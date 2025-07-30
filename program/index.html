@@ -1,0 +1,43 @@
+<div class="app">
+  <header>
+    <h1>R <code>layout()</code> matrix builder</h1>
+    <div class="controls">
+      <label>Rows <input type="number" id="rows" min="1" value="8"></label>
+      <label>Cols <input type="number" id="cols" min="1" value="8"></label>
+      <label><input type="checkbox" id="showGrid" checked> show grid</label>
+      <label><input type="checkbox" id="squareCells"> square cells</label>
+      <label><input type="checkbox" id="showIndices"> show cell indices</label>
+      <span class="dim" id="dimText"></span>
+      <button id="undoBtn">Undo</button>
+      <button id="redoBtn">Redo</button>
+      <button id="clearBtn">Clear</button>
+      <button id="exportBtn">Export JSON</button>
+      <button id="importBtn">Import JSON</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="canvas-wrap" id="canvasWrap" aria-label="drawing area">
+      <canvas id="canvas" width="900" height="900"></canvas>
+    </div>
+
+    <div class="legend">
+      <h2>Rectangles</h2>
+      <div class="legend-list" id="legendList"></div>
+    </div>
+  </div>
+
+  <div class="rcode">
+    <div class="toolbar">
+      <h2 class="hint">R code (<code>mat</code> with negative space = N + 1)</h2>
+      <div class="flexsp"></div>
+      <button id="copyBtn" class="primary">Copy R</button>
+    </div>
+    <textarea id="rcode" readonly></textarea>
+  </div>
+
+  <footer class="dim">
+    Tip: drag on empty space to draw; drag inside a rectangle to move; drag its edge to
+    resize. Corners on edges/vertices are allowed; overlapping interiors are not.
+  </footer>
+</div>
