@@ -5,11 +5,12 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   font-size: var(--ui);
   color: #0b0b0b;
+  overflow: hidden;
 }
 
 .app {
   display: grid;
-  grid-template-columns: 1fr var(--panel);
+  grid-template-columns: 1fr;   /* single column */
   grid-template-rows: auto 1fr auto;
   gap: var(--gap);
   padding: var(--gap);
@@ -58,10 +59,21 @@ canvas { cursor: inherit; }  /* let JS set cursor directly on the canvas */
 
 .main {
   display: grid;
-  grid-template-columns: 1fr var(--panel);
+  grid-template-columns: var(--w-left, 420px)   /* canvas */
+                       6px                      /* splitter */
+                       var(--w-mid, 300px)      /* directory */
+                       6px                      /* splitter */
+                       var(--w-right, 1fr);     /* R code (flex) */
   gap: var(--gap);
-  min-height: 0;
+  min-height: 0;          /* let children shrink vertically */
 }
+
+.splitter {
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+}
+.splitter:hover { background: #e5e7eb; }
 
 .canvas-wrap {
   position: relative;
@@ -97,14 +109,20 @@ canvas {
 
 .legend-list { display: flex; flex-direction: column; gap: 6px; }
 
-.legend-item {
-  display: grid;
-  grid-template-columns: 20px 1fr auto;
-  gap: 8px;
-  align-items: center;
-  padding: 4px 2px;
-  border-radius: 6px;
+/* ── legend line: swatch │ alias │ ×, always one row ──────────────── */
+.legend-item{
+  display:flex;                  /* switch grid → flex */
+  align-items:center;
+  gap:8px;
 }
+
+/* text column may shrink and wrap */
+.legend-item > :nth-child(2){
+  flex:1 1 0;                    /* take all free space, allow shrink */
+  overflow-wrap:anywhere;        /* wrap very long aliases */
+}
+
+
 .legend-item:hover { background: #f7f7f7; }
 
 .swatch {
@@ -137,6 +155,7 @@ canvas {
     monospace;
   font-size: 12px;
   line-height: 1.4;
+  resize: none;
   border: none;
   border-top: 1px solid #efefef;
   margin: 0;
@@ -152,7 +171,6 @@ canvas {
 .canvas-wrap,
 .legend,
 .rcode {
-  resize: horizontal;   /* lets user drag the right edge */
   overflow: auto;       /* keep scrollbars if somebody shrinks too much */
   min-width: 160px;     /* optional: don’t let them vanish entirely */
 }

@@ -23,36 +23,43 @@
       <button id="undoBtn">Undo</button>
       <button id="redoBtn">Redo</button>
       <button id="clearBtn">Clear</button>
+      <button id="trimBtn">Trim</button>
+      <button id="reduceBtn">Reduce</button>
       <button id="exportBtn">Export JSON</button>
       <button id="importBtn">Import JSON</button>
     </div>
   </header>
 
   <div class="main">
-    <div class="canvas-wrap" id="canvasWrap" aria-label="drawing area">
-      <canvas id="canvas" width="900" height="900"></canvas>
-    </div>
-
-    <div class="legend">
-      <h2>Rectangles</h2>
-      <div class="legend-list" id="legendList"></div>
-    </div>
+  <div class="canvas-wrap" id="canvasWrap">
+    <canvas id="canvas"></canvas>
   </div>
 
-  <div class="rcode">
+  <div class="splitter" id="splitLeft"></div>
+
+  <div class="legend">
+    <h2>Rectangles</h2>
+    <div class="legend-list" id="legendList"></div>
+  </div>
+
+  <div class="splitter" id="splitRight"></div>   <!-- ⬅︎ move inside .main -->
+
+  <div class="rcode">                            <!-- ⬅︎ move inside .main -->
     <div class="toolbar">
-      <h2 class="hint">R code (<code>mat</code> with negative space = N + 1)</h2>
+      <h2 class="hint">R code (<code>mat</code> with negative space = N + 1)</h2>
       <div class="flexsp"></div>
-      <button id="copyBtn" class="primary">Copy R</button>
+      <button id="copyBtn" class="primary">Copy R</button>
     </div>
     <textarea id="rcode" readonly></textarea>
   </div>
+</div>
 
   <footer class="dim">
     Tip: drag on empty space to draw; drag inside a rectangle to move; drag its edge to
     resize. Corners on edges/vertices are allowed; overlapping interiors are not.
   </footer>
 </div>
+
 
 
   <!-- JS -->
