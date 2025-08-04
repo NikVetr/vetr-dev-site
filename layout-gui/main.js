@@ -21,6 +21,11 @@
     const dimText = document.getElementById('dimText');
     const wrap = document.getElementById('canvasWrap');
     const squareEl = document.getElementById('squareCells');
+    const darkEl = document.getElementById('darkMode');
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        darkEl.checked = true; /* honour OS preference on first load (overridden by checkbox) */
+    }
+    document.body.classList.toggle('dark', darkEl.checked);
 
     const state = {
         rows: +rowsEl.value,
@@ -35,7 +40,9 @@
         start: null,
         hover: null,
         past: [],
-        future: []
+        future: [],
+        aspect: null,
+        renderer: 'layout'
     };
 
     let cursorPos = {
@@ -126,20 +133,34 @@
     /* ---------- rendering ---------- */
     const col = i => `hsl(${(i * 137.508) % 360} 70% 75%)`;
 
+    function crisp(v, max, dpr) {
+        let p = Math.round(v) + 0.5 / dpr; // centre the 1-px stroke
+        if (p > max - 0.5) p = max - 0.5; // keep it inside the bitmap
+        return p;
+    }
+
     function grid() {
         if (!state.showGrid) return;
+
         ctx.save();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#e8e8e8';
+        const d = window.devicePixelRatio || 1;
+
+        ctx.lineWidth = window.devicePixelRatio >= 2 ? 1 : 2;
+        ctx.strokeStyle = getComputedStyle(document.body)
+            .getPropertyValue('--canvas-grid').trim() || '#d0d0d0';
+
+        /* verticals */
         for (let c = 0; c <= state.cols; c++) {
-            const x = (c * canvas.width) / state.cols;
+            const x = crisp(c * canvas.width / state.cols, canvas.width, d);
             ctx.beginPath();
             ctx.moveTo(x, 0);
             ctx.lineTo(x, canvas.height);
             ctx.stroke();
         }
+
+        /* horizontals */
         for (let r = 0; r <= state.rows; r++) {
-            const y = (r * canvas.height) / state.rows;
+            const y = crisp(r * canvas.height / state.rows, canvas.height, d);
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(canvas.width, y);
@@ -147,6 +168,40 @@
         }
         ctx.restore();
     }
+
+    /* keep the URL short-ish: base64-encode a compressed JSON subset */
+    function encodeState() {
+        const keep = {
+            rows: state.rows,
+            cols: state.cols,
+            rects: state.rects,
+            aliases: state.aliases,
+            renderer: renderer,
+            square: state.square,
+            aspect: state.aspect
+        };
+        const json = JSON.stringify(keep);
+        return btoa(encodeURIComponent(json));
+    }
+
+    function decodeState(str) {
+        try {
+            return JSON.parse(decodeURIComponent(atob(str)));
+        } catch (e) {
+            return null;
+        }
+    }
+
+    /* push state into location.hash – debounced so rapid drags don’t spam */
+    let urlTimer = null;
+
+    function syncURL() {
+        clearTimeout(urlTimer);
+        urlTimer = setTimeout(() => {
+            location.hash = encodeState();
+        }, 150);
+    }
+
 
     function drawTextFixed(xCSS, yCSS, txt,
         align = 'center',
@@ -310,7 +365,7 @@
             const R = norm(R0);
             const li = document.createElement('div');
             li.className = 'legend-item';
-            li.dataset.idx = i;                                        // ← for dbl-click
+            li.dataset.idx = i; // ← for dbl-click
             li.innerHTML = `
               <div class="swatch" style="background:${col(i+1)}">${i+1}</div>
               <div class="legend-name">${nameOf(i)}</div>
@@ -321,21 +376,23 @@
                 state.rects.splice(i, 1);
                 state.aliases.splice(i, 1);
                 update();
+                syncURL();
             };
             legendList.append(li);
         });
     }
 
     legendList.addEventListener('dblclick', e => {
-      const item = e.target.closest('.legend-item');
-      if (!item) return;
-      const idx = +item.dataset.idx;
-      const current = state.aliases[idx] || '';
-      const name = prompt('Rectangle name:', current);
-      if (name === null) return;             // cancelled
-      history();
-      state.aliases[idx] = name.trim();
-      update();
+        const item = e.target.closest('.legend-item');
+        if (!item) return;
+        const idx = +item.dataset.idx;
+        const current = state.aliases[idx] || '';
+        const name = prompt('Rectangle name:', current);
+        if (name === null) return; // cancelled
+        history();
+        state.aliases[idx] = name.trim();
+        update();
+        syncURL();
     });
 
     /* ---------- R code ---------- */
@@ -344,35 +401,371 @@
             blank = N + 1;
         const M = Array.from({
             length: state.rows
-        }, () => Array(state.cols).fill(blank));
-        state.rects.forEach((R0, i) => {
-            const R = norm(R0);
-            for (let r = R.r0; r < R.r1; r++)
-                for (let c = R.c0; c < R.c1; c++) M[r][c] = i + 1;
+        }, _ => Array(state.cols).fill(blank));
+        state.rects.forEach((r0, i) => {
+            const r = norm(r0);
+            for (let rIdx = r.r0; rIdx < r.r1; rIdx++)
+                for (let c = r.c0; c < r.c1; c++) M[rIdx][c] = i + 1;
         });
         return M;
     };
 
-    const toR = () => {
-        const M = buildMat(),
-            N = state.rects.length;
-        const rowsR = M.map(r => `  c(${r.join(', ')})`).join(',\n');
-        return [
-            `# layout matrix (${state.rows} × ${state.cols})`,
-            `# rectangles 1..${N}; blank = ${N + 1}`,
-            `mat <- rbind(\n${rowsR}\n)`,
-            `layout(mat)`,
-            `layout.show(${Math.max(1, N)})`,
-            `mat`
-        ].join('\n');
-    };
+    let renderer = 'layout'; // default
+
+    document.getElementById('renderRadios')
+        .addEventListener('change', e => {
+            if (e.target.name === 'render') {
+                renderer = e.target.value;
+                rcodeEl.value = generateCode(); // refresh
+            }
+        });
+
+    function matrixLiteral() {
+        const M = buildMat();
+        return M.map(r => `c(${r.join(', ')})`).join(',\n  ');
+    }
+
+    /* ---------- helpers used only by generateCode ---------- */
+    function designMatrix() {
+        /* matrix of ints (R) or strings (Python/Julia) that matches
+           the current rectangle layout                                     */
+        const M = Array.from({
+                length: state.rows
+            },
+            _ => Array(state.cols).fill(0));
+        state.rects.forEach((r0, i) => {
+            const r = norm(r0),
+                mark = i + 1; // 1-based id
+            for (let rr = r.r0; rr < r.r1; rr++)
+                for (let cc = r.c0; cc < r.c1; cc++)
+                    M[rr][cc] = mark;
+        });
+        return M;
+    }
+
+    function widthsHeights() {
+        /* vectors of column widths / row heights (all 1 → equal sizing)   */
+        return {
+            w: 'unit(rep(1, ' + state.cols + '), "null")',
+            h: 'unit(rep(1, ' + state.rows + '), "null")'
+        };
+    }
+
+    /* ---------- main factory ---------- */
+    /* format numbers like 0.63636… → "0.6364", 0.250000 → "0.25" */
+    const f = (x, d = 4) => +x.toFixed(d) // round
+        .toString() // drop trailing zeros
+        .replace(/\.0+$/, '');
+
+    const fmt = (n, k = 6) => +n.toFixed(k); // trim long floats
+
+    function generateCode() {
+        const N = state.rects.length || 1; // at least 1 panel
+        const M = designMatrix(); // 2-D array
+        const matR = 'matrix(c(\n  ' +
+            M.map(r => `c(${r.join(', ')})`).join(',\n  ') +
+            `\n), nrow=${state.rows}, byrow=TRUE)`;
+
+        /* helper for Python & Julia – slice syntax like 0:2,3 */
+        const pySlice = (r0, r1, c0, c1) =>
+            `[${r0}:${r1}, ${c0}:${c1}]`; // end exclusive
+
+        function rowFmt(arr) {
+            return '  c(' + arr.join(', ') + ')';
+        }
+
+        /* names like p_scatter, p_2 … respect aliases */
+        const plotVar = i => 'p_' + nameOf(i).replace(/\W+/g, '_');
+
+        const grobList = state.rects.map((_, i) => plotVar(i)).join(', ');
+
+
+        switch (renderer) {
+
+            /* ──────────────────────  R  ────────────────────── */
+
+            case 'layout': {
+                const body = M.map(rowFmt).join(',\n');
+                return `mat <- matrix(c(\n${body}\n), nrow = ${state.rows}, byrow = TRUE)
+layout(mat)
+layout.show(${N})`;
+            }
+
+
+            case 'gridExtra': {
+                const N = state.rects.length || 1; // at least 1 panel
+                const BLANK = N + 1; // code for “empty”
+
+                /* 1 ── numeric layout matrix: blanks = N+1 */
+                const matTxt = buildMat() // original matrix (0..N, blank=N+1)
+                    .map(r => '  c(' + r.join(', ') + ')')
+                    .join(',\n');
+
+                /* 2 ── stub grob variables */
+                const grobStubs = Array.from({
+                        length: N
+                    }, (_, i) =>
+                    `  g${i + 1} = NULL`).join(',\n');
+
+                /* 3 ── full grob list incl. the blank one */
+                const grobList = `grobs <- list(
+${grobStubs},
+  blank = grid::nullGrob()
+)`;
+
+                /* 4 ── final R snippet */
+                return `library(gridExtra)
+library(grid)
+
+${grobList}
+
+mat <- matrix(c(
+${matTxt}
+), nrow = ${state.rows}, byrow = TRUE)
+
+grid.arrange(grobs = grobs, layout_matrix = mat)`;
+            }
+
+
+            case 'cowplot': {
+                /* turn every rectangle into one draw_plot() call */
+                const calls = state.rects.map((r0, i) => {
+                    const r = norm(r0);
+                    const w = f((r.c1 - r.c0) / state.cols);
+                    const h = f((r.r1 - r.r0) / state.rows);
+                    const x = f(r.c0 / state.cols);
+                    const y = f(1 - r.r1 / state.rows); // cowplot’s Y origin is bottom-left
+                    return `  draw_plot(plots[[${i + 1}]], x = ${x}, y = ${y}, width = ${w}, height = ${h})`;
+                }).join(' +\n');
+
+                return `library(cowplot)
+library(ggplot2)
+
+plots <- list()   # your ggplots here
+
+ggdraw() +
+${calls}`;
+            }
+
+            case 'patchwork': {
+                const TAGS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const tags = state.rects.map((_, i) => TAGS[i]); // A, B, C …
+
+                /* ---- build ASCII design with # = blank ------------------------------- */
+                const asciiRows = Array.from({
+                        length: state.rows
+                    },
+                    () => Array(state.cols).fill('#'));
+
+                state.rects.forEach((r0, i) => {
+                    const r = norm(r0),
+                        t = tags[i];
+                    for (let rr = r.r0; rr < r.r1; rr++)
+                        for (let cc = r.c0; cc < r.c1; cc++)
+                            asciiRows[rr][cc] = t;
+                });
+
+                const ascii = asciiRows.map(r => r.join('')).join('\n');
+
+                /* ---- named plot list -------------------------------------------------- */
+                const plist = state.rects.map((_, i) =>
+                    `  ${tags[i]} = plots[[${i+1}]]`).join(',\n');
+
+                return `library(patchwork)
+library(ggplot2)
+
+plots <- list(
+${plist}
+)
+
+design <- "
+${ascii}
+"
+
+wrap_plots(plots, design = design)`;
+            }
+
+            /* ---------- base-R par(fig) ------------------------------------------------ */
+            case 'parfig': {
+                /* helper already defined earlier:  f(x)  */
+
+                /* (1) list skeleton ------------------------------------------------ */
+                const plotList = state.rects.map((_, i, arr) =>
+                    `  NULL${i < arr.length - 1 ? ',' : ''}  # ${nameOf(i)}`).join('\n');
+
+                /* (2) coordinate rows --------------------------------------------- */
+                const coordRows = state.rects.map((r0, i, arr) => {
+                    const r = norm(r0);
+                    const row = [
+                        f(r.c0 / state.cols),
+                        f(r.c1 / state.cols),
+                        f(1 - r.r1 / state.rows), // y-min  (flip Y)
+                        f(1 - r.r0 / state.rows) // y-max
+                    ].join(', ');
+                    return `  c(${row})${i < arr.length - 1 ? ',' : ''}  # ${nameOf(i)}`;
+                }).join('\n');
+
+                /* (3) final script ------------------------------------------------- */
+                return [
+                    'plots <- list(',
+                    plotList,
+                    ')',
+                    '',
+                    'coords <- rbind(',
+                    coordRows,
+                    ')',
+                    '',
+                    'plot.new()',
+                    'par(oma = c(0,0,0,0))',
+                    '',
+                    'for (i in seq_along(plots)) {',
+                    '  par(fig = coords[i, ], new = T)',
+                    '  plot(plots[[i]])',
+                    '}'
+                ].join('\n');
+            }
+
+
+
+
+            /* ────────────────────  Python  ──────────────────── */
+            case 'mpl': { // matplotlib + GridSpec
+                const rows = state.rows,
+                    cols = state.cols;
+                const slice = r => {
+                    const n = nameOf(r); // alias or index
+                    const bb = norm(state.rects[r]);
+                    return `ax_${n} = fig.add_subplot(gs[${bb.r0}:${bb.r1}, ${bb.c0}:${bb.c1}])`;
+                };
+
+                return `import matplotlib.pyplot as plt
+
+fig = plt.figure(constrained_layout=True)
+gs  = fig.add_gridspec(${rows}, ${cols})
+
+${state.rects.map((_, i) => slice(i)).join('\n')}
+`;
+            }
+
+            /* 2) PLOTLY ------------------------------------------- */
+            case 'plotly': {
+                const rows = state.rows,
+                    cols = state.cols;
+
+                // build specs matrix: JS value `null` → Python None, object → dict
+                const specs = Array.from({
+                    length: rows
+                }, () => Array(cols).fill(null));
+
+                state.rects.forEach((r0, i) => {
+                    const r = norm(r0);
+                    specs[r.r0][r.c0] = {
+                        rowspan: r.r1 - r.r0,
+                        colspan: r.c1 - r.c0,
+                        type: 'xy',
+                        subplot: nameOf(i)
+                    };
+                });
+
+                // stringify: JSON-ish but with None and no quotes around keys
+                const pyVal = v =>
+                    v === null ? 'None' :
+                    '{ ' + Object.entries(v)
+                    .map(([k, x]) => `'${k}': ${x}`)
+                    .join(', ') + ' }';
+
+                const specsPy = specs
+                    .map(row => '    [' + row.map(pyVal).join(', ') + ']')
+                    .join(',\n');
+
+                return `import plotly.subplots as sp
+
+fig = sp.make_subplots(
+    rows=${rows}, cols=${cols},
+    specs=[
+${specsPy}
+    ])
+
+# Example: fig.add_trace(trace, row=1, col=1)
+fig.show()`;
+            }
+
+            /* 3) BOKEH -------------------------------------------- */
+            case 'bokeh': {
+                /* choose one base “cell” size in pixels */
+                const CELL = 250;
+                const W = state.cols * CELL;
+                const H = state.rows * CELL;
+
+                /* grid[][] will hold either None or a plot variable */
+                const grid = Array.from({
+                        length: state.rows
+                    },
+                    () => Array(state.cols).fill('None'));
+                const plots = [];
+
+                state.rects.forEach((r0, i) => {
+                    const r = norm(r0);
+                    const wPx = (r.c1 - r.c0) * CELL;
+                    const hPx = (r.r1 - r.r0) * CELL;
+                    const id = `p_${nameOf(i)}`;
+
+                    plots.push(`${id} = figure(plot_width=${wPx}, plot_height=${hPx})`);
+                    grid[r.r0][r.c0] = id; // only TL corner of span holds plot
+                });
+
+                const gridPy = grid
+                    .map(r => '    [' + r.join(', ') + ']')
+                    .join(',\n');
+
+                return `from bokeh.plotting import figure, show
+from bokeh.layouts  import gridplot
+
+${plots.join('\n')}
+
+grid = gridplot([
+${gridPy}
+], width=${W}, height=${H}, sizing_mode='fixed')
+
+show(grid)`;
+            }
+
+            /* ---------- Julia • Makie ---------- */
+            case 'makie': {
+                const rows = state.rows,
+                    cols = state.cols;
+                const blocks = state.rects.map((r0, i) => {
+                    const r = norm(r0),
+                        n = nameOf(i);
+                    return `ax_${n} = Axis(f[${r.r0+1}:${r.r1}, ${r.c0+1}:${r.c1}])`;
+                }).join('\n');
+
+                return `using CairoMakie
+f = Figure(resolution = (800, 800))
+
+${blocks}
+
+display(f)`;
+            }
+
+            /* ────────────────────  Other  ──────────────────── */
+
+            case 'csv':
+                /* real new-lines, no “\\n” literals */
+                return M.map(r => r.join(',')).join('\n');
+
+            default:
+                return '# unknown renderer';
+        }
+    }
 
     const update = () => {
         repaint();
         legend();
-        rcodeEl.value = toR();
+        rcodeEl.value = generateCode();
         dimText.textContent = `(${state.rows}×${state.cols})`;
         cursor();
+        syncURL();
     };
 
     /* ---------- history ---------- */
@@ -396,6 +789,7 @@
         rowsEl.value = o.rows;
         colsEl.value = o.cols;
         update();
+        syncURL();
     };
 
     /* ---------- interaction ---------- */
@@ -523,16 +917,20 @@
     });
 
     canvas.addEventListener('dblclick', e => {
-      const { x, y } = pos(e);
-      const hitInfo = hit(x, y);
-      if (!hitInfo || hitInfo.kind !== 'inside') return;
-      const idx = hitInfo.idx;
-      const current = state.aliases[idx] || '';
-      const name = prompt('Rectangle name:', current);
-      if (name === null) return;
-      history();
-      state.aliases[idx] = name.trim();
-      update();
+        const {
+            x,
+            y
+        } = pos(e);
+        const hitInfo = hit(x, y);
+        if (!hitInfo || hitInfo.kind !== 'inside') return;
+        const idx = hitInfo.idx;
+        const current = state.aliases[idx] || '';
+        const name = prompt('Rectangle name:', current);
+        if (name === null) return;
+        history();
+        state.aliases[idx] = name.trim();
+        update();
+        syncURL();
     });
 
 
@@ -546,7 +944,8 @@
             history(); // enable undo
             state.rects.splice(hv.idx, 1);
             state.aliases.splice(hv.idx, 1);
-            update(); // redraw + renumber colours
+            update();
+            syncURL(); // redraw + renumber colours
             return; // nothing else to do
         }
 
@@ -587,6 +986,7 @@
                 state.aliases.push('');
             }
             update();
+            syncURL();
             return;
         }
         if (state.mode === 'moving') {
@@ -610,6 +1010,7 @@
             }
             state.mode = 'idle';
             update();
+            syncURL();
             return;
         }
         if (state.mode === 'resizing') {
@@ -629,18 +1030,61 @@
             }
             state.mode = 'idle';
             update();
+            syncURL();
             return;
         }
     });
 
+    document.querySelectorAll('input[name="renderer"]').forEach(radio => {
+        radio.onchange = () => {
+            state.renderer = radio.value;
+            update();
+            syncURL();
+        };
+    });
+
     /* ---------- controls ---------- */
     function resizeCanvas() {
-        const r = wrap.getBoundingClientRect(),
-            s = Math.min(r.width, r.height);
-        const d = window.devicePixelRatio || 1;
-        canvas.width = canvas.height = Math.round(s * d);
+        const box = wrap.getBoundingClientRect(); // free CSS px
+        const dpr = window.devicePixelRatio || 1;
+
+        /* -------- choose displayed (CSS) size --------------------------- */
+        let wCss, hCss;
+
+        if (state.square) { // ① exact squares
+            const cell = Math.min(box.width / state.cols,
+                box.height / state.rows);
+            wCss = cell * state.cols;
+            hCss = cell * state.rows;
+
+        } else if (state.aspect) { // ② forced AR
+            /* try to use full width – shrink if too tall                     */
+            wCss = box.width;
+            hCss = wCss / state.aspect;
+            if (hCss > box.height) {
+                hCss = box.height;
+                wCss = hCss * state.aspect;
+            }
+
+        } else { // ③ fill pane
+            wCss = box.width;
+            hCss = box.height;
+        }
+
+        /* -------- update element + backing bitmap ----------------------- */
+        canvas.style.width = wCss + 'px';
+        canvas.style.height = hCss + 'px';
+        canvas.width = Math.round(wCss * dpr);
+        canvas.height = Math.round(hCss * dpr);
+
+        /* cosmetic centring inside the wrap                               */
+        canvas.style.marginLeft = ((box.width - wCss) / 2) + 'px';
+        canvas.style.marginTop = ((box.height - hCss) / 2) + 'px';
+
         repaint();
     }
+
+
     new ResizeObserver(resizeCanvas).observe(wrap);
 
     [rowsEl, colsEl].forEach(el => el.onchange = () => {
@@ -650,7 +1094,9 @@
             history();
             state.rows = r;
             state.cols = c;
+            resizeCanvas();
             update();
+            syncURL();
         }
     });
     showGridEl.onchange = () => {
@@ -665,94 +1111,146 @@
         state.square = squareEl.checked;
         resizeCanvas();
     };
-    copyBtn.onclick = async () => {
-        await navigator.clipboard.writeText(rcodeEl.value);
+
+    function flashCopied() {
         copyBtn.textContent = 'Copied!';
-        setTimeout(() => copyBtn.textContent = 'Copy R', 900);
+        setTimeout(() => {
+            copyBtn.textContent = 'Copy';
+        }, 900);
+    }
+
+    aspect.oninput = () => { // empty = auto
+        const v = parseFloat(aspect.value);
+        state.aspect = isFinite(v) ? Math.max(0.2, v) : null;
+        if (state.square && state.aspect) { // force off – can’t mix
+            squareEl.checked = state.square = false;
+        }
+        resizeCanvas();
+    };
+
+    copyBtn.onclick = () => {
+        /* works for <textarea>, <pre>, <code>, … */
+        const code =
+            'value' in rcodeEl && rcodeEl.value !== undefined ?
+            rcodeEl.value :
+            rcodeEl.textContent;
+
+        /* 1 – modern Clipboard API (needs https or localhost) */
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard
+                .writeText(code)
+                .then(flashCopied)
+                .catch(fallbackCopy); // e.g. insecure context
+            return;
+        }
+
+        /* 2 – fallback for file://, plain http, old browsers */
+        fallbackCopy();
+
+        function fallbackCopy() {
+            const ta = document.createElement('textarea');
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            ta.value = code;
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                if (document.execCommand('copy')) flashCopied();
+                else alert('Copy failed – please copy manually.');
+            } finally {
+                document.body.removeChild(ta);
+            }
+        }
     };
 
     trimBtn.onclick = () => {
-      if (!state.rects.length) return;            // nothing to trim
+        if (!state.rects.length) return; // nothing to trim
 
-      /* 1 ── find global bounding box of all rectangles */
-      let minR = Infinity, minC = Infinity,
-          maxR = -Infinity, maxC = -Infinity;
+        /* 1 ── find global bounding box of all rectangles */
+        let minR = Infinity,
+            minC = Infinity,
+            maxR = -Infinity,
+            maxC = -Infinity;
 
-      state.rects.forEach(r0 => {
-        const r = norm(r0);
-        if (r.r0 < minR) minR = r.r0;
-        if (r.c0 < minC) minC = r.c0;
-        if (r.r1 > maxR) maxR = r.r1;
-        if (r.c1 > maxC) maxC = r.c1;
-      });
+        state.rects.forEach(r0 => {
+            const r = norm(r0);
+            if (r.r0 < minR) minR = r.r0;
+            if (r.c0 < minC) minC = r.c0;
+            if (r.r1 > maxR) maxR = r.r1;
+            if (r.c1 > maxC) maxC = r.c1;
+        });
 
-      /* nothing to trim if bounding box already touches (0,0) and full dims */
-      if (minR === 0 && minC === 0 &&
-          maxR === state.rows && maxC === state.cols) return;
+        /* nothing to trim if bounding box already touches (0,0) and full dims */
+        if (minR === 0 && minC === 0 &&
+            maxR === state.rows && maxC === state.cols) return;
 
-      history();                                  // enable undo
+        history(); // enable undo
 
-      /* 2 ── shift every rectangle so (minR,minC) becomes (0,0) */
-      state.rects = state.rects.map(r0 => {
-        const r = norm(r0);
-        return {
-          r0 : r.r0 - minR,
-          c0 : r.c0 - minC,
-          r1 : r.r1 - minR,
-          c1 : r.c1 - minC
-        };
-      });
+        /* 2 ── shift every rectangle so (minR,minC) becomes (0,0) */
+        state.rects = state.rects.map(r0 => {
+            const r = norm(r0);
+            return {
+                r0: r.r0 - minR,
+                c0: r.c0 - minC,
+                r1: r.r1 - minR,
+                c1: r.c1 - minC
+            };
+        });
 
-      /* 3 ── shrink the grid to the bounding-box size */
-      const newRows = maxR - minR;
-      const newCols = maxC - minC;
-      state.rows = newRows;
-      state.cols = newCols;
-      rowsEl.value = newRows;
-      colsEl.value = newCols;
+        /* 3 ── shrink the grid to the bounding-box size */
+        const newRows = maxR - minR;
+        const newCols = maxC - minC;
+        state.rows = newRows;
+        state.cols = newCols;
+        rowsEl.value = newRows;
+        colsEl.value = newCols;
 
-      update();                                   // repaint, legend, R code
+        update();
+        syncURL(); // repaint, legend, R code
     };
 
     reduceBtn.onclick = () => {
-      if (!state.rects.length) return;                    // nothing to reduce
+        if (!state.rects.length) return; // nothing to reduce
 
-      /* 1 ── collect every horizontal & vertical boundary */
-      const rSet = new Set([0, state.rows]);
-      const cSet = new Set([0, state.cols]);
-      state.rects.forEach(r0 => {
-        const r = norm(r0);
-        rSet.add(r.r0); rSet.add(r.r1);
-        cSet.add(r.c0); cSet.add(r.c1);
-      });
+        /* 1 ── collect every horizontal & vertical boundary */
+        const rSet = new Set([0, state.rows]);
+        const cSet = new Set([0, state.cols]);
+        state.rects.forEach(r0 => {
+            const r = norm(r0);
+            rSet.add(r.r0);
+            rSet.add(r.r1);
+            cSet.add(r.c0);
+            cSet.add(r.c1);
+        });
 
-      /* 2 ── greatest common divisor of all boundary coordinates */
-      const rFactor = [...rSet].reduce((g, v) => gcd(g, v));
-      const cFactor = [...cSet].reduce((g, v) => gcd(g, v));
+        /* 2 ── greatest common divisor of all boundary coordinates */
+        const rFactor = [...rSet].reduce((g, v) => gcd(g, v));
+        const cFactor = [...cSet].reduce((g, v) => gcd(g, v));
 
-      /* if no common divisor >1 in either dimension, nothing to do */
-      if (rFactor === 1 && cFactor === 1) return;
+        /* if no common divisor >1 in either dimension, nothing to do */
+        if (rFactor === 1 && cFactor === 1) return;
 
-      history();                                          // enable undo
+        history(); // enable undo
 
-      /* 3 ── rescale every rectangle */
-      state.rects = state.rects.map(r0 => {
-        const r = norm(r0);
-        return {
-          r0 : r.r0 / rFactor,
-          c0 : r.c0 / cFactor,
-          r1 : r.r1 / rFactor,
-          c1 : r.c1 / cFactor
-        };
-      });
+        /* 3 ── rescale every rectangle */
+        state.rects = state.rects.map(r0 => {
+            const r = norm(r0);
+            return {
+                r0: r.r0 / rFactor,
+                c0: r.c0 / cFactor,
+                r1: r.r1 / rFactor,
+                c1: r.c1 / cFactor
+            };
+        });
 
-      /* 4 ── rescale the grid itself */
-      state.rows = Math.round(state.rows / rFactor);
-      state.cols = Math.round(state.cols / cFactor);
-      rowsEl.value = state.rows;
-      colsEl.value = state.cols;
+        /* 4 ── rescale the grid itself */
+        state.rows = Math.round(state.rows / rFactor);
+        state.cols = Math.round(state.cols / cFactor);
+        rowsEl.value = state.rows;
+        colsEl.value = state.cols;
 
-      update();                                           // repaint everything
+        update();
+        syncURL(); // repaint everything
     };
 
 
@@ -761,8 +1259,9 @@
         history();
         state.rects.length = 0;
         update();
+        syncURL();
     };
-    
+
     undoBtn.onclick = () => {
         if (!state.past.length) return;
         state.future.push(JSON.stringify({
@@ -802,6 +1301,12 @@
         URL.revokeObjectURL(a.href);
     };
 
+    darkEl.onchange = () => {
+        document.body.classList.toggle('dark', darkEl.checked);
+        repaint(); // grid colour changes
+    };
+
+
     importBtn.onclick = () => {
         const inp = Object.assign(document.createElement('input'), {
             type: 'file',
@@ -825,6 +1330,7 @@
                         rowsEl.value = o.rows;
                         colsEl.value = o.cols;
                         update();
+                        syncURL();
                     }
                 } catch (_) {}
             };
@@ -832,6 +1338,48 @@
         };
         inp.click();
     };
+
+    /* ---------- simple tooltip engine ---------------------------------- */
+    {
+        const tip = Object.assign(document.createElement('div'), {
+            className: 'tooltip'
+        });
+        document.body.append(tip);
+
+        let timer = null;
+
+        function show(el) {
+            tip.textContent = el.dataset.tip;
+            tip.style.opacity = '1';
+
+            const r = el.getBoundingClientRect(),
+                pad = 8, // gap below the element
+                x = Math.min(r.left, window.innerWidth - tip.offsetWidth - pad),
+                y = Math.min(r.bottom + pad, window.innerHeight - tip.offsetHeight - pad);
+
+            tip.style.left = x + 'px';
+            tip.style.top = y + 'px';
+        }
+
+        function hide() {
+            tip.style.opacity = '0';
+        }
+
+        document.addEventListener('mouseover', e => {
+            const el = e.target.closest('[data-tip]');
+            if (!el) return;
+            timer = setTimeout(() => show(el), 1000); // 350 ms hover delay
+        });
+
+        document.addEventListener('mouseout', e => {
+            if (timer) {
+                clearTimeout(timer);
+                timer = null;
+            }
+            hide();
+        });
+    }
+
 
     (() => {
         const main = document.querySelector('.main');
@@ -871,38 +1419,40 @@
                 const R0 = getCss('--w-right'); // not strictly needed but nice for symmetry
 
                 function onMove(ev) {
-                  const dx = ev.clientX - startX;
-                  const G  = main.getBoundingClientRect().width - TOTAL_GAPS;   // full free width
+                    const dx = ev.clientX - startX;
+                    const G = main.getBoundingClientRect().width - TOTAL_GAPS; // full free width
 
-                  let L = L0, M = M0, R = R0;          // start widths for this drag
+                    let L = L0,
+                        M = M0,
+                        R = R0; // start widths for this drag
 
-                  if (id === 'splitLeft') {
-                    /* slide border between LEFT and MIDDLE, keep RIGHT fixed */
-                    L = clamp(L0 + dx, MIN_LEFT, G - MIN_MID - R0);
-                    M = G - L - R0;                    // whatever space remains
+                    if (id === 'splitLeft') {
+                        /* slide border between LEFT and MIDDLE, keep RIGHT fixed */
+                        L = clamp(L0 + dx, MIN_LEFT, G - MIN_MID - R0);
+                        M = G - L - R0; // whatever space remains
 
-                    /* final safeguard */
-                    if (M < MIN_MID) {                 // shouldn’t happen, but keep gap visible
-                      M = MIN_MID;
-                      L = G - R0 - M;
+                        /* final safeguard */
+                        if (M < MIN_MID) { // shouldn’t happen, but keep gap visible
+                            M = MIN_MID;
+                            L = G - R0 - M;
+                        }
+
+                    } else { // splitRight
+                        /* slide border between MIDDLE and RIGHT, keep LEFT fixed */
+                        R = clamp(R0 - dx, MIN_RIGHT, G - L0 - MIN_MID); // note R0 - dx (drag right → dx>0 shrinks R)
+                        M = G - L0 - R;
+
+                        if (M < MIN_MID) { // keep 6 px splitter + 10 px gap visible
+                            M = MIN_MID;
+                            R = G - L0 - M;
+                        }
                     }
 
-                  } else { // splitRight
-                    /* slide border between MIDDLE and RIGHT, keep LEFT fixed */
-                    R = clamp(R0 - dx, MIN_RIGHT, G - L0 - MIN_MID);  // note R0 - dx (drag right → dx>0 shrinks R)
-                    M = G - L0 - R;
+                    setCss('--w-left', L);
+                    setCss('--w-mid', M);
+                    setCss('--w-right', R);
 
-                    if (M < MIN_MID) {                 // keep 6 px splitter + 10 px gap visible
-                      M = MIN_MID;
-                      R = G - L0 - M;
-                    }
-                  }
-
-                  setCss('--w-left',  L);
-                  setCss('--w-mid',   M);
-                  setCss('--w-right', R);
-
-                  resizeCanvas();                       // keep canvas crisp while dragging
+                    resizeCanvas(); // keep canvas crisp while dragging
                 }
 
 
@@ -920,7 +1470,30 @@
 
 
     /* ---------- init ---------- */
+    /* --- load state from #hash if present --------------------------------- */
+    if (location.hash.length > 1) {
+        const saved = decodeState(location.hash.slice(1));
+        if (saved && saved.rows && saved.cols) {
+            Object.assign(state, {
+                rows: saved.rows,
+                cols: saved.cols,
+                rects: saved.rects.map(norm),
+                aliases: saved.aliases || [],
+                square: !!saved.square,
+                aspect: saved.aspect ?? null
+            });
+            renderer = saved.renderer || 'layout';
+            /* reflect UI widgets */
+            rowsEl.value = state.rows;
+            colsEl.value = state.cols;
+            squareEl.checked = state.square;
+            aspect.value = state.aspect ?? '';
+            document.querySelector(`input[name="render"][value="${renderer}"]`).checked = true;
+        }
+    }
+
     history();
     resizeCanvas();
     update();
+    syncURL();
 })();

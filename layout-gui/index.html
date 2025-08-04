@@ -11,56 +11,122 @@
 
 
 <div class="app">
-  <header>
-    <h1>R <code>layout()</code> matrix builder</h1>
-    <div class="controls">
-      <label>Rows <input type="number" id="rows" min="1" value="8"></label>
-      <label>Cols <input type="number" id="cols" min="1" value="8"></label>
-      <label><input type="checkbox" id="showGrid" checked> show grid</label>
-      <label><input type="checkbox" id="squareCells"> square cells</label>
-      <label><input type="checkbox" id="showIndices"> show cell indices</label>
-      <span class="dim" id="dimText"></span>
-      <button id="undoBtn">Undo</button>
-      <button id="redoBtn">Redo</button>
-      <button id="clearBtn">Clear</button>
-      <button id="trimBtn">Trim</button>
-      <button id="reduceBtn">Reduce</button>
-      <button id="exportBtn">Export JSON</button>
-      <button id="importBtn">Import JSON</button>
+    <header>
+        <h1>Multipanel <code>CODE</code> builder</h1>
+
+        <div class="controls">
+            <!-- size controls -->
+            <label data-tip="Total rows in the drawing grid">
+                Rows <input type="number" id="rows" min="1" value="8">
+            </label>
+
+            <label data-tip="Total columns in the drawing grid">
+                Cols <input type="number" id="cols" min="1" value="8">
+            </label>
+
+
+            <label data-tip="The aspect ratio of the canvas below">
+                AR <input type="number" id="aspect" step="0.1" min="0.2" max="10" placeholder="auto">
+            </label>
+
+            <!-- view toggles -->
+            <label data-tip="Toggle the light-grey grid lines">
+                <input type="checkbox" id="showGrid" checked> show grid
+            </label>
+
+            <label data-tip="Force each cell to be square by resizing the canvas">
+                <input type="checkbox" id="squareCells"> square cells
+            </label>
+
+            <label data-tip="Display row / column indices inside every cell">
+                <input type="checkbox" id="showIndices"> show cell indices
+            </label>
+
+            <label data-tip="Switch between light & dark colour themes">
+                <input type="checkbox" id="darkMode" checked> dark mode
+            </label>
+
+            <span class="dim" id="dimText" data-tip="Current grid dimensions"></span>
+
+            <!-- history -->
+            <button id="undoBtn" data-tip="Undo the last change">Undo</button>
+            <button id="redoBtn" data-tip="Redo the previously undone change">Redo</button>
+
+            <!-- edit -->
+            <button id="clearBtn" data-tip="Remove ALL rectangles">Clear</button>
+            <button id="trimBtn" data-tip="Crop canvas to bounding-box of rectangles">Trim</button>
+            <button id="reduceBtn" data-tip="Factor grid without changing relative rectangle sizes and shapes">Reduce</button>
+
+            <!-- persist -->
+            <button id="exportBtn" data-tip="Save the current layout to a JSON file">Export JSON</button>
+            <button id="importBtn" data-tip="Load a layout from a JSON file">Import JSON</button>
+        </div>
+    </header>
+
+
+    <div class="main">
+        <div class="canvas-wrap" id="canvasWrap">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="splitter" id="splitLeft"></div>
+
+        <div class="legend">
+            <h2>Rectangles</h2>
+            <div class="legend-list" id="legendList"></div>
+        </div>
+
+        <div class="splitter" id="splitRight"></div> <!-- ⬅︎ move inside .main -->
+
+        <div class="rcode"> <!-- ⬅︎ move inside .main -->
+            <div class="toolbar">
+                <h2 class="hint">Code Output</h2>
+
+                <div class="render-select" id="renderRadios">
+                    <!-- R --------------- -->
+                    <fieldset>
+                        <legend>R</legend>
+                        <label><input type="radio" name="render" value="layout" checked>layout</label>
+                        <label><input type="radio" name="render" value="gridExtra">gridExtra</label>
+                        <label><input type="radio" name="render" value="cowplot">cowplot</label>
+                        <label><input type="radio" name="render" value="patchwork">patchwork</label>
+                        <label><input type="radio" name="render" value="parfig">par(fig)</label>
+                    </fieldset>
+
+                    <!-- Python ---------- -->
+                    <fieldset>
+                        <legend>Python</legend>
+                        <label><input type="radio" name="render" value="mpl">matplotlib</label>
+                        <label><input type="radio" name="render" value="plotly">plotly</label>
+                        <label><input type="radio" name="render" value="bokeh">bokeh</label>
+                    </fieldset>
+
+                    <!-- Julia ----------- -->
+                    <fieldset>
+                        <legend>Julia</legend>
+                        <label><input type="radio" name="render" value="makie">Makie</label>
+                    </fieldset>
+
+                    <!-- Other ----------- -->
+                    <fieldset>
+                        <legend>Other</legend>
+                        <label><input type="radio" name="render" value="csv">csv</label>
+                    </fieldset>
+                </div>
+
+
+                <button id="copyBtn" class="primary">Copy</button>
+            </div>
+            <textarea id="rcode" readonly></textarea>
+        </div>
     </div>
-  </header>
 
-  <div class="main">
-  <div class="canvas-wrap" id="canvasWrap">
-    <canvas id="canvas"></canvas>
-  </div>
-
-  <div class="splitter" id="splitLeft"></div>
-
-  <div class="legend">
-    <h2>Rectangles</h2>
-    <div class="legend-list" id="legendList"></div>
-  </div>
-
-  <div class="splitter" id="splitRight"></div>   <!-- ⬅︎ move inside .main -->
-
-  <div class="rcode">                            <!-- ⬅︎ move inside .main -->
-    <div class="toolbar">
-      <h2 class="hint">R code (<code>mat</code> with negative space = N + 1)</h2>
-      <div class="flexsp"></div>
-      <button id="copyBtn" class="primary">Copy R</button>
-    </div>
-    <textarea id="rcode" readonly></textarea>
-  </div>
+    <footer class="dim">
+        Tip: drag on empty space to draw; drag inside a rectangle to move; drag its edge to
+        resize. Corners on edges/vertices are allowed; overlapping interiors are not. 
+        Double-click on rectangles to rename.
+    </footer>
 </div>
-
-  <footer class="dim">
-    Tip: drag on empty space to draw; drag inside a rectangle to move; drag its edge to
-    resize. Corners on edges/vertices are allowed; overlapping interiors are not.
-  </footer>
-</div>
-
-
 
   <!-- JS -->
   <script src="./main.js" defer></script>
