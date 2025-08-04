@@ -170,27 +170,63 @@
     }
 
     /* keep the URL short-ish: base64-encode a compressed JSON subset */
-    function encodeState() {
-        const keep = {
-            rows: state.rows,
-            cols: state.cols,
-            rects: state.rects,
-            aliases: state.aliases,
-            renderer: renderer,
-            square: state.square,
-            aspect: state.aspect
-        };
-        const json = JSON.stringify(keep);
-        return btoa(encodeURIComponent(json));
+    /* ---------- hash helpers  ––  ultra-compact base-36 ---------------- */
+    const b36 = n => n.toString(36);
+    const i36 = s => parseInt(s, 36);
+
+    /* ①  serialise current state → string */
+    function encodeState () {
+    /* rows.cols|r0c0r1c1;r0c0r1c1;…|alias1,alias2…  (all base-36) */
+    const rects = state.rects
+            .map(r => {
+            const n = norm(r);
+            return b36(n.r0)+b36(n.c0)+b36(n.r1)+b36(n.c1);   // 4 chars / rect
+            })
+            .join(';');
+
+    const aliases = state.aliases
+            .map(encodeURIComponent)          // protect spaces, commas…
+            .join(',');
+
+    return (
+        b36(state.rows) + '.' + b36(state.cols) + '|' +
+        rects + '|' +
+        aliases                                 // may be empty
+    );
     }
 
-    function decodeState(str) {
-        try {
-            return JSON.parse(decodeURIComponent(atob(str)));
-        } catch (e) {
-            return null;
-        }
+    /* ②  parse string in location.hash → patch state (returns true/false) */
+    function decodeState (str) {
+    try{
+        const [grid, rectPart='', aliasPart=''] = str.split('|');
+        const [rowsB36, colsB36] = grid.split('.');
+
+        const rows = i36(rowsB36);
+        const cols = i36(colsB36);
+        if(!rows || !cols) return false;       // malformed
+
+        const rects = rectPart
+            ? rectPart.split(';').map(s => ({
+                r0: i36(s[0]), c0: i36(s[1]),
+                r1: i36(s[2]), c1: i36(s[3])
+                }))
+            : [];
+
+        const aliases = aliasPart
+            ? aliasPart.split(',').map(decodeURIComponent)
+            : [];
+
+        Object.assign(state, {
+        rows, cols, rects, aliases,
+        });
+
+        /* reflect widgets that mirror state */
+        rowsEl.value   = rows;
+        colsEl.value   = cols;
+        return true;
+    }catch(_){ return false; }
     }
+
 
     /* push state into location.hash – debounced so rapid drags don’t spam */
     let urlTimer = null;
