@@ -52,6 +52,8 @@
         y: 0
     };
 
+    /* rectangle color code */
+
     /* ---------- helpers ---------- */
     const nameOf = i => state.aliases[i] || String(i + 1);
     const labelOf = i => state.aliases?.[i] || String(i + 1);

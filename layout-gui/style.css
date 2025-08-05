@@ -227,8 +227,18 @@ canvas {
 }
 
 .legend-item.dragover {
-    outline: 2px dashed var(--fg-muted);
-    background: rgba(100, 100, 100, 0.05);
+    outline: none;
+    position: relative;
+}
+
+.legend-item.dragover::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--fg-muted);
 }
 
 /* text column may shrink and wrap */
@@ -239,7 +249,6 @@ canvas {
     /* wrap very long aliases */
 }
 
-
 .legend-item:hover {
     background: #f7f7f7;
 }
@@ -248,6 +257,12 @@ body.dark .legend-item:hover {
     background: #2a2a2a;
 }
 
+.legend-footer {
+  margin-top: auto;
+  padding-top: 0.5em;
+  font-size: 0.9em;
+  color: var(--dim-text-color);
+}
 
 .swatch {
     width: 20px;

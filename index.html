@@ -1,5 +1,47 @@
+Of course! I can certainly help you spruce up your personal website. Based on current design trends and best practices for personal project showcases, here’s a refreshed version of your HTML and some CSS to go with it. This new design aims for a clean, modern, and minimalist aesthetic that is easily scalable as you add more projects.
+
+The Revamped HTML (index.html)
+
+This updated structure introduces a header, a main content area with a brief introduction, a section to showcase your projects, and a footer. This organization is more descriptive and provides a solid foundation for adding more content in the future.
+
+Generated html
 <!doctype html>
-<meta charset="utf-8">
-<title>vetr.dev</title>
-<h1>Welcome</h1>
-<p><a href="/layout-gui/">Create multi-panel figure layouts for R (cowplot, grid, layout) with this interactive GUI.</a></p>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vetr.dev</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="container">
+        <h1>vetr.dev</h1>
+        <p class="tagline">A collection of utilities and projects.</p>
+    </header>
+
+    <main class="container">
+        <section id="intro">
+            <h2>Welcome!</h2>
+            <p>This website is very much a WiP. Over the years, I've made lots of little tools and utilities for myself, only to consign them to the dustbin of history once whatever immediate need has been met. But later on it's sometimes difficult to find them again, and even more difficult for me to share them.
+            
+            To help with both issues, I'm going to try tossing them on here, bandwidth permitting.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-card">
+                <h3>Multipanel Layout GUI for Figures</h3>
+                <p>Create multi-panel figure layouts for R (cowplot, grid, layout, etc.), Python (matplotlib, plotly, bokeh), and other languages with this interactive GUI.</p>
+                <a href="/layout-gui/" class="project-link">View Project &rarr;</a>
+            </div>
+            
+        </section>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2025 vetr.dev</p>
+    </footer>
+
+</body>
+</html>
