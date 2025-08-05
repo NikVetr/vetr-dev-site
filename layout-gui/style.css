@@ -6,14 +6,14 @@
     /* light-theme values */
     --bg: #ffffff;
     --fg: #0b0b0b;
-    --border: #e5e5e5;
+    --border: #a0a0a0;
     --panel-bg: #fff;
     --grid: #d0d0d0;
     --fg-muted: #666;
     --fg-heading: #0b0b0b;
     --canvas-bg: #ffffff;
     /* new */
-    --canvas-grid: #6f6f6f;
+    --canvas-grid: #b5b5b5;
     /* new (light mode) */
 }
 
@@ -34,7 +34,7 @@ body.dark {
     --grid: #e2e2e2;
     --fg-muted: #e2e2e2;
     --fg-heading: #bdbdbd;
-    --canvas-bg: #1d1d1d;
+    --canvas-bg: #0c0c0c;
     /* graphite background */
     --canvas-grid: #555555;
     /* dim grid lines      */
@@ -73,6 +73,27 @@ header h1 {
     align-items: center;
 }
 
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.aesthetic-controls,
+.functional-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+}
+
+.control-divider {
+    width: 1px;
+    height: 24px;
+    /* or adjust as desired */
+    background-color: var(--border);
+}
+
 label {
     display: inline-flex;
     align-items: center;
@@ -102,6 +123,17 @@ button:hover {
 
 button.primary {
     border-color: #3b82f6;
+}
+
+/* Button colors for dark mode */
+body.dark button {
+    background: #2e2e2e;
+    border: 1px solid var(--border);
+    color: var(--fg);
+}
+
+body.dark button:hover {
+    background: #3c3c3c;
 }
 
 canvas {
@@ -139,7 +171,7 @@ canvas {
 
 .canvas-wrap {
     position: relative;
-    background: #fff;
+    background: var(--canvas-bg);
     border: 1px solid #e5e5e5;
     border-radius: 8px;
     overflow: hidden;
@@ -156,9 +188,11 @@ canvas {
 .legend,
 .rcode {
     background: var(--panel-bg);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 8px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .legend {
@@ -186,6 +220,15 @@ canvas {
     align-items: center;
     gap: 8px;
     color: var(--fg-heading);
+}
+
+.legend-item.dragging {
+    opacity: 0.5;
+}
+
+.legend-item.dragover {
+    outline: 2px dashed var(--fg-muted);
+    background: rgba(100, 100, 100, 0.05);
 }
 
 /* text column may shrink and wrap */
@@ -255,8 +298,26 @@ body.dark .legend-item:hover {
     /* scroll bars both axes */
 }
 
+/* Code output textbox for dark mode */
+body.dark .rcode textarea {
+    background: #282828;
+    color: var(--fg);
+    border-top: 1px solid var(--border);
+}
+
+/* Toolbar background for consistency */
+body.dark .rcode .toolbar {
+    background: var(--panel-bg);
+}
+
+/* Adjust splitter color for dark mode */
+body.dark .splitter:hover {
+    background: #505050;
+}
+
 .rcode .toolbar {
     display: flex;
+    flex-direction: column;
     gap: 8px;
     padding: 8px;
     flex-wrap: wrap;
