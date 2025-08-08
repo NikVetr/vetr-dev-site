@@ -1,51 +1,71 @@
 <!doctype html>
 <html lang="en">
 <head>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1E4PVRWYSG"></script>
-    <script>
+  <!-- analytics (optional) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1E4PVRWYSG"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-1E4PVRWYSG');
-    </script>
+  </script>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>vetr.dev</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Utilities and projects by vetr.dev">
+  <link rel="icon" href="/favicon.svg">
+  <title>vetr.dev</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="container">
-        <h1>vetr.dev</h1>
-        <p class="tagline">A collection of utilities and projects.</p>
-    </header>
+  <header class="site-header">
+    <div class="container">
+      <h1>vetr.dev</h1>
+      <p class="tagline">A collection of utilities and projects.</p>
+    </div>
+  </header>
 
-    <main class="container">
-        <section id="intro">
-            <h2>Welcome!</h2>
-            <p>This website is very much a WiP. Over the years, I've made lots of little tools and utilities for myself, only to consign them to the dustbin of history once whatever immediate need has been met. But later on it's sometimes difficult to find them again, and even more difficult for me to share them.
-            
-            To help with both issues, I'm going to try tossing them on here, bandwidth permitting.</p>
-        </section>
+  <main class="container">
+    <section id="intro">
+      <h2>Welcome!</h2>
+      <p>This website is very much a WiP. Over the years, I've made lots of little tools and utilities for myself, only to consign them to the dustbin of history once whatever immediate need has been met. But later on it's sometimes difficult to find them again, and even more difficult for me to share them. To help with both issues, I'm going to try tossing them on here, bandwidth permitting.</p>
+    </section>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project-card">
-                <h3>Multipanel Layout GUI for Figures</h3>
-                <p>Create multi-panel figure layouts for R (cowplot, grid, layout, etc.), Python (matplotlib, plotly, bokeh), and other languages with this interactive GUI.</p>
-                <a href="/layout-gui/" class="project-link">View Project &rarr;</a>
-            </div>
-            
-        </section>
-    </main>
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="project-card">
+          <h3>Multipanel Layout GUI for Figures</h3>
+          <p>Create multi-panel figure layouts for R (cowplot, grid, layout, etc.), Python (matplotlib, plotly, bokeh), and other languages with this interactive GUI.</p>
+          <a href="/layout-gui/" class="project-link">View project →</a>
+        </article>
+      </div>
+    </section>
+  </main>
 
-    <footer class="container">
-        <p>&copy; 2025 vetr.dev</p>
-    </footer>
+  <footer class="site-footer">
+    <div class="footer-art">
+      <picture>
+        <source type="image/webp"
+                srcset="assets/pets_footer_1000.webp 1000w,
+                        assets/pets_footer_2000.webp 2000w,
+                        assets/pets_footer_4000.webp 4000w"
+                sizes="100vw">
+        <img src="assets/pets_footer_2000.jpg"
+             srcset="assets/pets_footer_1000.jpg 1000w,
+                     assets/pets_footer_2000.jpg 2000w,
+                     assets/pets_footer_4000.jpg 4000w"
+             sizes="100vw"
+             alt=""
+             role="presentation"
+             loading="lazy"
+             decoding="async">
+      </picture>
+      <div class="footer-credit">&copy; 2025 vetr.dev</div>
+    </div>
+  </footer>
 
 </body>
 </html>
