@@ -1,6 +1,7 @@
 import {
   canvas, wrap, rowsEl, colsEl, squareEl,
-  showGridEl, showIdxEl, rcodeEl, copyBtn
+  showGridEl, showIdxEl, rcodeEl, copyBtn,
+  aspectEl
 }                        from './dom.js';
 import { state, history }         from './state.js';
 import { clamp, syncURL, ok, norm, rectBox }         from './helpers.js';
@@ -70,17 +71,49 @@ export function resizeCanvas() {
 
 new ResizeObserver(resizeCanvas).observe(wrap);
 
+/* ─── grid-size widgets ──────────────────────────────────────────── */
+const toast = Object.assign(document.createElement('div'), {
+  className : 'toast',
+});
+document.body.append(toast);
+
+/* helper – show + auto-hide little error note */
+function flashError(msg){
+  toast.textContent   = msg;
+  toast.style.opacity = 1;
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(()=> toast.style.opacity = 0, 1500);
+}
+
 [rowsEl, colsEl].forEach(el => el.onchange = () => {
-    const r = Math.max(1, +rowsEl.value || 1),
-        c = Math.max(1, +colsEl.value || 1);
-    if (r !== state.rows || c !== state.cols) {
-        history();
-        state.rows = r;
-        state.cols = c;
-        resizeCanvas();
-        update();
-        syncURL();
-    }
+
+  const newRows = Math.max(1, +rowsEl.value || 1),
+        newCols = Math.max(1, +colsEl.value || 1);
+
+  /* early exit when nothing changed */
+  if (newRows === state.rows && newCols === state.cols) return;
+
+  /* would any rectangle stick out? */
+  const bad = state.rects.find(r0 => {
+    const r = norm(r0);
+    return r.r1 > newRows || r.c1 > newCols;
+  });
+
+  if (bad){
+    flashError('error: shrinking grid would clip existing rectangles');
+    /* restore previous values in the number boxes */
+    rowsEl.value = state.rows;
+    colsEl.value = state.cols;
+    return;
+  }
+
+  /* apply the new grid size */
+  history();
+  state.rows = newRows;
+  state.cols = newCols;
+  resizeCanvas();
+  update();
+  syncURL();
 });
 
 showGridEl.onchange = () => {
@@ -94,8 +127,18 @@ showIdxEl.onchange = () => {
 };
 
 squareEl.onchange = () => {
-    state.square = squareEl.checked;
-    resizeCanvas();
+  state.square = squareEl.checked;
+
+  if (state.square) {
+    // clear the aspect-ratio value (UI + state) and send
+    aspectEl.value = '';
+    state.aspect  = null;
+    aspectEl.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  /* redraw & sync */
+  resizeCanvas();
+  syncURL();
 };
 
 const main = document.querySelector('.main');

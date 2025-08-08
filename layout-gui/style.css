@@ -8,6 +8,7 @@
     --fg: #0b0b0b;
     --border: #a0a0a0;
     --panel-bg: #fff;
+    --accent-col: #daebf9;
     --grid: #d0d0d0;
     --fg-muted: #666;
     --fg-heading: #0b0b0b;
@@ -31,6 +32,7 @@ body.dark {
     --fg: #e2e2e2;
     --border: #bdbdbd;
     --panel-bg: #383838;
+    --accent-col: #3c5060;
     --grid: #e2e2e2;
     --fg-muted: #e2e2e2;
     --fg-heading: #bdbdbd;
@@ -225,6 +227,7 @@ canvas {
 /* ── legend line: swatch │ alias │ ×, always one row ──────────────── */
 .legend-item {
     display: flex;
+    position: relative;
     /* switch grid → flex */
     align-items: center;
     gap: 8px;
@@ -235,19 +238,22 @@ canvas {
     opacity: 0.5;
 }
 
-.legend-item.dragover {
-    outline: none;
-    position: relative;
+/* thin bar above the row */
+.legend-item.dragover-above::before {
+  content: '';
+  position: absolute;
+  top: -4px; left: 0; right: 0;
+  height: 2px;
+  background: var(--fg-muted);
 }
 
-.legend-item.dragover::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--fg-muted);
+/* thin bar below the row */
+.legend-item.dragover-below::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 2px;
+  background: var(--fg-muted);
 }
 
 /* text column may shrink and wrap */
@@ -429,4 +435,43 @@ body.dark .splitter:hover {
     /* mouse goes through it */
     opacity: 0;
     transition: opacity .15s;
+}
+
+/* error message */
+.toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  padding: 20px 30px;
+  background: rgba(211, 47, 47, 0.75);
+  color: #fff;
+  font: bold 24px/1.4 system-ui, sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* switch for labels */
+.label-switch{
+  display:inline-flex;
+  border:1px solid var(--border);
+  border-radius:2px;
+  overflow:hidden;
+  font-size:13px;
+  border-color:var(--border);
+}
+.label-switch button{
+  all:unset;
+  padding:4px 12px;
+  cursor:pointer;
+  user-select:none;
+}
+.label-switch button.active{
+  background:var(--accent-col);
+  font-weight:1000;
 }

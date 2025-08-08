@@ -1,7 +1,7 @@
 import { legendList }          from './dom.js';
 import { state, history }               from './state.js';
 import { norm, col, nameOf }   from './helpers.js';
-import { syncURL }             from './helpers.js';
+import { syncURL, colorOf }             from './helpers.js';
 import { update }              from './controls.js';
 import { repaint }     from './canvas.js';
 
@@ -16,7 +16,7 @@ export function legend() {
         li.draggable = true; // enable dragging
 
         li.innerHTML = `
-        <div class="swatch" style="background:${col(i+1)}">${i+1}</div>
+        <div class="swatch" style="background:${colorOf(i)}">${i+1}</div>
         <div class="legend-name">${nameOf(i)}</div>
         <small class="dim">rows&nbsp;${R.r0+1}:${R.r1}, cols&nbsp;${R.c0+1}:${R.c1}</small>
         <button class="del">×</button>`;
@@ -25,6 +25,8 @@ export function legend() {
             history();
             state.rects.splice(i, 1);
             state.aliases.splice(i, 1);
+            state.pool.unshift(state.colours[i]);
+            state.colours.splice(i, 1);
             update();
             syncURL();
         };
@@ -41,34 +43,63 @@ export function legend() {
         });
 
         li.addEventListener('dragover', e => {
-            e.preventDefault();
-            li.classList.add('dragover');
+            e.preventDefault();                // must keep default cancelled
+
+            // clear any previous hint classes
+            li.classList.remove('dragover-above', 'dragover-below');
+
+            // cursor is past the mid-line ⇒ show the bar *below* the row
+            const mid = li.getBoundingClientRect().height / 2;
+            const cls = (e.offsetY > mid) ? 'dragover-below' : 'dragover-above';
+            li.classList.add(cls);
         });
 
+        const clearHint = el =>
+            el.classList.remove('dragover-above','dragover-below');
+
         li.addEventListener('dragleave', () => {
-            li.classList.remove('dragover');
+            clearHint(li);
         });
 
         li.addEventListener('drop', e => {
-            e.preventDefault();
-            li.classList.remove('dragover');
+            e.preventDefault();          // we handle the drop ourselves
 
-            const fromIdx = +e.dataTransfer.getData('text/plain');
-            const toIdx = +li.dataset.idx;
+            const fromIdx = +e.dataTransfer.getData('text/plain');   // dragged row
+            const rowIdx  = +li.dataset.idx;                         // row under pointer
 
-            if (fromIdx === toIdx) return;
+            /* Decide whether the pointer is in the upper or lower half
+            of the hovered row → insert *above* or *below* that row. */
+            const pointerBelowMid =
+                e.offsetY > li.getBoundingClientRect().height / 2;   // boolean
+
+            /* Calculate final insertion slot (after removing the dragged row)
+            If we insert *after* a row that originally sat before us,
+            the target index needs to be decremented because the list shrank. */
+            let insertAt = rowIdx + (pointerBelowMid ? 1 : 0);
+            if (fromIdx < insertAt) insertAt--;
+
+            /* Nothing to do? */
+            if (fromIdx === insertAt) {
+                clearHint(li);
+                return;
+            }
 
             history();
 
-            // move the rect and alias in state
-            const [rect] = state.rects.splice(fromIdx, 1);
-            const [alias] = state.aliases.splice(fromIdx, 1);
-            state.rects.splice(toIdx, 0, rect);
-            state.aliases.splice(toIdx, 0, alias);
+            /* Move rectangle, alias and colour in lock-step ---------------*/
+            const [rect]   = state.rects  .splice(fromIdx, 1);
+            const [alias]  = state.aliases.splice(fromIdx, 1);
+            const [colour] = state.colours.splice(fromIdx, 1);
 
+            state.rects  .splice(insertAt, 0, rect);
+            state.aliases.splice(insertAt, 0, alias);
+            state.colours.splice(insertAt, 0, colour);
+
+            clearHint(li);      // remove the visual bar
             update();
             syncURL();
         });
+
 
         legendList.append(li);
     });

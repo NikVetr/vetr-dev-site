@@ -1,12 +1,13 @@
 /* events.js (no exports – listeners only) --------------------------- */
+
 import {
-  canvas, legendList, copyBtn, trimBtn, reduceBtn,
+  canvas, legendList, copyBtn, trimBtn, reduceBtn, expandBtn,
   clearBtn, undoBtn, redoBtn, exportBtn, importBtn,
   darkEl, rowsEl, colsEl, squareEl, showIdxEl, showGridEl,
-  renderRadios, rcodeEl, aspectEl
+  renderRadios, rcodeEl, aspectEl, labelSwitch
 } from './dom.js';
 
-import { state, history, applySnap }          from './state.js';
+import { state, history, applySnap, PALETTE }          from './state.js';
 import {
   nameOf, clamp, gcd, snap, norm, ok, rectBox, col,
   syncURL
@@ -114,9 +115,11 @@ canvas.addEventListener('mousedown', e => {
         history(); // enable undo
         state.rects.splice(hv.idx, 1);
         state.aliases.splice(hv.idx, 1);
+        state.pool.unshift(state.colours[hv.idx]);
+        state.colours.splice(hv.idx, 1);
         update();
-        syncURL(); // redraw + renumber colours
-        return; // nothing else to do
+        syncURL();
+        return;
     }
 
     if (hv) {
@@ -154,6 +157,8 @@ window.addEventListener('mouseup', e => {
             history();
             state.rects.push(R);
             state.aliases.push('');
+            const colour = state.pool.shift() ?? `hsl(${Math.random()*360} 70% 75%)`; // emergency new colour
+            state.colours.push(colour);
         }
         update();
         syncURL();
@@ -297,9 +302,24 @@ trimBtn.onclick = () => {
 };
 
 reduceBtn.onclick = () => {
-    if (!state.rects.length) return; // nothing to reduce
+    
+    /* NO RECTANGLES – use the common divisor of rows & cols */
+    if (!state.rects.length) {
+        const f = gcd(state.rows, state.cols);
+        if (f === 1) return;
 
-    /* 1 ── collect every horizontal & vertical boundary */
+        history();
+        state.rows /= f;
+        state.cols /= f;
+        rowsEl.value = state.rows;
+        colsEl.value = state.cols;
+
+        update();
+        syncURL();
+        return;
+    }
+
+    /* YES RECTANGLES - collect every horizontal & vertical boundary */
     const rSet = new Set([0, state.rows]);
     const cSet = new Set([0, state.cols]);
     state.rects.forEach(r0 => {
@@ -340,14 +360,47 @@ reduceBtn.onclick = () => {
     syncURL(); // repaint everything
 };
 
+/* ---------- EXPAND  ––  double everything -------------------------------- */
+expandBtn.onclick = () => {
+  /* 0 ── sanity: nothing to do if grid would grow beyond some huge limit   */
+  const MAX = 10_000;                        // arbitrary safety cap
+  if (state.rows * 2 > MAX || state.cols * 2 > MAX) return;
+
+  history();                                 // enable Undo
+
+  /* scale the grid itself  */
+  state.rows *= 2;
+  state.cols *= 2;
+  rowsEl.value = state.rows;
+  colsEl.value = state.cols;
+
+  /* scale every rectangle  */
+  state.rects = state.rects.map(r0 => {
+    const r = norm(r0);                      // be safe
+    return {
+      r0: r.r0 * 2,
+      c0: r.c0 * 2,
+      r1: r.r1 * 2,
+      c1: r.c1 * 2
+    };
+  });
+  /*  refresh everything */
+  update();
+  syncURL();
+};
 
 clearBtn.onclick = () => {
-    if (!state.rects.length) return;
-    history();
-    state.rects.length = 0;
-    state.aliases.length = 0;
-    update();
-    syncURL();
+  if (!state.rects.length) return;
+
+  history();
+  state.rects.length   = 0;
+  state.aliases.length = 0;
+  state.pool    = [...PALETTE];
+  state.colours = [];
+  state.focus      = null;
+  state.prevFocus  = null;
+  update();
+  syncURL();
 };
 
 undoBtn.onclick = () => {
@@ -356,9 +409,12 @@ undoBtn.onclick = () => {
         rows: state.rows,
         cols: state.cols,
         rects: state.rects,
-        aliases: state.aliases
+        aliases: state.aliases,
+        colours: state.colours,
+        pool : state.pool
     }));
     applySnap(state.past.pop());
+    resizeCanvas();
 };
 
 redoBtn.onclick = () => {
@@ -367,9 +423,12 @@ redoBtn.onclick = () => {
         rows: state.rows,
         cols: state.cols,
         rects: state.rects,
-        aliases: state.aliases
+        aliases: state.aliases,
+        colours: state.colours,
+        pool : state.pool
     }));
     applySnap(state.future.pop());
+    resizeCanvas();
 };
 
 exportBtn.onclick = () => {
@@ -377,7 +436,9 @@ exportBtn.onclick = () => {
         rows: state.rows,
         cols: state.cols,
         rects: state.rects,
-        aliases: state.aliases
+        aliases: state.aliases,
+        colours: state.colours,
+        pool : state.pool
     }, null, 2)], {
         type: 'application/json'
     });
@@ -413,6 +474,8 @@ importBtn.onclick = () => {
                         rows: o.rows,
                         cols: o.cols,
                         rects: o.rects.map(norm),
+                        colours: o.colours,
+                        pool : o.pool,
                         aliases: o.aliases || []
                     });
                     rowsEl.value = o.rows;
@@ -431,5 +494,31 @@ renderRadios.addEventListener('change', e => {
   if (e.target.name === 'render') {
     renderer.value       = e.target.value;   // ← .value!
     rcodeEl.value        = generateCode();   // live refresh
+  }
+});
+
+/* mutually-exclusive buttons for code generation */
+labelSwitch.addEventListener('click', e => {
+  const btn = e.target.closest('button[data-mode]');
+  if (!btn) return;
+
+  /* visual state */
+  labelSwitch.querySelectorAll('button').forEach(b =>
+      b.classList.toggle('active', b === btn));
+
+  /* functional state */
+  state.labelMode = btn.dataset.mode;   // 'num' | 'alpha'
+  update();                             // repaint legend + canvas + code
+});
+
+/* keyboard shortcuts */
+document.addEventListener('keydown', e => {
+  const mod = e.ctrlKey || e.metaKey;     // Ctrl on Win/Linux, Cmd on macOS
+  if (!mod || e.altKey) return;           // ignore if Alt is held
+
+  if (e.key.toLowerCase() === 'z') {
+    e.preventDefault();                   // stop the browser’s own undo
+    if (e.shiftKey)   redoBtn.click();
+    else              undoBtn.click();
   }
 });

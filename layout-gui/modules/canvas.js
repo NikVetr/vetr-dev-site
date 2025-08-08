@@ -2,7 +2,7 @@ import { canvas }                   from './dom.js';
 import { state }         from './state.js';
 import {
   norm, rectBox, col, nameOf, cell,
-  snap, clamp, ok
+  snap, clamp, ok, colorOf
 }                                   from './helpers.js';
 import { maxDelta }                 from './controls.js';
 
@@ -77,7 +77,7 @@ export function drawRects() {
     state.rects.forEach((R0, i) => {
         const R = norm(R0),
             b = rectBox(R);
-        ctx.fillStyle = col(i + 1);
+        ctx.fillStyle = colorOf(i);
         ctx.strokeStyle = '#00000025';
         ctx.fillRect(b.x + 0.5, b.y + 0.5, b.W - 1, b.H - 1);
         ctx.strokeRect(b.x + 0.5, b.y + 0.5, b.W - 1, b.H - 1);
@@ -120,7 +120,8 @@ export function drawPreview() {
         valid = ok(R);
     const bpx = rectBox(R);
     ctx.globalAlpha = 0.6;
-    ctx.fillStyle = valid ? col(state.rects.length + 1) : '#ddd';
+    const previewClr = state.pool[0] ?? `hsl(${Math.random()*360} 70% 75%)`;
+    ctx.fillStyle   = valid ? previewClr : '#ddd';
     ctx.fillRect(bpx.x, bpx.y, bpx.W, bpx.H);
     ctx.globalAlpha = 1;
     ctx.strokeStyle = valid ? '#3b82f6' : '#e53935';
@@ -174,7 +175,7 @@ export function drawLiveTransform() {
         b = rectBox(R);
 
     ctx.globalAlpha = 0.35;
-    ctx.fillStyle = valid ? col(state.active + 1) : '#ddd';
+    ctx.fillStyle = valid ? colorOf(state.active) : '#ddd';
     ctx.fillRect(b.x, b.y, b.W, b.H);
     ctx.globalAlpha = 1;
     ctx.setLineDash([6, 4]);

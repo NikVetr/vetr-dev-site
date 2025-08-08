@@ -1,11 +1,12 @@
-import { state } from './state.js';
+import { state, PALETTE } from './state.js';
 import { canvas, rowsEl, colsEl, aspectEl } from './dom.js';
 
 /* ---------- helpers ---------- */
 
 /* ------ aliases / labels ------------------------------------------ */
-export const nameOf = i => state.aliases[i] || String(i + 1);
-export const labelOf = i => state.aliases?.[i] || String(i + 1);
+export const nameOf = i => state.aliases[i] || 
+(state.labelMode === 'alpha' ? alpha(i) : String(i + 1));
+export const pastel = i => `hsl(${(i * 137.508) % 360} 70% 75%)`;
 
 /* ------ maths ----------------------------------------------------- */
 export const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -89,6 +90,7 @@ export const rectBox = r => {
 };
 
 /* ---------- rendering ---------- */
+export const colorOf = i => state.colours[i] ?? '#cccccc';   // safety fallback
 export const col = i => `hsl(${(i * 137.508) % 360} 70% 75%)`;
 
 /* State serialisation */
@@ -141,6 +143,10 @@ export function decodeState(str) {
                 c1: i36(s[3])
             })) : [];
 
+        /* rebuild colour arrays  */
+       state.pool    = [...PALETTE];
+       state.colours = rects.map(_ => state.pool.shift());
+
         const aliases = aliasPart ?
             aliasPart.split(',').map(decodeURIComponent) : [];
         
@@ -164,3 +170,12 @@ export function syncURL() {
         location.hash = encodeState();
     }, 150);
 }
+
+/* default labels */
+const alpha = n => {           // 0→A, 1→B … 25→Z, 26→AA …
+  let s = '';
+  do { s = String.fromCharCode(65 + (n % 26)) + s;
+       n = Math.floor(n / 26) - 1;
+  } while (n >= 0);
+  return s;
+};
