@@ -51,13 +51,13 @@ body.dark {
     box-sizing: border-box;
 }
 
-header,
-footer {
+header, footer {
     grid-column: 1 / -1;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 8px 14px;
+    overflow-x: auto;
 }
 
 header h1 {
@@ -68,31 +68,37 @@ header h1 {
 
 .controls {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow: auto;
     gap: 8px 12px;
     align-items: center;
 }
 
-.controls {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+.controls .dim{
+  font-size:0.9em;
+  line-height:1;
+  vertical-align:baseline;
+  align-self:center;
 }
+
 
 .aesthetic-controls,
 .functional-controls {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
     gap: 8px 14px;
+    min-width: 240px;
 }
 
-.control-divider {
-    width: 1px;
-    height: 24px;
-    /* or adjust as desired */
-    background-color: var(--border);
+.control-divider{
+  height:auto;
+  align-self:stretch;
+  width:1px;
+  background:var(--border);
+  margin:0 12px;
+  flex:0 0 auto;
 }
+
 
 label {
     display: inline-flex;
@@ -142,22 +148,25 @@ canvas {
 
 /* let JS set cursor directly on the canvas */
 
-.main {
-    display: grid;
-    grid-template-columns: var(--w-left, 420px)
-        /* canvas */
-        6px
-        /* splitter */
-        var(--w-mid, 300px)
-        /* directory */
-        6px
-        /* splitter */
-        var(--w-right, 1fr);
-    /* R code (flex) */
-    gap: var(--gap);
-    min-height: 0;
-    /* let children shrink vertically */
+.main{
+  display:grid;
+  grid-template-columns:
+      var(--w-left ,420px)    6px
+      var(--w-mid  ,300px)    6px
+      var(--w-right,1fr);
+
+  gap:var(--gap);
+  min-height:0;      /* keep children shrinkable vertically */
+
+  /* let the grid itself shrink below its content */
+  min-width:0;
+
+  /* if (min-widths + splitters) > viewport → show a scrollbar  */
+  overflow-x:auto;
 }
+
+/* let every flex/grid item inside the .main shrink too */
+.main > *{min-width:0;}
 
 .splitter {
     width: 6px;
@@ -249,11 +258,11 @@ canvas {
     /* wrap very long aliases */
 }
 
-.legend-item:hover {
+.legend-item:hover, .legend-item.focus {
     background: #f7f7f7;
 }
 
-body.dark .legend-item:hover {
+body.dark .legend-item:hover, body.dark .legend-item.focus {
     background: #2a2a2a;
 }
 

@@ -1,6 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1E4PVRWYSG"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1E4PVRWYSG');
+    </script>
+
   <meta charset="utf-8">
   <title>Mult-Panel Figure GUI</title>
 
@@ -154,6 +165,7 @@
 </div>
 
   <!-- JS -->
-  <script src="./main.js" defer></script>
+  <!-- <script src="./main.js" defer></script> -->
+    <script type="module" src="./main-refactor.js"></script>
 </body>
 </html>

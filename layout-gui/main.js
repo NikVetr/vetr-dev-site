@@ -1,9 +1,7 @@
 (() => {
     /* ---------- state ---------- */
     const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d', {
-        alpha: false
-    });
+    const ctx = canvas.getContext('2d', {alpha: false});
     const rowsEl = document.getElementById('rows');
     const colsEl = document.getElementById('cols');
     const showGridEl = document.getElementById('showGrid');
