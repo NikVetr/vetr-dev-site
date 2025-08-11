@@ -568,3 +568,15 @@ body.dark .splitter:hover {
 .row { display: flex; gap: 8px; align-items: baseline; margin: 6px 0; }
 .row b { font-weight: 600; }
 .row .desc { opacity: .85; }
+
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 4px 10px; border-radius: 6px;
+  border: 1px solid rgba(0,0,0,.18);
+  background: rgba(255,255,255,.55);
+  font: 600 13px system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1; white-space: nowrap; color: inherit;
+}
+@media (prefers-color-scheme: dark) {
+  .chip { border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.10); }
+}

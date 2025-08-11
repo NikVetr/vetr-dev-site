@@ -804,11 +804,11 @@ function renderHelpHTML() {
   <div class="controls-grid">
     <div class="section">
       <h3>Canvas — Mouse</h3>
-      <div class="row"><span class="kbd">Click</span> <span class="desc">Toggle sticky focus on a rectangle; click empty grid to clear</span></div>
+      <div class="row"><span class="chip">Click</span> <span class="desc">Toggle sticky focus on a rectangle; click empty grid to clear</span></div>
       <div class="row"><span class="kbd">Click + drag</span> <span class="desc">Draw new rectangle (empty space) or move (inside rect) or resize (edge/corner)</span></div>
       <div class="row"><span class="kbd">Double-click (rect)</span> <span class="desc">Rename rectangle</span></div>
       <div class="row"><span class="kbd">Double-click (empty)</span> <span class="desc">Create 1×1 rectangle at cell</span></div>
-      <div class="row"><span class="kbd">Scroll</span> <span class="desc">Over focused rect: expand (up) on all sides; shrink (down) toward hovered cell</span></div>
+      <div class="row"><span class="chip">Scroll</span> <span class="desc">On highlighted rect: expand (up) on all sides; shrink (down) toward hovered cell</span></div>
       <div class="row"><span class="kbd">× (red)</span> <span class="desc">Delete rectangle</span></div>
     </div>
 
