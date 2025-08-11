@@ -23,6 +23,7 @@
 <div class="app">
     <header>
         <h1>multipanel <code>web-gui</code></h1>
+        <button id="helpBtn" class="btn" data-tip="Keyboard & mouse controls and shortcuts"> ? </button>
 
         <div class="controls">
 
@@ -66,7 +67,6 @@
 
             <div class="functional-controls">
 
-
                 <!-- size controls -->
                 <label data-tip="Total rows in the drawing grid">
                     Rows <input type="number" id="rows" min="1" value="8">
@@ -89,6 +89,7 @@
                 <!-- persist -->
                 <button id="exportBtn" data-tip="Save the current layout to a JSON file">Export JSON</button>
                 <button id="importBtn" data-tip="Load a layout from a JSON file">Import JSON</button>
+                
             </div>
         </div>
     </header>
@@ -174,5 +175,14 @@
   <!-- JS -->
   <!-- <script src="./main.js" defer></script> -->
     <script type="module" src="./main.js"></script>
+    <div id="helpModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="helpTitle">
+    <div id="helpBackdrop" class="modal__backdrop"></div>
+    <div class="modal__card" role="document" tabindex="-1">
+        <button id="helpClose" class="modal__close" aria-label="Close">×</button>
+        <h2 id="helpTitle" class="modal__title">Shortcuts & Controls</h2>
+        <div id="helpContent" class="modal__content"></div>
+    </div>
+    </div>
+
 </body>
 </html>

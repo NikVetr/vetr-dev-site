@@ -4,17 +4,21 @@ import {
   canvas, legendList, copyBtn, trimBtn, reduceBtn, expandBtn,
   clearBtn, undoBtn, redoBtn, exportBtn, importBtn,
   darkEl, rowsEl, colsEl, squareEl, showIdxEl, showGridEl,
-  renderRadios, rcodeEl, aspectEl, labelSwitch
+  renderRadios, rcodeEl, aspectEl, labelSwitch,
+  helpBtn, helpModal, helpClose, helpBackdrop, helpContent
+
 } from './dom.js';
 
 import { state, history, applySnap, PALETTE }          from './state.js';
 import {
   nameOf, clamp, gcd, snap, norm, ok, rectBox, col,
-  syncURL
+  syncURL, cell, cellAtPx, moveRect, deleteRect, expandRect, contractRect,
+  growAllSidesOnce, shrinkTowardCellOnce, shrinkTargetCellForKeyboard,
+  expandRectToLimit
 } from './helpers.js';
 
 import {
-  repaint, grid, drawRects, drawPreview, drawLiveTransform, indices
+  repaint, grid, drawRects, drawPreview, drawLiveTransform, indices, updateMods
 } from './canvas.js';
 
 import {
@@ -89,21 +93,62 @@ canvas.addEventListener('mouseleave', () => {
 });
 
 canvas.addEventListener('dblclick', e => {
-    const {
-        x,
-        y
-    } = pos(e);
-    const hitInfo = hit(x, y);
-    if (!hitInfo || hitInfo.kind !== 'inside') return;
-    const idx = hitInfo.idx;
+const { x, y } = pos(e);
+const hv = hit(x, y);
+
+// 1) dbl-click ON an existing rect → rename (unchanged)
+if (hv && hv.kind === 'inside') {
+    const idx = hv.idx;
     const current = state.aliases[idx] || '';
     const name = prompt('Rectangle name:', current);
-    if (name === null) return;
+    if (name == null) return;
     history();
     state.aliases[idx] = name.trim();
     update();
     syncURL();
+    return;
+}
+
+  // 2) dbl-click NOT on a rect → create a 1×1 rect at the cell under the pointer
+    const { r, c } = cellAtPx(x, y);
+    const R = norm({ r0: r, c0: c, r1: r + 1, c1: c + 1 });
+
+    if (!ok(R)) return;
+
+    history();
+    state.rects.push(R);
+    state.aliases.push('');
+    const colour = state.pool.shift() ?? `hsl(${Math.random()*360} 70% 75%)`;
+    state.colours.push(colour);
+
+    // NEW: focus the freshly created rectangle (so the wheel works immediately)
+    const newIdx   = state.rects.length - 1;
+    state.focus    = newIdx;                  // used by wheel listener + canvas tint
+    // optional: make hover consistent with focus
+    state.hover    = { kind: 'inside', idx: newIdx };
+
+    update();
+    // optional: if you want the legend row to show the .focus style immediately:
+    requestAnimationFrame(() => {
+    legendList.querySelector(`.legend-item[data-idx="${newIdx}"]`)
+            ?.classList.add('focus');
+    });
 });
+
+// Helper function to toggle sticky focus... can maybe move into helpers later
+function toggleStickyFocus(hv) {
+    if (hv && state.mode === 'idle') {
+        if (state.stickyFocus === null) {
+            state.stickyFocus = hv.idx;  // Set sticky focus
+        } else if (state.stickyFocus === hv.idx) {
+            state.stickyFocus = null;  // Remove sticky focus
+        } else {
+            state.stickyFocus = hv.idx;  // Switch focus to the new rectangle
+        }
+    } else if (!hv && state.stickyFocus !== null) {
+        state.stickyFocus = null;  // Remove sticky focus if clicked outside
+    }
+}
 
 canvas.addEventListener('mousedown', e => {
     const {
@@ -142,7 +187,17 @@ canvas.addEventListener('mousedown', e => {
 });
 
 window.addEventListener('mouseup', e => {
+
+    const { x, y } = pos(e);
+    const hv = hit(x, y);  // Check if the mouse is inside a rectangle
+    let moved = false; // Track if a move or resize has happened
+
     if (state.mode === 'drawing') {
+
+        //first clear stickyfocus
+        state.stickyFocus = null
+        repaint();
+
         const a = state.start.begin,
             b = snap(...Object.values(pos(e)));
         const R = norm({
@@ -164,6 +219,7 @@ window.addEventListener('mouseup', e => {
         syncURL();
         return;
     }
+
     if (state.mode === 'moving') {
         const v = snap(...Object.values(pos(e))),
             dR = v.r - state.grab.r,
@@ -173,7 +229,7 @@ window.addEventListener('mouseup', e => {
             dc
         } = maxDelta(state.active, dR, dC);
         const R = state.base;
-        const moved = {
+        const movedRect = {
             r0: R.r0 + dr,
             c0: R.c0 + dc,
             r1: R.r1 + dr,
@@ -181,13 +237,18 @@ window.addEventListener('mouseup', e => {
         };
         if (dr || dc) {
             history();
-            state.rects[state.active] = moved;
+            state.rects[state.active] = movedRect;
+            if(state.active !== state.stickyFocus){
+                state.stickyFocus = null;
+                repaint();
+            }
+            moved = true;  // Track that the rectangle has moved
         }
         state.mode = 'idle';
         update();
         syncURL();
-        return;
     }
+
     if (state.mode === 'resizing') {
         const v = snap(...Object.values(pos(e)));
         let R = {
@@ -202,13 +263,52 @@ window.addEventListener('mouseup', e => {
         if (ok(R, state.active)) {
             history();
             state.rects[state.active] = R;
+            if (state.active !== state.stickyFocus) {
+                state.stickyFocus = null;
+                repaint();
+            }
+            moved = true;  // Track that the rectangle has moved
         }
         state.mode = 'idle';
         update();
         syncURL();
-        return;
     }
+
+    if (!moved) {
+        toggleStickyFocus(hv);  // Call the dedicated function to toggle sticky focus
+        repaint();  // Redraw the canvas with updated focus
+    }
+
 });
+
+
+canvas.addEventListener('wheel', (e) => {
+  if (state.mode !== 'idle' || state.focus == null) return;
+  e.preventDefault();
+
+  const { x, y } = pos(e);
+  const { r: tr, c: tc } = cellAtPx(x, y);
+  const idx = state.focus;
+  const R   = norm(state.rects[idx]);
+
+  let next = null;
+
+  if (e.deltaY > 0) {
+    // shrink toward hovered cell
+    next = shrinkTowardCellOnce(R, tr, tc);
+  } else if (e.deltaY < 0) {
+    // expand one tick on all sides
+    next = growAllSidesOnce(R, idx);
+  }
+
+  if (next) {
+    history();
+    state.rects[idx] = next;
+    update();
+    syncURL();
+  }
+}, { passive: false });
+
 
 aspectEl.oninput = () => { // empty = auto
     const v = parseFloat(aspectEl.value);
@@ -512,6 +612,8 @@ labelSwitch.addEventListener('click', e => {
 });
 
 /* keyboard shortcuts */
+
+//events for undo / redo
 document.addEventListener('keydown', e => {
   const mod = e.ctrlKey || e.metaKey;     // Ctrl on Win/Linux, Cmd on macOS
   if (!mod || e.altKey) return;           // ignore if Alt is held
@@ -521,4 +623,280 @@ document.addEventListener('keydown', e => {
     if (e.shiftKey)   redoBtn.click();
     else              undoBtn.click();
   }
+});
+
+/*
+//events for moving a sticky focused rectangle
+document.addEventListener('keydown', e => {
+    
+    // Only proceed if stickyFocus is set and focus is on the canvas
+    //if (state.stickyFocus !== null && state.focusSource === 'canvas') {
+    if (state.stickyFocus !== null) {
+
+        const idx = state.stickyFocus;  // Get the sticky-focused rectangle index
+        let moved = false;
+
+        switch (e.key) {
+            case 'ArrowLeft':
+                moved = moveRect(idx, 0, -1);  // Move rectangle up
+                break;
+            case 'ArrowRight':
+                moved = moveRect(idx, 0, 1);  // Move rectangle down
+                break;
+            case 'ArrowUp':
+                moved = moveRect(idx, -1, 0);  // Move rectangle left
+                break;
+            case 'ArrowDown':
+                moved = moveRect(idx, 1, 0);  // Move rectangle right
+                break;
+            case 'Delete':
+                deleteRect(idx);  // Delete focused rectangle
+                break;
+            default:
+                break;
+        }
+
+        if (moved) {
+            update();
+            syncURL();
+        }
+    }
+});
+*/
+
+document.addEventListener('keydown', e => {
+  // nothing to do if no sticky focus AND the key isn't Tab (which can set it)
+  const hasFocus = state.stickyFocus !== null;
+
+  // --- Tab / Shift+Tab: cycle sticky focus with rollover
+  if (e.key === 'Tab') {
+    const n = state.rects.length;
+    if (!n) return;
+    e.preventDefault();
+
+    if (!hasFocus) {
+      state.stickyFocus = e.shiftKey ? (n - 1) : 0;
+    } else {
+      const delta = e.shiftKey ? -1 : 1;
+      state.stickyFocus = (state.stickyFocus + delta + n) % n;
+    }
+    state.focusSource = 'canvas';
+    repaint();
+    return;
+  }
+
+  if (!hasFocus) return; // from here on we need a sticky focused rect
+
+  const idx = state.stickyFocus;
+  const ctrl = e.ctrlKey || e.metaKey;
+  const shift = e.shiftKey;
+  let changed = false;
+
+  // --- Cmd/Ctrl + Enter: expand to maximum
+  if ((e.key === 'Enter' || e.key === 'NumpadEnter') && ctrl) {
+    e.preventDefault();
+    // expand to limit using your existing helper
+    changed = expandRectToLimit(idx);
+    if (changed) { update(); syncURL(); }
+    return;
+  }
+
+  // --- Cmd/Ctrl + '+' / '-' one-tick grow/shrink (wheel semantics)
+  if (ctrl) {
+    const isPlus  = (e.key === '+' || e.key === '=' || e.key === 'Add');
+    const isMinus = (e.key === '-' || e.key === 'Subtract');
+
+    if (isPlus || isMinus) {
+      e.preventDefault(); // stop browser zoom
+      const R = norm(state.rects[idx]);
+      let next = null;
+
+      if (isPlus) {
+        next = growAllSidesOnce(R, idx);
+      } else { // isMinus
+        const { r: tr, c: tc } = shrinkTargetCellForKeyboard(idx);
+        next = shrinkTowardCellOnce(R, tr, tc);
+      }
+
+      if (next) {
+        history();
+        state.rects[idx] = next;
+        update();
+        syncURL();
+      }
+      return;
+    }
+  }
+
+  switch (e.key) {
+    case 'Delete': {
+      e.preventDefault();
+      const old = idx;
+      history();
+      // deleteRect already does history() in your version; if so, remove the history() above
+      deleteRect(old);            // does update() + syncURL()
+      if (state.rects.length) {
+        state.stickyFocus = Math.min(old, state.rects.length - 1);
+        state.focusSource = 'canvas';
+      } else {
+        state.stickyFocus = null;
+        state.focusSource = null;
+      }
+      repaint();
+      return;
+    }
+
+    case 'ArrowLeft':
+      if (ctrl && shift) { changed = contractRect(idx, 'E'); }
+      else if (ctrl)     { changed = expandRect(idx, 'W'); }
+      else               { changed = moveRect(idx, 0, -1); }
+      break;
+
+    case 'ArrowRight':
+      if (ctrl && shift) { changed = contractRect(idx, 'W'); }
+      else if (ctrl)     { changed = expandRect(idx, 'E'); }
+      else               { changed = moveRect(idx, 0,  1); }
+      break;
+
+    case 'ArrowUp':
+      if (ctrl && shift) { changed = contractRect(idx, 'S'); }
+      else if (ctrl)     { changed = expandRect(idx, 'N'); }
+      else               { changed = moveRect(idx, -1, 0); }
+      break;
+
+    case 'ArrowDown':
+      if (ctrl && shift) { changed = contractRect(idx, 'N'); }
+      else if (ctrl)     { changed = expandRect(idx, 'S'); }
+      else               { changed = moveRect(idx,  1, 0); }
+      break;
+
+    default:
+      return; // not a key we handle
+  }
+
+  if (changed) {
+    e.preventDefault();   // stop page scroll / key repeat side-effects
+    history();
+    update();
+    syncURL();
+  }
+});
+
+//visual modifiers for stickyfocus
+document.addEventListener('keydown', updateMods);
+document.addEventListener('keyup',   updateMods);
+// When the window loses focus, clear modifiers (prevents stuck visuals)
+window.addEventListener('blur', () => {
+  if (state.modDown || state.shiftDown) {
+    state.modDown = false;
+    state.shiftDown = false;
+    if (state.stickyFocus != null) repaint();
+  }
+});
+
+//help information
+// Detect platform modifier label
+const MOD_LABEL = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl';
+
+// Build the modal content (HTML) — uses your current behaviors
+function renderHelpHTML() {
+  return `
+  <div class="controls-grid">
+    <div class="section">
+      <h3>Canvas — Mouse</h3>
+      <div class="row"><span class="kbd">Click</span> <span class="desc">Toggle sticky focus on a rectangle; click empty grid to clear</span></div>
+      <div class="row"><span class="kbd">Click + drag</span> <span class="desc">Draw new rectangle (empty space) or move (inside rect) or resize (edge/corner)</span></div>
+      <div class="row"><span class="kbd">Double-click (rect)</span> <span class="desc">Rename rectangle</span></div>
+      <div class="row"><span class="kbd">Double-click (empty)</span> <span class="desc">Create 1×1 rectangle at cell</span></div>
+      <div class="row"><span class="kbd">Scroll</span> <span class="desc">Over focused rect: expand (up) on all sides; shrink (down) toward hovered cell</span></div>
+      <div class="row"><span class="kbd">× (red)</span> <span class="desc">Delete rectangle</span></div>
+    </div>
+
+    <div class="section">
+      <h3>Canvas — Keyboard (requires sticky focus)</h3>
+      <div class="row"><span class="kbd">Tab</span>/<span class="kbd">Shift</span><span class="kbd">Tab</span> <span class="desc">Cycle focused rectangle (rollover)</span></div>
+      <div class="row"><span class="kbd">←</span><span class="kbd">→</span><span class="kbd">↑</span><span class="kbd">↓</span> <span class="desc">Move rectangle by 1 cell (blocked by borders/overlap)</span></div>
+      <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">←/→/↑/↓</span> <span class="desc">Expand 1 cell from that side</span></div>
+      <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">Shift</span> + <span class="kbd">←/→/↑/↓</span> <span class="desc">Contract 1 cell from that side</span></div>
+      <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">Enter</span> <span class="desc">Expand to maximum space</span></div>
+      <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">+</span> / <span class="kbd">−</span> <span class="desc">Grow/shrink 1 tick (same as scroll)</span></div>
+      <div class="row"><span class="kbd">Delete</span> <span class="desc">Delete focused rectangle</span></div>
+    </div>
+
+    <div class="section">
+      <h3>Legend</h3>
+      <div class="row"><span class="kbd">Drag rows</span> <span class="desc">Reorder rectangles (color/name travel with it)</span></div>
+      <div class="row"><span class="kbd">Hover row</span> <span class="desc">Highlight rectangle in canvas</span></div>
+    </div>
+
+    <div class="section">
+      <h3>History & Export</h3>
+      <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">Z</span> <span class="desc">Undo</span></div>
+      <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">Shift</span> + <span class="kbd">Z</span> <span class="desc">Redo</span></div>
+      <div class="row"><b>Export / Import</b> <span class="desc">JSON snapshot; shareable URL is updated automatically</span></div>
+    </div>
+  </div>`;
+}
+
+// Open/close helpers (with focus trap)
+let _helpPrevFocus = null;
+
+function openHelp() {
+  helpContent.innerHTML = renderHelpHTML();
+  helpModal.classList.remove('hidden');
+  helpModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  _helpPrevFocus = document.activeElement;
+  helpClose.focus();
+}
+
+function closeHelp() {
+  helpModal.classList.add('hidden');
+  helpModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+  if (_helpPrevFocus && _helpPrevFocus instanceof HTMLElement) _helpPrevFocus.focus();
+}
+
+// click + keyboard bindings
+helpBtn?.addEventListener('click', openHelp);
+helpClose?.addEventListener('click', closeHelp);
+helpBackdrop?.addEventListener('click', closeHelp);
+
+// ESC closes
+document.addEventListener('keydown', (e) => {
+  if (helpModal.classList.contains('hidden')) return;
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    closeHelp();
+  }
+});
+
+// focus trap inside modal
+helpModal.addEventListener('keydown', (e) => {
+  if (helpModal.classList.contains('hidden')) return;
+  if (e.key !== 'Tab') return;
+
+  const focusables = helpModal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  if (!focusables.length) return;
+
+  const first = focusables[0];
+  const last  = focusables[focusables.length - 1];
+
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault(); last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault(); first.focus();
+  }
+});
+
+// Optional: keyboard 'H' toggles help
+document.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() !== 'h') return;
+  // avoid typing in inputs
+  const t = e.target;
+  if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+  if (helpModal.classList.contains('hidden')) openHelp();
+  else closeHelp();
 });

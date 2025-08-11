@@ -1,4 +1,3 @@
-/* ---------- state ---------- */
 export const canvas = document.getElementById('canvas');
 export const rowsEl = document.getElementById('rows');
 export const colsEl = document.getElementById('cols');
@@ -24,3 +23,9 @@ export const incURLEl = document.getElementById('incURL');
 export const renderRadios = document.getElementById('renderRadios');
 export const aspectEl    = document.getElementById('aspect');
 export const labelSwitch = document.getElementById('labelSwitch');
+//help info
+export const helpBtn     = document.getElementById('helpBtn');
+export const helpModal   = document.getElementById('helpModal');
+export const helpClose   = document.getElementById('helpClose');
+export const helpBackdrop= document.getElementById('helpBackdrop');
+export const helpContent = document.getElementById('helpContent');

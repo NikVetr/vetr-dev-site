@@ -1,4 +1,4 @@
-import { state, PALETTE } from './state.js';
+import { state, history, PALETTE } from './state.js';
 import { canvas, rowsEl, colsEl, aspectEl } from './dom.js';
 
 /* ---------- helpers ---------- */
@@ -17,6 +17,17 @@ export const cell = () => ({
     w: canvas.width / state.cols,
     h: canvas.height / state.rows
 });
+
+export function cellAtPx(x, y) {
+  const eps = 1e-7;
+  const r = Math.floor(((y / canvas.height) * state.rows) - eps);
+  const c = Math.floor(((x / canvas.width)  * state.cols) - eps);
+  return {
+    r: Math.min(Math.max(r, 0), state.rows - 1),
+    c: Math.min(Math.max(c, 0), state.cols - 1),
+  };
+}
+
 export const snap = (x, y) => {
     const {
         w,
@@ -179,3 +190,181 @@ const alpha = n => {           // 0→A, 1→B … 25→Z, 26→AA …
   } while (n >= 0);
   return s;
 };
+
+export function moveRect(idx, dr, dc) {
+    const rect = state.rects[idx];
+    
+    // Calculate new proposed position
+    const newRect = {
+        r0: rect.r0 + dr,
+        c0: rect.c0 + dc,
+        r1: rect.r1 + dr,
+        c1: rect.c1 + dc
+    };
+
+    // Check if moving would go out of bounds and adjust the deltas (dr, dc) accordingly
+    if (newRect.r0 < 0) {
+        dr = -rect.r0;  // Stop movement if it would go above the top
+    }
+    if (newRect.c0 < 0) {
+        dc = -rect.c0;  // Stop movement if it would go beyond the left side
+    }
+    if (newRect.r1 > state.rows) {
+        dr = state.rows - rect.r1;  // Stop movement if it would go beyond the bottom
+    }
+    if (newRect.c1 > state.cols) {
+        dc = state.cols - rect.c1;  // Stop movement if it would go beyond the right side
+    }
+
+    // Apply the adjusted deltas to the rectangle's position
+    const adjustedRect = {
+        r0: rect.r0 + dr,
+        c0: rect.c0 + dc,
+        r1: rect.r1 + dr,
+        c1: rect.c1 + dc
+    };
+
+    // Ensure that the rectangle stays within the grid bounds and does not overlap
+    if (!ok(adjustedRect, idx)) return false;
+
+    // Update the rectangle's position
+    state.rects[idx] = adjustedRect;
+    return true;
+}
+
+
+export function deleteRect(idx) {
+    history();
+    state.rects.splice(idx, 1);
+    state.aliases.splice(idx, 1);
+    state.pool.unshift(state.colours[idx]);
+    state.colours.splice(idx, 1);
+    update();
+    syncURL();
+}
+
+export function expandRect(idx, dir) {
+  const R = norm(state.rects[idx]);
+  let cand = { ...R };
+
+  if (dir === 'N') { if (R.r0 === 0) return false;           cand.r0 = R.r0 - 1; }
+  if (dir === 'S') { if (R.r1 === state.rows) return false;  cand.r1 = R.r1 + 1; }
+  if (dir === 'W') { if (R.c0 === 0) return false;           cand.c0 = R.c0 - 1; }
+  if (dir === 'E') { if (R.c1 === state.cols) return false;  cand.c1 = R.c1 + 1; }
+
+  cand = norm(cand);
+  if (cand.r0 === R.r0 && cand.r1 === R.r1 && cand.c0 === R.c0 && cand.c1 === R.c1) return false;
+  if (!ok(cand, idx)) return false;
+
+  state.rects[idx] = cand;  // (no history here; caller handles it)
+  return true;
+}
+
+export function contractRect(idx, dir) {
+  const R = norm(state.rects[idx]);
+  const w = R.c1 - R.c0, h = R.r1 - R.r0;
+  let cand = { ...R };
+
+  if (dir === 'N') { if (h <= 1) return false; cand.r0 = R.r0 + 1; }
+  if (dir === 'S') { if (h <= 1) return false; cand.r1 = R.r1 - 1; }
+  if (dir === 'W') { if (w <= 1) return false; cand.c0 = R.c0 + 1; }
+  if (dir === 'E') { if (w <= 1) return false; cand.c1 = R.c1 - 1; }
+
+  cand = norm(cand);
+  if (cand.r0 === R.r0 && cand.r1 === R.r1 && cand.c0 === R.c0 && cand.c1 === R.c1) return false;
+
+  state.rects[idx] = cand;
+  return true;
+}
+
+export function expandRectToLimit(idx) {
+  let R = norm(state.rects[idx]);
+  let grewAny = false;
+
+  const tryGrowSide = (side) => {
+    let cand = { ...R };
+    if (side === 'N') { if (R.r0 === 0) return false;            cand.r0 = R.r0 - 1; }
+    if (side === 'S') { if (R.r1 === state.rows) return false;    cand.r1 = R.r1 + 1; }
+    if (side === 'W') { if (R.c0 === 0) return false;            cand.c0 = R.c0 - 1; }
+    if (side === 'E') { if (R.c1 === state.cols) return false;    cand.c1 = R.c1 + 1; }
+
+    cand = norm(cand);
+    if (!ok(cand, idx)) return false;
+
+    R = cand;       // commit this single-side growth to the working rect
+    return true;
+  };
+
+  // keep growing until a full pass makes no progress
+  for (;;) {
+    const grewThisPass = !!(tryGrowSide('N') | tryGrowSide('S') | tryGrowSide('W') | tryGrowSide('E'));
+    if (!grewThisPass) break;
+    grewAny = true;
+  }
+
+  if (grewAny) {
+    history();              // single undo step for the whole expansion
+    state.rects[idx] = R;
+  }
+  return grewAny;
+}
+
+// center cell (floor for even dims)
+export function rectCenterCell(R) {
+  R = norm(R);
+  const r = Math.floor((R.r0 + R.r1 - 1) / 2);
+  const c = Math.floor((R.c0 + R.c1 - 1) / 2);
+  return { r, c };
+}
+
+// choose target cell for keyboard shrink: cursor cell if inside, else center
+export function shrinkTargetCellForKeyboard(idx) {
+  const R = norm(state.rects[idx]);
+  const { x, y } = state.cursorPos || { x: 0, y: 0 };
+  const { r, c } = cellAtPx(x, y);
+  return inside(R, { r, c }) ? { r, c } : rectCenterCell(R);
+}
+
+// one-tick grow on all sides (same as wheel expand pass)
+export function growAllSidesOnce(R, idx) {
+  R = norm(R);
+  let cur = { ...R };
+  const trySide = (side) => {
+    let cand = { ...cur };
+    if (side === 'N') { if (cur.r0 === 0) return false;          cand.r0 = cur.r0 - 1; }
+    if (side === 'S') { if (cur.r1 === state.rows) return false;  cand.r1 = cur.r1 + 1; }
+    if (side === 'W') { if (cur.c0 === 0) return false;          cand.c0 = cur.c0 - 1; }
+    if (side === 'E') { if (cur.c1 === state.cols) return false;  cand.c1 = cur.c1 + 1; }
+    cand = norm(cand);
+    if (!ok(cand, idx)) return false;
+    cur = cand;
+    return true;
+  };
+  const grew = !!(trySide('N') | trySide('S') | trySide('W') | trySide('E'));
+  return grew ? cur : null;
+}
+
+// one-tick shrink toward a target cell (wheel’s deltaY>0 path)
+export function shrinkTowardCellOnce(R, tr, tc) {
+  R = norm(R);
+  const insideTarget = (tr >= R.r0 && tr < R.r1 && tc >= R.c0 && tc < R.c1);
+  if (!insideTarget) return null;
+
+  let nR = {
+    r0: (R.r0 < tr)     ? R.r0 + 1 : R.r0,
+    r1: (R.r1 > tr + 1) ? R.r1 - 1 : R.r1,
+    c0: (R.c0 < tc)     ? R.c0 + 1 : R.c0,
+    c1: (R.c1 > tc + 1) ? R.c1 - 1 : R.c1
+  };
+
+  // guarantee target remains inside and ≥1×1
+  if (nR.r0 > tr)     nR.r0 = tr;
+  if (nR.r1 < tr + 1) nR.r1 = tr + 1;
+  if (nR.c0 > tc)     nR.c0 = tc;
+  if (nR.c1 < tc + 1) nR.c1 = tc + 1;
+  nR.r0 = Math.min(nR.r0, nR.r1 - 1);
+  nR.c0 = Math.min(nR.c0, nR.c1 - 1);
+
+  nR = norm(nR);
+  return (nR.r0 !== R.r0 || nR.r1 !== R.r1 || nR.c0 !== R.c0 || nR.c1 !== R.c1) ? nR : null;
+}

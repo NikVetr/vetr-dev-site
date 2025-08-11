@@ -46,7 +46,149 @@ export function grid() {
     ctx.restore();
 }
 
-/* TODO: rectangle color code */
+
+// --- Keycap (box) ---
+function drawKeycapBox(x, y, w, h, {
+  radius = 4,
+  fillAlpha = 0.28,
+  strokeAlpha = 0.35,
+  strokeWidth = 3.0,
+} = {}) {
+  ctx.save();
+  ctx.fillStyle   = `rgba(255,255,255,${fillAlpha})`;
+  ctx.strokeStyle = `rgba(0,0,0,${strokeAlpha})`;
+  ctx.lineWidth   = strokeWidth;
+
+  const r = Math.min(radius, (Math.min(w, h) * 0.25));
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+}
+
+// --- Icon (arrow + bar), canonical EAST-facing; rotate per edge ---
+function drawKeycapIconRot(x, y, w, h, angleRad, mode, {
+  inset = 6,     // keep icon away from keycap border
+  gap   = 6,     // space between arrow tip and bar
+  iconAlpha = 0.8,
+} = {}) {
+  ctx.save();
+  ctx.translate(x + w / 2, y + h / 2);
+  ctx.rotate(angleRad);
+
+  // usable square inside the keycap
+  const s        = Math.min(w, h);
+  const safeHalf = (s / 2) - inset;        // never draw beyond this (±safeHalf)
+  const sC       = Math.max(1, (safeHalf * 2)); // content-size for scaling
+
+  // icon metrics based on content area
+  const t  = Math.max(2, sC * 0.10);   // stroke thickness
+  const L  = sC * 0.52;                // arrow shaft length
+  const ah = sC * 0.22;                // arrowhead length
+  const aw = sC * 0.18;                // arrowhead half-width
+
+  ctx.lineCap   = 'round';
+  ctx.lineJoin  = 'round';
+  ctx.strokeStyle = `rgba(0,0,0,${iconAlpha})`;
+  ctx.fillStyle   = `rgba(0,0,0,${iconAlpha})`;
+  ctx.lineWidth   = t;
+
+  const clampX = (xPos) =>
+    Math.max(-safeHalf + t * 0.5, Math.min(safeHalf - t * 0.5, xPos));
+
+  const drawArrow = (dir /* +1: →, -1: ← */) => {
+    // shaft
+    ctx.beginPath();
+    if (dir > 0) { // →
+      ctx.moveTo(-L/2, 0);
+      ctx.lineTo(+L/2, 0);
+    } else {       // ←
+      ctx.moveTo(+L/2, 0);
+      ctx.lineTo(-L/2, 0);
+    }
+    ctx.stroke();
+    // head at the pointing end
+    const tipX = dir > 0 ? +L/2 : -L/2;
+    const base = dir > 0 ? tipX - ah : tipX + ah;
+    ctx.beginPath();
+    ctx.moveTo(tipX, 0);
+    ctx.lineTo(base, +aw);
+    ctx.lineTo(base, -aw);
+    ctx.closePath();
+    ctx.fill();
+    return tipX; // so we can place the bar relative to tip + gap
+  };
+
+  const drawBarAtX = (xPos) => {
+    const xClamped = clampX(xPos);
+    const halfLen  = sC * 0.32;
+    ctx.beginPath();
+    ctx.moveTo(xClamped, -halfLen);
+    ctx.lineTo(xClamped,  halfLen);
+    ctx.stroke();
+  };
+
+  if (mode === 'move') {
+    drawArrow(+1);
+  } else if (mode === 'expand') {
+    // arrow points outward; bar sits outside the tip with a gap
+    const tip = drawArrow(+1);
+    drawBarAtX(tip + gap);
+  } else { // 'contract'
+    // arrow points inward; bar sits toward the border with a gap from the inward tip
+    const tip = drawArrow(-1);
+    drawBarAtX(tip - gap);
+  }
+
+  ctx.restore();
+}
+
+
+// Decide which label to draw for a given side based on modifier state
+// side: 'N' | 'S' | 'W' | 'E'
+// mode: 'move' | 'expand' | 'contract'
+export function edgeLabel(side, mode) {
+  if (mode === 'move') {
+    return side === 'W' ? '←'
+         : side === 'E' ? '→'
+         : side === 'N' ? '↑'
+         :                '↓';
+  }
+  if (mode === 'expand') {
+    // arrow points outward to a bar
+    return side === 'W' ? '←│'   // growing West
+         : side === 'E' ? '→│'   // growing East
+         : side === 'N' ? '↑│'   // growing North
+         :                '↓│';  // growing South
+  }
+  // contract: bar at edge, arrow pointing inward
+  return side === 'W' ? '│→'
+       : side === 'E' ? '│←'
+       : side === 'N' ? '│↓'
+       :                '│↑';
+}
+
+
+export const updateMods = (e) => {
+  const mod  = !!(e.ctrlKey || e.metaKey);
+  const shft = !!e.shiftKey;
+  const changed = (mod !== state.modDown) || (shft !== state.shiftDown);
+  if (changed) {
+    state.modDown = mod;
+    state.shiftDown = shft;
+    if (state.stickyFocus != null) repaint();
+  }
+};
 
 /* Text */
 export function drawTextFixed(xCSS, yCSS, txt,
@@ -100,6 +242,56 @@ export function drawRects() {
             ctx.fillStyle  = '#000';               // plain black tint
             ctx.fillRect(b.x + .5, b.y + .5, b.W - 1, b.H - 1);
             ctx.restore();
+        }
+        
+        //draw keyboard control indicators
+        if (state.stickyFocus === i) {
+            // thick border
+            ctx.save();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = '#ff0000';
+            ctx.strokeRect(b.x + 0.5, b.y + 0.5, b.W - 1, b.H - 1);
+            ctx.restore();
+
+            const mode = state.modDown ? (state.shiftDown ? 'contract' : 'expand') : 'move';
+
+            // layout constants (tweak to taste)
+            const pad = Math.max(12, Math.min(24, Math.min(b.W, b.H) * 0.08));  // inset from edges
+            const kw  = Math.max(28, Math.min(48, b.W * 0.22));                 // keycap width
+            const kh  = Math.max(24, Math.min(40, b.H * 0.22));                 // keycap height
+
+            // centers for top/bottom and left/right placements
+            const kcx = b.x + b.W / 2 - kw / 2;
+            const kcy = b.y + b.H / 2 - kh / 2;
+
+            // Draw only if there’s room (avoid overlapping the whole rect)
+            const roomH = (kh + 8 * pad) < b.H;
+            const roomW = (kw + 8 * pad) < b.W;
+
+            // North (rotate -90°)
+            if (roomH){
+                drawKeycapBox(kcx, b.y + pad, kw, kh);
+                drawKeycapIconRot(kcx, b.y + pad, kw, kh, -Math.PI/2, mode);
+            }
+
+            // South (+90°)
+            if (roomH){
+                drawKeycapBox(kcx, b.y + b.H - pad - kh, kw, kh);
+                drawKeycapIconRot(kcx, b.y + b.H - pad - kh, kw, kh,  Math.PI/2, mode);
+            } 
+
+            // West (180°)
+            if (roomW){
+                drawKeycapBox(b.x + pad, kcy, kw, kh);
+                drawKeycapIconRot(b.x + pad, kcy, kw, kh, Math.PI, mode);
+            }
+
+            // East (0°)
+            if (roomW){
+                drawKeycapBox(b.x + b.W - pad - kw, kcy, kw, kh);
+                drawKeycapIconRot(b.x + b.W - pad - kw, kcy, kw, kh, 0, mode);
+            }
+
         }
 
     });

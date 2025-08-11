@@ -475,3 +475,96 @@ body.dark .splitter:hover {
   background:var(--accent-col);
   font-weight:1000;
 }
+
+/* help information */
+
+.hidden { display: none !important; }
+
+.modal-open { overflow: hidden; }
+
+.modal {
+  position: fixed; inset: 0; z-index: 9999;
+}
+
+.modal__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(2px);
+}
+
+.modal__card {
+  position: absolute; inset: 0;
+  margin: auto; max-width: 860px; max-height: 80vh;
+  width: min(92vw, 860px); height: auto;
+  background: var(--panel-bg, #fff);
+  color: var(--fg, #111);
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+  padding: 18px 20px 16px 20px;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal__card {
+    background: var(--panel-bg, #1f1f1f);
+    color: var(--fg, #f3f3f3);
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  }
+}
+
+.modal__title {
+  margin: 0 36px 8px 0;
+  font: 600 20px system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.modal__close {
+  position: absolute; top: 8px; right: 8px;
+  width: 32px; height: 32px; border: 0; border-radius: 8px;
+  background: transparent; color: inherit; font-size: 22px; line-height: 1;
+  cursor: pointer;
+}
+.modal__close:hover { background: rgba(0,0,0,.06); }
+@media (prefers-color-scheme: dark) {
+  .modal__close:hover { background: rgba(255,255,255,.06); }
+}
+
+.modal__content {
+  overflow: auto; max-height: calc(80vh - 56px);
+  padding-right: 4px;
+}
+
+.controls-grid {
+  display: grid; gap: 10px 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: start;
+}
+
+.section {
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 10px;
+  padding: 12px 12px 8px;
+}
+@media (prefers-color-scheme: dark) {
+  .section { border-color: rgba(255,255,255,.12); }
+}
+
+.section h3 {
+  margin: 0 0 8px; font: 600 14px system-ui;
+  opacity: .9; letter-spacing: .2px; text-transform: uppercase;
+}
+
+.kbd {
+  display: inline-block; min-width: 1.75em;
+  padding: 2px 6px; margin: 0 2px;
+  border-radius: 6px; border: 1px solid rgba(0,0,0,.2);
+  background: rgba(255,255,255,.5);
+  color: inherit; font: 500 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-align: center;
+}
+@media (prefers-color-scheme: dark) {
+  .kbd { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+}
+
+.row { display: flex; gap: 8px; align-items: baseline; margin: 6px 0; }
+.row b { font-weight: 600; }
+.row .desc { opacity: .85; }

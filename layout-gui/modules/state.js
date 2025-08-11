@@ -29,8 +29,13 @@ export const state = {
     aspect: null,
     cursorPos: { x: 0, y: 0 },
     focus : null, 
+    stickyFocus : null,
+    focusSource : null,
     prevFocus : null,
-    labelMode : 'num'
+    labelMode : 'num',
+
+    modDown: false,
+    shiftDown: false
 };
 
 /* ---------- history ---------- */
