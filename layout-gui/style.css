@@ -483,13 +483,17 @@ body.dark .splitter:hover {
 .modal-open { overflow: hidden; }
 
 .modal {
-  position: fixed; inset: 0; z-index: 9999;
+  position: fixed; 
+  inset: 0; 
+  z-index: 9999;
+  pointer-events: none;
 }
 
 .modal__backdrop {
   position: absolute; inset: 0;
   background: rgba(0,0,0,.35);
   backdrop-filter: blur(2px);
+  pointer-events: auto;
 }
 
 .modal__card {
@@ -502,6 +506,7 @@ body.dark .splitter:hover {
   box-shadow: 0 10px 40px rgba(0,0,0,.25);
   padding: 18px 20px 16px 20px;
   overflow: hidden;
+  pointer-events: auto;
 }
 
 @media (prefers-color-scheme: dark) {

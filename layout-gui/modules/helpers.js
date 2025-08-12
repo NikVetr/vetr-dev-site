@@ -100,6 +100,28 @@ export const rectBox = r => {
     };
 };
 
+export function deleteGlyphMetrics(b) {
+  const s = Math.min(b.W, b.H);
+
+  // Skip when the rect is super tiny
+  if (s < 18) return { draw: false };
+
+  // Pad away from the corner, scale with rect but stay sane
+  const pad    = Math.max(4, Math.min(2, s * 0.12));
+
+  // Visual font size target (device-independent; canvas will scale by DPR)
+  const fontPx = Math.max(10, Math.min(20, s * 0.50));
+
+  // Where to place the glyph (top-right, aligned "right/top")
+  const x = b.x + b.W - pad;
+  const y = b.y + pad;
+
+  // Hit radius/box ~ proportional to the glyph size
+  const hit = Math.max(10, fontPx * 0.65);
+
+  return { draw: true, x, y, fontPx, hit };
+}
+
 /* ---------- rendering ---------- */
 export const colorOf = i => state.colours[i] ?? '#cccccc';   // safety fallback
 export const col = i => `hsl(${(i * 137.508) % 360} 70% 75%)`;
@@ -167,8 +189,18 @@ export function decodeState(str) {
         rowsEl.value = rows;
         colsEl.value = cols;
         aspectEl.value = aspect ?? '';
+
+        //check if we should show or omit the welcome message
+        if (state.rects.length > 0) {
+            state.hasEverHadRect = true;   // URL provided rects → no overlay
+            state.welcomeAlpha   = 0;
+            state.welcomeFading  = false;
+        }
+
         return true;
+
     } catch (_) {
+
         return false;
     }
 }
@@ -232,15 +264,12 @@ export function moveRect(idx, dr, dc) {
     return true;
 }
 
-
-export function deleteRect(idx) {
-    history();
-    state.rects.splice(idx, 1);
-    state.aliases.splice(idx, 1);
-    state.pool.unshift(state.colours[idx]);
-    state.colours.splice(idx, 1);
-    update();
-    syncURL();
+export function deleteRectInPlace(idx) {
+  const colour = state.colours[idx];
+  state.rects.splice(idx, 1);
+  state.aliases.splice(idx, 1);
+  state.colours.splice(idx, 1);
+  state.pool.unshift(colour);
 }
 
 export function expandRect(idx, dir) {

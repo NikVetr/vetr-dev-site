@@ -33,22 +33,25 @@ document.body.classList.toggle('dark', darkEl.checked);
 /* --- load state from #hash if present --------------------------------- */
 if (location.hash.length > 1) {
     const saved = decodeState(location.hash.slice(1));
+
     if (saved && saved.rows && saved.cols) {
-        Object.assign(state, {
-            rows: saved.rows,
-            cols: saved.cols,
-            rects: saved.rects.map(norm),
-            aliases: saved.aliases || [],
-            square: !!saved.square,
-            aspect: saved.aspect ?? null
-        });
-        renderer.value = saved.renderer || 'layout';
-        /* reflect UI widgets */
-        rowsEl.value = state.rows;
-        colsEl.value = state.cols;
-        squareEl.checked = state.square;
-        aspectEl.value = state.aspect ?? '';
-        document.querySelector(`input[name="render"][value="${renderer.value}"]`).checked = true;
+      Object.assign(state, {
+          rows: saved.rows,
+          cols: saved.cols,
+          rects: saved.rects.map(norm),
+          aliases: saved.aliases || [],
+          square: !!saved.square,
+          aspect: saved.aspect ?? null
+      });
+
+      renderer.value = saved.renderer || 'layout';
+      /* reflect UI widgets */
+      rowsEl.value = state.rows;
+      colsEl.value = state.cols;
+      squareEl.checked = state.square;
+      aspectEl.value = state.aspect ?? '';
+      document.querySelector(`input[name="render"][value="${renderer.value}"]`).checked = true;
+    
     }
 }
 

@@ -2,7 +2,7 @@ import { canvas }                   from './dom.js';
 import { state }         from './state.js';
 import {
   norm, rectBox, col, nameOf, cell,
-  snap, clamp, ok, colorOf
+  snap, clamp, ok, colorOf, deleteGlyphMetrics
 }                                   from './helpers.js';
 import { maxDelta }                 from './controls.js';
 
@@ -190,25 +190,92 @@ export const updateMods = (e) => {
   }
 };
 
+function scaleFontPxStr(fontPx) {
+  const dpr = window.devicePixelRatio || 1;
+  return Math.round(fontPx * dpr);
+}
+
 /* Text */
-export function drawTextFixed(xCSS, yCSS, txt,
-    align = 'center',
-    font = 'bold 16px system-ui') {
+export function drawTextFixed(x, y, txt, align = 'center', font = 'bold 16px system-ui') {
+  const dpr = window.devicePixelRatio || 1;
+  // convert “… 16px …” to “… 16*dpr px …”
+  const fontDPR = font.replace(/(\d+(?:\.\d+)?)px/g, (_, n) => `${Math.round(parseFloat(n) * dpr)}px`);
 
-    /* canvas’ displayed size, not its internal bitmap */
-    const box = canvas.getBoundingClientRect();
-    const scaleX = box.width / box.height;
-    const invX = 1 / scaleX;
+  ctx.save();
+  ctx.textAlign = align;
+  ctx.textBaseline = 'middle';
+  ctx.font = fontDPR;
+  ctx.fillText(txt, x, y);
+  ctx.restore();
+}
 
-    ctx.save();
-    ctx.scale(invX, 1); // undo the horizontal stretch
-    ctx.font = font;
-    ctx.textAlign = align;
-    ctx.textBaseline = 'middle';
+function setFont(weight, px, family = 'system-ui') {
+  ctx.font = `${weight} ${scaleFontPxStr(px)}px ${family}`;
+}
 
-    /* pre‑scale x so the glyph lands correctly after inverse scaling */
-    ctx.fillText(txt, xCSS * scaleX, yCSS);
-    ctx.restore();
+function wrapLines(text, maxWpx, fontPx, weight = 'bold', family = 'system-ui') {
+  setFont(weight, fontPx, family);
+  const words = (text || '').split(/\s+/).filter(Boolean);
+  if (!words.length) return [''];
+
+  const lines = [];
+  let line = words[0];
+
+  for (let i = 1; i < words.length; i++) {
+    const test = line + ' ' + words[i];
+    if (ctx.measureText(test).width <= maxWpx) line = test;
+    else { lines.push(line); line = words[i]; }
+  }
+  lines.push(line);
+  return lines;
+}
+
+function fitTextMultiline(text, boxW, boxH, {
+  minPx = 10,
+  maxPx = 48,
+  lineHeight = 1.15,
+  weight = 'bold',
+  family = 'system-ui',
+} = {}) {
+  let lo = minPx, hi = maxPx, best = null;
+
+  while (lo <= hi) {
+    const mid = Math.floor((lo + hi) / 2);
+    const lines = wrapLines(text, boxW, mid, weight, family);
+    const totalH = lines.length * mid * lineHeight;
+    if (totalH <= boxH) {
+      best = { fontPx: mid, lines, totalH };
+      lo = mid + 1;
+    } else {
+      hi = mid - 1;
+    }
+  }
+  return best; // {fontPx, lines, totalH} or null
+}
+
+function drawMultilineCentered(xCenter, yCenter, lines, fontPx, {
+  fill = '#222',
+  lineHeight = 1.15,
+  weight = 'bold',
+  family = 'system-ui',
+} = {}) {
+  const dpr = window.devicePixelRatio || 1;
+  const lhDev = fontPx * lineHeight * dpr;
+  setFont(weight, fontPx, family);
+
+  ctx.save();
+  ctx.fillStyle = fill;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  const totalHDev = lines.length * lhDev;
+  // vertical center: first baseline at yCenter - total/2 + lh/2
+  let y = yCenter - totalHDev / 2 + lhDev / 2;
+  for (const line of lines) {
+    ctx.fillText(line, xCenter, y);
+    y += lhDev;
+  }
+  ctx.restore();
 }
 
 /* Main Layers */
@@ -226,15 +293,44 @@ export function drawRects() {
 
         const deleteOffset = 10; // same as edgeKind
 
-        // centred number
-        ctx.fillStyle = '#222';
-        drawTextFixed(b.x + b.W / 2, b.y + b.H / 2, nameOf(i),
-            'center', 'bold 32px system-ui');
+        // centred label (fit + wrap)
+        {
+        const pad = Math.max(6, Math.min(b.W, b.H) * 0.12);
+        const boxW = Math.max(0, b.W - 2 * pad);
+        const boxH = Math.max(0, b.H - 2 * pad);
 
-        // red ×
-        ctx.fillStyle = '#e53935';
-        drawTextFixed(b.x + b.W - deleteOffset, b.y + deleteOffset * 2,
-            '×', 'right', 'bold 32px system-ui');
+        if (boxW > 0 && boxH > 0) {
+            const label = nameOf(i);
+            // try to fit up to 48px or half the rect height, whichever is smaller
+            const fit = fitTextMultiline(label, boxW, boxH, {
+            minPx: 10,
+            maxPx: Math.min(48, Math.floor(b.H * 0.5)),
+            lineHeight: 1.12,
+            weight: 'bold',
+            family: 'system-ui'
+            });
+            if (fit) {
+            drawMultilineCentered(b.x + b.W / 2, b.y + b.H / 2, fit.lines, fit.fontPx, {
+                fill: '#222',
+                lineHeight: 1.12,
+                weight: 'bold',
+                family: 'system-ui'
+            });
+            }
+        }
+        }
+
+        // red × (consistent target size, shrink if rect is tiny)
+        {
+            const m = deleteGlyphMetrics(b);
+            if (m.draw) {
+                ctx.fillStyle = '#e53935';
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'top';
+                ctx.font = `bold ${scaleFontPxStr(m.fontPx)}px system-ui`; // your DPR helper
+                ctx.fillText('×', m.x, m.y);
+            }
+        }
 
         if (i === state.focus) {                 // <- only the hovered one
             ctx.save();
@@ -398,8 +494,108 @@ export const repaint = () => {
     ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--canvas-bg').trim();
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     grid();
+    drawWelcomeOverlay();
     drawRects();
     drawPreview();
     drawLiveTransform();
     indices();
 };
+
+//welcome message for first time drawers
+function drawWelcomeOverlay() {
+  if (state.hasEverHadRect) return;
+  const a = state.welcomeAlpha;
+  if (a <= 0) return;
+
+  const W = canvas.width;
+  const H = canvas.height;
+
+  // outer margin
+  const margin = Math.round(Math.min(W, H) * 0.06);
+  const boxW = Math.max(0, W - 2 * margin);
+  const boxH = Math.max(0, H - 2 * margin);
+  if (boxW <= 0 || boxH <= 0) return;
+
+  const line1 = 'CLICK & DRAG';
+  const line2 = 'OR';
+  const line3 = 'DOUBLE-CLICK';
+
+  // Find a base size so that line1 and line3 fit width,
+  // and the stack fits height with some gaps.
+  let lo = 16, hi = Math.max(32, Math.floor(H * 0.2)), base = 24;
+  const gapRatio = 0.20; // gap relative to base font
+  while (lo <= hi) {
+    const mid = Math.floor((lo + hi) / 2);
+    const big = mid;
+    const huge = Math.round(mid * 1.35);
+
+    setFont('900', big, 'system-ui');
+    const w1 = ctx.measureText(line1).width;
+    const w3 = ctx.measureText(line3).width;
+
+    setFont('900', huge, 'system-ui');
+    const w2 = ctx.measureText(line2).width;
+
+    const fitsW = (w1 <= boxW) && (w2 <= boxW) && (w3 <= boxW);
+    const totalH = (big + huge + big) * 1.0   // line heights ~1.0em
+                 + (gapRatio * big) * 2;      // two gaps
+
+    const fitsH = (totalH <= boxH);
+
+    if (fitsW && fitsH) { base = mid; lo = mid + 1; }
+    else hi = mid - 1;
+  }
+
+  const big  = base;
+  const huge = Math.round(base * 1.35);
+  const gap  = Math.round(base * 0.20);
+
+  const centerX = W / 2;
+  // Compute baseline Y positions
+  const totalH = big + gap + huge + gap + big;
+  let y = H / 2 - totalH / 2;
+
+  ctx.save();
+  ctx.globalAlpha = a * 0.75;
+  ctx.fillStyle   = '#666';
+
+  // line 1
+  setFont('900', big, 'system-ui');
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  ctx.fillText(line1, centerX, y);
+  y += big + gap;
+
+  // line 2
+  ctx.globalAlpha = a * 0.9;
+  setFont('900', huge, 'system-ui');
+  ctx.fillText(line2, centerX, y);
+  y += huge + gap;
+
+  // line 3
+  ctx.globalAlpha = a * 0.75;
+  setFont('900', big, 'system-ui');
+  ctx.fillText(line3, centerX, y);
+
+  ctx.restore();
+}
+
+
+// 1s fade; rectangles should paint over the text (so we draw text before rects)
+export function startWelcomeFade(duration = 1000) {
+  if (state.hasEverHadRect || state.welcomeFading) return;
+  state.welcomeFading = true;
+  const t0 = performance.now();
+
+  const tick = (t) => {
+    const k = Math.min(1, (t - t0) / duration);
+    state.welcomeAlpha = 1 - k;
+    repaint();                        // animate
+    if (k < 1 && state.welcomeFading) requestAnimationFrame(tick);
+    else {
+      state.welcomeFading = false;
+      state.welcomeAlpha  = 0;
+      state.hasEverHadRect = true;    // never show again
+    }
+  };
+  requestAnimationFrame(tick);
+}

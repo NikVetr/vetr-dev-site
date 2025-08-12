@@ -9,19 +9,23 @@ import { syncURL, pastel }               from './helpers.js';
 export const PALETTE = Array.from({length:40}, (_,i) => pastel(i));
 
 export const state = {
-    rows: +rowsEl.value,
-    cols: +colsEl.value,
 
+    //aesthetic parameters
     showGrid: showGridEl.checked,
     square: squareEl.checked,
     showIdx: showIdxEl.checked,
 
+    //fundamental canvas parameters
+    rows: +rowsEl.value,
+    cols: +colsEl.value,
     rects: [],
     aliases: [],
     pool : [...PALETTE],
     colours : [],
     mode: 'idle',
     active: -1,
+    
+    //monitor parameters for user actions
     start: null,
     hover: null,
     past: [],
@@ -33,9 +37,16 @@ export const state = {
     focusSource : null,
     prevFocus : null,
     labelMode : 'num',
+    modalOpen: false,
 
+    //keyboard modifier keys
     modDown: false,
-    shiftDown: false
+    shiftDown: false,
+
+    //initial canvas welcome message
+    hasEverHadRect: false,
+    welcomeAlpha: 1,
+    welcomeFading: false
 };
 
 /* ---------- history ---------- */

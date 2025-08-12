@@ -1,5 +1,6 @@
 import { legendList }          from './dom.js';
 import { state, history }               from './state.js';
+import { commitDelete } from './events.js';
 import { norm, col, nameOf }   from './helpers.js';
 import { syncURL, colorOf }             from './helpers.js';
 import { update }              from './controls.js';
@@ -22,13 +23,7 @@ export function legend() {
         <button class="del">×</button>`;
 
         li.querySelector('.del').onclick = () => {
-            history();
-            state.rects.splice(i, 1);
-            state.aliases.splice(i, 1);
-            state.pool.unshift(state.colours[i]);
-            state.colours.splice(i, 1);
-            update();
-            syncURL();
+            commitDelete(i, { strategy: 'preserve' });
         };
 
         // Drag events

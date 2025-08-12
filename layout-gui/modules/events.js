@@ -12,7 +12,7 @@ import {
 import { state, history, applySnap, PALETTE }          from './state.js';
 import {
   nameOf, clamp, gcd, snap, norm, ok, rectBox, col,
-  syncURL, cell, cellAtPx, moveRect, deleteRect, expandRect, contractRect,
+  syncURL, cell, cellAtPx, moveRect, deleteRectInPlace, expandRect, contractRect,
   growAllSidesOnce, shrinkTowardCellOnce, shrinkTargetCellForKeyboard,
   expandRectToLimit
 } from './helpers.js';
@@ -34,6 +34,52 @@ function flashCopied() {
     }, 900);
 }
 
+export function commitDelete(idx, { strategy = 'preserve' } = {}) {
+  if (idx < 0 || idx >= state.rects.length) return;
+
+  const prevSticky = state.stickyFocus; // keep for index adjustment
+  history();
+  deleteRectInPlace(idx);
+
+  if (strategy === 'retarget') {
+    if (state.rects.length) {
+      // compute new index from the *previous* sticky target
+      let newIdx = prevSticky;
+      if (newIdx == null) {
+        // fallback: target the same slot that was deleted
+        newIdx = idx;
+      } else if (idx < newIdx) {
+        // array shifted left for items after the deleted one
+        newIdx -= 1;
+      }
+      state.stickyFocus = Math.min(newIdx, state.rects.length - 1);
+      state.focusSource = 'canvas';
+    } else {
+      state.stickyFocus = null;
+      state.focusSource = null;
+    }
+  } else if (strategy === 'preserve') {
+    if (prevSticky == null) {
+      state.stickyFocus = null;
+      state.focusSource = null;
+    } else if (prevSticky === idx) {
+      // you deleted the focused rect via × → clear focus
+      state.stickyFocus = null;
+      state.focusSource = null;
+    } else {
+      // preserve the *same rectangle* identity if it was after the removed slot
+      state.stickyFocus = prevSticky + (idx < prevSticky ? -1 : 0);
+      state.focusSource = 'canvas';
+    }
+  } else { // 'clear'
+    state.stickyFocus = null;
+    state.focusSource = null;
+  }
+
+  update();   // rebuild legend + repaint
+  syncURL();  // debounced
+}
+
 legendList.addEventListener('dblclick', e => {
     const item = e.target.closest('.legend-item');
     if (!item) return;
@@ -48,6 +94,7 @@ legendList.addEventListener('dblclick', e => {
 });
 
 canvas.addEventListener('mousemove', e => {
+    if (state.modalOpen) return;
     state.cursorPos = pos(e);
     const {
         x,
@@ -151,19 +198,14 @@ function toggleStickyFocus(hv) {
 }
 
 canvas.addEventListener('mousedown', e => {
+    if (state.modalOpen) return;
     const {
         x,
         y
     } = pos(e), hv = hit(x, y);
 
     if (hv && hv.kind === 'delete') {
-        history(); // enable undo
-        state.rects.splice(hv.idx, 1);
-        state.aliases.splice(hv.idx, 1);
-        state.pool.unshift(state.colours[hv.idx]);
-        state.colours.splice(hv.idx, 1);
-        update();
-        syncURL();
+        commitDelete(hv.idx, { strategy: 'preserve' });
         return;
     }
 
@@ -187,7 +229,7 @@ canvas.addEventListener('mousedown', e => {
 });
 
 window.addEventListener('mouseup', e => {
-
+    if (state.modalOpen) return;
     const { x, y } = pos(e);
     const hv = hit(x, y);  // Check if the mouse is inside a rectangle
     let moved = false; // Track if a move or resize has happened
@@ -625,45 +667,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/*
-//events for moving a sticky focused rectangle
-document.addEventListener('keydown', e => {
-    
-    // Only proceed if stickyFocus is set and focus is on the canvas
-    //if (state.stickyFocus !== null && state.focusSource === 'canvas') {
-    if (state.stickyFocus !== null) {
-
-        const idx = state.stickyFocus;  // Get the sticky-focused rectangle index
-        let moved = false;
-
-        switch (e.key) {
-            case 'ArrowLeft':
-                moved = moveRect(idx, 0, -1);  // Move rectangle up
-                break;
-            case 'ArrowRight':
-                moved = moveRect(idx, 0, 1);  // Move rectangle down
-                break;
-            case 'ArrowUp':
-                moved = moveRect(idx, -1, 0);  // Move rectangle left
-                break;
-            case 'ArrowDown':
-                moved = moveRect(idx, 1, 0);  // Move rectangle right
-                break;
-            case 'Delete':
-                deleteRect(idx);  // Delete focused rectangle
-                break;
-            default:
-                break;
-        }
-
-        if (moved) {
-            update();
-            syncURL();
-        }
-    }
-});
-*/
-
 document.addEventListener('keydown', e => {
   // nothing to do if no sticky focus AND the key isn't Tab (which can set it)
   const hasFocus = state.stickyFocus !== null;
@@ -729,21 +732,12 @@ document.addEventListener('keydown', e => {
   }
 
   switch (e.key) {
-    case 'Delete': {
-      e.preventDefault();
-      const old = idx;
-      history();
-      // deleteRect already does history() in your version; if so, remove the history() above
-      deleteRect(old);            // does update() + syncURL()
-      if (state.rects.length) {
-        state.stickyFocus = Math.min(old, state.rects.length - 1);
-        state.focusSource = 'canvas';
-      } else {
-        state.stickyFocus = null;
-        state.focusSource = null;
-      }
-      repaint();
-      return;
+      
+    case 'Delete': case 'Backspace': {
+        if (state.stickyFocus == null) return;
+        e.preventDefault();
+        commitDelete(state.stickyFocus, { strategy: 'retarget' });
+        return;
     }
 
     case 'ArrowLeft':
@@ -803,7 +797,7 @@ function renderHelpHTML() {
   return `
   <div class="controls-grid">
     <div class="section">
-      <h3>Canvas — Mouse</h3>
+      <h3>Canvas (Left Panel) — Mouse</h3>
       <div class="row"><span class="chip">Click</span> <span class="desc">Toggle sticky focus on a rectangle; click empty grid to clear</span></div>
       <div class="row"><span class="kbd">Click + drag</span> <span class="desc">Draw new rectangle (empty space) or move (inside rect) or resize (edge/corner)</span></div>
       <div class="row"><span class="kbd">Double-click (rect)</span> <span class="desc">Rename rectangle</span></div>
@@ -813,8 +807,8 @@ function renderHelpHTML() {
     </div>
 
     <div class="section">
-      <h3>Canvas — Keyboard (requires sticky focus)</h3>
-      <div class="row"><span class="kbd">Tab</span>/<span class="kbd">Shift</span><span class="kbd">Tab</span> <span class="desc">Cycle focused rectangle (rollover)</span></div>
+      <h3>Canvas (Left Panel) — Keyboard (requires sticky focus)</h3>
+      <div class="row"><span class="kbd">Tab</span>/<span class="kbd">Shift</span> + <span class="kbd">Tab</span> <span class="desc">Cycle focused rectangle (rollover)</span></div>
       <div class="row"><span class="kbd">←</span><span class="kbd">→</span><span class="kbd">↑</span><span class="kbd">↓</span> <span class="desc">Move rectangle by 1 cell (blocked by borders/overlap)</span></div>
       <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">←/→/↑/↓</span> <span class="desc">Expand 1 cell from that side</span></div>
       <div class="row"><span class="kbd">${MOD_LABEL}</span> + <span class="kbd">Shift</span> + <span class="kbd">←/→/↑/↓</span> <span class="desc">Contract 1 cell from that side</span></div>
@@ -824,7 +818,7 @@ function renderHelpHTML() {
     </div>
 
     <div class="section">
-      <h3>Legend</h3>
+      <h3>Legend (Middle Panel) </h3>
       <div class="row"><span class="kbd">Drag rows</span> <span class="desc">Reorder rectangles (color/name travel with it)</span></div>
       <div class="row"><span class="kbd">Hover row</span> <span class="desc">Highlight rectangle in canvas</span></div>
     </div>
@@ -846,6 +840,7 @@ function openHelp() {
   helpModal.classList.remove('hidden');
   helpModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
+  state.modalOpen = true;
   _helpPrevFocus = document.activeElement;
   helpClose.focus();
 }
@@ -854,6 +849,7 @@ function closeHelp() {
   helpModal.classList.add('hidden');
   helpModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
+  state.modalOpen = false;
   if (_helpPrevFocus && _helpPrevFocus instanceof HTMLElement) _helpPrevFocus.focus();
 }
 

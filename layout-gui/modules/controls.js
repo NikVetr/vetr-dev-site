@@ -4,8 +4,8 @@ import {
   aspectEl
 }                        from './dom.js';
 import { state, history }         from './state.js';
-import { clamp, syncURL, ok, norm, rectBox }         from './helpers.js';
-import { repaint }       from './canvas.js';
+import { clamp, syncURL, ok, norm, rectBox, deleteGlyphMetrics }         from './helpers.js';
+import { repaint, startWelcomeFade }       from './canvas.js';
 import { legend }       from './legend.js';
 import { generateCode } from './code-generator.js'
 
@@ -237,12 +237,23 @@ export const pos = e => {
 export function edgeKind(px, py, R, tol = 10) {
     const b = rectBox(R);
 
-    const deleteOffset = tol + 2;
-    const delHot =
-        px >= b.x + b.W - deleteOffset - 12 && px <= b.x + b.W - deleteOffset &&
-        py >= b.y + deleteOffset && py <= b.y + deleteOffset + 12;
-    if (delHot) return 'delete'; // give it top priority
+    {
+        const m = deleteGlyphMetrics(b);
+        if (m.draw) {
+        // '×' is drawn at (m.x, m.y) with right/top alignment.
+        // Make a hit region that extends left/down from that anchor,
+        // with a tiny padding that scales with tol.
+        const pad = Math.max(0, Math.min(tol, m.hit * 0.3));
+        const x0 = m.x - m.hit - pad;   // extend left
+        const x1 = m.x + pad;           // tiny buffer to the right
+        const y0 = m.y - pad;           // tiny buffer above
+        const y1 = m.y + m.hit + pad;   // extend down
 
+        if (px >= x0 && px <= x1 && py >= y0 && py <= y1) return 'delete';
+        }
+    }
+
+    // Edges/corners
     const onN = Math.abs(py - b.y) <= tol &&
         px >= b.x - tol && px <= b.x + b.W + tol;
     const onS = Math.abs(py - (b.y + b.H)) <= tol &&
@@ -251,7 +262,6 @@ export function edgeKind(px, py, R, tol = 10) {
         py >= b.y - tol && py <= b.y + b.H + tol;
     const onE = Math.abs(px - (b.x + b.W)) <= tol &&
         py >= b.y - tol && py <= b.y + b.H + tol;
-
 
     if (onN && onW) return 'cornerNW';
     if (onN && onE) return 'cornerNE';
@@ -306,8 +316,6 @@ export function hit(px, py) {
   return null;                  // hit nothing
 }
 
-
-
 export function maxDelta(idx, dr, dc) {
     const R0 = norm(state.rects[idx]);
     let bestDr = dr,
@@ -348,6 +356,10 @@ export function rescaleSplitWidths () {
 
 /* one central refresh */
 export const update = () => {
+    //face out welcome message if it has never faded out before
+    if (!state.hasEverHadRect && state.rects.length > 0) {
+        startWelcomeFade();
+    }
     repaint();
     legend();
     rcodeEl.value = generateCode();
