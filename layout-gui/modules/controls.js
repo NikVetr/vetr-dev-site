@@ -11,22 +11,35 @@ import { generateCode } from './code-generator.js'
 
 /* ---------- controls ---------- */
 export function cursor() {
-    if (!state.hover) {
-        canvas.style.cursor = 'crosshair';
-        return;
-    }
-    canvas.style.cursor = {
-        inside: 'move',
-        edgeN: 'ns-resize',
-        edgeS: 'ns-resize',
-        edgeE: 'ew-resize',
-        edgeW: 'ew-resize',
-        cornerNW: 'nwse-resize',
-        cornerSE: 'nwse-resize',
-        cornerNE: 'nesw-resize',
-        delete: 'pointer',
-        cornerSW: 'nesw-resize'
-    } [state.hover.kind] || 'crosshair';
+  if (!state.hover) {
+    canvas.style.cursor = 'crosshair';
+    return;
+  }
+
+  const base = {
+    inside:   'move',
+    edgeN:    'ns-resize',
+    edgeS:    'ns-resize',
+    edgeE:    'ew-resize',
+    edgeW:    'ew-resize',
+    cornerNW: 'nwse-resize',
+    cornerSE: 'nwse-resize',
+    cornerNE: 'nesw-resize',
+    cornerSW: 'nesw-resize',
+    delete:   'pointer'
+  };
+
+  const shifted = {
+    ...base,
+    edgeN: 'row-resize',
+    edgeS: 'row-resize',
+    edgeE: 'col-resize',
+    edgeW: 'col-resize'
+    // corners remain diagonal for clarity
+  };
+
+  const map = state.shiftDown ? shifted : base;
+  canvas.style.cursor = map[state.hover.kind] || 'crosshair';
 }
 
 export function resizeCanvas() {

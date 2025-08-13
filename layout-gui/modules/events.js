@@ -14,7 +14,7 @@ import {
   nameOf, clamp, gcd, snap, norm, ok, rectBox, col,
   syncURL, cell, cellAtPx, moveRect, deleteRectInPlace, expandRect, contractRect,
   growAllSidesOnce, shrinkTowardCellOnce, shrinkTargetCellForKeyboard,
-  expandRectToLimit
+  expandRectToLimit, planShiftResizeComposite
 } from './helpers.js';
 
 import {
@@ -293,27 +293,49 @@ window.addEventListener('mouseup', e => {
 
     if (state.mode === 'resizing') {
         const v = snap(...Object.values(pos(e)));
-        let R = {
-            ...state.base
-        };
-        const k = state.resize;
-        if (/N/.test(k)) R.r0 = clamp(v.r, 0, R.r1 - 1);
-        if (/S/.test(k)) R.r1 = clamp(v.r, R.r0 + 1, state.rows);
-        if (/W/.test(k)) R.c0 = clamp(v.c, 0, R.c1 - 1);
-        if (/E/.test(k)) R.c1 = clamp(v.c, R.c0 + 1, state.cols);
-        R = norm(R);
-        if (ok(R, state.active)) {
-            history();
-            state.rects[state.active] = R;
-            if (state.active !== state.stickyFocus) {
-                state.stickyFocus = null;
-                repaint();
+                
+        if (state.shiftDown) {
+            const baseRects = state.rects.map(r => norm(r));
+            const { ok: valid, rects: planned } =
+            planShiftResizeComposite(baseRects, state.active, state.resize, v, state.rows, state.cols);
+
+            state.mode = 'idle';
+            if (valid) {
+                history();
+                state.rects = planned;
+                if (state.active !== state.stickyFocus) {
+                    state.stickyFocus = null;
+                    repaint();
+                }
+                moved = true;
             }
-            moved = true;  // Track that the rectangle has moved
+            update();
+            syncURL();
+        } else {
+            let R = {
+                ...state.base
+            };
+            const k = state.resize;
+            if (/N/.test(k)) R.r0 = clamp(v.r, 0, R.r1 - 1);
+            if (/S/.test(k)) R.r1 = clamp(v.r, R.r0 + 1, state.rows);
+            if (/W/.test(k)) R.c0 = clamp(v.c, 0, R.c1 - 1);
+            if (/E/.test(k)) R.c1 = clamp(v.c, R.c0 + 1, state.cols);
+            R = norm(R);
+            if (ok(R, state.active)) {
+                history();
+                state.rects[state.active] = R;
+                if (state.active !== state.stickyFocus) {
+                    state.stickyFocus = null;
+                    repaint();
+                }
+                moved = true;  // Track that the rectangle has moved
+            }
+            state.mode = 'idle';
+            update();
+            syncURL();
         }
-        state.mode = 'idle';
-        update();
-        syncURL();
+
+
     }
 
     if (!moved) {

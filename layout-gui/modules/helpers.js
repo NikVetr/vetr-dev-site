@@ -397,3 +397,268 @@ export function shrinkTowardCellOnce(R, tr, tc) {
   nR = norm(nR);
   return (nR.r0 !== R.r0 || nR.r1 !== R.r1 || nR.c0 !== R.c0 || nR.c1 !== R.c1) ? nR : null;
 }
+
+//shift-resize helpers
+/* ================= SHIFT-RESIZE CHAIN HELPERS ================= */
+
+const overlaps1D = (a0,a1,b0,b1) => (a0 < b1) && (a1 > b0);
+const opp = d => (d==='E'?'W':d==='W'?'E':d==='S'?'N':'S');
+const signOut = d => (d==='E'||d==='S') ? +1 : -1;
+
+const edgeCoord = (R, d) => (d==='E'?R.c1 : d==='W'?R.c0 : d==='S'?R.r1 : R.r0);
+const setEdge  = (R, d, v) => {
+  if (d==='E') R.c1=v; else if (d==='W') R.c0=v;
+  else if (d==='S') R.r1=v; else R.r0=v;
+};
+const sizeAlong = (R, d) => (d==='E'||d==='W') ? (R.c1 - R.c0) : (R.r1 - R.r0);
+const orthRange = (R, d) => (d==='E'||d==='W') ? [R.r0, R.r1] : [R.c0, R.c1];
+
+const border = (rows, cols, d) => (d==='E'?cols : d==='W'?0 : d==='S'?rows : 0);
+
+// neighbors whose near-edge (w.r.t dir) lies exactly at coord and overlap orthogonally
+function neighborsAtCoord(rects, excludeIdx, dir, coord, o0, o1) {
+  const res = [];
+  for (let i=0;i<rects.length;i++){
+    if (i===excludeIdx) continue;
+    const R = rects[i];
+    const overl = (dir==='E'||dir==='W') ? overlaps1D(o0,o1,R.r0,R.r1) : overlaps1D(o0,o1,R.c0,R.c1);
+    if (!overl) continue;
+    if (dir==='E' && R.c0===coord) res.push(i);
+    else if (dir==='W' && R.c1===coord) res.push(i);
+    else if (dir==='S' && R.r0===coord) res.push(i);
+    else if (dir==='N' && R.r1===coord) res.push(i);
+  }
+  return res;
+}
+
+// frontier ahead of pos in 'dir'; if an adjacent group is exactly at pos, return pos
+function nextFrontier(rects, excludeIdx, dir, pos, o0, o1, rows, cols) {
+  // treat adjacency as immediate frontier (gap=0)
+  if (neighborsAtCoord(rects, excludeIdx, dir, pos, o0, o1).length) return pos;
+
+  let f = border(rows, cols, dir);
+  if (dir==='E') {
+    for (let i=0;i<rects.length;i++){
+      if (i===excludeIdx) continue;
+      const R=rects[i];
+      if (overlaps1D(o0,o1,R.r0,R.r1) && R.c0>pos) f = Math.min(f, R.c0);
+    }
+  } else if (dir==='W') {
+    for (let i=0;i<rects.length;i++){
+      if (i===excludeIdx) continue;
+      const R=rects[i];
+      if (overlaps1D(o0,o1,R.r0,R.r1) && R.c1<pos) f = Math.max(f, R.c1);
+    }
+  } else if (dir==='S') {
+    for (let i=0;i<rects.length;i++){
+      if (i===excludeIdx) continue;
+      const R=rects[i];
+      if (overlaps1D(o0,o1,R.c0,R.c1) && R.r0>pos) f = Math.min(f, R.r0);
+    }
+  } else { // 'N'
+    for (let i=0;i<rects.length;i++){
+      if (i===excludeIdx) continue;
+      const R=rects[i];
+      if (overlaps1D(o0,o1,R.c0,R.c1) && R.r1<pos) f = Math.max(f, R.r1);
+    }
+  }
+  return f;
+}
+
+function shrinkGroupNearEdge(rects, group, dir, s){
+  if (!s) return;
+  for (const i of group){
+    const R = rects[i];
+    if (dir==='E') R.c0 += s;
+    else if (dir==='W') R.c1 -= s;
+    else if (dir==='S') R.r0 += s;
+    else R.r1 -= s; // 'N'
+  }
+}
+
+function collectBarriers(rects, excludeIdx, dir, pos, o0, o1, rows, cols) {
+  const barriers = [];
+
+  for (let i = 0; i < rects.length; i++) {
+    if (i === excludeIdx) continue;
+    const R = rects[i];
+    const overl = (dir === 'E' || dir === 'W')
+      ? overlaps1D(o0, o1, R.r0, R.r1)
+      : overlaps1D(o0, o1, R.c0, R.c1);
+    if (!overl) continue;
+
+    if (dir === 'E' && R.c0 > pos) barriers.push(R.c0);
+    else if (dir === 'W' && R.c1 < pos) barriers.push(R.c1);
+    else if (dir === 'S' && R.r0 > pos) barriers.push(R.r0);
+    else if (dir === 'N' && R.r1 < pos) barriers.push(R.r1);
+  }
+
+  // Add the canvas border as a last resort barrier
+  const borderCoord = (dir === 'E') ? cols
+                     : (dir === 'W') ? 0
+                     : (dir === 'S') ? rows
+                     : /* 'N' */       0;
+  barriers.push(borderCoord);
+
+  // Sort in outward order
+  if (dir === 'E' || dir === 'S') barriers.sort((a, b) => a - b);      // increasing
+  else                            barriers.sort((a, b) => b - a);      // decreasing
+
+  return barriers;
+}
+
+// OUTWARD push: move active edge in 'dir' by at most 'amount', shrinking chains ahead
+// returns { ok, applied, rects }
+function pushChain(rectsIn, idx, dir, amount, rows, cols) {
+  if (!amount) return { ok: true, applied: 0, rects: rectsIn };
+
+  const rects = rectsIn.map(r => ({ ...r }));
+  const A     = rects[idx];
+  const sgn   = signOut(dir);               // +1 for E/S, -1 for W/N
+  const [o0, o1] = orthRange(A, dir);       // orthogonal span is fixed while pushing
+
+  let pos     = edgeCoord(A, dir);          // current active edge coord
+  let applied = 0;
+  let ok      = true;
+
+  const borderCoord = border(rows, cols, dir);
+
+  while (applied < amount) {
+    // If we’re already at the border, can’t move further
+    if (pos === borderCoord) { ok = false; break; }
+
+    // Who’s touching the active edge *right now*?
+    const group = neighborsAtCoord(rects, idx, dir, pos, o0, o1);
+
+    if (group.length) {
+      // Need at least 2 cells along dir to shrink by 1
+      const blocked = group.some(i => sizeAlong(rects[i], dir) <= 1);
+      if (blocked) { ok = false; break; }
+
+      // Shrink everyone touching this edge by 1, then advance the edge by 1
+      shrinkGroupNearEdge(rects, group, dir, 1);
+      pos += sgn * 1;
+      applied += 1;
+      continue;
+    }
+
+    // No neighbor at the edge → this cell is free space (gap). Just move 1.
+    const nextPos = pos + sgn * 1;
+    // Don’t cross border
+    if ((sgn > 0 && nextPos > borderCoord) || (sgn < 0 && nextPos < borderCoord)) {
+      ok = false; break;
+    }
+    pos = nextPos;
+    applied += 1;
+  }
+
+  // Commit the active edge to where we actually got
+  setEdge(A, dir, pos);
+
+  return { ok, applied, rects };
+}
+
+// INWARD pull: shrink active by 'amount' and let its immediate neighbors
+// expand into freed space; to create that room, chains *behind* them are pushed
+// in the opposite direction (reusing pushChain). Returns { ok, applied, rects }.
+function pullChain(rectsIn, idx, dir, amount, rows, cols){
+  if (!amount) return { ok:true, applied:0, rects:rectsIn };
+
+  // work on a copy (like pushChain)
+  const rects = rectsIn.map(r => ({ ...r }));
+  const A0    = rects[idx];
+
+  // max we can shrink without collapsing to zero
+  const maxS = sizeAlong(A0, dir) - 1;
+  const s    = Math.min(amount, maxS);
+  if (!s) return { ok:true, applied:0, rects };
+
+  const sgn     = signOut(dir);
+  const oldEdge = edgeCoord(A0, dir);
+  const [o0, o1]= orthRange(A0, dir);
+
+  // Determine neighbors at the *old* edge BEFORE we mutate A
+  const group = neighborsAtCoord(rects, idx, dir, oldEdge, o0, o1);
+
+  // Shrink the active by s
+  const A = rects[idx];
+  setEdge(A, dir, oldEdge - sgn * s);
+
+  // New edge position after shrink (the freed-space inner boundary)
+  const newEdge = edgeCoord(A, dir);
+
+  // Expand neighbors to exactly meet newEdge (no relative adds — absolute clamp)
+  for (const j of group) {
+    const R = rects[j];
+    if (dir === 'E') {
+      // neighbor sits to the East; its near edge is c0
+      R.c0 = Math.min(R.c0, newEdge);
+      // keep ≥ 1 cell
+      if (R.c1 - R.c0 < 1) R.c0 = R.c1 - 1;
+    } else if (dir === 'W') {
+      // neighbor sits to the West; its near edge is c1
+      R.c1 = Math.max(R.c1, newEdge);
+      if (R.c1 - R.c0 < 1) R.c1 = R.c0 + 1;
+    } else if (dir === 'S') {
+      // neighbor sits to the South; its near edge is r0
+      R.r0 = Math.min(R.r0, newEdge);
+      if (R.r1 - R.r0 < 1) R.r0 = R.r1 - 1;
+    } else { // 'N'
+      // neighbor sits to the North; its near edge is r1
+      R.r1 = Math.max(R.r1, newEdge);
+      if (R.r1 - R.r0 < 1) R.r1 = R.r0 + 1;
+    }
+  }
+
+  return { ok:true, applied:s, rects };
+}
+
+// PUBLIC: compose for corner/edge with Shift
+export function planShiftResizeComposite(rectsIn, idx, kind, target, rows, cols){
+  let rects = rectsIn.map(r => ({...r}));
+  let ok    = true;
+
+  // Start from the rect as it currently is
+  const A0 = rects[idx];
+
+  // ----- Horizontal (only if grabbing E or W) -----
+  let dirH = null;
+  if (/E/.test(kind)) dirH = 'E';
+  else if (/W/.test(kind)) dirH = 'W';
+
+  if (dirH) {
+    // delta measured at the grabbed edge
+    const dH = (dirH === 'E') ? (target.c - A0.c1) : (target.c - A0.c0);
+    if (dH !== 0) {
+      const outward = Math.sign(dH) === signOut(dirH);   // +E/S is outward, -W/N is outward
+      const amt     = Math.abs(dH);
+      const res     = outward
+        ? pushChain(rects, idx, dirH, amt, rows, cols)
+        : pullChain(rects, idx, dirH, amt, rows, cols);
+      rects = res.rects; ok = ok && res.ok;
+    }
+  }
+
+  // Re-read the (possibly updated) active rect for vertical math
+  const A1 = rects[idx];
+
+  // ----- Vertical (only if grabbing N or S) -----
+  let dirV = null;
+  if (/S/.test(kind)) dirV = 'S';
+  else if (/N/.test(kind)) dirV = 'N';
+
+  if (dirV) {
+    // delta measured at the grabbed edge
+    const dV = (dirV === 'S') ? (target.r - A1.r1) : (target.r - A1.r0);
+    if (dV !== 0) {
+      const outward = Math.sign(dV) === signOut(dirV);
+      const amt     = Math.abs(dV);
+      const res     = outward
+        ? pushChain(rects, idx, dirV, amt, rows, cols)
+        : pullChain(rects, idx, dirV, amt, rows, cols);
+      rects = res.rects; ok = ok && res.ok;
+    }
+  }
+
+  return { ok, rects };
+}

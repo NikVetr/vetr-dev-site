@@ -2,9 +2,10 @@ import { canvas }                   from './dom.js';
 import { state }         from './state.js';
 import {
   norm, rectBox, col, nameOf, cell,
-  snap, clamp, ok, colorOf, deleteGlyphMetrics
+  snap, clamp, ok, colorOf, deleteGlyphMetrics,
+  planShiftResizeComposite
 }                                   from './helpers.js';
-import { maxDelta }                 from './controls.js';
+import { maxDelta, cursor }                 from './controls.js';
 
 /* ------ canvas context ------------------------------------------- */
 export const ctx = canvas.getContext('2d', {alpha: false});
@@ -178,7 +179,6 @@ export function edgeLabel(side, mode) {
        :                '│↑';
 }
 
-
 export const updateMods = (e) => {
   const mod  = !!(e.ctrlKey || e.metaKey);
   const shft = !!e.shiftKey;
@@ -186,6 +186,7 @@ export const updateMods = (e) => {
   if (changed) {
     state.modDown = mod;
     state.shiftDown = shft;
+    cursor();
     if (state.stickyFocus != null) repaint();
   }
 };
@@ -446,18 +447,54 @@ export function drawLiveTransform() {
             r1: B.r1 + dr,
             c1: B.c1 + dc
         });
-    } else {
-        const v = snap(...Object.values(state.cursorPos));
-        R = {
-            ...state.base
-        };
-        const k = state.resize;
-        if (/N/.test(k)) R.r0 = clamp(v.r, 0, R.r1 - 1);
-        if (/S/.test(k)) R.r1 = clamp(v.r, R.r0 + 1, state.rows);
-        if (/W/.test(k)) R.c0 = clamp(v.c, 0, R.c1 - 1);
-        if (/E/.test(k)) R.c1 = clamp(v.c, R.c0 + 1, state.cols);
-        R = norm(R);
-    }
+    } else if (state.mode === 'resizing'){
+        if(state.shiftDown) {
+            // SHIFT-resize: preview multi-rect plan
+            const v = snap(...Object.values(state.cursorPos));
+            const baseRects = state.rects.map(r => norm(r));
+            const kind = state.resize; // e.g. 'edgeE', 'cornerNE', etc.
+
+            const { ok: valid, rects: planned } =
+            planShiftResizeComposite(baseRects, state.active, kind, v, state.rows, state.cols);
+
+            // Draw overlays for all rects that changed
+            ctx.save();
+            ctx.globalAlpha = 0.35;
+            for (let i = 0; i < planned.length; i++) {
+            const a = baseRects[i], b = planned[i];
+            if (!a || !b) continue;
+            if (a.r0===b.r0 && a.c0===b.c0 && a.r1===b.r1 && a.c1===b.c1) continue;
+            const bx = rectBox(b);
+            ctx.fillStyle = valid ? colorOf(i) : '#ddd';
+            ctx.fillRect(bx.x, bx.y, bx.W, bx.H);
+            }
+            ctx.globalAlpha = 1;
+            ctx.setLineDash([6,4]);
+            ctx.strokeStyle = valid ? '#3b82f6' : '#e53935';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < planned.length; i++) {
+            const a = baseRects[i], b = planned[i];
+            if (!a || !b) continue;
+            if (a.r0===b.r0 && a.c0===b.c0 && a.r1===b.r1 && a.c1===b.c1) continue;
+            const bx = rectBox(b);
+            ctx.strokeRect(bx.x, bx.y, bx.W, bx.H);
+            }
+            ctx.setLineDash([]);
+            ctx.restore();
+            return;
+        } else {
+            const v = snap(...Object.values(state.cursorPos));
+            R = {
+                ...state.base
+            };
+            const k = state.resize;
+            if (/N/.test(k)) R.r0 = clamp(v.r, 0, R.r1 - 1);
+            if (/S/.test(k)) R.r1 = clamp(v.r, R.r0 + 1, state.rows);
+            if (/W/.test(k)) R.c0 = clamp(v.c, 0, R.c1 - 1);
+            if (/E/.test(k)) R.c1 = clamp(v.c, R.c0 + 1, state.cols);
+            R = norm(R);
+        }
+    } 
 
     const valid = ok(R, state.active),
         b = rectBox(R);
@@ -501,84 +538,88 @@ export const repaint = () => {
     indices();
 };
 
-//welcome message for first time drawers
+function textWH(txt, px, weight='900', family='system-ui'){
+  setFont(weight, px, family);
+  const m = ctx.measureText(txt);
+  const w = m.width;
+  // robust fallback if metrics are missing
+  const asc = m.actualBoundingBoxAscent  ?? px * 0.82;
+  const desc= m.actualBoundingBoxDescent ?? px * 0.18;
+  const h = asc + desc;
+  return { w, h };
+}
+
+// welcome message for first-time drawers (no overlap, true metrics)
 function drawWelcomeOverlay() {
   if (state.hasEverHadRect) return;
   const a = state.welcomeAlpha;
   if (a <= 0) return;
 
-  const W = canvas.width;
-  const H = canvas.height;
-
-  // outer margin
+  const W = canvas.width, H = canvas.height;
   const margin = Math.round(Math.min(W, H) * 0.06);
-  const boxW = Math.max(0, W - 2 * margin);
-  const boxH = Math.max(0, H - 2 * margin);
+  const boxW = Math.max(0, W - 2*margin);
+  const boxH = Math.max(0, H - 2*margin);
   if (boxW <= 0 || boxH <= 0) return;
 
   const line1 = 'CLICK & DRAG';
   const line2 = 'OR';
   const line3 = 'DOUBLE-CLICK';
 
-  // Find a base size so that line1 and line3 fit width,
-  // and the stack fits height with some gaps.
-  let lo = 16, hi = Math.max(32, Math.floor(H * 0.2)), base = 24;
-  const gapRatio = 0.20; // gap relative to base font
+  // Fit base size by binary search using real metrics
+  let lo = 12, hi = Math.max(28, Math.floor(H * 0.25)), best = 18;
+  const gapRatio = 0.22;         // space between lines relative to base px
+
   while (lo <= hi) {
-    const mid = Math.floor((lo + hi) / 2);
-    const big = mid;
-    const huge = Math.round(mid * 1.35);
+    const mid  = Math.floor((lo + hi)/2);
+    const big  = mid;
+    const huge = Math.round(mid * 1.5);
 
-    setFont('900', big, 'system-ui');
-    const w1 = ctx.measureText(line1).width;
-    const w3 = ctx.measureText(line3).width;
+    const m1 = textWH(line1, big);
+    const m2 = textWH(line2, huge);
+    const m3 = textWH(line3, big);
 
-    setFont('900', huge, 'system-ui');
-    const w2 = ctx.measureText(line2).width;
+    const gap = Math.round(gapRatio * big);
+    const fitsW = (m1.w <= boxW) && (m2.w <= boxW) && (m3.w <= boxW);
+    const totalH = m1.h + gap + m2.h + gap + m3.h;
 
-    const fitsW = (w1 <= boxW) && (w2 <= boxW) && (w3 <= boxW);
-    const totalH = (big + huge + big) * 1.0   // line heights ~1.0em
-                 + (gapRatio * big) * 2;      // two gaps
-
-    const fitsH = (totalH <= boxH);
-
-    if (fitsW && fitsH) { base = mid; lo = mid + 1; }
+    if (fitsW && totalH <= boxH) { best = mid; lo = mid + 1; }
     else hi = mid - 1;
   }
 
-  const big  = base;
-  const huge = Math.round(base * 1.35);
-  const gap  = Math.round(base * 0.20);
+  const big  = best;
+  const huge = Math.round(best * 1.5);
+  const m1 = textWH(line1, big);
+  const m2 = textWH(line2, huge);
+  const m3 = textWH(line3, big);
+  const gap = Math.round(gapRatio * best);
+  const totalH = m1.h + gap + m2.h + gap + m3.h;
 
-  const centerX = W / 2;
-  // Compute baseline Y positions
-  const totalH = big + gap + huge + gap + big;
-  let y = H / 2 - totalH / 2;
+  const cx = W/2;
+  let y = H/2 - totalH/2;
 
   ctx.save();
-  ctx.globalAlpha = a * 0.75;
-  ctx.fillStyle   = '#666';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
 
   // line 1
+  ctx.globalAlpha = a * 0.5; ctx.fillStyle = '#666';
   setFont('900', big, 'system-ui');
-  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-  ctx.fillText(line1, centerX, y);
-  y += big + gap;
+  ctx.fillText(line1, cx, y);
+  y += m1.h + gap;
 
   // line 2
-  ctx.globalAlpha = a * 0.9;
+  ctx.globalAlpha = a * 0.5;
   setFont('900', huge, 'system-ui');
-  ctx.fillText(line2, centerX, y);
-  y += huge + gap;
+  ctx.fillText(line2, cx, y);
+  y += m2.h + gap;
 
   // line 3
-  ctx.globalAlpha = a * 0.75;
+  ctx.globalAlpha = a * 0.5;
   setFont('900', big, 'system-ui');
-  ctx.fillText(line3, centerX, y);
+  ctx.fillText(line3, cx, y);
 
   ctx.restore();
 }
-
 
 // 1s fade; rectangles should paint over the text (so we draw text before rects)
 export function startWelcomeFade(duration = 1000) {
