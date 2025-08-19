@@ -12,7 +12,7 @@ import { generateCode } from './code-generator.js'
 /* ---------- controls ---------- */
 export function cursor() {
   if (!state.hover) {
-    canvas.style.cursor = state.aggrDown ? 
+    canvas.style.cursor = state.pwrDown ? 
     "url('assets/cursors/crosshair.png') 16 16, crosshair" : 'crosshair';
     return;
   }
@@ -30,7 +30,7 @@ export function cursor() {
     delete:   'pointer'
   };
 
-  const aggr = {
+  const pwr = {
     ...base,
     inside:   "url('assets/cursors/move.png') 16 16, move",
     edgeN:    "url('assets/cursors/ns-resize.png') 16 16, row-resize",
@@ -43,7 +43,7 @@ export function cursor() {
     cornerSE: "url('assets/cursors/nwse-resize.png') 12 12, nwse-resize"
   };
 
-  const map = state.aggrDown ? aggr : base;
+  const map = state.pwrDown ? pwr : base;
   canvas.style.cursor = map[state.hover.kind] || 'crosshair';
 }
 

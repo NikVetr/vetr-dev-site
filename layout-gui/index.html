@@ -23,8 +23,13 @@
 <div class="app">
     <header>
         <h1>multipanel <code>web-gui</code></h1>
-            <button id="helpBtn" class="btn" data-tip="Keyboard & mouse controls and shortcuts"> ? </button>
-
+        <button id="helpBtn" class="btn" data-tip="Keyboard & mouse controls and shortcuts"> ? </button>
+        <div id="modIndicators" class="modbar" aria-label="Modifier keys state">
+            <div id="modIndMod"   class="modchip" data-tip="Cmd/Ctrl">mod</div>
+            <div id="modIndPwr"   class="modchip" data-tip="Alt/Option">pwr</div>
+            <div id="modIndShift" class="modchip" data-tip="Shift">shift</div>
+        </div>
+        
         <div class="controls">
 
             <hr class="control-divider">

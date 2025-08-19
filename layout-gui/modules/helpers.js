@@ -88,29 +88,59 @@ export function ok(R, ignore = -1) {
     return true;
 }
 
-export const updateMods = (e) => {
-  const mod  = !!(e.ctrlKey || e.metaKey);
-  const shft = !!e.shiftKey;
-  const alt  = !!e.altKey;
+function setModIndicators() {
+  const elMod   = document.getElementById('modIndMod');
+  const elPwr   = document.getElementById('modIndPwr');
+  const elShift = document.getElementById('modIndShift');
 
-  const aggr = alt;
+  if (!elMod || !elPwr || !elShift) {
+    // If you see this, your markup ids don’t match.
+    console.warn('mod chips missing:', { elMod: !!elMod, elPwr: !!elPwr, elShift: !!elShift });
+    return;
+  }
+
+  elMod.classList.toggle('on', !!state.modDown);
+  elPwr.classList.toggle('on', !!(state.pwrDown || state.altDown));
+  elShift.classList.toggle('on', !!state.shiftDown);
+
+  // Debug: see classes that are actually on the nodes
+  // (comment out when you’re happy)
+  // console.debug('chips:',
+  //   { mod: elMod.className, pwr: elPwr.className, shift: elShift.className });
+}
+
+export function updateMods(e) {
+  // Read from the event if present; otherwise keep current values.
+  const nextMod   = e ? !!(e.ctrlKey || e.metaKey) : state.modDown;
+  const nextShift = e ? !!e.shiftKey               : state.shiftDown;
+  // Some browsers are picky; getModifierState('Alt') helps on odd layouts
+  const altHeld   = e ? (e.altKey || (e.getModifierState && e.getModifierState('Alt'))) : state.altDown;
+  const nextPwr   = !!altHeld; // alias
 
   const changed = (
-    mod  !== state.modDown  ||
-    shft !== state.shiftDown||
-    alt  !== state.altDown  ||
-    aggr !== state.aggrDown
+    nextMod   !== state.modDown   ||
+    nextShift !== state.shiftDown ||
+    altHeld   !== state.altDown   ||
+    nextPwr   !== state.pwrDown
   );
 
-  if (changed) {
-    state.modDown   = mod;
-    state.shiftDown = shft;
-    state.altDown   = alt;
-    state.aggrDown  = aggr;
-    cursor();
-    if (state.stickyFocus != null) repaint();
-  }
-};
+  if (!changed) return;
+
+  state.modDown   = nextMod;
+  state.shiftDown = nextShift;
+  state.altDown   = !!altHeld;
+  state.pwrDown   = nextPwr;
+
+  setModIndicators();
+  cursor();
+  if (state.stickyFocus != null) repaint();
+
+  // Debug the flags we think are active (comment out when satisfied)
+  // console.debug('mods:', {
+  //   mod: state.modDown, shift: state.shiftDown, alt: state.altDown, pwr: state.pwrDown
+  // });
+}
+
 
 /* ------ rectangle → canvas-pixel box ----------------------------- */
 export const rectBox = r => {
@@ -784,6 +814,7 @@ function moveOnceWithPullMetrics(rectsIn, idx, dir, rows, cols) {
 
   // 3) Pull along neighbors that were attached at the *old* trailing edge
   const trailingGroup = neighborsAtCoord(rects, idx, trailing, trailingCoord, o0, o1);
+
   for (const j of trailingGroup) {
     const r2 = pushChain(rects, j, dir, 1, rows, cols);
     rects = r2.rects; // if r2.applied===0 they just couldn't follow this tick (fine)
@@ -831,62 +862,98 @@ function canTranslateOne(rectsIn, idx, dir, rows, cols) {
   return { ok:true, rects: out };
 }
 
-export function planAggressiveMoveStep(rectsIn, idx, dr, dc, rows, cols) {
+function expandOneToward(rects, j, dir, rows, cols) {
+  const R = rects[j];
+  if (dir === 'E')      { if (R.c1 < cols) R.c1 += 1; }
+  else if (dir === 'W') { if (R.c0 > 0)    R.c0 -= 1; }
+  else if (dir === 'S') { if (R.r1 < rows) R.r1 += 1; }
+  else /* dir === 'N' */{ if (R.r0 > 0)    R.r0 -= 1; }
+  // safety: keep ≥ 1×1
+  if (R.c1 - R.c0 < 1) R.c1 = R.c0 + 1;
+  if (R.r1 - R.r0 < 1) R.r1 = R.r0 + 1;
+}
+
+// Expand all pre-step trailing neighbors into the 1-cell strip freed by moving idx
+// one step in `dir`. Use pushChain so we *respect other rectangles*.
+// If any neighbor cannot expand (blocked at min-size), abort the gapless step.
+function fillTrailingStrip(rectsBefore, rectsAfter, idx, dir, rows, cols) {
+  const trailing = opp(dir);
+  const A0       = rectsBefore[idx];            // pre-step geometry = reference
+  const [o0, o1] = orthRange(A0, dir);
+  const trailPos = edgeCoord(A0, trailing);
+
+  // neighbors that *shared the original trailing edge* (don’t glue new ones mid-step)
+  const trailingIdxs = neighborsAtCoord(rectsBefore, idx, trailing, trailPos, o0, o1);
+
+  let rects = rectsAfter.map(r => ({ ...r }));  // work on a copy we can mutate
+
+  for (const j of trailingIdxs) {
+    // Try to expand this neighbor 1 cell toward `dir` while shrinking blockers if needed.
+    const res = pushChain(rects, j, dir, 1, rows, cols);
+    if (res.applied === 0) {
+      // Couldn’t fill without violating min-size / borders → abort gapless
+      return { ok: false, rects: rectsAfter };
+    }
+    rects = res.rects;
+  }
+  return { ok: true, rects };
+}
+
+// Pure-translate if possible, then *safely* pull trailing neighbors into the freed strip.
+// If filling the strip can’t be done safely, report failure so caller can fall back.
+function tryGaplessTranslateOne(rectsIn, idx, dir, rows, cols) {
+  const t = canTranslateOne(rectsIn, idx, dir, rows, cols);   // your existing helper
+  if (!t.ok) return t;
+
+  const after = t.rects.map(r => ({ ...r }));                 // copy before filling
+  const filled = fillTrailingStrip(rectsIn, after, idx, dir, rows, cols);
+  return filled.ok ? filled : { ok: false, rects: rectsIn };
+}
+
+export function planPwrMoveStep(rectsIn, idx, dr, dc, rows, cols) {
   if (!dr && !dc) return { ok: true, rects: rectsIn };
 
-  // Single-axis: try pure translation first
+  // Single axis
   if (dc && !dr) {
     const dirH = dc > 0 ? 'E' : 'W';
-    const noShrink = canTranslateOne(rectsIn, idx, dirH, rows, cols);
-    if (noShrink.ok) return noShrink;
-
-    // fallback: your current aggressive step (may push/pull)
-    const h = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols);
-    return h.ok ? { ok: true, rects: h.rects } : { ok: false, rects: rectsIn };
+    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols);
+    if (gapless.ok) return gapless; // ✅ pull trailing neighbors safely
+    const h = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols); // fallback
+    return h.ok ? { ok:true, rects:h.rects } : { ok:false, rects:rectsIn };
   }
-
   if (dr && !dc) {
     const dirV = dr > 0 ? 'S' : 'N';
-    const noShrink = canTranslateOne(rectsIn, idx, dirV, rows, cols);
-    if (noShrink.ok) return noShrink;
-
+    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols);
+    if (gapless.ok) return gapless;
     const v = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols);
-    return v.ok ? { ok: true, rects: v.rects } : { ok: false, rects: rectsIn };
+    return v.ok ? { ok:true, rects:v.rects } : { ok:false, rects:rectsIn };
   }
 
-  // Both axes want to move (diagonal tick): try zero-shrink HV and VH
+  // Diagonal tick: try gapless on both axes in both orders
   const dirH = dc > 0 ? 'E' : 'W';
   const dirV = dr > 0 ? 'S' : 'N';
 
-  // H then V (both zero-shrink)
-  const h1 = canTranslateOne(rectsIn, idx, dirH, rows, cols);
-  if (h1.ok) {
-    const hv = canTranslateOne(h1.rects, idx, dirV, rows, cols);
-    if (hv.ok) return hv; // perfect: both axes moved with no collateral
+  const H1 = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols);
+  if (H1.ok) {
+    const HV = tryGaplessTranslateOne(H1.rects, idx, dirV, rows, cols);
+    if (HV.ok) return HV;
   }
 
-  // V then H (both zero-shrink)
-  const v1 = canTranslateOne(rectsIn, idx, dirV, rows, cols);
-  if (v1.ok) {
-    const vh = canTranslateOne(v1.rects, idx, dirH, rows, cols);
-    if (vh.ok) return vh;
+  const V1 = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols);
+  if (V1.ok) {
+    const VH = tryGaplessTranslateOne(V1.rects, idx, dirH, rows, cols);
+    if (VH.ok) return VH;
   }
 
-  // If neither order allows a zero-shrink diagonal step:
-  //  - optionally try a single zero-shrink on one axis (advance what we can),
-  //  - else fall back to your aggressive step chooser.
-  if (h1.ok) return h1;
-  if (v1.ok) return v1;
+  if (H1.ok) return H1;
+  if (V1.ok) return V1;
 
-  // fallback: use your aggressive moveOnceWithPullMetrics chooser for the tick
+  // Fallback: robust push/pull chooser
   const H = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols);
-  const HV = H.ok ? moveOnceWithPullMetrics(H.rects, idx, dirV, rows, cols)
-                  : { ok:false, rects:rectsIn };
+  const HV = H.ok ? moveOnceWithPullMetrics(H.rects, idx, dirV, rows, cols) : { ok:false, rects:rectsIn };
   const V = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols);
-  const VH = V.ok ? moveOnceWithPullMetrics(V.rects, idx, dirH, rows, cols)
-                  : { ok:false, rects:rectsIn };
+  const VH = V.ok ? moveOnceWithPullMetrics(V.rects, idx, dirH, rows, cols) : { ok:false, rects:rectsIn };
 
-  // Prefer a fully-successful two-axis tick; otherwise any single step that worked.
   if (H.ok && HV.ok) return { ok:true, rects: HV.rects };
   if (V.ok && VH.ok) return { ok:true, rects: VH.rects };
   if (H.ok)          return { ok:true, rects: H.rects  };

@@ -3,7 +3,7 @@ import { state }         from './state.js';
 import {
   norm, rectBox, col, nameOf, cell,
   snap, clamp, ok, colorOf, deleteGlyphMetrics,
-  planShiftResizeComposite, planAggressiveMoveStep
+  planShiftResizeComposite, planPwrMoveStep
 }                                   from './helpers.js';
 import { maxDelta, cursor }                 from './controls.js';
 
@@ -465,7 +465,7 @@ export function drawLiveTransform() {
     // baseline: what we compare against in the overlay
     const baseRects = (state.baseAll ?? state.rects).map(r => norm(r));
 
-    if (state.aggrDown) {
+    if (state.pwrDown) {
         let remR = Math.abs(dR), remC = Math.abs(dC);
         const sR = Math.sign(dR), sC = Math.sign(dC);
 
@@ -477,7 +477,7 @@ export function drawLiveTransform() {
             const stepDr = remR > 0 ? sR : 0;
             const stepDc = remC > 0 ? sC : 0;
 
-            const res = planAggressiveMoveStep(plan, state.active, stepDr, stepDc, state.rows, state.cols);
+            const res = planPwrMoveStep(plan, state.active, stepDr, stepDc, state.rows, state.cols);
             if (!res.ok) { blocked = true; break; }
 
             plan = res.rects;
@@ -511,8 +511,8 @@ export function drawLiveTransform() {
   {
     const v = snap(...Object.values(state.cursorPos));
 
-    if (state.aggrDown) {
-      // Aggressive RESIZE preview (push/pull)
+    if (state.pwrDown) {
+      // power RESIZE preview (push/pull)
       const kind = state.resize;
       const { ok: valid, rects: plan } =
         planShiftResizeComposite(baseRects, state.active, kind, v, state.rows, state.cols);

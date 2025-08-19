@@ -68,6 +68,55 @@ header h1 {
     font-weight: 600;
 }
 
+/* Modifier indicator chips */
+.modbar {
+  display: inline-flex;
+  align-items: center;
+  margin-left: .5rem;
+}
+
+.modchip {
+  padding: 6px 8px;
+  border: 1px solid #d0d0d0;               /* same as button */
+  background: #fff;                        /* same as button */
+  color: var(--fg, #333);
+  font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  user-select: none;
+  transition: background-color .12s ease, color .12s ease, border-color .12s ease, opacity .12s ease;
+  opacity: .9;
+}
+
+/* Join edges — continuous control */
+.modchip + .modchip { border-left: 0; }
+
+/* Rounded only on the ends, like a segmented control */
+.modchip:first-child { border-radius: 6px 0 0 6px; }
+.modchip:last-child  { border-radius: 0 6px 6px 0; }
+.modchip:not(:first-child):not(:last-child) { border-radius: 0; }
+
+/* Hover to match button */
+.modchip:hover { background: #f6f6f6; }
+
+/* Active/on state – strong blue */
+.modchip.on {
+  background: #daebf9;
+  color: #000000;
+  opacity: 1;
+}
+
+/* Dark mode parity with your buttons */
+body.dark .modchip {
+  background: #2e2e2e;
+  border: 1px solid var(--border, #555);
+  color: var(--fg, #ddd);
+}
+body.dark .modchip:hover { background: #3c3c3c; }
+body.dark .modchip.on {
+  background: #3c5060;
+  color: #fff;
+}
+
+
 .controls {
     display: flex;
     flex-wrap: nowrap;
