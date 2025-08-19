@@ -38,10 +38,14 @@ export const state = {
     prevFocus : null,
     labelMode : 'num',
     modalOpen: false,
+    base: null,
+    baseAll: null,
 
     //keyboard modifier keys
     modDown: false,
     shiftDown: false,
+    altDown: false,
+    aggrDown: false,
 
     //initial canvas welcome message
     hasEverHadRect: false,

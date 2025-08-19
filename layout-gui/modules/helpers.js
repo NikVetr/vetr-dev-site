@@ -1,5 +1,7 @@
 import { state, history, PALETTE } from './state.js';
 import { canvas, rowsEl, colsEl, aspectEl } from './dom.js';
+import { cursor } from './controls.js';
+import { repaint } from './canvas.js';
 
 /* ---------- helpers ---------- */
 
@@ -85,6 +87,30 @@ export function ok(R, ignore = -1) {
     }
     return true;
 }
+
+export const updateMods = (e) => {
+  const mod  = !!(e.ctrlKey || e.metaKey);
+  const shft = !!e.shiftKey;
+  const alt  = !!e.altKey;
+
+  const aggr = alt;
+
+  const changed = (
+    mod  !== state.modDown  ||
+    shft !== state.shiftDown||
+    alt  !== state.altDown  ||
+    aggr !== state.aggrDown
+  );
+
+  if (changed) {
+    state.modDown   = mod;
+    state.shiftDown = shft;
+    state.altDown   = alt;
+    state.aggrDown  = aggr;
+    cursor();
+    if (state.stickyFocus != null) repaint();
+  }
+};
 
 /* ------ rectangle → canvas-pixel box ----------------------------- */
 export const rectBox = r => {
@@ -561,104 +587,310 @@ function pushChain(rectsIn, idx, dir, amount, rows, cols) {
 // INWARD pull: shrink active by 'amount' and let its immediate neighbors
 // expand into freed space; to create that room, chains *behind* them are pushed
 // in the opposite direction (reusing pushChain). Returns { ok, applied, rects }.
-function pullChain(rectsIn, idx, dir, amount, rows, cols){
-  if (!amount) return { ok:true, applied:0, rects:rectsIn };
+function pullChain(rectsIn, idx, dir, amount, rows, cols) {
+  if (!amount) return { ok: true, applied: 0, rects: rectsIn };
 
-  // work on a copy (like pushChain)
+  // Work on a fresh copy
   const rects = rectsIn.map(r => ({ ...r }));
-  const A0    = rects[idx];
+  const A     = rects[idx];
 
-  // max we can shrink without collapsing to zero
-  const maxS = sizeAlong(A0, dir) - 1;
-  const s    = Math.min(amount, maxS);
-  if (!s) return { ok:true, applied:0, rects };
+  const sgn        = signOut(dir);     // +1 for E/S, -1 for W/N
+  const oppDir     = opp(dir);         // neighbors expand toward this
+  const [o0, o1]   = orthRange(A, dir);
 
-  const sgn     = signOut(dir);
-  const oldEdge = edgeCoord(A0, dir);
-  const [o0, o1]= orthRange(A0, dir);
+  // Max we can shrink active without collapsing
+  const maxS = sizeAlong(A, dir) - 1;
+  const want = Math.min(amount, maxS);
+  if (!want) return { ok: true, applied: 0, rects };
 
-  // Determine neighbors at the *old* edge BEFORE we mutate A
-  const group = neighborsAtCoord(rects, idx, dir, oldEdge, o0, o1);
+  let applied = 0;
+  let ok      = true;
 
-  // Shrink the active by s
-  const A = rects[idx];
-  setEdge(A, dir, oldEdge - sgn * s);
+  // Edge position we’re shrinking from (moves inward each step)
+  let edgePos = edgeCoord(A, dir);
 
-  // New edge position after shrink (the freed-space inner boundary)
-  const newEdge = edgeCoord(A, dir);
+  while (applied < want) {
+    // 1) Find neighbors *currently* touching the active's edge
+    const group = neighborsAtCoord(rects, idx, dir, edgePos, o0, o1);
+    // Shrink the active inward by 1 cell immediately (this frees one cell)
+    setEdge(A, dir, edgePos - sgn * 1);
+    const newEdge = edgeCoord(A, dir); // for reference
 
-  // Expand neighbors to exactly meet newEdge (no relative adds — absolute clamp)
-  for (const j of group) {
-    const R = rects[j];
-    if (dir === 'E') {
-      // neighbor sits to the East; its near edge is c0
-      R.c0 = Math.min(R.c0, newEdge);
-      // keep ≥ 1 cell
-      if (R.c1 - R.c0 < 1) R.c0 = R.c1 - 1;
-    } else if (dir === 'W') {
-      // neighbor sits to the West; its near edge is c1
-      R.c1 = Math.max(R.c1, newEdge);
-      if (R.c1 - R.c0 < 1) R.c1 = R.c0 + 1;
-    } else if (dir === 'S') {
-      // neighbor sits to the South; its near edge is r0
-      R.r0 = Math.min(R.r0, newEdge);
-      if (R.r1 - R.r0 < 1) R.r0 = R.r1 - 1;
-    } else { // 'N'
-      // neighbor sits to the North; its near edge is r1
-      R.r1 = Math.max(R.r1, newEdge);
-      if (R.r1 - R.r0 < 1) R.r1 = R.r0 + 1;
+    if (!group.length) {
+      // No one to pull along: just leave a 1-cell gap this step (allowed).
+      edgePos = newEdge;
+      applied += 1;
+      continue;
     }
+
+    // 2) Collect *all* blockers that sit at the neighbors’ expansion edge.
+    // Neighbors expand toward oppDir; blockers sit at each neighbor's near edge in oppDir.
+    const blockers = new Set();
+    for (const j of group) {
+      const Rn = rects[j];
+      const [no0, no1] = orthRange(Rn, oppDir);    // neighbor's orth span
+      const nEdge = edgeCoord(Rn, oppDir);         // near edge in oppDir (the side we move)
+      // union of blockers across all neighbors (deduplicated)
+      neighborsAtCoord(rects, j, oppDir, nEdge, no0, no1).forEach(k => blockers.add(k));
+    }
+
+    // 3) If any blocker is at min-size in this axis, the whole step is blocked.
+    let blocked = false;
+    for (const k of blockers) {
+      if (sizeAlong(rects[k], oppDir) <= 1) { blocked = true; break; }
+    }
+    if (blocked) { ok = false; break; }
+
+    // 4) Shrink every blocker by 1 toward oppDir (once per step, no duplicates).
+    if (blockers.size) {
+      const grp = Array.from(blockers);
+      shrinkGroupNearEdge(rects, grp, oppDir, 1);
+    }
+
+    // 5) Now expand *all* pulled neighbors by 1 toward the active (into the freed space).
+    for (const j of group) {
+      const Rn = rects[j];
+      if (oppDir === 'W')      Rn.c0 -= 1;
+      else if (oppDir === 'E') Rn.c1 += 1;
+      else if (oppDir === 'N') Rn.r0 -= 1;
+      else                     Rn.r1 += 1;
+
+      // keep ≥1×1 safety (very defensive; should not trigger if blockers handled)
+      if (Rn.c1 - Rn.c0 < 1) Rn.c1 = Rn.c0 + 1;
+      if (Rn.r1 - Rn.r0 < 1) Rn.r1 = Rn.r0 + 1;
+    }
+
+    // Move inward to the new edge and count the step
+    edgePos = newEdge;
+    applied += 1;
   }
 
-  return { ok:true, applied:s, rects };
+  return { ok, applied, rects };
 }
 
 // PUBLIC: compose for corner/edge with Shift
-export function planShiftResizeComposite(rectsIn, idx, kind, target, rows, cols){
-  let rects = rectsIn.map(r => ({...r}));
+export function planShiftResizeComposite(rectsIn, idx, kind, target, rows, cols) {
+  let rects = rectsIn.map(r => ({ ...r }));
   let ok    = true;
 
-  // Start from the rect as it currently is
+  // Helper: detect which horizontal/vertical edge was actually grabbed
+  const dirH = /E/.test(kind) ? 'E' : /W/.test(kind) ? 'W' : null;
+  const dirV = /S/.test(kind) ? 'S' : /N/.test(kind) ? 'N' : null;
+
+  // Compute desired integer deltas *against the grabbed edges*
   const A0 = rects[idx];
+  let dH = 0, dV = 0;
+  if (dirH === 'E') dH = target.c - A0.c1;
+  if (dirH === 'W') dH = target.c - A0.c0;
+  if (dirV === 'S') dV = target.r - A0.r1;
+  if (dirV === 'N') dV = target.r - A0.r0;
 
-  // ----- Horizontal (only if grabbing E or W) -----
-  let dirH = null;
-  if (/E/.test(kind)) dirH = 'E';
-  else if (/W/.test(kind)) dirH = 'W';
+  // Remaining steps and outward flags
+  let remH = Math.abs(dH);
+  let remV = Math.abs(dV);
+  const outH = dirH ? (Math.sign(dH) === signOut(dirH)) : false;
+  const outV = dirV ? (Math.sign(dV) === signOut(dirV)) : false;
 
-  if (dirH) {
-    // delta measured at the grabbed edge
-    const dH = (dirH === 'E') ? (target.c - A0.c1) : (target.c - A0.c0);
-    if (dH !== 0) {
-      const outward = Math.sign(dH) === signOut(dirH);   // +E/S is outward, -W/N is outward
-      const amt     = Math.abs(dH);
-      const res     = outward
-        ? pushChain(rects, idx, dirH, amt, rows, cols)
-        : pullChain(rects, idx, dirH, amt, rows, cols);
-      rects = res.rects; ok = ok && res.ok;
+  // Take 1-cell steps, interleaving H then V so geometry updates in between.
+  while ((remH > 0 || remV > 0) && ok) {
+    if (dirH && remH > 0) {
+      const resH = outH
+        ? pushChain(rects, idx, dirH, 1, rows, cols)
+        : pullChain(rects, idx, dirH, 1, rows, cols);
+      if (resH.applied === 0) { ok = false; break; }
+      rects = resH.rects;
+      remH -= 1;
     }
-  }
 
-  // Re-read the (possibly updated) active rect for vertical math
-  const A1 = rects[idx];
-
-  // ----- Vertical (only if grabbing N or S) -----
-  let dirV = null;
-  if (/S/.test(kind)) dirV = 'S';
-  else if (/N/.test(kind)) dirV = 'N';
-
-  if (dirV) {
-    // delta measured at the grabbed edge
-    const dV = (dirV === 'S') ? (target.r - A1.r1) : (target.r - A1.r0);
-    if (dV !== 0) {
-      const outward = Math.sign(dV) === signOut(dirV);
-      const amt     = Math.abs(dV);
-      const res     = outward
-        ? pushChain(rects, idx, dirV, amt, rows, cols)
-        : pullChain(rects, idx, dirV, amt, rows, cols);
-      rects = res.rects; ok = ok && res.ok;
+    if (dirV && remV > 0) {
+      const resV = outV
+        ? pushChain(rects, idx, dirV, 1, rows, cols)
+        : pullChain(rects, idx, dirV, 1, rows, cols);
+      if (resV.applied === 0) { ok = false; break; }
+      rects = resV.rects;
+      remV -= 1;
     }
   }
 
   return { ok, rects };
+}
+
+// One outward tick on all four sides using pushChain (Shift-expand).
+export function expandAllSidesWithPushStep(rectsIn, idx, rows, cols) {
+  let rects   = rectsIn.map(r => ({ ...r }));
+  let changed = false;
+
+  for (const dir of ['N','S','W','E']) {
+    const res = pushChain(rects, idx, dir, 1, rows, cols);
+    if (res.applied > 0) changed = true;
+    rects = res.rects;
+  }
+  return { rects, changed };
+}
+
+// One inward tick toward a hovered cell using pullChain (Shift-shrink).
+export function shrinkTowardCellWithPullStep(rectsIn, idx, tr, tc, rows, cols) {
+  let rects   = rectsIn.map(r => ({ ...r }));
+  let changed = false;
+
+  const shouldPull = (R, side) => (
+    side === 'N' ? (R.r0 < tr)     :
+    side === 'S' ? (R.r1 > tr + 1) :
+    side === 'W' ? (R.c0 < tc)     :
+                   (R.c1 > tc + 1)     // 'E'
+  );
+
+  // Try each side once; re-evaluate rect after each successful pull.
+  for (const side of ['N','S','W','E']) {
+    const Rnow = norm(rects[idx]);
+    if (!shouldPull(Rnow, side)) continue;
+
+    const res = pullChain(rects, idx, side, 1, rows, cols);
+    if (res.applied > 0) {
+      rects   = res.rects;
+      changed = true;
+    }
+  }
+  return { rects, changed };
+}
+
+// Count whether this step would *shrink* anyone at the *leading* edge.
+// We treat "shrink happened" as a boolean (0/1) per step for order choice.
+function moveOnceWithPullMetrics(rectsIn, idx, dir, rows, cols) {
+  let rects = rectsIn.map(r => ({ ...r }));
+
+  // Record trailing edge before the move
+  const trailing = opp(dir);
+  const A0 = rects[idx];
+  const [o0, o1] = orthRange(A0, dir);
+  const leadCoord = edgeCoord(A0, dir);
+  const trailingCoord = edgeCoord(A0, trailing);
+
+  // Will this step shrink anyone at the leading edge?
+  const leadingNeighbors = neighborsAtCoord(rects, idx, dir, leadCoord, o0, o1);
+  const shrinks = leadingNeighbors.length > 0 ? 1 : 0;
+
+  // 1) Open space by 1 cell at leading edge
+  const res = pushChain(rects, idx, dir, 1, rows, cols);
+  if (res.applied === 0) return { ok: false, shrinks: 0, rects: rectsIn };
+  rects = res.rects;
+
+  // 2) Complete translation: shift trailing edge 1 cell
+  const A = rects[idx];
+  if (dir === 'E')      A.c0 += 1;
+  else if (dir === 'W') A.c1 -= 1;
+  else if (dir === 'S') A.r0 += 1;
+  else                  A.r1 -= 1; // 'N'
+
+  // 3) Pull along neighbors that were attached at the *old* trailing edge
+  const trailingGroup = neighborsAtCoord(rects, idx, trailing, trailingCoord, o0, o1);
+  for (const j of trailingGroup) {
+    const r2 = pushChain(rects, j, dir, 1, rows, cols);
+    rects = r2.rects; // if r2.applied===0 they just couldn't follow this tick (fine)
+  }
+
+  return { ok: true, shrinks, rects };
+}
+
+// --- local helpers for zero-shrink probe ---
+const overlapsStrict = (A, B) =>
+  A.r0 < B.r1 && A.r1 > B.r0 && A.c0 < B.c1 && A.c1 > B.c0;
+
+function inBounds(R, rows, cols) {
+  return R.r0 >= 0 && R.c0 >= 0 && R.r1 <= rows && R.c1 <= cols &&
+         (R.r1 - R.r0) >= 1 && (R.c1 - R.c0) >= 1;
+}
+
+function overlapsAny(rects, idx, cand) {
+  const A = norm(cand);
+  for (let i = 0; i < rects.length; i++) {
+    if (i === idx) continue;
+    const B = norm(rects[i]);
+    if (overlapsStrict(A, B)) return true;
+  }
+  return false;
+}
+
+// Try a pure translation by exactly 1 cell along dir with NO changes to others.
+function canTranslateOne(rectsIn, idx, dir, rows, cols) {
+  const rects = rectsIn; // read only
+  const A0 = rects[idx];
+  let cand = { ...A0 };
+
+  if (dir === 'E') { cand.c0 += 1; cand.c1 += 1; }
+  else if (dir === 'W'){ cand.c0 -= 1; cand.c1 -= 1; }
+  else if (dir === 'S'){ cand.r0 += 1; cand.r1 += 1; }
+  else /* 'N' */        { cand.r0 -= 1; cand.r1 -= 1; }
+
+  cand = norm(cand);
+  if (!inBounds(cand, rows, cols)) return { ok:false, rects:rectsIn };
+  if (overlapsAny(rects, idx, cand)) return { ok:false, rects:rectsIn };
+
+  const out = rects.map(r => ({...r}));
+  out[idx] = cand;
+  return { ok:true, rects: out };
+}
+
+export function planAggressiveMoveStep(rectsIn, idx, dr, dc, rows, cols) {
+  if (!dr && !dc) return { ok: true, rects: rectsIn };
+
+  // Single-axis: try pure translation first
+  if (dc && !dr) {
+    const dirH = dc > 0 ? 'E' : 'W';
+    const noShrink = canTranslateOne(rectsIn, idx, dirH, rows, cols);
+    if (noShrink.ok) return noShrink;
+
+    // fallback: your current aggressive step (may push/pull)
+    const h = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols);
+    return h.ok ? { ok: true, rects: h.rects } : { ok: false, rects: rectsIn };
+  }
+
+  if (dr && !dc) {
+    const dirV = dr > 0 ? 'S' : 'N';
+    const noShrink = canTranslateOne(rectsIn, idx, dirV, rows, cols);
+    if (noShrink.ok) return noShrink;
+
+    const v = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols);
+    return v.ok ? { ok: true, rects: v.rects } : { ok: false, rects: rectsIn };
+  }
+
+  // Both axes want to move (diagonal tick): try zero-shrink HV and VH
+  const dirH = dc > 0 ? 'E' : 'W';
+  const dirV = dr > 0 ? 'S' : 'N';
+
+  // H then V (both zero-shrink)
+  const h1 = canTranslateOne(rectsIn, idx, dirH, rows, cols);
+  if (h1.ok) {
+    const hv = canTranslateOne(h1.rects, idx, dirV, rows, cols);
+    if (hv.ok) return hv; // perfect: both axes moved with no collateral
+  }
+
+  // V then H (both zero-shrink)
+  const v1 = canTranslateOne(rectsIn, idx, dirV, rows, cols);
+  if (v1.ok) {
+    const vh = canTranslateOne(v1.rects, idx, dirH, rows, cols);
+    if (vh.ok) return vh;
+  }
+
+  // If neither order allows a zero-shrink diagonal step:
+  //  - optionally try a single zero-shrink on one axis (advance what we can),
+  //  - else fall back to your aggressive step chooser.
+  if (h1.ok) return h1;
+  if (v1.ok) return v1;
+
+  // fallback: use your aggressive moveOnceWithPullMetrics chooser for the tick
+  const H = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols);
+  const HV = H.ok ? moveOnceWithPullMetrics(H.rects, idx, dirV, rows, cols)
+                  : { ok:false, rects:rectsIn };
+  const V = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols);
+  const VH = V.ok ? moveOnceWithPullMetrics(V.rects, idx, dirH, rows, cols)
+                  : { ok:false, rects:rectsIn };
+
+  // Prefer a fully-successful two-axis tick; otherwise any single step that worked.
+  if (H.ok && HV.ok) return { ok:true, rects: HV.rects };
+  if (V.ok && VH.ok) return { ok:true, rects: VH.rects };
+  if (H.ok)          return { ok:true, rects: H.rects  };
+  if (V.ok)          return { ok:true, rects: V.rects  };
+
+  return { ok:false, rects: rectsIn };
 }

@@ -3,7 +3,7 @@ import { state }         from './state.js';
 import {
   norm, rectBox, col, nameOf, cell,
   snap, clamp, ok, colorOf, deleteGlyphMetrics,
-  planShiftResizeComposite
+  planShiftResizeComposite, planAggressiveMoveStep
 }                                   from './helpers.js';
 import { maxDelta, cursor }                 from './controls.js';
 
@@ -178,18 +178,6 @@ export function edgeLabel(side, mode) {
        : side === 'N' ? '│↓'
        :                '│↑';
 }
-
-export const updateMods = (e) => {
-  const mod  = !!(e.ctrlKey || e.metaKey);
-  const shft = !!e.shiftKey;
-  const changed = (mod !== state.modDown) || (shft !== state.shiftDown);
-  if (changed) {
-    state.modDown = mod;
-    state.shiftDown = shft;
-    cursor();
-    if (state.stickyFocus != null) repaint();
-  }
-};
 
 function scaleFontPxStr(fontPx) {
   const dpr = window.devicePixelRatio || 1;
@@ -428,87 +416,129 @@ export function drawPreview() {
     }
 }
 
-export function drawLiveTransform() {
-    if (state.mode !== 'moving' && state.mode !== 'resizing') return;
+function drawPreviewOverlay(baseRects, nextRects, valid, activeIdx) {
+  // Draws only rectangles that changed between baseRects and nextRects
+  // `valid` controls blue vs red stroke; `activeIdx` is optional (for colorOf)
+  const n = Math.min(baseRects.length, nextRects.length);
+  const was = baseRects, now = nextRects;
 
-    let R;
-    if (state.mode === 'moving') {
-        const v = snap(...Object.values(state.cursorPos)),
-            dR = v.r - state.grab.r,
-            dC = v.c - state.grab.c,
-            {
-                dr,
-                dc
-            } = maxDelta(state.active, dR, dC),
-            B = state.base;
-        R = norm({
-            r0: B.r0 + dr,
-            c0: B.c0 + dc,
-            r1: B.r1 + dr,
-            c1: B.c1 + dc
-        });
-    } else if (state.mode === 'resizing'){
-        if(state.shiftDown) {
-            // SHIFT-resize: preview multi-rect plan
-            const v = snap(...Object.values(state.cursorPos));
-            const baseRects = state.rects.map(r => norm(r));
-            const kind = state.resize; // e.g. 'edgeE', 'cornerNE', etc.
+  ctx.save();
 
-            const { ok: valid, rects: planned } =
-            planShiftResizeComposite(baseRects, state.active, kind, v, state.rows, state.cols);
-
-            // Draw overlays for all rects that changed
-            ctx.save();
-            ctx.globalAlpha = 0.35;
-            for (let i = 0; i < planned.length; i++) {
-            const a = baseRects[i], b = planned[i];
-            if (!a || !b) continue;
-            if (a.r0===b.r0 && a.c0===b.c0 && a.r1===b.r1 && a.c1===b.c1) continue;
-            const bx = rectBox(b);
-            ctx.fillStyle = valid ? colorOf(i) : '#ddd';
-            ctx.fillRect(bx.x, bx.y, bx.W, bx.H);
-            }
-            ctx.globalAlpha = 1;
-            ctx.setLineDash([6,4]);
-            ctx.strokeStyle = valid ? '#3b82f6' : '#e53935';
-            ctx.lineWidth = 2;
-            for (let i = 0; i < planned.length; i++) {
-            const a = baseRects[i], b = planned[i];
-            if (!a || !b) continue;
-            if (a.r0===b.r0 && a.c0===b.c0 && a.r1===b.r1 && a.c1===b.c1) continue;
-            const bx = rectBox(b);
-            ctx.strokeRect(bx.x, bx.y, bx.W, bx.H);
-            }
-            ctx.setLineDash([]);
-            ctx.restore();
-            return;
-        } else {
-            const v = snap(...Object.values(state.cursorPos));
-            R = {
-                ...state.base
-            };
-            const k = state.resize;
-            if (/N/.test(k)) R.r0 = clamp(v.r, 0, R.r1 - 1);
-            if (/S/.test(k)) R.r1 = clamp(v.r, R.r0 + 1, state.rows);
-            if (/W/.test(k)) R.c0 = clamp(v.c, 0, R.c1 - 1);
-            if (/E/.test(k)) R.c1 = clamp(v.c, R.c0 + 1, state.cols);
-            R = norm(R);
-        }
-    } 
-
-    const valid = ok(R, state.active),
-        b = rectBox(R);
-
-    ctx.globalAlpha = 0.35;
-    ctx.fillStyle = valid ? colorOf(state.active) : '#ddd';
+  // filled delta areas
+  ctx.globalAlpha = 0.35;
+  for (let i = 0; i < n; i++) {
+    const A = was[i], B = now[i];
+    if (!A || !B) continue;
+    if (A.r0===B.r0 && A.c0===B.c0 && A.r1===B.r1 && A.c1===B.c1) continue;
+    const b = rectBox(B);
+    ctx.fillStyle = valid ? colorOf(i) : '#ddd';
     ctx.fillRect(b.x, b.y, b.W, b.H);
-    ctx.globalAlpha = 1;
-    ctx.setLineDash([6, 4]);
-    ctx.strokeStyle = valid ? '#3b82f6' : '#e53935';
-    ctx.lineWidth = 2;
+  }
+
+  // dashed strokes
+  ctx.globalAlpha = 1;
+  ctx.setLineDash([6,4]);
+  ctx.strokeStyle = valid ? '#3b82f6' : '#e53935';
+  ctx.lineWidth = 2;
+  for (let i = 0; i < n; i++) {
+    const A = was[i], B = now[i];
+    if (!A || !B) continue;
+    if (A.r0===B.r0 && A.c0===B.c0 && A.r1===B.r1 && A.c1===B.c1) continue;
+    const b = rectBox(B);
     ctx.strokeRect(b.x, b.y, b.W, b.H);
-    ctx.setLineDash([]);
+  }
+  ctx.setLineDash([]);
+  ctx.restore();
 }
+
+export function drawLiveTransform() {
+  if (state.mode !== 'moving' && state.mode !== 'resizing') return;
+
+  // Useful locals
+  const baseRects = state.baseAll ?? state.rects.map(r => norm(r));
+
+  if (state.mode === 'moving') {
+    const v   = snap(...Object.values(state.cursorPos));
+    const dR  = v.r - state.grab.r;
+    const dC  = v.c - state.grab.c;
+      
+    // baseline: what we compare against in the overlay
+    const baseRects = (state.baseAll ?? state.rects).map(r => norm(r));
+
+    if (state.aggrDown) {
+        let remR = Math.abs(dR), remC = Math.abs(dC);
+        const sR = Math.sign(dR), sC = Math.sign(dC);
+
+        let plan         = baseRects.map(r => ({ ...r }));
+        let appliedSteps = 0;       // <- NEW
+        let blocked      = false;
+
+        while ((remR > 0 || remC > 0) && !blocked) {
+            const stepDr = remR > 0 ? sR : 0;
+            const stepDc = remC > 0 ? sC : 0;
+
+            const res = planAggressiveMoveStep(plan, state.active, stepDr, stepDc, state.rows, state.cols);
+            if (!res.ok) { blocked = true; break; }
+
+            plan = res.rects;
+            appliedSteps++;
+            if (stepDr) remR--;
+            if (stepDc) remC--;
+        }
+
+        // If we applied at least one step, preview is "valid" (blue); 
+        // if literally nothing can move this tick, mark invalid (red).
+        const previewValid = appliedSteps > 0;
+
+        drawPreviewOverlay(baseRects, plan, previewValid, state.active);
+        return;
+  }
+
+    // Normal MOVE preview (single rect)
+    const { dr, dc } = maxDelta(state.active, dR, dC);
+    const B = state.base;
+    const R = norm({ r0:B.r0+dr, c0:B.c0+dc, r1:B.r1+dr, c1:B.c1+dc });
+
+    const plan = baseRects.slice();
+    plan[state.active] = R;
+    const valid = ok(R, state.active);
+
+    drawPreviewOverlay(baseRects, plan, valid, state.active);
+    return;
+  }
+
+  // ---- RESIZING ----
+  {
+    const v = snap(...Object.values(state.cursorPos));
+
+    if (state.aggrDown) {
+      // Aggressive RESIZE preview (push/pull)
+      const kind = state.resize;
+      const { ok: valid, rects: plan } =
+        planShiftResizeComposite(baseRects, state.active, kind, v, state.rows, state.cols);
+
+      drawPreviewOverlay(baseRects, plan, valid, state.active);
+      return;
+    }
+
+    // Normal RESIZE preview (single rect)
+    let R = { ...state.base };
+    const k = state.resize;
+    if (/N/.test(k)) R.r0 = clamp(v.r, 0, R.r1 - 1);
+    if (/S/.test(k)) R.r1 = clamp(v.r, R.r0 + 1, state.rows);
+    if (/W/.test(k)) R.c0 = clamp(v.c, 0, R.c1 - 1);
+    if (/E/.test(k)) R.c1 = clamp(v.c, R.c0 + 1, state.cols);
+    R = norm(R);
+
+    const plan   = baseRects.slice();
+    plan[state.active] = R;
+    const valid = ok(R, state.active);
+
+    drawPreviewOverlay(baseRects, plan, valid, state.active);
+    return;
+  }
+}
+
 
 export function indices() {
     if (!state.showIdx) return;

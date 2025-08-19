@@ -12,7 +12,8 @@ import { generateCode } from './code-generator.js'
 /* ---------- controls ---------- */
 export function cursor() {
   if (!state.hover) {
-    canvas.style.cursor = 'crosshair';
+    canvas.style.cursor = state.aggrDown ? 
+    "url('assets/cursors/crosshair.png') 16 16, crosshair" : 'crosshair';
     return;
   }
 
@@ -29,16 +30,20 @@ export function cursor() {
     delete:   'pointer'
   };
 
-  const shifted = {
+  const aggr = {
     ...base,
-    edgeN: 'row-resize',
-    edgeS: 'row-resize',
-    edgeE: 'col-resize',
-    edgeW: 'col-resize'
-    // corners remain diagonal for clarity
+    inside:   "url('assets/cursors/move.png') 16 16, move",
+    edgeN:    "url('assets/cursors/ns-resize.png') 16 16, row-resize",
+    edgeS:    "url('assets/cursors/ns-resize.png') 16 16, row-resize",
+    edgeE:    "url('assets/cursors/ew-resize.png') 16 16, col-resize",
+    edgeW:    "url('assets/cursors/ew-resize.png') 16 16, col-resize",
+    cornerNE: "url('assets/cursors/nesw-resize.png') 12 12, nesw-resize",
+    cornerSW: "url('assets/cursors/nesw-resize.png') 12 12, nesw-resize",
+    cornerNW: "url('assets/cursors/nwse-resize.png') 12 12, nwse-resize",
+    cornerSE: "url('assets/cursors/nwse-resize.png') 12 12, nwse-resize"
   };
 
-  const map = state.shiftDown ? shifted : base;
+  const map = state.aggrDown ? aggr : base;
   canvas.style.cursor = map[state.hover.kind] || 'crosshair';
 }
 

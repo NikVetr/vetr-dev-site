@@ -14,11 +14,12 @@ import {
   nameOf, clamp, gcd, snap, norm, ok, rectBox, col,
   syncURL, cell, cellAtPx, moveRect, deleteRectInPlace, expandRect, contractRect,
   growAllSidesOnce, shrinkTowardCellOnce, shrinkTargetCellForKeyboard,
-  expandRectToLimit, planShiftResizeComposite
+  expandRectToLimit, planShiftResizeComposite, expandAllSidesWithPushStep,
+  shrinkTowardCellWithPullStep, updateMods, planAggressiveMoveStep
 } from './helpers.js';
 
 import {
-  repaint, grid, drawRects, drawPreview, drawLiveTransform, indices, updateMods
+  repaint, grid, drawRects, drawPreview, drawLiveTransform, indices
 } from './canvas.js';
 
 import {
@@ -215,9 +216,12 @@ canvas.addEventListener('mousedown', e => {
         if (hv.kind === 'inside') {
             state.mode = 'moving';
             state.grab = snap(x, y);
+            state.baseAll = state.aggrDown ? state.rects.map(r => norm(r)) : null;
+
         } else {
             state.mode = 'resizing';
             state.resize = hv.kind;
+            state.baseAll = state.aggrDown ? state.rects.map(r => norm(r)) : null;
         }
     } else {
         state.mode = 'drawing';
@@ -266,40 +270,89 @@ window.addEventListener('mouseup', e => {
         const v = snap(...Object.values(pos(e))),
             dR = v.r - state.grab.r,
             dC = v.c - state.grab.c;
-        const {
-            dr,
-            dc
-        } = maxDelta(state.active, dR, dC);
-        const R = state.base;
-        const movedRect = {
-            r0: R.r0 + dr,
-            c0: R.c0 + dc,
-            r1: R.r1 + dr,
-            c1: R.c1 + dc
-        };
-        if (dr || dc) {
-            history();
-            state.rects[state.active] = movedRect;
-            if(state.active !== state.stickyFocus){
+        
+        if (state.aggrDown) {
+            // Aggressive commit
+            let remR = Math.abs(dR), remC = Math.abs(dC);
+            const sR = Math.sign(dR), sC = Math.sign(dC);
+
+            let rects = (state.baseAll ?? state.rects).map(r => ({ ...r }));
+            let ok    = true;
+            let moved = false;
+
+            while ((remR > 0 || remC > 0) && ok) {
+            const stepDr = remR > 0 ? sR : 0;
+            const stepDc = remC > 0 ? sC : 0;
+
+            // ✨ both axes together = chooser runs each tick
+            const res = planAggressiveMoveStep(rects, state.active, stepDr, stepDc, state.rows, state.cols);
+            if (!res.ok) { ok = false; break; }
+
+            rects = res.rects;
+            moved = true;
+            if (stepDr) remR--;
+            if (stepDc) remC--;
+            }
+
+            state.mode    = 'idle';
+            state.baseAll = null;
+            state.base    = null;
+
+            if (moved) {
+                history();
+                state.rects = rects;
+                if (state.active !== state.stickyFocus) {
                 state.stickyFocus = null;
                 repaint();
+                }
+                update();
+                syncURL();
+            } else {
+                update();
             }
-            moved = true;  // Track that the rectangle has moved
+            return;
+
+        } else {
+            //regular moving
+            const {
+                dr,
+                dc
+            } = maxDelta(state.active, dR, dC);
+            const R = state.base;
+            const movedRect = {
+                r0: R.r0 + dr,
+                c0: R.c0 + dc,
+                r1: R.r1 + dr,
+                c1: R.c1 + dc
+            };
+            if (dr || dc) {
+                history();
+                state.rects[state.active] = movedRect;
+                if(state.active !== state.stickyFocus){
+                    state.stickyFocus = null;
+                    repaint();
+                }
+                moved = true;  // Track that the rectangle has moved
+            }
+            state.mode = 'idle';
+            update();
+            syncURL();
+
         }
-        state.mode = 'idle';
-        update();
-        syncURL();
     }
 
     if (state.mode === 'resizing') {
         const v = snap(...Object.values(pos(e)));
                 
-        if (state.shiftDown) {
+        if (state.aggrDown) {
             const baseRects = state.rects.map(r => norm(r));
             const { ok: valid, rects: planned } =
             planShiftResizeComposite(baseRects, state.active, state.resize, v, state.rows, state.cols);
 
             state.mode = 'idle';
+            state.baseAll = null;
+            state.base    = null;
+
             if (valid) {
                 history();
                 state.rects = planned;
@@ -345,29 +398,70 @@ window.addEventListener('mouseup', e => {
 
 });
 
+function wheelDir(e) {
+  const dy = e.deltaY;
+  if (dy > 0) return  +1;                     // scroll down
+  if (dy < 0) return  -1;                     // scroll up
+  // dy === 0  → could be +0 or -0; detect -0 via 1/dy
+  if (dy === 0 && 1 / dy === -Infinity) return -1; // negative zero
+  return 0;                                   // truly zero
+}
 
 canvas.addEventListener('wheel', (e) => {
-  if (state.mode !== 'idle' || state.focus == null) return;
+  if (state.mode !== 'idle') return;
   e.preventDefault();
+
+  // Prefer sticky focus; fall back to hover focus.
+  const idx = (state.stickyFocus != null) ? state.stickyFocus : state.focus;
+  if (idx == null) return;
 
   const { x, y } = pos(e);
   const { r: tr, c: tc } = cellAtPx(x, y);
-  const idx = state.focus;
-  const R   = norm(state.rects[idx]);
+  const dir = wheelDir(e); // -1 (up), +1 (down), 0 (none), with -0 handled
+  //console.log('wheel:', { idx, sticky: state.stickyFocus, hover: state.focus, shiftKey: e.shiftKey, deltaY: e.deltaY, dir });
 
-  let next = null;
+  let changed = false;
 
-  if (e.deltaY > 0) {
-    // shrink toward hovered cell
-    next = shrinkTowardCellOnce(R, tr, tc);
-  } else if (e.deltaY < 0) {
-    // expand one tick on all sides
-    next = growAllSidesOnce(R, idx);
+    if (state.aggrDown) {
+    // neighbor-aware chain logic
+    if (dir < 0) {
+      // expand outward one tick on all sides (push neighbors)
+      const res = expandAllSidesWithPushStep(state.rects, idx, state.rows, state.cols);
+      if (res.changed) {
+        history();
+        state.rects = res.rects;
+        changed = true;
+        // console.log('pushStep changed');
+      }
+    } else if (dir > 0) {
+      // shrink one tick toward hovered cell (pull neighbors)
+      const res = shrinkTowardCellWithPullStep(state.rects, idx, tr, tc, state.rows, state.cols);
+      if (res.changed) {
+        history();
+        state.rects = res.rects;
+        changed = true;
+        // console.log('pullStep changed', { tr, tc });
+      }
+    }
+  } else {
+    // --- No alt mode: original solo-rect behavior
+    const R = norm(state.rects[idx]);
+    let next = null;
+
+    if (dir > 0) {
+      next = shrinkTowardCellOnce(R, tr, tc);
+    } else if (dir < 0) {
+      next = growAllSidesOnce(R, idx);
+    }
+
+    if (next) {
+      history();
+      state.rects[idx] = next;
+      changed = true;
+    }
   }
 
-  if (next) {
-    history();
-    state.rects[idx] = next;
+  if (changed) {
     update();
     syncURL();
   }
@@ -801,14 +895,22 @@ document.addEventListener('keydown', e => {
 //visual modifiers for stickyfocus
 document.addEventListener('keydown', updateMods);
 document.addEventListener('keyup',   updateMods);
+
 // When the window loses focus, clear modifiers (prevents stuck visuals)
 window.addEventListener('blur', () => {
-  if (state.modDown || state.shiftDown) {
-    state.modDown = false;
-    state.shiftDown = false;
-    if (state.stickyFocus != null) repaint();
-  }
+    if (state.modDown || state.shiftDown || state.altDown || state.aggrDown) {
+        state.modDown = state.shiftDown = state.altDown = state.aggrDown = false;
+        if (state.stickyFocus != null) repaint();
+    }
 });
+
+//stop browser from switching tabs on alt+arrow
+document.addEventListener('keydown', (e) => {
+  if (e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}, true);
 
 //help information
 // Detect platform modifier label
@@ -819,14 +921,22 @@ function renderHelpHTML() {
   return `
   <div class="controls-grid">
     <div class="section">
-      <h3>Canvas (Left Panel) — Mouse</h3>
-      <div class="row"><span class="chip">Click</span> <span class="desc">Toggle sticky focus on a rectangle; click empty grid to clear</span></div>
-      <div class="row"><span class="kbd">Click + drag</span> <span class="desc">Draw new rectangle (empty space) or move (inside rect) or resize (edge/corner)</span></div>
-      <div class="row"><span class="kbd">Double-click (rect)</span> <span class="desc">Rename rectangle</span></div>
-      <div class="row"><span class="kbd">Double-click (empty)</span> <span class="desc">Create 1×1 rectangle at cell</span></div>
-      <div class="row"><span class="chip">Scroll</span> <span class="desc">On highlighted rect: expand (up) on all sides; shrink (down) toward hovered cell</span></div>
-      <div class="row"><span class="kbd">× (red)</span> <span class="desc">Delete rectangle</span></div>
+    <h3>Canvas (Left Panel) — Mouse (Default)</h3>
+        <div class="row"><span class="chip">Click (rect)</span> <span class="desc">Toggle sticky focus on a rectangle; click empty grid to clear</span></div>
+        <div class="row"><span class="chip">Click + drag</span> <span class="desc">Draw new rectangle (empty space) or move (inside rect) or resize (edge/corner)</span></div>
+        <div class="row"><span class="chip">Double-click (rect)</span> <span class="desc">Rename rectangle</span></div>
+        <div class="row"><span class="chip">Double-click (empty)</span> <span class="desc">Create 1×1 rectangle at cell</span></div>
+        <div class="row"><span class="chip">Scroll</span> <span class="desc">On highlighted rect: grow (scroll up) on all sides; shrink (scroll down) toward hovered cell</span></div>
+        <div class="row"><span class="chip">× (red)</span> <span class="desc">Delete rectangle</span></div>
     </div>
+
+    <div class="section">
+    <h3>Canvas (Left Panel) — Mouse (Alt/Option held)</h3>
+        <div class="row"><span class="chip">Drag edge / corner</span> <span class="desc">Alt resize: push/pull other rectangles out of/into the way (up to 1-cell minimum)</span></div>
+        <div class="row"><span class="chip">Drag inside rect</span> <span class="desc">Alt move: pushes blockers and pulls attached neighbors when possible</span></div>
+        <div class="row"><span class="chip">Scroll</span> <span class="desc">Alt grow/shrink: expand (up) on all sides by pushing neighbors; shrink (down) toward hovered cell by pulling neighbors</span></div>
+    </div>
+
 
     <div class="section">
       <h3>Canvas (Left Panel) — Keyboard (requires sticky focus)</h3>
@@ -841,8 +951,8 @@ function renderHelpHTML() {
 
     <div class="section">
       <h3>Legend (Middle Panel) </h3>
-      <div class="row"><span class="kbd">Drag rows</span> <span class="desc">Reorder rectangles (color/name travel with it)</span></div>
-      <div class="row"><span class="kbd">Hover row</span> <span class="desc">Highlight rectangle in canvas</span></div>
+      <div class="row"><span class="chip">Drag rows</span> <span class="desc">Reorder rectangles (color/name travel with it)</span></div>
+      <div class="row"><span class="chip">Hover row</span> <span class="desc">Highlight rectangle in canvas</span></div>
     </div>
 
     <div class="section">
