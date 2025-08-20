@@ -1,32 +1,94 @@
 /* events.js (no exports – listeners only) --------------------------- */
 
 import {
-  canvas, legendList, copyBtn, trimBtn, reduceBtn, expandBtn,
-  clearBtn, undoBtn, redoBtn, exportBtn, importBtn,
-  darkEl, rowsEl, colsEl, squareEl, showIdxEl, showGridEl,
-  renderRadios, rcodeEl, aspectEl, labelSwitch,
-  helpBtn, helpModal, helpClose, helpBackdrop, helpContent
+    canvas,
+    legendList,
+    copyBtn,
+    trimBtn,
+    reduceBtn,
+    expandBtn,
+    clearBtn,
+    undoBtn,
+    redoBtn,
+    exportBtn,
+    importBtn,
+    darkEl,
+    rowsEl,
+    colsEl,
+    squareEl,
+    showIdxEl,
+    showGridEl,
+    renderRadios,
+    rcodeEl,
+    aspectEl,
+    labelSwitch,
+    helpBtn,
+    helpModal,
+    helpClose,
+    helpBackdrop,
+    helpContent
 
 } from './dom.js';
 
-import { state, history, applySnap, PALETTE }          from './state.js';
 import {
-  nameOf, clamp, gcd, snap, norm, ok, rectBox, col,
-  syncURL, cell, cellAtPx, moveRect, deleteRectInPlace, expandRect, contractRect,
-  growAllSidesOnce, shrinkTowardCellOnce, shrinkTargetCellForKeyboard,
-  expandRectToLimit, planShiftResizeComposite, expandAllSidesWithPushStep,
-  shrinkTowardCellWithPullStep, updateMods, planPwrMoveStep
+    state,
+    history,
+    applySnap,
+    PALETTE
+} from './state.js';
+
+import {
+    nameOf,
+    clamp,
+    gcd,
+    snap,
+    norm,
+    ok,
+    rectBox,
+    col,
+    syncURL,
+    cell,
+    cellAtPx,
+    moveRect,
+    deleteRectInPlace,
+    expandRect,
+    contractRect,
+    growAllSidesOnce,
+    shrinkTowardCellOnce,
+    shrinkTargetCellForKeyboard,
+    expandRectToLimit,
+    planShiftResizeComposite,
+    expandAllSidesWithPushStep,
+    shrinkTowardCellWithPullStep,
+    updateMods,
+    planPwrMoveStep,
+    pushChain, pullChain,
+    buildOccupancy, hasEmptyCell, adjacentEmptyAtSide, shuffledSides,
+    registerPwrButton
 } from './helpers.js';
 
 import {
-  repaint, grid, drawRects, drawPreview, drawLiveTransform, indices
+    repaint,
+    grid,
+    drawRects,
+    drawPreview,
+    drawLiveTransform,
+    indices
 } from './canvas.js';
 
 import {
-  generateCode, renderer
+    generateCode,
+    renderer
 } from './code-generator.js';
 
-import { update, resizeCanvas, pos, hit, cursor, maxDelta } from './controls.js';
+import {
+    update,
+    resizeCanvas,
+    pos,
+    hit,
+    cursor,
+    maxDelta
+} from './controls.js';
 
 function flashCopied() {
     copyBtn.textContent = 'Copied!';
@@ -35,50 +97,52 @@ function flashCopied() {
     }, 900);
 }
 
-export function commitDelete(idx, { strategy = 'preserve' } = {}) {
-  if (idx < 0 || idx >= state.rects.length) return;
+export function commitDelete(idx, {
+    strategy = 'preserve'
+} = {}) {
+    if (idx < 0 || idx >= state.rects.length) return;
 
-  const prevSticky = state.stickyFocus; // keep for index adjustment
-  history();
-  deleteRectInPlace(idx);
+    const prevSticky = state.stickyFocus; // keep for index adjustment
+    history();
+    deleteRectInPlace(idx);
 
-  if (strategy === 'retarget') {
-    if (state.rects.length) {
-      // compute new index from the *previous* sticky target
-      let newIdx = prevSticky;
-      if (newIdx == null) {
-        // fallback: target the same slot that was deleted
-        newIdx = idx;
-      } else if (idx < newIdx) {
-        // array shifted left for items after the deleted one
-        newIdx -= 1;
-      }
-      state.stickyFocus = Math.min(newIdx, state.rects.length - 1);
-      state.focusSource = 'canvas';
-    } else {
-      state.stickyFocus = null;
-      state.focusSource = null;
+    if (strategy === 'retarget') {
+        if (state.rects.length) {
+            // compute new index from the *previous* sticky target
+            let newIdx = prevSticky;
+            if (newIdx == null) {
+                // fallback: target the same slot that was deleted
+                newIdx = idx;
+            } else if (idx < newIdx) {
+                // array shifted left for items after the deleted one
+                newIdx -= 1;
+            }
+            state.stickyFocus = Math.min(newIdx, state.rects.length - 1);
+            state.focusSource = 'canvas';
+        } else {
+            state.stickyFocus = null;
+            state.focusSource = null;
+        }
+    } else if (strategy === 'preserve') {
+        if (prevSticky == null) {
+            state.stickyFocus = null;
+            state.focusSource = null;
+        } else if (prevSticky === idx) {
+            // you deleted the focused rect via × → clear focus
+            state.stickyFocus = null;
+            state.focusSource = null;
+        } else {
+            // preserve the *same rectangle* identity if it was after the removed slot
+            state.stickyFocus = prevSticky + (idx < prevSticky ? -1 : 0);
+            state.focusSource = 'canvas';
+        }
+    } else { // 'clear'
+        state.stickyFocus = null;
+        state.focusSource = null;
     }
-  } else if (strategy === 'preserve') {
-    if (prevSticky == null) {
-      state.stickyFocus = null;
-      state.focusSource = null;
-    } else if (prevSticky === idx) {
-      // you deleted the focused rect via × → clear focus
-      state.stickyFocus = null;
-      state.focusSource = null;
-    } else {
-      // preserve the *same rectangle* identity if it was after the removed slot
-      state.stickyFocus = prevSticky + (idx < prevSticky ? -1 : 0);
-      state.focusSource = 'canvas';
-    }
-  } else { // 'clear'
-    state.stickyFocus = null;
-    state.focusSource = null;
-  }
 
-  update();   // rebuild legend + repaint
-  syncURL();  // debounced
+    update(); // rebuild legend + repaint
+    syncURL(); // debounced
 }
 
 legendList.addEventListener('dblclick', e => {
@@ -113,9 +177,9 @@ canvas.addEventListener('mousemove', e => {
     }
 
     /* idle hover */
-    state.hover  = hit(x, y);
-    state.prevFocus  = state.focus;
-    state.focus      = state.hover ? state.hover.idx : null;
+    state.hover = hit(x, y);
+    state.prevFocus = state.focus;
+    state.focus = state.hover ? state.hover.idx : null;
     cursor();
 
     /* update legend highlight */
@@ -125,8 +189,8 @@ canvas.addEventListener('mousemove', e => {
 
         if (state.focus != null) {
             legendList
-            .querySelector(`.legend-item[data-idx="${state.focus}"]`)
-            ?.classList.add('focus');
+                .querySelector(`.legend-item[data-idx="${state.focus}"]`)
+                ?.classList.add('focus');
         }
     }
 
@@ -134,32 +198,43 @@ canvas.addEventListener('mousemove', e => {
 });
 
 canvas.addEventListener('mouseleave', () => {
-  state.focus = null;
-  const oldEl = legendList.querySelector('.legend-item.focus');
-  if (oldEl) oldEl.classList.remove('focus');
-  repaint();                       // remove the tint, too
+    state.focus = null;
+    const oldEl = legendList.querySelector('.legend-item.focus');
+    if (oldEl) oldEl.classList.remove('focus');
+    repaint(); // remove the tint, too
 });
 
 canvas.addEventListener('dblclick', e => {
-const { x, y } = pos(e);
-const hv = hit(x, y);
+    const {
+        x,
+        y
+    } = pos(e);
+    const hv = hit(x, y);
 
-// 1) dbl-click ON an existing rect → rename (unchanged)
-if (hv && hv.kind === 'inside') {
-    const idx = hv.idx;
-    const current = state.aliases[idx] || '';
-    const name = prompt('Rectangle name:', current);
-    if (name == null) return;
-    history();
-    state.aliases[idx] = name.trim();
-    update();
-    syncURL();
-    return;
-}
+    // 1) dbl-click ON an existing rect → rename (unchanged)
+    if (hv && hv.kind === 'inside') {
+        const idx = hv.idx;
+        const current = state.aliases[idx] || '';
+        const name = prompt('Rectangle name:', current);
+        if (name == null) return;
+        history();
+        state.aliases[idx] = name.trim();
+        update();
+        syncURL();
+        return;
+    }
 
-  // 2) dbl-click NOT on a rect → create a 1×1 rect at the cell under the pointer
-    const { r, c } = cellAtPx(x, y);
-    const R = norm({ r0: r, c0: c, r1: r + 1, c1: c + 1 });
+    // 2) dbl-click NOT on a rect → create a 1×1 rect at the cell under the pointer
+    const {
+        r,
+        c
+    } = cellAtPx(x, y);
+    const R = norm({
+        r0: r,
+        c0: c,
+        r1: r + 1,
+        c1: c + 1
+    });
 
     if (!ok(R)) return;
 
@@ -170,15 +245,18 @@ if (hv && hv.kind === 'inside') {
     state.colours.push(colour);
 
     // NEW: focus the freshly created rectangle (so the wheel works immediately)
-    const newIdx   = state.rects.length - 1;
-    state.focus    = newIdx;                  // used by wheel listener + canvas tint
+    const newIdx = state.rects.length - 1;
+    state.focus = newIdx; // used by wheel listener + canvas tint
     // optional: make hover consistent with focus
-    state.hover    = { kind: 'inside', idx: newIdx };
+    state.hover = {
+        kind: 'inside',
+        idx: newIdx
+    };
 
     update();
     // optional: if you want the legend row to show the .focus style immediately:
     requestAnimationFrame(() => {
-    legendList.querySelector(`.legend-item[data-idx="${newIdx}"]`)
+        legendList.querySelector(`.legend-item[data-idx="${newIdx}"]`)
             ?.classList.add('focus');
     });
 });
@@ -187,14 +265,14 @@ if (hv && hv.kind === 'inside') {
 function toggleStickyFocus(hv) {
     if (hv && state.mode === 'idle') {
         if (state.stickyFocus === null) {
-            state.stickyFocus = hv.idx;  // Set sticky focus
+            state.stickyFocus = hv.idx; // Set sticky focus
         } else if (state.stickyFocus === hv.idx) {
-            state.stickyFocus = null;  // Remove sticky focus
+            state.stickyFocus = null; // Remove sticky focus
         } else {
-            state.stickyFocus = hv.idx;  // Switch focus to the new rectangle
+            state.stickyFocus = hv.idx; // Switch focus to the new rectangle
         }
     } else if (!hv && state.stickyFocus !== null) {
-        state.stickyFocus = null;  // Remove sticky focus if clicked outside
+        state.stickyFocus = null; // Remove sticky focus if clicked outside
     }
 }
 
@@ -206,7 +284,9 @@ canvas.addEventListener('mousedown', e => {
     } = pos(e), hv = hit(x, y);
 
     if (hv && hv.kind === 'delete') {
-        commitDelete(hv.idx, { strategy: 'preserve' });
+        commitDelete(hv.idx, {
+            strategy: 'preserve'
+        });
         return;
     }
 
@@ -234,8 +314,11 @@ canvas.addEventListener('mousedown', e => {
 
 window.addEventListener('mouseup', e => {
     if (state.modalOpen) return;
-    const { x, y } = pos(e);
-    const hv = hit(x, y);  // Check if the mouse is inside a rectangle
+    const {
+        x,
+        y
+    } = pos(e);
+    const hv = hit(x, y); // Check if the mouse is inside a rectangle
     let moved = false; // Track if a move or resize has happened
 
     if (state.mode === 'drawing') {
@@ -270,40 +353,47 @@ window.addEventListener('mouseup', e => {
         const v = snap(...Object.values(pos(e))),
             dR = v.r - state.grab.r,
             dC = v.c - state.grab.c;
-        
+
         if (state.pwrDown) {
             // power commit
-            let remR = Math.abs(dR), remC = Math.abs(dC);
-            const sR = Math.sign(dR), sC = Math.sign(dC);
+            let remR = Math.abs(dR),
+                remC = Math.abs(dC);
+            const sR = Math.sign(dR),
+                sC = Math.sign(dC);
 
-            let rects = (state.baseAll ?? state.rects).map(r => ({ ...r }));
-            let ok    = true;
+            let rects = (state.baseAll ?? state.rects).map(r => ({
+                ...r
+            }));
+            let ok = true;
             let moved = false;
 
             while ((remR > 0 || remC > 0) && ok) {
-            const stepDr = remR > 0 ? sR : 0;
-            const stepDc = remC > 0 ? sC : 0;
+                const stepDr = remR > 0 ? sR : 0;
+                const stepDc = remC > 0 ? sC : 0;
 
-            // ✨ both axes together = chooser runs each tick
-            const res = planPwrMoveStep(rects, state.active, stepDr, stepDc, state.rows, state.cols);
-            if (!res.ok) { ok = false; break; }
+                // ✨ both axes together = chooser runs each tick
+                const res = planPwrMoveStep(rects, state.active, stepDr, stepDc, state.rows, state.cols);
+                if (!res.ok) {
+                    ok = false;
+                    break;
+                }
 
-            rects = res.rects;
-            moved = true;
-            if (stepDr) remR--;
-            if (stepDc) remC--;
+                rects = res.rects;
+                moved = true;
+                if (stepDr) remR--;
+                if (stepDc) remC--;
             }
 
-            state.mode    = 'idle';
+            state.mode = 'idle';
             state.baseAll = null;
-            state.base    = null;
+            state.base = null;
 
             if (moved) {
                 history();
                 state.rects = rects;
                 if (state.active !== state.stickyFocus) {
-                state.stickyFocus = null;
-                repaint();
+                    state.stickyFocus = null;
+                    repaint();
                 }
                 update();
                 syncURL();
@@ -328,11 +418,11 @@ window.addEventListener('mouseup', e => {
             if (dr || dc) {
                 history();
                 state.rects[state.active] = movedRect;
-                if(state.active !== state.stickyFocus){
+                if (state.active !== state.stickyFocus) {
                     state.stickyFocus = null;
                     repaint();
                 }
-                moved = true;  // Track that the rectangle has moved
+                moved = true; // Track that the rectangle has moved
             }
             state.mode = 'idle';
             update();
@@ -343,15 +433,18 @@ window.addEventListener('mouseup', e => {
 
     if (state.mode === 'resizing') {
         const v = snap(...Object.values(pos(e)));
-                
+
         if (state.pwrDown) {
             const baseRects = state.rects.map(r => norm(r));
-            const { ok: valid, rects: planned } =
+            const {
+                ok: valid,
+                rects: planned
+            } =
             planShiftResizeComposite(baseRects, state.active, state.resize, v, state.rows, state.cols);
 
             state.mode = 'idle';
             state.baseAll = null;
-            state.base    = null;
+            state.base = null;
 
             if (valid) {
                 history();
@@ -381,7 +474,7 @@ window.addEventListener('mouseup', e => {
                     state.stickyFocus = null;
                     repaint();
                 }
-                moved = true;  // Track that the rectangle has moved
+                moved = true; // Track that the rectangle has moved
             }
             state.mode = 'idle';
             update();
@@ -392,80 +485,88 @@ window.addEventListener('mouseup', e => {
     }
 
     if (!moved) {
-        toggleStickyFocus(hv);  // Call the dedicated function to toggle sticky focus
-        repaint();  // Redraw the canvas with updated focus
+        toggleStickyFocus(hv); // Call the dedicated function to toggle sticky focus
+        repaint(); // Redraw the canvas with updated focus
     }
 
 });
 
 function wheelDir(e) {
-  const dy = e.deltaY;
-  if (dy > 0) return  +1;                     // scroll down
-  if (dy < 0) return  -1;                     // scroll up
-  // dy === 0  → could be +0 or -0; detect -0 via 1/dy
-  if (dy === 0 && 1 / dy === -Infinity) return -1; // negative zero
-  return 0;                                   // truly zero
+    const dy = e.deltaY;
+    if (dy > 0) return +1; // scroll down
+    if (dy < 0) return -1; // scroll up
+    // dy === 0  → could be +0 or -0; detect -0 via 1/dy
+    if (dy === 0 && 1 / dy === -Infinity) return -1; // negative zero
+    return 0; // truly zero
 }
 
 canvas.addEventListener('wheel', (e) => {
-  if (state.mode !== 'idle') return;
-  e.preventDefault();
+    if (state.mode !== 'idle') return;
+    e.preventDefault();
 
-  // identify focused state
-  const idx = state.focus;
-  if (idx == null) return;
+    // identify focused state
+    const idx = state.focus;
+    if (idx == null) return;
 
-  const { x, y } = pos(e);
-  const { r: tr, c: tc } = cellAtPx(x, y);
-  const dir = wheelDir(e); // -1 (up), +1 (down), 0 (none), with -0 handled
-  //console.log('wheel:', { idx, sticky: state.stickyFocus, hover: state.focus, shiftKey: e.shiftKey, deltaY: e.deltaY, dir });
+    const {
+        x,
+        y
+    } = pos(e);
+    const {
+        r: tr,
+        c: tc
+    } = cellAtPx(x, y);
+    const dir = wheelDir(e); // -1 (up), +1 (down), 0 (none), with -0 handled
+    //console.log('wheel:', { idx, sticky: state.stickyFocus, hover: state.focus, shiftKey: e.shiftKey, deltaY: e.deltaY, dir });
 
-  let changed = false;
+    let changed = false;
 
     if (state.pwrDown) {
-    // neighbor-aware chain logic
-    if (dir < 0) {
-      // expand outward one tick on all sides (push neighbors)
-      const res = expandAllSidesWithPushStep(state.rects, idx, state.rows, state.cols);
-      if (res.changed) {
-        history();
-        state.rects = res.rects;
-        changed = true;
-        // console.log('pushStep changed');
-      }
-    } else if (dir > 0) {
-      // shrink one tick toward hovered cell (pull neighbors)
-      const res = shrinkTowardCellWithPullStep(state.rects, idx, tr, tc, state.rows, state.cols);
-      if (res.changed) {
-        history();
-        state.rects = res.rects;
-        changed = true;
-        // console.log('pullStep changed', { tr, tc });
-      }
-    }
-  } else {
-    // --- No alt mode: original solo-rect behavior
-    const R = norm(state.rects[idx]);
-    let next = null;
+        // neighbor-aware chain logic
+        if (dir < 0) {
+            // expand outward one tick on all sides (push neighbors)
+            const res = expandAllSidesWithPushStep(state.rects, idx, state.rows, state.cols);
+            if (res.changed) {
+                history();
+                state.rects = res.rects;
+                changed = true;
+                // console.log('pushStep changed');
+            }
+        } else if (dir > 0) {
+            // shrink one tick toward hovered cell (pull neighbors)
+            const res = shrinkTowardCellWithPullStep(state.rects, idx, tr, tc, state.rows, state.cols);
+            if (res.changed) {
+                history();
+                state.rects = res.rects;
+                changed = true;
+                // console.log('pullStep changed', { tr, tc });
+            }
+        }
+    } else {
+        // --- No alt mode: original solo-rect behavior
+        const R = norm(state.rects[idx]);
+        let next = null;
 
-    if (dir > 0) {
-      next = shrinkTowardCellOnce(R, tr, tc);
-    } else if (dir < 0) {
-      next = growAllSidesOnce(R, idx);
+        if (dir > 0) {
+            next = shrinkTowardCellOnce(R, tr, tc);
+        } else if (dir < 0) {
+            next = growAllSidesOnce(R, idx);
+        }
+
+        if (next) {
+            history();
+            state.rects[idx] = next;
+            changed = true;
+        }
     }
 
-    if (next) {
-      history();
-      state.rects[idx] = next;
-      changed = true;
+    if (changed) {
+        update();
+        syncURL();
     }
-  }
-
-  if (changed) {
-    update();
-    syncURL();
-  }
-}, { passive: false });
+}, {
+    passive: false
+});
 
 
 aspectEl.oninput = () => { // empty = auto
@@ -560,7 +661,7 @@ trimBtn.onclick = () => {
 };
 
 reduceBtn.onclick = () => {
-    
+
     /* NO RECTANGLES – use the common divisor of rows & cols */
     if (!state.rects.length) {
         const f = gcd(state.rows, state.cols);
@@ -620,45 +721,134 @@ reduceBtn.onclick = () => {
 
 /* ---------- EXPAND  ––  double everything -------------------------------- */
 expandBtn.onclick = () => {
-  /* 0 ── sanity: nothing to do if grid would grow beyond some huge limit   */
-  const MAX = 10_000;                        // arbitrary safety cap
-  if (state.rows * 2 > MAX || state.cols * 2 > MAX) return;
+    /* 0 ── sanity: nothing to do if grid would grow beyond some huge limit   */
+    const MAX = 10_000; // arbitrary safety cap
+    if (state.rows * 2 > MAX || state.cols * 2 > MAX) return;
 
-  history();                                 // enable Undo
+    history(); // enable Undo
 
-  /* scale the grid itself  */
-  state.rows *= 2;
-  state.cols *= 2;
-  rowsEl.value = state.rows;
-  colsEl.value = state.cols;
+    /* scale the grid itself  */
+    state.rows *= 2;
+    state.cols *= 2;
+    rowsEl.value = state.rows;
+    colsEl.value = state.cols;
 
-  /* scale every rectangle  */
-  state.rects = state.rects.map(r0 => {
-    const r = norm(r0);                      // be safe
-    return {
-      r0: r.r0 * 2,
-      c0: r.c0 * 2,
-      r1: r.r1 * 2,
-      c1: r.c1 * 2
-    };
-  });
-  /*  refresh everything */
-  update();
-  syncURL();
+    /* scale every rectangle  */
+    state.rects = state.rects.map(r0 => {
+        const r = norm(r0); // be safe
+        return {
+            r0: r.r0 * 2,
+            c0: r.c0 * 2,
+            r1: r.r1 * 2,
+            c1: r.c1 * 2
+        };
+    });
+    /*  refresh everything */
+    update();
+    syncURL();
+};
+
+/* ---------- FILL  ––  expand rectangles into empty space ----------------- */
+fillBtn.onclick = (e) => {
+  if (!state.rects.length) return;
+
+  const allowPower = !!e.altKey; // Alt-click = Power Fill
+  history();                     // one undo frame for the whole fill
+  let changed = false;
+
+  // -------- Pass 1: normal (non-power) expansion until stable -------------
+  // We try to grow each rect from randomized sides; repeat until no growth.
+  const MAX_PASSES = state.rows + state.cols + state.rects.length * 4; // safety
+  let pass = 0, grew = true;
+
+  while (grew && pass < MAX_PASSES) {
+    grew = false;
+    pass++;
+
+    for (let i = 0; i < state.rects.length; i++) {
+      // try sides in random order for fairness
+      const sides = shuffledSides();
+      for (const side of sides) {
+        // expandRect(i, side) should mutate state.rects and return boolean
+        if (expandRect(i, side)) {
+          grew = true;
+          changed = true;
+        }
+      }
+    }
+  }
+
+  // -------- Pass 2 (optional): Power Fill to reach trapped pockets ---------
+  if (allowPower) {
+    let occ = buildOccupancy(state.rects, state.rows, state.cols);
+    let guard = 0;
+
+    while (hasEmptyCell(occ) && guard < MAX_PASSES * 2) {
+      guard++;
+      let any = false;
+
+      for (let i = 0; i < state.rects.length; i++) {
+        const R = norm(state.rects[i]);
+
+        for (const side of ['N','S','W','E']) {
+          if (!adjacentEmptyAtSide(occ, R, side, state.rows, state.cols)) continue;
+
+          // Prepare a single-step power push on that side using the composite planner
+          const kind =
+            side === 'E' ? 'edgeE' :
+            side === 'W' ? 'edgeW' :
+            side === 'S' ? 'edgeS' : 'edgeN';
+
+          // target 1 cell outward from the grabbed edge
+          const target =
+            side === 'E' ? { r: R.r1,   c: R.c1 + 1 } :
+            side === 'W' ? { r: R.r0,   c: R.c0 - 1 } :
+            side === 'S' ? { r: R.r1 + 1, c: R.c1   } :
+                           { r: R.r0 - 1, c: R.c0   }; // 'N'
+
+          const base = state.rects.map(norm);
+          const res  = planShiftResizeComposite(base, i, kind, target, state.rows, state.cols);
+
+          if (res.ok) {
+            // Did anything actually change?
+            let diff = false;
+            for (let k = 0; k < base.length; k++) {
+              const a = base[k], b = res.rects[k];
+              if (!a || !b) continue;
+              if (a.r0 !== b.r0 || a.c0 !== b.c0 || a.r1 !== b.r1 || a.c1 !== b.c1) { diff = true; break; }
+            }
+            if (diff) {
+              state.rects = res.rects;
+              occ = buildOccupancy(state.rects, state.rows, state.cols);
+              any = true;
+              changed = true;
+            }
+          }
+        }
+      }
+
+      if (!any) break; // no progress this sweep
+    }
+  }
+
+  if (changed) {
+    update();
+    syncURL();
+  }
 };
 
 clearBtn.onclick = () => {
-  if (!state.rects.length) return;
+    if (!state.rects.length) return;
 
-  history();
-  state.rects.length   = 0;
-  state.aliases.length = 0;
-  state.pool    = [...PALETTE];
-  state.colours = [];
-  state.focus      = null;
-  state.prevFocus  = null;
-  update();
-  syncURL();
+    history();
+    state.rects.length = 0;
+    state.aliases.length = 0;
+    state.pool = [...PALETTE];
+    state.colours = [];
+    state.focus = null;
+    state.prevFocus = null;
+    update();
+    syncURL();
 };
 
 undoBtn.onclick = () => {
@@ -669,7 +859,7 @@ undoBtn.onclick = () => {
         rects: state.rects,
         aliases: state.aliases,
         colours: state.colours,
-        pool : state.pool
+        pool: state.pool
     }));
     applySnap(state.past.pop());
     resizeCanvas();
@@ -683,7 +873,7 @@ redoBtn.onclick = () => {
         rects: state.rects,
         aliases: state.aliases,
         colours: state.colours,
-        pool : state.pool
+        pool: state.pool
     }));
     applySnap(state.future.pop());
     resizeCanvas();
@@ -696,7 +886,7 @@ exportBtn.onclick = () => {
         rects: state.rects,
         aliases: state.aliases,
         colours: state.colours,
-        pool : state.pool
+        pool: state.pool
     }, null, 2)], {
         type: 'application/json'
     });
@@ -733,7 +923,7 @@ importBtn.onclick = () => {
                         cols: o.cols,
                         rects: o.rects.map(norm),
                         colours: o.colours,
-                        pool : o.pool,
+                        pool: o.pool,
                         aliases: o.aliases || []
                     });
                     rowsEl.value = o.rows;
@@ -749,233 +939,288 @@ importBtn.onclick = () => {
 };
 
 renderRadios.addEventListener('change', e => {
-  if (e.target.name === 'render') {
-    renderer.value       = e.target.value;   // ← .value!
-    rcodeEl.value        = generateCode();   // live refresh
-  }
+    if (e.target.name === 'render') {
+        renderer.value = e.target.value; // ← .value!
+        rcodeEl.value = generateCode(); // live refresh
+    }
 });
 
 /* mutually-exclusive buttons for code generation */
 labelSwitch.addEventListener('click', e => {
-  const btn = e.target.closest('button[data-mode]');
-  if (!btn) return;
+    const btn = e.target.closest('button[data-mode]');
+    if (!btn) return;
 
-  /* visual state */
-  labelSwitch.querySelectorAll('button').forEach(b =>
-      b.classList.toggle('active', b === btn));
+    /* visual state */
+    labelSwitch.querySelectorAll('button').forEach(b =>
+        b.classList.toggle('active', b === btn));
 
-  /* functional state */
-  state.labelMode = btn.dataset.mode;   // 'num' | 'alpha'
-  update();                             // repaint legend + canvas + code
+    /* functional state */
+    state.labelMode = btn.dataset.mode; // 'num' | 'alpha'
+    update(); // repaint legend + canvas + code
 });
 
 /* keyboard shortcuts */
 
 //events for undo / redo
 document.addEventListener('keydown', e => {
-  const mod = e.ctrlKey || e.metaKey;     // Ctrl on Win/Linux, Cmd on macOS
-  if (!mod || e.altKey) return;           // ignore if Alt is held
+    const mod = e.ctrlKey || e.metaKey; // Ctrl on Win/Linux, Cmd on macOS
+    if (!mod || e.altKey) return; // ignore if Alt is held
 
-  if (e.key.toLowerCase() === 'z') {
-    e.preventDefault();                   // stop the browser’s own undo
-    if (e.shiftKey)   redoBtn.click();
-    else              undoBtn.click();
-  }
+    if (e.key.toLowerCase() === 'z') {
+        e.preventDefault(); // stop the browser’s own undo
+        if (e.shiftKey) redoBtn.click();
+        else undoBtn.click();
+    }
 });
 
 document.addEventListener('keydown', (e) => {
-  if (state.stickyFocus == null) return;
-  if (!e.altKey) return;
+    if (state.stickyFocus == null) return;
+    if (!e.altKey) return;
 
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-    e.preventDefault(); // block Back/Forward
-    // do NOT call stopPropagation()
-  }
-}, { capture: true });
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault(); // block Back/Forward
+        // do NOT call stopPropagation()
+    }
+}, {
+    capture: true
+});
 
 
 document.addEventListener('keydown', e => {
-  
-  // nothing to do if no sticky focus AND the key isn't Tab (which can set it)
-  const hasFocus = state.stickyFocus !== null;
-  // --- Tab / Shift+Tab: cycle sticky focus with rollover
-  if (e.key === 'Tab') {
-    const n = state.rects.length;
-    if (!n) return;
-    e.preventDefault();
 
-    if (!hasFocus) {
-      state.stickyFocus = e.shiftKey ? (n - 1) : 0;
-    } else {
-      const delta = e.shiftKey ? -1 : 1;
-      state.stickyFocus = (state.stickyFocus + delta + n) % n;
-    }
-    state.focusSource = 'canvas';
-    repaint();
-    return;
-  }
+    // nothing to do if no sticky focus AND the key isn't Tab (which can set it)
+    const hasFocus = state.stickyFocus !== null;
+    // --- Tab / Shift+Tab: cycle sticky focus with rollover
+    if (e.key === 'Tab') {
+        const n = state.rects.length;
+        if (!n) return;
+        e.preventDefault();
 
-  if (!hasFocus) return; // from here on we need a sticky focused rect
-
-  const idx = state.stickyFocus;
-  const ctrl = e.ctrlKey || e.metaKey || state.modDown;
-  const shift = e.shiftKey;
-  const pwr  = e.altKey || state.pwrDown;
-  let changed = false;
-
-  // --- Cmd/Ctrl + Enter: expand to maximum
-  if ((e.key === 'Enter' || e.key === 'NumpadEnter') && ctrl) {
-    e.preventDefault();
-    // expand to limit using your existing helper
-    changed = expandRectToLimit(idx);
-    if (changed) { update(); syncURL(); }
-    return;
-  }
-
-  // --- Cmd/Ctrl + '+' / '-' one-tick grow/shrink (wheel semantics)
-  if (ctrl) {
-    const isPlus  = (e.key === '+' || e.key === '=' || e.key === 'Add' || e.key === '≠');
-    const isMinus = (e.key === '-' || e.key === 'Subtract' || e.key === '–');
-
-    if (isPlus || isMinus) {
-      e.preventDefault(); // stop browser zoom
-
-      if(pwr){
-        
-        // POWER VARIANTS: push/pull neighbors
-        let res;
-        if (isPlus) {
-            res = expandAllSidesWithPushStep(state.rects, idx, state.rows, state.cols);
+        if (!hasFocus) {
+            state.stickyFocus = e.shiftKey ? (n - 1) : 0;
         } else {
-            const { r: tr, c: tc } = shrinkTargetCellForKeyboard(idx);
-            res = shrinkTowardCellWithPullStep(state.rects, idx, tr, tc, state.rows, state.cols);
+            const delta = e.shiftKey ? -1 : 1;
+            state.stickyFocus = (state.stickyFocus + delta + n) % n;
         }
-        if (res.changed) {
-            history();
-            state.rects = res.rects;
-            update(); syncURL();
-        }
+        state.focusSource = 'canvas';
+        repaint();
+        return;
+    }
 
-      } else {
+    if (!hasFocus) return; // from here on we need a sticky focused rect
 
-        // standard mode: stop at boundaries
-        const R = norm(state.rects[idx]);
-        let next = null;
+    const idx = state.stickyFocus;
+    const ctrl = e.ctrlKey || e.metaKey || state.modDown;
+    const shift = e.shiftKey;
+    const pwr = e.altKey || state.pwrDown;
+    let changed = false;
 
-        if (isPlus) {
-            next = growAllSidesOnce(R, idx);
-        } else { // isMinus
-            const { r: tr, c: tc } = shrinkTargetCellForKeyboard(idx);
-            next = shrinkTowardCellOnce(R, tr, tc);
-        }
-
-        if (next) {
-            history();
-            state.rects[idx] = next;
+    // --- Cmd/Ctrl + Enter: expand to maximum
+    if ((e.key === 'Enter' || e.key === 'NumpadEnter') && ctrl) {
+        e.preventDefault();
+        // expand to limit using your existing helper
+        changed = expandRectToLimit(idx);
+        if (changed) {
             update();
             syncURL();
         }
-      }
-      
-      return;
-    }
-  }
-
-  switch (e.key) {
-      
-    case 'Delete': case 'Backspace': {
-        if (state.stickyFocus == null) return;
-        commitDelete(state.stickyFocus, { strategy: 'retarget' });
         return;
     }
 
-    case 'Escape':
-        state.stickyFocus = null;
-        repaint();
-        return;
+    // --- Cmd/Ctrl + '+' / '-' one-tick grow/shrink (wheel semantics)
+    if (ctrl) {
+        const isPlus = (e.key === '+' || e.key === '=' || e.key === 'Add' || e.key === '≠');
+        const isMinus = (e.key === '-' || e.key === 'Subtract' || e.key === '–');
 
-    case 'ArrowLeft':
-        if (pwr) {
-        e.preventDefault();
-            const res = planPwrMoveStep(state.rects, idx, 0, -1, state.rows, state.cols);
-            if (res.ok) {
-                state.rects = res.rects;
-                changed = true;
+        if (isPlus || isMinus) {
+            e.preventDefault(); // stop browser zoom
+
+            if (pwr) {
+
+                // POWER VARIANTS: push/pull neighbors
+                let res;
+                if (isPlus) {
+                    res = expandAllSidesWithPushStep(state.rects, idx, state.rows, state.cols);
+                } else {
+                    const {
+                        r: tr,
+                        c: tc
+                    } = shrinkTargetCellForKeyboard(idx);
+                    res = shrinkTowardCellWithPullStep(state.rects, idx, tr, tc, state.rows, state.cols);
+                }
+                if (res.changed) {
+                    history();
+                    state.rects = res.rects;
+                    update();
+                    syncURL();
+                }
+
+            } else {
+
+                // standard mode: stop at boundaries
+                const R = norm(state.rects[idx]);
+                let next = null;
+
+                if (isPlus) {
+                    next = growAllSidesOnce(R, idx);
+                } else { // isMinus
+                    const {
+                        r: tr,
+                        c: tc
+                    } = shrinkTargetCellForKeyboard(idx);
+                    next = shrinkTowardCellOnce(R, tr, tc);
+                }
+
+                if (next) {
+                    history();
+                    state.rects[idx] = next;
+                    update();
+                    syncURL();
+                }
             }
-        } else {
-            if (ctrl && shift) { changed = contractRect(idx, 'E'); }
-            else if (ctrl)     { changed = expandRect(idx, 'W'); }
-            else               { changed = moveRect(idx, 0, -1); }
+
+            return;
         }
-        break;
+    }
 
-    case 'ArrowRight':
-      if (pwr) {
-        e.preventDefault();
-        const res = planPwrMoveStep(state.rects, idx, 0, 1, state.rows, state.cols);
-        if (res.ok) {
-            state.rects = res.rects;
-            changed = true;
+    switch (e.key) {
+
+        case 'Delete': case 'Backspace': {
+            if (state.stickyFocus == null) return;
+            commitDelete(state.stickyFocus, {
+                strategy: 'retarget'
+            });
+            return;
         }
-      } else {
-        if (ctrl && shift) { changed = contractRect(idx, 'W'); }
-        else if (ctrl)     { changed = expandRect(idx, 'E'); }
-        else               { changed = moveRect(idx, 0,  1); }
-      }
-      break;
-      
 
-    case 'ArrowUp':
-      if (pwr) {
-        e.preventDefault();
-        const res = planPwrMoveStep(state.rects, idx, -1, 0, state.rows, state.cols);
-        if (res.ok) {
-            state.rects = res.rects;
-            changed = true;
-        }
-      } else {
-        if (ctrl && shift) { changed = contractRect(idx, 'S'); }
-        else if (ctrl)     { changed = expandRect(idx, 'N'); }
-        else               { changed = moveRect(idx, -1, 0); }
-      }
-      break;
+        case 'Escape':
+            state.stickyFocus = null;
+            repaint();
+            return;
 
-    case 'ArrowDown':
-      if (pwr) {
-        e.preventDefault();
-        const res = planPwrMoveStep(state.rects, idx, 1, 0, state.rows, state.cols);
-        if (res.ok) {
-            state.rects = res.rects;
-            changed = true;
-        }
-      } else {
-        if (ctrl && shift) { changed = contractRect(idx, 'N'); }
-        else if (ctrl)     { changed = expandRect(idx, 'S'); }
-        else               { changed = moveRect(idx,  1, 0); }
-      }
-      break;
+        case 'ArrowLeft':
+            if (pwr) {
+                e.preventDefault();
+                if (ctrl && shift) {
+                    const res = pullChain(state.rects, idx, 'E', 1, state.rows, state.cols);
+                    if (res.applied > 0) { state.rects = res.rects; changed = true; }
+                } else if (ctrl) {
+                    const res = pushChain(state.rects, idx, 'W', 1, state.rows, state.cols);
+                    if (res.applied > 0) { state.rects = res.rects; changed = true; }
+                } else {
+                    const res = planPwrMoveStep(state.rects, idx, 0, -1, state.rows, state.cols);
+                    if (res.ok) { state.rects = res.rects; changed = true; }
+                }
+            } else {
+                if (ctrl && shift) {
+                    changed = contractRect(idx, 'E');
+                } else if (ctrl) {
+                    changed = expandRect(idx, 'W');
+                } else {
+                    changed = moveRect(idx, 0, -1);
+                }
+            }
+            break;
 
-    default:
-      return; // not a key we handle
-  }
+        case 'ArrowRight':
+            if (pwr) {
+                e.preventDefault();
+                if (ctrl && shift) {
+                    const res = pullChain(state.rects, idx, 'W', 1, state.rows, state.cols);
+                    if (res.applied > 0) { state.rects = res.rects; changed = true; }
+                } else if (ctrl) {
+                    const res = pushChain(state.rects, idx, 'E', 1, state.rows, state.cols);
+                    if (res.applied > 0) { state.rects = res.rects; changed = true; }
+                } else {
+                    const res = planPwrMoveStep(state.rects, idx, 0, 1, state.rows, state.cols);
+                    if (res.ok) { state.rects = res.rects; changed = true; }
+                }
+            } else {
+                if (ctrl && shift) {
+                    changed = contractRect(idx, 'W');
+                } else if (ctrl) {
+                    changed = expandRect(idx, 'E');
+                } else {
+                    changed = moveRect(idx, 0, 1);
+                }
+            }
+            break;
 
-  if (changed) {
-    e.preventDefault();   // stop page scroll / key repeat side-effects
-    history();
-    update();
-    syncURL();
-  }
+
+        case 'ArrowUp':
+            if (pwr) {
+                e.preventDefault();
+                if (ctrl && shift) {
+                    const res = pullChain(state.rects, idx, 'S', 1, state.rows, state.cols);
+                    if (res.applied > 0) { state.rects = res.rects; changed = true; }
+                } else if (ctrl) {
+                    const res = pushChain(state.rects, idx, 'N', 1, state.rows, state.cols);
+                    if (res.applied > 0) { state.rects = res.rects; changed = true; }
+                } else {
+                    const res = planPwrMoveStep(state.rects, idx, -1, 0, state.rows, state.cols);
+                    if (res.ok) { state.rects = res.rects; changed = true; }
+                }
+            } else {
+                if (ctrl && shift) {
+                    changed = contractRect(idx, 'S');
+                } else if (ctrl) {
+                    changed = expandRect(idx, 'N');
+                } else {
+                    changed = moveRect(idx, -1, 0);
+                }
+            }
+            break;
+
+        case 'ArrowDown':
+            if (pwr) {
+                e.preventDefault();
+                if (ctrl && shift) {
+                    const res = pullChain(state.rects, idx, 'N', 1, state.rows, state.cols);
+                    if (res.applied > 0) { state.rects = res.rects; changed = true; }
+                } else if (ctrl) {
+                    const res = pushChain(state.rects, idx, 'S', 1, state.rows, state.cols);
+                    if (res.applied > 0) { state.rects = res.rects; changed = true; }
+                } else {
+                    const res = planPwrMoveStep(state.rects, idx, 1, 0, state.rows, state.cols);
+                    if (res.ok) { state.rects = res.rects; changed = true; }
+                }
+            } else {
+                if (ctrl && shift) {
+                    changed = contractRect(idx, 'N');
+                } else if (ctrl) {
+                    changed = expandRect(idx, 'S');
+                } else {
+                    changed = moveRect(idx, 1, 0);
+                }
+            }
+            break;
+
+        default:
+            return; // not a key we handle
+    }
+
+    if (changed) {
+        e.preventDefault(); // stop page scroll / key repeat side-effects
+        history();
+        update();
+        syncURL();
+    }
 });
 
 //visual modifiers for stickyfocus
-document.addEventListener('keydown', (e) => { updateMods(e)});
-document.addEventListener('keyup',   (e) => { updateMods(e)});
+document.addEventListener('keydown', (e) => {
+    updateMods(e)
+});
+document.addEventListener('keyup', (e) => {
+    updateMods(e)
+});
 
 // When the window loses focus, clear modifiers (prevents stuck visuals)
 window.addEventListener('blur', () => {
     if (state.modDown || state.shiftDown || state.altDown || state.pwrDown) {
         state.modDown = state.shiftDown = state.altDown = state.pwrDown = false;
         updateMods();
+        updatePwrButtons();
         if (state.stickyFocus != null) repaint();
     }
 });
@@ -986,7 +1231,7 @@ const MOD_LABEL = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl';
 
 // Build the modal content (HTML) — uses your current behaviors
 function renderHelpHTML() {
-  return `
+    return `
   <div class="controls-grid">
     <div class="section">
     <h3><strong>Canvas</strong> (Left Panel) — Mouse (Default)</h3>
@@ -999,7 +1244,11 @@ function renderHelpHTML() {
     </div>
 
     <div class="section">
-    <h3><strong>Canvas</strong> (Left Panel) — Mouse (Alt/Option held)</h3>
+    <h3>
+        <strong>Canvas</strong> (Left Panel) — Mouse (
+        <span class="kbd" style="text-transform:none;">Alt</span> /
+        <span class="kbd" style="text-transform:none;">Option</span> held)
+    </h3>
         <div class="row"><span class="chip">Drag edge / corner</span> <span class="desc">Alt resize: push/pull other rectangles out of/into the way (up to 1-cell minimum)</span></div>
         <div class="row"><span class="chip">Drag inside rect</span> <span class="desc">Alt move: pushes blockers and pulls attached neighbors when possible</span></div>
         <div class="row"><span class="chip">Scroll</span> <span class="desc">Alt grow/shrink: expand (up) on all sides by pushing neighbors; shrink (down) toward hovered cell by pulling neighbors</span></div>
@@ -1019,15 +1268,39 @@ function renderHelpHTML() {
     </div>
 
     <div class="section">
-    <h3><strong>Canvas</strong> (Left Panel) — Keyboard (Focused + Alt/Option held)</h3>
-    <div class="row">
-        <span class="kbd">Alt</span> + <span class="kbd">←/→/↑/↓</span>
-        <span class="desc">Power move: pushes blockers and pulls attached neighbors when possible</span>
-    </div>
-    <div class="row">
-        <span class="kbd">${MOD_LABEL}</span> + <span class="kbd">Alt</span> + <span class="kbd">+</span>/<span class="kbd">−</span>
-        <span class="desc">Power grow/shrink</span></div>
-    
+        <h3><strong>Canvas</strong> (Left Panel) — Keyboard (
+            <span class="kbd" style="text-transform:none;">Alt</span> /
+            <span class="kbd" style="text-transform:none;">Option</span> held + Focused)</h3>
+
+        <div class="row"><span class="kbd">←/→/↑/↓</span>
+            <span class="desc">Power move: squeezes and stretches neighbors</span></div>
+
+        <div class="row">
+            <span class="kbd">${MOD_LABEL}</span> + <span class="kbd">+</span>/<span class="kbd">−</span>
+            <span class="desc">Power grow / shrink: squeezes and stretches neighbors </span></div>
+
+
+
+        <div class="row">
+            <span class="kbd">Ctrl</span> + 
+            <span class="kbd">←/→/↑/↓</span>
+            <span class="desc">Power expand (push): expand from that side, pushing neighbors (min 1×1)</span>
+        </div>
+
+        <div class="row">
+            <span class="kbd">Ctrl</span> + 
+            <span class="kbd">Shift</span> + 
+            <span class="kbd">←/→/↑/↓</span>
+            <span class="desc">Power contract (pull): contract from that side, pulling neighbors along</span>
+        </div>
+
+        <div class="row">
+            <span class="kbd">${MOD_LABEL}</span> + 
+            <span class="kbd">+</span>/<span class="kbd">−</span>
+            <span class="desc">Power grow/shrink (1 tick): push on grow; pull toward hovered cell on shrink</span>
+        </div>
+
+            
     </div>
 
     <div class="section">
@@ -1049,21 +1322,21 @@ function renderHelpHTML() {
 let _helpPrevFocus = null;
 
 function openHelp() {
-  helpContent.innerHTML = renderHelpHTML();
-  helpModal.classList.remove('hidden');
-  helpModal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('modal-open');
-  state.modalOpen = true;
-  _helpPrevFocus = document.activeElement;
-  helpClose.focus();
+    helpContent.innerHTML = renderHelpHTML();
+    helpModal.classList.remove('hidden');
+    helpModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    state.modalOpen = true;
+    _helpPrevFocus = document.activeElement;
+    helpClose.focus();
 }
 
 function closeHelp() {
-  helpModal.classList.add('hidden');
-  helpModal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('modal-open');
-  state.modalOpen = false;
-  if (_helpPrevFocus && _helpPrevFocus instanceof HTMLElement) _helpPrevFocus.focus();
+    helpModal.classList.add('hidden');
+    helpModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    state.modalOpen = false;
+    if (_helpPrevFocus && _helpPrevFocus instanceof HTMLElement) _helpPrevFocus.focus();
 }
 
 // click + keyboard bindings
@@ -1073,39 +1346,47 @@ helpBackdrop?.addEventListener('click', closeHelp);
 
 // ESC closes
 document.addEventListener('keydown', (e) => {
-  if (helpModal.classList.contains('hidden')) return;
-  if (e.key === 'Escape') {
-    e.preventDefault();
-    closeHelp();
-  }
+    if (helpModal.classList.contains('hidden')) return;
+    if (e.key === 'Escape') {
+        e.preventDefault();
+        closeHelp();
+    }
 });
 
 // focus trap inside modal
 helpModal.addEventListener('keydown', (e) => {
-  if (helpModal.classList.contains('hidden')) return;
-  if (e.key !== 'Tab') return;
+    if (helpModal.classList.contains('hidden')) return;
+    if (e.key !== 'Tab') return;
 
-  const focusables = helpModal.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  );
-  if (!focusables.length) return;
+    const focusables = helpModal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusables.length) return;
 
-  const first = focusables[0];
-  const last  = focusables[focusables.length - 1];
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
 
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault(); last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault(); first.focus();
-  }
+    if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+    }
 });
 
 // Optional: keyboard 'H' toggles help
 document.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() !== 'h') return;
-  // avoid typing in inputs
-  const t = e.target;
-  if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-  if (helpModal.classList.contains('hidden')) openHelp();
-  else closeHelp();
+    if (e.key.toLowerCase() !== 'h') return;
+    // avoid typing in inputs
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (helpModal.classList.contains('hidden')) openHelp();
+    else closeHelp();
+});
+
+// Fill: show red power hint + different tooltip
+registerPwrButton(fillBtn, {
+  tipPower:   'Fill gaps — POWER (Alt): will push/pull',
+  tipDefault: 'Fill gaps (Alt-click: Power Fill)'
 });

@@ -193,6 +193,19 @@ body.dark button:hover {
     background: #3c3c3c;
 }
 
+/* Power-mode visual for any button */
+button.power {
+  background: #e53935;
+  border-color: #b71c1c;
+  color: #fff;
+}
+
+body.dark button.power {
+  background: #c62828;
+  border-color: #8e1515;
+  color: #fff;
+}
+
 /* help button's gotta pop yo */
 
 /* Make only the Help button a blue "primary" */

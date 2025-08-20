@@ -12,6 +12,7 @@ export const clearBtn = document.getElementById('clearBtn');
 export const trimBtn = document.getElementById('trimBtn');
 export const reduceBtn = document.getElementById('reduceBtn');
 export const expandBtn = document.getElementById('expandBtn');
+export const fillBtn = document.getElementById('fillBtn');
 export const exportBtn = document.getElementById('exportBtn');
 export const importBtn = document.getElementById('importBtn');
 export const dimText = document.getElementById('dimText');
@@ -23,6 +24,7 @@ export const incURLEl = document.getElementById('incURL');
 export const renderRadios = document.getElementById('renderRadios');
 export const aspectEl    = document.getElementById('aspect');
 export const labelSwitch = document.getElementById('labelSwitch');
+
 //help info
 export const helpBtn     = document.getElementById('helpBtn');
 export const helpModal   = document.getElementById('helpModal');

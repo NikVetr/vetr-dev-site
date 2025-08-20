@@ -132,6 +132,7 @@ export function updateMods(e) {
   state.pwrDown   = nextPwr;
 
   setModIndicators();
+  updatePwrButtons();
   cursor();
   if (state.stickyFocus != null) repaint();
 
@@ -565,7 +566,7 @@ function collectBarriers(rects, excludeIdx, dir, pos, o0, o1, rows, cols) {
 
 // OUTWARD push: move active edge in 'dir' by at most 'amount', shrinking chains ahead
 // returns { ok, applied, rects }
-function pushChain(rectsIn, idx, dir, amount, rows, cols) {
+export function pushChain(rectsIn, idx, dir, amount, rows, cols) {
   if (!amount) return { ok: true, applied: 0, rects: rectsIn };
 
   const rects = rectsIn.map(r => ({ ...r }));
@@ -617,7 +618,7 @@ function pushChain(rectsIn, idx, dir, amount, rows, cols) {
 // INWARD pull: shrink active by 'amount' and let its immediate neighbors
 // expand into freed space; to create that room, chains *behind* them are pushed
 // in the opposite direction (reusing pushChain). Returns { ok, applied, rects }.
-function pullChain(rectsIn, idx, dir, amount, rows, cols) {
+export function pullChain(rectsIn, idx, dir, amount, rows, cols) {
   if (!amount) return { ok: true, applied: 0, rects: rectsIn };
 
   // Work on a fresh copy
@@ -960,4 +961,122 @@ export function planPwrMoveStep(rectsIn, idx, dr, dc, rows, cols) {
   if (V.ok)          return { ok:true, rects: V.rects  };
 
   return { ok:false, rects: rectsIn };
+}
+
+//Fill button functionality
+
+// Build an occupancy grid of the current layout (0 = empty, 1 = covered)
+export function buildOccupancy(rects, rows, cols) {
+  const occ = Array.from({ length: rows }, () => new Uint8Array(cols));
+  for (const r0 of rects) {
+    const r = norm(r0);
+    for (let rr = r.r0; rr < r.r1; rr++) {
+      for (let cc = r.c0; cc < r.c1; cc++) {
+        if (rr >= 0 && rr < rows && cc >= 0 && cc < cols) occ[rr][cc] = 1;
+      }
+    }
+  }
+  return occ;
+}
+
+export function hasEmptyCell(occ) {
+  for (let r = 0; r < occ.length; r++) {
+    const row = occ[r];
+    for (let c = 0; c < row.length; c++) if (row[c] === 0) return true;
+  }
+  return false;
+}
+
+// Is the immediate stripe next to side 'side' empty anywhere?
+export function adjacentEmptyAtSide(occ, R0, side, rows, cols) {
+  const R = norm(R0);
+  if (side === 'E') {
+    if (R.c1 >= cols) return false;
+    for (let rr = R.r0; rr < R.r1; rr++) if (occ[rr][R.c1] === 0) return true;
+    return false;
+  }
+  if (side === 'W') {
+    if (R.c0 - 1 < 0) return false;
+    for (let rr = R.r0; rr < R.r1; rr++) if (occ[rr][R.c0 - 1] === 0) return true;
+    return false;
+  }
+  if (side === 'S') {
+    if (R.r1 >= rows) return false;
+    for (let cc = R.c0; cc < R.c1; cc++) if (occ[R.r1][cc] === 0) return true;
+    return false;
+  }
+  // 'N'
+  if (R.r0 - 1 < 0) return false;
+  for (let cc = R.c0; cc < R.c1; cc++) if (occ[R.r0 - 1][cc] === 0) return true;
+  return false;
+}
+
+// Small helper: randomize side order to avoid bias
+export function shuffledSides() {
+  const a = ['N','S','W','E'];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = (Math.random() * (i + 1)) | 0;
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+//pwr mode indicator for buttons on hover
+// --- Power-aware buttons registry ------------------------------------------
+const _pwrBtnMap = new Map(); // el -> { classOn, tipPower, baseTip, tipDefault }
+
+/** Update a single registered button based on hover + power modifier. */
+function _updateOnePwrBtn(el) {
+  const opts = _pwrBtnMap.get(el);
+  if (!opts) return;
+  const hovered = el.matches(':hover');
+  const power   = hovered && (state.pwrDown || state.altDown);
+
+  el.classList.toggle(opts.classOn, power);
+
+  // Tooltip handling (optional)
+  if (opts.tipPower || opts.baseTip) {
+    el.dataset.tip = power
+      ? (opts.tipPower || opts.baseTip)
+      : (opts.tipDefault || opts.baseTip);
+  }
+}
+
+/** Exported: call to refresh all power-aware buttons (e.g. when Alt changes). */
+export function updatePwrButtons() {
+  for (const el of _pwrBtnMap.keys()) _updateOnePwrBtn(el);
+}
+
+/**
+ * Exported: make any button "power-aware".
+ * @param {HTMLElement} el  Button element
+ * @param {object} opts     { classOn='power', tipPower, tipDefault }
+ */
+export function registerPwrButton(el, opts = {}) {
+  if (!el) return () => {};
+
+  const cfg = {
+    classOn: 'power',
+    tipPower: undefined,
+    tipDefault: undefined,
+    baseTip: el.dataset.tip || '',
+    ...opts,
+  };
+  _pwrBtnMap.set(el, cfg);
+
+  const refresh = () => _updateOnePwrBtn(el);
+  el.addEventListener('mouseenter', refresh);
+  el.addEventListener('mouseleave', refresh);
+
+  // Initial hydration
+  _updateOnePwrBtn(el);
+
+  // Return disposer if you ever need to unbind
+  return () => {
+    el.removeEventListener('mouseenter', refresh);
+    el.removeEventListener('mouseleave', refresh);
+    _pwrBtnMap.delete(el);
+    el.classList.remove(cfg.classOn);
+    if (cfg.baseTip) el.dataset.tip = cfg.baseTip;
+  };
 }
