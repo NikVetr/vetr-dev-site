@@ -338,7 +338,7 @@ export function drawRects() {
             ctx.strokeRect(b.x + 0.5, b.y + 0.5, b.W - 1, b.H - 1);
             ctx.restore();
 
-            const mode = state.modDown ? (state.shiftDown ? 'contract' : 'expand') : 'move';
+            const mode = state.modActive ? (state.invActive ? 'contract' : 'expand') : 'move';
 
             // layout constants (tweak to taste)
             const pad = Math.max(12, Math.min(24, Math.min(b.W, b.H) * 0.08));  // inset from edges
@@ -458,40 +458,51 @@ export function drawLiveTransform() {
   const baseRects = state.baseAll ?? state.rects.map(r => norm(r));
 
   if (state.mode === 'moving') {
-    const v   = snap(...Object.values(state.cursorPos));
-    const dR  = v.r - state.grab.r;
-    const dC  = v.c - state.grab.c;
-      
-    // baseline: what we compare against in the overlay
-    const baseRects = (state.baseAll ?? state.rects).map(r => norm(r));
+    const { x, y } = state.cursorPos;
+    const { x: gx, y: gy } = state.grabPx;
+    const { w, h } = cell();
 
-    if (state.pwrDown) {
-        let remR = Math.abs(dR), remC = Math.abs(dC);
-        const sR = Math.sign(dR), sC = Math.sign(dC);
+    // cell-rounded deltas based purely on pixel movement
+    const dR = Math.round((y - gy) / h);
+    const dC = Math.round((x - gx) / w);
 
-        let plan         = baseRects.map(r => ({ ...r }));
-        let appliedSteps = 0;       // <- NEW
-        let blocked      = false;
+    if (state.pwrActive) {
+      let remR = Math.abs(dR), remC = Math.abs(dC);
+      const sR = Math.sign(dR), sC = Math.sign(dC);
 
-        while ((remR > 0 || remC > 0) && !blocked) {
-            const stepDr = remR > 0 ? sR : 0;
-            const stepDc = remC > 0 ? sC : 0;
+      const diagonalGesture = (remR > 0 && remC > 0);
+      const allowSinglePull = !diagonalGesture;
 
-            const res = planPwrMoveStep(plan, state.active, stepDr, stepDc, state.rows, state.cols);
-            if (!res.ok) { blocked = true; break; }
+      let plan         = baseRects.map(r => ({ ...r }));
+      let previewValid = false;
 
-            plan = res.rects;
-            appliedSteps++;
-            if (stepDr) remR--;
-            if (stepDc) remC--;
+      while ((remR > 0 || remC > 0)) {
+        const stepDr = remR > 0 ? sR : 0;
+        const stepDc = remC > 0 ? sC : 0;
+
+        const before = plan[state.active]; // snapshot current rect
+        const res = planPwrMoveStep(plan, state.active, stepDr, stepDc, state.rows, state.cols, { allowSinglePull });
+        if (!res.ok) break;
+
+        const after = res.rects[state.active];
+        plan = res.rects;
+
+        const movedR = (after.r0 !== before.r0) || (after.r1 !== before.r1);
+        const movedC = (after.c0 !== before.c0) || (after.c1 !== before.c1);
+
+        if (movedR) remR--;
+        if (movedC) remC--;
+
+        if (movedR || movedC) {
+          previewValid = true;
+        } else {
+          // nothing moved this tick → stop to avoid “over-drag”
+          break;
         }
+      }
 
-        // If we applied at least one step, preview is "valid" (blue); 
-        // if literally nothing can move this tick, mark invalid (red).
-        const previewValid = appliedSteps > 0;
-
-        drawPreviewOverlay(baseRects, plan, previewValid, state.active);
-        return;
+      drawPreviewOverlay(baseRects, plan, previewValid, state.active);
+      return;
   }
 
     // Normal MOVE preview (single rect)
@@ -511,7 +522,7 @@ export function drawLiveTransform() {
   {
     const v = snap(...Object.values(state.cursorPos));
 
-    if (state.pwrDown) {
+    if (state.pwrActive) {
       // power RESIZE preview (push/pull)
       const kind = state.resize;
       const { ok: valid, rects: plan } =

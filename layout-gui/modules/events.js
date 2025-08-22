@@ -12,6 +12,7 @@ import {
     redoBtn,
     exportBtn,
     importBtn,
+    fillBtn,
     darkEl,
     rowsEl,
     colsEl,
@@ -64,7 +65,7 @@ import {
     planPwrMoveStep,
     pushChain, pullChain,
     buildOccupancy, hasEmptyCell, adjacentEmptyAtSide, shuffledSides,
-    registerPwrButton
+    registerPwrButton, toggleLatch, clearPhysicalMods
 } from './helpers.js';
 
 import {
@@ -244,17 +245,22 @@ canvas.addEventListener('dblclick', e => {
     const colour = state.pool.shift() ?? `hsl(${Math.random()*360} 70% 75%)`;
     state.colours.push(colour);
 
-    // NEW: focus the freshly created rectangle (so the wheel works immediately)
+    // focus the freshly created rectangle (so the wheel works immediately)
     const newIdx = state.rects.length - 1;
     state.focus = newIdx; // used by wheel listener + canvas tint
-    // optional: make hover consistent with focus
+    if (state.pwrActive) {
+        expandRectToLimit(newIdx, { recordHistory: false });
+    }
+
+    // make hover consistent with focus
     state.hover = {
         kind: 'inside',
         idx: newIdx
     };
 
     update();
-    // optional: if you want the legend row to show the .focus style immediately:
+    
+    // legend row to show the .focus style immediately:
     requestAnimationFrame(() => {
         legendList.querySelector(`.legend-item[data-idx="${newIdx}"]`)
             ?.classList.add('focus');
@@ -295,13 +301,13 @@ canvas.addEventListener('mousedown', e => {
         state.base = norm(state.rects[hv.idx]);
         if (hv.kind === 'inside') {
             state.mode = 'moving';
-            state.grab = snap(x, y);
-            state.baseAll = state.pwrDown ? state.rects.map(r => norm(r)) : null;
-
+            state.grabPx = pos(e);
+            state.base   = norm(state.rects[hv.idx]);
+            state.baseAll = state.pwrActive ? state.rects.map(norm) : null;
         } else {
             state.mode = 'resizing';
             state.resize = hv.kind;
-            state.baseAll = state.pwrDown ? state.rects.map(r => norm(r)) : null;
+            state.baseAll = state.pwrActive ? state.rects.map(r => norm(r)) : null;
         }
     } else {
         state.mode = 'drawing';
@@ -350,39 +356,48 @@ window.addEventListener('mouseup', e => {
     }
 
     if (state.mode === 'moving') {
-        const v = snap(...Object.values(pos(e))),
-            dR = v.r - state.grab.r,
-            dC = v.c - state.grab.c;
+        const { x, y }   = pos(e);
+        const { x: gx, y: gy } = state.grabPx;
+        const { w, h }   = cell();
 
-        if (state.pwrDown) {
+        const dR = Math.round((y - gy) / h);
+        const dC = Math.round((x - gx) / w);
+
+        if (state.pwrActive) {
             // power commit
-            let remR = Math.abs(dR),
-                remC = Math.abs(dC);
-            const sR = Math.sign(dR),
-                sC = Math.sign(dC);
+            let remR = Math.abs(dR), remC = Math.abs(dC);
+            const sR = Math.sign(dR), sC = Math.sign(dC);
 
-            let rects = (state.baseAll ?? state.rects).map(r => ({
-                ...r
-            }));
-            let ok = true;
+            const diagonalGesture = (remR > 0 && remC > 0);
+            const allowSinglePull = !diagonalGesture;
+
+            let rects = (state.baseAll ?? state.rects).map(r => ({ ...r }));
             let moved = false;
 
-            while ((remR > 0 || remC > 0) && ok) {
-                const stepDr = remR > 0 ? sR : 0;
-                const stepDc = remC > 0 ? sC : 0;
+            while ((remR > 0 || remC > 0)) {
+            const stepDr = remR > 0 ? sR : 0;
+            const stepDc = remC > 0 ? sC : 0;
 
-                // ✨ both axes together = chooser runs each tick
-                const res = planPwrMoveStep(rects, state.active, stepDr, stepDc, state.rows, state.cols);
-                if (!res.ok) {
-                    ok = false;
-                    break;
-                }
+            const before = rects[state.active];
+            const res = planPwrMoveStep(rects, state.active, stepDr, stepDc, state.rows, state.cols, { allowSinglePull });
+            if (!res.ok) break;
 
-                rects = res.rects;
+            const after = res.rects[state.active];
+            rects = res.rects;
+
+            const movedR = (after.r0 !== before.r0) || (after.r1 !== before.r1);
+            const movedC = (after.c0 !== before.c0) || (after.c1 !== before.c1);
+
+            if (movedR) remR--;
+            if (movedC) remC--;
+
+            if (movedR || movedC) {
                 moved = true;
-                if (stepDr) remR--;
-                if (stepDc) remC--;
+            } else {
+                break;
             }
+            }
+
 
             state.mode = 'idle';
             state.baseAll = null;
@@ -398,6 +413,8 @@ window.addEventListener('mouseup', e => {
                 update();
                 syncURL();
             } else {
+                toggleStickyFocus(hv);
+                repaint();
                 update();
             }
             return;
@@ -434,7 +451,7 @@ window.addEventListener('mouseup', e => {
     if (state.mode === 'resizing') {
         const v = snap(...Object.values(pos(e)));
 
-        if (state.pwrDown) {
+        if (state.pwrActive) {
             const baseRects = state.rects.map(r => norm(r));
             const {
                 ok: valid,
@@ -492,12 +509,15 @@ window.addEventListener('mouseup', e => {
 });
 
 function wheelDir(e) {
-    const dy = e.deltaY;
-    if (dy > 0) return +1; // scroll down
-    if (dy < 0) return -1; // scroll up
-    // dy === 0  → could be +0 or -0; detect -0 via 1/dy
-    if (dy === 0 && 1 / dy === -Infinity) return -1; // negative zero
-    return 0; // truly zero
+  let sign = Math.sign(e.deltaY || 0);
+  if (sign === 0) {
+    if ('wheelDelta' in e)       sign = -Math.sign(e.wheelDelta);
+    else if ('detail' in e)      sign =  Math.sign(e.detail);
+    else if (e.deltaY === 0 && 1/e.deltaY === -Infinity) sign = -1; // -0 edge-case
+  }
+
+  if (state.invActive) sign = -sign;     // invert once, globally
+  return sign;                           // -1 = "up/expand", +1 = "down/shrink"
 }
 
 canvas.addEventListener('wheel', (e) => {
@@ -521,7 +541,7 @@ canvas.addEventListener('wheel', (e) => {
 
     let changed = false;
 
-    if (state.pwrDown) {
+    if (state.pwrActive) {
         // neighbor-aware chain logic
         if (dir < 0) {
             // expand outward one tick on all sides (push neighbors)
@@ -752,7 +772,7 @@ expandBtn.onclick = () => {
 fillBtn.onclick = (e) => {
   if (!state.rects.length) return;
 
-  const allowPower = !!e.altKey; // Alt-click = Power Fill
+  const allowPower = !!state.pwrActive;
   history();                     // one undo frame for the whole fill
   let changed = false;
 
@@ -964,7 +984,7 @@ labelSwitch.addEventListener('click', e => {
 //events for undo / redo
 document.addEventListener('keydown', e => {
     const mod = e.ctrlKey || e.metaKey; // Ctrl on Win/Linux, Cmd on macOS
-    if (!mod || e.altKey) return; // ignore if Alt is held
+    if (!mod) return;
 
     if (e.key.toLowerCase() === 'z') {
         e.preventDefault(); // stop the browser’s own undo
@@ -974,16 +994,12 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('keydown', (e) => {
-    if (state.stickyFocus == null) return;
-    if (!e.altKey) return;
-
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        e.preventDefault(); // block Back/Forward
-        // do NOT call stopPropagation()
-    }
-}, {
-    capture: true
-});
+  if (state.stickyFocus == null) return;
+  if (!state.pwrActive) return;
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    e.preventDefault();
+  }
+}, true);
 
 
 document.addEventListener('keydown', e => {
@@ -1010,13 +1026,13 @@ document.addEventListener('keydown', e => {
     if (!hasFocus) return; // from here on we need a sticky focused rect
 
     const idx = state.stickyFocus;
-    const ctrl = e.ctrlKey || e.metaKey || state.modDown;
-    const shift = e.shiftKey;
-    const pwr = e.altKey || state.pwrDown;
+    const mod = state.modActive;
+    const inv = state.invActive;
+    const pwr = state.pwrActive;
     let changed = false;
 
     // --- Cmd/Ctrl + Enter: expand to maximum
-    if ((e.key === 'Enter' || e.key === 'NumpadEnter') && ctrl) {
+    if ((e.key === 'Enter' || e.key === 'NumpadEnter') && mod) {
         e.preventDefault();
         // expand to limit using your existing helper
         changed = expandRectToLimit(idx);
@@ -1028,7 +1044,7 @@ document.addEventListener('keydown', e => {
     }
 
     // --- Cmd/Ctrl + '+' / '-' one-tick grow/shrink (wheel semantics)
-    if (ctrl) {
+    if (mod) {
         const isPlus = (e.key === '+' || e.key === '=' || e.key === 'Add' || e.key === '≠');
         const isMinus = (e.key === '-' || e.key === 'Subtract' || e.key === '–');
 
@@ -1101,10 +1117,10 @@ document.addEventListener('keydown', e => {
         case 'ArrowLeft':
             if (pwr) {
                 e.preventDefault();
-                if (ctrl && shift) {
+                if (mod && inv) {
                     const res = pullChain(state.rects, idx, 'E', 1, state.rows, state.cols);
                     if (res.applied > 0) { state.rects = res.rects; changed = true; }
-                } else if (ctrl) {
+                } else if (mod) {
                     const res = pushChain(state.rects, idx, 'W', 1, state.rows, state.cols);
                     if (res.applied > 0) { state.rects = res.rects; changed = true; }
                 } else {
@@ -1112,9 +1128,9 @@ document.addEventListener('keydown', e => {
                     if (res.ok) { state.rects = res.rects; changed = true; }
                 }
             } else {
-                if (ctrl && shift) {
+                if (mod && inv) {
                     changed = contractRect(idx, 'E');
-                } else if (ctrl) {
+                } else if (mod) {
                     changed = expandRect(idx, 'W');
                 } else {
                     changed = moveRect(idx, 0, -1);
@@ -1125,10 +1141,10 @@ document.addEventListener('keydown', e => {
         case 'ArrowRight':
             if (pwr) {
                 e.preventDefault();
-                if (ctrl && shift) {
+                if (mod && inv) {
                     const res = pullChain(state.rects, idx, 'W', 1, state.rows, state.cols);
                     if (res.applied > 0) { state.rects = res.rects; changed = true; }
-                } else if (ctrl) {
+                } else if (mod) {
                     const res = pushChain(state.rects, idx, 'E', 1, state.rows, state.cols);
                     if (res.applied > 0) { state.rects = res.rects; changed = true; }
                 } else {
@@ -1136,9 +1152,9 @@ document.addEventListener('keydown', e => {
                     if (res.ok) { state.rects = res.rects; changed = true; }
                 }
             } else {
-                if (ctrl && shift) {
+                if (mod && inv) {
                     changed = contractRect(idx, 'W');
-                } else if (ctrl) {
+                } else if (mod) {
                     changed = expandRect(idx, 'E');
                 } else {
                     changed = moveRect(idx, 0, 1);
@@ -1150,10 +1166,10 @@ document.addEventListener('keydown', e => {
         case 'ArrowUp':
             if (pwr) {
                 e.preventDefault();
-                if (ctrl && shift) {
+                if (mod && inv) {
                     const res = pullChain(state.rects, idx, 'S', 1, state.rows, state.cols);
                     if (res.applied > 0) { state.rects = res.rects; changed = true; }
-                } else if (ctrl) {
+                } else if (mod) {
                     const res = pushChain(state.rects, idx, 'N', 1, state.rows, state.cols);
                     if (res.applied > 0) { state.rects = res.rects; changed = true; }
                 } else {
@@ -1161,9 +1177,9 @@ document.addEventListener('keydown', e => {
                     if (res.ok) { state.rects = res.rects; changed = true; }
                 }
             } else {
-                if (ctrl && shift) {
+                if (mod && inv) {
                     changed = contractRect(idx, 'S');
-                } else if (ctrl) {
+                } else if (mod) {
                     changed = expandRect(idx, 'N');
                 } else {
                     changed = moveRect(idx, -1, 0);
@@ -1174,10 +1190,10 @@ document.addEventListener('keydown', e => {
         case 'ArrowDown':
             if (pwr) {
                 e.preventDefault();
-                if (ctrl && shift) {
+                if (mod && inv) {
                     const res = pullChain(state.rects, idx, 'N', 1, state.rows, state.cols);
                     if (res.applied > 0) { state.rects = res.rects; changed = true; }
-                } else if (ctrl) {
+                } else if (mod) {
                     const res = pushChain(state.rects, idx, 'S', 1, state.rows, state.cols);
                     if (res.applied > 0) { state.rects = res.rects; changed = true; }
                 } else {
@@ -1185,9 +1201,9 @@ document.addEventListener('keydown', e => {
                     if (res.ok) { state.rects = res.rects; changed = true; }
                 }
             } else {
-                if (ctrl && shift) {
+                if (mod && inv) {
                     changed = contractRect(idx, 'N');
-                } else if (ctrl) {
+                } else if (mod) {
                     changed = expandRect(idx, 'S');
                 } else {
                     changed = moveRect(idx, 1, 0);
@@ -1207,24 +1223,6 @@ document.addEventListener('keydown', e => {
     }
 });
 
-//visual modifiers for stickyfocus
-document.addEventListener('keydown', (e) => {
-    updateMods(e)
-});
-document.addEventListener('keyup', (e) => {
-    updateMods(e)
-});
-
-// When the window loses focus, clear modifiers (prevents stuck visuals)
-window.addEventListener('blur', () => {
-    if (state.modDown || state.shiftDown || state.altDown || state.pwrDown) {
-        state.modDown = state.shiftDown = state.altDown = state.pwrDown = false;
-        updateMods();
-        updatePwrButtons();
-        if (state.stickyFocus != null) repaint();
-    }
-});
-
 //help information
 // Detect platform modifier label
 const MOD_LABEL = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl';
@@ -1233,6 +1231,60 @@ const MOD_LABEL = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl';
 function renderHelpHTML() {
     return `
   <div class="controls-grid">
+
+    <div class="section section--full help-mods">
+    <div class="section-title">
+        <h3><strong>Modifier keys</strong></h3>
+        <div class="modbar" aria-hidden="true">
+        <div class="modchip">mod</div>
+        <div class="modchip">pwr</div>
+        <div class="modchip">inv</div>
+        </div>
+    </div>
+
+    <p class="blurb">Three modifiers change how actions behave:</p>
+
+    <div class="line">
+        <span class="label"><span class="modchip modchip--roundL">mod</span></span>
+        <span class="explain"><b>Cmd/Ctrl</b>. Switches focused <i>movement</i> ↔ <i>resize</i>.</span>
+    </div>
+
+    <div class="line">
+        <span class="label"><span class="modchip modchip--square">pwr</span></span>
+        <span class="explain"><b>Alt/Option</b>. <i>Squish / stretch</i> other rectangles when moving or resizing.</span>
+    </div>
+
+    <div class="line">
+        <span class="label"><span class="modchip modchip--roundR">inv</span></span>
+        <span class="explain"><b>Shift</b>. Inverts direction of resizing (expand → contract; push → pull).</span>
+    </div>
+
+    <span class="aside" style="margin-top:1.8rem;">(note: modifiers can also change the function of some buttons)</span>
+
+    <p class="blurb" style="margin-top:0.8rem;">
+        To activate, you can <b>hold</b> the keys:
+        <span class="demo">
+        <span class="modchip modchip--roundL">mod</span>
+        <span class="arrow">→</span>
+        <span class="modchip modchip--roundL on">mod</span>
+        </span>
+    </p>
+
+    <p class="blurb" style="margin-top:0.8rem;">
+        …or <b>toggle</b> the chips (click them or press <b>M</b>/<b>P</b>/<b>I</b>):
+        <span class="demo" style="margin-top:0.5rem;">
+        <span class="modchip modchip--roundL">mod</span>
+        <span class="arrow">→</span>
+        <span class="modchip modchip--roundL latched">mod</span>
+        </span>
+        <span class="aside">(holding latched modifiers cancels them)</span>
+    </p>
+
+    </div>
+
+
+
+    
     <div class="section">
     <h3><strong>Canvas</strong> (Left Panel) — Mouse (Default)</h3>
         <div class="row"><span class="chip">Click (rect)</span> <span class="desc">Toggle sticky focus on a rectangle; click empty grid to clear</span></div>
@@ -1246,8 +1298,7 @@ function renderHelpHTML() {
     <div class="section">
     <h3>
         <strong>Canvas</strong> (Left Panel) — Mouse (
-        <span class="kbd" style="text-transform:none;">Alt</span> /
-        <span class="kbd" style="text-transform:none;">Option</span> held)
+        <span class="kbd" style="text-transform:none;">pwr</span> mode)
     </h3>
         <div class="row"><span class="chip">Drag edge / corner</span> <span class="desc">Alt resize: push/pull other rectangles out of/into the way (up to 1-cell minimum)</span></div>
         <div class="row"><span class="chip">Drag inside rect</span> <span class="desc">Alt move: pushes blockers and pulls attached neighbors when possible</span></div>
@@ -1269,9 +1320,8 @@ function renderHelpHTML() {
 
     <div class="section">
         <h3><strong>Canvas</strong> (Left Panel) — Keyboard (
-            <span class="kbd" style="text-transform:none;">Alt</span> /
-            <span class="kbd" style="text-transform:none;">Option</span> held + Focused)</h3>
-
+            <span class="kbd" style="text-transform:none;">pwr</span> mode + Focused)</h3>
+        
         <div class="row"><span class="kbd">←/→/↑/↓</span>
             <span class="desc">Power move: squeezes and stretches neighbors</span></div>
 
@@ -1387,6 +1437,28 @@ document.addEventListener('keydown', (e) => {
 
 // Fill: show red power hint + different tooltip
 registerPwrButton(fillBtn, {
-  tipPower:   'Fill gaps — POWER (Alt): will push/pull',
-  tipDefault: 'Fill gaps (Alt-click: Power Fill)'
+  tipPower:   'Fill negative space — pwr mode will push / pull rectangles.',
+  tipDefault: 'Fill negative space — default mode will expand rects until they run into barriers.'
 });
+
+// chip clicks → latch/unlatch
+document.getElementById('modIndMod')  ?.addEventListener('click', () => toggleLatch('mod'));
+document.getElementById('modIndPwr')  ?.addEventListener('click', () => toggleLatch('pwr'));
+document.getElementById('modIndShift')?.addEventListener('click', () => toggleLatch('inv'));
+
+// m / p / i toggle (ignore when typing)
+const isEditable = el => el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+document.addEventListener('keydown', (e) => {
+  if (isEditable(e.target)) return;
+  const k = e.key.toLowerCase();
+  if (k === 'm') { e.preventDefault(); toggleLatch('mod'); }
+  if (k === 'p') { e.preventDefault(); toggleLatch('pwr'); }
+  if (k === 'i') { e.preventDefault(); toggleLatch('inv'); }
+});
+
+// keep physical flags in sync
+document.addEventListener('keydown', updateMods);
+document.addEventListener('keyup',   updateMods);
+
+// on blur, clear physical (leave latches)
+window.addEventListener('blur', clearPhysicalMods);

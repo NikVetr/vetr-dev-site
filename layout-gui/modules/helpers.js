@@ -40,6 +40,7 @@ export const snap = (x, y) => {
         c: clamp(Math.round(x / w), 0, state.cols)
     };
 };
+
 export const norm = ({
     r0,
     c0,
@@ -51,6 +52,7 @@ export const norm = ({
     r1: Math.max(r0, r1),
     c1: Math.max(c0, c1)
 });
+
 export const zero = r => r.r0 === r.r1 || r.c0 === r.c1;
 export const cor = r => [{
         r: r.r0,
@@ -88,60 +90,79 @@ export function ok(R, ignore = -1) {
     return true;
 }
 
+// --- indicators ---------------------------------------------------
 function setModIndicators() {
-  const elMod   = document.getElementById('modIndMod');
-  const elPwr   = document.getElementById('modIndPwr');
-  const elShift = document.getElementById('modIndShift');
-
-  if (!elMod || !elPwr || !elShift) {
-    // If you see this, your markup ids don’t match.
-    console.warn('mod chips missing:', { elMod: !!elMod, elPwr: !!elPwr, elShift: !!elShift });
-    return;
-  }
-
-  elMod.classList.toggle('on', !!state.modDown);
-  elPwr.classList.toggle('on', !!(state.pwrDown || state.altDown));
-  elShift.classList.toggle('on', !!state.shiftDown);
-
-  // Debug: see classes that are actually on the nodes
-  // (comment out when you’re happy)
-  // console.debug('chips:',
-  //   { mod: elMod.className, pwr: elPwr.className, shift: elShift.className });
+  const set = (id, {on, latched}) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('on', !!on);
+    el.classList.toggle('latched', !!latched);
+  };
+  set('modIndMod',   { on: state.modActive,  latched: state.modLatch });
+  set('modIndPwr',   { on: state.pwrActive,  latched: state.pwrLatch });
+  set('modIndShift', { on: state.invActive,  latched: state.invLatch });
 }
 
-export function updateMods(e) {
-  // Read from the event if present; otherwise keep current values.
-  const nextMod   = e ? !!(e.ctrlKey || e.metaKey) : state.modDown;
-  const nextShift = e ? !!e.shiftKey               : state.shiftDown;
-  // Some browsers are picky; getModifierState('Alt') helps on odd layouts
-  const altHeld   = e ? (e.altKey || (e.getModifierState && e.getModifierState('Alt'))) : state.altDown;
-  const nextPwr   = !!altHeld; // alias
+// compute effective = latch XOR physical-function
+function recomputeEffectiveMods() {
+  // derive function “Down” flags from physical keys
+  state.modDown = !!(state.ctrlDown || state.cmdDown);
+  state.pwrDown = !!(state.altDown  || state.optDown); // opt is alias of alt
+  state.invDown = !!state.shiftDown;
 
-  const changed = (
-    nextMod   !== state.modDown   ||
-    nextShift !== state.shiftDown ||
-    altHeld   !== state.altDown   ||
-    nextPwr   !== state.pwrDown
-  );
+  // effective (what to use everywhere in behavior)
+  state.modActive = !!(state.modLatch ^ state.modDown);
+  state.pwrActive = !!(state.pwrLatch ^ state.pwrDown);
+  state.invActive = !!(state.invLatch ^ state.invDown);
+}
+
+export const updateMods = (e) => {
+  // read physical keys from the event if present
+  const next = {
+    shiftDown: !!e?.shiftKey,
+    altDown:   !!e?.altKey,
+    ctrlDown:  !!e?.ctrlKey,
+    cmdDown:   !!e?.metaKey,
+    optDown:   !!e?.altKey
+  };
+
+  const changed =
+      next.shiftDown !== state.shiftDown ||
+      next.altDown   !== state.altDown   ||
+      next.ctrlDown  !== state.ctrlDown  ||
+      next.cmdDown   !== state.cmdDown   ||
+      next.optDown   !== state.optDown;
 
   if (!changed) return;
 
-  state.modDown   = nextMod;
-  state.shiftDown = nextShift;
-  state.altDown   = !!altHeld;
-  state.pwrDown   = nextPwr;
-
+  Object.assign(state, next);
+  recomputeEffectiveMods();
   setModIndicators();
   updatePwrButtons();
   cursor();
-  if (state.stickyFocus != null) repaint();
+  if (state.stickyFocus != null) repaint?.();
+  //console.log('inv = ' + state.invActive + ', pwr = ' + state.pwrActive, ', mod = ' + state.modActive);
+};
 
-  // Debug the flags we think are active (comment out when satisfied)
-  // console.debug('mods:', {
-  //   mod: state.modDown, shift: state.shiftDown, alt: state.altDown, pwr: state.pwrDown
-  // });
+// public toggles for latching via chip clicks / hotkeys
+export function toggleLatch(which) {
+  if (which === 'mod') state.modLatch = !state.modLatch;
+  if (which === 'pwr') state.pwrLatch = !state.pwrLatch;
+  if (which === 'inv') state.invLatch = !state.invLatch;
+
+  recomputeEffectiveMods();
+  setModIndicators();
+  if (state.stickyFocus != null) repaint?.();
 }
 
+// clear physical flags (not latches) e.g., on blur
+export function clearPhysicalMods() {
+  if (!state.shiftDown && !state.altDown && !state.ctrlDown && !state.cmdDown) return;
+  state.shiftDown = state.altDown = state.ctrlDown = state.cmdDown = state.optDown = false;
+  recomputeEffectiveMods();
+  setModIndicators();
+  if (state.stickyFocus != null) repaint?.();
+}
 
 /* ------ rectangle → canvas-pixel box ----------------------------- */
 export const rectBox = r => {
@@ -363,7 +384,7 @@ export function contractRect(idx, dir) {
   return true;
 }
 
-export function expandRectToLimit(idx) {
+export function expandRectToLimit(idx, { recordHistory = true } = {}) {
   let R = norm(state.rects[idx]);
   let grewAny = false;
 
@@ -389,7 +410,7 @@ export function expandRectToLimit(idx) {
   }
 
   if (grewAny) {
-    history();              // single undo step for the whole expansion
+    if (recordHistory) history();
     state.rects[idx] = R;
   }
   return grewAny;
@@ -787,7 +808,8 @@ export function shrinkTowardCellWithPullStep(rectsIn, idx, tr, tc, rows, cols) {
 
 // Count whether this step would *shrink* anyone at the *leading* edge.
 // We treat "shrink happened" as a boolean (0/1) per step for order choice.
-function moveOnceWithPullMetrics(rectsIn, idx, dir, rows, cols) {
+function moveOnceWithPullMetrics(rectsIn, idx, dir, rows, cols, opts = {}) {
+  const pullTrailing = opts.pullTrailing !== false; // default = true
   let rects = rectsIn.map(r => ({ ...r }));
 
   // Record trailing edge before the move
@@ -814,11 +836,12 @@ function moveOnceWithPullMetrics(rectsIn, idx, dir, rows, cols) {
   else                  A.r1 -= 1; // 'N'
 
   // 3) Pull along neighbors that were attached at the *old* trailing edge
-  const trailingGroup = neighborsAtCoord(rects, idx, trailing, trailingCoord, o0, o1);
-
-  for (const j of trailingGroup) {
-    const r2 = pushChain(rects, j, dir, 1, rows, cols);
-    rects = r2.rects; // if r2.applied===0 they just couldn't follow this tick (fine)
+  if (pullTrailing) {
+    const trailingGroup = neighborsAtCoord(rects, idx, trailing, trailingCoord, o0, o1);
+    for (const j of trailingGroup) {
+      const r2 = pushChain(rects, j, dir, 1, rows, cols);
+      rects = r2.rects;
+    }
   }
 
   return { ok: true, shrinks, rects };
@@ -902,65 +925,82 @@ function fillTrailingStrip(rectsBefore, rectsAfter, idx, dir, rows, cols) {
 
 // Pure-translate if possible, then *safely* pull trailing neighbors into the freed strip.
 // If filling the strip can’t be done safely, report failure so caller can fall back.
-function tryGaplessTranslateOne(rectsIn, idx, dir, rows, cols) {
-  const t = canTranslateOne(rectsIn, idx, dir, rows, cols);   // your existing helper
+function tryGaplessTranslateOne(rectsIn, idx, dir, rows, cols, opts = {}) {
+  const t = canTranslateOne(rectsIn, idx, dir, rows, cols);
   if (!t.ok) return t;
+
+  if (opts.pullTrailing === false) {
+    return t; // ok, gapless move with no trailing fill on this half-tick
+  }
 
   const after = t.rects.map(r => ({ ...r }));                 // copy before filling
   const filled = fillTrailingStrip(rectsIn, after, idx, dir, rows, cols);
   return filled.ok ? filled : { ok: false, rects: rectsIn };
 }
 
-export function planPwrMoveStep(rectsIn, idx, dr, dc, rows, cols) {
+export function planPwrMoveStep(rectsIn, idx, dr, dc, rows, cols, opts = {}) {
+  const allowSinglePull = (opts.allowSinglePull !== false); // default true
   if (!dr && !dc) return { ok: true, rects: rectsIn };
 
   // Single axis
   if (dc && !dr) {
     const dirH = dc > 0 ? 'E' : 'W';
-    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols);
+    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols, { pullTrailing: allowSinglePull });
     if (gapless.ok) return gapless; // ✅ pull trailing neighbors safely
     const h = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols); // fallback
     return h.ok ? { ok:true, rects:h.rects } : { ok:false, rects:rectsIn };
   }
   if (dr && !dc) {
     const dirV = dr > 0 ? 'S' : 'N';
-    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols);
+    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols, { pullTrailing: allowSinglePull });
     if (gapless.ok) return gapless;
-    const v = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols);
+    const v = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing: allowSinglePull });
     return v.ok ? { ok:true, rects:v.rects } : { ok:false, rects:rectsIn };
   }
 
-  // Diagonal tick: try gapless on both axes in both orders
-  const dirH = dc > 0 ? 'E' : 'W';
-  const dirV = dr > 0 ? 'S' : 'N';
+  // ----- diagonal tick: NO-PULL on first half, PULL on second -----
+    const dirH = dc > 0 ? 'E' : 'W';
+    const dirV = dr > 0 ? 'S' : 'N';
 
-  const H1 = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols);
-  if (H1.ok) {
-    const HV = tryGaplessTranslateOne(H1.rects, idx, dirV, rows, cols);
-    if (HV.ok) return HV;
-  }
+    // Gapless H→V
+    const H1 = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols, { pullTrailing:false });
+    if (H1.ok) {
+      const HV = tryGaplessTranslateOne(H1.rects, idx, dirV, rows, cols, { pullTrailing:true });
+      if (HV.ok) return HV;
+    }
 
-  const V1 = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols);
-  if (V1.ok) {
-    const VH = tryGaplessTranslateOne(V1.rects, idx, dirH, rows, cols);
-    if (VH.ok) return VH;
-  }
+    // Gapless V→H
+    const V1 = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols, { pullTrailing:false });
+    if (V1.ok) {
+      const VH = tryGaplessTranslateOne(V1.rects, idx, dirH, rows, cols, { pullTrailing:true });
+      if (VH.ok) return VH;
+    }
 
-  if (H1.ok) return H1;
-  if (V1.ok) return V1;
+    // If only one axis can move gaplessly, keep your behavior
+    if (H1.ok) return H1;
+    if (V1.ok) return V1;
 
-  // Fallback: robust push/pull chooser
-  const H = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols);
-  const HV = H.ok ? moveOnceWithPullMetrics(H.rects, idx, dirV, rows, cols) : { ok:false, rects:rectsIn };
-  const V = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols);
-  const VH = V.ok ? moveOnceWithPullMetrics(V.rects, idx, dirH, rows, cols) : { ok:false, rects:rectsIn };
+    // Aggressive single-axis progress (unchanged except explicit pullTrailing)
+    const H2 = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols, { pullTrailing:true });
+    if (H2.ok) return { ok: true, rects: H2.rects };
+    const V2 = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing:true });
+    if (V2.ok) return { ok: true, rects: V2.rects };
 
-  if (H.ok && HV.ok) return { ok:true, rects: HV.rects };
-  if (V.ok && VH.ok) return { ok:true, rects: VH.rects };
-  if (H.ok)          return { ok:true, rects: H.rects  };
-  if (V.ok)          return { ok:true, rects: V.rects  };
+    // Fallback chooser with the same no-pull-first policy
+    const H = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols, { pullTrailing:false });
+    const HV = H.ok ? moveOnceWithPullMetrics(H.rects, idx, dirV, rows, cols, { pullTrailing:true })
+                    : { ok:false, rects:rectsIn };
 
-  return { ok:false, rects: rectsIn };
+    const V = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing:false });
+    const VH = V.ok ? moveOnceWithPullMetrics(V.rects, idx, dirH, rows, cols, { pullTrailing:true })
+                    : { ok:false, rects:rectsIn };
+
+    if (H.ok && HV.ok) return { ok:true, rects: HV.rects };
+    if (V.ok && VH.ok) return { ok:true, rects: VH.rects };
+    if (H.ok)          return { ok:true, rects: H.rects  };
+    if (V.ok)          return { ok:true, rects: V.rects  };
+
+    return { ok:false, rects: rectsIn };
 }
 
 //Fill button functionality
@@ -1030,7 +1070,7 @@ function _updateOnePwrBtn(el) {
   const opts = _pwrBtnMap.get(el);
   if (!opts) return;
   const hovered = el.matches(':hover');
-  const power   = hovered && (state.pwrDown || state.altDown);
+  const power = hovered && !!state.pwrActive;
 
   el.classList.toggle(opts.classOn, power);
 

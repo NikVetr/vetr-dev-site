@@ -12,7 +12,7 @@ import { generateCode } from './code-generator.js'
 /* ---------- controls ---------- */
 export function cursor() {
   if (!state.hover) {
-    canvas.style.cursor = state.pwrDown ? 
+    canvas.style.cursor = state.pwrActive ? 
     "url('assets/cursors/crosshair.png') 16 16, crosshair" : 'crosshair';
     return;
   }
@@ -43,7 +43,7 @@ export function cursor() {
     cornerSE: "url('assets/cursors/nwse-resize.png') 12 12, nwse-resize"
   };
 
-  const map = state.pwrDown ? pwr : base;
+  const map = state.pwrActive ? pwr : base;
   canvas.style.cursor = map[state.hover.kind] || 'crosshair';
 }
 
@@ -385,4 +385,3 @@ export const update = () => {
     cursor();
     syncURL();
 };
-

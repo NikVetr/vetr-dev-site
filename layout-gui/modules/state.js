@@ -43,10 +43,23 @@ export const state = {
     grab: null,
 
     //keyboard modifier keys
-    modDown: false,
     shiftDown: false,
     altDown: false,
+    ctrlDown: false,
+    cmdDown: false,
+    optDown: false,
+
+    modDown: false,
     pwrDown: false,
+    invDown: false,
+  
+    modLatch:false,
+    pwrLatch:false,
+    invLatch:false,
+
+    modActive:false,
+    pwrActive:false,
+    invActive:false,
 
     //initial canvas welcome message
     hasEverHadRect: false,

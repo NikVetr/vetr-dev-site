@@ -25,9 +25,9 @@
         <h1>multipanel <code>web-gui</code></h1>
         <button id="helpBtn" class="btn" data-tip="Keyboard & mouse controls and shortcuts"> ? </button>
         <div id="modIndicators" class="modbar" aria-label="Modifier keys state">
-            <div id="modIndMod"   class="modchip" data-tip="Cmd/Ctrl">mod</div>
-            <div id="modIndPwr"   class="modchip" data-tip="Alt/Option">pwr</div>
-            <div id="modIndShift" class="modchip" data-tip="Shift">shift</div>
+            <div id="modIndMod"   class="modchip" data-tip="The 'Mod' modifier is mapped to Cmd / Ctrl and shifts you from movement operations to resizing operations in Focus mode.">mod</div>
+            <div id="modIndPwr"   class="modchip" data-tip="The 'Pwr' modifier is mapped to Alt / Option and makes rectangle operations squish or stretch other rectangles in the event of collision.">pwr</div>
+            <div id="modIndShift" class="modchip" data-tip="The 'Inv' modifier is mapped to Shift and inverts the directionality of rectangle operations, eg. from expansion to contraction.">inv</div>
         </div>
 
         <div class="controls">
@@ -116,7 +116,7 @@
 
         <div class="splitter" id="splitRight"></div> <!-- ⬅︎ move inside .main -->
 
-        <div class="rcode"> <!-- ⬅︎ move inside .main -->
+        <div class="coderenderer"> <!-- ⬅︎ move inside .main -->
             <div class="toolbar">
                 <h2 class="hint">Code Output</h2>
 
@@ -130,44 +130,76 @@
                         <input type="checkbox" id="incURL" checked> URL
                     </label>
 
+                    <label data-tip="example code that will render nonsense plots given your current configuration">
+                        <input type="checkbox" id="incExample" > Example
+                    </label>
+
                 </fieldset>
 
-                <div class="render-select" id="renderRadios">
+                <div class="render-select chip-radios" id="renderRadios">
                     <!-- R --------------- -->
                     <fieldset>
                         <legend>R</legend>
-                        <label><input type="radio" name="render" value="layout" checked>layout</label>
-                        <label><input type="radio" name="render" value="gridExtra">gridExtra</label>
-                        <label><input type="radio" name="render" value="cowplot">cowplot</label>
-                        <label><input type="radio" name="render" value="patchwork">patchwork</label>
-                        <label><input type="radio" name="render" value="parfig">par(fig)</label>
+                        <label><input type="radio" name="render" value="layout" checked>layout</span></label>
+                        <label><input type="radio" name="render" value="grid"><span>grid</span></label>
+                        <label><input type="radio" name="render" value="gridExtra"><span>gridExtra</span></label>
+                        <label><input type="radio" name="render" value="cowplot"><span>cowplot</span></label>
+                        <label><input type="radio" name="render" value="patchwork"><span>patchwork</span></label>
+                        <label><input type="radio" name="render" value="parfig"><span>par(fig)</span></label>
                     </fieldset>
-
+                    
                     <!-- Python ---------- -->
                     <fieldset>
                         <legend>Python</legend>
-                        <label><input type="radio" name="render" value="mpl">matplotlib</label>
-                        <label><input type="radio" name="render" value="plotly">plotly</label>
-                        <label><input type="radio" name="render" value="bokeh">bokeh</label>
+                        <label><input type="radio" name="render" value="mpl"><span>mpl</span></label>
+                        <label><input type="radio" name="render" value="mpl_axes"><span>mpl (abs)</span></label>
+                        <label><input type="radio" name="render" value="mpl_mosaic"><span>mpl (mosaic)</span></label>
+                        <label><input type="radio" name="render" value="plotly"><span>plotly</span></label>
+                        <label><input type="radio" name="render" value="bokeh"><span>bokeh</span></label>
                     </fieldset>
-
+                    
                     <!-- Julia ----------- -->
                     <fieldset>
                         <legend>Julia</legend>
-                        <label><input type="radio" name="render" value="makie">Makie</label>
+                        <label><input type="radio" name="render" value="makie"><span>Makie.jl</span></label>
+                        <label><input type="radio" name="render" value="plots"><span>Plots.jl</span></label>
                     </fieldset>
-
+                    
+                    <!-- MATLAB / Octave ----------- -->
+                    <fieldset>
+                        <legend>MATLAB</legend>
+                        <label><input type="radio" name="render" value="tiled"><span>tiledlayout</span></label>
+                    </fieldset>
+                    
+                    <!-- Mathematica ----------- -->
+                    <fieldset>
+                        <legend>Mathematica</legend>
+                        <label><input type="radio" name="render" value="mma_grid"><span>grid</span></label>
+                    </fieldset>
+                    
+                    <!-- LaTeX ----------- -->
+                    <fieldset>
+                        <legend><i>L<sub><span style="position:relative; right:.1em">A</span></sub><span style="position:relative; right:.3em"><span></style>T</b><sup>E</sup><span style="position:relative; right:.2em"></span><span style="position:relative; right:.1em">X</span></i></legend>
+                        <label><input type="radio" name="render" value="textpos"><span>textpos</span></label>
+                        <label><input type="radio" name="render" value="tikz"><span>TikZ</span></label>
+                        <label><input type="radio" name="render" value="tabularx"><span>tabularx</span></label>
+                    </fieldset>
+                    
                     <!-- Other ----------- -->
                     <fieldset>
                         <legend>Other</legend>
-                        <label><input type="radio" name="render" value="csv">csv</label>
+                        <label><input type="radio" name="render" value="csv_inds"><span>inds</span></label>
+                        <label><input type="radio" name="render" value="csv_coords"><span>coords</span></label>
+                        <label><input type="radio" name="render" value="csv_dims"><span>dims</span></label>
+                        <label><input type="radio" name="render" value="json"><span>json</span></label>
+                        <label><input type="radio" name="render" value="yaml"><span>yaml</span></label>
                     </fieldset>
                 </div>
 
 
                 <button id="copyBtn" class="primary">Copy</button>
             </div>
-            <textarea id="rcode" readonly></textarea>
+            <textarea id="coderenderer" readonly></textarea>
         </div>
     </div>
 

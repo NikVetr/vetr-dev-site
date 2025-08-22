@@ -7,7 +7,7 @@ import { decodeState, norm, syncURL }  from './modules/helpers.js';
 import { repaint }      from './modules/canvas.js';
 import { legend }       from './modules/legend.js';
 import {
-  generateCode, renderer,   // <- renderer has a .value property
+  generateCode, renderer,
 }                       from './modules/code-generator.js';
 import { resizeCanvas, update, rescaleSplitWidths } from './modules/controls.js';
 
