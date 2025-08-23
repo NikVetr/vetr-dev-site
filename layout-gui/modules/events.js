@@ -47,6 +47,7 @@ import {
     ok,
     rectBox,
     col,
+    opp,
     syncURL,
     cell,
     cellAtPx,
@@ -65,7 +66,9 @@ import {
     planPwrMoveStep,
     pushChain, pullChain,
     buildOccupancy, hasEmptyCell, adjacentEmptyAtSide, shuffledSides,
-    registerPwrButton, toggleLatch, clearPhysicalMods
+    registerPwrButton, toggleLatch, clearPhysicalMods,
+    nearestSidePx, growAxisSymOnce, shrinkAxisSymOnce,
+    resolveTinyOverlaps
 } from './helpers.js';
 
 import {
@@ -88,7 +91,8 @@ import {
     pos,
     hit,
     cursor,
-    maxDelta
+    maxDelta,
+    edgeKind
 } from './controls.js';
 
 function flashCopied() {
@@ -300,10 +304,19 @@ canvas.addEventListener('mousedown', e => {
         state.active = hv.idx;
         state.base = norm(state.rects[hv.idx]);
         if (hv.kind === 'inside') {
-            state.mode = 'moving';
-            state.grabPx = pos(e);
-            state.base   = norm(state.rects[hv.idx]);
-            state.baseAll = state.pwrActive ? state.rects.map(norm) : null;
+            if (state.modActive) {
+                // CLONE mode
+                state.mode       = 'cloning';
+                state.cloneFrom  = hv.idx;
+                state.cloneBase  = norm(state.rects[hv.idx]);
+                state.grabPx     = pos(e);
+                state.grab       = snap(...Object.values(state.grabPx));
+            } else {
+                state.mode = 'moving';
+                state.grabPx = pos(e);
+                state.base   = norm(state.rects[hv.idx]);
+                state.baseAll = state.pwrActive ? state.rects.map(norm) : null;
+            }
         } else {
             state.mode = 'resizing';
             state.resize = hv.kind;
@@ -448,6 +461,132 @@ window.addEventListener('mouseup', e => {
         }
     }
 
+    if (state.mode === 'cloning') {
+        // Safety 
+        const srcIdx = state.cloneFrom;
+        const src0   = state.cloneBase ?? state.rects[srcIdx];
+        if (srcIdx == null || !src0) {
+            state.mode = 'idle';
+            state.cloneFrom = state.cloneBase = null;
+            update();
+            return;
+        }
+        const src = norm(src0);
+
+        // Pixel-based deltas (same feel as move/power-move) 
+        const { x, y }       = pos(e);
+        const { x: gx, y: gy } = state.grabPx;      // set when clone starts
+        const { w, h }       = cell();
+        const dR = Math.round((y - gy) / h);
+        const dC = Math.round((x - gx) / w);
+
+        // Shared helpers 
+        const overlaps = (A, B) =>
+            !(A.r1 <= B.r0 || A.r0 >= B.r1 || A.c1 <= B.c0 || A.c0 >= B.c1);
+
+        const inBounds = (R) =>
+            R.r0 >= 0 && R.c0 >= 0 && R.r1 <= state.rows && R.c1 <= state.cols;
+
+        const clampInside = (R) => {
+            const hh = R.r1 - R.r0, ww = R.c1 - R.c0;
+            R.r0 = clamp(R.r0, 0, state.rows - hh);
+            R.c0 = clamp(R.c0, 0, state.cols - ww);
+            R.r1 = R.r0 + hh;
+            R.c1 = R.c0 + ww;
+            return R;
+        };
+
+        let committed = false;
+
+        if (state.pwrActive) {
+            // POWER CLONE: simulate push/pull like power-move
+            // Build sim world WITHOUT the source (so it never gets pushed)
+            let sim = state.rects.map(norm);
+            sim.splice(srcIdx, 1);
+
+            // Insert the clone at the source’s pose as the last element
+            let kClone = sim.length;
+            sim.push({ ...src });
+
+            let remR = Math.abs(dR), remC = Math.abs(dC);
+            const sR = Math.sign(dR), sC = Math.sign(dC);
+            const diagonalGesture = (remR > 0 && remC > 0);
+            const allowSinglePull = !diagonalGesture;
+
+            let movedAny = false;
+            while (remR > 0 || remC > 0) {
+            const stepDr = remR > 0 ? sR : 0;
+            const stepDc = remC > 0 ? sC : 0;
+
+            const before = sim[kClone];
+            const res = planPwrMoveStep(sim, kClone, stepDr, stepDc, state.rows, state.cols, { allowSinglePull, pullTrailing: false });
+            if (!res.ok) break;
+
+            const after = res.rects[kClone];
+            sim = res.rects;
+
+            const movedR = (after.r0 !== before.r0) || (after.r1 !== before.r1);
+            const movedC = (after.c0 !== before.c0) || (after.c1 !== before.c1);
+            if (movedR) remR--;
+            if (movedC) remC--;
+            if (movedR || movedC) movedAny = true;
+            else break;
+            }
+
+            if (movedAny) {
+            const finalClone = sim[kClone];
+
+            // Disallow landing overlapping the original
+            if (!overlaps(finalClone, src)) {
+                history();
+
+                // Reinsert untouched source at its original index, append clone
+                const finalRects = sim.slice();
+                finalRects.splice(srcIdx, 0, src); // put source back
+                state.rects = finalRects;
+
+                // New color + empty alias
+                state.aliases.push('');
+                const colour = state.pool.shift() ?? `hsl(${Math.random()*360} 70% 75%)`;
+                state.colours.push(colour);
+
+                committed = true;
+            }
+            }
+        } else {
+            // BASE CLONE: pixel-rounded, clamped, no overlaps
+            let clone = norm({
+            r0: src.r0 + dR, c0: src.c0 + dC,
+            r1: src.r1 + dR, c1: src.c1 + dC
+            });
+            clone = clampInside(clone);
+
+            const fits = inBounds(clone) && state.rects.every(R =>
+            clone.r1 <= R.r0 || clone.r0 >= R.r1 ||
+            clone.c1 <= R.c0 || clone.c0 >= R.c1
+            );
+
+            if (fits) {
+            history();
+            state.rects.push(clone);
+            state.aliases.push('');
+            const colour = state.pool.shift() ?? `hsl(${Math.random()*360} 70% 75%)`;
+            state.colours.push(colour);
+            committed = true;
+            }
+        }
+
+        // Exit clone mode (common)
+        state.mode = 'idle';
+        state.cloneFrom = null;
+        state.cloneBase = null;
+
+        if (committed) { update(); syncURL(); }
+        else { repaint(); } // clear ghost overlay
+        return;
+        }
+
+
     if (state.mode === 'resizing') {
         const v = snap(...Object.values(pos(e)));
 
@@ -515,8 +654,6 @@ function wheelDir(e) {
     else if ('detail' in e)      sign =  Math.sign(e.detail);
     else if (e.deltaY === 0 && 1/e.deltaY === -Infinity) sign = -1; // -0 edge-case
   }
-
-  if (state.invActive) sign = -sign;     // invert once, globally
   return sign;                           // -1 = "up/expand", +1 = "down/shrink"
 }
 
@@ -528,18 +665,131 @@ canvas.addEventListener('wheel', (e) => {
     const idx = state.focus;
     if (idx == null) return;
 
-    const {
-        x,
-        y
-    } = pos(e);
-    const {
-        r: tr,
-        c: tc
-    } = cellAtPx(x, y);
+    const {x, y} = pos(e);
+    const {r: tr, c: tc} = cellAtPx(x, y);
+    const R = norm(state.rects[idx]);
     const dir = wheelDir(e); // -1 (up), +1 (down), 0 (none), with -0 handled
     //console.log('wheel:', { idx, sticky: state.stickyFocus, hover: state.focus, shiftKey: e.shiftKey, deltaY: e.deltaY, dir });
 
     let changed = false;
+    const hoverKind = edgeKind(x, y, R, 10); // 'edgeN'|'edgeS'|'edgeW'|'edgeE'|'cornerNE'... or null
+    const wantDirectional = state.modActive || !!hoverKind;
+
+    //directional expansion
+    if (wantDirectional) {
+        e.preventDefault();
+
+        // Helpers
+        const sideFromKind = k => k ? k.slice(4) : null;             // 'edgeN' -> 'N'
+        const cornerFromKind = k => k ? k.slice(6) : null;           // 'cornerNE' -> 'NE'
+        const oppSide = s => ({N:'S',S:'N',W:'E',E:'W'})[s];
+        const oppCorner = cr => ({NW:'SE', NE:'SW', SW:'NE', SE:'NW'})[cr];
+
+        // Decide anchor (where the cursor is): edge/corner if present, otherwise nearest side by pixels
+        const anchorCorner = hoverKind?.startsWith('corner') ? cornerFromKind(hoverKind) : null;
+        const anchorSide   = hoverKind?.startsWith('edge')
+                            ? sideFromKind(hoverKind)
+                            : (!anchorCorner ? nearestSidePx(R, x, y) : null);
+
+        let changedLocal = false;
+
+        if (anchorCorner) {
+            const oppCorner = cr => ({NW:'SE', NE:'SW', SW:'NE', SE:'NW'})[cr];
+            const opC = oppCorner(anchorCorner);       // e.g. NW → SE
+            const sidesFor = { SE:['S','E'], SW:['S','W'], NE:['N','E'], NW:['N','W'] }[opC];
+
+            const sideKind = s => (s==='E'?'edgeE':s==='W'?'edgeW':s==='S'?'edgeS':'edgeN');
+
+            // one-cell targets for a single side
+            const outwardFor = (R, side) =>
+                side === 'E' ? { r:R.r1,     c:R.c1+1 } :
+                side === 'W' ? { r:R.r0,     c:R.c0-1 } :
+                side === 'S' ? { r:R.r1+1,   c:R.c1   } :
+                            { r:R.r0-1,   c:R.c0   }; // 'N'
+            const inwardFor = (R, side) =>
+                side === 'E' ? { r:R.r1,     c:R.c1-1 } :
+                side === 'W' ? { r:R.r0,     c:R.c0+1 } :
+                side === 'S' ? { r:R.r1-1,   c:R.c1   } :
+                            { r:R.r0+1,   c:R.c0   }; // 'N'
+
+            let changedLocal = false;
+
+            if (state.pwrActive) {
+                // Try both axes independently (so one can move even if the other can't)
+                let plan = state.rects.map(norm);
+                const before = plan[idx];
+
+                for (const side of sidesFor) {
+                const kind = sideKind(side);
+                const aim  = (dir < 0) ? outwardFor(before, side)
+                            : (dir > 0) ? inwardFor(before, side)
+                            : null;
+                if (!aim) continue;
+
+                const res = planShiftResizeComposite(plan, idx, kind, aim, state.rows, state.cols);
+                if (res.ok) {
+                    // Did the active rect actually change?
+                    const A = res.rects[idx];
+                    if (A.r0!==plan[idx].r0 || A.c0!==plan[idx].c0 || A.r1!==plan[idx].r1 || A.c1!==plan[idx].c1) {
+                    plan = res.rects;
+                    changedLocal = true;
+                    }
+                }
+                }
+
+                if (changedLocal) { state.rects = plan; history(); update(); syncURL(); }
+                return;
+            } else {
+                // Non-power: already independent single-axis ticks
+                let changed = false;
+                if (dir < 0) { // grow
+                for (const s of sidesFor) changed = expandRect(idx, s) || changed;
+                } else if (dir > 0) { // shrink
+                for (const s of sidesFor) changed = contractRect(idx, s) || changed;
+                }
+                if (changed) { history(); update(); syncURL(); }
+                return;
+            }
+        } else if (anchorSide) {
+            // ----- Edge anchor → operate on the OPPOSITE side (single axis) -----
+            const sideOpp = oppSide(anchorSide);
+
+            if (state.pwrActive) {
+                // one-cell composite edge-resize toward/away from sideOpp
+                const kind =
+                sideOpp === 'E' ? 'edgeE' :
+                sideOpp === 'W' ? 'edgeW' :
+                sideOpp === 'S' ? 'edgeS' : 'edgeN';
+
+                const outwardTarget =
+                sideOpp === 'E' ? { r: R.r1,     c: R.c1 + 1 } :
+                sideOpp === 'W' ? { r: R.r0,     c: R.c0 - 1 } :
+                sideOpp === 'S' ? { r: R.r1 + 1, c: R.c1     } :
+                                    { r: R.r0 - 1, c: R.c0     }; // 'N'
+
+                const inwardTarget =
+                sideOpp === 'E' ? { r: R.r1,     c: R.c1 - 1 } :
+                sideOpp === 'W' ? { r: R.r0,     c: R.c0 + 1 } :
+                sideOpp === 'S' ? { r: R.r1 - 1, c: R.c1     } :
+                                    { r: R.r0 + 1, c: R.c0     }; // 'N'
+
+                const base = state.rects.map(norm);
+                const aim  = (dir < 0) ? outwardTarget : (dir > 0) ? inwardTarget : null;
+                if (aim) {
+                const res = planShiftResizeComposite(base, idx, kind, aim, state.rows, state.cols);
+                if (res.ok) { state.rects = res.rects; changedLocal = true; }
+                }
+            } else {
+                // Non-power: single-axis tick on the opposite side
+                if (dir < 0)      changedLocal = expandRect(idx, sideOpp);
+                else if (dir > 0) changedLocal = contractRect(idx, sideOpp);
+            }
+        }
+
+        if (changedLocal) { history(); update(); syncURL(); }
+        return; // handled directionally
+    }
+
 
     if (state.pwrActive) {
         // neighbor-aware chain logic
@@ -681,63 +931,177 @@ trimBtn.onclick = () => {
 };
 
 reduceBtn.onclick = () => {
+  const allowPower = !!state.pwrActive;
 
-    /* NO RECTANGLES – use the common divisor of rows & cols */
+  // ---------- Normal reduce (unchanged) ----------
+  const normalReduce = () => {
     if (!state.rects.length) {
-        const f = gcd(state.rows, state.cols);
-        if (f === 1) return;
-
-        history();
-        state.rows /= f;
-        state.cols /= f;
-        rowsEl.value = state.rows;
-        colsEl.value = state.cols;
-
-        update();
-        syncURL();
-        return;
+      const f = gcd(state.rows, state.cols);
+      if (f === 1) return;
+      history();
+      state.rows /= f;
+      state.cols /= f;
+      rowsEl.value = state.rows;
+      colsEl.value = state.cols;
+      update();
+      syncURL();
+      return;
     }
 
-    /* YES RECTANGLES - collect every horizontal & vertical boundary */
     const rSet = new Set([0, state.rows]);
     const cSet = new Set([0, state.cols]);
     state.rects.forEach(r0 => {
-        const r = norm(r0);
-        rSet.add(r.r0);
-        rSet.add(r.r1);
-        cSet.add(r.c0);
-        cSet.add(r.c1);
+      const r = norm(r0);
+      rSet.add(r.r0); rSet.add(r.r1);
+      cSet.add(r.c0); cSet.add(r.c1);
     });
 
-    /* 2 ── greatest common divisor of all boundary coordinates */
     const rFactor = [...rSet].reduce((g, v) => gcd(g, v));
     const cFactor = [...cSet].reduce((g, v) => gcd(g, v));
 
-    /* if no common divisor >1 in either dimension, nothing to do */
     if (rFactor === 1 && cFactor === 1) return;
 
-    history(); // enable undo
-
-    /* 3 ── rescale every rectangle */
+    history();
     state.rects = state.rects.map(r0 => {
-        const r = norm(r0);
-        return {
-            r0: r.r0 / rFactor,
-            c0: r.c0 / cFactor,
-            r1: r.r1 / rFactor,
-            c1: r.c1 / cFactor
-        };
+      const r = norm(r0);
+      return { r0: r.r0 / rFactor, c0: r.c0 / cFactor, r1: r.r1 / rFactor, c1: r.c1 / cFactor };
     });
-
-    /* 4 ── rescale the grid itself */
     state.rows = Math.round(state.rows / rFactor);
     state.cols = Math.round(state.cols / cFactor);
     rowsEl.value = state.rows;
     colsEl.value = state.cols;
 
     update();
-    syncURL(); // repaint everything
+    syncURL();
+  };
+
+  // ---------- Power reduce  ----------
+  const powerReduce = (tol = 0.4) => {
+    // Helper: divisors of n, >1, sorted desc
+    const divisorsDesc = (n) => {
+      const out = new Set();
+      for (let d = 2; d * d <= n; d++) {
+        if (n % d === 0) { out.add(d); out.add(Math.floor(n / d)); }
+      }
+      out.add(n); // include n itself
+      return [...out].sort((a, b) => b - a);
+    };
+
+    // Pairwise non-overlap test
+    const nonOverlapAll = (arr) => {
+      for (let i = 0; i < arr.length; i++) {
+        const A = arr[i];
+        for (let j = i + 1; j < arr.length; j++) {
+          const B = arr[j];
+          const sep = (A.r1 <= B.r0) || (A.r0 >= B.r1) || (A.c1 <= B.c0) || (A.c0 >= B.c1);
+          if (!sep) return false;
+        }
+      }
+      return true;
+    };
+
+    // Snap a single value to nearest multiple of s
+    const snapMult = (v, s) => Math.round(v / s) * s;
+
+    // Try a candidate step s on both axes simultaneously
+    const tryStep = (s) => {
+        if ((state.rows % s) !== 0 || (state.cols % s) !== 0) return null;
+
+        const snapped = [];
+        for (const r0 of state.rects) {
+            const r = norm(r0);
+            const h = r.r1 - r.r0;
+            const w = r.c1 - r.c0;
+
+            const tolR = Math.floor(h * tol);
+            const tolC = Math.floor(w * tol);
+
+            let r0n = snapMult(r.r0, s);
+            let r1n = snapMult(r.r1, s);
+            let c0n = snapMult(r.c0, s);
+            let c1n = snapMult(r.c1, s);
+
+            // per-edge movement limits vs. ORIGINAL (pre-resolve) pose
+            if (Math.abs(r0n - r.r0) > tolR) return null;
+            if (Math.abs(r1n - r.r1) > tolR) return null;
+            if (Math.abs(c0n - r.c0) > tolC) return null;
+            if (Math.abs(c1n - r.c1) > tolC) return null;
+
+            if ((r1n - r0n) < s || (c1n - c0n) < s) return null;
+
+            // clamp to grid
+            r0n = Math.max(0, Math.min(state.rows - s, r0n));
+            c0n = Math.max(0, Math.min(state.cols - s, c0n));
+            r1n = Math.min(state.rows, Math.max(s, r1n));
+            c1n = Math.min(state.cols, Math.max(s, c1n));
+
+            snapped.push({ r0: r0n, c0: c0n, r1: r1n, c1: c1n });
+        }
+
+        // If snapping created tiny overlaps, try to resolve them *within the same tol*
+        let snappedOut = snapped;
+        const originals = state.rects.map(norm);
+        const nonOverlapAll = (arr) => {
+            for (let i = 0; i < arr.length; i++) {
+            const A = arr[i];
+            for (let j = i+1; j < arr.length; j++) {
+                const B = arr[j];
+                const sep = (A.r1 <= B.r0) || (A.r0 >= B.r1) || (A.c1 <= B.c0) || (A.c0 >= B.c1);
+                if (!sep) return false;
+            }
+            }
+            return true;
+        };
+
+        if (!nonOverlapAll(snappedOut)) {
+            const resolved = resolveTinyOverlaps(snappedOut, originals, state.rows, state.cols, tol);
+            if (!resolved.ok) return null;
+            snappedOut = resolved.rects;
+            if (!nonOverlapAll(snappedOut)) return null; // belt-and-braces
+        }
+
+        // Success → divide by s
+        const reduced = snappedOut.map(R => ({
+            r0: R.r0 / s, c0: R.c0 / s, r1: R.r1 / s, c1: R.c1 / s
+        }));
+        return {
+            rows: Math.round(state.rows / s),
+            cols: Math.round(state.cols / s),
+            rects: reduced,
+        };
+        };
+
+    // Try from coarsest lattice down
+    const g = gcd(state.rows, state.cols);
+    const cand = divisorsDesc(g); // largest first
+    for (const s of cand) {
+      const res = tryStep(s);
+      if (res) {
+        history();
+        state.rows = res.rows;
+        state.cols = res.cols;
+        rowsEl.value = state.rows;
+        colsEl.value = state.cols;
+        state.rects = res.rects;
+        update();
+        syncURL();
+        return true;
+      }
+    }
+    return false;
+  };
+
+  // Route
+  if (allowPower) {
+    if (!powerReduce(0.4)) {
+      // If no candidate worked within tolerance, do nothing (or fall back):
+      // normalReduce();
+    }
+  } else {
+    normalReduce();
+  }
 };
+
 
 /* ---------- EXPAND  ––  double everything -------------------------------- */
 expandBtn.onclick = () => {
@@ -1440,6 +1804,11 @@ registerPwrButton(fillBtn, {
   tipPower:   'Fill negative space — pwr mode will push / pull rectangles.',
   tipDefault: 'Fill negative space — default mode will expand rects until they run into barriers.'
 });
+registerPwrButton(reduceBtn, {
+  tipPower:   'Simplify rectangles onto a coarser grid (≤10% tolerance)',
+  tipDefault: 'Downscale grid and rects by an evenly divisble common factor.'
+});
+
 
 // chip clicks → latch/unlatch
 document.getElementById('modIndMod')  ?.addEventListener('click', () => toggleLatch('mod'));
@@ -1462,3 +1831,10 @@ document.addEventListener('keyup',   updateMods);
 
 // on blur, clear physical (leave latches)
 window.addEventListener('blur', clearPhysicalMods);
+
+// Block context menu only when we intend to clone (or are in cloning)
+canvas.addEventListener('contextmenu', (e) => {
+  if (state.mode === 'cloning') {
+    e.preventDefault();
+  }
+});

@@ -41,6 +41,8 @@ export const state = {
     base: null,
     baseAll: null,
     grab: null,
+    cloneFrom: null,
+    cloneBase: null,
 
     //keyboard modifier keys
     shiftDown: false,

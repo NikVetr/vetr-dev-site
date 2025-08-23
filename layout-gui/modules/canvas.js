@@ -416,22 +416,33 @@ export function drawPreview() {
     }
 }
 
-function drawPreviewOverlay(baseRects, nextRects, valid, activeIdx) {
-  // Draws only rectangles that changed between baseRects and nextRects
-  // `valid` controls blue vs red stroke; `activeIdx` is optional (for colorOf)
-  const n = Math.min(baseRects.length, nextRects.length);
+function rectsEqual(A, B) {
+  return A && B && A.r0===B.r0 && A.c0===B.c0 && A.r1===B.r1 && A.c1===B.c1;
+}
+
+function previewFillForIndex(i) {
+  // Use existing color if present; otherwise a friendly fallback
+  return (i < state.colours.length)
+    ? colorOf(i)
+    : (state.pool[0] ?? `hsl(${Math.random()*360} 70% 75%)`);
+}
+
+export function drawPreviewOverlay(baseRects, nextRects, valid, activeIdx) {
+  const n = Math.max(baseRects.length, nextRects.length);   // ← was Math.min
   const was = baseRects, now = nextRects;
 
   ctx.save();
 
-  // filled delta areas
+  // filled areas
   ctx.globalAlpha = 0.35;
   for (let i = 0; i < n; i++) {
-    const A = was[i], B = now[i];
-    if (!A || !B) continue;
-    if (A.r0===B.r0 && A.c0===B.c0 && A.r1===B.r1 && A.c1===B.c1) continue;
+    const A = was[i];
+    const B = now[i];
+    if (!B) continue;                // nothing to draw
+    if (A && rectsEqual(A, B)) continue; // unchanged
+
     const b = rectBox(B);
-    ctx.fillStyle = valid ? colorOf(i) : '#ddd';
+    ctx.fillStyle = valid ? previewFillForIndex(i) : '#ddd';
     ctx.fillRect(b.x, b.y, b.W, b.H);
   }
 
@@ -441,9 +452,11 @@ function drawPreviewOverlay(baseRects, nextRects, valid, activeIdx) {
   ctx.strokeStyle = valid ? '#3b82f6' : '#e53935';
   ctx.lineWidth = 2;
   for (let i = 0; i < n; i++) {
-    const A = was[i], B = now[i];
-    if (!A || !B) continue;
-    if (A.r0===B.r0 && A.c0===B.c0 && A.r1===B.r1 && A.c1===B.c1) continue;
+    const A = was[i];
+    const B = now[i];
+    if (!B) continue;
+    if (A && rectsEqual(A, B)) continue;
+
     const b = rectBox(B);
     ctx.strokeRect(b.x, b.y, b.W, b.H);
   }
@@ -451,8 +464,10 @@ function drawPreviewOverlay(baseRects, nextRects, valid, activeIdx) {
   ctx.restore();
 }
 
+
 export function drawLiveTransform() {
-  if (state.mode !== 'moving' && state.mode !== 'resizing') return;
+
+  if (!['moving','resizing','cloning'].includes(state.mode)) return;
 
   // Useful locals
   const baseRects = state.baseAll ?? state.rects.map(r => norm(r));
@@ -517,6 +532,103 @@ export function drawLiveTransform() {
     drawPreviewOverlay(baseRects, plan, valid, state.active);
     return;
   }
+
+  // cloning branch
+  if (state.mode === 'cloning') {
+      // bail safely if something got cleared mid-frame
+      if (state.cloneFrom == null) return;
+      const src0 = state.cloneBase ?? state.rects[state.cloneFrom];
+      if (!src0) return;
+
+      const baseRects = state.rects.map(r => norm(r));
+
+      // pixel-rounded deltas (same feel as move)
+      const { x, y } = state.cursorPos;
+      const { x: gx, y: gy } = state.grabPx;
+      const { w, h } = cell();
+      const dR = Math.round((y - gy) / h);
+      const dC = Math.round((x - gx) / w);
+
+      // Candidate (for non-power preview)
+      const unclamped = norm({
+        r0: src0.r0 + dR, c0: src0.c0 + dC,
+        r1: src0.r1 + dR, c1: src0.c1 + dC
+      });
+
+      if (!state.pwrActive) {
+        // Plain clone preview: clamp + require empty space
+        const hh = unclamped.r1 - unclamped.r0, ww = unclamped.c1 - unclamped.c0;
+        let cand = { ...unclamped };
+        cand.r0 = clamp(cand.r0, 0, state.rows - hh);
+        cand.c0 = clamp(cand.c0, 0, state.cols - ww);
+        cand.r1 = cand.r0 + hh;
+        cand.c1 = cand.c0 + ww;
+
+        const valid =
+          cand.r0 >= 0 && cand.c0 >= 0 &&
+          cand.r1 <= state.rows && cand.c1 <= state.cols &&
+          baseRects.every(R =>
+            cand.r1 <= R.r0 || cand.r0 >= R.r1 ||
+            cand.c1 <= R.c0 || cand.c0 >= R.c1
+          );
+
+        const plan = baseRects.concat([cand]);
+        drawPreviewOverlay(baseRects, plan, valid, plan.length - 1);
+        return;
+      }
+
+      // POWER clone preview: simulate power-move from src0, but NEVER pull trailing
+      const srcIdx = state.cloneFrom;
+      const src    = norm(src0);
+
+      // Sim list w/o source; insert clone at source pose as last item
+      let sim = baseRects.slice();
+      sim.splice(srcIdx, 1);
+      const kClone = sim.length;
+      sim.push({ ...src });
+
+      // step like power-move
+      let remR = Math.abs(dR), remC = Math.abs(dC);
+      const sR = Math.sign(dR), sC = Math.sign(dC);
+      const diagonalGesture = (remR > 0 && remC > 0);
+      const allowSinglePull = !diagonalGesture;
+
+      let previewValid = false;
+      while (remR > 0 || remC > 0) {
+        const stepDr = remR > 0 ? sR : 0;
+        const stepDc = remC > 0 ? sC : 0;
+
+        const before = sim[kClone];
+        const res = planPwrMoveStep(sim, kClone, stepDr, stepDc, state.rows, state.cols, {
+          allowSinglePull,
+          pullTrailing: false   // <- key: no trailing pulls in preview
+        });
+        if (!res.ok) break;
+
+        const after = res.rects[kClone];
+        sim = res.rects;
+
+        const movedR = (after.r0 !== before.r0) || (after.r1 !== before.r1);
+        const movedC = (after.c0 !== before.c0) || (after.c1 !== before.c1);
+        if (movedR) remR--;
+        if (movedC) remC--;
+        if (movedR || movedC) previewValid = true;
+        else break;
+      }
+
+      // Reinsert the untouched source to align indices with the real world
+      const plan = sim.slice();
+      plan.splice(srcIdx, 0, src);
+
+      // Do not allow dropping onto the original (even partially)
+      const overlaps = (A, B) =>
+        !(A.r1 <= B.r0 || A.r0 >= B.r1 || A.c1 <= B.c0 || A.c0 >= B.c1);
+      const overSrc = overlaps(plan[kClone + 1], src); // +1 after reinserting
+      const valid   = previewValid && !overSrc;
+
+      drawPreviewOverlay(baseRects, plan, valid, kClone + 1);
+      return;
+    }
 
   // ---- RESIZING ----
   {

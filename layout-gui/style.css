@@ -13,9 +13,16 @@
     --fg-muted: #666;
     --fg-heading: #0b0b0b;
     --canvas-bg: #ffffff;
-    /* new */
+    --chip-col: #fff;
     --canvas-grid: #b5b5b5;
-    /* new (light mode) */
+    
+    --col-r:       #18457b;  /* R blue */
+    --col-python: #be8e00;  /* Python yellow */
+    --col-latex:   #48721a;  /* TeX green */
+    --col-matlab:  #7e4411;  /* MATLAB orange */
+    --col-wolfram: #88100c;  /* Mathematica red */
+    --col-julia:   #643a77;  /* Julia purple */
+    --col-other:   #6c757d;  /* neutral */
 }
 
 body {
@@ -33,13 +40,21 @@ body.dark {
     --border: #bdbdbd;
     --panel-bg: #383838;
     --accent-col: #3c5060;
+    --chip-col: #2e2e2e;
     --grid: #e2e2e2;
     --fg-muted: #e2e2e2;
     --fg-heading: #bdbdbd;
     --canvas-bg: #0c0c0c;
     /* graphite background */
     --canvas-grid: #555555;
-    /* dim grid lines      */
+    
+  --col-r:       #6aa3ff;
+  --col-python: #fec008;
+  --col-latex:   #62b37b;
+  --col-matlab:  #ffa04d;
+  --col-wolfram: #ff6a6a;
+  --col-julia:   #c49ad9;
+  --col-other:   #a7b1b8;
 }
 
 .app {
@@ -106,7 +121,7 @@ header h1 {
 
 /* Dark mode parity with your buttons */
 body.dark .modchip {
-  background: #2e2e2e;
+  background: var(--chip-col);
   border: 1px solid var(--border, #555);
   color: var(--fg, #ddd);
 }
@@ -495,30 +510,41 @@ body.dark .splitter:hover {
 .render-select.chip-radios {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 6px;
   /* space between groups */
 }
 
 /* group “oval” — tighter */
 .render-select.chip-radios fieldset {
   margin: 0;
-  padding: 4px 6px;
+  padding: 4px 4px;
   /* tighter */
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid;
+  --group-col: var(--chip-border, var(--border));
+  border-color: var(--group-col);
+  border-radius: 4px;
   /* oval */
   background: var(--panel-bg);
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
   /* chips flow horizontally */
-  gap: 6px 8px;
+  gap: 0px 0px;
   /* chip spacing */
   width: max-content;
   /* don’t stretch */
   flex: 0 1 auto;
-  background: color-mix(in srgb, var(--panel-bg) 95%, var(--fg) 5%);
 }
+
+
+/* palette per group (single color across all sides)… */
+.render-select.chip-radios fieldset[data-lang="r"]       { --group-col: var(--col-r); }
+.render-select.chip-radios fieldset[data-lang="python"]  { --group-col: var(--col-python); }
+.render-select.chip-radios fieldset[data-lang="latex"]   { --group-col: var(--col-latex); }
+.render-select.chip-radios fieldset[data-lang="matlab"]  { --group-col: var(--col-matlab); }
+.render-select.chip-radios fieldset[data-lang="wolfram"] { --group-col: var(--col-wolfram); }
+.render-select.chip-radios fieldset[data-lang="julia"]   { --group-col: var(--col-julia); }
+.render-select.chip-radios fieldset[data-lang="other"]   { --group-col: var(--col-other); }
 
 /* wide groups (R / Python / Other) take a whole row */
 .render-select.chip-radios fieldset[data-wide] {
@@ -537,25 +563,31 @@ body.dark .splitter:hover {
 
 /* legend: compact */
 .render-select.chip-radios fieldset legend {
+  display: inline-block;       /* take only as much height as needed */
+  line-height: 1;              /* collapse sub/sup whitespace */
+  vertical-align: middle;      /* keep aligned with border */
+  padding: 0 4px;              /* small consistent padding */
   font-size: 12px;
   font-weight: 600;
-  margin: 0 6px 0 2px;
+  margin: 0 2px 0 2px;
   opacity: 0.9;
 }
 
-/* chips (your radios restyled) — slightly smaller than before */
+
+/* chips */
 .render-select.chip-radios label {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
+  padding: 2px 6px;
   /* tighter chip */
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid var(--fg-heading);
+  border-radius: 4px;
   font-size: 12px;
   line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
+  background: var(--chip-col);
 }
 
 .render-select.chip-radios label input[type="radio"] {
@@ -565,26 +597,37 @@ body.dark .splitter:hover {
   cursor: pointer;
 }
 
-/* selected state (modern browsers) */
-@supports selector(:has(*)) {
-  .render-select.chip-radios label:has(input:checked) {
-    border-color: var(--accent, #6aa3ff);
-    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent, #6aa3ff) 45%, transparent) inset;
-    background: color-mix(in oklab, var(--accent, #6aa3ff) 18%, transparent);
-  }
+.render-select.chip-radios fieldset legend sub,
+.render-select.chip-radios fieldset legend sup {
+  font-size: 70%;              /* smaller so it doesn’t force line height */
+  line-height: 0;              /* don’t expand parent box */
+}
 
-  .render-select.chip-radios label:has(input:focus-visible) {
-    outline: 2px solid var(--accent, #6aa3ff);
+/* modern browsers */
+@supports selector(:has(*)) {
+  .render-select.chip-radios fieldset label:has(input:checked) {
+    border-color: var(--group-col);
+    background-color: var(--group-col);
+    color: var(--bg);
+    box-shadow: none;
+  }
+  .render-select.chip-radios fieldset label:has(input:focus-visible) {
+    outline: 2px solid var(--group-col);
     outline-offset: 2px;
   }
 }
 
-/* fallback if :has isn’t available and you wrap text in <span> */
+/* fallback when :has() isn’t supported — requires <input> + <span> in your markup */
 @supports not selector(:has(*)) {
-  .render-select.chip-radios label input[type="radio"]:checked+span {
-    border-color: var(--accent, #6aa3ff);
-    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent, #6aa3ff) 45%, transparent) inset;
-    background: color-mix(in oklab, var(--accent, #6aa3ff) 18%, transparent);
+  .render-select.chip-radios fieldset label input[type="radio"]:checked + span {
+    border-color: var(--group-col);
+    background-color: var(--group-col);
+    color: #fff;
+    box-shadow: none;
+  }
+  .render-select.chip-radios fieldset label input[type="radio"]:focus-visible + span {
+    outline: 2px solid var(--group-col);
+    outline-offset: 2px;
   }
 }
 

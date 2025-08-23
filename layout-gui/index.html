@@ -130,15 +130,19 @@
                         <input type="checkbox" id="incURL" checked> URL
                     </label>
 
-                    <label data-tip="example code that will render nonsense plots given your current configuration">
+                    <label data-tip="example code that will render random plots given your current configuration">
                         <input type="checkbox" id="incExample" > Example
+                    </label>
+
+                    <label data-tip="code that will draw figure labels in the upper left corner of each plo9t">
+                        <input type="checkbox" id="incLabels"> Labels
                     </label>
 
                 </fieldset>
 
                 <div class="render-select chip-radios" id="renderRadios">
                     <!-- R --------------- -->
-                    <fieldset>
+                    <fieldset data-lang="r">
                         <legend>R</legend>
                         <label><input type="radio" name="render" value="layout" checked>layout</span></label>
                         <label><input type="radio" name="render" value="grid"><span>grid</span></label>
@@ -149,7 +153,7 @@
                     </fieldset>
                     
                     <!-- Python ---------- -->
-                    <fieldset>
+                    <fieldset data-lang="python">
                         <legend>Python</legend>
                         <label><input type="radio" name="render" value="mpl"><span>mpl</span></label>
                         <label><input type="radio" name="render" value="mpl_axes"><span>mpl (abs)</span></label>
@@ -157,36 +161,39 @@
                         <label><input type="radio" name="render" value="plotly"><span>plotly</span></label>
                         <label><input type="radio" name="render" value="bokeh"><span>bokeh</span></label>
                     </fieldset>
-                    
-                    <!-- Julia ----------- -->
-                    <fieldset>
-                        <legend>Julia</legend>
-                        <label><input type="radio" name="render" value="makie"><span>Makie.jl</span></label>
-                        <label><input type="radio" name="render" value="plots"><span>Plots.jl</span></label>
-                    </fieldset>
-                    
-                    <!-- MATLAB / Octave ----------- -->
-                    <fieldset>
-                        <legend>MATLAB</legend>
-                        <label><input type="radio" name="render" value="tiled"><span>tiledlayout</span></label>
-                    </fieldset>
-                    
-                    <!-- Mathematica ----------- -->
-                    <fieldset>
-                        <legend>Mathematica</legend>
-                        <label><input type="radio" name="render" value="mma_grid"><span>grid</span></label>
-                    </fieldset>
-                    
+
                     <!-- LaTeX ----------- -->
-                    <fieldset>
-                        <legend><i>L<sub><span style="position:relative; right:.1em">A</span></sub><span style="position:relative; right:.3em"><span></style>T</b><sup>E</sup><span style="position:relative; right:.2em"></span><span style="position:relative; right:.1em">X</span></i></legend>
+                    <fieldset data-lang="latex">
+                        <legend><i>L<sub><span style="position:relative; right:.1em">A</span></sub><span
+                                    style="position:relative; right:.3em"><span></style>T</b><sup>E</sup><span
+                                            style="position:relative; right:.2em"></span><span
+                                            style="position:relative; right:.1em">X</span></i></legend>
                         <label><input type="radio" name="render" value="textpos"><span>textpos</span></label>
                         <label><input type="radio" name="render" value="tikz"><span>TikZ</span></label>
                         <label><input type="radio" name="render" value="tabularx"><span>tabularx</span></label>
                     </fieldset>
                     
+                    <!-- MATLAB / Octave ----------- -->
+                    <fieldset data-lang="matlab">
+                        <legend>MATLAB</legend>
+                        <label><input type="radio" name="render" value="tiled"><span>tiledlayout</span></label>
+                    </fieldset>
+                    
+                    <!-- Mathematica / Wolfram ----------- -->
+                    <fieldset data-lang="wolfram">
+                        <legend>Wolfram</legend>
+                        <label><input type="radio" name="render" value="mma_grid"><span>grid</span></label>
+                    </fieldset>
+
+                    <!-- Julia ----------- -->
+                    <fieldset data-lang="julia">
+                        <legend>Julia</legend>
+                        <label><input type="radio" name="render" value="makie"><span>Makie.jl</span></label>
+                        <label><input type="radio" name="render" value="plots"><span>Plots.jl</span></label>
+                    </fieldset>
+                    
                     <!-- Other ----------- -->
-                    <fieldset>
+                    <fieldset data-lang="other">
                         <legend>Other</legend>
                         <label><input type="radio" name="render" value="csv_inds"><span>inds</span></label>
                         <label><input type="radio" name="render" value="csv_coords"><span>coords</span></label>

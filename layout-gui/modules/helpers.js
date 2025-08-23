@@ -480,7 +480,7 @@ export function shrinkTowardCellOnce(R, tr, tc) {
 /* ================= SHIFT-RESIZE CHAIN HELPERS ================= */
 
 const overlaps1D = (a0,a1,b0,b1) => (a0 < b1) && (a1 > b0);
-const opp = d => (d==='E'?'W':d==='W'?'E':d==='S'?'N':'S');
+export const opp = d => (d==='E'?'W':d==='W'?'E':d==='S'?'N':'S');
 const signOut = d => (d==='E'||d==='S') ? +1 : -1;
 
 const edgeCoord = (R, d) => (d==='E'?R.c1 : d==='W'?R.c0 : d==='S'?R.r1 : R.r0);
@@ -940,67 +940,71 @@ function tryGaplessTranslateOne(rectsIn, idx, dir, rows, cols, opts = {}) {
 
 export function planPwrMoveStep(rectsIn, idx, dr, dc, rows, cols, opts = {}) {
   const allowSinglePull = (opts.allowSinglePull !== false); // default true
+  const wantTrailing    = (opts.pullTrailing !== false);    // default true
+
   if (!dr && !dc) return { ok: true, rects: rectsIn };
 
-  // Single axis
+  // ----- single axis --------------------------------------------------------
   if (dc && !dr) {
     const dirH = dc > 0 ? 'E' : 'W';
-    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols, { pullTrailing: allowSinglePull });
-    if (gapless.ok) return gapless; // ✅ pull trailing neighbors safely
-    const h = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols); // fallback
-    return h.ok ? { ok:true, rects:h.rects } : { ok:false, rects:rectsIn };
+    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols, { pullTrailing: wantTrailing });
+    if (gapless.ok) return gapless;
+    const h = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols, { pullTrailing: wantTrailing });
+    return h.ok ? { ok: true, rects: h.rects } : { ok: false, rects: rectsIn };
   }
   if (dr && !dc) {
     const dirV = dr > 0 ? 'S' : 'N';
-    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols, { pullTrailing: allowSinglePull });
+    const gapless = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols, { pullTrailing: wantTrailing });
     if (gapless.ok) return gapless;
-    const v = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing: allowSinglePull });
-    return v.ok ? { ok:true, rects:v.rects } : { ok:false, rects:rectsIn };
+    const v = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing: wantTrailing });
+    return v.ok ? { ok: true, rects: v.rects } : { ok: false, rects: rectsIn };
   }
 
-  // ----- diagonal tick: NO-PULL on first half, PULL on second -----
-    const dirH = dc > 0 ? 'E' : 'W';
-    const dirV = dr > 0 ? 'S' : 'N';
+  // ----- diagonal tick ------------------------------------------------------
+  const dirH = dc > 0 ? 'E' : 'W';
+  const dirV = dr > 0 ? 'S' : 'N';
 
-    // Gapless H→V
-    const H1 = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols, { pullTrailing:false });
-    if (H1.ok) {
-      const HV = tryGaplessTranslateOne(H1.rects, idx, dirV, rows, cols, { pullTrailing:true });
-      if (HV.ok) return HV;
-    }
+  // Gapless H→V : no trailing pull on the first half; second half if wanted
+  const H1 = tryGaplessTranslateOne(rectsIn, idx, dirH, rows, cols, { pullTrailing: false });
+  if (H1.ok) {
+    const HV = tryGaplessTranslateOne(H1.rects, idx, dirV, rows, cols, { pullTrailing: wantTrailing });
+    if (HV.ok) return HV;
+  }
 
-    // Gapless V→H
-    const V1 = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols, { pullTrailing:false });
-    if (V1.ok) {
-      const VH = tryGaplessTranslateOne(V1.rects, idx, dirH, rows, cols, { pullTrailing:true });
-      if (VH.ok) return VH;
-    }
+  // Gapless V→H : same policy
+  const V1 = tryGaplessTranslateOne(rectsIn, idx, dirV, rows, cols, { pullTrailing: false });
+  if (V1.ok) {
+    const VH = tryGaplessTranslateOne(V1.rects, idx, dirH, rows, cols, { pullTrailing: wantTrailing });
+    if (VH.ok) return VH;
+  }
 
-    // If only one axis can move gaplessly, keep your behavior
-    if (H1.ok) return H1;
-    if (V1.ok) return V1;
+  // If only one axis can move gaplessly, advance by that axis
+  if (H1.ok) return H1;
+  if (V1.ok) return V1;
 
-    // Aggressive single-axis progress (unchanged except explicit pullTrailing)
-    const H2 = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols, { pullTrailing:true });
-    if (H2.ok) return { ok: true, rects: H2.rects };
-    const V2 = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing:true });
-    if (V2.ok) return { ok: true, rects: V2.rects };
+  // Aggressive single-axis progress — honor caller’s trailing policy
+  const H2 = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols, { pullTrailing: wantTrailing });
+  if (H2.ok) return { ok: true, rects: H2.rects };
+  const V2 = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing: wantTrailing });
+  if (V2.ok) return { ok: true, rects: V2.rects };
 
-    // Fallback chooser with the same no-pull-first policy
-    const H = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols, { pullTrailing:false });
-    const HV = H.ok ? moveOnceWithPullMetrics(H.rects, idx, dirV, rows, cols, { pullTrailing:true })
-                    : { ok:false, rects:rectsIn };
+  // Fallback chooser (no-pull first half; second half only if wanted)
+  const H = moveOnceWithPullMetrics(rectsIn, idx, dirH, rows, cols, { pullTrailing: false });
+  const HV = H.ok
+    ? moveOnceWithPullMetrics(H.rects, idx, dirV, rows, cols, { pullTrailing: wantTrailing })
+    : { ok: false, rects: rectsIn };
 
-    const V = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing:false });
-    const VH = V.ok ? moveOnceWithPullMetrics(V.rects, idx, dirH, rows, cols, { pullTrailing:true })
-                    : { ok:false, rects:rectsIn };
+  const V = moveOnceWithPullMetrics(rectsIn, idx, dirV, rows, cols, { pullTrailing: false });
+  const VH = V.ok
+    ? moveOnceWithPullMetrics(V.rects, idx, dirH, rows, cols, { pullTrailing: wantTrailing })
+    : { ok: false, rects: rectsIn };
 
-    if (H.ok && HV.ok) return { ok:true, rects: HV.rects };
-    if (V.ok && VH.ok) return { ok:true, rects: VH.rects };
-    if (H.ok)          return { ok:true, rects: H.rects  };
-    if (V.ok)          return { ok:true, rects: V.rects  };
+  if (H.ok && HV.ok) return { ok: true, rects: HV.rects };
+  if (V.ok && VH.ok) return { ok: true, rects: VH.rects };
+  if (H.ok)          return { ok: true, rects: H.rects  };
+  if (V.ok)          return { ok: true, rects: V.rects  };
 
-    return { ok:false, rects: rectsIn };
+  return { ok: false, rects: rectsIn };
 }
 
 //Fill button functionality
@@ -1119,4 +1123,220 @@ export function registerPwrButton(el, opts = {}) {
     el.classList.remove(cfg.classOn);
     if (cfg.baseTip) el.dataset.tip = cfg.baseTip;
   };
+}
+
+// some more functions for wheel controls
+// Nearest side of rect R to cell (tr, tc)
+export function nearestSidePx(R, x, y) {
+  const { w, h } = cell();             // your existing helper for cell size
+  const x0 = R.c0 * w, x1 = R.c1 * w;
+  const y0 = R.r0 * h, y1 = R.r1 * h;
+
+  // clamp to rect bounds (in case cursor is slightly outside)
+  const cx = Math.max(x0, Math.min(x, x1));
+  const cy = Math.max(y0, Math.min(y, y1));
+
+  const dN = cy - y0;
+  const dS = y1 - cy;
+  const dW = cx - x0;
+  const dE = x1 - cx;
+
+  // pick the minimal distance; simple, stable tiebreak via order
+  let side = 'N';
+  let best = dN;
+  if (dS < best) { best = dS; side = 'S'; }
+  if (dW < best) { best = dW; side = 'W'; }
+  if (dE < best) {             side = 'E'; }
+
+  return side;
+}
+
+
+// Symmetric 1-tick grow/shrink along an axis (no push/pull)
+export function growAxisSymOnce(rects, idx, axis /* 'H'|'V' */, rows, cols) {
+  const R = norm(rects[idx]);
+  let changed = false;
+  if (axis === 'H') {
+    const cL = expandRect(idx, 'W');   // try both sides each tick
+    const cR = expandRect(idx, 'E');
+    changed = cL || cR;
+  } else {
+    const cN = expandRect(idx, 'N');
+    const cS = expandRect(idx, 'S');
+    changed = cN || cS;
+  }
+  return changed;
+}
+export function shrinkAxisSymOnce(rects, idx, axis, rows, cols) {
+  const R = norm(rects[idx]);
+  let changed = false;
+  if (axis === 'H') {
+    const cL = contractRect(idx, 'W');
+    const cR = contractRect(idx, 'E');
+    changed = cL || cR;
+  } else {
+    const cN = contractRect(idx, 'N');
+    const cS = contractRect(idx, 'S');
+    changed = cN || cS;
+  }
+  return changed;
+}
+
+// Resolve small overlaps after snapping by shifting the *shared boundary*
+// toward the rect that has less claim. We keep each rect within its tol
+// (fraction of its own size) and never shrink below 1×1 or exit the grid.
+export function resolveTinyOverlaps(rectsIn, originalsIn, rows, cols, tol = 0.25) {
+  const rects     = rectsIn.map(r => ({...r}));
+  const originals = originalsIn.map(r => ({...r}));
+  const n = rects.length;
+
+  const minSize = 1; // keep ≥1 cell wide/tall
+  const maxIters = n * 12; // safety
+
+  const width  = (R) => R.c1 - R.c0;
+  const height = (R) => R.r1 - R.r0;
+
+  const maxMoveH = (i) => Math.floor(width(originals[i])  * tol);   // columns
+  const maxMoveV = (i) => Math.floor(height(originals[i]) * tol);   // rows
+
+  const clampInt = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+  const overlapRect = (A, B) => ({
+    r0: Math.max(A.r0, B.r0),
+    c0: Math.max(A.c0, B.c0),
+    r1: Math.min(A.r1, B.r1),
+    c1: Math.min(A.c1, B.c1)
+  });
+
+  const hasArea = (R) => (R.r0 < R.r1) && (R.c0 < R.c1);
+
+  const sep = (A, B) =>
+    (A.r1 <= B.r0) || (A.r0 >= B.r1) || (A.c1 <= B.c0) || (A.c0 >= B.c1);
+
+  let iter = 0;
+  for (; iter < maxIters; iter++) {
+    let fixedAny = false;
+
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const A = rects[i], B = rects[j];
+        const O = overlapRect(A, B);
+        if (!hasArea(O)) continue; // no overlap
+
+        // Decide axis to resolve on: pick the *smaller* overlap span.
+        const oW = O.c1 - O.c0;
+        const oH = O.r1 - O.r0;
+
+        if (oW <= oH) {
+          // Horizontal resolution: set a split column between O.c0..O.c1
+          // "Claim": use original touching edges mid-point as the ideal split.
+          const aEdgeOrig = originals[i].c1; // A's right edge
+          const bEdgeOrig = originals[j].c0; // B's left edge
+          const ideal = Math.round((aEdgeOrig + bEdgeOrig) / 2);
+
+          // Legal split must lie within both rect interiors and the overlap slab.
+          const lo = Math.max(A.c0 + 1, O.c0);
+          const hi = Math.min(B.c1 - 1, O.c1);
+          let split = clampInt(ideal, lo, hi);
+
+          // Movement budget from the *snapped* positions:
+          const moveA = Math.abs(split - A.c1);
+          const moveB = Math.abs(split - B.c0);
+          const canA  = moveA <= maxMoveH(i) && (split - A.c0) >= minSize;
+          const canB  = moveB <= maxMoveH(j) && (B.c1 - split) >= minSize;
+
+          if (canA && canB) {
+            A.c1 = split; B.c0 = split;
+            fixedAny = true;
+            continue;
+          }
+
+          // If both can't move to ideal, award by "claim":
+          // who was closer (originally) to the overlap mid keeps more.
+          const mid = (O.c0 + O.c1) / 2;
+          const dA  = Math.abs(aEdgeOrig - mid);
+          const dB  = Math.abs(bEdgeOrig - mid);
+
+          if (dA <= dB) {
+            // Favor A: keep A.c1, move B's left to just after A
+            const bNew = clampInt(A.c1, B.c0 + 1, B.c1 - minSize);
+            const delta = Math.abs(bNew - B.c0);
+            if (delta <= maxMoveH(j)) {
+              B.c0 = bNew;
+              fixedAny = true;
+              continue;
+            }
+          } else {
+            // Favor B: keep B.c0, move A's right to just before B
+            const aNew = clampInt(B.c0, A.c0 + minSize, A.c1 - 1);
+            const delta = Math.abs(aNew - A.c1);
+            if (delta <= maxMoveH(i)) {
+              A.c1 = aNew;
+              fixedAny = true;
+              continue;
+            }
+          }
+          // Couldn’t fix within tolerances → give up early.
+          return { ok:false, rects: rectsIn };
+        } else {
+          // Vertical resolution (analogous).
+          const aEdgeOrig = originals[i].r1; // A's bottom
+          const bEdgeOrig = originals[j].r0; // B's top
+          const ideal = Math.round((aEdgeOrig + bEdgeOrig) / 2);
+
+          const lo = Math.max(A.r0 + 1, O.r0);
+          const hi = Math.min(B.r1 - 1, O.r1);
+          let split = clampInt(ideal, lo, hi);
+
+          const moveA = Math.abs(split - A.r1);
+          const moveB = Math.abs(split - B.r0);
+          const canA  = moveA <= maxMoveV(i) && (split - A.r0) >= minSize;
+          const canB  = moveB <= maxMoveV(j) && (B.r1 - split) >= minSize;
+
+          if (canA && canB) {
+            A.r1 = split; B.r0 = split;
+            fixedAny = true;
+            continue;
+          }
+
+          const mid = (O.r0 + O.r1) / 2;
+          const dA  = Math.abs(aEdgeOrig - mid);
+          const dB  = Math.abs(bEdgeOrig - mid);
+
+          if (dA <= dB) {
+            const bNew = clampInt(A.r1, B.r0 + 1, B.r1 - minSize);
+            const delta = Math.abs(bNew - B.r0);
+            if (delta <= maxMoveV(j)) {
+              B.r0 = bNew;
+              fixedAny = true;
+              continue;
+            }
+          } else {
+            const aNew = clampInt(B.r0, A.r0 + minSize, A.r1 - 1);
+            const delta = Math.abs(aNew - A.r1);
+            if (delta <= maxMoveV(i)) {
+              A.r1 = aNew;
+              fixedAny = true;
+              continue;
+            }
+          }
+          return { ok:false, rects: rectsIn };
+        }
+      }
+    }
+
+    if (!fixedAny) break; // all overlaps are gone or nothing else we can do
+  }
+
+  // Final safety: ensure no overlaps remain.
+  for (let i = 0; i < n; i++) for (let j = i+1; j < n; j++) {
+    if (!sep(rects[i], rects[j])) return { ok:false, rects: rectsIn };
+  }
+  // Keep in-bounds & ≥1×1 (Reduce’s snapping should already ensure this)
+  for (const R of rects) {
+    if (R.r0 < 0 || R.c0 < 0 || R.r1 > rows || R.c1 > cols) return { ok:false, rects: rectsIn };
+    if ((R.r1 - R.r0) < minSize || (R.c1 - R.c0) < minSize) return { ok:false, rects: rectsIn };
+  }
+
+  return { ok:true, rects };
 }

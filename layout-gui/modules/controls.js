@@ -11,6 +11,13 @@ import { generateCode } from './code-generator.js'
 
 /* ---------- controls ---------- */
 export function cursor() {
+
+  if (state.mode === 'cloning') {
+    // mirror moving cursors; use a “power” variant if you have one
+    canvas.style.cursor = state.pwrActive ? 'grabbing' : 'grabbing';
+    return;
+  }
+
   if (!state.hover) {
     canvas.style.cursor = state.pwrActive ? 
     "url('assets/cursors/crosshair.png') 16 16, crosshair" : 'crosshair';
