@@ -284,6 +284,38 @@ canvas {
   overflow-x:auto;
 }
 
+/* Stack panels vertically when the viewport is ≥1.25× taller than wide
+   (height/width ≥ 1.25  ↔  width/height ≤ 0.8) */
+@media (max-aspect-ratio: 4/5) {
+  .main {
+    /* one column, five rows: canvas ▸ split ▸ legend ▸ split ▸ coder */
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      minmax(220px, 1fr)
+      /* canvas */
+      6px
+      /* split L */
+      minmax(180px, auto)
+      /* legend */
+      6px
+      /* split R */
+      minmax(220px, auto)
+      /* coder */
+    ;
+
+    /* in tall mode we want vertical scroll, not horizontal */
+    overflow-x: visible;
+    overflow-y: auto;
+  }
+
+  /* splitters become horizontal bars */
+  .splitter {
+    width: 100%;
+    height: 6px;
+    cursor: row-resize;
+  }
+}
+
 /* let every flex/grid item inside the .main shrink too */
 .main > *{min-width:0;}
 

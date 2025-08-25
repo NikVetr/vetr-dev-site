@@ -163,7 +163,7 @@ legendList.addEventListener('dblclick', e => {
     syncURL();
 });
 
-canvas.addEventListener('mousemove', e => {
+canvas.addEventListener('pointermove', e => {
     if (state.modalOpen) return;
     state.cursorPos = pos(e);
     const {
@@ -202,7 +202,7 @@ canvas.addEventListener('mousemove', e => {
     repaint();
 });
 
-canvas.addEventListener('mouseleave', () => {
+canvas.addEventListener('pointerleave', () => {
     state.focus = null;
     const oldEl = legendList.querySelector('.legend-item.focus');
     if (oldEl) oldEl.classList.remove('focus');
@@ -286,7 +286,7 @@ function toggleStickyFocus(hv) {
     }
 }
 
-canvas.addEventListener('mousedown', e => {
+canvas.addEventListener('pointerdown', e => {
     if (state.modalOpen) return;
     const {
         x,
@@ -331,7 +331,7 @@ canvas.addEventListener('mousedown', e => {
     }
 });
 
-window.addEventListener('mouseup', e => {
+window.addEventListener('pointerup', e => {
     if (state.modalOpen) return;
     const {
         x,
@@ -976,7 +976,7 @@ reduceBtn.onclick = () => {
   };
 
   // ---------- Power reduce  ----------
-  const powerReduce = (tol = 0.4) => {
+  const powerReduce = (tol = 0.3) => {
     // Helper: divisors of n, >1, sorted desc
     const divisorsDesc = (n) => {
       const out = new Set();
@@ -1093,7 +1093,7 @@ reduceBtn.onclick = () => {
 
   // Route
   if (allowPower) {
-    if (!powerReduce(0.4)) {
+    if (!powerReduce(0.3)) {
       // If no candidate worked within tolerance, do nothing (or fall back):
       // normalReduce();
     }
