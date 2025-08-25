@@ -103,7 +103,7 @@ const toast = Object.assign(document.createElement('div'), {
 document.body.append(toast);
 
 /* helper – show + auto-hide little error note */
-function flashError(msg){
+export function flashError(msg){
   toast.textContent   = msg;
   toast.style.opacity = 1;
   clearTimeout(toast.timer);

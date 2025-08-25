@@ -922,3 +922,13 @@ body.dark .splitter:hover {
 @media (prefers-color-scheme: dark) {
   .chip { border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.10); }
 }
+
+#projectBtn {
+  margin-right: .35rem;
+}
+
+#projectTarget {
+  font-size: 0.95em;
+  padding: 0.15rem 0.3rem;
+  text-align: center;
+}

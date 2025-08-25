@@ -88,9 +88,14 @@
                 <!-- edit -->
                 <button id="clearBtn" data-tip="Remove ALL rectangles">Clear</button>
                 <button id="trimBtn" data-tip="Crop canvas to bounding-box of rectangles">Trim</button>
+                <button id="fillBtn" class="btn" data-tip="Fill negative space by expanding rectangles">Fill</button>
                 <button id="reduceBtn" data-tip="Factor grid without changing relative rectangle sizes and shapes">Reduce</button>
                 <button id="expandBtn" data-tip="Double dimensions of grid and rectangles">Expand</button>
-                <button id="fillBtn" class="btn" data-tip="Fill negative space by expanding rectangles">Fill</button>
+                <div class="control-row">
+                    <button id="projectBtn" data-tip="Project canvas and rectangles to a different sized canvas">Project:</button>
+                    <input id="projectTarget" data-tip="The larger dimension of the canvas to project to" type="number" value="8" min="1" style="width:3rem;">
+                </div>
+                
 
                 <!-- persist -->
                 <button id="exportBtn" data-tip="Save the current layout to a JSON file">Export JSON</button>

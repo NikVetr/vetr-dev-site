@@ -27,7 +27,8 @@ import {
     helpModal,
     helpClose,
     helpBackdrop,
-    helpContent
+    helpContent,
+    projectBtn, projectTarget
 
 } from './dom.js';
 
@@ -92,7 +93,8 @@ import {
     hit,
     cursor,
     maxDelta,
-    edgeKind
+    edgeKind,
+    flashError
 } from './controls.js';
 
 function flashCopied() {
@@ -1837,4 +1839,264 @@ canvas.addEventListener('contextmenu', (e) => {
   if (state.mode === 'cloning') {
     e.preventDefault();
   }
+});
+
+// project button functionality
+
+// Build sorted unique boundary coords for an axis
+function boundaryCoords(axisMax, rects, pick0, pick1) {
+  const s = new Set([0, axisMax]);
+  rects.forEach(r => { s.add(pick0(r)); s.add(pick1(r)); });
+  return [...s].sort((a,b)=>a-b);
+}
+
+// Apportion integer lengths to segments so totals equal newMax.
+// - Each segment i must be at least minReq[i] (0 or 1 in our use).
+// - Leftovers go to largest remainders, preferring occupied segments for nicer shapes.
+function allocateSegmentsWithMin(li, newMax, minReq, occ) {
+  const n = li.length;
+  const L = new Array(n).fill(0);
+
+  // 1) Base assignment from floor + honor min
+  let sum = 0;
+  for (let i = 0; i < n; i++) {
+    const base = Math.floor(li[i]);
+    L[i] = Math.max(minReq[i] | 0, base);
+    sum += L[i];
+  }
+  if (sum > newMax) return null;
+
+  // 2) Distribute leftovers by largest remainder; prefer occupied (tiny bias)
+  let rem = newMax - sum;
+  if (rem === 0) return L;
+
+  const items = Array.from({ length: n }, (_, i) => ({
+    i,
+    // If minReq already forced 1, its fractional part becomes less critical,
+    // but keeping it still helps proportions. Small bias for occupied.
+    key: (li[i] - Math.floor(li[i])) + (occ[i] ? 1e-6 : 0)
+  })).sort((a, b) => b.key - a.key);
+
+  for (const { i } of items) {
+    if (rem === 0) break;
+    L[i] += 1;
+    rem--;
+  }
+  return rem === 0 ? L : null;
+}
+
+// For each segment [coords[i], coords[i+1]) compute:
+// - occ[i]: any rectangle overlaps this open interval
+// - essential[i]: some rectangle's axis-span is entirely within this segment
+function segmentFlags(rects, coords, pick0, pick1) {
+  const n = coords.length - 1;
+  const occ = new Array(n).fill(false);
+  const essential = new Array(n).fill(false);
+
+  for (let i = 0; i < n; i++) {
+    const lo = coords[i], hi = coords[i + 1];
+    for (const R of rects) {
+      const a0 = pick0(R), a1 = pick1(R);
+      // overlap with positive measure?
+      if (!(a1 <= lo || a0 >= hi)) occ[i] = true;
+      // essential if the rect lives entirely in this segment
+      if (a0 >= lo && a1 <= hi && a1 > a0) essential[i] = true;
+      if (occ[i] && essential[i]) break;
+    }
+  }
+  return { occ, essential };
+}
+
+// Project old boundary coords[] in [0..oldMax] to new integer coords[] in [0..newMax].
+// - Only "essential" segments are forced to keep ≥1 cell;
+// - non-essential occupied segments may collapse to 0 if budget is tight.
+// - Empty segments start at 0 and may get cells if there are leftovers.
+function projectAxis(coords, oldMax, newMax, rects, pick0, pick1) {
+  if (newMax < 1) return null;
+
+  const scale = newMax / oldMax;
+  const segReal = [];
+  for (let i = 0; i < coords.length - 1; i++) {
+    const lo = coords[i], hi = coords[i + 1];
+    segReal.push((hi - lo) * scale);
+  }
+
+  // Flags per segment
+  const { occ, essential } = segmentFlags(rects, coords, pick0, pick1);
+
+  // Build min requirements: essential → 1, others → 0
+  const minReq = essential.map(x => (x ? 1 : 0));
+
+  // Allocate respecting minReq, biasing by remainders (and occ for tie-break)
+  const segInt = allocateSegmentsWithMin(segReal, newMax, minReq, occ);
+  if (!segInt) return null;
+
+  // Prefix-sum to new coords
+  const mapped = [0];
+  for (let i = 0; i < segInt.length; i++) mapped.push(mapped[mapped.length - 1] + segInt[i]);
+  if (mapped[mapped.length - 1] !== newMax) return null;
+
+  const out = new Map();
+  for (let i = 0; i < coords.length; i++) out.set(coords[i], mapped[i]);
+  return out;
+}
+
+// Map a rect's center to a target cell (before conflict resolution)
+function centerTargetCell(r, rows, cols, newRows, newCols) {
+  const rc = (r.r0 + r.r1) / 2;
+  const cc = (r.c0 + r.c1) / 2;
+  let tr = Math.floor(rc * newRows / rows);
+  let tc = Math.floor(cc * newCols / cols);
+  tr = Math.max(0, Math.min(newRows - 1, tr));
+  tc = Math.max(0, Math.min(newCols - 1, tc));
+  return { tr, tc };
+}
+
+// Find nearest free cell to (r,c) via BFS over Manhattan distance
+function findNearestFree(taken, r, c, newRows, newCols) {
+  if (!taken[r][c]) return { r, c };
+  const q = [{ r, c }];
+  const seen = new Set([`${r},${c}`]);
+
+  const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+  while (q.length) {
+    const cur = q.shift();
+    for (const [dr, dc] of dirs) {
+      const nr = cur.r + dr, nc = cur.c + dc;
+      if (nr < 0 || nc < 0 || nr >= newRows || nc >= newCols) continue;
+      const key = `${nr},${nc}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      if (!taken[nr][nc]) return { r: nr, c: nc };
+      q.push({ r: nr, c: nc });
+    }
+  }
+  return null; // grid completely full
+}
+
+// Scatter fallback: put every rect as 1×1, near its mapped center, without overlap.
+function fallbackScatterProject(rectsN, rows, cols, newRows, newCols) {
+
+  if (rectsN.length > newRows * newCols) {
+    return null;
+  }
+
+  // Desired target cells by center mapping
+  const targets = rectsN.map(r => centerTargetCell(r, rows, cols, newRows, newCols));
+
+  // Fill grid with nearest-free placement
+  const taken = Array.from({ length: newRows }, () => Array(newCols).fill(false));
+  const placed = [];
+
+  for (let i = 0; i < rectsN.length; i++) {
+    const { tr, tc } = targets[i];
+    const spot = findNearestFree(taken, tr, tc, newRows, newCols);
+    if (!spot) {
+      return null;
+    }
+    taken[spot.r][spot.c] = true;
+    placed.push({ r0: spot.r, c0: spot.c, r1: spot.r + 1, c1: spot.c + 1 });
+  }
+
+  return {
+    rows: newRows,
+    cols: newCols,
+    rects: placed
+  };
+}
+
+function projectToLongest(targetLongest) {
+  targetLongest = Math.max(1, Math.floor(targetLongest));
+  const { rows, cols } = state;
+  const curLongest = Math.max(rows, cols);
+  if (curLongest === targetLongest) {
+    return true;
+  }
+
+  // Compute new grid dims preserving aspect
+  const scale = targetLongest / curLongest;
+  const newRows = (rows >= cols) ? targetLongest : Math.max(1, Math.round(rows * scale));
+  const newCols = (cols >= rows) ? targetLongest : Math.max(1, Math.round(cols * scale));
+
+  const rectsN = state.rects.map(norm);
+
+  // ---------- First try: high-fidelity axis projection ----------
+  const rCoords = boundaryCoords(rows, rectsN, r => r.r0, r => r.r1);
+  const cCoords = boundaryCoords(cols, rectsN, r => r.c0, r => r.c1);
+
+  const rMap = projectAxis(rCoords, rows, newRows, rectsN, r => r.r0, r => r.r1);
+  const cMap = projectAxis(cCoords, cols, newCols, rectsN, r => r.c0, r => r.c1);
+
+  if (rMap && cMap) {
+    const nextRects = rectsN.map(r => ({
+      r0: rMap.get(r.r0), c0: cMap.get(r.c0),
+      r1: rMap.get(r.r1), c1: cMap.get(r.c1),
+    }));
+    // sanity
+    let valid = true;
+    for (const R of nextRects) {
+      if (R.r0 < 0 || R.c0 < 0 || R.r1 > newRows || R.c1 > newCols) { valid = false; break; }
+      if ((R.r1 - R.r0) < 1 || (R.c1 - R.c0) < 1) { valid = false; break; }
+    }
+    if (valid) {
+      history();
+      state.rows = newRows;
+      state.cols = newCols;
+      rowsEl.value = newRows;
+      colsEl.value = newCols;
+      state.rects = nextRects;
+      update(); resizeCanvas(); syncURL();
+      return true;
+    } else {
+    }
+  }
+  
+  // ---------- Fallback: permissive scatter (centers -> nearest free) ----------
+  const fallback = fallbackScatterProject(rectsN, rows, cols, newRows, newCols);
+
+  if (!fallback) {
+    return false;
+  }
+
+  // Commit fallback
+  history();
+  state.rows = fallback.rows;
+  state.cols = fallback.cols;
+  rowsEl.value = fallback.rows;
+  colsEl.value = fallback.cols;
+  state.rects = fallback.rects;
+  update(); resizeCanvas(); syncURL();
+  return true;
+}
+
+projectBtn.onclick = () => {
+  const target = +projectTarget.value || 0;
+  const ok = projectToLongest(target);
+  if (!ok) {
+    flashError('error: cannot project without losing rectangles');
+  }
+};
+
+// make the numeric text entry fields responsive to the scroll wheel
+document.querySelectorAll('input[type=number]').forEach(input => {
+  input.addEventListener('wheel', (event) => {
+    event.preventDefault(); // needs passive:false on the listener
+
+    const step = input.step ? parseFloat(input.step) : 1;
+    const min = input.min ? parseFloat(input.min) : -Infinity;
+    const max = input.max ? parseFloat(input.max) : Infinity;
+
+    let value = Number.isFinite(input.valueAsNumber) ? input.valueAsNumber : 0;
+
+    // up = increase, down = decrease
+    value = event.deltaY < 0 ? Math.min(value + step, max)
+                             : Math.max(value - step, min);
+
+    // set the number and notify listeners
+    input.valueAsNumber = value;
+
+    // fire both, in case some fields listen to 'input' and others to 'change'
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+  }, { passive: false }); // <— important
 });
