@@ -295,7 +295,16 @@ canvas.addEventListener('pointerdown', e => {
         y
     } = pos(e), hv = hit(x, y);
 
+    //delete x click
     if (hv && hv.kind === 'delete') {
+        commitDelete(hv.idx, {
+            strategy: 'preserve'
+        });
+        return;
+    }
+
+    // Middle click delete
+    if (e.button === 1 && hit != null) {
         commitDelete(hv.idx, {
             strategy: 'preserve'
         });

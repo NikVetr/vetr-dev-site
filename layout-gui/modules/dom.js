@@ -21,9 +21,13 @@ export const dimText = document.getElementById('dimText');
 export const wrap = document.getElementById('canvasWrap');
 export const squareEl = document.getElementById('squareCells');
 export const darkEl = document.getElementById('darkMode');
+
 export const incSetupEl = document.getElementById('incSetup');
 export const incURLEl = document.getElementById('incURL');
+export const incExampleEl = document.getElementById('incExample');
+export const incLabelsEl = document.getElementById('incLabels');
 export const renderRadios = document.getElementById('renderRadios');
+
 export const aspectEl    = document.getElementById('aspect');
 export const labelSwitch = document.getElementById('labelSwitch');
 

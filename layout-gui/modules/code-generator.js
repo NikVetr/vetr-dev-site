@@ -3,7 +3,7 @@ import { norm, nameOf, encodeState } from './helpers.js';
 import {
   rcodeEl,                          // where the generated code lands
   renderRadios,
-  incSetupEl, incURLEl
+  incSetupEl, incURLEl, incExampleEl, incLabelsEl
 }                                   from './dom.js';
 import { update }                   from './controls.js';
 
@@ -205,11 +205,13 @@ function tokensInReadingOrder(ascii, blank = '#') {
 /* default: include full setup, omit URL */
 export let incSetup = incSetupEl.checked;
 export let incURL = incURLEl.checked;
+export let incExample = incExampleEl.checked;
 
-[incSetupEl, incURLEl].forEach(el => {
+[incSetupEl, incURLEl, incExampleEl].forEach(el => {
     el.onchange = () => {
         incSetup = incSetupEl.checked;
         incURL = incURLEl.checked;
+        incExample = incExampleEl.checked;
         update(); // regenerate code immediately
     };
 });
@@ -228,6 +230,259 @@ export function urlHeader() {
 }
 
 export const renderer = { value: 'layout' }; // default
+
+/* ----- helpers for Example generation (refined) ----- */
+
+/* ----- shape → type, with diversity (alternate per shape) ----- */
+function classifyShape(r0) {
+  const r = norm(r0);
+  const w = (r.c1 - r.c0), h = (r.r1 - r.r0);
+  const ar = w / Math.max(1e-9, h);
+  if (ar > 1.3) return 'wide';
+  if (ar < 0.77) return 'tall';
+  return 'square';
+}
+
+function pickTypeForShape(shape, k) {
+  const cycles = {
+    wide:   ['manhattan', 'hist', 'scatter'],  // NEW: manhattan for long skinny
+    tall:   ['vline', 'heatmap'],
+    square: ['scatter', 'heatmap', 'hist']
+  };
+  const arr = cycles[shape] || ['scatter'];
+  return arr[k % arr.length];
+}
+
+// prefer state.colours[i], fallback to rect color-ish fields
+function rectColor(i) {
+  const fromPalette = (state.colours && state.colours[i]) ? state.colours[i] : null;
+  if (fromPalette) return fromPalette;
+  const r = state.rects[i] || {};
+  return r.color || r.fill || r.stroke || r.col || '#1f77b4';
+}
+
+// label/comment: "# <id> <alias?>"
+function rectCommentHeader(i) {
+  const id = i + 1;
+  const alias = (state.aliases && state.aliases[i] != null)
+    ? String(state.aliases[i]).trim()
+    : '';
+  const nm = alias || nameOf(i) || String(id);
+  return (String(nm) === String(id)) ? `# ${id}` : `# ${id} ${nm}`;
+}
+
+// parse CSS hsl()/hsla() and return hex (ignore alpha; we add transparency via adjustcolor in R)
+function hslStringToHex(s) {
+  // extract inside of parentheses, normalize separators (commas, spaces, slash)
+  const inner = s.slice(s.indexOf('(') + 1, s.lastIndexOf(')')).trim();
+  const tokens = inner
+    .replace(/,/g, ' ')
+    .replace(/\s+\/\s+/, ' ')
+    .split(/\s+/)
+    .filter(Boolean);
+
+  // tokens: [h, s%, l%, (alpha?)] — hue may include 'deg'
+  const rawH = tokens[0].replace(/deg$/i, '');
+  const rawS = tokens[1].replace('%', '');
+  const rawL = tokens[2].replace('%', '');
+
+  const h = parseFloat(rawH);
+  const S = Math.max(0, Math.min(1, parseFloat(rawS) / 100));
+  const L = Math.max(0, Math.min(1, parseFloat(rawL) / 100));
+
+  function hue2rgb(p, q, t) {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1/6) return p + (q - p) * 6 * t;
+    if (t < 1/2) return q;
+    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    return p;
+  }
+
+  let r, g, b;
+  if (S === 0) {
+    r = g = b = L;
+  } else {
+    const hh = ((h % 360) + 360) % 360 / 360;
+    const q = L < 0.5 ? L * (1 + S) : L + S - L * S;
+    const p = 2 * L - q;
+    r = hue2rgb(p, q, hh + 1/3);
+    g = hue2rgb(p, q, hh);
+    b = hue2rgb(p, q, hh - 1/3);
+  }
+
+  const R = Math.round(r * 255).toString(16).padStart(2, '0');
+  const G = Math.round(g * 255).toString(16).padStart(2, '0');
+  const B = Math.round(b * 255).toString(16).padStart(2, '0');
+  return `#${R}${G}${B}`;
+}
+
+// parse CSS rgb()/rgba() and return hex (ignore alpha in rgba)
+function rgbStringToHex(s) {
+  const inner = s.slice(s.indexOf('(') + 1, s.lastIndexOf(')')).trim();
+  const parts = inner.split(',').map(x => x.trim());
+  // handle both "rgb(r,g,b)" and "rgb(r g b)" (CSS4 allows spaces)
+  const nums = (parts.length === 1 ? inner.split(/\s+/) : parts).slice(0, 3);
+  const [r, g, b] = nums.map(v => {
+    if (/%$/.test(v)) {
+      // percentage form: 100% → 255
+      return Math.round(255 * (parseFloat(v) / 100));
+    }
+    return Math.max(0, Math.min(255, parseFloat(v)));
+  });
+  const R = Math.round(r).toString(16).padStart(2, '0');
+  const G = Math.round(g).toString(16).padStart(2, '0');
+  const B = Math.round(b).toString(16).padStart(2, '0');
+  return `#${R}${G}${B}`;
+}
+
+// css-ish → hex (keep your existing rgb/hsl helpers)
+// NOTE: use your upgraded hsl/rgb → hex helpers here
+function toRColorLiteral(css) {
+  if (!css) return '"#1f77b4"';
+  const c = String(css).trim();
+  if (c.startsWith('#')) {
+    if (c.length === 4) { const r = c[1], g = c[2], b = c[3]; return `"#${r}${r}${g}${g}${b}${b}"`; }
+    return `"${c}"`;
+  }
+  if (/^hsla?\(/i.test(c)) return `"${hslStringToHex(c)}"`;
+  if (/^rgba?\(/i.test(c)) return `"${rgbStringToHex(c)}"`;
+  return `"${c}"`;
+}
+
+// generate code for a single plot (base-R + ggplot2 supported; focus base-R)
+export function plot_code({
+  color,
+  type,
+  language = 'R',
+  style = 'base_r'
+} = {}) {
+  if (language !== 'R') return `# TODO: language "${language}" not yet supported\n`;
+
+  const COL = toRColorLiteral(color);
+
+  // --- base R (focus) ---
+  if (style === 'base_r') {
+    if (type === 'scatter') {
+      return [
+        `n <- 700L; x <- rnorm(n); y <- 0.7*x + rnorm(n)`,
+        `plot(x, y, pch=19, cex=0.6, col=${COL},`,
+        `     xaxt="n", yaxt="n", xlab="", ylab="", bty="n")`,
+        `box(col=${COL}, lwd=2)`,
+        ``
+      ].join('\n');
+    }
+
+    if (type === 'hist') {
+      return [
+        `x <- c(rnorm(500L), rexp(300L) - 1)`,
+        `hist(x, breaks=30, col=${COL}, border=NA,`,
+        `     xaxt="n", yaxt="n", xlab="", main="")`,
+        `box(col=${COL}, lwd=2)`,
+        ``
+      ].join('\n');
+    }
+
+    if (type === 'vline') { // vertical sine with smaller amplitude
+      return [
+        `t <- seq(0, 2*pi, length.out=1000L)`,
+        `plot(sin(3*t), t, type="l", lwd=2, col=${COL},`,
+        `     xlim = c(-1.25, 1.25),`,
+        `     xaxt="n", yaxt="n", xlab="", ylab="", bty="n")`,
+        `box(col=${COL}, lwd=2)`,
+        ``
+      ].join('\n');
+    }
+
+    if (type === 'heatmap') { // block-diagonal structure
+      return [
+        `nr <- 60L; nc <- 40L`,
+        `z <- matrix(rnorm(nr*nc, sd=0.6), nr, nc)`,
+        `blk <- 4L`,
+        `rs <- round(seq(0, nr, length.out=blk+1))`,
+        `cs <- round(seq(0, nc, length.out=blk+1))`,
+        `for (i in seq_len(blk)) {`,
+        `  r <- (rs[i]+1):rs[i+1]; c <- (cs[i]+1):cs[i+1]`,
+        `  z[r, c] <- z[r, c] + 2`,
+        `}`,
+        `pal <- colorRampPalette(c("#ffffff", ${COL}))(64)`,
+        `image(z, col=pal, axes=FALSE, useRaster=TRUE)`,
+        `box(col=${COL}, lwd=2)`,
+        ``
+      ].join('\n');
+    }
+
+    if (type === 'manhattan') { // long skinny (wide) rectangles
+      return [
+        `n <- 1200L`,
+        `x <- seq_len(n)`,
+        `y <- -log10(runif(n))`,
+        `peaks <- sample.int(n, max(15L, n %/% 25L))`,
+        `y[peaks] <- y[peaks] + rexp(length(peaks), rate=0.6) + 1`,
+        `plot(x, y, col=NA,`,
+        `     xaxt="n", yaxt="n", xlab="", ylab="", bty="n")`,
+        `segments(x, 0, x, y, col=${COL})`,
+        `box(col=${COL}, lwd=2)`,
+        ``
+      ].join('\n');
+    }
+
+    // fallback
+    type = 'scatter';
+    return [
+      `n <- 700L; x <- rnorm(n); y <- 0.7*x + rnorm(n)`,
+      `plot(x, y, pch=19, cex=0.6, col=${COL},`,
+      `     xaxt="n", yaxt="n", xlab="", ylab="", bty="n")`,
+      `box(col=${COL}, lwd=2)`,
+      ``
+    ].join('\n');
+  }
+
+  // --- ggplot2 (unchanged for now; we’ll expand later) ---
+  if (type === 'scatter') {
+    return [
+      `n <- 600L; x <- rnorm(n); y <- 0.7*x + rnorm(n)`,
+      `print(ggplot(data.frame(x,y), aes(x,y)) +`,
+      `  geom_point(shape=16, size=1.3, alpha=0.6, color=${COL}) +`,
+      `  theme_void())`,
+      ``
+    ].join('\n');
+  }
+  if (type === 'hist') {
+    return [
+      `x <- c(rnorm(500L), rexp(300L) - 1)`,
+      `print(ggplot(data.frame(x), aes(x)) +`,
+      `  geom_histogram(bins=30, fill=${COL}, alpha=0.65, color=NA) +`,
+      `  theme_void())`,
+      ``
+    ].join('\n');
+  }
+  return `# TODO: ggplot2 "${type}" not yet implemented\n`;
+}
+
+
+function buildExampleBlockLayoutR(style = 'base_r') {
+  const lines = [];
+  lines.push(`par(mar=c(2,2,1,1)+0.1, xaxs="i", yaxs="i")`);
+  if (style === 'ggplot2' && !incSetup) {
+    lines.push(`suppressPackageStartupMessages(library(ggplot2))`);
+  }
+
+  const counters = { square: 0, wide: 0, tall: 0 };
+
+  state.rects.forEach((r0, i) => {
+    const shape = classifyShape(r0);
+    const typ   = pickTypeForShape(shape, counters[shape]++);
+    const col   = rectColor(i);
+
+    lines.push('');                   // blank line BEFORE label
+    lines.push(rectCommentHeader(i)); // "# <id> <alias?>"
+    lines.push(plot_code({ color: col, type: typ, language: 'R', style }).trimEnd());
+    lines.push('');                   // blank line after each plot
+  });
+
+  return lines.join('\n');
+}
 
 export function generateCode() {
     const N = state.rects.length || 1; // at least 1 panel
@@ -256,9 +511,7 @@ export function generateCode() {
 
         case 'layout': {
             /* ---- 1) matrix rows (always emitted) -------------------- */
-            const rowsTxt = designMatrix() // 2-space indent
-                .map(r => '  c(' + r.join(', ') + ')')
-                .join(',\n');
+            const rowsTxt = designMatrix().map(r => '  c(' + r.join(', ') + ')').join(',\n');
 
             const matDef = [
                 'mat <- matrix(c(',
@@ -266,17 +519,25 @@ export function generateCode() {
                 `), nrow = ${state.rows}, byrow = TRUE)`
             ].join('\n');
 
-            /* ---- 2) static tail (only with “Setup” ✓) --------------- */
-            const post = [
-                'layout(mat)',
-                `layout.show(${state.rects.length || 1})`
-            ].join('\n');
+            const needLayout = incSetup || incExample;
+            const includeLayoutShow = incSetup && !incExample;
 
-            /* ---- 3) final snippet ----------------------------------- */
-            return urlHeader() // "" if URL ☐, "#https://..." if ✓
-                +
-                matDef + '\n' +
-                (incSetup ? post : ''); // omit tail when Setup ☐
+            const parts = [];
+
+            // ensure exactly one newline after the URL header, not two
+            const hdr = urlHeader().trim();
+            if (hdr) parts.push(hdr);
+
+            parts.push(matDef);
+            if (needLayout) parts.push('layout(mat)');
+            if (includeLayoutShow) parts.push(`layout.show(${state.rects.length || 1})`);
+
+            if (incExample) {
+                const style = 'base_r';
+                parts.push(buildExampleBlockLayoutR(style));
+            }
+
+            return parts.filter(Boolean).join('\n');
         }
 
         case 'grid': {
