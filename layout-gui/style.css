@@ -8,7 +8,9 @@
     --fg: #0b0b0b;
     --border: #a0a0a0;
     --panel-bg: #fff;
+    --text-col: #505050;
     --accent-col: #daebf9;
+    --accent-text: #000000;
     --grid: #d0d0d0;
     --fg-muted: #666;
     --fg-heading: #0b0b0b;
@@ -40,6 +42,9 @@ body.dark {
     --border: #bdbdbd;
     --panel-bg: #383838;
     --accent-col: #3c5060;
+    --text-col: #ffffff;
+    --accent-text: #fff;
+    --text-col: #ffffff;
     --chip-col: #2e2e2e;
     --grid: #e2e2e2;
     --fg-muted: #e2e2e2;
@@ -81,6 +86,19 @@ header h1 {
     font-size: 16px;
     margin: 0;
     font-weight: 600;
+}
+
+/* stack just the labels you mark with .stack */
+label.stack {
+  display: flex;
+  /* overrides your global inline-flex */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.sidebar label.stack input[type="number"] {
+  width: 100%;
 }
 
 /* Modifier indicator chips */
@@ -267,30 +285,32 @@ canvas {
 }
 
 /* let JS set cursor directly on the canvas */
-.main{
-  display:grid;
+.main {
+  display: grid;
+  /* now: sidebar | canvas | split | legend | split | coder */
   grid-template-columns:
-      var(--w-left ,420px)    6px
-      var(--w-mid  ,300px)    6px
-      var(--w-right,1fr);
-
-  gap:var(--gap);
-  min-height:0;      /* keep children shrinkable vertically */
-
-  /* let the grid itself shrink below its content */
-  min-width:0;
-
-  /* if (min-widths + splitters) > viewport → show a scrollbar  */
-  overflow-x:auto;
+    var(--sidebar-w, 120px) 
+    var(--w-left, clamp(240px, 34vw, 420px)) 6px 
+    var(--w-mid,  clamp(220px, 28vw, 300px)) 6px 
+    var(--w-right, clamp(220px, 28vw, 320px));
+  gap: var(--gap);
+  min-height: 0;
+  /* keep children shrinkable vertically */
+  min-width: 0;
+  /* allow grid to shrink; children can overflow */
+  overflow-x: auto;
+  /* horizontal scroll if needed */
 }
+
 
 /* Stack panels vertically when the viewport is ≥1.25× taller than wide
    (height/width ≥ 1.25  ↔  width/height ≤ 0.8) */
 @media (max-aspect-ratio: 4/5) {
   .main {
-    /* one column, five rows: canvas ▸ split ▸ legend ▸ split ▸ coder */
     grid-template-columns: 1fr;
     grid-template-rows:
+      auto
+      /* sidebar (toolbox) */
       minmax(220px, 1fr)
       /* canvas */
       6px
@@ -303,18 +323,77 @@ canvas {
       /* coder */
     ;
 
-    /* in tall mode we want vertical scroll, not horizontal */
     overflow-x: visible;
     overflow-y: auto;
   }
 
-  /* splitters become horizontal bars */
   .splitter {
     width: 100%;
     height: 6px;
     cursor: row-resize;
   }
 }
+
+/* toolbar style */
+/* sidebar column (new) */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--chip-col);
+  overflow: auto;
+  /* its own scroll if tall */
+  min-width: 120px;
+  /* don’t collapse too far */
+}
+
+/* “oval” fieldset pods (new, self-contained) */
+.pod {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px 14px 12px;
+  background: var(--panel-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pod legend {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 0 6px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  align-self: center;
+}
+
+/* stack controls neatly inside each pod */
+.pod .aesthetic-controls,
+.pod .functional-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pod label,
+.pod button,
+.pod .control-row {
+  width: 100%;
+}
+
+.pod .control-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.canvas-wrap, .legend, .coderenderer { min-height:0; overflow:auto; }
 
 /* let every flex/grid item inside the .main shrink too */
 .main > *{min-width:0;}
@@ -537,6 +616,55 @@ body.dark .splitter:hover {
     margin: 0;
 }
 
+/* aesthetic options for checkboxes */
+/* This is the main container that handles wrapping */
+.chip-toggles {
+  display: grid;
+  gap: 6px;
+  /* Create as many columns as can fit, each at least 65px wide */
+  grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+}
+/* This hides the actual, default checkbox from view */
+.chip-toggles input[type="checkbox"] {
+  display: none;
+}
+
+/* This styles the label to look like our toggle button */
+.chip-toggles label {
+  /* Appearance */
+  display: inline-block;
+  /* Important for proper padding and layout */
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--chip-col);
+  color: var(--text-col);
+  font-size: 12px;
+  line-height: 1.2;
+  cursor: pointer;
+  text-align: center;
+
+  /* Behavior - ensures it doesn't stretch */
+  width: auto;
+  user-select: none;
+  /* Prevents text selection on click */
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.chip-toggles input[type="checkbox"]:checked+label {
+  background-color: var(--accent-col);
+  color: var(--accent-text);
+}
+
+/* Optional: Add a subtle hover effect for better UX */
+.chip-toggles label:hover {
+  border-color: #999;
+}
+
+body.dark .chip-toggles label:hover {
+  border-color: #ccc;
+}
+
 /* --- compact chip radios --- */
 /* container: rows that wrap; big groups force their own row */
 .render-select.chip-radios {
@@ -567,7 +695,6 @@ body.dark .splitter:hover {
   /* don’t stretch */
   flex: 0 1 auto;
 }
-
 
 /* palette per group (single color across all sides)… */
 .render-select.chip-radios fieldset[data-lang="r"]       { --group-col: var(--col-r); }
@@ -674,10 +801,9 @@ body.dark .splitter:hover {
 
 .legend,
 .coderenderer {
-    overflow: hidden;
-    /* keep scrollbars if somebody shrinks too much */
-    min-width: 160px;
-    /* optional: don’t let them vanish entirely */
+  overflow: auto;
+  min-width: 0;
+  /* let grid shrink them */
 }
 
 .dim {
@@ -732,14 +858,16 @@ body.dark .splitter:hover {
 }
 
 /* switch for labels */
-.label-switch{
-  display:inline-flex;
-  border:1px solid var(--border);
-  border-radius:2px;
-  overflow:hidden;
-  font-size:13px;
-  border-color:var(--border);
+.label-switch {
+  display: inline-flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  font-size: 13px;
+  border-color: var(--border);
 }
+
 .label-switch button{
   all:unset;
   padding:4px 12px;
@@ -932,3 +1060,54 @@ body.dark .splitter:hover {
   padding: 0.15rem 0.3rem;
   text-align: center;
 }
+
+/* some global layout rules */
+
+/* keep everything inside the sidebar from forcing horizontal scroll */
+.sidebar {
+  overflow: auto;
+}
+
+.sidebar * {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* stack/wrap all controls in the sidebar; don't let inline gaps make them wider */
+.sidebar .aesthetic-controls,
+.sidebar .functional-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.sidebar .pod label,
+.sidebar button,
+.sidebar .control-row {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* slimmer buttons in the sidebar only */
+.sidebar button {
+  padding: 3px 8px;
+  border-radius: 4px;
+  line-height: 1.15;
+  font-size: 12px;
+}
+
+/* stack Project controls vertically so they don't widen the column */
+.sidebar .control-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* inputs shouldn't expand past the column */
+.sidebar input[type="number"] {
+  width: 100%;
+  max-width: 100%;
+}
+
+*, *::before, *::after { box-sizing: border-box; }

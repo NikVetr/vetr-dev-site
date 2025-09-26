@@ -23,90 +23,77 @@
 <div class="app">
     <header>
         <h1>multipanel <code>web-gui</code></h1>
-        <button id="helpBtn" class="btn" data-tip="Keyboard & mouse controls and shortcuts"> ? </button>
+        <button id="helpBtn" class="btn"> ? </button>
         <div id="modIndicators" class="modbar" aria-label="Modifier keys state">
-            <div id="modIndMod"   class="modchip" data-tip="The 'Mod' modifier is mapped to Cmd / Ctrl and shifts you from movement operations to resizing operations in Focus mode.">mod</div>
-            <div id="modIndPwr"   class="modchip" data-tip="The 'Pwr' modifier is mapped to Alt / Option and makes rectangle operations squish or stretch other rectangles in the event of collision.">pwr</div>
-            <div id="modIndShift" class="modchip" data-tip="The 'Inv' modifier is mapped to Shift and inverts the directionality of rectangle operations, eg. from expansion to contraction.">inv</div>
+            <div id="modIndMod"   class="modchip">mod</div>
+            <div id="modIndPwr"   class="modchip">pwr</div>
+            <div id="modIndShift" class="modchip">inv</div>
         </div>
-
-        <div class="controls">
-
-            <hr class="control-divider">
-
-            <div class="aesthetic-controls">
-
-
-                <label data-tip="The aspect ratio of the canvas below">
-                    AR <input type="number" id="aspect" step="0.1" min="0.2" max="10" placeholder="auto">
-                </label>
-
-                <!-- view toggles -->
-                <label data-tip="Toggle the light-grey grid lines">
-                    <input type="checkbox" id="showGrid" checked> show grid
-                </label>
-
-                <label data-tip="Force each cell to be square by resizing the canvas">
-                    <input type="checkbox" id="squareCells"> square cells
-                </label>
-
-                <label data-tip="Display row / column indices inside every cell">
-                    <input type="checkbox" id="showIndices"> show cell indices
-                </label>
-
-                <label data-tip="Switch between light & dark colour themes">
-                    <input type="checkbox" id="darkMode" checked> dark mode
-                </label>
-
-                <div class="label-switch" id="labelSwitch" 
-                    data-tip="Switch between default cell-names {1, 2, 3, 4, ...} and {A, B, C, D, ...}">
-                    <button data-mode="num"   class="active">123s</button>
-                    <button data-mode="alpha">ABCs</button>
-                </div>
-
-                <span class="dim" id="dimText" data-tip="Current grid dimensions"></span>
-
-            </div>
-
-            <hr class="control-divider">
-
-            <div class="functional-controls">
-
-                <!-- size controls -->
-                <label data-tip="Total rows in the drawing grid">
-                    Rows <input type="number" id="rows" min="1" value="8">
-                </label>
-
-                <label data-tip="Total columns in the drawing grid">
-                    Cols <input type="number" id="cols" min="1" value="8">
-                </label>
-
-                <!-- history -->
-                <button id="undoBtn" data-tip="Undo the last change">Undo</button>
-                <button id="redoBtn" data-tip="Redo the previously undone change">Redo</button>
-
-                <!-- edit -->
-                <button id="clearBtn" data-tip="Remove ALL rectangles">Clear</button>
-                <button id="trimBtn" data-tip="Crop canvas to bounding-box of rectangles">Trim</button>
-                <button id="fillBtn" class="btn" data-tip="Fill negative space by expanding rectangles">Fill</button>
-                <button id="reduceBtn" data-tip="Factor grid without changing relative rectangle sizes and shapes">Reduce</button>
-                <button id="expandBtn" data-tip="Double dimensions of grid and rectangles">Expand</button>
-                <div class="control-row">
-                    <button id="projectBtn" data-tip="Project canvas and rectangles to a different sized canvas">Project:</button>
-                    <input id="projectTarget" data-tip="The larger dimension of the canvas to project to" type="number" value="8" min="1" style="width:3rem;">
-                </div>
-                
-
-                <!-- persist -->
-                <button id="exportBtn" data-tip="Save the current layout to a JSON file">Export JSON</button>
-                <button id="importBtn" data-tip="Load a layout from a JSON file">Import JSON</button>
-                
-            </div>
-        </div>
+        <span class="dim" id="dimText"></span>
     </header>
 
+<div class="main">
+    <!-- ⬇️ Sidebar belongs here, not in <header> -->
+    <aside class="sidebar" aria-label="Toolbox">
+    
+        <fieldset class="pod" id="podVisuals">
+            <legend>Visuals</legend>
+            <div class="aesthetic-controls">
+                <label class="stack"><span>Aspect</span>
+                    <input type="number" id="aspect" step="0.1" min="0.2" max="10" placeholder="auto"></label>
+                    <div class="chip-toggles" id="viewToggles">
+                        <div>
+                            <input type="checkbox" id="showGrid" checked>
+                            <label for="showGrid">grid</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="squareCells">
+                            <label for="squareCells">sqCells</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="showIndices">
+                            <label for="showIndices">indices</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="darkMode" checked>
+                            <label for="darkMode">dark</label>
+                        </div>
+                    </div>
+                    <div class="label-switch" id="labelSwitch">
+                        <button data-mode="num" class="active">123s</button>
+                        <button data-mode="alpha">ABCs</button>
+                </div>
+            </div>
+        </fieldset> <!-- ✅ close Visuals pod -->
+    
+        <fieldset class="pod" id="podControls">
+            <legend><span>Controls</span></legend>
+            <div class="functional-controls">
+                <label class="stack"><span>Rows</span><input type="number" id="rows" min="1" value="8"></label>
+                <label class="stack"><span>Cols</span><input type="number" id="cols" min="1" value="8"></label>
+    
+                <button id="undoBtn">Undo</button>
+                <button id="redoBtn">Redo</button>
+                <button id="clearBtn">Clear</button>
+                <button id="trimBtn">Trim</button>
+                <button id="fillBtn">Fill</button>
+                <button id="reduceBtn">Reduce</button>
+                <button id="expandBtn">Expand</button>
+    
+                <!-- stack these vertically -->
+                <div class="control-row">
+                    <button id="projectBtn">Project:</button>
+                    <input id="projectTarget" type="number" value="8" min="1" style="width:3rem;">
+                </div>
+    
+                <button id="exportBtn">Export</button>
+                <button id="importBtn">Import</button>
+            </div>
+        </fieldset>
+    
+    </aside>
 
-    <div class="main">
+
         <div class="canvas-wrap" id="canvasWrap">
             <canvas id="canvas"></canvas>
         </div>
@@ -114,7 +101,7 @@
         <div class="splitter" id="splitLeft"></div>
 
         <div class="legend">
-            <h2>Rectangle Plotting Order</h2>
+            <h2>Legend</h2>
             <div class="legend-list" id="legendList"></div>
             <div class="dim legend-footer">Tip: you can drag and drop entries above to reorder them.</div>
         </div>
@@ -127,22 +114,10 @@
 
                 <fieldset>
                     <legend>Include:</legend>
-                    <label data-tip="calls to library(), plot(), import, etc.">
-                        <input type="checkbox" id="incSetup" checked> Boilerplate
-                    </label>
-
-                    <label data-tip="the URL of the current configuration of rectangles as a comment">
-                        <input type="checkbox" id="incURL" checked> URL
-                    </label>
-
-                    <label data-tip="example code that will render random plots given your current configuration">
-                        <input type="checkbox" id="incExample" > Example
-                    </label>
-
-                    <label data-tip="code that will draw figure labels in the upper left corner of each plo9t">
-                        <input type="checkbox" id="incLabels"> Labels
-                    </label>
-
+                    <label><input type="checkbox" id="incSetup" checked> Boilerplate</label>
+                    <label><input type="checkbox" id="incURL" checked> URL</label>
+                    <label><input type="checkbox" id="incExample" > Example</label>
+                    <label><input type="checkbox" id="incLabels"> Labels</label>
                 </fieldset>
 
                 <div class="render-select chip-radios" id="renderRadios">

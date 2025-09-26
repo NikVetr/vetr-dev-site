@@ -1,7 +1,7 @@
 import {
   canvas, wrap, rowsEl, colsEl, squareEl,
   showGridEl, showIdxEl, rcodeEl, copyBtn,
-  aspectEl
+  aspectEl, sidebarEl
 }                        from './dom.js';
 import { state, history }         from './state.js';
 import { clamp, syncURL, ok, norm, rectBox, deleteGlyphMetrics }         from './helpers.js';
@@ -170,21 +170,96 @@ const main = document.querySelector('.main');
 const MIN_LEFT = 260,
     MIN_MID = 150,
     MIN_RIGHT = 260; // px
+const splitW = 6; // keep in sync with CSS
+
+const getGap = () =>
+  parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap')) || 10;
+
+// Prefer CSS var --sidebar-w; fall back to actual DOM width
+const getSidebarW = () => {
+  const cssVal = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-w')) || 0;
+  if (cssVal) return cssVal;
+  return sidebarEl ? sidebarEl.getBoundingClientRect().width : 0;
+};
+
+// Available width for the three resizable panels (excludes sidebar, splitters, and gaps)
+// width available for LEFT+MID+RIGHT (excludes sidebar, splitters, and gaps)
+function budget() {
+  const mainW = main.getBoundingClientRect().width;
+
+  const styles = getComputedStyle(document.documentElement);
+  const gap    = parseFloat(styles.getPropertyValue('--gap')) || 10;
+
+  // prefer CSS var --sidebar-w; fallback to actual DOM width
+  let sidebarW = parseFloat(styles.getPropertyValue('--sidebar-w')) || 0;
+  if (!sidebarW) {
+    const aside = document.querySelector('.sidebar');
+    sidebarW = aside ? aside.getBoundingClientRect().width : 0;
+  }
+
+  // 6 grid columns ⇒ 5 gaps; 2 splitters are their own columns
+  const fixed = sidebarW + (2 * splitW) + (5 * gap);
+  const finalBudget = Math.max(0, mainW - fixed);
+
+    console.log({
+    step: "budget() calculation",
+    mainW: mainW,
+    sidebarW: sidebarW,
+    gap: gap,
+    fixedCost: fixed,
+    finalBudget: finalBudget 
+  });
+
+  return Math.max(0, mainW - fixed);
+}
+
+
 const setCss = (name, px) =>
     document.documentElement.style.setProperty(name, px + 'px');
 const getCss = name =>
     parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 
-/* ----- initial 50 / 25 / 25 proportions ----- */
-const splitW = 6; // splitter width in CSS
-const colGap = parseFloat(getComputedStyle(document.documentElement)
-    .getPropertyValue('--gap')) || 10; // .main { gap: var(--gap) }
-const TOTAL_GAPS = splitW * 2 + colGap * 4; // 5 cols → 4 gaps
-const gridW = main.getBoundingClientRect().width - TOTAL_GAPS;
-setCss('--w-left', gridW * 0.50);
-setCss('--w-mid', gridW * 0.25);
-setCss('--w-right', gridW * 0.25);
+/* exact-fit initializer: honors mins and fills the whole budget */
+function initSplitWidths() {
+  const G = budget();
+  const MIN_SUM = MIN_LEFT + MIN_MID + MIN_RIGHT;
 
+  // initialize
+  let L = 0, M = 0, R = 0;
+  L = Math.max(MIN_LEFT, G * 0.50);
+  M = Math.max(MIN_MID,  G * 0.25);
+  R = G - L - M;
+
+  if (G <= 0) {
+    // nothing visible; keep zeros
+  } else if (G < MIN_SUM) {
+    // scale mins down proportionally so we never overflow
+    const s = G / MIN_SUM;
+    L = MIN_LEFT  * s;
+    M = MIN_MID   * s;
+    R = MIN_RIGHT * s;
+  } else {
+    // target 50/25/25, then enforce mins and give RIGHT the exact remainder
+    L = Math.max(MIN_LEFT, G * 0.55);
+    M = Math.max(MIN_MID,  G * 0.2);
+    R = G - L - M;
+
+    // if RIGHT fell under its min, borrow from L then M (without dropping their mins)
+    if (R < MIN_RIGHT) {
+      let need = MIN_RIGHT - R;
+      const giveL = Math.min(need, L - MIN_LEFT); L -= giveL; need -= giveL;
+      const giveM = Math.min(need, M - MIN_MID);  M -= giveM; need -= giveM;
+      R = G - L - M; // exact remainder
+    }
+  }
+
+  setCss('--w-left',  L);
+  setCss('--w-mid',   M);
+  setCss('--w-right', R);
+
+  console.log({ step: "initSplitWidths() applied", Left: L, Mid: M, Right: R });
+
+};
 
 function dragFactory(id) {
     const splitter = document.getElementById(id);
@@ -193,8 +268,6 @@ function dragFactory(id) {
         e.preventDefault();
         const startX = e.clientX;
 
-        const G = main.getBoundingClientRect().width - TOTAL_GAPS;
-
         /* -------- freeze the starting widths -------- */
         const L0 = getCss('--w-left');
         const M0 = getCss('--w-mid');
@@ -202,7 +275,7 @@ function dragFactory(id) {
 
         function onMove(ev) {
             const dx = ev.clientX - startX;
-            const G = main.getBoundingClientRect().width - TOTAL_GAPS; // full free width
+            const G = budget();
 
             let L = L0,
                 M = M0,
@@ -248,6 +321,45 @@ function dragFactory(id) {
 
 dragFactory('splitLeft');
 dragFactory('splitRight');
+
+export function rescaleSplitWidths () {
+  const G = budget(); // new: true free width for the 3 resizable columns
+
+  let L = getCss('--w-left');
+  let M = getCss('--w-mid');
+  let R = getCss('--w-right');
+  let sum = L + M + R || 1;
+
+  // scale current widths to the new budget
+  const k = G / sum;
+  L = L * k;
+  M = M * k;
+  R = R * k;
+
+  // enforce mins without reintroducing overflow
+  const MIN_SUM = MIN_LEFT + MIN_MID + MIN_RIGHT;
+  if (G < MIN_SUM) {
+    // viewport is so small that mins don't fit — scale mins down proportionally
+    const s = G / MIN_SUM;
+    L = MIN_LEFT  * s;
+    M = MIN_MID   * s;
+    R = MIN_RIGHT * s;
+  } else {
+    // clamp to mins, then put exact remainder in R to avoid rounding drift
+    L = Math.max(MIN_LEFT, L);
+    M = Math.max(MIN_MID,  M);
+    R = Math.max(MIN_RIGHT, G - L - M);
+    if (R < MIN_RIGHT) {
+      R = MIN_RIGHT;
+      M = Math.max(MIN_MID, G - L - R);
+      L = Math.max(MIN_LEFT, G - M - R);
+    }
+  }
+
+  setCss('--w-left',  L);
+  setCss('--w-mid',   M);
+  setCss('--w-right', R);
+}
 
 export const pos = e => {
     const r = canvas.getBoundingClientRect(),
@@ -299,6 +411,20 @@ export function edgeKind(px, py, R, tol = 10) {
 
     return null;
 }
+
+/* one central refresh */
+export const update = () => {
+    //face out welcome message if it has never faded out before
+    if (!state.hasEverHadRect && state.rects.length > 0) {
+        startWelcomeFade();
+    }
+    repaint();
+    legend();
+    rcodeEl.value = generateCode();
+    dimText.textContent = `(${state.rows}×${state.cols})`;
+    cursor();
+    syncURL();
+};
 
 export function hit(px, py) {
   /* try to grab an edge / corner */
@@ -366,29 +492,59 @@ export function maxDelta(idx, dr, dc) {
     };
 }
 
-export function rescaleSplitWidths () {
-  const total = main.getBoundingClientRect().width - TOTAL_GAPS;
-  const L = getCss('--w-left');
-  const M = getCss('--w-mid');
-  const R = getCss('--w-right');
-  const sum = L + M + R || 1;               // guard-rail
+//initialize layout, avoiding race conditions
+let hasInitializedLayout = false;
 
-  const k = total / sum;                    // zoom-factor
-  setCss('--w-left',  L * k);
-  setCss('--w-mid',   M * k);
-  setCss('--w-right', R * k);
+const mainLayoutObserver = new ResizeObserver(entries => {
+  // Guard against unnecessary runs after we're done.
+  if (hasInitializedLayout) {
+    mainLayoutObserver.disconnect();
+    return;
+  }
+
+  const mainElement = entries[0].target;
+  const mainWidth = mainElement.getBoundingClientRect().width;
+  const sidebarElement = document.querySelector('.sidebar');
+  const sidebarWidth = sidebarElement ? sidebarElement.getBoundingClientRect().width : 0;
+
+  // CRITICAL CHECK:
+  // Only proceed if the main container has a width AND
+  // the sidebar's width is a reasonable, non-zero number that is LESS than the main container's width.
+  if (mainWidth > 0 && sidebarWidth > 0 && sidebarWidth < mainWidth) {
+    console.log(`Layout is stable: mainW=${mainWidth}, sidebarW=${sidebarWidth}. Initializing panels.`);
+    
+    initSplitWidths();
+    
+    hasInitializedLayout = true;
+    mainLayoutObserver.disconnect(); // We are done, stop observing.
+  } else {
+    // This log will show us if we are skipping a "bad" render frame.
+    console.log(`Layout not yet stable, skipping initialization: mainW=${mainWidth}, sidebarW=${sidebarWidth}`);
+  }
+});
+
+// Start observing the .main element.
+const mainElement = document.querySelector('.main');
+if (mainElement) {
+  mainLayoutObserver.observe(mainElement);
 }
 
-/* one central refresh */
-export const update = () => {
-    //face out welcome message if it has never faded out before
-    if (!state.hasEverHadRect && state.rects.length > 0) {
-        startWelcomeFade();
-    }
-    repaint();
-    legend();
-    rcodeEl.value = generateCode();
-    dimText.textContent = `(${state.rows}×${state.cols})`;
-    cursor();
-    syncURL();
-};
+export function handleViewportResize () {
+  // --- START: Safety Check ---
+  const mainElement = document.querySelector('.main');
+  const sidebarElement = document.querySelector('.sidebar');
+  if (!mainElement || !sidebarElement) return; // Exit if elements don't exist
+
+  const mainWidth = mainElement.getBoundingClientRect().width;
+  const sidebarWidth = sidebarElement.getBoundingClientRect().width;
+
+  // Only run the resizing logic if the layout is stable and makes sense.
+  // This prevents the bug on monitor wake-up or other glitchy resize events.
+  if (sidebarWidth <= 0 || sidebarWidth >= mainWidth) {
+    console.warn(`Skipping resize. Unstable layout detected: mainW=${mainWidth}, sidebarW=${sidebarWidth}`);
+    return;
+  }
+
+  rescaleSplitWidths();     // keep the three columns proportional
+  resizeCanvas();           // then redraw the bitmap
+}

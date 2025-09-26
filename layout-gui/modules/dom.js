@@ -30,6 +30,7 @@ export const renderRadios = document.getElementById('renderRadios');
 
 export const aspectEl    = document.getElementById('aspect');
 export const labelSwitch = document.getElementById('labelSwitch');
+export const sidebarEl = document.querySelector('.sidebar');
 
 //help info
 export const helpBtn     = document.getElementById('helpBtn');

@@ -9,17 +9,13 @@ import { legend }       from './modules/legend.js';
 import {
   generateCode, renderer,
 }                       from './modules/code-generator.js';
-import { resizeCanvas, update, rescaleSplitWidths } from './modules/controls.js';
+import { resizeCanvas, update, rescaleSplitWidths, handleViewportResize } from './modules/controls.js';
 
 import './modules/events.js';
 import './modules/controls.js';
 import './modules/tooltips.js';
 
 /* handle viewport resizing */
-function handleViewportResize () {
-  rescaleSplitWidths();     // keep the three columns proportional
-  resizeCanvas();           // then redraw the bitmap
-}
 window.addEventListener        ('resize', handleViewportResize);      // classic
 window.visualViewport?.addEventListener('resize', handleViewportResize); // pinch-zoom
 
@@ -54,6 +50,10 @@ if (location.hash.length > 1) {
     
     }
 }
+
+//load tooltips
+import { tooltipsReady } from './modules/tooltips.js';
+await tooltipsReady;
 
 history();
 resizeCanvas();

@@ -2089,7 +2089,7 @@ projectBtn.onclick = () => {
 // make the numeric text entry fields responsive to the scroll wheel
 document.querySelectorAll('input[type=number]').forEach(input => {
   input.addEventListener('wheel', (event) => {
-    event.preventDefault(); // needs passive:false on the listener
+    event.preventDefault();
 
     const step = input.step ? parseFloat(input.step) : 1;
     const min = input.min ? parseFloat(input.min) : -Infinity;
@@ -2101,11 +2101,13 @@ document.querySelectorAll('input[type=number]').forEach(input => {
     value = event.deltaY < 0 ? Math.min(value + step, max)
                              : Math.max(value - step, min);
 
-    // set the number and notify listeners
+    // fix floating-point errors by rounding to step’s decimal precision
+    const decimals = (step.toString().split('.')[1] || '').length;
+    value = Number(value.toFixed(decimals));
+
     input.valueAsNumber = value;
 
-    // fire both, in case some fields listen to 'input' and others to 'change'
     input.dispatchEvent(new Event('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
-  }, { passive: false }); // <— important
+  }, { passive: false });
 });
