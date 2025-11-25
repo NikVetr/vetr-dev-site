@@ -44,7 +44,6 @@ body.dark {
     --accent-col: #3c5060;
     --text-col: #ffffff;
     --accent-text: #fff;
-    --text-col: #ffffff;
     --chip-col: #2e2e2e;
     --grid: #e2e2e2;
     --fg-muted: #e2e2e2;
@@ -360,7 +359,7 @@ canvas {
   background: var(--panel-bg);
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 10px;
 }
 
 /* force the legend bubble to be centered over the border */
@@ -415,13 +414,13 @@ canvas {
 .splitter:hover {
     background: #e5e7eb;
 }
-
 .canvas-wrap {
-    position: relative;
-    background: var(--canvas-bg);
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    overflow: hidden;
+  position: relative;
+  background: var(--canvas-bg);
+  /* ← uses the new var */
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 canvas {
@@ -798,15 +797,6 @@ body.dark .chip-toggles label:hover {
   }
 }
 
-.canvas-wrap {
-    position: relative;
-    background: var(--canvas-bg);
-    /* ← uses the new var */
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
 .legend,
 .coderenderer {
   overflow: auto;
@@ -1050,14 +1040,8 @@ body.dark .chip-toggles label:hover {
 
 /* some global layout rules */
 
-/* keep everything inside the sidebar from forcing horizontal scroll */
-.sidebar {
-  overflow: auto;
-}
-
 .sidebar * {
   min-width: 0;
-  box-sizing: border-box;
 }
 
 /* stack/wrap all controls in the sidebar; don't let inline gaps make them wider */
