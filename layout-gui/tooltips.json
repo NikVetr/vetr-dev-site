@@ -3,7 +3,7 @@
   "modIndMod": "The 'Mod' modifier is mapped to Cmd / Ctrl and shifts you from movement operations to resizing operations in Focus mode.",
   "modIndPwr": "The 'Pwr' modifier is mapped to Alt / Option and makes rectangle operations squish or stretch other rectangles in the event of collision.",
   "modIndShift": "The 'Inv' modifier is mapped to Shift and inverts the directionality of rectangle operations, eg. from expansion to contraction.",
-  "aspect": "The aspect ratio of the canvas below",
+  "aspect": "The aspect ratio of the canvas panel",
   "showGrid": "Toggle the light-grey grid lines",
   "squareCells": "Force each cell to be square by resizing the canvas",
   "showIndices": "Display row / column indices inside every cell",
@@ -26,5 +26,6 @@
   "incSetup": "calls to library(), plot(), import, etc.",
   "incURL": "the URL of the current configuration of rectangles as a comment",
   "incExample": "example code that will render random plots given your current configuration",
-  "incLabels": "code that will draw figure labels in the upper left corner of each plot"
+  "incLabels": "code that will draw figure labels in the upper left corner of each plot",
+  "squareCells":"Force each cell of the grid to have a square aspect ratio"
 }

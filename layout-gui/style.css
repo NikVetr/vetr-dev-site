@@ -339,8 +339,8 @@ canvas {
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 8px;
+  gap: 16px;
+  padding: 16px 8px 8px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--chip-col);
@@ -352,16 +352,25 @@ canvas {
 
 /* “oval” fieldset pods (new, self-contained) */
 .pod {
+  position: relative;
+  /* let legend position against this */
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 16px 14px 12px;
   background: var(--panel-bg);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 100px;
 }
 
+/* force the legend bubble to be centered over the border */
 .pod legend {
+  position: absolute;
+  top: -0.7em;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
@@ -370,7 +379,6 @@ canvas {
   background: var(--panel-bg);
   border: 1px solid var(--border);
   border-radius: 9999px;
-  align-self: center;
 }
 
 /* stack controls neatly inside each pod */
@@ -857,27 +865,6 @@ body.dark .chip-toggles label:hover {
   pointer-events: none;
 }
 
-/* switch for labels */
-.label-switch {
-  display: inline-flex;
-  flex-direction: column;
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  font-size: 13px;
-  border-color: var(--border);
-}
-
-.label-switch button{
-  all:unset;
-  padding:4px 12px;
-  cursor:pointer;
-  user-select:none;
-}
-.label-switch button.active{
-  background:var(--accent-col);
-}
-
 /* help information */
 
 .hidden { display: none !important; }
@@ -1108,6 +1095,46 @@ body.dark .chip-toggles label:hover {
 .sidebar input[type="number"] {
   width: 100%;
   max-width: 100%;
+}
+
+.label-switch {
+  display: inline-flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+/* center text + make buttons full-width */
+.label-switch button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 4px 0;
+  cursor: pointer;
+  user-select: none;
+  background: var(--panel-bg);
+}
+
+/* white divider line between 123s / ABCs */
+.label-switch button+button {
+  border-top: 1px solid var(--border);
+}
+
+.label-switch button.active {
+  background: var(--accent-col);
+}
+
+/* override global `button:hover` so grey never wins here */
+.label-switch button:hover {
+  background: var(--panel-bg);
+}
+
+.label-switch button.active:hover {
+  background: var(--accent-col);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
