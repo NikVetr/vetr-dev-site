@@ -9,21 +9,52 @@ export const tooltipsReady = (async () => {
     Object.entries(tips).forEach(([id, val]) => {
       const el = document.getElementById(id);
       if (!el) {
-        console.warn(`[tooltips] no element with id="${id}"`);
+        console.warn('[tooltips] no element with id="%s"', id);
         return;
       }
+
+      // figure out the text & other fields just once
+      let text = null;
+      let title = null;
+      let img = null;
+      let html = null;
+
       if (typeof val === 'string') {
-        // simple case: just a text tooltip
-        el.dataset.tip = val;
+        text = val;
       } else if (val && typeof val === 'object') {
-        // future-friendly: structured tooltips
-        // (you can use these later to render richer HTML)
-        if (val.text) el.dataset.tip = val.text;
-        if (val.title) el.dataset.tipTitle = val.title;
-        if (val.img) el.dataset.tipImg = val.img;
-        if (val.html) el.dataset.tipHtml = val.html; // optional raw HTML
+        if (val.text) text = val.text;
+        if (val.title) title = val.title;
+        if (val.img) img = val.img;
+        if (val.html) html = val.html;
       }
+
+      // collect all elements that should get the tooltip:
+      //  - the element itself
+      //  - any labels pointing at it (for="id")
+      const targets = [el];
+
+      if (el instanceof HTMLInputElement && el.labels && el.labels.length > 0) {
+        // HTMLInputElement.labels is a NodeList of <label> elements
+        targets.push(...el.labels);
+      } else {
+        // fallback: query labels by for="id" if .labels isn't supported
+        const extra = document.querySelectorAll('label[for="' + id + '"]');
+        extra.forEach(label => {
+          if (!targets.includes(label)) targets.push(label);
+        });
+      }
+
+      // apply data attributes to all targets
+      targets.forEach(target => {
+        if (text) target.dataset.tip = text;
+        if (title) target.dataset.tipTitle = title;
+        if (img) target.dataset.tipImg = img;
+        if (html) target.dataset.tipHtml = html;
+      });
+
+      console.debug('[tooltips] attached to', id, 'targets:', targets.length);
     });
+
 
     console.debug('[tooltips] applied', Object.keys(tips).length, 'entries');
     return tips;

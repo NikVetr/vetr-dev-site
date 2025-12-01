@@ -139,7 +139,7 @@ label.stack {
 /* Dark mode parity with your buttons */
 body.dark .modchip {
   background: var(--chip-col);
-  border: 1px solid var(--border, #555);
+  border-color: var(--border, #555);
   color: var(--fg, #ddd);
 }
 body.dark .modchip:hover { background: #3c3c3c; }
@@ -202,6 +202,10 @@ label {
 input[type='number'] {
     width: 70px;
     padding: 4px 6px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--canvas-grid);
+    color: var(--fg);
 }
 
 input[type='checkbox'] {
@@ -227,7 +231,7 @@ button.primary {
 /* Button colors for dark mode */
 body.dark button {
     background: #2e2e2e;
-    border: 1px solid var(--border);
+    border-color: var(--border);
     color: var(--fg);
 }
 
@@ -1062,10 +1066,14 @@ body.dark .chip-toggles label:hover {
 
 /* slimmer buttons in the sidebar only */
 .sidebar button {
-  padding: 3px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 4px 6px;
   border-radius: 4px;
-  line-height: 1.15;
   font-size: 12px;
+  width: 100%;
 }
 
 /* stack Project controls vertically so they don't widen the column */
@@ -1073,6 +1081,26 @@ body.dark .chip-toggles label:hover {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  align-items: stretch;
+}
+
+.sidebar .control-row:has(#projectBtn) {
+  gap: 0;
+}
+
+#projectBtn {
+  width: 100%;
+  margin: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+}
+
+#projectTarget {
+  width: 100%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  text-align: center;
 }
 
 /* inputs shouldn't expand past the column */

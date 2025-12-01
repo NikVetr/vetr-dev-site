@@ -201,14 +201,14 @@ function budget() {
   const fixed = sidebarW + (2 * splitW) + (5 * gap);
   const finalBudget = Math.max(0, mainW - fixed);
 
-    console.log({
-    step: "budget() calculation",
-    mainW: mainW,
-    sidebarW: sidebarW,
-    gap: gap,
-    fixedCost: fixed,
-    finalBudget: finalBudget 
-  });
+  //   console.log({
+  //   step: "budget() calculation",
+  //   mainW: mainW,
+  //   sidebarW: sidebarW,
+  //   gap: gap,
+  //   fixedCost: fixed,
+  //   finalBudget: finalBudget 
+  // });
 
   return Math.max(0, mainW - fixed);
 }

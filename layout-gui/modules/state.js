@@ -36,7 +36,7 @@ export const state = {
     stickyFocus : null,
     focusSource : null,
     prevFocus : null,
-    labelMode : 'num',
+    labelMode : 'alpha',
     modalOpen: false,
     base: null,
     baseAll: null,

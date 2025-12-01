@@ -3,7 +3,8 @@ import { norm, nameOf, encodeState } from './helpers.js';
 import {
   rcodeEl,                          // where the generated code lands
   renderRadios,
-  incSetupEl, incURLEl, incExampleEl, incLabelsEl
+  incSetupEl, incURLEl, incExampleEl, incLabelsEl,
+  labelSwitch
 }                                   from './dom.js';
 import { update }                   from './controls.js';
 
@@ -206,15 +207,18 @@ function tokensInReadingOrder(ascii, blank = '#') {
 export let incSetup = incSetupEl.checked;
 export let incURL = incURLEl.checked;
 export let incExample = incExampleEl.checked;
+export let incLabels  = incLabelsEl.checked;
 
-[incSetupEl, incURLEl, incExampleEl].forEach(el => {
-    el.onchange = () => {
-        incSetup = incSetupEl.checked;
-        incURL = incURLEl.checked;
-        incExample = incExampleEl.checked;
-        update(); // regenerate code immediately
-    };
+[incSetupEl, incURLEl, incExampleEl, incLabelsEl].forEach(el => {
+  el.onchange = () => {
+    incSetup   = incSetupEl.checked;
+    incURL     = incURLEl.checked;
+    incExample = incExampleEl.checked;
+    incLabels  = incLabelsEl.checked;
+    update(); // regenerate code immediately
+  };
 });
+
 
 /* format numbers like 0.63636… → "0.6364", 0.250000 → "0.25" */
 export const f = (x, d = 4) => +x.toFixed(d) // round
@@ -460,839 +464,1076 @@ export function plot_code({
   return `# TODO: ggplot2 "${type}" not yet implemented\n`;
 }
 
+function buildRExampleSnippets(style = 'base_r') {
+  const counters = { square: 0, wide: 0, tall: 0 };
+
+  return state.rects.map((r0, i) => {
+    const shape   = classifyShape(r0);
+    const typ     = pickTypeForShape(shape, counters[shape]++);
+    const col     = rectColor(i);
+    const comment = rectCommentHeader(i);  // "# id alias"
+    const body    = plot_code({ color: col, type: typ, language: 'R', style }).trimEnd();
+
+    return { comment, body };
+  });
+}
+
 
 function buildExampleBlockLayoutR(style = 'base_r') {
   const lines = [];
+
   lines.push(`par(mar=c(2,2,1,1)+0.1, xaxs="i", yaxs="i")`);
   if (style === 'ggplot2' && !incSetup) {
     lines.push(`suppressPackageStartupMessages(library(ggplot2))`);
   }
 
-  const counters = { square: 0, wide: 0, tall: 0 };
+  const snippets = buildRExampleSnippets(style);
 
-  state.rects.forEach((r0, i) => {
-    const shape = classifyShape(r0);
-    const typ   = pickTypeForShape(shape, counters[shape]++);
-    const col   = rectColor(i);
-
-    lines.push('');                   // blank line BEFORE label
-    lines.push(rectCommentHeader(i)); // "# <id> <alias?>"
-    lines.push(plot_code({ color: col, type: typ, language: 'R', style }).trimEnd());
-    lines.push('');                   // blank line after each plot
+  snippets.forEach(({ comment, body }) => {
+    lines.push('');
+    lines.push(comment);
+    lines.push(body);
+    lines.push('');
   });
 
   return lines.join('\n');
 }
 
+function buildExampleBlockParfigR(style = 'base_r') {
+  if (!state.rects.length) return '# (no rectangles yet)';
+
+  const R = state.rows;
+  const C = state.cols;
+
+  // coords matrix (same geometry as existing par(fig) code)
+  const coordRows = state.rects
+    .map((r0, i, arr) => {
+      const r = norm(r0);
+      const row = [
+        f(r.c0 / C),              // x-min
+        f(r.c1 / C),              // x-max
+        f(1 - r.r1 / R),          // y-min (flip)
+        f(1 - r.r0 / R)           // y-max
+      ].join(', ');
+      const sep = (i < arr.length - 1) ? ',' : '';
+      return `  c(${row})${sep}  # ${nameOf(i)}`;
+    })
+    .join('\n');
+
+  const coordsBlock = ['coords <- rbind(', coordRows, ')'].join('\n');
+  const snippets    = buildRExampleSnippets(style);
+
+  const lines = [];
+
+  lines.push(coordsBlock);
+  lines.push('');
+  lines.push('plot.new()');
+  lines.push('par(oma = c(0,0,0,0))');
+  lines.push('par(mar=c(2,2,1,1)+0.1, xaxs="i", yaxs="i")');
+  lines.push('');
+
+  snippets.forEach(({ comment, body }, idx) => {
+    const i = idx + 1;
+    lines.push(comment);
+    lines.push(`par(fig = coords[${i}, ], new = TRUE)`);
+    lines.push(body);
+    lines.push('');
+  });
+
+  return lines.join('\n');
+}
+
+
+// generic base-R panel labels for any grid-based layout (layout(), par(fig), …)
+function buildRPanelLabels() {
+  if (!incLabels || !state.rects.length) return '';
+
+  // 123s vs ABCs from the toggle
+  let mode = 'num';
+  if (labelSwitch) {
+    const activeBtn = labelSwitch.querySelector('button.active');
+    if (activeBtn && activeBtn.dataset.mode === 'alpha') {
+      mode = 'alpha';
+    }
+  }
+
+  // index → "1)" / "2)" / … or "a)" / "b)" / … / "aa)" etc.
+  const mkLabel = i => {
+    if (mode === 'num') return `${i + 1})`;
+
+    const base = 'abcdefghijklmnopqrstuvwxyz';
+    let n = i;
+    let s = '';
+    while (true) {
+      const rem = n % 26;
+      s = base[rem] + s;
+      n = Math.floor(n / 26) - 1;
+      if (n < 0) break;
+    }
+    return `${s})`;
+  };
+
+  const R = state.rows;
+  const C = state.cols;
+  const xInset = 2;  // % inward from left
+  const yInset = 4;  // % downward from top
+
+  const out = [];
+
+  // 1) define fig_lab once
+  out.push('');
+  out.push('# figure labels');
+  out.push(
+`fig_lab <- function(xp = 0, yp = 0, cex = 2, label = "", xpd = NA){
+  ds <- dev.size("in")
+  xb <- grconvertX(c(0, ds[1]), from = "in", to = "user")
+  yb <- grconvertY(c(0, ds[2]), from = "in", to = "user")
+  text(x = xb[1] + diff(xb) * xp / 100,
+       y = yb[1] + diff(yb) * yp / 100,
+       label = label, cex = cex, xpd = xpd)
+}`
+  );
+  out.push('');
+
+  // 2) one fig_lab() call per rectangle (reading order)
+  state.rects.forEach((r0, i) => {
+    const r = norm(r0);
+
+    const fracLeft = r.c0 / C;
+    const fracTop  = 1 - r.r0 / R;
+
+    const xp = f(fracLeft * 100 + xInset, 2);
+    const yp = f(fracTop  * 100 - yInset, 2);
+
+    const lab = mkLabel(i).replace(/"/g, '\\"');
+    out.push(`fig_lab(label = "${lab}", xp = ${xp}, yp = ${yp})`);
+  });
+
+  return out.join('\n');
+}
+
+
+
+// which extras are supported per renderer
+const FEATURE_SUPPORT = {
+  // R
+  layout:   { example: true,  labels: true },
+  grid:     { example: false, labels: false },
+  gridExtra:{ example: false, labels: false },
+  cowplot:  { example: false, labels: false },
+  patchwork:{ example: false, labels: false },
+  parfig:   { example: true, labels: true },
+
+  // Python
+  mpl:         { example: false, labels: false },
+  mpl_mosaic:  { example: false, labels: false },
+  mpl_axes:    { example: false, labels: false },
+  plotly:      { example: false, labels: false },
+  bokeh:       { example: false, labels: false },
+
+  // Julia
+  makie: { example: false, labels: false },
+  plots: { example: false, labels: false },
+
+  // MATLAB
+  tiled: { example: false, labels: false },
+
+  // Wolfram
+  mma_grid: { example: false, labels: false },
+
+  // LaTeX
+  textpos:  { example: false, labels: false },
+  tikz:     { example: false, labels: false },
+  tabularx: { example: false, labels: false },
+
+  // Other / CSV / JSON / YAML
+  csv_inds:   { example: false, labels: false },
+  csv_dims:   { example: false, labels: false },
+  csv_coords: { example: false, labels: false },
+  json:       { example: false, labels: false },
+  yaml:       { example: false, labels: false }
+};
+
+function syncExtraOptionVisibility() {
+  const key = renderer.value;
+  const cfg = FEATURE_SUPPORT[key] || { example: false, labels: false };
+
+  if (incExampleEl) {
+    const wrapper = incExampleEl.closest('label') || incExampleEl;
+    wrapper.style.display = cfg.example ? '' : 'none';
+  }
+
+  if (incLabelsEl) {
+    const wrapper = incLabelsEl.closest('label') || incLabelsEl;
+    wrapper.style.display = cfg.labels ? '' : 'none';
+  }
+}
+
 export function generateCode() {
-    const N = state.rects.length || 1; // at least 1 panel
-    const M = designMatrix(); // 2-D array
-    const matR = 'matrix(c(\n  ' +
-        M.map(r => `c(${r.join(', ')})`).join(',\n  ') +
-        `\n), nrow=${state.rows}, byrow=TRUE)`;
+  syncExtraOptionVisibility();
+  switch (renderer.value) {
 
-    /* helper for Python & Julia – slice syntax like 0:2,3 */
-    const pySlice = (r0, r1, c0, c1) =>
-        `[${r0}:${r1}, ${c0}:${c1}]`; // end exclusive
+    /* ──────────────────────  R  ────────────────────── */
+    case 'layout':    return gc_R_layout();
+    case 'grid':      return gc_R_grid();
+    case 'gridExtra': return gc_R_gridExtra();
+    case 'cowplot':   return gc_R_cowplot();
+    case 'patchwork': return gc_R_patchwork();
+    case 'parfig':    return gc_R_parfig();
 
-    function rowFmt(arr) {
-        return '  c(' + arr.join(', ') + ')';
+    /* ────────────────────  Python  ──────────────────── */
+    case 'mpl':         return gc_Python_mpl();
+    case 'mpl_mosaic':  return gc_Python_mpl_mosaic();
+    case 'mpl_axes':    return gc_Python_mpl_axes();
+    case 'plotly':      return gc_Python_plotly();
+    case 'bokeh':       return gc_Python_bokeh();
+
+    /* ────────────────────  Julia  ───────────────────── */
+    case 'makie':       return gc_Julia_makie();
+    case 'plots':       return gc_Julia_plots();
+
+    /* ────────────────────  MATLAB / Octave  ─────────── */
+    case 'tiled':       return gc_MATLAB_tiled();
+
+    /* ────────────────────  Wolfram  ─────────────────── */
+    case 'mma_grid':    return gc_Wolfram_mma_grid();
+
+    /* ────────────────────  Other formats  ───────────── */
+    case 'csv_inds':    return gc_Other_csv_inds();
+    case 'csv_dims':    return gc_Other_csv_dims();
+    case 'csv_coords':  return gc_Other_csv_coords();
+    case 'json':        return gc_Other_json();
+    case 'yaml':        return gc_Other_yaml();
+
+    /* ────────────────────  LaTeX  ───────────────────── */
+    case 'textpos':     return gc_LATEX_textpos();
+    case 'tikz':        return gc_LATEX_tikz();
+    case 'tabularx':    return gc_LATEX_tabularx();
+
+    default:
+      return '# unknown renderer';
+  }
+}
+
+function gc_R_layout() {
+
+    /* ---- 1) matrix rows (always emitted) -------------------- */
+    const rowsTxt = designMatrix().map(r => '  c(' + r.join(', ') + ')').join(',\n');
+
+    const matDef = [
+        'mat <- matrix(c(',
+        rowsTxt,
+        `), nrow = ${state.rows}, byrow = TRUE)`
+    ].join('\n');
+
+    const needLayout = incSetup || incExample;
+    const includeLayoutShow = incSetup && !incExample;
+
+    const parts = [];
+
+    // ensure exactly one newline after the URL header, not two
+    const hdr = urlHeader().trim();
+    if (hdr) parts.push(hdr);
+
+    parts.push(matDef);
+    if (needLayout) parts.push('layout(mat)');
+    if (includeLayoutShow) parts.push(`layout.show(${state.rects.length || 1})`);
+
+    if (incExample) {
+        const style = 'base_r';
+        parts.push(buildExampleBlockLayoutR(style));
     }
 
-    /* names like p_scatter, p_2 … respect aliases */
-    const plotVar = i => 'p_' + nameOf(i).replace(/\W+/g, '_');
-
-    const grobList = state.rects.map((_, i) => plotVar(i)).join(', ');
-
-
-    switch (renderer.value) {
-
-        /* ──────────────────────  R  ────────────────────── */
-
-        case 'layout': {
-            /* ---- 1) matrix rows (always emitted) -------------------- */
-            const rowsTxt = designMatrix().map(r => '  c(' + r.join(', ') + ')').join(',\n');
-
-            const matDef = [
-                'mat <- matrix(c(',
-                rowsTxt,
-                `), nrow = ${state.rows}, byrow = TRUE)`
-            ].join('\n');
-
-            const needLayout = incSetup || incExample;
-            const includeLayoutShow = incSetup && !incExample;
-
-            const parts = [];
-
-            // ensure exactly one newline after the URL header, not two
-            const hdr = urlHeader().trim();
-            if (hdr) parts.push(hdr);
-
-            parts.push(matDef);
-            if (needLayout) parts.push('layout(mat)');
-            if (includeLayoutShow) parts.push(`layout.show(${state.rects.length || 1})`);
-
-            if (incExample) {
-                const style = 'base_r';
-                parts.push(buildExampleBlockLayoutR(style));
-            }
-
-            return parts.filter(Boolean).join('\n');
-        }
-
-        case 'grid': {
-            // R grid viewports; origin at top-left (grid uses bottom-left Y, so flip)
-            const R = state.rows, C = state.cols;
-            const rects = normalizedRects().map(r => ({
-                id: r.id,
-                alias: r.alias,
-                x0: r.fx0,                 // left
-                x1: r.fx1,                 // right
-                y0: f(1 - r.fy1),          // flip: data top -> grid bottom
-                y1: f(1 - r.fy0),          // flip
-                w:  r.fw,
-                h:  r.fh
-            }));
-
-            const df = [
-                'mat <- data.frame(',
-                '  id = c(' + rects.map(r => r.id).join(', ') + '),',
-                '  x  = c(' + rects.map(r => r.x0).join(', ') + '),',
-                '  y  = c(' + rects.map(r => r.y0).join(', ') + '),',
-                '  w  = c(' + rects.map(r => r.w ).join(', ') + '),',
-                '  h  = c(' + rects.map(r => r.h ).join(', ') + ')',
-                ')'
-            ].join('\n');
-
-            const setup = [
-                'library(grid)',
-                '',
-                df,
-                '',
-                'grid.newpage()',
-                'pushViewport(viewport(xscale = c(0,1), yscale = c(0,1)))',
-                'for (i in seq_len(nrow(mat))) {',
-                '  with(mat[i,], {',
-                '    vp <- viewport(x = x + w/2, y = y + h/2, width = w, height = h, just = c("center","center"))',
-                '    pushViewport(vp)',
-                '    # draw your grob here, e.g.: grid.rect(gp = gpar(col = "black", fill = NA))',
-                '    popViewport()',
-                '  })',
-                '}'
-            ].join('\n');
-
-            // when Setup is off, just return data frame + loop skeleton
-            const body = incSetup ? setup : df;
-
-            return urlHeader() + body;
-        }
-
-
-        case 'gridExtra': {
-            const N = state.rects.length || 1; // ≥ 1 panel
-            const BLANK = N + 1; // code for “empty”
-
-            /* ---- 1) layout matrix (numbers, blank = N+1) ------------- */
-            const matTxt = buildMat() // 2-space indent
-                .map(r => '  c(' + r.join(', ') + ')')
-                .join(',\n');
-
-            /* ---- 2) grob list ---------------------------------------- */
-            const grobStubs = Array.from({
-                    length: N
-                }, (_, i) =>
-                `  g${i + 1} = NULL`).join(',\n');
-
-            const grobList = [
-                'grobs <- list(',
-                grobStubs + ',',
-                '  blank = grid::nullGrob()',
-                ')'
-            ].join('\n');
-
-            /* ---- 3) body common to both “setup on/off” --------------- */
-            const matDef = [
-                'mat <- matrix(c(',
-                matTxt,
-                `), nrow = ${state.rows}, byrow = TRUE)`
-            ].join('\n');
-
-            const post = `grid.arrange(grobs = grobs, layout_matrix = mat)`;
-
-            /* ---- 4) final result ------------------------------------- */
-            return urlHeader() +
-                (incSetup ? 'library(gridExtra)\nlibrary(grid)\n\n' + grobList + '\n\n' : '') +
-                matDef + '\n' +
-                (incSetup ? post : '');
-        }
-
-
-        case 'cowplot': {
-            /* ---- gather rectangle geometry --------------------------- */
-            const rows = state.rects.map((r0, i) => {
-                const r = norm(r0);
-                return {
-                    id: i + 1,
-                    x: f(r.c0 / state.cols),
-                    y: f(1 - r.r1 / state.rows), // cowplot’s origin is bottom-left
-                    w: f((r.c1 - r.c0) / state.cols),
-                    h: f((r.r1 - r.r0) / state.rows)
-                };
-            });
-
-            /* ---- 1) data-frame (always included) --------------------- */
-            const df = [
-                'mat <- data.frame(',
-                '  id = c(' + rows.map(r => r.id).join(', ') + '),',
-                '  x  = c(' + rows.map(r => r.x).join(', ') + '),',
-                '  y  = c(' + rows.map(r => r.y).join(', ') + '),',
-                '  w  = c(' + rows.map(r => r.w).join(', ') + '),',
-                '  h  = c(' + rows.map(r => r.h).join(', ') + ')',
-                ')'
-            ].join('\n');
-
-            /* ---- 2) fixed cowplot boiler-plate ----------------------- */
-            const setupBlock = [
-                'library(cowplot)',
-                'library(ggplot2)',
-                '',
-                'plots <- list()   # your ggplots here',
-                '',
-                df,
-                '',
-                'p <- ggdraw()',
-                'for (i in seq_len(nrow(mat))) {',
-                '  p <- p + draw_plot(',
-                '    plots[[mat$id[i]]],',
-                '    x      = mat$x[i],',
-                '    y      = mat$y[i],',
-                '    width  = mat$w[i],',
-                '    height = mat$h[i]',
-                '  )',
-                '}',
-                'p'
-            ].join('\n');
-
-            /* ---- 3) final result ------------------------------------- */
-            return urlHeader() +
-                (incSetup ? setupBlock : df);
-        }
-
-        case 'patchwork': {
-            const TAGS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const tags = state.rects.map((_, i) => TAGS[i]); // A, B, C …
-
-            /* ---- ASCII layout ( # = blank ) ------------------------- */
-            const asciiRows = Array.from({
-                    length: state.rows
-                },
-                () => Array(state.cols).fill('#'));
-
-            state.rects.forEach((r0, i) => {
-                const r = norm(r0),
-                    t = tags[i];
-                for (let rr = r.r0; rr < r.r1; rr++)
-                    for (let cc = r.c0; cc < r.c1; cc++)
-                        asciiRows[rr][cc] = t;
-            });
-            const ascii = asciiRows.map(r => r.join('')).join('\n');
-
-            /* ---- helper blocks -------------------------------------- */
-            const designTxt = ['design <- "', ascii, '"'].join('\n');
-
-            const plotList = state.rects.map((_, i) =>
-                `  ${tags[i]} = plots[[${i + 1}]]`).join(',\n');
-
-            const fullScript = [
-                'library(patchwork)',
-                'library(ggplot2)',
-                '',
-                'plots <- list(',
-                plotList,
-                ')',
-                '',
-                designTxt,
-                '',
-                'wrap_plots(plots, design = design)'
-            ].join('\n');
-
-            /* ---- return --------------------------------------------- */
-            return urlHeader() + (incSetup ? fullScript : designTxt);
-        }
-
-        /* ---------- base-R par(fig) ------------------------------------------------ */
-        case 'parfig': {
-            /* 1 — placeholder list (only needed when Setup is ON) */
-            const plotList = state.rects
-                .map((_, i, arr) =>
-                    `  NULL${i < arr.length - 1 ? ',' : ''}  # ${nameOf(i)}`)
-                .join('\n');
-
-            /* 2 — coords matrix (always returned) */
-            const coordRows = state.rects
-                .map((r0, i, arr) => {
-                    const r = norm(r0);
-                    const row = [
-                        f(r.c0 / state.cols), // x-min
-                        f(r.c1 / state.cols), // x-max
-                        f(1 - r.r1 / state.rows), // y-min (flip)
-                        f(1 - r.r0 / state.rows) // y-max
-                    ].join(', ');
-                    return `  c(${row})${i < arr.length - 1 ? ',' : ''}  # ${nameOf(i)}`;
-                })
-                .join('\n');
-
-            const coordsBlock = ['coords <- rbind(', coordRows, ')'].join('\n');
-
-            /* 3 — full demo script (when Setup is ticked) */
-            const fullScript = [
-                'plots <- list(',
-                plotList,
-                ')',
-                '',
-                coordsBlock,
-                '',
-                'plot.new()',
-                'par(oma = c(0,0,0,0))',
-                '',
-                'for (i in seq_along(plots)) {',
-                '  par(fig = coords[i, ], new = TRUE)',
-                '  plot(plots[[i]])',
-                '}'
-            ].join('\n');
-
-            return urlHeader() + (incSetup ? fullScript : coordsBlock);
-        }
-
-        /* ────────────────────  Python  ──────────────────── */
-        case 'mpl': {
-            const rows = state.rows;
-            const cols = state.cols;
-
-            /* helper → one ax_… line per rectangle -------------------- */
-            const axLine = i => {
-                const nm = nameOf(i); // alias or numeric index
-                const r = norm(state.rects[i]);
-                return `ax_${nm} = fig.add_subplot(gs[${r.r0}:${r.r1}, ${r.c0}:${r.c1}])`;
-            };
-
-            /* 1 ) lines that are always variable ---------------------- */
-            const varPart = [
-                `gs  = fig.add_gridspec(${rows}, ${cols})`,
-                state.rects.length ?
-                state.rects.map((_, i) => axLine(i)).join('\n') :
-                '# (no rectangles yet)'
-            ].join('\n');
-
-            /* 2 ) one-off setup (only when “Setup” is ticked) ---------- */
-            const setup = [
-                'import matplotlib.pyplot as plt',
-                '',
-                'fig = plt.figure(constrained_layout=True)',
-                ''
-            ].join('\n');
-
-            /* 3 ) stitch together with URL header if requested -------- */
-            return urlHeader() +
-                (incSetup ? setup + varPart : varPart);
-        }
-
-        case 'mpl_mosaic': {
-            const mosaic = asciiMosaic(); // '#' as blanks
-            const setup = incSetup ? [
-                'import matplotlib.pyplot as plt',
-                '',
-                'mosaic = """',
-                mosaic,
-                '""".strip()',
-                '',
-                'fig, axd = plt.subplot_mosaic(mosaic, empty_sentinel="#", constrained_layout=True)',
-                '# Example:',
-                '# axd["A"].plot([0,1],[0,1])',
-                'plt.show()'
-            ].join('\n') : [
-                'mosaic = """',
-                mosaic,
-                '""".strip()',
-                '',
-                'fig, axd = plt.subplot_mosaic(mosaic, empty_sentinel="#", constrained_layout=True)'
-            ].join('\n');
-
-            return urlHeader() + setup;
-        }
-
-        case 'mpl_axes': {
-            // absolute axes with fig.add_axes([left,bottom,width,height])
-            const rects = normalizedRects().map(r => ({
-                name: nameOf(r.id - 1).replace(/\W+/g, '_'),
-                left: r.fx0,
-                right: r.fx1,
-                top: r.fy0,
-                bottom: r.fy1,
-                // matplotlib uses bottom-left origin
-                l: r.fx0,
-                b: f(1 - r.fy1),
-                w: r.fw,
-                h: r.fh
-            }));
-
-            const setup = [
-                'import matplotlib.pyplot as plt',
-                '',
-                'fig = plt.figure()',
-                ...rects.map(r => `ax_${r.name} = fig.add_axes([${r.l}, ${r.b}, ${r.w}, ${r.h}])`),
-                // minimal guidance when Setup on
-                incSetup ? 'plt.show()' : ''
-            ].join('\n');
-
-            const body = incSetup ? setup : rects.map(r => `ax_${r.name} = fig.add_axes([${r.l}, ${r.b}, ${r.w}, ${r.h}])`).join('\n');
-
-            return urlHeader() + body;
-        }
-
-        /* 2) PLOTLY ------------------------------------------- */
-        case 'plotly': {
-            const rows = state.rows;
-            const cols = state.cols;
-
-            /* 1 ── build specs[][] (JS null → Python None) -------------- */
-            const specs = Array.from({
-                length: rows
-            }, () => Array(cols).fill(null));
-
-            state.rects.forEach((r0, i) => {
-                const r = norm(r0);
-                specs[r.r0][r.c0] = {
-                    rowspan: r.r1 - r.r0,
-                    colspan: r.c1 - r.c0,
-                    type: 'xy',
-                    subplot: nameOf(i)
-                };
-            });
-
-            const pyVal = v =>
-                v === null ?
-                'None' :
-                '{ ' + Object.entries(v)
-                .map(([k, x]) => `'${k}': ${x}`)
-                .join(', ') + ' }';
-
-            const specsPy = specs
-                .map(r => '    [' + r.map(pyVal).join(', ') + ']')
-                .join(',\n');
-
-            /* 2 ── variable part (always changes with layout) ---------- */
-            const varPart = [
-                'fig = sp.make_subplots(',
-                `    rows=${rows}, cols=${cols},`,
-                '    specs=[',
-                specsPy,
-                '    ]',
-                ')',
-                incSetup ? '\n# Example: fig.add_trace(trace, row=1, col=1)' : '',
-                incSetup ? 'fig.show()' : ''
-            ].join('\n');
-
-            /* 3 ── imports (only if Setup ticked) ----------------------- */
-            const setup = 'import plotly.subplots as sp\n\n';
-
-            /* 4 ── final output with optional URL header ---------------- */
-            return urlHeader() + (incSetup ? setup + varPart : varPart);
-        }
-
-        /* 3) BOKEH -------------------------------------------- */
-        case 'bokeh': {
-            /* ---- constants ------------------------------------------ */
-            const CELL = 250; // base cell size [px]
-            const W = state.cols * CELL;
-            const H = state.rows * CELL;
-
-            /* ---- 1) build plot stubs + grid[][] --------------------- */
-            const grid = Array.from({
-                    length: state.rows
-                },
-                () => Array(state.cols).fill('None'));
-            const plots = [];
-
-            state.rects.forEach((r0, i) => {
-                const r = norm(r0);
-                const id = `p_${nameOf(i)}`;
-                plots.push(
-                    `${id} = figure(plot_width=${(r.c1 - r.c0) * CELL}, ` +
-                    `plot_height=${(r.r1 - r.r0) * CELL})`
-                );
-                grid[r.r0][r.c0] = id; // top-left anchor
-            });
-
-            const gridPy = grid
-                .map(r => '    [' + r.join(', ') + ']')
-                .join(',\n');
-
-            /* ---- 2) variable section (always changes) --------------- */
-            const varPart = [
-                plots.join('\n'),
-                '',
-                'grid = gridplot([',
-                gridPy,
-                `], width=${W}, height=${H}, sizing_mode='fixed')`,
-                incSetup ? '\nshow(grid)' : ''
-            ].join('\n');
-
-            /* ---- 3) optional imports -------------------------------- */
-            const setup = [
-                'from bokeh.plotting import figure, show',
-                'from bokeh.layouts  import gridplot',
-                ''
-            ].join('\n');
-
-            /* ---- 4) final output ------------------------------------ */
-            return urlHeader() + (incSetup ? setup + varPart : varPart);
-        }
-
-        /* ---------- Julia • Makie ---------- */
-        case 'makie': {
-            const R = state.rows,
-                C = state.cols; // grid size (always needed)
-
-            /* ---- axis definitions (always vary) -------------------- */
-            const axes = state.rects.map((r0, i) => {
-                const r = norm(r0),
-                    n = nameOf(i);
-                return `ax_${n} = Axis(g[${r.r0+1}:${r.r1}, ${r.c0+1}:${r.c1}])`;
-            }).join('\n') || '# (no rectangles)';
-
-            /* ---- placeholder loop: **always** emitted -------------- */
-            const placeholders = `
+    if (incLabels) {
+      parts.push(buildRPanelLabels());
+    }
+
+    return parts.filter(Boolean).join('\n');
+
+}
+
+function gc_R_grid() {
+    // R grid viewports; origin at top-left (grid uses bottom-left Y, so flip)
+    const R = state.rows,
+        C = state.cols;
+    const rects = normalizedRects().map(r => ({
+        id: r.id,
+        alias: r.alias,
+        x0: r.fx0, // left
+        x1: r.fx1, // right
+        y0: f(1 - r.fy1), // flip: data top -> grid bottom
+        y1: f(1 - r.fy0), // flip
+        w: r.fw,
+        h: r.fh
+    }));
+
+    const df = [
+        'mat <- data.frame(',
+        '  id = c(' + rects.map(r => r.id).join(', ') + '),',
+        '  x  = c(' + rects.map(r => r.x0).join(', ') + '),',
+        '  y  = c(' + rects.map(r => r.y0).join(', ') + '),',
+        '  w  = c(' + rects.map(r => r.w).join(', ') + '),',
+        '  h  = c(' + rects.map(r => r.h).join(', ') + ')',
+        ')'
+    ].join('\n');
+
+    const setup = [
+        'library(grid)',
+        '',
+        df,
+        '',
+        'grid.newpage()',
+        'pushViewport(viewport(xscale = c(0,1), yscale = c(0,1)))',
+        'for (i in seq_len(nrow(mat))) {',
+        '  with(mat[i,], {',
+        '    vp <- viewport(x = x + w/2, y = y + h/2, width = w, height = h, just = c("center","center"))',
+        '    pushViewport(vp)',
+        '    # draw your grob here, e.g.: grid.rect(gp = gpar(col = "black", fill = NA))',
+        '    popViewport()',
+        '  })',
+        '}'
+    ].join('\n');
+
+    // when Setup is off, just return data frame + loop skeleton
+    const body = incSetup ? setup : df;
+
+    return urlHeader() + body;
+}
+
+function gc_R_gridExtra() {
+    const N = state.rects.length || 1; // ≥ 1 panel
+    const BLANK = N + 1; // code for “empty”
+
+    /* ---- 1) layout matrix (numbers, blank = N+1) ------------- */
+    const matTxt = buildMat() // 2-space indent
+        .map(r => '  c(' + r.join(', ') + ')')
+        .join(',\n');
+
+    /* ---- 2) grob list ---------------------------------------- */
+    const grobStubs = Array.from({
+            length: N
+        }, (_, i) =>
+        `  g${i + 1} = NULL`).join(',\n');
+
+    const grobList = [
+        'grobs <- list(',
+        grobStubs + ',',
+        '  blank = grid::nullGrob()',
+        ')'
+    ].join('\n');
+
+    /* ---- 3) body common to both “setup on/off” --------------- */
+    const matDef = [
+        'mat <- matrix(c(',
+        matTxt,
+        `), nrow = ${state.rows}, byrow = TRUE)`
+    ].join('\n');
+
+    const post = `grid.arrange(grobs = grobs, layout_matrix = mat)`;
+
+    /* ---- 4) final result ------------------------------------- */
+    return urlHeader() +
+        (incSetup ? 'library(gridExtra)\nlibrary(grid)\n\n' + grobList + '\n\n' : '') +
+        matDef + '\n' +
+        (incSetup ? post : '');
+}
+
+
+function gc_R_cowplot() {
+    /* ---- gather rectangle geometry --------------------------- */
+    const rows = state.rects.map((r0, i) => {
+        const r = norm(r0);
+        return {
+            id: i + 1,
+            x: f(r.c0 / state.cols),
+            y: f(1 - r.r1 / state.rows), // cowplot’s origin is bottom-left
+            w: f((r.c1 - r.c0) / state.cols),
+            h: f((r.r1 - r.r0) / state.rows)
+        };
+    });
+
+    /* ---- 1) data-frame (always included) --------------------- */
+    const df = [
+        'mat <- data.frame(',
+        '  id = c(' + rows.map(r => r.id).join(', ') + '),',
+        '  x  = c(' + rows.map(r => r.x).join(', ') + '),',
+        '  y  = c(' + rows.map(r => r.y).join(', ') + '),',
+        '  w  = c(' + rows.map(r => r.w).join(', ') + '),',
+        '  h  = c(' + rows.map(r => r.h).join(', ') + ')',
+        ')'
+    ].join('\n');
+
+    /* ---- 2) fixed cowplot boiler-plate ----------------------- */
+    const setupBlock = [
+        'library(cowplot)',
+        'library(ggplot2)',
+        '',
+        'plots <- list()   # your ggplots here',
+        '',
+        df,
+        '',
+        'p <- ggdraw()',
+        'for (i in seq_len(nrow(mat))) {',
+        '  p <- p + draw_plot(',
+        '    plots[[mat$id[i]]],',
+        '    x      = mat$x[i],',
+        '    y      = mat$y[i],',
+        '    width  = mat$w[i],',
+        '    height = mat$h[i]',
+        '  )',
+        '}',
+        'p'
+    ].join('\n');
+
+    /* ---- 3) final result ------------------------------------- */
+    return urlHeader() +
+        (incSetup ? setupBlock : df);
+}
+
+function gc_R_patchwork() {
+    const TAGS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const tags = state.rects.map((_, i) => TAGS[i]); // A, B, C …
+
+    /* ---- ASCII layout ( # = blank ) ------------------------- */
+    const asciiRows = Array.from({
+            length: state.rows
+        },
+        () => Array(state.cols).fill('#'));
+
+    state.rects.forEach((r0, i) => {
+        const r = norm(r0),
+            t = tags[i];
+        for (let rr = r.r0; rr < r.r1; rr++)
+            for (let cc = r.c0; cc < r.c1; cc++)
+                asciiRows[rr][cc] = t;
+    });
+    const ascii = asciiRows.map(r => r.join('')).join('\n');
+
+    /* ---- helper blocks -------------------------------------- */
+    const designTxt = ['design <- "', ascii, '"'].join('\n');
+
+    const plotList = state.rects.map((_, i) =>
+        `  ${tags[i]} = plots[[${i + 1}]]`).join(',\n');
+
+    const fullScript = [
+        'library(patchwork)',
+        'library(ggplot2)',
+        '',
+        'plots <- list(',
+        plotList,
+        ')',
+        '',
+        designTxt,
+        '',
+        'wrap_plots(plots, design = design)'
+    ].join('\n');
+
+    /* ---- return --------------------------------------------- */
+    return urlHeader() + (incSetup ? fullScript : designTxt);
+}
+
+/* ---------- base-R par(fig) ------------------------------------------------ */
+function gc_R_parfig() {
+  const hdr = urlHeader().trim();
+  const parts = [];
+  if (hdr) parts.push(hdr);
+
+  // If Example is requested, emit a self-contained par(fig) demo
+  if (incExample) {
+    const style = 'base_r';
+    parts.push(buildExampleBlockParfigR(style));
+
+    if (incLabels) {
+      parts.push(buildRPanelLabels());
+    }
+
+    return parts.filter(Boolean).join('\n');
+  }
+
+  // --- original non-example behavior -------------------------
+
+  /* 1 — placeholder list (only needed when Setup is ON) */
+  const plotList = state.rects
+    .map((_, i, arr) =>
+      `  NULL${i < arr.length - 1 ? ',' : ''}  # ${nameOf(i)}`)
+    .join('\n');
+
+  /* 2 — coords matrix (always returned) */
+  const coordRows = state.rects
+    .map((r0, i, arr) => {
+      const r = norm(r0);
+      const row = [
+        f(r.c0 / state.cols),         // x-min
+        f(r.c1 / state.cols),         // x-max
+        f(1 - r.r1 / state.rows),     // y-min (flip)
+        f(1 - r.r0 / state.rows)      // y-max
+      ].join(', ');
+      return `  c(${row})${i < arr.length - 1 ? ',' : ''}  # ${nameOf(i)}`;
+    })
+    .join('\n');
+
+  const coordsBlock = ['coords <- rbind(', coordRows, ')'].join('\n');
+
+  /* 3 — full demo script (when Setup is ticked) */
+  const fullScript = [
+    'plots <- list(',
+    plotList,
+    ')',
+    '',
+    coordsBlock,
+    '',
+    'plot.new()',
+    'par(oma = c(0,0,0,0))',
+    '',
+    'for (i in seq_along(plots)) {',
+    '  par(fig = coords[i, ], new = TRUE)',
+    '  plot(plots[[i]])',
+    '}'
+  ].join('\n');
+
+  parts.push(incSetup ? fullScript : coordsBlock);
+
+  if (incLabels) {
+    parts.push(buildRPanelLabels());
+  }
+
+  return parts.filter(Boolean).join('\n');
+}
+
+
+/* ────────────────────  Python  ──────────────────── */
+function gc_Python_mpl() {
+    const rows = state.rows;
+    const cols = state.cols;
+
+    /* helper → one ax_… line per rectangle -------------------- */
+    const axLine = i => {
+        const nm = nameOf(i); // alias or numeric index
+        const r = norm(state.rects[i]);
+        return `ax_${nm} = fig.add_subplot(gs[${r.r0}:${r.r1}, ${r.c0}:${r.c1}])`;
+    };
+
+    /* 1 ) lines that are always variable ---------------------- */
+    const varPart = [
+        `gs  = fig.add_gridspec(${rows}, ${cols})`,
+        state.rects.length ?
+        state.rects.map((_, i) => axLine(i)).join('\n') :
+        '# (no rectangles yet)'
+    ].join('\n');
+
+    /* 2 ) one-off setup (only when “Setup” is ticked) ---------- */
+    const setup = [
+        'import matplotlib.pyplot as plt',
+        '',
+        'fig = plt.figure(constrained_layout=True)',
+        ''
+    ].join('\n');
+
+    /* 3 ) stitch together with URL header if requested -------- */
+    return urlHeader() +
+        (incSetup ? setup + varPart : varPart);
+}
+
+function gc_Python_mpl_mosaic() {
+    const mosaic = asciiMosaic(); // '#' as blanks
+    const setup = incSetup ? [
+        'import matplotlib.pyplot as plt',
+        '',
+        'mosaic = """',
+        mosaic,
+        '""".strip()',
+        '',
+        'fig, axd = plt.subplot_mosaic(mosaic, empty_sentinel="#", constrained_layout=True)',
+        '# Example:',
+        '# axd["A"].plot([0,1],[0,1])',
+        'plt.show()'
+    ].join('\n') : [
+        'mosaic = """',
+        mosaic,
+        '""".strip()',
+        '',
+        'fig, axd = plt.subplot_mosaic(mosaic, empty_sentinel="#", constrained_layout=True)'
+    ].join('\n');
+
+    return urlHeader() + setup;
+}
+
+function gc_Python_mpl_axes() {
+    // absolute axes with fig.add_axes([left,bottom,width,height])
+    const rects = normalizedRects().map(r => ({
+        name: nameOf(r.id - 1).replace(/\W+/g, '_'),
+        left: r.fx0,
+        right: r.fx1,
+        top: r.fy0,
+        bottom: r.fy1,
+        // matplotlib uses bottom-left origin
+        l: r.fx0,
+        b: f(1 - r.fy1),
+        w: r.fw,
+        h: r.fh
+    }));
+
+    const setup = [
+        'import matplotlib.pyplot as plt',
+        '',
+        'fig = plt.figure()',
+        ...rects.map(r => `ax_${r.name} = fig.add_axes([${r.l}, ${r.b}, ${r.w}, ${r.h}])`),
+        // minimal guidance when Setup on
+        incSetup ? 'plt.show()' : ''
+    ].join('\n');
+
+    const body = incSetup ? setup : rects.map(r => `ax_${r.name} = fig.add_axes([${r.l}, ${r.b}, ${r.w}, ${r.h}])`).join('\n');
+
+    return urlHeader() + body;
+}
+
+/* 2) PLOTLY ------------------------------------------- */
+function gc_Python_plotly() {
+    const rows = state.rows;
+    const cols = state.cols;
+
+    /* 1 ── build specs[][] (JS null → Python None) -------------- */
+    const specs = Array.from({
+        length: rows
+    }, () => Array(cols).fill(null));
+
+    state.rects.forEach((r0, i) => {
+        const r = norm(r0);
+        specs[r.r0][r.c0] = {
+            rowspan: r.r1 - r.r0,
+            colspan: r.c1 - r.c0,
+            type: 'xy',
+            subplot: nameOf(i)
+        };
+    });
+
+    const pyVal = v =>
+        v === null ?
+        'None' :
+        '{ ' + Object.entries(v)
+        .map(([k, x]) => `'${k}': ${x}`)
+        .join(', ') + ' }';
+
+    const specsPy = specs
+        .map(r => '    [' + r.map(pyVal).join(', ') + ']')
+        .join(',\n');
+
+    /* 2 ── variable part (always changes with layout) ---------- */
+    const varPart = [
+        'fig = sp.make_subplots(',
+        `    rows=${rows}, cols=${cols},`,
+        '    specs=[',
+        specsPy,
+        '    ]',
+        ')',
+        incSetup ? '\n# Example: fig.add_trace(trace, row=1, col=1)' : '',
+        incSetup ? 'fig.show()' : ''
+    ].join('\n');
+
+    /* 3 ── imports (only if Setup ticked) ----------------------- */
+    const setup = 'import plotly.subplots as sp\n\n';
+
+    /* 4 ── final output with optional URL header ---------------- */
+    return urlHeader() + (incSetup ? setup + varPart : varPart);
+}
+
+/* 3) BOKEH -------------------------------------------- */
+function gc_Python_bokeh() {
+    /* ---- constants ------------------------------------------ */
+    const CELL = 250; // base cell size [px]
+    const W = state.cols * CELL;
+    const H = state.rows * CELL;
+
+    /* ---- 1) build plot stubs + grid[][] --------------------- */
+    const grid = Array.from({
+            length: state.rows
+        },
+        () => Array(state.cols).fill('None'));
+    const plots = [];
+
+    state.rects.forEach((r0, i) => {
+        const r = norm(r0);
+        const id = `p_${nameOf(i)}`;
+        plots.push(
+            `${id} = figure(plot_width=${(r.c1 - r.c0) * CELL}, ` +
+            `plot_height=${(r.r1 - r.r0) * CELL})`
+        );
+        grid[r.r0][r.c0] = id; // top-left anchor
+    });
+
+    const gridPy = grid
+        .map(r => '    [' + r.join(', ') + ']')
+        .join(',\n');
+
+    /* ---- 2) variable section (always changes) --------------- */
+    const varPart = [
+        plots.join('\n'),
+        '',
+        'grid = gridplot([',
+        gridPy,
+        `], width=${W}, height=${H}, sizing_mode='fixed')`,
+        incSetup ? '\nshow(grid)' : ''
+    ].join('\n');
+
+    /* ---- 3) optional imports -------------------------------- */
+    const setup = [
+        'from bokeh.plotting import figure, show',
+        'from bokeh.layouts  import gridplot',
+        ''
+    ].join('\n');
+
+    /* ---- 4) final output ------------------------------------ */
+    return urlHeader() + (incSetup ? setup + varPart : varPart);
+}
+
+/* ---------- Julia • Makie ---------- */
+function gc_Julia_makie() {
+    const R = state.rows,
+        C = state.cols; // grid size (always needed)
+
+    /* ---- axis definitions (always vary) -------------------- */
+    const axes = state.rects.map((r0, i) => {
+        const r = norm(r0),
+            n = nameOf(i);
+        return `ax_${n} = Axis(g[${r.r0+1}:${r.r1}, ${r.c0+1}:${r.c1}])`;
+    }).join('\n') || '# (no rectangles)';
+
+    /* ---- placeholder loop: **always** emitted -------------- */
+    const placeholders = `
 for r in 1:${R}, c in 1:${C}
 g[r, c] = GridLayout()          # keep empty cells / whitespace
 end
 `;
 
-            /* ---- optional header & trailer ------------------------- */
-            const header = incSetup ? `using CairoMakie
+    /* ---- optional header & trailer ------------------------- */
+    const header = incSetup ? `using CairoMakie
 f = Figure(resolution = (800, 800))
 g = f.layout
 ` : '';
 
-            const trailer = incSetup ? '\ndisplay(f)' : '';
+    const trailer = incSetup ? '\ndisplay(f)' : '';
 
-            /* ---- final Makie snippet ------------------------------- */
-            return urlHeader() // only if “URL” is ticked
-                +
-                header // maybe empty
-                +
-                placeholders // always present
-                +
-                axes // always present
-                +
-                trailer; // maybe empty
-        }
+    /* ---- final Makie snippet ------------------------------- */
+    return urlHeader() // only if “URL” is ticked
+        +
+        header // maybe empty
+        +
+        placeholders // always present
+        +
+        axes // always present
+        +
+        trailer; // maybe empty
+}
 
-        case 'plots': {
-            const ascii = asciiMosaic();           // '#' = blank
-            const tokens = tokensInReadingOrder(ascii, '#'); // e.g., ['A','B','C']
-            const hasBlanks = ascii.includes('#');
+function gc_Julia_plots() {
+    const ascii = asciiMosaic(); // '#' = blank
+    const tokens = tokensInReadingOrder(ascii, '#'); // e.g., ['A','B','C']
+    const hasBlanks = ascii.includes('#');
 
-            // Build @layout text: rows like [ A B ; A C ]
-            const layoutRows = ascii.split('\n').map(row => row.split('').join(' '));
-            const layoutTxt = '[ ' + layoutRows.join(' ; ') + ' ]';
+    // Build @layout text: rows like [ A B ; A C ]
+    const layoutRows = ascii.split('\n').map(row => row.split('').join(' '));
+    const layoutTxt = '[ ' + layoutRows.join(' ; ') + ' ]';
 
-            // plots vector in the same order tokens appear in @layout
-            // add a dummy blank if '#' appears
-            const plotDecls = [
-                'using Plots',
-                incSetup ? 'default(size=(900,700))' : null,
-                '',
-                `layout_spec = @layout ${layoutTxt}`,
-                hasBlanks ? 'blank = plot(framestyle=:none, grid=false, axis=false)' : null,
-                '',
-                '# your actual plots in order of the tokens below:',
-                `# tokens: ${tokens.join(', ')}${hasBlanks ? ', #' : ''}`,
-                `plots = [${tokens.map(t => `plot()  # ${t}`).join(', ')}${hasBlanks ? ', blank  # #' : ''}]`,
-                '',
-                'plt = plot(plots..., layout=layout_spec)',
-                incSetup ? 'display(plt)' : null
-            ].filter(Boolean).join('\n');
+    // plots vector in the same order tokens appear in @layout
+    // add a dummy blank if '#' appears
+    const plotDecls = [
+        'using Plots',
+        incSetup ? 'default(size=(900,700))' : null,
+        '',
+        `layout_spec = @layout ${layoutTxt}`,
+        hasBlanks ? 'blank = plot(framestyle=:none, grid=false, axis=false)' : null,
+        '',
+        '# your actual plots in order of the tokens below:',
+        `# tokens: ${tokens.join(', ')}${hasBlanks ? ', #' : ''}`,
+        `plots = [${tokens.map(t => `plot()  # ${t}`).join(', ')}${hasBlanks ? ', blank  # #' : ''}]`,
+        '',
+        'plt = plot(plots..., layout=layout_spec)',
+        incSetup ? 'display(plt)' : null
+    ].filter(Boolean).join('\n');
 
-            return urlHeader() + plotDecls;
-        }
-
-
-        /* ────────────────────  Matlab / Octave  ──────────────────── */
-        case 'tiled': {
-            const R = state.rows, C = state.cols;
-            // build per-rect geometry once
-            const lines = [];
-            if (incSetup) {
-                lines.push(
-                `% layout: ${R}x${C}`,
-                `tiledlayout(${R}, ${C}, 'Padding','compact','TileSpacing','compact');`,
-                ''
-                );
-            } else {
-                lines.push(
-                `tiledlayout(${R}, ${C});`
-                );
-            }
-
-            state.rects.forEach((r0, i) => {
-                const r = norm(r0);
-                const nm = nameOf(i).replace(/\W+/g, '_') || `r${i+1}`;
-                const rspan = r.r1 - r.r0;
-                const cspan = r.c1 - r.c0;
-                const tileIndex = (r.r0 * C) + r.c0 + 1; // MATLAB is 1-based
-                lines.push(
-                `% ${i+1} ${nameOf(i)}`,
-                `nexttile(${tileIndex}, [${rspan} ${cspan}]);`,
-                `ax_${nm} = gca;`,
-                incSetup ? `% plot(ax_${nm}, ...);` : ''
-                );
-            });
-
-            return urlHeader() + lines.join('\n');
-        }
-
-        /* ────────────────────  Mathematica  ──────────────────── */
-        case 'mma_grid': {
-            // ownership grid: 0=blank, else rect id (1-based)
-            const G = Array.from({ length: state.rows }, () => Array(state.cols).fill(0));
-            state.rects.forEach((r0, i) => {
-                const r = norm(r0), id = i + 1;
-                for (let rr = r.r0; rr < r.r1; rr++)
-                for (let cc = r.c0; cc < r.c1; cc++)
-                    G[rr][cc] = id;
-            });
-
-            // build WL rows with SpanFromLeft / SpanFromAbove
-            const wlines = [];
-            wlines.push('(* Grid with row/col spans; replace Style[...] with actual Graphics *)');
-            wlines.push('rowMajor = {');
-            for (let r = 0; r < state.rows; r++) {
-                const cells = [];
-                for (let c = 0; c < state.cols; c++) {
-                const id = G[r][c];
-                if (id === 0) {
-                    cells.push('""');
-                    continue;
-                }
-                const up = r > 0 ? G[r-1][c] : -1;
-                const left = c > 0 ? G[r][c-1] : -1;
-                if (id === left && id !== up) {
-                    cells.push('SpanFromLeft');
-                } else if (id === up && id !== left) {
-                    cells.push('SpanFromAbove');
-                } else if (id === up && id === left) {
-                    // interior of a merged block; prefer SpanFromLeft to continue horizontal span
-                    cells.push('SpanFromLeft');
-                } else {
-                    const label = nameOf(id-1);
-                    cells.push(`Style["${label}", Bold]`);
-                }
-                }
-                wlines.push('  {' + cells.join(', ') + '}' + (r < state.rows - 1 ? ',' : ''));
-            }
-            wlines.push('};');
-            wlines.push('');
-            wlines.push('Grid[rowMajor, Frame -> All, Spacings -> {0, 0}]');
-
-            return urlHeader() + wlines.join('\n');
-        }
+    return urlHeader() + plotDecls;
+}
 
 
-        /* ────────────────────  Other  ──────────────────── */
-
-        /* ----------------------------------------------------------- */
-        /* “Other” ▸ CSV                                               */
-        /* ----------------------------------------------------------- */
-        case 'csv_inds': {
-            /* the body never needs “setup”; just emit the matrix        */
-            const csvBody = M.map(r => r.join(',')).join('\n');
-
-            /* prepend the URL header only when “URL” is ticked */
-            return urlHeader() + csvBody;
-        }
-
-        case 'csv_dims': {
-            const rows = rectsUnitBL();
-            const header = 'idx,name,x,y,w,h';
-            const body = rows.map(r => `${r.idx},${r.name},${r.x},${r.y},${r.w},${r.h}`).join('\n');
-            return urlHeader() + header + '\n' + body;
-        }
-
-        case 'csv_coords': {
-            const rows = rectsUnitBL();
-            const header = 'idx,name,x1,x2,x3,x4,y1,y2,y3,y4';
-            const line = r => [
-                r.idx, r.name, r.x1, r.x2, r.x3, r.x4, r.y1, r.y2, r.y3, r.y4
-            ].join(',');
-            const body = rows.map(line).join('\n');
-            return urlHeader() + header + '\n' + body;
-        }
-
-        case 'json': {
-            const payload = {
-                rows: state.rows,
-                cols: state.cols,
-                rects: normalizedRects().map(r => ({
-                id: r.id,
-                name: nameOf(r.id - 1),
-                r0: r.r0, r1: r.r1, c0: r.c0, c1: r.c1,
-                fx0: r.fx0, fx1: r.fx1, fy0: r.fy0, fy1: r.fy1,
-                fw: r.fw, fh: r.fh
-                })),
-                ascii: asciiLayout()
-            };
-            const s = JSON.stringify(payload, null, 2);
-            return (incURL ? urlHeader() : '') + s;
-        }
-
-        case 'yaml': {
-            // simple hand-rolled YAML (no deps in the target)
-            const lines = [];
-            if (incURL) lines.push(urlHeader().trim(), ''); // keep top comment if chosen
-            lines.push(`rows: ${state.rows}`);
-            lines.push(`cols: ${state.cols}`);
-            lines.push('rects:');
-            normalizedRects().forEach(r => {
-                lines.push(`  - id: ${r.id}`);
-                lines.push(`    name: "${nameOf(r.id - 1)}"`);
-                lines.push(`    r0: ${r.r0}`);
-                lines.push(`    r1: ${r.r1}`);
-                lines.push(`    c0: ${r.c0}`);
-                lines.push(`    c1: ${r.c1}`);
-                lines.push(`    fx0: ${r.fx0}`);
-                lines.push(`    fx1: ${r.fx1}`);
-                lines.push(`    fy0: ${r.fy0}`);
-                lines.push(`    fy1: ${r.fy1}`);
-                lines.push(`    fw: ${r.fw}`);
-                lines.push(`    fh: ${r.fh}`);
-            });
-            lines.push('ascii: |');
-            asciiLayout().split('\n').forEach(row => lines.push(`  ${row}`));
-            return lines.join('\n');
-        }
-
-
-        case 'textpos': {
-            const rows = rectsUnitBL();
-            const setup = incSetup ? [
-                '% required packages:',
-                '\\usepackage[absolute,overlay]{textpos}',
-                '% configure page-fraction modules:',
-                '\\setlength{\\TPHorizModule}{\\paperwidth}',
-                '\\setlength{\\TPVertModule}{\\paperheight}',
-                ''
-            ].join('\n') : '';
-
-            const blocks = rows.map(r => {
-                // width = w·textwidth, height = h·textheight, placed at (x·textwidth, y·textheight)
-                return [
-                `% ${r.idx} ${r.name}`,
-                `\\begin{textblock*}{${r.w}\\textwidth}(${r.x}\\textwidth,${r.y}\\textheight)`,
-                `  \\fbox{\\parbox[t][${r.h}\\textheight][t]{${r.w}\\textwidth}{\\centering \\textbf{${r.name}}}}`,
-                `\\end{textblock*}`
-                ].join('\n');
-            }).join('\n\n');
-
-            return urlHeader() + setup + blocks;
-        }
-
-        case 'tikz': {
-            const rows = rectsUnitBL();
-            const setup = incSetup ? [
-                '% required packages:',
-                '\\usepackage{tikz}',
-                '\\usetikzlibrary{calc}',
-                ''
-            ].join('\n') : '';
-
-            const body = [
-                '\\begin{tikzpicture}[remember picture,overlay]',
-                ...rows.map(r => {
-                // anchor at page.south west + (x,y) in fractions of page size
-                const pos = `($ (current page.south west) + (${r.x}\\paperwidth, ${r.y}\\paperheight) $)`;
-                return [
-                    `  % ${r.idx} ${r.name}`,
-                    `  \\node[anchor=south west,`,
-                    `        inner sep=0,`,
-                    `        minimum width=${r.w}\\paperwidth,`,
-                    `        minimum height=${r.h}\\paperheight,`,
-                    `        draw] at ${pos} {\\centering \\textbf{${r.name}}};`
-                ].join('\n');
-                }),
-                '\\end{tikzpicture>'
-            ].join('\n');
-
-            return urlHeader() + setup + body;
-        }
-
-        case 'tabularx': {
-            const G = cellOwners();
-            const R = state.rows, C = state.cols;
-
-            const setup = incSetup ? [
-                '% grid-with-spans using tabularx + multirow',
-                '\\usepackage{tabularx}',
-                '\\usepackage{multirow}',
-                '\\usepackage{booktabs}', // optional, for nicer rules
-                ''
-            ].join('\n') : '';
-
-            // column spec: C columns of equal flex width
-            const colSpec = 'X'.repeat(C).split('').join('|'); // X|X|X ... visually boxed
-            const topRule = '\\toprule';
-            const midRule = '\\midrule';
-            const botRule = '\\bottomrule';
-
-            const nameOfId = id => nameOf(id - 1);
-
-            const lines = [];
-            // header (optional). users can comment out if unwanted:
-            lines.push(`\\begin{tabularx}{\\textwidth}{${colSpec}}`);
-            lines.push(topRule);
-
-            for (let r = 0; r < R; r++) {
-                let c = 0;
-                const rowCells = [];
-                while (c < C) {
-                const id = G[r][c];
-                if (id === 0) {
-                    rowCells.push(''); // empty cell
-                    c += 1;
-                } else if (isAnchor(G, r, c)) {
-                    const { h, w } = spanHW(G, r, c);
-                    // compose the cell with nested multirow+multicolumn
-                    const label = nameOfId(id);
-                    const cell = `\\multirow{${h}}{*}{\\multicolumn{${w}}{c}{\\fbox{${label}}}}`;
-                    rowCells.push(cell);
-                    c += w;
-                } else {
-                    // covered by a span originating to the left or above; skip it
-                    c += 1;
-                    // BUT we must emit nothing for this cell—tabularx needs a placeholder.
-                    // We’ll fix alignment by inserting empty cells when not consumed by a multicolumn.
-                    // To avoid extra &'s, we’ll mark it and prune later.
-                    rowCells.push('__SKIP__');
-                }
-                }
-                // remove placeholders that were actually spanned horizontally
-                const pruned = [];
-                for (let i = 0; i < rowCells.length; i++) {
-                if (rowCells[i] === '__SKIP__') continue;
-                pruned.push(rowCells[i]);
-                }
-                lines.push(pruned.join(' & ') + ' \\\\');
-                if (r < R - 1) lines.push(midRule);
-            }
-
-            lines.push(botRule);
-            lines.push('\\end{tabularx}');
-
-            const body = lines.join('\n');
-            return urlHeader() + setup + body;
-            }
-
-        default:
-            return '# unknown renderer';
+/* ────────────────────  Matlab / Octave  ──────────────────── */
+function gc_MATLAB_tiled() {
+    const R = state.rows,
+        C = state.cols;
+    // build per-rect geometry once
+    const lines = [];
+    if (incSetup) {
+        lines.push(
+            `% layout: ${R}x${C}`,
+            `tiledlayout(${R}, ${C}, 'Padding','compact','TileSpacing','compact');`,
+            ''
+        );
+    } else {
+        lines.push(
+            `tiledlayout(${R}, ${C});`
+        );
     }
+
+    state.rects.forEach((r0, i) => {
+        const r = norm(r0);
+        const nm = nameOf(i).replace(/\W+/g, '_') || `r${i+1}`;
+        const rspan = r.r1 - r.r0;
+        const cspan = r.c1 - r.c0;
+        const tileIndex = (r.r0 * C) + r.c0 + 1; // MATLAB is 1-based
+        lines.push(
+            `% ${i+1} ${nameOf(i)}`,
+            `nexttile(${tileIndex}, [${rspan} ${cspan}]);`,
+            `ax_${nm} = gca;`,
+            incSetup ? `% plot(ax_${nm}, ...);` : ''
+        );
+    });
+
+    return urlHeader() + lines.join('\n');
+}
+
+/* ────────────────────  Mathematica  ──────────────────── */
+function gc_Wolfram_mma_grid() {
+    // ownership grid: 0=blank, else rect id (1-based)
+    const G = Array.from({
+        length: state.rows
+    }, () => Array(state.cols).fill(0));
+    state.rects.forEach((r0, i) => {
+        const r = norm(r0),
+            id = i + 1;
+        for (let rr = r.r0; rr < r.r1; rr++)
+            for (let cc = r.c0; cc < r.c1; cc++)
+                G[rr][cc] = id;
+    });
+
+    // build WL rows with SpanFromLeft / SpanFromAbove
+    const wlines = [];
+    wlines.push('(* Grid with row/col spans; replace Style[...] with actual Graphics *)');
+    wlines.push('rowMajor = {');
+    for (let r = 0; r < state.rows; r++) {
+        const cells = [];
+        for (let c = 0; c < state.cols; c++) {
+            const id = G[r][c];
+            if (id === 0) {
+                cells.push('""');
+                continue;
+            }
+            const up = r > 0 ? G[r - 1][c] : -1;
+            const left = c > 0 ? G[r][c - 1] : -1;
+            if (id === left && id !== up) {
+                cells.push('SpanFromLeft');
+            } else if (id === up && id !== left) {
+                cells.push('SpanFromAbove');
+            } else if (id === up && id === left) {
+                // interior of a merged block; prefer SpanFromLeft to continue horizontal span
+                cells.push('SpanFromLeft');
+            } else {
+                const label = nameOf(id - 1);
+                cells.push(`Style["${label}", Bold]`);
+            }
+        }
+        wlines.push('  {' + cells.join(', ') + '}' + (r < state.rows - 1 ? ',' : ''));
+    }
+    wlines.push('};');
+    wlines.push('');
+    wlines.push('Grid[rowMajor, Frame -> All, Spacings -> {0, 0}]');
+
+    return urlHeader() + wlines.join('\n');
+}
+
+
+/* ────────────────────  Other  ──────────────────── */
+function gc_Other_csv_inds() {
+  const M = designMatrix();
+  const csvBody = M.map(r => r.join(',')).join('\n');
+  return urlHeader() + csvBody;
+}
+
+function gc_Other_csv_dims() {
+    const rows = rectsUnitBL();
+    const header = 'idx,name,x,y,w,h';
+    const body = rows.map(r => `${r.idx},${r.name},${r.x},${r.y},${r.w},${r.h}`).join('\n');
+    return urlHeader() + header + '\n' + body;
+}
+
+function gc_Other_csv_coords() {
+    const rows = rectsUnitBL();
+    const header = 'idx,name,x1,x2,x3,x4,y1,y2,y3,y4';
+    const line = r => [
+        r.idx, r.name, r.x1, r.x2, r.x3, r.x4, r.y1, r.y2, r.y3, r.y4
+    ].join(',');
+    const body = rows.map(line).join('\n');
+    return urlHeader() + header + '\n' + body;
+}
+
+function gc_Other_json() {
+    const payload = {
+        rows: state.rows,
+        cols: state.cols,
+        rects: normalizedRects().map(r => ({
+            id: r.id,
+            name: nameOf(r.id - 1),
+            r0: r.r0,
+            r1: r.r1,
+            c0: r.c0,
+            c1: r.c1,
+            fx0: r.fx0,
+            fx1: r.fx1,
+            fy0: r.fy0,
+            fy1: r.fy1,
+            fw: r.fw,
+            fh: r.fh
+        })),
+        ascii: asciiLayout()
+    };
+    const s = JSON.stringify(payload, null, 2);
+    return (incURL ? urlHeader() : '') + s;
+}
+
+function gc_Other_yaml() {
+    // simple hand-rolled YAML (no deps in the target)
+    const lines = [];
+    if (incURL) lines.push(urlHeader().trim(), ''); // keep top comment if chosen
+    lines.push(`rows: ${state.rows}`);
+    lines.push(`cols: ${state.cols}`);
+    lines.push('rects:');
+    normalizedRects().forEach(r => {
+        lines.push(`  - id: ${r.id}`);
+        lines.push(`    name: "${nameOf(r.id - 1)}"`);
+        lines.push(`    r0: ${r.r0}`);
+        lines.push(`    r1: ${r.r1}`);
+        lines.push(`    c0: ${r.c0}`);
+        lines.push(`    c1: ${r.c1}`);
+        lines.push(`    fx0: ${r.fx0}`);
+        lines.push(`    fx1: ${r.fx1}`);
+        lines.push(`    fy0: ${r.fy0}`);
+        lines.push(`    fy1: ${r.fy1}`);
+        lines.push(`    fw: ${r.fw}`);
+        lines.push(`    fh: ${r.fh}`);
+    });
+    lines.push('ascii: |');
+    asciiLayout().split('\n').forEach(row => lines.push(`  ${row}`));
+    return lines.join('\n');
+}
+
+
+function gc_LATEX_textpos() {
+    const rows = rectsUnitBL();
+    const setup = incSetup ? [
+        '% required packages:',
+        '\\usepackage[absolute,overlay]{textpos}',
+        '% configure page-fraction modules:',
+        '\\setlength{\\TPHorizModule}{\\paperwidth}',
+        '\\setlength{\\TPVertModule}{\\paperheight}',
+        ''
+    ].join('\n') : '';
+
+    const blocks = rows.map(r => {
+        // width = w·textwidth, height = h·textheight, placed at (x·textwidth, y·textheight)
+        return [
+            `% ${r.idx} ${r.name}`,
+            `\\begin{textblock*}{${r.w}\\textwidth}(${r.x}\\textwidth,${r.y}\\textheight)`,
+            `  \\fbox{\\parbox[t][${r.h}\\textheight][t]{${r.w}\\textwidth}{\\centering \\textbf{${r.name}}}}`,
+            `\\end{textblock*}`
+        ].join('\n');
+    }).join('\n\n');
+
+    return urlHeader() + setup + blocks;
+}
+
+function gc_LATEX_tikz() {
+    const rows = rectsUnitBL();
+    const setup = incSetup ? [
+        '% required packages:',
+        '\\usepackage{tikz}',
+        '\\usetikzlibrary{calc}',
+        ''
+    ].join('\n') : '';
+
+    const body = [
+        '\\begin{tikzpicture}[remember picture,overlay]',
+        ...rows.map(r => {
+            // anchor at page.south west + (x,y) in fractions of page size
+            const pos = `($ (current page.south west) + (${r.x}\\paperwidth, ${r.y}\\paperheight) $)`;
+            return [
+                `  % ${r.idx} ${r.name}`,
+                `  \\node[anchor=south west,`,
+                `        inner sep=0,`,
+                `        minimum width=${r.w}\\paperwidth,`,
+                `        minimum height=${r.h}\\paperheight,`,
+                `        draw] at ${pos} {\\centering \\textbf{${r.name}}};`
+            ].join('\n');
+        }),
+        '\\end{tikzpicture>'
+    ].join('\n');
+
+    return urlHeader() + setup + body;
+}
+
+function gc_LATEX_tabularx() {
+    const G = cellOwners();
+    const R = state.rows,
+        C = state.cols;
+
+    const setup = incSetup ? [
+        '% grid-with-spans using tabularx + multirow',
+        '\\usepackage{tabularx}',
+        '\\usepackage{multirow}',
+        '\\usepackage{booktabs}', // optional, for nicer rules
+        ''
+    ].join('\n') : '';
+
+    // column spec: C columns of equal flex width
+    const colSpec = 'X'.repeat(C).split('').join('|'); // X|X|X ... visually boxed
+    const topRule = '\\toprule';
+    const midRule = '\\midrule';
+    const botRule = '\\bottomrule';
+
+    const nameOfId = id => nameOf(id - 1);
+
+    const lines = [];
+    // header (optional). users can comment out if unwanted:
+    lines.push(`\\begin{tabularx}{\\textwidth}{${colSpec}}`);
+    lines.push(topRule);
+
+    for (let r = 0; r < R; r++) {
+        let c = 0;
+        const rowCells = [];
+        while (c < C) {
+            const id = G[r][c];
+            if (id === 0) {
+                rowCells.push(''); // empty cell
+                c += 1;
+            } else if (isAnchor(G, r, c)) {
+                const {
+                    h,
+                    w
+                } = spanHW(G, r, c);
+                // compose the cell with nested multirow+multicolumn
+                const label = nameOfId(id);
+                const cell = `\\multirow{${h}}{*}{\\multicolumn{${w}}{c}{\\fbox{${label}}}}`;
+                rowCells.push(cell);
+                c += w;
+            } else {
+                // covered by a span originating to the left or above; skip it
+                c += 1;
+                // BUT we must emit nothing for this cell—tabularx needs a placeholder.
+                // We’ll fix alignment by inserting empty cells when not consumed by a multicolumn.
+                // To avoid extra &'s, we’ll mark it and prune later.
+                rowCells.push('__SKIP__');
+            }
+        }
+        // remove placeholders that were actually spanned horizontally
+        const pruned = [];
+        for (let i = 0; i < rowCells.length; i++) {
+            if (rowCells[i] === '__SKIP__') continue;
+            pruned.push(rowCells[i]);
+        }
+        lines.push(pruned.join(' & ') + ' \\\\');
+        if (r < R - 1) lines.push(midRule);
+    }
+
+    lines.push(botRule);
+    lines.push('\\end{tabularx}');
+
+    const body = lines.join('\n');
+    return urlHeader() + setup + body;
 }
