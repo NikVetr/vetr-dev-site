@@ -619,7 +619,7 @@ body.dark .splitter:hover {
 }
 
 .include-box {
-  border: 2px dashed var(--include-border);
+  border: 2px dotted var(--include-border);
   padding: 6px 10px 4px;
   background: var(--panel-bg);
 }

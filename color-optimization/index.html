@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Palette Extender</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Color palette extension</p>
+        <h1>Extend discrete color palettes with colorblind-aware optimization</h1>
+        <p class="subhead">Paste your palette, tweak the parameters, and watch the optimizer propose accessible and discriminable new colors.</p>
+      </div>
+      <div class="actions">
+        <button id="run-btn" class="primary">Run optimization</button>
+        <button id="reset-btn" class="ghost">Reset view</button>
+      </div>
+    </header>
+
+    <section class="layout">
+      <div class="controls stack">
+        <div class="control-block wide">
+          <label for="palette-input">Input Colors (Hex)</label>
+          <textarea id="palette-input" rows="3" spellcheck="false" placeholder="#4477AA #6D4B08 #228833 #F3A02B #882255 #D687B5"></textarea>
+        </div>
+
+        <div class="control-block">
+          <h3>Algorithm Settings</h3>
+          <div class="field">
+            <label for="color-space">Optimization color space</label>
+            <select id="color-space">
+              <option value="oklab">OKLab</option>
+              <option value="oklch">OKLCh</option>
+              <option value="lab">Lab</option>
+              <option value="lch">LCh</option>
+              <option value="hsl">HSL</option>
+            </select>
+          </div>
+          <div class="field two-col">
+            <div>
+              <label for="colors-to-add">Colors to add</label>
+              <input id="colors-to-add" type="number" min="1" max="8" value="3">
+            </div>
+            <div>
+              <label for="optim-runs">Restarts</label>
+              <input id="optim-runs" type="number" min="5" max="200" value="60">
+            </div>
+          </div>
+          <div class="field">
+            <label for="nm-iters">Nelder–Mead iterations</label>
+            <input id="nm-iters" type="number" min="50" max="1000" value="260">
+          </div>
+          <div class="field">
+            <label>constraint widths</label>
+            <div class="field three-col mini">
+              <div>
+                <label id="w-h-label" for="w-h">h</label>
+                <input id="w-h" type="range" min="0" max="1" step="0.01" value="0">
+                <span id="w-h-val" class="value-chip">0%</span>
+              </div>
+              <div>
+                <label id="w-sc-label" for="w-sc">s/c</label>
+                <input id="w-sc" type="range" min="0" max="1" step="0.01" value="0">
+                <span id="w-sc-val" class="value-chip">0%</span>
+              </div>
+              <div>
+                <label id="w-l-label" for="w-l">l</label>
+                <input id="w-l" type="range" min="0" max="1" step="0.01" value="0">
+                <span id="w-l-val" class="value-chip">0%</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="colorwheel-space">Visualization colorspace</label>
+            <select id="colorwheel-space">
+              <option value="hsl">HSL</option>
+              <option value="lch">LCh</option>
+              <option value="oklch">OKLCh</option>
+              <option value="lab">Lab</option>
+              <option value="oklab">OKLab</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-block">
+          <h3>Color Vision Settings</h3>
+          <div class="field four-col tight">
+            <div>
+              <label for="w-none">none</label>
+              <input id="w-none" type="number" min="0" step="0.1" value="6">
+            </div>
+            <div>
+              <label for="w-deutan">deutan</label>
+              <input id="w-deutan" type="number" min="0" step="0.1" value="6">
+            </div>
+            <div>
+              <label for="w-protan">protan</label>
+              <input id="w-protan" type="number" min="0" step="0.1" value="2">
+            </div>
+            <div>
+              <label for="w-tritan">tritan</label>
+              <input id="w-tritan" type="number" min="0" step="0.05" value="0.1">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-side">
+        <section id="panels" class="panels"></section>
+        <div class="status-col">
+          <div class="control-block status">
+          <h3>Status</h3>
+          <div class="progress">
+            <div id="progress-bar"></div>
+          </div>
+          <canvas id="status-graph" height="150"></canvas>
+          <p id="status-text" class="status">waiting to start…</p>
+          <div id="error-text" class="error"></div>
+        </div>
+
+          <div class="control-block status">
+            <h3>Results</h3>
+            <div class="field">
+              <label for="results-box">New hex codes</label>
+              <textarea id="results-box" rows="2" readonly></textarea>
+            </div>
+            <div class="field inline-row compact">
+              <label class="inline small">
+                <input id="format-quotes" type="checkbox">
+                quotes
+              </label>
+              <label class="inline small">
+                <input id="format-commas" type="checkbox" checked>
+                commas
+              </label>
+              <label class="inline small">
+                <input id="format-lines" type="checkbox">
+                newline
+              </label>
+            </div>
+            <button id="copy-btn" class="ghost">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
