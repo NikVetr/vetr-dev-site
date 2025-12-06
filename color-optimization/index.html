@@ -14,7 +14,7 @@
     <header class="hero">
       <div>
         <p class="eyebrow">Color palette extension</p>
-        <h1>Extend discrete color palettes with colorblind-aware optimization</h1>
+        <h1>Extend discrete color palettes with colorblind-aware constrained optimization</h1>
         <p class="subhead">Paste your palette, tweak the parameters, and watch the optimizer propose accessible and discriminable new colors.</p>
       </div>
       <div class="actions">
@@ -33,7 +33,7 @@
         <div class="control-block">
           <h3>Algorithm Settings</h3>
           <div class="field">
-            <label for="color-space">Optimization color space</label>
+            <label for="color-space">Optimization colorspace</label>
             <select id="color-space">
               <option value="oklab">OKLab</option>
               <option value="oklch">OKLCh</option>
@@ -77,7 +77,13 @@
             </div>
           </div>
           <div class="field">
-            <label for="colorwheel-space">Visualization colorspace</label>
+            <div class="inline-row between">
+              <label for="colorwheel-space">Visualization colorspace</label>
+              <label class="inline small">
+                <input id="sync-colorspaces" type="checkbox" checked>
+                synchronize
+              </label>
+            </div>
             <select id="colorwheel-space">
               <option value="hsl">HSL</option>
               <option value="lch">LCh</option>
@@ -89,10 +95,10 @@
         </div>
 
         <div class="control-block">
-          <h3>Color Vision Settings</h3>
+          <h3>Color Vision Prioritization Weights</h3>
           <div class="field four-col tight">
             <div>
-              <label for="w-none">none</label>
+              <label for="w-none">baseline</label>
               <input id="w-none" type="number" min="0" step="0.1" value="6">
             </div>
             <div>
@@ -120,6 +126,11 @@
             <div id="progress-bar"></div>
           </div>
           <canvas id="status-graph" height="150"></canvas>
+          <label class="inline small">
+            <input id="verbose-toggle" type="checkbox">
+            Verbose
+          </label>
+          <textarea id="verbose-box" rows="8" readonly style="display:none; resize:vertical;"></textarea>
           <p id="status-text" class="status">waiting to start…</p>
           <div id="error-text" class="error"></div>
         </div>
@@ -150,6 +161,6 @@
       </div>
     </section>
   </main>
-  <script src="script.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>

@@ -321,7 +321,7 @@ label.small {
 }
 
 .channel-dot.square {
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 .channel-headings {
