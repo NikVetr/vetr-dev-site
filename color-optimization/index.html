@@ -12,14 +12,33 @@
 <body>
   <main class="page">
     <header class="hero">
-      <div>
-        <p class="eyebrow">Color palette extension</p>
-        <h1>Extend discrete color palettes with colorblind-aware constrained optimization</h1>
-        <p class="subhead">Paste your palette, tweak the parameters, and watch the optimizer propose accessible and discriminable new colors.</p>
+      <div class="hero-text">
+        <style>
+        </style>
+    
+        <p class="eyebrow-title">
+          <span class="c-1">P</span><span class="c-2">a</span><span class="c-3">l</span><span class="c-4">e</span><span
+            class="c-5">t</span><span class="c-6">t</span><span class="c-7">e</span>
+          <span class="c-8">T</span><span class="c-9">o</span><span class="c-10">w</span><span class="c-11">n</span>
+        </p>
+    
+        <h1 class="long-title">
+          traversing <span class="c-1">P</span>erceptu<span class="c-2">A</span>lly uniform co<span
+            class="c-3">L</span>orspaces to
+          <span class="c-4">E</span>nhance and ex<span class="c-5">T</span>end discre<span class="c-6">T</span>e color
+          palett<span class="c-7">E</span>s for
+          <span class="c-8">T</span>richromatic and c<span class="c-9">O</span>lor vision deficient discriminability
+          <span class="c-10">W</span>ith joi<span class="c-11">N</span>t optimization
+        </h1>
+    
+        <p class="subhead">
+          Choose your starter palette, train their parameters, and watch your team evolve into a champion color scheme.
+        </p>
       </div>
+    
       <div class="actions">
-        <button id="run-btn" class="primary">Run optimization</button>
-        <button id="reset-btn" class="ghost">Reset view</button>
+        <button id="run-btn" class="primary">RUN</button>
+        <button id="reset-btn" class="ghost">RESET</button>
       </div>
     </header>
 
@@ -64,7 +83,7 @@
           </div>
           <div class="field">
             <label for="nm-iters">Nelder–Mead iterations</label>
-            <input id="nm-iters" type="number" min="50" max="1000" value="260">
+            <input id="nm-iters" type="number" min="50" max="1000" value="100">
           </div>
           <div class="field">
             <label>constraint widths</label>

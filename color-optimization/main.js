@@ -244,7 +244,7 @@ async function runOptimization() {
   } finally {
     state.running = false;
     ui.runBtn.disabled = false;
-    ui.runBtn.textContent = "Run optimization";
+    ui.runBtn.textContent = "RUN";
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
     drawStatusMini(state, ui);
   }
