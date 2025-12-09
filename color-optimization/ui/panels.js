@@ -168,24 +168,6 @@ export function renderChannelBars(barObjs, current, added, type, state, ui) {
   combined.forEach((entry) => {
     const sim = applyCvdHex(entry.color, type);
     const decoded = decodeColor(entry.color, barSpace);
-    barObjs.forEach((obj, idx) => {
-      const cfg = configs[idx];
-      let val;
-      if (cfg.key === "h") {
-        const span = cfg.max - cfg.min || 360;
-        const raw = decoded[cfg.key] ?? 0;
-        val = (((raw - hueBarOffsetDeg - cfg.min) % span) + span) % span / span;
-      } else {
-        val = normalize(decoded[cfg.key] || 0, cfg.min, cfg.max);
-      }
-      const dot = document.createElement("div");
-      dot.className = `channel-dot ${entry.shape === "square" ? "square" : ""}`;
-      dot.style.top = `${val * 100}%`;
-      dot.style.width = "12px";
-      dot.style.height = "12px";
-      dot.style.background = sim;
-      obj.bar.appendChild(dot);
-    });
   });
 
   if (state.bounds && ui.colorSpace.value === barSpace) {
@@ -253,6 +235,29 @@ export function renderChannelBars(barObjs, current, added, type, state, ui) {
       }
     });
   }
+
+  combined.forEach((entry) => {
+    const sim = applyCvdHex(entry.color, type);
+    const decoded = decodeColor(entry.color, barSpace);
+    barObjs.forEach((obj, idx) => {
+      const cfg = configs[idx];
+      let val;
+      if (cfg.key === "h") {
+        const span = cfg.max - cfg.min || 360;
+        const raw = decoded[cfg.key] ?? 0;
+        val = (((raw - hueBarOffsetDeg - cfg.min) % span) + span) % span / span;
+      } else {
+        val = normalize(decoded[cfg.key] || 0, cfg.min, cfg.max);
+      }
+      const dot = document.createElement("div");
+      dot.className = `channel-dot ${entry.shape === "square" ? "square" : ""}`;
+      dot.style.top = `${val * 100}%`;
+      dot.style.width = "12px";
+      dot.style.height = "12px";
+      dot.style.background = sim;
+      obj.bar.appendChild(dot);
+    });
+  });
 }
 
 export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpace, optSpace) {

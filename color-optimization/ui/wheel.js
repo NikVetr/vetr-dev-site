@@ -134,22 +134,6 @@ export function drawWheel(type, ui, state) {
     }
   });
 
-  coords.forEach((pt) => {
-    const fill = applyCvdHex(pt.color, type);
-    ctx.beginPath();
-    const sizePt = 6 + 12 * pt.lNorm;
-    if (pt.shape === "square") {
-      ctx.rect(pt.x - sizePt / 2, pt.y - sizePt / 2, sizePt, sizePt);
-    } else {
-      ctx.arc(pt.x, pt.y, sizePt / 2, 0, 2 * Math.PI);
-    }
-    ctx.fillStyle = fill;
-    ctx.strokeStyle = "#0f172a";
-    ctx.lineWidth = 1;
-    ctx.fill();
-    ctx.stroke();
-  });
-
   // axis labels
   ctx.fillStyle = "#0f172a";
   ctx.font = "11px 'Space Grotesk', Arial, sans-serif";
@@ -254,7 +238,7 @@ export function drawWheel(type, ui, state) {
       }
     }
 
-    if ((wheelSpaceCurrent === "lab" || wheelSpaceCurrent === "oklab") && state.bounds.boundsByName) {
+  if ((wheelSpaceCurrent === "lab" || wheelSpaceCurrent === "oklab") && state.bounds.boundsByName) {
       const aBounds = state.bounds.boundsByName.a;
       const bBounds = state.bounds.boundsByName.b;
       if (aBounds && bBounds) {
@@ -284,6 +268,23 @@ export function drawWheel(type, ui, state) {
       }
     }
   }
+
+  // draw points above overlays
+  coords.forEach((pt) => {
+    const fill = applyCvdHex(pt.color, type);
+    ctx.beginPath();
+    const sizePt = 6 + 12 * pt.lNorm;
+    if (pt.shape === "square") {
+      ctx.rect(pt.x - sizePt / 2, pt.y - sizePt / 2, sizePt, sizePt);
+    } else {
+      ctx.arc(pt.x, pt.y, sizePt / 2, 0, 2 * Math.PI);
+    }
+    ctx.fillStyle = fill;
+    ctx.strokeStyle = "#0f172a";
+    ctx.lineWidth = 1;
+    ctx.fill();
+    ctx.stroke();
+  });
 }
 
 export function makeWheelColor(hueDeg, chromaNorm, wheelSpace) {
