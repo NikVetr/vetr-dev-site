@@ -1,19 +1,6 @@
 export function parsePalette(raw) {
-  const cleaned = raw.replace(/['"]/g, " ");
-  const parts = cleaned
-    .split(/[\s,]+/)
-    .map((s) => s.trim())
-    .filter(Boolean);
-  const valid = [];
-  parts.forEach((p) => {
-    let hex = p.startsWith("#") ? p : `#${p}`;
-    if (/^#?[0-9a-fA-F]{6}$/.test(p) || /^#[0-9a-fA-F]{6}$/.test(hex)) {
-      hex = hex.toUpperCase();
-      if (!hex.startsWith("#")) hex = `#${hex}`;
-      valid.push(hex);
-    }
-  });
-  return valid;
+  const matches = raw.match(/#[0-9a-fA-F]{6}/g) || [];
+  return matches.map((h) => h.toUpperCase());
 }
 
 export function getWidths(ui) {

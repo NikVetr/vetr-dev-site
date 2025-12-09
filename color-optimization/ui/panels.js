@@ -1,5 +1,5 @@
 import { plotOrder as plotOrderDefault } from "../config.js";
-import { channelOrder, csRanges, decodeColor } from "../core/colorSpaces.js";
+import { channelOrder, csRanges, decodeColor, effectiveRangeFromColors } from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
 import { normalize } from "../core/stats.js";
@@ -113,9 +113,24 @@ export function renderSwatchColumn(container, colors, type, shape) {
     const sw = document.createElement("div");
     sw.className = "swatch";
     const sim = applyCvdHex(c, type);
-    sw.style.background = sim;
+    const splitPct = type === "none" ? 1 : 0.1;
+    if (type === "none") {
+      sw.style.background = sim;
+    } else {
+      sw.style.background = `linear-gradient(90deg, ${c} 0%, ${c} ${splitPct * 100}%, ${sim} ${splitPct * 100}%, ${sim} 100%)`;
+      const sep = document.createElement("div");
+      sep.className = "swatch-separator";
+      sep.style.left = `${splitPct * 100}%`;
+      sep.style.background = contrastColor(sim);
+      sw.appendChild(sep);
+    }
     sw.style.color = contrastColor(sim);
-    sw.textContent = c;
+    sw.style.justifyContent = "flex-end";
+    sw.style.textAlign = "right";
+    const label = document.createElement("span");
+    label.className = "swatch-label";
+    label.textContent = c;
+    sw.appendChild(label);
     container.appendChild(sw);
   });
 }
@@ -125,7 +140,9 @@ export function renderChannelBars(barObjs, current, added, type, state, ui) {
   const barSpace = ui.colorwheelSpace.value || "hsl";
   if (!csRanges[barSpace]) return;
   const hueBarOffsetDeg = 285;
-  const hueBarOffsetNorm = hueBarOffsetDeg / (csRanges[barSpace].max.h - csRanges[barSpace].min.h || 360);
+  const allColors = [...current, ...added];
+  const ranges = effectiveRangeFromColors(allColors, barSpace);
+  const hueBarOffsetNorm = hueBarOffsetDeg / (ranges.max.h - ranges.min.h || 360);
   const combined = [
     ...current.map((c) => ({ color: c, shape: "circle" })),
     ...added.map((c) => ({ color: c, shape: "square" })),
@@ -134,8 +151,8 @@ export function renderChannelBars(barObjs, current, added, type, state, ui) {
   const vizChannels = channelOrder[barSpace];
   const configs = vizChannels.map((key) => ({
     key,
-    min: csRanges[barSpace].min[key],
-    max: csRanges[barSpace].max[key],
+    min: ranges.min[key],
+    max: ranges.max[key],
   }));
   while (configs.length < 3) {
     configs.push({ key: vizChannels[vizChannels.length - 1] || "l", min: 0, max: 1 });
@@ -172,7 +189,7 @@ export function renderChannelBars(barObjs, current, added, type, state, ui) {
   });
 
   if (state.bounds && ui.colorSpace.value === barSpace) {
-    const hueRange = csRanges[barSpace].max.h - csRanges[barSpace].min.h || 360;
+    const hueRange = ranges.max.h - ranges.min.h || 360;
     const overlays = configs.map((cfg, idx) => {
       const b = state.bounds.boundsByName?.[cfg.key];
       if (!b) return null;

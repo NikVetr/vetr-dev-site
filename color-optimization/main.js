@@ -7,8 +7,9 @@ import { getWidths, parsePalette, readConfig } from "./ui/configRead.js";
 import { copyResults, setResults } from "./ui/resultsBox.js";
 import { createInitialState } from "./ui/state.js";
 import { showError, setStatus } from "./ui/status.js";
-import { drawStatusGraph } from "./ui/statusGraph.js";
+import { drawStatusGraph, drawStatusMini } from "./ui/statusGraph.js";
 import { createPanels, refreshSwatches, updateChannelHeadings } from "./ui/panels.js";
+import { paletteGroups } from "./palettes.js";
 
 const state = createInitialState();
 let ui = null;
@@ -18,19 +19,20 @@ document.addEventListener("DOMContentLoaded", () => {
   ui = getUIRefs();
   createPanels(ui, plotOrder);
   setDefaultValues();
+  buildPaletteButtons();
   attachEventListeners();
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
 });
 
 function setDefaultValues() {
-  ui.paletteInput.value = defaultPalette;
-  ui.paletteInput.classList.remove("muted-input");
-  state.mutedInput = false;
+  ui.paletteInput.value = "";
+  ui.paletteInput.classList.add("muted-input");
+  state.mutedInput = true;
   ui.colorSpace.value = "oklab";
   ui.colorwheelSpace.value = "oklab";
   if (ui.syncSpaces) ui.syncSpaces.checked = true;
   ui.colorsToAdd.value = "3";
-  ui.optimRuns.value = "60";
+  ui.optimRuns.value = "100";
   ui.nmIters.value = "260";
   ui.wH.value = "0";
   ui.wSC.value = "0";
@@ -39,6 +41,8 @@ function setDefaultValues() {
   ui.wDeutan.value = "6";
   ui.wProtan.value = "2";
   ui.wTritan.value = "0.1";
+  if (ui.bgColor) ui.bgColor.value = "#ffffff";
+  if (ui.bgEnabled) ui.bgEnabled.checked = true;
   ui.formatQuotes.checked = false;
   ui.formatCommas.checked = true;
   ui.formatLines.checked = false;
@@ -54,14 +58,40 @@ function setDefaultValues() {
   state.bestScores = [];
   state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
   drawStatusGraph(state, ui);
+  drawStatusMini(state, ui);
   logVerbose("palette", "", ui.paletteInput.value.trim());
+  togglePlaceholder();
+  updateBgControls();
+  updatePaletteHighlight();
 }
 
 function attachEventListeners() {
   ui.paletteInput.addEventListener("input", () => {
     state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+    togglePlaceholder();
+    updatePaletteHighlight();
+    drawStatusMini(state, ui);
   });
+  ui.paletteInput.addEventListener("scroll", syncPaletteHighlightScroll);
+  ui.paletteClear?.addEventListener("click", () => {
+    ui.paletteInput.value = "";
+    state.bounds = computeBoundsFromCurrent([], ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+    togglePlaceholder();
+    ui.paletteInput.focus();
+    drawStatusMini(state, ui);
+  });
+  ui.bgColor?.addEventListener("change", () => {
+    updateBgControls();
+  });
+  ui.paletteMore?.addEventListener("click", () => {
+    if (!ui.paletteGroups) return;
+    ui.paletteGroups.classList.toggle("show-all");
+    ui.paletteMore.textContent = ui.paletteGroups.classList.contains("show-all") ? "Less ▴" : "More ▾";
+  });
+  ui.bgEnabled?.addEventListener("change", () => updateBgControls());
+  ui.bgColor?.addEventListener("change", () => updateBgControls());
 
   ui.colorSpace.addEventListener("change", () => {
     updateWidthLabels();
@@ -70,6 +100,7 @@ function attachEventListeners() {
       updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
     }
     updateBoundsAndRefresh();
+    drawStatusMini(state, ui);
   });
 
   ui.colorwheelSpace.addEventListener("change", () => {
@@ -78,12 +109,14 @@ function attachEventListeners() {
     }
     updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+    drawStatusMini(state, ui);
   });
   ui.syncSpaces?.addEventListener("change", () => {
     if (ui.syncSpaces.checked) {
       ui.colorwheelSpace.value = ui.colorSpace.value;
       updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
       refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+      drawStatusMini(state, ui);
     }
   });
 
@@ -91,6 +124,7 @@ function attachEventListeners() {
   ui.resetBtn.addEventListener("click", () => {
     setDefaultValues();
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+    drawStatusMini(state, ui);
   });
   ui.copyBtn.addEventListener("click", () => copyResults(ui, state));
   ui.formatQuotes.addEventListener("change", () => setResults(state.newColors, ui));
@@ -101,11 +135,13 @@ function attachEventListeners() {
     el.addEventListener("input", () => {
       updateWidthChips();
       updateBoundsAndRefresh();
+      drawStatusMini(state, ui);
     });
   });
 
   window.addEventListener("resize", () => {
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+    drawStatusMini(state, ui);
   });
 
   window.addEventListener("error", (e) => {
@@ -137,6 +173,7 @@ function updateWidthChips() {
 function updateBoundsAndRefresh() {
   state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+  drawStatusMini(state, ui);
 }
 
 async function runOptimization() {
@@ -146,6 +183,14 @@ async function runOptimization() {
     showError("Please enter at least one valid hex color.", ui);
     return;
   }
+  const paletteForOpt = [...palette];
+  if (ui.bgEnabled?.checked) {
+    const bgHex = (ui.bgColor?.value || "").trim();
+    if (bgHex && /^#?[0-9a-fA-F]{6}$/.test(bgHex)) {
+      const fixed = bgHex.startsWith("#") ? bgHex.toUpperCase() : `#${bgHex.toUpperCase()}`;
+      paletteForOpt.push(fixed);
+    }
+  }
   showError("", ui);
   const config = readConfig(ui, state);
   state.running = true;
@@ -154,14 +199,20 @@ async function runOptimization() {
   setStatus("starting optimizer…", 0, ui, state);
   setResults([], ui);
   state.bestScores = [];
+  state.nmTrails = [];
+  state.bestColors = [];
   state.bounds = computeBoundsFromCurrent(palette, config.colorSpace, config);
   drawStatusGraph(state, ui);
+  drawStatusMini(state, ui);
 
   try {
-    const best = await optimizePalette(palette, config, {
-      onProgress: async ({ run, pct, bestScore }) => {
+    const best = await optimizePalette(paletteForOpt, config, {
+      onProgress: async ({ run, pct, bestScore, startHex, endHex, bestHex }) => {
         state.bestScores.push(bestScore);
+        state.nmTrails.push({ run, startHex, endHex });
+        state.bestColors = bestHex || state.bestColors;
         setStatus(`restart ${run}/${config.nOptimRuns}`, pct, ui, state);
+        drawStatusMini(state, ui);
         await nextFrame();
       },
       onVerbose: (info) => {
@@ -182,6 +233,7 @@ async function runOptimization() {
       },
     });
     state.newColors = best.newHex || [];
+    state.bestColors = state.newColors;
     logVerbose("newColors", [], state.newColors);
     const convergence = best.meta?.reason || "finished";
     setStatus(`done. best score = ${(-best.value).toFixed(3)} (${convergence})`, 100, ui, state);
@@ -194,6 +246,7 @@ async function runOptimization() {
     ui.runBtn.disabled = false;
     ui.runBtn.textContent = "Run optimization";
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+    drawStatusMini(state, ui);
   }
 }
 
@@ -216,4 +269,92 @@ function updateVerboseBox() {
     return;
   }
   ui.verboseBox.value = verboseLogs.join("\n");
+}
+
+function updateBgControls() {
+  if (!ui?.bgEnabled || !ui.bgColor) return;
+  const enabled = ui.bgEnabled.checked;
+  const row = ui.bgColor.closest(".bg-row");
+  if (row) {
+    row.classList.toggle("disabled", !enabled);
+  }
+  ui.bgColor.disabled = !enabled;
+}
+
+function togglePlaceholder() {
+  if (!ui?.paletteInput) return;
+  const hasValue = ui.paletteInput.value.trim().length > 0;
+  if (hasValue) {
+    ui.paletteInput.classList.remove("muted-input");
+  } else {
+    ui.paletteInput.classList.add("muted-input");
+  }
+  updatePaletteHighlight();
+}
+
+function updatePaletteHighlight() {
+  const high = ui?.paletteHighlight;
+  if (!high || !ui?.paletteInput) return;
+  const raw = ui.paletteInput.value;
+  const tokens = [];
+  let lastIndex = 0;
+  const regex = /#[0-9a-fA-F]{0,6}/g;
+  let m;
+  while ((m = regex.exec(raw)) !== null) {
+    if (m.index > lastIndex) {
+      tokens.push({ text: raw.slice(lastIndex, m.index), cls: "ph-other" });
+    }
+    const text = m[0];
+    if (/^#[0-9a-fA-F]{6}$/.test(text)) {
+      tokens.push({ text, cls: "ph-valid" });
+    } else {
+      tokens.push({ text, cls: "ph-invalid" });
+    }
+    lastIndex = m.index + text.length;
+  }
+  if (lastIndex < raw.length) {
+    tokens.push({ text: raw.slice(lastIndex), cls: "ph-other" });
+  }
+  const escape = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  high.innerHTML = tokens.map((t) => `<span class="${t.cls}">${escape(t.text)}</span>`).join("");
+  syncPaletteHighlightScroll();
+}
+
+function buildPaletteButtons() {
+  if (!ui?.paletteGroups) return;
+  ui.paletteGroups.innerHTML = "";
+  ui.paletteGroups.classList.remove("show-all");
+  paletteGroups.forEach((group, groupIdx) => {
+    const wrap = document.createElement("div");
+    wrap.className = "palette-group";
+    if (groupIdx > 0) wrap.classList.add("hidden-group");
+    const title = document.createElement("span");
+    title.className = "palette-group-title";
+    title.textContent = group.title;
+    wrap.appendChild(title);
+    group.palettes.forEach((p) => {
+      const btn = document.createElement("button");
+      btn.className = "palette-btn";
+      btn.textContent = p.name;
+      btn.addEventListener("click", () => appendPalette(p.colors));
+      wrap.appendChild(btn);
+    });
+    ui.paletteGroups.appendChild(wrap);
+  });
+}
+
+function appendPalette(colors) {
+  const paletteStr = colors.join(" ");
+  const hasValue = ui.paletteInput.value.trim().length > 0;
+  ui.paletteInput.value = `${hasValue ? ui.paletteInput.value.trim() + " " : ""}${paletteStr}`;
+  togglePlaceholder();
+  state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
+  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+  drawStatusMini(state, ui);
+}
+
+function syncPaletteHighlightScroll() {
+  if (!ui?.paletteInput || !ui?.paletteHighlight) return;
+  ui.paletteHighlight.scrollTop = ui.paletteInput.scrollTop;
+  ui.paletteHighlight.scrollLeft = ui.paletteInput.scrollLeft;
 }

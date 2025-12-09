@@ -1,6 +1,10 @@
 export function getUIRefs() {
   return {
     paletteInput: document.getElementById("palette-input"),
+    paletteGroups: document.getElementById("palette-groups"),
+    paletteClear: document.getElementById("palette-clear"),
+    paletteMore: document.getElementById("palette-more"),
+    paletteHighlight: document.getElementById("palette-highlight"),
     colorSpace: document.getElementById("color-space"),
     colorsToAdd: document.getElementById("colors-to-add"),
     optimRuns: document.getElementById("optim-runs"),
@@ -19,6 +23,7 @@ export function getUIRefs() {
     resultsBox: document.getElementById("results-box"),
     copyBtn: document.getElementById("copy-btn"),
     statusGraph: document.getElementById("status-graph"),
+    statusMini: document.getElementById("status-mini"),
     verboseToggle: document.getElementById("verbose-toggle"),
     verboseBox: document.getElementById("verbose-box"),
     formatQuotes: document.getElementById("format-quotes"),
@@ -33,6 +38,8 @@ export function getUIRefs() {
     wHVal: document.getElementById("w-h-val"),
     wSCVal: document.getElementById("w-sc-val"),
     wLVal: document.getElementById("w-l-val"),
+    bgColor: document.getElementById("bg-color"),
+    bgEnabled: document.getElementById("bg-enabled"),
     syncSpaces: document.getElementById("sync-colorspaces"),
   };
 }

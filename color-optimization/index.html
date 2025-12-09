@@ -27,7 +27,17 @@
       <div class="controls stack">
         <div class="control-block wide">
           <label for="palette-input">Input Colors (Hex)</label>
-          <textarea id="palette-input" rows="3" spellcheck="false" placeholder="#4477AA #6D4B08 #228833 #F3A02B #882255 #D687B5"></textarea>
+          <div class="palette-input-wrap">
+            <pre id="palette-highlight" aria-hidden="true"></pre>
+            <textarea id="palette-input" rows="3" spellcheck="false" placeholder="eg, #E64B35, #4DBBD5, #00A087, #3C5488, ..."></textarea>
+          </div>
+          <div class="palette-clear-row">
+            <button id="palette-clear" type="button" class="ghost palette-clear">Clear</button>
+          </div>
+          <div class="palette-buttons">
+            <div id="palette-groups"></div>
+            <button id="palette-more" type="button" class="palette-btn palette-more">More ▾</button>
+          </div>
         </div>
 
         <div class="control-block">
@@ -49,7 +59,7 @@
             </div>
             <div>
               <label for="optim-runs">Restarts</label>
-              <input id="optim-runs" type="number" min="5" max="200" value="60">
+              <input id="optim-runs" type="number" min="5" max="200" value="100">
             </div>
           </div>
           <div class="field">
@@ -75,6 +85,15 @@
                 <span id="w-l-val" class="value-chip">0%</span>
               </div>
             </div>
+          </div>
+          <div class="field inline-row between bg-row">
+            <label class="inline small">
+              <input id="bg-enabled" type="checkbox" checked>
+              Background Color:
+            </label>
+            <label for="bg-color" class="bg-chip">
+              <input id="bg-color" type="color" value="#ffffff" aria-label="Background color picker">
+            </label>
           </div>
           <div class="field">
             <div class="inline-row between">
@@ -126,6 +145,7 @@
             <div id="progress-bar"></div>
           </div>
           <canvas id="status-graph" height="150"></canvas>
+          <canvas id="status-mini" height="200"></canvas>
           <label class="inline small">
             <input id="verbose-toggle" type="checkbox">
             Verbose

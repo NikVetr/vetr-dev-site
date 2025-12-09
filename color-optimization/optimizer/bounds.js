@@ -1,4 +1,9 @@
-import { channelOrder, decodeColor, normalizeSpace } from "../core/colorSpaces.js";
+import {
+  channelOrder,
+  decodeColor,
+  effectiveRangeFromValues,
+  normalizeWithRange,
+} from "../core/colorSpaces.js";
 import { quantiles, widthBounds } from "../core/stats.js";
 
 export function computeBounds(normalized, colorSpace, config) {
@@ -44,8 +49,11 @@ export function computeBounds(normalized, colorSpace, config) {
 
 export function computeBoundsFromCurrent(colors, colorSpace, configLike = {}) {
   if (!colors.length) return null;
-  const normalized = colors.map((hex) => normalizeSpace(decodeColor(hex, colorSpace), colorSpace));
-  return computeBounds(normalized, colorSpace, configLike);
+  const decoded = colors.map((hex) => decodeColor(hex, colorSpace));
+  const ranges = effectiveRangeFromValues(decoded, colorSpace);
+  const normalized = decoded.map((v) => normalizeWithRange(v, ranges, colorSpace));
+  const bounds = computeBounds(normalized, colorSpace, configLike);
+  return { ...bounds, ranges };
 }
 
 function computeHueBounds(vals, width) {

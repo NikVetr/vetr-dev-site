@@ -10,10 +10,10 @@ export const channelOrder = {
 
 export const csRanges = {
   hsl: { min: { h: 0, s: 0, l: 0 }, max: { h: 360, s: 100, l: 100 } },
-  lab: { min: { l: 0, a: -128, b: -128 }, max: { l: 100, a: 127, b: 127 } },
-  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 140, h: 360 } },
-  oklab: { min: { l: 0, a: -0.5, b: -0.5 }, max: { l: 1, a: 0.5, b: 0.5 } },
-  oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.4, h: 360 } },
+  lab: { min: { l: 0, a: -80, b: -80 }, max: { l: 100, a: 80, b: 80 } },
+  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 100, h: 360 } },
+  oklab: { min: { l: 0, a: -0.32, b: -0.32 }, max: { l: 1, a: 0.32, b: 0.32 } },
+  oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.35, h: 360 } },
 };
 
 export function hexToRgb(hex) {
@@ -216,23 +216,50 @@ export function encodeColor(vals, space) {
 }
 
 export function normalizeSpace(vals, space) {
-  const min = csRanges[space].min;
-  const max = csRanges[space].max;
+  return normalizeWithRange(vals, csRanges[space], space);
+}
+
+export function unscaleSpace(vals, space) {
+  return unscaleWithRange(vals, csRanges[space], space);
+}
+
+export function normalizeWithRange(vals, range, space) {
+  const min = range.min;
+  const max = range.max;
   const out = {};
   channelOrder[space].forEach((ch) => {
-    out[ch] = (vals[ch] - min[ch]) / (max[ch] - min[ch]);
+    const denom = max[ch] - min[ch] || 1;
+    out[ch] = (vals[ch] - min[ch]) / denom;
   });
   return out;
 }
 
-export function unscaleSpace(vals, space) {
-  const min = csRanges[space].min;
-  const max = csRanges[space].max;
+export function unscaleWithRange(vals, range, space) {
+  const min = range.min;
+  const max = range.max;
   const out = {};
   channelOrder[space].forEach((ch) => {
     out[ch] = vals[ch] * (max[ch] - min[ch]) + min[ch];
   });
   return out;
+}
+
+export function effectiveRangeFromValues(values, space) {
+  const base = csRanges[space];
+  const min = { ...base.min };
+  const max = { ...base.max };
+  values.forEach((v) => {
+    channelOrder[space].forEach((ch) => {
+      if (v[ch] < min[ch]) min[ch] = v[ch];
+      if (v[ch] > max[ch]) max[ch] = v[ch];
+    });
+  });
+  return { min, max };
+}
+
+export function effectiveRangeFromColors(colors, space) {
+  const decoded = (colors || []).map((c) => decodeColor(c, space));
+  return effectiveRangeFromValues(decoded, space);
 }
 
 function labFn(t) {

@@ -8,5 +8,7 @@ export function createInitialState() {
     lastRuns: 0,
     bounds: null,
     mutedInput: false,
+    nmTrails: [],
+    bestColors: [],
   };
 }

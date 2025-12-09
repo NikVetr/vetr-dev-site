@@ -2,32 +2,31 @@ import { applyCvdHex } from "../core/cvd.js";
 import { deltaE2000 } from "../core/metrics.js";
 import {
   channelOrder,
-  csRanges,
   decodeColor,
   encodeColor,
-  normalizeSpace,
-  unscaleSpace,
+  effectiveRangeFromValues,
+  normalizeWithRange,
+  unscaleWithRange,
 } from "../core/colorSpaces.js";
 import { clamp, logistic } from "../core/util.js";
 import { computeBounds } from "./bounds.js";
 
 export function prepareData(palette, colorSpace, config) {
   const channels = channelOrder[colorSpace];
-  const normalized = palette.map((hex) => {
-    const vals = decodeColor(hex, colorSpace);
-    return normalizeSpace(vals, colorSpace);
-  });
+  const decoded = palette.map((hex) => decodeColor(hex, colorSpace));
+  const ranges = effectiveRangeFromValues(decoded, colorSpace);
+  const normalized = decoded.map((vals) => normalizeWithRange(vals, ranges, colorSpace));
 
   const bounds = computeBounds(normalized, colorSpace, config);
   const currHex = normalized.map((row) =>
-    encodeColor(unscaleSpace(row, colorSpace), colorSpace)
+    encodeColor(unscaleWithRange(row, ranges, colorSpace), colorSpace)
   );
   return {
     currCols: normalized,
     currHex,
     bounds,
     colorSpace,
-    csRanges,
+    ranges,
     colorblindWeights: config.colorblindWeights,
     colorblindSafe: config.colorblindSafe,
     nColsToAdd: config.nColsToAdd,
@@ -35,7 +34,7 @@ export function prepareData(palette, colorSpace, config) {
 }
 
 export function meanDistance(par, prep, returnInfo) {
-  const { currHex, bounds, colorSpace, colorblindWeights, colorblindSafe, nColsToAdd } = prep;
+  const { currHex, bounds, colorSpace, colorblindWeights, colorblindSafe, nColsToAdd, ranges } = prep;
   const channels = channelOrder[colorSpace];
   const cn = channels;
 
@@ -98,11 +97,11 @@ export function meanDistance(par, prep, returnInfo) {
     });
   }
 
-  const scaled = m.map((row) => unscaleSpace(row, colorSpace));
+  const scaled = m.map((row) => unscaleWithRange(row, ranges, colorSpace));
   const rawHex = scaled.map((row) => encodeColor(row, colorSpace));
   const newHex = rawHex.map((hex) => {
     const decoded = decodeColor(hex, colorSpace);
-    const norm = normalizeSpace(decoded, colorSpace);
+    const norm = normalizeWithRange(decoded, ranges, colorSpace);
     const clamped = { ...norm };
     const scCh = cn.find((c) => c === "s" || c === "c");
     if (bounds.boundsH && typeof clamped.h === "number") {
@@ -126,7 +125,7 @@ export function meanDistance(par, prep, returnInfo) {
       const b = bounds.boundsByName?.[ch];
       if (b && typeof clamped[ch] === "number") clamped[ch] = clamp(clamped[ch], b[0], b[1]);
     });
-    return encodeColor(unscaleSpace(clamped, colorSpace), colorSpace);
+    return encodeColor(unscaleWithRange(clamped, ranges, colorSpace), colorSpace);
   });
   const currHexLocal = currHex;
 

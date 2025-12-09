@@ -1,4 +1,10 @@
-import { channelOrder, csRanges, decodeColor, encodeColor } from "../core/colorSpaces.js";
+import {
+  channelOrder,
+  csRanges,
+  decodeColor,
+  encodeColor,
+  effectiveRangeFromColors,
+} from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
 import { clamp } from "../core/util.js";
 
@@ -9,7 +15,7 @@ export function drawWheel(type, ui, state) {
   const ctx = canvas.getContext("2d");
   const size = refs.panel.clientWidth - 24;
   const deviceScale = window.devicePixelRatio || 1;
-  const dim = Math.max(240, Math.min(420, size));
+  const dim = Math.max(220, Math.min(380, size - 6));
   canvas.width = dim * deviceScale;
   canvas.height = dim * deviceScale;
   canvas.style.width = `${dim}px`;
@@ -17,21 +23,27 @@ export function drawWheel(type, ui, state) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(deviceScale, deviceScale);
 
-  const cx = dim / 2;
+  let cx = dim / 2;
   const cy = dim / 2;
-  const radius = (dim / 2) * 0.9;
+  const baseRadius = (dim / 2) * 0.86;
   const slicesT = 60;
   const slicesR = 20;
   const wheelSpace = ui.colorwheelSpace.value;
   if (!csRanges[wheelSpace]) return;
 
   const isRectWheel = wheelSpace === "lab" || wheelSpace === "oklab";
+  let radius = baseRadius;
   let maxC = 1;
+  if (isRectWheel) {
+    const leftPad = 25;
+    cx = dim / 2 + leftPad / 2;
+    radius = Math.min(baseRadius, dim / 2 - leftPad);
+  }
   if (isRectWheel) {
     const maxA = Math.max(Math.abs(csRanges[wheelSpace].min.a), Math.abs(csRanges[wheelSpace].max.a));
     const maxB = Math.max(Math.abs(csRanges[wheelSpace].min.b), Math.abs(csRanges[wheelSpace].max.b));
     maxC = Math.min(maxA, maxB) || 1;
-    const steps = 70;
+    const steps = 48;
     const squareSize = radius * 2;
     for (let yi = 0; yi < steps; yi++) {
       for (let xi = 0; xi < steps; xi++) {
@@ -70,14 +82,15 @@ export function drawWheel(type, ui, state) {
 
   const allColors = state.currentColors.map((c) => ({ color: c, shape: "circle" }))
     .concat(state.newColors.map((c) => ({ color: c, shape: "square" })));
+  const ranges = effectiveRangeFromColors(allColors.map((c) => c.color), wheelSpace);
   const coords = allColors.map((entry) => {
     const vals = decodeColor(entry.color, wheelSpace);
-    const lx = csRanges[wheelSpace];
+    const lx = ranges;
     const lNorm = clamp((vals.l - lx.min.l) / (lx.max.l - lx.min.l), 0, 1);
 
     if (isRectWheel) {
-      const maxA = Math.max(Math.abs(csRanges[wheelSpace].min.a), Math.abs(csRanges[wheelSpace].max.a));
-      const maxB = Math.max(Math.abs(csRanges[wheelSpace].min.b), Math.abs(csRanges[wheelSpace].max.b));
+      const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
+      const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
       const maxRectC = Math.min(maxA, maxB) || 1;
       const aVal = vals.a || 0;
       const bVal = vals.b || 0;
@@ -102,12 +115,12 @@ export function drawWheel(type, ui, state) {
       }
       const maxSC =
         sOrC === "s"
-          ? csRanges[wheelSpace].max.s
+          ? ranges.max.s
           : sOrC === "c"
-          ? csRanges[wheelSpace].max.c
+          ? ranges.max.c
           : Math.min(
-              Math.max(Math.abs(csRanges[wheelSpace].min.a || 0), Math.abs(csRanges[wheelSpace].max.a || 0)),
-              Math.max(Math.abs(csRanges[wheelSpace].min.b || 0), Math.abs(csRanges[wheelSpace].max.b || 0))
+              Math.max(Math.abs(ranges.min.a || 0), Math.abs(ranges.max.a || 0)),
+              Math.max(Math.abs(ranges.min.b || 0), Math.abs(ranges.max.b || 0))
             );
       const rNorm = maxSC ? clamp(chroma / maxSC, 0, 1) : 0;
       const theta = (hueDeg / 180) * Math.PI;
@@ -143,20 +156,33 @@ export function drawWheel(type, ui, state) {
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   if (isRectWheel) {
-    const maxA = Math.max(Math.abs(csRanges[wheelSpace].min.a), Math.abs(csRanges[wheelSpace].max.a));
-    const maxB = Math.max(Math.abs(csRanges[wheelSpace].min.b), Math.abs(csRanges[wheelSpace].max.b));
-    const pad = 14;
-    ctx.fillText(`A -${maxA.toFixed(2)}`, cx - radius + pad, cy + radius + 22);
-    ctx.fillText(`A +${maxA.toFixed(2)}`, cx + radius - pad, cy + radius + 22);
-    ctx.textAlign = "right";
-    ctx.fillText(`B +${maxB.toFixed(2)}`, cx - radius - 10, cy - radius + pad);
-    ctx.fillText(`B -${maxB.toFixed(2)}`, cx - radius - 10, cy + radius - pad);
-    ctx.textAlign = "center";
+    const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
+    const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
+    const ticks = 5;
+    for (let i = 0; i < ticks; i++) {
+      const t = i / (ticks - 1);
+      const aVal = (t * 2 - 1) * maxA;
+      const bVal = (1 - t * 2) * maxB;
+      const x = cx - radius + t * (2 * radius);
+      const y = cy - radius + t * (2 * radius);
+      ctx.fillText(aVal.toFixed(1), x, cy + radius + 10);
+      ctx.textAlign = "right";
+      ctx.fillText(bVal.toFixed(1), cx - radius - 6, y);
+      ctx.textAlign = "center";
+    }
   } else {
-    ctx.fillText("Hue 0°", cx + radius - 10, cy + radius + 22);
-    ctx.fillText("Hue 180°", cx - radius + 10, cy + radius + 22);
-    ctx.fillText("Sat/Chroma max", cx, cy - radius + 14);
-    ctx.fillText("bounding circle", cx, cy - radius - 4);
+    const tickAngles = Array.from({ length: 12 }, (_, i) => i * 30);
+    const labelR = radius + 8;
+    tickAngles.forEach((deg) => {
+      const ang = (deg * Math.PI) / 180;
+      const tx = cx + labelR * Math.cos(ang);
+      const ty = cy + labelR * Math.sin(ang);
+      ctx.save();
+      ctx.translate(tx, ty);
+      ctx.rotate(ang + Math.PI / 2);
+      ctx.fillText(`${deg}`, 0, 0);
+      ctx.restore();
+    });
   }
 
   if (state.bounds && ui.colorSpace.value === ui.colorwheelSpace.value) {
@@ -232,7 +258,7 @@ export function drawWheel(type, ui, state) {
       const aBounds = state.bounds.boundsByName.a;
       const bBounds = state.bounds.boundsByName.b;
       if (aBounds && bBounds) {
-        const aRange = csRanges[wheelSpaceCurrent];
+        const aRange = ranges;
         const maxA = Math.max(Math.abs(aRange.min.a), Math.abs(aRange.max.a));
         const maxB = Math.max(Math.abs(aRange.min.b), Math.abs(aRange.max.b));
         const maxRectC = Math.min(maxA, maxB) || 1;
