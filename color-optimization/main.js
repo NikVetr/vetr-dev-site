@@ -15,13 +15,21 @@ const state = createInitialState();
 let ui = null;
 let verboseLogs = [];
 
+function currentVizOpts() {
+  return {
+    clipToGamut: ui?.clipGamut ? ui.clipGamut.checked : true,
+    gamutPreset: ui?.gamutPreset?.value || "srgb",
+    gamutMode: ui?.gamutMode?.value || "auto",
+  };
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   ui = getUIRefs();
   createPanels(ui, plotOrder);
   setDefaultValues();
   buildPaletteButtons();
   attachEventListeners();
-  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
 });
 
 function setDefaultValues() {
@@ -30,6 +38,9 @@ function setDefaultValues() {
   state.mutedInput = true;
   ui.colorSpace.value = "oklab";
   ui.colorwheelSpace.value = "oklab";
+  if (ui.gamutMode) ui.gamutMode.value = "auto";
+  if (ui.gamutPreset) ui.gamutPreset.value = "srgb";
+  if (ui.clipGamut) ui.clipGamut.checked = true;
   if (ui.syncSpaces) ui.syncSpaces.checked = true;
   ui.colorsToAdd.value = "3";
   ui.optimRuns.value = "100";
@@ -54,11 +65,15 @@ function setDefaultValues() {
   updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
   state.lastRuns = Math.max(1, parseInt(ui.optimRuns.value, 10) || 20);
   state.newColors = [];
+  state.newRaw = [];
+  state.bestRaw = [];
+  state.rawSpace = ui.colorSpace.value;
+  state.newRawSpace = ui.colorSpace.value;
   setResults([], ui);
   state.bestScores = [];
   state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
   drawStatusGraph(state, ui);
-  drawStatusMini(state, ui);
+  drawStatusMini(state, ui, currentVizOpts());
   logVerbose("palette", "", ui.paletteInput.value.trim());
   togglePlaceholder();
   updateBgControls();
@@ -68,19 +83,19 @@ function setDefaultValues() {
 function attachEventListeners() {
   ui.paletteInput.addEventListener("input", () => {
     state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
-    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     togglePlaceholder();
     updatePaletteHighlight();
-    drawStatusMini(state, ui);
+    drawStatusMini(state, ui, currentVizOpts());
   });
   ui.paletteInput.addEventListener("scroll", syncPaletteHighlightScroll);
   ui.paletteClear?.addEventListener("click", () => {
     ui.paletteInput.value = "";
     state.bounds = computeBoundsFromCurrent([], ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
-    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     togglePlaceholder();
     ui.paletteInput.focus();
-    drawStatusMini(state, ui);
+    drawStatusMini(state, ui, currentVizOpts());
   });
   ui.bgColor?.addEventListener("change", () => {
     updateBgControls();
@@ -100,7 +115,7 @@ function attachEventListeners() {
       updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
     }
     updateBoundsAndRefresh();
-    drawStatusMini(state, ui);
+    drawStatusMini(state, ui, currentVizOpts());
   });
 
   ui.colorwheelSpace.addEventListener("change", () => {
@@ -108,23 +123,35 @@ function attachEventListeners() {
       ui.syncSpaces.checked = false;
     }
     updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
-    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
-    drawStatusMini(state, ui);
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
+  });
+  ui.gamutMode?.addEventListener("change", () => {
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
+  });
+  ui.gamutPreset?.addEventListener("change", () => {
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
+  });
+  ui.clipGamut?.addEventListener("change", () => {
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
   });
   ui.syncSpaces?.addEventListener("change", () => {
     if (ui.syncSpaces.checked) {
       ui.colorwheelSpace.value = ui.colorSpace.value;
       updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
-      refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
-      drawStatusMini(state, ui);
+      refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+      drawStatusMini(state, ui, currentVizOpts());
     }
   });
 
   ui.runBtn.addEventListener("click", () => runOptimization());
   ui.resetBtn.addEventListener("click", () => {
     setDefaultValues();
-    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
-    drawStatusMini(state, ui);
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
   });
   ui.copyBtn.addEventListener("click", () => copyResults(ui, state));
   ui.formatQuotes.addEventListener("change", () => setResults(state.newColors, ui));
@@ -135,13 +162,13 @@ function attachEventListeners() {
     el.addEventListener("input", () => {
       updateWidthChips();
       updateBoundsAndRefresh();
-      drawStatusMini(state, ui);
+      drawStatusMini(state, ui, currentVizOpts());
     });
   });
 
   window.addEventListener("resize", () => {
-    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
-    drawStatusMini(state, ui);
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
   });
 
   window.addEventListener("error", (e) => {
@@ -172,17 +199,13 @@ function updateWidthChips() {
 
 function updateBoundsAndRefresh() {
   state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
-  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
-  drawStatusMini(state, ui);
+  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+  drawStatusMini(state, ui, currentVizOpts());
 }
 
 async function runOptimization() {
   if (state.running) return;
   const palette = parsePalette(ui.paletteInput.value);
-  if (!palette.length) {
-    showError("Please enter at least one valid hex color.", ui);
-    return;
-  }
   const paletteForOpt = [...palette];
   if (ui.bgEnabled?.checked) {
     const bgHex = (ui.bgColor?.value || "").trim();
@@ -193,6 +216,8 @@ async function runOptimization() {
   }
   showError("", ui);
   const config = readConfig(ui, state);
+  state.rawSpace = config.colorSpace;
+  state.newRawSpace = config.colorSpace;
   state.running = true;
   ui.runBtn.disabled = true;
   ui.runBtn.textContent = "Running…";
@@ -201,18 +226,28 @@ async function runOptimization() {
   state.bestScores = [];
   state.nmTrails = [];
   state.bestColors = [];
+  state.bestRaw = [];
+  state.newRaw = [];
   state.bounds = computeBoundsFromCurrent(palette, config.colorSpace, config);
   drawStatusGraph(state, ui);
-  drawStatusMini(state, ui);
+  drawStatusMini(state, ui, currentVizOpts());
 
   try {
     const best = await optimizePalette(paletteForOpt, config, {
-      onProgress: async ({ run, pct, bestScore, startHex, endHex, bestHex }) => {
+      onProgress: async ({ run, pct, bestScore, startHex, endHex, startRaw, endRaw, bestHex, bestRaw }) => {
         state.bestScores.push(bestScore);
-        state.nmTrails.push({ run, startHex, endHex });
+        state.nmTrails.push({
+          run,
+          startHex,
+          endHex,
+          startRaw: startRaw || null,
+          endRaw: endRaw || null,
+          rawSpace: config.colorSpace,
+        });
         state.bestColors = bestHex || state.bestColors;
+        state.bestRaw = bestRaw || state.bestRaw;
         setStatus(`restart ${run}/${config.nOptimRuns}`, pct, ui, state);
-        drawStatusMini(state, ui);
+        drawStatusMini(state, ui, currentVizOpts());
         await nextFrame();
       },
       onVerbose: (info) => {
@@ -234,6 +269,9 @@ async function runOptimization() {
     });
     state.newColors = best.newHex || [];
     state.bestColors = state.newColors;
+    state.newRaw = best.newRaw || [];
+    state.bestRaw = state.newRaw;
+    state.newRawSpace = config.colorSpace;
     logVerbose("newColors", [], state.newColors);
     const convergence = best.meta?.reason || "finished";
     setStatus(`done. best score = ${(-best.value).toFixed(3)} (${convergence})`, 100, ui, state);
@@ -245,8 +283,8 @@ async function runOptimization() {
     state.running = false;
     ui.runBtn.disabled = false;
     ui.runBtn.textContent = "RUN";
-    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
-    drawStatusMini(state, ui);
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
   }
 }
 
@@ -349,8 +387,8 @@ function appendPalette(colors) {
   ui.paletteInput.value = `${hasValue ? ui.paletteInput.value.trim() + " " : ""}${paletteStr}`;
   togglePlaceholder();
   state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
-  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value);
-  drawStatusMini(state, ui);
+  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+  drawStatusMini(state, ui, currentVizOpts());
 }
 
 function syncPaletteHighlightScroll() {

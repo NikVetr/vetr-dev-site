@@ -9,7 +9,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   const prep = prepareData(palette, colorSpace, config);
   const dim = config.nColsToAdd * channels.length;
   const logit = (p) => Math.log(p / (1 - p));
-  let best = { value: Infinity, par: null, newHex: [] };
+  let best = { value: Infinity, par: null, newHex: [], newRaw: [] };
 
   for (let run = 0; run < config.nOptimRuns; run++) {
     const start = Array.from({ length: dim }, () => logit(Math.random()));
@@ -20,6 +20,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         run: run + 1,
         params: start,
         hex: startInfo.newHex,
+        raw: startInfo.newRaw,
       });
     }
     const res = nelderMead(
@@ -29,13 +30,14 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
     );
     const endInfo = objectiveInfo(res.x, prep);
     if (res.fx < best.value) {
-      best = { value: res.fx, par: res.x, newHex: endInfo.newHex, meta: { reason: res.reason } };
+      best = { value: res.fx, par: res.x, newHex: endInfo.newHex, newRaw: endInfo.newRaw, meta: { reason: res.reason } };
       if (onVerbose) {
         onVerbose({
           stage: "best",
           run: run + 1,
           params: res.x,
           hex: endInfo.newHex,
+          raw: endInfo.newRaw,
           score: -res.fx,
         });
       }
@@ -49,7 +51,10 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         bestScore,
         startHex: startInfo.newHex,
         endHex: endInfo.newHex,
+        startRaw: startInfo.newRaw,
+        endRaw: endInfo.newRaw,
         bestHex: best.newHex || [],
+        bestRaw: best.newRaw || [],
       });
     }
   }

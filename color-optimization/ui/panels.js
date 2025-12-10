@@ -1,5 +1,5 @@
 import { plotOrder as plotOrderDefault } from "../config.js";
-import { channelOrder, csRanges, decodeColor, effectiveRangeFromColors } from "../core/colorSpaces.js";
+import { channelOrder, csRanges, decodeColor, effectiveRangeFromValues, rangeFromPreset, clampToRange } from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
 import { normalize } from "../core/stats.js";
@@ -135,18 +135,27 @@ export function renderSwatchColumn(container, colors, type, shape) {
   });
 }
 
-export function renderChannelBars(barObjs, current, added, type, state, ui) {
+export function renderChannelBars(barObjs, current, added, type, state, ui, vizOpts = {}) {
   if (!barObjs) return;
-  const barSpace = ui.colorwheelSpace.value || "hsl";
+  const barSpace = vizOpts.vizSpace || ui.colorwheelSpace.value || "hsl";
+  const gamutMode = vizOpts.gamutMode || "auto";
+  const clipToGamut = vizOpts.clipToGamut !== false;
+  const gamutPreset = vizOpts.gamutPreset || "srgb";
   if (!csRanges[barSpace]) return;
   const hueBarOffsetDeg = 285;
-  const allColors = [...current, ...added];
-  const ranges = effectiveRangeFromColors(allColors, barSpace);
-  const hueBarOffsetNorm = hueBarOffsetDeg / (ranges.max.h - ranges.min.h || 360);
-  const combined = [
-    ...current.map((c) => ({ color: c, shape: "circle" })),
-    ...added.map((c) => ({ color: c, shape: "square" })),
+  const rawCurrent = !clipToGamut && state.rawSpace === barSpace ? state.currentRaw : null;
+  const rawAdded = !clipToGamut && state.newRawSpace === barSpace ? state.newRaw : null;
+  const combinedValues = [
+    ...current.map((c, idx) => ({ color: c, shape: "circle", vals: rawCurrent?.[idx] || decodeColor(c, barSpace) })),
+    ...added.map((c, idx) => ({ color: c, shape: "square", vals: rawAdded?.[idx] || decodeColor(c, barSpace) })),
   ];
+  const valueSet = combinedValues.map((v) => v.vals);
+  const presetRange = rangeFromPreset(barSpace, gamutPreset) || csRanges[barSpace];
+  const ranges = gamutMode === "full"
+    ? presetRange
+    : effectiveRangeFromValues(valueSet, barSpace);
+  const hueBarOffsetNorm = hueBarOffsetDeg / (ranges.max.h - ranges.min.h || 360);
+  const combined = combinedValues;
 
   const vizChannels = channelOrder[barSpace];
   const configs = vizChannels.map((key) => ({
@@ -163,11 +172,6 @@ export function renderChannelBars(barObjs, current, added, type, state, ui) {
     obj.bar.innerHTML = "";
     obj.bar.style.background = channelGradientForSpace(cfg.key, barSpace, type);
     obj.bar.dataset.key = cfg.key;
-  });
-
-  combined.forEach((entry) => {
-    const sim = applyCvdHex(entry.color, type);
-    const decoded = decodeColor(entry.color, barSpace);
   });
 
   if (state.bounds && ui.colorSpace.value === barSpace) {
@@ -238,7 +242,7 @@ export function renderChannelBars(barObjs, current, added, type, state, ui) {
 
   combined.forEach((entry) => {
     const sim = applyCvdHex(entry.color, type);
-    const decoded = decodeColor(entry.color, barSpace);
+    const decoded = clipToGamut ? clampToRange(entry.vals, presetRange, barSpace) : entry.vals;
     barObjs.forEach((obj, idx) => {
       const cfg = configs[idx];
       let val;
@@ -260,10 +264,13 @@ export function renderChannelBars(barObjs, current, added, type, state, ui) {
   });
 }
 
-export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpace, optSpace) {
+export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpace, optSpace, gamutMode = "auto", vizOpts = {}) {
   const colors = parsePalette(ui.paletteInput.value);
   state.currentColors = colors;
   const colorSpace = optSpace || ui.colorSpace.value;
+  state.rawSpace = colorSpace;
+  state.currentRaw = colors.map((hex) => decodeColor(hex, colorSpace));
+  const resolvedVizSpace = vizSpace || ui.colorwheelSpace.value;
   state.bounds = computeBoundsFromCurrent(colors, colorSpace, { constrain: true, widths: getWidths(ui) });
   plotOrder.forEach((type) => {
     const refs = ui.panelMap[type];
@@ -271,7 +278,17 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
     refs.panel.style.display = "flex";
     renderSwatchColumn(refs.currList, colors, type, "circle");
     renderSwatchColumn(refs.newList, state.newColors, type, "square");
-    renderChannelBars(refs.channelBars, state.currentColors, state.newColors, type, state, ui);
-    drawWheel(type, ui, state);
+    renderChannelBars(refs.channelBars, state.currentColors, state.newColors, type, state, ui, {
+      vizSpace: resolvedVizSpace,
+      gamutMode,
+      gamutPreset: vizOpts.gamutPreset,
+      clipToGamut: vizOpts.clipToGamut,
+    });
+    drawWheel(type, ui, state, {
+      vizSpace: resolvedVizSpace,
+      gamutMode,
+      gamutPreset: vizOpts.gamutPreset,
+      clipToGamut: vizOpts.clipToGamut,
+    });
   });
 }

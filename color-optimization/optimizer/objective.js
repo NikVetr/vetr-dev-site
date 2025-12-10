@@ -24,6 +24,7 @@ export function prepareData(palette, colorSpace, config) {
   return {
     currCols: normalized,
     currHex,
+    currRaw: decoded,
     bounds,
     colorSpace,
     ranges,
@@ -165,7 +166,7 @@ export function meanDistance(par, prep, returnInfo) {
   const value = -wd + penaltyWeight * penalty;
 
   if (returnInfo) {
-    return { value, newHex, distance: wd };
+    return { value, newHex, newRaw: scaled.map((row) => ({ ...row })), distance: wd };
   }
   return { value };
 }

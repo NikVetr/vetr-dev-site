@@ -130,6 +130,27 @@
               <option value="oklab">OKLab</option>
             </select>
           </div>
+          <div class="field">
+            <label for="gamut-mode">Gamut for visualization</label>
+            <select id="gamut-mode">
+              <option value="auto">auto (fit to palette)</option>
+              <option value="full">full colorspace</option>
+            </select>
+            <div class="field two-col mini">
+              <label class="inline small">
+                <input id="clip-gamut" type="checkbox" checked>
+                clip to gamut
+              </label>
+              <div>
+                <label for="gamut-preset">Gamut preset</label>
+                <select id="gamut-preset">
+                  <option value="srgb">sRGB</option>
+                  <option value="p3">Display P3</option>
+                  <option value="ntsc">NTSC-ish</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="control-block">

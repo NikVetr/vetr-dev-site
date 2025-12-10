@@ -2,6 +2,11 @@ export function createInitialState() {
   return {
     currentColors: [],
     newColors: [],
+    currentRaw: [],
+    newRaw: [],
+    bestRaw: [],
+    rawSpace: null,
+    newRawSpace: null,
     running: false,
     bestScores: [],
     copyTimeout: null,

@@ -8,13 +8,61 @@ export const channelOrder = {
   oklch: ["l", "c", "h"],
 };
 
-export const csRanges = {
+/*export const csRanges = {
   hsl: { min: { h: 0, s: 0, l: 0 }, max: { h: 360, s: 100, l: 100 } },
   lab: { min: { l: 0, a: -80, b: -80 }, max: { l: 100, a: 80, b: 80 } },
   lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 100, h: 360 } },
   oklab: { min: { l: 0, a: -0.32, b: -0.32 }, max: { l: 1, a: 0.32, b: 0.32 } },
   oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.35, h: 360 } },
+};*/
+
+export const csRanges = {
+  hsl: { min: { h: 0, s: 0, l: 0 }, max: { h: 360, s: 100, l: 100 } },
+  
+  // Standard integer Lab usually fits in signed 8-bit (-128 to 127)
+  lab: { min: { l: 0, a: -128, b: -128 }, max: { l: 100, a: 127, b: 127 } },
+  
+  // LCh Chroma can go higher than 100. 150 is a safe upper bound for visible colors.
+  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 150, h: 360 } },
+  
+  // OKLab fits within roughly +/- 0.4 or 0.5
+  oklab: { min: { l: 0, a: -0.4, b: -0.4 }, max: { l: 1, a: 0.4, b: 0.4 } },
+  
+  // OKLCh Chroma max 0.4 covers virtually all visible colors
+  oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.4, h: 360 } },
 };
+
+export const gamutPresets = {
+  srgb: { label: "sRGB", scale: 1 },
+  p3: { label: "Display P3", scale: 1.1 },
+  ntsc: { label: "NTSC-ish", scale: 1.2 },
+};
+
+export function rangeFromPreset(space, preset = "srgb") {
+  const base = csRanges[space];
+  if (!base) return null;
+  const scale = gamutPresets[preset]?.scale ?? 1;
+  if (!Number.isFinite(scale) || scale === 1) {
+    return {
+      min: { ...base.min },
+      max: { ...base.max },
+    };
+  }
+  const min = {};
+  const max = {};
+  Object.keys(base.min).forEach((key) => {
+    if (key === "h") {
+      min[key] = base.min[key];
+      max[key] = base.max[key];
+      return;
+    }
+    const center = (base.max[key] + base.min[key]) / 2;
+    const half = ((base.max[key] - base.min[key]) / 2) * scale;
+    min[key] = center - half;
+    max[key] = center + half;
+  });
+  return { min, max };
+}
 
 export function hexToRgb(hex) {
   const clean = hex.replace("#", "");
@@ -242,6 +290,27 @@ export function unscaleWithRange(vals, range, space) {
     out[ch] = vals[ch] * (max[ch] - min[ch]) + min[ch];
   });
   return out;
+}
+
+export function clampToRange(vals, range, space) {
+  const out = {};
+  channelOrder[space].forEach((ch) => {
+    if (!(ch in vals)) return;
+    if (ch === "h") {
+      const span = (range.max.h - range.min.h) || 360;
+      let h = vals.h;
+      if (Number.isFinite(h)) {
+        h = ((h - range.min.h) % span + span) % span + range.min.h;
+        if (h < range.min.h) h = range.min.h;
+        if (h > range.max.h) h = range.max.h;
+      }
+      out.h = h;
+    } else {
+      const v = vals[ch];
+      out[ch] = Math.max(range.min[ch], Math.min(range.max[ch], v));
+    }
+  });
+  return { ...vals, ...out };
 }
 
 export function effectiveRangeFromValues(values, space) {
