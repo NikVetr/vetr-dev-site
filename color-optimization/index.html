@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <main class="page">
@@ -70,6 +70,20 @@
               <option value="lch">LCh</option>
               <option value="hsl">HSL</option>
             </select>
+          </div>
+          <div class="field two-col mini">
+            <label class="inline small">
+              <input id="clip-gamut" type="checkbox">
+              Clip to Gamut
+            </label>
+            <div>
+              <label for="gamut-preset">Gamut preset</label>
+              <select id="gamut-preset">
+                <option value="srgb">sRGB</option>
+                <option value="display-p3">Display P3</option>
+                <option value="rec2020">Rec. 2020</option>
+              </select>
+            </div>
           </div>
           <div class="field two-col">
             <div>
@@ -136,20 +150,6 @@
               <option value="auto">auto (fit to palette)</option>
               <option value="full">full colorspace</option>
             </select>
-            <div class="field two-col mini">
-              <label class="inline small">
-                <input id="clip-gamut" type="checkbox" checked>
-                clip to gamut
-              </label>
-              <div>
-                <label for="gamut-preset">Gamut preset</label>
-                <select id="gamut-preset">
-                  <option value="srgb">sRGB</option>
-                  <option value="p3">Display P3</option>
-                  <option value="ntsc">NTSC-ish</option>
-                </select>
-              </div>
-            </div>
           </div>
         </div>
 

@@ -6,16 +6,20 @@ import {
   effectiveRangeFromValues,
   clampToRange,
   rangeFromPreset,
+  gamutPresets,
+  convertColorValues,
 } from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
 import { clamp } from "../core/util.js";
+import { buildGamutHullPaths, strokeHull } from "./gamutHull.js";
 
 export function drawWheel(type, ui, state, opts = {}) {
   const refs = ui.panelMap[type];
   if (!refs) return;
   const gamutMode = opts.gamutMode || "auto";
-  const clipToGamut = opts.clipToGamut !== false;
+  const clipToGamut = opts.clipToGamut === true || opts.clipToGamut === false ? opts.clipToGamut : false;
   const gamutPreset = opts.gamutPreset || "srgb";
+  const presetLabel = gamutPresets[gamutPreset]?.label || gamutPreset;
   const wheelSpace = opts.vizSpace || ui.colorwheelSpace.value;
   const canvas = refs.canvas;
   const ctx = canvas.getContext("2d");
@@ -37,8 +41,18 @@ export function drawWheel(type, ui, state, opts = {}) {
   if (!csRanges[wheelSpace]) return;
   const channels = channelOrder[wheelSpace] || [];
 
-  const rawCurrent = !clipToGamut && state.rawSpace === wheelSpace ? state.currentRaw : null;
-  const rawNew = !clipToGamut && state.newRawSpace === wheelSpace ? state.newRaw : null;
+  const rawCurrent =
+    !clipToGamut && state.rawCurrentColors?.length
+      ? state.rawCurrentColors.map((v) =>
+          state.rawSpace && state.rawSpace !== wheelSpace ? convertColorValues(v, state.rawSpace, wheelSpace) : v
+        )
+      : null;
+  const rawNew =
+    !clipToGamut && state.rawNewColors?.length
+      ? state.rawNewColors.map((v) =>
+          state.newRawSpace && state.newRawSpace !== wheelSpace ? convertColorValues(v, state.newRawSpace, wheelSpace) : v
+        )
+      : null;
   const allColors = state.currentColors.map((c, idx) => ({
     color: c,
     shape: "circle",
@@ -51,7 +65,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     })));
   const valueSet = allColors.map((c) => c.vals);
   const presetRange = rangeFromPreset(wheelSpace, gamutPreset) || csRanges[wheelSpace];
-  const ranges = gamutMode === "full"
+  const ranges = gamutMode === "full" || !clipToGamut
     ? presetRange
     : effectiveRangeFromValues(valueSet, wheelSpace);
 
@@ -104,55 +118,63 @@ export function drawWheel(type, ui, state, opts = {}) {
     }
   }
 
-  const coords = allColors.map((entry) => {
-    const vals = clipToGamut ? clampToRange(entry.vals, presetRange, wheelSpace) : entry.vals;
-    const lx = ranges;
-    const lNorm = clamp((vals.l - lx.min.l) / (lx.max.l - lx.min.l), 0, 1);
+  const scaleRange = clipToGamut ? presetRange : ranges;
+
+  const toPoint = (vals, rangeOverride, clampVals = !rangeOverride && clipToGamut) => {
+    const useRange = rangeOverride || scaleRange;
+    const clampedVals = clampVals ? clampToRange(vals, presetRange, wheelSpace) : vals;
+    const v = clampedVals;
+    const lMin = useRange.min.l ?? 0;
+    const lMax = useRange.max.l ?? 1;
+    const lVal = v.l ?? ((wheelSpace === "lab" || wheelSpace === "oklab") ? 0 : lMin);
+    const lNorm = clamp((lVal - lMin) / Math.max(lMax - lMin, 1e-6), 0, 1);
 
     if (isRectWheel) {
-    const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
-    const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
-    const maxRectC = Math.min(maxA, maxB) || 1;
-      const aVal = vals.a || 0;
-      const bVal = vals.b || 0;
-      return {
-        color: entry.color,
-        shape: entry.shape,
-        x: cx + clamp(aVal / maxRectC, -1, 1) * radius,
-        y: cy - clamp(bVal / maxRectC, -1, 1) * radius,
-        lNorm,
-      };
-    } else {
-      const hasHue = Number.isFinite(vals.h);
-      let hueDeg = hasHue ? ((vals.h % 360) + 360) % 360 : ((Math.atan2(vals.b || 0, vals.a || 0) * 180) / Math.PI + 360) % 360;
-      const sOrC = wheelSpace === "hsl" ? "s" : ("c" in vals ? "c" : null);
-      let chroma;
-      if (sOrC === "s") {
-        chroma = vals.s || 0;
-      } else if (sOrC === "c") {
-        chroma = vals.c || 0;
-      } else {
-        chroma = Math.sqrt(Math.pow(vals.a || 0, 2) + Math.pow(vals.b || 0, 2));
-      }
-      const maxSC =
-        sOrC === "s"
-          ? ranges.max.s
-          : sOrC === "c"
-          ? ranges.max.c
-          : Math.min(
-              Math.max(Math.abs(ranges.min.a || 0), Math.abs(ranges.max.a || 0)),
-              Math.max(Math.abs(ranges.min.b || 0), Math.abs(ranges.max.b || 0))
-            );
-      const rNorm = maxSC ? clamp(chroma / maxSC, 0, 1) : 0;
-      const theta = (hueDeg / 180) * Math.PI;
-      return {
-        color: entry.color,
-        shape: entry.shape,
-        x: cx + radius * rNorm * Math.cos(theta),
-        y: cy + radius * rNorm * Math.sin(theta),
-        lNorm,
-      };
+      const maxA = Math.max(Math.abs(useRange.min.a), Math.abs(useRange.max.a)) || 1;
+      const maxB = Math.max(Math.abs(useRange.min.b), Math.abs(useRange.max.b)) || 1;
+      const x = cx + (v.a / maxA) * radius;
+      const y = cy - (v.b / maxB) * radius;
+      return { x, y, lNorm };
     }
+
+    const chans = channelOrder[wheelSpace];
+    const scKey = chans.find((c) => c === "s" || c === "c") || ("c" in v ? "c" : null);
+    const hasHue = Number.isFinite(v.h);
+    const hueDeg = hasHue
+      ? ((v.h % 360) + 360) % 360
+      : ((Math.atan2(v.b || 0, v.a || 0) * 180) / Math.PI + 360) % 360;
+    let chroma;
+    if (scKey === "s") chroma = v.s || 0;
+    else if (scKey === "c") chroma = v.c || 0;
+    else chroma = Math.sqrt(Math.pow(v.a || 0, 2) + Math.pow(v.b || 0, 2));
+
+    const maxSC =
+      scKey === "s"
+        ? useRange.max.s
+        : scKey === "c"
+        ? useRange.max.c
+        : Math.min(
+            Math.max(Math.abs(useRange.min.a || 0), Math.abs(useRange.max.a || 0)),
+            Math.max(Math.abs(useRange.min.b || 0), Math.abs(useRange.max.b || 0))
+          );
+    const rNorm = clamp(chroma / Math.max(maxSC, 1e-6), 0, 1);
+    const theta = (hueDeg / 180) * Math.PI;
+    return {
+      x: cx + radius * rNorm * Math.cos(theta),
+      y: cy + radius * rNorm * Math.sin(theta),
+      lNorm,
+    };
+  };
+
+  const coords = allColors.map((entry) => {
+    const pt = toPoint(entry.vals);
+    return {
+      color: entry.color,
+      shape: entry.shape,
+      x: pt.x,
+      y: pt.y,
+      lNorm: pt.lNorm,
+    };
   });
 
   // axis labels
@@ -289,62 +311,10 @@ export function drawWheel(type, ui, state, opts = {}) {
     }
   }
 
-  // gamut overlays: current range and preset range
-  const drawOutline = (r, color, width, dash = [6, 4]) => {
-    ctx.setLineDash(dash);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
-    if (isRectWheel) {
-      ctx.strokeRect(cx - r, cy - r, r * 2, r * 2);
-    } else {
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-      ctx.stroke();
-    }
-    ctx.setLineDash([]);
-  };
-
-  if (isRectWheel) {
-    // preset outline relative to current range
-    const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a)) || 1;
-    const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b)) || 1;
-    const maxRectC = Math.min(maxA, maxB) || 1;
-    const presetMaxA = Math.max(Math.abs(presetRange.min.a), Math.abs(presetRange.max.a)) || 1;
-    const presetMaxB = Math.max(Math.abs(presetRange.min.b), Math.abs(presetRange.max.b)) || 1;
-    const presetMax = Math.min(presetMaxA, presetMaxB) || 1;
-    const presetR = radius * Math.min(1, presetMax / maxRectC);
-    // base outline for current plotted span
-    drawOutline(radius, "rgba(255,255,255,0.85)", 2.2, [2, 0]);
-    drawOutline(radius, "rgba(0,0,0,0.7)", 1, [2, 0]);
-    // preset overlay
-    drawOutline(presetR, "rgba(255,255,255,0.95)", 2.4, [2, 0]);
-    drawOutline(presetR, "rgba(0,0,0,0.9)", 1.2, [2, 0]);
-  } else {
-    const channels = channelOrder[wheelSpace] || [];
-    const scKey = channels.find((c) => c === "s" || c === "c");
-    const maxSC =
-      scKey === "s"
-        ? ranges.max.s
-        : scKey === "c"
-        ? ranges.max.c
-        : Math.min(
-            Math.max(Math.abs(ranges.min.a || 0), Math.abs(ranges.max.a || 0)),
-            Math.max(Math.abs(ranges.min.b || 0), Math.abs(ranges.max.b || 0))
-          );
-    const presetMaxSC =
-      scKey === "s"
-        ? presetRange.max.s
-        : scKey === "c"
-        ? presetRange.max.c
-        : Math.min(
-            Math.max(Math.abs(presetRange.min.a || 0), Math.abs(presetRange.max.a || 0)),
-            Math.max(Math.abs(presetRange.min.b || 0), Math.abs(presetRange.max.b || 0))
-          );
-    const presetR = maxSC ? radius * Math.min(1.1, presetMaxSC / maxSC) : radius;
-    drawOutline(radius, "rgba(255,255,255,0.85)", 2.2, [2, 0]);
-    drawOutline(radius, "rgba(0,0,0,0.7)", 1, [2, 0]);
-    drawOutline(presetR, "rgba(255,255,255,0.95)", 2.4, [2, 0]);
-    drawOutline(presetR, "rgba(0,0,0,0.9)", 1.2, [2, 0]);
+  // True gamut hull overlay
+  if (clipToGamut) {
+    const hullPaths = buildGamutHullPaths(gamutPreset, wheelSpace, (vals) => toPoint(vals, scaleRange, false));
+    strokeHull(ctx, hullPaths);
   }
 
   // draw points above overlays
@@ -363,6 +333,12 @@ export function drawWheel(type, ui, state, opts = {}) {
     ctx.fill();
     ctx.stroke();
   });
+
+  ctx.fillStyle = "#0f172a";
+  ctx.font = "12px 'Space Grotesk', Arial, sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  ctx.fillText(`${presetLabel}${clipToGamut ? " (clipped)" : " (raw)"}`, 8, 6);
 }
 
 export function makeWheelColor(hueDeg, chromaNorm, wheelSpace) {

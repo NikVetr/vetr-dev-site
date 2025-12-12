@@ -143,8 +143,8 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
   const gamutPreset = vizOpts.gamutPreset || "srgb";
   if (!csRanges[barSpace]) return;
   const hueBarOffsetDeg = 285;
-  const rawCurrent = !clipToGamut && state.rawSpace === barSpace ? state.currentRaw : null;
-  const rawAdded = !clipToGamut && state.newRawSpace === barSpace ? state.newRaw : null;
+  const rawCurrent = !clipToGamut && state.rawSpace === barSpace ? state.rawCurrentColors : null;
+  const rawAdded = !clipToGamut && state.newRawSpace === barSpace ? state.rawNewColors : null;
   const combinedValues = [
     ...current.map((c, idx) => ({ color: c, shape: "circle", vals: rawCurrent?.[idx] || decodeColor(c, barSpace) })),
     ...added.map((c, idx) => ({ color: c, shape: "square", vals: rawAdded?.[idx] || decodeColor(c, barSpace) })),
@@ -269,7 +269,7 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
   state.currentColors = colors;
   const colorSpace = optSpace || ui.colorSpace.value;
   state.rawSpace = colorSpace;
-  state.currentRaw = colors.map((hex) => decodeColor(hex, colorSpace));
+  state.rawCurrentColors = colors.map((hex) => decodeColor(hex, colorSpace));
   const resolvedVizSpace = vizSpace || ui.colorwheelSpace.value;
   state.bounds = computeBoundsFromCurrent(colors, colorSpace, { constrain: true, widths: getWidths(ui) });
   plotOrder.forEach((type) => {

@@ -19,23 +19,71 @@ export const channelOrder = {
 export const csRanges = {
   hsl: { min: { h: 0, s: 0, l: 0 }, max: { h: 360, s: 100, l: 100 } },
   
-  // Standard integer Lab usually fits in signed 8-bit (-128 to 127)
-  lab: { min: { l: 0, a: -128, b: -128 }, max: { l: 100, a: 127, b: 127 } },
+  // Lab widened to cover wide-gamut/Rec.2020 theoretical extremes
+  lab: { min: { l: 0, a: -170, b: -170 }, max: { l: 100, a: 170, b: 170 } },
   
-  // LCh Chroma can go higher than 100. 150 is a safe upper bound for visible colors.
-  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 150, h: 360 } },
+  // LCh chroma extended for wide-gamut corners
+  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 230, h: 360 } },
   
-  // OKLab fits within roughly +/- 0.4 or 0.5
-  oklab: { min: { l: 0, a: -0.4, b: -0.4 }, max: { l: 1, a: 0.4, b: 0.4 } },
+  // OKLab fits within roughly +/- 0.5
+  oklab: { min: { l: 0, a: -0.5, b: -0.5 }, max: { l: 1, a: 0.5, b: 0.5 } },
   
-  // OKLCh Chroma max 0.4 covers virtually all visible colors
-  oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.4, h: 360 } },
+  // OKLCh chroma widened to match OKLab coverage
+  oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.5, h: 360 } },
 };
 
 export const gamutPresets = {
   srgb: { label: "sRGB", scale: 1 },
-  p3: { label: "Display P3", scale: 1.1 },
+  "display-p3": { label: "Display P3", scale: 1.1 },
+  p3: { label: "Display P3", scale: 1.1 }, // alias
+  rec2020: { label: "Rec. 2020", scale: 1.2 },
   ntsc: { label: "NTSC-ish", scale: 1.2 },
+};
+
+// Linear RGB <-> XYZ matrices for standard D65 spaces.
+export const GAMUTS = {
+  "srgb": {
+    toXYZ(r, g, b) {
+      return linearRgbToXyz({ r, g, b });
+    },
+    fromXYZ(x, y, z) {
+      return xyzToLinearRgb({ x, y, z });
+    },
+  },
+  "display-p3": {
+    // CSS Color 4 Display P3 (D65)
+    toXYZ(r, g, b) {
+      return {
+        x: r * 0.4865709486482162 + g * 0.26566769316909306 + b * 0.1982172852343625,
+        y: r * 0.2289745640697488 + g * 0.6917385218365064 + b * 0.079286914093745,
+        z: r * 0 + g * 0.04511338185890264 + b * 1.043944368900976,
+      };
+    },
+    fromXYZ(x, y, z) {
+      return {
+        r: x * 2.493496911941425 + y * -0.9313836179191239 + z * -0.402710784450717,
+        g: x * -0.8294889695615749 + y * 1.7626640603183463 + z * 0.02362468584194358,
+        b: x * 0.03584583024378447 + y * -0.07617238926804182 + z * 0.9568845240076872,
+      };
+    },
+  },
+  "rec2020": {
+    // ITU-R BT.2020 (D65)
+    toXYZ(r, g, b) {
+      return {
+        x: r * 0.6369580483012914 + g * 0.14461690358620832 + b * 0.1688809751641721,
+        y: r * 0.2627002120112671 + g * 0.6779980715188708 + b * 0.05930171646986196,
+        z: r * 0 + g * 0.028072693049087428 + b * 1.060985057710791,
+      };
+    },
+    fromXYZ(x, y, z) {
+      return {
+        r: x * 1.7166511879712674 + y * -0.35567078377639233 + z * -0.25336628137365974,
+        g: x * -0.6666843518324892 + y * 1.6164812366349395 + z * 0.01576854581391113,
+        b: x * 0.017639857445310783 + y * -0.042770613257808524 + z * 0.9421031212354738,
+      };
+    },
+  },
 };
 
 export function rangeFromPreset(space, preset = "srgb") {
@@ -128,21 +176,34 @@ export function rgbToXyz({ r, g, b }) {
   const rl = toLinear(r);
   const gl = toLinear(g);
   const bl = toLinear(b);
+  return linearRgbToXyz({ r: rl, g: gl, b: bl });
+}
+
+export function linearRgbToXyz({ r, g, b }) {
   return {
-    x: rl * 0.4124564 + gl * 0.3575761 + bl * 0.1804375,
-    y: rl * 0.2126729 + gl * 0.7151522 + bl * 0.072175,
-    z: rl * 0.0193339 + gl * 0.119192 + bl * 0.9503041,
+    x: r * 0.4124564 + g * 0.3575761 + b * 0.1804375,
+    y: r * 0.2126729 + g * 0.7151522 + b * 0.072175,
+    z: r * 0.0193339 + g * 0.119192 + b * 0.9503041,
   };
 }
 
 export function xyzToRgb({ x, y, z }) {
+  const { r, g, b } = xyzToLinearRgb({ x, y, z });
+  return {
+    r: toSrgb(r),
+    g: toSrgb(g),
+    b: toSrgb(b),
+  };
+}
+
+export function xyzToLinearRgb({ x, y, z }) {
   const rl = x * 3.2404542 + y * -1.5371385 + z * -0.4985314;
   const gl = x * -0.969266 + y * 1.8760108 + z * 0.041556;
   const bl = x * 0.0556434 + y * -0.2040259 + z * 1.0572252;
   return {
-    r: toSrgb(rl),
-    g: toSrgb(gl),
-    b: toSrgb(bl),
+    r: rl,
+    g: gl,
+    b: bl,
   };
 }
 
@@ -186,12 +247,22 @@ export function lchToLab({ l, c, h }) {
 }
 
 export function srgbToOklab({ r, g, b }) {
-  const rl = toLinear(r);
-  const gl = toLinear(g);
-  const bl = toLinear(b);
-  const l = 0.412165612 * rl + 0.536275208 * gl + 0.0514575653 * bl;
-  const m = 0.211859107 * rl + 0.6807189584 * gl + 0.107406579 * bl;
-  const s = 0.0883097947 * rl + 0.2818474174 * gl + 0.6302613616 * bl;
+  return xyzToOklab(rgbToXyz({ r, g, b }));
+}
+
+export function oklabToSrgb({ l, a, b }) {
+  const srgb = xyzToRgb(oklabToXyz({ l, a, b }));
+  return {
+    r: srgb.r,
+    g: srgb.g,
+    b: srgb.b,
+  };
+}
+
+export function xyzToOklab({ x, y, z }) {
+  const l = 0.8189330101 * x + 0.3618667424 * y - 0.1288597137 * z;
+  const m = 0.0329845436 * x + 0.9293118715 * y + 0.0361456387 * z;
+  const s = 0.0482003018 * x + 0.2643662691 * y + 0.633851707 * z;
   const l_ = Math.cbrt(l);
   const m_ = Math.cbrt(m);
   const s_ = Math.cbrt(s);
@@ -202,7 +273,7 @@ export function srgbToOklab({ r, g, b }) {
   };
 }
 
-export function oklabToSrgb({ l, a, b }) {
+export function oklabToXyz({ l, a, b }) {
   const l_ = l + 0.3963377774 * a + 0.2158037573 * b;
   const m_ = l - 0.1055613458 * a - 0.0638541728 * b;
   const s_ = l - 0.0894841775 * a - 1.291485548 * b;
@@ -210,10 +281,61 @@ export function oklabToSrgb({ l, a, b }) {
   const m3 = m_ * m_ * m_;
   const s3 = s_ * s_ * s_;
   return {
-    r: clamp(toSrgb(4.0767416621 * l3 - 3.3077115913 * m3 + 0.2309699292 * s3)),
-    g: clamp(toSrgb(-1.2684380046 * l3 + 2.6097574011 * m3 - 0.3413193965 * s3)),
-    b: clamp(toSrgb(-0.0041960863 * l3 - 0.7034186147 * m3 + 1.707614701 * s3)),
+    x: 1.2270138511035211 * l3 - 0.5577999806518222 * m3 + 0.28125614896646783 * s3,
+    y: -0.04058017842328059 * l3 + 1.11225686961683 * m3 - 0.07167667866560119 * s3,
+    z: -0.0763812845057069 * l3 - 0.4214819784180127 * m3 + 1.586163220440795 * s3,
   };
+}
+
+export function oklabToOklch({ l, a, b }) {
+  const c = Math.sqrt(a * a + b * b);
+  let h = Math.atan2(b, a) * (180 / Math.PI);
+  if (h < 0) h += 360;
+  return { l, c, h };
+}
+
+export function oklchToOklab({ l, c, h }) {
+  const hr = (h * Math.PI) / 180;
+  return { l, a: c * Math.cos(hr), b: c * Math.sin(hr) };
+}
+
+export function convertColorValues(values, fromSpace, toSpace) {
+  const src = (fromSpace || "").toLowerCase();
+  const dst = (toSpace || "").toLowerCase();
+  if (src === dst) return { ...values };
+
+  const toXyz = {
+    xyz: (v) => v,
+    lab: (v) => labToXyz(v),
+    lch: (v) => labToXyz(lchToLab(v)),
+    oklab: (v) => oklabToXyz(v),
+    oklch: (v) => oklabToXyz(oklchToOklab(v)),
+    hsl: (v) => rgbToXyz(hslToRgb(v)),
+    rgb: (v) => linearRgbToXyz(v),
+  };
+
+  const fromXyz = {
+    xyz: (v) => v,
+    lab: (v) => xyzToLab(v),
+    lch: (v) => labToLch(xyzToLab(v)),
+    oklab: (v) => xyzToOklab(v),
+    oklch: (v) => oklabToOklch(xyzToOklab(v)),
+    hsl: (v) => rgbToHsl(xyzToRgb(v)),
+    rgb: (v) => xyzToLinearRgb(v),
+  };
+
+  const toXyzFn = toXyz[src];
+  const fromXyzFn = fromXyz[dst];
+
+  if (!toXyzFn) {
+    throw new Error(`Unsupported source color space: ${fromSpace}`);
+  }
+  if (!fromXyzFn) {
+    throw new Error(`Unsupported target color space: ${toSpace}`);
+  }
+
+  const xyz = toXyzFn(values);
+  return fromXyzFn(xyz);
 }
 
 export function decodeColor(hex, space) {

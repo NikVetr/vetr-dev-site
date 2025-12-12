@@ -25,10 +25,11 @@ export function applyCvdRgb(rgb, type) {
   const r = clamp(rgb.r);
   const g = clamp(rgb.g);
   const b = clamp(rgb.b);
+  const sim = applyCvdLinear({ r, g, b }, type);
   return {
-    r: clamp(m[0][0] * r + m[0][1] * g + m[0][2] * b),
-    g: clamp(m[1][0] * r + m[1][1] * g + m[1][2] * b),
-    b: clamp(m[2][0] * r + m[2][1] * g + m[2][2] * b),
+    r: clamp(sim.r),
+    g: clamp(sim.g),
+    b: clamp(sim.b),
   };
 }
 
@@ -37,4 +38,17 @@ export function applyCvdHex(hex, type) {
   const rgb = hexToRgb(hex);
   const sim = applyCvdRgb(rgb, type);
   return rgbToHex(sim);
+}
+
+export function applyCvdLinear(rgb, type) {
+  const m = cvdMatrices[type];
+  if (!m) return rgb;
+  const r = rgb.r;
+  const g = rgb.g;
+  const b = rgb.b;
+  return {
+    r: m[0][0] * r + m[0][1] * g + m[0][2] * b,
+    g: m[1][0] * r + m[1][1] * g + m[1][2] * b,
+    b: m[2][0] * r + m[2][1] * g + m[2][2] * b,
+  };
 }

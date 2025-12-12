@@ -17,7 +17,7 @@ let verboseLogs = [];
 
 function currentVizOpts() {
   return {
-    clipToGamut: ui?.clipGamut ? ui.clipGamut.checked : true,
+    clipToGamut: ui?.clipGamut ? ui.clipGamut.checked : false,
     gamutPreset: ui?.gamutPreset?.value || "srgb",
     gamutMode: ui?.gamutMode?.value || "auto",
   };
@@ -40,7 +40,7 @@ function setDefaultValues() {
   ui.colorwheelSpace.value = "oklab";
   if (ui.gamutMode) ui.gamutMode.value = "auto";
   if (ui.gamutPreset) ui.gamutPreset.value = "srgb";
-  if (ui.clipGamut) ui.clipGamut.checked = true;
+  if (ui.clipGamut) ui.clipGamut.checked = false;
   if (ui.syncSpaces) ui.syncSpaces.checked = true;
   ui.colorsToAdd.value = "3";
   ui.optimRuns.value = "100";
@@ -65,8 +65,9 @@ function setDefaultValues() {
   updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
   state.lastRuns = Math.max(1, parseInt(ui.optimRuns.value, 10) || 20);
   state.newColors = [];
-  state.newRaw = [];
-  state.bestRaw = [];
+  state.rawCurrentColors = [];
+  state.rawNewColors = [];
+  state.rawBestColors = [];
   state.rawSpace = ui.colorSpace.value;
   state.newRawSpace = ui.colorSpace.value;
   setResults([], ui);
@@ -226,8 +227,8 @@ async function runOptimization() {
   state.bestScores = [];
   state.nmTrails = [];
   state.bestColors = [];
-  state.bestRaw = [];
-  state.newRaw = [];
+  state.rawBestColors = [];
+  state.rawNewColors = [];
   state.bounds = computeBoundsFromCurrent(palette, config.colorSpace, config);
   drawStatusGraph(state, ui);
   drawStatusMini(state, ui, currentVizOpts());
@@ -245,7 +246,7 @@ async function runOptimization() {
           rawSpace: config.colorSpace,
         });
         state.bestColors = bestHex || state.bestColors;
-        state.bestRaw = bestRaw || state.bestRaw;
+        state.rawBestColors = bestRaw || state.rawBestColors;
         setStatus(`restart ${run}/${config.nOptimRuns}`, pct, ui, state);
         drawStatusMini(state, ui, currentVizOpts());
         await nextFrame();
@@ -269,8 +270,8 @@ async function runOptimization() {
     });
     state.newColors = best.newHex || [];
     state.bestColors = state.newColors;
-    state.newRaw = best.newRaw || [];
-    state.bestRaw = state.newRaw;
+    state.rawNewColors = best.newRaw || [];
+    state.rawBestColors = state.rawNewColors;
     state.newRawSpace = config.colorSpace;
     logVerbose("newColors", [], state.newColors);
     const convergence = best.meta?.reason || "finished";

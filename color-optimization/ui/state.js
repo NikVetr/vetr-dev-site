@@ -2,9 +2,9 @@ export function createInitialState() {
   return {
     currentColors: [],
     newColors: [],
-    currentRaw: [],
-    newRaw: [],
-    bestRaw: [],
+    rawCurrentColors: [],
+    rawNewColors: [],
+    rawBestColors: [],
     rawSpace: null,
     newRawSpace: null,
     running: false,

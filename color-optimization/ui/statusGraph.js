@@ -1,5 +1,14 @@
-import { channelOrder, csRanges, decodeColor, effectiveRangeFromValues, rangeFromPreset, clampToRange } from "../core/colorSpaces.js";
+import {
+  channelOrder,
+  csRanges,
+  decodeColor,
+  rangeFromPreset,
+  clampToRange,
+  gamutPresets,
+  convertColorValues,
+} from "../core/colorSpaces.js";
 import { niceTicks } from "../core/stats.js";
+import { buildGamutHullPaths, strokeHull } from "./gamutHull.js";
 
 export function drawStatusGraph(state, ui) {
   const canvas = ui.statusGraph;
@@ -94,9 +103,9 @@ export function drawStatusGraph(state, ui) {
 export function drawStatusMini(state, ui, opts = {}) {
   const canvas = ui.statusMini;
   if (!canvas) return;
-  const gamutMode = typeof opts === "string" ? opts : opts.gamutMode || "auto";
-  const clipToGamut = typeof opts === "object" ? opts.clipToGamut !== false : true;
+  const clipToGamut = typeof opts === "object" ? (opts.clipToGamut === true || opts.clipToGamut === false ? opts.clipToGamut : false) : false;
   const gamutPreset = typeof opts === "object" ? opts.gamutPreset || "srgb" : "srgb";
+  const presetLabel = gamutPresets[gamutPreset]?.label || gamutPreset;
   const space = (typeof opts === "object" && opts.vizSpace) || ui.colorwheelSpace?.value || "hsl";
   const ctx = canvas.getContext("2d");
   const deviceScale = window.devicePixelRatio || 1;
@@ -115,8 +124,18 @@ export function drawStatusMini(state, ui, opts = {}) {
   const radius = (size / 2) * 0.97;
 
   const trails = state.nmTrails || [];
-  const rawCurrent = !clipToGamut && state.rawSpace === space ? state.currentRaw : null;
-  const rawBest = !clipToGamut && state.newRawSpace === space ? state.bestRaw : null;
+  const rawCurrent =
+    !clipToGamut && state.rawCurrentColors?.length
+      ? state.rawCurrentColors.map((v) =>
+          state.rawSpace && state.rawSpace !== space ? convertColorValues(v, state.rawSpace, space) : v
+        )
+      : null;
+  const rawBest =
+    !clipToGamut && state.rawBestColors?.length
+      ? state.rawBestColors.map((v) =>
+          state.newRawSpace && state.newRawSpace !== space ? convertColorValues(v, state.newRawSpace, space) : v
+        )
+      : null;
   const colorSet = [];
   const valuesForRange = [];
   state.currentColors.forEach((hex, idx) => {
@@ -130,11 +149,17 @@ export function drawStatusMini(state, ui, opts = {}) {
   trails.forEach((t) => {
     (t.startHex || []).forEach((hex, idx) => {
       colorSet.push(hex);
-      valuesForRange.push((t.startRaw && t.startRaw[idx]) || decodeColor(hex, space));
+      const rawVal = t.startRaw && t.startRaw[idx];
+      valuesForRange.push(
+        rawVal && t.rawSpace && t.rawSpace !== space ? convertColorValues(rawVal, t.rawSpace, space) : rawVal || decodeColor(hex, space)
+      );
     });
     (t.endHex || []).forEach((hex, idx) => {
       colorSet.push(hex);
-      valuesForRange.push((t.endRaw && t.endRaw[idx]) || decodeColor(hex, space));
+      const rawVal = t.endRaw && t.endRaw[idx];
+      valuesForRange.push(
+        rawVal && t.rawSpace && t.rawSpace !== space ? convertColorValues(rawVal, t.rawSpace, space) : rawVal || decodeColor(hex, space)
+      );
     });
   });
 
@@ -153,17 +178,80 @@ export function drawStatusMini(state, ui, opts = {}) {
   }
 
   const presetRange = rangeFromPreset(space, gamutPreset) || csRanges[space];
-  const ranges = gamutMode === "full"
-    ? presetRange
-    : effectiveRangeFromValues(valuesForRange, space);
-  const scaleRange = clipToGamut ? presetRange : ranges;
+  const channels = channelOrder[space];
+  const visibleValues = clipToGamut
+    ? valuesForRange.map((v) => clampToRange(v, presetRange, space))
+    : valuesForRange;
 
-  const toPoint = (vals) => {
-    const useVals = clipToGamut ? clampToRange(vals, presetRange, space) : vals;
+  const rangeFromValues = (vals) => {
+    const min = {};
+    const max = {};
+    channels.forEach((ch) => {
+      if (ch === "h") {
+        min[ch] = presetRange.min[ch];
+        max[ch] = presetRange.max[ch];
+      } else {
+        min[ch] = Infinity;
+        max[ch] = -Infinity;
+      }
+    });
+    vals.forEach((v) => {
+      channels.forEach((ch) => {
+        if (ch === "h") return;
+        const val = v?.[ch];
+        if (!Number.isFinite(val)) return;
+        if (val < min[ch]) min[ch] = val;
+        if (val > max[ch]) max[ch] = val;
+      });
+    });
+    channels.forEach((ch) => {
+      if (ch === "h") return;
+      if (!Number.isFinite(min[ch]) || !Number.isFinite(max[ch])) {
+        min[ch] = presetRange.min[ch];
+        max[ch] = presetRange.max[ch];
+      }
+    });
+    return { min, max };
+  };
+
+  const unionRanges = (a, b) => {
+    const min = {};
+    const max = {};
+    channels.forEach((ch) => {
+      min[ch] = Math.min(a?.min?.[ch] ?? Infinity, b?.min?.[ch] ?? Infinity);
+      max[ch] = Math.max(a?.max?.[ch] ?? -Infinity, b?.max?.[ch] ?? -Infinity);
+    });
+    return { min, max };
+  };
+
+  const padRange = (range, frac = 0.1) => {
+    const min = {};
+    const max = {};
+    channels.forEach((ch) => {
+      if (ch === "h") {
+        min[ch] = range.min[ch];
+        max[ch] = range.max[ch];
+        return;
+      }
+      const span = range.max[ch] - range.min[ch];
+      const pad = span === 0 ? Math.max(Math.abs(range.max[ch]) || 1, 1) * frac : span * frac;
+      min[ch] = range.min[ch] - pad;
+      max[ch] = range.max[ch] + pad;
+    });
+    return { min, max };
+  };
+
+  const dataRange = visibleValues.length ? rangeFromValues(visibleValues) : presetRange;
+  const unionRange = unionRanges(dataRange, presetRange);
+  const scaleRange = padRange(unionRange);
+
+  const toPoint = (vals, rangeOverride, clampVals = clipToGamut) => {
+    const useRange = rangeOverride || scaleRange;
+    const useVals = clampVals ? clampToRange(vals, presetRange, space) : vals;
     const v = useVals;
     if (isRect) {
-      const maxA = Math.max(Math.abs(scaleRange.min.a), Math.abs(scaleRange.max.a)) || 1;
-      const maxB = Math.max(Math.abs(scaleRange.min.b), Math.abs(scaleRange.max.b)) || 1;
+      const maxA = Math.max(Math.abs(useRange.min.a), Math.abs(useRange.max.a)) || 1;
+      const maxB = Math.max(Math.abs(useRange.min.b), Math.abs(useRange.max.b)) || 1;
       const x = cx + (v.a / maxA) * radius;
       const y = cy - (v.b / maxB) * radius;
       return { x, y };
@@ -177,12 +265,12 @@ export function drawStatusMini(state, ui, opts = {}) {
     else chroma = Math.hypot(v.a || 0, v.b || 0);
     const maxSC =
       sc === "s"
-        ? scaleRange.max.s
+        ? useRange.max.s
         : sc === "c"
-        ? scaleRange.max.c
+        ? useRange.max.c
         : Math.min(
-            Math.max(Math.abs(scaleRange.min.a || 0), Math.abs(scaleRange.max.a || 0)),
-            Math.max(Math.abs(scaleRange.min.b || 0), Math.abs(scaleRange.max.b || 0))
+            Math.max(Math.abs(useRange.min.a || 0), Math.abs(useRange.max.a || 0)),
+            Math.max(Math.abs(useRange.min.b || 0), Math.abs(useRange.max.b || 0))
           ) || 1;
     const rNorm = Math.max(0, Math.min(1, chroma / maxSC));
     const ang = (hue * Math.PI) / 180;
@@ -192,31 +280,24 @@ export function drawStatusMini(state, ui, opts = {}) {
     };
   };
 
-  // gamut overlay: solid dual stroke for visibility
-  const drawOutline = (r) => {
-    ctx.setLineDash([]);
-    ctx.lineWidth = 2.2;
-    ctx.strokeStyle = "rgba(255,255,255,0.9)";
-    if (isRect) ctx.strokeRect(cx - r, cy - r, r * 2, r * 2);
-    else {
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-      ctx.stroke();
-    }
-    ctx.lineWidth = 1.2;
-    ctx.strokeStyle = "rgba(0,0,0,0.8)";
-    if (isRect) ctx.strokeRect(cx - r, cy - r, r * 2, r * 2);
-    else {
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-      ctx.stroke();
-    }
-  };
-  drawOutline(radius);
+  if (clipToGamut) {
+    const hullPaths = buildGamutHullPaths(gamutPreset, space, (vals) => toPoint(vals, scaleRange, false));
+    strokeHull(ctx, hullPaths);
+  }
 
-  const resolveVal = (hex, rawArr, idx) => (rawArr && rawArr[idx]) || decodeColor(hex, space);
+  const resolveVal = (hex, rawArr, idx, sourceSpace) => {
+    const raw = rawArr && rawArr[idx];
+    if (raw) {
+      return sourceSpace && sourceSpace !== space ? convertColorValues(raw, sourceSpace, space) : raw;
+    }
+    return decodeColor(hex, space);
+  };
   const resolveTrailVal = (hex, rawArr, idx, trailSpace) =>
-    !clipToGamut && trailSpace === space && rawArr ? rawArr[idx] : decodeColor(hex, space);
+    !clipToGamut && rawArr
+      ? trailSpace && trailSpace !== space
+        ? convertColorValues(rawArr[idx], trailSpace, space)
+        : rawArr[idx]
+      : decodeColor(hex, space);
 
   trails.forEach((trail, idx) => {
     const startPts = (trail.startHex || []).map((hex, i) =>
@@ -278,8 +359,16 @@ export function drawStatusMini(state, ui, opts = {}) {
     ctx.stroke();
   };
 
-  state.currentColors.forEach((hex, idx) => drawPoint(toPoint(resolveVal(hex, rawCurrent, idx)), hex, "circle", 9));
-  (state.bestColors || []).forEach((hex, idx) =>
-    drawPoint(toPoint(resolveVal(hex, rawBest, idx)), "#fbbf24", "star", 12)
+  state.currentColors.forEach((hex, idx) =>
+    drawPoint(toPoint(resolveVal(hex, rawCurrent, idx, state.rawSpace)), hex, "circle", 9)
   );
+  (state.bestColors || []).forEach((hex, idx) =>
+    drawPoint(toPoint(resolveVal(hex, rawBest, idx, state.newRawSpace)), "#fbbf24", "star", 12)
+  );
+
+  ctx.fillStyle = "#0f172a";
+  ctx.font = "11px 'Space Grotesk', Arial, sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  ctx.fillText(`${presetLabel}${clipToGamut ? " (clipped)" : " (raw)"}`, 6, 4);
 }

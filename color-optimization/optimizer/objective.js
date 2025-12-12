@@ -1,12 +1,15 @@
-import { applyCvdHex } from "../core/cvd.js";
+import { applyCvdLinear } from "../core/cvd.js";
 import { deltaE2000 } from "../core/metrics.js";
 import {
   channelOrder,
+  convertColorValues,
   decodeColor,
   encodeColor,
   effectiveRangeFromValues,
+  linearRgbToXyz,
   normalizeWithRange,
   unscaleWithRange,
+  xyzToLab,
 } from "../core/colorSpaces.js";
 import { clamp, logistic } from "../core/util.js";
 import { computeBounds } from "./bounds.js";
@@ -21,10 +24,21 @@ export function prepareData(palette, colorSpace, config) {
   const currHex = normalized.map((row) =>
     encodeColor(unscaleWithRange(row, ranges, colorSpace), colorSpace)
   );
+  const cvdStates = config.colorblindSafe ? ["deutan", "protan", "tritan", "none"] : ["none"];
+  const currLinear = decoded.map((row) => convertColorValues(row, colorSpace, "rgb"));
+  const currLabsByState = {};
+  cvdStates.forEach((state) => {
+    currLabsByState[state] = currLinear.map((lin) => {
+      const sim = state === "none" ? lin : applyCvdLinear(lin, state);
+      return xyzToLab(linearRgbToXyz(sim));
+    });
+  });
   return {
     currCols: normalized,
     currHex,
     currRaw: decoded,
+    currLabsByState,
+    cvdStates,
     bounds,
     colorSpace,
     ranges,
@@ -100,44 +114,22 @@ export function meanDistance(par, prep, returnInfo) {
 
   const scaled = m.map((row) => unscaleWithRange(row, ranges, colorSpace));
   const rawHex = scaled.map((row) => encodeColor(row, colorSpace));
-  const newHex = rawHex.map((hex) => {
-    const decoded = decodeColor(hex, colorSpace);
-    const norm = normalizeWithRange(decoded, ranges, colorSpace);
-    const clamped = { ...norm };
-    const scCh = cn.find((c) => c === "s" || c === "c");
-    if (bounds.boundsH && typeof clamped.h === "number") {
-      const start = bounds.boundsH[0];
-      const end = bounds.boundsH[1];
-      const span = (end - start + 1) % 1 || 1;
-      let off = ((clamped.h - start + 1) % 1);
-      if (off > span) off = span;
-      clamped.h = (start + off) % 1;
-    }
-    if (scCh && typeof clamped[scCh] === "number") {
-      const b = bounds.boundsByName?.[scCh] || bounds.boundsSc;
-      clamped[scCh] = clamp(clamped[scCh], b[0], b[1]);
-    }
-    if (typeof clamped.l === "number") {
-      const b = bounds.boundsByName?.l || bounds.boundsL;
-      clamped.l = clamp(clamped.l, b[0], b[1]);
-    }
-    cn.forEach((ch) => {
-      if (ch === "l" || ch === scCh || ch === "h") return;
-      const b = bounds.boundsByName?.[ch];
-      if (b && typeof clamped[ch] === "number") clamped[ch] = clamp(clamped[ch], b[0], b[1]);
-    });
-    return encodeColor(unscaleWithRange(clamped, ranges, colorSpace), colorSpace);
-  });
-  const currHexLocal = currHex;
+  const newHex = rawHex;
 
-  const cvdStates = colorblindSafe ? ["deutan", "protan", "tritan", "none"] : ["none"];
+  const cvdStates = prep.cvdStates;
+  const newLabsByState = {};
+  cvdStates.forEach((state) => {
+    newLabsByState[state] = scaled.map((row) => {
+      const lin = convertColorValues(row, colorSpace, "rgb");
+      const sim = state === "none" ? lin : applyCvdLinear(lin, state);
+      return xyzToLab(linearRgbToXyz(sim));
+    });
+  });
   const dists = {};
 
   for (const state of cvdStates) {
-    const nh = newHex.map((h) => applyCvdHex(h, state));
-    const ch = currHexLocal.map((h) => applyCvdHex(h, state));
-    const nLabs = nh.map((h) => decodeColor(h, "lab"));
-    const cLabs = ch.map((h) => decodeColor(h, "lab"));
+    const nLabs = newLabsByState[state];
+    const cLabs = prep.currLabsByState[state];
 
     const pairwise = [];
     for (let i = 0; i < cLabs.length; i++) {
