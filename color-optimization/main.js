@@ -1,5 +1,6 @@
 import { defaultPalette, plotOrder } from "./config.js";
 import { channelOrder } from "./core/colorSpaces.js";
+import { contrastColor } from "./core/metrics.js";
 import { computeBoundsFromCurrent } from "./optimizer/bounds.js";
 import { optimizePalette } from "./optimizer/optimizePalette.js";
 import { getUIRefs } from "./ui/domRefs.js";
@@ -14,6 +15,11 @@ import { paletteGroups } from "./palettes.js";
 const state = createInitialState();
 let ui = null;
 let verboseLogs = [];
+let verboseRows = [];
+let verboseTruncInfo = null;
+let verboseBestScore = -Infinity;
+let verboseBestRun = null;
+const VERBOSE_MAX_ROWS = 4000;
 
 function currentVizOpts() {
   return {
@@ -59,7 +65,10 @@ function setDefaultValues() {
   ui.formatLines.checked = false;
   ui.copyBtn.textContent = "Copy";
   verboseLogs = [];
-  updateVerboseBox();
+  verboseRows = [];
+  verboseBestScore = -Infinity;
+  verboseBestRun = null;
+  renderVerboseTable();
   updateWidthChips();
   updateWidthLabels();
   updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
@@ -179,8 +188,8 @@ function attachEventListeners() {
   });
 
   ui.verboseToggle?.addEventListener("change", () => {
-    ui.verboseBox.style.display = ui.verboseToggle.checked ? "block" : "none";
-    updateVerboseBox();
+    if (ui.verbosePanel) ui.verbosePanel.style.display = ui.verboseToggle.checked ? "block" : "none";
+    renderVerboseTable();
   });
 }
 
@@ -229,6 +238,10 @@ async function runOptimization() {
   state.bestColors = [];
   state.rawBestColors = [];
   state.rawNewColors = [];
+  verboseRows = [];
+  verboseBestRun = null;
+  verboseBestScore = -Infinity;
+  renderVerboseTable();
   state.bounds = computeBoundsFromCurrent(palette, config.colorSpace, config);
   drawStatusGraph(state, ui);
   drawStatusMini(state, ui, currentVizOpts());
@@ -259,12 +272,66 @@ async function runOptimization() {
         if (info.stage === "start") {
           logVerbose(`run ${info.run} start params`, "", paramPreview);
           logVerbose(`run ${info.run} start hex`, "", hexStr);
+          if (info.distance !== undefined || info.penalty !== undefined) {
+            if (info.distance !== undefined) {
+              logVerbose(`run ${info.run} start distance`, "", info.distance.toFixed(4));
+            }
+            if (info.penalty !== undefined) {
+              logVerbose(`run ${info.run} start penalty`, "", info.penalty.toFixed(4));
+            }
+            if (info.paramPenalty !== undefined || info.gamutPenalty !== undefined) {
+              logVerbose(
+                `run ${info.run} start penalty breakdown`,
+                "",
+                `param=${(info.paramPenalty ?? 0).toFixed(4)}, gamut=${(info.gamutPenalty ?? 0).toFixed(4)}`
+              );
+            }
+          }
+          pushVerboseRows(info);
+        } else if (info.stage === "end") {
+          logVerbose(`run ${info.run} end params`, "", paramPreview);
+          logVerbose(`run ${info.run} end hex`, "", hexStr);
+          if (info.score !== undefined) {
+            logVerbose(`run ${info.run} end score`, "", info.score.toFixed(4));
+          }
+          if (info.distance !== undefined || info.penalty !== undefined) {
+            if (info.distance !== undefined) {
+              logVerbose(`run ${info.run} end distance`, "", info.distance.toFixed(4));
+            }
+            if (info.penalty !== undefined) {
+              logVerbose(`run ${info.run} end penalty`, "", info.penalty.toFixed(4));
+            }
+            if (info.paramPenalty !== undefined || info.gamutPenalty !== undefined) {
+              logVerbose(
+                `run ${info.run} end penalty breakdown`,
+                "",
+                `param=${(info.paramPenalty ?? 0).toFixed(4)}, gamut=${(info.gamutPenalty ?? 0).toFixed(4)}`
+              );
+            }
+          }
+          pushVerboseRows(info);
         } else if (info.stage === "best") {
           logVerbose(`run ${info.run} best params`, "", paramPreview);
           logVerbose(`run ${info.run} best hex`, "", hexStr);
           if (info.score !== undefined) {
             logVerbose(`run ${info.run} best score`, "", info.score.toFixed(4));
           }
+          if (info.distance !== undefined || info.penalty !== undefined) {
+            if (info.distance !== undefined) {
+              logVerbose(`run ${info.run} best distance`, "", info.distance.toFixed(4));
+            }
+            if (info.penalty !== undefined) {
+              logVerbose(`run ${info.run} best penalty`, "", info.penalty.toFixed(4));
+            }
+            if (info.paramPenalty !== undefined || info.gamutPenalty !== undefined) {
+              logVerbose(
+                `run ${info.run} best penalty breakdown`,
+                "",
+                `param=${(info.paramPenalty ?? 0).toFixed(4)}, gamut=${(info.gamutPenalty ?? 0).toFixed(4)}`
+              );
+            }
+          }
+          pushVerboseRows(info);
         }
       },
     });
@@ -284,6 +351,7 @@ async function runOptimization() {
     state.running = false;
     ui.runBtn.disabled = false;
     ui.runBtn.textContent = "RUN";
+    if (ui.verboseToggle?.checked) renderVerboseTable();
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
   }
@@ -298,16 +366,313 @@ function logVerbose(key, prev, next) {
   const nextStr = Array.isArray(next) ? next.join(" ") : String(next);
   verboseLogs.push(`${key}: ${prevStr} -> ${nextStr}`);
   if (verboseLogs.length > 200) verboseLogs.shift();
-  updateVerboseBox();
+  renderVerboseTable();
 }
 
-function updateVerboseBox() {
-  if (!ui?.verboseBox) return;
+function renderVerboseTable() {
+  if (!ui?.verbosePanel || !ui.verboseTable) return;
   if (!ui.verboseToggle?.checked) {
-    ui.verboseBox.value = "";
+    ui.verbosePanel.style.display = "none";
+    ui.verboseTable.innerHTML = "";
     return;
   }
-  ui.verboseBox.value = verboseLogs.join("\n");
+  ui.verbosePanel.style.display = "block";
+  if (state?.running || !verboseRows.length) {
+    ui.verboseTable.innerHTML = "<p class=\"muted\">Verbose output will be generated once all runs have finished.</p>";
+    return;
+  }
+  const channels = channelOrder[ui.colorSpace.value] || [];
+  const startHeaders = [
+    "<th>Hex</th>",
+    ...channels.map((c) => `<th>${c.toUpperCase()}</th>`),
+    "<th>Dist</th>",
+    "<th>Pen</th>",
+    "<th>Gamut Dist</th>",
+    "<th>Total</th>",
+    "<th>Dist%</th>",
+    "<th>Pen%</th>",
+    "<th>Score</th>",
+  ];
+  const endHeaders = [
+    '<th class="block-start">Hex</th>',
+    ...channels.map((c) => `<th>${c.toUpperCase()}</th>`),
+    "<th>Dist</th>",
+    "<th>Pen</th>",
+    "<th>Gamut Dist</th>",
+    "<th>Total</th>",
+    "<th>Dist%</th>",
+    "<th>Pen%</th>",
+    "<th>Score</th>",
+  ];
+  const diffHeaders = [
+    ...channels.map((c, idx) => `<th${idx === 0 ? ' class="block-start"' : ""}>Δ${c.toUpperCase()}</th>`),
+    '<th class="block-start">ΔDist</th>',
+    "<th>ΔPen</th>",
+    "<th>ΔGamut</th>",
+    "<th>ΔTotal</th>",
+    "<th>ΔDist%</th>",
+    "<th>ΔPen%</th>",
+    "<th>ΔScore</th>",
+  ];
+  const metaHeaders = [
+    '<th class="block-start">Best Run</th>',
+    "<th>Influence</th>",
+    "<th>% Influence</th>",
+    "<th>Rank</th>",
+    "<th>Closest</th>",
+    "<th>End Hex</th>",
+    "<th>Closest Dist</th>",
+  ];
+  const totalCols =
+    2 + startHeaders.length + endHeaders.length + diffHeaders.length + metaHeaders.length;
+  const truncNote = verboseTruncInfo
+    ? `<p class="muted warning">Verbose output truncated: removed ${verboseTruncInfo.droppedRows} row${
+        verboseTruncInfo.droppedRows === 1 ? "" : "s"
+      } this pass to stay under ${VERBOSE_MAX_ROWS} rows. Earliest shown run: ${
+        verboseTruncInfo.firstKeptRun ?? "?"
+      } (runs < ${verboseTruncInfo.firstKeptRun ?? "?"} are not displayed; estimated runs dropped: ${
+        verboseTruncInfo.droppedRuns
+      }).</p>`
+    : "";
+  const header = `
+    <table class="verbose-table">
+      <thead>
+        <tr>
+          <th rowspan="2">Run</th>
+          <th rowspan="2">Idx</th>
+          <th colspan="${startHeaders.length}">Start</th>
+          <th colspan="${endHeaders.length}">End</th>
+          <th colspan="${diffHeaders.length}">Difference (End - Start)</th>
+          <th colspan="${metaHeaders.length}">Meta</th>
+        </tr>
+        <tr>
+          ${startHeaders.join("")}
+          ${endHeaders.join("")}
+          ${diffHeaders.join("")}
+          ${metaHeaders.join("")}
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  const grouped = {};
+  verboseRows.forEach((row) => {
+    const key = `${row.run}-${row.idx}`;
+    if (!grouped[key]) grouped[key] = { run: row.run, idx: row.idx };
+    if (row.stage === "start") grouped[key].start = row;
+    if (row.stage === "end") grouped[key].end = row;
+    if (row.stage === "best") grouped[key].best = row;
+  });
+  let bestRunSoFar = null;
+  let bestScoreSoFar = -Infinity;
+  const rows = Object.values(grouped)
+    .sort((a, b) => a.run - b.run || a.idx - b.idx)
+    .map((entry, i, arr) => {
+      const start = entry.start || {};
+      const end = entry.end || entry.best || {};
+      const endScore = typeof end.score === "number" ? end.score : typeof start.score === "number" ? start.score : null;
+      if (typeof endScore === "number" && endScore > bestScoreSoFar) {
+        bestScoreSoFar = endScore;
+        bestRunSoFar = entry.run;
+      }
+      const prev = arr[i - 1];
+      const runBreak = !prev || prev.run !== entry.run;
+      const spacer = "";
+      const startCh = channels.map((c) => formatVal(start.channels?.[c]));
+      const endCh = channels.map((c) => formatVal(end.channels?.[c]));
+      const diffCh = channels.map((c) =>
+        formatVal((end.channels?.[c] ?? 0) - (start.channels?.[c] ?? 0))
+      );
+      const diffCells = diffCh.map((v, idx3) => `<td${idx3 === 0 ? ' class="block-start"' : ""}>${v}</td>`);
+      const deltaDistCell = `<td class="block-start">${formatVal((end.distance ?? 0) - (start.distance ?? 0))}</td>`;
+      const startDistPct = relPart(start.distance, start.total);
+      const startPenPct = relPart(start.penalty, start.total);
+      const endDistPct = relPart(end.distance, end.total);
+      const endPenPct = relPart(end.penalty, end.total);
+      const diffDistPct = numDiff(endDistPct, startDistPct);
+      const diffPenPct = numDiff(endPenPct, startPenPct);
+      const rowHtml = `<tr class="${runBreak ? "row-sep" : ""}">
+        <td class="col-run">${entry.run}</td>
+        <td class="col-run">${entry.idx}</td>
+        <td class="col-start">${renderHex(start.hex, start.color)}</td>
+        ${startCh.map((v) => `<td class="col-start">${v}</td>`).join("")}
+        <td class="col-start">${formatVal(start.distance)}</td>
+        <td class="col-start">${formatVal(start.penalty)}</td>
+        <td class="col-start">${formatVal(start.gamutDistance)}</td>
+        <td class="col-start">${formatVal(start.total)}</td>
+        <td class="col-start">${formatVal(startDistPct)}</td>
+        <td class="col-start">${formatVal(startPenPct)}</td>
+        <td class="col-start">${formatVal(start.score)}</td>
+        <td class="col-end block-start">${renderHex(end.hex, end.color)}</td>
+        ${endCh.map((v) => `<td class="col-end">${v}</td>`).join("")}
+        <td class="col-end">${formatVal(end.distance)}</td>
+        <td class="col-end">${formatVal(end.penalty)}</td>
+        <td class="col-end">${formatVal(end.gamutDistance)}</td>
+        <td class="col-end">${formatVal(end.total)}</td>
+        <td class="col-end">${formatVal(endDistPct)}</td>
+        <td class="col-end">${formatVal(endPenPct)}</td>
+        <td class="col-end">${formatVal(end.score)}</td>
+        ${diffCells.join("")}
+        ${deltaDistCell}
+        <td>${formatVal((end.penalty ?? 0) - (start.penalty ?? 0))}</td>
+        <td>${formatVal((end.gamutDistance ?? 0) - (start.gamutDistance ?? 0))}</td>
+        <td>${formatVal((end.total ?? 0) - (start.total ?? 0))}</td>
+        <td>${formatVal(diffDistPct)}</td>
+        <td>${formatVal(diffPenPct)}</td>
+        <td>${formatVal((end.score ?? 0) - (start.score ?? 0))}</td>
+        <td class="col-meta block-start">${bestRunSoFar ?? ""}</td>
+        <td class="col-meta">${formatVal(end.influence)}</td>
+        <td class="col-meta">${formatVal(percentInfluence(end.influence, end.score))}</td>
+        <td class="col-meta">${end.influenceRank ?? ""}</td>
+        <td class="col-meta">${renderHex(end.closestHex, end.closestHex)}</td>
+        <td class="col-meta">${renderHex(end.hex, end.color)}</td>
+        <td class="col-meta">${formatVal(end.closestDist)}</td>
+      </tr>`;
+      return `${spacer}${rowHtml}`;
+    });
+  ui.verboseTable.innerHTML = `${truncNote}${header}${rows.join("")}</tbody></table>`;
+}
+
+function pushVerboseRows(info) {
+  const rows = [];
+  const hexes = info.hex || [];
+  let details = info.details || [];
+  if (!details.length && (info.raw || info.newRaw)) {
+    const raws = info.raw || info.newRaw || [];
+    details = raws.map((r, idx) => ({
+      hex: hexes[idx] || "",
+      channels: r,
+      distance: info.distance,
+      penalty: info.penalty,
+      gamutDistance: null,
+      total: null,
+      score: info.score,
+    }));
+  }
+  details.forEach((det, idx) => {
+    if (info.stage === "best" && typeof info.score === "number" && info.score > verboseBestScore) {
+      verboseBestScore = info.score;
+      verboseBestRun = info.run;
+    }
+    rows.push({
+      run: info.run,
+      stage: info.stage,
+      idx: idx + 1,
+      hex: hexes[idx] || det.hex || "",
+      color: det.hex || hexes[idx] || "",
+      channels: det.channels || {},
+      distance: det.distance,
+      penalty: det.penalty,
+      gamutDistance: det.gamutDistance,
+      total: det.total,
+      score: info.score,
+      bestRunSoFar: verboseBestRun,
+      influence: det.influence,
+      influenceRank: det.influenceRank,
+      closestHex: det.closestHex,
+      closestDist: det.closestDist,
+      space: info.space || ui.colorSpace.value,
+    });
+  });
+  let appended = verboseRows.concat(rows);
+  if (appended.length > VERBOSE_MAX_ROWS) {
+    const runMap = new Map();
+    appended.forEach((r) => {
+      if (!runMap.has(r.run)) runMap.set(r.run, []);
+      runMap.get(r.run).push(r);
+    });
+    const runList = Array.from(runMap.keys()).sort((a, b) => a - b);
+    const keepRuns = new Set();
+    if (verboseBestRun != null && runMap.has(verboseBestRun)) {
+      keepRuns.add(verboseBestRun);
+    }
+    let keptCount = keepRuns.size ? runMap.get(verboseBestRun).length : 0;
+    for (let i = runList.length - 1; i >= 0 && keptCount < VERBOSE_MAX_ROWS; i--) {
+      const run = runList[i];
+      if (keepRuns.has(run)) continue;
+      const len = runMap.get(run).length;
+      if (keptCount + len > VERBOSE_MAX_ROWS) continue;
+      keepRuns.add(run);
+      keptCount += len;
+    }
+    let droppedRuns = runList.filter((r) => !keepRuns.has(r));
+    const runsKept = Array.from(keepRuns).sort((a, b) => a - b);
+    let rebuilt = [];
+    if (runsKept.length) {
+      runsKept.forEach((run) => {
+        rebuilt.push(...runMap.get(run));
+      });
+    } else {
+      rebuilt = appended.slice(-VERBOSE_MAX_ROWS);
+    }
+    // if still over the cap, drop whole earliest runs (prefer keeping best run)
+    if (rebuilt.length > VERBOSE_MAX_ROWS && runsKept.length > 0) {
+      const keptRunsAsc = [...runsKept];
+      let droppedExtraRuns = [];
+      let currLength = rebuilt.length;
+      let idx = 0;
+      while (currLength > VERBOSE_MAX_ROWS && idx < keptRunsAsc.length) {
+        const candidate =
+          keptRunsAsc[idx] === verboseBestRun && keptRunsAsc.length > idx + 1
+            ? keptRunsAsc[idx + 1]
+            : keptRunsAsc[idx];
+        if (candidate === verboseBestRun && keptRunsAsc.length === 1) break;
+        const len = runMap.get(candidate)?.length || 0;
+        if (len === 0) {
+          idx += 1;
+          continue;
+        }
+        currLength -= len;
+        droppedExtraRuns.push(candidate);
+        rebuilt = rebuilt.filter((r) => r.run !== candidate);
+        keptRunsAsc.splice(keptRunsAsc.indexOf(candidate), 1);
+      }
+      runsKept.length = 0;
+      runsKept.push(...keptRunsAsc);
+      droppedRuns.push(...droppedExtraRuns);
+    }
+    verboseTruncInfo = {
+      droppedRuns: Math.max(droppedRuns.length, (rebuilt[0]?.run || 1) - 1),
+      droppedRows: appended.length - rebuilt.length,
+      firstKeptRun: rebuilt[0]?.run,
+    };
+    appended = rebuilt;
+  } else {
+    verboseTruncInfo = null;
+  }
+  verboseRows = appended;
+  if (!state?.running && ui?.verboseToggle?.checked) {
+    renderVerboseTable();
+  }
+}
+
+function formatVal(v) {
+  if (!Number.isFinite(v)) return "";
+  if (v === 0) return "0";
+  const str = Number(v).toPrecision(3);
+  // remove unnecessary plus signs
+  return str.replace(/^\+/, "");
+}
+
+function renderHex(hex, color) {
+  if (!hex) return "";
+  const bg = color || hex;
+  const fg = contrastColor(bg);
+  return `<span class="verbose-hex" style="background:${bg};color:${fg};">${hex}</span>`;
+}
+
+function relPart(part, total) {
+  if (!Number.isFinite(part) || !Number.isFinite(total) || Math.abs(total) < 1e-12) return NaN;
+  return part / total;
+}
+
+function numDiff(a, b) {
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return NaN;
+  return a - b;
+}
+
+function percentInfluence(influence, score) {
+  if (!Number.isFinite(influence) || !Number.isFinite(score) || score === 0) return NaN;
+  return influence / score;
 }
 
 function updateBgControls() {

@@ -8,27 +8,11 @@ export const channelOrder = {
   oklch: ["l", "c", "h"],
 };
 
-/*export const csRanges = {
-  hsl: { min: { h: 0, s: 0, l: 0 }, max: { h: 360, s: 100, l: 100 } },
-  lab: { min: { l: 0, a: -80, b: -80 }, max: { l: 100, a: 80, b: 80 } },
-  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 100, h: 360 } },
-  oklab: { min: { l: 0, a: -0.32, b: -0.32 }, max: { l: 1, a: 0.32, b: 0.32 } },
-  oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.35, h: 360 } },
-};*/
-
 export const csRanges = {
   hsl: { min: { h: 0, s: 0, l: 0 }, max: { h: 360, s: 100, l: 100 } },
-  
-  // Lab widened to cover wide-gamut/Rec.2020 theoretical extremes
-  lab: { min: { l: 0, a: -170, b: -170 }, max: { l: 100, a: 170, b: 170 } },
-  
-  // LCh chroma extended for wide-gamut corners
-  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 230, h: 360 } },
-  
-  // OKLab fits within roughly +/- 0.5
+  lab: { min: { l: 0, a: -128, b: -128 }, max: { l: 100, a: 128, b: 128 } },
+  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 150, h: 360 } },
   oklab: { min: { l: 0, a: -0.5, b: -0.5 }, max: { l: 1, a: 0.5, b: 0.5 } },
-  
-  // OKLCh chroma widened to match OKLab coverage
   oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.5, h: 360 } },
 };
 

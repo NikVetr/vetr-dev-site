@@ -8,6 +8,7 @@ import {
   rangeFromPreset,
   gamutPresets,
   convertColorValues,
+  rgbToHex,
 } from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
 import { clamp } from "../core/util.js";
@@ -53,21 +54,32 @@ export function drawWheel(type, ui, state, opts = {}) {
           state.newRawSpace && state.newRawSpace !== wheelSpace ? convertColorValues(v, state.newRawSpace, wheelSpace) : v
         )
       : null;
-  const allColors = state.currentColors.map((c, idx) => ({
-    color: c,
-    shape: "circle",
-    vals: rawCurrent?.[idx] || decodeColor(c, wheelSpace),
-  }))
-    .concat(state.newColors.map((c, idx) => ({
+  const allColors = state.currentColors.map((c, idx) => {
+    const vals = rawCurrent?.[idx] || decodeColor(c, wheelSpace);
+    const displayHex = !clipToGamut && vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
+    return {
       color: c,
-      shape: "square",
-      vals: rawNew?.[idx] || decodeColor(c, wheelSpace),
-    })));
+      displayColor: displayHex,
+      shape: "circle",
+      vals,
+    };
+  })
+    .concat(state.newColors.map((c, idx) => {
+      const vals = rawNew?.[idx] || decodeColor(c, wheelSpace);
+      const displayHex = !clipToGamut && vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
+      return {
+        color: c,
+        displayColor: displayHex,
+        shape: "square",
+        vals,
+      };
+    }));
   const valueSet = allColors.map((c) => c.vals);
   const presetRange = rangeFromPreset(wheelSpace, gamutPreset) || csRanges[wheelSpace];
-  const ranges = gamutMode === "full" || !clipToGamut
-    ? presetRange
-    : effectiveRangeFromValues(valueSet, wheelSpace);
+  const dataRange = effectiveRangeFromValues(valueSet, wheelSpace);
+  const ranges = clipToGamut
+    ? (gamutMode === "full" ? presetRange : dataRange)
+    : dataRange;
 
   const isRectWheel = wheelSpace === "lab" || wheelSpace === "oklab";
   let radius = baseRadius;
@@ -319,7 +331,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
   // draw points above overlays
   coords.forEach((pt) => {
-    const fill = applyCvdHex(pt.color, type);
+    const fill = applyCvdHex(pt.displayColor || pt.color, type);
     ctx.beginPath();
     const sizePt = 6 + 12 * pt.lNorm;
     if (pt.shape === "square") {

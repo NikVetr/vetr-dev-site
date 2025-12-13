@@ -23,6 +23,8 @@ export function getUIRefs() {
     statusText: document.getElementById("status-text"),
     errorText: document.getElementById("error-text"),
     panels: document.getElementById("panels"),
+    verbosePanel: document.getElementById("verbose-panel"),
+    verboseTable: document.getElementById("verbose-table"),
     resultsBox: document.getElementById("results-box"),
     copyBtn: document.getElementById("copy-btn"),
     statusGraph: document.getElementById("status-graph"),

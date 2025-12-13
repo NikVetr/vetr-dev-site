@@ -22,6 +22,7 @@ export function readConfig(ui, state) {
   return {
     colorSpace: ui.colorSpace.value,
     colorwheelSpace: ui.colorwheelSpace.value,
+    gamutPreset: ui.gamutPreset?.value || "srgb",
     nColsToAdd: Math.max(1, parseInt(ui.colorsToAdd.value, 10) || 1),
     nOptimRuns: state.lastRuns,
     nmIterations: Math.max(10, parseInt(ui.nmIters.value, 10) || 260),

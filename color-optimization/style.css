@@ -675,6 +675,73 @@ label.small {
   align-items: center;
 }
 
+.verbose-panel {
+  overflow: auto;
+  grid-column: 1 / -1;
+  margin-top: 24px;
+}
+
+.verbose-table {
+  width: auto;
+  border-collapse: collapse;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.verbose-table th,
+.verbose-table td {
+  padding: 4px 6px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  border-left: 0;
+}
+
+/* hard edge after idx column */
+.verbose-table .col-run:nth-child(2) {
+  border-right: 3px solid #111827;
+}
+
+.verbose-table th.block-start,
+.verbose-table td.block-start {
+  border-left: 3px solid #111827;
+}
+.verbose-table thead th.block-start {
+  border-left: 0;
+}
+
+.verbose-table th {
+  background: #f8fafc;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.verbose-table code {
+  background: #f1f5f9;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.verbose-hex {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #0f172a;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.verbose-table .run-spacer td {
+  border: none;
+  height: 6px;
+  padding: 0;
+  border-top: 2px solid #111827;
+}
+
+.verbose-table .row-sep td {
+  border-top: 3px solid #111827;
+}
+
 @media (max-width: 720px) {
   .hero {
     flex-direction: column;

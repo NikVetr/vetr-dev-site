@@ -1,10 +1,12 @@
 import {
   channelOrder,
   decodeColor,
-  effectiveRangeFromValues,
+  csRanges,
   normalizeWithRange,
 } from "../core/colorSpaces.js";
 import { quantiles, widthBounds } from "../core/stats.js";
+
+const MIN_EXPLORATION_WIDTH = 0.3; // normalized space
 
 export function computeBounds(normalized, colorSpace, config) {
   const channels = channelOrder[colorSpace];
@@ -26,18 +28,38 @@ export function computeBounds(normalized, colorSpace, config) {
     channels.forEach((ch, idx) => {
       const width = widthForChannel(ch, idx);
       const vals = values(ch);
-      const minVal = Math.min(...vals);
-      const maxVal = Math.max(...vals);
+      const hasVals = vals.length > 0;
+      const minVal = hasVals ? Math.min(...vals) : null;
+      const maxVal = hasVals ? Math.max(...vals) : null;
       let b;
-      if (width <= 0) {
-      b = [0, 1];
-    } else if (ch === "h") {
-      b = computeHueBounds(vals, width);
-    } else {
-      const low = (1 - width) * 0 + width * minVal;
-      const high = (1 - width) * 1 + width * maxVal;
-      b = [Math.max(0, low), Math.min(1, high)];
-    }
+      if (!hasVals || width <= 0) {
+        b = safeInitBounds(colorSpace, ch);
+      } else if (ch === "h") {
+        b = computeHueBounds(vals, width);
+      } else {
+        const low = (1 - width) * 0 + width * minVal;
+        const high = (1 - width) * 1 + width * maxVal;
+        b = [Math.max(0, low), Math.min(1, high)];
+      }
+      // enforce a minimum exploration span (except hue)
+      if (ch !== "h") {
+        const span = b[1] - b[0];
+        if (span < MIN_EXPLORATION_WIDTH) {
+          const center = (b[0] + b[1]) / 2;
+          const half = MIN_EXPLORATION_WIDTH / 2;
+          let minB = center - half;
+          let maxB = center + half;
+          if (minB < 0) {
+            maxB = Math.min(1, maxB + (0 - minB));
+            minB = 0;
+          }
+          if (maxB > 1) {
+            minB = Math.max(0, minB - (maxB - 1));
+            maxB = 1;
+          }
+          b = [minB, maxB];
+        }
+      }
       boundsByName[ch] = b;
       if (ch === "h") boundsH = b;
       else if (ch === "l") boundsL = b;
@@ -50,7 +72,7 @@ export function computeBounds(normalized, colorSpace, config) {
 export function computeBoundsFromCurrent(colors, colorSpace, configLike = {}) {
   if (!colors.length) return null;
   const decoded = colors.map((hex) => decodeColor(hex, colorSpace));
-  const ranges = effectiveRangeFromValues(decoded, colorSpace);
+  const ranges = csRanges[colorSpace];
   const normalized = decoded.map((v) => normalizeWithRange(v, ranges, colorSpace));
   const bounds = computeBounds(normalized, colorSpace, configLike);
   return { ...bounds, ranges };
@@ -80,4 +102,31 @@ function computeHueBounds(vals, width) {
     end += 1;
   }
   return [start, end];
+}
+
+function safeInitBounds(space, ch) {
+  // prefer a central "safe" sub-box to start search inside gamut-ish region
+  if (ch === "h") return [0, 1];
+  const defaults = {
+    l: [0.05, 0.95],
+    a: [0.05, 0.95],
+    b: [0.05, 0.95],
+    c: [0.05, 0.95],
+    s: [0.05, 0.95],
+  };
+  if (space === "oklab" || space === "oklch") {
+    if (ch === "l") return [0.05, 0.95];
+    if (ch === "a" || ch === "b") return [0.05, 0.95];
+    if (ch === "c") return [0.05, 0.95];
+  }
+  if (space === "lab" || space === "lch") {
+    if (ch === "l") return [0.05, 0.95];
+    if (ch === "a" || ch === "b") return [0.05, 0.95];
+    if (ch === "c") return [0.05, 0.95];
+  }
+  if (space === "hsl") {
+    if (ch === "l") return [0.05, 0.95];
+    if (ch === "s") return [0.05, 0.95];
+  }
+  return defaults[ch] || [0.05, 0.95];
 }

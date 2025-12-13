@@ -128,6 +128,13 @@
               <input id="bg-color" type="color" value="#ffffff" aria-label="Background color picker">
             </label>
           </div>
+          <div class="field inline-row">
+            <label class="inline small">
+              <input id="verbose-toggle" type="checkbox">
+              Verbose
+            </label>
+            <span class="help-text">show detailed run table</span>
+          </div>
           <div class="field">
             <div class="inline-row between">
               <label for="colorwheel-space">Visualization colorspace</label>
@@ -186,11 +193,6 @@
           </div>
           <canvas id="status-graph" height="150"></canvas>
           <canvas id="status-mini" height="200"></canvas>
-          <label class="inline small">
-            <input id="verbose-toggle" type="checkbox">
-            Verbose
-          </label>
-          <textarea id="verbose-box" rows="8" readonly style="display:none; resize:vertical;"></textarea>
           <p id="status-text" class="status">waiting to start…</p>
           <div id="error-text" class="error"></div>
         </div>
@@ -219,6 +221,10 @@
           </div>
         </div>
       </div>
+    </section>
+    <section id="verbose-panel" class="control-block verbose-panel" style="display:none;">
+      <h3>Verbose Runs</h3>
+      <div id="verbose-table"></div>
     </section>
   </main>
   <script type="module" src="main.js"></script>
