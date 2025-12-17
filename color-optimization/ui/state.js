@@ -15,5 +15,8 @@ export function createInitialState() {
     mutedInput: false,
     nmTrails: [],
     bestColors: [],
+    runResults: [],
+    runRanking: [],
+    selectedResultIdx: null,
   };
 }

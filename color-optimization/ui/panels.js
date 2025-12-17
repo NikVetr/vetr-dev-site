@@ -151,9 +151,10 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
   ];
   const valueSet = combinedValues.map((v) => v.vals);
   const presetRange = rangeFromPreset(barSpace, gamutPreset) || csRanges[barSpace];
+  const baseRange = csRanges[barSpace];
   const ranges = gamutMode === "full"
-    ? presetRange
-    : effectiveRangeFromValues(valueSet, barSpace);
+    ? (clipToGamut ? presetRange : baseRange)
+    : effectiveRangeFromValues(valueSet.concat([baseRange.min, baseRange.max]), barSpace);
   const hueBarOffsetNorm = hueBarOffsetDeg / (ranges.max.h - ranges.min.h || 360);
   const combined = combinedValues;
 
@@ -176,16 +177,22 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
 
   if (state.bounds && ui.colorSpace.value === barSpace) {
     const hueRange = ranges.max.h - ranges.min.h || 360;
+    const baseRange = state.bounds.ranges || csRanges[barSpace];
+    const isFull01 = (b) => Array.isArray(b) && b.length === 2 && b[0] <= 1e-6 && b[1] >= 1 - 1e-6;
     const overlays = configs.map((cfg, idx) => {
       const b = state.bounds.boundsByName?.[cfg.key];
       if (!b) return null;
+      if (cfg.key !== "h" && isFull01(b)) return null;
       if (cfg.key === "h") {
+        if (isFull01(b)) return null;
         return { idx, type: "h", range: b };
       }
-      const minVal = b[0] * (cfg.max - cfg.min) + cfg.min;
-      const maxVal = b[1] * (cfg.max - cfg.min) + cfg.min;
-      const minN = normalize(minVal, cfg.min, cfg.max);
-      const maxN = normalize(maxVal, cfg.min, cfg.max);
+      const baseMin = baseRange.min?.[cfg.key] ?? cfg.min;
+      const baseMax = baseRange.max?.[cfg.key] ?? cfg.max;
+      const minVal = b[0] * (baseMax - baseMin) + baseMin;
+      const maxVal = b[1] * (baseMax - baseMin) + baseMin;
+      const minN = clamp01(normalize(minVal, cfg.min, cfg.max));
+      const maxN = clamp01(normalize(maxVal, cfg.min, cfg.max));
       return { idx, min: minN, max: maxN };
     }).filter(Boolean);
 
@@ -259,9 +266,15 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
       dot.style.width = "12px";
       dot.style.height = "12px";
       dot.style.background = sim;
+      dot.style.border = `2px solid ${contrastColor(sim)}`;
       obj.bar.appendChild(dot);
     });
   });
+}
+
+function clamp01(v) {
+  if (!Number.isFinite(v)) return 0;
+  return Math.max(0, Math.min(1, v));
 }
 
 export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpace, optSpace, gamutMode = "auto", vizOpts = {}) {

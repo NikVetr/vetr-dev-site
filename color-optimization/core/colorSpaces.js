@@ -10,8 +10,8 @@ export const channelOrder = {
 
 export const csRanges = {
   hsl: { min: { h: 0, s: 0, l: 0 }, max: { h: 360, s: 100, l: 100 } },
-  lab: { min: { l: 0, a: -128, b: -128 }, max: { l: 100, a: 128, b: 128 } },
-  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 150, h: 360 } },
+  lab: { min: { l: 0, a: -180, b: -180 }, max: { l: 100, a: 180, b: 180 } },
+  lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 230, h: 360 } },
   oklab: { min: { l: 0, a: -0.5, b: -0.5 }, max: { l: 1, a: 0.5, b: 0.5 } },
   oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.5, h: 360 } },
 };
@@ -97,11 +97,18 @@ export function rangeFromPreset(space, preset = "srgb") {
 }
 
 export function hexToRgb(hex) {
-  const clean = hex.replace("#", "");
+  if (typeof hex !== "string") hex = String(hex ?? "");
+  const m = hex.match(/#?[0-9a-fA-F]{6}/);
+  if (!m) return { r: 0, g: 0, b: 0 };
+  const clean = m[0].replace("#", "");
   const r = parseInt(clean.slice(0, 2), 16) / 255;
   const g = parseInt(clean.slice(2, 4), 16) / 255;
   const b = parseInt(clean.slice(4, 6), 16) / 255;
-  return { r, g, b };
+  return {
+    r: Number.isFinite(r) ? r : 0,
+    g: Number.isFinite(g) ? g : 0,
+    b: Number.isFinite(b) ? b : 0,
+  };
 }
 
 export function rgbToHex({ r, g, b }) {
@@ -322,6 +329,22 @@ export function convertColorValues(values, fromSpace, toSpace) {
   return fromXyzFn(xyz);
 }
 
+export function projectToGamut(values, fromSpace, gamutPreset = "srgb", toSpace = fromSpace) {
+  const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
+  if (!gamut) return convertColorValues(values, fromSpace, toSpace);
+  try {
+    const xyz = convertColorValues(values, fromSpace, "xyz");
+    const lin = gamut.fromXYZ(xyz.x, xyz.y, xyz.z);
+    const r = clamp(lin.r, 0, 1);
+    const g = clamp(lin.g, 0, 1);
+    const b = clamp(lin.b, 0, 1);
+    const xyzClamped = gamut.toXYZ(r, g, b);
+    return convertColorValues(xyzClamped, "xyz", toSpace);
+  } catch (e) {
+    return convertColorValues(values, fromSpace, toSpace);
+  }
+}
+
 export function decodeColor(hex, space) {
   const rgb = hexToRgb(hex);
   switch (space) {
@@ -421,13 +444,33 @@ export function clampToRange(vals, range, space) {
 
 export function effectiveRangeFromValues(values, space) {
   const base = csRanges[space];
-  const min = { ...base.min };
-  const max = { ...base.max };
-  values.forEach((v) => {
+  const min = {};
+  const max = {};
+  channelOrder[space].forEach((ch) => {
+    if (ch === "h") {
+      min[ch] = base.min[ch];
+      max[ch] = base.max[ch];
+      return;
+    }
+    min[ch] = Infinity;
+    max[ch] = -Infinity;
+  });
+  (values || []).forEach((v) => {
+    if (!v) return;
     channelOrder[space].forEach((ch) => {
-      if (v[ch] < min[ch]) min[ch] = v[ch];
-      if (v[ch] > max[ch]) max[ch] = v[ch];
+      if (ch === "h") return;
+      const val = v[ch];
+      if (!Number.isFinite(val)) return;
+      if (val < min[ch]) min[ch] = val;
+      if (val > max[ch]) max[ch] = val;
     });
+  });
+  channelOrder[space].forEach((ch) => {
+    if (ch === "h") return;
+    if (!Number.isFinite(min[ch]) || !Number.isFinite(max[ch])) {
+      min[ch] = base.min[ch];
+      max[ch] = base.max[ch];
+    }
   });
   return { min, max };
 }

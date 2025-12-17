@@ -4,13 +4,15 @@ import {
   decodeColor,
   encodeColor,
   effectiveRangeFromValues,
-  clampToRange,
   rangeFromPreset,
   gamutPresets,
   convertColorValues,
+  projectToGamut,
   rgbToHex,
+  GAMUTS,
 } from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
+import { contrastColor } from "../core/metrics.js";
 import { clamp } from "../core/util.js";
 import { buildGamutHullPaths, strokeHull } from "./gamutHull.js";
 
@@ -42,21 +44,23 @@ export function drawWheel(type, ui, state, opts = {}) {
   if (!csRanges[wheelSpace]) return;
   const channels = channelOrder[wheelSpace] || [];
 
-  const rawCurrent =
-    !clipToGamut && state.rawCurrentColors?.length
-      ? state.rawCurrentColors.map((v) =>
-          state.rawSpace && state.rawSpace !== wheelSpace ? convertColorValues(v, state.rawSpace, wheelSpace) : v
-        )
-      : null;
-  const rawNew =
-    !clipToGamut && state.rawNewColors?.length
-      ? state.rawNewColors.map((v) =>
-          state.newRawSpace && state.newRawSpace !== wheelSpace ? convertColorValues(v, state.newRawSpace, wheelSpace) : v
-        )
-      : null;
+  const resolveVals = (hex, rawVals, idx, sourceSpace) => {
+    const raw = rawVals && rawVals[idx];
+    if (raw) {
+      return clipToGamut
+        ? projectToGamut(raw, sourceSpace || wheelSpace, gamutPreset, wheelSpace)
+        : sourceSpace && sourceSpace !== wheelSpace
+          ? convertColorValues(raw, sourceSpace, wheelSpace)
+          : raw;
+    }
+    const decoded = decodeColor(hex, wheelSpace);
+    return clipToGamut ? projectToGamut(decoded, wheelSpace, gamutPreset, wheelSpace) : decoded;
+  };
+  const rawCurrent = state.rawCurrentColors?.length ? state.rawCurrentColors : null;
+  const rawNew = state.rawNewColors?.length ? state.rawNewColors : null;
   const allColors = state.currentColors.map((c, idx) => {
-    const vals = rawCurrent?.[idx] || decodeColor(c, wheelSpace);
-    const displayHex = !clipToGamut && vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
+    const vals = resolveVals(c, rawCurrent, idx, state.rawSpace);
+    const displayHex = vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
     return {
       color: c,
       displayColor: displayHex,
@@ -65,8 +69,8 @@ export function drawWheel(type, ui, state, opts = {}) {
     };
   })
     .concat(state.newColors.map((c, idx) => {
-      const vals = rawNew?.[idx] || decodeColor(c, wheelSpace);
-      const displayHex = !clipToGamut && vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
+      const vals = resolveVals(c, rawNew, idx, state.newRawSpace);
+      const displayHex = vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
       return {
         color: c,
         displayColor: displayHex,
@@ -75,11 +79,19 @@ export function drawWheel(type, ui, state, opts = {}) {
       };
     }));
   const valueSet = allColors.map((c) => c.vals);
-  const presetRange = rangeFromPreset(wheelSpace, gamutPreset) || csRanges[wheelSpace];
   const dataRange = effectiveRangeFromValues(valueSet, wheelSpace);
-  const ranges = clipToGamut
-    ? (gamutMode === "full" ? presetRange : dataRange)
-    : dataRange;
+  const baseRange = csRanges[wheelSpace];
+  const gamutRange =
+    computeGamutRange(wheelSpace, gamutPreset) ||
+    rangeFromPreset(wheelSpace, gamutPreset) ||
+    baseRange;
+  // Keep the visualization axes stable: never shrink below the base range,
+  // and only expand (no extra padding) when values fall outside.
+  const unclippedRange =
+    gamutMode === "full" ? baseRange : unionRanges(dataRange, baseRange, wheelSpace);
+  const clippedRange =
+    gamutMode === "full" ? gamutRange : unionRanges(dataRange, gamutRange, wheelSpace);
+  const ranges = clipToGamut ? clippedRange : unclippedRange;
 
   const isRectWheel = wheelSpace === "lab" || wheelSpace === "oklab";
   let radius = baseRadius;
@@ -130,12 +142,11 @@ export function drawWheel(type, ui, state, opts = {}) {
     }
   }
 
-  const scaleRange = clipToGamut ? presetRange : ranges;
+  const scaleRange = ranges;
 
-  const toPoint = (vals, rangeOverride, clampVals = !rangeOverride && clipToGamut) => {
+  const toPoint = (vals, rangeOverride) => {
     const useRange = rangeOverride || scaleRange;
-    const clampedVals = clampVals ? clampToRange(vals, presetRange, wheelSpace) : vals;
-    const v = clampedVals;
+    const v = vals;
     const lMin = useRange.min.l ?? 0;
     const lMax = useRange.max.l ?? 1;
     const lVal = v.l ?? ((wheelSpace === "lab" || wheelSpace === "oklab") ? 0 : lMin);
@@ -228,6 +239,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     const wheelSpaceCurrent = wheelSpace;
     const hasHue = channels.includes("h");
     const scKey = channels.find((c) => c === "s" || c === "c");
+    const baseRange = state.bounds.ranges || csRanges[wheelSpaceCurrent];
 
     const strokeOverlay = () => {
       ctx.setLineDash([]);
@@ -240,6 +252,7 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.stroke();
       ctx.setLineDash([]);
     };
+    const isFull01 = (b) => Array.isArray(b) && b.length === 2 && b[0] <= 1e-6 && b[1] >= 1 - 1e-6;
 
     const hueSpanNorm = state.bounds.boundsH
       ? (state.bounds.boundsH[1] - state.bounds.boundsH[0] + 1) % 1
@@ -249,16 +262,23 @@ export function drawWheel(type, ui, state, opts = {}) {
       hasHue &&
       scKey &&
       state.bounds.boundsH &&
-      state.bounds.boundsSc &&
       hueSpanNorm !== null &&
       hueSpanNorm > 0 &&
       hueSpanNorm < 0.999
     ) {
+      if (isFull01(state.bounds.boundsH) || isFull01(state.bounds.boundsByName?.[scKey])) {
+        // unconstrained in hue and/or chroma -> skip overlay
+      } else {
       let a0 = state.bounds.boundsH[0] * 2 * Math.PI;
       let a1 = state.bounds.boundsH[1] * 2 * Math.PI;
       while (a1 <= a0) a1 += 2 * Math.PI;
-      const r0 = state.bounds.boundsSc[0] * radius;
-      const r1 = state.bounds.boundsSc[1] * radius;
+      const b = state.bounds.boundsByName?.[scKey];
+      const toVal = (bnd, min, max) => min + bnd * (max - min);
+      const minVal = toVal(b[0], baseRange.min[scKey], baseRange.max[scKey]);
+      const maxVal = toVal(b[1], baseRange.min[scKey], baseRange.max[scKey]);
+      const maxSC = scKey === "s" ? ranges.max.s : ranges.max.c;
+      const r0 = clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
+      const r1 = clamp(maxVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
       ctx.beginPath();
       ctx.moveTo(cx + r1 * Math.cos(a0), cy + r1 * Math.sin(a0));
       ctx.arc(cx, cy, r1, a0, a1);
@@ -270,10 +290,16 @@ export function drawWheel(type, ui, state, opts = {}) {
       }
       ctx.closePath();
       strokeOverlay();
+      }
     } else {
-      if (scKey && state.bounds.boundsSc) {
-        const rMin = state.bounds.boundsSc[0] * radius;
-        const rMax = state.bounds.boundsSc[1] * radius;
+      if (scKey && state.bounds.boundsByName?.[scKey] && !isFull01(state.bounds.boundsByName[scKey])) {
+        const b = state.bounds.boundsByName[scKey];
+        const toVal = (bnd, min, max) => min + bnd * (max - min);
+        const minVal = toVal(b[0], baseRange.min[scKey], baseRange.max[scKey]);
+        const maxVal = toVal(b[1], baseRange.min[scKey], baseRange.max[scKey]);
+        const maxSC = scKey === "s" ? ranges.max.s : ranges.max.c;
+        const rMin = clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
+        const rMax = clamp(maxVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
         ctx.beginPath();
         ctx.arc(cx, cy, rMin, 0, 2 * Math.PI);
         strokeOverlay();
@@ -281,7 +307,7 @@ export function drawWheel(type, ui, state, opts = {}) {
         ctx.arc(cx, cy, rMax, 0, 2 * Math.PI);
         strokeOverlay();
       }
-      if (hasHue && state.bounds.boundsH && hueSpanNorm !== null && hueSpanNorm > 0 && hueSpanNorm < 0.999) {
+      if (hasHue && state.bounds.boundsH && !isFull01(state.bounds.boundsH) && hueSpanNorm !== null && hueSpanNorm > 0 && hueSpanNorm < 0.999) {
         const start = state.bounds.boundsH[0] * 2 * Math.PI;
         const span = hueSpanNorm * 2 * Math.PI;
         ctx.beginPath();
@@ -296,15 +322,15 @@ export function drawWheel(type, ui, state, opts = {}) {
       const aBounds = state.bounds.boundsByName.a;
       const bBounds = state.bounds.boundsByName.b;
       if (aBounds && bBounds) {
-        const aRange = ranges;
-        const maxA = Math.max(Math.abs(aRange.min.a), Math.abs(aRange.max.a));
-        const maxB = Math.max(Math.abs(aRange.min.b), Math.abs(aRange.max.b));
+        if (isFull01(aBounds) && isFull01(bBounds)) return;
+        const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
+        const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
         const maxRectC = Math.min(maxA, maxB) || 1;
         const toVal = (bnd, min, max) => min + bnd * (max - min);
-        const aMin = toVal(aBounds[0], aRange.min.a, aRange.max.a);
-        const aMax = toVal(aBounds[1], aRange.min.a, aRange.max.a);
-        const bMin = toVal(bBounds[0], aRange.min.b, aRange.max.b);
-        const bMax = toVal(bBounds[1], aRange.min.b, aRange.max.b);
+        const aMin = toVal(aBounds[0], baseRange.min.a, baseRange.max.a);
+        const aMax = toVal(aBounds[1], baseRange.min.a, baseRange.max.a);
+        const bMin = toVal(bBounds[0], baseRange.min.b, baseRange.max.b);
+        const bMax = toVal(bBounds[1], baseRange.min.b, baseRange.max.b);
         const x0 = cx + clamp(aMin / maxRectC, -1, 1) * radius;
         const x1 = cx + clamp(aMax / maxRectC, -1, 1) * radius;
         const y0 = cy - clamp(bMax / maxRectC, -1, 1) * radius;
@@ -325,7 +351,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
   // True gamut hull overlay
   if (clipToGamut) {
-    const hullPaths = buildGamutHullPaths(gamutPreset, wheelSpace, (vals) => toPoint(vals, scaleRange, false));
+    const hullPaths = buildGamutHullPaths(gamutPreset, wheelSpace, (vals) => toPoint(vals, scaleRange));
     strokeHull(ctx, hullPaths);
   }
 
@@ -340,7 +366,7 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.arc(pt.x, pt.y, sizePt / 2, 0, 2 * Math.PI);
     }
     ctx.fillStyle = fill;
-    ctx.strokeStyle = "#0f172a";
+    ctx.strokeStyle = contrastColor(fill);
     ctx.lineWidth = 1;
     ctx.fill();
     ctx.stroke();
@@ -351,6 +377,100 @@ export function drawWheel(type, ui, state, opts = {}) {
   ctx.textAlign = "left";
   ctx.textBaseline = "top";
   ctx.fillText(`${presetLabel}${clipToGamut ? " (clipped)" : " (raw)"}`, 8, 6);
+}
+
+const gamutRangeCache = new Map();
+
+function unionRanges(a, b, space) {
+  const channels = channelOrder[space] || [];
+  const min = {};
+  const max = {};
+  channels.forEach((ch) => {
+    min[ch] = Math.min(a?.min?.[ch] ?? Infinity, b?.min?.[ch] ?? Infinity);
+    max[ch] = Math.max(a?.max?.[ch] ?? -Infinity, b?.max?.[ch] ?? -Infinity);
+  });
+  return { min, max };
+}
+
+function padRange(range, frac = 0.06) {
+  const min = { ...range.min };
+  const max = { ...range.max };
+  Object.keys(min).forEach((ch) => {
+    if (ch === "h") return;
+    const span = max[ch] - min[ch];
+    const pad = span === 0 ? Math.max(Math.abs(max[ch]) || 1, 1) * frac : span * frac;
+    min[ch] = min[ch] - pad;
+    max[ch] = max[ch] + pad;
+  });
+  return { min, max };
+}
+
+function computeGamutRange(space, gamutPreset) {
+  const key = `${space}::${gamutPreset}`;
+  if (gamutRangeCache.has(key)) return gamutRangeCache.get(key);
+  const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
+  const channels = channelOrder[space] || [];
+  if (!gamut || !channels.length) return null;
+
+  // Sample the gamut cube edges in XYZ then convert to the visualization space.
+  const edges = [
+    [[0, 0, 0], [1, 0, 0]],
+    [[0, 0, 0], [0, 1, 0]],
+    [[0, 0, 0], [0, 0, 1]],
+    [[1, 1, 1], [0, 1, 1]],
+    [[1, 1, 1], [1, 0, 1]],
+    [[1, 1, 1], [1, 1, 0]],
+    [[1, 0, 0], [1, 1, 0]],
+    [[1, 0, 0], [1, 0, 1]],
+    [[0, 1, 0], [1, 1, 0]],
+    [[0, 1, 0], [0, 1, 1]],
+    [[0, 0, 1], [1, 0, 1]],
+    [[0, 0, 1], [0, 1, 1]],
+  ];
+  const steps = 18;
+
+  const min = {};
+  const max = {};
+  channels.forEach((ch) => {
+    if (ch === "h") {
+      min[ch] = csRanges[space]?.min?.[ch] ?? 0;
+      max[ch] = csRanges[space]?.max?.[ch] ?? 360;
+      return;
+    }
+    min[ch] = Infinity;
+    max[ch] = -Infinity;
+  });
+
+  for (const [a, b] of edges) {
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const r = a[0] + (b[0] - a[0]) * t;
+      const g = a[1] + (b[1] - a[1]) * t;
+      const bl = a[2] + (b[2] - a[2]) * t;
+      const xyz = gamut.toXYZ(r, g, bl);
+      const vals = convertColorValues(xyz, "xyz", space);
+      channels.forEach((ch) => {
+        if (ch === "h") return;
+        const v = vals?.[ch];
+        if (!Number.isFinite(v)) return;
+        if (v < min[ch]) min[ch] = v;
+        if (v > max[ch]) max[ch] = v;
+      });
+    }
+  }
+
+  const fallback = rangeFromPreset(space, gamutPreset) || csRanges[space];
+  channels.forEach((ch) => {
+    if (ch === "h") return;
+    if (!Number.isFinite(min[ch]) || !Number.isFinite(max[ch])) {
+      min[ch] = fallback.min[ch];
+      max[ch] = fallback.max[ch];
+    }
+  });
+
+  const out = { min, max };
+  gamutRangeCache.set(key, out);
+  return out;
 }
 
 export function makeWheelColor(hueDeg, chromaNorm, wheelSpace) {

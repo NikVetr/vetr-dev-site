@@ -8,6 +8,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   const colorSpace = config.colorSpace;
   const channels = channelOrder[colorSpace];
   const prep = prepareData(palette, colorSpace, config);
+  const conditioningHexes = palette || [];
   const dim = config.nColsToAdd * channels.length;
   const logit = (p) => Math.log(p / (1 - p));
   let best = { value: Infinity, par: null, newHex: [], newRaw: [] };
@@ -16,7 +17,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   for (let run = 0; run < config.nOptimRuns; run++) {
     const start = Array.from({ length: dim }, () => logit(Math.random()));
     const startInfo = objectiveInfo(start, prep);
-    const startDetails = attachMeta(startInfo.details, startInfo.newHex, startInfo.newRaw, colorSpace);
+    const startDetails = attachMeta(startInfo.details, startInfo.newHex, startInfo.newRaw, colorSpace, conditioningHexes);
     if (onVerbose) {
       onVerbose({
         stage: "start",
@@ -39,7 +40,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
       { maxIterations: config.nmIterations, step: 1.2 }
     );
     const endInfo = objectiveInfo(res.x, prep);
-    const endDetails = attachMeta(endInfo.details, endInfo.newHex, endInfo.newRaw, colorSpace);
+    const endDetails = attachMeta(endInfo.details, endInfo.newHex, endInfo.newRaw, colorSpace, conditioningHexes);
     if (onVerbose) {
       onVerbose({
         stage: "end",
@@ -94,7 +95,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   }
   // Final meta for best run (influences, closest)
   if (best.newHex?.length) {
-    const metaDetails = computeInfluences(best.newHex, best.newRaw, colorSpace);
+    const metaDetails = computeInfluences(best.newHex, conditioningHexes);
     if (onVerbose) {
       onVerbose({
         stage: "final-best",
@@ -115,22 +116,31 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   return best;
 }
 
-function computeInfluences(hexes, raws, space) {
-  const labs = hexes.map((h, idx) => decodeColor(h, "lab"));
-  const n = labs.length;
-  if (n < 2) return hexes.map((h) => ({ hex: h }));
+function computeInfluences(hexes, conditioningHexes = []) {
+  const newHexes = hexes || [];
+  const currHexes = conditioningHexes || [];
+  const allHexes = [...currHexes, ...newHexes];
+  const offset = currHexes.length;
+  const nAll = allHexes.length;
+  if (newHexes.length === 0) return [];
+
+  const labs = allHexes.map((h) => decodeColor(h, "lab"));
+  if (nAll < 2) return newHexes.map((h) => ({ hex: h }));
+
   const pairwise = [];
-  for (let i = 0; i < n; i++) {
-    for (let j = i + 1; j < n; j++) {
+  for (let i = 0; i < nAll; i++) {
+    for (let j = i + 1; j < nAll; j++) {
       const d = deltaE2000(labs[i], labs[j]);
       pairwise.push({ i, j, d });
     }
   }
-  const hm = harmonicMean(pairwise.map((p) => p.d));
+
+  const hmAll = harmonicMean(pairwise.map((p) => p.d));
   const influences = [];
-  for (let i = 0; i < n; i++) {
+  for (let localIdx = 0; localIdx < newHexes.length; localIdx++) {
+    const i = offset + localIdx;
     const remaining = pairwise.filter((p) => p.i !== i && p.j !== i).map((p) => p.d);
-    const hmWithout = remaining.length ? harmonicMean(remaining) : hm;
+    const hmWithout = remaining.length ? harmonicMean(remaining) : hmAll;
     const closest = pairwise
       .filter((p) => p.i === i || p.j === i)
       .reduce(
@@ -142,12 +152,13 @@ function computeInfluences(hexes, raws, space) {
         { idx: null, dist: Infinity }
       );
     influences.push({
-      hex: hexes[i],
-      influence: hm - hmWithout,
-      closestHex: closest.idx != null ? hexes[closest.idx] : "",
-      closestDist: isFinite(closest.dist) ? closest.dist : null,
+      hex: newHexes[localIdx],
+      influence: hmAll - hmWithout,
+      closestHex: closest.idx != null ? allHexes[closest.idx] : "",
+      closestDist: Number.isFinite(closest.dist) ? closest.dist : null,
     });
   }
+
   const ranked = [...influences].sort((a, b) => (b.influence || 0) - (a.influence || 0));
   ranked.forEach((item, idx) => {
     const target = influences.find((inf) => inf.hex === item.hex && inf.influence === item.influence);
@@ -163,9 +174,9 @@ function harmonicMean(arr) {
   return arr.length / sum;
 }
 
-function attachMeta(details, hexes, raws, space) {
+function attachMeta(details, hexes, raws, space, conditioningHexes = []) {
   if (!details || !details.length) return details;
-  const inf = computeInfluences(hexes, raws, space);
+  const inf = computeInfluences(hexes, conditioningHexes);
   const byHex = {};
   inf.forEach((entry) => {
     byHex[entry.hex] = entry;

@@ -71,13 +71,22 @@
               <option value="hsl">HSL</option>
             </select>
           </div>
-          <div class="field two-col mini">
-            <label class="inline small">
-              <input id="clip-gamut" type="checkbox">
-              Clip to Gamut
-            </label>
-            <div>
-              <label for="gamut-preset">Gamut preset</label>
+          <div class="field three-col mini gamut-row">
+            <div class="clip-inline">
+              <div class="clip-inline-label">Clip to Gamut:</div>
+              <div class="clip-inline-cols">
+                <div class="clip-inline-col">
+                  <div class="clip-inline-title">Visual</div>
+                  <input id="clip-gamut" type="checkbox" aria-label="Clip to gamut for visualization">
+                </div>
+                <div class="clip-inline-col">
+                  <div class="clip-inline-title">Optim</div>
+                  <input id="clip-gamut-opt" type="checkbox" aria-label="Clip to gamut for optimization">
+                </div>
+              </div>
+            </div>
+            <div class="gamut-select">
+              <label for="gamut-preset">Preset</label>
               <select id="gamut-preset">
                 <option value="srgb">sRGB</option>
                 <option value="display-p3">Display P3</option>
@@ -104,18 +113,18 @@
             <div class="field three-col mini">
               <div>
                 <label id="w-h-label" for="w-h">h</label>
-                <input id="w-h" type="range" min="0" max="1" step="0.01" value="0">
-                <span id="w-h-val" class="value-chip">0%</span>
+                <input id="w-h" type="range" min="0" max="1" step="0.001" value="0">
+                <span id="w-h-val" class="value-chip">0.0%</span>
               </div>
               <div>
                 <label id="w-sc-label" for="w-sc">s/c</label>
-                <input id="w-sc" type="range" min="0" max="1" step="0.01" value="0">
-                <span id="w-sc-val" class="value-chip">0%</span>
+                <input id="w-sc" type="range" min="0" max="1" step="0.001" value="0">
+                <span id="w-sc-val" class="value-chip">0.0%</span>
               </div>
               <div>
                 <label id="w-l-label" for="w-l">l</label>
-                <input id="w-l" type="range" min="0" max="1" step="0.01" value="0">
-                <span id="w-l-val" class="value-chip">0%</span>
+                <input id="w-l" type="range" min="0" max="1" step="0.001" value="0">
+                <span id="w-l-val" class="value-chip">0.0%</span>
               </div>
             </div>
           </div>
@@ -133,7 +142,6 @@
               <input id="verbose-toggle" type="checkbox">
               Verbose
             </label>
-            <span class="help-text">show detailed run table</span>
           </div>
           <div class="field">
             <div class="inline-row between">
@@ -162,28 +170,48 @@
 
         <div class="control-block">
           <h3>Color Vision Prioritization Weights</h3>
-          <div class="field four-col tight">
+          <div class="field four-col mini">
             <div>
-              <label for="w-none">baseline</label>
-              <input id="w-none" type="number" min="0" step="0.1" value="6">
+              <label for="w-none">trichrom</label>
+              <input id="w-none" type="range" min="0" max="100" step="0.1" value="50">
+              <span id="w-none-val" class="value-chip">50.0%</span>
             </div>
             <div>
               <label for="w-deutan">deutan</label>
-              <input id="w-deutan" type="number" min="0" step="0.1" value="6">
+              <input id="w-deutan" type="range" min="0" max="100" step="0.1" value="40">
+              <span id="w-deutan-val" class="value-chip">40.0%</span>
             </div>
             <div>
               <label for="w-protan">protan</label>
-              <input id="w-protan" type="number" min="0" step="0.1" value="2">
+              <input id="w-protan" type="range" min="0" max="100" step="0.1" value="8">
+              <span id="w-protan-val" class="value-chip">8.0%</span>
             </div>
             <div>
               <label for="w-tritan">tritan</label>
-              <input id="w-tritan" type="number" min="0" step="0.05" value="0.1">
+              <input id="w-tritan" type="range" min="0" max="100" step="0.1" value="2">
+              <span id="w-tritan-val" class="value-chip">2.0%</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="right-side">
+        <div class="result-nav" id="result-nav">
+          <div class="result-nav-left">
+            <button id="result-prev" type="button" aria-label="Previous result" class="result-nav-btn">‹</button>
+            <div class="result-nav-center">
+              <span>#</span>
+              <input id="result-rank" type="number" min="1" value="1" aria-label="Result rank">
+              <span>Best Result</span>
+              <span id="result-total" class="result-total">(of 0)</span>
+            </div>
+            <button id="result-next" type="button" aria-label="Next result" class="result-nav-btn">›</button>
+          </div>
+          <div class="result-nav-meta">
+            <span id="result-score" class="result-chip">Score: —</span>
+            <span id="result-worst" class="result-chip">Worst color: —</span>
+          </div>
+        </div>
         <section id="panels" class="panels"></section>
         <div class="status-col">
           <div class="control-block status">
@@ -216,8 +244,19 @@
                 <input id="format-lines" type="checkbox">
                 newline
               </label>
+              <label class="inline small">
+                <input id="format-r-c" type="checkbox">
+                c()
+              </label>
+              <label class="inline small">
+                <input id="format-py-list" type="checkbox">
+                []
+              </label>
             </div>
-            <button id="copy-btn" class="ghost">Copy</button>
+            <div class="results-row">
+              <button id="send-to-input-btn" class="ghost" type="button">Send to Input</button>
+              <button id="copy-btn" class="ghost" type="button">Copy</button>
+            </div>
           </div>
         </div>
       </div>

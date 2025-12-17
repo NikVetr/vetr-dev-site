@@ -20,6 +20,12 @@ let verboseTruncInfo = null;
 let verboseBestScore = -Infinity;
 let verboseBestRun = null;
 const VERBOSE_MAX_ROWS = 4000;
+const cvdScores = {
+  none: 0,
+  deutan: 0,
+  protan: 0,
+  tritan: 0,
+};
 
 function currentVizOpts() {
   return {
@@ -36,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   buildPaletteButtons();
   attachEventListeners();
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+  updateResultNavigator();
 });
 
 function setDefaultValues() {
@@ -47,6 +54,7 @@ function setDefaultValues() {
   if (ui.gamutMode) ui.gamutMode.value = "auto";
   if (ui.gamutPreset) ui.gamutPreset.value = "srgb";
   if (ui.clipGamut) ui.clipGamut.checked = false;
+  if (ui.clipGamutOpt) ui.clipGamutOpt.checked = true;
   if (ui.syncSpaces) ui.syncSpaces.checked = true;
   ui.colorsToAdd.value = "3";
   ui.optimRuns.value = "100";
@@ -54,10 +62,10 @@ function setDefaultValues() {
   ui.wH.value = "0";
   ui.wSC.value = "0";
   ui.wL.value = "0";
-  ui.wNone.value = "6";
-  ui.wDeutan.value = "6";
-  ui.wProtan.value = "2";
-  ui.wTritan.value = "0.1";
+  ui.wNone.value = "50.0";
+  ui.wDeutan.value = "40.0";
+  ui.wProtan.value = "8.0";
+  ui.wTritan.value = "2.0";
   if (ui.bgColor) ui.bgColor.value = "#ffffff";
   if (ui.bgEnabled) ui.bgEnabled.checked = true;
   ui.formatQuotes.checked = false;
@@ -70,6 +78,7 @@ function setDefaultValues() {
   verboseBestRun = null;
   renderVerboseTable();
   updateWidthChips();
+  normalizeAndUpdateWeights();
   updateWidthLabels();
   updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
   state.lastRuns = Math.max(1, parseInt(ui.optimRuns.value, 10) || 20);
@@ -81,13 +90,97 @@ function setDefaultValues() {
   state.newRawSpace = ui.colorSpace.value;
   setResults([], ui);
   state.bestScores = [];
+  state.nmTrails = [];
+  state.bestColors = [];
+  state.rawBestColors = [];
   state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
   drawStatusGraph(state, ui);
   drawStatusMini(state, ui, currentVizOpts());
+  setStatus("waiting to start…", 0, ui, state);
   logVerbose("palette", "", ui.paletteInput.value.trim());
   togglePlaceholder();
   updateBgControls();
   updatePaletteHighlight();
+}
+
+function clampNum(v, lo, hi) {
+  return Math.max(lo, Math.min(hi, v));
+}
+
+function normalizeAndUpdateWeights(changedKey = null) {
+  const keys = ["none", "deutan", "protan", "tritan"];
+  const els = {
+    none: ui.wNone,
+    deutan: ui.wDeutan,
+    protan: ui.wProtan,
+    tritan: ui.wTritan,
+  };
+  const valEls = {
+    none: ui.wNoneVal,
+    deutan: ui.wDeutanVal,
+    protan: ui.wProtanVal,
+    tritan: ui.wTritanVal,
+  };
+
+  const changed = changedKey && keys.includes(changedKey) ? changedKey : null;
+  const weightsFromScores = () => {
+    const max = Math.max(...keys.map((k) => cvdScores[k]));
+    const exps = {};
+    let sum = 0;
+    keys.forEach((k) => {
+      const e = Math.exp(cvdScores[k] - max);
+      exps[k] = e;
+      sum += e;
+    });
+    const out = {};
+    keys.forEach((k) => {
+      out[k] = sum > 0 ? (exps[k] / sum) * 100 : 25;
+    });
+    return out;
+  };
+
+  const setScoreForTargetPct = (key, pct) => {
+    const targetPct = clampNum(pct, 0, 100);
+    const others = keys.filter((k) => k !== key);
+    const otherScores = others.map((k) => cvdScores[k]);
+    const maxOther = otherScores.length ? Math.max(...otherScores) : 0;
+    const sumExpOther = others.reduce((acc, k) => acc + Math.exp(cvdScores[k] - maxOther), 0);
+    const logSumOther = maxOther + Math.log(Math.max(sumExpOther, 1e-12));
+    if (targetPct <= 0) {
+      cvdScores[key] = (otherScores.length ? Math.min(...otherScores) : 0) - 20;
+      return;
+    }
+    if (targetPct >= 100) {
+      cvdScores[key] = (otherScores.length ? Math.max(...otherScores) : 0) + 20;
+      return;
+    }
+    const t = clampNum(targetPct / 100, 1e-6, 1 - 1e-6);
+    cvdScores[key] = Math.log(t / (1 - t)) + logSumOther;
+  };
+
+  if (changed) {
+    setScoreForTargetPct(changed, parseFloat(els[changed]?.value || "0") || 0);
+  } else {
+    // initialize scores from current UI values
+    const vals = keys.map((k) => clampNum(parseFloat(els[k]?.value || "0") || 0, 0, 100));
+    const sum = vals.reduce((acc, v) => acc + v, 0);
+    const safe = vals.map((v) => Math.max(v, 1e-6));
+    const logs = safe.map((v) => Math.log(v));
+    const mean = logs.reduce((acc, v) => acc + v, 0) / logs.length;
+    keys.forEach((k, idx) => {
+      cvdScores[k] = logs[idx] - mean;
+    });
+    if (sum <= 0) {
+      keys.forEach((k) => (cvdScores[k] = 0));
+    }
+  }
+
+  const weights = weightsFromScores();
+  keys.forEach((k) => {
+    const pct = weights[k];
+    if (els[k]) els[k].value = pct.toFixed(1);
+    if (valEls[k]) valEls[k].textContent = `${pct.toFixed(1)}%`;
+  });
 }
 
 function attachEventListeners() {
@@ -148,6 +241,17 @@ function attachEventListeners() {
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
   });
+  ui.clipGamutOpt?.addEventListener("change", () => {
+    // affects optimization only; no immediate redraw needed
+  });
+  ui.resultPrev?.addEventListener("click", () => changeResultSelection(-1));
+  ui.resultNext?.addEventListener("click", () => changeResultSelection(1));
+  ui.resultRank?.addEventListener("change", () => {
+    const val = parseInt(ui.resultRank.value, 10);
+    if (Number.isFinite(val)) {
+      changeResultSelection(val, true);
+    }
+  });
   ui.syncSpaces?.addEventListener("change", () => {
     if (ui.syncSpaces.checked) {
       ui.colorwheelSpace.value = ui.colorSpace.value;
@@ -162,11 +266,42 @@ function attachEventListeners() {
     setDefaultValues();
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
+    state.runResults = [];
+    state.runRanking = [];
+    state.selectedResultIdx = null;
+    state.bestScores = [];
+    state.nmTrails = [];
+    state.bestColors = [];
+    state.rawBestColors = [];
+    drawStatusGraph(state, ui);
+    drawStatusMini(state, ui, currentVizOpts());
+    setStatus("waiting to start…", 0, ui, state);
+    showError("", ui);
+    updateResultNavigator();
   });
   ui.copyBtn.addEventListener("click", () => copyResults(ui, state));
-  ui.formatQuotes.addEventListener("change", () => setResults(state.newColors, ui));
-  ui.formatCommas.addEventListener("change", () => setResults(state.newColors, ui));
-  ui.formatLines.addEventListener("change", () => setResults(state.newColors, ui));
+  ui.sendToInputBtn?.addEventListener("click", () => sendResultsToInput());
+  const enforceWrapper = () => {
+    const wrapR = ui.formatRC?.checked;
+    const wrapPy = ui.formatPyList?.checked;
+    if (wrapR || wrapPy) {
+      if (ui.formatQuotes) ui.formatQuotes.checked = true;
+      if (ui.formatCommas) ui.formatCommas.checked = true;
+      if (ui.formatLines) ui.formatLines.checked = false;
+    }
+    setResults(state.newColors, ui);
+  };
+  ui.formatQuotes.addEventListener("change", () => enforceWrapper());
+  ui.formatCommas.addEventListener("change", () => enforceWrapper());
+  ui.formatLines.addEventListener("change", () => enforceWrapper());
+  ui.formatRC?.addEventListener("change", () => {
+    if (ui.formatRC.checked && ui.formatPyList) ui.formatPyList.checked = false;
+    enforceWrapper();
+  });
+  ui.formatPyList?.addEventListener("change", () => {
+    if (ui.formatPyList.checked && ui.formatRC) ui.formatRC.checked = false;
+    enforceWrapper();
+  });
 
   [ui.wH, ui.wSC, ui.wL].forEach((el) => {
     el.addEventListener("input", () => {
@@ -174,6 +309,18 @@ function attachEventListeners() {
       updateBoundsAndRefresh();
       drawStatusMini(state, ui, currentVizOpts());
     });
+  });
+
+  const weightMap = {
+    none: ui.wNone,
+    deutan: ui.wDeutan,
+    protan: ui.wProtan,
+    tritan: ui.wTritan,
+  };
+  Object.entries(weightMap).forEach(([key, el]) => {
+    if (!el) return;
+    el.addEventListener("input", () => normalizeAndUpdateWeights(key));
+    el.addEventListener("change", () => normalizeAndUpdateWeights(key));
   });
 
   window.addEventListener("resize", () => {
@@ -193,6 +340,21 @@ function attachEventListeners() {
   });
 }
 
+function sendResultsToInput() {
+  if (!ui?.paletteInput) return;
+  const colors = state.newColors || [];
+  if (!colors.length) return;
+  const existing = parsePalette(ui.paletteInput.value);
+  const toAdd = colors.filter((c) => !existing.includes(c));
+  if (!toAdd.length) return;
+
+  const appendText = toAdd.join(", ");
+  const cur = ui.paletteInput.value;
+  const sep = cur.trim().length ? (cur.endsWith("\n") ? "" : "\n") : "";
+  ui.paletteInput.value = `${cur}${sep}${appendText}`;
+  ui.paletteInput.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
 function updateWidthLabels() {
   const channels = channelOrder[ui.colorSpace.value];
   const scChannel = channels.find((c) => c === "s" || c === "c") || channels[1] || "s";
@@ -202,9 +364,9 @@ function updateWidthLabels() {
 }
 
 function updateWidthChips() {
-  ui.wHVal.textContent = `${Math.round(parseFloat(ui.wH.value) * 100)}%`;
-  ui.wSCVal.textContent = `${Math.round(parseFloat(ui.wSC.value) * 100)}%`;
-  ui.wLVal.textContent = `${Math.round(parseFloat(ui.wL.value) * 100)}%`;
+  ui.wHVal.textContent = `${(parseFloat(ui.wH.value) * 100).toFixed(1)}%`;
+  ui.wSCVal.textContent = `${(parseFloat(ui.wSC.value) * 100).toFixed(1)}%`;
+  ui.wLVal.textContent = `${(parseFloat(ui.wL.value) * 100).toFixed(1)}%`;
 }
 
 function updateBoundsAndRefresh() {
@@ -238,10 +400,14 @@ async function runOptimization() {
   state.bestColors = [];
   state.rawBestColors = [];
   state.rawNewColors = [];
+  state.runResults = [];
+  state.runRanking = [];
+  state.selectedResultIdx = null;
   verboseRows = [];
   verboseBestRun = null;
   verboseBestScore = -Infinity;
   renderVerboseTable();
+  updateResultNavigator();
   state.bounds = computeBoundsFromCurrent(palette, config.colorSpace, config);
   drawStatusGraph(state, ui);
   drawStatusMini(state, ui, currentVizOpts());
@@ -291,11 +457,11 @@ async function runOptimization() {
         } else if (info.stage === "end") {
           logVerbose(`run ${info.run} end params`, "", paramPreview);
           logVerbose(`run ${info.run} end hex`, "", hexStr);
-          if (info.score !== undefined) {
-            logVerbose(`run ${info.run} end score`, "", info.score.toFixed(4));
-          }
-          if (info.distance !== undefined || info.penalty !== undefined) {
-            if (info.distance !== undefined) {
+        if (info.score !== undefined) {
+          logVerbose(`run ${info.run} end score`, "", info.score.toFixed(4));
+        }
+        if (info.distance !== undefined || info.penalty !== undefined) {
+          if (info.distance !== undefined) {
               logVerbose(`run ${info.run} end distance`, "", info.distance.toFixed(4));
             }
             if (info.penalty !== undefined) {
@@ -310,6 +476,7 @@ async function runOptimization() {
             }
           }
           pushVerboseRows(info);
+          storeRunResult(info);
         } else if (info.stage === "best") {
           logVerbose(`run ${info.run} best params`, "", paramPreview);
           logVerbose(`run ${info.run} best hex`, "", hexStr);
@@ -335,15 +502,21 @@ async function runOptimization() {
         }
       },
     });
-    state.newColors = best.newHex || [];
-    state.bestColors = state.newColors;
-    state.rawNewColors = best.newRaw || [];
-    state.rawBestColors = state.rawNewColors;
-    state.newRawSpace = config.colorSpace;
+    state.runRanking = rankRunResults(state.runResults);
+    state.selectedResultIdx = state.runRanking.length ? 1 : null;
+    if (state.runRanking.length) {
+      applySelectedResult({ skipNavUpdate: true });
+    } else {
+      state.newColors = best.newHex || [];
+      state.bestColors = state.newColors;
+      state.rawNewColors = best.newRaw || [];
+      state.rawBestColors = state.rawNewColors;
+      state.newRawSpace = config.colorSpace;
+      setResults(state.newColors, ui);
+    }
     logVerbose("newColors", [], state.newColors);
     const convergence = best.meta?.reason || "finished";
     setStatus(`done. best score = ${(-best.value).toFixed(3)} (${convergence})`, 100, ui, state);
-    setResults(state.newColors, ui);
   } catch (err) {
     showError(err.message || "Optimization failed.", ui);
     console.error(err);
@@ -352,8 +525,13 @@ async function runOptimization() {
     ui.runBtn.disabled = false;
     ui.runBtn.textContent = "RUN";
     if (ui.verboseToggle?.checked) renderVerboseTable();
-    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
-    drawStatusMini(state, ui, currentVizOpts());
+    if (!state.runRanking?.length && state.newColors?.length) {
+      refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+      drawStatusMini(state, ui, currentVizOpts());
+    } else if (state.runRanking?.length) {
+      applySelectedResult({ skipNavUpdate: true });
+    }
+    updateResultNavigator();
   }
 }
 
@@ -464,6 +642,11 @@ function renderVerboseTable() {
   });
   let bestRunSoFar = null;
   let bestScoreSoFar = -Infinity;
+  const selectedRun =
+    state.runRanking && state.selectedResultIdx
+      ? state.runRanking[Math.max(0, Math.min(state.selectedResultIdx - 1, state.runRanking.length - 1))]?.run
+      : null;
+  const bestRunGlobal = state.runRanking && state.runRanking.length ? state.runRanking[0].run : null;
   const rows = Object.values(grouped)
     .sort((a, b) => a.run - b.run || a.idx - b.idx)
     .map((entry, i, arr) => {
@@ -490,7 +673,9 @@ function renderVerboseTable() {
       const endPenPct = relPart(end.penalty, end.total);
       const diffDistPct = numDiff(endDistPct, startDistPct);
       const diffPenPct = numDiff(endPenPct, startPenPct);
-      const rowHtml = `<tr class="${runBreak ? "row-sep" : ""}">
+      const isSelectedRun = selectedRun != null && entry.run === selectedRun;
+      const isBestRun = bestRunGlobal != null && entry.run === bestRunGlobal;
+      const rowHtml = `<tr class="${runBreak ? "row-sep" : ""} ${isSelectedRun ? "row-selected" : ""} ${isBestRun ? "row-best" : ""}">
         <td class="col-run">${entry.run}</td>
         <td class="col-run">${entry.idx}</td>
         <td class="col-start">${renderHex(start.hex, start.color)}</td>
@@ -673,6 +858,112 @@ function numDiff(a, b) {
 function percentInfluence(influence, score) {
   if (!Number.isFinite(influence) || !Number.isFinite(score) || score === 0) return NaN;
   return influence / score;
+}
+
+function computeWorstColorScore(runNumber) {
+  if (!Number.isFinite(runNumber)) return null;
+  const run = (state.runResults || []).find((r) => r.run === runNumber);
+  if (run && Number.isFinite(run.worstDistance)) return run.worstDistance;
+  const rows = verboseRows.filter((r) => r.run === runNumber && (r.stage === "end" || r.stage === "best"));
+  const distances = rows.map((r) => r.distance).filter((v) => Number.isFinite(v));
+  if (!distances.length) return null;
+  return Math.min(...distances);
+}
+
+function storeRunResult(info) {
+  if (!info || (info.stage !== "end" && info.stage !== "best")) return;
+  const worst =
+    info.details && info.details.length
+      ? Math.min(...info.details.map((d) => (Number.isFinite(d.distance) ? d.distance : Infinity)))
+      : null;
+  const entry = {
+    run: info.run,
+    hex: info.hex ? [...info.hex] : [],
+    raw: info.raw ? [...info.raw] : [],
+    score: info.score,
+    distance: info.distance,
+    penalty: info.penalty,
+    total: typeof info.distance === "number" && typeof info.penalty === "number" ? info.distance - info.penalty : null,
+    space: info.space || ui.colorSpace.value,
+    worstDistance: Number.isFinite(worst) ? worst : null,
+  };
+  state.runResults = (state.runResults || []).filter((r) => r.run !== entry.run);
+  state.runResults.push(entry);
+}
+
+function rankRunResults(results = []) {
+  return results
+    .filter((r) => Number.isFinite(r?.score))
+    .sort((a, b) => {
+      const diff = b.score - a.score;
+      if (Math.abs(diff) > 1e-9) return diff;
+      return (a.run || 0) - (b.run || 0);
+    });
+}
+
+function changeResultSelection(stepOrRank, absolute = false) {
+  if (state.running) return;
+  const total = state.runRanking?.length || 0;
+  if (!total) {
+    updateResultNavigator();
+    return;
+  }
+  const current = state.selectedResultIdx || 1;
+  let next = absolute ? stepOrRank : current + stepOrRank;
+  next = Math.max(1, Math.min(total, next));
+  state.selectedResultIdx = next;
+  applySelectedResult();
+}
+
+function applySelectedResult(options = {}) {
+  const { skipNavUpdate } = options;
+  const ranking = state.runRanking || [];
+  if (!ranking.length) {
+    updateResultNavigator();
+    return;
+  }
+  const idx = Math.min(Math.max((state.selectedResultIdx || 1) - 1, 0), ranking.length - 1);
+  const pick = ranking[idx];
+  if (!pick) {
+    updateResultNavigator();
+    return;
+  }
+  state.selectedResultIdx = idx + 1;
+  state.newColors = pick.hex || [];
+  state.rawNewColors = pick.raw || [];
+  state.newRawSpace = pick.space || state.rawSpace;
+  state.bestColors = pick.hex || state.bestColors;
+  state.rawBestColors = pick.raw || state.rawBestColors;
+  setResults(state.newColors, ui);
+  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+  drawStatusMini(state, ui, currentVizOpts());
+  drawStatusGraph(state, ui);
+  if (!skipNavUpdate) updateResultNavigator();
+}
+
+function updateResultNavigator() {
+  if (!ui?.resultNav) return;
+  const total = state.runRanking?.length || 0;
+  const rank = Math.min(Math.max(state.selectedResultIdx || 1, 1), Math.max(total, 1));
+  const disabled = state.running || total === 0;
+  ui.resultNav.classList.toggle("disabled", disabled);
+  if (ui.resultRank) {
+    ui.resultRank.value = total ? rank : 0;
+    ui.resultRank.disabled = disabled;
+    ui.resultRank.min = total ? 1 : 0;
+    ui.resultRank.max = Math.max(total, 1);
+  }
+  if (ui.resultPrev) ui.resultPrev.disabled = disabled || rank <= 1;
+  if (ui.resultNext) ui.resultNext.disabled = disabled || rank >= total;
+  if (ui.resultTotal) ui.resultTotal.textContent = `(of ${total})`;
+  const selected = total && state.selectedResultIdx ? state.runRanking[Math.min(total - 1, Math.max(0, state.selectedResultIdx - 1))] : null;
+  if (ui.resultScore) {
+    ui.resultScore.textContent = selected ? `Score: ${formatVal(selected.score)}` : "Score: —";
+  }
+  if (ui.resultWorst) {
+    const worst = selected ? computeWorstColorScore(selected.run) : null;
+    ui.resultWorst.textContent = Number.isFinite(worst) ? `Worst color: ${formatVal(worst)}` : "Worst color: —";
+  }
 }
 
 function updateBgControls() {

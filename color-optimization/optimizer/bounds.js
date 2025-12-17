@@ -6,8 +6,6 @@ import {
 } from "../core/colorSpaces.js";
 import { quantiles, widthBounds } from "../core/stats.js";
 
-const MIN_EXPLORATION_WIDTH = 0.3; // normalized space
-
 export function computeBounds(normalized, colorSpace, config) {
   const channels = channelOrder[colorSpace];
   const values = (channel) => normalized.map((r) => r[channel]);
@@ -32,33 +30,18 @@ export function computeBounds(normalized, colorSpace, config) {
       const minVal = hasVals ? Math.min(...vals) : null;
       const maxVal = hasVals ? Math.max(...vals) : null;
       let b;
-      if (!hasVals || width <= 0) {
+      // If the user sets constraint width to 0%, treat it as "no constraint" for this channel.
+      // (Using safeInitBounds here makes the dashed outline appear inset even at 0%.)
+      if (!hasVals) {
         b = safeInitBounds(colorSpace, ch);
+      } else if (width <= 0) {
+        b = [0, 1];
       } else if (ch === "h") {
         b = computeHueBounds(vals, width);
       } else {
         const low = (1 - width) * 0 + width * minVal;
         const high = (1 - width) * 1 + width * maxVal;
         b = [Math.max(0, low), Math.min(1, high)];
-      }
-      // enforce a minimum exploration span (except hue)
-      if (ch !== "h") {
-        const span = b[1] - b[0];
-        if (span < MIN_EXPLORATION_WIDTH) {
-          const center = (b[0] + b[1]) / 2;
-          const half = MIN_EXPLORATION_WIDTH / 2;
-          let minB = center - half;
-          let maxB = center + half;
-          if (minB < 0) {
-            maxB = Math.min(1, maxB + (0 - minB));
-            minB = 0;
-          }
-          if (maxB > 1) {
-            minB = Math.max(0, minB - (maxB - 1));
-            maxB = 1;
-          }
-          b = [minB, maxB];
-        }
       }
       boundsByName[ch] = b;
       if (ch === "h") boundsH = b;
@@ -70,9 +53,33 @@ export function computeBounds(normalized, colorSpace, config) {
 }
 
 export function computeBoundsFromCurrent(colors, colorSpace, configLike = {}) {
-  if (!colors.length) return null;
-  const decoded = colors.map((hex) => decodeColor(hex, colorSpace));
   const ranges = csRanges[colorSpace];
+  if (!ranges) return null;
+  let decoded;
+  if (!colors.length) {
+    const mid = {};
+    (channelOrder[colorSpace] || []).forEach((ch) => {
+      if (ch === "h") {
+        mid[ch] = 0;
+        return;
+      }
+      if (ch === "c") {
+        // chroma behaves like an unbounded-above channel in common formulations
+        mid[ch] = 0;
+        return;
+      }
+      const min = ranges.min?.[ch];
+      const max = ranges.max?.[ch];
+      if (Number.isFinite(min) && Number.isFinite(max)) {
+        mid[ch] = (min + max) / 2;
+      } else {
+        mid[ch] = 0;
+      }
+    });
+    decoded = [mid];
+  } else {
+    decoded = colors.map((hex) => decodeColor(hex, colorSpace));
+  }
   const normalized = decoded.map((v) => normalizeWithRange(v, ranges, colorSpace));
   const bounds = computeBounds(normalized, colorSpace, configLike);
   return { ...bounds, ranges };

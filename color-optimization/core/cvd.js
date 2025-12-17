@@ -34,7 +34,14 @@ export function applyCvdRgb(rgb, type) {
 }
 
 export function applyCvdHex(hex, type) {
-  if (type === "none") return hex;
+  if (type === "none") {
+    if (typeof hex !== "string") return "#000000";
+    const m = hex.match(/#?[0-9a-fA-F]{6}/);
+    if (!m) return "#000000";
+    const clean = m[0].startsWith("#") ? m[0].toUpperCase() : `#${m[0].toUpperCase()}`;
+    return clean;
+  }
+  if (typeof hex !== "string") return "#000000";
   const rgb = hexToRgb(hex);
   const sim = applyCvdRgb(rgb, type);
   return rgbToHex(sim);

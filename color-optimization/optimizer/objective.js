@@ -19,6 +19,7 @@ import { computeBounds } from "./bounds.js";
 const PARAM_PENALTY_WEIGHT = 20;
 const GAMUT_PENALTY_WEIGHT = 80;
 const LOW_L_PENALTY = 400;
+const PENALTY_NORMALIZATION = 14.1; // legacy weight-sum scale (previous defaults summed to ~14.1)
 
 export function prepareData(palette, colorSpace, config) {
   const channels = channelOrder[colorSpace];
@@ -31,13 +32,13 @@ export function prepareData(palette, colorSpace, config) {
     encodeColor(unscaleWithRange(row, ranges, colorSpace), colorSpace)
   );
   const cvdStates = config.colorblindSafe ? ["deutan", "protan", "tritan", "none"] : ["none"];
-  const currLinear = decoded.map((row) => convertColorValues(row, colorSpace, "rgb"));
   const currLabsByState = {};
+  const clipToGamutOpt = config.clipToGamutOpt === true;
+  const gamutPreset = config.gamutPreset || "srgb";
   cvdStates.forEach((state) => {
-    currLabsByState[state] = currLinear.map((lin) => {
-      const sim = state === "none" ? lin : applyCvdLinear(lin, state);
-      return xyzToLab(linearRgbToXyz(sim));
-    });
+    currLabsByState[state] = decoded.map((row) =>
+      labForObjective(row, colorSpace, gamutPreset, state, clipToGamutOpt)
+    );
   });
   return {
     currCols: normalized,
@@ -47,11 +48,13 @@ export function prepareData(palette, colorSpace, config) {
     cvdStates,
     bounds,
     colorSpace,
-    gamutPreset: config.gamutPreset || "srgb",
+    gamutPreset,
+    clipToGamutOpt,
     ranges,
     colorblindWeights: config.colorblindWeights,
     colorblindSafe: config.colorblindSafe,
     nColsToAdd: config.nColsToAdd,
+    penaltyScale: PENALTY_NORMALIZATION,
   };
 }
 
@@ -97,14 +100,23 @@ export function meanDistance(par, prep, returnInfo) {
     }
   }
 
-  if (cn.includes("h") && bounds.boundsH) {
+  if (cn.includes("h")) {
     for (let i = 0; i < m.length; i++) {
-      const span = (bounds.boundsH[1] - bounds.boundsH[0] + 1) % 1 || 1;
-      let h = clamp(logistic(m[i].h), 0, 1);
-      h = (bounds.boundsH[0] + h * span) % 1;
-      const offset = ((h - bounds.boundsH[0] + 1) % 1);
+      const h01 = clamp(logistic(m[i].h), 0, 1);
+      const b = bounds.boundsH;
+      if (!b) {
+        m[i].h = h01;
+        continue;
+      }
+      const rawSpan = (b[1] - b[0] + 1) % 1;
+      const diff = b[1] - b[0];
+      // If b spans a full circle (e.g. [0,1] or [0.2,1.2]), keep it unconstrained.
+      // If rawSpan collapses to 0 but diff < 1, treat it as a tight arc (epsilon span).
+      const span = rawSpan === 0 ? (diff >= 0.999 ? 1 : 1e-6) : rawSpan;
+      let h = (b[0] + h01 * span) % 1;
+      const offset = ((h - b[0] + 1) % 1);
       if (offset > span) {
-        h = (bounds.boundsH[0] + span) % 1;
+        h = (b[0] + span) % 1;
       }
       m[i].h = h;
     }
@@ -131,11 +143,9 @@ export function meanDistance(par, prep, returnInfo) {
   const newLabsByState = {};
   const perColorDistances = Array.from({ length: scaled.length }, () => ({ sum: 0, count: 0 }));
   cvdStates.forEach((state) => {
-    newLabsByState[state] = scaled.map((row) => {
-      const lin = convertColorValues(row, colorSpace, "rgb");
-      const sim = state === "none" ? lin : applyCvdLinear(lin, state);
-      return xyzToLab(linearRgbToXyz(sim));
-    });
+    newLabsByState[state] = scaled.map((row) =>
+      labForObjective(row, colorSpace, prep.gamutPreset, state, prep.clipToGamutOpt)
+    );
   });
   const dists = {};
 
@@ -175,7 +185,9 @@ export function meanDistance(par, prep, returnInfo) {
 
   const penaltyWeight = 1e-3;
   const penalty = par.reduce((acc, v) => acc + v * v, 0);
-  const penaltyTotal = paramPenalty + gamutPenalty + penaltyWeight * penalty;
+  const penaltyRaw = paramPenalty + gamutPenalty + penaltyWeight * penalty;
+  const penaltyScale = prep.penaltyScale || 1;
+  const penaltyTotal = penaltyRaw / penaltyScale;
   const value = -wd + penaltyTotal;
 
   if (returnInfo) {
@@ -183,12 +195,13 @@ export function meanDistance(par, prep, returnInfo) {
       const dist = perColorDistances[idx];
       const avgDist = dist.count ? dist.sum / dist.count : 0;
       const gamutDist = Math.sqrt(perRowGamut[idx].distSq || 0);
-      const totalContribution = avgDist + perRowPenalties[idx].penalty + perRowGamut[idx].penalty;
+      const rowPenalty = (perRowPenalties[idx].penalty + perRowGamut[idx].penalty) / penaltyScale;
+      const totalContribution = avgDist + rowPenalty;
       return {
         hex: newHex[idx],
         channels: row,
         distance: avgDist,
-        penalty: perRowPenalties[idx].penalty + perRowGamut[idx].penalty,
+        penalty: rowPenalty,
         gamutDistance: gamutDist,
         total: totalContribution,
       };
@@ -200,8 +213,8 @@ export function meanDistance(par, prep, returnInfo) {
       newRaw: scaled.map((row) => ({ ...row })),
       distance: wd,
       penalty: penaltyTotal,
-      paramPenalty,
-      gamutPenalty,
+      paramPenalty: paramPenalty / penaltyScale,
+      gamutPenalty: gamutPenalty / penaltyScale,
       details,
       colorSpace,
     };
@@ -260,4 +273,22 @@ function gamutPenaltyForRow(row, space, gamutPreset = "srgb") {
   const db = Math.max(0, -lin.b, lin.b - 1);
   const distSq = dr * dr + dg * dg + db * db;
   return { penalty: GAMUT_PENALTY_WEIGHT * distSq, distSq };
+}
+
+function labForObjective(row, space, gamutPreset, cvdState, clipToGamutOpt) {
+  const xyz = convertColorValues(row, space, "xyz");
+  const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
+  let lin;
+  if (clipToGamutOpt) {
+    const from = gamut?.fromXYZ ? gamut.fromXYZ : (x, y, z) => xyzToLinearRgb({ x, y, z });
+    const out = from(xyz.x, xyz.y, xyz.z);
+    lin = { r: clamp(out.r, 0, 1), g: clamp(out.g, 0, 1), b: clamp(out.b, 0, 1) };
+  } else {
+    lin = xyzToLinearRgb(xyz);
+  }
+  const sim = cvdState === "none" ? lin : applyCvdLinear(lin, cvdState);
+  const xyzSim = clipToGamutOpt
+    ? gamut.toXYZ(sim.r, sim.g, sim.b)
+    : linearRgbToXyz(sim);
+  return xyzToLab(xyzSim);
 }

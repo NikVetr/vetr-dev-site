@@ -12,10 +12,10 @@ export function getWidths(ui) {
 
 export function readConfig(ui, state) {
   const colorblindWeights = {
-    none: parseFloat(ui.wNone.value) || 0,
-    deutan: parseFloat(ui.wDeutan.value) || 0,
-    protan: parseFloat(ui.wProtan.value) || 0,
-    tritan: parseFloat(ui.wTritan.value) || 0,
+    none: (parseFloat(ui.wNone.value) || 0) / 100,
+    deutan: (parseFloat(ui.wDeutan.value) || 0) / 100,
+    protan: (parseFloat(ui.wProtan.value) || 0) / 100,
+    tritan: (parseFloat(ui.wTritan.value) || 0) / 100,
   };
   state.lastRuns = Math.max(1, parseInt(ui.optimRuns.value, 10) || 20);
   const widths = getWidths(ui);
@@ -23,6 +23,7 @@ export function readConfig(ui, state) {
     colorSpace: ui.colorSpace.value,
     colorwheelSpace: ui.colorwheelSpace.value,
     gamutPreset: ui.gamutPreset?.value || "srgb",
+    clipToGamutOpt: ui.clipGamutOpt?.checked || false,
     nColsToAdd: Math.max(1, parseInt(ui.colorsToAdd.value, 10) || 1),
     nOptimRuns: state.lastRuns,
     nmIterations: Math.max(10, parseInt(ui.nmIters.value, 10) || 260),

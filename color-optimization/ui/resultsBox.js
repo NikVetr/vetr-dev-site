@@ -1,17 +1,16 @@
 export function setResults(colors, ui) {
   const list = colors || [];
   const withQuotes = ui.formatQuotes?.checked;
-  const useCommas = ui.formatCommas?.checked;
-  const useLines = ui.formatLines?.checked;
+  const wrapR = ui.formatRC?.checked;
+  const wrapPy = ui.formatPyList?.checked;
+  const useCommas = ui.formatCommas?.checked || wrapR || wrapPy;
+  const useLines = ui.formatLines?.checked && !wrapR && !wrapPy;
   const mapped = list.map((c) => (withQuotes ? `"${c}"` : c));
   let txt;
-  if (useLines) {
-    txt = mapped.join("\n");
-  } else if (useCommas) {
-    txt = mapped.join(", ");
-  } else {
-    txt = mapped.join(" ");
-  }
+  const body = useLines ? mapped.join("\n") : useCommas ? mapped.join(", ") : mapped.join(" ");
+  if (wrapR) txt = `c(${mapped.join(", ")})`;
+  else if (wrapPy) txt = `[${mapped.join(", ")}]`;
+  else txt = body;
   ui.resultsBox.value = txt;
 }
 
