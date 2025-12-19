@@ -1,5 +1,6 @@
 import { applyCvdLinear } from "../core/cvd.js";
 import { deltaE2000 } from "../core/metrics.js";
+import { aggregateDistances } from "../core/means.js";
 import {
   channelOrder,
   convertColorValues,
@@ -11,10 +12,11 @@ import {
   normalizeWithRange,
   unscaleWithRange,
   xyzToLab,
+  xyzToOklab,
   GAMUTS,
 } from "../core/colorSpaces.js";
 import { clamp, logistic } from "../core/util.js";
-import { computeBounds } from "./bounds.js";
+import { computeBoundsFromCurrent } from "./bounds.js";
 
 const PARAM_PENALTY_WEIGHT = 20;
 const GAMUT_PENALTY_WEIGHT = 80;
@@ -27,29 +29,40 @@ export function prepareData(palette, colorSpace, config) {
   const ranges = csRanges[colorSpace];
   const normalized = decoded.map((vals) => normalizeWithRange(vals, ranges, colorSpace));
 
-  const bounds = computeBounds(normalized, colorSpace, config);
+  // Important: use the same bounds logic as the UI (including synthetic midpoints when palette is empty).
+  // Also: never let the optional background color dictate constraint bounds.
+  const boundsPalette = Array.isArray(config?.boundsPalette) ? config.boundsPalette : palette;
+  const bounds = computeBoundsFromCurrent(boundsPalette, colorSpace, config);
   const currHex = normalized.map((row) =>
     encodeColor(unscaleWithRange(row, ranges, colorSpace), colorSpace)
   );
   const cvdStates = config.colorblindSafe ? ["deutan", "protan", "tritan", "none"] : ["none"];
-  const currLabsByState = {};
+  const currCoordsByState = {};
   const clipToGamutOpt = config.clipToGamutOpt === true;
   const gamutPreset = config.gamutPreset || "srgb";
+  const cvdModel = config.cvdModel || "legacy";
+  const meanType = config.meanType || "harmonic";
+  const meanP = Number.isFinite(config.meanP) ? config.meanP : undefined;
+  const distanceMetric = config.distanceMetric || "de2000";
   cvdStates.forEach((state) => {
-    currLabsByState[state] = decoded.map((row) =>
-      labForObjective(row, colorSpace, gamutPreset, state, clipToGamutOpt)
+    currCoordsByState[state] = decoded.map((row) =>
+      coordsForObjective(row, colorSpace, gamutPreset, state, clipToGamutOpt, cvdModel, distanceMetric)
     );
   });
   return {
     currCols: normalized,
     currHex,
     currRaw: decoded,
-    currLabsByState,
+    currCoordsByState,
     cvdStates,
     bounds,
     colorSpace,
     gamutPreset,
     clipToGamutOpt,
+    cvdModel,
+    meanType,
+    meanP,
+    distanceMetric,
     ranges,
     colorblindWeights: config.colorblindWeights,
     colorblindSafe: config.colorblindSafe,
@@ -140,31 +153,41 @@ export function meanDistance(par, prep, returnInfo) {
   const perRowGamut = scaled.map((row) => gamutPenaltyForRow(row, colorSpace, prep.gamutPreset));
   const paramPenalty = perRowPenalties.reduce((acc, r) => acc + r.penalty, 0);
   const gamutPenalty = perRowGamut.reduce((acc, r) => acc + r.penalty, 0);
-  const newLabsByState = {};
+  const newCoordsByState = {};
   const perColorDistances = Array.from({ length: scaled.length }, () => ({ sum: 0, count: 0 }));
   cvdStates.forEach((state) => {
-    newLabsByState[state] = scaled.map((row) =>
-      labForObjective(row, colorSpace, prep.gamutPreset, state, prep.clipToGamutOpt)
+    newCoordsByState[state] = scaled.map((row) =>
+      coordsForObjective(
+        row,
+        colorSpace,
+        prep.gamutPreset,
+        state,
+        prep.clipToGamutOpt,
+        prep.cvdModel,
+        prep.distanceMetric
+      )
     );
   });
   const dists = {};
+  const distMetric = prep.distanceMetric || "de2000";
+  const distFn = (a, b) => distanceBetween(a, b, distMetric);
 
   for (const state of cvdStates) {
-    const nLabs = newLabsByState[state];
-    const cLabs = prep.currLabsByState[state];
+    const nCoords = newCoordsByState[state];
+    const cCoords = prep.currCoordsByState[state];
 
     const pairwise = [];
-    for (let i = 0; i < cLabs.length; i++) {
-      for (let j = 0; j < nLabs.length; j++) {
-        const d = deltaE2000(cLabs[i], nLabs[j]);
+    for (let i = 0; i < cCoords.length; i++) {
+      for (let j = 0; j < nCoords.length; j++) {
+        const d = distFn(cCoords[i], nCoords[j]);
         pairwise.push(d);
         perColorDistances[j].sum += d;
         perColorDistances[j].count += 1;
       }
     }
-    for (let i = 0; i < nLabs.length; i++) {
-      for (let j = i + 1; j < nLabs.length; j++) {
-        const d = deltaE2000(nLabs[i], nLabs[j]);
+    for (let i = 0; i < nCoords.length; i++) {
+      for (let j = i + 1; j < nCoords.length; j++) {
+        const d = distFn(nCoords[i], nCoords[j]);
         pairwise.push(d);
         perColorDistances[i].sum += d;
         perColorDistances[i].count += 1;
@@ -172,9 +195,7 @@ export function meanDistance(par, prep, returnInfo) {
         perColorDistances[j].count += 1;
       }
     }
-    const eps = 1e-6;
-    const hm = 1 / (pairwise.reduce((acc, v) => acc + 1 / Math.max(v, eps), 0) / pairwise.length);
-    dists[state] = hm;
+    dists[state] = aggregateDistances(pairwise, prep.meanType, prep.meanP);
   }
 
   const weights = colorblindWeights;
@@ -275,7 +296,7 @@ function gamutPenaltyForRow(row, space, gamutPreset = "srgb") {
   return { penalty: GAMUT_PENALTY_WEIGHT * distSq, distSq };
 }
 
-function labForObjective(row, space, gamutPreset, cvdState, clipToGamutOpt) {
+function coordsForObjective(row, space, gamutPreset, cvdState, clipToGamutOpt, cvdModel, distanceMetric) {
   const xyz = convertColorValues(row, space, "xyz");
   const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
   let lin;
@@ -286,9 +307,20 @@ function labForObjective(row, space, gamutPreset, cvdState, clipToGamutOpt) {
   } else {
     lin = xyzToLinearRgb(xyz);
   }
-  const sim = cvdState === "none" ? lin : applyCvdLinear(lin, cvdState);
+  const sim = cvdState === "none" ? lin : applyCvdLinear(lin, cvdState, 1, cvdModel);
   const xyzSim = clipToGamutOpt
     ? gamut.toXYZ(sim.r, sim.g, sim.b)
     : linearRgbToXyz(sim);
-  return xyzToLab(xyzSim);
+  const metric = (distanceMetric || "de2000").toLowerCase();
+  if (metric === "oklab76") return xyzToOklab(xyzSim);
+  return xyzToLab(xyzSim); // de2000 + lab76
+}
+
+function distanceBetween(a, b, metric) {
+  const m = (metric || "de2000").toLowerCase();
+  if (m === "de2000") return deltaE2000(a, b);
+  const dl = (a.l || 0) - (b.l || 0);
+  const da = (a.a || 0) - (b.a || 0);
+  const db = (a.b || 0) - (b.b || 0);
+  return Math.hypot(dl, da, db);
 }

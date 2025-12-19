@@ -99,7 +99,7 @@ export function updateChannelHeadings(ui, vizSpace, plotOrder = plotOrderDefault
   });
 }
 
-export function renderSwatchColumn(container, colors, type, shape) {
+export function renderSwatchColumn(container, colors, type, shape, cvdModel = "legacy") {
   container.innerHTML = "";
   if (!colors || !colors.length) {
     const empty = document.createElement("div");
@@ -112,7 +112,7 @@ export function renderSwatchColumn(container, colors, type, shape) {
   colors.forEach((c) => {
     const sw = document.createElement("div");
     sw.className = "swatch";
-    const sim = applyCvdHex(c, type);
+    const sim = applyCvdHex(c, type, 1, cvdModel);
     const splitPct = type === "none" ? 1 : 0.1;
     if (type === "none") {
       sw.style.background = sim;
@@ -138,6 +138,7 @@ export function renderSwatchColumn(container, colors, type, shape) {
 export function renderChannelBars(barObjs, current, added, type, state, ui, vizOpts = {}) {
   if (!barObjs) return;
   const barSpace = vizOpts.vizSpace || ui.colorwheelSpace.value || "hsl";
+  const cvdModel = ui?.cvdModel?.value || "legacy";
   const gamutMode = vizOpts.gamutMode || "auto";
   const clipToGamut = vizOpts.clipToGamut !== false;
   const gamutPreset = vizOpts.gamutPreset || "srgb";
@@ -171,7 +172,7 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
   barObjs.forEach((obj, idx) => {
     const cfg = configs[idx];
     obj.bar.innerHTML = "";
-    obj.bar.style.background = channelGradientForSpace(cfg.key, barSpace, type);
+    obj.bar.style.background = channelGradientForSpace(cfg.key, barSpace, type, cvdModel);
     obj.bar.dataset.key = cfg.key;
   });
 
@@ -206,49 +207,28 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
         const span = (high - low + 1) % 1 || 1;
         if (span >= 0.999) return;
         if (high < low) high += 1;
-        const segments = high > 1 ? [[low, 1], [0, high - 1]] : [[low, high]];
-        segments.forEach((seg) => {
-          const overlayWhite = document.createElement("div");
-          overlayWhite.style.position = "absolute";
-          overlayWhite.style.left = "-3px";
-          overlayWhite.style.right = "-3px";
-          overlayWhite.style.top = `${seg[0] * 100}%`;
-          overlayWhite.style.height = `${Math.max((seg[1] - seg[0]) * 100, 1)}%`;
-          overlayWhite.style.background = "rgba(255,255,255,0.12)";
-          overlayWhite.style.pointerEvents = "none";
-          overlayWhite.style.borderTop = "2px dashed rgba(255,255,255,0.9)";
-          overlayWhite.style.borderBottom = "2px dashed rgba(255,255,255,0.9)";
-          const overlayBlack = overlayWhite.cloneNode(false);
-          overlayBlack.style.background = "rgba(0,0,0,0.08)";
-          overlayBlack.style.borderTop = "2px dashed rgba(0,0,0,0.75)";
-          overlayBlack.style.borderBottom = "2px dashed rgba(0,0,0,0.75)";
-          bar.appendChild(overlayWhite);
-          bar.appendChild(overlayBlack);
-        });
+        const allowed = high > 1 ? [[low, 1], [0, high - 1]] : [[low, high]];
+        const excluded = complementSegments(allowed);
+        excluded.forEach(([a, b]) => addFadeSegment(bar, a, b));
+        // draw dashed boundaries at the constraint edges (not at 0/1 wrap edges)
+        if (high > 1) {
+          addBoundary(bar, low);
+          addBoundary(bar, high - 1);
+        } else {
+          addBoundary(bar, low);
+          addBoundary(bar, high);
+        }
       } else if (o.min !== undefined && o.max !== undefined) {
-        const heightPct = Math.max((o.max - o.min) * 100, 1);
-        const overlayWhite = document.createElement("div");
-        overlayWhite.style.position = "absolute";
-        overlayWhite.style.left = "-3px";
-        overlayWhite.style.right = "-3px";
-        overlayWhite.style.top = `${o.min * 100}%`;
-        overlayWhite.style.height = `${heightPct}%`;
-        overlayWhite.style.background = "rgba(255,255,255,0.12)";
-        overlayWhite.style.pointerEvents = "none";
-        overlayWhite.style.borderTop = "2px dashed rgba(255,255,255,0.9)";
-        overlayWhite.style.borderBottom = "2px dashed rgba(255,255,255,0.9)";
-        const overlayBlack = overlayWhite.cloneNode(false);
-        overlayBlack.style.background = "rgba(0,0,0,0.08)";
-        overlayBlack.style.borderTop = "2px dashed rgba(0,0,0,0.75)";
-        overlayBlack.style.borderBottom = "2px dashed rgba(0,0,0,0.75)";
-        bar.appendChild(overlayWhite);
-        bar.appendChild(overlayBlack);
+        addFadeSegment(bar, 0, o.min);
+        addFadeSegment(bar, o.max, 1);
+        addBoundary(bar, o.min);
+        addBoundary(bar, o.max);
       }
     });
   }
 
   combined.forEach((entry) => {
-    const sim = applyCvdHex(entry.color, type);
+    const sim = applyCvdHex(entry.color, type, 1, cvdModel);
     const decoded = clipToGamut ? clampToRange(entry.vals, presetRange, barSpace) : entry.vals;
     barObjs.forEach((obj, idx) => {
       const cfg = configs[idx];
@@ -277,6 +257,78 @@ function clamp01(v) {
   return Math.max(0, Math.min(1, v));
 }
 
+function addFadeSegment(bar, start, end) {
+  const a = clamp01(start);
+  const b = clamp01(end);
+  const span = b - a;
+  if (span <= 1e-6) return;
+  const el = document.createElement("div");
+  el.style.position = "absolute";
+  el.style.left = "-3px";
+  el.style.right = "-3px";
+  el.style.top = `${a * 100}%`;
+  el.style.height = `${Math.max(span * 100, 1)}%`;
+  el.style.background = "rgba(255,255,255,0.60)";
+  el.style.pointerEvents = "none";
+  bar.appendChild(el);
+}
+
+function addBoundary(bar, at) {
+  const y = clamp01(at) * 100;
+  const makeSolid = (color) => {
+    const el = document.createElement("div");
+    el.style.position = "absolute";
+    el.style.left = "-3px";
+    el.style.right = "-3px";
+    el.style.top = `${y}%`;
+    el.style.height = "2px";
+    el.style.transform = "translateY(-1px)";
+    el.style.pointerEvents = "none";
+    el.style.background = color;
+    return el;
+  };
+  const makeDashed = () => {
+    const el = document.createElement("div");
+    el.style.position = "absolute";
+    el.style.left = "-3px";
+    el.style.right = "-3px";
+    el.style.top = `${y}%`;
+    el.style.height = "2px";
+    el.style.transform = "translateY(-1px)";
+    el.style.pointerEvents = "none";
+    // Approximate canvas dash [6,4] using repeating-linear-gradient.
+    el.style.backgroundImage =
+      "repeating-linear-gradient(90deg, rgba(0,0,0,0.80) 0 6px, rgba(0,0,0,0) 6px 10px)";
+    return el;
+  };
+  // Solid white underlay + dashed black overlay (matches wheel/square styling).
+  bar.appendChild(makeSolid("rgba(255,255,255,0.95)"));
+  bar.appendChild(makeDashed());
+}
+
+function complementSegments(segments) {
+  if (!segments?.length) return [[0, 1]];
+  const sorted = segments
+    .map(([a, b]) => [clamp01(a), clamp01(b)])
+    .filter(([a, b]) => b > a + 1e-6)
+    .sort((x, y) => x[0] - y[0]);
+  if (!sorted.length) return [[0, 1]];
+  const merged = [];
+  sorted.forEach(([a, b]) => {
+    const last = merged[merged.length - 1];
+    if (!last || a > last[1] + 1e-6) merged.push([a, b]);
+    else last[1] = Math.max(last[1], b);
+  });
+  const out = [];
+  let cur = 0;
+  merged.forEach(([a, b]) => {
+    if (a > cur + 1e-6) out.push([cur, a]);
+    cur = Math.max(cur, b);
+  });
+  if (cur < 1 - 1e-6) out.push([cur, 1]);
+  return out;
+}
+
 export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpace, optSpace, gamutMode = "auto", vizOpts = {}) {
   const colors = parsePalette(ui.paletteInput.value);
   state.currentColors = colors;
@@ -289,8 +341,9 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
     const refs = ui.panelMap[type];
     if (!refs) return;
     refs.panel.style.display = "flex";
-    renderSwatchColumn(refs.currList, colors, type, "circle");
-    renderSwatchColumn(refs.newList, state.newColors, type, "square");
+    const cvdModel = ui?.cvdModel?.value || "legacy";
+    renderSwatchColumn(refs.currList, colors, type, "circle", cvdModel);
+    renderSwatchColumn(refs.newList, state.newColors, type, "square", cvdModel);
     renderChannelBars(refs.channelBars, state.currentColors, state.newColors, type, state, ui, {
       vizSpace: resolvedVizSpace,
       gamutMode,

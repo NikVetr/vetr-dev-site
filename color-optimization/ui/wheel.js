@@ -22,6 +22,7 @@ export function drawWheel(type, ui, state, opts = {}) {
   const gamutMode = opts.gamutMode || "auto";
   const clipToGamut = opts.clipToGamut === true || opts.clipToGamut === false ? opts.clipToGamut : false;
   const gamutPreset = opts.gamutPreset || "srgb";
+  const cvdModel = opts.cvdModel || ui?.cvdModel?.value || "legacy";
   const presetLabel = gamutPresets[gamutPreset]?.label || gamutPreset;
   const wheelSpace = opts.vizSpace || ui.colorwheelSpace.value;
   const canvas = refs.canvas;
@@ -113,7 +114,7 @@ export function drawWheel(type, ui, state, opts = {}) {
         const b = (1 - (yi + 0.5) / steps) * 2 * maxC - maxC;
         const lVal = wheelSpace === "lab" ? 75 : 0.75;
         const hex = encodeColor({ l: lVal, a, b }, wheelSpace);
-        ctx.fillStyle = applyCvdHex(hex, type);
+        ctx.fillStyle = applyCvdHex(hex, type, 1, cvdModel);
         const px = cx - radius + (xi / steps) * squareSize;
         const py = cy - radius + (yi / steps) * squareSize;
         ctx.fillRect(px, py, squareSize / steps, squareSize / steps);
@@ -128,7 +129,7 @@ export function drawWheel(type, ui, state, opts = {}) {
         const r1 = (r + 1) / slicesR;
         const hue = ((t + 0.5) / slicesT) * 360;
         const chroma = (r + 0.5) / slicesR;
-        const color = applyCvdHex(makeWheelColor(hue, chroma, wheelSpace), type);
+        const color = applyCvdHex(makeWheelColor(hue, chroma, wheelSpace), type, 1, cvdModel);
 
         ctx.beginPath();
         ctx.moveTo(cx + radius * r0 * Math.cos(t0), cy + radius * r0 * Math.sin(t0));
@@ -258,24 +259,81 @@ export function drawWheel(type, ui, state, opts = {}) {
       ? (state.bounds.boundsH[1] - state.bounds.boundsH[0] + 1) % 1
       : null;
 
-    if (
+    const hueConstrained =
       hasHue &&
-      scKey &&
       state.bounds.boundsH &&
+      !isFull01(state.bounds.boundsH) &&
       hueSpanNorm !== null &&
       hueSpanNorm > 0 &&
-      hueSpanNorm < 0.999
-    ) {
-      if (isFull01(state.bounds.boundsH) || isFull01(state.bounds.boundsByName?.[scKey])) {
-        // unconstrained in hue and/or chroma -> skip overlay
-      } else {
+      hueSpanNorm < 0.999;
+    const scBounds = scKey ? state.bounds.boundsByName?.[scKey] : null;
+    const scConstrained = scKey && scBounds && !isFull01(scBounds);
+    const shadeExcludedEvenOdd = (shadeStyle, drawFullPath, drawAllowedPath) => {
+      ctx.save();
+      ctx.fillStyle = shadeStyle;
+      ctx.beginPath();
+      drawFullPath();
+      drawAllowedPath();
+      ctx.fill("evenodd");
+      ctx.restore();
+    };
+
+    // Draw overlays independently: hue-only should still render even if chroma is unconstrained.
+    if (!isRectWheel && (hueConstrained || scConstrained)) {
+      const start = state.bounds.boundsH ? state.bounds.boundsH[0] * 2 * Math.PI : 0;
+      const span = hueSpanNorm != null ? hueSpanNorm * 2 * Math.PI : 2 * Math.PI;
+      const end = start + span;
+      let r0 = 0;
+      let r1 = radius;
+      if (scConstrained) {
+        const toVal = (bnd, min, max) => min + bnd * (max - min);
+        const minVal = toVal(scBounds[0], baseRange.min[scKey], baseRange.max[scKey]);
+        const maxVal = toVal(scBounds[1], baseRange.min[scKey], baseRange.max[scKey]);
+        const maxSC = scKey === "s" ? ranges.max.s : ranges.max.c;
+        r0 = clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
+        r1 = clamp(maxVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
+      }
+      const drawFull = () => {
+        ctx.moveTo(cx + radius, cy);
+        ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+      };
+      const drawAllowed = () => {
+        if (hueConstrained && scConstrained) {
+          ctx.moveTo(cx + r1 * Math.cos(start), cy + r1 * Math.sin(start));
+          ctx.arc(cx, cy, r1, start, end);
+          if (r0 > 1e-3) {
+            ctx.lineTo(cx + r0 * Math.cos(end), cy + r0 * Math.sin(end));
+            ctx.arc(cx, cy, r0, end, start, true);
+          } else {
+            ctx.lineTo(cx, cy);
+          }
+          ctx.closePath();
+          return;
+        }
+        if (hueConstrained) {
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, radius, start, end);
+          ctx.closePath();
+          return;
+        }
+        // chroma-only
+        ctx.moveTo(cx + r1, cy);
+        ctx.arc(cx, cy, r1, 0, 2 * Math.PI);
+        if (r0 > 1e-3) {
+          ctx.moveTo(cx + r0, cy);
+          ctx.arc(cx, cy, r0, 0, 2 * Math.PI);
+        }
+      };
+      shadeExcludedEvenOdd("rgba(255,255,255,0.60)", drawFull, drawAllowed);
+    }
+
+    if (hueConstrained && scConstrained) {
       let a0 = state.bounds.boundsH[0] * 2 * Math.PI;
       let a1 = state.bounds.boundsH[1] * 2 * Math.PI;
       while (a1 <= a0) a1 += 2 * Math.PI;
-      const b = state.bounds.boundsByName?.[scKey];
       const toVal = (bnd, min, max) => min + bnd * (max - min);
-      const minVal = toVal(b[0], baseRange.min[scKey], baseRange.max[scKey]);
-      const maxVal = toVal(b[1], baseRange.min[scKey], baseRange.max[scKey]);
+      const minVal = toVal(scBounds[0], baseRange.min[scKey], baseRange.max[scKey]);
+      const maxVal = toVal(scBounds[1], baseRange.min[scKey], baseRange.max[scKey]);
       const maxSC = scKey === "s" ? ranges.max.s : ranges.max.c;
       const r0 = clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
       const r1 = clamp(maxVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
@@ -290,13 +348,11 @@ export function drawWheel(type, ui, state, opts = {}) {
       }
       ctx.closePath();
       strokeOverlay();
-      }
     } else {
-      if (scKey && state.bounds.boundsByName?.[scKey] && !isFull01(state.bounds.boundsByName[scKey])) {
-        const b = state.bounds.boundsByName[scKey];
+      if (scConstrained) {
         const toVal = (bnd, min, max) => min + bnd * (max - min);
-        const minVal = toVal(b[0], baseRange.min[scKey], baseRange.max[scKey]);
-        const maxVal = toVal(b[1], baseRange.min[scKey], baseRange.max[scKey]);
+        const minVal = toVal(scBounds[0], baseRange.min[scKey], baseRange.max[scKey]);
+        const maxVal = toVal(scBounds[1], baseRange.min[scKey], baseRange.max[scKey]);
         const maxSC = scKey === "s" ? ranges.max.s : ranges.max.c;
         const rMin = clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
         const rMax = clamp(maxVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
@@ -307,7 +363,7 @@ export function drawWheel(type, ui, state, opts = {}) {
         ctx.arc(cx, cy, rMax, 0, 2 * Math.PI);
         strokeOverlay();
       }
-      if (hasHue && state.bounds.boundsH && !isFull01(state.bounds.boundsH) && hueSpanNorm !== null && hueSpanNorm > 0 && hueSpanNorm < 0.999) {
+      if (hueConstrained) {
         const start = state.bounds.boundsH[0] * 2 * Math.PI;
         const span = hueSpanNorm * 2 * Math.PI;
         ctx.beginPath();
@@ -322,29 +378,41 @@ export function drawWheel(type, ui, state, opts = {}) {
       const aBounds = state.bounds.boundsByName.a;
       const bBounds = state.bounds.boundsByName.b;
       if (aBounds && bBounds) {
-        if (isFull01(aBounds) && isFull01(bBounds)) return;
-        const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
-        const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
-        const maxRectC = Math.min(maxA, maxB) || 1;
-        const toVal = (bnd, min, max) => min + bnd * (max - min);
-        const aMin = toVal(aBounds[0], baseRange.min.a, baseRange.max.a);
-        const aMax = toVal(aBounds[1], baseRange.min.a, baseRange.max.a);
-        const bMin = toVal(bBounds[0], baseRange.min.b, baseRange.max.b);
-        const bMax = toVal(bBounds[1], baseRange.min.b, baseRange.max.b);
-        const x0 = cx + clamp(aMin / maxRectC, -1, 1) * radius;
-        const x1 = cx + clamp(aMax / maxRectC, -1, 1) * radius;
-        const y0 = cy - clamp(bMax / maxRectC, -1, 1) * radius;
-        const y1 = cy - clamp(bMin / maxRectC, -1, 1) * radius;
+        if (!(isFull01(aBounds) && isFull01(bBounds))) {
+          const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
+          const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
+          const maxRectC = Math.min(maxA, maxB) || 1;
+          const toVal = (bnd, min, max) => min + bnd * (max - min);
+          const aMin = toVal(aBounds[0], baseRange.min.a, baseRange.max.a);
+          const aMax = toVal(aBounds[1], baseRange.min.a, baseRange.max.a);
+          const bMin = toVal(bBounds[0], baseRange.min.b, baseRange.max.b);
+          const bMax = toVal(bBounds[1], baseRange.min.b, baseRange.max.b);
+          const x0 = cx + clamp(aMin / maxRectC, -1, 1) * radius;
+          const x1 = cx + clamp(aMax / maxRectC, -1, 1) * radius;
+          const y0 = cy - clamp(bMax / maxRectC, -1, 1) * radius;
+          const y1 = cy - clamp(bMin / maxRectC, -1, 1) * radius;
 
-        ctx.setLineDash([]);
-        ctx.strokeStyle = "rgba(255,255,255,0.9)";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0));
-        ctx.setLineDash([6, 4]);
-        ctx.strokeStyle = "rgba(0,0,0,0.75)";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0));
-        ctx.setLineDash([]);
+          // Shade excluded region outside the constraint rectangle (even-odd).
+          shadeExcludedEvenOdd(
+            "rgba(255,255,255,0.60)",
+            () => {
+              ctx.rect(cx - radius, cy - radius, radius * 2, radius * 2);
+            },
+            () => {
+              ctx.rect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0));
+            }
+          );
+
+          ctx.setLineDash([]);
+          ctx.strokeStyle = "rgba(255,255,255,0.9)";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0));
+          ctx.setLineDash([6, 4]);
+          ctx.strokeStyle = "rgba(0,0,0,0.75)";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0));
+          ctx.setLineDash([]);
+        }
       }
     }
   }
@@ -357,7 +425,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
   // draw points above overlays
   coords.forEach((pt) => {
-    const fill = applyCvdHex(pt.displayColor || pt.color, type);
+    const fill = applyCvdHex(pt.displayColor || pt.color, type, 1, cvdModel);
     ctx.beginPath();
     const sizePt = 6 + 12 * pt.lNorm;
     if (pt.shape === "square") {
@@ -505,7 +573,7 @@ export function makeWheelColor(hueDeg, chromaNorm, wheelSpace) {
   return encodeColor({ h: hueDeg, s: chromaNorm * 100, l: fixedL * 100 }, "hsl");
 }
 
-export function channelGradientForSpace(key, space, type) {
+export function channelGradientForSpace(key, space, type, cvdModel = "legacy") {
   const stops = 24;
   const colors = [];
   const hueStart = 285;
@@ -530,7 +598,7 @@ export function channelGradientForSpace(key, space, type) {
     } else {
       hex = encodeColor({ ...zeroChannels(space), l: midL(space) }, space);
     }
-    colors.push(applyCvdHex(hex, type));
+    colors.push(applyCvdHex(hex, type, 1, cvdModel));
   }
   const gradient = colors.map((c, idx) => `${c} ${(idx / stops) * 100}%`).join(", ");
   return `linear-gradient(180deg, ${gradient})`;

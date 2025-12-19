@@ -94,6 +94,44 @@
               </select>
             </div>
           </div>
+          <div class="field">
+            <label for="cvd-model">CVD model</label>
+            <select id="cvd-model">
+              <option value="legacy">Legacy (gamma RGB matrix)</option>
+              <option value="machado2009">Machado 2009 (linear RGB)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="distance-metric">Distance metric</label>
+            <select id="distance-metric">
+              <option value="de2000">ΔE2000 (Lab)</option>
+              <option value="oklab76">ΔE76 (Euclidean in OKLab)</option>
+              <option value="lab76">ΔE76 (Euclidean in Lab)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="mean-type">Distance aggregation</label>
+            <select id="mean-type">
+              <optgroup label="-- recommended --">
+                <option value="harmonic">Harmonic mean</option>
+                <option value="lehmer">Lehrer mean</option>
+                <option value="power">Power mean</option>
+                <option value="minimum">Minimum (worst-case)</option>
+              </optgroup>
+              <optgroup label="-- not recommended --">
+                <option value="geometric">Geometric mean</option>
+                <option value="arithmetic">Arithmetic mean</option>
+                <option value="quadratic">Quadratic mean (RMS)</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="field" id="mean-p-row" hidden>
+            <label for="mean-p">p</label>
+            <div class="inline-row compact between">
+              <input id="mean-p" type="range" min="-10" max="10" step="0.1" value="-2">
+              <span id="mean-p-val" class="result-chip">-2.0</span>
+            </div>
+          </div>
           <div class="field two-col">
             <div>
               <label for="colors-to-add">Colors to add</label>
@@ -204,12 +242,21 @@
               <input id="result-rank" type="number" min="1" value="1" aria-label="Result rank">
               <span>Best Result</span>
               <span id="result-total" class="result-total">(of 0)</span>
+              <span id="result-rank-all" class="result-rank-all">#—/—</span>
             </div>
             <button id="result-next" type="button" aria-label="Next result" class="result-nav-btn">›</button>
           </div>
           <div class="result-nav-meta">
             <span id="result-score" class="result-chip">Score: —</span>
             <span id="result-worst" class="result-chip">Worst color: —</span>
+            <div class="uniqueness-control" aria-label="Uniqueness filter">
+              <label for="uniqueness" class="uniqueness-label">uniqueness</label>
+              <input id="uniqueness" type="range" min="0" max="100" step="1" value="0">
+              <span id="uniqueness-val" class="result-chip">0%</span>
+            </div>
+            <span id="clip-gamut-warning" class="clip-warning" hidden>
+              Note: constraints are applied in the raw optimization space; gamut clipping for visualization can move the displayed point outside the dashed constraint outline.
+            </span>
           </div>
         </div>
         <section id="panels" class="panels"></section>

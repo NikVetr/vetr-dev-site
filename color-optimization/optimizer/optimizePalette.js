@@ -3,6 +3,7 @@ import { randomNormalArray } from "../core/random.js";
 import { nelderMead } from "./nelderMead.js";
 import { objectiveInfo, objectiveValue, prepareData } from "./objective.js";
 import { deltaE2000 } from "../core/metrics.js";
+import { aggregateDistances } from "../core/means.js";
 
 export async function optimizePalette(palette, config, { onProgress, onVerbose } = {}) {
   const colorSpace = config.colorSpace;
@@ -17,7 +18,14 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   for (let run = 0; run < config.nOptimRuns; run++) {
     const start = Array.from({ length: dim }, () => logit(Math.random()));
     const startInfo = objectiveInfo(start, prep);
-    const startDetails = attachMeta(startInfo.details, startInfo.newHex, startInfo.newRaw, colorSpace, conditioningHexes);
+    const startDetails = attachMeta(
+      startInfo.details,
+      startInfo.newHex,
+      startInfo.newRaw,
+      colorSpace,
+      conditioningHexes,
+      prep
+    );
     if (onVerbose) {
       onVerbose({
         stage: "start",
@@ -40,7 +48,14 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
       { maxIterations: config.nmIterations, step: 1.2 }
     );
     const endInfo = objectiveInfo(res.x, prep);
-    const endDetails = attachMeta(endInfo.details, endInfo.newHex, endInfo.newRaw, colorSpace, conditioningHexes);
+    const endDetails = attachMeta(
+      endInfo.details,
+      endInfo.newHex,
+      endInfo.newRaw,
+      colorSpace,
+      conditioningHexes,
+      prep
+    );
     if (onVerbose) {
       onVerbose({
         stage: "end",
@@ -95,7 +110,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   }
   // Final meta for best run (influences, closest)
   if (best.newHex?.length) {
-    const metaDetails = computeInfluences(best.newHex, conditioningHexes);
+    const metaDetails = computeInfluences(best.newHex, conditioningHexes, prep);
     if (onVerbose) {
       onVerbose({
         stage: "final-best",
@@ -116,31 +131,43 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   return best;
 }
 
-function computeInfluences(hexes, conditioningHexes = []) {
+function computeInfluences(hexes, conditioningHexes = [], prepLike = {}) {
   const newHexes = hexes || [];
   const currHexes = conditioningHexes || [];
-  const allHexes = [...currHexes, ...newHexes];
   const offset = currHexes.length;
-  const nAll = allHexes.length;
   if (newHexes.length === 0) return [];
 
-  const labs = allHexes.map((h) => decodeColor(h, "lab"));
-  if (nAll < 2) return newHexes.map((h) => ({ hex: h }));
+  const metric = (prepLike.distanceMetric || "de2000").toLowerCase();
+  const meanType = prepLike.meanType || "harmonic";
+  const meanP = prepLike.meanP;
+
+  const decodeSpace = metric === "oklab76" ? "oklab" : "lab";
+  const currCoords = currHexes.map((h) => decodeColor(h, decodeSpace));
+  const newCoords = newHexes.map((h) => decodeColor(h, decodeSpace));
+
+  if (currCoords.length + newCoords.length < 2) return newHexes.map((h) => ({ hex: h }));
 
   const pairwise = [];
-  for (let i = 0; i < nAll; i++) {
-    for (let j = i + 1; j < nAll; j++) {
-      const d = deltaE2000(labs[i], labs[j]);
-      pairwise.push({ i, j, d });
+  // Match the optimization distance structure: cross(curr,new) + within(new), not within(curr).
+  for (let i = 0; i < currCoords.length; i++) {
+    for (let j = 0; j < newCoords.length; j++) {
+      const d = distanceBetween(currCoords[i], newCoords[j], metric);
+      pairwise.push({ i, j: offset + j, d });
+    }
+  }
+  for (let i = 0; i < newCoords.length; i++) {
+    for (let j = i + 1; j < newCoords.length; j++) {
+      const d = distanceBetween(newCoords[i], newCoords[j], metric);
+      pairwise.push({ i: offset + i, j: offset + j, d });
     }
   }
 
-  const hmAll = harmonicMean(pairwise.map((p) => p.d));
+  const allAgg = aggregateDistances(pairwise.map((p) => p.d), meanType, meanP);
   const influences = [];
   for (let localIdx = 0; localIdx < newHexes.length; localIdx++) {
     const i = offset + localIdx;
     const remaining = pairwise.filter((p) => p.i !== i && p.j !== i).map((p) => p.d);
-    const hmWithout = remaining.length ? harmonicMean(remaining) : hmAll;
+    const aggWithout = remaining.length ? aggregateDistances(remaining, meanType, meanP) : allAgg;
     const closest = pairwise
       .filter((p) => p.i === i || p.j === i)
       .reduce(
@@ -153,8 +180,11 @@ function computeInfluences(hexes, conditioningHexes = []) {
       );
     influences.push({
       hex: newHexes[localIdx],
-      influence: hmAll - hmWithout,
-      closestHex: closest.idx != null ? allHexes[closest.idx] : "",
+      influence: allAgg - aggWithout,
+      closestHex:
+        closest.idx != null
+          ? (closest.idx < offset ? currHexes[closest.idx] : newHexes[closest.idx - offset])
+          : "",
       closestDist: Number.isFinite(closest.dist) ? closest.dist : null,
     });
   }
@@ -174,9 +204,9 @@ function harmonicMean(arr) {
   return arr.length / sum;
 }
 
-function attachMeta(details, hexes, raws, space, conditioningHexes = []) {
+function attachMeta(details, hexes, raws, space, conditioningHexes = [], prepLike = {}) {
   if (!details || !details.length) return details;
-  const inf = computeInfluences(hexes, conditioningHexes);
+  const inf = computeInfluences(hexes, conditioningHexes, prepLike);
   const byHex = {};
   inf.forEach((entry) => {
     byHex[entry.hex] = entry;
@@ -191,4 +221,13 @@ function attachMeta(details, hexes, raws, space, conditioningHexes = []) {
       closestDist: meta.closestDist,
     };
   });
+}
+
+function distanceBetween(a, b, metric) {
+  const m = (metric || "de2000").toLowerCase();
+  if (m === "de2000") return deltaE2000(a, b);
+  const dl = (a.l || 0) - (b.l || 0);
+  const da = (a.a || 0) - (b.a || 0);
+  const db = (a.b || 0) - (b.b || 0);
+  return Math.hypot(dl, da, db);
 }

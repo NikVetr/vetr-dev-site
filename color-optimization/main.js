@@ -1,6 +1,6 @@
 import { defaultPalette, plotOrder } from "./config.js";
-import { channelOrder } from "./core/colorSpaces.js";
-import { contrastColor } from "./core/metrics.js";
+import { channelOrder, decodeColor } from "./core/colorSpaces.js";
+import { contrastColor, deltaE2000 } from "./core/metrics.js";
 import { computeBoundsFromCurrent } from "./optimizer/bounds.js";
 import { optimizePalette } from "./optimizer/optimizePalette.js";
 import { getUIRefs } from "./ui/domRefs.js";
@@ -27,11 +27,17 @@ const cvdScores = {
   tritan: 0,
 };
 
+let uniquenessValue = 0;
+let lastOptSpace = null;
+
+const DEFAULT_L_WIDTH = 0.65;
+
 function currentVizOpts() {
   return {
     clipToGamut: ui?.clipGamut ? ui.clipGamut.checked : false,
     gamutPreset: ui?.gamutPreset?.value || "srgb",
     gamutMode: ui?.gamutMode?.value || "auto",
+    cvdModel: ui?.cvdModel?.value || "legacy",
   };
 }
 
@@ -53,15 +59,18 @@ function setDefaultValues() {
   ui.colorwheelSpace.value = "oklab";
   if (ui.gamutMode) ui.gamutMode.value = "auto";
   if (ui.gamutPreset) ui.gamutPreset.value = "srgb";
+  if (ui.cvdModel) ui.cvdModel.value = "legacy";
+  if (ui.distanceMetric) ui.distanceMetric.value = "de2000";
+  if (ui.meanType) ui.meanType.value = "harmonic";
+  if (ui.meanP) ui.meanP.value = "-2";
   if (ui.clipGamut) ui.clipGamut.checked = false;
   if (ui.clipGamutOpt) ui.clipGamutOpt.checked = true;
   if (ui.syncSpaces) ui.syncSpaces.checked = true;
   ui.colorsToAdd.value = "3";
   ui.optimRuns.value = "100";
   ui.nmIters.value = "260";
-  ui.wH.value = "0";
-  ui.wSC.value = "0";
-  ui.wL.value = "0";
+  applyConstraintWidthDefaults(ui.colorSpace.value);
+  lastOptSpace = ui.colorSpace.value;
   ui.wNone.value = "50.0";
   ui.wDeutan.value = "40.0";
   ui.wProtan.value = "8.0";
@@ -81,6 +90,11 @@ function setDefaultValues() {
   normalizeAndUpdateWeights();
   updateWidthLabels();
   updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
+  updateClipWarning();
+  updateMeanControls(true);
+  if (ui.uniqueness) ui.uniqueness.value = "0";
+  if (ui.uniquenessVal) ui.uniquenessVal.textContent = "0%";
+  uniquenessValue = 0;
   state.lastRuns = Math.max(1, parseInt(ui.optimRuns.value, 10) || 20);
   state.newColors = [];
   state.rawCurrentColors = [];
@@ -105,6 +119,58 @@ function setDefaultValues() {
 
 function clampNum(v, lo, hi) {
   return Math.max(lo, Math.min(hi, v));
+}
+
+function parseWidthVal(v) {
+  const n = parseFloat(v);
+  return Number.isFinite(n) ? clampNum(n, 0, 1) : 0;
+}
+
+function channelSlotsForSpace(space) {
+  const channels = channelOrder[space] || [];
+  const first = channels[0] || "h";
+  const third = channels[2] || "l";
+  const scChannel = channels.find((c) => c === "s" || c === "c") || channels[1] || "s";
+  return { first, scChannel, third };
+}
+
+function defaultWidthForChannel(ch) {
+  return ch === "l" ? DEFAULT_L_WIDTH : 0;
+}
+
+function constraintWidthMapForSpace(space) {
+  const { first, scChannel, third } = channelSlotsForSpace(space);
+  return {
+    [first]: parseWidthVal(ui.wH.value),
+    [scChannel]: parseWidthVal(ui.wSC.value),
+    [third]: parseWidthVal(ui.wL.value),
+  };
+}
+
+function mappedWidthForChannel(ch, prevMap) {
+  if (prevMap && Object.prototype.hasOwnProperty.call(prevMap, ch)) return prevMap[ch];
+  if (ch === "c" && prevMap && Object.prototype.hasOwnProperty.call(prevMap, "s")) return prevMap.s;
+  if (ch === "s" && prevMap && Object.prototype.hasOwnProperty.call(prevMap, "c")) return prevMap.c;
+  return defaultWidthForChannel(ch);
+}
+
+function applyConstraintWidthsForSpace(space, prevMap) {
+  const { first, scChannel, third } = channelSlotsForSpace(space);
+  ui.wH.value = String(mappedWidthForChannel(first, prevMap));
+  ui.wSC.value = String(mappedWidthForChannel(scChannel, prevMap));
+  ui.wL.value = String(mappedWidthForChannel(third, prevMap));
+}
+
+function applyConstraintWidthDefaults(space) {
+  applyConstraintWidthsForSpace(space, null);
+  updateWidthChips();
+}
+
+function remapConstraintWidths(prevSpace, nextSpace) {
+  const prev = prevSpace || nextSpace;
+  const prevMap = prev ? constraintWidthMapForSpace(prev) : null;
+  applyConstraintWidthsForSpace(nextSpace, prevMap);
+  updateWidthChips();
 }
 
 function normalizeAndUpdateWeights(changedKey = null) {
@@ -212,11 +278,15 @@ function attachEventListeners() {
   ui.bgColor?.addEventListener("change", () => updateBgControls());
 
   ui.colorSpace.addEventListener("change", () => {
+    const nextSpace = ui.colorSpace.value;
+    remapConstraintWidths(lastOptSpace, nextSpace);
+    lastOptSpace = nextSpace;
     updateWidthLabels();
     if (ui.syncSpaces?.checked) {
       ui.colorwheelSpace.value = ui.colorSpace.value;
       updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
     }
+    updateClipWarning();
     updateBoundsAndRefresh();
     drawStatusMini(state, ui, currentVizOpts());
   });
@@ -237,7 +307,21 @@ function attachEventListeners() {
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
   });
+  ui.cvdModel?.addEventListener("change", () => {
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
+  });
+  ui.distanceMetric?.addEventListener("change", () => {
+    // affects optimization only; no immediate redraw needed
+  });
+  ui.meanType?.addEventListener("change", () => {
+    updateMeanControls(true);
+  });
+  ui.meanP?.addEventListener("input", () => {
+    updateMeanControls(false);
+  });
   ui.clipGamut?.addEventListener("change", () => {
+    updateClipWarning();
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
   });
@@ -251,6 +335,13 @@ function attachEventListeners() {
     if (Number.isFinite(val)) {
       changeResultSelection(val, true);
     }
+  });
+  ui.uniqueness?.addEventListener("input", () => {
+    uniquenessValue = clampNum(parseFloat(ui.uniqueness.value) || 0, 0, 100);
+    if (ui.uniquenessVal) ui.uniquenessVal.textContent = `${Math.round(uniquenessValue)}%`;
+    applyUniquenessFilter();
+    if (state.runRanking?.length) applySelectedResult({ skipNavUpdate: true });
+    updateResultNavigator();
   });
   ui.syncSpaces?.addEventListener("change", () => {
     if (ui.syncSpaces.checked) {
@@ -268,6 +359,7 @@ function attachEventListeners() {
     drawStatusMini(state, ui, currentVizOpts());
     state.runResults = [];
     state.runRanking = [];
+    state.runRankingAll = [];
     state.selectedResultIdx = null;
     state.bestScores = [];
     state.nmTrails = [];
@@ -306,6 +398,7 @@ function attachEventListeners() {
   [ui.wH, ui.wSC, ui.wL].forEach((el) => {
     el.addEventListener("input", () => {
       updateWidthChips();
+      updateClipWarning();
       updateBoundsAndRefresh();
       drawStatusMini(state, ui, currentVizOpts());
     });
@@ -369,6 +462,129 @@ function updateWidthChips() {
   ui.wLVal.textContent = `${(parseFloat(ui.wL.value) * 100).toFixed(1)}%`;
 }
 
+function updateClipWarning() {
+  const el = ui?.clipGamutWarning;
+  if (!el) return;
+  const visualClip = ui.clipGamut?.checked === true;
+  const widths = getWidths(ui);
+  const anyConstraint = widths.some((v) => Number.isFinite(v) && v > 0);
+  el.hidden = !(visualClip && anyConstraint);
+}
+
+function updateMeanControls(forceDefaultForKind = false) {
+  if (!ui?.meanType) return;
+  const kind = ui.meanType.value || "harmonic";
+  const needsP = kind === "power" || kind === "lehmer";
+  if (ui.meanPRow) ui.meanPRow.hidden = !needsP;
+  if (needsP && ui.meanP && forceDefaultForKind) {
+    ui.meanP.value = kind === "lehmer" ? "-2" : "-2";
+  }
+  if (ui.meanPVal && ui.meanP) {
+    const v = parseFloat(ui.meanP.value);
+    ui.meanPVal.textContent = Number.isFinite(v) ? v.toFixed(1) : "0.0";
+  }
+}
+
+function harmonicMean(arr) {
+  const eps = 1e-9;
+  if (!arr.length) return 0;
+  const sum = arr.reduce((acc, v) => acc + 1 / Math.max(v, eps), 0);
+  return arr.length / sum;
+}
+
+function paletteDistanceHmLabs(labsA = [], labsB = []) {
+  if (!labsA.length || !labsB.length) return 0;
+  const dists = [];
+  for (let i = 0; i < labsA.length; i++) {
+    for (let j = 0; j < labsB.length; j++) {
+      dists.push(deltaE2000(labsA[i], labsB[j]));
+    }
+  }
+  return harmonicMean(dists);
+}
+
+function quantile(sortedArr, q) {
+  if (!sortedArr.length) return Infinity;
+  const qq = Math.max(0, Math.min(1, q));
+  const pos = qq * (sortedArr.length - 1);
+  const lo = Math.floor(pos);
+  const hi = Math.ceil(pos);
+  if (lo === hi) return sortedArr[lo];
+  const t = pos - lo;
+  return sortedArr[lo] * (1 - t) + sortedArr[hi] * t;
+}
+
+function computeUniquenessForRanking(rankingAll = []) {
+  rankingAll.forEach((entry, idx) => {
+    entry.fullRank = idx + 1;
+    entry.uniqueness = idx === 0 ? Infinity : null;
+    entry._labs = (entry.hex || []).map((h) => decodeColor(h, "lab"));
+  });
+  for (let i = 1; i < rankingAll.length; i++) {
+    const cur = rankingAll[i];
+    let minDist = Infinity;
+    for (let j = 0; j < i; j++) {
+      const prev = rankingAll[j];
+      const d = paletteDistanceHmLabs(cur._labs || [], prev._labs || []);
+      if (d < minDist) minDist = d;
+    }
+    cur.uniqueness = minDist;
+  }
+  return rankingAll;
+}
+
+function applyUniquenessFilter() {
+  const all = state.runRankingAll || [];
+  const totalAll = all.length;
+  if (!totalAll) {
+    state.runRanking = [];
+    state.selectedResultIdx = null;
+    updateResultNavigator();
+    return;
+  }
+
+  const prevPick =
+    state.runRanking?.length && state.selectedResultIdx
+      ? state.runRanking[Math.max(0, Math.min(state.selectedResultIdx - 1, state.runRanking.length - 1))]
+      : null;
+  const preserveRun = prevPick?.run ?? null;
+
+  const u = clampNum(
+    Number.isFinite(uniquenessValue) ? uniquenessValue : (parseFloat(ui?.uniqueness?.value) || 0),
+    0,
+    100
+  );
+  uniquenessValue = u;
+  if (ui?.uniqueness) ui.uniqueness.value = String(u);
+  if (ui?.uniquenessVal) ui.uniquenessVal.textContent = `${Math.round(u)}%`;
+
+  let filtered = all;
+  if (u >= 100) {
+    filtered = all.slice(0, 1);
+  } else if (u <= 0) {
+    filtered = all;
+  } else {
+    const finite = all
+      .map((e) => e.uniqueness)
+      .filter((v) => Number.isFinite(v))
+      .sort((a, b) => a - b);
+    const thr = quantile(finite, u / 100);
+    filtered = all.filter(
+      (e) => e.uniqueness === Infinity || (Number.isFinite(e.uniqueness) && e.uniqueness >= thr)
+    );
+  }
+
+  state.runRanking = filtered;
+
+  if (!filtered.length) {
+    state.selectedResultIdx = null;
+    updateResultNavigator();
+    return;
+  }
+  const keepIdx = preserveRun != null ? filtered.findIndex((e) => e.run === preserveRun) : -1;
+  state.selectedResultIdx = keepIdx >= 0 ? keepIdx + 1 : 1;
+}
+
 function updateBoundsAndRefresh() {
   state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), ui.colorSpace.value, { constrain: true, widths: getWidths(ui) });
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
@@ -388,6 +604,8 @@ async function runOptimization() {
   }
   showError("", ui);
   const config = readConfig(ui, state);
+  // Constraints should be based on the user's input palette only (not the optional background).
+  config.boundsPalette = palette;
   state.rawSpace = config.colorSpace;
   state.newRawSpace = config.colorSpace;
   state.running = true;
@@ -402,6 +620,7 @@ async function runOptimization() {
   state.rawNewColors = [];
   state.runResults = [];
   state.runRanking = [];
+  state.runRankingAll = [];
   state.selectedResultIdx = null;
   verboseRows = [];
   verboseBestRun = null;
@@ -502,8 +721,8 @@ async function runOptimization() {
         }
       },
     });
-    state.runRanking = rankRunResults(state.runResults);
-    state.selectedResultIdx = state.runRanking.length ? 1 : null;
+    state.runRankingAll = computeUniquenessForRanking(rankRunResults(state.runResults));
+    applyUniquenessFilter();
     if (state.runRanking.length) {
       applySelectedResult({ skipNavUpdate: true });
     } else {
@@ -944,9 +1163,11 @@ function applySelectedResult(options = {}) {
 function updateResultNavigator() {
   if (!ui?.resultNav) return;
   const total = state.runRanking?.length || 0;
+  const totalAll = state.runRankingAll?.length || total;
   const rank = Math.min(Math.max(state.selectedResultIdx || 1, 1), Math.max(total, 1));
   const disabled = state.running || total === 0;
   ui.resultNav.classList.toggle("disabled", disabled);
+  if (ui.uniqueness) ui.uniqueness.disabled = state.running;
   if (ui.resultRank) {
     ui.resultRank.value = total ? rank : 0;
     ui.resultRank.disabled = disabled;
@@ -957,6 +1178,10 @@ function updateResultNavigator() {
   if (ui.resultNext) ui.resultNext.disabled = disabled || rank >= total;
   if (ui.resultTotal) ui.resultTotal.textContent = `(of ${total})`;
   const selected = total && state.selectedResultIdx ? state.runRanking[Math.min(total - 1, Math.max(0, state.selectedResultIdx - 1))] : null;
+  if (ui.resultRankAll) {
+    ui.resultRankAll.textContent =
+      selected && selected.fullRank ? `#${selected.fullRank}/${totalAll}` : "#—/—";
+  }
   if (ui.resultScore) {
     ui.resultScore.textContent = selected ? `Score: ${formatVal(selected.score)}` : "Score: —";
   }

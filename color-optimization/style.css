@@ -203,6 +203,13 @@ button.ghost {
   font-size: 13px;
 }
 
+.result-rank-all {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  line-height: 1;
+}
+
 #result-rank {
   width: 60px;
   text-align: center;
@@ -227,6 +234,27 @@ button.ghost {
   gap: 8px;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.uniqueness-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.uniqueness-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #334155;
+  text-transform: lowercase;
+}
+
+#uniqueness {
+  width: 140px;
 }
 
 .result-chip {
@@ -387,6 +415,16 @@ textarea {
 
 .gamut-row #gamut-preset {
   width: 120px;
+}
+
+.clip-warning {
+  font-size: 11px;
+  line-height: 1.25;
+  color: #475569;
+  border-radius: 10px;
+  padding: 4px 8px;
+  max-width: 2000px;
+  white-space: normal;
 }
 
 .clip-col-title {
