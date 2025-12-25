@@ -3,9 +3,9 @@ import { channelOrder, csRanges, decodeColor, effectiveRangeFromValues, rangeFro
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
 import { normalize } from "../core/stats.js";
-import { computeBoundsFromCurrent } from "../optimizer/bounds.js";
+import { computeBoundsFromCurrent, computeBoundsFromRawValues } from "../optimizer/bounds.js";
 import { parsePalette, getWidths } from "./configRead.js";
-import { channelGradientForSpace, drawWheel } from "./wheel.js";
+import { channelGradientForSpace, drawWheel, computeGamutRange } from "./wheel.js";
 
 export function createPanels(ui, plotOrder = plotOrderDefault) {
   ui.panelMap = {};
@@ -144,15 +144,34 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
   const gamutPreset = vizOpts.gamutPreset || "srgb";
   if (!csRanges[barSpace]) return;
   const hueBarOffsetDeg = 285;
-  const rawCurrent = !clipToGamut && state.rawSpace === barSpace ? state.rawCurrentColors : null;
+  const overrideCurrent =
+    !clipToGamut && state.rawInputOverride?.space === barSpace
+      ? state.rawInputOverride.values
+      : null;
+  const rawCurrent = overrideCurrent || (!clipToGamut && state.rawSpace === barSpace ? state.rawCurrentColors : null);
   const rawAdded = !clipToGamut && state.newRawSpace === barSpace ? state.rawNewColors : null;
   const combinedValues = [
-    ...current.map((c, idx) => ({ color: c, shape: "circle", vals: rawCurrent?.[idx] || decodeColor(c, barSpace) })),
-    ...added.map((c, idx) => ({ color: c, shape: "square", vals: rawAdded?.[idx] || decodeColor(c, barSpace) })),
+    ...current.map((c, idx) => ({
+      role: "input",
+      index: idx,
+      color: c,
+      shape: "circle",
+      vals: rawCurrent?.[idx] || decodeColor(c, barSpace),
+    })),
+    ...added.map((c, idx) => ({
+      role: "output",
+      index: idx,
+      color: c,
+      shape: "square",
+      vals: rawAdded?.[idx] || decodeColor(c, barSpace),
+    })),
   ];
   const valueSet = combinedValues.map((v) => v.vals);
-  const presetRange = rangeFromPreset(barSpace, gamutPreset) || csRanges[barSpace];
-  const baseRange = csRanges[barSpace];
+  const presetRange =
+    barSpace === "jzazbz"
+      ? (computeGamutRange(barSpace, gamutPreset) || rangeFromPreset(barSpace, gamutPreset) || csRanges[barSpace])
+      : (rangeFromPreset(barSpace, gamutPreset) || csRanges[barSpace]);
+  const baseRange = barSpace === "jzazbz" ? presetRange : csRanges[barSpace];
   const ranges = gamutMode === "full"
     ? (clipToGamut ? presetRange : baseRange)
     : effectiveRangeFromValues(valueSet.concat([baseRange.min, baseRange.max]), barSpace);
@@ -172,58 +191,96 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
   barObjs.forEach((obj, idx) => {
     const cfg = configs[idx];
     obj.bar.innerHTML = "";
-    obj.bar.style.background = channelGradientForSpace(cfg.key, barSpace, type, cvdModel);
+    obj.bar.style.background = channelGradientForSpace(cfg.key, barSpace, type, cvdModel, ranges);
     obj.bar.dataset.key = cfg.key;
+    obj.meta = {
+      barSpace,
+      ranges,
+      cfg,
+      hueBarOffsetDeg,
+      clipToGamut,
+      gamutPreset,
+    };
   });
+  barObjs.meta = {
+    barSpace,
+    ranges,
+    configs,
+    hueBarOffsetDeg,
+    clipToGamut,
+    gamutPreset,
+  };
 
   if (state.bounds && ui.colorSpace.value === barSpace) {
-    const hueRange = ranges.max.h - ranges.min.h || 360;
     const baseRange = state.bounds.ranges || csRanges[barSpace];
-    const isFull01 = (b) => Array.isArray(b) && b.length === 2 && b[0] <= 1e-6 && b[1] >= 1 - 1e-6;
-    const overlays = configs.map((cfg, idx) => {
-      const b = state.bounds.boundsByName?.[cfg.key];
-      if (!b) return null;
-      if (cfg.key !== "h" && isFull01(b)) return null;
-      if (cfg.key === "h") {
-        if (isFull01(b)) return null;
-        return { idx, type: "h", range: b };
-      }
+    const constraintSets = state.bounds.constraintSets;
+    const factors = [0.6745, 1.2816, 1.96];
+    const toBar = (u, cfg) => {
       const baseMin = baseRange.min?.[cfg.key] ?? cfg.min;
       const baseMax = baseRange.max?.[cfg.key] ?? cfg.max;
-      const minVal = b[0] * (baseMax - baseMin) + baseMin;
-      const maxVal = b[1] * (baseMax - baseMin) + baseMin;
-      const minN = clamp01(normalize(minVal, cfg.min, cfg.max));
-      const maxN = clamp01(normalize(maxVal, cfg.min, cfg.max));
-      return { idx, min: minN, max: maxN };
-    }).filter(Boolean);
+      const val = u * (baseMax - baseMin) + baseMin;
+      return clamp01(normalize(val, cfg.min, cfg.max));
+    };
 
-    overlays.forEach((o) => {
-      const bar = o.idx >= 0 ? barObjs[o.idx]?.bar : null;
-      if (!bar) return;
-      if (o.type === "h" && o.range) {
-        let [low, high] = o.range;
-        low = (low - hueBarOffsetNorm + 1) % 1;
-        high = (high - hueBarOffsetNorm + 1) % 1;
-        const span = (high - low + 1) % 1 || 1;
-        if (span >= 0.999) return;
-        if (high < low) high += 1;
-        const allowed = high > 1 ? [[low, 1], [0, high - 1]] : [[low, high]];
-        const excluded = complementSegments(allowed);
-        excluded.forEach(([a, b]) => addFadeSegment(bar, a, b));
-        // draw dashed boundaries at the constraint edges (not at 0/1 wrap edges)
-        if (high > 1) {
-          addBoundary(bar, low);
-          addBoundary(bar, high - 1);
-        } else {
-          addBoundary(bar, low);
-          addBoundary(bar, high);
+    configs.forEach((cfg, idx) => {
+      const bar = barObjs[idx]?.bar;
+      if (!bar || !constraintSets?.channels) return;
+      const constraint = constraintSets.channels[cfg.key];
+      if (!constraint) return;
+      const mode = constraint.mode || "hard";
+
+      if (cfg.key === "h") {
+        const segments = normalizeHueSegments(constraint.intervalsRad || [], hueBarOffsetNorm);
+        if (!segments.length || isFullSegments(segments)) return;
+        if (mode === "hard") {
+          const excluded = complementSegments(segments);
+          excluded.forEach(([a, b]) => addFadeSegment(bar, a, b));
+          segments.forEach(([a, b]) => {
+            addBoundary(bar, a);
+            addBoundary(bar, b);
+          });
+          return;
         }
-      } else if (o.min !== undefined && o.max !== undefined) {
-        addFadeSegment(bar, 0, o.min);
-        addFadeSegment(bar, o.max, 1);
-        addBoundary(bar, o.min);
-        addBoundary(bar, o.max);
+        const contourEdges = [];
+        (constraint.intervalsRad || []).forEach(([aRad, bRad]) => {
+          const center = (aRad + bRad) / 2;
+          const sigma = Math.max((bRad - aRad) / (2 * 1.96), 1e-3);
+          factors.forEach((k) => {
+            const start = center - k * sigma;
+            const end = center + k * sigma;
+            normalizeHueSegments([[start, end]], hueBarOffsetNorm)
+              .forEach(([a, b]) => contourEdges.push(a, b));
+          });
+        });
+        contourEdges.forEach((edge) => addBoundary(bar, edge));
+        return;
       }
+
+      const intervals = constraint.intervals || [];
+      if (!intervals.length || (intervals.length === 1 && intervals[0][0] <= 1e-6 && intervals[0][1] >= 1 - 1e-6)) {
+        return;
+      }
+      if (mode === "hard") {
+        const mapped = intervals.map(([a, b]) => [toBar(a, cfg), toBar(b, cfg)]).filter(([a, b]) => b > a + 1e-6);
+        const excluded = complementSegments(mapped);
+        excluded.forEach(([a, b]) => addFadeSegment(bar, a, b));
+        mapped.forEach(([a, b]) => {
+          addBoundary(bar, a);
+          addBoundary(bar, b);
+        });
+        return;
+      }
+      const contourEdges = [];
+      intervals.forEach(([a, b]) => {
+        const center = (a + b) / 2;
+        const sigma = Math.max((b - a) / (2 * 1.96), 1e-3);
+        factors.forEach((k) => {
+          const start = clamp01(center - k * sigma);
+          const end = clamp01(center + k * sigma);
+          contourEdges.push(toBar(start, cfg), toBar(end, cfg));
+        });
+      });
+      contourEdges.forEach((edge) => addBoundary(bar, edge));
     });
   }
 
@@ -247,6 +304,9 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
       dot.style.height = "12px";
       dot.style.background = sim;
       dot.style.border = `2px solid ${contrastColor(sim)}`;
+      if (entry.role) dot.dataset.role = entry.role;
+      if (Number.isFinite(entry.index)) dot.dataset.index = String(entry.index);
+      dot.dataset.channel = cfg.key;
       obj.bar.appendChild(dot);
     });
   });
@@ -329,14 +389,61 @@ function complementSegments(segments) {
   return out;
 }
 
+function normalizeHueSegments(intervalsRad, hueBarOffsetNorm) {
+  const segments = [];
+  const TAU = Math.PI * 2;
+  (intervalsRad || []).forEach(([aRad, bRad]) => {
+    const span = bRad - aRad;
+    if (span >= TAU - 1e-6) {
+      segments.push([0, 1]);
+      return;
+    }
+    const startNorm = ((aRad / TAU) % 1 + 1) % 1;
+    const endNorm = ((bRad / TAU) % 1 + 1) % 1;
+    const low = (startNorm - hueBarOffsetNorm + 1) % 1;
+    const high = (endNorm - hueBarOffsetNorm + 1) % 1;
+    if (low <= high) {
+      segments.push([low, high]);
+    } else {
+      segments.push([0, high], [low, 1]);
+    }
+  });
+  return mergeSegments(segments);
+}
+
+function mergeSegments(segments) {
+  if (!segments?.length) return [];
+  const sorted = segments
+    .map(([a, b]) => [clamp01(a), clamp01(b)])
+    .filter(([a, b]) => b > a + 1e-6)
+    .sort((x, y) => x[0] - y[0]);
+  const merged = [];
+  sorted.forEach(([a, b]) => {
+    const last = merged[merged.length - 1];
+    if (!last || a > last[1] + 1e-6) merged.push([a, b]);
+    else last[1] = Math.max(last[1], b);
+  });
+  return merged;
+}
+
+function isFullSegments(segments) {
+  return segments.length === 1 && segments[0][0] <= 1e-6 && segments[0][1] >= 1 - 1e-6;
+}
+
 export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpace, optSpace, gamutMode = "auto", vizOpts = {}) {
   const colors = parsePalette(ui.paletteInput.value);
   state.currentColors = colors;
   const colorSpace = optSpace || ui.colorSpace.value;
   state.rawSpace = colorSpace;
-  state.rawCurrentColors = colors.map((hex) => decodeColor(hex, colorSpace));
+  const widths = getWidths(ui);
+  if (state.rawInputOverride?.space === colorSpace && state.rawInputOverride.values?.length) {
+    state.rawCurrentColors = state.rawInputOverride.values.map((v) => ({ ...v }));
+    state.bounds = computeBoundsFromRawValues(state.rawInputOverride.values, colorSpace, { constrain: true, widths });
+  } else {
+    state.rawCurrentColors = colors.map((hex) => decodeColor(hex, colorSpace));
+    state.bounds = computeBoundsFromCurrent(colors, colorSpace, { constrain: true, widths });
+  }
   const resolvedVizSpace = vizSpace || ui.colorwheelSpace.value;
-  state.bounds = computeBoundsFromCurrent(colors, colorSpace, { constrain: true, widths: getWidths(ui) });
   plotOrder.forEach((type) => {
     const refs = ui.panelMap[type];
     if (!refs) return;

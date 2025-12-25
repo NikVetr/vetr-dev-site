@@ -1,6 +1,6 @@
 import { applyCvdLinear } from "../core/cvd.js";
-import { deltaE2000 } from "../core/metrics.js";
 import { aggregateDistances } from "../core/means.js";
+import { coordsFromXyzForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
 import {
   channelOrder,
   convertColorValues,
@@ -11,8 +11,6 @@ import {
   xyzToLinearRgb,
   normalizeWithRange,
   unscaleWithRange,
-  xyzToLab,
-  xyzToOklab,
   GAMUTS,
 } from "../core/colorSpaces.js";
 import { clamp, logistic } from "../core/util.js";
@@ -21,7 +19,10 @@ import { computeBoundsFromCurrent } from "./bounds.js";
 const PARAM_PENALTY_WEIGHT = 20;
 const GAMUT_PENALTY_WEIGHT = 80;
 const LOW_L_PENALTY = 400;
+const CONSTRAINT_PENALTY_WEIGHT = 8;
+const HARD_SET_PENALTY_MULT = 6;
 const PENALTY_NORMALIZATION = 14.1; // legacy weight-sum scale (previous defaults summed to ~14.1)
+const TAU = Math.PI * 2;
 
 export function prepareData(palette, colorSpace, config) {
   const channels = channelOrder[colorSpace];
@@ -49,6 +50,7 @@ export function prepareData(palette, colorSpace, config) {
       coordsForObjective(row, colorSpace, gamutPreset, state, clipToGamutOpt, cvdModel, distanceMetric)
     );
   });
+  const hueAnchorRad = channels.includes("h") ? computeHueAnchorRad(decoded) : 0;
   return {
     currCols: normalized,
     currHex,
@@ -64,6 +66,10 @@ export function prepareData(palette, colorSpace, config) {
     meanP,
     distanceMetric,
     ranges,
+    hueAnchorRad,
+    constraintTopology: config.constraintTopology || "contiguous",
+    constraintMode: config.constraintMode || {},
+    aestheticMode: config.aestheticMode || "none",
     colorblindWeights: config.colorblindWeights,
     colorblindSafe: config.colorblindSafe,
     nColsToAdd: config.nColsToAdd,
@@ -75,72 +81,72 @@ export function meanDistance(par, prep, returnInfo) {
   const { currHex, bounds, colorSpace, colorblindWeights, colorblindSafe, nColsToAdd, ranges } = prep;
   const channels = channelOrder[colorSpace];
   const cn = channels;
+  const lightKey = cn.includes("l") ? "l" : cn.includes("jz") ? "jz" : null;
+  const constraintSets = bounds?.constraintSets;
+  const constraintTopology = prep.constraintTopology || constraintSets?.topology || "contiguous";
 
   const m = [];
+  const zRows = [];
   for (let i = 0; i < nColsToAdd; i++) {
     const row = {};
     for (let j = 0; j < cn.length; j++) {
       row[cn[j]] = par[i * cn.length + j];
     }
     m.push(row);
+    zRows.push({ ...row });
   }
 
-  if (cn.includes("l")) {
+  if (lightKey) {
     if (m.length > 1) {
       for (let i = 1; i < m.length; i++) {
-        m[i].l = Math.exp(m[i].l);
+        m[i][lightKey] = Math.exp(m[i][lightKey]);
       }
       let acc = 0;
       for (let i = 0; i < m.length; i++) {
-        acc += m[i].l;
-        m[i].l = acc;
+        acc += m[i][lightKey];
+        m[i][lightKey] = acc;
       }
     }
     for (let i = 0; i < m.length; i++) {
-      const b = bounds.boundsByName?.l || bounds.boundsL;
-      m[i].l = logistic(m[i].l) * (b[1] - b[0]) + b[0];
+      const channelMode = constraintSets?.channels?.[lightKey]?.mode || "hard";
+      const useHard = channelMode === "hard" && constraintTopology === "contiguous";
+      const b = useHard ? (bounds.boundsByName?.[lightKey] || bounds.boundsL) : [0, 1];
+      m[i][lightKey] = logistic(m[i][lightKey]) * (b[1] - b[0]) + b[0];
     }
   }
 
   const scChannel = cn.find((c) => c === "s" || c === "c");
   if (scChannel) {
     for (let i = 0; i < m.length; i++) {
-      const b = bounds.boundsByName?.[scChannel] || bounds.boundsSc;
+      const channelMode = constraintSets?.channels?.[scChannel]?.mode || "hard";
+      const useHard = channelMode === "hard" && constraintTopology === "contiguous";
+      const b = useHard ? (bounds.boundsByName?.[scChannel] || bounds.boundsSc) : [0, 1];
       m[i][scChannel] =
         clamp(logistic(m[i][scChannel]), 0, 1) * (b[1] - b[0]) +
         b[0];
-      m[i][scChannel] = clamp(m[i][scChannel], b[0], b[1]);
+      if (useHard) m[i][scChannel] = clamp(m[i][scChannel], b[0], b[1]);
     }
   }
 
   if (cn.includes("h")) {
+    const hueMode = constraintSets?.channels?.h?.mode || "hard";
+    const useHard = hueMode === "hard" && constraintTopology === "contiguous";
+    const arc = useHard && bounds?.boundsH ? hueArcFromBounds(bounds.boundsH) : null;
     for (let i = 0; i < m.length; i++) {
-      const h01 = clamp(logistic(m[i].h), 0, 1);
-      const b = bounds.boundsH;
-      if (!b) {
-        m[i].h = h01;
-        continue;
-      }
-      const rawSpan = (b[1] - b[0] + 1) % 1;
-      const diff = b[1] - b[0];
-      // If b spans a full circle (e.g. [0,1] or [0.2,1.2]), keep it unconstrained.
-      // If rawSpan collapses to 0 but diff < 1, treat it as a tight arc (epsilon span).
-      const span = rawSpan === 0 ? (diff >= 0.999 ? 1 : 1e-6) : rawSpan;
-      let h = (b[0] + h01 * span) % 1;
-      const offset = ((h - b[0] + 1) % 1);
-      if (offset > span) {
-        h = (b[0] + span) % 1;
-      }
-      m[i].h = h;
+      const decodedHue = decodeHueParam(m[i].h, arc, prep.hueAnchorRad);
+      m[i].h = decodedHue.h01;
+      m[i].__huePhi = decodedHue.phi;
     }
   }
 
   for (let i = 0; i < m.length; i++) {
     cn.forEach((ch) => {
-      if (ch === "l" || ch === scChannel || ch === "h") return;
-      const b = bounds.boundsByName?.[ch] || [0, 1];
+      if (ch === lightKey || ch === scChannel || ch === "h") return;
+      const channelMode = constraintSets?.channels?.[ch]?.mode || "hard";
+      const useHard = channelMode === "hard" && constraintTopology === "contiguous";
+      const b = useHard ? (bounds.boundsByName?.[ch] || [0, 1]) : [0, 1];
       m[i][ch] = clamp(logistic(m[i][ch]), 0, 1) * (b[1] - b[0]) + b[0];
-      m[i][ch] = clamp(m[i][ch], b[0], b[1]);
+      if (useHard) m[i][ch] = clamp(m[i][ch], b[0], b[1]);
     });
   }
 
@@ -151,8 +157,12 @@ export function meanDistance(par, prep, returnInfo) {
   const cvdStates = prep.cvdStates;
   const perRowPenalties = scaled.map((row) => parameterPenaltyForRow(row, colorSpace));
   const perRowGamut = scaled.map((row) => gamutPenaltyForRow(row, colorSpace, prep.gamutPreset));
+  const perRowConstraint = scaled.map((row, idx) =>
+    constraintPenaltyForRow(m[idx], idx, zRows[idx], constraintSets, constraintTopology)
+  );
   const paramPenalty = perRowPenalties.reduce((acc, r) => acc + r.penalty, 0);
   const gamutPenalty = perRowGamut.reduce((acc, r) => acc + r.penalty, 0);
+  const constraintPenalty = perRowConstraint.reduce((acc, r) => acc + r.penalty, 0);
   const newCoordsByState = {};
   const perColorDistances = Array.from({ length: scaled.length }, () => ({ sum: 0, count: 0 }));
   cvdStates.forEach((state) => {
@@ -170,7 +180,7 @@ export function meanDistance(par, prep, returnInfo) {
   });
   const dists = {};
   const distMetric = prep.distanceMetric || "de2000";
-  const distFn = (a, b) => distanceBetween(a, b, distMetric);
+  const distFn = (a, b) => distanceBetweenCoords(a, b, distMetric);
 
   for (const state of cvdStates) {
     const nCoords = newCoordsByState[state];
@@ -206,7 +216,7 @@ export function meanDistance(par, prep, returnInfo) {
 
   const penaltyWeight = 1e-3;
   const penalty = par.reduce((acc, v) => acc + v * v, 0);
-  const penaltyRaw = paramPenalty + gamutPenalty + penaltyWeight * penalty;
+  const penaltyRaw = paramPenalty + gamutPenalty + constraintPenalty + penaltyWeight * penalty;
   const penaltyScale = prep.penaltyScale || 1;
   const penaltyTotal = penaltyRaw / penaltyScale;
   const value = -wd + penaltyTotal;
@@ -216,7 +226,8 @@ export function meanDistance(par, prep, returnInfo) {
       const dist = perColorDistances[idx];
       const avgDist = dist.count ? dist.sum / dist.count : 0;
       const gamutDist = Math.sqrt(perRowGamut[idx].distSq || 0);
-      const rowPenalty = (perRowPenalties[idx].penalty + perRowGamut[idx].penalty) / penaltyScale;
+      const rowPenalty =
+        (perRowPenalties[idx].penalty + perRowGamut[idx].penalty + perRowConstraint[idx].penalty) / penaltyScale;
       const totalContribution = avgDist + rowPenalty;
       return {
         hex: newHex[idx],
@@ -224,6 +235,7 @@ export function meanDistance(par, prep, returnInfo) {
         distance: avgDist,
         penalty: rowPenalty,
         gamutDistance: gamutDist,
+        constraintPenalty: perRowConstraint[idx].penalty / penaltyScale,
         total: totalContribution,
       };
     });
@@ -236,6 +248,7 @@ export function meanDistance(par, prep, returnInfo) {
       penalty: penaltyTotal,
       paramPenalty: paramPenalty / penaltyScale,
       gamutPenalty: gamutPenalty / penaltyScale,
+      constraintPenalty: constraintPenalty / penaltyScale,
       details,
       colorSpace,
     };
@@ -255,6 +268,7 @@ function parameterPenaltyForRow(row, space) {
   const range = csRanges[space];
   if (!range) return { penalty: 0, gamutDistance: 0, distSq: 0 };
   const channels = channelOrder[space] || Object.keys(row);
+  const lightKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : null;
   let penalty = 0;
   channels.forEach((ch) => {
     const val = row[ch];
@@ -269,9 +283,15 @@ function parameterPenaltyForRow(row, space) {
       penalty += PARAM_PENALTY_WEIGHT * Math.pow(excess, 2);
     }
   });
-  if ("l" in row && Number.isFinite(row.l) && range.min?.l !== undefined && range.max?.l !== undefined) {
-    const span = Math.max(range.max.l - range.min.l, 1e-9);
-    const lNorm = (row.l - range.min.l) / span;
+  if (
+    lightKey &&
+    lightKey in row &&
+    Number.isFinite(row[lightKey]) &&
+    range.min?.[lightKey] !== undefined &&
+    range.max?.[lightKey] !== undefined
+  ) {
+    const span = Math.max(range.max[lightKey] - range.min[lightKey], 1e-9);
+    const lNorm = (row[lightKey] - range.min[lightKey]) / span;
     if (lNorm < 0.05) {
       penalty += (0.05 - lNorm) * LOW_L_PENALTY;
     }
@@ -311,16 +331,141 @@ function coordsForObjective(row, space, gamutPreset, cvdState, clipToGamutOpt, c
   const xyzSim = clipToGamutOpt
     ? gamut.toXYZ(sim.r, sim.g, sim.b)
     : linearRgbToXyz(sim);
-  const metric = (distanceMetric || "de2000").toLowerCase();
-  if (metric === "oklab76") return xyzToOklab(xyzSim);
-  return xyzToLab(xyzSim); // de2000 + lab76
+  return coordsFromXyzForDistanceMetric(xyzSim, distanceMetric);
 }
 
-function distanceBetween(a, b, metric) {
-  const m = (metric || "de2000").toLowerCase();
-  if (m === "de2000") return deltaE2000(a, b);
-  const dl = (a.l || 0) - (b.l || 0);
-  const da = (a.a || 0) - (b.a || 0);
-  const db = (a.b || 0) - (b.b || 0);
-  return Math.hypot(dl, da, db);
+function wrap01(x) {
+  return ((x % 1) + 1) % 1;
+}
+
+function hueArcFromBounds(boundsH) {
+  if (!Array.isArray(boundsH) || boundsH.length < 2) return null;
+  const diff = boundsH[1] - boundsH[0];
+  const rawSpan = (diff + 1) % 1;
+  const span = rawSpan === 0 ? (diff >= 0.999 ? 1 : 1e-6) : rawSpan;
+  return {
+    startRad: boundsH[0] * TAU,
+    spanRad: span * TAU,
+    full: span >= 0.999,
+  };
+}
+
+function decodeHueParam(z, arc, anchorRad = 0) {
+  if (!arc || arc.full) {
+    const phi = anchorRad + z;
+    return { phi, h01: wrap01(phi / TAU) };
+  }
+  const t = logistic(z);
+  const phi = arc.startRad + arc.spanRad * t;
+  return { phi, h01: wrap01(phi / TAU), t };
+}
+
+function logit(p) {
+  const t = clamp(p, 1e-6, 1 - 1e-6);
+  return Math.log(t / (1 - t));
+}
+
+function constraintPenaltyForRow(row, idx, zRow, constraintSets, topology) {
+  if (!constraintSets || !constraintSets.channels) return { penalty: 0 };
+  const channels = Object.keys(constraintSets.channels);
+  let penalty = 0;
+  channels.forEach((ch) => {
+    const c = constraintSets.channels[ch];
+    if (!c) return;
+    const mode = c.mode || "hard";
+    const usePenalty = mode === "soft" || topology === "discontiguous";
+    if (!usePenalty) return;
+    if (c.type === "hue") {
+      const phi = row.__huePhi;
+      if (!Number.isFinite(phi)) return;
+      const hardBoost = mode === "hard" ? HARD_SET_PENALTY_MULT : 1;
+      if (topology === "discontiguous" && Array.isArray(c.intervalsRad)) {
+        const dist = distanceToHueUnion(phi, c.intervalsRad);
+        const eps = Math.max((1 - clamp(c.width || 0, 0, 1)) * 0.5 * TAU, 1e-3);
+        penalty += hardBoost * CONSTRAINT_PENALTY_WEIGHT * Math.pow(dist / eps, 2);
+      } else if (c.arc) {
+        const sigma = Math.max((c.arc.spanRad / 2) / 1.96, 1e-3);
+        const center = c.arc.startRad + c.arc.spanRad / 2;
+        const d = wrapToPi(phi - center);
+        penalty += CONSTRAINT_PENALTY_WEIGHT * 0.5 * Math.pow(d / sigma, 2);
+      }
+      return;
+    }
+    const z = zRow?.[ch];
+    if (!Number.isFinite(z)) return;
+    const hardBoost = mode === "hard" ? HARD_SET_PENALTY_MULT : 1;
+    if (topology === "discontiguous" && Array.isArray(c.intervals)) {
+      const u = clamp(logistic(z), 0, 1);
+      const dist = distanceToIntervals(u, c.intervals);
+      const eps = Math.max((1 - clamp(c.width || 0, 0, 1)) * 0.5, 1e-3);
+      penalty += hardBoost * CONSTRAINT_PENALTY_WEIGHT * Math.pow(dist / eps, 2);
+      return;
+    }
+    if (Array.isArray(c.intervals) && c.intervals.length) {
+      const L = clamp(c.intervals[0][0], 1e-6, 1 - 1e-6);
+      const U = clamp(c.intervals[c.intervals.length - 1][1], 1e-6, 1 - 1e-6);
+      const zL = logit(L);
+      const zU = logit(U);
+      const mu = (zL + zU) / 2;
+      const sigma = Math.max((zU - zL) / (2 * 1.96), 1e-3);
+      penalty += CONSTRAINT_PENALTY_WEIGHT * 0.5 * Math.pow((z - mu) / sigma, 2);
+    }
+  });
+  return { penalty };
+}
+
+function distanceToIntervals(u, intervals) {
+  if (!intervals?.length) return 0;
+  for (const [a, b] of intervals) {
+    if (u >= a && u <= b) return 0;
+  }
+  let best = Infinity;
+  intervals.forEach(([a, b]) => {
+    if (u < a) best = Math.min(best, a - u);
+    else if (u > b) best = Math.min(best, u - b);
+  });
+  return Number.isFinite(best) ? best : 0;
+}
+
+function distanceToHueUnion(phi, intervalsRad) {
+  if (!intervalsRad?.length) return 0;
+  const angle = wrapRad(phi);
+  for (const [a, b] of intervalsRad) {
+    if (angle >= a && angle <= b) return 0;
+  }
+  let best = Infinity;
+  intervalsRad.forEach(([a, b]) => {
+    best = Math.min(best, circularDistance(angle, a), circularDistance(angle, b));
+  });
+  return Number.isFinite(best) ? best : 0;
+}
+
+function wrapRad(phi) {
+  return ((phi % TAU) + TAU) % TAU;
+}
+
+function wrapToPi(phi) {
+  return ((phi + Math.PI) % TAU + TAU) % TAU - Math.PI;
+}
+
+function circularDistance(a, b) {
+  const d = Math.abs(a - b);
+  return Math.min(d, TAU - d);
+}
+
+function computeHueAnchorRad(rows) {
+  if (!rows?.length) return 0;
+  let sumX = 0;
+  let sumY = 0;
+  let count = 0;
+  rows.forEach((row) => {
+    if (!Number.isFinite(row.h)) return;
+    const rad = (row.h * Math.PI) / 180;
+    sumX += Math.cos(rad);
+    sumY += Math.sin(rad);
+    count += 1;
+  });
+  if (!count) return 0;
+  if (Math.abs(sumX) < 1e-12 && Math.abs(sumY) < 1e-12) return 0;
+  return Math.atan2(sumY, sumX);
 }

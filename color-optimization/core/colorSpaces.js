@@ -6,6 +6,8 @@ export const channelOrder = {
   lch: ["l", "c", "h"],
   oklab: ["l", "a", "b"],
   oklch: ["l", "c", "h"],
+  luv: ["l", "u", "v"],
+  jzazbz: ["jz", "az", "bz"],
 };
 
 export const csRanges = {
@@ -14,6 +16,11 @@ export const csRanges = {
   lch: { min: { l: 0, c: 0, h: 0 }, max: { l: 100, c: 230, h: 360 } },
   oklab: { min: { l: 0, a: -0.5, b: -0.5 }, max: { l: 1, a: 0.5, b: 0.5 } },
   oklch: { min: { l: 0, c: 0, h: 0 }, max: { l: 1, c: 0.5, h: 360 } },
+  // CIE L*u*v* (D65); ranges are intentionally generous for wide-gamut exploration.
+  luv: { min: { l: 0, u: -220, v: -220 }, max: { l: 100, u: 220, v: 220 } },
+  // JzAzBz (relative XYZ scaled to an assumed HDR reference); Jz normalized to ~[0,1].
+  // Typical sRGB/Rec.2020 az/bz ranges are small; keep bounds tight to avoid extreme clipping.
+  jzazbz: { min: { jz: 0, az: -0.05, bz: -0.05 }, max: { jz: 1, az: 0.05, bz: 0.05 } },
 };
 
 export const gamutPresets = {
@@ -302,6 +309,8 @@ export function convertColorValues(values, fromSpace, toSpace) {
     oklab: (v) => oklabToXyz(v),
     oklch: (v) => oklabToXyz(oklchToOklab(v)),
     hsl: (v) => rgbToXyz(hslToRgb(v)),
+    luv: (v) => luvToXyz(v),
+    jzazbz: (v) => jzazbzToXyz(v),
     rgb: (v) => linearRgbToXyz(v),
   };
 
@@ -312,6 +321,8 @@ export function convertColorValues(values, fromSpace, toSpace) {
     oklab: (v) => xyzToOklab(v),
     oklch: (v) => oklabToOklch(xyzToOklab(v)),
     hsl: (v) => rgbToHsl(xyzToRgb(v)),
+    luv: (v) => xyzToLuv(v),
+    jzazbz: (v) => xyzToJzAzBz(v),
     rgb: (v) => xyzToLinearRgb(v),
   };
 
@@ -366,6 +377,14 @@ export function decodeColor(hex, space) {
       const h = (hRaw + 360) % 360;
       return { l: lab.l, c: Math.sqrt(lab.a * lab.a + lab.b * lab.b), h };
     }
+    case "luv": {
+      const xyz = rgbToXyz(rgb);
+      return xyzToLuv(xyz);
+    }
+    case "jzazbz": {
+      const xyz = rgbToXyz(rgb);
+      return xyzToJzAzBz(xyz);
+    }
     default:
       return rgbToHsl(rgb);
   }
@@ -387,6 +406,10 @@ export function encodeColor(vals, space) {
       const b = vals.c * Math.sin(hRad);
       return rgbToHex(oklabToSrgb({ l: vals.l, a, b }));
     }
+    case "luv":
+      return rgbToHex(xyzToRgb(luvToXyz(vals)));
+    case "jzazbz":
+      return rgbToHex(xyzToRgb(jzazbzToXyz(vals)));
     default:
       return rgbToHex(hslToRgb(vals));
   }
@@ -478,6 +501,141 @@ export function effectiveRangeFromValues(values, space) {
 export function effectiveRangeFromColors(colors, space) {
   const decoded = (colors || []).map((c) => decodeColor(c, space));
   return effectiveRangeFromValues(decoded, space);
+}
+
+// CIE L*u*v* (D65)
+export function xyzToLuv({ x, y, z }) {
+  const xn = 0.95047;
+  const yn = 1;
+  const zn = 1.08883;
+  const denom = x + 15 * y + 3 * z;
+  const denomN = xn + 15 * yn + 3 * zn;
+  const uPrime = denom > 1e-12 ? (4 * x) / denom : 0;
+  const vPrime = denom > 1e-12 ? (9 * y) / denom : 0;
+  const uPrimeN = (4 * xn) / denomN;
+  const vPrimeN = (9 * yn) / denomN;
+  const fy = labFn(y / yn);
+  const l = 116 * fy - 16;
+  if (l <= 1e-9) return { l: 0, u: 0, v: 0 };
+  const u = 13 * l * (uPrime - uPrimeN);
+  const v = 13 * l * (vPrime - vPrimeN);
+  return { l, u, v };
+}
+
+export function luvToXyz({ l, u, v }) {
+  const xn = 0.95047;
+  const yn = 1;
+  const zn = 1.08883;
+  if (!Number.isFinite(l) || l <= 1e-9) return { x: 0, y: 0, z: 0 };
+  const denomN = xn + 15 * yn + 3 * zn;
+  const uPrimeN = (4 * xn) / denomN;
+  const vPrimeN = (9 * yn) / denomN;
+  const uPrime = u / (13 * l) + uPrimeN;
+  const vPrime = v / (13 * l) + vPrimeN;
+  const fy = (l + 16) / 116;
+  const yr = labInvFn(fy);
+  const y = yr * yn;
+  if (!Number.isFinite(vPrime) || Math.abs(vPrime) <= 1e-12) return { x: 0, y, z: 0 };
+  const x = y * (9 * uPrime) / (4 * vPrime);
+  const z = y * (12 - 3 * uPrime - 20 * vPrime) / (4 * vPrime);
+  return { x, y, z };
+}
+
+// JzAzBz (Safdar et al. 2017). Assumes relative XYZ (D65) mapped to an HDR reference luminance.
+// We normalize Jz by the Jz value of the D65 whitepoint under the same assumptions so it behaves ~[0,1].
+const JZ_HDR_SCALE = 10000; // cd/m^2 reference (relative XYZ * scale)
+const JZ_B = 1.15;
+const JZ_G = 0.66;
+const JZ_C1 = 3424 / 4096;
+const JZ_C2 = 2413 / 128;
+const JZ_C3 = 2392 / 128;
+const JZ_N = 2610 / 16384;
+const JZ_P = (1.7 * 2523) / 32;
+const JZ_D = -0.56;
+const JZ_D0 = 1.6295499532821566e-11;
+const JZ_M1 = [
+  [0.41478972, 0.579999, 0.0146480],
+  [-0.2015100, 1.120649, 0.0531008],
+  [-0.0166008, 0.264800, 0.6684799],
+];
+const JZ_M1_INV = [
+  [1.924226435787607, -1.004792312595366, 0.037651404030618014],
+  [0.3503167620949992, 0.7264811939316554, -0.06538442294808504],
+  [-0.09098281098284759, -0.31272829052307405, 1.5227665613052608],
+];
+const JZ_M2_INV = [
+  [1, 0.13860504327153927, 0.058047316156118856],
+  [1, -0.13860504327153927, -0.058047316156118856],
+  [1, -0.09601924202631894, -0.8118918960560388],
+];
+
+function jzazbzMul3(m, x, y, z) {
+  return {
+    x: m[0][0] * x + m[0][1] * y + m[0][2] * z,
+    y: m[1][0] * x + m[1][1] * y + m[1][2] * z,
+    z: m[2][0] * x + m[2][1] * y + m[2][2] * z,
+  };
+}
+
+function jzazbzNonlinF(t) {
+  const tt = Math.max(t, 0);
+  const p = Math.pow(tt / JZ_HDR_SCALE, JZ_N);
+  const num = JZ_C1 + JZ_C2 * p;
+  const den = 1 + JZ_C3 * p;
+  const frac = den !== 0 ? num / den : 0;
+  return Math.pow(frac, JZ_P);
+}
+
+function jzazbzNonlinFinv(tp) {
+  const y = Math.pow(Math.max(tp, 0), 1 / JZ_P);
+  const den = y * JZ_C3 - JZ_C2;
+  if (Math.abs(den) <= 1e-18) return 0;
+  const x = (JZ_C1 - y) / den;
+  return JZ_HDR_SCALE * Math.pow(Math.max(x, 0), 1 / JZ_N);
+}
+
+function xyzToJzAzBzUnnormalized({ x, y, z }) {
+  const xp = JZ_B * x - (JZ_B - 1) * z;
+  const yp = JZ_G * y - (JZ_G - 1) * x;
+  const zp = z;
+  const lms = jzazbzMul3(JZ_M1, xp, yp, zp);
+  const lp = jzazbzNonlinF(lms.x);
+  const mp = jzazbzNonlinF(lms.y);
+  const sp = jzazbzNonlinF(lms.z);
+  const iz = 0.5 * (lp + mp);
+  const az = 3.524000 * lp - 4.066708 * mp + 0.542708 * sp;
+  const bz = 0.199076 * lp + 1.096799 * mp - 1.295875 * sp;
+  const jz = ((1 + JZ_D) * iz) / (1 + JZ_D * iz) - JZ_D0;
+  return { jz, az, bz };
+}
+
+function jzazbzToXyzUnnormalized({ jz, az, bz }) {
+  const jzp = jz + JZ_D0;
+  const den = (1 + JZ_D) - JZ_D * jzp;
+  const iz = Math.abs(den) <= 1e-18 ? 0 : jzp / den;
+  const lmsP = jzazbzMul3(JZ_M2_INV, iz, az, bz);
+  const l = jzazbzNonlinFinv(lmsP.x);
+  const m = jzazbzNonlinFinv(lmsP.y);
+  const s = jzazbzNonlinFinv(lmsP.z);
+  const xyzP = jzazbzMul3(JZ_M1_INV, l, m, s);
+  const z = xyzP.z;
+  const x = (xyzP.x + (JZ_B - 1) * z) / JZ_B;
+  const y = (xyzP.y + (JZ_G - 1) * x) / JZ_G;
+  return { x, y, z };
+}
+
+const JZ_WHITE = (() => {
+  const white = xyzToJzAzBzUnnormalized({ x: 0.95047, y: 1, z: 1.08883 });
+  return Math.max(white.jz, 1e-9);
+})();
+
+export function xyzToJzAzBz({ x, y, z }) {
+  const { jz, az, bz } = xyzToJzAzBzUnnormalized({ x, y, z });
+  return { jz: jz / JZ_WHITE, az, bz };
+}
+
+export function jzazbzToXyz({ jz, az, bz }) {
+  return jzazbzToXyzUnnormalized({ jz: (jz || 0) * JZ_WHITE, az: az || 0, bz: bz || 0 });
 }
 
 function labFn(t) {

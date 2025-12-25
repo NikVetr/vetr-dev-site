@@ -1,13 +1,16 @@
-import { channelOrder, decodeColor } from "../core/colorSpaces.js";
-import { randomNormalArray } from "../core/random.js";
+import { channelOrder, hexToRgb, rgbToXyz } from "../core/colorSpaces.js";
+import { random, setRandomSeed } from "../core/random.js";
 import { nelderMead } from "./nelderMead.js";
 import { objectiveInfo, objectiveValue, prepareData } from "./objective.js";
-import { deltaE2000 } from "../core/metrics.js";
 import { aggregateDistances } from "../core/means.js";
+import { coordsFromXyzForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
 
 export async function optimizePalette(palette, config, { onProgress, onVerbose } = {}) {
   const colorSpace = config.colorSpace;
   const channels = channelOrder[colorSpace];
+  if ("seed" in config) {
+    setRandomSeed(config.seed);
+  }
   const prep = prepareData(palette, colorSpace, config);
   const conditioningHexes = palette || [];
   const dim = config.nColsToAdd * channels.length;
@@ -16,7 +19,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   let bestScoreSoFar = -Infinity;
 
   for (let run = 0; run < config.nOptimRuns; run++) {
-    const start = Array.from({ length: dim }, () => logit(Math.random()));
+    const start = Array.from({ length: dim }, () => logit(random()));
     const startInfo = objectiveInfo(start, prep);
     const startDetails = attachMeta(
       startInfo.details,
@@ -140,10 +143,13 @@ function computeInfluences(hexes, conditioningHexes = [], prepLike = {}) {
   const metric = (prepLike.distanceMetric || "de2000").toLowerCase();
   const meanType = prepLike.meanType || "harmonic";
   const meanP = prepLike.meanP;
-
-  const decodeSpace = metric === "oklab76" ? "oklab" : "lab";
-  const currCoords = currHexes.map((h) => decodeColor(h, decodeSpace));
-  const newCoords = newHexes.map((h) => decodeColor(h, decodeSpace));
+  const coordsForHex = (h) => {
+    const rgb = hexToRgb(h);
+    const xyz = rgbToXyz(rgb);
+    return coordsFromXyzForDistanceMetric(xyz, metric);
+  };
+  const currCoords = currHexes.map(coordsForHex);
+  const newCoords = newHexes.map(coordsForHex);
 
   if (currCoords.length + newCoords.length < 2) return newHexes.map((h) => ({ hex: h }));
 
@@ -151,13 +157,13 @@ function computeInfluences(hexes, conditioningHexes = [], prepLike = {}) {
   // Match the optimization distance structure: cross(curr,new) + within(new), not within(curr).
   for (let i = 0; i < currCoords.length; i++) {
     for (let j = 0; j < newCoords.length; j++) {
-      const d = distanceBetween(currCoords[i], newCoords[j], metric);
+      const d = distanceBetweenCoords(currCoords[i], newCoords[j], metric);
       pairwise.push({ i, j: offset + j, d });
     }
   }
   for (let i = 0; i < newCoords.length; i++) {
     for (let j = i + 1; j < newCoords.length; j++) {
-      const d = distanceBetween(newCoords[i], newCoords[j], metric);
+      const d = distanceBetweenCoords(newCoords[i], newCoords[j], metric);
       pairwise.push({ i: offset + i, j: offset + j, d });
     }
   }
@@ -221,13 +227,4 @@ function attachMeta(details, hexes, raws, space, conditioningHexes = [], prepLik
       closestDist: meta.closestDist,
     };
   });
-}
-
-function distanceBetween(a, b, metric) {
-  const m = (metric || "de2000").toLowerCase();
-  if (m === "de2000") return deltaE2000(a, b);
-  const dl = (a.l || 0) - (b.l || 0);
-  const da = (a.a || 0) - (b.a || 0);
-  const db = (a.b || 0) - (b.b || 0);
-  return Math.hypot(dl, da, db);
 }

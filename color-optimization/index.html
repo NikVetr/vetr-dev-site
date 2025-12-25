@@ -62,13 +62,19 @@
         <div class="control-block">
           <h3>Algorithm Settings</h3>
           <div class="field">
+            <label for="seed-input">Seed</label>
+            <input id="seed-input" type="text" inputmode="numeric" pattern="-?\\d*" placeholder="random" value="random">
+          </div>
+          <div class="field">
             <label for="color-space">Optimization colorspace</label>
             <select id="color-space">
               <option value="oklab">OKLab</option>
               <option value="oklch">OKLCh</option>
               <option value="lab">Lab</option>
+              <option value="luv">Luv</option>
               <option value="lch">LCh</option>
               <option value="hsl">HSL</option>
+              <option value="jzazbz">JzAzBz</option>
             </select>
           </div>
           <div class="field three-col mini gamut-row">
@@ -97,16 +103,20 @@
           <div class="field">
             <label for="cvd-model">CVD model</label>
             <select id="cvd-model">
-              <option value="legacy">Legacy (gamma RGB matrix)</option>
               <option value="machado2009">Machado 2009 (linear RGB)</option>
+              <option value="legacy">Legacy (gamma RGB matrix)</option>
             </select>
           </div>
+          <input id="raw-input-values" type="hidden">
           <div class="field">
             <label for="distance-metric">Distance metric</label>
             <select id="distance-metric">
               <option value="de2000">ΔE2000 (Lab)</option>
               <option value="oklab76">ΔE76 (Euclidean in OKLab)</option>
               <option value="lab76">ΔE76 (Euclidean in Lab)</option>
+              <option value="cam02ucs">CAM02-UCS (Luo 2006)</option>
+              <option value="cam16ucs">CAM16-UCS (Li 2017)</option>
+              <option value="deitp">ΔE_ITP (BT.2124, ICtCp)</option>
             </select>
           </div>
           <div class="field">
@@ -146,21 +156,57 @@
             <label for="nm-iters">Nelder–Mead iterations</label>
             <input id="nm-iters" type="number" min="50" max="1000" value="100">
           </div>
+          <div class="field two-col">
+            <div>
+              <label for="constraint-topology">Constraint topology</label>
+              <select id="constraint-topology">
+                <option value="contiguous">Contiguous</option>
+                <option value="discontiguous">Discontiguous</option>
+              </select>
+            </div>
+            <div>
+              <label for="aesthetic-mode">Aesthetic centers</label>
+              <select id="aesthetic-mode">
+                <option value="none">None</option>
+                <option value="complementary">Complementary</option>
+                <option value="triadic">Triadic</option>
+                <option value="tetradic">Tetradic</option>
+              </select>
+            </div>
+          </div>
           <div class="field">
             <label>constraint widths</label>
             <div class="field three-col mini">
-              <div>
-                <label id="w-h-label" for="w-h">h</label>
+              <div class="constraint-row">
+                <div class="constraint-head">
+                  <label id="w-h-label" for="w-h">h</label>
+                  <select id="mode-h" class="constraint-mode">
+                    <option value="hard">Hard</option>
+                    <option value="soft">Soft</option>
+                  </select>
+                </div>
                 <input id="w-h" type="range" min="0" max="1" step="0.001" value="0">
                 <span id="w-h-val" class="value-chip">0.0%</span>
               </div>
-              <div>
-                <label id="w-sc-label" for="w-sc">s/c</label>
+              <div class="constraint-row">
+                <div class="constraint-head">
+                  <label id="w-sc-label" for="w-sc">s/c</label>
+                  <select id="mode-sc" class="constraint-mode">
+                    <option value="hard">Hard</option>
+                    <option value="soft">Soft</option>
+                  </select>
+                </div>
                 <input id="w-sc" type="range" min="0" max="1" step="0.001" value="0">
                 <span id="w-sc-val" class="value-chip">0.0%</span>
               </div>
-              <div>
-                <label id="w-l-label" for="w-l">l</label>
+              <div class="constraint-row">
+                <div class="constraint-head">
+                  <label id="w-l-label" for="w-l">l</label>
+                  <select id="mode-l" class="constraint-mode">
+                    <option value="hard">Hard</option>
+                    <option value="soft">Soft</option>
+                  </select>
+                </div>
                 <input id="w-l" type="range" min="0" max="1" step="0.001" value="0">
                 <span id="w-l-val" class="value-chip">0.0%</span>
               </div>
@@ -194,7 +240,9 @@
               <option value="lch">LCh</option>
               <option value="oklch">OKLCh</option>
               <option value="lab">Lab</option>
+              <option value="luv">Luv</option>
               <option value="oklab">OKLab</option>
+              <option value="jzazbz">JzAzBz</option>
             </select>
           </div>
           <div class="field">
@@ -261,8 +309,8 @@
         </div>
         <section id="panels" class="panels"></section>
         <div class="status-col">
-          <div class="control-block status">
-          <h3>Status</h3>
+          <div class="control-block status" id="status-block">
+          <h3>Status: <span id="status-state" class="status-state">Waiting to run</span></h3>
           <div class="progress">
             <div id="progress-bar"></div>
           </div>

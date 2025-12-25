@@ -185,11 +185,16 @@ export function drawStatusMini(state, ui, opts = {}) {
   const size = Math.min(width, height);
   const cx = width / 2;
   const cy = height / 2;
-  const isRect = space === "lab" || space === "oklab";
+  const channelsForSpace = channelOrder[space] || [];
+  const isRect = !channelsForSpace.includes("h");
+  const rectKeys = isRect
+    ? { x: channelsForSpace[1] || "a", y: channelsForSpace[2] || "b" }
+    : null;
   const radius = (size / 2) * 0.97;
 
   const trails = state.nmTrails || [];
-  const rawCurrent = state.rawCurrentColors?.length ? state.rawCurrentColors : null;
+  const rawOverride = state.rawInputOverride?.space === space ? state.rawInputOverride.values : null;
+  const rawCurrent = rawOverride?.length ? rawOverride : (state.rawCurrentColors?.length ? state.rawCurrentColors : null);
   const rawBest = state.rawBestColors?.length ? state.rawBestColors : null;
   const resolveMaybeProjected = (hex, rawArr, idx, sourceSpace) => {
     const raw = rawArr && rawArr[idx];
@@ -317,19 +322,21 @@ export function drawStatusMini(state, ui, opts = {}) {
     const useRange = rangeOverride || scaleRange;
     const v = vals;
     if (isRect) {
-      const maxA = Math.max(Math.abs(useRange.min.a), Math.abs(useRange.max.a)) || 1;
-      const maxB = Math.max(Math.abs(useRange.min.b), Math.abs(useRange.max.b)) || 1;
-      const x = cx + (v.a / maxA) * radius;
-      const y = cy - (v.b / maxB) * radius;
+      const xKey = rectKeys.x;
+      const yKey = rectKeys.y;
+      const maxX = Math.max(Math.abs(useRange.min[xKey] || 0), Math.abs(useRange.max[xKey] || 0)) || 1;
+      const maxY = Math.max(Math.abs(useRange.min[yKey] || 0), Math.abs(useRange.max[yKey] || 0)) || 1;
+      const x = cx + ((v?.[xKey] || 0) / maxX) * radius;
+      const y = cy - ((v?.[yKey] || 0) / maxY) * radius;
       return { x, y };
     }
     const channels = channelOrder[space];
     const sc = channels.find((c) => c === "s" || c === "c") || "c";
-    const hue = (v.h ?? ((Math.atan2(v.b || 0, v.a || 0) * 180) / Math.PI + 360)) % 360;
+    const hue = (v.h ?? 0) % 360;
     let chroma;
     if (sc === "s") chroma = v.s || 0;
     else if (sc === "c") chroma = v.c || 0;
-    else chroma = Math.hypot(v.a || 0, v.b || 0);
+    else chroma = 0;
     const maxSC =
       sc === "s"
         ? useRange.max.s

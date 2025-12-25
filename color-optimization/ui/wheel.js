@@ -30,6 +30,7 @@ export function drawWheel(type, ui, state, opts = {}) {
   const size = refs.panel.clientWidth - 24;
   const deviceScale = window.devicePixelRatio || 1;
   const dim = Math.max(220, Math.min(380, size - 6));
+  const TAU = Math.PI * 2;
   canvas.width = dim * deviceScale;
   canvas.height = dim * deviceScale;
   canvas.style.width = `${dim}px`;
@@ -44,6 +45,10 @@ export function drawWheel(type, ui, state, opts = {}) {
   const slicesR = 20;
   if (!csRanges[wheelSpace]) return;
   const channels = channelOrder[wheelSpace] || [];
+  const hasHue = channels.includes("h");
+  const rectKeys = !hasHue
+    ? { l: channels[0] || "l", x: channels[1] || "a", y: channels[2] || "b" }
+    : null;
 
   const resolveVals = (hex, rawVals, idx, sourceSpace) => {
     const raw = rawVals && rawVals[idx];
@@ -57,12 +62,15 @@ export function drawWheel(type, ui, state, opts = {}) {
     const decoded = decodeColor(hex, wheelSpace);
     return clipToGamut ? projectToGamut(decoded, wheelSpace, gamutPreset, wheelSpace) : decoded;
   };
-  const rawCurrent = state.rawCurrentColors?.length ? state.rawCurrentColors : null;
+  const rawOverride = state.rawInputOverride?.space === wheelSpace ? state.rawInputOverride.values : null;
+  const rawCurrent = rawOverride?.length ? rawOverride : (state.rawCurrentColors?.length ? state.rawCurrentColors : null);
   const rawNew = state.rawNewColors?.length ? state.rawNewColors : null;
   const allColors = state.currentColors.map((c, idx) => {
     const vals = resolveVals(c, rawCurrent, idx, state.rawSpace);
     const displayHex = vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
     return {
+      role: "input",
+      index: idx,
       color: c,
       displayColor: displayHex,
       shape: "circle",
@@ -73,6 +81,8 @@ export function drawWheel(type, ui, state, opts = {}) {
       const vals = resolveVals(c, rawNew, idx, state.newRawSpace);
       const displayHex = vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
       return {
+        role: "output",
+        index: idx,
         color: c,
         displayColor: displayHex,
         shape: "square",
@@ -81,11 +91,12 @@ export function drawWheel(type, ui, state, opts = {}) {
     }));
   const valueSet = allColors.map((c) => c.vals);
   const dataRange = effectiveRangeFromValues(valueSet, wheelSpace);
-  const baseRange = csRanges[wheelSpace];
-  const gamutRange =
+  const presetRange =
     computeGamutRange(wheelSpace, gamutPreset) ||
     rangeFromPreset(wheelSpace, gamutPreset) ||
-    baseRange;
+    csRanges[wheelSpace];
+  const baseRange = wheelSpace === "jzazbz" ? presetRange : csRanges[wheelSpace];
+  const gamutRange = presetRange;
   // Keep the visualization axes stable: never shrink below the base range,
   // and only expand (no extra padding) when values fall outside.
   const unclippedRange =
@@ -94,26 +105,29 @@ export function drawWheel(type, ui, state, opts = {}) {
     gamutMode === "full" ? gamutRange : unionRanges(dataRange, gamutRange, wheelSpace);
   const ranges = clipToGamut ? clippedRange : unclippedRange;
 
-  const isRectWheel = wheelSpace === "lab" || wheelSpace === "oklab";
+  const isRectWheel = !hasHue;
   let radius = baseRadius;
-  let maxC = 1;
   if (isRectWheel) {
     const leftPad = 25;
     cx = dim / 2 + leftPad / 2;
     radius = Math.min(baseRadius, dim / 2 - leftPad);
   }
   if (isRectWheel) {
-    const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
-    const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
-    maxC = Math.min(maxA, maxB) || 1;
+    const xKey = rectKeys.x;
+    const yKey = rectKeys.y;
+    const lKey = rectKeys.l;
+    const maxX = Math.max(Math.abs(ranges.min[xKey] || 0), Math.abs(ranges.max[xKey] || 0)) || 1;
+    const maxY = Math.max(Math.abs(ranges.min[yKey] || 0), Math.abs(ranges.max[yKey] || 0)) || 1;
+    const lMin = ranges.min[lKey] ?? 0;
+    const lMax = ranges.max[lKey] ?? 1;
+    const lVal = lMin + 0.75 * (lMax - lMin);
     const steps = 48;
     const squareSize = radius * 2;
     for (let yi = 0; yi < steps; yi++) {
       for (let xi = 0; xi < steps; xi++) {
-        const a = ((xi + 0.5) / steps) * 2 * maxC - maxC;
-        const b = (1 - (yi + 0.5) / steps) * 2 * maxC - maxC;
-        const lVal = wheelSpace === "lab" ? 75 : 0.75;
-        const hex = encodeColor({ l: lVal, a, b }, wheelSpace);
+        const xVal = ((xi + 0.5) / steps) * 2 * maxX - maxX;
+        const yVal = (1 - (yi + 0.5) / steps) * 2 * maxY - maxY;
+        const hex = encodeColor({ [lKey]: lVal, [xKey]: xVal, [yKey]: yVal }, wheelSpace);
         ctx.fillStyle = applyCvdHex(hex, type, 1, cvdModel);
         const px = cx - radius + (xi / steps) * squareSize;
         const py = cy - radius + (yi / steps) * squareSize;
@@ -148,16 +162,19 @@ export function drawWheel(type, ui, state, opts = {}) {
   const toPoint = (vals, rangeOverride) => {
     const useRange = rangeOverride || scaleRange;
     const v = vals;
-    const lMin = useRange.min.l ?? 0;
-    const lMax = useRange.max.l ?? 1;
-    const lVal = v.l ?? ((wheelSpace === "lab" || wheelSpace === "oklab") ? 0 : lMin);
+    const lKey = isRectWheel ? rectKeys.l : "l";
+    const lMin = useRange.min[lKey] ?? 0;
+    const lMax = useRange.max[lKey] ?? 1;
+    const lVal = v[lKey] ?? lMin;
     const lNorm = clamp((lVal - lMin) / Math.max(lMax - lMin, 1e-6), 0, 1);
 
     if (isRectWheel) {
-      const maxA = Math.max(Math.abs(useRange.min.a), Math.abs(useRange.max.a)) || 1;
-      const maxB = Math.max(Math.abs(useRange.min.b), Math.abs(useRange.max.b)) || 1;
-      const x = cx + (v.a / maxA) * radius;
-      const y = cy - (v.b / maxB) * radius;
+      const xKey = rectKeys.x;
+      const yKey = rectKeys.y;
+      const maxX = Math.max(Math.abs(useRange.min[xKey] || 0), Math.abs(useRange.max[xKey] || 0)) || 1;
+      const maxY = Math.max(Math.abs(useRange.min[yKey] || 0), Math.abs(useRange.max[yKey] || 0)) || 1;
+      const x = cx + ((v[xKey] || 0) / maxX) * radius;
+      const y = cy - ((v[yKey] || 0) / maxY) * radius;
       return { x, y, lNorm };
     }
 
@@ -193,6 +210,8 @@ export function drawWheel(type, ui, state, opts = {}) {
   const coords = allColors.map((entry) => {
     const pt = toPoint(entry.vals);
     return {
+      role: entry.role,
+      index: entry.index,
       color: entry.color,
       shape: entry.shape,
       x: pt.x,
@@ -200,6 +219,19 @@ export function drawWheel(type, ui, state, opts = {}) {
       lNorm: pt.lNorm,
     };
   });
+  refs.wheelMeta = {
+    wheelSpace,
+    ranges,
+    cx,
+    cy,
+    radius,
+    isRectWheel,
+    rectKeys,
+    scKey: channels.find((c) => c === "s" || c === "c") || null,
+    clipToGamut,
+    gamutPreset,
+  };
+  refs.wheelPoints = coords;
 
   // axis labels
   ctx.fillStyle = "#0f172a";
@@ -207,18 +239,28 @@ export function drawWheel(type, ui, state, opts = {}) {
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   if (isRectWheel) {
-    const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
-    const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
+    const xKey = rectKeys.x;
+    const yKey = rectKeys.y;
+    const maxX = Math.max(Math.abs(ranges.min[xKey] || 0), Math.abs(ranges.max[xKey] || 0));
+    const maxY = Math.max(Math.abs(ranges.min[yKey] || 0), Math.abs(ranges.max[yKey] || 0));
     const ticks = 5;
+    const fmt = (v) => {
+      const av = Math.abs(v);
+      if (av < 0.005) return v.toFixed(3);
+      if (av < 0.05) return v.toFixed(3);
+      if (av < 0.5) return v.toFixed(2);
+      if (av < 5) return v.toFixed(1);
+      return v.toFixed(0);
+    };
     for (let i = 0; i < ticks; i++) {
       const t = i / (ticks - 1);
-      const aVal = (t * 2 - 1) * maxA;
-      const bVal = (1 - t * 2) * maxB;
+      const xVal = (t * 2 - 1) * maxX;
+      const yVal = (1 - t * 2) * maxY;
       const x = cx - radius + t * (2 * radius);
       const y = cy - radius + t * (2 * radius);
-      ctx.fillText(aVal.toFixed(1), x, cy + radius + 10);
+      ctx.fillText(fmt(xVal), x, cy + radius + 10);
       ctx.textAlign = "right";
-      ctx.fillText(bVal.toFixed(1), cx - radius - 6, y);
+      ctx.fillText(fmt(yVal), cx - radius - 6, y);
       ctx.textAlign = "center";
     }
   } else {
@@ -241,6 +283,8 @@ export function drawWheel(type, ui, state, opts = {}) {
     const hasHue = channels.includes("h");
     const scKey = channels.find((c) => c === "s" || c === "c");
     const baseRange = state.bounds.ranges || csRanges[wheelSpaceCurrent];
+    const constraintSets = state.bounds.constraintSets;
+    const factors = [0.6745, 1.2816, 1.96];
 
     const strokeOverlay = () => {
       ctx.setLineDash([]);
@@ -253,21 +297,6 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.stroke();
       ctx.setLineDash([]);
     };
-    const isFull01 = (b) => Array.isArray(b) && b.length === 2 && b[0] <= 1e-6 && b[1] >= 1 - 1e-6;
-
-    const hueSpanNorm = state.bounds.boundsH
-      ? (state.bounds.boundsH[1] - state.bounds.boundsH[0] + 1) % 1
-      : null;
-
-    const hueConstrained =
-      hasHue &&
-      state.bounds.boundsH &&
-      !isFull01(state.bounds.boundsH) &&
-      hueSpanNorm !== null &&
-      hueSpanNorm > 0 &&
-      hueSpanNorm < 0.999;
-    const scBounds = scKey ? state.bounds.boundsByName?.[scKey] : null;
-    const scConstrained = scKey && scBounds && !isFull01(scBounds);
     const shadeExcludedEvenOdd = (shadeStyle, drawFullPath, drawAllowedPath) => {
       ctx.save();
       ctx.fillStyle = shadeStyle;
@@ -277,141 +306,183 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.fill("evenodd");
       ctx.restore();
     };
-
-    // Draw overlays independently: hue-only should still render even if chroma is unconstrained.
-    if (!isRectWheel && (hueConstrained || scConstrained)) {
-      const start = state.bounds.boundsH ? state.bounds.boundsH[0] * 2 * Math.PI : 0;
-      const span = hueSpanNorm != null ? hueSpanNorm * 2 * Math.PI : 2 * Math.PI;
-      const end = start + span;
-      let r0 = 0;
-      let r1 = radius;
-      if (scConstrained) {
-        const toVal = (bnd, min, max) => min + bnd * (max - min);
-        const minVal = toVal(scBounds[0], baseRange.min[scKey], baseRange.max[scKey]);
-        const maxVal = toVal(scBounds[1], baseRange.min[scKey], baseRange.max[scKey]);
-        const maxSC = scKey === "s" ? ranges.max.s : ranges.max.c;
-        r0 = clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
-        r1 = clamp(maxVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
-      }
-      const drawFull = () => {
-        ctx.moveTo(cx + radius, cy);
-        ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
-      };
-      const drawAllowed = () => {
-        if (hueConstrained && scConstrained) {
-          ctx.moveTo(cx + r1 * Math.cos(start), cy + r1 * Math.sin(start));
-          ctx.arc(cx, cy, r1, start, end);
-          if (r0 > 1e-3) {
-            ctx.lineTo(cx + r0 * Math.cos(end), cy + r0 * Math.sin(end));
-            ctx.arc(cx, cy, r0, end, start, true);
-          } else {
-            ctx.lineTo(cx, cy);
-          }
-          ctx.closePath();
-          return;
-        }
-        if (hueConstrained) {
-          ctx.moveTo(cx, cy);
-          ctx.arc(cx, cy, radius, start, end);
-          ctx.closePath();
-          return;
-        }
-        // chroma-only
-        ctx.moveTo(cx + r1, cy);
-        ctx.arc(cx, cy, r1, 0, 2 * Math.PI);
-        if (r0 > 1e-3) {
-          ctx.moveTo(cx + r0, cy);
-          ctx.arc(cx, cy, r0, 0, 2 * Math.PI);
-        }
-      };
-      shadeExcludedEvenOdd("rgba(255,255,255,0.60)", drawFull, drawAllowed);
-    }
-
-    if (hueConstrained && scConstrained) {
-      let a0 = state.bounds.boundsH[0] * 2 * Math.PI;
-      let a1 = state.bounds.boundsH[1] * 2 * Math.PI;
-      while (a1 <= a0) a1 += 2 * Math.PI;
-      const toVal = (bnd, min, max) => min + bnd * (max - min);
-      const minVal = toVal(scBounds[0], baseRange.min[scKey], baseRange.max[scKey]);
-      const maxVal = toVal(scBounds[1], baseRange.min[scKey], baseRange.max[scKey]);
+    const toVal = (u, min, max) => min + u * (max - min);
+    const mapRadius = (u) => {
+      const minVal = toVal(u, baseRange.min[scKey], baseRange.max[scKey]);
       const maxSC = scKey === "s" ? ranges.max.s : ranges.max.c;
-      const r0 = clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
-      const r1 = clamp(maxVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
-      ctx.beginPath();
-      ctx.moveTo(cx + r1 * Math.cos(a0), cy + r1 * Math.sin(a0));
-      ctx.arc(cx, cy, r1, a0, a1);
-      if (r0 > 1e-3) {
-        ctx.lineTo(cx + r0 * Math.cos(a1), cy + r0 * Math.sin(a1));
-        ctx.arc(cx, cy, r0, a1, a0, true);
-      } else {
-        ctx.lineTo(cx, cy);
+      return clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
+    };
+
+    if (!isRectWheel && constraintSets?.channels) {
+      const hueC = constraintSets.channels.h;
+      const scC = scKey ? constraintSets.channels[scKey] : null;
+      const hueMode = hueC?.mode || "hard";
+      const scMode = scC?.mode || "hard";
+      const hueSegments = normalizeHueSegments(hueC?.intervalsRad || []);
+      const scIntervals = scC?.intervals || [[0, 1]];
+      const hueActive = hueSegments.length && !isFullArc(hueSegments);
+      const scActive = scIntervals.length && !(scIntervals.length === 1 && scIntervals[0][0] <= 1e-6 && scIntervals[0][1] >= 1 - 1e-6);
+
+      if ((hueActive && hueMode === "hard") || (scActive && scMode === "hard")) {
+        const shadeHue = hueActive && hueMode === "hard" ? hueSegments : [[0, TAU]];
+        const shadeSc = scActive && scMode === "hard" ? scIntervals : [[0, 1]];
+        shadeExcludedEvenOdd(
+          "rgba(255,255,255,0.60)",
+          () => {
+            ctx.moveTo(cx + radius, cy);
+            ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+          },
+          () => {
+            shadeHue.forEach(([a, b]) => {
+              shadeSc.forEach(([u0, u1]) => {
+                const r0 = mapRadius(u0);
+                const r1 = mapRadius(u1);
+                ctx.moveTo(cx + r1 * Math.cos(a), cy + r1 * Math.sin(a));
+                ctx.arc(cx, cy, r1, a, b);
+                if (r0 > 1e-3) {
+                  ctx.lineTo(cx + r0 * Math.cos(b), cy + r0 * Math.sin(b));
+                  ctx.arc(cx, cy, r0, b, a, true);
+                } else {
+                  ctx.lineTo(cx, cy);
+                }
+                ctx.closePath();
+              });
+            });
+          }
+        );
       }
-      ctx.closePath();
-      strokeOverlay();
-    } else {
-      if (scConstrained) {
-        const toVal = (bnd, min, max) => min + bnd * (max - min);
-        const minVal = toVal(scBounds[0], baseRange.min[scKey], baseRange.max[scKey]);
-        const maxVal = toVal(scBounds[1], baseRange.min[scKey], baseRange.max[scKey]);
-        const maxSC = scKey === "s" ? ranges.max.s : ranges.max.c;
-        const rMin = clamp(minVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
-        const rMax = clamp(maxVal / Math.max(maxSC, 1e-6), 0, 1) * radius;
-        ctx.beginPath();
-        ctx.arc(cx, cy, rMin, 0, 2 * Math.PI);
-        strokeOverlay();
-        ctx.beginPath();
-        ctx.arc(cx, cy, rMax, 0, 2 * Math.PI);
-        strokeOverlay();
+
+      if (hueActive) {
+        if (hueMode === "hard") {
+          hueSegments.forEach(([a, b]) => {
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, radius, a, b);
+            ctx.closePath();
+            strokeOverlay();
+          });
+        } else {
+          (hueC?.intervalsRad || []).forEach(([aRad, bRad]) => {
+            const center = (aRad + bRad) / 2;
+            const sigma = Math.max((bRad - aRad) / (2 * 1.96), 1e-3);
+            factors.forEach((k) => {
+              const start = center - k * sigma;
+              const end = center + k * sigma;
+              normalizeHueSegments([[start, end]]).forEach(([a, b]) => {
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, radius, a, b);
+                ctx.closePath();
+                strokeOverlay();
+              });
+            });
+          });
+        }
       }
-      if (hueConstrained) {
-        const start = state.bounds.boundsH[0] * 2 * Math.PI;
-        const span = hueSpanNorm * 2 * Math.PI;
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.arc(cx, cy, radius, start, start + span);
-        ctx.closePath();
-        strokeOverlay();
+
+      if (scActive && scKey) {
+        if (scMode === "hard") {
+          scIntervals.forEach(([u0, u1]) => {
+            const rMin = mapRadius(u0);
+            const rMax = mapRadius(u1);
+            ctx.beginPath();
+            ctx.arc(cx, cy, rMin, 0, 2 * Math.PI);
+            strokeOverlay();
+            ctx.beginPath();
+            ctx.arc(cx, cy, rMax, 0, 2 * Math.PI);
+            strokeOverlay();
+          });
+        } else {
+          scIntervals.forEach(([u0, u1]) => {
+            const center = (u0 + u1) / 2;
+            const sigma = Math.max((u1 - u0) / (2 * 1.96), 1e-3);
+            factors.forEach((k) => {
+              const rA = mapRadius(clamp01(center - k * sigma));
+              const rB = mapRadius(clamp01(center + k * sigma));
+              ctx.beginPath();
+              ctx.arc(cx, cy, rA, 0, 2 * Math.PI);
+              strokeOverlay();
+              ctx.beginPath();
+              ctx.arc(cx, cy, rB, 0, 2 * Math.PI);
+              strokeOverlay();
+            });
+          });
+        }
       }
     }
 
-    if ((wheelSpaceCurrent === "lab" || wheelSpaceCurrent === "oklab") && state.bounds.boundsByName) {
-      const aBounds = state.bounds.boundsByName.a;
-      const bBounds = state.bounds.boundsByName.b;
-      if (aBounds && bBounds) {
-        if (!(isFull01(aBounds) && isFull01(bBounds))) {
-          const maxA = Math.max(Math.abs(ranges.min.a), Math.abs(ranges.max.a));
-          const maxB = Math.max(Math.abs(ranges.min.b), Math.abs(ranges.max.b));
-          const maxRectC = Math.min(maxA, maxB) || 1;
-          const toVal = (bnd, min, max) => min + bnd * (max - min);
-          const aMin = toVal(aBounds[0], baseRange.min.a, baseRange.max.a);
-          const aMax = toVal(aBounds[1], baseRange.min.a, baseRange.max.a);
-          const bMin = toVal(bBounds[0], baseRange.min.b, baseRange.max.b);
-          const bMax = toVal(bBounds[1], baseRange.min.b, baseRange.max.b);
-          const x0 = cx + clamp(aMin / maxRectC, -1, 1) * radius;
-          const x1 = cx + clamp(aMax / maxRectC, -1, 1) * radius;
-          const y0 = cy - clamp(bMax / maxRectC, -1, 1) * radius;
-          const y1 = cy - clamp(bMin / maxRectC, -1, 1) * radius;
+    if (isRectWheel && constraintSets?.channels && rectKeys) {
+      const xKey = rectKeys.x;
+      const yKey = rectKeys.y;
+      const xC = constraintSets.channels[xKey];
+      const yC = constraintSets.channels[yKey];
+      const xMode = xC?.mode || "hard";
+      const yMode = yC?.mode || "hard";
+      const xIntervals = xC?.intervals || [[0, 1]];
+      const yIntervals = yC?.intervals || [[0, 1]];
+      const xActive = xIntervals.length && !(xIntervals.length === 1 && xIntervals[0][0] <= 1e-6 && xIntervals[0][1] >= 1 - 1e-6);
+      const yActive = yIntervals.length && !(yIntervals.length === 1 && yIntervals[0][0] <= 1e-6 && yIntervals[0][1] >= 1 - 1e-6);
 
-          // Shade excluded region outside the constraint rectangle (even-odd).
-          shadeExcludedEvenOdd(
-            "rgba(255,255,255,0.60)",
-            () => {
-              ctx.rect(cx - radius, cy - radius, radius * 2, radius * 2);
-            },
-            () => {
-              ctx.rect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0));
-            }
-          );
+      const maxX = Math.max(Math.abs(ranges.min[xKey] || 0), Math.abs(ranges.max[xKey] || 0)) || 1;
+      const maxY = Math.max(Math.abs(ranges.min[yKey] || 0), Math.abs(ranges.max[yKey] || 0)) || 1;
+      const xToCoord = (u) => {
+        const val = toVal(u, baseRange.min[xKey], baseRange.max[xKey]);
+        return cx + clamp(val / maxX, -1, 1) * radius;
+      };
+      const yToCoord = (u) => {
+        const val = toVal(u, baseRange.min[yKey], baseRange.max[yKey]);
+        return cy - clamp(val / maxY, -1, 1) * radius;
+      };
 
-          ctx.setLineDash([]);
-          ctx.strokeStyle = "rgba(255,255,255,0.9)";
-          ctx.lineWidth = 2;
-          ctx.strokeRect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0));
-          ctx.setLineDash([6, 4]);
-          ctx.strokeStyle = "rgba(0,0,0,0.75)";
-          ctx.lineWidth = 1;
-          ctx.strokeRect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0));
-          ctx.setLineDash([]);
+      if ((xActive && xMode === "hard") || (yActive && yMode === "hard")) {
+        const shadeX = xActive && xMode === "hard" ? xIntervals : [[0, 1]];
+        const shadeY = yActive && yMode === "hard" ? yIntervals : [[0, 1]];
+        shadeExcludedEvenOdd(
+          "rgba(255,255,255,0.60)",
+          () => {
+            ctx.rect(cx - radius, cy - radius, radius * 2, radius * 2);
+          },
+          () => {
+            shadeX.forEach(([x0, x1]) => {
+              shadeY.forEach(([y0, y1]) => {
+                const xA = xToCoord(x0);
+                const xB = xToCoord(x1);
+                const yA = yToCoord(y0);
+                const yB = yToCoord(y1);
+                ctx.rect(Math.min(xA, xB), Math.min(yA, yB), Math.abs(xB - xA), Math.abs(yB - yA));
+              });
+            });
+          }
+        );
+      }
+
+      if (xActive || yActive) {
+        if (xMode === "hard" && yMode === "hard") {
+          xIntervals.forEach(([x0, x1]) => {
+            yIntervals.forEach(([y0, y1]) => {
+              const xA = xToCoord(x0);
+              const xB = xToCoord(x1);
+              const yA = yToCoord(y0);
+              const yB = yToCoord(y1);
+              ctx.beginPath();
+              ctx.rect(Math.min(xA, xB), Math.min(yA, yB), Math.abs(xB - xA), Math.abs(yB - yA));
+              strokeOverlay();
+            });
+          });
+        } else {
+          const xContours = xMode === "soft" ? contourIntervals(xIntervals, factors) : xIntervals;
+          const yContours = yMode === "soft" ? contourIntervals(yIntervals, factors) : yIntervals;
+          xContours.forEach(([x0, x1]) => {
+            yContours.forEach(([y0, y1]) => {
+              const xA = xToCoord(x0);
+              const xB = xToCoord(x1);
+              const yA = yToCoord(y0);
+              const yB = yToCoord(y1);
+              ctx.beginPath();
+              ctx.rect(Math.min(xA, xB), Math.min(yA, yB), Math.abs(xB - xA), Math.abs(yB - yA));
+              strokeOverlay();
+            });
+          });
         }
       }
     }
@@ -473,7 +544,67 @@ function padRange(range, frac = 0.06) {
   return { min, max };
 }
 
-function computeGamutRange(space, gamutPreset) {
+function clamp01(v) {
+  if (!Number.isFinite(v)) return 0;
+  return Math.max(0, Math.min(1, v));
+}
+
+function normalizeHueSegments(intervalsRad) {
+  const segments = [];
+  const TAU = Math.PI * 2;
+  (intervalsRad || []).forEach(([aRad, bRad]) => {
+    const span = bRad - aRad;
+    if (span >= TAU - 1e-6) {
+      segments.push([0, TAU]);
+      return;
+    }
+    const start = ((aRad % TAU) + TAU) % TAU;
+    const end = ((bRad % TAU) + TAU) % TAU;
+    if (start <= end) {
+      segments.push([start, end]);
+    } else {
+      segments.push([0, end], [start, TAU]);
+    }
+  });
+  return mergeAngleSegments(segments);
+}
+
+function mergeAngleSegments(segments) {
+  if (!segments?.length) return [];
+  const TAU = Math.PI * 2;
+  const sorted = segments
+    .map(([a, b]) => [Math.max(0, a), Math.min(TAU, b)])
+    .filter(([a, b]) => b > a + 1e-6)
+    .sort((x, y) => x[0] - y[0]);
+  const merged = [];
+  sorted.forEach(([a, b]) => {
+    const last = merged[merged.length - 1];
+    if (!last || a > last[1] + 1e-6) merged.push([a, b]);
+    else last[1] = Math.max(last[1], b);
+  });
+  return merged;
+}
+
+function isFullArc(segments) {
+  const TAU = Math.PI * 2;
+  return segments.length === 1 && segments[0][0] <= 1e-6 && segments[0][1] >= TAU - 1e-6;
+}
+
+function contourIntervals(intervals, factors) {
+  const out = [];
+  intervals.forEach(([a, b]) => {
+    const center = (a + b) / 2;
+    const sigma = Math.max((b - a) / (2 * 1.96), 1e-3);
+    factors.forEach((k) => {
+      const start = clamp01(center - k * sigma);
+      const end = clamp01(center + k * sigma);
+      if (end > start + 1e-6) out.push([start, end]);
+    });
+  });
+  return out;
+}
+
+export function computeGamutRange(space, gamutPreset) {
   const key = `${space}::${gamutPreset}`;
   if (gamutRangeCache.has(key)) return gamutRangeCache.get(key);
   const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
@@ -573,30 +704,32 @@ export function makeWheelColor(hueDeg, chromaNorm, wheelSpace) {
   return encodeColor({ h: hueDeg, s: chromaNorm * 100, l: fixedL * 100 }, "hsl");
 }
 
-export function channelGradientForSpace(key, space, type, cvdModel = "legacy") {
+export function channelGradientForSpace(key, space, type, cvdModel = "legacy", rangeOverride = null) {
+  const range = rangeOverride || csRanges[space];
   const stops = 24;
   const colors = [];
   const hueStart = 285;
   const hueSpan = 360;
+  const lightKey = lightnessKey(space);
   for (let i = 0; i <= stops; i++) {
     const t = i / stops;
     let hex;
     if (key === "h") {
       const h = hueStart + hueSpan * t;
       hex = encodeColor({ h, s: 100, l: 50 }, "hsl");
-    } else if (key === "l") {
-      const lVal = csRanges[space].min.l + t * (csRanges[space].max.l - csRanges[space].min.l);
-      hex = encodeColor({ ...zeroChannels(space), l: lVal }, space);
+    } else if (key === lightKey) {
+      const lVal = range.min[lightKey] + t * (range.max[lightKey] - range.min[lightKey]);
+      hex = encodeColor({ ...zeroChannels(space, range), [lightKey]: lVal }, space);
     } else if (key === "s" || key === "c") {
       const scVal =
-        csRanges[space].min[key] + t * (csRanges[space].max[key] - csRanges[space].min[key]);
-      hex = encodeColor({ ...zeroChannels(space), [key]: scVal, l: midL(space) }, space);
-    } else if (key === "a" || key === "b") {
-      const val = csRanges[space].min[key] + t * (csRanges[space].max[key] - csRanges[space].min[key]);
-      const obj = { ...zeroChannels(space), l: midL(space), [key]: val };
+        range.min[key] + t * (range.max[key] - range.min[key]);
+      hex = encodeColor({ ...zeroChannels(space, range), [key]: scVal, [lightKey]: midL(space, range) }, space);
+    } else if (key !== "h") {
+      const val = range.min[key] + t * (range.max[key] - range.min[key]);
+      const obj = { ...zeroChannels(space, range), [lightKey]: midL(space, range), [key]: val };
       hex = encodeColor(obj, space);
     } else {
-      hex = encodeColor({ ...zeroChannels(space), l: midL(space) }, space);
+      hex = encodeColor({ ...zeroChannels(space, range), [lightKey]: midL(space, range) }, space);
     }
     colors.push(applyCvdHex(hex, type, 1, cvdModel));
   }
@@ -604,17 +737,28 @@ export function channelGradientForSpace(key, space, type, cvdModel = "legacy") {
   return `linear-gradient(180deg, ${gradient})`;
 }
 
-function zeroChannels(space) {
+function zeroChannels(space, rangeOverride = null) {
   const ch = channelOrder[space];
+  const lightKey = lightnessKey(space);
   const obj = {};
+  const range = rangeOverride || csRanges[space];
   ch.forEach((key) => {
     if (key === "h") obj[key] = 0;
-    else if (key === "l") obj[key] = midL(space);
+    else if (key === lightKey) obj[key] = midL(space, range);
     else obj[key] = 0;
   });
   return obj;
 }
 
-function midL(space) {
-  return (csRanges[space].min.l + csRanges[space].max.l) / 2;
+function lightnessKey(space) {
+  const ch = channelOrder[space] || [];
+  if (ch.includes("l")) return "l";
+  if (ch.includes("jz")) return "jz";
+  return ch[0] || "l";
+}
+
+function midL(space, rangeOverride = null) {
+  const lk = lightnessKey(space);
+  const r = rangeOverride || csRanges[space];
+  return (r.min[lk] + r.max[lk]) / 2;
 }

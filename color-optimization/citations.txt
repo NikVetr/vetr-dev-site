@@ -16,3 +16,32 @@ Implementation note / provenance
   https://github.com/njsmith/colorspacious/blob/master/colorspacious/cvd.py
   (colorspacious is BSD-licensed; see that project’s LICENSE.txt for details)
 
+
+Additional Color / Distance Model References
+
+CIE L*u*v* (CIELUV)
+- CIE 1976 L*u*v* colour space (CIELUV), defined in terms of CIE XYZ and u'v'.
+
+JzAzBz
+- Safdar, M., Cui, G., Kim, Y. J., & Luo, M. R. (2017)
+  “Perceptually uniform color space for image signals including high dynamic range and wide gamut”
+  (JzAzBz)
+- Constants and matrices in `core/colorSpaces.js` follow common published implementations.
+
+CAM02-UCS
+- Luo, M. R., Cui, G., & Li, C. (2006)
+  “Uniform colour spaces based on CIECAM02 colour appearance model”
+  (CAM02-UCS / J′a′b′ mapping with coefficients c1=0.007, c2=0.0228)
+
+CAM16-UCS
+- Li, C., Li, Z., Wang, Z., Xu, Y., Luo, M. R., Cui, G., et al. (2017)
+  “Comprehensive color solutions: CAM16, CAT16, and CAM16-UCS”
+
+ICtCp + ΔE_ITP
+- Dolby (2016) “What is ICtCp?” (ICtCp encoding)
+- ITU-R BT.2100 (ICtCp usage for HDR/WCG)
+- ITU-R BT.2124 (ΔE_ITP definition; ΔE_ITP = 720 * sqrt((ΔI)^2 + (0.5ΔT)^2 + (ΔP)^2))
+
+Implementation note / provenance
+- ICtCp matrices in `core/ictcp.js` and CAT16 matrix in `core/camUcs.js` match the values used by:
+  https://github.com/colour-science/colour (BSD-3-Clause)

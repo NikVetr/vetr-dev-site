@@ -4,11 +4,15 @@ import {
   convertColorValues,
   GAMUTS,
   hslToRgb,
+  jzazbzToXyz,
   labToXyz,
+  luvToXyz,
   oklabToSrgb,
   rgbToHex,
   rgbToXyz,
   srgbToOklab,
+  xyzToJzAzBz,
+  xyzToLuv,
   xyzToRgb,
 } from "../core/colorSpaces.js";
 
@@ -101,4 +105,24 @@ test("Display P3 pure red converts to finite XYZ via GAMUTS matrix", () => {
   Object.values(xyz).forEach((v) => {
     assert.ok(Number.isFinite(v), `Expected finite value, got ${v}`);
   });
+});
+
+test("Luv round-trips through XYZ", () => {
+  const luv = { l: 65, u: 40, v: -20 };
+  const xyz = luvToXyz(luv);
+  const back = xyzToLuv(xyz);
+  assert.ok(Number.isFinite(back.l) && Number.isFinite(back.u) && Number.isFinite(back.v));
+  assert.ok(Math.abs(back.l - luv.l) < 1e-6);
+  assert.ok(Math.abs(back.u - luv.u) < 1e-4);
+  assert.ok(Math.abs(back.v - luv.v) < 1e-4);
+});
+
+test("JzAzBz round-trips through XYZ (normalized Jz)", () => {
+  const jz = { jz: 0.5, az: 0.08, bz: -0.06 };
+  const xyz = jzazbzToXyz(jz);
+  const back = xyzToJzAzBz(xyz);
+  assert.ok(Number.isFinite(back.jz) && Number.isFinite(back.az) && Number.isFinite(back.bz));
+  assert.ok(Math.abs(back.jz - jz.jz) < 1e-3);
+  assert.ok(Math.abs(back.az - jz.az) < 1e-3);
+  assert.ok(Math.abs(back.bz - jz.bz) < 1e-3);
 });
