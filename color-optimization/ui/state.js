@@ -18,5 +18,13 @@ export function createInitialState() {
     runResults: [],
     runRanking: [],
     selectedResultIdx: null,
+    customConstraints: null,
+    customConstraintSelection: null,
+    suppressConstraintTopologyHistory: false,
+    perInputConstraints: {
+      enabled: false,
+      sync: { h: false, sc: false, l: false },
+      widths: { h: [], sc: [], l: [] },
+    },
   };
 }

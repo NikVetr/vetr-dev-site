@@ -2,15 +2,15 @@ import {
   channelOrder,
   csRanges,
   decodeColor,
+  effectiveRangeFromValues,
   rangeFromPreset,
   gamutPresets,
   convertColorValues,
   projectToGamut,
-  GAMUTS,
 } from "../core/colorSpaces.js";
 import { contrastColor } from "../core/metrics.js";
 import { niceTicks } from "../core/stats.js";
-import { buildGamutHullPaths, strokeHull } from "./gamutHull.js";
+import { buildGamutProjectionBoundary, smoothBoundary, strokeBoundary } from "./gamutHull.js";
 
 export function drawStatusGraph(state, ui) {
   const canvas = ui.statusGraph;
@@ -170,6 +170,7 @@ export function drawStatusMini(state, ui, opts = {}) {
   if (!canvas) return;
   const clipToGamut = typeof opts === "object" ? (opts.clipToGamut === true || opts.clipToGamut === false ? opts.clipToGamut : false) : false;
   const gamutPreset = typeof opts === "object" ? opts.gamutPreset || "srgb" : "srgb";
+  const gamutMode = typeof opts === "object" ? opts.gamutMode || "auto" : "auto";
   const presetLabel = gamutPresets[gamutPreset]?.label || gamutPreset;
   const space = (typeof opts === "object" && opts.vizSpace) || ui.colorwheelSpace?.value || "hsl";
   const ctx = canvas.getContext("2d");
@@ -195,6 +196,7 @@ export function drawStatusMini(state, ui, opts = {}) {
   const trails = state.nmTrails || [];
   const rawOverride = state.rawInputOverride?.space === space ? state.rawInputOverride.values : null;
   const rawCurrent = rawOverride?.length ? rawOverride : (state.rawCurrentColors?.length ? state.rawCurrentColors : null);
+  const rawCurrentSpace = rawOverride?.length ? state.rawInputOverride.space : state.rawSpace;
   const rawBest = state.rawBestColors?.length ? state.rawBestColors : null;
   const resolveMaybeProjected = (hex, rawArr, idx, sourceSpace) => {
     const raw = rawArr && rawArr[idx];
@@ -218,7 +220,7 @@ export function drawStatusMini(state, ui, opts = {}) {
   const valuesForRange = [];
   state.currentColors.forEach((hex, idx) => {
     colorSet.push(hex);
-    valuesForRange.push(resolveMaybeProjected(hex, rawCurrent, idx, state.rawSpace));
+    valuesForRange.push(resolveMaybeProjected(hex, rawCurrent, idx, rawCurrentSpace));
   });
   (state.bestColors || []).forEach((hex, idx) => {
     colorSet.push(hex);
@@ -249,43 +251,9 @@ export function drawStatusMini(state, ui, opts = {}) {
     return;
   }
 
-  const presetRange =
-    computeGamutRange(space, gamutPreset) ||
-    rangeFromPreset(space, gamutPreset) ||
-    csRanges[space];
+  const presetRange = rangeFromPreset(space, gamutPreset) || csRanges[space];
   const channels = channelOrder[space];
   const visibleValues = valuesForRange;
-
-  const rangeFromValues = (vals) => {
-    const min = {};
-    const max = {};
-    channels.forEach((ch) => {
-      if (ch === "h") {
-        min[ch] = presetRange.min[ch];
-        max[ch] = presetRange.max[ch];
-      } else {
-        min[ch] = Infinity;
-        max[ch] = -Infinity;
-      }
-    });
-    vals.forEach((v) => {
-      channels.forEach((ch) => {
-        if (ch === "h") return;
-        const val = v?.[ch];
-        if (!Number.isFinite(val)) return;
-        if (val < min[ch]) min[ch] = val;
-        if (val > max[ch]) max[ch] = val;
-      });
-    });
-    channels.forEach((ch) => {
-      if (ch === "h") return;
-      if (!Number.isFinite(min[ch]) || !Number.isFinite(max[ch])) {
-        min[ch] = presetRange.min[ch];
-        max[ch] = presetRange.max[ch];
-      }
-    });
-    return { min, max };
-  };
 
   const unionRanges = (a, b) => {
     const min = {};
@@ -314,9 +282,11 @@ export function drawStatusMini(state, ui, opts = {}) {
     return { min, max };
   };
 
-  const dataRange = visibleValues.length ? rangeFromValues(visibleValues) : presetRange;
-  const unionRange = unionRanges(dataRange, presetRange);
-  const scaleRange = padRange(unionRange);
+  const baseRange = space === "jzazbz" ? presetRange : csRanges[space];
+  const dataRange = effectiveRangeFromValues(visibleValues, space);
+  const unclippedRange = gamutMode === "full" ? baseRange : unionRanges(dataRange, baseRange);
+  const clippedRange = gamutMode === "full" ? presetRange : unionRanges(dataRange, presetRange);
+  const scaleRange = padRange(clipToGamut ? clippedRange : unclippedRange, 0);
 
   const toPoint = (vals, rangeOverride) => {
     const useRange = rangeOverride || scaleRange;
@@ -355,8 +325,19 @@ export function drawStatusMini(state, ui, opts = {}) {
   };
 
   if (clipToGamut) {
-    const hullPaths = buildGamutHullPaths(gamutPreset, space, (vals) => toPoint(vals, scaleRange));
-    strokeHull(ctx, hullPaths);
+    const boundaryVals = buildGamutProjectionBoundary(
+      space,
+      gamutPreset,
+      scaleRange,
+      isRect,
+      rectKeys
+    );
+    const boundaryPts = (boundaryVals || [])
+      .map((vals) => toPoint(vals, scaleRange))
+      .filter((pt) => pt && Number.isFinite(pt.x) && Number.isFinite(pt.y));
+    if (boundaryPts.length) {
+      strokeBoundary(ctx, smoothBoundary(boundaryPts, 1));
+    }
   }
 
   const resolveVal = (hex, rawArr, idx, sourceSpace) =>
@@ -435,7 +416,7 @@ export function drawStatusMini(state, ui, opts = {}) {
   };
 
   state.currentColors.forEach((hex, idx) =>
-    drawPoint(toPoint(resolveVal(hex, rawCurrent, idx, state.rawSpace)), hex, "circle", 9)
+    drawPoint(toPoint(resolveVal(hex, rawCurrent, idx, rawCurrentSpace)), hex, "circle", 9)
   );
   (state.bestColors || []).forEach((hex, idx) =>
     drawPoint(
@@ -451,72 +432,4 @@ export function drawStatusMini(state, ui, opts = {}) {
   ctx.textAlign = "left";
   ctx.textBaseline = "top";
   ctx.fillText(`${presetLabel}${clipToGamut ? " (clipped)" : " (raw)"}`, 6, 4);
-}
-
-const gamutRangeCache = new Map();
-
-function computeGamutRange(space, gamutPreset) {
-  const key = `${space}::${gamutPreset}`;
-  if (gamutRangeCache.has(key)) return gamutRangeCache.get(key);
-  const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
-  const channels = channelOrder[space] || [];
-  if (!gamut || !channels.length) return null;
-
-  const edges = [
-    [[0, 0, 0], [1, 0, 0]],
-    [[0, 0, 0], [0, 1, 0]],
-    [[0, 0, 0], [0, 0, 1]],
-    [[1, 1, 1], [0, 1, 1]],
-    [[1, 1, 1], [1, 0, 1]],
-    [[1, 1, 1], [1, 1, 0]],
-    [[1, 0, 0], [1, 1, 0]],
-    [[1, 0, 0], [1, 0, 1]],
-    [[0, 1, 0], [1, 1, 0]],
-    [[0, 1, 0], [0, 1, 1]],
-    [[0, 0, 1], [1, 0, 1]],
-    [[0, 0, 1], [0, 1, 1]],
-  ];
-  const steps = 14;
-  const min = {};
-  const max = {};
-  channels.forEach((ch) => {
-    if (ch === "h") {
-      min[ch] = csRanges[space]?.min?.[ch] ?? 0;
-      max[ch] = csRanges[space]?.max?.[ch] ?? 360;
-      return;
-    }
-    min[ch] = Infinity;
-    max[ch] = -Infinity;
-  });
-
-  for (const [a, b] of edges) {
-    for (let i = 0; i <= steps; i++) {
-      const t = i / steps;
-      const r = a[0] + (b[0] - a[0]) * t;
-      const g = a[1] + (b[1] - a[1]) * t;
-      const bl = a[2] + (b[2] - a[2]) * t;
-      const xyz = gamut.toXYZ(r, g, bl);
-      const vals = convertColorValues(xyz, "xyz", space);
-      channels.forEach((ch) => {
-        if (ch === "h") return;
-        const v = vals?.[ch];
-        if (!Number.isFinite(v)) return;
-        if (v < min[ch]) min[ch] = v;
-        if (v > max[ch]) max[ch] = v;
-      });
-    }
-  }
-
-  const fallback = rangeFromPreset(space, gamutPreset) || csRanges[space];
-  channels.forEach((ch) => {
-    if (ch === "h") return;
-    if (!Number.isFinite(min[ch]) || !Number.isFinite(max[ch])) {
-      min[ch] = fallback.min[ch];
-      max[ch] = fallback.max[ch];
-    }
-  });
-
-  const out = { min, max };
-  gamutRangeCache.set(key, out);
-  return out;
 }

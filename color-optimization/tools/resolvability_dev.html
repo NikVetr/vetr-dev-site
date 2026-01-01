@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resolvability Panel Dev Harness</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .dev-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dev-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .dev-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      font-size: 13px;
+      color: #475467;
+    }
+
+    .dev-controls label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dev-readout {
+      font-size: 12px;
+      color: #475467;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="dev-wrap">
+      <h1 class="dev-title">Resolvability Panel Dev Harness</h1>
+      <div class="dev-controls">
+        <label for="metric-select">
+          Metric
+          <select id="metric-select">
+            <option value="de2000">Delta E 2000 (Lab)</option>
+            <option value="oklab76">Delta E 76 (OKLab)</option>
+            <option value="lab76">Delta E 76 (Lab)</option>
+            <option value="cam02ucs">CAM02-UCS</option>
+            <option value="cam16ucs">CAM16-UCS</option>
+            <option value="deitp">Delta E ITP</option>
+          </select>
+        </label>
+      </div>
+      <div id="resolvability-host"></div>
+      <div id="resolvability-readout" class="dev-readout">
+        Hover a cell or node to inspect a pair or color.
+      </div>
+    </div>
+  </main>
+  <script type="module" src="./resolvability_dev.js"></script>
+</body>
+</html>

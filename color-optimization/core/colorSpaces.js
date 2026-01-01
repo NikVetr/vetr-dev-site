@@ -120,6 +120,8 @@ export function hexToRgb(hex) {
 
 export function rgbToHex({ r, g, b }) {
   const toHex = (v) => {
+    // Guard against NaN/undefined - treat as black component
+    if (!Number.isFinite(v)) v = 0;
     const clamped = Math.round(clamp(v) * 255).toString(16).padStart(2, "0");
     return clamped;
   };
@@ -353,6 +355,23 @@ export function projectToGamut(values, fromSpace, gamutPreset = "srgb", toSpace 
     return convertColorValues(xyzClamped, "xyz", toSpace);
   } catch (e) {
     return convertColorValues(values, fromSpace, toSpace);
+  }
+}
+
+// Check if a color is within a given gamut (with optional tolerance)
+export function isInGamut(values, fromSpace, gamutPreset = "srgb", tolerance = 1e-4) {
+  const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
+  if (!gamut) return true;
+  try {
+    const xyz = convertColorValues(values, fromSpace, "xyz");
+    const lin = gamut.fromXYZ(xyz.x, xyz.y, xyz.z);
+    return (
+      lin.r >= -tolerance && lin.r <= 1 + tolerance &&
+      lin.g >= -tolerance && lin.g <= 1 + tolerance &&
+      lin.b >= -tolerance && lin.b <= 1 + tolerance
+    );
+  } catch (e) {
+    return true;
   }
 }
 

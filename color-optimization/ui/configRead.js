@@ -12,26 +12,100 @@ export function getWidths(ui) {
   return [h, sc, l].map((v) => (isFinite(v) ? v : 0));
 }
 
+function clamp01(v) {
+  if (!Number.isFinite(v)) return 0;
+  return Math.max(0, Math.min(1, v));
+}
+
+function readModeValue(el) {
+  if (!el) return "hard";
+  if (el.type === "checkbox") return el.checked ? "soft" : "hard";
+  return el.value || "hard";
+}
+
+function perInputWidthsForSpace(ui, space, state) {
+  const topology = ui.constraintTopology?.value || "contiguous";
+  const perInput = state?.perInputConstraints;
+  if (topology !== "discontiguous" || !perInput?.enabled) return null;
+  const channels = channelOrder[space] || [];
+  const first = channels[0];
+  const third = channels[2];
+  const scChannel = channels.find((c) => c === "s" || c === "c") || channels[1];
+  const count =
+    state?.rawInputOverride?.space === space && Array.isArray(state.rawInputOverride.values)
+      ? state.rawInputOverride.values.length
+      : parsePalette(ui.paletteInput.value).length;
+  if (!count) return null;
+  const defaults = {
+    h: clamp01(parseFloat(ui.wH.value)),
+    sc: clamp01(parseFloat(ui.wSC.value)),
+    l: clamp01(parseFloat(ui.wL.value)),
+  };
+  const widths = perInput.widths || {};
+  const buildSlot = (slot, fallback) => {
+    const arr = Array.isArray(widths[slot]) ? widths[slot] : [];
+    return Array.from({ length: count }, (_, i) => {
+      const v = arr[i];
+      return Number.isFinite(v) ? clamp01(v) : fallback;
+    });
+  };
+  const out = {};
+  if (first) out[first] = buildSlot("h", defaults.h);
+  if (scChannel) out[scChannel] = buildSlot("sc", defaults.sc);
+  if (third) out[third] = buildSlot("l", defaults.l);
+  return out;
+}
+
+function customWidthsForSpace(ui, space, state) {
+  const topology = ui.constraintTopology?.value || "contiguous";
+  if (topology !== "custom") return null;
+  const custom = state?.customConstraints;
+  if (!custom?.values?.length || custom.space !== space) return null;
+  const channels = channelOrder[space] || [];
+  const scChannel = channels.find((c) => c === "s" || c === "c") || channels[1];
+  const defaults = {};
+  if (channels[0]) defaults[channels[0]] = clamp01(parseFloat(ui.wH.value));
+  if (scChannel) defaults[scChannel] = clamp01(parseFloat(ui.wSC.value));
+  if (channels[2]) defaults[channels[2]] = clamp01(parseFloat(ui.wL.value));
+  const widths = custom.widths || {};
+  const count = custom.values.length;
+  const out = {};
+  channels.forEach((ch) => {
+    const arr = Array.isArray(widths[ch]) ? widths[ch] : [];
+    out[ch] = Array.from({ length: count }, (_, i) => {
+      const v = arr[i];
+      return Number.isFinite(v) ? clamp01(v) : (defaults[ch] ?? 0);
+    });
+  });
+  return out;
+}
+
 export function constraintModeForSpace(ui, space) {
   const channels = channelOrder[space] || [];
   const scChannel = channels.find((c) => c === "s" || c === "c") || channels[1];
   const first = channels[0];
   const third = channels[2];
   const out = {};
-  if (first && ui.modeH) out[first] = ui.modeH.value || "hard";
-  if (scChannel && ui.modeSC) out[scChannel] = ui.modeSC.value || "hard";
-  if (third && ui.modeL) out[third] = ui.modeL.value || "hard";
+  if (first && ui.modeH) out[first] = readModeValue(ui.modeH);
+  if (scChannel && ui.modeSC) out[scChannel] = readModeValue(ui.modeSC);
+  if (third && ui.modeL) out[third] = readModeValue(ui.modeL);
   return out;
 }
 
-export function readConstraintConfig(ui, space) {
-  return {
+export function readConstraintConfig(ui, space, state) {
+  const config = {
     constrain: true,
     widths: getWidths(ui),
     constraintTopology: ui.constraintTopology?.value || "contiguous",
     aestheticMode: ui.aestheticMode?.value || "none",
     constraintMode: constraintModeForSpace(ui, space),
+    perInputWidths: customWidthsForSpace(ui, space, state) || perInputWidthsForSpace(ui, space, state),
+    customConstraintPoints:
+      state?.customConstraints?.space === space && Array.isArray(state.customConstraints.values)
+        ? state.customConstraints.values.map((v) => ({ ...v }))
+        : null,
   };
+  return config;
 }
 
 export function readConfig(ui, state) {
@@ -66,6 +140,11 @@ export function readConfig(ui, state) {
     constraintTopology: ui.constraintTopology?.value || "contiguous",
     aestheticMode: ui.aestheticMode?.value || "none",
     constraintMode,
+    perInputWidths: customWidthsForSpace(ui, ui.colorSpace.value, state) || perInputWidthsForSpace(ui, ui.colorSpace.value, state),
+    customConstraintPoints:
+      state?.customConstraints?.space === ui.colorSpace.value && Array.isArray(state.customConstraints.values)
+        ? state.customConstraints.values.map((v) => ({ ...v }))
+        : null,
     constrain: true,
     widths,
     colorblindSafe: true,

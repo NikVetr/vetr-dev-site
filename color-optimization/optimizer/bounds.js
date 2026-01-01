@@ -17,6 +17,7 @@ export function computeBounds(valuesRaw, colorSpace, config) {
   const topology = config.constraintTopology || "contiguous";
   const aestheticMode = config.aestheticMode || "none";
   const constraintMode = config.constraintMode || {};
+  const perInputWidths = config.perInputWidths || null;
   const ranges = csRanges[colorSpace];
   const aestheticValues = applyAestheticCenters(valuesRaw || [], colorSpace, aestheticMode);
   const aestheticNorm = aestheticValues.map((row) => normalizeForConstraint(row, ranges, colorSpace));
@@ -62,7 +63,8 @@ export function computeBounds(valuesRaw, colorSpace, config) {
     widthForChannel,
     boundsByName,
     boundsH,
-    aestheticNorm
+    aestheticNorm,
+    perInputWidths
   );
 
   return { boundsSc, boundsL, boundsH, boundsByName, constraintSets };
@@ -169,17 +171,23 @@ function buildConstraintSets(
   widthForChannel,
   boundsByName,
   boundsH,
-  aestheticNorm
+  aestheticNorm,
+  perInputWidths
 ) {
   const sets = { topology, aestheticMode, channels: {} };
+  const isDiscontiguous = topology === "discontiguous" || topology === "custom";
   channels.forEach((ch, idx) => {
     const mode = constraintMode[ch] || "hard";
     const width = widthForChannel(ch, idx);
+    const perWidths = Array.isArray(perInputWidths?.[ch]) ? perInputWidths[ch] : null;
     if (ch === "h") {
-      if (topology === "discontiguous") {
-        const arcs = buildHueUnionIntervals(valuesForChannel(aestheticNorm, "h"), width);
+      if (isDiscontiguous) {
+        const hueVals = valuesForChannel(aestheticNorm, "h");
+        const arcs = buildHueUnionIntervals(hueVals, perWidths || width);
         const full = arcs.length === 1 && arcs[0][0] <= 1e-6 && arcs[0][1] >= TAU - 1e-6;
-        sets.channels.h = { type: "hue", mode, width, intervalsRad: arcs, full };
+        // Store per-point windows for visualization (before merge)
+        const pointWindows = buildHuePointWindows(hueVals, perWidths || width);
+        sets.channels.h = { type: "hue", mode, width, intervalsRad: arcs, pointWindows, full };
       } else {
         const arc = hueArcFromBounds(boundsH);
         const arcs = arc ? [[arc.startRad, arc.startRad + arc.spanRad]] : [[0, TAU]];
@@ -187,10 +195,13 @@ function buildConstraintSets(
       }
       return;
     }
-    if (topology === "discontiguous") {
-      const intervals = buildLinearUnionIntervals(valuesForChannel(aestheticNorm, ch), width);
+    if (isDiscontiguous) {
+      const chVals = valuesForChannel(aestheticNorm, ch);
+      const intervals = buildLinearUnionIntervals(chVals, perWidths || width);
       const full = intervals.length === 1 && intervals[0][0] <= 1e-6 && intervals[0][1] >= 1 - 1e-6;
-      sets.channels[ch] = { type: "linear", mode, width, intervals, full };
+      // Store per-point windows for visualization (before merge)
+      const pointWindows = buildLinearPointWindows(chVals, perWidths || width);
+      sets.channels[ch] = { type: "linear", mode, width, intervals, pointWindows, full };
     } else {
       const b = boundsByName?.[ch] || [0, 1];
       sets.channels[ch] = { type: "linear", mode, width, intervals: [b], full: isFull01(b) };
@@ -205,17 +216,78 @@ function valuesForChannel(values, ch) {
     .filter((v) => Number.isFinite(v));
 }
 
-function buildLinearUnionIntervals(points, width) {
-  if (!points.length || width <= 0) return [[0, 1]];
+function widthForPoint(widths, idx, fallback) {
+  if (!Array.isArray(widths) || !widths.length) return fallback;
+  const v = widths[idx];
+  return Number.isFinite(v) ? v : fallback;
+}
+
+function linearWindowFromCenter(center, radius) {
+  let min = center - radius;
+  let max = center + radius;
+  if (min < 0) {
+    max -= min;
+    min = 0;
+  }
+  if (max > 1) {
+    min -= max - 1;
+    max = 1;
+  }
+  return { min: clamp01(min), max: clamp01(max) };
+}
+
+function buildLinearUnionIntervals(points, widthOrWidths) {
+  if (!points.length) return [[0, 1]];
+  if (Array.isArray(widthOrWidths)) {
+    const intervals = points
+      .map((u, idx) => {
+        const width = widthForPoint(widthOrWidths, idx, 0);
+        if (width <= 0) return null;
+        const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6);
+        const center = clamp01(u);
+        const window = linearWindowFromCenter(center, r);
+        return [window.min, window.max];
+      })
+      .filter((v) => v && v[1] > v[0] + 1e-6);
+    return mergeIntervals(intervals, 0, 1);
+  }
+  const width = widthOrWidths;
+  if (width <= 0) return [[0, 1]];
   const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6);
-  const intervals = points.map((u) => [clamp01(u - r), clamp01(u + r)]).filter(([a, b]) => b > a + 1e-6);
+  const intervals = points
+    .map((u) => {
+      const center = clamp01(u);
+      const window = linearWindowFromCenter(center, r);
+      return [window.min, window.max];
+    })
+    .filter(([a, b]) => b > a + 1e-6);
   return mergeIntervals(intervals, 0, 1);
 }
 
-function buildHueUnionIntervals(points, width) {
-  if (!points.length || width <= 0) return [[0, TAU]];
-  const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6) * TAU;
+function buildHueUnionIntervals(points, widthOrWidths) {
+  if (!points.length) return [[0, TAU]];
   const intervals = [];
+  if (Array.isArray(widthOrWidths)) {
+    points.forEach((u, idx) => {
+      const width = widthForPoint(widthOrWidths, idx, 0);
+      if (width <= 0) return;
+      const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6) * TAU;
+      const phi = wrap01(u) * TAU;
+      let a = phi - r;
+      let b = phi + r;
+      a = ((a % TAU) + TAU) % TAU;
+      b = ((b % TAU) + TAU) % TAU;
+      if (a <= b) {
+        intervals.push([a, b]);
+      } else {
+        intervals.push([0, b], [a, TAU]);
+      }
+    });
+    return mergeIntervals(intervals, 0, TAU);
+  }
+  const width = widthOrWidths;
+  if (width <= 0) return [[0, TAU]];
+  const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6) * TAU;
   points.forEach((u) => {
     const phi = wrap01(u) * TAU;
     let a = phi - r;
@@ -229,6 +301,50 @@ function buildHueUnionIntervals(points, width) {
     }
   });
   return mergeIntervals(intervals, 0, TAU);
+}
+
+// Returns per-point windows (un-merged) for visualization of discontiguous constraints
+function buildHuePointWindows(points, widthOrWidths) {
+  if (!points.length) return [];
+  if (Array.isArray(widthOrWidths)) {
+    return points.map((u, idx) => {
+      const width = widthForPoint(widthOrWidths, idx, 0);
+      if (width <= 0) return null;
+      const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6) * TAU;
+      const phi = wrap01(u) * TAU;
+      return { center: phi, radius: r };
+    });
+  }
+  const width = widthOrWidths;
+  if (width <= 0) return [];
+  const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6) * TAU;
+  return points.map((u) => {
+    const phi = wrap01(u) * TAU;
+    return { center: phi, radius: r };
+  });
+}
+
+// Returns per-point windows (un-merged) for visualization of discontiguous constraints
+function buildLinearPointWindows(points, widthOrWidths) {
+  if (!points.length) return [];
+  if (Array.isArray(widthOrWidths)) {
+    return points.map((u, idx) => {
+      const width = widthForPoint(widthOrWidths, idx, 0);
+      if (width <= 0) return null;
+      const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6);
+      const center = clamp01(u);
+      const window = linearWindowFromCenter(center, r);
+      return { center, radius: r, min: window.min, max: window.max };
+    });
+  }
+  const width = widthOrWidths;
+  if (width <= 0) return [];
+  const r = Math.max((1 - clamp01(width)) * 0.5, 1e-6);
+  return points.map((u) => {
+    const center = clamp01(u);
+    const window = linearWindowFromCenter(center, r);
+    return { center, radius: r, min: window.min, max: window.max };
+  });
 }
 
 function mergeIntervals(intervals, min = 0, max = 1) {

@@ -45,3 +45,24 @@ ICtCp + ΔE_ITP
 Implementation note / provenance
 - ICtCp matrices in `core/ictcp.js` and CAT16 matrix in `core/camUcs.js` match the values used by:
   https://github.com/colour-science/colour (BSD-3-Clause)
+
+
+Discriminability Threshold References
+
+General JND scaling
+- Wikipedia: "Color difference" (https://en.wikipedia.org/wiki/Color_difference)
+  - Notes ΔE_ITP is scaled so a value of 1 indicates potential just noticeable difference (JND).
+  - Notes ΔE formulas were originally designed so 1.0 is a JND, with CIE76 revised to ~2.3.
+- Color.js docs: "Color difference" (https://colorjs.io/docs/color-difference/)
+  - Notes ~2.3 as the commonly cited JND threshold for ΔE*ab-style metrics.
+
+CAM02-UCS / CAM16-UCS
+- Luo, M. R., Cui, G., & Li, C. (2006) “Uniform colour spaces based on CIECAM02 colour appearance model”
+  (CAM02-UCS is a uniform space; Euclidean distances intended to correlate with perceived differences).
+- Li, C., Li, Z., Wang, Z., Xu, Y., Luo, M. R., Cui, G., et al. (2017) “Comprehensive color solutions: CAM16, CAT16, and CAM16-UCS”
+  (CAM16-UCS likewise provides perceptually uniform Euclidean distances).
+
+OKLab scaling
+- Björn Ottosson (2020) “A perceptual color space for image processing”
+  https://bottosson.github.io/posts/oklab/
+  (OKLab uses normalized L in [0,1] and a/b in roughly [-0.5, 0.5], so ΔE-like thresholds are scaled by 1/100 relative to CIE Lab).

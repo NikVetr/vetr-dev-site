@@ -1,5 +1,6 @@
-export function setResults(colors, ui) {
-  const list = colors || [];
+export function setResults(colors, ui, inputColors = []) {
+  const includeInputs = ui.formatIncludeInputs?.checked;
+  const list = includeInputs ? (inputColors || []).concat(colors || []) : (colors || []);
   const withQuotes = ui.formatQuotes?.checked;
   const wrapR = ui.formatRC?.checked;
   const wrapPy = ui.formatPyList?.checked;

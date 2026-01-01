@@ -1,0 +1,14 @@
+{
+  "name": "color-optimization",
+  "version": "1.0.0",
+  "description": "Color palette optimization tool",
+  "scripts": {
+    "test": "npx playwright test",
+    "screenshot": "npx playwright test tests/screenshot.spec.js",
+    "serve": "npx http-server . -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "http-server": "^14.1.1"
+  }
+}

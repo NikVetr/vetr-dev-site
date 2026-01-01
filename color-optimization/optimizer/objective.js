@@ -11,10 +11,11 @@ import {
   xyzToLinearRgb,
   normalizeWithRange,
   unscaleWithRange,
+  projectToGamut,
   GAMUTS,
 } from "../core/colorSpaces.js";
 import { clamp, logistic } from "../core/util.js";
-import { computeBoundsFromCurrent } from "./bounds.js";
+import { computeBoundsFromCurrent, computeBoundsFromRawValues } from "./bounds.js";
 
 const PARAM_PENALTY_WEIGHT = 20;
 const GAMUT_PENALTY_WEIGHT = 80;
@@ -33,7 +34,10 @@ export function prepareData(palette, colorSpace, config) {
   // Important: use the same bounds logic as the UI (including synthetic midpoints when palette is empty).
   // Also: never let the optional background color dictate constraint bounds.
   const boundsPalette = Array.isArray(config?.boundsPalette) ? config.boundsPalette : palette;
-  const bounds = computeBoundsFromCurrent(boundsPalette, colorSpace, config);
+  const useCustom = config?.constraintTopology === "custom" && Array.isArray(config?.customConstraintPoints) && config.customConstraintPoints.length;
+  const bounds = useCustom
+    ? computeBoundsFromRawValues(config.customConstraintPoints, colorSpace, config)
+    : computeBoundsFromCurrent(boundsPalette, colorSpace, config);
   const currHex = normalized.map((row) =>
     encodeColor(unscaleWithRange(row, ranges, colorSpace), colorSpace)
   );
@@ -150,8 +154,15 @@ export function meanDistance(par, prep, returnInfo) {
     });
   }
 
+  if (constraintTopology === "discontiguous" || constraintTopology === "custom") {
+    applyDiscontiguousHardConstraints(m, zRows, constraintSets);
+  }
+
   const scaled = m.map((row) => unscaleWithRange(row, ranges, colorSpace));
-  const rawHex = scaled.map((row) => encodeColor(row, colorSpace));
+  const displayRaw = prep.clipToGamutOpt
+    ? scaled.map((row) => projectToGamut(row, colorSpace, prep.gamutPreset, colorSpace))
+    : scaled;
+  const rawHex = displayRaw.map((row) => encodeColor(row, colorSpace));
   const newHex = rawHex;
 
   const cvdStates = prep.cvdStates;
@@ -365,25 +376,165 @@ function logit(p) {
   return Math.log(t / (1 - t));
 }
 
+function applyDiscontiguousHardConstraints(rows, zRows, constraintSets) {
+  if (!constraintSets?.channels || !rows?.length) return;
+  const channels = Object.keys(constraintSets.channels);
+  const pointWindowsByChannel = {};
+  let numPoints = 0;
+  let hasHard = false;
+
+  channels.forEach((ch) => {
+    const c = constraintSets.channels[ch];
+    if (!c) return;
+    if (c.mode === "hard") hasHard = true;
+    if (Array.isArray(c.pointWindows) && c.pointWindows.length > 0) {
+      pointWindowsByChannel[ch] = c.pointWindows;
+      numPoints = Math.max(numPoints, c.pointWindows.length);
+    }
+  });
+
+  if (!hasHard || numPoints === 0) return;
+
+  rows.forEach((row, idx) => {
+    const zRow = zRows?.[idx] || {};
+    let bestIndex = null;
+    let bestZSq = Infinity;
+
+    for (let i = 0; i < numPoints; i++) {
+      let zSq = 0;
+      let used = false;
+      channels.forEach((ch) => {
+        const c = constraintSets.channels[ch];
+        if (!c) return;
+        const windows = pointWindowsByChannel[ch];
+        if (!windows) return;
+        const w = windows[i % windows.length];
+        if (!w) return;
+        used = true;
+        if (c.type === "hue") {
+          const phi = row.__huePhi;
+          if (!Number.isFinite(phi)) return;
+          const sigma = Math.max(w.radius / 1.96, 1e-3);
+          const dHue = circularDistance(phi, w.center);
+          zSq += Math.pow(dHue / sigma, 2);
+        } else {
+          const z = zRow?.[ch];
+          if (!Number.isFinite(z)) return;
+          const u = clamp(logistic(z), 0, 1);
+          const sigma = Math.max(w.radius / 1.96, 1e-3);
+          const dLin = Math.abs(u - w.center);
+          zSq += Math.pow(dLin / sigma, 2);
+        }
+      });
+      if (used && zSq < bestZSq) {
+        bestZSq = zSq;
+        bestIndex = i;
+      }
+    }
+
+    if (bestIndex == null) return;
+
+    channels.forEach((ch) => {
+      const c = constraintSets.channels[ch];
+      if (!c || c.mode !== "hard") return;
+      const windows = pointWindowsByChannel[ch];
+      if (!windows) return;
+      const w = windows[bestIndex % windows.length];
+      if (!w) return;
+      if (c.type === "hue") {
+        const phi = row.__huePhi;
+        if (!Number.isFinite(phi)) return;
+        const radius = Math.max(w.radius, 1e-6);
+        const delta = wrapToPi(phi - w.center);
+        if (Math.abs(delta) > radius) {
+          const clampedPhi = w.center + (delta >= 0 ? 1 : -1) * radius;
+          row.__huePhi = clampedPhi;
+          row.h = wrap01(clampedPhi / TAU);
+        }
+      } else {
+        const min = Number.isFinite(w.min) ? w.min : Math.max(0, w.center - w.radius);
+        const max = Number.isFinite(w.max) ? w.max : Math.min(1, w.center + w.radius);
+        const clamped = clamp(row[ch], min, max);
+        row[ch] = clamped;
+        zRow[ch] = logit(clamped);
+      }
+    });
+  });
+}
+
 function constraintPenaltyForRow(row, idx, zRow, constraintSets, topology) {
   if (!constraintSets || !constraintSets.channels) return { penalty: 0 };
   const channels = Object.keys(constraintSets.channels);
   let penalty = 0;
+
+  // For discontiguous mode, compute combined penalty based on distance to nearest point window
+  // (not independent per-channel checks which would allow invalid cross-combinations)
+  if (topology === "discontiguous" || topology === "custom") {
+    const pointWindowsByChannel = {};
+    let numPoints = 0;
+    let hasAnyHardConstraint = false;
+
+    channels.forEach((ch) => {
+      const c = constraintSets.channels[ch];
+      if (!c) return;
+      if (c.mode === "hard") hasAnyHardConstraint = true;
+      if (Array.isArray(c.pointWindows) && c.pointWindows.length > 0) {
+        pointWindowsByChannel[ch] = c.pointWindows;
+        numPoints = Math.max(numPoints, c.pointWindows.length);
+      }
+    });
+
+    if (numPoints > 0) {
+      // For each point, compute combined z² across all channels
+      let minZSq = Infinity;
+      for (let i = 0; i < numPoints; i++) {
+        let zSq = 0;
+        channels.forEach((ch) => {
+          const c = constraintSets.channels[ch];
+          if (!c) return;
+          const windows = pointWindowsByChannel[ch];
+          const w = windows ? windows[i % windows.length] : null;
+          if (!w) return;
+
+          if (c.type === "hue") {
+            const phi = row.__huePhi;
+            if (!Number.isFinite(phi)) return;
+            // Distance to this point's hue center
+            const dHue = circularDistance(phi, w.center);
+            const sigma = Math.max(w.radius / 1.96, 1e-3);
+            zSq += Math.pow(dHue / sigma, 2);
+          } else {
+            const z = zRow?.[ch];
+            if (!Number.isFinite(z)) return;
+            const u = clamp(logistic(z), 0, 1);
+            // Distance to this point's center
+            const dLin = Math.abs(u - w.center);
+            const sigma = Math.max(w.radius / 1.96, 1e-3);
+            zSq += Math.pow(dLin / sigma, 2);
+          }
+        });
+        if (zSq < minZSq) minZSq = zSq;
+      }
+
+      if (Number.isFinite(minZSq) && minZSq > 0) {
+        const hardBoost = hasAnyHardConstraint ? HARD_SET_PENALTY_MULT : 1;
+        penalty += hardBoost * CONSTRAINT_PENALTY_WEIGHT * minZSq;
+      }
+    }
+    return { penalty };
+  }
+
+  // Contiguous mode: check each channel independently (original logic)
   channels.forEach((ch) => {
     const c = constraintSets.channels[ch];
     if (!c) return;
     const mode = c.mode || "hard";
-    const usePenalty = mode === "soft" || topology === "discontiguous";
+    const usePenalty = mode === "soft";
     if (!usePenalty) return;
     if (c.type === "hue") {
       const phi = row.__huePhi;
       if (!Number.isFinite(phi)) return;
-      const hardBoost = mode === "hard" ? HARD_SET_PENALTY_MULT : 1;
-      if (topology === "discontiguous" && Array.isArray(c.intervalsRad)) {
-        const dist = distanceToHueUnion(phi, c.intervalsRad);
-        const eps = Math.max((1 - clamp(c.width || 0, 0, 1)) * 0.5 * TAU, 1e-3);
-        penalty += hardBoost * CONSTRAINT_PENALTY_WEIGHT * Math.pow(dist / eps, 2);
-      } else if (c.arc) {
+      if (c.arc) {
         const sigma = Math.max((c.arc.spanRad / 2) / 1.96, 1e-3);
         const center = c.arc.startRad + c.arc.spanRad / 2;
         const d = wrapToPi(phi - center);
@@ -393,14 +544,6 @@ function constraintPenaltyForRow(row, idx, zRow, constraintSets, topology) {
     }
     const z = zRow?.[ch];
     if (!Number.isFinite(z)) return;
-    const hardBoost = mode === "hard" ? HARD_SET_PENALTY_MULT : 1;
-    if (topology === "discontiguous" && Array.isArray(c.intervals)) {
-      const u = clamp(logistic(z), 0, 1);
-      const dist = distanceToIntervals(u, c.intervals);
-      const eps = Math.max((1 - clamp(c.width || 0, 0, 1)) * 0.5, 1e-3);
-      penalty += hardBoost * CONSTRAINT_PENALTY_WEIGHT * Math.pow(dist / eps, 2);
-      return;
-    }
     if (Array.isArray(c.intervals) && c.intervals.length) {
       const L = clamp(c.intervals[0][0], 1e-6, 1 - 1e-6);
       const U = clamp(c.intervals[c.intervals.length - 1][1], 1e-6, 1 - 1e-6);
@@ -414,42 +557,14 @@ function constraintPenaltyForRow(row, idx, zRow, constraintSets, topology) {
   return { penalty };
 }
 
-function distanceToIntervals(u, intervals) {
-  if (!intervals?.length) return 0;
-  for (const [a, b] of intervals) {
-    if (u >= a && u <= b) return 0;
-  }
-  let best = Infinity;
-  intervals.forEach(([a, b]) => {
-    if (u < a) best = Math.min(best, a - u);
-    else if (u > b) best = Math.min(best, u - b);
-  });
-  return Number.isFinite(best) ? best : 0;
-}
-
-function distanceToHueUnion(phi, intervalsRad) {
-  if (!intervalsRad?.length) return 0;
-  const angle = wrapRad(phi);
-  for (const [a, b] of intervalsRad) {
-    if (angle >= a && angle <= b) return 0;
-  }
-  let best = Infinity;
-  intervalsRad.forEach(([a, b]) => {
-    best = Math.min(best, circularDistance(angle, a), circularDistance(angle, b));
-  });
-  return Number.isFinite(best) ? best : 0;
-}
-
-function wrapRad(phi) {
-  return ((phi % TAU) + TAU) % TAU;
-}
-
 function wrapToPi(phi) {
   return ((phi + Math.PI) % TAU + TAU) % TAU - Math.PI;
 }
 
 function circularDistance(a, b) {
-  const d = Math.abs(a - b);
+  const aNorm = ((a % TAU) + TAU) % TAU;
+  const bNorm = ((b % TAU) + TAU) % TAU;
+  const d = Math.abs(aNorm - bNorm);
   return Math.min(d, TAU - d);
 }
 

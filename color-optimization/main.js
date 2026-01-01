@@ -1,26 +1,37 @@
 import { defaultPalette, plotOrder } from "./config.js";
-import { channelOrder, decodeColor } from "./core/colorSpaces.js";
+import { channelOrder, convertColorValues, decodeColor } from "./core/colorSpaces.js";
 import { contrastColor, deltaE2000 } from "./core/metrics.js";
+import { discriminabilityLabel, metricJnd } from "./core/resolvability.js";
+import { defaultPForMean } from "./core/means.js";
 import { computeBoundsFromCurrent, computeBoundsFromRawValues } from "./optimizer/bounds.js";
 import { optimizePalette } from "./optimizer/optimizePalette.js";
 import { getUIRefs } from "./ui/domRefs.js";
-import { getWidths, parsePalette, readConfig } from "./ui/configRead.js";
+import { getWidths, parsePalette, readConfig, readConstraintConfig } from "./ui/configRead.js";
 import { copyResults, setResults } from "./ui/resultsBox.js";
 import { createInitialState } from "./ui/state.js";
 import { showError, setStatus, setStatusState } from "./ui/status.js";
 import { drawStatusGraph, drawStatusMini } from "./ui/statusGraph.js";
 import { createPanels, refreshSwatches, updateChannelHeadings } from "./ui/panels.js";
 import { attachVisualizationInteractions } from "./ui/interactions.js";
+import { createHistoryManager } from "./ui/history.js";
 import { paletteGroups } from "./palettes.js";
 
 const state = createInitialState();
 let ui = null;
+let history = null;
 let verboseLogs = [];
 let verboseRows = [];
 let verboseTruncInfo = null;
 let verboseBestScore = -Infinity;
 let verboseBestRun = null;
 const VERBOSE_MAX_ROWS = 4000;
+let verboseSortKey = "run";
+let verboseSortDir = "asc";
+const verboseGroupState = {
+  end: false,
+  start: false,
+  diff: false,
+};
 const cvdScores = {
   none: 0,
   deutan: 0,
@@ -32,6 +43,7 @@ let uniquenessValue = 0;
 let lastOptSpace = null;
 
 const DEFAULT_L_WIDTH = 0.65;
+const DISC_STATES = ["none", "deutan", "protan", "tritan"];
 
 function currentVizOpts() {
   return {
@@ -42,15 +54,273 @@ function currentVizOpts() {
   };
 }
 
+function captureHistorySnapshot() {
+  return {
+    ui: {
+      paletteInput: ui?.paletteInput?.value || "",
+      seedInput: ui?.seedInput?.value || "",
+      colorSpace: ui?.colorSpace?.value || "oklab",
+      colorwheelSpace: ui?.colorwheelSpace?.value || "oklab",
+      gamutMode: ui?.gamutMode?.value || "auto",
+      gamutPreset: ui?.gamutPreset?.value || "srgb",
+      clipGamut: Boolean(ui?.clipGamut?.checked),
+      clipGamutOpt: Boolean(ui?.clipGamutOpt?.checked),
+      cvdModel: ui?.cvdModel?.value || "legacy",
+      distanceMetric: ui?.distanceMetric?.value || "de2000",
+      meanType: ui?.meanType?.value || "harmonic",
+      meanP: ui?.meanP?.value || "",
+      colorsToAdd: ui?.colorsToAdd?.value || "",
+      optimRuns: ui?.optimRuns?.value || "",
+      nmIters: ui?.nmIters?.value || "",
+      constraintTopology: ui?.constraintTopology?.value || "contiguous",
+      aestheticMode: ui?.aestheticMode?.value || "none",
+      wH: ui?.wH?.value || "",
+      wSC: ui?.wSC?.value || "",
+      wL: ui?.wL?.value || "",
+      modeH: readModeValue(ui?.modeH),
+      modeSC: readModeValue(ui?.modeSC),
+      modeL: readModeValue(ui?.modeL),
+      wNone: ui?.wNone?.value || "",
+      wDeutan: ui?.wDeutan?.value || "",
+      wProtan: ui?.wProtan?.value || "",
+      wTritan: ui?.wTritan?.value || "",
+      bgColor: ui?.bgColor?.value || "#ffffff",
+      bgEnabled: Boolean(ui?.bgEnabled?.checked),
+      syncSpaces: Boolean(ui?.syncSpaces?.checked),
+      uniqueness: ui?.uniqueness?.value || "",
+      formatQuotes: Boolean(ui?.formatQuotes?.checked),
+      formatCommas: Boolean(ui?.formatCommas?.checked),
+      formatLines: Boolean(ui?.formatLines?.checked),
+      formatRC: Boolean(ui?.formatRC?.checked),
+      formatPyList: Boolean(ui?.formatPyList?.checked),
+      formatIncludeInputs: Boolean(ui?.formatIncludeInputs?.checked),
+      verboseToggle: Boolean(ui?.verboseToggle?.checked),
+    },
+    state: {
+      newColors: state.newColors ? [...state.newColors] : [],
+      rawNewColors: state.rawNewColors ? state.rawNewColors.map((v) => ({ ...v })) : [],
+      newRawSpace: state.newRawSpace ?? null,
+      rawInputOverride: state.rawInputOverride
+        ? { space: state.rawInputOverride.space, values: state.rawInputOverride.values.map((v) => ({ ...v })) }
+        : null,
+      keepInputOverride: Boolean(state.keepInputOverride),
+      mutedInput: Boolean(state.mutedInput),
+      selectedResultIdx: state.selectedResultIdx ?? null,
+      customConstraints: state.customConstraints
+        ? {
+          space: state.customConstraints.space,
+          values: state.customConstraints.values.map((v) => ({ ...v })),
+          widths: cloneCustomWidths(state.customConstraints.widths),
+        }
+        : null,
+      perInputConstraints: state.perInputConstraints
+        ? {
+          enabled: Boolean(state.perInputConstraints.enabled),
+          sync: { ...state.perInputConstraints.sync },
+          widths: {
+            h: Array.isArray(state.perInputConstraints.widths?.h) ? [...state.perInputConstraints.widths.h] : [],
+            sc: Array.isArray(state.perInputConstraints.widths?.sc) ? [...state.perInputConstraints.widths.sc] : [],
+            l: Array.isArray(state.perInputConstraints.widths?.l) ? [...state.perInputConstraints.widths.l] : [],
+          },
+        }
+        : null,
+    },
+  };
+}
+
+function applyHistorySnapshot(snapshot) {
+  if (!snapshot || !ui) return;
+  const snapUi = snapshot.ui || {};
+  const snapState = snapshot.state || {};
+
+  if (ui.paletteInput) ui.paletteInput.value = snapUi.paletteInput || "";
+  if (ui.seedInput) ui.seedInput.value = snapUi.seedInput || "";
+  if (ui.colorSpace) ui.colorSpace.value = snapUi.colorSpace || "oklab";
+  if (ui.colorwheelSpace) ui.colorwheelSpace.value = snapUi.colorwheelSpace || ui.colorSpace.value;
+  if (ui.gamutMode) ui.gamutMode.value = snapUi.gamutMode || "auto";
+  if (ui.gamutPreset) ui.gamutPreset.value = snapUi.gamutPreset || "srgb";
+  if (ui.clipGamut) ui.clipGamut.checked = Boolean(snapUi.clipGamut);
+  if (ui.clipGamutOpt) ui.clipGamutOpt.checked = Boolean(snapUi.clipGamutOpt);
+  if (ui.cvdModel) ui.cvdModel.value = snapUi.cvdModel || "legacy";
+  if (ui.distanceMetric) ui.distanceMetric.value = snapUi.distanceMetric || "de2000";
+  if (ui.meanType) ui.meanType.value = snapUi.meanType || "harmonic";
+  if (ui.meanP) ui.meanP.value = snapUi.meanP || ui.meanP.value;
+  if (ui.colorsToAdd) ui.colorsToAdd.value = snapUi.colorsToAdd || ui.colorsToAdd.value;
+  if (ui.optimRuns) ui.optimRuns.value = snapUi.optimRuns || ui.optimRuns.value;
+  if (ui.nmIters) ui.nmIters.value = snapUi.nmIters || ui.nmIters.value;
+  if (ui.constraintTopology) ui.constraintTopology.value = snapUi.constraintTopology || "contiguous";
+  if (ui.aestheticMode) ui.aestheticMode.value = snapUi.aestheticMode || "none";
+  if (ui.wH) ui.wH.value = snapUi.wH || ui.wH.value;
+  if (ui.wSC) ui.wSC.value = snapUi.wSC || ui.wSC.value;
+  if (ui.wL) ui.wL.value = snapUi.wL || ui.wL.value;
+  setModeValue(ui.modeH, snapUi.modeH || readModeValue(ui.modeH));
+  setModeValue(ui.modeSC, snapUi.modeSC || readModeValue(ui.modeSC));
+  setModeValue(ui.modeL, snapUi.modeL || readModeValue(ui.modeL));
+  if (ui.wNone) ui.wNone.value = snapUi.wNone || ui.wNone.value;
+  if (ui.wDeutan) ui.wDeutan.value = snapUi.wDeutan || ui.wDeutan.value;
+  if (ui.wProtan) ui.wProtan.value = snapUi.wProtan || ui.wProtan.value;
+  if (ui.wTritan) ui.wTritan.value = snapUi.wTritan || ui.wTritan.value;
+  if (ui.bgColor) ui.bgColor.value = snapUi.bgColor || ui.bgColor.value;
+  if (ui.bgEnabled) ui.bgEnabled.checked = Boolean(snapUi.bgEnabled);
+  if (ui.syncSpaces) ui.syncSpaces.checked = Boolean(snapUi.syncSpaces);
+  if (ui.uniqueness) ui.uniqueness.value = snapUi.uniqueness || ui.uniqueness.value;
+  if (ui.formatQuotes) ui.formatQuotes.checked = Boolean(snapUi.formatQuotes);
+  if (ui.formatCommas) ui.formatCommas.checked = Boolean(snapUi.formatCommas);
+  if (ui.formatLines) ui.formatLines.checked = Boolean(snapUi.formatLines);
+  if (ui.formatRC) ui.formatRC.checked = Boolean(snapUi.formatRC);
+  if (ui.formatPyList) ui.formatPyList.checked = Boolean(snapUi.formatPyList);
+  if (ui.formatIncludeInputs) ui.formatIncludeInputs.checked = Boolean(snapUi.formatIncludeInputs);
+  if (ui.verboseToggle) ui.verboseToggle.checked = Boolean(snapUi.verboseToggle);
+
+  state.newColors = snapState.newColors ? [...snapState.newColors] : [];
+  state.rawNewColors = snapState.rawNewColors ? snapState.rawNewColors.map((v) => ({ ...v })) : [];
+  state.newRawSpace = snapState.newRawSpace ?? null;
+  state.rawInputOverride = snapState.rawInputOverride
+    ? { space: snapState.rawInputOverride.space, values: snapState.rawInputOverride.values.map((v) => ({ ...v })) }
+    : null;
+  state.keepInputOverride = Boolean(snapState.keepInputOverride);
+  state.mutedInput = Boolean(snapState.mutedInput);
+  state.customConstraints = snapState.customConstraints
+    ? {
+      space: snapState.customConstraints.space,
+      values: snapState.customConstraints.values.map((v) => ({ ...v })),
+      widths: cloneCustomWidths(snapState.customConstraints.widths),
+    }
+    : null;
+  state.perInputConstraints = snapState.perInputConstraints
+    ? {
+      enabled: Boolean(snapState.perInputConstraints.enabled),
+      sync: { ...snapState.perInputConstraints.sync },
+      widths: {
+        h: Array.isArray(snapState.perInputConstraints.widths?.h) ? [...snapState.perInputConstraints.widths.h] : [],
+        sc: Array.isArray(snapState.perInputConstraints.widths?.sc) ? [...snapState.perInputConstraints.widths.sc] : [],
+        l: Array.isArray(snapState.perInputConstraints.widths?.l) ? [...snapState.perInputConstraints.widths.l] : [],
+      },
+    }
+    : {
+      enabled: false,
+      sync: { h: false, sc: false, l: false },
+      widths: { h: [], sc: [], l: [] },
+    };
+
+  if (ui.rawInputValues) {
+    ui.rawInputValues.value = state.rawInputOverride ? JSON.stringify(state.rawInputOverride) : "";
+  }
+
+  if (ui.syncSpaces?.checked) {
+    ui.colorwheelSpace.value = ui.colorSpace.value;
+  }
+  lastOptSpace = ui.colorSpace.value;
+
+  updateWidthLabels();
+  syncCustomConstraintsToSpace(ui.colorSpace.value);
+  ensurePerInputConstraintState();
+  updateConstraintTopologyUI();
+  updateWidthChips();
+  updateMeanControls(false);
+  updateClipWarning();
+  updateBgControls();
+  togglePlaceholder();
+  updatePaletteHighlight();
+  updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
+
+  uniquenessValue = clampNum(parseFloat(ui.uniqueness?.value) || 0, 0, 100);
+  if (ui.uniquenessVal) ui.uniquenessVal.textContent = `${Math.round(uniquenessValue)}%`;
+  if (state.runRankingAll?.length) {
+    applyUniquenessFilter();
+    updateResultNavigator();
+  }
+
+  state.bounds = computeInputBounds(ui.colorSpace.value);
+  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+  enforceWrapper();
+  drawStatusMini(state, ui, currentVizOpts());
+
+  if (ui.verbosePanel) ui.verbosePanel.style.display = ui.verboseToggle?.checked ? "block" : "none";
+}
+
+function updateUndoRedoButtons() {
+  if (!ui?.undoBtn || !ui?.redoBtn || !history) return;
+  const disabled = state.running;
+  ui.undoBtn.disabled = disabled || !history.canUndo();
+  ui.redoBtn.disabled = disabled || !history.canRedo();
+}
+
+function weightedAggregateDistances(valuesByState, weights, kind, p, eps = 1e-9) {
+  const entries = [];
+  DISC_STATES.forEach((state) => {
+    const v = valuesByState?.[state];
+    if (!Number.isFinite(v)) return;
+    const w = Number.isFinite(weights?.[state]) ? weights[state] : 0;
+    entries.push({ v, w });
+  });
+  if (!entries.length) return NaN;
+
+  let sumW = entries.reduce((acc, e) => acc + e.w, 0);
+  const norm = sumW > 0 ? entries.map((e) => e.w / sumW) : entries.map(() => 1 / entries.length);
+  const vals = entries.map((e) => Math.max(e.v, eps));
+  const meanKind = String(kind || "harmonic").toLowerCase();
+
+  if (meanKind === "minimum" || meanKind === "min") {
+    return Math.min(...entries.map((e) => e.v));
+  }
+
+  if (meanKind === "arithmetic" || meanKind === "mean") {
+    return vals.reduce((acc, v, i) => acc + v * norm[i], 0);
+  }
+
+  if (meanKind === "quadratic" || meanKind === "rms") {
+    const m2 = vals.reduce((acc, v, i) => acc + v * v * norm[i], 0);
+    return Math.sqrt(m2);
+  }
+
+  if (meanKind === "geometric") {
+    const mlog = vals.reduce((acc, v, i) => acc + Math.log(v) * norm[i], 0);
+    return Math.exp(mlog);
+  }
+
+  if (meanKind === "harmonic") {
+    const inv = vals.reduce((acc, v, i) => acc + norm[i] / v, 0);
+    return inv > 0 ? 1 / inv : 0;
+  }
+
+  const pp = Number.isFinite(p) ? p : defaultPForMean(meanKind);
+
+  if (meanKind === "power") {
+    if (Math.abs(pp) < 1e-12) {
+      const mlog = vals.reduce((acc, v, i) => acc + Math.log(v) * norm[i], 0);
+      return Math.exp(mlog);
+    }
+    const mp = vals.reduce((acc, v, i) => acc + Math.pow(v, pp) * norm[i], 0);
+    return Math.pow(mp, 1 / pp);
+  }
+
+  if (meanKind === "lehmer") {
+    const num = vals.reduce((acc, v, i) => acc + Math.pow(v, pp + 1) * norm[i], 0);
+    const den = vals.reduce((acc, v, i) => acc + Math.pow(v, pp) * norm[i], 0);
+    return den > 0 ? num / den : 0;
+  }
+
+  return vals.reduce((acc, v, i) => acc + v * norm[i], 0);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   ui = getUIRefs();
   createPanels(ui, plotOrder);
   setDefaultValues();
   buildPaletteButtons();
+  history = createHistoryManager({
+    capture: captureHistorySnapshot,
+    apply: applyHistorySnapshot,
+    onUpdate: updateUndoRedoButtons,
+  });
+  state.history = history;
   attachEventListeners();
   attachVisualizationInteractions(ui, state, plotOrder);
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   updateResultNavigator();
+  history.push(captureHistorySnapshot());
+  updateUndoRedoButtons();
 });
 
 function setDefaultValues() {
@@ -76,9 +346,9 @@ function setDefaultValues() {
   ui.nmIters.value = "260";
   applyConstraintWidthDefaults(ui.colorSpace.value);
   lastOptSpace = ui.colorSpace.value;
-  if (ui.modeH) ui.modeH.value = "hard";
-  if (ui.modeSC) ui.modeSC.value = "hard";
-  if (ui.modeL) ui.modeL.value = "hard";
+  setModeValue(ui.modeH, "hard");
+  setModeValue(ui.modeSC, "hard");
+  setModeValue(ui.modeL, "hard");
   ui.wNone.value = "50.0";
   ui.wDeutan.value = "40.0";
   ui.wProtan.value = "8.0";
@@ -99,6 +369,7 @@ function setDefaultValues() {
   normalizeAndUpdateWeights();
   updateWidthLabels();
   updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
+  updateConstraintTopologyUI();
   updateClipWarning();
   updateMeanControls(true);
   if (ui.uniqueness) ui.uniqueness.value = "0";
@@ -111,9 +382,16 @@ function setDefaultValues() {
   state.rawBestColors = [];
   state.rawInputOverride = null;
   state.keepInputOverride = false;
+  state.customConstraints = null;
+  state.customConstraintSelection = null;
+  state.perInputConstraints = {
+    enabled: false,
+    sync: { h: false, sc: false, l: false },
+    widths: { h: [], sc: [], l: [] },
+  };
   state.rawSpace = ui.colorSpace.value;
   state.newRawSpace = ui.colorSpace.value;
-  setResults([], ui);
+  setResults([], ui, state.currentColors);
   state.bestScores = [];
   state.nmTrails = [];
   state.bestColors = [];
@@ -133,6 +411,30 @@ function clampNum(v, lo, hi) {
   return Math.max(lo, Math.min(hi, v));
 }
 
+function cloneCustomWidths(widths) {
+  if (!widths || typeof widths !== "object") return null;
+  const out = {};
+  Object.entries(widths).forEach(([key, arr]) => {
+    if (Array.isArray(arr)) out[key] = [...arr];
+  });
+  return Object.keys(out).length ? out : null;
+}
+
+function readModeValue(el) {
+  if (!el) return "hard";
+  if (el.type === "checkbox") return el.checked ? "soft" : "hard";
+  return el.value || "hard";
+}
+
+function setModeValue(el, mode) {
+  if (!el) return;
+  if (el.type === "checkbox") {
+    el.checked = mode === "soft";
+    return;
+  }
+  el.value = mode;
+}
+
 function parseWidthVal(v) {
   const n = parseFloat(v);
   return Number.isFinite(n) ? clampNum(n, 0, 1) : 0;
@@ -150,34 +452,193 @@ function defaultWidthForChannel(ch) {
   return ch === "l" ? DEFAULT_L_WIDTH : 0;
 }
 
-function constraintModeForSpace(space) {
-  const channels = channelOrder[space] || [];
-  const scChannel = channels.find((c) => c === "s" || c === "c") || channels[1];
-  const first = channels[0];
-  const third = channels[2];
-  const out = {};
-  if (first && ui.modeH) out[first] = ui.modeH.value || "hard";
-  if (scChannel && ui.modeSC) out[scChannel] = ui.modeSC.value || "hard";
-  if (third && ui.modeL) out[third] = ui.modeL.value || "hard";
-  return out;
-}
-
 function constraintConfigForSpace(space) {
-  return {
-    constrain: true,
-    widths: getWidths(ui),
-    constraintTopology: ui.constraintTopology?.value || "contiguous",
-    aestheticMode: ui.aestheticMode?.value || "none",
-    constraintMode: constraintModeForSpace(space),
-  };
+  return readConstraintConfig(ui, space, state);
 }
 
 function computeInputBounds(space) {
   const config = constraintConfigForSpace(space);
+  const topology = config.constraintTopology || "contiguous";
+  if (topology === "custom" && config.customConstraintPoints?.length) {
+    return computeBoundsFromRawValues(config.customConstraintPoints, space, config);
+  }
   if (state.rawInputOverride?.space === space && state.rawInputOverride.values?.length) {
     return computeBoundsFromRawValues(state.rawInputOverride.values, space, config);
   }
   return computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), space, config);
+}
+
+function syncCustomConstraintsToSpace(space) {
+  if (!state.customConstraints?.values?.length) return;
+  if (state.customConstraints.space === space) return;
+  const converted = state.customConstraints.values.map((v) => convertColorValues(v, state.customConstraints.space, space));
+  state.customConstraints = { space, values: converted, widths: cloneCustomWidths(state.customConstraints.widths) };
+}
+
+function ensureCustomConstraintsInitialized() {
+  if (state.customConstraints?.values?.length) return;
+  const space = ui.colorSpace.value;
+  let values = [];
+  if (state.rawInputOverride?.space === space && Array.isArray(state.rawInputOverride.values)) {
+    values = state.rawInputOverride.values.map((v) => ({ ...v }));
+  } else {
+    const palette = parsePalette(ui.paletteInput.value);
+    values = palette.map((hex) => decodeColor(hex, space));
+  }
+  if (values.length) {
+    state.customConstraints = { space, values };
+  }
+}
+
+function perInputDefaults() {
+  return {
+    h: parseWidthVal(ui.wH.value),
+    sc: parseWidthVal(ui.wSC.value),
+    l: parseWidthVal(ui.wL.value),
+  };
+}
+
+function ensurePerInputConstraintState() {
+  if (!state.perInputConstraints) {
+    state.perInputConstraints = { enabled: false, sync: { h: false, sc: false, l: false }, widths: { h: [], sc: [], l: [] } };
+  }
+  const per = state.perInputConstraints;
+  per.sync = { h: false, sc: false, l: false };
+  if (!per.widths) per.widths = { h: [], sc: [], l: [] };
+  const count = parsePalette(ui.paletteInput.value).length;
+  const defaults = perInputDefaults();
+  ["h", "sc", "l"].forEach((slot) => {
+    const arr = Array.isArray(per.widths[slot]) ? per.widths[slot] : [];
+    const next = Array.from({ length: count }, (_, i) => {
+      const v = arr[i];
+      return Number.isFinite(v) ? clampNum(v, 0, 1) : defaults[slot];
+    });
+    per.widths[slot] = next;
+  });
+}
+
+function renderPerInputConstraintUI() {
+  if (!ui.constraintIndividualRow || !ui.constraintIndividualPanel || !ui.constraintIndividualList) return;
+  const topology = ui.constraintTopology?.value || "contiguous";
+  const supportsPerInput = topology === "discontiguous";
+  const isExpanded = Boolean(state.perInputConstraints?.enabled) && supportsPerInput;
+  ui.constraintIndividualRow.hidden = false;
+  if (ui.constraintIndividualToggle) {
+    ui.constraintIndividualToggle.setAttribute("aria-expanded", String(isExpanded));
+    ui.constraintIndividualToggle.textContent = isExpanded ? "Hide per-color constraints" : "Per-color constraints";
+  }
+  ui.constraintIndividualPanel.hidden = !isExpanded;
+  if (!isExpanded) {
+    ui.constraintIndividualList.innerHTML = "";
+    return;
+  }
+  ensurePerInputConstraintState();
+  const defaults = perInputDefaults();
+  const palette = parsePalette(ui.paletteInput.value);
+  const labels = {
+    h: ui.wHLabel?.textContent || "H",
+    sc: ui.wSCLabel?.textContent || "S/C",
+    l: ui.wLLabel?.textContent || "L",
+  };
+  ui.constraintIndividualList.innerHTML = "";
+  const header = document.createElement("div");
+  header.className = "constraint-individual-header";
+  const colorHead = document.createElement("span");
+  colorHead.textContent = "Color";
+  header.appendChild(colorHead);
+  ["h", "sc", "l"].forEach((slot) => {
+    const label = document.createElement("span");
+    label.textContent = labels[slot];
+    header.appendChild(label);
+  });
+  ui.constraintIndividualList.appendChild(header);
+
+  palette.forEach((hex, idx) => {
+    const row = document.createElement("div");
+    row.className = "constraint-individual-row";
+    const id = document.createElement("div");
+    id.className = "constraint-individual-id";
+    const pill = document.createElement("span");
+    pill.className = "constraint-color-pill";
+    pill.style.background = hex;
+    pill.style.color = contrastColor(hex);
+    pill.textContent = hex;
+    id.appendChild(pill);
+    row.appendChild(id);
+
+    ["h", "sc", "l"].forEach((slot) => {
+      const wrap = document.createElement("div");
+      wrap.className = "constraint-slider-wrap";
+      const input = document.createElement("input");
+      input.type = "range";
+      input.min = "0";
+      input.max = "1";
+      input.step = "0.001";
+      const val = state.perInputConstraints.widths?.[slot]?.[idx];
+      const applied = Number.isFinite(val) ? val : defaults[slot];
+      input.value = String(clampNum(applied, 0, 1));
+      const tooltip = document.createElement("span");
+      tooltip.className = "constraint-slider-tooltip";
+      const updateTooltip = () => {
+        const v = clampNum(parseFloat(input.value) || 0, 0, 1);
+        tooltip.textContent = `${(v * 100).toFixed(1)}%`;
+        tooltip.style.left = `${v * 100}%`;
+      };
+      let hideTimer = null;
+      const showTip = () => {
+        updateTooltip();
+        wrap.classList.add("show-tooltip");
+        if (hideTimer) clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => wrap.classList.remove("show-tooltip"), 900);
+      };
+      input.addEventListener("input", () => {
+        const v = clampNum(parseFloat(input.value) || 0, 0, 1);
+        if (!state.perInputConstraints.widths[slot]) state.perInputConstraints.widths[slot] = [];
+        state.perInputConstraints.widths[slot][idx] = v;
+        showTip();
+        updateClipWarning();
+        updateBoundsAndRefresh();
+        drawStatusMini(state, ui, currentVizOpts());
+      });
+      input.addEventListener("pointerdown", () => showTip());
+      input.addEventListener("pointerup", () => wrap.classList.remove("show-tooltip"));
+      input.addEventListener("blur", () => wrap.classList.remove("show-tooltip"));
+      input.addEventListener("change", () => history?.record());
+      updateTooltip();
+      wrap.appendChild(input);
+      wrap.appendChild(tooltip);
+      row.appendChild(wrap);
+    });
+    ui.constraintIndividualList.appendChild(row);
+  });
+}
+
+function applyMainWidthToPerInputs(slot) {
+  ensurePerInputConstraintState();
+  const defaults = perInputDefaults();
+  const next = defaults[slot];
+  state.perInputConstraints.widths[slot] = state.perInputConstraints.widths[slot].map(() => next);
+  if (state.perInputConstraints?.enabled) renderPerInputConstraintUI();
+}
+
+function updateConstraintTopologyUI() {
+  const topology = ui.constraintTopology?.value || "contiguous";
+  syncCustomConstraintsToSpace(ui.colorSpace.value);
+  if (topology === "custom") {
+    ensureCustomConstraintsInitialized();
+  }
+  const disableWidths = topology === "custom";
+  [ui.wH, ui.wSC, ui.wL].forEach((slider) => {
+    if (!slider) return;
+    const row = slider.closest(".constraint-row");
+    slider.disabled = disableWidths;
+    if (row) {
+      row.classList.toggle("is-disabled", disableWidths);
+      row.setAttribute("aria-disabled", disableWidths ? "true" : "false");
+      row.dataset.disabledMessage = disableWidths ? "Disabled while custom constraints are active." : "";
+    }
+  });
+  renderPerInputConstraintUI();
 }
 
 function constraintWidthMapForSpace(space) {
@@ -292,6 +753,9 @@ function normalizeAndUpdateWeights(changedKey = null) {
 }
 
 function attachEventListeners() {
+  const recordHistory = (options) => history?.record(options);
+  const scheduleHistory = (delay) => history?.schedule(delay);
+
   ui.paletteInput.addEventListener("input", () => {
     if (state.keepInputOverride) {
       state.keepInputOverride = false;
@@ -301,10 +765,13 @@ function attachEventListeners() {
     }
     state.bounds = computeInputBounds(ui.colorSpace.value);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    ensurePerInputConstraintState();
+    renderPerInputConstraintUI();
     togglePlaceholder();
     updatePaletteHighlight();
     drawStatusMini(state, ui, currentVizOpts());
     setStatusState(ui, "Inputs changed", { stale: true });
+    scheduleHistory(500);
   });
   ui.paletteInput.addEventListener("scroll", syncPaletteHighlightScroll);
   ui.paletteClear?.addEventListener("click", () => {
@@ -313,27 +780,34 @@ function attachEventListeners() {
     if (ui.rawInputValues) ui.rawInputValues.value = "";
     state.bounds = computeInputBounds(ui.colorSpace.value);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    ensurePerInputConstraintState();
+    renderPerInputConstraintUI();
     togglePlaceholder();
     ui.paletteInput.focus();
     drawStatusMini(state, ui, currentVizOpts());
     setStatusState(ui, "Waiting to run");
+    recordHistory();
   });
   ui.bgColor?.addEventListener("change", () => {
     updateBgControls();
+    recordHistory();
   });
   ui.paletteMore?.addEventListener("click", () => {
     if (!ui.paletteGroups) return;
     ui.paletteGroups.classList.toggle("show-all");
     ui.paletteMore.textContent = ui.paletteGroups.classList.contains("show-all") ? "Less ▴" : "More ▾";
   });
-  ui.bgEnabled?.addEventListener("change", () => updateBgControls());
-  ui.bgColor?.addEventListener("change", () => updateBgControls());
+  ui.bgEnabled?.addEventListener("change", () => {
+    updateBgControls();
+    recordHistory();
+  });
 
   ui.colorSpace.addEventListener("change", () => {
     const nextSpace = ui.colorSpace.value;
     remapConstraintWidths(lastOptSpace, nextSpace);
     lastOptSpace = nextSpace;
     updateWidthLabels();
+    syncCustomConstraintsToSpace(nextSpace);
     if (ui.syncSpaces?.checked) {
       ui.colorwheelSpace.value = ui.colorSpace.value;
       updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
@@ -341,6 +815,8 @@ function attachEventListeners() {
     updateClipWarning();
     updateBoundsAndRefresh();
     drawStatusMini(state, ui, currentVizOpts());
+    renderPerInputConstraintUI();
+    recordHistory();
   });
 
   ui.colorwheelSpace.addEventListener("change", () => {
@@ -350,35 +826,48 @@ function attachEventListeners() {
     updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
+    recordHistory();
   });
   ui.gamutMode?.addEventListener("change", () => {
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
+    recordHistory();
   });
   ui.gamutPreset?.addEventListener("change", () => {
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
+    recordHistory();
   });
   ui.cvdModel?.addEventListener("change", () => {
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
+    recordHistory();
   });
   ui.distanceMetric?.addEventListener("change", () => {
-    // affects optimization only; no immediate redraw needed
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+    drawStatusMini(state, ui, currentVizOpts());
+    recordHistory();
   });
   ui.meanType?.addEventListener("change", () => {
     updateMeanControls(true);
+    recordHistory();
   });
   ui.meanP?.addEventListener("input", () => {
     updateMeanControls(false);
+  });
+  ui.meanP?.addEventListener("change", () => {
+    updateMeanControls(false);
+    recordHistory();
   });
   ui.clipGamut?.addEventListener("change", () => {
     updateClipWarning();
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
+    recordHistory();
   });
   ui.clipGamutOpt?.addEventListener("change", () => {
     // affects optimization only; no immediate redraw needed
+    recordHistory();
   });
   ui.resultPrev?.addEventListener("click", () => changeResultSelection(-1));
   ui.resultNext?.addEventListener("click", () => changeResultSelection(1));
@@ -395,6 +884,9 @@ function attachEventListeners() {
     if (state.runRanking?.length) applySelectedResult({ skipNavUpdate: true });
     updateResultNavigator();
   });
+  ui.uniqueness?.addEventListener("change", () => {
+    recordHistory();
+  });
   ui.syncSpaces?.addEventListener("change", () => {
     if (ui.syncSpaces.checked) {
       ui.colorwheelSpace.value = ui.colorSpace.value;
@@ -402,6 +894,7 @@ function attachEventListeners() {
       refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
       drawStatusMini(state, ui, currentVizOpts());
     }
+    recordHistory();
   });
 
   ui.runBtn.addEventListener("click", () => runOptimization());
@@ -422,22 +915,16 @@ function attachEventListeners() {
     setStatus("waiting to start…", 0, ui, state);
     showError("", ui);
     updateResultNavigator();
+    recordHistory();
   });
+  ui.undoBtn?.addEventListener("click", () => history?.undo());
+  ui.redoBtn?.addEventListener("click", () => history?.redo());
   ui.copyBtn.addEventListener("click", () => copyResults(ui, state));
   ui.sendToInputBtn?.addEventListener("click", () => sendResultsToInput());
-  const enforceWrapper = () => {
-    const wrapR = ui.formatRC?.checked;
-    const wrapPy = ui.formatPyList?.checked;
-    if (wrapR || wrapPy) {
-      if (ui.formatQuotes) ui.formatQuotes.checked = true;
-      if (ui.formatCommas) ui.formatCommas.checked = true;
-      if (ui.formatLines) ui.formatLines.checked = false;
-    }
-    setResults(state.newColors, ui);
-  };
   ui.formatQuotes.addEventListener("change", () => enforceWrapper());
   ui.formatCommas.addEventListener("change", () => enforceWrapper());
   ui.formatLines.addEventListener("change", () => enforceWrapper());
+  ui.formatIncludeInputs?.addEventListener("change", () => enforceWrapper());
   ui.formatRC?.addEventListener("change", () => {
     if (ui.formatRC.checked && ui.formatPyList) ui.formatPyList.checked = false;
     enforceWrapper();
@@ -446,23 +933,56 @@ function attachEventListeners() {
     if (ui.formatPyList.checked && ui.formatRC) ui.formatRC.checked = false;
     enforceWrapper();
   });
+  [ui.formatQuotes, ui.formatCommas, ui.formatLines, ui.formatRC, ui.formatPyList, ui.formatIncludeInputs].forEach((el) => {
+    if (!el) return;
+    el.addEventListener("change", () => recordHistory());
+  });
 
-  [ui.wH, ui.wSC, ui.wL].forEach((el) => {
+  const widthInputs = [
+    { el: ui.wH, slot: "h" },
+    { el: ui.wSC, slot: "sc" },
+    { el: ui.wL, slot: "l" },
+  ];
+  widthInputs.forEach(({ el, slot }) => {
+    if (!el) return;
     el.addEventListener("input", () => {
       updateWidthChips();
+      applyMainWidthToPerInputs(slot);
       updateClipWarning();
       updateBoundsAndRefresh();
       drawStatusMini(state, ui, currentVizOpts());
+    });
+    el.addEventListener("change", () => {
+      recordHistory();
     });
   });
 
   [ui.modeH, ui.modeSC, ui.modeL, ui.constraintTopology, ui.aestheticMode].forEach((el) => {
     if (!el) return;
     el.addEventListener("change", () => {
+      const skipHistory = el === ui.constraintTopology && state.suppressConstraintTopologyHistory;
+      if (skipHistory) state.suppressConstraintTopologyHistory = false;
+      if (el === ui.constraintTopology) {
+        updateConstraintTopologyUI();
+      }
       updateClipWarning();
       updateBoundsAndRefresh();
       drawStatusMini(state, ui, currentVizOpts());
+      if (!skipHistory) recordHistory();
     });
+  });
+
+  ui.constraintIndividualToggle?.addEventListener("click", () => {
+    ensurePerInputConstraintState();
+    const wantsEnabled = !state.perInputConstraints.enabled;
+    if (wantsEnabled && ui.constraintTopology?.value !== "discontiguous") {
+      ui.constraintTopology.value = "discontiguous";
+    }
+    state.perInputConstraints.enabled = wantsEnabled;
+    updateConstraintTopologyUI();
+    updateBoundsAndRefresh();
+    drawStatusMini(state, ui, currentVizOpts());
+    recordHistory();
   });
 
   const weightMap = {
@@ -474,7 +994,15 @@ function attachEventListeners() {
   Object.entries(weightMap).forEach(([key, el]) => {
     if (!el) return;
     el.addEventListener("input", () => normalizeAndUpdateWeights(key));
-    el.addEventListener("change", () => normalizeAndUpdateWeights(key));
+    el.addEventListener("change", () => {
+      normalizeAndUpdateWeights(key);
+      recordHistory();
+    });
+  });
+
+  [ui.seedInput, ui.colorsToAdd, ui.optimRuns, ui.nmIters].forEach((el) => {
+    if (!el) return;
+    el.addEventListener("change", () => recordHistory());
   });
 
   window.addEventListener("resize", () => {
@@ -491,6 +1019,18 @@ function attachEventListeners() {
   ui.verboseToggle?.addEventListener("change", () => {
     if (ui.verbosePanel) ui.verbosePanel.style.display = ui.verboseToggle.checked ? "block" : "none";
     renderVerboseTable();
+    recordHistory();
+  });
+
+  document.addEventListener("keydown", (evt) => {
+    if (state.running) return;
+    const isMod = evt.metaKey || evt.ctrlKey;
+    if (!isMod) return;
+    const key = String(evt.key || "").toLowerCase();
+    if (key !== "z") return;
+    evt.preventDefault();
+    if (evt.shiftKey) history?.redo();
+    else history?.undo();
   });
 }
 
@@ -515,6 +1055,7 @@ function updateWidthLabels() {
   ui.wHLabel.textContent = (channels[0] || "h").toUpperCase();
   ui.wSCLabel.textContent = scChannel.toUpperCase();
   ui.wLLabel.textContent = (channels[2] || "l").toUpperCase();
+  renderPerInputConstraintUI();
 }
 
 function updateWidthChips() {
@@ -544,6 +1085,24 @@ function updateMeanControls(forceDefaultForKind = false) {
     const v = parseFloat(ui.meanP.value);
     ui.meanPVal.textContent = Number.isFinite(v) ? v.toFixed(1) : "0.0";
   }
+}
+
+function enforceWrapper() {
+  const wrapR = ui.formatRC?.checked;
+  const wrapPy = ui.formatPyList?.checked;
+  const isWrapped = wrapR || wrapPy;
+  if (isWrapped) {
+    if (ui.formatQuotes) ui.formatQuotes.checked = true;
+    if (ui.formatCommas) ui.formatCommas.checked = true;
+    if (ui.formatLines) ui.formatLines.checked = false;
+  }
+  [ui.formatQuotes, ui.formatCommas, ui.formatLines].forEach((el) => {
+    if (!el) return;
+    el.disabled = isWrapped;
+    const label = el.parentElement;
+    if (label) label.style.opacity = isWrapped ? "0.5" : "1";
+  });
+  setResults(state.newColors, ui, state.currentColors);
 }
 
 function harmonicMean(arr) {
@@ -672,9 +1231,10 @@ async function runOptimization() {
   state.running = true;
   ui.runBtn.disabled = true;
   ui.runBtn.textContent = "Running…";
+  updateUndoRedoButtons();
   setStatus("starting optimizer…", 0, ui, state);
   setStatusState(ui, "Running");
-  setResults([], ui);
+  setResults([], ui, state.currentColors);
   state.bestScores = [];
   state.nmTrails = [];
   state.bestColors = [];
@@ -689,7 +1249,9 @@ async function runOptimization() {
   verboseBestScore = -Infinity;
   renderVerboseTable();
   updateResultNavigator();
-  if (state.rawInputOverride?.space === config.colorSpace && state.rawInputOverride.values?.length) {
+  if (config.constraintTopology === "custom" && config.customConstraintPoints?.length) {
+    state.bounds = computeBoundsFromRawValues(config.customConstraintPoints, config.colorSpace, config);
+  } else if (state.rawInputOverride?.space === config.colorSpace && state.rawInputOverride.values?.length) {
     state.bounds = computeBoundsFromRawValues(state.rawInputOverride.values, config.colorSpace, config);
   } else {
     state.bounds = computeBoundsFromCurrent(palette, config.colorSpace, config);
@@ -797,7 +1359,7 @@ async function runOptimization() {
       state.rawNewColors = best.newRaw || [];
       state.rawBestColors = state.rawNewColors;
       state.newRawSpace = config.colorSpace;
-      setResults(state.newColors, ui);
+      setResults(state.newColors, ui, state.currentColors);
     }
     logVerbose("newColors", [], state.newColors);
     const convergence = best.meta?.reason || "finished";
@@ -810,6 +1372,7 @@ async function runOptimization() {
     state.running = false;
     ui.runBtn.disabled = false;
     ui.runBtn.textContent = "RUN";
+    updateUndoRedoButtons();
     if (ui.verboseToggle?.checked) renderVerboseTable();
     if (!state.runRanking?.length && state.newColors?.length) {
       refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
@@ -846,49 +1409,6 @@ function renderVerboseTable() {
     return;
   }
   const channels = channelOrder[ui.colorSpace.value] || [];
-  const startHeaders = [
-    "<th>Hex</th>",
-    ...channels.map((c) => `<th>${c.toUpperCase()}</th>`),
-    "<th>Dist</th>",
-    "<th>Pen</th>",
-    "<th>Gamut Dist</th>",
-    "<th>Total</th>",
-    "<th>Dist%</th>",
-    "<th>Pen%</th>",
-    "<th>Score</th>",
-  ];
-  const endHeaders = [
-    '<th class="block-start">Hex</th>',
-    ...channels.map((c) => `<th>${c.toUpperCase()}</th>`),
-    "<th>Dist</th>",
-    "<th>Pen</th>",
-    "<th>Gamut Dist</th>",
-    "<th>Total</th>",
-    "<th>Dist%</th>",
-    "<th>Pen%</th>",
-    "<th>Score</th>",
-  ];
-  const diffHeaders = [
-    ...channels.map((c, idx) => `<th${idx === 0 ? ' class="block-start"' : ""}>Δ${c.toUpperCase()}</th>`),
-    '<th class="block-start">ΔDist</th>',
-    "<th>ΔPen</th>",
-    "<th>ΔGamut</th>",
-    "<th>ΔTotal</th>",
-    "<th>ΔDist%</th>",
-    "<th>ΔPen%</th>",
-    "<th>ΔScore</th>",
-  ];
-  const metaHeaders = [
-    '<th class="block-start">Best Run</th>',
-    "<th>Influence</th>",
-    "<th>% Influence</th>",
-    "<th>Rank</th>",
-    "<th>Closest</th>",
-    "<th>End Hex</th>",
-    "<th>Closest Dist</th>",
-  ];
-  const totalCols =
-    2 + startHeaders.length + endHeaders.length + diffHeaders.length + metaHeaders.length;
   const truncNote = verboseTruncInfo
     ? `<p class="muted warning">Verbose output truncated: removed ${verboseTruncInfo.droppedRows} row${
         verboseTruncInfo.droppedRows === 1 ? "" : "s"
@@ -898,26 +1418,6 @@ function renderVerboseTable() {
         verboseTruncInfo.droppedRuns
       }).</p>`
     : "";
-  const header = `
-    <table class="verbose-table">
-      <thead>
-        <tr>
-          <th rowspan="2">Run</th>
-          <th rowspan="2">Idx</th>
-          <th colspan="${startHeaders.length}">Start</th>
-          <th colspan="${endHeaders.length}">End</th>
-          <th colspan="${diffHeaders.length}">Difference (End - Start)</th>
-          <th colspan="${metaHeaders.length}">Meta</th>
-        </tr>
-        <tr>
-          ${startHeaders.join("")}
-          ${endHeaders.join("")}
-          ${diffHeaders.join("")}
-          ${metaHeaders.join("")}
-        </tr>
-      </thead>
-      <tbody>
-  `;
   const grouped = {};
   verboseRows.forEach((row) => {
     const key = `${row.run}-${row.idx}`;
@@ -926,81 +1426,355 @@ function renderVerboseTable() {
     if (row.stage === "end") grouped[key].end = row;
     if (row.stage === "best") grouped[key].best = row;
   });
-  let bestRunSoFar = null;
-  let bestScoreSoFar = -Infinity;
   const selectedRun =
     state.runRanking && state.selectedResultIdx
       ? state.runRanking[Math.max(0, Math.min(state.selectedResultIdx - 1, state.runRanking.length - 1))]?.run
       : null;
   const bestRunGlobal = state.runRanking && state.runRanking.length ? state.runRanking[0].run : null;
-  const rows = Object.values(grouped)
-    .sort((a, b) => a.run - b.run || a.idx - b.idx)
-    .map((entry, i, arr) => {
-      const start = entry.start || {};
-      const end = entry.end || entry.best || {};
-      const endScore = typeof end.score === "number" ? end.score : typeof start.score === "number" ? start.score : null;
-      if (typeof endScore === "number" && endScore > bestScoreSoFar) {
-        bestScoreSoFar = endScore;
-        bestRunSoFar = entry.run;
+  const entries = Object.values(grouped);
+  const orderedForBest = [...entries].sort((a, b) => a.run - b.run || a.idx - b.idx);
+  let bestRunSoFar = null;
+  let bestScoreSoFar = -Infinity;
+  orderedForBest.forEach((entry) => {
+    const start = entry.start || {};
+    const end = entry.end || entry.best || {};
+    const endScore = typeof end.score === "number" ? end.score : typeof start.score === "number" ? start.score : null;
+    if (typeof endScore === "number" && endScore > bestScoreSoFar) {
+      bestScoreSoFar = endScore;
+      bestRunSoFar = entry.run;
+    }
+    entry.bestRunSoFar = bestRunSoFar;
+  });
+
+  const fallbackWeights = {
+    none: (parseFloat(ui.wNone?.value || "0") || 0) / 100,
+    deutan: (parseFloat(ui.wDeutan?.value || "0") || 0) / 100,
+    protan: (parseFloat(ui.wProtan?.value || "0") || 0) / 100,
+    tritan: (parseFloat(ui.wTritan?.value || "0") || 0) / 100,
+  };
+  const fallbackMeanType = ui.meanType?.value || "harmonic";
+  const fallbackMeanP = ui.meanP ? parseFloat(ui.meanP.value) : undefined;
+
+  const rows = entries.map((entry) => {
+    const start = entry.start || {};
+    const end = entry.end || entry.best || {};
+    const startDistPct = relPart(start.distance, start.total);
+    const startPenPct = relPart(start.penalty, start.total);
+    const endDistPct = relPart(end.distance, end.total);
+    const endPenPct = relPart(end.penalty, end.total);
+    const diff = {
+      channels: Object.fromEntries(
+        channels.map((c) => [c, (end.channels?.[c] ?? 0) - (start.channels?.[c] ?? 0)])
+      ),
+      dist: (end.distance ?? 0) - (start.distance ?? 0),
+      pen: (end.penalty ?? 0) - (start.penalty ?? 0),
+      gamut: (end.gamutDistance ?? 0) - (start.gamutDistance ?? 0),
+      total: (end.total ?? 0) - (start.total ?? 0),
+      distPct: numDiff(endDistPct, startDistPct),
+      penPct: numDiff(endPenPct, startPenPct),
+      score: (end.score ?? 0) - (start.score ?? 0),
+    };
+    const closestDistByState = { ...(end.closestDistByState || {}) };
+    if (!Number.isFinite(closestDistByState.none) && Number.isFinite(end.closestDist)) {
+      closestDistByState.none = end.closestDist;
+    }
+    const metric = end.distanceMetric || start.distanceMetric || ui.distanceMetric?.value || "de2000";
+    const weights = end.colorblindWeights || start.colorblindWeights || fallbackWeights;
+    const meanType = end.meanType || start.meanType || fallbackMeanType;
+    const meanP = Number.isFinite(end.meanP) ? end.meanP : Number.isFinite(start.meanP) ? start.meanP : fallbackMeanP;
+    const discWeightedDistance = weightedAggregateDistances(closestDistByState, weights, meanType, meanP);
+    return {
+      run: entry.run,
+      idx: entry.idx,
+      start,
+      end,
+      diff,
+      startDistPct,
+      startPenPct,
+      endDistPct,
+      endPenPct,
+      bestRunSoFar: entry.bestRunSoFar,
+      closestDistByState,
+      metric,
+      weights,
+      meanType,
+      meanP,
+      discWeightedDistance,
+      isSelected: selectedRun != null && entry.run === selectedRun,
+      isBest: bestRunGlobal != null && entry.run === bestRunGlobal,
+    };
+  });
+
+  const endColumnsAll = [
+    {
+      key: "end_hex",
+      label: "Hex",
+      type: "string",
+      className: "col-end",
+      get: (row) => row.end.hex || "",
+      render: (row) => renderHex(row.end.hex, row.end.color),
+    },
+    ...channels.map((c) => ({
+      key: `end_${c}`,
+      label: c.toUpperCase(),
+      type: "number",
+      className: "col-end",
+      get: (row) => row.end.channels?.[c],
+      render: (row) => formatVal(row.end.channels?.[c]),
+    })),
+    { key: "end_dist", label: "Dist", type: "number", className: "col-end", get: (row) => row.end.distance, render: (row) => formatVal(row.end.distance) },
+    { key: "end_pen", label: "Pen", type: "number", className: "col-end", get: (row) => row.end.penalty, render: (row) => formatVal(row.end.penalty) },
+    { key: "end_gamut", label: "Gamut Dist", type: "number", className: "col-end", get: (row) => row.end.gamutDistance, render: (row) => formatVal(row.end.gamutDistance) },
+    { key: "end_total", label: "Total", type: "number", className: "col-end", get: (row) => row.end.total, render: (row) => formatVal(row.end.total) },
+    { key: "end_dist_pct", label: "Dist%", type: "number", className: "col-end", get: (row) => row.endDistPct, render: (row) => formatVal(row.endDistPct) },
+    { key: "end_pen_pct", label: "Pen%", type: "number", className: "col-end", get: (row) => row.endPenPct, render: (row) => formatVal(row.endPenPct) },
+    { key: "end_score", label: "Score", type: "number", className: "col-end", get: (row) => row.end.score, render: (row) => formatVal(row.end.score) },
+  ];
+
+  const startColumnsAll = [
+    {
+      key: "start_hex",
+      label: "Hex",
+      type: "string",
+      className: "col-start",
+      get: (row) => row.start.hex || "",
+      render: (row) => renderHex(row.start.hex, row.start.color),
+    },
+    ...channels.map((c) => ({
+      key: `start_${c}`,
+      label: c.toUpperCase(),
+      type: "number",
+      className: "col-start",
+      get: (row) => row.start.channels?.[c],
+      render: (row) => formatVal(row.start.channels?.[c]),
+    })),
+    { key: "start_dist", label: "Dist", type: "number", className: "col-start", get: (row) => row.start.distance, render: (row) => formatVal(row.start.distance) },
+    { key: "start_pen", label: "Pen", type: "number", className: "col-start", get: (row) => row.start.penalty, render: (row) => formatVal(row.start.penalty) },
+    { key: "start_gamut", label: "Gamut Dist", type: "number", className: "col-start", get: (row) => row.start.gamutDistance, render: (row) => formatVal(row.start.gamutDistance) },
+    { key: "start_total", label: "Total", type: "number", className: "col-start", get: (row) => row.start.total, render: (row) => formatVal(row.start.total) },
+    { key: "start_dist_pct", label: "Dist%", type: "number", className: "col-start", get: (row) => row.startDistPct, render: (row) => formatVal(row.startDistPct) },
+    { key: "start_pen_pct", label: "Pen%", type: "number", className: "col-start", get: (row) => row.startPenPct, render: (row) => formatVal(row.startPenPct) },
+    { key: "start_score", label: "Score", type: "number", className: "col-start", get: (row) => row.start.score, render: (row) => formatVal(row.start.score) },
+  ];
+
+  const diffColumnsAll = [
+    ...channels.map((c) => ({
+      key: `diff_${c}`,
+      label: `Δ${c.toUpperCase()}`,
+      type: "number",
+      className: "col-diff",
+      get: (row) => row.diff.channels?.[c],
+      render: (row) => formatVal(row.diff.channels?.[c]),
+    })),
+    { key: "diff_dist", label: "ΔDist", type: "number", className: "col-diff", get: (row) => row.diff.dist, render: (row) => formatVal(row.diff.dist) },
+    { key: "diff_pen", label: "ΔPen", type: "number", className: "col-diff", get: (row) => row.diff.pen, render: (row) => formatVal(row.diff.pen) },
+    { key: "diff_gamut", label: "ΔGamut", type: "number", className: "col-diff", get: (row) => row.diff.gamut, render: (row) => formatVal(row.diff.gamut) },
+    { key: "diff_total", label: "ΔTotal", type: "number", className: "col-diff", get: (row) => row.diff.total, render: (row) => formatVal(row.diff.total) },
+    { key: "diff_dist_pct", label: "ΔDist%", type: "number", className: "col-diff", get: (row) => row.diff.distPct, render: (row) => formatVal(row.diff.distPct) },
+    { key: "diff_pen_pct", label: "ΔPen%", type: "number", className: "col-diff", get: (row) => row.diff.penPct, render: (row) => formatVal(row.diff.penPct) },
+    { key: "diff_score", label: "ΔScore", type: "number", className: "col-diff", get: (row) => row.diff.score, render: (row) => formatVal(row.diff.score) },
+  ];
+
+  const metaColumns = [
+    { key: "meta_best_run", label: "Best Run", type: "number", className: "col-meta", get: (row) => row.bestRunSoFar, render: (row) => row.bestRunSoFar ?? "" },
+    { key: "meta_influence", label: "Influence", type: "number", className: "col-meta", get: (row) => row.end.influence, render: (row) => formatVal(row.end.influence) },
+    { key: "meta_influence_pct", label: "% Influence", type: "number", className: "col-meta", get: (row) => percentInfluence(row.end.influence, row.end.score), render: (row) => formatVal(percentInfluence(row.end.influence, row.end.score)) },
+    { key: "meta_rank", label: "Rank", type: "number", className: "col-meta", get: (row) => row.end.influenceRank, render: (row) => row.end.influenceRank ?? "" },
+    { key: "meta_closest_hex", label: "Closest", type: "string", className: "col-meta", get: (row) => row.end.closestHex || "", render: (row) => renderHex(row.end.closestHex, row.end.closestHex) },
+    { key: "meta_end_hex", label: "End Hex", type: "string", className: "col-meta", get: (row) => row.end.hex || "", render: (row) => renderHex(row.end.hex, row.end.color) },
+    { key: "meta_closest_dist", label: "Closest Dist", type: "number", className: "col-meta", get: (row) => row.end.closestDist, render: (row) => formatVal(row.end.closestDist) },
+    {
+      key: "disc_none",
+      label: "Disc (Tri)",
+      type: "number",
+      className: "col-meta",
+      get: (row) => row.closestDistByState?.none,
+      render: (row) => renderDiscCell(row.closestDistByState?.none, row.metric),
+    },
+    {
+      key: "disc_deutan",
+      label: "Disc (Deu)",
+      type: "number",
+      className: "col-meta",
+      get: (row) => row.closestDistByState?.deutan,
+      render: (row) => renderDiscCell(row.closestDistByState?.deutan, row.metric),
+    },
+    {
+      key: "disc_protan",
+      label: "Disc (Pro)",
+      type: "number",
+      className: "col-meta",
+      get: (row) => row.closestDistByState?.protan,
+      render: (row) => renderDiscCell(row.closestDistByState?.protan, row.metric),
+    },
+    {
+      key: "disc_tritan",
+      label: "Disc (Trit)",
+      type: "number",
+      className: "col-meta",
+      get: (row) => row.closestDistByState?.tritan,
+      render: (row) => renderDiscCell(row.closestDistByState?.tritan, row.metric),
+    },
+    {
+      key: "disc_weighted",
+      label: "Disc (Weighted)",
+      type: "number",
+      className: "col-meta",
+      get: (row) => row.discWeightedDistance,
+      render: (row) => renderDiscCell(row.discWeightedDistance, row.metric),
+    },
+  ];
+
+  const endColumns = verboseGroupState.end ? endColumnsAll : [endColumnsAll[0]];
+  const startColumns = verboseGroupState.start ? startColumnsAll : [startColumnsAll[0]];
+  const diffColumns = verboseGroupState.diff ? diffColumnsAll : [diffColumnsAll[diffColumnsAll.length - 1]];
+
+  const sortMap = {
+    run: { type: "number", get: (row) => row.run },
+    idx: { type: "number", get: (row) => row.idx },
+  };
+  const allColumns = [...endColumnsAll, ...metaColumns, ...startColumnsAll, ...diffColumnsAll];
+  allColumns.forEach((col) => {
+    sortMap[col.key] = { type: col.type || "number", get: col.get };
+  });
+
+  const sortSpec = sortMap[verboseSortKey] || sortMap.run;
+  rows.sort((a, b) => {
+    const va = sortSpec.get(a);
+    const vb = sortSpec.get(b);
+    if (sortSpec.type === "string") {
+      const sa = String(va ?? "");
+      const sb = String(vb ?? "");
+      const cmp = sa.localeCompare(sb);
+      if (cmp !== 0) return verboseSortDir === "desc" ? -cmp : cmp;
+    } else {
+      const aValid = Number.isFinite(va);
+      const bValid = Number.isFinite(vb);
+      if (!aValid && !bValid) {
+        // fall through to tie-breaker
+      } else if (!aValid) {
+        return 1;
+      } else if (!bValid) {
+        return -1;
+      } else if (va !== vb) {
+        return verboseSortDir === "desc" ? vb - va : va - vb;
       }
-      const prev = arr[i - 1];
-      const runBreak = !prev || prev.run !== entry.run;
-      const spacer = "";
-      const startCh = channels.map((c) => formatVal(start.channels?.[c]));
-      const endCh = channels.map((c) => formatVal(end.channels?.[c]));
-      const diffCh = channels.map((c) =>
-        formatVal((end.channels?.[c] ?? 0) - (start.channels?.[c] ?? 0))
-      );
-      const diffCells = diffCh.map((v, idx3) => `<td${idx3 === 0 ? ' class="block-start"' : ""}>${v}</td>`);
-      const deltaDistCell = `<td class="block-start">${formatVal((end.distance ?? 0) - (start.distance ?? 0))}</td>`;
-      const startDistPct = relPart(start.distance, start.total);
-      const startPenPct = relPart(start.penalty, start.total);
-      const endDistPct = relPart(end.distance, end.total);
-      const endPenPct = relPart(end.penalty, end.total);
-      const diffDistPct = numDiff(endDistPct, startDistPct);
-      const diffPenPct = numDiff(endPenPct, startPenPct);
-      const isSelectedRun = selectedRun != null && entry.run === selectedRun;
-      const isBestRun = bestRunGlobal != null && entry.run === bestRunGlobal;
-      const rowHtml = `<tr class="${runBreak ? "row-sep" : ""} ${isSelectedRun ? "row-selected" : ""} ${isBestRun ? "row-best" : ""}">
-        <td class="col-run">${entry.run}</td>
-        <td class="col-run">${entry.idx}</td>
-        <td class="col-start">${renderHex(start.hex, start.color)}</td>
-        ${startCh.map((v) => `<td class="col-start">${v}</td>`).join("")}
-        <td class="col-start">${formatVal(start.distance)}</td>
-        <td class="col-start">${formatVal(start.penalty)}</td>
-        <td class="col-start">${formatVal(start.gamutDistance)}</td>
-        <td class="col-start">${formatVal(start.total)}</td>
-        <td class="col-start">${formatVal(startDistPct)}</td>
-        <td class="col-start">${formatVal(startPenPct)}</td>
-        <td class="col-start">${formatVal(start.score)}</td>
-        <td class="col-end block-start">${renderHex(end.hex, end.color)}</td>
-        ${endCh.map((v) => `<td class="col-end">${v}</td>`).join("")}
-        <td class="col-end">${formatVal(end.distance)}</td>
-        <td class="col-end">${formatVal(end.penalty)}</td>
-        <td class="col-end">${formatVal(end.gamutDistance)}</td>
-        <td class="col-end">${formatVal(end.total)}</td>
-        <td class="col-end">${formatVal(endDistPct)}</td>
-        <td class="col-end">${formatVal(endPenPct)}</td>
-        <td class="col-end">${formatVal(end.score)}</td>
-        ${diffCells.join("")}
-        ${deltaDistCell}
-        <td>${formatVal((end.penalty ?? 0) - (start.penalty ?? 0))}</td>
-        <td>${formatVal((end.gamutDistance ?? 0) - (start.gamutDistance ?? 0))}</td>
-        <td>${formatVal((end.total ?? 0) - (start.total ?? 0))}</td>
-        <td>${formatVal(diffDistPct)}</td>
-        <td>${formatVal(diffPenPct)}</td>
-        <td>${formatVal((end.score ?? 0) - (start.score ?? 0))}</td>
-        <td class="col-meta block-start">${bestRunSoFar ?? ""}</td>
-        <td class="col-meta">${formatVal(end.influence)}</td>
-        <td class="col-meta">${formatVal(percentInfluence(end.influence, end.score))}</td>
-        <td class="col-meta">${end.influenceRank ?? ""}</td>
-        <td class="col-meta">${renderHex(end.closestHex, end.closestHex)}</td>
-        <td class="col-meta">${renderHex(end.hex, end.color)}</td>
-        <td class="col-meta">${formatVal(end.closestDist)}</td>
-      </tr>`;
-      return `${spacer}${rowHtml}`;
+    }
+    return a.run - b.run || a.idx - b.idx;
+  });
+
+  const groupKeyForRow = (row) => {
+    const val = sortSpec.get(row);
+    if (sortSpec.type === "string") return String(val ?? "");
+    if (!Number.isFinite(val)) return "";
+    if (verboseSortKey === "run" || verboseSortKey === "idx") return String(val);
+    return formatVal(val);
+  };
+
+  const renderSortHeader = (col, isGroupStart) => {
+    const isActive = verboseSortKey === col.key;
+    const dirClass = isActive ? (verboseSortDir === "desc" ? "sort-desc" : "sort-asc") : "";
+    const ariaSort = isActive ? (verboseSortDir === "desc" ? "descending" : "ascending") : "none";
+    const classes = [col.className || "", isGroupStart ? "block-start" : "", dirClass].filter(Boolean).join(" ");
+    return `<th class="${classes}" aria-sort="${ariaSort}">
+      <button class="sort-btn" type="button" data-sort-key="${col.key}" aria-label="Sort by ${col.label}">
+        <span class="sort-label">${col.label}</span>
+        <span class="sort-icons"><span class="sort-up">^</span><span class="sort-down">v</span></span>
+      </button>
+    </th>`;
+  };
+
+  const renderRowSpanSortHeader = (label, key) => {
+    const isActive = verboseSortKey === key;
+    const dirClass = isActive ? (verboseSortDir === "desc" ? "sort-desc" : "sort-asc") : "";
+    const ariaSort = isActive ? (verboseSortDir === "desc" ? "descending" : "ascending") : "none";
+    const classes = ["col-run", dirClass].filter(Boolean).join(" ");
+    return `<th rowspan="2" class="${classes}" aria-sort="${ariaSort}">
+      <button class="sort-btn" type="button" data-sort-key="${key}" aria-label="Sort by ${label}">
+        <span class="sort-label">${label}</span>
+        <span class="sort-icons"><span class="sort-up">^</span><span class="sort-down">v</span></span>
+      </button>
+    </th>`;
+  };
+
+  const renderGroupToggle = (groupKey) => {
+    const expanded = verboseGroupState[groupKey];
+    const label = expanded ? "v" : ">";
+    return `<button class="group-toggle" type="button" data-group-toggle="${groupKey}" aria-expanded="${expanded ? "true" : "false"}">${label}</button>`;
+  };
+
+  const header = `
+    <table class="verbose-table">
+      <thead>
+        <tr>
+          ${renderRowSpanSortHeader("Run", "run")}
+          ${renderRowSpanSortHeader("Idx", "idx")}
+          <th colspan="${endColumns.length}" class="group-header block-start">End ${renderGroupToggle("end")}</th>
+          <th colspan="${metaColumns.length}" class="group-header block-start">Meta</th>
+          <th colspan="${startColumns.length}" class="group-header block-start">Start ${renderGroupToggle("start")}</th>
+          <th colspan="${diffColumns.length}" class="group-header block-start">Difference ${renderGroupToggle("diff")}</th>
+        </tr>
+        <tr>
+          ${endColumns.map((col, idx) => renderSortHeader(col, idx === 0)).join("")}
+          ${metaColumns.map((col, idx) => renderSortHeader(col, idx === 0)).join("")}
+          ${startColumns.map((col, idx) => renderSortHeader(col, idx === 0)).join("")}
+          ${diffColumns.map((col, idx) => renderSortHeader(col, idx === 0)).join("")}
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  let prevGroupKey = null;
+  const rowsHtml = rows.map((row) => {
+    const groupKey = groupKeyForRow(row);
+    const groupBreak = prevGroupKey !== null && groupKey !== prevGroupKey;
+    prevGroupKey = groupKey;
+    const rowClass = `${groupBreak ? "row-sep" : ""} ${row.isSelected ? "row-selected" : ""} ${row.isBest ? "row-best" : ""}`.trim();
+
+    const renderCells = (cols) =>
+      cols
+        .map((col, idx) => {
+          const className = [col.className || "", idx === 0 ? "block-start" : ""].filter(Boolean).join(" ");
+          return `<td class="${className}">${col.render(row)}</td>`;
+        })
+        .join("");
+
+    return `<tr class="${rowClass}">
+      <td class="col-run">${row.run}</td>
+      <td class="col-run">${row.idx}</td>
+      ${renderCells(endColumns)}
+      ${renderCells(metaColumns)}
+      ${renderCells(startColumns)}
+      ${renderCells(diffColumns)}
+    </tr>`;
+  });
+
+  ui.verboseTable.innerHTML = `${truncNote}${header}${rowsHtml.join("")}</tbody></table>`;
+  const table = ui.verboseTable.querySelector("table");
+  if (table) {
+    table.addEventListener("click", (event) => {
+      const toggle = event.target.closest("[data-group-toggle]");
+      if (toggle) {
+        const key = toggle.getAttribute("data-group-toggle");
+        if (key && key in verboseGroupState) {
+          verboseGroupState[key] = !verboseGroupState[key];
+          renderVerboseTable();
+        }
+        return;
+      }
+      const sortBtn = event.target.closest("[data-sort-key]");
+      if (!sortBtn) return;
+      const key = sortBtn.getAttribute("data-sort-key");
+      if (!key) return;
+      if (verboseSortKey === key) {
+        verboseSortDir = verboseSortDir === "asc" ? "desc" : "asc";
+      } else {
+        verboseSortKey = key;
+        verboseSortDir = "asc";
+      }
+      renderVerboseTable();
     });
-  ui.verboseTable.innerHTML = `${truncNote}${header}${rows.join("")}</tbody></table>`;
+  }
 }
 
 function pushVerboseRows(info) {
@@ -1041,6 +1815,12 @@ function pushVerboseRows(info) {
       influenceRank: det.influenceRank,
       closestHex: det.closestHex,
       closestDist: det.closestDist,
+      closestDistByState: det.closestDistByState,
+      closestHexByState: det.closestHexByState,
+      colorblindWeights: info.colorblindWeights,
+      distanceMetric: info.distanceMetric,
+      meanType: info.meanType,
+      meanP: info.meanP,
       space: info.space || ui.colorSpace.value,
     });
   });
@@ -1122,6 +1902,14 @@ function formatVal(v) {
   const str = Number(v).toPrecision(3);
   // remove unnecessary plus signs
   return str.replace(/^\+/, "");
+}
+
+function renderDiscCell(distance, metric) {
+  if (!Number.isFinite(distance)) return "";
+  const label = discriminabilityLabel(distance, metric);
+  const dist = formatVal(distance);
+  const title = dist ? ` title="${dist}"` : "";
+  return `<span class="disc-chip"${title}>${label}</span>`;
 }
 
 function renderHex(hex, color) {
@@ -1220,7 +2008,7 @@ function applySelectedResult(options = {}) {
   state.newRawSpace = pick.space || state.rawSpace;
   state.bestColors = pick.hex || state.bestColors;
   state.rawBestColors = pick.raw || state.rawBestColors;
-  setResults(state.newColors, ui);
+  setResults(state.newColors, ui, state.currentColors);
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   drawStatusMini(state, ui, currentVizOpts());
   drawStatusGraph(state, ui);
@@ -1341,7 +2129,10 @@ function appendPalette(colors) {
   if (ui.rawInputValues) ui.rawInputValues.value = "";
   state.bounds = computeInputBounds(ui.colorSpace.value);
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+  ensurePerInputConstraintState();
+  renderPerInputConstraintUI();
   drawStatusMini(state, ui, currentVizOpts());
+  history?.record();
 }
 
 function syncPaletteHighlightScroll() {
