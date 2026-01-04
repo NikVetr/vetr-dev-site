@@ -502,6 +502,72 @@ textarea {
   transform: translateY(0);
 }
 
+.field-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 18px;
+}
+
+.accordion-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.accordion-preview {
+  position: relative;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.accordion-preview::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.7) 50%, white 100%);
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.accordion-section.expanded .accordion-preview {
+  max-height: 400px;
+}
+
+.accordion-section.expanded .accordion-preview::after {
+  opacity: 0;
+}
+
+.accordion-toggle {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.accordion-toggle:hover {
+  border-color: #cbd5e1;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.accordion-toggle[aria-expanded="true"] {
+  background: linear-gradient(90deg, rgba(199, 210, 254, 0.4), rgba(199, 210, 254, 0.9), rgba(199, 210, 254, 0.4));
+  border-color: #c7d2fe;
+  color: #334155;
+}
+
 .constraint-individual-toggle {
   margin-top: -4px;
 }
@@ -773,13 +839,15 @@ label.small {
 
 .panels {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
   margin-top: 8px;
   align-items: stretch;
   grid-auto-rows: 1fr;
   align-content: stretch;
   align-self: stretch;
+  height: 100%;
+  min-height: 0;
 }
 
 .panel {
@@ -792,6 +860,8 @@ label.small {
   flex-direction: column;
   gap: 10px;
   position: relative;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .panel h4 {
@@ -1118,7 +1188,7 @@ label.small {
   gap: 6px;
   align-items: center;
   position: relative;
-  max-height: 72px;
+  max-height: 42px;
   overflow: hidden;
   transition: max-height 0.25s ease;
 }
@@ -1129,8 +1199,8 @@ label.small {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 48px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.6) 40%, rgba(255, 255, 255, 0.9) 70%, white 100%);
+  height: 28px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.7) 50%, white 100%);
   pointer-events: none;
   transition: opacity 0.25s ease;
 }
@@ -1283,19 +1353,32 @@ label.small {
   overflow: hidden;
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 2px 4px;
+  justify-content: center;
+  padding: 2px 8px 2px 4px;
+  gap: 6px;
   transition: opacity 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
 }
 
 .bg-row input[type="color"] {
   -webkit-appearance: none;
   border: none;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
   cursor: pointer;
   background: transparent;
+  flex-shrink: 0;
+}
+
+.bg-color-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color 0.15s ease;
 }
 
 .bg-row input[type="color"]::-webkit-color-swatch {
@@ -1306,6 +1389,114 @@ label.small {
 .bg-row input[type="color"]::-moz-color-swatch {
   border: none;
   border-radius: 8px;
+}
+
+/* Input header row with background picker */
+.input-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.bg-row-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bg-row-inline .bg-chip {
+  height: 26px;
+  border-radius: 13px;
+  border: 1px solid #d0d7e2;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px 2px 4px;
+  gap: 6px;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.bg-row-inline input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  cursor: pointer;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.bg-row-inline input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+
+.bg-row-inline input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+
+/* Gamut clip row */
+.gamut-clip-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.gamut-clip-row .clip-label {
+  padding-bottom: 10px;
+}
+
+.gamut-select-inline {
+  flex: 1;
+}
+
+/* Visualization options */
+.viz-options {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Accordion disabled state */
+.accordion-section.disabled .accordion-toggle {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.accordion-section.disabled .accordion-toggle:hover {
+  background: transparent;
+  border-color: transparent;
+  color: #64748b;
+}
+
+.accordion-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 100;
+}
+
+.accordion-section.disabled:hover .accordion-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .bg-row.disabled {
@@ -1398,10 +1589,14 @@ label.small {
 
 .wheel {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  flex: 1 1 auto;
+  min-height: 0;
   border-radius: 14px;
   border: 1px solid rgba(0, 0, 0, 0.06);
   background: #f8fafc;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
 }
 
 .wheel canvas {
@@ -1409,6 +1604,7 @@ label.small {
   height: 100%;
   display: block;
   border-radius: 14px;
+  object-fit: contain;
 }
 
 .control-block.status {

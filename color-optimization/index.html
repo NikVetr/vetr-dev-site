@@ -50,7 +50,20 @@
     <section class="layout">
       <div class="controls stack">
         <div class="control-block wide">
-          <label for="palette-input">Input Colors (Hex)</label>
+          <h3>Input</h3>
+          <div class="input-header-row">
+            <label for="palette-input">Input Colors (Hex)</label>
+            <div class="bg-row-inline">
+              <label class="inline small">
+                <input id="bg-enabled" type="checkbox" checked>
+                Background:
+              </label>
+              <label for="bg-color" class="bg-chip">
+                <input id="bg-color" type="color" value="#ffffff" aria-label="Background color picker">
+                <span id="bg-color-label" class="bg-color-label">#FFFFFF</span>
+              </label>
+            </div>
+          </div>
           <div class="palette-input-wrap">
             <pre id="palette-highlight" aria-hidden="true"></pre>
             <textarea id="palette-input" rows="3" spellcheck="false" placeholder="eg, #E64B35, #4DBBD5, #00A087, #3C5488, ..."></textarea>
@@ -65,13 +78,40 @@
         </div>
 
         <div class="control-block">
-          <h3>Algorithm Settings</h3>
-          <div class="field">
-            <label for="seed-input">Seed</label>
-            <input id="seed-input" type="text" inputmode="numeric" pattern="-?\\d*" placeholder="random" value="random">
+          <h3>General Settings</h3>
+          <div class="field three-col mini">
+            <div>
+              <label for="colors-to-add">Colors to add</label>
+              <input id="colors-to-add" type="number" min="1" max="8" value="3">
+            </div>
+            <div>
+              <label for="optim-runs"># Runs</label>
+              <input id="optim-runs" type="number" min="5" max="200" value="100">
+            </div>
+            <div class="field-center">
+              <label class="inline small">
+                <input id="verbose-toggle" type="checkbox">
+                Verbose Output
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-block">
+          <h3>Optimization Settings</h3>
+          <input id="raw-input-values" type="hidden">
+          <div class="field two-col">
+            <div>
+              <label for="seed-input">Seed</label>
+              <input id="seed-input" type="text" inputmode="numeric" pattern="-?\\d*" placeholder="random" value="random">
+            </div>
+            <div>
+              <label for="nm-iters">N-M iterations</label>
+              <input id="nm-iters" type="number" min="50" max="1000" value="100">
+            </div>
           </div>
           <div class="field">
-            <label for="color-space">Optimization colorspace</label>
+            <label for="color-space">Colorspace</label>
             <select id="color-space">
               <option value="oklab">OKLab</option>
               <option value="oklch">OKLCh</option>
@@ -82,22 +122,13 @@
               <option value="jzazbz">JzAzBz</option>
             </select>
           </div>
-          <div class="field three-col mini gamut-row">
-            <div class="clip-inline">
-              <div class="clip-inline-label">Clip to Gamut:</div>
-              <div class="clip-inline-cols">
-                <div class="clip-inline-col">
-                  <div class="clip-inline-title">Visual</div>
-                  <input id="clip-gamut" type="checkbox" aria-label="Clip to gamut for visualization">
-                </div>
-                <div class="clip-inline-col">
-                  <div class="clip-inline-title">Optim</div>
-                  <input id="clip-gamut-opt" type="checkbox" aria-label="Clip to gamut for optimization">
-                </div>
-              </div>
-            </div>
-            <div class="gamut-select">
-              <label for="gamut-preset">Preset</label>
+          <div class="field gamut-clip-row">
+            <label class="inline small clip-label">
+              <input id="clip-gamut-opt" type="checkbox" aria-label="Clip to gamut for optimization">
+              Clip
+            </label>
+            <div class="gamut-select-inline">
+              <label for="gamut-preset">Gamut</label>
               <select id="gamut-preset">
                 <option value="srgb">sRGB</option>
                 <option value="display-p3">Display P3</option>
@@ -105,40 +136,34 @@
               </select>
             </div>
           </div>
-          <div class="field">
-            <label for="cvd-model">Discriminability model</label>
-            <select id="cvd-model">
-              <option value="machado2009">Machado 2009 (linear RGB)</option>
-              <option value="legacy">Legacy (gamma RGB matrix)</option>
-            </select>
-          </div>
-          <input id="raw-input-values" type="hidden">
-          <div class="field">
-            <label for="distance-metric">Distance metric</label>
-            <select id="distance-metric">
-              <option value="de2000">ΔE2000 (Lab)</option>
-              <option value="oklab76">ΔE76 (Euclidean in OKLab)</option>
-              <option value="lab76">ΔE76 (Euclidean in Lab)</option>
-              <option value="cam02ucs">CAM02-UCS (Luo 2006)</option>
-              <option value="cam16ucs">CAM16-UCS (Li 2017)</option>
-              <option value="deitp">ΔE_ITP (BT.2124, ICtCp)</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="mean-type">Distance aggregation</label>
-            <select id="mean-type">
-              <optgroup label="-- recommended --">
-                <option value="harmonic">Harmonic mean</option>
-                <option value="lehmer">Lehrer mean</option>
-                <option value="power">Power mean</option>
-                <option value="minimum">Minimum (worst-case)</option>
-              </optgroup>
-              <optgroup label="-- not recommended --">
-                <option value="geometric">Geometric mean</option>
-                <option value="arithmetic">Arithmetic mean</option>
-                <option value="quadratic">Quadratic mean (RMS)</option>
-              </optgroup>
-            </select>
+          <div class="field two-col">
+            <div>
+              <label for="distance-metric">Distance metric</label>
+              <select id="distance-metric">
+                <option value="de2000">ΔE2000 (Lab)</option>
+                <option value="oklab76">ΔE76 (OKLab)</option>
+                <option value="lab76">ΔE76 (Lab)</option>
+                <option value="cam02ucs">CAM02-UCS</option>
+                <option value="cam16ucs">CAM16-UCS</option>
+                <option value="deitp">ΔE_ITP</option>
+              </select>
+            </div>
+            <div>
+              <label for="mean-type">Aggregation</label>
+              <select id="mean-type">
+                <optgroup label="-- recommended --">
+                  <option value="harmonic">Harmonic</option>
+                  <option value="lehmer">Lehmer</option>
+                  <option value="power">Power</option>
+                  <option value="minimum">Minimum</option>
+                </optgroup>
+                <optgroup label="-- not recommended --">
+                  <option value="geometric">Geometric</option>
+                  <option value="arithmetic">Arithmetic</option>
+                  <option value="quadratic">Quadratic</option>
+                </optgroup>
+              </select>
+            </div>
           </div>
           <div class="field" id="mean-p-row" hidden>
             <label for="mean-p">p</label>
@@ -147,23 +172,49 @@
               <span id="mean-p-val" class="result-chip">-2.0</span>
             </div>
           </div>
-          <div class="field two-col">
-            <div>
-              <label for="colors-to-add">Colors to add</label>
-              <input id="colors-to-add" type="number" min="1" max="8" value="3">
-            </div>
-            <div>
-              <label for="optim-runs">Restarts</label>
-              <input id="optim-runs" type="number" min="5" max="200" value="100">
-            </div>
+        </div>
+
+        <div class="control-block">
+          <h3>Colorvision Settings</h3>
+          <div class="field">
+            <label for="cvd-model">CVD Model</label>
+            <select id="cvd-model">
+              <option value="machado2009">Machado 2009 (linear RGB)</option>
+              <option value="legacy">Legacy (gamma RGB matrix)</option>
+            </select>
           </div>
           <div class="field">
-            <label for="nm-iters">Nelder–Mead iterations</label>
-            <input id="nm-iters" type="number" min="50" max="1000" value="100">
+            <label>Prioritization weights</label>
+            <div class="field four-col mini">
+              <div>
+                <label for="w-none">trichrom</label>
+                <input id="w-none" type="range" min="0" max="100" step="0.1" value="50">
+                <span id="w-none-val" class="value-chip">50.0%</span>
+              </div>
+              <div>
+                <label for="w-deutan">deutan</label>
+                <input id="w-deutan" type="range" min="0" max="100" step="0.1" value="40">
+                <span id="w-deutan-val" class="value-chip">40.0%</span>
+              </div>
+              <div>
+                <label for="w-protan">protan</label>
+                <input id="w-protan" type="range" min="0" max="100" step="0.1" value="8">
+                <span id="w-protan-val" class="value-chip">8.0%</span>
+              </div>
+              <div>
+                <label for="w-tritan">tritan</label>
+                <input id="w-tritan" type="range" min="0" max="100" step="0.1" value="2">
+                <span id="w-tritan-val" class="value-chip">2.0%</span>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div class="control-block">
+          <h3>Constraints</h3>
           <div class="field two-col">
             <div>
-              <label for="constraint-topology">Constraint topology</label>
+              <label for="constraint-topology">Topology</label>
               <select id="constraint-topology">
                 <option value="contiguous">Contiguous</option>
                 <option value="discontiguous">Discontiguous</option>
@@ -181,7 +232,7 @@
             </div>
           </div>
           <div class="field">
-            <label>constraint widths</label>
+            <label>Constraint widths</label>
             <div class="field three-col mini">
               <div class="constraint-row">
                 <div class="constraint-head">
@@ -230,36 +281,34 @@
               </div>
             </div>
           </div>
-          <div class="field constraint-individual-toggle" id="constraint-individual-row">
-            <button id="constraint-individual-toggle" type="button" class="constraint-expander" aria-expanded="false">
-              Per-color constraints
+          <div class="field accordion-section" id="constraint-individual-row">
+            <div class="accordion-preview" id="constraint-individual-preview">
+              <div id="constraint-individual-list" class="constraint-individual-list"></div>
+            </div>
+            <button id="constraint-individual-toggle" type="button" class="accordion-toggle" aria-expanded="false">
+              Individuated Constraints ▾
             </button>
+            <span class="accordion-tooltip">Add input colors to use individuated constraints</span>
           </div>
           <div class="field constraint-individual-panel" id="constraint-individual-panel" hidden>
-            <div id="constraint-individual-list" class="constraint-individual-list"></div>
           </div>
-          <div class="field inline-row between bg-row">
-            <label class="inline small">
-              <input id="bg-enabled" type="checkbox" checked>
-              Background Color:
-            </label>
-            <label for="bg-color" class="bg-chip">
-              <input id="bg-color" type="color" value="#ffffff" aria-label="Background color picker">
-            </label>
-          </div>
-          <div class="field inline-row">
-            <label class="inline small">
-              <input id="verbose-toggle" type="checkbox">
-              Verbose
-            </label>
-          </div>
+        </div>
+
+        <div class="control-block">
+          <h3>Visualization</h3>
           <div class="field">
             <div class="inline-row between">
-              <label for="colorwheel-space">Visualization colorspace</label>
-              <label class="inline small">
-                <input id="sync-colorspaces" type="checkbox" checked>
-                synchronize
-              </label>
+              <label for="colorwheel-space">Colorspace</label>
+              <div class="viz-options">
+                <label class="inline small">
+                  <input id="clip-gamut" type="checkbox" aria-label="Clip to gamut for visualization">
+                  Clip
+                </label>
+                <label class="inline small">
+                  <input id="sync-colorspaces" type="checkbox" checked>
+                  Sync
+                </label>
+              </div>
             </div>
             <select id="colorwheel-space">
               <option value="hsl">HSL</option>
@@ -271,40 +320,10 @@
               <option value="jzazbz">JzAzBz</option>
             </select>
           </div>
-          <div class="field">
-            <label for="gamut-mode">Gamut for visualization</label>
-            <select id="gamut-mode">
-              <option value="auto">auto (fit to palette)</option>
-              <option value="full">full colorspace</option>
-            </select>
-          </div>
         </div>
 
-        <div class="control-block">
-          <h3>Color Vision Prioritization Weights</h3>
-          <div class="field four-col mini">
-            <div>
-              <label for="w-none">trichrom</label>
-              <input id="w-none" type="range" min="0" max="100" step="0.1" value="50">
-              <span id="w-none-val" class="value-chip">50.0%</span>
-            </div>
-            <div>
-              <label for="w-deutan">deutan</label>
-              <input id="w-deutan" type="range" min="0" max="100" step="0.1" value="40">
-              <span id="w-deutan-val" class="value-chip">40.0%</span>
-            </div>
-            <div>
-              <label for="w-protan">protan</label>
-              <input id="w-protan" type="range" min="0" max="100" step="0.1" value="8">
-              <span id="w-protan-val" class="value-chip">8.0%</span>
-            </div>
-            <div>
-              <label for="w-tritan">tritan</label>
-              <input id="w-tritan" type="range" min="0" max="100" step="0.1" value="2">
-              <span id="w-tritan-val" class="value-chip">2.0%</span>
-            </div>
-          </div>
-        </div>
+        <!-- Hidden field for gamut-mode, kept for compatibility -->
+        <input id="gamut-mode" type="hidden" value="auto">
       </div>
 
       <div class="right-side">

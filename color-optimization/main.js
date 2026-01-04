@@ -518,23 +518,31 @@ function ensurePerInputConstraintState() {
 }
 
 function renderPerInputConstraintUI() {
-  if (!ui.constraintIndividualRow || !ui.constraintIndividualPanel || !ui.constraintIndividualList) return;
+  if (!ui.constraintIndividualRow || !ui.constraintIndividualList) return;
+  const palette = parsePalette(ui.paletteInput?.value || "");
+  const hasInputColors = palette.length > 0;
   const topology = ui.constraintTopology?.value || "contiguous";
   const supportsPerInput = topology === "discontiguous";
-  const isExpanded = Boolean(state.perInputConstraints?.enabled) && supportsPerInput;
+  const isExpanded = Boolean(state.perInputConstraints?.enabled) && supportsPerInput && hasInputColors;
   ui.constraintIndividualRow.hidden = false;
+  // Toggle disabled state when no input colors
+  ui.constraintIndividualRow.classList.toggle("disabled", !hasInputColors);
+  // Toggle accordion expanded class
+  ui.constraintIndividualRow.classList.toggle("expanded", isExpanded);
   if (ui.constraintIndividualToggle) {
     ui.constraintIndividualToggle.setAttribute("aria-expanded", String(isExpanded));
-    ui.constraintIndividualToggle.textContent = isExpanded ? "Hide per-color constraints" : "Per-color constraints";
+    ui.constraintIndividualToggle.textContent = isExpanded ? "Individuated Constraints ▴" : "Individuated Constraints ▾";
+    ui.constraintIndividualToggle.disabled = !hasInputColors;
   }
-  ui.constraintIndividualPanel.hidden = !isExpanded;
+  if (ui.constraintIndividualPanel) {
+    ui.constraintIndividualPanel.hidden = !isExpanded;
+  }
   if (!isExpanded) {
     ui.constraintIndividualList.innerHTML = "";
     return;
   }
   ensurePerInputConstraintState();
   const defaults = perInputDefaults();
-  const palette = parsePalette(ui.paletteInput.value);
   const labels = {
     h: ui.wHLabel?.textContent || "H",
     sc: ui.wSCLabel?.textContent || "S/C",
@@ -788,6 +796,9 @@ function attachEventListeners() {
     setStatusState(ui, "Waiting to run");
     recordHistory();
   });
+  ui.bgColor?.addEventListener("input", () => {
+    updateBgControls();
+  });
   ui.bgColor?.addEventListener("change", () => {
     updateBgControls();
     recordHistory();
@@ -979,6 +990,11 @@ function attachEventListeners() {
       ui.constraintTopology.value = "discontiguous";
     }
     state.perInputConstraints.enabled = wantsEnabled;
+    // Toggle accordion expanded class
+    const accordionSection = ui.constraintIndividualRow;
+    if (accordionSection) {
+      accordionSection.classList.toggle("expanded", wantsEnabled);
+    }
     updateConstraintTopologyUI();
     updateBoundsAndRefresh();
     drawStatusMini(state, ui, currentVizOpts());
@@ -2055,6 +2071,17 @@ function updateBgControls() {
     row.classList.toggle("disabled", !enabled);
   }
   ui.bgColor.disabled = !enabled;
+  // Update the hex label with color and contrast text
+  if (ui.bgColorLabel) {
+    const hex = ui.bgColor.value.toUpperCase();
+    ui.bgColorLabel.textContent = hex;
+    ui.bgColorLabel.style.color = contrastColor(hex);
+  }
+  // Update the chip background
+  const chip = ui.bgColor.closest(".bg-chip");
+  if (chip) {
+    chip.style.background = ui.bgColor.value;
+  }
 }
 
 function togglePlaceholder() {

@@ -71,6 +71,7 @@ export function getUIRefs() {
     wSCVal: document.getElementById("w-sc-val"),
     wLVal: document.getElementById("w-l-val"),
     bgColor: document.getElementById("bg-color"),
+    bgColorLabel: document.getElementById("bg-color-label"),
     bgEnabled: document.getElementById("bg-enabled"),
     syncSpaces: document.getElementById("sync-colorspaces"),
     constraintIndividualRow: document.getElementById("constraint-individual-row"),
