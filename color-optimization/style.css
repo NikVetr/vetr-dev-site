@@ -883,10 +883,14 @@ label.small {
 
 .resolvability-header {
   display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resolvability-title-row {
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .resolvability-title {
@@ -902,7 +906,6 @@ label.small {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  margin-left: auto;
 }
 
 .resolvability-threshold {
@@ -935,10 +938,16 @@ label.small {
 .resolvability-sync {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  color: #475467;
-  text-transform: lowercase;
+  gap: 4px;
+  font-size: 10px;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.resolvability-sync input[type="checkbox"] {
+  width: 12px;
+  height: 12px;
+  margin: 0;
 }
 
 .resolvability-modes {
@@ -1023,28 +1032,68 @@ label.small {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(15, 23, 42, 0.2);
-  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
   overflow: hidden;
   padding: 0 1px;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.15);
+}
+
+.resolvability-label-separator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: 2;
 }
 
 .resolvability-label-text {
   display: inline-block;
   transform-origin: center;
   white-space: nowrap;
+  position: relative;
+  z-index: 3;
+  font-size: 9px;
 }
 
+/* For top labels in CVD panels, shift text right into CVD area */
+.resolvability-label-top .resolvability-label-text {
+  margin-left: 0;
+}
+
+/* For left labels, rotate text and shift down into CVD area */
 .resolvability-label-left .resolvability-label-text {
   transform: rotate(-90deg);
+  margin-top: 0;
 }
 
 .resolvability-label.active {
   outline: 2px solid #0f172a;
   outline-offset: 1px;
+}
+
+/* Output colors get dashed border (black base + white dashed overlay) */
+.resolvability-label.is-output {
+  border: none;
+  box-shadow:
+    inset 0 0 0 1.5px #0f172a,
+    inset 0 0 0 1px rgba(15, 23, 42, 0.15);
+  background-clip: padding-box;
+}
+
+.resolvability-label.is-output::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1.5px dashed rgba(255, 255, 255, 0.9);
+  pointer-events: none;
 }
 
 .resolvability-heatmap-legend {
@@ -1589,22 +1638,20 @@ label.small {
 
 .wheel {
   width: 100%;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-height: 0;
   border-radius: 14px;
   border: 1px solid rgba(0, 0, 0, 0.06);
   background: #f8fafc;
-  display: flex;
-  align-items: stretch;
-  justify-content: stretch;
+  padding: 4px;
 }
 
 .wheel canvas {
-  width: 100%;
-  height: 100%;
   display: block;
-  border-radius: 14px;
-  object-fit: contain;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
 }
 
 .control-block.status {

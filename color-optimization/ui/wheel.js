@@ -30,12 +30,13 @@ export function drawWheel(type, ui, state, opts = {}) {
   const ctx = canvas.getContext("2d");
   const size = refs.panel.clientWidth - 24;
   const deviceScale = window.devicePixelRatio || 1;
-  const dim = Math.max(220, Math.min(380, size - 6));
+  const dim = Math.max(180, size - 6);
   const TAU = Math.PI * 2;
   canvas.width = dim * deviceScale;
   canvas.height = dim * deviceScale;
-  canvas.style.width = `${dim}px`;
-  canvas.style.height = `${dim}px`;
+  canvas.style.width = "100%";
+  canvas.style.height = "auto";
+  canvas.style.aspectRatio = "1 / 1";
   ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(deviceScale, deviceScale);
 

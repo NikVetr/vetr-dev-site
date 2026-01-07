@@ -846,6 +846,7 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
         highlightIndices([i]);
       };
       const combined = colors.concat(state.newColors || []);
+      const inputCount = colors.length;
       const metric = ui.distanceMetric?.value || "de2000";
       const threshold = resolvabilityThreshold(metric);
       const mode = resolvabilityModeFor(type);
@@ -855,6 +856,7 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
       refs.resolvabilityHighlightColor = onHighlightColor;
       refs.resolvability.update({
         colors: combined,
+        inputCount,
         metric,
         threshold,
         mode,

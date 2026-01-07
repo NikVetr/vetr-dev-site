@@ -226,10 +226,27 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
 
   const header = document.createElement("div");
   header.className = "resolvability-header";
+
+  // Title row with sync checkbox inline
+  const titleRow = document.createElement("div");
+  titleRow.className = "resolvability-title-row";
   const title = document.createElement("div");
   title.className = "resolvability-title";
   title.textContent = "Resolvability";
-  header.appendChild(title);
+  titleRow.appendChild(title);
+
+  const syncWrap = document.createElement("label");
+  syncWrap.className = "resolvability-sync";
+  const syncToggle = document.createElement("input");
+  syncToggle.type = "checkbox";
+  syncToggle.checked = true;
+  const syncText = document.createElement("span");
+  syncText.textContent = "sync view";
+  syncWrap.appendChild(syncToggle);
+  syncWrap.appendChild(syncText);
+  titleRow.appendChild(syncWrap);
+
+  header.appendChild(titleRow);
 
   const controls = document.createElement("div");
   controls.className = "resolvability-controls";
@@ -249,17 +266,6 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
   thresholdWrap.appendChild(thresholdLabel);
   thresholdWrap.appendChild(thresholdInput);
   thresholdWrap.appendChild(thresholdVal);
-
-  const syncWrap = document.createElement("label");
-  syncWrap.className = "resolvability-sync";
-  const syncToggle = document.createElement("input");
-  syncToggle.type = "checkbox";
-  syncToggle.checked = true;
-  const syncText = document.createElement("span");
-  syncText.textContent = "sync view";
-  syncWrap.appendChild(syncToggle);
-  syncWrap.appendChild(syncText);
-  controls.appendChild(syncWrap);
 
   const modeWrap = document.createElement("div");
   modeWrap.className = "resolvability-modes";
@@ -356,6 +362,9 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     labelLeftEls: [],
     showHexLabels: false,
     graphNodes: null,
+    inputCount: 0,
+    sortOrder: null,
+    harmonicScores: null,
     graphSize: 0,
   };
 
@@ -411,43 +420,129 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     thresholdVal.textContent = formatValue(threshold);
   };
 
+  // Compute harmonic mean of distances for each color and return sorted indices
+  const computeSortOrder = () => {
+    const n = state.simColors.length;
+    if (n <= 1) {
+      state.harmonicScores = n === 1 ? [0] : [];
+      state.sortOrder = n === 1 ? [0] : [];
+      return;
+    }
+
+    // Compute harmonic mean of distances for each color
+    const scores = new Array(n);
+    for (let i = 0; i < n; i++) {
+      let sumInv = 0;
+      let count = 0;
+      for (let j = 0; j < n; j++) {
+        if (i === j) continue;
+        const d = state.distances[i * n + j];
+        if (d > 1e-9) {
+          sumInv += 1 / d;
+          count++;
+        }
+      }
+      // Harmonic mean = count / sumInv (lower score = worse resolvability)
+      scores[i] = count > 0 ? count / sumInv : 0;
+    }
+    state.harmonicScores = scores;
+
+    // Create sorted indices (ascending by score = worst first)
+    const indices = Array.from({ length: n }, (_, i) => i);
+    indices.sort((a, b) => scores[a] - scores[b]);
+    state.sortOrder = indices;
+  };
+
   const rebuildLabels = () => {
     topLabels.innerHTML = "";
     leftLabels.innerHTML = "";
     state.labelTopEls = [];
     state.labelLeftEls = [];
-    state.showHexLabels = state.simColors.length <= 10;
-    state.simColors.forEach((hex, idx) => {
+    // Show hex labels only if few colors and enough space
+    state.showHexLabels = state.simColors.length <= 8;
+    const isCvdPanel = type !== "none";
+    const splitPct = 0.12; // 12% sliver for original color
+    const n = state.simColors.length;
+    const order = state.sortOrder || Array.from({ length: n }, (_, i) => i);
+
+    // Iterate in sorted order
+    for (let sortIdx = 0; sortIdx < n; sortIdx++) {
+      const idx = order[sortIdx];
+      const simHex = state.simColors[idx];
+      const origHex = state.colors[idx] || simHex;
+      const displayHex = simHex;
+      const isOutput = idx >= state.inputCount;
+
+      // Create top label
       const top = document.createElement("span");
       top.className = "resolvability-label resolvability-label-top";
-      top.style.background = hex;
-      top.style.color = contrastColor(hex);
-      top.title = hex;
+      if (isOutput) top.classList.add("is-output");
+      if (isCvdPanel) {
+        // Gradient: original color sliver on left, simulated color on right
+        top.style.background = `linear-gradient(90deg, ${origHex} 0%, ${origHex} ${splitPct * 100}%, ${simHex} ${splitPct * 100}%, ${simHex} 100%)`;
+        // Add separator line
+        const sep = document.createElement("div");
+        sep.className = "resolvability-label-separator";
+        sep.style.left = `${splitPct * 100}%`;
+        sep.style.background = contrastColor(simHex);
+        top.appendChild(sep);
+      } else {
+        top.style.background = simHex;
+      }
+      top.style.color = contrastColor(simHex);
+      top.title = origHex === simHex ? simHex : `${origHex} → ${simHex}`;
       top.dataset.index = String(idx);
+      top.dataset.sortIndex = String(sortIdx);
       if (state.showHexLabels) {
         const text = document.createElement("span");
         text.className = "resolvability-label-text";
-        text.textContent = hex;
+        text.textContent = displayHex;
+        // Offset text to stay within CVD simulation area (away from trichromat sliver on left)
+        if (isCvdPanel) {
+          text.style.marginLeft = `${splitPct * 100 + 2}%`;
+        }
         top.appendChild(text);
       }
       topLabels.appendChild(top);
       state.labelTopEls.push(top);
 
+      // Create left label
       const left = document.createElement("span");
       left.className = "resolvability-label resolvability-label-left";
-      left.style.background = hex;
-      left.style.color = contrastColor(hex);
-      left.title = hex;
+      if (isOutput) left.classList.add("is-output");
+      if (isCvdPanel) {
+        // Gradient: original color sliver on top, simulated color on bottom (rotated view)
+        left.style.background = `linear-gradient(180deg, ${origHex} 0%, ${origHex} ${splitPct * 100}%, ${simHex} ${splitPct * 100}%, ${simHex} 100%)`;
+        // Add separator line
+        const sep = document.createElement("div");
+        sep.className = "resolvability-label-separator";
+        sep.style.top = `${splitPct * 100}%`;
+        sep.style.left = "0";
+        sep.style.right = "0";
+        sep.style.width = "auto";
+        sep.style.height = "1px";
+        sep.style.background = contrastColor(simHex);
+        left.appendChild(sep);
+      } else {
+        left.style.background = simHex;
+      }
+      left.style.color = contrastColor(simHex);
+      left.title = origHex === simHex ? simHex : `${origHex} → ${simHex}`;
       left.dataset.index = String(idx);
+      left.dataset.sortIndex = String(sortIdx);
       if (state.showHexLabels) {
         const text = document.createElement("span");
         text.className = "resolvability-label-text";
-        text.textContent = hex;
+        text.textContent = displayHex;
+        // Offset text to stay within CVD simulation area (away from trichromat sliver on top)
+        if (isCvdPanel) {
+          text.style.marginTop = `${splitPct * 100 + 2}%`;
+        }
         left.appendChild(text);
       }
       leftLabels.appendChild(left);
       state.labelLeftEls.push(left);
-    });
+    }
   };
 
   const setLabelHighlight = (indices) => {
@@ -476,7 +571,7 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
       matrixSize = Math.max(1, heatmapSize - labelSize);
       cellSize = matrixSize / n;
     }
-    const labelFontSize = Math.max(7, Math.min(11, Math.floor(labelSize * 0.55)));
+    const labelFontSize = Math.max(6, Math.min(9, Math.floor(labelSize * 0.5)));
     state.cellSize = cellSize;
     heatmapWrap.style.setProperty("--label-size", `${labelSize}px`);
     setupCanvasSquare(matrixSize);
@@ -519,13 +614,19 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     });
 
     const maxDist = maxDistanceForMetric(state.metric);
-    for (let i = 0; i < n; i++) {
-      for (let j = 0; j < n; j++) {
-        const d = state.distances[i * n + j];
+    const order = state.sortOrder || Array.from({ length: n }, (_, i) => i);
+
+    // Draw heatmap cells using sorted order
+    for (let si = 0; si < n; si++) {
+      for (let sj = 0; sj < n; sj++) {
+        // Map sorted indices back to original color indices
+        const oi = order[si];
+        const oj = order[sj];
+        const d = state.distances[oi * n + oj];
         const t = clamp(d / maxDist, 0, 1);
         const v = Math.round(t * 255);
         ctx.fillStyle = `rgb(${v},${v},${v})`;
-        ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+        ctx.fillRect(sj * cellSize, si * cellSize, cellSize, cellSize);
       }
     }
     if (cellSize >= 22) {
@@ -539,16 +640,18 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
         cellFontSize = Math.floor(cellFontSize * (maxLabelWidth / longest));
         ctx.font = `${cellFontSize}px "Space Grotesk", sans-serif`;
       }
-      for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-          if (i === j) continue;
-          const d = state.distances[i * n + j];
+      for (let si = 0; si < n; si++) {
+        for (let sj = 0; sj < n; sj++) {
+          if (si === sj) continue;
+          const oi = order[si];
+          const oj = order[sj];
+          const d = state.distances[oi * n + oj];
           const label = discriminabilityLabel(d, state.metric);
           if (!label) continue;
           const t = clamp(d / maxDist, 0, 1);
           const v = Math.round(t * 255);
           ctx.fillStyle = v < 128 ? "#f8fafc" : "#0f172a";
-          ctx.fillText(label, j * cellSize + cellSize / 2, i * cellSize + cellSize / 2);
+          ctx.fillText(label, sj * cellSize + cellSize / 2, si * cellSize + cellSize / 2);
         }
       }
     }
@@ -900,11 +1003,16 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
       return;
     }
     if (target.kind === "pair") {
+      // i, j are sorted indices (for label highlighting)
+      // oi, oj are original indices (for external callbacks)
       setLabelHighlight([target.i, target.j]);
-      state.onHighlightPair?.(target.i, target.j);
+      const oi = target.oi ?? target.i;
+      const oj = target.oj ?? target.j;
+      state.onHighlightPair?.(oi, oj);
     } else {
       setLabelHighlight([target.i]);
-      state.onHighlightColor?.(target.i);
+      const oi = target.oi ?? target.i;
+      state.onHighlightColor?.(oi);
     }
   };
 
@@ -926,9 +1034,9 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     const x = evt.clientX - rect.left;
     const y = evt.clientY - rect.top;
     const cell = state.cellSize;
-    const i = Math.floor(y / cell);
-    const j = Math.floor(x / cell);
-    if (i < 0 || j < 0 || i >= n || j >= n) {
+    const si = Math.floor(y / cell); // sorted index for row
+    const sj = Math.floor(x / cell); // sorted index for col
+    if (si < 0 || sj < 0 || si >= n || sj >= n) {
       state.hover = null;
       render();
       updateTooltip("", 0, 0);
@@ -936,18 +1044,23 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
       return;
     }
     if (state.locked) return;
-    state.hover = { kind: "pair", i, j };
+    // Map sorted indices back to original color indices
+    const order = state.sortOrder || Array.from({ length: n }, (_, i) => i);
+    const oi = order[si];
+    const oj = order[sj];
+    // Store both sorted indices (for rendering) and original indices (for data lookup)
+    state.hover = { kind: "pair", i: si, j: sj, oi, oj };
     render();
-    const dist = state.distances[i * n + j];
+    const dist = state.distances[oi * n + oj];
     const label = discriminabilityLabel(dist, state.metric);
     updateTooltip(
       `<div class="resolvability-tip-row">
-        <span class="resolvability-tip-swatch" style="background:${state.simColors[i]}"></span>
-        <span>${state.simColors[i]}</span>
+        <span class="resolvability-tip-swatch" style="background:${state.simColors[oi]}"></span>
+        <span>${state.simColors[oi]}</span>
       </div>
       <div class="resolvability-tip-row">
-        <span class="resolvability-tip-swatch" style="background:${state.simColors[j]}"></span>
-        <span>${state.simColors[j]}</span>
+        <span class="resolvability-tip-swatch" style="background:${state.simColors[oj]}"></span>
+        <span>${state.simColors[oj]}</span>
       </div>
       <div class="resolvability-tip-meta">${formatValue(dist)} · ${label}</div>`,
       x,
@@ -1109,6 +1222,7 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
 
   const update = ({
     colors = [],
+    inputCount = 0,
     metric = "de2000",
     threshold = 2,
     mode = "heatmap",
@@ -1121,6 +1235,7 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     state.metric = metric;
     state.cvdModel = cvdModel;
     state.background = background;
+    state.inputCount = inputCount;
     state.onHighlightPair = onHighlightPair || null;
     state.onHighlightColor = onHighlightColor || null;
     setMode(mode);
@@ -1133,6 +1248,7 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
       state.simColors = simulateColors(colors, type, cvdModel);
       state.coords = coordsForHexes(state.simColors, metric);
       state.distances = computeDistanceMatrix(state.coords, metric);
+      computeSortOrder();
       const nn = computeNearestNeighbors(state.distances, state.simColors.length);
       state.minDist = nn.minDist;
       state.nearest = nn.nearest;
