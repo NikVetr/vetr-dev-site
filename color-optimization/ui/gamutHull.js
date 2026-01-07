@@ -580,3 +580,102 @@ export function buildGamutOuterBoundary(pointsOrPaths, cx, cy, expandPx = 0) {
 
   return finalBoundary.map((pt) => ({ x: pt.x, y: pt.y }));
 }
+
+/**
+ * Compute the extent (min/max) of the gamut in the given color space.
+ * Returns a range object { min: {channel: value}, max: {channel: value} }
+ * with a margin multiplier applied (e.g., 1.1 for 10% padding).
+ */
+export function computeGamutExtent(space, gamutPreset, marginMultiplier = 1.1) {
+  const channels = channelOrder[space] || [];
+  const baseRange = csRanges[space];
+  if (!baseRange) return null;
+
+  const hasHue = channels.includes("h");
+  const lKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : channels[0] || "l";
+  const isRect = !hasHue;
+
+  // For hue-based spaces (polar), we need to find the max chroma/saturation
+  // For rect spaces (Lab, etc.), we need to find the actual extent in a/b axes
+  const gamut = GAMUTS[gamutPreset] || GAMUTS.srgb;
+  if (!gamut) return null;
+
+  const min = {};
+  const max = {};
+
+  // Initialize with extreme values
+  channels.forEach((ch) => {
+    if (ch === "h") {
+      // Hue always spans full range
+      min[ch] = baseRange.min[ch] ?? 0;
+      max[ch] = baseRange.max[ch] ?? 360;
+    } else {
+      min[ch] = Infinity;
+      max[ch] = -Infinity;
+    }
+  });
+
+  // Sample the RGB cube surface to find the gamut extent
+  const steps = 32;
+  for (let r = 0; r <= steps; r++) {
+    for (let g = 0; g <= steps; g++) {
+      for (let b = 0; b <= steps; b++) {
+        // Only sample surface of cube (at least one coordinate is 0 or 1)
+        const rn = r / steps;
+        const gn = g / steps;
+        const bn = b / steps;
+        const onSurface =
+          rn === 0 || rn === 1 || gn === 0 || gn === 1 || bn === 0 || bn === 1;
+        if (!onSurface) continue;
+
+        const xyz = gamut.toXYZ(rn, gn, bn);
+        const vals = convertColorValues(xyz, "xyz", space);
+        if (!vals) continue;
+
+        channels.forEach((ch) => {
+          if (ch === "h") return; // Skip hue
+          const v = vals[ch];
+          if (Number.isFinite(v)) {
+            if (v < min[ch]) min[ch] = v;
+            if (v > max[ch]) max[ch] = v;
+          }
+        });
+      }
+    }
+  }
+
+  // Apply margin and ensure valid ranges
+  const result = { min: {}, max: {} };
+  channels.forEach((ch) => {
+    if (ch === "h") {
+      result.min[ch] = min[ch];
+      result.max[ch] = max[ch];
+      return;
+    }
+
+    const minVal = min[ch];
+    const maxVal = max[ch];
+
+    if (!Number.isFinite(minVal) || !Number.isFinite(maxVal)) {
+      result.min[ch] = baseRange.min[ch] ?? 0;
+      result.max[ch] = baseRange.max[ch] ?? 1;
+      return;
+    }
+
+    // For symmetric axes (like a, b in Lab), expand symmetrically around 0
+    const isSymmetric = minVal < 0 && maxVal > 0;
+    if (isSymmetric) {
+      const maxAbs = Math.max(Math.abs(minVal), Math.abs(maxVal)) * marginMultiplier;
+      result.min[ch] = -maxAbs;
+      result.max[ch] = maxAbs;
+    } else {
+      // For non-symmetric axes (like L, s, c), expand the range
+      const span = maxVal - minVal;
+      const padding = span * (marginMultiplier - 1) / 2;
+      result.min[ch] = minVal - padding;
+      result.max[ch] = maxVal + padding;
+    }
+  });
+
+  return result;
+}

@@ -15,7 +15,7 @@ import {
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
 import { clamp } from "../core/util.js";
-import { buildGamutProjectionBoundary, smoothBoundary, strokeBoundary } from "./gamutHull.js";
+import { buildGamutProjectionBoundary, smoothBoundary, strokeBoundary, computeGamutExtent } from "./gamutHull.js";
 
 export function drawWheel(type, ui, state, opts = {}) {
   const refs = ui.panelMap[type];
@@ -95,7 +95,10 @@ export function drawWheel(type, ui, state, opts = {}) {
   const dataRange = effectiveRangeFromValues(valueSet, wheelSpace);
   const presetRange = rangeFromPreset(wheelSpace, gamutPreset) || csRanges[wheelSpace];
   const baseRange = wheelSpace === "jzazbz" ? presetRange : csRanges[wheelSpace];
-  const gamutRange = presetRange;
+  // When clipping to gamut, compute the actual gamut extent for tighter zoom (1.1x margin)
+  const gamutRange = clipToGamut
+    ? computeGamutExtent(wheelSpace, gamutPreset, 1.1) || presetRange
+    : presetRange;
   // Keep the visualization axes stable: never shrink below the base range,
   // and only expand (no extra padding) when values fall outside.
   const unclippedRange =

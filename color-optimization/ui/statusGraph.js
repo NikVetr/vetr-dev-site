@@ -10,7 +10,7 @@ import {
 } from "../core/colorSpaces.js";
 import { contrastColor } from "../core/metrics.js";
 import { niceTicks } from "../core/stats.js";
-import { buildGamutProjectionBoundary, smoothBoundary, strokeBoundary } from "./gamutHull.js";
+import { buildGamutProjectionBoundary, smoothBoundary, strokeBoundary, computeGamutExtent } from "./gamutHull.js";
 
 export function drawStatusGraph(state, ui) {
   const canvas = ui.statusGraph;
@@ -284,8 +284,12 @@ export function drawStatusMini(state, ui, opts = {}) {
 
   const baseRange = space === "jzazbz" ? presetRange : csRanges[space];
   const dataRange = effectiveRangeFromValues(visibleValues, space);
+  // When clipping to gamut, compute the actual gamut extent for tighter zoom (1.1x margin)
+  const gamutExtent = clipToGamut
+    ? computeGamutExtent(space, gamutPreset, 1.1) || presetRange
+    : presetRange;
   const unclippedRange = gamutMode === "full" ? baseRange : unionRanges(dataRange, baseRange);
-  const clippedRange = gamutMode === "full" ? presetRange : unionRanges(dataRange, presetRange);
+  const clippedRange = gamutMode === "full" ? gamutExtent : unionRanges(dataRange, gamutExtent);
   const scaleRange = padRange(clipToGamut ? clippedRange : unclippedRange, 0);
 
   const toPoint = (vals, rangeOverride) => {
