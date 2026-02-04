@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agendamatic - A real-time meeting agenda tracker with timeline visualization">
+    <title>Agendamatic - Meeting Agenda Tracker</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="main-stage">
+        <!-- Page Title -->
+        <h1 class="page-title">Agendamatic</h1>
+
+        <!-- Top Section: Agenda Input + Export/Status -->
+        <div class="top-section">
+            <!-- Agenda Input Box -->
+            <div class="box input-box">
+                <div class="box-header">
+                    <h3>Input</h3>
+                </div>
+
+                <!-- Agenda Header -->
+                <div class="agenda-grid agenda-header">
+                    <div></div>
+                    <div>Item</div>
+                    <div>Lead</div>
+                    <div>Time</div>
+                    <div class="interval-header">
+                        <div class="time-input-wrapper start-time-inline" id="start-time-row">
+                            <input type="text" id="agenda-start-time" value="4:00 PM" data-tooltip="Meeting start time - scroll or use arrows to adjust">
+                            <div class="time-spinner">
+                                <button data-action="time-up" data-tooltip="Increase time">&#9650;</button>
+                                <button data-action="time-down" data-tooltip="Decrease time">&#9660;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
+                    <div data-tooltip="Item notes">&#128221;</div>
+                    <div></div>
+                </div>
+
+                <!-- Agenda Items Container (populated by JS) -->
+                <div id="agenda-container"></div>
+
+                <!-- Add Item Button -->
+                <button id="btn-add-item" class="btn-add-row" data-tooltip="Add a new agenda item">+ Add Item</button>
+            </div>
+
+            <!-- Export + Status -->
+            <div class="right-side">
+                <!-- Import / Export Box -->
+                <div class="box export-box">
+                    <div class="box-header">
+                        <h3>Import / Export</h3>
+                    </div>
+                    <div class="export-panel">
+                        <div class="export-options">
+                            <div class="export-section-label">Include:</div>
+                            <label data-tooltip="Include meeting header with date, time, and duration">
+                                <input type="checkbox" id="include-header" checked> Header
+                            </label>
+                            <label data-tooltip="Include notes from each agenda item">
+                                <input type="checkbox" id="include-notes" checked> Notes
+                            </label>
+                            <label data-tooltip="Include preparation checklist">
+                                <input type="checkbox" id="include-prep"> Prep
+                            </label>
+                            <label data-tooltip="Include contextual information">
+                                <input type="checkbox" id="include-context"> Context
+                            </label>
+                        </div>
+                        <div class="export-buttons-section">
+                            <div class="export-section-label">To:</div>
+                            <div class="export-buttons-vertical">
+                                <button id="btn-export-md" data-tooltip="Download as Markdown file">.md</button>
+                                <button id="btn-export-txt" data-tooltip="Download as plain text">.txt</button>
+                                <button id="btn-export-docx" data-tooltip="Download as Word document">.doc</button>
+                                <button id="btn-export-json" data-tooltip="Download state as JSON">.json</button>
+                            </div>
+                            <div class="export-section-label" style="margin-top: 8px;">From:</div>
+                            <button id="btn-import-inline" class="btn-import" data-tooltip="Import agenda from JSON file">Import .json</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-column">
+                    <!-- Status Display -->
+                    <div class="box status-box overall-status-box" id="status-display">
+                        <div class="box-header">
+                            <h3>Overall Status</h3>
+                            <div class="status-clock" id="status-clock">--:--</div>
+                        </div>
+                        <div class="status-display on-time">
+                            <span class="status-label">YOU ARE</span>
+                            <div class="ticker-container">
+                                <div class="ticker-tape" id="ticker-tape">
+                                    <span class="ticker-on-time">ON TIME</span>
+                                </div>
+                            </div>
+                            <span class="status-direction"></span>
+                        </div>
+                    </div>
+
+                    <button id="btn-next-item" class="next-item-btn" data-tooltip="Advance to the next agenda item">
+                        <span class="next-item-text">NEXT<br>ITEM</span>
+                        <span class="spacebar-icon" aria-hidden="true">SPACE</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tracker-section">
+            <!-- Timeline / Tracker Box -->
+            <div class="box timeline-container">
+                <div class="timeline-header">
+                    <h3>Tracker</h3>
+                    <div class="timeline-controls">
+                        <button id="btn-start" data-tooltip="Start tracking the meeting">&#9654; Start</button>
+                        <button id="btn-stop" data-tooltip="Stop/pause tracking">&#9632; Stop</button>
+                    </div>
+                </div>
+
+                <!-- Timeline Axis -->
+                <div class="timeline-axis-wrapper">
+                    <div class="timeline-axis-line"></div>
+                    <div id="current-time-marker" class="current-time-marker"></div>
+                    <div id="timeline-axis" class="axis-ticks"></div>
+                </div>
+
+                <!-- Timeline Track -->
+                <div class="timeline-track-wrapper">
+                    <div id="timeline-track" class="timeline-track"></div>
+                    <!-- Overflow labels for blocks that are too small -->
+                    <div id="overflow-labels" class="overflow-labels-container"></div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Current Status Panel -->
+            <div class="box current-status-box" id="current-status-display">
+                <div class="box-header">
+                    <h3>Current Status</h3>
+                </div>
+                <div class="current-status-display">
+                    <div class="current-status-label">YOU HAVE</div>
+                    <div class="current-status-ticker">
+                        <div class="current-status-tape" id="current-status-tape"></div>
+                    </div>
+                    <div class="current-status-unit">MINUTES</div>
+                    <div class="current-status-line">
+                        of <span class="current-status-item" id="current-status-item">-</span> LEFT
+                    </div>
+                    <div class="current-status-next" id="current-status-next">
+                        (next item: <span class="current-status-next-item" id="current-status-next-item">-</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Item Panel -->
+        <div class="box current-item-box" id="current-item-panel">
+            <div class="box-header">
+                <h3>Current Item</h3>
+            </div>
+            <div class="active-header">
+                <div>
+                    <h1 class="current-item-name">No Active Item</h1>
+                </div>
+                <div class="current-item-lead">
+                    <div class="label">LED BY</div>
+                    <div class="value">{ - }</div>
+                </div>
+            </div>
+            <div class="notes-editor" id="notes-editor">
+                <div class="editor-toolbar notes-toolbar">
+                    <button data-action="bold" data-tooltip="Bold (Ctrl+B)"><b>B</b></button>
+                    <button data-action="italic" data-tooltip="Italic (Ctrl+I)"><i>I</i></button>
+                    <button data-action="heading" data-tooltip="Heading">H</button>
+                    <button data-action="bullet" data-tooltip="Bullet list">&#8226; List</button>
+                    <button data-action="numbered" data-tooltip="Numbered list">1. List</button>
+                    <button data-action="link" data-tooltip="Insert link">Link</button>
+                    <button data-action="code" data-tooltip="Code block">&lt;/&gt;</button>
+                </div>
+                <textarea
+                    id="notes-area"
+                    class="notes-area"
+                    placeholder="[NOTES GO HERE] - Type your minutes..."
+                    data-tooltip="Type meeting notes for the current agenda item"
+                ></textarea>
+                <div class="notes-preview" id="notes-preview" aria-live="polite"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Sidebar -->
+    <div class="settings-sidebar">
+        <h3>Settings</h3>
+
+        <!-- Time Settings -->
+        <div class="setting-group">
+            <h4>Time</h4>
+            <div class="settings-list">
+                <label data-tooltip="Set the meeting start time">
+                    Start Time
+                    <div class="settings-time-wrapper">
+                        <input type="time" id="start-time" value="16:00">
+                        <div class="settings-time-spinner">
+                            <button data-action="settings-time-up" data-tooltip="Increase time">&#9650;</button>
+                            <button data-action="settings-time-down" data-tooltip="Decrease time">&#9660;</button>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <!-- Global Settings -->
+        <div class="setting-group">
+            <h4>Global</h4>
+            <div class="settings-list">
+                <label data-tooltip="Switch to dark color theme">
+                    <input type="checkbox" id="dark-mode"> Dark Mode
+                </label>
+                <label data-tooltip="Play sounds for warnings and transitions">
+                    <input type="checkbox" id="sound-effects"> Sound Effects
+                </label>
+                <label data-tooltip="Automatically use current time as start time">
+                    <input type="checkbox" id="sync-system-time"> Sync System Time
+                </label>
+            </div>
+        </div>
+
+        <!-- Layout Settings -->
+        <div class="setting-group">
+            <h4>Layout</h4>
+            <div class="settings-list">
+                <label data-tooltip="Adjust row spacing and font size">
+                    Density
+                    <select id="density">
+                        <option value="comfortable">Comfortable</option>
+                        <option value="compact">Compact</option>
+                        <option value="presentation">Presentation</option>
+                    </select>
+                </label>
+                <label data-tooltip="Show overall meeting progress bar">
+                    <input type="checkbox" id="show-progress-bar" checked> Show Progress Bar
+                </label>
+            </div>
+        </div>
+
+        <!-- Timing & Alerts -->
+        <div class="setting-group">
+            <h4>Timing & Alerts</h4>
+            <div class="settings-list">
+                <label data-tooltip="Auto-add buffer time between agenda items">
+                    Buffer (mins)
+                    <input type="number" id="buffer" value="0" min="0" max="30">
+                </label>
+                <label data-tooltip="Display countdown or elapsed time">
+                    Timer Mode
+                    <select id="timer-mode">
+                        <option value="countdown">Count Down</option>
+                        <option value="elapsed">Elapsed</option>
+                    </select>
+                </label>
+                <label data-tooltip="Show warning when 1 minute remains for current item">
+                    <input type="checkbox" id="one-min-warning" checked> 1-Min Warning
+                </label>
+                <label data-tooltip="Flash screen when overtime">
+                    <input type="checkbox" id="overtime-flash"> Overtime Flash
+                </label>
+            </div>
+        </div>
+
+        <!-- Data Management -->
+        <div class="setting-group">
+            <h4>Data</h4>
+            <div class="json-buttons">
+                <button id="btn-import-json" data-tooltip="Import agenda from JSON file">Import</button>
+                <button id="btn-copy-link" data-tooltip="Copy shareable link to clipboard">Share Link</button>
+            </div>
+            <input type="file" id="import-file-input" class="hidden-input" accept=".json">
+            <div class="json-buttons" style="margin-top: 8px;">
+                <button id="btn-reset" data-tooltip="Reset all items and settings to defaults">Reset All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Editor Modal -->
+    <div class="modal-overlay" id="notes-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Edit Notes</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="editor-toolbar">
+                    <button data-action="bold" data-tooltip="Bold (Ctrl+B)"><b>B</b></button>
+                    <button data-action="italic" data-tooltip="Italic (Ctrl+I)"><i>I</i></button>
+                    <button data-action="heading" data-tooltip="Heading">H</button>
+                    <button data-action="bullet" data-tooltip="Bullet list">&#8226; List</button>
+                    <button data-action="numbered" data-tooltip="Numbered list">1. List</button>
+                    <button data-action="link" data-tooltip="Insert link">Link</button>
+                    <button data-action="code" data-tooltip="Code block">&lt;/&gt;</button>
+                </div>
+                <textarea class="editor-textarea" id="editor-textarea" placeholder="Enter your notes here..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="modal-cancel">Cancel</button>
+                <button class="btn-save" id="modal-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load main module -->
+    <script type="module" src="js/main.js"></script>
+
+</body>
+</html>

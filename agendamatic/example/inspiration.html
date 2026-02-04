@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+    :root {
+        --border-color: #333;
+        --bg-color: #fcfcfc;
+        --accent-red: #e74c3c;
+        
+        /* Color Themes */
+        --c-1: #e3f2fd; --c-2: #f3e5f5; --c-3: #e8f5e9; --c-4: #fff3e0;
+    }
+    
+    body {
+        font-family: 'Courier New', monospace;
+        display: grid;
+        grid-template-columns: 1fr 260px; /* Slightly wider sidebar for new settings */
+        height: 100vh;
+        margin: 0;
+        background: var(--bg-color);
+        color: #222;
+        overflow: hidden; 
+    }
+
+    /* --- LAYOUT --- */
+    .main-stage {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        gap: 15px;
+        padding: 20px;
+        border-right: 2px solid var(--border-color);
+        overflow-y: auto;
+    }
+
+    .top-section { display: grid; grid-template-columns: 2.5fr 1fr; gap: 20px; }
+    .box { border: 2px solid var(--border-color); padding: 15px; border-radius: 4px; background: #fff; position: relative; }
+    h3 { margin-top: 0; text-transform: uppercase; font-size: 0.9rem; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 15px;}
+
+    /* --- AGENDA TABLE --- */
+    .agenda-grid {
+        display: grid;
+        /* Grip | Item | Lead | Time | Interval | Lock | Note | Delete */
+        grid-template-columns: 20px 3fr 1.5fr 1fr 1.5fr 0.5fr 0.5fr 25px; 
+        gap: 8px;
+        align-items: center;
+        font-size: 0.85rem;
+        padding: 5px 0;
+    }
+    
+    .agenda-header { font-weight: bold; border-bottom: 2px solid #eee; margin-bottom: 5px; padding-bottom: 10px;}
+    
+    .agenda-row { 
+        background: #fff; 
+        border: 1px solid transparent;
+        transition: transform 0.2s;
+        padding: 5px;
+        border-radius: 4px;
+        cursor: grab;
+    }
+    .agenda-row:hover { border-color: #ccc; }
+    .agenda-row.dragging { opacity: 0.5; background: #fafafa; border: 1px dashed #999; }
+    .agenda-row input { width: 100%; box-sizing: border-box; padding: 6px; border: 1px solid #ddd; font-family: inherit; }
+
+    /* Delete Button */
+    .btn-delete { border: none; background: transparent; color: #ccc; font-weight: bold; cursor: pointer; font-size: 1.2rem; }
+    .btn-delete:hover { color: red; }
+
+    /* Add Item Button */
+    .btn-add-row { width: 100%; padding: 10px; margin-top: 10px; background: #f9f9f9; border: 2px dashed #ddd; color: #666; cursor: pointer; font-family: inherit; font-weight: bold; }
+    .btn-add-row:hover { background: #eee; border-color: #999; color: #333; }
+
+    /* --- THEMES --- */
+    .theme-1 { border-left: 4px solid #2196f3; } .theme-1 input:nth-of-type(1) { background-color: var(--c-1); border-color: #bbdefb; }
+    .theme-2 { border-left: 4px solid #9c27b0; } .theme-2 input:nth-of-type(1) { background-color: var(--c-2); border-color: #e1bee7; }
+    .theme-3 { border-left: 4px solid #4caf50; } .theme-3 input:nth-of-type(1) { background-color: var(--c-3); border-color: #c8e6c9; }
+    .theme-4 { border-left: 4px solid #ff9800; } .theme-4 input:nth-of-type(1) { background-color: var(--c-4); border-color: #ffe0b2; }
+
+    /* --- REST OF UI --- */
+    .status-display { text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; }
+    .status-large { font-size: 2.2rem; font-weight: 800; display: block; margin: 10px 0;}
+    .export-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;}
+    .export-buttons { display: flex; gap: 5px; flex-wrap: wrap; }
+    .export-buttons button { flex: 1; cursor: pointer; padding: 5px; }
+    
+    .timeline-container { min-height: 140px; display: flex; flex-direction: column; }
+    .timeline-axis-wrapper { position: relative; margin-top: 15px; height: 30px; border-bottom: 2px solid #333; }
+    .axis-ticks { display: flex; justify-content: space-between; font-size: 0.75rem; position: absolute; width: 100%; bottom: 2px; }
+    .current-time-marker { position: absolute; bottom: -11px; left: 28%; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid var(--accent-red); z-index: 10; }
+    .timeline-track { display: flex; height: 50px; margin-top: 10px; border: 1px solid #ccc; background: #eee; }
+    .timeline-block { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; overflow: hidden; white-space: nowrap; border-right: 1px solid rgba(0,0,0,0.1); font-weight: bold; }
+    
+    .block-1 { background-color: var(--c-1); color: #0d47a1; } .block-2 { background-color: var(--c-2); color: #4a148c; }
+    .block-3 { background-color: var(--c-3); color: #1b5e20; } .block-4 { background-color: var(--c-4); color: #e65100; }
+
+    .current-item-box { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+    .active-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #ccc; }
+    .notes-area { flex: 1; width: 100%; box-sizing: border-box; padding: 15px; font-family: inherit; font-size: 1rem; background: #fafafa; border: 2px dashed #bbb; resize: none; outline: none; }
+    
+    /* --- SETTINGS SIDEBAR --- */
+    .settings-sidebar { padding: 20px; background: #f4f4f4; border-left: 2px solid #ddd; overflow-y: auto; }
+    .setting-group { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #ddd; }
+    .setting-group h4 { margin: 0 0 10px 0; font-size: 0.8rem; color: #666; text-transform: uppercase; }
+    .settings-list label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; cursor: pointer; font-size: 0.9rem; }
+    .settings-list select, .settings-list input[type="number"] { padding: 4px; border: 1px solid #ccc; font-family: inherit; }
+    
+    .grip { color: #ccc; cursor: grab; font-size: 1.2rem; user-select: none;}
+</style>
+</head>
+<body>
+
+    <div class="main-stage">
+        <div class="top-section">
+            <div class="box">
+                <h3>Agendamatic Input</h3>
+                <div class="agenda-grid agenda-header">
+                    <div></div>
+                    <div>Item</div> <div>Lead</div> <div>Time</div> <div>Interval</div> <div>🔒</div> <div>📝</div> <div></div>
+                </div>
+                
+                <div id="agenda-container">
+                    <div class="agenda-grid agenda-row theme-1" draggable="true">
+                        <div class="grip">⋮⋮</div>
+                        <input type="text" value="Welcome"> <input type="text" value="Chair"> <input type="text" value="5m">
+                        <span>4:00-4:05</span> <input type="checkbox"> <button>📝</button> 
+                        <button class="btn-delete" onclick="deleteRow(this)">&times;</button>
+                    </div>
+
+                    <div class="agenda-grid agenda-row theme-2" draggable="true">
+                        <div class="grip">⋮⋮</div>
+                        <input type="text" value="ED Report"> <input type="text" value="Director"> <input type="text" value="30m">
+                        <span>4:05-4:35</span> <input type="checkbox" checked> <button>📝</button> 
+                        <button class="btn-delete" onclick="deleteRow(this)">&times;</button>
+                    </div>
+
+                    <div class="agenda-grid agenda-row theme-3" draggable="true">
+                        <div class="grip">⋮⋮</div>
+                        <input type="text" value="Treasurer Rpt"> <input type="text" value="CFO"> <input type="text" value="15m">
+                        <span>4:35-4:50</span> <input type="checkbox" checked> <button>📝</button> 
+                        <button class="btn-delete" onclick="deleteRow(this)">&times;</button>
+                    </div>
+
+                    <div class="agenda-grid agenda-row theme-4" draggable="true">
+                        <div class="grip">⋮⋮</div>
+                        <input type="text" value="Committee Upd"> <input type="text" value="Staff"> <input type="text" value="10m">
+                        <span>4:50-5:00</span> <input type="checkbox"> <button>📝</button> 
+                        <button class="btn-delete" onclick="deleteRow(this)">&times;</button>
+                    </div>
+
+                    <div class="agenda-grid agenda-row theme-1" draggable="true">
+                        <div class="grip">⋮⋮</div>
+                        <input type="text" value="Closing"> <input type="text" value="Chair"> <input type="text" value="5m">
+                        <span>5:00-5:05</span> <input type="checkbox"> <button>📝</button> 
+                        <button class="btn-delete" onclick="deleteRow(this)">&times;</button>
+                    </div>
+                </div>
+                
+                <button class="btn-add-row" onclick="addRow()">+ Add Item</button>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="box">
+                    <h3>Export</h3>
+                    <div class="export-options">
+                        <label><input type="checkbox" checked> Include Header</label>
+                        <label><input type="checkbox" checked> Include Notes</label>
+                        <label><input type="checkbox"> Include Prep</label>
+                    </div>
+                    <div class="export-buttons">
+                        <button>.md</button> <button>.pdf</button> <button>.word</button>
+                    </div>
+                </div>
+                <div class="box status-display">
+                    <div>YOU ARE</div>
+                    <span class="status-large" style="color: var(--accent-red)">4 MINS</span>
+                    <span style="letter-spacing: 2px;">BEHIND</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="box timeline-container">
+            <div style="display:flex; justify-content:space-between;">
+                <h3>Tracker</h3>
+                <div><button>▶ Start</button> <button>⏹ Stop</button></div>
+            </div>
+            <div class="timeline-axis-wrapper">
+                <div class="current-time-marker"></div>
+                <div class="axis-ticks">
+                    <span class="tick">4:00</span> <span class="tick">4:30</span> <span class="tick">5:00</span> <span class="tick">5:30</span> <span class="tick">6:00</span>
+                </div>
+            </div>
+            <div class="timeline-track">
+                <div class="timeline-block block-1" style="width: 8%;">Welcome</div>
+                <div class="timeline-block block-2" style="width: 45%;">ED Report</div>
+                <div class="timeline-block block-3" style="width: 25%;">Treasurer</div>
+                <div class="timeline-block block-4" style="width: 14%;">Comm..</div>
+                <div class="timeline-block block-1" style="width: 8%;">End</div>
+            </div>
+        </div>
+
+        <div class="box current-item-box theme-3" style="border-left: 5px solid #4caf50;">
+            <div class="active-header">
+                <div><span style="font-size: 0.8rem; color: #666;">CURRENT ITEM</span><h1 style="margin: 5px 0 0 0;">Treasurer Report</h1></div>
+                <div style="text-align: right;"><div style="font-size: 0.8rem; color: #666;">LED BY</div><div style="font-weight: bold; font-size: 1.2rem;">{ CFO }</div></div>
+            </div>
+            <textarea class="notes-area" placeholder="[NOTES GO HERE] - Type your minutes..."></textarea>
+        </div>
+    </div>
+
+    <div class="settings-sidebar">
+        <h3>Settings</h3>
+        
+        <div class="setting-group">
+            <h4>Global</h4>
+            <div class="settings-list">
+                <label><input type="checkbox" checked> Dark Mode</label>
+                <label><input type="checkbox"> Sound Effects</label>
+                <label><input type="checkbox"> Sync SystemTime</label>
+            </div>
+        </div>
+
+        <div class="setting-group">
+            <h4>Layout</h4>
+            <div class="settings-list">
+                <label>
+                    Density
+                    <select>
+                        <option>Comfortable</option>
+                        <option>Compact</option>
+                        <option>Presentation</option>
+                    </select>
+                </label>
+                <label><input type="checkbox"> Show Progress Bar</label>
+            </div>
+        </div>
+
+        <div class="setting-group">
+            <h4>Timing & Alerts</h4>
+            <div class="settings-list">
+                <label>
+                    Buffer (mins)
+                    <input type="number" value="0" style="width: 40px;">
+                </label>
+                <label>
+                    Timer Mode
+                    <select>
+                        <option>Count Down</option>
+                        <option>Elapsed</option>
+                    </select>
+                </label>
+                <label><input type="checkbox" checked> 1-Min Warning</label>
+                <label><input type="checkbox"> Overtime Flash</label>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const container = document.getElementById('agenda-container');
+
+    // DELETE ROW
+    function deleteRow(btn) {
+        const row = btn.closest('.agenda-row');
+        row.remove();
+    }
+
+    // ADD ROW
+    function addRow() {
+        const newRow = document.createElement('div');
+        newRow.className = 'agenda-grid agenda-row theme-1'; 
+        newRow.draggable = true;
+        
+        newRow.innerHTML = `
+            <div class="grip">⋮⋮</div>
+            <input type="text" placeholder="New Item">
+            <input type="text" placeholder="Lead">
+            <input type="text" placeholder="10m">
+            <span>--:--</span>
+            <input type="checkbox">
+            <button>📝</button>
+            <button class="btn-delete" onclick="deleteRow(this)">&times;</button>
+        `;
+        
+        addDragListeners(newRow);
+        container.appendChild(newRow);
+    }
+
+    // DRAG LOGIC
+    function addDragListeners(element) {
+        element.addEventListener('dragstart', () => { element.classList.add('dragging'); });
+        element.addEventListener('dragend', () => { element.classList.remove('dragging'); });
+    }
+    
+    document.querySelectorAll('.agenda-row').forEach(addDragListeners);
+
+    container.addEventListener('dragover', e => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(container, e.clientY);
+        const draggable = document.querySelector('.dragging');
+        if (!draggable) return;
+        if (afterElement == null) {
+            container.appendChild(draggable);
+        } else {
+            container.insertBefore(draggable, afterElement);
+        }
+    });
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.agenda-row:not(.dragging)')];
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+</script>
+
+</body>
+</html>
