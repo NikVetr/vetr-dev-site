@@ -255,11 +255,16 @@ h3 {
 }
 
 .agenda-header > div {
-    text-align: center;
+    text-align: left;
 }
 
-.agenda-header > div:nth-child(2) {
-    text-align: left;
+.agenda-header > div:nth-child(1),
+.agenda-header > div:nth-child(4),
+.agenda-header > div:nth-child(5),
+.agenda-header > div:nth-child(6),
+.agenda-header > div:nth-child(7),
+.agenda-header > div:nth-child(8) {
+    text-align: center;
 }
 
 /* Start time inline in interval column */
@@ -375,6 +380,39 @@ h3 {
     color: var(--text-muted);
     text-align: center;
     white-space: nowrap;
+}
+
+.interval-time-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.interval-time-btn:hover {
+    text-decoration: underline;
+}
+
+.interval-time-btn:focus-visible {
+    outline: 1px dashed var(--border-color);
+    outline-offset: 2px;
+}
+
+.interval-start-input {
+    width: 5.2ch;
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 2px 4px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.interval-separator {
+    margin: 0 2px;
 }
 
 .agenda-row input[type="checkbox"] {

@@ -8,10 +8,11 @@ import {
     addItem,
     deleteItem,
     updateItem,
+    updateIntervalTime,
     reorderItems,
     calculateIntervals
 } from './state.js';
-import { formatInterval, debounce, parseDuration, formatDuration } from './utils.js';
+import { formatTime, parseTime, addMinutes, debounce, parseDuration, formatDuration } from './utils.js';
 
 let container = null;
 let draggedElement = null;
@@ -401,7 +402,31 @@ function createAgendaRow(item, index) {
     // Interval display
     const intervalSpan = document.createElement('span');
     intervalSpan.className = 'interval';
-    intervalSpan.textContent = formatInterval(item.startTime, item.endTime);
+
+    const startBtn = document.createElement('button');
+    startBtn.type = 'button';
+    startBtn.className = 'interval-time-btn interval-start-btn';
+    startBtn.textContent = formatTime(item.startTime);
+    startBtn.dataset.position = 'start';
+    startBtn.dataset.index = index.toString();
+    startBtn.setAttribute('data-tooltip', 'Click to change start time');
+
+    const separator = document.createElement('span');
+    separator.className = 'interval-separator';
+    separator.textContent = '-';
+
+    const endBtn = document.createElement('button');
+    endBtn.type = 'button';
+    endBtn.className = 'interval-time-btn interval-end-btn';
+    endBtn.textContent = formatTime(item.endTime);
+    endBtn.dataset.position = 'end';
+    endBtn.dataset.index = index.toString();
+    endBtn.setAttribute('data-tooltip', 'Click to change end time');
+
+    intervalSpan.appendChild(startBtn);
+    intervalSpan.appendChild(separator);
+    intervalSpan.appendChild(endBtn);
+
     intervalSpan.setAttribute('data-tooltip', 'Calculated time slot based on duration');
 
     // Lock checkbox
@@ -503,10 +528,96 @@ function setupRowEventListeners(row, item) {
         });
     });
 
+    row.querySelectorAll('.interval-time-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openIntervalTimeEditor(btn);
+        });
+
+        btn.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY < 0 ? 5 : -5;
+            adjustIntervalTimeByDelta(btn, delta);
+        });
+    });
+
     // Drag and drop
     row.addEventListener('dragstart', handleDragStart);
     row.addEventListener('dragend', handleDragEnd);
 
+}
+
+/**
+ * Inline editor for an interval time boundary
+ * @param {HTMLButtonElement} button - Interval time button
+ */
+function openIntervalTimeEditor(button) {
+    if (!button) return;
+    const position = button.dataset.position || 'start';
+    const index = parseInt(button.dataset.index || '0', 10);
+
+    const intervals = calculateIntervals();
+    const interval = intervals[index];
+    if (!interval) return;
+
+    const currentValue = position === 'end'
+        ? formatTimeValue(interval.endTime)
+        : formatTimeValue(interval.startTime);
+
+    const input = document.createElement('input');
+    input.type = 'time';
+    input.className = 'interval-start-input';
+    input.value = currentValue;
+
+    button.replaceWith(input);
+    input.focus();
+
+    if (typeof input.showPicker === 'function') {
+        try {
+            input.showPicker();
+        } catch (err) {
+            // no-op if the browser blocks programmatic picker
+        }
+    }
+
+    const commit = () => {
+        const nextValue = input.value || currentValue;
+        const parsed = parseTime(nextValue);
+        if (parsed && !Number.isNaN(parsed.getTime())) {
+            updateIntervalTime(index, position, parsed);
+        }
+    };
+
+    input.addEventListener('blur', commit);
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            input.blur();
+        }
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            input.value = currentValue;
+            input.blur();
+        }
+    });
+}
+
+function adjustIntervalTimeByDelta(button, deltaMinutes) {
+    const position = button.dataset.position || 'start';
+    const index = parseInt(button.dataset.index || '0', 10);
+    const intervals = calculateIntervals();
+    const interval = intervals[index];
+    if (!interval) return;
+
+    const baseTime = position === 'end' ? interval.endTime : interval.startTime;
+    const targetTime = addMinutes(baseTime, deltaMinutes);
+    updateIntervalTime(index, position, targetTime);
+}
+
+function formatTimeValue(date) {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
 }
 
 /**

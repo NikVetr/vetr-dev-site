@@ -110,7 +110,6 @@ function getElements() {
         // Agenda
         agendaContainer: document.getElementById('agenda-container'),
         addItemBtn: document.getElementById('btn-add-item'),
-        agendaStartTime: document.getElementById('agenda-start-time'),
 
         // Timeline
         timelineTrack: document.getElementById('timeline-track'),
@@ -158,6 +157,8 @@ function getElements() {
         darkModeCheckbox: document.getElementById('dark-mode'),
         soundEffectsCheckbox: document.getElementById('sound-effects'),
         syncSystemTimeCheckbox: document.getElementById('sync-system-time'),
+        pinStartTimeCheckbox: document.getElementById('pin-start-time'),
+        pinEndTimeCheckbox: document.getElementById('pin-end-time'),
         densitySelect: document.getElementById('density'),
         showProgressBarCheckbox: document.getElementById('show-progress-bar'),
         bufferInput: document.getElementById('buffer'),
@@ -189,13 +190,6 @@ function setupEventListeners(elements) {
         });
     }
 
-    // Agenda start time input
-    if (elements.agendaStartTime) {
-        setupTimeInput(elements.agendaStartTime, (newTime) => {
-            updateSettings({ startTime: newTime });
-        });
-    }
-
     // Export options
     setupExportOptionsListeners(elements);
 
@@ -212,19 +206,6 @@ function setupEventListeners(elements) {
                 resetState();
                 showNotification('Reset to defaults', 'success');
             }
-        });
-    }
-
-    // Start time row spinner buttons
-    const startTimeRow = document.getElementById('start-time-row');
-    if (startTimeRow) {
-        startTimeRow.querySelectorAll('.time-spinner button').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const action = btn.dataset.action;
-                const delta = action === 'time-up' ? 5 : -5;
-                updateSettings({ startTime: getSteppedStartTime(delta) });
-            });
         });
     }
 
@@ -290,16 +271,11 @@ function parseTimeString(str) {
  * @param {Object} state - Current state
  */
 function syncStartTimeInputs(state) {
-    const agendaStartTime = document.getElementById('agenda-start-time');
     const settingsStartTime = document.getElementById('start-time');
 
     if (state.settings.startTime) {
         const time = parseTime(state.settings.startTime);
         const displayTime = formatTime(time);
-
-        if (agendaStartTime) {
-            agendaStartTime.value = displayTime;
-        }
 
         if (settingsStartTime) {
             settingsStartTime.value = state.settings.startTime;
@@ -374,6 +350,22 @@ function setupSettingsListeners(elements) {
         elements.syncSystemTimeCheckbox.checked = state.settings.syncSystemTime;
         elements.syncSystemTimeCheckbox.addEventListener('change', (e) => {
             updateSettings({ syncSystemTime: e.target.checked });
+        });
+    }
+
+    // Pin start time
+    if (elements.pinStartTimeCheckbox) {
+        elements.pinStartTimeCheckbox.checked = state.settings.pinStartTime !== false;
+        elements.pinStartTimeCheckbox.addEventListener('change', (e) => {
+            updateSettings({ pinStartTime: e.target.checked });
+        });
+    }
+
+    // Pin end time
+    if (elements.pinEndTimeCheckbox) {
+        elements.pinEndTimeCheckbox.checked = state.settings.pinEndTime !== false;
+        elements.pinEndTimeCheckbox.addEventListener('change', (e) => {
+            updateSettings({ pinEndTime: e.target.checked });
         });
     }
 

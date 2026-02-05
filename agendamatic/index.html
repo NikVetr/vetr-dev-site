@@ -26,16 +26,8 @@
                     <div></div>
                     <div>Item</div>
                     <div>Lead</div>
+                    <div>Duration</div>
                     <div>Time</div>
-                    <div class="interval-header">
-                        <div class="time-input-wrapper start-time-inline" id="start-time-row">
-                            <input type="text" id="agenda-start-time" value="4:00 PM" data-tooltip="Meeting start time - scroll or use arrows to adjust">
-                            <div class="time-spinner">
-                                <button data-action="time-up" data-tooltip="Increase time">&#9650;</button>
-                                <button data-action="time-down" data-tooltip="Decrease time">&#9660;</button>
-                            </div>
-                        </div>
-                    </div>
                     <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
                     <div data-tooltip="Item notes">&#128221;</div>
                     <div></div>
@@ -231,6 +223,12 @@
                 </label>
                 <label data-tooltip="Automatically use current time as start time">
                     <input type="checkbox" id="sync-system-time"> Sync System Time
+                </label>
+                <label data-tooltip="Keep meeting start time fixed when adjusting interval times">
+                    <input type="checkbox" id="pin-start-time" checked> Pin Start Time
+                </label>
+                <label data-tooltip="Keep meeting end time fixed when adjusting interval times">
+                    <input type="checkbox" id="pin-end-time" checked> Pin End Time
                 </label>
             </div>
         </div>

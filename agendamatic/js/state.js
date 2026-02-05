@@ -295,6 +295,8 @@ const DEFAULT_STATE = {
     items: [],
     settings: {
         startTime: '16:00',
+        pinStartTime: true,
+        pinEndTime: true,
         darkMode: false,
         soundEffects: false,
         syncSystemTime: false,
@@ -584,6 +586,101 @@ export function advanceToNextItem(currentTime = new Date()) {
 }
 
 /**
+ * Update an interval boundary time and rebalance durations as needed.
+ * @param {number} index - Item index
+ * @param {'start'|'end'} position - Which boundary to update
+ * @param {Date} targetTime - New boundary time
+ * @returns {boolean} Whether an update was applied
+ */
+export function updateIntervalTime(index, position, targetTime) {
+    const { items, settings } = currentState;
+    if (!items || items.length === 0) return false;
+
+    const intervals = calculateIntervals();
+    if (!intervals[index]) return false;
+
+    if (!(targetTime instanceof Date) || Number.isNaN(targetTime.getTime())) {
+        return false;
+    }
+
+    const buffer = settings.buffer || 0;
+    const pinStart = settings.pinStartTime !== false;
+    const pinEnd = settings.pinEndTime !== false;
+
+    if (position === 'start') {
+        if (index === 0) {
+            const newStartValue = formatTimeValue(targetTime);
+            setState({ settings: { ...settings, startTime: newStartValue } });
+            return true;
+        }
+
+        const oldBoundary = intervals[index].startTime;
+
+        if (!pinStart) {
+            const currentStart = parseTime(settings.startTime);
+            const deltaMinutes = Math.round((targetTime - oldBoundary) / 60000);
+            const newStart = addMinutes(currentStart, deltaMinutes);
+            const newStartValue = formatTimeValue(newStart);
+            setState({ settings: { ...settings, startTime: newStartValue } });
+            return true;
+        }
+
+        const currentStart = parseTime(settings.startTime);
+        const buffersBefore = Math.max(0, index - 1);
+        let targetTotal = Math.round((targetTime - currentStart) / 60000) - buffersBefore * buffer;
+        targetTotal = Math.max(0, targetTotal);
+
+        const prevItems = items.slice(0, index);
+        const newDurations = scaleDurationsToTarget(prevItems, targetTotal);
+
+        const updatedItems = items.map((item, idx) => {
+            if (idx < index) {
+                return { ...item, duration: formatDuration(newDurations[idx]) };
+            }
+            return item;
+        });
+
+        setState({ items: updatedItems });
+        return true;
+    }
+
+    if (position === 'end') {
+        const itemStart = intervals[index].startTime;
+        let newDuration = Math.round((targetTime - itemStart) / 60000);
+        newDuration = Math.max(1, newDuration);
+
+        const updatedItems = items.map((item, idx) => {
+            if (idx === index) {
+                return { ...item, duration: formatDuration(newDuration) };
+            }
+            return item;
+        });
+
+        if (pinEnd && index < items.length - 1) {
+            const oldMeetingEnd = intervals[intervals.length - 1].endTime;
+            const laterItems = items.slice(index + 1);
+            const buffersAfter = laterItems.length;
+            let targetTotal = Math.round((oldMeetingEnd - targetTime) / 60000) - buffersAfter * buffer;
+            targetTotal = Math.max(0, targetTotal);
+
+            const newLaterDurations = scaleDurationsToTarget(laterItems, targetTotal);
+            for (let i = 0; i < newLaterDurations.length; i += 1) {
+                const itemIndex = index + 1 + i;
+                updatedItems[itemIndex] = {
+                    ...updatedItems[itemIndex],
+                    duration: formatDuration(newLaterDurations[i])
+                };
+            }
+        }
+
+        setState({ items: updatedItems });
+        return true;
+    }
+
+    return false;
+}
+
+/**
  * Calculate intervals for all items based on start time and durations
  * Takes into account locked items and adjusts unlocked items proportionally
  * @returns {Array} Items with calculated start and end times
@@ -622,6 +719,67 @@ export function calculateIntervals() {
             themeNumber: item.themeColor || ((index % 4) + 1)
         };
     });
+}
+
+function formatTimeValue(date) {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+}
+
+function scaleDurationsToTarget(items, targetTotal) {
+    if (!items.length) return [];
+
+    const durations = items.map(item => parseDuration(item.duration));
+    const locked = items.map(item => item.locked);
+    const minDurations = durations.map((duration, idx) => (locked[idx] ? duration : 1));
+
+    const totalDuration = durations.reduce((sum, duration) => sum + duration, 0);
+    const lockedTotal = durations.reduce((sum, duration, idx) => {
+        return locked[idx] ? sum + duration : sum;
+    }, 0);
+    const unlockedTotal = totalDuration - lockedTotal;
+
+    let newDurations;
+    if (targetTotal >= totalDuration) {
+        const scale = totalDuration > 0 ? targetTotal / totalDuration : 1;
+        newDurations = durations.map(duration => Math.max(1, Math.round(duration * scale)));
+    } else {
+        const availableForUnlocked = Math.max(0, targetTotal - lockedTotal);
+        const scale = unlockedTotal > 0 ? availableForUnlocked / unlockedTotal : 0;
+        newDurations = durations.map((duration, idx) => {
+            if (locked[idx]) return duration;
+            return Math.max(1, Math.round(duration * scale));
+        });
+    }
+
+    let diff = targetTotal - newDurations.reduce((sum, duration) => sum + duration, 0);
+    const adjustable = items.map((item, idx) => ({
+        idx,
+        min: minDurations[idx],
+        locked: item.locked
+    }));
+
+    let safety = 0;
+    while (diff !== 0 && safety < 10000) {
+        let moved = false;
+        for (const entry of adjustable) {
+            if (diff === 0) break;
+            if (diff > 0) {
+                newDurations[entry.idx] += 1;
+                diff -= 1;
+                moved = true;
+            } else if (newDurations[entry.idx] > entry.min) {
+                newDurations[entry.idx] -= 1;
+                diff += 1;
+                moved = true;
+            }
+        }
+        if (!moved) break;
+        safety += 1;
+    }
+
+    return newDurations;
 }
 
 /**
