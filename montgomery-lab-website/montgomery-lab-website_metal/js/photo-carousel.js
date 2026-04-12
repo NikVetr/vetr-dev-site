@@ -16,6 +16,7 @@ const photoPool = [
 ];
 
 const offsets = new Map(photoPool.map((item, index) => [item.key, (index * 3) % photoPool.length]));
+const photoMap = new Map(photoPool.map((item) => [item.key, item]));
 const pageSeeds = {
   home: 0,
   research: 2,
@@ -28,6 +29,18 @@ const pageSeeds = {
   contact: 5,
 };
 let carouselSerial = 0;
+
+const pagePools = {
+  home: ["lab-room.webp", "team-group.webp", "lab-dinner.webp", "lab-social.webp", "escape-room.webp", "eqtl-costume.webp", "lab-hike.webp", "contact-beach-group.webp"],
+  research: ["hero-pictionary.webp", "pictionary-room.webp", "resources-pictionary.webp", "lab-room.webp", "team-group.webp", "eqtl-costume.webp", "escape-room.webp", "lab-social.webp"],
+  publications: ["publications-ashg.webp", "lab-dinner-portrait.webp", "lab-social.webp", "team-group.webp", "join-retreat-dinner.webp", "contact-beach-group.webp", "lab-room.webp", "escape-room.webp"],
+  team: ["team-group.webp", "join-retreat-dinner.webp", "lab-dinner.webp", "lab-dinner-portrait.webp", "escape-room.webp", "lab-social.webp", "contact-beach-group.webp", "lab-hike.webp"],
+  consortia: ["lab-social.webp", "contact-beach-group.webp", "lab-room.webp", "resources-pictionary.webp", "team-group.webp", "join-retreat-dinner.webp", "lab-hike.webp", "escape-room.webp"],
+  resources: ["resources-pictionary.webp", "hero-pictionary.webp", "pictionary-room.webp", "lab-room.webp", "eqtl-costume.webp", "team-group.webp", "lab-social.webp", "contact-beach-group.webp"],
+  join: ["join-retreat-dinner.webp", "lab-dinner.webp", "lab-dinner-portrait.webp", "contact-beach-group.webp", "lab-hike.webp", "team-group.webp", "escape-room.webp", "lab-social.webp"],
+  news: ["escape-room.webp", "lab-hike.webp", "lab-dinner.webp", "pictionary-room.webp", "team-group.webp", "lab-social.webp", "contact-beach-group.webp", "publications-ashg.webp"],
+  contact: ["contact-beach-group.webp", "lab-social.webp", "team-group.webp", "lab-hike.webp", "escape-room.webp", "lab-dinner.webp", "join-retreat-dinner.webp", "lab-room.webp"],
+};
 
 const keyFromSrc = (src = "") => {
   const match = src.match(/([^/]+\.webp)(?:[?#].*)?$/);
@@ -48,9 +61,15 @@ const makeSet = (key, salt = 0) => {
     return [];
   }
 
-  const pageSeed = pageSeeds[document.body.dataset.page || "home"] || 0;
-  const start = ((offsets.get(key) || 0) + pageSeed + salt * 5) % photoPool.length;
-  const rotated = Array.from({ length: photoPool.length }, (_, index) => photoPool[(start + index) % photoPool.length]);
+  const pageId = document.body.dataset.page || "home";
+  const basePool = (pagePools[pageId] || photoPool.map((item) => item.key))
+    .map((poolKey) => photoMap.get(poolKey))
+    .filter(Boolean);
+  const fallbackPool = photoPool.filter((item) => !basePool.some((candidate) => candidate.key === item.key));
+  const scopedPool = [...basePool, ...fallbackPool];
+  const pageSeed = pageSeeds[pageId] || 0;
+  const start = ((offsets.get(key) || 0) + pageSeed + salt * 3) % scopedPool.length;
+  const rotated = Array.from({ length: scopedPool.length }, (_, index) => scopedPool[(start + index) % scopedPool.length]);
   return [current, ...rotated.filter((item) => item.key !== key)].slice(0, 8);
 };
 

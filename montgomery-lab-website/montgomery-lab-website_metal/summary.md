@@ -25,4 +25,6 @@ This directory is an independent static website variant for the Montgomery Lab. 
 - Floating rune text is now scroll-driven rather than autonomously animated, avoiding platform-specific animation inconsistencies while keeping the stage background reactive.
 - Group and lab-scene photos now use metal-styled hover carousels with ember triangle controls, dot navigation, and photo-specific captions. The medium-desktop hero breakpoint was also retuned so the poster copy and image no longer overlap.
 - On mobile, the torn-ticket navigation collapses into a short sticky header with the metal logo on the left and a circular menu toggle on the right, while the full setlist hides inside a drawer.
-- The amp rack now includes a dedicated `BIOINFORMATICS` dial with evenly spaced scale marks, a taped-on `11`, and a home-page headline lockup reading `BIOINFORMATICS / TURNED UP TO / ELEVEN`.
+- The mobile menu glyph now uses tighter bar spacing and the logo is pulled closer to the left edge so the compact header reads more like a real stage credential than a centered card.
+- The amp rack now includes a dedicated `BIOINFORMATICS` dial with a fixed red 0-10 ring, evenly spaced numeric labels from 0 through 10, matching tick marks, a pointer aligned to the taped-on `11`, and a home-page headline lockup reading `BIOINFORMATICS / TURNED UP TO / ELEVEN`.
+- News/archive stills and photo-carousel pools were rebalanced so page defaults do not keep repeating the same generated lab scenes across the metal concept.

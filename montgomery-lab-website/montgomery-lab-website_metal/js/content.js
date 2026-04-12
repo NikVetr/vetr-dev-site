@@ -333,9 +333,9 @@ export const metalContent = {
     values: ["collaboration as a scientific method", "in-person discussion and fast iteration", "shared compute literacy", "health and sustainability"],
   },
   news: [
-    { year: "2024", title: "MoTrPAC papers map the molecular effects of exercise training", text: "Stanford coverage in May 2024 highlighted a major public milestone linking physiology to multi-omic response at scale.", image: "assets/generated/page-hero/publications-ashg.webp" },
+    { year: "2024", title: "MoTrPAC papers map the molecular effects of exercise training", text: "Stanford coverage in May 2024 highlighted a major public milestone linking physiology to multi-omic response at scale.", image: "assets/generated/home/lab-dinner.webp" },
     { year: "2017", title: "GTEx paper set becomes a defining reference point", text: "The October 17, 2017 GTEx release remains a landmark in how the lab approaches tissue-aware regulatory biology.", image: "assets/generated/home/lab-hike.webp" },
-    { year: "2016", title: "The lab joins MoTrPAC", text: "The December 15, 2016 launch of the lab's role in MoTrPAC established a long-running connection to exercise biology at consortium scale.", image: "assets/generated/home/lab-room.webp" },
+    { year: "2016", title: "The lab joins MoTrPAC", text: "The December 15, 2016 launch of the lab's role in MoTrPAC established a long-running connection to exercise biology at consortium scale.", image: "assets/generated/home/pictionary-room.webp" },
   ],
   contact: {
     email: "smontgom@stanford.edu",

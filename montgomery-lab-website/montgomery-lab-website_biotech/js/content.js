@@ -699,7 +699,7 @@ export const biotechContent = {
       year: "2024",
       title: "MoTrPAC papers map the molecular effects of exercise training",
       text: "Stanford coverage in May 2024 highlighted a major public milestone linking physiology to multi-omic response at scale.",
-      image: "assets/generated/page-hero/publications-ashg.webp",
+      image: "assets/generated/home/lab-social.webp",
     },
     {
       year: "2017",
@@ -711,7 +711,7 @@ export const biotechContent = {
       year: "2016",
       title: "The lab joins MoTrPAC",
       text: "The December 15, 2016 launch of the lab's role in MoTrPAC established a long-running connection to exercise biology at consortium scale.",
-      image: "assets/generated/home/lab-room.webp",
+      image: "assets/generated/home/hero-pictionary.webp",
     },
   ],
   contact: {

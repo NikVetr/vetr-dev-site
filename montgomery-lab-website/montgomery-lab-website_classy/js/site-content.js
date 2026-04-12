@@ -868,24 +868,24 @@ export const siteData = {
         title: "May 2024: MoTrPAC papers map the molecular effects of exercise training",
         text:
           "Stanford coverage in May 2024 highlighted the molecular effects of exercise training, reinforcing MoTrPAC as one of the lab's most visible recent collaborative efforts.",
-        image: "assets/generated/home/hero-pictionary.webp",
-        alt: "Working session in the Montgomery Lab",
+        image: "assets/generated/page-hero/publications-ashg.webp",
+        alt: "Scientific meeting audience during a genomics conference session",
       },
       {
         eyebrow: "Archive",
         title: "The GTEx paper set remains a defining reference point in the lab's history",
         text:
           "The October 17, 2017 release of the GTEx papers remains a defining milestone for the lab's work on regulation and variation across tissues.",
-        image: "assets/generated/home/lab-hike.webp",
-        alt: "Montgomery Lab members on a hike",
+        image: "assets/generated/home/lab-social.webp",
+        alt: "Montgomery Lab members at a social event",
       },
       {
         eyebrow: "Consortium history",
         title: "December 2016: the lab joins MoTrPAC",
         text:
           "The lab joined MoTrPAC on December 15, 2016, establishing a long-running connection to consortium-scale exercise biology and molecular physiology.",
-        image: "assets/generated/home/lab-room.webp",
-        alt: "Montgomery Lab members meeting in a conference room",
+        image: "assets/generated/home/team-group.webp",
+        alt: "Montgomery Lab group portrait",
       },
     ],
   },

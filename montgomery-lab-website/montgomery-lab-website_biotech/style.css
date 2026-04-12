@@ -1700,6 +1700,8 @@ input {
     grid-column: 2;
     grid-row: 1;
     place-items: center;
+    align-content: center;
+    gap: 0.16rem;
     width: 2.7rem;
     height: 2.7rem;
     padding: 0;
@@ -1715,7 +1717,7 @@ input {
     display: block;
     width: 1.22rem;
     height: 2px;
-    margin: 0.12rem 0;
+    margin: 0;
     background: var(--green-bright);
     box-shadow: 0 0 0.5rem rgba(85, 248, 159, 0.45);
   }
@@ -1730,6 +1732,8 @@ input {
     max-height: min(66vh, 32rem);
     gap: 0.5rem;
     padding: 0.7rem 0.2rem 0.2rem;
+    background: rgba(4, 16, 11, 0.98);
+    border-radius: 1.15rem;
     scrollbar-width: thin;
     scrollbar-color: rgba(85, 248, 159, 0.7) rgba(3, 17, 11, 0.72);
   }

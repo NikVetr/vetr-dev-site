@@ -206,11 +206,27 @@ const renderAmpRig = () => {
       <div class="bio-knob-panel" aria-label="Bioinformatics level set past ten">
         <p class="eyebrow">Bioinformatics</p>
         <div class="bio-knob" aria-hidden="true">
+          <span class="bio-knob-tick bio-knob-tick-0"></span>
           <span class="bio-knob-mark bio-knob-mark-0">0</span>
+          <span class="bio-knob-tick bio-knob-tick-1"></span>
+          <span class="bio-knob-mark bio-knob-mark-1">1</span>
+          <span class="bio-knob-tick bio-knob-tick-2"></span>
           <span class="bio-knob-mark bio-knob-mark-2">2</span>
+          <span class="bio-knob-tick bio-knob-tick-3"></span>
+          <span class="bio-knob-mark bio-knob-mark-3">3</span>
+          <span class="bio-knob-tick bio-knob-tick-4"></span>
           <span class="bio-knob-mark bio-knob-mark-4">4</span>
+          <span class="bio-knob-tick bio-knob-tick-5"></span>
+          <span class="bio-knob-mark bio-knob-mark-5">5</span>
+          <span class="bio-knob-tick bio-knob-tick-6"></span>
           <span class="bio-knob-mark bio-knob-mark-6">6</span>
+          <span class="bio-knob-tick bio-knob-tick-7"></span>
+          <span class="bio-knob-mark bio-knob-mark-7">7</span>
+          <span class="bio-knob-tick bio-knob-tick-8"></span>
           <span class="bio-knob-mark bio-knob-mark-8">8</span>
+          <span class="bio-knob-tick bio-knob-tick-9"></span>
+          <span class="bio-knob-mark bio-knob-mark-9">9</span>
+          <span class="bio-knob-tick bio-knob-tick-10"></span>
           <span class="bio-knob-mark bio-knob-mark-10">10</span>
           <span class="bio-knob-tape">11</span>
           <span class="bio-knob-dial"></span>

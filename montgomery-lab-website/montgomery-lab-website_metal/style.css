@@ -670,7 +670,7 @@ h3 {
   border-radius: 50%;
   background:
     radial-gradient(circle at 44% 34%, rgba(255, 255, 255, 0.18), transparent 0 16%, rgba(0, 0, 0, 0.2) 17%),
-    conic-gradient(from 220deg, rgba(255, 77, 24, 0.74) 0deg 305deg, rgba(255, 255, 255, 0.1) 305deg 360deg),
+    conic-gradient(from 225deg, rgba(185, 30, 9, 0.98) 0deg 270deg, rgba(36, 22, 19, 0.92) 270deg 360deg),
     radial-gradient(circle, #2d2d2f 0 39%, #090909 40% 51%, #010101 52%);
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow:
@@ -702,7 +702,7 @@ h3 {
   border-radius: 99px;
   background: linear-gradient(180deg, #fff5df, var(--ember) 34%, #5e0a02);
   box-shadow: 0 0 0.65rem rgba(255, 77, 24, 0.7);
-  transform: translate(-50%, -95%) rotate(142deg);
+  transform: translate(-50%, -95%) rotate(156deg);
   transform-origin: 50% 95%;
   z-index: 3;
 }
@@ -723,40 +723,119 @@ h3 {
 }
 
 .bio-knob-mark,
+.bio-knob-tick,
 .bio-knob-tape {
   position: absolute;
   left: 50%;
   top: 50%;
+}
+
+.bio-knob-mark,
+.bio-knob-tape {
   z-index: 4;
   color: rgba(255, 247, 229, 0.86);
   font-size: 0.52rem;
   font-weight: 900;
   letter-spacing: 0.05em;
   text-shadow: 0 0.08rem 0 #000;
-  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3rem) rotate(calc(-1 * var(--knob-angle)));
+  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3.3rem) rotate(calc(-1 * var(--knob-angle)));
 }
 
 .bio-knob-mark-0 {
   --knob-angle: -135deg;
 }
 
+.bio-knob-mark-1 {
+  --knob-angle: -108deg;
+}
+
 .bio-knob-mark-2 {
   --knob-angle: -81deg;
+}
+
+.bio-knob-mark-3 {
+  --knob-angle: -54deg;
 }
 
 .bio-knob-mark-4 {
   --knob-angle: -27deg;
 }
 
+.bio-knob-mark-5 {
+  --knob-angle: 0deg;
+}
+
 .bio-knob-mark-6 {
   --knob-angle: 27deg;
+}
+
+.bio-knob-mark-7 {
+  --knob-angle: 54deg;
 }
 
 .bio-knob-mark-8 {
   --knob-angle: 81deg;
 }
 
+.bio-knob-mark-9 {
+  --knob-angle: 108deg;
+}
+
 .bio-knob-mark-10 {
+  --knob-angle: 135deg;
+}
+
+.bio-knob-tick {
+  z-index: 2;
+  width: 0.08rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 247, 229, 0.9), rgba(255, 226, 207, 0.36));
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-2.78rem);
+}
+
+.bio-knob-tick-0 {
+  --knob-angle: -135deg;
+}
+
+.bio-knob-tick-1 {
+  --knob-angle: -108deg;
+}
+
+.bio-knob-tick-2 {
+  --knob-angle: -81deg;
+}
+
+.bio-knob-tick-3 {
+  --knob-angle: -54deg;
+}
+
+.bio-knob-tick-4 {
+  --knob-angle: -27deg;
+}
+
+.bio-knob-tick-5 {
+  --knob-angle: 0deg;
+}
+
+.bio-knob-tick-6 {
+  --knob-angle: 27deg;
+}
+
+.bio-knob-tick-7 {
+  --knob-angle: 54deg;
+}
+
+.bio-knob-tick-8 {
+  --knob-angle: 81deg;
+}
+
+.bio-knob-tick-9 {
+  --knob-angle: 108deg;
+}
+
+.bio-knob-tick-10 {
   --knob-angle: 135deg;
 }
 
@@ -773,7 +852,7 @@ h3 {
   border: 1px solid rgba(0, 0, 0, 0.18);
   box-shadow: 0 0.18rem 0.4rem rgba(0, 0, 0, 0.42);
   text-shadow: none;
-  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3.2rem) rotate(calc(-1 * var(--knob-angle))) rotate(-7deg);
+  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3.62rem) rotate(calc(-1 * var(--knob-angle))) rotate(-7deg);
 }
 
 .transport-button.is-primary {
@@ -1112,9 +1191,9 @@ h3 {
   }
 
   .main-stage {
-    width: min(880px, calc(100% - var(--controller-width) - 3.5rem));
+    width: min(960px, calc(100% - var(--controller-width) - 2.6rem));
     margin-left: calc(var(--controller-width) + 2.35rem);
-    margin-right: 1rem;
+    margin-right: 0.25rem;
   }
 
   .home-poster,
@@ -1140,8 +1219,8 @@ h3 {
 .page-hero {
   min-height: min(760px, calc(100vh - 11rem));
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-  gap: 1.2rem;
+  grid-template-columns: minmax(0, 0.98fr) minmax(360px, 0.9fr);
+  gap: clamp(1.5rem, 3vw, 2.8rem);
   align-items: center;
 }
 
@@ -1177,7 +1256,7 @@ h3 {
 
 h1 {
   margin: 0;
-  font-size: clamp(3rem, 5vw, 4.4rem);
+  font-size: clamp(2.8rem, 4vw, 3.78rem);
   line-height: 0.84;
   letter-spacing: -0.045em;
   text-shadow:
@@ -1190,6 +1269,7 @@ h1 {
   display: grid;
   justify-items: start;
   width: fit-content;
+  max-width: min(100%, 8.95ch);
   text-transform: uppercase;
 }
 
@@ -1211,7 +1291,7 @@ h1 {
 
 .metal-title-line-3 {
   color: #ffd9bf;
-  font-size: 1.29em;
+  font-size: 1.21em;
   letter-spacing: 0.055em;
   text-shadow:
     2px 2px 0 #000,
@@ -1817,7 +1897,7 @@ h3 {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 0.65rem;
     align-items: center;
-    padding: 0.48rem 0.7rem;
+    padding: 0.48rem 0.7rem 0.48rem 0.22rem;
     border-radius: 0.7rem;
     clip-path: polygon(0 0, 100% 2%, 99.4% 100%, 0.7% 98%);
     transform: none;
@@ -1826,6 +1906,8 @@ h3 {
   .poster-brand {
     justify-items: start;
     align-items: center;
+    justify-self: start;
+    margin-left: 0;
     transform: none;
   }
 
@@ -1863,6 +1945,8 @@ h3 {
     grid-column: 2;
     grid-row: 1;
     place-items: center;
+    align-content: center;
+    gap: 0.16rem;
     width: 2.9rem;
     height: 2.9rem;
     padding: 0;
@@ -1876,7 +1960,7 @@ h3 {
     display: block;
     width: 1.28rem;
     height: 2px;
-    margin: 0.12rem 0;
+    margin: 0;
     background: #111;
   }
 
@@ -1933,6 +2017,7 @@ h3 {
 
   .metal-title-stack {
     font-size: clamp(2.2rem, 11vw, 3rem);
+    max-width: min(100%, 9.1ch);
   }
 
   .metal-title-line-3 {
