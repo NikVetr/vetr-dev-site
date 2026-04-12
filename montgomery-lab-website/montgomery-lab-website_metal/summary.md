@@ -14,7 +14,7 @@ This directory is an independent static website variant for the Montgomery Lab. 
 - The primary navigation is a floating sticky concert-ticket/setlist rather than a conventional top bar, making this version structurally distinct from the professional and biotech variants.
 - The lab’s metal logo is integrated directly into the ticket as a large printed mark with contrast/sepia blending, avoiding duplicate textual branding or secondary subtitle copy.
 - The page background uses CSS-only brushed metal, diamond-plate texture, stage-light vignettes, spikes, and flame silhouettes rather than a soft generic glow.
-- On desktop, the amp controls become a wide fixed left-margin MIDI/amp rack styled like a physical control surface, while narrower screens keep the controls inline to avoid covering content.
+- On desktop, the amp controls become a wide fixed left-margin MIDI/amp rack styled like a physical control surface, while the main stage remains centered beneath the ticket; narrower screens keep the controls inline to avoid covering content.
 - The MIDI rack loads a page-associated lab song, exposes beveled play/pause/prev/next hardware-style buttons, a page-track toggle, a hidden full playlist dropdown, and a smoked-glass waveform display, but never starts playback until the user presses play.
 - Partner-program logos are rendered directly on large transparent full-width card headers with glow instead of white tiles, and the partner grid uses a two-column layout on desktop so wide logos have room.
 - Background rune labels include science terms and consortium names, drifting upward from off-screen bottom to off-screen top so visible loop resets are avoided.

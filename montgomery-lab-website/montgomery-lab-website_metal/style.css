@@ -931,9 +931,9 @@ h3 {
 
 @media (min-width: 1280px) {
   .main-stage {
-    width: min(1040px, calc(100% - var(--controller-width) - 3.2rem));
-    margin-left: calc(var(--controller-width) + 2rem);
-    margin-right: 1rem;
+    width: min(960px, calc(100% - 2rem));
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
