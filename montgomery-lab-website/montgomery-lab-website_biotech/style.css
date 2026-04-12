@@ -36,6 +36,33 @@
 
 html {
   scroll-behavior: smooth;
+  background: #020504;
+  scrollbar-color: rgba(85, 248, 159, 0.78) #020504;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 0.92rem;
+  height: 0.92rem;
+}
+
+::-webkit-scrollbar-track {
+  background:
+    linear-gradient(180deg, rgba(5, 248, 111, 0.06), transparent 40%),
+    #020504;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 0.22rem solid #020504;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(111, 249, 255, 0.92), rgba(85, 248, 159, 0.86) 46%, rgba(141, 255, 102, 0.82));
+  box-shadow: inset 0 0 0 1px rgba(190, 255, 220, 0.28), 0 0 1rem rgba(85, 248, 159, 0.34);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg, rgba(111, 249, 255, 1), rgba(141, 255, 102, 0.96));
 }
 
 body {
@@ -798,7 +825,17 @@ input {
 
 .hero-visual {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+  align-items: stretch;
+}
+
+.hero-shell {
+  grid-template-columns: 1fr;
+}
+
+.hero-visual .terminal-stack {
+  grid-column: 1 / -1;
 }
 
 .publication-hero {
@@ -1438,6 +1475,24 @@ input {
   .dock-terminal-launcher {
     display: none;
   }
+
+  .hero-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .hero-visual .terminal-stack {
+    grid-column: 1 / -1;
+  }
+
+  .visual-frame-main,
+  .visual-frame-side {
+    min-height: clamp(16rem, 30vw, 22rem);
+  }
 }
 
 @media (max-width: 1720px) and (min-width: 1401px) {
@@ -1502,6 +1557,14 @@ input {
   .dual-grid,
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual .terminal-stack {
+    grid-column: auto;
   }
 
   .engine-grid,

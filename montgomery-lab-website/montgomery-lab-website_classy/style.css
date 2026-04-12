@@ -31,6 +31,31 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: rgba(15, 76, 129, 0.72) #eef2f1;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 0.92rem;
+  height: 0.92rem;
+}
+
+::-webkit-scrollbar-track {
+  background:
+    linear-gradient(180deg, #f7f4ed, #edf4f5 58%, #f5f1eb);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 0.22rem solid #eef2f1;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, var(--blue), var(--teal));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.46);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg, #0b5c9e, #0f766e);
 }
 
 body {

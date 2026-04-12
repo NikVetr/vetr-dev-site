@@ -39,10 +39,6 @@ const renderSetlist = () => {
     return;
   }
 
-  if (!document.getElementById("ticketScrim")) {
-    mount.insertAdjacentHTML("beforebegin", '<div id="ticketScrim" class="ticket-scrim" aria-hidden="true"></div>');
-  }
-
   mount.innerHTML = `
     <a class="poster-brand" href="index.html" aria-label="Montgomery Lab home">
       <img src="assets/logos/lab_logo-metal_background_lab-not-band_monocolor.svg" alt="">

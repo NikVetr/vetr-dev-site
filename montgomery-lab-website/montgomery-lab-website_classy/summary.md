@@ -147,6 +147,7 @@ That material was translated into structured page content rather than embedded v
 - **Images added to otherwise text-heavy side panels:** the publications and contact hero side panels now carry lab imagery so those pages feel less diagrammatic and less dependent on text alone.
 - **Broader interior-page photo usage:** the Resources, Publications, Contact, and Join hero side panels now use distinct images drawn from different parts of `assets/lab_photos`, reducing repetition and making the interior pages feel less templated.
 - **Static Scholar feed instead of fragile live browser scraping:** the publications page now hydrates from a local JSON feed generated from the live Google Scholar profile, which avoids CORS and markup-stability problems while still surfacing the most recent papers and Scholar links.
+- **Theme-aligned scrollbar:** the refined academic concept now styles the main page scrollbar with the site’s blue/teal palette so it does not clash with the otherwise custom visual system.
 
 ## How the parts connect
 
