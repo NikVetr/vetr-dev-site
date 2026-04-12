@@ -16,5 +16,7 @@ This directory contains three independent static Montgomery Lab website concepts
 - The wrapper uses the same shared favicon image as the concept sites.
 - Each standalone concept carries its own themed scrollbar styling inside the iframe so the browser chrome that remains visible in each concept matches that concept’s visual language.
 - Each standalone concept now also has its own local photo-carousel module. The modules use the same optimized lab-photo pool but preserve standalone deployability by avoiding a shared parent-directory runtime dependency.
+- The three concepts now diverge on mobile as well as desktop: Classic Signal uses a polished pill header, Genome OS uses a compact neon command header with a toggle drawer, and Stage Rig uses a short ticket-header with a hidden setlist menu.
+- Carousel image queues now vary by page and carousel position inside each concept so repeated subpage imagery feels less templated even when the same starting asset is reused.
 - The selector labels avoid implementation names like "classy", "biotech", and "metal", while their typography and color treatments signal each design direction.
 - `.gitignore` excludes raw Notion exports, raw lab photo archives, raw headshot folders, and cloned legacy website source from deployment. The published site uses generated web assets, and the Resources page links to the public legacy supplemental page rather than bundling the cloned legacy repo.

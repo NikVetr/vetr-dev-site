@@ -149,6 +149,7 @@ That material was translated into structured page content rather than embedded v
 - **Static Scholar feed instead of fragile live browser scraping:** the publications page now hydrates from a local JSON feed generated from the live Google Scholar profile, which avoids CORS and markup-stability problems while still surfacing the most recent papers and Scholar links.
 - **Theme-aligned scrollbar:** the refined academic concept now styles the main page scrollbar with the site’s blue/teal palette so it does not clash with the otherwise custom visual system.
 - **Editorial photo carousels:** group and lab-scene photos now become hover-revealed carousels with subtle blue/teal controls and dot navigation, using the shared optimized photo pool while leaving headshots and consortium logos unchanged.
+- **Mobile header alignment:** the mobile header now keeps the `ML` mark and lab name left-aligned while pushing the hamburger control to the far right edge of the pill, and the carousel queues vary by page so repeated image sets are less obvious.
 
 ## How the parts connect
 

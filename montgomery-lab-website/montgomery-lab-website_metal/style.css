@@ -138,6 +138,18 @@ input {
   font: inherit;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .skip-link {
   position: fixed;
   top: 1rem;
@@ -434,6 +446,10 @@ h3 {
   color: rgba(0, 0, 0, 0.62);
 }
 
+.setlist-mobile-toggle {
+  display: none;
+}
+
 .amp-rig {
   position: relative;
   z-index: 19;
@@ -497,7 +513,8 @@ h3 {
 
 .deck-display,
 .track-console,
-.pad-grid {
+.pad-grid,
+.bio-knob-panel {
   position: relative;
   z-index: 1;
 }
@@ -621,6 +638,142 @@ h3 {
 
 .transport-button {
   min-height: 2.55rem;
+}
+
+.bio-knob-panel {
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+  align-self: stretch;
+  min-width: 9.25rem;
+  padding: 0.72rem 0.62rem 0.54rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent),
+    radial-gradient(circle at 50% 45%, rgba(255, 77, 24, 0.14), transparent 62%),
+    rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.64rem;
+  box-shadow: inset 0 0 0.8rem rgba(0, 0, 0, 0.6);
+}
+
+.bio-knob-panel .eyebrow {
+  margin: 0;
+  color: var(--steel);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+}
+
+.bio-knob {
+  position: relative;
+  width: min(7.2rem, 100%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 44% 34%, rgba(255, 255, 255, 0.18), transparent 0 16%, rgba(0, 0, 0, 0.2) 17%),
+    conic-gradient(from 220deg, rgba(255, 77, 24, 0.74) 0deg 305deg, rgba(255, 255, 255, 0.1) 305deg 360deg),
+    radial-gradient(circle, #2d2d2f 0 39%, #090909 40% 51%, #010101 52%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 0.35rem 0.75rem rgba(255, 255, 255, 0.08),
+    inset 0 -0.55rem 0.9rem rgba(0, 0, 0, 0.78),
+    0 0.55rem 0.85rem rgba(0, 0, 0, 0.62);
+}
+
+.bio-knob::before {
+  content: "";
+  position: absolute;
+  inset: 0.72rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 42% 32%, rgba(255, 255, 255, 0.28), transparent 0 18%),
+    repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.05) 0deg 5deg, transparent 5deg 15deg),
+    linear-gradient(145deg, #3b3b3d, #090909 62%, #000);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 0 1rem rgba(0, 0, 0, 0.75);
+}
+
+.bio-knob::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.22rem;
+  height: 2.6rem;
+  border-radius: 99px;
+  background: linear-gradient(180deg, #fff5df, var(--ember) 34%, #5e0a02);
+  box-shadow: 0 0 0.65rem rgba(255, 77, 24, 0.7);
+  transform: translate(-50%, -95%) rotate(142deg);
+  transform-origin: 50% 95%;
+  z-index: 3;
+}
+
+.bio-knob-dial {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 5;
+  width: 0.88rem;
+  height: 0.88rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 32%, #fff, #7f7f80 16%, #161616 62%);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 0 0.18rem 0.4rem rgba(0, 0, 0, 0.8);
+  transform: translate(-50%, -50%);
+}
+
+.bio-knob-mark,
+.bio-knob-tape {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 4;
+  color: rgba(255, 247, 229, 0.86);
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0.08rem 0 #000;
+  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3rem) rotate(calc(-1 * var(--knob-angle)));
+}
+
+.bio-knob-mark-0 {
+  --knob-angle: -135deg;
+}
+
+.bio-knob-mark-2 {
+  --knob-angle: -81deg;
+}
+
+.bio-knob-mark-4 {
+  --knob-angle: -27deg;
+}
+
+.bio-knob-mark-6 {
+  --knob-angle: 27deg;
+}
+
+.bio-knob-mark-8 {
+  --knob-angle: 81deg;
+}
+
+.bio-knob-mark-10 {
+  --knob-angle: 135deg;
+}
+
+.bio-knob-tape {
+  --knob-angle: 156deg;
+  padding: 0.1rem 0.36rem 0.05rem;
+  color: #17100c;
+  font-family: "Marker Felt", "Comic Sans MS", cursive;
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+  background:
+    linear-gradient(100deg, rgba(0, 0, 0, 0.1), transparent 32%, rgba(0, 0, 0, 0.08)),
+    #f1ead9;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0.18rem 0.4rem rgba(0, 0, 0, 0.42);
+  text-shadow: none;
+  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3.2rem) rotate(calc(-1 * var(--knob-angle))) rotate(-7deg);
 }
 
 .transport-button.is-primary {
@@ -1033,6 +1186,39 @@ h1 {
     -1px -1px 0 rgba(255, 255, 255, 0.28);
 }
 
+.metal-title-stack {
+  display: grid;
+  justify-items: start;
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+.metal-title-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.metal-title-line-1 {
+  font-size: 0.95em;
+  letter-spacing: -0.04em;
+}
+
+.metal-title-line-2 {
+  color: rgba(255, 247, 229, 0.94);
+  font-size: 0.98em;
+  letter-spacing: -0.047em;
+}
+
+.metal-title-line-3 {
+  color: #ffd9bf;
+  font-size: 1.29em;
+  letter-spacing: 0.055em;
+  text-shadow:
+    2px 2px 0 #000,
+    5px 5px 0 rgba(255, 77, 24, calc(0.58 * var(--gain))),
+    0 0 1.2rem rgba(255, 77, 24, 0.32);
+}
+
 h2 {
   margin: 0;
   font-size: clamp(2.4rem, 5vw, 5rem);
@@ -1160,12 +1346,12 @@ h3 {
 
 .photo-carousel-prev {
   left: 0;
-  background: linear-gradient(90deg, rgba(255, 77, 24, 0.26), transparent);
+  background: linear-gradient(90deg, rgba(255, 77, 24, 0.12), transparent 72%);
 }
 
 .photo-carousel-next {
   right: 0;
-  background: linear-gradient(270deg, rgba(255, 157, 46, 0.26), transparent);
+  background: linear-gradient(270deg, rgba(255, 157, 46, 0.12), transparent 72%);
 }
 
 .photo-carousel-side::before {
@@ -1174,20 +1360,20 @@ h3 {
   top: 50%;
   width: 0;
   height: 0;
-  border-top: 1.18rem solid transparent;
-  border-bottom: 1.18rem solid transparent;
-  filter: drop-shadow(0 0 0.8rem rgba(255, 77, 24, 0.78));
+  border-top: 0.82rem solid transparent;
+  border-bottom: 0.82rem solid transparent;
+  filter: drop-shadow(0 0 0.45rem rgba(255, 77, 24, 0.42));
 }
 
 .photo-carousel-prev::before {
   left: 1rem;
-  border-right: 1.65rem solid rgba(255, 157, 46, 0.84);
+  border-right: 1.1rem solid rgba(255, 157, 46, 0.54);
   transform: translateY(-50%);
 }
 
 .photo-carousel-next::before {
   right: 1rem;
-  border-left: 1.65rem solid rgba(255, 157, 46, 0.84);
+  border-left: 1.1rem solid rgba(255, 157, 46, 0.54);
   transform: translateY(-50%);
 }
 
@@ -1611,6 +1797,12 @@ h3 {
     grid-template-columns: minmax(0, 1fr) minmax(180px, 0.75fr);
   }
 
+  .home-poster,
+  .page-hero {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: auto;
+  }
+
   .stomp-row,
   .track-jump {
     justify-content: flex-start;
@@ -1619,29 +1811,73 @@ h3 {
 
 @media (max-width: 1080px) {
   .setlist-nav {
-    width: min(100% - 1rem, var(--stage-max));
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-    border-radius: 0;
+    position: sticky;
+    top: 0.5rem;
+    width: min(100% - 1rem, 52rem);
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.65rem;
+    align-items: center;
+    padding: 0.48rem 0.7rem;
+    border-radius: 0.7rem;
+    clip-path: polygon(0 0, 100% 2%, 99.4% 100%, 0.7% 98%);
     transform: none;
   }
 
   .poster-brand {
-    justify-items: center;
+    justify-items: start;
     align-items: center;
     transform: none;
   }
 
+  .poster-brand img {
+    width: min(13rem, 46vw);
+    max-height: 3.45rem;
+  }
+
   .setlist-title {
-    transform: none;
+    display: none;
   }
 
   .setlist-links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: none;
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+    max-height: min(64vh, 34rem);
+    overflow: auto;
+    padding: 0.35rem 0.2rem 0.15rem;
+  }
+
+  .setlist-nav.is-open .setlist-links {
+    display: grid;
   }
 
   .setlist-link {
     min-width: 0;
+    padding: 0.58rem 0.45rem;
+  }
+
+  .setlist-mobile-toggle {
+    display: inline-grid;
+    grid-column: 2;
+    grid-row: 1;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    padding: 0;
+    border: 2px solid rgba(0, 0, 0, 0.36);
+    border-radius: 50%;
+    background: rgba(255, 77, 24, 0.16);
+    cursor: pointer;
+  }
+
+  .setlist-mobile-toggle span:not(.sr-only) {
+    display: block;
+    width: 1.28rem;
+    height: 2px;
+    margin: 0.12rem 0;
+    background: #111;
   }
 
   .amp-head {
@@ -1693,6 +1929,15 @@ h3 {
   h1 {
     font-size: clamp(2.85rem, 15vw, 4rem);
     overflow-wrap: anywhere;
+  }
+
+  .metal-title-stack {
+    font-size: clamp(2.2rem, 11vw, 3rem);
+  }
+
+  .metal-title-line-3 {
+    font-size: 1.36em;
+    letter-spacing: 0.065em;
   }
 
   .record-card {

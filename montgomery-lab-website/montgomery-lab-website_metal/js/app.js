@@ -33,6 +33,17 @@ const adjacentNav = (offset) => {
   return metalContent.nav[next];
 };
 
+const renderPageTitle = () =>
+  pageId === "home"
+    ? `
+      <h1 class="metal-title-stack" aria-label="Bioinformatics turned up to eleven">
+        <span class="metal-title-line metal-title-line-1">Bioinformatics</span>
+        <span class="metal-title-line metal-title-line-2">Turned up to</span>
+        <span class="metal-title-line metal-title-line-3">Eleven</span>
+      </h1>
+    `
+    : `<h1>${page.title}</h1>`;
+
 const renderSetlist = () => {
   const mount = document.getElementById("setlistNav");
 
@@ -61,7 +72,22 @@ const renderSetlist = () => {
         )
         .join("")}
     </nav>
+    <button class="setlist-mobile-toggle" type="button" aria-expanded="false" aria-controls="setlistMobileLinks">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="sr-only">Toggle setlist navigation</span>
+    </button>
   `;
+
+  const links = mount.querySelector(".setlist-links");
+  const toggle = mount.querySelector(".setlist-mobile-toggle");
+  links?.setAttribute("id", "setlistMobileLinks");
+  toggle?.addEventListener("click", () => {
+    const next = !mount.classList.contains("is-open");
+    mount.classList.toggle("is-open", next);
+    toggle.setAttribute("aria-expanded", String(next));
+  });
 };
 
 const renderStageFx = () => {
@@ -176,6 +202,19 @@ const renderAmpRig = () => {
         <button id="deckPrev" class="transport-button" type="button" aria-label="Previous track">prev</button>
         <button id="deckPlay" class="transport-button is-primary" type="button" aria-label="Play selected track">play</button>
         <button id="deckNext" class="transport-button" type="button" aria-label="Next track">next</button>
+      </div>
+      <div class="bio-knob-panel" aria-label="Bioinformatics level set past ten">
+        <p class="eyebrow">Bioinformatics</p>
+        <div class="bio-knob" aria-hidden="true">
+          <span class="bio-knob-mark bio-knob-mark-0">0</span>
+          <span class="bio-knob-mark bio-knob-mark-2">2</span>
+          <span class="bio-knob-mark bio-knob-mark-4">4</span>
+          <span class="bio-knob-mark bio-knob-mark-6">6</span>
+          <span class="bio-knob-mark bio-knob-mark-8">8</span>
+          <span class="bio-knob-mark bio-knob-mark-10">10</span>
+          <span class="bio-knob-tape">11</span>
+          <span class="bio-knob-dial"></span>
+        </div>
       </div>
       <div class="amp-knobs" aria-label="Controller faders">
         <label><span>gain</span><input id="gainKnob" type="range" min="0" max="100" value="58"></label>
@@ -313,7 +352,7 @@ const pageHero = () => `
   <section class="page-hero reveal">
     <div class="hero-copy">
       <p class="eyebrow">${page.kicker}</p>
-      <h1>${page.title}</h1>
+      ${renderPageTitle()}
       <p class="lede">${page.lede}</p>
     </div>
     <figure class="hero-card">
@@ -349,7 +388,7 @@ const renderHome = () => `
   <section class="home-poster reveal">
     <div class="poster-copy">
       <p class="eyebrow">${page.kicker}</p>
-      <h1>${page.title}</h1>
+      ${renderPageTitle()}
       <p class="lede">${page.lede}</p>
       <div class="chip-row">${metalContent.hero.chips.map((chip) => `<span>${chip}</span>`).join("")}</div>
     </div>

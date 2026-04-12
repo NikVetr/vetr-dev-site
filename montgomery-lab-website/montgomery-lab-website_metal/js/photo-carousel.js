@@ -16,6 +16,18 @@ const photoPool = [
 ];
 
 const offsets = new Map(photoPool.map((item, index) => [item.key, (index * 3) % photoPool.length]));
+const pageSeeds = {
+  home: 0,
+  research: 2,
+  publications: 4,
+  team: 6,
+  consortia: 8,
+  resources: 10,
+  join: 12,
+  news: 3,
+  contact: 5,
+};
+let carouselSerial = 0;
 
 const keyFromSrc = (src = "") => {
   const match = src.match(/([^/]+\.webp)(?:[?#].*)?$/);
@@ -29,14 +41,15 @@ const pathPrefix = (src = "") => {
 
 const resolveSrc = (src, currentSrc) => `${pathPrefix(currentSrc)}${src.split("assets/generated/")[1]}`;
 
-const makeSet = (key) => {
+const makeSet = (key, salt = 0) => {
   const current = photoPool.find((item) => item.key === key);
 
   if (!current) {
     return [];
   }
 
-  const start = offsets.get(key) || 0;
+  const pageSeed = pageSeeds[document.body.dataset.page || "home"] || 0;
+  const start = ((offsets.get(key) || 0) + pageSeed + salt * 5) % photoPool.length;
   const rotated = Array.from({ length: photoPool.length }, (_, index) => photoPool[(start + index) % photoPool.length]);
   return [current, ...rotated.filter((item) => item.key !== key)].slice(0, 8);
 };
@@ -94,7 +107,8 @@ const updateCarousel = (container, index) => {
 
 const attachCarousel = (img) => {
   const key = keyFromSrc(img.getAttribute("src"));
-  const items = makeSet(key);
+  const items = makeSet(key, carouselSerial);
+  carouselSerial += 1;
 
   if (items.length < 2) {
     return;

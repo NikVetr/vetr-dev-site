@@ -121,6 +121,18 @@ a {
   transform: translate(-50%, 0);
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 button,
 input {
   font: inherit;
@@ -248,6 +260,10 @@ input {
 .dock-nav {
   display: grid;
   gap: 0.58rem;
+}
+
+.dock-mobile-toggle {
+  display: none;
 }
 
 .dock-link {
@@ -1631,45 +1647,108 @@ input {
   .site-shell {
     padding-left: 0;
     padding-right: 0;
-    padding-bottom: 6rem;
+    padding-top: 6rem;
+    padding-bottom: 2.5rem;
   }
 
   .command-dock {
-    top: auto;
+    top: 0.85rem;
     left: 1rem;
     right: 1rem;
-    bottom: 1rem;
+    bottom: auto;
     width: auto;
     height: auto;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 1rem;
-    padding: 0.8rem 1rem;
+    gap: 0.7rem;
+    padding: 0.78rem 0.9rem;
+    border-radius: 999px;
+    overflow: visible;
   }
 
-  .dock-brand,
   .dock-status,
   .floating-terminal,
   .dock-terminal-launcher {
     display: none;
   }
 
-  .dock-nav {
-    width: 100%;
-    display: flex;
-    overflow-x: auto;
-    gap: 0.5rem;
-    padding-bottom: 0.1rem;
-    scrollbar-width: none;
+  .dock-brand {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.72rem;
+    min-width: 0;
   }
 
-  .dock-nav::-webkit-scrollbar {
+  .dock-brand .brand-mark {
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+
+  .brand-copy strong {
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+
+  .brand-copy small {
     display: none;
   }
 
+  .dock-mobile-toggle {
+    display: inline-grid;
+    grid-column: 2;
+    grid-row: 1;
+    place-items: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    padding: 0;
+    border: 1px solid rgba(115, 255, 191, 0.34);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at top left, rgba(141, 255, 102, 0.22), transparent 48%),
+      rgba(8, 24, 18, 0.96);
+    cursor: pointer;
+  }
+
+  .dock-mobile-toggle span:not(.sr-only) {
+    display: block;
+    width: 1.22rem;
+    height: 2px;
+    margin: 0.12rem 0;
+    background: var(--green-bright);
+    box-shadow: 0 0 0.5rem rgba(85, 248, 159, 0.45);
+  }
+
+  .dock-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    display: none;
+    grid-template-columns: 1fr;
+    overflow: auto;
+    max-height: min(66vh, 32rem);
+    gap: 0.5rem;
+    padding: 0.7rem 0.2rem 0.2rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(85, 248, 159, 0.7) rgba(3, 17, 11, 0.72);
+  }
+
+  .command-dock.is-open {
+    border-radius: 24px;
+  }
+
+  .command-dock.is-open .dock-nav {
+    display: grid;
+  }
+
+  .dock-nav::-webkit-scrollbar {
+    width: 0.45rem;
+  }
+
   .dock-link {
-    min-width: 5.8rem;
-    padding: 0.55rem 0.6rem;
+    min-width: 0;
+    padding: 0.72rem 0.78rem;
   }
 
   .page-intro,

@@ -16,6 +16,7 @@ This directory is an independent static website variant for the Montgomery Lab. 
 - The page background uses CSS-only brushed metal, diamond-plate texture, stage-light vignettes, spikes, and flame silhouettes rather than a soft generic glow.
 - On desktop, the amp controls become a fixed left-margin MIDI/amp rack styled like a physical control surface, while medium desktop breakpoints reserve space for the rig so it cannot cover the poster; narrower screens keep the controls inline to avoid covering content.
 - The MIDI rack loads a page-associated lab song, exposes beveled play/pause/prev/next hardware-style buttons, a page-track toggle, a hidden full playlist dropdown, and a smoked-glass waveform display, but never starts playback until the user presses play.
+- The home poster headline is rendered as a custom three-line lockup, `BIOINFORMATICS / TURNED UP TO / ELEVEN`, and the rack includes a dedicated `BIOINFORMATICS` dial with a printed 0-10 scale plus a taped-on `11` marker.
 - Partner-program logos are rendered directly on large transparent full-width card headers with glow instead of white tiles, and the partner grid uses a two-column layout on desktop so wide logos have room.
 - Background rune labels include science terms and consortium names, drifting upward from off-screen bottom to off-screen top so visible loop resets are avoided.
 - Content remains static and local-first so the site can be served with a simple static server while still feeling interactive through JavaScript-rendered panels and effects.
@@ -23,3 +24,5 @@ This directory is an independent static website variant for the Montgomery Lab. 
 - The main page scrollbar uses a dark steel-and-ember treatment so the browser scroll affordance matches the stage-rig concept instead of falling back to a generic grey control.
 - Floating rune text is now scroll-driven rather than autonomously animated, avoiding platform-specific animation inconsistencies while keeping the stage background reactive.
 - Group and lab-scene photos now use metal-styled hover carousels with ember triangle controls, dot navigation, and photo-specific captions. The medium-desktop hero breakpoint was also retuned so the poster copy and image no longer overlap.
+- On mobile, the torn-ticket navigation collapses into a short sticky header with the metal logo on the left and a circular menu toggle on the right, while the full setlist hides inside a drawer.
+- The amp rack now includes a dedicated `BIOINFORMATICS` dial with evenly spaced scale marks, a taped-on `11`, and a home-page headline lockup reading `BIOINFORMATICS / TURNED UP TO / ELEVEN`.

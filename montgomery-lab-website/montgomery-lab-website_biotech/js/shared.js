@@ -227,6 +227,30 @@ const renderDock = (content, page) => {
       `
     )
     .join("");
+
+  const shell = document.querySelector(".command-dock");
+  let toggle = document.querySelector(".dock-mobile-toggle");
+
+  if (shell && !toggle) {
+    toggle = document.createElement("button");
+    toggle.className = "dock-mobile-toggle";
+    toggle.type = "button";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", "dockNav");
+    toggle.innerHTML = `
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="sr-only">Toggle command dock navigation</span>
+    `;
+    shell.append(toggle);
+  }
+
+  toggle?.addEventListener("click", () => {
+    const next = !shell.classList.contains("is-open");
+    shell.classList.toggle("is-open", next);
+    toggle.setAttribute("aria-expanded", String(next));
+  });
 };
 
 const initBrandGlitch = () => {
