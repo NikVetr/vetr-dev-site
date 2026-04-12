@@ -12,6 +12,7 @@ This directory contains three independent static Montgomery Lab website concepts
 ## Design Decisions
 
 - The shell uses an iframe rather than merging the sites into one shared bundle so each concept stays standalone and can still be copied, served, or deployed independently.
-- The switcher is intentionally compact, vertical, and fixed in the top-left corner so reviewers can compare the concepts without changing each variant's internal navigation model.
+- The switcher is intentionally compact, vertical, and fixed in the bottom-right corner so reviewers can compare the concepts without changing each variant's internal navigation model.
+- The wrapper uses the same shared favicon image as the concept sites.
 - The selector labels avoid implementation names like "classy", "biotech", and "metal", while their typography and color treatments signal each design direction.
 - `.gitignore` excludes raw Notion exports, raw lab photo archives, raw headshot folders, and cloned legacy website source from deployment. The published site uses generated web assets, and the Resources page links to the public legacy supplemental page rather than bundling the cloned legacy repo.

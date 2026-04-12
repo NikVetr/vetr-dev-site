@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Montgomery Lab Concept Switcher</title>
+    <link rel="icon" type="image/png" href="montgomery-lab-website_biotech/assets/brand/favicon.png">
     <style>
       :root {
         color-scheme: light dark;
@@ -33,8 +34,8 @@
 
       .concept-switcher {
         position: fixed;
-        top: 0.7rem;
-        left: 0.7rem;
+        right: 0.7rem;
+        bottom: 0.7rem;
         z-index: 10;
         display: grid;
         grid-template-columns: 1fr;
@@ -73,7 +74,7 @@
 
       .concept-switcher button:hover,
       .concept-switcher button:focus-visible {
-        transform: translateX(0.06rem);
+        transform: translateX(-0.06rem);
       }
 
       .concept-switcher button:hover::after,
