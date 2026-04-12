@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact | Montgomery Lab</title>
+    <meta name="description" content="Contact details and official links for the Montgomery Lab.">
+    <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-page="contact">
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <div class="page-glow page-glow-one" aria-hidden="true"></div>
+    <div class="page-glow page-glow-two" aria-hidden="true"></div>
+    <div class="page-grid" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header-shell">
+        <a class="brand" href="index.html" aria-label="Montgomery Lab home">
+          <span class="brand-mark">ML</span>
+          <span class="brand-copy"><strong>Montgomery Lab</strong><small>Stanford University</small></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <ul id="desktopNav"></ul>
+          <div id="consortiaDropdown" class="dropdown-panel" aria-label="Consortia menu"></div>
+        </nav>
+        <a class="header-cta" href="join.html">How to Join</a>
+        <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobilePanel">
+          <span></span><span></span><span></span><span class="sr-only">Toggle navigation</span>
+        </button>
+      </div>
+      <div id="mobilePanel" class="mobile-panel">
+        <nav class="mobile-nav" aria-label="Mobile">
+          <ul id="mobileNav"></ul>
+          <div id="mobileConsortiaDropdown" class="mobile-dropdown-panel"></div>
+          <a class="mobile-cta" href="join.html">How to Join</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="page-hero section">
+        <div class="shell page-hero-shell">
+          <div class="reveal is-visible">
+            <p class="hero-kicker">Contact</p>
+            <h1>Direct contact, mailing details, and official links.</h1>
+            <p class="page-lede">
+              Use these channels for research inquiries, collaboration questions, and general contact with the lab.
+            </p>
+          </div>
+          <aside class="hero-side-card reveal is-visible">
+            <img src="assets/generated/page-hero/contact-beach-group.webp" alt="Montgomery Lab members standing together on a beach">
+            <p class="eyebrow">Get in touch</p>
+            <ul>
+              <li>General lab and collaboration inquiries</li>
+              <li>Official Stanford pages, PI profile, and scholarship links</li>
+              <li>Mailing details for physical correspondence and administrative routing</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div class="info-grid">
+            <article class="info-panel reveal">
+              <p class="eyebrow">Primary contact</p>
+              <h3>Email</h3>
+              <p><a id="contactEmail" href="#" class="text-link"></a></p>
+              <h3>Phone</h3>
+              <p><a id="contactPhone" href="#" class="text-link"></a></p>
+              <h3>Location</h3>
+              <p id="contactLocation"></p>
+            </article>
+            <article class="info-panel reveal">
+              <p class="eyebrow">Mailing</p>
+              <h3>Address</h3>
+              <p id="contactMailingAddress"></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-contrast">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Official links</p>
+            <h2>Primary external references for the lab.</h2>
+          </div>
+          <div id="contactOfficialLinks" class="link-cloud reveal"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-shell">
+        <div><p class="eyebrow">Montgomery Lab</p><p class="footer-summary">Reach the lab through Stanford Medicine contact channels and mailing details.</p></div>
+        <div id="footerLinks" class="footer-links"></div>
+      </div>
+      <div class="shell footer-bottom"><p>&copy; <span id="footerYear"></span> Montgomery Lab. Stanford University.</p><a href="index.html">Home</a></div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

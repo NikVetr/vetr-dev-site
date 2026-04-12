@@ -1,0 +1,21 @@
+name: Jane Doe
+slug: jane-doe
+role: Graduate Student
+category: current
+pronouns: she/her
+email: jane@example.edu
+image: /assets/people/jane-doe.jpg
+imageAlt: Portrait of Jane Doe
+shortBlurb: Studies rare variant effects on gene regulation and disease.
+longBio: >
+  Placeholder biography. Replace with a real short professional bio.
+interests:
+  - rare disease
+  - transcriptomics
+  - statistical genetics
+links:
+  scholar: ""
+  github: ""
+  linkedin: ""
+active: true
+sortOrder: 100

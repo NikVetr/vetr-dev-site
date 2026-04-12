@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Montgomery Lab Concept Switcher</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --panel: rgba(255, 255, 255, 0.78);
+        --ink: #111827;
+        --muted: #667085;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at 8% 8%, rgba(255, 255, 255, 0.9), transparent 12rem),
+          linear-gradient(135deg, #eef3f1, #141414 48%, #030805);
+      }
+
+      .concept-switcher {
+        position: fixed;
+        top: 0.85rem;
+        left: 0.85rem;
+        z-index: 10;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.42rem;
+        width: min(31rem, calc(100vw - 1.7rem));
+        padding: 0.48rem;
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        border-radius: 999px;
+        background: var(--panel);
+        box-shadow: 0 1.4rem 4rem rgba(0, 0, 0, 0.24);
+        backdrop-filter: blur(22px) saturate(1.15);
+      }
+
+      .concept-switcher button {
+        min-height: 2.85rem;
+        border: 0;
+        border-radius: 999px;
+        cursor: pointer;
+        color: var(--muted);
+        background: transparent;
+        font: 800 0.78rem/1.1 ui-sans-serif, system-ui, sans-serif;
+        letter-spacing: 0.02em;
+        transition: transform 160ms ease, color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+      }
+
+      .concept-switcher button:hover,
+      .concept-switcher button:focus-visible {
+        transform: translateY(-0.05rem);
+      }
+
+      .concept-switcher button.is-active {
+        color: #08111e;
+      }
+
+      .concept-switcher .signal.is-active {
+        background: linear-gradient(135deg, #ffffff, #d7e7e8);
+        box-shadow: inset 0 0 0 1px rgba(7, 85, 110, 0.16), 0 0.8rem 1.7rem rgba(9, 45, 62, 0.16);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 0.92rem;
+      }
+
+      .concept-switcher .genome {
+        font-family: "Courier New", monospace;
+        text-transform: uppercase;
+      }
+
+      .concept-switcher .genome.is-active {
+        color: #b8ffb5;
+        background: linear-gradient(135deg, #04120b, #0a2a14);
+        box-shadow: inset 0 0 0 1px rgba(105, 255, 95, 0.45), 0 0 1.2rem rgba(105, 255, 95, 0.28);
+      }
+
+      .concept-switcher .stage {
+        font-family: Impact, "Arial Black", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+      }
+
+      .concept-switcher .stage.is-active {
+        color: #fff1df;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 32%),
+          linear-gradient(135deg, #161616, #6f130b 62%, #ff4d18);
+        box-shadow: inset 0 0 0 1px rgba(255, 239, 220, 0.22), 0 0.9rem 2rem rgba(255, 77, 24, 0.22);
+      }
+
+      .concept-frame {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        border: 0;
+        background: #fff;
+      }
+
+      @media (max-width: 640px) {
+        .concept-switcher {
+          grid-template-columns: 1fr;
+          width: min(14rem, calc(100vw - 1.5rem));
+          border-radius: 1.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="concept-switcher" role="group" aria-label="Montgomery Lab visual concept selector">
+      <button class="signal is-active" type="button" data-concept="signal" data-src="montgomery-lab-website_classy/index.html">Classic Signal</button>
+      <button class="genome" type="button" data-concept="genome" data-src="montgomery-lab-website_biotech/index.html">Genome OS</button>
+      <button class="stage" type="button" data-concept="stage" data-src="montgomery-lab-website_metal/index.html">Stage Rig</button>
+    </div>
+    <iframe id="conceptFrame" class="concept-frame" title="Montgomery Lab website concept preview" src="montgomery-lab-website_classy/index.html"></iframe>
+    <script>
+      const buttons = Array.from(document.querySelectorAll("[data-concept]"));
+      const frame = document.getElementById("conceptFrame");
+      const concepts = new Map(buttons.map((button) => [button.dataset.concept, button]));
+
+      const setConcept = (concept, shouldUpdateUrl = true) => {
+        const selected = concepts.get(concept) || concepts.get("signal");
+
+        buttons.forEach((button) => button.classList.toggle("is-active", button === selected));
+        frame.src = selected.dataset.src;
+
+        if (shouldUpdateUrl) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("concept", selected.dataset.concept);
+          window.history.replaceState({}, "", url);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => setConcept(button.dataset.concept));
+      });
+
+      setConcept(new URLSearchParams(window.location.search).get("concept") || "signal", false);
+    </script>
+  </body>
+</html>

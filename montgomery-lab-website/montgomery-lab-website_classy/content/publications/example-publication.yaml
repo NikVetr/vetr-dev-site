@@ -1,0 +1,20 @@
+title: Example landmark paper title
+year: 2025
+authors:
+  - Doe J
+  - Smith A
+  - Montgomery SB
+venue: Nature Genetics
+doi: ""
+pubmed: ""
+preprint: ""
+url: ""
+abstractShort: >
+  One- to two-sentence plain-English summary.
+tags:
+  - rare disease
+  - methods
+consortium: GREGoR
+featured: true
+codeLink: ""
+dataLink: ""

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>News | Montgomery Lab</title>
+    <meta name="description" content="Selected milestones, collaborations, and archived highlights from the Montgomery Lab.">
+    <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-page="news">
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <div class="page-glow page-glow-one" aria-hidden="true"></div>
+    <div class="page-glow page-glow-two" aria-hidden="true"></div>
+    <div class="page-grid" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header-shell">
+        <a class="brand" href="index.html" aria-label="Montgomery Lab home">
+          <span class="brand-mark">ML</span>
+          <span class="brand-copy"><strong>Montgomery Lab</strong><small>Stanford University</small></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <ul id="desktopNav"></ul>
+          <div id="consortiaDropdown" class="dropdown-panel" aria-label="Consortia menu"></div>
+        </nav>
+        <a class="header-cta" href="join.html">How to Join</a>
+        <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobilePanel">
+          <span></span><span></span><span></span><span class="sr-only">Toggle navigation</span>
+        </button>
+      </div>
+      <div id="mobilePanel" class="mobile-panel">
+        <nav class="mobile-nav" aria-label="Mobile">
+          <ul id="mobileNav"></ul>
+          <div id="mobileConsortiaDropdown" class="mobile-dropdown-panel"></div>
+          <a class="mobile-cta" href="join.html">How to Join</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="page-hero section">
+        <div class="shell page-hero-shell">
+          <div class="reveal is-visible">
+            <p class="hero-kicker">News / Stories</p>
+            <h1>Stories from the lab's science, collaboration, and community.</h1>
+            <p class="page-lede">
+              Recent public milestones sit alongside older landmark moments, giving a broader view of the lab's scientific trajectory.
+            </p>
+          </div>
+          <aside class="page-hero-card reveal is-visible">
+            <img src="assets/generated/home/lab-hike.webp" alt="Montgomery Lab members hiking">
+            <p class="eyebrow">Highlights</p>
+            <ul class="simple-list">
+              <li>Archived milestones from GTEx, MoTrPAC, awards, and trainee defenses</li>
+              <li>Recent public visibility through Stanford coverage and consortium science</li>
+              <li>Community moments remain part of the story, but the science stays central</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div id="newsStoryGrid" class="story-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-shell">
+        <div><p class="eyebrow">Montgomery Lab</p><p class="footer-summary">Stories from the lab's science, people, and working culture.</p></div>
+        <div id="footerLinks" class="footer-links"></div>
+      </div>
+      <div class="shell footer-bottom"><p>&copy; <span id="footerYear"></span> Montgomery Lab. Stanford University.</p><a href="contact.html">Contact</a></div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

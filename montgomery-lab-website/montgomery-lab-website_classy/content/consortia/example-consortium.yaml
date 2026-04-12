@@ -1,0 +1,13 @@
+name: GTEx
+slug: gtex
+shortName: GTEx
+summary: >
+  Consortium studying genetic effects on gene expression across human tissues.
+labRole: >
+  Publicly described as a major initiative led or co-led by the lab in key analyses.
+logo: /assets/logos/gtex.svg
+website: https://gtexportal.org/
+selectedPubs: []
+navOrder: 1
+themeColor: indigo
+status: active

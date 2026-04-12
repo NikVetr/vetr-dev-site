@@ -1,0 +1,20 @@
+# Keep the public deployment small. These directories were source material used
+# to build the static pages, not assets the live pages should publish wholesale.
+montgomery-lab-website_classy/assets/lab_photos/
+montgomery-lab-website_classy/assets/notion/
+montgomery-lab-website_classy/assets/headshots/
+montgomery-lab-website_classy/assets/representative/
+montgomery-lab-website_classy/assets/consortium_logos/original/
+montgomery-lab-website_classy/assets/consortium_logos/PS/
+montgomery-lab-website_classy/assets/consortium_logos/upscale/
+montgomery-lab-website_biotech/assets/consortium_logos/original/
+montgomery-lab-website_biotech/assets/consortium_logos/PS/
+montgomery-lab-website_biotech/assets/consortium_logos/upscale/
+montgomery-lab-website_metal/assets/consortium_logos/original/
+montgomery-lab-website_metal/assets/consortium_logos/PS/
+montgomery-lab-website_metal/assets/consortium_logos/upscale/
+
+montgomery-lab-website_classy/assets/legacy_website/**
+
+montgomery-lab-website_classy/.agent/
+montgomery-lab-website_classy/.vscode/

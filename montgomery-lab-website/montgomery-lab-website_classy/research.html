@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Research | Montgomery Lab</title>
+    <meta name="description" content="Research programs and active project directions in the Montgomery Lab.">
+    <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-page="research">
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <div class="page-glow page-glow-one" aria-hidden="true"></div>
+    <div class="page-glow page-glow-two" aria-hidden="true"></div>
+    <div class="page-grid" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header-shell">
+        <a class="brand" href="index.html" aria-label="Montgomery Lab home">
+          <span class="brand-mark">ML</span>
+          <span class="brand-copy"><strong>Montgomery Lab</strong><small>Stanford University</small></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <ul id="desktopNav"></ul>
+          <div id="consortiaDropdown" class="dropdown-panel" aria-label="Consortia menu"></div>
+        </nav>
+        <a class="header-cta" href="join.html">How to Join</a>
+        <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobilePanel">
+          <span></span><span></span><span></span><span class="sr-only">Toggle navigation</span>
+        </button>
+      </div>
+      <div id="mobilePanel" class="mobile-panel">
+        <nav class="mobile-nav" aria-label="Mobile">
+          <ul id="mobileNav"></ul>
+          <div id="mobileConsortiaDropdown" class="mobile-dropdown-panel"></div>
+          <a class="mobile-cta" href="join.html">How to Join</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="page-hero section">
+        <div class="shell page-hero-shell">
+          <div class="reveal is-visible">
+            <p class="hero-kicker">Research</p>
+            <h1>Research programs built around mechanism, scale, and disease relevance.</h1>
+            <p class="page-lede">
+              The lab works across gene regulation, rare disease, ancestry-aware genomics, multi-omics, structural variation, and
+              environment-responsive biology.
+            </p>
+            <div class="page-actions">
+              <a class="button button-primary" href="publications.html">Selected Publications</a>
+              <a class="button button-secondary" href="consortia.html">Consortia</a>
+            </div>
+          </div>
+          <aside class="page-hero-card reveal is-visible">
+            <img src="assets/generated/home/lab-room.webp" alt="Montgomery Lab discussion in a conference room">
+            <p class="eyebrow">Active directions</p>
+            <ul class="simple-list">
+              <li>Mechanistic regulatory genomics across expression, splicing, and structural variation</li>
+              <li>Rare disease and molecular outlier strategies with diagnostic consequence</li>
+              <li>Consortium-scale programs spanning exercise biology, developmental regulation, and population genomics</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Scientific pillars</p>
+            <h2>Core research themes in the Montgomery Lab.</h2>
+          </div>
+          <div id="researchPillars" class="research-grid"></div>
+        </div>
+      </section>
+
+      <section class="section section-contrast">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Active project directions</p>
+            <h2>Representative directions across current collaborative and translational work.</h2>
+          </div>
+          <div id="activeProjects" class="list-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-shell">
+        <div><p class="eyebrow">Montgomery Lab</p><p class="footer-summary">Genetic variation, molecular phenotypes, and disease-focused genomics.</p></div>
+        <div id="footerLinks" class="footer-links"></div>
+      </div>
+      <div class="shell footer-bottom"><p>&copy; <span id="footerYear"></span> Montgomery Lab. Stanford University.</p><a href="contact.html">Contact</a></div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

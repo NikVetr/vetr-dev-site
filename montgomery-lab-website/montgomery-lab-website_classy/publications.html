@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Publications | Montgomery Lab</title>
+    <meta name="description" content="Selected publication markers and reading themes for the Montgomery Lab.">
+    <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-page="publications">
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <div class="page-glow page-glow-one" aria-hidden="true"></div>
+    <div class="page-glow page-glow-two" aria-hidden="true"></div>
+    <div class="page-grid" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header-shell">
+        <a class="brand" href="index.html" aria-label="Montgomery Lab home">
+          <span class="brand-mark">ML</span>
+          <span class="brand-copy"><strong>Montgomery Lab</strong><small>Stanford University</small></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <ul id="desktopNav"></ul>
+          <div id="consortiaDropdown" class="dropdown-panel" aria-label="Consortia menu"></div>
+        </nav>
+        <a class="header-cta" href="join.html">How to Join</a>
+        <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobilePanel">
+          <span></span><span></span><span></span><span class="sr-only">Toggle navigation</span>
+        </button>
+      </div>
+      <div id="mobilePanel" class="mobile-panel">
+        <nav class="mobile-nav" aria-label="Mobile">
+          <ul id="mobileNav"></ul>
+          <div id="mobileConsortiaDropdown" class="mobile-dropdown-panel"></div>
+          <a class="mobile-cta" href="join.html">How to Join</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="page-hero section">
+        <div class="shell page-hero-shell">
+          <div class="reveal is-visible">
+            <p class="hero-kicker">Publications</p>
+            <h1>Selected milestones and reading paths across the lab's scientific arc.</h1>
+            <p class="page-lede">
+              These papers provide a compact way into the lab's work across transcriptome genetics, rare disease,
+              regulatory variation, and consortium-scale molecular biology.
+            </p>
+          </div>
+          <aside class="hero-side-card reveal is-visible">
+            <img src="assets/generated/page-hero/publications-ashg.webp" alt="Large scientific meeting audience during a genomics conference session">
+            <p class="eyebrow">Focus areas</p>
+            <ul>
+              <li>Transcriptome genetics and gene regulation</li>
+              <li>Rare-variant interpretation and molecular outliers</li>
+              <li>Exercise biology, multi-omics, and functional genomics</li>
+              <li>Shared reference resources that shaped how the field studies regulation</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Recent from Scholar</p>
+            <h2>Most recent papers from the live Google Scholar feed.</h2>
+            <p id="publicationScholarMeta" class="page-lede"></p>
+          </div>
+          <div id="publicationScholarGrid" class="publication-grid"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Featured markers</p>
+            <h2>Public-facing milestones across the lab's timeline.</h2>
+          </div>
+          <div id="publicationFeatureGrid" class="publication-grid"></div>
+        </div>
+      </section>
+
+      <section class="section section-contrast">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Reading themes</p>
+            <h2>How a newcomer could orient themselves quickly.</h2>
+          </div>
+          <div class="info-panel reveal">
+            <ul id="publicationThemes" class="simple-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-shell">
+        <div><p class="eyebrow">Montgomery Lab</p><p class="footer-summary">Selected milestones and reading themes across the lab's research trajectory.</p></div>
+        <div id="footerLinks" class="footer-links"></div>
+      </div>
+      <div class="shell footer-bottom"><p>&copy; <span id="footerYear"></span> Montgomery Lab. Stanford University.</p><a href="contact.html">Contact</a></div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

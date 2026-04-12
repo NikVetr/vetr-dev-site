@@ -1,0 +1,731 @@
+const currentRoster = [
+  {
+    name: "Laurens van de Wiel",
+    role: "Postdoctoral researcher",
+    focus: "Statistical genetics, molecular phenotypes, and population-scale interpretation.",
+    headshot: "assets/generated/headshots/laurens-van-de-wiel.webp",
+  },
+  {
+    name: "Ronit Jain",
+    role: "Research member",
+    focus: "Functional genomics and collaborative project execution across the active portfolio.",
+    email: "ronitj@stanford.edu",
+  },
+  {
+    name: "Maggie Maurer",
+    role: "Research member",
+    focus: "Experimental and computational support across shared genomics programs.",
+  },
+  {
+    name: "Kate Lawrence",
+    role: "Graduate student",
+    focus: "Genetics training at the interface of molecular mechanism and disease biology.",
+    headshot: "assets/generated/headshots/kate-lawrence.webp",
+  },
+  {
+    name: "Julie Lake",
+    role: "Research member",
+    focus: "Project execution in a fast-moving mixed wet-lab and computational environment.",
+  },
+  {
+    name: "Daniel Nachun",
+    role: "Instructor",
+    focus: "Human genetics, transcriptomic interpretation, and rare-disease-oriented analysis.",
+    headshot: "assets/generated/headshots/daniel-nachun.webp",
+  },
+  {
+    name: "Evin Padhi",
+    role: "Research member",
+    focus: "Molecular phenotyping and day-to-day collaborative scientific delivery.",
+  },
+  {
+    name: "Paul Petrowski",
+    role: "Research member",
+    focus: "Applied analysis, infrastructure, and scientific coordination across lab programs.",
+  },
+  {
+    name: "Yilin Xie",
+    role: "Research member",
+    focus: "Data-driven interpretation across the lab's regulatory and translational work.",
+  },
+  {
+    name: "Nikolai Gates Vetr",
+    role: "Postdoctoral researcher",
+    focus: "Cross-population transcriptomics, computational genomics, and scientific software.",
+    headshot: "assets/generated/headshots/nik-vetr.webp",
+  },
+  {
+    name: "Esther Robb",
+    role: "Research member",
+    focus: "Collaborative execution at the boundary of experimentation and genomic analysis.",
+  },
+  {
+    name: "Victoria",
+    role: "Research member",
+    focus: "Current lab member contributing to ongoing genomics and translational projects.",
+  },
+  {
+    name: "Jordan",
+    role: "Research member",
+    focus: "Current lab member working across shared research operations and scientific delivery.",
+  },
+  {
+    name: "Sherry Yang",
+    role: "Graduate student",
+    focus: "Training in computational and molecular genomics with emphasis on mechanism.",
+    headshot: "assets/generated/headshots/sherry-yang.webp",
+  },
+  {
+    name: "Sohaib Hassan",
+    role: "Research member",
+    focus: "Current lab member contributing to active collaborative genomics programs.",
+  },
+  {
+    name: "Josh",
+    role: "Research member",
+    focus: "Current lab member supporting ongoing research across the lab's scientific stack.",
+  },
+  {
+    name: "Yassine",
+    role: "Research member",
+    focus: "Current lab member working inside shared computational and biological projects.",
+  },
+  {
+    name: "Iman Jaljuli",
+    role: "Research member",
+    focus: "Project-focused contribution across the lab's active research network.",
+  },
+  {
+    name: "Haim Krupkin",
+    role: "Research member",
+    focus: "Ongoing work at the intersection of genetics, interpretation, and experimental execution.",
+  },
+  {
+    name: "Ziming Weng",
+    role: "Research member",
+    focus: "Current lab member contributing to data-rich studies of human genomic function.",
+  },
+  {
+    name: "Kevin Smith",
+    role: "Senior scientist",
+    focus: "Senior scientific leadership across collaborative programs and operational scale-up.",
+    headshot: "assets/generated/headshots/kevin-smith.webp",
+  },
+  {
+    name: "Char Armitage",
+    role: "Administrative assistant",
+    focus: "Administrative operations, scheduling, logistics, and coordination for the lab.",
+    email: "carmitag@stanford.edu",
+  },
+];
+
+const alumniRoster = [
+  "Mike Gloudemans",
+  "Nicole Gay",
+  "Nicole Ersaro",
+  "Joe Davis",
+  "Laure Fresard",
+  "Emily Tsang",
+  "Olivia de Goede",
+  "Bruna Balliu",
+  "Olga Sazonova",
+  "Tracy Nance",
+  "Nathan Abell",
+  "Abhiram Rao",
+  "Craig Smail",
+  "Bosh Liu",
+  "Kim Kukurba",
+  "Xin Li",
+  "Konrad Karczewski",
+  "Matthew Durrant",
+  "Zach Zappala",
+  "Nikki Teran",
+  "Salil Deshpande",
+  "Marie Huynh",
+  "Tiffany Eulalio",
+  "Alexander Ioannadis",
+  "Jarod Rutledge",
+  "Rachel Ungar",
+  "Ying Sun",
+  "Qianhui Zheng",
+  "Marianne DeGorter",
+  "Pagé Goddard",
+  "Emily Greenwald",
+  "Tanner Jensen",
+  "Andrew Marderstein",
+  "Kameron Rodrigues",
+  "Alex Miller",
+  "Jeren Olsen",
+  "Jonathan Nguyen",
+  "Aditi Goyal",
+];
+
+export const biotechContent = {
+  meta: {
+    title: "Montgomery Lab OS",
+    description:
+      "Montgomery Lab OS is a dark, high-energy public website for the Montgomery Lab at Stanford, highlighting functional genomics, rare disease, and platform-scale biology.",
+  },
+  pages: {
+    home: {
+      label: "Boot",
+      href: "index.html",
+      eyebrow: "Montgomery Lab",
+      title: "Montgomery Lab OS",
+      lede: "A genomic discovery platform built to move from variant signal to molecular mechanism, disease interpretation, and deployable public resources.",
+      panelLabel: "Overview",
+      panelTitle: "Current scientific profile.",
+      panelItems: [
+        "Functional genomics and gene regulation",
+        "Rare-disease mechanism and transcriptomic diagnosis",
+        "National-scale consortia and public data products",
+      ],
+    },
+    research: {
+      label: "Signals",
+      href: "research.html",
+      eyebrow: "Signal stack",
+      title: "Research engines",
+      lede: "The lab links regulatory variation, molecular phenotypes, and disease-facing interpretation through experiments, computation, and collaborative scale.",
+      panelLabel: "Research logic",
+      panelTitle: "How the lab connects data to mechanism.",
+      panelItems: [
+        "Start from human variation and molecular readouts",
+        "Map consequence across expression, splicing, and function",
+        "Push mechanism toward diagnosis and translation",
+      ],
+    },
+    publications: {
+      label: "Papers",
+      href: "publications.html",
+      eyebrow: "Output stream",
+      title: "Publications and milestone papers",
+      lede: "Selected papers show how the lab moves from foundational transcriptome genetics to clinically oriented interpretation and consortium-scale atlases.",
+      panelLabel: "Reading frame",
+      panelTitle: "Core publication themes.",
+      panelItems: [
+        "Transcriptome genetics and cross-tissue regulation",
+        "Rare-variant molecular outlier interpretation",
+        "Multi-omic atlases and collaborative platform biology",
+      ],
+    },
+    team: {
+      label: "Network",
+      href: "team.html",
+      eyebrow: "Team",
+      title: "Team and network",
+      lede: "The lab operates through a mixed team of faculty, instructors, staff scientists, trainees, research members, and administrative support connected through shared scientific execution.",
+      panelLabel: "Team state",
+      panelTitle: "How the lab works together.",
+      panelItems: [
+        "In-person discussion and rapid iteration",
+        "Mixed wet-lab and computational collaboration",
+        "A current roster tied to long-lived alumni networks",
+      ],
+    },
+    consortia: {
+      label: "Partners",
+      href: "consortia.html",
+      eyebrow: "Partner network",
+      title: "Consortia and programs",
+      lede: "The Montgomery Lab contributes to national and cross-institutional efforts where data generation, interpretation standards, and public resources all matter.",
+      panelLabel: "Scale layer",
+      panelTitle: "Where collaboration changes the science.",
+      panelItems: [
+        "Shared reference resources at national scale",
+        "Large-cohort biology paired with public portals",
+        "Mechanism-first collaboration across institutions",
+      ],
+    },
+    resources: {
+      label: "Toolchain",
+      href: "resources.html",
+      eyebrow: "Toolchain",
+      title: "Software and infrastructure",
+      lede: "The lab builds software, workflows, portal connections, and computational habits that make high-dimensional genomics work practical.",
+      panelLabel: "Resources",
+      panelTitle: "What the lab makes public.",
+      panelItems: [
+        "Public analysis tools and project resources",
+        "Workflow guides for shared compute environments",
+        "Portals and data hubs used across live programs",
+      ],
+    },
+    join: {
+      label: "Join",
+      href: "join.html",
+      eyebrow: "Recruitment protocol",
+      title: "How to join",
+      lede: "The lab is built for people who want to operate across computation, biology, infrastructure, and mechanism rather than staying inside a single silo.",
+      panelLabel: "Entry points",
+      panelTitle: "How to make first contact.",
+      panelItems: [
+        "Postdocs: cover letter, CV, references",
+        "Stanford PhD students: short note and CV",
+        "Stanford undergraduates: interests and unofficial transcript",
+      ],
+    },
+    news: {
+      label: "News",
+      href: "news.html",
+      eyebrow: "Milestones",
+      title: "Milestones and timeline",
+      lede: "The lab's public arc includes foundational transcriptome genetics, GTEx-era regulatory biology, and more recent high-profile consortium work in exercise and disease.",
+      panelLabel: "Timeline",
+      panelTitle: "Selected public milestones.",
+      panelItems: [
+        "Foundational transcriptome genetics",
+        "GTEx and cross-tissue regulatory interpretation",
+        "MoTrPAC and newer collaborative visibility",
+      ],
+    },
+    contact: {
+      label: "Transmit",
+      href: "contact.html",
+      eyebrow: "Transmission",
+      title: "Contact and channels",
+      lede: "Use this page for direct contact, official Montgomery Lab links, and the practical routes into the lab's public presence.",
+      panelLabel: "Contact",
+      panelTitle: "Primary routes into the lab.",
+      panelItems: [
+        "Direct faculty and administrative contact",
+        "Official Stanford pages and public profiles",
+        "Location and mailing details for correspondence",
+      ],
+    },
+  },
+  dock: [
+    { id: "home", label: "01_boot.sh", href: "index.html" },
+    { id: "research", label: "02_signals.sh", href: "research.html" },
+    { id: "publications", label: "03_papers.sh", href: "publications.html" },
+    { id: "team", label: "04_network.sh", href: "team.html" },
+    { id: "consortia", label: "05_partners.sh", href: "consortia.html" },
+    { id: "resources", label: "06_resources.sh", href: "resources.html" },
+    { id: "join", label: "07_join.sh", href: "join.html" },
+    { id: "news", label: "08_news.sh", href: "news.html" },
+    { id: "contact", label: "09_transmit.sh", href: "contact.html" },
+  ],
+  keywords: [
+    "eqtl.scan()",
+    "splice.outlier",
+    "rare_variant.decode",
+    "multiomic_layer",
+    "gtex.signal",
+    "motrpac.matrix",
+    "diagnostic.route",
+    "expression.engine",
+    "regulatory.graph",
+    "phenotype.stack",
+    "cohort.scale",
+    "bayes.inference",
+    "atlas.runtime",
+    "molecular.readout",
+  ],
+  hero: {
+    status: "SYSTEM ONLINE / STANFORD MEDICINE / MONTGOMERY LAB",
+    title: "Decode molecular consequence from genetic variation.",
+    lede:
+      "The Montgomery Lab studies how human genetic variation shapes gene regulation, molecular phenotypes, and disease. Its work spans functional genomics, rare-disease interpretation, computational biology, and large collaborative programs that produce methods, atlases, and public resources.",
+    primaryCta: { label: "Enter research stack", href: "research.html" },
+    secondaryCta: { label: "Inspect team network", href: "team.html" },
+    metrics: [
+      { value: "22", label: "current members" },
+      { value: "10", label: "major consortia" },
+      { value: "11+", label: "public tools" },
+      { value: "4", label: "core research engines" },
+    ],
+    chips: ["functional genomics", "rare disease", "molecular phenotypes", "platform-scale biology"],
+    imageA: {
+      src: "assets/generated/home/lab-room.webp",
+      alt: "Montgomery Lab members in a conference room during a working session",
+      caption: "In-person scientific discussion with active whiteboards, working sessions, and project troubleshooting.",
+    },
+    imageB: {
+      src: "assets/generated/home/team-group.webp",
+      alt: "Montgomery Lab group portrait",
+      caption: "A mixed experimental, computational, and translational research group.",
+    },
+  },
+  research: {
+    intro:
+      "The lab's scientific stack is organized around signal extraction, mechanistic interpretation, diagnostic consequence, and data systems that scale well beyond a single project.",
+    cards: [
+      {
+        eyebrow: "Regulatory engine",
+        title: "Trace how variation rewires expression, splicing, and regulatory circuitry.",
+        text:
+          "The lab treats regulation as a causal layer, not just a descriptive readout. Expression, splicing, structural variation, and other molecular phenotypes are used to explain why genomes behave differently across people, tissues, and disease contexts.",
+        bullets: ["expression and splicing QTLs", "structural variation", "understudied RNA biology"],
+      },
+      {
+        eyebrow: "Rare disease engine",
+        title: "Move from unsolved cases to molecular mechanism.",
+        text:
+          "Rare-disease work combines outlier detection, transcriptomic interpretation, and multi-omic evidence so that variants can be explained at the level of biological mechanism rather than annotation alone.",
+        bullets: ["GREGoR and UDN-facing analyses", "diagnostic consequence", "multi-omic interpretation"],
+      },
+      {
+        eyebrow: "Atlas engine",
+        title: "Operate inside programs that only make sense at national scale.",
+        text:
+          "The lab contributes to collaborative efforts where transcriptomic, proteomic, epigenomic, and phenotypic measurements can be interpreted at scale across tissues, cohorts, and study designs.",
+        bullets: ["GTEx and dGTEx", "MoTrPAC", "TOPMed, IGVF, SMaHT, All of Us, ENCODE4"],
+      },
+      {
+        eyebrow: "Tooling engine",
+        title: "Leave behind methods, browsers, and computational infrastructure.",
+        text:
+          "The output is not only papers. The lab builds reusable tools, data resources, and statistical methods that other groups can deploy in practical analysis workflows.",
+        bullets: ["EAGLE", "EigenMT", "ANT-seq", "SplicePlot", "Path-scan"],
+      },
+    ],
+    pipeline: [
+      {
+        label: "Input",
+        title: "Variant and cohort data",
+        text: "Human genetic variation, tissue context, and cohort-scale molecular data enter the system together.",
+      },
+      {
+        label: "Readout",
+        title: "Expression and splicing consequence",
+        text: "The lab measures how variants shape transcript abundance, splicing, and other molecular outputs.",
+      },
+      {
+        label: "Mechanism",
+        title: "Biological interpretation",
+        text: "Signal is refined into regulatory mechanism, pathway-level consequence, and functional hypothesis.",
+      },
+      {
+        label: "Translation",
+        title: "Diagnosis, tools, and public resources",
+        text: "The result becomes disease interpretation, reusable software, or a broader reference resource.",
+      },
+    ],
+    projectTrack: [
+      { title: "MoTrPAC", status: "live", text: "Exercise-responsive multi-omics and public portal development." },
+      { title: "Rare variant multi-omics impact", status: "published", text: "Connecting rare variation to molecular consequence." },
+      { title: "GTEx ancestry-aware interpretation", status: "live", text: "Regulatory interpretation with ancestry and tissue context." },
+      { title: "African transcriptomic colocalization", status: "live", text: "Cross-population colocalization and ancestry-matched regulatory biology." },
+    ],
+  },
+  publications: {
+    featured: [
+      {
+        year: "2010",
+        title: "Whole-genome and transcriptome integration in human populations",
+        detail:
+          "Foundational work that helped establish the lab's long-running focus on transcriptome genetics and regulatory consequence.",
+        href: "https://med.stanford.edu/profiles/stephen-montgomery",
+      },
+      {
+        year: "2017",
+        title: "GTEx analyses of genetic effects on expression across tissues",
+        detail:
+          "A defining reference point for tissue-aware interpretation of regulatory variation across the human body.",
+        href: "https://www.nature.com/articles/nature24277",
+      },
+      {
+        year: "2024",
+        title: "MoTrPAC molecular effects of exercise training",
+        detail:
+          "One of the lab's highest-visibility recent milestones, linking physiology to multi-omic change at scale.",
+        href: "https://med.stanford.edu/news/all-news/2024/05/exercise-molecular-changes.html",
+      },
+    ],
+    streams: [
+      {
+        title: "Regulatory genetics",
+        text: "Expression QTLs, splicing, and transcriptome interpretation across tissues and populations.",
+      },
+      {
+        title: "Rare-disease mechanism",
+        text: "Outlier-based molecular diagnosis and variant interpretation tied to mechanism.",
+      },
+      {
+        title: "Consortium-scale atlases",
+        text: "Large collaborative maps that connect physiology, development, and genomic function.",
+      },
+    ],
+    selected: [
+      {
+        eyebrow: "Foundations",
+        title: "Transcriptome genetics and population-scale expression biology",
+        text: "Early and mid-career lab papers defined how regulatory variation can be studied directly through RNA and molecular readouts.",
+      },
+      {
+        eyebrow: "Mechanism",
+        title: "Rare variants, molecular outliers, and disease-facing genomics",
+        text: "Publications in this stream connect unsolved disease questions to transcriptomic consequence and actionable interpretation.",
+      },
+      {
+        eyebrow: "Scale",
+        title: "Atlas biology through GTEx, MoTrPAC, and related programs",
+        text: "Collaborative papers expand the lab's reach into large, structured resources that reshape the field's baseline references.",
+      },
+    ],
+    image: "assets/generated/page-hero/publications-ashg.webp",
+  },
+  team: {
+    leadership: {
+      name: "Stephen B. Montgomery",
+      role: "Founder / Principal Investigator",
+      headshot: "assets/generated/headshots/stephen-montgomery.webp",
+      headshotPosition: "50% 24%",
+      summary:
+        "Stephen B. Montgomery is an Endowed Professor of Pathology, Professor of Genetics, Professor of Biomedical Data Science, and Professor by courtesy of Computer Science at Stanford. His research connects genetic variation to gene regulation, molecular phenotypes, and disease.",
+      links: [
+        { label: "Stanford profile", href: "https://med.stanford.edu/profiles/stephen-montgomery" },
+        { label: "Scholar", href: "https://scholar.google.com/citations?hl=en&user=117h3CAAAAAJ" },
+        { label: "Email", href: "mailto:smontgom@stanford.edu" },
+      ],
+    },
+    featured: currentRoster.filter((member) => member.headshot).slice(0, 6),
+    roster: currentRoster,
+    alumni: alumniRoster,
+    note:
+      "The current roster combines leadership, instruction, staff science, graduate training, postdoctoral work, and administrative coordination in one shared research environment.",
+  },
+  consortia: [
+    {
+      shortName: "GREGoR",
+      role: "Principal Investigator",
+      logo: "assets/consortium_logos/gregor1.png",
+      summary: "Rare disease diagnosis supported by multi-omic interpretation and functional consequence mapping.",
+      output: "Clinical mechanism and molecular interpretation",
+    },
+    {
+      shortName: "MoTrPAC",
+      role: "Principal Investigator",
+      logo: "assets/consortium_logos/motrpac.png",
+      summary: "Body-wide molecular responses to exercise training across tissues, assays, and training states.",
+      output: "Exercise multi-omics and public portal outputs",
+    },
+    {
+      shortName: "TOPMed",
+      role: "Principal Investigator",
+      logo: "assets/consortium_logos/TOPMed.png",
+      summary: "Population-scale genomics and precision medicine infrastructure.",
+      output: "Large cohort interpretation and translational context",
+    },
+    {
+      shortName: "Functional ADSP",
+      role: "Principal Investigator",
+      logo: "assets/consortium_logos/fungen.png",
+      summary: "Alzheimer's disease genetics interpreted through functional genomic systems.",
+      output: "Disease-focused functional genomics",
+    },
+    {
+      shortName: "dGTEx",
+      role: "Investigator",
+      logo: "assets/consortium_logos/dGTEx.png",
+      summary: "Developmental tissue regulation and expression programs across human biology.",
+      output: "Developmental regulation and tissue context",
+    },
+    {
+      shortName: "IGVF",
+      role: "Investigator",
+      logo: "assets/consortium_logos/iGVF.png",
+      summary: "Interpretable maps linking genomic variants to function.",
+      output: "Variant-to-function reference maps",
+    },
+    {
+      shortName: "SMaHT",
+      role: "Investigator",
+      logo: "assets/consortium_logos/SMaHT.png",
+      summary: "Cell atlas and molecular reference generation at systems scale.",
+      output: "Reference atlases and molecular standards",
+    },
+    {
+      shortName: "All of Us",
+      role: "Investigator",
+      logo: "assets/consortium_logos/AoU.png",
+      summary: "Population-scale precision medicine and representation-aware genomics.",
+      output: "Representation-aware precision medicine resources",
+    },
+    {
+      shortName: "UDN",
+      role: "Investigator",
+      logo: "assets/consortium_logos/UDN.png",
+      summary: "Mechanism-first support for unresolved clinical cases.",
+      output: "Case resolution and translational genomics",
+    },
+    {
+      shortName: "ENCODE4",
+      role: "Investigator",
+      logo: "assets/consortium_logos/encode2.png",
+      summary: "Reference functional genomics resources that shape interpretation workflows.",
+      output: "Shared reference biology for downstream analysis",
+    },
+  ],
+  resources: {
+    intro:
+      "The lab builds and uses a practical public stack: software, project resources, workflow guides, and consortium portals that help genomics work move faster and more reproducibly.",
+    categories: [
+      {
+        title: "Public lab tools",
+        text: "Software and methods pages associated with ancestry inference, regulatory annotation, QTL analysis, and variant interpretation.",
+        items: [
+          { label: "ANT-seq", href: "https://github.com/boxiangliu/ANTseq" },
+          { label: "EAGLE", href: "https://davidaknowles.github.io/eagle/" },
+          { label: "EigenMT", href: "https://github.com/joed3/eigenMT" },
+          { label: "ORegAnno", href: "https://plone.bcgsc.ca/platform/bioinfo/software/ORegAnno" },
+          { label: "Path-scan", href: "https://psb.stanford.edu/psb-online/proceedings/psb14/daneshjou.pdf" },
+          { label: "SplicePlot", href: "https://github.com/wueric/SplicePlot" },
+        ],
+      },
+      {
+        title: "Project resources",
+        text: "Supplemental material, summary statistics, and project pages tied to published work and shared analyses.",
+        items: [
+          { label: "Smooth muscle cell eQTL and sQTL summary statistics", href: "https://stanford.box.com/s/e6e8hyft5u7wix1nzg5mjfqa084c4tin" },
+          { label: "Sardinia regulatory variation supplemental code", href: "https://github.com/zaczap/sardinia" },
+          { label: "Kukurba et al. supplemental page", href: "https://smontgomlab.github.io/resources/kukurba2013/" },
+          { label: "Montgomery et al. 2010 supplemental page", href: "http://jungle.unige.ch/rnaseq_CEU60/" },
+        ],
+      },
+      {
+        title: "Portal layer",
+        text: "Collaborative programs and data portals that intersect directly with the lab's ongoing work.",
+        items: [
+          { label: "GREGoR", href: "https://gregor.stanford.edu/" },
+          { label: "UDN Stanford", href: "https://undiagnosed.stanford.edu/" },
+          { label: "MoTrPAC data hub", href: "https://motrpac-data.org/" },
+          { label: "GTEx portal", href: "https://gtexportal.org/home/" },
+          { label: "dGTEx", href: "https://dgtex.org/" },
+        ],
+      },
+    ],
+    guides: [
+      {
+        title: "Run notebooks on SCG through VS Code",
+        text: "A practical route into cluster-based analysis using Remote SSH, interactive Slurm sessions, and notebook kernels on compute nodes.",
+        href: "https://code.visualstudio.com/docs/remote/ssh",
+      },
+      {
+        title: "Build reproducible pipelines with Snakemake",
+        text: "A solid starting point for dry runs, DAG inspection, cluster execution, and longer-lived genomic workflows.",
+        href: "https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html",
+      },
+      {
+        title: "Start on Stanford computing with the lab primer",
+        text: "The lab's SCG primer covers the first practical moves: access, storage, interactive compute, and responsible shared usage.",
+        href: "https://github.com/smontgomlab/resources/blob/master/scg_primer.md",
+      },
+    ],
+    inventory: [
+      {
+        title: "GTEx and developmental regulation",
+        text: "Tissue-aware expression resources remain a backbone for regulatory interpretation across adulthood and development.",
+      },
+      {
+        title: "MoTrPAC and exercise multi-omics",
+        text: "The consortium layer extends the lab into physiology-linked transcriptomic and systems biology measurements.",
+      },
+      {
+        title: "Population cohorts and precision medicine",
+        text: "TOPMed and All of Us place the lab inside large-scale representation-aware genomic resources.",
+      },
+      {
+        title: "Rare disease and clinically oriented multi-omics",
+        text: "GREGoR and UDN connect transcriptomic interpretation directly to diagnosis and mechanism-first clinical work.",
+      },
+    ],
+  },
+  join: {
+    intro:
+      "The lab is a fit for researchers who want to work across computation and biology, move comfortably between high-dimensional data and mechanism, and contribute to a collaborative environment where methods and interpretation both matter.",
+    audiences: [
+      {
+        title: "Postdoctoral applicants",
+        text:
+          "Email Stephen Montgomery with a cover letter describing your research experience and the project directions that interest you, your CV, and contact information for two references.",
+      },
+      {
+        title: "Stanford PhD students",
+        text:
+          "Students interested in a rotation or longer-term fit should send a short introductory note and a brief CV, then follow up about project fit and timing.",
+      },
+      {
+        title: "Stanford undergraduates",
+        text:
+          "Undergraduates should send a short introduction, a description of interests, and an unofficial transcript. The lab typically facilitates internships for students already enrolled at Stanford.",
+      },
+      {
+        title: "Logistics and scheduling",
+        text:
+          "Scientific applications should go to Stephen Montgomery. Administrative and scheduling questions can also be routed to Char Armitage.",
+      },
+    ],
+    steps: [
+      {
+        title: "Signal intent clearly",
+        text:
+          "A strong first note is specific about research direction, technical background, and why the lab's mix of experimental and computational genomics is the right fit.",
+      },
+      {
+        title: "Send the right material",
+        text:
+          "Postdocs should send a cover letter, CV, and references. Stanford graduate students should send a short introduction and CV. Stanford undergraduates should include interests and an unofficial transcript.",
+      },
+      {
+        title: "Expect a structured ramp",
+        text:
+          "New members are onboarded into computing, lab routines, mentoring, and required training early so they can reach productive science quickly.",
+      },
+    ],
+    values: [
+      "collaboration as a scientific method",
+      "in-person discussion and fast iteration",
+      "shared compute literacy",
+      "health and sustainability",
+    ],
+    faq: [
+      {
+        question: "Can the lab help prospective students gain admission to Stanford?",
+        answer: "No. Prospective students should apply through the standard admissions process for the relevant Stanford graduate program.",
+      },
+      {
+        question: "What should a postdoc include in an initial email?",
+        answer: "A concise cover letter, CV, a description of relevant research experience, project directions of interest, and contact information for references.",
+      },
+      {
+        question: "What kind of training environment should a new member expect?",
+        answer: "Regular meeting attendance, early mentorship, shared compute resources, and a collaborative mix of experimental and computational genomics.",
+      },
+    ],
+  },
+  news: [
+    {
+      year: "2024",
+      title: "MoTrPAC papers map the molecular effects of exercise training",
+      text: "Stanford coverage in May 2024 highlighted a major public milestone linking physiology to multi-omic response at scale.",
+      image: "assets/generated/page-hero/publications-ashg.webp",
+    },
+    {
+      year: "2017",
+      title: "GTEx paper set becomes a defining reference point",
+      text: "The October 17, 2017 GTEx release remains a landmark in how the lab approaches tissue-aware regulatory biology.",
+      image: "assets/generated/home/lab-hike.webp",
+    },
+    {
+      year: "2016",
+      title: "The lab joins MoTrPAC",
+      text: "The December 15, 2016 launch of the lab's role in MoTrPAC established a long-running connection to exercise biology at consortium scale.",
+      image: "assets/generated/home/lab-room.webp",
+    },
+  ],
+  contact: {
+    email: "smontgom@stanford.edu",
+    admin: "carmitag@stanford.edu",
+    phone: "(650) 725-9641",
+    location: "Edwards Building, Stanford School of Medicine, Stanford, CA",
+    mailing: "Montgomery Lab, Stanford University, 1291 Welch Road, BLDG 07-309, Room R-212, Palo Alto, CA 94304",
+    links: [
+      { label: "Stanford lab page", href: "https://med.stanford.edu/montgomerylab.html" },
+      { label: "Stanford profile", href: "https://med.stanford.edu/profiles/stephen-montgomery" },
+      { label: "Google Scholar", href: "https://scholar.google.com/citations?hl=en&user=117h3CAAAAAJ" },
+      { label: "Legacy site", href: "https://smontgomlab.github.io/" },
+      { label: "GitHub", href: "https://github.com/smontgomlab" },
+    ],
+  },
+};

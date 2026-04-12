@@ -1,0 +1,32 @@
+mainNav:
+  - label: Home
+    href: /
+  - label: Research
+    href: /research
+  - label: Team
+    href: /team
+  - label: Publications
+    href: /publications
+  - label: Consortia
+    href: /consortia
+    dropdownFromCollection: consortia
+  - label: Resources
+    href: /resources
+  - label: Join
+    href: /join
+  - label: News
+    href: /news
+  - label: Contact
+    href: /contact
+
+socialLinks:
+  - label: Stanford profile
+    href: https://med.stanford.edu/montgomerylab.html
+  - label: Google Scholar
+    href: https://scholar.google.com/citations?hl=en&user=117h3CAAAAAJ
+
+footerLinks:
+  - label: Accessibility
+    href: /accessibility
+  - label: Privacy
+    href: /privacy

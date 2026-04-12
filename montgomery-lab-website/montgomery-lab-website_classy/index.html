@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Montgomery Lab | Stanford University</title>
+    <meta
+      name="description"
+      content="Montgomery Lab at Stanford University studies how genetic variation shapes molecular phenotypes, gene regulation, and disease."
+    >
+    <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="preload" as="image" href="assets/generated/home/lab-room.webp">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+
+    <div class="page-glow page-glow-one" aria-hidden="true"></div>
+    <div class="page-glow page-glow-two" aria-hidden="true"></div>
+    <div class="page-grid" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header-shell">
+        <a class="brand" href="index.html" aria-label="Montgomery Lab home">
+          <span class="brand-mark">ML</span>
+          <span class="brand-copy">
+            <strong>Montgomery Lab</strong>
+            <small>Stanford University</small>
+          </span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Primary">
+          <ul id="desktopNav"></ul>
+          <div id="consortiaDropdown" class="dropdown-panel" aria-label="Consortia menu"></div>
+        </nav>
+
+        <a class="header-cta" href="join.html">How to Join</a>
+
+        <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobilePanel">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+      </div>
+
+      <div id="mobilePanel" class="mobile-panel">
+        <nav class="mobile-nav" aria-label="Mobile">
+          <ul id="mobileNav"></ul>
+          <div id="mobileConsortiaDropdown" class="mobile-dropdown-panel"></div>
+          <a class="mobile-cta" href="join.html">How to Join</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="hero section">
+        <div class="shell hero-shell">
+          <div class="hero-copy reveal is-visible">
+            <p class="hero-kicker">Stanford Medicine | Pathology + Genetics + Biomedical Data Science</p>
+            <h1>From genetic variation to mechanism to diagnosis.</h1>
+            <p class="hero-lede">
+              The Montgomery Lab studies how genetic variation shapes molecular phenotypes, cellular processes,
+              and disease through functional genomics, rare-disease biology, computational genomics, and
+              consortium-scale science.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="research.html">Explore Research</a>
+              <a class="button button-secondary" href="team.html">Meet the Team</a>
+            </div>
+
+            <div class="hero-frame hero-frame-support">
+              <img src="assets/generated/home/team-group.webp" alt="Montgomery Lab members gathered for a group portrait">
+              <div class="hero-caption">
+                <span>Lab community</span>
+                <strong>A group built around collaborative projects, close mentorship, and shared scientific momentum.</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal is-visible">
+            <div class="hero-frame hero-frame-main">
+              <img
+                src="assets/generated/home/lab-room.webp"
+                alt="Montgomery Lab members gathered around a conference table during a working session"
+                fetchpriority="high"
+              >
+              <div class="hero-caption">
+                <span>Lab culture</span>
+                <strong>Work, conversation, and a room full of active scientific discussion.</strong>
+              </div>
+            </div>
+
+            <div class="hero-frame hero-frame-signal">
+              <p class="eyebrow">Scientific profile</p>
+              <h2>Genomics that moves from signal to mechanism to human relevance.</h2>
+              <ul class="simple-list">
+                <li>Gene regulation, expression, splicing, and rare variants</li>
+                <li>Rare disease interpretation and molecular diagnosis</li>
+                <li>Consortium-scale atlases, tools, and translational genomics</li>
+              </ul>
+            </div>
+
+            <div class="hero-photo-stack">
+              <div class="hero-frame hero-frame-team hero-frame-portrait">
+                <img src="assets/generated/home/lab-dinner-portrait.webp" alt="Montgomery Lab members gathered around a holiday dinner table">
+              </div>
+
+              <div class="hero-frame hero-frame-detail">
+                <img src="assets/generated/home/lab-dinner.webp" alt="Montgomery Lab members gathered at a lab dinner">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tight">
+        <div class="shell">
+          <div id="homeStats" class="proof-strip"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Explore</p>
+            <h2>Research directions, people, and shared resources.</h2>
+            <p>
+              Explore current research, the lab community, public resources, and major collaborative programs.
+            </p>
+          </div>
+          <div id="homePreviewGrid" class="preview-grid"></div>
+        </div>
+      </section>
+
+      <section class="section section-contrast">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Signals</p>
+            <h2>Scenes from the lab's science and community.</h2>
+          </div>
+          <div id="homeStoryGrid" class="story-grid"></div>
+        </div>
+      </section>
+
+      <section class="section section-band">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Consortia</p>
+            <h2>Major collaborative programs shape the scale and reach of the lab's science.</h2>
+            <p>These collaborations connect the lab to rare disease, exercise biology, precision medicine, and functional interpretation at scale.</p>
+          </div>
+          <div id="homeConsortiaRibbon" class="consortia-ribbon reveal"></div>
+          <div class="page-actions reveal">
+            <a class="button button-primary" href="consortia.html">Open Consortia Page</a>
+            <a class="button button-secondary" href="publications.html">Open Publications</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-shell">
+        <div>
+          <p class="eyebrow">Montgomery Lab</p>
+          <p class="footer-summary">Functional genomics, rare disease, and consortium-scale biology at Stanford University.</p>
+        </div>
+        <div id="footerLinks" class="footer-links"></div>
+      </div>
+      <div class="shell footer-bottom">
+        <p>&copy; <span id="footerYear"></span> Montgomery Lab. Stanford University.</p>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
