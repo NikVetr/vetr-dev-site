@@ -1,4 +1,5 @@
 import { siteData } from "./site-content.js";
+import { initPhotoCarousels } from "./photo-carousel.js";
 
 const byId = (id) => document.getElementById(id);
 const page = document.body.dataset.page || "home";
@@ -1435,3 +1436,4 @@ renderFieldNoteRail();
 initMarginParallax();
 bindNavigation();
 bindReveal();
+initPhotoCarousels(".hero-frame > img, .page-hero-card > img, .hero-side-card > img, .story-media > img");

@@ -859,6 +859,129 @@ summary {
   object-fit: cover;
 }
 
+.photo-carousel {
+  position: relative;
+  overflow: hidden;
+  --carousel-accent: var(--blue);
+  --carousel-contrast: #ffffff;
+  --carousel-panel: rgba(255, 255, 255, 0.72);
+}
+
+.photo-carousel-side,
+.photo-carousel-dots,
+.photo-carousel-caption {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.photo-carousel:hover .photo-carousel-side,
+.photo-carousel:hover .photo-carousel-dots,
+.photo-carousel:hover .photo-carousel-caption,
+.photo-carousel:focus-within .photo-carousel-side,
+.photo-carousel:focus-within .photo-carousel-dots,
+.photo-carousel:focus-within .photo-carousel-caption {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.photo-carousel-side {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 6;
+  width: 34%;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+.photo-carousel-prev {
+  left: 0;
+  background: linear-gradient(90deg, rgba(15, 76, 129, 0.22), transparent);
+}
+
+.photo-carousel-next {
+  right: 0;
+  background: linear-gradient(270deg, rgba(15, 118, 110, 0.22), transparent);
+}
+
+.photo-carousel-side::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-top: 1.05rem solid transparent;
+  border-bottom: 1.05rem solid transparent;
+  filter: drop-shadow(0 0.35rem 0.85rem rgba(20, 34, 58, 0.28));
+}
+
+.photo-carousel-prev::before {
+  left: 1rem;
+  border-right: 1.5rem solid rgba(15, 76, 129, 0.74);
+  transform: translateY(-50%);
+}
+
+.photo-carousel-next::before {
+  right: 1rem;
+  border-left: 1.5rem solid rgba(15, 118, 110, 0.74);
+  transform: translateY(-50%);
+}
+
+.photo-carousel-dots {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  z-index: 7;
+  display: flex;
+  gap: 0.42rem;
+  transform: translateX(-50%) translateY(-0.2rem);
+}
+
+.photo-carousel:hover .photo-carousel-dots,
+.photo-carousel:focus-within .photo-carousel-dots {
+  transform: translateX(-50%) translateY(0);
+}
+
+.photo-carousel-dot {
+  width: 0.62rem;
+  height: 0.62rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 50%;
+  background: rgba(15, 76, 129, 0.28);
+  box-shadow: 0 0.25rem 0.8rem rgba(20, 34, 58, 0.18);
+  cursor: pointer;
+}
+
+.photo-carousel-dot.is-active {
+  background: rgba(15, 76, 129, 0.9);
+  opacity: 1;
+}
+
+.photo-carousel-caption {
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  z-index: 7;
+  padding: 0.82rem;
+  border-radius: 14px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: var(--shadow-md);
+  font-weight: 800;
+}
+
+@media (hover: none) {
+  .photo-carousel-side,
+  .photo-carousel-dots {
+    opacity: 0.78;
+    pointer-events: auto;
+  }
+}
+
 .hero-side-card img {
   width: 100%;
   min-height: 12rem;

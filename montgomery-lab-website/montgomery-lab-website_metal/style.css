@@ -247,15 +247,13 @@ input {
 
 .rune {
   position: absolute;
-  bottom: -28vh;
+  top: 0;
   color: rgba(244, 239, 229, 0.22);
   font-family: var(--display-font);
   font-size: clamp(0.7rem, 1.3vw, 1rem);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  transform: translate3d(0, 0, 0) rotate(var(--rune-rotate, 0deg));
-  animation: rune-drift var(--rune-duration, 42s) linear infinite;
-  animation-delay: var(--rune-delay, 0s);
+  transform: translate3d(0, var(--rune-start, 110vh), 0) rotate(var(--rune-rotate, 0deg));
   will-change: transform;
 }
 
@@ -1123,6 +1121,128 @@ h3 {
   font-weight: 800;
 }
 
+.photo-carousel {
+  position: relative;
+  overflow: hidden;
+  --carousel-accent: var(--ember);
+  --carousel-contrast: var(--bone);
+  --carousel-panel: rgba(5, 5, 5, 0.72);
+}
+
+.photo-carousel-side,
+.photo-carousel-dots,
+.photo-carousel-caption {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.photo-carousel:hover .photo-carousel-side,
+.photo-carousel:hover .photo-carousel-dots,
+.photo-carousel:hover .photo-carousel-caption,
+.photo-carousel:focus-within .photo-carousel-side,
+.photo-carousel:focus-within .photo-carousel-dots,
+.photo-carousel:focus-within .photo-carousel-caption {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.photo-carousel-side {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 6;
+  width: 34%;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+.photo-carousel-prev {
+  left: 0;
+  background: linear-gradient(90deg, rgba(255, 77, 24, 0.26), transparent);
+}
+
+.photo-carousel-next {
+  right: 0;
+  background: linear-gradient(270deg, rgba(255, 157, 46, 0.26), transparent);
+}
+
+.photo-carousel-side::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-top: 1.18rem solid transparent;
+  border-bottom: 1.18rem solid transparent;
+  filter: drop-shadow(0 0 0.8rem rgba(255, 77, 24, 0.78));
+}
+
+.photo-carousel-prev::before {
+  left: 1rem;
+  border-right: 1.65rem solid rgba(255, 157, 46, 0.84);
+  transform: translateY(-50%);
+}
+
+.photo-carousel-next::before {
+  right: 1rem;
+  border-left: 1.65rem solid rgba(255, 157, 46, 0.84);
+  transform: translateY(-50%);
+}
+
+.photo-carousel-dots {
+  position: absolute;
+  top: 2.15rem;
+  left: 50%;
+  z-index: 7;
+  display: flex;
+  gap: 0.42rem;
+  transform: translateX(-50%) translateY(-0.2rem);
+}
+
+.photo-carousel:hover .photo-carousel-dots,
+.photo-carousel:focus-within .photo-carousel-dots {
+  transform: translateX(-50%) translateY(0);
+}
+
+.photo-carousel-dot {
+  width: 0.62rem;
+  height: 0.62rem;
+  padding: 0;
+  border: 1px solid rgba(244, 239, 229, 0.76);
+  border-radius: 50%;
+  background: rgba(255, 77, 24, 0.32);
+  box-shadow: 0 0 0.9rem rgba(255, 77, 24, 0.34);
+  cursor: pointer;
+}
+
+.photo-carousel-dot.is-active {
+  background: rgba(255, 157, 46, 0.92);
+  opacity: 1;
+}
+
+.photo-carousel-caption {
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  z-index: 7;
+  padding: 0.82rem;
+  color: var(--bone);
+  background: linear-gradient(180deg, rgba(5, 5, 5, 0.12), rgba(5, 5, 5, 0.9));
+  border: 1px solid var(--line);
+  font-weight: 800;
+}
+
+@media (hover: none) {
+  .photo-carousel-side,
+  .photo-carousel-dots {
+    opacity: 0.78;
+    pointer-events: auto;
+  }
+}
+
 .section-block {
   margin-top: 3rem;
   scroll-margin-top: 14rem;
@@ -1451,13 +1571,20 @@ h3 {
   }
 }
 
-@keyframes rune-drift {
-  from {
-    transform: translate3d(0, 0, 0) rotate(var(--rune-rotate, 0deg));
+@media (min-width: 1280px) and (max-width: 1699px) {
+  .home-poster,
+  .page-hero {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: auto;
   }
 
-  to {
-    transform: translate3d(0, -162vh, 0) rotate(var(--rune-rotate, 0deg));
+  .poster-photo,
+  .hero-card {
+    min-height: 22rem;
+  }
+
+  h1 {
+    font-size: clamp(2.75rem, 4.35vw, 4rem);
   }
 }
 

@@ -1,4 +1,5 @@
 import { metalContent } from "./content.js";
+import { initPhotoCarousels } from "./photo-carousel.js";
 
 const pageId = document.body.dataset.page || "home";
 const main = document.getElementById("mainStage");
@@ -99,8 +100,44 @@ const renderStageFx = () => {
     <div class="flame-wall"></div>
     <div class="chrome-seal"><img src="assets/logos/lab_logo-metal_background_lab-not-band_monocolor.svg" alt=""></div>
     ${Array.from({ length: 18 }, (_, index) => `<span class="spike spike-${index + 1}"></span>`).join("")}
-    ${Array.from({ length: 22 }, (_, index) => `<span class="rune rune-${index + 1}">${riffs[index % riffs.length]}</span>`).join("")}
+    ${Array.from({ length: 22 }, (_, index) => `<span class="rune rune-${index + 1}" style="--rune-start:${112 + ((index * 23) % 130)}vh">${riffs[index % riffs.length]}</span>`).join("")}
   `;
+};
+
+const bindRuneScroll = () => {
+  const runes = Array.from(document.querySelectorAll(".rune"));
+
+  if (!runes.length) {
+    return;
+  }
+
+  const states = runes.map((rune, index) => ({
+    rune,
+    start: 112 + ((index * 23) % 130),
+    distance: 165 + ((index * 17) % 95),
+    rotate: getComputedStyle(rune).getPropertyValue("--rune-rotate").trim() || "0deg",
+  }));
+  let frame = 0;
+
+  const update = () => {
+    frame = 0;
+    const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const progress = window.scrollY / scrollable;
+
+    states.forEach(({ rune, start, distance, rotate }) => {
+      rune.style.transform = `translate3d(0, ${start - progress * distance}vh, 0) rotate(${rotate})`;
+    });
+  };
+
+  const requestUpdate = () => {
+    if (!frame) {
+      frame = requestAnimationFrame(update);
+    }
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  update();
 };
 
 const renderAmpRig = () => {
@@ -608,6 +645,7 @@ const bindReveal = () => {
 };
 
 renderStageFx();
+bindRuneScroll();
 renderSetlist();
 renderAmpRig();
 
@@ -617,6 +655,7 @@ if (main) {
 
 document.title = `${page.title} | ${metalContent.meta.title}`;
 bindReveal();
+initPhotoCarousels(".poster-photo > img, .hero-card > img, .news-card > img");
 
 if (pageId === "team") {
   bindTeam();

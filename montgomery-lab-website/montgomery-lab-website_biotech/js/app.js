@@ -9,6 +9,7 @@ import { renderResources } from "./pages/resources.js";
 import { renderJoin } from "./pages/join.js";
 import { renderNews } from "./pages/news.js";
 import { renderContact } from "./pages/contact.js";
+import { initPhotoCarousels } from "./photo-carousel.js";
 
 const page = document.body.dataset.page || "home";
 
@@ -40,3 +41,4 @@ if (mount) {
 renderFooter(biotechContent, page);
 initScene(biotechContent);
 bindReveal();
+initPhotoCarousels(".visual-frame > img, .news-card > img");
