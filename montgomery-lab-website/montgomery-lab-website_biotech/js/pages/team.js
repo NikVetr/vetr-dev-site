@@ -41,16 +41,19 @@ const renderTeam = (mount, content) => {
             </div>
           </div>
         </article>
-        <article class="hud-panel stat-panel">
-          <p class="terminal-label">Team overview</p>
-          <p>${team.note}</p>
-          <div class="mini-metrics">
-            <div><strong>${team.roster.length}</strong><span>current members</span></div>
-            <div><strong>${team.alumni.length}</strong><span>alumni network</span></div>
-            <div><strong>${team.roster.filter((member) => member.headshot).length}</strong><span>profile images</span></div>
-          </div>
-        </article>
       </div>
+    </section>
+
+    <section class="module shell reveal" id="team-overview">
+      <article class="hud-panel stat-panel team-overview-panel">
+        <p class="terminal-label">Team overview</p>
+        <p>${team.note}</p>
+        <div class="mini-metrics">
+          <div><strong>${team.roster.length}</strong><span>current members</span></div>
+          <div><strong>${team.alumni.length}</strong><span>alumni network</span></div>
+          <div><strong>${team.roster.filter((member) => member.headshot).length}</strong><span>profile images</span></div>
+        </div>
+      </article>
     </section>
 
     <section class="module shell reveal" id="roster">

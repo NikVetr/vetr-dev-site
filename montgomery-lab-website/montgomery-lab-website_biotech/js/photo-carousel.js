@@ -31,15 +31,15 @@ const pageSeeds = {
 let carouselSerial = 0;
 
 const pagePools = {
-  home: ["lab-room.webp", "team-group.webp", "lab-social.webp", "escape-room.webp", "lab-dinner.webp", "eqtl-costume.webp", "contact-beach-group.webp", "lab-hike.webp"],
-  research: ["hero-pictionary.webp", "resources-pictionary.webp", "pictionary-room.webp", "lab-room.webp", "team-group.webp", "eqtl-costume.webp", "lab-social.webp", "escape-room.webp"],
-  publications: ["publications-ashg.webp", "lab-social.webp", "team-group.webp", "lab-dinner-portrait.webp", "join-retreat-dinner.webp", "contact-beach-group.webp", "lab-room.webp", "lab-hike.webp"],
-  team: ["team-group.webp", "join-retreat-dinner.webp", "lab-dinner.webp", "lab-dinner-portrait.webp", "contact-beach-group.webp", "escape-room.webp", "lab-social.webp", "lab-hike.webp"],
-  consortia: ["lab-social.webp", "contact-beach-group.webp", "resources-pictionary.webp", "lab-room.webp", "team-group.webp", "join-retreat-dinner.webp", "lab-hike.webp", "escape-room.webp"],
-  resources: ["resources-pictionary.webp", "hero-pictionary.webp", "pictionary-room.webp", "lab-room.webp", "eqtl-costume.webp", "lab-social.webp", "team-group.webp", "contact-beach-group.webp"],
-  join: ["join-retreat-dinner.webp", "lab-dinner.webp", "lab-dinner-portrait.webp", "contact-beach-group.webp", "team-group.webp", "escape-room.webp", "lab-hike.webp", "lab-social.webp"],
-  news: ["lab-social.webp", "lab-hike.webp", "hero-pictionary.webp", "team-group.webp", "contact-beach-group.webp", "escape-room.webp", "lab-dinner.webp", "publications-ashg.webp"],
-  contact: ["contact-beach-group.webp", "lab-social.webp", "team-group.webp", "lab-hike.webp", "join-retreat-dinner.webp", "escape-room.webp", "lab-dinner.webp", "lab-room.webp"],
+  home: ["lab-room.webp", "team-group.webp", "lab-social.webp", "eqtl-costume.webp", "lab-dinner.webp", "escape-room.webp", "contact-beach-group.webp", "lab-hike.webp"],
+  research: ["hero-pictionary.webp", "resources-pictionary.webp", "pictionary-room.webp", "lab-room.webp", "publications-ashg.webp", "eqtl-costume.webp", "team-group.webp", "lab-social.webp"],
+  publications: ["publications-ashg.webp", "lab-dinner-portrait.webp", "join-retreat-dinner.webp", "contact-beach-group.webp", "lab-social.webp", "team-group.webp", "lab-room.webp", "lab-hike.webp"],
+  team: ["team-group.webp", "lab-social.webp", "join-retreat-dinner.webp", "lab-dinner.webp", "lab-dinner-portrait.webp", "contact-beach-group.webp", "escape-room.webp", "lab-hike.webp"],
+  consortia: ["resources-pictionary.webp", "contact-beach-group.webp", "lab-room.webp", "hero-pictionary.webp", "team-group.webp", "join-retreat-dinner.webp", "publications-ashg.webp", "lab-hike.webp"],
+  resources: ["resources-pictionary.webp", "pictionary-room.webp", "hero-pictionary.webp", "eqtl-costume.webp", "lab-room.webp", "lab-social.webp", "team-group.webp", "contact-beach-group.webp"],
+  join: ["join-retreat-dinner.webp", "lab-dinner.webp", "lab-hike.webp", "lab-dinner-portrait.webp", "contact-beach-group.webp", "team-group.webp", "escape-room.webp", "lab-social.webp"],
+  news: ["lab-hike.webp", "escape-room.webp", "hero-pictionary.webp", "lab-social.webp", "team-group.webp", "contact-beach-group.webp", "lab-dinner.webp", "publications-ashg.webp"],
+  contact: ["contact-beach-group.webp", "lab-hike.webp", "lab-social.webp", "join-retreat-dinner.webp", "team-group.webp", "escape-room.webp", "lab-dinner.webp", "resources-pictionary.webp"],
 };
 
 const keyFromSrc = (src = "") => {

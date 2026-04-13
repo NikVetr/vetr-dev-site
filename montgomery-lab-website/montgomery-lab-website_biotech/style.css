@@ -1201,7 +1201,7 @@ input {
 
 .lead-card {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 292px 1fr;
   gap: 1rem;
 }
 
@@ -1210,6 +1210,37 @@ input {
   border-radius: 24px;
   background: linear-gradient(180deg, rgba(12, 30, 24, 0.98), rgba(7, 18, 15, 0.96));
   border: 1px solid rgba(115, 255, 191, 0.18);
+}
+
+.consortium-lead-grid,
+.consortium-detail-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.consortium-lead-card {
+  grid-template-columns: minmax(210px, 0.44fr) minmax(0, 0.56fr);
+}
+
+.consortium-lead-logo {
+  min-height: 15rem;
+  padding: 1.1rem;
+  place-items: center;
+}
+
+.consortium-lead-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.consortium-jump-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.consortium-jump-card.is-active {
+  border-color: rgba(85, 248, 159, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(85, 248, 159, 0.22), 0 0 1.2rem rgba(85, 248, 159, 0.08);
 }
 
 .mini-metrics {
@@ -1679,6 +1710,8 @@ input {
     align-items: center;
     gap: 0.72rem;
     min-width: 0;
+    justify-self: start;
+    margin-left: -0.36rem;
   }
 
   .dock-brand .brand-mark {
@@ -1701,7 +1734,7 @@ input {
     grid-row: 1;
     place-items: center;
     align-content: center;
-    gap: 0.16rem;
+    gap: 0.1rem;
     width: 2.7rem;
     height: 2.7rem;
     padding: 0;
@@ -1732,8 +1765,9 @@ input {
     max-height: min(66vh, 32rem);
     gap: 0.5rem;
     padding: 0.7rem 0.2rem 0.2rem;
-    background: rgba(4, 16, 11, 0.98);
+    background: rgba(4, 16, 11, 1);
     border-radius: 1.15rem;
+    backdrop-filter: none;
     scrollbar-width: thin;
     scrollbar-color: rgba(85, 248, 159, 0.7) rgba(3, 17, 11, 0.72);
   }
@@ -1760,7 +1794,9 @@ input {
   .publication-hero,
   .lead-grid,
   .dual-grid,
-  .contact-grid {
+  .contact-grid,
+  .consortium-lead-grid,
+  .consortium-detail-grid {
     grid-template-columns: 1fr;
   }
 

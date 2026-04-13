@@ -25,6 +25,7 @@ The implementation is intentionally lightweight and static-first:
   - mobile consortia submenu
   - intersection-based reveal animations
   - footer year updates
+  - consortium detail-logo aspect switching so wide logos stay in a shallow top band while tall logos can sit on the left side of the detail card
 
 This approach keeps content and page logic separate without introducing a framework or build pipeline. It is straightforward to maintain now, and it leaves a clean migration path if the lab later wants Astro, Next.js, or a CMS-backed setup.
 

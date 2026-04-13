@@ -28,3 +28,4 @@ This directory is an independent static website variant for the Montgomery Lab. 
 - The mobile menu glyph now uses tighter bar spacing and the logo is pulled closer to the left edge so the compact header reads more like a real stage credential than a centered card.
 - The amp rack now includes a dedicated `BIOINFORMATICS` dial with a fixed red 0-10 ring, evenly spaced numeric labels from 0 through 10, matching tick marks, a pointer aligned to the taped-on `11`, and a home-page headline lockup reading `BIOINFORMATICS / TURNED UP TO / ELEVEN`.
 - News/archive stills and photo-carousel pools were rebalanced so page defaults do not keep repeating the same generated lab scenes across the metal concept.
+- The metal build now also includes dedicated consortium stop pages under `consortia/*.html`, and the Join page uses a tighter heading scale so long audience labels stay inside their cards instead of spilling at mid-sized desktop widths.

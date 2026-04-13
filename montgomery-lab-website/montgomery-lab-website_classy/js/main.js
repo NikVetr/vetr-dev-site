@@ -1135,8 +1135,23 @@ const renderConsortiumDetail = () => {
   byId("consortiumKicker").textContent = item.role;
   byId("consortiumTitle").textContent = item.name;
   byId("consortiumSummary").textContent = item.summary;
-  byId("consortiumLogo").src = item.logo;
-  byId("consortiumLogo").alt = `${item.shortName} logo`;
+  const consortiumLogo = byId("consortiumLogo");
+  const consortiumCard = byId("consortiumRoleDetail").closest(".page-hero-card");
+
+  consortiumLogo.src = item.logo;
+  consortiumLogo.alt = `${item.shortName} logo`;
+  consortiumCard?.classList.add("consortium-detail-card");
+  consortiumLogo.onload = () => {
+    if (!consortiumCard) {
+      return;
+    }
+
+    consortiumCard.classList.remove("logo-wide", "logo-tall");
+    consortiumCard.classList.add(consortiumLogo.naturalWidth >= consortiumLogo.naturalHeight ? "logo-wide" : "logo-tall");
+  };
+  if (consortiumLogo.complete) {
+    consortiumLogo.onload(new Event("load"));
+  }
   byId("consortiumShortName").textContent = item.shortName;
   byId("consortiumRoleDetail").textContent = item.roleDetail;
   byId("consortiumFocus").textContent = item.overview;
@@ -1152,7 +1167,7 @@ const renderConsortiumDetail = () => {
   }
 
   attachNoteTrigger(
-    byId("consortiumRoleDetail").closest(".page-hero-card"),
+    consortiumCard,
     noteFrom({
       eyebrow: item.shortName,
       title: item.shortName,
@@ -1436,4 +1451,4 @@ renderFieldNoteRail();
 initMarginParallax();
 bindNavigation();
 bindReveal();
-initPhotoCarousels(".hero-frame > img, .page-hero-card > img, .hero-side-card > img, .story-media > img");
+initPhotoCarousels(".hero-frame > img, .hero-side-card > img, .story-media > img");

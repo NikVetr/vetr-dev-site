@@ -2,8 +2,11 @@ import { metalContent } from "./content.js";
 import { initPhotoCarousels } from "./photo-carousel.js";
 
 const pageId = document.body.dataset.page || "home";
+const pageKey = pageId === "consortium-detail" ? "consortia" : pageId;
 const main = document.getElementById("mainStage");
-const page = metalContent.pages[pageId] || metalContent.pages.home;
+const consortiumId = document.body.dataset.consortium || "";
+const consortium = metalContent.consortia.find((item) => item.id === consortiumId);
+const page = metalContent.pages[pageKey] || metalContent.pages.home;
 
 const linkAttrs = (href) => (href.startsWith("http") ? ' target="_blank" rel="noreferrer"' : "");
 
@@ -15,7 +18,7 @@ const initials = (name) =>
     .map((part) => part[0].toUpperCase())
     .join("");
 
-const currentNav = () => metalContent.nav.find((item) => item.id === pageId) || metalContent.nav[0];
+const currentNav = () => metalContent.nav.find((item) => item.id === pageKey) || metalContent.nav[0];
 
 const waveformBars = (songIndex = 0) =>
   Array.from({ length: 58 }, (_, barIndex) => {
@@ -28,7 +31,7 @@ const waveformBars = (songIndex = 0) =>
   }).join("");
 
 const adjacentNav = (offset) => {
-  const index = metalContent.nav.findIndex((item) => item.id === pageId);
+  const index = metalContent.nav.findIndex((item) => item.id === pageKey);
   const next = (index + offset + metalContent.nav.length) % metalContent.nav.length;
   return metalContent.nav[next];
 };
@@ -63,7 +66,7 @@ const renderSetlist = () => {
       ${metalContent.nav
         .map(
           (item) => `
-            <a class="setlist-link ${item.id === pageId ? "is-active" : ""}" href="${item.href}">
+            <a class="setlist-link ${item.id === pageKey ? "is-active" : ""}" href="${item.href}">
               <span>${item.track}</span>
               <strong>${item.label}</strong>
               <small>${item.subtitle}</small>
@@ -172,7 +175,7 @@ const renderAmpRig = () => {
   const songs = metalContent.songs || [];
   const pageSongIndex = Math.max(
     0,
-    songs.findIndex((song) => song.pages?.includes(pageId))
+    songs.findIndex((song) => song.pages?.includes(pageKey))
   );
   const followPage = localStorage.getItem("ml-metal-follow-page-track") !== "false";
   const storedSongIndex = Number(localStorage.getItem("ml-metal-song-index"));
@@ -596,7 +599,7 @@ const renderConsortia = () => `
           (item) => `
             <article class="partner-card">
               <div class="partner-logo"><img src="${item.logo}" alt="${item.shortName}"></div>
-              <div><p class="eyebrow">${item.role}</p><h3>${item.shortName}</h3><p>${item.summary}</p><strong>${item.output}</strong></div>
+              <div><p class="eyebrow">${item.role}</p><h3>${item.shortName}</h3><p>${item.summary}</p><strong>${item.output}</strong><div class="link-row"><a href="${item.href}">Open tour stop</a></div></div>
             </article>
           `
         )
@@ -604,6 +607,71 @@ const renderConsortia = () => `
     </div>
   </section>
 `;
+
+const renderConsortiumDetail = () => {
+  if (!consortium) {
+    return `
+      <section class="section-block reveal">
+        <div class="section-heading"><p class="eyebrow">Tour routing</p><h2>Consortium not found.</h2><p>The requested tour stop is not available in the current Stage Rig build.</p></div>
+      </section>
+    `;
+  }
+
+  return `
+    <section class="page-hero reveal">
+      <div class="hero-copy">
+        <p class="eyebrow">${consortium.role}</p>
+        <h1>${consortium.name}</h1>
+        <p class="lede">${consortium.summary}</p>
+        <div class="link-row">
+          <a href="consortia.html">All tour stops</a>
+          <a href="research.html">Research riffs</a>
+        </div>
+      </div>
+      <article class="hero-card consortium-hero-card">
+        <div class="partner-logo consortium-hero-logo"><img src="${consortium.logo}" alt="${consortium.shortName}"></div>
+        <div class="consortium-hero-copy">
+          <p class="eyebrow">${consortium.shortName}</p>
+          <strong>${consortium.focus}</strong>
+          <p>${consortium.roleDetail}</p>
+        </div>
+      </article>
+    </section>
+    <section class="section-block reveal">
+      <div class="chain-grid consortium-detail-grid">
+        <article class="metal-card">
+          <p class="eyebrow">Overview</p>
+          <h3>What this program is built to answer.</h3>
+          <p>${consortium.overview}</p>
+        </article>
+        <article class="metal-card">
+          <p class="eyebrow">Lab contribution</p>
+          <h3>How the lab plays inside it.</h3>
+          <p>${consortium.labContribution}</p>
+        </article>
+      </div>
+    </section>
+    <section class="section-block reveal">
+      <div class="section-heading"><p class="eyebrow">Tour notes</p><h2>Key threads in this stop.</h2></div>
+      ${cardGrid(consortium.highlights.map((highlight) => ({ title: highlight, text: consortium.shortName })), "card-grid consortium-highlight-grid")}
+    </section>
+    <section class="section-block reveal">
+      <div class="section-heading"><p class="eyebrow">Switchboard</p><h2>Jump to another consortium stop.</h2></div>
+      <div class="partner-grid">
+        ${metalContent.consortia
+          .map(
+            (item) => `
+              <a class="partner-card consortium-jump-card ${item.id === consortium.id ? "is-active" : ""}" href="${item.href}">
+                <div class="partner-logo"><img src="${item.logo}" alt="${item.shortName}"></div>
+                <div><p class="eyebrow">${item.role}</p><h3>${item.shortName}</h3><p>${item.focus}</p><strong>${item.output}</strong></div>
+              </a>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+};
 
 const renderResources = () => `
   ${pageHero()}
@@ -678,6 +746,7 @@ const renderers = {
   publications: renderPublications,
   team: renderTeam,
   consortia: renderConsortia,
+  "consortium-detail": renderConsortiumDetail,
   resources: renderResources,
   join: renderJoin,
   news: renderNews,
@@ -708,7 +777,7 @@ if (main) {
   main.innerHTML = renderers[pageId]?.() || renderHome();
 }
 
-document.title = `${page.title} | ${metalContent.meta.title}`;
+  document.title = `${pageId === "consortium-detail" && consortium ? consortium.shortName : page.title} | ${metalContent.meta.title}`;
 bindReveal();
 initPhotoCarousels(".poster-photo > img, .hero-card > img, .news-card > img");
 
