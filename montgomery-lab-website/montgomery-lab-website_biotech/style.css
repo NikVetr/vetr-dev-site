@@ -1247,7 +1247,7 @@ body[data-page="consortium-detail"] .consortium-lead-card {
   grid-template-columns: minmax(140px, 0.24fr) minmax(0, 0.76fr);
   gap: 1.15rem;
   height: 100%;
-  align-items: center;
+  align-items: stretch;
 }
 
 .consortium-lead-logo {
@@ -1259,6 +1259,7 @@ body[data-page="consortium-detail"] .consortium-lead-card {
 body[data-page="consortium-detail"] .consortium-lead-logo {
   min-height: 10.25rem;
   padding: 0.72rem;
+  align-self: center;
 }
 
 body[data-page="consortium-detail"] .consortium-lead-grid > .stat-panel {
@@ -1266,6 +1267,18 @@ body[data-page="consortium-detail"] .consortium-lead-grid > .stat-panel {
   height: 100%;
   display: grid;
   align-content: start;
+}
+
+body[data-page="consortium-detail"] .consortium-lead-card .lead-copy {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  align-content: start;
+  gap: 0.75rem;
+  min-height: 100%;
+}
+
+body[data-page="consortium-detail"] .consortium-lead-card .link-row {
+  align-self: end;
 }
 
 .consortium-lead-logo img {

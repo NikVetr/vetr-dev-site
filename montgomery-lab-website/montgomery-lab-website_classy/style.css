@@ -855,7 +855,7 @@ summary {
 }
 
 .page-hero-card.consortium-detail-card.logo-tall {
-  grid-template-columns: minmax(8.25rem, 0.36fr) minmax(0, 1fr);
+  grid-template-columns: minmax(10rem, 0.42fr) minmax(0, 1fr);
   align-items: start;
   column-gap: 1.15rem;
 }
@@ -865,8 +865,10 @@ summary {
   grid-row: 1 / span 3;
   width: 100%;
   max-width: 100%;
-  max-height: 10.5rem;
+  max-height: 13rem;
+  height: auto;
   margin: 0;
+  align-self: start;
 }
 
 .page-hero-card.consortium-detail-card.logo-tall .eyebrow,
