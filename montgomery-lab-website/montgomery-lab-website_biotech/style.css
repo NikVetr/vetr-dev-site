@@ -1199,6 +1199,21 @@ input {
   grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
 }
 
+#leadership .lead-grid {
+  grid-template-columns: 1fr;
+}
+
+#leadership .lead-card {
+  grid-template-columns: minmax(286px, 0.56fr) minmax(0, 1.44fr);
+  align-items: stretch;
+}
+
+#leadership .lead-card .lead-copy h2 {
+  font-size: clamp(2.5rem, 4.4vw, 4.35rem);
+  line-height: 0.92;
+  max-width: 11ch;
+}
+
 .lead-card {
   display: grid;
   grid-template-columns: 292px 1fr;
@@ -1218,19 +1233,47 @@ input {
 }
 
 .consortium-lead-card {
-  grid-template-columns: minmax(210px, 0.44fr) minmax(0, 0.56fr);
+  grid-template-columns: minmax(168px, 0.28fr) minmax(0, 0.72fr);
+  align-items: center;
+}
+
+body[data-page="consortium-detail"] .consortium-lead-grid {
+  grid-template-columns: minmax(0, 1.24fr) minmax(280px, 0.76fr);
+  align-items: start;
+}
+
+body[data-page="consortium-detail"] .consortium-lead-card {
+  grid-template-columns: minmax(140px, 0.24fr) minmax(0, 0.76fr);
+  gap: 1.15rem;
 }
 
 .consortium-lead-logo {
-  min-height: 15rem;
-  padding: 1.1rem;
+  min-height: 11.5rem;
+  padding: 0.95rem;
   place-items: center;
+}
+
+body[data-page="consortium-detail"] .consortium-lead-logo {
+  min-height: 10.25rem;
+  padding: 0.72rem;
 }
 
 .consortium-lead-logo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.consortium-lead-card .lead-copy h2 {
+  font-size: clamp(1.7rem, 2.75vw, 2.6rem);
+  line-height: 0.94;
+  overflow-wrap: anywhere;
+}
+
+body[data-page="consortium-detail"] .consortium-lead-card .lead-copy h2 {
+  font-size: clamp(1.45rem, 2.2vw, 2.15rem);
+  line-height: 0.92;
+  max-width: 10ch;
 }
 
 .consortium-jump-card {

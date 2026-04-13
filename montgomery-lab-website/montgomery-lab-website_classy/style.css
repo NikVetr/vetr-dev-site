@@ -865,7 +865,7 @@ summary {
   grid-row: 1 / span 3;
   width: 100%;
   max-width: 100%;
-  max-height: 8.4rem;
+  max-height: 9.3rem;
   margin: 0;
 }
 
@@ -875,10 +875,10 @@ summary {
 }
 
 .page-hero-card.consortium-detail-card.logo-wide .consortium-detail-logo {
-  width: auto;
-  max-width: 74%;
-  max-height: 5rem;
-  margin: 0 auto 0.55rem;
+  width: min(96%, 30rem);
+  max-width: 96%;
+  max-height: 8.35rem;
+  margin: 0 auto 0.45rem;
 }
 
 .page-hero-card img {
@@ -1530,9 +1530,9 @@ summary {
 .consortium-detail-logo {
   display: block;
   width: auto;
-  max-width: 82%;
-  max-height: 6.2rem;
-  margin: 0 auto 0.65rem;
+  max-width: 96%;
+  max-height: 8.1rem;
+  margin: 0 auto 0.5rem;
   object-fit: contain;
   object-position: center;
   border-radius: 0;

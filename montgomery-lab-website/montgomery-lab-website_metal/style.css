@@ -670,7 +670,7 @@ h3 {
   border-radius: 50%;
   background:
     radial-gradient(circle at 44% 34%, rgba(255, 255, 255, 0.18), transparent 0 16%, rgba(0, 0, 0, 0.2) 17%),
-    conic-gradient(from 225deg, rgba(185, 30, 9, 0.98) 0deg 270deg, rgba(36, 22, 19, 0.92) 270deg 360deg),
+    conic-gradient(from 208deg, rgba(185, 30, 9, 0.98) 0deg 304deg, rgba(36, 22, 19, 0.92) 304deg 360deg),
     radial-gradient(circle, #2d2d2f 0 39%, #090909 40% 51%, #010101 52%);
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow:
@@ -702,7 +702,7 @@ h3 {
   border-radius: 99px;
   background: linear-gradient(180deg, #fff5df, var(--ember) 34%, #5e0a02);
   box-shadow: 0 0 0.65rem rgba(255, 77, 24, 0.7);
-  transform: translate(-50%, -95%) rotate(160deg);
+  transform: translate(-50%, -95%) rotate(162deg);
   transform-origin: 50% 95%;
   z-index: 3;
 }
@@ -738,7 +738,7 @@ h3 {
   font-weight: 900;
   letter-spacing: 0.05em;
   text-shadow: 0 0.08rem 0 #000;
-  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-2.82rem) rotate(calc(-1 * var(--knob-angle)));
+  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3.1rem) rotate(calc(-1 * var(--knob-angle)));
 }
 
 .bio-knob-mark-0 {
@@ -787,12 +787,12 @@ h3 {
 
 .bio-knob-tick {
   z-index: 2;
-  width: 0.08rem;
-  height: 0.22rem;
+  width: 0.06rem;
+  height: 0.14rem;
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(255, 247, 229, 0.9), rgba(255, 226, 207, 0.36));
   box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.35);
-  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-2.76rem);
+  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3.02rem);
 }
 
 .bio-knob-tick-0 {
@@ -840,7 +840,7 @@ h3 {
 }
 
 .bio-knob-tape {
-  --knob-angle: 160deg;
+  --knob-angle: 162deg;
   padding: 0.1rem 0.36rem 0.05rem;
   color: #17100c;
   font-family: "Marker Felt", "Comic Sans MS", cursive;
@@ -852,7 +852,7 @@ h3 {
   border: 1px solid rgba(0, 0, 0, 0.18);
   box-shadow: 0 0.18rem 0.4rem rgba(0, 0, 0, 0.42);
   text-shadow: none;
-  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3.62rem) rotate(calc(-1 * var(--knob-angle))) rotate(-7deg);
+  transform: translate(-50%, -50%) rotate(var(--knob-angle)) translateY(-3.76rem) rotate(calc(-1 * var(--knob-angle))) rotate(-7deg);
 }
 
 .transport-button.is-primary {
@@ -893,7 +893,13 @@ h3 {
   height: 0.55rem;
   border-radius: 99px;
   background:
-    linear-gradient(90deg, var(--ember), var(--ember-2) 54%, rgba(255, 255, 255, 0.16) 54%),
+    linear-gradient(
+      90deg,
+      var(--ember) 0%,
+      var(--ember-2) var(--slider-fill, 54%),
+      rgba(255, 255, 255, 0.16) var(--slider-fill, 54%),
+      rgba(255, 255, 255, 0.16) 100%
+    ),
     #050505;
   border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: inset 0 0 0.45rem rgba(0, 0, 0, 0.86);
@@ -1812,6 +1818,19 @@ body[data-page="join"] .metal-card h3 {
   gap: 0.9rem;
 }
 
+body[data-page="consortium-detail"] .page-hero .hero-copy h1 {
+  font-size: clamp(2.05rem, 3.55vw, 3.85rem);
+  line-height: 0.88;
+  max-width: 7.3ch;
+  overflow-wrap: anywhere;
+}
+
+body[data-page="consortium-detail"] .page-hero {
+  grid-template-columns: minmax(0, 0.96fr) minmax(320px, 0.78fr);
+  gap: clamp(1.4rem, 2.45vw, 2rem);
+  align-items: start;
+}
+
 .consortium-hero-copy strong {
   color: var(--bone);
   font-size: clamp(1.05rem, 1.8vw, 1.35rem);
@@ -1941,7 +1960,7 @@ body[data-page="join"] .metal-card h3 {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 0.65rem;
     align-items: center;
-    padding: 0.48rem 0.7rem 0.48rem 0.02rem;
+    padding: 0.48rem 0.7rem 0.48rem 0;
     border-radius: 0.7rem;
     clip-path: polygon(0 0, 100% 2%, 99.4% 100%, 0.7% 98%);
     transform: none;
@@ -1951,7 +1970,7 @@ body[data-page="join"] .metal-card h3 {
     justify-items: start;
     align-items: center;
     justify-self: start;
-    margin-left: -0.5rem;
+    margin-left: -1.16rem;
     transform: none;
   }
 

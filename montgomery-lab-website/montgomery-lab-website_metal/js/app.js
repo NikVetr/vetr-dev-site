@@ -278,6 +278,13 @@ const renderAmpRig = () => {
     const omics = Number(document.getElementById("omicsKnob")?.value || 72);
     document.documentElement.style.setProperty("--gain", (0.35 + gain / 100).toFixed(2));
     document.documentElement.style.setProperty("--omics", (0.3 + omics / 100).toFixed(2));
+    mount.querySelectorAll("input[type='range']").forEach((input) => {
+      const min = Number(input.min || 0);
+      const max = Number(input.max || 100);
+      const value = Number(input.value || min);
+      const fill = max > min ? ((value - min) / (max - min)) * 100 : 0;
+      input.style.setProperty("--slider-fill", `${fill.toFixed(1)}%`);
+    });
   };
 
   const audio = document.getElementById("labDeckAudio");
