@@ -1804,30 +1804,36 @@ body[data-page="join"] .metal-card h3 {
 
 .consortium-hero-card {
   display: grid;
-  gap: 1rem;
+  gap: 1.12rem;
   align-content: start;
+  padding: 1.45rem 1.55rem 1.6rem;
 }
 
 .consortium-hero-logo {
-  min-height: 11.5rem;
+  display: grid;
+  place-items: center;
+  min-height: 11.2rem;
+  padding: 0.55rem 1.2rem 0.95rem;
   border-bottom: 0;
 }
 
 .consortium-hero-copy {
   display: grid;
   gap: 0.9rem;
+  padding-inline: 0.05rem;
 }
 
 body[data-page="consortium-detail"] .page-hero .hero-copy h1 {
-  font-size: clamp(2.05rem, 3.55vw, 3.85rem);
-  line-height: 0.88;
-  max-width: 7.3ch;
-  overflow-wrap: anywhere;
+  font-size: clamp(1.95rem, 3.2vw, 3.5rem);
+  line-height: 0.9;
+  max-width: 12.2ch;
+  overflow-wrap: normal;
+  text-wrap: balance;
 }
 
 body[data-page="consortium-detail"] .page-hero {
-  grid-template-columns: minmax(0, 0.96fr) minmax(320px, 0.78fr);
-  gap: clamp(1.4rem, 2.45vw, 2rem);
+  grid-template-columns: minmax(0, 1.14fr) minmax(360px, 0.86fr);
+  gap: clamp(1.7rem, 2.8vw, 2.4rem);
   align-items: start;
 }
 

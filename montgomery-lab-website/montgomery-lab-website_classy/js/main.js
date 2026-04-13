@@ -1147,7 +1147,8 @@ const renderConsortiumDetail = () => {
     }
 
     consortiumCard.classList.remove("logo-wide", "logo-tall");
-    consortiumCard.classList.add(consortiumLogo.naturalWidth >= consortiumLogo.naturalHeight ? "logo-wide" : "logo-tall");
+    const aspectRatio = consortiumLogo.naturalWidth / Math.max(consortiumLogo.naturalHeight, 1);
+    consortiumCard.classList.add(aspectRatio >= 1.35 ? "logo-wide" : "logo-tall");
   };
   if (consortiumLogo.complete) {
     consortiumLogo.onload(new Event("load"));

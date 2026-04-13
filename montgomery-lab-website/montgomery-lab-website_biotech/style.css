@@ -1239,12 +1239,15 @@ input {
 
 body[data-page="consortium-detail"] .consortium-lead-grid {
   grid-template-columns: minmax(0, 1.24fr) minmax(280px, 0.76fr);
-  align-items: start;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
 }
 
 body[data-page="consortium-detail"] .consortium-lead-card {
   grid-template-columns: minmax(140px, 0.24fr) minmax(0, 0.76fr);
   gap: 1.15rem;
+  height: 100%;
+  align-items: center;
 }
 
 .consortium-lead-logo {
@@ -1256,6 +1259,13 @@ body[data-page="consortium-detail"] .consortium-lead-card {
 body[data-page="consortium-detail"] .consortium-lead-logo {
   min-height: 10.25rem;
   padding: 0.72rem;
+}
+
+body[data-page="consortium-detail"] .consortium-lead-grid > .stat-panel {
+  min-height: 100%;
+  height: 100%;
+  display: grid;
+  align-content: start;
 }
 
 .consortium-lead-logo img {
