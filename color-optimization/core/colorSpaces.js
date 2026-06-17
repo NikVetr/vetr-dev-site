@@ -363,6 +363,13 @@ export function isInGamut(values, fromSpace, gamutPreset = "srgb", tolerance = 1
   const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
   if (!gamut) return true;
   try {
+    if (fromSpace === "luv") {
+      const l = values?.l;
+      const u = values?.u || 0;
+      const v = values?.v || 0;
+      if (!Number.isFinite(l) || l < -tolerance || l > 100 + tolerance) return false;
+      if (l <= tolerance && Math.hypot(u, v) > tolerance) return false;
+    }
     const xyz = convertColorValues(values, fromSpace, "xyz");
     const lin = gamut.fromXYZ(xyz.x, xyz.y, xyz.z);
     return (

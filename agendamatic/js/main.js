@@ -1,14 +1,21 @@
 /**
- * main.js - Entry point for Agendamatic
+ * main.js - Entry point for autoCHAIR
  * Initializes all modules and wires together the application
  */
 
 import { initializeState, getState, subscribe, updateSettings, updateExportOptions, updateItem, resetState } from './state.js';
 import { initAgenda, handleAddItem } from './agenda.js';
 import { initTimer } from './timer.js';
+import { initStaging } from './staging.js';
+import { initLayoutResizers } from './layout-resize.js';
 import { initTooltips } from './tooltips.js';
 import { initExport, showNotification } from './export.js';
 import { formatTime, parseTime } from './utils.js';
+
+const LOGO_FULL_SPIN_SECONDS = 8;
+const NEXT_PREV_SPIN_SECONDS = LOGO_FULL_SPIN_SECONDS / 8;
+const HEADER_SPIN_SECONDS = LOGO_FULL_SPIN_SECONDS / 2;
+const LOGO_STOP_EPSILON_SECONDS = 0.03;
 
 /**
  * Format a Date as HH:MM (24-hour) for settings storage
@@ -33,6 +40,162 @@ function getSteppedStartTime(deltaMinutes) {
     return formatTimeValue(currentTime);
 }
 
+function normalizeLogoVideo(video) {
+    if (!video) return;
+
+    const setInitialFrame = () => {
+        try {
+            video.pause();
+            video.currentTime = 0;
+        } catch (err) {
+            // Ignore seek errors before metadata is loaded.
+        }
+    };
+
+    if (video.readyState >= 1) {
+        setInitialFrame();
+    } else {
+        video.addEventListener('loadedmetadata', setInitialFrame, { once: true });
+    }
+}
+
+function stopLogoSpin(video) {
+    if (!video) return;
+
+    if (video._logoSpinState) {
+        const { timeoutId, onTimeUpdate, onEnded } = video._logoSpinState;
+        if (timeoutId) clearTimeout(timeoutId);
+        if (onTimeUpdate) video.removeEventListener('timeupdate', onTimeUpdate);
+        if (onEnded) video.removeEventListener('ended', onEnded);
+        video._logoSpinState = null;
+    }
+
+    video.pause();
+}
+
+function spinLogoSegment(video, seconds) {
+    if (!video) return;
+
+    normalizeLogoVideo(video);
+    stopLogoSpin(video);
+
+    const startPlayback = () => {
+        const duration = Number.isFinite(video.duration) && video.duration > 0
+            ? video.duration
+            : LOGO_FULL_SPIN_SECONDS;
+        const endTime = Math.max(0.05, Math.min(seconds, duration));
+
+        const finish = () => {
+            stopLogoSpin(video);
+            try {
+                video.currentTime = Math.min(endTime, Math.max(0, duration - LOGO_STOP_EPSILON_SECONDS));
+            } catch (err) {
+                // Ignore seek issues.
+            }
+        };
+
+        const onTimeUpdate = () => {
+            if (video.currentTime >= endTime - LOGO_STOP_EPSILON_SECONDS) {
+                finish();
+            }
+        };
+        const onEnded = () => finish();
+
+        const timeoutId = window.setTimeout(finish, Math.ceil((endTime + 0.2) * 1000));
+        video._logoSpinState = { timeoutId, onTimeUpdate, onEnded };
+        video.addEventListener('timeupdate', onTimeUpdate);
+        video.addEventListener('ended', onEnded);
+
+        try {
+            video.currentTime = 0;
+        } catch (err) {
+            // Ignore seek issues.
+        }
+
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => finish());
+        }
+    };
+
+    if (video.readyState >= 1) {
+        startPlayback();
+    } else {
+        video.addEventListener('loadedmetadata', startPlayback, { once: true });
+        video.load();
+    }
+}
+
+function setHeaderLogoVariant(elements, direction) {
+    const forwardVideo = elements.headerLogoVideoForward;
+    const reverseVideo = elements.headerLogoVideoReverse;
+    if (!forwardVideo && !reverseVideo) return null;
+
+    const showReverse = direction === 'reverse';
+    const activeVideo = showReverse ? reverseVideo : forwardVideo;
+    const inactiveVideo = showReverse ? forwardVideo : reverseVideo;
+
+    if (inactiveVideo) {
+        stopLogoSpin(inactiveVideo);
+        inactiveVideo.classList.add('is-hidden');
+    }
+
+    if (activeVideo) {
+        activeVideo.classList.remove('is-hidden');
+    }
+
+    return activeVideo || inactiveVideo;
+}
+
+function spinHeaderLogo(elements, direction) {
+    const activeVideo = setHeaderLogoVariant(elements, direction);
+    if (activeVideo) {
+        spinLogoSegment(activeVideo, HEADER_SPIN_SECONDS);
+    }
+}
+
+function setupLogoAnimations(elements) {
+    const {
+        headerLogoButton,
+        headerLogoVideoForward,
+        headerLogoVideoReverse,
+        prevItemLogoVideo,
+        nextItemLogoVideo,
+        prevItemButton,
+        nextItemButton
+    } = elements;
+
+    [headerLogoVideoForward, headerLogoVideoReverse, prevItemLogoVideo, nextItemLogoVideo].forEach(normalizeLogoVideo);
+    setHeaderLogoVariant(elements, 'forward');
+
+    if (headerLogoButton) {
+        headerLogoButton.addEventListener('click', () => {
+            spinHeaderLogo(elements, 'forward');
+        });
+        headerLogoButton.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            spinHeaderLogo(elements, 'forward');
+        });
+    }
+
+    if (nextItemButton && nextItemLogoVideo) {
+        nextItemButton.addEventListener('click', () => {
+            spinLogoSegment(nextItemLogoVideo, NEXT_PREV_SPIN_SECONDS);
+        });
+    }
+
+    if (prevItemButton && prevItemLogoVideo) {
+        prevItemButton.addEventListener('click', () => {
+            spinLogoSegment(prevItemLogoVideo, NEXT_PREV_SPIN_SECONDS);
+        });
+    }
+
+    window.addEventListener('autochair:data-imported', () => {
+        spinHeaderLogo(elements, 'forward');
+    });
+}
+
 /**
  * Initialize the application
  */
@@ -50,9 +213,11 @@ function init() {
 
     // Get DOM elements
     const elements = getElements();
+    setupLogoAnimations(elements);
 
     // Initialize modules
     initAgenda(elements.agendaContainer);
+    initStaging(elements.stagingContainer);
 
     initTimer({
         timelineTrack: elements.timelineTrack,
@@ -69,6 +234,8 @@ function init() {
         progressBar: elements.progressBar,
         startButton: elements.startButton,
         stopButton: elements.stopButton,
+        popoutButton: elements.popoutButton,
+        prevItemButton: elements.prevItemButton,
         nextItemButton: elements.nextItemButton
     });
 
@@ -86,6 +253,9 @@ function init() {
     // Set up event listeners
     setupEventListeners(elements);
 
+    // Enable panel split resizing handles
+    initLayoutResizers();
+
     // Apply initial settings
     applySettings(getState());
 
@@ -98,7 +268,7 @@ function init() {
     // Initial sync of start time inputs
     syncStartTimeInputs(getState());
 
-    console.log('Agendamatic initialized');
+    console.log('autoCHAIR initialized');
 }
 
 /**
@@ -115,6 +285,7 @@ function getElements() {
         timelineTrack: document.getElementById('timeline-track'),
         timelineAxis: document.getElementById('timeline-axis'),
         currentTimeMarker: document.getElementById('current-time-marker'),
+        popoutButton: document.getElementById('btn-popout'),
         startButton: document.getElementById('btn-start'),
         stopButton: document.getElementById('btn-stop'),
 
@@ -124,6 +295,7 @@ function getElements() {
 
         // Current item
         currentItemPanel: document.getElementById('current-item-panel'),
+        stagingContainer: document.getElementById('staging-container'),
         notesArea: document.getElementById('notes-area'),
 
         // Progress
@@ -166,7 +338,13 @@ function getElements() {
         oneMinWarningCheckbox: document.getElementById('one-min-warning'),
         overtimeFlashCheckbox: document.getElementById('overtime-flash'),
         resetBtn: document.getElementById('btn-reset'),
-        nextItemButton: document.getElementById('btn-next-item')
+        prevItemButton: document.getElementById('btn-prev-item'),
+        nextItemButton: document.getElementById('btn-next-item'),
+        headerLogoButton: document.getElementById('btn-header-logo'),
+        headerLogoVideoForward: document.getElementById('header-logo-video-forward'),
+        headerLogoVideoReverse: document.getElementById('header-logo-video-reverse'),
+        prevItemLogoVideo: document.getElementById('prev-item-logo-video'),
+        nextItemLogoVideo: document.getElementById('next-item-logo-video')
     };
 }
 
@@ -203,6 +381,7 @@ function setupEventListeners(elements) {
     if (elements.resetBtn) {
         elements.resetBtn.addEventListener('click', () => {
             if (confirm('Reset all agenda items and settings to defaults?')) {
+                spinHeaderLogo(elements, 'reverse');
                 resetState();
                 showNotification('Reset to defaults', 'success');
             }

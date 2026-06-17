@@ -124,6 +124,8 @@ export function readConfig(ui, state) {
   state.lastRuns = Math.max(1, parseInt(ui.optimRuns.value, 10) || 20);
   const widths = getWidths(ui);
   const constraintMode = constraintModeForSpace(ui, ui.colorSpace.value);
+  const nmIterations = Math.max(10, parseInt(ui.nmIters.value, 10) || 260);
+  const trajectorySteps = Math.max(1, Math.min(nmIterations, parseInt(ui.pathSteps?.value, 10) || 48));
   return {
     colorSpace: ui.colorSpace.value,
     colorwheelSpace: ui.colorwheelSpace.value,
@@ -135,7 +137,8 @@ export function readConfig(ui, state) {
     meanP: ui.meanP ? parseFloat(ui.meanP.value) : undefined,
     nColsToAdd: Math.max(1, parseInt(ui.colorsToAdd.value, 10) || 1),
     nOptimRuns: state.lastRuns,
-    nmIterations: Math.max(10, parseInt(ui.nmIters.value, 10) || 260),
+    nmIterations,
+    trajectorySteps,
     seed,
     constraintTopology: ui.constraintTopology?.value || "contiguous",
     aestheticMode: ui.aestheticMode?.value || "none",

@@ -3,189 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Agendamatic - A real-time meeting agenda tracker with timeline visualization">
-    <title>Agendamatic - Meeting Agenda Tracker</title>
+    <meta name="description" content="autoCHAIR - A real-time meeting agenda tracker with timeline visualization">
+    <title>autoCHAIR - Meeting Agenda Tracker</title>
+    <link rel="icon" type="image/svg+xml" href="assets/autoChair-logo-black.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/svg+xml" href="assets/autoChair-logo-white.svg" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" href="assets/autoChair-logo-smol.png">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
     <div class="main-stage">
         <!-- Page Title -->
-        <h1 class="page-title">Agendamatic</h1>
+        <div class="page-title">
+            <h1 class="page-title-text">
+                <span class="visually-hidden">autoCHAIR</span>
+                <img class="page-title-name" src="assets/autoChair-name.png" alt="autoCHAIR">
+            </h1>
+            <button id="btn-header-logo" class="header-logo-button" aria-label="Spin autoCHAIR logo">
+                <span class="header-logo-stack" aria-hidden="true">
+                    <video
+                        id="header-logo-video-forward"
+                        class="page-title-logo logo-video header-logo-variant"
+                        muted
+                        playsinline
+                        preload="auto"
+                    >
+                        <source src="assets/animation/logo_spin_128.webm" type="video/webm">
+                    </video>
+                    <video
+                        id="header-logo-video-reverse"
+                        class="page-title-logo logo-video header-logo-variant is-hidden"
+                        muted
+                        playsinline
+                        preload="auto"
+                    >
+                        <source src="assets/animation/logo_spin_reversed_128.webm" type="video/webm">
+                    </video>
+                </span>
+            </button>
+        </div>
 
-        <!-- Top Section: Agenda Input + Export/Status -->
-        <div class="top-section">
-            <!-- Agenda Input Box -->
-            <div class="box input-box">
-                <div class="box-header">
-                    <h3>Input</h3>
-                </div>
-
-                <!-- Agenda Header -->
-                <div class="agenda-grid agenda-header">
-                    <div></div>
-                    <div>Item</div>
-                    <div>Lead</div>
-                    <div>Duration</div>
-                    <div>Time</div>
-                    <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
-                    <div data-tooltip="Item notes">&#128221;</div>
-                    <div></div>
-                </div>
-
-                <!-- Agenda Items Container (populated by JS) -->
-                <div id="agenda-container"></div>
-
-                <!-- Add Item Button -->
-                <button id="btn-add-item" class="btn-add-row" data-tooltip="Add a new agenda item">+ Add Item</button>
-            </div>
-
-            <!-- Export + Status -->
-            <div class="right-side">
-                <!-- Import / Export Box -->
-                <div class="box export-box">
+        <div class="workspace-panels">
+            <!-- Top Section: Agenda Input + Export/Status -->
+            <div class="top-section">
+                <!-- Agenda Input Box -->
+                <div class="box input-box">
                     <div class="box-header">
-                        <h3>Import / Export</h3>
+                        <h3>Input</h3>
                     </div>
-                    <div class="export-panel">
-                        <div class="export-options">
-                            <div class="export-section-label">Include:</div>
-                            <label data-tooltip="Include meeting header with date, time, and duration">
-                                <input type="checkbox" id="include-header" checked> Header
-                            </label>
-                            <label data-tooltip="Include notes from each agenda item">
-                                <input type="checkbox" id="include-notes" checked> Notes
-                            </label>
-                            <label data-tooltip="Include preparation checklist">
-                                <input type="checkbox" id="include-prep"> Prep
-                            </label>
-                            <label data-tooltip="Include contextual information">
-                                <input type="checkbox" id="include-context"> Context
-                            </label>
-                        </div>
-                        <div class="export-buttons-section">
-                            <div class="export-section-label">To:</div>
-                            <div class="export-buttons-vertical">
-                                <button id="btn-export-md" data-tooltip="Download as Markdown file">.md</button>
-                                <button id="btn-export-txt" data-tooltip="Download as plain text">.txt</button>
-                                <button id="btn-export-docx" data-tooltip="Download as Word document">.doc</button>
-                                <button id="btn-export-json" data-tooltip="Download state as JSON">.json</button>
-                            </div>
-                            <div class="export-section-label" style="margin-top: 8px;">From:</div>
-                            <button id="btn-import-inline" class="btn-import" data-tooltip="Import agenda from JSON file">Import .json</button>
-                        </div>
+
+                    <!-- Agenda Header -->
+                    <div class="agenda-grid agenda-header">
+                        <div></div>
+                        <div>Item</div>
+                        <div>Lead</div>
+                        <div>Duration</div>
+                        <div>Time</div>
+                        <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
+                        <div data-tooltip="Item notes">&#128221;</div>
+                        <div></div>
                     </div>
+
+                    <!-- Agenda Items Container (populated by JS) -->
+                    <div id="agenda-container"></div>
+
+                    <!-- Add Item Button -->
+                    <button id="btn-add-item" class="btn-add-row" data-tooltip="Add a new agenda item">+ Add Item</button>
                 </div>
 
-                <div class="status-column">
-                    <!-- Status Display -->
-                    <div class="box status-box overall-status-box" id="status-display">
+                <div
+                    id="resizer-top-main"
+                    class="panel-resizer resizer-vertical"
+                    data-tooltip="Drag to resize Input and right-side panels"
+                    aria-label="Resize top section columns"
+                    role="separator"
+                >
+                    <span class="panel-corner corner-start" aria-hidden="true"></span>
+                    <span class="panel-corner corner-end" aria-hidden="true"></span>
+                </div>
+
+                <!-- Export + Status -->
+                <div class="right-side">
+                    <!-- Import / Export Box -->
+                    <div class="box export-box">
                         <div class="box-header">
-                            <h3>Overall Status</h3>
-                            <div class="status-clock" id="status-clock">--:--</div>
+                            <h3>Import / Export</h3>
                         </div>
-                        <div class="status-display on-time">
-                            <span class="status-label">YOU ARE</span>
-                            <div class="ticker-container">
-                                <div class="ticker-tape" id="ticker-tape">
-                                    <span class="ticker-on-time">ON TIME</span>
-                                </div>
+                        <div class="export-panel">
+                            <div class="export-options">
+                                <div class="export-section-label">Include:</div>
+                                <label data-tooltip="Include meeting header with date, time, and duration">
+                                    <input type="checkbox" id="include-header" checked> Header
+                                </label>
+                                <label data-tooltip="Include notes from each agenda item">
+                                    <input type="checkbox" id="include-notes" checked> Notes
+                                </label>
+                                <label data-tooltip="Include preparation checklist">
+                                    <input type="checkbox" id="include-prep"> Prep
+                                </label>
+                                <label data-tooltip="Include contextual information">
+                                    <input type="checkbox" id="include-context"> Context
+                                </label>
                             </div>
-                            <span class="status-direction"></span>
+                            <div class="export-buttons-section">
+                                <div class="export-section-label">To:</div>
+                                <div class="export-buttons-vertical">
+                                    <button id="btn-export-md" data-tooltip="Download as Markdown file">.md</button>
+                                    <button id="btn-export-txt" data-tooltip="Download as plain text">.txt</button>
+                                    <button id="btn-export-docx" data-tooltip="Download as Word document">.doc</button>
+                                    <button id="btn-export-json" data-tooltip="Download state as JSON">.json</button>
+                                </div>
+                                <div class="export-section-label" style="margin-top: 8px;">From:</div>
+                                <button id="btn-import-inline" class="btn-import" data-tooltip="Import agenda from JSON file">Import .json</button>
+                            </div>
                         </div>
                     </div>
 
-                    <button id="btn-next-item" class="next-item-btn" data-tooltip="Advance to the next agenda item">
-                        <span class="next-item-text">NEXT<br>ITEM</span>
-                        <span class="spacebar-icon" aria-hidden="true">SPACE</span>
-                    </button>
+                    <div
+                        id="resizer-right-side"
+                        class="panel-resizer resizer-vertical"
+                        data-tooltip="Drag to resize Import/Export and status column"
+                        aria-label="Resize right side columns"
+                        role="separator"
+                    >
+                        <span class="panel-corner corner-start" aria-hidden="true"></span>
+                        <span class="panel-corner corner-end" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="status-column">
+                        <!-- Status Display -->
+                        <div class="box status-box overall-status-box" id="status-display">
+                            <div class="box-header">
+                                <h3>Overall Status</h3>
+                                <div class="status-clock" id="status-clock">--:--</div>
+                            </div>
+                            <div class="status-display on-time">
+                                <span class="status-label">YOU ARE</span>
+                                <div class="ticker-container">
+                                    <div class="ticker-tape" id="ticker-tape">
+                                        <span class="ticker-on-time">ON TIME</span>
+                                    </div>
+                                </div>
+                                <div class="status-unit" id="status-unit">STATUS</div>
+                                <span class="status-direction"></span>
+                            </div>
+                        </div>
+
+                        <div
+                            id="resizer-status-column"
+                            class="panel-resizer resizer-horizontal"
+                            data-tooltip="Drag to resize Overall Status and Next controls"
+                            aria-label="Resize status rows"
+                            role="separator"
+                        >
+                            <span class="panel-corner corner-start" aria-hidden="true"></span>
+                            <span class="panel-corner corner-end" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="next-item-controls">
+                            <button id="btn-prev-item" class="next-item-btn prev-item-btn" data-tooltip="Shift focus to the previous agenda item">
+                                <span class="next-item-text">
+                                    PREV
+                                    <video
+                                        id="prev-item-logo-video"
+                                        class="next-item-logo logo-video"
+                                        muted
+                                        playsinline
+                                        preload="auto"
+                                        aria-hidden="true"
+                                    >
+                                        <source src="assets/animation/logo_spin_reversed_128.webm" type="video/webm">
+                                    </video>
+                                    ITEM
+                                </span>
+                                <span class="spacebar-icon backspace-icon" aria-hidden="true">BACKSPACE</span>
+                            </button>
+                            <div
+                                id="resizer-next-controls"
+                                class="panel-resizer resizer-vertical"
+                                data-tooltip="Drag to resize Previous and Next buttons"
+                                aria-label="Resize next item controls"
+                                role="separator"
+                            >
+                                <span class="panel-corner corner-start" aria-hidden="true"></span>
+                                <span class="panel-corner corner-end" aria-hidden="true"></span>
+                            </div>
+                            <button id="btn-next-item" class="next-item-btn main-next-btn" data-tooltip="Advance to the next agenda item">
+                                <span class="next-item-text">
+                                    NEXT
+                                    <video
+                                        id="next-item-logo-video"
+                                        class="next-item-logo logo-video"
+                                        muted
+                                        playsinline
+                                        preload="auto"
+                                        aria-hidden="true"
+                                    >
+                                        <source src="assets/animation/logo_spin_128.webm" type="video/webm">
+                                    </video>
+                                    ITEM
+                                </span>
+                                <span class="spacebar-icon" aria-hidden="true">SPACE</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="tracker-section">
-            <!-- Timeline / Tracker Box -->
-            <div class="box timeline-container">
-                <div class="timeline-header">
-                    <h3>Tracker</h3>
-                    <div class="timeline-controls">
-                        <button id="btn-start" data-tooltip="Start tracking the meeting">&#9654; Start</button>
-                        <button id="btn-stop" data-tooltip="Stop/pause tracking">&#9632; Stop</button>
+            <div
+                id="resizer-main-top"
+                class="panel-resizer resizer-horizontal"
+                data-tooltip="Drag to resize top and lower panel groups"
+                aria-label="Resize top and lower panel groups"
+                role="separator"
+            >
+                <span class="panel-corner corner-start" aria-hidden="true"></span>
+                <span class="panel-corner corner-end" aria-hidden="true"></span>
+            </div>
+
+            <div class="lower-panels">
+                <div class="tracker-section">
+                    <!-- Timeline / Tracker Box -->
+                    <div class="box timeline-container">
+                        <div class="timeline-header">
+                            <h3>Tracker</h3>
+                            <div class="timeline-controls">
+                                <button id="btn-popout" data-tooltip="Open a wide tracker pop-out window">&#8599; Pop Out</button>
+                                <button id="btn-start" data-tooltip="Start tracking the meeting">&#9654; Start</button>
+                                <button id="btn-stop" data-tooltip="Stop/pause tracking">&#9632; Stop</button>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Axis -->
+                        <div class="timeline-axis-wrapper">
+                            <div class="timeline-axis-line"></div>
+                            <div id="current-time-marker" class="current-time-marker"></div>
+                            <div id="timeline-axis" class="axis-ticks"></div>
+                        </div>
+
+                        <!-- Timeline Track -->
+                        <div class="timeline-track-wrapper">
+                            <div id="timeline-track" class="timeline-track"></div>
+                            <!-- Overflow labels for blocks that are too small -->
+                            <div id="overflow-labels" class="overflow-labels-container"></div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="progress-bar-container">
+                            <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                        </div>
+                        <div id="progress-guide-line" class="progress-guide-line" aria-hidden="true"></div>
+                    </div>
+
+                    <div
+                        id="resizer-tracker"
+                        class="panel-resizer resizer-vertical"
+                        data-tooltip="Drag to resize Tracker and Current Status panels"
+                        aria-label="Resize tracker section columns"
+                        role="separator"
+                    >
+                        <span class="panel-corner corner-start" aria-hidden="true"></span>
+                        <span class="panel-corner corner-end" aria-hidden="true"></span>
+                    </div>
+
+                    <!-- Current Status Panel -->
+                    <div class="box current-status-box" id="current-status-display">
+                        <div class="box-header">
+                            <h3>Current Status</h3>
+                        </div>
+                        <div class="current-status-display">
+                            <div class="current-status-label">YOU HAVE</div>
+                            <div class="current-status-ticker">
+                                <div class="current-status-tape" id="current-status-tape"></div>
+                            </div>
+                            <div class="current-status-unit">MINUTES</div>
+                            <div class="current-status-line">
+                                of <span class="current-status-item" id="current-status-item">-</span> LEFT
+                            </div>
+                            <div class="current-status-next" id="current-status-next">
+                                (next item: <span class="current-status-next-item" id="current-status-next-item">-</span>)
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Timeline Axis -->
-                <div class="timeline-axis-wrapper">
-                    <div class="timeline-axis-line"></div>
-                    <div id="current-time-marker" class="current-time-marker"></div>
-                    <div id="timeline-axis" class="axis-ticks"></div>
+                <div
+                    id="resizer-main-bottom"
+                    class="panel-resizer resizer-horizontal"
+                    data-tooltip="Drag to resize tracker and bottom panels"
+                    aria-label="Resize tracker and bottom panels"
+                    role="separator"
+                >
+                    <span class="panel-corner corner-start" aria-hidden="true"></span>
+                    <span class="panel-corner corner-end" aria-hidden="true"></span>
                 </div>
 
-                <!-- Timeline Track -->
-                <div class="timeline-track-wrapper">
-                    <div id="timeline-track" class="timeline-track"></div>
-                    <!-- Overflow labels for blocks that are too small -->
-                    <div id="overflow-labels" class="overflow-labels-container"></div>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="progress-bar-container">
-                    <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
-                </div>
-            </div>
-
-            <!-- Current Status Panel -->
-            <div class="box current-status-box" id="current-status-display">
-                <div class="box-header">
-                    <h3>Current Status</h3>
-                </div>
-                <div class="current-status-display">
-                    <div class="current-status-label">YOU HAVE</div>
-                    <div class="current-status-ticker">
-                        <div class="current-status-tape" id="current-status-tape"></div>
+                <div class="bottom-section">
+                    <!-- Current Item Panel -->
+                    <div class="box current-item-box" id="current-item-panel">
+                        <div class="box-header">
+                            <h3>Current Item</h3>
+                        </div>
+                        <div class="active-header">
+                            <div>
+                                <h1 class="current-item-name">No Active Item</h1>
+                            </div>
+                            <div class="current-item-lead">
+                                <div class="label">LED BY</div>
+                                <div class="value">{ - }</div>
+                            </div>
+                        </div>
+                        <div class="notes-editor" id="notes-editor">
+                            <div class="editor-toolbar notes-toolbar">
+                                <button data-action="bold" data-tooltip="Bold (Ctrl+B)"><b>B</b></button>
+                                <button data-action="italic" data-tooltip="Italic (Ctrl+I)"><i>I</i></button>
+                                <button data-action="heading" data-tooltip="Heading">H</button>
+                                <button data-action="bullet" data-tooltip="Bullet list">&#8226; List</button>
+                                <button data-action="numbered" data-tooltip="Numbered list">1. List</button>
+                                <button data-action="link" data-tooltip="Insert link">Link</button>
+                                <button data-action="code" data-tooltip="Code block">&lt;/&gt;</button>
+                            </div>
+                            <textarea
+                                id="notes-area"
+                                class="notes-area"
+                                placeholder="[NOTES GO HERE] - Type your minutes..."
+                                data-tooltip="Type meeting notes for the current agenda item"
+                            ></textarea>
+                            <div class="notes-preview" id="notes-preview" aria-live="polite"></div>
+                        </div>
                     </div>
-                    <div class="current-status-unit">MINUTES</div>
-                    <div class="current-status-line">
-                        of <span class="current-status-item" id="current-status-item">-</span> LEFT
-                    </div>
-                    <div class="current-status-next" id="current-status-next">
-                        (next item: <span class="current-status-next-item" id="current-status-next-item">-</span>)
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Current Item Panel -->
-        <div class="box current-item-box" id="current-item-panel">
-            <div class="box-header">
-                <h3>Current Item</h3>
-            </div>
-            <div class="active-header">
-                <div>
-                    <h1 class="current-item-name">No Active Item</h1>
+                    <div class="box staging-box" id="staging-panel">
+                        <div class="box-header">
+                            <h3>Staging</h3>
+                        </div>
+                        <div class="staging-help">Drag items here to hold them for the next meeting.</div>
+                        <div id="staging-container" class="staging-container"></div>
+                    </div>
+
+                    <div
+                        id="resizer-bottom"
+                        class="panel-resizer resizer-vertical"
+                        data-tooltip="Drag to resize Staging and Current Item panels"
+                        aria-label="Resize bottom section columns"
+                        role="separator"
+                    >
+                        <span class="panel-corner corner-start" aria-hidden="true"></span>
+                        <span class="panel-corner corner-end" aria-hidden="true"></span>
+                    </div>
                 </div>
-                <div class="current-item-lead">
-                    <div class="label">LED BY</div>
-                    <div class="value">{ - }</div>
-                </div>
-            </div>
-            <div class="notes-editor" id="notes-editor">
-                <div class="editor-toolbar notes-toolbar">
-                    <button data-action="bold" data-tooltip="Bold (Ctrl+B)"><b>B</b></button>
-                    <button data-action="italic" data-tooltip="Italic (Ctrl+I)"><i>I</i></button>
-                    <button data-action="heading" data-tooltip="Heading">H</button>
-                    <button data-action="bullet" data-tooltip="Bullet list">&#8226; List</button>
-                    <button data-action="numbered" data-tooltip="Numbered list">1. List</button>
-                    <button data-action="link" data-tooltip="Insert link">Link</button>
-                    <button data-action="code" data-tooltip="Code block">&lt;/&gt;</button>
-                </div>
-                <textarea
-                    id="notes-area"
-                    class="notes-area"
-                    placeholder="[NOTES GO HERE] - Type your minutes..."
-                    data-tooltip="Type meeting notes for the current agenda item"
-                ></textarea>
-                <div class="notes-preview" id="notes-preview" aria-live="polite"></div>
             </div>
         </div>
     </div>

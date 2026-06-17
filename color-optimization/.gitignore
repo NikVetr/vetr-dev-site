@@ -1,0 +1,9 @@
+
+# Local/debug artifacts
+color-optimization/.playwright-mcp/
+color-optimization/.claude/
+color-optimization/.vscode/
+color-optimization/node_modules/
+color-optimization/tests/screenshots/
+*_ExportBlock-*.zip
+ExportBlock-*.zip

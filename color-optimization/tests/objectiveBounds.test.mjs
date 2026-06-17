@@ -1,7 +1,9 @@
 import test from "node:test";
 import { strict as assert } from "node:assert";
 
-import { prepareData } from "../optimizer/objective.js";
+import { isInGamut, normalizeWithRange } from "../core/colorSpaces.js";
+import { normSatisfiesHardConstraints } from "../core/hardConstraints.js";
+import { objectiveInfo, prepareData } from "../optimizer/objective.js";
 
 function isFull01(b) {
   return Array.isArray(b) && b.length === 2 && b[0] <= 1e-6 && b[1] >= 1 - 1e-6;
@@ -29,3 +31,98 @@ test("prepareData uses UI-consistent bounds for empty palettes (OKLCh hue constr
   assert.equal(isFull01(prep.bounds.boundsH), false);
 });
 
+test("custom constraints are literal under aesthetic modes", () => {
+  const prep = prepareData([], "hsl", {
+    constrain: true,
+    widths: [0.9, 0.9, 0.9],
+    constraintTopology: "custom",
+    aestheticMode: "complementary",
+    constraintMode: { h: "hard", s: "hard", l: "hard" },
+    customConstraintPoints: [{ h: 0, s: 50, l: 50 }],
+    gamutPreset: "srgb",
+    clipToGamutOpt: false,
+    nColsToAdd: 1,
+    colorblindSafe: false,
+    colorblindWeights: { none: 1 },
+  });
+
+  const center = prep.bounds.constraintSets.channels.h.pointWindows[0].center;
+  assert.ok(center < 1e-6 || Math.abs(center - Math.PI * 2) < 1e-6);
+});
+
+test("hard custom windows do not penalize colors inside the window", () => {
+  const prep = prepareData([], "oklab", {
+    constrain: true,
+    widths: [0.8, 0.8, 0.8],
+    constraintTopology: "custom",
+    constraintMode: { l: "hard", a: "hard", b: "hard" },
+    customConstraintPoints: [{ l: 0.5, a: 0, b: 0 }],
+    gamutPreset: "srgb",
+    clipToGamutOpt: false,
+    nColsToAdd: 1,
+    colorblindSafe: false,
+    colorblindWeights: { none: 1 },
+  });
+
+  const logit = (p) => Math.log(p / (1 - p));
+  const info = objectiveInfo([logit(0.55), logit(0.5), logit(0.5)], prep);
+  assert.equal(info.constraintPenalty, 0);
+});
+
+test("hard custom windows clamp optimizer raw output inside the window", () => {
+  const prep = prepareData([], "oklab", {
+    constrain: true,
+    widths: [0.65, 0.8, 0.8],
+    constraintTopology: "custom",
+    constraintMode: { l: "hard", a: "hard", b: "hard" },
+    customConstraintPoints: [{ l: 0.65, a: 0, b: 0 }],
+    gamutPreset: "srgb",
+    clipToGamutOpt: true,
+    nColsToAdd: 1,
+    colorblindSafe: false,
+    colorblindWeights: { none: 1 },
+  });
+
+  const logit = (p) => Math.log(p / (1 - p));
+  const info = objectiveInfo([logit(0.95), logit(0.95), logit(0.95)], prep);
+  const row = info.optimizerRaw[0];
+  const { ranges, bounds } = prep;
+  const norm = {
+    l: (row.l - ranges.min.l) / (ranges.max.l - ranges.min.l),
+    a: (row.a - ranges.min.a) / (ranges.max.a - ranges.min.a),
+    b: (row.b - ranges.min.b) / (ranges.max.b - ranges.min.b),
+  };
+
+  ["l", "a", "b"].forEach((ch) => {
+    const window = bounds.constraintSets.channels[ch].pointWindows[0];
+    assert.ok(norm[ch] >= window.min - 1e-10, `${ch} below custom hard window`);
+    assert.ok(norm[ch] <= window.max + 1e-10, `${ch} above custom hard window`);
+  });
+  assert.equal(info.constraintPenalty, 0);
+});
+
+test("gamut-clipped display output respects hard custom windows", () => {
+  const prep = prepareData([], "oklab", {
+    constrain: true,
+    widths: [0, 0, 0],
+    constraintTopology: "custom",
+    constraintMode: { l: "hard", a: "hard", b: "hard" },
+    customConstraintPoints: [{ l: 0.55, a: 0, b: 0 }],
+    perInputWidths: { l: [0], a: [0.7], b: [0.7] },
+    gamutPreset: "srgb",
+    clipToGamutOpt: true,
+    nColsToAdd: 1,
+    colorblindSafe: false,
+    colorblindWeights: { none: 1 },
+  });
+
+  const logit = (p) => Math.log(p / (1 - p));
+  const info = objectiveInfo([logit(0.48), logit(0.65), logit(0.65)], prep);
+  const displayNorm = normalizeWithRange(info.newRaw[0], prep.ranges, "oklab");
+  const optimizerNorm = normalizeWithRange(info.optimizerRaw[0], prep.ranges, "oklab");
+  const sets = prep.bounds.constraintSets;
+
+  assert.equal(isInGamut(info.newRaw[0], "oklab", "srgb"), true);
+  assert.equal(normSatisfiesHardConstraints(optimizerNorm, sets, sets.topology), true);
+  assert.equal(normSatisfiesHardConstraints(displayNorm, sets, sets.topology), true);
+});

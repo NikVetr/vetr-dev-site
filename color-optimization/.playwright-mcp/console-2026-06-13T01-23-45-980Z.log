@@ -1,0 +1,7 @@
+[     271ms] ReferenceError: Cannot access 'activeGamutClipBoundary' before initialization
+    at drawGamutClipLayer (http://127.0.0.1:8111/ui/wheel.js:1402:31)
+    at drawWheel (http://127.0.0.1:8111/ui/wheel.js:349:3)
+    at http://127.0.0.1:8111/ui/panels.js:815:5
+    at Array.forEach (<anonymous>)
+    at refreshSwatches (http://127.0.0.1:8111/ui/panels.js:802:13)
+    at HTMLDocument.<anonymous> (http://127.0.0.1:8111/main.js:371:3)

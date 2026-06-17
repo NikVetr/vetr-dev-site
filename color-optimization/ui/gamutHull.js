@@ -56,8 +56,10 @@ export function strokeHull(ctx, paths) {
   stroke(2, "rgba(15,23,42,0.9)");
 }
 
-export function strokeBoundary(ctx, boundary) {
+export function strokeBoundary(ctx, boundary, opts = {}) {
   if (!ctx || !boundary?.length) return;
+  ctx.save();
+  if (opts.dashed) ctx.setLineDash(opts.dash || [7, 5]);
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
   ctx.beginPath();
@@ -70,8 +72,87 @@ export function strokeBoundary(ctx, boundary) {
   ctx.strokeStyle = "rgba(255,255,255,0.95)";
   ctx.stroke();
   ctx.lineWidth = 2;
-  ctx.strokeStyle = "rgba(15,23,42,0.9)";
+  ctx.strokeStyle = opts.dashed ? "rgba(15,23,42,0.72)" : "rgba(15,23,42,0.9)";
   ctx.stroke();
+  ctx.restore();
+}
+
+export function createOutOfGamutPattern(ctx, spacing = 8) {
+  const size = spacing;
+  const patternCanvas = document.createElement("canvas");
+  patternCanvas.width = size;
+  patternCanvas.height = size;
+  const pCtx = patternCanvas.getContext("2d");
+
+  pCtx.fillStyle = "white";
+  pCtx.fillRect(0, 0, size, size);
+
+  pCtx.strokeStyle = "rgba(180, 185, 195, 0.4)";
+  pCtx.lineWidth = 0.5;
+  pCtx.beginPath();
+  pCtx.moveTo(size - 0.25, 0);
+  pCtx.lineTo(size - 0.25, size);
+  pCtx.moveTo(0, size - 0.25);
+  pCtx.lineTo(size, size - 0.25);
+  pCtx.stroke();
+
+  return ctx.createPattern(patternCanvas, "repeat");
+}
+
+export function drawOutOfGamutOverlay(ctx, cx, cy, radius, isRectWheel, outerBoundary) {
+  if (!outerBoundary || outerBoundary.length < 3) return;
+
+  const outOfGamutPattern = createOutOfGamutPattern(ctx);
+
+  ctx.save();
+  ctx.beginPath();
+
+  if (isRectWheel) {
+    const size = radius * 2;
+    const left = cx - radius;
+    const top = cy - radius;
+    ctx.moveTo(left, top);
+    ctx.lineTo(left + size, top);
+    ctx.lineTo(left + size, top + size);
+    ctx.lineTo(left, top + size);
+    ctx.closePath();
+  } else {
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.closePath();
+  }
+
+  ctx.moveTo(outerBoundary[outerBoundary.length - 1].x, outerBoundary[outerBoundary.length - 1].y);
+  for (let i = outerBoundary.length - 2; i >= 0; i--) {
+    ctx.lineTo(outerBoundary[i].x, outerBoundary[i].y);
+  }
+  ctx.closePath();
+
+  ctx.fillStyle = outOfGamutPattern;
+  ctx.fill("evenodd");
+  ctx.restore();
+}
+
+export function drawOutOfConstraintOverlay(ctx, fullBoundary, constrainedBoundary, opacity = 0.52) {
+  if (!ctx || !fullBoundary?.length || !constrainedBoundary?.length) return;
+  if (fullBoundary.length < 3 || constrainedBoundary.length < 3) return;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(fullBoundary[0].x, fullBoundary[0].y);
+  for (let i = 1; i < fullBoundary.length; i++) {
+    ctx.lineTo(fullBoundary[i].x, fullBoundary[i].y);
+  }
+  ctx.closePath();
+
+  ctx.moveTo(constrainedBoundary[constrainedBoundary.length - 1].x, constrainedBoundary[constrainedBoundary.length - 1].y);
+  for (let i = constrainedBoundary.length - 2; i >= 0; i--) {
+    ctx.lineTo(constrainedBoundary[i].x, constrainedBoundary[i].y);
+  }
+  ctx.closePath();
+
+  ctx.fillStyle = `rgba(255,255,255,${opacity})`;
+  ctx.fill("evenodd");
+  ctx.restore();
 }
 
 export function smoothBoundary(points, iterations = 2) {
@@ -133,8 +214,10 @@ export function buildGamutProjectionBoundary(space, gamutPreset, ranges, isRectW
   const channels = channelOrder[space] || [];
   const out = [];
   const lKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : channels[0] || "l";
-  const lMin = ranges?.min?.[lKey] ?? csRanges[space]?.min?.[lKey] ?? 0;
-  const lMax = ranges?.max?.[lKey] ?? csRanges[space]?.max?.[lKey] ?? 1;
+  const lBaseMin = csRanges[space]?.min?.[lKey] ?? 0;
+  const lBaseMax = csRanges[space]?.max?.[lKey] ?? 1;
+  const lMin = Math.max(ranges?.min?.[lKey] ?? lBaseMin, lBaseMin);
+  const lMax = Math.min(ranges?.max?.[lKey] ?? lBaseMax, lBaseMax);
   const lVals = Array.from({ length: Math.max(2, lSteps) }, (_, i) => lMin + (i / (lSteps - 1)) * (lMax - lMin));
   const lMid = lMin + 0.5 * (lMax - lMin);
 
@@ -143,10 +226,10 @@ export function buildGamutProjectionBoundary(space, gamutPreset, ranges, isRectW
     const yKey = rectKeys?.y || channels[2] || "b";
     const maxX = Math.max(Math.abs(ranges?.min?.[xKey] || 0), Math.abs(ranges?.max?.[xKey] || 0)) || 1;
     const maxY = Math.max(Math.abs(ranges?.min?.[yKey] || 0), Math.abs(ranges?.max?.[yKey] || 0)) || 1;
-    const maxR = Math.hypot(maxX, maxY);
 
     for (let i = 0; i < steps; i++) {
       const ang = (i / steps) * Math.PI * 2;
+      const maxR = rectRayLimit(maxX, maxY, ang);
       let bestR = 0;
       for (let li = 0; li < lVals.length; li++) {
         let lo = 0;
@@ -202,8 +285,10 @@ export function buildGamutSliceBoundary(space, gamutPreset, ranges, isRectWheel,
   const channels = channelOrder[space] || [];
   const out = [];
   const lKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : channels[0] || "l";
-  const lMin = ranges?.min?.[lKey] ?? csRanges[space]?.min?.[lKey] ?? 0;
-  const lMax = ranges?.max?.[lKey] ?? csRanges[space]?.max?.[lKey] ?? 1;
+  const lBaseMin = csRanges[space]?.min?.[lKey] ?? 0;
+  const lBaseMax = csRanges[space]?.max?.[lKey] ?? 1;
+  const lMin = Math.max(ranges?.min?.[lKey] ?? lBaseMin, lBaseMin);
+  const lMax = Math.min(ranges?.max?.[lKey] ?? lBaseMax, lBaseMax);
   const fixedLNorm = space === "hsl" ? 0.5 : 0.75;
   const lVal = lMin + fixedLNorm * (lMax - lMin);
 
@@ -212,12 +297,11 @@ export function buildGamutSliceBoundary(space, gamutPreset, ranges, isRectWheel,
     const yKey = rectKeys?.y || channels[2] || "b";
     const maxX = Math.max(Math.abs(ranges?.min?.[xKey] || 0), Math.abs(ranges?.max?.[xKey] || 0)) || 1;
     const maxY = Math.max(Math.abs(ranges?.min?.[yKey] || 0), Math.abs(ranges?.max?.[yKey] || 0)) || 1;
-    const maxR = Math.hypot(maxX, maxY);
 
     for (let i = 0; i < steps; i++) {
       const ang = (i / steps) * Math.PI * 2;
       let lo = 0;
-      let hi = maxR;
+      let hi = rectRayLimit(maxX, maxY, ang);
       for (let iter = 0; iter < 12; iter++) {
         const mid = (lo + hi) / 2;
         const vals = {
@@ -257,12 +341,125 @@ export function buildGamutSliceBoundary(space, gamutPreset, ranges, isRectWheel,
   return out;
 }
 
+export function hardContiguousConstraintRange(bounds, space) {
+  const base = bounds?.ranges || csRanges[space];
+  const sets = bounds?.constraintSets;
+  if (!base || sets?.topology !== "contiguous" || !sets?.channels) return null;
+  const channels = channelOrder[space] || [];
+  const min = { ...base.min };
+  const max = { ...base.max };
+  const constrained = [];
+
+  channels.forEach((ch) => {
+    if (ch === "h") return;
+    const c = sets.channels[ch];
+    if (!c || c.mode !== "hard" || c.type !== "linear") return;
+    if (!Array.isArray(c.intervals) || c.intervals.length !== 1) return;
+    const [lo, hi] = c.intervals[0];
+    if (!Number.isFinite(lo) || !Number.isFinite(hi)) return;
+    if (lo <= 1e-6 && hi >= 1 - 1e-6) return;
+    const rawLo = base.min[ch] + lo * (base.max[ch] - base.min[ch]);
+    const rawHi = base.min[ch] + hi * (base.max[ch] - base.min[ch]);
+    min[ch] = Math.min(rawLo, rawHi);
+    max[ch] = Math.max(rawLo, rawHi);
+    constrained.push(ch);
+  });
+
+  return constrained.length ? { range: { min, max }, channels: constrained } : null;
+}
+
+export function hardContiguousVisibleConstraintGuides(bounds, space, visibleChannels = []) {
+  const base = bounds?.ranges || csRanges[space];
+  const sets = bounds?.constraintSets;
+  if (!base || sets?.topology !== "contiguous" || !sets?.channels) return [];
+  const visible = new Set(visibleChannels.filter(Boolean));
+  const guides = [];
+
+  (channelOrder[space] || []).forEach((ch) => {
+    if (!visible.has(ch)) return;
+    const c = sets.channels[ch];
+    if (!c || c.mode !== "hard") return;
+    if (ch === "h") {
+      const intervalsRad = (c.intervalsRad || []).filter(([lo, hi]) => {
+        const span = hi - lo;
+        return Number.isFinite(span) && span > 1e-6 && span < Math.PI * 2 - 1e-6;
+      });
+      if (intervalsRad.length) guides.push({ channel: ch, type: "hue", intervalsRad });
+      return;
+    }
+    if (c.type !== "linear") return;
+    if (!Array.isArray(c.intervals) || c.intervals.length !== 1) return;
+    const [lo, hi] = c.intervals[0];
+    if (!Number.isFinite(lo) || !Number.isFinite(hi)) return;
+    if (lo <= 1e-6 && hi >= 1 - 1e-6) return;
+    const rawLo = base.min[ch] + lo * (base.max[ch] - base.min[ch]);
+    const rawHi = base.min[ch] + hi * (base.max[ch] - base.min[ch]);
+    guides.push({
+      channel: ch,
+      type: "linear",
+      raw: [Math.min(rawLo, rawHi), Math.max(rawLo, rawHi)],
+      norm: [Math.min(lo, hi), Math.max(lo, hi)],
+    });
+  });
+
+  return guides;
+}
+
+export function hardContiguousHiddenConstraintRange(bounds, space, visibleChannels = []) {
+  const base = bounds?.ranges || csRanges[space];
+  const sets = bounds?.constraintSets;
+  if (!base || sets?.topology !== "contiguous" || !sets?.channels) return null;
+  const visible = new Set(visibleChannels.filter(Boolean));
+  const min = { ...base.min };
+  const max = { ...base.max };
+  const constrained = [];
+
+  (channelOrder[space] || []).forEach((ch) => {
+    if (ch === "h" || visible.has(ch)) return;
+    const c = sets.channels[ch];
+    if (!c || c.mode !== "hard" || c.type !== "linear") return;
+    if (!Array.isArray(c.intervals) || c.intervals.length !== 1) return;
+    const [lo, hi] = c.intervals[0];
+    if (!Number.isFinite(lo) || !Number.isFinite(hi)) return;
+    if (lo <= 1e-6 && hi >= 1 - 1e-6) return;
+    const rawLo = base.min[ch] + lo * (base.max[ch] - base.min[ch]);
+    const rawHi = base.min[ch] + hi * (base.max[ch] - base.min[ch]);
+    min[ch] = Math.min(rawLo, rawHi);
+    max[ch] = Math.max(rawLo, rawHi);
+    constrained.push(ch);
+  });
+
+  return constrained.length ? { range: { min, max }, channels: constrained } : null;
+}
+
+export function applyConstrainedChannelsToRange(range, constraintRange, constrainedChannels) {
+  if (!range || !constraintRange || !constrainedChannels?.length) return range;
+  const min = { ...range.min };
+  const max = { ...range.max };
+  constrainedChannels.forEach((ch) => {
+    if (Number.isFinite(constraintRange.min?.[ch])) min[ch] = constraintRange.min[ch];
+    if (Number.isFinite(constraintRange.max?.[ch])) max[ch] = constraintRange.max[ch];
+  });
+  return { min, max };
+}
+
+function rectRayLimit(maxX, maxY, angle) {
+  const ax = Math.abs(Math.cos(angle));
+  const ay = Math.abs(Math.sin(angle));
+  const xLimit = ax > 1e-9 ? maxX / ax : Infinity;
+  const yLimit = ay > 1e-9 ? maxY / ay : Infinity;
+  const limit = Math.min(xLimit, yLimit);
+  return Number.isFinite(limit) && limit > 0 ? limit : Math.max(maxX, maxY, 1);
+}
+
 export function buildGamutProjectedBoundary(space, gamutPreset, ranges, isRectWheel, rectKeys, steps = 360, lSteps = 1) {
   const channels = channelOrder[space] || [];
   const out = [];
   const lKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : channels[0] || "l";
-  const lMin = ranges?.min?.[lKey] ?? csRanges[space]?.min?.[lKey] ?? 0;
-  const lMax = ranges?.max?.[lKey] ?? csRanges[space]?.max?.[lKey] ?? 1;
+  const lBaseMin = csRanges[space]?.min?.[lKey] ?? 0;
+  const lBaseMax = csRanges[space]?.max?.[lKey] ?? 1;
+  const lMin = Math.max(ranges?.min?.[lKey] ?? lBaseMin, lBaseMin);
+  const lMax = Math.min(ranges?.max?.[lKey] ?? lBaseMax, lBaseMax);
   const fixedLNorm = space === "hsl" ? 0.5 : 0.75;
   const lFixed = lMin + fixedLNorm * (lMax - lMin);
   const count = Math.max(1, lSteps);
@@ -320,8 +517,10 @@ export function buildGamutProjectedBoundary(space, gamutPreset, ranges, isRectWh
 export function buildGamutProjectedHull(space, gamutPreset, ranges, isRectWheel, rectKeys, toPoint, steps = 64, radialSteps = 32) {
   const channels = channelOrder[space] || [];
   const lKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : channels[0] || "l";
-  const lMin = ranges?.min?.[lKey] ?? csRanges[space]?.min?.[lKey] ?? 0;
-  const lMax = ranges?.max?.[lKey] ?? csRanges[space]?.max?.[lKey] ?? 1;
+  const lBaseMin = csRanges[space]?.min?.[lKey] ?? 0;
+  const lBaseMax = csRanges[space]?.max?.[lKey] ?? 1;
+  const lMin = Math.max(ranges?.min?.[lKey] ?? lBaseMin, lBaseMin);
+  const lMax = Math.min(ranges?.max?.[lKey] ?? lBaseMax, lBaseMax);
   const fixedLNorm = space === "hsl" ? 0.5 : 0.75;
   const lVal = lMin + fixedLNorm * (lMax - lMin);
   const points = [];
@@ -586,10 +785,16 @@ export function buildGamutOuterBoundary(pointsOrPaths, cx, cy, expandPx = 0) {
  * Returns a range object { min: {channel: value}, max: {channel: value} }
  * with a margin multiplier applied (e.g., 1.1 for 10% padding).
  */
-export function computeGamutExtent(space, gamutPreset, marginMultiplier = 1.1) {
+export function computeGamutExtent(space, gamutPreset, marginMultiplier = 1.1, rangeConstraint = null) {
   const channels = channelOrder[space] || [];
   const baseRange = csRanges[space];
   if (!baseRange) return null;
+  if (space === "hsl") {
+    return {
+      min: { ...baseRange.min },
+      max: { ...baseRange.max },
+    };
+  }
 
   const hasHue = channels.includes("h");
   const lKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : channels[0] || "l";
@@ -631,6 +836,7 @@ export function computeGamutExtent(space, gamutPreset, marginMultiplier = 1.1) {
         const xyz = gamut.toXYZ(rn, gn, bn);
         const vals = convertColorValues(xyz, "xyz", space);
         if (!vals) continue;
+        if (rangeConstraint && !valuesWithinRange(vals, space, rangeConstraint)) continue;
 
         channels.forEach((ch) => {
           if (ch === "h") return; // Skip hue
@@ -678,4 +884,16 @@ export function computeGamutExtent(space, gamutPreset, marginMultiplier = 1.1) {
   });
 
   return result;
+}
+
+function valuesWithinRange(vals, space, range, tolerance = 1e-6) {
+  const channels = channelOrder[space] || [];
+  return channels.every((ch) => {
+    if (ch === "h") return true;
+    const v = vals?.[ch];
+    const min = range?.min?.[ch];
+    const max = range?.max?.[ch];
+    if (!Number.isFinite(v) || !Number.isFinite(min) || !Number.isFinite(max)) return true;
+    return v >= min - tolerance && v <= max + tolerance;
+  });
 }

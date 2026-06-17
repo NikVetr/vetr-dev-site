@@ -293,6 +293,7 @@ const LZString = {
 // Default state
 const DEFAULT_STATE = {
     items: [],
+    stagedItems: [],
     settings: {
         startTime: '16:00',
         pinStartTime: true,
@@ -316,7 +317,13 @@ const DEFAULT_STATE = {
     tracker: {
         isRunning: false,
         startedAt: null,
-        pausedAt: null
+        pausedAt: null,
+        activeItemIndex: 0,
+        completedDiffById: {},
+        overallDeltaMinutes: 0,
+        expectedSnapshot: null,
+        varianceMode: false,
+        varianceActivatedAt: null
     }
 };
 
@@ -381,7 +388,10 @@ export function updateItem(itemId, updates) {
     const items = currentState.items.map(item =>
         item.id === itemId ? { ...item, ...updates } : item
     );
-    setState({ items });
+    const stagedItems = currentState.stagedItems.map(item =>
+        item.id === itemId ? { ...item, ...updates } : item
+    );
+    setState({ items, stagedItems });
 }
 
 // Track next theme color to assign
@@ -441,6 +451,68 @@ export function reorderItems(fromIndex, toIndex) {
 }
 
 /**
+ * Reorder staged items
+ * @param {number} fromIndex - Source index
+ * @param {number} toIndex - Destination index
+ */
+export function reorderStagedItems(fromIndex, toIndex) {
+    const stagedItems = [...currentState.stagedItems];
+    if (fromIndex < 0 || fromIndex >= stagedItems.length) return false;
+    if (toIndex < 0) toIndex = 0;
+    if (toIndex >= stagedItems.length) toIndex = stagedItems.length - 1;
+    const [removed] = stagedItems.splice(fromIndex, 1);
+    stagedItems.splice(toIndex, 0, removed);
+    setState({ stagedItems });
+    return true;
+}
+
+/**
+ * Move an agenda item into staging
+ * @param {string} itemId - Item ID
+ * @param {number} toIndex - Optional staged insertion index
+ * @returns {boolean} Whether an update was applied
+ */
+export function stageItem(itemId, toIndex = -1) {
+    const items = [...currentState.items];
+    const stagedItems = [...currentState.stagedItems];
+    const fromIndex = items.findIndex(item => item.id === itemId);
+    if (fromIndex < 0) return false;
+
+    const [moved] = items.splice(fromIndex, 1);
+    if (toIndex < 0 || toIndex > stagedItems.length) {
+        stagedItems.push(moved);
+    } else {
+        stagedItems.splice(toIndex, 0, moved);
+    }
+
+    setState({ items, stagedItems });
+    return true;
+}
+
+/**
+ * Move a staged item back into the active agenda
+ * @param {string} itemId - Item ID
+ * @param {number} toIndex - Optional agenda insertion index
+ * @returns {boolean} Whether an update was applied
+ */
+export function unstageItem(itemId, toIndex = -1) {
+    const items = [...currentState.items];
+    const stagedItems = [...currentState.stagedItems];
+    const fromIndex = stagedItems.findIndex(item => item.id === itemId);
+    if (fromIndex < 0) return false;
+
+    const [moved] = stagedItems.splice(fromIndex, 1);
+    if (toIndex < 0 || toIndex > items.length) {
+        items.push(moved);
+    } else {
+        items.splice(toIndex, 0, moved);
+    }
+
+    setState({ items, stagedItems });
+    return true;
+}
+
+/**
  * Update settings
  * @param {Object} settings - Settings updates
  */
@@ -470,6 +542,50 @@ export function updateTracker(tracker) {
     });
 }
 
+function createExpectedSnapshotFromState() {
+    const { items, settings } = currentState;
+    return {
+        capturedAt: new Date().toISOString(),
+        startTime: settings.startTime,
+        buffer: settings.buffer || 0,
+        items: (items || []).map(item => ({
+            id: item.id,
+            name: item.name || '',
+            lead: item.lead || '',
+            duration: item.duration || '1m',
+            locked: !!item.locked,
+            notes: item.notes || '',
+            themeColor: item.themeColor || 1
+        }))
+    };
+}
+
+function ensureExpectedSnapshotInTracker(tracker) {
+    if (tracker?.expectedSnapshot) {
+        return { tracker, changed: false };
+    }
+    return {
+        tracker: {
+            ...(tracker || {}),
+            expectedSnapshot: createExpectedSnapshotFromState()
+        },
+        changed: true
+    };
+}
+
+/**
+ * Ensure an expected-plan snapshot exists for this run.
+ * @returns {boolean} Whether a snapshot was created
+ */
+export function ensureExpectedSnapshot() {
+    const currentTracker = currentState.tracker || {};
+    const { tracker, changed } = ensureExpectedSnapshotInTracker(currentTracker);
+    if (changed) {
+        setState({ tracker });
+    }
+    return changed;
+}
+
 /**
  * Advance to the next item by ending the current item now and redistributing future time
  * Locked items are never compressed below their current duration
@@ -480,8 +596,153 @@ export function advanceToNextItem(currentTime = new Date()) {
     const { items, settings } = currentState;
     if (!items || items.length === 0) return false;
 
+    const tracker = currentState.tracker || {};
+    if (tracker.isRunning || tracker.startedAt) {
+        const scheduledIntervals = calculateIntervals();
+        if (scheduledIntervals.length === 0) return false;
+
+        let currentIndex = Math.max(0, Math.min(
+            items.length - 1,
+            Number.isFinite(tracker.activeItemIndex) ? tracker.activeItemIndex : 0
+        ));
+        if (currentIndex >= items.length - 1) return false;
+
+        let nextTracker = tracker;
+        let trackerChanged = false;
+        const snapshotResult = ensureExpectedSnapshotInTracker(nextTracker);
+        nextTracker = snapshotResult.tracker;
+        trackerChanged = snapshotResult.changed;
+
+        const scheduledCurrent = scheduledIntervals[currentIndex];
+        if (!scheduledCurrent) return false;
+        const originalDuration = parseDuration(items[currentIndex].duration);
+        const elapsedExact = Math.max(0, (currentTime - scheduledCurrent.startTime) / 60000);
+        let newCurrentDuration = Math.max(1, Math.round(elapsedExact));
+        if (items[currentIndex].locked) {
+            newCurrentDuration = Math.max(originalDuration, newCurrentDuration);
+        }
+
+        const scheduledEnd = scheduledIntervals[scheduledIntervals.length - 1].endTime;
+        const remainingTotal = Math.max(0, Math.round((scheduledEnd - currentTime) / 60000));
+        const buffer = settings.buffer || 0;
+
+        const futureItems = items.slice(currentIndex + 1);
+        const futureCount = futureItems.length;
+        const totalFutureBuffer = Math.max(0, (futureCount - 1) * buffer);
+        const remainingForFuture = Math.max(0, remainingTotal - totalFutureBuffer);
+        const futureDurations = futureItems.map(item => parseDuration(item.duration));
+        const totalFutureDuration = futureDurations.reduce((sum, duration) => sum + duration, 0);
+        const lockedTotal = futureItems.reduce((sum, item, idx) => {
+            return item.locked ? sum + futureDurations[idx] : sum;
+        }, 0);
+        const unlockedTotal = totalFutureDuration - lockedTotal;
+
+        let newFutureDurations;
+        if (remainingForFuture >= totalFutureDuration) {
+            const scale = totalFutureDuration > 0 ? remainingForFuture / totalFutureDuration : 1;
+            newFutureDurations = futureDurations.map(duration => Math.max(1, Math.round(duration * scale)));
+        } else {
+            const availableForUnlocked = Math.max(0, remainingForFuture - lockedTotal);
+            const scale = unlockedTotal > 0 ? availableForUnlocked / unlockedTotal : 0;
+            newFutureDurations = futureDurations.map((duration, idx) => {
+                if (futureItems[idx].locked) return duration;
+                return Math.max(1, Math.round(duration * scale));
+            });
+        }
+
+        let durationSum = newFutureDurations.reduce((sum, duration) => sum + duration, 0);
+        let diff = remainingForFuture - durationSum;
+        const adjustable = futureItems
+            .map((item, idx) => ({ idx, locked: item.locked }))
+            .filter(entry => !entry.locked);
+
+        if (diff !== 0 && adjustable.length > 0) {
+            let safety = 0;
+            while (diff !== 0 && safety < 5000) {
+                for (const entry of adjustable) {
+                    if (diff === 0) break;
+                    if (diff > 0) {
+                        newFutureDurations[entry.idx] += 1;
+                        diff -= 1;
+                    } else if (newFutureDurations[entry.idx] > 1) {
+                        newFutureDurations[entry.idx] -= 1;
+                        diff += 1;
+                    }
+                }
+                if (diff < 0 && adjustable.every(entry => newFutureDurations[entry.idx] <= 1)) {
+                    break;
+                }
+                safety += 1;
+            }
+        }
+
+        const updatedItems = items.map((item, index) => {
+            if (index < currentIndex) return item;
+            if (index === currentIndex) {
+                return { ...item, duration: formatDuration(newCurrentDuration) };
+            }
+            const futureIndex = index - currentIndex - 1;
+            const nextDuration = newFutureDurations[futureIndex] ?? parseDuration(item.duration);
+            return { ...item, duration: formatDuration(nextDuration) };
+        });
+
+        const deltaExact = elapsedExact - originalDuration;
+        const completedDiffById = {
+            ...(nextTracker.completedDiffById || {}),
+            [items[currentIndex].id]: deltaExact
+        };
+        const overallDeltaMinutes = Object.values(completedDiffById)
+            .reduce((sum, value) => sum + (Number.isFinite(value) ? value : 0), 0);
+
+        if (!nextTracker.varianceMode && Math.abs(deltaExact) > 1) {
+            nextTracker = {
+                ...nextTracker,
+                varianceMode: true,
+                varianceActivatedAt: new Date().toISOString()
+            };
+            trackerChanged = true;
+        }
+
+        nextTracker = {
+            ...nextTracker,
+            activeItemIndex: Math.min(items.length - 1, currentIndex + 1),
+            completedDiffById,
+            overallDeltaMinutes
+        };
+        trackerChanged = true;
+
+        const updates = { items: updatedItems };
+        if (trackerChanged) {
+            updates.tracker = nextTracker;
+        }
+        setState(updates);
+        return true;
+    }
+
     const scheduledIntervals = calculateIntervals();
     if (scheduledIntervals.length === 0) return false;
+
+    let nextTracker = currentState.tracker || {};
+    let trackerChanged = false;
+    if (nextTracker.isRunning) {
+        const snapshotResult = ensureExpectedSnapshotInTracker(nextTracker);
+        nextTracker = snapshotResult.tracker;
+        trackerChanged = snapshotResult.changed;
+
+        const adjustedBeforeAdvance = calculateAdjustedIntervals(currentTime);
+        if (
+            adjustedBeforeAdvance.status !== 'on-time' &&
+            adjustedBeforeAdvance.difference > 1 &&
+            !nextTracker.varianceMode
+        ) {
+            nextTracker = {
+                ...nextTracker,
+                varianceMode: true,
+                varianceActivatedAt: new Date().toISOString()
+            };
+            trackerChanged = true;
+        }
+    }
 
     let currentIndex = -1;
     for (let i = 0; i < scheduledIntervals.length; i++) {
@@ -581,8 +842,68 @@ export function advanceToNextItem(currentTime = new Date()) {
         return { ...item, duration: formatDuration(nextDuration) };
     });
 
-    setState({ items: updatedItems });
+    const updates = { items: updatedItems };
+    if (trackerChanged) {
+        updates.tracker = nextTracker;
+    }
+    setState(updates);
     return true;
+}
+
+/**
+ * Move run focus back to the previous item.
+ * @returns {boolean} Whether an update was applied
+ */
+export function retreatToPreviousItem() {
+    const { items, tracker } = currentState;
+    if (!items || items.length === 0) return false;
+    if (!tracker || (!tracker.isRunning && !tracker.startedAt)) return false;
+
+    const activeItemIndex = Math.max(0, Math.min(
+        items.length - 1,
+        Number.isFinite(tracker.activeItemIndex) ? tracker.activeItemIndex : 0
+    ));
+    if (activeItemIndex <= 0) return false;
+
+    const prevIndex = activeItemIndex - 1;
+    const prevItem = items[prevIndex];
+    const completedDiffById = { ...(tracker.completedDiffById || {}) };
+    if (prevItem?.id && Object.prototype.hasOwnProperty.call(completedDiffById, prevItem.id)) {
+        delete completedDiffById[prevItem.id];
+    }
+    const overallDeltaMinutes = Object.values(completedDiffById)
+        .reduce((sum, value) => sum + (Number.isFinite(value) ? value : 0), 0);
+
+    setState({
+        tracker: {
+            ...tracker,
+            activeItemIndex: prevIndex,
+            completedDiffById,
+            overallDeltaMinutes
+        }
+    });
+    return true;
+}
+
+function calculateIntervalsFromPlan(planItems, startTimeValue, bufferValue) {
+    if (!planItems || planItems.length === 0) return [];
+    const startTime = parseTime(startTimeValue);
+    const buffer = bufferValue || 0;
+
+    let currentTime = new Date(startTime);
+    return planItems.map((item, index) => {
+        const duration = parseDuration(item.duration);
+        const itemStart = new Date(currentTime);
+        const itemEnd = addMinutes(currentTime, duration);
+        currentTime = addMinutes(itemEnd, index < planItems.length - 1 ? buffer : 0);
+
+        return {
+            ...item,
+            startTime: itemStart,
+            endTime: itemEnd,
+            themeNumber: item.themeColor || ((index % 4) + 1)
+        };
+    });
 }
 
 /**
@@ -687,38 +1008,57 @@ export function updateIntervalTime(index, position, targetTime) {
  */
 export function calculateIntervals() {
     const { items, settings } = currentState;
-    const startTime = parseTime(settings.startTime);
-    const buffer = settings.buffer || 0;
+    return calculateIntervalsFromPlan(items, settings.startTime, settings.buffer || 0);
+}
 
-    if (!items || items.length === 0) return [];
+/**
+ * Get Expected-vs-Actual rows for the Input panel and exports.
+ * Returns null when variance mode is not active.
+ * @returns {Object|null}
+ */
+export function getExpectedVsActualData() {
+    const tracker = currentState.tracker || {};
+    const snapshot = tracker.expectedSnapshot;
+    if (!tracker.varianceMode || !snapshot || !snapshot.items || snapshot.items.length === 0) {
+        return null;
+    }
 
-    // Calculate total duration and end time
-    let totalDuration = 0;
-    items.forEach(item => {
-        totalDuration += parseDuration(item.duration) + buffer;
-    });
-    // Remove buffer after last item
-    totalDuration -= buffer;
+    const expectedIntervals = calculateIntervalsFromPlan(
+        snapshot.items,
+        snapshot.startTime || currentState.settings.startTime,
+        snapshot.buffer ?? currentState.settings.buffer ?? 0
+    );
+    const actualIntervals = calculateIntervals();
+    const expectedById = new Map(expectedIntervals.map(item => [item.id, item]));
 
-    const endTime = addMinutes(startTime, totalDuration);
-
-    // Calculate intervals
-    let currentTime = new Date(startTime);
-    return items.map((item, index) => {
-        const duration = parseDuration(item.duration);
-        const itemStart = new Date(currentTime);
-        const itemEnd = addMinutes(currentTime, duration);
-
-        currentTime = addMinutes(itemEnd, index < items.length - 1 ? buffer : 0);
+    const rows = actualIntervals.map(actual => {
+        const expected = expectedById.get(actual.id) || null;
+        const actualDurationMinutes = parseDuration(actual.duration || '1m');
+        const expectedDurationMinutes = expected ? parseDuration(expected.duration || '1m') : null;
+        const durationDifferenceMinutes = expectedDurationMinutes === null
+            ? null
+            : actualDurationMinutes - expectedDurationMinutes;
 
         return {
-            ...item,
-            startTime: itemStart,
-            endTime: itemEnd,
-            // Use item's stored themeColor, fall back to position-based if not set
-            themeNumber: item.themeColor || ((index % 4) + 1)
+            id: actual.id,
+            expected,
+            actual,
+            expectedDurationMinutes,
+            actualDurationMinutes,
+            durationDifferenceMinutes
         };
     });
+
+    const byId = rows.reduce((acc, row) => {
+        acc[row.id] = row;
+        return acc;
+    }, {});
+
+    return {
+        snapshot,
+        rows,
+        byId
+    };
 }
 
 function formatTimeValue(date) {
@@ -803,70 +1143,31 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
             items: calculateIntervals(),
             status: 'on-time',
             difference: 0,
+            signedDifference: 0,
             currentItemIndex: -1
         };
     }
 
-    // Calculate scheduled total
-    let scheduledTotal = 0;
-    items.forEach((item, i) => {
-        scheduledTotal += parseDuration(item.duration) + (i < items.length - 1 ? buffer : 0);
-    });
-    const scheduledEnd = addMinutes(scheduledStart, scheduledTotal);
+    const scheduledItems = calculateIntervals();
+    const currentItemIndex = Math.max(0, Math.min(
+        items.length - 1,
+        Number.isFinite(tracker.activeItemIndex) ? tracker.activeItemIndex : 0
+    ));
+    const plannedDurations = items.map(item => parseDuration(item.duration || '1m'));
 
-    // Find current item based on scheduled times
-    let elapsed = Math.max(0, (currentTime - scheduledStart) / 60000);
-    let currentItemIndex = -1;
-    let elapsedCheck = 0;
+    const currentScheduledStart = scheduledItems[currentItemIndex]?.startTime || new Date(currentTime);
+    const currentPlannedDuration = plannedDurations[currentItemIndex] || 1;
+    const elapsedOnCurrent = Math.max(0, (currentTime - currentScheduledStart) / 60000);
+    const currentActualDuration = Math.max(currentPlannedDuration, elapsedOnCurrent);
 
-    for (let i = 0; i < items.length; i++) {
-        const duration = parseDuration(items[i].duration) + (i < items.length - 1 ? buffer : 0);
-        if (elapsed >= elapsedCheck && elapsed < elapsedCheck + duration) {
-            currentItemIndex = i;
-            break;
-        }
-        elapsedCheck += duration;
-    }
-
-    if (currentItemIndex === -1 && elapsed >= elapsedCheck) {
-        currentItemIndex = items.length - 1;
-    }
-
-    // Calculate remaining time and adjust unlocked items
-    const remainingTime = Math.max(0, (scheduledEnd - currentTime) / 60000);
-
-    // Calculate locked duration remaining (items after current)
-    let lockedDuration = 0;
-    let unlockedCount = 0;
-    let unlockedDuration = 0;
-
-    for (let i = currentItemIndex + 1; i < items.length; i++) {
-        const duration = parseDuration(items[i].duration);
-        if (items[i].locked) {
-            lockedDuration += duration;
-        } else {
-            unlockedCount++;
-            unlockedDuration += duration;
-        }
-    }
-
-    // Calculate how much time is available for unlocked items
-    const availableForUnlocked = Math.max(0, remainingTime - lockedDuration - (items.length - currentItemIndex - 2) * buffer);
-    const scaleFactor = unlockedDuration > 0 ? availableForUnlocked / unlockedDuration : 1;
-
-    // Build adjusted items
     let runningTime = new Date(scheduledStart);
     const adjustedItems = items.map((item, index) => {
-        let duration = parseDuration(item.duration);
-
-        // If item is in the future and unlocked, scale it
-        if (index > currentItemIndex && !item.locked && scaleFactor !== 1) {
-            duration = Math.max(1, Math.round(duration * scaleFactor));
-        }
+        const duration = index === currentItemIndex
+            ? currentActualDuration
+            : plannedDurations[index];
 
         const itemStart = new Date(runningTime);
         const itemEnd = addMinutes(runningTime, duration);
-
         runningTime = addMinutes(itemEnd, index < items.length - 1 ? buffer : 0);
 
         return {
@@ -874,25 +1175,25 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
             startTime: itemStart,
             endTime: itemEnd,
             adjustedDuration: duration,
-            // Use item's stored themeColor, fall back to position-based if not set
             themeNumber: item.themeColor || ((index % 4) + 1)
         };
     });
 
-    // Calculate status
-    const scheduledCurrentEnd = calculateIntervals()[currentItemIndex]?.endTime || scheduledEnd;
-    const actualCurrentEnd = adjustedItems[currentItemIndex]?.endTime || new Date();
-    const difference = Math.round((currentTime - scheduledCurrentEnd) / 60000);
+    const currentOverrun = Math.max(0, elapsedOnCurrent - currentPlannedDuration);
+    const signedDifference = (tracker.overallDeltaMinutes || 0) + currentOverrun;
 
     let status = 'on-time';
-    if (difference > 1) status = 'behind';
-    else if (difference < -1) status = 'ahead';
+    if (signedDifference > 0.05) status = 'behind';
+    else if (signedDifference < -0.05) status = 'ahead';
 
     return {
         items: adjustedItems,
         status,
-        difference: Math.abs(difference),
-        currentItemIndex
+        difference: Math.abs(signedDifference),
+        signedDifference,
+        currentItemIndex,
+        currentOverrun,
+        currentRemaining: currentPlannedDuration - elapsedOnCurrent
     };
 }
 
@@ -903,6 +1204,14 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
 export function encodeStateToURL() {
     const stateToEncode = {
         i: currentState.items.map(item => ({
+            n: item.name,
+            l: item.lead,
+            d: item.duration,
+            k: item.locked ? 1 : 0,
+            o: item.notes,
+            c: item.themeColor || 1
+        })),
+        g: currentState.stagedItems.map(item => ({
             n: item.name,
             l: item.lead,
             d: item.duration,
@@ -942,6 +1251,15 @@ export function decodeStateFromURL(encoded) {
 
         return {
             items: decoded.i.map((item, index) => ({
+                id: generateId(),
+                name: item.n || '',
+                lead: item.l || '',
+                duration: item.d || '10m',
+                locked: item.k === 1,
+                notes: item.o || '',
+                themeColor: item.c || ((index % 4) + 1)
+            })),
+            stagedItems: (decoded.g || []).map((item, index) => ({
                 id: generateId(),
                 name: item.n || '',
                 lead: item.l || '',
@@ -1085,6 +1403,10 @@ export function importFromJSON(json) {
             ...item,
             id: item.id || generateId()
         }));
+        imported.stagedItems = (imported.stagedItems || []).map(item => ({
+            ...item,
+            id: item.id || generateId()
+        }));
 
         // Merge with defaults
         currentState = {
@@ -1092,7 +1414,7 @@ export function importFromJSON(json) {
             ...imported,
             settings: { ...DEFAULT_STATE.settings, ...imported.settings },
             exportOptions: { ...DEFAULT_STATE.exportOptions, ...imported.exportOptions },
-            tracker: { ...DEFAULT_STATE.tracker }
+            tracker: { ...DEFAULT_STATE.tracker, ...imported.tracker }
         };
 
         persistState();

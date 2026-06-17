@@ -34,7 +34,7 @@ test.describe('Color Optimization App Screenshots', () => {
     await page.waitForTimeout(300);
 
     // Select Display P3
-    await page.selectOption('#gamut-preset', 'p3');
+    await page.selectOption('#gamut-preset', 'display-p3');
     await page.waitForTimeout(500);
 
     await page.screenshot({
@@ -54,7 +54,7 @@ test.describe('Color Optimization App Screenshots', () => {
     await page.waitForTimeout(200);
 
     // Set small restarts for quick test
-    await page.fill('#restarts', '20');
+    await page.fill('#optim-runs', '20');
     await page.waitForTimeout(100);
 
     // Run optimization
@@ -89,7 +89,7 @@ test.describe('Color Optimization App Screenshots', () => {
     await page.waitForTimeout(200);
 
     // Set small restarts
-    await page.fill('#restarts', '20');
+    await page.fill('#optim-runs', '20');
     await page.waitForTimeout(100);
 
     // Run optimization

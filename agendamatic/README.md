@@ -1,4 +1,4 @@
-# Agendamatic
+# autoCHAIR
 
 A real-time meeting agenda tracker with visual timeline, state persistence, and export capabilities. Runs entirely in the browser as a static site.
 
@@ -102,7 +102,7 @@ agendamatic/
 
 ## State Persistence
 
-Agendamatic saves your agenda in three ways:
+autoCHAIR saves your agenda in three ways:
 
 1. **URL Parameters**: State is compressed and encoded in the URL query string
 2. **Local Storage**: Automatically saved as you make changes

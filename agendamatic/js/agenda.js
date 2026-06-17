@@ -10,7 +10,9 @@ import {
     updateItem,
     updateIntervalTime,
     reorderItems,
-    calculateIntervals
+    unstageItem,
+    calculateIntervals,
+    getExpectedVsActualData
 } from './state.js';
 import { formatTime, parseTime, addMinutes, debounce, parseDuration, formatDuration } from './utils.js';
 
@@ -24,6 +26,12 @@ let notesModal = null;
 let modalTitle = null;
 let editorTextarea = null;
 let currentEditingItem = null;
+
+function setGlobalDragCursor(active) {
+    const value = active ? 'grabbing' : '';
+    document.documentElement.style.setProperty('cursor', value, 'important');
+    document.body.style.setProperty('cursor', value, 'important');
+}
 
 /**
  * Initialize the agenda module
@@ -220,8 +228,9 @@ function setupContainerDragEvents() {
     if (!container) return;
 
     container.addEventListener('dragover', (e) => {
+        const source = e.dataTransfer?.getData('application/x-agenda-source') || document.body.dataset.dragSource;
+        if (!source) return;
         e.preventDefault();
-        if (!draggedElement) return;
 
         const rows = [...container.querySelectorAll('.agenda-row:not(.dragging)')];
         const afterElement = getDragAfterElement(rows, e.clientY);
@@ -231,11 +240,11 @@ function setupContainerDragEvents() {
         if (afterElement) {
             targetIndex = parseInt(afterElement.dataset.index, 10);
             // Adjust if dragging from before to after
-            if (draggedIndex < targetIndex) {
+            if (source === 'agenda' && draggedIndex !== null && draggedIndex < targetIndex) {
                 targetIndex--;
             }
         } else {
-            targetIndex = getState().items.length - 1;
+            targetIndex = getState().items.length;
         }
 
         // Clear all indicators
@@ -272,7 +281,9 @@ function setupContainerDragEvents() {
         e.preventDefault();
         clearDragIndicators();
 
-        if (!draggedElement) return;
+        const source = e.dataTransfer?.getData('application/x-agenda-source') || document.body.dataset.dragSource;
+        const itemId = e.dataTransfer?.getData('text/plain') || document.body.dataset.dragItemId;
+        if (!source || !itemId) return;
 
         const rows = [...container.querySelectorAll('.agenda-row:not(.dragging)')];
         const afterElement = getDragAfterElement(rows, e.clientY);
@@ -281,15 +292,25 @@ function setupContainerDragEvents() {
         if (afterElement) {
             targetIndex = parseInt(afterElement.dataset.index, 10);
             // Adjust if dragging from before to after
-            if (draggedIndex < targetIndex) {
+            if (source === 'agenda' && draggedIndex !== null && draggedIndex < targetIndex) {
                 targetIndex--;
             }
         } else {
-            targetIndex = getState().items.length - 1;
+            targetIndex = getState().items.length;
         }
 
-        if (draggedIndex !== targetIndex) {
-            reorderItems(draggedIndex, targetIndex);
+        if (source === 'agenda') {
+            const fromIndex = draggedIndex !== null
+                ? draggedIndex
+                : getState().items.findIndex(item => item.id === itemId);
+            if (fromIndex >= 0 && fromIndex !== targetIndex) {
+                reorderItems(fromIndex, targetIndex);
+            }
+            return;
+        }
+
+        if (source === 'staging') {
+            unstageItem(itemId, targetIndex);
         }
     });
 }
@@ -331,6 +352,11 @@ export function renderAgenda(state) {
     if (!container) return;
 
     const itemsWithIntervals = calculateIntervals();
+    const varianceData = getExpectedVsActualData();
+    const varianceMode = !!varianceData;
+    const varianceById = varianceData?.byId || {};
+
+    renderAgendaHeader(varianceMode);
 
     // Clear existing rows (but keep the header if it exists)
     const existingRows = container.querySelectorAll('.agenda-row');
@@ -338,9 +364,43 @@ export function renderAgenda(state) {
 
     // Render each item
     itemsWithIntervals.forEach((item, index) => {
-        const row = createAgendaRow(item, index);
+        const row = createAgendaRow(item, index, varianceMode, varianceById[item.id] || null);
         container.appendChild(row);
     });
+}
+
+function renderAgendaHeader(varianceMode) {
+    const header = document.querySelector('.agenda-header');
+    if (!header) return;
+
+    header.classList.toggle('variance-grid', varianceMode);
+    if (varianceMode) {
+        header.innerHTML = `
+            <div></div>
+            <div>Item</div>
+            <div>Lead</div>
+            <div class="header-split"><span class="header-main">Duration</span><span class="header-sub">Expected</span></div>
+            <div class="header-split"><span class="header-main">Duration</span><span class="header-sub">Actual</span></div>
+            <div class="header-split"><span class="header-main">Time</span><span class="header-sub">Expected</span></div>
+            <div class="header-split"><span class="header-main">Time</span><span class="header-sub">Actual</span></div>
+            <div class="header-split"><span class="header-main">Difference</span><span class="header-sub">Actual-Expected</span></div>
+            <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
+            <div data-tooltip="Item notes">&#128221;</div>
+            <div></div>
+        `;
+        return;
+    }
+
+    header.innerHTML = `
+        <div></div>
+        <div>Item</div>
+        <div>Lead</div>
+        <div>Duration</div>
+        <div>Time</div>
+        <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
+        <div data-tooltip="Item notes">&#128221;</div>
+        <div></div>
+    `;
 }
 
 /**
@@ -349,9 +409,12 @@ export function renderAgenda(state) {
  * @param {number} index - Item index
  * @returns {HTMLElement} Row element
  */
-function createAgendaRow(item, index) {
+function createAgendaRow(item, index, varianceMode, varianceRow) {
     const row = document.createElement('div');
     row.className = `agenda-grid agenda-row theme-${item.themeNumber}`;
+    if (varianceMode) {
+        row.classList.add('variance-grid');
+    }
     row.draggable = true;
     row.dataset.id = item.id;
     row.dataset.index = index;
@@ -429,6 +492,42 @@ function createAgendaRow(item, index) {
 
     intervalSpan.setAttribute('data-tooltip', 'Calculated time slot based on duration');
 
+    let expectedDurationCell = null;
+    let expectedIntervalCell = null;
+    let differenceCell = null;
+    if (varianceMode) {
+        expectedDurationCell = document.createElement('span');
+        expectedDurationCell.className = 'agenda-static-cell duration-expected-cell';
+        expectedDurationCell.textContent = varianceRow?.expectedDurationMinutes === null || varianceRow?.expectedDurationMinutes === undefined
+            ? '-'
+            : formatDuration(varianceRow.expectedDurationMinutes);
+        expectedDurationCell.setAttribute('data-tooltip', 'Original planned duration');
+
+        expectedIntervalCell = document.createElement('span');
+        expectedIntervalCell.className = 'interval interval-expected-cell';
+        expectedIntervalCell.textContent = varianceRow?.expected
+            ? `${formatTime(varianceRow.expected.startTime)}-${formatTime(varianceRow.expected.endTime)}`
+            : '-';
+        expectedIntervalCell.setAttribute('data-tooltip', 'Original planned time interval');
+
+        differenceCell = document.createElement('span');
+        differenceCell.className = 'agenda-static-cell difference-cell';
+        const diff = varianceRow?.durationDifferenceMinutes;
+        if (diff === null || diff === undefined) {
+            differenceCell.textContent = '-';
+        } else {
+            differenceCell.textContent = `${diff > 0 ? '+' : ''}${diff}m`;
+            if (diff > 0) {
+                differenceCell.classList.add('positive');
+            } else if (diff < 0) {
+                differenceCell.classList.add('negative');
+            } else {
+                differenceCell.classList.add('neutral');
+            }
+        }
+        differenceCell.setAttribute('data-tooltip', 'Actual duration minus expected duration');
+    }
+
     // Lock checkbox
     const lockCheckbox = document.createElement('input');
     lockCheckbox.type = 'checkbox';
@@ -454,8 +553,16 @@ function createAgendaRow(item, index) {
     row.appendChild(grip);
     row.appendChild(nameInput);
     row.appendChild(leadInput);
-    row.appendChild(durationWrapper);
-    row.appendChild(intervalSpan);
+    if (varianceMode) {
+        row.appendChild(expectedDurationCell);
+        row.appendChild(durationWrapper);
+        row.appendChild(expectedIntervalCell);
+        row.appendChild(intervalSpan);
+        row.appendChild(differenceCell);
+    } else {
+        row.appendChild(durationWrapper);
+        row.appendChild(intervalSpan);
+    }
     row.appendChild(lockCheckbox);
     row.appendChild(notesBtn);
     row.appendChild(deleteBtn);
@@ -653,10 +760,18 @@ function adjustDuration(item, deltaMinutes) {
 function handleDragStart(e) {
     draggedElement = e.currentTarget;
     draggedIndex = parseInt(draggedElement.dataset.index, 10);
+    const itemId = draggedElement.dataset.id;
 
     e.currentTarget.classList.add('dragging');
+    document.body.classList.add('dragging-item');
+    setGlobalDragCursor(true);
+    document.body.dataset.dragSource = 'agenda';
+    if (itemId) {
+        document.body.dataset.dragItemId = itemId;
+    }
     e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', draggedElement.dataset.id);
+    e.dataTransfer.setData('text/plain', itemId || '');
+    e.dataTransfer.setData('application/x-agenda-source', 'agenda');
 
     // Add a slight delay to allow the drag image to be captured
     setTimeout(() => {
@@ -673,6 +788,10 @@ function handleDragStart(e) {
 function handleDragEnd(e) {
     e.currentTarget.classList.remove('dragging');
     e.currentTarget.style.opacity = '';
+    document.body.classList.remove('dragging-item');
+    setGlobalDragCursor(false);
+    delete document.body.dataset.dragSource;
+    delete document.body.dataset.dragItemId;
 
     clearDragIndicators();
 

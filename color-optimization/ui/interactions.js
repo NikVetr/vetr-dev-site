@@ -13,6 +13,7 @@ import { parsePalette, readConstraintConfig } from "./configRead.js";
 import { refreshSwatches } from "./panels.js";
 import { setResults } from "./resultsBox.js";
 import { setStatusState } from "./status.js";
+import { drawStatusMini } from "./statusGraph.js";
 
 const HIT_RADIUS = 8;
 const EDGE_HIT = 6;
@@ -162,6 +163,18 @@ function midpointForSpaceChannel(space, ch) {
   const max = range.max?.[ch];
   if (!Number.isFinite(min) || !Number.isFinite(max)) return 0;
   return (min + max) / 2;
+}
+
+function midpointForConstraintChannel(ui, state, space, ch) {
+  if (ui.colorSpace?.value === space && state.bounds?.boundsByName?.[ch] && state.bounds?.ranges) {
+    const b = state.bounds.boundsByName[ch];
+    const min = state.bounds.ranges.min?.[ch];
+    const max = state.bounds.ranges.max?.[ch];
+    if (Array.isArray(b) && Number.isFinite(min) && Number.isFinite(max)) {
+      return min + ((b[0] + b[1]) / 2) * (max - min);
+    }
+  }
+  return midpointForSpaceChannel(space, ch);
 }
 
 function ensureCustomConstraintSpace(state, space) {
@@ -319,6 +332,7 @@ function updateCustomConstraints(state, ui, plotOrder, updater) {
     state.bounds = computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), space, config);
   }
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts(ui));
+  drawStatusMini(state, ui, currentVizOpts(ui));
   setStatusState(ui, "Constraints edited", { stale: true });
 }
 
@@ -393,7 +407,7 @@ function maybeProjectWithFlag(vals, meta, flag) {
   }
 }
 
-function pointToValues(meta, ui, state, x, y, baseVals = null, projectionFlag = null) {
+function pointToValues(meta, ui, state, x, y, baseVals = null, projectionFlag = null, projectToVisualGamut = true) {
   const space = meta.wheelSpace;
   const ranges = meta.ranges || csRanges[space];
   const thirdKey = thirdKeyForMeta(meta);
@@ -410,6 +424,7 @@ function pointToValues(meta, ui, state, x, y, baseVals = null, projectionFlag = 
       [yKey]: ny * maxY,
       [thirdKey]: thirdVal,
     };
+    if (!projectToVisualGamut) return v;
     return projectionFlag ? maybeProjectWithFlag(v, meta, projectionFlag) : maybeProject(v, meta);
   }
 
@@ -428,6 +443,7 @@ function pointToValues(meta, ui, state, x, y, baseVals = null, projectionFlag = 
     [scKey]: scVal,
     [thirdKey]: thirdVal,
   };
+  if (!projectToVisualGamut) return v;
   return projectionFlag ? maybeProjectWithFlag(v, meta, projectionFlag) : maybeProject(v, meta);
 }
 
@@ -469,6 +485,7 @@ function updateOutputColor(state, ui, plotOrder, idx, vals, space) {
   const hex = encodeColor(vals, space);
   if (!state.newColors) state.newColors = [];
   if (!state.rawNewColors) state.rawNewColors = [];
+  ensureOutputRawSpace(state, space);
   state.newColors[idx] = hex;
   state.rawNewColors[idx] = { ...vals };
   state.newRawSpace = space;
@@ -476,6 +493,37 @@ function updateOutputColor(state, ui, plotOrder, idx, vals, space) {
   const viz = currentVizOpts(ui);
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, viz);
   setStatusState(ui, "Outputs edited", { stale: true });
+}
+
+function ensureOutputRawSpace(state, space) {
+  if (state.newRawSpace === space) return;
+  const previousSpace = state.newRawSpace;
+  state.rawNewColors = (state.newColors || []).map((hex, idx) => {
+    const raw = state.rawNewColors?.[idx];
+    if (raw && previousSpace) {
+      try {
+        return convertColorValues(raw, previousSpace, space);
+      } catch (e) {
+        // Fall back to the encoded color when prior raw state is not convertible.
+      }
+    }
+    return decodeColor(hex, space);
+  });
+  state.newRawSpace = space;
+}
+
+function outputRawForSpace(state, idx, space) {
+  const raw = state.rawNewColors?.[idx];
+  if (raw && state.newRawSpace === space) return { ...raw };
+  if (raw && state.newRawSpace) {
+    try {
+      return convertColorValues(raw, state.newRawSpace, space);
+    } catch (e) {
+      // Fall back to encoded output below.
+    }
+  }
+  const hex = state.newColors?.[idx];
+  return hex ? decodeColor(hex, space) : null;
 }
 
 function hueArcStats(values) {
@@ -675,16 +723,24 @@ function customConstraintEdgeHit(meta, ui, state, x, y) {
       const x1 = xW ? xW.max : 1;
       const y0 = yW ? yW.max : 1;
       const y1 = yW ? yW.min : 0;
+      const rawX0 = toVal(x0, baseRange.min[xKey], baseRange.max[xKey]);
+      const rawX1 = toVal(x1, baseRange.min[xKey], baseRange.max[xKey]);
+      const rawY0 = toVal(y0, baseRange.min[yKey], baseRange.max[yKey]);
+      const rawY1 = toVal(y1, baseRange.min[yKey], baseRange.max[yKey]);
+      const x0Visible = !xW || (rawX0 >= -maxX && rawX0 <= maxX);
+      const x1Visible = !xW || (rawX1 >= -maxX && rawX1 <= maxX);
+      const y0Visible = !yW || (rawY0 >= -maxY && rawY0 <= maxY);
+      const y1Visible = !yW || (rawY1 >= -maxY && rawY1 <= maxY);
       const xA = xToCoord(x0);
       const xB = xToCoord(x1);
       const yA = yToCoord(y0);
       const yB = yToCoord(y1);
       const withinY = y >= Math.min(yA, yB) - EDGE_HIT && y <= Math.max(yA, yB) + EDGE_HIT;
       const withinX = x >= Math.min(xA, xB) - EDGE_HIT && x <= Math.max(xA, xB) + EDGE_HIT;
-      const nearX0 = xW && Math.abs(x - xA) <= EDGE_HIT && withinY;
-      const nearX1 = xW && Math.abs(x - xB) <= EDGE_HIT && withinY;
-      const nearY0 = yW && Math.abs(y - yA) <= EDGE_HIT && withinX;
-      const nearY1 = yW && Math.abs(y - yB) <= EDGE_HIT && withinX;
+      const nearX0 = xW && x0Visible && Math.abs(x - xA) <= EDGE_HIT && withinY;
+      const nearX1 = xW && x1Visible && Math.abs(x - xB) <= EDGE_HIT && withinY;
+      const nearY0 = yW && y0Visible && Math.abs(y - yA) <= EDGE_HIT && withinX;
+      const nearY1 = yW && y1Visible && Math.abs(y - yB) <= EDGE_HIT && withinX;
       if (nearX0 || nearX1 || nearY0 || nearY1) {
         const dx = nearX0 ? Math.abs(x - xA) : nearX1 ? Math.abs(x - xB) : Infinity;
         const dy = nearY0 ? Math.abs(y - yA) : nearY1 ? Math.abs(y - yB) : Infinity;
@@ -1117,7 +1173,7 @@ function updateCustomConstraintFromPointer(ui, state, plotOrder, meta, idx, x, y
   const baseWheel = base && constraintSpace !== meta.wheelSpace
     ? convertColorValues(base, constraintSpace, meta.wheelSpace)
     : base;
-  const vals = pointToValues(meta, ui, state, x, y, baseWheel);
+  const vals = pointToValues(meta, ui, state, x, y, baseWheel, null, false);
   const updated = meta.wheelSpace === constraintSpace ? vals : convertColorValues(vals, meta.wheelSpace, constraintSpace);
   updateCustomConstraints(state, ui, plotOrder, (custom) => {
     custom.values[idx] = { ...updated };
@@ -1138,8 +1194,8 @@ function buildCustomConstraintFromWheel(meta, ui, state, x0, y0, x1, y1) {
   if (!range) return null;
   const channels = channelOrder[constraintSpace] || [];
   if (!channels.length) return null;
-  const startVals = pointToValues(meta, ui, state, x0, y0, null);
-  const endVals = pointToValues(meta, ui, state, x1, y1, null);
+  const startVals = pointToValues(meta, ui, state, x0, y0, null, null, false);
+  const endVals = pointToValues(meta, ui, state, x1, y1, null, null, false);
   const startConstraint = meta.wheelSpace === constraintSpace
     ? startVals
     : convertColorValues(startVals, meta.wheelSpace, constraintSpace);
@@ -1169,7 +1225,7 @@ function buildCustomConstraintFromWheel(meta, ui, state, x0, y0, x1, y1) {
     const scVal = range.min[scKey] + scCenter * (range.max[scKey] - range.min[scKey]);
     values.h = hueVal;
     values[scKey] = scVal;
-    values[thirdKey] = midpointForSpaceChannel(constraintSpace, thirdKey);
+    values[thirdKey] = midpointForConstraintChannel(ui, state, constraintSpace, thirdKey);
     widths.h = hueWidth;
     widths[scKey] = scWidth;
     return { values, widths };
@@ -1192,7 +1248,7 @@ function buildCustomConstraintFromWheel(meta, ui, state, x0, y0, x1, y1) {
   const xVal = range.min[xKey] + xCenter * (range.max[xKey] - range.min[xKey]);
   const yVal = range.min[yKey] + yCenter * (range.max[yKey] - range.min[yKey]);
   const lKey = channels[0];
-  values[lKey] = midpointForSpaceChannel(constraintSpace, lKey);
+  values[lKey] = midpointForConstraintChannel(ui, state, constraintSpace, lKey);
   values[xKey] = xVal;
   values[yKey] = yVal;
   widths[xKey] = xWidth;
@@ -1233,7 +1289,7 @@ function buildCustomConstraintFromBar(barObj, ui, state, t0, t1) {
   const centerVal = range.min[key] + centerN * (range.max[key] - range.min[key]);
   const values = {};
   channels.forEach((ch) => {
-    values[ch] = ch === key ? centerVal : midpointForSpaceChannel(constraintSpace, ch);
+    values[ch] = ch === key ? centerVal : midpointForConstraintChannel(ui, state, constraintSpace, ch);
   });
   return { values, widths: { [key]: width } };
 }
@@ -1294,7 +1350,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     if (drag.mode === "output") {
       const baseHex = state.newColors?.[drag.index];
       if (!baseHex) return;
-      const baseVals = decodeColor(baseHex, space);
+      const baseVals = outputRawForSpace(state, drag.index, space) || decodeColor(baseHex, space);
       const vals = pointToValues(meta, ui, state, x, y, baseVals);
       updateOutputColor(state, ui, plotOrder, drag.index, vals, space);
       return;
@@ -1589,28 +1645,6 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     }
 
     if (drag.mode === "custom-draw" && meta) {
-      if (meta.isRectWheel) {
-        const inside =
-          x >= meta.cx - meta.radius &&
-          x <= meta.cx + meta.radius &&
-          y >= meta.cy - meta.radius &&
-          y <= meta.cy + meta.radius;
-        if (!inside) {
-          drag.mode = null;
-          refs.canvas.style.cursor = "crosshair";
-          clearCustomPreview(state, ui, plotOrder);
-          return;
-        }
-      } else {
-        const dist = Math.hypot(x - meta.cx, y - meta.cy);
-        if (dist > meta.radius) {
-          drag.mode = null;
-          refs.canvas.style.cursor = "crosshair";
-          clearCustomPreview(state, ui, plotOrder);
-          return;
-        }
-      }
-
       const constraintSpace = customConstraintSpace(ui);
       if (drag.moved) {
         const defaults = defaultWidthMapForSpace(ui, constraintSpace);
@@ -1622,6 +1656,27 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
           commitHistory();
         }
       } else {
+        if (meta.isRectWheel) {
+          const inside =
+            x >= meta.cx - meta.radius &&
+            x <= meta.cx + meta.radius &&
+            y >= meta.cy - meta.radius &&
+            y <= meta.cy + meta.radius;
+          if (!inside) {
+            drag.mode = null;
+            refs.canvas.style.cursor = "crosshair";
+            clearCustomPreview(state, ui, plotOrder);
+            return;
+          }
+        } else {
+          const dist = Math.hypot(x - meta.cx, y - meta.cy);
+          if (dist > meta.radius) {
+            drag.mode = null;
+            refs.canvas.style.cursor = "crosshair";
+            clearCustomPreview(state, ui, plotOrder);
+            return;
+          }
+        }
         const space = meta.wheelSpace;
         const projection = { projected: false };
         const vals = pointToValues(meta, ui, state, x, y, null, projection);
@@ -1644,25 +1699,27 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     if (drag.mode === "add" && meta) {
       const space = meta.wheelSpace;
       const wantsCustom = drag.moved && ui.constraintTopology?.value !== "custom";
-      if (meta.isRectWheel) {
-        const inside =
-          x >= meta.cx - meta.radius &&
-          x <= meta.cx + meta.radius &&
-          y >= meta.cy - meta.radius &&
-          y <= meta.cy + meta.radius;
-        if (!inside) {
-          drag.mode = null;
-          refs.canvas.style.cursor = "crosshair";
-          clearCustomPreview(state, ui, plotOrder);
-          return;
-        }
-      } else {
-        const dist = Math.hypot(x - meta.cx, y - meta.cy);
-        if (dist > meta.radius) {
-          drag.mode = null;
-          refs.canvas.style.cursor = "crosshair";
-          clearCustomPreview(state, ui, plotOrder);
-          return;
+      if (!wantsCustom) {
+        if (meta.isRectWheel) {
+          const inside =
+            x >= meta.cx - meta.radius &&
+            x <= meta.cx + meta.radius &&
+            y >= meta.cy - meta.radius &&
+            y <= meta.cy + meta.radius;
+          if (!inside) {
+            drag.mode = null;
+            refs.canvas.style.cursor = "crosshair";
+            clearCustomPreview(state, ui, plotOrder);
+            return;
+          }
+        } else {
+          const dist = Math.hypot(x - meta.cx, y - meta.cy);
+          if (dist > meta.radius) {
+            drag.mode = null;
+            refs.canvas.style.cursor = "crosshair";
+            clearCustomPreview(state, ui, plotOrder);
+            return;
+          }
         }
       }
       const projection = { projected: false };
@@ -1721,7 +1778,10 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     const space = meta.wheelSpace;
     const sourceHex = hit.role === "output" ? state.newColors?.[hit.index] : getPaletteHexes(ui)[hit.index];
     if (!sourceHex) return;
-    const vals = decodeColor(sourceHex, space);
+    const vals =
+      hit.role === "output"
+        ? outputRawForSpace(state, hit.index, space) || decodeColor(sourceHex, space)
+        : getInputOverrideValues(state, ui, space)[hit.index] || decodeColor(sourceHex, space);
     const thirdKey = thirdKeyForMeta(meta);
     const range = meta.ranges || csRanges[space];
     const min = range.min[thirdKey];

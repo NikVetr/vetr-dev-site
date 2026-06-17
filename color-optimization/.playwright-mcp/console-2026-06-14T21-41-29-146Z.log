@@ -1,0 +1,11 @@
+[  570222ms] [ERROR] ReferenceError: normalizeWithRange is not defined
+    at visibleHardConstraintRegion (http://127.0.0.1:8111/ui/statusGraph.js:641:18)
+    at http://127.0.0.1:8111/ui/statusGraph.js:462:26
+    at Array.map (<anonymous>)
+    at http://127.0.0.1:8111/ui/statusGraph.js:458:10
+    at Array.forEach (<anonymous>)
+    at drawTrails (http://127.0.0.1:8111/ui/statusGraph.js:441:35)
+    at drawClippedToVisibleHardConstraints (http://127.0.0.1:8111/ui/statusGraph.js:583:5)
+    at http://127.0.0.1:8111/ui/statusGraph.js:588:51
+    at drawClippedToBoundary (http://127.0.0.1:8111/ui/statusGraph.js:392:5)
+    at drawClippedToPathBoundary (http://127.0.0.1:8111/ui/statusGraph.js:588:5) @ http://127.0.0.1:8111/main.js:1492

@@ -34,6 +34,7 @@ function wrap01(x) {
 }
 
 const TAU = Math.PI * 2;
+const DEFAULT_TRAJECTORY_STEPS = 48;
 
 function hueArcFromBounds(boundsH) {
   if (!Array.isArray(boundsH) || boundsH.length < 2) return null;
@@ -63,6 +64,67 @@ function buildRandomParams(dim) {
   return Array.from({ length: dim }, () => logitClamped(random()));
 }
 
+function pointWindowSummary(constraintSets, channels) {
+  const topology = constraintSets?.topology || "contiguous";
+  if (topology !== "custom" && topology !== "discontiguous") return null;
+  const hardWindows = {};
+  let count = 0;
+  channels.forEach((ch) => {
+    const c = constraintSets?.channels?.[ch];
+    if (!c || c.mode !== "hard" || !Array.isArray(c.pointWindows) || !c.pointWindows.length) return;
+    hardWindows[ch] = c.pointWindows;
+    count = Math.max(count, c.pointWindows.length);
+  });
+  return count > 0 ? { count, hardWindows } : null;
+}
+
+function normWithinPointWindows(norm, constraintSets, channels, summary) {
+  if (!summary?.count) return true;
+  for (let i = 0; i < summary.count; i++) {
+    let ok = true;
+    for (const ch of channels) {
+      const windows = summary.hardWindows[ch];
+      if (!windows) continue;
+      const w = windows[i % windows.length];
+      if (!w) continue;
+      if (constraintSets.channels[ch]?.type === "hue") {
+        const phi = wrap01(norm.h ?? 0) * TAU;
+        const d = Math.abs(Math.atan2(Math.sin(phi - w.center), Math.cos(phi - w.center)));
+        if (d > Math.max(w.radius, 0) + 1e-10) {
+          ok = false;
+          break;
+        }
+      } else {
+        const min = Number.isFinite(w.min) ? w.min : Math.max(0, w.center - w.radius);
+        const max = Number.isFinite(w.max) ? w.max : Math.min(1, w.center + w.radius);
+        const v = norm[ch];
+        if (!Number.isFinite(v) || v < min - 1e-10 || v > max + 1e-10) {
+          ok = false;
+          break;
+        }
+      }
+    }
+    if (ok) return true;
+  }
+  return false;
+}
+
+function sampleNormInPointWindow(norm, constraintSets, channels, summary, pointIndex) {
+  channels.forEach((ch) => {
+    const windows = summary?.hardWindows?.[ch];
+    const w = windows ? windows[pointIndex % windows.length] : null;
+    if (!w) return;
+    if (constraintSets.channels[ch]?.type === "hue") {
+      const phi = w.center + (random() * 2 - 1) * Math.max(w.radius, 0);
+      norm.h = wrap01(phi / TAU);
+      return;
+    }
+    const min = Number.isFinite(w.min) ? w.min : Math.max(0, w.center - w.radius);
+    const max = Number.isFinite(w.max) ? w.max : Math.min(1, w.center + w.radius);
+    norm[ch] = min + random() * Math.max(max - min, 0);
+  });
+}
+
 export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges, prepLike = {}) {
   const channels = channelOrder[colorSpace];
   const samples = [];
@@ -72,6 +134,7 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
   const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
   const constraintSets = prepLike?.bounds?.constraintSets;
   const topology = prepLike?.constraintTopology || constraintSets?.topology || "contiguous";
+  const pointWindows = pointWindowSummary(constraintSets, channels);
   const hueArc = (() => {
     const hueMode = constraintSets?.channels?.h?.mode || "hard";
     const useHard = hueMode === "hard" && topology === "contiguous";
@@ -88,6 +151,7 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
   };
 
   const withinBounds = (norm) => {
+    if (pointWindows && !normWithinPointWindows(norm, constraintSets, channels, pointWindows)) return false;
     for (const ch of channels) {
       if (ch === "h") {
         const h01 = wrap01(norm.h ?? 0);
@@ -102,18 +166,7 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
     return true;
   };
 
-  const tryAddSample = (vals) => {
-    if (!vals) return false;
-    const norm = normalizeWithRange(vals, ranges, colorSpace);
-    if (!withinBounds(norm)) return false;
-    samples.push({ vals, norm });
-    return true;
-  };
-
-  const maxAttempts = Math.max(400, nColors * 400);
-  let attempts = 0;
-  while (samples.length < nColors && attempts < maxAttempts) {
-    attempts += 1;
+  const sampleNorm = () => {
     const norm = {};
     channels.forEach((ch) => {
       if (ch === "h") {
@@ -129,6 +182,26 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
       const [b0, b1] = channelBoundsForStart(prepLike, ch, scChannel, lightKey);
       norm[ch] = b0 + random() * (b1 - b0);
     });
+    if (pointWindows?.count) {
+      const pointIndex = Math.floor(random() * pointWindows.count);
+      sampleNormInPointWindow(norm, constraintSets, channels, pointWindows, pointIndex);
+    }
+    return norm;
+  };
+
+  const tryAddSample = (vals) => {
+    if (!vals) return false;
+    const norm = normalizeWithRange(vals, ranges, colorSpace);
+    if (!withinBounds(norm)) return false;
+    samples.push({ vals, norm });
+    return true;
+  };
+
+  const maxAttempts = Math.max(400, nColors * 400);
+  let attempts = 0;
+  while (samples.length < nColors && attempts < maxAttempts) {
+    attempts += 1;
+    const norm = sampleNorm();
     const vals = unscaleWithRange(norm, ranges, colorSpace);
     if (!isInGamut(vals, colorSpace, gamutPreset)) continue;
     if (tryAddSample(vals)) continue;
@@ -152,26 +225,22 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
     }
   }
 
-  while (samples.length < nColors) {
-    const norm = {};
-    channels.forEach((ch) => {
-      if (ch === "h") {
-        if (hueArc && !hueArc.full) {
-          const t = random();
-          const phi = hueArc.startRad + hueArc.spanRad * t;
-          norm.h = wrap01(phi / TAU);
-        } else {
-          norm.h = random();
-        }
-        return;
-      }
-      const [b0, b1] = channelBoundsForStart(prepLike, ch, scChannel, lightKey);
-      norm[ch] = b0 + random() * (b1 - b0);
-    });
+  const projectedMaxAttempts = Math.max(1000, nColors * 1000);
+  let projectedAttempts = 0;
+  while (samples.length < nColors && projectedAttempts < projectedMaxAttempts) {
+    projectedAttempts += 1;
+    const norm = sampleNorm();
     const vals = unscaleWithRange(norm, ranges, colorSpace);
     const projected = projectToGamut(vals, colorSpace, gamutPreset, colorSpace);
     const projectedNorm = normalizeWithRange(projected, ranges, colorSpace);
+    if (!withinBounds(projectedNorm)) continue;
     samples.push({ vals: projected, norm: projectedNorm });
+  }
+
+  if (samples.length < nColors) {
+    throw new Error(
+      `Unable to sample ${nColors} in-gamut start colors within the active ${colorSpace} constraints.`
+    );
   }
 
   const ordered = lightKey && nColors > 1
@@ -268,6 +337,13 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   const dim = config.nColsToAdd * channels.length;
   let best = { value: Infinity, par: null, newHex: [], newRaw: [] };
   let bestScoreSoFar = -Infinity;
+  const trajectorySteps = Math.max(
+    1,
+    Math.min(
+      Math.max(1, config.nmIterations || DEFAULT_TRAJECTORY_STEPS),
+      Math.floor(config.trajectorySteps || DEFAULT_TRAJECTORY_STEPS)
+    )
+  );
 
   const verboseMeta = {
     distanceMetric: prep.distanceMetric,
@@ -299,6 +375,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         params: start,
         hex: startInfo.newHex,
         raw: startInfo.newRaw,
+        optimizerRaw: startInfo.optimizerRaw,
         details: startDetails,
         distance: startInfo.distance,
         penalty: startInfo.penalty,
@@ -311,9 +388,10 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
     const res = nelderMead(
       (p) => objectiveValue(p, prep),
       start,
-      { maxIterations: config.nmIterations, step: 1.2 }
+      { maxIterations: config.nmIterations, step: 1.2, trace: true }
     );
     const endInfo = objectiveInfo(res.x, prep);
+    const trajectory = buildTrajectory(res.trace, start, res.x, prep, trajectorySteps);
     const endDetails = attachMeta(
       endInfo.details,
       endInfo.newHex,
@@ -330,6 +408,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         params: res.x,
         hex: endInfo.newHex,
         raw: endInfo.newRaw,
+        optimizerRaw: endInfo.optimizerRaw,
         details: endDetails,
         score: -res.fx,
         distance: endInfo.distance,
@@ -340,7 +419,21 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
       });
     }
     if (res.fx < best.value) {
-      best = { value: res.fx, par: res.x, newHex: endInfo.newHex, newRaw: endInfo.newRaw, meta: { reason: res.reason } };
+      best = {
+        value: res.fx,
+        par: res.x,
+        newHex: endInfo.newHex,
+        newRaw: endInfo.newRaw,
+        optimizerRaw: endInfo.optimizerRaw,
+        meta: {
+          reason: res.reason,
+          distance: endInfo.distance,
+          penalty: endInfo.penalty,
+          paramPenalty: endInfo.paramPenalty,
+          gamutPenalty: endInfo.gamutPenalty,
+          constraintPenalty: endInfo.constraintPenalty,
+        },
+      };
       bestScoreSoFar = -res.fx;
       if (onVerbose) {
         onVerbose({
@@ -350,6 +443,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
           params: res.x,
           hex: endInfo.newHex,
           raw: endInfo.newRaw,
+          optimizerRaw: endInfo.optimizerRaw,
           details: endDetails,
           score: -res.fx,
           distance: endInfo.distance,
@@ -369,10 +463,11 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         bestScore,
         startHex: startInfo.newHex,
         endHex: endInfo.newHex,
-        startRaw: startInfo.newRaw,
-        endRaw: endInfo.newRaw,
+        startRaw: startInfo.newRaw || startInfo.optimizerRaw,
+        endRaw: endInfo.newRaw || endInfo.optimizerRaw,
+        trajectory,
         bestHex: best.newHex || [],
-        bestRaw: best.newRaw || [],
+        bestRaw: best.newRaw || best.optimizerRaw || [],
       });
     }
   }
@@ -387,6 +482,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         params: best.par,
         hex: best.newHex,
         raw: best.newRaw,
+        optimizerRaw: best.optimizerRaw,
         details: metaDetails,
         score: -best.value,
         distance: best.meta?.distance,
@@ -398,6 +494,47 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
     }
   }
   return best;
+}
+
+function buildTrajectory(traceParams, startParams, endParams, prep, maxTraceSamples = DEFAULT_TRAJECTORY_STEPS) {
+  const traceLimit = Math.max(1, Math.floor(maxTraceSamples || DEFAULT_TRAJECTORY_STEPS));
+  const sampledTrace = downsampleRows(Array.isArray(traceParams) ? traceParams : [], traceLimit);
+  const params = [startParams]
+    .concat(sampledTrace)
+    .concat([endParams])
+    .filter((row) => Array.isArray(row));
+  const unique = [];
+  params.forEach((row) => {
+    const prev = unique[unique.length - 1];
+    if (!prev || !sameParams(prev, row)) unique.push(row);
+  });
+  return unique.map((params) => {
+    const info = objectiveInfo(params, prep);
+    return {
+      hex: info.newHex,
+      raw: info.newRaw || info.optimizerRaw,
+    };
+  });
+}
+
+function sameParams(a, b) {
+  if (!a || !b || a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (Math.abs((a[i] || 0) - (b[i] || 0)) > 1e-10) return false;
+  }
+  return true;
+}
+
+function downsampleRows(rows, maxRows) {
+  if (!Array.isArray(rows) || rows.length <= maxRows) return rows || [];
+  if (maxRows <= 2) return [rows[0], rows[rows.length - 1]];
+  const out = [];
+  const last = rows.length - 1;
+  for (let i = 0; i < maxRows; i++) {
+    const idx = Math.round((i / (maxRows - 1)) * last);
+    if (out[out.length - 1] !== rows[idx]) out.push(rows[idx]);
+  }
+  return out;
 }
 
 function computeInfluences(hexes, conditioningHexes = [], prepLike = {}) {

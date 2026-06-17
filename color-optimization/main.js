@@ -13,6 +13,13 @@ import { showError, setStatus, setStatusState } from "./ui/status.js";
 import { drawStatusGraph, drawStatusMini } from "./ui/statusGraph.js";
 import { createPanels, refreshSwatches, updateChannelHeadings } from "./ui/panels.js";
 import { attachVisualizationInteractions } from "./ui/interactions.js";
+import {
+  attachImageInput,
+  cloneImageInputForHistory,
+  reconcileImageInputFromPalette,
+  refreshImageInputControls,
+  restoreImageInputFromHistory,
+} from "./ui/imageInput.js";
 import { createHistoryManager } from "./ui/history.js";
 import { paletteGroups } from "./palettes.js";
 
@@ -43,6 +50,15 @@ let uniquenessValue = 0;
 let lastOptSpace = null;
 
 const DEFAULT_L_WIDTH = 0.65;
+const LIGHTNESS_WIDTH_DEFAULTS = {
+  oklab: 0.65,
+  oklch: 0.65,
+  lab: 0.769,
+  lch: 0.769,
+  luv: 0.769,
+  hsl: 0.731,
+  jzazbz: 0.71,
+};
 const DISC_STATES = ["none", "deutan", "protan", "tritan"];
 
 function currentVizOpts() {
@@ -72,6 +88,7 @@ function captureHistorySnapshot() {
       colorsToAdd: ui?.colorsToAdd?.value || "",
       optimRuns: ui?.optimRuns?.value || "",
       nmIters: ui?.nmIters?.value || "",
+      pathSteps: ui?.pathSteps?.value || "",
       constraintTopology: ui?.constraintTopology?.value || "contiguous",
       aestheticMode: ui?.aestheticMode?.value || "none",
       wH: ui?.wH?.value || "",
@@ -124,6 +141,7 @@ function captureHistorySnapshot() {
           },
         }
         : null,
+      imageInput: cloneImageInputForHistory(state.imageInput),
     },
   };
 }
@@ -148,6 +166,8 @@ function applyHistorySnapshot(snapshot) {
   if (ui.colorsToAdd) ui.colorsToAdd.value = snapUi.colorsToAdd || ui.colorsToAdd.value;
   if (ui.optimRuns) ui.optimRuns.value = snapUi.optimRuns || ui.optimRuns.value;
   if (ui.nmIters) ui.nmIters.value = snapUi.nmIters || ui.nmIters.value;
+  if (ui.pathSteps) ui.pathSteps.value = snapUi.pathSteps || ui.pathSteps.value;
+  clampPathSteps();
   if (ui.constraintTopology) ui.constraintTopology.value = snapUi.constraintTopology || "contiguous";
   if (ui.aestheticMode) ui.aestheticMode.value = snapUi.aestheticMode || "none";
   if (ui.wH) ui.wH.value = snapUi.wH || ui.wH.value;
@@ -202,6 +222,7 @@ function applyHistorySnapshot(snapshot) {
       sync: { h: false, sc: false, l: false },
       widths: { h: [], sc: [], l: [] },
     };
+  restoreImageInputFromHistory(state, snapState.imageInput);
 
   if (ui.rawInputValues) {
     ui.rawInputValues.value = state.rawInputOverride ? JSON.stringify(state.rawInputOverride) : "";
@@ -233,6 +254,7 @@ function applyHistorySnapshot(snapshot) {
 
   state.bounds = computeInputBounds(ui.colorSpace.value);
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+  refreshImageInputControls(ui, state);
   enforceWrapper();
   drawStatusMini(state, ui, currentVizOpts());
 
@@ -244,6 +266,30 @@ function updateUndoRedoButtons() {
   const disabled = state.running;
   ui.undoBtn.disabled = disabled || !history.canUndo();
   ui.redoBtn.disabled = disabled || !history.canRedo();
+}
+
+function clampPathSteps() {
+  if (!ui?.pathSteps) return 48;
+  const max = Math.max(1, parseInt(ui.nmIters?.value, 10) || 260);
+  ui.pathSteps.min = "1";
+  ui.pathSteps.max = String(max);
+  const value = Math.max(1, Math.min(max, parseInt(ui.pathSteps.value, 10) || 48));
+  ui.pathSteps.value = String(value);
+  return value;
+}
+
+function refreshAfterImageInput(statusText = "Image colors updated") {
+  state.rawInputOverride = null;
+  state.keepInputOverride = false;
+  if (ui.rawInputValues) ui.rawInputValues.value = "";
+  state.bounds = computeInputBounds(ui.colorSpace.value);
+  refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
+  ensurePerInputConstraintState();
+  renderPerInputConstraintUI();
+  togglePlaceholder();
+  updatePaletteHighlight();
+  drawStatusMini(state, ui, currentVizOpts());
+  setStatusState(ui, statusText, { stale: true });
 }
 
 function weightedAggregateDistances(valuesByState, weights, kind, p, eps = 1e-9) {
@@ -317,6 +363,11 @@ document.addEventListener("DOMContentLoaded", () => {
   state.history = history;
   attachEventListeners();
   attachVisualizationInteractions(ui, state, plotOrder);
+  attachImageInput(ui, state, {
+    onCommit: refreshAfterImageInput,
+    recordHistory: () => history?.record(),
+    setStatus: (text) => setStatusState(ui, text, { stale: true }),
+  });
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   updateResultNavigator();
   history.push(captureHistorySnapshot());
@@ -338,12 +389,14 @@ function setDefaultValues() {
   if (ui.meanP) ui.meanP.value = "-2";
   if (ui.constraintTopology) ui.constraintTopology.value = "contiguous";
   if (ui.aestheticMode) ui.aestheticMode.value = "none";
-  if (ui.clipGamut) ui.clipGamut.checked = false;
+  if (ui.clipGamut) ui.clipGamut.checked = true;
   if (ui.clipGamutOpt) ui.clipGamutOpt.checked = true;
   if (ui.syncSpaces) ui.syncSpaces.checked = true;
   ui.colorsToAdd.value = "3";
   ui.optimRuns.value = "100";
   ui.nmIters.value = "260";
+  if (ui.pathSteps) ui.pathSteps.value = "48";
+  clampPathSteps();
   applyConstraintWidthDefaults(ui.colorSpace.value);
   lastOptSpace = ui.colorSpace.value;
   setModeValue(ui.modeH, "hard");
@@ -384,6 +437,7 @@ function setDefaultValues() {
   state.keepInputOverride = false;
   state.customConstraints = null;
   state.customConstraintSelection = null;
+  state.imageInput = null;
   state.perInputConstraints = {
     enabled: false,
     sync: { h: false, sc: false, l: false },
@@ -420,6 +474,10 @@ function cloneCustomWidths(widths) {
   return Object.keys(out).length ? out : null;
 }
 
+function cloneRawRows(rows) {
+  return Array.isArray(rows) ? rows.map((row) => ({ ...row })) : [];
+}
+
 function readModeValue(el) {
   if (!el) return "hard";
   if (el.type === "checkbox") return el.checked ? "soft" : "hard";
@@ -448,8 +506,21 @@ function channelSlotsForSpace(space) {
   return { first, scChannel, third };
 }
 
-function defaultWidthForChannel(ch) {
-  return ch === "l" ? DEFAULT_L_WIDTH : 0;
+function lightnessChannelForSpace(space) {
+  const channels = channelOrder[space] || [];
+  if (channels.includes("jz")) return "jz";
+  if (channels.includes("l")) return "l";
+  return channels[0] || null;
+}
+
+function defaultLightnessWidthForSpace(space) {
+  return LIGHTNESS_WIDTH_DEFAULTS[space] ?? DEFAULT_L_WIDTH;
+}
+
+function defaultWidthForChannel(space, ch) {
+  return ch && ch === lightnessChannelForSpace(space)
+    ? defaultLightnessWidthForSpace(space)
+    : 0;
 }
 
 function constraintConfigForSpace(space) {
@@ -658,18 +729,34 @@ function constraintWidthMapForSpace(space) {
   };
 }
 
-function mappedWidthForChannel(ch, prevMap) {
-  if (prevMap && Object.prototype.hasOwnProperty.call(prevMap, ch)) return prevMap[ch];
-  if (ch === "c" && prevMap && Object.prototype.hasOwnProperty.call(prevMap, "s")) return prevMap.s;
-  if (ch === "s" && prevMap && Object.prototype.hasOwnProperty.call(prevMap, "c")) return prevMap.c;
-  return defaultWidthForChannel(ch);
+function isDefaultWidth(value, space, ch) {
+  if (!Number.isFinite(value) || !space || !ch) return false;
+  return Math.abs(value - defaultWidthForChannel(space, ch)) < 1e-6;
 }
 
-function applyConstraintWidthsForSpace(space, prevMap) {
+function mappedWidthForChannel(ch, prevMap, nextSpace, prevSpace) {
+  const nextDefault = defaultWidthForChannel(nextSpace, ch);
+  const nextLight = lightnessChannelForSpace(nextSpace);
+  const prevLight = lightnessChannelForSpace(prevSpace);
+  const isNextLight = ch && ch === nextLight;
+  if (prevMap && Object.prototype.hasOwnProperty.call(prevMap, ch)) {
+    const value = prevMap[ch];
+    return isNextLight && isDefaultWidth(value, prevSpace, ch) ? nextDefault : value;
+  }
+  if (isNextLight && prevMap && prevLight && Object.prototype.hasOwnProperty.call(prevMap, prevLight)) {
+    const value = prevMap[prevLight];
+    return isDefaultWidth(value, prevSpace, prevLight) ? nextDefault : value;
+  }
+  if (ch === "c" && prevMap && Object.prototype.hasOwnProperty.call(prevMap, "s")) return prevMap.s;
+  if (ch === "s" && prevMap && Object.prototype.hasOwnProperty.call(prevMap, "c")) return prevMap.c;
+  return nextDefault;
+}
+
+function applyConstraintWidthsForSpace(space, prevMap, prevSpace = null) {
   const { first, scChannel, third } = channelSlotsForSpace(space);
-  ui.wH.value = String(mappedWidthForChannel(first, prevMap));
-  ui.wSC.value = String(mappedWidthForChannel(scChannel, prevMap));
-  ui.wL.value = String(mappedWidthForChannel(third, prevMap));
+  ui.wH.value = String(mappedWidthForChannel(first, prevMap, space, prevSpace));
+  ui.wSC.value = String(mappedWidthForChannel(scChannel, prevMap, space, prevSpace));
+  ui.wL.value = String(mappedWidthForChannel(third, prevMap, space, prevSpace));
 }
 
 function applyConstraintWidthDefaults(space) {
@@ -680,7 +767,7 @@ function applyConstraintWidthDefaults(space) {
 function remapConstraintWidths(prevSpace, nextSpace) {
   const prev = prevSpace || nextSpace;
   const prevMap = prev ? constraintWidthMapForSpace(prev) : null;
-  applyConstraintWidthsForSpace(nextSpace, prevMap);
+  applyConstraintWidthsForSpace(nextSpace, prevMap, prev);
   updateWidthChips();
 }
 
@@ -771,6 +858,7 @@ function attachEventListeners() {
       state.rawInputOverride = null;
       if (ui.rawInputValues) ui.rawInputValues.value = "";
     }
+    reconcileImageInputFromPalette(ui, state);
     state.bounds = computeInputBounds(ui.colorSpace.value);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     ensurePerInputConstraintState();
@@ -785,6 +873,8 @@ function attachEventListeners() {
   ui.paletteClear?.addEventListener("click", () => {
     ui.paletteInput.value = "";
     state.rawInputOverride = null;
+    state.imageInput = null;
+    refreshImageInputControls(ui, state);
     if (ui.rawInputValues) ui.rawInputValues.value = "";
     state.bounds = computeInputBounds(ui.colorSpace.value);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
@@ -798,9 +888,11 @@ function attachEventListeners() {
   });
   ui.bgColor?.addEventListener("input", () => {
     updateBgControls();
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   });
   ui.bgColor?.addEventListener("change", () => {
     updateBgControls();
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     recordHistory();
   });
   ui.paletteMore?.addEventListener("click", () => {
@@ -810,6 +902,7 @@ function attachEventListeners() {
   });
   ui.bgEnabled?.addEventListener("change", () => {
     updateBgControls();
+    refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     recordHistory();
   });
 
@@ -911,6 +1004,7 @@ function attachEventListeners() {
   ui.runBtn.addEventListener("click", () => runOptimization());
   ui.resetBtn.addEventListener("click", () => {
     setDefaultValues();
+    refreshImageInputControls(ui, state);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     drawStatusMini(state, ui, currentVizOpts());
     state.runResults = [];
@@ -1016,9 +1110,20 @@ function attachEventListeners() {
     });
   });
 
-  [ui.seedInput, ui.colorsToAdd, ui.optimRuns, ui.nmIters].forEach((el) => {
+  ui.nmIters?.addEventListener("input", () => {
+    clampPathSteps();
+  });
+  ui.pathSteps?.addEventListener("input", () => {
+    clampPathSteps();
+    drawStatusMini(state, ui, currentVizOpts());
+  });
+  [ui.seedInput, ui.colorsToAdd, ui.optimRuns, ui.nmIters, ui.pathSteps].forEach((el) => {
     if (!el) return;
-    el.addEventListener("change", () => recordHistory());
+    el.addEventListener("change", () => {
+      clampPathSteps();
+      drawStatusMini(state, ui, currentVizOpts());
+      recordHistory();
+    });
   });
 
   window.addEventListener("resize", () => {
@@ -1240,6 +1345,7 @@ async function runOptimization() {
   }
   showError("", ui);
   const config = readConfig(ui, state);
+  config.trajectorySteps = clampPathSteps();
   // Constraints should be based on the user's input palette only (not the optional background).
   config.boundsPalette = palette;
   state.rawSpace = config.colorSpace;
@@ -1277,7 +1383,7 @@ async function runOptimization() {
 
   try {
     const best = await optimizePalette(paletteForOpt, config, {
-      onProgress: async ({ run, pct, bestScore, startHex, endHex, startRaw, endRaw, bestHex, bestRaw }) => {
+      onProgress: async ({ run, pct, bestScore, startHex, endHex, startRaw, endRaw, trajectory, bestHex, bestRaw }) => {
         state.bestScores.push(bestScore);
         state.nmTrails.push({
           run,
@@ -1285,6 +1391,7 @@ async function runOptimization() {
           endHex,
           startRaw: startRaw || null,
           endRaw: endRaw || null,
+          trajectory: Array.isArray(trajectory) ? trajectory : null,
           rawSpace: config.colorSpace,
         });
         state.bestColors = bestHex || state.bestColors;
@@ -1372,7 +1479,7 @@ async function runOptimization() {
     } else {
       state.newColors = best.newHex || [];
       state.bestColors = state.newColors;
-      state.rawNewColors = best.newRaw || [];
+      state.rawNewColors = best.newRaw || best.optimizerRaw || [];
       state.rawBestColors = state.rawNewColors;
       state.newRawSpace = config.colorSpace;
       setResults(state.newColors, ui, state.currentColors);
@@ -1969,7 +2076,8 @@ function storeRunResult(info) {
   const entry = {
     run: info.run,
     hex: info.hex ? [...info.hex] : [],
-    raw: info.raw ? [...info.raw] : [],
+    raw: cloneRawRows(info.raw || info.optimizerRaw),
+    optimizerRaw: cloneRawRows(info.optimizerRaw),
     score: info.score,
     distance: info.distance,
     penalty: info.penalty,
@@ -2019,11 +2127,11 @@ function applySelectedResult(options = {}) {
     return;
   }
   state.selectedResultIdx = idx + 1;
-  state.newColors = pick.hex || [];
-  state.rawNewColors = pick.raw || [];
+  state.newColors = pick.hex ? [...pick.hex] : [];
+  state.rawNewColors = cloneRawRows(pick.raw);
   state.newRawSpace = pick.space || state.rawSpace;
-  state.bestColors = pick.hex || state.bestColors;
-  state.rawBestColors = pick.raw || state.rawBestColors;
+  state.bestColors = pick.hex ? [...pick.hex] : state.bestColors;
+  state.rawBestColors = pick.raw ? cloneRawRows(pick.raw) : state.rawBestColors;
   setResults(state.newColors, ui, state.currentColors);
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   drawStatusMini(state, ui, currentVizOpts());

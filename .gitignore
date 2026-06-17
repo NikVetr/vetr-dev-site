@@ -1,1 +1,8 @@
 .DS_Store
+/AGENTS.md
+/figures/
+/webapp/artifacts/
+/webapp/old_refactor_docs/
+
+*_ExportBlock-*.zip
+ExportBlock-*.zip

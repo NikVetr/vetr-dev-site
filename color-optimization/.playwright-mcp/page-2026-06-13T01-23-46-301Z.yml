@@ -1,0 +1,360 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - paragraph [ref=e5]: Palette Town
+      - heading "traversing PerceptuAlly uniform coLorspaces to Enhance and exTend discreTe color palettEs for Trichromatic and cOlor vision deficient discriminability With joiNt optimization" [level=1] [ref=e6]
+      - paragraph [ref=e7]: Choose your starter palette, train their parameters, and watch your team evolve into a champion color scheme.
+    - generic [ref=e8]:
+      - button "RUN" [ref=e9] [cursor=pointer]
+      - button "RESET" [ref=e10] [cursor=pointer]
+      - generic [ref=e11]:
+        - button "UNDO" [ref=e12] [cursor=pointer]
+        - button "REDO" [ref=e13] [cursor=pointer]
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - heading "Input" [level=3] [ref=e17]
+        - generic [ref=e18]:
+          - generic [ref=e19]: Input Colors (Hex)
+          - generic [ref=e20]:
+            - generic [ref=e21]:
+              - checkbox "Background:" [checked] [ref=e22]
+              - text: "Background:"
+            - generic [ref=e23] [cursor=pointer]:
+              - textbox "Background color picker" [ref=e24]: "#ffffff"
+              - generic [ref=e25]: "#FFFFFF"
+        - textbox "Input Colors (Hex)" [ref=e27]:
+          - /placeholder: "eg, #E64B35, #4DBBD5, #00A087, #3C5488, ..."
+        - generic [ref=e28]:
+          - button "Clear" [ref=e29] [cursor=pointer]
+          - button "Upload Image" [ref=e30] [cursor=pointer]
+        - generic [ref=e31]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: RColorBrewer
+            - button "Set1" [ref=e35] [cursor=pointer]
+            - button "Set2" [ref=e36] [cursor=pointer]
+            - button "Set3" [ref=e37] [cursor=pointer]
+            - button "Pastel1" [ref=e38] [cursor=pointer]
+            - button "Pastel2" [ref=e39] [cursor=pointer]
+            - button "Dark2" [ref=e40] [cursor=pointer]
+            - button "Accent" [ref=e41] [cursor=pointer]
+            - button "Paired" [ref=e42] [cursor=pointer]
+          - button "More ▾" [ref=e43] [cursor=pointer]
+      - generic [ref=e44]:
+        - heading "General Settings" [level=3] [ref=e45]
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - generic [ref=e48]: Colors to add
+            - spinbutton "Colors to add" [ref=e49]: "3"
+          - generic [ref=e50]:
+            - generic [ref=e51]: "# Runs"
+            - spinbutton "# Runs" [ref=e52]: "100"
+          - generic [ref=e54]:
+            - checkbox "Verbose Output" [ref=e55]
+            - text: Verbose Output
+      - generic [ref=e56]:
+        - heading "Optimization Settings" [level=3] [ref=e57]
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]: Seed
+            - textbox "Seed" [ref=e61]:
+              - /placeholder: random
+              - text: random
+          - generic [ref=e62]:
+            - generic [ref=e63]: N-M iterations
+            - spinbutton "N-M iterations" [ref=e64]: "260"
+        - generic [ref=e65]:
+          - generic [ref=e66]: Colorspace
+          - combobox "Colorspace" [ref=e67]:
+            - option "OKLab" [selected]
+            - option "OKLCh"
+            - option "Lab"
+            - option "Luv"
+            - option "LCh"
+            - option "HSL"
+            - option "JzAzBz"
+        - generic [ref=e68]:
+          - generic [ref=e69]:
+            - checkbox "Clip to gamut for optimization" [checked] [ref=e70]
+            - text: Clip
+          - generic [ref=e71]:
+            - generic [ref=e72]: Gamut
+            - combobox "Gamut" [ref=e73]:
+              - option "sRGB" [selected]
+              - option "Display P3"
+              - option "Rec. 2020"
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - generic [ref=e76]: Distance metric
+            - combobox "Distance metric" [ref=e77]:
+              - option "ΔE2000 (Lab)" [selected]
+              - option "ΔE76 (OKLab)"
+              - option "ΔE76 (Lab)"
+              - option "CAM02-UCS"
+              - option "CAM16-UCS"
+              - option "ΔE_ITP"
+          - generic [ref=e78]:
+            - generic [ref=e79]: Aggregation
+            - combobox "Aggregation" [ref=e80]:
+              - option "Harmonic" [selected]
+              - option "Lehmer"
+              - option "Power"
+              - option "Minimum"
+              - option "Geometric"
+              - option "Arithmetic"
+              - option "Quadratic"
+      - generic [ref=e81]:
+        - heading "Colorvision Settings" [level=3] [ref=e82]
+        - generic [ref=e83]:
+          - generic [ref=e84]: CVD Model
+          - combobox "CVD Model" [ref=e85]:
+            - option "Machado 2009 (linear RGB)" [selected]
+            - option "Legacy (gamma RGB matrix)"
+        - generic [ref=e86]:
+          - generic [ref=e87]: Prioritization weights
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]: trichrom
+              - slider "trichrom" [ref=e91]: "50"
+              - generic [ref=e92]: 50.0%
+            - generic [ref=e93]:
+              - generic [ref=e94]: deutan
+              - slider "deutan" [ref=e95]: "40"
+              - generic [ref=e96]: 40.0%
+            - generic [ref=e97]:
+              - generic [ref=e98]: protan
+              - slider "protan" [ref=e99]: "8"
+              - generic [ref=e100]: 8.0%
+            - generic [ref=e101]:
+              - generic [ref=e102]: tritan
+              - slider "tritan" [ref=e103]: "2"
+              - generic [ref=e104]: 2.0%
+      - generic [ref=e105]:
+        - heading "Constraints" [level=3] [ref=e106]
+        - generic [ref=e107]:
+          - generic [ref=e108]:
+            - generic [ref=e109]: Topology
+            - combobox "Topology" [ref=e110]:
+              - option "Contiguous" [selected]
+              - option "Discontiguous"
+              - option "Custom"
+          - generic [ref=e111]:
+            - generic [ref=e112]: Aesthetic centers
+            - combobox "Aesthetic centers" [ref=e113]:
+              - option "None" [selected]
+              - option "Complementary"
+              - option "Triadic"
+              - option "Tetradic"
+        - generic [ref=e114]:
+          - generic [ref=e115]: Constraint widths
+          - generic [ref=e116]:
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - generic [ref=e119]: L
+                - generic [ref=e120]:
+                  - generic [ref=e121]: Hard
+                  - generic [ref=e122]:
+                    - checkbox "Toggle soft constraint for H"
+                  - generic [ref=e124]: Soft
+              - slider "L" [ref=e125]: "0.65"
+              - generic [ref=e126]: 65.0%
+            - generic [ref=e127]:
+              - generic [ref=e128]:
+                - generic [ref=e129]: A
+                - generic [ref=e130]:
+                  - generic [ref=e131]: Hard
+                  - generic [ref=e132]:
+                    - checkbox "Toggle soft constraint for S/C"
+                  - generic [ref=e134]: Soft
+              - slider "A" [ref=e135]: "0"
+              - generic [ref=e136]: 0.0%
+            - generic [ref=e137]:
+              - generic [ref=e138]:
+                - generic [ref=e139]: B
+                - generic [ref=e140]:
+                  - generic [ref=e141]: Hard
+                  - generic [ref=e142]:
+                    - checkbox "Toggle soft constraint for L"
+                  - generic [ref=e144]: Soft
+              - slider "B" [ref=e145]: "0"
+              - generic [ref=e146]: 0.0%
+        - generic [ref=e147]:
+          - button "Individuated Constraints ▾" [disabled] [ref=e148]
+          - generic: Add input colors to use individuated constraints
+      - generic [ref=e149]:
+        - heading "Visualization" [level=3] [ref=e150]
+        - generic [ref=e151]:
+          - generic [ref=e152]:
+            - generic [ref=e153]: Colorspace
+            - generic [ref=e154]:
+              - generic [ref=e155]:
+                - checkbox "Clip to gamut for visualization" [checked] [ref=e156]
+                - text: Clip
+              - generic [ref=e157]:
+                - checkbox "Sync" [checked] [ref=e158]
+                - text: Sync
+          - combobox "Colorspace" [ref=e159]:
+            - option "HSL"
+            - option "LCh"
+            - option "OKLCh"
+            - option "Lab"
+            - option "Luv"
+            - option "OKLab" [selected]
+            - option "JzAzBz"
+    - generic [ref=e160]:
+      - generic [ref=e161]:
+        - generic [ref=e162]:
+          - button "Previous result" [ref=e163] [cursor=pointer]: ‹
+          - generic [ref=e164]:
+            - generic [ref=e165]: "#"
+            - spinbutton "Result rank" [ref=e166]: "1"
+            - generic [ref=e167]: Best Result
+            - generic [ref=e168]: (of 0)
+            - generic [ref=e169]: "#—/—"
+          - button "Next result" [ref=e170] [cursor=pointer]: ›
+        - generic [ref=e171]:
+          - generic [ref=e172]: "Score: —"
+          - generic [ref=e173]: "Worst color: —"
+          - generic "Uniqueness filter" [ref=e174]:
+            - generic [ref=e175]: uniqueness
+            - slider "uniqueness" [ref=e176]: "0"
+            - generic [ref=e177]: 0%
+          - generic [ref=e178]: "Note: constraints are applied in the raw optimization space; gamut clipping for visualization can move the displayed point outside the dashed constraint outline."
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - heading "trichromacy" [level=4] [ref=e181]
+          - generic [ref=e182]:
+            - generic [ref=e183]:
+              - generic [ref=e184]: Input =
+              - generic [ref=e187]: —
+            - generic [ref=e188]:
+              - generic [ref=e189]: Output =
+              - generic [ref=e192]: —
+            - generic [ref=e194]:
+              - generic: L
+              - generic: A
+              - generic: B
+          - generic [ref=e201]:
+            - generic [ref=e202]:
+              - generic [ref=e203]:
+                - generic [ref=e204]: Resolvability
+                - generic [ref=e205] [cursor=pointer]:
+                  - checkbox "sync view" [checked] [ref=e206]
+                  - generic [ref=e207]: sync view
+              - generic [ref=e209]:
+                - button "Heat map" [ref=e210] [cursor=pointer]
+                - button "Scatter" [ref=e211] [cursor=pointer]
+                - button "Voronoi" [ref=e212] [cursor=pointer]
+                - button "Collisions" [ref=e213] [cursor=pointer]
+            - generic [ref=e214]:
+              - generic:
+                - generic: darker = less discriminable
+        - generic [ref=e218]:
+          - heading "deutan-type simulation" [level=4] [ref=e219]
+          - generic [ref=e220]:
+            - generic [ref=e222]: Input =
+            - generic [ref=e225]: Output =
+            - generic [ref=e228]:
+              - generic: L
+              - generic: A
+              - generic: B
+          - generic [ref=e235]:
+            - generic [ref=e236]:
+              - generic [ref=e237]:
+                - generic [ref=e238]: Resolvability
+                - generic [ref=e239] [cursor=pointer]:
+                  - checkbox "sync view" [checked] [ref=e240]
+                  - generic [ref=e241]: sync view
+              - generic [ref=e243]:
+                - button "Heat map" [ref=e244] [cursor=pointer]
+                - button "Scatter" [ref=e245] [cursor=pointer]
+                - button "Voronoi" [ref=e246] [cursor=pointer]
+                - button "Collisions" [ref=e247] [cursor=pointer]
+            - generic [ref=e248]:
+              - generic:
+                - generic: darker = less discriminable
+        - generic [ref=e252]:
+          - heading "protan-type simulation" [level=4] [ref=e253]
+          - generic [ref=e254]:
+            - generic [ref=e256]: Input =
+            - generic [ref=e259]: Output =
+            - generic [ref=e262]:
+              - generic: L
+              - generic: A
+              - generic: B
+          - generic [ref=e269]:
+            - generic [ref=e270]:
+              - generic [ref=e271]:
+                - generic [ref=e272]: Resolvability
+                - generic [ref=e273] [cursor=pointer]:
+                  - checkbox "sync view" [checked] [ref=e274]
+                  - generic [ref=e275]: sync view
+              - generic [ref=e277]:
+                - button "Heat map" [ref=e278] [cursor=pointer]
+                - button "Scatter" [ref=e279] [cursor=pointer]
+                - button "Voronoi" [ref=e280] [cursor=pointer]
+                - button "Collisions" [ref=e281] [cursor=pointer]
+            - generic [ref=e282]:
+              - generic:
+                - generic: darker = less discriminable
+        - generic [ref=e286]:
+          - heading "tritan-type simulation" [level=4] [ref=e287]
+          - generic [ref=e288]:
+            - generic [ref=e290]: Input =
+            - generic [ref=e293]: Output =
+            - generic [ref=e296]:
+              - generic: L
+              - generic: A
+              - generic: B
+          - generic [ref=e303]:
+            - generic [ref=e304]:
+              - generic [ref=e305]:
+                - generic [ref=e306]: Resolvability
+                - generic [ref=e307] [cursor=pointer]:
+                  - checkbox "sync view" [checked] [ref=e308]
+                  - generic [ref=e309]: sync view
+              - generic [ref=e311]:
+                - button "Heat map" [ref=e312] [cursor=pointer]
+                - button "Scatter" [ref=e313] [cursor=pointer]
+                - button "Voronoi" [ref=e314] [cursor=pointer]
+                - button "Collisions" [ref=e315] [cursor=pointer]
+            - generic [ref=e316]:
+              - generic:
+                - generic: darker = less discriminable
+      - generic [ref=e320]:
+        - generic [ref=e321]:
+          - 'heading "Status: Waiting to run" [level=3] [ref=e322]'
+          - generic [ref=e325]:
+            - generic [ref=e326]: Optimization Paths
+            - generic [ref=e327]:
+              - generic [ref=e328]: "# Steps"
+              - 'spinbutton "Optimization Paths # Steps" [ref=e329]': "48"
+          - paragraph [ref=e331]: waiting to start…
+          - generic [ref=e332]: "Uncaught ReferenceError: Cannot access 'activeGamutClipBoundary' before initialization"
+        - generic [ref=e333]:
+          - heading "Results" [level=3] [ref=e334]
+          - generic [ref=e335]:
+            - generic [ref=e336]: New hex codes
+            - textbox "New hex codes" [ref=e337]
+          - generic [ref=e338]:
+            - generic [ref=e339]:
+              - checkbox "quotes" [ref=e340]
+              - text: quotes
+            - generic [ref=e341]:
+              - checkbox "commas" [checked] [ref=e342]
+              - text: commas
+            - generic [ref=e343]:
+              - checkbox "newline" [ref=e344]
+              - text: newline
+            - generic [ref=e345]:
+              - checkbox "c()" [ref=e346]
+              - text: c()
+            - generic [ref=e347]:
+              - checkbox "[]" [ref=e348]
+              - text: "[]"
+            - generic [ref=e349]:
+              - checkbox "+inputs" [ref=e350]
+              - text: +inputs
+          - generic [ref=e351]:
+            - button "Send to Input" [ref=e352] [cursor=pointer]
+            - button "Copy" [ref=e353] [cursor=pointer]

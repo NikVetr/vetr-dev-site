@@ -64,10 +64,60 @@ test.describe('Gamut Clipping Detail Screenshots', () => {
 
     // Screenshot the status mini area
     const statusMini = page.locator('#status-mini');
-    if (await statusMini.isVisible()) {
-      await statusMini.screenshot({
-        path: 'tests/screenshots/optimization-paths-detail.png',
-      });
-    }
+    await expect(statusMini).toBeVisible();
+    await expectStarClusters(page, 3);
+    await statusMini.screenshot({
+      path: 'tests/screenshots/optimization-paths-detail.png',
+    });
   });
 });
+
+async function expectStarClusters(page, expectedCount) {
+  const clusterCount = await page.locator('#status-mini').evaluate((canvas) => {
+    const ctx = canvas.getContext('2d');
+    const { width, height } = canvas;
+    const data = ctx.getImageData(0, 0, width, height).data;
+    const isStarPixel = new Uint8Array(width * height);
+
+    for (let i = 0; i < width * height; i++) {
+      const r = data[i * 4];
+      const g = data[i * 4 + 1];
+      const b = data[i * 4 + 2];
+      const a = data[i * 4 + 3];
+      if (a > 160 && r > 220 && g > 150 && g < 215 && b < 95) {
+        isStarPixel[i] = 1;
+      }
+    }
+
+    const visited = new Uint8Array(width * height);
+    let clusters = 0;
+    const stack = [];
+    for (let i = 0; i < width * height; i++) {
+      if (!isStarPixel[i] || visited[i]) continue;
+      let area = 0;
+      visited[i] = 1;
+      stack.push(i);
+      while (stack.length) {
+        const idx = stack.pop();
+        area++;
+        const x = idx % width;
+        const y = Math.floor(idx / width);
+        const neighbors = [
+          x > 0 ? idx - 1 : -1,
+          x < width - 1 ? idx + 1 : -1,
+          y > 0 ? idx - width : -1,
+          y < height - 1 ? idx + width : -1,
+        ];
+        neighbors.forEach((next) => {
+          if (next >= 0 && isStarPixel[next] && !visited[next]) {
+            visited[next] = 1;
+            stack.push(next);
+          }
+        });
+      }
+      if (area >= 12) clusters++;
+    }
+    return clusters;
+  });
+  expect(clusterCount).toBeGreaterThanOrEqual(expectedCount);
+}

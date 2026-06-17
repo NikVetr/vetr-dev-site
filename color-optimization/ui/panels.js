@@ -7,7 +7,7 @@ import {
   effectiveRangeFromValues,
   encodeColor,
   rangeFromPreset,
-  clampToRange,
+  projectToGamut,
 } from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
@@ -503,7 +503,9 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
 
   const drawDots = (entry) => {
     const sim = applyCvdHex(entry.color, type, 1, cvdModel);
-    const decoded = clipToGamut ? clampToRange(entry.vals, presetRange, barSpace) : entry.vals;
+    const decoded = clipToGamut
+      ? projectToGamut(entry.vals, barSpace, gamutPreset, barSpace)
+      : entry.vals;
     barObjs.forEach((obj, idx) => {
       const cfg = configs[idx];
       let val;

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc:*)",
+      "Bash(xargs ls:*)",
+      "Bash(git -C /Users/nikgvetr/repos/vetr-dev-site/color-optimization log --oneline -20)",
+      "Bash(node --test:*)",
+      "Bash(npm test:*)",
+      "Bash(node:*)",
+      "Bash(npm install)",
+      "Bash(npx playwright:*)"
+    ]
+  }
+}

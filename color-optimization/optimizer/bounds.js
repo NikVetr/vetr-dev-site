@@ -19,7 +19,9 @@ export function computeBounds(valuesRaw, colorSpace, config) {
   const constraintMode = config.constraintMode || {};
   const perInputWidths = config.perInputWidths || null;
   const ranges = csRanges[colorSpace];
-  const aestheticValues = applyAestheticCenters(valuesRaw || [], colorSpace, aestheticMode);
+  const aestheticValues = topology === "custom"
+    ? valuesRaw || []
+    : applyAestheticCenters(valuesRaw || [], colorSpace, aestheticMode);
   const aestheticNorm = aestheticValues.map((row) => normalizeForConstraint(row, ranges, colorSpace));
   const values = (arr, channel) => arr.map((r) => r[channel]).filter((v) => Number.isFinite(v));
 

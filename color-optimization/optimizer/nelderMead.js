@@ -6,6 +6,7 @@ export function nelderMead(fn, start, opts = {}) {
   const maxIterations = opts.maxIterations || 200;
   const tolerance = opts.tolerance || 1e-5;
   const step = opts.step || 1;
+  const trace = opts.trace ? [] : null;
 
   const n = start.length;
   let simplex = Array.from({ length: n + 1 }, (_, i) => {
@@ -25,10 +26,11 @@ export function nelderMead(fn, start, opts = {}) {
 
     const best = simplex[0];
     const worst = simplex[n];
+    if (trace) trace.push(best.slice());
 
     const spread = Math.max(...values) - Math.min(...values);
     if (spread < tolerance) {
-      return { x: simplex[0], fx: values[0], reason: "converged (spread)" };
+      return { x: simplex[0], fx: values[0], reason: "converged (spread)", trace };
     }
 
     const centroid = Array(n).fill(0);
@@ -80,5 +82,5 @@ export function nelderMead(fn, start, opts = {}) {
     }
   }
 
-  return { x: simplex[0], fx: values[0], reason: "max iterations" };
+  return { x: simplex[0], fx: values[0], reason: "max iterations", trace };
 }

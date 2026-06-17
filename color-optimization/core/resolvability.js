@@ -10,7 +10,7 @@ export function metricJnd(metric) {
 export function discriminabilityLabel(distance, metric) {
   if (!Number.isFinite(distance)) return "";
   const jnd = metricJnd(metric);
-  const thresholds = [5, 10, 20, 30].map((t) => t * jnd);
+  const thresholds = [1, 2, 5, 10].map((t) => t * jnd);
   if (distance < thresholds[0]) return "awful";
   if (distance < thresholds[1]) return "poor";
   if (distance < thresholds[2]) return "fair";

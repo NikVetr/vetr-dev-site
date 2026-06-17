@@ -11,10 +11,10 @@ import {
   xyzToLinearRgb,
   normalizeWithRange,
   unscaleWithRange,
-  projectToGamut,
   GAMUTS,
 } from "../core/colorSpaces.js";
 import { clamp, logistic } from "../core/util.js";
+import { projectToGamutWithinHardConstraints } from "../core/hardConstraints.js";
 import { computeBoundsFromCurrent, computeBoundsFromRawValues } from "./bounds.js";
 
 const PARAM_PENALTY_WEIGHT = 20;
@@ -160,7 +160,7 @@ export function meanDistance(par, prep, returnInfo) {
 
   const scaled = m.map((row) => unscaleWithRange(row, ranges, colorSpace));
   const displayRaw = prep.clipToGamutOpt
-    ? scaled.map((row) => projectToGamut(row, colorSpace, prep.gamutPreset, colorSpace))
+    ? scaled.map((row) => projectToGamutWithinHardConstraints(row, prep))
     : scaled;
   const rawHex = displayRaw.map((row) => encodeColor(row, colorSpace));
   const newHex = rawHex;
@@ -254,7 +254,8 @@ export function meanDistance(par, prep, returnInfo) {
       value,
       score: -value,
       newHex,
-      newRaw: scaled.map((row) => ({ ...row })),
+      newRaw: displayRaw.map((row) => ({ ...row })),
+      optimizerRaw: scaled.map((row) => ({ ...row })),
       distance: wd,
       penalty: penaltyTotal,
       paramPenalty: paramPenalty / penaltyScale,
@@ -399,13 +400,15 @@ function applyDiscontiguousHardConstraints(rows, zRows, constraintSets) {
     const zRow = zRows?.[idx] || {};
     let bestIndex = null;
     let bestZSq = Infinity;
+    let bestTieSq = Infinity;
 
     for (let i = 0; i < numPoints; i++) {
       let zSq = 0;
+      let tieSq = 0;
       let used = false;
       channels.forEach((ch) => {
         const c = constraintSets.channels[ch];
-        if (!c) return;
+        if (!c || c.mode !== "hard") return;
         const windows = pointWindowsByChannel[ch];
         if (!windows) return;
         const w = windows[i % windows.length];
@@ -416,18 +419,24 @@ function applyDiscontiguousHardConstraints(rows, zRows, constraintSets) {
           if (!Number.isFinite(phi)) return;
           const sigma = Math.max(w.radius / 1.96, 1e-3);
           const dHue = circularDistance(phi, w.center);
-          zSq += Math.pow(dHue / sigma, 2);
+          const excess = Math.max(0, dHue - Math.max(w.radius, 0));
+          zSq += Math.pow(excess / sigma, 2);
+          tieSq += Math.pow(dHue / sigma, 2);
         } else {
-          const z = zRow?.[ch];
-          if (!Number.isFinite(z)) return;
-          const u = clamp(logistic(z), 0, 1);
+          const u = clamp(row[ch], 0, 1);
+          if (!Number.isFinite(u)) return;
           const sigma = Math.max(w.radius / 1.96, 1e-3);
+          const min = Number.isFinite(w.min) ? w.min : Math.max(0, w.center - w.radius);
+          const max = Number.isFinite(w.max) ? w.max : Math.min(1, w.center + w.radius);
+          const excess = u < min ? min - u : u > max ? u - max : 0;
           const dLin = Math.abs(u - w.center);
-          zSq += Math.pow(dLin / sigma, 2);
+          zSq += Math.pow(excess / sigma, 2);
+          tieSq += Math.pow(dLin / sigma, 2);
         }
       });
-      if (used && zSq < bestZSq) {
+      if (used && (zSq < bestZSq || (Math.abs(zSq - bestZSq) <= 1e-12 && tieSq < bestTieSq))) {
         bestZSq = zSq;
+        bestTieSq = tieSq;
         bestIndex = i;
       }
     }
@@ -485,7 +494,9 @@ function constraintPenaltyForRow(row, idx, zRow, constraintSets, topology) {
     });
 
     if (numPoints > 0) {
-      // For each point, compute combined z² across all channels
+      // For each point, compute combined z² across all channels. Hard windows
+      // only penalize violations outside the window; soft windows penalize
+      // distance from the center.
       let minZSq = Infinity;
       for (let i = 0; i < numPoints; i++) {
         let zSq = 0;
@@ -499,18 +510,23 @@ function constraintPenaltyForRow(row, idx, zRow, constraintSets, topology) {
           if (c.type === "hue") {
             const phi = row.__huePhi;
             if (!Number.isFinite(phi)) return;
-            // Distance to this point's hue center
             const dHue = circularDistance(phi, w.center);
             const sigma = Math.max(w.radius / 1.96, 1e-3);
-            zSq += Math.pow(dHue / sigma, 2);
+            const excess = c.mode === "hard" ? Math.max(0, dHue - Math.max(w.radius, 0)) : dHue;
+            zSq += Math.pow(excess / sigma, 2);
           } else {
-            const z = zRow?.[ch];
-            if (!Number.isFinite(z)) return;
-            const u = clamp(logistic(z), 0, 1);
-            // Distance to this point's center
-            const dLin = Math.abs(u - w.center);
+            const u = clamp(row[ch], 0, 1);
+            if (!Number.isFinite(u)) return;
             const sigma = Math.max(w.radius / 1.96, 1e-3);
-            zSq += Math.pow(dLin / sigma, 2);
+            if (c.mode === "hard") {
+              const min = Number.isFinite(w.min) ? w.min : Math.max(0, w.center - w.radius);
+              const max = Number.isFinite(w.max) ? w.max : Math.min(1, w.center + w.radius);
+              const excess = u < min ? min - u : u > max ? u - max : 0;
+              zSq += Math.pow(excess / sigma, 2);
+            } else {
+              const dLin = Math.abs(u - w.center);
+              zSq += Math.pow(dLin / sigma, 2);
+            }
           }
         });
         if (zSq < minZSq) minZSq = zSq;

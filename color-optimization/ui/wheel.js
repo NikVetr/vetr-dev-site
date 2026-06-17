@@ -15,7 +15,17 @@ import {
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
 import { clamp } from "../core/util.js";
-import { buildGamutProjectionBoundary, smoothBoundary, strokeBoundary, computeGamutExtent } from "./gamutHull.js";
+import {
+  applyConstrainedChannelsToRange,
+  buildGamutProjectionBoundary,
+  computeGamutExtent,
+  drawOutOfConstraintOverlay,
+  drawOutOfGamutOverlay,
+  hardContiguousHiddenConstraintRange,
+  hardContiguousVisibleConstraintGuides,
+  smoothBoundary,
+  strokeBoundary,
+} from "./gamutHull.js";
 
 export function drawWheel(type, ui, state, opts = {}) {
   const refs = ui.panelMap[type];
@@ -52,24 +62,26 @@ export function drawWheel(type, ui, state, opts = {}) {
     ? { l: channels[0] || "l", x: channels[1] || "a", y: channels[2] || "b" }
     : null;
 
-  const resolveVals = (hex, rawVals, idx, sourceSpace) => {
+  const resolveRawVals = (hex, rawVals, idx, sourceSpace) => {
     const raw = rawVals && rawVals[idx];
     if (raw) {
-      return clipToGamut
-        ? projectToGamut(raw, sourceSpace || wheelSpace, gamutPreset, wheelSpace)
-        : sourceSpace && sourceSpace !== wheelSpace
-          ? convertColorValues(raw, sourceSpace, wheelSpace)
-          : raw;
+      return sourceSpace && sourceSpace !== wheelSpace
+        ? convertColorValues(raw, sourceSpace, wheelSpace)
+        : raw;
     }
-    const decoded = decodeColor(hex, wheelSpace);
-    return clipToGamut ? projectToGamut(decoded, wheelSpace, gamutPreset, wheelSpace) : decoded;
+    return decodeColor(hex, wheelSpace);
+  };
+  const resolveVisualVals = (hex, rawVals, idx, sourceSpace) => {
+    const vals = resolveRawVals(hex, rawVals, idx, sourceSpace);
+    return clipToGamut ? projectToGamut(vals, wheelSpace, gamutPreset, wheelSpace) : vals;
   };
   const rawOverride = state.rawInputOverride?.space === wheelSpace ? state.rawInputOverride.values : null;
   const rawCurrent = rawOverride?.length ? rawOverride : (state.rawCurrentColors?.length ? state.rawCurrentColors : null);
   const rawNew = state.rawNewColors?.length ? state.rawNewColors : null;
   const allColors = state.currentColors.map((c, idx) => {
-    const vals = resolveVals(c, rawCurrent, idx, state.rawSpace);
-    const displayHex = vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
+    const vals = resolveRawVals(c, rawCurrent, idx, state.rawSpace);
+    const displayVals = vals ? (clipToGamut ? projectToGamut(vals, wheelSpace, gamutPreset, wheelSpace) : vals) : null;
+    const displayHex = displayVals ? rgbToHex(convertColorValues(displayVals, wheelSpace, "rgb")) : c;
     return {
       role: "input",
       index: idx,
@@ -77,11 +89,13 @@ export function drawWheel(type, ui, state, opts = {}) {
       displayColor: displayHex,
       shape: "circle",
       vals,
+      displayVals,
     };
   })
     .concat(state.newColors.map((c, idx) => {
-      const vals = resolveVals(c, rawNew, idx, state.newRawSpace);
-      const displayHex = vals ? rgbToHex(convertColorValues(vals, wheelSpace, "rgb")) : c;
+      const vals = resolveRawVals(c, rawNew, idx, state.newRawSpace);
+      const displayVals = vals ? (clipToGamut ? projectToGamut(vals, wheelSpace, gamutPreset, wheelSpace) : vals) : null;
+      const displayHex = displayVals ? rgbToHex(convertColorValues(displayVals, wheelSpace, "rgb")) : c;
       return {
         role: "output",
         index: idx,
@@ -89,9 +103,11 @@ export function drawWheel(type, ui, state, opts = {}) {
         displayColor: displayHex,
         shape: "square",
         vals,
+        displayVals,
       };
-    }));
-  const valueSet = allColors.map((c) => c.vals);
+  }));
+  const valueSet = allColors.map((c) => c.displayVals || c.vals);
+  const hasDataValues = valueSet.some((vals) => vals);
   const dataRange = effectiveRangeFromValues(valueSet, wheelSpace);
   const presetRange = rangeFromPreset(wheelSpace, gamutPreset) || csRanges[wheelSpace];
   const baseRange = wheelSpace === "jzazbz" ? presetRange : csRanges[wheelSpace];
@@ -104,10 +120,22 @@ export function drawWheel(type, ui, state, opts = {}) {
   const unclippedRange =
     gamutMode === "full" ? baseRange : unionRanges(dataRange, baseRange, wheelSpace);
   const clippedRange =
-    gamutMode === "full" ? gamutRange : unionRanges(dataRange, gamutRange, wheelSpace);
+    gamutMode === "full" || !hasDataValues ? gamutRange : unionRanges(dataRange, gamutRange, wheelSpace);
   const ranges = clipToGamut ? clippedRange : unclippedRange;
-
   const isRectWheel = !hasHue;
+  const visibleConstraintChannels = isRectWheel
+    ? [rectKeys?.x, rectKeys?.y]
+    : ["h", channels.find((c) => c === "s" || c === "c")].filter(Boolean);
+  const activeConstraintDomain =
+    state.bounds && ui.colorSpace.value === wheelSpace
+      ? hardContiguousHiddenConstraintRange(state.bounds, wheelSpace, visibleConstraintChannels)
+      : null;
+  const visibleConstraintGuides =
+    state.bounds && ui.colorSpace.value === wheelSpace
+      ? hardContiguousVisibleConstraintGuides(state.bounds, wheelSpace, visibleConstraintChannels)
+      : [];
+  const hiddenConstraintChannels =
+    activeConstraintDomain?.channels?.filter((ch) => !visibleConstraintChannels.includes(ch)) || [];
   let radius = baseRadius;
   if (isRectWheel) {
     const leftPad = 25;
@@ -223,7 +251,7 @@ export function drawWheel(type, ui, state, opts = {}) {
   };
 
   const coords = allColors.map((entry) => {
-    const pt = toPoint(entry.vals);
+    const pt = toPoint(entry.displayVals || entry.vals);
     return {
       role: entry.role,
       index: entry.index,
@@ -321,6 +349,12 @@ export function drawWheel(type, ui, state, opts = {}) {
     });
   }
 
+  let activeGamutClipBoundary = null;
+
+  // Put the gamut mask under constraint overlays so soft constraints remain visible
+  // when "clip to gamut" is enabled.
+  drawGamutClipLayer();
+
   if (state.bounds && ui.colorSpace.value === wheelSpace) {
     const wheelSpaceCurrent = wheelSpace;
     const hasHue = channels.includes("h");
@@ -339,17 +373,19 @@ export function drawWheel(type, ui, state, opts = {}) {
     // Extract input colors for colored constraint boundaries
     const inputColors = allColors.filter((c) => c.role === "input").map((c) => c.color);
 
-    // Draw constraint visualizations based on mode (wrapped in try-catch to prevent rendering failures)
-    // Note: We don't clip constraints to gamut here because the base viz already shows white
-    // outside the gamut, so constraint overlays naturally blend with it.
+    // Draw constraint visualizations based on mode (wrapped in try-catch to prevent rendering failures).
+    // When gamut clipping is active, show rectangular/polar guides only where they intersect
+    // the active projected gamut region.
     try {
-      if (!isRectWheel && constraintSets?.channels) {
-        drawPolarConstraints(ctx, cx, cy, radius, constraintSets, scKey, topology, mapRadius, inputColors);
-      }
+      drawClippedToBoundary(activeGamutClipBoundary, () => {
+        if (!isRectWheel && constraintSets?.channels) {
+          drawPolarConstraints(ctx, cx, cy, radius, constraintSets, scKey, topology, mapRadius, inputColors);
+        }
 
-      if (isRectWheel && constraintSets?.channels && rectKeys) {
-        drawRectConstraints(ctx, cx, cy, radius, constraintSets, rectKeys, baseRange, ranges, topology, inputColors);
-      }
+        if (isRectWheel && constraintSets?.channels && rectKeys) {
+          drawRectConstraints(ctx, cx, cy, radius, constraintSets, rectKeys, baseRange, ranges, topology, inputColors);
+        }
+      });
     } catch (e) {
       console.warn("Constraint visualization error:", e);
     }
@@ -409,7 +445,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
     // Shade excluded regions
     ctx.save();
-    ctx.fillStyle = "rgba(255,255,255,0.60)";
+    ctx.fillStyle = "rgba(255,255,255,0.52)";
     ctx.beginPath();
     ctx.moveTo(cx + radius, cy);
     ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
@@ -483,7 +519,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (hueIsHard && !scIsHard) {
       // Hue is hard, saturation is soft: draw hard overlay outside hue bounds
       ctx.save();
-      ctx.fillStyle = "rgba(255,255,255,0.60)";
+      ctx.fillStyle = "rgba(255,255,255,0.52)";
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, TAU);
       // Cut out the allowed hue wedge (full radius)
@@ -498,7 +534,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (scIsHard && !hueIsHard) {
       // Saturation is hard, hue is soft: draw hard overlay outside saturation bounds
       ctx.save();
-      ctx.fillStyle = "rgba(255,255,255,0.60)";
+      ctx.fillStyle = "rgba(255,255,255,0.52)";
       // Inner region (r < scMin)
       if (scMin > 0) {
         ctx.beginPath();
@@ -634,7 +670,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     offCtx.setTransform(ctx.getTransform());
 
     // Fill entire circle with white overlay on offscreen canvas
-    offCtx.fillStyle = "rgba(255,255,255,0.60)";
+    offCtx.fillStyle = "rgba(255,255,255,0.52)";
     offCtx.beginPath();
     offCtx.arc(cx, cy, radius, 0, 2 * Math.PI);
     offCtx.fill();
@@ -875,7 +911,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
     // Shade excluded regions
     ctx.save();
-    ctx.fillStyle = "rgba(255,255,255,0.60)";
+    ctx.fillStyle = "rgba(255,255,255,0.52)";
     ctx.beginPath();
     ctx.rect(cx - radius, cy - radius, radius * 2, radius * 2);
     shadeX.forEach(([x0, x1]) => {
@@ -931,7 +967,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (xIsHard && !yIsHard) {
       // X is hard, Y is soft: draw hard overlay outside X bounds
       ctx.save();
-      ctx.fillStyle = "rgba(255,255,255,0.60)";
+      ctx.fillStyle = "rgba(255,255,255,0.52)";
       // Left region (x < x0)
       const xA = xToCoord(0);
       const xB = xToCoord(x0);
@@ -948,7 +984,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (yIsHard && !xIsHard) {
       // Y is hard, X is soft: draw hard overlay outside Y bounds
       ctx.save();
-      ctx.fillStyle = "rgba(255,255,255,0.60)";
+      ctx.fillStyle = "rgba(255,255,255,0.52)";
       const xLeft = xToCoord(0);
       const xRight = xToCoord(1);
       // Top region (y < y0 in normalized, but y axis is inverted in screen coords)
@@ -1061,7 +1097,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     offCtx.setTransform(ctx.getTransform());
 
     // Fill entire square with white overlay on offscreen canvas
-    offCtx.fillStyle = "rgba(255,255,255,0.60)";
+    offCtx.fillStyle = "rgba(255,255,255,0.52)";
     offCtx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
 
     // Clear out allowed regions using destination-out
@@ -1335,27 +1371,121 @@ export function drawWheel(type, ui, state, opts = {}) {
     ctx.restore();
   }
 
-  // Draw white grid overlay on out-of-gamut areas using the hull boundary path
-  if (clipToGamut) {
-    const boundaryVals = buildGamutProjectionBoundary(
-      wheelSpace,
-      gamutPreset,
-      scaleRange,
-      isRectWheel,
-      rectKeys
-    );
-    const boundaryPts = (boundaryVals || [])
-      .map((vals) => toPoint(vals, scaleRange))
-      .filter((pt) => pt && Number.isFinite(pt.x) && Number.isFinite(pt.y));
-    const clipBoundary = smoothBoundary(boundaryPts, 1);
-    if (clipBoundary && clipBoundary.length) {
-      drawOutOfGamutOverlay(ctx, cx, cy, radius, isRectWheel, clipBoundary);
-      strokeBoundary(ctx, clipBoundary);
+  // Draw white grid overlay on out-of-gamut areas using the hull boundary path.
+  function drawGamutClipLayer() {
+    if (!clipToGamut) return;
+    const boundaryForRange = (boundaryRange) => {
+      const boundaryVals = buildGamutProjectionBoundary(
+        wheelSpace,
+        gamutPreset,
+        boundaryRange,
+        isRectWheel,
+        rectKeys
+      );
+      const boundaryPts = (boundaryVals || [])
+        .map((vals) => toPoint(vals, scaleRange))
+        .filter((pt) => pt && Number.isFinite(pt.x) && Number.isFinite(pt.y));
+      return smoothBoundary(boundaryPts, 1);
+    };
+    const customHiddenBoundaries = () => {
+      const sets = state.bounds?.constraintSets;
+      if (!sets?.channels || (sets.topology !== "custom" && sets.topology !== "discontiguous")) return [];
+      const base = state.bounds?.ranges || csRanges[wheelSpace];
+      const hidden = (channelOrder[wheelSpace] || []).filter((ch) => {
+        if (visibleConstraintChannels.includes(ch)) return false;
+        const c = sets.channels[ch];
+        return c?.mode === "hard" && c.type === "linear" && Array.isArray(c.pointWindows) && c.pointWindows.length;
+      });
+      if (!hidden.length) return [];
+      const count = hidden.reduce((acc, ch) => Math.max(acc, sets.channels[ch].pointWindows.length), 0);
+      const out = [];
+      for (let i = 0; i < count; i++) {
+        const min = { ...scaleRange.min };
+        const max = { ...scaleRange.max };
+        hidden.forEach((ch) => {
+          const windows = sets.channels[ch].pointWindows;
+          const w = windows[i % windows.length];
+          if (!w) return;
+          const lo = Math.max(0, Math.min(1, Number.isFinite(w.min) ? w.min : w.center - w.radius));
+          const hi = Math.max(0, Math.min(1, Number.isFinite(w.max) ? w.max : w.center + w.radius));
+          const cMin = base.min?.[ch] ?? scaleRange.min?.[ch] ?? 0;
+          const cMax = base.max?.[ch] ?? scaleRange.max?.[ch] ?? 1;
+          min[ch] = cMin + Math.min(lo, hi) * (cMax - cMin);
+          max[ch] = cMin + Math.max(lo, hi) * (cMax - cMin);
+        });
+        const boundary = boundaryForRange({ min, max });
+        if (boundary?.length) out.push(boundary);
+      }
+      return out;
+    };
+    const drawOutOfMultipleConstraintOverlay = (fullBoundary, boundaries) => {
+      if (!fullBoundary?.length || !boundaries?.length) return;
+      const offscreen = document.createElement("canvas");
+      offscreen.width = ctx.canvas.width;
+      offscreen.height = ctx.canvas.height;
+      const offCtx = offscreen.getContext("2d");
+      offCtx.setTransform(ctx.getTransform());
+
+      offCtx.beginPath();
+      offCtx.moveTo(fullBoundary[0].x, fullBoundary[0].y);
+      for (let i = 1; i < fullBoundary.length; i++) offCtx.lineTo(fullBoundary[i].x, fullBoundary[i].y);
+      offCtx.closePath();
+      offCtx.fillStyle = "rgba(255,255,255,0.52)";
+      offCtx.fill();
+
+      offCtx.globalCompositeOperation = "destination-out";
+      boundaries.forEach((boundary) => {
+        if (!boundary?.length) return;
+        offCtx.beginPath();
+        offCtx.moveTo(boundary[0].x, boundary[0].y);
+        for (let i = 1; i < boundary.length; i++) offCtx.lineTo(boundary[i].x, boundary[i].y);
+        offCtx.closePath();
+        offCtx.fillStyle = "rgba(0,0,0,1)";
+        offCtx.fill();
+      });
+
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.drawImage(offscreen, 0, 0);
+      ctx.restore();
+    };
+    const fullBoundary = boundaryForRange(scaleRange);
+    if (fullBoundary && fullBoundary.length) {
+      drawOutOfGamutOverlay(ctx, cx, cy, radius, isRectWheel, fullBoundary);
+      let constrainedBoundary = null;
+      const customBoundaries = customHiddenBoundaries();
+      if (hiddenConstraintChannels.length) {
+        const constrainedRange = applyConstrainedChannelsToRange(
+          scaleRange,
+          activeConstraintDomain.range,
+          hiddenConstraintChannels
+        );
+        constrainedBoundary = boundaryForRange(constrainedRange);
+        if (constrainedBoundary && constrainedBoundary.length) {
+          drawOutOfConstraintOverlay(ctx, fullBoundary, constrainedBoundary);
+        }
+      } else if (customBoundaries.length) {
+        drawOutOfMultipleConstraintOverlay(fullBoundary, customBoundaries);
+      }
+      strokeBoundary(ctx, fullBoundary);
+      if (constrainedBoundary && constrainedBoundary.length) {
+        strokeBoundary(ctx, constrainedBoundary, { dashed: true });
+      } else if (customBoundaries.length) {
+        customBoundaries.forEach((boundary) => strokeBoundary(ctx, boundary, { dashed: true }));
+      }
+      activeGamutClipBoundary = constrainedBoundary?.length
+        ? constrainedBoundary
+        : customBoundaries.length
+          ? customBoundaries
+          : fullBoundary;
     }
   }
 
-  // draw points above overlays
-  coords.forEach((pt) => {
+  if (clipToGamut) {
+    drawClippedToBoundary(activeGamutClipBoundary, () => drawVisibleConstraintGuides(visibleConstraintGuides));
+  }
+
+  const drawPoint = (pt) => {
     const fill = applyCvdHex(pt.displayColor || pt.color, type, 1, cvdModel);
     ctx.beginPath();
     const sizePt = 6 + 12 * pt.lNorm;
@@ -1369,7 +1499,11 @@ export function drawWheel(type, ui, state, opts = {}) {
     ctx.lineWidth = 1;
     ctx.fill();
     ctx.stroke();
-  });
+  };
+
+  // Input/output markers are glyphs, not feasible-region fills. Draw them
+  // un-clipped above gamut and constraint masks so the full marker is visible.
+  coords.forEach(drawPoint);
 
   constraintPoints.forEach((pt) => {
     const fill = applyCvdHex(pt.displayColor || pt.color, type, 1, cvdModel);
@@ -1392,7 +1526,227 @@ export function drawWheel(type, ui, state, opts = {}) {
   ctx.font = "12px 'Space Grotesk', Arial, sans-serif";
   ctx.textAlign = "left";
   ctx.textBaseline = "top";
-  ctx.fillText(`${presetLabel}${clipToGamut ? " (clipped)" : " (raw)"}`, 8, 6);
+  const gamutLabel = `${presetLabel}${clipToGamut ? " (clipped)" : " (raw)"}`;
+  ctx.fillText(gamutLabel, 8, 6);
+  drawGamutLegend(8 + ctx.measureText(gamutLabel).width + 12);
+
+  function drawGamutLegend(minX) {
+    if (!clipToGamut) return;
+    const hasCustomConstraintGuides = ui.constraintTopology?.value === "custom" && state.customConstraints?.values?.length;
+    const hasConstraintLegend = hiddenConstraintChannels.length || visibleConstraintGuides.length || hasCustomConstraintGuides;
+    const label = "constraint";
+    const y = 12;
+    ctx.save();
+    ctx.font = "9px 'Space Grotesk', Arial, sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.lineCap = "round";
+    ctx.lineWidth = 1.5;
+    const fullLabel = "full gamut";
+    const lineWidth = 13;
+    const labelGap = 3;
+    const itemGap = 7;
+    const rightEdge = dim - 8;
+    const measureItem = (text) => lineWidth + labelGap + ctx.measureText(text).width;
+    const fullItemWidth = measureItem(fullLabel);
+    const solidItemWidth = measureItem(label);
+    const totalWidth = hasConstraintLegend ? fullItemWidth + itemGap + solidItemWidth : fullItemWidth;
+    const availableWidth = rightEdge - minX;
+    const drawItem = (x, itemY, text, dashed) => {
+      ctx.strokeStyle = dashed ? "rgba(15,23,42,0.72)" : "rgba(15,23,42,0.9)";
+      ctx.setLineDash(dashed ? [4, 3] : []);
+      ctx.beginPath();
+      ctx.moveTo(x, itemY);
+      ctx.lineTo(x + lineWidth, itemY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = dashed ? "rgba(15,23,42,0.72)" : "rgba(15,23,42,0.78)";
+      ctx.fillText(text, x + lineWidth + labelGap, itemY);
+    };
+    if (hasConstraintLegend && totalWidth > availableWidth) {
+      const rowWidth = Math.max(fullItemWidth, solidItemWidth);
+      const x = Math.max(minX, rightEdge - rowWidth);
+      drawItem(x + rowWidth - fullItemWidth, 9, fullLabel, false);
+      drawItem(x + rowWidth - solidItemWidth, 19, label, true);
+      ctx.restore();
+      return;
+    }
+    const x = rightEdge - totalWidth;
+    drawItem(x, y, fullLabel, false);
+    if (hasConstraintLegend) {
+      drawItem(x + fullItemWidth + itemGap, y, label, true);
+    }
+    ctx.restore();
+  }
+
+  function drawVisibleConstraintGuides(guides) {
+    if (!guides?.length) return;
+    const strokeGuide = () => {
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.setLineDash([]);
+      ctx.strokeStyle = "rgba(255,255,255,0.95)";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.setLineDash([2, 4]);
+      ctx.strokeStyle = "rgba(8,145,178,0.95)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.setLineDash([]);
+    };
+
+    ctx.save();
+    if (isRectWheel && rectKeys) {
+      const xKey = rectKeys.x;
+      const yKey = rectKeys.y;
+      const maxX = Math.max(Math.abs(scaleRange.min[xKey] || 0), Math.abs(scaleRange.max[xKey] || 0)) || 1;
+      const maxY = Math.max(Math.abs(scaleRange.min[yKey] || 0), Math.abs(scaleRange.max[yKey] || 0)) || 1;
+      guides.forEach((guide) => {
+        if (guide.type !== "linear") return;
+        guide.raw.forEach((raw) => {
+          if (guide.channel === xKey) {
+            const x = cx + clamp(raw / maxX, -1, 1) * radius;
+            ctx.beginPath();
+            ctx.moveTo(x, cy - radius);
+            ctx.lineTo(x, cy + radius);
+            strokeGuide();
+          } else if (guide.channel === yKey) {
+            const y = cy - clamp(raw / maxY, -1, 1) * radius;
+            ctx.beginPath();
+            ctx.moveTo(cx - radius, y);
+            ctx.lineTo(cx + radius, y);
+            strokeGuide();
+          }
+        });
+      });
+      ctx.restore();
+      return;
+    }
+
+    const scKey = channels.find((c) => c === "s" || c === "c");
+    const maxSC = scKey === "s" ? scaleRange.max.s : scaleRange.max.c;
+    guides.forEach((guide) => {
+      if (guide.type === "hue") {
+        guide.intervalsRad.forEach(([start, end]) => {
+          [start, end].forEach((ang) => {
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(cx + radius * Math.cos(ang), cy + radius * Math.sin(ang));
+            strokeGuide();
+          });
+        });
+      } else if (guide.type === "linear" && guide.channel === scKey) {
+        guide.raw.forEach((raw) => {
+          const r = clamp(raw / Math.max(maxSC, 1e-6), 0, 1) * radius;
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, TAU);
+          strokeGuide();
+        });
+      }
+    });
+    ctx.restore();
+  }
+
+  function drawClippedToBoundary(boundary, drawFn) {
+    const boundaries = Array.isArray(boundary?.[0]) ? boundary : (boundary?.length ? [boundary] : []);
+    const valid = boundaries.filter((poly) => poly?.length >= 3);
+    if (!clipToGamut || !valid.length) {
+      drawFn();
+      return;
+    }
+    ctx.save();
+    ctx.beginPath();
+    valid.forEach((poly) => {
+      ctx.moveTo(poly[0].x, poly[0].y);
+      for (let i = 1; i < poly.length; i++) ctx.lineTo(poly[i].x, poly[i].y);
+      ctx.closePath();
+    });
+    ctx.clip();
+    drawFn();
+    ctx.restore();
+  }
+
+  function drawClippedToVisibleHardConstraints(drawFn) {
+    if (!isRectWheel || !rectKeys || !state.bounds || ui.colorSpace.value !== wheelSpace) {
+      drawFn();
+      return;
+    }
+    const constraintSets = state.bounds.constraintSets;
+    if (!constraintSets?.channels) {
+      drawFn();
+      return;
+    }
+    const base = state.bounds.ranges || csRanges[wheelSpace];
+    const xKey = rectKeys.x;
+    const yKey = rectKeys.y;
+    const maxX = Math.max(Math.abs(ranges.min[xKey] || 0), Math.abs(ranges.max[xKey] || 0)) || 1;
+    const maxY = Math.max(Math.abs(ranges.min[yKey] || 0), Math.abs(ranges.max[yKey] || 0)) || 1;
+    const toRaw = (ch, u) => {
+      const min = base.min?.[ch] ?? ranges.min?.[ch] ?? 0;
+      const max = base.max?.[ch] ?? ranges.max?.[ch] ?? 1;
+      return min + clamp(u, 0, 1) * (max - min);
+    };
+    const xToCoord = (u) => cx + clamp(toRaw(xKey, u) / maxX, -1, 1) * radius;
+    const yToCoord = (u) => cy - clamp(toRaw(yKey, u) / maxY, -1, 1) * radius;
+    const addRect = (x0, x1, y0, y1) => {
+      const xA = xToCoord(x0);
+      const xB = xToCoord(x1);
+      const yA = yToCoord(y0);
+      const yB = yToCoord(y1);
+      const left = Math.min(xA, xB);
+      const top = Math.min(yA, yB);
+      const width = Math.abs(xB - xA);
+      const height = Math.abs(yB - yA);
+      if (width <= 1e-6 || height <= 1e-6) return false;
+      ctx.rect(left, top, width, height);
+      return true;
+    };
+    const xC = constraintSets.channels[xKey];
+    const yC = constraintSets.channels[yKey];
+    const xHard = xC?.mode === "hard";
+    const yHard = yC?.mode === "hard";
+    const topology = constraintSets.topology || "contiguous";
+    const isWindowed = topology === "custom" || topology === "discontiguous";
+    let hasClip = false;
+
+    ctx.save();
+    ctx.beginPath();
+    if (isWindowed) {
+      const xWindows = xHard ? (xC?.pointWindows || []) : [];
+      const yWindows = yHard ? (yC?.pointWindows || []) : [];
+      const count = Math.max(xWindows.length, yWindows.length);
+      for (let i = 0; i < count; i++) {
+        const xW = xWindows[i % Math.max(xWindows.length, 1)] || null;
+        const yW = yWindows[i % Math.max(yWindows.length, 1)] || null;
+        const x0 = xW ? xW.min : 0;
+        const x1 = xW ? xW.max : 1;
+        const y0 = yW ? yW.min : 0;
+        const y1 = yW ? yW.max : 1;
+        hasClip = addRect(x0, x1, y0, y1) || hasClip;
+      }
+    } else {
+      const fullX = !xHard || xC?.full;
+      const fullY = !yHard || yC?.full;
+      const xIntervals = fullX ? [[0, 1]] : (xC?.intervals || [[0, 1]]);
+      const yIntervals = fullY ? [[0, 1]] : (yC?.intervals || [[0, 1]]);
+      if (!fullX || !fullY) {
+        xIntervals.forEach(([x0, x1]) => {
+          yIntervals.forEach(([y0, y1]) => {
+            hasClip = addRect(x0, x1, y0, y1) || hasClip;
+          });
+        });
+      }
+    }
+
+    if (!hasClip) {
+      ctx.restore();
+      drawFn();
+      return;
+    }
+    ctx.clip();
+    drawFn();
+    ctx.restore();
+  }
 }
 
 function unionRanges(a, b, space) {
@@ -1595,69 +1949,4 @@ function midL(space, rangeOverride = null) {
   const minVal = Number.isFinite(r?.min?.[lk]) ? r.min[lk] : (baseRange?.min?.[lk] ?? 0);
   const maxVal = Number.isFinite(r?.max?.[lk]) ? r.max[lk] : (baseRange?.max?.[lk] ?? 1);
   return (minVal + maxVal) / 2;
-}
-
-// Create a white fill with subtle grid pattern for out-of-gamut overlay
-function createOutOfGamutPattern(ctx, spacing = 8) {
-  const size = spacing;
-  const patternCanvas = document.createElement("canvas");
-  patternCanvas.width = size;
-  patternCanvas.height = size;
-  const pCtx = patternCanvas.getContext("2d");
-
-  // Fill with white
-  pCtx.fillStyle = "white";
-  pCtx.fillRect(0, 0, size, size);
-
-  // Draw subtle grid lines at the edges
-  pCtx.strokeStyle = "rgba(180, 185, 195, 0.4)";
-  pCtx.lineWidth = 0.5;
-  pCtx.beginPath();
-  pCtx.moveTo(size - 0.25, 0);
-  pCtx.lineTo(size - 0.25, size);
-  pCtx.moveTo(0, size - 0.25);
-  pCtx.lineTo(size, size - 0.25);
-  pCtx.stroke();
-
-  return ctx.createPattern(patternCanvas, "repeat");
-}
-
-// Draw white grid pattern overlay on out-of-gamut areas
-// Uses the outer boundary polygon to exactly match the hull stroke lines
-function drawOutOfGamutOverlay(ctx, cx, cy, radius, isRectWheel, outerBoundary) {
-  if (!outerBoundary || outerBoundary.length < 3) return;
-
-  const outOfGamutPattern = createOutOfGamutPattern(ctx);
-
-  ctx.save();
-  ctx.beginPath();
-
-  if (isRectWheel) {
-    // For rectangular wheel, cover the square area
-    const size = radius * 2;
-    const left = cx - radius;
-    const top = cy - radius;
-    // Outer rectangle (clockwise)
-    ctx.moveTo(left, top);
-    ctx.lineTo(left + size, top);
-    ctx.lineTo(left + size, top + size);
-    ctx.lineTo(left, top + size);
-    ctx.closePath();
-  } else {
-    // For polar wheel, cover the circular area
-    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.closePath();
-  }
-
-  // Inner boundary polygon (counter-clockwise to cut a hole with evenodd)
-  // Start from the last point and go backwards
-  ctx.moveTo(outerBoundary[outerBoundary.length - 1].x, outerBoundary[outerBoundary.length - 1].y);
-  for (let i = outerBoundary.length - 2; i >= 0; i--) {
-    ctx.lineTo(outerBoundary[i].x, outerBoundary[i].y);
-  }
-  ctx.closePath();
-
-  ctx.fillStyle = outOfGamutPattern;
-  ctx.fill("evenodd");
-  ctx.restore();
 }

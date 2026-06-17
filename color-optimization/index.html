@@ -70,6 +70,7 @@
           </div>
           <div class="palette-clear-row">
             <button id="palette-clear" type="button" class="ghost palette-clear">Clear</button>
+            <button id="palette-image" type="button" class="ghost palette-image">Upload Image</button>
           </div>
           <div class="palette-buttons">
             <div id="palette-groups"></div>
@@ -301,7 +302,7 @@
               <label for="colorwheel-space">Colorspace</label>
               <div class="viz-options">
                 <label class="inline small">
-                  <input id="clip-gamut" type="checkbox" aria-label="Clip to gamut for visualization">
+                  <input id="clip-gamut" type="checkbox" aria-label="Clip to gamut for visualization" checked>
                   Clip
                 </label>
                 <label class="inline small">
@@ -348,7 +349,7 @@
               <span id="uniqueness-val" class="result-chip">0%</span>
             </div>
             <span id="clip-gamut-warning" class="clip-warning" hidden>
-              Note: constraints are applied in the raw optimization space; gamut clipping for visualization can move the displayed point outside the dashed constraint outline.
+              Note: clipped views plot gamut-projected display positions; internal optimizer coordinates are retained for diagnostics.
             </span>
           </div>
         </div>
@@ -360,7 +361,13 @@
             <div id="progress-bar"></div>
           </div>
           <canvas id="status-graph" height="150"></canvas>
-          <label class="small" style="margin-top: 8px; display: block;">Optimization Paths</label>
+          <div class="path-head">
+            <label class="small" for="path-steps">Optimization Paths</label>
+            <label class="path-steps-control" for="path-steps">
+              <span># Steps</span>
+              <input id="path-steps" type="number" min="1" max="260" value="48">
+            </label>
+          </div>
           <canvas id="status-mini" height="200"></canvas>
           <p id="status-text" class="status">waiting to start…</p>
           <div id="error-text" class="error"></div>

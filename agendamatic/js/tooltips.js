@@ -43,7 +43,7 @@ export function initTooltips() {
  */
 function handleMouseEnter(e) {
     const target = e.target.closest('[data-tooltip]');
-    if (target) {
+    if (target && !isSuppressedTooltipTarget(target)) {
         showTooltip(target);
     }
 }
@@ -65,7 +65,7 @@ function handleMouseLeave(e) {
  */
 function handleFocusIn(e) {
     const target = e.target.closest('[data-tooltip]');
-    if (target) {
+    if (target && !isSuppressedTooltipTarget(target)) {
         showTooltip(target);
     }
 }
@@ -87,6 +87,7 @@ function handleFocusOut(e) {
  */
 export function showTooltip(element) {
     if (!tooltipElement || !element) return;
+    if (isSuppressedTooltipTarget(element)) return;
 
     const text = element.getAttribute('data-tooltip');
     if (!text) return;
@@ -102,6 +103,10 @@ export function showTooltip(element) {
         tooltipElement.classList.add('visible');
         tooltipElement.setAttribute('aria-hidden', 'false');
     }, SHOW_DELAY);
+}
+
+function isSuppressedTooltipTarget(element) {
+    return Boolean(element.closest('.panel-resizer, .panel-corner'));
 }
 
 /**

@@ -44,6 +44,7 @@ export const paletteGroups = [
   {
     title: "Other",
     palettes: [
+      { name: "HTML 4.01", colors: ["#000000", "#C0C0C0", "#808080", "#FFFFFF", "#800000", "#FF0000", "#800080", "#FF00FF", "#008000", "#00FF00", "#808000", "#FFFF00", "#000080", "#0000FF", "#008080", "#00FFFF"] },
       { name: "Tableau 10", colors: ["#4E79A7", "#F28E2C", "#E15759", "#76B7B2", "#59A14F", "#EDC949", "#AF7AA1", "#FF9DA7", "#9C755F", "#BAB0AB"] },
       { name: "D3 Category10", colors: ["#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", "#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF"] },
       { name: "Viridis", colors: ["#440154", "#414487", "#2A788E", "#22A884", "#7AD151", "#FDE725"] },

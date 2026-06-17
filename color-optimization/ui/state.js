@@ -20,6 +20,7 @@ export function createInitialState() {
     selectedResultIdx: null,
     customConstraints: null,
     customConstraintSelection: null,
+    imageInput: null,
     suppressConstraintTopologyHistory: false,
     perInputConstraints: {
       enabled: false,
