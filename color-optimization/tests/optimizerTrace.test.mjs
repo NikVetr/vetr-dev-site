@@ -153,3 +153,33 @@ test("custom hard constraint trajectories stay inside displayed point windows", 
     });
   });
 });
+
+test("optimizePalette stops after cancellation predicate is set", async () => {
+  setRandomSeed(2030);
+  const progress = [];
+  let cancelled = false;
+  const best = await optimizePalette(["#680B00", "#003B48", "#1BB600"], {
+    colorSpace: "oklab",
+    constrain: true,
+    widths: [0.65, 0, 0],
+    constraintTopology: "contiguous",
+    constraintMode: { l: "hard", a: "hard", b: "hard" },
+    gamutPreset: "srgb",
+    clipToGamutOpt: true,
+    nColsToAdd: 2,
+    nOptimRuns: 4,
+    nmIterations: 20,
+    colorblindSafe: false,
+    colorblindWeights: { none: 1 },
+  }, {
+    shouldStop: () => cancelled,
+    onProgress: (info) => {
+      progress.push(info);
+      cancelled = true;
+    },
+  });
+
+  assert.equal(progress.length, 1);
+  assert.equal(best.cancelled, true);
+  assert.equal(best.meta.reason, "cancelled");
+});

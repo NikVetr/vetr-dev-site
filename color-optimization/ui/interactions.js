@@ -8,12 +8,21 @@ import {
   projectToGamut,
   GAMUTS,
 } from "../core/colorSpaces.js";
+import {
+  cloneExplicitBounds,
+  sanitizeHueBounds,
+  sanitizeLinearBounds,
+  setHueBoundEdge,
+  setLinearBoundEdge,
+  widthFromBounds,
+} from "../core/constraintBounds.js";
 import { computeBoundsFromCurrent, computeBoundsFromRawValues } from "../optimizer/bounds.js";
 import { parsePalette, readConstraintConfig } from "./configRead.js";
 import { refreshSwatches } from "./panels.js";
 import { setResults } from "./resultsBox.js";
 import { setStatusState } from "./status.js";
 import { drawStatusMini } from "./statusGraph.js";
+import { drawWheel } from "./wheel.js";
 
 const HIT_RADIUS = 8;
 const EDGE_HIT = 6;
@@ -37,6 +46,17 @@ function clampRange(v, min, max) {
 
 function clamp01(v) {
   return clampRange(v, 0, 1);
+}
+
+function canvasPointFromEvent(canvas, evt) {
+  const rect = canvas.getBoundingClientRect();
+  const deviceScale = window.devicePixelRatio || 1;
+  const logicalWidth = canvas.width / deviceScale;
+  const logicalHeight = canvas.height / deviceScale;
+  return {
+    x: ((evt.clientX - rect.left) / Math.max(rect.width, 1)) * logicalWidth,
+    y: ((evt.clientY - rect.top) / Math.max(rect.height, 1)) * logicalHeight,
+  };
 }
 
 function syncRawInputField(ui, state) {
@@ -345,17 +365,63 @@ function sliderForChannel(ui, space, ch) {
   return null;
 }
 
-function setWidthForChannel(ui, space, ch, width, throttle = false) {
+function setWidthForChannel(ui, state, space, ch, width, throttle = false, preserveExplicitBounds = false) {
   const slider = sliderForChannel(ui, space, ch);
   if (!slider) return;
+  if (preserveExplicitBounds) state.preserveSliderConstraintBoundsOnce = true;
   slider.value = String(clamp01(width));
-
-  if (throttle) {
-    const now = performance.now();
-    if (now - lastConstraintUpdate < CONSTRAINT_THROTTLE_MS) return;
-    lastConstraintUpdate = now;
-  }
   slider.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
+function setExplicitConstraintBounds(state, space, ch, bounds) {
+  const clean = ch === "h" ? sanitizeHueBounds(bounds) : sanitizeLinearBounds(bounds);
+  if (!clean) return null;
+  if (!state.sliderConstraintBounds || state.sliderConstraintBounds.space !== space) {
+    state.sliderConstraintBounds = { space, bounds: {} };
+  }
+  state.sliderConstraintBounds.bounds[ch] = clean;
+  return clean;
+}
+
+function dragBoundsForChannel(state, dragState, ch) {
+  const dragBounds = dragState?.boundsByChannel?.[ch];
+  if (Array.isArray(dragBounds)) return [...dragBounds];
+  const stateBounds = state.bounds?.boundsByName?.[ch];
+  if (Array.isArray(stateBounds)) return [...stateBounds];
+  return [0, 1];
+}
+
+function updateExplicitConstraintEdge(ui, state, space, ch, edge, targetNorm, dragState) {
+  const current = dragBoundsForChannel(state, dragState, ch);
+  const next = ch === "h"
+    ? setHueBoundEdge(current, edge, targetNorm)
+    : setLinearBoundEdge(current, edge, targetNorm);
+  const clean = setExplicitConstraintBounds(state, space, ch, next);
+  if (!clean) return;
+  setWidthForChannel(ui, state, space, ch, widthFromBounds(clean, ch), true, true);
+}
+
+function buildConstraintDragState(ui, state, space) {
+  const palette = getPaletteHexes(ui);
+  const values = getInputOverrideValues(state, ui, space);
+  const baseRange = state.bounds?.ranges || csRanges[space];
+  const statsByChannel = {};
+  (channelOrder[space] || []).forEach((ch) => {
+    const stats = paletteChannelStats(space, ch, palette, baseRange, values);
+    if (stats) statsByChannel[ch] = stats;
+  });
+  let hueArc = null;
+  const hues = values
+    .map((v) => normalizeWithRange(v, baseRange, space).h)
+    .filter((v) => Number.isFinite(v));
+  if (hues.length) {
+    hueArc = hueArcStats(hues);
+  } else if (Array.isArray(state.bounds?.boundsH)) {
+    const span = (state.bounds.boundsH[1] - state.bounds.boundsH[0] + 1) % 1 || 1;
+    hueArc = { arcSpan: span, center: (state.bounds.boundsH[0] + span / 2) % 1 };
+  }
+  const boundsByChannel = cloneExplicitBounds(state.bounds?.boundsByName) || {};
+  return { space, baseRange, statsByChannel, hueArc, boundsByChannel };
 }
 
 function thirdKeyForMeta(meta) {
@@ -545,11 +611,6 @@ function hueArcStats(values) {
   return { arcSpan, center };
 }
 
-function hueDistance(a, b) {
-  const d = Math.abs(((a - b + 0.5) % 1) - 0.5);
-  return d;
-}
-
 function constraintHit(meta, ui, state, x, y) {
   if (!state.bounds || ui.colorSpace.value !== meta.wheelSpace) return null;
   const bounds = state.bounds.boundsByName || {};
@@ -660,7 +721,8 @@ function barConstraintHit(barObj, ui, state, evt) {
     }
     let closest = null;
     edges.forEach((e) => {
-      const d = Math.abs(t - e.pos);
+      const raw = Math.abs(t - e.pos);
+      const d = Math.min(raw, 1 - raw);
       if (d <= tol && (!closest || d < closest.dist)) {
         closest = { ...e, dist: d, kind: "hue" };
       }
@@ -880,53 +942,26 @@ function customBarConstraintHit(barObj, ui, state, evt) {
   return best;
 }
 
-function updateBarConstraintFromPointer(ui, state, barObj, hit, evt) {
+function updateBarConstraintFromPointer(ui, state, barObj, hit, evt, dragState = null) {
   if (!hit || !barObj?.meta) return;
   const { barSpace, cfg, ranges, hueBarOffsetDeg } = barObj.meta;
   const rect = barObj.bar.getBoundingClientRect();
   const t = clamp01((evt.clientY - rect.top) / rect.height);
-  const palette = getPaletteHexes(ui);
-  const values = getInputOverrideValues(state, ui, barSpace);
-  const baseRange = state.bounds?.ranges || csRanges[barSpace];
+  const baseRange = dragState?.baseRange || state.bounds?.ranges || csRanges[barSpace];
 
   if (cfg.key === "h") {
     const span = cfg.max - cfg.min || 360;
     const hVal = (t * span + cfg.min + hueBarOffsetDeg) % span;
     const hueDenom = Math.max(baseRange.max.h - baseRange.min.h, 1e-6);
-    const hueNorm = clamp01((hVal - baseRange.min.h) / hueDenom);
-    let arcSpan = 1;
-    let center = hueNorm;
-    if (values.length) {
-      const hues = values
-        .map((v) => normalizeWithRange(v, baseRange, barSpace).h)
-        .filter((v) => Number.isFinite(v));
-      if (hues.length) {
-        ({ arcSpan, center } = hueArcStats(hues));
-      }
-    } else if (Array.isArray(state.bounds?.boundsH)) {
-      const spanNorm = (state.bounds.boundsH[1] - state.bounds.boundsH[0] + 1) % 1 || 1;
-      arcSpan = spanNorm;
-      center = (state.bounds.boundsH[0] + spanNorm / 2) % 1;
-    }
-    const delta = hueDistance(hueNorm, center);
-    const desiredSpan = clampRange(2 * delta, 0, 1);
-    const width = arcSpan >= 0.999 ? 1 - desiredSpan : (1 - clampRange(desiredSpan, arcSpan, 1)) / (1 - arcSpan);
-    setWidthForChannel(ui, barSpace, "h", width, true);
+    const hueNorm = wrap01((hVal - baseRange.min.h) / hueDenom);
+    updateExplicitConstraintEdge(ui, state, barSpace, "h", hit.edge, hueNorm, dragState);
     return;
   }
 
-  const stats = paletteChannelStats(barSpace, cfg.key, palette, baseRange, values);
-  if (stats) {
-    const denom = Math.max(baseRange.max[cfg.key] - baseRange.min[cfg.key], 1e-6);
-    const val = cfg.min + t * (cfg.max - cfg.min);
-    const norm = clamp01((val - baseRange.min[cfg.key]) / denom);
-    const target = hit.edge === "min" ? Math.min(norm, stats.min) : Math.max(norm, stats.max);
-    // When palette point is at boundary, keep tight constraint (width=1) rather than jumping to 0
-    const width = hit.edge === "min"
-      ? (stats.min <= 1e-6 ? 1 : clamp01(target / stats.min))
-      : (stats.max >= 1 - 1e-6 ? 1 : clamp01((1 - target) / (1 - stats.max)));
-    setWidthForChannel(ui, barSpace, cfg.key, width, true);
-  }
+  const denom = Math.max(baseRange.max[cfg.key] - baseRange.min[cfg.key], 1e-6);
+  const val = cfg.min + t * (cfg.max - cfg.min);
+  const norm = clamp01((val - baseRange.min[cfg.key]) / denom);
+  updateExplicitConstraintEdge(ui, state, barSpace, cfg.key, hit.edge, norm, dragState);
 }
 
 function updateCustomConstraintEdgeFromPointer(ui, state, plotOrder, meta, hit, x, y, force = false) {
@@ -1076,12 +1111,10 @@ function updateCustomBarConstraintEdgeFromPointer(ui, state, plotOrder, barObj, 
   updateCustomConstraints(state, ui, plotOrder, () => {});
 }
 
-function updateConstraintFromPointer(ui, state, meta, hit, x, y) {
+function updateConstraintFromPointer(ui, state, meta, hit, x, y, dragState = null) {
   if (!hit) return;
   const space = meta.wheelSpace;
-  const palette = getPaletteHexes(ui);
-  const values = getInputOverrideValues(state, ui, space);
-  const baseRange = state.bounds?.ranges || csRanges[space];
+  const baseRange = dragState?.baseRange || state.bounds?.ranges || csRanges[space];
 
   if (hit.kind === "rect") {
     const maxX = Math.max(Math.abs(meta.ranges.min[hit.xKey] || 0), Math.abs(meta.ranges.max[hit.xKey] || 0)) || 1;
@@ -1091,26 +1124,10 @@ function updateConstraintFromPointer(ui, state, meta, hit, x, y) {
     const normX = clamp01((nx - baseRange.min[hit.xKey]) / Math.max(baseRange.max[hit.xKey] - baseRange.min[hit.xKey], 1e-6));
     const normY = clamp01((ny - baseRange.min[hit.yKey]) / Math.max(baseRange.max[hit.yKey] - baseRange.min[hit.yKey], 1e-6));
     if (hit.xEdge) {
-      const stats = paletteChannelStats(space, hit.xKey, palette, baseRange, values);
-      if (stats) {
-        const target = hit.xEdge === "min" ? Math.min(normX, stats.min) : Math.max(normX, stats.max);
-        // When palette point is at boundary, keep tight constraint (width=1) rather than jumping to 0
-        const width = hit.xEdge === "min"
-          ? (stats.min <= 1e-6 ? 1 : clamp01(target / stats.min))
-          : (stats.max >= 1 - 1e-6 ? 1 : clamp01((1 - target) / (1 - stats.max)));
-        setWidthForChannel(ui, space, hit.xKey, width, true);
-      }
+      updateExplicitConstraintEdge(ui, state, space, hit.xKey, hit.xEdge, normX, dragState);
     }
     if (hit.yEdge) {
-      const stats = paletteChannelStats(space, hit.yKey, palette, baseRange, values);
-      if (stats) {
-        const target = hit.yEdge === "min" ? Math.min(normY, stats.min) : Math.max(normY, stats.max);
-        // When palette point is at boundary, keep tight constraint (width=1) rather than jumping to 0
-        const width = hit.yEdge === "min"
-          ? (stats.min <= 1e-6 ? 1 : clamp01(target / stats.min))
-          : (stats.max >= 1 - 1e-6 ? 1 : clamp01((1 - target) / (1 - stats.max)));
-        setWidthForChannel(ui, space, hit.yKey, width, true);
-      }
+      updateExplicitConstraintEdge(ui, state, space, hit.yKey, hit.yEdge, normY, dragState);
     }
     return;
   }
@@ -1128,39 +1145,12 @@ function updateConstraintFromPointer(ui, state, meta, hit, x, y) {
       const maxSC = scKey === "s" ? meta.ranges.max.s : meta.ranges.max.c;
       const scVal = rNorm * Math.max(maxSC, 1e-6);
       const norm = clamp01((scVal - baseRange.min[scKey]) / Math.max(baseRange.max[scKey] - baseRange.min[scKey], 1e-6));
-      const stats = paletteChannelStats(space, scKey, palette, baseRange, values);
-      if (stats) {
-        const target = hit.edge === "min" ? Math.min(norm, stats.min) : Math.max(norm, stats.max);
-        // When palette point is at boundary, keep tight constraint (width=1) rather than jumping to 0
-        const width = hit.edge === "min"
-          ? (stats.min <= 1e-6 ? 1 : clamp01(target / stats.min))
-          : (stats.max >= 1 - 1e-6 ? 1 : clamp01((1 - target) / (1 - stats.max)));
-        setWidthForChannel(ui, space, scKey, width, true);
-      }
+      updateExplicitConstraintEdge(ui, state, space, scKey, hit.edge, norm, dragState);
       return;
     }
 
     if (hit.type === "hue") {
-      const stats = paletteChannelStats(space, "h", palette, baseRange, values);
-      if (!stats) return;
-      let arcSpan = 1;
-      let center = hueNorm;
-      if (values.length) {
-        const hues = values
-          .map((v) => normalizeWithRange(v, baseRange, space).h)
-          .filter((v) => Number.isFinite(v));
-        if (hues.length) {
-          ({ arcSpan, center } = hueArcStats(hues));
-        }
-      } else if (Array.isArray(state.bounds?.boundsH)) {
-        const span = (state.bounds.boundsH[1] - state.bounds.boundsH[0] + 1) % 1 || 1;
-        arcSpan = span;
-        center = (state.bounds.boundsH[0] + span / 2) % 1;
-      }
-      const delta = hueDistance(hueNorm, center);
-      const desiredSpan = clampRange(2 * delta, 0, 1);
-      const width = arcSpan >= 0.999 ? 1 - desiredSpan : (1 - clampRange(desiredSpan, arcSpan, 1)) / (1 - arcSpan);
-      setWidthForChannel(ui, space, "h", width, true);
+      updateExplicitConstraintEdge(ui, state, space, "h", hit.edge, hueNorm, dragState);
     }
   }
 }
@@ -1297,6 +1287,18 @@ function buildCustomConstraintFromBar(barObj, ui, state, t0, t1) {
 export function attachVisualizationInteractions(ui, state, plotOrder) {
   const commitHistory = () => state.history?.record();
   const scheduleHistory = (delay) => state.history?.schedule(delay);
+  const setHoveredTweakInput = (idx) => {
+    const next = Number.isFinite(idx) ? Math.floor(idx) : null;
+    if ((state.hoveredTweakInputIndex ?? null) === next) return;
+    state.hoveredTweakInputIndex = next;
+    const viz = currentVizOpts(ui);
+    plotOrder.forEach((panelType) => drawWheel(panelType, ui, state, {
+      ...viz,
+      vizSpace: ui.colorwheelSpace.value,
+      gamutMode: ui.gamutMode?.value,
+    }));
+    drawStatusMini(state, ui, { ...viz, vizSpace: ui.colorwheelSpace.value, gamutMode: ui.gamutMode?.value });
+  };
   const drag = {
     active: false,
     mode: null,
@@ -1309,6 +1311,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     moved: false,
     constraint: null,
     edge: null,
+    constraintDragState: null,
     raf: null,
     suppressClick: false,
   };
@@ -1322,6 +1325,11 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
         else state.keepInputOverride = true;
         syncRawInputField(ui, state);
       }
+      if (Array.isArray(state.tweakInputIndices)) {
+        state.tweakInputIndices = state.tweakInputIndices
+          .filter((tweakIdx) => tweakIdx !== idx)
+          .map((tweakIdx) => tweakIdx > idx ? tweakIdx - 1 : tweakIdx);
+      }
       removePaletteIndex(ui, state, idx);
     },
     onDeleteOutput: (idx) => {
@@ -1333,7 +1341,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     const meta = refs.wheelMeta;
     if (!meta) return;
     if (drag.mode === "constraint") {
-      updateConstraintFromPointer(ui, state, meta, drag.constraint, x, y);
+      updateConstraintFromPointer(ui, state, meta, drag.constraint, x, y, drag.constraintDragState);
       return;
     }
     if (drag.mode === "custom-constraint") {
@@ -1369,9 +1377,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
   const onPointerDown = (evt, refs) => {
     const meta = refs.wheelMeta;
     if (!meta) return;
-    const rect = refs.canvas.getBoundingClientRect();
-    const x = evt.clientX - rect.left;
-    const y = evt.clientY - rect.top;
+    const { x, y } = canvasPointFromEvent(refs.canvas, evt);
     drag.suppressClick = false;
     drag.active = true;
     drag.startX = x;
@@ -1386,6 +1392,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
       if (hitConstraint) {
         drag.mode = "constraint";
         drag.constraint = hitConstraint;
+        drag.constraintDragState = buildConstraintDragState(ui, state, meta.wheelSpace);
         drag.role = null;
         drag.index = null;
         if (hitConstraint.kind === "polar") {
@@ -1466,9 +1473,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
   const onPointerMove = (evt, refs) => {
     const meta = refs.wheelMeta;
     if (!meta) return;
-    const rect = refs.canvas.getBoundingClientRect();
-    const x = evt.clientX - rect.left;
-    const y = evt.clientY - rect.top;
+    const { x, y } = canvasPointFromEvent(refs.canvas, evt);
 
     if (drag.active && drag.refs === refs) {
       const dx = Math.abs(x - drag.startX);
@@ -1509,6 +1514,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     if (!isCustom) {
       const hitConstraint = constraintHit(meta, ui, state, x, y);
       if (hitConstraint) {
+        setHoveredTweakInput(null);
         if (hitConstraint.kind === "polar") {
           const baseAngle = Math.atan2(y - meta.cy, x - meta.cx);
           const angle = hitConstraint.type === "hue" ? baseAngle + Math.PI / 2 : baseAngle;
@@ -1533,6 +1539,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     if (isCustom) {
       const hitEdge = customConstraintEdgeHit(meta, ui, state, x, y);
       if (hitEdge) {
+        setHoveredTweakInput(null);
         const cursor =
           hitEdge.kind === "rect" && hitEdge.xEdge && hitEdge.yEdge
             ? ((hitEdge.xEdge === "min" && hitEdge.yEdge === "max") ||
@@ -1548,6 +1555,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
       }
       const hitCustom = hitConstraintPoint(refs, x, y);
       if (hitCustom) {
+        setHoveredTweakInput(null);
         refs.canvas.style.cursor = "grab";
         return;
       }
@@ -1555,6 +1563,12 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
 
     const hitInput = hitPoint(refs, x, y, "input");
     const hitOutput = hitPoint(refs, x, y, "output");
+    const hoverTweak = hitInput?.tweaked
+      ? hitInput.index
+      : hitOutput?.kind === "tweak" && Number.isFinite(hitOutput.sourceInputIndex)
+        ? hitOutput.sourceInputIndex
+        : null;
+    setHoveredTweakInput(hoverTweak);
     if (hitInput || hitOutput) {
       refs.canvas.style.cursor = "grab";
       return;
@@ -1568,9 +1582,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     drag.active = false;
     refs.canvas.releasePointerCapture?.(evt.pointerId);
 
-    const rect = refs.canvas.getBoundingClientRect();
-    const x = evt.clientX - rect.left;
-    const y = evt.clientY - rect.top;
+    const { x, y } = canvasPointFromEvent(refs.canvas, evt);
 
     if (drag.mode === "color") {
       if (!drag.moved) {
@@ -1610,6 +1622,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
       }
       drag.mode = null;
       drag.constraint = null;
+      drag.constraintDragState = null;
       drag.role = null;
       drag.index = null;
       refs.canvas.style.cursor = "crosshair";
@@ -1767,9 +1780,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
   const onWheel = (evt, refs) => {
     const meta = refs.wheelMeta;
     if (!meta) return;
-    const rect = refs.canvas.getBoundingClientRect();
-    const x = evt.clientX - rect.left;
-    const y = evt.clientY - rect.top;
+    const { x, y } = canvasPointFromEvent(refs.canvas, evt);
     const hitInput = hitPoint(refs, x, y, "input");
     const hitOutput = hitPoint(refs, x, y, "output");
     const hit = hitInput || hitOutput;
@@ -1955,12 +1966,12 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
         drag.refs = refs;
         drag.barObj = barObj;
         drag.constraint = hitConstraint;
+        drag.constraintDragState = buildConstraintDragState(ui, state, barObj.meta.barSpace);
         drag.suppressClick = false;
         drag.startX = evt.clientX;
         drag.startY = evt.clientY;
         barObj.bar.setPointerCapture?.(evt.pointerId);
         barObj.bar.style.cursor = "ns-resize";
-        updateBarConstraintFromPointer(ui, state, barObj, hitConstraint, evt);
         evt.preventDefault();
         return;
       }
@@ -2047,7 +2058,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
       const dx = Math.abs(evt.clientX - drag.startX);
       const dy = Math.abs(evt.clientY - drag.startY);
       if (dx + dy > 2) drag.moved = true;
-      updateBarConstraintFromPointer(ui, state, barObj, drag.constraint, evt);
+      updateBarConstraintFromPointer(ui, state, barObj, drag.constraint, evt, drag.constraintDragState);
       evt.preventDefault();
       return;
     }
@@ -2169,6 +2180,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     drag.index = null;
     drag.role = null;
     drag.constraint = null;
+    drag.constraintDragState = null;
     barObj.bar.releasePointerCapture?.(evt.pointerId);
     barObj.bar.style.cursor = "crosshair";
     if (drag.moved) {
@@ -2188,6 +2200,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
     refs.canvas.addEventListener("pointermove", (evt) => onPointerMove(evt, refs));
     refs.canvas.addEventListener("pointerup", (evt) => onPointerUp(evt, refs));
     refs.canvas.addEventListener("pointerleave", (evt) => {
+      setHoveredTweakInput(null);
       if (!drag.active) refs.canvas.style.cursor = "crosshair";
     });
     refs.canvas.addEventListener("wheel", (evt) => onWheel(evt, refs), { passive: false });

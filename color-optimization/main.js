@@ -1,5 +1,6 @@
 import { defaultPalette, plotOrder } from "./config.js";
 import { channelOrder, convertColorValues, decodeColor } from "./core/colorSpaces.js";
+import { cloneExplicitBounds } from "./core/constraintBounds.js";
 import { contrastColor, deltaE2000 } from "./core/metrics.js";
 import { discriminabilityLabel, metricJnd } from "./core/resolvability.js";
 import { defaultPForMean } from "./core/means.js";
@@ -12,6 +13,7 @@ import { createInitialState } from "./ui/state.js";
 import { showError, setStatus, setStatusState } from "./ui/status.js";
 import { drawStatusGraph, drawStatusMini } from "./ui/statusGraph.js";
 import { createPanels, refreshSwatches, updateChannelHeadings } from "./ui/panels.js";
+import { drawWheel } from "./ui/wheel.js";
 import { attachVisualizationInteractions } from "./ui/interactions.js";
 import {
   attachImageInput,
@@ -60,6 +62,34 @@ const LIGHTNESS_WIDTH_DEFAULTS = {
   jzazbz: 0.71,
 };
 const DISC_STATES = ["none", "deutan", "protan", "tritan"];
+const DEFAULT_TWEAK_CONSTRAINT_WIDTH = 0.85;
+let optimizationRunToken = 0;
+let optimizationCancelRef = null;
+
+function setRunButtonState(mode = "idle") {
+  if (!ui?.runBtn) return;
+  const running = mode === "running" || mode === "stopping";
+  ui.runBtn.disabled = mode === "stopping";
+  ui.runBtn.textContent = mode === "running" ? "STOP" : mode === "stopping" ? "STOPPING…" : "RUN";
+  ui.runBtn.classList.toggle("stop", running);
+}
+
+function requestStopOptimization() {
+  if (!state.running || !optimizationCancelRef) return;
+  optimizationCancelRef.cancelled = true;
+  setRunButtonState("stopping");
+  const pct = Math.round(((state.bestScores?.length || 0) / Math.max(1, state.lastRuns || 1)) * 100);
+  setStatus("stopping after current optimizer checkpoint…", pct, ui, state);
+}
+
+function cancelCurrentOptimization() {
+  optimizationRunToken += 1;
+  if (optimizationCancelRef) optimizationCancelRef.cancelled = true;
+  optimizationCancelRef = null;
+  state.running = false;
+  setRunButtonState("idle");
+  updateUndoRedoButtons();
+}
 
 function currentVizOpts() {
   return {
@@ -68,6 +98,17 @@ function currentVizOpts() {
     gamutMode: ui?.gamutMode?.value || "auto",
     cvdModel: ui?.cvdModel?.value || "legacy",
   };
+}
+
+function redrawMainColorWheels() {
+  if (!ui) return;
+  const vizOpts = currentVizOpts();
+  const vizSpace = ui.colorwheelSpace?.value || ui.colorSpace?.value;
+  plotOrder.forEach((type) => drawWheel(type, ui, state, {
+    ...vizOpts,
+    vizSpace,
+    gamutMode: ui.gamutMode?.value,
+  }));
 }
 
 function captureHistorySnapshot() {
@@ -117,6 +158,7 @@ function captureHistorySnapshot() {
       newColors: state.newColors ? [...state.newColors] : [],
       rawNewColors: state.rawNewColors ? state.rawNewColors.map((v) => ({ ...v })) : [],
       newRawSpace: state.newRawSpace ?? null,
+      optimizedColorRoles: Array.isArray(state.optimizedColorRoles) ? state.optimizedColorRoles.map((r) => ({ ...r })) : [],
       rawInputOverride: state.rawInputOverride
         ? { space: state.rawInputOverride.space, values: state.rawInputOverride.values.map((v) => ({ ...v })) }
         : null,
@@ -130,17 +172,26 @@ function captureHistorySnapshot() {
           widths: cloneCustomWidths(state.customConstraints.widths),
         }
         : null,
+      sliderConstraintBounds: state.sliderConstraintBounds
+        ? {
+          space: state.sliderConstraintBounds.space,
+          bounds: cloneExplicitBounds(state.sliderConstraintBounds.bounds),
+        }
+        : null,
       perInputConstraints: state.perInputConstraints
         ? {
           enabled: Boolean(state.perInputConstraints.enabled),
+          autoEnabledForTweaks: Boolean(state.perInputConstraints.autoEnabledForTweaks),
           sync: { ...state.perInputConstraints.sync },
           widths: {
             h: Array.isArray(state.perInputConstraints.widths?.h) ? [...state.perInputConstraints.widths.h] : [],
             sc: Array.isArray(state.perInputConstraints.widths?.sc) ? [...state.perInputConstraints.widths.sc] : [],
             l: Array.isArray(state.perInputConstraints.widths?.l) ? [...state.perInputConstraints.widths.l] : [],
           },
+          modes: Array.isArray(state.perInputConstraints.modes) ? [...state.perInputConstraints.modes] : [],
         }
         : null,
+      tweakInputIndices: Array.isArray(state.tweakInputIndices) ? [...state.tweakInputIndices] : [],
       imageInput: cloneImageInputForHistory(state.imageInput),
     },
   };
@@ -195,6 +246,9 @@ function applyHistorySnapshot(snapshot) {
   state.newColors = snapState.newColors ? [...snapState.newColors] : [];
   state.rawNewColors = snapState.rawNewColors ? snapState.rawNewColors.map((v) => ({ ...v })) : [];
   state.newRawSpace = snapState.newRawSpace ?? null;
+  state.optimizedColorRoles = Array.isArray(snapState.optimizedColorRoles)
+    ? snapState.optimizedColorRoles.map((r) => ({ ...r }))
+    : [];
   state.rawInputOverride = snapState.rawInputOverride
     ? { space: snapState.rawInputOverride.space, values: snapState.rawInputOverride.values.map((v) => ({ ...v })) }
     : null;
@@ -207,21 +261,36 @@ function applyHistorySnapshot(snapshot) {
       widths: cloneCustomWidths(snapState.customConstraints.widths),
     }
     : null;
+  state.sliderConstraintBounds = snapState.sliderConstraintBounds
+    ? {
+      space: snapState.sliderConstraintBounds.space,
+      bounds: cloneExplicitBounds(snapState.sliderConstraintBounds.bounds),
+    }
+    : null;
+  state.preserveSliderConstraintBoundsOnce = false;
   state.perInputConstraints = snapState.perInputConstraints
     ? {
       enabled: Boolean(snapState.perInputConstraints.enabled),
+      autoEnabledForTweaks: Boolean(snapState.perInputConstraints.autoEnabledForTweaks),
       sync: { ...snapState.perInputConstraints.sync },
       widths: {
         h: Array.isArray(snapState.perInputConstraints.widths?.h) ? [...snapState.perInputConstraints.widths.h] : [],
         sc: Array.isArray(snapState.perInputConstraints.widths?.sc) ? [...snapState.perInputConstraints.widths.sc] : [],
         l: Array.isArray(snapState.perInputConstraints.widths?.l) ? [...snapState.perInputConstraints.widths.l] : [],
       },
+      modes: Array.isArray(snapState.perInputConstraints.modes) ? [...snapState.perInputConstraints.modes] : [],
     }
     : {
       enabled: false,
+      autoEnabledForTweaks: false,
       sync: { h: false, sc: false, l: false },
       widths: { h: [], sc: [], l: [] },
+      modes: [],
     };
+  state.tweakInputIndices = Array.isArray(snapState.tweakInputIndices)
+    ? snapState.tweakInputIndices.map((idx) => Math.floor(idx)).filter((idx) => idx >= 0)
+    : [];
+  state.hoveredTweakInputIndex = null;
   restoreImageInputFromHistory(state, snapState.imageInput);
 
   if (ui.rawInputValues) {
@@ -236,6 +305,8 @@ function applyHistorySnapshot(snapshot) {
   updateWidthLabels();
   syncCustomConstraintsToSpace(ui.colorSpace.value);
   ensurePerInputConstraintState();
+  pruneTweakInputIndices();
+  enforcePerInputViewSync();
   updateConstraintTopologyUI();
   updateWidthChips();
   updateMeanControls(false);
@@ -286,6 +357,7 @@ function refreshAfterImageInput(statusText = "Image colors updated") {
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   ensurePerInputConstraintState();
   renderPerInputConstraintUI();
+  updateAestheticModeAvailability();
   togglePlaceholder();
   updatePaletteHighlight();
   drawStatusMini(state, ui, currentVizOpts());
@@ -363,6 +435,10 @@ document.addEventListener("DOMContentLoaded", () => {
   state.history = history;
   attachEventListeners();
   attachVisualizationInteractions(ui, state, plotOrder);
+  state.deleteCallbacks = {
+    ...(state.deleteCallbacks || {}),
+    onToggleTweak: (idx) => toggleInputTweak(idx),
+  };
   attachImageInput(ui, state, {
     onCommit: refreshAfterImageInput,
     recordHistory: () => history?.record(),
@@ -437,12 +513,19 @@ function setDefaultValues() {
   state.keepInputOverride = false;
   state.customConstraints = null;
   state.customConstraintSelection = null;
+  state.sliderConstraintBounds = null;
+  state.preserveSliderConstraintBoundsOnce = false;
   state.imageInput = null;
   state.perInputConstraints = {
     enabled: false,
+    autoEnabledForTweaks: false,
     sync: { h: false, sc: false, l: false },
     widths: { h: [], sc: [], l: [] },
+    modes: [],
   };
+  state.tweakInputIndices = [];
+  state.hoveredTweakInputIndex = null;
+  state.optimizedColorRoles = [];
   state.rawSpace = ui.colorSpace.value;
   state.newRawSpace = ui.colorSpace.value;
   setResults([], ui, state.currentColors);
@@ -506,6 +589,24 @@ function channelSlotsForSpace(space) {
   return { first, scChannel, third };
 }
 
+function channelForConstraintSlot(space, slot) {
+  const { first, scChannel, third } = channelSlotsForSpace(space);
+  if (slot === "h") return first;
+  if (slot === "sc") return scChannel;
+  if (slot === "l") return third;
+  return null;
+}
+
+function clearSliderConstraintBound(slot) {
+  if (!state.sliderConstraintBounds || state.sliderConstraintBounds.space !== ui.colorSpace.value) return;
+  const ch = channelForConstraintSlot(ui.colorSpace.value, slot);
+  if (!ch || !state.sliderConstraintBounds.bounds) return;
+  delete state.sliderConstraintBounds.bounds[ch];
+  if (!Object.keys(state.sliderConstraintBounds.bounds).length) {
+    state.sliderConstraintBounds = null;
+  }
+}
+
 function lightnessChannelForSpace(space) {
   const channels = channelOrder[space] || [];
   if (channels.includes("jz")) return "jz";
@@ -521,6 +622,42 @@ function defaultWidthForChannel(space, ch) {
   return ch && ch === lightnessChannelForSpace(space)
     ? defaultLightnessWidthForSpace(space)
     : 0;
+}
+
+function hasAestheticCenterSupport(space) {
+  const channels = channelOrder[space] || [];
+  if (channels.includes("h")) return true;
+  return space === "lab" || space === "oklab" || space === "luv" || space === "jzazbz";
+}
+
+function currentConstraintCenterCount(space) {
+  if (state.rawInputOverride?.space === space && Array.isArray(state.rawInputOverride.values)) {
+    return state.rawInputOverride.values.length;
+  }
+  return parsePalette(ui.paletteInput?.value || "").length;
+}
+
+function aestheticModeDisabledReason() {
+  const topology = ui.constraintTopology?.value || "contiguous";
+  if (topology === "custom") return "Use Contiguous or Discontiguous topology to apply aesthetic centers.";
+  const space = ui.colorSpace?.value || "oklab";
+  if (!hasAestheticCenterSupport(space)) return "Choose a hue or opponent-axis optimization colorspace to apply aesthetic centers.";
+  if (!currentConstraintCenterCount(space)) return "Add input colors to apply aesthetic centers.";
+  return "";
+}
+
+function updateAestheticModeAvailability() {
+  if (!ui?.aestheticMode) return;
+  const reason = aestheticModeDisabledReason();
+  const disabled = Boolean(reason);
+  const wrap = ui.aestheticMode.closest(".aesthetic-mode-wrap") || ui.aestheticMode.parentElement;
+  ui.aestheticMode.disabled = disabled;
+  ui.aestheticMode.setAttribute("aria-disabled", disabled ? "true" : "false");
+  ui.aestheticMode.title = reason;
+  if (!wrap) return;
+  wrap.classList.toggle("is-disabled", disabled);
+  wrap.dataset.disabledMessage = reason;
+  wrap.title = reason;
 }
 
 function constraintConfigForSpace(space) {
@@ -571,11 +708,12 @@ function perInputDefaults() {
 
 function ensurePerInputConstraintState() {
   if (!state.perInputConstraints) {
-    state.perInputConstraints = { enabled: false, sync: { h: false, sc: false, l: false }, widths: { h: [], sc: [], l: [] } };
+    state.perInputConstraints = { enabled: false, autoEnabledForTweaks: false, sync: { h: false, sc: false, l: false }, widths: { h: [], sc: [], l: [] }, modes: [] };
   }
   const per = state.perInputConstraints;
   per.sync = { h: false, sc: false, l: false };
   if (!per.widths) per.widths = { h: [], sc: [], l: [] };
+  if (!Array.isArray(per.modes)) per.modes = [];
   const count = parsePalette(ui.paletteInput.value).length;
   const defaults = perInputDefaults();
   ["h", "sc", "l"].forEach((slot) => {
@@ -586,6 +724,99 @@ function ensurePerInputConstraintState() {
     });
     per.widths[slot] = next;
   });
+  per.modes = Array.from({ length: count }, (_, i) => per.modes[i] === "soft" ? "soft" : "hard");
+}
+
+function perInputConstraintsActive() {
+  return Boolean(state.perInputConstraints?.enabled) && (ui.constraintTopology?.value || "contiguous") === "discontiguous";
+}
+
+function enforcePerInputViewSync() {
+  if (!ui || !perInputConstraintsActive()) return false;
+  let changed = false;
+  if (ui.syncSpaces && !ui.syncSpaces.checked) {
+    ui.syncSpaces.checked = true;
+    changed = true;
+  }
+  if (ui.colorwheelSpace && ui.colorSpace && ui.colorwheelSpace.value !== ui.colorSpace.value) {
+    ui.colorwheelSpace.value = ui.colorSpace.value;
+    updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
+    changed = true;
+  }
+  return changed;
+}
+
+function pruneTweakInputIndices() {
+  const count = parsePalette(ui?.paletteInput?.value || "").length;
+  const seen = new Set();
+  state.tweakInputIndices = (Array.isArray(state.tweakInputIndices) ? state.tweakInputIndices : [])
+    .map((idx) => Math.floor(idx))
+    .filter((idx) => {
+      if (idx < 0 || idx >= count || seen.has(idx)) return false;
+      seen.add(idx);
+      return true;
+    });
+  if (!Number.isFinite(state.hoveredTweakInputIndex) || state.hoveredTweakInputIndex < 0 || state.hoveredTweakInputIndex >= count) {
+    state.hoveredTweakInputIndex = null;
+  }
+}
+
+function isInputTweaked(idx) {
+  return Array.isArray(state.tweakInputIndices) && state.tweakInputIndices.includes(idx);
+}
+
+function initializeTweakedInputConstraintWidths(idx) {
+  ensurePerInputConstraintState();
+  const defaults = perInputDefaults();
+  ["h", "sc", "l"].forEach((slot) => {
+    if (!state.perInputConstraints.widths[slot]) state.perInputConstraints.widths[slot] = [];
+    const current = state.perInputConstraints.widths[slot][idx];
+    const untouched = !Number.isFinite(current) || Math.abs(current - defaults[slot]) < 1e-6;
+    if (untouched) state.perInputConstraints.widths[slot][idx] = DEFAULT_TWEAK_CONSTRAINT_WIDTH;
+  });
+  state.perInputConstraints.modes[idx] = "soft";
+}
+
+function toggleInputTweak(idx) {
+  pruneTweakInputIndices();
+  const next = new Set(state.tweakInputIndices || []);
+  if (next.has(idx)) {
+    next.delete(idx);
+    removeTweakOutputsForInput(idx);
+  } else {
+    next.add(idx);
+    initializeTweakedInputConstraintWidths(idx);
+  }
+  state.tweakInputIndices = [...next].sort((a, b) => a - b);
+  state.hoveredTweakInputIndex = null;
+  if (state.tweakInputIndices.length && !state.perInputConstraints?.enabled) {
+    ensurePerInputConstraintState();
+    state.perInputConstraints.enabled = true;
+    state.perInputConstraints.autoEnabledForTweaks = true;
+    if (ui.constraintTopology?.value !== "discontiguous") ui.constraintTopology.value = "discontiguous";
+  }
+  if (!state.tweakInputIndices.length && state.perInputConstraints?.autoEnabledForTweaks) {
+    state.perInputConstraints.enabled = false;
+    state.perInputConstraints.autoEnabledForTweaks = false;
+  }
+  enforcePerInputViewSync();
+  updateConstraintTopologyUI();
+  updateBoundsAndRefresh();
+  drawStatusMini(state, ui, currentVizOpts());
+  history?.record();
+}
+
+function removeTweakOutputsForInput(inputIndex) {
+  if (!Array.isArray(state.optimizedColorRoles) || !state.optimizedColorRoles.length) return;
+  const keep = state.optimizedColorRoles.map((role, idx) => ({ role, idx }))
+    .filter(({ role }) => !(role?.kind === "tweak" && role.inputIndex === inputIndex));
+  if (keep.length === state.optimizedColorRoles.length) return;
+  state.optimizedColorRoles = keep.map(({ role }) => ({ ...role }));
+  state.newColors = keep.map(({ idx }) => state.newColors?.[idx]).filter(Boolean);
+  state.rawNewColors = keep.map(({ idx }) => state.rawNewColors?.[idx]).filter(Boolean);
+  state.rawBestColors = state.rawNewColors.map((row) => ({ ...row }));
+  state.bestColors = [...state.newColors];
+  setResults(state.newColors, ui, state.currentColors || []);
 }
 
 function renderPerInputConstraintUI() {
@@ -625,11 +856,17 @@ function renderPerInputConstraintUI() {
   const colorHead = document.createElement("span");
   colorHead.textContent = "Color";
   header.appendChild(colorHead);
+  const modeHead = document.createElement("span");
+  modeHead.textContent = "Mode";
+  header.appendChild(modeHead);
   ["h", "sc", "l"].forEach((slot) => {
     const label = document.createElement("span");
     label.textContent = labels[slot];
     header.appendChild(label);
   });
+  const tweakHead = document.createElement("span");
+  tweakHead.textContent = "Tweak";
+  header.appendChild(tweakHead);
   ui.constraintIndividualList.appendChild(header);
 
   palette.forEach((hex, idx) => {
@@ -644,6 +881,28 @@ function renderPerInputConstraintUI() {
     pill.textContent = hex;
     id.appendChild(pill);
     row.appendChild(id);
+
+    const modeWrap = document.createElement("div");
+    modeWrap.className = "constraint-mode-cell";
+    const modeBtn = document.createElement("button");
+    modeBtn.type = "button";
+    modeBtn.className = "constraint-mode-btn";
+    const currentMode = state.perInputConstraints.modes?.[idx] === "soft" ? "soft" : "hard";
+    modeBtn.textContent = currentMode === "soft" ? "Soft" : "Hard";
+    modeBtn.setAttribute("aria-pressed", String(currentMode === "soft"));
+    modeBtn.title = "Toggle this input color's individuated constraint mode.";
+    modeBtn.addEventListener("click", () => {
+      ensurePerInputConstraintState();
+      const nextMode = state.perInputConstraints.modes[idx] === "soft" ? "hard" : "soft";
+      state.perInputConstraints.modes[idx] = nextMode;
+      renderPerInputConstraintUI();
+      updateClipWarning();
+      updateBoundsAndRefresh();
+      drawStatusMini(state, ui, currentVizOpts());
+      history?.record();
+    });
+    modeWrap.appendChild(modeBtn);
+    row.appendChild(modeWrap);
 
     ["h", "sc", "l"].forEach((slot) => {
       const wrap = document.createElement("div");
@@ -663,31 +922,133 @@ function renderPerInputConstraintUI() {
         tooltip.textContent = `${(v * 100).toFixed(1)}%`;
         tooltip.style.left = `${v * 100}%`;
       };
-      let hideTimer = null;
       const showTip = () => {
         updateTooltip();
         wrap.classList.add("show-tooltip");
-        if (hideTimer) clearTimeout(hideTimer);
-        hideTimer = setTimeout(() => wrap.classList.remove("show-tooltip"), 900);
       };
-      input.addEventListener("input", () => {
-        const v = clampNum(parseFloat(input.value) || 0, 0, 1);
+      const hideTip = () => wrap.classList.remove("show-tooltip");
+      let sliderHover = false;
+      let sliderFocus = false;
+      let sliderPointer = false;
+      const updateTweakConstraintPreview = () => {
+        const active = isInputTweaked(idx) && (sliderHover || sliderFocus || sliderPointer);
+        const next = active ? idx : null;
+        const current = state.hoveredTweakInputIndex ?? null;
+        if (next == null && current !== idx) return;
+        if (current === next) return;
+        state.hoveredTweakInputIndex = next;
+        redrawMainColorWheels();
+      };
+      const commitValue = (v, record = false) => {
+        const next = clampNum(v, 0, 1);
+        input.value = String(next);
         if (!state.perInputConstraints.widths[slot]) state.perInputConstraints.widths[slot] = [];
-        state.perInputConstraints.widths[slot][idx] = v;
+        state.perInputConstraints.widths[slot][idx] = next;
         showTip();
         updateClipWarning();
         updateBoundsAndRefresh();
         drawStatusMini(state, ui, currentVizOpts());
+        if (record) history?.record();
+      };
+      let pointerStart = null;
+      const capturePointer = (pointerId) => {
+        try {
+          input.setPointerCapture?.(pointerId);
+        } catch (_) {
+          // Range inputs still work without pointer capture.
+        }
+      };
+      const releasePointer = (pointerId) => {
+        try {
+          input.releasePointerCapture?.(pointerId);
+        } catch (_) {
+          // Some browsers auto-release range input pointer capture.
+        }
+      };
+      input.addEventListener("input", () => {
+        const v = clampNum(parseFloat(input.value) || 0, 0, 1);
+        commitValue(v);
       });
-      input.addEventListener("pointerdown", () => showTip());
-      input.addEventListener("pointerup", () => wrap.classList.remove("show-tooltip"));
-      input.addEventListener("blur", () => wrap.classList.remove("show-tooltip"));
+      input.addEventListener("mouseenter", () => {
+        sliderHover = true;
+        showTip();
+        updateTweakConstraintPreview();
+      });
+      input.addEventListener("focus", () => {
+        sliderFocus = true;
+        showTip();
+        updateTweakConstraintPreview();
+      });
+      input.addEventListener("mouseleave", () => {
+        sliderHover = false;
+        hideTip();
+        updateTweakConstraintPreview();
+      });
+      input.addEventListener("pointerdown", (e) => {
+        sliderPointer = true;
+        capturePointer(e.pointerId);
+        pointerStart = true;
+        showTip();
+        updateTweakConstraintPreview();
+      });
+      input.addEventListener("pointerup", (e) => {
+        showTip();
+        sliderPointer = false;
+        releasePointer(e.pointerId);
+        if (!pointerStart) {
+          updateTweakConstraintPreview();
+          return;
+        }
+        pointerStart = null;
+        updateTweakConstraintPreview();
+      });
+      input.addEventListener("dblclick", (e) => {
+        e.preventDefault();
+        showTip();
+        updateTweakConstraintPreview();
+        const currentPct = ((clampNum(parseFloat(input.value) || 0, 0, 1)) * 100).toFixed(1);
+        const raw = window.prompt(`Set ${labels[slot]} constraint width (%)`, currentPct);
+        if (raw == null) {
+          updateTweakConstraintPreview();
+          return;
+        }
+        const parsed = parseFloat(String(raw).replace("%", ""));
+        if (!Number.isFinite(parsed)) {
+          updateTweakConstraintPreview();
+          return;
+        }
+        commitValue(parsed / 100, true);
+        updateTweakConstraintPreview();
+      });
+      input.addEventListener("pointercancel", (e) => {
+        sliderPointer = false;
+        releasePointer(e.pointerId);
+        updateTweakConstraintPreview();
+      });
+      input.addEventListener("blur", () => {
+        sliderFocus = false;
+        hideTip();
+        updateTweakConstraintPreview();
+      });
       input.addEventListener("change", () => history?.record());
       updateTooltip();
       wrap.appendChild(input);
       wrap.appendChild(tooltip);
       row.appendChild(wrap);
     });
+    const tweakWrap = document.createElement("div");
+    tweakWrap.className = "constraint-tweak-cell";
+    const tweakBtn = document.createElement("button");
+    tweakBtn.type = "button";
+    tweakBtn.className = "constraint-tweak-btn";
+    tweakBtn.textContent = isInputTweaked(idx) ? "On" : "Off";
+    tweakBtn.setAttribute("aria-pressed", String(isInputTweaked(idx)));
+    tweakBtn.title = isInputTweaked(idx)
+      ? "This input color will be optimized inside its individuated constraint window."
+      : "Optimize this input color inside its individuated constraint window.";
+    tweakBtn.addEventListener("click", () => toggleInputTweak(idx));
+    tweakWrap.appendChild(tweakBtn);
+    row.appendChild(tweakWrap);
     ui.constraintIndividualList.appendChild(row);
   });
 }
@@ -702,6 +1063,7 @@ function applyMainWidthToPerInputs(slot) {
 
 function updateConstraintTopologyUI() {
   const topology = ui.constraintTopology?.value || "contiguous";
+  updateAestheticModeAvailability();
   syncCustomConstraintsToSpace(ui.colorSpace.value);
   if (topology === "custom") {
     ensureCustomConstraintsInitialized();
@@ -859,10 +1221,12 @@ function attachEventListeners() {
       if (ui.rawInputValues) ui.rawInputValues.value = "";
     }
     reconcileImageInputFromPalette(ui, state);
+    pruneTweakInputIndices();
     state.bounds = computeInputBounds(ui.colorSpace.value);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     ensurePerInputConstraintState();
     renderPerInputConstraintUI();
+    updateAestheticModeAvailability();
     togglePlaceholder();
     updatePaletteHighlight();
     drawStatusMini(state, ui, currentVizOpts());
@@ -874,12 +1238,15 @@ function attachEventListeners() {
     ui.paletteInput.value = "";
     state.rawInputOverride = null;
     state.imageInput = null;
+    state.tweakInputIndices = [];
+    state.optimizedColorRoles = [];
     refreshImageInputControls(ui, state);
     if (ui.rawInputValues) ui.rawInputValues.value = "";
     state.bounds = computeInputBounds(ui.colorSpace.value);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     ensurePerInputConstraintState();
     renderPerInputConstraintUI();
+    updateAestheticModeAvailability();
     togglePlaceholder();
     ui.paletteInput.focus();
     drawStatusMini(state, ui, currentVizOpts());
@@ -912,11 +1279,12 @@ function attachEventListeners() {
     lastOptSpace = nextSpace;
     updateWidthLabels();
     syncCustomConstraintsToSpace(nextSpace);
-    if (ui.syncSpaces?.checked) {
+    if (ui.syncSpaces?.checked || perInputConstraintsActive()) {
       ui.colorwheelSpace.value = ui.colorSpace.value;
       updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
     }
     updateClipWarning();
+    updateAestheticModeAvailability();
     updateBoundsAndRefresh();
     drawStatusMini(state, ui, currentVizOpts());
     renderPerInputConstraintUI();
@@ -924,7 +1292,9 @@ function attachEventListeners() {
   });
 
   ui.colorwheelSpace.addEventListener("change", () => {
-    if (ui.syncSpaces?.checked && ui.colorwheelSpace.value !== ui.colorSpace.value) {
+    if (perInputConstraintsActive() && ui.colorwheelSpace.value !== ui.colorSpace.value) {
+      enforcePerInputViewSync();
+    } else if (ui.syncSpaces?.checked && ui.colorwheelSpace.value !== ui.colorSpace.value) {
       ui.syncSpaces.checked = false;
     }
     updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
@@ -1001,8 +1371,12 @@ function attachEventListeners() {
     recordHistory();
   });
 
-  ui.runBtn.addEventListener("click", () => runOptimization());
+  ui.runBtn.addEventListener("click", () => {
+    if (state.running) requestStopOptimization();
+    else runOptimization();
+  });
   ui.resetBtn.addEventListener("click", () => {
+    cancelCurrentOptimization();
     setDefaultValues();
     refreshImageInputControls(ui, state);
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
@@ -1051,6 +1425,9 @@ function attachEventListeners() {
   widthInputs.forEach(({ el, slot }) => {
     if (!el) return;
     el.addEventListener("input", () => {
+      const preserveExplicit = Boolean(state.preserveSliderConstraintBoundsOnce);
+      state.preserveSliderConstraintBoundsOnce = false;
+      if (!preserveExplicit) clearSliderConstraintBound(slot);
       updateWidthChips();
       applyMainWidthToPerInputs(slot);
       updateClipWarning();
@@ -1068,8 +1445,12 @@ function attachEventListeners() {
       const skipHistory = el === ui.constraintTopology && state.suppressConstraintTopologyHistory;
       if (skipHistory) state.suppressConstraintTopologyHistory = false;
       if (el === ui.constraintTopology) {
+        if (state.tweakInputIndices?.length && ui.constraintTopology.value !== "discontiguous") {
+          state.tweakInputIndices = [];
+        }
         updateConstraintTopologyUI();
       }
+      enforcePerInputViewSync();
       updateClipWarning();
       updateBoundsAndRefresh();
       drawStatusMini(state, ui, currentVizOpts());
@@ -1084,6 +1465,8 @@ function attachEventListeners() {
       ui.constraintTopology.value = "discontiguous";
     }
     state.perInputConstraints.enabled = wantsEnabled;
+    state.perInputConstraints.autoEnabledForTweaks = false;
+    enforcePerInputViewSync();
     // Toggle accordion expanded class
     const accordionSection = ui.constraintIndividualRow;
     if (accordionSection) {
@@ -1177,6 +1560,7 @@ function updateWidthLabels() {
   ui.wSCLabel.textContent = scChannel.toUpperCase();
   ui.wLLabel.textContent = (channels[2] || "l").toUpperCase();
   renderPerInputConstraintUI();
+  updateAestheticModeAvailability();
 }
 
 function updateWidthChips() {
@@ -1327,6 +1711,7 @@ function applyUniquenessFilter() {
 }
 
 function updateBoundsAndRefresh() {
+  enforcePerInputViewSync();
   state.bounds = computeInputBounds(ui.colorSpace.value);
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   drawStatusMini(state, ui, currentVizOpts());
@@ -1334,6 +1719,12 @@ function updateBoundsAndRefresh() {
 
 async function runOptimization() {
   if (state.running) return;
+  const runToken = optimizationRunToken + 1;
+  optimizationRunToken = runToken;
+  const cancelRef = { cancelled: false };
+  optimizationCancelRef = cancelRef;
+  const isSameRun = () => optimizationRunToken === runToken;
+  const shouldContinueRun = () => isSameRun() && !cancelRef.cancelled;
   const palette = parsePalette(ui.paletteInput.value);
   const paletteForOpt = [...palette];
   if (ui.bgEnabled?.checked) {
@@ -1351,8 +1742,7 @@ async function runOptimization() {
   state.rawSpace = config.colorSpace;
   state.newRawSpace = config.colorSpace;
   state.running = true;
-  ui.runBtn.disabled = true;
-  ui.runBtn.textContent = "Running…";
+  setRunButtonState("running");
   updateUndoRedoButtons();
   setStatus("starting optimizer…", 0, ui, state);
   setStatusState(ui, "Running");
@@ -1362,6 +1752,7 @@ async function runOptimization() {
   state.bestColors = [];
   state.rawBestColors = [];
   state.rawNewColors = [];
+  state.optimizedColorRoles = [];
   state.runResults = [];
   state.runRanking = [];
   state.runRankingAll = [];
@@ -1383,7 +1774,9 @@ async function runOptimization() {
 
   try {
     const best = await optimizePalette(paletteForOpt, config, {
-      onProgress: async ({ run, pct, bestScore, startHex, endHex, startRaw, endRaw, trajectory, bestHex, bestRaw }) => {
+      shouldStop: () => !shouldContinueRun(),
+      onProgress: async ({ run, pct, bestScore, startHex, endHex, startRaw, endRaw, trajectory, bestHex, bestRaw, optimizedRows }) => {
+        if (!shouldContinueRun()) return;
         state.bestScores.push(bestScore);
         state.nmTrails.push({
           run,
@@ -1396,11 +1789,13 @@ async function runOptimization() {
         });
         state.bestColors = bestHex || state.bestColors;
         state.rawBestColors = bestRaw || state.rawBestColors;
+        state.optimizedColorRoles = Array.isArray(optimizedRows) ? optimizedRows.map((row) => ({ ...row })) : state.optimizedColorRoles;
         setStatus(`restart ${run}/${config.nOptimRuns}`, pct, ui, state);
         drawStatusMini(state, ui, currentVizOpts());
         await nextFrame();
       },
       onVerbose: (info) => {
+        if (!shouldContinueRun()) return;
         const hexStr = (info.hex || []).join(" ");
         const paramPreview = (info.params || [])
           .map((v) => v.toFixed(3))
@@ -1472,36 +1867,51 @@ async function runOptimization() {
         }
       },
     });
+    if (!isSameRun()) return;
+    const stopped = Boolean(best.cancelled || cancelRef.cancelled);
+    const hasCompletedBest = Number.isFinite(best.value) && Array.isArray(best.newHex) && best.newHex.length;
+    if (stopped && !hasCompletedBest && !state.runResults.length) {
+      setStatus("stopped before any restart finished.", Math.round(((state.bestScores?.length || 0) / Math.max(1, config.nOptimRuns || 1)) * 100), ui, state);
+      setStatusState(ui, "Stopped");
+      return;
+    }
     state.runRankingAll = computeUniquenessForRanking(rankRunResults(state.runResults));
     applyUniquenessFilter();
     if (state.runRanking.length) {
-      applySelectedResult({ skipNavUpdate: true });
+      applySelectedResult({ skipNavUpdate: true, statusLabel: stopped ? "Stopped" : "Finished" });
     } else {
       state.newColors = best.newHex || [];
       state.bestColors = state.newColors;
       state.rawNewColors = best.newRaw || best.optimizerRaw || [];
       state.rawBestColors = state.rawNewColors;
+      state.optimizedColorRoles = Array.isArray(best.optimizedRows) ? best.optimizedRows.map((row) => ({ ...row })) : [];
       state.newRawSpace = config.colorSpace;
       setResults(state.newColors, ui, state.currentColors);
     }
     logVerbose("newColors", [], state.newColors);
-    const convergence = best.meta?.reason || "finished";
-    setStatus(`done. best score = ${(-best.value).toFixed(3)} (${convergence})`, 100, ui, state);
-    setStatusState(ui, "Finished");
+    const convergence = stopped ? "stopped" : best.meta?.reason || "finished";
+    const pctDone = stopped
+      ? Math.round(((state.bestScores?.length || 0) / Math.max(1, config.nOptimRuns || 1)) * 100)
+      : 100;
+    const scoreText = Number.isFinite(best.value) ? (-best.value).toFixed(3) : "n/a";
+    setStatus(`${stopped ? "stopped" : "done"}. best score = ${scoreText} (${convergence})`, pctDone, ui, state);
+    setStatusState(ui, stopped ? "Stopped" : "Finished");
   } catch (err) {
+    if (!isSameRun()) return;
     showError(err.message || "Optimization failed.", ui);
     console.error(err);
   } finally {
+    if (!isSameRun()) return;
+    optimizationCancelRef = null;
     state.running = false;
-    ui.runBtn.disabled = false;
-    ui.runBtn.textContent = "RUN";
+    setRunButtonState("idle");
     updateUndoRedoButtons();
     if (ui.verboseToggle?.checked) renderVerboseTable();
     if (!state.runRanking?.length && state.newColors?.length) {
       refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
       drawStatusMini(state, ui, currentVizOpts());
     } else if (state.runRanking?.length) {
-      applySelectedResult({ skipNavUpdate: true });
+      applySelectedResult({ skipNavUpdate: true, statusLabel: ui.statusState?.textContent || "Finished" });
     }
     updateResultNavigator();
   }
@@ -2078,6 +2488,7 @@ function storeRunResult(info) {
     hex: info.hex ? [...info.hex] : [],
     raw: cloneRawRows(info.raw || info.optimizerRaw),
     optimizerRaw: cloneRawRows(info.optimizerRaw),
+    optimizedRows: Array.isArray(info.optimizedRows) ? info.optimizedRows.map((row) => ({ ...row })) : [],
     score: info.score,
     distance: info.distance,
     penalty: info.penalty,
@@ -2114,7 +2525,7 @@ function changeResultSelection(stepOrRank, absolute = false) {
 }
 
 function applySelectedResult(options = {}) {
-  const { skipNavUpdate } = options;
+  const { skipNavUpdate, statusLabel = "Finished" } = options;
   const ranking = state.runRanking || [];
   if (!ranking.length) {
     updateResultNavigator();
@@ -2129,6 +2540,7 @@ function applySelectedResult(options = {}) {
   state.selectedResultIdx = idx + 1;
   state.newColors = pick.hex ? [...pick.hex] : [];
   state.rawNewColors = cloneRawRows(pick.raw);
+  state.optimizedColorRoles = Array.isArray(pick.optimizedRows) ? pick.optimizedRows.map((row) => ({ ...row })) : [];
   state.newRawSpace = pick.space || state.rawSpace;
   state.bestColors = pick.hex ? [...pick.hex] : state.bestColors;
   state.rawBestColors = pick.raw ? cloneRawRows(pick.raw) : state.rawBestColors;
@@ -2136,7 +2548,7 @@ function applySelectedResult(options = {}) {
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   drawStatusMini(state, ui, currentVizOpts());
   drawStatusGraph(state, ui);
-  setStatusState(ui, "Finished");
+  setStatusState(ui, statusLabel);
   if (!skipNavUpdate) updateResultNavigator();
 }
 
@@ -2266,6 +2678,7 @@ function appendPalette(colors) {
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   ensurePerInputConstraintState();
   renderPerInputConstraintUI();
+  updateAestheticModeAvailability();
   drawStatusMini(state, ui, currentVizOpts());
   history?.record();
 }

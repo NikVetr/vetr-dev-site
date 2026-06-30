@@ -25,6 +25,8 @@ import {
 } from "./gamutHull.js";
 import { hardConstraintRegionIndex } from "../core/hardConstraints.js";
 
+const STATUS_MINI_CONSTRAINT_TOL = 1e-4;
+
 export function drawStatusGraph(state, ui) {
   const canvas = ui.statusGraph;
   if (!canvas) return;
@@ -208,6 +210,28 @@ export function drawStatusMini(state, ui, opts = {}) {
     ? [rectKeys?.x, rectKeys?.y]
     : ["h", channelsForSpace.find((c) => c === "s" || c === "c")].filter(Boolean);
   const radius = (size / 2) * 0.97;
+  const constraintSetsForTweakHoverDisplay = (constraintSets) => {
+    const topology = constraintSets?.topology || "contiguous";
+    if (topology !== "discontiguous" || !constraintSets?.channels) return constraintSets;
+    const channelsOut = {};
+    Object.entries(constraintSets.channels).forEach(([ch, channel]) => {
+      if (!Array.isArray(channel?.pointWindows) || !Array.isArray(channel?.pointModes)) {
+        channelsOut[ch] = channel;
+        return;
+      }
+      const allSoft = channel.pointModes.length > 0 && channel.pointModes.every((mode) => mode === "soft");
+      const allHard = channel.pointModes.length > 0 && channel.pointModes.every((mode) => mode === "hard");
+      channelsOut[ch] = {
+        ...channel,
+        mode: allSoft ? "soft" : allHard ? "hard" : channel.mode,
+      };
+    });
+    return { ...constraintSets, channels: channelsOut };
+  };
+  const displayBounds =
+    state.bounds && ui.colorSpace?.value === space
+      ? { ...state.bounds, constraintSets: constraintSetsForTweakHoverDisplay(state.bounds.globalConstraintSets || state.bounds.constraintSets) }
+      : state.bounds;
 
   const trails = state.nmTrails || [];
   const displayTraceSamples = Math.max(1, parseInt(ui.pathSteps?.value, 10) || 48);
@@ -313,16 +337,16 @@ export function drawStatusMini(state, ui, opts = {}) {
 
   const baseRange = space === "jzazbz" ? presetRange : csRanges[space];
   const constraintDomain =
-    state.bounds && ui.colorSpace?.value === space
-      ? hardContiguousHiddenConstraintRange(state.bounds, space, visibleConstraintChannels)
+    displayBounds && ui.colorSpace?.value === space
+      ? hardContiguousHiddenConstraintRange(displayBounds, space, visibleConstraintChannels)
       : null;
   const visibleConstraintGuides =
-    state.bounds && ui.colorSpace?.value === space
-      ? hardContiguousVisibleConstraintGuides(state.bounds, space, visibleConstraintChannels)
+    displayBounds && ui.colorSpace?.value === space
+      ? hardContiguousVisibleConstraintGuides(displayBounds, space, visibleConstraintChannels)
       : [];
   const pointConstraintGuides =
-    state.bounds && ui.colorSpace?.value === space
-      ? pointWindowConstraintGuides(state.bounds, space, visibleConstraintChannels)
+    displayBounds && ui.colorSpace?.value === space
+      ? pointWindowConstraintGuides(displayBounds, space, visibleConstraintChannels)
       : null;
   const hiddenConstraintChannels =
     constraintDomain?.channels?.filter((ch) => !visibleConstraintChannels.includes(ch)) || [];
@@ -426,9 +450,9 @@ export function drawStatusMini(state, ui, opts = {}) {
       ? boundaryForRange(applyConstrainedChannelsToRange(scaleRange, domainRange, hiddenConstraintChannels))
       : null;
     const customHiddenBoundaries = () => {
-      const sets = state.bounds?.constraintSets;
+      const sets = displayBounds?.constraintSets;
       if (!sets?.channels || (sets.topology !== "custom" && sets.topology !== "discontiguous")) return [];
-      const base = state.bounds?.ranges || csRanges[space];
+      const base = displayBounds?.ranges || csRanges[space];
       const hidden = channelsForSpace.filter((ch) => {
         if (visibleConstraintChannels.includes(ch)) return false;
         const c = sets.channels[ch];
@@ -587,16 +611,16 @@ export function drawStatusMini(state, ui, opts = {}) {
   }
 
   function drawClippedToVisibleHardConstraints(drawFn) {
-    if (!isRect || !rectKeys || !state.bounds || ui.colorSpace?.value !== space) {
+    if (!isRect || !rectKeys || !displayBounds || ui.colorSpace?.value !== space) {
       drawFn();
       return;
     }
-    const constraintSets = state.bounds.constraintSets;
+    const constraintSets = displayBounds.constraintSets;
     if (!constraintSets?.channels) {
       drawFn();
       return;
     }
-    const base = state.bounds.ranges || csRanges[space];
+    const base = displayBounds.ranges || csRanges[space];
     const xKey = rectKeys.x;
     const yKey = rectKeys.y;
     const maxX = Math.max(Math.abs(scaleRange.min[xKey] || 0), Math.abs(scaleRange.max[xKey] || 0)) || 1;
@@ -717,11 +741,31 @@ export function drawStatusMini(state, ui, opts = {}) {
     ctx.stroke();
   };
 
+  const strokeBlackWhiteDashedLine = (x1, y1, x2, y2, width = 1.5) => {
+    ctx.save();
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = "rgba(255,255,255,0.95)";
+    ctx.lineWidth = width;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.strokeStyle = "#0f172a";
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.restore();
+  };
+
   function visibleHardConstraintRegion(vals) {
-    if (!vals || !isRect || !rectKeys || !state.bounds || ui.colorSpace?.value !== space) return 0;
-    const constraintSets = state.bounds.constraintSets;
+    if (!vals || !isRect || !rectKeys || !displayBounds || ui.colorSpace?.value !== space) return 0;
+    const constraintSets = displayBounds.constraintSets;
     if (!constraintSets?.channels) return 0;
-    const base = state.bounds.ranges || csRanges[space];
+    const base = displayBounds.ranges || csRanges[space];
     const xKey = rectKeys.x;
     const yKey = rectKeys.y;
     const norm = normalizeWithRange(vals, base, space);
@@ -734,7 +778,7 @@ export function drawStatusMini(state, ui, opts = {}) {
     const visibleSets = { topology, channels: {} };
     if (xHard && xC) visibleSets.channels[xKey] = xC;
     if (yHard && yC) visibleSets.channels[yKey] = yC;
-    return hardConstraintRegionIndex(norm, visibleSets, topology);
+    return hardConstraintRegionIndex(norm, visibleSets, topology, STATUS_MINI_CONSTRAINT_TOL);
   }
 
   drawClippedToPathBoundary(() => {
@@ -750,17 +794,22 @@ export function drawStatusMini(state, ui, opts = {}) {
   ctx.fillText(`${presetLabel}${clipToGamut ? " (clipped)" : " (raw)"}`, 6, 4);
 
   // Final overlay pass: keep best-result stars above paths, masks, guides,
-  // labels, and point glyphs. The point itself must still be in a visible
-  // hard-constraint region, but the star glyph is not clipped by masks.
+  // labels, and point glyphs. Stars are always drawn; if one falls outside
+  // the visible hard-constraint domain, mark it loudly instead of hiding it.
+  const outputRoles = Array.isArray(state.optimizedColorRoles) ? state.optimizedColorRoles : [];
+  outputRoles.forEach((role, idx) => {
+    if (role?.kind !== "tweak" || !Number.isFinite(role.inputIndex)) return;
+    const inputHex = state.currentColors?.[role.inputIndex];
+    const outputHex = state.bestColors?.[idx];
+    if (!inputHex || !outputHex) return;
+    const inputPt = toPoint(resolveVisualVals(inputHex, rawCurrent, role.inputIndex, rawCurrentSpace));
+    const outputPt = toPoint(resolveVisualVals(outputHex, rawBest, idx, state.newRawSpace));
+    strokeBlackWhiteDashedLine(inputPt.x, inputPt.y, outputPt.x, outputPt.y, 1.6);
+  });
   (state.bestColors || []).forEach((hex, idx) => {
     const vals = resolveVisualVals(hex, rawBest, idx, state.newRawSpace);
-    if (visibleHardConstraintRegion(vals) == null) return;
-    drawPoint(
-      toPoint(vals),
-      "#fbbf24",
-      "star",
-      15
-    );
+    const pt = toPoint(vals);
+    drawPoint(pt, "#fbbf24", "star", 15);
   });
 
   function pointWindowConstraintGuides(bounds, guideSpace, visibleChannels) {
@@ -777,7 +826,7 @@ export function drawStatusMini(state, ui, opts = {}) {
     if (!guides?.sets?.channels) return;
     const sets = guides.sets;
     const hard = new Set(guides.hardVisible || []);
-    const range = state.bounds?.ranges || csRanges[space];
+    const range = displayBounds?.ranges || csRanges[space];
     const rawFromNorm = (ch, u) => {
       const min = range?.min?.[ch] ?? scaleRange.min?.[ch] ?? 0;
       const max = range?.max?.[ch] ?? scaleRange.max?.[ch] ?? 1;

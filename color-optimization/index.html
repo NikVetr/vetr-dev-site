@@ -83,7 +83,7 @@
           <div class="field three-col mini">
             <div>
               <label for="colors-to-add">Colors to add</label>
-              <input id="colors-to-add" type="number" min="1" max="8" value="3">
+              <input id="colors-to-add" type="number" min="0" max="8" value="3">
             </div>
             <div>
               <label for="optim-runs"># Runs</label>
@@ -222,7 +222,7 @@
                 <option value="custom">Custom</option>
               </select>
             </div>
-            <div>
+            <div class="aesthetic-mode-wrap">
               <label for="aesthetic-mode">Aesthetic centers</label>
               <select id="aesthetic-mode">
                 <option value="none">None</option>
@@ -233,7 +233,7 @@
             </div>
           </div>
           <div class="field">
-            <label>Constraint widths</label>
+            <label>Global Constraints</label>
             <div class="field three-col mini">
               <div class="constraint-row">
                 <div class="constraint-head">

@@ -27,6 +27,22 @@ import {
   strokeBoundary,
 } from "./gamutHull.js";
 
+const HARD_CONSTRAINT_OVERLAY_ALPHA = 0.52;
+const MAX_SOFT_CONSTRAINT_OVERLAY_ALPHA = 1;
+
+function hardConstraintOverlayAlpha(softAlpha = 0) {
+  const soft = Number.isFinite(softAlpha) ? Math.max(0, Math.min(1, softAlpha)) : 0;
+  return Math.max(HARD_CONSTRAINT_OVERLAY_ALPHA, soft);
+}
+
+function hardConstraintOverlayFill(softAlpha = 0) {
+  return `rgba(255,255,255,${hardConstraintOverlayAlpha(softAlpha).toFixed(3)})`;
+}
+
+function maxSoftConstraintOverlayAlpha(hasSoftConstraint) {
+  return hasSoftConstraint ? MAX_SOFT_CONSTRAINT_OVERLAY_ALPHA : 0;
+}
+
 export function drawWheel(type, ui, state, opts = {}) {
   const refs = ui.panelMap[type];
   if (!refs) return;
@@ -78,29 +94,35 @@ export function drawWheel(type, ui, state, opts = {}) {
   const rawOverride = state.rawInputOverride?.space === wheelSpace ? state.rawInputOverride.values : null;
   const rawCurrent = rawOverride?.length ? rawOverride : (state.rawCurrentColors?.length ? state.rawCurrentColors : null);
   const rawNew = state.rawNewColors?.length ? state.rawNewColors : null;
+  const tweakedInputIndices = new Set(state.tweakInputIndices || []);
+  const outputRoles = Array.isArray(state.optimizedColorRoles) ? state.optimizedColorRoles : [];
   const allColors = state.currentColors.map((c, idx) => {
     const vals = resolveRawVals(c, rawCurrent, idx, state.rawSpace);
     const displayVals = vals ? (clipToGamut ? projectToGamut(vals, wheelSpace, gamutPreset, wheelSpace) : vals) : null;
-    const displayHex = displayVals ? rgbToHex(convertColorValues(displayVals, wheelSpace, "rgb")) : c;
     return {
       role: "input",
       index: idx,
+      tweaked: tweakedInputIndices.has(idx),
       color: c,
-      displayColor: displayHex,
+      displayColor: c,
       shape: "circle",
       vals,
       displayVals,
     };
   })
     .concat(state.newColors.map((c, idx) => {
+      const roleMeta = outputRoles[idx] || {};
       const vals = resolveRawVals(c, rawNew, idx, state.newRawSpace);
       const displayVals = vals ? (clipToGamut ? projectToGamut(vals, wheelSpace, gamutPreset, wheelSpace) : vals) : null;
-      const displayHex = displayVals ? rgbToHex(convertColorValues(displayVals, wheelSpace, "rgb")) : c;
       return {
         role: "output",
         index: idx,
+        kind: roleMeta.kind === "tweak" && tweakedInputIndices.has(roleMeta.inputIndex) ? "tweak" : "add",
+        sourceInputIndex: roleMeta.kind === "tweak" && tweakedInputIndices.has(roleMeta.inputIndex) && Number.isFinite(roleMeta.inputIndex)
+          ? roleMeta.inputIndex
+          : null,
         color: c,
-        displayColor: displayHex,
+        displayColor: c,
         shape: "square",
         vals,
         displayVals,
@@ -126,14 +148,22 @@ export function drawWheel(type, ui, state, opts = {}) {
   const visibleConstraintChannels = isRectWheel
     ? [rectKeys?.x, rectKeys?.y]
     : ["h", channels.find((c) => c === "s" || c === "c")].filter(Boolean);
-  const activeConstraintDomain =
+  const displayBounds =
     state.bounds && ui.colorSpace.value === wheelSpace
-      ? hardContiguousHiddenConstraintRange(state.bounds, wheelSpace, visibleConstraintChannels)
+      ? { ...state.bounds, constraintSets: state.bounds.globalConstraintSets || state.bounds.constraintSets }
+      : null;
+  const activeConstraintDomain =
+    displayBounds
+      ? hardContiguousHiddenConstraintRange(displayBounds, wheelSpace, visibleConstraintChannels)
       : null;
   const visibleConstraintGuides =
-    state.bounds && ui.colorSpace.value === wheelSpace
-      ? hardContiguousVisibleConstraintGuides(state.bounds, wheelSpace, visibleConstraintChannels)
+    displayBounds
+      ? hardContiguousVisibleConstraintGuides(displayBounds, wheelSpace, visibleConstraintChannels)
       : [];
+  const visibleSoftConstraintAlpha =
+    displayBounds
+      ? maxSoftConstraintOverlayAlpha(hasSoftConstraintForChannels(displayBounds.constraintSets, visibleConstraintChannels))
+      : 0;
   const hiddenConstraintChannels =
     activeConstraintDomain?.channels?.filter((ch) => !visibleConstraintChannels.includes(ch)) || [];
   let radius = baseRadius;
@@ -255,7 +285,11 @@ export function drawWheel(type, ui, state, opts = {}) {
     return {
       role: entry.role,
       index: entry.index,
+      kind: entry.kind,
+      tweaked: Boolean(entry.tweaked),
+      sourceInputIndex: entry.sourceInputIndex,
       color: entry.color,
+      displayColor: entry.displayColor,
       shape: entry.shape,
       x: pt.x,
       y: pt.y,
@@ -351,17 +385,51 @@ export function drawWheel(type, ui, state, opts = {}) {
 
   let activeGamutClipBoundary = null;
 
+  function constraintSetsForPointDisplay(constraintSets, pointIndex) {
+    const topology = constraintSets?.topology || "contiguous";
+    if (topology !== "discontiguous" || !constraintSets?.channels || !Number.isFinite(pointIndex)) return null;
+    const channelsOut = {};
+    let hasPointWindow = false;
+    Object.entries(constraintSets.channels).forEach(([ch, channel]) => {
+      if (!Array.isArray(channel?.pointWindows)) {
+        return;
+      }
+      const windows = channel.pointWindows;
+      const idx = Math.max(0, Math.min(windows.length - 1, Math.floor(pointIndex)));
+      const window = windows[idx];
+      if (!window) return;
+      const mode = Array.isArray(channel.pointModes)
+        ? (channel.pointModes[idx] === "soft" ? "soft" : "hard")
+        : (channel.mode === "soft" ? "soft" : "hard");
+      hasPointWindow = true;
+      channelsOut[ch] = {
+        ...channel,
+        mode,
+        pointWindows: [window],
+        pointModes: [mode],
+        intervals: channel.type === "linear" ? [[window.min, window.max]] : channel.intervals,
+        intervalsRad: channel.type === "hue" ? [[window.center - window.radius, window.center + window.radius]] : channel.intervalsRad,
+        full: false,
+      };
+    });
+    return hasPointWindow ? { ...constraintSets, channels: channelsOut } : null;
+  }
+
   // Put the gamut mask under constraint overlays so soft constraints remain visible
   // when "clip to gamut" is enabled.
   drawGamutClipLayer();
 
-  if (state.bounds && ui.colorSpace.value === wheelSpace) {
+  if (displayBounds) {
     const wheelSpaceCurrent = wheelSpace;
     const hasHue = channels.includes("h");
     const scKey = channels.find((c) => c === "s" || c === "c");
-    const baseRange = state.bounds.ranges || csRanges[wheelSpaceCurrent];
-    const constraintSets = state.bounds.constraintSets;
+    const baseRange = displayBounds.ranges || csRanges[wheelSpaceCurrent];
+    const constraintSets = displayBounds.constraintSets;
     const topology = constraintSets?.topology || "contiguous";
+    const tweakConstraintSets =
+      state.bounds?.constraintSets && Number.isFinite(state.hoveredTweakInputIndex)
+        ? constraintSetsForPointDisplay(state.bounds.constraintSets, state.hoveredTweakInputIndex)
+        : null;
 
     const toVal = (u, min, max) => min + u * (max - min);
     const mapRadius = (u) => {
@@ -385,14 +453,32 @@ export function drawWheel(type, ui, state, opts = {}) {
         if (isRectWheel && constraintSets?.channels && rectKeys) {
           drawRectConstraints(ctx, cx, cy, radius, constraintSets, rectKeys, baseRange, ranges, topology, inputColors);
         }
+
+        if (tweakConstraintSets?.channels) {
+          const hoveredColor = inputColors[state.hoveredTweakInputIndex] || null;
+          const tweakOverlayOptions = { showSoftGuides: false };
+          if (!isRectWheel) {
+            drawPolarConstraints(ctx, cx, cy, radius, tweakConstraintSets, scKey, topology, mapRadius, hoveredColor ? [hoveredColor] : [], tweakOverlayOptions);
+          } else if (rectKeys) {
+            drawRectConstraints(ctx, cx, cy, radius, tweakConstraintSets, rectKeys, baseRange, ranges, topology, hoveredColor ? [hoveredColor] : [], tweakOverlayOptions);
+          }
+        }
       });
     } catch (e) {
       console.warn("Constraint visualization error:", e);
     }
   }
 
+  function hasSoftConstraintForChannels(constraintSets, channelKeys = []) {
+    if (!constraintSets?.channels) return false;
+    return channelKeys.filter(Boolean).some((ch) => {
+      const constraint = constraintSets.channels[ch];
+      return constraint?.mode === "soft";
+    });
+  }
+
   // Helper function for polar wheel constraints
-  function drawPolarConstraints(ctx, cx, cy, radius, constraintSets, scKey, topology, mapRadius, inputColors = []) {
+  function drawPolarConstraints(ctx, cx, cy, radius, constraintSets, scKey, topology, mapRadius, inputColors = [], options = {}) {
     const hueC = constraintSets.channels.h;
     const scC = scKey ? constraintSets.channels[scKey] : null;
     const hueMode = hueC?.mode || "hard";
@@ -420,7 +506,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (isDiscontiguous) {
       if (hueMode === "soft" || scMode === "soft") {
         // Soft discontiguous: draw gradient circles around each point
-        drawSoftDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueMode, scMode, mapRadius, hueC?.width ?? 0, scC?.width ?? 0);
+        drawSoftDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueMode, scMode, hueActive, scActive, mapRadius, hueC?.width ?? 0, scC?.width ?? 0, options);
       } else {
         // Hard discontiguous: draw per-point regions with shading
         drawHardDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueActive, scActive, mapRadius, inputColors, isCustom);
@@ -445,7 +531,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
     // Shade excluded regions
     ctx.save();
-    ctx.fillStyle = "rgba(255,255,255,0.52)";
+    ctx.fillStyle = hardConstraintOverlayFill();
     ctx.beginPath();
     ctx.moveTo(cx + radius, cy);
     ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
@@ -496,7 +582,6 @@ export function drawWheel(type, ui, state, opts = {}) {
     const maxOpacity = clamp01(strength);
     const nAngular = 48; // Angular resolution
     const nRadial = 24;  // Radial resolution
-    if (maxOpacity <= 1e-4) return;
 
     // Get the allowed region bounds
     const hueIntervals = hueC?.intervalsRad || [[0, TAU]];
@@ -510,6 +595,9 @@ export function drawWheel(type, ui, state, opts = {}) {
     const scIsHard = scActive && scMode === "hard";
     const hueIsSoft = hueActive && hueMode === "soft";
     const scIsSoft = scActive && scMode === "soft";
+    const hardOverlaySoftAlpha = maxSoftConstraintOverlayAlpha(hueIsSoft || scIsSoft);
+
+    if (maxOpacity <= 1e-4 && !hueIsHard && !scIsHard) return;
 
     // Calculate sigma for soft dimensions
     const sigmaHue = hueIsSoft ? Math.max((hueEnd - hueStart) / (2 * 1.96), 1e-3) : Infinity;
@@ -519,7 +607,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (hueIsHard && !scIsHard) {
       // Hue is hard, saturation is soft: draw hard overlay outside hue bounds
       ctx.save();
-      ctx.fillStyle = "rgba(255,255,255,0.52)";
+      ctx.fillStyle = hardConstraintOverlayFill(hardOverlaySoftAlpha);
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, TAU);
       // Cut out the allowed hue wedge (full radius)
@@ -534,7 +622,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (scIsHard && !hueIsHard) {
       // Saturation is hard, hue is soft: draw hard overlay outside saturation bounds
       ctx.save();
-      ctx.fillStyle = "rgba(255,255,255,0.52)";
+      ctx.fillStyle = hardConstraintOverlayFill(hardOverlaySoftAlpha);
       // Inner region (r < scMin)
       if (scMin > 0) {
         ctx.beginPath();
@@ -632,6 +720,26 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.arc(cx, cy, mapRadius(scMax), 0, TAU);
       strokeConstraintBoundary(ctx);
     }
+
+    if (hueIsSoft) {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + radius * Math.cos(hueStart), cy + radius * Math.sin(hueStart));
+      strokeSoftConstraintGuide(ctx);
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + radius * Math.cos(hueEnd), cy + radius * Math.sin(hueEnd));
+      strokeSoftConstraintGuide(ctx);
+    }
+
+    if (scIsSoft) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, mapRadius(scMin), 0, TAU);
+      strokeSoftConstraintGuide(ctx);
+      ctx.beginPath();
+      ctx.arc(cx, cy, mapRadius(scMax), 0, TAU);
+      strokeSoftConstraintGuide(ctx);
+    }
   }
 
   // Helper: check if angle is within interval (handles wraparound)
@@ -670,7 +778,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     offCtx.setTransform(ctx.getTransform());
 
     // Fill entire circle with white overlay on offscreen canvas
-    offCtx.fillStyle = "rgba(255,255,255,0.52)";
+    offCtx.fillStyle = hardConstraintOverlayFill();
     offCtx.beginPath();
     offCtx.arc(cx, cy, radius, 0, 2 * Math.PI);
     offCtx.fill();
@@ -759,7 +867,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     }
   }
 
-  function drawSoftDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueMode, scMode, mapRadius, hueWidth, scWidth) {
+  function drawSoftDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueMode, scMode, hueActive, scActive, mapRadius, hueWidth, scWidth, options = {}) {
     const widthFromHueRadius = (r) => clamp01(1 - (2 * r) / TAU);
     const widthFromLinearRadius = (r) => clamp01(1 - 2 * r);
     const fallbackStrength = Math.max(clamp01(hueWidth), clamp01(scWidth));
@@ -794,13 +902,36 @@ export function drawWheel(type, ui, state, opts = {}) {
       });
     }
     const maxOpacity = clamp01(maxStrength);
+    const hueIsHard = hueMode === "hard" && hueActive;
+    const scIsHard = scMode === "hard" && scActive;
+    const hueIsSoft = hueMode === "soft" && hueActive;
+    const scIsSoft = scMode === "soft" && scActive;
+    const hasHardWindow = hueIsHard || scIsHard;
+    if (hasHardWindow) {
+      const hardOverlaySoftAlpha = maxSoftConstraintOverlayAlpha(hueIsSoft || scIsSoft);
+      drawHardDiscontiguousPolarMask(ctx, cx, cy, radius, hueWindows, scWindows, hueIsHard, scIsHard, mapRadius, hardOverlaySoftAlpha);
+    }
     if (maxOpacity <= 1e-4) return;
+
+    const insideHardWindow = (angle, rNorm) => {
+      if (!hasHardWindow) return true;
+      const count = Math.max(hueIsHard ? hueWindows.length : 0, scIsHard ? scWindows.length : 0);
+      for (let i = 0; i < count; i++) {
+        const hW = hueIsHard && hueWindows.length ? hueWindows[i % hueWindows.length] : null;
+        const scW = scIsHard && scWindows.length ? scWindows[i % scWindows.length] : null;
+        const hueOk = !hW || angularDistance(angle, hW.center) <= hW.radius + 1e-9;
+        const scOk = !scW || (rNorm >= scW.min - 1e-9 && rNorm <= scW.max + 1e-9);
+        if (hueOk && scOk) return true;
+      }
+      return false;
+    };
 
     // For each cell in the polar grid, compute minimum z² to any point center
     for (let ai = 0; ai < nAngular; ai++) {
       for (let ri = 0; ri < nRadial; ri++) {
         const angle = (ai + 0.5) / nAngular * TAU;
         const rNorm = (ri + 0.5) / nRadial;
+        if (!insideHardWindow(angle, rNorm)) continue;
 
         // Find minimum z² across all point centers
         let minZSq = Infinity;
@@ -848,10 +979,88 @@ export function drawWheel(type, ui, state, opts = {}) {
         }
       }
     }
+
+    if (options.showSoftGuides !== false) {
+      drawSoftDiscontiguousPolarGuides(ctx, cx, cy, radius, hueWindows, scWindows, hueIsSoft, scIsSoft, mapRadius);
+    }
+  }
+
+  function drawSoftDiscontiguousPolarGuides(ctx, cx, cy, radius, hueWindows, scWindows, hueIsSoft, scIsSoft, mapRadius) {
+    const count = Math.max(hueIsSoft ? hueWindows.length : 0, scIsSoft ? scWindows.length : 0);
+    for (let i = 0; i < count; i++) {
+      const hW = hueIsSoft && hueWindows.length ? hueWindows[i % hueWindows.length] : null;
+      const scW = scIsSoft && scWindows.length ? scWindows[i % scWindows.length] : null;
+      const r0 = scW ? mapRadius(scW.min) : 0;
+      const r1 = scW ? mapRadius(scW.max) : radius;
+
+      if (hW) {
+        const hueStart = hW.center - hW.radius;
+        const hueEnd = hW.center + hW.radius;
+        ctx.beginPath();
+        ctx.moveTo(cx + r0 * Math.cos(hueStart), cy + r0 * Math.sin(hueStart));
+        ctx.lineTo(cx + r1 * Math.cos(hueStart), cy + r1 * Math.sin(hueStart));
+        strokeSoftConstraintGuide(ctx);
+        ctx.beginPath();
+        ctx.moveTo(cx + r0 * Math.cos(hueEnd), cy + r0 * Math.sin(hueEnd));
+        ctx.lineTo(cx + r1 * Math.cos(hueEnd), cy + r1 * Math.sin(hueEnd));
+        strokeSoftConstraintGuide(ctx);
+      }
+
+      if (scW) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, mapRadius(scW.min), hW ? hW.center - hW.radius : 0, hW ? hW.center + hW.radius : TAU);
+        strokeSoftConstraintGuide(ctx);
+        ctx.beginPath();
+        ctx.arc(cx, cy, mapRadius(scW.max), hW ? hW.center - hW.radius : 0, hW ? hW.center + hW.radius : TAU);
+        strokeSoftConstraintGuide(ctx);
+      }
+    }
+  }
+
+  function drawHardDiscontiguousPolarMask(ctx, cx, cy, radius, hueWindows, scWindows, hueIsHard, scIsHard, mapRadius, softAlpha = 0) {
+    const count = Math.max(hueIsHard ? hueWindows.length : 0, scIsHard ? scWindows.length : 0);
+    if (!count) return;
+    const offscreen = document.createElement("canvas");
+    offscreen.width = ctx.canvas.width;
+    offscreen.height = ctx.canvas.height;
+    const offCtx = offscreen.getContext("2d");
+    offCtx.setTransform(ctx.getTransform());
+    offCtx.fillStyle = hardConstraintOverlayFill(softAlpha);
+    offCtx.beginPath();
+    offCtx.arc(cx, cy, radius, 0, TAU);
+    offCtx.fill();
+
+    offCtx.globalCompositeOperation = "destination-out";
+    offCtx.fillStyle = "rgba(255,255,255,1)";
+    for (let i = 0; i < count; i++) {
+      const hW = hueIsHard && hueWindows.length ? hueWindows[i % hueWindows.length] : null;
+      const scW = scIsHard && scWindows.length ? scWindows[i % scWindows.length] : null;
+      const hueStart = hW ? hW.center - hW.radius : 0;
+      const hueEnd = hW ? hW.center + hW.radius : TAU;
+      const scMin = scW ? scW.min : 0;
+      const scMax = scW ? scW.max : 1;
+      const r0 = mapRadius(scMin);
+      const r1 = mapRadius(scMax);
+      offCtx.beginPath();
+      offCtx.moveTo(cx + r1 * Math.cos(hueStart), cy + r1 * Math.sin(hueStart));
+      offCtx.arc(cx, cy, r1, hueStart, hueEnd);
+      if (r0 > 1e-3) {
+        offCtx.lineTo(cx + r0 * Math.cos(hueEnd), cy + r0 * Math.sin(hueEnd));
+        offCtx.arc(cx, cy, r0, hueEnd, hueStart, true);
+      } else {
+        offCtx.lineTo(cx, cy);
+      }
+      offCtx.closePath();
+      offCtx.fill();
+    }
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(offscreen, 0, 0);
+    ctx.restore();
   }
 
   // Helper function for rectangular constraints (Lab/OKLab spaces)
-  function drawRectConstraints(ctx, cx, cy, radius, constraintSets, rectKeys, baseRange, ranges, topology, inputColors = []) {
+  function drawRectConstraints(ctx, cx, cy, radius, constraintSets, rectKeys, baseRange, ranges, topology, inputColors = [], options = {}) {
     const xKey = rectKeys.x;
     const yKey = rectKeys.y;
     const xC = constraintSets.channels[xKey];
@@ -890,7 +1099,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
     if (isDiscontiguous) {
       if (xMode === "soft" || yMode === "soft") {
-        drawSoftDiscontiguousRect(ctx, xWindows, yWindows, xToCoord, yToCoord, cx, cy, radius, xC?.width ?? 0, yC?.width ?? 0);
+        drawSoftDiscontiguousRect(ctx, xWindows, yWindows, xMode, yMode, xActive, yActive, xToCoord, yToCoord, cx, cy, radius, xC?.width ?? 0, yC?.width ?? 0, options);
       } else {
         drawHardDiscontiguousRect(ctx, cx, cy, radius, xWindows, yWindows, xActive, yActive, xToCoord, yToCoord, inputColors, isCustom);
       }
@@ -911,7 +1120,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
     // Shade excluded regions
     ctx.save();
-    ctx.fillStyle = "rgba(255,255,255,0.52)";
+    ctx.fillStyle = hardConstraintOverlayFill();
     ctx.beginPath();
     ctx.rect(cx - radius, cy - radius, radius * 2, radius * 2);
     shadeX.forEach(([x0, x1]) => {
@@ -946,7 +1155,6 @@ export function drawWheel(type, ui, state, opts = {}) {
     const strength = Math.max(xMode === "soft" ? xStrength : 0, yMode === "soft" ? yStrength : 0);
     const maxOpacity = clamp01(strength);
     const nSteps = 32; // Grid resolution for 2D sampling
-    if (maxOpacity <= 1e-4) return;
 
     // Get the allowed region bounds
     const x0 = xActive && xIntervals.length ? xIntervals[0][0] : 0;
@@ -958,6 +1166,9 @@ export function drawWheel(type, ui, state, opts = {}) {
     const yIsHard = yActive && yMode === "hard";
     const xIsSoft = xActive && xMode === "soft";
     const yIsSoft = yActive && yMode === "soft";
+    const hardOverlaySoftAlpha = maxSoftConstraintOverlayAlpha(xIsSoft || yIsSoft);
+
+    if (maxOpacity <= 1e-4 && !xIsHard && !yIsHard) return;
 
     // Calculate sigma for soft axes
     const sigmaX = xIsSoft ? Math.max((x1 - x0) / (2 * 1.96), 1e-3) : Infinity;
@@ -967,7 +1178,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (xIsHard && !yIsHard) {
       // X is hard, Y is soft: draw hard overlay outside X bounds
       ctx.save();
-      ctx.fillStyle = "rgba(255,255,255,0.52)";
+      ctx.fillStyle = hardConstraintOverlayFill(hardOverlaySoftAlpha);
       // Left region (x < x0)
       const xA = xToCoord(0);
       const xB = xToCoord(x0);
@@ -984,7 +1195,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     if (yIsHard && !xIsHard) {
       // Y is hard, X is soft: draw hard overlay outside Y bounds
       ctx.save();
-      ctx.fillStyle = "rgba(255,255,255,0.52)";
+      ctx.fillStyle = hardConstraintOverlayFill(hardOverlaySoftAlpha);
       const xLeft = xToCoord(0);
       const xRight = xToCoord(1);
       // Top region (y < y0 in normalized, but y axis is inverted in screen coords)
@@ -1079,6 +1290,32 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.lineTo(xRight, yToCoord(y1));
       strokeConstraintBoundary(ctx);
     }
+
+    if (xIsSoft) {
+      const yTop = yToCoord(0);
+      const yBot = yToCoord(1);
+      ctx.beginPath();
+      ctx.moveTo(xToCoord(x0), yTop);
+      ctx.lineTo(xToCoord(x0), yBot);
+      strokeSoftConstraintGuide(ctx);
+      ctx.beginPath();
+      ctx.moveTo(xToCoord(x1), yTop);
+      ctx.lineTo(xToCoord(x1), yBot);
+      strokeSoftConstraintGuide(ctx);
+    }
+
+    if (yIsSoft) {
+      const xLeft = xToCoord(0);
+      const xRight = xToCoord(1);
+      ctx.beginPath();
+      ctx.moveTo(xLeft, yToCoord(y0));
+      ctx.lineTo(xRight, yToCoord(y0));
+      strokeSoftConstraintGuide(ctx);
+      ctx.beginPath();
+      ctx.moveTo(xLeft, yToCoord(y1));
+      ctx.lineTo(xRight, yToCoord(y1));
+      strokeSoftConstraintGuide(ctx);
+    }
   }
 
   function drawHardDiscontiguousRect(ctx, cx, cy, radius, xWindows, yWindows, xActive, yActive, xToCoord, yToCoord, inputColors = [], useConstraintBoundaryStyle = false) {
@@ -1097,7 +1334,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     offCtx.setTransform(ctx.getTransform());
 
     // Fill entire square with white overlay on offscreen canvas
-    offCtx.fillStyle = "rgba(255,255,255,0.52)";
+    offCtx.fillStyle = hardConstraintOverlayFill();
     offCtx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
 
     // Clear out allowed regions using destination-out
@@ -1142,15 +1379,21 @@ export function drawWheel(type, ui, state, opts = {}) {
         const xB = xToCoord(x1);
         const yA = yToCoord(y0);
         const yB = yToCoord(y1);
-        ctx.beginPath();
-        ctx.rect(Math.min(xA, xB), Math.min(yA, yB), Math.abs(xB - xA), Math.abs(yB - yA));
-        if (useConstraintBoundaryStyle) strokeConstraintBoundary(ctx);
-        else strokePointWindowColored(ctx, pointColor);
+        const w = Math.abs(xB - xA);
+        const h = Math.abs(yB - yA);
+        if (w < 2.5 && h < 2.5) {
+          strokePointWindowDot(ctx, (xA + xB) / 2, (yA + yB) / 2, pointColor, useConstraintBoundaryStyle);
+        } else {
+          ctx.beginPath();
+          ctx.rect(Math.min(xA, xB), Math.min(yA, yB), w, h);
+          if (useConstraintBoundaryStyle) strokeConstraintBoundary(ctx);
+          else strokePointWindowColored(ctx, pointColor);
+        }
       }
     }
   }
 
-  function drawSoftDiscontiguousRect(ctx, xWindows, yWindows, xToCoord, yToCoord, cx, cy, radius, xWidth, yWidth) {
+  function drawSoftDiscontiguousRect(ctx, xWindows, yWindows, xMode, yMode, xActive, yActive, xToCoord, yToCoord, cx, cy, radius, xWidth, yWidth, options = {}) {
     const widthFromRadius = (r) => clamp01(1 - 2 * r);
     const fallbackStrength = Math.max(clamp01(xWidth), clamp01(yWidth));
     const nSteps = 32; // Grid resolution
@@ -1181,13 +1424,36 @@ export function drawWheel(type, ui, state, opts = {}) {
       });
     }
     const maxOpacity = clamp01(maxStrength);
+    const xIsHard = xMode === "hard" && xActive;
+    const yIsHard = yMode === "hard" && yActive;
+    const xIsSoft = xMode === "soft" && xActive;
+    const yIsSoft = yMode === "soft" && yActive;
+    const hasHardWindow = xIsHard || yIsHard;
+    if (hasHardWindow) {
+      const hardOverlaySoftAlpha = maxSoftConstraintOverlayAlpha(xIsSoft || yIsSoft);
+      drawHardDiscontiguousRectMask(ctx, cx, cy, radius, xWindows, yWindows, xIsHard, yIsHard, xToCoord, yToCoord, hardOverlaySoftAlpha);
+    }
     if (maxOpacity <= 1e-4) return;
+
+    const insideHardWindow = (uX, uY) => {
+      if (!hasHardWindow) return true;
+      const count = Math.max(xIsHard ? xWindows.length : 0, yIsHard ? yWindows.length : 0);
+      for (let i = 0; i < count; i++) {
+        const xW = xIsHard && xWindows.length ? xWindows[i % xWindows.length] : null;
+        const yW = yIsHard && yWindows.length ? yWindows[i % yWindows.length] : null;
+        const xOk = !xW || (uX >= xW.min - 1e-9 && uX <= xW.max + 1e-9);
+        const yOk = !yW || (uY >= yW.min - 1e-9 && uY <= yW.max + 1e-9);
+        if (xOk && yOk) return true;
+      }
+      return false;
+    };
 
     // For each grid cell, compute the minimum z² to any point center
     for (let yi = 0; yi < nSteps; yi++) {
       for (let xi = 0; xi < nSteps; xi++) {
         const uX = (xi + 0.5) / nSteps;
         const uY = (yi + 0.5) / nSteps;
+        if (!insideHardWindow(uX, uY)) continue;
 
         // Find minimum z² across all point centers
         let minZSq = Infinity;
@@ -1223,6 +1489,87 @@ export function drawWheel(type, ui, state, opts = {}) {
         }
       }
     }
+
+    if (options.showSoftGuides !== false) {
+      drawSoftDiscontiguousRectGuides(ctx, xWindows, yWindows, xIsSoft, yIsSoft, xToCoord, yToCoord);
+    }
+  }
+
+  function drawSoftDiscontiguousRectGuides(ctx, xWindows, yWindows, xIsSoft, yIsSoft, xToCoord, yToCoord) {
+    const count = Math.max(xIsSoft ? xWindows.length : 0, yIsSoft ? yWindows.length : 0);
+    for (let i = 0; i < count; i++) {
+      const xW = xIsSoft && xWindows.length ? xWindows[i % xWindows.length] : null;
+      const yW = yIsSoft && yWindows.length ? yWindows[i % yWindows.length] : null;
+      const x0 = xW ? xW.min : 0;
+      const x1 = xW ? xW.max : 1;
+      const y0 = yW ? yW.min : 0;
+      const y1 = yW ? yW.max : 1;
+      const xA = xToCoord(x0);
+      const xB = xToCoord(x1);
+      const yA = yToCoord(y0);
+      const yB = yToCoord(y1);
+      const w = Math.abs(xB - xA);
+      const h = Math.abs(yB - yA);
+
+      if (w < 2.5 && h < 2.5) {
+        strokePointWindowDot(ctx, (xA + xB) / 2, (yA + yB) / 2, null, false);
+        continue;
+      }
+
+      if (xW) {
+        ctx.beginPath();
+        ctx.moveTo(xA, yA);
+        ctx.lineTo(xA, yB);
+        strokeSoftConstraintGuide(ctx);
+        ctx.beginPath();
+        ctx.moveTo(xB, yA);
+        ctx.lineTo(xB, yB);
+        strokeSoftConstraintGuide(ctx);
+      }
+
+      if (yW) {
+        ctx.beginPath();
+        ctx.moveTo(xA, yA);
+        ctx.lineTo(xB, yA);
+        strokeSoftConstraintGuide(ctx);
+        ctx.beginPath();
+        ctx.moveTo(xA, yB);
+        ctx.lineTo(xB, yB);
+        strokeSoftConstraintGuide(ctx);
+      }
+    }
+  }
+
+  function drawHardDiscontiguousRectMask(ctx, cx, cy, radius, xWindows, yWindows, xIsHard, yIsHard, xToCoord, yToCoord, softAlpha = 0) {
+    const count = Math.max(xIsHard ? xWindows.length : 0, yIsHard ? yWindows.length : 0);
+    if (!count) return;
+    const offscreen = document.createElement("canvas");
+    offscreen.width = ctx.canvas.width;
+    offscreen.height = ctx.canvas.height;
+    const offCtx = offscreen.getContext("2d");
+    offCtx.setTransform(ctx.getTransform());
+    offCtx.fillStyle = hardConstraintOverlayFill(softAlpha);
+    offCtx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+
+    offCtx.globalCompositeOperation = "destination-out";
+    offCtx.fillStyle = "rgba(255,255,255,1)";
+    for (let i = 0; i < count; i++) {
+      const xW = xIsHard && xWindows.length ? xWindows[i % xWindows.length] : null;
+      const yW = yIsHard && yWindows.length ? yWindows[i % yWindows.length] : null;
+      const x0 = xW ? xW.min : 0;
+      const x1 = xW ? xW.max : 1;
+      const y0 = yW ? yW.min : 0;
+      const y1 = yW ? yW.max : 1;
+      const xA = xToCoord(x0);
+      const xB = xToCoord(x1);
+      const yA = yToCoord(y0);
+      const yB = yToCoord(y1);
+      offCtx.fillRect(Math.min(xA, xB), Math.min(yA, yB), Math.abs(xB - xA), Math.abs(yB - yA));
+    }
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(offscreen, 0, 0);
+    ctx.restore();
   }
 
   // Stroke helper for hard constraint boundaries
@@ -1236,6 +1583,20 @@ export function drawWheel(type, ui, state, opts = {}) {
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.setLineDash([]);
+  }
+
+  function strokeSoftConstraintGuide(ctx) {
+    ctx.save();
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.setLineDash([]);
+    ctx.strokeStyle = "rgba(255,255,255,0.72)";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+    ctx.strokeStyle = "rgba(8,145,178,0.68)";
+    ctx.lineWidth = 2.25;
+    ctx.stroke();
+    ctx.restore();
   }
 
   // Stroke helper for per-point windows in discontiguous mode (fallback)
@@ -1279,6 +1640,19 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.stroke();
     }
     ctx.setLineDash([]);
+  }
+
+  function strokePointWindowDot(ctx, x, y, hex = null, useConstraintBoundaryStyle = false) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x, y, 8, 0, TAU);
+    if (useConstraintBoundaryStyle || !hex) {
+      strokeConstraintBoundary(ctx);
+      ctx.restore();
+      return;
+    }
+    strokePointWindowColored(ctx, hex);
+    ctx.restore();
   }
 
   const preview = state.customConstraintPreview;
@@ -1388,7 +1762,9 @@ export function drawWheel(type, ui, state, opts = {}) {
       return smoothBoundary(boundaryPts, 1);
     };
     const customHiddenBoundaries = () => {
-      const sets = state.bounds?.constraintSets;
+      const rawSets = displayBounds?.constraintSets;
+      const inputColors = allColors.filter((c) => c.role === "input").map((c) => c.color);
+      const sets = rawSets;
       if (!sets?.channels || (sets.topology !== "custom" && sets.topology !== "discontiguous")) return [];
       const base = state.bounds?.ranges || csRanges[wheelSpace];
       const hidden = (channelOrder[wheelSpace] || []).filter((ch) => {
@@ -1430,7 +1806,7 @@ export function drawWheel(type, ui, state, opts = {}) {
       offCtx.moveTo(fullBoundary[0].x, fullBoundary[0].y);
       for (let i = 1; i < fullBoundary.length; i++) offCtx.lineTo(fullBoundary[i].x, fullBoundary[i].y);
       offCtx.closePath();
-      offCtx.fillStyle = "rgba(255,255,255,0.52)";
+      offCtx.fillStyle = hardConstraintOverlayFill(visibleSoftConstraintAlpha);
       offCtx.fill();
 
       offCtx.globalCompositeOperation = "destination-out";
@@ -1462,7 +1838,7 @@ export function drawWheel(type, ui, state, opts = {}) {
         );
         constrainedBoundary = boundaryForRange(constrainedRange);
         if (constrainedBoundary && constrainedBoundary.length) {
-          drawOutOfConstraintOverlay(ctx, fullBoundary, constrainedBoundary);
+          drawOutOfConstraintOverlay(ctx, fullBoundary, constrainedBoundary, hardConstraintOverlayAlpha(visibleSoftConstraintAlpha));
         }
       } else if (customBoundaries.length) {
         drawOutOfMultipleConstraintOverlay(fullBoundary, customBoundaries);
@@ -1487,6 +1863,7 @@ export function drawWheel(type, ui, state, opts = {}) {
 
   const drawPoint = (pt) => {
     const fill = applyCvdHex(pt.displayColor || pt.color, type, 1, cvdModel);
+    const isTweaked = pt.tweaked || pt.kind === "tweak";
     ctx.beginPath();
     const sizePt = 6 + 12 * pt.lNorm;
     if (pt.shape === "square") {
@@ -1495,14 +1872,53 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.arc(pt.x, pt.y, sizePt / 2, 0, 2 * Math.PI);
     }
     ctx.fillStyle = fill;
-    ctx.strokeStyle = contrastColor(fill);
-    ctx.lineWidth = 1;
     ctx.fill();
+    if (isTweaked) {
+      ctx.strokeStyle = "rgba(255,255,255,0.95)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([]);
+      ctx.stroke();
+      ctx.strokeStyle = "#0f172a";
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 3]);
+      ctx.stroke();
+    } else {
+      ctx.strokeStyle = contrastColor(fill);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+  };
+
+  const strokeBlackWhiteDashedLine = (x1, y1, x2, y2, width = 1.5) => {
+    ctx.save();
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = "rgba(255,255,255,0.95)";
+    ctx.lineWidth = width;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
     ctx.stroke();
+    ctx.strokeStyle = "#0f172a";
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.restore();
   };
 
   // Input/output markers are glyphs, not feasible-region fills. Draw them
   // un-clipped above gamut and constraint masks so the full marker is visible.
+  coords
+    .filter((pt) => pt.role === "output" && pt.kind === "tweak" && Number.isFinite(pt.sourceInputIndex))
+    .forEach((outPt) => {
+      const inPt = coords.find((pt) => pt.role === "input" && pt.index === outPt.sourceInputIndex);
+      if (!inPt) return;
+      strokeBlackWhiteDashedLine(inPt.x, inPt.y, outPt.x, outPt.y, 1.6);
+    });
   coords.forEach(drawPoint);
 
   constraintPoints.forEach((pt) => {
@@ -1563,6 +1979,14 @@ export function drawWheel(type, ui, state, opts = {}) {
       ctx.fillStyle = dashed ? "rgba(15,23,42,0.72)" : "rgba(15,23,42,0.78)";
       ctx.fillText(text, x + lineWidth + labelGap, itemY);
     };
+    if (hasConstraintLegend && !isRectWheel) {
+      const rowWidth = Math.max(fullItemWidth, solidItemWidth);
+      const x = Math.max(minX, rightEdge - rowWidth);
+      drawItem(x + rowWidth - solidItemWidth, 9, label, true);
+      drawItem(x + rowWidth - fullItemWidth, 19, fullLabel, false);
+      ctx.restore();
+      return;
+    }
     if (hasConstraintLegend && totalWidth > availableWidth) {
       const rowWidth = Math.max(fullItemWidth, solidItemWidth);
       const x = Math.max(minX, rightEdge - rowWidth);
@@ -1667,16 +2091,16 @@ export function drawWheel(type, ui, state, opts = {}) {
   }
 
   function drawClippedToVisibleHardConstraints(drawFn) {
-    if (!isRectWheel || !rectKeys || !state.bounds || ui.colorSpace.value !== wheelSpace) {
+    if (!isRectWheel || !rectKeys || !displayBounds) {
       drawFn();
       return;
     }
-    const constraintSets = state.bounds.constraintSets;
+    const constraintSets = displayBounds.constraintSets;
     if (!constraintSets?.channels) {
       drawFn();
       return;
     }
-    const base = state.bounds.ranges || csRanges[wheelSpace];
+    const base = displayBounds.ranges || csRanges[wheelSpace];
     const xKey = rectKeys.x;
     const yKey = rectKeys.y;
     const maxX = Math.max(Math.abs(ranges.min[xKey] || 0), Math.abs(ranges.max[xKey] || 0)) || 1;

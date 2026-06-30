@@ -14,7 +14,7 @@ import {
 import { applyCvdLinear } from "../core/cvd.js";
 import { clamp } from "../core/util.js";
 import { random, setRandomSeed } from "../core/random.js";
-import { nelderMead } from "./nelderMead.js";
+import { nelderMeadAsync } from "./nelderMead.js";
 import { objectiveInfo, objectiveValue, prepareData } from "./objective.js";
 import { aggregateDistances } from "../core/means.js";
 import { coordsFromXyzForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
@@ -50,7 +50,7 @@ function hueArcFromBounds(boundsH) {
 
 function channelBoundsForStart(prepLike, ch, scChannel, lightKey) {
   const bounds = prepLike?.bounds || {};
-  const constraintSets = bounds.constraintSets;
+  const constraintSets = bounds.globalConstraintSets || bounds.constraintSets;
   const topology = prepLike?.constraintTopology || constraintSets?.topology || "contiguous";
   const channelMode = constraintSets?.channels?.[ch]?.mode || "hard";
   const useHard = channelMode === "hard" && topology === "contiguous";
@@ -125,6 +125,98 @@ function sampleNormInPointWindow(norm, constraintSets, channels, summary, pointI
   });
 }
 
+function usesOrderedLightnessRows(prepLike = {}) {
+  const rows = prepLike.optimizedRows || [];
+  return !(Array.isArray(rows) && rows.some((row) => row?.kind === "tweak"));
+}
+
+function encodeNormalizedRowsToParams(normRows, colorSpace, ranges, prepLike = {}) {
+  const channels = channelOrder[colorSpace];
+  const lightKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : null;
+  const scChannel = channels.find((c) => c === "s" || c === "c") || null;
+  const hueAnchorRad = Number.isFinite(prepLike?.hueAnchorRad) ? prepLike.hueAnchorRad : 0;
+  const constraintSets = prepLike?.bounds?.globalConstraintSets || prepLike?.bounds?.constraintSets;
+  const topology = prepLike?.constraintTopology || constraintSets?.topology || "contiguous";
+  const hueArc = (() => {
+    const hueMode = constraintSets?.channels?.h?.mode || "hard";
+    const useHard = hueMode === "hard" && topology === "contiguous";
+    return useHard ? hueArcFromBounds(prepLike?.bounds?.boundsH) : null;
+  })();
+  const useOrderedLightness = lightKey && normRows.length > 1 && usesOrderedLightnessRows(prepLike);
+  const rows = useOrderedLightness
+    ? (() => {
+      const [b0, b1] = channelBoundsForStart(prepLike, lightKey, scChannel, lightKey);
+      const withY = normRows.map((norm) => {
+        const denom = b1 - b0 || 1;
+        const t = clamp01((norm[lightKey] - b0) / denom);
+        return { norm, y: logitClamped(t) };
+      }).sort((a, b) => a.y - b.y);
+      const minGap = 1e-4;
+      let prevY = null;
+      withY.forEach((row, idx) => {
+        if (idx === 0) {
+          row.yAdj = row.y;
+          prevY = row.yAdj;
+          return;
+        }
+        const nextY = Math.max(row.y, prevY + minGap);
+        row.yAdj = nextY;
+        prevY = nextY;
+      });
+      return withY;
+    })()
+    : normRows.map((norm) => ({ norm }));
+
+  const params = [];
+  rows.forEach((row, rowIdx) => {
+    const encodedBoundsForChannel = (ch) => channelBoundsForStart(prepLike, ch, scChannel, lightKey);
+    channels.forEach((ch) => {
+      const norm = row.norm;
+      if (ch === lightKey) {
+        if (useOrderedLightness) {
+          if (rowIdx === 0) {
+            params.push(row.yAdj);
+          } else {
+            const prevY = rows[rowIdx - 1].yAdj;
+            const diff = Math.max(row.yAdj - prevY, 1e-6);
+            params.push(Math.log(diff));
+          }
+        } else {
+          const [b0, b1] = encodedBoundsForChannel(ch);
+          const denom = b1 - b0 || 1;
+          const t = clamp01((norm[ch] - b0) / denom);
+          params.push(logitClamped(t));
+        }
+        return;
+      }
+
+      if (ch === "h") {
+        const h01 = wrap01(norm.h ?? 0);
+        if (!hueArc || hueArc.full) {
+          params.push(h01 * TAU - hueAnchorRad);
+          return;
+        }
+        let phi = h01 * TAU;
+        const start = hueArc.startRad;
+        const end = hueArc.startRad + hueArc.spanRad;
+        while (phi < start) phi += TAU;
+        while (phi > end) phi -= TAU;
+        if (phi < start) phi = start;
+        if (phi > end) phi = end;
+        const t = hueArc.spanRad > 0 ? (phi - start) / hueArc.spanRad : 0.5;
+        params.push(logitClamped(clamp01(t)));
+        return;
+      }
+
+      const [b0, b1] = encodedBoundsForChannel(ch);
+      const denom = b1 - b0 || 1;
+      const t = clamp01((norm[ch] - b0) / denom);
+      params.push(logitClamped(t));
+    });
+  });
+  return params;
+}
+
 export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges, prepLike = {}) {
   const channels = channelOrder[colorSpace];
   const samples = [];
@@ -132,7 +224,7 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
   const scChannel = channels.find((c) => c === "s" || c === "c") || null;
   const hueAnchorRad = Number.isFinite(prepLike?.hueAnchorRad) ? prepLike.hueAnchorRad : 0;
   const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
-  const constraintSets = prepLike?.bounds?.constraintSets;
+  const constraintSets = prepLike?.bounds?.globalConstraintSets || prepLike?.bounds?.constraintSets;
   const topology = prepLike?.constraintTopology || constraintSets?.topology || "contiguous";
   const pointWindows = pointWindowSummary(constraintSets, channels);
   const hueArc = (() => {
@@ -243,81 +335,34 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
     );
   }
 
-  const ordered = lightKey && nColors > 1
-    ? (() => {
-      const [b0, b1] = channelBoundsForStart(prepLike, lightKey, scChannel, lightKey);
-      const withY = samples.map((row) => {
-        const denom = b1 - b0 || 1;
-        const t = clamp01((row.norm[lightKey] - b0) / denom);
-        return { ...row, y: logitClamped(t) };
-      }).sort((a, b) => a.y - b.y);
-      const minGap = 1e-4;
-      let prevY = null;
-      withY.forEach((row, idx) => {
-        if (idx === 0) {
-          row.yAdj = row.y;
-          prevY = row.yAdj;
-          return;
-        }
-        const nextY = Math.max(row.y, prevY + minGap);
-        row.yAdj = nextY;
-        prevY = nextY;
-      });
-      return withY;
-    })()
-    : samples;
-
-  const params = [];
-  ordered.forEach((row, rowIdx) => {
-    channels.forEach((ch) => {
-      if (ch === lightKey) {
-        if (lightKey && nColors > 1) {
-          if (rowIdx === 0) {
-            params.push(row.yAdj);
-          } else {
-            const prevY = ordered[rowIdx - 1].yAdj;
-            const diff = Math.max(row.yAdj - prevY, 1e-6);
-            params.push(Math.log(diff));
-          }
-        } else {
-          const [b0, b1] = channelBoundsForStart(prepLike, ch, scChannel, lightKey);
-          const denom = b1 - b0 || 1;
-          const t = clamp01((row.norm[ch] - b0) / denom);
-          params.push(logitClamped(t));
-        }
-        return;
-      }
-
-      if (ch === "h") {
-        const h01 = wrap01(row.norm.h ?? 0);
-        if (!hueArc || hueArc.full) {
-          params.push(h01 * TAU - hueAnchorRad);
-          return;
-        }
-        let phi = h01 * TAU;
-        const start = hueArc.startRad;
-        const end = hueArc.startRad + hueArc.spanRad;
-        while (phi < start) phi += TAU;
-        while (phi > end) phi -= TAU;
-        if (phi < start) phi = start;
-        if (phi > end) phi = end;
-        const t = hueArc.spanRad > 0 ? (phi - start) / hueArc.spanRad : 0.5;
-        params.push(logitClamped(clamp01(t)));
-        return;
-      }
-
-      const [b0, b1] = channelBoundsForStart(prepLike, ch, scChannel, lightKey);
-      const denom = b1 - b0 || 1;
-      const t = clamp01((row.norm[ch] - b0) / denom);
-      params.push(logitClamped(t));
-    });
-  });
-  return params;
+  return encodeNormalizedRowsToParams(samples.map((row) => row.norm), colorSpace, ranges, prepLike);
 }
 
-function generateStartWithInfo(dim, prep) {
+function buildTweakAnchoredParams(prep) {
+  const rows = prep.optimizedRows || [];
+  if (!rows.some((row) => row?.kind === "tweak" && row.sourceNorm)) return null;
+  const channels = channelOrder[prep.colorSpace] || [];
+  const normRows = rows.map((role) => {
+    if (role?.kind === "tweak" && role.sourceNorm) return { ...role.sourceNorm };
+    const norm = {};
+    channels.forEach((ch) => {
+      norm[ch] = random();
+    });
+    return norm;
+  });
+  return encodeNormalizedRowsToParams(normRows, prep.colorSpace, prep.ranges, prep);
+}
+
+function generateStartWithInfo(dim, prep, runIndex = 0) {
+  if (runIndex === 0) {
+    const anchored = buildTweakAnchoredParams(prep);
+    if (anchored?.length === dim) {
+      const info = objectiveInfo(anchored, prep);
+      return { params: anchored, info };
+    }
+  }
   if (prep.clipToGamutOpt) {
-    const params = buildGamutUniformParams(prep.nColsToAdd, prep.colorSpace, prep.gamutPreset, prep.ranges, prep);
+    const params = buildGamutUniformParams(prep.nOptimized ?? prep.nColsToAdd, prep.colorSpace, prep.gamutPreset, prep.ranges, prep);
     const info = objectiveInfo(params, prep);
     return { params, info };
   }
@@ -326,15 +371,18 @@ function generateStartWithInfo(dim, prep) {
   return { params, info };
 }
 
-export async function optimizePalette(palette, config, { onProgress, onVerbose } = {}) {
+export async function optimizePalette(palette, config, { onProgress, onVerbose, shouldStop } = {}) {
   const colorSpace = config.colorSpace;
   const channels = channelOrder[colorSpace];
   if ("seed" in config) {
     setRandomSeed(config.seed);
   }
   const prep = prepareData(palette, colorSpace, config);
-  const conditioningHexes = palette || [];
-  const dim = config.nColsToAdd * channels.length;
+  const conditioningHexes = prep.currHex || [];
+  const dim = (prep.nOptimized ?? config.nColsToAdd) * channels.length;
+  if (dim <= 0) {
+    throw new Error("Nothing to optimize: set Colors to add above 0 or mark at least one input color for tweaking.");
+  }
   let best = { value: Infinity, par: null, newHex: [], newRaw: [] };
   let bestScoreSoFar = -Infinity;
   const trajectorySteps = Math.max(
@@ -356,7 +404,12 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
   };
 
   for (let run = 0; run < config.nOptimRuns; run++) {
-    const startState = generateStartWithInfo(dim, prep);
+    if (shouldStop?.()) {
+      best.cancelled = true;
+      best.meta = { ...(best.meta || {}), reason: "cancelled" };
+      break;
+    }
+    const startState = generateStartWithInfo(dim, prep, run);
     const start = startState.params;
     const startInfo = startState.info || objectiveInfo(start, prep);
     const startDetails = attachMeta(
@@ -376,6 +429,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         hex: startInfo.newHex,
         raw: startInfo.newRaw,
         optimizerRaw: startInfo.optimizerRaw,
+        optimizedRows: startInfo.optimizedRows,
         details: startDetails,
         distance: startInfo.distance,
         penalty: startInfo.penalty,
@@ -385,11 +439,16 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         space: prep.colorSpace,
       });
     }
-    const res = nelderMead(
+    const res = await nelderMeadAsync(
       (p) => objectiveValue(p, prep),
       start,
-      { maxIterations: config.nmIterations, step: 1.2, trace: true }
+      { maxIterations: config.nmIterations, step: 1.2, trace: true, shouldStop, yieldEvery: 5 }
     );
+    if (res.cancelled) {
+      best.cancelled = true;
+      best.meta = { ...(best.meta || {}), reason: "cancelled" };
+      break;
+    }
     const endInfo = objectiveInfo(res.x, prep);
     const trajectory = buildTrajectory(res.trace, start, res.x, prep, trajectorySteps);
     const endDetails = attachMeta(
@@ -409,6 +468,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         hex: endInfo.newHex,
         raw: endInfo.newRaw,
         optimizerRaw: endInfo.optimizerRaw,
+        optimizedRows: endInfo.optimizedRows,
         details: endDetails,
         score: -res.fx,
         distance: endInfo.distance,
@@ -425,6 +485,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         newHex: endInfo.newHex,
         newRaw: endInfo.newRaw,
         optimizerRaw: endInfo.optimizerRaw,
+        optimizedRows: endInfo.optimizedRows,
         meta: {
           reason: res.reason,
           distance: endInfo.distance,
@@ -444,6 +505,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
           hex: endInfo.newHex,
           raw: endInfo.newRaw,
           optimizerRaw: endInfo.optimizerRaw,
+          optimizedRows: endInfo.optimizedRows,
           details: endDetails,
           score: -res.fx,
           distance: endInfo.distance,
@@ -468,6 +530,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         trajectory,
         bestHex: best.newHex || [],
         bestRaw: best.newRaw || best.optimizerRaw || [],
+        optimizedRows: best.optimizedRows || [],
       });
     }
   }
@@ -483,6 +546,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose }
         hex: best.newHex,
         raw: best.newRaw,
         optimizerRaw: best.optimizerRaw,
+        optimizedRows: best.optimizedRows,
         details: metaDetails,
         score: -best.value,
         distance: best.meta?.distance,
@@ -513,6 +577,7 @@ function buildTrajectory(traceParams, startParams, endParams, prep, maxTraceSamp
     return {
       hex: info.newHex,
       raw: info.newRaw || info.optimizerRaw,
+      optimizedRows: info.optimizedRows || [],
     };
   });
 }

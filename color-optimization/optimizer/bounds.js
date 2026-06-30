@@ -1,4 +1,5 @@
 import { channelOrder, decodeColor, csRanges } from "../core/colorSpaces.js";
+import { sanitizeExplicitBounds } from "../core/constraintBounds.js";
 
 const TAU = Math.PI * 2;
 
@@ -18,6 +19,11 @@ export function computeBounds(valuesRaw, colorSpace, config) {
   const aestheticMode = config.aestheticMode || "none";
   const constraintMode = config.constraintMode || {};
   const perInputWidths = config.perInputWidths || null;
+  const perInputModes = Array.isArray(config.perInputModes) ? config.perInputModes : null;
+  const explicitBounds =
+    topology === "custom"
+      ? null
+      : sanitizeExplicitBounds(config.explicitBounds, channels);
   const ranges = csRanges[colorSpace];
   const aestheticValues = topology === "custom"
     ? valuesRaw || []
@@ -49,6 +55,7 @@ export function computeBounds(valuesRaw, colorSpace, config) {
         const high = (1 - width) * 1 + width * maxVal;
         b = [Math.max(0, low), Math.min(1, high)];
       }
+      if (explicitBounds?.[ch]) b = explicitBounds[ch];
       boundsByName[ch] = b;
       if (ch === "h") boundsH = b;
       else if (ch === "l") boundsL = b;
@@ -66,10 +73,24 @@ export function computeBounds(valuesRaw, colorSpace, config) {
     boundsByName,
     boundsH,
     aestheticNorm,
-    perInputWidths
+    perInputWidths,
+    perInputModes
+  );
+  const globalConstraintSets = buildConstraintSets(
+    topology,
+    aestheticMode,
+    constraintMode,
+    channels,
+    scChannel,
+    widthForChannel,
+    boundsByName,
+    boundsH,
+    aestheticNorm,
+    null,
+    null
   );
 
-  return { boundsSc, boundsL, boundsH, boundsByName, constraintSets };
+  return { boundsSc, boundsL, boundsH, boundsByName, constraintSets, globalConstraintSets };
 }
 
 export function computeBoundsFromCurrent(colors, colorSpace, configLike = {}) {
@@ -174,7 +195,8 @@ function buildConstraintSets(
   boundsByName,
   boundsH,
   aestheticNorm,
-  perInputWidths
+  perInputWidths,
+  perInputModes
 ) {
   const sets = { topology, aestheticMode, channels: {} };
   const isDiscontiguous = topology === "discontiguous" || topology === "custom";
@@ -182,6 +204,9 @@ function buildConstraintSets(
     const mode = constraintMode[ch] || "hard";
     const width = widthForChannel(ch, idx);
     const perWidths = Array.isArray(perInputWidths?.[ch]) ? perInputWidths[ch] : null;
+    const pointModes = Array.isArray(perInputModes)
+      ? Array.from({ length: aestheticNorm.length }, (_, i) => perInputModes[i] === "soft" ? "soft" : mode)
+      : null;
     if (ch === "h") {
       if (isDiscontiguous) {
         const hueVals = valuesForChannel(aestheticNorm, "h");
@@ -189,7 +214,7 @@ function buildConstraintSets(
         const full = arcs.length === 1 && arcs[0][0] <= 1e-6 && arcs[0][1] >= TAU - 1e-6;
         // Store per-point windows for visualization (before merge)
         const pointWindows = buildHuePointWindows(hueVals, perWidths || width);
-        sets.channels.h = { type: "hue", mode, width, intervalsRad: arcs, pointWindows, full };
+        sets.channels.h = { type: "hue", mode, width, intervalsRad: arcs, pointWindows, pointModes, full };
       } else {
         const arc = hueArcFromBounds(boundsH);
         const arcs = arc ? [[arc.startRad, arc.startRad + arc.spanRad]] : [[0, TAU]];
@@ -203,7 +228,7 @@ function buildConstraintSets(
       const full = intervals.length === 1 && intervals[0][0] <= 1e-6 && intervals[0][1] >= 1 - 1e-6;
       // Store per-point windows for visualization (before merge)
       const pointWindows = buildLinearPointWindows(chVals, perWidths || width);
-      sets.channels[ch] = { type: "linear", mode, width, intervals, pointWindows, full };
+      sets.channels[ch] = { type: "linear", mode, width, intervals, pointWindows, pointModes, full };
     } else {
       const b = boundsByName?.[ch] || [0, 1];
       sets.channels[ch] = { type: "linear", mode, width, intervals: [b], full: isFull01(b) };

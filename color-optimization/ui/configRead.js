@@ -1,4 +1,5 @@
 import { channelOrder } from "../core/colorSpaces.js";
+import { sanitizeExplicitBounds } from "../core/constraintBounds.js";
 
 export function parsePalette(raw) {
   const matches = raw.match(/#[0-9a-fA-F]{6}/g) || [];
@@ -56,6 +57,19 @@ function perInputWidthsForSpace(ui, space, state) {
   return out;
 }
 
+function perInputModesForSpace(ui, space, state) {
+  const topology = ui.constraintTopology?.value || "contiguous";
+  const perInput = state?.perInputConstraints;
+  if (topology !== "discontiguous" || !perInput?.enabled) return null;
+  const count =
+    state?.rawInputOverride?.space === space && Array.isArray(state.rawInputOverride.values)
+      ? state.rawInputOverride.values.length
+      : parsePalette(ui.paletteInput.value).length;
+  if (!count) return null;
+  const modes = Array.isArray(perInput.modes) ? perInput.modes : [];
+  return Array.from({ length: count }, (_, i) => modes[i] === "soft" ? "soft" : "hard");
+}
+
 function customWidthsForSpace(ui, space, state) {
   const topology = ui.constraintTopology?.value || "contiguous";
   if (topology !== "custom") return null;
@@ -92,14 +106,30 @@ export function constraintModeForSpace(ui, space) {
   return out;
 }
 
+function defaultSoftConstraintModeForSpace(space) {
+  const out = {};
+  (channelOrder[space] || []).forEach((ch) => {
+    out[ch] = "soft";
+  });
+  return out;
+}
+
 export function readConstraintConfig(ui, space, state) {
+  const topology = ui.constraintTopology?.value || "contiguous";
+  const explicitBounds =
+    topology !== "custom" && state?.sliderConstraintBounds?.space === space
+      ? sanitizeExplicitBounds(state.sliderConstraintBounds.bounds, channelOrder[space] || [])
+      : null;
   const config = {
     constrain: true,
     widths: getWidths(ui),
-    constraintTopology: ui.constraintTopology?.value || "contiguous",
+    constraintTopology: topology,
     aestheticMode: ui.aestheticMode?.value || "none",
     constraintMode: constraintModeForSpace(ui, space),
+    tweakConstraintMode: defaultSoftConstraintModeForSpace(space),
+    explicitBounds,
     perInputWidths: customWidthsForSpace(ui, space, state) || perInputWidthsForSpace(ui, space, state),
+    perInputModes: perInputModesForSpace(ui, space, state),
     customConstraintPoints:
       state?.customConstraints?.space === space && Array.isArray(state.customConstraints.values)
         ? state.customConstraints.values.map((v) => ({ ...v }))
@@ -124,8 +154,18 @@ export function readConfig(ui, state) {
   state.lastRuns = Math.max(1, parseInt(ui.optimRuns.value, 10) || 20);
   const widths = getWidths(ui);
   const constraintMode = constraintModeForSpace(ui, ui.colorSpace.value);
+  const explicitBounds =
+    (ui.constraintTopology?.value || "contiguous") !== "custom" && state?.sliderConstraintBounds?.space === ui.colorSpace.value
+      ? sanitizeExplicitBounds(state.sliderConstraintBounds.bounds, channelOrder[ui.colorSpace.value] || [])
+      : null;
   const nmIterations = Math.max(10, parseInt(ui.nmIters.value, 10) || 260);
   const trajectorySteps = Math.max(1, Math.min(nmIterations, parseInt(ui.pathSteps?.value, 10) || 48));
+  const inputCount = parsePalette(ui.paletteInput.value).length;
+  const tweakInputIndices = Array.isArray(state?.tweakInputIndices)
+    ? state.tweakInputIndices
+      .map((idx) => Math.floor(idx))
+      .filter((idx, pos, arr) => idx >= 0 && idx < inputCount && arr.indexOf(idx) === pos)
+    : [];
   return {
     colorSpace: ui.colorSpace.value,
     colorwheelSpace: ui.colorwheelSpace.value,
@@ -135,7 +175,8 @@ export function readConfig(ui, state) {
     distanceMetric: ui.distanceMetric?.value || "de2000",
     meanType: ui.meanType?.value || "harmonic",
     meanP: ui.meanP ? parseFloat(ui.meanP.value) : undefined,
-    nColsToAdd: Math.max(1, parseInt(ui.colorsToAdd.value, 10) || 1),
+    nColsToAdd: Math.max(0, parseInt(ui.colorsToAdd.value, 10) || 0),
+    tweakInputIndices,
     nOptimRuns: state.lastRuns,
     nmIterations,
     trajectorySteps,
@@ -143,7 +184,10 @@ export function readConfig(ui, state) {
     constraintTopology: ui.constraintTopology?.value || "contiguous",
     aestheticMode: ui.aestheticMode?.value || "none",
     constraintMode,
+    tweakConstraintMode: defaultSoftConstraintModeForSpace(ui.colorSpace.value),
+    explicitBounds,
     perInputWidths: customWidthsForSpace(ui, ui.colorSpace.value, state) || perInputWidthsForSpace(ui, ui.colorSpace.value, state),
+    perInputModes: perInputModesForSpace(ui, ui.colorSpace.value, state),
     customConstraintPoints:
       state?.customConstraints?.space === ui.colorSpace.value && Array.isArray(state.customConstraints.values)
         ? state.customConstraints.values.map((v) => ({ ...v }))

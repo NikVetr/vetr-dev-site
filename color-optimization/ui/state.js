@@ -5,6 +5,7 @@ export function createInitialState() {
     rawCurrentColors: [],
     rawNewColors: [],
     rawBestColors: [],
+    optimizedColorRoles: [],
     rawSpace: null,
     newRawSpace: null,
     running: false,
@@ -20,12 +21,18 @@ export function createInitialState() {
     selectedResultIdx: null,
     customConstraints: null,
     customConstraintSelection: null,
+    sliderConstraintBounds: null,
+    preserveSliderConstraintBoundsOnce: false,
     imageInput: null,
     suppressConstraintTopologyHistory: false,
     perInputConstraints: {
       enabled: false,
+      autoEnabledForTweaks: false,
       sync: { h: false, sc: false, l: false },
       widths: { h: [], sc: [], l: [] },
+      modes: [],
     },
+    tweakInputIndices: [],
+    hoveredTweakInputIndex: null,
   };
 }

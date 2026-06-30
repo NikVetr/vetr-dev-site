@@ -14,8 +14,13 @@ export function projectToGamutWithinHardConstraints(row, prep) {
   const space = prep.colorSpace;
   const gamutPreset = prep.gamutPreset || "srgb";
   const ranges = prep.ranges || csRanges[space];
-  const constraintSets = prep.bounds?.constraintSets;
-  const topology = prep.constraintTopology || constraintSets?.topology || "contiguous";
+  const rawConstraintSets = prep.bounds?.constraintSets;
+  const rawTopology = prep.constraintTopology || rawConstraintSets?.topology || "contiguous";
+  const constraintSets =
+    rawTopology === "discontiguous"
+      ? (prep.bounds?.globalConstraintSets || rawConstraintSets)
+      : rawConstraintSets;
+  const topology = rawTopology;
   if (!ranges || !constraintSets?.channels) {
     return projectToGamut(row, space, gamutPreset, space);
   }
@@ -91,13 +96,13 @@ export function normSatisfiesHardConstraints(norm, constraintSets, topology) {
   return hardConstraintRegionIndex(norm, constraintSets, topology) != null;
 }
 
-export function hardConstraintRegionIndex(norm, constraintSets, topology) {
+export function hardConstraintRegionIndex(norm, constraintSets, topology, tolerance = 1e-8) {
   if (!constraintSets?.channels) return 0;
   if (topology === "custom" || topology === "discontiguous") {
-    return containingHardPointWindowIndex(norm, constraintSets);
+    return containingHardPointWindowIndex(norm, constraintSets, tolerance);
   }
   const clamped = clampNormToHardConstraints(norm, constraintSets, topology, norm);
-  return Object.keys(clamped).every((ch) => Math.abs((norm[ch] ?? 0) - (clamped[ch] ?? 0)) <= 1e-8)
+  return Object.keys(clamped).every((ch) => Math.abs((norm[ch] ?? 0) - (clamped[ch] ?? 0)) <= tolerance)
     ? 0
     : null;
 }
@@ -132,11 +137,11 @@ export function nearestHardPointWindowIndex(norm, constraintSets) {
   return pointWindowIndex(norm, constraintSets, false);
 }
 
-export function containingHardPointWindowIndex(norm, constraintSets) {
-  return pointWindowIndex(norm, constraintSets, true);
+export function containingHardPointWindowIndex(norm, constraintSets, tolerance = 1e-8) {
+  return pointWindowIndex(norm, constraintSets, true, tolerance);
 }
 
-function pointWindowIndex(norm, constraintSets, requireInside) {
+function pointWindowIndex(norm, constraintSets, requireInside, tolerance = 1e-8) {
   const channels = Object.keys(constraintSets.channels || {});
   let count = 0;
   channels.forEach((ch) => {
@@ -180,7 +185,7 @@ function pointWindowIndex(norm, constraintSets, requireInside) {
       bestIndex = i;
     }
   }
-  if (requireInside && bestViolation > 1e-16) return null;
+  if (requireInside && bestViolation > tolerance * tolerance) return null;
   return bestIndex;
 }
 

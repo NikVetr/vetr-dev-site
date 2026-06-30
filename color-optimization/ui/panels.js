@@ -8,6 +8,7 @@ import {
   encodeColor,
   rangeFromPreset,
   projectToGamut,
+  normalizeWithRange,
 } from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
@@ -24,6 +25,50 @@ const resolvabilitySettings = {
   thresholdFactor: 2,
   perPanelMode: new Map(),
 };
+
+export function buildResolvabilityColorEntries(inputColors = [], outputColors = [], roles = [], activeTweakIndices = null) {
+  const roleRows = Array.isArray(roles) && roles.length === outputColors.length ? roles : [];
+  const activeTweaks = activeTweakIndices == null ? null : new Set(activeTweakIndices || []);
+  const replacedInputIndices = new Set();
+  roleRows.forEach((role) => {
+    if (
+      role?.kind === "tweak" &&
+      Number.isFinite(role.inputIndex) &&
+      (!activeTweaks || activeTweaks.has(role.inputIndex))
+    ) {
+      replacedInputIndices.add(Math.floor(role.inputIndex));
+    }
+  });
+
+  const entries = [];
+  inputColors.forEach((hex, inputIndex) => {
+    if (replacedInputIndices.has(inputIndex)) return;
+    entries.push({ hex, kind: "input", inputIndex });
+  });
+  const inputCount = entries.length;
+
+  outputColors.forEach((hex, outputIndex) => {
+    const role = roleRows[outputIndex] || null;
+    const isActiveTweak =
+      role?.kind === "tweak" &&
+      Number.isFinite(role.inputIndex) &&
+      (!activeTweaks || activeTweaks.has(role.inputIndex));
+    entries.push({
+      hex,
+      kind: isActiveTweak ? "tweak" : "output",
+      outputIndex,
+      sourceInputIndex: isActiveTweak
+        ? Math.floor(role.inputIndex)
+        : null,
+    });
+  });
+
+  return {
+    entries,
+    colors: entries.map((entry) => entry.hex),
+    inputCount,
+  };
+}
 
 function resolvabilityModeFor(type) {
   if (resolvabilitySettings.sync) return resolvabilitySettings.mode;
@@ -52,6 +97,7 @@ export function createPanels(ui, plotOrder = plotOrderDefault) {
       refs.resolvability.setThreshold(threshold, metric);
       refs.resolvability.update({
         colors: refs.resolvabilityColors || [],
+        inputCount: refs.resolvabilityInputCount || 0,
         metric,
         threshold,
         mode,
@@ -171,6 +217,7 @@ export function createPanels(ui, plotOrder = plotOrderDefault) {
     ui.panelMap[type] = {
       type,
       panel,
+      labelRow,
       currList,
       newList,
       channelBars,
@@ -197,7 +244,7 @@ export function updateChannelHeadings(ui, vizSpace, plotOrder = plotOrderDefault
   });
 }
 
-export function renderSwatchColumn(container, colors, type, shape, cvdModel = "legacy", onDelete = null) {
+export function renderSwatchColumn(container, colors, type, shape, cvdModel = "legacy", onDelete = null, options = {}) {
   container.innerHTML = "";
   if (!colors || !colors.length) {
     const empty = document.createElement("div");
@@ -207,9 +254,22 @@ export function renderSwatchColumn(container, colors, type, shape, cvdModel = "l
     container.appendChild(empty);
     return;
   }
-  colors.forEach((c, idx) => {
+  const tweaked = new Set(options.tweakedInputIndices || []);
+  colors.forEach((entry, idx) => {
+    const item = typeof entry === "string" ? { hex: entry } : (entry || {});
+    const c = item.hex;
+    if (!c && item.placeholder) {
+      const placeholder = document.createElement("div");
+      placeholder.className = "swatch swatch-placeholder";
+      placeholder.setAttribute("aria-hidden", "true");
+      container.appendChild(placeholder);
+      return;
+    }
     const sw = document.createElement("div");
-    sw.className = "swatch";
+    sw.className = `swatch${item.tweaked ? " is-tweaked" : ""}${item.tweakOutput ? " is-tweak-output" : ""}`;
+    if (Number.isFinite(item.inputIndex)) sw.dataset.inputIndex = String(item.inputIndex);
+    if (Number.isFinite(item.sourceInputIndex)) sw.dataset.sourceInputIndex = String(item.sourceInputIndex);
+    if (Number.isFinite(item.outputIndex)) sw.dataset.outputIndex = String(item.outputIndex);
     sw.style.position = "relative";
     const sim = applyCvdHex(c, type, 1, cvdModel);
     const splitPct = type === "none" ? 1 : 0.1;
@@ -226,6 +286,29 @@ export function renderSwatchColumn(container, colors, type, shape, cvdModel = "l
     sw.style.color = contrastColor(sim);
     sw.style.justifyContent = "flex-end";
     sw.style.textAlign = "right";
+    const controlLeftPos = type === "none" ? "2px" : `calc(${splitPct * 100}% + 2px)`;
+    const tweakLabelLeftPos = type === "none" ? "4px" : `calc(${splitPct * 100}% + 1px)`;
+    const controlTextColor = contrastColor(sim);
+    const hoverTweakIndex = Number.isFinite(item.inputIndex)
+      ? item.inputIndex
+      : Number.isFinite(item.sourceInputIndex)
+        ? item.sourceInputIndex
+        : null;
+    if (Number.isFinite(hoverTweakIndex) && (item.tweaked || item.tweakOutput) && options.onTweakHover) {
+      const enterTweakHover = () => options.onTweakHover(hoverTweakIndex);
+      const leaveTweakHover = (evt) => {
+        if (evt?.relatedTarget && sw.contains(evt.relatedTarget)) return;
+        options.onTweakHover(null);
+      };
+      sw.addEventListener("mouseenter", enterTweakHover);
+      sw.addEventListener("mouseover", enterTweakHover);
+      sw.addEventListener("pointerenter", enterTweakHover);
+      sw.addEventListener("mouseleave", leaveTweakHover);
+      sw.addEventListener("mouseout", leaveTweakHover);
+      sw.addEventListener("pointerleave", leaveTweakHover);
+      sw.addEventListener("focusin", () => options.onTweakHover(hoverTweakIndex));
+      sw.addEventListener("focusout", () => options.onTweakHover(null));
+    }
 
     // Add delete button (hover to show)
     if (onDelete) {
@@ -233,11 +316,10 @@ export function renderSwatchColumn(container, colors, type, shape, cvdModel = "l
       deleteBtn.className = "swatch-delete";
       deleteBtn.textContent = "\u00d7"; // × symbol
       // For CVD swatches, position button on the simulated color (right of separator)
-      const leftPos = type === "none" ? "2px" : `calc(${splitPct * 100}% + 2px)`;
       deleteBtn.style.cssText = `
         position: absolute;
         top: 2px;
-        left: ${leftPos};
+        left: ${controlLeftPos};
         width: 14px;
         height: 14px;
         padding: 0;
@@ -253,11 +335,37 @@ export function renderSwatchColumn(container, colors, type, shape, cvdModel = "l
       `;
       deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        onDelete(idx);
+        onDelete(Number.isFinite(item.outputIndex) ? item.outputIndex : idx);
       });
       sw.appendChild(deleteBtn);
       sw.addEventListener("mouseenter", () => { deleteBtn.style.opacity = "1"; });
       sw.addEventListener("mouseleave", () => { deleteBtn.style.opacity = "0"; });
+    }
+
+    if (options.onToggleTweak && shape === "circle") {
+      const sourceIdx = Number.isFinite(item.inputIndex) ? item.inputIndex : idx;
+      const tweakBtn = document.createElement("button");
+      tweakBtn.className = "swatch-tweak";
+      tweakBtn.type = "button";
+      tweakBtn.textContent = "tweak";
+      tweakBtn.setAttribute("aria-pressed", String(tweaked.has(sourceIdx)));
+      tweakBtn.title = tweaked.has(sourceIdx) ? "Disable tweaking for this input color" : "Optimize this input color";
+      tweakBtn.style.left = tweakLabelLeftPos;
+      tweakBtn.style.color = controlTextColor;
+      tweakBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        options.onToggleTweak(sourceIdx);
+      });
+      sw.appendChild(tweakBtn);
+    }
+
+    if (item.tweakOutput) {
+      const tweakLabel = document.createElement("span");
+      tweakLabel.className = "swatch-tweak-label";
+      tweakLabel.textContent = "tweaked";
+      tweakLabel.style.left = tweakLabelLeftPos;
+      tweakLabel.style.color = controlTextColor;
+      sw.appendChild(tweakLabel);
     }
 
     const label = document.createElement("span");
@@ -316,6 +424,30 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
         };
       })
       : [];
+  const preview = state.customConstraintPreview;
+  const hasPreview =
+    preview &&
+    preview.panelType === type &&
+    preview.space &&
+    preview.values &&
+    ui.colorSpace?.value === barSpace;
+  const previewVals =
+    hasPreview
+      ? preview.space === barSpace
+        ? preview.values
+        : convertColorValues(preview.values, preview.space, barSpace)
+      : null;
+  const previewWidths = hasPreview && preview.space === barSpace ? (preview.widths || {}) : {};
+  const previewConstraintValues =
+    previewVals
+      ? [{
+        role: "constraint",
+        index: null,
+        color: encodeColor(previewVals, barSpace),
+        shape: "diamond",
+        vals: previewVals,
+      }]
+      : [];
   const valueSet = combinedValues.map((v) => v.vals);
   const presetRange = rangeFromPreset(barSpace, gamutPreset) || csRanges[barSpace];
   const baseRange = barSpace === "jzazbz" ? presetRange : csRanges[barSpace];
@@ -360,7 +492,26 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
 
   if (state.bounds && ui.colorSpace.value === barSpace) {
     const baseRange = state.bounds.ranges || csRanges[barSpace];
-    const constraintSets = state.bounds.constraintSets;
+    const rawConstraintSets = state.bounds.globalConstraintSets || state.bounds.constraintSets;
+    const filterTweakPointWindows = (constraintSets) => {
+      const topology = constraintSets?.topology || "contiguous";
+      if (topology !== "discontiguous" || !constraintSets?.channels) return constraintSets;
+      const channels = {};
+      Object.entries(constraintSets.channels).forEach(([ch, channel]) => {
+        if (!Array.isArray(channel?.pointWindows) || !Array.isArray(channel?.pointModes)) {
+          channels[ch] = channel;
+          return;
+        }
+        const allSoft = channel.pointModes.length > 0 && channel.pointModes.every((mode) => mode === "soft");
+        const allHard = channel.pointModes.length > 0 && channel.pointModes.every((mode) => mode === "hard");
+        channels[ch] = {
+          ...channel,
+          mode: allSoft ? "soft" : allHard ? "hard" : channel.mode,
+        };
+      });
+      return { ...constraintSets, channels };
+    };
+    const constraintSets = filterTweakPointWindows(rawConstraintSets);
     const topology = constraintSets?.topology || "contiguous";
     const useHardBoundaries = topology === "custom";
     const toBar = (u, cfg) => {
@@ -377,6 +528,7 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
       if (!constraint) return;
       const mode = constraint.mode || "hard";
       const isDiscontiguous = topology === "discontiguous" || topology === "custom";
+      if (isDiscontiguous && !constraint.pointWindows?.length) return;
 
       if (cfg.key === "h") {
         const segments = normalizeHueSegments(constraint.intervalsRad || [], hueBarOffsetNorm);
@@ -501,6 +653,35 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
     });
   }
 
+  if (previewVals) {
+    const baseRange = state.bounds?.ranges || csRanges[barSpace];
+    const norm = normalizeWithRange(previewVals, baseRange, barSpace);
+    const toBar = (u, cfg) => {
+      const baseMin = baseRange.min?.[cfg.key] ?? cfg.min;
+      const baseMax = baseRange.max?.[cfg.key] ?? cfg.max;
+      const val = u * (baseMax - baseMin) + baseMin;
+      return clamp01(normalize(val, cfg.min, cfg.max));
+    };
+
+    configs.forEach((cfg, idx) => {
+      const bar = barObjs[idx]?.bar;
+      if (!bar) return;
+      const width = clamp01(previewWidths[cfg.key] ?? 0);
+      if (width <= 0) return;
+      if (cfg.key === "h") {
+        const center = (((norm.h ?? 0) - hueBarOffsetNorm) % 1 + 1) % 1;
+        const radius = Math.max((1 - width) * 0.5, 0);
+        const min = center - radius;
+        const max = center + radius;
+        addPreviewWindow(bar, min, max, true);
+        return;
+      }
+      const radius = Math.max((1 - width) * 0.5, 0);
+      const window = linearWindowFromCenter(clamp01(norm[cfg.key] ?? 0.5), radius);
+      addPreviewWindow(bar, toBar(window.min, cfg), toBar(window.max, cfg), false);
+    });
+  }
+
   const drawDots = (entry) => {
     const sim = applyCvdHex(entry.color, type, 1, cvdModel);
     const decoded = clipToGamut
@@ -533,11 +714,26 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
 
   combined.forEach(drawDots);
   constraintValues.forEach(drawDots);
+  previewConstraintValues.forEach(drawDots);
 }
 
 function clamp01(v) {
   if (!Number.isFinite(v)) return 0;
   return Math.max(0, Math.min(1, v));
+}
+
+function linearWindowFromCenter(center, radius) {
+  let min = center - radius;
+  let max = center + radius;
+  if (min < 0) {
+    max -= min;
+    min = 0;
+  }
+  if (max > 1) {
+    min -= max - 1;
+    max = 1;
+  }
+  return { min: clamp01(min), max: clamp01(max) };
 }
 
 function addFadeSegment(bar, start, end) {
@@ -699,6 +895,66 @@ function addBoundary(bar, at) {
   bar.appendChild(makeDashed());
 }
 
+function addPreviewWindow(bar, start, end, wraps = false) {
+  const drawSegment = (a, b) => {
+    const lo = clamp01(a);
+    const hi = clamp01(b);
+    if (hi - lo > 1e-6) addPreviewFill(bar, lo, hi);
+    addPreviewBoundary(bar, lo);
+    addPreviewBoundary(bar, hi);
+  };
+  if (wraps) {
+    let a = ((start % 1) + 1) % 1;
+    let b = ((end % 1) + 1) % 1;
+    const span = end - start;
+    if (span >= 0.999) return;
+    if (a <= b) drawSegment(a, b);
+    else {
+      drawSegment(0, b);
+      drawSegment(a, 1);
+    }
+    return;
+  }
+  drawSegment(start, end);
+}
+
+function addPreviewFill(bar, start, end) {
+  const el = document.createElement("div");
+  el.style.position = "absolute";
+  el.style.left = "-3px";
+  el.style.right = "-3px";
+  el.style.top = `${start * 100}%`;
+  el.style.height = `${Math.max((end - start) * 100, 1)}%`;
+  el.style.background = "rgba(20,184,166,0.18)";
+  el.style.pointerEvents = "none";
+  bar.appendChild(el);
+}
+
+function addPreviewBoundary(bar, at) {
+  const y = clamp01(at) * 100;
+  const under = document.createElement("div");
+  under.style.position = "absolute";
+  under.style.left = "-4px";
+  under.style.right = "-4px";
+  under.style.top = `${y}%`;
+  under.style.height = "4px";
+  under.style.transform = "translateY(-2px)";
+  under.style.pointerEvents = "none";
+  under.style.background = "rgba(255,255,255,0.95)";
+  bar.appendChild(under);
+
+  const line = document.createElement("div");
+  line.style.position = "absolute";
+  line.style.left = "-4px";
+  line.style.right = "-4px";
+  line.style.top = `${y}%`;
+  line.style.height = "3px";
+  line.style.transform = "translateY(-1.5px)";
+  line.style.pointerEvents = "none";
+  line.style.background = "rgba(20,184,166,0.78)";
+  bar.appendChild(line);
+}
+
 // Per-point window boundary for discontiguous mode
 function addPointWindowBoundary(bar, at) {
   const y = clamp01(at) * 100;
@@ -779,6 +1035,78 @@ function isFullSegments(segments) {
   return segments.length === 1 && segments[0][0] <= 1e-6 && segments[0][1] >= 1 - 1e-6;
 }
 
+export function buildOutputSwatchEntries(inputColors, outputColors, roles = [], activeTweakIndices = []) {
+  if (!Array.isArray(outputColors) || !outputColors.length) return outputColors || [];
+  const roleRows = Array.isArray(roles) && roles.length === outputColors.length ? roles : null;
+  if (!roleRows) return outputColors;
+  const activeTweaks = new Set(activeTweakIndices || []);
+  const byInput = new Map();
+  const added = [];
+  roleRows.forEach((role, outputIndex) => {
+    const isActiveTweak = role?.kind === "tweak" && Number.isFinite(role.inputIndex) && activeTweaks.has(role.inputIndex);
+    const entry = {
+      hex: outputColors[outputIndex],
+      outputIndex,
+      tweakOutput: isActiveTweak,
+      sourceInputIndex: isActiveTweak ? role.inputIndex : null,
+    };
+    if (isActiveTweak) byInput.set(role.inputIndex, entry);
+    else added.push(entry);
+  });
+  if (!byInput.size) return added;
+  const maxTweakInputIndex = Math.max(...byInput.keys());
+  const rows = [];
+  let addedCursor = 0;
+  inputColors.slice(0, maxTweakInputIndex + 1).forEach((_, inputIndex) => {
+    if (byInput.has(inputIndex)) rows.push(byInput.get(inputIndex));
+    else if (addedCursor < added.length) rows.push(added[addedCursor++]);
+    else rows.push({ placeholder: true, sourceInputIndex: inputIndex });
+  });
+  return rows.concat(added.slice(addedCursor));
+}
+
+function drawSwatchConnectors(refs) {
+  if (!refs?.labelRow || !refs.currList || !refs.newList) return;
+  refs.labelRow.querySelector(".swatch-connector-overlay")?.remove();
+  const outputs = Array.from(refs.newList.querySelectorAll(".swatch.is-tweak-output"));
+  if (!outputs.length) return;
+
+  const hostRect = refs.labelRow.getBoundingClientRect();
+  if (!hostRect.width || !hostRect.height) return;
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.classList.add("swatch-connector-overlay");
+  svg.setAttribute("viewBox", `0 0 ${hostRect.width} ${hostRect.height}`);
+  svg.setAttribute("preserveAspectRatio", "none");
+
+  const makeLine = (x1, y1, x2, y2) => {
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", String(x1));
+    line.setAttribute("y1", String(y1));
+    line.setAttribute("x2", String(x2));
+    line.setAttribute("y2", String(y2));
+    line.setAttribute("stroke", "#0f172a");
+    line.setAttribute("stroke-width", "1.8");
+    line.setAttribute("stroke-linecap", "round");
+    return line;
+  };
+
+  outputs.forEach((outEl) => {
+    const sourceIdx = parseInt(outEl.dataset.sourceInputIndex || "", 10);
+    if (!Number.isFinite(sourceIdx)) return;
+    const inputEl = refs.currList.querySelector(`.swatch[data-input-index="${sourceIdx}"]`);
+    if (!inputEl) return;
+    const inRect = inputEl.getBoundingClientRect();
+    const outRect = outEl.getBoundingClientRect();
+    const x1 = inRect.right - hostRect.left;
+    const y1 = inRect.top + inRect.height / 2 - hostRect.top;
+    const x2 = outRect.left - hostRect.left;
+    const y2 = outRect.top + outRect.height / 2 - hostRect.top;
+    svg.appendChild(makeLine(x1, y1, x2, y2));
+  });
+
+  refs.labelRow.appendChild(svg);
+}
+
 export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpace, optSpace, gamutMode = "auto", vizOpts = {}) {
   const colors = parsePalette(ui.paletteInput.value);
   state.currentColors = colors;
@@ -799,13 +1127,33 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
   const resolvedVizSpace = vizSpace || ui.colorwheelSpace.value;
   // Get delete callbacks from state (set up in attachVisualizationInteractions)
   const deleteCallbacks = state.deleteCallbacks || {};
+  const tweakedInputIndices = Array.isArray(state.tweakInputIndices) ? state.tweakInputIndices : [];
+  const inputEntries = colors.map((hex, idx) => ({ hex, inputIndex: idx, tweaked: tweakedInputIndices.includes(idx) }));
+  const outputEntries = buildOutputSwatchEntries(colors, state.newColors || [], state.optimizedColorRoles || [], tweakedInputIndices);
+  const setHoveredTweakInput = (idx) => {
+    const next = Number.isFinite(idx) ? Math.floor(idx) : null;
+    if ((state.hoveredTweakInputIndex ?? null) === next) return;
+    state.hoveredTweakInputIndex = next;
+    plotOrder.forEach((panelType) => drawWheel(panelType, ui, state, {
+      ...vizOpts,
+      vizSpace: resolvedVizSpace,
+      gamutMode,
+    }));
+  };
   plotOrder.forEach((type) => {
     const refs = ui.panelMap[type];
     if (!refs) return;
     refs.panel.style.display = "flex";
     const cvdModel = ui?.cvdModel?.value || "legacy";
-    renderSwatchColumn(refs.currList, colors, type, "circle", cvdModel, deleteCallbacks.onDeleteInput);
-    renderSwatchColumn(refs.newList, state.newColors, type, "square", cvdModel, deleteCallbacks.onDeleteOutput);
+    renderSwatchColumn(refs.currList, inputEntries, type, "circle", cvdModel, deleteCallbacks.onDeleteInput, {
+      tweakedInputIndices,
+      onToggleTweak: deleteCallbacks.onToggleTweak,
+      onTweakHover: setHoveredTweakInput,
+    });
+    renderSwatchColumn(refs.newList, outputEntries, type, "square", cvdModel, deleteCallbacks.onDeleteOutput, {
+      onTweakHover: setHoveredTweakInput,
+    });
+    drawSwatchConnectors(refs);
     renderChannelBars(refs.channelBars, state.currentColors, state.newColors, type, state, ui, {
       vizSpace: resolvedVizSpace,
       gamutMode,
@@ -823,13 +1171,28 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
       const inputSwatches = Array.from(refs.currList.querySelectorAll(".swatch"));
       const outputSwatches = Array.from(refs.newList.querySelectorAll(".swatch"));
       const allSwatches = inputSwatches.concat(outputSwatches);
+      const resolvability = buildResolvabilityColorEntries(
+        colors,
+        state.newColors || [],
+        state.optimizedColorRoles || [],
+        tweakedInputIndices
+      );
+      const swatchesByResolvabilityIndex = resolvability.entries.map((entry) => {
+        if (entry.kind === "input") {
+          return refs.currList.querySelector(`.swatch[data-input-index="${entry.inputIndex}"]`);
+        }
+        if (Number.isFinite(entry.outputIndex)) {
+          return refs.newList.querySelector(`.swatch[data-output-index="${entry.outputIndex}"]`);
+        }
+        return null;
+      });
       const clearHighlight = () => {
         allSwatches.forEach((el) => el.classList.remove("is-highlight"));
       };
       const highlightIndices = (indices) => {
         clearHighlight();
         (indices || []).forEach((idx) => {
-          const el = allSwatches[idx];
+          const el = swatchesByResolvabilityIndex[idx];
           if (el) el.classList.add("is-highlight");
         });
       };
@@ -847,18 +1210,17 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
         }
         highlightIndices([i]);
       };
-      const combined = colors.concat(state.newColors || []);
-      const inputCount = colors.length;
       const metric = ui.distanceMetric?.value || "de2000";
       const threshold = resolvabilityThreshold(metric);
       const mode = resolvabilityModeFor(type);
       const bg = ui?.bgEnabled?.checked ? ui.bgColor?.value || "#ffffff" : "#ffffff";
-      refs.resolvabilityColors = combined;
+      refs.resolvabilityColors = resolvability.colors;
+      refs.resolvabilityInputCount = resolvability.inputCount;
       refs.resolvabilityHighlightPair = onHighlightPair;
       refs.resolvabilityHighlightColor = onHighlightColor;
       refs.resolvability.update({
-        colors: combined,
-        inputCount,
+        colors: resolvability.colors,
+        inputCount: resolvability.inputCount,
         metric,
         threshold,
         mode,

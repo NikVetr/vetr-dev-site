@@ -7,6 +7,7 @@ import {
   discriminabilityLabel,
   metricJnd,
 } from "../core/resolvability.js";
+import { buildOutputSwatchEntries, buildResolvabilityColorEntries } from "../ui/panels.js";
 
 test("computeDistanceMatrix is symmetric with zero diagonal", () => {
   const coords = [
@@ -49,4 +50,73 @@ test("discriminabilityLabel respects boundaries", () => {
   assert.equal(discriminabilityLabel(2, "de2000"), "fair");
   assert.equal(discriminabilityLabel(5, "de2000"), "good");
   assert.equal(discriminabilityLabel(10, "de2000"), "great");
+});
+
+test("resolvability colors replace tweaked inputs after tweak outputs exist", () => {
+  const result = buildResolvabilityColorEntries(
+    ["#0000A8", "#FF5400", "#2C3C30"],
+    ["#0000AD", "#FF5900", "#2B3B19"],
+    [
+      { kind: "tweak", inputIndex: 0, pointIndex: 0 },
+      { kind: "tweak", inputIndex: 1, pointIndex: 1 },
+      { kind: "add", addIndex: 0 },
+    ]
+  );
+
+  assert.deepEqual(result.colors, ["#2C3C30", "#0000AD", "#FF5900", "#2B3B19"]);
+  assert.equal(result.inputCount, 1);
+  assert.deepEqual(
+    result.entries.map((entry) => ({
+      kind: entry.kind,
+      inputIndex: entry.inputIndex ?? null,
+      outputIndex: entry.outputIndex ?? null,
+      sourceInputIndex: entry.sourceInputIndex ?? null,
+    })),
+    [
+      { kind: "input", inputIndex: 2, outputIndex: null, sourceInputIndex: null },
+      { kind: "tweak", inputIndex: null, outputIndex: 0, sourceInputIndex: 0 },
+      { kind: "tweak", inputIndex: null, outputIndex: 1, sourceInputIndex: 1 },
+      { kind: "output", inputIndex: null, outputIndex: 2, sourceInputIndex: null },
+    ]
+  );
+});
+
+test("resolvability colors keep planned tweaks before outputs exist", () => {
+  const result = buildResolvabilityColorEntries(
+    ["#0000A8", "#FF5400"],
+    [],
+    []
+  );
+
+  assert.deepEqual(result.colors, ["#0000A8", "#FF5400"]);
+  assert.equal(result.inputCount, 2);
+});
+
+test("output swatches pin tweaked outputs and fill untweaked rows with added colors", () => {
+  const entries = buildOutputSwatchEntries(
+    ["#111111", "#222222", "#333333", "#444444"],
+    ["#AAAAAA", "#BBBBBB", "#CCCCCC", "#DDDDDD"],
+    [
+      { kind: "tweak", inputIndex: 1, pointIndex: 1 },
+      { kind: "add", addIndex: 0 },
+      { kind: "add", addIndex: 1 },
+      { kind: "add", addIndex: 2 },
+    ],
+    [1]
+  );
+
+  assert.deepEqual(
+    entries.map((entry) => ({
+      hex: entry.hex,
+      outputIndex: entry.outputIndex ?? null,
+      sourceInputIndex: entry.sourceInputIndex ?? null,
+      tweakOutput: Boolean(entry.tweakOutput),
+    })),
+    [
+      { hex: "#BBBBBB", outputIndex: 1, sourceInputIndex: null, tweakOutput: false },
+      { hex: "#AAAAAA", outputIndex: 0, sourceInputIndex: 1, tweakOutput: true },
+      { hex: "#CCCCCC", outputIndex: 2, sourceInputIndex: null, tweakOutput: false },
+      { hex: "#DDDDDD", outputIndex: 3, sourceInputIndex: null, tweakOutput: false },
+    ]
+  );
 });
