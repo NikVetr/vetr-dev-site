@@ -152,6 +152,18 @@ export function drawWheel(type, ui, state, opts = {}) {
     state.bounds && ui.colorSpace.value === wheelSpace
       ? { ...state.bounds, constraintSets: state.bounds.globalConstraintSets || state.bounds.constraintSets }
       : null;
+  const activeTweakInputIndex = Number.isFinite(state.hoveredTweakInputIndex)
+    ? Math.floor(state.hoveredTweakInputIndex)
+    : null;
+  const activeTweakConstraintSets =
+    state.bounds?.constraintSets && activeTweakInputIndex != null
+      ? constraintSetsForPointDisplay(state.bounds.constraintSets, activeTweakInputIndex)
+      : null;
+  const hasSoftTweakConstraintPreview =
+    activeTweakInputIndex != null &&
+    Array.isArray(state.tweakInputIndices) &&
+    state.tweakInputIndices.includes(activeTweakInputIndex) &&
+    state.perInputConstraints?.modes?.[activeTweakInputIndex] === "soft";
   const activeConstraintDomain =
     displayBounds
       ? hardContiguousHiddenConstraintRange(displayBounds, wheelSpace, visibleConstraintChannels)
@@ -160,10 +172,14 @@ export function drawWheel(type, ui, state, opts = {}) {
     displayBounds
       ? hardContiguousVisibleConstraintGuides(displayBounds, wheelSpace, visibleConstraintChannels)
       : [];
+  const discontiguousHiddenConstraintChannels =
+    discontiguousHiddenHardPointWindowChannels(displayBounds, wheelSpace, visibleConstraintChannels);
   const visibleSoftConstraintAlpha =
-    displayBounds
-      ? maxSoftConstraintOverlayAlpha(hasSoftConstraintForChannels(displayBounds.constraintSets, visibleConstraintChannels))
-      : 0;
+    maxSoftConstraintOverlayAlpha(
+      hasSoftConstraintForChannels(displayBounds?.constraintSets, visibleConstraintChannels) ||
+      hasSoftConstraintForChannels(activeTweakConstraintSets, visibleConstraintChannels) ||
+      hasSoftTweakConstraintPreview
+    );
   const hiddenConstraintChannels =
     activeConstraintDomain?.channels?.filter((ch) => !visibleConstraintChannels.includes(ch)) || [];
   let radius = baseRadius;
@@ -426,10 +442,8 @@ export function drawWheel(type, ui, state, opts = {}) {
     const baseRange = displayBounds.ranges || csRanges[wheelSpaceCurrent];
     const constraintSets = displayBounds.constraintSets;
     const topology = constraintSets?.topology || "contiguous";
-    const tweakConstraintSets =
-      state.bounds?.constraintSets && Number.isFinite(state.hoveredTweakInputIndex)
-        ? constraintSetsForPointDisplay(state.bounds.constraintSets, state.hoveredTweakInputIndex)
-        : null;
+    const tweakConstraintSets = activeTweakConstraintSets;
+    const globalConstraintOptions = { hardOverlaySoftAlpha: visibleSoftConstraintAlpha };
 
     const toVal = (u, min, max) => min + u * (max - min);
     const mapRadius = (u) => {
@@ -447,16 +461,16 @@ export function drawWheel(type, ui, state, opts = {}) {
     try {
       drawClippedToBoundary(activeGamutClipBoundary, () => {
         if (!isRectWheel && constraintSets?.channels) {
-          drawPolarConstraints(ctx, cx, cy, radius, constraintSets, scKey, topology, mapRadius, inputColors);
+          drawPolarConstraints(ctx, cx, cy, radius, constraintSets, scKey, topology, mapRadius, inputColors, globalConstraintOptions);
         }
 
         if (isRectWheel && constraintSets?.channels && rectKeys) {
-          drawRectConstraints(ctx, cx, cy, radius, constraintSets, rectKeys, baseRange, ranges, topology, inputColors);
+          drawRectConstraints(ctx, cx, cy, radius, constraintSets, rectKeys, baseRange, ranges, topology, inputColors, globalConstraintOptions);
         }
 
         if (tweakConstraintSets?.channels) {
           const hoveredColor = inputColors[state.hoveredTweakInputIndex] || null;
-          const tweakOverlayOptions = { showSoftGuides: false };
+          const tweakOverlayOptions = { showSoftGuides: false, hardOverlaySoftAlpha: visibleSoftConstraintAlpha };
           if (!isRectWheel) {
             drawPolarConstraints(ctx, cx, cy, radius, tweakConstraintSets, scKey, topology, mapRadius, hoveredColor ? [hoveredColor] : [], tweakOverlayOptions);
           } else if (rectKeys) {
@@ -474,6 +488,20 @@ export function drawWheel(type, ui, state, opts = {}) {
     return channelKeys.filter(Boolean).some((ch) => {
       const constraint = constraintSets.channels[ch];
       return constraint?.mode === "soft";
+    });
+  }
+
+  function discontiguousHiddenHardPointWindowChannels(bounds, space, visibleChannels = []) {
+    const sets = bounds?.constraintSets;
+    if (!sets?.channels || (sets.topology !== "discontiguous" && sets.topology !== "custom")) return [];
+    const visible = new Set((visibleChannels || []).filter(Boolean));
+    return (channelOrder[space] || []).filter((ch) => {
+      if (ch === "h" || visible.has(ch)) return false;
+      const constraint = sets.channels[ch];
+      return constraint?.mode === "hard" &&
+        constraint.type === "linear" &&
+        Array.isArray(constraint.pointWindows) &&
+        constraint.pointWindows.length;
     });
   }
 
@@ -509,7 +537,7 @@ export function drawWheel(type, ui, state, opts = {}) {
         drawSoftDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueMode, scMode, hueActive, scActive, mapRadius, hueC?.width ?? 0, scC?.width ?? 0, options);
       } else {
         // Hard discontiguous: draw per-point regions with shading
-        drawHardDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueActive, scActive, mapRadius, inputColors, isCustom);
+        drawHardDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueActive, scActive, mapRadius, inputColors, isCustom, options.hardOverlaySoftAlpha || 0);
       }
     } else {
       // Contiguous mode
@@ -518,20 +546,20 @@ export function drawWheel(type, ui, state, opts = {}) {
         drawSoftContiguousPolar(ctx, cx, cy, radius, hueC, scC, hueMode, scMode, hueActive, scActive, mapRadius, hueC?.width ?? 0, scC?.width ?? 0);
       } else {
         // Hard contiguous: draw excluded shading + boundary lines
-        drawHardContiguousPolar(ctx, cx, cy, radius, hueSegments, scIntervals, hueActive, scActive, mapRadius);
+        drawHardContiguousPolar(ctx, cx, cy, radius, hueSegments, scIntervals, hueActive, scActive, mapRadius, options.hardOverlaySoftAlpha || 0);
       }
     }
 
     // For custom mode, only draw per-point windows (no bounding union overlay).
   }
 
-  function drawHardContiguousPolar(ctx, cx, cy, radius, hueSegments, scIntervals, hueActive, scActive, mapRadius) {
+  function drawHardContiguousPolar(ctx, cx, cy, radius, hueSegments, scIntervals, hueActive, scActive, mapRadius, softAlpha = 0) {
     const shadeHue = hueActive ? hueSegments : [[0, TAU]];
     const shadeSc = scActive ? scIntervals : [[0, 1]];
 
     // Shade excluded regions
     ctx.save();
-    ctx.fillStyle = hardConstraintOverlayFill();
+    ctx.fillStyle = hardConstraintOverlayFill(softAlpha);
     ctx.beginPath();
     ctx.moveTo(cx + radius, cy);
     ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
@@ -761,7 +789,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     return Math.min(diff, TAU - diff);
   }
 
-  function drawHardDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueActive, scActive, mapRadius, inputColors = [], useConstraintBoundaryStyle = false) {
+  function drawHardDiscontiguousPolar(ctx, cx, cy, radius, hueWindows, scWindows, hueActive, scActive, mapRadius, inputColors = [], useConstraintBoundaryStyle = false, softAlpha = 0) {
     // For discontiguous mode, draw PER-POINT regions (not Cartesian product)
     // Each input point has its own (hue, saturation) window
     const numPoints = Math.max(hueWindows.length, scWindows.length);
@@ -778,7 +806,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     offCtx.setTransform(ctx.getTransform());
 
     // Fill entire circle with white overlay on offscreen canvas
-    offCtx.fillStyle = hardConstraintOverlayFill();
+    offCtx.fillStyle = hardConstraintOverlayFill(softAlpha);
     offCtx.beginPath();
     offCtx.arc(cx, cy, radius, 0, 2 * Math.PI);
     offCtx.fill();
@@ -1101,26 +1129,26 @@ export function drawWheel(type, ui, state, opts = {}) {
       if (xMode === "soft" || yMode === "soft") {
         drawSoftDiscontiguousRect(ctx, xWindows, yWindows, xMode, yMode, xActive, yActive, xToCoord, yToCoord, cx, cy, radius, xC?.width ?? 0, yC?.width ?? 0, options);
       } else {
-        drawHardDiscontiguousRect(ctx, cx, cy, radius, xWindows, yWindows, xActive, yActive, xToCoord, yToCoord, inputColors, isCustom);
+        drawHardDiscontiguousRect(ctx, cx, cy, radius, xWindows, yWindows, xActive, yActive, xToCoord, yToCoord, inputColors, isCustom, options.hardOverlaySoftAlpha || 0);
       }
     } else {
       if (xMode === "soft" || yMode === "soft") {
         drawSoftContiguousRect(ctx, xIntervals, yIntervals, xMode, yMode, xActive, yActive, xToCoord, yToCoord, xC?.width ?? 0, yC?.width ?? 0);
       } else {
-        drawHardContiguousRect(ctx, cx, cy, radius, xIntervals, yIntervals, xActive, yActive, xToCoord, yToCoord);
+        drawHardContiguousRect(ctx, cx, cy, radius, xIntervals, yIntervals, xActive, yActive, xToCoord, yToCoord, options.hardOverlaySoftAlpha || 0);
       }
     }
 
     // For custom mode, only draw per-point windows (no bounding union overlay).
   }
 
-  function drawHardContiguousRect(ctx, cx, cy, radius, xIntervals, yIntervals, xActive, yActive, xToCoord, yToCoord) {
+  function drawHardContiguousRect(ctx, cx, cy, radius, xIntervals, yIntervals, xActive, yActive, xToCoord, yToCoord, softAlpha = 0) {
     const shadeX = xActive ? xIntervals : [[0, 1]];
     const shadeY = yActive ? yIntervals : [[0, 1]];
 
     // Shade excluded regions
     ctx.save();
-    ctx.fillStyle = hardConstraintOverlayFill();
+    ctx.fillStyle = hardConstraintOverlayFill(softAlpha);
     ctx.beginPath();
     ctx.rect(cx - radius, cy - radius, radius * 2, radius * 2);
     shadeX.forEach(([x0, x1]) => {
@@ -1318,7 +1346,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     }
   }
 
-  function drawHardDiscontiguousRect(ctx, cx, cy, radius, xWindows, yWindows, xActive, yActive, xToCoord, yToCoord, inputColors = [], useConstraintBoundaryStyle = false) {
+  function drawHardDiscontiguousRect(ctx, cx, cy, radius, xWindows, yWindows, xActive, yActive, xToCoord, yToCoord, inputColors = [], useConstraintBoundaryStyle = false, softAlpha = 0) {
     // For discontiguous mode, draw PER-POINT regions (not Cartesian product)
     // Each input point has its own (x, y) window
     const numPoints = Math.max(xWindows.length, yWindows.length);
@@ -1334,7 +1362,7 @@ export function drawWheel(type, ui, state, opts = {}) {
     offCtx.setTransform(ctx.getTransform());
 
     // Fill entire square with white overlay on offscreen canvas
-    offCtx.fillStyle = hardConstraintOverlayFill();
+    offCtx.fillStyle = hardConstraintOverlayFill(softAlpha);
     offCtx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
 
     // Clear out allowed regions using destination-out
@@ -1949,7 +1977,11 @@ export function drawWheel(type, ui, state, opts = {}) {
   function drawGamutLegend(minX) {
     if (!clipToGamut) return;
     const hasCustomConstraintGuides = ui.constraintTopology?.value === "custom" && state.customConstraints?.values?.length;
-    const hasConstraintLegend = hiddenConstraintChannels.length || visibleConstraintGuides.length || hasCustomConstraintGuides;
+    const hasConstraintLegend =
+      hiddenConstraintChannels.length ||
+      discontiguousHiddenConstraintChannels.length ||
+      visibleConstraintGuides.length ||
+      hasCustomConstraintGuides;
     const label = "constraint";
     const y = 12;
     ctx.save();

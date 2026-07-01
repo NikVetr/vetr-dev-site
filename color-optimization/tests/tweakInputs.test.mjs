@@ -128,6 +128,31 @@ test("hard tweak constraints do not constrain added output rows", () => {
   );
 });
 
+test("soft tweak constraints do not penalize added output rows", () => {
+  const palette = ["#72565E", "#545AA7"];
+  const prep = prepareData(palette, "oklab", baseConfig({
+    tweakInputIndices: [0],
+    nColsToAdd: 1,
+    widths: [0, 0, 0],
+    perInputWidths: {
+      l: [1, 0],
+      a: [1, 0],
+      b: [1, 0],
+    },
+    perInputModes: ["soft", "hard"],
+  }));
+  const params = [
+    ...paramsForSingleHex(palette[0], prep),
+    ...paramsForSingleHex("#00FF00", prep),
+  ];
+  const info = objectiveInfo(params, prep);
+
+  assert.ok(
+    info.constraintPenalty < 1e-8,
+    `added output should not receive tweak-local soft penalty; penalty=${info.constraintPenalty}`
+  );
+});
+
 test("hard tweak constraints clamp without adding center pressure inside the source window", () => {
   const palette = ["#992C95", "#213F00", "#0004A2"];
   const prep = prepareData(palette, "oklab", baseConfig({ tweakInputIndices: [1], tweakConstraintMode: hardOklabTweaks }));

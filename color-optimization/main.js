@@ -777,12 +777,24 @@ function initializeTweakedInputConstraintWidths(idx) {
   state.perInputConstraints.modes[idx] = "soft";
 }
 
+function resetAutoTweakedInputConstraintWidths(idx) {
+  if (!state.perInputConstraints?.autoEnabledForTweaks) return;
+  ensurePerInputConstraintState();
+  const defaults = perInputDefaults();
+  ["h", "sc", "l"].forEach((slot) => {
+    if (!state.perInputConstraints.widths[slot]) state.perInputConstraints.widths[slot] = [];
+    state.perInputConstraints.widths[slot][idx] = defaults[slot];
+  });
+  state.perInputConstraints.modes[idx] = "hard";
+}
+
 function toggleInputTweak(idx) {
   pruneTweakInputIndices();
   const next = new Set(state.tweakInputIndices || []);
   if (next.has(idx)) {
     next.delete(idx);
     removeTweakOutputsForInput(idx);
+    resetAutoTweakedInputConstraintWidths(idx);
   } else {
     next.add(idx);
     initializeTweakedInputConstraintWidths(idx);
