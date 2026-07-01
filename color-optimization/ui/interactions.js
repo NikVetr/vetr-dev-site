@@ -23,6 +23,7 @@ import { setResults } from "./resultsBox.js";
 import { setStatusState } from "./status.js";
 import { drawStatusMini } from "./statusGraph.js";
 import { drawWheel } from "./wheel.js";
+import { ensureCustomConstraintsForSpace, resetCustomConstraintsForSpace } from "./customConstraints.js";
 
 const HIT_RADIUS = 8;
 const EDGE_HIT = 6;
@@ -198,18 +199,11 @@ function midpointForConstraintChannel(ui, state, space, ch) {
 }
 
 function ensureCustomConstraintSpace(state, space) {
-  if (!state.customConstraints?.values?.length) return;
-  if (state.customConstraints.space === space) return;
-  const converted = state.customConstraints.values.map((v) => convertColorValues(v, state.customConstraints.space, space));
-  state.customConstraints = { space, values: converted, widths: state.customConstraints.widths || null };
+  resetCustomConstraintsForSpace(state, space);
 }
 
 function ensureCustomConstraintState(state, space) {
-  if (!state.customConstraints) state.customConstraints = { space, values: [], widths: {} };
-  if (state.customConstraints.space !== space) {
-    state.customConstraints = { space, values: state.customConstraints.values || [], widths: state.customConstraints.widths || {} };
-  }
-  if (!state.customConstraints.widths) state.customConstraints.widths = {};
+  ensureCustomConstraintsForSpace(state, space);
   const channels = channelOrder[space] || [];
   channels.forEach((ch) => {
     if (!Array.isArray(state.customConstraints.widths[ch])) state.customConstraints.widths[ch] = [];
@@ -314,9 +308,13 @@ function seedCustomConstraintsFromCurrent(ui, state) {
   state.customConstraints = { space, values, widths };
 }
 
-function promoteToCustomConstraints(ui, state) {
+function promoteToCustomConstraints(ui, state, { seedCurrent = true } = {}) {
   if (!ui.constraintTopology) return;
-  seedCustomConstraintsFromCurrent(ui, state);
+  if (seedCurrent) {
+    seedCustomConstraintsFromCurrent(ui, state);
+  } else {
+    state.customConstraints = { space: customConstraintSpace(ui), values: [], widths: {} };
+  }
   if (ui.constraintTopology.value !== "custom") {
     state.suppressConstraintTopologyHistory = true;
     ui.constraintTopology.value = "custom";
@@ -1742,7 +1740,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
       }
       if (ui.constraintTopology?.value === "custom" || wantsCustom) {
         if (wantsCustom) {
-          promoteToCustomConstraints(ui, state);
+          promoteToCustomConstraints(ui, state, { seedCurrent: false });
         }
         const constraintSpace = customConstraintSpace(ui);
         const defaults = defaultWidthMapForSpace(ui, constraintSpace);
@@ -2123,7 +2121,7 @@ export function attachVisualizationInteractions(ui, state, plotOrder) {
       barObj.bar.releasePointerCapture?.(evt.pointerId);
       barObj.bar.style.cursor = "crosshair";
       if (!drag.moved) return;
-      promoteToCustomConstraints(ui, state);
+      promoteToCustomConstraints(ui, state, { seedCurrent: false });
       const rect = barObj.bar.getBoundingClientRect();
       const t0 = (drag.startY - rect.top) / rect.height;
       const t1 = (evt.clientY - rect.top) / rect.height;

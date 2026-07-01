@@ -7,6 +7,7 @@ import {
   unscaleWithRange,
 } from "./colorSpaces.js";
 import { clamp } from "./util.js";
+import { activeConstraintSets } from "./activeConstraints.js";
 
 const TAU = Math.PI * 2;
 
@@ -16,10 +17,7 @@ export function projectToGamutWithinHardConstraints(row, prep) {
   const ranges = prep.ranges || csRanges[space];
   const rawConstraintSets = prep.bounds?.constraintSets;
   const rawTopology = prep.constraintTopology || rawConstraintSets?.topology || "contiguous";
-  const constraintSets =
-    rawTopology === "discontiguous"
-      ? (prep.bounds?.globalConstraintSets || rawConstraintSets)
-      : rawConstraintSets;
+  const constraintSets = activeConstraintSets(prep.bounds, prep) || rawConstraintSets;
   const topology = rawTopology;
   if (!ranges || !constraintSets?.channels) {
     return projectToGamut(row, space, gamutPreset, space);

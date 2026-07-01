@@ -18,6 +18,7 @@ import { nelderMeadAsync } from "./nelderMead.js";
 import { objectiveInfo, objectiveValue, prepareData } from "./objective.js";
 import { aggregateDistances } from "../core/means.js";
 import { coordsFromXyzForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
+import { activeConstraintSets } from "../core/activeConstraints.js";
 
 function logitClamped(p) {
   const t = clamp(p, 1e-6, 1 - 1e-6);
@@ -50,7 +51,7 @@ function hueArcFromBounds(boundsH) {
 
 function channelBoundsForStart(prepLike, ch, scChannel, lightKey) {
   const bounds = prepLike?.bounds || {};
-  const constraintSets = bounds.globalConstraintSets || bounds.constraintSets;
+  const constraintSets = activeConstraintSets(bounds, prepLike);
   const topology = prepLike?.constraintTopology || constraintSets?.topology || "contiguous";
   const channelMode = constraintSets?.channels?.[ch]?.mode || "hard";
   const useHard = channelMode === "hard" && topology === "contiguous";
@@ -135,7 +136,7 @@ function encodeNormalizedRowsToParams(normRows, colorSpace, ranges, prepLike = {
   const lightKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : null;
   const scChannel = channels.find((c) => c === "s" || c === "c") || null;
   const hueAnchorRad = Number.isFinite(prepLike?.hueAnchorRad) ? prepLike.hueAnchorRad : 0;
-  const constraintSets = prepLike?.bounds?.globalConstraintSets || prepLike?.bounds?.constraintSets;
+  const constraintSets = activeConstraintSets(prepLike?.bounds, prepLike);
   const topology = prepLike?.constraintTopology || constraintSets?.topology || "contiguous";
   const hueArc = (() => {
     const hueMode = constraintSets?.channels?.h?.mode || "hard";
@@ -224,7 +225,7 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
   const scChannel = channels.find((c) => c === "s" || c === "c") || null;
   const hueAnchorRad = Number.isFinite(prepLike?.hueAnchorRad) ? prepLike.hueAnchorRad : 0;
   const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
-  const constraintSets = prepLike?.bounds?.globalConstraintSets || prepLike?.bounds?.constraintSets;
+  const constraintSets = activeConstraintSets(prepLike?.bounds, prepLike);
   const topology = prepLike?.constraintTopology || constraintSets?.topology || "contiguous";
   const pointWindows = pointWindowSummary(constraintSets, channels);
   const hueArc = (() => {

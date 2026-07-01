@@ -92,6 +92,55 @@ test("resolvability colors keep planned tweaks before outputs exist", () => {
   assert.equal(result.inputCount, 2);
 });
 
+test("resolvability untweak mode uses source inputs instead of generated tweak outputs", () => {
+  const result = buildResolvabilityColorEntries(
+    ["#0000A8", "#FF5400", "#2C3C30"],
+    ["#0000AD", "#FF5900", "#2B3B19"],
+    [
+      { kind: "tweak", inputIndex: 0, pointIndex: 0 },
+      { kind: "tweak", inputIndex: 1, pointIndex: 1 },
+      { kind: "add", addIndex: 0 },
+    ],
+    [0, 1],
+    { untweakTweaks: true }
+  );
+
+  assert.deepEqual(result.colors, ["#2C3C30", "#0000A8", "#FF5400", "#2B3B19"]);
+  assert.equal(result.inputCount, 1);
+  assert.deepEqual(
+    result.entries.map((entry) => ({
+      kind: entry.kind,
+      inputIndex: entry.inputIndex ?? null,
+      outputIndex: entry.outputIndex ?? null,
+      sourceInputIndex: entry.sourceInputIndex ?? null,
+    })),
+    [
+      { kind: "input", inputIndex: 2, outputIndex: null, sourceInputIndex: null },
+      { kind: "untweak", inputIndex: 0, outputIndex: 0, sourceInputIndex: 0 },
+      { kind: "untweak", inputIndex: 1, outputIndex: 1, sourceInputIndex: 1 },
+      { kind: "output", inputIndex: null, outputIndex: 2, sourceInputIndex: null },
+    ]
+  );
+});
+
+test("resolvability untweak mode preserves tweaked-output entry order", () => {
+  const input = ["#0000A8", "#FF5400", "#2C3C30"];
+  const output = ["#0000AD", "#FF5900", "#2B3B19"];
+  const roles = [
+    { kind: "tweak", inputIndex: 0, pointIndex: 0 },
+    { kind: "tweak", inputIndex: 1, pointIndex: 1 },
+    { kind: "add", addIndex: 0 },
+  ];
+  const tweaked = buildResolvabilityColorEntries(input, output, roles, [0, 1]);
+  const untweaked = buildResolvabilityColorEntries(input, output, roles, [0, 1], { untweakTweaks: true });
+
+  assert.equal(untweaked.colors.length, tweaked.colors.length);
+  assert.deepEqual(
+    untweaked.entries.map((entry) => entry.outputIndex ?? entry.inputIndex),
+    tweaked.entries.map((entry) => entry.outputIndex ?? entry.inputIndex)
+  );
+});
+
 test("output swatches pin tweaked outputs and fill untweaked rows with added colors", () => {
   const entries = buildOutputSwatchEntries(
     ["#111111", "#222222", "#333333", "#444444"],

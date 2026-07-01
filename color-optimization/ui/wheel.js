@@ -15,6 +15,7 @@ import {
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
 import { clamp } from "../core/util.js";
+import { activeConstraintSets, useLocalConstraintSets } from "../core/activeConstraints.js";
 import {
   applyConstrainedChannelsToRange,
   buildGamutProjectionBoundary,
@@ -148,9 +149,18 @@ export function drawWheel(type, ui, state, opts = {}) {
   const visibleConstraintChannels = isRectWheel
     ? [rectKeys?.x, rectKeys?.y]
     : ["h", channels.find((c) => c === "s" || c === "c")].filter(Boolean);
+  const constraintContext = {
+    constraintTopology: ui.constraintTopology?.value || "contiguous",
+    individualConstraintsReplaceGlobal:
+      (ui.constraintTopology?.value || "contiguous") === "discontiguous" &&
+      Boolean(state.perInputConstraints?.enabled) &&
+      !state.perInputConstraints.autoEnabledForTweaks,
+  };
+  const displayConstraintSets = activeConstraintSets(state.bounds, constraintContext);
+  const displayUsesLocalConstraintSets = useLocalConstraintSets(state.bounds, constraintContext);
   const displayBounds =
     state.bounds && ui.colorSpace.value === wheelSpace
-      ? { ...state.bounds, constraintSets: state.bounds.globalConstraintSets || state.bounds.constraintSets }
+      ? { ...state.bounds, constraintSets: displayConstraintSets }
       : null;
   const activeTweakInputIndex = Number.isFinite(state.hoveredTweakInputIndex)
     ? Math.floor(state.hoveredTweakInputIndex)
@@ -159,6 +169,8 @@ export function drawWheel(type, ui, state, opts = {}) {
     state.bounds?.constraintSets && activeTweakInputIndex != null
       ? constraintSetsForPointDisplay(state.bounds.constraintSets, activeTweakInputIndex)
       : null;
+  const persistentIndividualConstraintInfo =
+    displayUsesLocalConstraintSets ? null : persistentIndividualConstraintDisplay(state.bounds?.constraintSets);
   const hasSoftTweakConstraintPreview =
     activeTweakInputIndex != null &&
     Array.isArray(state.tweakInputIndices) &&
@@ -177,6 +189,7 @@ export function drawWheel(type, ui, state, opts = {}) {
   const visibleSoftConstraintAlpha =
     maxSoftConstraintOverlayAlpha(
       hasSoftConstraintForChannels(displayBounds?.constraintSets, visibleConstraintChannels) ||
+      hasSoftConstraintForChannels(persistentIndividualConstraintInfo?.constraintSets, visibleConstraintChannels) ||
       hasSoftConstraintForChannels(activeTweakConstraintSets, visibleConstraintChannels) ||
       hasSoftTweakConstraintPreview
     );
@@ -404,31 +417,64 @@ export function drawWheel(type, ui, state, opts = {}) {
   function constraintSetsForPointDisplay(constraintSets, pointIndex) {
     const topology = constraintSets?.topology || "contiguous";
     if (topology !== "discontiguous" || !constraintSets?.channels || !Number.isFinite(pointIndex)) return null;
+    const selected = constraintSetsForPointIndicesDisplay(constraintSets, [pointIndex]);
+    return selected?.constraintSets || null;
+  }
+
+  function constraintSetsForPointIndicesDisplay(constraintSets, pointIndices) {
+    const topology = constraintSets?.topology || "contiguous";
+    if (topology !== "discontiguous" || !constraintSets?.channels || !Array.isArray(pointIndices) || !pointIndices.length) return null;
     const channelsOut = {};
     let hasPointWindow = false;
+    const indicesOut = [];
     Object.entries(constraintSets.channels).forEach(([ch, channel]) => {
       if (!Array.isArray(channel?.pointWindows)) {
         return;
       }
       const windows = channel.pointWindows;
-      const idx = Math.max(0, Math.min(windows.length - 1, Math.floor(pointIndex)));
-      const window = windows[idx];
-      if (!window) return;
-      const mode = Array.isArray(channel.pointModes)
-        ? (channel.pointModes[idx] === "soft" ? "soft" : "hard")
-        : (channel.mode === "soft" ? "soft" : "hard");
-      hasPointWindow = true;
+      const selected = pointIndices
+        .map((idx) => Math.floor(idx))
+        .filter((idx) => idx >= 0 && idx < windows.length && windows[idx]);
+      if (!selected.length) return;
+      const pointModes = selected.map((idx) => (
+        Array.isArray(channel.pointModes)
+          ? (channel.pointModes[idx] === "soft" ? "soft" : "hard")
+          : (channel.mode === "soft" ? "soft" : "hard")
+      ));
+      const allSoft = pointModes.every((mode) => mode === "soft");
+      const allHard = pointModes.every((mode) => mode === "hard");
+      const mode = allSoft ? "soft" : allHard ? "hard" : (channel.mode === "soft" ? "soft" : "hard");
+      selected.forEach((idx) => {
+        if (!indicesOut.includes(idx)) indicesOut.push(idx);
+      });
+      hasPointWindow = hasPointWindow || selected.length > 0;
       channelsOut[ch] = {
         ...channel,
         mode,
-        pointWindows: [window],
-        pointModes: [mode],
-        intervals: channel.type === "linear" ? [[window.min, window.max]] : channel.intervals,
-        intervalsRad: channel.type === "hue" ? [[window.center - window.radius, window.center + window.radius]] : channel.intervalsRad,
+        pointWindows: selected.map((idx) => windows[idx]),
+        pointModes,
+        intervals: channel.type === "linear" ? selected.map((idx) => [windows[idx].min, windows[idx].max]) : channel.intervals,
+        intervalsRad: channel.type === "hue" ? selected.map((idx) => [windows[idx].center - windows[idx].radius, windows[idx].center + windows[idx].radius]) : channel.intervalsRad,
         full: false,
       };
     });
-    return hasPointWindow ? { ...constraintSets, channels: channelsOut } : null;
+    return hasPointWindow ? { constraintSets: { ...constraintSets, channels: channelsOut }, pointIndices: indicesOut.sort((a, b) => a - b) } : null;
+  }
+
+  function hasPerInputPointModes(constraintSets) {
+    if ((constraintSets?.topology || "contiguous") !== "discontiguous" || !constraintSets?.channels) return false;
+    return Object.values(constraintSets.channels).some((channel) => Array.isArray(channel?.pointModes));
+  }
+
+  function persistentIndividualConstraintDisplay(constraintSets) {
+    if (!state.perInputConstraints?.enabled || state.perInputConstraints?.autoEnabledForTweaks) return null;
+    if (!hasPerInputPointModes(constraintSets)) return null;
+    const tweakRows = new Set((state.tweakInputIndices || []).map((idx) => Math.floor(idx)));
+    const count = Object.values(constraintSets.channels || {}).reduce((acc, channel) => (
+      Math.max(acc, Array.isArray(channel?.pointWindows) ? channel.pointWindows.length : 0)
+    ), 0);
+    const pointIndices = Array.from({ length: count }, (_, idx) => idx).filter((idx) => !tweakRows.has(idx));
+    return constraintSetsForPointIndicesDisplay(constraintSets, pointIndices);
   }
 
   // Put the gamut mask under constraint overlays so soft constraints remain visible
@@ -454,6 +500,9 @@ export function drawWheel(type, ui, state, opts = {}) {
 
     // Extract input colors for colored constraint boundaries
     const inputColors = allColors.filter((c) => c.role === "input").map((c) => c.color);
+    const individualConstraintSets = persistentIndividualConstraintInfo?.constraintSets || null;
+    const individualInputColors =
+      persistentIndividualConstraintInfo?.pointIndices?.map((idx) => inputColors[idx]).filter(Boolean) || [];
 
     // Draw constraint visualizations based on mode (wrapped in try-catch to prevent rendering failures).
     // When gamut clipping is active, show rectangular/polar guides only where they intersect
@@ -466,6 +515,16 @@ export function drawWheel(type, ui, state, opts = {}) {
 
         if (isRectWheel && constraintSets?.channels && rectKeys) {
           drawRectConstraints(ctx, cx, cy, radius, constraintSets, rectKeys, baseRange, ranges, topology, inputColors, globalConstraintOptions);
+        }
+
+        if (individualConstraintSets?.channels) {
+          const individualTopology = individualConstraintSets.topology || topology;
+          const individualOptions = { showSoftGuides: true, hardOverlaySoftAlpha: visibleSoftConstraintAlpha };
+          if (!isRectWheel) {
+            drawPolarConstraints(ctx, cx, cy, radius, individualConstraintSets, scKey, individualTopology, mapRadius, individualInputColors, individualOptions);
+          } else if (rectKeys) {
+            drawRectConstraints(ctx, cx, cy, radius, individualConstraintSets, rectKeys, baseRange, ranges, individualTopology, individualInputColors, individualOptions);
+          }
         }
 
         if (tweakConstraintSets?.channels) {

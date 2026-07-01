@@ -14,6 +14,7 @@ import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
 import { normalize } from "../core/stats.js";
 import { metricJnd } from "../core/resolvability.js";
+import { activeConstraintSets } from "../core/activeConstraints.js";
 import { computeBoundsFromCurrent, computeBoundsFromRawValues } from "../optimizer/bounds.js";
 import { parsePalette, readConstraintConfig } from "./configRead.js";
 import { channelGradientForSpace, drawWheel } from "./wheel.js";
@@ -23,12 +24,14 @@ const resolvabilitySettings = {
   sync: true,
   mode: "heatmap",
   thresholdFactor: 2,
+  untweakTweaks: false,
   perPanelMode: new Map(),
 };
 
-export function buildResolvabilityColorEntries(inputColors = [], outputColors = [], roles = [], activeTweakIndices = null) {
+export function buildResolvabilityColorEntries(inputColors = [], outputColors = [], roles = [], activeTweakIndices = null, options = {}) {
   const roleRows = Array.isArray(roles) && roles.length === outputColors.length ? roles : [];
   const activeTweaks = activeTweakIndices == null ? null : new Set(activeTweakIndices || []);
+  const untweak = Boolean(options.untweakTweaks);
   const replacedInputIndices = new Set();
   roleRows.forEach((role) => {
     if (
@@ -53,6 +56,17 @@ export function buildResolvabilityColorEntries(inputColors = [], outputColors = 
       role?.kind === "tweak" &&
       Number.isFinite(role.inputIndex) &&
       (!activeTweaks || activeTweaks.has(role.inputIndex));
+    if (untweak && isActiveTweak) {
+      const sourceInputIndex = Math.floor(role.inputIndex);
+      entries.push({
+        hex: inputColors[sourceInputIndex] || hex,
+        kind: "untweak",
+        inputIndex: sourceInputIndex,
+        outputIndex,
+        sourceInputIndex,
+      });
+      return;
+    }
     entries.push({
       hex,
       kind: isActiveTweak ? "tweak" : "output",
@@ -91,6 +105,7 @@ export function createPanels(ui, plotOrder = plotOrderDefault) {
     plotOrder.forEach((type) => {
       const refs = ui.panelMap[type];
       if (!refs?.resolvability) return;
+      refs.resolvabilityRefresh?.();
       const mode = resolvabilityModeFor(type);
       refs.resolvability.setMode(mode);
       refs.resolvability.setSync(resolvabilitySettings.sync);
@@ -98,6 +113,9 @@ export function createPanels(ui, plotOrder = plotOrderDefault) {
       refs.resolvability.update({
         colors: refs.resolvabilityColors || [],
         inputCount: refs.resolvabilityInputCount || 0,
+        sortColors: refs.resolvabilitySortColors || null,
+        showUntweak: Boolean(refs.resolvabilityHasTweakOutputs),
+        untweak: resolvabilitySettings.untweakTweaks,
         metric,
         threshold,
         mode,
@@ -139,6 +157,11 @@ export function createPanels(ui, plotOrder = plotOrderDefault) {
     const metric = ui.distanceMetric?.value || "de2000";
     const jnd = metricJnd(metric);
     resolvabilitySettings.thresholdFactor = jnd > 0 ? value / jnd : 0;
+    refreshResolvability();
+  };
+
+  const handleUntweakChange = (untweak) => {
+    resolvabilitySettings.untweakTweaks = Boolean(untweak);
     refreshResolvability();
   };
 
@@ -210,6 +233,7 @@ export function createPanels(ui, plotOrder = plotOrderDefault) {
       onModeChange: handleModeChange,
       onSyncChange: handleSyncChange,
       onThresholdChange: handleThresholdChange,
+      onUntweakChange: handleUntweakChange,
     });
     panel.appendChild(resolvability.root);
 
@@ -492,7 +516,13 @@ export function renderChannelBars(barObjs, current, added, type, state, ui, vizO
 
   if (state.bounds && ui.colorSpace.value === barSpace) {
     const baseRange = state.bounds.ranges || csRanges[barSpace];
-    const rawConstraintSets = state.bounds.globalConstraintSets || state.bounds.constraintSets;
+    const rawConstraintSets = activeConstraintSets(state.bounds, {
+      constraintTopology: ui.constraintTopology?.value || "contiguous",
+      individualConstraintsReplaceGlobal:
+        (ui.constraintTopology?.value || "contiguous") === "discontiguous" &&
+        Boolean(state.perInputConstraints?.enabled) &&
+        !state.perInputConstraints.autoEnabledForTweaks,
+    });
     const filterTweakPointWindows = (constraintSets) => {
       const topology = constraintSets?.topology || "contiguous";
       if (topology !== "discontiguous" || !constraintSets?.channels) return constraintSets;
@@ -1168,67 +1198,92 @@ export function refreshSwatches(ui, state, plotOrder = plotOrderDefault, vizSpac
     });
 
     if (refs.resolvability) {
-      const inputSwatches = Array.from(refs.currList.querySelectorAll(".swatch"));
-      const outputSwatches = Array.from(refs.newList.querySelectorAll(".swatch"));
-      const allSwatches = inputSwatches.concat(outputSwatches);
-      const resolvability = buildResolvabilityColorEntries(
-        colors,
-        state.newColors || [],
-        state.optimizedColorRoles || [],
-        tweakedInputIndices
-      );
-      const swatchesByResolvabilityIndex = resolvability.entries.map((entry) => {
-        if (entry.kind === "input") {
-          return refs.currList.querySelector(`.swatch[data-input-index="${entry.inputIndex}"]`);
-        }
-        if (Number.isFinite(entry.outputIndex)) {
-          return refs.newList.querySelector(`.swatch[data-output-index="${entry.outputIndex}"]`);
-        }
-        return null;
-      });
-      const clearHighlight = () => {
-        allSwatches.forEach((el) => el.classList.remove("is-highlight"));
-      };
-      const highlightIndices = (indices) => {
-        clearHighlight();
-        (indices || []).forEach((idx) => {
-          const el = swatchesByResolvabilityIndex[idx];
-          if (el) el.classList.add("is-highlight");
+      refs.resolvabilityRefresh = () => {
+        const inputSwatches = Array.from(refs.currList.querySelectorAll(".swatch"));
+        const outputSwatches = Array.from(refs.newList.querySelectorAll(".swatch"));
+        const allSwatches = inputSwatches.concat(outputSwatches);
+        const roles = state.optimizedColorRoles || [];
+        const hasTweakOutputs = roles.some((role, idx) =>
+          role?.kind === "tweak" &&
+          Number.isFinite(role.inputIndex) &&
+          tweakedInputIndices.includes(Math.floor(role.inputIndex)) &&
+          Boolean((state.newColors || [])[idx])
+        );
+        const baseResolvability = buildResolvabilityColorEntries(
+          colors,
+          state.newColors || [],
+          roles,
+          tweakedInputIndices
+        );
+        const resolvability = resolvabilitySettings.untweakTweaks && hasTweakOutputs
+          ? buildResolvabilityColorEntries(
+              colors,
+              state.newColors || [],
+              roles,
+              tweakedInputIndices,
+              { untweakTweaks: true }
+            )
+          : baseResolvability;
+        const swatchesByResolvabilityIndex = resolvability.entries.map((entry) => {
+          if (entry.kind === "input" || entry.kind === "untweak") {
+            return refs.currList.querySelector(`.swatch[data-input-index="${entry.inputIndex}"]`);
+          }
+          if (Number.isFinite(entry.outputIndex)) {
+            return refs.newList.querySelector(`.swatch[data-output-index="${entry.outputIndex}"]`);
+          }
+          return null;
         });
-      };
-      const onHighlightPair = (i, j) => {
-        if (!Number.isFinite(i) || !Number.isFinite(j)) {
+        const clearHighlight = () => {
+          allSwatches.forEach((el) => el.classList.remove("is-highlight"));
+        };
+        const highlightIndices = (indices) => {
           clearHighlight();
-          return;
-        }
-        highlightIndices([i, j]);
+          (indices || []).forEach((idx) => {
+            const el = swatchesByResolvabilityIndex[idx];
+            if (el) el.classList.add("is-highlight");
+          });
+        };
+        refs.resolvabilityColors = resolvability.colors;
+        refs.resolvabilitySortColors =
+          resolvabilitySettings.untweakTweaks && hasTweakOutputs
+            ? baseResolvability.colors
+            : null;
+        refs.resolvabilityInputCount = resolvability.inputCount;
+        refs.resolvabilityHasTweakOutputs = hasTweakOutputs;
+        refs.resolvabilityHighlightPair = (i, j) => {
+          if (!Number.isFinite(i) || !Number.isFinite(j)) {
+            clearHighlight();
+            return;
+          }
+          highlightIndices([i, j]);
+        };
+        refs.resolvabilityHighlightColor = (i) => {
+          if (!Number.isFinite(i)) {
+            clearHighlight();
+            return;
+          }
+          highlightIndices([i]);
+        };
       };
-      const onHighlightColor = (i) => {
-        if (!Number.isFinite(i)) {
-          clearHighlight();
-          return;
-        }
-        highlightIndices([i]);
-      };
+      refs.resolvabilityRefresh();
       const metric = ui.distanceMetric?.value || "de2000";
       const threshold = resolvabilityThreshold(metric);
       const mode = resolvabilityModeFor(type);
       const bg = ui?.bgEnabled?.checked ? ui.bgColor?.value || "#ffffff" : "#ffffff";
-      refs.resolvabilityColors = resolvability.colors;
-      refs.resolvabilityInputCount = resolvability.inputCount;
-      refs.resolvabilityHighlightPair = onHighlightPair;
-      refs.resolvabilityHighlightColor = onHighlightColor;
       refs.resolvability.update({
-        colors: resolvability.colors,
-        inputCount: resolvability.inputCount,
+        colors: refs.resolvabilityColors,
+        inputCount: refs.resolvabilityInputCount,
+        sortColors: refs.resolvabilitySortColors || null,
+        showUntweak: Boolean(refs.resolvabilityHasTweakOutputs),
+        untweak: resolvabilitySettings.untweakTweaks,
         metric,
         threshold,
         mode,
         sync: resolvabilitySettings.sync,
         cvdModel,
         background: bg,
-        onHighlightPair,
-        onHighlightColor,
+        onHighlightPair: refs.resolvabilityHighlightPair,
+        onHighlightColor: refs.resolvabilityHighlightColor,
       });
     }
   });

@@ -5,6 +5,7 @@ import { channelOrder, decodeColor, normalizeWithRange } from "../core/colorSpac
 import { normSatisfiesHardConstraints } from "../core/hardConstraints.js";
 import { objectiveInfo, prepareData } from "../optimizer/objective.js";
 import { optimizePalette } from "../optimizer/optimizePalette.js";
+import { readConstraintConfig } from "../ui/configRead.js";
 
 function baseConfig(overrides = {}) {
   return {
@@ -151,6 +152,59 @@ test("soft tweak constraints do not penalize added output rows", () => {
     info.constraintPenalty < 1e-8,
     `added output should not receive tweak-local soft penalty; penalty=${info.constraintPenalty}`
   );
+});
+
+test("auto-enabled tweak constraints filter non-tweaked input rows", () => {
+  const ui = {
+    constraintTopology: { value: "discontiguous" },
+    paletteInput: { value: "#72565E, #545AA7" },
+    wH: { value: "0.65" },
+    wSC: { value: "0" },
+    wL: { value: "0" },
+    modeH: { type: "checkbox", checked: false },
+    modeSC: { type: "checkbox", checked: false },
+    modeL: { type: "checkbox", checked: false },
+    aestheticMode: { value: "none" },
+  };
+  const config = readConstraintConfig(ui, "oklab", {
+    tweakInputIndices: [0],
+    perInputConstraints: {
+      enabled: true,
+      autoEnabledForTweaks: true,
+      widths: { h: [0.85, 0.85], sc: [0.85, 0.85], l: [0.85, 0.85] },
+      modes: ["soft", "soft"],
+    },
+  });
+
+  assert.deepEqual(config.perInputWidths.l, [0.85, 0]);
+  assert.deepEqual(config.perInputWidths.a, [0.85, 0]);
+  assert.deepEqual(config.perInputWidths.b, [0.85, 0]);
+  assert.deepEqual(config.perInputModes, ["soft", "hard"]);
+  assert.deepEqual(config.globalConstraintExcludeInputIndices, [0]);
+});
+
+test("auto tweak rows are removed from the global discontiguous layer", () => {
+  const palette = ["#72565E", "#545AA7"];
+  const prep = prepareData(palette, "oklab", baseConfig({
+    tweakInputIndices: [0],
+    nColsToAdd: 1,
+    widths: [0.85, 0.85, 0.85],
+    perInputWidths: {
+      l: [0.85, 0],
+      a: [0.85, 0],
+      b: [0.85, 0],
+    },
+    perInputModes: ["soft", "hard"],
+    globalConstraintExcludeInputIndices: [0],
+  }));
+  const norm0 = normalizeWithRange(decodeColor(palette[0], "oklab"), prep.ranges, "oklab");
+  const norm1 = normalizeWithRange(decodeColor(palette[1], "oklab"), prep.ranges, "oklab");
+  const globalLWindows = prep.bounds.globalConstraintSets.channels.l.pointWindows;
+
+  assert.equal(globalLWindows.length, 1);
+  assert.ok(Math.abs(globalLWindows[0].center - norm1.l) < 1e-9);
+  assert.ok(Math.abs(globalLWindows[0].center - norm0.l) > 1e-4);
+  assert.equal(prep.bounds.constraintSets.channels.l.pointWindows.length, 2);
 });
 
 test("hard tweak constraints clamp without adding center pressure inside the source window", () => {

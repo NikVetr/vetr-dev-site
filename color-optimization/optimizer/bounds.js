@@ -29,6 +29,10 @@ export function computeBounds(valuesRaw, colorSpace, config) {
     ? valuesRaw || []
     : applyAestheticCenters(valuesRaw || [], colorSpace, aestheticMode);
   const aestheticNorm = aestheticValues.map((row) => normalizeForConstraint(row, ranges, colorSpace));
+  const globalExclude = inputIndexSet(config.globalConstraintExcludeInputIndices, aestheticNorm.length);
+  const globalAestheticNorm = globalExclude.size
+    ? aestheticNorm.filter((_, idx) => !globalExclude.has(idx))
+    : aestheticNorm;
   const values = (arr, channel) => arr.map((r) => r[channel]).filter((v) => Number.isFinite(v));
 
   const boundsByName = {};
@@ -85,12 +89,21 @@ export function computeBounds(valuesRaw, colorSpace, config) {
     widthForChannel,
     boundsByName,
     boundsH,
-    aestheticNorm,
+    globalAestheticNorm,
     null,
     null
   );
 
   return { boundsSc, boundsL, boundsH, boundsByName, constraintSets, globalConstraintSets };
+}
+
+function inputIndexSet(indices, count) {
+  if (!Array.isArray(indices) || !count) return new Set();
+  return new Set(
+    indices
+      .map((idx) => Math.floor(idx))
+      .filter((idx, pos, arr) => idx >= 0 && idx < count && arr.indexOf(idx) === pos)
+  );
 }
 
 export function computeBoundsFromCurrent(colors, colorSpace, configLike = {}) {

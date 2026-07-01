@@ -3,6 +3,7 @@ import { strict as assert } from "node:assert";
 
 import { isInGamut, normalizeWithRange } from "../core/colorSpaces.js";
 import { normSatisfiesHardConstraints } from "../core/hardConstraints.js";
+import { activeConstraintSets } from "../core/activeConstraints.js";
 import { computeBoundsFromCurrent } from "../optimizer/bounds.js";
 import { objectiveInfo, prepareData } from "../optimizer/objective.js";
 
@@ -175,4 +176,37 @@ test("per-input constraint modes are retained for discontiguous point windows", 
   ["l", "a", "b"].forEach((ch) => {
     assert.deepEqual(bounds.constraintSets.channels[ch].pointModes, ["soft", "hard"]);
   });
+});
+
+test("manual individuated constraints replace the global constraint layer", () => {
+  const prep = prepareData(["#808080"], "oklab", {
+    constrain: true,
+    widths: [1, 1, 1],
+    constraintTopology: "discontiguous",
+    constraintMode: { l: "hard", a: "hard", b: "hard" },
+    perInputWidths: { l: [0.5], a: [0.5], b: [0.5] },
+    perInputModes: ["hard"],
+    individualConstraintsReplaceGlobal: true,
+    gamutPreset: "srgb",
+    clipToGamutOpt: false,
+    nColsToAdd: 1,
+    colorblindSafe: false,
+    colorblindWeights: { none: 1 },
+  });
+
+  const activeSets = activeConstraintSets(prep.bounds, prep);
+  const targetNorm = {};
+  ["l", "a", "b"].forEach((ch) => {
+    const w = activeSets.channels[ch].pointWindows[0];
+    targetNorm[ch] = Math.min(w.max - 1e-4, w.center + Math.max(w.radius * 0.5, 0.02));
+  });
+  const logit = (p) => Math.log(p / (1 - p));
+  const info = objectiveInfo([logit(targetNorm.l), logit(targetNorm.a), logit(targetNorm.b)], prep);
+  const norm = normalizeWithRange(info.optimizerRaw[0], prep.ranges, "oklab");
+  const globalSets = prep.bounds.globalConstraintSets;
+
+  assert.equal(activeSets, prep.bounds.constraintSets);
+  assert.equal(normSatisfiesHardConstraints(norm, globalSets, globalSets.topology), false);
+  assert.equal(normSatisfiesHardConstraints(norm, activeSets, activeSets.topology), true);
+  assert.equal(info.constraintPenalty, 0);
 });

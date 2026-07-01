@@ -4,6 +4,7 @@ export function getUIRefs() {
     paletteGroups: document.getElementById("palette-groups"),
     paletteClear: document.getElementById("palette-clear"),
     paletteImage: document.getElementById("palette-image"),
+    paletteTweakAll: document.getElementById("palette-tweak-all"),
     paletteMore: document.getElementById("palette-more"),
     paletteHighlight: document.getElementById("palette-highlight"),
     colorSpace: document.getElementById("color-space"),

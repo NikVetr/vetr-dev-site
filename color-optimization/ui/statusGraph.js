@@ -24,6 +24,7 @@ import {
   drawOutOfGamutOverlay,
 } from "./gamutHull.js";
 import { hardConstraintRegionIndex } from "../core/hardConstraints.js";
+import { activeConstraintSets, useLocalConstraintSets } from "../core/activeConstraints.js";
 
 const STATUS_MINI_CONSTRAINT_TOL = 1e-4;
 
@@ -210,6 +211,15 @@ export function drawStatusMini(state, ui, opts = {}) {
     ? [rectKeys?.x, rectKeys?.y]
     : ["h", channelsForSpace.find((c) => c === "s" || c === "c")].filter(Boolean);
   const radius = (size / 2) * 0.97;
+  const constraintContext = {
+    constraintTopology: ui.constraintTopology?.value || "contiguous",
+    individualConstraintsReplaceGlobal:
+      (ui.constraintTopology?.value || "contiguous") === "discontiguous" &&
+      Boolean(state.perInputConstraints?.enabled) &&
+      !state.perInputConstraints.autoEnabledForTweaks,
+  };
+  const displayConstraintSetsRaw = activeConstraintSets(state.bounds, constraintContext);
+  const displayUsesLocalConstraintSets = useLocalConstraintSets(state.bounds, constraintContext);
   const constraintSetsForTweakHoverDisplay = (constraintSets) => {
     const topology = constraintSets?.topology || "contiguous";
     if (topology !== "discontiguous" || !constraintSets?.channels) return constraintSets;
@@ -228,10 +238,71 @@ export function drawStatusMini(state, ui, opts = {}) {
     });
     return { ...constraintSets, channels: channelsOut };
   };
+  const constraintSetsForPointIndicesDisplay = (constraintSets, pointIndices) => {
+    const topology = constraintSets?.topology || "contiguous";
+    if (topology !== "discontiguous" || !constraintSets?.channels || !Array.isArray(pointIndices) || !pointIndices.length) return null;
+    const channelsOut = {};
+    const indicesOut = [];
+    let hasPointWindow = false;
+    Object.entries(constraintSets.channels).forEach(([ch, channel]) => {
+      if (!Array.isArray(channel?.pointWindows)) return;
+      const windows = channel.pointWindows;
+      const selected = pointIndices
+        .map((idx) => Math.floor(idx))
+        .filter((idx) => idx >= 0 && idx < windows.length && windows[idx]);
+      if (!selected.length) return;
+      const pointModes = selected.map((idx) => (
+        Array.isArray(channel.pointModes)
+          ? (channel.pointModes[idx] === "soft" ? "soft" : "hard")
+          : (channel.mode === "soft" ? "soft" : "hard")
+      ));
+      const allSoft = pointModes.every((mode) => mode === "soft");
+      const allHard = pointModes.every((mode) => mode === "hard");
+      selected.forEach((idx) => {
+        if (!indicesOut.includes(idx)) indicesOut.push(idx);
+      });
+      hasPointWindow = true;
+      channelsOut[ch] = {
+        ...channel,
+        mode: allSoft ? "soft" : allHard ? "hard" : (channel.mode === "soft" ? "soft" : "hard"),
+        pointWindows: selected.map((idx) => windows[idx]),
+        pointModes,
+        intervals: channel.type === "linear" ? selected.map((idx) => [windows[idx].min, windows[idx].max]) : channel.intervals,
+        intervalsRad: channel.type === "hue" ? selected.map((idx) => [windows[idx].center - windows[idx].radius, windows[idx].center + windows[idx].radius]) : channel.intervalsRad,
+        full: false,
+      };
+    });
+    return hasPointWindow ? { constraintSets: { ...constraintSets, channels: channelsOut }, pointIndices: indicesOut.sort((a, b) => a - b) } : null;
+  };
+  const hasPerInputPointModes = (constraintSets) => {
+    if ((constraintSets?.topology || "contiguous") !== "discontiguous" || !constraintSets?.channels) return false;
+    return Object.values(constraintSets.channels).some((channel) => Array.isArray(channel?.pointModes));
+  };
+  const persistentIndividualConstraintDisplay = (constraintSets) => {
+    if (!state.perInputConstraints?.enabled || state.perInputConstraints?.autoEnabledForTweaks) return null;
+    if (!hasPerInputPointModes(constraintSets)) return null;
+    const tweakRows = new Set((state.tweakInputIndices || []).map((idx) => Math.floor(idx)));
+    const count = Object.values(constraintSets.channels || {}).reduce((acc, channel) => (
+      Math.max(acc, Array.isArray(channel?.pointWindows) ? channel.pointWindows.length : 0)
+    ), 0);
+    const pointIndices = Array.from({ length: count }, (_, idx) => idx).filter((idx) => !tweakRows.has(idx));
+    const selected = constraintSetsForPointIndicesDisplay(constraintSets, pointIndices);
+    return selected
+      ? { ...selected, constraintSets: constraintSetsForTweakHoverDisplay(selected.constraintSets) }
+      : null;
+  };
   const displayBounds =
     state.bounds && ui.colorSpace?.value === space
-      ? { ...state.bounds, constraintSets: constraintSetsForTweakHoverDisplay(state.bounds.globalConstraintSets || state.bounds.constraintSets) }
+      ? { ...state.bounds, constraintSets: constraintSetsForTweakHoverDisplay(displayConstraintSetsRaw) }
       : state.bounds;
+  const persistentIndividualConstraintInfo =
+    state.bounds && ui.colorSpace?.value === space && !displayUsesLocalConstraintSets
+      ? persistentIndividualConstraintDisplay(state.bounds.constraintSets)
+      : null;
+  const persistentIndividualDisplayBounds =
+    persistentIndividualConstraintInfo?.constraintSets
+      ? { ...state.bounds, constraintSets: persistentIndividualConstraintInfo.constraintSets }
+      : null;
 
   const trails = state.nmTrails || [];
   const displayTraceSamples = Math.max(1, parseInt(ui.pathSteps?.value, 10) || 48);
@@ -347,6 +418,10 @@ export function drawStatusMini(state, ui, opts = {}) {
   const pointConstraintGuides =
     displayBounds && ui.colorSpace?.value === space
       ? pointWindowConstraintGuides(displayBounds, space, visibleConstraintChannels)
+      : null;
+  const persistentIndividualPointGuides =
+    persistentIndividualDisplayBounds && ui.colorSpace?.value === space
+      ? pointWindowConstraintGuides(persistentIndividualDisplayBounds, space, visibleConstraintChannels)
       : null;
   const hiddenConstraintChannels =
     constraintDomain?.channels?.filter((ch) => !visibleConstraintChannels.includes(ch)) || [];
@@ -530,7 +605,10 @@ export function drawStatusMini(state, ui, opts = {}) {
     }
     if (visibleBoundary?.length) pathClipBoundary = visibleBoundary;
   }
-  drawClippedToBoundary(pathClipBoundary, () => drawPointWindowConstraintGuides(pointConstraintGuides));
+  drawClippedToBoundary(pathClipBoundary, () => {
+    drawPointWindowConstraintGuides(pointConstraintGuides);
+    drawPointWindowConstraintGuides(persistentIndividualPointGuides);
+  });
 
   const resolveVal = (hex, rawArr, idx, sourceSpace) =>
     resolveRawVals(hex, rawArr, idx, sourceSpace);
@@ -817,15 +895,19 @@ export function drawStatusMini(state, ui, opts = {}) {
     if (!sets?.channels || (sets.topology !== "custom" && sets.topology !== "discontiguous")) return null;
     const channels = channelOrder[guideSpace] || [];
     const visible = new Set((visibleChannels || []).filter(Boolean));
-    const hardVisible = channels.filter((ch) => visible.has(ch) && sets.channels[ch]?.mode === "hard");
-    if (!hardVisible.length) return null;
-    return { sets, hardVisible };
+    const visibleWindows = channels.filter((ch) => (
+      visible.has(ch) &&
+      Array.isArray(sets.channels[ch]?.pointWindows) &&
+      sets.channels[ch].pointWindows.length
+    ));
+    if (!visibleWindows.length) return null;
+    return { sets, visibleWindows };
   }
 
   function drawPointWindowConstraintGuides(guides) {
     if (!guides?.sets?.channels) return;
     const sets = guides.sets;
-    const hard = new Set(guides.hardVisible || []);
+    const visibleWindows = new Set(guides.visibleWindows || []);
     const range = displayBounds?.ranges || csRanges[space];
     const rawFromNorm = (ch, u) => {
       const min = range?.min?.[ch] ?? scaleRange.min?.[ch] ?? 0;
@@ -850,8 +932,8 @@ export function drawStatusMini(state, ui, opts = {}) {
     if (isRect && rectKeys) {
       const xKey = rectKeys.x;
       const yKey = rectKeys.y;
-      const xWindows = hard.has(xKey) ? (sets.channels[xKey]?.pointWindows || []) : [];
-      const yWindows = hard.has(yKey) ? (sets.channels[yKey]?.pointWindows || []) : [];
+      const xWindows = visibleWindows.has(xKey) ? (sets.channels[xKey]?.pointWindows || []) : [];
+      const yWindows = visibleWindows.has(yKey) ? (sets.channels[yKey]?.pointWindows || []) : [];
       const count = Math.max(xWindows.length, yWindows.length);
       for (let i = 0; i < count; i++) {
         const xW = xWindows[i] || null;
@@ -895,8 +977,8 @@ export function drawStatusMini(state, ui, opts = {}) {
       ctx.restore();
       return;
     }
-    const hueWindows = hard.has("h") ? (sets.channels.h?.pointWindows || []) : [];
-    const scWindows = hard.has(scKey) ? (sets.channels[scKey]?.pointWindows || []) : [];
+    const hueWindows = visibleWindows.has("h") ? (sets.channels.h?.pointWindows || []) : [];
+    const scWindows = visibleWindows.has(scKey) ? (sets.channels[scKey]?.pointWindows || []) : [];
     const count = Math.max(hueWindows.length, scWindows.length);
     const wrapRad = (a) => ((a % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
     const hueRaw = (a) => rawFromNorm("h", wrapRad(a) / (Math.PI * 2));

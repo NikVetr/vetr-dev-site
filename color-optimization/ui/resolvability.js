@@ -66,8 +66,9 @@ function buildDeBruijnSequence(k) {
   return sequence;
 }
 
-function colorsKey(colors, metric, type, cvdModel) {
-  return `${type}|${metric}|${cvdModel}|${colors.join("|")}`;
+function colorsKey(colors, metric, type, cvdModel, sortColors = null) {
+  const sortPart = Array.isArray(sortColors) && sortColors.length ? `||sort:${sortColors.join("|")}` : "";
+  return `${type}|${metric}|${cvdModel}|${colors.join("|")}${sortPart}`;
 }
 
 function simulateColors(colors, type, cvdModel) {
@@ -220,7 +221,7 @@ function formatValue(v) {
   return Number(v).toPrecision(3).replace(/^\+/, "");
 }
 
-export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onThresholdChange } = {}) {
+export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onThresholdChange, onUntweakChange } = {}) {
   const root = document.createElement("div");
   root.className = "resolvability-panel";
 
@@ -245,6 +246,17 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
   syncWrap.appendChild(syncToggle);
   syncWrap.appendChild(syncText);
   titleRow.appendChild(syncWrap);
+
+  const untweakWrap = document.createElement("label");
+  untweakWrap.className = "resolvability-sync resolvability-untweak";
+  untweakWrap.hidden = true;
+  const untweakToggle = document.createElement("input");
+  untweakToggle.type = "checkbox";
+  const untweakText = document.createElement("span");
+  untweakText.textContent = "untweak";
+  untweakWrap.appendChild(untweakToggle);
+  untweakWrap.appendChild(untweakText);
+  titleRow.appendChild(untweakWrap);
 
   header.appendChild(titleRow);
 
@@ -331,6 +343,7 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     simColors: [],
     coords: [],
     distances: null,
+    sortDistances: null,
     minDist: null,
     nearest: null,
     mds: null,
@@ -408,6 +421,11 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     syncToggle.checked = Boolean(sync);
   };
 
+  const setUntweak = (untweak, visible) => {
+    untweakToggle.checked = Boolean(untweak);
+    untweakWrap.hidden = !visible;
+  };
+
   const setThreshold = (threshold, metric) => {
     state.threshold = threshold;
     state.voronoiDirty = true;
@@ -429,6 +447,7 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
       return;
     }
 
+    const orderDistances = state.sortDistances || state.distances;
     // Compute harmonic mean of distances for each color
     const scores = new Array(n);
     for (let i = 0; i < n; i++) {
@@ -436,7 +455,7 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
       let count = 0;
       for (let j = 0; j < n; j++) {
         if (i === j) continue;
-        const d = state.distances[i * n + j];
+        const d = orderDistances[i * n + j];
         if (d > 1e-9) {
           sumInv += 1 / d;
           count++;
@@ -1220,9 +1239,16 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     onThresholdChange?.(val, type);
   });
 
+  untweakToggle.addEventListener("change", () => {
+    onUntweakChange?.(untweakToggle.checked, type);
+  });
+
   const update = ({
     colors = [],
     inputCount = 0,
+    sortColors = null,
+    showUntweak = false,
+    untweak = false,
     metric = "de2000",
     threshold = 2,
     mode = "heatmap",
@@ -1240,14 +1266,26 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     state.onHighlightColor = onHighlightColor || null;
     setMode(mode);
     setSync(sync);
+    setUntweak(untweak, showUntweak);
     setThreshold(threshold, metric);
-    const key = colorsKey(colors, metric, type, cvdModel);
+    const stableSortColors =
+      Array.isArray(sortColors) && sortColors.length === colors.length
+        ? sortColors
+        : null;
+    const key = colorsKey(colors, metric, type, cvdModel, stableSortColors);
     if (key !== state.key) {
       state.key = key;
       state.colors = colors.slice();
       state.simColors = simulateColors(colors, type, cvdModel);
       state.coords = coordsForHexes(state.simColors, metric);
       state.distances = computeDistanceMatrix(state.coords, metric);
+      if (stableSortColors) {
+        const sortSimColors = simulateColors(stableSortColors, type, cvdModel);
+        const sortCoords = coordsForHexes(sortSimColors, metric);
+        state.sortDistances = computeDistanceMatrix(sortCoords, metric);
+      } else {
+        state.sortDistances = null;
+      }
       computeSortOrder();
       const nn = computeNearestNeighbors(state.distances, state.simColors.length);
       state.minDist = nn.minDist;
@@ -1297,5 +1335,5 @@ export function createResolvabilityPanel(type, { onModeChange, onSyncChange, onT
     render();
   };
 
-  return { root, update, setMode, setSync, setThreshold };
+  return { root, update, setMode, setSync, setThreshold, setUntweak };
 }

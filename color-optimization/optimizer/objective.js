@@ -114,6 +114,7 @@ export function prepareData(palette, colorSpace, config) {
     ranges,
     hueAnchorRad,
     constraintTopology: config.constraintTopology || "contiguous",
+    individualConstraintsReplaceGlobal: Boolean(config.individualConstraintsReplaceGlobal),
     constraintMode: config.constraintMode || {},
     tweakConstraintMode: config.tweakConstraintMode || defaultTweakConstraintMode(channels),
     aestheticMode: config.aestheticMode || "none",
@@ -139,6 +140,7 @@ export function meanDistance(par, prep, returnInfo) {
   const useLayeredIndividualConstraints =
     constraintTopology === "discontiguous" &&
     prep.hasPerInputConstraints &&
+    !prep.individualConstraintsReplaceGlobal &&
     constraintSets &&
     globalConstraintSets &&
     constraintSets !== globalConstraintSets;

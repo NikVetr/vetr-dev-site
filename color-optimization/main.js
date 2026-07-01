@@ -1,5 +1,5 @@
 import { defaultPalette, plotOrder } from "./config.js";
-import { channelOrder, convertColorValues, decodeColor } from "./core/colorSpaces.js";
+import { channelOrder, decodeColor } from "./core/colorSpaces.js";
 import { cloneExplicitBounds } from "./core/constraintBounds.js";
 import { contrastColor, deltaE2000 } from "./core/metrics.js";
 import { discriminabilityLabel, metricJnd } from "./core/resolvability.js";
@@ -15,6 +15,7 @@ import { drawStatusGraph, drawStatusMini } from "./ui/statusGraph.js";
 import { createPanels, refreshSwatches, updateChannelHeadings } from "./ui/panels.js";
 import { drawWheel } from "./ui/wheel.js";
 import { attachVisualizationInteractions } from "./ui/interactions.js";
+import { resetCustomConstraintsForSpace } from "./ui/customConstraints.js";
 import {
   attachImageInput,
   cloneImageInputForHistory,
@@ -303,7 +304,7 @@ function applyHistorySnapshot(snapshot) {
   lastOptSpace = ui.colorSpace.value;
 
   updateWidthLabels();
-  syncCustomConstraintsToSpace(ui.colorSpace.value);
+  resetCustomConstraintsForSpace(state, ui.colorSpace.value);
   ensurePerInputConstraintState();
   pruneTweakInputIndices();
   enforcePerInputViewSync();
@@ -676,13 +677,6 @@ function computeInputBounds(space) {
   return computeBoundsFromCurrent(parsePalette(ui.paletteInput.value), space, config);
 }
 
-function syncCustomConstraintsToSpace(space) {
-  if (!state.customConstraints?.values?.length) return;
-  if (state.customConstraints.space === space) return;
-  const converted = state.customConstraints.values.map((v) => convertColorValues(v, state.customConstraints.space, space));
-  state.customConstraints = { space, values: converted, widths: cloneCustomWidths(state.customConstraints.widths) };
-}
-
 function ensureCustomConstraintsInitialized() {
   if (state.customConstraints?.values?.length) return;
   const space = ui.colorSpace.value;
@@ -765,6 +759,29 @@ function isInputTweaked(idx) {
   return Array.isArray(state.tweakInputIndices) && state.tweakInputIndices.includes(idx);
 }
 
+function inputColorCount() {
+  return parsePalette(ui?.paletteInput?.value || "").length;
+}
+
+function allInputsTweaked() {
+  const count = inputColorCount();
+  if (!count) return false;
+  const tweaks = new Set(state.tweakInputIndices || []);
+  return Array.from({ length: count }, (_, idx) => tweaks.has(idx)).every(Boolean);
+}
+
+function updateTweakAllButton() {
+  if (!ui?.paletteTweakAll) return;
+  const count = inputColorCount();
+  const allTweaked = allInputsTweaked();
+  ui.paletteTweakAll.textContent = allTweaked ? "Untweak All" : "Tweak All";
+  ui.paletteTweakAll.disabled = count === 0;
+  ui.paletteTweakAll.setAttribute("aria-pressed", String(allTweaked));
+  ui.paletteTweakAll.title = allTweaked
+    ? "Disable tweaking for every input color."
+    : "Optimize every input color inside its own individuated constraint window.";
+}
+
 function initializeTweakedInputConstraintWidths(idx) {
   ensurePerInputConstraintState();
   const defaults = perInputDefaults();
@@ -786,6 +803,37 @@ function resetAutoTweakedInputConstraintWidths(idx) {
     state.perInputConstraints.widths[slot][idx] = defaults[slot];
   });
   state.perInputConstraints.modes[idx] = "hard";
+}
+
+function applyTweakSet(nextIndices) {
+  const count = inputColorCount();
+  const next = new Set(
+    (nextIndices || [])
+      .map((idx) => Math.floor(idx))
+      .filter((idx) => idx >= 0 && idx < count)
+  );
+  const prev = new Set(state.tweakInputIndices || []);
+  prev.forEach((idx) => {
+    if (!next.has(idx)) {
+      removeTweakOutputsForInput(idx);
+      resetAutoTweakedInputConstraintWidths(idx);
+    }
+  });
+  next.forEach((idx) => {
+    if (!prev.has(idx)) initializeTweakedInputConstraintWidths(idx);
+  });
+  state.tweakInputIndices = [...next].sort((a, b) => a - b);
+  state.hoveredTweakInputIndex = null;
+  if (state.tweakInputIndices.length && !state.perInputConstraints?.enabled) {
+    ensurePerInputConstraintState();
+    state.perInputConstraints.enabled = true;
+    state.perInputConstraints.autoEnabledForTweaks = true;
+    if (ui.constraintTopology?.value !== "discontiguous") ui.constraintTopology.value = "discontiguous";
+  }
+  if (!state.tweakInputIndices.length && state.perInputConstraints?.autoEnabledForTweaks) {
+    state.perInputConstraints.enabled = false;
+    state.perInputConstraints.autoEnabledForTweaks = false;
+  }
 }
 
 function toggleInputTweak(idx) {
@@ -811,6 +859,19 @@ function toggleInputTweak(idx) {
     state.perInputConstraints.enabled = false;
     state.perInputConstraints.autoEnabledForTweaks = false;
   }
+  enforcePerInputViewSync();
+  updateConstraintTopologyUI();
+  updateBoundsAndRefresh();
+  drawStatusMini(state, ui, currentVizOpts());
+  history?.record();
+}
+
+function toggleAllInputTweaks() {
+  pruneTweakInputIndices();
+  const count = inputColorCount();
+  if (!count) return;
+  const next = allInputsTweaked() ? [] : Array.from({ length: count }, (_, idx) => idx);
+  applyTweakSet(next);
   enforcePerInputViewSync();
   updateConstraintTopologyUI();
   updateBoundsAndRefresh();
@@ -880,6 +941,122 @@ function renderPerInputConstraintUI() {
   tweakHead.textContent = "Tweak";
   header.appendChild(tweakHead);
   ui.constraintIndividualList.appendChild(header);
+
+  const makeSliderTooltip = (input, tooltip) => {
+    const v = clampNum(parseFloat(input.value) || 0, 0, 1);
+    tooltip.textContent = `${(v * 100).toFixed(1)}%`;
+    tooltip.style.left = `${v * 100}%`;
+  };
+  const rerenderConstraints = (record = false) => {
+    renderPerInputConstraintUI();
+    updateClipWarning();
+    updateBoundsAndRefresh();
+    drawStatusMini(state, ui, currentVizOpts());
+    if (record) history?.record();
+  };
+  const masterRow = document.createElement("div");
+  masterRow.className = "constraint-individual-row constraint-individual-master-row";
+  const masterId = document.createElement("div");
+  masterId.className = "constraint-individual-id";
+  const masterPill = document.createElement("span");
+  masterPill.className = "constraint-color-pill constraint-color-pill-all";
+  masterPill.textContent = "All";
+  masterId.appendChild(masterPill);
+  masterRow.appendChild(masterId);
+
+  const masterModeWrap = document.createElement("div");
+  masterModeWrap.className = "constraint-mode-cell";
+  const allSoft = palette.every((_, idx) => state.perInputConstraints.modes?.[idx] === "soft");
+  const allHard = palette.every((_, idx) => state.perInputConstraints.modes?.[idx] !== "soft");
+  const masterModeBtn = document.createElement("button");
+  masterModeBtn.type = "button";
+  masterModeBtn.className = "constraint-mode-btn";
+  masterModeBtn.textContent = allSoft ? "Soft" : allHard ? "Hard" : "Mixed";
+  masterModeBtn.setAttribute("aria-pressed", String(allSoft));
+  masterModeBtn.title = "Toggle every input color's individuated constraint mode.";
+  masterModeBtn.addEventListener("click", () => {
+    ensurePerInputConstraintState();
+    const nextMode = allSoft ? "hard" : "soft";
+    state.perInputConstraints.modes = palette.map(() => nextMode);
+    rerenderConstraints(true);
+  });
+  masterModeWrap.appendChild(masterModeBtn);
+  masterRow.appendChild(masterModeWrap);
+
+  ["h", "sc", "l"].forEach((slot) => {
+    const wrap = document.createElement("div");
+    wrap.className = "constraint-slider-wrap constraint-slider-wrap-master";
+    const input = document.createElement("input");
+    input.type = "range";
+    input.min = "0";
+    input.max = "1";
+    input.step = "0.001";
+    const vals = palette.map((_, idx) => {
+      const v = state.perInputConstraints.widths?.[slot]?.[idx];
+      return Number.isFinite(v) ? clampNum(v, 0, 1) : defaults[slot];
+    });
+    const avg = vals.length ? vals.reduce((acc, v) => acc + v, 0) / vals.length : defaults[slot];
+    input.value = String(clampNum(avg, 0, 1));
+    const tooltip = document.createElement("span");
+    tooltip.className = "constraint-slider-tooltip";
+    const showTip = () => {
+      makeSliderTooltip(input, tooltip);
+      wrap.classList.add("show-tooltip");
+    };
+    const hideTip = () => wrap.classList.remove("show-tooltip");
+    const commitAll = (v, record = false, rerender = false) => {
+      const next = clampNum(v, 0, 1);
+      input.value = String(next);
+      if (!state.perInputConstraints.widths[slot]) state.perInputConstraints.widths[slot] = [];
+      state.perInputConstraints.widths[slot] = palette.map(() => next);
+      showTip();
+      state.hoveredTweakInputIndex = null;
+      updateClipWarning();
+      updateBoundsAndRefresh();
+      drawStatusMini(state, ui, currentVizOpts());
+      if (rerender) renderPerInputConstraintUI();
+      if (record) history?.record();
+    };
+    input.addEventListener("input", () => {
+      commitAll(parseFloat(input.value) || 0);
+    });
+    input.addEventListener("mouseenter", showTip);
+    input.addEventListener("focus", showTip);
+    input.addEventListener("mouseleave", hideTip);
+    input.addEventListener("blur", hideTip);
+    input.addEventListener("change", () => {
+      renderPerInputConstraintUI();
+      history?.record();
+    });
+    input.addEventListener("dblclick", (e) => {
+      e.preventDefault();
+      showTip();
+      const currentPct = ((clampNum(parseFloat(input.value) || 0, 0, 1)) * 100).toFixed(1);
+      const raw = window.prompt(`Set all ${labels[slot]} constraint widths (%)`, currentPct);
+      if (raw == null) return;
+      const parsed = parseFloat(String(raw).replace("%", ""));
+      if (!Number.isFinite(parsed)) return;
+      commitAll(parsed / 100, true, true);
+    });
+    makeSliderTooltip(input, tooltip);
+    wrap.appendChild(input);
+    wrap.appendChild(tooltip);
+    masterRow.appendChild(wrap);
+  });
+
+  const masterTweakWrap = document.createElement("div");
+  masterTweakWrap.className = "constraint-tweak-cell";
+  const masterTweakBtn = document.createElement("button");
+  masterTweakBtn.type = "button";
+  masterTweakBtn.className = "constraint-tweak-btn";
+  const allTweaked = allInputsTweaked();
+  masterTweakBtn.textContent = allTweaked ? "On" : "Off";
+  masterTweakBtn.setAttribute("aria-pressed", String(allTweaked));
+  masterTweakBtn.title = allTweaked ? "Disable tweaking for every input color." : "Tweak every input color.";
+  masterTweakBtn.addEventListener("click", () => toggleAllInputTweaks());
+  masterTweakWrap.appendChild(masterTweakBtn);
+  masterRow.appendChild(masterTweakWrap);
+  ui.constraintIndividualList.appendChild(masterRow);
 
   palette.forEach((hex, idx) => {
     const row = document.createElement("div");
@@ -1075,8 +1252,9 @@ function applyMainWidthToPerInputs(slot) {
 
 function updateConstraintTopologyUI() {
   const topology = ui.constraintTopology?.value || "contiguous";
+  updateTweakAllButton();
   updateAestheticModeAvailability();
-  syncCustomConstraintsToSpace(ui.colorSpace.value);
+  resetCustomConstraintsForSpace(state, ui.colorSpace.value);
   if (topology === "custom") {
     ensureCustomConstraintsInitialized();
   }
@@ -1092,6 +1270,7 @@ function updateConstraintTopologyUI() {
     }
   });
   renderPerInputConstraintUI();
+  updateTweakAllButton();
 }
 
 function constraintWidthMapForSpace(space) {
@@ -1238,6 +1417,7 @@ function attachEventListeners() {
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     ensurePerInputConstraintState();
     renderPerInputConstraintUI();
+    updateTweakAllButton();
     updateAestheticModeAvailability();
     togglePlaceholder();
     updatePaletteHighlight();
@@ -1251,6 +1431,10 @@ function attachEventListeners() {
     state.rawInputOverride = null;
     state.imageInput = null;
     state.tweakInputIndices = [];
+    if (state.perInputConstraints?.autoEnabledForTweaks) {
+      state.perInputConstraints.enabled = false;
+      state.perInputConstraints.autoEnabledForTweaks = false;
+    }
     state.optimizedColorRoles = [];
     refreshImageInputControls(ui, state);
     if (ui.rawInputValues) ui.rawInputValues.value = "";
@@ -1258,12 +1442,16 @@ function attachEventListeners() {
     refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
     ensurePerInputConstraintState();
     renderPerInputConstraintUI();
+    updateTweakAllButton();
     updateAestheticModeAvailability();
     togglePlaceholder();
     ui.paletteInput.focus();
     drawStatusMini(state, ui, currentVizOpts());
     setStatusState(ui, "Waiting to run");
     recordHistory();
+  });
+  ui.paletteTweakAll?.addEventListener("click", () => {
+    toggleAllInputTweaks();
   });
   ui.bgColor?.addEventListener("input", () => {
     updateBgControls();
@@ -1290,7 +1478,7 @@ function attachEventListeners() {
     remapConstraintWidths(lastOptSpace, nextSpace);
     lastOptSpace = nextSpace;
     updateWidthLabels();
-    syncCustomConstraintsToSpace(nextSpace);
+    resetCustomConstraintsForSpace(state, nextSpace);
     if (ui.syncSpaces?.checked || perInputConstraintsActive()) {
       ui.colorwheelSpace.value = ui.colorSpace.value;
       updateChannelHeadings(ui, ui.colorwheelSpace.value, plotOrder);
@@ -2690,7 +2878,9 @@ function appendPalette(colors) {
   refreshSwatches(ui, state, plotOrder, ui.colorwheelSpace.value, ui.colorSpace.value, ui.gamutMode?.value, currentVizOpts());
   ensurePerInputConstraintState();
   renderPerInputConstraintUI();
+  updateTweakAllButton();
   updateAestheticModeAvailability();
+  updatePaletteHighlight();
   drawStatusMini(state, ui, currentVizOpts());
   history?.record();
 }
