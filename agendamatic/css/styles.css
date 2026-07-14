@@ -1252,6 +1252,10 @@ h3 {
     height: 4px;
 }
 
+.axis-tick.has-connector::before {
+    content: none;
+}
+
 .axis-tick-label {
     position: absolute;
     top: 0;
@@ -1291,7 +1295,7 @@ h3 {
     margin-top: 6px;
     position: relative;
     flex: 0 0 auto;
-    z-index: 2;
+    z-index: 3;
 }
 
 .timeline-track {
@@ -1329,16 +1333,22 @@ h3 {
     position: absolute;
     display: none;
     pointer-events: none;
-    z-index: 3;
+    z-index: 1;
     background: linear-gradient(
         to top,
-        rgb(var(--active-glow-rgb, 33 150 243) / 0.42) 0%,
-        rgb(var(--active-glow-rgb, 33 150 243) / 0.18) 52%,
+        rgb(var(--active-glow-rgb, 33 150 243) / 0.62) 0%,
+        rgb(var(--active-glow-rgb, 33 150 243) / 0.3) 48%,
+        rgb(var(--active-glow-rgb, 33 150 243) / 0.1) 76%,
         transparent 100%
     );
-    clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
-    filter: blur(3px);
-    opacity: 0.9;
+    clip-path: polygon(
+        var(--active-glow-tip-left, 44%) 0,
+        var(--active-glow-tip-right, 56%) 0,
+        var(--active-glow-base-right, 100%) 100%,
+        var(--active-glow-base-left, 0) 100%
+    );
+    filter: blur(4px) drop-shadow(0 -5px 8px rgb(var(--active-glow-rgb, 33 150 243) / 0.28));
+    opacity: 1;
 }
 
 .timeline-block.active {
@@ -2301,10 +2311,10 @@ body.corner-resize-preview * {
 .progress-guide-line {
     position: absolute;
     width: 0;
-    border-left: 1px dotted var(--accent-blue);
-    opacity: 0.62;
+    border-left: 2px dotted var(--accent-blue);
+    opacity: 0.76;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
     display: none;
     transform: translateX(-50%);
 }

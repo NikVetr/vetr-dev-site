@@ -33,7 +33,10 @@ let progressGuideLine = null;
 let activeItemGlow = null;
 let tickerTape = null;
 let tickInterval = null;
-let popoutSyncInterval = null;
+let popoutResizeTimeout = null;
+let popoutTrackerSignature = null;
+let popoutOverallSignature = null;
+let popoutCurrentSignature = null;
 let startButton = null;
 let stopButton = null;
 let popoutButton = null;
@@ -499,6 +502,91 @@ function endTrackerResize() {
     endHistoryTransaction();
 }
 
+function getTrackerStructureSignature() {
+    const axisWrapper = document.querySelector('.timeline-axis-wrapper');
+    const track = document.querySelector('.timeline-track');
+    const progressContainer = document.querySelector('.progress-bar-container');
+    return JSON.stringify({
+        labels: [...(axisWrapper?.querySelectorAll('.axis-tick-label') || [])].map(label => ({
+            text: label.textContent,
+            className: label.className,
+            tickOffset: label.dataset.tickOffset,
+            desiredCenter: label.dataset.desiredCenter,
+            followColor: label.dataset.followColor
+        })),
+        ticks: [...(axisWrapper?.querySelectorAll('.axis-tick') || [])].map(tick => ({
+            className: tick.className.replace(' has-connector', ''),
+            offset: tick.dataset.offset,
+            left: tick.style.left
+        })),
+        blocks: [...(track?.querySelectorAll('.timeline-block') || [])].map(block => ({
+            id: block.dataset.id,
+            className: block.className.replace(' label-overflow', ''),
+            width: block.style.width,
+            text: block.textContent,
+            glowRgb: block.dataset.glowRgb
+        })),
+        progressClass: progressContainer?.className || ''
+    });
+}
+
+function getSemanticDomSignature(element) {
+    if (!element) return '';
+    const descendants = [...element.querySelectorAll('*')]
+        .map(node => `${node.tagName}.${node.className}:${node.childElementCount ? '' : node.textContent}`)
+        .join('|');
+    return `${element.tagName}.${element.className}|${descendants}`;
+}
+
+function syncPopoutDynamicTracker(trackerHost) {
+    const sourceMarker = document.querySelector('.current-time-marker');
+    const targetMarker = trackerHost.querySelector('.current-time-marker');
+    if (sourceMarker && targetMarker) {
+        targetMarker.style.left = sourceMarker.style.left;
+        targetMarker.style.display = sourceMarker.style.display;
+        targetMarker.style.opacity = sourceMarker.style.opacity;
+    }
+
+    const sourceProgressContainer = document.querySelector('.progress-bar-container');
+    const targetProgressContainer = trackerHost.querySelector('.progress-bar-container');
+    const sourceProgress = sourceProgressContainer?.querySelector('.progress-bar');
+    const targetProgress = targetProgressContainer?.querySelector('.progress-bar');
+    if (sourceProgressContainer && targetProgressContainer) {
+        targetProgressContainer.className = sourceProgressContainer.className;
+    }
+    if (sourceProgress && targetProgress) {
+        targetProgress.style.width = sourceProgress.style.width;
+    }
+}
+
+function syncPopoutStatusPanel(source, host, selectors) {
+    if (!source) {
+        if (host.childElementCount) host.replaceChildren();
+        return false;
+    }
+
+    let target = host.firstElementChild;
+    if (!target || target.tagName !== source.tagName) {
+        target = source.cloneNode(true);
+        host.replaceChildren(target);
+        return true;
+    }
+
+    target.className = source.className;
+    let changed = false;
+    selectors.forEach(selector => {
+        const sourceNode = source.querySelector(selector);
+        const targetNode = target.querySelector(selector);
+        if (!sourceNode || !targetNode) return;
+        targetNode.className = sourceNode.className;
+        if (targetNode.innerHTML !== sourceNode.innerHTML) {
+            targetNode.innerHTML = sourceNode.innerHTML;
+            changed = true;
+        }
+    });
+    return changed;
+}
+
 function openTrackerPopout() {
     if (popoutWindow && !popoutWindow.closed) {
         popoutWindow.focus();
@@ -508,6 +596,9 @@ function openTrackerPopout() {
 
     popoutWindow = window.open('', 'autochair-tracker-popout', 'width=1500,height=420,resizable=yes');
     if (!popoutWindow) return;
+    popoutTrackerSignature = null;
+    popoutOverallSignature = null;
+    popoutCurrentSignature = null;
 
     const baseHref = `${window.location.origin}${window.location.pathname.replace(/[^/]*$/, '')}`;
     popoutWindow.document.open();
@@ -600,18 +691,18 @@ function openTrackerPopout() {
             triggerRetreatToPreviousItem();
         }
     });
+    popoutWindow.addEventListener('resize', () => {
+        clearTimeout(popoutResizeTimeout);
+        popoutResizeTimeout = setTimeout(() => {
+            popoutTrackerSignature = null;
+            syncPopoutWindow();
+        }, 140);
+    });
 
-    const startPopoutSync = () => {
-        syncPopoutWindow();
-        if (popoutSyncInterval) {
-            clearInterval(popoutSyncInterval);
-        }
-        popoutSyncInterval = setInterval(syncPopoutWindow, 1000);
-    };
     if (popoutWindow.document.readyState === 'complete') {
-        startPopoutSync();
+        syncPopoutWindow();
     } else {
-        popoutWindow.addEventListener('load', startPopoutSync, { once: true });
+        popoutWindow.addEventListener('load', syncPopoutWindow, { once: true });
     }
 }
 
@@ -630,28 +721,60 @@ function syncPopoutWindow() {
     const popoutNext = doc.getElementById('btn-popout-next');
     if (!trackerHost || !overallHost || !currentHost) return;
 
-    const axisHtml = document.querySelector('.timeline-axis-wrapper')?.outerHTML || '';
-    const trackHtml = document.querySelector('.timeline-track-wrapper')?.outerHTML || '';
-    const progressHtml = document.querySelector('.progress-bar-container')?.outerHTML || '';
-    trackerHost.innerHTML = `<div class="active-item-glow" aria-hidden="true"></div>${axisHtml}${trackHtml}${progressHtml}`;
+    const popoutView = doc.defaultView;
+    const nextTrackerSignature = getTrackerStructureSignature();
+    if (nextTrackerSignature !== popoutTrackerSignature) {
+        const axisHtml = document.querySelector('.timeline-axis-wrapper')?.outerHTML || '';
+        const trackHtml = document.querySelector('.timeline-track-wrapper')?.outerHTML || '';
+        const progressHtml = document.querySelector('.progress-bar-container')?.outerHTML || '';
+        trackerHost.innerHTML = `<div class="active-item-glow" aria-hidden="true"></div>${axisHtml}${trackHtml}${progressHtml}`;
+        popoutTrackerSignature = nextTrackerSignature;
 
-    const overall = statusDisplayEl?.querySelector('.status-display')?.outerHTML || '';
-    const current = currentStatusBox?.querySelector('.current-status-display')?.outerHTML || '';
-    overallHost.innerHTML = overall;
-    currentHost.innerHTML = current;
+        const popoutAxisWrapper = trackerHost.querySelector('.timeline-axis-wrapper');
+        const popoutTrack = trackerHost.querySelector('.timeline-track');
+        const popoutOverflow = trackerHost.querySelector('.overflow-labels-container');
+        const popoutGlow = trackerHost.querySelector('.active-item-glow');
+        const blockData = getTimelineBlockData(calculateIntervals());
+        popoutView?.requestAnimationFrame(() => {
+            layoutClonedAxis(popoutAxisWrapper);
+            renderOverflowLabels(blockData, popoutTrack, popoutOverflow);
+            updateActiveItemGlow(trackerHost, popoutTrack, popoutGlow);
+        });
+    }
+    syncPopoutDynamicTracker(trackerHost);
 
-    const popoutAxisWrapper = trackerHost.querySelector('.timeline-axis-wrapper');
-    const popoutTrack = trackerHost.querySelector('.timeline-track');
-    const popoutOverflow = trackerHost.querySelector('.overflow-labels-container');
-    const popoutGlow = trackerHost.querySelector('.active-item-glow');
-    const blockData = getTimelineBlockData(calculateIntervals());
-    popoutWindow.requestAnimationFrame(() => {
-        layoutClonedAxis(popoutAxisWrapper);
-        renderOverflowLabels(blockData, popoutTrack, popoutOverflow);
-        updateActiveItemGlow(trackerHost, popoutTrack, popoutGlow);
-        fitTickerToContainer(overallHost.querySelector('.ticker-tape'));
-        fitTickerToContainer(currentHost.querySelector('.current-status-tape'));
-    });
+    const overallSource = statusDisplayEl?.querySelector('.status-display');
+    const currentSource = currentStatusBox?.querySelector('.current-status-display');
+    const nextOverallSignature = getSemanticDomSignature(overallSource);
+    const nextCurrentSignature = getSemanticDomSignature(currentSource);
+    const overallChanged = nextOverallSignature !== popoutOverallSignature;
+    const currentChanged = nextCurrentSignature !== popoutCurrentSignature;
+
+    if (overallChanged) {
+        syncPopoutStatusPanel(overallSource, overallHost, [
+            '.status-label',
+            '.ticker-tape',
+            '.status-unit',
+            '.status-direction'
+        ]);
+        popoutOverallSignature = nextOverallSignature;
+    }
+    if (currentChanged) {
+        syncPopoutStatusPanel(currentSource, currentHost, [
+            '.current-status-label',
+            '.current-status-tape',
+            '.current-status-unit',
+            '.current-status-line',
+            '.current-status-next'
+        ]);
+        popoutCurrentSignature = nextCurrentSignature;
+    }
+    if (overallChanged || currentChanged) {
+        popoutView?.requestAnimationFrame(() => {
+            if (overallChanged) fitTickerToContainer(overallHost.querySelector('.ticker-tape'));
+            if (currentChanged) fitTickerToContainer(currentHost.querySelector('.current-status-tape'));
+        });
+    }
 
     if (popoutPrev && prevItemButton) {
         popoutPrev.disabled = prevItemButton.disabled;
@@ -662,10 +785,11 @@ function syncPopoutWindow() {
 }
 
 function cleanupPopoutWindow() {
-    if (popoutSyncInterval) {
-        clearInterval(popoutSyncInterval);
-        popoutSyncInterval = null;
-    }
+    clearTimeout(popoutResizeTimeout);
+    popoutResizeTimeout = null;
+    popoutTrackerSignature = null;
+    popoutOverallSignature = null;
+    popoutCurrentSignature = null;
     if (popoutWindow && !popoutWindow.closed) {
         try {
             popoutWindow.close();
@@ -861,6 +985,7 @@ function updateActiveItemGlow(
     const originLeft = containerRect.left + container.clientLeft;
     const originTop = containerRect.top + container.clientTop;
     const axisRect = axisWrapper.getBoundingClientRect();
+    const trackRect = track.getBoundingClientRect();
     const blockRect = activeBlock.getBoundingClientRect();
     const top = Math.max(0, axisRect.top - originTop + 2);
     const bottom = blockRect.top - originTop;
@@ -870,12 +995,25 @@ function updateActiveItemGlow(
         return;
     }
 
+    const glowWidth = Math.min(trackRect.width, Math.max(blockRect.width, 140));
+    const trackLeft = trackRect.left - originLeft;
+    const blockLeft = blockRect.left - originLeft;
+    const desiredLeft = blockLeft + (blockRect.width - glowWidth) / 2;
+    const glowLeft = clamp(desiredLeft, trackLeft, trackLeft + trackRect.width - glowWidth);
+    const baseLeft = blockLeft - glowLeft;
+    const baseRight = baseLeft + blockRect.width;
+    const tipCenter = blockLeft + blockRect.width / 2 - glowLeft;
+
     glow.style.display = 'block';
-    glow.style.left = `${blockRect.left - originLeft}px`;
+    glow.style.left = `${glowLeft}px`;
     glow.style.top = `${top}px`;
-    glow.style.width = `${blockRect.width}px`;
+    glow.style.width = `${glowWidth}px`;
     glow.style.height = `${height}px`;
     glow.style.setProperty('--active-glow-rgb', activeBlock.dataset.glowRgb || '33 150 243');
+    glow.style.setProperty('--active-glow-tip-left', `${tipCenter - 6}px`);
+    glow.style.setProperty('--active-glow-tip-right', `${tipCenter + 6}px`);
+    glow.style.setProperty('--active-glow-base-left', `${baseLeft}px`);
+    glow.style.setProperty('--active-glow-base-right', `${baseRight}px`);
 }
 
 /**
@@ -1214,6 +1352,7 @@ function layoutAxisLabels(axisWrapper, axis, labelEntries) {
         labelEntries.forEach((entry, i) => {
             const displacement = Math.abs(fittedCenters[i] - desiredCenters[i]);
             entry.displaced = displacement > 2;
+            entry.tickElement.classList.toggle('has-connector', entry.displaced);
             entry.label.style.left = `${fittedCenters[i]}px`;
             entry.label.style.top = entry.displaced ? `${liftedTop}px` : `${baseTop}px`;
             entry.label.style.background = '';
@@ -1242,7 +1381,7 @@ function layoutAxisLabels(axisWrapper, axis, labelEntries) {
             const endX = fittedCenters[i];
             const endY = labelBox.top - wrapperRect.top + labelBox.height + 0.5;
             const startX = desiredCenters[i];
-            const startY = axisY - tickHeights[i] + 0.5;
+            const startY = axisY + 0.5;
             const path = ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', getVerticalConnectorPath(startX, startY, endX, endY));
             path.setAttribute('stroke', entry.isMajor ? entry.followColor : '#444');
