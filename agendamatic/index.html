@@ -144,7 +144,7 @@
                                         <span class="ticker-on-time">ON TIME</span>
                                     </div>
                                 </div>
-                                <div class="status-unit" id="status-unit">STATUS</div>
+                                <div class="status-unit" id="status-unit"></div>
                                 <span class="status-direction"></span>
                             </div>
                         </div>
@@ -278,7 +278,7 @@
                             </div>
                             <div class="current-status-unit">MINUTES</div>
                             <div class="current-status-line">
-                                of <span class="current-status-item" id="current-status-item">-</span> LEFT
+                                LEFT FOR <span class="current-status-item" id="current-status-item">-</span>
                             </div>
                             <div class="current-status-next" id="current-status-next">
                                 (next item: <span class="current-status-next-item" id="current-status-next-item">-</span>)
@@ -428,12 +428,12 @@
                 <label data-tooltip="Display countdown or elapsed time">
                     Timer Mode
                     <select id="timer-mode">
-                        <option value="countdown">Count Down</option>
-                        <option value="elapsed">Elapsed</option>
+                        <option value="countdown">Time Remaining</option>
+                        <option value="elapsed">Time Elapsed</option>
                     </select>
                 </label>
-                <label data-tooltip="Show warning when 1 minute remains for current item">
-                    <input type="checkbox" id="one-min-warning" checked> 1-Min Warning
+                <label data-tooltip="Show a warning when one minute remains in the current item">
+                    <input type="checkbox" id="one-min-warning" checked> 1-Minute Warning
                 </label>
                 <label data-tooltip="Flash screen when overtime">
                     <input type="checkbox" id="overtime-flash"> Overtime Flash

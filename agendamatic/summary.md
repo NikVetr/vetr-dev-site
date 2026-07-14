@@ -36,11 +36,12 @@ How parts connect
 - Drag-and-drop is cross-panel: input rows, tracker blocks, and staging cards all exchange items by ID through shared state updates.
 - Status tickers auto-fit to container width to reduce clipping/overflow at higher zoom levels.
 - Current Status now tracks the active item continuously (including overtime): before boundary it shows time left; after boundary it switches to "PAST THE END OF [item]" while keeping the next-item line.
+- Status wording omits a dangling unit when the meeting is on time, uses singular units correctly, and shows an explicit empty-agenda state; agenda item names are always inserted as text rather than interpreted as markup.
 - Overall Status now reflects cumulative run drift from completed items plus live overrun on the active item, instead of auto-advancing by wall clock.
 - Tracker now renders an additional dashed progress guide line from the progress bar upward to the axis (behind chart blocks), and displaced major time labels use boundary-color gradients with improved connector curve geometry.
 - The layout now includes direct split-handle resizing for top, right-side, status stack, tracker, and bottom panel boundaries, with clamping to keep both sides usable and prevent UI extrusion.
 - The layout resizers now include both column and row splitters (`workspace-panels` and `lower-panels`) with hover-only handles and corner grips, and persisted splits were versioned to avoid stale/garbled layouts after structure changes.
-- Tracker connector curves now use vertical tangency at both ends (ticks/labels and block edges/overflow labels) so they meet anchors straight-on, and splitter clamping now handles infeasible minimums by scaling constraints to prevent panel overlap.
+- Tracker connector curves use monotone midpoint Béziers with vertical tangency at both ends (ticks/labels and block edges/overflow labels), remain between their endpoint rows, and render behind label text. Splitter clamping handles infeasible minimums by scaling constraints to prevent panel overlap.
 - The next/previous control pair now has its own internal splitter, and layout split persistence was versioned again to clear stale values after clamp/geometry changes.
 - Split-drag updates now trigger immediate re-clamping of all persisted split values and a tracker layout refresh pass, so nested panels and axis/overflow labels stay aligned during live panel resizing.
 - Panel internals now use additional adaptive sizing rules (container-query-driven typography/grid compression, tighter spinner controls, and scroll-safe overflow in tracker/current-item/staging) so content remains contained and legible at extreme splitter positions.

@@ -1401,6 +1401,7 @@ h3 {
 
 .overflow-label {
     position: absolute;
+    z-index: 2;
     font-size: 0.8rem;
     font-weight: bold;
     border-left: none !important;
@@ -1420,6 +1421,7 @@ h3 {
 /* SVG for bezier curves */
 .overflow-curves-svg {
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
@@ -1430,6 +1432,7 @@ h3 {
 
 .axis-label-layer {
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 0;
     right: 0;
@@ -1440,6 +1443,7 @@ h3 {
 
 .axis-label-curves {
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
@@ -2689,7 +2693,7 @@ body.corner-resize-preview * {
 
     .timeline-axis-line,
     .axis-ticks {
-        top: 22px;
+        top: 28px;
     }
 
     .axis-tick.major::before {
@@ -2737,7 +2741,7 @@ body.corner-resize-preview * {
 
     .timeline-axis-line,
     .axis-ticks {
-        top: 14px;
+        top: 19px;
     }
 
     .axis-tick-label {

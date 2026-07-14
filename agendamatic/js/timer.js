@@ -872,15 +872,6 @@ function renderOverflowLabels(blockData) {
             const endX = fittedCenters[i];
             // Anchor just above the label to avoid colored strokes intruding on text.
             const endY = Math.max(0, labelTop - 2);
-            const lift = Math.max(10, Math.min(22, Math.abs(endX - startX) * 0.18 + 8));
-            const controlY = endY >= startY
-                ? Math.max(startY, endY) + lift
-                : Math.min(startY, endY) - lift;
-            // Keep entry/exit vertical so curves hit rectangles/labels straight-on.
-            const c1x = startX;
-            const c1y = controlY;
-            const c2x = endX;
-            const c2y = controlY;
 
             const colors = {
                 1: '#2196f3',
@@ -891,8 +882,7 @@ function renderOverflowLabels(blockData) {
             const strokeColor = colors[item.themeNumber] || '#666';
 
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const d = `M ${startX} ${startY} C ${c1x} ${c1y} ${c2x} ${c2y} ${endX} ${endY}`;
-            path.setAttribute('d', d);
+            path.setAttribute('d', getVerticalConnectorPath(startX, startY, endX, endY));
             path.setAttribute('stroke', strokeColor);
             path.setAttribute('stroke-width', '1.5');
             path.setAttribute('fill', 'none');
@@ -913,6 +903,11 @@ function getTextWidth(text, font) {
     const context = canvas.getContext('2d');
     context.font = font;
     return context.measureText(text).width;
+}
+
+function getVerticalConnectorPath(startX, startY, endX, endY) {
+    const middleY = startY + ((endY - startY) / 2);
+    return `M ${startX} ${startY} C ${startX} ${middleY} ${endX} ${middleY} ${endX} ${endY}`;
 }
 
 function fitLabelCenters(desiredCenters, widths, gap, bounds) {
@@ -1178,6 +1173,7 @@ function renderAxisTicks() {
             const followColor = getFollowingItemColor(items, tick.time);
             labelEntries.push({
                 label,
+                tickElement: tickEl,
                 isMajor: tick.isMajor,
                 desiredCenter: tick.position,
                 followColor,
@@ -1200,10 +1196,14 @@ function renderAxisTicks() {
             ? fitLabelCenters(boundedDesiredCenters, labelWidths, 8, [0, width])
             : boundedDesiredCenters;
         const labelHeights = labelEntries.map(entry => entry.label.getBoundingClientRect().height || 12);
+        const tickHeights = labelEntries.map(entry => {
+            const renderedHeight = parseFloat(getComputedStyle(entry.tickElement, '::before').height);
+            return Number.isFinite(renderedHeight) ? renderedHeight : entry.tickHeight;
+        });
         const maxLabelHeight = Math.max(...labelHeights, 12);
         const axisLine = axisWrapper.querySelector('.timeline-axis-line');
         const axisY = axisLine ? axisLine.offsetTop : timelineAxis.offsetTop;
-        const majorTickHeight = 8;
+        const majorTickHeight = Math.max(...tickHeights);
         const tickTop = axisY - majorTickHeight;
         const baseTop = Math.max(0, tickTop - maxLabelHeight - 4);
         const liftedTop = Math.max(0, baseTop - 14);
@@ -1243,16 +1243,7 @@ function renderAxisTicks() {
             const endX = fittedCenters[i];
             const endY = labelBox.top - wrapperRect.top + labelBox.height + 0.5;
             const startX = desiredCenters[i];
-            const startY = axisY - entry.tickHeight + 0.5;
-            const lift = Math.max(10, Math.min(24, Math.abs(endX - startX) * 0.2 + 8));
-            const controlY = endY >= startY
-                ? Math.max(startY, endY) + lift
-                : Math.min(startY, endY) - lift;
-            // Keep entry/exit vertical so curves hit ticks/labels straight-on.
-            const c1x = startX;
-            const c1y = controlY;
-            const c2x = endX;
-            const c2y = controlY;
+            const startY = axisY - tickHeights[i] + 0.5;
 
             let stroke = '#444';
             if (entry.isMajor) {
@@ -1278,8 +1269,7 @@ function renderAxisTicks() {
             }
 
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const d = `M ${startX} ${startY} C ${c1x} ${c1y} ${c2x} ${c2y} ${endX} ${endY}`;
-            path.setAttribute('d', d);
+            path.setAttribute('d', getVerticalConnectorPath(startX, startY, endX, endY));
             path.setAttribute('stroke', stroke);
             path.setAttribute('stroke-width', entry.isMajor ? '1.4' : '1');
             path.setAttribute('fill', 'none');
@@ -1347,7 +1337,7 @@ function updateStatusDisplay() {
         tickerTape.innerHTML = '<span class="ticker-on-time">ON TIME</span>';
         directionEl.textContent = '';
         if (statusUnitEl) {
-            statusUnitEl.textContent = 'MINUTES';
+            statusUnitEl.textContent = '';
         }
     } else {
         const scale = getTickerScale(difference);
@@ -1441,7 +1431,7 @@ function getTickerScale(minutesValue) {
     if (absMinutes < 2) {
         return {
             value: absMinutes,
-            unit: 'MINUTES',
+            unit: Math.abs(absMinutes - 1) < 0.05 ? 'MINUTE' : 'MINUTES',
             step: 0.5,
             precision: 1
         };
@@ -1508,23 +1498,38 @@ function updateCurrentItemPanel() {
     }
 }
 
+function renderCurrentStatusItemLine(statusLine, prefix, itemName) {
+    statusLine.replaceChildren(document.createTextNode(`${prefix} `));
+
+    const item = document.createElement('span');
+    item.className = 'current-status-item';
+    item.id = 'current-status-item';
+    item.textContent = itemName || '-';
+    statusLine.appendChild(item);
+    currentStatusItemEl = item;
+}
+
 /**
  * Update the current status panel
  */
 function updateCurrentStatusPanel() {
-    if (!currentStatusBox || !currentStatusTape || !currentStatusItemEl || !currentStatusNextLineEl) return;
+    if (!currentStatusBox || !currentStatusTape || !currentStatusNextLineEl) return;
 
     const items = calculateIntervals();
     if (items.length === 0) {
-        currentStatusItemEl.textContent = '-';
-        if (currentStatusLabelEl) currentStatusLabelEl.textContent = 'YOU HAVE';
-        if (currentStatusUnitEl) currentStatusUnitEl.textContent = 'MINUTES';
+        if (currentStatusLabelEl) currentStatusLabelEl.textContent = 'NO AGENDA ITEMS';
+        if (currentStatusUnitEl) currentStatusUnitEl.textContent = '';
+        const emptyTicker = document.createElement('span');
+        emptyTicker.className = 'ticker-on-time';
+        emptyTicker.textContent = '—';
+        currentStatusTape.replaceChildren(emptyTicker);
+        const statusLine = currentStatusBox.querySelector('.current-status-line');
+        if (statusLine) statusLine.textContent = '';
+        currentStatusItemEl = null;
         currentStatusNextLineEl.textContent = '';
         currentStatusNextItemEl = null;
-        renderMinuteTicker(currentStatusTape, 0);
         fitTickerToContainer(currentStatusTape);
         lastCurrentMinutes = 0;
-        applyThemeText(currentStatusItemEl, null);
         applyThemeText(currentStatusTape, null);
         if (nextItemButton) nextItemButton.disabled = true;
         if (prevItemButton) prevItemButton.disabled = true;
@@ -1558,7 +1563,6 @@ function updateCurrentStatusPanel() {
         lastCurrentMinutes = displayValue;
     }
 
-    currentStatusItemEl.textContent = currentItem?.name || '-';
     if (currentStatusLabelEl) {
         currentStatusLabelEl.textContent = remaining >= 0 ? 'YOU HAVE' : 'YOU ARE';
     }
@@ -1568,12 +1572,8 @@ function updateCurrentStatusPanel() {
 
     const statusLine = currentStatusBox.querySelector('.current-status-line');
     if (statusLine) {
-        if (remaining >= 0) {
-            statusLine.innerHTML = `of <span class="current-status-item" id="current-status-item">${currentItem?.name || '-'}</span> LEFT`;
-        } else {
-            statusLine.innerHTML = `PAST THE END OF <span class="current-status-item" id="current-status-item">${currentItem?.name || '-'}</span>`;
-        }
-        currentStatusItemEl = statusLine.querySelector('#current-status-item') || currentStatusItemEl;
+        const prefix = remaining >= 0 ? 'LEFT FOR' : 'PAST THE END OF';
+        renderCurrentStatusItemLine(statusLine, prefix, currentItem?.name);
     }
 
     if (nextItem) {
@@ -1589,7 +1589,9 @@ function updateCurrentStatusPanel() {
         currentStatusNextItemEl = null;
     }
 
-    applyThemeText(currentStatusItemEl, currentItem?.themeNumber);
+    if (currentStatusItemEl) {
+        applyThemeText(currentStatusItemEl, currentItem?.themeNumber);
+    }
     if (currentStatusNextItemEl) {
         applyThemeText(currentStatusNextItemEl, nextItem?.themeNumber);
     }
