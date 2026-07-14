@@ -232,7 +232,7 @@ body.dragging-item * {
 
 .workspace-panels {
     display: grid;
-    grid-template-rows: minmax(0, var(--main-top-height, 1.35fr)) var(--splitter-size) minmax(0, 1fr);
+    grid-template-rows: minmax(0, var(--main-top-height, 43%)) var(--splitter-size) minmax(0, 1fr);
     gap: 0;
     min-height: 0;
     overflow: hidden;
@@ -240,7 +240,7 @@ body.dragging-item * {
 
 .lower-panels {
     display: grid;
-    grid-template-rows: minmax(0, 1fr) var(--splitter-size) minmax(0, var(--main-bottom-height, 1fr));
+    grid-template-rows: minmax(0, 0.72fr) var(--splitter-size) minmax(0, var(--main-bottom-height, 1fr));
     gap: 0;
     min-height: 0;
     overflow: hidden;
@@ -284,7 +284,7 @@ body.dragging-item * {
     flex-direction: column;
     min-height: 0;
     align-self: stretch;
-    container-type: inline-size;
+    container-type: size;
     container-name: input-panel;
 }
 
@@ -845,12 +845,15 @@ h3 {
 }
 
 .overall-status-box .status-display {
+    display: grid;
+    grid-template-rows: auto minmax(20px, 1fr) auto auto;
+    align-content: stretch;
     height: 100%;
     max-width: 100%;
     max-height: 100%;
     margin: 0 auto;
-    padding-top: 24px;
-    padding-bottom: 22px;
+    padding: clamp(5px, 1.6cqh, 16px) 14px;
+    overflow: hidden;
 }
 
 .status-label {
@@ -874,7 +877,8 @@ h3 {
 }
 
 .overall-status-box .ticker-container {
-    height: 150px;
+    height: auto;
+    min-height: 20px;
     overflow: hidden;
     max-width: 100%;
 }
@@ -2390,6 +2394,32 @@ body.corner-resize-preview * {
     }
 }
 
+@container input-panel (max-height: 360px) {
+    .agenda-header {
+        margin-bottom: 2px;
+        padding-top: 2px;
+        padding-bottom: 5px;
+    }
+
+    .agenda-row {
+        min-height: 32px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .agenda-row input[type="text"],
+    .agenda-row input[type="number"] {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    .btn-add-row {
+        margin-top: 5px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+}
+
 @container input-panel (max-width: 430px) {
     .agenda-grid {
         font-size: 0.7rem;
@@ -2441,6 +2471,10 @@ body.corner-resize-preview * {
 }
 
 @container overall-status (max-width: 210px) {
+    .overall-status-box .status-clock {
+        display: none;
+    }
+
     .overall-status-box .status-label {
         font-size: 0.88rem;
     }
@@ -2507,8 +2541,8 @@ body.corner-resize-preview * {
 }
 
 @container next-controls (max-width: 200px) {
-    .next-item-logo,
-    .next-item-logo-small {
+    .next-item-controls .next-item-logo,
+    .next-item-controls .next-item-logo-small {
         display: none;
     }
 
@@ -2745,7 +2779,7 @@ body.corner-resize-preview * {
     }
 
     .current-status-ticker {
-        height: 56px;
+        height: 42px;
     }
 
     .current-status-unit {
@@ -2758,8 +2792,11 @@ body.corner-resize-preview * {
     }
 
     .current-status-next {
-        font-size: 0.7rem;
-        margin-top: 0;
+        display: none;
+    }
+
+    .current-status-line {
+        display: none;
     }
 }
 
@@ -2854,7 +2891,7 @@ body.corner-resize-preview * {
     }
 }
 
-@container current-item (max-height: 210px) {
+@container current-item (max-height: 250px) {
     .active-header {
         margin-bottom: 6px;
         padding-bottom: 6px;
@@ -2878,7 +2915,7 @@ body.corner-resize-preview * {
     }
 }
 
-@container current-item (max-height: 165px) {
+@container current-item (max-height: 230px) {
     .notes-editor {
         grid-template-rows: auto minmax(0, 1fr);
     }
@@ -2890,6 +2927,17 @@ body.corner-resize-preview * {
     .notes-area {
         padding: 8px 10px;
         font-size: 0.84rem;
+    }
+
+    .notes-toolbar {
+        flex-wrap: nowrap;
+        gap: 4px;
+        overflow-x: auto;
+    }
+
+    .notes-toolbar button {
+        flex: 0 0 auto;
+        padding: 5px 8px;
     }
 }
 

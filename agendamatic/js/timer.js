@@ -14,7 +14,9 @@ import {
     ensureExpectedSnapshot,
     retreatToPreviousItem,
     reorderItems,
-    unstageItem
+    unstageItem,
+    beginHistoryTransaction,
+    endHistoryTransaction
 } from './state.js';
 import { formatTime, getMinutesDiff, clamp, parseDuration, formatDuration, renderMarkdownToHtml } from './utils.js';
 
@@ -160,6 +162,7 @@ export function initTimer(elements) {
     updateCurrentStatusPanel();
     updateStatusClock();
     updateProgressBar();
+    updateButtonStates();
 
     // Start the tick interval
     startTickInterval();
@@ -212,6 +215,7 @@ function stopTickInterval() {
  * Start the timer
  */
 export function startTimer() {
+    beginHistoryTransaction();
     const state = getState();
     if (!state.tracker.expectedSnapshot) {
         ensureExpectedSnapshot();
@@ -229,6 +233,7 @@ export function startTimer() {
         completedDiffById: hasStartedBefore ? (state.tracker.completedDiffById || {}) : {},
         overallDeltaMinutes: hasStartedBefore ? (state.tracker.overallDeltaMinutes || 0) : 0
     });
+    endHistoryTransaction();
     updateButtonStates();
 }
 
@@ -428,6 +433,7 @@ function beginTrackerResize(blockEl, itemIndex, edge, pointerEvent) {
     const items = calculateIntervals();
     if (items.length === 0) return;
 
+    beginHistoryTransaction();
     trackerResizeState = {
         blockEl,
         itemIndex,
@@ -488,6 +494,7 @@ function endTrackerResize() {
     window.removeEventListener('pointermove', handleTrackerResizeMove);
     window.removeEventListener('pointerup', endTrackerResize);
     window.removeEventListener('pointercancel', endTrackerResize);
+    endHistoryTransaction();
 }
 
 function openTrackerPopout() {
@@ -799,8 +806,10 @@ function renderOverflowLabels(blockData) {
 
     blocks.forEach((block, index) => {
         const blockRect = block.getBoundingClientRect();
-        const textWidth = getTextWidth(block.textContent, '0.8rem bold "Courier New"');
-        const availableWidth = blockRect.width - 8; // Account for padding
+        const blockStyle = getComputedStyle(block);
+        const font = `${blockStyle.fontWeight} ${blockStyle.fontSize} ${blockStyle.fontFamily}`;
+        const textWidth = getTextWidth(block.textContent, font);
+        const availableWidth = block.clientWidth - 8;
 
         if (textWidth > availableWidth) {
             block.classList.add('label-overflow');

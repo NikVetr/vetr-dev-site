@@ -12,6 +12,7 @@ A real-time meeting agenda tracker with visual timeline, state persistence, and 
 - **Locked Items**: Lock specific items to prevent their duration from being adjusted
 - **Status Monitor**: Clear display of whether you're on time, behind, or ahead
 - **State Persistence**: State saved to URL and localStorage
+- **Undo/Redo**: Use Ctrl/Cmd-Z and Ctrl/Cmd-Shift-Z outside text editors
 - **Shareable Links**: Copy URL to share your agenda with others
 - **Export Options**: Export to Markdown or JSON
 - **Import/Export**: Full JSON import/export for backup and transfer
@@ -75,6 +76,7 @@ agendamatic/
 - **Edit**: Click any field to edit item name, lead, or duration
 - **Duration Format**: Enter duration as `5m`, `1h`, `1h30m`, or just `30`
 - **Reorder**: Drag items by the grip handle (⋮⋮) to reorder
+- **Undo/Redo**: Press Ctrl/Cmd-Z to undo an app action and Ctrl/Cmd-Shift-Z to redo it; focused text fields keep native text undo behavior
 - **Lock**: Check the lock icon to prevent duration adjustment when running late
 - **Delete**: Click × to remove an item
 

@@ -2,7 +2,7 @@
  * layout-resize.js - Drag handles for resizing panel splits
  */
 
-const STORAGE_KEY = 'autochair_layout_splits_v5';
+const STORAGE_KEY = 'autochair_layout_splits_v6';
 
 const RESIZER_DEFS = [
     {
@@ -59,7 +59,6 @@ const RESIZER_DEFS = [
         containerSelector: '.lower-panels',
         cssVar: '--main-bottom-height',
         anchor: 'next',
-        initFromSelector: '.bottom-section',
         minPrev: 120,
         minNext: 120
     },
@@ -482,17 +481,6 @@ function clampAll() {
         const container = document.querySelector(def.containerSelector);
         if (!container) return;
         let value = Number.parseFloat(container.style.getPropertyValue(def.cssVar));
-
-        if (!Number.isFinite(value) && def.anchor === 'next' && def.initFromSelector) {
-            const initEl = container.querySelector(def.initFromSelector);
-            if (initEl) {
-                const size = def.axis === 'x'
-                    ? initEl.getBoundingClientRect().width
-                    : initEl.getBoundingClientRect().height;
-                container.style.setProperty(def.cssVar, `${Math.round(size)}px`);
-                value = Number.parseFloat(container.style.getPropertyValue(def.cssVar));
-            }
-        }
 
         if (!Number.isFinite(value)) return;
         const rect = container.getBoundingClientRect();

@@ -3,7 +3,17 @@
  * Initializes all modules and wires together the application
  */
 
-import { initializeState, getState, subscribe, updateSettings, updateExportOptions, updateItem, resetState } from './state.js';
+import {
+    initializeState,
+    getState,
+    subscribe,
+    updateSettings,
+    updateExportOptions,
+    updateItem,
+    resetState,
+    undo,
+    redo
+} from './state.js';
 import { initAgenda, handleAddItem } from './agenda.js';
 import { initTimer } from './timer.js';
 import { initStaging } from './staging.js';
@@ -252,6 +262,7 @@ function init() {
 
     // Set up event listeners
     setupEventListeners(elements);
+    setupUndoRedoShortcuts();
 
     // Enable panel split resizing handles
     initLayoutResizers();
@@ -263,12 +274,64 @@ function init() {
     subscribe((state) => {
         applySettings(state);
         syncStartTimeInputs(state);
+        syncControlsFromState(state, elements);
     });
 
     // Initial sync of start time inputs
     syncStartTimeInputs(getState());
+    syncControlsFromState(getState(), elements);
 
     console.log('autoCHAIR initialized');
+}
+
+function setupUndoRedoShortcuts() {
+    document.addEventListener('keydown', (event) => {
+        if (!(event.ctrlKey || event.metaKey) || event.altKey) return;
+        if (event.key.toLowerCase() !== 'z') return;
+
+        const target = event.target;
+        const isNativeEditor = target instanceof HTMLElement && (
+            target.tagName === 'TEXTAREA' ||
+            target.isContentEditable
+        );
+        if (isNativeEditor) return;
+
+        event.preventDefault();
+        if (target instanceof HTMLInputElement) target.blur();
+        if (event.shiftKey) {
+            redo();
+        } else {
+            undo();
+        }
+    });
+}
+
+function syncControlsFromState(state, elements) {
+    const settings = state.settings || {};
+    const exportOptions = state.exportOptions || {};
+    const checkboxValues = [
+        [elements.darkModeCheckbox, settings.darkMode],
+        [elements.soundEffectsCheckbox, settings.soundEffects],
+        [elements.syncSystemTimeCheckbox, settings.syncSystemTime],
+        [elements.pinStartTimeCheckbox, settings.pinStartTime !== false],
+        [elements.pinEndTimeCheckbox, settings.pinEndTime !== false],
+        [elements.showProgressBarCheckbox, settings.showProgressBar],
+        [elements.oneMinWarningCheckbox, settings.oneMinWarning],
+        [elements.overtimeFlashCheckbox, settings.overtimeFlash],
+        [elements.includeHeaderCheckbox, exportOptions.includeHeader],
+        [elements.includeNotesCheckbox, exportOptions.includeNotes],
+        [elements.includePrepCheckbox, exportOptions.includePrep],
+        [elements.includeContextCheckbox, exportOptions.includeContext]
+    ];
+    checkboxValues.forEach(([element, value]) => {
+        if (element) element.checked = !!value;
+    });
+
+    if (elements.densitySelect) elements.densitySelect.value = settings.density;
+    if (elements.timerModeSelect) elements.timerModeSelect.value = settings.timerMode;
+    if (elements.bufferInput && document.activeElement !== elements.bufferInput) {
+        elements.bufferInput.value = settings.buffer;
+    }
 }
 
 /**

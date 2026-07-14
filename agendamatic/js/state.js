@@ -337,10 +337,17 @@ const DEFAULT_ITEMS = [
 ];
 
 const STORAGE_KEY = 'agendamatic_state';
+const STORAGE_URL_KEY = 'agendamatic_last_url_state';
+const HISTORY_LIMIT = 100;
 
 // State subscribers
 let subscribers = [];
 let currentState = null;
+let undoStack = [];
+let redoStack = [];
+let historyTransaction = null;
+let lastHistoryGroup = null;
+let lastHistoryTime = 0;
 
 /**
  * Get the current state
@@ -373,10 +380,69 @@ function notifySubscribers() {
  * Update state and persist
  * @param {Object} updates - Partial state updates
  */
-export function setState(updates) {
-    currentState = { ...currentState, ...updates };
+export function setState(updates, options = {}) {
+    const nextState = options.replace ? updates : { ...currentState, ...updates };
+    if (JSON.stringify(nextState) === JSON.stringify(currentState)) return false;
+
+    if (!historyTransaction) {
+        const now = Date.now();
+        const canCoalesce = options.historyGroup &&
+            options.historyGroup === lastHistoryGroup &&
+            now - lastHistoryTime < 750;
+        if (!canCoalesce) {
+            undoStack.push(deepClone(currentState));
+            if (undoStack.length > HISTORY_LIMIT) undoStack.shift();
+        }
+        redoStack = [];
+        lastHistoryGroup = options.historyGroup || null;
+        lastHistoryTime = now;
+    }
+
+    currentState = nextState;
     persistState();
     notifySubscribers();
+    return true;
+}
+
+/** Group a sequence of live updates into one undo step. */
+export function beginHistoryTransaction() {
+    if (historyTransaction || !currentState) return;
+    historyTransaction = { before: deepClone(currentState) };
+}
+
+/** Finish a grouped state update and record its initial state. */
+export function endHistoryTransaction() {
+    if (!historyTransaction) return;
+    const before = historyTransaction.before;
+    historyTransaction = null;
+    if (JSON.stringify(before) === JSON.stringify(currentState)) return;
+    undoStack.push(before);
+    if (undoStack.length > HISTORY_LIMIT) undoStack.shift();
+    redoStack = [];
+    lastHistoryGroup = null;
+    lastHistoryTime = 0;
+}
+
+export function undo() {
+    if (undoStack.length === 0 || !currentState) return false;
+    redoStack.push(deepClone(currentState));
+    currentState = undoStack.pop();
+    lastHistoryGroup = null;
+    lastHistoryTime = 0;
+    persistState();
+    notifySubscribers();
+    return true;
+}
+
+export function redo() {
+    if (redoStack.length === 0 || !currentState) return false;
+    undoStack.push(deepClone(currentState));
+    currentState = redoStack.pop();
+    lastHistoryGroup = null;
+    lastHistoryTime = 0;
+    persistState();
+    notifySubscribers();
+    return true;
 }
 
 /**
@@ -391,7 +457,8 @@ export function updateItem(itemId, updates) {
     const stagedItems = currentState.stagedItems.map(item =>
         item.id === itemId ? { ...item, ...updates } : item
     );
-    setState({ items, stagedItems });
+    const fields = Object.keys(updates).sort().join(',');
+    setState({ items, stagedItems }, { historyGroup: `item:${itemId}:${fields}` });
 }
 
 // Track next theme color to assign
@@ -1300,6 +1367,11 @@ export function updateURL() {
     const url = new URL(window.location.href);
     url.searchParams.set('s', encoded);
     window.history.replaceState({}, '', url.toString());
+    try {
+        localStorage.setItem(STORAGE_URL_KEY, encoded);
+    } catch (e) {
+        console.error('Failed to remember URL state:', e);
+    }
 }
 
 /**
@@ -1348,12 +1420,21 @@ function loadFromLocalStorage() {
  * Initialize state from URL, localStorage, or defaults
  */
 export function initializeState() {
-    // Priority: URL > localStorage > defaults
-    let state = loadFromURL();
-
-    if (!state) {
-        state = loadFromLocalStorage();
+    // A URL different from the last URL generated in this browser is a shared
+    // agenda and takes priority. Otherwise prefer the fuller local state, which
+    // includes tracker runtime details omitted from compact share URLs.
+    const url = new URL(window.location.href);
+    const encodedURLState = url.searchParams.get('s');
+    let lastLocalURLState = null;
+    try {
+        lastLocalURLState = localStorage.getItem(STORAGE_URL_KEY);
+    } catch (e) {
+        console.error('Failed to read remembered URL state:', e);
     }
+
+    const hasExternalURLState = !!encodedURLState && encodedURLState !== lastLocalURLState;
+    let state = hasExternalURLState ? loadFromURL() : loadFromLocalStorage();
+    if (!state && encodedURLState) state = loadFromURL();
 
     if (!state) {
         state = {
@@ -1372,6 +1453,12 @@ export function initializeState() {
     }
 
     currentState = state;
+    undoStack = [];
+    redoStack = [];
+    historyTransaction = null;
+    lastHistoryGroup = null;
+    lastHistoryTime = 0;
+    persistState();
     notifySubscribers();
     return currentState;
 }
@@ -1409,7 +1496,7 @@ export function importFromJSON(json) {
         }));
 
         // Merge with defaults
-        currentState = {
+        const nextState = {
             ...deepClone(DEFAULT_STATE),
             ...imported,
             settings: { ...DEFAULT_STATE.settings, ...imported.settings },
@@ -1417,8 +1504,7 @@ export function importFromJSON(json) {
             tracker: { ...DEFAULT_STATE.tracker, ...imported.tracker }
         };
 
-        persistState();
-        notifySubscribers();
+        setState(nextState, { replace: true });
         return true;
     } catch (e) {
         console.error('Failed to import JSON:', e);
@@ -1430,10 +1516,8 @@ export function importFromJSON(json) {
  * Reset state to defaults
  */
 export function resetState() {
-    currentState = {
+    setState({
         ...deepClone(DEFAULT_STATE),
         items: deepClone(DEFAULT_ITEMS)
-    };
-    persistState();
-    notifySubscribers();
+    }, { replace: true });
 }

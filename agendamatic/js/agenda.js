@@ -351,6 +351,14 @@ function getDragAfterElement(elements, y) {
 export function renderAgenda(state) {
     if (!container) return;
 
+    const activeInput = document.activeElement?.closest?.('.agenda-row input[data-field]');
+    const activeInputState = activeInput ? {
+        itemId: activeInput.closest('.agenda-row')?.dataset.id,
+        field: activeInput.dataset.field,
+        selectionStart: activeInput.selectionStart,
+        selectionEnd: activeInput.selectionEnd
+    } : null;
+
     const itemsWithIntervals = calculateIntervals();
     const varianceData = getExpectedVsActualData();
     const varianceMode = !!varianceData;
@@ -367,6 +375,18 @@ export function renderAgenda(state) {
         const row = createAgendaRow(item, index, varianceMode, varianceById[item.id] || null);
         container.appendChild(row);
     });
+
+    if (activeInputState?.itemId && activeInputState.field) {
+        const restored = [...container.querySelectorAll('.agenda-row')]
+            .find(row => row.dataset.id === activeInputState.itemId)
+            ?.querySelector(`input[data-field="${activeInputState.field}"]`);
+        if (restored) {
+            restored.focus({ preventScroll: true });
+            if (typeof restored.setSelectionRange === 'function') {
+                restored.setSelectionRange(activeInputState.selectionStart, activeInputState.selectionEnd);
+            }
+        }
+    }
 }
 
 function renderAgendaHeader(varianceMode) {
@@ -591,6 +611,7 @@ function setupRowEventListeners(row, item) {
 
         input.addEventListener('blur', (e) => {
             // Immediate update on blur
+            debouncedUpdate.cancel();
             updateItem(item.id, { [e.target.dataset.field]: e.target.value });
         });
 
