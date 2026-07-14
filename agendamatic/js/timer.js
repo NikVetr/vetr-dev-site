@@ -82,7 +82,6 @@ function scheduleLayoutRefresh() {
 // Ticker state for smooth animation
 let lastDifference = 0;
 let lastStatus = 'on-time';
-let lastCurrentMinutes = 0;
 
 /**
  * Initialize the timer module
@@ -323,6 +322,11 @@ function triggerRetreatToPreviousItem() {
 
 function fitTickerToContainer(tapeEl) {
     if (!tapeEl) return;
+    if (tapeEl.classList.contains('continuous-ticker')) {
+        tapeEl.dataset.fitScale = '1';
+        tapeEl.style.transform = '';
+        return;
+    }
     const container = tapeEl.parentElement;
     if (!container) return;
 
@@ -539,9 +543,32 @@ function getTrackerStructureSignature() {
 function getSemanticDomSignature(element) {
     if (!element) return '';
     const descendants = [...element.querySelectorAll('*')]
-        .map(node => `${node.tagName}.${node.className}:${node.childElementCount ? '' : node.textContent}`)
+        .map(node => {
+            const text = node.classList.contains('ticker-number') ? '#' : node.textContent;
+            return `${node.tagName}.${node.className}:${node.childElementCount ? '' : text}`;
+        })
         .join('|');
     return `${element.tagName}.${element.className}|${descendants}`;
+}
+
+function syncPopoutTicker(sourceTape, targetTape) {
+    if (!sourceTape || !targetTape) return;
+    targetTape.className = sourceTape.className;
+    targetTape.style.cssText = sourceTape.style.cssText;
+    targetTape.dataset.fitScale = sourceTape.dataset.fitScale || '';
+
+    const sourceNumbers = [...sourceTape.children];
+    const targetNumbers = [...targetTape.children];
+    if (sourceNumbers.length !== targetNumbers.length) return;
+
+    sourceNumbers.forEach((sourceNumber, index) => {
+        const targetNumber = targetNumbers[index];
+        targetNumber.className = sourceNumber.className;
+        targetNumber.textContent = sourceNumber.textContent;
+        targetNumber.style.cssText = sourceNumber.style.cssText;
+        Object.keys(targetNumber.dataset).forEach(key => delete targetNumber.dataset[key]);
+        Object.assign(targetNumber.dataset, sourceNumber.dataset);
+    });
 }
 
 function syncPopoutDynamicTracker(trackerHost) {
@@ -858,6 +885,14 @@ function syncPopoutWindow() {
         ]);
         popoutCurrentSignature = nextCurrentSignature;
     }
+    syncPopoutTicker(
+        overallSource?.querySelector('.ticker-tape'),
+        overallHost.querySelector('.ticker-tape')
+    );
+    syncPopoutTicker(
+        currentSource?.querySelector('.current-status-tape'),
+        currentHost.querySelector('.current-status-tape')
+    );
     if (overallChanged || currentChanged) {
         popoutView?.requestAnimationFrame(() => {
             if (overallChanged) fitTickerToContainer(overallHost.querySelector('.ticker-tape'));
@@ -1737,6 +1772,70 @@ function renderMinuteTicker(tapeEl, centerValue, options = {}) {
     }).join('');
 }
 
+function interpolateTickerStyle(distance) {
+    const scaleStops = [1, 0.625, 0.393, 0.286, 0.2];
+    const opacityStops = [1, 0.5, 0.25, 0.1, 0];
+    const bounded = clamp(Math.abs(distance), 0, scaleStops.length - 1);
+    const lower = Math.floor(bounded);
+    const upper = Math.min(scaleStops.length - 1, lower + 1);
+    const fraction = bounded - lower;
+    return {
+        scale: scaleStops[lower] + (scaleStops[upper] - scaleStops[lower]) * fraction,
+        opacity: opacityStops[lower] + (opacityStops[upper] - opacityStops[lower]) * fraction
+    };
+}
+
+function renderContinuousIntegerTicker(tapeEl, centerValue) {
+    if (!tapeEl || !Number.isFinite(centerValue)) return;
+    tapeEl.classList.add('continuous-ticker');
+
+    const containerWidth = tapeEl.parentElement?.clientWidth || 320;
+    const spacing = clamp(containerWidth / 6.4, 34, 62);
+    const firstValue = Math.max(0, Math.floor(centerValue) - 4);
+    const lastValue = Math.max(8, Math.ceil(centerValue) + 4);
+    const desiredValues = new Set();
+    const existing = new Map(
+        [...tapeEl.querySelectorAll('.ticker-number[data-ticker-value]')]
+            .map(number => [Number(number.dataset.tickerValue), number])
+    );
+
+    for (let value = firstValue; value <= lastValue; value += 1) {
+        desiredValues.add(value);
+        let number = existing.get(value);
+        if (!number) {
+            number = tapeEl.ownerDocument.createElement('span');
+            number.className = 'ticker-number';
+            number.dataset.tickerValue = `${value}`;
+            number.textContent = `${value}`;
+            tapeEl.appendChild(number);
+        }
+
+        const distance = value - centerValue;
+        const style = interpolateTickerStyle(distance);
+        number.style.setProperty('--ticker-offset', `${distance * spacing}px`);
+        number.style.setProperty('--ticker-scale', `${style.scale}`);
+        number.style.opacity = `${style.opacity}`;
+    }
+
+    existing.forEach((number, value) => {
+        if (!desiredValues.has(value)) number.remove();
+    });
+}
+
+function getCurrentTickerScale(minutesValue) {
+    const absMinutes = Math.max(0, minutesValue);
+    if (absMinutes >= 90) {
+        return {
+            value: absMinutes / 60,
+            unit: 'HOURS'
+        };
+    }
+    return {
+        value: absMinutes,
+        unit: Math.round(absMinutes) === 1 ? 'MINUTE' : 'MINUTES'
+    };
+}
+
 function getTickerScale(minutesValue) {
     const absMinutes = Math.max(0, minutesValue);
     if (absMinutes >= 90) {
@@ -1841,6 +1940,7 @@ function updateCurrentStatusPanel() {
         const emptyTicker = document.createElement('span');
         emptyTicker.className = 'ticker-on-time';
         emptyTicker.textContent = '—';
+        currentStatusTape.classList.remove('continuous-ticker');
         currentStatusTape.replaceChildren(emptyTicker);
         const statusLine = currentStatusBox.querySelector('.current-status-line');
         if (statusLine) statusLine.textContent = '';
@@ -1848,7 +1948,6 @@ function updateCurrentStatusPanel() {
         currentStatusNextLineEl.textContent = '';
         currentStatusNextItemEl = null;
         fitTickerToContainer(currentStatusTape);
-        lastCurrentMinutes = 0;
         applyThemeText(currentStatusTape, null);
         if (nextItemButton) nextItemButton.disabled = true;
         if (prevItemButton) prevItemButton.disabled = true;
@@ -1872,15 +1971,10 @@ function updateCurrentStatusPanel() {
         : parseDuration((currentItem?.duration || '1m'));
     const overrun = Math.max(0, -(remaining));
     const displayValue = remaining >= 0 ? remaining : overrun;
-    const scale = getTickerScale(displayValue);
+    const scale = getCurrentTickerScale(displayValue);
 
-    renderMinuteTicker(currentStatusTape, scale.value, { step: scale.step, precision: scale.precision });
+    renderContinuousIntegerTicker(currentStatusTape, scale.value);
     fitTickerToContainer(currentStatusTape);
-
-    if (Math.abs(displayValue - lastCurrentMinutes) > 0.01) {
-        animateTickerTransition(currentStatusTape, lastCurrentMinutes, displayValue);
-        lastCurrentMinutes = displayValue;
-    }
 
     if (currentStatusLabelEl) {
         currentStatusLabelEl.textContent = remaining >= 0 ? 'YOU HAVE' : 'YOU ARE';

@@ -35,7 +35,7 @@ How parts connect
 - Timeline/status visuals derive from calculated intervals in `state.js` to keep time math consistent.
 - Drag-and-drop is cross-panel: input rows, tracker blocks, and staging cards all exchange items by ID through shared state updates.
 - Status tickers auto-fit to container width to reduce clipping/overflow at higher zoom levels.
-- Current Status now tracks the active item continuously (including overtime): before boundary it shows time left; after boundary it switches to "PAST THE END OF [item]" while keeping the next-item line.
+- Current Status tracks the active item continuously (including overtime): before the boundary it shows time left; after the boundary it switches to "PAST THE END OF [item]" while keeping the next-item line. Its time display is an integer-only number ruler whose labels translate continuously and interpolate in size and opacity around the exact remaining value, including in the pop-out.
 - Status wording omits a dangling unit when the meeting is on time, uses singular units correctly, and shows an explicit empty-agenda state; agenda item names are always inserted as text rather than interpreted as markup.
 - Overall Status now reflects cumulative run drift from completed items plus live overrun on the active item, instead of auto-advancing by wall clock.
 - Tracker renders a two-pixel dotted progress guide from the bottom of a red downward-pointing time triangle to the progress bar, above the active-item glow but behind chart blocks, and uses solid item-colored connectors for displaced major time labels.
