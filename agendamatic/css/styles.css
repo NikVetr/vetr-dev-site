@@ -1146,6 +1146,7 @@ h3 {
 /* --- TIMELINE / TRACKER --- */
 .timeline-container {
     grid-column: 1;
+    position: relative;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -1271,10 +1272,10 @@ h3 {
     opacity: 0.86;
 }
 
-/* Current time marker - red triangle pointing up, positioned between axis and track */
+/* Current time marker stays above the axis labels and progress guide. */
 .current-time-marker {
     position: absolute;
-    top: 42px;
+    top: -18px;
     width: 12px;
     height: 12px;
     background: var(--accent-red);
@@ -1313,10 +1314,31 @@ h3 {
     border-right: 1px solid rgba(0,0,0,0.1);
     font-weight: bold;
     padding: 0 2px;
-    transition: width var(--transition-normal);
+    transition: width var(--transition-normal), opacity var(--transition-normal), filter var(--transition-normal);
     position: relative;
     box-shadow: inset 0 0 0 1.5px var(--block-outline, transparent);
     cursor: grab;
+}
+
+.timeline-block.completed {
+    opacity: 0.42;
+    filter: saturate(0.38) brightness(1.08);
+}
+
+.active-item-glow {
+    position: absolute;
+    display: none;
+    pointer-events: none;
+    z-index: 3;
+    background: linear-gradient(
+        to top,
+        rgb(var(--active-glow-rgb, 33 150 243) / 0.42) 0%,
+        rgb(var(--active-glow-rgb, 33 150 243) / 0.18) 52%,
+        transparent 100%
+    );
+    clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
+    filter: blur(3px);
+    opacity: 0.9;
 }
 
 .timeline-block.active {
@@ -1416,6 +1438,11 @@ h3 {
 .overflow-label::before,
 .overflow-label::after {
     content: none !important;
+}
+
+.overflow-label.completed {
+    opacity: 0.42;
+    filter: saturate(0.38);
 }
 
 /* SVG for bezier curves */
@@ -2274,8 +2301,8 @@ body.corner-resize-preview * {
 .progress-guide-line {
     position: absolute;
     width: 0;
-    border-left: 4px dashed var(--accent-blue);
-    opacity: 0.78;
+    border-left: 1px dotted var(--accent-blue);
+    opacity: 0.62;
     pointer-events: none;
     z-index: 1;
     display: none;
