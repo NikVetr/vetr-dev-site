@@ -42,7 +42,7 @@ export function initTooltips() {
  * @param {MouseEvent} e - Mouse event
  */
 function handleMouseEnter(e) {
-    const target = e.target.closest('[data-tooltip]');
+    const target = getTooltipTarget(e);
     if (target && !isSuppressedTooltipTarget(target)) {
         showTooltip(target);
     }
@@ -53,7 +53,7 @@ function handleMouseEnter(e) {
  * @param {MouseEvent} e - Mouse event
  */
 function handleMouseLeave(e) {
-    const target = e.target.closest('[data-tooltip]');
+    const target = getTooltipTarget(e);
     if (target) {
         hideTooltip();
     }
@@ -64,7 +64,7 @@ function handleMouseLeave(e) {
  * @param {FocusEvent} e - Focus event
  */
 function handleFocusIn(e) {
-    const target = e.target.closest('[data-tooltip]');
+    const target = getTooltipTarget(e);
     if (target && !isSuppressedTooltipTarget(target)) {
         showTooltip(target);
     }
@@ -75,10 +75,16 @@ function handleFocusIn(e) {
  * @param {FocusEvent} e - Focus event
  */
 function handleFocusOut(e) {
-    const target = e.target.closest('[data-tooltip]');
+    const target = getTooltipTarget(e);
     if (target) {
         hideTooltip();
     }
+}
+
+function getTooltipTarget(event) {
+    return event.target instanceof Element
+        ? event.target.closest('[data-tooltip]')
+        : null;
 }
 
 /**
