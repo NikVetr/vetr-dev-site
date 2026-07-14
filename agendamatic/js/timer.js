@@ -943,7 +943,6 @@ function renderTimeline() {
 
     // Find current item index
     const { currentItemIndex } = adjusted;
-    const completedItemIds = new Set(Object.keys(getState().tracker?.completedDiffById || {}));
 
     // Build timeline blocks
     timelineTrack.innerHTML = '';
@@ -976,11 +975,9 @@ function renderTimeline() {
         };
         block.dataset.glowRgb = glowColors[item.themeNumber] || '102 102 102';
 
-        if (completedItemIds.has(item.id)) {
+        if (index < currentItemIndex) {
             block.classList.add('completed');
-        }
-
-        if (index === currentItemIndex) {
+        } else if (index === currentItemIndex) {
             block.classList.add('active');
         }
 
