@@ -1189,6 +1189,38 @@ function scaleDurationsToTarget(items, targetTotal) {
     return newDurations;
 }
 
+function scaleLiveFutureDurations(items, targetTotal) {
+    if (!items.length) return [];
+
+    const durations = items.map(item => parseDuration(item.duration || '1m'));
+    const totalDuration = durations.reduce((sum, duration) => sum + duration, 0);
+    if (targetTotal >= totalDuration) return durations;
+
+    const lockedTotal = items.reduce((sum, item, index) => {
+        return item.locked ? sum + durations[index] : sum;
+    }, 0);
+    const unlockedIndexes = items
+        .map((item, index) => ({ item, index }))
+        .filter(entry => !entry.item.locked)
+        .map(entry => entry.index);
+    const minimumTotal = lockedTotal + unlockedIndexes.length;
+    if (targetTotal <= minimumTotal) {
+        return durations.map((duration, index) => items[index].locked ? duration : 1);
+    }
+
+    const availableExtra = targetTotal - minimumTotal;
+    const totalExtraWeight = unlockedIndexes.reduce((sum, index) => {
+        return sum + Math.max(0, durations[index] - 1);
+    }, 0);
+    if (totalExtraWeight <= 0) return durations;
+
+    return durations.map((duration, index) => {
+        if (items[index].locked) return duration;
+        const weight = Math.max(0, duration - 1);
+        return 1 + availableExtra * (weight / totalExtraWeight);
+    });
+}
+
 /**
  * Calculate adjusted intervals when running behind/ahead of schedule
  * Locked items keep their duration, unlocked items are proportionally adjusted
@@ -1226,12 +1258,24 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
     const currentPlannedDuration = plannedDurations[currentItemIndex] || 1;
     const elapsedOnCurrent = Math.max(0, (currentTime - currentScheduledStart) / 60000);
     const currentActualDuration = Math.max(currentPlannedDuration, elapsedOnCurrent);
+    const currentOverrun = Math.max(0, elapsedOnCurrent - currentPlannedDuration);
+    const futureItems = items.slice(currentItemIndex + 1);
+    const futurePlannedTotal = plannedDurations
+        .slice(currentItemIndex + 1)
+        .reduce((sum, duration) => sum + duration, 0);
+    const liveFutureDurations = scaleLiveFutureDurations(
+        futureItems,
+        Math.max(0, futurePlannedTotal - currentOverrun)
+    );
 
     let runningTime = new Date(scheduledStart);
     const adjustedItems = items.map((item, index) => {
-        const duration = index === currentItemIndex
-            ? currentActualDuration
-            : plannedDurations[index];
+        let duration = plannedDurations[index];
+        if (index === currentItemIndex) {
+            duration = currentActualDuration;
+        } else if (index > currentItemIndex) {
+            duration = liveFutureDurations[index - currentItemIndex - 1];
+        }
 
         const itemStart = new Date(runningTime);
         const itemEnd = addMinutes(runningTime, duration);
@@ -1246,7 +1290,6 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
         };
     });
 
-    const currentOverrun = Math.max(0, elapsedOnCurrent - currentPlannedDuration);
     const signedDifference = (tracker.overallDeltaMinutes || 0) + currentOverrun;
 
     let status = 'on-time';

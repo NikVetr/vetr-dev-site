@@ -37,6 +37,7 @@ let popoutResizeTimeout = null;
 let popoutTrackerSignature = null;
 let popoutOverallSignature = null;
 let popoutCurrentSignature = null;
+let lastLiveLayoutKey = null;
 let startButton = null;
 let stopButton = null;
 let popoutButton = null;
@@ -187,6 +188,21 @@ function onStateChange(state) {
     updateButtonStates();
 }
 
+function getLiveLayoutKey(adjusted) {
+    const tracker = getState().tracker || {};
+    if (!tracker.isRunning && !tracker.startedAt) return 'inactive';
+    return `${adjusted.currentItemIndex}:${Math.ceil((adjusted.currentOverrun || 0) * 4)}`;
+}
+
+function refreshLiveTrackerLayout() {
+    const adjusted = calculateAdjustedIntervals();
+    const nextKey = getLiveLayoutKey(adjusted);
+    if (nextKey === lastLiveLayoutKey) return;
+    lastLiveLayoutKey = nextKey;
+    renderTimeline();
+    renderAxisTicks();
+}
+
 /**
  * Start the real-time tick interval
  */
@@ -197,6 +213,7 @@ function startTickInterval() {
 
     // Update every second
     tickInterval = setInterval(() => {
+        refreshLiveTrackerLayout();
         updateCurrentTimeMarker();
         updateStatusDisplay();
         updateCurrentItemPanel();
@@ -505,28 +522,17 @@ function endTrackerResize() {
 function getTrackerStructureSignature() {
     const axisWrapper = document.querySelector('.timeline-axis-wrapper');
     const track = document.querySelector('.timeline-track');
-    const progressContainer = document.querySelector('.progress-bar-container');
     return JSON.stringify({
-        labels: [...(axisWrapper?.querySelectorAll('.axis-tick-label') || [])].map(label => ({
-            text: label.textContent,
-            className: label.className,
-            tickOffset: label.dataset.tickOffset,
-            desiredCenter: label.dataset.desiredCenter,
-            followColor: label.dataset.followColor
-        })),
-        ticks: [...(axisWrapper?.querySelectorAll('.axis-tick') || [])].map(tick => ({
-            className: tick.className.replace(' has-connector', ''),
-            offset: tick.dataset.offset,
-            left: tick.style.left
-        })),
+        labels: [...(axisWrapper?.querySelectorAll('.axis-tick-label') || [])]
+            .map(label => label.className),
+        ticks: [...(axisWrapper?.querySelectorAll('.axis-tick') || [])]
+            .map(tick => tick.className.replace(' has-connector', '')),
         blocks: [...(track?.querySelectorAll('.timeline-block') || [])].map(block => ({
             id: block.dataset.id,
             className: block.className.replace(' label-overflow', ''),
-            width: block.style.width,
             text: block.textContent,
             glowRgb: block.dataset.glowRgb
-        })),
-        progressClass: progressContainer?.className || ''
+        }))
     });
 }
 
@@ -539,6 +545,67 @@ function getSemanticDomSignature(element) {
 }
 
 function syncPopoutDynamicTracker(trackerHost) {
+    let axisGeometryChanged = false;
+    let blockGeometryChanged = false;
+    const sourceAxisWrapper = document.querySelector('.timeline-axis-wrapper');
+    const targetAxisWrapper = trackerHost.querySelector('.timeline-axis-wrapper');
+    const sourceTicks = [...(sourceAxisWrapper?.querySelectorAll('.axis-tick') || [])];
+    const targetTicks = [...(targetAxisWrapper?.querySelectorAll('.axis-tick') || [])];
+    const sourceLabels = [...(sourceAxisWrapper?.querySelectorAll('.axis-tick-label') || [])];
+    const targetLabels = [...(targetAxisWrapper?.querySelectorAll('.axis-tick-label') || [])];
+
+    if (sourceTicks.length === targetTicks.length && sourceLabels.length === targetLabels.length) {
+        sourceTicks.forEach((sourceTick, index) => {
+            const targetTick = targetTicks[index];
+            const sourceClass = sourceTick.className.replace(' has-connector', '');
+            const targetClass = targetTick.className.replace(' has-connector', '');
+            if (
+                targetTick.style.left !== sourceTick.style.left ||
+                targetTick.dataset.offset !== sourceTick.dataset.offset ||
+                targetClass !== sourceClass
+            ) {
+                targetTick.style.left = sourceTick.style.left;
+                targetTick.dataset.offset = sourceTick.dataset.offset;
+                targetTick.className = sourceClass;
+                axisGeometryChanged = true;
+            }
+        });
+        sourceLabels.forEach((sourceLabel, index) => {
+            const targetLabel = targetLabels[index];
+            const attributes = ['tickOffset', 'desiredCenter', 'followColor', 'tickHeight'];
+            const dataChanged = attributes.some(name => (
+                targetLabel.dataset[name] !== sourceLabel.dataset[name]
+            ));
+            if (
+                targetLabel.textContent !== sourceLabel.textContent ||
+                targetLabel.className !== sourceLabel.className ||
+                dataChanged
+            ) {
+                targetLabel.textContent = sourceLabel.textContent;
+                targetLabel.className = sourceLabel.className;
+                attributes.forEach(name => {
+                    targetLabel.dataset[name] = sourceLabel.dataset[name] || '';
+                });
+                axisGeometryChanged = true;
+            }
+        });
+    }
+
+    const sourceTrack = document.querySelector('.timeline-track');
+    const targetTrack = trackerHost.querySelector('.timeline-track');
+    const sourceBlocks = [...(sourceTrack?.querySelectorAll('.timeline-block') || [])];
+    const targetBlocks = [...(targetTrack?.querySelectorAll('.timeline-block') || [])];
+    if (sourceBlocks.length === targetBlocks.length) {
+        sourceBlocks.forEach((sourceBlock, index) => {
+            const targetBlock = targetBlocks[index];
+            if (targetBlock.style.width !== sourceBlock.style.width) {
+                targetBlock.style.width = sourceBlock.style.width;
+                targetBlock.title = sourceBlock.title;
+                blockGeometryChanged = true;
+            }
+        });
+    }
+
     const sourceMarker = document.querySelector('.current-time-marker');
     const targetMarker = trackerHost.querySelector('.current-time-marker');
     if (sourceMarker && targetMarker) {
@@ -556,6 +623,27 @@ function syncPopoutDynamicTracker(trackerHost) {
     }
     if (sourceProgress && targetProgress) {
         targetProgress.style.width = sourceProgress.style.width;
+    }
+
+    const popoutView = trackerHost.ownerDocument.defaultView;
+    const targetGlow = trackerHost.querySelector('.active-item-glow');
+    if (axisGeometryChanged || blockGeometryChanged) {
+        popoutView?.requestAnimationFrame(() => {
+            if (axisGeometryChanged) layoutClonedAxis(targetAxisWrapper);
+            if (blockGeometryChanged) {
+                const blockData = getTimelineBlockData(calculateAdjustedIntervals().items);
+                renderOverflowLabels(
+                    blockData,
+                    targetTrack,
+                    trackerHost.querySelector('.overflow-labels-container')
+                );
+            }
+            updateActiveItemGlow(trackerHost, targetTrack, targetGlow);
+            syncPopoutProgressGuide(trackerHost);
+        });
+    } else {
+        updateActiveItemGlow(trackerHost, targetTrack, targetGlow);
+        syncPopoutProgressGuide(trackerHost);
     }
 }
 
@@ -727,14 +815,15 @@ function syncPopoutWindow() {
         const axisHtml = document.querySelector('.timeline-axis-wrapper')?.outerHTML || '';
         const trackHtml = document.querySelector('.timeline-track-wrapper')?.outerHTML || '';
         const progressHtml = document.querySelector('.progress-bar-container')?.outerHTML || '';
-        trackerHost.innerHTML = `<div class="active-item-glow" aria-hidden="true"></div>${axisHtml}${trackHtml}${progressHtml}`;
+        const guideHtml = document.querySelector('.progress-guide-line')?.outerHTML || '';
+        trackerHost.innerHTML = `<div class="active-item-glow" aria-hidden="true"></div>${axisHtml}${trackHtml}${progressHtml}${guideHtml}`;
         popoutTrackerSignature = nextTrackerSignature;
 
         const popoutAxisWrapper = trackerHost.querySelector('.timeline-axis-wrapper');
         const popoutTrack = trackerHost.querySelector('.timeline-track');
         const popoutOverflow = trackerHost.querySelector('.overflow-labels-container');
         const popoutGlow = trackerHost.querySelector('.active-item-glow');
-        const blockData = getTimelineBlockData(calculateIntervals());
+        const blockData = getTimelineBlockData(calculateAdjustedIntervals().items);
         popoutView?.requestAnimationFrame(() => {
             layoutClonedAxis(popoutAxisWrapper);
             renderOverflowLabels(blockData, popoutTrack, popoutOverflow);
@@ -805,11 +894,13 @@ function cleanupPopoutWindow() {
  */
 function getTimelineBlockData(items) {
     if (!items.length) return [];
-    const totalMinutes = getMinutesDiff(items[0].startTime, items[items.length - 1].endTime);
+    const totalMinutes = (
+        items[items.length - 1].endTime.getTime() - items[0].startTime.getTime()
+    ) / 60000;
     let runningPosition = 0;
 
     return items.map(item => {
-        const duration = getMinutesDiff(item.startTime, item.endTime);
+        const duration = (item.endTime.getTime() - item.startTime.getTime()) / 60000;
         const widthPercent = totalMinutes > 0 ? (duration / totalMinutes) * 100 : 0;
         const block = {
             name: item.name,
@@ -826,7 +917,9 @@ function getTimelineBlockData(items) {
 function renderTimeline() {
     if (!timelineTrack) return;
 
-    const items = calculateIntervals();
+    const adjusted = calculateAdjustedIntervals();
+    const items = adjusted.items;
+    lastLiveLayoutKey = getLiveLayoutKey(adjusted);
     if (items.length === 0) {
         timelineTrack.innerHTML = '<div class="timeline-block" style="width: 100%; background: #ddd;">No items</div>';
         if (activeItemGlow) activeItemGlow.style.display = 'none';
@@ -849,7 +942,7 @@ function renderTimeline() {
     }
 
     // Find current item index
-    const { currentItemIndex } = calculateAdjustedIntervals();
+    const { currentItemIndex } = adjusted;
     const completedItemIds = new Set(Object.keys(getState().tracker?.completedDiffById || {}));
 
     // Build timeline blocks
@@ -985,7 +1078,6 @@ function updateActiveItemGlow(
     const originLeft = containerRect.left + container.clientLeft;
     const originTop = containerRect.top + container.clientTop;
     const axisRect = axisWrapper.getBoundingClientRect();
-    const trackRect = track.getBoundingClientRect();
     const blockRect = activeBlock.getBoundingClientRect();
     const top = Math.max(0, axisRect.top - originTop + 2);
     const bottom = blockRect.top - originTop;
@@ -995,25 +1087,14 @@ function updateActiveItemGlow(
         return;
     }
 
-    const glowWidth = Math.min(trackRect.width, Math.max(blockRect.width, 140));
-    const trackLeft = trackRect.left - originLeft;
     const blockLeft = blockRect.left - originLeft;
-    const desiredLeft = blockLeft + (blockRect.width - glowWidth) / 2;
-    const glowLeft = clamp(desiredLeft, trackLeft, trackLeft + trackRect.width - glowWidth);
-    const baseLeft = blockLeft - glowLeft;
-    const baseRight = baseLeft + blockRect.width;
-    const tipCenter = blockLeft + blockRect.width / 2 - glowLeft;
 
     glow.style.display = 'block';
-    glow.style.left = `${glowLeft}px`;
+    glow.style.left = `${blockLeft}px`;
     glow.style.top = `${top}px`;
-    glow.style.width = `${glowWidth}px`;
+    glow.style.width = `${blockRect.width}px`;
     glow.style.height = `${height}px`;
     glow.style.setProperty('--active-glow-rgb', activeBlock.dataset.glowRgb || '33 150 243');
-    glow.style.setProperty('--active-glow-tip-left', `${tipCenter - 6}px`);
-    glow.style.setProperty('--active-glow-tip-right', `${tipCenter + 6}px`);
-    glow.style.setProperty('--active-glow-base-left', `${baseLeft}px`);
-    glow.style.setProperty('--active-glow-base-right', `${baseRight}px`);
 }
 
 /**
@@ -1433,7 +1514,7 @@ function renderAxisTicks() {
     timelineAxis.innerHTML = '';
     axisWrapper.querySelectorAll('.axis-label-layer, .axis-label-curves').forEach(node => node.remove());
 
-    const items = calculateIntervals();
+    const items = calculateAdjustedIntervals().items;
     if (items.length === 0) {
         return;
     }
@@ -1529,7 +1610,7 @@ function renderAxisTicks() {
 function updateCurrentTimeMarker() {
     if (!currentTimeMarker) return;
 
-    const items = calculateIntervals();
+    const items = calculateAdjustedIntervals().items;
     if (items.length === 0) {
         currentTimeMarker.style.display = 'none';
         return;
@@ -1873,49 +1954,89 @@ function applyThemeText(element, themeNumber) {
     }
 }
 
-function updateProgressGuideLine(progressPercent) {
-    if (!progressGuideLine || !timelineTrack || !timelineAxis || !progressBar) return;
-
-    const state = getState();
-    if (!state.settings.showProgressBar) {
-        progressGuideLine.style.display = 'none';
+function positionProgressGuideLine({
+    guide,
+    container,
+    track,
+    progressContainer,
+    marker,
+    progressPercent,
+    visible
+}) {
+    if (!guide || !container || !track || !progressContainer || !visible) {
+        if (guide) guide.style.display = 'none';
         return;
     }
 
-    const timelineContainer = timelineTrack.closest('.timeline-container');
-    const progressContainer = progressBar.parentElement;
-    const axisLine = timelineAxis.parentElement?.querySelector('.timeline-axis-line');
-    if (!timelineContainer || !progressContainer || !axisLine) {
-        progressGuideLine.style.display = 'none';
-        return;
-    }
-
-    const containerRect = timelineContainer.getBoundingClientRect();
-    const trackRect = timelineTrack.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const trackRect = track.getBoundingClientRect();
     const progressRect = progressContainer.getBoundingClientRect();
-    const axisLineRect = axisLine.getBoundingClientRect();
-
+    const originLeft = containerRect.left + container.clientLeft;
+    const originTop = containerRect.top + container.clientTop;
     const clamped = clamp(progressPercent, 0, 100);
-    const markerRect = currentTimeMarker?.getBoundingClientRect();
-    const markerX = markerRect
-        ? (markerRect.left + markerRect.width / 2) - containerRect.left
+    const markerRect = marker?.getBoundingClientRect();
+    const markerVisible = marker && marker.style.display !== 'none' && markerRect?.height > 0;
+    const markerX = markerVisible
+        ? (markerRect.left + markerRect.width / 2) - originLeft
         : NaN;
     const x = Number.isFinite(markerX)
         ? markerX
-        : (trackRect.left - containerRect.left + (clamped / 100) * trackRect.width);
-    const top = axisLineRect.top - containerRect.top;
-    const bottom = progressRect.top - containerRect.top;
+        : (trackRect.left - originLeft + (clamped / 100) * trackRect.width);
+    const axisLineRect = container.querySelector('.timeline-axis-line')?.getBoundingClientRect();
+    const top = markerVisible
+        ? markerRect.bottom - originTop
+        : (axisLineRect?.top ?? originTop) - originTop;
+    const bottom = progressRect.top - originTop;
     const height = bottom - top;
 
     if (!Number.isFinite(x) || height <= 0) {
-        progressGuideLine.style.display = 'none';
+        guide.style.display = 'none';
         return;
     }
 
-    progressGuideLine.style.display = 'block';
-    progressGuideLine.style.left = `${x}px`;
-    progressGuideLine.style.top = `${top}px`;
-    progressGuideLine.style.height = `${height}px`;
+    guide.style.display = 'block';
+    guide.style.left = `${x}px`;
+    guide.style.top = `${top}px`;
+    guide.style.height = `${height}px`;
+
+    const renderedGuideRect = guide.getBoundingClientRect();
+    const desiredCenterX = Number.isFinite(markerX)
+        ? markerRect.left + markerRect.width / 2
+        : trackRect.left + (clamped / 100) * trackRect.width;
+    const horizontalCorrection = desiredCenterX - (
+        renderedGuideRect.left + renderedGuideRect.width / 2
+    );
+    if (Math.abs(horizontalCorrection) > 0.01) {
+        guide.style.left = `${x + horizontalCorrection}px`;
+    }
+}
+
+function syncPopoutProgressGuide(trackerHost) {
+    const targetProgress = trackerHost.querySelector('.progress-bar');
+    const progressPercent = parseFloat(targetProgress?.style.width) || 0;
+    positionProgressGuideLine({
+        guide: trackerHost.querySelector('.progress-guide-line'),
+        container: trackerHost,
+        track: trackerHost.querySelector('.timeline-track'),
+        progressContainer: trackerHost.querySelector('.progress-bar-container'),
+        marker: trackerHost.querySelector('.current-time-marker'),
+        progressPercent,
+        visible: Boolean(getState().settings.showProgressBar)
+    });
+}
+
+function updateProgressGuideLine(progressPercent) {
+    if (!progressGuideLine || !timelineTrack || !progressBar) return;
+
+    positionProgressGuideLine({
+        guide: progressGuideLine,
+        container: timelineTrack.closest('.timeline-container'),
+        track: timelineTrack,
+        progressContainer: progressBar.parentElement,
+        marker: currentTimeMarker,
+        progressPercent,
+        visible: Boolean(getState().settings.showProgressBar)
+    });
 }
 
 /**
@@ -1937,7 +2058,7 @@ function updateProgressBar() {
 
     container?.classList.add('visible');
 
-    const items = calculateIntervals();
+    const items = calculateAdjustedIntervals().items;
     if (items.length === 0) {
         progressBar.style.width = '0%';
         if (progressGuideLine) {

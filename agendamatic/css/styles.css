@@ -1279,12 +1279,14 @@ h3 {
 /* Current time marker stays above the axis labels and progress guide. */
 .current-time-marker {
     position: absolute;
-    top: -18px;
-    width: 12px;
-    height: 12px;
-    background: var(--accent-red);
+    top: -11px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--accent-red);
     z-index: 10;
-    transform: translateX(-6px) rotate(45deg);
+    transform: translateX(-50%);
     transition: left 1s linear;
 }
 
@@ -1336,19 +1338,11 @@ h3 {
     z-index: 1;
     background: linear-gradient(
         to top,
-        rgb(var(--active-glow-rgb, 33 150 243) / 0.62) 0%,
-        rgb(var(--active-glow-rgb, 33 150 243) / 0.3) 48%,
-        rgb(var(--active-glow-rgb, 33 150 243) / 0.1) 76%,
+        rgb(var(--active-glow-rgb, 33 150 243) / 0.18) 0%,
+        rgb(var(--active-glow-rgb, 33 150 243) / 0.08) 52%,
         transparent 100%
     );
-    clip-path: polygon(
-        var(--active-glow-tip-left, 44%) 0,
-        var(--active-glow-tip-right, 56%) 0,
-        var(--active-glow-base-right, 100%) 100%,
-        var(--active-glow-base-left, 0) 100%
-    );
-    filter: blur(4px) drop-shadow(0 -5px 8px rgb(var(--active-glow-rgb, 33 150 243) / 0.28));
-    opacity: 1;
+    opacity: 0.72;
 }
 
 .timeline-block.active {
