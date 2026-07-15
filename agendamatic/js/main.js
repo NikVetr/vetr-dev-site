@@ -321,6 +321,7 @@ function syncControlsFromState(state, elements) {
         [elements.syncSystemTimeCheckbox, settings.syncSystemTime],
         [elements.pinStartTimeCheckbox, settings.pinStartTime !== false],
         [elements.pinEndTimeCheckbox, settings.pinEndTime !== false],
+        [elements.separateAdjacentColorsCheckbox, settings.separateAdjacentColors],
         [elements.showProgressBarCheckbox, settings.showProgressBar],
         [elements.oneMinWarningCheckbox, settings.oneMinWarning],
         [elements.overtimeFlashCheckbox, settings.overtimeFlash],
@@ -406,6 +407,7 @@ function getElements() {
         syncSystemTimeCheckbox: document.getElementById('sync-system-time'),
         pinStartTimeCheckbox: document.getElementById('pin-start-time'),
         pinEndTimeCheckbox: document.getElementById('pin-end-time'),
+        separateAdjacentColorsCheckbox: document.getElementById('separate-adjacent-colors'),
         densitySelect: document.getElementById('density'),
         showProgressBarCheckbox: document.getElementById('show-progress-bar'),
         bufferInput: document.getElementById('buffer'),
@@ -628,6 +630,13 @@ function setupSettingsListeners(elements) {
         elements.pinEndTimeCheckbox.checked = state.settings.pinEndTime !== false;
         elements.pinEndTimeCheckbox.addEventListener('change', (e) => {
             updateSettings({ pinEndTime: e.target.checked });
+        });
+    }
+
+    if (elements.separateAdjacentColorsCheckbox) {
+        elements.separateAdjacentColorsCheckbox.checked = state.settings.separateAdjacentColors;
+        elements.separateAdjacentColorsCheckbox.addEventListener('change', (e) => {
+            updateSettings({ separateAdjacentColors: e.target.checked });
         });
     }
 

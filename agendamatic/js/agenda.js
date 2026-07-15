@@ -399,6 +399,7 @@ function renderAgendaHeader(varianceMode) {
             <div></div>
             <div>Item</div>
             <div>Lead</div>
+            <div>Color</div>
             <div class="header-split"><span class="header-main">Duration</span><span class="header-sub">Expected</span></div>
             <div class="header-split"><span class="header-main">Duration</span><span class="header-sub">Actual</span></div>
             <div class="header-split"><span class="header-main">Time</span><span class="header-sub">Expected</span></div>
@@ -415,6 +416,7 @@ function renderAgendaHeader(varianceMode) {
         <div></div>
         <div>Item</div>
         <div>Lead</div>
+        <div>Color</div>
         <div>Duration</div>
         <div>Time</div>
         <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
@@ -460,6 +462,15 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     leadInput.dataset.field = 'lead';
     leadInput.placeholder = 'Lead';
     leadInput.setAttribute('data-tooltip', 'Who is leading this agenda item');
+
+    const themeColors = ['#2196f3', '#9c27b0', '#4caf50', '#ff9800', '#e91e63', '#009688', '#795548', '#607d8b'];
+    const colorInput = document.createElement('input');
+    colorInput.type = 'color';
+    colorInput.className = 'agenda-color-input';
+    colorInput.value = themeColors[(item.themeNumber || 1) - 1] || themeColors[0];
+    colorInput.dataset.field = 'themeColor';
+    colorInput.setAttribute('aria-label', `Color for ${item.name}`);
+    colorInput.setAttribute('data-tooltip', 'Choose an item color; lightness is normalized to match the agenda palette');
 
     // Duration input with time spinner
     const durationWrapper = document.createElement('div');
@@ -573,6 +584,7 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     row.appendChild(grip);
     row.appendChild(nameInput);
     row.appendChild(leadInput);
+    row.appendChild(colorInput);
     if (varianceMode) {
         row.appendChild(expectedDurationCell);
         row.appendChild(durationWrapper);
@@ -623,6 +635,38 @@ function setupRowEventListeners(row, item) {
             });
         }
     });
+
+    const colorInput = row.querySelector('.agenda-color-input');
+    if (colorInput) {
+        const palette = ['#2196f3', '#9c27b0', '#4caf50', '#ff9800', '#e91e63', '#009688', '#795548', '#607d8b'];
+        const hexToRgb = hex => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
+        const closestTheme = hex => {
+            const rgb = hexToRgb(hex);
+            let bestIndex = 0;
+            let bestDistance = Infinity;
+            palette.forEach((color, index) => {
+                const candidate = hexToRgb(color);
+                const distance = candidate.reduce((sum, value, channel) => sum + ((value - rgb[channel]) ** 2), 0);
+                if (distance < bestDistance) {
+                    bestDistance = distance;
+                    bestIndex = index;
+                }
+            });
+            return bestIndex + 1;
+        };
+        const previewColor = () => {
+            const themeColor = closestTheme(colorInput.value);
+            row.className = row.className.replace(/theme-\d+/, `theme-${themeColor}`);
+            return themeColor;
+        };
+        const applyColor = () => {
+            const themeColor = previewColor();
+            colorInput.value = palette[themeColor - 1];
+            updateItem(item.id, { themeColor });
+        };
+        colorInput.addEventListener('input', previewColor);
+        colorInput.addEventListener('change', applyColor);
+    }
 
     // Duration spinner buttons
     row.querySelectorAll('.time-spinner button').forEach(btn => {

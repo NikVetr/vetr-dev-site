@@ -1026,14 +1026,22 @@ function renderTimeline() {
             1: '#2196f3',
             2: '#9c27b0',
             3: '#4caf50',
-            4: '#ff9800'
+            4: '#ff9800',
+            5: '#e91e63',
+            6: '#009688',
+            7: '#795548',
+            8: '#607d8b'
         };
         block.style.setProperty('--block-outline', outlineColors[item.themeNumber] || '#666');
         const glowColors = {
             1: '33 150 243',
             2: '156 39 176',
             3: '76 175 80',
-            4: '255 152 0'
+            4: '255 152 0',
+            5: '233 30 99',
+            6: '0 150 136',
+            7: '121 85 72',
+            8: '96 125 139'
         };
         block.dataset.glowRgb = glowColors[item.themeNumber] || '102 102 102';
 
@@ -1247,7 +1255,11 @@ function renderOverflowLabels(
                 1: '#2196f3',
                 2: '#9c27b0',
                 3: '#4caf50',
-                4: '#ff9800'
+                4: '#ff9800',
+                5: '#e91e63',
+                6: '#009688',
+                7: '#795548',
+                8: '#607d8b'
             };
             const strokeColor = colors[item.themeNumber] || '#666';
 
@@ -1426,7 +1438,11 @@ function getThemeStrokeColor(themeNumber) {
         1: '#2196f3',
         2: '#9c27b0',
         3: '#4caf50',
-        4: '#ff9800'
+        4: '#ff9800',
+        5: '#e91e63',
+        6: '#009688',
+        7: '#795548',
+        8: '#607d8b'
     };
     return colors[themeNumber] || '#555';
 }
@@ -2094,7 +2110,7 @@ function updateStatusClock() {
  */
 function applyThemeText(element, themeNumber) {
     if (!element) return;
-    element.classList.remove('theme-text-1', 'theme-text-2', 'theme-text-3', 'theme-text-4');
+    element.classList.remove(...Array.from({ length: 8 }, (_, index) => `theme-text-${index + 1}`));
     if (themeNumber) {
         element.classList.add(`theme-text-${themeNumber}`);
     }

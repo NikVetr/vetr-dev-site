@@ -128,7 +128,7 @@ function renderStaging(state) {
 
     stagedItems.forEach((item, index) => {
         const card = document.createElement('div');
-        const themeNumber = item.themeColor || ((index % 4) + 1);
+        const themeNumber = item.themeColor || ((index % 8) + 1);
         card.className = `staging-item theme-${themeNumber}`;
         card.draggable = true;
         card.dataset.id = item.id;

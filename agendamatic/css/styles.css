@@ -35,6 +35,23 @@
     --theme-4-input: #ffe0b2;
     --theme-4-text: #e65100;
 
+    --theme-5: #fce4ec;
+    --theme-5-border: #e91e63;
+    --theme-5-input: #f8bbd0;
+    --theme-5-text: #880e4f;
+    --theme-6: #e0f2f1;
+    --theme-6-border: #009688;
+    --theme-6-input: #b2dfdb;
+    --theme-6-text: #004d40;
+    --theme-7: #efebe9;
+    --theme-7-border: #795548;
+    --theme-7-input: #d7ccc8;
+    --theme-7-text: #3e2723;
+    --theme-8: #eceff1;
+    --theme-8-border: #607d8b;
+    --theme-8-input: #cfd8dc;
+    --theme-8-text: #263238;
+
     /* Layout variables */
     --sidebar-width: 260px;
     --row-height: 42px;
@@ -76,6 +93,22 @@
     --theme-4-border: #ffb74d;
     --theme-4-input: #4a3728;
     --theme-4-text: #ffcc80;
+    --theme-5: #4a2032;
+    --theme-5-border: #f06292;
+    --theme-5-input: #4a2032;
+    --theme-5-text: #f48fb1;
+    --theme-6: #173f3c;
+    --theme-6-border: #4db6ac;
+    --theme-6-input: #173f3c;
+    --theme-6-text: #80cbc4;
+    --theme-7: #3e302b;
+    --theme-7-border: #a1887f;
+    --theme-7-input: #3e302b;
+    --theme-7-text: #bcaaa4;
+    --theme-8: #29363c;
+    --theme-8-border: #90a4ae;
+    --theme-8-input: #29363c;
+    --theme-8-text: #b0bec5;
 }
 
 [data-theme="dark"] .box {
@@ -340,7 +373,7 @@ h3 {
 /* --- AGENDA TABLE --- */
 .agenda-grid {
     display: grid;
-    grid-template-columns: 20px minmax(130px, 3fr) minmax(80px, 1.5fr) minmax(62px, 90px) minmax(70px, 100px) 24px 24px 20px;
+    grid-template-columns: 20px minmax(130px, 3fr) minmax(80px, 1.5fr) 34px minmax(62px, 90px) minmax(70px, 100px) 24px 24px 20px;
     gap: var(--row-gap);
     align-items: center;
     font-size: 0.85rem;
@@ -348,7 +381,7 @@ h3 {
 }
 
 .agenda-grid.variance-grid {
-    grid-template-columns: 20px minmax(120px, 2.8fr) minmax(70px, 1.2fr) minmax(60px, 78px) minmax(60px, 78px) minmax(76px, 116px) minmax(76px, 116px) minmax(62px, 78px) 24px 24px 20px;
+    grid-template-columns: 20px minmax(120px, 2.8fr) minmax(70px, 1.2fr) 34px minmax(60px, 78px) minmax(60px, 78px) minmax(76px, 116px) minmax(76px, 116px) minmax(62px, 78px) 24px 24px 20px;
 }
 
 .agenda-header {
@@ -367,7 +400,8 @@ h3 {
 .agenda-header > div:nth-child(5),
 .agenda-header > div:nth-child(6),
 .agenda-header > div:nth-child(7),
-.agenda-header > div:nth-child(8) {
+.agenda-header > div:nth-child(8),
+.agenda-header > div:nth-child(9) {
     text-align: center;
 }
 
@@ -379,7 +413,8 @@ h3 {
 .agenda-header.variance-grid > div:nth-child(8),
 .agenda-header.variance-grid > div:nth-child(9),
 .agenda-header.variance-grid > div:nth-child(10),
-.agenda-header.variance-grid > div:nth-child(11) {
+.agenda-header.variance-grid > div:nth-child(11),
+.agenda-header.variance-grid > div:nth-child(12) {
     text-align: center;
 }
 
@@ -616,6 +651,24 @@ h3 {
 
 .theme-4 { border-left: 4px solid var(--theme-4-border); }
 .theme-4 input[data-field="name"] { background-color: var(--theme-4); border-color: var(--theme-4-input); color: var(--theme-4-text); font-weight: bold; }
+.theme-5 { border-left: 4px solid var(--theme-5-border); }
+.theme-5 input[data-field="name"] { background-color: var(--theme-5); border-color: var(--theme-5-input); color: var(--theme-5-text); font-weight: bold; }
+.theme-6 { border-left: 4px solid var(--theme-6-border); }
+.theme-6 input[data-field="name"] { background-color: var(--theme-6); border-color: var(--theme-6-input); color: var(--theme-6-text); font-weight: bold; }
+.theme-7 { border-left: 4px solid var(--theme-7-border); }
+.theme-7 input[data-field="name"] { background-color: var(--theme-7); border-color: var(--theme-7-input); color: var(--theme-7-text); font-weight: bold; }
+.theme-8 { border-left: 4px solid var(--theme-8-border); }
+.theme-8 input[data-field="name"] { background-color: var(--theme-8); border-color: var(--theme-8-input); color: var(--theme-8-text); font-weight: bold; }
+
+.agenda-color-input {
+    width: 30px;
+    height: 28px;
+    padding: 2px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+}
 
 /* --- TIME INPUT WITH SPINNER --- */
 .time-input-wrapper {
@@ -1370,6 +1423,10 @@ h3 {
     background-color: var(--theme-4-text);
     color: var(--theme-4);
 }
+.timeline-block.block-5.active { background-color: var(--theme-5-text); color: var(--theme-5); }
+.timeline-block.block-6.active { background-color: var(--theme-6-text); color: var(--theme-6); }
+.timeline-block.block-7.active { background-color: var(--theme-7-text); color: var(--theme-7); }
+.timeline-block.block-8.active { background-color: var(--theme-8-text); color: var(--theme-8); }
 
 .timeline-block.dragging {
     cursor: grabbing;
@@ -1412,6 +1469,10 @@ h3 {
 .block-2 { background-color: var(--theme-2); color: var(--theme-2-text); --block-outline: var(--theme-2-border); }
 .block-3 { background-color: var(--theme-3); color: var(--theme-3-text); --block-outline: var(--theme-3-border); }
 .block-4 { background-color: var(--theme-4); color: var(--theme-4-text); --block-outline: var(--theme-4-border); }
+.block-5 { background-color: var(--theme-5); color: var(--theme-5-text); --block-outline: var(--theme-5-border); }
+.block-6 { background-color: var(--theme-6); color: var(--theme-6-text); --block-outline: var(--theme-6-border); }
+.block-7 { background-color: var(--theme-7); color: var(--theme-7-text); --block-outline: var(--theme-7-border); }
+.block-8 { background-color: var(--theme-8); color: var(--theme-8-text); --block-outline: var(--theme-8-border); }
 
 /* Overflow labels container below the track */
 .overflow-labels-container {
@@ -1587,6 +1648,10 @@ h3 {
 .theme-text-2 { color: var(--theme-2-text); }
 .theme-text-3 { color: var(--theme-3-text); }
 .theme-text-4 { color: var(--theme-4-text); }
+.theme-text-5 { color: var(--theme-5-text); }
+.theme-text-6 { color: var(--theme-6-text); }
+.theme-text-7 { color: var(--theme-7-text); }
+.theme-text-8 { color: var(--theme-8-text); }
 
 /* --- CURRENT ITEM PANEL --- */
 .current-item-box {
@@ -1607,6 +1672,19 @@ h3 {
 .current-item-box.theme-2 { border-left: 5px solid var(--theme-2-border); }
 .current-item-box.theme-3 { border-left: 5px solid var(--theme-3-border); }
 .current-item-box.theme-4 { border-left: 5px solid var(--theme-4-border); }
+.current-item-box.theme-5 { border-left: 5px solid var(--theme-5-border); }
+.current-item-box.theme-6 { border-left: 5px solid var(--theme-6-border); }
+.current-item-box.theme-7 { border-left: 5px solid var(--theme-7-border); }
+.current-item-box.theme-8 { border-left: 5px solid var(--theme-8-border); }
+
+.current-item-box.theme-1 .box-header { background: var(--theme-1); }
+.current-item-box.theme-2 .box-header { background: var(--theme-2); }
+.current-item-box.theme-3 .box-header { background: var(--theme-3); }
+.current-item-box.theme-4 .box-header { background: var(--theme-4); }
+.current-item-box.theme-5 .box-header { background: var(--theme-5); }
+.current-item-box.theme-6 .box-header { background: var(--theme-6); }
+.current-item-box.theme-7 .box-header { background: var(--theme-7); }
+.current-item-box.theme-8 .box-header { background: var(--theme-8); }
 
 .active-header {
     display: flex;
@@ -2493,24 +2571,24 @@ body.meeting-alert-pulse::after {
     }
 
     .agenda-grid {
-        grid-template-columns: 20px 2fr 1fr 60px 80px 25px 25px 20px;
+        grid-template-columns: 20px 2fr 1fr 30px 60px 80px 25px 25px 20px;
         font-size: 0.75rem;
     }
 
     .agenda-grid.variance-grid {
-        grid-template-columns: 20px 1.8fr 1fr 58px 58px 84px 84px 62px 22px 22px 18px;
+        grid-template-columns: 20px 1.8fr 1fr 30px 58px 58px 84px 84px 62px 22px 22px 18px;
     }
 }
 
 @container input-panel (max-width: 520px) {
     .agenda-grid {
-        grid-template-columns: 16px minmax(90px, 2.4fr) minmax(58px, 1.1fr) minmax(50px, 0.85fr) minmax(56px, 0.95fr) 20px 20px 16px;
+        grid-template-columns: 16px minmax(90px, 2.4fr) minmax(58px, 1.1fr) 28px minmax(50px, 0.85fr) minmax(56px, 0.95fr) 20px 20px 16px;
         gap: 4px;
         font-size: 0.75rem;
     }
 
     .agenda-grid.variance-grid {
-        grid-template-columns: 16px minmax(84px, 2.2fr) minmax(52px, 1fr) minmax(46px, 0.8fr) minmax(46px, 0.8fr) minmax(56px, 1fr) minmax(56px, 1fr) minmax(50px, 0.9fr) 20px 20px 16px;
+        grid-template-columns: 16px minmax(84px, 2.2fr) minmax(52px, 1fr) 28px minmax(46px, 0.8fr) minmax(46px, 0.8fr) minmax(56px, 1fr) minmax(56px, 1fr) minmax(50px, 0.9fr) 20px 20px 16px;
     }
 }
 

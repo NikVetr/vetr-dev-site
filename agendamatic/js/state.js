@@ -310,7 +310,8 @@ const DEFAULT_STATE = {
         alertOffsetsSeconds: [60, 0],
         alertSound: 'chime',
         alertVisual: 'both',
-        desktopNotifications: false
+        desktopNotifications: false,
+        separateAdjacentColors: false
     },
     exportOptions: {
         includeHeader: true,
@@ -476,7 +477,7 @@ let nextThemeColor = 1;
 export function addItem(item = {}, index = -1) {
     // Assign a theme color if not provided
     const themeColor = item.themeColor || nextThemeColor;
-    nextThemeColor = (nextThemeColor % 4) + 1;
+    nextThemeColor = (nextThemeColor % 8) + 1;
 
     const newItem = {
         id: generateId(),
@@ -518,6 +519,15 @@ export function reorderItems(fromIndex, toIndex) {
     const items = [...currentState.items];
     const [removed] = items.splice(fromIndex, 1);
     items.splice(toIndex, 0, removed);
+    if (currentState.settings.separateAdjacentColors) {
+        const before = items[toIndex - 1]?.themeColor;
+        const after = items[toIndex + 1]?.themeColor;
+        if (removed.themeColor === before || removed.themeColor === after) {
+            const replacement = Array.from({ length: 8 }, (_, index) => index + 1)
+                .find(color => color !== before && color !== after);
+            items[toIndex] = { ...removed, themeColor: replacement };
+        }
+    }
     setState({ items });
 }
 
@@ -972,7 +982,7 @@ function calculateIntervalsFromPlan(planItems, startTimeValue, bufferValue) {
             ...item,
             startTime: itemStart,
             endTime: itemEnd,
-            themeNumber: item.themeColor || ((index % 4) + 1)
+            themeNumber: item.themeColor || ((index % 8) + 1)
         };
     });
 }
@@ -1290,7 +1300,7 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
             startTime: itemStart,
             endTime: itemEnd,
             adjustedDuration: duration,
-            themeNumber: item.themeColor || ((index % 4) + 1)
+            themeNumber: item.themeColor || ((index % 8) + 1)
         };
     });
 
@@ -1347,7 +1357,8 @@ export function encodeStateToURL() {
             ao: currentState.settings.alertOffsetsSeconds,
             as: currentState.settings.alertSound,
             av: currentState.settings.alertVisual,
-            nt: currentState.settings.desktopNotifications ? 1 : 0
+            nt: currentState.settings.desktopNotifications ? 1 : 0,
+            sc: currentState.settings.separateAdjacentColors ? 1 : 0
         }
     };
 
@@ -1375,7 +1386,7 @@ export function decodeStateFromURL(encoded) {
                 duration: item.d || '10m',
                 locked: item.k === 1,
                 notes: item.o || '',
-                themeColor: item.c || ((index % 4) + 1)
+                themeColor: item.c || ((index % 8) + 1)
             })),
             stagedItems: (decoded.g || []).map((item, index) => ({
                 id: generateId(),
@@ -1384,7 +1395,7 @@ export function decodeStateFromURL(encoded) {
                 duration: item.d || '10m',
                 locked: item.k === 1,
                 notes: item.o || '',
-                themeColor: item.c || ((index % 4) + 1)
+                themeColor: item.c || ((index % 8) + 1)
             })),
             settings: {
                 ...DEFAULT_STATE.settings,
@@ -1407,7 +1418,8 @@ export function decodeStateFromURL(encoded) {
                     : DEFAULT_STATE.settings.alertOffsetsSeconds,
                 alertSound: decoded.s?.as || DEFAULT_STATE.settings.alertSound,
                 alertVisual: decoded.s?.av || DEFAULT_STATE.settings.alertVisual,
-                desktopNotifications: decoded.s?.nt === 1
+                desktopNotifications: decoded.s?.nt === 1,
+                separateAdjacentColors: decoded.s?.sc === 1
             }
         };
     } catch (e) {
