@@ -433,12 +433,36 @@
                         <option value="elapsed">Time Elapsed</option>
                     </select>
                 </label>
-                <label data-tooltip="Show a warning when one minute remains in the current item">
-                    <input type="checkbox" id="one-min-warning" checked> 1-Minute Warning
+                <label data-tooltip="Show visual warnings at the configured times">
+                    <input type="checkbox" id="one-min-warning" checked> Visual Warnings
                 </label>
-                <label data-tooltip="Flash screen when overtime">
-                    <input type="checkbox" id="overtime-flash"> Overtime Flash
+                <label data-tooltip="Comma-separated warning times; use s for seconds or m for minutes">
+                    Warning Times
+                    <input type="text" id="alert-warning-offsets" value="1m, 0s" aria-label="Warning times">
                 </label>
+                <label data-tooltip="Choose the warning sound">
+                    Sound Style
+                    <select id="alert-sound-style">
+                        <option value="chime">Chime</option>
+                        <option value="beep">Beep</option>
+                        <option value="double">Double Beep</option>
+                    </select>
+                </label>
+                <label data-tooltip="Choose how visual warnings appear">
+                    Visual Style
+                    <select id="alert-visual-style">
+                        <option value="both">Banner + Pulse</option>
+                        <option value="banner">Banner</option>
+                        <option value="pulse">Pulse</option>
+                    </select>
+                </label>
+                <label data-tooltip="Also show operating-system notifications while the app is open">
+                    <input type="checkbox" id="desktop-notifications"> Desktop Notifications
+                </label>
+                <label data-tooltip="Add an extra pulse when the current item enters overtime">
+                    <input type="checkbox" id="overtime-flash"> Overtime Pulse
+                </label>
+                <button type="button" id="btn-preview-alert" class="settings-preview-button">Preview Alert</button>
             </div>
         </div>
 

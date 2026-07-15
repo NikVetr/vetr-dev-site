@@ -20,6 +20,12 @@ import { initStaging } from './staging.js';
 import { initLayoutResizers } from './layout-resize.js';
 import { initTooltips } from './tooltips.js';
 import { initExport, showNotification } from './export.js';
+import {
+    formatAlertOffsets,
+    parseAlertOffsets,
+    previewAlert,
+    requestDesktopNotificationPermission
+} from './alerts.js';
 import { formatTime, parseTime } from './utils.js';
 
 const LOGO_FULL_SPIN_SECONDS = 8;
@@ -318,6 +324,7 @@ function syncControlsFromState(state, elements) {
         [elements.showProgressBarCheckbox, settings.showProgressBar],
         [elements.oneMinWarningCheckbox, settings.oneMinWarning],
         [elements.overtimeFlashCheckbox, settings.overtimeFlash],
+        [elements.desktopNotificationsCheckbox, settings.desktopNotifications],
         [elements.includeHeaderCheckbox, exportOptions.includeHeader],
         [elements.includeNotesCheckbox, exportOptions.includeNotes],
         [elements.includePrepCheckbox, exportOptions.includePrep],
@@ -329,6 +336,11 @@ function syncControlsFromState(state, elements) {
 
     if (elements.densitySelect) elements.densitySelect.value = settings.density;
     if (elements.timerModeSelect) elements.timerModeSelect.value = settings.timerMode;
+    if (elements.alertSoundSelect) elements.alertSoundSelect.value = settings.alertSound;
+    if (elements.alertVisualSelect) elements.alertVisualSelect.value = settings.alertVisual;
+    if (elements.alertWarningOffsetsInput && document.activeElement !== elements.alertWarningOffsetsInput) {
+        elements.alertWarningOffsetsInput.value = formatAlertOffsets(settings.alertOffsetsSeconds || [60, 0]);
+    }
     if (elements.bufferInput && document.activeElement !== elements.bufferInput) {
         elements.bufferInput.value = settings.buffer;
     }
@@ -400,6 +412,11 @@ function getElements() {
         timerModeSelect: document.getElementById('timer-mode'),
         oneMinWarningCheckbox: document.getElementById('one-min-warning'),
         overtimeFlashCheckbox: document.getElementById('overtime-flash'),
+        alertWarningOffsetsInput: document.getElementById('alert-warning-offsets'),
+        alertSoundSelect: document.getElementById('alert-sound-style'),
+        alertVisualSelect: document.getElementById('alert-visual-style'),
+        desktopNotificationsCheckbox: document.getElementById('desktop-notifications'),
+        previewAlertButton: document.getElementById('btn-preview-alert'),
         resetBtn: document.getElementById('btn-reset'),
         prevItemButton: document.getElementById('btn-prev-item'),
         nextItemButton: document.getElementById('btn-next-item'),
@@ -591,7 +608,10 @@ function setupSettingsListeners(elements) {
     if (elements.syncSystemTimeCheckbox) {
         elements.syncSystemTimeCheckbox.checked = state.settings.syncSystemTime;
         elements.syncSystemTimeCheckbox.addEventListener('change', (e) => {
-            updateSettings({ syncSystemTime: e.target.checked });
+            updateSettings({
+                syncSystemTime: e.target.checked,
+                ...(e.target.checked ? { startTime: formatTimeValue(new Date()) } : {})
+            });
         });
     }
 
@@ -657,6 +677,55 @@ function setupSettingsListeners(elements) {
         elements.overtimeFlashCheckbox.addEventListener('change', (e) => {
             updateSettings({ overtimeFlash: e.target.checked });
         });
+    }
+
+    if (elements.alertWarningOffsetsInput) {
+        elements.alertWarningOffsetsInput.value = formatAlertOffsets(state.settings.alertOffsetsSeconds);
+        elements.alertWarningOffsetsInput.addEventListener('change', (e) => {
+            try {
+                updateSettings({ alertOffsetsSeconds: parseAlertOffsets(e.target.value) });
+            } catch (error) {
+                e.target.value = formatAlertOffsets(getState().settings.alertOffsetsSeconds);
+                showNotification(error.message, 'warning');
+            }
+        });
+    }
+
+    if (elements.alertSoundSelect) {
+        elements.alertSoundSelect.value = state.settings.alertSound;
+        elements.alertSoundSelect.addEventListener('change', (e) => {
+            updateSettings({ alertSound: e.target.value });
+        });
+    }
+
+    if (elements.alertVisualSelect) {
+        elements.alertVisualSelect.value = state.settings.alertVisual;
+        elements.alertVisualSelect.addEventListener('change', (e) => {
+            updateSettings({ alertVisual: e.target.value });
+        });
+    }
+
+    if (elements.desktopNotificationsCheckbox) {
+        elements.desktopNotificationsCheckbox.checked = state.settings.desktopNotifications;
+        elements.desktopNotificationsCheckbox.addEventListener('change', async (e) => {
+            if (!e.target.checked) {
+                updateSettings({ desktopNotifications: false });
+                return;
+            }
+            try {
+                const permission = await requestDesktopNotificationPermission();
+                const enabled = permission === 'granted';
+                updateSettings({ desktopNotifications: enabled });
+                if (!enabled) showNotification('Desktop notification permission was not granted', 'warning');
+            } catch (error) {
+                updateSettings({ desktopNotifications: false });
+                showNotification(error.message, 'warning');
+            }
+        });
+    }
+
+    if (elements.previewAlertButton) {
+        elements.previewAlertButton.addEventListener('click', previewAlert);
     }
 }
 

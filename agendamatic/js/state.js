@@ -306,7 +306,11 @@ const DEFAULT_STATE = {
         buffer: 0,
         timerMode: 'countdown',
         oneMinWarning: true,
-        overtimeFlash: false
+        overtimeFlash: false,
+        alertOffsetsSeconds: [60, 0],
+        alertSound: 'chime',
+        alertVisual: 'both',
+        desktopNotifications: false
     },
     exportOptions: {
         includeHeader: true,
@@ -1339,7 +1343,11 @@ export function encodeStateToURL() {
             b: currentState.settings.buffer,
             tm: currentState.settings.timerMode,
             ow: currentState.settings.oneMinWarning ? 1 : 0,
-            of: currentState.settings.overtimeFlash ? 1 : 0
+            of: currentState.settings.overtimeFlash ? 1 : 0,
+            ao: currentState.settings.alertOffsetsSeconds,
+            as: currentState.settings.alertSound,
+            av: currentState.settings.alertVisual,
+            nt: currentState.settings.desktopNotifications ? 1 : 0
         }
     };
 
@@ -1393,7 +1401,13 @@ export function decodeStateFromURL(encoded) {
                 oneMinWarning: decoded.s?.ow === undefined
                     ? DEFAULT_STATE.settings.oneMinWarning
                     : decoded.s?.ow === 1,
-                overtimeFlash: decoded.s?.of === 1
+                overtimeFlash: decoded.s?.of === 1,
+                alertOffsetsSeconds: Array.isArray(decoded.s?.ao)
+                    ? decoded.s.ao
+                    : DEFAULT_STATE.settings.alertOffsetsSeconds,
+                alertSound: decoded.s?.as || DEFAULT_STATE.settings.alertSound,
+                alertVisual: decoded.s?.av || DEFAULT_STATE.settings.alertVisual,
+                desktopNotifications: decoded.s?.nt === 1
             }
         };
     } catch (e) {

@@ -5,6 +5,7 @@
 import {
     getState,
     subscribe,
+    updateSettings,
     updateTracker,
     updateItem,
     updateIntervalTime,
@@ -19,6 +20,7 @@ import {
     endHistoryTransaction
 } from './state.js';
 import { formatTime, getMinutesDiff, clamp, parseDuration, formatDuration, renderMarkdownToHtml } from './utils.js';
+import { processAlertTick } from './alerts.js';
 
 let timelineTrack = null;
 let timelineAxis = null;
@@ -219,6 +221,7 @@ function startTickInterval() {
         updateCurrentStatusPanel();
         updateStatusClock();
         updateProgressBar();
+        processAlertTick();
     }, 1000);
 }
 
@@ -237,7 +240,14 @@ function stopTickInterval() {
  */
 export function startTimer() {
     beginHistoryTransaction();
-    const state = getState();
+    let state = getState();
+    if (state.settings.syncSystemTime && !state.tracker.startedAt) {
+        const now = new Date();
+        updateSettings({
+            startTime: `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
+        });
+        state = getState();
+    }
     if (!state.tracker.expectedSnapshot) {
         ensureExpectedSnapshot();
     }
@@ -1993,7 +2003,8 @@ function updateCurrentStatusPanel() {
 
     const now = new Date();
     const adjusted = calculateAdjustedIntervals(now);
-    const trackerState = getState().tracker || {};
+    const state = getState();
+    const trackerState = state.tracker || {};
     const trackerActive = trackerState.isRunning || trackerState.startedAt;
     let currentIndex = adjusted.currentItemIndex;
 
@@ -2007,14 +2018,19 @@ function updateCurrentStatusPanel() {
         ? (adjusted.currentRemaining ?? 0)
         : parseDuration((currentItem?.duration || '1m'));
     const overrun = Math.max(0, -(remaining));
-    const displayValue = remaining >= 0 ? remaining : overrun;
+    const plannedDuration = parseDuration(currentItem?.duration || '1m');
+    const elapsedMode = state.settings.timerMode === 'elapsed';
+    const elapsed = trackerActive ? Math.max(0, plannedDuration - remaining) : 0;
+    const displayValue = elapsedMode ? elapsed : (remaining >= 0 ? remaining : overrun);
     const scale = getCurrentTickerScale(displayValue);
 
     renderContinuousTicker(currentStatusTape, scale.value, scale);
     fitTickerToContainer(currentStatusTape);
 
     if (currentStatusLabelEl) {
-        currentStatusLabelEl.textContent = remaining >= 0 ? 'YOU HAVE' : 'YOU ARE';
+        currentStatusLabelEl.textContent = elapsedMode
+            ? 'YOU HAVE USED'
+            : (remaining >= 0 ? 'YOU HAVE' : 'YOU ARE');
     }
     if (currentStatusUnitEl) {
         currentStatusUnitEl.textContent = scale.unit;
@@ -2022,7 +2038,9 @@ function updateCurrentStatusPanel() {
 
     const statusLine = currentStatusBox.querySelector('.current-status-line');
     if (statusLine) {
-        const prefix = remaining >= 0 ? 'LEFT FOR' : 'PAST THE END OF';
+        const prefix = elapsedMode
+            ? 'ON'
+            : (remaining >= 0 ? 'LEFT FOR' : 'PAST THE END OF');
         renderCurrentStatusItemLine(statusLine, prefix, currentItem?.name);
     }
 
