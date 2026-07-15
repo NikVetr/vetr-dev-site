@@ -19,6 +19,7 @@ import { initTimer } from './timer.js';
 import { initStaging } from './staging.js';
 import { initBulkEdit } from './bulk-edit.js';
 import { initMetadata } from './metadata.js';
+import { initPanelSwaps } from './panel-swap.js';
 import { initLayoutResizers } from './layout-resize.js';
 import { initTooltips } from './tooltips.js';
 import { initExport, showNotification } from './export.js';
@@ -273,6 +274,7 @@ function init() {
     // Set up event listeners
     setupEventListeners(elements);
     setupUndoRedoShortcuts();
+    initPanelSwaps();
 
     // Enable panel split resizing handles
     initLayoutResizers();

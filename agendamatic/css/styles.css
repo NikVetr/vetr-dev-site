@@ -359,6 +359,70 @@ h3 {
     overflow-wrap: anywhere;
 }
 
+.box[data-panel-id] > .box-header {
+    cursor: grab;
+}
+
+.box[data-panel-id] > .box-header button,
+.box[data-panel-id] > .box-header input,
+.box[data-panel-id] > .box-header select,
+.box[data-panel-id] > .box-header a {
+    cursor: pointer;
+}
+
+body.dragging-panel,
+body.dragging-panel * {
+    cursor: grabbing !important;
+    user-select: none !important;
+}
+
+.panel-drag-ghost {
+    position: fixed !important;
+    z-index: 1500 !important;
+    max-width: min(520px, 70vw);
+    max-height: min(420px, 70vh);
+    margin: 0 !important;
+    opacity: 0.28;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    transform: scale(0.72);
+    transform-origin: top left;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+}
+
+.panel-swap-source {
+    opacity: 0.48;
+}
+
+.panel-swap-target {
+    outline: 3px dashed var(--accent-blue);
+    outline-offset: -6px;
+    background-image: linear-gradient(rgba(52, 152, 219, 0.08), rgba(52, 152, 219, 0.08));
+}
+
+.panel-slot-input,
+.panel-slot-export,
+.panel-slot-overall-status,
+.panel-slot-tracker,
+.panel-slot-current-status,
+.panel-slot-staging,
+.panel-slot-current-item {
+    grid-row: 1 !important;
+}
+
+.panel-slot-input,
+.panel-slot-export,
+.panel-slot-overall-status,
+.panel-slot-tracker,
+.panel-slot-staging {
+    grid-column: 1 !important;
+}
+
+.panel-slot-current-status,
+.panel-slot-current-item {
+    grid-column: 3 !important;
+}
+
 .status-clock {
     font-size: 0.85rem;
     color: #999;
