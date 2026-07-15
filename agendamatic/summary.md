@@ -6,6 +6,10 @@ Technical architecture
 - `index.html` provides the UI shell and references `css/styles.css` plus the ES module entry point `js/main.js`, including the branded header, split top section (input + right-side grid with import/export spanning overall status + next item), and the tracker/current-status row.
 - `index.html` now also includes a bottom split section with a compressed `Current Item` panel plus a new `Staging` panel for carry-forward agenda items.
 - `js/main.js` initializes modules, wires UI events, applies settings to the DOM, and now includes inline notes toolbar handling.
+- `js/alerts.js` schedules transition warnings at configurable offsets and presents synthesized sound, banner/pulse, and permission-gated desktop notifications; the same presentation can be previewed from Settings.
+- `js/bulk-edit.js` provides whole-column list editing and escaped CSV round-tripping with unequal-row validation.
+- `js/metadata.js` manages persisted meeting details and attendance, initially seeding attendees from unique agenda leads.
+- `js/panel-swap.js` gives every primary box a stable layout slot and persists drag-to-swap panel ordering independently of splitter sizes.
 - `js/layout-resize.js` adds drag bars and corner grips between key panel boundaries and persists split sizes locally so users can tailor panel widths/heights.
 - `js/state.js` is the source of truth. It manages state, persistence (localStorage), and share links via URL compression, includes a "next item" adjustment that redistributes remaining time, and derives live tracker intervals that expand an overdue active item while proportionally compressing eligible future items. Other modules subscribe to it for re-renders.
 - `js/state.js` now tracks both active `items` and `stagedItems`, with move/reorder operations for staging workflows and URL/localStorage persistence for both lists.
@@ -17,7 +21,7 @@ Technical architecture
 - `js/timer.js` also supports direct tracker duration editing (scroll to nudge item duration, drag left/right block edges to adjust interval boundaries), plus a tracker pop-out window with an adaptive tracker/overall/current layout for projector or second-screen use.
 - Runtime progression is manual while running: the active item only advances on explicit Next, and Previous rewinds that active focus while undoing the last completed-item delta contribution.
 - The main control strip uses split previous/next controls (20/80), while the pop-out uses equally sized, explicit Previous Item and Next Item buttons; both expose keyboard shortcuts (`Space` for next and `Backspace` for previous when text inputs are not focused) with on-button keycap hints.
-- `js/export.js` generates exports (Markdown, plain text, Word-compatible HTML), includes carry-forward staged items in output, handles JSON import/export/share links, and adds Expected vs Actual timing/duration details when variance mode has been triggered.
+- `js/export.js` generates exports (Markdown, plain text, Word-compatible HTML), includes persisted metadata and optional action-item checklists, names unrun documents agendas and started documents minutes, includes carry-forward staged items, handles JSON import/export/share links, and adds Expected vs Actual timing/duration details when variance mode has been triggered.
 - `js/export.js` markdown output now follows a board-meeting style template structure (title lines, metadata table, agenda table with Context/Preparation/Notes subrows, then Decision/Action checklists) while still filling fields from live app state.
 - `js/tooltips.js` implements a lightweight tooltip system with event delegation.
 - `js/utils.js` centralizes time parsing/formatting, IDs, small helpers, and a lightweight markdown-to-HTML renderer for note previews.
@@ -27,7 +31,10 @@ Key design decisions
 - Centralized state with subscriptions: predictable updates across the agenda list, timeline, and exports.
 - URL-compressed state: supports shareable links without a backend.
 - LocalStorage persistence: preserves user work across reloads.
+- Header-driven panel swaps: the data-bearing panel moves into a stable slot, so existing module references continue working while CSS Grid gives it the target slot's dimensions.
 - Staging workflow: unfinished items can be dragged out of the agenda timeline/list into a persistent staging area, then dragged back into active agenda order when needed.
+- Agenda colors use eight normalized light/dark theme pairs. The row color control selects the nearest palette hue, and optional neighbor separation recolors a moved item when it would collide with either immediate neighbor.
+- Timer Mode now drives Current Status wording and values, Sync System Time updates the start time when enabled and before a first start, and hour-scale Current Status uses tenths of an hour while minute-scale status uses whole-minute ticks.
 
 How parts connect
 - `main.js` initializes modules and registers event handlers.
