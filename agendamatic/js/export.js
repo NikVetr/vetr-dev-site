@@ -42,6 +42,28 @@ function splitLeads(leads, maxPerGroup = 5) {
     return { board, staff };
 }
 
+function getDocumentKind(state = getState()) {
+    return state.tracker?.startedAt ? 'Minutes' : 'Agenda';
+}
+
+function getExportStem(state = getState()) {
+    return getDocumentKind(state).toLowerCase();
+}
+
+function formatMeetingLink(url) {
+    if (!url) return '';
+    try {
+        const host = new URL(url).hostname.toLowerCase();
+        const label = host.includes('zoom') ? 'Zoom'
+            : host.includes('teams') ? 'Microsoft Teams'
+                : host.includes('meet.google') ? 'Google Meet'
+                    : 'Meeting link';
+        return `[${label}](${url})`;
+    } catch {
+        return url;
+    }
+}
+
 /**
  * Generate Markdown export of the agenda
  * @param {Object} options - Export options
@@ -53,7 +75,8 @@ export function generateMarkdown(options = {}) {
         includeHeader = true,
         includeNotes = true,
         includePrep = false,
-        includeContext = false
+        includeContext = false,
+        includeActionItems = false
     } = {
         ...state.exportOptions,
         ...options
@@ -65,6 +88,8 @@ export function generateMarkdown(options = {}) {
     const varianceById = varianceData?.byId || {};
     const lines = [];
     const now = new Date();
+    const kind = getDocumentKind(state);
+    const metadata = state.metadata || {};
     const leads = items.map(item => item.lead);
     const leadGroups = splitLeads(leads);
     const tzName = new Intl.DateTimeFormat([], { timeZoneName: 'short' })
@@ -75,18 +100,21 @@ export function generateMarkdown(options = {}) {
         const startTime = items.length > 0 ? formatAgendaTimeWithZone(items[0].startTime) : 'TBD';
         const endTime = items.length > 0 ? formatAgendaTimeWithZone(items[items.length - 1].endTime) : 'TBD';
         lines.push('autoCHAIR');
-        lines.push('Board Meeting');
-        lines.push(formatAgendaDateLine(now));
+        lines.push(`${metadata.title || 'Meeting'} ${kind}`);
+        lines.push(metadata.date || formatAgendaDateLine(now));
         lines.push('');
         lines.push('| Location |  | Date |  | Time |  |');
         lines.push('| :---- | :---- | :---- | :---- | :---- | :---- |');
-        lines.push(`| TBD |  | ${escapeMarkdownTableCell(formatAgendaDateLine(now))} |  | ${escapeMarkdownTableCell(`${startTime} - ${endTime}`)} |  |`);
-        lines.push(`| Board: | ${escapeMarkdownTableCell(leadGroups.board[0])} | ${escapeMarkdownTableCell(leadGroups.board[1])} | ${escapeMarkdownTableCell(leadGroups.board[2])} | ${escapeMarkdownTableCell(leadGroups.board[3])} | ${escapeMarkdownTableCell(leadGroups.board[4])} |`);
-        lines.push(`| Staff: | ${escapeMarkdownTableCell(leadGroups.staff[0])} | ${escapeMarkdownTableCell(leadGroups.staff[1])} | ${escapeMarkdownTableCell(leadGroups.staff[2])} | ${escapeMarkdownTableCell(leadGroups.staff[3])} | ${escapeMarkdownTableCell(leadGroups.staff[4])} |`);
+        lines.push(`| ${escapeMarkdownTableCell(metadata.location || 'TBD')} | ${formatMeetingLink(metadata.url)} | ${escapeMarkdownTableCell(metadata.date || formatAgendaDateLine(now))} |  | ${escapeMarkdownTableCell(`${startTime} - ${endTime}`)} |  |`);
+        if (metadata.attendees?.length) {
+            lines.push(`| ${escapeMarkdownTableCell(metadata.attendeeGroup || 'Attendees')}: | ${metadata.attendees.map(person => `${person.present ? '☑' : '☐'} ${escapeMarkdownTableCell(person.name)}`).join(' | ')} |`);
+        } else {
+            lines.push(`| Attendees: | ${escapeMarkdownTableCell(leadGroups.board.filter(Boolean).join(', '))} |  |  |  |  |`);
+        }
         lines.push('');
     }
 
-    lines.push(`Agenda *(times are estimates and in the ${tzName} time zone)*`);
+    lines.push(`${kind} *(times are ${kind === 'Agenda' ? 'estimates' : 'recorded'} and in the ${tzName} time zone)*`);
     lines.push('');
     lines.push('| Start Time | End Time | Agenda Item | Time Allotted | Leader |');
     lines.push('| ----- | ----- | ----- | ----- | ----- |');
@@ -134,15 +162,17 @@ export function generateMarkdown(options = {}) {
     lines.push('');
     lines.push('- [ ] ');
     lines.push('');
-    lines.push('Action items (after meeting)');
-    lines.push('');
-    const actionLeads = [...new Set(leads.filter(Boolean).map(v => String(v).trim()).filter(Boolean))];
-    if (actionLeads.length > 0) {
-        actionLeads.forEach(name => lines.push(`- [ ] ${escapeMarkdownTableCell(name)}`));
-    } else {
-        lines.push('- [ ] ');
+    if (includeActionItems) {
+        lines.push('Action items (after meeting)');
+        lines.push('');
+        const actionLeads = [...new Set(leads.filter(Boolean).map(v => String(v).trim()).filter(Boolean))];
+        if (actionLeads.length > 0) {
+            actionLeads.forEach(name => lines.push(`- [ ] ${escapeMarkdownTableCell(name)}`));
+        } else {
+            lines.push('- [ ] ');
+        }
+        lines.push('');
     }
-    lines.push('');
     lines.push(`*Generated by autoCHAIR on ${escapeMarkdownTableCell(now.toLocaleString())}*`);
 
     return lines.join('\n');
@@ -159,7 +189,8 @@ export function generatePlainText(options = {}) {
         includeHeader = true,
         includeNotes = true,
         includePrep = false,
-        includeContext = false
+        includeContext = false,
+        includeActionItems = false
     } = {
         ...state.exportOptions,
         ...options
@@ -171,7 +202,9 @@ export function generatePlainText(options = {}) {
     const varianceById = varianceData?.byId || {};
     const lines = [];
 
-    lines.push('MEETING AGENDA');
+    const kind = getDocumentKind(state);
+    const metadata = state.metadata || {};
+    lines.push(`${(metadata.title || 'MEETING').toUpperCase()} ${kind.toUpperCase()}`);
     lines.push('='.repeat(50));
     lines.push('');
 
@@ -179,8 +212,13 @@ export function generatePlainText(options = {}) {
         const startTime = items.length > 0 ? formatTime(items[0].startTime) : 'TBD';
         const endTime = items.length > 0 ? formatTime(items[items.length - 1].endTime) : 'TBD';
 
-        lines.push(`Date: ${new Date().toLocaleDateString()}`);
+        lines.push(`Date: ${metadata.date || new Date().toLocaleDateString()}`);
         lines.push(`Time: ${startTime} - ${endTime}`);
+        if (metadata.location) lines.push(`Location: ${metadata.location}`);
+        if (metadata.url) lines.push(`Meeting URL: ${metadata.url}`);
+        if (metadata.attendees?.length) {
+            lines.push(`${metadata.attendeeGroup || 'Attendees'}: ${metadata.attendees.map(person => `[${person.present ? 'x' : ' '}] ${person.name}`).join(', ')}`);
+        }
         lines.push('');
     }
 
@@ -191,7 +229,7 @@ export function generatePlainText(options = {}) {
         lines.push('');
     }
 
-    lines.push('AGENDA ITEMS');
+    lines.push(`${kind.toUpperCase()} ITEMS`);
     lines.push('-'.repeat(50));
     lines.push('');
 
@@ -245,6 +283,13 @@ export function generatePlainText(options = {}) {
         lines.push('');
     }
 
+    if (includeActionItems) {
+        lines.push('ACTION ITEMS');
+        lines.push('-'.repeat(50));
+        [...new Set(items.map(item => item.lead).filter(Boolean))].forEach(name => lines.push(`[ ] ${name}`));
+        lines.push('');
+    }
+
     lines.push('='.repeat(50));
     lines.push(`Generated by autoCHAIR on ${new Date().toLocaleString()}`);
 
@@ -263,7 +308,8 @@ export function generateDocx(options = {}) {
         includeHeader = true,
         includeNotes = true,
         includePrep = false,
-        includeContext = false
+        includeContext = false,
+        includeActionItems = false
     } = {
         ...state.exportOptions,
         ...options
@@ -297,16 +343,23 @@ hr { border: none; border-top: 1pt solid #ccc; margin: 18pt 0; }
 </head>
 <body>`;
 
-    html += '\n<h1>Meeting Agenda</h1>\n';
+    const kind = getDocumentKind(state);
+    const metadata = state.metadata || {};
+    html += `\n<h1>${escapeHtml(metadata.title || 'Meeting')} ${kind}</h1>\n`;
 
     if (includeHeader) {
         const startTime = items.length > 0 ? formatTime(items[0].startTime) : 'TBD';
         const endTime = items.length > 0 ? formatTime(items[items.length - 1].endTime) : 'TBD';
         const totalDuration = items.reduce((sum, item) => sum + parseDuration(item.duration), 0);
 
-        html += `<p class="meta"><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>\n`;
+        html += `<p class="meta"><strong>Date:</strong> ${escapeHtml(metadata.date || new Date().toLocaleDateString())}</p>\n`;
         html += `<p class="meta"><strong>Time:</strong> ${startTime} - ${endTime}</p>\n`;
         html += `<p class="meta"><strong>Duration:</strong> ${formatDuration(totalDuration)}</p>\n`;
+        if (metadata.location) html += `<p class="meta"><strong>Location:</strong> ${escapeHtml(metadata.location)}</p>\n`;
+        if (metadata.url) html += `<p class="meta"><strong>Meeting URL:</strong> <a href="${escapeHtml(metadata.url)}">${escapeHtml(metadata.url)}</a></p>\n`;
+        if (metadata.attendees?.length) {
+            html += `<p class="meta"><strong>${escapeHtml(metadata.attendeeGroup || 'Attendees')}:</strong> ${metadata.attendees.map(person => `${person.present ? '☑' : '☐'} ${escapeHtml(person.name)}`).join(', ')}</p>\n`;
+        }
         html += '<hr>\n';
     }
 
@@ -374,6 +427,14 @@ hr { border: none; border-top: 1pt solid #ccc; margin: 18pt 0; }
         html += '</ul>\n';
     }
 
+    if (includeActionItems) {
+        html += '<h2>Action Items</h2><ul>\n';
+        [...new Set(items.map(item => item.lead).filter(Boolean))].forEach(name => {
+            html += `<li>☐ ${escapeHtml(name)}</li>\n`;
+        });
+        html += '</ul>\n';
+    }
+
     html += '<hr>\n';
     html += `<p class="footer">Generated by autoCHAIR on ${new Date().toLocaleString()}</p>\n`;
     html += '</body>\n</html>';
@@ -422,7 +483,7 @@ function downloadFile(content, filename, mimeType) {
 export function exportAsMarkdown() {
     const content = generateMarkdown();
     const date = new Date().toISOString().split('T')[0];
-    downloadFile(content, `agenda-${date}.md`, 'text/markdown');
+    downloadFile(content, `${getExportStem()}-${date}.md`, 'text/markdown');
 }
 
 /**
@@ -431,7 +492,7 @@ export function exportAsMarkdown() {
 export function exportAsJSON() {
     const content = exportToJSON();
     const date = new Date().toISOString().split('T')[0];
-    downloadFile(content, `agenda-${date}.json`, 'application/json');
+    downloadFile(content, `${getExportStem()}-${date}.json`, 'application/json');
 }
 
 /**
@@ -440,7 +501,7 @@ export function exportAsJSON() {
 export function exportAsText() {
     const content = generatePlainText();
     const date = new Date().toISOString().split('T')[0];
-    downloadFile(content, `agenda-${date}.txt`, 'text/plain');
+    downloadFile(content, `${getExportStem()}-${date}.txt`, 'text/plain');
 }
 
 /**
@@ -450,7 +511,7 @@ export function exportAsDocx() {
     const content = generateDocx();
     const date = new Date().toISOString().split('T')[0];
     // Use .doc extension with HTML content - Word will open it correctly
-    downloadFile(content, `agenda-${date}.doc`, 'application/msword');
+    downloadFile(content, `${getExportStem()}-${date}.doc`, 'application/msword');
 }
 
 /**

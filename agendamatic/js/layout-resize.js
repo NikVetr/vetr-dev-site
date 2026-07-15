@@ -26,7 +26,7 @@ const RESIZER_DEFS = [
         axis: 'x',
         containerSelector: '.right-side',
         cssVar: '--right-export-width',
-        minPrev: 130,
+        minPrev: 190,
         minNext: 200
     },
     {

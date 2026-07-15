@@ -18,6 +18,7 @@ import { initAgenda, handleAddItem } from './agenda.js';
 import { initTimer } from './timer.js';
 import { initStaging } from './staging.js';
 import { initBulkEdit } from './bulk-edit.js';
+import { initMetadata } from './metadata.js';
 import { initLayoutResizers } from './layout-resize.js';
 import { initTooltips } from './tooltips.js';
 import { initExport, showNotification } from './export.js';
@@ -236,6 +237,7 @@ function init() {
     initAgenda(elements.agendaContainer);
     initStaging(elements.stagingContainer);
     initBulkEdit();
+    initMetadata();
 
     initTimer({
         timelineTrack: elements.timelineTrack,
@@ -331,7 +333,8 @@ function syncControlsFromState(state, elements) {
         [elements.includeHeaderCheckbox, exportOptions.includeHeader],
         [elements.includeNotesCheckbox, exportOptions.includeNotes],
         [elements.includePrepCheckbox, exportOptions.includePrep],
-        [elements.includeContextCheckbox, exportOptions.includeContext]
+        [elements.includeContextCheckbox, exportOptions.includeContext],
+        [elements.includeActionItemsCheckbox, exportOptions.includeActionItems]
     ];
     checkboxValues.forEach(([element, value]) => {
         if (element) element.checked = !!value;
@@ -401,6 +404,7 @@ function getElements() {
         includeNotesCheckbox: document.getElementById('include-notes'),
         includePrepCheckbox: document.getElementById('include-prep'),
         includeContextCheckbox: document.getElementById('include-context'),
+        includeActionItemsCheckbox: document.getElementById('include-action-items'),
 
         // Settings
         startTimeInput: document.getElementById('start-time'),
@@ -555,7 +559,8 @@ function setupExportOptionsListeners(elements) {
         { el: elements.includeHeaderCheckbox, key: 'includeHeader' },
         { el: elements.includeNotesCheckbox, key: 'includeNotes' },
         { el: elements.includePrepCheckbox, key: 'includePrep' },
-        { el: elements.includeContextCheckbox, key: 'includeContext' }
+        { el: elements.includeContextCheckbox, key: 'includeContext' },
+        { el: elements.includeActionItemsCheckbox, key: 'includeActionItems' }
     ];
 
     checkboxes.forEach(({ el, key }) => {

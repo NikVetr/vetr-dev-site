@@ -90,6 +90,7 @@
                     <div class="box export-box">
                         <div class="box-header">
                             <h3>Import / Export</h3>
+                            <button type="button" id="btn-metadata" class="box-header-action" data-tooltip="Add meeting details and attendance">Add Metadata</button>
                         </div>
                         <div class="export-panel">
                             <div class="export-options">
@@ -105,6 +106,9 @@
                                 </label>
                                 <label data-tooltip="Include contextual information">
                                     <input type="checkbox" id="include-context"> Context
+                                </label>
+                                <label data-tooltip="Include an action-items checklist">
+                                    <input type="checkbox" id="include-action-items"> Action Items
                                 </label>
                             </div>
                             <div class="export-buttons-section">
@@ -531,6 +535,32 @@
             <div class="modal-footer">
                 <button type="button" id="bulk-edit-cancel">Cancel</button>
                 <button type="button" id="bulk-edit-apply" class="primary">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meeting Metadata Modal -->
+    <div class="modal-overlay" id="metadata-modal">
+        <div class="modal metadata-modal" role="dialog" aria-modal="true" aria-labelledby="metadata-title-heading">
+            <div class="modal-header">
+                <h3 id="metadata-title-heading">Meeting Metadata</h3>
+                <button class="modal-close" id="metadata-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body metadata-body">
+                <label>Meeting Title <input type="text" id="metadata-meeting-title"></label>
+                <label>Date <input type="date" id="metadata-date"></label>
+                <label>Location <input type="text" id="metadata-location" placeholder="Room or address"></label>
+                <label>Meeting URL <input type="url" id="metadata-url" placeholder="https://..."></label>
+                <label>Attendee Type <input type="text" id="metadata-attendee-group"></label>
+                <div class="metadata-attendees-header"><strong>Attendance</strong><span>Present</span></div>
+                <div id="metadata-attendees" class="metadata-attendees"></div>
+                <div class="metadata-add-attendee">
+                    <input type="text" id="metadata-new-attendee" placeholder="Add attendee">
+                    <button type="button" id="metadata-add-attendee">+ Add</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="metadata-done" class="primary">Done</button>
             </div>
         </div>
     </div>

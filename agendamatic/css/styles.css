@@ -58,7 +58,7 @@
     --row-gap: 8px;
     --border-radius: 4px;
     --input-col-fr: 1.6fr;
-    --export-col: minmax(150px, 170px);
+    --export-col: minmax(210px, 230px);
     --splitter-size: 10px;
 
     /* Transitions */
@@ -420,6 +420,12 @@ h3 {
     color: var(--text-color);
     font: inherit;
     cursor: pointer;
+}
+
+.export-box .box-header-action {
+    padding: 3px 5px;
+    font-size: 0.68rem;
+    white-space: nowrap;
 }
 
 .agenda-header > div:nth-child(1),
@@ -803,7 +809,7 @@ h3 {
 /* --- EXPORT & STATUS SECTION --- */
 .right-side {
     display: grid;
-    grid-template-columns: minmax(0, var(--right-export-width, 170px)) var(--splitter-size) minmax(0, 1fr);
+    grid-template-columns: minmax(0, var(--right-export-width, 230px)) var(--splitter-size) minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr);
     gap: 0;
     align-items: stretch;
@@ -2289,6 +2295,70 @@ body.corner-resize-preview * {
     background: rgba(231, 76, 60, 0.08);
     color: var(--accent-red);
     font-size: 0.76rem;
+}
+
+.metadata-modal {
+    max-width: 620px;
+}
+
+.metadata-body {
+    display: grid;
+    gap: 10px;
+}
+
+.metadata-body > label {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+}
+
+.metadata-body > label input,
+.metadata-add-attendee input,
+.metadata-attendee-row input[type="text"] {
+    min-width: 0;
+    padding: 7px 9px;
+    border: 1px solid #bbb;
+    border-radius: var(--border-radius);
+    font: inherit;
+}
+
+.metadata-attendees-header,
+.metadata-attendee-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 28px;
+    align-items: center;
+    gap: 8px;
+}
+
+.metadata-attendees-header {
+    margin-top: 6px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.82rem;
+}
+
+.metadata-attendee-row {
+    margin-bottom: 6px;
+}
+
+.metadata-attendee-row input[type="checkbox"] {
+    justify-self: center;
+}
+
+.metadata-remove-attendee {
+    border: 0;
+    background: transparent;
+    color: var(--accent-red);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.metadata-add-attendee {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
 }
 
 .btn-cancel {

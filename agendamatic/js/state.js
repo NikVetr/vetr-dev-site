@@ -317,7 +317,17 @@ const DEFAULT_STATE = {
         includeHeader: true,
         includeNotes: true,
         includePrep: false,
-        includeContext: false
+        includeContext: false,
+        includeActionItems: false
+    },
+    metadata: {
+        title: 'Board Meeting',
+        date: '',
+        location: '',
+        url: '',
+        attendeeGroup: 'Attendees',
+        attendees: [],
+        initialized: false
     },
     tracker: {
         isRunning: false,
@@ -627,6 +637,13 @@ export function updateSettings(settings) {
 export function updateExportOptions(options) {
     setState({
         exportOptions: { ...currentState.exportOptions, ...options }
+    });
+}
+
+/** Update persisted meeting metadata. */
+export function updateMetadata(metadata) {
+    setState({
+        metadata: { ...currentState.metadata, ...metadata }
     });
 }
 
@@ -1534,6 +1551,7 @@ export function initializeState() {
             ...state,
             settings: { ...DEFAULT_STATE.settings, ...state.settings },
             exportOptions: { ...DEFAULT_STATE.exportOptions, ...state.exportOptions },
+            metadata: { ...DEFAULT_STATE.metadata, ...state.metadata },
             tracker: { ...DEFAULT_STATE.tracker, ...state.tracker }
         };
     }
@@ -1587,6 +1605,7 @@ export function importFromJSON(json) {
             ...imported,
             settings: { ...DEFAULT_STATE.settings, ...imported.settings },
             exportOptions: { ...DEFAULT_STATE.exportOptions, ...imported.exportOptions },
+            metadata: { ...DEFAULT_STATE.metadata, ...imported.metadata },
             tracker: { ...DEFAULT_STATE.tracker, ...imported.tracker }
         };
 
