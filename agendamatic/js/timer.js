@@ -49,6 +49,7 @@ let currentStatusItemEl = null;
 let currentStatusNextItemEl = null;
 let currentStatusNextLineEl = null;
 let currentStatusLabelEl = null;
+let currentStatusHoursEl = null;
 let currentStatusUnitEl = null;
 let nextItemButton = null;
 let trackerDropIndex = null;
@@ -102,6 +103,7 @@ export function initTimer(elements) {
     currentStatusNextItemEl = elements.currentStatusNextItem;
     currentStatusNextLineEl = elements.currentStatusNextLine;
     currentStatusLabelEl = currentStatusBox?.querySelector('.current-status-label') || null;
+    currentStatusHoursEl = currentStatusBox?.querySelector('.current-status-hours') || null;
     currentStatusUnitEl = currentStatusBox?.querySelector('.current-status-unit') || null;
     progressBar = elements.progressBar;
     progressGuideLine = document.getElementById('progress-guide-line');
@@ -710,6 +712,7 @@ function syncPopoutStatusPanel(source, host, selectors) {
         const targetNode = target.querySelector(selector);
         if (!sourceNode || !targetNode) return;
         targetNode.className = sourceNode.className;
+        targetNode.hidden = sourceNode.hidden;
         if (targetNode.innerHTML !== sourceNode.innerHTML) {
             targetNode.innerHTML = sourceNode.innerHTML;
             changed = true;
@@ -895,6 +898,7 @@ function syncPopoutWindow() {
     if (currentChanged) {
         syncPopoutStatusPanel(currentSource, currentHost, [
             '.current-status-label',
+            '.current-status-hours',
             '.current-status-tape',
             '.current-status-unit',
             '.current-status-line',
@@ -1808,7 +1812,7 @@ function renderContinuousTicker(tapeEl, centerValue, options = {}) {
 
     const step = Number.isFinite(options.step) && options.step > 0 ? options.step : 1;
     const precision = Number.isFinite(options.precision) ? options.precision : 0;
-    const scaleKey = `${step}:${precision}`;
+    const scaleKey = `${options.mode || 'default'}:${step}:${precision}`;
     const scaleChanged = tapeEl.dataset.tickerScale !== scaleKey;
     if (scaleChanged) tapeEl.classList.add('ticker-scale-changing');
     const containerWidth = tapeEl.parentElement?.clientWidth || 320;
@@ -1858,16 +1862,22 @@ function renderContinuousTicker(tapeEl, centerValue, options = {}) {
 function getCurrentTickerScale(minutesValue) {
     const absMinutes = Math.max(0, minutesValue);
     if (absMinutes >= 90) {
+        const hours = Math.floor(absMinutes / 60);
+        const minutes = absMinutes - hours * 60;
         return {
-            value: absMinutes / 60,
-            unit: 'HOURS',
-            step: 0.1,
-            precision: 1
+            value: minutes,
+            unit: Math.round(minutes) === 1 ? 'MINUTE' : 'MINUTES',
+            hoursText: `${hours} ${hours === 1 ? 'HOUR' : 'HOURS'}`,
+            mode: 'hours-minutes',
+            step: 1,
+            precision: 0
         };
     }
     return {
         value: absMinutes,
         unit: Math.round(absMinutes) === 1 ? 'MINUTE' : 'MINUTES',
+        hoursText: '',
+        mode: 'minutes',
         step: 1,
         precision: 0
     };
@@ -1973,6 +1983,10 @@ function updateCurrentStatusPanel() {
     const items = calculateIntervals();
     if (items.length === 0) {
         if (currentStatusLabelEl) currentStatusLabelEl.textContent = 'NO AGENDA ITEMS';
+        if (currentStatusHoursEl) {
+            currentStatusHoursEl.hidden = true;
+            currentStatusHoursEl.textContent = '';
+        }
         if (currentStatusUnitEl) currentStatusUnitEl.textContent = '';
         const emptyTicker = document.createElement('span');
         emptyTicker.className = 'ticker-on-time';
@@ -2015,6 +2029,10 @@ function updateCurrentStatusPanel() {
 
     if (currentStatusLabelEl) {
         currentStatusLabelEl.textContent = remaining >= 0 ? 'YOU HAVE' : 'YOU ARE';
+    }
+    if (currentStatusHoursEl) {
+        currentStatusHoursEl.textContent = scale.hoursText;
+        currentStatusHoursEl.hidden = !scale.hoursText;
     }
     if (currentStatusUnitEl) {
         currentStatusUnitEl.textContent = scale.unit;

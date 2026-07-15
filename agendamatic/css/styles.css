@@ -1515,6 +1515,14 @@ h3 {
     letter-spacing: 2px;
 }
 
+.current-status-hours {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
 .current-status-ticker {
     position: relative;
     height: 80px;
@@ -2843,6 +2851,10 @@ body.corner-resize-preview * {
         letter-spacing: 1px;
     }
 
+    .current-status-hours {
+        font-size: 0.66rem;
+    }
+
     .current-status-ticker {
         height: 42px;
     }
@@ -2911,6 +2923,7 @@ body.corner-resize-preview * {
 
 @container current-status (max-height: 105px) {
     .current-status-label,
+    .current-status-hours,
     .current-status-unit {
         font-size: 0.66rem;
         letter-spacing: 0.6px;
