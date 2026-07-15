@@ -17,6 +17,7 @@ import {
 import { initAgenda, handleAddItem } from './agenda.js';
 import { initTimer } from './timer.js';
 import { initStaging } from './staging.js';
+import { initBulkEdit } from './bulk-edit.js';
 import { initLayoutResizers } from './layout-resize.js';
 import { initTooltips } from './tooltips.js';
 import { initExport, showNotification } from './export.js';
@@ -234,6 +235,7 @@ function init() {
     // Initialize modules
     initAgenda(elements.agendaContainer);
     initStaging(elements.stagingContainer);
+    initBulkEdit();
 
     initTimer({
         timelineTrack: elements.timelineTrack,

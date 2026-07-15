@@ -466,6 +466,23 @@ export function updateItem(itemId, updates) {
     setState({ items, stagedItems }, { historyGroup: `item:${itemId}:${fields}` });
 }
 
+/** Replace all agenda items in one undoable state update. */
+export function replaceItems(items) {
+    if (!Array.isArray(items)) throw new TypeError('Agenda items must be an array.');
+    const normalized = items.map(item => ({
+        id: item.id || generateId(),
+        name: item.name || 'New Item',
+        lead: item.lead || '',
+        duration: item.duration || '10m',
+        locked: !!item.locked,
+        notes: item.notes || '',
+        themeColor: Number(item.themeColor) >= 1 && Number(item.themeColor) <= 8
+            ? Number(item.themeColor)
+            : 1
+    }));
+    setState({ items: normalized });
+}
+
 // Track next theme color to assign
 let nextThemeColor = 1;
 

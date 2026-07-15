@@ -395,6 +395,33 @@ h3 {
     text-align: left;
 }
 
+.bulk-column-button {
+    appearance: none;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px dotted currentColor;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+}
+
+.bulk-column-button:hover,
+.bulk-column-button:focus-visible {
+    color: var(--accent-blue);
+}
+
+.box-header-action {
+    padding: 4px 8px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    background: var(--bg-secondary);
+    color: var(--text-color);
+    font: inherit;
+    cursor: pointer;
+}
+
 .agenda-header > div:nth-child(1),
 .agenda-header > div:nth-child(4),
 .agenda-header > div:nth-child(5),
@@ -2206,6 +2233,62 @@ body.corner-resize-preview * {
     cursor: pointer;
     font-family: inherit;
     transition: all var(--transition-fast);
+}
+
+.bulk-edit-modal {
+    max-width: 820px;
+}
+
+.bulk-edit-format {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+}
+
+.bulk-edit-format[hidden] {
+    display: none;
+}
+
+.bulk-edit-format label {
+    cursor: pointer;
+}
+
+#bulk-edit-text {
+    width: 100%;
+    min-height: 280px;
+    resize: vertical;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: var(--border-radius);
+    font: 0.86rem/1.45 'Courier New', monospace;
+    white-space: pre;
+}
+
+.bulk-edit-warning {
+    min-height: 1.3em;
+    margin-bottom: 5px;
+    color: var(--accent-red);
+    font-size: 0.84rem;
+    font-weight: bold;
+}
+
+.bulk-edit-bad-rows {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 6px;
+}
+
+.bulk-edit-bad-rows span {
+    padding: 2px 6px;
+    border: 1px solid rgba(231, 76, 60, 0.28);
+    border-radius: 3px;
+    background: rgba(231, 76, 60, 0.08);
+    color: var(--accent-red);
+    font-size: 0.76rem;
 }
 
 .btn-cancel {

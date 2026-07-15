@@ -50,15 +50,16 @@
                 <div class="box input-box">
                     <div class="box-header">
                         <h3>Input</h3>
+                        <button type="button" id="btn-edit-csv" class="box-header-action" data-tooltip="Edit all agenda rows as CSV">Edit CSV</button>
                     </div>
 
                     <!-- Agenda Header -->
                     <div class="agenda-grid agenda-header">
                         <div></div>
-                        <div>Item</div>
-                        <div>Lead</div>
-                        <div>Color</div>
-                        <div>Duration</div>
+                        <div><button type="button" class="bulk-column-button" data-bulk-field="name">Item</button></div>
+                        <div><button type="button" class="bulk-column-button" data-bulk-field="lead">Lead</button></div>
+                        <div><button type="button" class="bulk-column-button" data-bulk-field="themeColor">Color</button></div>
+                        <div><button type="button" class="bulk-column-button" data-bulk-field="duration">Duration</button></div>
                         <div>Time</div>
                         <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
                         <div data-tooltip="Item notes">&#128221;</div>
@@ -506,6 +507,30 @@
             <div class="modal-footer">
                 <button class="btn-cancel" id="modal-cancel">Cancel</button>
                 <button class="btn-save" id="modal-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Agenda Editor Modal -->
+    <div class="modal-overlay" id="bulk-edit-modal">
+        <div class="modal bulk-edit-modal" role="dialog" aria-modal="true" aria-labelledby="bulk-edit-title">
+            <div class="modal-header">
+                <h3 id="bulk-edit-title">Edit Agenda Column</h3>
+                <button class="modal-close" id="bulk-edit-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="bulk-edit-format" class="bulk-edit-format">
+                    <span>Separate values with:</span>
+                    <label><input type="radio" name="bulk-format" value="newline" checked> New lines</label>
+                    <label><input type="radio" name="bulk-format" value="comma"> Commas</label>
+                </div>
+                <div id="bulk-edit-warning" class="bulk-edit-warning" role="alert"></div>
+                <textarea id="bulk-edit-text" rows="14" spellcheck="false"></textarea>
+                <div id="bulk-edit-bad-rows" class="bulk-edit-bad-rows"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="bulk-edit-cancel">Cancel</button>
+                <button type="button" id="bulk-edit-apply" class="primary">Apply</button>
             </div>
         </div>
     </div>

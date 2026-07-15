@@ -397,10 +397,10 @@ function renderAgendaHeader(varianceMode) {
     if (varianceMode) {
         header.innerHTML = `
             <div></div>
-            <div>Item</div>
-            <div>Lead</div>
-            <div>Color</div>
-            <div class="header-split"><span class="header-main">Duration</span><span class="header-sub">Expected</span></div>
+            <div><button type="button" class="bulk-column-button" data-bulk-field="name">Item</button></div>
+            <div><button type="button" class="bulk-column-button" data-bulk-field="lead">Lead</button></div>
+            <div><button type="button" class="bulk-column-button" data-bulk-field="themeColor">Color</button></div>
+            <div class="header-split"><button type="button" class="bulk-column-button header-main" data-bulk-field="duration">Duration</button><span class="header-sub">Expected</span></div>
             <div class="header-split"><span class="header-main">Duration</span><span class="header-sub">Actual</span></div>
             <div class="header-split"><span class="header-main">Time</span><span class="header-sub">Expected</span></div>
             <div class="header-split"><span class="header-main">Time</span><span class="header-sub">Actual</span></div>
@@ -414,10 +414,10 @@ function renderAgendaHeader(varianceMode) {
 
     header.innerHTML = `
         <div></div>
-        <div>Item</div>
-        <div>Lead</div>
-        <div>Color</div>
-        <div>Duration</div>
+        <div><button type="button" class="bulk-column-button" data-bulk-field="name">Item</button></div>
+        <div><button type="button" class="bulk-column-button" data-bulk-field="lead">Lead</button></div>
+        <div><button type="button" class="bulk-column-button" data-bulk-field="themeColor">Color</button></div>
+        <div><button type="button" class="bulk-column-button" data-bulk-field="duration">Duration</button></div>
         <div>Time</div>
         <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
         <div data-tooltip="Item notes">&#128221;</div>
