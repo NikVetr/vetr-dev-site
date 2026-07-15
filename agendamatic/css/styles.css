@@ -1561,6 +1561,10 @@ h3 {
     will-change: transform, opacity;
 }
 
+.current-status-tape.continuous-ticker.ticker-scale-changing .ticker-number {
+    transition: none;
+}
+
 .current-status-unit {
     font-size: 0.85rem;
     font-weight: bold;

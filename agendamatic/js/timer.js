@@ -553,9 +553,14 @@ function getSemanticDomSignature(element) {
 
 function syncPopoutTicker(sourceTape, targetTape) {
     if (!sourceTape || !targetTape) return;
+    const firstSync = targetTape.dataset.popoutTickerReady !== 'true';
+    const initializing = firstSync || targetTape.dataset.popoutTickerInitializing === 'true';
     targetTape.className = sourceTape.className;
+    if (initializing) targetTape.classList.add('ticker-scale-changing');
     targetTape.style.cssText = sourceTape.style.cssText;
     targetTape.dataset.fitScale = sourceTape.dataset.fitScale || '';
+    targetTape.dataset.popoutTickerReady = 'true';
+    if (firstSync) targetTape.dataset.popoutTickerInitializing = 'true';
 
     const sourceNumbers = [...sourceTape.children];
     const targetNumbers = [...targetTape.children];
@@ -569,6 +574,17 @@ function syncPopoutTicker(sourceTape, targetTape) {
         Object.keys(targetNumber.dataset).forEach(key => delete targetNumber.dataset[key]);
         Object.assign(targetNumber.dataset, sourceNumber.dataset);
     });
+
+    if (firstSync) {
+        // Commit cloned geometry before enabling motion so labels do not bunch on entry.
+        targetTape.getBoundingClientRect();
+        targetTape.ownerDocument.defaultView?.requestAnimationFrame(() => {
+            targetTape.ownerDocument.defaultView?.requestAnimationFrame(() => {
+                targetTape.classList.remove('ticker-scale-changing');
+                delete targetTape.dataset.popoutTickerInitializing;
+            });
+        });
+    }
 }
 
 function syncPopoutDynamicTracker(trackerHost) {
@@ -744,6 +760,7 @@ function openTrackerPopout() {
     .popout-content .current-status-display { box-sizing: border-box; height: auto; min-height: 100%; gap: 4px; padding: 6px 4px; overflow: visible; }
     .popout-content .ticker-container { height: 58px; }
     .popout-content .current-status-ticker { height: 52px; }
+    .popout-content .current-status-tape.continuous-ticker { --ticker-base-size: 2rem; }
     .popout-content .current-status-line { font-size: 0.82rem; }
     .popout-content .current-status-next { font-size: 0.72rem; margin-top: 1px; }
     .popout-controls-wrap { flex: 1; min-height: 0; padding: 8px; }
@@ -1785,41 +1802,57 @@ function interpolateTickerStyle(distance) {
     };
 }
 
-function renderContinuousIntegerTicker(tapeEl, centerValue) {
+function renderContinuousTicker(tapeEl, centerValue, options = {}) {
     if (!tapeEl || !Number.isFinite(centerValue)) return;
     tapeEl.classList.add('continuous-ticker');
 
+    const step = Number.isFinite(options.step) && options.step > 0 ? options.step : 1;
+    const precision = Number.isFinite(options.precision) ? options.precision : 0;
+    const scaleKey = `${step}:${precision}`;
+    const scaleChanged = tapeEl.dataset.tickerScale !== scaleKey;
+    if (scaleChanged) tapeEl.classList.add('ticker-scale-changing');
     const containerWidth = tapeEl.parentElement?.clientWidth || 320;
-    const spacing = clamp(containerWidth / 6.4, 34, 62);
-    const firstValue = Math.max(0, Math.floor(centerValue) - 4);
-    const lastValue = Math.max(8, Math.ceil(centerValue) + 4);
-    const desiredValues = new Set();
+    const spacing = precision > 0
+        ? clamp(containerWidth / 5.2, 62, 86)
+        : clamp(containerWidth / 6.4, 34, 62);
+    const centerIndex = centerValue / step;
+    const firstIndex = Math.max(0, Math.floor(centerIndex) - 4);
+    const lastIndex = Math.max(8, Math.ceil(centerIndex) + 4);
+    const desiredIndexes = new Set();
     const existing = new Map(
-        [...tapeEl.querySelectorAll('.ticker-number[data-ticker-value]')]
-            .map(number => [Number(number.dataset.tickerValue), number])
+        [...tapeEl.querySelectorAll('.ticker-number[data-ticker-index]')]
+            .map(number => [Number(number.dataset.tickerIndex), number])
     );
 
-    for (let value = firstValue; value <= lastValue; value += 1) {
-        desiredValues.add(value);
-        let number = existing.get(value);
+    for (let index = firstIndex; index <= lastIndex; index += 1) {
+        desiredIndexes.add(index);
+        let number = existing.get(index);
         if (!number) {
             number = tapeEl.ownerDocument.createElement('span');
             number.className = 'ticker-number';
-            number.dataset.tickerValue = `${value}`;
-            number.textContent = `${value}`;
+            number.dataset.tickerIndex = `${index}`;
             tapeEl.appendChild(number);
         }
 
-        const distance = value - centerValue;
+        const value = index * step;
+        number.textContent = precision > 0 ? value.toFixed(precision) : `${Math.round(value)}`;
+        const distance = index - centerIndex;
         const style = interpolateTickerStyle(distance);
         number.style.setProperty('--ticker-offset', `${distance * spacing}px`);
         number.style.setProperty('--ticker-scale', `${style.scale}`);
         number.style.opacity = `${style.opacity}`;
     }
 
-    existing.forEach((number, value) => {
-        if (!desiredValues.has(value)) number.remove();
+    existing.forEach((number, index) => {
+        if (!desiredIndexes.has(index)) number.remove();
     });
+
+    tapeEl.dataset.tickerScale = scaleKey;
+    if (scaleChanged) {
+        tapeEl.ownerDocument.defaultView?.requestAnimationFrame(() => {
+            tapeEl.classList.remove('ticker-scale-changing');
+        });
+    }
 }
 
 function getCurrentTickerScale(minutesValue) {
@@ -1827,12 +1860,16 @@ function getCurrentTickerScale(minutesValue) {
     if (absMinutes >= 90) {
         return {
             value: absMinutes / 60,
-            unit: 'HOURS'
+            unit: 'HOURS',
+            step: 0.1,
+            precision: 1
         };
     }
     return {
         value: absMinutes,
-        unit: Math.round(absMinutes) === 1 ? 'MINUTE' : 'MINUTES'
+        unit: Math.round(absMinutes) === 1 ? 'MINUTE' : 'MINUTES',
+        step: 1,
+        precision: 0
     };
 }
 
@@ -1973,7 +2010,7 @@ function updateCurrentStatusPanel() {
     const displayValue = remaining >= 0 ? remaining : overrun;
     const scale = getCurrentTickerScale(displayValue);
 
-    renderContinuousIntegerTicker(currentStatusTape, scale.value);
+    renderContinuousTicker(currentStatusTape, scale.value, scale);
     fitTickerToContainer(currentStatusTape);
 
     if (currentStatusLabelEl) {
