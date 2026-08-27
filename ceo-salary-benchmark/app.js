@@ -20,19 +20,21 @@
     stream: "incumbents",
     measure: "base",
     sample: "primary",
-    fit: "empirical",
+    fit: "lognormal",
     weighting: "equal",
     targetExpense: 7_500_000,
     bandwidth: 0.7,
-    bins: 12,
-    showDensity: true,
+    bins: 20,
+    autoBins: true,
     showRug: true,
     showReference: true,
     quantileGranularity: "quintiles",
+    customQuantiles: "5, 25, 50, 75, 95",
     sortKey: "organization",
     sortDirection: "asc",
     search: "",
-    filters: { organization: "", tier: "", topic: "" },
+    filters: { title: new Set(), tier: new Set(), topic: new Set() },
+    showUnavailable: false,
     focusedId: "",
     hoverQuantile: null,
   };
@@ -48,14 +50,18 @@
 
   const refs = {
     stream: $("#stream-select"), measure: $("#measure-select"), measureField: $("#measure-field"),
-    sample: $("#sample-select"), fit: $("#fit-select"), weighting: $("#weighting-select"),
+    sample: $("#sample-select"), fit: [...document.querySelectorAll('input[name="distribution"]')], weighting: $("#weighting-select"),
     sizeControls: $("#size-controls"), targetExpense: $("#target-expense"), bandwidth: $("#size-bandwidth"),
     bandwidthValue: $("#bandwidth-value"), bins: $("#bin-count"), binValue: $("#bin-value"),
-    showDensity: $("#show-density"), showRug: $("#show-rug"), showReference: $("#show-reference"),
+    showRug: $("#show-rug"), showReference: $("#show-reference"),
     reset: $("#reset-settings"), chart: $("#salary-chart"), chartWrap: $("#chart-wrap"),
     tooltip: $("#chart-tooltip"), chartKicker: $("#chart-kicker"), chartTitle: $("#chart-title"),
     statN: $("#stat-n"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
     quantileGranularity: $("#quantile-granularity"), quantileGrid: $("#quantile-grid"),
+    customQuantilesField: $("#custom-quantiles-field"), customQuantiles: $("#custom-quantiles"),
+    customQuantilesError: $("#custom-quantiles-error"), densityLegend: $("#density-legend"),
+    densityLegendLabel: $("#density-legend-label"), showUnavailable: $("#show-unavailable"),
+    showUnavailableLabel: $("#show-unavailable-label"),
     tableBody: $("#organization-table tbody"), tableSearch: $("#table-search"),
     includedCount: $("#included-count"), dialog: $("#source-dialog"),
   };
@@ -93,12 +99,13 @@
 
   function applyPreset() {
     for (const row of rows()) {
-      let selected = row.defaultIncluded;
-      if (state.sample === "clean") selected = row.defaultIncluded && row.structurallyClean;
+      const available = salary(row) != null;
+      let selected = row.defaultIncluded && available;
+      if (state.sample === "clean") selected = row.defaultIncluded && row.structurallyClean && available;
       if (state.sample === "tierA") {
-        selected = row.defaultIncluded && (row.tier === "A" || row.tier === "strict_primary");
+        selected = row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary");
       }
-      if (state.sample === "observed") selected = salary(row) != null;
+      if (state.sample === "observed") selected = available;
       inclusion[state.stream].set(row.id, selected);
     }
   }
@@ -233,15 +240,41 @@
   }
 
   function tierColor(row) {
-    if (row.tier === "A" || row.tier === "strict_primary") return "#174f43";
-    if (row.tier === "B" || row.tier.includes?.("secondary")) return "#2f7d71";
-    return "#4f708d";
+    if (row.tier === "A" || row.tier === "strict_primary") return "#2D6885";
+    if (row.tier === "B" || row.tier.includes?.("secondary")) return "#44B0DF";
+    return "#75CCEC";
   }
 
   function referenceRange() {
     if (state.stream === "jobAds") return [250_000, 340_000];
     if (state.measure === "total") return [340_000, 435_000];
     return [290_000, 350_000];
+  }
+
+  function squareBinCount(items, domainMin, domainMax, innerWidth, innerHeight) {
+    let best = { bins: 20, score: Infinity };
+    const model = fitModel(items);
+    const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+    for (let count = 2; count <= 200; count += 1) {
+      const totals = Array(count).fill(0);
+      items.forEach((item) => {
+        const index = clamp(Math.floor(((item.value - domainMin) / (domainMax - domainMin)) * count), 0, count - 1);
+        totals[index] += item.weight;
+      });
+      const binWidth = (domainMax - domainMin) / count;
+      const densityPeak = model ? Math.max(...Array.from({ length: 101 }, (_, index) => {
+        const value = domainMin + (index / 100) * (domainMax - domainMin);
+        return model.density(value) * totalWeight * binWidth;
+      })) : 0;
+      const maxTotal = Math.max(...totals, densityPeak * 1.08, 1);
+      const typicalWeight = items.reduce((sum, item) => sum + item.weight, 0) / items.length;
+      const blockWidth = innerWidth / count;
+      const blockHeight = innerHeight * typicalWeight / maxTotal;
+      const sizePenalty = Math.min(blockWidth, blockHeight) < 7 ? (7 - Math.min(blockWidth, blockHeight)) / 2 : 0;
+      const score = Math.abs(Math.log(blockWidth / Math.max(blockHeight, 0.1))) + sizePenalty;
+      if (score < best.score) best = { bins: count, score };
+    }
+    return best.bins;
   }
 
   function renderChart() {
@@ -255,7 +288,7 @@
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
-      const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#66716b", "font-size": 13 });
+      const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
       empty.textContent = "No organizations have a value for the current selection.";
       svg.append(empty);
       refs.statN.textContent = "0"; refs.statNeff.textContent = "0"; refs.statCenter.textContent = "—";
@@ -270,6 +303,12 @@
     const domainMin = Math.max(0, Math.floor((rawMin - pad) / 50_000) * 50_000);
     const domainMax = Math.ceil((rawMax + pad) / 50_000) * 50_000;
     const xScale = (value) => margin.left + ((value - domainMin) / (domainMax - domainMin)) * innerWidth;
+    if (state.autoBins) {
+      state.bins = squareBinCount(items, domainMin, domainMax, innerWidth, innerHeight);
+      refs.bins.value = state.bins;
+      refs.binValue.value = state.bins;
+      state.autoBins = false;
+    }
     const binWidthValue = (domainMax - domainMin) / state.bins;
     const bins = Array.from({ length: state.bins }, (_, index) => ({ index, total: 0, items: [] }));
     items.forEach((item) => {
@@ -277,7 +316,14 @@
       bins[index].items.push(item);
       bins[index].total += item.weight;
     });
-    const maxWeight = Math.max(...bins.map((bin) => bin.total), 1);
+    const model = fitModel(items);
+    const sumWeight = items.reduce((sum, item) => sum + item.weight, 0);
+    const densityPoints = model ? Array.from({ length: 181 }, (_, index) => {
+      const value = domainMin + (index / 180) * (domainMax - domainMin);
+      return { value, expectedWeight: model.density(value) * sumWeight * binWidthValue };
+    }) : [];
+    const densityPeak = densityPoints.length ? Math.max(...densityPoints.map((point) => point.expectedWeight)) : 0;
+    const maxWeight = Math.max(...bins.map((bin) => bin.total), densityPeak * 1.08, 1);
     const yScale = (weight) => innerHeight - (weight / maxWeight) * innerHeight;
 
     const gridTicks = 4;
@@ -285,7 +331,7 @@
       const value = (maxWeight * i) / gridTicks;
       const y = margin.top + yScale(value);
       svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: y, y2: y, class: "grid-line" }));
-      const label = svgElement("text", { x: margin.left - 8, y: y + 3, "text-anchor": "end", fill: "#66716b", "font-size": 9 });
+      const label = svgElement("text", { x: margin.left - 8, y: y + 3, "text-anchor": "end", fill: "#52879E", "font-size": 9 });
       label.textContent = value.toFixed(value < 10 ? 1 : 0);
       svg.append(label);
     }
@@ -322,17 +368,12 @@
       });
     });
 
-    const model = fitModel(items);
-    if (model && state.showDensity) {
-      const sumWeight = items.reduce((sum, item) => sum + item.weight, 0);
-      let path = "";
-      for (let i = 0; i <= 180; i += 1) {
-        const value = domainMin + (i / 180) * (domainMax - domainMin);
-        const expectedBinWeight = model.density(value) * sumWeight * binWidthValue;
-        const x = xScale(value);
-        const y = margin.top + yScale(expectedBinWeight);
-        path += `${i ? "L" : "M"}${x.toFixed(2)},${clamp(y, margin.top, plotBottom).toFixed(2)}`;
-      }
+    if (model) {
+      const path = densityPoints.map((point, index) => {
+        const x = xScale(point.value);
+        const y = margin.top + yScale(point.expectedWeight);
+        return `${index ? "L" : "M"}${x.toFixed(2)},${y.toFixed(2)}`;
+      }).join("");
       svg.append(svgElement("path", { d: path, class: "density-line" }));
     }
 
@@ -352,12 +393,12 @@
     for (let i = 0; i <= tickCount; i += 1) {
       const value = domainMin + (i / tickCount) * (domainMax - domainMin);
       const x = xScale(value);
-      svg.append(svgElement("line", { x1: x, x2: x, y1: plotBottom, y2: plotBottom + 4, stroke: "#929991" }));
-      const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#66716b", "font-size": 10 });
+      svg.append(svgElement("line", { x1: x, x2: x, y1: plotBottom, y2: plotBottom + 4, stroke: "#52879E" }));
+      const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#52879E", "font-size": 10 });
       label.textContent = compactMoney(value);
       svg.append(label);
     }
-    const axisTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#4e5853", "font-size": 10, "font-weight": 700 });
+    const axisTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
     axisTitle.textContent = `Annual compensation (${DATA.priceBasis})`;
     svg.append(axisTitle);
 
@@ -384,16 +425,27 @@
 
   function renderQuantiles() {
     const items = selectedRows();
-    const probabilities = state.quantileGranularity === "deciles"
-      ? [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-      : [0.1, 0.25, 0.5, 0.75, 0.9];
+    const model = fitModel(items);
+    refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
+    let percentiles = [20, 40, 60, 80];
+    if (state.quantileGranularity === "deciles") percentiles = Array.from({ length: 9 }, (_, index) => (index + 1) * 10);
+    if (state.quantileGranularity === "percentiles") percentiles = Array.from({ length: 99 }, (_, index) => index + 1);
+    if (state.quantileGranularity === "custom") {
+      const tokens = state.customQuantiles.split(",").map((value) => Number(value.trim()));
+      const valid = tokens.length > 0 && tokens.every((value) => Number.isFinite(value) && value > 0 && value < 100);
+      refs.customQuantilesError.textContent = valid ? "" : "Enter comma-separated values greater than 0 and less than 100.";
+      if (valid) percentiles = [...new Set(tokens)].sort((a, b) => a - b);
+      else percentiles = [];
+    } else refs.customQuantilesError.textContent = "";
     refs.quantileGrid.replaceChildren();
-    probabilities.forEach((probability) => {
-      const value = items.length ? distributionQuantile(items, probability) : NaN;
+    refs.quantileGrid.classList.toggle("is-percentiles", percentiles.length > 20);
+    percentiles.forEach((percentile) => {
+      const probability = percentile / 100;
+      const value = items.length ? (model ? model.quantile(probability) : weightedQuantile(items, probability)) : NaN;
       const button = document.createElement("button");
       button.type = "button";
       button.className = "quantile-cell";
-      button.innerHTML = `<span>${Math.round(probability * 100)}th percentile</span><strong>${compactMoney(value)}</strong>`;
+      button.innerHTML = `<span>${formatPercentile(percentile)}</span><strong>${compactMoney(value)}</strong>`;
       button.addEventListener("pointerenter", () => { state.hoverQuantile = value; renderChart(); });
       button.addEventListener("pointerleave", () => { state.hoverQuantile = null; renderChart(); });
       button.addEventListener("focus", () => { state.hoverQuantile = value; renderChart(); });
@@ -402,15 +454,22 @@
     });
   }
 
+  function formatPercentile(value) {
+    const rounded = Number.isInteger(value) ? value : value.toFixed(1);
+    const integer = Math.floor(value);
+    const suffix = integer % 100 >= 11 && integer % 100 <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[integer % 10] || "th");
+    return `${rounded}${suffix} percentile`;
+  }
+
   function tableRows() {
     const search = state.search.toLowerCase();
     const filtered = rows().filter((row) => {
-      const haystack = [row.organization, row.title, row.topic, row.eaAffinity, row.location].join(" ").toLowerCase();
+      if (!state.showUnavailable && salary(row) == null) return false;
+      const haystack = [row.organization, row.title, row.rawTitle, row.topic, row.eaAffinity, row.location].join(" ").toLowerCase();
       if (search && !haystack.includes(search)) return false;
-      return Object.entries(state.filters).every(([key, value]) => {
-        if (!value) return true;
-        const field = key === "tier" ? row.tier : row[key];
-        return String(field || "").toLowerCase().includes(value.toLowerCase());
+      return Object.entries(state.filters).every(([key, selected]) => {
+        if (!selected.size) return true;
+        return selected.has(String(row[key] || "Not reported"));
       });
     });
     const direction = state.sortDirection === "asc" ? 1 : -1;
@@ -426,25 +485,69 @@
     });
   }
 
+  function buildFilterMenus() {
+    document.querySelectorAll("[data-filter-menu]").forEach((container) => {
+      const key = container.dataset.filterMenu;
+      const values = [...new Set(rows().map((row) => String(row[key] || "Not reported")))].sort((a, b) => a.localeCompare(b));
+      const selected = state.filters[key];
+      container.replaceChildren();
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+      summary.textContent = selected.size ? `${selected.size} selected` : "All";
+      summary.setAttribute("aria-label", `Filter ${key}`);
+      const panel = document.createElement("div");
+      panel.className = "filter-popover";
+      const actions = document.createElement("div");
+      actions.className = "filter-actions";
+      const allButton = document.createElement("button");
+      allButton.type = "button"; allButton.textContent = "Select all";
+      allButton.addEventListener("click", () => { selected.clear(); buildFilterMenus(); renderTable(); });
+      actions.append(allButton);
+      const options = document.createElement("div");
+      options.className = "filter-options";
+      values.forEach((value) => {
+        const label = document.createElement("label");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox"; checkbox.checked = !selected.size || selected.has(value);
+        checkbox.addEventListener("change", () => {
+          if (!selected.size) values.forEach((option) => selected.add(option));
+          if (checkbox.checked) selected.add(value); else selected.delete(value);
+          if (selected.size === values.length) selected.clear();
+          summary.textContent = selected.size ? `${selected.size} selected` : "All";
+          renderTable();
+        });
+        const span = document.createElement("span"); span.textContent = value;
+        label.append(checkbox, span); options.append(label);
+      });
+      panel.append(actions, options); details.append(summary, panel); container.append(details);
+    });
+  }
+
   function renderTable() {
     refs.tableBody.replaceChildren();
     tableRows().forEach((row) => {
+      const available = salary(row) != null;
       const tr = document.createElement("tr");
       if (!inclusion[state.stream].get(row.id)) tr.classList.add("is-excluded");
+      if (!available) tr.classList.add("is-unavailable");
       if (state.focusedId === row.id) tr.classList.add("is-focused");
       tr.dataset.id = row.id;
 
       const toggleCell = document.createElement("td");
       toggleCell.className = "check-column";
       const toggle = document.createElement("input");
-      toggle.type = "checkbox"; toggle.className = "row-toggle"; toggle.checked = inclusion[state.stream].get(row.id);
-      toggle.setAttribute("aria-label", `Include ${row.organization}`);
+      toggle.type = "checkbox"; toggle.className = "row-toggle"; toggle.checked = available && inclusion[state.stream].get(row.id);
+      toggle.disabled = !available;
+      toggle.setAttribute("aria-label", available ? `Include ${row.organization}` : `${row.organization} has no ${measureLabel()} observation`);
       toggle.addEventListener("change", () => { inclusion[state.stream].set(row.id, toggle.checked); renderAll(); });
       toggleCell.append(toggle);
 
       const org = document.createElement("td");
       org.className = "org-cell";
-      org.innerHTML = `<strong>${escapeHtml(row.organization)}</strong><span title="${escapeHtml(row.title || "")}">${escapeHtml(row.title || row.analysisStatus || "")}</span>`;
+      org.innerHTML = `<strong>${escapeHtml(row.organization)}</strong>`;
+
+      const title = document.createElement("td");
+      title.className = "title-cell"; title.title = row.rawTitle || row.title || ""; title.textContent = row.title || "Not reported";
 
       const salaryCell = document.createElement("td");
       salaryCell.className = "money-cell"; salaryCell.textContent = compactMoney(salary(row));
@@ -453,6 +556,7 @@
       const weightInput = document.createElement("input");
       weightInput.type = "number"; weightInput.min = "0"; weightInput.max = "10"; weightInput.step = "0.1";
       weightInput.value = customWeights[state.stream].get(row.id) ?? 1; weightInput.className = "weight-input";
+      weightInput.disabled = !available;
       weightInput.title = `Effective weight: ${effectiveWeight(row).toFixed(2)}`;
       weightInput.setAttribute("aria-label", `Custom weight for ${row.organization}`);
       weightInput.addEventListener("change", () => {
@@ -473,11 +577,15 @@
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
       } else source.textContent = "—";
-      tr.append(toggleCell, org, salaryCell, weightCell, preview, source, tier, topic, expenses);
+      tr.append(toggleCell, org, title, salaryCell, expenses, weightCell, tier, topic, preview, source);
       refs.tableBody.append(tr);
     });
     const count = selectedRows().length;
+    const unavailable = rows().filter((row) => salary(row) == null).length;
     refs.includedCount.textContent = `${count} included`;
+    refs.showUnavailableLabel.textContent = state.showUnavailable
+      ? `Showing ${unavailable} rows without this salary measure`
+      : `Show ${unavailable} rows without this salary measure`;
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
       const active = button.dataset.sort === state.sortKey;
       button.dataset.active = active;
@@ -503,7 +611,7 @@
     const meta = $("#dialog-meta");
     meta.replaceChildren();
     [
-      ["Executive / role", [row.executive, row.title].filter(Boolean).join(" · ") || "Not reported"],
+      ["Executive / role", [row.executive, row.rawTitle || row.title].filter(Boolean).join(" · ") || "Not reported"],
       ["Evidence year", row.compensationYear || "Not reported"],
       ["Tier", row.tier || "Not coded"],
       ["Topic / model", row.topic || "Not coded"],
@@ -534,6 +642,8 @@
       ? "Validated CEO / ED posting midpoints"
       : { base: "Validated Schedule J base salaries", cash: "Validated Part VII cash / W-2 proxies", total: "Validated filing total compensation" }[state.measure];
     refs.sizeControls.hidden = !["size", "blended"].includes(state.weighting);
+    refs.densityLegend.hidden = state.fit === "empirical";
+    refs.densityLegendLabel.textContent = `${state.fit === "gamma" ? "Gamma" : "Lognormal"} density`;
     refs.bandwidthValue.value = `${state.bandwidth.toFixed(2)}×`;
     refs.binValue.value = state.bins;
   }
@@ -547,19 +657,23 @@
 
   function reset() {
     Object.assign(state, {
-      stream: "incumbents", measure: "base", sample: "primary", fit: "empirical", weighting: "equal",
-      targetExpense: 7_500_000, bandwidth: 0.7, bins: 12, showDensity: true, showRug: true,
-      showReference: true, quantileGranularity: "quintiles", sortKey: "organization", sortDirection: "asc",
-      search: "", filters: { organization: "", tier: "", topic: "" }, focusedId: "", hoverQuantile: null,
+      stream: "incumbents", measure: "base", sample: "primary", fit: "lognormal", weighting: "equal",
+      targetExpense: 7_500_000, bandwidth: 0.7, bins: 20, autoBins: true, showRug: true,
+      showReference: true, quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95",
+      sortKey: "organization", sortDirection: "asc", search: "",
+      filters: { title: new Set(), tier: new Set(), topic: new Set() }, showUnavailable: false,
+      focusedId: "", hoverQuantile: null,
     });
     Object.entries({ incumbents: DATA.incumbents, jobAds: DATA.jobAds }).forEach(([stream, streamRows]) => {
       streamRows.forEach((row) => { inclusion[stream].set(row.id, Boolean(row.defaultIncluded)); customWeights[stream].set(row.id, 1); });
     });
     refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
-    refs.fit.value = state.fit; refs.weighting.value = state.weighting; refs.targetExpense.value = 7.5;
-    refs.bandwidth.value = state.bandwidth; refs.bins.value = state.bins; refs.showDensity.checked = true;
+    refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
+    refs.weighting.value = state.weighting; refs.targetExpense.value = 7.5;
+    refs.bandwidth.value = state.bandwidth; refs.bins.value = state.bins;
     refs.showRug.checked = true; refs.showReference.checked = true; refs.quantileGranularity.value = "quintiles";
-    refs.tableSearch.value = ""; document.querySelectorAll("[data-filter]").forEach((input) => { input.value = ""; });
+    refs.customQuantiles.value = state.customQuantiles; refs.tableSearch.value = ""; refs.showUnavailable.checked = false;
+    applyPreset(); buildFilterMenus();
     renderAll();
   }
 
@@ -567,21 +681,25 @@
     return String(value ?? "").replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[char]);
   }
 
-  refs.stream.addEventListener("change", () => { state.stream = refs.stream.value; state.focusedId = ""; applyPreset(); renderAll(); });
-  refs.measure.addEventListener("change", () => { state.measure = refs.measure.value; state.focusedId = ""; renderAll(); });
+  refs.stream.addEventListener("change", () => {
+    state.stream = refs.stream.value; state.focusedId = ""; state.autoBins = true; state.showUnavailable = false;
+    state.filters = { title: new Set(), tier: new Set(), topic: new Set() }; refs.showUnavailable.checked = false;
+    applyPreset(); buildFilterMenus(); renderAll();
+  });
+  refs.measure.addEventListener("change", () => { state.measure = refs.measure.value; state.focusedId = ""; state.autoBins = true; applyPreset(); renderAll(); });
   refs.sample.addEventListener("change", () => { state.sample = refs.sample.value; applyPreset(); renderAll(); });
-  refs.fit.addEventListener("change", () => { state.fit = refs.fit.value; renderAll(); });
+  refs.fit.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.fit = radio.value; renderAll(); } }));
   refs.weighting.addEventListener("change", () => { state.weighting = refs.weighting.value; renderAll(); });
   refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || 7.5, 1, 100) * 1_000_000; renderAll(); });
   refs.bandwidth.addEventListener("input", () => { state.bandwidth = Number(refs.bandwidth.value); renderAll(); });
-  refs.bins.addEventListener("input", () => { state.bins = Number(refs.bins.value); renderAll(); });
-  refs.showDensity.addEventListener("change", () => { state.showDensity = refs.showDensity.checked; renderChart(); });
+  refs.bins.addEventListener("input", () => { state.autoBins = false; state.bins = Number(refs.bins.value); renderAll(); });
   refs.showRug.addEventListener("change", () => { state.showRug = refs.showRug.checked; renderChart(); });
   refs.showReference.addEventListener("change", () => { state.showReference = refs.showReference.checked; renderChart(); });
   refs.quantileGranularity.addEventListener("change", () => { state.quantileGranularity = refs.quantileGranularity.value; renderQuantiles(); });
+  refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); });
   refs.tableSearch.addEventListener("input", () => { state.search = refs.tableSearch.value; renderTable(); });
+  refs.showUnavailable.addEventListener("change", () => { state.showUnavailable = refs.showUnavailable.checked; renderTable(); });
   refs.reset.addEventListener("click", reset);
-  document.querySelectorAll("[data-filter]").forEach((input) => input.addEventListener("input", () => { state.filters[input.dataset.filter] = input.value; renderTable(); }));
   document.querySelectorAll("thead button[data-sort]").forEach((button) => button.addEventListener("click", () => {
     const key = button.dataset.sort;
     if (state.sortKey === key) state.sortDirection = state.sortDirection === "asc" ? "desc" : "asc";
@@ -592,5 +710,7 @@
   const observer = new ResizeObserver(() => renderChart());
   observer.observe(refs.chartWrap);
   $("#archive-status").textContent = `${DATA.summary.retrievedManifestRecords} / ${DATA.summary.retrievedManifestRecords} sources archived`;
+  applyPreset();
+  buildFilterMenus();
   renderAll();
 })();

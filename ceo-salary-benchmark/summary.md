@@ -6,7 +6,9 @@ This directory contains a validated public-record CEO compensation benchmark for
 
 `index.html`, `style.css`, `app.js`, and generated `app-data.js` form the static GitHub Pages application. The desktop layout uses a settings column, a central weighted histogram and quantile view, and a sortable/filterable evidence table. Narrow layouts stack these regions.
 
-The app keeps incumbent Form 990 evidence separate from recruitment postings. Incumbent users can switch among validated Schedule J base compensation, Part VII cash/W-2 proxy, and filing-total proxy. The default is the empirical, equally weighted distribution; lognormal and gamma fits are explicit sensitivity modes. Users can apply structural presets, comparability or expense-similarity weighting, organization-specific multipliers, and row inclusion toggles. Each histogram block maps to one organization and focuses the corresponding table row. Quantile cells project their value onto the chart on hover or keyboard focus.
+The app keeps incumbent Form 990 evidence separate from recruitment postings. Incumbent users can switch among validated Schedule J base compensation, Part VII cash/W-2 proxy, and filing-total proxy. The default is an equally weighted lognormal summary with its density overlaid on the histogram; empirical and gamma summaries are explicit alternatives. The initial 2–200 bin control is calibrated to make organization blocks approximately square at the current viewport. Users can apply structural presets, comparability or expense-similarity weighting, organization-specific multipliers, and row inclusion toggles. Rows without the active compensation measure are hidden by default and can be exposed for auditing, with unavailable inclusion controls disabled. Each histogram block maps to one organization and focuses the corresponding table row.
+
+Organization and normalized job-title fields are separate. Equivalent titles such as `Chief Executive Officer` and `CEO` share a consolidated title while the original source wording remains in the evidence record. Title, tier, and topic columns use exact-value checkbox menus that support multi-selection. Quantiles can be shown as quintiles, deciles, all percentiles, or user-entered percentile levels; hovering or focusing a result projects it onto the chart. The interface uses the Rethink Priorities blue palette and the local Aspekta variable font.
 
 Source previews display the exact evidence fields used for the selected measure. Third-party links open the public host, while `evidence/original/` contains compactly published copies of the original XML, HTML, or PDF artifacts referenced by app observations. `scripts/build_app_data.py` rebuilds both the app dataset and this publishable source subset from the validated benchmark deliverables.
 
@@ -22,7 +24,7 @@ The strict `source_complete` packager remains fail-closed because it requires th
 
 - `python3 scripts/build_app_data.py` rebuilds the static app data and publishable evidence files.
 - `npm run serve` serves the route locally on port 4173.
-- `npm test` runs focused Playwright checks for chart rendering, empirical/model switching, source previews, H-CAP and Center for AI Safety corrections, evidence-stream switching, and responsive layout.
+- `npm test` starts a local server and runs focused Playwright checks for chart and density rendering, distribution switching, row inclusion, unavailable observations, multi-select categorical filtering, percentile controls, source previews, H-CAP and Center for AI Safety corrections, evidence-stream switching, and responsive layout.
 - The benchmark's independent audits and source validators remain under `benchmark/scripts/`.
 
 The app is decision support for board deliberation, not a population salary estimator or a substitute for a formal compensation-reasonableness process.

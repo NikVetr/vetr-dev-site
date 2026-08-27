@@ -7,6 +7,7 @@
   <meta name="description" content="Interactive Rethink Priorities CEO salary benchmark explorer">
   <link rel="icon" href="/favicon.svg">
   <title>CEO Salary Benchmark · vetr.dev</title>
+  <link rel="stylesheet" href="assets/aspekta/variable/font-face.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,7 +34,7 @@
       </div>
 
       <label class="field">
-        <span>Evidence stream</span>
+        <span>Evidence stream <button class="info-tooltip" type="button" aria-label="About evidence streams" data-tooltip="Switch between compensation reported for current nonprofit leaders in Form 990 filings and salary ranges advertised for open executive roles.">?</button></span>
         <select id="stream-select">
           <option value="incumbents">Incumbent Form 990s</option>
           <option value="jobAds">Recruitment postings</option>
@@ -41,7 +42,7 @@
       </label>
 
       <label class="field" id="measure-field">
-        <span>Compensation measure</span>
+        <span>Compensation measure <button class="info-tooltip" type="button" aria-label="About compensation measures" data-tooltip="Schedule J base is the preferred salary measure. Part VII cash is a W-2-style cash proxy; filing total adds reported other compensation.">?</button></span>
         <select id="measure-select">
           <option value="base">Schedule J base</option>
           <option value="cash">Part VII cash / W-2 proxy</option>
@@ -50,7 +51,7 @@
       </label>
 
       <label class="field">
-        <span>Sample preset</span>
+        <span>Sample preset <button class="info-tooltip" type="button" aria-label="About sample presets" data-tooltip="Apply a reproducible inclusion rule. You can still include, exclude, or reweight individual observations afterward.">?</button></span>
         <select id="sample-select">
           <option value="primary">All primary observations</option>
           <option value="clean">Structurally clean only</option>
@@ -59,17 +60,15 @@
         </select>
       </label>
 
-      <label class="field">
-        <span>Distribution summary</span>
-        <select id="fit-select">
-          <option value="empirical">Empirical distribution</option>
-          <option value="lognormal">Lognormal fit</option>
-          <option value="gamma">Gamma fit</option>
-        </select>
-      </label>
+      <fieldset class="choice-group field">
+        <legend>Distribution <button class="info-tooltip" type="button" aria-label="About distribution models" data-tooltip="Empirical uses the weighted observations directly. Lognormal and gamma fit smooth, right-skewed probability models and overlay their expected histogram density.">?</button></legend>
+        <label><input type="radio" name="distribution" value="empirical"> Empirical</label>
+        <label><input type="radio" name="distribution" value="lognormal" checked> Lognormal</label>
+        <label><input type="radio" name="distribution" value="gamma"> Gamma</label>
+      </fieldset>
 
       <label class="field">
-        <span>Base weighting</span>
+        <span>Base weighting <button class="info-tooltip" type="button" aria-label="About base weighting" data-tooltip="Choose how much influence each included organization receives before applying its editable row weight.">?</button></span>
         <select id="weighting-select">
           <option value="equal">Equal weights</option>
           <option value="comparability">Comparability score</option>
@@ -80,28 +79,27 @@
 
       <div id="size-controls" class="subsettings" hidden>
         <label class="field compact">
-          <span>RP comparison budget</span>
+          <span>RP comparison budget <button class="info-tooltip" type="button" aria-label="About comparison budget" data-tooltip="The annual-expense target used by expense-similarity weighting. Organizations nearer this scale receive more weight.">?</button></span>
           <div class="input-with-unit">
             <input id="target-expense" type="number" min="1" max="100" step="0.5" value="7.5">
             <span>$M</span>
           </div>
         </label>
         <label class="field compact">
-          <span>Size bandwidth <output id="bandwidth-value">0.70×</output></span>
+          <span>Size bandwidth <button class="info-tooltip" type="button" aria-label="About size bandwidth" data-tooltip="Controls how quickly an organization's weight falls as its expenses differ from the RP comparison budget. Larger values are more permissive.">?</button> <output id="bandwidth-value">0.70×</output></span>
           <input id="size-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
         </label>
       </div>
 
       <label class="field compact">
-        <span>Histogram bins <output id="bin-value">12</output></span>
-        <input id="bin-count" type="range" min="6" max="24" step="1" value="12">
+        <span>Histogram bins <button class="info-tooltip" type="button" aria-label="About histogram bins" data-tooltip="Controls the number of equal-width salary intervals. The initial value is chosen to make organization blocks approximately square on your screen.">?</button> <output id="bin-value">Auto</output></span>
+        <input id="bin-count" type="range" min="2" max="200" step="1" value="20">
       </label>
 
       <fieldset class="toggle-group">
         <legend>Display</legend>
-        <label><input id="show-density" type="checkbox" checked> Fitted density curve</label>
-        <label><input id="show-rug" type="checkbox" checked> Salary rug</label>
-        <label><input id="show-reference" type="checkbox" checked> RP judgment band</label>
+        <label><input id="show-rug" type="checkbox" checked> Salary rug <button class="info-tooltip" type="button" aria-label="About the salary rug" data-tooltip="Short marks along the horizontal axis show every included salary's exact position, including observations that overlap inside the same bin.">?</button></label>
+        <label><input id="show-reference" type="checkbox" checked> RP judgment band <button class="info-tooltip" type="button" aria-label="About the RP judgment band" data-tooltip="A contextual compensation range carried over from the benchmark's board-facing judgment scenarios. It is not a fitted confidence interval.">?</button></label>
       </fieldset>
 
       <div class="method-note">
@@ -132,7 +130,9 @@
           <span><i class="swatch tier-a"></i> Tier A / strict</span>
           <span><i class="swatch tier-b"></i> Tier B</span>
           <span><i class="swatch tier-c"></i> Tier C / expanded</span>
-          <span><i class="line-swatch"></i> Model density</span>
+          <span id="density-legend"><i class="line-swatch"></i> <b id="density-legend-label">Lognormal density</b></span>
+          <span><i class="band-swatch"></i> RP judgment range</span>
+          <span><i class="rug-swatch"></i> Individual salaries</span>
         </div>
       </section>
 
@@ -142,13 +142,20 @@
             <p class="section-label">Current weighted distribution</p>
             <h2 id="quantile-title">Quantiles</h2>
           </div>
-          <label class="inline-select">Breaks
+          <label class="inline-select">Breaks <button class="info-tooltip" type="button" aria-label="About quantile breaks" data-tooltip="Choose standard fifths, tenths, every percentile, or enter your own percentile levels. Values use the selected empirical or fitted distribution.">?</button>
             <select id="quantile-granularity">
               <option value="quintiles">Quintiles</option>
               <option value="deciles">Deciles</option>
+              <option value="percentiles">Percentiles</option>
+              <option value="custom">Custom…</option>
             </select>
           </label>
         </div>
+        <label id="custom-quantiles-field" class="custom-quantiles" hidden>
+          <span>Percentile levels (0–100, comma separated)</span>
+          <input id="custom-quantiles" type="text" value="5, 25, 50, 75, 95" inputmode="decimal">
+          <small id="custom-quantiles-error" role="alert"></small>
+        </label>
         <div id="quantile-grid" class="quantile-grid"></div>
       </section>
     </section>
@@ -165,29 +172,36 @@
         <span class="sr-only">Search organizations</span>
         <input id="table-search" type="search" placeholder="Search organization, topic, title…">
       </label>
+      <label class="unavailable-toggle">
+        <input id="show-unavailable" type="checkbox">
+        <span id="show-unavailable-label">Show rows without this salary measure</span>
+        <button class="info-tooltip" type="button" aria-label="About unavailable observations" data-tooltip="These organizations are part of the peer universe but have no validated value for the currently selected compensation measure, so they cannot affect the histogram.">?</button>
+      </label>
       <div class="table-scroll" tabindex="0">
         <table id="organization-table">
           <thead>
             <tr>
               <th class="check-column"><span class="sr-only">Included</span></th>
               <th><button type="button" data-sort="organization">Organization</button></th>
+              <th><button type="button" data-sort="title">Job title</button></th>
               <th><button type="button" data-sort="salary">Salary</button></th>
+              <th><button type="button" data-sort="expenses">Expenses</button></th>
               <th><button type="button" data-sort="weight">Weight</button></th>
-              <th>Source preview</th>
-              <th>Source</th>
               <th><button type="button" data-sort="tier">Tier</button></th>
               <th><button type="button" data-sort="topic">Topic / model</button></th>
-              <th><button type="button" data-sort="expenses">Expenses</button></th>
+              <th>Source preview</th>
+              <th>Source</th>
             </tr>
             <tr class="column-filters">
               <th></th>
-              <th><input data-filter="organization" aria-label="Filter organization" placeholder="Filter…"></th>
+              <th></th>
+              <th><div class="filter-menu" data-filter-menu="title"></div></th>
               <th></th>
               <th></th>
               <th></th>
+              <th><div class="filter-menu" data-filter-menu="tier"></div></th>
+              <th><div class="filter-menu" data-filter-menu="topic"></div></th>
               <th></th>
-              <th><input data-filter="tier" aria-label="Filter tier" placeholder="A, B…"></th>
-              <th><input data-filter="topic" aria-label="Filter topic" placeholder="Filter…"></th>
               <th></th>
             </tr>
           </thead>

@@ -5,6 +5,7 @@ import csv
 import json
 import math
 import shutil
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -46,6 +47,21 @@ def slug(source_id: str) -> str:
     return "".join(c.lower() if c.isalnum() else "-" for c in source_id).strip("-")
 
 
+def normalize_title(value: str) -> str:
+    """Consolidate equivalent executive-title spellings without erasing role distinctions."""
+    original = text(value)
+    if not original:
+        return "Not reported"
+    normalized = re.sub(r"\s+", " ", original.replace("/", " & ")).strip()
+    normalized = re.sub(r"\bChief Executive Officer\b", "CEO", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bChief Exec(?:utive)? Officer\b", "CEO", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bExecutive Director\b", "Executive Director", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bPresident\b", "President", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\s+(?:and|&)\s+", " & ", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\s*&\s*CEO\b", " & CEO", normalized, flags=re.IGNORECASE)
+    return normalized
+
+
 def cache_source(source_id: str, local_path: str) -> str:
     source = BENCHMARK / local_path
     if not source.is_file():
@@ -75,6 +91,7 @@ def build_incumbents() -> list[dict]:
         cached = cache_source(source_id, local_path) if source_id and local_path else ""
         observed_name = text(filing.get("observed_ceo_name")) if filing else ""
         observed_title = text(filing.get("observed_ceo_title")) if filing else ""
+        raw_title = observed_title or (text(filing.get("ceo_title")) if filing else "")
         period_end = text(filing.get("tax_period_end")) if filing else ""
         evidence = "No clean compensation observation was retained for this selected reference organization."
         if filing:
@@ -90,7 +107,8 @@ def build_incumbents() -> list[dict]:
             "id": source_id or f"REF-{slug(text(peer['organization']))}",
             "organization": text(peer["organization"]),
             "executive": observed_name or (text(filing.get("ceo_name")) if filing else ""),
-            "title": observed_title or (text(filing.get("ceo_title")) if filing else ""),
+            "title": normalize_title(raw_title),
+            "rawTitle": raw_title,
             "tier": text(peer["reference_tier"]),
             "topic": text(peer["topic_cluster"]),
             "eaAffinity": text(peer["ea_affinity"]),
@@ -142,11 +160,13 @@ def build_job_ads() -> list[dict]:
             f"Location: {text(job['location'])}; work arrangement: {text(job['remote_status']) or 'not reported'}."
         )
         source_url = text(job["resolved_url"]) or text(job["fallback_url_1"]) or text(job["canonical_url"])
+        raw_title = text(job["role_title"])
         output.append({
             "id": source_id,
             "organization": text(job["organization"]),
             "executive": "",
-            "title": text(job["role_title"]),
+            "title": normalize_title(raw_title),
+            "rawTitle": raw_title,
             "tier": text(job["tier"]),
             "topic": text(job["mission_operating_model"]),
             "eaAffinity": "Not coded",
