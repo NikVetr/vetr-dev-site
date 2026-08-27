@@ -114,13 +114,64 @@
     tier: "Tier", eaAffinity: "EA relation", sourceType: "Evidence stream", topic: "Topic / model",
     titleGroup: "Job-title group", structure: "Structure", streamBalanced: "Balanced evidence streams",
   };
+  const DISCRETE_WEIGHT_NOTES = {
+    tier: "Suggested values follow the peer hierarchy: narrow primary peers receive full weight; broader, structural, and excluded sensitivity tiers receive progressively less.",
+    eaAffinity: "Suggested values favor EA-core and EA-adjacent organizations, moderately weight functional-only peers, and leave uncoded observations neutral.",
+    sourceType: "Suggested values give filed incumbent compensation full weight and advertised salary midpoints slightly less weight because they are offers rather than realized pay.",
+    topic: "Suggested values favor RP cause areas and research, evidence, evaluation, policy, or advisory work; delivery-only, grantmaking, and structurally dissimilar settings receive less.",
+    titleGroup: "Suggested values give CEO roles full weight, then moderately step down Executive Director, President, other executive, and unreported titles.",
+    structure: "Suggested values favor independent, board-accountable nonprofits; affiliates, fiscally sponsored projects, unclear structures, and subordinate roles receive less.",
+  };
 
   function defaultDiscreteWeight(key, value) {
     const normalized = String(value || "").toLowerCase();
-    if (key === "tier") return normalized === "a" || normalized.includes("strict")
-      ? 1 : normalized === "b" || normalized.includes("secondary") ? 0.65 : 0.35;
-    if (key === "eaAffinity") return normalized.includes("aligned")
-      ? 1 : normalized.includes("adjacent") ? 0.8 : normalized.includes("functional") ? 0.55 : 0.45;
+    if (key === "tier") {
+      if (normalized === "a" || normalized.includes("strict_primary") || normalized.includes("strict-primary")) return 1;
+      if (normalized.includes("expanded_primary")) return 0.85;
+      if (normalized === "b" || normalized === "secondary") return 0.7;
+      if (normalized.includes("secondary_structural")) return 0.4;
+      if (normalized.includes("secondary_scale_unknown")) return 0.45;
+      if (normalized.includes("secondary_scale")) return 0.55;
+      if (normalized.includes("expanded_broad")) return 0.35;
+      if (normalized.includes("date_ambiguity")) return 0.3;
+      if (normalized.includes("older_structural")) return 0.25;
+      if (normalized.includes("fractional")) return 0.2;
+      if (normalized.includes("excluded")) return 0.1;
+      return normalized === "c" ? 0.35 : 0.5;
+    }
+    if (key === "eaAffinity") {
+      if (normalized.includes("not coded") || normalized.includes("not reported")) return 1;
+      if (normalized.includes("core") || normalized.includes("aligned")) return 1;
+      if (normalized.includes("adjacent")) return 0.85;
+      return normalized.includes("functional") ? 0.65 : 0.6;
+    }
+    if (key === "sourceType") return normalized.includes("form 990") ? 1 : normalized.includes("job posting") ? 0.8 : 0.7;
+    if (key === "titleGroup") {
+      if (normalized === "ceo" || normalized.includes("chief executive")) return 1;
+      if (normalized.includes("executive director")) return 0.85;
+      if (normalized.includes("president") || normalized.includes("co-lead")) return 0.75;
+      if (normalized.includes("not reported")) return 0.35;
+      return 0.6;
+    }
+    if (key === "structure") {
+      if (normalized.includes("independent nonprofit") || normalized === "board of directors" || normalized.includes("board of trustees") || normalized.includes("joint board") || normalized.includes("board (implied")) return 1;
+      if (normalized.includes("boards of the affiliated")) return 0.85;
+      if (normalized.includes("membership nonprofit")) return normalized.includes("fiscal sponsor") ? 0.55 : 0.75;
+      if (normalized.includes("fiscal") || normalized.includes("international nonprofit affiliate")) return 0.55;
+      if (normalized.includes("nonprofit/project")) return 0.65;
+      if (normalized.includes("advisory board")) return 0.7;
+      if (normalized.includes("chief operating officer")) return 0.35;
+      if (normalized.includes("not extracted") || normalized.includes("not reported")) return 0.6;
+      return 0.7;
+    }
+    if (key === "topic") {
+      if (/animal welfare|global health|catastrophic risk|biosecurity|ai,|ea infrastructure|effective giving/.test(normalized)) return 1;
+      if (/grantmaking foundation|community foundation|private health foundation|endowment/.test(normalized)) return 0.45;
+      if (/university|regional program leadership|direct program delivery|public-facing cultural|local investigative/.test(normalized)) return 0.55;
+      if (/research|evaluation|evidence|science|data|policy|advisory|think-and-do|think tank/.test(normalized)) return 0.9;
+      if (/field-building|membership|knowledge/.test(normalized)) return 0.75;
+      return normalized.includes("not reported") ? 0.6 : 0.65;
+    }
     return 1;
   }
 
@@ -1118,6 +1169,7 @@
       const details = document.createElement("details");
       details.open = discrete.length === 1;
       const summary = document.createElement("summary"); summary.textContent = `${WEIGHT_LABELS[key]} category multipliers`;
+      const note = document.createElement("p"); note.className = "discrete-weight-note"; note.textContent = `${DISCRETE_WEIGHT_NOTES[key]} A multiplier of 1.00 is the reference value; 0 excludes a category.`;
       const grid = document.createElement("div"); grid.className = "discrete-weight-grid";
       Object.keys(weights).sort((a, b) => a.localeCompare(b)).forEach((category) => {
         const label = document.createElement("label"); label.textContent = category; label.title = category;
@@ -1131,7 +1183,7 @@
         });
         grid.append(label, input);
       });
-      details.append(summary, grid); refs.discreteWeightEditors.append(details);
+      details.append(summary, note, grid); refs.discreteWeightEditors.append(details);
     });
   }
 

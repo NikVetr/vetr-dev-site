@@ -175,11 +175,33 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#weighting-description")).toContainText("Expense similarity × Staff similarity");
   await page.locator('#weighting-components input[value="tier"]').check();
   await expect(page.locator("#discrete-weight-editors")).toBeVisible();
+  await expect(page.locator("#discrete-weight-editors .discrete-weight-note")).toContainText("peer hierarchy");
   const tierAWeight = page.getByLabel("Tier multiplier for A");
   await expect(tierAWeight).toHaveValue("1");
+  await expect(page.getByLabel("Tier multiplier for B")).toHaveValue("0.7");
+  await expect(page.getByLabel("Tier multiplier for C")).toHaveValue("0.35");
   await tierAWeight.fill("0.8");
   await tierAWeight.blur();
   await expect(tierAWeight).toHaveValue("0.8");
+  await page.locator('#weighting-components input[value="tier"]').uncheck();
+  await page.locator('#weighting-components input[value="tier"]').check();
+  await expect(page.getByLabel("Tier multiplier for A")).toHaveValue("0.8");
+
+  await page.locator('#weighting-components input[value="eaAffinity"]').check();
+  await expect(page.getByLabel("EA relation multiplier for EA-core")).toHaveValue("1");
+  await expect(page.getByLabel("EA relation multiplier for EA-adjacent")).toHaveValue("0.85");
+  await expect(page.getByLabel("EA relation multiplier for functional-only")).toHaveValue("0.65");
+  await page.locator('#weighting-components input[value="titleGroup"]').check();
+  await expect(page.getByLabel("Job-title group multiplier for CEO")).toHaveValue("1");
+  await expect(page.getByLabel("Job-title group multiplier for Executive Director")).toHaveValue("0.85");
+  await expect(page.getByLabel("Job-title group multiplier for President")).toHaveValue("0.75");
+  await expect(page.getByLabel("Job-title group multiplier for Not reported")).toHaveValue("0.35");
+  await page.locator('#weighting-components input[value="topic"]').check();
+  await expect(page.getByLabel("Topic / model multiplier for AI, catastrophic risk, biosecurity, and technology policy")).toHaveValue("1");
+  await expect(page.getByLabel("Topic / model multiplier for Research, evaluation, philanthropy infrastructure, and policy")).toHaveValue("0.9");
+  await page.locator('#weighting-components input[value="structure"]').check();
+  await expect(page.getByLabel("Structure multiplier for independent nonprofit")).toHaveValue("1");
+  await expect(page.getByLabel("Structure multiplier for membership nonprofit")).toHaveValue("0.75");
 
   const cais = page.locator("tbody tr").filter({ hasText: "Center for AI Safety" });
   await expect(cais).toHaveCount(1);
@@ -199,6 +221,9 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
   await page.locator("#stream-select").selectOption("jobAds");
   await expect(page.locator("#stat-n")).toHaveText("15");
+  await expect(page.getByLabel("Tier multiplier for strict_primary")).toHaveValue("1");
+  await expect(page.getByLabel("Tier multiplier for expanded_primary_title")).toHaveValue("0.85");
+  await expect(page.getByLabel("Tier multiplier for excluded", { exact: true })).toHaveValue("0.1");
   await expect(page.locator("tbody tr").filter({ hasText: "Chief Executive Officer" }).first()).toBeVisible();
   const hcap = page.locator("tbody tr").filter({ hasText: "Healthcare Career Advancement Program" });
   await expect(hcap).toHaveCount(1);
@@ -212,6 +237,9 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#stat-n")).toHaveText("125");
   await page.locator('[data-filter-menu="sourceType"] summary').click();
   await expect(page.locator('[data-filter-menu="sourceType"] .filter-options input')).toHaveCount(2);
+  await page.locator('#weighting-components input[value="sourceType"]').check();
+  await expect(page.getByLabel("Evidence stream multiplier for Form 990")).toHaveValue("1");
+  await expect(page.getByLabel("Evidence stream multiplier for Job posting")).toHaveValue("0.8");
   await page.locator('#weighting-components input[value="streamBalanced"]').check();
   await expect(page.locator("#weighting-description")).toContainText("Balanced evidence streams");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
@@ -258,6 +286,8 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await page.locator('#weighting-components input[value="staff"]').check();
   await page.screenshot({ path: "tmp/app-weighting.png", fullPage: true });
   await page.locator("#size-controls").screenshot({ path: "tmp/app-weighting-curves.png" });
+  await page.locator('#weighting-components input[value="tier"]').check();
+  await page.locator("#discrete-weight-editors").screenshot({ path: "tmp/app-discrete-weights.png" });
   await page.locator("#reset-settings").click();
   await page.locator("#stream-select").selectOption("combined");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
