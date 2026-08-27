@@ -38,6 +38,21 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     return children.indexOf(svg.querySelector(".density-line")) > lastBar;
   });
   expect(densityIsOverlay).toBe(true);
+  await page.locator(".bar-block").first().hover();
+  await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(1);
+  await page.locator("#chart-title").hover();
+  await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(0);
+  const histogramTickLines = await page.locator("#salary-chart").evaluate((svg) => {
+    const rug = svg.querySelector(".rug-line");
+    const baseline = Number(rug.getAttribute("y1")) - 2;
+    return [...svg.querySelectorAll("line:not(.rug-line)")].filter((line) =>
+      Number(line.getAttribute("y1")) === baseline && Number(line.getAttribute("y2")) === baseline + 4).length;
+  });
+  expect(histogramTickLines).toBe(0);
+  await expect(page.locator("aside.settings-panel").locator('input[name="chart-view"]')).toHaveCount(2);
+  await page.locator("#chart-color").selectOption("eaAffinity");
+  await expect(page.locator("#color-description")).toContainText("effective-altruist");
+  expect(new Set(await page.locator(".bar-block").evaluateAll((blocks) => blocks.map((block) => block.getAttribute("fill")))).size).toBeGreaterThan(1);
 
   await page.locator('input[name="distribution"][value="gamma"]').check();
   await expect(page.locator("#chart-legend")).toContainText("Gamma density");
@@ -123,12 +138,23 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".quantile-cell")).toHaveCount(3);
 
   await page.locator("#reset-settings").click();
-  await page.locator("#weighting-select").selectOption("size");
+  await page.locator('#weighting-components input[value="size"]').check();
   await expect(page.locator("#size-controls")).toBeVisible();
   await expect(page.locator("#expense-target-field")).toBeVisible();
-  await page.locator("#weighting-select").selectOption("staff");
+  await expect(page.locator("#weight-profile")).toBeVisible();
+  await expect(page.locator(".weight-profile-curve")).toHaveCount(1);
+  await page.locator('#weighting-components input[value="staff"]').check();
   await expect(page.locator("#staff-target-field")).toBeVisible();
-  await expect(page.locator("#weighting-description")).toContainText("staff count");
+  await expect(page.locator("#expense-target-field")).toBeVisible();
+  await expect(page.locator(".weight-profile-curve")).toHaveCount(2);
+  await expect(page.locator("#weighting-description")).toContainText("Expense similarity × Staff similarity");
+  await page.locator('#weighting-components input[value="tier"]').check();
+  await expect(page.locator("#discrete-weight-editors")).toBeVisible();
+  const tierAWeight = page.getByLabel("Tier multiplier for A");
+  await expect(tierAWeight).toHaveValue("1");
+  await tierAWeight.fill("0.8");
+  await tierAWeight.blur();
+  await expect(tierAWeight).toHaveValue("0.8");
 
   const cais = page.locator("tbody tr").filter({ hasText: "Center for AI Safety" });
   await expect(cais).toHaveCount(1);
@@ -161,13 +187,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#stat-n")).toHaveText("125");
   await page.locator('[data-filter-menu="sourceType"] summary').click();
   await expect(page.locator('[data-filter-menu="sourceType"] .filter-options input')).toHaveCount(2);
-  await page.locator("#weighting-select").selectOption("streamBalanced");
-  await expect(page.locator("#weighting-description")).toContainText("half of total base influence");
+  await page.locator('#weighting-components input[value="streamBalanced"]').check();
+  await expect(page.locator("#weighting-description")).toContainText("Balanced evidence streams");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
   await expect(page.locator("#scatter-controls")).toBeVisible();
   await expect(page.locator(".scatter-point")).not.toHaveCount(0);
   await expect(page.locator(".covariance-contour")).toHaveCount(3);
-  await page.locator("#scatter-color").selectOption("sourceType");
+  await page.locator("#chart-color").selectOption("sourceType");
   await expect(page.locator("#chart-legend")).toContainText("Form 990");
   await expect(page.locator("#chart-legend")).toContainText("Job posting");
   await page.locator("#scatter-x").selectOption("staff");
@@ -189,9 +215,13 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await page.locator('[data-filter-menu="title"] summary').click();
   await page.screenshot({ path: "tmp/app-title-filter.png", fullPage: true });
   await page.locator('[data-filter-menu="title"] summary').click();
+  await page.locator('#weighting-components input[value="size"]').check();
+  await page.locator('#weighting-components input[value="staff"]').check();
+  await page.screenshot({ path: "tmp/app-weighting.png", fullPage: true });
+  await page.locator("#reset-settings").click();
   await page.locator("#stream-select").selectOption("combined");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
-  await page.locator("#scatter-color").selectOption("sourceType");
+  await page.locator("#chart-color").selectOption("sourceType");
   await page.screenshot({ path: "tmp/app-scatter.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.reload();

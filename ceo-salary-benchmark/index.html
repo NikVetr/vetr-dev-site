@@ -69,21 +69,42 @@
         <label><input type="radio" name="distribution" value="gamma"> Gamma</label>
       </fieldset>
 
+      <fieldset class="choice-group field view-setting">
+        <legend>Chart view</legend>
+        <label><input type="radio" name="chart-view" value="histogram" checked> Histogram</label>
+        <label><input type="radio" name="chart-view" value="scatter"> Scatterplot</label>
+      </fieldset>
+
       <label class="field">
-        <span>Base weighting <button class="info-tooltip" type="button" aria-label="About base weighting" data-tooltip="Choose how much influence each included organization receives before applying its editable row weight.">?</button></span>
-        <select id="weighting-select">
-          <option value="equal">Equal observations</option>
-          <option value="streamBalanced">Equal evidence streams</option>
-          <option value="comparability">Comparability score</option>
-          <option value="size">Expense similarity</option>
-          <option value="staff">Staff-count similarity</option>
-          <option value="recency">Evidence recency</option>
-          <option value="tier">Tier priority</option>
-          <option value="eaAffinity">EA relationship</option>
-          <option value="blended">Comparability × expense similarity</option>
+        <span>Color marks by <button class="info-tooltip" type="button" aria-label="About chart colors" data-tooltip="Tier encodes peer strength: A or strict-primary is the narrowest comparison set, B or secondary is broader, and C or expanded is mainly for sensitivity analysis. Other choices use the corresponding coded table field; Topic and Structure may contain many categories, so lighter and darker RP palette variants are used.">?</button></span>
+        <select id="chart-color">
+          <option value="tier">Tier</option>
+          <option value="topic">Topic / model</option>
+          <option value="eaAffinity">EA relation</option>
+          <option value="sourceType">Evidence stream</option>
+          <option value="titleGroup">Job-title group</option>
+          <option value="structure">Structure</option>
         </select>
-        <small id="weighting-description" class="field-description"></small>
+        <small id="color-description" class="field-description"></small>
       </label>
+
+      <fieldset class="weighting-field field">
+        <legend>Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Select any number of components. Their multipliers are multiplied together, then multiplied by the editable row weight. With no components selected, observations receive equal base weight.">?</button></legend>
+        <div id="weighting-components" class="weighting-components">
+          <label><input type="checkbox" value="comparability"> Match score</label>
+          <label><input type="checkbox" value="size"> Expenses</label>
+          <label><input type="checkbox" value="staff"> Staff</label>
+          <label><input type="checkbox" value="recency"> Recency</label>
+          <label><input type="checkbox" value="tier"> Tier</label>
+          <label><input type="checkbox" value="eaAffinity"> EA relation</label>
+          <label><input type="checkbox" value="sourceType"> Evidence stream</label>
+          <label><input type="checkbox" value="topic"> Topic / model</label>
+          <label><input type="checkbox" value="titleGroup"> Title group</label>
+          <label><input type="checkbox" value="structure"> Structure</label>
+          <label><input type="checkbox" value="streamBalanced" disabled> Balance streams</label>
+        </div>
+        <small id="weighting-description" class="field-description">No components selected: equal base weights.</small>
+      </fieldset>
 
       <div id="size-controls" class="subsettings" hidden>
         <label id="expense-target-field" class="field compact">
@@ -92,16 +113,21 @@
             <input id="target-expense" type="number" min="1" max="100" step="0.5" value="7.5">
             <span>$M</span>
           </div>
-        </label>
-        <label class="field compact">
-          <span>Size bandwidth <button class="info-tooltip" type="button" aria-label="About size bandwidth" data-tooltip="Controls how quickly an organization's weight falls as its expenses differ from the RP comparison budget. Larger values are more permissive.">?</button> <output id="bandwidth-value">0.70×</output></span>
-          <input id="size-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
+          <span>Expense bandwidth <button class="info-tooltip" type="button" aria-label="About expense bandwidth" data-tooltip="Controls how quickly the expense multiplier falls with logged distance from the target. Larger values are more permissive.">?</button> <output id="expense-bandwidth-value">0.70×</output></span>
+          <input id="expense-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
         </label>
         <label id="staff-target-field" class="field compact" hidden>
           <span>RP comparison staff <button class="info-tooltip" type="button" aria-label="About staff comparison" data-tooltip="The staff-count target used by staff-similarity weighting. Organizations nearer this headcount receive more weight.">?</button></span>
           <input id="target-staff" type="number" min="1" max="1000" step="1" value="50">
+          <span>Staff bandwidth <button class="info-tooltip" type="button" aria-label="About staff bandwidth" data-tooltip="Controls how quickly the staff multiplier falls with logged distance from the target. Larger values are more permissive.">?</button> <output id="staff-bandwidth-value">0.70×</output></span>
+          <input id="staff-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
+        </label>
+        <label id="recency-field" class="field compact" hidden>
+          <span>Recency half-life <button class="info-tooltip" type="button" aria-label="About recency half-life" data-tooltip="The number of years by which an older observation's recency multiplier is halved.">?</button> <output id="recency-halflife-value">4 years</output></span>
+          <input id="recency-halflife" type="range" min="1" max="12" step="0.5" value="4">
         </label>
       </div>
+      <div id="discrete-weight-editors" class="discrete-weight-editors" hidden></div>
 
       <label id="bin-field" class="field compact">
         <span>Histogram bins <button class="info-tooltip" type="button" aria-label="About histogram bins" data-tooltip="Controls the number of equal-width salary intervals. The initial value is chosen to make organization blocks approximately square on your screen.">?</button> <output id="bin-value">Auto</output></span>
@@ -121,16 +147,10 @@
             <p class="section-label" id="chart-kicker">Incumbent compensation</p>
             <h2 id="chart-title">Validated Schedule J base salaries</h2>
           </div>
-          <div class="chart-heading-tools">
-            <fieldset class="view-toggle" aria-label="Chart view">
-              <label><input type="radio" name="chart-view" value="histogram" checked> Histogram</label>
-              <label><input type="radio" name="chart-view" value="scatter"> Scatterplot</label>
-            </fieldset>
-            <div class="live-stats" aria-live="polite">
-              <span><b id="stat-n">0</b> <i id="stat-n-unit">organizations</i></span>
-              <span><b id="stat-neff">0</b> effective n</span>
-              <span><b id="stat-center">—</b> median</span>
-            </div>
+          <div class="live-stats" aria-live="polite">
+            <span><b id="stat-n">0</b> <i id="stat-n-unit">organizations</i></span>
+            <span><b id="stat-neff">0</b> effective n</span>
+            <span><b id="stat-center">—</b> median</span>
           </div>
         </div>
         <div id="scatter-controls" class="scatter-controls" hidden>
@@ -143,18 +163,18 @@
               <option value="compensationYear">Evidence year</option>
             </select>
           </label>
-          <label>Point color
-            <select id="scatter-color">
-              <option value="tier">Tier</option>
-              <option value="topic">Topic / model</option>
-              <option value="eaAffinity">EA relation</option>
-              <option value="sourceType">Evidence stream</option>
-              <option value="titleGroup">Job-title group</option>
-              <option value="structure">Structure</option>
-            </select>
-          </label>
           <label class="contour-toggle"><input id="show-contours" type="checkbox" checked> Covariance contours <button class="info-tooltip" type="button" aria-label="About covariance contours" data-tooltip="Show weighted bivariate-normal data ellipses enclosing approximately 50%, 80%, and 95% of the selected points. These summarize covariance; they are not confidence intervals for a causal relationship.">?</button></label>
         </div>
+        <section id="weight-profile" class="weight-profile" hidden aria-labelledby="weight-profile-title">
+          <div class="weight-profile-heading">
+            <div>
+              <p class="section-label">Selected continuous components</p>
+              <h3 id="weight-profile-title">Weight-response curves</h3>
+            </div>
+            <p>Relative multiplier before category and row weights</p>
+          </div>
+          <div id="weight-profile-grid" class="weight-profile-grid"></div>
+        </section>
         <div id="chart-wrap" class="chart-wrap">
           <svg id="salary-chart" role="img" aria-labelledby="chart-title chart-description"></svg>
           <p id="chart-description" class="sr-only">A weighted histogram in which each block represents one organization.</p>

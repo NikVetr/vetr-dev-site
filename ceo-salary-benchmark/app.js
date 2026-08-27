@@ -21,15 +21,18 @@
     measure: "base",
     sample: "primary",
     fit: "lognormal",
-    weighting: "equal",
+    weightings: new Set(),
+    discreteWeights: {},
     targetExpense: 7_500_000,
     targetStaff: 50,
-    bandwidth: 0.7,
+    expenseBandwidth: 0.7,
+    staffBandwidth: 0.7,
+    recencyHalfLife: 4,
     bins: 20,
     autoBins: true,
     view: "histogram",
     scatterX: "expenses",
-    scatterColor: "tier",
+    chartColor: "tier",
     showContours: true,
     quantileGranularity: "quintiles",
     customQuantiles: "5, 25, 50, 75, 95",
@@ -61,12 +64,17 @@
 
   const refs = {
     stream: $("#stream-select"), measure: $("#measure-select"), measureField: $("#measure-field"),
-    sample: $("#sample-select"), fit: [...document.querySelectorAll('input[name="distribution"]')], weighting: $("#weighting-select"),
+    sample: $("#sample-select"), fit: [...document.querySelectorAll('input[name="distribution"]')],
+    weightingComponents: [...document.querySelectorAll('#weighting-components input[type="checkbox"]')],
     sizeControls: $("#size-controls"), expenseTargetField: $("#expense-target-field"), staffTargetField: $("#staff-target-field"),
-    targetExpense: $("#target-expense"), targetStaff: $("#target-staff"), bandwidth: $("#size-bandwidth"),
-    bandwidthValue: $("#bandwidth-value"), binField: $("#bin-field"), bins: $("#bin-count"), binValue: $("#bin-value"),
+    recencyField: $("#recency-field"), targetExpense: $("#target-expense"), targetStaff: $("#target-staff"),
+    expenseBandwidth: $("#expense-bandwidth"), staffBandwidth: $("#staff-bandwidth"), recencyHalfLife: $("#recency-halflife"),
+    expenseBandwidthValue: $("#expense-bandwidth-value"), staffBandwidthValue: $("#staff-bandwidth-value"),
+    recencyHalfLifeValue: $("#recency-halflife-value"), discreteWeightEditors: $("#discrete-weight-editors"),
+    binField: $("#bin-field"), bins: $("#bin-count"), binValue: $("#bin-value"),
     view: [...document.querySelectorAll('input[name="chart-view"]')], scatterControls: $("#scatter-controls"),
-    scatterX: $("#scatter-x"), scatterColor: $("#scatter-color"), showContours: $("#show-contours"),
+    scatterX: $("#scatter-x"), chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
+    weightProfile: $("#weight-profile"), weightProfileGrid: $("#weight-profile-grid"),
     reset: $("#reset-settings"), chart: $("#salary-chart"), chartWrap: $("#chart-wrap"),
     tooltip: $("#chart-tooltip"), chartKicker: $("#chart-kicker"), chartTitle: $("#chart-title"),
     statN: $("#stat-n"), statNUnit: $("#stat-n-unit"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
@@ -98,6 +106,31 @@
 
   function rowInclusion(row) { return inclusion[rowStream(row)]; }
   function rowCustomWeights(row) { return customWeights[rowStream(row)]; }
+
+  const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
+  const WEIGHT_LABELS = {
+    comparability: "Match score", size: "Expense similarity", staff: "Staff similarity", recency: "Evidence recency",
+    tier: "Tier", eaAffinity: "EA relation", sourceType: "Evidence stream", topic: "Topic / model",
+    titleGroup: "Job-title group", structure: "Structure", streamBalanced: "Balanced evidence streams",
+  };
+
+  function defaultDiscreteWeight(key, value) {
+    const normalized = String(value || "").toLowerCase();
+    if (key === "tier") return normalized === "a" || normalized.includes("strict")
+      ? 1 : normalized === "b" || normalized.includes("secondary") ? 0.65 : 0.35;
+    if (key === "eaAffinity") return normalized.includes("aligned")
+      ? 1 : normalized.includes("adjacent") ? 0.8 : normalized.includes("functional") ? 0.55 : 0.45;
+    return 1;
+  }
+
+  function ensureDiscreteWeights(key) {
+    if (!state.discreteWeights[key]) state.discreteWeights[key] = {};
+    rows().forEach((row) => {
+      const category = String(row[key] || "Not reported");
+      if (state.discreteWeights[key][category] == null) state.discreteWeights[key][category] = defaultDiscreteWeight(key, category);
+    });
+    return state.discreteWeights[key];
+  }
 
   function wikipediaSearchUrl(organization) {
     return `https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(organization)}`;
@@ -181,38 +214,31 @@
   }
 
   function baseWeight(row) {
-    const scoreWeight = clamp((row.comparabilityScore || 50) / 75, 0.25, 1.75);
-    const expense = row.expenses;
-    const sizeWeight = expense && expense > 0
-      ? Math.exp(-0.5 * (Math.log(expense / state.targetExpense) / state.bandwidth) ** 2)
-      : 0.45;
-    const staffWeight = row.staff && row.staff > 0
-      ? Math.exp(-0.5 * (Math.log(row.staff / state.targetStaff) / state.bandwidth) ** 2)
-      : 0.45;
     const latestYear = Math.max(...rows().map((item) => item.compensationYear || 0));
-    const recencyWeight = row.compensationYear ? 0.5 ** (Math.max(0, latestYear - row.compensationYear) / 4) : 0.45;
-    const tier = String(row.tier || "").toLowerCase();
-    const tierWeight = tier === "a" || tier.includes("strict") ? 1 : tier === "b" || tier.includes("secondary") ? 0.65 : 0.35;
-    const affinity = String(row.eaAffinity || "").toLowerCase();
-    const affinityWeight = affinity.includes("aligned") ? 1 : affinity.includes("adjacent") ? 0.8 : affinity.includes("functional") ? 0.55 : 0.45;
-    if (state.weighting === "comparability") return scoreWeight;
-    if (state.weighting === "size") return sizeWeight;
-    if (state.weighting === "staff") return staffWeight;
-    if (state.weighting === "recency") return recencyWeight;
-    if (state.weighting === "tier") return tierWeight;
-    if (state.weighting === "eaAffinity") return affinityWeight;
-    if (state.weighting === "blended") return scoreWeight * sizeWeight;
-    return 1;
+    let weight = 1;
+    if (state.weightings.has("comparability")) weight *= clamp((row.comparabilityScore || 50) / 75, 0.25, 1.75);
+    if (state.weightings.has("size")) weight *= row.expenses && row.expenses > 0
+      ? Math.exp(-0.5 * (Math.log(row.expenses / state.targetExpense) / state.expenseBandwidth) ** 2) : 0.45;
+    if (state.weightings.has("staff")) weight *= row.staff && row.staff > 0
+      ? Math.exp(-0.5 * (Math.log(row.staff / state.targetStaff) / state.staffBandwidth) ** 2) : 0.45;
+    if (state.weightings.has("recency")) weight *= row.compensationYear
+      ? 0.5 ** (Math.max(0, latestYear - row.compensationYear) / state.recencyHalfLife) : 0.45;
+    DISCRETE_WEIGHT_KEYS.forEach((key) => {
+      if (!state.weightings.has(key)) return;
+      const category = String(row[key] || "Not reported");
+      weight *= ensureDiscreteWeights(key)[category];
+    });
+    return weight;
   }
 
   function effectiveWeight(row) {
     if (!rowInclusion(row).get(row.id)) return 0;
     const weight = baseWeight(row) * (rowCustomWeights(row).get(row.id) ?? 1);
-    if (state.weighting !== "streamBalanced" || state.stream !== "combined") return weight;
+    if (!state.weightings.has("streamBalanced") || state.stream !== "combined") return weight;
     const stream = rowStream(row);
     const streamTotal = rows().reduce((sum, candidate) => {
       if (rowStream(candidate) !== stream || salary(candidate) == null || !passesFilters(candidate) || !rowInclusion(candidate).get(candidate.id)) return sum;
-      return sum + (rowCustomWeights(candidate).get(candidate.id) ?? 1);
+      return sum + baseWeight(candidate) * (rowCustomWeights(candidate).get(candidate.id) ?? 1);
     }, 0);
     return streamTotal ? weight / streamTotal : 0;
   }
@@ -435,12 +461,6 @@
     return element;
   }
 
-  function tierColor(row) {
-    if (row.tier === "A" || row.tier === "strict_primary") return "#2D6885";
-    if (row.tier === "B" || row.tier.includes?.("secondary")) return "#44B0DF";
-    return "#75CCEC";
-  }
-
   function squareBinCount(items, domainMin, domainMax, innerWidth, innerHeight) {
     let best = { bins: 20, score: Infinity };
     const model = fitModel(items);
@@ -467,21 +487,36 @@
     return best.bins;
   }
 
-  function renderHistogramLegend() {
-    refs.chartLegend.innerHTML = [
-      '<span><i class="swatch tier-a"></i> Tier A / strict</span>',
-      '<span><i class="swatch tier-b"></i> Tier B / secondary</span>',
-      '<span><i class="swatch tier-c"></i> Tier C / expanded</span>',
-      state.fit === "empirical" ? "" : `<span><i class="line-swatch"></i> ${state.fit === "gamma" ? "Gamma" : "Lognormal"} density</span>`,
-      '<span><i class="rug-swatch"></i> Individual salaries</span>',
-    ].join("");
+  function appendCategoryLegend(colorMap) {
+    colorMap.forEach((color, label) => {
+      const item = document.createElement("span"); item.title = label;
+      const swatch = document.createElement("i"); swatch.className = "swatch"; swatch.style.background = color;
+      item.append(swatch, document.createTextNode(label)); refs.chartLegend.append(item);
+    });
+  }
+
+  function renderHistogramLegend(colorMap) {
+    refs.chartLegend.replaceChildren();
+    appendCategoryLegend(colorMap);
+    if (state.fit !== "empirical") {
+      const density = document.createElement("span"); density.innerHTML = `<i class="line-swatch"></i> ${state.fit === "gamma" ? "Gamma" : "Lognormal"} density`;
+      refs.chartLegend.append(density);
+    }
+    const rug = document.createElement("span"); rug.innerHTML = '<i class="rug-swatch"></i> Individual salaries'; refs.chartLegend.append(rug);
+  }
+
+  function highlightRug(id, highlighted) {
+    refs.chart.querySelectorAll(".rug-line").forEach((rug) => {
+      if (rug.dataset.rugId === id) rug.classList.toggle("is-highlighted", highlighted || state.focusedId === id);
+    });
   }
 
   function renderHistogram() {
     const items = selectedRows();
     const svg = refs.chart;
     svg.replaceChildren();
-    renderHistogramLegend();
+    const colors = categoryColors(items);
+    renderHistogramLegend(colors);
     $("#chart-description").textContent = "A weighted histogram in which each block represents one organization.";
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(330, refs.chartWrap.clientHeight || 360);
@@ -545,14 +580,18 @@
       [...bin.items].sort((a, b) => b.weight - a.weight).forEach((item) => {
         const y0 = margin.top + yScale(cumulative + item.weight);
         const y1 = margin.top + yScale(cumulative);
+        const category = String(item.row[state.chartColor] || "Not reported");
         const rect = svgElement("rect", {
           x: x0, y: y0, width: Math.max(1, x1 - x0), height: Math.max(2, y1 - y0),
-          fill: tierColor(item.row), class: `bar-block${state.focusedId === item.row.id ? " is-focused" : ""}`,
+          fill: colors.get(category), class: `bar-block${state.focusedId === item.row.id ? " is-focused" : ""}`,
           tabindex: "0", role: "button", "aria-label": `${item.row.organization}, ${money(item.value)}`,
         });
-        rect.addEventListener("pointerenter", (event) => showTooltip(event, item));
+        const detail = `${escapeHtml(item.row.title || "")}<br>${escapeHtml(category)}`;
+        rect.addEventListener("pointerenter", (event) => { highlightRug(item.row.id, true); showTooltip(event, item, detail); });
         rect.addEventListener("pointermove", (event) => positionTooltip(event));
-        rect.addEventListener("pointerleave", hideTooltip);
+        rect.addEventListener("pointerleave", () => { highlightRug(item.row.id, false); hideTooltip(); });
+        rect.addEventListener("focus", () => highlightRug(item.row.id, true));
+        rect.addEventListener("blur", () => highlightRug(item.row.id, false));
         rect.addEventListener("click", () => focusRow(item.row.id));
         rect.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRow(item.row.id); });
         svg.append(rect);
@@ -571,7 +610,10 @@
 
     items.forEach((item) => {
       const x = xScale(item.value);
-      svg.append(svgElement("line", { x1: x, x2: x, y1: plotBottom + 2, y2: plotBottom + 8, class: "rug-line" }));
+      svg.append(svgElement("line", {
+        x1: x, x2: x, y1: plotBottom + 2, y2: plotBottom + 8,
+        class: `rug-line${state.focusedId === item.row.id ? " is-highlighted" : ""}`, "data-rug-id": item.row.id,
+      }));
     });
 
     if (state.hoverQuantile != null) {
@@ -583,7 +625,6 @@
     for (let i = 0; i <= tickCount; i += 1) {
       const value = domainMin + (i / tickCount) * (domainMax - domainMin);
       const x = xScale(value);
-      svg.append(svgElement("line", { x1: x, x2: x, y1: plotBottom, y2: plotBottom + 4, stroke: "#52879E" }));
       const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#52879E", "font-size": 10 });
       label.textContent = compactMoney(value);
       svg.append(label);
@@ -612,7 +653,7 @@
     comparabilityScore: { label: "Comparability score", format: (value) => Number(value).toFixed(0), logarithmic: false },
     compensationYear: { label: "Evidence year", format: (value) => Number(value).toFixed(0), logarithmic: false },
   };
-  const scatterPalette = ["#2D6885", "#44B0DF", "#75CCEC", "#52879E", "#3E454A", "#B7E2F2"];
+  const categoryPalette = ["#2D6885", "#44B0DF", "#75CCEC", "#52879E", "#3E454A", "#B7E2F2"];
 
   function mixHex(hex, target, amount) {
     const source = hex.match(/[a-f\d]{2}/gi).map((value) => parseInt(value, 16));
@@ -620,11 +661,11 @@
     return `#${source.map((value, index) => Math.round(value + (destination[index] - value) * amount).toString(16).padStart(2, "0")).join("")}`;
   }
 
-  function scatterCategoryColors(items) {
-    const categories = [...new Set(items.map((item) => String(item.row[state.scatterColor] || "Not reported")))].sort((a, b) => a.localeCompare(b));
+  function categoryColors(items) {
+    const categories = [...new Set(items.map((item) => String(item.row[state.chartColor] || "Not reported")))].sort((a, b) => a.localeCompare(b));
     return new Map(categories.map((category, index) => {
-      const cycle = Math.floor(index / scatterPalette.length);
-      const base = scatterPalette[index % scatterPalette.length];
+      const cycle = Math.floor(index / categoryPalette.length);
+      const base = categoryPalette[index % categoryPalette.length];
       const color = cycle % 2 ? mixHex(base, "#ffffff", Math.min(0.18 + cycle * 0.05, 0.42)) : mixHex(base, "#000000", Math.min(cycle * 0.05, 0.25));
       return [category, color];
     }));
@@ -632,11 +673,7 @@
 
   function renderScatterLegend(colorMap, contoursShown) {
     refs.chartLegend.replaceChildren();
-    colorMap.forEach((color, label) => {
-      const item = document.createElement("span"); item.title = label;
-      const swatch = document.createElement("i"); swatch.className = "swatch"; swatch.style.background = color;
-      item.append(swatch, document.createTextNode(label)); refs.chartLegend.append(item);
-    });
+    appendCategoryLegend(colorMap);
     if (contoursShown) {
       const contour = document.createElement("span"); contour.innerHTML = '<i class="contour-swatch"></i> 50 / 80 / 95% covariance contours';
       refs.chartLegend.append(contour);
@@ -728,9 +765,9 @@
     defs.append(clip); svg.append(defs);
     const points = items.map((item) => ({ item, x: xScale(item.row[state.scatterX]), y: yScale(item.value) }));
     const contoursShown = appendCovarianceContours(svg, points, clipId);
-    const colors = scatterCategoryColors(items);
+    const colors = categoryColors(items);
     points.forEach(({ item, x, y }) => {
-      const category = String(item.row[state.scatterColor] || "Not reported");
+      const category = String(item.row[state.chartColor] || "Not reported");
       const point = svgElement("circle", {
         cx: x, cy: y, r: clamp(3.5 + Math.sqrt(item.weight), 4, 8), fill: colors.get(category),
         class: `scatter-point${state.focusedId === item.row.id ? " is-focused" : ""}`, tabindex: "0", role: "button",
@@ -1050,6 +1087,112 @@
     return { base: "Schedule J base, July 2026 USD", cash: "Part VII cash / W-2 proxy, July 2026 USD", total: "Filing total proxy, July 2026 USD" }[state.measure];
   }
 
+  function renderWeightControls() {
+    if (state.stream !== "combined") state.weightings.delete("streamBalanced");
+    refs.weightingComponents.forEach((input) => {
+      input.checked = state.weightings.has(input.value);
+      if (input.value === "streamBalanced") input.disabled = state.stream !== "combined";
+    });
+    const continuous = ["size", "staff", "recency"];
+    refs.sizeControls.hidden = !continuous.some((key) => state.weightings.has(key));
+    refs.expenseTargetField.hidden = !state.weightings.has("size");
+    refs.staffTargetField.hidden = !state.weightings.has("staff");
+    refs.recencyField.hidden = !state.weightings.has("recency");
+    const active = [...state.weightings].map((key) => WEIGHT_LABELS[key]);
+    refs.weightingDescription.textContent = active.length
+      ? `Base weight = ${active.join(" × ")}. Missing continuous values receive a 0.45 multiplier.`
+      : "No components selected: equal base weights.";
+    const discrete = DISCRETE_WEIGHT_KEYS.filter((key) => state.weightings.has(key));
+    refs.discreteWeightEditors.hidden = !discrete.length;
+    refs.discreteWeightEditors.replaceChildren();
+    discrete.forEach((key) => {
+      const weights = ensureDiscreteWeights(key);
+      const details = document.createElement("details");
+      details.open = discrete.length === 1;
+      const summary = document.createElement("summary"); summary.textContent = `${WEIGHT_LABELS[key]} category multipliers`;
+      const grid = document.createElement("div"); grid.className = "discrete-weight-grid";
+      Object.keys(weights).sort((a, b) => a.localeCompare(b)).forEach((category) => {
+        const label = document.createElement("label"); label.textContent = category; label.title = category;
+        const input = document.createElement("input");
+        input.type = "number"; input.min = "0"; input.max = "10"; input.step = "0.05"; input.value = weights[category];
+        input.setAttribute("aria-label", `${WEIGHT_LABELS[key]} multiplier for ${category}`);
+        input.addEventListener("change", () => {
+          weights[category] = clamp(Number(input.value) || 0, 0, 10);
+          input.value = weights[category];
+          renderAll();
+        });
+        grid.append(label, input);
+      });
+      details.append(summary, grid); refs.discreteWeightEditors.append(details);
+    });
+  }
+
+  function componentResponse(key, value) {
+    if (key === "comparability") return clamp(value / 75, 0.25, 1.75);
+    if (key === "size") return Math.exp(-0.5 * (Math.log(value / state.targetExpense) / state.expenseBandwidth) ** 2);
+    if (key === "staff") return Math.exp(-0.5 * (Math.log(value / state.targetStaff) / state.staffBandwidth) ** 2);
+    const latestYear = Math.max(...rows().map((row) => row.compensationYear || 0));
+    return 0.5 ** (Math.max(0, latestYear - value) / state.recencyHalfLife);
+  }
+
+  function renderWeightProfiles() {
+    const keys = ["comparability", "size", "staff", "recency"].filter((key) => state.weightings.has(key));
+    refs.weightProfile.hidden = !keys.length;
+    refs.weightProfileGrid.replaceChildren();
+    keys.forEach((key) => {
+      let values;
+      let format;
+      let logarithmic = false;
+      let parameter;
+      if (key === "comparability") {
+        values = [0, 100]; format = (value) => value.toFixed(0); parameter = "Score ÷ 75, capped at 0.25–1.75";
+      } else if (key === "size") {
+        values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
+        parameter = `Target ${compactMoney(state.targetExpense)} · bandwidth ${state.expenseBandwidth.toFixed(2)}`;
+      } else if (key === "staff") {
+        values = rows().map((row) => row.staff).filter((value) => value > 0); format = (value) => Math.round(value).toLocaleString(); logarithmic = true;
+        parameter = `Target ${state.targetStaff.toLocaleString()} · bandwidth ${state.staffBandwidth.toFixed(2)}`;
+      } else {
+        values = rows().map((row) => row.compensationYear).filter((value) => value > 0); format = (value) => value.toFixed(0);
+        parameter = `${state.recencyHalfLife.toFixed(1)}-year half-life`;
+      }
+      if (!values.length) return;
+      const rawMin = Math.min(...values); const rawMax = Math.max(...values);
+      const domainMin = logarithmic ? Math.log(rawMin) : rawMin;
+      const domainMax = logarithmic ? Math.log(rawMax) : rawMax;
+      const width = 220; const height = 78; const margin = { top: 5, right: 5, bottom: 17, left: 24 };
+      const innerWidth = width - margin.left - margin.right; const innerHeight = height - margin.top - margin.bottom;
+      const samples = Array.from({ length: 81 }, (_, index) => {
+        const transformed = domainMin + (index / 80) * Math.max(domainMax - domainMin, 1);
+        const value = logarithmic ? Math.exp(transformed) : transformed;
+        return { value, weight: componentResponse(key, value), x: margin.left + (index / 80) * innerWidth };
+      });
+      const maxWeight = Math.max(1, ...samples.map((sample) => sample.weight)) * 1.03;
+      const y = (weight) => margin.top + innerHeight - (weight / maxWeight) * innerHeight;
+      const figure = document.createElement("div"); figure.className = "weight-profile-figure";
+      const title = document.createElement("strong"); title.textContent = WEIGHT_LABELS[key];
+      const description = document.createElement("span"); description.textContent = parameter;
+      const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]} relative weight-response curve` });
+      svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: margin.top + innerHeight, y2: margin.top + innerHeight, class: "weight-profile-axis" }));
+      svg.append(svgElement("line", { x1: margin.left, x2: margin.left, y1: margin.top, y2: margin.top + innerHeight, class: "weight-profile-axis" }));
+      const path = samples.map((sample, index) => `${index ? "L" : "M"}${sample.x.toFixed(2)},${y(sample.weight).toFixed(2)}`).join("");
+      svg.append(svgElement("path", { d: path, class: "weight-profile-curve" }));
+      const target = key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : key === "recency" ? rawMax : null;
+      if (target != null && target >= rawMin && target <= rawMax) {
+        const targetPosition = logarithmic ? Math.log(target) : target;
+        const targetX = margin.left + ((targetPosition - domainMin) / Math.max(domainMax - domainMin, 1)) * innerWidth;
+        svg.append(svgElement("line", { x1: targetX, x2: targetX, y1: margin.top, y2: margin.top + innerHeight, class: "weight-profile-target" }));
+      }
+      [[margin.left, rawMin, "start"], [width - margin.right, rawMax, "end"]].forEach(([x, value, anchor]) => {
+        const label = svgElement("text", { x, y: height - 3, "text-anchor": anchor, class: "weight-profile-label" });
+        label.textContent = format(value); svg.append(label);
+      });
+      const zero = svgElement("text", { x: margin.left - 3, y: margin.top + innerHeight + 2, "text-anchor": "end", class: "weight-profile-label" }); zero.textContent = "0";
+      const peak = svgElement("text", { x: margin.left - 3, y: margin.top + 3, "text-anchor": "end", class: "weight-profile-label" }); peak.textContent = maxWeight.toFixed(1);
+      svg.append(zero, peak); figure.append(title, description, svg); refs.weightProfileGrid.append(figure);
+    });
+  }
+
   function updateHeadings() {
     const isJobs = state.stream === "jobAds";
     const isCombined = state.stream === "combined";
@@ -1063,37 +1206,33 @@
     refs.statNUnit.textContent = isCombined ? "observations" : "organizations";
     refs.scatterControls.hidden = state.view !== "scatter";
     refs.binField.hidden = state.view !== "histogram";
-    refs.sizeControls.hidden = !["size", "blended", "staff"].includes(state.weighting);
-    refs.expenseTargetField.hidden = !["size", "blended"].includes(state.weighting);
-    refs.staffTargetField.hidden = state.weighting !== "staff";
-    refs.weighting.querySelector('option[value="streamBalanced"]').disabled = !isCombined;
     refs.sampleDescription.textContent = {
       primary: "Rows retained as primary after source validation and role-structure review.",
       clean: "Primary rows with no structural compensation or leadership flags.",
       tierA: "The narrowest peer definition: incumbent Tier A or job-ad strict-primary rows.",
       observed: "Every row with a usable salary value, including broader sensitivity cases.",
     }[state.sample];
-    refs.weightingDescription.textContent = {
-      equal: "Each included observation starts with the same influence.",
-      streamBalanced: "In the combined view, filings and postings each receive half of total base influence.",
-      comparability: "Uses the table's comparability score, scaled around the benchmark protocol's 75-point reference.",
-      size: "Downweights organizations as logged expenses move away from the RP comparison budget.",
-      staff: "Downweights organizations as logged staff count moves away from the RP comparison headcount.",
-      recency: "Uses the evidence-year column with a four-year half-life.",
-      tier: "Weights Tier A / strict at 1.00, Tier B / secondary at 0.65, and broader tiers at 0.35.",
-      eaAffinity: "Weights EA-aligned, adjacent, functional-only, and uncoded relationships progressively less.",
-      blended: "Multiplies comparability-score and expense-similarity weights.",
-    }[state.weighting];
+    refs.colorDescription.textContent = {
+      tier: "A / strict-primary is narrowest; B / secondary is broader; C / expanded is mainly a sensitivity set.",
+      topic: "Mission or operating-model category coded during peer selection.",
+      eaAffinity: "Degree of effective-altruist alignment or functional adjacency coded before compensation review.",
+      sourceType: "Distinguishes realized Form 990 compensation from advertised job-posting midpoints.",
+      titleGroup: "A broad grouping used only for navigation; displayed job titles remain source-native.",
+      structure: "Leadership or organizational-structure coding from the validation record.",
+    }[state.chartColor];
     refs.methodNoteTitle.textContent = isCombined ? "Combined-evidence caution" : "Interpretation";
     refs.methodNoteText.textContent = isCombined
       ? "This view pools incumbent Schedule J base pay with job-ad salary midpoints. Both are July 2026 USD salary proxies, but one is realized pay and the other an advertised range midpoint. Use evidence-stream coloring, filtering, or balanced weighting to test that assumption; an ‘all compensation measures’ pool is intentionally not offered because it would duplicate correlated values from each filing."
       : "Empirical, lognormal, and gamma summaries describe the selected convenience sample. They are sensitivity tools—not population estimates.";
-    refs.bandwidthValue.value = `${state.bandwidth.toFixed(2)}×`;
+    refs.expenseBandwidthValue.value = `${state.expenseBandwidth.toFixed(2)}×`;
+    refs.staffBandwidthValue.value = `${state.staffBandwidth.toFixed(2)}×`;
+    refs.recencyHalfLifeValue.value = `${state.recencyHalfLife.toFixed(1)} years`;
     refs.binValue.value = state.bins;
   }
 
   function renderAll() {
     updateHeadings();
+    renderWeightProfiles();
     renderChart();
     renderQuantiles();
     renderTable();
@@ -1101,9 +1240,9 @@
 
   function reset() {
     Object.assign(state, {
-      stream: "incumbents", measure: "base", sample: "primary", fit: "lognormal", weighting: "equal",
-      targetExpense: 7_500_000, targetStaff: 50, bandwidth: 0.7, bins: 20, autoBins: true,
-      view: "histogram", scatterX: "expenses", scatterColor: "tier", showContours: true,
+      stream: "incumbents", measure: "base", sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
+      targetExpense: 7_500_000, targetStaff: 50, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
+      bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95",
       sortKey: "organization", sortDirection: "asc",
       filters: {
@@ -1123,12 +1262,12 @@
     refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
-    refs.scatterX.value = state.scatterX; refs.scatterColor.value = state.scatterColor; refs.showContours.checked = true;
-    refs.weighting.value = state.weighting; refs.targetExpense.value = 7.5; refs.targetStaff.value = 50;
-    refs.bandwidth.value = state.bandwidth; refs.bins.value = state.bins;
+    refs.scatterX.value = state.scatterX; refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
+    refs.targetExpense.value = 7.5; refs.targetStaff.value = 50;
+    refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.quantileGranularity.value = "quintiles";
     refs.customQuantiles.value = state.customQuantiles; refs.showUnavailable.checked = false;
-    applyPreset(); configureRanges(); buildFilterMenus();
+    applyPreset(); configureRanges(); buildFilterMenus(); renderWeightControls();
     renderAll();
   }
 
@@ -1139,13 +1278,12 @@
   refs.stream.addEventListener("change", () => {
     state.stream = refs.stream.value; state.focusedId = ""; state.autoBins = true; state.showUnavailable = false;
     if (state.stream === "combined") { state.measure = "base"; refs.measure.value = "base"; }
-    if (state.stream !== "combined" && state.weighting === "streamBalanced") { state.weighting = "equal"; refs.weighting.value = "equal"; }
     state.filters = {
       title: null, sourceType: null, tier: null, topic: null, location: null,
       eaAffinity: null, structure: null,
     };
     refs.showUnavailable.checked = false;
-    applyPreset(); configureRanges(); buildFilterMenus(); renderAll();
+    applyPreset(); configureRanges(); buildFilterMenus(); renderWeightControls(); renderAll();
   });
   refs.measure.addEventListener("change", () => {
     state.measure = refs.measure.value; state.focusedId = ""; state.autoBins = true;
@@ -1153,16 +1291,21 @@
   });
   refs.sample.addEventListener("change", () => { state.sample = refs.sample.value; applyPreset(); renderAll(); });
   refs.fit.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.fit = radio.value; renderAll(); } }));
-  refs.weighting.addEventListener("change", () => { state.weighting = refs.weighting.value; renderAll(); });
+  refs.weightingComponents.forEach((input) => input.addEventListener("change", () => {
+    if (input.checked) state.weightings.add(input.value); else state.weightings.delete(input.value);
+    renderWeightControls(); renderAll();
+  }));
   refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || 7.5, 1, 100) * 1_000_000; renderAll(); });
   refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || 50, 1, 1000); renderAll(); });
-  refs.bandwidth.addEventListener("input", () => { state.bandwidth = Number(refs.bandwidth.value); renderAll(); });
+  refs.expenseBandwidth.addEventListener("input", () => { state.expenseBandwidth = Number(refs.expenseBandwidth.value); renderAll(); });
+  refs.staffBandwidth.addEventListener("input", () => { state.staffBandwidth = Number(refs.staffBandwidth.value); renderAll(); });
+  refs.recencyHalfLife.addEventListener("input", () => { state.recencyHalfLife = Number(refs.recencyHalfLife.value); renderAll(); });
   refs.bins.addEventListener("input", () => { state.autoBins = false; state.bins = Number(refs.bins.value); renderAll(); });
   refs.quantileGranularity.addEventListener("change", () => { state.quantileGranularity = refs.quantileGranularity.value; renderQuantiles(); });
   refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); });
   refs.view.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.view = radio.value; renderAll(); } }));
   refs.scatterX.addEventListener("change", () => { state.scatterX = refs.scatterX.value; renderChart(); });
-  refs.scatterColor.addEventListener("change", () => { state.scatterColor = refs.scatterColor.value; renderChart(); });
+  refs.chartColor.addEventListener("change", () => { state.chartColor = refs.chartColor.value; renderAll(); });
   refs.showContours.addEventListener("change", () => { state.showContours = refs.showContours.checked; renderChart(); });
   refs.showUnavailable.addEventListener("change", () => { state.showUnavailable = refs.showUnavailable.checked; renderTable(); });
   refs.salaryMin.addEventListener("input", () => updateRange("salary", "low"));
@@ -1185,6 +1328,7 @@
   applyPreset();
   configureRanges();
   buildFilterMenus();
+  renderWeightControls();
   initializeHelpTooltips();
   renderAll();
 })();
