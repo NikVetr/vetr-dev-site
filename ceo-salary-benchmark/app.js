@@ -70,7 +70,9 @@
     showUnavailable: $("#show-unavailable"),
     showUnavailableLabel: $("#show-unavailable-label"),
     salaryMin: $("#salary-range-min"), salaryMax: $("#salary-range-max"), salaryRangeValue: $("#salary-range-value"),
+    salaryFilterSummary: $("#salary-filter-summary"),
     expenseMin: $("#expense-range-min"), expenseMax: $("#expense-range-max"), expenseRangeValue: $("#expense-range-value"),
+    expenseFilterSummary: $("#expense-filter-summary"),
     tableBody: $("#organization-table tbody"), tableSearch: $("#table-search"),
     includedCount: $("#included-count"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
@@ -259,6 +261,8 @@
       ? "All" : `${compactMoney(salary.low)}–${compactMoney(salary.high)}`;
     refs.expenseRangeValue.value = expenses.low === expenses.min && expenses.high === expenses.max
       ? "All" : `${compactMoney(expenses.low)}–${compactMoney(expenses.high)}`;
+    refs.salaryFilterSummary.textContent = refs.salaryRangeValue.value;
+    refs.expenseFilterSummary.textContent = refs.expenseRangeValue.value;
     [["salary", refs.salaryMin, refs.salaryMax], ["expenses", refs.expenseMin, refs.expenseMax]].forEach(([key, low, high]) => {
       const minimum = Number(low.min); const maximum = Number(low.max);
       const track = document.querySelector(`[data-range-filter="${key}"] .dual-range`);
@@ -724,7 +728,7 @@
       });
       weightCell.append(weightInput);
 
-      const tier = document.createElement("td"); tier.textContent = row.tier || "—";
+      const tier = document.createElement("td"); tier.className = "tier-cell"; tier.title = row.tier || ""; tier.textContent = row.tier || "—";
       const topic = document.createElement("td"); topic.className = "topic-cell"; topic.title = row.topic || ""; topic.textContent = row.topic || "—";
       const expenses = document.createElement("td"); expenses.className = "money-cell"; expenses.textContent = compactMoney(row.expenses);
       const location = document.createElement("td"); location.className = "metadata-cell"; location.textContent = row.location || "—";
@@ -753,6 +757,10 @@
       const active = button.dataset.sort === state.sortKey;
       button.dataset.active = active;
       button.dataset.direction = active ? state.sortDirection : "";
+      button.title = `Sort by ${button.textContent.trim()}`;
+      button.closest("th").setAttribute("aria-sort", active
+        ? (state.sortDirection === "asc" ? "ascending" : "descending")
+        : "none");
     });
   }
 

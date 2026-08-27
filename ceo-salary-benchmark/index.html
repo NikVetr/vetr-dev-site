@@ -171,22 +171,6 @@
         <span id="show-unavailable-label">Show rows without this salary measure</span>
         <button class="info-tooltip" type="button" aria-label="About unavailable observations" data-tooltip="These organizations are part of the peer universe but have no validated value for the currently selected compensation measure, so they cannot affect the histogram.">?</button>
       </label>
-      <div class="range-filters" aria-label="Numeric filters">
-        <section class="range-filter" data-range-filter="salary">
-          <div><span>Salary range <button class="info-tooltip" type="button" aria-label="About salary filtering" data-tooltip="Include only rows whose selected compensation value falls between the two handles. This filter also updates the histogram, fitted curve, statistics, and quantiles.">?</button></span><output id="salary-range-value">All</output></div>
-          <div class="dual-range">
-            <input id="salary-range-min" type="range" aria-label="Minimum salary">
-            <input id="salary-range-max" type="range" aria-label="Maximum salary">
-          </div>
-        </section>
-        <section class="range-filter" data-range-filter="expenses">
-          <div><span>Expense range <button class="info-tooltip" type="button" aria-label="About expense filtering" data-tooltip="Include only organizations whose annual expenses fall between the handles. The slider uses a logarithmic scale so both small and large nonprofits remain adjustable.">?</button></span><output id="expense-range-value">All</output></div>
-          <div class="dual-range">
-            <input id="expense-range-min" type="range" min="0" max="1000" step="1" aria-label="Minimum expenses">
-            <input id="expense-range-max" type="range" min="0" max="1000" step="1" aria-label="Maximum expenses">
-          </div>
-        </section>
-      </div>
       <div class="table-scroll" tabindex="0">
         <table id="organization-table">
           <thead>
@@ -197,7 +181,7 @@
               <th><button type="button" data-sort="salary">Salary</button></th>
               <th><button type="button" data-sort="expenses">Expenses</button></th>
               <th><button type="button" data-sort="weight">Weight</button></th>
-              <th><button type="button" data-sort="tier">Tier</button></th>
+              <th class="tier-column"><button type="button" data-sort="tier">Tier</button></th>
               <th><button type="button" data-sort="topic">Topic / model</button></th>
               <th><button type="button" data-sort="location">Location</button></th>
               <th><button type="button" data-sort="remoteStatus">Work model</button></th>
@@ -212,10 +196,40 @@
               <th></th>
               <th></th>
               <th><div class="filter-menu" data-filter-menu="title"></div></th>
+              <th>
+                <div class="filter-menu numeric-filter-menu" data-numeric-filter="salary">
+                  <details>
+                    <summary id="salary-filter-summary" aria-label="Filter salary">All</summary>
+                    <div class="filter-popover numeric-filter-popover">
+                      <section class="range-filter" data-range-filter="salary">
+                        <div><span>Salary range <button class="info-tooltip" type="button" aria-label="About salary filtering" data-tooltip="Include only rows whose selected compensation value falls between the two handles. This filter also updates the histogram, fitted curve, statistics, and quantiles.">?</button></span><output id="salary-range-value">All</output></div>
+                        <div class="dual-range">
+                          <input id="salary-range-min" type="range" aria-label="Minimum salary">
+                          <input id="salary-range-max" type="range" aria-label="Maximum salary">
+                        </div>
+                      </section>
+                    </div>
+                  </details>
+                </div>
+              </th>
+              <th>
+                <div class="filter-menu numeric-filter-menu" data-numeric-filter="expenses">
+                  <details>
+                    <summary id="expense-filter-summary" aria-label="Filter expenses">All</summary>
+                    <div class="filter-popover numeric-filter-popover">
+                      <section class="range-filter" data-range-filter="expenses">
+                        <div><span>Expense range <button class="info-tooltip" type="button" aria-label="About expense filtering" data-tooltip="Include only organizations whose annual expenses fall between the handles. The slider uses a logarithmic scale so both small and large nonprofits remain adjustable.">?</button></span><output id="expense-range-value">All</output></div>
+                        <div class="dual-range">
+                          <input id="expense-range-min" type="range" min="0" max="1000" step="1" aria-label="Minimum expenses">
+                          <input id="expense-range-max" type="range" min="0" max="1000" step="1" aria-label="Maximum expenses">
+                        </div>
+                      </section>
+                    </div>
+                  </details>
+                </div>
+              </th>
               <th></th>
-              <th></th>
-              <th></th>
-              <th><div class="filter-menu" data-filter-menu="tier"></div></th>
+              <th class="tier-column"><div class="filter-menu" data-filter-menu="tier"></div></th>
               <th><div class="filter-menu" data-filter-menu="topic"></div></th>
               <th><div class="filter-menu" data-filter-menu="location"></div></th>
               <th><div class="filter-menu" data-filter-menu="remoteStatus"></div></th>

@@ -76,13 +76,33 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('[data-filter-menu="title"] summary').click();
   expect(await page.locator('[data-filter-menu="title"] .filter-options input').evaluateAll((options) => options.every((option) => option.checked))).toBe(true);
 
+  await expect(page.locator("#salary-range-min")).not.toBeVisible();
+  await page.locator("#salary-filter-summary").click();
+  await expect(page.locator("#salary-range-min")).toBeVisible();
   await page.locator("#salary-range-min").fill("300000");
   await expect(page.locator("#salary-range-value")).not.toHaveText("All");
+  await expect(page.locator("#salary-filter-summary")).not.toHaveText("All");
   await expect(page.locator("#stat-n")).not.toHaveText("110");
   await page.locator("#reset-settings").click();
+  await expect(page.locator("#expense-range-min")).not.toBeVisible();
+  await page.locator("#expense-filter-summary").click();
   await page.locator("#expense-range-min").fill("500");
   await expect(page.locator("#expense-range-value")).not.toHaveText("All");
+  await expect(page.locator("#expense-filter-summary")).not.toHaveText("All");
   await expect(page.locator("#stat-n")).not.toHaveText("110");
+
+  await page.locator("#reset-settings").click();
+  const salaryHeader = page.locator('thead button[data-sort="salary"]');
+  const titleHeader = page.locator('thead button[data-sort="title"]');
+  await expect(salaryHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "none");
+  await salaryHeader.click();
+  await expect(salaryHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
+  await salaryHeader.click();
+  await expect(salaryHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "descending");
+  await titleHeader.click();
+  await expect(titleHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
+  const tierHeaderWidth = await page.locator("thead .tier-column").first().evaluate((cell) => cell.getBoundingClientRect().width);
+  expect(tierHeaderWidth).toBeLessThanOrEqual(80);
 
   await page.locator("#reset-settings").click();
   await page.locator("#quantile-granularity").selectOption("percentiles");
@@ -107,6 +127,9 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#table-search").fill("");
   const immigrationCouncil = page.locator("tbody tr").filter({ hasText: "American Immigration Council" });
   await expect(immigrationCouncil.locator(".organization-name")).toHaveAttribute("href", /americanimmigrationcouncil\.org/i);
+  const orgCellBox = await immigrationCouncil.locator(".org-cell").boundingBox();
+  await page.mouse.move(orgCellBox.x + orgCellBox.width - 2, orgCellBox.y + orgCellBox.height / 2);
+  await expect(page.locator("#organization-preview")).toBeHidden();
   await immigrationCouncil.locator(".organization-name").hover();
   await expect(page.locator("#organization-preview")).toBeVisible();
   await expect(page.locator("#organization-preview-wikipedia")).toContainText("nonprofit immigration advocacy");
@@ -127,7 +150,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
 test("desktop and narrow layouts render", async ({ page }) => {
   await page.goto("/");
-  await page.locator(".info-tooltip").last().hover();
+  await page.locator(".info-tooltip:visible").last().hover();
   const desktopTooltip = await page.locator("#help-tooltip").boundingBox();
   expect(desktopTooltip.x + desktopTooltip.width).toBeLessThanOrEqual(1440);
   await page.screenshot({ path: "tmp/app-desktop.png", fullPage: true });
