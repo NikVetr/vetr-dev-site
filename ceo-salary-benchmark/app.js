@@ -23,17 +23,21 @@
     fit: "lognormal",
     weighting: "equal",
     targetExpense: 7_500_000,
+    targetStaff: 50,
     bandwidth: 0.7,
     bins: 20,
     autoBins: true,
+    view: "histogram",
+    scatterX: "expenses",
+    scatterColor: "tier",
+    showContours: true,
     quantileGranularity: "quintiles",
     customQuantiles: "5, 25, 50, 75, 95",
     sortKey: "organization",
     sortDirection: "asc",
-    search: "",
     filters: {
-      title: new Set(), tier: new Set(), topic: new Set(), location: new Set(),
-      remoteStatus: new Set(), eaAffinity: new Set(), structure: new Set(),
+      title: null, sourceType: null, tier: null, topic: null, location: null,
+      eaAffinity: null, structure: null,
     },
     ranges: {
       salary: { min: null, max: null, low: null, high: null },
@@ -58,29 +62,42 @@
   const refs = {
     stream: $("#stream-select"), measure: $("#measure-select"), measureField: $("#measure-field"),
     sample: $("#sample-select"), fit: [...document.querySelectorAll('input[name="distribution"]')], weighting: $("#weighting-select"),
-    sizeControls: $("#size-controls"), targetExpense: $("#target-expense"), bandwidth: $("#size-bandwidth"),
-    bandwidthValue: $("#bandwidth-value"), bins: $("#bin-count"), binValue: $("#bin-value"),
+    sizeControls: $("#size-controls"), expenseTargetField: $("#expense-target-field"), staffTargetField: $("#staff-target-field"),
+    targetExpense: $("#target-expense"), targetStaff: $("#target-staff"), bandwidth: $("#size-bandwidth"),
+    bandwidthValue: $("#bandwidth-value"), binField: $("#bin-field"), bins: $("#bin-count"), binValue: $("#bin-value"),
+    view: [...document.querySelectorAll('input[name="chart-view"]')], scatterControls: $("#scatter-controls"),
+    scatterX: $("#scatter-x"), scatterColor: $("#scatter-color"), showContours: $("#show-contours"),
     reset: $("#reset-settings"), chart: $("#salary-chart"), chartWrap: $("#chart-wrap"),
     tooltip: $("#chart-tooltip"), chartKicker: $("#chart-kicker"), chartTitle: $("#chart-title"),
-    statN: $("#stat-n"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
+    statN: $("#stat-n"), statNUnit: $("#stat-n-unit"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
     quantileGranularity: $("#quantile-granularity"), quantileGrid: $("#quantile-grid"),
     customQuantilesField: $("#custom-quantiles-field"), customQuantiles: $("#custom-quantiles"),
-    customQuantilesError: $("#custom-quantiles-error"), densityLegend: $("#density-legend"),
-    densityLegendLabel: $("#density-legend-label"), quantileBasis: $("#quantile-basis"),
+    customQuantilesError: $("#custom-quantiles-error"), chartLegend: $("#chart-legend"),
+    quantileBasis: $("#quantile-basis"), sampleDescription: $("#sample-description"),
+    weightingDescription: $("#weighting-description"),
+    methodNoteTitle: $("#method-note-title"), methodNoteText: $("#method-note-text"),
     showUnavailable: $("#show-unavailable"),
     showUnavailableLabel: $("#show-unavailable-label"),
     salaryMin: $("#salary-range-min"), salaryMax: $("#salary-range-max"), salaryRangeValue: $("#salary-range-value"),
     salaryFilterSummary: $("#salary-filter-summary"),
     expenseMin: $("#expense-range-min"), expenseMax: $("#expense-range-max"), expenseRangeValue: $("#expense-range-value"),
     expenseFilterSummary: $("#expense-filter-summary"),
-    tableBody: $("#organization-table tbody"), tableSearch: $("#table-search"),
+    tableBody: $("#organization-table tbody"),
     includedCount: $("#included-count"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
   };
 
   function rows() {
+    if (state.stream === "combined") return [...DATA.incumbents, ...DATA.jobAds];
     return state.stream === "incumbents" ? DATA.incumbents : DATA.jobAds;
   }
+
+  function rowStream(row) {
+    return row.evidenceStream || (row.sourceType === "Job posting" ? "jobAds" : "incumbents");
+  }
+
+  function rowInclusion(row) { return inclusion[rowStream(row)]; }
+  function rowCustomWeights(row) { return customWeights[rowStream(row)]; }
 
   function wikipediaSearchUrl(organization) {
     return `https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(organization)}`;
@@ -159,7 +176,8 @@
   }
 
   function salary(row) {
-    return row.salary?.[state.stream === "jobAds" ? "base" : state.measure] ?? null;
+    if (rowStream(row) === "jobAds" || state.stream === "combined") return row.salary?.base ?? null;
+    return row.salary?.[state.measure] ?? null;
   }
 
   function baseWeight(row) {
@@ -168,15 +186,35 @@
     const sizeWeight = expense && expense > 0
       ? Math.exp(-0.5 * (Math.log(expense / state.targetExpense) / state.bandwidth) ** 2)
       : 0.45;
+    const staffWeight = row.staff && row.staff > 0
+      ? Math.exp(-0.5 * (Math.log(row.staff / state.targetStaff) / state.bandwidth) ** 2)
+      : 0.45;
+    const latestYear = Math.max(...rows().map((item) => item.compensationYear || 0));
+    const recencyWeight = row.compensationYear ? 0.5 ** (Math.max(0, latestYear - row.compensationYear) / 4) : 0.45;
+    const tier = String(row.tier || "").toLowerCase();
+    const tierWeight = tier === "a" || tier.includes("strict") ? 1 : tier === "b" || tier.includes("secondary") ? 0.65 : 0.35;
+    const affinity = String(row.eaAffinity || "").toLowerCase();
+    const affinityWeight = affinity.includes("aligned") ? 1 : affinity.includes("adjacent") ? 0.8 : affinity.includes("functional") ? 0.55 : 0.45;
     if (state.weighting === "comparability") return scoreWeight;
     if (state.weighting === "size") return sizeWeight;
+    if (state.weighting === "staff") return staffWeight;
+    if (state.weighting === "recency") return recencyWeight;
+    if (state.weighting === "tier") return tierWeight;
+    if (state.weighting === "eaAffinity") return affinityWeight;
     if (state.weighting === "blended") return scoreWeight * sizeWeight;
     return 1;
   }
 
   function effectiveWeight(row) {
-    if (!inclusion[state.stream].get(row.id)) return 0;
-    return baseWeight(row) * (customWeights[state.stream].get(row.id) ?? 1);
+    if (!rowInclusion(row).get(row.id)) return 0;
+    const weight = baseWeight(row) * (rowCustomWeights(row).get(row.id) ?? 1);
+    if (state.weighting !== "streamBalanced" || state.stream !== "combined") return weight;
+    const stream = rowStream(row);
+    const streamTotal = rows().reduce((sum, candidate) => {
+      if (rowStream(candidate) !== stream || salary(candidate) == null || !passesFilters(candidate) || !rowInclusion(candidate).get(candidate.id)) return sum;
+      return sum + (rowCustomWeights(candidate).get(candidate.id) ?? 1);
+    }, 0);
+    return streamTotal ? weight / streamTotal : 0;
   }
 
   function selectedRows() {
@@ -187,11 +225,8 @@
   }
 
   function passesFilters(row) {
-    const search = state.search.toLowerCase();
-    const haystack = [row.organization, row.title, row.rawTitle, row.topic, row.eaAffinity, row.location, row.remoteStatus, row.structure].join(" ").toLowerCase();
-    if (search && !haystack.includes(search)) return false;
     const categoricalMatch = Object.entries(state.filters).every(([key, selected]) => {
-      if (!selected.size) return true;
+      if (selected == null) return true;
       return selected.has(String(row[key] || "Not reported"));
     });
     if (!categoricalMatch) return false;
@@ -214,7 +249,7 @@
         selected = row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary");
       }
       if (state.sample === "observed") selected = available;
-      inclusion[state.stream].set(row.id, selected);
+      rowInclusion(row).set(row.id, selected);
     }
   }
 
@@ -432,10 +467,22 @@
     return best.bins;
   }
 
-  function renderChart() {
+  function renderHistogramLegend() {
+    refs.chartLegend.innerHTML = [
+      '<span><i class="swatch tier-a"></i> Tier A / strict</span>',
+      '<span><i class="swatch tier-b"></i> Tier B / secondary</span>',
+      '<span><i class="swatch tier-c"></i> Tier C / expanded</span>',
+      state.fit === "empirical" ? "" : `<span><i class="line-swatch"></i> ${state.fit === "gamma" ? "Gamma" : "Lognormal"} density</span>`,
+      '<span><i class="rug-swatch"></i> Individual salaries</span>',
+    ].join("");
+  }
+
+  function renderHistogram() {
     const items = selectedRows();
     const svg = refs.chart;
     svg.replaceChildren();
+    renderHistogramLegend();
+    $("#chart-description").textContent = "A weighted histogram in which each block represents one organization.";
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(330, refs.chartWrap.clientHeight || 360);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -548,7 +595,7 @@
       x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`,
       "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700,
     });
-    yAxisTitle.textContent = "Weighted organizations per bin";
+    yAxisTitle.textContent = state.stream === "combined" ? "Weighted observations per bin" : "Weighted organizations per bin";
     svg.append(yAxisTitle);
 
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
@@ -558,8 +605,162 @@
     refs.statCenter.textContent = compactMoney(distributionQuantile(items, 0.5));
   }
 
-  function showTooltip(event, item) {
-    refs.tooltip.innerHTML = `<b>${escapeHtml(item.row.organization)}</b>${money(item.value)} · weight ${item.weight.toFixed(2)}<br>${escapeHtml(item.row.title || item.row.topic || "")}`;
+  const scatterVariables = {
+    expenses: { label: "Annual expenses", format: compactMoney, logarithmic: true },
+    revenue: { label: "Annual revenue", format: compactMoney, logarithmic: true },
+    staff: { label: "Staff count", format: (value) => Math.round(value).toLocaleString(), logarithmic: true },
+    comparabilityScore: { label: "Comparability score", format: (value) => Number(value).toFixed(0), logarithmic: false },
+    compensationYear: { label: "Evidence year", format: (value) => Number(value).toFixed(0), logarithmic: false },
+  };
+  const scatterPalette = ["#2D6885", "#44B0DF", "#75CCEC", "#52879E", "#3E454A", "#B7E2F2"];
+
+  function mixHex(hex, target, amount) {
+    const source = hex.match(/[a-f\d]{2}/gi).map((value) => parseInt(value, 16));
+    const destination = target.match(/[a-f\d]{2}/gi).map((value) => parseInt(value, 16));
+    return `#${source.map((value, index) => Math.round(value + (destination[index] - value) * amount).toString(16).padStart(2, "0")).join("")}`;
+  }
+
+  function scatterCategoryColors(items) {
+    const categories = [...new Set(items.map((item) => String(item.row[state.scatterColor] || "Not reported")))].sort((a, b) => a.localeCompare(b));
+    return new Map(categories.map((category, index) => {
+      const cycle = Math.floor(index / scatterPalette.length);
+      const base = scatterPalette[index % scatterPalette.length];
+      const color = cycle % 2 ? mixHex(base, "#ffffff", Math.min(0.18 + cycle * 0.05, 0.42)) : mixHex(base, "#000000", Math.min(cycle * 0.05, 0.25));
+      return [category, color];
+    }));
+  }
+
+  function renderScatterLegend(colorMap, contoursShown) {
+    refs.chartLegend.replaceChildren();
+    colorMap.forEach((color, label) => {
+      const item = document.createElement("span"); item.title = label;
+      const swatch = document.createElement("i"); swatch.className = "swatch"; swatch.style.background = color;
+      item.append(swatch, document.createTextNode(label)); refs.chartLegend.append(item);
+    });
+    if (contoursShown) {
+      const contour = document.createElement("span"); contour.innerHTML = '<i class="contour-swatch"></i> 50 / 80 / 95% covariance contours';
+      refs.chartLegend.append(contour);
+    }
+  }
+
+  function appendCovarianceContours(svg, points, clipId) {
+    if (!state.showContours || points.length < 3) return false;
+    const total = points.reduce((sum, point) => sum + point.item.weight, 0);
+    const meanX = points.reduce((sum, point) => sum + point.x * point.item.weight, 0) / total;
+    const meanY = points.reduce((sum, point) => sum + point.y * point.item.weight, 0) / total;
+    const varianceX = points.reduce((sum, point) => sum + (point.x - meanX) ** 2 * point.item.weight, 0) / total;
+    const varianceY = points.reduce((sum, point) => sum + (point.y - meanY) ** 2 * point.item.weight, 0) / total;
+    const covariance = points.reduce((sum, point) => sum + (point.x - meanX) * (point.y - meanY) * point.item.weight, 0) / total;
+    const trace = varianceX + varianceY;
+    const root = Math.sqrt(Math.max(0, ((varianceX - varianceY) / 2) ** 2 + covariance ** 2));
+    const eigenA = trace / 2 + root;
+    const eigenB = trace / 2 - root;
+    if (!(eigenA > 0) || !(eigenB > 0)) return false;
+    const angle = Math.atan2(2 * covariance, varianceX - varianceY) * 90 / Math.PI;
+    const group = svgElement("g", { "clip-path": `url(#${clipId})` });
+    [0.95, 0.8, 0.5].forEach((probability, index) => {
+      const radius = Math.sqrt(-2 * Math.log(1 - probability));
+      group.append(svgElement("ellipse", {
+        cx: meanX, cy: meanY, rx: radius * Math.sqrt(eigenA), ry: radius * Math.sqrt(eigenB),
+        transform: `rotate(${angle} ${meanX} ${meanY})`, class: "covariance-contour",
+        opacity: [0.35, 0.55, 0.8][index], "stroke-dasharray": index === 2 ? "" : "5 4",
+      }));
+    });
+    svg.append(group);
+    return true;
+  }
+
+  function renderScatter() {
+    const variable = scatterVariables[state.scatterX];
+    const items = selectedRows().filter((item) => {
+      const value = item.row[state.scatterX];
+      return value != null && Number.isFinite(value) && (!variable.logarithmic || value > 0);
+    });
+    const svg = refs.chart;
+    svg.replaceChildren();
+    $("#chart-description").textContent = `A scatterplot of annual compensation against ${variable.label.toLowerCase()}.`;
+    const width = Math.max(520, refs.chartWrap.clientWidth || 720);
+    const height = Math.max(290, refs.chartWrap.clientHeight || 340);
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    const margin = { top: 14, right: 18, bottom: 50, left: 72 };
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+    if (!items.length) {
+      const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
+      empty.textContent = `No selected organizations report ${variable.label.toLowerCase()}.`;
+      svg.append(empty); refs.chartLegend.replaceChildren();
+      refs.statN.textContent = "0"; refs.statNeff.textContent = "0"; refs.statCenter.textContent = "—";
+      return;
+    }
+    const xTransform = (value) => variable.logarithmic ? Math.log(value) : value;
+    const transformedX = items.map((item) => xTransform(item.row[state.scatterX]));
+    const salaries = items.map((item) => item.value);
+    const paddedDomain = (values, minimumPadding) => {
+      const low = Math.min(...values); const high = Math.max(...values);
+      const padding = Math.max((high - low) * 0.08, minimumPadding);
+      return [low - padding, high + padding];
+    };
+    const [xMin, xMax] = paddedDomain(transformedX, variable.logarithmic ? 0.08 : 1);
+    const [rawYMin, rawYMax] = paddedDomain(salaries, 25_000);
+    const yMin = Math.max(0, rawYMin); const yMax = rawYMax;
+    const xScale = (value) => margin.left + ((xTransform(value) - xMin) / (xMax - xMin)) * innerWidth;
+    const yScale = (value) => margin.top + innerHeight - ((value - yMin) / (yMax - yMin)) * innerHeight;
+    for (let index = 0; index <= 4; index += 1) {
+      const yValue = yMin + (index / 4) * (yMax - yMin);
+      const y = yScale(yValue);
+      svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: y, y2: y, class: "grid-line" }));
+      const label = svgElement("text", { x: margin.left - 8, y: y + 3, "text-anchor": "end", fill: "#52879E", "font-size": 9 });
+      label.textContent = compactMoney(yValue); svg.append(label);
+    }
+    const plotBottom = margin.top + innerHeight;
+    for (let index = 0; index <= 5; index += 1) {
+      const transformed = xMin + (index / 5) * (xMax - xMin);
+      const value = variable.logarithmic ? Math.exp(transformed) : transformed;
+      const x = margin.left + (index / 5) * innerWidth;
+      svg.append(svgElement("line", { x1: x, x2: x, y1: plotBottom, y2: plotBottom + 4, stroke: "#52879E" }));
+      const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#52879E", "font-size": 9 });
+      label.textContent = variable.format(value); svg.append(label);
+    }
+    const clipId = "scatter-plot-clip";
+    const defs = svgElement("defs");
+    const clip = svgElement("clipPath", { id: clipId });
+    clip.append(svgElement("rect", { x: margin.left, y: margin.top, width: innerWidth, height: innerHeight }));
+    defs.append(clip); svg.append(defs);
+    const points = items.map((item) => ({ item, x: xScale(item.row[state.scatterX]), y: yScale(item.value) }));
+    const contoursShown = appendCovarianceContours(svg, points, clipId);
+    const colors = scatterCategoryColors(items);
+    points.forEach(({ item, x, y }) => {
+      const category = String(item.row[state.scatterColor] || "Not reported");
+      const point = svgElement("circle", {
+        cx: x, cy: y, r: clamp(3.5 + Math.sqrt(item.weight), 4, 8), fill: colors.get(category),
+        class: `scatter-point${state.focusedId === item.row.id ? " is-focused" : ""}`, tabindex: "0", role: "button",
+        "aria-label": `${item.row.organization}, ${money(item.value)}, ${variable.label} ${variable.format(item.row[state.scatterX])}`,
+      });
+      const detail = `${variable.label}: ${variable.format(item.row[state.scatterX])}<br>${escapeHtml(category)}`;
+      point.addEventListener("pointerenter", (event) => showTooltip(event, item, detail));
+      point.addEventListener("pointermove", positionTooltip); point.addEventListener("pointerleave", hideTooltip);
+      point.addEventListener("click", () => focusRow(item.row.id));
+      point.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRow(item.row.id); });
+      svg.append(point);
+    });
+    const xTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
+    xTitle.textContent = `${variable.label}${variable.logarithmic ? " (log scale)" : ""}`; svg.append(xTitle);
+    const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
+    yTitle.textContent = `Annual compensation (${DATA.priceBasis})`; svg.append(yTitle);
+    renderScatterLegend(colors, contoursShown);
+    const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+    const squared = items.reduce((sum, item) => sum + item.weight ** 2, 0);
+    refs.statN.textContent = items.length;
+    refs.statNeff.textContent = squared ? (totalWeight ** 2 / squared).toFixed(1) : "0";
+    refs.statCenter.textContent = compactMoney(distributionQuantile(items, 0.5));
+  }
+
+  function renderChart() {
+    if (state.view === "scatter") renderScatter(); else renderHistogram();
+  }
+
+  function showTooltip(event, item, detail = escapeHtml(item.row.title || item.row.topic || "")) {
+    refs.tooltip.innerHTML = `<b>${escapeHtml(item.row.organization)}</b>${money(item.value)} · weight ${item.weight.toFixed(2)}<br>${detail}`;
     refs.tooltip.hidden = false;
     positionTooltip(event);
   }
@@ -620,9 +821,7 @@
       const value = (row) => {
         if (state.sortKey === "salary") return salary(row) ?? -Infinity;
         if (state.sortKey === "weight") return effectiveWeight(row);
-        if (state.sortKey === "expenses") return row.expenses ?? -Infinity;
-        if (state.sortKey === "staff") return row.staff ?? -Infinity;
-        if (state.sortKey === "compensationYear") return row.compensationYear ?? -Infinity;
+        if (["expenses", "staff", "comparabilityScore", "compensationYear"].includes(state.sortKey)) return row[state.sortKey] ?? -Infinity;
         return String(row[state.sortKey] || "").toLowerCase();
       };
       const av = value(a); const bv = value(b);
@@ -638,32 +837,67 @@
       container.replaceChildren();
       const details = document.createElement("details");
       const summary = document.createElement("summary");
-      summary.textContent = selected.size ? `${selected.size} selected` : "All";
+      summary.textContent = selected == null ? "All" : selected.size ? `${selected.size} selected` : "None";
       summary.setAttribute("aria-label", `Filter ${key}`);
       const panel = document.createElement("div");
       panel.className = "filter-popover";
       const actions = document.createElement("div");
       actions.className = "filter-actions";
       const allButton = document.createElement("button");
-      allButton.type = "button"; allButton.textContent = "Select all";
-      allButton.addEventListener("click", () => { selected.clear(); buildFilterMenus(); renderAll(); });
+      allButton.type = "button"; allButton.textContent = selected == null ? "Deselect all" : "Select all";
+      allButton.addEventListener("click", () => {
+        state.filters[key] = selected == null ? new Set() : null;
+        buildFilterMenus();
+        document.querySelector(`[data-filter-menu="${key}"] details`).open = true;
+        renderAll();
+      });
       actions.append(allButton);
       const options = document.createElement("div");
       options.className = "filter-options";
-      values.forEach((value) => {
+      const appendOption = (value, parent = options) => {
         const label = document.createElement("label");
         const checkbox = document.createElement("input");
-        checkbox.type = "checkbox"; checkbox.checked = !selected.size || selected.has(value);
+        checkbox.type = "checkbox"; checkbox.checked = selected == null || selected.has(value);
         checkbox.addEventListener("change", () => {
-          if (!selected.size) values.forEach((option) => selected.add(option));
-          if (checkbox.checked) selected.add(value); else selected.delete(value);
-          if (selected.size === values.length) selected.clear();
-          summary.textContent = selected.size ? `${selected.size} selected` : "All";
+          const next = state.filters[key] == null ? new Set(values) : new Set(state.filters[key]);
+          if (checkbox.checked) next.add(value); else next.delete(value);
+          state.filters[key] = next.size === values.length ? null : next;
+          summary.textContent = state.filters[key] == null ? "All" : next.size ? `${next.size} selected` : "None";
+          allButton.textContent = state.filters[key] == null ? "Deselect all" : "Select all";
           renderAll();
         });
         const span = document.createElement("span"); span.textContent = value;
-        label.append(checkbox, span); options.append(label);
-      });
+        label.append(checkbox, span); parent.append(label);
+      };
+      if (key === "title") {
+        const grouped = new Map();
+        rows().forEach((row) => {
+          const group = row.titleGroup || "Other executive titles";
+          const value = String(row.title || "Not reported");
+          if (!grouped.has(group)) grouped.set(group, new Set());
+          grouped.get(group).add(value);
+        });
+        [...grouped].sort(([a], [b]) => a.localeCompare(b)).forEach(([group, groupSet]) => {
+          const groupValues = [...groupSet].sort((a, b) => a.localeCompare(b));
+          const wrapper = document.createElement("section"); wrapper.className = "filter-group";
+          const groupButton = document.createElement("button"); groupButton.type = "button"; groupButton.className = "filter-group-heading";
+          const checkedCount = groupValues.filter((value) => selected == null || selected.has(value)).length;
+          groupButton.textContent = `${group} · ${checkedCount}/${groupValues.length}`;
+          groupButton.setAttribute("aria-label", `${checkedCount === groupValues.length ? "Deselect" : "Select"} all ${group} titles`);
+          groupButton.addEventListener("click", () => {
+            const next = state.filters[key] == null ? new Set(values) : new Set(state.filters[key]);
+            const allChecked = groupValues.every((value) => next.has(value));
+            groupValues.forEach((value) => { if (allChecked) next.delete(value); else next.add(value); });
+            state.filters[key] = next.size === values.length ? null : next;
+            buildFilterMenus();
+            document.querySelector('[data-filter-menu="title"] details').open = true;
+            renderAll();
+          });
+          wrapper.append(groupButton);
+          groupValues.forEach((value) => appendOption(value, wrapper));
+          options.append(wrapper);
+        });
+      } else values.forEach((value) => appendOption(value));
       panel.append(actions, options); details.append(summary, panel); container.append(details);
     });
   }
@@ -673,7 +907,7 @@
     tableRows().forEach((row) => {
       const available = salary(row) != null;
       const tr = document.createElement("tr");
-      if (!inclusion[state.stream].get(row.id)) tr.classList.add("is-excluded");
+      if (!rowInclusion(row).get(row.id)) tr.classList.add("is-excluded");
       if (!available) tr.classList.add("is-unavailable");
       if (state.focusedId === row.id) tr.classList.add("is-focused");
       tr.dataset.id = row.id;
@@ -681,10 +915,10 @@
       const toggleCell = document.createElement("td");
       toggleCell.className = "check-column";
       const toggle = document.createElement("input");
-      toggle.type = "checkbox"; toggle.className = "row-toggle"; toggle.checked = available && inclusion[state.stream].get(row.id);
+      toggle.type = "checkbox"; toggle.className = "row-toggle"; toggle.checked = available && rowInclusion(row).get(row.id);
       toggle.disabled = !available;
-      toggle.setAttribute("aria-label", available ? `Include ${row.organization}` : `${row.organization} has no ${measureLabel()} observation`);
-      toggle.addEventListener("change", () => { inclusion[state.stream].set(row.id, toggle.checked); renderAll(); });
+      toggle.setAttribute("aria-label", available ? `Include ${row.organization}` : `${row.organization} has no ${measureLabel(row)} observation`);
+      toggle.addEventListener("change", () => { rowInclusion(row).set(row.id, toggle.checked); renderAll(); });
       toggleCell.append(toggle);
 
       const org = document.createElement("td");
@@ -710,29 +944,33 @@
       const title = document.createElement("td");
       title.className = "title-cell"; title.title = row.rawTitle || row.title || ""; title.textContent = row.title || "Not reported";
 
+      const evidenceType = document.createElement("td");
+      evidenceType.className = "evidence-cell"; evidenceType.textContent = row.sourceType || "—";
+
       const salaryCell = document.createElement("td");
       salaryCell.className = "money-cell"; salaryCell.textContent = compactMoney(salary(row));
 
       const weightCell = document.createElement("td");
       const weightInput = document.createElement("input");
       weightInput.type = "number"; weightInput.min = "0"; weightInput.max = "10"; weightInput.step = "0.1";
-      weightInput.value = customWeights[state.stream].get(row.id) ?? 1; weightInput.className = "weight-input";
+      weightInput.value = rowCustomWeights(row).get(row.id) ?? 1; weightInput.className = "weight-input";
       weightInput.disabled = !available;
       weightInput.title = `Effective weight: ${effectiveWeight(row).toFixed(2)}`;
       weightInput.setAttribute("aria-label", `Custom weight for ${row.organization}`);
       weightInput.addEventListener("change", () => {
         const value = clamp(Number(weightInput.value) || 0, 0, 10);
-        customWeights[state.stream].set(row.id, value);
-        if (value === 0) inclusion[state.stream].set(row.id, false);
+        rowCustomWeights(row).set(row.id, value);
+        if (value === 0) rowInclusion(row).set(row.id, false);
         renderAll();
       });
       weightCell.append(weightInput);
 
+      const comparability = document.createElement("td");
+      comparability.className = "number-cell"; comparability.textContent = row.comparabilityScore ?? "—";
       const tier = document.createElement("td"); tier.className = "tier-cell"; tier.title = row.tier || ""; tier.textContent = row.tier || "—";
       const topic = document.createElement("td"); topic.className = "topic-cell"; topic.title = row.topic || ""; topic.textContent = row.topic || "—";
       const expenses = document.createElement("td"); expenses.className = "money-cell"; expenses.textContent = compactMoney(row.expenses);
       const location = document.createElement("td"); location.className = "metadata-cell"; location.textContent = row.location || "—";
-      const workModel = document.createElement("td"); workModel.className = "metadata-cell"; workModel.textContent = row.remoteStatus || "—";
       const staff = document.createElement("td"); staff.className = "number-cell"; staff.textContent = row.staff ?? "—";
       const ea = document.createElement("td"); ea.className = "metadata-cell"; ea.textContent = row.eaAffinity || "—";
       const structure = document.createElement("td"); structure.className = "metadata-cell"; structure.textContent = row.structure || "—";
@@ -744,7 +982,7 @@
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
       } else source.textContent = "—";
-      tr.append(toggleCell, org, title, salaryCell, expenses, weightCell, tier, topic, location, workModel, staff, ea, structure, year, preview, source);
+      tr.append(toggleCell, org, title, evidenceType, salaryCell, expenses, weightCell, comparability, tier, topic, location, staff, ea, structure, year, preview, source);
       refs.tableBody.append(tr);
     });
     const count = selectedRows().length;
@@ -776,7 +1014,7 @@
   function openSourceDialog(row) {
     $("#dialog-source-type").textContent = `${row.sourceType} · ${row.auditStatus || "source record"}`;
     $("#dialog-title").textContent = row.organization;
-    $("#dialog-measure-label").textContent = measureLabel();
+    $("#dialog-measure-label").textContent = measureLabel(row);
     $("#dialog-value").textContent = money(salary(row));
     $("#dialog-evidence").textContent = row.evidenceText;
     const meta = $("#dialog-meta");
@@ -804,21 +1042,52 @@
     refs.dialog.showModal();
   }
 
-  function measureLabel() {
+  function measureLabel(row = null) {
+    if (state.stream === "combined") return row && rowStream(row) === "jobAds"
+      ? "Posting midpoint, July 2026 USD"
+      : row ? "Schedule J base, July 2026 USD" : "Comparable salary proxy, July 2026 USD";
     if (state.stream === "jobAds") return "Posting midpoint, July 2026 USD";
     return { base: "Schedule J base, July 2026 USD", cash: "Part VII cash / W-2 proxy, July 2026 USD", total: "Filing total proxy, July 2026 USD" }[state.measure];
   }
 
   function updateHeadings() {
     const isJobs = state.stream === "jobAds";
-    refs.measureField.hidden = isJobs;
-    refs.chartKicker.textContent = isJobs ? "Recruitment evidence" : "Incumbent compensation";
-    refs.chartTitle.textContent = isJobs
-      ? "Validated CEO / ED posting midpoints"
-      : { base: "Validated Schedule J base salaries", cash: "Validated Part VII cash / W-2 proxies", total: "Validated filing total compensation" }[state.measure];
-    refs.sizeControls.hidden = !["size", "blended"].includes(state.weighting);
-    refs.densityLegend.hidden = state.fit === "empirical";
-    refs.densityLegendLabel.textContent = `${state.fit === "gamma" ? "Gamma" : "Lognormal"} density`;
+    const isCombined = state.stream === "combined";
+    refs.measureField.hidden = isJobs || isCombined;
+    refs.chartKicker.textContent = isCombined ? "Combined public evidence" : isJobs ? "Recruitment evidence" : "Incumbent compensation";
+    refs.chartTitle.textContent = isCombined
+      ? "Schedule J base salaries + posting midpoints"
+      : isJobs
+        ? "Validated CEO / ED posting midpoints"
+        : { base: "Validated Schedule J base salaries", cash: "Validated Part VII cash / W-2 proxies", total: "Validated filing total compensation" }[state.measure];
+    refs.statNUnit.textContent = isCombined ? "observations" : "organizations";
+    refs.scatterControls.hidden = state.view !== "scatter";
+    refs.binField.hidden = state.view !== "histogram";
+    refs.sizeControls.hidden = !["size", "blended", "staff"].includes(state.weighting);
+    refs.expenseTargetField.hidden = !["size", "blended"].includes(state.weighting);
+    refs.staffTargetField.hidden = state.weighting !== "staff";
+    refs.weighting.querySelector('option[value="streamBalanced"]').disabled = !isCombined;
+    refs.sampleDescription.textContent = {
+      primary: "Rows retained as primary after source validation and role-structure review.",
+      clean: "Primary rows with no structural compensation or leadership flags.",
+      tierA: "The narrowest peer definition: incumbent Tier A or job-ad strict-primary rows.",
+      observed: "Every row with a usable salary value, including broader sensitivity cases.",
+    }[state.sample];
+    refs.weightingDescription.textContent = {
+      equal: "Each included observation starts with the same influence.",
+      streamBalanced: "In the combined view, filings and postings each receive half of total base influence.",
+      comparability: "Uses the table's comparability score, scaled around the benchmark protocol's 75-point reference.",
+      size: "Downweights organizations as logged expenses move away from the RP comparison budget.",
+      staff: "Downweights organizations as logged staff count moves away from the RP comparison headcount.",
+      recency: "Uses the evidence-year column with a four-year half-life.",
+      tier: "Weights Tier A / strict at 1.00, Tier B / secondary at 0.65, and broader tiers at 0.35.",
+      eaAffinity: "Weights EA-aligned, adjacent, functional-only, and uncoded relationships progressively less.",
+      blended: "Multiplies comparability-score and expense-similarity weights.",
+    }[state.weighting];
+    refs.methodNoteTitle.textContent = isCombined ? "Combined-evidence caution" : "Interpretation";
+    refs.methodNoteText.textContent = isCombined
+      ? "This view pools incumbent Schedule J base pay with job-ad salary midpoints. Both are July 2026 USD salary proxies, but one is realized pay and the other an advertised range midpoint. Use evidence-stream coloring, filtering, or balanced weighting to test that assumption; an ‘all compensation measures’ pool is intentionally not offered because it would duplicate correlated values from each filing."
+      : "Empirical, lognormal, and gamma summaries describe the selected convenience sample. They are sensitivity tools—not population estimates.";
     refs.bandwidthValue.value = `${state.bandwidth.toFixed(2)}×`;
     refs.binValue.value = state.bins;
   }
@@ -833,12 +1102,13 @@
   function reset() {
     Object.assign(state, {
       stream: "incumbents", measure: "base", sample: "primary", fit: "lognormal", weighting: "equal",
-      targetExpense: 7_500_000, bandwidth: 0.7, bins: 20, autoBins: true,
+      targetExpense: 7_500_000, targetStaff: 50, bandwidth: 0.7, bins: 20, autoBins: true,
+      view: "histogram", scatterX: "expenses", scatterColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95",
-      sortKey: "organization", sortDirection: "asc", search: "",
+      sortKey: "organization", sortDirection: "asc",
       filters: {
-        title: new Set(), tier: new Set(), topic: new Set(), location: new Set(),
-        remoteStatus: new Set(), eaAffinity: new Set(), structure: new Set(),
+        title: null, sourceType: null, tier: null, topic: null, location: null,
+        eaAffinity: null, structure: null,
       },
       ranges: {
         salary: { min: null, max: null, low: null, high: null },
@@ -852,10 +1122,12 @@
     });
     refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
-    refs.weighting.value = state.weighting; refs.targetExpense.value = 7.5;
+    refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
+    refs.scatterX.value = state.scatterX; refs.scatterColor.value = state.scatterColor; refs.showContours.checked = true;
+    refs.weighting.value = state.weighting; refs.targetExpense.value = 7.5; refs.targetStaff.value = 50;
     refs.bandwidth.value = state.bandwidth; refs.bins.value = state.bins;
     refs.quantileGranularity.value = "quintiles";
-    refs.customQuantiles.value = state.customQuantiles; refs.tableSearch.value = ""; refs.showUnavailable.checked = false;
+    refs.customQuantiles.value = state.customQuantiles; refs.showUnavailable.checked = false;
     applyPreset(); configureRanges(); buildFilterMenus();
     renderAll();
   }
@@ -866,9 +1138,11 @@
 
   refs.stream.addEventListener("change", () => {
     state.stream = refs.stream.value; state.focusedId = ""; state.autoBins = true; state.showUnavailable = false;
+    if (state.stream === "combined") { state.measure = "base"; refs.measure.value = "base"; }
+    if (state.stream !== "combined" && state.weighting === "streamBalanced") { state.weighting = "equal"; refs.weighting.value = "equal"; }
     state.filters = {
-      title: new Set(), tier: new Set(), topic: new Set(), location: new Set(),
-      remoteStatus: new Set(), eaAffinity: new Set(), structure: new Set(),
+      title: null, sourceType: null, tier: null, topic: null, location: null,
+      eaAffinity: null, structure: null,
     };
     refs.showUnavailable.checked = false;
     applyPreset(); configureRanges(); buildFilterMenus(); renderAll();
@@ -881,11 +1155,15 @@
   refs.fit.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.fit = radio.value; renderAll(); } }));
   refs.weighting.addEventListener("change", () => { state.weighting = refs.weighting.value; renderAll(); });
   refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || 7.5, 1, 100) * 1_000_000; renderAll(); });
+  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || 50, 1, 1000); renderAll(); });
   refs.bandwidth.addEventListener("input", () => { state.bandwidth = Number(refs.bandwidth.value); renderAll(); });
   refs.bins.addEventListener("input", () => { state.autoBins = false; state.bins = Number(refs.bins.value); renderAll(); });
   refs.quantileGranularity.addEventListener("change", () => { state.quantileGranularity = refs.quantileGranularity.value; renderQuantiles(); });
   refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); });
-  refs.tableSearch.addEventListener("input", () => { state.search = refs.tableSearch.value; renderAll(); });
+  refs.view.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.view = radio.value; renderAll(); } }));
+  refs.scatterX.addEventListener("change", () => { state.scatterX = refs.scatterX.value; renderChart(); });
+  refs.scatterColor.addEventListener("change", () => { state.scatterColor = refs.scatterColor.value; renderChart(); });
+  refs.showContours.addEventListener("change", () => { state.showContours = refs.showContours.checked; renderChart(); });
   refs.showUnavailable.addEventListener("change", () => { state.showUnavailable = refs.showUnavailable.checked; renderTable(); });
   refs.salaryMin.addEventListener("input", () => updateRange("salary", "low"));
   refs.salaryMax.addEventListener("input", () => updateRange("salary", "high"));

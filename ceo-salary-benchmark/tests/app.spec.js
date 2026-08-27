@@ -26,8 +26,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#bin-count")).toHaveAttribute("min", "2");
   await expect(page.locator("#bin-count")).toHaveAttribute("max", "200");
   const blockAspect = await page.locator(".bar-block").first().evaluate((element) => {
-    const box = element.getBoundingClientRect();
-    return box.width / box.height;
+    return Number(element.getAttribute("width")) / Number(element.getAttribute("height"));
   });
   expect(blockAspect).toBeGreaterThan(0.5);
   expect(blockAspect).toBeLessThan(2);
@@ -41,7 +40,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(densityIsOverlay).toBe(true);
 
   await page.locator('input[name="distribution"][value="gamma"]').check();
-  await expect(page.locator("#density-legend-label")).toHaveText("Gamma density");
+  await expect(page.locator("#chart-legend")).toContainText("Gamma density");
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from the fitted gamma distribution");
   await page.locator('input[name="distribution"][value="empirical"]').check();
   await expect(page.locator(".density-line")).toHaveCount(0);
@@ -67,13 +66,25 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".bar-block")).toHaveCount(filteredN);
 
   await page.locator("#reset-settings").click();
+  await expect(page.locator("#sample-description")).toContainText("source validation");
+  await page.locator("#sample-select").selectOption("clean");
+  await expect(page.locator("#sample-description")).toContainText("structural");
+  await page.locator("#reset-settings").click();
   await page.locator('[data-filter-menu="title"] summary').click();
   const titleOptions = page.locator('[data-filter-menu="title"] .filter-options input');
-  await expect(titleOptions).toHaveCount(await titleOptions.count());
   expect(await titleOptions.evaluateAll((options) => options.every((option) => option.checked))).toBe(true);
-  await titleOptions.last().uncheck();
+  const ceoGroup = page.locator('[data-filter-menu="title"] .filter-group').filter({ has: page.locator(".filter-group-heading", { hasText: /^CEO/ }) });
+  await expect(ceoGroup).toHaveCount(1);
+  await ceoGroup.locator(".filter-group-heading").click();
+  expect(await ceoGroup.locator('input[type="checkbox"]').evaluateAll((options) => options.every((option) => !option.checked))).toBe(true);
+  await ceoGroup.locator(".filter-group-heading").click();
+  expect(await ceoGroup.locator('input[type="checkbox"]').evaluateAll((options) => options.every((option) => option.checked))).toBe(true);
+  await expect(page.locator('[data-filter-menu="title"] .filter-actions button')).toHaveText("Deselect all");
   await page.locator('[data-filter-menu="title"] .filter-actions button').click();
-  await page.locator('[data-filter-menu="title"] summary').click();
+  expect(await page.locator('[data-filter-menu="title"] .filter-options input').evaluateAll((options) => options.every((option) => !option.checked))).toBe(true);
+  await expect(page.locator("#stat-n")).toHaveText("0");
+  await expect(page.locator('[data-filter-menu="title"] .filter-actions button')).toHaveText("Select all");
+  await page.locator('[data-filter-menu="title"] .filter-actions button').click();
   expect(await page.locator('[data-filter-menu="title"] .filter-options input').evaluateAll((options) => options.every((option) => option.checked))).toBe(true);
 
   await expect(page.locator("#salary-range-min")).not.toBeVisible();
@@ -114,9 +125,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#reset-settings").click();
   await page.locator("#weighting-select").selectOption("size");
   await expect(page.locator("#size-controls")).toBeVisible();
+  await expect(page.locator("#expense-target-field")).toBeVisible();
+  await page.locator("#weighting-select").selectOption("staff");
+  await expect(page.locator("#staff-target-field")).toBeVisible();
+  await expect(page.locator("#weighting-description")).toContainText("staff count");
 
-  await page.locator("#table-search").fill("Center for AI Safety");
-  await expect(page.locator("#stat-n")).toHaveText("1");
   const cais = page.locator("tbody tr").filter({ hasText: "Center for AI Safety" });
   await expect(cais).toHaveCount(1);
   await cais.getByRole("button", { name: "Preview" }).click();
@@ -124,7 +137,6 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#dialog-evidence")).toContainText("$314,534");
   await page.locator(".dialog-close").click();
 
-  await page.locator("#table-search").fill("");
   const immigrationCouncil = page.locator("tbody tr").filter({ hasText: "American Immigration Council" });
   await expect(immigrationCouncil.locator(".organization-name")).toHaveAttribute("href", /americanimmigrationcouncil\.org/i);
   const orgCellBox = await immigrationCouncil.locator(".org-cell").boundingBox();
@@ -136,14 +148,34 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
   await page.locator("#stream-select").selectOption("jobAds");
   await expect(page.locator("#stat-n")).toHaveText("15");
-  await expect(page.locator("tbody tr").filter({ hasText: "Chief Executive Officer" })).toHaveCount(0);
-  await expect(page.locator("tbody tr").filter({ hasText: "CEO" }).first()).toBeVisible();
-  await page.locator("#table-search").fill("Healthcare Career Advancement Program");
+  await expect(page.locator("tbody tr").filter({ hasText: "Chief Executive Officer" }).first()).toBeVisible();
   const hcap = page.locator("tbody tr").filter({ hasText: "Healthcare Career Advancement Program" });
   await expect(hcap).toHaveCount(1);
   await hcap.getByRole("button", { name: "Preview" }).click();
   await expect(page.locator("#dialog-evidence")).toContainText("$150,000–$170,000");
   await page.locator(".dialog-close").click();
+
+  await page.locator("#stream-select").selectOption("combined");
+  await expect(page.locator("#measure-field")).toBeHidden();
+  await expect(page.locator("#method-note-text")).toContainText("realized pay");
+  await expect(page.locator("#stat-n")).toHaveText("125");
+  await page.locator('[data-filter-menu="sourceType"] summary').click();
+  await expect(page.locator('[data-filter-menu="sourceType"] .filter-options input')).toHaveCount(2);
+  await page.locator("#weighting-select").selectOption("streamBalanced");
+  await expect(page.locator("#weighting-description")).toContainText("half of total base influence");
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await expect(page.locator("#scatter-controls")).toBeVisible();
+  await expect(page.locator(".scatter-point")).not.toHaveCount(0);
+  await expect(page.locator(".covariance-contour")).toHaveCount(3);
+  await page.locator("#scatter-color").selectOption("sourceType");
+  await expect(page.locator("#chart-legend")).toContainText("Form 990");
+  await expect(page.locator("#chart-legend")).toContainText("Job posting");
+  await page.locator("#scatter-x").selectOption("staff");
+  await expect(page.locator("#salary-chart")).toContainText("Staff count (log scale)");
+  await page.locator("#show-contours").uncheck();
+  await expect(page.locator(".covariance-contour")).toHaveCount(0);
+  await expect(page.locator("#table-search")).toHaveCount(0);
+  await expect(page.locator('thead button[data-sort="remoteStatus"]')).toHaveCount(0);
 
   expect(errors).toEqual([]);
 });
@@ -154,6 +186,13 @@ test("desktop and narrow layouts render", async ({ page }) => {
   const desktopTooltip = await page.locator("#help-tooltip").boundingBox();
   expect(desktopTooltip.x + desktopTooltip.width).toBeLessThanOrEqual(1440);
   await page.screenshot({ path: "tmp/app-desktop.png", fullPage: true });
+  await page.locator('[data-filter-menu="title"] summary').click();
+  await page.screenshot({ path: "tmp/app-title-filter.png", fullPage: true });
+  await page.locator('[data-filter-menu="title"] summary').click();
+  await page.locator("#stream-select").selectOption("combined");
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await page.locator("#scatter-color").selectOption("sourceType");
+  await page.screenshot({ path: "tmp/app-scatter.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.reload();
   await page.locator(".info-tooltip").first().hover();

@@ -63,6 +63,22 @@ def normalize_title(value: str) -> str:
     return normalized
 
 
+def title_group(value: str) -> str:
+    """Group source-native executive titles without replacing their displayed wording."""
+    normalized = normalize_title(value).lower()
+    if normalized == "not reported":
+        return "Not reported"
+    if re.search(r"\bceo\b", normalized):
+        return "CEO"
+    if "executive director" in normalized:
+        return "Executive Director"
+    if "co-director" in normalized or "co director" in normalized:
+        return "Co-leadership"
+    if "president" in normalized:
+        return "President"
+    return "Other executive titles"
+
+
 def cache_source(source_id: str, local_path: str) -> str:
     source = BENCHMARK / local_path
     if not source.is_file():
@@ -125,7 +141,8 @@ def build_incumbents() -> list[dict]:
             "id": source_id or f"REF-{slug(text(peer['organization']))}",
             "organization": text(peer["organization"]),
             "executive": observed_name or (text(filing.get("ceo_name")) if filing else ""),
-            "title": normalize_title(raw_title),
+            "title": raw_title or "Not reported",
+            "titleGroup": title_group(raw_title),
             "rawTitle": raw_title,
             "tier": text(peer["reference_tier"]),
             "topic": text(peer["topic_cluster"]),
@@ -156,6 +173,7 @@ def build_incumbents() -> list[dict]:
             "cachedSource": cached,
             "localPath": local_path,
             "sourceType": "Form 990",
+            "evidenceStream": "incumbents",
             "homepageUrl": filing_homepage(local_path) if local_path else "",
         })
     return output
@@ -184,7 +202,8 @@ def build_job_ads() -> list[dict]:
             "id": source_id,
             "organization": text(job["organization"]),
             "executive": "",
-            "title": normalize_title(raw_title),
+            "title": raw_title or "Not reported",
+            "titleGroup": title_group(raw_title),
             "rawTitle": raw_title,
             "tier": text(job["tier"]),
             "topic": text(job["mission_operating_model"]),
@@ -216,6 +235,7 @@ def build_job_ads() -> list[dict]:
             "cachedSource": cached,
             "localPath": local_path,
             "sourceType": "Job posting",
+            "evidenceStream": "jobAds",
             "homepageUrl": "",
         })
     return output
