@@ -144,26 +144,29 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .live-stats i { font-style: normal; }
 .chart-wrap { position: relative; flex: 1; min-height: 300px; margin-top: 10px; }
 .chart-panel:has(.scatter-controls:not([hidden])) .chart-wrap { min-height: 270px; }
-.chart-panel:has(.weight-profile:not([hidden])) .chart-wrap { min-height: 220px; }
-.chart-panel:has(.weight-profile:not([hidden])) #salary-chart { min-height: 220px; }
 .scatter-controls { display: flex; justify-content: flex-end; align-items: end; gap: 9px; margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--line); }
 .scatter-controls label { color: var(--muted); font-size: 9px; }
 .scatter-controls select { display: block; min-width: 130px; margin-top: 3px; padding-block: 5px; font-size: 10px; }
 .scatter-controls .contour-toggle { display: flex; align-items: center; gap: 4px; padding-bottom: 5px; color: var(--ink); }
 .scatter-controls input { margin: 0; accent-color: var(--green); }
-.weight-profile { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
-.weight-profile-heading { display: flex; justify-content: space-between; align-items: end; gap: 12px; }
-.weight-profile-heading h3 { margin: 2px 0 0; font-size: 12px; }
-.weight-profile-heading > p { margin: 0; color: var(--muted); font-size: 9px; }
-.weight-profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 8px; margin-top: 5px; }
-.weight-profile-figure { min-width: 0; }
-.weight-profile-figure strong { display: block; color: var(--ink); font-size: 9px; }
-.weight-profile-figure span { color: var(--muted); font-size: 8px; }
-.weight-profile-figure svg { display: block; width: 100%; height: 78px; }
+.weight-profile { margin-top: 17px; padding-top: 12px; border-top: 1px solid var(--line); }
+.weight-profile-heading h3 { margin: 2px 0 0; font-size: 13px; }
+.weight-profile-heading > p:last-child { margin: 4px 0 0; color: var(--muted); font-size: 9px; line-height: 1.4; }
+.weight-profile-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 9px; }
+.weight-profile-figure { min-width: 0; padding: 8px 7px 3px; border: 1px solid var(--line); background: color-mix(in srgb, var(--green-soft), white 35%); }
+.weight-profile-figure strong { display: block; color: var(--ink); font-size: 10px; }
+.weight-profile-figure > span { display: block; min-height: 22px; margin-top: 2px; color: var(--muted); font-size: 8px; line-height: 1.35; }
+.weight-profile-figure svg { display: block; width: 100%; height: auto; margin-top: 2px; overflow: visible; }
 .weight-profile-axis { stroke: var(--line-dark); stroke-width: 1; }
+.weight-profile-grid-line { stroke: color-mix(in srgb, var(--line), white 28%); stroke-width: 1; }
 .weight-profile-curve { fill: none; stroke: var(--green); stroke-width: 2; }
 .weight-profile-target { stroke: var(--teal); stroke-width: 1; stroke-dasharray: 3 2; }
-.weight-profile-label { fill: var(--muted); font-size: 8px; }
+.weight-profile-label { fill: var(--muted); font-size: 9px; font-variant-numeric: tabular-nums; }
+.weight-profile-axis-title { fill: var(--ink); font-size: 9px; font-weight: 650; }
+.rp-scale-reference { margin-top: 9px; border: 1px solid var(--line); background: white; }
+.rp-scale-reference summary { padding: 7px 8px; color: var(--green); font-size: 9.5px; font-weight: 750; cursor: pointer; }
+.rp-scale-reference p { margin: 0; padding: 0 8px 8px; color: var(--muted); font-size: 8.5px; line-height: 1.45; }
+.rp-scale-reference a { color: var(--green); font-weight: 650; text-underline-offset: 2px; }
 #salary-chart { display: block; width: 100%; height: 100%; min-height: 330px; overflow: visible; }
 .axis text { fill: var(--muted); font-size: 10px; }
 .axis line, .axis path { stroke: var(--line-dark); }
@@ -336,7 +339,6 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
   .live-stats { justify-content: flex-start; }
   .scatter-controls { align-items: stretch; flex-direction: column; }
   .scatter-controls select { width: 100%; }
-  .weight-profile-heading { align-items: flex-start; flex-direction: column; gap: 2px; }
   .quantile-grid, .quantile-grid.is-percentiles { grid-template-columns: repeat(2, 1fr); }
   .quantile-cell { border-bottom: 1px solid var(--line); }
   .custom-quantiles { grid-template-columns: 1fr; }

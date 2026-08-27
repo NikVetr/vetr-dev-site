@@ -13,6 +13,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "CEO salary benchmark" })).toBeVisible();
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
   await expect(page.locator("#stat-n")).toHaveText("110");
   await expect(page.locator(".bar-block")).toHaveCount(110);
   await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
@@ -142,11 +143,25 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#size-controls")).toBeVisible();
   await expect(page.locator("#expense-target-field")).toBeVisible();
   await expect(page.locator("#weight-profile")).toBeVisible();
+  await expect(page.locator(".settings-panel > #weight-profile")).toHaveCount(1);
+  await expect(page.locator(".chart-panel #weight-profile")).toHaveCount(0);
   await expect(page.locator(".weight-profile-curve")).toHaveCount(1);
+  await expect(page.locator("#rp-scale-reference")).toBeVisible();
+  await expect(page.locator("#rp-scale-reference")).toContainText("$20.38M consolidated expenses");
   await page.locator('#weighting-components input[value="staff"]').check();
   await expect(page.locator("#staff-target-field")).toBeVisible();
+  await expect(page.locator("#target-staff")).toHaveValue("57");
   await expect(page.locator("#expense-target-field")).toBeVisible();
   await expect(page.locator(".weight-profile-curve")).toHaveCount(2);
+  await expect(page.locator(".weight-profile-axis-title")).toHaveCount(4);
+  await expect(page.locator(".weight-profile-x-tick")).toHaveCount(8);
+  await expect(page.locator(".weight-profile-y-tick")).toHaveCount(8);
+  await expect(page.locator("#weight-profile")).toContainText("Annual expenses (USD, log scale)");
+  await expect(page.locator("#weight-profile")).toContainText("Relative multiplier");
+  const expenseCurveBefore = await page.locator(".weight-profile-curve").first().getAttribute("d");
+  await page.locator("#expense-bandwidth").fill("1.2");
+  await expect(page.locator(".weight-profile-figure").first()).toContainText("bandwidth 1.20");
+  expect(await page.locator(".weight-profile-curve").first().getAttribute("d")).not.toBe(expenseCurveBefore);
   await expect(page.locator("#weighting-description")).toContainText("Expense similarity × Staff similarity");
   await page.locator('#weighting-components input[value="tier"]').check();
   await expect(page.locator("#discrete-weight-editors")).toBeVisible();
@@ -218,6 +233,7 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await page.locator('#weighting-components input[value="size"]').check();
   await page.locator('#weighting-components input[value="staff"]').check();
   await page.screenshot({ path: "tmp/app-weighting.png", fullPage: true });
+  await page.locator("#weight-profile").screenshot({ path: "tmp/app-weighting-curves.png" });
   await page.locator("#reset-settings").click();
   await page.locator("#stream-select").selectOption("combined");
   await page.locator('input[name="chart-view"][value="scatter"]').check();

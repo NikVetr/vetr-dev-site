@@ -24,7 +24,7 @@
     weightings: new Set(),
     discreteWeights: {},
     targetExpense: 7_500_000,
-    targetStaff: 50,
+    targetStaff: 57,
     expenseBandwidth: 0.7,
     staffBandwidth: 0.7,
     recencyHalfLife: 4,
@@ -74,7 +74,7 @@
     binField: $("#bin-field"), bins: $("#bin-count"), binValue: $("#bin-value"),
     view: [...document.querySelectorAll('input[name="chart-view"]')], scatterControls: $("#scatter-controls"),
     scatterX: $("#scatter-x"), chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
-    weightProfile: $("#weight-profile"), weightProfileGrid: $("#weight-profile-grid"),
+    weightProfile: $("#weight-profile"), weightProfileGrid: $("#weight-profile-grid"), rpScaleReference: $("#rp-scale-reference"),
     reset: $("#reset-settings"), chart: $("#salary-chart"), chartWrap: $("#chart-wrap"),
     tooltip: $("#chart-tooltip"), chartKicker: $("#chart-kicker"), chartTitle: $("#chart-title"),
     statN: $("#stat-n"), statNUnit: $("#stat-n-unit"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
@@ -1138,58 +1138,88 @@
   function renderWeightProfiles() {
     const keys = ["comparability", "size", "staff", "recency"].filter((key) => state.weightings.has(key));
     refs.weightProfile.hidden = !keys.length;
+    refs.rpScaleReference.hidden = !keys.some((key) => key === "size" || key === "staff");
     refs.weightProfileGrid.replaceChildren();
     keys.forEach((key) => {
       let values;
       let format;
       let logarithmic = false;
       let parameter;
+      let axisTitle;
       if (key === "comparability") {
         values = [0, 100]; format = (value) => value.toFixed(0); parameter = "Score ÷ 75, capped at 0.25–1.75";
+        axisTitle = "Match score (0–100)";
       } else if (key === "size") {
         values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
         parameter = `Target ${compactMoney(state.targetExpense)} · bandwidth ${state.expenseBandwidth.toFixed(2)}`;
+        axisTitle = "Annual expenses (USD, log scale)";
       } else if (key === "staff") {
         values = rows().map((row) => row.staff).filter((value) => value > 0); format = (value) => Math.round(value).toLocaleString(); logarithmic = true;
         parameter = `Target ${state.targetStaff.toLocaleString()} · bandwidth ${state.staffBandwidth.toFixed(2)}`;
+        axisTitle = "Staff count (log scale)";
       } else {
         values = rows().map((row) => row.compensationYear).filter((value) => value > 0); format = (value) => value.toFixed(0);
         parameter = `${state.recencyHalfLife.toFixed(1)}-year half-life`;
+        axisTitle = "Evidence year";
       }
       if (!values.length) return;
       const rawMin = Math.min(...values); const rawMax = Math.max(...values);
       const domainMin = logarithmic ? Math.log(rawMin) : rawMin;
       const domainMax = logarithmic ? Math.log(rawMax) : rawMax;
-      const width = 220; const height = 78; const margin = { top: 5, right: 5, bottom: 17, left: 24 };
+      const domainSpan = Math.max(domainMax - domainMin, 1);
+      const width = 220; const height = 140; const margin = { top: 7, right: 8, bottom: 38, left: 43 };
       const innerWidth = width - margin.left - margin.right; const innerHeight = height - margin.top - margin.bottom;
       const samples = Array.from({ length: 81 }, (_, index) => {
-        const transformed = domainMin + (index / 80) * Math.max(domainMax - domainMin, 1);
+        const transformed = domainMin + (index / 80) * domainSpan;
         const value = logarithmic ? Math.exp(transformed) : transformed;
         return { value, weight: componentResponse(key, value), x: margin.left + (index / 80) * innerWidth };
       });
-      const maxWeight = Math.max(1, ...samples.map((sample) => sample.weight)) * 1.03;
+      const maxWeight = Math.max(1, ...samples.map((sample) => sample.weight)) * 1.08;
       const y = (weight) => margin.top + innerHeight - (weight / maxWeight) * innerHeight;
       const figure = document.createElement("div"); figure.className = "weight-profile-figure";
       const title = document.createElement("strong"); title.textContent = WEIGHT_LABELS[key];
       const description = document.createElement("span"); description.textContent = parameter;
       const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]} relative weight-response curve` });
+      const xTicks = Array.from({ length: 4 }, (_, index) => {
+        const ratio = index / 3;
+        const transformed = domainMin + ratio * domainSpan;
+        return { ratio, value: logarithmic ? Math.exp(transformed) : transformed };
+      });
+      const yTicks = Array.from({ length: 4 }, (_, index) => (index / 3) * maxWeight);
+      yTicks.forEach((tick) => {
+        const tickY = y(tick);
+        svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: tickY, y2: tickY, class: "weight-profile-grid-line" }));
+        const label = svgElement("text", { x: margin.left - 5, y: tickY + 3, "text-anchor": "end", class: "weight-profile-label weight-profile-y-tick" });
+        label.textContent = tick < 0.05 ? "0" : tick.toFixed(1); svg.append(label);
+      });
+      xTicks.forEach(({ ratio, value }, index) => {
+        const tickX = margin.left + ratio * innerWidth;
+        svg.append(svgElement("line", { x1: tickX, x2: tickX, y1: margin.top + innerHeight, y2: margin.top + innerHeight + 4, class: "weight-profile-axis" }));
+        const label = svgElement("text", {
+          x: tickX, y: margin.top + innerHeight + 14,
+          "text-anchor": index === 0 ? "start" : index === xTicks.length - 1 ? "end" : "middle",
+          class: "weight-profile-label weight-profile-x-tick",
+        });
+        label.textContent = format(value); svg.append(label);
+      });
       svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: margin.top + innerHeight, y2: margin.top + innerHeight, class: "weight-profile-axis" }));
       svg.append(svgElement("line", { x1: margin.left, x2: margin.left, y1: margin.top, y2: margin.top + innerHeight, class: "weight-profile-axis" }));
-      const path = samples.map((sample, index) => `${index ? "L" : "M"}${sample.x.toFixed(2)},${y(sample.weight).toFixed(2)}`).join("");
-      svg.append(svgElement("path", { d: path, class: "weight-profile-curve" }));
       const target = key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : key === "recency" ? rawMax : null;
       if (target != null && target >= rawMin && target <= rawMax) {
         const targetPosition = logarithmic ? Math.log(target) : target;
-        const targetX = margin.left + ((targetPosition - domainMin) / Math.max(domainMax - domainMin, 1)) * innerWidth;
+        const targetX = margin.left + ((targetPosition - domainMin) / domainSpan) * innerWidth;
         svg.append(svgElement("line", { x1: targetX, x2: targetX, y1: margin.top, y2: margin.top + innerHeight, class: "weight-profile-target" }));
       }
-      [[margin.left, rawMin, "start"], [width - margin.right, rawMax, "end"]].forEach(([x, value, anchor]) => {
-        const label = svgElement("text", { x, y: height - 3, "text-anchor": anchor, class: "weight-profile-label" });
-        label.textContent = format(value); svg.append(label);
+      const path = samples.map((sample, index) => `${index ? "L" : "M"}${sample.x.toFixed(2)},${y(sample.weight).toFixed(2)}`).join("");
+      svg.append(svgElement("path", { d: path, class: "weight-profile-curve" }));
+      const xTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 2, "text-anchor": "middle", class: "weight-profile-axis-title" });
+      xTitle.textContent = axisTitle;
+      const yTitle = svgElement("text", {
+        x: 10, y: margin.top + innerHeight / 2, transform: `rotate(-90 10 ${margin.top + innerHeight / 2})`,
+        "text-anchor": "middle", class: "weight-profile-axis-title",
       });
-      const zero = svgElement("text", { x: margin.left - 3, y: margin.top + innerHeight + 2, "text-anchor": "end", class: "weight-profile-label" }); zero.textContent = "0";
-      const peak = svgElement("text", { x: margin.left - 3, y: margin.top + 3, "text-anchor": "end", class: "weight-profile-label" }); peak.textContent = maxWeight.toFixed(1);
-      svg.append(zero, peak); figure.append(title, description, svg); refs.weightProfileGrid.append(figure);
+      yTitle.textContent = "Relative multiplier";
+      svg.append(xTitle, yTitle); figure.append(title, description, svg); refs.weightProfileGrid.append(figure);
     });
   }
 
@@ -1241,7 +1271,7 @@
   function reset() {
     Object.assign(state, {
       stream: "incumbents", measure: "base", sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
-      targetExpense: 7_500_000, targetStaff: 50, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
+      targetExpense: 7_500_000, targetStaff: 57, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95",
       sortKey: "organization", sortDirection: "asc",
@@ -1263,7 +1293,7 @@
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
     refs.scatterX.value = state.scatterX; refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
-    refs.targetExpense.value = 7.5; refs.targetStaff.value = 50;
+    refs.targetExpense.value = 7.5; refs.targetStaff.value = 57;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.quantileGranularity.value = "quintiles";
     refs.customQuantiles.value = state.customQuantiles; refs.showUnavailable.checked = false;
@@ -1296,7 +1326,7 @@
     renderWeightControls(); renderAll();
   }));
   refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || 7.5, 1, 100) * 1_000_000; renderAll(); });
-  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || 50, 1, 1000); renderAll(); });
+  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || 57, 1, 1000); renderAll(); });
   refs.expenseBandwidth.addEventListener("input", () => { state.expenseBandwidth = Number(refs.expenseBandwidth.value); renderAll(); });
   refs.staffBandwidth.addEventListener("input", () => { state.staffBandwidth = Number(refs.staffBandwidth.value); renderAll(); });
   refs.recencyHalfLife.addEventListener("input", () => { state.recencyHalfLife = Number(refs.recencyHalfLife.value); renderAll(); });
