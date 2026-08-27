@@ -8,6 +8,7 @@ import shutil
 import re
 from datetime import datetime, timezone
 from pathlib import Path
+from xml.etree import ElementTree
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,6 +72,23 @@ def cache_source(source_id: str, local_path: str) -> str:
     destination = EVIDENCE_DIR / f"{slug(source_id)}{suffix}"
     shutil.copy2(source, destination)
     return str(destination.relative_to(ROOT))
+
+
+def filing_homepage(local_path: str) -> str:
+    source = BENCHMARK / local_path
+    if not source.is_file() or source.suffix.lower() != ".xml":
+        return ""
+    try:
+        root = ElementTree.parse(source).getroot()
+    except ElementTree.ParseError:
+        return ""
+    for element in root.iter():
+        if element.tag.rsplit("}", 1)[-1] == "WebsiteAddressTxt" and text(element.text):
+            value = text(element.text)
+            if value.lower() in {"n/a", "none", "not applicable"}:
+                return ""
+            return value if value.lower().startswith(("http://", "https://")) else f"https://{value}"
+    return ""
 
 
 def build_incumbents() -> list[dict]:
@@ -138,6 +156,7 @@ def build_incumbents() -> list[dict]:
             "cachedSource": cached,
             "localPath": local_path,
             "sourceType": "Form 990",
+            "homepageUrl": filing_homepage(local_path) if local_path else "",
         })
     return output
 
@@ -197,6 +216,7 @@ def build_job_ads() -> list[dict]:
             "cachedSource": cached,
             "localPath": local_path,
             "sourceType": "Job posting",
+            "homepageUrl": "",
         })
     return output
 

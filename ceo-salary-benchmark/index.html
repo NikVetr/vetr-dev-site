@@ -96,12 +96,6 @@
         <input id="bin-count" type="range" min="2" max="200" step="1" value="20">
       </label>
 
-      <fieldset class="toggle-group">
-        <legend>Display</legend>
-        <label><input id="show-rug" type="checkbox" checked> Salary rug <button class="info-tooltip" type="button" aria-label="About the salary rug" data-tooltip="Short marks along the horizontal axis show every included salary's exact position, including observations that overlap inside the same bin.">?</button></label>
-        <label><input id="show-reference" type="checkbox" checked> RP judgment band <button class="info-tooltip" type="button" aria-label="About the RP judgment band" data-tooltip="A contextual compensation range carried over from the benchmark's board-facing judgment scenarios. It is not a fitted confidence interval.">?</button></label>
-      </fieldset>
-
       <div class="method-note">
         <strong>Interpretation</strong>
         <p>Empirical, lognormal, and gamma summaries describe the selected convenience sample. They are sensitivity tools—not population estimates.</p>
@@ -131,7 +125,6 @@
           <span><i class="swatch tier-b"></i> Tier B</span>
           <span><i class="swatch tier-c"></i> Tier C / expanded</span>
           <span id="density-legend"><i class="line-swatch"></i> <b id="density-legend-label">Lognormal density</b></span>
-          <span><i class="band-swatch"></i> RP judgment range</span>
           <span><i class="rug-swatch"></i> Individual salaries</span>
         </div>
       </section>
@@ -141,6 +134,7 @@
           <div>
             <p class="section-label">Current weighted distribution</p>
             <h2 id="quantile-title">Quantiles</h2>
+            <p id="quantile-basis" class="quantile-basis">Derived from the fitted lognormal distribution</p>
           </div>
           <label class="inline-select">Breaks <button class="info-tooltip" type="button" aria-label="About quantile breaks" data-tooltip="Choose standard fifths, tenths, every percentile, or enter your own percentile levels. Values use the selected empirical or fitted distribution.">?</button>
             <select id="quantile-granularity">
@@ -177,6 +171,22 @@
         <span id="show-unavailable-label">Show rows without this salary measure</span>
         <button class="info-tooltip" type="button" aria-label="About unavailable observations" data-tooltip="These organizations are part of the peer universe but have no validated value for the currently selected compensation measure, so they cannot affect the histogram.">?</button>
       </label>
+      <div class="range-filters" aria-label="Numeric filters">
+        <section class="range-filter" data-range-filter="salary">
+          <div><span>Salary range <button class="info-tooltip" type="button" aria-label="About salary filtering" data-tooltip="Include only rows whose selected compensation value falls between the two handles. This filter also updates the histogram, fitted curve, statistics, and quantiles.">?</button></span><output id="salary-range-value">All</output></div>
+          <div class="dual-range">
+            <input id="salary-range-min" type="range" aria-label="Minimum salary">
+            <input id="salary-range-max" type="range" aria-label="Maximum salary">
+          </div>
+        </section>
+        <section class="range-filter" data-range-filter="expenses">
+          <div><span>Expense range <button class="info-tooltip" type="button" aria-label="About expense filtering" data-tooltip="Include only organizations whose annual expenses fall between the handles. The slider uses a logarithmic scale so both small and large nonprofits remain adjustable.">?</button></span><output id="expense-range-value">All</output></div>
+          <div class="dual-range">
+            <input id="expense-range-min" type="range" min="0" max="1000" step="1" aria-label="Minimum expenses">
+            <input id="expense-range-max" type="range" min="0" max="1000" step="1" aria-label="Maximum expenses">
+          </div>
+        </section>
+      </div>
       <div class="table-scroll" tabindex="0">
         <table id="organization-table">
           <thead>
@@ -189,6 +199,12 @@
               <th><button type="button" data-sort="weight">Weight</button></th>
               <th><button type="button" data-sort="tier">Tier</button></th>
               <th><button type="button" data-sort="topic">Topic / model</button></th>
+              <th><button type="button" data-sort="location">Location</button></th>
+              <th><button type="button" data-sort="remoteStatus">Work model</button></th>
+              <th><button type="button" data-sort="staff">Staff</button></th>
+              <th><button type="button" data-sort="eaAffinity">EA relation</button></th>
+              <th><button type="button" data-sort="structure">Structure</button></th>
+              <th><button type="button" data-sort="compensationYear">Year</button></th>
               <th>Source preview</th>
               <th>Source</th>
             </tr>
@@ -201,6 +217,12 @@
               <th></th>
               <th><div class="filter-menu" data-filter-menu="tier"></div></th>
               <th><div class="filter-menu" data-filter-menu="topic"></div></th>
+              <th><div class="filter-menu" data-filter-menu="location"></div></th>
+              <th><div class="filter-menu" data-filter-menu="remoteStatus"></div></th>
+              <th></th>
+              <th><div class="filter-menu" data-filter-menu="eaAffinity"></div></th>
+              <th><div class="filter-menu" data-filter-menu="structure"></div></th>
+              <th></th>
               <th></th>
               <th></th>
             </tr>
@@ -229,6 +251,17 @@
       </div>
     </form>
   </dialog>
+
+  <div id="help-tooltip" class="help-tooltip" role="tooltip" hidden></div>
+  <aside id="organization-preview" class="organization-preview" aria-live="polite" hidden>
+    <strong id="organization-preview-title"></strong>
+    <p id="organization-preview-local"></p>
+    <p id="organization-preview-wikipedia"></p>
+    <div>
+      <a id="organization-preview-homepage" href="#" target="_blank" rel="noopener noreferrer">Filing-declared website ↗</a>
+      <a id="organization-preview-wiki" href="#" target="_blank" rel="noopener noreferrer">Wikipedia search ↗</a>
+    </div>
+  </aside>
 
   <script src="app-data.js"></script>
   <script src="app.js"></script>
