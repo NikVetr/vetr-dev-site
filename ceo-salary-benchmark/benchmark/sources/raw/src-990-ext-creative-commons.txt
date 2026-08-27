@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Creative Commons
+ein: 04-3585301
+source_wave: extension2
+peer_tier: Tier B weighted secondary
+ea_affinity: EA-adjacent
+comparability_score: 88.0
+ceo_name: Anna Tumadottir
+ceo_title: Chief Executive Officer
+top_executive_basis: Explicit CEO
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-13
+irs_object_id: 202543179349306294
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202543179349306294_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/043585301
+part_vii_org: 230000.0
+part_vii_related: 0.0
+part_vii_other: 24431.0
+cash_proxy: 230000.0
+total_proxy: 254431.0
+schedule_j_base: 
+revenue: 2439364.0
+expenses: 3912384.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: below_primary_scale_global_network
+analysis_status: primary
+exclusion_reason: 
+notes: Open knowledge and digital public-goods organization; below RP core scale and operates through a global network.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn807748view2.
+source_id: SRC-990-EXT-CREATIVE-COMMONS
+part_vii_org_jul2026: 244832.24086714385
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 26006.506420109527
+cash_proxy_jul2026: 244832.24086714385
+total_proxy_jul2026: 270838.7472872534
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 1.069572506286672

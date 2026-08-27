@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Center for Effective Philanthropy
+ein: 04-3523528
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 87.0
+ceo_name: Phil Buchanan
+ceo_title: President
+top_executive_basis: top organization-wide executive
+tax_period_begin: 2025-01-01
+tax_period_end: 2025-12-31
+compensation_calendar_year: 2025.0
+filing_date: 2026-07-22
+irs_object_id: 202602039349300145
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202602039349300145_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/43523528
+part_vii_org: 636356.0
+part_vii_related: 0.0
+part_vii_other: 64664.0
+cash_proxy: 636356.0
+total_proxy: 701020.0
+schedule_j_base: 
+revenue: 18084378.0
+expenses: 15868358.0
+employee_count: 74.0
+full_year_status: yes
+founder_flag: no
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: Latest filing filed before Aug. 17, 2026 cutoff.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest 2025 filing table
+source_id: SRC-990-EXT-CENTER-FOR-EFFECTIVE-PHILANTHROPY
+part_vii_org_jul2026: 660025.9139288632
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 67069.24378539059
+cash_proxy_jul2026: 660025.9139288632
+total_proxy_jul2026: 727095.1577142539
+schedule_j_base_jul2026: 
+cpi_factor: 1.0371960253833754
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 1.0574182732606872

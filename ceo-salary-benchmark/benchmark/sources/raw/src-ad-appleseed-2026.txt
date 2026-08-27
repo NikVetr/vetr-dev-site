@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-APPLESEED-2026
+organization: Appleseed Foundation
+role_title: Executive Director
+posting_date: 2026-06-29
+closing_date: 
+salary_min: 120000
+salary_max: 155000
+currency: USD
+salary_is_base: yes
+salary_text: $120,000-$155,000 annually
+location: United States
+remote_status: Fully remote
+geographic_restrictions: United States
+mission_operating_model: National justice-policy network and hub supporting 20 independent centers with research, advocacy, and pro bono collaboration.
+annual_budget_or_expense: 
+scale_measure: not reported in accessible posting
+scale_year: 
+staff_count: 
+responsibilities: Strategy, fundraising, network leadership, operations, communications, people management, and board relations.
+reporting_relationship: Board of Directors
+original_url: https://remoteimpact.org/jobs/executive-director-appleseed-foundation/
+resolved_url: https://remoteimpact.org/jobs/executive-director-appleseed-foundation/
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: complete third-party copy
+archive_path: sources/raw/src-ad-appleseed-2026.txt
+tier: expanded_secondary_scale_unknown
+included_in_quantitative_analysis: yes
+inclusion_reason: National remote organization-wide ED with research/network scope; scale unavailable and legal-network structure differs.
+exclusion_reason: 
+evidence_quality_notes: Complete mirror; no accessible budget or staff figure.
+source_line_refs: turn970460view2 lines 28-81
+cpi_period: 2026-06
+cpi_basis_note: Posting month CPI.

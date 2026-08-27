@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Mercy For Animals
+reference_tier: B
+tier_label: Tier B weighted secondary
+selection_wave: first expansion
+topic_cluster: Animal welfare and food systems
+ea_affinity: EA-adjacent
+country_or_region: US/international
+expected_structure: independent nonprofit
+ein: 54-2076145
+revenue: 23344663.0
+expenses: 23908480.0
+employee_count: 133.0
+comparability_score: 72.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 207659.255287485
+total_proxy_jul2026: 215410.85693093957
+ceo_title: Chief Executive Officer
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/542076145
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202502259349301135_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/mercy-for-animals%2C542076145/
+prior_scale_source_type: Public Form 990 rendering (Cause IQ or ProPublica)
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Topical match; advocacy/campaign structure and staff are above RP core but inside wider band.
+prior_function_score: 16.0
+prior_expense_score: 20.0
+prior_staff_score: 12.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

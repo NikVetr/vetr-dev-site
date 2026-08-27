@@ -1,0 +1,14 @@
+SOURCE-COMPLETE RELEASE GATE TEST
+=================================
+Packager return code: 2
+Prohibited partial ZIP exists: False
+Fail-closed behavior passed: True
+
+Packager stderr:
+Ignoring wrong pointing object 7 0 (offset 0)
+Ignoring wrong pointing object 21 0 (offset 0)
+Ignoring wrong pointing object 28 0 (offset 0)
+REFUSING TO PACKAGE: source-completeness validation failed.
+See /home/nikgvetr/repos/vetr-dev-site/ceo-salary-benchmark/benchmark/analysis/source_completeness/source_completeness_validation.txt
+
+STATUS: PASS

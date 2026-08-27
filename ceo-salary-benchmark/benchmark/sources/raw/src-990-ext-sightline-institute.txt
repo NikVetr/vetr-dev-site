@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Sightline Institute
+ein: 52-1833599
+source_wave: extension2
+peer_tier: Tier B weighted secondary
+ea_affinity: functional-only
+comparability_score: 82.0
+ceo_name: Alan Durning
+ceo_title: Executive Director
+top_executive_basis: Explicit Executive Director
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-08-12
+irs_object_id: 202522249349300332
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202522249349300332_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521833599
+part_vii_org: 198548.0
+part_vii_related: 0.0
+part_vii_other: 29398.0
+cash_proxy: 198548.0
+total_proxy: 227946.0
+schedule_j_base: 
+revenue: 2520867.0
+expenses: 3249823.0
+employee_count: 
+full_year_status: yes
+founder_flag: yes
+structure_flag: below_primary_scale_regional
+analysis_status: primary
+exclusion_reason: 
+notes: Research and policy institute with strong functional similarity but smaller and regionally focused.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn805570view0.
+source_id: SRC-990-EXT-SIGHTLINE-INSTITUTE
+part_vii_org_jul2026: 211351.9641725638
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 31293.81833483606
+cash_proxy_jul2026: 211351.9641725638
+total_proxy_jul2026: 242645.78250739988
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.9966471081307628

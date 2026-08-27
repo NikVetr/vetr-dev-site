@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: TechCongress
+reference_tier: B
+tier_label: Tier B weighted secondary
+selection_wave: third expansion / filing verification
+topic_cluster: technology policy and talent
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 81-1839685
+revenue: 7320089.0
+expenses: 3725264.0
+employee_count: 
+comparability_score: 87.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 267279.1925651436
+total_proxy_jul2026: 304837.09784030094
+ceo_title: Executive Director / Board Secretary
+compensation_year: 2025.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/811839685
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202621959349301032_public.xml
+selection_note: Added by the third-expansion freeze and retained after role/scale/title verification; pay did not determine selection.

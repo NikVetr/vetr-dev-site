@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: New Harvest
+reference_tier: C
+tier_label: Tier C broad sensitivity
+selection_wave: first expansion
+topic_cluster: Animal welfare and food systems
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 20-1425438
+revenue: 797070.0
+expenses: 976255.0
+employee_count: 3.0
+comparability_score: 56.0
+selection_status: selected quantitative reference organization
+compensation_observation: not collected/clean observation unavailable
+cash_proxy_jul2026: 
+total_proxy_jul2026: 
+ceo_title: 
+compensation_year: 
+propublica_url: 
+official_irs_url: 
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/new-harvest%2C201425438/
+prior_scale_source_type: Public Form 990 rendering (Cause IQ or ProPublica)
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Research/field-building function is relevant but far below scale.
+prior_function_score: 27.0
+prior_expense_score: 5.0
+prior_staff_score: 0.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

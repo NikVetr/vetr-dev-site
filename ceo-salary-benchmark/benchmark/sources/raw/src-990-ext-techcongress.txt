@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: TechCongress
+ein: 81-1839685
+source_wave: extension3
+peer_tier: Tier B weighted secondary
+ea_affinity: EA-adjacent
+comparability_score: 87.0
+ceo_name: Travis Moore
+ceo_title: Executive Director / Board Secretary
+top_executive_basis: Organization-wide Executive Director; board president is unpaid
+tax_period_begin: 2025-01-01
+tax_period_end: 2025-12-31
+compensation_calendar_year: 2025.0
+filing_date: 2026-07-14
+irs_object_id: 202621959349301032
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202621959349301032_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/811839685
+part_vii_org: 257694.0
+part_vii_related: 0.0
+part_vii_other: 36211.0
+cash_proxy: 257694.0
+total_proxy: 293905.0
+schedule_j_base: 
+revenue: 7320089.0
+expenses: 3725264.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: Technology-policy talent and capacity-building nonprofit; current filing is below Tier A expense band but has a national executive scope.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table and XML link; browser source turn568961view0 lines 21-89.
+source_id: SRC-990-EXT-TECHCONGRESS
+part_vii_org_jul2026: 267279.1925651436
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 37557.905275157405
+cash_proxy_jul2026: 267279.1925651436
+total_proxy_jul2026: 304837.09784030094
+schedule_j_base_jul2026: 
+cpi_factor: 1.0371960253833754
+tier_group: B
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 1.0574182732606872

@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Fresh Energy
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: third expansion / filing verification
+topic_cluster: climate and evidence
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 41-1735501
+revenue: 7134049.0
+expenses: 7006749.0
+employee_count: 
+comparability_score: 87.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 253476.94794576152
+total_proxy_jul2026: 276996.8103890639
+ceo_title: Executive Director
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/411735501
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202513169349301031_public.xml
+selection_note: Added by the third-expansion freeze and retained after role/scale/title verification; pay did not determine selection.

@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-AD-TAC-2026
+Organization: Technical Assistance Collaborative
+Document type: CEO/ED recruitment advertisement
+Original URL: https://www.nonprofitoperations.com/job-submissions/chief-executive-officer-/technical-assistance-collaborative
+Resolved URL: https://www.nonprofitoperations.com/job-submissions/chief-executive-officer-/technical-assistance-collaborative
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: recruiter/job portal
+Browser/source references: turn128878view0 L18-L21; L59-L75; L91-L121; L192-L203
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+The listing was posted June 1, 2026. TAC is a national nonprofit consulting organization with 43 staff and approximately $14 million annual revenue. The CEO has full managerial and administrative oversight, strategy, revenue generation, infrastructure, culture, board development, and external ambassador responsibilities. The detailed compensation section states a starting salary range of $240,000 to $300,000. A page header separately displays $291K-$310K; the detailed body is used and the conflict is preserved.

@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-IRS-BULK
+Organization: Internal Revenue Service
+Document type: TEOS bulk filing index
+Original URL: https://www.irs.gov/charities-non-profits/form-990-series-downloads
+Resolved URL: https://www.irs.gov/charities-non-profits/form-990-series-downloads
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: original
+Browser/source references: turn670263view0
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Official IRS page provides annual bulk e-file XML ZIP indexes. Network/runtime access prevented retrieval of the relevant ZIP members; object IDs and XML member names are retained.

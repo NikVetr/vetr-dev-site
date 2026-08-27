@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-CEA
+Organization: Center for Effective Altruism / legal host
+Document type: Form 990 filing-derived snapshot
+Original URL: not established
+Resolved URL: not established
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: unsuccessful entity-resolution search
+EIN: not established
+IRS object ID: not established
+Tax period:  to 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Center for Effective Altruism / legal host
+EIN: not established
+IRS object ID: not established
+Tax period:  to 
+Filing date: 
+Top-executive record:  - 
+Full-year status: not established
+Part VII reportable compensation from organization: 
+Related organizations: 
+Part VII other compensation: 
+Cash/reportable proxy: 
+Filing total proxy: 
+Revenue: 
+Expenses: 
+Tier/status: excluded_structure / excluded
+Exclusion reason: No clean one-to-one mapping between public operating organization, legal filing entity, and organization-wide CEO was established.
+Notes: Search logged; no compensation observation used.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

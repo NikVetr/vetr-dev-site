@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Economic Innovation Group
+ein: 46-2450336
+source_wave: extension3
+peer_tier: Tier B weighted secondary
+ea_affinity: functional-only
+comparability_score: 86.0
+ceo_name: John Lettieri
+ceo_title: President and CEO
+top_executive_basis: Organization-wide President and CEO
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-17
+irs_object_id: 202513219349307891
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202513219349307891_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/462450336
+part_vii_org: 479718.0
+part_vii_related: 0.0
+part_vii_other: 55589.0
+cash_proxy: 479718.0
+total_proxy: 535307.0
+schedule_j_base: 
+revenue: 5679893.0
+expenses: 5806034.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: 501c4_and_first_class_travel_disclosed
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: Economic-policy research organization and close-scale comparator. Retained despite high compensation under the no-pay-driven-removal rule; 501(c)(4) status and travel disclosure are labeled.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table and XML link; browser source turn518192view0 lines 29-100.
+source_id: SRC-990-EXT-ECONOMIC-INNOVATION-GROUP
+part_vii_org_jul2026: 510654.05619262834
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 59173.82364158112
+cash_proxy_jul2026: 510654.05619262834
+total_proxy_jul2026: 569827.8798342095
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 1.0452640402347024

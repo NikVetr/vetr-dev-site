@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Council on Strategic Risks
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: first expansion
+topic_cluster: AI, catastrophic risk, biosecurity, and technology policy
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 82-3106472
+revenue: 6445581.0
+expenses: 5184309.0
+employee_count: 23.0
+comparability_score: 90.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 270708.162625061
+total_proxy_jul2026: 287324.04295170266
+ceo_title: Chief Executive Officer
+compensation_year: 2025.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/823106472
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202601119349300825_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/the-council-on-strategic-risks%2C823106472/
+prior_scale_source_type: Cause IQ filing profile (IRS-derived)
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Close match on research/policy model and operating expenses; staff count is just below RP main band but well within the expanded band.
+prior_function_score: 29.0
+prior_expense_score: 25.0
+prior_staff_score: 12.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

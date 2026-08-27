@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-BLS-CPI-JUL26
+Organization: U.S. Bureau of Labor Statistics
+Document type: CPI table
+Original URL: https://www.bls.gov/news.release/cpi.t01.htm
+Resolved URL: https://www.bls.gov/news.release/cpi.t01.htm
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: original
+Browser/source references: turn382256view1 L173-L200; L244
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Official BLS Table 1 for July 2026 identifies CPI-U, U.S. city average, all items, not seasonally adjusted. All-items index: June 2026 333.952; July 2026 333.918. Last modified August 12, 2026.

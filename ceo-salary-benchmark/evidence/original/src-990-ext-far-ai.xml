@@ -1,0 +1,698 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2024v5.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-11-14T08:12:53-00:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>821650312</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>Alta CPA Group</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>59 Franklin St 2nd Floor</AddressLine1Txt>
+        <CityNm>Annapolis</CityNm>
+        <StateAbbreviationCd>MD</StateAbbreviationCd>
+        <ZIPCd>21401</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>920692207</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>FAR AI INC</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>FARA</BusinessNameControlTxt>
+      <PhoneNum>7074353451</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>501 W BROADWAY STE 1540</AddressLine1Txt>
+        <CityNm>SAN DIEGO</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>92101</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>ADAM GLEAVE</PersonNm>
+      <PersonTitleTxt>CEO AND PRESIDENT</PersonTitleTxt>
+      <PhoneNum>7074353451</PhoneNum>
+      <SignatureDt>2025-11-14</SignatureDt>
+      <DiscussWithPaidPreparerInd>true</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>Jeffrey Griffith</PreparerPersonNm>
+      <PTIN>P01081433</PTIN>
+      <PhoneNum>4103495101</PhoneNum>
+      <PreparationDt>2025-11-14</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="7">
+    <IRS990 documentId="990" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <AddressChangeInd>X</AddressChangeInd>
+      <PrincipalOfficerNm>ADAM GLEAVE</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>501 W BROADWAY STE 1540</AddressLine1Txt>
+        <CityNm>SAN DIEGO</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>92101</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>24293765</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>false</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>HTTPS://FAR.AI/</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2022</FormationYr>
+      <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>FOUNDED IN 2022, FAR.AI, INC. IS A CALIFORNIA NON-PROFIT DEDICATED TO MAKING ADVANCED AI SAFE AND BENEFICIAL FOR EVERYONE. FAR.AI CONDUCTS AND SUPPORTS TECHNICAL AI RESEARCH, CONTINUED ON SCH O</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>3</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>2</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>22</TotalEmployeeCnt>
+      <TotalVolunteersCnt>17</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <PYContributionsGrantsAmt>7648387</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>23254628</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>339412</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>429091</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>86470</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>610046</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>2045</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>0</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>8076314</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>24293765</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>45000</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>1460000</CYGrantsAndSimilarPaidAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>932868</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>2264469</CYSalariesCompEmpBnftPaidAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>0</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>1823030</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>4878527</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>2800898</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>8602996</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>5275416</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>15690769</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>7724375</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>23022514</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>955277</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>562647</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>6769098</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>22459867</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>FOUNDED IN 2022, FAR.AI, INC. IS A CALIFORNIA NON-PROFIT DEDICATED TO MAKING ADVANCED AI SAFE AND BENEFICIAL FOR EVERYONE. FAR.AI CONDUCTS AND SUPPORTS TECHNICAL AI RESEARCH, CONTINUED ON SCH O</MissionDesc>
+      <SignificantNewProgramSrvcInd>true</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>false</SignificantChangeInd>
+      <ExpenseAmt>2956925</ExpenseAmt>
+      <Desc>RESEARCH PROGRAMS FAR.AI CONDUCTS TECHNICAL RESEARCH TO ADDRESS FUNDAMENTAL ARTIFICIAL INTELLIGENCE AI SAFETY CHALLENGES. IN 2024 WE PUBLISHED 12 RESEARCH PAPERS WITH ACCEPTANCES AT LEADING VENUES SUCH AS THE INTERNATIONAL CONFERENCE ON LEARNING REPRESENTATIONS ICLR, THE INTERNATIONAL CONFERENCE ON MACHINE LEARNING ICML, AND THE NEURAL INFORMATION PROCESSING SYSTEMS CONFERENCE NEURIPS. WE PARTNERED WITH GOVERNMENT-LED AI SECURITY INITIATIVES AND CONDUCTED RED-TEAMING ENGAGEMENTS ON FRONTIER AI SYSTEMS. WE ALSO SUPPORTED EXTERNAL RESEARCHERS THROUGH COLLABORATIONS, MENTORSHIPS, AND/OR OPERATIONAL SUPPORT.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>1142509</ExpenseAmt>
+        <Desc>RESEARCH HUB AND COWORKING SPACE FAR.AI OPERATED A COLLABORATIVE RESEARCH HUB IN BERKELEY, PROVIDING A DEDICATED COWORKING SPACE AND IN PERSON PROGRAMS FOR RESEARCHERS AND ORGANIZATIONS WORKING ON CORE AI SECURITY, SAFETY AND GOVERNANCE CHALLENGES. HOSTING 40 TO 50 MEMBERS, THE HUB FACILITATED KNOWLEDGE EXCHANGE THROUGH WEEKLY SEMINARS WHERE RESEARCHERS AND FOUNDERS PRESENTED THEIR WORK TO THE COMMUNITY AND RAN A TEAM-IN-RESIDENCE PROGRAM DESIGNED TO SUPPORT NEW ORGANIZATIONS IN THIS FIELD.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>1957949</ExpenseAmt>
+        <Desc>EVENTS AND WORKSHOPS FAR.AI HOSTED AND FACILITATED TECHNICAL WORKSHOPS, MULTI-DAY CONVENINGS, AND COORDINATION EVENTS IN 2024. THESE INCLUDED LARGE-SCALE ALIGNMENT WORKSHOPS IN THE BAY AREA AND EUROPE, AS WELL AS SMALLER SPECIALIZED SESSIONS WITH RESEARCHERS, PRACTITIONERS, INDUSTRY PARTNERS, AND POLICYMAKERS. THESE EVENTS SUPPORTED COLLABORATION ON KEY TECHNICAL AND GOVERNANCE CHALLENGES IN CURRENT AND EMERGING AI SYSTEMS.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <TotalOtherProgSrvcExpenseAmt>1460000</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcGrantAmt>1460000</TotalOtherProgSrvcGrantAmt>
+      <TotalProgramServiceExpensesAmt>7517383</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="990A">true</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="990B">true</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd>false</DonorAdvisedFundInd>
+      <ConservationEasementsInd>false</ConservationEasementsInd>
+      <CollectionsOfArtInd>false</CollectionsOfArtInd>
+      <CreditCounselingInd>false</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>false</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="990D">true</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd>false</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd>false</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd>false</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="990D">true</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="990D">true</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd>false</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd>false</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <ForeignOfficeInd>false</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="990F">true</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="990F">true</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>false</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>false</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>false</FundraisingActivitiesInd>
+      <GamingActivitiesInd>false</GamingActivitiesInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <GrantsToOrganizationsInd>false</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>false</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="990J">true</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>false</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>false</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>false</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>false</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>false</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>false</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>false</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>false</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>false</DeductibleArtContributionInd>
+      <TerminateOperationsInd>false</TerminateOperationsInd>
+      <PartialLiquidationInd>false</PartialLiquidationInd>
+      <DisregardedEntityInd>false</DisregardedEntityInd>
+      <RelatedEntityInd>false</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>false</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>true</ScheduleORequiredInd>
+      <IRPDocumentCnt>8</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>true</BackupWthldComplianceInd>
+      <EmployeeCnt>22</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>true</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>false</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>false</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>false</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>false</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>false</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>false</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>false</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>false</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>false</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>false</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>3</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>2</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>false</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>false</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>false</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>false</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>false</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>false</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>false</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>true</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>true</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>false</OfficerMailingAddressInd>
+      <LocalChaptersInd>false</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>true</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>true</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>true</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>false</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>true</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>false</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>true</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>true</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>false</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>KARL BERZINS</PersonNm>
+        <PhoneNum>7074353451</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>501 W BROADWAY STE 1540</AddressLine1Txt>
+          <CityNm>SAN DIEGO</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>92101</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ADAM GLEAVE</PersonNm>
+        <TitleTxt>PRESIDENT/CEO</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>229331</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>8273</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>KARL BERZINS</PersonNm>
+        <TitleTxt>CHIEF OPERATING OFFICER</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <KeyEmployeeInd>X</KeyEmployeeInd>
+        <ReportableCompFromOrgAmt>182641</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>8563</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CONOR MCGURK</PersonNm>
+        <TitleTxt>FISCALLY SPONSORED PROJECT DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>155885</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>8080</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BENJAMIN GOLDHABER</PersonNm>
+        <TitleTxt>DIRECTOR, FAR.LABS</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>151332</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>9369</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ADRIA GARRIGA ALONSO</PersonNm>
+        <TitleTxt>RESEARCH SCIENTIST</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>135623</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>8432</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>IAN MCKENZIE</PersonNm>
+        <TitleTxt>RESEARCH ENGINEER</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>135342</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>5956</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SAWYER BERNATH</PersonNm>
+        <TitleTxt>TREASURER</TitleTxt>
+        <AverageHoursPerWeekRt>001.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LAWRENCE CHAN</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>001.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>990154</TotalReportableCompFromOrgAmt>
+      <TotalOtherCompensationAmt>48673</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>6</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>false</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>true</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>false</CompensationFromOtherSrcsInd>
+      <AllOtherContributionsAmt>23254628</AllOtherContributionsAmt>
+      <TotalContributionsAmt>23254628</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>EARNED REVENUE</Desc>
+        <BusinessCd>900099</BusinessCd>
+        <TotalRevenueColumnAmt>429091</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>429091</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>429091</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>610046</TotalRevenueColumnAmt>
+        <ExclusionAmt>610046</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>24293765</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>429091</RelatedOrExemptFuncIncomeAmt>
+        <ExclusionAmt>610046</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>0</TotalAmt>
+      </GrantsToDomesticOrgsGrp>
+      <GrantsToDomesticIndividualsGrp>
+        <TotalAmt>0</TotalAmt>
+      </GrantsToDomesticIndividualsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>1460000</TotalAmt>
+        <ProgramServicesAmt>1460000</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <BenefitsToMembersGrp>
+        <TotalAmt>0</TotalAmt>
+      </BenefitsToMembersGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>428808</TotalAmt>
+        <ProgramServicesAmt>332129</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>96679</ManagementAndGeneralAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <CompDisqualPersonsGrp>
+        <TotalAmt>0</TotalAmt>
+      </CompDisqualPersonsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>1577175</TotalAmt>
+        <ProgramServicesAmt>1221586</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>355589</ManagementAndGeneralAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>0</TotalAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>99170</TotalAmt>
+        <ProgramServicesAmt>76811</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>22359</ManagementAndGeneralAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>159316</TotalAmt>
+        <ProgramServicesAmt>123397</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>35919</ManagementAndGeneralAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesManagementGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForServicesManagementGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>99913</TotalAmt>
+        <ProgramServicesAmt>32550</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>67363</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>68644</TotalAmt>
+        <ProgramServicesAmt>22363</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>46281</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesProfFundraising></FeesForServicesProfFundraising>
+      <FeesForSrvcInvstMgmntFeesGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForSrvcInvstMgmntFeesGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>972870</TotalAmt>
+        <ProgramServicesAmt>713150</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>259720</ManagementAndGeneralAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>37949</TotalAmt>
+        <ProgramServicesAmt>9641</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>28308</ManagementAndGeneralAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>213431</TotalAmt>
+        <ProgramServicesAmt>125698</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>87733</ManagementAndGeneralAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>1925821</TotalAmt>
+        <ProgramServicesAmt>1924102</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1719</ManagementAndGeneralAmt>
+      </InformationTechnologyGrp>
+      <RoyaltiesGrp>
+        <TotalAmt>0</TotalAmt>
+      </RoyaltiesGrp>
+      <OccupancyGrp>
+        <TotalAmt>517275</TotalAmt>
+        <ProgramServicesAmt>517031</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>244</ManagementAndGeneralAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>576049</TotalAmt>
+        <ProgramServicesAmt>526183</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>49866</ManagementAndGeneralAmt>
+      </TravelGrp>
+      <PymtTravelEntrtnmntPubOfclGrp>
+        <TotalAmt>0</TotalAmt>
+      </PymtTravelEntrtnmntPubOfclGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>0</TotalAmt>
+      </ConferencesMeetingsGrp>
+      <InterestGrp>
+        <TotalAmt>0</TotalAmt>
+      </InterestGrp>
+      <PaymentsToAffiliatesGrp>
+        <TotalAmt>0</TotalAmt>
+      </PaymentsToAffiliatesGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>17072</TotalAmt>
+        <ManagementAndGeneralAmt>17072</ManagementAndGeneralAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>15731</TotalAmt>
+        <ProgramServicesAmt>4659</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>11072</ManagementAndGeneralAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>MEALS AND CATERING</Desc>
+        <TotalAmt>433422</TotalAmt>
+        <ProgramServicesAmt>428083</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>5339</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>PRIZES</Desc>
+        <TotalAmt>350</TotalAmt>
+        <ManagementAndGeneralAmt>350</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>0</TotalAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>8602996</TotalAmt>
+        <ProgramServicesAmt>7517383</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1085613</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>7194234</BOYAmt>
+        <EOYAmt>19403689</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>211253</BOYAmt>
+        <EOYAmt>3081739</EOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>722</BOYAmt>
+        <EOYAmt>20330</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>134544</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>23366</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>72060</BOYAmt>
+        <EOYAmt>111178</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <IntangibleAssetsGrp>
+        <BOYAmt>10141</BOYAmt>
+        <EOYAmt>7605</EOYAmt>
+      </IntangibleAssetsGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>235965</BOYAmt>
+        <EOYAmt>397973</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>7724375</BOYAmt>
+        <EOYAmt>23022514</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>90267</BOYAmt>
+        <EOYAmt>185964</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <DeferredRevenueGrp>
+        <BOYAmt>417279</BOYAmt>
+      </DeferredRevenueGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>447731</BOYAmt>
+        <EOYAmt>376683</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>955277</BOYAmt>
+        <EOYAmt>562647</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>5343146</BOYAmt>
+        <EOYAmt>7662208</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>1425952</BOYAmt>
+        <EOYAmt>14797659</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>6769098</BOYAmt>
+        <EOYAmt>22459867</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>7724375</BOYAmt>
+        <EOYAmt>23022514</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>15690769</ReconcilationRevenueExpnssAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>false</AccountantCompileOrReviewInd>
+      <FSAuditedInd>true</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <ConsolidatedBasisFinclStmtInd>X</ConsolidatedBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>true</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>false</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="990A" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus2YearsAmt>1507686</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>7987799</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>23883719</CurrentTaxYearAmt>
+        <TotalAmt>33379204</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus2YearsAmt>1507686</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>7987799</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>23883719</CurrentTaxYearAmt>
+        <TotalAmt>33379204</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <PublicSupportTotal170Amt>33379204</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus1YearAmt>86470</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>610046</CurrentTaxYearAmt>
+        <TotalAmt>696516</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus1YearAmt>2045</CurrentTaxYearMinus1YearAmt>
+        <TotalAmt>2045</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>34077765</TotalSupportAmt>
+      <First5Years170Ind>X</First5Years170Ind>
+      <PublicSupportCY170Pct>0.00000</PublicSupportCY170Pct>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="990B" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="990D" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <InclEscrowCustodialAcctLiabInd>false</InclEscrowCustodialAcctLiabInd>
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>134544</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>23366</DepreciationAmt>
+        <BookValueAmt>111178</BookValueAmt>
+      </EquipmentGrp>
+      <TotalBookValueLandBuildingsAmt>111178</TotalBookValueLandBuildingsAmt>
+      <OtherSecuritiesGrp>
+        <Desc>Financial derivatives and other financial products</Desc>
+      </OtherSecuritiesGrp>
+      <OtherSecuritiesGrp>
+        <Desc>Closely-held equity interests</Desc>
+      </OtherSecuritiesGrp>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>Federal income taxes</Desc>
+      </OtherLiabilitiesOrgGrp>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>RIGHT OF USE LIABILITY</Desc>
+        <Amt>331626</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>SECURITY DEPOSITS</Desc>
+        <Amt>45057</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>376683</TotalLiabilityAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>24293765</TotalRevEtcAuditedFinclStmtAmt>
+      <RevenueSubtotalAmt>24293765</RevenueSubtotalAmt>
+      <TotalRevenuePerForm990Amt>24293765</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>8602996</TotExpnsEtcAuditedFinclStmtAmt>
+      <ExpensesSubtotalAmt>8602996</ExpensesSubtotalAmt>
+      <TotalExpensesPerForm990Amt>8602996</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>X 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE INTERNAL REVENUE SERVICE AND THE CALIFORNIA FRANCHISE TAX BOARD HAVE DETERMINED THAT THE ORGANIZATION IS EXEMPT FROM FEDERAL AND STATE INCOME TAXES UNDER IRC 501C3 AND CALIFORNIA RTC 23701D. FAR HAS EVALUATED ITS CURRENT TAX POSITIONS AS OF DECEMBER 31, 2024 AND IS NOT AWARE OF ANY SIGNIFICANT UNCERTAIN TAX POSITIONS FOR WHICH A RESERVE WOULD BE NECESSARY. FARS TAX RETURNS ARE GENERALLY SUBJECT TO EXAMINATION BY FEDERAL AND STATE TAXING AUTHORITIES FOR THREE AND FOUR YEARS, RESPECTIVELY, AFTER THEY ARE FILED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="990F" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <GrantRecordsMaintainedInd>true</GrantRecordsMaintainedInd>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Europe Including Iceland and Greenland</RegionTxt>
+        <TypeOfActivitiesConductedTxt>GRANTS TO RECIPIENTS</TypeOfActivitiesConductedTxt>
+        <RegionTotalExpendituresAmt>1460000</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <SubtotalSpentAmt>1460000</SubtotalSpentAmt>
+      <TotalSpentAmt>1460000</TotalSpentAmt>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>Europe Including Iceland and Greenland</RegionTxt>
+        <PurposeOfGrantTxt>RESEARCH STUDIES</PurposeOfGrantTxt>
+        <CashGrantAmt>1460000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE</MannerOfCashDisbursementTxt>
+      </GrantsToOrgOutsideUSGrp>
+      <Total501c3OrgCnt>1</Total501c3OrgCnt>
+    </IRS990ScheduleF>
+    <IRS990ScheduleJ documentId="990J" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>false</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>false</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>false</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>false</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>false</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>false</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>false</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>false</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>false</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>ADAM GLEAVE</PersonNm>
+        <TitleTxt>PRESIDENT/CEO</TitleTxt>
+        <BaseCompensationFilingOrgAmt>229331</BaseCompensationFilingOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>8563</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>237894</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>KARL BERZINS</PersonNm>
+        <TitleTxt>CHIEF OPERATING OFFICER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>182641</BaseCompensationFilingOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>8273</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>190914</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>BENJAMIN GOLDHABER</PersonNm>
+        <TitleTxt>DIRECTOR, FAR.LABS</TitleTxt>
+        <BaseCompensationFilingOrgAmt>151332</BaseCompensationFilingOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>9369</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>160701</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>CONOR MCGURK</PersonNm>
+        <TitleTxt>FISCALLY SPONSORED PROJECT DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>156487</BaseCompensationFilingOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>8080</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>164567</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleO documentId="990O" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part III, Line 4d</FormAndLineReferenceDesc>
+        <ExplanationTxt>Program Service Expenses 1,460,000, Grants and allocations 1,460,000, Revenue 0 RESEARCH GRANTMAKING FAR.AI ADMINISTERED A TECHNICAL AI RESEARCH GRANTMAKING PROGRAM TO SUPPORT RESEARCH PROJECTS. IN 2024, WE FACILITATED GRANTS TOTALING 1.46 MILLION TO SUBGRANTEES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part I, Line 1</FormAndLineReferenceDesc>
+        <ExplanationTxt>MISSION CONTINUED FOSTERS GLOBAL COORDINATION, AND ADVANCES UNDERSTANDING OF AI RISKS AND OPPORTUNITIES. THE ORGANIZATION ALSO SUPPORTS THE BAY AREA AI RESEARCH COMMUNITY THROUGH A COWORKING SPACE FAR LABS AND HOSTS EVENTS CONNECTING RESEARCHERS, POLICYMAKERS, AND INDUSTRY LEADERS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part III, Line 1</FormAndLineReferenceDesc>
+        <ExplanationTxt>MISSION CONTINUED FOSTERS GLOBAL COORDINATION, AND ADVANCES UNDERSTANDING OF AI RISKS AND OPPORTUNITIES. THE ORGANIZATION ALSO SUPPORTS THE BAY AREA AI RESEARCH COMMUNITY THROUGH A COWORKING SPACE FAR LABS AND HOSTS EVENTS CONNECTING RESEARCHERS, POLICYMAKERS, AND INDUSTRY LEADERS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE 990 IS PROVIDED TO THE BOARD OF DIRECTORS FOR REVIEW AND APPROVAL. THE FINAL VERSION IS DISTRIBUTED TO ALL BOARD MEMBERS PRIOR TO FILING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 15A</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE BOARD OF DIRECTORS DECIDED THE SALARY AND BENEFITS OF THE EXECUTIVE DIRECTOR OF THE ORGANIZATION. THE BOARD, WHICH INCLUDES INDEPENDENT MEMBERS, HAVE ASSESSED FAIR AND EQUITABLE COMPENSATION BASED ON COMPENSATIONS OF MANAGERS OF ORGANIZATIONS OF SIMILAR SIZE, FIELD, LOCATION, AND NON-PROFIT NATURE TO THE ORGANIZATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 15B</FormAndLineReferenceDesc>
+        <ExplanationTxt>WAGES AND SALARIES OF STAFF ARE DETERMINED BY THE EXECUTIVE DIRECTOR, WITH OVERSIGHT OF THE BOARD OF DIRECTORS. THE WAGES AND SALARIES ARE BASED UPON COMPENSATION OF EMPLOYEES OF ORGANIZATIONS OF SIMILAR SIZE, FIELD, LOCATION, AND NON-PROFIT NATURE TO THE ORGANIZATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section C, Line 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>GOVERNING DOCUMENTS ARE AVAILABLE UPON WRITTEN REQUEST TO THE ORGANIZATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part IX, Line 11G</FormAndLineReferenceDesc>
+        <ExplanationTxt>PROGRAM PROFESSIONAL FEES 713,150, ADMIN PROFESSIONAL FEES 259,720.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

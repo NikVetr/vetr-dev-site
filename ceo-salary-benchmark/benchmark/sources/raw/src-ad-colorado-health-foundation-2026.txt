@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-CHF-2026
+organization: The Colorado Health Foundation
+role_title: Chief Executive Officer
+posting_date: 2026-08-11
+closing_date: 
+salary_min: 626000
+salary_max: 736000
+currency: USD
+salary_is_base: yes
+salary_text: $626,000-$736,000 starting salary
+location: Denver, Colorado
+remote_status: Hybrid
+geographic_restrictions: Colorado
+mission_operating_model: Large private health foundation with an endowment approaching $3B.
+annual_budget_or_expense: 
+scale_measure: private foundation/endowment
+scale_year: 2026
+staff_count: 
+responsibilities: Foundation-wide grantmaking, investment-linked strategy, staff, board, and external leadership.
+reporting_relationship: Board of Directors
+original_url: https://www.nonprofitoperations.com/job-submissions/chief-executive-officer-/the-colorado-health-foundation-
+resolved_url: https://www.nonprofitoperations.com/job-submissions/chief-executive-officer-/the-colorado-health-foundation-
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: recruiter/job-board complete copy
+archive_path: sources/raw/src-ad-colorado-health-foundation-2026.txt
+tier: excluded_private_foundation
+included_in_quantitative_analysis: no
+inclusion_reason: 
+exclusion_reason: Private-foundation asset and grantmaking model is not comparable to RP.
+evidence_quality_notes: Complete posting; excluded before salary analysis under frozen operating-model rule.
+source_line_refs: turn485271search4
+cpi_period: 2026-07
+cpi_basis_note: Excluded.

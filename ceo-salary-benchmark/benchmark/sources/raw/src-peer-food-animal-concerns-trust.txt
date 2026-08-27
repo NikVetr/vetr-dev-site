@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Food Animal Concerns Trust
+reference_tier: C
+tier_label: Tier C broad sensitivity
+selection_wave: second expansion / filing verification
+topic_cluster: Animal welfare and food systems
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 36-3172605
+revenue: 901531.0
+expenses: 1058203.0
+employee_count: 
+comparability_score: 65.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 132990.744263025
+total_proxy_jul2026: 132990.744263025
+ceo_title: Executive Director
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/363172605
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202620149349300022_public.xml
+selection_note: Added by the second-expansion freeze and retained after role/scale verification; pay did not determine selection.

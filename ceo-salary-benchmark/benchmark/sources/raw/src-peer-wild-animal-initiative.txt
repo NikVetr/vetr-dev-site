@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Wild Animal Initiative
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: first expansion
+topic_cluster: Animal welfare and food systems
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 82-2281466
+revenue: 2487849.0
+expenses: 3345940.0
+employee_count: 16.0
+comparability_score: 86.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 108536.2613524124
+total_proxy_jul2026: 121717.81630309868
+ceo_title: Executive Director
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/822281466
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202532319349300913_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/utility-farm%2C822281466/
+prior_scale_source_type: Public Form 990 rendering (Cause IQ or ProPublica)
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Excellent EA-aligned research function; lower edge of secondary expense/staff bands.
+prior_function_score: 30.0
+prior_expense_score: 20.0
+prior_staff_score: 12.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

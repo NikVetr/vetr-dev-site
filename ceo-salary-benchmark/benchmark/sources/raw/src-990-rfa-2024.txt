@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-RFA-2024
+Organization: Results for America
+Document type: Form 990 filing-derived snapshot
+Original URL: https://apps.irs.gov/pub/epostcard/990/xml/2025/202513179349309376_public.xml
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/812709681
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: turn579724view1 L28-L100
+EIN: 81-2709681
+IRS object ID: 202513179349309376
+Tax period: 2024-01-01 to 2024-12-31
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Results for America
+EIN: 81-2709681
+IRS object ID: 202513179349309376
+Tax period: 2024-01-01 to 2024-12-31
+Filing date: 2025-11-13
+Top-executive record: Michele Jolin - President & CEO
+Full-year status: yes
+Part VII reportable compensation from organization: 311352
+Related organizations: 0
+Part VII other compensation: 7176
+Cash/reportable proxy: 311352
+Filing total proxy: 318528
+Revenue: 16801077
+Expenses: 24594265
+Tier/status: secondary / included_secondary
+Exclusion reason: 
+Notes: Preselected primary candidate moved to secondary for scale/implementation, not pay.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

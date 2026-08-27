@@ -1,0 +1,7 @@
+node_modules/
+test-results/
+playwright-report/
+tmp/
+benchmark/sources/native/
+benchmark/*.zip
+benchmark/scripts/__pycache__/

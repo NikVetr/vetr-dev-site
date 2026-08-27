@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Project Drawdown
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: third expansion / filing verification
+topic_cluster: climate and evidence
+ea_affinity: EA-adjacent
+country_or_region: US/international
+expected_structure: independent nonprofit
+ein: 38-3705448
+revenue: 8269185.0
+expenses: 4479322.0
+employee_count: 
+comparability_score: 91.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 444921.92195981904
+total_proxy_jul2026: 509208.4814835083
+ceo_title: Executive Director
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/383705448
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202512529349301621_public.xml
+selection_note: Added by the third-expansion freeze and retained after role/scale/title verification; pay did not determine selection.

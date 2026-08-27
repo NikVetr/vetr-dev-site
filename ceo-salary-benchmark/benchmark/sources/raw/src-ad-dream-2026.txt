@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-DREAM-2026
+organization: Dream.Org
+role_title: Chief Executive Officer
+posting_date: 2026-06-02
+closing_date: 
+salary_min: 260000
+salary_max: 290000
+currency: USD
+salary_is_base: yes
+salary_text: Body range $260,000-$290,000; page header displayed $271,000-$290,000
+location: Oakland, CA or Washington, DC
+remote_status: Hybrid
+geographic_restrictions: Must work from Oakland or Washington, DC hub
+mission_operating_model: National policy, advocacy, workforce, climate, and technology nonprofit with research-informed campaigns.
+annual_budget_or_expense: 
+scale_measure: not reported in accessible posting
+scale_year: 
+staff_count: 39
+responsibilities: Organization-wide strategy, board partnership, fundraising, people leadership, operations, policy direction, and public representation.
+reporting_relationship: Board of Directors
+original_url: https://www.nonprofitoperations.com/job-submissions/chief-executive-officer-/dream.org-
+resolved_url: https://www.nonprofitoperations.com/job-submissions/chief-executive-officer-/dream.org-
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: recruiter/job-board complete copy
+archive_path: sources/raw/src-ad-dream-2026.txt
+tier: expanded_primary_title
+included_in_quantitative_analysis: yes
+inclusion_reason: Full national CEO scope and 39-person staff; broader campaign/advocacy mix than RP.
+exclusion_reason: 
+evidence_quality_notes: Detailed body range controls over conflicting header range; conflict retained.
+source_line_refs: turn970460view1 lines 18-63, 76-115, 181-195
+cpi_period: 2026-06
+cpi_basis_note: Posting month CPI.

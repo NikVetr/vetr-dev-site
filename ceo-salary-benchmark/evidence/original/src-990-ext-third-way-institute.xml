@@ -1,0 +1,744 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2024v5.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-11-11T08:50:10-06:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>521853933</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>JM&amp;M</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>1730 RHODE ISLAND AVE NW SUITE 800</AddressLine1Txt>
+        <CityNm>WASHINGTON</CityNm>
+        <StateAbbreviationCd>DC</StateAbbreviationCd>
+        <ZIPCd>20036</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>260535276</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>THIRD WAY INSTITUTE</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>THIR</BusinessNameControlTxt>
+      <PhoneNum>2023841700</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>1025 CONNECTICUT AVE NW SUITE 400</AddressLine1Txt>
+        <CityNm>WASHINGTON</CityNm>
+        <StateAbbreviationCd>DC</StateAbbreviationCd>
+        <ZIPCd>20036</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>STEVE DIETERLE</PersonNm>
+      <PersonTitleTxt>CFO AND TREASURER</PersonTitleTxt>
+      <PhoneNum>2023841700</PhoneNum>
+      <SignatureDt>2025-11-11</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>1</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>MEENA BISHNOI</PreparerPersonNm>
+      <PTIN>P01480769</PTIN>
+      <PhoneNum>2022963306</PhoneNum>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="10">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <PrincipalOfficerNm>JONATHAN COWAN</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>1025 CONNECTICUT AVE NW SUITE 400</AddressLine1Txt>
+        <CityNm>WASHINGTON</CityNm>
+        <StateAbbreviationCd>DC</StateAbbreviationCd>
+        <ZIPCd>20036</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>29636701</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>N/A</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2006</FormationYr>
+      <LegalDomicileStateCd>DE</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>TO SUPPORT CHARITABLE AND EDUCATIONAL ACTIVITIES THAT ADVANCE CENTRIST SOLUTIONS.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>6</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>4</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>0</TotalEmployeeCnt>
+      <TotalVolunteersCnt>4</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>17689532</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>17431767</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>0</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>0</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>745671</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>1847122</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>0</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>0</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>18435203</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>19278889</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>19809000</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>21902000</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>224000</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>218813</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>0</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>6577</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>406102</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>210698</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>20439102</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>22331511</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-2003899</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>-3052622</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>31865844</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>28311002</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>15705983</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>14977173</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>16159861</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>13333829</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>THIRD WAY INSTITUTE SUPPORTS CHARITABLE AND EDUCATIONAL ACTIVITIES THAT ADVANCE CENTRIST SOLUTIONS TO MAJOR ECONOMIC, NATIONAL SECURITY, ENERGY AND SOCIAL POLICY ISSUES.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>22111700</ExpenseAmt>
+      <GrantAmt>21902000</GrantAmt>
+      <Desc>THIRD WAY INSTITUTE SUPPORTS THE DEVELOPMENT OF EDUCATIONAL MATERIALS AND EVENTS ON THE POLICY CHALLENGES FACED BY AMERICA, FOCUSING ON A WIDE VARIETY OF POLICY ISSUES.CLIMATE AND ENERGYIN 2024, THIRD WAY'S CLIMATE AND ENERGY PROGRAM HELPED SOLIDIFY THE UNITED STATES' POSITION AS A GLOBAL LEADER IN CLEAN ENERGY INNOVATION AND DEPLOYMENT. THIRD WAY FOCUSED THEIR EFFORTS ON ADDRESSING DEPLOYMENT CHALLENGES, CLARIFYING THE ECONOMIC AND NATIONAL SECURITY BENEFITS OF CLEAN ENERGY, AND SUPPORTING STRATEGIES THAT ACCELERATE PROGRESS. THIRD WAY'S WORK CENTERED ON THREE PRIORITIES: 1) EQUIPPING DECISION-MAKERS WITH DATA AND INSIGHT TO GUIDE THE ENERGY TRANSITION; 2) IDENTIFYING AND ADDRESSING NON-COST BARRIERS TO CLEAN ENERGY DEPLOYMENT; AND 3) INCREASING PUBLIC UNDERSTANDING OF THE BENEFITS OF CLEAN ENERGY.THIRD WAY BRIDGED GAPS IN THE CLEAN ENERGY ECONOMY BY PROVIDING STRATEGIC ANALYSIS AND SOLUTIONS.SOCIAL POLICY AND POLITICSIN 2024, THIRD WAY'S SOCIAL POLICY, EDUCATION AND POLITICS TEAM FOCUSED ON THREE CORE AREAS: 1) DEFINING WHAT AMERICAN WANT FROM WASHINGTON; 2) CENTERING VALUE IN THE HIGHER EDUCATION DEBATE; AND 3) ADDRESSING THREATS ON SOCIAL ISSUES:DEFINING WHAT AMERICANS WANT FROM WASHINGTON: THIRD WAY'S POLITICS TEAM ANSWERED THIS QUESTION BY: --UTILIZING ELECTORAL DATA SOURCES INCLUDING THE CATALIST VOTER FILE, COOPERATIVE ELECTION STUDY, AND AP VOTECAST, TO DRAFT REPORTS ANALYZING AND EXPLAINING THE AMERICAN ELECTORATE AND DIFFERENCES IN OPINION, WORLDVIEW, AND VOTING BEHAVIOR ACROSS STATES AND DISTRICTS WITH A FOCUS ON KEY PRESIDENTIAL AND SENATE STATES AND BATTLEGROUND HOUSE DISTRICTS; --CONDUCTING QUALITATIVE AND QUANTITATIVE PUBLIC OPINION RESEARCH TO BETTER UNDERSTAND WHAT VOTERS PRIORITIZE, HOW THEY THINK ABOUT CURRENT ISSUES UNDER DISCUSSION IN THE ADMINISTRATION AND CONGRESS, AND WHAT THEY WANT FROM CANDIDATES AND POLICYMAKERS; --BUILDING A CASE AGAINST RUNNING A WELL-FINANCED THIRD-PARTY CANDIDATE IN THE 2024 PRESIDENTIAL ELECTION BY EMPLOYING HISTORICAL AND EMPIRICAL DATA TO SHOW THIS CANDIDATE WOULD HAVE NO PATH TO VICTORY AND COULD ONLY PLAY A ROLE AS A SPOILER FOR VOTERS; AND, --TRACKING HOW IDEOLOGICAL DIVERGENT CANDIDATES FARE IN PRIMARY AND GENERAL ELECTIONS IN 2024 TO CONTINUE YEARS OF WORK SHOWING AMERICANS CONTINUE TO GRAVITATE TO MAINSTREAM CANDIDATES OVER EXTREMISM.CENTERING VALUE IN THE HIGHER EDUCATION DEBATE: THIRD WAY'S EDUCATION TEAM CONTINUES TO LEAD A COORDINATED MOVEMENT TO CHANGE THE FEDERAL POLICY NARRATIVE ON HIGHER EDUCATION FROM COST TO RETURN ON INVESTMENT AND SOCIALIZE A SLATE OF ACTIONABLE, DEFENSIBLE SOLUTIONS TO IMPROVE POSTSECONDARY VALUE, QUALITY, AND ACCOUNTABILITY FOR STUDENTS AND TAXPAYERS. THIRD WAY ADVANCED THESE EFFORTS BY:--HOSTING THE PROGRAM'S LARGEST EVENT TO DATE, THE HIGHER ED VALUE SUMMIT, A CONFERENCE THAT BROUGHT TOGETHER EXPERTS IN THE FIELD, INCLUDING FORMER DEPARTMENT OF EDUCATION UNDER SECRETARY JAMES KVAAL AND OTHER NOTABLE INFLUENCERS, FOR A DAY OF LEARNING AND CONNECTION ON THE BIGGEST BARRIERS TO CENTERING VALUE IN THE INDUSTRY.--CONDUCTING LANDMARK PUBLIC OPINION RESEARCH ON HIGH SCHOOL STUDENTS, DEMONSTRATING THAT YOUNG AMERICANS STILL SEE VALUE IN PURSUING A COLLEGE DEGREE AND UNDERSTANDING THEIR BARRIERS TO THAT PURSUIT. --PUBLISHING THE FOURTH ANNUAL ECONOMIC MOBILITY INDEX, ALONG WITH A DEDICATED WEBSITE FOR OUR VALUE METRICS, TO CELEBRATE COLLEGES AND UNIVERSITIES THAT OPEN THEIR DOORS TO STUDENTS FROM LOW-INCOME BACKGROUNDS AND PRIORITIZE THEIR SUCCESS.--CHAMPIONING THE POSTSECONDARY STUDENT SUCCESS GRANT PROGRAM TO SUPPORT EVIDENCE-BASED COLLEGE RETENTION AND COMPLETION PROGRAMS AND MAKING THE CASE FOR MAKING THIS FUND PERMANENT.--WEIGHING IN ON THE FORMATION OF A NEW COLLEGE ACCREDITOR AND HOW THEY'RE DEVELOPING THEIR ACCREDITING STANDARDS TO HOLD THEM ACCOUNTABLE TO THEIR ROLE IN THE PROCESS OF IMPROVING OUTCOMES FOR STUDENTS. --DEVELOPING POLICY IDEAS FOR IMPROVING THE GRADUATE STUDENT LENDING SYSTEM, WHICH CURRENTLY DRIVES OUR HIGH OUTSTANDING FEDERAL STUDENT DEBT AND TAKES ADVANTAGE OF UNRESTRICTED TAXPAYER DOLLARS.ADDRESSING THREATS ON SOCIAL ISSUES: THIRD WAY REMAINS COMMITTED TO ADDRESSING THREATS TO AMERICAN VALUES AND VULNERABLE POPULATIONS ON KEY SOCIAL AND CULTURAL ISSUES. THIRD WAY EMPLOYED VARIOUS TACTICS TO MAKE PROGRESS ON CRIME, IMMIGRATION, AND LGBT RIGHTS IN THE PAST YEAR.ECONOMICS PROGRAM IN 2024, THIRD WAY'S ECONOMIC PROGRAM FOCUSED ON THREE CORE AREAS: 1) MAKING THE MIDDLE CLASS MORE AFFORDABLE AND ATTAINABLE FOR NON-COLLEGE EDUCATED WORKERS; 2) STRENGTHENING THE AFFORDABLE CARE ACT AND LOWERING HEALTH CARE COSTS; AND 3) EXPANDING ENTREPRENEURIAL OPPORTUNITY IN AMERICA.NATIONAL SECURITY PROGRAMIN 2024, THE NATIONAL SECURITY PROGRAM FOCUSED MOST EXCLUSIVELY ON ARTIFICIAL INTELLIGENCE, BOTH DOMESTICALLY AND AS IT RELATES TO CHINA. IT IS CLEAR NOW THAT AI IS THE NEW ARMS RACE AND THAT BOTH THE UNITED STATES AND CHINA ARE WELL AHEAD OF THE REST OF THE WORLD. EACH COUNTRY HAS A DIFFERENT MODEL ON HOW IT WILL DEVELOP AI AND EACH HAS GOALS ON HOW IT IS REGULATED IN DEPLOYED. US-CHINA ON AI AND THE POWER COMPETITION: MORE THAN EVER, THE US-CHINA COMPETITION WILL BE DECIDED BY DIGITAL TECHNOLOGY AND AI. THE NATIONAL SECURITY PROGRAM HIGHLIGHTED THE IMPORTANCE AND CHALLENGES THE US FACES WITH CHINA. --THE AI RACE WILL BE SHAPED BY THE VALUES EACH COUNTRY HOLDS. THIRD WAY DISSECTED THE MAJOR VALUES AMERICA AND CHINA BRING TO AI INNOVATION AND INFORMED POLICYMAKERS AND THE PUBLIC HOW IT MAY DETERMINE WHO WINS THE AI RACE. --IN THIRD WAY'S PAPER TITLED CLASH OF THE TECH TITANS, WE ARGUED TO THE PUBLIC AND POLICYMAKERS THAT THE FRONTLINES IN THE US-CHINA DIGITAL COMPETITION ARE THE COMPANIES. THIRD WAY EDUCATED THE PUBLIC ON WHAT EACH COMPANY DOES, HOW THEY COMPETE, AND THE THREAT THE CHINESE COMPANIES POSE TO NATIONAL SECURITY AND PRIVACY. --THIRD WAY'S PAPER CHINA'S NERVOUS NEIGHBORS EDUCATED POLICYMAKERS AND THE PUBLIC ON HOW AMERICA'S ALLIANCES ARE DEEP, BUT CHINA'S ARE TRANSACTIONAL. WHILE AMERICA'S NEIGHBORS ARE TRUE FRIENDS AND PARTNERS; CHINA'S NEIGHBORS ARE WARY AND NERVOUS. THIRD WAY EXPLAINED CHINA'S CAPABILITIES OF REPRESSION THROUGH AI, MASS SURVEILLANCE, RELENTLESS CENSORSHIP, AND AUTOMATED DISINFORMATION OPERATIONS THAT THREATEN GLOBAL FREEDOMS;--THIRD WAY MADE THE CASE THAT A DIGITAL PRO-DEMOCRACY MODEL IS NEEDED TO SET INTERNATIONAL NORMS AND STANDARDS TO COMPETE AGAINST THE ONGOING PROLIFERATION OF CHINA'S DIGITAL AUTOCRACY MODEL.ARTIFICIAL INTELLIGENCE: HOW SHOULD POLICY MAKERS VIEW ARTIFICIAL INTELLIGENCE A THREAT, AN OPPORTUNITY, BOTH? THIRD WAY EXPLORED BOTH ENDS OF THE SPECTRUM:--THIRD WAY EDUCATED POLICYMAKERS AND THE PUBLIC ON WHAT IS NEW IN ARTIFICIAL INTELLIGENCE AND ARGUED THAT COMPETITION IS GOOD. --THIRD WAY EXPLORED A NEW AI TOPIC CALLED AGENTIC AI AND EXPLORED THE RAMIFICATION FOR POLICYMAKERS.--SHOULD AI BE DEVELOPED IN A CLOSED OR OPEN MODEL? THIRD WAY ANALYZED THE PLUSSES AND MINUSES OF OPEN SOURCE AI TO HELP POLICYMAKERS BETTER UNDERSTAND THIS COMPLICATED AND TECHNICAL ISSUE. --THIRD WAY DRAFTED MANY OTHER PAPERS ON AI, HELD AND ATTENDED DINNERS FOR POLICYMAKERS AIMED AT EXPLORING THE CONTOURS OF AI, PARTICIPATED IN PANELS, AND MADE MANY MEDIA APPEARANCES.</Desc>
+      <TotalProgramServiceExpensesAmt>22111700</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc1039100001">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd referenceDocumentId="RetDoc1039600001">0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd referenceDocumentId="RetDoc1039600001">1</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd referenceDocumentId="RetDoc1039600001">0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc1040000001">0</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc1040000001">0</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc1040000001">0</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc1040000001">0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc1040000001">0</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc1040000001">0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc1040000001">0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc1040000001">0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc1040000001">1</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc1040000001">1</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">1</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <ForeignActivitiesInd>0</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>0</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>0</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>0</FundraisingActivitiesInd>
+      <GamingActivitiesInd>0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="RetDoc1041900001">1</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd referenceDocumentId="RetDoc1041900001">0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="RetDoc1042400001">1</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd referenceDocumentId="RetDoc1042900001">1</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd referenceDocumentId="RetDoc1042900001">0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd referenceDocumentId="RetDoc1043400001">0</DisregardedEntityInd>
+      <RelatedEntityInd referenceDocumentId="RetDoc1043400001">1</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd referenceDocumentId="RetDoc1043400001">1</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd referenceDocumentId="RetDoc1043400001">0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>0</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <EmployeeCnt>0</EmployeeCnt>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>0</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>6</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>4</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>0</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>0</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>STEVE J DIETERLE</BusinessNameLine1Txt>
+        </BusinessName>
+        <PhoneNum>2023841700</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>1025 CONNECTICUT AVE NW SUITE 400</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <InfoInScheduleOPartVIIInd>X</InfoInScheduleOPartVIIInd>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JONATHAN COWAN</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHoursPerWeekRt>4.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>36.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>413118</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>41470</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DAVID HELLER</PersonNm>
+        <TitleTxt>TRUSTEE</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>2.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JACQUIE LAWING EBERT</PersonNm>
+        <TitleTxt>TRUSTEE</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>THURGOOD MARSHALL JR</PersonNm>
+        <TitleTxt>TRUSTEE</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>2.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ROGAN KERSH</PersonNm>
+        <TitleTxt>TRUSTEE</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>STEVE J DIETERLE CFO</PersonNm>
+        <TitleTxt>BOARD TREASURER</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>38.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>181205</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>7215</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MATTHEW BENNETT</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>38.00</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>379453</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>41140</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>0</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>973776</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>89825</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>0</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>1</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <CntrctRcvdGreaterThan100KCnt>0</CntrctRcvdGreaterThan100KCnt>
+      <AllOtherContributionsAmt>17431767</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>269530</NoncashContributionsAmt>
+      <TotalContributionsAmt>17431767</TotalContributionsAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>875653</TotalRevenueColumnAmt>
+        <ExclusionAmt>875653</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>11329281</SecuritiesAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>10357812</SecuritiesAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>971469</SecuritiesAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>971469</TotalRevenueColumnAmt>
+        <ExclusionAmt>971469</ExclusionAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>19278889</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>1847122</ExclusionAmt>
+      </TotalRevenueGrp>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>21902000</TotalAmt>
+        <ProgramServicesAmt>21902000</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>89960</TotalAmt>
+        <ProgramServicesAmt>64889</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>25070</ManagementAndGeneralAmt>
+        <FundraisingAmt>1</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>102913</TotalAmt>
+        <ProgramServicesAmt>79478</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>18801</ManagementAndGeneralAmt>
+        <FundraisingAmt>4634</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>3700</TotalAmt>
+        <ProgramServicesAmt>2024</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1490</ManagementAndGeneralAmt>
+        <FundraisingAmt>186</FundraisingAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>7400</TotalAmt>
+        <ProgramServicesAmt>4049</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2980</ManagementAndGeneralAmt>
+        <FundraisingAmt>371</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>14840</TotalAmt>
+        <ProgramServicesAmt>10760</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3709</ManagementAndGeneralAmt>
+        <FundraisingAmt>371</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>27400</TotalAmt>
+        <ManagementAndGeneralAmt>27400</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>10000</TotalAmt>
+        <ProgramServicesAmt>8000</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2000</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForSrvcInvstMgmntFeesGrp>
+        <TotalAmt>128810</TotalAmt>
+        <ManagementAndGeneralAmt>128810</ManagementAndGeneralAmt>
+      </FeesForSrvcInvstMgmntFeesGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>3246</TotalAmt>
+        <ProgramServicesAmt>2800</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>375</ManagementAndGeneralAmt>
+        <FundraisingAmt>71</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <OccupancyGrp>
+        <TotalAmt>36540</TotalAmt>
+        <ProgramServicesAmt>33600</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2100</ManagementAndGeneralAmt>
+        <FundraisingAmt>840</FundraisingAmt>
+      </OccupancyGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>4403</TotalAmt>
+        <ProgramServicesAmt>4100</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>200</ManagementAndGeneralAmt>
+        <FundraisingAmt>103</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <OtherExpensesGrp>
+        <Desc>MISC. EXPENSES</Desc>
+        <TotalAmt>299</TotalAmt>
+        <ManagementAndGeneralAmt>299</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>22331511</TotalAmt>
+        <ProgramServicesAmt>22111700</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>213234</ManagementAndGeneralAmt>
+        <FundraisingAmt>6577</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>5096723</BOYAmt>
+        <EOYAmt>5400802</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>691676</BOYAmt>
+        <EOYAmt>354943</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>26020990</BOYAmt>
+        <EOYAmt>22551003</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>56455</BOYAmt>
+        <EOYAmt>4254</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>31865844</BOYAmt>
+        <EOYAmt>28311002</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>9148</BOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <DeferredRevenueGrp>
+        <BOYAmt>10913235</BOYAmt>
+        <EOYAmt>10053673</EOYAmt>
+      </DeferredRevenueGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>4783600</BOYAmt>
+        <EOYAmt>4923500</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>15705983</BOYAmt>
+        <EOYAmt>14977173</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>15443575</BOYAmt>
+        <EOYAmt>12978886</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>716286</BOYAmt>
+        <EOYAmt>354943</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>16159861</BOYAmt>
+        <EOYAmt>13333829</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>31865844</BOYAmt>
+        <EOYAmt>28311002</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>-3052622</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>226590</NetUnrlzdGainsLossesInvstAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <InfoInScheduleOPartXIIInd>X</InfoInScheduleOPartXIIInd>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>1</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <ConsolidatedBasisFinclStmtInd>X</ConsolidatedBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>13078977</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>11943933</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>16423854</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>17689532</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>17431767</CurrentTaxYearAmt>
+        <TotalAmt>76568063</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>13078977</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>11943933</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>16423854</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>17689532</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>17431767</CurrentTaxYearAmt>
+        <TotalAmt>76568063</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>17261686</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>59306377</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>100896</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>35267</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>274994</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>653890</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>875653</CurrentTaxYearAmt>
+        <TotalAmt>1940700</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <TotalSupportAmt>78508763</TotalSupportAmt>
+      <PublicSupportCY170Pct>0.75540</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.71440</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleC documentId="RetDoc1039600001">
+      <OtherExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>22324934</FilingOrganizationsTotalAmt>
+      </OtherExemptPurposeExpendGrp>
+      <TotalExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>22324934</FilingOrganizationsTotalAmt>
+      </TotalExemptPurposeExpendGrp>
+      <LobbyingNontaxableAmountGrp>
+        <FilingOrganizationsTotalAmt>1000000</FilingOrganizationsTotalAmt>
+      </LobbyingNontaxableAmountGrp>
+      <GrassrootsNontaxableGrp>
+        <FilingOrganizationsTotalAmt>250000</FilingOrganizationsTotalAmt>
+      </GrassrootsNontaxableGrp>
+      <TotLbbyngGrassrootMnsNonTxGrp>
+        <FilingOrganizationsTotalAmt>0</FilingOrganizationsTotalAmt>
+      </TotLbbyngGrassrootMnsNonTxGrp>
+      <TotLbbyExpendMnsLbbyngNonTxGrp>
+        <FilingOrganizationsTotalAmt>0</FilingOrganizationsTotalAmt>
+      </TotLbbyExpendMnsLbbyngNonTxGrp>
+      <AvgLobbyingNontaxableAmountGrp>
+        <CurrentYearMinus3Amt>821210</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>1000000</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>1000000</CurrentYearMinus1Amt>
+        <CurrentYearAmt>1000000</CurrentYearAmt>
+        <TotalAmt>3821210</TotalAmt>
+      </AvgLobbyingNontaxableAmountGrp>
+      <LobbyingCeilingAmt>5731815</LobbyingCeilingAmt>
+      <AvgGrassrootsNontaxableGrp>
+        <CurrentYearMinus3Amt>205303</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>250000</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>250000</CurrentYearMinus1Amt>
+        <CurrentYearAmt>250000</CurrentYearAmt>
+        <TotalAmt>955303</TotalAmt>
+      </AvgGrassrootsNontaxableGrp>
+      <GrassrootsCeilingAmt>1432955</GrassrootsCeilingAmt>
+    </IRS990ScheduleC>
+    <IRS990ScheduleD documentId="RetDoc1040000001">
+      <TotalBookValueLandBuildingsAmt>0</TotalBookValueLandBuildingsAmt>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>DUE TO THIRD WAY, A RELATED PARTY</Desc>
+        <Amt>4923500</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>4923500</TotalLiabilityAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART X, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION BELIEVES THAT IT HAS APPROPRIATE SUPPORT FOR ANY TAX POSITIONS TAKEN. THEREFORE, MANAGEMENT HAS NOT IDENTIFIED ANY UNCERTAIN INCOME TAX POSITIONS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleI documentId="RetDoc1041900001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>THIRD WAY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1025 CONNECTICUT AVE NW 400</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>201734070</RecipientEIN>
+        <IRCSectionDesc>501(C)(4)</IRCSectionDesc>
+        <CashGrantAmt>21902000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>SUPPORT CHARITABLE AND EDUCATIONAL ACTIVITIES RELATED TO ECONOMIC, NATIONAL SECURITY, ENERGY AND SOCIAL POLICY ISSUES AND PROVIDE INSIGHT INTO THE BELIEFS AND POLICY PREFERENCES OF SELF-IDENTIFIED MODERATES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>0</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>1</TotalOtherOrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>ALL GRANTS, SUCH AS THOSE MADE BY THIRD WAY INSTITUTE TO THIRD WAY (GRANT RECIPIENT) IN 2024 MUST COMPLY WITH THE FOLLOWING RESTRICTIONS: (A) THE GRANT RECIPIENT CAN ONLY USE THE GRANT FUNDS FOR CHARITABLE AND EDUCATIONAL ACTIVITIES, AS DEFINED IN SECTION 501(C)(3) OF THE CODE, AND NO FUNDS MAY BE USED FOR ANY OTHER PURPOSE; (B) GRANT FUNDS SHALL NOT BE USED FOR ANY ACTIVITY CONSIDERED TO BE LOBBYING UNDER SECTION 4911 AND 501(H) OF THE CODE; (C) GRANT FUNDS SHALL NOT BE USED TO SUPPORT OR OPPOSE ANY CANDIDATE SEEKING ELECTION TO PUBLIC OFFICE, OR PROVIDE A BENEFIT TO ANY POLITICAL PARTY OR CANDIDATE; (D) IN ADDITION, THE GRANT RECIPIENT MUST PROVIDE THIRD WAY INSTITUTE WITH DETAILED SEMI-ANNUAL REPORTS ON HOW THE GRANT FUNDS WERE USED, DEMONSTRATING THAT THE FUNDS WERE ONLY USED FOR THE CHARITABLE AND EDUCATIONAL PURPOSES APPROVED IN THE ORIGINAL GRANT PROPOSALS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleJ documentId="RetDoc1042400001">
+      <SeverancePaymentInd>0</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>0</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>0</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>0</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>0</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>0</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>0</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>0</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>0</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>JONATHAN COWAN</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <BaseCompensationFilingOrgAmt>0</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>413118</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>0</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>13800</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>0</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>27670</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>0</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>454588</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>MATTHEW BENNETT</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <BaseCompensationFilingOrgAmt>0</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>379453</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>0</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>13800</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>0</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>27340</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>0</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>420593</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>STEVE J DIETERLE CFO</PersonNm>
+        <TitleTxt>BOARD TREASURER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>0</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>181205</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>0</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>7215</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>0</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>0</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>188420</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, SCHEDULE J, PART II:</FormAndLineReferenceDesc>
+        <ExplanationTxt>ALL EMPLOYEES' WAGES (REPORTED ON FORM W-2) ARE PAID BY THIRD WAY. HOWEVER, BECAUSE EMPLOYEES PERFORM WORK FOR BOTH THIRD WAY AND THIRD WAY INSTITUTE, THE COSTS ARE SHARED. THIRD WAY TRACKS AND ANALYZES HOW MUCH TIME AND EXPENSE IS DEVOTED TO EACH ORGANIZATION, THEN ALLOCATES EXPENSES ACCORDINGLY BETWEEN THE TWO ENTITIES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleM documentId="RetDoc1042900001">
+      <SecuritiesPubliclyTradedGrp>
+        <NonCashCheckboxInd>X</NonCashCheckboxInd>
+        <ContributionCnt>2</ContributionCnt>
+        <NoncashContributionsRptF990Amt>269530</NoncashContributionsRptF990Amt>
+      </SecuritiesPubliclyTradedGrp>
+      <AnyPropertyThatMustBeHeldInd>0</AnyPropertyThatMustBeHeldInd>
+      <ReviewProcessUnusualNCGiftsInd>0</ReviewProcessUnusualNCGiftsInd>
+      <ThirdPartiesUsedInd>0</ThirdPartiesUsedInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, COLUMN (B):</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANOZATION IS REPORTING NUMBER OF CONTRIBUTIONS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleM>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION'S FORM 990 WAS PREPARED BY STAFF WORKING WITH A PROFESSIONAL RETURN PREPARER AND REVIEWED BY ITS PRESIDENT. A COPY OF THE RETURN WILL BE PROVIDED TO THE ENTIRE BOARD BEFORE IT IS FILED WITH THE IRS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION REMINDS STAFF AND MEMBERS OF THE BOARD OF THE CONFLICT OF INTEREST POLICY ON AN ANNUAL BASIS AND IS FOLLOWED UP FOR COMPLETION BY THE ORGANIZATION'S PRESIDENT.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 15</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE COMPENSATION COMMITTEE OF THE BOARD OF DIRECTORS OF THIRD WAY, A RELATED ORGANIZATION, CONDUCTED A REVIEW OF CEO AND OTHER CORPORATE OFFCIERS' SALARIES AND COMPARED THE SALARIES WITH COMPARABLY SIZED ORGANIZATIONS TO DETERMINE A REASONABLE COMPENSATION PACKAGE. THE SALARY REVIEW INCLUDED A COMPENSATION SURVEY AND EVALUATING THE FORM 990 OF OTHER SIMILAR ORGANIZATIONS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION MAKES ITS GOVERNING DOCUMENTS, CONFLICT OF INTEREST POLICY AND FINANCIAL STATEMENTS AVAILABLE TO THE PUBLIC UPON REQUEST.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VII:</FormAndLineReferenceDesc>
+        <ExplanationTxt>ALL W2 WAGES ARE PAID BY THIRD WAY, A RELATED ORGANIZATION. AMOUNTS ARE SPLIT WITH THE RELATED ORGANIZATION BASED ON COST SHARING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART XII, LINE 2C:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THESE PROCESSES HAVE NOT CHANGED SINCE THE PRIOR YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+    <IRS990ScheduleR documentId="RetDoc1043400001">
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>THIRD WAY</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>1025 CONNECTICUT AVE NW SUITE 501</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <EIN>201734070</EIN>
+        <PrimaryActivitiesTxt>TO RESEARCH AND DEVELOP CENTRIST POLICY IDEAS.</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>DC</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501(C)(4)</ExemptCodeSectionTxt>
+        <DirectControllingNACd>N/A</DirectControllingNACd>
+        <ControlledOrganizationInd>0</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <ReceiptOfIntAnntsRntsRyltsInd>0</ReceiptOfIntAnntsRntsRyltsInd>
+      <GiftGrntOrCapContriToOthOrgInd>1</GiftGrntOrCapContriToOthOrgInd>
+      <GiftGrntCapContriFromOthOrgInd>0</GiftGrntCapContriFromOthOrgInd>
+      <LoansOrGuaranteesToOtherOrgInd>0</LoansOrGuaranteesToOtherOrgInd>
+      <LoansOrGuaranteesFromOthOrgInd>0</LoansOrGuaranteesFromOthOrgInd>
+      <DivRelatedOrganizationInd>0</DivRelatedOrganizationInd>
+      <AssetSaleToOtherOrgInd>0</AssetSaleToOtherOrgInd>
+      <AssetPurchaseFromOtherOrgInd>0</AssetPurchaseFromOtherOrgInd>
+      <AssetExchangeInd>0</AssetExchangeInd>
+      <RentalOfFacilitiesToOthOrgInd>0</RentalOfFacilitiesToOthOrgInd>
+      <RentalOfFcltsFromOthOrgInd>0</RentalOfFcltsFromOthOrgInd>
+      <PerformOfServicesForOthOrgInd>0</PerformOfServicesForOthOrgInd>
+      <PerformOfServicesByOtherOrgInd>1</PerformOfServicesByOtherOrgInd>
+      <SharingOfFacilitiesInd>1</SharingOfFacilitiesInd>
+      <PaidEmployeesSharingInd>1</PaidEmployeesSharingInd>
+      <ReimbursementPaidToOtherOrgInd>1</ReimbursementPaidToOtherOrgInd>
+      <ReimbursementPaidByOtherOrgInd>0</ReimbursementPaidByOtherOrgInd>
+      <TransferToOtherOrgInd>0</TransferToOtherOrgInd>
+      <TransferFromOtherOrgInd>0</TransferFromOtherOrgInd>
+      <TransactionsRelatedOrgGrp>
+        <OtherOrganizationName>
+          <BusinessNameLine1Txt>THIRD WAY</BusinessNameLine1Txt>
+        </OtherOrganizationName>
+        <TransactionTypeTxt>O</TransactionTypeTxt>
+        <InvolvedAmt>218814</InvolvedAmt>
+        <MethodOfAmountDeterminationTxt>COST</MethodOfAmountDeterminationTxt>
+      </TransactionsRelatedOrgGrp>
+      <TransactionsRelatedOrgGrp>
+        <OtherOrganizationName>
+          <BusinessNameLine1Txt>THIRD WAY</BusinessNameLine1Txt>
+        </OtherOrganizationName>
+        <TransactionTypeTxt>B</TransactionTypeTxt>
+        <InvolvedAmt>21902000</InvolvedAmt>
+        <MethodOfAmountDeterminationTxt>COST</MethodOfAmountDeterminationTxt>
+      </TransactionsRelatedOrgGrp>
+    </IRS990ScheduleR>
+  </ReturnData>
+</Return>

@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: FrameWorks Institute
+ein: 71-0891642
+source_wave: extension2
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 92.0
+ceo_name: Nathaniel Kendall-Taylor
+ceo_title: Chief Executive Officer
+top_executive_basis: explicit CEO
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-05-18
+irs_object_id: 202641389349300439
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202641389349300439_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/710891642
+part_vii_org: 426832.0
+part_vii_related: 0.0
+part_vii_other: 61329.0
+cash_proxy: 426832.0
+total_proxy: 488161.0
+schedule_j_base: 
+revenue: 5952829.0
+expenses: 10039139.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: Exceptionally close social-science research/advisory and operating-scale match.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table lines 21-90; IRS object ID from XML link
+source_id: SRC-990-EXT-FRAMEWORKS-INSTITUTE
+part_vii_org_jul2026: 454357.54362523794
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 65283.98478322202
+cash_proxy_jul2026: 454357.54362523794
+total_proxy_jul2026: 519641.52840846
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 1.118189438390612

@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-SSRC-2024
+Organization: Social Science Research Council
+Document type: Form 990 filing-derived snapshot
+Original URL: https://apps.irs.gov/pub/epostcard/990/xml/2026/202641339349307834_public.xml
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/131325070
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: turn579724view2 L25-L93
+EIN: 13-1325070
+IRS object ID: 202641339349307834
+Tax period: 2024-07-01 to 2025-06-30
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Social Science Research Council
+EIN: 13-1325070
+IRS object ID: 202641339349307834
+Tax period: 2024-07-01 to 2025-06-30
+Filing date: 2026-05-13
+Top-executive record: Anna Harvey - President
+Full-year status: yes
+Part VII reportable compensation from organization: 341003
+Related organizations: 0
+Part VII other compensation: 42326
+Cash/reportable proxy: 341003
+Filing total proxy: 383329
+Revenue: 14237307
+Expenses: 15470220
+Tier/status: secondary / included_secondary
+Exclusion reason: 
+Notes: Comparable research institution, but grants/fellowships structure differs.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

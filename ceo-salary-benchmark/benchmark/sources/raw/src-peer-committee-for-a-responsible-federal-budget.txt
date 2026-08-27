@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Committee for a Responsible Federal Budget
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: second expansion / filing verification
+topic_cluster: Research, evaluation, philanthropy infrastructure, and policy
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 52-1231278
+revenue: 10368338.0
+expenses: 6703049.0
+employee_count: 
+comparability_score: 87.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 634845.9060206311
+total_proxy_jul2026: 697235.3213394918
+ceo_title: President
+compensation_year: 2025.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521231278
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202611949349301721_public.xml
+selection_note: Added by the second-expansion freeze and retained after role/scale verification; pay did not determine selection.

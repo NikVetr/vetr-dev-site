@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: American Security Project
+reference_tier: C
+tier_label: Tier C broad sensitivity
+selection_wave: third expansion / filing verification
+topic_cluster: security and foreign policy
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 20-4079553
+revenue: 1662436.0
+expenses: 750155.0
+employee_count: 
+comparability_score: 62.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 162512.1900715837
+total_proxy_jul2026: 170299.9843071664
+ceo_title: CEO / Treasurer
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/204079553
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202542279349301744_public.xml
+selection_note: Added by the third-expansion freeze and retained after role/scale/title verification; pay did not determine selection.

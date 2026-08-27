@@ -1,0 +1,1034 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2025v4.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2026-06-25T10:32:20-05:00</ReturnTs>
+    <TaxPeriodEndDt>2025-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>042571780</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>AAFCPAS INC</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>50 WASHINGTON STREET</AddressLine1Txt>
+        <CityNm>WESTBOROUGH</CityNm>
+        <StateAbbreviationCd>MA</StateAbbreviationCd>
+        <ZIPCd>01581</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2025-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>261797336</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>CLIMATE CENTRAL INC</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>CLIM</BusinessNameControlTxt>
+      <PhoneNum>6099243800</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>ONE PALMER SQUARE 315</AddressLine1Txt>
+        <CityNm>PRINCETON</CityNm>
+        <StateAbbreviationCd>NJ</StateAbbreviationCd>
+        <ZIPCd>08542</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>BENJAMIN STRAUSS</PersonNm>
+      <PersonTitleTxt>CEO AND CHIEF SCIENTIST</PersonTitleTxt>
+      <PhoneNum>6099243800</PhoneNum>
+      <SignatureDt>2026-06-24</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>NICHOLE REILLY CPA</PreparerPersonNm>
+      <PTIN>P01633587</PTIN>
+      <PhoneNum>5083669100</PhoneNum>
+      <PreparationDt>2026-06-24</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2025</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="9">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <PrincipalOfficerNm>BENJAMIN STRAUSS</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>ONE PALMER SQUARE 315</AddressLine1Txt>
+        <CityNm>PRINCETON</CityNm>
+        <StateAbbreviationCd>NJ</StateAbbreviationCd>
+        <ZIPCd>08542</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>22272608</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>WWW.CLIMATECENTRAL.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2008</FormationYr>
+      <LegalDomicileStateCd>NJ</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>COMMUNICATE THE SCIENCE AND EFFECTS OF CLIMATE CHANGE TO THE PUBLIC AND DECISION-MAKERS.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>9</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>9</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>57</TotalEmployeeCnt>
+      <TotalVolunteersCnt>9</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>6100975</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>21731974</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>239929</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>324877</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>292515</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>215757</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>158238</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>0</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>6791657</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>22272608</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>0</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>0</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>7917843</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>7640984</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>57326</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>554524</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>1374171</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>4213010</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>3340169</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>12188179</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>11535677</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-5396522</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>10736931</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>6058894</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>16002936</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>1852763</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>1059874</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>4206131</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>14943062</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>CLIMATE CENTRAL, INC. (THE ORGANIZATION") IS AN INDEPENDENT NOT-FOR-PROFIT ORGANIZATION OF LEADING SCIENTISTS, TECHNOLOGY EXPERTS AND COMMUNICATION PROFESSIONALS THAT ARE DEDICATED TO RESEARCHING AND REPORTING ON CLIMATE CHANGE AND ITS IMPACTS AND SOLUTIONS. THE ORGANIZATION SURVEYS AND CONDUCTS SCIENTIFIC RESEARCH ON CLIMATE CHANGE AND INFORMS THE PUBLIC AND DECISION MAKERS OF KEY FINDINGS. THE ORGANIZATION IS NOT AN ADVOCACY ORGANIZATION AND DOES NOT LOBBY OR SUPPORT ANY SPECIFIC LEGISLATION, POLICY OR BILL REGARDING CLIMATE CHANGE.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>3316315</ExpenseAmt>
+      <Desc>ATTRIBUTION SCIENCE + CLIMATE FINGERPRINTS: THE ORGANIZATION PLAYED A LEAD ROLE IN TRANSFORMING THE PUBLIC NARRATIVE TO RECOGNIZE THAT SOME EXTREME WEATHER EVENTS CAN BE ATTRIBUTED TO CLIMATE CHANGE, A CLAIM VALIDATED BY THE NATIONAL ACADEMY OF SCIENCES IN 2016. THIS PIONEERING RESEARCH IS JUST ONE EXAMPLE OF HOW THE ORGANIZATION'S SCIENTISTS HELPED CHANGE THE GLOBAL CLIMATE CONVERSATION. THE ORGANIZATION CONTINUES TO ADVANCE SCIENCE THAT WILL ENABLE THE QUANTIFICATION OF CLIMATE FINGERPRINTS IN WORLDWIDE LOCAL WEATHER DAILY A TRUE GRAIL FOR CLIMATE COMMUNICATIONS. TO ACHIEVE THIS IMPACT, THE ATTRIBUTION SCIENCE + CLIMATE FINGERPRINTS PROGRAM DEVELOPS TOOLS TO HELP REVEAL HOW CLIMATE CHANGE IS DISRUPTING OUR WORLD. ITS FIRST OPERATIONAL TOOL, THE CLIMATE SHIFT INDEX, PROVIDES DAILY ESTIMATES OF HOW CLIMATE CHANGE IS IMPACTING AIR TEMPERATURE.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>2077143</ExpenseAmt>
+        <Desc>CLIMATE MATTERS: CLIMATE MATTERS IS A CLIMATE REPORTING RESOURCE PROGRAM GROUNDED IN THE LATEST SCIENCE THAT HELPS METEOROLOGISTS AND JOURNALISTS REPORT ON CLIMATE IMPACTS AND SOLUTIONS IN WAYS THAT ARE LOCAL, IMMEDIATE, AND PERSONAL. THE ORGANIZATION'S TEAM OF SCIENTISTS, DATA ANALYSTS AND VISUAL ARTISTS IDENTIFY AND INTERPRET DATA AND PRODUCE EASY-TO-UNDERSTAND TEXT AND VISUAL MATERIALS, INCLUDING GRAPHICS, INTERACTIVE CONTENT AND VIDEOS, TO HELP JOURNALISTS BUILD STORIES THAT WILL ENGAGE AND ENLIGHTEN THEIR AUDIENCE. THE ORGANIZATION'S REPORTING TOOLS ARE AVAILABLE, FREE OF CHARGE, TO ANYONE INTERESTED IN TELLING ENGAGING LOCAL, SCIENCE-BASED STORIES ABOUT HOW GLOBAL CLIMATE CHANGE IS IMPACTING THEIR COMMUNITY, WHY IT MATTERS, AND WHAT CAN BE DONE ABOUT IT.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>763506</ExpenseAmt>
+        <Desc>REALTIME CLIMATE: REALTIME CLIMATE IS AN INITIATIVE TO DISPATCH TIMELY ALERTS AND RELATED CONTENT TO METEOROLOGISTS, OTHER JOURNALISTS, AND OTHER SUBSCRIBERS WHEN CURRENT LOCAL CONDITIONS PRESENT A NOTABLE OPPORTUNITY TO COMMUNICATE ABOUT CLIMATE CHANGE, ITS IMPACTS, OR ITS SOLUTIONS. AT REALTIME CLIMATE'S CORE IS A CONTINUALLY UPDATED SOFTWARE SYSTEM THAT MONITORS A GROWING RANGE OF DATA STREAMS FROM LOCAL WEATHER FORECASTS TO COASTAL WATER LEVELS TO LOCAL RENEWABLE ENERGY GENERATION. WHEN KEY THRESHOLDS ARE MET, THE SYSTEM ASSEMBLES RELATED CONTENT, LARGELY LEVERAGING RESEARCH AND MATERIALS FROM THE CLIMATE MATTERS, SEA LEVEL RISE, AND ATTRIBUTION PROGRAMS, AND SENDS ALERTS TO SUBSCRIBERS IN THE AREAS EXPERIENCING THRESHOLD CONDITIONS. SUBSCRIBERS INCLUDE PARTICIPANTS IN THE CLIMATE MATTERS PROGRAM AND MANY STAKEHOLDERS OF THE SEA LEVEL RISE PROGRAM, AS WELL AS ANYONE WHO OPTS IN USING AN ONLINE FORM ON CLIMATE CENTRAL'S WEBSITE.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>2888909</ExpenseAmt>
+        <RevenueAmt>324877</RevenueAmt>
+        <Desc>SEA LEVEL RISE: THE ORGANIZATION'S PROGRAM ON SEA LEVEL RISE STRIVES TO PROVIDE SCIENCE-BASED, CLEAR AND GRANULAR INFORMATION ABOUT SEA LEVEL RISE AND COASTAL FLOOD HAZARDS BOTH LOCALLY AND GLOBALLY, TODAY AND TOMORROW. ANCHORED IN RIGOROUS PRIMARY RESEARCH, THE ORGANIZATION'S WORK DISTINGUISHES ITSELF BY ITS USER-FRIENDLY MAPS AND TOOLS, EXTENSIVE DATASETS, AND HIGH-QUALITY VISUAL PRESENTATIONS. THE PROGRAM DEDICATES ITS EFFORTS TO HELPING JOURNALISTS, CITIZENS, COMMUNITIES, BUSINESSES, ORGANIZATIONS, AND GOVERNMENTS AT EVERY LEVEL TO UNDERSTAND THE CONSEQUENCES OF DIFFERENT CARBON PATHWAYS AND TO NAVIGATE THE SHIFTING WATERS OF OUR WARMING WORLD. FLOODVISION: FLOODVISION, AN INNOVATIVE TOOL DEVELOPED BY CLIMATE CENTRAL, USES ADVANCED DATA COLLECTION TECHNIQUES, AI-BASED ALGORITHMS, AND INTUITIVE SOFTWARE TO PRODUCE SCIENCE-BASED AUGMENTED-REALITY PHOTOS OF SPECIFIC LOCATIONS. USERS CAN CHOOSE OPTIONAL VIEWS TO CONTRAST MEANINGFUL SCENARIOS IN THEIR NEIGHBORHOODS, SUCH AS PROJECTED SEA LEVELS BASED ON DIFFERENT CARBON PATHWAYS OR LOCAL STORM SURGE FORECASTS FROM APPROACHING HURRICANES. FLOODVISION IS DESIGNED TO EMPOWER THE ORGANIZATION'S BROAD MEDIA NETWORKS, AS WELL AS LOCAL GOVERNMENTS, AGENCIES, NGOS AND OTHER COASTAL STAKEHOLDERS, SUCH AS EMERGENCY MANAGERS WHO CAN USE THE IMAGERY TO STRENGTHEN EVACUATION WARNINGS AND OTHER SAFETY MEASURES. THIS HELPS THE PUBLIC AND OTHER STAKEHOLDERS BETTER VISUALIZE AND UNDERSTAND THE IMPACTS OF CLIMATE CHANGE.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>2888909</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcRevenueAmt>324877</TotalOtherProgSrvcRevenueAmt>
+      <TotalProgramServiceExpensesAmt>9045873</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc1039100001">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>0</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc1040000001">0</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc1040000001">0</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc1040000001">0</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc1040000001">0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc1040000001">1</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc1040000001">0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc1040000001">0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc1040000001">0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc1040000001">1</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc1040000001">1</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">1</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="RetDoc1040500001">1</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="RetDoc1040500001">0</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd referenceDocumentId="RetDoc1040500001">0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd referenceDocumentId="RetDoc1041200001">1</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd referenceDocumentId="RetDoc1041200001">0</FundraisingActivitiesInd>
+      <GamingActivitiesInd referenceDocumentId="RetDoc1041200001">0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd>0</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="RetDoc1042400001">1</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd referenceDocumentId="RetDoc1042900001">1</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd referenceDocumentId="RetDoc1042900001">0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd>0</DisregardedEntityInd>
+      <RelatedEntityInd>0</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>41</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>1</BackupWthldComplianceInd>
+      <EmployeeCnt>57</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>0</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>9</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>9</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>1</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>1</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NJ</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>FL</StatesWhereCopyOfReturnIsFldCd>
+      <OwnWebsiteInd>X</OwnWebsiteInd>
+      <OtherWebsiteInd>X</OtherWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>MONIVETT ACEVEDO</BusinessNameLine1Txt>
+        </BusinessName>
+        <PhoneNum>6099243800</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>ONE PALMER SQUARE SUITE 315</AddressLine1Txt>
+          <CityNm>PRINCETON</CityNm>
+          <StateAbbreviationCd>NJ</StateAbbreviationCd>
+          <ZIPCd>08542</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DR STEPHEN PACALA</PersonNm>
+        <TitleTxt>CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>5.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MICHAEL OPPENHEIMER</PersonNm>
+        <TitleTxt>VICE CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DECKER ANSTROM</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>APARNA BOLE MD</PersonNm>
+        <TitleTxt>TRUSTEE (AS OF 05/2025)</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CARL FERENBACH</PersonNm>
+        <TitleTxt>TRUSTEE</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MARCELINO FORD LIVENE</PersonNm>
+        <TitleTxt>TRUSTEE</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>RANDALL HACK</PersonNm>
+        <TitleTxt>TRUSTEE (UNTIL 10/2025)</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DR SARAH KAPNICK</PersonNm>
+        <TitleTxt>TRUSTEE (AS OF 01/2025)</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ROBERT LITTERMAN</PersonNm>
+        <TitleTxt>TRUSTEE</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>VIVIAN SCHILLER</PersonNm>
+        <TitleTxt>TRUSTEE (UNTIL 05/2025)</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>WENDY SCHMIDT</PersonNm>
+        <TitleTxt>TRUSTEE</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DR BENJAMIN STRAUSS</PersonNm>
+        <TitleTxt>CEO &amp; CHIEF SCIENTIST</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>309795</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>82196</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MONIVETT ACEVEDO</PersonNm>
+        <TitleTxt>VICE PRESIDENT FOR FINANCE</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>158958</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>55400</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DANIEL DODSON</PersonNm>
+        <TitleTxt>CHIEF TECHNOLOGY OFFICER</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>236554</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>71135</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SCOTT ANDREW KULP</PersonNm>
+        <TitleTxt>PRINCIPAL COMPUTATIONAL SCIENTIST</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>256391</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>73340</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANDREW PERSHING</PersonNm>
+        <TitleTxt>CHIEF PROGRAM OFFICER</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>225000</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>61284</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BERNADETTE WOODS PLACKY</PersonNm>
+        <TitleTxt>VP FOR ENGAGEMENT</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>213001</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>68643</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>EMILY ELLEN SILBERSTEIN</PersonNm>
+        <TitleTxt>CHIEF OF STAFF</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>213750</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>49832</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>1613449</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>461830</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>19</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>1</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>ORR GROUP INC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>3000 K STREET NW E280</AddressLine1Txt>
+            <CityNm>WASHINGTON</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>20007</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>OUTSOURCED DEVELOPMENT</ServicesDesc>
+        <CompensationAmt>554524</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>SWIRL CREATIVE LLC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>2207 BEAU WEST CT</AddressLine1Txt>
+            <CityNm>GRANBURY</CityNm>
+            <StateAbbreviationCd>TX</StateAbbreviationCd>
+            <ZIPCd>76049</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>SOFTWARE DEVELOPMENT</ServicesDesc>
+        <CompensationAmt>194200</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>DATANA TRACEWSKI LUKASZ</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <ForeignAddress>
+            <AddressLine1Txt>ALFREDA JAHNA 37</AddressLine1Txt>
+            <CityNm>WROCLAW</CityNm>
+            <CountryCd>PL</CountryCd>
+            <ForeignPostalCd>54-703</ForeignPostalCd>
+          </ForeignAddress>
+        </ContractorAddress>
+        <ServicesDesc>SOFTWARE DEVELOPMENT</ServicesDesc>
+        <CompensationAmt>172405</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>LEAR &amp; PANNEPACKER LLP</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>791 ALEXANDER ROAD</AddressLine1Txt>
+            <CityNm>PRINCETON</CityNm>
+            <StateAbbreviationCd>NJ</StateAbbreviationCd>
+            <ZIPCd>08540</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>OUTSOURCED ACCOUNTING FUNCTION</ServicesDesc>
+        <CompensationAmt>149055</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>TWOJ STARTUP</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <ForeignAddress>
+            <AddressLine1Txt>AL JEROZOLIMSKIE 123A</AddressLine1Txt>
+            <CityNm>WARSAW</CityNm>
+            <CountryCd>PL</CountryCd>
+            <ForeignPostalCd>02-017</ForeignPostalCd>
+          </ForeignAddress>
+        </ContractorAddress>
+        <ServicesDesc>CONSULTING</ServicesDesc>
+        <CompensationAmt>133747</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>8</CntrctRcvdGreaterThan100KCnt>
+      <GovernmentGrantsAmt>23942</GovernmentGrantsAmt>
+      <AllOtherContributionsAmt>21708032</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>1035624</NoncashContributionsAmt>
+      <TotalContributionsAmt>21731974</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>PROGRAM LICENSING FEES</Desc>
+        <BusinessCd>900099</BusinessCd>
+        <TotalRevenueColumnAmt>324877</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>324877</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>324877</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>215757</TotalRevenueColumnAmt>
+        <ExclusionAmt>215757</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>22272608</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>324877</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>215757</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>606349</TotalAmt>
+        <ProgramServicesAmt>374227</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>232122</ManagementAndGeneralAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>5117852</TotalAmt>
+        <ProgramServicesAmt>4320189</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>294698</ManagementAndGeneralAmt>
+        <FundraisingAmt>502965</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>549814</TotalAmt>
+        <ProgramServicesAmt>400768</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>100145</ManagementAndGeneralAmt>
+        <FundraisingAmt>48901</FundraisingAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>903025</TotalAmt>
+        <ProgramServicesAmt>821107</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>880</ManagementAndGeneralAmt>
+        <FundraisingAmt>81038</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>463944</TotalAmt>
+        <ProgramServicesAmt>336694</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>83585</ManagementAndGeneralAmt>
+        <FundraisingAmt>43665</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>33978</TotalAmt>
+        <ManagementAndGeneralAmt>33978</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>64472</TotalAmt>
+        <ManagementAndGeneralAmt>64472</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesProfFundraising>
+        <TotalAmt>554524</TotalAmt>
+        <FundraisingAmt>554524</FundraisingAmt>
+      </FeesForServicesProfFundraising>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>1774926</TotalAmt>
+        <ProgramServicesAmt>1547074</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>172835</ManagementAndGeneralAmt>
+        <FundraisingAmt>55017</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>98073</TotalAmt>
+        <ProgramServicesAmt>36928</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>34484</ManagementAndGeneralAmt>
+        <FundraisingAmt>26661</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>619024</TotalAmt>
+        <ProgramServicesAmt>593471</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>15026</ManagementAndGeneralAmt>
+        <FundraisingAmt>10527</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <OccupancyGrp>
+        <TotalAmt>197749</TotalAmt>
+        <ProgramServicesAmt>163893</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>16800</ManagementAndGeneralAmt>
+        <FundraisingAmt>17056</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>134249</TotalAmt>
+        <ProgramServicesAmt>118682</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>10173</ManagementAndGeneralAmt>
+        <FundraisingAmt>5394</FundraisingAmt>
+      </TravelGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>49065</TotalAmt>
+        <ProgramServicesAmt>40755</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4033</ManagementAndGeneralAmt>
+        <FundraisingAmt>4277</FundraisingAmt>
+      </ConferencesMeetingsGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>218257</TotalAmt>
+        <ProgramServicesAmt>172935</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>31026</ManagementAndGeneralAmt>
+        <FundraisingAmt>14296</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>73503</TotalAmt>
+        <ProgramServicesAmt>58240</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>10448</ManagementAndGeneralAmt>
+        <FundraisingAmt>4815</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>MISCELLANEOUS</Desc>
+        <TotalAmt>76873</TotalAmt>
+        <ProgramServicesAmt>60910</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>10928</ManagementAndGeneralAmt>
+        <FundraisingAmt>5035</FundraisingAmt>
+      </OtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>11535677</TotalAmt>
+        <ProgramServicesAmt>9045873</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1115633</ManagementAndGeneralAmt>
+        <FundraisingAmt>1374171</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>496444</BOYAmt>
+        <EOYAmt>1159317</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>3707016</BOYAmt>
+        <EOYAmt>6548809</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>120000</BOYAmt>
+        <EOYAmt>7514408</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>78835</BOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>81082</BOYAmt>
+        <EOYAmt>81214</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>664286</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>391144</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>485067</BOYAmt>
+        <EOYAmt>273142</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <IntangibleAssetsGrp>
+        <BOYAmt>145931</BOYAmt>
+        <EOYAmt>91882</EOYAmt>
+      </IntangibleAssetsGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>944519</BOYAmt>
+        <EOYAmt>334164</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>6058894</BOYAmt>
+        <EOYAmt>16002936</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>900177</BOYAmt>
+        <EOYAmt>790532</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>952586</BOYAmt>
+        <EOYAmt>269342</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>1852763</BOYAmt>
+        <EOYAmt>1059874</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>2537725</BOYAmt>
+        <EOYAmt>4201116</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>1668406</BOYAmt>
+        <EOYAmt>10741946</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>4206131</BOYAmt>
+        <EOYAmt>14943062</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>6058894</BOYAmt>
+        <EOYAmt>16002936</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>10736931</ReconcilationRevenueExpnssAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <InfoInScheduleOPartXIIInd>X</InfoInScheduleOPartXIIInd>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>1</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>7133066</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>13892447</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>8716952</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>6100975</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>21731974</CurrentTaxYearAmt>
+        <TotalAmt>57575414</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>7133066</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>13892447</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>8716952</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>6100975</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>21731974</CurrentTaxYearAmt>
+        <TotalAmt>57575414</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>19596457</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>37978957</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>644</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>112142</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>351730</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>292515</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>215757</CurrentTaxYearAmt>
+        <TotalAmt>972788</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>174570</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>216460</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>167197</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>158238</CurrentTaxYearMinus1YearAmt>
+        <TotalAmt>716465</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>59264667</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>1256443</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.64080</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.45470</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="RetDoc1040000001">
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>437061</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>327015</DepreciationAmt>
+        <BookValueAmt>110046</BookValueAmt>
+      </EquipmentGrp>
+      <OtherLandBuildingsGrp>
+        <OtherCostOrOtherBasisAmt>227225</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>64129</DepreciationAmt>
+        <BookValueAmt>163096</BookValueAmt>
+      </OtherLandBuildingsGrp>
+      <TotalBookValueLandBuildingsAmt>273142</TotalBookValueLandBuildingsAmt>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>OPERATING LEASE LIABILITIES</Desc>
+        <Amt>269342</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>269342</TotalLiabilityAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>22272608</TotalRevEtcAuditedFinclStmtAmt>
+      <RevenueNotReportedAmt>0</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>22272608</RevenueSubtotalAmt>
+      <RevenueNotReportedFinclStmtAmt>0</RevenueNotReportedFinclStmtAmt>
+      <TotalRevenuePerForm990Amt>22272608</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>11535677</TotExpnsEtcAuditedFinclStmtAmt>
+      <ExpensesNotReportedAmt>0</ExpensesNotReportedAmt>
+      <ExpensesSubtotalAmt>11535677</ExpensesSubtotalAmt>
+      <ExpensesNotRptFinclStmtAmt>0</ExpensesNotRptFinclStmtAmt>
+      <TotalExpensesPerForm990Amt>11535677</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART X, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION ACCOUNTS FOR UNCERTAINTY IN INCOME TAXES IN ACCORDANCE WITH ASC TOPIC, INCOME TAXES. THIS STANDARD CLARIFIES THE ACCOUNTING FOR UNCERTAINTY IN TAX POSITIONS AND PRESCRIBES A RECOGNITION THRESHOLD AND MEASUREMENT ATTRIBUTE FOR THE FINANCIAL STATEMENTS REGARDING A TAX POSITION TAKEN OR EXPECTED TO BE TAKEN IN A TAX RETURN. THE ORGANIZATION HAS DETERMINED THAT THERE ARE NO UNCERTAIN TAX POSITIONS WHICH QUALIFY FOR EITHER RECOGNITION OR DISCLOSURE IN THE FINANCIAL STATEMENTS AT DECEMBER 31, 2025. THE ORGANIZATIONS' INFORMATION RETURNS ARE SUBJECT TO EXAMINATION BY THE FEDERAL AND STATE JURISDICTIONS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="RetDoc1040500001">
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PRODUCT FEASIBILITY AND MARKET RESEARCH</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>38333</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>SOFTWARE DEVELOPER</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>306152</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>RUSSIA AND NEIGHBORING STATES</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>SOFTWARE DEVELOPER</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>57300</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <SubtotalOfficesCnt>0</SubtotalOfficesCnt>
+      <SubtotalEmployeesCnt>0</SubtotalEmployeesCnt>
+      <ContinuationTotalOfficeCnt>0</ContinuationTotalOfficeCnt>
+      <ContinuationTotalEmployeeCnt>0</ContinuationTotalEmployeeCnt>
+      <TotalOfficeCnt>0</TotalOfficeCnt>
+      <TotalEmployeeCnt>0</TotalEmployeeCnt>
+      <SubtotalSpentAmt>401785</SubtotalSpentAmt>
+      <ContinuationSpentAmt>0</ContinuationSpentAmt>
+      <TotalSpentAmt>401785</TotalSpentAmt>
+      <TransferToForeignCorpInd>0</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>0</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>0</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>0</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>0</ForeignPartnershipInd>
+      <BoycottCountriesInd>0</BoycottCountriesInd>
+    </IRS990ScheduleF>
+    <IRS990ScheduleG documentId="RetDoc1041200001">
+      <MailSolicitationsInd>X</MailSolicitationsInd>
+      <EmailSolicitationsInd>X</EmailSolicitationsInd>
+      <PhoneSolicitationsInd>X</PhoneSolicitationsInd>
+      <InPersonSolicitationsInd>X</InPersonSolicitationsInd>
+      <SolicitationOfNonGovtGrantsInd>X</SolicitationOfNonGovtGrantsInd>
+      <SpecialFundraisingEventsInd>X</SpecialFundraisingEventsInd>
+      <AgrmtProfFundraisingActyInd>1</AgrmtProfFundraisingActyInd>
+      <FundraiserActivityInfoGrp>
+        <OrganizationBusinessName>
+          <BusinessNameLine1Txt>ORR GROUP INC</BusinessNameLine1Txt>
+        </OrganizationBusinessName>
+        <USAddress>
+          <AddressLine1Txt>3000 K STREET NORTHWEST SUITE E280</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20007</ZIPCd>
+        </USAddress>
+        <ActivityTxt>DEVELOPMENT</ActivityTxt>
+        <FundraiserControlOfFundsInd>0</FundraiserControlOfFundsInd>
+        <GrossReceiptsAmt>0</GrossReceiptsAmt>
+        <RetainedByContractorAmt>554524</RetainedByContractorAmt>
+        <NetToOrganizationAmt>-554524</NetToOrganizationAmt>
+      </FundraiserActivityInfoGrp>
+      <TotalRetainedByContractorsAmt>554524</TotalRetainedByContractorsAmt>
+      <TotalNetToOrganizationAmt>-554524</TotalNetToOrganizationAmt>
+      <LicensedStatesCd>NJ</LicensedStatesCd>
+      <LicensedStatesCd>CA</LicensedStatesCd>
+      <LicensedStatesCd>FL</LicensedStatesCd>
+    </IRS990ScheduleG>
+    <IRS990ScheduleJ documentId="RetDoc1042400001">
+      <WrittenEmploymentContractInd>X</WrittenEmploymentContractInd>
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>0</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>0</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>0</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>0</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>0</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>0</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>0</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>1</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>0</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>DR BENJAMIN STRAUSS</PersonNm>
+        <TitleTxt>CEO &amp; CHIEF SCIENTIST</TitleTxt>
+        <BaseCompensationFilingOrgAmt>309795</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>37176</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>45020</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>391991</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>SCOTT ANDREW KULP</PersonNm>
+        <TitleTxt>PRINCIPAL COMPUTATIONAL SCIENTIST</TitleTxt>
+        <BaseCompensationFilingOrgAmt>234391</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>22000</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>30260</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>43080</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>329731</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>DANIEL DODSON</PersonNm>
+        <TitleTxt>CHIEF TECHNOLOGY OFFICER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>236554</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>28386</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>42749</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>307689</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>ANDREW PERSHING</PersonNm>
+        <TitleTxt>CHIEF PROGRAM OFFICER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>225000</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>27000</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>34284</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>286284</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>BERNADETTE WOODS PLACKY</PersonNm>
+        <TitleTxt>VP FOR ENGAGEMENT</TitleTxt>
+        <BaseCompensationFilingOrgAmt>213001</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>25560</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>43083</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>281644</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>EMILY ELLEN SILBERSTEIN</PersonNm>
+        <TitleTxt>CHIEF OF STAFF</TitleTxt>
+        <BaseCompensationFilingOrgAmt>213750</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>25650</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>24182</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>263582</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>MONIVETT ACEVEDO</PersonNm>
+        <TitleTxt>VICE PRESIDENT FOR FINANCE</TitleTxt>
+        <BaseCompensationFilingOrgAmt>158958</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>19075</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>36325</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>214358</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 7</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION PAYS NON-FIXED PAYMENTS IN THE FORM OF BONUSES. THESE BONUSES ARE MERIT BASED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleM documentId="RetDoc1042900001">
+      <SecuritiesPubliclyTradedGrp>
+        <NonCashCheckboxInd>X</NonCashCheckboxInd>
+        <ContributionCnt>9</ContributionCnt>
+        <NoncashContributionsRptF990Amt>1035624</NoncashContributionsRptF990Amt>
+        <MethodOfDeterminingRevenuesTxt>AVERAGE PRICE DOR</MethodOfDeterminingRevenuesTxt>
+      </SecuritiesPubliclyTradedGrp>
+      <AnyPropertyThatMustBeHeldInd>0</AnyPropertyThatMustBeHeldInd>
+      <ReviewProcessUnusualNCGiftsInd>0</ReviewProcessUnusualNCGiftsInd>
+      <ThirdPartiesUsedInd>0</ThirdPartiesUsedInd>
+    </IRS990ScheduleM>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION SHARES A COPY OF FORM 990 WITH THE FINANCE AND AUDIT COMMITTEE AND THE FULL BOARD OF TRUSTEES FOR REVIEW BEFORE FILING IT.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>EACH BOARD MEMBER, OFFICER, AND KEY EMPLOYEE IS REQUIRED TO ANNUALLY AFFIRM THAT THEY UNDERSTAND THE CONFLICT OF INTEREST POLICY, AFFIRM THAT THEY HAVE NO CONFLICTS OF INTEREST, AND DISCLOSE ANY CONFLICTS OF INTERST THAT MAY EXIST. "COVERED PERSONS" ARE REQUIRED TO DISCLOSE ANY POSSIBLE CONFLICT OF INTEREST AS SOON AS THEY ARISE. AFTER THE "COVERED PERSON" HAS DISCLOSED THE EXISTENCE OF A FINANCIAL INTEREST OR A POSSIBLE FINANCIAL INTEREST, THE BOARD SHALL DETERMINE IF A CONFLICT OF INTEREST EXISTS BECAUSE THE "COVERED PERSON" HAS AN ACTUAL FINANCIAL INTEREST IN THE PROPOSED TRANSACTION AND THAT HE OR SHE SHALL BENEFIT FROM SUCH PROPOSED TRANSACTION. IF THE BOARD HAS REASONABLE CAUSE TO BELIEVE THAT A "COVERED PERSON" HAS FAILED TO DISCLOSE A FINANCIAL INTEREST, IT SHALL INFORM THE "COVERED PERSON" OF THE BASIS FOR SUCH BELIEF AND AFFORD THE "COVERED PERSON" AN OPPORTUNITY TO EXPLAIN THE FAILURE OF SUCH DISCLOSURE.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 15</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE COMPENSATION FOR THE CEO/PRESIDENT AND HIGHEST COMPENSATED EMPLOYEES IS BASED ON COMPENSATION OF COMPARABLE NONPROFIT ORGANIZATIONS OF SIMILAR PURPOSE AND BUDGET. THE COMPENSATION FOR THE CEO/PRESIDENT IS APPROVED BY THE BOARD OF TRUSTEES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION MAKES ITS GOVERNING DOCUMENTS, CONFLICT OF INTEREST POLICY, AND FINANCIAL STATEMENTS AVAILABLE UPON REQUEST TO THE PUBLIC.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART IX, LINE 11G</FormAndLineReferenceDesc>
+        <ExplanationTxt>OTHER PROFESSIONAL FEES: PROGRAM SERVICE EXPENSES 1,547,074. MANAGEMENT AND GENERAL EXPENSES 172,835. FUNDRAISING EXPENSES 55,017. TOTAL EXPENSES 1,774,926.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART XII, LINE 2C:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THIS PROCESS HAS NOT CHANGED SINCE THE PRIOR YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

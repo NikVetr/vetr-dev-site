@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Results for Development
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: first expansion
+topic_cluster: Global health, development, and evidence
+ea_affinity: EA-adjacent
+country_or_region: US/international
+expected_structure: independent nonprofit
+ein: 20-8530747
+revenue: 49137699.0
+expenses: 48542325.0
+employee_count: 140.0
+comparability_score: 76.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 408852.8104400699
+total_proxy_jul2026: 423542.7448920985
+ceo_title: President & CEO
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/208530747
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202512739349302306_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/results-for-development%2C208530747/
+prior_scale_source_type: Cause IQ filing-derived profile
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Strong evidence/advisory function; above expense band but staff within wider band; some implementation work.
+prior_function_score: 28.0
+prior_expense_score: 12.0
+prior_staff_score: 12.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

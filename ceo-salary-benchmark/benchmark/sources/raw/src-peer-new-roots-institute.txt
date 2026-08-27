@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: New Roots Institute
+reference_tier: B
+tier_label: Tier B weighted secondary
+selection_wave: first expansion
+topic_cluster: Animal welfare and food systems
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 82-4594246
+revenue: 3509009.0
+expenses: 2260435.0
+employee_count: 36.0
+comparability_score: 71.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 94680.8854953396
+total_proxy_jul2026: 101479.77037541982
+ceo_title: Executive Director
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/824594246
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202523519349301637_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/factory-farming-awareness-coalition%2C824594246/
+prior_scale_source_type: Cause IQ filing profile (IRS-derived)
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Animal-welfare education, field-building, and advocacy organization. Expenses are below the main band, but 36 employees are directly comparable to RP headcount; retained with a functional/scale discount.
+prior_function_score: 20.0
+prior_expense_score: 12.0
+prior_staff_score: 15.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

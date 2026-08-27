@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Electronic Frontier Foundation
+ein: 04-3091431
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 79.0
+ceo_name: Cindy Cohn
+ceo_title: Executive Director
+top_executive_basis: explicit ED
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-04-09
+irs_object_id: 202610989349301676
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202610989349301676_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/43091431
+part_vii_org: 352039.0
+part_vii_related: 0.0
+part_vii_other: 24127.0
+cash_proxy: 352039.0
+total_proxy: 376166.0
+schedule_j_base: 
+revenue: 21592581.0
+expenses: 25771066.0
+employee_count: 121.0
+full_year_status: yes
+founder_flag: no
+structure_flag: legal_advocacy_hybrid
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: Technology-policy and research relevance, but substantial litigation/advocacy function.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest FY2025 filing table
+source_id: SRC-990-EXT-ELECTRONIC-FRONTIER-FOUNDATION
+part_vii_org_jul2026: 374741.29235925415
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 25682.902066963383
+cash_proxy_jul2026: 374741.29235925415
+total_proxy_jul2026: 400424.1944262175
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: True
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.960184409052808

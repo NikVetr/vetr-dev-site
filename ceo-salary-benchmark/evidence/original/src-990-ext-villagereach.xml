@@ -1,0 +1,1549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2023v6.0">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-08-07T10:47:19-05:00</ReturnTs>
+    <TaxPeriodEndDt>2024-09-30</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>911194016</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>CLARK NUBER PS</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>10900 NE 4TH ST SUITE 1400</AddressLine1Txt>
+        <CityNm>BELLEVUE</CityNm>
+        <StateAbbreviationCd>WA</StateAbbreviationCd>
+        <ZIPCd>98004</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2023-10-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>912083484</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>VILLAGEREACH</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>VILL</BusinessNameControlTxt>
+      <PhoneNum>2065121530</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>210 S HUDSON ST 307</AddressLine1Txt>
+        <CityNm>SEATTLE</CityNm>
+        <StateAbbreviationCd>WA</StateAbbreviationCd>
+        <ZIPCd>98134</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>TENDAI MUNYORO</PersonNm>
+      <PersonTitleTxt>CFO</PersonTitleTxt>
+      <PhoneNum>2064863028</PhoneNum>
+      <SignatureDt>2025-08-05</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>0</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>FRANCES OLSON</PreparerPersonNm>
+      <PTIN>P01228048</PTIN>
+      <PhoneNum>4254544919</PhoneNum>
+      <PreparationDt>2025-08-05</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2023</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="10">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <PrincipalOfficerNm>AHMED OGWELL</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>210 S HUDSON ST 307</AddressLine1Txt>
+        <CityNm>SEATTLE</CityNm>
+        <StateAbbreviationCd>WA</StateAbbreviationCd>
+        <ZIPCd>98134</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>46986043</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>WWW.VILLAGEREACH.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2000</FormationYr>
+      <LegalDomicileStateCd>WA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>TO SAVE LIVES AND IMPROVE HEALTH BY INCREASING ACCESS TO QUALITY HEALTHCARE.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>13</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>13</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>62</TotalEmployeeCnt>
+      <TotalVolunteersCnt>14</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>12195017</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>24363316</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>5974703</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>6116347</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>644127</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>1035036</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>2690</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>0</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>18816537</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>31514699</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>2551267</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>3803472</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>14547408</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>15867380</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>0</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>44182</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>474563</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>7936161</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>12052723</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>25034836</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>31767757</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-6218299</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>-253058</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>25538831</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>26371248</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>2209425</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>3322913</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>23329406</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>23048335</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>VILLAGEREACH'S MISSION IS TO TRANSFORM HEALTH CARE DELIVERY TO REACH EVERYONE.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>9288740</ExpenseAmt>
+      <GrantAmt>13875</GrantAmt>
+      <RevenueAmt>1064770</RevenueAmt>
+      <Desc>ACCELERATING NEXT-GENERATION SUPPLY CHAINS: VILLAGEREACH WORKS WITH MINISTRIES OF HEALTH TO DESIGN AND IMPLEMENT "NEXT-GENERATION" SUPPLY CHAINS TO GET MEDICINES AND VACCINES TO ALL PEOPLE WHO NEED THEM. ALONG WITH OUR DIRECT WORK WITH GOVERNMENTS AND THEIR PARTNERS TO IMPLEMENT NEW SUPPLY CHAIN DESIGNS IN MOZAMBIQUE, DRC, AND TANZANIA, THE ORGANIZATION ALSO DRIVES CHANGE GLOBALLY THROUGH ADVOCACY, EVIDENCE-GENERATION, AND PARTNERSHIPS THAT ENCOURAGE ADDITIONAL COUNTRIES TO INITIATE AND EXPAND EFFORTS TO IMPROVE SUPPLY CHAIN EFFECTIVENESS AND EFFICIENCY.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>8635244</ExpenseAmt>
+        <GrantAmt>2889312</GrantAmt>
+        <RevenueAmt>998842</RevenueAmt>
+        <Desc>RESEARCH, INCUBATION, AND TECHNICAL ASSISTANCE: IN ADDITION TO THE PROGRAMS BELOW, VILLAGEREACH SUPPORTS GOVERNMENTS ACROSS 15 AFRICAN COUNTRIES AND WASHINGTON STATE TO UNDERSTAND STRATEGIES FOR REACHING MORE HARD TO REACH CHILDREN AND ADOLESCENTS WITH VACCINES, IMPROVE ACCESS TO TELEHEALTH AND TELEMEDICINE SERVICES, IMPROVE LABORATORY SAMPLE TRANSPORT EFFORTS, IMPROVE PUBLIC HEALTH OUTREACH STRATEGIES, AND ENGAGE IN COMMUNITY-BASED PARTICIPATORY RESEARCH TO IMPROVE ACCESS TO PRIMARY HEALTH CARE SERVICES FOR HARD TO REACH POPULATIONS.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>1281978</ExpenseAmt>
+        <GrantAmt>354348</GrantAmt>
+        <RevenueAmt>1158730</RevenueAmt>
+        <Desc>OPENLMIS - ELECTRONIC LOGISTICS MANAGEMENT INFORMATION SYSTEMS (ELMIS) CAN IMPROVE, SUPPORT, AND AUTOMATE SUPPLY CHAIN DATA COLLECTION AND PROCESSES TO EQUIP HEALTH WORKERS AND LOGISTICIANS WITH RELIABLE, ACCURATE, AND TIMELY DATA NEEDED TO ENSURE PRODUCTS AREAVAILABLE WHEN AND WHERE THEY ARE NEEDED AS PART OF A ROBUST, RESPONSIVE PRIMARY HEALTH CARE SYSTEM. VILLAGEREACH IS A FOUNDING MEMBER OF THE OPENLMIS COMMUNITY, AN OPEN-SOURCE LOGISTICS MANAGEMENT INFORMATION SYSTEM DESIGNED TO MANAGE HEALTH COMMODITY DATA IN LOW-RESOURCE SETTINGS. VILLAGEREACH WORKS WITH GOVERNMENTS TO DESIGN, SELECT, AND IMPLEMENT OPENLMIS AND OTHER ELMIS.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>1010793</ExpenseAmt>
+        <GrantAmt>227269</GrantAmt>
+        <RevenueAmt>331923</RevenueAmt>
+        <Desc>HEALTH CENTER BY PHONE: HEALTH CENTER BY PHONE IS A SCALABLE, SUSTAINABLE DIGITAL HEALTH SOLUTION THAT ENGAGES BOTH CAREGIVERS AND HEALTH WORKERS THROUGH VOICE, MOBILE AND AI TECHNOLOGY TO EXTEND THE REACH OF PRIMARY HEALTH CARE SERVICES INTO COMMUNITIES. THROUGH THIS PROGRAM, VILLAGEREACH WORKS WITH GOVERNMENTS TO BUILD TELEHEALTH AND TELEMEDICINE PLATFORMS THAT PROVIDE ADVICE, INFORMATION, REFERRALS, AND IDENTIFY AND ADDRESS OUTBREAKS AND EMERGENCIES. VILLAGEREACH ALSO CO-MANAGES A GLOBAL TELEHEALTH COMMUNITY OF PRACTICE TO ALLOW FOR PEER-TO-PEER LEARNING ACROSS GOVERNMENTS ON THE USE AND VALUE OF TELEHEALTH AND TELEMEDICAL</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>843874</ExpenseAmt>
+        <GrantAmt>98008</GrantAmt>
+        <RevenueAmt>1125970</RevenueAmt>
+        <Desc>DRONES FOR HEALTH: VILLAGEREACH'S DRONES FOR HEALTH SOLUTION IMPROVES ACCESS TO HEALTH PRODUCTS BY INTEGRATING DRONES INTO SUPPLY CHAINS. IN COLLABORATION WITH GOVERNMENTS, THE PRIVATE SECTOR AND NON-GOVERNMENTAL ORGANIZATIONS, WE ARE DEMONSTRATING THE POTENTIAL TO IMPROVE PRODUCT AVAILABILITY AND INCREASE EQUITABLE ACCESS TO LIFESAVING MEDICINES AND VACCINES. DRONES HELP TO SAVE TIME WHERE IT IS MORE GEOGRAPHICALLY CHALLENGING FOR CARS, MOTORCYCLES OR BOATS TO REACH AND ALSO HAVE THE POTENTIAL TO CREATE COST-EFFICIENCIES.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>625709</ExpenseAmt>
+        <GrantAmt>57659</GrantAmt>
+        <RevenueAmt>472264</RevenueAmt>
+        <Desc>SUPPLY CHAIN FOR COMMUNITY HEALTH WORKERS: VILLAGEREACH SERVES AS THE SUPPLY CHAIN PARTNER FOR THE COMMUNITY HEALTH IMPACT COALITION, HELPING ENSURE THAT COMMUNITY HEALTH WORKERS (CHWS) ARE EQUIPPED WITH THE PRODUCTS THEY NEED TO SERVE THE PEOPLE IN THEIR COMMUNITIES. THIS INCLUDES WORKING WITH GOVERNMENTS TO IMPROVE ACCESS TO SUPPLY FOR CHWS AND WORKING ON THE DATA SYSTEMS THAT SUPPORT CHWS TO DELIVER SERVICES TO THEIR COMMUNITIES. VILLAGEREACH IS HELPING TO DEVELOP, TEST AND PILOT AN ELECTRONIC CHILD REGISTRY IN MOZAMBIQUE TO PROVIDE IMPORTANT DATA TO HEALTH WORKERS ABOUT CHILD HEALTH AND PRIMARY HEALTH CARE NEEDS OF CHILDREN. OTHER PROGRAMS RELATED TO TRANSFORMING HEALTH CARE DELIVERY TO REACH EVERYONE.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>914275</ExpenseAmt>
+        <GrantAmt>163001</GrantAmt>
+        <RevenueAmt>963848</RevenueAmt>
+        <Desc>OTHER PROGRAMS RELATED TO TRANSFORMING HEALTH CARE DELIVERY TO REACH EVERYONE.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>3394651</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcGrantAmt>545937</TotalOtherProgSrvcGrantAmt>
+      <TotalOtherProgSrvcRevenueAmt>2894005</TotalOtherProgSrvcRevenueAmt>
+      <TotalProgramServiceExpensesAmt>22600613</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc1039100001">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>0</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc1040000001">0</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc1040000001">0</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc1040000001">0</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc1040000001">0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc1040000001">1</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc1040000001">0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc1040000001">0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc1040000001">0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc1040000001">1</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc1040000001">0</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">1</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>1</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="RetDoc1040500001">1</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="RetDoc1040500001">1</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd referenceDocumentId="RetDoc1040500001">0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd referenceDocumentId="RetDoc1041200001">1</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd referenceDocumentId="RetDoc1041200001">0</FundraisingActivitiesInd>
+      <GamingActivitiesInd referenceDocumentId="RetDoc1041200001">0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="RetDoc1041900001">1</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd referenceDocumentId="RetDoc1041900001">0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="RetDoc1042400001">1</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>0</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd referenceDocumentId="RetDoc1043400001">1</DisregardedEntityInd>
+      <RelatedEntityInd referenceDocumentId="RetDoc1043400001">0</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd referenceDocumentId="RetDoc1043400001">0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd referenceDocumentId="RetDoc1043400001">0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <InfoInScheduleOPartVInd>X</InfoInScheduleOPartVInd>
+      <IRPDocumentCnt>18</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <EmployeeCnt>62</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>1</ForeignFinancialAccountInd>
+      <ForeignCountryCd>MZ</ForeignCountryCd>
+      <ForeignCountryCd>MI</ForeignCountryCd>
+      <ForeignCountryCd>CG</ForeignCountryCd>
+      <ForeignCountryCd>SF</ForeignCountryCd>
+      <ForeignCountryCd>IV</ForeignCountryCd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>0</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>13</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>13</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>0</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>1</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>1</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <OwnWebsiteInd>X</OwnWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>SAMY AHMED</PersonNm>
+        <PhoneNum>2064863022</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>210 S HUDSON ST SUITE 307</AddressLine1Txt>
+          <CityNm>SEATTLE</CityNm>
+          <StateAbbreviationCd>WA</StateAbbreviationCd>
+          <ZIPCd>98134</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SENA KWAWU</PersonNm>
+        <TitleTxt>BOARD CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JOHN DEW</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>VALERIE NKAMGANG BEMO</PersonNm>
+        <TitleTxt>DIRECTOR (THRU 11/23)</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>PAUL SUZMAN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>STEPHAN COONROD</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>VIVIEN TSU</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SIMON SUSMAN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>FRASER BLACK</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BINYAH KESSELLY</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>OLUFUNMILAYO AREWA</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LOLA DARE</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>NORAH OBUDHO</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ERIC WALKER</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>OUMAR SEYDI</PersonNm>
+        <TitleTxt>DIRECTOR (FROM 05/24)</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>TENDAI MUNYORO</PersonNm>
+        <TitleTxt>CHIEF FINANCIAL OFFICER/TREASURER</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>72083</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>2279</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>EMILY BANCROFT</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>228632</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>14623</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANN HOLMES</PersonNm>
+        <TitleTxt>VP, GLOBAL OPS/TREAS (THRU 12/23)</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>189811</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>24723</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BANNET NDYANABANGI</PersonNm>
+        <TitleTxt>VP, PROGRAMS</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>175000</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>5122</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CATHERINE QUINN</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>64736</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>10991</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CLAUDIA SHILUMANI</PersonNm>
+        <TitleTxt>VP, P&amp;I (THRU 09/24)</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>185500</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>9534</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JOSEPH ROUSSEL</PersonNm>
+        <TitleTxt>DIR, PVT SECT. ENGMT (THRU 09/24)</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>180199</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>17217</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>OLIVIER DEFAWE</PersonNm>
+        <TitleTxt>DIRECTOR, PRIVATE SECTOR ENGAGEMENT</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>142093</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>16598</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JOSHUA ZAMOR</PersonNm>
+        <TitleTxt>PRINCIPAL SOFTWARE ENGINEER</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>136676</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>14947</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JENNIFER CROUCH</PersonNm>
+        <TitleTxt>DIRECTOR, DEVELOPMENT</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>129163</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>14713</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>KATLEN TILMAN</PersonNm>
+        <TitleTxt>DIRECTOR, COMMUNICATIONS</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>125777</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>20529</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>1629670</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>151276</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>43</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>1</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>SOLDEVELO</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <ForeignAddress>
+            <AddressLine1Txt>ALEJA ZWYCIESTWA</AddressLine1Txt>
+            <CityNm>GDYNIA</CityNm>
+            <CountryCd>PL</CountryCd>
+            <ForeignPostalCd>81-451</ForeignPostalCd>
+          </ForeignAddress>
+        </ContractorAddress>
+        <ServicesDesc>IT CONSULTING</ServicesDesc>
+        <CompensationAmt>266205</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>BOLLORE TRANSPORT &amp; LOGISTICS</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <ForeignAddress>
+            <AddressLine1Txt>AVENIDA DO PODER POPULAR</AddressLine1Txt>
+            <CityNm>BEIRA</CityNm>
+            <ProvinceOrStateNm>SOFALA</ProvinceOrStateNm>
+            <CountryCd>MZ</CountryCd>
+          </ForeignAddress>
+        </ContractorAddress>
+        <ServicesDesc>TRANSPORTATION</ServicesDesc>
+        <CompensationAmt>174844</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>GLOBAL HEALTH STRATEGIES</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>38 EAST 32ND STREET 12TH FLOOR</AddressLine1Txt>
+            <CityNm>NEW YORK</CityNm>
+            <StateAbbreviationCd>NY</StateAbbreviationCd>
+            <ZIPCd>10016</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>MEDIA STRATEGY</ServicesDesc>
+        <CompensationAmt>159979</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>AMY GLASS</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <ForeignAddress>
+            <AddressLine1Txt>SITIO BATICOVA APARTADO 229</AddressLine1Txt>
+            <CityNm>MOCHIQUE</CityNm>
+            <CountryCd>PO</CountryCd>
+            <ForeignPostalCd>8550-319</ForeignPostalCd>
+          </ForeignAddress>
+        </ContractorAddress>
+        <ServicesDesc>PROGRAM MANAGEMENT</ServicesDesc>
+        <CompensationAmt>112417</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>LOTUS LEAF CONSULTING</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>3110 W HILLSBOROUGH AVE</AddressLine1Txt>
+            <CityNm>TAMPA</CityNm>
+            <StateAbbreviationCd>FL</StateAbbreviationCd>
+            <ZIPCd>33614</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>DATA ARCHITECT</ServicesDesc>
+        <CompensationAmt>110635</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>5</CntrctRcvdGreaterThan100KCnt>
+      <GovernmentGrantsAmt>502602</GovernmentGrantsAmt>
+      <AllOtherContributionsAmt>23860714</AllOtherContributionsAmt>
+      <TotalContributionsAmt>24363316</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>OPENLMIS</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>1158730</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>1158730</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>DRONES FOR HEALTH</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>1125970</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>1125970</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>NEXT-GEN. SUPPLY CHAIN</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>1064770</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>1064770</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>VACCINE ASSISTANCE</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>998842</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>998842</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>COMM. HEALTH WORKERS</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>472264</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>472264</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalOthProgramServiceRevGrp>
+        <TotalRevenueColumnAmt>1295771</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>1295771</RelatedOrExemptFuncIncomeAmt>
+      </TotalOthProgramServiceRevGrp>
+      <TotalProgramServiceRevenueAmt>6116347</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>583086</TotalRevenueColumnAmt>
+        <ExclusionAmt>583086</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>15906013</SecuritiesAmt>
+        <OtherAmt>17281</OtherAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>15471344</SecuritiesAmt>
+        <OtherAmt>0</OtherAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>434669</SecuritiesAmt>
+        <OtherAmt>17281</OtherAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>451950</TotalRevenueColumnAmt>
+        <ExclusionAmt>451950</ExclusionAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>31514699</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>6116347</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>1035036</ExclusionAmt>
+      </TotalRevenueGrp>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>397450</TotalAmt>
+        <ProgramServicesAmt>397450</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>3406022</TotalAmt>
+        <ProgramServicesAmt>3406022</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>980498</TotalAmt>
+        <ProgramServicesAmt>809599</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>151429</ManagementAndGeneralAmt>
+        <FundraisingAmt>19470</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>11415884</TotalAmt>
+        <ProgramServicesAmt>7420702</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3726692</ManagementAndGeneralAmt>
+        <FundraisingAmt>268490</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>329905</TotalAmt>
+        <ProgramServicesAmt>228276</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>101629</ManagementAndGeneralAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>2452221</TotalAmt>
+        <ProgramServicesAmt>1707157</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>696743</ManagementAndGeneralAmt>
+        <FundraisingAmt>48321</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>688872</TotalAmt>
+        <ProgramServicesAmt>457412</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>215837</ManagementAndGeneralAmt>
+        <FundraisingAmt>15623</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>86388</TotalAmt>
+        <ProgramServicesAmt>15063</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>71325</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>101585</TotalAmt>
+        <ProgramServicesAmt>19783</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>81802</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesProfFundraising>
+        <TotalAmt>44182</TotalAmt>
+        <FundraisingAmt>44182</FundraisingAmt>
+      </FeesForServicesProfFundraising>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>2928118</TotalAmt>
+        <ProgramServicesAmt>1608903</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1274910</ManagementAndGeneralAmt>
+        <FundraisingAmt>44305</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>58735</TotalAmt>
+        <ProgramServicesAmt>42549</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>12709</ManagementAndGeneralAmt>
+        <FundraisingAmt>3477</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>2312119</TotalAmt>
+        <ProgramServicesAmt>2139935</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>166352</ManagementAndGeneralAmt>
+        <FundraisingAmt>5832</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>693749</TotalAmt>
+        <ProgramServicesAmt>211684</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>475985</ManagementAndGeneralAmt>
+        <FundraisingAmt>6080</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <OccupancyGrp>
+        <TotalAmt>350409</TotalAmt>
+        <ProgramServicesAmt>208699</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>141710</ManagementAndGeneralAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>3345331</TotalAmt>
+        <ProgramServicesAmt>2836393</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>498187</ManagementAndGeneralAmt>
+        <FundraisingAmt>10751</FundraisingAmt>
+      </TravelGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>278385</TotalAmt>
+        <ProgramServicesAmt>213095</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>65290</ManagementAndGeneralAmt>
+      </ConferencesMeetingsGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>286340</TotalAmt>
+        <ManagementAndGeneralAmt>286340</ManagementAndGeneralAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>146554</TotalAmt>
+        <ProgramServicesAmt>29260</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>117294</ManagementAndGeneralAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>VEHICLE MAINTENANCE</Desc>
+        <TotalAmt>597711</TotalAmt>
+        <ProgramServicesAmt>587269</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>10442</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>BAD DEBT EXPENSE</Desc>
+        <TotalAmt>416504</TotalAmt>
+        <ManagementAndGeneralAmt>416504</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>MEALS AND EXPENSES</Desc>
+        <TotalAmt>298836</TotalAmt>
+        <ProgramServicesAmt>242023</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>48826</ManagementAndGeneralAmt>
+        <FundraisingAmt>7987</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>STAFF TRAINING &amp; EDU.</Desc>
+        <TotalAmt>20206</TotalAmt>
+        <ProgramServicesAmt>14422</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>5739</ManagementAndGeneralAmt>
+        <FundraisingAmt>45</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>131753</TotalAmt>
+        <ProgramServicesAmt>4917</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>126836</ManagementAndGeneralAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>31767757</TotalAmt>
+        <ProgramServicesAmt>22600613</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>8692581</ManagementAndGeneralAmt>
+        <FundraisingAmt>474563</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>1983688</BOYAmt>
+        <EOYAmt>2484642</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>0</BOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>250000</BOYAmt>
+        <EOYAmt>1000000</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>3501090</BOYAmt>
+        <EOYAmt>1986389</EOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>1513030</BOYAmt>
+        <EOYAmt>1557587</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>1672939</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>827573</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>626964</BOYAmt>
+        <EOYAmt>845366</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>17283962</BOYAmt>
+        <EOYAmt>18193960</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>380097</BOYAmt>
+        <EOYAmt>303304</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>25538831</BOYAmt>
+        <EOYAmt>26371248</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>1655235</BOYAmt>
+        <EOYAmt>1935955</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <DeferredRevenueGrp>
+        <BOYAmt>210479</BOYAmt>
+        <EOYAmt>141281</EOYAmt>
+      </DeferredRevenueGrp>
+      <MortgNotesPyblScrdInvstPropGrp>
+        <EOYAmt>1000000</EOYAmt>
+      </MortgNotesPyblScrdInvstPropGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>343711</BOYAmt>
+        <EOYAmt>245677</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>2209425</BOYAmt>
+        <EOYAmt>3322913</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>16090831</BOYAmt>
+        <EOYAmt>8520161</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>7238575</BOYAmt>
+        <EOYAmt>14528174</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>23329406</BOYAmt>
+        <EOYAmt>23048335</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>25538831</BOYAmt>
+        <EOYAmt>26371248</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <InfoInScheduleOPartXIInd>X</InfoInScheduleOPartXIInd>
+      <ReconcilationRevenueExpnssAmt>-253058</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>-54238</NetUnrlzdGainsLossesInvstAmt>
+      <DonatedServicesAndUseFcltsAmt>-2640</DonatedServicesAndUseFcltsAmt>
+      <OtherChangesInNetAssetsAmt>28865</OtherChangesInNetAssetsAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>1</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <ConsolidatedBasisFinclStmtInd>X</ConsolidatedBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>1</FederalGrantAuditRequiredInd>
+      <FederalGrantAuditPerformedInd>1</FederalGrantAuditPerformedInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>17585643</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>22788888</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>34525002</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>12095071</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>24363316</CurrentTaxYearAmt>
+        <TotalAmt>111357920</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>17585643</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>22788888</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>34525002</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>12095071</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>24363316</CurrentTaxYearAmt>
+        <TotalAmt>111357920</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>46109203</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>65248717</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>1310</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>829</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>258246</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>602522</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>583086</CurrentTaxYearAmt>
+        <TotalAmt>1445993</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>500</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>383</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>202</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>2690</CurrentTaxYearMinus1YearAmt>
+        <TotalAmt>3775</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>112807688</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>22371794</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.57840</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.64020</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+      <Form990ScheduleAPartVIGrp>
+        <FormAndLineReferenceDesc>SCHEDULE A, PART II, LINE 10, EXPLANATION OF OTHER INCOME:</FormAndLineReferenceDesc>
+        <ExplanationTxt>MISCELLANEOUS - 2019 AMOUNT: $ 500. 2020 AMOUNT: $ 383. 2021 AMOUNT: $ 202. INSURANCE REIMBURSEMENTS - 2022 AMOUNT: $ 2,690.</ExplanationTxt>
+      </Form990ScheduleAPartVIGrp>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="RetDoc1040000001">
+      <LeaseholdImprovementsGrp>
+        <OtherCostOrOtherBasisAmt>5763</OtherCostOrOtherBasisAmt>
+        <BookValueAmt>5763</BookValueAmt>
+      </LeaseholdImprovementsGrp>
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>1414382</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>735112</DepreciationAmt>
+        <BookValueAmt>679270</BookValueAmt>
+      </EquipmentGrp>
+      <OtherLandBuildingsGrp>
+        <OtherCostOrOtherBasisAmt>252794</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>92461</DepreciationAmt>
+        <BookValueAmt>160333</BookValueAmt>
+      </OtherLandBuildingsGrp>
+      <TotalBookValueLandBuildingsAmt>845366</TotalBookValueLandBuildingsAmt>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>OPERATING LEASE LIABILITY</Desc>
+        <Amt>245677</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>245677</TotalLiabilityAmt>
+      <TotalRevEtcAuditedFinclStmtAmt>31389380</TotalRevEtcAuditedFinclStmtAmt>
+      <NetUnrealizedGainsInvstAmt>-54238</NetUnrealizedGainsInvstAmt>
+      <OtherRevenueAmt>-71081</OtherRevenueAmt>
+      <RevenueNotReportedAmt>-125319</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>31514699</RevenueSubtotalAmt>
+      <RevenueNotReportedFinclStmtAmt>0</RevenueNotReportedFinclStmtAmt>
+      <TotalRevenuePerForm990Amt>31514699</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>31670451</TotExpnsEtcAuditedFinclStmtAmt>
+      <DonatedServicesUseFcltsAmt>2640</DonatedServicesUseFcltsAmt>
+      <ExpensesNotReportedAmt>2640</ExpensesNotReportedAmt>
+      <ExpensesSubtotalAmt>31667811</ExpensesSubtotalAmt>
+      <OtherExpensesNotIncludedAmt>99946</OtherExpensesNotIncludedAmt>
+      <ExpensesNotRptFinclStmtAmt>99946</ExpensesNotRptFinclStmtAmt>
+      <TotalExpensesPerForm990Amt>31767757</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART XI, LINE 2D - OTHER ADJUSTMENTS:</FormAndLineReferenceDesc>
+        <ExplanationTxt>FOREIGN CURRENCY TRANSLATION ADJUSTMENT -71,081.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART XII, LINE 4B - OTHER ADJUSTMENTS:</FormAndLineReferenceDesc>
+        <ExplanationTxt>PRIOR YEAR GRANTS RETURNED 99,946.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="RetDoc1040500001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <OfficesCnt>4</OfficesCnt>
+        <EmployeeCnt>160</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>HEALTH SYSTEM IMPROVEMENT</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>17361925</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS TO RECIPIENTS LOCATED IN THE REGION</TypeOfActivitiesConductedTxt>
+        <RegionTotalExpendituresAmt>3406022</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>FUNDRAISING REVENUES RECEIVED FROM DONORS IN THE REGION</TypeOfActivitiesConductedTxt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM OPERATIONS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>TRANSPORTATION</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>174844</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>2</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>IT, PROGRAM, AND DEVELOPMENT CONSULTING</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>378622</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>FUNDRAISING REVENUES RECEIVED FROM DONORS IN THE REGION</TypeOfActivitiesConductedTxt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>NORTH AMERICA</RegionTxt>
+        <TypeOfActivitiesConductedTxt>FUNDRAISING REVENUES RECEIVED FROM DONORS IN THE REGION</TypeOfActivitiesConductedTxt>
+      </AccountActivitiesOutsideUSGrp>
+      <SubtotalOfficesCnt>4</SubtotalOfficesCnt>
+      <SubtotalEmployeesCnt>162</SubtotalEmployeesCnt>
+      <ContinuationTotalOfficeCnt>0</ContinuationTotalOfficeCnt>
+      <ContinuationTotalEmployeeCnt>0</ContinuationTotalEmployeeCnt>
+      <TotalOfficeCnt>4</TotalOfficeCnt>
+      <TotalEmployeeCnt>162</TotalEmployeeCnt>
+      <SubtotalSpentAmt>21321413</SubtotalSpentAmt>
+      <ContinuationSpentAmt>0</ContinuationSpentAmt>
+      <TotalSpentAmt>21321413</TotalSpentAmt>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR COVID RESEARCH</PurposeOfGrantTxt>
+        <CashGrantAmt>5997</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR COVID RESEARCH</PurposeOfGrantTxt>
+        <CashGrantAmt>227269</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SUPPLY CHAIN</PurposeOfGrantTxt>
+        <CashGrantAmt>224348</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SUPPLY CHAIN</PurposeOfGrantTxt>
+        <CashGrantAmt>58567</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SUPPLY CHAIN</PurposeOfGrantTxt>
+        <CashGrantAmt>55374</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>ACH</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR VACCINE RESEARCH</PurposeOfGrantTxt>
+        <CashGrantAmt>72036</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>5089</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>430532</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>228925</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>111422</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>271211</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>332166</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>199000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>ACH</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>339889</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>82012</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>60200</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>6939</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>172811</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SUPPLY CHAIN</PurposeOfGrantTxt>
+        <CashGrantAmt>12885</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>14421</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR DRONES</PurposeOfGrantTxt>
+        <CashGrantAmt>73008</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR OPENLMIS</PurposeOfGrantTxt>
+        <CashGrantAmt>101323</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR IMMUNIZATION</PurposeOfGrantTxt>
+        <CashGrantAmt>221780</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR IMMUNIZATION</PurposeOfGrantTxt>
+        <CashGrantAmt>41535</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR SUPPLY CHAIN</PurposeOfGrantTxt>
+        <CashGrantAmt>30000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SUB-SAHARAN AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>SUPPORT FOR DRONES</PurposeOfGrantTxt>
+        <CashGrantAmt>25000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <Total501c3OrgCnt>13</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>13</TotalOtherOrgCnt>
+      <TransferToForeignCorpInd>1</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>0</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>0</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>0</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>0</ForeignPartnershipInd>
+      <BoycottCountriesInd>0</BoycottCountriesInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>VILLAGEREACH HAS A SUBRECIPIENT POLICY IN PLACE WITH PROCEDURES THAT GUIDE THE MONITORING OF SUBRECIPIENTS. THIS INCLUDES BOTH FINANCIAL AND TECHNICAL MONITORING USING RISK ASSESSMENTS, REPORTING, SITE VISITS, REGULAR CONTACT, AND OTHER MEANS TO PROVIDE REASONABLE ASSURANCE THAT THE RECIPIENT ADMINISTERS FUNDS IN COMPLIANCE WITH LAWS, REGULATIONS, AND PRIME AWARD TERMS WHILE ACHIEVING PROJECT AND PERFORMANCE GOALS ESTABLISHED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 3:</FormAndLineReferenceDesc>
+        <ExplanationTxt>VILLAGEREACH USES THE ACCRUAL METHOD OF ACCOUNTING TO REPORT EXPENDITURES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 3:</FormAndLineReferenceDesc>
+        <ExplanationTxt>VILLAGEREACH INCURS ADMINISTRATIVE COSTS WHEN WRITING PROPOSALS AND PREPARING BIDS FOR PROJECTS, I.E. PROGRAM FUNDING. THE BUSINESS DEVELOPMENT COSTS ASSOCIATED WITH FOREIGN GRANT FUNDS IS NOT EASILY ASCERTAINED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART IV, LINE 1:</FormAndLineReferenceDesc>
+        <ExplanationTxt>FORM 926 IS NOT REQUIRED TO BE FILED BECAUSE THE TRANSFER TO A FOREIGN CORPORATION DOES NOT MEET THE REPORTING REQUIREMENTS IN IRC 6038(A)(1)(A).</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleF>
+    <IRS990ScheduleG documentId="RetDoc1041200001">
+      <MailSolicitationsInd>X</MailSolicitationsInd>
+      <EmailSolicitationsInd>X</EmailSolicitationsInd>
+      <SolicitationOfNonGovtGrantsInd>X</SolicitationOfNonGovtGrantsInd>
+      <SolicitationOfGovtGrantsInd>X</SolicitationOfGovtGrantsInd>
+      <AgrmtProfFundraisingActyInd>1</AgrmtProfFundraisingActyInd>
+      <FundraiserActivityInfoGrp>
+        <OrganizationBusinessName>
+          <BusinessNameLine1Txt>BENTZ WHALEY FESSNER AND ASSOCIATES INC</BusinessNameLine1Txt>
+        </OrganizationBusinessName>
+        <USAddress>
+          <AddressLine1Txt>7900 XERXES AVE S SUITE 980</AddressLine1Txt>
+          <CityNm>MINNEAPOLIS</CityNm>
+          <StateAbbreviationCd>MN</StateAbbreviationCd>
+          <ZIPCd>55431</ZIPCd>
+        </USAddress>
+        <ActivityTxt>FUNDRAISING SUPPORT</ActivityTxt>
+        <FundraiserControlOfFundsInd>0</FundraiserControlOfFundsInd>
+        <GrossReceiptsAmt>0</GrossReceiptsAmt>
+        <RetainedByContractorAmt>44182</RetainedByContractorAmt>
+        <NetToOrganizationAmt>-44182</NetToOrganizationAmt>
+      </FundraiserActivityInfoGrp>
+      <TotalRetainedByContractorsAmt>44182</TotalRetainedByContractorsAmt>
+      <TotalNetToOrganizationAmt>-44182</TotalNetToOrganizationAmt>
+      <LicensedStatesCd>WA</LicensedStatesCd>
+    </IRS990ScheduleG>
+    <IRS990ScheduleI documentId="RetDoc1041900001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>FHI PARTNERS LLC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>359 BLACKWELL ST STE 200</AddressLine1Txt>
+          <CityNm>DURHAM</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+        <RecipientEIN>237413005</RecipientEIN>
+        <IRCSectionDesc>501(C)(3)</IRCSectionDesc>
+        <CashGrantAmt>192797</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>SUPPORT FOR SAMPLE TRANSPORT</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>SUPPLY CHAIN NOW</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>383 DORCHESTER AVE STE 400</AddressLine1Txt>
+          <CityNm>BOSTON</CityNm>
+          <StateAbbreviationCd>MA</StateAbbreviationCd>
+          <ZIPCd>20127</ZIPCd>
+        </USAddress>
+        <RecipientEIN>271414646</RecipientEIN>
+        <CashGrantAmt>13875</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>SUPPORT FOR SUPPLY CHAIN</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CLINTON HEALTH ACCESS INITIATIVE</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1624 WHITE OAK COVE</AddressLine1Txt>
+          <CityNm>LOGANVILLE</CityNm>
+          <StateAbbreviationCd>GA</StateAbbreviationCd>
+          <ZIPCd>30052</ZIPCd>
+        </USAddress>
+        <RecipientEIN>825463848</RecipientEIN>
+        <IRCSectionDesc>501(C)(3)</IRCSectionDesc>
+        <CashGrantAmt>30000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>SUPPORT FOR OPENLMIS</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>GLOBAL HEALTH STRATEGIES</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>38 EAST 32ND STREET</AddressLine1Txt>
+          <CityNm>NEW YORK</CityNm>
+          <StateAbbreviationCd>NY</StateAbbreviationCd>
+          <ZIPCd>10016</ZIPCd>
+        </USAddress>
+        <RecipientEIN>223885564</RecipientEIN>
+        <CashGrantAmt>133002</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>SUPPORT FOR COMMUNICATIONS</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>JSI RESEARCH &amp; TRAINING INSTITUTE INC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2733 CRYSTAL DRIVE 4TH FLOOR</AddressLine1Txt>
+          <CityNm>ARLINGTON</CityNm>
+          <StateAbbreviationCd>VA</StateAbbreviationCd>
+          <ZIPCd>22202</ZIPCd>
+        </USAddress>
+        <RecipientEIN>042679824</RecipientEIN>
+        <IRCSectionDesc>501(C)(3)</IRCSectionDesc>
+        <CashGrantAmt>27776</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>SUPPORT FOR DATA COLLECTION</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>3</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>3</TotalOtherOrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>VILLAGEREACH HAS A SUBRECIPIENT POLICY IN PLACE WITH PROCEDURES THAT GUIDES THE MONITORING OF SUBRECIPIENTS. THIS INCLUDES BOTH FINANCIAL AND TECHNICAL MONITORING USING RISK ASSESSMENTS, REPORTING, SITE VISITS, REGULAR CONTACT, AND OTHER MEANS TO PROVIDE REASONABLE ASSURANCE THAT THE RECIPIENT ADMINISTERS FUNDS IN COMPLIANCE WITH LAWS, REGULATIONS, AND PRIME AWARD TERMS WHILE ACHIEVING PROJECT AND PERFORMANCE GOALS ESTABLISHED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleJ documentId="RetDoc1042400001">
+      <SubstantiationRequiredInd>1</SubstantiationRequiredInd>
+      <IndependentConsultantInd>X</IndependentConsultantInd>
+      <CompensationSurveyInd>X</CompensationSurveyInd>
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>0</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>0</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>0</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>0</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>0</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>0</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>0</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>0</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>0</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>EMILY BANCROFT</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <BaseCompensationFilingOrgAmt>228632</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>9359</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>5264</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>243255</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>ANN HOLMES</PersonNm>
+        <TitleTxt>VP, GLOBAL OPS/TREAS (THRU 12/23)</TitleTxt>
+        <BaseCompensationFilingOrgAmt>171389</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>18422</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>7734</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>16989</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>214534</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>JOSEPH ROUSSEL</PersonNm>
+        <TitleTxt>DIR, PVT SECT. ENGMT (THRU 09/24)</TitleTxt>
+        <BaseCompensationFilingOrgAmt>180199</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>7260</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>9957</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>197416</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>CLAUDIA SHILUMANI</PersonNm>
+        <TitleTxt>VP, P&amp;I (THRU 09/24)</TitleTxt>
+        <BaseCompensationFilingOrgAmt>172985</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>12515</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>0</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>9534</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>195034</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>BANNET NDYANABANGI</PersonNm>
+        <TitleTxt>VP, PROGRAMS</TitleTxt>
+        <BaseCompensationFilingOrgAmt>175000</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>0</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>5122</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>180122</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>OLIVIER DEFAWE</PersonNm>
+        <TitleTxt>DIRECTOR, PRIVATE SECTOR ENGAGEMENT</TitleTxt>
+        <BaseCompensationFilingOrgAmt>142093</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>5733</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>10865</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>158691</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>JOSHUA ZAMOR</PersonNm>
+        <TitleTxt>PRINCIPAL SOFTWARE ENGINEER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>136676</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>5448</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>9499</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>151623</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART I, LINE 6, VOLUNTEERS:</FormAndLineReferenceDesc>
+        <ExplanationTxt>FOURTEEN BOARD MEMBERS SERVED AS VOLUNTEERS DURING THE COURSE OF THE YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART IV, LINE 12B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE CONSOLIDATED FINANCIAL STATEMENTS AND FORM 990 TAX RETURN INCLUDE THE ACCOUNTS OF VILLAGEREACH AND ITS CONTROLLED SUBSIDIARY, VILLAGEREACH RDC ABSL, AN ORGANIZATION REGISTERED AS A NONGOVERNMENTAL ORGANIZATION IN DEMOCRATIC REPUBLIC OF CONGO AND TREATED AS A FOREIGN DISREGARDED ENTITY FOR TAX PURPOSES. THIS ENTITY HAS BEEN REPORTED ON SCHEDULE R, PART I.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART V, LINE 2A:</FormAndLineReferenceDesc>
+        <ExplanationTxt>VILLAGEREACH HAD A TOTAL OF 19 EMPLOYEES IN MALAWI, 31 IN MOZAMBIQUE, 67 IN THE DEMOCRATIC REPUBLIC OF THE CONGO, 3 IN TANZANIA, 5 IN SOUTH AFRICA, 4 IN NIGERIA, 2 IN COTE D'IVOIRE, 1 IN BELGIUM, 25 IN KENYA, 1 IN SIERRA LEONE, 2 IN UGANDA, 2 IN UNITED KINGDOM, 1 IN ZAMBIA, AND 1 IN SPAIN IN FISCAL YEAR ENDED SEPTEMBER 30, 2024 (IN ADDITION TO THE UNITED STATES BASED EMPLOYEES NOTED ON THIS LINE).</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION A, LINE 8B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE EXECUTIVE COMMITTEE, STRATEGY COMMITTEE AND FUNDRAISING COMMITTEE DO NOT KEEP MINUTES BUT DO REPORT TO THE FULL BOARD ON THEIR ACTIONS AND RECOMMENDATIONS. THE FINANCE COMMITTEE DOES HAVE AUTHORITY TO ACT ON BEHALF OF THE BOARD BUT KEEPS MONTHLY MINUTES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE FORM 990 IS COMPLETED BY CLARK NUBER, OUR INDEPENDENT ACCOUNTANTS. IT IS THEN REVIEWED AND APPROVED BY THE SENIOR ACCOUNTANT, CONTROLLER, CFO, AND CEO. THE FINAL FORM 990 IS PROVIDED TO THE BOARD PRIOR TO SUBMISSION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>ALL KEY PERSONNEL AND MEMBERS OF THE GOVERNING BODY ARE SENT A CONFLICT OF INTEREST POLICY EACH YEAR, WHICH THEY FILL OUT AND RETURN. THE TREASURER REVIEWS THE SIGNED STATEMENTS TO DETERMINE WHERE CONFLICT EXISTS. MOREOVER, THE PRESIDENT AND TREASURER ACTIVELY MONITOR ALL TRANSACTIONS AND WILL PRESENT ANY THAT MAY INVOLVE A CONFLICT OF INTEREST TO THE BOARD OF DIRECTORS FOR NECESSARY ACTION OR FOLLOW UP. IF A CONFLICT SHOULD ARISE, THE BOARD MEMBER RECUSES THEMSELVES OF ANY DISCUSSION OR VOTE ON THE MATTER.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 15</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE BOARD OF DIRECTORS ANNUALLY REVIEWS SALARY DATA OF SIMILAR ORGANIZATIONS TO DETERMINE THE APPROPRIATE COMPENSATION LEVEL OF THE PRESIDENT. OTHER OFFICER POSITIONS OF VICE PRESIDENT, TREASURER, AND SECRETARY ARE LIKEWISE SURVEYED ANNUALLY. COMPARABILITY DATA IS REVIEWED BY THE BOARD OF DIRECTORS WITHOUT COMPENSATED PERSONS PRESENT. THE LAST COMPENSATION REVIEW FOR OFFICERS OCCURRED IN OCTOBER 2024.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>VILLAGEREACH POSTS ITS ARTICLES OF INCORPORATION, BYLAWS, AND DETERMINATION LETTER ON ITS WEBSITE, ALONG WITH THE THREE MOST RECENT FORM 990 RETURNS AND AUDITED FINANCIAL STATEMENTS. THESE DOCUMENTS ARE ALSO AVAILABLE UPON REQUEST ALONG WITH THE CONFLICT OF INTEREST POLICY.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART XI, LINE 9:</FormAndLineReferenceDesc>
+        <ExplanationTxt>FOREIGN CURRENCY TRANSLATION ADJUSTMENT -71,081. RETURN OF PRIOR YEAR GRANT 99,946.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+    <IRS990ScheduleR documentId="RetDoc1043400001">
+      <IdDisregardedEntitiesGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>VILLAGEREACH RDC ASBL</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>AVENUE TOMBALBAYE N51</AddressLine1Txt>
+          <CityNm>COMMUNE DE LA GOMBE</CityNm>
+          <ProvinceOrStateNm>KINSHASA</ProvinceOrStateNm>
+          <CountryCd>CG</CountryCd>
+        </ForeignAddress>
+        <EIN>912083484</EIN>
+        <PrimaryActivitiesTxt>IMPROVE HEALTH BY INCREASING ACCESS TO QUALITY HEALTHCARE</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>CG</LegalDomicileForeignCountryCd>
+        <TotalIncomeAmt>8460897</TotalIncomeAmt>
+        <EndOfYearAssetsAmt>1900096</EndOfYearAssetsAmt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>VILLAGEREACH</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+      </IdDisregardedEntitiesGrp>
+    </IRS990ScheduleR>
+  </ReturnData>
+</Return>

@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Brennan Center for Justice
+ein: 13-3839293
+source_wave: extension2
+peer_tier: Tier C broad sensitivity
+ea_affinity: functional-only
+comparability_score: 68.0
+ceo_name: Michael Waldman
+ceo_title: President
+top_executive_basis: President alongside separately paid Executive Director
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-05-09
+irs_object_id: 202621289349303897
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202621289349303897_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/133839293
+part_vii_org: 650385.0
+part_vii_related: 0.0
+part_vii_other: 50231.0
+cash_proxy: 650385.0
+total_proxy: 700616.0
+schedule_j_base: 
+revenue: 73820955.0
+expenses: 58143269.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: university_affiliate_dual_top_leadership_large_scale
+analysis_status: structural_sensitivity
+exclusion_reason: 
+notes: Large university-affiliated policy center with both a president and separately compensated executive director; not pooled in clean primary analysis.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn327197view2.
+source_id: SRC-990-EXT-BRENNAN-CENTER-FOR-JUSTICE
+part_vii_org_jul2026: 692327.0303320754
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 53470.296917380445
+cash_proxy_jul2026: 692327.0303320754
+total_proxy_jul2026: 745797.3272494558
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: C
+primary_eligible: False
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 

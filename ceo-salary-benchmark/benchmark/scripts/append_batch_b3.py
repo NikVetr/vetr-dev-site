@@ -1,0 +1,15 @@
+from __future__ import annotations
+import pandas as pd, numpy as np
+from pathlib import Path
+W=Path('/mnt/data/rp_ceo_expanded_benchmark_v2'); p=W/'data/form990_evidence_working.csv'
+df=pd.read_csv(p); peer=pd.read_csv(W/'data/previous_160_peer_universe.csv').set_index('organization')
+def add(name,**r):
+ global df
+ if name in set(df.organization): return
+ m=peer.loc[name]; row=dict(organization=name,ein=r.pop('ein'),source_wave='previous_expansion',peer_tier=m.provisional_tier,ea_affinity=m.ea_affinity_precomp,comparability_score=m.comparability_score,employee_count=m.employee_count,part_vii_related=0,schedule_j_base=np.nan,retrieved_at='2026-08-25',extraction_location='ProPublica filing-derived table; official IRS object ID identified from XML link',**r)
+ row['cash_proxy']=row['part_vii_org']; row['total_proxy']=row['cash_proxy']+row['part_vii_other']; row['official_irs_url']=f"https://apps.irs.gov/pub/epostcard/990/xml/{str(row['irs_object_id'])[:4]}/{row['irs_object_id']}_public.xml"; row['propublica_url']=f"https://projects.propublica.org/nonprofits/organizations/{row['ein'].replace('-','')}"
+ df=pd.concat([df,pd.DataFrame([row])],ignore_index=True)
+add('Evidence Action',ein='90-0874591',ceo_name='Kanika Bahl',ceo_title='Chief Executive Officer',top_executive_basis='explicit CEO',tax_period_begin='2024-01-01',tax_period_end='2024-12-31',compensation_calendar_year=2024,filing_date='2025-10-09',irs_object_id='202512829349302256',part_vii_org=385764,part_vii_other=45901,revenue=36213681,expenses=45139532,full_year_status='yes',founder_flag='no',structure_flag='above_scale_delivery_hybrid',analysis_status='primary_with_structure_flag',exclusion_reason='',notes='EA-adjacent evidence-based delivery organization; materially above RP core scale.')
+add('Redwood Research',ein='87-1702255',ceo_name='Michael Shlegeris',ceo_title='CEO, Director',top_executive_basis='explicit CEO',tax_period_begin='2024-01-01',tax_period_end='2024-12-31',compensation_calendar_year=2024,filing_date='2025-11-15',irs_object_id='202503199349302920',part_vii_org=272164,part_vii_other=11301,revenue=22060,expenses=2922498,full_year_status='yes',founder_flag='no',structure_flag='below_scale_revenue_anomaly',analysis_status='primary',exclusion_reason='',notes='EA-adjacent AI research peer; expenses below RP scale and 2024 revenue reflects use of prior reserves.')
+add('Guttmacher Institute',ein='13-2890727',ceo_name='Herminia Palacio',ceo_title='President & CEO',top_executive_basis='explicit CEO; later filings had transition/acting CEOs',tax_period_begin='2022-01-01',tax_period_end='2022-12-31',compensation_calendar_year=2022,filing_date='2023-07-17',irs_object_id='202341989349301459',part_vii_org=371060,part_vii_other=48391,revenue=32979466,expenses=27769947,full_year_status='yes',founder_flag='no',structure_flag='older_clean_due_transition',analysis_status='primary_older_clean',exclusion_reason='',notes='Latest clean full-year CEO observation is 2022; shown separately in recency sensitivity.')
+df.to_csv(p,index=False); print(len(df)); print(df.analysis_status.value_counts())

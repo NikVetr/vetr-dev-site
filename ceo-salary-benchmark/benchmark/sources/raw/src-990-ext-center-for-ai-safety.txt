@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Center for AI Safety
+ein: 88-1751310
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 94.0
+ceo_name: Dan Hendrycks
+ceo_title: President & Treasurer
+top_executive_basis: sole top executive shown
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-17
+irs_object_id: 202503219349323615
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202503219349323615_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/881751310
+part_vii_org: 242953.0
+part_vii_related: 0.0
+part_vii_other: 22764.0
+cash_proxy: 242953.0
+total_proxy: 265717.0
+schedule_j_base: 
+revenue: 10235085.0
+expenses: 7163607.0
+employee_count: 25.0
+full_year_status: yes
+founder_flag: yes
+structure_flag: founder
+analysis_status: primary
+exclusion_reason: 
+notes: Founder retained; exclude in founder sensitivity.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest 2024 filing table
+source_id: SRC-990-EXT-CENTER-FOR-AI-SAFETY
+part_vii_org_jul2026: 258620.55397997916
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 24232.00491782462
+cash_proxy_jul2026: 258620.55397997916
+total_proxy_jul2026: 282852.5588978037
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 1.1424979044425816

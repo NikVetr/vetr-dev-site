@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Internet Security Research Group
+ein: 46-3344200
+source_wave: extension2
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 91.0
+ceo_name: Joshua Aas
+ceo_title: Executive Director
+top_executive_basis: Explicit Executive Director
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-07-07
+irs_object_id: 202501889349300640
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202501889349300640_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/463344200
+part_vii_org: 352850.0
+part_vii_related: 0.0
+part_vii_other: 44856.0
+cash_proxy: 352850.0
+total_proxy: 397706.0
+schedule_j_base: 
+revenue: 9563960.0
+expenses: 7925896.0
+employee_count: 
+full_year_status: yes
+founder_flag: yes
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: Technical public-interest infrastructure nonprofit with close expense scale and distributed knowledge-work model.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn791228view0.
+source_id: SRC-990-EXT-INTERNET-SECURITY-RESEARCH-GROUP
+part_vii_org_jul2026: 375604.5921303117
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 47748.67389711567
+cash_proxy_jul2026: 375604.5921303117
+total_proxy_jul2026: 423353.2660274274
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 1.106035205364627

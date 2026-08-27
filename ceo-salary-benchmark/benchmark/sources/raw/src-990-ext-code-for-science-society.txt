@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Code for Science & Society
+ein: 81-3791683
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 84.0
+ceo_name: Danielle Robinson
+ceo_title: Executive Director and President
+top_executive_basis: explicit ED/president
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-05-15
+irs_object_id: 202601359349304090
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202601359349304090_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/813791683
+part_vii_org: 201230.0
+part_vii_related: 0.0
+part_vii_other: 24901.0
+cash_proxy: 201230.0
+total_proxy: 226131.0
+schedule_j_base: 
+revenue: 10336769.0
+expenses: 18017578.0
+employee_count: 41.0
+full_year_status: yes
+founder_flag: no
+structure_flag: fiscal_sponsorship_platform
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: Organization is a research-infrastructure nonprofit and fiscal sponsor; included but excluded in sponsorship sensitivity.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest FY2025 filing table
+source_id: SRC-990-EXT-CODE-FOR-SCIENCE-SOCIETY
+part_vii_org_jul2026: 214206.92099867543
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 26506.81578188152
+cash_proxy_jul2026: 214206.92099867543
+total_proxy_jul2026: 240713.73678055697
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 1.0209555741827323

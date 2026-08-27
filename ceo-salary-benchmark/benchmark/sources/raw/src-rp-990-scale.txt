@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-RP-990-SCALE
+Organization: Rethink Priorities
+Document type: RP public Form 990 scale rendering
+Original URL: https://projects.propublica.org/nonprofits/organizations/843896318
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/843896318
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: derivative
+Browser/source references: see rp_public_profile.csv
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+2024 consolidated revenue $20.60M and expenses $20.38M used only as consolidated-scale sensitivity. Incidental officer-compensation exposure was quarantined and is not reproduced.

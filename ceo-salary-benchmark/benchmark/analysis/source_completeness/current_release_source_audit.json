@@ -1,0 +1,65 @@
+{
+  "audit_timestamp_utc": "2026-08-27T20:25:19+00:00",
+  "counts_by_stream": [
+    {
+      "derivative_bytes": 1227,
+      "derivative_present": 1,
+      "evidence_stream": "documented_search_record",
+      "required": 1,
+      "source_complete": 1,
+      "source_native_present": 1
+    },
+    {
+      "derivative_bytes": 255396,
+      "derivative_present": 135,
+      "evidence_stream": "form990",
+      "required": 135,
+      "source_complete": 14,
+      "source_native_present": 135
+    },
+    {
+      "derivative_bytes": 407893,
+      "derivative_present": 7,
+      "evidence_stream": "frozen_local_input",
+      "required": 7,
+      "source_complete": 7,
+      "source_native_present": 7
+    },
+    {
+      "derivative_bytes": 46906,
+      "derivative_present": 32,
+      "evidence_stream": "job_ad",
+      "required": 32,
+      "source_complete": 30,
+      "source_native_present": 32
+    },
+    {
+      "derivative_bytes": 225362,
+      "derivative_present": 174,
+      "evidence_stream": "supporting_web_source",
+      "required": 174,
+      "source_complete": 174,
+      "source_native_present": 174
+    }
+  ],
+  "derivative_snapshots_present": 349,
+  "incomplete_records": 123,
+  "original_misnamed_zip": {
+    "archive_bytes": 0,
+    "file_count": 0,
+    "path": "/home/nikgvetr/repos/vetr-dev-site/ceo-salary-benchmark/rp_ceo_expanded_rebenchmark_complete.zip",
+    "pdf_count": 0,
+    "present": false,
+    "source_native_bytes": 0,
+    "source_native_count": 0,
+    "source_raw_bytes": 0,
+    "source_raw_count": 0,
+    "xml_count": 0
+  },
+  "required_source_records": 349,
+  "retrieval_status": "PASS - ALL SOURCES LOCALLY PRESERVED",
+  "source_complete_records": 226,
+  "source_native_or_frozen_local_files_present": 349,
+  "status": "FAIL - NOT SOURCE-COMPLETE",
+  "validation_status": "FAIL - EXPECTED-DATA CORRECTIONS REQUIRED"
+}

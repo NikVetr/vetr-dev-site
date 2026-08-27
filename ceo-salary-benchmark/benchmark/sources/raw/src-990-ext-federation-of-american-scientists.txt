@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Federation of American Scientists
+ein: 23-7185827
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 76.0
+ceo_name: Daniel Correa
+ceo_title: Chief Executive Officer
+top_executive_basis: explicit CEO
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-04-03
+irs_object_id: 202620939349300837
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202620939349300837_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/237185827
+part_vii_org: 683472.0
+part_vii_related: 0.0
+part_vii_other: 96001.0
+cash_proxy: 683472.0
+total_proxy: 779473.0
+schedule_j_base: 
+revenue: 35602788.0
+expenses: 36430648.0
+employee_count: 116.0
+full_year_status: yes
+founder_flag: no
+structure_flag: above_primary_scale
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: Above RP core scale; Tier A frozen assignment retained, isolated in close-scale sensitivity.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest FY2025 filing table
+source_id: SRC-990-EXT-FEDERATION-OF-AMERICAN-SCIENTISTS
+part_vii_org_jul2026: 727547.7449128197
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 102191.91284994206
+cash_proxy_jul2026: 727547.7449128197
+total_proxy_jul2026: 829739.6577627618
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: True
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.9237217099748531

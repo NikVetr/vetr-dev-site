@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Interactive Rethink Priorities CEO salary benchmark explorer">
+  <link rel="icon" href="/favicon.svg">
+  <title>CEO Salary Benchmark · vetr.dev</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Rethink Priorities · decision support</p>
+      <h1>CEO salary benchmark</h1>
+      <p class="subtitle">Explore validated public compensation evidence, peer choices, and distribution assumptions.</p>
+    </div>
+    <div class="header-meta" aria-label="Dataset status">
+      <span id="archive-status">349 / 349 sources archived</span>
+      <span>July 2026 USD</span>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="settings-panel panel" aria-labelledby="settings-title">
+      <div class="panel-heading">
+        <div>
+          <p class="section-label">Analysis</p>
+          <h2 id="settings-title">Settings</h2>
+        </div>
+        <button id="reset-settings" class="text-button" type="button">Reset</button>
+      </div>
+
+      <label class="field">
+        <span>Evidence stream</span>
+        <select id="stream-select">
+          <option value="incumbents">Incumbent Form 990s</option>
+          <option value="jobAds">Recruitment postings</option>
+        </select>
+      </label>
+
+      <label class="field" id="measure-field">
+        <span>Compensation measure</span>
+        <select id="measure-select">
+          <option value="base">Schedule J base</option>
+          <option value="cash">Part VII cash / W-2 proxy</option>
+          <option value="total">Filing total proxy</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Sample preset</span>
+        <select id="sample-select">
+          <option value="primary">All primary observations</option>
+          <option value="clean">Structurally clean only</option>
+          <option value="tierA">Tier A / strict primary</option>
+          <option value="observed">All rows with this measure</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Distribution summary</span>
+        <select id="fit-select">
+          <option value="empirical">Empirical distribution</option>
+          <option value="lognormal">Lognormal fit</option>
+          <option value="gamma">Gamma fit</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Base weighting</span>
+        <select id="weighting-select">
+          <option value="equal">Equal weights</option>
+          <option value="comparability">Comparability score</option>
+          <option value="size">Expense similarity to RP</option>
+          <option value="blended">Score × expense similarity</option>
+        </select>
+      </label>
+
+      <div id="size-controls" class="subsettings" hidden>
+        <label class="field compact">
+          <span>RP comparison budget</span>
+          <div class="input-with-unit">
+            <input id="target-expense" type="number" min="1" max="100" step="0.5" value="7.5">
+            <span>$M</span>
+          </div>
+        </label>
+        <label class="field compact">
+          <span>Size bandwidth <output id="bandwidth-value">0.70×</output></span>
+          <input id="size-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
+        </label>
+      </div>
+
+      <label class="field compact">
+        <span>Histogram bins <output id="bin-value">12</output></span>
+        <input id="bin-count" type="range" min="6" max="24" step="1" value="12">
+      </label>
+
+      <fieldset class="toggle-group">
+        <legend>Display</legend>
+        <label><input id="show-density" type="checkbox" checked> Fitted density curve</label>
+        <label><input id="show-rug" type="checkbox" checked> Salary rug</label>
+        <label><input id="show-reference" type="checkbox" checked> RP judgment band</label>
+      </fieldset>
+
+      <div class="method-note">
+        <strong>Interpretation</strong>
+        <p>Empirical, lognormal, and gamma summaries describe the selected convenience sample. They are sensitivity tools—not population estimates.</p>
+      </div>
+    </aside>
+
+    <section class="analysis-column" aria-label="Distribution analysis">
+      <section class="chart-panel panel">
+        <div class="chart-heading">
+          <div>
+            <p class="section-label" id="chart-kicker">Incumbent compensation</p>
+            <h2 id="chart-title">Validated Schedule J base salaries</h2>
+          </div>
+          <div class="live-stats" aria-live="polite">
+            <span><b id="stat-n">0</b> organizations</span>
+            <span><b id="stat-neff">0</b> effective n</span>
+            <span><b id="stat-center">—</b> median</span>
+          </div>
+        </div>
+        <div id="chart-wrap" class="chart-wrap">
+          <svg id="salary-chart" role="img" aria-labelledby="chart-title chart-description"></svg>
+          <p id="chart-description" class="sr-only">A weighted histogram in which each block represents one organization.</p>
+          <div id="chart-tooltip" class="chart-tooltip" role="tooltip" hidden></div>
+        </div>
+        <div class="chart-legend" aria-label="Chart legend">
+          <span><i class="swatch tier-a"></i> Tier A / strict</span>
+          <span><i class="swatch tier-b"></i> Tier B</span>
+          <span><i class="swatch tier-c"></i> Tier C / expanded</span>
+          <span><i class="line-swatch"></i> Model density</span>
+        </div>
+      </section>
+
+      <section class="quantile-panel panel" aria-labelledby="quantile-title">
+        <div class="panel-heading inline-heading">
+          <div>
+            <p class="section-label">Current weighted distribution</p>
+            <h2 id="quantile-title">Quantiles</h2>
+          </div>
+          <label class="inline-select">Breaks
+            <select id="quantile-granularity">
+              <option value="quintiles">Quintiles</option>
+              <option value="deciles">Deciles</option>
+            </select>
+          </label>
+        </div>
+        <div id="quantile-grid" class="quantile-grid"></div>
+      </section>
+    </section>
+
+    <aside class="table-panel panel" aria-labelledby="table-title">
+      <div class="table-toolbar">
+        <div>
+          <p class="section-label">Row-level evidence</p>
+          <h2 id="table-title">Organizations</h2>
+        </div>
+        <span id="included-count" class="count-badge">0 included</span>
+      </div>
+      <label class="search-field">
+        <span class="sr-only">Search organizations</span>
+        <input id="table-search" type="search" placeholder="Search organization, topic, title…">
+      </label>
+      <div class="table-scroll" tabindex="0">
+        <table id="organization-table">
+          <thead>
+            <tr>
+              <th class="check-column"><span class="sr-only">Included</span></th>
+              <th><button type="button" data-sort="organization">Organization</button></th>
+              <th><button type="button" data-sort="salary">Salary</button></th>
+              <th><button type="button" data-sort="weight">Weight</button></th>
+              <th>Source preview</th>
+              <th>Source</th>
+              <th><button type="button" data-sort="tier">Tier</button></th>
+              <th><button type="button" data-sort="topic">Topic / model</button></th>
+              <th><button type="button" data-sort="expenses">Expenses</button></th>
+            </tr>
+            <tr class="column-filters">
+              <th></th>
+              <th><input data-filter="organization" aria-label="Filter organization" placeholder="Filter…"></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th><input data-filter="tier" aria-label="Filter tier" placeholder="A, B…"></th>
+              <th><input data-filter="topic" aria-label="Filter topic" placeholder="Filter…"></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-footnote">Row weights multiply the selected base-weighting rule. A zero weight is equivalent to exclusion.</p>
+    </aside>
+  </main>
+
+  <dialog id="source-dialog" class="source-dialog">
+    <form method="dialog" class="dialog-shell">
+      <button class="dialog-close" value="close" aria-label="Close source preview">×</button>
+      <p class="section-label" id="dialog-source-type">Source evidence</p>
+      <h2 id="dialog-title">Organization</h2>
+      <div class="evidence-value">
+        <span id="dialog-measure-label">Selected measure</span>
+        <mark id="dialog-value">—</mark>
+      </div>
+      <p id="dialog-evidence" class="evidence-text"></p>
+      <dl id="dialog-meta" class="evidence-meta"></dl>
+      <div class="dialog-actions">
+        <a id="dialog-cached" class="secondary-link" href="#" target="_blank">Open cached source</a>
+        <a id="dialog-external" class="primary-link" href="#" target="_blank" rel="noopener noreferrer">Open third-party source ↗</a>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

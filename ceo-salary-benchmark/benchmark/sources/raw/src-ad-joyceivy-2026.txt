@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-JOYCEIVY-2026
+organization: Joyce Ivy Foundation
+role_title: Executive Director
+posting_date: 2026-08-03
+closing_date: 
+salary_min: 80000
+salary_max: 150000
+currency: USD
+salary_is_base: yes
+salary_text: $80,000-$150,000; exceptional fractional arrangements considered
+location: Remote with Midwest travel
+remote_status: Remote
+geographic_restrictions: United States; Midwest travel
+mission_operating_model: Education access and scholarship nonprofit.
+annual_budget_or_expense: 
+scale_measure: not reported
+scale_year: 
+staff_count: 
+responsibilities: Organization-wide leadership, fundraising, programs, operations, board, and external representation.
+reporting_relationship: Board of Directors
+original_url: https://careers.councilofnonprofits.org/jobs/executive-director-joyce-ivy-foundation-remote-in-anywhere/
+resolved_url: https://careers.councilofnonprofits.org/jobs/executive-director-joyce-ivy-foundation-remote-in-anywhere/
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: source-native job board
+archive_path: sources/raw/src-ad-joyceivy-2026.txt
+tier: fractional_sensitivity
+included_in_quantitative_analysis: sensitivity_only
+inclusion_reason: Full ED title but very wide range and possible fractional arrangement make it unsuitable for the primary full-time comparison.
+exclusion_reason: Sensitivity only.
+evidence_quality_notes: Posted before cutoff; fractional option prevents clean full-time base comparison.
+source_line_refs: turn690667view3 lines 18-31, 80-84
+cpi_period: 2026-07
+cpi_basis_note: July target used because posted August 3 and July was latest CPI available by cutoff.

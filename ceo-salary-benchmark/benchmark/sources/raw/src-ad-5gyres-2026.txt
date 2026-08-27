@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-5GYRES-2026
+organization: The 5 Gyres Institute
+role_title: Executive Director
+posting_date: 2025-12-18
+closing_date: 2026-01-30
+salary_min: 130000
+salary_max: 150000
+currency: USD
+salary_is_base: yes
+salary_text: $130,000-$150,000 annual salary
+location: Remote/hybrid; West Coast preferred
+remote_status: Remote with regular travel
+geographic_restrictions: United States; West Coast preferred
+mission_operating_model: Independent science, research, policy, and public-engagement nonprofit addressing plastic pollution.
+annual_budget_or_expense: 1700000
+scale_measure: FY2025 annual budget
+scale_year: 2025
+staff_count: 
+responsibilities: Strategy, fundraising, science/policy leadership, operations, external representation, and people leadership.
+reporting_relationship: Board of Directors
+original_url: https://www.climatechangecareers.com/job/the-5-gyres-institute/remote/executive-director/
+resolved_url: https://www.climatechangecareers.com/job/the-5-gyres-institute/remote/executive-director/
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: complete third-party copy
+archive_path: sources/raw/src-ad-5gyres-2026.txt
+tier: expanded_secondary_scale
+included_in_quantitative_analysis: yes
+inclusion_reason: Strong research/policy function and full enterprise scope, but materially below RP scale.
+exclusion_reason: 
+evidence_quality_notes: Complete mirror text; posting date inferred from page metadata/search chronology, closing date explicit.
+source_line_refs: turn970460view0 lines 14-35, 45-148
+cpi_period: 2026-01
+cpi_basis_note: Closing month used because the posting opened in late 2025 and closed January 2026.

@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Center for Democracy & Technology
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: first expansion
+topic_cluster: AI, catastrophic risk, biosecurity, and technology policy
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 52-1905358
+revenue: 11272645.0
+expenses: 8766703.0
+employee_count: 45.0
+comparability_score: 92.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 444423.7415740546
+total_proxy_jul2026: 493097.45554644655
+ceo_title: President & CEO
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521905358
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202533219349301933_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/center-for-democracy-and-technology%2C521905358/
+prior_scale_source_type: Cause IQ filing profile (IRS-derived)
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Technology-policy research and advocacy organization with close scale; legacy primary peer.
+prior_function_score: 28.0
+prior_expense_score: 25.0
+prior_staff_score: 15.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

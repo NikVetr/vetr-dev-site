@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Quincy Institute for Responsible Statecraft
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: second expansion / filing verification
+topic_cluster: AI, catastrophic risk, biosecurity, and technology policy
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 84-2285143
+revenue: 5498898.0
+expenses: 7389743.0
+employee_count: 
+comparability_score: 91.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 305905.11110745097
+total_proxy_jul2026: 361955.7269459703
+ceo_title: Chief Executive Officer
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/842285143
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202523169349300137_public.xml
+selection_note: Added by the second-expansion freeze and retained after role/scale verification; pay did not determine selection.

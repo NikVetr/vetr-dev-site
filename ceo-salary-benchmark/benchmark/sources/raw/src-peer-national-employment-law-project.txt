@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: National Employment Law Project
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: second expansion / filing verification
+topic_cluster: Research, evaluation, philanthropy infrastructure, and policy
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 13-2758558
+revenue: 6874119.0
+expenses: 13263163.0
+employee_count: 
+comparability_score: 83.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 368967.5094268046
+total_proxy_jul2026: 453116.350612842
+ceo_title: President & CEO
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/132758558
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202523089349302957_public.xml
+selection_note: Added by the second-expansion freeze and retained after role/scale verification; pay did not determine selection.

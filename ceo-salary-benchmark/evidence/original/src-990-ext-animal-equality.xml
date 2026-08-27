@@ -1,0 +1,1053 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" returnVersion="2024v5.2" xsi:schemaLocation="http://www.irs.gov/efile">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-10-27T08:54:48-07:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>200276349</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>MUN CPAs LLP</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>2901 Douglas Blvd</AddressLine1Txt>
+        <CityNm>Roseville</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>95661</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>472420444</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>Animal Equality</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>ANIM</BusinessNameControlTxt>
+      <PhoneNum>4242506236</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>8581 Santa Monica Blvd 350</AddressLine1Txt>
+        <CityNm>Los Angeles</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>90069</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>Sharon Nunez</PersonNm>
+      <PersonTitleTxt>President</PersonTitleTxt>
+      <SignatureDt>2025-10-27</SignatureDt>
+      <DiscussWithPaidPreparerInd>true</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>true</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>Bradley J Bartells CPA</PreparerPersonNm>
+      <PTIN>P02363556</PTIN>
+      <PhoneNum>9167744208</PhoneNum>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="9">
+    <IRS990 documentId="IRS990" referenceDocumentId="IRS990ScheduleO" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <PrincipalOfficerNm>Sharon Maria Nunez Gough</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>8581 Santa Monica Blvd 350</AddressLine1Txt>
+        <CityNm>Los Angeles</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>90069</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>4466663</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>false</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>ANIMALEQUALITY.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2014</FormationYr>
+      <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>ANIMAL EQUALITY IS AN INTERNATIONAL ORGANIZATION WORKING WITH SOCIETY, GOVERNMENTS, AND COMPANIES TO END CRUELTY TO FARMED ANIMALS.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>5</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>3</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>27</TotalEmployeeCnt>
+      <TotalVolunteersCnt>10773</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <PYContributionsGrantsAmt>4420795</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>4395343</CYContributionsGrantsAmt>
+      <CYProgramServiceRevenueAmt>1500</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>-882</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>-1015</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>44265</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>15635</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>4464178</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>4411463</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>1240116</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>1005773</CYGrantsAndSimilarPaidAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>1652420</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>1925499</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>305805</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>301221</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>1009863</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>2022930</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>1960285</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>5221271</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>5192778</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-757093</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>-781315</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>4694053</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>3189369</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>170406</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>235450</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>4523647</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>2953919</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>ANIMAL EQUALITY IS AN INTERNATIONAL ORGANIZATION WORKING WITH SOCIETY, GOVERNMENTS, AND COMPANIES TO END CRUELTY TO FARMED ANIMALS.</MissionDesc>
+      <SignificantNewProgramSrvcInd>false</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>false</SignificantChangeInd>
+      <ExpenseAmt>1687422</ExpenseAmt>
+      <GrantAmt>429919</GrantAmt>
+      <Desc>COMMUNICATIONS - In 2024, Animal Equalitys Communications and Marketing team delivered powerful results across media, digital engagement, and fundraising, expanding the organizations reach and deepening public awareness of animal protection issues.The team secured 70 earned media mentions in the U.S. alone, reaching an estimated 317 million peoplean 89% increase over the previous year. Highlights included a co-authored piece in Reuters and coverage in Vox, Plant Based News, Mashed, and Current Affairs.Efforts to elevate Love Veg, Animal Equalitys plant-based living resource, led to a full website revamp and consistent, high-quality weekly content. Paid social media advertising fueled growth, with an 8.5x increase in monthly subscribers. Across platforms, Animal Equalitys social media generated over 1.7 million engagements and a record 2.9 million video views.Marketing and fundraising strategies exceeded expectations. The team surpassed lead generation goals by 6%, achieving a cost per lead of just $1.73well below industry benchmarks. Online campaigns significantly outperformed sector norms, with online donations from new leads making up nearly 20% of total contributions. Additionally, the average monthly gift was 30% higher than the industry standard, and the cost per donation remained below benchmark.Timely and strategic content releasesincluding newsletters, blogs, and social mediakept supporters informed and engaged in Animal Equalitys global work throughout the year.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>1392763</ExpenseAmt>
+        <GrantAmt>354846</GrantAmt>
+        <Desc>CAMPAIGNS - Animal Equality added a third campaigner to the US Campaigns team, in 2024.In 2024, Animal Equality secured a policy from Dennys restaurant chain regarding gestation crates for pigs after an intense campaign lasting 600 days. Animal Equality participated in cage-free campaigns with the Open Wing Alliance and secured policies from companies, including Kewpie Corp, Colombina, and Lai Sun Dining.We continued the Aldi campaign in collaboration with Animal Equality in Germany, ramping up pressure by protesting at new store opening events.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>581132</ExpenseAmt>
+        <GrantAmt>148060</GrantAmt>
+        <Desc>INVESTIGATIONS - In 2024 Animal Equality presented 12 unique investigations filmed across our eight member countries. Shocking images of pig workers kicking, punching and stabbing piglets to death on a German pig farm were featured on one of the countries most respected news programs. Pigs at an Italian slaughterhouse were filmed standing, walking and gasping for breath after having their throats cut in violation of Italian cruelty laws. In India cows kept for milk production were documented being killed in open air markets after being dragged to the ground, bound and having their throats cut. In the United States two investigations were carried out one of which was later released in 2025. Animal Equality has spent considerable time developing professional standards for evidence management and analysis submitting our findings for veterinary, legal and legislative review in an ever expanding global capacity.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>286315</ExpenseAmt>
+        <GrantAmt>72948</GrantAmt>
+        <Desc>OTHER Programs</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>286315</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcGrantAmt>72948</TotalOtherProgSrvcGrantAmt>
+      <TotalProgramServiceExpensesAmt>3947632</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="IRS990ScheduleA">true</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="IRS990ScheduleB">true</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="IRS990ScheduleD">false</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="IRS990ScheduleD">false</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="IRS990ScheduleD">false</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="IRS990ScheduleD">false</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd referenceDocumentId="IRSScheduleD">false</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="IRS990ScheduleD">true</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="IRS990ScheduleD">false</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="IRS990ScheduleD">false</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="IRS990ScheduleD">false</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="IRS990ScheduleD">false</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="IRS990ScheduleD">true</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="IRS990ScheduleD">true</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="IRS990ScheduleD">false</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <ForeignOfficeInd>true</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="IRS990ScheduleF">true</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="IRS990ScheduleF">true</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd referenceDocumentId="IRS990ScheduleF">false</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd referenceDocumentId="IRS990ScheduleG">true</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd referenceDocumentId="IRS990ScheduleG">false</FundraisingActivitiesInd>
+      <GamingActivitiesInd referenceDocumentId="IRS990ScheduleG">false</GamingActivitiesInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <GrantsToOrganizationsInd>false</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>false</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd>false</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>false</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>false</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>false</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>false</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>false</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>false</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>false</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd referenceDocumentId="IRS990ScheduleM">true</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd referenceDocumentId="IRS990ScheduleM">false</DeductibleArtContributionInd>
+      <TerminateOperationsInd>false</TerminateOperationsInd>
+      <PartialLiquidationInd>false</PartialLiquidationInd>
+      <DisregardedEntityInd referenceDocumentId="IRS990ScheduleR">false</DisregardedEntityInd>
+      <RelatedEntityInd referenceDocumentId="IRS990ScheduleR">true</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd referenceDocumentId="IRS990ScheduleR">false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd referenceDocumentId="IRS990ScheduleR">false</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>true</ScheduleORequiredInd>
+      <IRPDocumentCnt>22</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>true</BackupWthldComplianceInd>
+      <EmployeeCnt>27</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>true</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>false</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>false</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>false</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>false</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>false</Form8282PropertyDisposedOfInd>
+      <Form8282FiledCnt>0</Form8282FiledCnt>
+      <RcvFndsToPayPrsnlBnftCntrctInd>false</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>false</PayPremiumsPrsnlBnftCntrctInd>
+      <Form8899Filedind>false</Form8899Filedind>
+      <Form1098CFiledInd>false</Form1098CFiledInd>
+      <IndoorTanningServicesInd>false</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>false</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>false</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>5</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>3</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>true</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>false</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>false</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>false</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>false</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>false</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>false</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>true</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>true</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>false</OfficerMailingAddressInd>
+      <LocalChaptersInd>false</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>true</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>true</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>true</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>true</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>true</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>true</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>true</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>true</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>false</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <OwnWebsiteInd>X</OwnWebsiteInd>
+      <OtherWebsiteInd>X</OtherWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>JOSE VALLE</PersonNm>
+        <PhoneNum>4242506236</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>8581 Santa Monica Blvd STE 350</AddressLine1Txt>
+          <CityNm>Los Angeles</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>90069</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Oliver Davidson</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <ReportableCompFromOrgAmt>109674</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>11475</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Sean Thomas</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <ReportableCompFromOrgAmt>102310</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>13427</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Jose Antonio Valle Blanco</PersonNm>
+        <TitleTxt>VP &amp; Secreatary</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>100399</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>10899</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Sharon Maria Nunez Gough</PersonNm>
+        <TitleTxt>President</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>100966</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>9893</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Margareta Marro</PersonNm>
+        <TitleTxt>Treasurer</TitleTxt>
+        <AverageHoursPerWeekRt>4.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Nora Kramer</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>4.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Marcos de Miguel Garcia</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>4.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>413349</TotalReportableCompFromOrgAmt>
+      <TotalOtherCompensationAmt>45694</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>4</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>false</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>false</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>false</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>RWT PRODUCTION LLC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>8932 ORANGE HUNT LANE</AddressLine1Txt>
+            <CityNm>ANNANDALE</CityNm>
+            <StateAbbreviationCd>VA</StateAbbreviationCd>
+            <ZIPCd>22003</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Mail Production</ServicesDesc>
+        <CompensationAmt>337225</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>AVALON CONSULTING GROUP INC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>805 15TH Street NW STE 700</AddressLine1Txt>
+            <CityNm>Washington</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>20005</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Fundraising Consulting</ServicesDesc>
+        <CompensationAmt>168461</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>NNROAD INC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>75 E SANTA CLARA STREET FLOOR 6</AddressLine1Txt>
+            <CityNm>SAN JOSE</CityNm>
+            <StateAbbreviationCd>CA</StateAbbreviationCd>
+            <ZIPCd>95113</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Staffing Services</ServicesDesc>
+        <CompensationAmt>112417</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>3</CntrctRcvdGreaterThan100KCnt>
+      <AllOtherContributionsAmt>4395343</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>56085</NoncashContributionsAmt>
+      <TotalContributionsAmt>4395343</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>Program Revenue</Desc>
+        <TotalRevenueColumnAmt>1500</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>1500</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>1500</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+      </InvestmentIncomeGrp>
+      <IncmFromInvestBondProceedsGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+      </IncmFromInvestBondProceedsGrp>
+      <RoyaltiesRevenueGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+      </RoyaltiesRevenueGrp>
+      <NetRentalIncomeOrLossGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+      </NetRentalIncomeOrLossGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>54185</SecuritiesAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>55200</SecuritiesAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>-1015</SecuritiesAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>-1015</TotalRevenueColumnAmt>
+        <ExclusionAmt>-1015</ExclusionAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <NetIncmFromFundraisingEvtGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+      </NetIncmFromFundraisingEvtGrp>
+      <NetIncomeFromGamingGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+      </NetIncomeFromGamingGrp>
+      <NetIncomeOrLossGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+      </NetIncomeOrLossGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>Other Income</Desc>
+        <BusinessCd>900099</BusinessCd>
+        <TotalRevenueColumnAmt>15635</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>15635</RelatedOrExemptFuncIncomeAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>15635</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>4411463</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>17135</RelatedOrExemptFuncIncomeAmt>
+        <ExclusionAmt>-1015</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>0</TotalAmt>
+      </GrantsToDomesticOrgsGrp>
+      <GrantsToDomesticIndividualsGrp>
+        <TotalAmt>0</TotalAmt>
+      </GrantsToDomesticIndividualsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>1005773</TotalAmt>
+        <ProgramServicesAmt>1005773</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <BenefitsToMembersGrp>
+        <TotalAmt>0</TotalAmt>
+      </BenefitsToMembersGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>343306</TotalAmt>
+        <ProgramServicesAmt>252937</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>30280</ManagementAndGeneralAmt>
+        <FundraisingAmt>60089</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <CompDisqualPersonsGrp>
+        <TotalAmt>0</TotalAmt>
+      </CompDisqualPersonsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>1288844</TotalAmt>
+        <ProgramServicesAmt>948388</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>111007</ManagementAndGeneralAmt>
+        <FundraisingAmt>229449</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>0</TotalAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>160754</TotalAmt>
+        <ProgramServicesAmt>119869</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>17389</ManagementAndGeneralAmt>
+        <FundraisingAmt>23496</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>132595</TotalAmt>
+        <ProgramServicesAmt>96343</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>12840</ManagementAndGeneralAmt>
+        <FundraisingAmt>23412</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesManagementGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForServicesManagementGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>18880</TotalAmt>
+        <ProgramServicesAmt>16002</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1830</ManagementAndGeneralAmt>
+        <FundraisingAmt>1048</FundraisingAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>18575</TotalAmt>
+        <ProgramServicesAmt>1705</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>16870</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesProfFundraising>
+        <TotalAmt>301221</TotalAmt>
+        <FundraisingAmt>301221</FundraisingAmt>
+      </FeesForServicesProfFundraising>
+      <FeesForSrvcInvstMgmntFeesGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForSrvcInvstMgmntFeesGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>523305</TotalAmt>
+        <ProgramServicesAmt>501495</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>20489</ManagementAndGeneralAmt>
+        <FundraisingAmt>1321</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>367240</TotalAmt>
+        <ProgramServicesAmt>331638</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>762</ManagementAndGeneralAmt>
+        <FundraisingAmt>34840</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>4296</TotalAmt>
+        <ProgramServicesAmt>3025</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>168</ManagementAndGeneralAmt>
+        <FundraisingAmt>1103</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>276337</TotalAmt>
+        <ProgramServicesAmt>201716</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3060</ManagementAndGeneralAmt>
+        <FundraisingAmt>71561</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <RoyaltiesGrp>
+        <TotalAmt>0</TotalAmt>
+      </RoyaltiesGrp>
+      <OccupancyGrp>
+        <TotalAmt>12725</TotalAmt>
+        <ProgramServicesAmt>7724</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4154</ManagementAndGeneralAmt>
+        <FundraisingAmt>847</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>136339</TotalAmt>
+        <ProgramServicesAmt>127105</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1729</ManagementAndGeneralAmt>
+        <FundraisingAmt>7505</FundraisingAmt>
+      </TravelGrp>
+      <PymtTravelEntrtnmntPubOfclGrp>
+        <TotalAmt>0</TotalAmt>
+      </PymtTravelEntrtnmntPubOfclGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>0</TotalAmt>
+      </ConferencesMeetingsGrp>
+      <InterestGrp>
+        <TotalAmt>0</TotalAmt>
+      </InterestGrp>
+      <PaymentsToAffiliatesGrp>
+        <TotalAmt>0</TotalAmt>
+      </PaymentsToAffiliatesGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>8540</TotalAmt>
+        <ProgramServicesAmt>7224</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>782</ManagementAndGeneralAmt>
+        <FundraisingAmt>534</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>21149</TotalAmt>
+        <ProgramServicesAmt>11591</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>6531</ManagementAndGeneralAmt>
+        <FundraisingAmt>3027</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>Postage and Shipping</Desc>
+        <TotalAmt>228368</TotalAmt>
+        <ProgramServicesAmt>89047</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4331</ManagementAndGeneralAmt>
+        <FundraisingAmt>134990</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>Printing and Publications</Desc>
+        <TotalAmt>126150</TotalAmt>
+        <ProgramServicesAmt>72867</ProgramServicesAmt>
+        <FundraisingAmt>53283</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>program supplies and Materials</Desc>
+        <TotalAmt>98920</TotalAmt>
+        <ProgramServicesAmt>65373</ProgramServicesAmt>
+        <FundraisingAmt>33547</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>DUES &amp; SUBSCRIPTIONS</Desc>
+        <TotalAmt>40941</TotalAmt>
+        <ProgramServicesAmt>40823</ProgramServicesAmt>
+        <FundraisingAmt>118</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>78520</TotalAmt>
+        <ProgramServicesAmt>46987</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3061</ManagementAndGeneralAmt>
+        <FundraisingAmt>28472</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>5192778</TotalAmt>
+        <ProgramServicesAmt>3947632</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>235283</ManagementAndGeneralAmt>
+        <FundraisingAmt>1009863</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>3737420</BOYAmt>
+        <EOYAmt>3005354</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <EOYAmt>0</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>823026</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>3668</BOYAmt>
+        <EOYAmt>50000</EOYAmt>
+      </AccountsReceivableGrp>
+      <ReceivablesFromOfficersEtcGrp>
+        <EOYAmt>0</EOYAmt>
+      </ReceivablesFromOfficersEtcGrp>
+      <RcvblFromDisqualifiedPrsnGrp>
+        <EOYAmt>0</EOYAmt>
+      </RcvblFromDisqualifiedPrsnGrp>
+      <OthNotesLoansReceivableNetGrp>
+        <EOYAmt>0</EOYAmt>
+      </OthNotesLoansReceivableNetGrp>
+      <InventoriesForSaleOrUseGrp>
+        <BOYAmt>8313</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </InventoriesForSaleOrUseGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>72175</BOYAmt>
+        <EOYAmt>106655</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>134795</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>116967</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>24035</BOYAmt>
+        <EOYAmt>17828</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <EOYAmt>0</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <InvestmentsOtherSecuritiesGrp>
+        <EOYAmt>0</EOYAmt>
+      </InvestmentsOtherSecuritiesGrp>
+      <InvestmentsProgramRelatedGrp>
+        <EOYAmt>0</EOYAmt>
+      </InvestmentsProgramRelatedGrp>
+      <IntangibleAssetsGrp>
+        <BOYAmt>11866</BOYAmt>
+        <EOYAmt>9532</EOYAmt>
+      </IntangibleAssetsGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>13550</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>4694053</BOYAmt>
+        <EOYAmt>3189369</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>170406</BOYAmt>
+        <EOYAmt>235450</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>170406</BOYAmt>
+        <EOYAmt>235450</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>4265532</BOYAmt>
+        <EOYAmt>2827312</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>258115</BOYAmt>
+        <EOYAmt>126607</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>4523647</BOYAmt>
+        <EOYAmt>2953919</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>4694053</BOYAmt>
+        <EOYAmt>3189369</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>-781315</ReconcilationRevenueExpnssAmt>
+      <PriorPeriodAdjustmentsAmt>-788413</PriorPeriodAdjustmentsAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>false</AccountantCompileOrReviewInd>
+      <FSAuditedInd>true</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>true</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>false</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="IRS990ScheduleA" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>4785728</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>7078767</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>4297381</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>4330653</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>4395343</CurrentTaxYearAmt>
+        <TotalAmt>24887872</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TaxRevLeviedOrgnztnlBnft170Grp>
+        <TotalAmt>0</TotalAmt>
+      </TaxRevLeviedOrgnztnlBnft170Grp>
+      <GovtFurnSrvcFcltsVl170Grp>
+        <TotalAmt>0</TotalAmt>
+      </GovtFurnSrvcFcltsVl170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>4785728</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>7078767</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>4297381</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>4330653</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>4395343</CurrentTaxYearAmt>
+        <TotalAmt>24887872</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>0</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>24887872</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus3YearsAmt>226</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>1</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>26</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>-1015</CurrentTaxYearAmt>
+        <TotalAmt>-762</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <UnrelatedBusinessNetIncm170Grp>
+        <TotalAmt>0</TotalAmt>
+      </UnrelatedBusinessNetIncm170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>53322</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>1794</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>25428</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>24661</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>16120</CurrentTaxYearAmt>
+        <TotalAmt>121325</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>25008435</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>1500</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.99520</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.66820</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="IRS990ScheduleB" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="IRS990ScheduleD" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>134795</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>116967</DepreciationAmt>
+        <BookValueAmt>17828</BookValueAmt>
+      </EquipmentGrp>
+      <TotalBookValueLandBuildingsAmt>17828</TotalBookValueLandBuildingsAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>4411463</TotalRevEtcAuditedFinclStmtAmt>
+      <RevenueSubtotalAmt>4411463</RevenueSubtotalAmt>
+      <TotalRevenuePerForm990Amt>4411463</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>5192778</TotExpnsEtcAuditedFinclStmtAmt>
+      <ExpensesSubtotalAmt>5192778</ExpensesSubtotalAmt>
+      <TotalExpensesPerForm990Amt>5192778</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Part X : FIN48 Footnote</FormAndLineReferenceDesc>
+        <ExplanationTxt>The Organization qualifies for exemption from income taxes under provision Section 501(c)(3) of the Internal Revenue Code and exempt from state income taxes. Accordingly, there is no provision for income taxes recorded in the financial statements. As required by the Income Tax Topic of FASB ASC 740, the Organization recognizes the effect of income tax positions only if those positions are more likely then not be being sustained. The Organization does not believe its financial statements include any uncertain tax positions.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="IRS990ScheduleF" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <GrantRecordsMaintainedInd>true</GrantRecordsMaintainedInd>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>1</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS AND PROGRAMS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>ANIMAL WELFARE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>408770</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>NORTH AMERICA</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>1</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS AND PROGRAMS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>Animal Welfare</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>613799</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE, ICELAND, &amp; GREENLAND</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>1</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS AND PROGRAMS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>ANIMAL WELFARE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>168962</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>ASIA</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>6</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS AND PROGRAMS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>ANIMAL WELFARE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>78028</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <SubtotalEmployeesCnt>9</SubtotalEmployeesCnt>
+      <TotalEmployeeCnt>9</TotalEmployeeCnt>
+      <SubtotalSpentAmt>1269559</SubtotalSpentAmt>
+      <TotalSpentAmt>1269559</TotalSpentAmt>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>Europe</RegionTxt>
+        <PurposeOfGrantTxt>Animal welfare</PurposeOfGrantTxt>
+        <CashGrantAmt>168962</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE</MannerOfCashDisbursementTxt>
+        <ValuationMethodUsedDesc>BOOK</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>NORTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>Animal welfare</PurposeOfGrantTxt>
+        <CashGrantAmt>613799</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE</MannerOfCashDisbursementTxt>
+        <ValuationMethodUsedDesc>BOOK</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>Animal welfare</PurposeOfGrantTxt>
+        <CashGrantAmt>408770</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE</MannerOfCashDisbursementTxt>
+        <ValuationMethodUsedDesc>BOOK</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <TotalOtherOrgCnt>3</TotalOtherOrgCnt>
+      <TransferToForeignCorpInd>false</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>false</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>false</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>false</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>false</ForeignPartnershipInd>
+      <BoycottCountriesInd>false</BoycottCountriesInd>
+    </IRS990ScheduleF>
+    <IRS990ScheduleG documentId="IRS990ScheduleG" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <MailSolicitationsInd>X</MailSolicitationsInd>
+      <EmailSolicitationsInd>X</EmailSolicitationsInd>
+      <PhoneSolicitationsInd>X</PhoneSolicitationsInd>
+      <InPersonSolicitationsInd>X</InPersonSolicitationsInd>
+      <SolicitationOfNonGovtGrantsInd>X</SolicitationOfNonGovtGrantsInd>
+      <AgrmtProfFundraisingActyInd>true</AgrmtProfFundraisingActyInd>
+      <FundraiserActivityInfoGrp>
+        <OrganizationBusinessName>
+          <BusinessNameLine1Txt>AVALON CONSULTING GROUP</BusinessNameLine1Txt>
+        </OrganizationBusinessName>
+        <USAddress>
+          <AddressLine1Txt>805 15TH STREET NW STE 7</AddressLine1Txt>
+          <CityNm>Washington</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20005</ZIPCd>
+        </USAddress>
+        <ActivityTxt>DIRECT MAIL PROGRAM</ActivityTxt>
+        <FundraiserControlOfFundsInd>false</FundraiserControlOfFundsInd>
+        <GrossReceiptsAmt>332916</GrossReceiptsAmt>
+        <RetainedByContractorAmt>168461</RetainedByContractorAmt>
+        <NetToOrganizationAmt>164455</NetToOrganizationAmt>
+      </FundraiserActivityInfoGrp>
+      <TotalGrossReceiptsAmt>332916</TotalGrossReceiptsAmt>
+      <TotalRetainedByContractorsAmt>168461</TotalRetainedByContractorsAmt>
+      <TotalNetToOrganizationAmt>164455</TotalNetToOrganizationAmt>
+      <LicensedStatesCd>CA</LicensedStatesCd>
+      <LicensedStatesCd>AK</LicensedStatesCd>
+      <LicensedStatesCd>AR</LicensedStatesCd>
+      <LicensedStatesCd>MN</LicensedStatesCd>
+      <LicensedStatesCd>NM</LicensedStatesCd>
+      <LicensedStatesCd>OH</LicensedStatesCd>
+      <LicensedStatesCd>VA</LicensedStatesCd>
+      <LicensedStatesCd>ND</LicensedStatesCd>
+      <LicensedStatesCd>IL</LicensedStatesCd>
+      <LicensedStatesCd>MA</LicensedStatesCd>
+      <LicensedStatesCd>MS</LicensedStatesCd>
+      <LicensedStatesCd>UT</LicensedStatesCd>
+      <LicensedStatesCd>PA</LicensedStatesCd>
+      <LicensedStatesCd>KY</LicensedStatesCd>
+      <LicensedStatesCd>WI</LicensedStatesCd>
+      <LicensedStatesCd>WA</LicensedStatesCd>
+      <LicensedStatesCd>CO</LicensedStatesCd>
+      <LicensedStatesCd>KS</LicensedStatesCd>
+      <LicensedStatesCd>WV</LicensedStatesCd>
+      <LicensedStatesCd>NH</LicensedStatesCd>
+      <LicensedStatesCd>DC</LicensedStatesCd>
+      <LicensedStatesCd>MD</LicensedStatesCd>
+      <LicensedStatesCd>OK</LicensedStatesCd>
+      <LicensedStatesCd>NY</LicensedStatesCd>
+      <LicensedStatesCd>HI</LicensedStatesCd>
+      <LicensedStatesCd>OR</LicensedStatesCd>
+      <LicensedStatesCd>MI</LicensedStatesCd>
+      <LicensedStatesCd>AL</LicensedStatesCd>
+      <LicensedStatesCd>GA</LicensedStatesCd>
+      <LicensedStatesCd>NJ</LicensedStatesCd>
+      <LicensedStatesCd>FL</LicensedStatesCd>
+      <LicensedStatesCd>CT</LicensedStatesCd>
+      <LicensedStatesCd>RI</LicensedStatesCd>
+      <LicensedStatesCd>ME</LicensedStatesCd>
+      <LicensedStatesCd>TN</LicensedStatesCd>
+      <LicensedStatesCd>NV</LicensedStatesCd>
+      <LicensedStatesCd>SC</LicensedStatesCd>
+      <LicensedStatesCd>NC</LicensedStatesCd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Part I, Line 2b - Fundraiser Additional Information</FormAndLineReferenceDesc>
+        <ExplanationTxt>SCHEDULE G, PART I, LINE 2B, LIST OF TEN HIGHEST PAID FUNDRAISERS:(I) NAME OF FUNDRAISER: AVALON CONSULTING GROUP INC(I) ADDRESS OF FUNDRAISER: 805 15TH STREET NW, STE 700, WASHINGTON, DC 20005</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleG>
+    <IRS990ScheduleM documentId="IRS990ScheduleM" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <SecuritiesPubliclyTradedGrp>
+        <NonCashCheckboxInd>X</NonCashCheckboxInd>
+        <ContributionCnt>110</ContributionCnt>
+        <NoncashContributionsRptF990Amt>50093</NoncashContributionsRptF990Amt>
+        <MethodOfDeterminingRevenuesTxt>FMV</MethodOfDeterminingRevenuesTxt>
+      </SecuritiesPubliclyTradedGrp>
+      <AnyPropertyThatMustBeHeldInd>false</AnyPropertyThatMustBeHeldInd>
+      <ReviewProcessUnusualNCGiftsInd>false</ReviewProcessUnusualNCGiftsInd>
+      <ThirdPartiesUsedInd>false</ThirdPartiesUsedInd>
+    </IRS990ScheduleM>
+    <IRS990ScheduleO documentId="IRS990ScheduleO" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section A, Line 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>TWO OF THE DIRECTORS, SHARON MARIA NUNEZ GOUGH AND JOSE ANTONIO VALLE BLANCO, ARE MARRIED TO EACH OTHER.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 11b</FormAndLineReferenceDesc>
+        <ExplanationTxt>ALL OFFICERS OF ANIMAL EQUALITY ARE EMAILED AN ELECTRONIC COPY OF THE FORM 990 WITH ITS RELATED STATEMENTS AND SCHEDULES FOR THEIR REVIEW AND APPROVAL PRIOR TO SUBMITTING IT TO THE IRS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 12c</FormAndLineReferenceDesc>
+        <ExplanationTxt>BOARD MEMBERS ABSTAIN FROM DISCUSSION AND VOTING ON ANY MATTERS THAT MAY RESULT IN A CONFLICT OF INTEREST. THE BOARD WILL ONLY DECIDE TO HIRE OR CONTRACT WITH THE BOARD MEMBERS IF THE GOODS OR SERVICES ARE NEEDED AND THE INDIVIDUAL IS THE MOST QUALIFIED AND PROVIDES THE BEST PRICE. IT IS THE RESPONSIBILITY OF THE BOARD TO RECORD IN THE MINUTES OF THE BOARD MEETING THE POTENTIAL CONFLICT OF INTEREST. IN ADDITION, EACH BOARD MEMBER ISREQUIRED TO COMPLETE AND SIGN A CONFLICT OF INTEREST STATEMENT ON AN ANNUAL BASIS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 15a</FormAndLineReferenceDesc>
+        <ExplanationTxt>ANIMAL EQUALITY'S BOARD OF DIRECTORS HAS A PROCESS FOR REVIEWING AND APPROVING THE COMPENSATION OF OFFICERS AND KEY EMPLOYEES ON A REGULAR BASIS TO DETERMINE IT IS FAIR AND REASONABLE WITH THE GOAL OF RETAINING EMPLOYEES AT COMPENSATION LEVELS WITHIN APPROPRIATE MARKET RANGE. THE PROCESS FOR DETERMINING THE COMPENSATION PAID TO THE CEO, OFFICERS, AND KEY EMPLOYEES INCLUDES THE APPROVAL OF THE COMPENSATION AGREEMENT IN ADVANCE, BY THE BOARD OF DIRECTORS, WITH ALL PERSONS WITH A CONFLICT OF INTEREST ABSTAINING FROM THE BOARD'S DELIBERATION AND DISCUSSION. THE BOARD REVIEWS DATA OF COMPARABLE COMPENSATION FOR SIMILARLY QUALIFIED NONPROFIT EXECUTIVES AT SIMILARLY SITUATED ENTITIES.THE DOCUMENTATION OF THE BOARD INCLUDES THE TERMS OF THE TRANSACTION AND THE DATE OF APPROVAL, THE MEMBERS WHO WERE PRESENT DURING THE DEBATE AND VOTE ON THE TRANSACTION, A DESCRIPTION OF THE COMPARABLE DATA AND HOW IT WAS OBTAINED, AND DOCUMENTATION OF THE BASIS FOR THE DETERMINATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section C, Line 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>NO OTHER DOCUMENTS ARE AVAILABLE TO THE PUBLIC.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+    <IRS990ScheduleR documentId="IRS990ScheduleR" softwareId="24020490" softwareVersionNum="2024v5.2">
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>ANIMAL EQUALITY GERMANY EV</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>PAPPELALLEE 78/79</AddressLine1Txt>
+          <CityNm>BERLIN</CityNm>
+          <CountryCd>GM</CountryCd>
+          <ForeignPostalCd>10437</ForeignPostalCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>SEE PART VII</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>GM</LegalDomicileForeignCountryCd>
+        <ExemptCodeSectionTxt>Non-profit Org.</ExemptCodeSectionTxt>
+        <DirectControllingNACd>N/A</DirectControllingNACd>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>ANIMAL EQUALITY UK</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>124 CITY ROAD</AddressLine1Txt>
+          <CityNm>LONDON</CityNm>
+          <CountryCd>UK</CountryCd>
+          <ForeignPostalCd>EC1V 2NX</ForeignPostalCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>SEE PART VII</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>UK</LegalDomicileForeignCountryCd>
+        <ExemptCodeSectionTxt>Non-profit Org.</ExemptCodeSectionTxt>
+        <DirectControllingNACd>N/A</DirectControllingNACd>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Animal Equality - Brazil</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>AV Angelica N 321</AddressLine1Txt>
+          <CityNm>Bairro Higienopolis</CityNm>
+          <CountryCd>BR</CountryCd>
+          <ForeignPostalCd>01227</ForeignPostalCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>SEE PART VII</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>BR</LegalDomicileForeignCountryCd>
+        <ExemptCodeSectionTxt>Non-profit Org.</ExemptCodeSectionTxt>
+        <DirectControllingNACd>N/A</DirectControllingNACd>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Animal Equality - Italy</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>Via Carducci 32</AddressLine1Txt>
+          <CityNm>Milano</CityNm>
+          <CountryCd>IT</CountryCd>
+          <ForeignPostalCd>20123</ForeignPostalCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>SEE PART VII</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>IT</LegalDomicileForeignCountryCd>
+        <ExemptCodeSectionTxt>Non-profit Org.</ExemptCodeSectionTxt>
+        <DirectControllingNACd>N/A</DirectControllingNACd>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <ReceiptOfIntAnntsRntsRyltsInd>false</ReceiptOfIntAnntsRntsRyltsInd>
+      <GiftGrntOrCapContriToOthOrgInd>true</GiftGrntOrCapContriToOthOrgInd>
+      <GiftGrntCapContriFromOthOrgInd>false</GiftGrntCapContriFromOthOrgInd>
+      <LoansOrGuaranteesToOtherOrgInd>false</LoansOrGuaranteesToOtherOrgInd>
+      <LoansOrGuaranteesFromOthOrgInd>false</LoansOrGuaranteesFromOthOrgInd>
+      <DivRelatedOrganizationInd>false</DivRelatedOrganizationInd>
+      <AssetSaleToOtherOrgInd>false</AssetSaleToOtherOrgInd>
+      <AssetPurchaseFromOtherOrgInd>false</AssetPurchaseFromOtherOrgInd>
+      <AssetExchangeInd>false</AssetExchangeInd>
+      <RentalOfFacilitiesToOthOrgInd>false</RentalOfFacilitiesToOthOrgInd>
+      <RentalOfFcltsFromOthOrgInd>false</RentalOfFcltsFromOthOrgInd>
+      <PerformOfServicesForOthOrgInd>false</PerformOfServicesForOthOrgInd>
+      <PerformOfServicesByOtherOrgInd>false</PerformOfServicesByOtherOrgInd>
+      <SharingOfFacilitiesInd>false</SharingOfFacilitiesInd>
+      <PaidEmployeesSharingInd>false</PaidEmployeesSharingInd>
+      <ReimbursementPaidToOtherOrgInd>false</ReimbursementPaidToOtherOrgInd>
+      <ReimbursementPaidByOtherOrgInd>false</ReimbursementPaidByOtherOrgInd>
+      <TransferToOtherOrgInd>false</TransferToOtherOrgInd>
+      <TransferFromOtherOrgInd>false</TransferFromOtherOrgInd>
+      <TransactionsRelatedOrgGrp>
+        <OtherOrganizationName>
+          <BusinessNameLine1Txt>ANIMAL EQUALITY GERMANY EV</BusinessNameLine1Txt>
+        </OtherOrganizationName>
+        <TransactionTypeTxt>b</TransactionTypeTxt>
+        <InvolvedAmt>28193</InvolvedAmt>
+        <MethodOfAmountDeterminationTxt>Book</MethodOfAmountDeterminationTxt>
+      </TransactionsRelatedOrgGrp>
+      <TransactionsRelatedOrgGrp>
+        <OtherOrganizationName>
+          <BusinessNameLine1Txt>ANIMAL EQUALITY UK</BusinessNameLine1Txt>
+        </OtherOrganizationName>
+        <TransactionTypeTxt>b</TransactionTypeTxt>
+        <InvolvedAmt>4575</InvolvedAmt>
+        <MethodOfAmountDeterminationTxt>Book</MethodOfAmountDeterminationTxt>
+      </TransactionsRelatedOrgGrp>
+      <TransactionsRelatedOrgGrp>
+        <OtherOrganizationName>
+          <BusinessNameLine1Txt>Animal Equality - Brazil</BusinessNameLine1Txt>
+        </OtherOrganizationName>
+        <TransactionTypeTxt>b</TransactionTypeTxt>
+        <InvolvedAmt>408770</InvolvedAmt>
+        <MethodOfAmountDeterminationTxt>Book</MethodOfAmountDeterminationTxt>
+      </TransactionsRelatedOrgGrp>
+      <TransactionsRelatedOrgGrp>
+        <OtherOrganizationName>
+          <BusinessNameLine1Txt>Animal Equality - Italy</BusinessNameLine1Txt>
+        </OtherOrganizationName>
+        <TransactionTypeTxt>b</TransactionTypeTxt>
+        <InvolvedAmt>122343</InvolvedAmt>
+        <MethodOfAmountDeterminationTxt>Book</MethodOfAmountDeterminationTxt>
+      </TransactionsRelatedOrgGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule R, Part II, Column B</FormAndLineReferenceDesc>
+        <ExplanationTxt>ITEM 1ANIMAL EQUALITY GERMANY IS A REGISTERED CHARITY WORKING WITH SOCIETY,GOVERNMENT OFFICIALS, AND MEMBERS OF THE PUBLIC TO CREATE MEANINGFULAND LASTING CHANGE FOR FARMED ANIMALS. TAKING A MULTI-FACETEDAPPROACH, ANIMAL EQUALITY GERMANY USES A RANGE OF STRATEGIES TO ACHIEVECHANGE, INCLUDING THE RELEASE OF UNDERCOVER INVESTIGATIVE FOOTAGE,LEGAL ADVOCACY AND PUBLIC AWARENESS CAMPAIGNS. THE CHARITY RELIES ONTHE GENEROSITY OF THE GENERAL PUBLIC TO SUPPORT ITS ONGOING ACTIVITIESAND, IN TURN, FUNDRAISES TO SECURE SUPPORT FROM GRANTING BODIES ANDINDIVIDUAL DONORS, WHOSE KIND GIFTS ALLOW US TO MAXIMISE OUR IMPACT FORANIMALS.ITEM 2ANIMAL EQUALITY UK IS A REGISTERED CHARITY (ENGLAND AND WALES, NO.1168309) WORKING WITH SOCIETY, GOVERNMENT OFFICIALS, AND MEMBERS OF THEPUBLIC TO CREATE MEANINGFUL AND LASTING CHANGE FOR FARMED ANIMALS.TAKING A MULTI-FACETED APPROACH, ANIMAL EQUALITY UK USES A RANGE OFSTRATEGIES TO ACHIEVE CHANGE, INCLUDING THE RELEASE OF UNDERCOVERINVESTIGATIVE FOOTAGE, LEGAL ADVOCACY, AND PUBLIC AWARENESS CAMPAIGNS.THE CHARITY RELIES ON THE GENEROSITY OF THE GENERAL PUBLIC TO SUPPORTITS ONGOING ACTIVITIES AND, IN TURN, FUNDRAISES TO SECURE SUPPORT FROMGRANTING BODIES AND INDIVIDUAL DONORS, WHOSE KIND GIFTS ALLOW US TOMAXIMISE OUR IMPACT FOR ANIMALS.ITEM 3ANIMAL EQUALITY Brazil IS A REGISTERED CHARITY WORKING WITH SOCIETY,GOVERNMENT OFFICIALS, AND MEMBERS OF THE PUBLIC TO CREATE MEANINGFULAND LASTING CHANGE FOR FARMED ANIMALS. TAKING A MULTI-FACETEDAPPROACH, ANIMAL EQUALITY Brazil USES A RANGE OF STRATEGIES TO ACHIEVECHANGE, INCLUDING THE RELEASE OF UNDERCOVER INVESTIGATIVE FOOTAGE,LEGAL ADVOCACY AND PUBLIC AWARENESS CAMPAIGNS. THE CHARITY RELIES ONTHE GENEROSITY OF THE GENERAL PUBLIC TO SUPPORT ITS ONGOING ACTIVITIESAND, IN TURN, FUNDRAISES TO SECURE SUPPORT FROM GRANTING BODIES ANDINDIVIDUAL DONORS, WHOSE KIND GIFTS ALLOW US TO MAXIMISE OUR IMPACT FORANIMALS.ITEM 4ANIMAL EQUALITY Italy IS A REGISTERED CHARITY WORKING WITH SOCIETY,GOVERNMENT OFFICIALS, AND MEMBERS OF THE PUBLIC TO CREATE MEANINGFULAND LASTING CHANGE FOR FARMED ANIMALS. TAKING A MULTI-FACETEDAPPROACH, ANIMAL EQUALITY Italy USES A RANGE OF STRATEGIES TO ACHIEVECHANGE, INCLUDING THE RELEASE OF UNDERCOVER INVESTIGATIVE FOOTAGE,LEGAL ADVOCACY AND PUBLIC AWARENESS CAMPAIGNS. THE CHARITY RELIES ONTHE GENEROSITY OF THE GENERAL PUBLIC TO SUPPORT ITS ONGOING ACTIVITIESAND, IN TURN, FUNDRAISES TO SECURE SUPPORT FROM GRANTING BODIES ANDINDIVIDUAL DONORS, WHOSE KIND GIFTS ALLOW US TO MAXIMISE OUR IMPACT FORANIMALS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleR>
+  </ReturnData>
+</Return>

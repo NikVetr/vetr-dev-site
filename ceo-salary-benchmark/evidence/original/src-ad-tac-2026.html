@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		
+<!-- Load Vue -->
+<script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+
+	<!-- Production environment - Load bundled components -->
+	<script type="module" crossorigin src="/js/web-components/applicant-pro-components.js?version=1787856855"></script>
+	<script type="module">
+		import { initVue } from '/js/web-components/applicant-pro-components.js?version=1787856855';
+		window.initVue = initVue;
+	</script>
+
+<!-- Load component styles -->
+<link rel="stylesheet" href="/js/web-components/assets/style.css?version=live202604301.11">
+
+<!-- Loader that doesn't require importing or using a 'module' sadly we have to wait until it exists though! -->
+<script type="text/javascript">
+	// Helper sleep method
+	const sleep = (milliseconds) => {
+		return new Promise(resolve => setTimeout(resolve, milliseconds));
+	}
+
+	// Our component loader function which waits until our `module` files have been loaded
+	window.bootstrapVue = async function(mountSelector, componentsToLoad, mountingData) {
+		const csrfToken = "";
+		const isMobile = 0;
+
+		// Default value for the mounting data if none was given
+		mountingData = mountingData || {};
+
+		// Add the csrf token to every component's mountingData
+		mountingData.csrfToken = csrfToken;
+		mountingData.isMobile = isMobile;
+
+		if(typeof mountingData.courierCurrentRouteData === 'undefined') {
+			
+			mountingData.courierCurrentRouteData = {"domain_id":"4297","career_site_name":"Eos Transitions","root_domain_title":"ApplicantPool","root_domain_id":"10","organization_id":"3343","organization_name":"EOS Transition Partners","user_id":0,"use_autocomplete":"1","csrfToken":""};
+		}
+
+		// Wait until the initVue exists
+		while (!window.initVue) {
+			await sleep(50);
+		}
+
+		return await initVue(mountSelector, componentsToLoad, mountingData, {"primary":"#416a90","secondary":"#e6e6e6","accent":"#416A90"});
+	}
+</script>
+
+<script type="text/javascript">
+	window.bootstrapVue('#toaster', [ 'WaveToaster' ]);
+</script>
+		<!--[if lt IE 10]>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<![endif]-->
+		<link rel="stylesheet" href="/styles/all.min.css?ver=1.2.49890-2&use_vue_flag=1" />
+		<link rel="stylesheet" href="/styles/font-awesome-4.7.0/css/font-awesome.css?ver=" />
+		<link rel="stylesheet" href="/styles/awesomer.css?ver=1.1.46678" />
+		<link rel="shortcut icon" href="/favicon-appPool-color.ico" type="image/x-icon" />				<!--[if gte IE 9]>
+			<style type="text/css">
+				.gradient {
+		   			filter: none;
+				}
+			</style>
+		<![endif]-->
+		<title>Chief Executive Officer, Technical Assistance Collaborative - Boston, MA - Eos Transitions Jobs</title>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta name="keywords" content="Chief Executive Officer, Technical Assistance Collaborative, Boston, MA, United States, " />
+		
+				<meta property="og:image" content="http://eostransitions.applicantpool.com/images/10/4297/Eos-Partners-200.jpg" />
+		<meta property="og:image:secure_url"  content="https://eostransitions.applicantpool.com/images/10/4297/Eos-Partners-200.jpg" />
+				<meta property="og:description" content="Technical Assistance Collaborative Seeks Chief Executive Officer
+&nbsp;
+About Technical Assistance Collaborative
+For more than three decades, the Technical Assistance Collaborative (TAC) has partnered with federal, state, and local agencies, foundations, advocates, and service providers to strengthen the systems that support some of the nation's most vulnerable populations. Founded in 1992 and bas..." />
+		<meta property="og:title" content="Chief Executive Officer, Technical Assistance Collaborative - Boston, MA" />
+				<meta property="og:url" content="https://eostransitions.applicantpool.com/jobs/1306611-165918.html" />
+				
+				<meta name="description" content="Technical Assistance Collaborative Seeks Chief Executive Officer
+" /><meta name="keywords" content="Chief Executive Officer, Technical Assistance Collaborative, Boston, MA, United States, " /><link href="https://eostransitions.applicantpool.com/jobs/1306611.html" rel="canonical" />		<!--[if lt IE 9]>
+			<script src="/js/html5shiv.min.js"></script>
+      		<script src="/js/respond.min.js"></script>
+      	<![endif]-->
+
+		<!-- Popper for tooltips -->
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script type="text/javascript" src="/js/all.min.js?ver=2.3.47194&use_vue_flag=1"></script>
+		<!--<script type="text/javascript" src="/js/jQl.min.js"></script>-->
+		<script type="text/javascript">
+			$(function() {
+				$('input,textarea').placeholder();
+				A.supportsPlaceholders = $.support.placeholder = 'placeholder' in document.createElement('input');
+				V.init();
+				A.useN = true;
+				A.newValidation = true;
+				A.isMobile = 0;
+				
+							});
+		</script>
+		
+					<style>
+				html {
+					font-size: 62.5%;
+				}
+				.panel-default {
+					border-color: #ddd;
+				}
+				.panel {
+					margin-bottom: 20px;
+					background-color: #fff;
+					border: 1px solid transparent;
+					border-radius: 4px;
+					-webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+					box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+				}
+				.panel-body {
+					padding: 15px;
+				}
+				.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+					width: 100%;
+					margin-right: auto;
+					margin-left: auto;
+				}
+				#apply_container {
+					padding: 0 15px 0 5px;
+				}
+				#apply_container #apply_button {
+					font-size:1.2em;
+					padding: 1rem 0;
+				}
+				#job_piper_alerts_widget {
+					margin-top: 10px;
+				}
+				#job_piper_alerts_widget h3 {
+					margin-top: .5rem;
+				}
+				#job_piper_alerts_widget .refer-first-pane-btn {
+					font-size: 1.2em;
+				}
+				.fade.show, .show {
+					opacity: 1;
+				}
+			</style>
+				<script type="text/javascript">
+			function breakout() {
+				var request_uri = "/jobs/1306611";
+				if(request_uri.includes('?') && V.checkRequestUri(request_uri) > 0) {
+					// removed xss from url parameter and refresh the page
+					var new_uri = request_uri . split('?')[0];
+					window.top.location="https://eostransitions.applicantpool.com" + new_uri;
+				} else {
+					if(window.top != window.self) {
+						window.top.location="https://eostransitions.applicantpool.com//jobs/1306611";
+					}
+				}
+			}
+		</script>
+				
+				
+			</head>
+	<body class="main-body" onload="breakout()">
+		<div id="popover-container" class="bootstrap-area"></div>
+		<div id="toaster" class="bootstrap-area"><wave-toaster :position="{ top: 20, right: 20 }" :width="265"></wave-toaster></div>
+				<div class="container-fixed">
+			<div class="container" id="content_area">
+								<div class="header header-image" id="headerbar"  >
+										
+													<img alt="Eos Transitions" src="/images/10/4297/Eos-Partners-Logo-800x121.jpg" onclick='top.location="";' style='cursor:pointer;' />
+											
+									</div>
+				<div id="mainArea" class="panel panel-default">
+					<div class="panel-body">
+																	<div class="row d-flex" id="career-site-top-header">
+							<div class="col-sm-8 text-left">
+															</div>
+							<div class="col-sm-4">
+																<ul data-jin="ul1" id="menuLinks" class="nav navbar-nav navbar-right"><li data-jin="li"><a data-jin="1" href="/jobs/" >Jobs</a></li><li data-jin="li"><a href="/account/login.php?listing_id=1306611&i=0" title="Login to Your Account">Login</a></li></ul>							</div>
+						</div>
+						<style>
+														#mobile_menus .list-group-item {
+								border-color: #e2e2e2;
+							}
+							.navbar-nav {
+								flex-direction: row;
+							}
+							ul#menuLinks li + li {
+								border: none;
+							}
+							.navbar-right {
+								float: right;
+								margin-right: 0;
+							}
+							.list-group {
+								padding-left: 0;
+								margin-bottom: 20px;
+							}
+							@media (min-width: 320px) and (max-width: 768px) {
+								#mainArea {
+									margin-top: 0px;
+								}
+								ul#menuLinks li {
+									padding: 10px 0px;
+								}
+							}
+							@media (min-width: 767px) and (max-width: 991px) {
+								.container {
+									max-width: 90%!important;
+									min-width: auto!important;
+								}
+							}
+						</style>
+					<style>
+.extra-padding-top {
+	margin: 20px;
+}
+.text-left table, .text-left iframe, .text-left img {
+	max-width : 100%!important;
+}
+</style>
+<script type="text/javascript" src="/js/jquery.form-abandonment.js?ver=1"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#email_me_job').on('click', function() {
+			Analytics.addAction('email_me_job_button', { listing_id : 1306611 });
+		});
+
+		$('#download_job_description').on('click', function() {
+			// TODO - Download the full job description file
+		});
+		
+		Analytics.addParams({ listing_id : '1306611' });
+	});
+</script>
+<script type="application/ld+json">
+	{"@context":"http:\/\/schema.org\/","@type":"JobPosting","title":"Chief Executive Officer, Technical Assistance Collaborative","url":"https:\/\/eostransitions.applicantpool.com\/jobs\/1306611.html","description":"<p style=\"text-align: center; background: white;\"><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #0a233f;\">Technical Assistance Collaborative Seeks Chief Executive Officer<\/span><\/strong><\/p>\n<p style=\"line-height: normal; background: white;\">&nbsp;<\/p>\n<p style=\"line-height: normal; background: white; border: none; padding: 0in;\"><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #0a233f;\">About Technical Assistance Collaborative<\/span><\/strong><\/p>\n<p style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">For more than three decades, the <\/span><a href=\"https:\/\/www.tacinc.org\/\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; background: white;\">Technical Assistance Collaborative (TAC)<\/span><\/a><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\"> has partnered with federal, state, and local agencies, foundations, advocates, and service providers to strengthen the systems that support some of the nation's most vulnerable populations. Founded in 1992 and based in Boston, TAC is a nationally respected nonprofit consulting organization dedicated to advancing policies and practices that empower people to live healthy, independent lives in the communities of their choice. Through its work across homelessness, affordable housing, behavioral health, health care, and human services systems, TAC has become a recognized thought leader in helping organizations and governments implement innovative, practical, and sustainable solutions that improve both individual outcomes and system performance.<\/span><\/p>\n<p style=\"background: white;\">&nbsp;<\/p>\n<p style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">TAC's stellar reputation is built on deep subject matter expertise, a highly collaborative consulting model, and an unwavering commitment to mission-driven impact. Its multidisciplinary teams bring together professionals with extensive public and nonprofit sector experience-including nationally recognized experts and former senior government officials-who understand the complexities of housing, behavioral health, Medicaid, child welfare, juvenile justice, and community integration systems. Clients value TAC not only for its technical expertise and strategic insight, but also for its flexibility, tailored approach, and ability to navigate complex challenges with humanity, equity, and respect. Internally, TAC is equally recognized for fostering a supportive and values-driven culture that reflects the mission it advances every day.<\/span><\/p>\n<p style=\"background: white;\">&nbsp;<\/p>\n<p style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #687287;\">Key Areas of TAC's Work &amp; Programs:<\/span><\/p>\n<ul>\n<li style=\"color: windowtext; tab-stops: list .5in; background: white;\"><span style=\"color: #414140;\"><a href=\"https:\/\/www.tacinc.org\/focus-areas\/homelessness\/\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif;\">Homelessness:<\/span><\/a><\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\"> Supporting communities in preventing and ending homelessness through strategic resource alignment and supportive housing strategies. <\/span><\/li>\n<li style=\"color: windowtext; tab-stops: list .5in; background: white;\"><span style=\"color: #414140;\"><a href=\"https:\/\/www.tacinc.org\/focus-areas\/affordable-housing\/\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif;\">Affordable Housing:<\/span><\/a><\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\"> Helping states and localities expand housing opportunities for extremely low-income individuals and people with disabilities through policy and financing solutions. <\/span><\/li>\n<li style=\"color: windowtext; tab-stops: list .5in; background: white;\"><span style=\"color: #414140;\"><a href=\"https:\/\/www.tacinc.org\/focus-areas\/mental-health-substance-use-disorder\/\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif;\">Mental Health &amp; Substance Use Disorders<\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; background: white;\">:<\/span><\/a><\/span> <span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Assisting organizations and government entities<span style=\"background: white;\"> in aligning systems, leveraging resources, and improving access to effective behavioral health care and services. <\/span><\/span><\/li>\n<li style=\"color: windowtext; tab-stops: list .5in; background: white;\"><span style=\"color: #414140;\"><a href=\"https:\/\/www.tacinc.org\/focus-areas\/community-integration-housing-employment\/\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; background: white;\">Community Integration, Housing &amp; Employment:<\/span><\/a><\/span> <span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">Guiding states in developing and implementing effective Olmstead plans and advancing community-based living opportunities. <\/span><\/li>\n<li style=\"color: windowtext; tab-stops: list .5in; background: white;\"><span style=\"color: #414140;\"><a href=\"https:\/\/www.tacinc.org\/focus-areas\/medicaid\/\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; background: white;\">Medicaid:<\/span><\/a><\/span> <span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">Partnering with Medicaid programs to design financially sustainable, evidence-based behavioral health services and supports.<\/span><\/li>\n<\/ul>\n<p style=\"background: white;\">&nbsp;<\/p>\n<p><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">TAC has a <\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">staff of 43<\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\"> and annual revenue of approximately <\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">$14 million<\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">, primarily derived from its contracts and consulting assignments that range in size <\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">from $2,500 to $3 million and<\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\"> vary from one-day to multi-year engagements<\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">. TAC is overseen by a small but diverse Board of Directors representing public agencies and advocacy groups related to mental health and housing, academia, and people with lived experience of mental health conditions. During the last year, TAC has been successfully managed by its interim CEO, a long-tenured TAC director who succeeded a 14-year CEO and who will resume her position once a new CEO is hired.<\/span><\/p>\n<p>&nbsp;<\/p>\n<p style=\"line-height: normal; background: white; border: none; padding: 0in;\"><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #0a233f;\">The CEO Opportunity<\/span><\/strong><\/p>\n<p style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">The CEO will have the rare opportunity to lead a nationally respected, mission-driven, non-profit consulting practice at the forefront of housing, homelessness, and behavioral health systems change. With an exceptional and experienced team, strong financial footing, longstanding client relationships, and a collaborative culture grounded in purpose rather than profit, the next leader will have the chance to build on TAC's 35-year legacy while helping shape the field's future. The CEO will work alongside some of the smartest and most committed professionals in the country to drive meaningful and responsive systems change, scale TAC's influence, cultivate the next generation of leaders, and guide the organization through an important period of evolutionary growth and modernization. <\/span><\/p>\n<p style=\"line-height: normal; background: white;\">&nbsp;<\/p>\n<p style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">In addition to assuming all managerial and administrative oversight of TAC, the CEO will build on existing strengths by focusing on the following: <\/span><\/p>\n<ul>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #687287;\">Vision and Strategy<\/span>\n<ul>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Develop a long-term vision and strategy that ensures sustainability while reaffirming and protecting the organization's mission, values, and equity-centered approach while adapting to external realities. <\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Create an actionable roadmap for the organization's future by growing business development efforts, including the exploration of new markets, partnerships, and service lines to diversify revenue streams and reduce reliance on federal funding amid shifting political and policy environments.<\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Expand the organization's national visibility, thought leadership, and relationships with key influencers and decision-makers, helping communities and clients effectively communicate their impact and needs in a changing funding landscape. <\/span><\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p style=\"background: white;\">&nbsp;<\/p>\n<ul>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #687287;\">Organizational Capacity, Infrastructure, &amp; Leadership Continuity<\/span>\n<ul>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Embrace technology and modern tools to enhance collaboration, cross-sector communication, product delivery, project management, and organizational effectiveness.<\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Strengthen organizational infrastructure, systems, communications, and operational processes to benefit from efficiencies. <\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Focus on staff development including leadership pipeline growth and succession planning to develop a thoughtful plan as TAC's most senior leaders consider personal transitions.<\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Support board development and expansion to strengthen governance and strategic partnerships.<\/span><\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p style=\"background: white;\">&nbsp;<\/p>\n<ul>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #687287;\">Culture and Communications<\/span>\n<ul>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Protect and elevate the organization's people, culture, and mission-driven identity ensuring that TAC remains values-aligned, adaptive, and resilient.<\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Maintain morale, staff well-being, and organizational cohesion as the political and policy landscape continues to evolve.<\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Serve as a visible, relationship-oriented leader and ambassador for the organization, strengthening communications internally and externally through transparency, consistency, and active listening.<\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Listen, learn, and build trust so change management is well-informed. <\/span><\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p style=\"background: white;\">&nbsp;<\/p>\n<p>&nbsp;<\/p>\n<p style=\"line-height: normal; background: white; border: none; padding: 0in;\"><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #0a233f;\">Profile of the Ideal Candidate<\/span><\/strong><\/p>\n<p style=\"line-height: normal; background: white;\"><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #0a233f;\">Credentials:<\/span><\/strong><\/p>\n<ul>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">A minimum of <span style=\"background: white;\">ten years<\/span> of senior leadership, or equivalent experience.<\/span><\/li>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Proven business development, revenue generation, and\/or consulting experience. <\/span><\/li>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Demonstrated track record of understanding and working at the intersection of housing, behavioral health, homelessness, and human services systems.<\/span><\/li>\n<\/ul>\n<p style=\"line-height: normal; background: white;\">&nbsp;<\/p>\n<p style=\"line-height: normal; background: white;\"><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #0a233f;\">Skills and Qualities:<\/span><\/strong><\/p>\n<p style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #687287;\">Visionary and Credible Business Leader<\/span><\/p>\n<ul>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Skilled at serving as a compelling public-facing business developer and ambassador for a mission-based organization, a leader who can expand resources through income generation, grants, and\/or philanthropy. <\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Possess deep credibility in the field with the ability to confidently engage with stakeholders at all levels-from federal leaders to service recipients.<\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Able to develop, articulate, and champion a strategic vision externally and internally.<\/span><\/li>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; background: white;\">Entrepreneurial<\/span><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\"> leader with financial acumen and governance experience at an organization of similar size and scale.<\/span><\/li>\n<\/ul>\n<p style=\"line-height: normal; background: white;\">&nbsp;<\/p>\n<p style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #687287;\">Savvy Networker and Collaborator with Excellent Communication Skills<\/span><\/p>\n<ul>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Charismatic and energizing, with the ability to engage deeply with others and inspire trust.<\/span><\/li>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Eager to be the public spokesperson for TAC to advance its impact and business development.<\/span><\/li>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Curious leader and collaborative decision-maker who is receptive to feedback, thoughtful about organizational change, able to bring people along through the change process, and engage in healthy disagreement.<\/span><\/li>\n<li style=\"line-height: normal;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">Sound political and negotiation skills to ensure TAC remains engaged and relevant amidst change.<\/span><\/li>\n<li style=\"line-height: normal;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">Appreciative of diverse perspectives, backgrounds, and experiences.<\/span><\/li>\n<\/ul>\n<p style=\"line-height: normal; background: white;\">&nbsp;<\/p>\n<p style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #687287;\">Empowering, Inclusive, &amp; Thoughtful Manager of People<\/span><\/p>\n<ul>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Able to manage, motivate, and empower highly skilled subject matter experts valuing and trusting their expertise and diverse perspectives in a supportive, mission-driven culture which is not overly corporate or hierarchical.<\/span><\/li>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Skilled at evaluating and sustaining an organizational structure that leverages staff strengths while building cohesion across teams to maximize the contribution of staff and minimize focus area silos. <\/span><\/li>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Lead with empathy, humility, emotional intelligence, and active listening creating space for staff voice and perspectives.<\/span><\/li>\n<li style=\"line-height: normal; background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Balance openness and flexibility with accountability and the ability to make difficult decisions when necessary.<\/span><\/li>\n<li style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Able to model and support a relational\/servant leadership approach and appropriate work\/life balance.<\/span><\/li>\n<\/ul>\n<p style=\"line-height: normal;\">&nbsp;<\/p>\n<p style=\"line-height: normal; border: none; padding: 0in;\"><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">Comp<\/span><\/strong><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #0a233f;\">ensation, Benefits, and Work Location:<\/span><\/strong><\/p>\n<p><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">This is a full-time, salaried, exempt position with a starting salary range of $240,000 to $300,000,<\/span> <span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: windowtext;\">commensurate with experience and qualifications. TAC will tailor an actual offer based on the selected candidate's experience, industry knowledge, skills, and other factors that may prove relevant during the interview process. TAC offers a benefits package that currently includes but is not limited to health insurance (currently 80% of premiums), a flexible spending plan, vacation, holidays, sick and paid leave, and a 403(b) plan. While local residency is not required, a regular presence in the Boston office is an essential function of the position.<\/span><\/p>\n<p>&nbsp;<\/p>\n<p style=\"line-height: normal; background: white; border: none; padding: 0in;\"><strong><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: #0a233f;\">Application Process and Additional Information<\/span><\/strong><\/p>\n<p style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">TAC is an Equal Opportunity Employer and seeks applicants who can bring a variety of experiences, perspectives, and backgrounds to the team. TAC provides equal employment opportunities to all employees and applicants for employment without regard to race, color, religion, sex, national origin, disability, political affiliation, marital status, age, sexual orientation, gender identity, pregnancy, or any other characteristic protected by law. <\/span><\/p>\n<p style=\"background: white;\">&nbsp;<\/p>\n<p style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">Candidate must include a resume and a cover letter, both in PDF format, which describe how qualifications and experience match the needs and mission of TAC. Applications will be accepted until the position is filled. Upload required documents to: <\/span><a href=\"https:\/\/eostransitions.applicantpool.com\/jobs\/\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif;\">https:\/\/eostransitions.applicantpool.com\/jobs\/<\/span><\/a><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black; text-decoration: none; text-underline: none;\">.<\/span><\/p>\n<p style=\"background: white;\">&nbsp;<\/p>\n<p style=\"background: white;\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif; color: black;\">This executive search is being conducted by Eos Transition Partners consultant, John Tarvin. All submissions will be acknowledged and are confidential, and any questions can be submitted to John at: <\/span><a href=\"mailto:jtarvin@eostransitions.com\"><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif;\">jtarvin@eostransitions.com<\/span><\/a><span style=\"font-size: 11.0pt; font-family: 'Calibri',sans-serif;\">. <\/span><\/p>","identifier":{"@type":"PropertyValue","name":"Eos Transitions","sameAs":"1306611"},"datePosted":"2026-06-01 00:00:00","validThrough":"2031-07-03 00:00:00T23:59","employmentType":"FULL_TIME","baseSalary":{"@type":"MonetaryAmount","currency":"USD","value":{"@type":"QuantitativeValue","unitText":"YEAR","minValue":"240000","maxValue":"300000"}},"hiringOrganization":{"@type":"Organization","name":"Eos Transitions","sameAs":"https:\/\/eostransitions.applicantpool.com"},"jobLocation":{"@type":"Place","address":{"@type":"PostalAddress","streetAddress":"","addressLocality":"Boston","addressRegion":"MA","postalCode":"02111","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":"42.36008250000000","longitude":"-71.05888010000000"}}}</script>
+<div class="row text-left">
+	<div class="col-md-8">
+			<div id="job_detail" class="bootstrap-area"><job-detail v-bind="componentData"></div>
+	<script type="text/javascript">
+			$(function() {
+				window.bootstrapVue(
+					"#job_detail",
+					[ 'JobDetail' ],
+					{ componentData: { token : "", organizationId : 3343, domainId : 4297, domainTitle : "Eos Transitions", jobListingId : 1306611, jobInfo : {"mdiCalendar":"Posted 01-Jun-2026 (EST)","mdiBriefcase":"CEO\/Executive Director","mdiMapMarker":"Boston, MA, USA","mdiDollar":"240000-300000 per year","mdiBulletList":"Salary","mdiInbox":"Full Time"}, showEmailMeSimilarJobs : 1, mailToUrl : "mailto:?subject=Chief%20Executive%20Officer%2C%20Technical%20Assistance%20Collaborative%20at%20Eos%20Transitions&body=Apply%20for%20the%20Chief%20Executive%20Officer%2C%20Technical%20Assistance%20Collaborative%20at%20Eos%20Transitions%20using%20the%20link%20below.%0A%0Ahttps%3A%2F%2Feostransitions.applicantpool.com%2Fjobs%2F1306611", siteCss : {"accent":"#1A1C38"}, useChatToApplyFlag : false, airaEnabled : false, }}
+				);
+			});
+	</script>	</div>
+	<div class="col-md-4">
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script><script type="text/javascript">
+	$(function() {
+		A.setTempName('apply');
+		A.setTempDir('/jobs/');
+		A.getJson('getCsrfToken', '', function(result) {
+			if(result && Reflect.has(result, 'token')) {
+				$('input[name="csrf_token"]').val(result.token);
+				A.attachPostParam('csrf_token', result.token);
+			}
+		});
+
+		$('#job_piper_alerts_widget').show();
+
+		// Hide job piper to reduce confusion
+		$('#contact_number').on('keyup', function() {
+			$('#job_piper_alerts_widget').fadeOut(200);
+		});
+		$('#apply').on('submit', function () {
+			var $t = $(this), formIsValid = V.form('apply'), appData;
+
+			if(formIsValid) {
+
+				appData = AS.get('applicationInfo') || {};
+				appData.job_listing_id = '1306611';
+				appData.ad_version_id = '';
+				appData.i = '0';
+				appData.first_name = $('#first_name').val();
+				appData.last_name = $('#last_name').val();
+				appData.email = $('#email').val();
+				appData.contact_number = $('#contact_number').val();
+				appData.contact_number_type = $('#contact_number_type').val();
+				appData.text_approval = $('#text_approval').val();
+				appData.applicant_consent_approval = $('#applicant_consent_approval').val();
+				appData.info_use_consent = $('#info_use_consent').val();
+
+				if(window.isSeekSubmit && window.isSeekFromUrl) {
+					appData.seek_token = '';
+				}
+
+				if(!$('#info_use_consent').prop('checked')) {
+					V.field($('#info_use_consent'));
+					V.addError("Please indicate that you have read and agree to the Applicant Information Use & Privacy Policy");
+					return false;
+				}
+
+				AS.set('applicationInfo', appData, 2700);
+
+				$('#apply_container').animate({ opacity: 0 }, 200);
+				A.setTempName('apply');
+				A.setTempDir('/jobs/');
+				A.skipNotify = true;
+				A.getHTMLAsPost('initialForm', 'apply', '', function(result) {
+					if(result) {
+						$('#apply_container').html(result).animate({ opacity: 1 }, 200);
+						// Hide job piper to reduce confusion
+						$('#job_piper_alerts_widget').fadeOut(200);
+					}
+				});
+			}
+			return false;
+		});
+
+		$('#contact_number_type').on('change', function () {
+			if (this.value == 2) {
+				$('#text_approval_div').show();
+				$('#text_approval').attr('disabled', false);
+			} else {
+				$('#text_approval_div').hide();
+				$('#text_approval').attr('disabled', true);
+			}
+		});
+
+		if('') {
+			var appData = AS.get('applicationInfo');
+		} else {
+			var appData = null;
+		}
+
+		if(typeof(appData) != 'undefined') {
+			for(var i in appData) {
+				// make sure there's a value and that the field is a string, not an int, and skip the job_id and i
+				if(appData[i] && isNaN(parseInt(i)) && i != 'job_listing_id' && i != 'i')
+					$('#' + i).val(appData[i]);
+			}
+		}
+
+		$('#applicant_consent_approval').on('change', function() {
+			var $t = $(this), hasPhoneCallOption = $('#text_approval option[value="2"]').length, isPhoneCallSelected = $('#text_approval option[value="2"]:selected').length;
+			if($t.val() === "1") {
+				$('#text_approval option[value="1"]').prop('disabled', false);
+			} else {
+				$('#text_approval option[value="1"]').prop('disabled', true);
+				if(hasPhoneCallOption && isPhoneCallSelected) {
+					$('#text_approval option[value="2"]').prop('selected', true);
+				} else {
+					$('#text_approval option[value="0"]').prop('selected', true);
+				}
+			}
+		});
+
+		$('#info_use_consent').on('change', function() {
+			if(!$('#info_use_consent').prop('checked')) {
+				V.addError("Please indicate that you have read and agree to the Applicant Information Use & Privacy Policy");
+			} else {
+				V.removeError("Please indicate that you have read and agree to the Applicant Information Use & Privacy Policy");
+			}
+		});
+
+		$('#seek_button').on('click', function() {
+			authSocSeek();
+		});
+
+		setContactInfoFields();
+
+		// Track form abandonment
+		if((Reflect.has(window, 'ga')))
+			ga('send', 'event', 'apply-now-view-form', 'apply-step-1-viewed', 'Apply Step 1 - Viewed', 1);
+		$('#apply').trackEngagement({
+			trackFilledOutFormFields : true,
+			abandonmentCategory: 'apply-now-abandonment',
+			abandonmentAction: 'apply-step-1-abandonedForm',
+			abandonedLabel: 'Apply Step 1 - Left form unchanged',
+			notAbandonedLabel : 'Apply Step 1 - Filled out form',
+			submitCategory: 'apply-now-submit',
+			submitAction: 'apply-now-1-submitted'
+		});
+
+		const script = document.createElement('script');
+		script.async = true;
+		script.src = 'https://integration.seek.com/panels/SeekApi.js';
+		script.type = 'text/javascript';
+		document.body.appendChild(script);
+		window.SEEK_PANEL_DEBUG = true
+
+		// Auto-fill form if seek-prefill-id is present
+			});
+
+	$(function() {
+			$('#email').on('input blur', function() {
+				$t = $(this);
+				typeDelay(function() {
+					$t.val(Txt.clean($t.val(), { stripHtml : true }).replace(/(mailto\:|')+/ig, ''));
+				}, 500);
+			});
+		}
+	);
+
+	window.funID = '4297';
+
+	
+	function getParameterByName(name, url) {
+		if (!url) url = window.location.href;
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) return null;
+		if (!results[2]) return '';
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+	function setContactInfoFields() {
+		var fname = getParameterByName("fname");
+		var lname = getParameterByName("lname");
+		var email = getParameterByName("email");
+		var phone = getParameterByName("phone");
+		if(fname)
+			$('#first_name').val(fname);
+		if(lname)
+			$('#last_name').val(lname);
+		if(email)
+			$('#email').val(email);
+		if(phone)
+			$('#contact_number').val(phone);
+	}
+
+	/**
+	 * Seek V2 Process
+	 * 
+	 */
+
+	async function getSeekButton(seek_token = '') {
+		const applicationUri = window.location.href;
+		let postBody = {
+			domainId: 4297,
+			input: {
+				applicationUri,
+			}
+		};
+
+		if(seek_token !== '') {
+			postBody.input.seek_token = seek_token;
+		}
+
+		const request = await fetch('/core/api/seek-get-redirect-button', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(postBody)
+		});
+
+		if (!request.ok) {
+			return;
+		}
+
+		const { data } = await request.json();
+
+		// Check if we have the applyWithSeekButton data
+		if (data && data.url && data.buttonLabel && data.images && data.images.accent) {
+			// Find the existing SEEK button container and replace it
+			const seekButtonContainer = document.querySelector('#seek_v2_button');
+			if (seekButtonContainer) {
+				// Create the new button HTML
+				const newSeekButton = document.createElement('a');
+				newSeekButton.href = data.url;
+				newSeekButton.setAttribute('aria-roledescription', 'link');
+				
+				const buttonImage = document.createElement('img');
+				buttonImage.setAttribute('aria-roledescription', 'link');
+				buttonImage.alt = data.buttonLabel;
+				buttonImage.src = data.images.accent;
+				buttonImage.style.width = '100%';
+				buttonImage.style.height = 'auto';
+				
+				newSeekButton.appendChild(buttonImage);
+				
+				// Replace the existing button with the new one
+				seekButtonContainer.parentNode.replaceChild(newSeekButton, seekButtonContainer);
+			}
+		}
+	}
+</script>
+<script type="text/javascript">
+	async function fillSeekProfile(seek_prefill_id, seek_token) {
+		if (!seek_prefill_id) {
+			window.isSeekSubmit  = true;
+			window.isSeekFromUrl = true;
+			$('#is_seek_application').val(1);
+ 
+			return;
+ 		}
+		const request = await fetch('/core/api/prefill-with-seek', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				seek_prefill_id,
+				seek_token
+			})
+		});
+		if (!request.ok) {
+			return;
+		}
+		const { data } = await request.json();
+
+		// Check if data is not empty
+		if (!data || Object.keys(data).length === 0) {
+			return;
+		}
+
+		// Generate unique token and get existing application data
+		var unique_token = A.generateUniqueID();
+		var appData = AS.get('applicationInfo') || {};
+
+		// Store the SEEK data and metadata
+		appData.seek_prefill_id = seek_prefill_id;
+		appData.seek_token = seek_token;
+		appData.seek_unique_token = unique_token;
+		appData.seek_full_profile = data;
+
+		const userData = data.user || {};
+
+		if("first_name" in userData) {
+			// appData.first_name = userData.firstName;
+			$('#first_name').val(userData.first_name);
+		}
+		if("last_name" in userData) {
+			// appData.last_name = userData.lastName;
+			$('#last_name').val(userData.last_name);
+		}
+		if("email" in userData) {
+			// appData.email = userData.emailAddress;
+			$('#email').val(userData.email);
+		}
+		if("contact_number" in userData) {
+			// appData.contact_number = userData.phoneNumber;
+			$('#contact_number').val(userData.contact_number);
+		}
+		if("contact_number_type" in userData) {
+			// appData.contact_number_type = userData.phoneNumberType;
+			$('#contact_number_type').val(userData.contact_number_type);
+		}
+
+		// Mark this as a SEEK submission
+		window.isSeekSubmit = true;
+		$('#is_seek_application').val(1);
+
+		// Store the application data
+		AS.set('applicationInfo', appData, 2700);
+
+		// Auto-submit the form
+		$('#apply').submit();
+	}
+</script>
+
+<ul class="list-group">
+	<li class="list-group-item text-center">
+		<h3 id="apply_now">Apply Now</h3>
+				<h2 style="font-size: 18px;">with our quick 3 minute Application!</h2>
+			</li>
+	<li class="list-group-item background-theme">
+		<noscript>
+			<p class="text-danger">You have JavaScript disabled on your browser. You will not be able to apply for this position without enabling javascript. If you need assistance with enabling javascript, please click <a href="/help/" title="Help Area">here</a> for assistance.</p>
+		</noscript>
+		<div id="apply_container">
+						<style type='text/css'>
+			  .seek-apply-btn {
+				display: block;
+				width: 100%;
+				height: 45px;
+				line-height: 45px;
+				background: #e60278;
+				color: #fff;
+				border-radius: 4px;
+				box-shadow: 0 1px 2px 0 rgba(64,64,64,0.5);
+				font-size: 18px;
+				text-align: center;
+				text-decoration: none;
+				font-family: Helvetica, Arial;
+			  }
+			  .seek-apply-btn:hover {
+				background: #fd0585;
+				box-shadow: 0 1px 2px 0 rgba(64,64,64,0.4);
+				text-decoration: none;
+			  }
+			  .seek-apply-btn:active {
+				background: #cd026b;
+				box-shadow: 0 1px 2px 0 rgba(64,64,64,0.7);
+			  }
+			  .seek-apply-btn__image {
+				display: inline-block;
+				height: 30px;
+				width: 75px;
+				margin: -1px 0 0 9px;
+				vertical-align: middle;
+				background: url(/images/seek-apply-with-logo.svg) no-repeat;
+				background-size: 100% 100%;
+			  }
+			</style>
+
+			
+			
+			<form id="apply" class="form-horizontal validate">
+				<input type="hidden" name="listing_id" value="1306611" />
+				<input type="hidden" name="ad_version_id" value="" />
+				<input type="hidden" name="i" value="0" />
+				<input type="hidden" name="is_linkedin_new_api" id="is_linkedin_new_api" value="" />
+				<input type="hidden" name="is_seek_application" id="is_seek_application" value="" />
+				<input type="hidden"  name="csrf_token" value=""  />				<div class="row">
+					<div class="col-xs-12">
+						<small><i>* Fields Are Required</i></small>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<p><b>What is your full name?</b></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-6">
+						<label for="first_name" class="control-label sr-only">First Name</label>
+						<input data-maxlength="200" type="text" name="first_name" id="first_name" class="form-control required" placeholder="First Name*" />
+					</div>
+					<div class="col-xs-6">
+						<label for="last_name" class="control-label sr-only" style="display:none">Last Name</label>
+						<input data-maxlength="200" type="text" name="last_name" id="last_name" class="form-control required" placeholder="Last Name*" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<p><b>How can we contact you?</b></p>
+					</div>
+					<div class="col-xs-12">
+						<label for="email" class="control-label sr-only">Email</label>
+						<input data-maxlength="255" type="email" name="email" autocomplete="off" id="email" class="form-control required" placeholder="Email*" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-7">
+						<label for="contact_number" class="control-label sr-only">Phone Number</label>
+						<input data-maxlength="15" type="text" name="contact_number" id="contact_number" class="form-control required" placeholder="Phone Number*" value="" />
+					</div>
+					<div class="col-xs-5">
+						<label for="contact_number_type" class="control-label sr-only">Number Type</label>
+						<select class="form-control required" name="contact_number_type" id="contact_number_type">
+							<option value="1">Home</option>
+							<option value="2" selected>Cell</option>
+							<option value="3">Work</option>
+						</select>
+					</div>
+				</div>
+								<div class="form-group" id="text_approval_div">
+					<div class="col-xs-12">
+						<label for="text_approval">
+							<p><b>What is your preferred method of communication?</b></p>
+						</label>
+						<select class="form-control" name="text_approval" id="text_approval">
+							<option value="0">Email</option>
+							<option value="1" selected>Text Message</option>
+													</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label for="applicant_consent_approval">Please indicate if you agree to ApplicantPool's <a target="_blank" href="https://admin.applicantpool.com/applicant-communication-policy/" title="ApplicantPool's Applicant Communication Policy"><b>Applicant Communication Policy</b></a>.</label>
+						<select class="form-control required" name="applicant_consent_approval" id="applicant_consent_approval">
+							<option value=""></option>
+							<option value="1">Yes, I agree to be contacted by text messages</option>
+							<option value="2">No, I do not agree to receive text messages</option>
+						</select>
+					</div>
+				</div>
+								<div class="form-group">
+					<div class="check-group col-sm-12">
+						<label for="info_use_consent" class="bold">
+							<input type="checkbox" id="info_use_consent" iferrText="Agreement is missing." name="info_use_consent" class="v">
+							I agree to ApplicantPool's <a target="_blank" href="https://admin.applicantpool.com/applicant-privacy-policy/" title="ApplicantPool's Privacy Policy">Privacy Policy</a> and <a href="https://admin.applicantpool.com/terms-of-service" target="_blank" title="Terms of Service">Terms of Service</a>.*
+						</label>
+					</div>
+				</div>
+				<div class="sr-only errors_div" tabindex="0"></div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label for="apply_button" class="sr-only">Apply for this Position</label>
+						<button type="submit" id="apply_button" class="btn btn-lg btn-block accent">Apply for this Position</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</li>
+</ul><ul class="list-group" id="job_piper_alerts_widget">
+	<li class="list-group-item text-center">
+		<h3>Sign Up For Job Alerts!</h3>
+	</li>
+	<li class="list-group-item background-theme">
+		<script type="text/javascript">
+			$(function() {
+				var sidebar_options = { 
+					api_key: "e7ff9c1d_apppool_eostransitions", 
+					style: "sidebar", 
+					title: "Chief Executive Officer, Technical Assistance Collaborative", 
+					source: "10_job" 
+				};
+				referWidget("create", sidebar_options, "refer-widget");
+			});
+		</script>
+		<div id="refer-widget"></div>
+	</li>
+</ul>
+	<div id="social_media_widget" class="bootstrap-area"><social-media-widget v-bind="componentData"></div>
+	<script type="text/javascript">
+			$(function() {
+				window.bootstrapVue(
+					"#social_media_widget",
+					[ 'SocialMediaWidget' ],
+					{ componentData: { job : {"id":"1306611","title":"Chief Executive Officer, Technical Assistance Collaborative","city":"Boston","name":"Massachusetts","abbreviation":"MA","description":"Technical Assistance Collaborative Seeks Chief Executive Officer\n&nbsp;\nAbout Technical Assistance Collaborative\nFor more than three decades, the Technical Assistance Collaborative (TAC) has partnered with federal, state, and local agencies, foundations, advocates, and service providers to strengthe...","advertisingTitle":"Chief Executive Officer, Technical Assistance Collaborative"}, organizationId : 3343, rootDomainId : 10, domainId : 4297, domainName : "applicantpool.com", domainTitle : "Eos Transitions", subdomainName : "eostransitions", sourceId : 0, employeeName : "", useWwwJobPagesUrl : false, }}
+				);
+			});
+	</script>	</div>
+</div>
+<img alt="." src="https://eostransitions.applicantpool.com/jobs/images/4297-1306611.png" />
+					</div> <!-- panel-body -->
+										<div class="panel-footer">
+												<div>
+														<div class="footer-links">Maintained by <a href='http://www.applicantpool.com' target='_blank'>ApplicantPool</a> - &copy; 2026</div>
+														<div class="footer-links">
+									<form method="post" id="clear_cache" style="display: inline-block;">
+										<input type="hidden" name="clear_session_cache_old_style" />
+										<a tabindex="-1" href="javascript:void(0);" onclick="$('#clear_cache').submit();">Refresh</a>
+									</form>
+								</div>
+													</div>
+												<!--[if lt IE 9]>
+						<script type="text/javascript">
+							$(function() {
+								$('.footer-links:last-child').css('border-left', '0');
+								$('.footer-links:last-child a').css('color', $('body .panel-footer').css('background-color'));
+							});
+						</script>
+					<![endif]-->
+					</div> <!-- panel-footer -->
+				</div> <!-- panel -->
+			</div> <!-- container -->
+		</div> <!-- container-fixed -->
+
+		
+		<!-- Refer.io Script that will be used throughout the site -->
+				<script type="text/javascript">
+			!function(e,r,t){e.referWidget=e.referWidget||function(){(e.referWidget.q=e.referWidget.q||[]).push(arguments)},e.referWidget.l=1*new Date;var n=r.createElement("script"),i=r.getElementsByTagName("script")[0];n.async=1,n.src=t,i.parentNode.insertBefore(n,i)}(window,document, "https://widget-dot-refer-io.appspot.com/refer.js");
+		</script>
+
+		
+		
+			
+	
+	<!-- GA4 - Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1QL0HHW9LT"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-1QL0HHW9LT');
+	</script>
+
+		<map name="headerMap" id="headerMap">
+			</map>
+
+				<!-- scripts
+	<script type="text/javascript">
+		jQl.loadjQ('/js/all.min.js?ver=2.3.47194');
+	</script>
+	-->
+
+	<!-- Google Translate For Placeholders -->
+	
+		<script type="text/javascript">
+				var exit_survey_enabled = '0';
+		var fired = '0';
+		var thanks = '0'
+		$(function() {
+			$('#leaving').on('change', function() {
+				if($(this).val() != 0)
+					$('#notice').css('display', 'block');
+				else
+					$('#notice').css('display', 'none');
+
+				if( $(this).val() == 'Other' )
+					$('#reason').css('display', 'block');
+				else
+					$('#reason').css('display', 'none');
+			});
+		});
+
+		if(exit_survey_enabled != 0) {
+			$('#left').on('click', function() {
+				var answer = $('#leaving').val();
+				if(answer != 0) {
+					var domain_id = '4297';
+					var job = '1306611';
+					var app = '';
+
+					if(answer == 'Other') {
+						if( $('#reason').val() != '' ) {
+							answer = $('#reason').val();
+						} else {
+							answer = 'Other (Non Specified)';
+						}
+					}
+					$.post("/jobs/edit.php", {n: 'conversion', f: 'survey', v :{app_id : app, domain: domain_id, job_id: job, answer: answer} });
+
+					$('#ouibounce-modal').hide();
+				  							$('#ouibounce-referio-modal').css('display', 'block');
+									}
+			});
+		}
+
+		// if you want to use the 'fire' or 'disable' fn,
+		// you need to save OuiBounce to an object
+		if(exit_survey_enabled != 0 && fired == 0 && thanks == 0) {
+			var modal = '';
+
+			$('html').on( 'mouseleave', function() {
+				if(fired == 0) {
+					fired = 1;
+					modal = ouibounce(document.getElementById('ouibounce-modal'), {
+							aggressive: false,
+						  	timer: 0,
+						  	callback: function() {
+						  		$('#top-nav').css('z-index', '0');
+						  		$.get("/jobs/view.php", {n: 'conversion', f: 'survey_fired'});
+								if( typeof(modal) != "undefined" && typeof(modal.disable) != "undefined" )
+									modal.disable();
+						  	}
+						});
+					modal.fire();
+				}
+			});
+
+			setInterval( function() {
+				$('select').click(
+					function(e) {
+						e = e || window.event;
+						e.stopPropagation();
+						if( typeof(modal) != "undefined" && typeof(modal.disable) != "undefined" )
+							modal.disable();
+					}
+				);
+
+				$('select').mouseleave(
+					function(e) {
+						e = e || window.event;
+						e.stopPropagation();
+						if( typeof(modal) != "undefined" && typeof(modal.disable) != "undefined" )
+							modal.disable();
+					}
+				);
+			}, 1000);
+
+			$('body').on('click', function() {
+			  	$('#ouibounce-modal').hide();
+			  	$('#ouibounce-referio-modal').hide();
+			});
+
+			$('#ouibounce-modal .modal').on('click', function(e) {
+			  	e.stopPropagation();
+			});
+
+			$('#ouibounce-referio-modal .modal').on('click', function(e) {
+			  	e.stopPropagation();
+			});
+
+			$('#ouibounce-referio-modal .modal-footer button').on('click', function(e) {
+			  	$('#ouibounce-referio-modal').hide();
+			});
+		}
+	</script>
+	
+		<!--
+	<script type="text/javascript">
+		var pkBaseURL = (("https:" == document.location.protocol) ? "https://eostransitions.applicantpool.com/stats/" : "http://eostransitions.applicantpool.com/stats/");
+		document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+		var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 0);
+		piwikTracker.trackPageView();
+		piwikTracker.enableLinkTracking();
+		} catch( err ) {}
+	</script>
+	<noscript><p><img src="https://eostransitions.applicantpool.com/stats/piwik.php?idsite=0" style="border:0" alt="" /></p></noscript>
+	-->
+		<script type="text/javascript">
+		$(function() {
+			Analytics.addAction();
+		});
+	</script>
+
+	
+	<!-- 36840 Add role="combobox" to all available selects-->
+	<script>
+		$(function() {
+			$('select').attr('role', 'combobox');
+			$('.dropdown').attr('role', 'combobox');
+		});
+	</script>
+
+		</body>
+</html>

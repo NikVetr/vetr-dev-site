@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Institute for Market Transformation
+ein: 94-3241464
+source_wave: extension3
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 88.0
+ceo_name: Alex Dews
+ceo_title: CEO
+top_executive_basis: CEO listed in filing, but prior filing listed another Executive Director and Alex Dews as Managing Director
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-10-09
+irs_object_id: 202512829349300921
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202512829349300921_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/943241464
+part_vii_org: 211550.0
+part_vii_related: 0.0
+part_vii_other: 22047.0
+cash_proxy: 211550.0
+total_proxy: 233597.0
+schedule_j_base: 
+revenue: 6537555.0
+expenses: 8135948.0
+employee_count: 
+full_year_status: unclear
+founder_flag: no
+structure_flag: possible_role_transition_during_compensation_year
+analysis_status: structural_sensitivity
+exclusion_reason: Exact CEO start date was not established; excluded from primary rather than silently treating as full-year.
+notes: Strong climate-policy and technical-assistance comparator, retained only as a labeled transition sensitivity.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table and prior-year comparison; browser source turn692537view0 lines 25-174.
+source_id: SRC-990-EXT-INSTITUTE-FOR-MARKET-TRANSFORMATION
+part_vii_org_jul2026: 225192.43719758384
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 23468.76701912139
+cash_proxy_jul2026: 225192.43719758384
+total_proxy_jul2026: 248661.20421670523
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: False
+structurally_clean: False
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 

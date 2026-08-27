@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-AD-FFIS-2026
+Organization: Federal Funds Information for States
+Document type: CEO/ED recruitment advertisement
+Original URL: https://recruiting.paylocity.com/recruiting/jobs/Details/4336561/Federal-Funds-Information-for-States-Inc/Executive-Director-and-Executive-Editor
+Resolved URL: https://ffis.org/jobs/
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: employer plus source-native ATS copy
+Browser/source references: turn955421search3; turn955421search6; turn220517view3 L0-L4
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+FFIS is a small 501(c)(3) research and data organization tracking federal funds to states. The Executive Director is the lead executive officer, oversees four staff, sets strategy and research/editorial direction, advises the board, builds partnerships, and manages financial sustainability. The salary is $220,000 annually. Applications requested by August 7, 2026. The original ATS page later became inactive, but the employer jobs page retained the complete content.

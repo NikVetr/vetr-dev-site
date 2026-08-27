@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Migration Policy Institute
+ein: 52-2279789
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 87.0
+ceo_name: Andrew Selee
+ceo_title: President
+top_executive_basis: top organization-wide executive
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-05-15
+irs_object_id: 202601359349310000
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202601359349310000_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/522279789
+part_vii_org: 285000.0
+part_vii_related: 0.0
+part_vii_other: 68194.0
+cash_proxy: 285000.0
+total_proxy: 353194.0
+schedule_j_base: 
+revenue: 6855627.0
+expenses: 7069622.0
+employee_count: 33.0
+full_year_status: yes
+founder_flag: no
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: 
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest FY2025 filing table
+source_id: SRC-990-EXT-MIGRATION-POLICY-INSTITUTE
+part_vii_org_jul2026: 303379.0810745043
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 72591.69492910437
+cash_proxy_jul2026: 303379.0810745043
+total_proxy_jul2026: 375970.7760036087
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 1.0574182732606872

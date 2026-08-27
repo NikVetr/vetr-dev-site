@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Animal Welfare Institute
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: first expansion
+topic_cluster: Animal welfare and food systems
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 13-5655952
+revenue: 6170763.0
+expenses: 7585554.0
+employee_count: 35.0
+comparability_score: 88.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 192686.1670264535
+total_proxy_jul2026: 202729.61134202525
+ceo_title: Executive Director/CEO
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/135655952
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202543189349305814_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/animal-welfare-institute%2C135655952/
+prior_scale_source_type: Public Form 990 rendering (Cause IQ or ProPublica)
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Strong expense/headcount and policy/research match.
+prior_function_score: 24.0
+prior_expense_score: 25.0
+prior_staff_score: 15.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

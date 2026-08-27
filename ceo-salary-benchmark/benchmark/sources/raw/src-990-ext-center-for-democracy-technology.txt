@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Center for Democracy & Technology
+ein: 52-1905358
+source_wave: legacy_original
+peer_tier: strict_primary
+ea_affinity: EA-adjacent
+comparability_score: 92.0
+ceo_name: Alexandra Givens
+ceo_title: President & CEO
+top_executive_basis: legacy verified
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-17
+irs_object_id: 202533219349301933
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202533219349301933_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521905358
+part_vii_org: 417500.0
+part_vii_related: 0.0
+part_vii_other: 45725.0
+cash_proxy: 417500.0
+total_proxy: 463225.0
+schedule_j_base: 
+revenue: 11272645.0
+expenses: 8766703.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: Strong technology-policy research match.
+retrieved_at: 2026-08-25
+extraction_location: Form 990 Part VII Section A, columns D/E/F; rendered ProPublica Compensation table. Revenue/expenses from rendered Extracted Financial Data. Exact XML element names unavailable without raw XML.
+source_id: SRC-990-EXT-CENTER-FOR-DEMOCRACY-TECHNOLOGY
+part_vii_org_jul2026: 444423.7415740546
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 48673.71397239197
+cash_proxy_jul2026: 444423.7415740546
+total_proxy_jul2026: 493097.45554644655
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 1.118189438390612

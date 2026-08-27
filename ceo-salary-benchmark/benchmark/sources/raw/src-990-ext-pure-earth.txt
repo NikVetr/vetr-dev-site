@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Pure Earth
+ein: 13-4075779
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 88.0
+ceo_name: Leadership transition
+ceo_title: CEO through November / President-CEO
+top_executive_basis: two leaders in compensation year
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-10-07
+irs_object_id: 202532809349302073
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202532809349302073_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/134075779
+part_vii_org: 
+part_vii_related: 
+part_vii_other: 
+cash_proxy: 
+total_proxy: 
+schedule_j_base: 
+revenue: 18493014.0
+expenses: 6837260.0
+employee_count: 27.0
+full_year_status: no
+founder_flag: yes
+structure_flag: transition
+analysis_status: excluded_transition
+exclusion_reason: Richard Fuller CEO through November; Andrew McCartor President/CEO; no clean single full-year observation.
+notes: Prior 2023 also shows CEO and Executive Director; not pooled.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest 2024 filing table
+source_id: SRC-990-EXT-PURE-EARTH
+part_vii_org_jul2026: 
+part_vii_related_jul2026: 
+part_vii_other_jul2026: 
+cash_proxy_jul2026: 
+total_proxy_jul2026: 
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: False
+structurally_clean: False
+current_comp_year: True
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 

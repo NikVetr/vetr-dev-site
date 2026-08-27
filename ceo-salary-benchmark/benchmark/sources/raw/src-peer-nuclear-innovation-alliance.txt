@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Nuclear Innovation Alliance
+reference_tier: C
+tier_label: Tier C broad sensitivity
+selection_wave: third expansion / filing verification
+topic_cluster: nuclear risk and climate
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 37-1859117
+revenue: 3029822.0
+expenses: 1898039.0
+employee_count: 
+comparability_score: 70.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 299570.21642340417
+total_proxy_jul2026: 309200.5815190888
+ceo_title: Executive Director
+compensation_year: 2025.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/371859117
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202621339349301817_public.xml
+selection_note: Added by the third-expansion freeze and retained after role/scale/title verification; pay did not determine selection.

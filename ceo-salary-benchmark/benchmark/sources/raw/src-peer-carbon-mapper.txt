@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Carbon Mapper
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: third expansion / filing verification
+topic_cluster: climate and evidence
+ea_affinity: EA-adjacent
+country_or_region: US/international
+expected_structure: independent nonprofit
+ein: 85-3149996
+revenue: 42000541.0
+expenses: 16084459.0
+employee_count: 
+comparability_score: 87.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 291123.63068709814
+total_proxy_jul2026: 320301.24687043903
+ceo_title: Director & CEO
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/853149996
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202630139349300833_public.xml
+selection_note: Added by the third-expansion freeze and retained after role/scale/title verification; pay did not determine selection.

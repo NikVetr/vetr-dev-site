@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-PROPUBLICA-METHOD
+Organization: ProPublica Nonprofit Explorer
+Document type: data provenance
+Original URL: https://projects.propublica.org/nonprofits/
+Resolved URL: https://projects.propublica.org/nonprofits/
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: derivative
+Browser/source references: turn590537view0 L13-L20; turn498315search0 About This Data
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Nonprofit Explorer states that Form 990 data is from the IRS and that it links full PDF and digital/XML filing copies where available. It was used for navigation and browser-rendered filing-derived extraction, with official IRS object IDs treated as canonical where captured.

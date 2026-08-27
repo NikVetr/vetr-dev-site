@@ -1,0 +1,25 @@
+SOURCE VALIDATOR SELF-TEST
+==========================
+Synthetic IRS XML checks: 10; all passed: True
+Synthetic job-ad checks: 5; all passed: True
+
+IRS XML checks:
+{'check': 'well_formed_xml', 'passed': True, 'expected': 'valid XML', 'observed': 'Return'}
+{'check': 'ein', 'passed': True, 'expected': '13-4148824', 'observed': '134148824'}
+{'check': 'tax_period_end', 'passed': True, 'expected': '2025-06-30', 'observed': '2025-06-30'}
+{'check': 'revenue', 'passed': True, 'expected': 7619753, 'observed': 7619753}
+{'check': 'expenses', 'passed': True, 'expected': 7840893, 'observed': 7840893}
+{'check': 'ceo_record_found', 'passed': True, 'expected': 'Michael Thatcher', 'observed': 'Michael Thatcher'}
+{'check': 'ceo_title', 'passed': True, 'expected': 'President & CEO', 'observed': 'President & CEO'}
+{'check': 'part_vii_org', 'passed': True, 'expected': 324339, 'observed': 324339}
+{'check': 'part_vii_related', 'passed': True, 'expected': 0, 'observed': 0}
+{'check': 'part_vii_other', 'passed': True, 'expected': 21494, 'observed': 21494}
+
+Job-ad checks:
+{'check': 'extractable_text', 'passed': True, 'expected': '>=100 characters', 'observed': 249}
+{'check': 'organization_text', 'passed': True, 'expected': 'distinctive organization words', 'observed': '3/3'}
+{'check': 'role_title_text', 'passed': True, 'expected': 'Chief Executive Officer', 'observed': '3/3 role words'}
+{'check': 'salary_min', 'passed': True, 'expected': ['240,000', '240000', '240k'], 'observed': 'found'}
+{'check': 'salary_max', 'passed': True, 'expected': ['300,000', '300000', '300k'], 'observed': 'found'}
+
+STATUS: PASS

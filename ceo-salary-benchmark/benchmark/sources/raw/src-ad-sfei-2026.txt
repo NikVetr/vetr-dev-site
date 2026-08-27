@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-AD-SFEI-2026
+Organization: San Francisco Estuary Institute
+Document type: CEO/ED recruitment advertisement
+Original URL: https://www.sfei.org/news/sfei-seeks-our-next-executive-director
+Resolved URL: https://potrerogroup.com/sfei
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: employer and retained recruiter
+Browser/source references: turn220517view2 L0-L30; turn955421search8
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+SFEI seeks an Executive Director to lead a respected environmental science organization known for rigorous, unbiased research. The role reports to the joint board, oversees seven directors, advances mission and financial sustainability, diversifies funding, strengthens management, supports staff, and translates science. The anticipated annual salary range is $200,000-$240,000. The position is based in Richmond, California, with regular in-person presence and hybrid flexibility. Priority consideration was June 7, 2026.

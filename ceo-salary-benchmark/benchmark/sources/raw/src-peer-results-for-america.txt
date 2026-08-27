@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Results for America
+reference_tier: B
+tier_label: secondary
+selection_wave: original frozen protocol / legacy bridge
+topic_cluster: Research, evaluation, policy, or EA-adjacent evidence organization
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 81-2709681
+revenue: 16801077.0
+expenses: 24594265.0
+employee_count: 
+comparability_score: 74.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 331430.4689498564
+total_proxy_jul2026: 339069.23486491124
+ceo_title: President & CEO
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/812709681
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202513179349309376_public.xml
+selection_note: Selected under the original frozen protocol before compensation review; retained as a legacy bridge observation.

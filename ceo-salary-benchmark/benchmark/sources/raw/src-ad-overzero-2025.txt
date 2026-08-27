@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-AD-OVERZERO-2025
+Organization: Over Zero
+Document type: CEO/ED recruitment advertisement
+Original URL: https://impactopportunity.org/job/7756/executive-director/
+Resolved URL: https://impactopportunity.org/job/7756/executive-director/
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: complete mirror of recruiter posting
+Browser/source references: turn663171search1; turn663171search5
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Over Zero advertised an Executive Director on April 22, 2025. The project is fiscally sponsored by Hopewell Fund, employs 15 staff, integrates research and practice, and is remote in the United States. The role reports to the President of Hopewell Fund, works with an advisory board, leads strategy, fundraising, finance, risk, culture, and external representation. Base compensation was $200,000-$250,000.

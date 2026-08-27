@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-COS-2024
+Organization: Center for Open Science
+Document type: Form 990 filing-derived snapshot
+Original URL: https://apps.irs.gov/pub/epostcard/990/xml/2025/202513219349318466_public.xml
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/461496217
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: turn787259view1 L25-L96
+EIN: 46-1496217
+IRS object ID: 202513219349318466
+Tax period: 2024-01-01 to 2024-12-31
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Center for Open Science
+EIN: 46-1496217
+IRS object ID: 202513219349318466
+Tax period: 2024-01-01 to 2024-12-31
+Filing date: 2025-11-17
+Top-executive record: Brian Nosek - Executive Director
+Full-year status: yes
+Part VII reportable compensation from organization: 252500
+Related organizations: 0
+Part VII other compensation: 10100
+Cash/reportable proxy: 252500
+Filing total proxy: 262600
+Revenue: 10217166
+Expenses: 8787031
+Tier/status: strict_primary / included
+Exclusion reason: 
+Notes: Founder retained in main sample and excluded in founder sensitivity.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

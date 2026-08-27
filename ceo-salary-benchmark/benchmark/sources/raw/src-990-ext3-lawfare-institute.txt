@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Lawfare Institute
+ein: 46-2967640
+source_wave: extension3
+peer_tier: Tier B weighted secondary
+ea_affinity: EA-adjacent
+comparability_score: 72.0
+ceo_name: 
+ceo_title: 
+top_executive_basis: no organization-wide CEO/ED disclosed in accessible latest compensation table
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-17
+irs_object_id: 202523219349307027
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202523219349307027_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/462967640
+part_vii_org: 
+part_vii_related: 
+part_vii_other: 
+cash_proxy: 
+total_proxy: 
+schedule_j_base: 
+revenue: 1854596.0
+expenses: 2077455.0
+employee_count: 
+full_year_status: unknown
+founder_flag: no
+structure_flag: no_clean_top_executive_observation
+analysis_status: excluded_measurement
+exclusion_reason: Latest filing did not identify a clean organization-wide CEO or Executive Director in the accessible officer-compensation table.
+notes: Security and technology policy research/media comparator. Excluded for measurement, not because of pay.
+retrieved_at: 2026-08-25T17:45:00-0700
+extraction_location: ProPublica Nonprofit Explorer rendered Form 990 financial and compensation tables; official IRS object ID captured from filing XML link. ProPublica page turn763366view0; latest filing reviewed.
+source_id: SRC-990-EXT3-LAWFARE-INSTITUTE
+part_vii_org_jul2026: 
+part_vii_related_jul2026: 
+part_vii_other_jul2026: 
+cash_proxy_jul2026: 
+total_proxy_jul2026: 
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: False
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 

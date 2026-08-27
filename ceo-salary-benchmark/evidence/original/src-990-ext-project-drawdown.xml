@@ -1,0 +1,734 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" returnVersion="2024v5.0">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-09-09T15:47:40-04:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>461335331</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>ALTRUIC ADVISORS CPAS</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>417 FOREST AVENUE</AddressLine1Txt>
+        <CityNm>PLYMOUTH</CityNm>
+        <StateAbbreviationCd>MI</StateAbbreviationCd>
+        <ZIPCd>48170</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>383705448</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>PROJECT DRAWDOWN</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>PROJ</BusinessNameControlTxt>
+      <PhoneNum>6512433116</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>428 MINNESOTA ST STE 500</AddressLine1Txt>
+        <CityNm>SAINT PAUL</CityNm>
+        <StateAbbreviationCd>MN</StateAbbreviationCd>
+        <ZIPCd>55101</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>JONATHAN FOLEY</PersonNm>
+      <PersonTitleTxt>EXECUTIVE DIRECTOR</PersonTitleTxt>
+      <PhoneNum>6512433116</PhoneNum>
+      <SignatureDt>2025-09-08</SignatureDt>
+      <DiscussWithPaidPreparerInd>true</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>false</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>RYAN N HAGAN CPA</PreparerPersonNm>
+      <PTIN>P00293011</PTIN>
+      <PhoneNum>8882985297</PhoneNum>
+      <PreparationDt>2025-09-09</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="6">
+    <IRS990 documentId="RetDoc3" referenceDocumentId="RetDoc6">
+      <PrincipalOfficerNm>JONATHAN FOLEY</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>428 MINNESOTA ST STE 500</AddressLine1Txt>
+        <CityNm>SAINT PAUL</CityNm>
+        <StateAbbreviationCd>MN</StateAbbreviationCd>
+        <ZIPCd>55101</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>8271141</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>false</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>WWW.DRAWDOWN.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2005</FormationYr>
+      <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>PROJECT DRAWDOWN'S MISSION IS TO DRIVE MEANINGFUL CLIMATE ACTION BY ADVANCING SCIENCE-BASED SOLUTIONS AND STRATEGIES. PROJECT DRAWDOWN'S WORK IS FOCUSED ON THREE PILLARS: SCIENCE - ADVANCING SCIENCE-BASED CLIMATE SOLUTIONS AND STRATEGIES; STAKEHOLDERS - ENGAGING KEY STAKEHOLDERS AND EMPOWERING BOLD CLIMATE LEADERSHIP; AND STORIES - TELLING HUMAN STORIES OF SOLUTIONS IN ACTION.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>7</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>7</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>24</TotalEmployeeCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <PYContributionsGrantsAmt>4722106</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>7709336</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>392000</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>332467</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>102411</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>210709</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>58955</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>16673</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>5275472</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>8269185</CYTotalRevenueAmt>
+      <CYGrantsAndSimilarPaidAmt>0</CYGrantsAndSimilarPaidAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>3689021</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>3520206</CYSalariesCompEmpBnftPaidAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>374913</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>1392062</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>959116</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>5081083</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>4479322</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>194389</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>3789863</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>4623077</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>8543786</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>205607</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>336476</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>4417470</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>8207310</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>PROJECT DRAWDOWN'S MISSION IS TO DRIVE MEANINGFUL CLIMATE ACTION BY ADVANCING SCIENCE-BASED SOLUTIONS AND STRATEGIES. PROJECT DRAWDOWN'S WORK IS FOCUSED ON THREE PILLARS: SCIENCE - ADVANCING SCIENCE-BASED CLIMATE SOLUTIONS AND STRATEGIES; STAKEHOLDERS - ENGAGING KEY STAKEHOLDERS AND EMPOWERING BOLD CLIMATE LEADERSHIP; AND STORIES - TELLING HUMAN STORIES OF SOLUTIONS IN ACTION.</MissionDesc>
+      <SignificantNewProgramSrvcInd>false</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>false</SignificantChangeInd>
+      <ExpenseAmt>364279</ExpenseAmt>
+      <Desc>COMMUNICATIONS: OUR RIGOROUS, CUTTING-EDGE RESEARCH IDENTIFIES THE BEST POSSIBLE CLIMATE SOLUTIONS AND DESIGNS THE MOST EFFECTIVE STRATEGIES TO BRING THEM TO SCALE. WE THEN SHARE OUR FINDINGS WITH THE WORLD THROUGH EFFECTIVE SCIENCE COMMUNICATION, MARKETING CAMPAIGNS, AND MEDIA PARTNERSHIPS. FOR EXAMPLE, WE HAD OVER 1.3 MILLION USERS FROM 230 COUNTRIES AND TERRITORIES ACCESS CLIMATE SOLUTIONS INFORMATION ON OUR WEBSITE IN 2024, AND THERE HAVE BEEN MORE THAN 1.2 MILLION VIEWS OF DR. JONATHAN FOLEY'S TWO TED TALKS SINCE THEY WERE RELEASED. THERE HAVE BEEN 12,500 DOWNLOADS OF PROJECT DRAWDOWN'S PUBLICATIONS IN THE LAST YEAR. FROM THE TED STAGE, INTERNATIONAL CLIMATE MEETINGS AND CLIMATE WEEK TO TOP-TIER MEDIA OUTLETS AND BOARDROOMS ACROSS THE WORLD, WE AMPLIFY THE IMPORTANCE OF SCIENCE-BASED CLIMATE ACTION.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>1528716</ExpenseAmt>
+        <RevenueAmt>4215250</RevenueAmt>
+        <Desc>SCIENCE: THE DRAWDOWN SCIENCE TEAM WORKS TO IDENTIFY THE MOST EFFECTIVE SOLUTIONS AND STRATEGIES, AND SERVES AS TRUSTED THOUGHT LEADERS IN THE GLOBAL CLIMATE SOLUTIONS SPACE. WE CONDUCT CUTTING-EDGE RESEARCH TO IDENTIFY THE BEST POSSIBLE CLIMATE SOLUTIONS AND DESIGN THE MOST EFFECTIVE STRATEGIES TO BRING THEM TO SCALE. DESPITE THE IMPORTANCE OF FOOD SYSTEMS IN THE GLOBAL CLIMATE CHALLENGE, EFFECTIVE SOLUTIONS IN THIS SPACE RECEIVE ONLY 3% OF CLIMATE FUNDING. OUR DRAWDOWN FOOD INITIATIVE IS WORKING TO CHANGE THIS BY CREATING AND SHARING SCIENCE-BASED PLANS TO ADDRESS CLIMATE CHANGE IN THE FOOD, AGRICULTURE, AND LAND-USE SECTOR. DRAWDOWN FOOD'S WORK EMPOWERS POLICYMAKERS, COMMUNITY LEADERS, BUSINESSES, INVESTORS, PHILANTHROPISTS, AND OTHERS TO DEPLOY THE MOST IMPACTFUL CLIMATE ACTIONS ACROSS THE GLOBAL FOOD SYSTEM. DRAWDOWN EXPLORER WILL BE WHAT THE CLIMATE MOVEMENT HAS BEEN MISSING: AN ALL-ENCOMPASSING PLATFORM USING THE BEST AVAILABLE DATA TO PROVIDE DECISION-MAKERS WITH ACTIONABLE, LOCALIZED INTELLIGENCE ON THE MOST EFFECTIVE CLIMATE SOLUTIONS. BUILT UPON TRILLIONS OF DATA POINTS AND THOUSANDS OF HOURS OF ANALYSIS BY TOP SCIENTISTS, DRAWDOWN EXPLORER WILL BE THE DEFINITIVE GUIDE TO EFFECTIVE CLIMATE ACTION, HIGHLIGHTING EMERGENCY BRAKE SOLUTIONS THAT CAN RAPIDLY REDUCE EMISSIONS, GEOGRAPHIC HOT SPOTS TO MAXIMIZE IMPACT, AND BENEFIT CLUSTERS THAT SIMULTANEOUSLY PROVIDE ADDITIONAL BENEFITS TO PEOPLE - IMPROVED HEALTH, ECONOMIC VITALITY, SECURITY, MORE - AND NATURE THROUGHOUT THE WORLD. WE HAVE ALREADY HAD A REACH OF OVER 10 MILLION ONLINE VIEWS OF THE DRAWDOWN EXPLORER TEASER VIDEO TO DATE.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>710638</ExpenseAmt>
+        <RevenueAmt>328809</RevenueAmt>
+        <Desc>DRAWDOWN LABS: UNLOCKING THE FULL POTENTIAL OF OUR CLIMATE SOLUTIONS REQUIRES SHARING SCIENCE-BACKED SOLUTIONS IN ACTIONABLE AND COMPELLING WAYS. WE USE OUR SCIENCE TO INFORM, INSPIRE, AND EMPOWER KEY STAKEHOLDERS AND EMERGING CLIMATE LEADERS - INCLUDING POLICYMAKERS, COMMUNITY LEADERS, PHILANTHROPISTS, INVESTORS, BUSINESS LEADERS, AND OTHERS - TO TAKE BOLD ACTION AND BRING THE MOST EFFECTIVE SOLUTIONS TO THE WORLD. WE HELP RAPIDLY ACCELERATE GLOBAL CLIMATE INVESTMENT BY SHOWING THE WORLD WHAT IS POSSIBLE, AND MOST EFFECTIVE IN ADDRESSING CLIMATE CHANGE. THE DRAWDOWN CAPITAL COALITION WORKS WITH IMPACT INVESTORS, PHILANTHROPISTS, AND THEIR ADVISORS TO GUIDE PRIVATE CAPITAL INTO MORE STRATEGIC, SCIENCE-BASED CLIMATE SOLUTIONS. AND WITH THE SUPPORT OF OUR PARTNERS, WE IDENTIFY OTHER ACTIONS - SUCH AS ADVOCATING FOR NEW POLICIES, PURSUING CRITICAL RESEARCH, OR ADVANCING PUBLIC COMMUNICATION - THAT CAN ALSO HELP SCALE CLIMATE SOLUTIONS. TO DATE, THIS WORK HAS HELPED GUIDE BILLIONS OF DOLLARS TOWARD MORE EFFECTIVE CLIMATE SOLUTIONS. THROUGH PROJECT DRAWDOWN'S JOB FUNCTION ACTION GUIDES, WE ARE EMPOWERING EMPLOYEES TO TAKE CLIMATE ACTION WHILE AT WORK AND HELP THEIR COMPANIES IMPLEMENT CLIMATE SOLUTIONS. WE HOST INTERACTIVE TRAINING PROGRAMS THAT HELP CLIMATE-PASSIONATE EMPLOYEES ENGAGE THEIR EMPLOYERS IN SCALING CLIMATE ACTION. FINALLY, RECOGNIZING THE CRITICAL IMPORTANCE OF INDIVIDUAL CLIMATE ACTIONS, WE ARE COLLABORATING TO LAUNCH SHIFT, A GAME-CHANGING NEW TOOL FOR CLIMATE-CONSCIOUS INDIVIDUALS SEEKING GUIDANCE FOR TAKING THE MOST EFFECTIVE, SCIENCE-BASED PERSONAL CLIMATE ACTION POSSIBLE - AT HOME, AT WORK, AND IN THEIR COMMUNITIES.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>844028</ExpenseAmt>
+        <RevenueAmt>3480764</RevenueAmt>
+        <Desc>ADDITIONALLY, OUR DRAWDOWN STORIES AND DRAWDOWN LIFT PROGRAMS CONTRIBUTED TO OUR 2024 ACCOMPLISHMENTS. DRAWDOWN STORIES: WE USE THE POWER OF STORYTELLING TO HELP MOVE THE NARRATIVE ON CLIMATE CHANGE AND INSPIRE THE VISION OF A MORE HOPEFUL FUTURE. OUR STORYTELLING WORK IS IGNITING CHANGE BY HIGHLIGHTING EVERYDAY PEOPLE ACROSS AMERICA - AND THE WORLD - WHO ARE STEPPING UP TO ADVANCE CLIMATE SOLUTIONS IN THEIR COMMUNITIES. DRAWDOWN STORIES INCLUDES DRAWDOWN'S NEIGHBORHOOD AND THE GLOBAL SOLUTIONS DIARY. THROUGH THESE, WE SHOWCASE CLIMATE HEROES PUTTING SOLUTIONS INTO ACTION - ACROSS AMERICA AND THE WORLD. DRAWDOWN LIFT: IN 2024, DRAWDOWN LIFT EVOLVED INTO DRAWDOWN NEXUS, A PROGRAM WE'RE USING TO CREATE A BROADER VISION FOR CLIMATE ACTION, IDENTIFYING POWERFUL SYNERGIES BETWEEN STOPPING CLIMATE CHANGE, HALTING BIODIVERSITY LOSS, AND IMPROVING HUMAN WELL-BEING. EXPLORING THESE CONNECTIONS, WE WILL BUILD A ROBUST, EVIDENCE-BASED FRAMEWORK CHANGE-MAKERS AROUND THE WORLD CAN USE TO IDENTIFY AND PRIORITIZE ACTIONS THAT SIMULTANEOUSLY ABATE CLIMATE CHANGE, PROTECT NATURE, AND ENHANCE HUMAN WELL-BEING</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>844028</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcRevenueAmt>3480764</TotalOtherProgSrvcRevenueAmt>
+      <TotalProgramServiceExpensesAmt>3447661</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc7">true</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1">true</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc4">false</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc4">false</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc4">false</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc4">false</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd referenceDocumentId="RetDoc4">false</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc4">true</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc4">false</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc4">false</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc4">false</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc4">false</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc4">false</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc4">true</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc4">false</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <ForeignOfficeInd>false</ForeignOfficeInd>
+      <ForeignActivitiesInd>false</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>false</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>false</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>false</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>false</FundraisingActivitiesInd>
+      <GamingActivitiesInd>false</GamingActivitiesInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <GrantsToOrganizationsInd>false</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>false</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="RetDoc5">true</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>false</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>false</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>false</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>false</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>false</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>false</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>false</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>false</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>false</DeductibleArtContributionInd>
+      <TerminateOperationsInd>false</TerminateOperationsInd>
+      <PartialLiquidationInd>false</PartialLiquidationInd>
+      <DisregardedEntityInd>false</DisregardedEntityInd>
+      <RelatedEntityInd>false</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>false</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>true</ScheduleORequiredInd>
+      <IRPDocumentCnt>26</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>false</BackupWthldComplianceInd>
+      <EmployeeCnt>24</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>true</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>false</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>false</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>false</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>false</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>false</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>false</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>false</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>false</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>false</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>false</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>7</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>7</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>false</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>false</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>false</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>false</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>false</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>false</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>false</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>true</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>true</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>false</OfficerMailingAddressInd>
+      <LocalChaptersInd>false</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>true</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>true</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>true</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>true</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>true</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>true</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>true</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>false</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>false</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <OwnWebsiteInd>X</OwnWebsiteInd>
+      <OtherWebsiteInd>X</OtherWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>ANNE MARSHALL</PersonNm>
+        <PhoneNum>6512433116</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>428 MINNESOTA ST STE 500</AddressLine1Txt>
+          <CityNm>SAINT PAUL</CityNm>
+          <StateAbbreviationCd>MN</StateAbbreviationCd>
+          <ZIPCd>55101</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JONATHAN FOLEY</PersonNm>
+        <TitleTxt>EXECUTIVE DI</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>417968</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>60392</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>RESHMA PATTNI</PersonNm>
+        <TitleTxt>FINANCE DIRE</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>151020</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>42016</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ELIZABETH BAGLEY</PersonNm>
+        <TitleTxt>MANAGING DIR</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>223431</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>46410</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>TOOD REUBOLD</PersonNm>
+        <TitleTxt>MARKETING DI</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <KeyEmployeeInd>X</KeyEmployeeInd>
+        <ReportableCompFromOrgAmt>185964</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>56064</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MATTHEW SCOTT</PersonNm>
+        <TitleTxt>ENGAGEMENT D</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <KeyEmployeeInd>X</KeyEmployeeInd>
+        <ReportableCompFromOrgAmt>164648</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>18489</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>STEPHAN NICOLEAU</PersonNm>
+        <TitleTxt>CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JENNIFER CALDWELL</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>PEGGY LIU</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANGELA MWANZA</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BRADLEY PALMER</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LAURA TURNER SEYDEL</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LOLA WOETZEL</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>1143031</TotalReportableCompFromOrgAmt>
+      <TotalOtherCompensationAmt>223371</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>5</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>false</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>true</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>false</CompensationFromOtherSrcsInd>
+      <AllOtherContributionsAmt>7709336</AllOtherContributionsAmt>
+      <TotalContributionsAmt>7709336</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>SERVICE FEES</Desc>
+        <TotalRevenueColumnAmt>332467</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>332467</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>332467</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>210915</TotalRevenueColumnAmt>
+        <ExclusionAmt>210915</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <RoyaltiesRevenueGrp>
+        <TotalRevenueColumnAmt>16354</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>16354</RelatedOrExemptFuncIncomeAmt>
+      </RoyaltiesRevenueGrp>
+      <GrossAmountSalesAssetsGrp>
+        <OtherAmt>1750</OtherAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <OtherAmt>1956</OtherAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <OtherAmt>-206</OtherAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>-206</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>-206</RelatedOrExemptFuncIncomeAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>OTHER INCOME</Desc>
+        <TotalRevenueColumnAmt>319</TotalRevenueColumnAmt>
+        <ExclusionAmt>319</ExclusionAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>319</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>8269185</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>348615</RelatedOrExemptFuncIncomeAmt>
+        <ExclusionAmt>211234</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>1186750</TotalAmt>
+        <ProgramServicesAmt>712494</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>294889</ManagementAndGeneralAmt>
+        <FundraisingAmt>179367</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>1681558</TotalAmt>
+        <ProgramServicesAmt>1586517</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3371</ManagementAndGeneralAmt>
+        <FundraisingAmt>91670</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>432951</TotalAmt>
+        <ProgramServicesAmt>325886</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>56511</ManagementAndGeneralAmt>
+        <FundraisingAmt>50554</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>218947</TotalAmt>
+        <ProgramServicesAmt>172032</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>27184</ManagementAndGeneralAmt>
+        <FundraisingAmt>19731</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>3903</TotalAmt>
+        <ManagementAndGeneralAmt>3903</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>46674</TotalAmt>
+        <ManagementAndGeneralAmt>46674</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>457105</TotalAmt>
+        <ProgramServicesAmt>400217</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>54288</ManagementAndGeneralAmt>
+        <FundraisingAmt>2600</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>70084</TotalAmt>
+        <ProgramServicesAmt>69609</ProgramServicesAmt>
+        <FundraisingAmt>475</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>5010</TotalAmt>
+        <ProgramServicesAmt>1581</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2987</ManagementAndGeneralAmt>
+        <FundraisingAmt>442</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>88463</TotalAmt>
+        <ProgramServicesAmt>50496</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>16900</ManagementAndGeneralAmt>
+        <FundraisingAmt>21067</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <TravelGrp>
+        <TotalAmt>102686</TotalAmt>
+        <ProgramServicesAmt>65266</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>29539</ManagementAndGeneralAmt>
+        <FundraisingAmt>7881</FundraisingAmt>
+      </TravelGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>3878</TotalAmt>
+        <ProgramServicesAmt>3878</ProgramServicesAmt>
+      </ConferencesMeetingsGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>6234</TotalAmt>
+        <ManagementAndGeneralAmt>6234</ManagementAndGeneralAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>16024</TotalAmt>
+        <ManagementAndGeneralAmt>16024</ManagementAndGeneralAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>EVENT EXPENSES</Desc>
+        <TotalAmt>35191</TotalAmt>
+        <ProgramServicesAmt>33816</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1375</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>NET PRESENT VALUE DISCOUN</Desc>
+        <TotalAmt>33334</TotalAmt>
+        <ManagementAndGeneralAmt>33334</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>BANK AND SERVICE CHARGES</Desc>
+        <TotalAmt>32337</TotalAmt>
+        <ManagementAndGeneralAmt>32337</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>SUPPLIES AND EQUIPMENT</Desc>
+        <TotalAmt>14418</TotalAmt>
+        <ProgramServicesAmt>13517</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>863</ManagementAndGeneralAmt>
+        <FundraisingAmt>38</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>43775</TotalAmt>
+        <ProgramServicesAmt>12352</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>30335</ManagementAndGeneralAmt>
+        <FundraisingAmt>1088</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>4479322</TotalAmt>
+        <ProgramServicesAmt>3447661</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>656748</ManagementAndGeneralAmt>
+        <FundraisingAmt>374913</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>458430</BOYAmt>
+        <EOYAmt>373143</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <EOYAmt>5603840</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>230250</BOYAmt>
+        <EOYAmt>2441666</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>9045</BOYAmt>
+        <EOYAmt>15471</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>30334</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>14730</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>22636</BOYAmt>
+        <EOYAmt>15604</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <EOYAmt>44062</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <InvestmentsOtherSecuritiesGrp>
+        <BOYAmt>3852716</BOYAmt>
+      </InvestmentsOtherSecuritiesGrp>
+      <IntangibleAssetsGrp>
+        <BOYAmt>50000</BOYAmt>
+        <EOYAmt>50000</EOYAmt>
+      </IntangibleAssetsGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>4623077</BOYAmt>
+        <EOYAmt>8543786</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>205607</BOYAmt>
+        <EOYAmt>288565</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <DeferredRevenueGrp>
+        <EOYAmt>47911</EOYAmt>
+      </DeferredRevenueGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>205607</BOYAmt>
+        <EOYAmt>336476</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>2744264</BOYAmt>
+        <EOYAmt>2884754</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>1673206</BOYAmt>
+        <EOYAmt>5322556</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>4417470</BOYAmt>
+        <EOYAmt>8207310</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>4623077</BOYAmt>
+        <EOYAmt>8543786</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>3789863</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>-23</NetUnrlzdGainsLossesInvstAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>false</AccountantCompileOrReviewInd>
+      <FSAuditedInd>true</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>false</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>false</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc7">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>5284736</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>3919932</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>3246009</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>4722106</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>7709336</CurrentTaxYearAmt>
+        <TotalAmt>24882119</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>5284736</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>3919932</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>3246009</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>4722106</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>7709336</CurrentTaxYearAmt>
+        <TotalAmt>24882119</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>991572</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>23890547</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus2YearsAmt>3270</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>102411</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>210915</CurrentTaxYearAmt>
+        <TotalAmt>316596</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>75559</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>38945</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>48923</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>58955</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>319</CurrentTaxYearAmt>
+        <TotalAmt>222701</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>25421416</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>348821</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.93980</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.98120</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+      <Form990ScheduleAPartVIGrp>
+        <FormAndLineReferenceDesc>PART II, LINE 10</FormAndLineReferenceDesc>
+        <ExplanationTxt>222,701</ExplanationTxt>
+      </Form990ScheduleAPartVIGrp>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="RetDoc4">
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>30334</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>14730</DepreciationAmt>
+        <BookValueAmt>15604</BookValueAmt>
+      </EquipmentGrp>
+      <TotalBookValueLandBuildingsAmt>15604</TotalBookValueLandBuildingsAmt>
+      <TotalRevEtcAuditedFinclStmtAmt>8760340</TotalRevEtcAuditedFinclStmtAmt>
+      <NetUnrealizedGainsInvstAmt>-23</NetUnrealizedGainsInvstAmt>
+      <DonatedServicesAndUseFcltsAmt>491178</DonatedServicesAndUseFcltsAmt>
+      <RevenueNotReportedAmt>491155</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>8269185</RevenueSubtotalAmt>
+      <TotalRevenuePerForm990Amt>8269185</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>4970500</TotExpnsEtcAuditedFinclStmtAmt>
+      <DonatedServicesUseFcltsAmt>491178</DonatedServicesUseFcltsAmt>
+      <ExpensesNotReportedAmt>491178</ExpensesNotReportedAmt>
+      <ExpensesSubtotalAmt>4479322</ExpensesSubtotalAmt>
+      <TotalExpensesPerForm990Amt>4479322</TotalExpensesPerForm990Amt>
+    </IRS990ScheduleD>
+    <IRS990ScheduleJ documentId="RetDoc5">
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>false</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>false</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>false</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>false</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>false</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>false</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>false</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>false</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>false</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>JONATHAN FOLEY</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>417968</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>60392</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>478360</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>RESHMA PATTNI</PersonNm>
+        <TitleTxt>FINANCE DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>151020</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>42016</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>193036</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>ELIZABETH BAGLEY</PersonNm>
+        <TitleTxt>MANAGING DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>223431</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>46410</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>269841</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>TOOD REUBOLD</PersonNm>
+        <TitleTxt>MARKETING DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>185964</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>56064</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>242028</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>MATTHEW SCOTT</PersonNm>
+        <TitleTxt>ENGAGEMENT DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>164648</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>18489</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>183137</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleO documentId="RetDoc6">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990 - ORGANIZATION'S MISSION</FormAndLineReferenceDesc>
+        <ExplanationTxt>PROJECT DRAWDOWN'S MISSION IS TO DRIVE MEANINGFUL CLIMATE ACTION BY ADVANCING SCIENCE-BASED SOLUTIONS AND STRATEGIES. PROJECT DRAWDOWN'S WORK IS FOCUSED ON THREE PILLARS: SCIENCE - ADVANCING SCIENCE-BASED CLIMATE SOLUTIONS AND STRATEGIES; STAKEHOLDERS - ENGAGING KEY STAKEHOLDERS AND EMPOWERING BOLD CLIMATE LEADERSHIP; AND STORIES - TELLING HUMAN STORIES OF SOLUTIONS IN ACTION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 2, PART III, LINE 4A</FormAndLineReferenceDesc>
+        <ExplanationTxt>COMMUNICATIONS: OUR RIGOROUS, CUTTING-EDGE RESEARCH IDENTIFIES THE BEST POSSIBLE CLIMATE SOLUTIONS AND DESIGNS THE MOST EFFECTIVE STRATEGIES TO BRING THEM TO SCALE. WE THEN SHARE OUR FINDINGS WITH THE WORLD THROUGH EFFECTIVE SCIENCE COMMUNICATION, MARKETING CAMPAIGNS, AND MEDIA PARTNERSHIPS. FOR EXAMPLE, WE HAD OVER 1.3 MILLION USERS FROM 230 COUNTRIES AND TERRITORIES ACCESS CLIMATE SOLUTIONS INFORMATION ON OUR WEBSITE IN 2024, AND THERE HAVE BEEN MORE THAN 1.2 MILLION VIEWS OF DR. JONATHAN FOLEY'S TWO TED TALKS SINCE THEY WERE RELEASED. THERE HAVE BEEN 12,500 DOWNLOADS OF PROJECT DRAWDOWN'S PUBLICATIONS IN THE LAST YEAR. FROM THE TED STAGE, INTERNATIONAL CLIMATE MEETINGS AND CLIMATE WEEK TO TOP-TIER MEDIA OUTLETS AND BOARDROOMS ACROSS THE WORLD, WE AMPLIFY THE IMPORTANCE OF SCIENCE-BASED CLIMATE ACTION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 2, PART III, LINE 4B</FormAndLineReferenceDesc>
+        <ExplanationTxt>SCIENCE: THE DRAWDOWN SCIENCE TEAM WORKS TO IDENTIFY THE MOST EFFECTIVE SOLUTIONS AND STRATEGIES, AND SERVES AS TRUSTED THOUGHT LEADERS IN THE GLOBAL CLIMATE SOLUTIONS SPACE. WE CONDUCT CUTTING-EDGE RESEARCH TO IDENTIFY THE BEST POSSIBLE CLIMATE SOLUTIONS AND DESIGN THE MOST EFFECTIVE STRATEGIES TO BRING THEM TO SCALE. DESPITE THE IMPORTANCE OF FOOD SYSTEMS IN THE GLOBAL CLIMATE CHALLENGE, EFFECTIVE SOLUTIONS IN THIS SPACE RECEIVE ONLY 3% OF CLIMATE FUNDING. OUR DRAWDOWN FOOD INITIATIVE IS WORKING TO CHANGE THIS BY CREATING AND SHARING SCIENCE-BASED PLANS TO ADDRESS CLIMATE CHANGE IN THE FOOD, AGRICULTURE, AND LAND-USE SECTOR. DRAWDOWN FOOD'S WORK EMPOWERS POLICYMAKERS, COMMUNITY LEADERS, BUSINESSES, INVESTORS, PHILANTHROPISTS, AND OTHERS TO DEPLOY THE MOST IMPACTFUL CLIMATE ACTIONS ACROSS THE GLOBAL FOOD SYSTEM. DRAWDOWN EXPLORER WILL BE WHAT THE CLIMATE MOVEMENT HAS BEEN MISSING: AN ALL-ENCOMPASSING PLATFORM USING THE BEST AVAILABLE DATA TO PROVIDE DECISION-MAKERS WITH ACTIONABLE, LOCALIZED INTELLIGENCE ON THE MOST EFFECTIVE CLIMATE SOLUTIONS. BUILT UPON TRILLIONS OF DATA POINTS AND THOUSANDS OF HOURS OF ANALYSIS BY TOP SCIENTISTS, DRAWDOWN EXPLORER WILL BE THE DEFINITIVE GUIDE TO EFFECTIVE CLIMATE ACTION, HIGHLIGHTING EMERGENCY BRAKE SOLUTIONS THAT CAN RAPIDLY REDUCE EMISSIONS, GEOGRAPHIC HOT SPOTS TO MAXIMIZE IMPACT, AND BENEFIT CLUSTERS THAT SIMULTANEOUSLY PROVIDE ADDITIONAL BENEFITS TO PEOPLE - IMPROVED HEALTH, ECONOMIC VITALITY, SECURITY, MORE - AND NATURE THROUGHOUT THE WORLD. WE HAVE ALREADY HAD A REACH OF OVER 10 MILLION ONLINE VIEWS OF THE DRAWDOWN EXPLORER TEASER VIDEO TO DATE.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 2, PART III, LINE 4C</FormAndLineReferenceDesc>
+        <ExplanationTxt>DRAWDOWN LABS: UNLOCKING THE FULL POTENTIAL OF OUR CLIMATE SOLUTIONS REQUIRES SHARING SCIENCE-BACKED SOLUTIONS IN ACTIONABLE AND COMPELLING WAYS. WE USE OUR SCIENCE TO INFORM, INSPIRE, AND EMPOWER KEY STAKEHOLDERS AND EMERGING CLIMATE LEADERS - INCLUDING POLICYMAKERS, COMMUNITY LEADERS, PHILANTHROPISTS, INVESTORS, BUSINESS LEADERS, AND OTHERS - TO TAKE BOLD ACTION AND BRING THE MOST EFFECTIVE SOLUTIONS TO THE WORLD. WE HELP RAPIDLY ACCELERATE GLOBAL CLIMATE INVESTMENT BY SHOWING THE WORLD WHAT IS POSSIBLE, AND MOST EFFECTIVE IN ADDRESSING CLIMATE CHANGE. THE DRAWDOWN CAPITAL COALITION WORKS WITH IMPACT INVESTORS, PHILANTHROPISTS, AND THEIR ADVISORS TO GUIDE PRIVATE CAPITAL INTO MORE STRATEGIC, SCIENCE-BASED CLIMATE SOLUTIONS. AND WITH THE SUPPORT OF OUR PARTNERS, WE IDENTIFY OTHER ACTIONS - SUCH AS ADVOCATING FOR NEW POLICIES, PURSUING CRITICAL RESEARCH, OR ADVANCING PUBLIC COMMUNICATION - THAT CAN ALSO HELP SCALE CLIMATE SOLUTIONS. TO DATE, THIS WORK HAS HELPED GUIDE BILLIONS OF DOLLARS TOWARD MORE EFFECTIVE CLIMATE SOLUTIONS. THROUGH PROJECT DRAWDOWN'S JOB FUNCTION ACTION GUIDES, WE ARE EMPOWERING EMPLOYEES TO TAKE CLIMATE ACTION WHILE AT WORK AND HELP THEIR COMPANIES IMPLEMENT CLIMATE SOLUTIONS. WE HOST INTERACTIVE TRAINING PROGRAMS THAT HELP CLIMATE-PASSIONATE EMPLOYEES ENGAGE THEIR EMPLOYERS IN SCALING CLIMATE ACTION. FINALLY, RECOGNIZING THE CRITICAL IMPORTANCE OF INDIVIDUAL CLIMATE ACTIONS, WE ARE COLLABORATING TO LAUNCH SHIFT, A GAME-CHANGING NEW TOOL FOR CLIMATE-CONSCIOUS INDIVIDUALS SEEKING GUIDANCE FOR TAKING THE MOST EFFECTIVE, SCIENCE-BASED PERSONAL CLIMATE ACTION POSSIBLE - AT HOME, AT WORK, AND IN THEIR COMMUNITIES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 2, PART III, LINE 4D</FormAndLineReferenceDesc>
+        <ExplanationTxt>ADDITIONALLY, OUR DRAWDOWN STORIES AND DRAWDOWN LIFT PROGRAMS CONTRIBUTED TO OUR 2024 ACCOMPLISHMENTS. DRAWDOWN STORIES: WE USE THE POWER OF STORYTELLING TO HELP MOVE THE NARRATIVE ON CLIMATE CHANGE AND INSPIRE THE VISION OF A MORE HOPEFUL FUTURE. OUR STORYTELLING WORK IS IGNITING CHANGE BY HIGHLIGHTING EVERYDAY PEOPLE ACROSS AMERICA - AND THE WORLD - WHO ARE STEPPING UP TO ADVANCE CLIMATE SOLUTIONS IN THEIR COMMUNITIES. DRAWDOWN STORIES INCLUDES DRAWDOWN'S NEIGHBORHOOD AND THE GLOBAL SOLUTIONS DIARY. THROUGH THESE, WE SHOWCASE CLIMATE HEROES PUTTING SOLUTIONS INTO ACTION - ACROSS AMERICA AND THE WORLD. DRAWDOWN LIFT: IN 2024, DRAWDOWN LIFT EVOLVED INTO DRAWDOWN NEXUS, A PROGRAM WE'RE USING TO CREATE A BROADER VISION FOR CLIMATE ACTION, IDENTIFYING POWERFUL SYNERGIES BETWEEN STOPPING CLIMATE CHANGE, HALTING BIODIVERSITY LOSS, AND IMPROVING HUMAN WELL-BEING. EXPLORING THESE CONNECTIONS, WE WILL BUILD A ROBUST, EVIDENCE-BASED FRAMEWORK CHANGE-MAKERS AROUND THE WORLD CAN USE TO IDENTIFY AND PRIORITIZE ACTIONS THAT SIMULTANEOUSLY ABATE CLIMATE CHANGE, PROTECT NATURE, AND ENHANCE HUMAN WELL-BEING</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>EACH OF THE BOARD MEMBER IS PROVIDED THE COPY OF 990 TO REVIEW AND TO APPROVE BEFORE FILING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>A CONFLICT OF INTEREST FORM IS COMPLETED AND SIGNED BY EACH BOARD MEMBER REGARDING CONFLICT OF INTEREST ISSUES SUCH AS BUSINESS RELATIONSHIPS AND COMPENSATION INCLUDING CERTAIN PAYMENTS MADE TO KEY EMPLOYEES AT THE END OF EACH BOARD MEETING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 15A</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION CONDUCTS A ONLINE MARKET RESEARCH FOR COMPARABLE ORGANIZATIONS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE GOVERNING DOCUMENTS ARE AVAILABLE UPON REQUEST.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART IX, LINE 11G</FormAndLineReferenceDesc>
+        <ExplanationTxt>OTHER CONSULTING FEES 400,217 54,288 2,600</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Good Food Institute
+ein: 81-0840578
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 76.0
+ceo_name: Ilya Sheyman
+ceo_title: CEO
+top_executive_basis: explicit CEO; founder/president also paid
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-14
+irs_object_id: 202543189349301719
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202543189349301719_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/810840578
+part_vii_org: 225925.0
+part_vii_related: 0.0
+part_vii_other: 22475.0
+cash_proxy: 225925.0
+total_proxy: 248400.0
+schedule_j_base: 
+revenue: 28143912.0
+expenses: 35420353.0
+employee_count: 132.0
+full_year_status: yes
+founder_flag: no
+structure_flag: founder_president_plus_ceo
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: CEO used; founder/president Bruce Friedrich separately received $230,799 plus $21,241. Excluded in solo-top-executive sensitivity.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest 2024 filing table
+source_id: SRC-990-EXT-GOOD-FOOD-INSTITUTE
+part_vii_org_jul2026: 240494.4522517803
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 23924.36788473503
+cash_proxy_jul2026: 240494.4522517803
+total_proxy_jul2026: 264418.82013651537
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: True
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.9237217099748531

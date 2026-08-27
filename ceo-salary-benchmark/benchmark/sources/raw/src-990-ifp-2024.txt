@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-IFP-2024
+Organization: Institute for Progress
+Document type: Form 990 filing-derived snapshot
+Original URL: https://projects.propublica.org/nonprofits/organizations/872449729
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/872449729
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: turn498315search1
+EIN: 87-2449729
+IRS object ID: not captured
+Tax period: 2024-01-01 to 2024-12-31
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Institute for Progress
+EIN: 87-2449729
+IRS object ID: not captured
+Tax period: 2024-01-01 to 2024-12-31
+Filing date: not captured
+Top-executive record: not extracted - not extracted
+Full-year status: not assessed
+Part VII reportable compensation from organization: 
+Related organizations: 
+Part VII other compensation: 
+Cash/reportable proxy: 
+Filing total proxy: 
+Revenue: 1075917
+Expenses: 3597698
+Tier/status: excluded_scale / excluded
+Exclusion reason: 2024 revenue $1.08M and expenses $3.60M; outside strict scale and below wider band on revenue; excluded before individual pay extraction.
+Notes: Organization page reviewed only for scale.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

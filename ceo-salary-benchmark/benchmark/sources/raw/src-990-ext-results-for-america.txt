@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Results for America
+ein: 81-2709681
+source_wave: legacy_original
+peer_tier: secondary
+ea_affinity: functional-only
+comparability_score: 74.0
+ceo_name: Michele Jolin
+ceo_title: President & CEO
+top_executive_basis: legacy verified
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-13
+irs_object_id: 202513179349309376
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202513179349309376_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/812709681
+part_vii_org: 311352.0
+part_vii_related: 0.0
+part_vii_other: 7176.0
+cash_proxy: 311352.0
+total_proxy: 318528.0
+schedule_j_base: 
+revenue: 16801077.0
+expenses: 24594265.0
+employee_count: 
+full_year_status: yes
+founder_flag: yes
+structure_flag: above_strict_expense_band_and_implementation_mix
+analysis_status: primary
+exclusion_reason: 
+notes: Preselected primary candidate moved to secondary for scale/implementation, not pay.
+retrieved_at: 2026-08-25
+extraction_location: Form 990 Part VII Section A, columns D/E/F; rendered ProPublica Compensation table. Revenue/expenses from rendered Extracted Financial Data. Exact XML element names unavailable without raw XML.
+source_id: SRC-990-EXT-RESULTS-FOR-AMERICA
+part_vii_org_jul2026: 331430.4689498564
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 7638.765915054887
+cash_proxy_jul2026: 331430.4689498564
+total_proxy_jul2026: 339069.23486491124
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.8994132439228835

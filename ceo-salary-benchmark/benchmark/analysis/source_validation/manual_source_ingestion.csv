@@ -1,0 +1,46 @@
+candidate_file,source_id,decision,reason,local_path
+tmp/webpages/Effective Ventures Foundation Usa - Nonprofit Explorer - ProPublica.html,SRC-990-CEA,accepted,canonical URL/EIN matched,sources/native/manual_browser/src-990-cea/Effective Ventures Foundation Usa - Nonprofit Explorer - ProPublica.html
+tmp/webpages/Faunalytics - Nonprofit Explorer - ProPublica.html,SRC-990-FAUNALYTICS,accepted,canonical URL/EIN matched,sources/native/manual_browser/src-990-faunalytics/Faunalytics - Nonprofit Explorer - ProPublica.html
+tmp/webpages/The Clear Fund - Nonprofit Explorer - ProPublica.html,SRC-990-GIVEWELL,accepted,canonical URL/EIN matched,sources/native/manual_browser/src-990-givewell/The Clear Fund - Nonprofit Explorer - ProPublica.html
+tmp/webpages/Machine Intelligence Research Institute Inc - Nonprofit Explorer - ProPublica.html,SRC-990-MIRI,accepted,canonical URL/EIN matched,sources/native/manual_browser/src-990-miri/Machine Intelligence Research Institute Inc - Nonprofit Explorer - ProPublica.html
+"tmp/webpages/Chief Executive Officer , The Colorado Health Foundation.html",SRC-AD-CHF-2026,accepted,"organization, role, and salary endpoints matched","sources/native/manual_browser/src-ad-chf-2026/Chief Executive Officer , The Colorado Health Foundation.html"
+"tmp/webpages/Executive Director, H-CAP @ SEIU _ Arena Job Board.html",SRC-AD-HCAP-2026,accepted,"organization, role, and salary endpoints matched","sources/native/manual_browser/src-ad-hcap-2026/Executive Director, H-CAP @ SEIU _ Arena Job Board.html"
+"tmp/webpages/AEOE - Executive Director - Marine Science Institute (Redwood City, CA).html",SRC-AD-MSI,accepted,"organization, role, and salary endpoints matched","sources/native/manual_browser/src-ad-msi/AEOE - Executive Director - Marine Science Institute (Redwood City, CA).html"
+tmp/webpages/Executive Director @ Marine Science Institute _ Schmidt Marine Job Board.html,SRC-AD-MSI,accepted_supplemental,complete second mirror retained alongside the primary capture,sources/native/manual_browser/src-ad-msi/supplemental/Executive Director @ Marine Science Institute _ Schmidt Marine Job Board.html
+tmp/webpages/Director of Advancement Jobs in Washington DC _ jobmatic.html,,rejected,"generic search results; missing H-CAP organization and $170,000 endpoint",
+"tmp/webpages/Faunalytics _ San Diego, CA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Federation of American Scientists (FAS) _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+tmp/webpages/Field Trips _ Marine Science Institute _ Redwood City.html,,rejected,organization homepage/field-trips page; not the executive job posting,
+"tmp/webpages/Generation Pledge _ Vauxhall, NJ _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/High Impact Athletes _ Lewes, DE _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/IDinsight USA _ San Francisco, CA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Ideas42 _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Innovations for Poverty Action A Nonprofit Corporation (IPA) _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Institute for Law and Ai _ Boston, MA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Institute for Womens Policy Research (IWPR) _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Living Goods _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Mercy for Animals _ Los Angeles, CA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Migration Policy Institute _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Model Evaluation and Threat Research _ Covina, CA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/New Roots Institute _ Los Angeles, CA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Nonhuman Rights Project _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Nuclear Threat Initiative _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/One For The World _ New York, NY _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Peter G Peterson Institute for International Economics (PIIE) _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Physicians Committee for Responsible Medicine (PCRM) _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Population Reference Bureau (PRB) _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Precision Development _ Newton, MA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Public Library of Science (PLOS) _ Alhambra, CA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Pure Earth _ New York, NY _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Redwood Research Group _ Berkeley, CA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Resolve To Save Lives _ Alexandria, VA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Sentience Institute _ New York, NY _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/StrongMinds _ Maplewood, NJ _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Technical Assistance Collaborative (TAC) _ Boston, MA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/The Good Food Institute _ Arlington, VA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/The Humane League _ Rockville, MD _ Cause IQ.html",,rejected,unrelated manual capture,
+tmp/webpages/This Job Has Expired _ Find Similar Remote Jobs _ DailyRemote.html,,rejected,expired placeholder; no complete H-CAP posting,
+"tmp/webpages/Village Enterprise Fund _ San Carlos, CA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/VillageReach _ Seattle, WA _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/Wild Animal Initiative _ Minneapolis, MN _ Cause IQ.html",,rejected,unrelated manual capture,
+"tmp/webpages/World Justice Project (WJP) _ Washington, DC _ Cause IQ.html",,rejected,unrelated manual capture,

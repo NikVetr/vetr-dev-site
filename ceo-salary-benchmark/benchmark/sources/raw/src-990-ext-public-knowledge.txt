@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Public Knowledge
+ein: 52-2336690
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 81.0
+ceo_name: Christopher J. Lewis
+ceo_title: President/CEO
+top_executive_basis: explicit CEO
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-10
+irs_object_id: 202533149349301903
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202533149349301903_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/522336690
+part_vii_org: 252001.0
+part_vii_related: 0.0
+part_vii_other: 16771.0
+cash_proxy: 252001.0
+total_proxy: 268772.0
+schedule_j_base: 
+revenue: 2876810.0
+expenses: 3654052.0
+employee_count: 22.0
+full_year_status: yes
+founder_flag: no
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: Below RP scale but strong tech-policy match.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest 2024 filing table
+source_id: SRC-990-EXT-PUBLIC-KNOWLEDGE
+part_vii_org_jul2026: 268252.0414380918
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 17852.528311229868
+cash_proxy_jul2026: 268252.0414380918
+total_proxy_jul2026: 286104.5697493216
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: False
+staff_known: True
+staff_in_band: True
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.9844928751047778

@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Village Enterprise
+ein: 22-2852248
+source_wave: previous_expansion
+peer_tier: Tier B weighted secondary
+ea_affinity: EA-adjacent
+comparability_score: 72.0
+ceo_name: Dianne Calvi
+ceo_title: CEO
+top_executive_basis: explicit CEO
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-05-15
+irs_object_id: 202631359349301128
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202631359349301128_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/222852248
+part_vii_org: 273863.0
+part_vii_related: 0.0
+part_vii_other: 28496.0
+cash_proxy: 273863.0
+total_proxy: 302359.0
+schedule_j_base: 
+revenue: 21517758.0
+expenses: 20984394.0
+employee_count: 19.0
+full_year_status: yes
+founder_flag: no
+structure_flag: delivery_hybrid
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: Development delivery and evidence hybrid; retained outside research-only sensitivity.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link
+source_id: SRC-990-EXT-VILLAGE-ENTERPRISE
+part_vii_org_jul2026: 291523.8781765157
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 30333.65015543535
+cash_proxy_jul2026: 291523.8781765157
+total_proxy_jul2026: 321857.52833195106
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: True
+staff_in_band: True
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.8751047778709136

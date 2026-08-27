@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: National Committee for Responsive Philanthropy
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: first expansion
+topic_cluster: Research, evaluation, philanthropy infrastructure, and policy
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 52-1072749
+revenue: 3680502.0
+expenses: 4098025.0
+employee_count: 27.0
+comparability_score: 76.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 341956.12633113604
+total_proxy_jul2026: 397599.04326421145
+ceo_title: CEO
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521072749
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202610449349300906_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://projects.propublica.org/nonprofits/organizations/521072749
+prior_scale_source_type: ProPublica Nonprofit Explorer filing profile
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Philanthropy research and advocacy organization; near lower edge of wider expense band with comparable headcount.
+prior_function_score: 24.0
+prior_expense_score: 20.0
+prior_staff_score: 15.0
+prior_ea_score: 7.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

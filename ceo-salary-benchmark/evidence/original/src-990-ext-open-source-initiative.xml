@@ -1,0 +1,954 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return returnVersion="2024v5.0" xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-11-03T10:26:28-07:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>912037395</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>OPEN SOURCE INITIATIVE</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>OPEN</BusinessNameControlTxt>
+      <PhoneNum>8475673962</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>8605 SANTA MONICA BLVD PMB 63639</AddressLine1Txt>
+        <CityNm>WEST HOLLYWOOD</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>900694109</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>Phyllis Dobbs</PersonNm>
+      <PersonTitleTxt>Controller</PersonTitleTxt>
+      <PhoneNum>8032212672</PhoneNum>
+      <SignatureDt>2025-10-31</SignatureDt>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>1</IRSResponsiblePrtyInfoCurrInd>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="7">
+    <IRS990 documentId="R000001" referenceDocumentId="R000006 R000007" softwareId="24021167" softwareVersionNum="v1.00">
+      <PrincipalOfficerNm>Phyllis Dobbs</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>8605 Santa Monica Blvd PMB 63639</AddressLine1Txt>
+        <CityNm>West Hollywood</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>900694109</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>1093077</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>https://opensource.org/</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>1998</FormationYr>
+      <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>EDUCATE THE PUBLIC ABOUT OPEN SOURCE SOFTWARE AND MAINTAIN THE OPEN SOURCE DEFINITION.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>11</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>11</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>1</TotalEmployeeCnt>
+      <TotalVolunteersCnt>20</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>790562</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>1056155</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>3250</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>0</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>17688</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>36922</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>27</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>0</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>811527</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>1093077</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>0</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>23332</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>205849</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>202140</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>0</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>119210</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>478298</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>788325</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>684147</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>1013797</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>127380</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>79280</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>896360</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>970107</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>144815</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>141058</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>751545</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>829049</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>To (1) educate the public about the advantages of open source software [software that users are free to modify and redistribute]; (2) encourage the software community to participate in open source software development; (3) identify how software users' objectives are best served through open source software; (4) persuade organizations and software authors to distribute source software freely they otherwise would not distribute; (5) provide resources for sharing information about open source software and licenses; (6) assist attorneys to craft open source licenses; (7) manage a certification program to allow use of one or more certification marks in association with open source software; and (8) advocate for open source principles.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>110459</ExpenseAmt>
+      <GrantAmt>0</GrantAmt>
+      <RevenueAmt>127600</RevenueAmt>
+      <Desc>1. OPEN SOURCE INITIATIVE ACTS AS FISCAL SPONSOREE FOR THREE ACTIVE PROJECTS IN 2024 WITH ALL REVENUE FROM DONATIONS. CLEARLYDEFINED IS AN OPEN SOURCE PROJECT TO CROWD-SOURCE THE GATHERING, CURATION, AND UPSTREAMING OF LICENSING AND SECURITY (AND MORE) DATA ABOUT FREE AND OPEN SOURCE PROJECTS. THE ULTIMATE GOAL BEING TO HELP PROJECTS THRIVE BY MORE CLEARLY DEFINING THEIR LICENSE AND STATUS. ALL REVENUE WAS FROM DONATIONS. THE FLOSS DESKTOPS FOR KIDS PROJECT TEACHES STUDENTS COMPUTING BY DOING; STUDENTS LEARN TO BREAK-DOWN AND REPAIR COMPUTER HARDWARE COMPONENTS AND INSTALL OPEN SOURCE SOFTWARE. SEAGL IS A GRASSROOTS TECHNICAL SUMMIT DEDICATED TO SPREADING AWARENESS AND KNOWLEDGE ABOUT FREE / LIBRE / OPEN SOURCE SOFTWARE, HARDWARE, AND CULTURE.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>517146</ExpenseAmt>
+        <GrantAmt>19913</GrantAmt>
+        <RevenueAmt>330650</RevenueAmt>
+        <Desc>THE OPEN SOURCE AND STANDARDS WORKING GROUP: 1. EXPLORES CURRENT STANDARDS SETTING ORGANIZATIONS (SSO) UNDERSTANDING OF OSI APPROVED LICENSES, AND MORE GENERALLY, OPEN SOURCE SOFTWARE, DEVELOPMENT, AND PROJECTS; 2. EDUCATES SSO IN CURRENT PRINCIPLES AND PRACTICES WIDELY EXCEPTED BY OPEN SOURCE COMMUNITIES OF PRACTICE; 3. SUPPORTS AUTHENTIC ENGAGEMENT ACROSS OPEN SOURCE COMMUNITIES (I.E. IMPLEMENTERS, CONTRIBUTORS, PROJECTS, FOUNDATIONS) TO ENSURE ALIGNMENT WITH BEST PRACTICES IN OPEN SOURCE LICENSING, DEVELOPMENT AND DISTRIBUTION; 4. PRODUCES REFERENCE RESOURCES (EDUCATIONAL MATERIALS, PROFESSIONAL DEVELOPMENT ACTIVITIES, EXPERT OPINIONS, CONSULTING SERVICES, ETC.) TO ADDRESS GAPS IN UNDERSTANDING, SUPPORT CURRENT PRACTICES, AND INCREASE THE RECOGNITION OF OSI APPROVED LICENSING AND THE OSI LICENSE REVIEW PROCESS, AND; 5. ENCOURAGES SSOS TO REQUEST AND MAINTAIN FORMAL PEER RELATIONSHIPS WITH OSI. THE WORKING GROUP ACTS AS THE FORMAL CORRESPONDENT. IN 2024, OPEN SOURCE INITIATIVE RECEIVED A SIGNIFICANT GRANT FROM THE ALFRED P. SLOAN FOUNDATION TO CREATE AND EDUCATE THE PUBLIC ABOUT THE OPEN SOURCE AI DEFINITION.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>27958</ExpenseAmt>
+        <GrantAmt>0</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>OPEN SOURCE INITIATIVE IS ACTIVELY INVOLVED IN COMMUNITY BUILDING, EDUCATION, AND PUBLIC ADVOCACY TO PROMOTE AWARENESS AND THE IMPORTANCE OF NON-PROPRIETARY SOFTWARE. OSI STAFF AND BOARD MEMBERS USE VIRTUAL RESOURCES OR TRAVEL THE WORLD TO ATTEND OPEN SOURCE CONFERENCES AND EVENTS, MEET WITH OPEN SOURCE DEVELOPERS AND USERS, AND TO DISCUSS WITH EXECUTIVES FROM THE PUBLIC AND PRIVATE SECTORS ABOUT HOW OPEN SOURCE TECHNOLOGIES, LICENSES, AND MODELS OF DEVELOPMENT CAN PROVIDE ECONOMIC AND STRATEGIC ADVANTAGES.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <TotalOtherProgSrvcExpenseAmt>0</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcGrantAmt>0</TotalOtherProgSrvcGrantAmt>
+      <TotalOtherProgSrvcRevenueAmt>0</TotalOtherProgSrvcRevenueAmt>
+      <TotalProgramServiceExpensesAmt>655563</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="R000002">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="R000003">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>0</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd>0</DonorAdvisedFundInd>
+      <ConservationEasementsInd>0</ConservationEasementsInd>
+      <CollectionsOfArtInd>0</CollectionsOfArtInd>
+      <CreditCounselingInd>0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd>0</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd>0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd>0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd>0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd>0</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd>0</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd>0</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd>0</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <ForeignActivitiesInd>0</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>0</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd referenceDocumentId="R000004">1</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>0</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>0</FundraisingActivitiesInd>
+      <GamingActivitiesInd>0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd>0</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="R000005">1</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>0</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd>0</DisregardedEntityInd>
+      <RelatedEntityInd>0</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>7</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>1</BackupWthldComplianceInd>
+      <EmployeeCnt>1</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>0</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+      <Form8899Filedind>0</Form8899Filedind>
+      <Form1098CFiledInd>0</Form1098CFiledInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>11</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>11</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>1</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>1</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>1</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>0</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <OwnWebsiteInd>X</OwnWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>PHYLLIS DOBBS</PersonNm>
+        <PhoneNum>8475673962</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>8605 SANTA MONICA BLVD PMB 63639</AddressLine1Txt>
+          <CityNm>WEST HOLLYWOOD</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>900694109</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>STEFANO MAFFULI</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <KeyEmployeeInd>X</KeyEmployeeInd>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>188678</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>TRACY HINDS</PersonNm>
+        <TitleTxt>PRESIDENT, DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>5</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>THIERRY CARREZ</PersonNm>
+        <TitleTxt>VICE PRESIDENT, DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>5</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANNE-MARIE SCOTT</PersonNm>
+        <TitleTxt>CHIEF FINANCIAL OFFICER, DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>5</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>GAIL BLONDELLE</PersonNm>
+        <TitleTxt>SECRETARY, DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>5</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CHRIS ANISZCZYK</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JOSH BERKUS</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>PAMELA CHESTEK</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SAYEED CHOWDHURY</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JUSTIN COLANNINO</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CATHARINA MARACKE</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CARLO PIANA</PersonNm>
+        <TitleTxt>FORMER PRESIDENT, DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>5</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>AEVA BLACK</PersonNm>
+        <TitleTxt>FORMER DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>188678</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>0</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>1</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>1</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>D Bryant Group LLC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>PO BOX 360308</AddressLine1Txt>
+            <CityNm>MELBOURNE</CityNm>
+            <StateAbbreviationCd>FL</StateAbbreviationCd>
+            <ZIPCd>32936</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>POLICY PROGRAM CONSULTING</ServicesDesc>
+        <CompensationAmt>114600</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>1</CntrctRcvdGreaterThan100KCnt>
+      <FederatedCampaignsAmt>0</FederatedCampaignsAmt>
+      <MembershipDuesAmt>25633</MembershipDuesAmt>
+      <FundraisingAmt>0</FundraisingAmt>
+      <RelatedOrganizationsAmt>0</RelatedOrganizationsAmt>
+      <GovernmentGrantsAmt>0</GovernmentGrantsAmt>
+      <AllOtherContributionsAmt>1030522</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>0</NoncashContributionsAmt>
+      <TotalContributionsAmt>1056155</TotalContributionsAmt>
+      <TotalProgramServiceRevenueAmt>0</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>36922</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>36922</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <IncmFromInvestBondProceedsGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </IncmFromInvestBondProceedsGrp>
+      <RoyaltiesRevenueGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </RoyaltiesRevenueGrp>
+      <RentalIncomeOrLossGrp>
+        <RealAmt>0</RealAmt>
+        <PersonalAmt>0</PersonalAmt>
+      </RentalIncomeOrLossGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>0</SecuritiesAmt>
+        <OtherAmt>0</OtherAmt>
+      </GainOrLossGrp>
+      <ContriRptFundraisingEventAmt>0</ContriRptFundraisingEventAmt>
+      <OtherRevenueTotalAmt>0</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>1093077</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>36922</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <GrantsToDomesticIndividualsGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+      </GrantsToDomesticIndividualsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>23332</TotalAmt>
+        <ProgramServicesAmt>23332</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <BenefitsToMembersGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+      </BenefitsToMembersGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>188677</TotalAmt>
+        <ProgramServicesAmt>96417</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>52720</ManagementAndGeneralAmt>
+        <FundraisingAmt>39540</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <CompDisqualPersonsGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </CompDisqualPersonsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>13463</TotalAmt>
+        <ProgramServicesAmt>3957</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>5549</ManagementAndGeneralAmt>
+        <FundraisingAmt>3957</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesManagementGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForServicesManagementGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>36690</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>36690</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesProfFundraising>
+        <TotalAmt>0</TotalAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForServicesProfFundraising>
+      <FeesForSrvcInvstMgmntFeesGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForSrvcInvstMgmntFeesGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>416462</TotalAmt>
+        <ProgramServicesAmt>330420</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>44048</ManagementAndGeneralAmt>
+        <FundraisingAmt>41994</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>57499</TotalAmt>
+        <ProgramServicesAmt>3000</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>32899</ManagementAndGeneralAmt>
+        <FundraisingAmt>21600</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>5716</TotalAmt>
+        <ProgramServicesAmt>3970</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1746</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>36643</TotalAmt>
+        <ProgramServicesAmt>5518</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>24935</ManagementAndGeneralAmt>
+        <FundraisingAmt>6190</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <RoyaltiesGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </RoyaltiesGrp>
+      <OccupancyGrp>
+        <TotalAmt>2728</TotalAmt>
+        <ProgramServicesAmt>1597</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1131</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>132973</TotalAmt>
+        <ProgramServicesAmt>107950</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>24397</ManagementAndGeneralAmt>
+        <FundraisingAmt>626</FundraisingAmt>
+      </TravelGrp>
+      <PymtTravelEntrtnmntPubOfclGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </PymtTravelEntrtnmntPubOfclGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>72170</TotalAmt>
+        <ProgramServicesAmt>72170</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </ConferencesMeetingsGrp>
+      <InterestGrp>
+        <TotalAmt>3935</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3935</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </InterestGrp>
+      <PaymentsToAffiliatesGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </PaymentsToAffiliatesGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>11803</TotalAmt>
+        <ProgramServicesAmt>3541</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4721</ManagementAndGeneralAmt>
+        <FundraisingAmt>3541</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>BANK AND CREDIT CARD FEES</Desc>
+        <TotalAmt>7106</TotalAmt>
+        <ProgramServicesAmt>1164</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4495</ManagementAndGeneralAmt>
+        <FundraisingAmt>1447</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>DUES AND SUBSCRIPTION</Desc>
+        <TotalAmt>2221</TotalAmt>
+        <ProgramServicesAmt>2221</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>FILING FEES</Desc>
+        <TotalAmt>1199</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1199</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>POSTAGE AND SHIPPING</Desc>
+        <TotalAmt>1180</TotalAmt>
+        <ProgramServicesAmt>306</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>559</ManagementAndGeneralAmt>
+        <FundraisingAmt>315</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>1013797</TotalAmt>
+        <ProgramServicesAmt>655563</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>239024</ManagementAndGeneralAmt>
+        <FundraisingAmt>119210</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>63825</BOYAmt>
+        <EOYAmt>266635</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>832535</BOYAmt>
+        <EOYAmt>703472</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </AccountsReceivableGrp>
+      <ReceivablesFromOfficersEtcGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </ReceivablesFromOfficersEtcGrp>
+      <RcvblFromDisqualifiedPrsnGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </RcvblFromDisqualifiedPrsnGrp>
+      <OthNotesLoansReceivableNetGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </OthNotesLoansReceivableNetGrp>
+      <InventoriesForSaleOrUseGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </InventoriesForSaleOrUseGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>0</BOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <InvestmentsOtherSecuritiesGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </InvestmentsOtherSecuritiesGrp>
+      <InvestmentsProgramRelatedGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </InvestmentsProgramRelatedGrp>
+      <IntangibleAssetsGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </IntangibleAssetsGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>896360</BOYAmt>
+        <EOYAmt>970107</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <GrantsPayableGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </GrantsPayableGrp>
+      <DeferredRevenueGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </DeferredRevenueGrp>
+      <TaxExemptBondLiabilitiesGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </TaxExemptBondLiabilitiesGrp>
+      <EscrowAccountLiabilityGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </EscrowAccountLiabilityGrp>
+      <LoansFromOfficersDirectorsGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </LoansFromOfficersDirectorsGrp>
+      <MortgNotesPyblScrdInvstPropGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </MortgNotesPyblScrdInvstPropGrp>
+      <UnsecuredNotesLoansPayableGrp>
+        <BOYAmt>144815</BOYAmt>
+        <EOYAmt>141058</EOYAmt>
+      </UnsecuredNotesLoansPayableGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>0</BOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>144815</BOYAmt>
+        <EOYAmt>141058</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>498913</BOYAmt>
+        <EOYAmt>556074</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>252632</BOYAmt>
+        <EOYAmt>272975</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>751545</BOYAmt>
+        <EOYAmt>829049</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>896360</BOYAmt>
+        <EOYAmt>970107</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <InfoInScheduleOPartXIInd>X</InfoInScheduleOPartXIInd>
+      <ReconcilationRevenueExpnssAmt>79280</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>0</NetUnrlzdGainsLossesInvstAmt>
+      <DonatedServicesAndUseFcltsAmt>800</DonatedServicesAndUseFcltsAmt>
+      <InvestmentExpenseAmt>0</InvestmentExpenseAmt>
+      <PriorPeriodAdjustmentsAmt>0</PriorPeriodAdjustmentsAmt>
+      <OtherChangesInNetAssetsAmt>-2576</OtherChangesInNetAssetsAmt>
+      <MethodOfAccountingCashInd>X</MethodOfAccountingCashInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>0</FSAuditedInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="R000002" softwareId="24021167" softwareVersionNum="v1.00">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>340557</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>457246</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>563897</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>754862</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>1059155</CurrentTaxYearAmt>
+        <TotalAmt>3175717</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TaxRevLeviedOrgnztnlBnft170Grp>
+        <CurrentTaxYearMinus4YearsAmt>0</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>0</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>0</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>0</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>0</CurrentTaxYearAmt>
+        <TotalAmt>0</TotalAmt>
+      </TaxRevLeviedOrgnztnlBnft170Grp>
+      <GovtFurnSrvcFcltsVl170Grp>
+        <CurrentTaxYearMinus4YearsAmt>0</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>0</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>0</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>0</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>0</CurrentTaxYearAmt>
+        <TotalAmt>0</TotalAmt>
+      </GovtFurnSrvcFcltsVl170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>340557</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>457246</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>563897</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>754862</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>1059155</CurrentTaxYearAmt>
+        <TotalAmt>3175717</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <PublicSupportTotal170Amt>3175717</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>57</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>466</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>387</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>17688</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>36922</CurrentTaxYearAmt>
+        <TotalAmt>55520</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <UnrelatedBusinessNetIncm170Grp>
+        <CurrentTaxYearMinus4YearsAmt>0</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>0</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>0</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>0</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>0</CurrentTaxYearAmt>
+        <TotalAmt>0</TotalAmt>
+      </UnrelatedBusinessNetIncm170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>36</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>0</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>18</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>27</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>0</CurrentTaxYearAmt>
+        <TotalAmt>81</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>3231318</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>0</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.98279</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.46738</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+      <Form990ScheduleAPartVIGrp>
+        <FormAndLineReferenceDesc>Schedule A, Part II, Line 10</FormAndLineReferenceDesc>
+        <ExplanationTxt>COMMISSIONS ON SALES OF OPEN SOURCE INITIATIVE TSHIRTS FROM 2020 - 2024</ExplanationTxt>
+      </Form990ScheduleAPartVIGrp>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="R000003" softwareId="24021167" softwareVersionNum="v1.00">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleF documentId="R000004" softwareId="24021167" softwareVersionNum="v1.00">
+      <ForeignIndividualsGrantsGrp>
+        <TypeOfAssistanceTxt>IN 2024, OPEN SOURCE INITIATIVE RECEIVED A SIGNIFICANT GRANT FROM THE ALFRED P. SLOAN FOUNDATION TO CREATE AND EDUCATE THE PUBLIC ABOUT THE OPEN SOURCE AI DEFINITION. IN PREPARATION TO DISTRIBUTE FINAL MATERIALS TO THE PUBLIC INCLUDING A WHITEPAPER, OPEN SOURCE INITIATIVE CONDUCTED A WORKSHOP IN PARIS, FRANCE, AND OFFERED TRAVEL GRANTS TO INTERNATIONAL EXPERTS.</TypeOfAssistanceTxt>
+        <RegionTxt>Europe (including Iceland and Greenland)</RegionTxt>
+        <RecipientCnt>14</RecipientCnt>
+        <CashGrantAmt>24903</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>PAYPAL AND WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>CASH</ValuationMethodUsedDesc>
+      </ForeignIndividualsGrantsGrp>
+      <ForeignIndividualsGrantsGrp>
+        <TypeOfAssistanceTxt>IN 2024, OPEN SOURCE INITIATIVE RECEIVED A SIGNIFICANT GRANT FROM THE ALFRED P. SLOAN FOUNDATION TO CREATE AND EDUCATE THE PUBLIC ABOUT THE OPEN SOURCE AI DEFINITION. IN PREPARATION TO DISTRIBUTE FINAL MATERIALS TO THE PUBLIC INCLUDING A WHITEPAPER, OPEN SOURCE INITIATIVE CONDUCTED A WORKSHOP IN DAKAR, SENEGAL, AND OFFERED TRAVEL GRANTS TO INTERNATIONAL EXPERTS.</TypeOfAssistanceTxt>
+        <RegionTxt>Sub-Saharan Africa</RegionTxt>
+        <RecipientCnt>3</RecipientCnt>
+        <CashGrantAmt>1575</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>CASH</ValuationMethodUsedDesc>
+      </ForeignIndividualsGrantsGrp>
+      <TransferToForeignCorpInd>0</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>0</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>0</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>0</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>0</ForeignPartnershipInd>
+      <BoycottCountriesInd>0</BoycottCountriesInd>
+    </IRS990ScheduleF>
+    <IRS990ScheduleJ documentId="R000005" softwareId="24021167" softwareVersionNum="v1.00">
+      <CompensationCommitteeInd>X</CompensationCommitteeInd>
+      <WrittenEmploymentContractInd>X</WrittenEmploymentContractInd>
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>0</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>0</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>0</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>0</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>0</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>0</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>0</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>0</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>0</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>STEFANO MAFFULI</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>188678</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>0</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>0</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>188678</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule J, Part I</FormAndLineReferenceDesc>
+        <ExplanationTxt>ANNUALLY, THE BOARD OF DIRECTORS REVIEWS THE PERFORMANCE AND COMPENSATION OF THE EXECUTIVE DIRECTOR. THE BOARD CHAIR LEADS THE REVIEW CONDUCTED WITH THE EXECUTIVE COMMITTEE. NO PERSON WITH A CONFLICT OF INTEREST IS INVOLVED IN THE PERFORMANCE REVIEW AND COMPENSATION RECOMMENDATION. OPEN SOURCE INITIATIVE DOES NOT OFFER SEVERANCE PAYMENTS, SUPPLEMENTAL NONQUALIFIED RETIREMENT PLANS, OR EQUITY-BASED COMPENSATION ARRANGEMENTS TO ANY EMPLOYEE. EMPLOYEE COMPENSATION IS NOT CONTINGENT UPON THE NET EARNINGS OF THE ORGANIZATION, DOES NOT INCLUDE NON-FIXED PAYMENTS, AND DOES NOT PROVIDE COMPENSATION AMOUNTS SUBJECT TO THE INITIAL CONTRACT EXCEPTION. THE COMPANY HAS A WRITTEN PAYMENT AND REIMBURSEMENT POLICY AND REQUIRES SUBSTANTIATION PROVIDED PRIOR TO REIMBURSING OR ALLOWING EXPENSES THAT APPLIES TO ALL EMPLOYEES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule J, Part I, Line 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>ANNUALLY, THE BOARD OF DIRECTORS REVIEWS THE PERFORMANCE AND COMPENSATION OF THE EXECUTIVE DIRECTOR. THE BOARD CHAIR LEADS THE REVIEW CONDUCTED WITH THE EXECUTIVE COMMITTEE. NO PERSON WITH A CONFLICT OF INTEREST IS INVOLVED IN THE PERFORMANCE REVIEW AND COMPENSATION RECOMMENDATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleO documentId="R000006" softwareId="24021167" softwareVersionNum="v1.00">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part I, Line 1</FormAndLineReferenceDesc>
+        <ExplanationTxt>EDUCATE THE PUBLIC ABOUT OPEN SOURCE SOFTWARE AND MAINTAIN THE OPEN SOURCE DEFINITION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part III</FormAndLineReferenceDesc>
+        <ExplanationTxt>WHEN ADDING ACTIVITIES, DISCONTINUING ACTIVITIES, AND ANNUALLY, THE OPEN SOURCE INITIATIVE'S MANAGEMENT REVIEWS AND ANALYZES THE ACTIVITY AGAINST THE APPROVED TAX-EXEMPT MISSION. IF ANY ACTIVITY IS DEEMED NOT TO FIT INTO THE TAX-EXEMPT MISSION, IT IS DOCUMENTED, DISCUSSED WITH THE BOARD OF DIRECTORS, AND DISCLOSED ON FORM 990. FOR THE TAX YEAR ENDING DECEMBER 31, 2024, ALL ACTIVITIES FIT INTO OPEN SOURCE INITIATIVE'S APPROVED TAX-EXEMPT MISSION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part III, Line 1</FormAndLineReferenceDesc>
+        <ExplanationTxt>To (1) educate the public about the advantages of open source software [software that users are free to modify and redistribute]; (2) encourage the software community to participate in open source software development; (3) identify how software users' objectives are best served through open source software; (4) persuade organizations and software authors to distribute source software freely they otherwise would not distribute; (5) provide resources for sharing information about open source software and licenses; (6) assist attorneys to craft open source licenses; (7) manage a certification program to allow use of one or more certification marks in association with open source software; and (8) advocate for open source principles.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section A, Line 6</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE OPEN SOURCE INITIATIVE BOARD OF DIRECTORS OFFERS THREE CLASSES OF MEMBERSHIP TO CREATE WORLDWIDE ADVOCACY FOR THE OPEN SOURCE COMMUNITY AND BETTER INFORM BOARD LEADERSHIP. THE BASIC MEMBERSHIP CLASS RECEIVES A COMPLIMENTARY MEMBERSHIP AND IS INELIGIBLE FOR VOTING PRIVILEGES. THE FULL MEMBERSHIP CLASS PAYS ANNUAL DUES AND IS ELIGIBLE TO VOTE IN THE ANNUAL ELECTIONS. AFFILIATE MEMBERSHIP CLASS IS COMPLIMENTARY AND IS ELIGIBLE TO VOTE IN THE ANNUAL ELECTION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section A, Line 7a</FormAndLineReferenceDesc>
+        <ExplanationTxt>ON AUGUST 18, 2023, THE BOARD APPROVED INCREASING THE NUMBER OF DIRECTORS TO 12 WITH ONE DIRECTOR APPOINTED BY AN ANNUAL ELECTION BY FULL MEMBERS AND TWO DIRECTORS APOINTED BY OTHER BOARD DIRECTORS. THE CHANGES TO THE NUMBER OF BOARD DIRECTORS DID NOT REQUIRE A CHANGE TO THE BYLAWS. OPEN SOURCE INITIATIVE'S BYLAWS AUTHORIZE THE BOARD TO APPOINT DIRECTORS. IN ORDER TO BETTER REPRESENT THE COMMUNITY'S INTERESTS, THE BOARD APPOINTS DIRECTORS AS FOLLOWS: (1) FOUR DIRECTORS ARE APPOINTED BASED ON AN ANNUAL ELECTION BY FULL MEMBERS, (2) FOUR DIRECTORS ARE APPOINTED BASED ON AN ANNUAL ELECTION BY AFFILIATE MEMBERS, AND (1) FOUR DIRECTORS ARE APPOINTED BY OTHER BOARD DIRECTORS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 11b</FormAndLineReferenceDesc>
+        <ExplanationTxt>COPIES OF THE COMPLETED DRAFT FORM 990 (INCLUDING REQUIRED SCHEDULES) ARE DISTRIBUTED TO THE BOARD CHAIR, TREASURER, AND EXECUTIVE DIRECTOR IN ELECTRONIC FORM FOR REVIEW AND APPROVAL. ANY QUESTIONS OR CONCERNS ARE NOTED AND ADDRESSED, AND THE CONTROLLER UPDATES THE FORM 990 AS APPROPRIATE. COPIES OF THE REVISED DRAFT FORM 990 ARE DISTRIBUTED TO THE BOARD OF DIRECTORS IN ELECTRONIC FORM FOR REVIEW AND APPROVAL. ANY QUESTIONS OR CONCERNS ARE NOTED AND ADDRESSED, AND THE CONTROLLER UPDATES THE FORM 990 AS APPROPRIATE. AFTER ALL INPUT FROM THE REVIEW STAGE HAS BEEN APPROPRIATELY ADDRESSED. THE FINAL VERSION OF THE FORM 990 (WITH REQUIRED SCHEDULES) IS DISTRIBUTED IN ELECTRONIC FORM BY THE CONTROLLER TO EVERY VOTING MEMBER OF THE BOARD OF DIRECTORS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 12c</FormAndLineReferenceDesc>
+        <ExplanationTxt>OPEN SOURCE INITIATIVE'S (OSI) CONFLICT OF INTEREST POLICY WAS ADOPTED BY THE BOARD ON MAY 7, 2013. MEMBERS OF THE BOARD OF DIRECTORS OWE A FIDUCIARY OBLIGATION TO OSI, WHICH INCLUDES A DUTY OF LOYALTY AND A DUTY OF CARE. DIRECTORS SHOULD ACT IN GOOD FAITH WITH THE CARE AN ORDINARILY PRUDENT PERSON IN A LIKE POSITION WOULD EXERCISE IN SIMILAR CIRCUMSTANCES. THE DUTY OF LOYALTY REQUIRES THAT DIRECTORS ACT IN GOOD FAITH IN A MANNER THE DIRECTOR REASONABLY BELIEVES TO BE IN THE BEST INTEREST OF THE CORPORATION. IF A DIRECTOR IS ALSO AN EMPLOYEE OF ANOTHER COMPANY, THE DIRECTOR'S FIRST LOYALTY AS A BOARD DIRECTOR IS TO THE OSI AND NOT THE EMPLOYER. THE DIRECTOR MAY VOICE THE OPINION OF THE DIRECTOR'S EMPLOYER, BUT IT IS THE DIRECTOR'S OBLIGATION TO FOCUS ON THE FIDUCIARY DUTIES TO THE OSI. IF A DIRECTOR IS ALSO A DIRECTOR OR OFFICER OF ANOTHER ORGANIZATION, THE DIRECTOR IS CHARGED WITH EXERCISING THEIR DUTIES BASED ON THE BEST INTERESTS OF BOTH COMPANIES. DIRECTORS MAY BE REQUIRED TO RECUSE THEMSELVES FROM ANY TRANSACTION OR DECISION THAT WOULD LEAD TO A CONFLICT OF INTEREST.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 15</FormAndLineReferenceDesc>
+        <ExplanationTxt>ANNUALLY, THE BOARD REVIEWS THE PERFORMANCE OF THE EXECUTIVE DIRECTOR. NO PERSON WITH A CONFLICT OF INTEREST IS INVOLVED IN THE DECISION. THE BOARD EVALUATES AND APPROVES COMPENSATION BASED ON ANNUAL GOALS, AS WELL AS CONSIDERING COST OF LIVING ADJUSTMENTS TO COMPENSATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section C, Line 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>NO CHANGES HAVE BEEN MADE TO THE ORGANIZING OR GOVERNING DOCUMENTS OF THE OPEN SOURCE INITIATIVE. ORGANIZING AND GOVERNING DOCUMENTS, AS WELL AS FINANCIAL RECORDS, ARE AVAILABLE UPON REQUEST.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part IX, Line 11g</FormAndLineReferenceDesc>
+        <ExplanationTxt>PROGRAM COSTS INCLUDE STANDARDS WORK GROUP, POLICY PROGRAM SUPPORT, TECHNICAL WRITING FEES. GENERAL AND ADMINISTRATIVE COSTS INCLUDE DESIGN FEES. FUNDRAISING COSTS INCLUDE ADMINISTRATIVE SUPPORT FOR MANAGING SPONSOR CONTRACTS AND DELIVERABLES AND DESIGN FEES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part XI, Line 9</FormAndLineReferenceDesc>
+        <ExplanationTxt>ADJUSTMENT RELATED TO ACCRUAL TO CASH RECONCILIATION</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+    <ReasonableCauseExplanation documentId="R000007" softwareId="24021167" softwareVersionNum="v1.00">
+      <ExplanationTxt>OPEN SOURCE INITIATIVE FILED A TIMELY EXTENSION ON FORM 8868, WHICH WAS ACCEPTED BY THE INTERNAL REVENUE SERVICE ON MAY 11, 2025.</ExplanationTxt>
+    </ReasonableCauseExplanation>
+  </ReturnData>
+</Return>

@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-RFF-2024
+Organization: Resources for the Future
+Document type: Form 990 filing-derived snapshot
+Original URL: https://apps.irs.gov/pub/epostcard/990/xml/2025/202511929349300821_public.xml
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/530220900
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: turn579724view3 L48-L119; turn579724view5 L127-L199
+EIN: 53-0220900
+IRS object ID: 202511929349300821
+Tax period: 2023-10-01 to 2024-09-30
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Resources for the Future
+EIN: 53-0220900
+IRS object ID: 202511929349300821
+Tax period: 2023-10-01 to 2024-09-30
+Filing date: 2025-07-11
+Top-executive record: Leadership transition - President and CEO
+Full-year status: no
+Part VII reportable compensation from organization: 
+Related organizations: 
+Part VII other compensation: 
+Cash/reportable proxy: 
+Filing total proxy: 
+Revenue: 16875215
+Expenses: 18076584
+Tier/status: excluded_transition / excluded
+Exclusion reason: Richard Newell served Oct-Apr and William Pizer May-Sep; reported compensation also reflects calendar-year/prior-role timing. No silent annualization.
+Notes: Individual transition amounts preserved in source snapshot but excluded from quantitative analysis.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

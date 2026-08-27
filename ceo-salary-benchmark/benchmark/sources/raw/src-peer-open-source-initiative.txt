@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Open Source Initiative
+reference_tier: C
+tier_label: Tier C broad sensitivity
+selection_wave: third expansion / filing verification
+topic_cluster: open technology infrastructure
+ea_affinity: EA-adjacent
+country_or_region: US/international
+expected_structure: membership nonprofit
+ein: 91-2037395
+revenue: 1093077.0
+expenses: 1013797.0
+employee_count: 
+comparability_score: 70.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 200845.467575352
+total_proxy_jul2026: 200845.467575352
+ceo_title: Executive Director
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/912037395
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202533079349301473_public.xml
+selection_note: Added by the third-expansion freeze and retained after role/scale/title verification; pay did not determine selection.

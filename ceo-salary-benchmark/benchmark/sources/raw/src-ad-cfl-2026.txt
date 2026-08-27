@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-CFL-2026
+organization: Community Foundation of Louisville
+role_title: Chief Executive Officer
+posting_date: 2026-02-23
+closing_date: 
+salary_min: 325000
+salary_max: 400000
+currency: USD
+salary_is_base: yes
+salary_text: $325,000-$400,000
+location: Louisville, Kentucky
+remote_status: In-person/local
+geographic_restrictions: Louisville region
+mission_operating_model: Community foundation managing nearly $1B of assets and more than 2,200 charitable funds.
+annual_budget_or_expense: 
+scale_measure: asset-based foundation
+scale_year: 2026
+staff_count: 30
+responsibilities: Foundation CEO, asset growth, grantmaking, community convening, operations, and board.
+reporting_relationship: Board of Directors
+original_url: https://pac.org/job/chief-executive-officer-4
+resolved_url: https://pac.org/job/chief-executive-officer-4
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: recruiter complete copy
+archive_path: sources/raw/src-ad-cfl-2026.txt
+tier: excluded_grantmaking
+included_in_quantitative_analysis: no
+inclusion_reason: 
+exclusion_reason: Asset-management and grantmaking-dominated community foundation; not comparable to RP core operating responsibility.
+evidence_quality_notes: Complete posting.
+source_line_refs: turn562106view0 lines 46-60, 72-118
+cpi_period: 2026-02
+cpi_basis_note: Excluded.

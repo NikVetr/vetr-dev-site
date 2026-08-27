@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" returnVersion="2024v5.0">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-11-12T20:56:52-05:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>460952065</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>BOUNTIFUL PEAK ADVISORS</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>1564 SOUTH 500 WEST SUITE 201</AddressLine1Txt>
+        <CityNm>BOUNTIFUL</CityNm>
+        <StateAbbreviationCd>UT</StateAbbreviationCd>
+        <ZIPCd>840107400</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>814537521</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>BETTER FOOD FOUNDATION INC</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>BETT</BusinessNameControlTxt>
+      <PhoneNum>8775614640</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>7828 ENGINEERS RD BOX 1510</AddressLine1Txt>
+        <CityNm>JULIAN</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>92036</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>JENNIFER CHANNIN</PersonNm>
+      <PersonTitleTxt>EXECUTIVE DIRECTOR</PersonTitleTxt>
+      <PhoneNum>8775614640</PhoneNum>
+      <SignatureDt>2025-11-11</SignatureDt>
+      <DiscussWithPaidPreparerInd>true</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>true</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>SHALAUN T HOWELL CPA</PreparerPersonNm>
+      <PTIN>P00969274</PTIN>
+      <PhoneNum>8012943155</PhoneNum>
+      <PreparationDt>2025-11-12</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="6">
+    <IRS990 documentId="RetDoc3" referenceDocumentId="RetDoc6">
+      <PrincipalOfficerNm>JENNIFER CHANNIN</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>7828 ENGINEERS RD BOX 1510</AddressLine1Txt>
+        <CityNm>JULIAN</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>92036</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>1680895</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>false</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>WWW.BETTERFOODFOUNDATION.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2016</FormationYr>
+      <LegalDomicileStateCd>UT</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>TO PROMOTE DIETARY CHANGES TO BUILD A HEALTHY, EQUITABLE, HUMANE, AND ENVIRONMENTALLY-SUSTAINABLE FOOD SYSTEM.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>3</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>3</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>10</TotalEmployeeCnt>
+      <TotalVolunteersCnt>3</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <PYContributionsGrantsAmt>2277226</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>1678722</CYContributionsGrantsAmt>
+      <CYProgramServiceRevenueAmt>0</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>1686</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>-1090</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>50</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>0</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>2278962</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>1677632</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>967508</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>1052832</CYGrantsAndSimilarPaidAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>642151</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>468780</CYSalariesCompEmpBnftPaidAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>58476</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>866862</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>265682</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>2476521</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>1787294</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-197559</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>-109662</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>344399</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>359748</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>73350</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>198361</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>271049</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>161387</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>TO PROMOTE DIETARY CHANGES TO BUILD A HEALTHY, EQUITABLE, HUMANE, AND ENVIRONMENTALLY-SUSTAINABLE FOOD SYSTEM.</MissionDesc>
+      <SignificantNewProgramSrvcInd>false</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>false</SignificantChangeInd>
+      <ExpenseAmt>620111</ExpenseAmt>
+      <GrantAmt>593332</GrantAmt>
+      <Desc>MOVEMENT BUILDING PROVIDING FINANCIAL, TECHNICAL, AND CONSULTING SUPPORT TO INDIVIDUALS AND ORGANIZATIONS WHOSE GOALS ALIGN WITH OUR MISSION.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>418261</ExpenseAmt>
+        <GrantAmt>2000</GrantAmt>
+        <Desc>DEFAULT VEG EDUCATING THE PUBLIC ABOUT THE BENEFITS OF DEFAULTING TO VEGAN FOOD AND DIET.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>137344</ExpenseAmt>
+        <Desc>PUBLIC EDUCATION ENGAGING THE PUBLIC WITH INFORMATION AND RESOURCES ABOUT THE BENEFITS OF A PLANT-BASED DIET.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>478784</ExpenseAmt>
+        <GrantAmt>457500</GrantAmt>
+        <Desc>RELIGIOUS PROVIDING RESOURCES AND SUPPORT TO RELIGIOUS COMMUNITIES INTERESTED IN SUSTAINABILITY, ANIMAL WELFARE,AND VEGANISM. THIS INCLUDES THE ORGANIZATIONS JEWISH INITIATIVE FOR ANIMALS (JIFA) PROGRAM. OTHER ENGAGING IN VARIOUS PROJECTS WHICH ALIGN WITH OUR MISSION BUT ARE NOT INCLUDED IN ANOTHER MAJOR PROGRAM, INCLUDING POLICY AND DAIRY INITIATIVES. THIS INCLUDES THE ORGANIZATIONS HUMANEWASHING PROGRAM.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>478784</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcGrantAmt>457500</TotalOtherProgSrvcGrantAmt>
+      <TotalProgramServiceExpensesAmt>1654500</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc7">true</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1">true</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc4">false</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc4">false</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc4">false</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc4">false</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd referenceDocumentId="RetDoc4">false</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc4">true</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc4">false</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc4">false</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc4">false</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc4">false</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc4">true</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc4">true</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc4">false</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <ForeignOfficeInd>false</ForeignOfficeInd>
+      <ForeignActivitiesInd>false</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>false</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>false</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>false</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>false</FundraisingActivitiesInd>
+      <GamingActivitiesInd>false</GamingActivitiesInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="RetDoc5">true</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd referenceDocumentId="RetDoc5">true</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd>false</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>false</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>false</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>false</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>false</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>false</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>false</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>false</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>false</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>false</DeductibleArtContributionInd>
+      <TerminateOperationsInd>false</TerminateOperationsInd>
+      <PartialLiquidationInd>false</PartialLiquidationInd>
+      <DisregardedEntityInd>false</DisregardedEntityInd>
+      <RelatedEntityInd>false</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>false</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>true</ScheduleORequiredInd>
+      <IRPDocumentCnt>12</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <EmployeeCnt>10</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>true</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>false</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>false</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>false</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>false</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>false</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>false</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>false</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>false</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>false</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>false</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>3</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>3</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>true</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>false</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>false</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>false</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>false</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>false</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>false</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>true</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>true</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>false</OfficerMailingAddressInd>
+      <LocalChaptersInd>false</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>true</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>true</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>true</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>true</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>true</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>true</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>true</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>false</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>false</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>UT</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <OtherWebsiteInd>X</OtherWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>BOUNTIFUL PEAK ADVISORS</BusinessNameLine1Txt>
+        </BusinessName>
+        <PhoneNum>8012943155</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>1564 S 500 W STE 201</AddressLine1Txt>
+          <CityNm>BOUNTIFUL</CityNm>
+          <StateAbbreviationCd>UT</StateAbbreviationCd>
+          <ZIPCd>84010</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JENNIFER CHANNIN</PersonNm>
+        <TitleTxt>EXECUTIVE DI</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>93250</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>4000</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>AARON GROSS</PersonNm>
+        <TitleTxt>BOARD CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>10.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BEN GOLDSMITH</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>6.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DEEDEE MCKEE</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>93250</TotalReportableCompFromOrgAmt>
+      <TotalOtherCompensationAmt>4000</TotalOtherCompensationAmt>
+      <FormerOfcrEmployeesListedInd>false</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>false</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>false</CompensationFromOtherSrcsInd>
+      <GovernmentGrantsAmt>144250</GovernmentGrantsAmt>
+      <AllOtherContributionsAmt>1534472</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>3520</NoncashContributionsAmt>
+      <TotalContributionsAmt>1678722</TotalContributionsAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>2173</TotalRevenueColumnAmt>
+        <ExclusionAmt>2173</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <OtherAmt>3263</OtherAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <OtherAmt>-3263</OtherAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>-3263</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>-3263</RelatedOrExemptFuncIncomeAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>1677632</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>-3263</RelatedOrExemptFuncIncomeAmt>
+        <ExclusionAmt>2173</ExclusionAmt>
+      </TotalRevenueGrp>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>700982</TotalAmt>
+        <ProgramServicesAmt>700982</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <GrantsToDomesticIndividualsGrp>
+        <TotalAmt>351850</TotalAmt>
+        <ProgramServicesAmt>351850</ProgramServicesAmt>
+      </GrantsToDomesticIndividualsGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>102500</TotalAmt>
+        <ProgramServicesAmt>57984</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>15442</ManagementAndGeneralAmt>
+        <FundraisingAmt>29074</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>305312</TotalAmt>
+        <ProgramServicesAmt>268429</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>16699</ManagementAndGeneralAmt>
+        <FundraisingAmt>20184</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>19400</TotalAmt>
+        <ProgramServicesAmt>16521</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1225</ManagementAndGeneralAmt>
+        <FundraisingAmt>1654</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>41568</TotalAmt>
+        <ProgramServicesAmt>29500</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>8409</ManagementAndGeneralAmt>
+        <FundraisingAmt>3659</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>595</TotalAmt>
+        <ManagementAndGeneralAmt>595</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>24982</TotalAmt>
+        <ManagementAndGeneralAmt>24982</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>39308</TotalAmt>
+        <ProgramServicesAmt>37938</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1370</ManagementAndGeneralAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>110966</TotalAmt>
+        <ProgramServicesAmt>110966</ProgramServicesAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>12376</TotalAmt>
+        <ProgramServicesAmt>9986</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>988</ManagementAndGeneralAmt>
+        <FundraisingAmt>1402</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>19823</TotalAmt>
+        <ProgramServicesAmt>17851</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1500</ManagementAndGeneralAmt>
+        <FundraisingAmt>472</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <OccupancyGrp>
+        <TotalAmt>4382</TotalAmt>
+        <ProgramServicesAmt>3630</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>238</ManagementAndGeneralAmt>
+        <FundraisingAmt>514</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>19039</TotalAmt>
+        <ProgramServicesAmt>18923</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>25</ManagementAndGeneralAmt>
+        <FundraisingAmt>91</FundraisingAmt>
+      </TravelGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>14261</TotalAmt>
+        <ProgramServicesAmt>14261</ProgramServicesAmt>
+      </ConferencesMeetingsGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>6180</TotalAmt>
+        <ProgramServicesAmt>4960</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>483</ManagementAndGeneralAmt>
+        <FundraisingAmt>737</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>5416</TotalAmt>
+        <ProgramServicesAmt>4348</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>423</ManagementAndGeneralAmt>
+        <FundraisingAmt>645</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>FOOD AND BEVERAGE</Desc>
+        <TotalAmt>3315</TotalAmt>
+        <ProgramServicesAmt>3303</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>5</ManagementAndGeneralAmt>
+        <FundraisingAmt>7</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>SUPPLIES</Desc>
+        <TotalAmt>3065</TotalAmt>
+        <ProgramServicesAmt>2711</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>320</ManagementAndGeneralAmt>
+        <FundraisingAmt>34</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>LICENSE AND DUES</Desc>
+        <TotalAmt>1640</TotalAmt>
+        <ProgramServicesAmt>340</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1300</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>BANK AND MERCHANT FEES</Desc>
+        <TotalAmt>312</TotalAmt>
+        <ManagementAndGeneralAmt>312</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>22</TotalAmt>
+        <ProgramServicesAmt>17</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2</ManagementAndGeneralAmt>
+        <FundraisingAmt>3</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>1787294</TotalAmt>
+        <ProgramServicesAmt>1654500</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>74318</ManagementAndGeneralAmt>
+        <FundraisingAmt>58476</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>176372</BOYAmt>
+        <EOYAmt>163500</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>152550</BOYAmt>
+        <EOYAmt>154719</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>5000</BOYAmt>
+        <EOYAmt>17500</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>1740</BOYAmt>
+        <EOYAmt>1636</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>32403</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>10010</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>8737</BOYAmt>
+        <EOYAmt>22393</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>344399</BOYAmt>
+        <EOYAmt>359748</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>73350</BOYAmt>
+        <EOYAmt>65861</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <GrantsPayableGrp>
+        <EOYAmt>132500</EOYAmt>
+      </GrantsPayableGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>73350</BOYAmt>
+        <EOYAmt>198361</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>266049</BOYAmt>
+        <EOYAmt>84654</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>5000</BOYAmt>
+        <EOYAmt>76733</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>271049</BOYAmt>
+        <EOYAmt>161387</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>344399</BOYAmt>
+        <EOYAmt>359748</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>-109662</ReconcilationRevenueExpnssAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>false</AccountantCompileOrReviewInd>
+      <FSAuditedInd>true</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>true</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>false</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc7">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>1332762</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>1627119</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>2108584</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>2277226</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>1678722</CurrentTaxYearAmt>
+        <TotalAmt>9024413</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>1332762</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>1627119</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>2108584</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>2277226</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>1678722</CurrentTaxYearAmt>
+        <TotalAmt>9024413</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>2467100</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>6557313</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus3YearsAmt>137</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>327</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>1956</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>2173</CurrentTaxYearAmt>
+        <TotalAmt>4593</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <TotalSupportAmt>9029006</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>1604</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.72620</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.59670</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="RetDoc4">
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>9303</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>6160</DepreciationAmt>
+        <BookValueAmt>3143</BookValueAmt>
+      </EquipmentGrp>
+      <OtherLandBuildingsGrp>
+        <OtherCostOrOtherBasisAmt>23100</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>3850</DepreciationAmt>
+        <BookValueAmt>19250</BookValueAmt>
+      </OtherLandBuildingsGrp>
+      <TotalBookValueLandBuildingsAmt>22393</TotalBookValueLandBuildingsAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>1713060</TotalRevEtcAuditedFinclStmtAmt>
+      <DonatedServicesAndUseFcltsAmt>35428</DonatedServicesAndUseFcltsAmt>
+      <RevenueNotReportedAmt>35428</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>1677632</RevenueSubtotalAmt>
+      <TotalRevenuePerForm990Amt>1677632</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>1822722</TotExpnsEtcAuditedFinclStmtAmt>
+      <DonatedServicesUseFcltsAmt>35428</DonatedServicesUseFcltsAmt>
+      <ExpensesNotReportedAmt>35428</ExpensesNotReportedAmt>
+      <ExpensesSubtotalAmt>1787294</ExpensesSubtotalAmt>
+      <TotalExpensesPerForm990Amt>1787294</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>SCHEDULE D, PAGE 3, PART X</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION HAS BEEN RECOGNIZED BY THE INTERNAL REVENUE SERVICE (IRS) AS EXEMPT FROM FEDERAL INCOME TAXES UNDER SECTION 501(C)(3), QUALIFYING FOR THE CHARITABLE CONTRIBUTION DEDUCTION UNDER SECTION 170(B)(1)(A)(VI), AND HAS BEEN DETERMINED NOT TO BE A PRIVATE FOUNDATION UNDER SECTION 509(A). THE ORGANIZATION IS ANNUALLY REQUIRED TO FILE A RETURN OF ORGANIZATION EXEMPT FROM INCOME TAX (FORM 990) AND IS SUBJECT TO INCOME TAX ON NET INCOME THAT IS DERIVED FROM BUSINESS ACTIVITIES THAT ARE UNRELATED TO THEIR EXEMPT PURPOSES. MANAGEMENT HAS DETERMINED THAT THE ORGANIZATION IS NOT SUBJECT TO UNRELATED BUSINESS INCOME TAX. MANAGEMENT BELIEVES THAT THE ORGANIZATION HAS APPROPRIATE SUPPORT FOR ANY TAX POSITIONS TAKEN IN ITS ANNUAL FILING AND DOES NOT HAVE ANY UNCERTAIN TAX POSITIONS THAT ARE MATERIAL TO THE FINANCIAL STATEMENTS. THE ORGANIZATIONS FORMS 990 ARE NO LONGER SUBJECT TO TAX EXAMINATION FOR YEARS BEFORE 2021.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleI documentId="RetDoc5">
+      <GrantRecordsMaintainedInd>true</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>FARM FORWARD INC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>55561 N ATLANTIC AVENUE</AddressLine1Txt>
+          <CityNm>PORTLAND</CityNm>
+          <StateAbbreviationCd>OR</StateAbbreviationCd>
+          <ZIPCd>97217</ZIPCd>
+        </USAddress>
+        <RecipientEIN>261643614</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>465422</CashGrantAmt>
+        <PurposeOfGrantTxt>CONSUMER EDUCATION</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>UNIVERSALIST UNITARIANS FOR THE</BusinessNameLine1Txt>
+          <BusinessNameLine2Txt>ETHICAL TREATMENT OF ANIMALS</BusinessNameLine2Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>9620 CINNAMON CREEK CR</AddressLine1Txt>
+          <CityNm>VIENNA</CityNm>
+          <StateAbbreviationCd>VA</StateAbbreviationCd>
+          <ZIPCd>22182</ZIPCd>
+        </USAddress>
+        <RecipientEIN>251899277</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>12500</CashGrantAmt>
+        <PurposeOfGrantTxt>ANIMAL ETHICS EDU</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>FOOD EMPOWERMENT PROJECT</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>PO BOX 13425</AddressLine1Txt>
+          <CityNm>SAN LUIS OBISPO</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>93406</ZIPCd>
+        </USAddress>
+        <RecipientEIN>261743952</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>41000</CashGrantAmt>
+        <PurposeOfGrantTxt>FOOD ADVOCACY</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>UNIVERSITY OF SAN DIEGO</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>5998 ALCALA PARK</AddressLine1Txt>
+          <CityNm>SAN DIEGO</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>92110</ZIPCd>
+        </USAddress>
+        <RecipientEIN>952544535</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>180000</CashGrantAmt>
+        <PurposeOfGrantTxt>FOOD SYSTEMS CHANGE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>4</Total501c3OrgCnt>
+      <GrantsOtherAsstToIndivInUSGrp>
+        <GrantTypeTxt>VEGAN FOOD BANK</GrantTypeTxt>
+        <RecipientCnt>1</RecipientCnt>
+        <CashGrantAmt>328750</CashGrantAmt>
+      </GrantsOtherAsstToIndivInUSGrp>
+      <GrantsOtherAsstToIndivInUSGrp>
+        <GrantTypeTxt>BLACK VEGANISM</GrantTypeTxt>
+        <RecipientCnt>1</RecipientCnt>
+        <CashGrantAmt>23100</CashGrantAmt>
+      </GrantsOtherAsstToIndivInUSGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>SCHEDULE I, PAGE 1, PART I, LINE 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION MONITORS THE USE OF GRANT FUNDS THROUGH SEMI-MONTHLY CONVERSATIONS WITH GRANTEES ABOUT THE USE OF GRANT FUNDS. THIS IS DONE VIA E-MAIL OR PHONE CONFERENCE. GRANT RECEIPIENTS ARE ALSO REQUIRED TO SUBMIT A FINAL WRITTEN REPORT DEMONSTRATING THE USE OF FUNDS AND THE PROGRAMMATIC IMPACT OF THEIR WORK.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleO documentId="RetDoc6">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 2, PART III, LINE 4D</FormAndLineReferenceDesc>
+        <ExplanationTxt>RELIGIOUS PROVIDING RESOURCES AND SUPPORT TO RELIGIOUS COMMUNITIES INTERESTED IN SUSTAINABILITY, ANIMAL WELFARE,AND VEGANISM. THIS INCLUDES THE ORGANIZATIONS JEWISH INITIATIVE FOR ANIMALS (JIFA) PROGRAM. OTHER ENGAGING IN VARIOUS PROJECTS WHICH ALIGN WITH OUR MISSION BUT ARE NOT INCLUDED IN ANOTHER MAJOR PROGRAM, INCLUDING POLICY AND DAIRY INITIATIVES. THIS INCLUDES THE ORGANIZATIONS HUMANEWASHING PROGRAM.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>AARON GROSS JENNIFER CHANNIN BOARD MEMBER EX. DIRECTOR SPOUSES</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE FORM 990 IS REVIEWED IN DETAIL BY THE EXECUTIVE DIRECTOR AND OPERATIONS MANAGER. IN ADDITION, THE ENTIRE BOARD OF DIRECTORS IS PROVIDED A COPY OF THE FORM 990 TO REVIEW AND IS GIVEN THE OPPORTUNITY TO PROVIDE FEEDBACK PRIOR TO FILING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>ON AN ANNUAL BASIS, ALL OFFICERS AND DIRECTORS ARE REQUIRED TO REVIEW THE ORGANIZATIONS CONFLICT OF INTEREST POLICY. IN ADDITION, EACH OFFICER OR DIRECTOR IS REQUIRED TO COMPLETE AN ACKNOWLEDGEMENT EVIDENCING THAT THEY REVIEWED THE POLICY AND TO DISCLOSE IN WRITING ANY POTENTIAL CONFLICTS OF INTEREST. NEW OFFICERS AND DIRECTORS ARE REQUIRED TO REVIEW THE POLICY AND COMPLETE THE ACKNOWLEDGEMENT WHEN THEY ARE HIRED OR WHEN THEIR TERM BEGINS. THE EXECUTIVE COMMITTEE IS RESPONSIBLE FOR REVIEWING ALL POTENTIAL CONFLICTS AND DETERMINING THE APPROPRIATE COURSE OF ACTION TO ELIMINATE OR MITIGATE THE RISKS POSED. RESPONSES TYPICALLY INCLUDE RECUSING THE AFFECTED INDIVIDUAL FROM PARTICIPATING IN DELIBERATION AND VOTING ON ANY ISSUE RELATED TO THE POTENTIAL CONFLICT.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 15A</FormAndLineReferenceDesc>
+        <ExplanationTxt>OFFICER COMPENSATION IS DETERMINED BY MEMBERS OF THE BOARD OF DIRECTORS WHO ARE INDEPENDENT OF THE OFFICER. IN ESTABLISHING COMPENSATION, THE BOARD USES COMPARABILITY DATA INCLUDING SALARY SURVEYS AND 990S OF ORGANIZATIONS THAT ARE OF SIMILAR SIZE, COMPLEXITY, AND REGION. THE DELIBERATION AND DETERMINATION OF THE OFFICERS' COMPENSATION IS DOCUMENTED IN THE BOARD MINUTES AND IN THE APPROVED ANNUAL BUDGET.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION'S GOVERNING DOCUMENTS, CONFLICT OF INTEREST POLICY, AND FINANCIAL STATEMENTS ARE MADE AVAILABLE TO THE PUBLIC UPON REQUEST TO THE ORGANIZATION'S OFFICES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

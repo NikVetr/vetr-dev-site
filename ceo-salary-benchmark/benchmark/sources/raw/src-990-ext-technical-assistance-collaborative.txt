@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Technical Assistance Collaborative
+ein: 22-3181028
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 87.0
+ceo_name: Kevin Martone
+ceo_title: Executive Director & President
+top_executive_basis: prior clean full-year; FY2025 transition
+tax_period_begin: 2023-07-01
+tax_period_end: 2024-06-30
+compensation_calendar_year: 2023.0
+filing_date: 2025-03-03
+irs_object_id: 202500629349300740
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202500629349300740_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/223181028
+part_vii_org: 230222.0
+part_vii_related: 0.0
+part_vii_other: 50228.0
+cash_proxy: 230222.0
+total_proxy: 280450.0
+schedule_j_base: 
+revenue: 17168882.0
+expenses: 17191674.0
+employee_count: 57.0
+full_year_status: yes_for_compensation_calendar_2023
+founder_flag: no
+structure_flag: prior_year_due_transition
+analysis_status: primary_older_clean
+exclusion_reason: 
+notes: Latest filing had ED until Apr 2025 and interim ED; used FY2024 filing/2023 compensation year.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica FY2024 filing table
+source_id: SRC-990-EXT-TECHNICAL-ASSISTANCE-COLLABORATIVE
+part_vii_org_jul2026: 252296.9160678796
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 55044.12914603059
+cash_proxy_jul2026: 252296.9160678796
+total_proxy_jul2026: 307341.04521391017
+schedule_j_base_jul2026: 
+cpi_factor: 1.095885345744019
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: False
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 1.0574182732606872

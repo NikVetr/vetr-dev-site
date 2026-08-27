@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Open Technology Fund
+ein: 84-3126447
+source_wave: extension2
+peer_tier: Tier C broad sensitivity
+ea_affinity: EA-adjacent
+comparability_score: 68.0
+ceo_name: Laura Cunningham
+ceo_title: President
+top_executive_basis: President is organization-wide top executive
+tax_period_begin: 2023-10-01
+tax_period_end: 2024-09-30
+compensation_calendar_year: 2023.0
+filing_date: 2025-08-12
+irs_object_id: 202502249349302770
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202502249349302770_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/843126447
+part_vii_org: 231659.0
+part_vii_related: 0.0
+part_vii_other: 14821.0
+cash_proxy: 231659.0
+total_proxy: 246480.0
+schedule_j_base: 
+revenue: 50635708.0
+expenses: 50950076.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: grantmaking_pass_through_and_large_scale
+analysis_status: structural_sensitivity
+exclusion_reason: 
+notes: Technology and internet-freedom mission is relevant, but the entity is grantmaking/pass-through-heavy and much larger than RP core scale.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn906101view0.
+source_id: SRC-990-EXT-OPEN-TECHNOLOGY-FUND
+part_vii_org_jul2026: 253871.7033097137
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 16242.116709272108
+cash_proxy_jul2026: 253871.7033097137
+total_proxy_jul2026: 270113.82001898583
+schedule_j_base_jul2026: 
+cpi_factor: 1.095885345744019
+tier_group: C
+primary_eligible: False
+structurally_clean: False
+current_comp_year: False
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 

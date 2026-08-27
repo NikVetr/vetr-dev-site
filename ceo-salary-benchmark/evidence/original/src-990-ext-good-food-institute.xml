@@ -1,0 +1,1694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2024v5.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-11-14T07:50:14-06:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>410746749</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>CLIFTONLARSONALLEN LLP</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>475 REGENCY PARK SUITE 175</AddressLine1Txt>
+        <CityNm>OFALLON</CityNm>
+        <StateAbbreviationCd>IL</StateAbbreviationCd>
+        <ZIPCd>62269</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>810840578</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE INC</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>GOOD</BusinessNameControlTxt>
+      <PhoneNum>2025962262</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>2503D N HARRISON ST 19</AddressLine1Txt>
+        <CityNm>ARLINGTON</CityNm>
+        <StateAbbreviationCd>VA</StateAbbreviationCd>
+        <ZIPCd>22207</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>NIGEL SIZER</PersonNm>
+      <PersonTitleTxt>CHIEF EXECUTIVE OFFICER</PersonTitleTxt>
+      <PhoneNum>2025962262</PhoneNum>
+      <SignatureDt>2025-11-12</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>0</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>ERIKA MARTINEZ</PreparerPersonNm>
+      <PTIN>P02297196</PTIN>
+      <PhoneNum>6182331200</PhoneNum>
+      <PreparationDt>2025-11-12</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="11">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <PrincipalOfficerNm>NIGEL SIZER</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>2503D N HARRISON ST 19</AddressLine1Txt>
+        <CityNm>ARLINGTON</CityNm>
+        <StateAbbreviationCd>VA</StateAbbreviationCd>
+        <ZIPCd>22207</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>71059770</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>GFI.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2015</FormationYr>
+      <LegalDomicileStateCd>DE</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>WE ARE DEVELOPING THE ROADMAP FOR A SUSTAINABLE, SECURE, AND JUST PROTEIN SUPPLY. WE IDENTIFY THE MOST EFFECTIVE SOLUTIONS, MOBILIZE RESOURCES AND TALENT, AND EMPOWER PARTNERS ACROSS THE FOOD SYSTEM TO MAKE ALTERNATIVE PROTEINS ACCESSIBLE, AFFORDABLE, AND DELICIOUS.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>7</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>6</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>132</TotalEmployeeCnt>
+      <TotalVolunteersCnt>54</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>41583843</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>26774736</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>751930</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>0</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>1057850</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>1308876</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>237743</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>60300</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>43631366</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>28143912</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>5328120</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>4573258</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>16021222</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>21394429</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>0</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>3347950</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>9688032</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>9452666</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>31037374</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>35420353</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>12593992</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>-7276441</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>65245715</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>62032056</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>6363710</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>7386672</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>58882005</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>54645384</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>TO HARNESS THE POWER OF FOOD INNOVATION AND MARKETS TO MAKE THE GLOBAL FOOD SYSTEM BETTER FOR THE PLANET, PEOPLE, AND ANIMALS BY SUPPORTING EFFORTS TO MAKE ALTERNATIVE PROTEINS ACCESSIBLE, AFFORDABLE, AND DELICIOUS.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>10290242</ExpenseAmt>
+      <GrantAmt>3723258</GrantAmt>
+      <RevenueAmt>0</RevenueAmt>
+      <Desc>SCIENCE AND TECHNOLOGY - GFI'S SCIENCE AND TECHNOLOGY DEPARTMENT ACCELERATES THE SCIENCE OF ALTERNATIVE PROTEIN TECHNOLOGIES. GFI'S SCIENTISTS ARE THE GLOBAL EXPERTS IN THIS SECTOR AND WORK TO ENSURE THAT A ROADMAP EXISTS FOR ALTERNATIVE PROTEIN INNOVATION, THAT THE BEST SCIENTISTS ARE ENGAGED IN RESEARCH AND DEVELOPMENT, AND THAT SIGNIFICANT FUNDS ARE DIRECTED TOWARD THE HIGHEST-IMPACT AREAS OF ALTERNATIVE PROTEIN RESEARCH.GFI'S SCITECH TEAM IS FOCUSED ON THREE PRINCIPAL ACTIVITIES:1. ANALYZING CURRENT AND FUTURE TECHNICAL CHALLENGES AND IDENTIFYING THE MOST IMPORTANT RESEARCH FOR ALTERNATIVE PROTEINS.2. MOBILIZING FUNDING FOR OPEN-ACCESS RESEARCH AND DEVELOPMENT OF ALTERNATIVE PROTEINS.3. INSPIRING AND SUPPORTING THE NEXT GENERATION OF INNOVATORS IN THE ALTERNATIVE PROTEIN INDUSTRY.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>5598130</ExpenseAmt>
+        <GrantAmt>0</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>POLICY AND GOVERNMENT RELATIONS - GFI'S POLICY AND GOVERNMENT RELATIONS DEPARTMENT IS FOCUSED ON REMOVING PUBLIC POLICY HURDLES AND DIRECTING PUBLIC INVESTMENT TO ACCELERATE PROGRESS ON THE WIDESPREAD ADOPTION OF ALTERNATIVE PROTEINS. THE POLICY AND GOVERNMENT RELATIONS TEAM PRIMARILY EDUCATES PUBLIC INSTITUTIONS, INCLUDING ELECTED OFFICIALS AND REGULATORS, AND USES IMPACT LITIGATION AS A STRATEGIC TOOL WHERE WARRANTED.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>4491125</ExpenseAmt>
+        <GrantAmt>467</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>CORPORATE ENGAGEMENT - GFI'S CORPORATE ENGAGEMENT DEPARTMENT WORKS TO EDUCATE COMPANIES AND INVESTORS TO PRIORITIZE ALTERNATIVE PROTEINS, ACCELERATE ALTERNATIVE PROTEIN INNOVATION, AND SCALE THE SUPPLY CHAIN. THE CORPORATE ENGAGEMENT TEAM'S WORK HELPS ENABLE FOOD INDUSTRY PARTNERS TO DEVELOP AND BRING TO MARKET ALTERNATIVE PROTEIN PRODUCTS THAT ARE AS ACCESSIBLE, AFFORDABLE, AND DELICIOUS AS CONVENTIONAL MEAT, EGGS, AND DAIRY. THE CORPORATE ENGAGEMENT TEAM EDUCATES AND EMPOWERS ENTITIES IN ALL STAGES OF THE SUPPLY CHAIN, INCLUDING ENTREPRENEURS AND STARTUPS, INVESTORS, FOOD AND MEAT MANUFACTURERS, INGREDIENT COMPANIES, GROCERY RETAILERS, FOODSERVICE COMPANIES, AND EQUIPMENT MANUFACTURERS.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>3599840</ExpenseAmt>
+        <GrantAmt>50000</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>COMMUNICATIONS - GFI'S COMMUNICATIONS DEPARTMENT POSITIONS GFI AS A GLOBAL THOUGHT LEADER AND TRUSTED SOURCE OF DATA AND INSIGHTS ACROSS THE FIELD OF ALTERNATIVE PROTEINS AND THROUGHOUT THE ADJACENT FIELDS OF CLIMATE, BIODIVERSITY, GLOBAL HEALTH, AND SUSTAINABLE, SECURE FOOD SYSTEMS. THE COMMUNICATIONS TEAM ELEVATES THE EXPERTISE OF OUR STAFF AND WORKS ACROSS THE ORGANIZATION AND FIELD TO PUBLISH AND DISSEMINATE ORIGINAL RESEARCH AND REPORTS, SECURE MEANINGFUL MEDIA COVERAGE, CONVENE AND PROMOTE COMMUNITY AND CAPACITY-BUILDING EVENTS, AND THOUGHTFULLY ENGAGE DECISION-MAKERS AND OTHER INFLUENCERS ACROSS THE PRIVATE AND PUBLIC SECTORS AND CIVIL SOCIETY TO POSITION ALTERNATIVE PROTEINS AS AN ESSENTIAL SOLUTION FOR A BETTER FOOD FUTURE.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>2353411</ExpenseAmt>
+        <GrantAmt>799533</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>INTERNATIONAL - GFI'S INTERNATIONAL PROGRAM CONSISTS OF TECHNICAL AND MANAGEMENT SUPPORT FROM ITS U.S. TEAM TO ITS FOREIGN AFFILIATES, AS WELL AS ADDITIONAL INTERNATIONAL ACTIVITIES LED DIRECTLY BY THE U.S. TEAM SUCH AS MANAGEMENT OF INTERNATIONAL SUB-GRANTS AND PROGRAMMATIC ACTIVITIES AIMED TO ACCELERATE WORLDWIDE ENGAGEMENT OF SCIENTISTS IN ALTERNATIVE PROTEIN RESEARCH, DRIVE GLOBAL POLICY AND REGULATORY ADVANCEMENTS, FOSTER SUCCESSFUL GENERATION OF INNOVATORS, AND AMPLIFY MEDIA COVERAGE OF ALTERNATIVE PROTEIN INNOVATION.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>5953251</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcGrantAmt>849533</TotalOtherProgSrvcGrantAmt>
+      <TotalOtherProgSrvcRevenueAmt>0</TotalOtherProgSrvcRevenueAmt>
+      <TotalProgramServiceExpensesAmt>26332748</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc1039100001">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd referenceDocumentId="RetDoc1039600001">0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd referenceDocumentId="RetDoc1039600001">1</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd referenceDocumentId="RetDoc1039600001">0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc1040000001">0</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc1040000001">0</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc1040000001">0</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc1040000001">0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc1040000001">1</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc1040000001">0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc1040000001">0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc1040000001">0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc1040000001">1</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc1040000001">1</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">1</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>1</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="RetDoc1040500001">1</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="RetDoc1040500001">1</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd referenceDocumentId="RetDoc1040500001">0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>0</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>0</FundraisingActivitiesInd>
+      <GamingActivitiesInd>0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="RetDoc1041900001">1</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd referenceDocumentId="RetDoc1041900001">0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="RetDoc1042400001">1</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd referenceDocumentId="RetDoc1042900001">1</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd referenceDocumentId="RetDoc1042900001">0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd referenceDocumentId="RetDoc1043400001">1</DisregardedEntityInd>
+      <RelatedEntityInd referenceDocumentId="RetDoc1043400001">1</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd referenceDocumentId="RetDoc1043400001">0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd referenceDocumentId="RetDoc1043400001">0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>44</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <EmployeeCnt>132</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>0</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>7</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>6</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>1</LocalChaptersInd>
+      <PoliciesReferenceChaptersInd>1</PoliciesReferenceChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>1</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>1</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>AL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>FL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>GA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>HI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>IL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MD</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NH</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NJ</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NM</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>PA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>RI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>SC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>TN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>VA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WV</StatesWhereCopyOfReturnIsFldCd>
+      <OwnWebsiteInd>X</OwnWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>BRUCE FRIEDRICH</BusinessNameLine1Txt>
+        </BusinessName>
+        <PhoneNum>2023062020</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>2503 D N HARRISON ST</AddressLine1Txt>
+          <CityNm>ARLINGTON</CityNm>
+          <StateAbbreviationCd>VA</StateAbbreviationCd>
+          <ZIPCd>63139</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANAND GOPAL</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BRUCE FRIEDRICH</PersonNm>
+        <TitleTxt>PRESIDENT AND FOUNDER</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>230799</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>21241</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CAMERON ICARD</PersonNm>
+        <TitleTxt>CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>3.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JOAN GASS</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>KATHLEEN FRESTON</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>NABIHA BASATHIA</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>VANDHANA BALASUBRAMANIAN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ILYA SHEYMAN</PersonNm>
+        <TitleTxt>CEO</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>225925</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>22475</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SARAH DAVID</PersonNm>
+        <TitleTxt>GEN. COUNSEL, SECRETARY, TREASURER</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>173558</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>21561</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CAROLINE BUSHNELL</PersonNm>
+        <TitleTxt>SVP - CORPORATE ENGAGEMENT</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>196663</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>19703</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CHETHANA BILIYAR</PersonNm>
+        <TitleTxt>VP OPERATIONS</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>168167</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>23530</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JESSICA ALMY</PersonNm>
+        <TitleTxt>SVP - POLICY AND GOVERNMENT RELATIONS</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>197947</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>30111</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SHEILA VOSS</PersonNm>
+        <TitleTxt>SVP - COMMUNICATIONS</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>199100</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>10826</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SUSAN MCCAUSLAND-HALTEMAN</PersonNm>
+        <TitleTxt>SVP - DEVELOPMENT</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>210448</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>19367</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>1602607</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>168814</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>52</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>1</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>MAUVE CORPORATE SYSTEMS UK</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <ForeignAddress>
+            <AddressLine1Txt>9 FRANKLINS YARD FOSSGATE</AddressLine1Txt>
+            <CityNm>YORK</CityNm>
+            <ProvinceOrStateNm>YORKSHIRE</ProvinceOrStateNm>
+            <CountryCd>UK</CountryCd>
+          </ForeignAddress>
+        </ContractorAddress>
+        <ServicesDesc>UK EOR</ServicesDesc>
+        <CompensationAmt>271300</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>MAUVE CORPORATE SYSTEMS AUSTRALIA</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <ForeignAddress>
+            <AddressLine1Txt>LEVEL ONE 54 NERIDAH STREET</AddressLine1Txt>
+            <CityNm>CHATSWOOD</CityNm>
+            <ProvinceOrStateNm>NEW SOUTH WALES</ProvinceOrStateNm>
+            <CountryCd>AS</CountryCd>
+            <ForeignPostalCd>2067</ForeignPostalCd>
+          </ForeignAddress>
+        </ContractorAddress>
+        <ServicesDesc>AUSTRALIA EOR</ServicesDesc>
+        <CompensationAmt>210027</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>TORREY ADVISORY GROUP</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>50 F STREET NW SUITE 650</AddressLine1Txt>
+            <CityNm>WASHINGTON</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>20001</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>DEVELOPING AND SUPPORTING FEDERAL AFFAIR</ServicesDesc>
+        <CompensationAmt>180000</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>3</CntrctRcvdGreaterThan100KCnt>
+      <GovernmentGrantsAmt>175204</GovernmentGrantsAmt>
+      <AllOtherContributionsAmt>26599532</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>5988508</NoncashContributionsAmt>
+      <TotalContributionsAmt>26774736</TotalContributionsAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>1358696</TotalRevenueColumnAmt>
+        <ExclusionAmt>1358696</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>42866038</SecuritiesAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>42915858</SecuritiesAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>-49820</SecuritiesAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>-49820</TotalRevenueColumnAmt>
+        <ExclusionAmt>-49820</ExclusionAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>OTHER INCOME</Desc>
+        <BusinessCd>900099</BusinessCd>
+        <TotalRevenueColumnAmt>60300</TotalRevenueColumnAmt>
+        <ExclusionAmt>60300</ExclusionAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>60300</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>28143912</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>1369176</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>1029693</TotalAmt>
+        <ProgramServicesAmt>1029693</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>3543565</TotalAmt>
+        <ProgramServicesAmt>3543565</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>695560</TotalAmt>
+        <ProgramServicesAmt>299074</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>378843</ManagementAndGeneralAmt>
+        <FundraisingAmt>17643</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>16147718</TotalAmt>
+        <ProgramServicesAmt>11398579</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2654254</ManagementAndGeneralAmt>
+        <FundraisingAmt>2094885</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>637977</TotalAmt>
+        <ProgramServicesAmt>417990</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>129897</ManagementAndGeneralAmt>
+        <FundraisingAmt>90090</FundraisingAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>2421581</TotalAmt>
+        <ProgramServicesAmt>1518673</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>516170</ManagementAndGeneralAmt>
+        <FundraisingAmt>386738</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>1491593</TotalAmt>
+        <ProgramServicesAmt>982547</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>314466</ManagementAndGeneralAmt>
+        <FundraisingAmt>194580</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesManagementGrp>
+        <TotalAmt>169156</TotalAmt>
+        <ProgramServicesAmt>50951</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>116648</ManagementAndGeneralAmt>
+        <FundraisingAmt>1557</FundraisingAmt>
+      </FeesForServicesManagementGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>159820</TotalAmt>
+        <ProgramServicesAmt>92401</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>67419</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>249657</TotalAmt>
+        <ManagementAndGeneralAmt>249657</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>584184</TotalAmt>
+        <ProgramServicesAmt>584184</ProgramServicesAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>6068438</TotalAmt>
+        <ProgramServicesAmt>5031362</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>743903</ManagementAndGeneralAmt>
+        <FundraisingAmt>293173</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>14712</TotalAmt>
+        <ProgramServicesAmt>14412</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>257</ManagementAndGeneralAmt>
+        <FundraisingAmt>43</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>175466</TotalAmt>
+        <ProgramServicesAmt>95786</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>47021</ManagementAndGeneralAmt>
+        <FundraisingAmt>32659</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>176</TotalAmt>
+        <ProgramServicesAmt>107</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>59</ManagementAndGeneralAmt>
+        <FundraisingAmt>10</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <OccupancyGrp>
+        <TotalAmt>229418</TotalAmt>
+        <ProgramServicesAmt>175819</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>45942</ManagementAndGeneralAmt>
+        <FundraisingAmt>7657</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>493025</TotalAmt>
+        <ProgramServicesAmt>323464</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>119970</ManagementAndGeneralAmt>
+        <FundraisingAmt>49591</FundraisingAmt>
+      </TravelGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>852320</TotalAmt>
+        <ProgramServicesAmt>512441</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>239447</ManagementAndGeneralAmt>
+        <FundraisingAmt>100432</FundraisingAmt>
+      </ConferencesMeetingsGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>12993</TotalAmt>
+        <ProgramServicesAmt>8976</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3440</ManagementAndGeneralAmt>
+        <FundraisingAmt>577</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>55056</TotalAmt>
+        <ProgramServicesAmt>30569</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>23214</ManagementAndGeneralAmt>
+        <FundraisingAmt>1273</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>FOREIGN EXCHANGE LOSS</Desc>
+        <TotalAmt>202035</TotalAmt>
+        <ProgramServicesAmt>115603</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>46338</ManagementAndGeneralAmt>
+        <FundraisingAmt>40094</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>SUBSCRIPTIONS</Desc>
+        <TotalAmt>93648</TotalAmt>
+        <ProgramServicesAmt>53585</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>21479</ManagementAndGeneralAmt>
+        <FundraisingAmt>18584</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>BANK, FILING AND OTHER</Desc>
+        <TotalAmt>79893</TotalAmt>
+        <ProgramServicesAmt>45718</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>18325</ManagementAndGeneralAmt>
+        <FundraisingAmt>15850</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>MISCELLANEOUS EXPENSES</Desc>
+        <TotalAmt>10526</TotalAmt>
+        <ProgramServicesAmt>6023</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2414</ManagementAndGeneralAmt>
+        <FundraisingAmt>2089</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>2143</TotalAmt>
+        <ProgramServicesAmt>1226</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>492</ManagementAndGeneralAmt>
+        <FundraisingAmt>425</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>35420353</TotalAmt>
+        <ProgramServicesAmt>26332748</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>5739655</ManagementAndGeneralAmt>
+        <FundraisingAmt>3347950</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>3803746</BOYAmt>
+        <EOYAmt>5157833</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>1004478</BOYAmt>
+        <EOYAmt>3611798</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>14553282</BOYAmt>
+        <EOYAmt>7862815</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <InventoriesForSaleOrUseGrp>
+        <EOYAmt>72500</EOYAmt>
+      </InventoriesForSaleOrUseGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>719990</BOYAmt>
+        <EOYAmt>664809</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>71669</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>43706</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>38867</BOYAmt>
+        <EOYAmt>27963</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>44939039</BOYAmt>
+        <EOYAmt>43980543</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>186313</BOYAmt>
+        <EOYAmt>653795</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>65245715</BOYAmt>
+        <EOYAmt>62032056</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>1628497</BOYAmt>
+        <EOYAmt>2232190</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <GrantsPayableGrp>
+        <BOYAmt>4548900</BOYAmt>
+        <EOYAmt>4500687</EOYAmt>
+      </GrantsPayableGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>186313</BOYAmt>
+        <EOYAmt>653795</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>6363710</BOYAmt>
+        <EOYAmt>7386672</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>42773587</BOYAmt>
+        <EOYAmt>41339904</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>16108418</BOYAmt>
+        <EOYAmt>13305480</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>58882005</BOYAmt>
+        <EOYAmt>54645384</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>65245715</BOYAmt>
+        <EOYAmt>62032056</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>-7276441</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>3039820</NetUnrlzdGainsLossesInvstAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <InfoInScheduleOPartXIIInd>X</InfoInScheduleOPartXIIInd>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>1</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <ConsolAndSepBasisFinclStmtInd>X</ConsolAndSepBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>18736534</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>42936683</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>15432490</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>41583843</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>26774736</CurrentTaxYearAmt>
+        <TotalAmt>145464286</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>18736534</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>42936683</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>15432490</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>41583843</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>26774736</CurrentTaxYearAmt>
+        <TotalAmt>145464286</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>25241610</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>120222676</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>127153</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>148212</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>202258</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>909567</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>1358696</CurrentTaxYearAmt>
+        <TotalAmt>2745886</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>45652</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>65207</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>59515</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>87836</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>60300</CurrentTaxYearAmt>
+        <TotalAmt>318510</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>148528682</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>1322915</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.80940</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.81960</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleC documentId="RetDoc1039600001">
+      <TotalGrassrootsLobbyingGrp>
+        <FilingOrganizationsTotalAmt>20182</FilingOrganizationsTotalAmt>
+      </TotalGrassrootsLobbyingGrp>
+      <TotalDirectLobbyingGrp>
+        <FilingOrganizationsTotalAmt>718240</FilingOrganizationsTotalAmt>
+      </TotalDirectLobbyingGrp>
+      <TotalLobbyingExpendGrp>
+        <FilingOrganizationsTotalAmt>738422</FilingOrganizationsTotalAmt>
+      </TotalLobbyingExpendGrp>
+      <OtherExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>25594326</FilingOrganizationsTotalAmt>
+      </OtherExemptPurposeExpendGrp>
+      <TotalExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>26332748</FilingOrganizationsTotalAmt>
+      </TotalExemptPurposeExpendGrp>
+      <LobbyingNontaxableAmountGrp>
+        <FilingOrganizationsTotalAmt>1000000</FilingOrganizationsTotalAmt>
+      </LobbyingNontaxableAmountGrp>
+      <GrassrootsNontaxableGrp>
+        <FilingOrganizationsTotalAmt>250000</FilingOrganizationsTotalAmt>
+      </GrassrootsNontaxableGrp>
+      <TotLbbyngGrassrootMnsNonTxGrp>
+        <FilingOrganizationsTotalAmt>0</FilingOrganizationsTotalAmt>
+      </TotLbbyngGrassrootMnsNonTxGrp>
+      <TotLbbyExpendMnsLbbyngNonTxGrp>
+        <FilingOrganizationsTotalAmt>0</FilingOrganizationsTotalAmt>
+      </TotLbbyExpendMnsLbbyngNonTxGrp>
+      <AvgLobbyingNontaxableAmountGrp>
+        <CurrentYearMinus3Amt>816250</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>1000000</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>1000000</CurrentYearMinus1Amt>
+        <CurrentYearAmt>1000000</CurrentYearAmt>
+        <TotalAmt>3816250</TotalAmt>
+      </AvgLobbyingNontaxableAmountGrp>
+      <LobbyingCeilingAmt>5724375</LobbyingCeilingAmt>
+      <AvgTotalLobbyingExpendGrp>
+        <CurrentYearMinus3Amt>473266</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>541458</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>548111</CurrentYearMinus1Amt>
+        <CurrentYearAmt>738422</CurrentYearAmt>
+        <TotalAmt>2301257</TotalAmt>
+      </AvgTotalLobbyingExpendGrp>
+      <AvgGrassrootsNontaxableGrp>
+        <CurrentYearMinus3Amt>204063</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>250000</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>250000</CurrentYearMinus1Amt>
+        <CurrentYearAmt>250000</CurrentYearAmt>
+        <TotalAmt>954063</TotalAmt>
+      </AvgGrassrootsNontaxableGrp>
+      <GrassrootsCeilingAmt>1431095</GrassrootsCeilingAmt>
+      <AvgGrassrootsLobbyingExpendGrp>
+        <CurrentYearMinus3Amt>3295</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>3070</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>1135</CurrentYearMinus1Amt>
+        <CurrentYearAmt>20182</CurrentYearAmt>
+        <TotalAmt>27682</TotalAmt>
+      </AvgGrassrootsLobbyingExpendGrp>
+    </IRS990ScheduleC>
+    <IRS990ScheduleD documentId="RetDoc1040000001">
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>71669</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>43706</DepreciationAmt>
+        <BookValueAmt>27963</BookValueAmt>
+      </EquipmentGrp>
+      <TotalBookValueLandBuildingsAmt>27963</TotalBookValueLandBuildingsAmt>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>RIGHT OF USE LEASE</Desc>
+        <Amt>653795</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>653795</TotalLiabilityAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART X, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE GOOD FOOD INSTITUTE, INC. REQUIRES THAT A TAX POSITION BE RECOGNIZED OR DERECOGNIZED BASED ON A "MORE-LIKELY-THAN-NOT" THRESHOLD. THIS APPLIES TO POSITIONS TAKEN OR EXPECTED TO BE TAKEN IN A TAX RETURN. GFI DOES NOT BELIEVE ITS CONSOLIDATED FINANCIAL STATEMENTS INCLUDE, OR REFLECT, ANY UNCERTAIN TAX POSITIONS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="RetDoc1040500001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EAST ASIA &amp; THE PACIFIC</RegionTxt>
+        <OfficesCnt>2</OfficesCnt>
+        <EmployeeCnt>16</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>2781633</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <OfficesCnt>1</OfficesCnt>
+        <EmployeeCnt>27</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>1571077</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SOUTH ASIA</RegionTxt>
+        <OfficesCnt>1</OfficesCnt>
+        <EmployeeCnt>15</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>725910</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST &amp; NORTH AFRICA</RegionTxt>
+        <OfficesCnt>1</OfficesCnt>
+        <EmployeeCnt>13</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>1840367</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND AND GREENLAND)</RegionTxt>
+        <OfficesCnt>1</OfficesCnt>
+        <EmployeeCnt>39</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>4140624</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EAST ASIA &amp; THE PACIFIC</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>SCALABLE PRODUCTION OF PRECISION-ENGINEERED ALTERNATIVE PROTEIN WITH MEAT-LIKE APPEARANCE AND TEXTURE; CHICKEN AND SHEEP TAG PRODUCTION FROM FOOD WASTE STREAMS WITH YEAST. TESTING EFFICIENT METHODS FOR ENHANCED STABILITY, SUSTAINED RELEASE AND EASE OF DELIVERY OF GROWTH FACTORS IN THE MEDIUM: LIPID COCHLEATE-BASED FORMULATION OF BASIC FIBROBLAST GROWTH FACTOR. ENGINEERING CONNECTIVE LAYER CONSTRUCTED BY PLANT PROTEIN FIBRILS FOR CREATING WHOLE-CUT MEAT SUBSTITUTES. UTILIZATION OF MICROALGAL FERMENTATION PRODUCT TO PRODUCE STRUCTURED PLANT-BASED FAT FOR MEAT ANALOGUE.</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>328255</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>SEAFOOD SPECIES CHARACTERIZATION. SCALABLE PROCESSES FOR OBTAINING 3D STRUCTURED WHOLE-CUTS OF FISH. WHOLE CUT CHICKEN ANALOGS FROM MASSIVE DYNAMIC COCOON-LIKE BACTERIAL CELLULOSE TISSUE-ENGINEERING CONSTRUCTS. BIOMIMIC OF FISH FILLETS USING FUNGAL PROTEINS BY ENZYMATIC TREATMENT OR WITH EXOPOLYSACCHARIDES PRODUCED BY LACTOBACILLUS SPP. ELECTROSPINNING OF PLANT PROTEINS TO PRODUCE 3D MEAT ANALOGUES. PRODUCE WHOLE CUTS OF CHICKEN MEAT WITH THE TASTE EXPERIENCE THROUGH COMBINATION OF CULTIVATED MEAT AND PLANT-BASED TECHNIQUES. DERIVATION OF EMBRYONIC SOMATIC CELLS AND TRANSGENE-FREE IPSCS FROM TWO IMPORTANT NEOTROPICAL FISH SPECIES.</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>945228</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST &amp; NORTH AFRICA</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>STUDY THE GENETIC BASIS OF PROLIFERATION IN CULTURED MEAT. DEVELOPMENT OF INJECTION-MOLDED STEAK. COST-EFFECTIVE EXTRACTION OF HIGH-QUALITY RUBISCO PROTEIN FROM A GREEN WASTE OF COMMON CROPS. DEVELOPING A FERMENTATION PROCESS FOR RECOMBINANT POTATO PATATIN. ASSEMBLY AND MATURATION OF SKELETAL MUSCLE ORGANOID BUILDING BLOCKS INTO THICK WHOLE-CUT. GRANT FOR ISRAEL AFFILIATE TO FUND SCIENCE AND TECHNOLOGY GRANTS.</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>330101</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND AND GREENLAND)</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>UNCOVERING THE SECRETOME OF EVOLVING PRIMARY MUSCLE CELLS FOR IN VITRO MEAT PRODUCTION. POLICY AND COMMUNICATIONS WORK. UNIVERSITY OF NOVI SAD ALT PROTEIN CLUB SUPPORT. CULTIVATED MEAT LIFECYCLE ANALYSIS. UNDERSTANDING AND CONTROLLING THE TEXTURE OF FILAMENTOUS FUNGI TO PATH THE WAY FOR MYCELIUM-BASED MEAT AND SEAFOOD ALTERNATIVES. ALGAE 2 FISH.</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>1937479</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <SubtotalOfficesCnt>6</SubtotalOfficesCnt>
+      <SubtotalEmployeesCnt>110</SubtotalEmployeesCnt>
+      <ContinuationTotalOfficeCnt>0</ContinuationTotalOfficeCnt>
+      <ContinuationTotalEmployeeCnt>0</ContinuationTotalEmployeeCnt>
+      <TotalOfficeCnt>6</TotalOfficeCnt>
+      <TotalEmployeeCnt>110</TotalEmployeeCnt>
+      <SubtotalSpentAmt>12663195</SubtotalSpentAmt>
+      <ContinuationSpentAmt>1937479</ContinuationSpentAmt>
+      <TotalSpentAmt>14600674</TotalSpentAmt>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>UPCYCLING WHEAT BRAN TO A NEW GENERATION OF FERMENTATION-BASED INGREDIENTS VIA HIGH THROUGHOUT SCREENING AND PROCESS UPSCALING (WHEAT-UP)</PurposeOfGrantTxt>
+        <CashGrantAmt>300000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>KAZBAR INNOVATIVE MEAT PROTEIN ALTERNATIVES PRODUCED THROUGH COST-EFFECTIVE TECHNOLOGIES</PurposeOfGrantTxt>
+        <CashGrantAmt>299235</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>FEENIX - ADVANCING CIRCULAR FOOD VALUE CHAINS WITH THE REPURPOSING OF SUNFLOWER SEED PROCESSING SIDE STREAMS</PurposeOfGrantTxt>
+        <CashGrantAmt>298208</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>PEARL - PATH TO EFFICIENT ALBUMIN RECOVERY FOR RESOURCE LEVERAGING</PurposeOfGrantTxt>
+        <CashGrantAmt>295910</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EAST ASIA AND THE PACIFIC</RegionTxt>
+        <PurposeOfGrantTxt>JUAN DU: OPTIMIZING SEAWEED PROTEINS TO CULTIVATED MEAT (SEATOMEAT)</PurposeOfGrantTxt>
+        <CashGrantAmt>289140</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>AQUEOUS TWO-PHASES SYSTEMS FOR A GREEN AND EFFICIENT DOWNSTREAM PROCESSING OF THE CELL BIOMASS OBTAINED BY PRECISION FERMENTATION</PurposeOfGrantTxt>
+        <CashGrantAmt>250000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>DEVELOPMENT OF OLEAGINOUS YEAST EXTRACT HYDROLYSATES FROM A SUSTAINABLE MULTI-STEP PROCESS USING LUPIN WASTE BIOMASS FOR THE CULTIVATED MEAT INDUSTRY</PurposeOfGrantTxt>
+        <CashGrantAmt>250000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>FROM TRASH TO CASH: BIOTECHNOLOGICAL RECYCLING OF EXHAUSTED CELL CULTURE MEDIA AND SUSTAINABLE PRODUCTION OF HYDROLYSATES FOR CULTIVATED MEAT USING MICROALGAE</PurposeOfGrantTxt>
+        <CashGrantAmt>249700</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>SOCCOL LOW-COST CULTIVATION MEDIA DERIVED FROM ALGAE AND EDIBLE FUNGI FOR CELLULAR MEAT PRODUCTION IN A CIRCULAR ECONOMY APPROACH</PurposeOfGrantTxt>
+        <CashGrantAmt>249588</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>BELL BIOCHEMICAL AND FUNCTIONAL ASSESSMENT OF PLANT-BASED HYDROLYSATES FOR SERUM-FREE BOVINE CELL CULTURE APPLICATIONS</PurposeOfGrantTxt>
+        <CashGrantAmt>230790</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>MATCH-FUNDING PROPOSAL FOR ALTERNATIVE PROTEINS</PurposeOfGrantTxt>
+        <CashGrantAmt>183690</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>DEVELOPING FAT REPLACEMENT FOR BIO-PRINTED CULTIVATED MEAT IN THE FORM OF PICKERING EMULSIONS STABILIZED WITH NANOPARTICLES; ENHANCING S-BASED COMPOUND LEVELS IN CROPS; HARNESSING NATURALLY FIBRIL-FORMING PROTEINS OF THE EDIBLE FUNGUS NEUROSPORA INTERMEDIA TO FORM MEAT ALTERNATIVES: TOWARDS CIRCULAR BIOECONOMY, SUSTAINABILITY AND FOOD SECURITY</PurposeOfGrantTxt>
+        <CashGrantAmt>90319</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>DEVELOPMENT OF FLOUR BASED ON BY-PRODUCTS FROM BABASSU PROCESSING OBTAINED THROUGH HYDROLYSIS AND FERMENTATION FOR APPLICATION IN MEAT ANALOGUE PRODUCTS</PurposeOfGrantTxt>
+        <CashGrantAmt>48335</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>BIOAMAZON2MEAT: SUSTAINABLE DEVELOPMENT OF MEAT ANALOGUES BASED ON ANISOTROPIC PROTEIN STRUCTURES AND AMAZONIAN RAW MATERIALS</PurposeOfGrantTxt>
+        <CashGrantAmt>45057</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>ROADMAP AND KEY STEPS FOR ALTERNATIVE PROTEINS TOWARD FOOD SECURITY</PurposeOfGrantTxt>
+        <CashGrantAmt>41242</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>DEVELOPMENT OF SUNA: A SEAWEED BASED ALTERNATIVE TO CANNED TUNAMIMICKING FAT PERCEPTION - PEPTIDE-BASED CD36 ACTIVATION FOR ENHANCED FOOD SENSORY EXPERIENCE</PurposeOfGrantTxt>
+        <CashGrantAmt>41242</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>AMAZONIAN FUNGI AS A POTENTIAL HEALTHY AND SUSTAINABLE ALTERNATIVE FOR THE DEVELOPMENT OF MEAT ANALOGUE PRODUCTS; STRUCTURING INGREDIENTS FROM GUARANA RESIDUE FOR THE DEVELOPMENT OF MEAT ANALOGUES</PurposeOfGrantTxt>
+        <CashGrantAmt>47914</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EAST ASIA AND THE PACIFIC</RegionTxt>
+        <PurposeOfGrantTxt>R&amp;D GAP ANALYSIS, NOMENCLATURE STUDY, NUTRITION AND ADVANCED MARKET SHAPINT WORKS</PurposeOfGrantTxt>
+        <CashGrantAmt>37115</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>DEVELOPMENT OF ADVANCED SYSTEMS FOR THE EXPRESSION AND HIGHLY SENSITIVE DETECTION OF GROWTH FACTORS</PurposeOfGrantTxt>
+        <CashGrantAmt>35743</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>VALORIZATION OF THE TUCUMA FRUIT PRODUCTION CHAIN THROUGH THE DEVELOPMENT OF PLANT-BASED INGREDIENTS</PurposeOfGrantTxt>
+        <CashGrantAmt>34564</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>EVALUATING THE POTENTIAL OF NOVEL FUNGAL STRAINS FOR MYCELIUM-BASED PROTEIN PRODUCTION THROUGH SUBMERGED FERMENTATION</PurposeOfGrantTxt>
+        <CashGrantAmt>34368</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>ESTABLISHING CULTIVATED FISH CELL LINES USING AN INNOVATIVE AI-GUIDED APPROACH</PurposeOfGrantTxt>
+        <CashGrantAmt>34368</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>BRAZIL NUT: AN ALTERNATIVE PROTEIN FOR THE PLANT-BASED MARKET</PurposeOfGrantTxt>
+        <CashGrantAmt>27884</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>CULTURED MEAT BIOPRODUCTION PLATFORM UTILIZING EDIBLE PLANT BASED SCAFFOLDS AND A SINGLE USE BIOREACTOR MADE FROM BARRIER FILM</PurposeOfGrantTxt>
+        <CashGrantAmt>20621</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>OPTIMIZATION OF MEDIA COMPONENTS FOR LIPID PRODUCTION BY OLEAGINOUS YEAST</PurposeOfGrantTxt>
+        <CashGrantAmt>17184</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>STRUCTURING INGREDIENTS FROM GUARANA RESIDUE FOR THE DEVELOPMENT OF MEAT ANALOGUE PRODUCTS</PurposeOfGrantTxt>
+        <CashGrantAmt>16569</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>DEVELOPMENT OF FLOUR BASED ON BY-PRODUCTS FROM BABASSU PROCESSING OBTAINED THROUGH HYDROLYSIS AND FERMENTATION FOR APPLICATION IN MEAT ANALOGUE PRODUCTS</PurposeOfGrantTxt>
+        <CashGrantAmt>14649</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>MIDDLE EAST AND NORTH AFRICA</RegionTxt>
+        <PurposeOfGrantTxt>GENERAL SUPPORT</PurposeOfGrantTxt>
+        <CashGrantAmt>14014</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <PurposeOfGrantTxt>OBTAINING PLANT-BASED FLAVORING FROM AMAZONIAN SOURCES THROUGH A CONTROLLED FERMENTATION PROCESS</PurposeOfGrantTxt>
+        <CashGrantAmt>10815</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>N/A</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FAIR MARKET VALUE</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <Total501c3OrgCnt>2</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>27</TotalOtherOrgCnt>
+      <TransferToForeignCorpInd>0</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>0</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>0</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>0</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>0</ForeignPartnershipInd>
+      <BoycottCountriesInd>0</BoycottCountriesInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>EACH GRANTEE SUBMITS A BUDGET PROPOSAL AND ONCE AN AGREED UPON BUDGET IS REACHED, GFI SENDS THE GRANTEE A LETTER STATING THE AMOUNT OF FUNDS TO BE DISBURSED AND A DESCRIPTION OF THE USE OF THE FUNDS. AT THE COMPLETION OF THE AWARD PERIOD, THE GRANTEE SUBMITS A FINAL REPORT THAT CONTAINS A SUMMARY OF THE USE OF FUNDS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART II, LINE 1 ACCOUNTING METHOD:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION USES THE ACCRUAL METHOD OF ACCOUNTING TO ACCOUNT FOR CASH GRANTS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleF>
+    <IRS990ScheduleI documentId="RetDoc1041900001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CONSERVATION X LABS INC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1066 31ST STREET NW</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20007</ZIPCd>
+        </USAddress>
+        <RecipientEIN>474066524</RecipientEIN>
+        <CashGrantAmt>50000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <ValuationMethodUsedDesc>N/A</ValuationMethodUsedDesc>
+        <NonCashAssistanceDesc>N/A</NonCashAssistanceDesc>
+        <PurposeOfGrantTxt>DEVELOPING AND PUBLISHING A TECHNICALLY SOUND WHITE PAPER OR POLICY BRIEF ON WHY AND HOW CONSERVATION ORGANIZATIONS SHOULD ADVANCE THE DEVELOPMENT OF APS</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CURATORS OF THE UNIVERSITY OF MISSOURI</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>601 TURNER AVENUE TURNER AVENUE</AddressLine1Txt>
+          <AddressLine2Txt>GARAGE ROOM 201</AddressLine2Txt>
+          <CityNm>COLUMBIA</CityNm>
+          <StateAbbreviationCd>MO</StateAbbreviationCd>
+          <ZIPCd>652110001</ZIPCd>
+        </USAddress>
+        <RecipientEIN>436003859</RecipientEIN>
+        <CashGrantAmt>246178</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <ValuationMethodUsedDesc>N/A</ValuationMethodUsedDesc>
+        <NonCashAssistanceDesc>N/A</NonCashAssistanceDesc>
+        <PurposeOfGrantTxt>VARDHANABHUTI RE-IMAGINING SOY PROTEIN THROUGH PLANT BREEDING INNOVATION AND OPTIMIZED ALTERNATIVE PROCESSING</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>DECO LABS</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>136 HARRISON AVENUE</AddressLine1Txt>
+          <CityNm>BOSTON</CityNm>
+          <StateAbbreviationCd>MA</StateAbbreviationCd>
+          <ZIPCd>02111</ZIPCd>
+        </USAddress>
+        <RecipientEIN>990647386</RecipientEIN>
+        <CashGrantAmt>250000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <ValuationMethodUsedDesc>N/A</ValuationMethodUsedDesc>
+        <NonCashAssistanceDesc>N/A</NonCashAssistanceDesc>
+        <PurposeOfGrantTxt>STOUT FEED2FOOD: DEVELOPMENT OF FOOD-GRAND HANDLING PROTOCOLS &amp; ASSESSMENT IN SIDE STREAMS USED FOR CULTIVATED MEAT MEDIUM COMPONENTS</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>DPROTEIN INC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>38 KEYES AVE SUITE 101</AddressLine1Txt>
+          <CityNm>SAN FRANSICO</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94129</ZIPCd>
+        </USAddress>
+        <RecipientEIN>871649519</RecipientEIN>
+        <CashGrantAmt>218296</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <ValuationMethodUsedDesc>N/A</ValuationMethodUsedDesc>
+        <NonCashAssistanceDesc>N/A</NonCashAssistanceDesc>
+        <PurposeOfGrantTxt>PROTEIN AND CELL ENGINEERING TO IMPROVE CELL SEPARATION, PROTEIN PURIFICATION AND DRYING AFTER PRECISION FERMENTATION</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>PURDUE UNIVERSITY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>585 PURDUE MALL</AddressLine1Txt>
+          <CityNm>WEST LAFAYETTE</CityNm>
+          <StateAbbreviationCd>IN</StateAbbreviationCd>
+          <ZIPCd>47907</ZIPCd>
+        </USAddress>
+        <RecipientEIN>356002041</RecipientEIN>
+        <CashGrantAmt>249999</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <ValuationMethodUsedDesc>N/A</ValuationMethodUsedDesc>
+        <NonCashAssistanceDesc>N/A</NonCashAssistanceDesc>
+        <PurposeOfGrantTxt>DR CHEN 2022 GRANT AWARD: REDUCE THE COST OF PLANT-BASED MEAT ANALOG WITHOUT AFFECTING ITS TEXTURE AND NUTRITION BY USING HYDROLYZED PEA PROTEINS</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>TUFTS UNIVERSITY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>136 HARRISON AVENUE 75K-950</AddressLine1Txt>
+          <CityNm>BOSTON</CityNm>
+          <StateAbbreviationCd>MA</StateAbbreviationCd>
+          <ZIPCd>02111</ZIPCd>
+        </USAddress>
+        <RecipientEIN>042103634</RecipientEIN>
+        <CashGrantAmt>5462</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <ValuationMethodUsedDesc>N/A</ValuationMethodUsedDesc>
+        <NonCashAssistanceDesc>N/A</NonCashAssistanceDesc>
+        <PurposeOfGrantTxt>ALT PROTEIN CLUB FUNDING</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>3</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>3</TotalOtherOrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>EACH GRANTEE SUBMITS A BUDGET PROPOSAL AND ONCE AN AGREED UPON BUDGET IS REACHED, GFI SENDS THE GRANTEE A LETTER STATING THE AMOUNT OF FUNDS TO BE DISBURSED AND A DESCRIPTION OF THE USE OF THE FUNDS. AT THE COMPLETION OF THE AWARD PERIOD, THE GRANTEE SUBMITS A FINAL REPORT THAT CONTAINS A SUMMARY OF THE USE OF FUNDS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleJ documentId="RetDoc1042400001">
+      <CompensationCommitteeInd>X</CompensationCommitteeInd>
+      <Form990OfOtherOrganizationsInd>X</Form990OfOtherOrganizationsInd>
+      <WrittenEmploymentContractInd>X</WrittenEmploymentContractInd>
+      <CompensationSurveyInd>X</CompensationSurveyInd>
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>0</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>0</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>0</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>0</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>0</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>0</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>0</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>0</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>0</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>BRUCE FRIEDRICH</PersonNm>
+        <TitleTxt>PRESIDENT AND FOUNDER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>230799</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>9600</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>11641</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>252040</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>ILYA SHEYMAN</PersonNm>
+        <TitleTxt>CEO</TitleTxt>
+        <BaseCompensationFilingOrgAmt>225925</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>9332</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>13143</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>248400</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>SUSAN MCCAUSLAND-HALTEMAN</PersonNm>
+        <TitleTxt>SVP - DEVELOPMENT</TitleTxt>
+        <BaseCompensationFilingOrgAmt>210448</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>8429</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>10938</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>229815</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>JESSICA ALMY</PersonNm>
+        <TitleTxt>SVP - POLICY AND GOVERNMENT RELATION</TitleTxt>
+        <BaseCompensationFilingOrgAmt>197947</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>8401</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>21710</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>228058</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>CAROLINE BUSHNELL</PersonNm>
+        <TitleTxt>SVP - CORPORATE ENGAGEMENT</TitleTxt>
+        <BaseCompensationFilingOrgAmt>196663</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>8010</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>11693</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>216366</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>SHEILA VOSS</PersonNm>
+        <TitleTxt>SVP - COMMUNICATIONS</TitleTxt>
+        <BaseCompensationFilingOrgAmt>199100</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>7964</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>2862</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>209926</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>SARAH DAVID</PersonNm>
+        <TitleTxt>GEN. COUNSEL, SECRETARY, TREASURER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>173558</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>7177</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>14384</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>195119</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>CHETHANA BILIYAR</PersonNm>
+        <TitleTxt>VP OPERATIONS</TitleTxt>
+        <BaseCompensationFilingOrgAmt>168167</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>7045</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>16485</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>191697</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE GFI COMPENSATION COMMITTEE, AN INDEPENDENT BODY, CONDUCTS AN ANNUAL REVIEW OF THE COMPENSATION OF THE PRESIDENT/FOUNDER, CHIEF EXECUTIVE OFFICER AND OTHER SENIOR LEADERSHIP. THE COMMITTEE EVALUATES THE REASONABLENESS OF COMPENSATION AS IT COMPARES TO REMUNERATION FOR SIMILARLY QUALIFIED INDIVIDUALS WITH COMPARABLE BACKGROUND, EXPERIENCE, EDUCATION, ETC. THIS IS ACCOMPLISHED BY REVIEWING SALARY AND BENEFITS DATA OF VARIOUS NONPROFIT ORGANIZATIONS, FOCUSING, WHEN POSSIBLE, ON THOSE WITH SIMILAR MISSIONS AND OF SIMILAR BUDGET SIZE. THE COMMITTEE USES A VARIETY OF SOURCES, INCLUDING SALARY AND BENEFIT SURVEYS PREPARED BY INDEPENDENT SOURCES, IRS 990'S POSTED ON WEBSITES THAT MONITOR/EVALUATE CHARITIES, ETC. THE COMMITTEE CONTEMPORANEOUSLY DOCUMENTS ITS REVIEW PROCEDURES AND PRESENTS THE FINDINGS TO THE BOARD OF DIRECTORS. THIS PROCESS WAS LAST COMPLETED IN 2024.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleM documentId="RetDoc1042900001">
+      <SecuritiesPubliclyTradedGrp>
+        <NonCashCheckboxInd>X</NonCashCheckboxInd>
+        <ContributionCnt>32961</ContributionCnt>
+        <NoncashContributionsRptF990Amt>5988508</NoncashContributionsRptF990Amt>
+        <MethodOfDeterminingRevenuesTxt>MARKET VALUE</MethodOfDeterminingRevenuesTxt>
+      </SecuritiesPubliclyTradedGrp>
+      <AnyPropertyThatMustBeHeldInd>0</AnyPropertyThatMustBeHeldInd>
+      <ReviewProcessUnusualNCGiftsInd>1</ReviewProcessUnusualNCGiftsInd>
+      <ThirdPartiesUsedInd>0</ThirdPartiesUsedInd>
+    </IRS990ScheduleM>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>SUBSTANTIVE SECTIONS OF THE FORM 990 WERE REVIEWED BY THE CEO, GENERAL COUNSEL, VICE PRESIDENT OPERATIONS, DIRECTOR OF FINANCE AND OPERATIONS, AND SENIOR FINANCE MANAGER AS WELL AS OTHER KEY PERSONNEL. ALL MEMBERS OF THE BOARD OF DIRECTORS WERE PROVIDED A COMPLETE ELECTRONIC COPY OF THIS FORM 990 PRIOR TO IT BEING SUBMITTED TO THE IRS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>IN CONNECTION WITH ANY ACTUAL OR POSSIBLE CONFLICT OF INTEREST, AN INTERESTED PERSON MUST DISCLOSE THE EXISTENCE OF THE FINANCIAL INTEREST AND BE GIVEN THE OPPORTUNITY TO DISCLOSE ALL MATERIAL FACTS TO THE DIRECTORS CONSIDERING THE PROPOSED TRANSACTION OR ARRANGEMENT AT THE TIME OF HIRE AND ANY TIME A POTENTIAL CONFLICT ARISES. THE EMPLOYEE MUST DISCLOSE THAT POTENTIAL CONFLICT TO HIS OR HER IMMEDIATE SUPERVISOR WHENEVER POSSIBLE, BEFORE ENGAGING IN ANY ACTIVITY, TRANSACTION OR RELATIONSHIP THAT MIGHT GIVE RISE TO A CONFLICT OF INTEREST, EMPLOYEES SHOULD CONSULT WITH THEIR IMMEDIATE SUPERVISOR(S) OR THE GENERAL COUNSEL.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 15</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE GFI COMPENSATION COMMITTEE, AN INDEPENDENT BODY, CONDUCTS AN ANNUAL REVIEW OF THE COMPENSATION OF THE PRESIDENT, CHIEF EXECUTIVE OFFICER AND OTHER SENIOR LEADERSHIP. THE COMMITTEE EVALUATES THE REASONABLENESS OF COMPENSATION AS IT COMPARES TO REMUNERATION FOR SIMILARLY QUALIFIED INDIVIDUALS WITH COMPARABLE BACKGROUND, EXPERIENCE, EDUCATION, ETC. THIS IS ACCOMPLISHED BY REVIEWING SALARY AND BENEFITS DATA OF VARIOUS NONPROFIT ORGANIZATIONS, FOCUSING, WHEN POSSIBLE, ON THOSE WITH SIMILAR MISSIONS AND OF SIMILAR BUDGET SIZE. THE COMMITTEE USES A VARIETY OF SOURCES, INCLUDING SALARY AND BENEFIT SURVEYS PREPARED BY INDEPENDENT SOURCES, IRS 990'S POSTED ON WEBSITES THAT MONITOR/EVALUATE CHARITIES, ETC. THE COMMITTEE CONTEMPORANEOUSLY DOCUMENTS ITS REVIEW PROCEDURES AND PRESENTS THE FINDINGS TO THE BOARD OF DIRECTORS. THIS PROCESS WAS LAST COMPLETED IN 2024.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE GOVERNING DOCUMENTS, CONFLICT OF INTEREST POLICY, AND FINANCIAL STATEMENTS ARE AVAILABLE ON REQUEST AS DETERMINED BY THE VICE PRESIDENT OF DEVELOPMENT.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART IX, LINE 11G</FormAndLineReferenceDesc>
+        <ExplanationTxt>CONSULTING/CONTRACTUAL: PROGRAM SERVICE EXPENSES 2,881,291. MANAGEMENT AND GENERAL EXPENSES 426,008. FUNDRAISING EXPENSES 167,890. TOTAL EXPENSES 3,475,189. GRAPHIC &amp; WEB DESIGN VIDEO PRODUCTION AND WRITING/EDITING: PROGRAM SERVICE EXPENSES 151,293. MANAGEMENT AND GENERAL EXPENSES 22,369. FUNDRAISING EXPENSES 8,816. TOTAL EXPENSES 182,478. MARKET RESEARCH: PROGRAM SERVICE EXPENSES 768,913. MANAGEMENT AND GENERAL EXPENSES 113,686. FUNDRAISING EXPENSES 44,804. TOTAL EXPENSES 927,403. SOFTWARE AS SERVICE AND OTHER: PROGRAM SERVICE EXPENSES 609,453. MANAGEMENT AND GENERAL EXPENSES 90,110. FUNDRAISING EXPENSES 35,512. TOTAL EXPENSES 735,075. INTERNATIONAL CONTRACTORS: PROGRAM SERVICE EXPENSES 620,412. MANAGEMENT AND GENERAL EXPENSES 91,730. FUNDRAISING EXPENSES 36,151. TOTAL EXPENSES 748,293.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART XII, LINE 2C:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THIS PROCESS HAS NOT CHANGED FROM THE PRIOR YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+    <IRS990ScheduleR documentId="RetDoc1043400001">
+      <IdDisregardedEntitiesGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE ASIA PACIFIC</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>FLAT A 22/F WING CHEONG COMM BLD</AddressLine1Txt>
+          <CityNm>HONG KONG</CityNm>
+          <CountryCd>HK</CountryCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>HK</LegalDomicileForeignCountryCd>
+        <TotalIncomeAmt>1669377</TotalIncomeAmt>
+        <EndOfYearAssetsAmt>252094</EndOfYearAssetsAmt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE INC</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+      </IdDisregardedEntitiesGrp>
+      <IdDisregardedEntitiesGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>ASSOCIACAO THE GOOD FOOD INST DO BRASIL</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>RUA CONEGO EUGENIO LEITE 840-PINHE</AddressLine1Txt>
+          <CityNm>SAU PAULO</CityNm>
+          <CountryCd>BR</CountryCd>
+          <ForeignPostalCd>05414-001</ForeignPostalCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>BR</LegalDomicileForeignCountryCd>
+        <TotalIncomeAmt>1937035</TotalIncomeAmt>
+        <EndOfYearAssetsAmt>509815</EndOfYearAssetsAmt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE INC</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+      </IdDisregardedEntitiesGrp>
+      <IdDisregardedEntitiesGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE EUROPE ASBL</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>DREVE DU PRESSOIR 38 1190</AddressLine1Txt>
+          <CityNm>BRUSSELS</CityNm>
+          <CountryCd>BE</CountryCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>BE</LegalDomicileForeignCountryCd>
+        <TotalIncomeAmt>4296589</TotalIncomeAmt>
+        <EndOfYearAssetsAmt>1118595</EndOfYearAssetsAmt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE INC</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+      </IdDisregardedEntitiesGrp>
+      <IdDisregardedEntitiesGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>ALTERNATIVE PROTEIN SOLUTIONS PRIVATE LIMITED</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>505 FLOOR 5TH 123 OM CHAMBERS A</AddressLine1Txt>
+          <CityNm>MUMBAI</CityNm>
+          <CountryCd>IN</CountryCd>
+          <ForeignPostalCd>40003-6</ForeignPostalCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>IN</LegalDomicileForeignCountryCd>
+        <TotalIncomeAmt>728726</TotalIncomeAmt>
+        <EndOfYearAssetsAmt>213017</EndOfYearAssetsAmt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE INC</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+      </IdDisregardedEntitiesGrp>
+      <IdDisregardedEntitiesGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE ISRAEL</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>YAHALOM 7</AddressLine1Txt>
+          <CityNm>SHOHAM</CityNm>
+          <CountryCd>IS</CountryCd>
+          <ForeignPostalCd>60805-07</ForeignPostalCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>IS</LegalDomicileForeignCountryCd>
+        <TotalIncomeAmt>1843419</TotalIncomeAmt>
+        <EndOfYearAssetsAmt>313449</EndOfYearAssetsAmt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE INC</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+      </IdDisregardedEntitiesGrp>
+      <IdDisregardedEntitiesGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>THE GOOD PROTEIN NETWORK LIMITED</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <ForeignAddress>
+          <AddressLine1Txt>11 IRVING PLACE 09-01</AddressLine1Txt>
+          <CityNm>SINGAPORE</CityNm>
+          <CountryCd>SN</CountryCd>
+          <ForeignPostalCd>36955-1</ForeignPostalCd>
+        </ForeignAddress>
+        <PrimaryActivitiesTxt>HARNESS THE POWER OF ALTERNATIVE PROTEINS TO IMPROVE THE GLOBAL FOOD SYSTEM</PrimaryActivitiesTxt>
+        <LegalDomicileForeignCountryCd>SN</LegalDomicileForeignCountryCd>
+        <TotalIncomeAmt>1823966</TotalIncomeAmt>
+        <EndOfYearAssetsAmt>910449</EndOfYearAssetsAmt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>THE GOOD FOOD INSTITUTE INC</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+      </IdDisregardedEntitiesGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>GOOD FOOD LEGISLATIVE FUND INC</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>2503 N HARRISON ST 19</AddressLine1Txt>
+          <CityNm>ARLINGTON</CityNm>
+          <StateAbbreviationCd>VA</StateAbbreviationCd>
+          <ZIPCd>22207</ZIPCd>
+        </USAddress>
+        <EIN>843138225</EIN>
+        <PrimaryActivitiesTxt>WORK WITH LEGISLATORS TO TRANSFORM FOOD SYSTEMS TOWARD ALTERNATIVE PROTEINS</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>VA</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501(C)(4)</ExemptCodeSectionTxt>
+        <ControlledOrganizationInd>0</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <ReceiptOfIntAnntsRntsRyltsInd>0</ReceiptOfIntAnntsRntsRyltsInd>
+      <GiftGrntOrCapContriToOthOrgInd>0</GiftGrntOrCapContriToOthOrgInd>
+      <GiftGrntCapContriFromOthOrgInd>0</GiftGrntCapContriFromOthOrgInd>
+      <LoansOrGuaranteesToOtherOrgInd>0</LoansOrGuaranteesToOtherOrgInd>
+      <LoansOrGuaranteesFromOthOrgInd>0</LoansOrGuaranteesFromOthOrgInd>
+      <DivRelatedOrganizationInd>0</DivRelatedOrganizationInd>
+      <AssetSaleToOtherOrgInd>0</AssetSaleToOtherOrgInd>
+      <AssetPurchaseFromOtherOrgInd>0</AssetPurchaseFromOtherOrgInd>
+      <AssetExchangeInd>0</AssetExchangeInd>
+      <RentalOfFacilitiesToOthOrgInd>0</RentalOfFacilitiesToOthOrgInd>
+      <RentalOfFcltsFromOthOrgInd>0</RentalOfFcltsFromOthOrgInd>
+      <PerformOfServicesForOthOrgInd>0</PerformOfServicesForOthOrgInd>
+      <PerformOfServicesByOtherOrgInd>0</PerformOfServicesByOtherOrgInd>
+      <SharingOfFacilitiesInd>0</SharingOfFacilitiesInd>
+      <PaidEmployeesSharingInd>0</PaidEmployeesSharingInd>
+      <ReimbursementPaidToOtherOrgInd>0</ReimbursementPaidToOtherOrgInd>
+      <ReimbursementPaidByOtherOrgInd>0</ReimbursementPaidByOtherOrgInd>
+      <TransferToOtherOrgInd>0</TransferToOtherOrgInd>
+      <TransferFromOtherOrgInd>0</TransferFromOtherOrgInd>
+    </IRS990ScheduleR>
+  </ReturnData>
+</Return>

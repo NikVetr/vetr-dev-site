@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Results for Development
+ein: 20-8530747
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 76.0
+ceo_name: Gina Lagomarsino
+ceo_title: President & CEO
+top_executive_basis: explicit CEO
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-09-30
+irs_object_id: 202512739349302306
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202512739349302306_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/208530747
+part_vii_org: 384084.0
+part_vii_related: 0.0
+part_vii_other: 13800.0
+cash_proxy: 384084.0
+total_proxy: 397884.0
+schedule_j_base: 
+revenue: 49137699.0
+expenses: 48542325.0
+employee_count: 140.0
+full_year_status: yes
+founder_flag: no
+structure_flag: above_primary_scale
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: Above RP core scale; retained in broad and wider-scale sensitivities.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link
+source_id: SRC-990-EXT-RESULTS-FOR-DEVELOPMENT
+part_vii_org_jul2026: 408852.8104400699
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 14689.93445202863
+cash_proxy_jul2026: 408852.8104400699
+total_proxy_jul2026: 423542.7448920985
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: True
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.9237217099748531

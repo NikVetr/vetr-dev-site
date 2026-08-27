@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Future of Privacy Forum
+ein: 45-3763097
+source_wave: legacy_original
+peer_tier: strict_primary
+ea_affinity: EA-adjacent
+comparability_score: 93.0
+ceo_name: Jules Polonetsky
+ceo_title: Chief Executive Officer
+top_executive_basis: legacy verified
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-17
+irs_object_id: 202543219349319589
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202543219349319589_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/453763097
+part_vii_org: 741942.0
+part_vii_related: 0.0
+part_vii_other: 66751.0
+cash_proxy: 741942.0
+total_proxy: 808693.0
+schedule_j_base: 
+revenue: 9862821.0
+expenses: 14356624.0
+employee_count: 
+full_year_status: yes
+founder_flag: yes
+structure_flag: founder_and_unusually_high_cash_proxy
+analysis_status: primary
+exclusion_reason: 
+notes: Retained under no-pay-driven-removal rule; isolated in founder and unusual-structure sensitivities.
+retrieved_at: 2026-08-25
+extraction_location: Form 990 Part VII Section A, columns D/E/F; rendered ProPublica Compensation table. Revenue/expenses from rendered Extracted Financial Data. Exact XML element names unavailable without raw XML.
+source_id: SRC-990-EXT-FUTURE-OF-PRIVACY-FORUM
+part_vii_org_jul2026: 789788.3584932628
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 71055.63873966399
+cash_proxy_jul2026: 789788.3584932628
+total_proxy_jul2026: 860843.9972329268
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 1.1303436714165966

@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-BLS-CPI-HIST
+Organization: U.S. Bureau of Labor Statistics
+Document type: historical CPI series
+Original URL: https://www.bls.gov/cpi/data.htm
+Resolved URL: https://www.bls.gov/cpi/data.htm
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: original
+Browser/source references: BLS series CUUR0000SA0; values transcribed to data/cpi_u.csv
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+CPI-U U.S. city average all items not seasonally adjusted, series CUUR0000SA0. Historical monthly and annual-average index values used for normalization are retained in data/cpi_u.csv.

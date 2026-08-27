@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-AD-WILLIAMS
+Organization: Williams Institute at UCLA
+Document type: CEO/ED recruitment advertisement
+Original URL: https://williamsinstitute.law.ucla.edu/
+Resolved URL: https://williamsinstitute.law.ucla.edu/
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: discovery result
+Browser/source references: discovery search; full source not retained
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Potential advertisement reviewed: Williams Institute at UCLA, Executive Director. Discovery range $260,000-$290,000; location Los Angeles, California. It was excluded before quantitative analysis for a pre-registered non-pay reason: Not a standalone organization-wide nonprofit CEO. The result is retained only in the search/exclusion log and is not evidence for the market estimate.

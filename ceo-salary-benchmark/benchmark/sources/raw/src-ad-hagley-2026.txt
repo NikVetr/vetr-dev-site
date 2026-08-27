@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-HAGLEY-2026
+organization: Hagley Museum and Library
+role_title: Chief Executive Officer
+posting_date: 2026-02-07
+closing_date: 
+salary_min: 225000
+salary_max: 260000
+currency: USD
+salary_is_base: yes
+salary_text: Detailed body $225,000-$260,000; page header $251,000-$270,000
+location: Wilmington, Delaware
+remote_status: In-person
+geographic_restrictions: Wilmington, Delaware
+mission_operating_model: Research library, museum, collections, public education, and knowledge institution focused on business, science, and technology history.
+annual_budget_or_expense: 11500000
+scale_measure: 2025 operating budget
+scale_year: 2025
+staff_count: 78
+responsibilities: Enterprise strategy, fundraising, operations, staff leadership, research library/museum stewardship, public representation, and board partnership.
+reporting_relationship: Board of Trustees
+original_url: https://www.nonprofitoperations.com/job-submissions/chief-executive-officer-/hagley-museum-and-library-
+resolved_url: https://www.nonprofitoperations.com/job-submissions/chief-executive-officer-/hagley-museum-and-library-
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: recruiter/job-board complete copy
+archive_path: sources/raw/src-ad-hagley-2026.txt
+tier: expanded_broad_functional
+included_in_quantitative_analysis: yes
+inclusion_reason: Excellent scale/title match and substantial research/knowledge function, but museum/site operations materially differ from RP.
+exclusion_reason: 
+evidence_quality_notes: Detailed body range controls over conflicting page header; both retained.
+source_line_refs: turn562106view1 lines 18-72
+cpi_period: 2026-02
+cpi_basis_note: Posting month CPI.

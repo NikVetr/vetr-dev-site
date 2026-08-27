@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Research!America
+ein: 52-1609875
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 84.0
+ceo_name: Mary Woolley
+ceo_title: President & Chief Executive Officer
+top_executive_basis: explicit CEO
+tax_period_begin: 2025-01-01
+tax_period_end: 2025-12-31
+compensation_calendar_year: 2025.0
+filing_date: 2026-05-11
+irs_object_id: 202601319349302140
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202601319349302140_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521609875
+part_vii_org: 597619.0
+part_vii_related: 0.0
+part_vii_other: 55121.0
+cash_proxy: 597619.0
+total_proxy: 652740.0
+schedule_j_base: 
+revenue: 8914085.0
+expenses: 9394184.0
+employee_count: 41.0
+full_year_status: yes
+founder_flag: no
+structure_flag: long_tenured
+analysis_status: primary
+exclusion_reason: 
+notes: 
+retrieved_at: 2026-08-25
+extraction_location: ProPublica latest 2025 filing table
+source_id: SRC-990-EXT-RESEARCH-AMERICA
+part_vii_org_jul2026: 619848.0514935874
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 57171.28211515704
+cash_proxy_jul2026: 619848.0514935874
+total_proxy_jul2026: 677019.3336087444
+schedule_j_base_jul2026: 
+cpi_factor: 1.0371960253833754
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 1.0209555741827323

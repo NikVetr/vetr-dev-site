@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Charity Navigator
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: first expansion
+topic_cluster: Research, evaluation, philanthropy infrastructure, and policy
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 13-4148824
+revenue: 7619753.0
+expenses: 7840893.0
+employee_count: 51.0
+comparability_score: 86.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 345254.9746548199
+total_proxy_jul2026: 368135.0798078564
+ceo_title: President & CEO
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/134148824
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202640789349301509_public.xml
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://projects.propublica.org/nonprofits/organizations/134148824
+prior_scale_source_type: ProPublica Nonprofit Explorer filing profile
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Evidence and nonprofit-evaluation infrastructure with expenses and staff closely matching RP core scale.
+prior_function_score: 29.0
+prior_expense_score: 25.0
+prior_staff_score: 15.0
+prior_ea_score: 7.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

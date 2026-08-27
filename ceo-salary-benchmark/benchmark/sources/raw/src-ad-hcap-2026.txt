@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-HCAP-2026
+organization: Healthcare Career Advancement Program
+role_title: Executive Director
+posting_date: 2026-01-28
+closing_date: 2026-03-15
+salary_min: 150000
+salary_max: 170000
+currency: USD
+salary_is_base: yes
+salary_text: $150,000-$170,000
+location: Remote
+remote_status: Fully remote with travel
+geographic_restrictions: Travel required within the United States, U.S. territories, and Canada; employee-residence eligibility not explicitly stated
+mission_operating_model: National workforce research, technical-assistance, and labor-management intermediary.
+annual_budget_or_expense: 
+scale_measure: not reported in accessible posting
+scale_year: 
+staff_count: 13
+responsibilities: Leads strategy, fundraising, research/technical assistance, operations, staff, external partnerships, and two related entities.
+reporting_relationship: Boards of H-CAP and H-CAP Education Association
+original_url: https://dailyremote.com/remote-job/h-cap-executive-director-4517350
+resolved_url: https://careers.arena.run/companies/seiu-2/jobs/66223842-executive-director-h-cap
+retrieved_at: 2026-08-27T12:53:03-0700
+upstream_provenance: complete lawful job-board mirror
+archive_path: sources/raw/src-ad-hcap-2026.txt
+tier: expanded_secondary_structural
+included_in_quantitative_analysis: yes
+inclusion_reason: National research/technical-assistance leadership role; smaller staff and dual-entity governance reduce comparability.
+exclusion_reason: 
+evidence_quality_notes: Complete mirror text; salary, 13-person remote team, posting timestamp, and first-round cutoff explicit. Travel territory is not treated as an employee-residence restriction.
+source_line_refs: saved Arena page visible text and embedded currentJob JSON
+cpi_period: 2026-01
+cpi_basis_note: Posting month CPI.

@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-CN-2024
+Organization: Charity Navigator
+Document type: Form 990 filing-derived snapshot
+Original URL: https://apps.irs.gov/pub/epostcard/990/xml/2026/202640789349301509_public.xml
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/134148824
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: turn590537view0 L25-L96
+EIN: 13-4148824
+IRS object ID: 202640789349301509
+Tax period: 2024-07-01 to 2025-06-30
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Charity Navigator
+EIN: 13-4148824
+IRS object ID: 202640789349301509
+Tax period: 2024-07-01 to 2025-06-30
+Filing date: 2026-03-19
+Top-executive record: Michael Thatcher - President & CEO
+Full-year status: yes
+Part VII reportable compensation from organization: 324339
+Related organizations: 0
+Part VII other compensation: 21494
+Cash/reportable proxy: 324339
+Filing total proxy: 345833
+Revenue: 7619753
+Expenses: 7840893
+Tier/status: strict_primary / included
+Exclusion reason: 
+Notes: Fiscal-year filer; compensation calendar year 2024 under IRS convention.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

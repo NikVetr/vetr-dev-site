@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Ploughshares Fund
+ein: 94-2764520
+source_wave: extension2
+peer_tier: Tier B weighted secondary
+ea_affinity: EA-adjacent
+comparability_score: 76.0
+ceo_name: Emma Belcher
+ceo_title: President
+top_executive_basis: President alongside separately compensated Executive Director
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-04-07
+irs_object_id: 202620979349300102
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202620979349300102_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/942764520
+part_vii_org: 402031.0
+part_vii_related: 0.0
+part_vii_other: 43205.0
+cash_proxy: 402031.0
+total_proxy: 445236.0
+schedule_j_base: 
+revenue: 5221356.0
+expenses: 7613345.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: grantmaking_and_dual_top_leadership
+analysis_status: structural_sensitivity
+exclusion_reason: 
+notes: Close expense scale and global-risk relevance, but grantmaking/fund-distribution model and separate paid Executive Director preclude clean pooling.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn798240view0.
+source_id: SRC-990-EXT-PLOUGHSHARES-FUND
+part_vii_org_jul2026: 427957.1766437335
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 45991.20420289108
+cash_proxy_jul2026: 427957.1766437335
+total_proxy_jul2026: 473948.38084662455
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: False
+structurally_clean: False
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 

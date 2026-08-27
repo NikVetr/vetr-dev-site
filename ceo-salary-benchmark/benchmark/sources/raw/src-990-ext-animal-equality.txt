@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Animal Equality
+ein: 47-2420444
+source_wave: previous_expansion
+peer_tier: Tier B weighted secondary
+ea_affinity: EA-adjacent
+comparability_score: 80.0
+ceo_name: Sharon Maria Nunez Gough
+ceo_title: President
+top_executive_basis: US legal-entity president; multiple paid directors
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-10-27
+irs_object_id: 202533009349301263
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202533009349301263_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/472420444
+part_vii_org: 100966.0
+part_vii_related: 0.0
+part_vii_other: 9893.0
+cash_proxy: 100966.0
+total_proxy: 110859.0
+schedule_j_base: 
+revenue: 4411463.0
+expenses: 5192778.0
+employee_count: 27.0
+full_year_status: yes
+founder_flag: yes
+structure_flag: international_affiliate_multiple_directors
+analysis_status: structural_sensitivity
+exclusion_reason: 
+notes: Not pooled in clean organization-wide CEO summaries because the US legal entity is part of a global structure and has multiple paid directors.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link
+source_id: SRC-990-EXT-ANIMAL-EQUALITY
+part_vii_org_jul2026: 107477.09578866108
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 10530.979821298495
+cash_proxy_jul2026: 107477.09578866108
+total_proxy_jul2026: 118008.07560995956
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: False
+structurally_clean: False
+current_comp_year: True
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 

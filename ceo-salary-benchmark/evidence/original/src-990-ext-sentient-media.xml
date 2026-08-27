@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2024v5.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-10-09T14:12:31-05:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>141555429</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>UHY ADVISORS NORTHEAST INC</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>45 FIVE MILE WOODS ROAD SUITE 1</AddressLine1Txt>
+        <CityNm>CATSKILL</CityNm>
+        <StateAbbreviationCd>NY</StateAbbreviationCd>
+        <ZIPCd>12414</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>830804345</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>SENTIENT MEDIA</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>SENT</BusinessNameControlTxt>
+      <PhoneNum>7072348051</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>2261 MARKET STREET 86748</AddressLine1Txt>
+        <CityNm>SAN FRANCISCO</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>94114</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>MIKKO JARVENPAA</PersonNm>
+      <PersonTitleTxt>PRESIDENT &amp; TREASURER</PersonTitleTxt>
+      <PhoneNum>7072348051</PhoneNum>
+      <SignatureDt>2025-10-09</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>1</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>BRADLEY CUMMINGS</PreparerPersonNm>
+      <PTIN>P00432821</PTIN>
+      <PhoneNum>5189434502</PhoneNum>
+      <PreparationDt>2025-10-09</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="5">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <PrincipalOfficerNm>MIKKO JARVENPAA</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>2261 MARKET STREET 86748</AddressLine1Txt>
+        <CityNm>SAN FRANCISCO</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>94114</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>2237457</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>SENTIENTMEDIA.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2018</FormationYr>
+      <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>SENTIENT MEDIA ("SENTIENT") (SENTIENTMEDIA.ORG) IS AN INDEPENDENT AND NONPARTISAN, NONPROFIT NEWS ORGANIZATION DEDICATED TO ILLUMINATING THE IMPACTS OF FACTORY FARMING ON CLIMATE, ANIMALS, PUBLIC HEALTH AND MORE. THROUGH FACT-CHECKED, SCIENCE-BASED JOURNALISM, WE UNCOVER INJUSTICES, HIGHLIGHT SOLUTIONS, AND INFORM COMMUNITIES, LAWMAKERS, NEWSROOMS AND CONTENT CREATORS.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>4</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>4</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>8</TotalEmployeeCnt>
+      <TotalVolunteersCnt>10</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>1194532</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>2186917</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>153898</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>50540</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>0</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>0</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>0</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>0</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>1348430</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>2237457</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>0</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>0</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>402071</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>684604</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>0</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>46284</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>412339</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>509474</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>814410</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>1194078</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>534020</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>1043379</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>981998</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>2258424</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>7653</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>43549</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>974345</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>2214875</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>SENTIENT MEDIA ("SENTIENT") (SENTIENTMEDIA.ORG) IS AN INDEPENDENT AND NONPARTISAN, NONPROFIT NEWS ORGANIZATION DEDICATED TO ILLUMINATING THE IMPACTS OF FACTORY FARMING ON CLIMATE, ANIMALS, PUBLIC HEALTH AND MORE. THROUGH FACT-CHECKED, SCIENCE-BASED JOURNALISM, WE UNCOVER INJUSTICES, HIGHLIGHT SOLUTIONS, AND INFORM COMMUNITIES, LAWMAKERS, NEWSROOMS AND CONTENT CREATORS.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>324653</ExpenseAmt>
+      <Desc>AUDIENCE ENGAGEMENT - SENTIENT WORKS TO ENSURE IMPORTANT HEADLINES AND STORIES REACH A BROAD AUDIENCE. SENTIENT PARTNERS WITH LOCAL AND NATIONAL NEWSROOMS TO ENSURE OUR STORIES HAVE A WIDE AND DIVERSE REACH.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>265628</ExpenseAmt>
+        <Desc>REPORTING AND INVESTIGATIONS - IN FY2024, SENTIENT PUBLISHED MORE THAN 200 ARTICLES ON THE IMPACTS OF FACTORY FARMS. SENTIENT'S JOURNALISM FALLS INTO FOUR AREAS: SOLUTIONS; ACCOUNTABILITY; DISINFORMATION DEBUNKING; AND POLICY AND SCIENCE-DRIVEN EXPLAINERS.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>158054</ExpenseAmt>
+        <Desc>PARTNERSHIP AND TRAINING SENTIENT'S APPROACH IS TO COLLABORATE WITH OTHER NEWS OUTLETS TO COREPORT, COPUBLISH, AND REPUBLISH STORIES ON FACTORY FARMING. SENTIENT PROVIDES RESOURCES TO HELP BUILD THE CAPACITY OF OTHER NEWSROOMS TO REPORT ACCURATELY ON THE VARIED IMPACTS OF FACTORY FARMS.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>191544</ExpenseAmt>
+        <RevenueAmt>50540</RevenueAmt>
+        <Desc>DIGITAL SERVICES - OPTIMIZING EXPLAINER ARTICLES TO ENSURE THE VISIBILITY OF HIGH-QUALITY, INFORMATIVE CONTENT IN SEARCH ENGINES. FELLOWSHIPS - EDITORIAL FELLOWS WORK WITH THE EDITORIAL TEAM ON ARTICLES, FACT-CHECKING AND NEWSLETTERS.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>191544</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcRevenueAmt>50540</TotalOtherProgSrvcRevenueAmt>
+      <TotalProgramServiceExpensesAmt>939879</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc1039100001">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>0</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc1040000001">0</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc1040000001">0</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc1040000001">0</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc1040000001">0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc1040000001">0</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc1040000001">0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc1040000001">0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc1040000001">0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc1040000001">0</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc1040000001">1</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>1</ForeignOfficeInd>
+      <ForeignActivitiesInd>0</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>0</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>0</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>0</FundraisingActivitiesInd>
+      <GamingActivitiesInd>0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd>0</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd>0</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>0</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd>0</DisregardedEntityInd>
+      <RelatedEntityInd>0</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>32</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <EmployeeCnt>8</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>0</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>4</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>4</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>0</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>0</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>0</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <OwnWebsiteInd>X</OwnWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>MIKKO JARVENPAA</BusinessNameLine1Txt>
+        </BusinessName>
+        <PhoneNum>7072348051</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>2984 B FOLSOM STREET</AddressLine1Txt>
+          <CityNm>SAN FRANCISCO</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94110</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MIKKO JARVENPAA</PersonNm>
+        <TitleTxt>PRESIDENT &amp; TREASURER</TitleTxt>
+        <AverageHoursPerWeekRt>10.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CAILEN LABARGE</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>10.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DAVID COMAN-HIDY</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>10.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DEBORAH BREWSTER</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>10.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANNA BRADLEY</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>100000</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>100000</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>0</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>0</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>0</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <CntrctRcvdGreaterThan100KCnt>0</CntrctRcvdGreaterThan100KCnt>
+      <AllOtherContributionsAmt>2186917</AllOtherContributionsAmt>
+      <TotalContributionsAmt>2186917</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>INTERNET PUBLISHING &amp;</Desc>
+        <BusinessCd>519130</BusinessCd>
+        <TotalRevenueColumnAmt>50540</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>50540</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>50540</TotalProgramServiceRevenueAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>2237457</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>50540</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </TotalRevenueGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>100000</TotalAmt>
+        <ProgramServicesAmt>75000</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>25000</ManagementAndGeneralAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>519171</TotalAmt>
+        <ProgramServicesAmt>492509</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>16407</ManagementAndGeneralAmt>
+        <FundraisingAmt>10255</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>15615</TotalAmt>
+        <ProgramServicesAmt>12444</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2691</ManagementAndGeneralAmt>
+        <FundraisingAmt>480</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>49818</TotalAmt>
+        <ProgramServicesAmt>46094</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2859</ManagementAndGeneralAmt>
+        <FundraisingAmt>865</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>55121</TotalAmt>
+        <ProgramServicesAmt>2484</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>52637</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <AdvertisingGrp>
+        <TotalAmt>14183</TotalAmt>
+        <ProgramServicesAmt>9723</ProgramServicesAmt>
+        <FundraisingAmt>4460</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>17517</TotalAmt>
+        <ProgramServicesAmt>5524</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>8468</ManagementAndGeneralAmt>
+        <FundraisingAmt>3525</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <TravelGrp>
+        <TotalAmt>59685</TotalAmt>
+        <ProgramServicesAmt>10557</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>25076</ManagementAndGeneralAmt>
+        <FundraisingAmt>24052</FundraisingAmt>
+      </TravelGrp>
+      <InsuranceGrp>
+        <TotalAmt>10525</TotalAmt>
+        <ManagementAndGeneralAmt>10525</ManagementAndGeneralAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>CONTRACTORS</Desc>
+        <TotalAmt>330441</TotalAmt>
+        <ProgramServicesAmt>283987</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>45232</ManagementAndGeneralAmt>
+        <FundraisingAmt>1222</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>PROFESSIONAL DEVELOPMEN</Desc>
+        <TotalAmt>9501</TotalAmt>
+        <ProgramServicesAmt>196</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>9305</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>PAYROLL PROCESSING</Desc>
+        <TotalAmt>8711</TotalAmt>
+        <ManagementAndGeneralAmt>8711</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>BANK FEES</Desc>
+        <TotalAmt>1728</TotalAmt>
+        <ProgramServicesAmt>383</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>20</ManagementAndGeneralAmt>
+        <FundraisingAmt>1325</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>2062</TotalAmt>
+        <ProgramServicesAmt>978</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>984</ManagementAndGeneralAmt>
+        <FundraisingAmt>100</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>1194078</TotalAmt>
+        <ProgramServicesAmt>939879</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>207915</ManagementAndGeneralAmt>
+        <FundraisingAmt>46284</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>981140</BOYAmt>
+        <EOYAmt>1727808</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <AccountsReceivableGrp>
+        <EOYAmt>530376</EOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>858</BOYAmt>
+        <EOYAmt>240</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>981998</BOYAmt>
+        <EOYAmt>2258424</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>7653</BOYAmt>
+        <EOYAmt>43549</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>7653</BOYAmt>
+        <EOYAmt>43549</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>954755</BOYAmt>
+        <EOYAmt>1949875</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>19590</BOYAmt>
+        <EOYAmt>265000</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>974345</BOYAmt>
+        <EOYAmt>2214875</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>981998</BOYAmt>
+        <EOYAmt>2258424</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>1043379</ReconcilationRevenueExpnssAmt>
+      <PriorPeriodAdjustmentsAmt>197151</PriorPeriodAdjustmentsAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <InfoInScheduleOPartXIIInd>X</InfoInScheduleOPartXIIInd>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>1</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>276579</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>473900</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>696947</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>1194532</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>2186917</CurrentTaxYearAmt>
+        <TotalAmt>4828875</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>276579</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>473900</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>696947</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>1194532</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>2186917</CurrentTaxYearAmt>
+        <TotalAmt>4828875</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>2400069</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>2428806</PublicSupportTotal170Amt>
+      <TotalSupportAmt>4828875</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>345788</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.50300</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.67290</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="RetDoc1040000001">
+      <TotalBookValueLandBuildingsAmt>0</TotalBookValueLandBuildingsAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART X, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION IS AN EXEMPT ORGANIZATION AS DEFINED IN SECTION 501(C)(3) OF THE INTERNAL REVENUE CODE. THE ORGANIZATION HAS EVALUATED ANY UNCERTAIN TAX POSITIONS AND RELATED INCOME TAX CONTINGENCIES AND DETERMINED UNCERTAIN POSITIONS, IF ANY, ARE NOT MATERIAL TO THE FINANCIAL STATEMENTS. PENALTIES AND INTEREST ASSESSED BY INCOME TAXING AUTHORITIES ARE INCLUDED IN OPERATING EXPENSES IF INCURRED. NONE OF THE ORGANIZATION'S RETURNS ARE CURRENTLY UNDER EXAMINATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>FORM 990 IS REVIEWED AND APPROVED BY THE BOARD AND EXECUTIVE DIRECTOR PRIOR TO FILING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION DOES NOT MAKE ITS DOCUMENTS AVAILABLE TO THE PUBLIC.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART XII LINE 2 C</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE PROCESS HAS NOT CHANGED FROM THE PRIOR YEAR</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

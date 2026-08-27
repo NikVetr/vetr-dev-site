@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Third Way Institute
+ein: 26-0535276
+source_wave: extension2
+peer_tier: Tier B weighted secondary
+ea_affinity: functional-only
+comparability_score: 76.0
+ceo_name: Jonathan Cowan
+ceo_title: President
+top_executive_basis: President is organization-wide top executive
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-11
+irs_object_id: 202543159349301669
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202543159349301669_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/260535276
+part_vii_org: 0.0
+part_vii_related: 413118.0
+part_vii_other: 41470.0
+cash_proxy: 413118.0
+total_proxy: 454588.0
+schedule_j_base: 
+revenue: 19278889.0
+expenses: 22331511.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: all_cash_from_related_org
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: Policy research institute; top executive cash is entirely reported by a related organization, kept as a labeled structural sensitivity.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table lines 21-89; IRS object ID from XML link
+source_id: SRC-990-EXT-THIRD-WAY-INSTITUTE
+part_vii_org_jul2026: 0.0
+part_vii_related_jul2026: 439759.1551415336
+part_vii_other_jul2026: 44144.31751634981
+cash_proxy_jul2026: 439759.1551415336
+total_proxy_jul2026: 483903.4726578834
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.9237217099748531

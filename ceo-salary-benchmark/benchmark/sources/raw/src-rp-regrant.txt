@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-RP-REGRANT
+Organization: Rethink Priorities
+Document type: RP regranting impact page
+Original URL: https://rethinkpriorities.org/impact-area/uniting-for-impact-improving-farmed-animal-welfare-across-the-eu/
+Resolved URL: https://rethinkpriorities.org/impact-area/uniting-for-impact-improving-farmed-animal-welfare-across-the-eu/
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: original
+Browser/source references: see rp_public_profile.csv
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+About $1.9M distributed to roughly 25 organizations across 16 countries.

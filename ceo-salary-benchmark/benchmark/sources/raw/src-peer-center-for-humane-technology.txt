@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Center for Humane Technology
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: first expansion
+topic_cluster: AI, catastrophic risk, biosecurity, and technology policy
+ea_affinity: EA-adjacent
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 82-3492182
+revenue: 5785317.0
+expenses: 5807076.0
+employee_count: 22.0
+comparability_score: 89.0
+selection_status: selected quantitative reference organization
+compensation_observation: not collected/clean observation unavailable
+cash_proxy_jul2026: 
+total_proxy_jul2026: 
+ceo_title: 
+compensation_year: 
+propublica_url: 
+official_irs_url: 
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/center-for-humane-technology%2C823492182/
+prior_scale_source_type: Cause IQ filing profile (IRS-derived)
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Close technology research, policy, field-building, fundraising, and operating-scale match; staff just below RP main band but within the expanded band.
+prior_function_score: 28.0
+prior_expense_score: 25.0
+prior_staff_score: 12.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

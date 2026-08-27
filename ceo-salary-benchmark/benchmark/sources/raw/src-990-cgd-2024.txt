@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-CGD-2024
+Organization: Center for Global Development
+Document type: Form 990 filing-derived snapshot
+Original URL: https://projects.propublica.org/nonprofits/organizations/522351337
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/522351337
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: turn498315search3
+EIN: 52-2351337
+IRS object ID: not captured
+Tax period: 2024-01-01 to 2024-12-31
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Center for Global Development
+EIN: 52-2351337
+IRS object ID: not captured
+Tax period: 2024-01-01 to 2024-12-31
+Filing date: 2025-11-06
+Top-executive record: Leadership transition - President
+Full-year status: no
+Part VII reportable compensation from organization: 
+Related organizations: 
+Part VII other compensation: 
+Cash/reportable proxy: 
+Filing total proxy: 
+Revenue: 23575821
+Expenses: 18124830
+Tier/status: excluded_transition / excluded
+Exclusion reason: President until July, interim president, and new president from September; no full-year incumbent observation.
+Notes: Within wider scale but excluded for transition, not pay.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

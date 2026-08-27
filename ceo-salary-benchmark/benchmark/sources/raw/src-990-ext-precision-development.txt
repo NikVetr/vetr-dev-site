@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Precision Development
+ein: 81-0779400
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 76.0
+ceo_name: Owen Barder
+ceo_title: Chief Executive Officer
+top_executive_basis: explicit CEO; latest filing excluded due March 2024 departure
+tax_period_begin: 2023-01-01
+tax_period_end: 2023-12-31
+compensation_calendar_year: 2023.0
+filing_date: 2024-11-14
+irs_object_id: 202433199349302193
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2024/202433199349302193_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/810779400
+part_vii_org: 224927.0
+part_vii_related: 0.0
+part_vii_other: 22600.0
+cash_proxy: 224927.0
+total_proxy: 247527.0
+schedule_j_base: 
+revenue: 6178835.0
+expenses: 5234047.0
+employee_count: 12.0
+full_year_status: yes
+founder_flag: no
+structure_flag: older_clean_due_transition
+analysis_status: primary_older_clean
+exclusion_reason: 
+notes: 2024 filing showed CEO until March 2024; prior full-year observation used without annualization.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link
+source_id: SRC-990-EXT-PRECISION-DEVELOPMENT
+part_vii_org_jul2026: 246494.20316216495
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 24767.00881381483
+cash_proxy_jul2026: 246494.20316216495
+total_proxy_jul2026: 271261.2119759798
+schedule_j_base_jul2026: 
+cpi_factor: 1.095885345744019
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: False
+close_expense: True
+staff_known: True
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.9237217099748531

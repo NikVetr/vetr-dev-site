@@ -1,0 +1,25 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-AD-MSI
+Organization: Marine Science Institute
+Document type: CEO/ED recruitment advertisement
+Original URL: https://potrerogroup.com/sites/default/files/pdfs/Marine%20Science%20Institute%20Executive%20Director%20Profile_0.pdf
+Resolved URL: https://aeoe.org/Find-a-Job/13574048
+Retrieved: 2026-08-27T12:53:38-07:00
+Upstream provenance: recruiter profile and complete lawful mirrors
+Browser/source references: saved Schmidt Marine JobPosting data and AEOE complete posting
+
+ACCESS AND PROVENANCE NOTE
+The complete recruitment listing was recovered after the original analysis. Browser captures preserve two lawful mirrors, and the recruiter-hosted position-profile PDF remains the canonical source.
+
+EXTRACTED CONTENT USED
+Role title: Executive Director
+Posting date: 2025-12-08
+Priority closing date: 2026-01-20
+Annual base salary range: $195,000-$240,000
+Location: Redwood City, California
+Remote status: On-site; regular presence required
+Responsibilities: Organization-wide leadership, strategy, financial sustainability, fundraising, operations, staff, and board partnership.
+Reporting relationship: Board of Directors
+Quantitative-analysis status: Excluded before compensation extraction for the predeclared non-pay reason "Dominant direct-service/field-delivery model."
+Validation note: Salary and location match the original discovery record. The recovered source corrects the role title from "President and CEO" to "Executive Director." Because the row was excluded before quantitative analysis, the correction does not change any modeled salary result.

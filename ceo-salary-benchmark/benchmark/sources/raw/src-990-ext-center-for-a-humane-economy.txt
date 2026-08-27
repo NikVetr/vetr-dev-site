@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Center for a Humane Economy
+ein: 83-2620507
+source_wave: extension2
+peer_tier: Tier B weighted secondary
+ea_affinity: EA-adjacent
+comparability_score: 76.0
+ceo_name: 
+ceo_title: 
+top_executive_basis: No clean paid organization-wide CEO or Executive Director listed in accessible filing table
+tax_period_begin: 2023-11-01
+tax_period_end: 2024-10-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-09-02
+irs_object_id: 202502459349301350
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202502459349301350_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/832620507
+part_vii_org: 
+part_vii_related: 
+part_vii_other: 
+cash_proxy: 
+total_proxy: 
+schedule_j_base: 
+revenue: 3869202.0
+expenses: 3205159.0
+employee_count: 
+full_year_status: unknown
+founder_flag: unknown
+structure_flag: no_clean_top_executive_observation
+analysis_status: excluded_measurement
+exclusion_reason: No clean paid organization-wide CEO/ED observation in accessible filing table.
+notes: Latest return listed compensated directors of philanthropy and policy rather than a clearly identified organization-wide CEO equivalent.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn491560view1.
+source_id: SRC-990-EXT-CENTER-FOR-A-HUMANE-ECONOMY
+part_vii_org_jul2026: 
+part_vii_related_jul2026: 
+part_vii_other_jul2026: 
+cash_proxy_jul2026: 
+total_proxy_jul2026: 
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: False
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 

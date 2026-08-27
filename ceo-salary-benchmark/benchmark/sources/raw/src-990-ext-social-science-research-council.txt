@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Social Science Research Council
+ein: 13-1325070
+source_wave: legacy_original
+peer_tier: secondary
+ea_affinity: functional-only
+comparability_score: 85.0
+ceo_name: Anna Harvey
+ceo_title: President
+top_executive_basis: legacy verified
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-05-13
+irs_object_id: 202641339349307834
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202641339349307834_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/131325070
+part_vii_org: 341003.0
+part_vii_related: 0.0
+part_vii_other: 42326.0
+cash_proxy: 341003.0
+total_proxy: 383329.0
+schedule_j_base: 
+revenue: 14237307.0
+expenses: 15470220.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: fellowships_grants_and_regranting_mix
+analysis_status: primary
+exclusion_reason: 
+notes: Comparable research institution, but grants/fellowships structure differs.
+retrieved_at: 2026-08-25
+extraction_location: Form 990 Part VII Section A, columns D/E/F; rendered ProPublica Compensation table. Revenue/expenses from rendered Extracted Financial Data. Exact XML element names unavailable without raw XML.
+source_id: SRC-990-EXT-SOCIAL-SCIENCE-RESEARCH-COUNCIL
+part_vii_org_jul2026: 362993.6027496463
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 45055.51924757709
+cash_proxy_jul2026: 362993.6027496463
+total_proxy_jul2026: 408049.12199722335
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: B
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 1.0331098072087177

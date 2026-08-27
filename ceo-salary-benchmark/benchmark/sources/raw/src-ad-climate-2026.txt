@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-AD-CLIMATE-2026
+Organization: The Climate Center
+Document type: CEO/ED recruitment advertisement
+Original URL: https://www.abfe.org/jobs/chief-executive-officer-climate-center
+Resolved URL: https://www.abfe.org/jobs/chief-executive-officer-climate-center
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: source-native job-board copy linking retained recruiter PDF
+Browser/source references: turn220517view0 L114-L146
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+The Climate Center is a climate and energy policy think-and-do tank using science-based research and coalition mobilization. Its CEO posting emphasizes fundraising, policy advocacy, relationships, and organizational leadership. The salary range is $195,000-$235,000. The role is remote in the United States, and the application date was April 10, 2026.

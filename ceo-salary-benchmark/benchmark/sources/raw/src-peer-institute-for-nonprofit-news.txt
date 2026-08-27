@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Institute for Nonprofit News
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: second expansion / filing verification
+topic_cluster: Open science, research infrastructure, and knowledge dissemination
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: membership nonprofit
+ein: 27-2614911
+revenue: 15594880.0
+expenses: 15663213.0
+employee_count: 
+comparability_score: 87.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 228681.8288739425
+total_proxy_jul2026: 228681.8288739425
+ceo_title: Chief Executive Officer
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/272614911
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202630269349301213_public.xml
+selection_note: Added by the second-expansion freeze and retained after role/scale verification; pay did not determine selection.

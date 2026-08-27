@@ -1,0 +1,19 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-RP-2025-RESULTS
+Organization: Rethink Priorities
+Document type: RP 2025 results and 2026 plans
+Original URL: https://rethinkpriorities.org/2025-results/
+Resolved URL: https://rethinkpriorities.org/2025-results/
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: original
+Browser/source references: see rp_public_profile.csv
+EIN: 
+IRS object ID: 
+Tax period: 
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Public core budget of approximately $7.5M and at least $9.3M productive-use capacity; fundraising and strategic priorities.

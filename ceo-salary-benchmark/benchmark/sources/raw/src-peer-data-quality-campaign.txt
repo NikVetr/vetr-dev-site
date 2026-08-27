@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Data Quality Campaign
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: second expansion / filing verification
+topic_cluster: Research, evaluation, philanthropy infrastructure, and policy
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 27-4566795
+revenue: 3867847.0
+expenses: 6466981.0
+employee_count: 
+comparability_score: 86.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 438046.39394346735
+total_proxy_jul2026: 487914.46345608943
+ceo_title: CEO/President
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/274566795
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202621339349304737_public.xml
+selection_note: Added by the second-expansion freeze and retained after role/scale verification; pay did not determine selection.

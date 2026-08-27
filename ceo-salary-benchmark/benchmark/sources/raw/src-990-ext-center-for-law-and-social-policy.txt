@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Center for Law and Social Policy
+ein: 23-7000150
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 81.0
+ceo_name: Indivar Dutta-Gupta
+ceo_title: President & Executive Director
+top_executive_basis: left June 14, 2024; interim followed
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-11-14
+irs_object_id: 202513189349314621
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202513189349314621_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/237000150
+part_vii_org: 151725.0
+part_vii_related: 0.0
+part_vii_other: 4000.0
+cash_proxy: 151725.0
+total_proxy: 155725.0
+schedule_j_base: 
+revenue: 9138332.0
+expenses: 10108913.0
+employee_count: 86.0
+full_year_status: no
+founder_flag: no
+structure_flag: leadership_transition
+analysis_status: excluded_transition
+exclusion_reason: President/ED departed June 14, 2024; acting and interim leadership followed.
+notes: Not annualized.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing plus CLASP announcement
+source_id: SRC-990-EXT-CENTER-FOR-LAW-AND-SOCIAL-POLICY
+part_vii_org_jul2026: 161509.44237203218
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 4257.952015080762
+cash_proxy_jul2026: 161509.44237203218
+total_proxy_jul2026: 165767.39438711293
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: False
+structurally_clean: False
+current_comp_year: True
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 

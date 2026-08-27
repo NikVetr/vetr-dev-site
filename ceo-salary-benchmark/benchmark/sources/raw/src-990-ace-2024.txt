@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+==========================
+Source ID: SRC-990-ACE-2024
+Organization: Animal Charity Evaluators
+Document type: Form 990 filing-derived snapshot
+Original URL: https://projects.propublica.org/nonprofits/organizations/364684978
+Resolved URL: https://projects.propublica.org/nonprofits/organizations/364684978
+Retrieved: 2026-08-17T18:45:00-07:00
+Upstream provenance: official filing via IRS; browser rendering via ProPublica where available
+Browser/source references: turn498315search0
+EIN: 36-4684978
+IRS object ID: not captured
+Tax period: 2024-04-01 to 2025-03-31
+
+ACCESS AND PROVENANCE NOTE
+The source-native bytes could not be fetched into the local runtime. This file is a derivative text snapshot of the complete browser-rendered content or exact extracted facts used. It is not represented as the original HTML, PDF, or IRS XML. The canonical URL and source reference are preserved.
+
+EXTRACTED CONTENT USED
+Organization: Animal Charity Evaluators
+EIN: 36-4684978
+IRS object ID: not captured
+Tax period: 2024-04-01 to 2025-03-31
+Filing date: not captured
+Top-executive record: No paid CEO/ED listed in rendered compensation table - not available
+Full-year status: not assessable
+Part VII reportable compensation from organization: 
+Related organizations: 
+Part VII other compensation: 
+Cash/reportable proxy: 
+Filing total proxy: 
+Revenue: 7801617
+Expenses: 6340574
+Tier/status: excluded_measurement / excluded
+Exclusion reason: No clean organization-wide paid CEO/ED observation in the accessible filing rendering; exclusion is measurement-based, not because compensation was low or zero.
+Notes: Filing reported no executive-compensation aggregate and did not list a paid CEO/ED in accessible table.
+Measure warning: Part VII reportable compensation is a W-2/cash proxy, not exact base salary. Schedule J components were not available and were not imputed.

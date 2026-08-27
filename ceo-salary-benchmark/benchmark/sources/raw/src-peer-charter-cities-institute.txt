@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Charter Cities Institute
+reference_tier: B
+tier_label: Tier B weighted secondary
+selection_wave: first expansion
+topic_cluster: Global health, development, and evidence
+ea_affinity: EA-adjacent
+country_or_region: US/international
+expected_structure: independent nonprofit
+ein: 82-3264419
+revenue: 1260681.0
+expenses: 2680500.0
+employee_count: 11.0
+comparability_score: 64.0
+selection_status: selected quantitative reference organization
+compensation_observation: not collected/clean observation unavailable
+cash_proxy_jul2026: 
+total_proxy_jul2026: 
+ceo_title: 
+compensation_year: 
+propublica_url: 
+official_irs_url: 
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://www.causeiq.com/organizations/charter-cities-institute%2C823264419/
+prior_scale_source_type: Cause IQ filing-derived profile
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: EA-adjacent policy/research organization; functionally relevant but below expanded expense/staff thresholds.
+prior_function_score: 22.0
+prior_expense_score: 12.0
+prior_staff_score: 6.0
+prior_ea_score: 14.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

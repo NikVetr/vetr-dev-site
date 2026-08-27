@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Economic Policy Institute
+reference_tier: A
+tier_label: Tier A expanded primary
+selection_wave: second expansion / filing verification
+topic_cluster: Research, evaluation, philanthropy infrastructure, and policy
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 52-1368964
+revenue: 11927401.0
+expenses: 13581055.0
+employee_count: 
+comparability_score: 86.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 254670.23899798797
+total_proxy_jul2026: 293706.0785842446
+ceo_title: President
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521368964
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202542469349301614_public.xml
+selection_note: Added by the second-expansion freeze and retained after role/scale verification; pay did not determine selection.

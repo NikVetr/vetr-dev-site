@@ -1,0 +1,1136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2024v5.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-11-12T07:37:05-06:00</ReturnTs>
+    <TaxPeriodEndDt>2025-01-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>341873282</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>CBIZ ADVISORS LLC</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>222 SOUTH 9TH STREET SUITE 1000</AddressLine1Txt>
+        <CityNm>MINNEAPOLIS</CityNm>
+        <StateAbbreviationCd>MN</StateAbbreviationCd>
+        <ZIPCd>55402</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-02-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>411735501</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>FRESH ENERGY</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>FRES</BusinessNameControlTxt>
+      <PhoneNum>6512250878</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>408 ST PETER ST STE 350</AddressLine1Txt>
+        <CityNm>ST PAUL</CityNm>
+        <StateAbbreviationCd>MN</StateAbbreviationCd>
+        <ZIPCd>55102</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>MARGARET CHERNE-HENDRICK</PersonNm>
+      <PersonTitleTxt>CHIEF EXECUTIVE OFFICER</PersonTitleTxt>
+      <PhoneNum>6512250878</PhoneNum>
+      <SignatureDt>2025-10-28</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>1</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>BRUCE THIEL</PreparerPersonNm>
+      <PTIN>P00526510</PTIN>
+      <PhoneNum>6123397811</PhoneNum>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="10">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <PrincipalOfficerNm>MARGARET CHERNE-HENDRICK</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>408 ST PETER ST STE 350</AddressLine1Txt>
+        <CityNm>ST PAUL</CityNm>
+        <StateAbbreviationCd>MN</StateAbbreviationCd>
+        <ZIPCd>55102</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>7226303</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>WWW.FRESH-ENERGY.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>1992</FormationYr>
+      <LegalDomicileStateCd>MN</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>SHAPE AND DRIVE BOLD POLICY SOLUTIONS TO ACHIEVE EQUITABLE CARBON-NEUTRAL ECONOMIES.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>16</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>16</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>43</TotalEmployeeCnt>
+      <TotalVolunteersCnt>16</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>18784</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>5612924</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>7011169</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>12300</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>18784</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>162790</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>145962</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>-29236</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>-41866</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>5758778</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>7134049</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>662022</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>879093</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>3839171</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>3857528</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>0</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>570896</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>4226362</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>2270128</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>8727555</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>7006749</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-2968777</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>127300</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>9163811</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>9395628</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>687074</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>772086</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>8476737</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>8623542</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>SHAPE AND DRIVE BOLD POLICY SOLUTIONS TO ACHIEVE EQUITABLE CARBON-NEUTRAL ECONOMIES.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>1</SignificantChangeInd>
+      <ExpenseAmt>2011208</ExpenseAmt>
+      <GrantAmt>474020</GrantAmt>
+      <Desc>ENERGY TRANSITION - SEE SCHEDULE O.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>1323750</ExpenseAmt>
+        <GrantAmt>405073</GrantAmt>
+        <RevenueAmt>1853</RevenueAmt>
+        <Desc>ENERGY NEWS NETWORK - SEE SCHEDULE O.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>706424</ExpenseAmt>
+        <Desc>ACCELERATION FUND - SEE SCHEDULE O.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>345473</ExpenseAmt>
+        <Desc>ENERGY ACCESS AND EQUITY:FRESH ENERGY IS COMMITTED TO ENSURING THAT THE TRANSITION TO CLEAN ENERGY BENEFITS ALL. EQUITY IS A CONSIDERATION IN OUR WORK ACROSS PROGRAMS AND WITHIN OUR INTERNAL OPERATIONS. WE ALSO HAVE A NUMBER OF PROGRAMMATIC INITIATIVES UNDERWAY WITH A SPECIFIC FOCUS ON EQUITY, INCLUDING SERVING AS CO-LEAD OF THE MINNESOTA MULTIFAMILY AFFORDABLE HOUSING ENERGY NETWORK (MMAHEN), WHICH CONNECTS BUILDING OWNERS, RENTERS, HOUSING AND ENERGY ADVOCATES, FINANCING ENTITIES, HEALTH PROFESSIONALS, AND OTHERS TO IMPROVE THE EFFICIENCY OF APARTMENT BUILDINGS AND OTHER MULTIFAMILY HOUSING. IN MULTIPLE STATE AND NATIONAL FORUMS, WE ALSO SHAPE RENEWABLE ENERGY PROGRAM DESIGN, ENERGY EFFICIENCY AND WEATHERIZATION INVESTMENTS, AND OTHER INITIATIVES TO REDUCE THE ENERGY BURDEN ON UNDER-RESOURCED HOUSEHOLDS. ACCESS AND EQUITY ARE ALSO CENTRAL ELEMENTS OF OUR CLEAN TRANSPORTATION WORK TO ELECTRIFY TRANSIT AND SCHOOL BUSES.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>626101</ExpenseAmt>
+        <Desc>CLEAN ELECTRICITY:GENERATING ELECTRICITY WITHOUT CARBON POLLUTION IS A CRUCIAL STEP TOWARD A CARBON-NEUTRAL FUTURE, AND FRESH ENERGY IS WORKING HARD TO LOCK IN A 90% CARBON FREE ELECTRIC SYSTEM BY 2025. THROUGH ACTIVE ENGAGEMENT AT THE MINNESOTA PUBLIC UTILITIES COMMISSION, STATE LEGISLATURE, AND OTHER DECISION-MAKING VENUES, FRESH ENERGY IS WORKING TO END RELIANCE ON FOSSIL FUEL, DRAMATICALLY INCREASE RENEWABLE ELECTRICITY GENERATION, AND MAXIMIZE EFFICIENCY WITH LOAD MANAGEMENT AND OTHER STRATEGIES. AS A RESULT OF OUR EFFORTS, COAL PLANTS ARE CLOSING OR RUNNING LESS OFTEN, UTILITIES ARE MAKING HISTORIC INVESTMENTS IN MORE EFFICIENT SYSTEMS, UTILITY CUSTOMERS HAVE NEW RENEWABLE ELECTRICITY CHOICES, AND WIND, SOLAR, AND BATTERY STORAGE ARE AN INCREASING PART OF MINNESOTA'S ENERGY SYSTEM. BECAUSE A LARGE-SCALE ENERGY TRANSITION WILL REQUIRE A STRONG, MODERN ELECTRIC GRID, FRESH ENERGY IS ALSO WORKING TO SECURE TRANSMISSION FOR INCREASED RENEWABLES ACROSS THE REGION, AND A DISTRIBUTION GRID THAT SUPPORTS CLEAN ENERGY PROJECTS IN OUR COMMUNITIES.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>518032</ExpenseAmt>
+        <Desc>PUBLIC AFFAIRS:AS A POLICY ORGANIZATION, FRESH ENERGY DRIVES CHANGE IN MULTIPLE DECISION-MAKING FORUMS INCLUDING LOCAL GOVERNMENTS, THE MINNESOTA LEGISLATURE AND WITH OUR CONGRESSIONAL DELEGATION. OUR PUBLIC AFFAIRS DEPARTMENT PROVIDES EXPERT LEADERSHIP ON POLICY-MAKER EDUCATION, ADVOCACY, AND COALITION WORK WITH PARTNERS ACROSS THE STATE. IN COLLABORATION WITH OUR COMMUNICATIONS TEAM THE PUBLIC AFFAIRS DEPARTMENT ALSO OPERATES A GROWING ACTION NETWORK THAT EQUIPS THE PUBLIC TO WEIGH IN ON CLIMATE AND ENERGY DECISION MAKING.</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>1489606</TotalOtherProgSrvcExpenseAmt>
+      <TotalProgramServiceExpensesAmt>5530988</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc1039100001">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd referenceDocumentId="RetDoc1039600001">0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd referenceDocumentId="RetDoc1039600001">1</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd referenceDocumentId="RetDoc1039600001">0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc1040000001">0</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc1040000001">0</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc1040000001">0</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc1040000001">0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc1040000001">1</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc1040000001">0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc1040000001">0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc1040000001">0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc1040000001">1</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc1040000001">1</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">1</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <ForeignActivitiesInd>0</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>0</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd referenceDocumentId="RetDoc1041300001">0</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd referenceDocumentId="RetDoc1041300001">1</FundraisingActivitiesInd>
+      <GamingActivitiesInd referenceDocumentId="RetDoc1041300001">0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="RetDoc1041900001">1</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd referenceDocumentId="RetDoc1041900001">0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="RetDoc1042400001">1</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd referenceDocumentId="RetDoc1042900001">1</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd referenceDocumentId="RetDoc1042900001">0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd>0</DisregardedEntityInd>
+      <RelatedEntityInd>0</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>40</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <EmployeeCnt>43</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>1</UnrelatedBusIncmOverLimitInd>
+      <Form990TFiledInd>1</Form990TFiledInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>1</QuidProQuoContributionsInd>
+      <QuidProQuoContriDisclInd>1</QuidProQuoContriDisclInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>16</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>16</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>1</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>0</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>MN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>DC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>FL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>IL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MD</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>VA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AK</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CT</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>GA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>HI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>ME</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>ND</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NH</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NJ</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NM</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NV</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OH</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OK</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>PA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>RI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>SC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>TN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>UT</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WV</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CO</StatesWhereCopyOfReturnIsFldCd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>MAT KRISETYA</BusinessNameLine1Txt>
+        </BusinessName>
+        <PhoneNum>6512250878</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>408 ST PETER STREET STE 350</AddressLine1Txt>
+          <CityNm>ST PAUL</CityNm>
+          <StateAbbreviationCd>MN</StateAbbreviationCd>
+          <ZIPCd>55102</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <InfoInScheduleOPartVIIInd>X</InfoInScheduleOPartVIIInd>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ELLEN PALMER</PersonNm>
+        <TitleTxt>CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ERIC PASI</PersonNm>
+        <TitleTxt>VICE CHAIR THRU 04/16/24</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>TRENT MOSTAERT</PersonNm>
+        <TitleTxt>VICE CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JACQUELINE JOHNSON</PersonNm>
+        <TitleTxt>TREASURER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>KATE WOLFORD</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ERIKA BAILEY JOHNSON</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LAURA BISHOP</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ROBERT BLAKE</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JEFFREY S BROBERG</PersonNm>
+        <TitleTxt>BOARD MEMBER THRU 10/15/24</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MERRITT CLAPP-SMITH</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>TED CONTAG</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BRYAN HERRMANN</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JIM LADNER</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>KEVIN LINDSEY</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CHRIS O'BRIEN</PersonNm>
+        <TitleTxt>BOARD MEMBER THRU 10/15/24</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JINA PENN-TRACY</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>RAJ V RAJAN</PersonNm>
+        <TitleTxt>BOARD MEMBER THRU 10/15/24</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MATT SCHUERGER</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>TOM STROBEL</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CHRISTINA YAGJIAN</PersonNm>
+        <TitleTxt>BOARD MEMBER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BRENDA CASSELLIUS</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR (UNTIL JAN 2025)</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>238121</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>22095</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MAT LARSON KRISETYA</PersonNm>
+        <TitleTxt>EXECUTIVE LEAD, ORGANIZATIONAL HEALTH</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>122924</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>19541</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ALLEN GLECKNER</PersonNm>
+        <TitleTxt>EXECUTIVE LEAD, POLICY AND PROGRAMS</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>144327</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>11246</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JULIA OLMSTEAD</PersonNm>
+        <TitleTxt>EXECUTIVE LEAD, PHILANTHROPY</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>140956</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>18611</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MARGARET CHERNE-HENDRICK</PersonNm>
+        <TitleTxt>SENIOR LEAD, INNOVATION &amp; IMPACT</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>128852</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>18726</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JUSTIN FAY</PersonNm>
+        <TitleTxt>SENIOR LEAD, PUBLIC AFFAIRS AND ADVOCACY</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>126226</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>12246</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>901406</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>102465</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>12</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>1</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>CLIFTONLARSONALLEN LLP</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>220 S 6TH STREET 300</AddressLine1Txt>
+            <CityNm>MINNEAPOLIS</CityNm>
+            <StateAbbreviationCd>MN</StateAbbreviationCd>
+            <ZIPCd>55402</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>ACCOUNTING, PAYROLL, SOFTWARE</ServicesDesc>
+        <CompensationAmt>198455</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>1</CntrctRcvdGreaterThan100KCnt>
+      <FundraisingAmt>459176</FundraisingAmt>
+      <AllOtherContributionsAmt>6551993</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>1365248</NoncashContributionsAmt>
+      <TotalContributionsAmt>7011169</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>ADVERTISING</Desc>
+        <BusinessCd>513120</BusinessCd>
+        <TotalRevenueColumnAmt>18784</TotalRevenueColumnAmt>
+        <UnrelatedBusinessRevenueAmt>18784</UnrelatedBusinessRevenueAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>18784</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>145962</TotalRevenueColumnAmt>
+        <ExclusionAmt>145962</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <FundraisingGrossIncomeAmt>48535</FundraisingGrossIncomeAmt>
+      <ContriRptFundraisingEventAmt>459176</ContriRptFundraisingEventAmt>
+      <FundraisingDirectExpensesAmt>92254</FundraisingDirectExpensesAmt>
+      <NetIncmFromFundraisingEvtGrp>
+        <TotalRevenueColumnAmt>-43719</TotalRevenueColumnAmt>
+        <ExclusionAmt>-43719</ExclusionAmt>
+      </NetIncmFromFundraisingEvtGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>MISCELLANEOUS INCOME</Desc>
+        <BusinessCd>900099</BusinessCd>
+        <TotalRevenueColumnAmt>1853</TotalRevenueColumnAmt>
+        <ExclusionAmt>1853</ExclusionAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>1853</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>7134049</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>18784</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>104096</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>879093</TotalAmt>
+        <ProgramServicesAmt>879093</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>400049</TotalAmt>
+        <ProgramServicesAmt>174710</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>130091</ManagementAndGeneralAmt>
+        <FundraisingAmt>95248</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>2711363</TotalAmt>
+        <ProgramServicesAmt>2177313</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>257802</ManagementAndGeneralAmt>
+        <FundraisingAmt>276248</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>519175</TotalAmt>
+        <ProgramServicesAmt>361797</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>89502</ManagementAndGeneralAmt>
+        <FundraisingAmt>67876</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>226941</TotalAmt>
+        <ProgramServicesAmt>172040</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>27925</ManagementAndGeneralAmt>
+        <FundraisingAmt>26976</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>20010</TotalAmt>
+        <ProgramServicesAmt>2085</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>17925</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>224274</TotalAmt>
+        <ProgramServicesAmt>4438</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>219836</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>60830</TotalAmt>
+        <ProgramServicesAmt>60830</ProgramServicesAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>1347872</TotalAmt>
+        <ProgramServicesAmt>1264946</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>64330</ManagementAndGeneralAmt>
+        <FundraisingAmt>18596</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>19234</TotalAmt>
+        <ProgramServicesAmt>12558</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4529</ManagementAndGeneralAmt>
+        <FundraisingAmt>2147</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>78916</TotalAmt>
+        <ProgramServicesAmt>78916</ProgramServicesAmt>
+      </InformationTechnologyGrp>
+      <OccupancyGrp>
+        <TotalAmt>118483</TotalAmt>
+        <ProgramServicesAmt>80989</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>22979</ManagementAndGeneralAmt>
+        <FundraisingAmt>14515</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>41497</TotalAmt>
+        <ProgramServicesAmt>37765</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3699</ManagementAndGeneralAmt>
+        <FundraisingAmt>33</FundraisingAmt>
+      </TravelGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>54707</TotalAmt>
+        <ProgramServicesAmt>37658</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>15620</ManagementAndGeneralAmt>
+        <FundraisingAmt>1429</FundraisingAmt>
+      </ConferencesMeetingsGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>129414</TotalAmt>
+        <ProgramServicesAmt>89296</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>23294</ManagementAndGeneralAmt>
+        <FundraisingAmt>16824</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>11789</TotalAmt>
+        <ProgramServicesAmt>10072</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1047</ManagementAndGeneralAmt>
+        <FundraisingAmt>670</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>COMMUNICATIONS</Desc>
+        <TotalAmt>76861</TotalAmt>
+        <ProgramServicesAmt>52422</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>15048</ManagementAndGeneralAmt>
+        <FundraisingAmt>9391</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>FUNDRAISING</Desc>
+        <TotalAmt>37055</TotalAmt>
+        <FundraisingAmt>37055</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>DUES, MEMB &amp; SUBSCRIPTI</Desc>
+        <TotalAmt>28609</TotalAmt>
+        <ProgramServicesAmt>21326</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>5579</ManagementAndGeneralAmt>
+        <FundraisingAmt>1704</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>MISCELLANEOUS</Desc>
+        <TotalAmt>11542</TotalAmt>
+        <ProgramServicesAmt>7308</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2975</ManagementAndGeneralAmt>
+        <FundraisingAmt>1259</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>9035</TotalAmt>
+        <ProgramServicesAmt>5426</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2684</ManagementAndGeneralAmt>
+        <FundraisingAmt>925</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>7006749</TotalAmt>
+        <ProgramServicesAmt>5530988</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>904865</ManagementAndGeneralAmt>
+        <FundraisingAmt>570896</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <JointCostsInd>X</JointCostsInd>
+      <TotalJointCostsGrp>
+        <TotalAmt>4291</TotalAmt>
+        <ProgramServicesAmt>3518</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>314</ManagementAndGeneralAmt>
+        <FundraisingAmt>459</FundraisingAmt>
+      </TotalJointCostsGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>692763</BOYAmt>
+        <EOYAmt>1715211</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>5395100</BOYAmt>
+        <EOYAmt>2090621</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>2222604</BOYAmt>
+        <EOYAmt>2821961</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>93350</BOYAmt>
+        <EOYAmt>110614</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>830946</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>543286</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>411983</BOYAmt>
+        <EOYAmt>287660</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>210122</BOYAmt>
+        <EOYAmt>2262441</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>137889</BOYAmt>
+        <EOYAmt>107120</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>9163811</BOYAmt>
+        <EOYAmt>9395628</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>422679</BOYAmt>
+        <EOYAmt>309383</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <GrantsPayableGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>255072</EOYAmt>
+      </GrantsPayableGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>264395</BOYAmt>
+        <EOYAmt>207631</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>687074</BOYAmt>
+        <EOYAmt>772086</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>1704352</BOYAmt>
+        <EOYAmt>2761258</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>6772385</BOYAmt>
+        <EOYAmt>5862284</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>8476737</BOYAmt>
+        <EOYAmt>8623542</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>9163811</BOYAmt>
+        <EOYAmt>9395628</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>127300</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>19505</NetUnrlzdGainsLossesInvstAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <InfoInScheduleOPartXIIInd>X</InfoInScheduleOPartXIIInd>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>1</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>8238712</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>7972156</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>8527969</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>5612924</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>7011169</CurrentTaxYearAmt>
+        <TotalAmt>37362930</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>8238712</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>7972156</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>8527969</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>5612924</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>7011169</CurrentTaxYearAmt>
+        <TotalAmt>37362930</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>18863353</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>18499577</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>25237</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>16439</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>20398</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>162790</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>145962</CurrentTaxYearAmt>
+        <TotalAmt>370826</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus3YearsAmt>120</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>237</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>1064</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>1853</CurrentTaxYearAmt>
+        <TotalAmt>3274</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>37737030</TotalSupportAmt>
+      <PublicSupportCY170Pct>0.49020</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.49390</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+      <Form990ScheduleAPartVIGrp>
+        <FormAndLineReferenceDesc>SCHEDULE A, PART II, LINE 10, EXPLANATION OF OTHER INCOME:</FormAndLineReferenceDesc>
+        <ExplanationTxt>MISCELLANEOUS REVENUE - 2021 AMOUNT: $ 120. 2022 AMOUNT: $ 237. 2023 AMOUNT: $ 1,064. 2024 AMOUNT: $ 1,853.</ExplanationTxt>
+      </Form990ScheduleAPartVIGrp>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleC documentId="RetDoc1039600001">
+      <TotalDirectLobbyingGrp>
+        <FilingOrganizationsTotalAmt>60830</FilingOrganizationsTotalAmt>
+      </TotalDirectLobbyingGrp>
+      <TotalLobbyingExpendGrp>
+        <FilingOrganizationsTotalAmt>60830</FilingOrganizationsTotalAmt>
+      </TotalLobbyingExpendGrp>
+      <OtherExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>6945919</FilingOrganizationsTotalAmt>
+      </OtherExemptPurposeExpendGrp>
+      <TotalExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>7006749</FilingOrganizationsTotalAmt>
+      </TotalExemptPurposeExpendGrp>
+      <LobbyingNontaxableAmountGrp>
+        <FilingOrganizationsTotalAmt>500337</FilingOrganizationsTotalAmt>
+      </LobbyingNontaxableAmountGrp>
+      <GrassrootsNontaxableGrp>
+        <FilingOrganizationsTotalAmt>125084</FilingOrganizationsTotalAmt>
+      </GrassrootsNontaxableGrp>
+      <TotLbbyngGrassrootMnsNonTxGrp>
+        <FilingOrganizationsTotalAmt>0</FilingOrganizationsTotalAmt>
+      </TotLbbyngGrassrootMnsNonTxGrp>
+      <TotLbbyExpendMnsLbbyngNonTxGrp>
+        <FilingOrganizationsTotalAmt>0</FilingOrganizationsTotalAmt>
+      </TotLbbyExpendMnsLbbyngNonTxGrp>
+      <AvgLobbyingNontaxableAmountGrp>
+        <CurrentYearMinus3Amt>426729</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>458737</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>586378</CurrentYearMinus1Amt>
+        <CurrentYearAmt>500337</CurrentYearAmt>
+        <TotalAmt>1972181</TotalAmt>
+      </AvgLobbyingNontaxableAmountGrp>
+      <LobbyingCeilingAmt>2958272</LobbyingCeilingAmt>
+      <AvgTotalLobbyingExpendGrp>
+        <CurrentYearMinus3Amt>57151</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>58748</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>60752</CurrentYearMinus1Amt>
+        <CurrentYearAmt>60830</CurrentYearAmt>
+        <TotalAmt>237481</TotalAmt>
+      </AvgTotalLobbyingExpendGrp>
+      <AvgGrassrootsNontaxableGrp>
+        <CurrentYearMinus3Amt>106682</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>114684</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>146595</CurrentYearMinus1Amt>
+        <CurrentYearAmt>125084</CurrentYearAmt>
+        <TotalAmt>493045</TotalAmt>
+      </AvgGrassrootsNontaxableGrp>
+      <GrassrootsCeilingAmt>739568</GrassrootsCeilingAmt>
+    </IRS990ScheduleC>
+    <IRS990ScheduleD documentId="RetDoc1040000001">
+      <LeaseholdImprovementsGrp>
+        <OtherCostOrOtherBasisAmt>433153</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>226572</DepreciationAmt>
+        <BookValueAmt>206581</BookValueAmt>
+      </LeaseholdImprovementsGrp>
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>397793</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>316714</DepreciationAmt>
+        <BookValueAmt>81079</BookValueAmt>
+      </EquipmentGrp>
+      <TotalBookValueLandBuildingsAmt>287660</TotalBookValueLandBuildingsAmt>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>OPERATING LEASE LIABILITY</Desc>
+        <Amt>207631</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>207631</TotalLiabilityAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>7153554</TotalRevEtcAuditedFinclStmtAmt>
+      <NetUnrealizedGainsInvstAmt>19505</NetUnrealizedGainsInvstAmt>
+      <RevenueNotReportedAmt>19505</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>7134049</RevenueSubtotalAmt>
+      <RevenueNotReportedFinclStmtAmt>0</RevenueNotReportedFinclStmtAmt>
+      <TotalRevenuePerForm990Amt>7134049</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>7006749</TotExpnsEtcAuditedFinclStmtAmt>
+      <ExpensesNotReportedAmt>0</ExpensesNotReportedAmt>
+      <ExpensesSubtotalAmt>7006749</ExpensesSubtotalAmt>
+      <ExpensesNotRptFinclStmtAmt>0</ExpensesNotRptFinclStmtAmt>
+      <TotalExpensesPerForm990Amt>7006749</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART X, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION REVIEWS AND ASSESSES ITS TAX POSITIONS TAKEN OR EXPECTED TO BE TAKEN IN TAX RETURNS. BASED ON THIS ASSESSMENT THE ORGANIZATION DETERMINES WHETHER IT IS MORE LIKELY THAN NOT THAT THE POSITION WOULD BE SUSTAINED UPON EXAMINATION BY TAX AUTHORITIES. THE ORGANIZATION'S ASSESSMENT HAS NOT IDENTIFIED ANY SIGNIFICANT POSITIONS THAT IT BELIEVES WOULD NOT BE SUSTAINED UNDER EXAMINATION. THE ORGANIZATION HAS IDENTIFIED ITS TAX STATUS AS A TAX EXEMPT ENTITY AS ITS ONLY SIGNIFICANT TAX POSITION AND HAS DETERMINED THAT SUCH TAX POSITION DOES NOT RESULT IN AN UNCERTAINTY REQUIRING RECOGNITION. THE ORGANIZATION IS NOT CURRENTLY UNDER EXAMINATION BY ANY TAXING JURISDICTION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleG documentId="RetDoc1041300001">
+      <FundraisingEventInformationGrp>
+        <Event1Nm>BENEFIT BREAKFAST CAMPAIGN</Event1Nm>
+        <GrossReceiptsEvent1Amt>507711</GrossReceiptsEvent1Amt>
+        <CharitableContriEvent1Amt>459176</CharitableContriEvent1Amt>
+        <GrossRevenueEvent1Amt>48535</GrossRevenueEvent1Amt>
+        <NonCashPrizesEvent1Amt>6186</NonCashPrizesEvent1Amt>
+        <RentFacilityCostsEvent1Amt>17383</RentFacilityCostsEvent1Amt>
+        <FoodAndBeverageEvent1Amt>31152</FoodAndBeverageEvent1Amt>
+        <EntertainmentEvent1Amt>12665</EntertainmentEvent1Amt>
+        <OtherDirectExpensesEvent1Amt>17552</OtherDirectExpensesEvent1Amt>
+        <GrossReceiptsTotalAmt>507711</GrossReceiptsTotalAmt>
+        <CharitableContributionsTotAmt>459176</CharitableContributionsTotAmt>
+        <GrossRevenueTotalEventsAmt>48535</GrossRevenueTotalEventsAmt>
+        <NonCashPrizesTotalEventsAmt>6186</NonCashPrizesTotalEventsAmt>
+        <RentFcltyCostsTotalEventsAmt>17383</RentFcltyCostsTotalEventsAmt>
+        <FoodAndBeverageTotalEventsAmt>31152</FoodAndBeverageTotalEventsAmt>
+        <EntertainmentTotalEventsAmt>12665</EntertainmentTotalEventsAmt>
+        <OthDirectExpnssTotalEventsAmt>17552</OthDirectExpnssTotalEventsAmt>
+        <DirectExpenseSummaryEventsAmt>84938</DirectExpenseSummaryEventsAmt>
+        <NetIncomeSummaryAmt>-36403</NetIncomeSummaryAmt>
+      </FundraisingEventInformationGrp>
+    </IRS990ScheduleG>
+    <IRS990ScheduleI documentId="RetDoc1041900001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>MIDWEST BUILDING DECARBONIZATION COALITION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2510 S TELEGRAPH RD STE L PMB 228</AddressLine1Txt>
+          <CityNm>BLOOMFIELD HILLS</CityNm>
+          <StateAbbreviationCd>MI</StateAbbreviationCd>
+          <ZIPCd>48302</ZIPCd>
+        </USAddress>
+        <RecipientEIN>933081977</RecipientEIN>
+        <IRCSectionDesc>501(C)(3)</IRCSectionDesc>
+        <CashGrantAmt>474020</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>PROGRAMMATIC FUNDING TRANSACTION</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CANARY MEDIA INC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2490 JUNCTION PL STE 200</AddressLine1Txt>
+          <CityNm>BOULDER</CityNm>
+          <StateAbbreviationCd>CO</StateAbbreviationCd>
+          <ZIPCd>80301</ZIPCd>
+        </USAddress>
+        <RecipientEIN>862478288</RecipientEIN>
+        <IRCSectionDesc>501(C)(3)</IRCSectionDesc>
+        <CashGrantAmt>405073</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>PROGRAMMATIC FUNDING TRANSACTION</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>2</Total501c3OrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION'S BOARD OF DIRECTORS APPROVED A RESOLUTION FOR A PROGRAMATTIC FUNDING TRANSACTION. UNDER THIS RESOLUTION, MIDWEST BUILDING DECARBONIZATION COALITION (MWBDC) TRANSITIONED FROM BEING A PROJECT OF FRESH ENERGY TO BECOMING INCORPORATED AS AN INDEPENDENT 501(C)(3) ORGANIZATION. AS PART OF THIS TRANSITION, FUNDS RESTRICTED FOR THE MWBDC PROGRAM WERE TRANSFERRED TO THE NEWLY FORMED 501(C)(3) ORGANIZATION. THE ORGANIZATION'S BOARD OF DIRECTORS APPROVED A RESOLUTION FOR A PROGRAMMATIC FUNDING TRANSACTION. UNDER THIS RESOLUTION, THE BOARD APPROVED THE TRANSFER OF FUNDS FROM ITS ENERGY NEWS NETWORK (ENN) PROGRAM TO CANARY MEDIA, A 501(C((3) ORGANIZATION TO CARRY OUT THIS PROGRAM.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleJ documentId="RetDoc1042400001">
+      <CompensationCommitteeInd>X</CompensationCommitteeInd>
+      <IndependentConsultantInd>X</IndependentConsultantInd>
+      <Form990OfOtherOrganizationsInd>X</Form990OfOtherOrganizationsInd>
+      <CompensationSurveyInd>X</CompensationSurveyInd>
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>0</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>0</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>0</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>0</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>0</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>0</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>0</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>1</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>0</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>BRENDA CASSELLIUS</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR (UNTIL JAN 2025)</TitleTxt>
+        <BaseCompensationFilingOrgAmt>230798</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>7323</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>17065</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>5030</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>260216</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>JULIA OLMSTEAD</PersonNm>
+        <TitleTxt>EXECUTIVE LEAD, PHILANTHROPY</TitleTxt>
+        <BaseCompensationFilingOrgAmt>140956</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>10409</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>8202</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>159567</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>ALLEN GLECKNER</PersonNm>
+        <TitleTxt>EXECUTIVE LEAD, POLICY AND PROGRAMS</TitleTxt>
+        <BaseCompensationFilingOrgAmt>144327</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>10665</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>581</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>155573</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 7</FormAndLineReferenceDesc>
+        <ExplanationTxt>BONUS PAYMENTS WERE DETERMINED BASED ON MEETING ORGANIZATIONAL PERFORMANCE PLAN GOALS AND AT THE DISCRETION OF THE BOARD OF DIRECTORS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleM documentId="RetDoc1042900001">
+      <SecuritiesPubliclyTradedGrp>
+        <NonCashCheckboxInd>X</NonCashCheckboxInd>
+        <ContributionCnt>2</ContributionCnt>
+        <NoncashContributionsRptF990Amt>1358751</NoncashContributionsRptF990Amt>
+        <MethodOfDeterminingRevenuesTxt>FMV</MethodOfDeterminingRevenuesTxt>
+      </SecuritiesPubliclyTradedGrp>
+      <Form8283ReceivedCnt>0</Form8283ReceivedCnt>
+      <AnyPropertyThatMustBeHeldInd>0</AnyPropertyThatMustBeHeldInd>
+      <ReviewProcessUnusualNCGiftsInd>0</ReviewProcessUnusualNCGiftsInd>
+      <ThirdPartiesUsedInd>0</ThirdPartiesUsedInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, COLUMN (B)</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE NUMBER OF CONTRIBUTIONS IS REPORTED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleM>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART III, LINE 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>DURING THE YEAR ENDED JANUARY 31, 2025, THE ORGANIZATION'S BOARD OF DIRECTORS APPROVED A RESOLUTION FOR A PROGRAMMATIC FUNDING TRANSACTION. UNDER THIS RESOLUTION, THE BOARD APPROVED A TRANSFER OF FUNDS FROM ITS ENERGY NEWS NETWORK (ENN) PROGRAM TO CANARY MEDIA, A 501(C)(3) ORGANIZATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART III, LINE 4A</FormAndLineReferenceDesc>
+        <ExplanationTxt>ENERGY TRANSITION: ANALYSIS MAKES IT CLEAR: TO TURN THE TIDE ON CLIMATE CHANGE, WE MUST NOT ONLY GENERATE ELECTRICITY WITHOUT CARBON, WE MUST REDUCE GREENHOUSE GAS EMISSIONS FROM OUR ENTIRE ECONOMY. FRESH ENERGY IS USING MULTIPLE STRATEGIES TO SPEED AN ECONOMYWIDE TRANSITION, DOUBLING DOWN ON ENERGY EFFICIENCY, USING CLEAN ELECTRICITY INSTEAD OF FOSSIL FUELS, AND MAKING DRAMATIC IMPROVEMENTS TO OUR BUILT ENVIRONMENT. OUR MAJOR ENERGY TRANSITION PRIORITIES INCLUDE: CLEAN TRANSPORTATION - WITH A FOCUS ON TRANSITIONING FROM POLLUTING VEHICLES TO CLEAN ELECTRIC CARS AND BUSES. IN ADDITION TO SPURRING POLICY CHANGE, SUCH AS CLEAN CARS MINNESOTA, TO INCREASE ACCESS TO ELECTRIC VEHICLES, WE CONDUCT EFFECTIVE ADVOCACY AT THE PUBLIC UTILITIES COMMISSION TO ENSURE THE ELECTRIC GRID IS READY FOR TRANSPORTATION ELECTRIFICATION THAT BENEFITS ALL CONSUMERS. BUILDING PERFORMANCE - INCLUDING SHAPING MINNESOTA'S BUILDING CODE AND OTHER POLICY SOLUTIONS, LEADING MARKET TRANSFORMATION AND EDUCATION, AND ADVOCATING FOR PROOF-OF CONCEPT MODELS THAT DEMONSTRATE STRATEGIES FOR ACHIEVING EQUITABLE BENEFITS WHILE MOVING TOWARD CARBON-NEUTRAL BUILDINGS. MINNESOTA BUILDING DECARBONIZATION COALITION - AN ACTIVE COALITION INCUBATED BY FRESH ENERGY THAT NOW INCLUDES MORE THAN 200 ORGANIZATIONS ACROSS THE REGION SHARING INFORMATION AND STRATEGY ON STATE-BASED PROJECTS; MULTIPLE INITIATIVES AT THE INTERSECTION OF HEALTH, EQUITY, AND DECARBONIZATION OF THE BUILDINGS SECTOR; AND AN EQUITY-CENTERED SUB-GRANTING PROGRAM THAT IS BUILDING THE CAPACITY OF LOCAL GROUPS TO ENGAGE ON THIS ISSUE. GAS DECARBONIZATION - A VITAL NEW INITIATIVE FOCUSED ON TRANSITIONING AWAY FROM GAS FOR BUILDINGS AND INDUSTRY IN A WAY THAT BENEFITS CONSUMERS, IMPROVES INDOOR AIR QUALITY, AND REDUCES CARBON EMISSIONS. THANKS TO THE NATURAL GAS INNOVATION ACT, ACTIVELY SHAPED BY FRESH ENERGY, THERE ARE NEW OPENINGS AT THE MINNESOTA PUBLIC UTILITIES COMMISSION TO SCRUTINIZE GAS UTILITY INFRASTRUCTURE INVESTMENTS, RATES, AND PILOT PROGRAMS AND FRESH ENERGY EXPERTS ARE USING THAT FORUM TO SPEED PROGRESS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART III, LINE 4B</FormAndLineReferenceDesc>
+        <ExplanationTxt>ENERGY NEWS NETWORK: FRESH ENERGY'S ENERGY NEWS NETWORK IS A NATIONAL NETWORK OF NEWS SITES PROVIDING DAILY LINKS TO TOP ENERGY NEWS STORIES AND ORIGINAL REPORTING ON THE TRANSITION TO CLEAN ENERGY. EDITORIALLY INDEPENDENT FROM FRESH ENERGY'S POLICY WORK, THE ENERGY NEWS NETWORK IS STAFFED BY PROFESSIONAL EDITORS AND A TEAM OF MORE THAN A DOZEN JOURNALISTS WHO COVER STATE-BASED STORIES IN A REGIONAL CONTEXT. OUR ENERGY NEWS LINKS AND ORIGINAL REPORTING ARE PUBLISHED THROUGH FIVE DIGESTS: U.S. ENERGY NEWS, MIDWEST ENERGY NEWS, SOUTHEAST ENERGY NEWS, NORTHEAST ENERGY NEWS, AND WESTERN ENERGY NEWS AS WELL AS CENTERED, A SEPARATE MIDWEST-FOCUSED NEWSLETTER ABOUT TECHNOLOGY'S ROLE IN FIGHTING CLIMATE CHANGE. THE MORE THAN 30 ORIGINAL NEWS STORIES PRODUCED BY ENERGY NEWS NETWORK REPORTERS EACH MONTH SHINE A LIGHT ON STORIES THAT WOULD OTHERWISE GO UNREPORTED, AND OUR JOURNALISM IS REGULARLY REPUBLISHED OR QUOTED IN TRADE PUBLICATIONS, TRADITIONAL MEDIA OUTLETS, AND IN OTHER ARENAS. OUR EDITORIAL STAFF WORKS TO INCREASE DIVERSITY IN STORIES COVERED AND PEOPLE QUOTED ON ENERGY AND WE HAVE A NEW DETROIT EQUITY FELLOWSHIP PROGRAM, IN PARTNERSHIP WITH PLANET DETROIT AND THE DETROIT EQUITY ACTION LAB, CREATING A MODEL. THE ENERGY NEWS NETWORK IS A MEMBER OF THE INSTITUTE FOR NONPROFIT NEWS AND OUR NATIONAL ADVISORY COMMITTEE OF JOURNALISM AND MEDIA EXPERTS PROVIDES KEY GUIDANCE.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART III, LINE 4C</FormAndLineReferenceDesc>
+        <ExplanationTxt>ACCELERATION FUND: ACCELERATION FUND WAS DEVELOPED TO FURTHER ACCELERATE THE MISSION OF FRESH ENERGY TO SHAPE AND DRIVE BOLD POLICY SOLUTIONS TO ACHEIVE EQUITABLE CARBON-NEUTRAL ECONOMIES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION A, LINE 1A</FormAndLineReferenceDesc>
+        <ExplanationTxt>THERE ARE NO MATERIAL DIFFERENCES IN VOTING RIGHTS AMONG MEMBERS OF THE BOARD OF DIRECTORS AND THE EXECUTIVE COMMITTEE MAY CONSIDER ANY ACTIONS, OR TAKE UP ANY MATTERS DEEMED IMPORTANT OR NECESSARY FOR THE CONTINUED OPERATION OF THE CORPORATION BETWEEN SCHEDULED MEETINGS OF THE FULL BOARD.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE 990 IS PROVIDED TO THE ENTIRE BOARD FOR REVIEW PRIOR TO FILING. THE FINANCE &amp; AUDIT COMMITTEE CAREFULLY REVIEW THE FORM 990 AND MAKE A RECOMMENDATION TO THE ENTIRE BOARD TO ACCEPT THE 990. THE EXECUTIVE DIRECTOR SIGNED THE 990.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>PROCEDURE WHEN DIRECTOR OR OFFICER HAS CONFLICT: 1) EACH DIRECTOR OR OFFICER OF FRESH ENERGY HAS A DUTY TO DISCLOSE TO THE BOARD (AND TO ANY APPLICABLE COMMITTEE OF THE BOARD THAT ONE IS ADDRESSING) THE MATERIAL FACTS OF ANY PROPOSED TRANSACTION OR ACTION OF FRESH ENERGY IN WHICH SUCH DIRECTOR HAS ANY CONFLICTS. 2) THE DISCLOSURE REQUIRED UNDER #1 (ABOVE) MUST BE MADE, TO THE EXTENT POSSIBLE, PRIOR TO ANY CONSIDERATION OF SUCH PROPOSED TRANSACTION OR ACTION BY THE BOARD OR BY ANY APPLICABLE COMMITTEE OF THE BOARD. IF A DIRECTOR OR OFFICER DOES NOT RECOGNIZE THE EXISTENCE OF A CONFLICT PRIOR TO THE BOARD'S DECISION REGARDING THE TRANSACTION, THE BOARD MEMBER HAS A DUTY TO DISCLOSE THE MATERIAL FACTS OF THE CONFLICT AS SOON AS THE CONFLICT IS RECOGNIZED. 3) THE DIRECTOR OR OFFICER HAVING A CONFLICT SHALL NOT PARTICIPATE IN THE DELIBERATION OR DECISION REGARDING THE MATTER UNDER CONSIDERATION AND SHALL RETIRE FROM THE ROOM DURING DELIBERATIONS EXCEPT TO THE EXTENT HE OR SHE HAS BEEN INVITED BY THE BOARD OR COMMITTEE TO PARTICIPATE, AFTER CONSIDERATION OF THE SIGNIFICANCE TO FRESH ENERGY OF THE DISCLOSED CONFLICT. THE BOARD OR COMMITTEE MAY ALSO REQUEST THAT HE OR SHE PROVIDE FRESH ENERGY WITH ANY RELEVANT INFORMATION KNOWN TO THE DIRECTOR REGARDING THE MATTER. 4) ANY PROPOSED TRANSACTION OR ACTION IN WHICH THE BOARD HAS DETERMINED THAT A DIRECTOR OR OFFICER HAS A CONFLICT OF INTEREST IS TO BE APPROVED BY A MAJORITY OF THE DIRECTORS ENTITLED TO VOTE OTHER THAN THE INTERESTED DIRECTOR(S) AT A MEETING AT WHICH A QUORUM IS PRESENT (I.E., BY A SUPERMAJORITY OF THE ENTIRE BOARD NOT INCLUDING THE CONFLICTED DIRECTOR(S)), EVEN THOUGH THE NON-CONFLICTED DIRECTORS MAY CONSTITUTE LESS THAN A QUORUM. 5) WHEN THERE IS ANY DOUBT AS TO WHETHER A CONFLICT EXISTS (AND THESE PROCEDURES ARE THUS TO BE EMPLOYED) THE MATTER SHALL BE RESOLVED BY ACTION OF THE BOARD, NOT INCLUDING THE PARTICIPATION OF THE INDIVIDUAL WHOSE POTENTIAL CONFLICT IS AT ISSUE. ALL DIRECTORS AND OFFICERS ARE OBLIGATED TO NOTIFY THE BOARD IF THEY BELIEVE AN INDIVIDUAL DIRECTOR OR OFFICER HAS FAILED TO PROFFER DISCLOSURE OF A CONFLICT THEY BELIEVE TO BE AT HAND, AND THE AFORMENTIONED PROCEDURE (RESOLUTION BY ACTION OF THE BOARD, NOT INCLUDING THE PARTICIAPTION OF THE INDIVIDUAL WHOSE POTENTIAL CONFLICT IS AT ISSUE) SHALL BE EMPLOYED BY THE BOARD IN ALL SUCH INSTANCES. PROCEDURE WHEN STAFF HAS CONFLICT: 1) EACH STAFF MEMBER HAS A DUTY TO DISCLOSE TO THE DIRECTOR OF OPERATIONS AND FINANCE OF FRESH ENERGY THE MATERIAL FACTS OF ANY PROPOSED TRANSACTION OF FRESH ENERGY IN WHICH SUCH PERSON HAS ANY CONFLICT. 2) THE DISCLOSURE REQUIRED UNDER #1 (ABOVE) IS TO BE MADE IMMEDIATELY, AND TO THE EXTENT POSSIBLE, BEFORE ANY CONSIDERATION OF SUCH PROPOSED TRANSACTION BY FRESH ENERGY. IF A STAFF MEMBER DOES NOT RECOGNIZE THE EXISTENCE OF A CONFLICT PRIOR TO FRESH ENERGY'S DECISION REGARDING THE TRANSACTION, THE STAFF MEMBER HAS A DUTY TO DISCLOSE THE MATERIAL FACTS OF THE CONFLICT AS SOON AS IT IS RECOGNIZED. 3) A STAFF MEMBER HAVING A CONFLICT SHALL NOT PARTICIPATE IN THE DELIBERATION OR DECISION BY FRESH ENERGY REGARDING THE TRANSACTION UNDER CONSIDERATION, UNLESS INVITED BY THE DIRECTOR OF OPERATIONS AND FINANCE OF FRESH ENERGY TO DO SO, AFTER CONSIDERATION OF THE SIGNIFICANCE TO FRESH ENERGY OF THE DISCLOSED CONFLICT. THE DIRECTOR OF OPERATIONS AND FINANCE OF FRESH ENERGY MAY ALSO REQUEST THAT HE OR SHE PROVIDE FRESH ENERGY WITH ANY RELEVANT INFORMATION REGARDING THE MATTER. 4) THE DIRECTOR OF OPERATIONS AND FINANCE OF FRESH ENERGY SHALL TAKE SUCH ADDITIONAL ACTION AS MAY BE REQUIRED TO ENSURE THAT THE CONFLICT IS PROPERLY NOTICED TO MANAGEMENT AND THAT APPROPRIATE STEPS ARE EMPLOYED AS THE TRANSACTION AND ITS TERMS ARE BROUGHT FORTH FOR DECISION-MAKING AND/OR IMPLEMENTATION. FURTHERMORE, THE DIRECTOR OF OPERATIONS AND FINANCE OF FRESH ENERGY SHALL MAINTAIN A RECORD OF THE EXISTENCE, PROCEDURE EMPLOYED IN MANAGING, AND RESOLUTION OF THE CONFLICT. 5) WHEN THERE IS ANY DOUBT AS TO WHETHER A CONFLICT EXISTS, THE MATTER SHALL BE RESOLVED BY THE BOARD OF DIRECTORS. GIFT BAN: FRESH ENERGY'S DIRECTORS, OFFICERS, AND STAFF SHALL NEITHER SOLICIT NOR ACCEPT GRATUITIES, FAVORS, OR ANYTHING OF MONETARY VALUE FROM CONTRACTORS, DONORS, GRANTEES OR PARTIES TO SUB-AGREEMENTS (WITH THE EXCEPTION THAT UNSOLICITED GIFTS OF NOMINAL VALUE MAY BE ACCEPTED).</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 15A</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE EXECUTIVE DIRECTOR'S SALARY IS REVIEWED BY THE BOARD OF DIRECTORS IN FEBRUARY OF EACH YEAR DURING THE ANNUAL PERFORMANCE EVALUATION PROCESS. PERIODICALLY, THE BOARD OF DIRECTORS USES A THIRD PARTY TO PERFORM AN ANALYSIS AND PROVIDE A COMPETITIVE COMPENSATION STUDY AS A MORE IN DEPTH REVIEW OF THE EXECUTIVE DIRECTOR'S SALARY. THIS PROCESS WAS LAST UNDERTAKEN IN NOVEMBER OF 2023. THE DIRECTOR OF OPERATIONS AND FINANCE, DEPUTY EXECUTIVE DIRECTOR, SENIOR DIRECTOR AND LEAD DIRECTOR'S SALARIES ARE ALSO DETERMINED DURING THE ANNUAL PERFORMANCE EVALUATION WHICH IS COMPLETED IN FEBRUARY OF EACH YEAR. PERIODICALLY, A THIRD PARTY IS USED TO PERFORM AN ANALYSIS AND PROVIDE A COMPETITIVE COMPENSATION STUDY TO DETERMINE THE SALARY. THIS PROCESS WAS LAST UNDERTAKEN IN MARCH OF 2024.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION MAKES ITS ARTICLES OF INCORPORATION, BYLAWS, CONFLICT OF INTEREST POLICY AND FINANCIAL STATEMENTS AVAILABLE ON A CASE-BY-CASE BASIS. EVERY REQUEST IS CONSIDERED INDIVIDUALLY BY THE BOARD OF DIRECTORS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VII</FormAndLineReferenceDesc>
+        <ExplanationTxt>MARGARET CHERNE-HENDRICK WAS APPOINTED CHIEF EXECUTIVE OFFICER EFFECTIVE APRIL 15, 2025.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART IX, LINE 11G</FormAndLineReferenceDesc>
+        <ExplanationTxt>ENERGY NEWS REPORTERS: PROGRAM SERVICE EXPENSES 272,174. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 272,174. OTHER: PROGRAM SERVICE EXPENSES 56,735. MANAGEMENT AND GENERAL EXPENSES 28,493. FUNDRAISING EXPENSES 18,149. TOTAL EXPENSES 103,377. PROGRAM CONSULTANTS: PROGRAM SERVICE EXPENSES 196,290. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 196,290. ENERGY NEWS NETWORK CONTRACTORS: PROGRAM SERVICE EXPENSES 167,822. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 167,822. STAFF DEVELOPMENT: PROGRAM SERVICE EXPENSES 1,989. MANAGEMENT AND GENERAL EXPENSES 5,834. FUNDRAISING EXPENSES 447. TOTAL EXPENSES 8,270. CONTRACTS WITH COLLABORATORS: PROGRAM SERVICE EXPENSES 346,000. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 346,000. COALITION CONSULTANT: PROGRAM SERVICE EXPENSES 177,909. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 177,909. EXECUTIVE DIRECTOR TRANSITION: PROGRAM SERVICE EXPENSES 0. MANAGEMENT AND GENERAL EXPENSES 19,000. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 19,000. CHARITY REGISTRATION ASSISTANCE: PROGRAM SERVICE EXPENSES 0. MANAGEMENT AND GENERAL EXPENSES 11,003. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 11,003. STRATEGIC PLAN: PROGRAM SERVICE EXPENSES 46,027. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 46,027.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART XII, LINE 2C</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION HAS NOT CHANGED ITS OVERSIGHT PROCESS OF THE AUDIT OR ITS SELECTION PROCESS OF AN INDEPENDENT ACCOUNTANT DURING THE TAX YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

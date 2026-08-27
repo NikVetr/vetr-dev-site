@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Tax Foundation
+ein: 52-1703065
+source_wave: extension2
+peer_tier: Tier A expanded primary
+ea_affinity: functional-only
+comparability_score: 88.0
+ceo_name: Daniel Bunn
+ceo_title: President & CEO and Board Secretary
+top_executive_basis: explicit President & CEO
+tax_period_begin: 2025-01-01
+tax_period_end: 2025-12-31
+compensation_calendar_year: 2025.0
+filing_date: 2026-07-14
+irs_object_id: 202631959349301758
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202631959349301758_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521703065
+part_vii_org: 362681.0
+part_vii_related: 0.0
+part_vii_other: 45865.0
+cash_proxy: 362681.0
+total_proxy: 408546.0
+schedule_j_base: 
+revenue: 7746689.0
+expenses: 9094340.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: National tax-policy research institute; excellent core-expense match. 2025 filing was filed before cutoff.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table lines 21-89; IRS object ID from XML link
+source_id: SRC-990-EXT-TAX-FOUNDATION
+part_vii_org_jul2026: 376171.291682068
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 47570.99570420852
+cash_proxy_jul2026: 376171.291682068
+total_proxy_jul2026: 423742.2873862765
+schedule_j_base_jul2026: 
+cpi_factor: 1.0371960253833754
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 1.069572506286672

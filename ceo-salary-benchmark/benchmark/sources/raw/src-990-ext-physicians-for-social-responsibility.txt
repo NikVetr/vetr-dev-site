@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Physicians for Social Responsibility
+ein: 23-7059731
+source_wave: extension2
+peer_tier: Tier C broad sensitivity
+ea_affinity: EA-adjacent
+comparability_score: 68.0
+ceo_name: Brian Campbell
+ceo_title: Executive Director
+top_executive_basis: Explicit Executive Director
+tax_period_begin: 2024-01-01
+tax_period_end: 2024-12-31
+compensation_calendar_year: 2024.0
+filing_date: 2025-10-01
+irs_object_id: 202512749349301461
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202512749349301461_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/237059731
+part_vii_org: 150000.0
+part_vii_related: 0.0
+part_vii_other: 3000.0
+cash_proxy: 150000.0
+total_proxy: 153000.0
+schedule_j_base: 
+revenue: 1615747.0
+expenses: 2180066.0
+employee_count: 
+full_year_status: yes
+founder_flag: no
+structure_flag: well_below_scale_membership_advocacy
+analysis_status: primary_with_structure_flag
+exclusion_reason: 
+notes: Nuclear-risk and public-health advocacy organization; topical relevance but materially below RP scale.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn682727view1.
+source_id: SRC-990-EXT-PHYSICIANS-FOR-SOCIAL-RESPONSIBILITY
+part_vii_org_jul2026: 159673.2005655286
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 3193.4640113105715
+cash_proxy_jul2026: 159673.2005655286
+total_proxy_jul2026: 162866.66457683916
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: C
+primary_eligible: True
+structurally_clean: False
+current_comp_year: True
+close_expense: False
+staff_known: False
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.826487845766974

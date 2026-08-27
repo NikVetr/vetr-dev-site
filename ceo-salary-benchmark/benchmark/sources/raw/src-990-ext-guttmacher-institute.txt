@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Guttmacher Institute
+ein: 13-2890727
+source_wave: previous_expansion
+peer_tier: Tier B weighted secondary
+ea_affinity: functional-only
+comparability_score: 68.0
+ceo_name: Herminia Palacio
+ceo_title: President & CEO
+top_executive_basis: explicit CEO; later filings had transition/acting CEOs
+tax_period_begin: 2022-01-01
+tax_period_end: 2022-12-31
+compensation_calendar_year: 2022.0
+filing_date: 2023-07-17
+irs_object_id: 202341989349301459
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2023/202341989349301459_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/132890727
+part_vii_org: 371060.0
+part_vii_related: 0.0
+part_vii_other: 48391.0
+cash_proxy: 371060.0
+total_proxy: 419451.0
+schedule_j_base: 
+revenue: 32979466.0
+expenses: 27769947.0
+employee_count: 145.0
+full_year_status: yes
+founder_flag: no
+structure_flag: older_clean_due_transition
+analysis_status: primary_older_clean
+exclusion_reason: 
+notes: Latest clean full-year CEO observation is 2022; shown separately in recency sensitivity.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link
+source_id: SRC-990-EXT-GUTTMACHER-INSTITUTE
+part_vii_org_jul2026: 423377.7419828809
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 55213.90694845467
+cash_proxy_jul2026: 423377.7419828809
+total_proxy_jul2026: 478591.6489313356
+schedule_j_base_jul2026: 
+cpi_factor: 1.1409953699748852
+tier_group: B
+primary_eligible: True
+structurally_clean: True
+current_comp_year: False
+close_expense: False
+staff_known: True
+staff_in_band: False
+close_scale: False
+joint_scale_known_staff: False
+analysis_weight: 0.826487845766974

@@ -1,0 +1,2053 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return returnVersion="2024v5.0" xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-07-30T15:35:28-07:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>522289435</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>NUCLEAR THREAT INITIATIVE INC</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>NUCL</BusinessNameControlTxt>
+      <PhoneNum>2022964810</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>1776 Eye Street NW Suite 1000</AddressLine1Txt>
+        <CityNm>Washington</CityNm>
+        <StateAbbreviationCd>DC</StateAbbreviationCd>
+        <ZIPCd>20006</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>Amy Hargrett</PersonNm>
+      <PersonTitleTxt>Chief Financial Officer</PersonTitleTxt>
+      <PhoneNum>2022964810</PhoneNum>
+      <SignatureDt>2025-07-31</SignatureDt>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>1</IRSResponsiblePrtyInfoCurrInd>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="12">
+    <IRS990 documentId="R000001" referenceDocumentId="R000012" softwareId="24021167" softwareVersionNum="v1.00">
+      <AddressChangeInd>X</AddressChangeInd>
+      <PrincipalOfficerNm>ERNEST MONIZ</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>1776 EYE STREET NW</AddressLine1Txt>
+        <AddressLine2Txt>SUITE 1000</AddressLine2Txt>
+        <CityNm>Washington</CityNm>
+        <StateAbbreviationCd>DC</StateAbbreviationCd>
+        <ZIPCd>20006</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>26692749</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>www.nti.org</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2001</FormationYr>
+      <LegalDomicileStateCd>GA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>The Nuclear Threat Initiative is a nonprofit, nonpartisan global security organization focused on reducing nuclear, biological, and emerging technology threats imperiling humanity.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>25</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>21</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>75</TotalEmployeeCnt>
+      <TotalVolunteersCnt>23</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>17589134</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>15610412</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>0</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>0</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>2300080</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>4038731</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>33346</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>641</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>19922560</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>19649784</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>578282</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>5047285</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>10461909</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>10951125</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>301730</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>245936</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>1438612</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>7633704</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>9829413</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>18975625</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>26073759</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>946935</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>-6423975</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>91461881</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>92105358</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>10140692</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>15711920</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>81321189</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>76393438</NetAssetsOrFundBalancesEOYAmt>
+      <MissionDesc>The Nuclear Threat Initiative is a nonprofit, nonpartisan global security organization focused on reducing nuclear, biological, and emerging technology threats imperiling humanity.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>8493826</ExpenseAmt>
+      <GrantAmt>4000285</GrantAmt>
+      <RevenueAmt>0</RevenueAmt>
+      <Desc>Biological Policy and Programs (NTI | bio). NTI | bio advanced our goal to prevent catastrophic events that could result from accidental or deliberate misuse of modern bioscience and biotechnology, and to drive sustained investment in biosecurity in countries around the world. NTI | bio established the AIxBio Global Forum to develop an international coalition of biosecurity professionals, artificial intelligence experts, and policymakers to advance lasting solutions that reduce risks at the convergence of AI and the life sciences. The inaugural meetings of the AIxBio Global Forum throughout 2024 convened experts and policymakers to identify policy goals and explore technical solutions that can meaningfully reduce rapidly evolving AIxBio risks. NTI launched the International Biosafety and Biosecurity Initiative for Science (IBBIS), a first-of-its-kind organization to strengthen biotechnology governance to prevent rapid bioscience advances from threatening global security. NTI and IBBIS launched the Common Mechanism-a free, globally available software tool to screen DNA synthesis orders and to flag potentially risky genetic sequences. NTI | bio published a report, "Developing Guardrails for AI Biodesign Tools," which outlined proposals to safeguard rapidly advancing AI enabled capabilities to design new biological components and systems-to prevent them from being exploited to cause harm. The report recommends pilot projects in two key areas: developing built-in guardrails for AI biodesign tools and exploring new managed access approaches as an alternative to fully open-source model release. NTI | bio is working with industry partners to safeguard the benefits of these tools while reducing risk of accidental or deliberate misuse. NTI partnered with the Coalition for Epidemic Preparedness Innovations (CEPI) to launch the International Bio Funders Compact at the 2024 Global Health Security Conference. The Compact strengthens funding-based incentives for biosecurity and biosafety best practices, to reduce the likelihood that funders support unduly risky research and promote safety and security within bioscience research. We partnered with the China Arms Control and Disarmament Association (CACDA) to host Track II dialogues between U.S. and Chinese experts to promote mutual understanding and explore cooperation on governing dual-use research and emerging technology to reduce biosecurity risks. NTI | bio continued to develop stronger international capabilities to disincentivize state bioweapons development. We published an essay collection, Disincentivizing Bioweapons: Theory and Policy Approaches, at the 2024 Biological Weapons Convention (BWC) Working Group meetings. The essays explore practical approaches to discourage states from developing or using biological weapons. NTI | bio also advanced efforts to enhance transparency in bioscience research and development, to reduce misperception risk and build trust among states. These efforts supported the BWC Working Groups' mandate to develop concrete proposals to strengthen the Convention. NTI | bio fostered the next generation of biosecurity leaders through an annual competition and opportunity to attend the August BWC meetings; Next Generation for Biosecurity Competition winners presented their paper, which examined inequity in biosecurity related to resource allocation and participation in global institutions. NTI's delegation of 11 rising international biosecurity leaders participated in a joint NTI and UNODA Youth for Biosecurity Poster Exhibition, highlighting innovative approaches to advance biosecurity.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>4677077</ExpenseAmt>
+        <GrantAmt>247000</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>Communications and Public Education (COMMS). In 2024, amid heightened geopolitical risks and an accelerating new nuclear arms race, NTI ramped up our public outreach work around the risks posed by nuclear weapons. In the lead-up to the Academy Awards in March, we tapped the buzz around Oppenheimer, which told the origin story of nuclear weapons, to remind the public that while the story is history, nuclear weapons are not. Our campaign reached millions as we blanketed Los Angeles with billboards and posters, shared videos, and created media opportunities, all capitalizing on the symmetry of Oppenheimer's 13 Oscar nominations and today's 13,000 nuclear weapons. We invited people to join us to "Make Nukes History," highlighting that they have a role to play in eliminating nuclear weapons. Our open letter in the Los Angeles Times was signed by several Oppenheimer cast and crew members and Hollywood luminaries like Michael Douglas, Jane Fonda, Emma Thompson, Barbra Streisand, and Kristen Stewart. It drew significant attention from CBS Saturday Morning, USA Today, CNN.com, The Guardian and NHK Japanese Television to Variety and Hollywood Reporter. We also placed a large art installation at Los Angeles' famous Grove Farmer's Market, which served as the anchor point for our on-the-ground activities, and our reach on digital and social media rose well past tens of millions of views across TikTok, Instagram, YouTube. NTI Emeritus Board member and former California Governor Jerry Brown joined NTI Co-Chair and CEO Ernest J. Moniz on an op-ed in the LA Times, titled "Oppenheimer's best performance-reminding us we live in dangerous times." A continuing our work to shift political incentives in favor of nuclear risk reduction and eventual elimination, NTI partnered with Ploughshares on a narrative strategy and messaging guide to challenge the dominate narrative that nuclear weapons keep us safe and connect with a supermajority of the U.S. public. It will be released in early 2025. In August, we launched our fourth annual, social media-based #CranesForOurFuture campaign to mark 79 years since the atomic bombings of Hiroshima and Nagasaki. Millions joined the campaign, including artists and cultural icons like Yoko Ono, Michael Douglas, and George Takei; global security leaders; current and former top U.S. officials; and organizations including The Elders, the Carnegie Corporation of New York, and the International Campaign to Abolish Nuclear Weapons. To see posts from the campaign, go to cranesforourfuture.org. Fashion designers also participated, and pieces from The Cranes Collection were worn by model Paris Jackson and influencer Liz Plank at New York Fashion Week. Communications also worked with Hiroshima Governor Hidehiko Yuzaki on an op-ed in The Seattle Times. In mid-September, NTI launched a Nevada-based campaign to highlight opposition to renewed explosive underground nuclear weapons testing. NTI organized a coalition, "Nevadans Against Nuclear Weapons Testing," comprised of business leaders, elected officials, environmental and community groups. Our poll of 600 Nevada voters found strong bipartisan opposition to testing, which would happen in the desert just 65 miles from Las Vegas. Ernest Moniz spoke to the Las Vegas Review-Journal about the campaign and penned an op-ed in The Nevada Independent, noting that if the United States breaks a three-decade moratorium on underground explosive testing, it could accelerate a new nuclear arms race.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>2961878</ExpenseAmt>
+        <GrantAmt>5000</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>Nuclear Materials Security (NMS):We built powerful coalitions to prevent the spread of nuclear weapons. In September, NTI, the Clean Air Task Force, and the Energy Futures Initiative Foundation launched the Nuclear Scaling Initiative (NSI), to promote the safe and secure expansion of nuclear energy. This grant will enable the three organizations to ensure that the scale-up of nuclear energy does not lead to more nuclear weapons. In November, NSI participated in COP29 in Azerbaijan, where we hosted events and met with global stakeholders to emphasize the importance of nonproliferation in nuclear energy. In September NTI, the Carnegie Endowment for International Peace, and the Belfer Center for Science and International Affairs at the Harvard Kennedy School jointly launched "The Task Force on Nuclear Proliferation and U.S. National Security." This bipartisan Task Force, which is comprised of former senior U.S. government officials and experts, is developing a report that identifies recommendations for how the United States can prevent the spread of nuclear weapons. Separately, NTI and the Center for Energy and Security Studies, a Russian think tank, hosted a series of virtual workshops that brought together American and Russian experts and former government officials to address risks to the nonproliferation regime. We strengthened global nuclear security through comprehensive analysis and by convening leaders to commit to concrete actions. In January, NTI and China's Arms Control and Disarmament Association (CACDA) held a Track 2 dialogue on nuclear security in Beijing, where participants shared perspectives on nuclear security trends and opportunities. In May, NTI participated in the International Atomic Energy Agency's International Conference on Nuclear Security (ICONS)-a once-every-four-year ministerial conference that shapes international nuclear security objectives. At ICONS, NTI promoted recommendations from our 2023 Nuclear Security Index to identify specific steps countries can take to improve nuclear security and launched its new report, Facilities in Times of Crisis, which promotes pathways for mitigating security risks at nuclear facilities during human-created or natural crises. To prepare for ICONS, NTI also hosted our 17th Global Dialogue on Nuclear Security Priorities with government officials, international organization representatives, and top experts to discuss the current nuclear security landscape and strategies to bolster it. We advanced international efforts to verify nuclear disarmament. In June, NTI and the U.S. State Department met with representatives from more than 25 countries in Geneva to celebrate the 10-year anniversary of the International Partnership for Nuclear Disarmament Verification (IPNDV) and discuss progress and challenges to effective verification. IPNDV works to imagine the technologies and methods necessary for future multilateral arms control efforts to verify the elimination of nuclear weapons. Our Gender Champions in Nuclear Policy (GCNP) network helped build a more diverse, inclusive, and equitable nuclear policy field. In 2024, GCNP added four organizations to its membership roster, totaling 86 organizations across four continents. GCNP also issued a microgrant supporting two nuclear security workshops for undergraduate women in Southeast Asia. GCNP is a leadership network of heads of organizations who become Gender Champions by pledging to advance gender equity.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>2749445</ExpenseAmt>
+        <GrantAmt>605000</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>Global Nuclear Policy Program (GNPP)</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>946196</ExpenseAmt>
+        <GrantAmt>170000</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>Strategic Initiatives</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <ProgSrvcAccomActyOtherGrp>
+        <ExpenseAmt>576497</ExpenseAmt>
+        <GrantAmt>20000</GrantAmt>
+        <RevenueAmt>0</RevenueAmt>
+        <Desc>Other Program Services (AI and Emerging Technologies, and the Distinguished Fellows program)</Desc>
+      </ProgSrvcAccomActyOtherGrp>
+      <TotalOtherProgSrvcExpenseAmt>4272138</TotalOtherProgSrvcExpenseAmt>
+      <TotalOtherProgSrvcGrantAmt>795000</TotalOtherProgSrvcGrantAmt>
+      <TotalOtherProgSrvcRevenueAmt>0</TotalOtherProgSrvcRevenueAmt>
+      <TotalProgramServiceExpensesAmt>20404919</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="R000002">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="R000003">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd referenceDocumentId="R000004">1</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd>0</DonorAdvisedFundInd>
+      <ConservationEasementsInd>0</ConservationEasementsInd>
+      <CollectionsOfArtInd>0</CollectionsOfArtInd>
+      <CreditCounselingInd>0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="R000005">1</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd>0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd>0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd>0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="R000005">1</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="R000005">1</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="R000005">1</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="R000005">0</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="R000006">1</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="R000006">1</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd referenceDocumentId="R000007">1</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>0</FundraisingActivitiesInd>
+      <GamingActivitiesInd>0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="R000008">1</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="R000009">1</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd referenceDocumentId="R000010">1</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd referenceDocumentId="R000011">1</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd>0</DisregardedEntityInd>
+      <RelatedEntityInd>0</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>91</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>1</BackupWthldComplianceInd>
+      <EmployeeCnt>75</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>25</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>21</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>1</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>0</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>1</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>1</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>AL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>FL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>GA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>HI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>IL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MD</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>ME</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>ND</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NH</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NJ</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NM</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>PA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>RI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>SC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>TN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>UT</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>VA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WV</StatesWhereCopyOfReturnIsFldCd>
+      <OwnWebsiteInd>X</OwnWebsiteInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>Amy Hargrett</PersonNm>
+        <PhoneNum>2022964810</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>1776 Eye Street NW</AddressLine1Txt>
+          <AddressLine2Txt>10th Floor</AddressLine2Txt>
+          <CityNm>Washington</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20006</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Joan Rohlfing</PersonNm>
+        <TitleTxt>President and COO, Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>45</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>457312</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>99485</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Lynn Rusten</PersonNm>
+        <TitleTxt>VP, Global Nuclear Policy Program</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>476544</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>54129</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Ernest J Moniz</PersonNm>
+        <TitleTxt>CEO and Co-Chair, Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>25</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>472562</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>54250</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Carmen MacDougall</PersonNm>
+        <TitleTxt>Senior Vice President</TitleTxt>
+        <AverageHoursPerWeekRt>45</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>317660</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>85378</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Amy Hargrett</PersonNm>
+        <TitleTxt>Chief Financial Officer, Treasurer, and VP</TitleTxt>
+        <AverageHoursPerWeekRt>45</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>308982</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>78084</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Jaime Yassif</PersonNm>
+        <TitleTxt>VP, Global Biological Policy and Programs</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>288405</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>44997</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Scott Roecker</PersonNm>
+        <TitleTxt>VP, Nuclear Materials Security</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>263271</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>69882</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Margaret Hall</PersonNm>
+        <TitleTxt>VP, Communications</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>220946</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>80310</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Catherine Gwin</PersonNm>
+        <TitleTxt>Sr Director, Communications</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>197714</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>71814</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Hayley Severance</PersonNm>
+        <TitleTxt>Deputy VP, Global Biological Policy and Programs</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>211888</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>45319</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Samantha Neakrase</PersonNm>
+        <TitleTxt>Sr Director, Strategic Initiatives</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>206199</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>37346</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Jessica Bell</PersonNm>
+        <TitleTxt>Sr Director, Global Biological Policy and Programs</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>187384</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>32247</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Eric Brewer</PersonNm>
+        <TitleTxt>Deputy VP, Nuclear Materials Security</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>191418</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>21913</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Sam Nunn</PersonNm>
+        <TitleTxt>Strategic Advisor and Co-Chair, Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>10</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>178747</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Hugh Sullivan</PersonNm>
+        <TitleTxt>VP, Development</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>112870</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>27798</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Page Stoutland</PersonNm>
+        <TitleTxt>Consultant</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <FormerOfcrDirectorTrusteeInd>X</FormerOfcrDirectorTrusteeInd>
+        <ReportableCompFromOrgAmt>126575</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Desmond Browne</PersonNm>
+        <TitleTxt>Vice Chairman, Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>61179</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Margaret Knudson</PersonNm>
+        <TitleTxt>VP, Development</TitleTxt>
+        <AverageHoursPerWeekRt>40</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>15567</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>6576</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>RE Turner III</PersonNm>
+        <TitleTxt>Co-Chair, Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Hamad Alkaabi</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Brooke D Anderson</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Alexey Arbatov</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Luciana Borio</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Gideon Frank</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Margaret A Hamburg</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Jon M Huntsman Jr</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Shirley Ann Jackson</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Riaz Mohammad Khan</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Jeong H Kim</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Emily Leproust</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Michelle McMurry-Heath</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Federica Mogherini</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Michael G Mullen</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Ronald L Olson</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Michael A Peterson</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Ray Rothrock</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Louis Salkind</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Nathalie Tocci</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Laura Turner Seydel</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Alexa Wesner</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Peng Yuan</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Gustavo Zlauvinen</PersonNm>
+        <TitleTxt>Member of the Board of Directors</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>J Rutherford Seydel II</PersonNm>
+        <TitleTxt>Corporate Secretary</TitleTxt>
+        <AverageHoursPerWeekRt>4</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>4295223</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>809528</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>38</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>1</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>1</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>Task Force LLC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>4313 Mentone Avenue</AddressLine1Txt>
+            <CityNm>New York</CityNm>
+            <StateAbbreviationCd>CA</StateAbbreviationCd>
+            <ZIPCd>90232</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Consulting</ServicesDesc>
+        <CompensationAmt>820775</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>Keno Kozie Associates</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>One North Franklin Street</AddressLine1Txt>
+            <CityNm>Chicago</CityNm>
+            <StateAbbreviationCd>IL</StateAbbreviationCd>
+            <ZIPCd>60606</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>IT Consultant</ServicesDesc>
+        <CompensationAmt>340331</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>Velocity Global LLC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>3858 Walnut St</AddressLine1Txt>
+            <AddressLine2Txt>Suite 107</AddressLine2Txt>
+            <CityNm>Denver</CityNm>
+            <StateAbbreviationCd>CO</StateAbbreviationCd>
+            <ZIPCd>80205</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Consulting</ServicesDesc>
+        <CompensationAmt>325252</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>Steven P Andreasen</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>721 N 1St Street</AddressLine1Txt>
+            <AddressLine2Txt>Apt 704</AddressLine2Txt>
+            <CityNm>Minneapolis</CityNm>
+            <StateAbbreviationCd>MN</StateAbbreviationCd>
+            <ZIPCd>55401</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Consulting</ServicesDesc>
+        <CompensationAmt>288804</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>DFS Construction Corporation</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>3101 Wilson Blvd</AddressLine1Txt>
+            <AddressLine2Txt>Suite 700</AddressLine2Txt>
+            <CityNm>Arlington</CityNm>
+            <StateAbbreviationCd>VA</StateAbbreviationCd>
+            <ZIPCd>22201</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Construction</ServicesDesc>
+        <CompensationAmt>280366</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>17</CntrctRcvdGreaterThan100KCnt>
+      <FederatedCampaignsAmt>0</FederatedCampaignsAmt>
+      <MembershipDuesAmt>0</MembershipDuesAmt>
+      <FundraisingAmt>0</FundraisingAmt>
+      <RelatedOrganizationsAmt>0</RelatedOrganizationsAmt>
+      <GovernmentGrantsAmt>438720</GovernmentGrantsAmt>
+      <AllOtherContributionsAmt>15171692</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>7042908</NoncashContributionsAmt>
+      <TotalContributionsAmt>15610412</TotalContributionsAmt>
+      <TotalProgramServiceRevenueAmt>0</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>4050794</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>4050794</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <IncmFromInvestBondProceedsGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </IncmFromInvestBondProceedsGrp>
+      <RoyaltiesRevenueGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </RoyaltiesRevenueGrp>
+      <RentalIncomeOrLossGrp>
+        <RealAmt>0</RealAmt>
+        <PersonalAmt>0</PersonalAmt>
+      </RentalIncomeOrLossGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>7030902</SecuritiesAmt>
+        <OtherAmt>0</OtherAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>7042965</SecuritiesAmt>
+        <OtherAmt>0</OtherAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>-12063</SecuritiesAmt>
+        <OtherAmt>0</OtherAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>-12063</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>-12063</ExclusionAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <ContriRptFundraisingEventAmt>0</ContriRptFundraisingEventAmt>
+      <OtherRevenueMiscGrp>
+        <Desc>Gains and Losses on foreign currency transactions</Desc>
+        <BusinessCd>900099</BusinessCd>
+        <TotalRevenueColumnAmt>641</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>641</ExclusionAmt>
+      </OtherRevenueMiscGrp>
+      <MiscellaneousRevenueGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </MiscellaneousRevenueGrp>
+      <OtherRevenueTotalAmt>641</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>19649784</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>4039372</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>357000</TotalAmt>
+        <ProgramServicesAmt>357000</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <GrantsToDomesticIndividualsGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+      </GrantsToDomesticIndividualsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>4690285</TotalAmt>
+        <ProgramServicesAmt>4690285</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <BenefitsToMembersGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+      </BenefitsToMembersGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>5104750</TotalAmt>
+        <ProgramServicesAmt>2748896</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1716517</ManagementAndGeneralAmt>
+        <FundraisingAmt>639337</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>4194303</TotalAmt>
+        <ProgramServicesAmt>3595119</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>470666</ManagementAndGeneralAmt>
+        <FundraisingAmt>128518</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>367986</TotalAmt>
+        <ProgramServicesAmt>220792</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>125115</ManagementAndGeneralAmt>
+        <FundraisingAmt>22079</FundraisingAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>717645</TotalAmt>
+        <ProgramServicesAmt>430587</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>243999</ManagementAndGeneralAmt>
+        <FundraisingAmt>43059</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>566441</TotalAmt>
+        <ProgramServicesAmt>392744</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>129427</ManagementAndGeneralAmt>
+        <FundraisingAmt>44270</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>298527</TotalAmt>
+        <ProgramServicesAmt>181230</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>117297</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>96491</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>96491</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>3057</TotalAmt>
+        <ProgramServicesAmt>3057</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesProfFundraising>
+        <TotalAmt>245936</TotalAmt>
+        <FundraisingAmt>245936</FundraisingAmt>
+      </FeesForServicesProfFundraising>
+      <FeesForSrvcInvstMgmntFeesGrp>
+        <TotalAmt>29047</TotalAmt>
+        <ManagementAndGeneralAmt>29047</ManagementAndGeneralAmt>
+      </FeesForSrvcInvstMgmntFeesGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>4555810</TotalAmt>
+        <ProgramServicesAmt>4305120</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>169617</ManagementAndGeneralAmt>
+        <FundraisingAmt>81073</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>125945</TotalAmt>
+        <ProgramServicesAmt>84135</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>31501</ManagementAndGeneralAmt>
+        <FundraisingAmt>10309</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>679618</TotalAmt>
+        <ProgramServicesAmt>460978</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>186906</ManagementAndGeneralAmt>
+        <FundraisingAmt>31734</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <RoyaltiesGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </RoyaltiesGrp>
+      <OccupancyGrp>
+        <TotalAmt>2012487</TotalAmt>
+        <ProgramServicesAmt>1288372</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>603493</ManagementAndGeneralAmt>
+        <FundraisingAmt>120622</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>604485</TotalAmt>
+        <ProgramServicesAmt>503933</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>71909</ManagementAndGeneralAmt>
+        <FundraisingAmt>28643</FundraisingAmt>
+      </TravelGrp>
+      <PymtTravelEntrtnmntPubOfclGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </PymtTravelEntrtnmntPubOfclGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>885646</TotalAmt>
+        <ProgramServicesAmt>813866</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>66487</ManagementAndGeneralAmt>
+        <FundraisingAmt>5293</FundraisingAmt>
+      </ConferencesMeetingsGrp>
+      <InterestGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </InterestGrp>
+      <PaymentsToAffiliatesGrp>
+        <TotalAmt>0</TotalAmt>
+        <ProgramServicesAmt>0</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>0</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </PaymentsToAffiliatesGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>204328</TotalAmt>
+        <ProgramServicesAmt>130770</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>61298</ManagementAndGeneralAmt>
+        <FundraisingAmt>12260</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>129572</TotalAmt>
+        <ProgramServicesAmt>82926</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>38872</ManagementAndGeneralAmt>
+        <FundraisingAmt>7774</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>Subscriptions and Periodicals</Desc>
+        <TotalAmt>50487</TotalAmt>
+        <ProgramServicesAmt>29768</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>10962</ManagementAndGeneralAmt>
+        <FundraisingAmt>9757</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>Professional Development</Desc>
+        <TotalAmt>46736</TotalAmt>
+        <ProgramServicesAmt>19679</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>26481</ManagementAndGeneralAmt>
+        <FundraisingAmt>576</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>Postage, Shipping &amp; Handling</Desc>
+        <TotalAmt>14810</TotalAmt>
+        <ProgramServicesAmt>10286</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1680</ManagementAndGeneralAmt>
+        <FundraisingAmt>2844</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>Storage</Desc>
+        <TotalAmt>7403</TotalAmt>
+        <ProgramServicesAmt>4984</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2016</ManagementAndGeneralAmt>
+        <FundraisingAmt>403</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>84964</TotalAmt>
+        <ProgramServicesAmt>50392</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>30447</ManagementAndGeneralAmt>
+        <FundraisingAmt>4125</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>26073759</TotalAmt>
+        <ProgramServicesAmt>20404919</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4230228</ManagementAndGeneralAmt>
+        <FundraisingAmt>1438612</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>1864996</BOYAmt>
+        <EOYAmt>2258584</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>6529383</BOYAmt>
+        <EOYAmt>7566135</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>3344306</BOYAmt>
+        <EOYAmt>1997829</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>262664</BOYAmt>
+        <EOYAmt>2106983</EOYAmt>
+      </AccountsReceivableGrp>
+      <ReceivablesFromOfficersEtcGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </ReceivablesFromOfficersEtcGrp>
+      <RcvblFromDisqualifiedPrsnGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </RcvblFromDisqualifiedPrsnGrp>
+      <OthNotesLoansReceivableNetGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </OthNotesLoansReceivableNetGrp>
+      <InventoriesForSaleOrUseGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </InventoriesForSaleOrUseGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>494412</BOYAmt>
+        <EOYAmt>412178</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>4247805</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>1797721</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>274501</BOYAmt>
+        <EOYAmt>2450084</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>71913686</BOYAmt>
+        <EOYAmt>68802852</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <InvestmentsOtherSecuritiesGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </InvestmentsOtherSecuritiesGrp>
+      <InvestmentsProgramRelatedGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </InvestmentsProgramRelatedGrp>
+      <IntangibleAssetsGrp>
+        <BOYAmt>6777933</BOYAmt>
+        <EOYAmt>6510713</EOYAmt>
+      </IntangibleAssetsGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>91461881</BOYAmt>
+        <EOYAmt>92105358</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>425899</BOYAmt>
+        <EOYAmt>1156030</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <GrantsPayableGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>947754</EOYAmt>
+      </GrantsPayableGrp>
+      <DeferredRevenueGrp>
+        <BOYAmt>283622</BOYAmt>
+        <EOYAmt>62312</EOYAmt>
+      </DeferredRevenueGrp>
+      <TaxExemptBondLiabilitiesGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </TaxExemptBondLiabilitiesGrp>
+      <EscrowAccountLiabilityGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </EscrowAccountLiabilityGrp>
+      <LoansFromOfficersDirectorsGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </LoansFromOfficersDirectorsGrp>
+      <MortgNotesPyblScrdInvstPropGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </MortgNotesPyblScrdInvstPropGrp>
+      <UnsecuredNotesLoansPayableGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </UnsecuredNotesLoansPayableGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>9431171</BOYAmt>
+        <EOYAmt>13545824</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>10140692</BOYAmt>
+        <EOYAmt>15711920</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>62048114</BOYAmt>
+        <EOYAmt>64205009</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>19273075</BOYAmt>
+        <EOYAmt>12188429</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>81321189</BOYAmt>
+        <EOYAmt>76393438</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>91461881</BOYAmt>
+        <EOYAmt>92105358</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <InfoInScheduleOPartXIInd>X</InfoInScheduleOPartXIInd>
+      <ReconcilationRevenueExpnssAmt>-6423975</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>-115062</NetUnrlzdGainsLossesInvstAmt>
+      <DonatedServicesAndUseFcltsAmt>0</DonatedServicesAndUseFcltsAmt>
+      <InvestmentExpenseAmt>0</InvestmentExpenseAmt>
+      <PriorPeriodAdjustmentsAmt>0</PriorPeriodAdjustmentsAmt>
+      <OtherChangesInNetAssetsAmt>1611286</OtherChangesInNetAssetsAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>1</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="R000002" softwareId="24021167" softwareVersionNum="v1.00">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>14138748</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>12245831</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>13818439</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>17589134</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>15610412</CurrentTaxYearAmt>
+        <TotalAmt>73402564</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>14138748</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>12245831</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>13818439</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>17589134</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>15610412</CurrentTaxYearAmt>
+        <TotalAmt>73402564</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>38696989</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>34705575</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>524228</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>109492</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>414514</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>2300080</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>4050794</CurrentTaxYearAmt>
+        <TotalAmt>7399108</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <UnrelatedBusinessNetIncm170Grp>
+        <CurrentTaxYearMinus4YearsAmt>0</CurrentTaxYearMinus4YearsAmt>
+        <TotalAmt>0</TotalAmt>
+      </UnrelatedBusinessNetIncm170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>0</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>7884</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>9182</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>81864</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>640</CurrentTaxYearAmt>
+        <TotalAmt>99570</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>80901242</TotalSupportAmt>
+      <PublicSupportCY170Pct>0.42899</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.39587</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+      <Form990ScheduleAPartVIGrp>
+        <FormAndLineReferenceDesc>Schedule A, Part II, Line 10</FormAndLineReferenceDesc>
+        <ExplanationTxt>Other income represents foreign currency exchange gains and miscellaneous reimbursement</ExplanationTxt>
+      </Form990ScheduleAPartVIGrp>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="R000003" softwareId="24021167" softwareVersionNum="v1.00">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleC documentId="R000004" softwareId="24021167" softwareVersionNum="v1.00">
+      <VolunteersInd>0</VolunteersInd>
+      <PaidStaffOrManagementInd>1</PaidStaffOrManagementInd>
+      <MediaAdvertisementsInd>0</MediaAdvertisementsInd>
+      <MailingsMembersInd>0</MailingsMembersInd>
+      <PublicationsOrBroadcastInd>0</PublicationsOrBroadcastInd>
+      <GrantsOtherOrganizationsInd>0</GrantsOtherOrganizationsInd>
+      <DirectContactLegislatorsInd>1</DirectContactLegislatorsInd>
+      <DirectContactLegislatorsAmt>3057</DirectContactLegislatorsAmt>
+      <RalliesDemonstrationsInd>0</RalliesDemonstrationsInd>
+      <OtherActivitiesInd>0</OtherActivitiesInd>
+      <TotalLobbyingExpendituresAmt>3057</TotalLobbyingExpendituresAmt>
+      <NotDescribedSection501c3Ind>0</NotDescribedSection501c3Ind>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule C, Part II-B, Line 1</FormAndLineReferenceDesc>
+        <ExplanationTxt>Comments were provided on draft legislation for a One Health Security Council at the request of a senator's staff. Meetings were held to discuss legislative ideas on emerging infectious diseases and DOD global health programs. Discussions and written comments were provided on draft legislation concerning nuclear energy and Russia. Technical comments were given on a letter to the administration at a representative's request. Analysis and comments were provided on a bill draft at the request of the HSGAC Majority. Meetings were held to discuss legislation on promoting nuclear energy at international development banks, resulting in the inclusion of language on nuclear security and nonproliferation in the proposed legislation.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleC>
+    <IRS990ScheduleD documentId="R000005" softwareId="24021167" softwareVersionNum="v1.00">
+      <LandGrp>
+        <InvestmentCostOrOtherBasisAmt>0</InvestmentCostOrOtherBasisAmt>
+        <OtherCostOrOtherBasisAmt>0</OtherCostOrOtherBasisAmt>
+        <BookValueAmt>0</BookValueAmt>
+      </LandGrp>
+      <BuildingsGrp>
+        <InvestmentCostOrOtherBasisAmt>0</InvestmentCostOrOtherBasisAmt>
+        <OtherCostOrOtherBasisAmt>0</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>0</DepreciationAmt>
+        <BookValueAmt>0</BookValueAmt>
+      </BuildingsGrp>
+      <LeaseholdImprovementsGrp>
+        <InvestmentCostOrOtherBasisAmt>0</InvestmentCostOrOtherBasisAmt>
+        <OtherCostOrOtherBasisAmt>547100</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>547100</DepreciationAmt>
+        <BookValueAmt>0</BookValueAmt>
+      </LeaseholdImprovementsGrp>
+      <EquipmentGrp>
+        <InvestmentCostOrOtherBasisAmt>0</InvestmentCostOrOtherBasisAmt>
+        <OtherCostOrOtherBasisAmt>1585958</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>1250621</DepreciationAmt>
+        <BookValueAmt>335337</BookValueAmt>
+      </EquipmentGrp>
+      <OtherLandBuildingsGrp>
+        <InvestmentCostOrOtherBasisAmt>0</InvestmentCostOrOtherBasisAmt>
+        <OtherCostOrOtherBasisAmt>2114747</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>0</DepreciationAmt>
+        <BookValueAmt>2114747</BookValueAmt>
+      </OtherLandBuildingsGrp>
+      <TotalBookValueLandBuildingsAmt>2450084</TotalBookValueLandBuildingsAmt>
+      <FederalIncomeTaxLiabilityAmt>0</FederalIncomeTaxLiabilityAmt>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>Lease Liabilities</Desc>
+        <Amt>13117046</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>Retirement Plan Liabilities</Desc>
+        <Amt>428778</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>13545824</TotalLiabilityAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>21043389</TotalRevEtcAuditedFinclStmtAmt>
+      <NetUnrealizedGainsInvstAmt>-115062</NetUnrealizedGainsInvstAmt>
+      <DonatedServicesAndUseFcltsAmt>0</DonatedServicesAndUseFcltsAmt>
+      <RecoveriesPriorYearGrantsAmt>1611286</RecoveriesPriorYearGrantsAmt>
+      <OtherRevenueAmt>0</OtherRevenueAmt>
+      <RevenueNotReportedAmt>1496224</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>19547165</RevenueSubtotalAmt>
+      <InvestmentExpensesNotIncldAmt>102619</InvestmentExpensesNotIncldAmt>
+      <OtherRevenuesNotIncludedAmt>0</OtherRevenuesNotIncludedAmt>
+      <RevenueNotReportedFinclStmtAmt>102619</RevenueNotReportedFinclStmtAmt>
+      <TotalRevenuePerForm990Amt>19649784</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>25971140</TotExpnsEtcAuditedFinclStmtAmt>
+      <DonatedServicesUseFcltsAmt>0</DonatedServicesUseFcltsAmt>
+      <PriorYearAdjustmentsAmt>0</PriorYearAdjustmentsAmt>
+      <LossesReportedAmt>0</LossesReportedAmt>
+      <OtherExpensesIncludedAmt>0</OtherExpensesIncludedAmt>
+      <ExpensesNotReportedAmt>0</ExpensesNotReportedAmt>
+      <ExpensesSubtotalAmt>25971140</ExpensesSubtotalAmt>
+      <InvestmentExpensesNotIncld2Amt>102619</InvestmentExpensesNotIncld2Amt>
+      <OtherExpensesNotIncludedAmt>0</OtherExpensesNotIncludedAmt>
+      <ExpensesNotRptFinclStmtAmt>102619</ExpensesNotRptFinclStmtAmt>
+      <TotalExpensesPerForm990Amt>26073759</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule D, Part X, Line 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>NTI is a tax-exempt organization under Section 501(c)(3) of the Internal Revenue Code, as amended. Management evaluated NTI's tax positions for open tax years (tax years subsequent to 2020) and concluded that a provision for uncertain tax positions is not required. NTI has taken no uncertain tax positions nor are there any related penalties or interest that require adjustment to the accompanying financial statements.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="R000006" softwareId="24021167" softwareVersionNum="v1.00">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Europe (including Iceland and Greenland)</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>Program Services</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>Program Services</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>895695</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>East Asia and the Pacific</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>Program Services</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>Program Services</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>200467</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Russia and Neighboring States</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>Program Services</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>Program Services</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>24503</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Middle East and North Africa</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>Program Services</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>Program Services</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>16227</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>North America (including Canada and Mexico, but not the United States)</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>Program Services</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>Program Services</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>14886</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Sub-Saharan Africa</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>Program Services</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>Program Services</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>7258</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>South America</RegionTxt>
+        <OfficesCnt>0</OfficesCnt>
+        <EmployeeCnt>0</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>Program Services</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>Program Services</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>84</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <TotalOfficeCnt>0</TotalOfficeCnt>
+      <TotalEmployeeCnt>0</TotalEmployeeCnt>
+      <TotalSpentAmt>1159120</TotalSpentAmt>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>Europe (including Iceland and Greenland)</RegionTxt>
+        <PurposeOfGrantTxt>Support for International Biosecurity and Biosafety Initiative for Science (IBBIS) toward its mission to strengthen biosecurity norms and develop innovative tools to uphold them</PurposeOfGrantTxt>
+        <CashGrantAmt>3847754</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>Wire Transfer</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>0</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FMV</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>Europe (including Iceland and Greenland)</RegionTxt>
+        <PurposeOfGrantTxt>Support for European nuclear security engagement</PurposeOfGrantTxt>
+        <CashGrantAmt>300000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>Wire Transfer</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>0</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FMV</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>East Asia and the Pacific</RegionTxt>
+        <PurposeOfGrantTxt>Support for Asia-Pacific nuclear security engagement</PurposeOfGrantTxt>
+        <CashGrantAmt>275000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>Wire Transfer</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>0</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FMV</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>Europe (including Iceland and Greenland)</RegionTxt>
+        <PurposeOfGrantTxt>Grant to plan and administer the Cyber Nuclear Forum</PurposeOfGrantTxt>
+        <CashGrantAmt>120000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>Wire Transfer</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>0</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FMV</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>Europe (including Iceland and Greenland)</RegionTxt>
+        <PurposeOfGrantTxt>Support the refinement and optimization of the Common Mechanism for DNA Synthesis Screening</PurposeOfGrantTxt>
+        <CashGrantAmt>115031</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>Wire Transfer</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>0</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FMV</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>Europe (including Iceland and Greenland)</RegionTxt>
+        <PurposeOfGrantTxt>Support emerging leaders (YGLN) on Euro-Atlantic Security</PurposeOfGrantTxt>
+        <CashGrantAmt>20000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>Wire Transfer</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <DescriptionOfNonCashAsstTxt>0</DescriptionOfNonCashAsstTxt>
+        <ValuationMethodUsedDesc>FMV</ValuationMethodUsedDesc>
+      </GrantsToOrgOutsideUSGrp>
+      <Total501c3OrgCnt>7</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>0</TotalOtherOrgCnt>
+      <TransferToForeignCorpInd>0</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>0</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>0</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>0</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>0</ForeignPartnershipInd>
+      <BoycottCountriesInd>0</BoycottCountriesInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule F, Part I, Line 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>For each grant NTI makes, a grant agreement is drawn up between NTI and the grantee and is signed by both parties. No funds are disbursed to grantees before grant agreements are signed and NTI has performed export compliance control checks and received satisfactory results. The agreements set forth the legal terms of the grant, including required grantee compliance with export controls laws and regulations. The agreements also include the grant budget and make clear what the grant funds may and may not be used for. The grant agreements require grantees to keep complete and accurate books and records of receipts and expenditures made in connection with the grant. The grant agreements require the grantee to prepare and submit, at least annually, narrative and financial reports to NTI that describe what was accomplished with the grant and how the funds were spent. The reports are reviewed by NTI's programmatic and financial personnel. NTI's program personnel maintain regular contact with grantees throughout the grant period, including in-person and via phone and video conferencing.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule F, Part I, Line 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>NTI uses the accrual method of accounting of expenses and grants.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule F, Part II, Line 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>NTI uses the accrual method of accounting of expenses and grants.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleF>
+    <IRS990ScheduleG documentId="R000007" softwareId="24021167" softwareVersionNum="v1.00">
+      <MailSolicitationsInd>X</MailSolicitationsInd>
+      <EmailSolicitationsInd>X</EmailSolicitationsInd>
+      <InPersonSolicitationsInd>X</InPersonSolicitationsInd>
+      <SolicitationOfNonGovtGrantsInd>X</SolicitationOfNonGovtGrantsInd>
+      <AgrmtProfFundraisingActyInd>1</AgrmtProfFundraisingActyInd>
+      <FundraiserActivityInfoGrp>
+        <OrganizationBusinessName>
+          <BusinessNameLine1Txt>Velocity Global LLC</BusinessNameLine1Txt>
+        </OrganizationBusinessName>
+        <USAddress>
+          <AddressLine1Txt>3858 Walnut St Suite 107</AddressLine1Txt>
+          <CityNm>Denver</CityNm>
+          <StateAbbreviationCd>CO</StateAbbreviationCd>
+          <ZIPCd>80205</ZIPCd>
+        </USAddress>
+        <ActivityTxt>General consulting for fundraising</ActivityTxt>
+        <FundraiserControlOfFundsInd>0</FundraiserControlOfFundsInd>
+        <GrossReceiptsAmt>0</GrossReceiptsAmt>
+        <RetainedByContractorAmt>182166</RetainedByContractorAmt>
+        <NetToOrganizationAmt>-182166</NetToOrganizationAmt>
+      </FundraiserActivityInfoGrp>
+      <FundraiserActivityInfoGrp>
+        <PersonNm>Andrea L Eisler</PersonNm>
+        <USAddress>
+          <AddressLine1Txt>2426 19th Street NW Apt 402</AddressLine1Txt>
+          <CityNm>Washington</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20009</ZIPCd>
+        </USAddress>
+        <ActivityTxt>Fundraising research</ActivityTxt>
+        <FundraiserControlOfFundsInd>0</FundraiserControlOfFundsInd>
+        <GrossReceiptsAmt>0</GrossReceiptsAmt>
+        <RetainedByContractorAmt>29144</RetainedByContractorAmt>
+        <NetToOrganizationAmt>-29144</NetToOrganizationAmt>
+      </FundraiserActivityInfoGrp>
+      <FundraiserActivityInfoGrp>
+        <PersonNm>Heidi Hermisson</PersonNm>
+        <USAddress>
+          <AddressLine1Txt>4808 44th Street NW</AddressLine1Txt>
+          <CityNm>Washington</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20016</ZIPCd>
+        </USAddress>
+        <ActivityTxt>General consulting for fundraising</ActivityTxt>
+        <FundraiserControlOfFundsInd>0</FundraiserControlOfFundsInd>
+        <GrossReceiptsAmt>0</GrossReceiptsAmt>
+        <RetainedByContractorAmt>12528</RetainedByContractorAmt>
+        <NetToOrganizationAmt>-12528</NetToOrganizationAmt>
+      </FundraiserActivityInfoGrp>
+      <FundraiserActivityInfoGrp>
+        <PersonNm>Therese Murphy</PersonNm>
+        <USAddress>
+          <AddressLine1Txt>2902 Upton St NW</AddressLine1Txt>
+          <CityNm>Washington</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20008</ZIPCd>
+        </USAddress>
+        <ActivityTxt>General consulting for fundraising</ActivityTxt>
+        <FundraiserControlOfFundsInd>0</FundraiserControlOfFundsInd>
+        <GrossReceiptsAmt>0</GrossReceiptsAmt>
+        <RetainedByContractorAmt>10693</RetainedByContractorAmt>
+        <NetToOrganizationAmt>-10693</NetToOrganizationAmt>
+      </FundraiserActivityInfoGrp>
+      <FundraiserActivityInfoGrp>
+        <OrganizationBusinessName>
+          <BusinessNameLine1Txt>Aperio Philanthropy LLC</BusinessNameLine1Txt>
+        </OrganizationBusinessName>
+        <USAddress>
+          <AddressLine1Txt>300 Cadman Plaza West 12th Floor</AddressLine1Txt>
+          <CityNm>Brooklyn</CityNm>
+          <StateAbbreviationCd>NY</StateAbbreviationCd>
+          <ZIPCd>11201</ZIPCd>
+        </USAddress>
+        <ActivityTxt>Fundraising research</ActivityTxt>
+        <FundraiserControlOfFundsInd>0</FundraiserControlOfFundsInd>
+        <GrossReceiptsAmt>0</GrossReceiptsAmt>
+        <RetainedByContractorAmt>10000</RetainedByContractorAmt>
+        <NetToOrganizationAmt>-10000</NetToOrganizationAmt>
+      </FundraiserActivityInfoGrp>
+      <TotalGrossReceiptsAmt>0</TotalGrossReceiptsAmt>
+      <TotalRetainedByContractorsAmt>244531</TotalRetainedByContractorsAmt>
+      <TotalNetToOrganizationAmt>-244531</TotalNetToOrganizationAmt>
+      <AllStatesCd>All States</AllStatesCd>
+    </IRS990ScheduleG>
+    <IRS990ScheduleI documentId="R000008" softwareId="24021167" softwareVersionNum="v1.00">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Middlebury Institute of International Studies at Monterey</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>460 Pierce Street</AddressLine1Txt>
+          <CityNm>Monterey</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>93940</ZIPCd>
+        </USAddress>
+        <RecipientEIN>030179298</RecipientEIN>
+        <IRCSectionDesc>501(c) (3)</IRCSectionDesc>
+        <CashGrantAmt>235000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>To maintain research on NTI's website</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Horizon 2045</BusinessNameLine1Txt>
+          <BusinessNameLine2Txt>Office of Sponsored Projects</BusinessNameLine2Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>203 Flamingo Road</AddressLine1Txt>
+          <CityNm>Mill Valley</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94941</ZIPCd>
+        </USAddress>
+        <RecipientEIN>933515328</RecipientEIN>
+        <IRCSectionDesc>501(c) (3)</IRCSectionDesc>
+        <CashGrantAmt>50000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>To identify disruptive legal and normative strategies to help shift the nuclear weapons system towards disarmament.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Herbert Scoville Jr Peace Fellowship</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>322 4th Street NE</AddressLine1Txt>
+          <CityNm>Washington</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20002</ZIPCd>
+        </USAddress>
+        <RecipientEIN>521755133</RecipientEIN>
+        <IRCSectionDesc>501(c) (3)</IRCSectionDesc>
+        <CashGrantAmt>25000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>To support the Scoville fellowship program</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Brown University</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>Controllers Office</AddressLine1Txt>
+          <AddressLine2Txt>Box J</AddressLine2Txt>
+          <CityNm>Providence</CityNm>
+          <StateAbbreviationCd>RI</StateAbbreviationCd>
+          <ZIPCd>02912</ZIPCd>
+        </USAddress>
+        <RecipientEIN>050258809</RecipientEIN>
+        <IRCSectionDesc>501(a)</IRCSectionDesc>
+        <CashGrantAmt>20000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>To support a pilot of a Regional Health Security Index.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>SynBioBeta LLC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>3559 Mount Diablo Boulevard</AddressLine1Txt>
+          <AddressLine2Txt>2</AddressLine2Txt>
+          <CityNm>Lafayette</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94549</ZIPCd>
+        </USAddress>
+        <RecipientEIN>460828425</RecipientEIN>
+        <CashGrantAmt>15000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>To support a SynBio Beta conference</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Center for Arms Control and Non Proliferation</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>820 1st St NE</AddressLine1Txt>
+          <AddressLine2Txt>Suite LL 180</AddressLine2Txt>
+          <CityNm>Washington</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20002</ZIPCd>
+        </USAddress>
+        <RecipientEIN>042693322</RecipientEIN>
+        <IRCSectionDesc>501(c) (3)</IRCSectionDesc>
+        <CashGrantAmt>12000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>To support Congressional education on Cranes campaign</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>5</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>1</TotalOtherOrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule I, Part I, Line 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>For each grant NTI makes, a grant agreement is drawn up between NTI and the grantee and is signed by both parties. No funds are disbursed to grantees before grant agreements are signed and NTI has performed export compliance control checks and received satisfactory results. The agreements set forth the legal terms of the grant, including required grantee compliance with export controls laws and regulations. The agreements also include the grant budget and make clear what the grant funds may and may not be used for. The grant agreements require grantees to keep complete and accurate books and records of receipts and expenditures made in connection with the grant. The grant agreements require the grantee to prepare and submit, at least annually, narrative and financial reports to NTI that describe what was accomplished with the grant and how the funds were spent. The reports are reviewed by NTI's programmatic and financial personnel. NTI's program personnel maintain regular contact with grantees throughout the grant period, including in-person and via phone and video conferencing.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleJ documentId="R000009" softwareId="24021167" softwareVersionNum="v1.00">
+      <FirstClassOrCharterTravelInd>X</FirstClassOrCharterTravelInd>
+      <TravelForCompanionsInd>X</TravelForCompanionsInd>
+      <WrittenPolicyRefTAndEExpnssInd>1</WrittenPolicyRefTAndEExpnssInd>
+      <SubstantiationRequiredInd>1</SubstantiationRequiredInd>
+      <CompensationCommitteeInd>X</CompensationCommitteeInd>
+      <CompensationSurveyInd>X</CompensationSurveyInd>
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>1</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>0</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>0</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>0</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>0</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>0</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>0</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>1</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>0</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Joan Rohlfing</PersonNm>
+        <TitleTxt>President and COO, Board of Directors</TitleTxt>
+        <BaseCompensationFilingOrgAmt>447312</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>10000</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>46700</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>52784</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>556796</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Lynn Rusten</PersonNm>
+        <TitleTxt>VP, Global Nuclear Policy Program</TitleTxt>
+        <BaseCompensationFilingOrgAmt>271044</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>205500</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>27400</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>26729</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>530673</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Ernest J Moniz</PersonNm>
+        <TitleTxt>CEO and Co-Chair, Board of Directors</TitleTxt>
+        <BaseCompensationFilingOrgAmt>462562</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>10000</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>46584</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>7666</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>526812</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Carmen MacDougall</PersonNm>
+        <TitleTxt>Senior Vice President</TitleTxt>
+        <BaseCompensationFilingOrgAmt>312660</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>5000</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>33000</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>52378</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>403038</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Amy Hargrett</PersonNm>
+        <TitleTxt>Chief Financial Officer, Treasurer, and VP</TitleTxt>
+        <BaseCompensationFilingOrgAmt>303982</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>5000</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>30935</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>47149</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>387066</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Jaime Yassif</PersonNm>
+        <TitleTxt>VP, Global Biological Policy and Programs</TitleTxt>
+        <BaseCompensationFilingOrgAmt>278405</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>10000</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>28800</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>16197</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>333402</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Scott Roecker</PersonNm>
+        <TitleTxt>VP, Nuclear Materials Security</TitleTxt>
+        <BaseCompensationFilingOrgAmt>263271</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>27100</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>42782</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>333153</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Margaret Hall</PersonNm>
+        <TitleTxt>VP, Communications</TitleTxt>
+        <BaseCompensationFilingOrgAmt>218946</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>2000</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>22900</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>57410</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>301256</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Catherine Gwin</PersonNm>
+        <TitleTxt>Sr Director, Communications</TitleTxt>
+        <BaseCompensationFilingOrgAmt>194714</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>3000</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>20537</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>51277</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>269528</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Hayley Severance</PersonNm>
+        <TitleTxt>Deputy VP, Global Biological Policy and Programs</TitleTxt>
+        <BaseCompensationFilingOrgAmt>211888</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>21507</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>23812</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>257207</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Samantha Neakrase</PersonNm>
+        <TitleTxt>Sr Director, Strategic Initiatives</TitleTxt>
+        <BaseCompensationFilingOrgAmt>206199</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>20791</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>16554</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>243544</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Jessica Bell</PersonNm>
+        <TitleTxt>Sr Director, Global Biological Policy and Programs</TitleTxt>
+        <BaseCompensationFilingOrgAmt>187384</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>18746</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>13501</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>219631</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Eric Brewer</PersonNm>
+        <TitleTxt>Deputy VP, Nuclear Materials Security</TitleTxt>
+        <BaseCompensationFilingOrgAmt>189918</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>1500</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>19150</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>2763</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>213331</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Sam Nunn</PersonNm>
+        <TitleTxt>Strategic Advisor and Co-Chair, Board of Directors</TitleTxt>
+        <BaseCompensationFilingOrgAmt>178747</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>0</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>0</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>178747</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Hugh Sullivan</PersonNm>
+        <TitleTxt>VP, Development</TitleTxt>
+        <BaseCompensationFilingOrgAmt>112870</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>12000</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>15798</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>140668</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Page Stoutland</PersonNm>
+        <TitleTxt>Consultant</TitleTxt>
+        <BaseCompensationFilingOrgAmt>126575</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>0</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>0</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>126575</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule J, Part I, Line 1a</FormAndLineReferenceDesc>
+        <ExplanationTxt>NTI's travel policy allows for (1) first class travel for certain officers and Board members for business purposes; and (2) companion travel for certain officers and Board members to attend Board meetings. These benefits are not treated as taxable compensation to the recipients.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule J, Part I, Line 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>Each year, NTI participates in a field-wide compensation study, and periodically engages a consultant to perform a compensation study and to benchmark NTI's compensation levels. These studies are used to inform compensation decisions. Additionally, NTI's Board of Directors has a Compensation Committee whose members may not include current or former directors who are also salaried senior executives of NTI. Annually, the Compensation Committee reviews the performance of NTI's senior executives, recommends to the full Board its determination of compensation and benefits of the CEO, President, the highest-ranking Vice President, and the Treasurer. The Compensation Committee also determines the annual salary and benefits of NTI's other officers.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule J, Part I, Line 4</FormAndLineReferenceDesc>
+        <ExplanationTxt>Lynn Rusten, VP Global Nuclear Policy Program received $205,500 in severance at 12/31/2024</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule J, Part I, Line 7</FormAndLineReferenceDesc>
+        <ExplanationTxt>Bonuses</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleL documentId="R000010" softwareId="24021167" softwareVersionNum="v1.00">
+      <BusTrInvolveInterestedPrsnGrp>
+        <NameOfInterested>
+          <PersonNm>Sam Nunn</PersonNm>
+        </NameOfInterested>
+        <RelationshipDescriptionTxt>OFFICER</RelationshipDescriptionTxt>
+        <TransactionAmt>178747</TransactionAmt>
+        <TransactionDesc>Independent contractor</TransactionDesc>
+        <SharingOfRevenuesInd>0</SharingOfRevenuesInd>
+      </BusTrInvolveInterestedPrsnGrp>
+      <BusTrInvolveInterestedPrsnGrp>
+        <NameOfInterested>
+          <PersonNm>Page Stoutland</PersonNm>
+        </NameOfInterested>
+        <RelationshipDescriptionTxt>FORMER OFFICER</RelationshipDescriptionTxt>
+        <TransactionAmt>126575</TransactionAmt>
+        <TransactionDesc>Independent contractor</TransactionDesc>
+        <SharingOfRevenuesInd>0</SharingOfRevenuesInd>
+      </BusTrInvolveInterestedPrsnGrp>
+    </IRS990ScheduleL>
+    <IRS990ScheduleM documentId="R000011" softwareId="24021167" softwareVersionNum="v1.00">
+      <SecuritiesPubliclyTradedGrp>
+        <NonCashCheckboxInd>X</NonCashCheckboxInd>
+        <ContributionCnt>2</ContributionCnt>
+        <NoncashContributionsRptF990Amt>7042908</NoncashContributionsRptF990Amt>
+        <MethodOfDeterminingRevenuesTxt>FMV</MethodOfDeterminingRevenuesTxt>
+      </SecuritiesPubliclyTradedGrp>
+      <Form8283ReceivedCnt>0</Form8283ReceivedCnt>
+      <AnyPropertyThatMustBeHeldInd>0</AnyPropertyThatMustBeHeldInd>
+      <ReviewProcessUnusualNCGiftsInd>0</ReviewProcessUnusualNCGiftsInd>
+      <ThirdPartiesUsedInd>0</ThirdPartiesUsedInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Schedule M, Part I, Line 9</FormAndLineReferenceDesc>
+        <ExplanationTxt>Column b represents the number of contributions.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleM>
+    <IRS990ScheduleO documentId="R000012" softwareId="24021167" softwareVersionNum="v1.00">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section A, Line 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>- One of NTI's Board members is the daughter of one of NTI's Co-Chairs. NTI's Corporate Secretary is married to the Board member who is a daughter of one of NTI's Co-Chairs.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 11b</FormAndLineReferenceDesc>
+        <ExplanationTxt>NTI's Form 990 is prepared by its Finance Department. It is reviewed by NTI's Chief Financial Officer, President, CEO, its external auditors, BDO, and by its external legal counsel, Davis Pickren Seydel and Sneed. The Form 990 is also reviewed by NTI's Audit Committee, which reviews the form on behalf of the full Board. The full Board is briefed on the contents of the form and the date of the filing.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 12c</FormAndLineReferenceDesc>
+        <ExplanationTxt>NTI's bylaws require that a copy of the organization's Conflict of Interest Policy, as adopted by the Board, be furnished to each Board member, officer, and staff member. NTI prohibits officers and staff from participating or engaging in any activity for which a conflict of interest exists. Officers and staff also give consideration to perceived conflicts of interest. Board members are recused from decisions of the Board in which a conflict of interest exists. Board members also give consideration to perceived conflicts of interest. Board members, officers, and staff are required to disclose to NTI any related party and any reportable affiliates that may apply for, or otherwise be considered by NTI, for a grant or other financial transaction.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 15</FormAndLineReferenceDesc>
+        <ExplanationTxt>NTI's Board of Directors has a Compensation Committee that annually reviews the performance of NTI's senior executives, recommends to the full Board its determination of compensation and benefits of the CEO, President, the highest-ranking Vice President, and the Treasurer. The Compensation Committee also determines the annual salary and benefits of NTI's other senior executives.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section C, Line 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>NTI's website includes links to downloadable copies of its annual reports, which include financial data. Other information is available upon request.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part IX, Line 11g</FormAndLineReferenceDesc>
+        <ExplanationTxt>Expenses included in this line relate to employment recruiting fees ($79,215), Honoraria ($70,726), Temporary help ($24,314), Photography and Video ($167,794), Employee processing costs for Payroll, 401K, and flexible spending ($53,866)and Professional services other than Legal fees, Accounting fees, Compensation of current officers, directors, trustees, and Fundraising fees ($4,159,895.39).</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part XI, Line 9</FormAndLineReferenceDesc>
+        <ExplanationTxt>Other changes due to the return of unspent funds from IAEA LEU bank ($1,610,286) and Columbia university</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

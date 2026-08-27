@@ -1,0 +1,165 @@
+RP CEO EXPANDED REBENCHMARK - INDEPENDENT VALIDATION REPORT
+Status: PASS WITH DOCUMENTED SOURCE-ARCHIVE AND STAFF-DATA LIMITATIONS
+Checks passed: 155
+Checks failed: 0
+Warnings: 2
+
+[PASS] Required file: deliverables/rp_ceo_expanded_rebenchmark_report.pdf - bytes=521911
+[PASS] Required file: deliverables/rp_ceo_expanded_rebenchmark_report.md - bytes=65886
+[PASS] Required file: deliverables/rp_ceo_expanded_benchmark_workbook.xlsx - bytes=207421
+[PASS] Required file: deliverables/expanded_reference_set.csv - bytes=76321
+[PASS] Required file: deliverables/form990_evidence.csv - bytes=117967
+[PASS] Required file: deliverables/job_ad_evidence.csv - bytes=34995
+[PASS] Required file: deliverables/peer_inclusion_exclusion_log.csv - bytes=151713
+[PASS] Required file: deliverables/rp_public_profile.csv - bytes=6807
+[PASS] Required file: deliverables/source_manifest.csv - bytes=242657
+[PASS] Required file: analysis/stats.json - bytes=12552
+[PASS] Required file: analysis/summary_statistics.csv - bytes=1826
+[PASS] Required file: data/form990_evidence_working.csv - bytes=92238
+[PASS] Required file: data/job_ad_evidence_expanded.csv - bytes=33919
+[PASS] Required file: data/original_source_manifest.csv - bytes=29538
+[PASS] Frozen file exists: extension2_protocol_amendment.md - frozen/extension2_protocol_amendment.md
+[PASS] Frozen hash sidecar exists: extension2_protocol_amendment.md - frozen/extension2_protocol_amendment.md.sha256
+[PASS] Frozen checksum: extension2_protocol_amendment.md - expected=bcfa477a761a54ee0ea99c4a8d969ab440f50a247b54f3b144bf4d7226bb81b2; actual=bcfa477a761a54ee0ea99c4a8d969ab440f50a247b54f3b144bf4d7226bb81b2
+[PASS] Frozen file exists: extension2_new_candidates_precomp.csv - frozen/extension2_new_candidates_precomp.csv
+[PASS] Frozen hash sidecar exists: extension2_new_candidates_precomp.csv - frozen/extension2_new_candidates_precomp.csv.sha256
+[PASS] Frozen checksum: extension2_new_candidates_precomp.csv - expected=9ed0ee56e13d29ea571124a8373d39e1d5d2b877d599e410f5c27d3b9ede68a8; actual=9ed0ee56e13d29ea571124a8373d39e1d5d2b877d599e410f5c27d3b9ede68a8
+[PASS] Frozen file exists: combined_peer_universe_precomp.csv - frozen/combined_peer_universe_precomp.csv
+[PASS] Frozen hash sidecar exists: combined_peer_universe_precomp.csv - frozen/combined_peer_universe_precomp.csv.sha256
+[PASS] Frozen checksum: combined_peer_universe_precomp.csv - expected=5ab36e39683e2b11f96faabaa39a8994081e13e82425263e45a28bd3f37daeba; actual=5ab36e39683e2b11f96faabaa39a8994081e13e82425263e45a28bd3f37daeba
+[PASS] Frozen file exists: extension3_protocol_amendment.md - frozen/extension3_protocol_amendment.md
+[PASS] Frozen hash sidecar exists: extension3_protocol_amendment.md - frozen/extension3_protocol_amendment.md.sha256
+[PASS] Frozen checksum: extension3_protocol_amendment.md - expected=c048466b556ea38232fcfbd8ed92745fa9a198706eb2a9a7115041c1b9dea27b; actual=c048466b556ea38232fcfbd8ed92745fa9a198706eb2a9a7115041c1b9dea27b
+[PASS] Frozen file exists: extension3_new_candidates_precomp.csv - frozen/extension3_new_candidates_precomp.csv
+[PASS] Frozen hash sidecar exists: extension3_new_candidates_precomp.csv - frozen/extension3_new_candidates_precomp.csv.sha256
+[PASS] Frozen checksum: extension3_new_candidates_precomp.csv - expected=b0c04fb1cec71b2496da1d8ade07d74ebf14abc43f11dc7ede81581f3b3316cc; actual=b0c04fb1cec71b2496da1d8ade07d74ebf14abc43f11dc7ede81581f3b3316cc
+[PASS] Frozen file exists: combined_peer_universe_3wave_precomp.csv - frozen/combined_peer_universe_3wave_precomp.csv
+[PASS] Frozen hash sidecar exists: combined_peer_universe_3wave_precomp.csv - frozen/combined_peer_universe_3wave_precomp.csv.sha256
+[PASS] Frozen checksum: combined_peer_universe_3wave_precomp.csv - expected=d84b6c772f8017bd4ddb8a4327012aabe40b6cd25198552558b4018f6c32e4c3; actual=d84b6c772f8017bd4ddb8a4327012aabe40b6cd25198552558b4018f6c32e4c3
+[PASS] Frozen file exists: legacy_original_peer_bridge_precomp.csv - frozen/legacy_original_peer_bridge_precomp.csv
+[PASS] Frozen hash sidecar exists: legacy_original_peer_bridge_precomp.csv - frozen/legacy_original_peer_bridge_precomp.csv.sha256
+[PASS] Frozen checksum: legacy_original_peer_bridge_precomp.csv - expected=ec5924cc4586012f2d1d1f902284954958d31a03bf4578807be399729a255c12; actual=ec5924cc4586012f2d1d1f902284954958d31a03bf4578807be399729a255c12
+[PASS] Third-wave frozen expansion universe has 450 organizations
+[PASS] Second-wave candidate freeze has 145 organizations
+[PASS] Third-wave candidate freeze has 145 organizations
+[PASS] Documented peer log has 452 unique organizations
+[PASS] Selected reference set has 144 unique organizations
+[PASS] Selected tiers total correctly - {'A': 79, 'B': 39, 'C': 26}
+[PASS] No selected reference organization was marked pay-seen before freeze
+[PASS] Stats selected-reference count agrees - stats=144; csv=144
+[PASS] Primary filing required field complete: organization - missing=0
+[PASS] Primary filing required field complete: ein - missing=0
+[PASS] Primary filing required field complete: irs_object_id - missing=0
+[PASS] Primary filing required field complete: tax_period_begin - missing=0
+[PASS] Primary filing required field complete: tax_period_end - missing=0
+[PASS] Primary filing required field complete: filing_date - missing=0
+[PASS] Primary filing required field complete: ceo_name - missing=0
+[PASS] Primary filing required field complete: ceo_title - missing=0
+[PASS] Primary filing required field complete: compensation_calendar_year - missing=0
+[PASS] Primary filing required field complete: part_vii_org - missing=0
+[PASS] Primary filing required field complete: part_vii_related - missing=0
+[PASS] Primary filing required field complete: part_vii_other - missing=0
+[PASS] Primary filing required field complete: cash_proxy - missing=0
+[PASS] Primary filing required field complete: total_proxy - missing=0
+[PASS] Primary filing required field complete: revenue - missing=0
+[PASS] Primary filing required field complete: expenses - missing=0
+[PASS] Primary filing required field complete: official_irs_url - missing=0
+[PASS] Primary filing required field complete: propublica_url - missing=0
+[PASS] Primary filing required field complete: source_id - missing=0
+[PASS] Primary filing required field complete: extraction_location - missing=0
+[PASS] Primary filing organizations unique - n=116; unique=116
+[PASS] Primary filing observation count is 116
+[PASS] Structurally clean filing count is 79
+[PASS] At least 100 primary-use filing observations
+[PASS] Cash proxy arithmetic
+[PASS] Total proxy arithmetic
+[PASS] CPI-normalized cash arithmetic
+[PASS] CPI-normalized total arithmetic
+[PASS] Primary filing dates parse
+[PASS] No primary filing after cutoff
+[PASS] No exact Schedule J base silently imputed
+[PASS] Stats primary count agrees
+[PASS] Stats clean count agrees
+[PASS] Known staff availability disclosed - known=43; missing=73
+[PASS] Statistic n: all_primary_eligible - csv=116; stats=116
+[PASS] Cash median: all_primary_eligible
+[PASS] Total median: all_primary_eligible
+[PASS] Statistic n: structurally_clean - csv=79; stats=79
+[PASS] Cash median: structurally_clean
+[PASS] Total median: structurally_clean
+[PASS] Statistic n: tier_A - csv=71; stats=71
+[PASS] Cash median: tier_A
+[PASS] Total median: tier_A
+[PASS] Statistic n: tier_A_B - csv=104; stats=104
+[PASS] Cash median: tier_A_B
+[PASS] Total median: tier_A_B
+[PASS] Statistic n: expense_and_available_staff_match - csv=59; stats=59
+[PASS] Cash median: expense_and_available_staff_match
+[PASS] Total median: expense_and_available_staff_match
+[PASS] Statistic n: joint_expense_and_known_staff_match - csv=17; stats=17
+[PASS] Cash median: joint_expense_and_known_staff_match
+[PASS] Total median: joint_expense_and_known_staff_match
+[PASS] Statistic n: EA_core_or_adjacent - csv=67; stats=67
+[PASS] Cash median: EA_core_or_adjacent
+[PASS] Total median: EA_core_or_adjacent
+[PASS] Statistic n: functional_only - csv=49; stats=49
+[PASS] Cash median: functional_only
+[PASS] Total median: functional_only
+[PASS] Leave-one-out close-scale n
+[PASS] Leave-one-out cash minimum
+[PASS] Leave-one-out cash maximum
+[PASS] Leave-one-out total minimum
+[PASS] Leave-one-out total maximum
+[PASS] Quant job-ad required field complete: organization
+[PASS] Quant job-ad required field complete: role_title
+[PASS] Quant job-ad required field complete: posting_date
+[PASS] Quant job-ad required field complete: salary_min
+[PASS] Quant job-ad required field complete: salary_max
+[PASS] Quant job-ad required field complete: location
+[PASS] Quant job-ad required field complete: original_url
+[PASS] Quant job-ad required field complete: retrieved_at
+[PASS] Quant job-ad required field complete: source_id
+[PASS] Quant job-ad required field complete: archive_path
+[PASS] Quantitative job-ad count is 15
+[PASS] Job-ad organizations unique
+[PASS] Job-ad ranges valid
+[PASS] Job-ad archive paths exist
+[PASS] Stats job-ad count agrees
+[PASS] Job-ad sample n: strict_primary
+[PASS] Job-ad midpoint median: strict_primary
+[PASS] Job-ad sample n: close_title_scale
+[PASS] Job-ad midpoint median: close_title_scale
+[PASS] Job-ad sample n: expanded_current
+[PASS] Job-ad midpoint median: expanded_current
+[PASS] Source manifest IDs unique
+[PASS] All manifest archive paths exist
+[PASS] All manifest byte lengths match
+[PASS] All manifest SHA-256 values match
+[PASS] Every primary filing source appears in manifest
+[PASS] Every quantitative job-ad source appears in manifest
+[PASS] Report contains: 144 selected organizations
+[PASS] Report contains: 116 primary-use incumbent observations
+[PASS] Report contains: 79 structurally clean
+[PASS] Report contains: Advertise $250K-$340K
+[PASS] Report contains: Successful incumbent base $290K-$350K
+[PASS] Report contains: $340K-$435K
+[PASS] Report contains: Exact Schedule J base
+[PASS] Report contains: not blind to the original benchmark
+[PASS] Report contains: d84b6c772f8017bd4ddb8a4327012aabe40b6cd25198552558b4018f6c32e4c3
+[PASS] Report PDF has expected substantive length - pages=17
+[PASS] PDF contains headline posting range
+[PASS] PDF contains primary observation count
+[PASS] Workbook contains required sheets - ['Summary', 'Reference Set', 'Primary 990', 'All 990', 'Quant Job Ads', 'All Job Ads', 'Sensitivities', 'Peer Log', 'Source Manifest', 'Protocol & Notes']
+[PASS] Workbook contains formulas for derived values - formulas=520
+[PASS] Workbook contains no formula-error literals - []
+[PASS] Workbook reference-set rows agree - workbook=144; csv=144
+[PASS] Workbook primary filing rows agree - workbook=116; csv=116
+[PASS] Workbook quantitative job-ad rows agree - workbook=15; csv=15
+[PASS] Analyst range ordered: external_posting - {'low': 250000, 'high': 340000, 'center': 295000, 'expected_hire_low': 280000, 'expected_hire_high': 320000}
+[PASS] Analyst range ordered: incumbent_base - {'low': 290000, 'high': 350000, 'center': 320000}
+[PASS] Analyst range ordered: recurring_total - {'low': 340000, 'high': 435000, 'center': 385000, 'confidence': 'low-to-moderate'}
+[PASS] Expected-hire zone within posting range
+
+WARNINGS
+- Employee count is unavailable for 73 of 116 primary observations; scale analyses therefore report both expense-only and joint known-staff views.
+- The archive preserves filing-derived snapshots and canonical IRS identifiers, not a complete source-native XML/PDF copy for every filing.

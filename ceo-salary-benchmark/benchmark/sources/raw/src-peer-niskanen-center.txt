@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Niskanen Center
+reference_tier: A
+tier_label: strict_primary
+selection_wave: original frozen protocol / legacy bridge
+topic_cluster: Research, evaluation, policy, or EA-adjacent evidence organization
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 45-5308952
+revenue: 9958495.0
+expenses: 10357724.0
+employee_count: 
+comparability_score: 85.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 726092.5898116659
+total_proxy_jul2026: 726978.2438308026
+ceo_title: President
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/455308952
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202523179349301947_public.xml
+selection_note: Selected under the original frozen protocol before compensation review; retained as a legacy bridge observation.

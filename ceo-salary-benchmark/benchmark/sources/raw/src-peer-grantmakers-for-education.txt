@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Grantmakers for Education
+reference_tier: B
+tier_label: Tier B weighted secondary
+selection_wave: third expansion / filing verification
+topic_cluster: philanthropy infrastructure
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: membership nonprofit
+ein: 33-0919329
+revenue: 3389406.0
+expenses: 3206947.0
+employee_count: 
+comparability_score: 84.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 250437.83469499767
+total_proxy_jul2026: 300201.5843832503
+ceo_title: Executive Director
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/330919329
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202543079349303299_public.xml
+selection_note: Added by the third-expansion freeze and retained after role/scale/title verification; pay did not determine selection.

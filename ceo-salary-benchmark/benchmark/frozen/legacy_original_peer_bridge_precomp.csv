@@ -1,0 +1,28 @@
+organization,preselected_tier,preselection_status,functional_basis,scale_basis_to_verify,geography,title_expected,founder_or_structure_flag,compensation_seen_at_selection,final_status,final_reason
+Charity Navigator,primary,selected,"Charity evaluation, data, research, donor decision support","Expected core $5M-$20M and 25-100 staff",US national/remote,President and CEO,none,no,pending,pending verification
+Institute for Progress,primary,selected,"Policy research and evidence-to-action think tank","Expected core $5M-$20M and 25-100 staff",Washington DC/national,CEO or Executive Director,possible founder,no,pending,pending verification
+Niskanen Center,primary,selected,"Policy research think tank with fundraising and public-impact strategy","Expected core $5M-$20M and 25-100 staff",Washington DC/national,President,none,no,pending,pending verification
+R Street Institute,primary,selected,"Policy research think tank, national reach, multi-program leadership","Expected core $10M-$25M and 50-100 staff",Washington DC/national,President and CEO,none,no,pending,pending verification
+Animal Charity Evaluators,primary,selected,"Research/evaluation, grant recommendations and field support","Expected core $3M-$8M and 15-40 staff",US remote/global,Executive Director,none,no,pending,pending verification
+Center for Open Science,primary,selected,"Research infrastructure, methodology, open-science services","Expected core $8M-$20M and 40-100 staff",US national/remote,CEO/Executive Director,founder possible,no,pending,pending verification
+Results for America,primary,selected,"Evidence use, policy research, technical assistance","Expected core $8M-$20M and 40-100 staff",Washington DC/national,CEO,none,no,pending,pending verification
+Partnership on AI,primary,selected,"Independent research, convening, policy and field-building","Expected core $10M-$25M and 40-100 staff",San Francisco/US remote,CEO,none,no,pending,pending verification
+Center for Democracy & Technology,primary,selected,"Technology policy research and public-interest analysis","Expected core $10M-$25M and 40-100 staff",Washington DC/national,President and CEO,none,no,pending,pending verification
+Future of Privacy Forum,primary,selected,"Technology policy research, convening, applied guidance","Expected core $8M-$20M and 30-80 staff",Washington DC/global,CEO,founder possible,no,pending,pending verification
+Social Science Research Council,secondary,selected,"Research, fellowships, grants, convening","Expected core $20M-$35M and 75-150 staff",New York/global,President,none,no,pending,upper-scale secondary
+Future of Life Institute,secondary,selected,"Research, policy, grants, global catastrophic-risk work","Expected core $5M-$20M and 15-50 staff",US/global,President or Executive Director,founder influence,no,pending,structural secondary
+Center for Effective Altruism / legal host,secondary,selected,"Research, field-building, community infrastructure","Umbrella legal host/pass-through complexity",US/UK/global,CEO,umbrella structure,no,pending,structure verification
+Center for Global Development,secondary,selected,"Global policy research and advisory work","Expected core above $20M and staff above 100",Washington DC/London,President,none,no,pending,larger-scale sensitivity
+Resources for the Future,secondary,selected,"Independent policy research institute","Expected core $20M-$35M and staff near/above 100",Washington DC,President and CEO,none,no,pending,upper-scale sensitivity
+GiveWell / legal host,secondary,selected,"Research-intensive charity evaluation and grant recommendations","Grantmaking/pass-through and legal-host complexity",US remote,CEO,none,no,pending,grantmaking/core-scale sensitivity
+Faunalytics,secondary,selected,"Animal-advocacy research and evidence services","Expected core below $3M and staff below 25",US remote,Executive Director,none,no,pending,small-scale sensitivity
+Machine Intelligence Research Institute,secondary,selected,"Technical research nonprofit","Expected core $3M-$10M and staff 15-40",Berkeley/remote,CEO,founder influence,no,pending,founder/mission-niche sensitivity
+Open Philanthropy,excluded,excluded,"Grantmaking-dominated","Much larger and pass-through/grant scale dominant",US remote,CEO,founder influence,no,excluded,pre-registered exclusion
+Innovations for Poverty Action,excluded,excluded,"Field delivery and country operations dominate","Much larger than RP core",Global,CEO,none,no,excluded,pre-registered exclusion
+Evidence Action,excluded,excluded,"Direct program implementation dominates","Much larger than RP core",Global,CEO,none,no,excluded,pre-registered exclusion
+Results for Development,excluded,excluded,"Implementation/consulting with large field portfolio","Likely much larger than RP core",Global,CEO,none,no,excluded,pre-registered exclusion
+RAND Corporation,excluded,excluded,"Research but vastly larger and quasi-commercial contracting","Vastly larger",US/global,President and CEO,none,no,excluded,pre-registered exclusion
+Urban Institute,excluded,excluded,"Research but vastly larger","Vastly larger",Washington DC,President,none,no,excluded,pre-registered exclusion
+New America,excluded,excluded,"Think tank but substantially larger and broad fellowship network","Likely above scale",Washington DC,CEO,none,no,excluded,pre-registered exclusion
+University centers,excluded,excluded,"Not standalone organization-wide nonprofit CEO role","Parent-university scale not comparable",various,Director,n/a,no,excluded,pre-registered exclusion
+Government agencies,excluded,excluded,"Government pay and accountability model","Not nonprofit labor market",various,Director/official,n/a,no,excluded,pre-registered exclusion

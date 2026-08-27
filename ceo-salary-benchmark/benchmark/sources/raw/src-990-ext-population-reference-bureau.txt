@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: Population Reference Bureau
+ein: 53-0214030
+source_wave: previous_expansion
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 94.0
+ceo_name: Jeffrey Jordan
+ceo_title: President & CEO
+top_executive_basis: prior clean full compensation year; later filing transition
+tax_period_begin: 2023-10-01
+tax_period_end: 2024-09-30
+compensation_calendar_year: 2023.0
+filing_date: 2025-06-27
+irs_object_id: 202501789349301305
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202501789349301305_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/530214030
+part_vii_org: 357544.0
+part_vii_related: 0.0
+part_vii_other: 57162.0
+cash_proxy: 357544.0
+total_proxy: 414706.0
+schedule_j_base: 
+revenue: 11745158.0
+expenses: 12190648.0
+employee_count: 59.0
+full_year_status: yes_for_compensation_calendar_2023
+founder_flag: no
+structure_flag: prior_year_due_transition
+analysis_status: primary_older_clean
+exclusion_reason: 
+notes: Most recent filing reflected 2024 CEO transition; used immediately prior full-year compensation year.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica FY2024 filing table
+source_id: SRC-990-EXT-POPULATION-REFERENCE-BUREAU
+part_vii_org_jul2026: 391827.2300586996
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 62642.99813341962
+cash_proxy_jul2026: 391827.2300586996
+total_proxy_jul2026: 454470.2281921192
+schedule_j_base_jul2026: 
+cpi_factor: 1.095885345744019
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: False
+close_expense: True
+staff_known: True
+staff_in_band: True
+close_scale: True
+joint_scale_known_staff: True
+analysis_weight: 1.1424979044425816

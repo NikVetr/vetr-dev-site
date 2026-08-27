@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-CHAPA-ROR-EXCL
+organization: Reach Out and Read (regional executive role)
+role_title: Regional Executive Director
+posting_date: 2026
+closing_date: 
+salary_min: 
+salary_max: 
+currency: USD
+salary_is_base: unknown
+salary_text: 
+location: United States region
+remote_status: 
+geographic_restrictions: 
+mission_operating_model: Regional program leadership within a national organization.
+annual_budget_or_expense: 
+scale_measure: 
+scale_year: 
+staff_count: 
+responsibilities: Regional leadership.
+reporting_relationship: Chief Operating Officer
+original_url: 
+resolved_url: 
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: job board
+archive_path: sources/raw/src-ad-reach-out-and-read-excluded.txt
+tier: excluded_subordinate_regional
+included_in_quantitative_analysis: no
+inclusion_reason: 
+exclusion_reason: Regional/subordinate executive reporting to COO; not organization-wide CEO equivalent.
+evidence_quality_notes: Logged as unsuccessful/rejected search.
+source_line_refs: turn690667view1 lines 27-50, 146-154
+cpi_period: 
+cpi_basis_note: Excluded.

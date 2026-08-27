@@ -1,0 +1,25 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Sightline Institute
+reference_tier: B
+tier_label: Tier B weighted secondary
+selection_wave: second expansion / filing verification
+topic_cluster: Climate, environment, and evidence
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 52-1833599
+revenue: 2520867.0
+expenses: 3249823.0
+employee_count: 
+comparability_score: 82.0
+selection_status: selected quantitative reference organization
+compensation_observation: yes
+cash_proxy_jul2026: 211351.9641725638
+total_proxy_jul2026: 242645.78250739988
+ceo_title: Executive Director
+compensation_year: 2024.0
+propublica_url: https://projects.propublica.org/nonprofits/organizations/521833599
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2025/202522249349300332_public.xml
+selection_note: Added by the second-expansion freeze and retained after role/scale verification; pay did not determine selection.

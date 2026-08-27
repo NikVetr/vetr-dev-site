@@ -1,0 +1,35 @@
+DERIVATIVE PEER-PROFILE SNAPSHOT
+Selection and scale facts only; compensation was not used to select or score the organization.
+
+organization: Candid
+reference_tier: C
+tier_label: Tier C broad sensitivity
+selection_wave: first expansion
+topic_cluster: Research, evaluation, philanthropy infrastructure, and policy
+ea_affinity: functional-only
+country_or_region: US
+expected_structure: independent nonprofit
+ein: 13-1837418
+revenue: 41100093.0
+expenses: 41312473.0
+employee_count: 221.0
+comparability_score: 57.0
+selection_status: selected quantitative reference organization
+compensation_observation: not collected/clean observation unavailable
+cash_proxy_jul2026: 
+total_proxy_jul2026: 
+ceo_title: 
+compensation_year: 
+propublica_url: 
+official_irs_url: 
+selection_note: Selected under the first expansion protocol before systematic pay review.
+prior_scale_source_url: https://projects.propublica.org/nonprofits/organizations/131837418
+prior_scale_source_type: ProPublica Nonprofit Explorer filing profile
+prior_scale_retrieval_date: 2026-08-25
+prior_scale_notes: Strong nonprofit-data and knowledge-infrastructure match but materially above wider scale on expenses and staff; lower-weight large-organization sensitivity.
+prior_function_score: 28.0
+prior_expense_score: 12.0
+prior_staff_score: 0.0
+prior_ea_score: 7.0
+prior_structure_score: 7.0
+prior_geography_score: 3.0

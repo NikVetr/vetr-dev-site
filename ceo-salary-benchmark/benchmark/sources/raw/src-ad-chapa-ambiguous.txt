@@ -1,0 +1,36 @@
+DERIVATIVE SOURCE SNAPSHOT
+This is not source-native HTML/PDF. It preserves the extracted facts and browser line references used in the analysis.
+
+source_id: SRC-AD-CHAPA-AMBIG
+organization: Citizens Housing and Planning Association
+role_title: Chief Executive Officer
+posting_date: 2026-02-02 page publication; underlying process dates indicate 2025
+closing_date: 
+salary_min: 180000
+salary_max: 210000
+currency: USD
+salary_is_base: yes
+salary_text: $180,000-$210,000
+location: Boston, Massachusetts
+remote_status: Hybrid
+geographic_restrictions: Boston-based
+mission_operating_model: Housing policy research, advocacy, coalition convening, and field infrastructure.
+annual_budget_or_expense: 3100000
+scale_measure: operating budget stated in posting
+scale_year: 2025
+staff_count: 
+responsibilities: Full CEO scope including policy, research, fundraising, operations, staff, external representation, and board.
+reporting_relationship: Board of Directors
+original_url: https://commonwealthbeacon.org/job/citizens-housing-and-planning-association-boston-full-time-chief-executive-officer/
+resolved_url: https://commonwealthbeacon.org/job/citizens-housing-and-planning-association-boston-full-time-chief-executive-officer/
+retrieved_at: 2026-08-25T16:20:00-0700
+upstream_provenance: complete third-party copy
+archive_path: sources/raw/src-ad-chapa-ambiguous.txt
+tier: date_ambiguity_sensitivity
+included_in_quantitative_analysis: sensitivity_only
+inclusion_reason: Strong functional CEO role but publication conflicts with an underlying 2025 interview/start timetable.
+exclusion_reason: Excluded from 2026 current-ad primary analysis because source dates are internally inconsistent.
+evidence_quality_notes: Page published February 2026, but process says February-April 2025 interviews and May 2025 start.
+source_line_refs: turn542118view0 lines 137-150; turn542118view2 lines 261-271
+cpi_period: 2025-04
+cpi_basis_note: Treated as an older/ambiguous sensitivity, not a 2026 current posting.

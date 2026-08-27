@@ -1,0 +1,54 @@
+DERIVATIVE FORM 990 EVIDENCE SNAPSHOT
+This is not a source-native return. It preserves the filing identifiers, extracted Part VII values, scale fields, and validation notes used by the offline analysis.
+
+organization: GivingTuesday
+ein: 84-2929872
+source_wave: extension2
+peer_tier: Tier A expanded primary
+ea_affinity: EA-adjacent
+comparability_score: 92.0
+ceo_name: Asha Curran
+ceo_title: Chief Executive Officer and President
+top_executive_basis: Explicit CEO and President
+tax_period_begin: 2024-07-01
+tax_period_end: 2025-06-30
+compensation_calendar_year: 2024.0
+filing_date: 2026-05-01
+irs_object_id: 202601219349300720
+official_irs_url: https://apps.irs.gov/pub/epostcard/990/xml/2026/202601219349300720_public.xml
+propublica_url: https://projects.propublica.org/nonprofits/organizations/842929872
+part_vii_org: 420352.0
+part_vii_related: 0.0
+part_vii_other: 42521.0
+cash_proxy: 420352.0
+total_proxy: 462873.0
+schedule_j_base: 
+revenue: 3656742.0
+expenses: 8638316.0
+employee_count: 
+full_year_status: yes
+founder_flag: yes
+structure_flag: none
+analysis_status: primary
+exclusion_reason: 
+notes: Global generosity research, data, field-building, and movement-infrastructure organization with close expense scale.
+retrieved_at: 2026-08-25
+extraction_location: ProPublica filing-derived table; official IRS object ID identified from XML link; browser source turn807748view0.
+source_id: SRC-990-EXT-GIVINGTUESDAY
+part_vii_org_jul2026: 447459.6613608072
+part_vii_related_jul2026: 0.0
+part_vii_other_jul2026: 45263.094408312274
+cash_proxy_jul2026: 447459.6613608072
+total_proxy_jul2026: 492722.7557691194
+schedule_j_base_jul2026: 
+cpi_factor: 1.0644880037701905
+tier_group: A
+primary_eligible: True
+structurally_clean: True
+current_comp_year: True
+close_expense: True
+staff_known: False
+staff_in_band: False
+close_scale: True
+joint_scale_known_staff: False
+analysis_weight: 1.118189438390612
