@@ -26,6 +26,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".density-line")).toHaveAttribute("d", /L/);
   await expect(page.locator("#bin-count")).toHaveAttribute("min", "2");
   await expect(page.locator("#bin-count")).toHaveAttribute("max", "200");
+  await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
+  await expect(page.locator("tbody .tier-cell").first()).toHaveAttribute("title", "A");
   expect(await page.locator("#bin-field").evaluate((element) => element.previousElementSibling?.classList.contains("view-setting"))).toBe(true);
   await expect(page.locator(".method-note")).toHaveCount(0);
   const blockAspect = await page.locator(".bar-block").first().evaluate((element) => {
@@ -43,6 +45,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(densityIsOverlay).toBe(true);
   await page.locator(".bar-block").first().hover();
   await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(1);
+  await expect(page.locator("#chart-tooltip")).toBeVisible();
+  await expect(page.locator("#chart-tooltip .chart-tooltip-value strong")).toContainText("$");
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["Histogram bin", "Peer tier", "Evidence", "Match score", "Effective weight"]);
+  await expect(page.locator("#chart-tooltip .chart-tooltip-hint")).toContainText("focus its row");
   await page.locator("#chart-title").hover();
   await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(0);
   const histogramTickLines = await page.locator("#salary-chart").evaluate((svg) => {
@@ -221,10 +227,20 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
   await page.locator("#stream-select").selectOption("jobAds");
   await expect(page.locator("#stat-n")).toHaveText("15");
+  await expect(page.locator("#chart-legend")).toContainText("Tier A · Primary");
+  await expect(page.locator("#chart-legend")).toContainText("Tier B · Secondary");
+  await expect(page.locator("#chart-legend")).toContainText("Tier C · Expanded");
+  await expect(page.locator("#chart-legend")).not.toContainText("strict_primary");
+  await expect(page.locator("#chart-legend .swatch")).toHaveCount(3);
+  await expect(page.locator("tbody .tier-cell").first()).toHaveAttribute("title", "strict_primary");
   await expect(page.getByLabel("Tier multiplier for strict_primary")).toHaveValue("1");
   await expect(page.getByLabel("Tier multiplier for expanded_primary_title")).toHaveValue("0.85");
   await expect(page.getByLabel("Tier multiplier for excluded", { exact: true })).toHaveValue("0.1");
   await expect(page.locator("tbody tr").filter({ hasText: "Chief Executive Officer" }).first()).toBeVisible();
+  await page.locator(".bar-block").first().hover();
+  await expect(page.locator("#chart-tooltip")).toContainText("Posting midpoint, July 2026 USD");
+  await expect(page.locator("#chart-tooltip")).toContainText("Advertised range");
+  await page.locator(".chart-panel").screenshot({ path: "tmp/app-recruitment-tooltip.png" });
   const hcap = page.locator("tbody tr").filter({ hasText: "Healthcare Career Advancement Program" });
   await expect(hcap).toHaveCount(1);
   await hcap.getByRole("button", { name: "Preview" }).click();
@@ -303,5 +319,11 @@ test("desktop and narrow layouts render", async ({ page }) => {
   expect(tooltipBox.y + tooltipBox.height).toBeLessThanOrEqual(844);
   await expect(page.locator("#salary-chart")).toBeVisible();
   await expect(page.locator("#organization-table")).toBeVisible();
+  await page.locator(".bar-block").first().hover();
+  const chartTooltipBox = await page.locator("#chart-tooltip").boundingBox();
+  expect(chartTooltipBox.x).toBeGreaterThanOrEqual(0);
+  expect(chartTooltipBox.y).toBeGreaterThanOrEqual(0);
+  expect(chartTooltipBox.x + chartTooltipBox.width).toBeLessThanOrEqual(390);
+  expect(chartTooltipBox.y + chartTooltipBox.height).toBeLessThanOrEqual(844);
   await page.screenshot({ path: "tmp/app-mobile.png", fullPage: true });
 });

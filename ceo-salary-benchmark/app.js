@@ -36,7 +36,7 @@
     showContours: true,
     quantileGranularity: "quintiles",
     customQuantiles: "5, 25, 50, 75, 95",
-    sortKey: "organization",
+    sortKey: "tier",
     sortDirection: "asc",
     filters: {
       title: null, sourceType: null, tier: null, topic: null, location: null,
@@ -632,14 +632,18 @@
       [...bin.items].sort((a, b) => b.weight - a.weight).forEach((item) => {
         const y0 = margin.top + yScale(cumulative + item.weight);
         const y1 = margin.top + yScale(cumulative);
-        const category = String(item.row[state.chartColor] || "Not reported");
+        const category = chartCategory(item.row);
         const rect = svgElement("rect", {
           x: x0, y: y0, width: Math.max(1, x1 - x0), height: Math.max(2, y1 - y0),
           fill: colors.get(category), class: `bar-block${state.focusedId === item.row.id ? " is-focused" : ""}`,
           tabindex: "0", role: "button", "aria-label": `${item.row.organization}, ${money(item.value)}`,
         });
-        const detail = `${escapeHtml(item.row.title || "")}<br>${escapeHtml(category)}`;
-        rect.addEventListener("pointerenter", (event) => { highlightRug(item.row.id, true); showTooltip(event, item, detail); });
+        const binLow = domainMin + bin.index * binWidthValue;
+        const binHigh = binLow + binWidthValue;
+        rect.addEventListener("pointerenter", (event) => {
+          highlightRug(item.row.id, true);
+          showTooltip(event, item, { category, chartDetail: ["Histogram bin", `${compactMoney(binLow)}–${compactMoney(binHigh)}`] });
+        });
         rect.addEventListener("pointermove", (event) => positionTooltip(event));
         rect.addEventListener("pointerleave", () => { highlightRug(item.row.id, false); hideTooltip(); });
         rect.addEventListener("focus", () => highlightRug(item.row.id, true));
@@ -707,6 +711,41 @@
   };
   const categoryPalette = ["#2D6885", "#44B0DF", "#75CCEC", "#52879E", "#3E454A", "#B7E2F2"];
 
+  function humanizeCategory(value) {
+    return String(value || "Not reported")
+      .replace(/[_-]+/g, " ")
+      .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  }
+
+  function peerTierInfo(value) {
+    const raw = String(value || "Not reported");
+    const normalized = raw.toLowerCase();
+    if (normalized === "a" || normalized === "strict_primary" || normalized.startsWith("tier a")) return { label: "Tier A · Primary", order: 0 };
+    if (normalized === "b" || normalized === "secondary" || normalized.startsWith("secondary_") || normalized.startsWith("tier b")) return { label: "Tier B · Secondary", order: 1 };
+    if (normalized === "c" || normalized.startsWith("expanded_") || normalized.startsWith("tier c")) return { label: "Tier C · Expanded", order: 2 };
+    if (normalized.includes("sensitivity")) return { label: "Sensitivity set", order: 3 };
+    if (normalized.startsWith("excluded")) return { label: "Excluded", order: 4 };
+    return { label: humanizeCategory(raw), order: 5 };
+  }
+
+  function tierSortValue(value) {
+    const raw = String(value || "Not reported").toLowerCase();
+    const details = [
+      "a", "strict_primary", "b", "secondary", "secondary_scale", "secondary_structural",
+      "c", "expanded_primary_title", "expanded_secondary_scale", "expanded_secondary_scale_unknown",
+      "expanded_secondary_structural", "expanded_broad_functional", "date_ambiguity_sensitivity",
+      "fractional_sensitivity", "older_structural_sensitivity", "excluded", "excluded_grantmaking",
+      "excluded_private_foundation", "excluded_subordinate_regional",
+    ];
+    const detailOrder = details.indexOf(raw);
+    return peerTierInfo(raw).order * 100 + (detailOrder < 0 ? 99 : detailOrder);
+  }
+
+  function chartCategory(row) {
+    const raw = String(row[state.chartColor] || "Not reported");
+    return state.chartColor === "tier" ? peerTierInfo(raw).label : raw;
+  }
+
   function mixHex(hex, target, amount) {
     const source = hex.match(/[a-f\d]{2}/gi).map((value) => parseInt(value, 16));
     const destination = target.match(/[a-f\d]{2}/gi).map((value) => parseInt(value, 16));
@@ -714,7 +753,10 @@
   }
 
   function categoryColors(items) {
-    const categories = [...new Set(items.map((item) => String(item.row[state.chartColor] || "Not reported")))].sort((a, b) => a.localeCompare(b));
+    const categories = [...new Set(items.map((item) => chartCategory(item.row)))].sort((a, b) => {
+      if (state.chartColor !== "tier") return a.localeCompare(b);
+      return peerTierInfo(a).order - peerTierInfo(b).order;
+    });
     return new Map(categories.map((category, index) => {
       const cycle = Math.floor(index / categoryPalette.length);
       const base = categoryPalette[index % categoryPalette.length];
@@ -819,14 +861,15 @@
     const contoursShown = appendCovarianceContours(svg, points, clipId);
     const colors = categoryColors(items);
     points.forEach(({ item, x, y }) => {
-      const category = String(item.row[state.chartColor] || "Not reported");
+      const category = chartCategory(item.row);
       const point = svgElement("circle", {
         cx: x, cy: y, r: clamp(3.5 + Math.sqrt(item.weight), 4, 8), fill: colors.get(category),
         class: `scatter-point${state.focusedId === item.row.id ? " is-focused" : ""}`, tabindex: "0", role: "button",
         "aria-label": `${item.row.organization}, ${money(item.value)}, ${variable.label} ${variable.format(item.row[state.scatterX])}`,
       });
-      const detail = `${variable.label}: ${variable.format(item.row[state.scatterX])}<br>${escapeHtml(category)}`;
-      point.addEventListener("pointerenter", (event) => showTooltip(event, item, detail));
+      point.addEventListener("pointerenter", (event) => showTooltip(event, item, {
+        category, chartDetail: [variable.label, variable.format(item.row[state.scatterX])],
+      }));
       point.addEventListener("pointermove", positionTooltip); point.addEventListener("pointerleave", hideTooltip);
       point.addEventListener("click", () => focusRow(item.row.id));
       point.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRow(item.row.id); });
@@ -848,16 +891,55 @@
     if (state.view === "scatter") renderScatter(); else renderHistogram();
   }
 
-  function showTooltip(event, item, detail = escapeHtml(item.row.title || item.row.topic || "")) {
-    refs.tooltip.innerHTML = `<b>${escapeHtml(item.row.organization)}</b>${money(item.value)} · weight ${item.weight.toFixed(2)}<br>${detail}`;
+  function showTooltip(event, item, context = {}) {
+    const row = item.row;
+    const tier = peerTierInfo(row.tier);
+    const rawTier = humanizeCategory(row.tier);
+    const evidence = [row.sourceType, row.compensationYear].filter(Boolean).join(" · ");
+    const range = rowStream(row) === "jobAds" && row.range
+      ? `${money(row.range.low)}–${money(row.range.high)}`
+      : "";
+    const colorLabel = {
+      topic: "Topic / model", eaAffinity: "EA relation", sourceType: "Evidence stream",
+      titleGroup: "Job-title group", structure: "Structure",
+    }[state.chartColor];
+    const details = [
+      context.chartDetail,
+      range ? ["Advertised range", range] : null,
+      ["Peer tier", tier.label],
+      rowStream(row) === "jobAds" && rawTier !== tier.label ? ["Recruitment subtype", rawTier] : null,
+      colorLabel ? [`Color · ${colorLabel}`, context.category] : null,
+      evidence ? ["Evidence", evidence] : null,
+      row.comparabilityScore != null ? ["Match score", `${row.comparabilityScore} / 100`] : null,
+      ["Effective weight", item.weight > 0 && item.weight < 0.01 ? "<0.01" : item.weight.toFixed(2)],
+    ].filter(Boolean);
+    refs.tooltip.innerHTML = `
+      <div class="chart-tooltip-heading">
+        <strong>${escapeHtml(row.organization)}</strong>
+        <span>${escapeHtml(row.title || "Executive role")}</span>
+      </div>
+      <div class="chart-tooltip-value">
+        <span>${escapeHtml(measureLabel(row))}</span>
+        <strong>${money(item.value)}</strong>
+      </div>
+      <dl>${details.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>
+      <p class="chart-tooltip-hint">Click the mark to focus its row in the table.</p>`;
     refs.tooltip.hidden = false;
     positionTooltip(event);
   }
 
   function positionTooltip(event) {
     const bounds = refs.chartWrap.getBoundingClientRect();
-    refs.tooltip.style.left = `${clamp(event.clientX - bounds.left + 12, 5, bounds.width - 270)}px`;
-    refs.tooltip.style.top = `${clamp(event.clientY - bounds.top - 56, 5, bounds.height - 75)}px`;
+    const tooltipWidth = refs.tooltip.offsetWidth;
+    const tooltipHeight = refs.tooltip.offsetHeight;
+    const pointerX = event.clientX - bounds.left;
+    const pointerY = event.clientY - bounds.top;
+    let left = pointerX + 14;
+    if (left + tooltipWidth > bounds.width - 5) left = pointerX - tooltipWidth - 14;
+    let top = pointerY - tooltipHeight - 12;
+    if (top < 5) top = pointerY + 14;
+    refs.tooltip.style.left = `${clamp(left, 5, Math.max(5, bounds.width - tooltipWidth - 5))}px`;
+    refs.tooltip.style.top = `${clamp(top, 5, Math.max(5, bounds.height - tooltipHeight - 5))}px`;
   }
 
   function hideTooltip() { refs.tooltip.hidden = true; }
@@ -915,13 +997,15 @@
     const direction = state.sortDirection === "asc" ? 1 : -1;
     return filtered.sort((a, b) => {
       const value = (row) => {
+        if (state.sortKey === "tier") return tierSortValue(row.tier);
         if (state.sortKey === "salary") return salary(row) ?? -Infinity;
         if (state.sortKey === "weight") return effectiveWeight(row);
         if (["expenses", "staff", "comparabilityScore", "compensationYear"].includes(state.sortKey)) return row[state.sortKey] ?? -Infinity;
         return String(row[state.sortKey] || "").toLowerCase();
       };
       const av = value(a); const bv = value(b);
-      return (av < bv ? -1 : av > bv ? 1 : 0) * direction;
+      const comparison = (av < bv ? -1 : av > bv ? 1 : 0) * direction;
+      return comparison || a.organization.localeCompare(b.organization);
     });
   }
 
@@ -1330,7 +1414,7 @@
       targetExpense: 7_500_000, targetStaff: 57, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95",
-      sortKey: "organization", sortDirection: "asc",
+      sortKey: "tier", sortDirection: "asc",
       filters: {
         title: null, sourceType: null, tier: null, topic: null, location: null,
         eaAffinity: null, structure: null,

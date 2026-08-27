@@ -198,16 +198,25 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
   position: absolute;
   z-index: 5;
   pointer-events: none;
-  max-width: 260px;
-  padding: 9px 11px;
-  border: 1px solid #303b35;
-  background: rgba(23, 33, 29, .96);
+  width: min(320px, calc(100% - 10px));
+  padding: 12px 13px 10px;
+  border: 1px solid var(--line-dark);
+  background: color-mix(in srgb, var(--ink), transparent 2%);
   color: white;
-  box-shadow: 0 9px 22px rgba(0,0,0,.16);
-  font-size: 11px;
-  line-height: 1.4;
+  box-shadow: 0 12px 28px rgba(45, 104, 133, .24);
+  font-size: 10.5px;
+  line-height: 1.35;
 }
-.chart-tooltip b { display: block; margin-bottom: 2px; font-size: 12px; }
+.chart-tooltip-heading strong { display: block; font-size: 13px; line-height: 1.25; }
+.chart-tooltip-heading span { display: block; margin-top: 2px; color: var(--line); }
+.chart-tooltip-value { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 9px; padding: 8px 0; border-block: 1px solid rgba(183, 226, 242, .32); }
+.chart-tooltip-value span { max-width: 165px; color: var(--line); font-size: 8.5px; line-height: 1.3; text-transform: uppercase; letter-spacing: .04em; }
+.chart-tooltip-value strong { color: white; font-size: 17px; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.chart-tooltip dl { margin: 7px 0 0; }
+.chart-tooltip dl div { display: grid; grid-template-columns: minmax(80px, .72fr) minmax(0, 1.28fr); gap: 10px; padding: 2px 0; }
+.chart-tooltip dt { color: var(--line); }
+.chart-tooltip dd { margin: 0; overflow-wrap: anywhere; color: white; font-weight: 600; text-align: right; }
+.chart-tooltip-hint { margin: 8px 0 0; padding-top: 7px; border-top: 1px solid rgba(183, 226, 242, .32); color: var(--line); font-size: 8.5px; }
 .chart-legend { display: flex; gap: 8px 14px; flex-wrap: wrap; max-height: 52px; overflow-y: auto; color: var(--muted); font-size: 10px; }
 .chart-legend span { display: inline-flex; align-items: center; gap: 5px; }
 .swatch { width: 9px; height: 9px; display: inline-block; }
