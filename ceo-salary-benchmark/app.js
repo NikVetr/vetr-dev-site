@@ -74,7 +74,9 @@
     binField: $("#bin-field"), bins: $("#bin-count"), binValue: $("#bin-value"),
     view: [...document.querySelectorAll('input[name="chart-view"]')], scatterControls: $("#scatter-controls"),
     scatterX: $("#scatter-x"), chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
-    weightProfile: $("#weight-profile"), weightProfileGrid: $("#weight-profile-grid"), rpScaleReference: $("#rp-scale-reference"),
+    comparabilityProfileField: $("#comparability-profile-field"),
+    weightProfileSlots: new Map(["comparability", "size", "staff", "recency"].map((key) => [key, $(`#weight-profile-${key}`)])),
+    rpScaleReference: $("#rp-scale-reference"),
     reset: $("#reset-settings"), chart: $("#salary-chart"), chartWrap: $("#chart-wrap"),
     tooltip: $("#chart-tooltip"), chartKicker: $("#chart-kicker"), chartTitle: $("#chart-title"),
     statN: $("#stat-n"), statNUnit: $("#stat-n-unit"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
@@ -83,7 +85,6 @@
     customQuantilesError: $("#custom-quantiles-error"), chartLegend: $("#chart-legend"),
     quantileBasis: $("#quantile-basis"), sampleDescription: $("#sample-description"),
     weightingDescription: $("#weighting-description"),
-    methodNoteTitle: $("#method-note-title"), methodNoteText: $("#method-note-text"),
     showUnavailable: $("#show-unavailable"),
     showUnavailableLabel: $("#show-unavailable-label"),
     salaryMin: $("#salary-range-min"), salaryMax: $("#salary-range-max"), salaryRangeValue: $("#salary-range-value"),
@@ -835,7 +836,9 @@
       const button = document.createElement("button");
       button.type = "button";
       button.className = "quantile-cell";
-      button.innerHTML = `<span>${formatPercentile(percentile)}</span><strong>${compactMoney(value)}</strong>`;
+      const label = percentileParts(percentile);
+      button.innerHTML = `<span>${label.number}<sup>${label.suffix}</sup> percentile</span><strong>${compactMoney(value)}</strong>`;
+      button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}`);
       button.addEventListener("pointerenter", () => { state.hoverQuantile = value; renderChart(); });
       button.addEventListener("pointerleave", () => { state.hoverQuantile = null; renderChart(); });
       button.addEventListener("focus", () => { state.hoverQuantile = value; renderChart(); });
@@ -845,10 +848,15 @@
   }
 
   function formatPercentile(value) {
+    const { number, suffix } = percentileParts(value);
+    return `${number}${suffix} percentile`;
+  }
+
+  function percentileParts(value) {
     const rounded = Number.isInteger(value) ? value : value.toFixed(1);
     const integer = Math.floor(value);
     const suffix = integer % 100 >= 11 && integer % 100 <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[integer % 10] || "th");
-    return `${rounded}${suffix} percentile`;
+    return { number: rounded, suffix };
   }
 
   function tableRows() {
@@ -1137,9 +1145,9 @@
 
   function renderWeightProfiles() {
     const keys = ["comparability", "size", "staff", "recency"].filter((key) => state.weightings.has(key));
-    refs.weightProfile.hidden = !keys.length;
+    refs.comparabilityProfileField.hidden = !state.weightings.has("comparability");
     refs.rpScaleReference.hidden = !keys.some((key) => key === "size" || key === "staff");
-    refs.weightProfileGrid.replaceChildren();
+    refs.weightProfileSlots.forEach((slot) => slot.replaceChildren());
     keys.forEach((key) => {
       let values;
       let format;
@@ -1219,7 +1227,7 @@
         "text-anchor": "middle", class: "weight-profile-axis-title",
       });
       yTitle.textContent = "Relative multiplier";
-      svg.append(xTitle, yTitle); figure.append(title, description, svg); refs.weightProfileGrid.append(figure);
+      svg.append(xTitle, yTitle); figure.append(title, description, svg); refs.weightProfileSlots.get(key).append(figure);
     });
   }
 
@@ -1250,10 +1258,6 @@
       titleGroup: "A broad grouping used only for navigation; displayed job titles remain source-native.",
       structure: "Leadership or organizational-structure coding from the validation record.",
     }[state.chartColor];
-    refs.methodNoteTitle.textContent = isCombined ? "Combined-evidence caution" : "Interpretation";
-    refs.methodNoteText.textContent = isCombined
-      ? "This view pools incumbent Schedule J base pay with job-ad salary midpoints. Both are July 2026 USD salary proxies, but one is realized pay and the other an advertised range midpoint. Use evidence-stream coloring, filtering, or balanced weighting to test that assumption; an ‘all compensation measures’ pool is intentionally not offered because it would duplicate correlated values from each filing."
-      : "Empirical, lognormal, and gamma summaries describe the selected convenience sample. They are sensitivity tools—not population estimates.";
     refs.expenseBandwidthValue.value = `${state.expenseBandwidth.toFixed(2)}×`;
     refs.staffBandwidthValue.value = `${state.staffBandwidth.toFixed(2)}×`;
     refs.recencyHalfLifeValue.value = `${state.recencyHalfLife.toFixed(1)} years`;

@@ -26,6 +26,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".density-line")).toHaveAttribute("d", /L/);
   await expect(page.locator("#bin-count")).toHaveAttribute("min", "2");
   await expect(page.locator("#bin-count")).toHaveAttribute("max", "200");
+  expect(await page.locator("#bin-field").evaluate((element) => element.previousElementSibling?.classList.contains("view-setting"))).toBe(true);
+  await expect(page.locator(".method-note")).toHaveCount(0);
   const blockAspect = await page.locator(".bar-block").first().evaluate((element) => {
     return Number(element.getAttribute("width")) / Number(element.getAttribute("height"));
   });
@@ -134,6 +136,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#reset-settings").click();
   await page.locator("#quantile-granularity").selectOption("percentiles");
   await expect(page.locator(".quantile-cell")).toHaveCount(99);
+  await expect(page.locator(".quantile-cell sup")).toHaveCount(99);
+  await expect(page.locator(".quantile-cell").first().locator("sup")).toHaveText("st");
+  await expect(page.locator(".quantile-cell").nth(10).locator("sup")).toHaveText("th");
+  await page.locator(".quantile-panel").screenshot({ path: "tmp/app-percentiles.png" });
   await page.locator("#quantile-granularity").selectOption("custom");
   await page.locator("#custom-quantiles").fill("5, 50, 95");
   await expect(page.locator(".quantile-cell")).toHaveCount(3);
@@ -142,9 +148,9 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('#weighting-components input[value="size"]').check();
   await expect(page.locator("#size-controls")).toBeVisible();
   await expect(page.locator("#expense-target-field")).toBeVisible();
-  await expect(page.locator("#weight-profile")).toBeVisible();
-  await expect(page.locator(".settings-panel > #weight-profile")).toHaveCount(1);
-  await expect(page.locator(".chart-panel #weight-profile")).toHaveCount(0);
+  await expect(page.locator("#weight-profile-size")).toBeVisible();
+  await expect(page.locator(".settings-panel #weight-profile-size")).toHaveCount(1);
+  await expect(page.locator(".chart-panel .weight-profile-slot")).toHaveCount(0);
   await expect(page.locator(".weight-profile-curve")).toHaveCount(1);
   await expect(page.locator("#rp-scale-reference")).toBeVisible();
   await expect(page.locator("#rp-scale-reference")).toContainText("$20.38M consolidated expenses");
@@ -156,12 +162,16 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".weight-profile-axis-title")).toHaveCount(4);
   await expect(page.locator(".weight-profile-x-tick")).toHaveCount(8);
   await expect(page.locator(".weight-profile-y-tick")).toHaveCount(8);
-  await expect(page.locator("#weight-profile")).toContainText("Annual expenses (USD, log scale)");
-  await expect(page.locator("#weight-profile")).toContainText("Relative multiplier");
-  const expenseCurveBefore = await page.locator(".weight-profile-curve").first().getAttribute("d");
+  await expect(page.locator("#weight-profile-size")).toContainText("Annual expenses (USD, log scale)");
+  await expect(page.locator("#weight-profile-size")).toContainText("Relative multiplier");
+  const expenseCurveBefore = await page.locator("#weight-profile-size .weight-profile-curve").getAttribute("d");
   await page.locator("#expense-bandwidth").fill("1.2");
-  await expect(page.locator(".weight-profile-figure").first()).toContainText("bandwidth 1.20");
-  expect(await page.locator(".weight-profile-curve").first().getAttribute("d")).not.toBe(expenseCurveBefore);
+  await expect(page.locator("#weight-profile-size .weight-profile-figure")).toContainText("bandwidth 1.20");
+  expect(await page.locator("#weight-profile-size .weight-profile-curve").getAttribute("d")).not.toBe(expenseCurveBefore);
+  const componentOrder = await page.locator("#size-controls").evaluate((element) => [...element.children].map((child) => child.id));
+  expect(componentOrder.slice(0, 2)).toEqual(["expense-target-field", "staff-target-field"]);
+  expect(await page.locator("#expense-target-field").evaluate((element) => element.querySelector("#expense-bandwidth").compareDocumentPosition(element.querySelector("#weight-profile-size")) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
+  expect(await page.locator("#staff-target-field").evaluate((element) => element.querySelector("#staff-bandwidth").compareDocumentPosition(element.querySelector("#weight-profile-staff")) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
   await expect(page.locator("#weighting-description")).toContainText("Expense similarity × Staff similarity");
   await page.locator('#weighting-components input[value="tier"]').check();
   await expect(page.locator("#discrete-weight-editors")).toBeVisible();
@@ -198,7 +208,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
   await page.locator("#stream-select").selectOption("combined");
   await expect(page.locator("#measure-field")).toBeHidden();
-  await expect(page.locator("#method-note-text")).toContainText("realized pay");
+  await expect(page.locator(".method-note")).toHaveCount(0);
   await expect(page.locator("#stat-n")).toHaveText("125");
   await page.locator('[data-filter-menu="sourceType"] summary').click();
   await expect(page.locator('[data-filter-menu="sourceType"] .filter-options input')).toHaveCount(2);
@@ -223,6 +233,20 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
 test("desktop and narrow layouts render", async ({ page }) => {
   await page.goto("/");
+  const scrollingPanel = page.locator(".settings-panel");
+  const overflowPanel = await scrollingPanel.evaluate((element) => ({
+    width: element.clientWidth, scrollHeight: element.scrollHeight, clientHeight: element.clientHeight,
+    gutter: getComputedStyle(element).scrollbarGutter,
+  }));
+  expect(overflowPanel.scrollHeight).toBeGreaterThan(overflowPanel.clientHeight);
+  expect(overflowPanel.gutter).toContain("stable");
+  const hiddenScrollbarWidth = await scrollingPanel.evaluate((element) => {
+    element.style.overflowY = "hidden";
+    const width = element.clientWidth;
+    element.style.overflowY = "";
+    return width;
+  });
+  expect(hiddenScrollbarWidth).toBe(overflowPanel.width);
   await page.locator(".info-tooltip:visible").last().hover();
   const desktopTooltip = await page.locator("#help-tooltip").boundingBox();
   expect(desktopTooltip.x + desktopTooltip.width).toBeLessThanOrEqual(1440);
@@ -233,7 +257,7 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await page.locator('#weighting-components input[value="size"]').check();
   await page.locator('#weighting-components input[value="staff"]').check();
   await page.screenshot({ path: "tmp/app-weighting.png", fullPage: true });
-  await page.locator("#weight-profile").screenshot({ path: "tmp/app-weighting-curves.png" });
+  await page.locator("#size-controls").screenshot({ path: "tmp/app-weighting-curves.png" });
   await page.locator("#reset-settings").click();
   await page.locator("#stream-select").selectOption("combined");
   await page.locator('input[name="chart-view"][value="scatter"]').check();

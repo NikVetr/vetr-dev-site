@@ -75,6 +75,11 @@
         <label><input type="radio" name="chart-view" value="scatter"> Scatterplot</label>
       </fieldset>
 
+      <label id="bin-field" class="field compact">
+        <span>Histogram bins <button class="info-tooltip" type="button" aria-label="About histogram bins" data-tooltip="Controls the number of equal-width salary intervals. The initial value is chosen to make organization blocks approximately square on your screen.">?</button> <output id="bin-value">Auto</output></span>
+        <input id="bin-count" type="range" min="2" max="200" step="1" value="20">
+      </label>
+
       <label class="field">
         <span>Color marks by <button class="info-tooltip" type="button" aria-label="About chart colors" data-tooltip="Tier encodes peer strength: A or strict-primary is the narrowest comparison set, B or secondary is broader, and C or expanded is mainly for sensitivity analysis. Other choices use the corresponding coded table field; Topic and Structure may contain many categories, so lighter and darker RP palette variants are used.">?</button></span>
         <select id="chart-color">
@@ -106,53 +111,47 @@
         <small id="weighting-description" class="field-description">No components selected: equal base weights.</small>
       </fieldset>
 
-      <div id="size-controls" class="subsettings" hidden>
-        <label id="expense-target-field" class="field compact">
-          <span>RP core-budget target <button class="info-tooltip" type="button" aria-label="About comparison budget" data-tooltip="The annual-expense target used by expense-similarity weighting. The default is RP's published $7.5M 2026 core budget, which excludes fiscally sponsored Special Projects.">?</button></span>
-          <div class="input-with-unit">
-            <input id="target-expense" type="number" min="1" max="100" step="0.5" value="7.5">
-            <span>$M</span>
-          </div>
-          <span>Expense bandwidth <button class="info-tooltip" type="button" aria-label="About expense bandwidth" data-tooltip="Controls how quickly the expense multiplier falls with logged distance from the target. Larger values are more permissive.">?</button> <output id="expense-bandwidth-value">0.70×</output></span>
-          <input id="expense-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
-        </label>
-        <label id="staff-target-field" class="field compact" hidden>
-          <span>RP FTE target <button class="info-tooltip" type="button" aria-label="About staff comparison" data-tooltip="The staff-count target used by staff-similarity weighting. The default is RP's published 57 full-time equivalents at year-end 2024; the Form 990/CauseIQ employee count is zero and does not represent RP's operating headcount.">?</button></span>
-          <input id="target-staff" type="number" min="1" max="1000" step="1" value="57">
-          <span>Staff bandwidth <button class="info-tooltip" type="button" aria-label="About staff bandwidth" data-tooltip="Controls how quickly the staff multiplier falls with logged distance from the target. Larger values are more permissive.">?</button> <output id="staff-bandwidth-value">0.70×</output></span>
-          <input id="staff-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
-        </label>
-        <label id="recency-field" class="field compact" hidden>
-          <span>Recency half-life <button class="info-tooltip" type="button" aria-label="About recency half-life" data-tooltip="The number of years by which an older observation's recency multiplier is halved.">?</button> <output id="recency-halflife-value">4 years</output></span>
-          <input id="recency-halflife" type="range" min="1" max="12" step="0.5" value="4">
-        </label>
-      </div>
-      <div id="discrete-weight-editors" class="discrete-weight-editors" hidden></div>
+      <section id="comparability-profile-field" class="weight-component-control" hidden aria-label="Match-score weighting response">
+        <div id="weight-profile-comparability" class="weight-profile-slot"></div>
+      </section>
 
-      <section id="weight-profile" class="weight-profile" hidden aria-labelledby="weight-profile-title">
-        <div class="weight-profile-heading">
-          <p class="section-label">Selected continuous components</p>
-          <h3 id="weight-profile-title">Weight-response curves</h3>
-          <p>Each curve is a relative multiplier before category and row weights.</p>
-        </div>
-        <div id="weight-profile-grid" class="weight-profile-grid"></div>
+      <div id="size-controls" class="subsettings" hidden>
+        <section id="expense-target-field" class="weight-component-control" hidden>
+          <label class="field compact">
+            <span>RP core-budget target <button class="info-tooltip" type="button" aria-label="About comparison budget" data-tooltip="The annual-expense target used by expense-similarity weighting. The default is RP's published $7.5M 2026 core budget, which excludes fiscally sponsored Special Projects.">?</button></span>
+            <div class="input-with-unit">
+              <input id="target-expense" type="number" min="1" max="100" step="0.5" value="7.5">
+              <span>$M</span>
+            </div>
+            <span>Expense bandwidth <button class="info-tooltip" type="button" aria-label="About expense bandwidth" data-tooltip="Controls how quickly the expense multiplier falls with logged distance from the target. Larger values are more permissive.">?</button> <output id="expense-bandwidth-value">0.70×</output></span>
+            <input id="expense-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
+          </label>
+          <div id="weight-profile-size" class="weight-profile-slot"></div>
+        </section>
+        <section id="staff-target-field" class="weight-component-control" hidden>
+          <label class="field compact">
+            <span>RP FTE target <button class="info-tooltip" type="button" aria-label="About staff comparison" data-tooltip="The staff-count target used by staff-similarity weighting. The default is RP's published 57 full-time equivalents at year-end 2024; the Form 990/CauseIQ employee count is zero and does not represent RP's operating headcount.">?</button></span>
+            <input id="target-staff" type="number" min="1" max="1000" step="1" value="57">
+            <span>Staff bandwidth <button class="info-tooltip" type="button" aria-label="About staff bandwidth" data-tooltip="Controls how quickly the staff multiplier falls with logged distance from the target. Larger values are more permissive.">?</button> <output id="staff-bandwidth-value">0.70×</output></span>
+            <input id="staff-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
+          </label>
+          <div id="weight-profile-staff" class="weight-profile-slot"></div>
+        </section>
+        <section id="recency-field" class="weight-component-control" hidden>
+          <label class="field compact">
+            <span>Recency half-life <button class="info-tooltip" type="button" aria-label="About recency half-life" data-tooltip="The number of years by which an older observation's recency multiplier is halved.">?</button> <output id="recency-halflife-value">4 years</output></span>
+            <input id="recency-halflife" type="range" min="1" max="12" step="0.5" value="4">
+          </label>
+          <div id="weight-profile-recency" class="weight-profile-slot"></div>
+        </section>
         <details id="rp-scale-reference" class="rp-scale-reference">
           <summary>Why these RP defaults?</summary>
           <p><b>$7.5M expenses:</b> RP's published 2026 core budget, excluding Special Projects. <a href="https://rethinkpriorities.org/2025-results/" target="_blank" rel="noopener noreferrer">RP plan ↗</a> · <a href="benchmark/sources/native/supporting/src-rp-2025-results.html" target="_blank">cached page</a></p>
           <p><b>57 staff:</b> RP's published year-end 2024 FTE count (61 permanent staff). <a href="https://rethinkpriorities.org/rethink-priorities-funding-needs/" target="_blank" rel="noopener noreferrer">RP report ↗</a> · <a href="benchmark/sources/native/supporting/src-rp-funding-needs.html" target="_blank">cached page</a></p>
           <p><b>990 sensitivity:</b> The 2024 filing reports $20.38M consolidated expenses and zero employees; it includes fiscally sponsored projects, so neither number is the primary core-operations target. <a href="https://rethinkpriorities.org/transparency/" target="_blank" rel="noopener noreferrer">RP filing ↗</a> · <a href="https://projects.propublica.org/nonprofits/organizations/843896318" target="_blank" rel="noopener noreferrer">ProPublica ↗</a> · <a href="benchmark/sources/native/supporting/src-rp-990-scale.html" target="_blank">cached page</a></p>
         </details>
-      </section>
-
-      <label id="bin-field" class="field compact">
-        <span>Histogram bins <button class="info-tooltip" type="button" aria-label="About histogram bins" data-tooltip="Controls the number of equal-width salary intervals. The initial value is chosen to make organization blocks approximately square on your screen.">?</button> <output id="bin-value">Auto</output></span>
-        <input id="bin-count" type="range" min="2" max="200" step="1" value="20">
-      </label>
-
-      <div class="method-note">
-        <strong id="method-note-title">Interpretation</strong>
-        <p id="method-note-text">Empirical, lognormal, and gamma summaries describe the selected convenience sample. They are sensitivity tools—not population estimates.</p>
       </div>
+      <div id="discrete-weight-editors" class="discrete-weight-editors" hidden></div>
     </aside>
 
     <section class="analysis-column" aria-label="Distribution analysis">
