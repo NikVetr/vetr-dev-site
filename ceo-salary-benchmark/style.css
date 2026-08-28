@@ -49,7 +49,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .app-header h1 { margin: 1px 0 3px; font: 650 clamp(25px, 2.2vw, 36px)/1.05 "Aspekta Variable", sans-serif; letter-spacing: -0.025em; }
 .eyebrow, .section-label { margin: 0; color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
 .header-meta { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-.header-meta span, .count-badge {
+.header-meta > span, .count-badge {
   border: 1px solid var(--line-dark);
   border-radius: 999px;
   padding: 6px 10px;
@@ -59,6 +59,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
   font-weight: 700;
   white-space: nowrap;
 }
+.archive-status-pill { display: inline-flex; align-items: center; gap: 5px; }
+.archive-status-pill .info-tooltip { width: 13px; height: 13px; margin: 0; font-size: 8px; }
 
 .app-shell {
   display: grid;
@@ -83,10 +85,10 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .analysis-column { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; min-width: 0; min-height: 0; }
 .chart-panel { display: flex; min-width: 0; min-height: 0; max-height: calc(100dvh - 128px); padding: 18px 18px 12px; border-radius: 4px; overflow: hidden; flex-direction: column; }
 .quantile-panel { padding: 15px 18px 17px; border-radius: 4px; }
-.table-panel { display: flex; flex-direction: column; padding: 16px 0 10px; border-radius: 4px 14px 14px 4px; overflow: hidden; }
+.table-panel { display: flex; flex-direction: column; padding: 0 0 10px; border-radius: 4px 14px 14px 4px; overflow: hidden; }
 
-.panel-heading, .chart-heading, .table-toolbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-.panel-heading h2, .chart-heading h2, .table-toolbar h2 { margin: 3px 0 0; font: 650 18px/1.15 "Aspekta Variable", sans-serif; }
+.panel-heading, .chart-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.panel-heading h2, .chart-heading h2 { margin: 3px 0 0; font: 650 18px/1.15 "Aspekta Variable", sans-serif; }
 .text-button { border: 0; background: none; color: var(--green); padding: 3px 0; cursor: pointer; font-size: 12px; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
 
 .field { display: grid; gap: 5px; margin-top: 17px; }
@@ -101,6 +103,14 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .weighting-field { position: sticky; z-index: 8; top: -17px; margin-inline: -17px; padding: 12px 17px 9px; border: 0; border-bottom: 1px solid var(--line); background: #fff; box-shadow: 0 7px 13px rgba(45, 104, 133, .12); }
 .weighting-field::after { position: absolute; top: 0; right: -9px; bottom: 0; width: 9px; background: #fff; content: ""; pointer-events: none; }
 .weighting-title { display: flex; align-items: center; gap: 3px; }
+.auto-weight-rule { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 7px; padding: 7px 8px; border: 1px solid var(--green); background: color-mix(in srgb, var(--green-soft), white 12%); color: var(--green); }
+.auto-weight-rule label { display: flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 750; cursor: pointer; }
+.auto-weight-rule > span { color: var(--muted); font-size: 8px; font-weight: 600; text-align: right; }
+.auto-weight-rule:has(input:checked) { background: var(--green); color: white; }
+.auto-weight-rule:has(input:checked) > span { color: var(--line); }
+.auto-weight-rule input { flex: none; margin: 0; accent-color: var(--green); }
+.auto-weight-rule:has(input:checked) input { accent-color: white; }
+.component-group-label { margin-top: 8px; color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
 .weighting-components { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 5px; border: 1px solid var(--line); background: var(--line); }
 .weighting-components > label { min-width: 0; background: white; color: var(--ink); font-size: 9px; }
 .weighting-components > label { display: flex; align-items: center; gap: 4px; padding: 5px 6px; cursor: pointer; }
@@ -164,7 +174,7 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .chart-wrap { position: relative; flex: 1 1 0; min-height: 180px; margin-top: 10px; }
 .chart-panel:has(.scatter-controls:not([hidden])) .chart-wrap { min-height: 160px; }
 .scatter-controls { display: flex; justify-content: flex-end; align-items: end; gap: 9px; margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--line); }
-.scatter-correlations { display: grid; align-self: center; gap: 2px; margin-right: auto; color: var(--ink); font-size: 9px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.scatter-correlations { display: block; align-self: center; margin-right: auto; color: var(--ink); font-size: 9px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; white-space: nowrap; }
 .scatter-controls label { color: var(--muted); font-size: 9px; }
 .scatter-controls select { display: block; min-width: 130px; margin-top: 3px; padding-block: 5px; font-size: 10px; }
 .scatter-controls .contour-toggle { display: flex; align-items: center; gap: 4px; padding-bottom: 5px; color: var(--ink); }
@@ -243,6 +253,10 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .line-swatch { width: 16px; border-top: 2px solid var(--coral); }
 .rug-swatch { width: 16px; height: 8px; display: inline-block; background: repeating-linear-gradient(90deg, var(--green) 0 1px, transparent 1px 4px); }
 .contour-swatch { width: 15px; height: 9px; display: inline-block; border: 1px solid var(--ink); border-radius: 50%; }
+.point-size-legend { gap: 7px !important; }
+.point-size-legend-label { color: var(--ink); font-weight: 650; }
+.point-size-key { gap: 3px !important; }
+.point-size-swatch { display: inline-block; flex: none; border: 1px solid var(--ink); border-radius: 50%; background: color-mix(in srgb, var(--blue), white 25%); }
 
 .inline-heading { align-items: center; }
 .quantile-basis { margin: 4px 0 0; color: var(--muted); font-size: 10px; }
@@ -263,7 +277,6 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .quantile-cell sup { font-size: .68em; line-height: 0; vertical-align: super; }
 .quantile-cell strong { display: block; margin-top: 2px; font-size: 13px; font-variant-numeric: tabular-nums; }
 
-.table-toolbar { padding: 0 15px; align-items: center; }
 .range-filter { padding: 10px 11px 12px; }
 .range-filter > div:first-child { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--ink); font-size: 9.5px; font-weight: 650; }
 .range-filter output { color: var(--green); font-variant-numeric: tabular-nums; white-space: nowrap; }

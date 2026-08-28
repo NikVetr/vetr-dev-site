@@ -1,6 +1,7 @@
 const { test, expect } = require("@playwright/test");
 
 test("benchmark interactions and validated sources", async ({ page }) => {
+  test.setTimeout(60_000);
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.route("https://en.wikipedia.org/**", (route) => route.fulfill({
@@ -16,10 +17,16 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".app-header .eyebrow")).toHaveText("Rethink Priorities");
   await expect(page.locator(".app-header .subtitle")).toHaveCount(0);
   await expect(page.locator("#archive-status")).toHaveText("349 / 349 sources");
+  await page.getByRole("button", { name: "About source and observation counts" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("174 supporting web pages, 135 Form 990s, 32 job-ad files");
+  await expect(page.locator("#help-tooltip")).toContainText("do not become plotted salary observations");
   for (const removedLabel of ["Analysis", "Incumbent compensation", "Row-level evidence", "Current weighted distribution"]) {
     await expect(page.getByText(removedLabel, { exact: true })).toHaveCount(0);
   }
   await expect(page.locator(".table-footnote")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Organizations" })).toHaveCount(0);
+  await expect(page.locator("#included-count")).toHaveCount(0);
+  await expect(page.locator(".table-panel")).toHaveAttribute("aria-label", "Organization-level evidence table");
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#measure-field")).toBeHidden();
@@ -60,8 +67,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-tick-outline")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-tick-outline").first()).toHaveCSS("stroke", "rgba(255, 255, 255, 0.96)");
-  expect(await page.locator(".curve-quantile-tick").evaluateAll((ticks) => ticks.every((tick) => (tick.getAttribute("d").match(/M/g) || []).length === 2))).toBe(true);
-  expect(await page.locator(".curve-quantile-tick").evaluateAll((ticks) => ticks.every((tick, index) => tick.getAttribute("d") === document.querySelectorAll(".curve-quantile-tick-outline")[index].getAttribute("d")))).toBe(true);
+  expect(await page.locator(".curve-quantile-tick").evaluateAll((ticks) => ticks.every((tick) => (tick.getAttribute("d").match(/M/g) || []).length === 1))).toBe(true);
+  expect(await page.locator(".curve-quantile-tick-outline").evaluateAll((ticks) => ticks.every((tick) => (tick.getAttribute("d").match(/M/g) || []).length === 2))).toBe(true);
   await expect(page.locator(".curve-quantile-mark")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-label.amount").first()).toHaveText(/^\$\d+K$/);
   await expect(page.locator(".curve-quantile-mark").first().locator("text").first()).toHaveCSS("font-size", "10px");
@@ -226,23 +233,25 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(3);
 
   await page.locator("#reset-settings").click();
-  await expect(page.getByRole("button", { name: "About composite peer score" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "About auto-weights" })).toHaveCount(0);
+  expect(await page.locator('.auto-weight-rule input[value="comparability"]').evaluate((input) => input.closest("#weighting-components"))).toBeNull();
+  await expect(page.locator(".component-group-label")).toHaveText("Individual components");
   await page.locator('.stream-balance-rule input[value="streamBalanced"]').check();
   await page.locator('#weighting-components input[value="size"]').check();
-  await page.locator('#weighting-components input[value="comparability"]').check();
-  await expect(page.locator('#weighting-components input[value="comparability"]')).toBeChecked();
+  await page.locator('.auto-weight-rule input[value="comparability"]').check();
+  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeChecked();
   await expect(page.locator('#weighting-components input[value="size"]')).not.toBeChecked();
   await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
   await expect(page.locator("#comparability-profile-field")).toBeVisible();
   await expect(page.locator("#comparability-profile-field")).toHaveCSS("padding-left", "0px");
   await expect(page.locator("#comparability-profile-field")).toHaveCSS("border-left-width", "0px");
-  await page.getByRole("button", { name: "About composite peer score" }).hover();
+  await page.getByRole("button", { name: "About auto-weights" }).hover();
   await expect(page.locator("#help-tooltip")).toContainText("functional/operating-model similarity (30 points)");
   await expect(page.locator("#help-tooltip")).toContainText("assigned without using compensation");
   await expect(page.locator("#help-tooltip")).toContainText("score ÷ 75");
   await expect(page.locator("#help-tooltip")).toContainText("avoid double-counting");
   await page.locator('#weighting-components input[value="size"]').check();
-  await expect(page.locator('#weighting-components input[value="comparability"]')).not.toBeChecked();
+  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).not.toBeChecked();
   await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
   await expect(page.locator("#comparability-profile-field")).toBeHidden();
   await expect(page.locator("#size-controls")).toBeVisible();
@@ -400,9 +409,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#scatter-controls")).toBeVisible();
   await expect(page.locator(".scatter-point")).not.toHaveCount(0);
   await expect(page.locator(".correlation-annotation")).toHaveCount(0);
-  await expect(page.locator("#scatter-correlations span").first()).toHaveText(/Weighted r = -?\d\.\d{3}/);
-  await expect(page.locator("#scatter-correlations span").nth(1)).toHaveText(/ρ = -?\d\.\d{3}/);
+  await expect(page.locator("#scatter-correlations")).toHaveText(/Weighted r = -?\d\.\d{3}, ρ = -?\d\.\d{3}/);
+  await expect(page.locator("#scatter-correlations")).toHaveAttribute("aria-label", /weighted Spearman rho/i);
   expect(await page.locator("#scatter-correlations").evaluate((output) => output.compareDocumentPosition(document.querySelector("#scatter-x")) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
+  await expect(page.locator(".point-size-legend")).toContainText("Point area = weight");
+  await expect(page.locator(".point-size-legend")).toContainText("0.5×1.0×2.0×");
+  await expect(page.locator(".point-size-swatch")).toHaveCount(3);
+  await page.locator(".chart-panel").screenshot({ path: "tmp/app-weighted-scatter.png" });
   const maximumPointAreaMultiple = await page.locator(".scatter-point").evaluateAll((points) => Math.max(...points.map((point) => (Number(point.getAttribute("r")) / 4.5) ** 2)));
   expect(maximumPointAreaMultiple).toBeLessThanOrEqual(10.001);
   await expect(page.locator(".covariance-contour")).toHaveCount(3);
@@ -466,6 +479,7 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await page.locator("#reset-settings").click();
   await page.locator("#stream-select").selectOption("combined");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await expect(page.locator(".point-size-legend")).toHaveCount(0);
   await page.locator("#chart-color").selectOption("sourceType");
   await page.screenshot({ path: "tmp/app-scatter.png", fullPage: true });
   await page.locator("#reset-settings").click();

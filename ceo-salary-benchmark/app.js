@@ -16,7 +16,7 @@
       : `$${Math.round(value / 1_000)}K`;
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
   const RP_REFERENCE = Object.freeze({ expenses: 7_500_000, staff: 57 });
-  const COMPOSITE_SCORE_TOOLTIP = "The frozen 0–100 non-pay composite combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1. Select this composite instead of its individual component weights to avoid double-counting those dimensions.";
+  const COMPOSITE_SCORE_TOOLTIP = "Auto-weights uses the frozen 0–100 non-pay composite, which combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1. Select Auto-weights instead of its individual component weights to avoid double-counting those dimensions.";
 
   const state = {
     stream: "combined",
@@ -98,8 +98,7 @@
     expenseFilterSummary: $("#expense-filter-summary"),
     tableRpReferenceLayer: $("#table-rp-reference-layer"), tableScroll: $(".table-scroll"),
     rpExpenseTableReference: $("#rp-expense-table-reference"), rpStaffTableReference: $("#rp-staff-table-reference"),
-    tableBody: $("#organization-table tbody"),
-    includedCount: $("#included-count"), dialog: $("#source-dialog"),
+    tableBody: $("#organization-table tbody"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
     urlStateError: $("#url-state-error"),
   };
@@ -119,7 +118,7 @@
 
   const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
   const WEIGHT_LABELS = {
-    comparability: "Composite peer score", size: "Expense similarity", staff: "Staff similarity", recency: "Evidence recency",
+    comparability: "Auto-weights", size: "Expense similarity", staff: "Staff similarity", recency: "Evidence recency",
     tier: "Tier", eaAffinity: "EA relation", sourceType: "Evidence stream", topic: "Topic / model",
     titleGroup: "Job-title group", structure: "Structure", streamBalanced: "50/50 evidence-stream balance",
   };
@@ -696,11 +695,12 @@
       if (normalY > 0) { normalX *= -1; normalY *= -1; }
       const tickOuter = 9;
       const tickGap = 5;
-      const tickPath = [
+      const tickOutlinePath = [
         `M${x - normalX * tickOuter},${y - normalY * tickOuter}L${x - normalX * tickGap},${y - normalY * tickGap}`,
         `M${x + normalX * tickGap},${y + normalY * tickGap}L${x + normalX * tickOuter},${y + normalY * tickOuter}`,
       ].join(" ");
-      svg.append(svgElement("path", { d: tickPath, class: "curve-quantile-tick-outline" }));
+      const tickPath = `M${x - normalX * tickOuter},${y - normalY * tickOuter}L${x + normalX * tickOuter},${y + normalY * tickOuter}`;
+      svg.append(svgElement("path", { d: tickOutlinePath, class: "curve-quantile-tick-outline" }));
       svg.append(svgElement("path", { d: tickPath, class: "curve-quantile-tick" }));
       let textAngle = tangentAngle * 180 / Math.PI;
       if (textAngle > 90) textAngle -= 180;
@@ -934,13 +934,35 @@
     }));
   }
 
-  function renderScatterLegend(colorMap, contoursShown) {
+  function appendPointSizeLegend(items) {
+    const sizingActive = state.weightings.size > 0 || items.some((item) => rowModifiedWeights(item.row).has(item.row.id));
+    if (!sizingActive) return;
+    const legend = document.createElement("span");
+    legend.className = "point-size-legend";
+    legend.setAttribute("aria-label", "Point area represents normalized analytical weight");
+    const title = document.createElement("span");
+    title.className = "point-size-legend-label";
+    title.textContent = "Point area = weight";
+    legend.append(title);
+    [0.5, 1, 2].forEach((weight) => {
+      const key = document.createElement("span"); key.className = "point-size-key";
+      const swatch = document.createElement("i"); swatch.className = "point-size-swatch";
+      const diameter = 9 * Math.sqrt(weight);
+      swatch.style.width = `${diameter.toFixed(1)}px`; swatch.style.height = `${diameter.toFixed(1)}px`;
+      key.append(swatch, document.createTextNode(`${weight.toFixed(1)}×`));
+      legend.append(key);
+    });
+    refs.chartLegend.append(legend);
+  }
+
+  function renderScatterLegend(colorMap, contoursShown, items) {
     refs.chartLegend.replaceChildren();
     appendCategoryLegend(colorMap);
     if (contoursShown) {
       const contour = document.createElement("span"); contour.innerHTML = '<i class="contour-swatch"></i> 50 / 80 / 95% covariance contours';
       refs.chartLegend.append(contour);
     }
+    appendPointSizeLegend(items);
   }
 
   function appendCovarianceContours(svg, points, clipId) {
@@ -1008,12 +1030,7 @@
 
   function updateCorrelationSummary(correlations = {}) {
     const format = (value) => Number.isFinite(value) ? value.toFixed(3) : "—";
-    refs.scatterCorrelations.replaceChildren();
-    const pearson = document.createElement("span");
-    pearson.textContent = `Weighted r = ${format(correlations.pearson)}`;
-    const spearman = document.createElement("span");
-    spearman.textContent = `ρ = ${format(correlations.spearman)}`;
-    refs.scatterCorrelations.append(pearson, spearman);
+    refs.scatterCorrelations.textContent = `Weighted r = ${format(correlations.pearson)}, ρ = ${format(correlations.spearman)}`;
     refs.scatterCorrelations.setAttribute("aria-label", `Weighted Pearson r ${format(correlations.pearson)}; weighted Spearman rho ${format(correlations.spearman)}`);
   }
 
@@ -1100,7 +1117,7 @@
     xTitle.textContent = `${variable.label}${variable.logarithmic ? " (log scale)" : ""}`; svg.append(xTitle);
     const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
     yTitle.textContent = `Annual compensation (${DATA.priceBasis})`; svg.append(yTitle);
-    renderScatterLegend(colors, contoursShown);
+    renderScatterLegend(colors, contoursShown, items);
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     const squared = items.reduce((sum, item) => sum + item.weight ** 2, 0);
     refs.statN.textContent = items.length;
@@ -1390,8 +1407,6 @@
       tr.append(toggleCell, org, title, evidenceType, salaryCell, expenses, weightCell, comparability, tier, topic, location, staff, ea, structure, year, preview, source);
       refs.tableBody.append(tr);
     });
-    const count = selection.length;
-    refs.includedCount.textContent = `${count} included`;
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
       const active = button.dataset.sort === state.sortKey;
       button.dataset.active = active;
@@ -1636,7 +1651,7 @@
       let axisTitle;
       if (key === "comparability") {
         values = [0, 100]; format = (value) => value.toFixed(0); parameter = "Score ÷ 75, capped at 0.25–1.75";
-        axisTitle = "Composite peer score (0–100)";
+        axisTitle = "Peer match score (0–100)";
       } else if (key === "size") {
         values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
         parameter = `Target ${compactMoney(state.targetExpense)} · bandwidth ${state.expenseBandwidth.toFixed(2)}`;
@@ -1676,7 +1691,7 @@
         const help = document.createElement("button");
         help.type = "button"; help.className = "info-tooltip"; help.textContent = "?";
         help.dataset.tooltip = COMPOSITE_SCORE_TOOLTIP;
-        help.setAttribute("aria-label", "About composite peer score");
+        help.setAttribute("aria-label", "About auto-weights");
         heading.append(help);
       }
       const description = document.createElement("span"); description.textContent = parameter;

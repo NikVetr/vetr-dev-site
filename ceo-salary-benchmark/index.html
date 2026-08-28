@@ -17,7 +17,10 @@
       <h1>CEO salary benchmark</h1>
     </div>
     <div class="header-meta" aria-label="Dataset status">
-      <span id="archive-status">349 / 349 sources</span>
+      <span class="archive-status-pill">
+        <span id="archive-status">349 / 349 sources</span>
+        <button class="info-tooltip" type="button" aria-label="About source and observation counts" data-tooltip="This counts locally archived files in the source-acquisition manifest, not salary observations. It includes 174 supporting web pages, 135 Form 990s, 32 job-ad files, 7 frozen inputs, and 1 documented search record. Sources used only for peer selection, metadata, validation, or exclusions do not become plotted salary observations. Scatterplots can be smaller again when rows lack the selected horizontal-axis value.">?</button>
+      </span>
       <span>July 2026 USD</span>
     </div>
   </header>
@@ -94,9 +97,13 @@
       </label>
 
       <section class="weighting-field field" role="group" aria-labelledby="weighting-components-title">
-        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Individual components multiply together, then multiply the editable row weight. The Composite peer score is an alternative that already combines several dimensions, so selecting it clears the individual components to prevent double-counting. The separate 50/50 rule controls the total influence of the two evidence streams.">?</button></div>
+        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Individual components multiply together, then multiply the editable row weight. Auto-weights is an alternative that derives a single multiplier from the preserved composite peer score, so selecting it clears the individual components to prevent double-counting. The separate 50/50 rule controls the total influence of the two evidence streams.">?</button></div>
+        <div class="auto-weight-rule">
+          <label><input type="checkbox" value="comparability"> Auto-weights</label>
+          <span>Uses overall peer match</span>
+        </div>
+        <div class="component-group-label">Individual components</div>
         <div id="weighting-components" class="weighting-components">
-          <label><input type="checkbox" value="comparability"> Composite peer score</label>
           <label><input type="checkbox" value="size"> Expenses</label>
           <label><input type="checkbox" value="staff"> Staff</label>
           <label><input type="checkbox" value="recency"> Recency</label>
@@ -114,7 +121,7 @@
       </section>
       <small id="weighting-description" class="weighting-description field-description">No components selected: equal base weights.</small>
 
-      <section id="comparability-profile-field" class="weight-component-control" hidden aria-label="Match-score weighting response">
+      <section id="comparability-profile-field" class="weight-component-control" hidden aria-label="Auto-weight response">
         <div id="weight-profile-comparability" class="weight-profile-slot"></div>
       </section>
 
@@ -170,10 +177,7 @@
           </div>
         </div>
         <div id="scatter-controls" class="scatter-controls" hidden>
-          <output id="scatter-correlations" class="scatter-correlations" aria-live="polite">
-            <span>Weighted r = —</span>
-            <span>ρ = —</span>
-          </output>
+          <output id="scatter-correlations" class="scatter-correlations" aria-live="polite">Weighted r = —, ρ = —</output>
           <label>Horizontal axis
             <select id="scatter-x">
               <option value="expenses">Annual expenses</option>
@@ -221,13 +225,7 @@
       </section>
     </section>
 
-    <aside class="table-panel panel" aria-labelledby="table-title">
-      <div class="table-toolbar">
-        <div>
-          <h2 id="table-title">Organizations</h2>
-        </div>
-        <span id="included-count" class="count-badge">0 included</span>
-      </div>
+    <aside class="table-panel panel" aria-label="Organization-level evidence table">
       <div id="table-rp-reference-layer" class="table-rp-reference-layer" aria-label="Rethink Priorities comparison references">
         <span id="rp-expense-table-reference" class="rp-table-reference" data-reference-column="expenses">RP = $7.5M</span>
         <span id="rp-staff-table-reference" class="rp-table-reference" data-reference-column="staff">RP = 57 FTE</span>
