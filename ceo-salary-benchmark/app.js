@@ -124,7 +124,7 @@
   const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
   const WEIGHT_LABELS = {
     comparability: "Auto-weights", size: "Expense similarity", staff: "Staff similarity", recency: "Evidence recency",
-    tier: "Tier", eaAffinity: "EA relation", sourceType: "Evidence stream", topic: "Topic / model",
+    tier: "Tier", eaAffinity: "EA relation", sourceType: "Evidence stream", topic: "Area",
     titleGroup: "Job-title group", structure: "Structure", streamBalanced: "50/50 evidence-stream balance",
   };
   const DISCRETE_WEIGHT_NOTES = {
@@ -278,7 +278,7 @@
       else if (weight <= 0.45) rationale += " Grantmaking, foundation, or endowment activity is materially less comparable with RP's knowledge-production model.";
       else if (weight <= 0.55) rationale += " Delivery, university, regional, cultural, or local-service features make it a broader functional comparator.";
       else rationale += " It has partial functional overlap but a less direct mission or operating-model match.";
-      explanation = `${rationale} Topic coding was determined without using compensation.`;
+      explanation = `${rationale} Area coding was determined without using compensation.`;
     }
     return `${explanation} App sensitivity multiplier: ${defaultDiscreteWeight(key, category).toFixed(2)}; 1.00 is the reference. This editable value is an analyst judgment, not a source rule.`;
   }
@@ -1362,7 +1362,7 @@
       ? `${money(displayedRange.low)}–${money(displayedRange.high)}`
       : "";
     const colorLabel = {
-      topic: "Topic / model", eaAffinity: "EA relation", sourceType: "Evidence stream",
+      topic: "Area", eaAffinity: "EA relation", sourceType: "Evidence stream",
       titleGroup: "Job-title group", structure: "Structure",
     }[state.chartColor];
     const details = [
@@ -1467,11 +1467,26 @@
     });
   }
 
+  function areaFamily(value) {
+    const normalized = String(value || "").toLowerCase();
+    if (/\bai\b|artificial intelligence|technology|data science/.test(normalized)) return "AI, technology & data";
+    if (/animal welfare|food systems/.test(normalized)) return "Animal welfare & food systems";
+    if (/nuclear risk|security|foreign policy|conflict/.test(normalized)) return "Conflict, security & foreign policy";
+    if (/climate|environment|conservation|clean energy/.test(normalized)) return "Climate & environment";
+    if (/global health|global development|health policy|biomedical|workforce/.test(normalized)) return "Health & global development";
+    if (/justice|housing|social policy/.test(normalized)) return "Justice, housing & social policy";
+    if (/education|culture|public engagement/.test(normalized)) return "Education, culture & public engagement";
+    if (/open science|open knowledge|journalism|knowledge dissemination|research infrastructure/.test(normalized)) return "Open science, journalism & knowledge";
+    if (/philanthrop|effective giving|ea infrastructure|nonprofit infrastructure|grantmaking/.test(normalized)) return "Philanthropy & nonprofit infrastructure";
+    if (/research|evaluation|policy|evidence/.test(normalized)) return "Research, evaluation & policy";
+    return "Other areas";
+  }
+
   function buildFilterMenus() {
     document.querySelectorAll("[data-filter-menu]").forEach((container) => {
       const key = container.dataset.filterMenu;
       const label = {
-        title: "Job title", sourceType: "Evidence", tier: "Tier", topic: "Topic / model",
+        title: "Job title", sourceType: "Evidence", tier: "Tier", topic: "Area",
         location: "Location", eaAffinity: "EA relation", structure: "Structure",
       }[key] || key;
       const values = [...new Set(rows().map((row) => String(row[key] || "Not reported")))].sort((a, b) => a.localeCompare(b));
@@ -1509,7 +1524,7 @@
       actions.append(allButton);
       const options = document.createElement("div");
       options.className = "filter-options";
-      const appendOption = (value, parent = options) => {
+      const appendOption = (value, parent = options, afterChange = null) => {
         const label = document.createElement("label");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox"; checkbox.checked = selected == null || selected.has(value);
@@ -1518,37 +1533,50 @@
           if (checkbox.checked) next.add(value); else next.delete(value);
           state.filters[key] = next.size === values.length ? null : next;
           updateMenuState();
+          if (afterChange) afterChange();
           renderAll();
         });
         const span = document.createElement("span"); span.textContent = value;
         label.append(checkbox, span); parent.append(label);
+        return checkbox;
       };
-      if (key === "title") {
+      if (key === "title" || key === "topic") {
         const grouped = new Map();
         rows().forEach((row) => {
-          const group = row.titleGroup || "Other executive titles";
-          const value = String(row.title || "Not reported");
+          const group = key === "title"
+            ? row.titleGroup || "Other executive titles"
+            : areaFamily(row.topic);
+          const value = String(row[key] || "Not reported");
           if (!grouped.has(group)) grouped.set(group, new Set());
           grouped.get(group).add(value);
         });
         [...grouped].sort(([a], [b]) => a.localeCompare(b)).forEach(([group, groupSet]) => {
           const groupValues = [...groupSet].sort((a, b) => a.localeCompare(b));
           const wrapper = document.createElement("section"); wrapper.className = "filter-group";
-          const groupButton = document.createElement("button"); groupButton.type = "button"; groupButton.className = "filter-group-heading";
-          const checkedCount = groupValues.filter((value) => selected == null || selected.has(value)).length;
-          groupButton.textContent = `${group} · ${checkedCount}/${groupValues.length}`;
-          groupButton.setAttribute("aria-label", `${checkedCount === groupValues.length ? "Deselect" : "Select"} all ${group} titles`);
-          groupButton.addEventListener("click", () => {
+          const groupLabel = document.createElement("label"); groupLabel.className = "filter-group-heading";
+          const groupCheckbox = document.createElement("input"); groupCheckbox.type = "checkbox";
+          const groupText = document.createElement("span"); groupText.className = "filter-group-title";
+          const childCheckboxes = [];
+          const syncGroupState = () => {
+            const checkedCount = childCheckboxes.filter((checkbox) => checkbox.checked).length;
+            groupCheckbox.checked = checkedCount === groupValues.length;
+            groupCheckbox.indeterminate = checkedCount > 0 && checkedCount < groupValues.length;
+            groupText.textContent = `${group} · ${checkedCount}/${groupValues.length}`;
+            groupCheckbox.setAttribute("aria-label", `${groupCheckbox.checked ? "Deselect" : "Select"} all ${group} ${key === "title" ? "titles" : "areas"}`);
+          };
+          groupCheckbox.addEventListener("change", () => {
             const next = state.filters[key] == null ? new Set(values) : new Set(state.filters[key]);
-            const allChecked = groupValues.every((value) => next.has(value));
-            groupValues.forEach((value) => { if (allChecked) next.delete(value); else next.add(value); });
+            groupValues.forEach((value) => { if (groupCheckbox.checked) next.add(value); else next.delete(value); });
             state.filters[key] = next.size === values.length ? null : next;
-            buildFilterMenus();
-            document.querySelector('[data-filter-menu="title"] details').open = true;
+            childCheckboxes.forEach((checkbox) => { checkbox.checked = groupCheckbox.checked; });
+            syncGroupState();
+            updateMenuState();
             renderAll();
           });
-          wrapper.append(groupButton);
-          groupValues.forEach((value) => appendOption(value, wrapper));
+          groupLabel.append(groupCheckbox, groupText);
+          wrapper.append(groupLabel);
+          groupValues.forEach((value) => childCheckboxes.push(appendOption(value, wrapper, syncGroupState)));
+          syncGroupState();
           options.append(wrapper);
         });
       } else values.forEach((value) => appendOption(value));
@@ -1744,7 +1772,24 @@
   }
 
   function alignOpenHeaderFilterPopovers() {
-    document.querySelectorAll(".header-filter-menu details[open]").forEach(alignHeaderFilterPopover);
+    const bounds = refs.tableScroll.getBoundingClientRect();
+    document.querySelectorAll(".header-filter-menu details[open]").forEach((details) => {
+      const header = details.closest("th");
+      const rectangle = header?.getBoundingClientRect();
+      if (!rectangle || rectangle.right <= bounds.left || rectangle.left >= bounds.right) {
+        details.open = false;
+        return;
+      }
+      alignHeaderFilterPopover(details);
+    });
+  }
+
+  function activateHeaderFilterPopover(details) {
+    if (!details?.open) return;
+    document.querySelectorAll(".header-filter-menu details[open]").forEach((candidate) => {
+      if (candidate !== details) candidate.open = false;
+    });
+    alignHeaderFilterPopover(details);
   }
 
   function focusRow(id) {
@@ -1774,7 +1819,7 @@
       ["Displayed dollar basis", state.inflationAdjusted ? `${DATA.priceBasis} · CPI factor ${Number(row.cpiFactor || 1).toFixed(4)}×` : "Nominal source-year dollars · no CPI adjustment"],
       ["CPI reference period", row.cpiPeriod || "Not reported"],
       ["Tier", row.tier || "Not coded"],
-      ["Topic / model", row.topic || "Not coded"],
+      ["Area", row.topic || "Not coded"],
       ["Location / work model", [row.location, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
       ["EA relation", row.eaAffinity || "Not coded"],
       ["Organization structure", row.structure || "Not coded"],
@@ -1823,7 +1868,7 @@
       ["Tier", [provenance.tier.value, provenance.tier.label].filter(Boolean).join(" · "), provenance.tier.rationale, provenance.tier.citation],
       ["EA relationship", provenance.ea.value || "Uncoded", provenance.ea.rationale, provenance.ea.citation],
       ["Structure", [provenance.structure.expected && `Expected: ${provenance.structure.expected}`, provenance.structure.observationFlag && `Observation flag: ${provenance.structure.observationFlag}`].filter(Boolean).join(" · ") || "Uncoded", provenance.structure.rationale, provenance.structure.citation],
-      ["Topic / model", [provenance.topic.value, provenance.topic.sourceDescription].filter(Boolean).join(" · ") || "Uncoded", provenance.topic.rationale, provenance.topic.citation],
+      ["Area", [provenance.topic.value, provenance.topic.sourceDescription].filter(Boolean).join(" · ") || "Uncoded", provenance.topic.rationale, provenance.topic.citation],
       ["Analysis title class", provenance.title.analysisGroup || "Uncoded", provenance.title.rationale, provenance.title.citation],
     ];
     const observation = row.observationCategoryProvenance;
@@ -2520,7 +2565,7 @@
   refs.matchScoreMax.addEventListener("input", () => updateRange("matchScore", "high"));
   refs.reset.addEventListener("click", reset);
   document.addEventListener("toggle", (event) => {
-    if (event.target.matches?.(".header-filter-menu details")) alignHeaderFilterPopover(event.target);
+    if (event.target.matches?.(".header-filter-menu details")) activateHeaderFilterPopover(event.target);
   }, true);
   refs.tableScroll.addEventListener("scroll", alignOpenHeaderFilterPopovers);
   document.addEventListener("change", scheduleUrlState);

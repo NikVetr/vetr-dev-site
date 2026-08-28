@@ -86,10 +86,10 @@
       </label>
 
       <label class="field">
-        <span>Color marks by <button class="info-tooltip" type="button" aria-label="About chart colors" data-tooltip="Tier encodes peer strength: A or strict-primary is the narrowest comparison set, B or secondary is broader, and C or expanded is mainly for sensitivity analysis. Other choices use the corresponding coded table field; Topic and Structure may contain many categories, so lighter and darker RP palette variants are used.">?</button></span>
+        <span>Color marks by <button class="info-tooltip" type="button" aria-label="About chart colors" data-tooltip="Tier encodes peer strength: A or strict-primary is the narrowest comparison set, B or secondary is broader, and C or expanded is mainly for sensitivity analysis. Other choices use the corresponding coded table field; Area and Structure may contain many categories, so lighter and darker RP palette variants are used.">?</button></span>
         <select id="chart-color">
           <option value="tier">Tier</option>
-          <option value="topic">Topic / model</option>
+          <option value="topic">Area</option>
           <option value="eaAffinity">EA relation</option>
           <option value="sourceType">Evidence stream</option>
           <option value="titleGroup">Job-title group</option>
@@ -112,7 +112,7 @@
           <label><input type="checkbox" value="tier"> Tier</label>
           <label><input type="checkbox" value="eaAffinity"> EA relation</label>
           <label><input type="checkbox" value="sourceType"> Evidence stream</label>
-          <label><input type="checkbox" value="topic"> Topic / model</label>
+          <label><input type="checkbox" value="topic"> Area</label>
           <label><input type="checkbox" value="titleGroup"> Title group</label>
           <label><input type="checkbox" value="structure"> Structure</label>
         </div>
@@ -299,7 +299,7 @@
                 <div class="filter-menu header-filter-menu" data-filter-menu="tier"></div>
               </th>
               <th class="filterable-column">
-                <button type="button" data-sort="topic">Topic / model</button>
+                <button type="button" data-sort="topic">Area</button>
                 <div class="filter-menu header-filter-menu" data-filter-menu="topic"></div>
               </th>
               <th class="filterable-column">

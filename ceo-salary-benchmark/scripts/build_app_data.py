@@ -422,6 +422,9 @@ def load_job_ad_enrichment(jobs: list[dict[str, str]]) -> dict[str, dict[str, st
         missing = sorted(field for field in required if not text(row[field]))
         if missing:
             raise ValueError(f"Job-ad enrichment {source_id} lacks required fields: {missing}")
+        topic_cluster = text(row["topic_cluster"])
+        if re.search(r"\$|\b(?:budget|staff|employees?|revenue|expenses?)\b", topic_cluster, re.IGNORECASE):
+            raise ValueError(f"Job-ad enrichment {source_id} has scale metadata in topic_cluster: {topic_cluster}")
         verify_preserved_paths(text(row["source_citation"]), " | ")
         by_source[source_id] = row
     if by_source.keys() != expected.keys():
