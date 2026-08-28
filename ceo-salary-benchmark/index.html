@@ -236,32 +236,21 @@
             <tr>
               <th class="check-column"><span class="sr-only">Included</span></th>
               <th><button type="button" data-sort="organization">Organization</button></th>
-              <th><button type="button" data-sort="title">Job title</button></th>
-              <th><button type="button" data-sort="sourceType">Evidence</button></th>
-              <th><button type="button" data-sort="salary">Salary</button></th>
-              <th><button type="button" data-sort="expenses" aria-label="Sort by expenses; Rethink Priorities comparison reference is $7.5 million">Expenses</button></th>
-              <th class="weight-column"><button type="button" data-sort="weight">Weight</button></th>
-              <th><button type="button" data-sort="comparabilityScore">Match score</button></th>
-              <th class="tier-column"><button type="button" data-sort="tier">Tier</button></th>
-              <th><button type="button" data-sort="topic">Topic / model</button></th>
-              <th><button type="button" data-sort="location">Location</button></th>
-              <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities comparison reference is 57 full-time equivalents">Staff</button></th>
-              <th><button type="button" data-sort="eaAffinity">EA relation</button></th>
-              <th><button type="button" data-sort="structure">Structure</button></th>
-              <th><button type="button" data-sort="compensationYear">Year</button></th>
-              <th>Source preview</th>
-              <th>Source</th>
-            </tr>
-            <tr class="column-filters">
-              <th class="check-column"></th>
-              <th></th>
-              <th><div class="filter-menu" data-filter-menu="title"></div></th>
-              <th><div class="filter-menu" data-filter-menu="sourceType"></div></th>
-              <th>
-                <div class="filter-menu numeric-filter-menu" data-numeric-filter="salary">
+              <th class="filterable-column">
+                <button type="button" data-sort="title">Job title</button>
+                <div class="filter-menu header-filter-menu" data-filter-menu="title"></div>
+              </th>
+              <th class="filterable-column">
+                <button type="button" data-sort="sourceType">Evidence</button>
+                <div class="filter-menu header-filter-menu" data-filter-menu="sourceType"></div>
+              </th>
+              <th class="filterable-column">
+                <button type="button" data-sort="salary">Salary</button>
+                <div class="filter-menu numeric-filter-menu header-filter-menu" data-numeric-filter="salary">
                   <details>
-                    <summary id="salary-filter-summary" aria-label="Filter salary">All</summary>
+                    <summary id="salary-filter-summary" aria-label="Filter salary"></summary>
                     <div class="filter-popover numeric-filter-popover">
+                      <div id="salary-filter-status" class="filter-status" aria-live="polite">All salaries included</div>
                       <section class="range-filter" data-range-filter="salary">
                         <div><span>Salary range <button class="info-tooltip" type="button" aria-label="About salary filtering" data-tooltip="Include only rows whose selected compensation value falls between the two handles. This filter also updates the histogram, fitted curve, statistics, and quantiles.">?</button></span><output id="salary-range-value">All</output></div>
                         <div class="dual-range">
@@ -273,11 +262,13 @@
                   </details>
                 </div>
               </th>
-              <th>
-                <div class="filter-menu numeric-filter-menu" data-numeric-filter="expenses">
+              <th class="filterable-column">
+                <button type="button" data-sort="expenses" aria-label="Sort by expenses; Rethink Priorities comparison reference is $7.5 million">Expenses</button>
+                <div class="filter-menu numeric-filter-menu header-filter-menu" data-numeric-filter="expenses">
                   <details>
-                    <summary id="expense-filter-summary" aria-label="Filter expenses">All</summary>
+                    <summary id="expense-filter-summary" aria-label="Filter expenses"></summary>
                     <div class="filter-popover numeric-filter-popover">
+                      <div id="expense-filter-status" class="filter-status" aria-live="polite">All expenses included</div>
                       <section class="range-filter" data-range-filter="expenses">
                         <div><span>Expense range <button class="info-tooltip" type="button" aria-label="About expense filtering" data-tooltip="Include only organizations whose annual expenses fall between the handles. The slider uses a logarithmic scale so both small and large nonprofits remain adjustable.">?</button></span><output id="expense-range-value">All</output></div>
                         <div class="dual-range">
@@ -289,17 +280,32 @@
                   </details>
                 </div>
               </th>
-              <th class="weight-column"></th>
-              <th></th>
-              <th class="tier-column"><div class="filter-menu" data-filter-menu="tier"></div></th>
-              <th><div class="filter-menu" data-filter-menu="topic"></div></th>
-              <th><div class="filter-menu" data-filter-menu="location"></div></th>
-              <th></th>
-              <th><div class="filter-menu" data-filter-menu="eaAffinity"></div></th>
-              <th><div class="filter-menu" data-filter-menu="structure"></div></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th class="weight-column"><button type="button" data-sort="weight">Weight</button></th>
+              <th><button type="button" data-sort="comparabilityScore">Match score</button></th>
+              <th class="tier-column filterable-column">
+                <button type="button" data-sort="tier">Tier</button>
+                <div class="filter-menu header-filter-menu" data-filter-menu="tier"></div>
+              </th>
+              <th class="filterable-column">
+                <button type="button" data-sort="topic">Topic / model</button>
+                <div class="filter-menu header-filter-menu" data-filter-menu="topic"></div>
+              </th>
+              <th class="filterable-column">
+                <button type="button" data-sort="location">Location</button>
+                <div class="filter-menu header-filter-menu" data-filter-menu="location"></div>
+              </th>
+              <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities comparison reference is 57 full-time equivalents">Staff</button></th>
+              <th class="filterable-column">
+                <button type="button" data-sort="eaAffinity">EA relation</button>
+                <div class="filter-menu header-filter-menu" data-filter-menu="eaAffinity"></div>
+              </th>
+              <th class="filterable-column">
+                <button type="button" data-sort="structure">Structure</button>
+                <div class="filter-menu header-filter-menu" data-filter-menu="structure"></div>
+              </th>
+              <th><button type="button" data-sort="compensationYear">Year</button></th>
+              <th>Source preview</th>
+              <th>Source</th>
             </tr>
           </thead>
           <tbody></tbody>

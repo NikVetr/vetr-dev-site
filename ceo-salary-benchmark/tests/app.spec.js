@@ -164,7 +164,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('[data-filter-menu="tier"] summary').click();
   const tierOptionCount = await page.locator('[data-filter-menu="tier"] .filter-options input').count();
   await page.locator('[data-filter-menu="tier"] .filter-options label').filter({ hasText: /^C$/ }).locator("input").uncheck();
-  await expect(page.locator('[data-filter-menu="tier"] summary')).toHaveText(`${tierOptionCount - 1} selected`);
+  await expect(page.locator('[data-filter-menu="tier"] summary')).toHaveAttribute("data-active", "true");
+  await expect(page.locator('[data-filter-menu="tier"] .filter-status')).toHaveText(`${tierOptionCount - 1} of ${tierOptionCount} selected`);
   await expect(page.locator("#stat-n")).not.toHaveText("125");
   const filteredN = Number(await page.locator("#stat-n").textContent());
   await expect(page.locator(".bar-block")).toHaveCount(filteredN);
@@ -196,14 +197,16 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#salary-range-min")).toBeVisible();
   await page.locator("#salary-range-min").fill("300000");
   await expect(page.locator("#salary-range-value")).not.toHaveText("All");
-  await expect(page.locator("#salary-filter-summary")).not.toHaveText("All");
+  await expect(page.locator("#salary-filter-summary")).toHaveAttribute("data-active", "true");
+  await expect(page.locator("#salary-filter-status")).toContainText("Salary filter");
   await expect(page.locator("#stat-n")).not.toHaveText("125");
   await page.locator("#reset-settings").click();
   await expect(page.locator("#expense-range-min")).not.toBeVisible();
   await page.locator("#expense-filter-summary").click();
   await page.locator("#expense-range-min").fill("500");
   await expect(page.locator("#expense-range-value")).not.toHaveText("All");
-  await expect(page.locator("#expense-filter-summary")).not.toHaveText("All");
+  await expect(page.locator("#expense-filter-summary")).toHaveAttribute("data-active", "true");
+  await expect(page.locator("#expense-filter-status")).toContainText("Expense filter");
   await expect(page.locator("#stat-n")).not.toHaveText("125");
 
   await page.locator("#reset-settings").click();
@@ -218,6 +221,15 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(titleHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
   const tierHeaderWidth = await page.locator("thead .tier-column").first().evaluate((cell) => cell.getBoundingClientRect().width);
   expect(tierHeaderWidth).toBeLessThanOrEqual(80);
+  await expect(page.locator("thead tr")).toHaveCount(1);
+  expect(await page.locator("#table-rp-reference-layer").evaluate((layer) => layer.getBoundingClientRect().height)).toBe(0);
+  const titleHeaderCell = page.locator('thead th:has(button[data-sort="title"])');
+  expect(await titleHeaderCell.locator(".header-filter-menu").evaluate((menu) => menu.getBoundingClientRect().width)).toBeLessThanOrEqual(18);
+  expect(await titleHeaderCell.evaluate((header) => {
+    const sort = header.querySelector('[data-sort="title"]').getBoundingClientRect();
+    const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
+    return filter.left >= sort.right;
+  })).toBe(true);
 
   await page.locator("#reset-settings").click();
   await page.locator("#quantile-granularity").selectOption("percentiles");

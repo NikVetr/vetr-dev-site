@@ -93,9 +93,9 @@
     quantileBasis: $("#quantile-basis"), sampleDescription: $("#sample-description"),
     weightingDescription: $("#weighting-description"),
     salaryMin: $("#salary-range-min"), salaryMax: $("#salary-range-max"), salaryRangeValue: $("#salary-range-value"),
-    salaryFilterSummary: $("#salary-filter-summary"),
+    salaryFilterSummary: $("#salary-filter-summary"), salaryFilterStatus: $("#salary-filter-status"),
     expenseMin: $("#expense-range-min"), expenseMax: $("#expense-range-max"), expenseRangeValue: $("#expense-range-value"),
-    expenseFilterSummary: $("#expense-filter-summary"),
+    expenseFilterSummary: $("#expense-filter-summary"), expenseFilterStatus: $("#expense-filter-status"),
     tableRpReferenceLayer: $("#table-rp-reference-layer"), tableScroll: $(".table-scroll"),
     rpExpenseTableReference: $("#rp-expense-table-reference"), rpStaffTableReference: $("#rp-staff-table-reference"),
     tableBody: $("#organization-table tbody"), dialog: $("#source-dialog"),
@@ -483,8 +483,18 @@
       ? "All" : `${compactMoney(salary.low)}–${compactMoney(salary.high)}`;
     refs.expenseRangeValue.value = expenses.low === expenses.min && expenses.high === expenses.max
       ? "All" : `${compactMoney(expenses.low)}–${compactMoney(expenses.high)}`;
-    refs.salaryFilterSummary.textContent = refs.salaryRangeValue.value;
-    refs.expenseFilterSummary.textContent = refs.expenseRangeValue.value;
+    const salaryActive = refs.salaryRangeValue.value !== "All";
+    const expenseActive = refs.expenseRangeValue.value !== "All";
+    refs.salaryFilterSummary.dataset.active = String(salaryActive);
+    refs.expenseFilterSummary.dataset.active = String(expenseActive);
+    refs.salaryFilterSummary.setAttribute("aria-label", salaryActive
+      ? `Filter salary, active range ${refs.salaryRangeValue.value}` : "Filter salary, all values included");
+    refs.expenseFilterSummary.setAttribute("aria-label", expenseActive
+      ? `Filter expenses, active range ${refs.expenseRangeValue.value}` : "Filter expenses, all values included");
+    refs.salaryFilterStatus.textContent = salaryActive
+      ? `Salary filter · ${refs.salaryRangeValue.value}` : "All salaries included";
+    refs.expenseFilterStatus.textContent = expenseActive
+      ? `Expense filter · ${refs.expenseRangeValue.value}` : "All expenses included";
     [["salary", refs.salaryMin, refs.salaryMax], ["expenses", refs.expenseMin, refs.expenseMax]].forEach(([key, low, high]) => {
       const minimum = Number(low.min); const maximum = Number(low.max);
       const track = document.querySelector(`[data-range-filter="${key}"] .dual-range`);
@@ -1245,21 +1255,38 @@
   function buildFilterMenus() {
     document.querySelectorAll("[data-filter-menu]").forEach((container) => {
       const key = container.dataset.filterMenu;
+      const label = {
+        title: "Job title", sourceType: "Evidence", tier: "Tier", topic: "Topic / model",
+        location: "Location", eaAffinity: "EA relation", structure: "Structure",
+      }[key] || key;
       const values = [...new Set(rows().map((row) => String(row[key] || "Not reported")))].sort((a, b) => a.localeCompare(b));
       const selected = state.filters[key];
       container.replaceChildren();
       const details = document.createElement("details");
       const summary = document.createElement("summary");
-      summary.textContent = selected == null ? "All" : selected.size ? `${selected.size} selected` : "None";
-      summary.setAttribute("aria-label", `Filter ${key}`);
       const panel = document.createElement("div");
       panel.className = "filter-popover";
+      const status = document.createElement("div");
+      status.className = "filter-status";
+      status.setAttribute("aria-live", "polite");
       const actions = document.createElement("div");
       actions.className = "filter-actions";
       const allButton = document.createElement("button");
-      allButton.type = "button"; allButton.textContent = selected == null ? "Deselect all" : "Select all";
+      allButton.type = "button";
+      const updateMenuState = () => {
+        const current = state.filters[key];
+        const count = current == null ? values.length : current.size;
+        const active = count !== values.length;
+        summary.dataset.active = String(active);
+        summary.setAttribute("aria-label", active
+          ? `Filter ${label}, ${count} of ${values.length} selected`
+          : `Filter ${label}, all ${values.length} selected`);
+        status.textContent = active ? `${count} of ${values.length} selected` : `All ${values.length} selected`;
+        allButton.textContent = active ? "Select all" : "Deselect all";
+      };
+      updateMenuState();
       allButton.addEventListener("click", () => {
-        state.filters[key] = selected == null ? new Set() : null;
+        state.filters[key] = state.filters[key] == null ? new Set() : null;
         buildFilterMenus();
         document.querySelector(`[data-filter-menu="${key}"] details`).open = true;
         renderAll();
@@ -1275,8 +1302,7 @@
           const next = state.filters[key] == null ? new Set(values) : new Set(state.filters[key]);
           if (checkbox.checked) next.add(value); else next.delete(value);
           state.filters[key] = next.size === values.length ? null : next;
-          summary.textContent = state.filters[key] == null ? "All" : next.size ? `${next.size} selected` : "None";
-          allButton.textContent = state.filters[key] == null ? "Deselect all" : "Select all";
+          updateMenuState();
           renderAll();
         });
         const span = document.createElement("span"); span.textContent = value;
@@ -1311,7 +1337,7 @@
           options.append(wrapper);
         });
       } else values.forEach((value) => appendOption(value));
-      panel.append(actions, options); details.append(summary, panel); container.append(details);
+      panel.append(status, actions, options); details.append(summary, panel); container.append(details);
     });
   }
 
