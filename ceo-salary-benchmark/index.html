@@ -225,6 +225,10 @@
         <span id="show-unavailable-label">Show rows without this salary measure</span>
         <button class="info-tooltip" type="button" aria-label="About unavailable observations" data-tooltip="These organizations are part of the peer universe but have no validated value for the currently selected compensation measure, so they cannot affect the histogram.">?</button>
       </label>
+      <div id="table-rp-reference-layer" class="table-rp-reference-layer" aria-label="Rethink Priorities comparison references">
+        <span id="rp-expense-table-reference" class="rp-table-reference" data-reference-column="expenses">RP = $7.5M</span>
+        <span id="rp-staff-table-reference" class="rp-table-reference" data-reference-column="staff">RP = 57 FTE</span>
+      </div>
       <div class="table-scroll" tabindex="0">
         <table id="organization-table">
           <thead>
@@ -234,13 +238,13 @@
               <th><button type="button" data-sort="title">Job title</button></th>
               <th><button type="button" data-sort="sourceType">Evidence</button></th>
               <th><button type="button" data-sort="salary">Salary</button></th>
-              <th><span id="rp-expense-table-reference" class="rp-column-reference">RP = $7.5M</span><button type="button" data-sort="expenses">Expenses</button></th>
+              <th><button type="button" data-sort="expenses" aria-label="Sort by expenses; Rethink Priorities comparison reference is $7.5 million">Expenses</button></th>
               <th><button type="button" data-sort="weight">Weight</button></th>
               <th><button type="button" data-sort="comparabilityScore">Match score</button></th>
               <th class="tier-column"><button type="button" data-sort="tier">Tier</button></th>
               <th><button type="button" data-sort="topic">Topic / model</button></th>
               <th><button type="button" data-sort="location">Location</button></th>
-              <th><span id="rp-staff-table-reference" class="rp-column-reference">RP = 57 FTE</span><button type="button" data-sort="staff">Staff</button></th>
+              <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities comparison reference is 57 full-time equivalents">Staff</button></th>
               <th><button type="button" data-sort="eaAffinity">EA relation</button></th>
               <th><button type="button" data-sort="structure">Structure</button></th>
               <th><button type="button" data-sort="compensationYear">Year</button></th>

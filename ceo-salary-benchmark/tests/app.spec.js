@@ -30,8 +30,25 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("tbody .tier-cell").first()).toHaveAttribute("title", "A");
   await expect(page.locator("#rp-expense-table-reference")).toHaveText("RP = $7.5M");
   await expect(page.locator("#rp-staff-table-reference")).toHaveText("RP = 57 FTE");
-  await page.locator("#rp-expense-table-reference").locator("xpath=..").screenshot({ path: "tmp/app-table-rp-expenses.png" });
-  await page.locator("#rp-staff-table-reference").locator("xpath=..").screenshot({ path: "tmp/app-table-rp-staff.png" });
+  await expect(page.locator("#table-rp-reference-layer")).toHaveAttribute("aria-label", "Rethink Priorities comparison references");
+  expect(await page.locator("#rp-expense-table-reference").evaluate((element) => Boolean(element.closest("th")))).toBe(false);
+  expect(await page.locator("#rp-staff-table-reference").evaluate((element) => Boolean(element.closest("th")))).toBe(false);
+  for (const [column, reference, screenshot] of [
+    ["expenses", "#rp-expense-table-reference", "tmp/app-floating-rp-expenses.png"],
+    ["staff", "#rp-staff-table-reference", "tmp/app-floating-rp-staff.png"],
+  ]) {
+    const header = page.locator(`thead button[data-sort="${column}"]`).locator("xpath=..");
+    await header.evaluate((element) => element.scrollIntoView({ block: "nearest", inline: "center" }));
+    await expect(page.locator(reference)).toBeVisible();
+    const centerDifference = await page.locator(reference).evaluate((marker, sortColumn) => {
+      const target = document.querySelector(`thead button[data-sort="${sortColumn}"]`).closest("th");
+      const markerRect = marker.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      return (markerRect.left + markerRect.width / 2) - (targetRect.left + targetRect.width / 2);
+    }, column);
+    expect(Math.abs(centerDifference)).toBeLessThan(2);
+    await page.locator(".table-panel").screenshot({ path: screenshot });
+  }
   expect(await page.locator("#bin-field").evaluate((element) => element.previousElementSibling?.classList.contains("view-setting"))).toBe(true);
   await expect(page.locator(".method-note")).toHaveCount(0);
   const blockAspect = await page.locator(".bar-block").first().evaluate((element) => {

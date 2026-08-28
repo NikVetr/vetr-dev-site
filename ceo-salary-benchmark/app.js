@@ -93,6 +93,7 @@
     salaryFilterSummary: $("#salary-filter-summary"),
     expenseMin: $("#expense-range-min"), expenseMax: $("#expense-range-max"), expenseRangeValue: $("#expense-range-value"),
     expenseFilterSummary: $("#expense-filter-summary"),
+    tableRpReferenceLayer: $("#table-rp-reference-layer"), tableScroll: $(".table-scroll"),
     rpExpenseTableReference: $("#rp-expense-table-reference"), rpStaffTableReference: $("#rp-staff-table-reference"),
     tableBody: $("#organization-table tbody"),
     includedCount: $("#included-count"), dialog: $("#source-dialog"),
@@ -1261,6 +1262,36 @@
         ? (state.sortDirection === "asc" ? "ascending" : "descending")
         : "none");
     });
+    scheduleTableReferencePosition();
+  }
+
+  let tableReferenceFrame = null;
+
+  function positionTableReferences() {
+    tableReferenceFrame = null;
+    const layerRect = refs.tableRpReferenceLayer.getBoundingClientRect();
+    const scrollRect = refs.tableScroll.getBoundingClientRect();
+    [
+      [refs.rpExpenseTableReference, "expenses"],
+      [refs.rpStaffTableReference, "staff"],
+    ].forEach(([marker, column]) => {
+      const header = document.querySelector(`thead button[data-sort="${column}"]`)?.closest("th");
+      if (!header) return;
+      const headerRect = header.getBoundingClientRect();
+      const center = headerRect.left + (headerRect.width / 2) - layerRect.left;
+      marker.style.left = `${center}px`;
+      const halfWidth = marker.offsetWidth / 2;
+      const withinViewport = headerRect.right > scrollRect.left
+        && headerRect.left < scrollRect.right
+        && center - halfWidth >= 4
+        && center + halfWidth <= layerRect.width - 4;
+      marker.classList.toggle("is-out-of-view", !withinViewport);
+    });
+  }
+
+  function scheduleTableReferencePosition() {
+    if (tableReferenceFrame != null) cancelAnimationFrame(tableReferenceFrame);
+    tableReferenceFrame = requestAnimationFrame(positionTableReferences);
   }
 
   function focusRow(id) {
@@ -1598,6 +1629,9 @@
 
   const observer = new ResizeObserver(() => renderChart());
   observer.observe(refs.chartWrap);
+  const tableObserver = new ResizeObserver(scheduleTableReferencePosition);
+  tableObserver.observe(refs.tableScroll);
+  refs.tableScroll.addEventListener("scroll", scheduleTableReferencePosition, { passive: true });
   refs.organizationPreview.addEventListener("pointerenter", () => window.clearTimeout(organizationPreviewHideTimer));
   refs.organizationPreview.addEventListener("pointerleave", scheduleOrganizationPreviewHide);
   refs.rpExpenseTableReference.textContent = `RP = ${compactMoney(RP_REFERENCE.expenses)}`;
