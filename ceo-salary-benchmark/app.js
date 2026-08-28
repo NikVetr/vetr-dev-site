@@ -49,6 +49,7 @@
     ranges: {
       salary: { min: null, max: null, low: null, high: null },
       expenses: { min: null, max: null, low: null, high: null },
+      matchScore: { min: 0, max: 100, low: 0, high: 100 },
     },
     focusedId: "",
     hoverQuantile: null,
@@ -98,6 +99,9 @@
     salaryFilterSummary: $("#salary-filter-summary"), salaryFilterStatus: $("#salary-filter-status"),
     expenseMin: $("#expense-range-min"), expenseMax: $("#expense-range-max"), expenseRangeValue: $("#expense-range-value"),
     expenseFilterSummary: $("#expense-filter-summary"), expenseFilterStatus: $("#expense-filter-status"),
+    matchScoreMin: $("#match-score-range-min"), matchScoreMax: $("#match-score-range-max"),
+    matchScoreRangeValue: $("#match-score-range-value"), matchScoreFilterSummary: $("#match-score-filter-summary"),
+    matchScoreFilterStatus: $("#match-score-filter-status"),
     tableScroll: $(".table-scroll"),
     tableBody: $("#organization-table tbody"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
@@ -436,11 +440,11 @@
       return selected.has(String(row[key] || "Not reported"));
     });
     if (!categoricalMatch) return false;
-    return ["salary", "expenses"].every((key) => {
+    return ["salary", "expenses", "matchScore"].every((key) => {
       const range = state.ranges[key];
       if (range.min == null || range.max == null) return true;
       const restricted = range.low > range.min || range.high < range.max;
-      const value = key === "salary" ? salary(row) : row.expenses;
+      const value = key === "salary" ? salary(row) : key === "expenses" ? row.expenses : row.comparabilityScore;
       if (value == null) return !restricted;
       return value >= range.low && value <= range.high;
     });
@@ -467,9 +471,11 @@
     state.ranges.expenses = {
       min: Math.min(...expenses), max: Math.max(...expenses), low: Math.min(...expenses), high: Math.max(...expenses),
     };
+    state.ranges.matchScore = { min: 0, max: 100, low: 0, high: 100 };
     Object.assign(refs.salaryMin, { min: salaryMin, max: salaryMax, step: 5_000, value: salaryMin });
     Object.assign(refs.salaryMax, { min: salaryMin, max: salaryMax, step: 5_000, value: salaryMax });
     refs.expenseMin.value = 0; refs.expenseMax.value = 1000;
+    refs.matchScoreMin.value = 0; refs.matchScoreMax.value = 100;
     updateRangeLabels();
   }
 
@@ -482,14 +488,14 @@
   }
 
   function updateRange(key, changed) {
-    const lowInput = key === "salary" ? refs.salaryMin : refs.expenseMin;
-    const highInput = key === "salary" ? refs.salaryMax : refs.expenseMax;
+    const lowInput = key === "salary" ? refs.salaryMin : key === "expenses" ? refs.expenseMin : refs.matchScoreMin;
+    const highInput = key === "salary" ? refs.salaryMax : key === "expenses" ? refs.expenseMax : refs.matchScoreMax;
     if (Number(lowInput.value) > Number(highInput.value)) {
       if (changed === "low") highInput.value = lowInput.value;
       else lowInput.value = highInput.value;
     }
-    state.ranges[key].low = key === "salary" ? Number(lowInput.value) : expenseFromSlider(lowInput.value);
-    state.ranges[key].high = key === "salary" ? Number(highInput.value) : expenseFromSlider(highInput.value);
+    state.ranges[key].low = key === "expenses" ? expenseFromSlider(lowInput.value) : Number(lowInput.value);
+    state.ranges[key].high = key === "expenses" ? expenseFromSlider(highInput.value) : Number(highInput.value);
     updateRangeLabels();
     renderAll();
   }
@@ -497,23 +503,32 @@
   function updateRangeLabels() {
     const salary = state.ranges.salary;
     const expenses = state.ranges.expenses;
+    const matchScore = state.ranges.matchScore;
     refs.salaryRangeValue.value = salary.low === salary.min && salary.high === salary.max
       ? "All" : `${compactMoney(salary.low)}–${compactMoney(salary.high)}`;
     refs.expenseRangeValue.value = expenses.low === expenses.min && expenses.high === expenses.max
       ? "All" : `${compactMoney(expenses.low)}–${compactMoney(expenses.high)}`;
+    refs.matchScoreRangeValue.value = matchScore.low === matchScore.min && matchScore.high === matchScore.max
+      ? "All" : `${Math.round(matchScore.low)}–${Math.round(matchScore.high)}`;
     const salaryActive = refs.salaryRangeValue.value !== "All";
     const expenseActive = refs.expenseRangeValue.value !== "All";
+    const matchScoreActive = refs.matchScoreRangeValue.value !== "All";
     refs.salaryFilterSummary.dataset.active = String(salaryActive);
     refs.expenseFilterSummary.dataset.active = String(expenseActive);
+    refs.matchScoreFilterSummary.dataset.active = String(matchScoreActive);
     refs.salaryFilterSummary.setAttribute("aria-label", salaryActive
       ? `Filter salary, active range ${refs.salaryRangeValue.value}` : "Filter salary, all values included");
     refs.expenseFilterSummary.setAttribute("aria-label", expenseActive
       ? `Filter expenses, active range ${refs.expenseRangeValue.value}` : "Filter expenses, all values included");
+    refs.matchScoreFilterSummary.setAttribute("aria-label", matchScoreActive
+      ? `Filter match score, active range ${refs.matchScoreRangeValue.value}` : "Filter match score, all values included");
     refs.salaryFilterStatus.textContent = salaryActive
       ? `Salary filter · ${refs.salaryRangeValue.value}` : "All salaries included";
     refs.expenseFilterStatus.textContent = expenseActive
       ? `Expense filter · ${refs.expenseRangeValue.value}` : "All expenses included";
-    [["salary", refs.salaryMin, refs.salaryMax], ["expenses", refs.expenseMin, refs.expenseMax]].forEach(([key, low, high]) => {
+    refs.matchScoreFilterStatus.textContent = matchScoreActive
+      ? `Match score filter · ${refs.matchScoreRangeValue.value}` : "All match scores included";
+    [["salary", refs.salaryMin, refs.salaryMax], ["expenses", refs.expenseMin, refs.expenseMax], ["matchScore", refs.matchScoreMin, refs.matchScoreMax]].forEach(([key, low, high]) => {
       const minimum = Number(low.min); const maximum = Number(low.max);
       const track = document.querySelector(`[data-range-filter="${key}"] .dual-range`);
       track.style.setProperty("--range-low", `${((Number(low.value) - minimum) / (maximum - minimum)) * 100}%`);
@@ -1592,9 +1607,32 @@
     if (tableStickyFrame != null) cancelAnimationFrame(tableStickyFrame);
     tableStickyFrame = requestAnimationFrame(() => {
       tableStickyFrame = null;
+      document.querySelectorAll("thead th.filterable-column").forEach((header) => {
+        const sortButton = header.querySelector("button[data-sort]");
+        if (sortButton) header.style.setProperty("--filter-left", `${sortButton.offsetLeft + sortButton.offsetWidth + 2}px`);
+      });
       const headerHeight = document.querySelector("#organization-table thead")?.getBoundingClientRect().height || 29;
       refs.tableScroll.style.setProperty("--table-header-height", `${headerHeight}px`);
     });
+  }
+
+  function alignHeaderFilterPopover(details) {
+    if (!details?.open) return;
+    requestAnimationFrame(() => {
+      const popover = details.querySelector(".filter-popover");
+      if (!popover) return;
+      popover.style.transform = "";
+      const bounds = refs.tableScroll.getBoundingClientRect();
+      const rectangle = popover.getBoundingClientRect();
+      let shift = 0;
+      if (rectangle.left < bounds.left + 4) shift += bounds.left + 4 - rectangle.left;
+      if (rectangle.right + shift > bounds.right - 4) shift -= rectangle.right + shift - bounds.right + 4;
+      popover.style.transform = shift ? `translateX(${shift}px)` : "";
+    });
+  }
+
+  function alignOpenHeaderFilterPopovers() {
+    document.querySelectorAll(".header-filter-menu details[open]").forEach(alignHeaderFilterPopover);
   }
 
   function focusRow(id) {
@@ -2036,6 +2074,7 @@
     const ranges = {};
     if (state.ranges.salary.low !== state.ranges.salary.min || state.ranges.salary.high !== state.ranges.salary.max) ranges.s = [state.ranges.salary.low, state.ranges.salary.high];
     if (state.ranges.expenses.low !== state.ranges.expenses.min || state.ranges.expenses.high !== state.ranges.expenses.max) ranges.e = [state.ranges.expenses.low, state.ranges.expenses.high];
+    if (state.ranges.matchScore.low !== state.ranges.matchScore.min || state.ranges.matchScore.high !== state.ranges.matchScore.max) ranges.m = [state.ranges.matchScore.low, state.ranges.matchScore.high];
     const payload = { v: URL_STATE_VERSION };
     if (state.stream !== "combined") payload.e = URL_STREAM_CODES[state.stream];
     if (state.measure !== "base" && state.stream === "incumbents") payload.m = URL_MEASURE_CODES[state.measure];
@@ -2109,6 +2148,8 @@
     refs.salaryMax.value = state.ranges.salary.high;
     refs.expenseMin.value = expenseSliderPosition(state.ranges.expenses.low);
     refs.expenseMax.value = expenseSliderPosition(state.ranges.expenses.high);
+    refs.matchScoreMin.value = state.ranges.matchScore.low;
+    refs.matchScoreMax.value = state.ranges.matchScore.high;
     updateRangeLabels();
   }
 
@@ -2200,6 +2241,7 @@
     configureRanges();
     const salaryRange = payload.r?.s;
     const expenseRange = payload.r?.e;
+    const matchScoreRange = payload.r?.m;
     if (Array.isArray(salaryRange) && salaryRange.length === 2) {
       state.ranges.salary.low = finiteNumber(salaryRange[0], state.ranges.salary.min, state.ranges.salary.min, state.ranges.salary.max);
       state.ranges.salary.high = finiteNumber(salaryRange[1], state.ranges.salary.max, state.ranges.salary.low, state.ranges.salary.max);
@@ -2207,6 +2249,10 @@
     if (Array.isArray(expenseRange) && expenseRange.length === 2) {
       state.ranges.expenses.low = finiteNumber(expenseRange[0], state.ranges.expenses.min, state.ranges.expenses.min, state.ranges.expenses.max);
       state.ranges.expenses.high = finiteNumber(expenseRange[1], state.ranges.expenses.max, state.ranges.expenses.low, state.ranges.expenses.max);
+    }
+    if (Array.isArray(matchScoreRange) && matchScoreRange.length === 2) {
+      state.ranges.matchScore.low = finiteNumber(matchScoreRange[0], state.ranges.matchScore.min, state.ranges.matchScore.min, state.ranges.matchScore.max);
+      state.ranges.matchScore.high = finiteNumber(matchScoreRange[1], state.ranges.matchScore.max, state.ranges.matchScore.low, state.ranges.matchScore.max);
     }
     (payload.i || []).forEach(([id, selected]) => {
       const row = rows().find((candidate) => candidate.id === id);
@@ -2240,6 +2286,7 @@
       ranges: {
         salary: { min: null, max: null, low: null, high: null },
         expenses: { min: null, max: null, low: null, high: null },
+        matchScore: { min: 0, max: 100, low: 0, high: 100 },
       },
       focusedId: "", hoverQuantile: null,
     });
@@ -2283,12 +2330,16 @@
   refs.dollarBasis.forEach((radio) => radio.addEventListener("change", () => {
     if (!radio.checked) return;
     const expenseRange = { ...state.ranges.expenses };
+    const matchScoreRange = { ...state.ranges.matchScore };
     state.inflationAdjusted = radio.value === "adjusted";
     state.autoBins = true;
     configureRanges();
     state.ranges.expenses = expenseRange;
+    state.ranges.matchScore = matchScoreRange;
     refs.expenseMin.value = expenseSliderPosition(expenseRange.low);
     refs.expenseMax.value = expenseSliderPosition(expenseRange.high);
+    refs.matchScoreMin.value = matchScoreRange.low;
+    refs.matchScoreMax.value = matchScoreRange.high;
     updateRangeLabels();
     renderAll();
   }));
@@ -2323,7 +2374,13 @@
   refs.salaryMax.addEventListener("input", () => updateRange("salary", "high"));
   refs.expenseMin.addEventListener("input", () => updateRange("expenses", "low"));
   refs.expenseMax.addEventListener("input", () => updateRange("expenses", "high"));
+  refs.matchScoreMin.addEventListener("input", () => updateRange("matchScore", "low"));
+  refs.matchScoreMax.addEventListener("input", () => updateRange("matchScore", "high"));
   refs.reset.addEventListener("click", reset);
+  document.addEventListener("toggle", (event) => {
+    if (event.target.matches?.(".header-filter-menu details")) alignHeaderFilterPopover(event.target);
+  }, true);
+  refs.tableScroll.addEventListener("scroll", alignOpenHeaderFilterPopovers);
   document.addEventListener("change", scheduleUrlState);
   document.addEventListener("input", scheduleUrlState);
   document.querySelectorAll("thead button[data-sort]").forEach((button) => button.addEventListener("click", () => {

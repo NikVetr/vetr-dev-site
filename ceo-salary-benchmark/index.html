@@ -276,7 +276,24 @@
               </th>
               <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities reports 43 individuals employed on its 2023 Form 990">Staff</button></th>
               <th class="weight-column"><button type="button" data-sort="weight">Weight</button></th>
-              <th><button type="button" data-sort="comparabilityScore">Match score</button></th>
+              <th class="filterable-column">
+                <button type="button" data-sort="comparabilityScore">Match score</button>
+                <div class="filter-menu numeric-filter-menu header-filter-menu" data-numeric-filter="matchScore">
+                  <details>
+                    <summary id="match-score-filter-summary" aria-label="Filter match score"></summary>
+                    <div class="filter-popover numeric-filter-popover">
+                      <div id="match-score-filter-status" class="filter-status" aria-live="polite">All match scores included</div>
+                      <section class="range-filter" data-range-filter="matchScore">
+                        <div><span>Match score range <button class="info-tooltip" type="button" aria-label="About match score filtering" data-tooltip="Include only rows whose frozen non-pay peer match score falls between the two handles. This filter updates the chart, fitted distribution, statistics, and quantiles.">?</button></span><output id="match-score-range-value">All</output></div>
+                        <div class="dual-range">
+                          <input id="match-score-range-min" type="range" min="0" max="100" step="1" aria-label="Minimum match score">
+                          <input id="match-score-range-max" type="range" min="0" max="100" step="1" aria-label="Maximum match score">
+                        </div>
+                      </section>
+                    </div>
+                  </details>
+                </div>
+              </th>
               <th class="tier-column filterable-column">
                 <button type="button" data-sort="tier">Tier</button>
                 <div class="filter-menu header-filter-menu" data-filter-menu="tier"></div>

@@ -37,6 +37,17 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   }));
   expect(tableHeaders).toEqual(["Included", "Organization", "Job title", "Salary", "Expenses", "Staff", "Weight", "Match score", "Tier", "Topic / model", "Location", "EA relation", "Structure", "Year", "Evidence", "Source"]);
   expect(await page.locator("#organization-table .title-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThan(140);
+  const longTitleCell = page.locator('tr[data-id]:has-text("New Jersey League of Conservation Voters") .title-cell');
+  await expect(longTitleCell).toHaveText("Executive Director and Chief Executive Officer");
+  const titleWrapping = await longTitleCell.evaluate((cell) => {
+    const style = getComputedStyle(cell);
+    return {
+      whiteSpace: style.whiteSpace,
+      fitsWidth: cell.scrollWidth <= cell.clientWidth + 1,
+      usesMultipleLines: cell.scrollHeight > Number.parseFloat(style.lineHeight) * 1.5,
+    };
+  });
+  expect(titleWrapping).toEqual({ whiteSpace: "normal", fitsWidth: true, usesMultipleLines: true });
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#measure-field")).toBeHidden();
@@ -107,6 +118,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".curve-quantile-mark")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-label.amount").first()).toHaveText(/^\$\d+K$/);
   await expect(page.locator(".curve-quantile-mark").first().locator("text").first()).toHaveCSS("font-size", "10px");
+  await expect(page.locator(".curve-quantile-label").first()).toHaveCSS("fill", "rgb(45, 104, 133)");
+  await expect(page.locator(".curve-quantile-label.amount").first()).toHaveCSS("fill", "rgb(62, 69, 74)");
   const curveLabelLinesOverlap = await page.locator(".curve-quantile-mark").evaluateAll((marks) => marks.some((mark) => {
     const [percentile, amount] = mark.querySelectorAll("text");
     const percentileBox = percentile.getBBox();
@@ -220,6 +233,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(empiricalMarkCount).toBeLessThanOrEqual(4);
   await expect(page.locator(".empirical-quantile-guide")).toHaveCount(empiricalMarkCount);
   await expect(page.locator(".empirical-quantile-label.amount").first()).toHaveText(/^\$\d+K$/);
+  await expect(page.locator(".empirical-quantile-label").first()).toHaveCSS("fill", "rgb(45, 104, 133)");
+  await expect(page.locator(".empirical-quantile-label.amount").first()).toHaveCSS("fill", "rgb(62, 69, 74)");
   await expect(page.locator(".empirical-quantile-guide").first()).toHaveCSS("stroke-dasharray", "5px, 4px");
   expect(await page.locator(".empirical-quantile-guide").evaluateAll((guides) => guides.every((guide) =>
     Number(guide.getAttribute("y1")) < Number(guide.getAttribute("y2"))))).toBe(true);
@@ -321,6 +336,25 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#expense-filter-summary")).toHaveAttribute("data-active", "true");
   await expect(page.locator("#expense-filter-status")).toContainText("Expense filter");
   await expect(page.locator("#stat-n")).not.toHaveText("125");
+  await page.locator("#reset-settings").click();
+  const matchScoreUnfilteredN = Number(await page.locator("#stat-n").textContent());
+  await expect(page.locator("#match-score-range-min")).not.toBeVisible();
+  await page.locator("#match-score-filter-summary").click();
+  await expect(page.locator("#match-score-range-min")).toBeVisible();
+  await page.locator("#match-score-range-min").fill("90");
+  await expect(page.locator("#match-score-range-value")).toHaveText("90–100");
+  await expect(page.locator("#match-score-filter-summary")).toHaveAttribute("data-active", "true");
+  await expect(page.locator("#match-score-filter-status")).toContainText("Match score filter");
+  await expect.poll(async () => Number(await page.locator("#stat-n").textContent())).toBeLessThan(matchScoreUnfilteredN);
+  expect(await page.locator('[data-numeric-filter="matchScore"] .filter-popover').evaluate((popover) => {
+    const rectangle = popover.getBoundingClientRect();
+    const bounds = popover.closest(".table-scroll").getBoundingClientRect();
+    return rectangle.left >= bounds.left && rectangle.right <= bounds.right;
+  })).toBe(true);
+  await page.locator(".table-panel").screenshot({ path: "tmp/app-match-score-filter.png" });
+  const matchScoreRangeBeforeBasisChange = await page.locator("#match-score-range-value").textContent();
+  await page.locator("#expense-filter-summary").locator("xpath=..").evaluate((details) => { details.open = true; });
+  await page.locator("#expense-range-min").fill("500");
   const expenseRangeBeforeBasisChange = await page.locator("#expense-range-value").textContent();
   await page.locator("#salary-filter-summary").locator("xpath=..").evaluate((details) => { details.open = true; });
   await page.locator("#salary-range-min").fill("300000");
@@ -328,6 +362,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#salary-range-value")).toHaveText("All");
   await expect(page.locator("#expense-range-value")).toHaveText(expenseRangeBeforeBasisChange);
   await expect(page.locator("#expense-filter-summary")).toHaveAttribute("data-active", "true");
+  await expect(page.locator("#match-score-range-value")).toHaveText(matchScoreRangeBeforeBasisChange);
+  await expect(page.locator("#match-score-filter-summary")).toHaveAttribute("data-active", "true");
 
   await page.locator("#reset-settings").click();
   const salaryHeader = page.locator('thead button[data-sort="salary"]');
@@ -343,13 +379,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(tierHeaderWidth).toBeLessThanOrEqual(80);
   await expect(page.locator("thead tr")).toHaveCount(1);
   await expect(page.locator("#table-rp-reference-layer")).toHaveCount(0);
-  const titleHeaderCell = page.locator('thead th:has(button[data-sort="title"])');
-  expect(await titleHeaderCell.locator(".header-filter-menu").evaluate((menu) => menu.getBoundingClientRect().width)).toBeLessThanOrEqual(18);
-  expect(await titleHeaderCell.evaluate((header) => {
-    const sort = header.querySelector('[data-sort="title"]').getBoundingClientRect();
+  const filterPlacements = await page.locator("thead th.filterable-column").evaluateAll((headers) => headers.map((header) => {
+    const sort = header.querySelector("button[data-sort]").getBoundingClientRect();
     const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
-    return filter.left >= sort.right;
-  })).toBe(true);
+    return { width: filter.width, gap: filter.left - sort.right };
+  }));
+  expect(filterPlacements.every(({ width, gap }) => width <= 18 && gap >= 0 && gap <= 6)).toBe(true);
 
   await page.locator("#reset-settings").click();
   await page.locator("#quantile-granularity").selectOption("percentiles");
@@ -701,6 +736,8 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await page.locator('input[name="distribution"][value="gamma"]').check();
   await page.locator("#quantile-granularity").selectOption("custom");
   await page.locator("#custom-quantiles").fill("10, 50, 90");
+  await page.locator("#match-score-filter-summary").click();
+  await page.locator("#match-score-range-min").fill("50");
   await expect.poll(() => page.url()).toContain("?s=");
   await page.waitForTimeout(100);
   const sharedUrl = page.url();
@@ -715,6 +752,8 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await expect(page.locator("#price-basis-status")).toHaveText("Source-year USD");
   await expect(page.locator("#quantile-granularity")).toHaveValue("custom");
   await expect(page.locator("#custom-quantiles")).toHaveValue("10, 50, 90");
+  await expect(page.locator("#match-score-range-min")).toHaveValue("50");
+  await expect(page.locator("#match-score-filter-summary")).toHaveAttribute("data-active", "true");
   await expect(page.locator("#mark-curve")).toBeChecked();
   const restoredRow = page.locator(`tbody tr[data-id="${rowId}"]`);
   await expect(restoredRow.locator(".row-toggle")).not.toBeChecked();
