@@ -34,7 +34,8 @@
     bins: 20,
     autoBins: true,
     view: "histogram",
-    axisMode: "value",
+    axisModes: { histogram: "value", scatterX: "value", scatterY: "value" },
+    axisScales: { histogram: "auto", scatterX: "auto", scatterY: "auto" },
     histogramAxis: { numerator: "salary", denominator: "expenses" },
     scatterXAxis: { numerator: "expenses", denominator: "staff" },
     scatterYAxis: { numerator: "salary", denominator: "expenses" },
@@ -86,7 +87,18 @@
     expenseBandwidthValue: $("#expense-bandwidth-value"), staffBandwidthValue: $("#staff-bandwidth-value"),
     recencyHalfLifeValue: $("#recency-halflife-value"), discreteWeightEditors: $("#discrete-weight-editors"),
     binField: $("#bin-field"), bins: $("#bin-count"), binValue: $("#bin-value"),
-    view: [...document.querySelectorAll('input[name="chart-view"]')], axisMode: [...document.querySelectorAll('input[name="axis-mode"]')],
+    view: [...document.querySelectorAll('input[name="chart-view"]')],
+    axisModes: {
+      histogram: [...document.querySelectorAll('input[name="histogram-axis-mode"]')],
+      scatterX: [...document.querySelectorAll('input[name="scatter-x-axis-mode"]')],
+      scatterY: [...document.querySelectorAll('input[name="scatter-y-axis-mode"]')],
+    },
+    axisScales: {
+      histogram: [...document.querySelectorAll('input[name="histogram-axis-scale"]')],
+      scatterX: [...document.querySelectorAll('input[name="scatter-x-axis-scale"]')],
+      scatterY: [...document.querySelectorAll('input[name="scatter-y-axis-scale"]')],
+    },
+    histogramAxisSettings: $("#histogram-axis-settings"), scatterAxisSettings: $("#scatter-axis-settings"),
     scatterControls: $("#scatter-controls"), contourField: $("#contour-field"),
     chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
     comparabilityProfileField: $("#comparability-profile-field"),
@@ -475,11 +487,13 @@
   const axisStateKeys = { histogram: "histogramAxis", scatterX: "scatterXAxis", scatterY: "scatterYAxis" };
 
   function axisExpression(axisKey) { return state[axisStateKeys[axisKey]]; }
+  function axisMode(axisKey) { return state.axisModes[axisKey]; }
 
-  function normalizeAxisExpressions() {
-    if (state.axisMode !== "ratio") return;
-    Object.values(axisStateKeys).forEach((stateKey) => {
-      const expression = state[stateKey];
+  function normalizeAxisExpressions(axisKey = null) {
+    const axisKeys = axisKey ? [axisKey] : Object.keys(axisStateKeys);
+    axisKeys.forEach((key) => {
+      if (axisMode(key) !== "ratio") return;
+      const expression = axisExpression(key);
       if (expression.numerator !== expression.denominator) return;
       expression.denominator = Object.keys(numericVariables).find((key) => key !== expression.numerator);
     });
@@ -489,10 +503,14 @@
     const expression = axisExpression(axisKey);
     const numerator = numericVariables[expression.numerator] || numericVariables.salary;
     const denominator = numericVariables[expression.denominator] || numericVariables.expenses;
-    if (state.axisMode === "value") {
+    const mode = axisMode(axisKey);
+    const scaleSetting = state.axisScales[axisKey];
+    const autoLogarithmic = mode === "ratio" || numerator.logarithmic;
+    const logarithmic = scaleSetting === "log" || (scaleSetting === "auto" && autoLogarithmic);
+    if (mode === "value") {
       return {
         axisKey, label: numerator.label(), shortLabel: numerator.shortLabel, format: numerator.format,
-        fullFormat: numerator.fullFormat, logarithmic: numerator.logarithmic,
+        fullFormat: numerator.fullFormat, mode, scaleSetting, logarithmic,
         primaryLabel: (row) => expression.numerator === "salary" ? measureLabel(row) : numerator.label(),
         value: (row) => numerator.value(row),
       };
@@ -503,7 +521,7 @@
       shortLabel: `${numerator.shortLabel} / ${denominator.shortLabel}`,
       format: compactNumber,
       fullFormat: (value) => value == null || !Number.isFinite(value) ? "—" : value.toLocaleString("en-US", { maximumSignificantDigits: 5 }),
-      logarithmic: true,
+      mode, scaleSetting, logarithmic,
       primaryLabel: () => `${numerator.shortLabel} / ${denominator.shortLabel}`,
       value: (row) => {
         const top = numerator.value(row);
@@ -511,6 +529,16 @@
         return Number.isFinite(top) && Number.isFinite(bottom) && top > 0 && bottom > 0 ? top / bottom : null;
       },
     };
+  }
+
+  function axisGeometry(descriptor) {
+    return descriptor.logarithmic
+      ? { transform: Math.log, inverse: Math.exp, jacobian: (value) => value }
+      : { transform: (value) => value, inverse: (value) => value, jacobian: () => 1 };
+  }
+
+  function axisDisplayLabel(descriptor) {
+    return `${descriptor.label}${descriptor.logarithmic ? " (log scale)" : ""}`;
   }
 
   function axisItems(axisKey) {
@@ -843,20 +871,21 @@
     return group;
   }
 
-  function squareBinCount(items, domainMin, domainMax, innerWidth, innerHeight) {
+  function squareBinCount(items, axisMin, axisMax, innerWidth, innerHeight, geometry) {
     let best = { bins: 20, score: Infinity };
     const model = fitModel(items);
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     for (let count = 2; count <= 200; count += 1) {
       const totals = Array(count).fill(0);
       items.forEach((item) => {
-        const index = clamp(Math.floor(((item.value - domainMin) / (domainMax - domainMin)) * count), 0, count - 1);
+        const position = geometry.transform(item.value);
+        const index = clamp(Math.floor(((position - axisMin) / (axisMax - axisMin)) * count), 0, count - 1);
         totals[index] += item.weight;
       });
-      const binWidth = (domainMax - domainMin) / count;
+      const binWidth = (axisMax - axisMin) / count;
       const densityPeak = model ? Math.max(...Array.from({ length: 101 }, (_, index) => {
-        const value = domainMin + (index / 100) * (domainMax - domainMin);
-        return model.density(value) * totalWeight * binWidth;
+        const value = geometry.inverse(axisMin + (index / 100) * (axisMax - axisMin));
+        return model.density(value) * geometry.jacobian(value) * totalWeight * binWidth;
       })) : 0;
       const maxTotal = Math.max(...totals, densityPeak, 1) * 1.1;
       const typicalWeight = items.reduce((sum, item) => sum + item.weight, 0) / items.length;
@@ -896,18 +925,20 @@
     return valid ? [...new Set(tokens)].sort((a, b) => a - b) : [];
   }
 
-  function appendCurveQuantileMarks(svg, model, percentiles, xScale, yScale, margin, sumWeight, binWidthValue, domainMin, domainMax, formatter) {
+  function appendCurveQuantileMarks(svg, model, percentiles, xScale, yScale, margin, sumWeight, binWidthAxis, axisMin, axisMax, formatter, geometry) {
     if (!state.markCurve || !model || !percentiles.length || percentiles.length >= 21) return;
-    const expectedWeight = (value) => model.density(value) * sumWeight * binWidthValue;
-    const delta = Math.max((domainMax - domainMin) / 1500, Number.EPSILON);
+    const expectedWeight = (value) => model.density(value) * geometry.jacobian(value) * sumWeight * binWidthAxis;
+    const delta = Math.max((axisMax - axisMin) / 1500, Number.EPSILON);
     const candidates = [];
     percentiles.forEach((percentile) => {
       const value = model.quantile(percentile / 100);
-      if (!Number.isFinite(value) || value < domainMin || value > domainMax) return;
+      if (!Number.isFinite(value) || value <= 0) return;
+      const position = geometry.transform(value);
+      if (position < axisMin || position > axisMax) return;
       const x = xScale(value);
       const y = margin.top + yScale(expectedWeight(value));
-      const before = Math.max(domainMin, value - delta);
-      const after = Math.min(domainMax, value + delta);
+      const before = geometry.inverse(Math.max(axisMin, position - delta));
+      const after = geometry.inverse(Math.min(axisMax, position + delta));
       const tangentAngle = Math.atan2(
         margin.top + yScale(expectedWeight(after)) - (margin.top + yScale(expectedWeight(before))),
         xScale(after) - xScale(before),
@@ -1027,7 +1058,7 @@
     const textBounds = text.getBBox();
     const isVertical = Boolean(attributes.transform);
     const triangleX = isVertical ? Number(attributes.x) + textBounds.width / 2 + 7 : textBounds.x + textBounds.width + 7;
-    const triangleY = isVertical ? Number(attributes.y) - 3 : Number(attributes.y) - 4;
+    const triangleY = Number(attributes.y) - 6;
     const triangle = svgElement("path", {
       d: `M${triangleX},${triangleY} l7,0 l-3.5,5 z`, class: "axis-variable-triangle",
     });
@@ -1053,8 +1084,8 @@
     refs.axisDenominator.replaceChildren(...options.map((option) => option.cloneNode(true)));
     refs.axisNumerator.value = expression.numerator;
     refs.axisDenominator.value = expression.denominator;
-    refs.axisNumeratorLabel.textContent = state.axisMode === "ratio" ? "Numerator" : "Measure";
-    refs.axisDenominatorField.hidden = state.axisMode !== "ratio";
+    refs.axisNumeratorLabel.textContent = axisMode(axisKey) === "ratio" ? "Numerator" : "Measure";
+    refs.axisDenominatorField.hidden = axisMode(axisKey) !== "ratio";
     refs.axisSelectorTitle.textContent = axisKey === "histogram" ? "Histogram axis"
       : axisKey === "scatterX" ? "Horizontal axis" : "Vertical axis";
   }
@@ -1083,7 +1114,7 @@
     if (!activeAxisSelector || !numericVariables[value]) return;
     const expression = axisExpression(activeAxisSelector);
     expression[part] = value;
-    if (state.axisMode === "ratio" && expression.numerator === expression.denominator) {
+    if (axisMode(activeAxisSelector) === "ratio" && expression.numerator === expression.denominator) {
       const alternative = Object.keys(numericVariables).find((key) => key !== value);
       expression[part === "numerator" ? "denominator" : "numerator"] = alternative;
     }
@@ -1101,6 +1132,7 @@
 
   function renderHistogram() {
     const descriptor = axisDescriptor("histogram");
+    const geometry = axisGeometry(descriptor);
     const items = axisItems("histogram");
     const svg = refs.chart;
     svg.replaceChildren();
@@ -1120,7 +1152,7 @@
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
       empty.textContent = "No organizations have a value for the current selection.";
       svg.append(empty);
-      appendAxisControl(svg, "histogram", descriptor.label, {
+      appendAxisControl(svg, "histogram", axisDisplayLabel(descriptor), {
         x: width / 2 - 5, y: height - 6, "text-anchor": "middle",
       });
       refs.statN.textContent = "0"; refs.statNeff.textContent = "0"; refs.statCenter.textContent = "—";
@@ -1129,29 +1161,30 @@
 
     const rpRow = DATA.rpReference;
     const rpValue = descriptor.value(rpRow);
-    const rpAvailable = Number.isFinite(rpValue) && rpValue > 0;
+    const rpAvailable = Number.isFinite(rpValue) && (!descriptor.logarithmic || rpValue > 0);
     const rpItem = { row: rpRow, value: rpValue, weight: 0 };
     const values = [...items.map((item) => item.value), ...(rpAvailable ? [rpValue] : [])];
-    const [domainMin, domainMax] = paddedDomain(values);
-    const xScale = (value) => margin.left + ((value - domainMin) / (domainMax - domainMin)) * innerWidth;
+    const [axisMin, axisMax] = paddedDomain(values.map(geometry.transform), 0.08, !descriptor.logarithmic);
+    const xScale = (value) => margin.left + ((geometry.transform(value) - axisMin) / (axisMax - axisMin)) * innerWidth;
     if (state.autoBins) {
-      state.bins = squareBinCount(items, domainMin, domainMax, innerWidth, innerHeight);
+      state.bins = squareBinCount(items, axisMin, axisMax, innerWidth, innerHeight, geometry);
       refs.bins.value = state.bins;
       refs.binValue.value = state.bins;
       state.autoBins = false;
     }
-    const binWidthValue = (domainMax - domainMin) / state.bins;
+    const binWidthAxis = (axisMax - axisMin) / state.bins;
     const bins = Array.from({ length: state.bins }, (_, index) => ({ index, total: 0, items: [] }));
     items.forEach((item) => {
-      const index = clamp(Math.floor((item.value - domainMin) / binWidthValue), 0, state.bins - 1);
+      const index = clamp(Math.floor((geometry.transform(item.value) - axisMin) / binWidthAxis), 0, state.bins - 1);
       bins[index].items.push(item);
       bins[index].total += item.weight;
     });
     const model = fitModel(items);
     const sumWeight = items.reduce((sum, item) => sum + item.weight, 0);
     const densityPoints = model ? Array.from({ length: 181 }, (_, index) => {
-      const value = domainMin + (index / 180) * (domainMax - domainMin);
-      return { value, expectedWeight: model.density(value) * sumWeight * binWidthValue };
+      const position = axisMin + (index / 180) * (axisMax - axisMin);
+      const value = geometry.inverse(position);
+      return { value, expectedWeight: model.density(value) * geometry.jacobian(value) * sumWeight * binWidthAxis };
     }) : [];
     const densityPeak = densityPoints.length ? Math.max(...densityPoints.map((point) => point.expectedWeight)) : 0;
     const maxWeight = Math.max(...bins.map((bin) => bin.total), densityPeak, 1) * 1.1;
@@ -1176,8 +1209,10 @@
       class: "rp-reference-guide", "aria-hidden": "true",
     }));
     bins.forEach((bin) => {
-      const x0 = xScale(domainMin + bin.index * binWidthValue) + 1;
-      const x1 = xScale(domainMin + (bin.index + 1) * binWidthValue) - 1;
+      const binLow = geometry.inverse(axisMin + bin.index * binWidthAxis);
+      const binHigh = geometry.inverse(axisMin + (bin.index + 1) * binWidthAxis);
+      const x0 = xScale(binLow) + 1;
+      const x1 = xScale(binHigh) - 1;
       let cumulative = 0;
       [...bin.items].sort((a, b) => b.weight - a.weight).forEach((item) => {
         const y0 = margin.top + yScale(cumulative + item.weight);
@@ -1188,8 +1223,6 @@
           fill: colors.get(category), class: `bar-block${state.focusedId === item.row.id ? " is-focused" : ""}`,
           tabindex: "0", role: "button", "aria-label": `${item.row.organization}, ${descriptor.fullFormat(item.value)}`,
         });
-        const binLow = domainMin + bin.index * binWidthValue;
-        const binHigh = binLow + binWidthValue;
         rect.addEventListener("pointerenter", (event) => {
           highlightRug(item.row.id, true);
           showTooltip(event, item, {
@@ -1220,7 +1253,7 @@
       svg.append(svgElement("path", { d: path, class: "density-line" }));
       appendCurveQuantileMarks(
         svg, model, percentiles, xScale, yScale, margin,
-        sumWeight, binWidthValue, domainMin, domainMax, descriptor.format,
+        sumWeight, binWidthAxis, axisMin, axisMax, descriptor.format, geometry,
       );
     }
 
@@ -1244,13 +1277,13 @@
 
     const tickCount = width < 650 ? 5 : 8;
     for (let i = 0; i <= tickCount; i += 1) {
-      const value = domainMin + (i / tickCount) * (domainMax - domainMin);
+      const value = geometry.inverse(axisMin + (i / tickCount) * (axisMax - axisMin));
       const x = xScale(value);
       const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#52879E", "font-size": 10 });
       label.textContent = descriptor.format(value);
       svg.append(label);
     }
-    appendAxisControl(svg, "histogram", descriptor.label, {
+    appendAxisControl(svg, "histogram", axisDisplayLabel(descriptor), {
       x: margin.left + innerWidth / 2 - 5, y: height - 6, "text-anchor": "middle",
     });
     const yAxisTitle = svgElement("text", {
@@ -1425,14 +1458,18 @@
   function renderScatter() {
     const xDescriptor = axisDescriptor("scatterX");
     const yDescriptor = axisDescriptor("scatterY");
+    const xGeometry = axisGeometry(xDescriptor);
+    const yGeometry = axisGeometry(yDescriptor);
     const items = normalizePlottedWeights(selectedRows().map((item) => ({
       ...item, xValue: xDescriptor.value(item.row), yValue: yDescriptor.value(item.row),
-    })).filter((item) => Number.isFinite(item.xValue) && item.xValue > 0 && Number.isFinite(item.yValue) && item.yValue > 0)
+    })).filter((item) => Number.isFinite(item.xValue) && (!xDescriptor.logarithmic || item.xValue > 0)
+      && Number.isFinite(item.yValue) && (!yDescriptor.logarithmic || item.yValue > 0))
       .map((item) => ({ ...item, value: item.yValue })));
     const rpRow = DATA.rpReference;
     const rpXValue = xDescriptor.value(rpRow);
     const rpValue = yDescriptor.value(rpRow);
-    const rpAvailable = Number.isFinite(rpXValue) && rpXValue > 0 && Number.isFinite(rpValue) && rpValue > 0;
+    const rpAvailable = Number.isFinite(rpXValue) && (!xDescriptor.logarithmic || rpXValue > 0)
+      && Number.isFinite(rpValue) && (!yDescriptor.logarithmic || rpValue > 0);
     const svg = refs.chart;
     svg.replaceChildren();
     $("#chart-description").textContent = `A scatterplot of ${yDescriptor.label.toLowerCase()} against ${xDescriptor.label.toLowerCase()}.`;
@@ -1446,18 +1483,18 @@
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
       empty.textContent = "No selected organizations have values for both plotted axes.";
       svg.append(empty); refs.chartLegend.replaceChildren();
-      appendAxisControl(svg, "scatterX", `${xDescriptor.label}${xDescriptor.logarithmic ? " (log scale)" : ""}`, {
+      appendAxisControl(svg, "scatterX", axisDisplayLabel(xDescriptor), {
         x: width / 2 - 5, y: height - 6, "text-anchor": "middle",
       });
-      appendAxisControl(svg, "scatterY", `${yDescriptor.label}${yDescriptor.logarithmic ? " (log scale)" : ""}`, {
+      appendAxisControl(svg, "scatterY", axisDisplayLabel(yDescriptor), {
         x: 14, y: height / 2, transform: `rotate(-90 14 ${height / 2})`, "text-anchor": "middle",
       });
       updateCorrelationSummary();
       refs.statN.textContent = "0"; refs.statNeff.textContent = "0"; refs.statCenter.textContent = "—";
       return;
     }
-    const xTransform = (value) => xDescriptor.logarithmic ? Math.log(value) : value;
-    const yTransform = (value) => yDescriptor.logarithmic ? Math.log(value) : value;
+    const xTransform = xGeometry.transform;
+    const yTransform = yGeometry.transform;
     const transformedX = items.map((item) => xTransform(item.xValue));
     const transformedY = items.map((item) => yTransform(item.yValue));
     if (rpAvailable) { transformedX.push(xTransform(rpXValue)); transformedY.push(yTransform(rpValue)); }
@@ -1467,7 +1504,7 @@
     const yScale = (value) => margin.top + innerHeight - ((yTransform(value) - yMin) / (yMax - yMin)) * innerHeight;
     for (let index = 0; index <= 4; index += 1) {
       const transformed = yMin + (index / 4) * (yMax - yMin);
-      const yValue = yDescriptor.logarithmic ? Math.exp(transformed) : transformed;
+      const yValue = yGeometry.inverse(transformed);
       const y = yScale(yValue);
       svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: y, y2: y, class: "grid-line" }));
       const label = svgElement("text", { x: margin.left - 8, y: y + 3, "text-anchor": "end", fill: "#52879E", "font-size": 9 });
@@ -1476,7 +1513,7 @@
     const plotBottom = margin.top + innerHeight;
     for (let index = 0; index <= 5; index += 1) {
       const transformed = xMin + (index / 5) * (xMax - xMin);
-      const value = xDescriptor.logarithmic ? Math.exp(transformed) : transformed;
+      const value = xGeometry.inverse(transformed);
       const x = margin.left + (index / 5) * innerWidth;
       svg.append(svgElement("line", { x1: x, x2: x, y1: plotBottom, y2: plotBottom + 4, stroke: "#52879E" }));
       const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#52879E", "font-size": 9 });
@@ -1528,10 +1565,10 @@
       }, 28);
     }
     updateCorrelationSummary(correlations);
-    appendAxisControl(svg, "scatterX", `${xDescriptor.label}${xDescriptor.logarithmic ? " (log scale)" : ""}`, {
+    appendAxisControl(svg, "scatterX", axisDisplayLabel(xDescriptor), {
       x: margin.left + innerWidth / 2 - 5, y: height - 6, "text-anchor": "middle",
     });
-    appendAxisControl(svg, "scatterY", `${yDescriptor.label}${yDescriptor.logarithmic ? " (log scale)" : ""}`, {
+    appendAxisControl(svg, "scatterY", axisDisplayLabel(yDescriptor), {
       x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle",
     });
     renderScatterLegend(colors, contoursShown, items);
@@ -2374,6 +2411,8 @@
     refs.scatterControls.hidden = state.view !== "scatter";
     refs.contourField.hidden = state.view !== "scatter";
     refs.binField.hidden = state.view !== "histogram";
+    refs.histogramAxisSettings.hidden = state.view !== "histogram";
+    refs.scatterAxisSettings.hidden = state.view !== "scatter";
     refs.sampleDescription.textContent = {
       primary: "Rows retained for the validated analysis after source and role-structure review.",
       sensitivity: "The validated analysis plus records explicitly designated sensitivity-only; substantive exclusions remain unchecked.",
@@ -2395,7 +2434,7 @@
     refs.binValue.value = state.bins;
   }
 
-  const URL_STATE_VERSION = 4;
+  const URL_STATE_VERSION = 5;
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
@@ -2484,15 +2523,18 @@
     if (!state.inflationAdjusted) payload.n = 1;
     if (state.sample !== "primary") payload.p = URL_SAMPLE_CODES[state.sample];
     if (state.fit !== "lognormal") payload.g = URL_FIT_CODES[state.fit];
-    if (state.axisMode === "ratio") payload.a = 1;
     const expressionCode = (expression) => `${URL_VARIABLE_CODES[expression.numerator]}${URL_VARIABLE_CODES[expression.denominator]}`;
-    const quantileExpression = state.view === "scatter" ? state.scatterYAxis : state.histogramAxis;
-    const nondefaultQuantileAxis = quantileExpression.numerator !== "salary"
-      || (state.axisMode === "ratio" && quantileExpression.denominator !== "expenses");
-    if (nondefaultQuantileAxis) {
-      if (state.view === "scatter") { payload.k = expressionCode(quantileExpression); payload.l = 1; }
+    const quantileAxisKey = analysisAxisKey();
+    const quantileMode = axisMode(quantileAxisKey);
+    const quantileExpression = axisExpression(quantileAxisKey);
+    if (quantileMode === "ratio") payload.a = 1;
+    const nondefaultQuantileExpression = quantileExpression.numerator !== "salary"
+      || (quantileMode === "ratio" && quantileExpression.denominator !== "expenses");
+    if (nondefaultQuantileExpression) {
+      if (state.view === "scatter") payload.k = expressionCode(quantileExpression);
       else payload.h = expressionCode(quantileExpression);
     }
+    if (state.view === "scatter" && (quantileMode === "ratio" || nondefaultQuantileExpression)) payload.l = 1;
     if (state.weightings.size) payload.w = [...state.weightings].map((key) => URL_WEIGHT_CODES[key]).join("");
     if (Object.keys(parameters).length) payload.x = parameters;
     if (state.quantileGranularity !== "quintiles") payload.q = URL_QUANTILE_CODES[state.quantileGranularity];
@@ -2537,6 +2579,15 @@
     return Math.round((Math.log(value / range.min) / Math.log(range.max / range.min)) * 1000);
   }
 
+  function syncAxisControls() {
+    Object.entries(refs.axisModes).forEach(([axisKey, radios]) => {
+      radios.forEach((radio) => { radio.checked = radio.value === state.axisModes[axisKey]; });
+    });
+    Object.entries(refs.axisScales).forEach(([axisKey, radios]) => {
+      radios.forEach((radio) => { radio.checked = radio.value === state.axisScales[axisKey]; });
+    });
+  }
+
   function syncControlsFromState() {
     refs.stream.value = state.stream;
     refs.measure.value = state.measure;
@@ -2544,7 +2595,7 @@
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === (state.inflationAdjusted ? "adjusted" : "nominal"); });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
-    refs.axisMode.forEach((radio) => { radio.checked = radio.value === state.axisMode; });
+    syncAxisControls();
     refs.chartColor.value = state.chartColor;
     refs.showContours.checked = state.showContours;
     refs.targetExpense.value = state.targetExpense / 1_000_000;
@@ -2566,7 +2617,7 @@
   }
 
   function expandCompactUrlState(payload) {
-    if (![2, 3, URL_STATE_VERSION].includes(payload?.v)) return payload;
+    if (![2, 3, 4, URL_STATE_VERSION].includes(payload?.v)) return payload;
     const version = payload.v;
     const custom = {};
     (payload.c || []).forEach(([code, value]) => {
@@ -2607,7 +2658,7 @@
 
   function restoreUrlState(payload) {
     const sourceVersion = payload?.v;
-    const compactVersion = [2, 3, URL_STATE_VERSION].includes(payload?.v);
+    const compactVersion = [2, 3, 4, URL_STATE_VERSION].includes(payload?.v);
     payload = expandCompactUrlState(payload);
     if (!payload || payload.v !== 1 || typeof payload.a !== "object") throw new Error("Unsupported or incomplete state version.");
     const analysis = payload.a;
@@ -2628,7 +2679,12 @@
     state.bins = Math.round(finiteNumber(analysis.b, state.bins, 2, 200));
     state.autoBins = compactVersion;
     state.view = enumValue(analysis.vw, ["histogram", "scatter"], state.view);
-    state.axisMode = enumValue(analysis.am, ["value", "ratio"], state.axisMode);
+    const restoredAxisMode = enumValue(analysis.am, ["value", "ratio"], "value");
+    state.axisModes = { histogram: "value", scatterX: "value", scatterY: "value" };
+    state.axisScales = { histogram: "auto", scatterX: "auto", scatterY: "auto" };
+    if (sourceVersion === 1 || sourceVersion === 4) {
+      Object.keys(state.axisModes).forEach((axisKey) => { state.axisModes[axisKey] = restoredAxisMode; });
+    } else state.axisModes[state.view === "scatter" ? "scatterY" : "histogram"] = restoredAxisMode;
     const decodeExpression = (encoded, fallback) => {
       if (typeof encoded !== "string") return fallback;
       if (encoded.length === 2 && URL_VARIABLE_KEYS[encoded[0]] && URL_VARIABLE_KEYS[encoded[1]]) {
@@ -2702,7 +2758,9 @@
     Object.assign(state, {
       stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
       targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
-      bins: 20, autoBins: true, view: "histogram", axisMode: "value",
+      bins: 20, autoBins: true, view: "histogram",
+      axisModes: { histogram: "value", scatterX: "value", scatterY: "value" },
+      axisScales: { histogram: "auto", scatterX: "auto", scatterY: "auto" },
       histogramAxis: { numerator: "salary", denominator: "expenses" },
       scatterXAxis: { numerator: "expenses", denominator: "staff" },
       scatterYAxis: { numerator: "salary", denominator: "expenses" },
@@ -2728,7 +2786,7 @@
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === "adjusted"; });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
-    refs.axisMode.forEach((radio) => { radio.checked = radio.value === state.axisMode; });
+    syncAxisControls();
     refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
     refs.targetExpense.value = RP_WEIGHT_TARGET.expenses / 1_000_000; refs.targetStaff.value = RP_WEIGHT_TARGET.staff;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
@@ -2798,14 +2856,20 @@
   refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); renderChart(); });
   refs.markCurve.addEventListener("change", () => { state.markCurve = refs.markCurve.checked; renderChart(); });
   refs.view.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.view = radio.value; renderAll(); } }));
-  refs.axisMode.forEach((radio) => radio.addEventListener("change", () => {
+  Object.entries(refs.axisModes).forEach(([axisKey, radios]) => radios.forEach((radio) => radio.addEventListener("change", () => {
     if (!radio.checked) return;
-    state.axisMode = radio.value;
-    normalizeAxisExpressions();
-    state.autoBins = true;
+    state.axisModes[axisKey] = radio.value;
+    normalizeAxisExpressions(axisKey);
+    if (axisKey === "histogram") state.autoBins = true;
     closeAxisSelector();
     renderAll();
-  }));
+  })));
+  Object.entries(refs.axisScales).forEach(([axisKey, radios]) => radios.forEach((radio) => radio.addEventListener("change", () => {
+    if (!radio.checked) return;
+    state.axisScales[axisKey] = radio.value;
+    if (axisKey === "histogram") state.autoBins = true;
+    renderAll();
+  })));
   refs.axisNumerator.addEventListener("change", () => updateAxisExpression("numerator", refs.axisNumerator.value));
   refs.axisDenominator.addEventListener("change", () => updateAxisExpression("denominator", refs.axisDenominator.value));
   refs.axisSelectorClose.addEventListener("click", closeAxisSelector);

@@ -235,7 +235,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('thead button[data-sort="expenses"]').evaluate((element) => element.scrollIntoView({ block: "nearest", inline: "center" }));
   await page.locator(".table-panel").screenshot({ path: "tmp/app-sticky-rp-reference.png" });
   await page.locator(".table-scroll").evaluate((element) => { element.scrollTop = 0; element.scrollLeft = 0; });
-  expect(await page.locator("#bin-field").evaluate((element) => element.previousElementSibling?.classList.contains("axis-mode-setting"))).toBe(true);
+  expect(await page.locator("#bin-field").evaluate((element) => element.previousElementSibling?.classList.contains("axis-settings"))).toBe(true);
   await expect(page.locator(".method-note")).toHaveCount(0);
   const blockAspect = await page.locator(".bar-block").first().evaluate((element) => {
     return Number(element.getAttribute("width")) / Number(element.getAttribute("height"));
@@ -882,6 +882,21 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
   const verticalAxis = () => page.locator('.axis-variable-control[aria-label^="Change vertical"]');
   await expect(horizontalAxis()).toHaveCount(1);
+  await expect(page.locator('input[name="histogram-axis-mode"][value="value"]')).toBeChecked();
+  await expect(page.locator('input[name="histogram-axis-scale"][value="auto"]')).toBeChecked();
+  await expect(horizontalAxis()).not.toContainText("log scale");
+  const horizontalControlAlignment = await horizontalAxis().evaluate((control) => {
+    const label = control.querySelector(".axis-variable-label");
+    const triangle = control.querySelector(".axis-variable-triangle");
+    const labelBox = label.getBBox();
+    const triangleBox = triangle.getBBox();
+    return {
+      decoration: getComputedStyle(label).textDecorationLine,
+      centerDifference: Math.abs((labelBox.y + labelBox.height / 2) - (triangleBox.y + triangleBox.height / 2)),
+    };
+  });
+  expect(horizontalControlAlignment.decoration).toBe("none");
+  expect(horizontalControlAlignment.centerDifference).toBeLessThan(2);
   await horizontalAxis().click();
   await expect(page.locator("#axis-selector-popover")).toBeVisible();
   await expect(page.locator("#axis-selector-title")).toHaveText("Histogram axis");
@@ -890,15 +905,17 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator("#axis-numerator option")).toHaveCount(6);
   await page.locator("#axis-numerator").selectOption("expenses");
   await expect(page.locator("#salary-chart")).toContainText("Annual expenses");
+  await expect(horizontalAxis()).toContainText("log scale");
   await expect(page.locator("#quantile-basis")).toContainText("for Expenses");
   await expect(page.locator(".bar-block")).toHaveCount(Number(await page.locator("#stat-n").textContent()));
 
-  await page.locator('input[name="axis-mode"][value="ratio"]').check();
+  await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await horizontalAxis().click();
   await expect(page.locator("#axis-numerator-label")).toHaveText("Numerator");
   await expect(page.locator("#axis-denominator-field")).toBeVisible();
   await page.locator("#axis-numerator").selectOption("salary");
   await expect(page.locator("#salary-chart")).toContainText("Salary / Expenses");
+  await expect(horizontalAxis()).toContainText("log scale");
   await expect(page.locator("#quantile-basis")).toContainText("for Salary / Expenses");
   await expect(page.locator(".density-line")).toHaveCount(1);
   await expect(page.locator(".quantile-cell strong").first()).not.toContainText("$");
@@ -907,19 +924,41 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.locator('input[name="distribution"][value="gamma"]').check();
   await expect(page.locator(".density-line")).toHaveCount(1);
   expect(Number(await page.locator("#stat-n").textContent())).toBeGreaterThan(0);
+  await page.locator('input[name="histogram-axis-scale"][value="linear"]').check();
+  await expect(horizontalAxis()).not.toContainText("log scale");
+  await page.locator('input[name="histogram-axis-scale"][value="auto"]').check();
+  await expect(horizontalAxis()).toContainText("log scale");
+  await page.locator(".chart-panel").screenshot({ path: "tmp/app-ratio-histogram-log.png" });
 
   await page.locator('input[name="chart-view"][value="scatter"]').check();
   await expect(horizontalAxis()).toHaveCount(1);
   await expect(verticalAxis()).toHaveCount(1);
   await expect(page.locator("#contour-field")).toBeVisible();
+  await expect(page.locator("#histogram-axis-settings")).toBeHidden();
+  await expect(page.locator("#scatter-axis-settings")).toBeVisible();
+  await expect(page.locator('input[name="scatter-x-axis-mode"][value="value"]')).toBeChecked();
+  await expect(page.locator('input[name="scatter-y-axis-mode"][value="value"]')).toBeChecked();
+  await expect(horizontalAxis()).toContainText("Annual expenses (log scale)");
+  await expect(verticalAxis()).toContainText("Annual compensation");
+  await expect(verticalAxis()).not.toContainText("log scale");
   await expect(page.locator(".covariance-contour")).toHaveCount(3);
   await expect(page.locator("#scatter-correlations")).toHaveText(/Weighted r = -?\d\.\d{3}, ρ = -?\d\.\d{3}/);
+  await page.locator('input[name="scatter-x-axis-mode"][value="ratio"]').check();
+  await expect(horizontalAxis()).toContainText("Expenses / Staff (log scale)");
   await verticalAxis().click();
   await expect(page.locator("#axis-selector-title")).toHaveText("Vertical axis");
   await expect(page.locator("#axis-numerator")).toHaveValue("salary");
+  await expect(page.locator("#axis-denominator-field")).toBeHidden();
+  await page.locator("#axis-selector-close").click();
+  await page.locator('input[name="scatter-y-axis-mode"][value="ratio"]').check();
+  await verticalAxis().click();
+  await expect(page.locator("#axis-denominator-field")).toBeVisible();
   await expect(page.locator("#axis-denominator")).toHaveValue("expenses");
   await page.locator("#axis-denominator").selectOption("revenue");
-  await expect(verticalAxis()).toContainText("Salary / Revenue");
+  await expect(verticalAxis()).toContainText("Salary / Revenue (log scale)");
+  await page.locator('input[name="scatter-y-axis-scale"][value="linear"]').check();
+  await expect(verticalAxis()).not.toContainText("log scale");
+  await page.locator('input[name="scatter-y-axis-scale"][value="auto"]').check();
   await horizontalAxis().click();
   await expect(page.locator("#axis-selector-title")).toHaveText("Horizontal axis");
   await expect(page.locator("#axis-numerator")).toHaveValue("expenses");
@@ -936,12 +975,16 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   const sharedUrl = page.url();
   expect(sharedUrl.length).toBeLessThan(500);
   await page.reload();
-  await expect(page.locator('input[name="axis-mode"][value="ratio"]')).toBeChecked();
-  await expect(horizontalAxis()).toContainText("Salary / Staff");
+  await expect(page.locator('input[name="histogram-axis-mode"][value="ratio"]')).toBeChecked();
+  await expect(page.locator('input[name="histogram-axis-scale"][value="auto"]')).toBeChecked();
+  await expect(horizontalAxis()).toContainText("Salary / Staff (log scale)");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
-  await expect(horizontalAxis()).toContainText("Expenses / Staff");
-  await expect(verticalAxis()).toContainText("Salary / Expenses");
+  await expect(page.locator('input[name="scatter-x-axis-mode"][value="value"]')).toBeChecked();
+  await expect(page.locator('input[name="scatter-y-axis-mode"][value="value"]')).toBeChecked();
+  await expect(horizontalAxis()).toContainText("Annual expenses (log scale)");
+  await expect(verticalAxis()).toContainText("Annual compensation");
 
+  await page.locator('input[name="scatter-y-axis-mode"][value="ratio"]').check();
   await verticalAxis().click();
   await page.locator("#axis-denominator").selectOption("revenue");
   await expect.poll(() => page.url()).toContain("?s=");
@@ -950,7 +993,10 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.reload();
   expect(page.url()).toBe(scatterShareUrl);
   await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
-  await expect(verticalAxis()).toContainText("Salary / Revenue");
+  await expect(page.locator('input[name="scatter-y-axis-mode"][value="ratio"]')).toBeChecked();
+  await expect(page.locator('input[name="scatter-y-axis-scale"][value="auto"]')).toBeChecked();
+  await expect(verticalAxis()).toContainText("Salary / Revenue (log scale)");
+  await expect(page.locator('input[name="scatter-x-axis-mode"][value="value"]')).toBeChecked();
   expect(errors).toEqual([]);
 });
 
@@ -1024,6 +1070,12 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await page.goto(`/?s=${legacyV3}`);
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#stat-n")).toHaveText("125");
+  const legacyV4 = Buffer.from(JSON.stringify({ v: 4, a: 1 })).toString("base64url");
+  await page.goto(`/?s=${legacyV4}`);
+  await expect(page.locator('input[name="histogram-axis-mode"][value="ratio"]')).toBeChecked();
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await expect(page.locator('input[name="scatter-x-axis-mode"][value="ratio"]')).toBeChecked();
+  await expect(page.locator('input[name="scatter-y-axis-mode"][value="ratio"]')).toBeChecked();
   const legacyV1 = Buffer.from(JSON.stringify({ v: 1, a: {} })).toString("base64url");
   await page.goto(`/?s=${legacyV1}`);
   await expect(page.locator("#stream-select")).toHaveValue("incumbents");
