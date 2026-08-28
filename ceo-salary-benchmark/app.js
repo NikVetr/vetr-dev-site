@@ -15,7 +15,7 @@
       ? `$${(value / 1_000_000).toFixed(value >= 10_000_000 ? 0 : 1)}M`
       : `$${Math.round(value / 1_000)}K`;
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
-  const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
+  const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 43 });
   const COMPOSITE_SCORE_TOOLTIP = "Auto-weights uses the frozen 0–100 non-pay composite, which combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1. Select Auto-weights instead of its individual component weights to avoid double-counting those dimensions.";
 
   const state = {
@@ -200,7 +200,7 @@
       else if (normalized === "strict_primary") explanation = "Strict-primary postings describe a current, full-time organization-wide CEO or ED with board accountability, an RP-like knowledge-sector role, and generally $5M–$20M core scale or 25–100 staff.";
       else if (normalized.includes("expanded_primary")) explanation = "Expanded-primary postings retain a strong organization-wide leadership match but relax a title, mission-mix, or close-fit requirement from the strict-primary posting set.";
       else if (normalized.includes("scale_unknown")) explanation = "This expanded secondary subtype has a useful role or functional match, but accessible evidence did not establish operating scale.";
-      else if (normalized.includes("scale")) explanation = "This subtype is broader because budget, expenses, or staff differ materially from RP's $7.5M and 57-FTE core anchors.";
+      else if (normalized.includes("scale")) explanation = "This subtype is broader because budget, expenses, or staff differ materially from RP's $7.5M core-budget and 43-employee filing anchors.";
       else if (normalized.includes("structural")) explanation = "This subtype is broader because governance, affiliation, fiscal sponsorship, grantmaking, or multi-entity leadership differs from RP's organization-wide CEO structure.";
       else if (normalized.includes("broad_functional")) explanation = "This expanded subtype is included mainly for functional sensitivity: some duties overlap with RP, but the mission or operating model is less direct.";
       else if (normalized.includes("date_ambiguity")) explanation = "The posting's publication and process dates conflict, so it is retained only as a date-ambiguity sensitivity.";
@@ -1388,7 +1388,7 @@
     tr.setAttribute("aria-label", "Rethink Priorities 2024 Form 990 reference profile; excluded from the peer distribution");
     const values = [
       "", reference.organization, reference.title, reference.sourceType, compactMoney(salary(reference)), compactMoney(reference.expenses),
-      "", "", reference.tier, "—", reference.location, `${reference.staff} (${reference.staffFte} FTE)`, "—", reference.structure, String(reference.compensationYear), "",
+      "", "", reference.tier, "—", reference.location, String(reference.staff), "—", reference.structure, String(reference.compensationYear), "",
     ];
     values.forEach((value, index) => {
       const td = document.createElement("td");
@@ -1400,7 +1400,7 @@
       } else td.textContent = value;
       if (index === 0) td.className = "check-column";
       if (index === 1) td.className = "rp-reference-name";
-      if (index === 11) td.title = "RP reported 61 permanent staff (57 FTE) at year-end 2024. Form 990 Part I, line 5 separately reports zero employees.";
+      if (index === 11) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
       tr.append(td);
     });
     const source = document.createElement("td");
@@ -1408,7 +1408,7 @@
     link.className = "rp-reference-source"; link.href = reference.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "ProPublica ↗";
     const separator = document.createTextNode(" · ");
     const staffLink = document.createElement("a");
-    staffLink.className = "rp-reference-source"; staffLink.href = reference.secondarySourceUrl; staffLink.target = "_blank"; staffLink.rel = "noopener noreferrer"; staffLink.textContent = "Staff ↗";
+    staffLink.className = "rp-reference-source"; staffLink.href = reference.secondarySourceUrl; staffLink.target = "_blank"; staffLink.rel = "noopener noreferrer"; staffLink.textContent = "Staff 990 ↗";
     source.append(link, separator, staffLink);
     tr.append(source);
     refs.tableBody.append(tr);
@@ -1558,7 +1558,8 @@
       ["EA relation", row.eaAffinity || "Not coded"],
       ["Organization structure", row.structure || "Not coded"],
       ["Scale", `${compactMoney(row.expenses)} expenses · ${row.staff ?? "—"} staff${row.staffFte ? ` (${row.staffFte} FTE)` : ""}`],
-      ...(row.filingStaff != null ? [["Form 990 employee field", `${row.filingStaff} on Part I, line 5`]] : []),
+      ...(row.filingStaff != null ? [["Form 990 employee field", `${row.filingStaff} on Part I, line 5 (${row.staffYear || row.compensationYear})`]] : []),
+      ...(row.currentFilingStaff != null ? [["Latest Form 990 employee field", `${row.currentFilingStaff} on Part I, line 5 (${row.compensationYear})`]] : []),
       ["Filing-declared website", row.homepageUrl || "Not available in the preserved source"],
       ["Local provenance", row.localPath || "No cached original"],
     ].forEach(([term, description]) => {
