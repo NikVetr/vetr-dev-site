@@ -21,6 +21,8 @@ OUTPUT = ROOT / "app-data.js"
 WIKIPEDIA_PROFILES = ROOT / "data" / "organization_wikipedia_profiles.csv"
 RP_REFERENCE_SOURCE_ID = "SRC-990-RP-REFERENCE"
 RP_REFERENCE_LOCAL_PATH = "sources/native/form990/202502879349301540_public.xml"
+RP_STAFF_SOURCE_ID = "SRC-RP-FUNDING-NEEDS"
+RP_STAFF_LOCAL_PATH = "sources/native/supporting/src-rp-funding-needs.html"
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -236,8 +238,14 @@ def build_rp_reference() -> dict:
     if (expenses, revenue, employees) != (20_378_936, 20_599_841, 0):
         raise ValueError(f"Unexpected RP filing scale fields: expenses={expenses}, revenue={revenue}, employees={employees}")
 
+    staff_path = BENCHMARK / RP_STAFF_LOCAL_PATH
+    staff_source = staff_path.read_text(encoding="utf-8")
+    if "61 permanent staff" not in staff_source or "57 full-time equivalent (FTE) staff" not in staff_source:
+        raise ValueError("RP operating report lacks the expected year-end 2024 staff disclosure")
+
     factor = cpi_factor(2024)
     cached = cache_source(RP_REFERENCE_SOURCE_ID, RP_REFERENCE_LOCAL_PATH)
+    cached_staff = cache_source(RP_STAFF_SOURCE_ID, RP_STAFF_LOCAL_PATH)
     return {
         "id": RP_REFERENCE_SOURCE_ID,
         "organization": "Rethink Priorities",
@@ -253,7 +261,9 @@ def build_rp_reference() -> dict:
         "structure": "independent nonprofit",
         "revenue": revenue,
         "expenses": expenses,
-        "staff": employees,
+        "staff": 61,
+        "staffFte": 57,
+        "filingStaff": employees,
         "comparabilityScore": None,
         "compensationYear": 2024,
         "salary": {
@@ -268,19 +278,24 @@ def build_rp_reference() -> dict:
         "structurallyClean": False,
         "founder": False,
         "analysisStatus": "reference only; excluded from peer distribution",
-        "auditStatus": "validated source-native RP Form 990 reference",
+        "auditStatus": "validated RP Form 990 and operating staff disclosure",
         "selectionNote": "",
         "evidenceText": (
             "IRS Form 990 for the period ending 2024-12-31. Marcus Davis, CEO. "
             f"Schedule J base: {money(base)}; Part VII cash/W-2 proxy: {money(cash + related)}; "
             f"Part VII other compensation: {money(other)}; filing total: {money(total)}. "
             f"The filing reports {money(expenses)} total functional expenses, {money(revenue)} total revenue, "
-            "and zero employees on Form 990 Part I, line 5."
+            "and zero employees on Form 990 Part I, line 5. RP's year-end 2024 operating report instead "
+            "states 61 permanent staff, corresponding to 57 full-time-equivalent staff, plus several dozen contractors."
         ),
         "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/843896318",
         "canonicalUrl": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
         "cachedSource": cached,
         "localPath": RP_REFERENCE_LOCAL_PATH,
+        "secondarySourceLabel": "RP operating staff report",
+        "secondarySourceUrl": "https://rethinkpriorities.org/rethink-priorities-funding-needs/",
+        "secondaryCachedSource": cached_staff,
+        "secondaryLocalPath": RP_STAFF_LOCAL_PATH,
         "sourceType": "Form 990",
         "evidenceStream": "incumbents",
         "homepageUrl": filing_homepage(RP_REFERENCE_LOCAL_PATH),

@@ -1388,7 +1388,7 @@
     tr.setAttribute("aria-label", "Rethink Priorities 2024 Form 990 reference profile; excluded from the peer distribution");
     const values = [
       "", reference.organization, reference.title, reference.sourceType, compactMoney(salary(reference)), compactMoney(reference.expenses),
-      "", "", reference.tier, "—", reference.location, String(reference.staff), "—", reference.structure, String(reference.compensationYear), "",
+      "", "", reference.tier, "—", reference.location, `${reference.staff} (${reference.staffFte} FTE)`, "—", reference.structure, String(reference.compensationYear), "",
     ];
     values.forEach((value, index) => {
       const td = document.createElement("td");
@@ -1400,13 +1400,16 @@
       } else td.textContent = value;
       if (index === 0) td.className = "check-column";
       if (index === 1) td.className = "rp-reference-name";
-      if (index === 11) td.title = "Form 990 Part I, line 5 reports zero employees; this may not represent RP's operating headcount.";
+      if (index === 11) td.title = "RP reported 61 permanent staff (57 FTE) at year-end 2024. Form 990 Part I, line 5 separately reports zero employees.";
       tr.append(td);
     });
     const source = document.createElement("td");
     const link = document.createElement("a");
     link.className = "rp-reference-source"; link.href = reference.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "ProPublica ↗";
-    source.append(link);
+    const separator = document.createTextNode(" · ");
+    const staffLink = document.createElement("a");
+    staffLink.className = "rp-reference-source"; staffLink.href = reference.secondarySourceUrl; staffLink.target = "_blank"; staffLink.rel = "noopener noreferrer"; staffLink.textContent = "Staff ↗";
+    source.append(link, separator, staffLink);
     tr.append(source);
     refs.tableBody.append(tr);
   }
@@ -1554,7 +1557,8 @@
       ["Location / work model", [row.location, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
       ["EA relation", row.eaAffinity || "Not coded"],
       ["Organization structure", row.structure || "Not coded"],
-      ["Scale", `${compactMoney(row.expenses)} expenses · ${row.staff ?? "—"} staff`],
+      ["Scale", `${compactMoney(row.expenses)} expenses · ${row.staff ?? "—"} staff${row.staffFte ? ` (${row.staffFte} FTE)` : ""}`],
+      ...(row.filingStaff != null ? [["Form 990 employee field", `${row.filingStaff} on Part I, line 5`]] : []),
       ["Filing-declared website", row.homepageUrl || "Not available in the preserved source"],
       ["Local provenance", row.localPath || "No cached original"],
     ].forEach(([term, description]) => {
@@ -1567,6 +1571,11 @@
     cached.hidden = !row.cachedSource; cached.href = row.cachedSource || "#";
     const external = $("#dialog-external");
     external.hidden = !row.sourceUrl; external.href = row.sourceUrl || "#";
+    const secondaryCached = $("#dialog-secondary-cached");
+    secondaryCached.hidden = !row.secondaryCachedSource; secondaryCached.href = row.secondaryCachedSource || "#";
+    const secondaryExternal = $("#dialog-secondary-external");
+    secondaryExternal.hidden = !row.secondarySourceUrl; secondaryExternal.href = row.secondarySourceUrl || "#";
+    secondaryExternal.textContent = row.secondarySourceLabel ? `Open ${row.secondarySourceLabel} ↗` : "Open secondary source ↗";
     refs.dialog.showModal();
   }
 
