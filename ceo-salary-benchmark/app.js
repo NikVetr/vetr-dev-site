@@ -15,6 +15,7 @@
       ? `$${(value / 1_000_000).toFixed(value >= 10_000_000 ? 0 : 1)}M`
       : `$${Math.round(value / 1_000)}K`;
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+  const RP_REFERENCE = Object.freeze({ expenses: 7_500_000, staff: 57 });
 
   const state = {
     stream: "incumbents",
@@ -23,8 +24,8 @@
     fit: "lognormal",
     weightings: new Set(),
     discreteWeights: {},
-    targetExpense: 7_500_000,
-    targetStaff: 57,
+    targetExpense: RP_REFERENCE.expenses,
+    targetStaff: RP_REFERENCE.staff,
     expenseBandwidth: 0.7,
     staffBandwidth: 0.7,
     recencyHalfLife: 4,
@@ -61,6 +62,7 @@
   };
   const wikipediaCache = new Map();
   let organizationPreviewHideTimer = 0;
+  let helpTooltipGlobalListenersBound = false;
 
   const refs = {
     stream: $("#stream-select"), measure: $("#measure-select"), measureField: $("#measure-field"),
@@ -91,6 +93,7 @@
     salaryFilterSummary: $("#salary-filter-summary"),
     expenseMin: $("#expense-range-min"), expenseMax: $("#expense-range-max"), expenseRangeValue: $("#expense-range-value"),
     expenseFilterSummary: $("#expense-filter-summary"),
+    rpExpenseTableReference: $("#rp-expense-table-reference"), rpStaffTableReference: $("#rp-staff-table-reference"),
     tableBody: $("#organization-table tbody"),
     includedCount: $("#included-count"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
@@ -175,6 +178,79 @@
     return 1;
   }
 
+  function discreteWeightExplanation(key, category) {
+    const normalized = String(category || "Not reported").toLowerCase();
+    let explanation;
+    if (key === "tier") {
+      if (normalized === "a") explanation = "Tier A is the principal expanded peer tier: generally score ≥75, functional score ≥20, a clean organization-wide chief executive, comparable scale, and no dominant structural exclusion.";
+      else if (normalized === "b") explanation = "Tier B is a useful secondary peer: generally score ≥62 with strong EA affinity, or ≥68 for a functional-only peer, with one meaningful scale, model, geography, or structure deviation.";
+      else if (normalized === "c") explanation = "Tier C is a broad robustness tier: generally score ≥52 with a usable chief-executive observation but a weaker scale, operating-model, or geographic match.";
+      else if (normalized === "strict_primary") explanation = "Strict-primary postings describe a current, full-time organization-wide CEO or ED with board accountability, an RP-like knowledge-sector role, and generally $5M–$20M core scale or 25–100 staff.";
+      else if (normalized.includes("expanded_primary")) explanation = "Expanded-primary postings retain a strong organization-wide leadership match but relax a title, mission-mix, or close-fit requirement from the strict-primary posting set.";
+      else if (normalized.includes("scale_unknown")) explanation = "This expanded secondary subtype has a useful role or functional match, but accessible evidence did not establish operating scale.";
+      else if (normalized.includes("scale")) explanation = "This subtype is broader because budget, expenses, or staff differ materially from RP's $7.5M and 57-FTE core anchors.";
+      else if (normalized.includes("structural")) explanation = "This subtype is broader because governance, affiliation, fiscal sponsorship, grantmaking, or multi-entity leadership differs from RP's organization-wide CEO structure.";
+      else if (normalized.includes("broad_functional")) explanation = "This expanded subtype is included mainly for functional sensitivity: some duties overlap with RP, but the mission or operating model is less direct.";
+      else if (normalized.includes("date_ambiguity")) explanation = "The posting's publication and process dates conflict, so it is retained only as a date-ambiguity sensitivity.";
+      else if (normalized.includes("older_structural")) explanation = "This is an older posting with a material structural difference and is retained only for sensitivity testing.";
+      else if (normalized.includes("fractional")) explanation = "The role is fractional or otherwise not a standard full-time organization-wide chief executive, so it is sensitivity evidence only.";
+      else if (normalized.includes("excluded_grantmaking")) explanation = "Excluded because grantmaking or pass-through stewardship dominates the operating model rather than RP-like knowledge production.";
+      else if (normalized.includes("excluded_private_foundation")) explanation = "Excluded because private-foundation governance, endowment, and grantmaking responsibilities are not directly comparable with RP's public-charity operating model.";
+      else if (normalized.includes("excluded_subordinate_regional")) explanation = "Excluded because the advertised role leads a regional unit beneath a parent organization rather than the whole organization.";
+      else if (normalized.includes("excluded")) explanation = "Excluded from the primary peer set after applying preregistered non-pay criteria such as role scope, operating model, scale, structure, geography, or source adequacy.";
+      else if (normalized.includes("secondary")) explanation = "Secondary postings are useful comparators with one meaningful scale, operating-model, geography, or structure deviation from the strict-primary criteria.";
+      else explanation = "This is a source-native peer tier assigned under the frozen function, scale, role, structure, geography, and source-quality rules.";
+      explanation += " Tiering was determined without using the observed compensation.";
+    } else if (key === "eaAffinity") {
+      if (normalized.includes("core")) explanation = "EA-core means an explicit effective-altruism organization or project. The frozen comparability score assigned this category 20 of 20 EA-affinity points.";
+      else if (normalized.includes("adjacent")) explanation = "EA-adjacent means a publicly EA-linked organization, or a prominent organization in an EA-recommended or evaluated cause area, without being classified as EA-core. It received 14 of 20 EA-affinity points.";
+      else if (normalized.includes("functional")) explanation = "Functional-only means no meaningful EA relationship was required, but the organization uses evidence-first research, evaluation, policy, advisory, or related methods. It received 7 of 20 EA-affinity points.";
+      else explanation = "Not coded means the benchmark did not assign an EA-affinity category. It is not evidence that the organization has no EA relationship, so the suggested weight is neutral.";
+      explanation += " This coding was frozen or verified independently of compensation.";
+    } else if (key === "sourceType") {
+      explanation = normalized.includes("form 990")
+        ? "Form 990 denotes realized incumbent compensation reported in a nonprofit filing. It is historical and measure-specific; Part VII cash is not automatically exact base salary."
+        : "Job posting denotes the inflation-adjusted midpoint of an advertised base-salary range. It is forward-looking offer evidence, not realized compensation.";
+    } else if (key === "titleGroup") {
+      if (normalized === "ceo") explanation = "CEO groups Chief Executive Officer variants and most directly matches RP's organization-wide chief-executive role.";
+      else if (normalized.includes("executive director")) explanation = "Executive Director can be the organization-wide top executive, but the title is less consistent across nonprofits and sometimes denotes a narrower role.";
+      else if (normalized.includes("president")) explanation = "President includes President/CEO and source-native President titles; comparability depends on whether the person is clearly the organization-wide top executive.";
+      else if (normalized.includes("not reported")) explanation = "The preserved record did not provide a usable title group, so role comparability cannot be confirmed from this field.";
+      else explanation = "Other executive titles contain source-native leadership roles outside the main CEO, Executive Director, and President groupings; their authority and scope are less uniform.";
+    } else if (key === "structure") {
+      const structures = {
+        "independent nonprofit": "A separate nonprofit legal organization with its own governance; the cleanest structural comparator to RP.",
+        "board of directors": "The posting explicitly makes the organization-wide executive accountable to a fiduciary board of directors.",
+        "board of trustees": "The organization-wide executive reports to a fiduciary board called trustees; treated similarly to a board of directors.",
+        "board (implied by full position description)": "Board accountability is strongly implied by the complete role description, although the reporting line is not stated verbatim.",
+        "joint board": "One executive is accountable to a combined or joint governing board; broadly comparable, but potentially more complex than a single-board organization.",
+        "boards of h-cap and h-cap education association": "The executive spans two related legal entities and their boards, adding multi-entity governance complexity.",
+        "boards of the affiliated organizations": "The executive leads a family of affiliated organizations and reports across multiple boards rather than one standalone nonprofit.",
+        "advisory board": "An advisory board guides the role but may lack the fiduciary authority of an independent nonprofit board, often in a fiscally sponsored setting.",
+        "president of hopewell fund; advisory board": "The role sits within a fiscal sponsor, with accountability to the sponsor's president and an advisory board rather than an independent fiduciary board.",
+        "fiscal sponsor / membership nonprofit": "The organization combines membership governance with fiscal-sponsorship responsibilities, so pass-through and hosted-project activity may differ from RP's core operations.",
+        "membership nonprofit": "Governance and executive accountability are materially shaped by an institutional or professional membership base.",
+        "international nonprofit affiliate": "The entity is an affiliate within an international nonprofit network rather than a fully standalone organization.",
+        "nonprofit or fiscally sponsored": "Accessible evidence did not resolve whether the organization is legally independent or operates under a fiscal sponsor.",
+        "nonprofit/project": "The record describes a nonprofit or project-like entity but does not establish a clean standalone governance structure.",
+        "chief operating officer": "The executive reports to a Chief Operating Officer and is therefore not the organization-wide top executive.",
+        "not extracted": "The preserved evidence did not yield a reliable governance or reporting structure; this is missing information, not an affirmative structure classification.",
+      };
+      explanation = structures[normalized] || "This is the source-derived governance, legal-entity, or executive-reporting structure used to assess whether the role is a clean organization-wide comparator.";
+    } else {
+      const weight = defaultDiscreteWeight(key, category);
+      let rationale = "It is a source-derived mission and operating-model category used to assess functional similarity to RP.";
+      if (weight === 1) rationale += " It directly overlaps an RP cause area or evidence-oriented priority and receives the reference suggestion.";
+      else if (weight >= 0.9) rationale += " It strongly overlaps research, evaluation, evidence, science, policy, data, or advisory work.";
+      else if (weight >= 0.75) rationale += " It has a useful field-building, membership, or knowledge role, with a moderate operating-model difference.";
+      else if (weight <= 0.45) rationale += " Grantmaking, foundation, or endowment activity is materially less comparable with RP's knowledge-production model.";
+      else if (weight <= 0.55) rationale += " Delivery, university, regional, cultural, or local-service features make it a broader functional comparator.";
+      else rationale += " It has partial functional overlap but a less direct mission or operating-model match.";
+      explanation = `${rationale} Topic coding was determined without using compensation.`;
+    }
+    return `${explanation} Suggested multiplier: ${defaultDiscreteWeight(key, category).toFixed(2)}; 1.00 is the reference.`;
+  }
+
   function ensureDiscreteWeights(key) {
     if (!state.discreteWeights[key]) state.discreteWeights[key] = {};
     rows().forEach((row) => {
@@ -198,8 +274,10 @@
     element.style.left = `${left}px`; element.style.top = `${top}px`;
   }
 
-  function initializeHelpTooltips() {
-    document.querySelectorAll(".info-tooltip[data-tooltip]").forEach((trigger) => {
+  function initializeHelpTooltips(root = document) {
+    root.querySelectorAll(".info-tooltip[data-tooltip]").forEach((trigger) => {
+      if (trigger.dataset.tooltipBound === "true") return;
+      trigger.dataset.tooltipBound = "true";
       const show = () => {
         refs.helpTooltip.textContent = trigger.dataset.tooltip;
         refs.helpTooltip.hidden = false;
@@ -210,8 +288,11 @@
       trigger.addEventListener("focus", show); trigger.addEventListener("blur", hide);
       trigger.addEventListener("keydown", (event) => { if (event.key === "Escape") hide(); });
     });
-    window.addEventListener("resize", () => { refs.helpTooltip.hidden = true; });
-    window.addEventListener("scroll", () => { refs.helpTooltip.hidden = true; }, true);
+    if (!helpTooltipGlobalListenersBound) {
+      window.addEventListener("resize", () => { refs.helpTooltip.hidden = true; });
+      window.addEventListener("scroll", () => { refs.helpTooltip.hidden = true; }, true);
+      helpTooltipGlobalListenersBound = true;
+    }
   }
 
   async function wikipediaPreview(organization) {
@@ -1256,7 +1337,14 @@
       const note = document.createElement("p"); note.className = "discrete-weight-note"; note.textContent = `${DISCRETE_WEIGHT_NOTES[key]} A multiplier of 1.00 is the reference value; 0 excludes a category.`;
       const grid = document.createElement("div"); grid.className = "discrete-weight-grid";
       Object.keys(weights).sort((a, b) => a.localeCompare(b)).forEach((category) => {
-        const label = document.createElement("label"); label.textContent = category; label.title = category;
+        const label = document.createElement("span"); label.className = "discrete-weight-category";
+        const labelText = document.createElement("span");
+        labelText.textContent = category; labelText.title = category;
+        const help = document.createElement("button");
+        help.type = "button"; help.className = "info-tooltip"; help.textContent = "?";
+        help.dataset.tooltip = discreteWeightExplanation(key, category);
+        help.setAttribute("aria-label", `About ${WEIGHT_LABELS[key]} category ${category}`);
+        label.append(labelText, help);
         const input = document.createElement("input");
         input.type = "number"; input.min = "0"; input.max = "10"; input.step = "0.05"; input.value = weights[category];
         input.setAttribute("aria-label", `${WEIGHT_LABELS[key]} multiplier for ${category}`);
@@ -1268,6 +1356,7 @@
         grid.append(label, input);
       });
       details.append(summary, note, grid); refs.discreteWeightEditors.append(details);
+      initializeHelpTooltips(details);
     });
   }
 
@@ -1307,11 +1396,15 @@
         axisTitle = "Evidence year";
       }
       if (!values.length) return;
-      const rawMin = Math.min(...values); const rawMax = Math.max(...values);
+      let target = key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : null;
+      const rpReference = key === "size" ? RP_REFERENCE.expenses : key === "staff" ? RP_REFERENCE.staff : null;
+      const domainValues = [...values, target, rpReference].filter((value) => value != null && Number.isFinite(value));
+      const rawMin = Math.min(...domainValues); const rawMax = Math.max(...domainValues);
+      if (key === "recency") target = rawMax;
       const domainMin = logarithmic ? Math.log(rawMin) : rawMin;
       const domainMax = logarithmic ? Math.log(rawMax) : rawMax;
       const domainSpan = Math.max(domainMax - domainMin, 1);
-      const width = 220; const height = 140; const margin = { top: 7, right: 8, bottom: 38, left: 43 };
+      const width = 220; const height = 148; const margin = { top: 17, right: 8, bottom: 38, left: 43 };
       const innerWidth = width - margin.left - margin.right; const innerHeight = height - margin.top - margin.bottom;
       const samples = Array.from({ length: 81 }, (_, index) => {
         const transformed = domainMin + (index / 80) * domainSpan;
@@ -1323,7 +1416,8 @@
       const figure = document.createElement("div"); figure.className = "weight-profile-figure";
       const title = document.createElement("strong"); title.textContent = WEIGHT_LABELS[key];
       const description = document.createElement("span"); description.textContent = parameter;
-      const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]} relative weight-response curve` });
+      const referenceDescription = rpReference == null ? "" : `; RP reference ${format(rpReference)}`;
+      const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]} relative weight-response curve${referenceDescription}` });
       const xTicks = Array.from({ length: 4 }, (_, index) => {
         const ratio = index / 3;
         const transformed = domainMin + ratio * domainSpan;
@@ -1348,11 +1442,23 @@
       });
       svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: margin.top + innerHeight, y2: margin.top + innerHeight, class: "weight-profile-axis" }));
       svg.append(svgElement("line", { x1: margin.left, x2: margin.left, y1: margin.top, y2: margin.top + innerHeight, class: "weight-profile-axis" }));
-      const target = key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : key === "recency" ? rawMax : null;
-      if (target != null && target >= rawMin && target <= rawMax) {
-        const targetPosition = logarithmic ? Math.log(target) : target;
-        const targetX = margin.left + ((targetPosition - domainMin) / domainSpan) * innerWidth;
+      const positionX = (value) => {
+        const position = logarithmic ? Math.log(value) : value;
+        return margin.left + ((position - domainMin) / domainSpan) * innerWidth;
+      };
+      const targetDiffersFromRp = rpReference == null || Math.abs(positionX(target) - positionX(rpReference)) > 0.5;
+      if (target != null && target >= rawMin && target <= rawMax && targetDiffersFromRp) {
+        const targetX = positionX(target);
         svg.append(svgElement("line", { x1: targetX, x2: targetX, y1: margin.top, y2: margin.top + innerHeight, class: "weight-profile-target" }));
+      }
+      if (rpReference != null && rpReference >= rawMin && rpReference <= rawMax) {
+        const referenceX = positionX(rpReference);
+        svg.append(svgElement("line", { x1: referenceX, x2: referenceX, y1: margin.top, y2: margin.top + innerHeight, class: "weight-profile-rp-reference" }));
+        const referenceLabel = svgElement("text", {
+          x: referenceX, y: margin.top - 5, "text-anchor": referenceX < margin.left + 12 ? "start" : referenceX > width - margin.right - 12 ? "end" : "middle",
+          class: "weight-profile-rp-label",
+        });
+        referenceLabel.textContent = "RP"; svg.append(referenceLabel);
       }
       const path = samples.map((sample, index) => `${index ? "L" : "M"}${sample.x.toFixed(2)},${y(sample.weight).toFixed(2)}`).join("");
       svg.append(svgElement("path", { d: path, class: "weight-profile-curve" }));
@@ -1411,7 +1517,7 @@
   function reset() {
     Object.assign(state, {
       stream: "incumbents", measure: "base", sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
-      targetExpense: 7_500_000, targetStaff: 57, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
+      targetExpense: RP_REFERENCE.expenses, targetStaff: RP_REFERENCE.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95",
       sortKey: "tier", sortDirection: "asc",
@@ -1433,7 +1539,7 @@
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
     refs.scatterX.value = state.scatterX; refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
-    refs.targetExpense.value = 7.5; refs.targetStaff.value = 57;
+    refs.targetExpense.value = RP_REFERENCE.expenses / 1_000_000; refs.targetStaff.value = RP_REFERENCE.staff;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.quantileGranularity.value = "quintiles";
     refs.customQuantiles.value = state.customQuantiles; refs.showUnavailable.checked = false;
@@ -1465,8 +1571,8 @@
     if (input.checked) state.weightings.add(input.value); else state.weightings.delete(input.value);
     renderWeightControls(); renderAll();
   }));
-  refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || 7.5, 1, 100) * 1_000_000; renderAll(); });
-  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || 57, 1, 1000); renderAll(); });
+  refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || RP_REFERENCE.expenses / 1_000_000, 1, 100) * 1_000_000; renderAll(); });
+  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || RP_REFERENCE.staff, 1, 1000); renderAll(); });
   refs.expenseBandwidth.addEventListener("input", () => { state.expenseBandwidth = Number(refs.expenseBandwidth.value); renderAll(); });
   refs.staffBandwidth.addEventListener("input", () => { state.staffBandwidth = Number(refs.staffBandwidth.value); renderAll(); });
   refs.recencyHalfLife.addEventListener("input", () => { state.recencyHalfLife = Number(refs.recencyHalfLife.value); renderAll(); });
@@ -1494,6 +1600,8 @@
   observer.observe(refs.chartWrap);
   refs.organizationPreview.addEventListener("pointerenter", () => window.clearTimeout(organizationPreviewHideTimer));
   refs.organizationPreview.addEventListener("pointerleave", scheduleOrganizationPreviewHide);
+  refs.rpExpenseTableReference.textContent = `RP = ${compactMoney(RP_REFERENCE.expenses)}`;
+  refs.rpStaffTableReference.textContent = `RP = ${RP_REFERENCE.staff} FTE`;
   $("#archive-status").textContent = `${DATA.summary.retrievedManifestRecords} / ${DATA.summary.retrievedManifestRecords} sources archived`;
   applyPreset();
   configureRanges();

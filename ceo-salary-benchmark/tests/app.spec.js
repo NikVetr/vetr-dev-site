@@ -28,6 +28,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#bin-count")).toHaveAttribute("max", "200");
   await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
   await expect(page.locator("tbody .tier-cell").first()).toHaveAttribute("title", "A");
+  await expect(page.locator("#rp-expense-table-reference")).toHaveText("RP = $7.5M");
+  await expect(page.locator("#rp-staff-table-reference")).toHaveText("RP = 57 FTE");
+  await page.locator("#rp-expense-table-reference").locator("xpath=..").screenshot({ path: "tmp/app-table-rp-expenses.png" });
+  await page.locator("#rp-staff-table-reference").locator("xpath=..").screenshot({ path: "tmp/app-table-rp-staff.png" });
   expect(await page.locator("#bin-field").evaluate((element) => element.previousElementSibling?.classList.contains("view-setting"))).toBe(true);
   await expect(page.locator(".method-note")).toHaveCount(0);
   const blockAspect = await page.locator(".bar-block").first().evaluate((element) => {
@@ -155,6 +159,9 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#size-controls")).toBeVisible();
   await expect(page.locator("#expense-target-field")).toBeVisible();
   await expect(page.locator("#weight-profile-size")).toBeVisible();
+  await expect(page.locator("#weight-profile-size .weight-profile-rp-reference")).toHaveCount(1);
+  await expect(page.locator("#weight-profile-size .weight-profile-rp-label")).toHaveText("RP");
+  await expect(page.locator("#weight-profile-size svg")).toHaveAttribute("aria-label", /RP reference \$7\.5M/);
   await expect(page.locator(".settings-panel #weight-profile-size")).toHaveCount(1);
   await expect(page.locator(".chart-panel .weight-profile-slot")).toHaveCount(0);
   await expect(page.locator(".weight-profile-curve")).toHaveCount(1);
@@ -165,6 +172,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#target-staff")).toHaveValue("57");
   await expect(page.locator("#expense-target-field")).toBeVisible();
   await expect(page.locator(".weight-profile-curve")).toHaveCount(2);
+  await expect(page.locator(".weight-profile-rp-reference")).toHaveCount(2);
+  await expect(page.locator(".weight-profile-rp-label")).toHaveCount(2);
   await expect(page.locator(".weight-profile-axis-title")).toHaveCount(4);
   await expect(page.locator(".weight-profile-x-tick")).toHaveCount(8);
   await expect(page.locator(".weight-profile-y-tick")).toHaveCount(8);
@@ -174,6 +183,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#expense-bandwidth").fill("1.2");
   await expect(page.locator("#weight-profile-size .weight-profile-figure")).toContainText("bandwidth 1.20");
   expect(await page.locator("#weight-profile-size .weight-profile-curve").getAttribute("d")).not.toBe(expenseCurveBefore);
+  const rpExpenseX = await page.locator("#weight-profile-size .weight-profile-rp-reference").getAttribute("x1");
+  await page.locator("#target-expense").fill("10");
+  await page.locator("#target-expense").press("Tab");
+  await expect(page.locator("#weight-profile-size .weight-profile-figure")).toContainText("Target $10M");
+  await expect(page.locator("#weight-profile-size .weight-profile-target")).toHaveCount(1);
+  await expect(page.locator("#weight-profile-size .weight-profile-rp-reference")).toHaveAttribute("x1", rpExpenseX);
   const componentOrder = await page.locator("#size-controls").evaluate((element) => [...element.children].map((child) => child.id));
   expect(componentOrder.slice(0, 2)).toEqual(["expense-target-field", "staff-target-field"]);
   expect(await page.locator("#expense-target-field").evaluate((element) => element.querySelector("#expense-bandwidth").compareDocumentPosition(element.querySelector("#weight-profile-size")) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
@@ -182,6 +197,15 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('#weighting-components input[value="tier"]').check();
   await expect(page.locator("#discrete-weight-editors")).toBeVisible();
   await expect(page.locator("#discrete-weight-editors .discrete-weight-note")).toContainText("peer hierarchy");
+  const tierWeightEditor = page.locator("#discrete-weight-editors details").filter({ hasText: "Tier category multipliers" });
+  await expect(tierWeightEditor.locator(".info-tooltip")).toHaveCount(3);
+  const tierAHelp = page.getByRole("button", { name: "About Tier category A" });
+  await tierAHelp.scrollIntoViewIfNeeded();
+  await tierAHelp.hover();
+  await expect(page.locator("#help-tooltip")).toBeVisible();
+  await expect(page.locator("#help-tooltip")).toContainText("score ≥75");
+  await expect(page.locator("#help-tooltip")).toContainText("without using the observed compensation");
+  await page.screenshot({ path: "tmp/app-weight-category-explainer.png" });
   const tierAWeight = page.getByLabel("Tier multiplier for A");
   await expect(tierAWeight).toHaveValue("1");
   await expect(page.getByLabel("Tier multiplier for B")).toHaveValue("0.7");
@@ -194,6 +218,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.getByLabel("Tier multiplier for A")).toHaveValue("0.8");
 
   await page.locator('#weighting-components input[value="eaAffinity"]').check();
+  const eaWeightEditor = page.locator("#discrete-weight-editors details").filter({ hasText: "EA relation category multipliers" });
+  await eaWeightEditor.locator("summary").click();
+  expect(await eaWeightEditor.locator(".discrete-weight-grid").evaluate((grid) =>
+    grid.querySelectorAll(".info-tooltip").length === grid.querySelectorAll('input[type="number"]').length)).toBe(true);
+  await page.getByRole("button", { name: "About EA relation category EA-adjacent" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("EA-recommended or evaluated cause area");
   await expect(page.getByLabel("EA relation multiplier for EA-core")).toHaveValue("1");
   await expect(page.getByLabel("EA relation multiplier for EA-adjacent")).toHaveValue("0.85");
   await expect(page.getByLabel("EA relation multiplier for functional-only")).toHaveValue("0.65");
@@ -206,6 +236,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.getByLabel("Topic / model multiplier for AI, catastrophic risk, biosecurity, and technology policy")).toHaveValue("1");
   await expect(page.getByLabel("Topic / model multiplier for Research, evaluation, philanthropy infrastructure, and policy")).toHaveValue("0.9");
   await page.locator('#weighting-components input[value="structure"]').check();
+  const structureWeightEditor = page.locator("#discrete-weight-editors details").filter({ hasText: "Structure category multipliers" });
+  await structureWeightEditor.locator("summary").click();
+  expect(await structureWeightEditor.locator(".discrete-weight-grid").evaluate((grid) =>
+    grid.querySelectorAll(".info-tooltip").length === grid.querySelectorAll('input[type="number"]').length)).toBe(true);
+  await page.getByRole("button", { name: "About Structure category independent nonprofit" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("separate nonprofit legal organization");
   await expect(page.getByLabel("Structure multiplier for independent nonprofit")).toHaveValue("1");
   await expect(page.getByLabel("Structure multiplier for membership nonprofit")).toHaveValue("0.75");
 
@@ -304,6 +340,16 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await page.locator("#size-controls").screenshot({ path: "tmp/app-weighting-curves.png" });
   await page.locator('#weighting-components input[value="tier"]').check();
   await page.locator("#discrete-weight-editors").screenshot({ path: "tmp/app-discrete-weights.png" });
+  await page.locator('#weighting-components input[value="eaAffinity"]').check();
+  await page.locator('#weighting-components input[value="structure"]').check();
+  await expect(page.locator(".weighting-field")).toHaveCSS("position", "sticky");
+  await scrollingPanel.evaluate((element) => { element.scrollTop = element.scrollHeight; });
+  const settingsBounds = await scrollingPanel.boundingBox();
+  const stickyWeightBounds = await page.locator(".weighting-field").boundingBox();
+  expect(stickyWeightBounds.y).toBeGreaterThanOrEqual(settingsBounds.y);
+  expect(stickyWeightBounds.y).toBeLessThanOrEqual(settingsBounds.y + 20);
+  expect(stickyWeightBounds.y + stickyWeightBounds.height).toBeLessThan(settingsBounds.y + settingsBounds.height);
+  await scrollingPanel.screenshot({ path: "tmp/app-sticky-weight-components.png" });
   await page.locator("#reset-settings").click();
   await page.locator("#stream-select").selectOption("combined");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
