@@ -16,6 +16,29 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
   await expect(page.locator("#stat-n")).toHaveText("110");
   await expect(page.locator(".bar-block")).toHaveCount(110);
+  const explainerCoverage = await page.evaluate(() => ({
+    definitions: Object.values(window.CEO_BENCHMARK_DATA.categoryExplainers.definitions)
+      .reduce((total, field) => total + Object.keys(field).length, 0),
+    rows: [...window.CEO_BENCHMARK_DATA.incumbents, ...window.CEO_BENCHMARK_DATA.jobAds]
+      .filter((row) => row.categoryProvenance).length,
+    filingReviews: window.CEO_BENCHMARK_DATA.incumbents
+      .filter((row) => row.observationCategoryProvenance).length,
+    packageCounts: window.CEO_BENCHMARK_DATA.categoryExplainers.rationaleCounts,
+  }));
+  expect(explainerCoverage).toEqual({
+    definitions: 270,
+    rows: 177,
+    filingReviews: 122,
+    packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
+  });
+  const methodologyResponse = await page.request.get("/benchmark/deliverables/category_explainers/methodology_notes.md");
+  expect(methodologyResponse.ok()).toBe(true);
+  expect(await methodologyResponse.text()).toContain("Classification layers");
+  const ssrcClassifications = await page.evaluate(() => {
+    const row = window.CEO_BENCHMARK_DATA.incumbents.find((item) => item.organization === "Social Science Research Council");
+    return [row.tier, row.categoryProvenance.tier.value, row.observationCategoryProvenance.tier.value];
+  });
+  expect(ssrcClassifications).toEqual(["A", "A", "B"]);
   await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
   await expect(page.locator(".density-line")).toHaveCount(1);
   await expect(page.locator(".rug-line")).toHaveCount(110);
@@ -220,8 +243,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await tierAHelp.scrollIntoViewIfNeeded();
   await tierAHelp.hover();
   await expect(page.locator("#help-tooltip")).toBeVisible();
-  await expect(page.locator("#help-tooltip")).toContainText("score ≥75");
-  await expect(page.locator("#help-tooltip")).toContainText("without using the observed compensation");
+  await expect(page.locator("#help-tooltip")).toContainText("Highest-comparability selected peer");
+  await expect(page.locator("#help-tooltip")).toContainText("editable analyst judgment, not a source rule");
   await page.screenshot({ path: "tmp/app-weight-category-explainer.png" });
   const tierAWeight = page.getByLabel("Tier multiplier for A");
   await expect(tierAWeight).toHaveValue("1");
@@ -240,7 +263,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(await eaWeightEditor.locator(".discrete-weight-grid").evaluate((grid) =>
     grid.querySelectorAll(".info-tooltip").length === grid.querySelectorAll('input[type="number"]').length)).toBe(true);
   await page.getByRole("button", { name: "About EA relation category EA-adjacent" }).hover();
-  await expect(page.locator("#help-tooltip")).toContainText("EA-recommended or evaluated cause area");
+  await expect(page.locator("#help-tooltip")).toContainText("recommended/evaluated in EA-related cause");
   await expect(page.getByLabel("EA relation multiplier for EA-core")).toHaveValue("1");
   await expect(page.getByLabel("EA relation multiplier for EA-adjacent")).toHaveValue("0.85");
   await expect(page.getByLabel("EA relation multiplier for functional-only")).toHaveValue("0.65");
@@ -258,7 +281,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(await structureWeightEditor.locator(".discrete-weight-grid").evaluate((grid) =>
     grid.querySelectorAll(".info-tooltip").length === grid.querySelectorAll('input[type="number"]').length)).toBe(true);
   await page.getByRole("button", { name: "About Structure category independent nonprofit" }).hover();
-  await expect(page.locator("#help-tooltip")).toContainText("separate nonprofit legal organization");
+  await expect(page.locator("#help-tooltip")).toContainText("standalone nonprofit legal organization");
   await expect(page.getByLabel("Structure multiplier for independent nonprofit")).toHaveValue("1");
   await expect(page.getByLabel("Structure multiplier for membership nonprofit")).toHaveValue("0.75");
 
@@ -267,6 +290,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await cais.getByRole("button", { name: "Preview" }).click();
   await expect(page.locator("#source-dialog")).toBeVisible();
   await expect(page.locator("#dialog-evidence")).toContainText("$314,534");
+  await page.locator("#dialog-category-provenance summary").click();
+  await expect(page.locator("#dialog-provenance-records section")).toHaveCount(6);
+  await expect(page.locator("#dialog-provenance-records")).toContainText("comparability score 94.0");
+  await expect(page.locator("#dialog-provenance-intro")).toContainText("precomp normalized metadata");
+  await expect(page.getByRole("link", { name: "Methodology notes ↗" })).toHaveAttribute("href", "benchmark/deliverables/category_explainers/methodology_notes.md");
+  await page.locator("#source-dialog").screenshot({ path: "tmp/app-category-provenance.png" });
   await page.locator(".dialog-close").click();
 
   const immigrationCouncil = page.locator("tbody tr").filter({ hasText: "American Immigration Council" });
@@ -298,6 +327,9 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(hcap).toHaveCount(1);
   await hcap.getByRole("button", { name: "Preview" }).click();
   await expect(page.locator("#dialog-evidence")).toContainText("$150,000–$170,000");
+  await page.locator("#dialog-category-provenance summary").click();
+  await expect(page.locator("#dialog-provenance-confidence")).toHaveText("medium confidence");
+  await expect(page.locator("#dialog-provenance-records")).toContainText("expanded_secondary_structural");
   await page.locator(".dialog-close").click();
 
   await page.locator("#stream-select").selectOption("combined");

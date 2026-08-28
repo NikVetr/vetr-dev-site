@@ -330,7 +330,7 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 .organization-preview div { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
 .organization-preview a { color: var(--green); font-size: 10px; font-weight: 650; text-underline-offset: 2px; }
 
-.source-dialog { width: min(650px, calc(100vw - 30px)); max-height: calc(100vh - 30px); padding: 0; border: 1px solid #8f9994; border-radius: 2px; background: var(--panel); box-shadow: 0 30px 80px rgba(0,0,0,.26); }
+.source-dialog { width: min(650px, calc(100vw - 30px)); max-height: calc(100vh - 30px); overflow: auto; padding: 0; border: 1px solid #8f9994; border-radius: 2px; background: var(--panel); box-shadow: 0 30px 80px rgba(0,0,0,.26); }
 .source-dialog::backdrop { background: rgba(20, 28, 24, .53); backdrop-filter: blur(2px); }
 .dialog-shell { position: relative; padding: 26px; }
 .dialog-shell h2 { margin: 5px 0 18px; font: 650 24px/1.15 "Aspekta Variable", sans-serif; }
@@ -343,6 +343,18 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 .evidence-meta dt, .evidence-meta dd { margin: 0; padding: 7px 0; border-bottom: 1px solid var(--line); }
 .evidence-meta dt { color: var(--muted); font-weight: 700; }
 .evidence-meta dd { overflow-wrap: anywhere; }
+.category-provenance { margin-top: 16px; border-block: 1px solid var(--line); }
+.category-provenance > summary { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; color: var(--green); font-size: 11px; font-weight: 750; cursor: pointer; }
+.category-provenance > summary span { color: var(--muted); font-size: 9px; font-weight: 600; text-transform: uppercase; }
+.category-provenance-intro { margin: 0 0 10px; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.category-provenance-records section { padding: 9px 0; border-top: 1px solid var(--line); }
+.category-provenance-records h3 { display: grid; grid-template-columns: 115px 1fr; gap: 8px; margin: 0; font: inherit; }
+.category-provenance-records h3 span { color: var(--muted); font-size: 10px; }
+.category-provenance-records h3 strong { color: var(--ink); font-size: 10.5px; }
+.category-provenance-records p { margin: 5px 0 0 123px; font-size: 10.5px; line-height: 1.5; }
+.provenance-citations { margin: 5px 0 0 123px; color: var(--muted); font-size: 9px; line-height: 1.4; overflow-wrap: anywhere; }
+.provenance-citations a, .category-provenance-links a { color: var(--green); text-underline-offset: 2px; }
+.category-provenance-links { display: flex; flex-wrap: wrap; gap: 7px 12px; padding: 9px 0 12px; border-top: 1px solid var(--line); font-size: 9.5px; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 20px; }
 .dialog-actions a { display: inline-block; padding: 9px 12px; font-size: 11px; font-weight: 750; text-decoration: none; }
 .secondary-link { border: 1px solid var(--line-dark); color: var(--green); }
@@ -375,4 +387,6 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
   .custom-quantiles { grid-template-columns: 1fr; }
   .custom-quantiles small { grid-column: auto; }
   .table-panel { height: 620px; }
+  .category-provenance-records h3 { grid-template-columns: 1fr; gap: 3px; }
+  .category-provenance-records p, .provenance-citations { margin-left: 0; }
 }

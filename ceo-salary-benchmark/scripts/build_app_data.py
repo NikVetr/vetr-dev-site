@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import math
 import shutil
@@ -14,6 +15,7 @@ from xml.etree import ElementTree
 ROOT = Path(__file__).resolve().parents[1]
 BENCHMARK = ROOT / "benchmark"
 DELIVERABLES = BENCHMARK / "deliverables"
+CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 EVIDENCE_DIR = ROOT / "evidence" / "original"
 OUTPUT = ROOT / "app-data.js"
 
@@ -26,6 +28,32 @@ def rows(path: Path) -> list[dict[str, str]]:
 def text(value: object) -> str:
     value = "" if value is None else str(value).strip()
     return "" if value.lower() in {"", "nan", "none"} else value
+
+
+def literal(value: object) -> str:
+    """Preserve category strings such as the meaningful structure flag `none`."""
+    return "" if value is None else str(value).strip()
+
+
+def verify_category_explainer_hashes() -> None:
+    manifest = CATEGORY_EXPLAINERS / "CATEGORY_EXPLAINER_HASHES.sha256"
+    for line in manifest.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        expected, relative_path = line.split(maxsplit=1)
+        path = BENCHMARK / relative_path.strip()
+        if not path.is_file():
+            raise FileNotFoundError(f"Missing hashed category-explainer file: {path}")
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != expected:
+            raise ValueError(f"Category-explainer hash mismatch: {path}")
+
+
+def verify_preserved_paths(value: str, separator: str) -> None:
+    for item in value.split(separator):
+        path = item.split("#", 1)[0].strip()
+        if path.startswith("benchmark/") and not (ROOT / path).is_file():
+            raise FileNotFoundError(f"Category explainer cites a missing preserved file: {path}")
 
 
 def number(value: object) -> float | None:
@@ -107,7 +135,114 @@ def filing_homepage(local_path: str) -> str:
     return ""
 
 
-def build_incumbents() -> list[dict]:
+def compact_category_rationale(row: dict[str, str]) -> dict:
+    return {
+        "recordId": literal(row["record_id"]),
+        "stableIdType": literal(row["stable_id_type"]),
+        "sourceWave": literal(row["source_wave"]),
+        "tier": {
+            "value": literal(row["tier"]),
+            "label": literal(row["tier_label"]),
+            "rationale": literal(row["tier_rationale"]),
+            "citation": literal(row["tier_citation"]),
+        },
+        "ea": {
+            "value": literal(row["ea_relationship"]),
+            "sourceValue": literal(row["ea_relationship_source_value"]),
+            "rationale": literal(row["ea_rationale"]),
+            "citation": literal(row["ea_citation"]),
+        },
+        "structure": {
+            "expected": literal(row["expected_structure"]),
+            "observationFlag": literal(row["observation_structure_flag"]),
+            "rationale": literal(row["structure_rationale"]),
+            "citation": literal(row["structure_citation"]),
+        },
+        "topic": {
+            "value": literal(row["topic_model"]),
+            "sourceDescription": literal(row["source_native_topic_or_model_description"]),
+            "rationale": literal(row["topic_model_rationale"]),
+            "citation": literal(row["topic_model_citation"]),
+        },
+        "title": {
+            "raw": literal(row["raw_title"]),
+            "analysisGroup": literal(row["title_group"]),
+            "rationale": literal(row["title_group_rationale"]),
+            "citation": literal(row["title_group_citation"]),
+        },
+        "classificationTiming": literal(row["classification_timing"]),
+        "provenanceType": literal(row["provenance_type"]),
+        "confidence": literal(row["overall_confidence"]),
+        "caveats": literal(row["caveats"]),
+    }
+
+
+def load_category_explainers() -> tuple[dict, dict, dict, dict[str, int]]:
+    verify_category_explainer_hashes()
+    dictionary_rows = rows(CATEGORY_EXPLAINERS / "category_dictionary.csv")
+    rationale_rows = rows(CATEGORY_EXPLAINERS / "organization_category_rationale.csv")
+    definitions: dict[str, dict[str, dict[str, str]]] = {}
+    for row in dictionary_rows:
+        field = literal(row["field"])
+        value = literal(row["exact_category_value"])
+        if not field or not value:
+            raise ValueError("Category dictionary contains a blank field or exact category value")
+        if value in definitions.setdefault(field, {}):
+            raise ValueError(f"Duplicate category definition: {field}={value}")
+        verify_preserved_paths(literal(row["source_path"]), ";")
+        definitions[field][value] = {
+            "shortDefinition": literal(row["short_display_definition"]),
+            "operationalRule": literal(row["detailed_operational_rule"]),
+            "weightRationale": literal(row["default_weight_rationale"]),
+            "provenanceType": literal(row["provenance_type"]),
+            "sourcePath": literal(row["source_path"]),
+            "sourceLocator": literal(row["source_locator"]),
+            "confidence": literal(row["confidence"]),
+            "caveats": literal(row["caveats"]),
+        }
+
+    by_source: dict[tuple[str, str], dict] = {}
+    references_by_organization: dict[str, dict] = {}
+    rationale_counts: dict[str, int] = {}
+    for row in rationale_rows:
+        stream = literal(row["evidence_stream"])
+        rationale_counts[stream] = rationale_counts.get(stream, 0) + 1
+        source_id = literal(row["source_id"])
+        organization = literal(row["organization"])
+        compact = compact_category_rationale(row)
+        for citation_field in ("tier_citation", "ea_citation", "structure_citation", "topic_model_citation", "title_group_citation"):
+            verify_preserved_paths(literal(row[citation_field]), " | ")
+        if source_id:
+            key = (stream, source_id)
+            if key in by_source:
+                raise ValueError(f"Duplicate category rationale: {stream}/{source_id}")
+            by_source[key] = compact
+        if stream == "reference_selection":
+            if organization in references_by_organization:
+                raise ValueError(f"Duplicate reference-selection rationale: {organization}")
+            references_by_organization[organization] = compact
+    return definitions, by_source, references_by_organization, rationale_counts
+
+
+def category_rationale(
+    by_source: dict[tuple[str, str], dict],
+    references_by_organization: dict[str, dict],
+    stream: str,
+    source_id: str,
+    organization: str,
+) -> dict:
+    rationale = by_source.get((stream, source_id)) if source_id else None
+    if rationale is None and stream == "form990":
+        rationale = references_by_organization.get(organization)
+    if rationale is None:
+        raise ValueError(f"No category rationale for {stream}/{source_id or organization}")
+    return rationale
+
+
+def build_incumbents(
+    by_source: dict[tuple[str, str], dict],
+    references_by_organization: dict[str, dict],
+) -> list[dict]:
     validated = rows(DELIVERABLES / "validated_form990_compensation.csv")
     by_ein = {text(row["ein"]).replace("-", ""): row for row in validated if text(row["ein"])}
     by_org = {text(row["organization"]): row for row in validated}
@@ -137,9 +272,13 @@ def build_incumbents() -> list[dict]:
                 f"Part VII other compensation: {money(number(filing.get('observed_part_vii_other')))}; "
                 f"validated filing total: {money(total)}."
             )
-        output.append({
+        organization = text(peer["organization"])
+        selection_rationale = references_by_organization.get(organization)
+        if selection_rationale is None:
+            raise ValueError(f"No reference-selection category rationale for {organization}")
+        app_row = {
             "id": source_id or f"REF-{slug(text(peer['organization']))}",
-            "organization": text(peer["organization"]),
+            "organization": organization,
             "executive": observed_name or (text(filing.get("ceo_name")) if filing else ""),
             "title": raw_title or "Not reported",
             "titleGroup": title_group(raw_title),
@@ -175,11 +314,17 @@ def build_incumbents() -> list[dict]:
             "sourceType": "Form 990",
             "evidenceStream": "incumbents",
             "homepageUrl": filing_homepage(local_path) if local_path else "",
-        })
+            "categoryProvenance": selection_rationale,
+        }
+        if source_id:
+            app_row["observationCategoryProvenance"] = category_rationale(
+                by_source, {}, "form990", source_id, organization
+            )
+        output.append(app_row)
     return output
 
 
-def build_job_ads() -> list[dict]:
+def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
     jobs = rows(DELIVERABLES / "validated_job_ad_compensation.csv")
     output: list[dict] = []
     for job in jobs:
@@ -237,6 +382,7 @@ def build_job_ads() -> list[dict]:
             "sourceType": "Job posting",
             "evidenceStream": "jobAds",
             "homepageUrl": "",
+            "categoryProvenance": category_rationale(by_source, {}, "job_ad", source_id, text(job["organization"])),
         })
     return output
 
@@ -244,13 +390,23 @@ def build_job_ads() -> list[dict]:
 def main() -> None:
     if EVIDENCE_DIR.exists():
         shutil.rmtree(EVIDENCE_DIR)
-    incumbents = build_incumbents()
-    jobs = build_job_ads()
+    definitions, rationales_by_source, reference_rationales, rationale_counts = load_category_explainers()
+    incumbents = build_incumbents(rationales_by_source, reference_rationales)
+    jobs = build_job_ads(rationales_by_source)
     payload = {
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "priceBasis": "July 2026 USD",
         "incumbents": incumbents,
         "jobAds": jobs,
+        "categoryExplainers": {
+            "definitions": definitions,
+            "definitionCount": sum(len(field) for field in definitions.values()),
+            "rationaleCounts": rationale_counts,
+            "dictionaryPath": "benchmark/deliverables/category_explainers/category_dictionary.csv",
+            "rationalesPath": "benchmark/deliverables/category_explainers/organization_category_rationale.csv",
+            "methodologyPath": "benchmark/deliverables/category_explainers/methodology_notes.md",
+            "validationPath": "benchmark/deliverables/category_explainers/validation_report.txt",
+        },
         "summary": {
             "selectedReferenceOrganizations": len(incumbents),
             "primaryIncumbentObservations": sum(row["defaultIncluded"] for row in incumbents),

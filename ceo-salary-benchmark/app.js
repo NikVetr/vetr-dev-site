@@ -180,6 +180,12 @@
   }
 
   function discreteWeightExplanation(key, category) {
+    const definition = categoryDefinition(key, category);
+    if (definition) {
+      const provenance = definition.provenanceType.replaceAll("_", " ").replaceAll(" + ", "; ");
+      const caveat = definition.caveats ? ` Caveat: ${definition.caveats}` : "";
+      return `${definition.shortDefinition}: ${definition.operationalRule}${caveat} Provenance: ${provenance}; ${definition.confidence || "unspecified"} confidence. App sensitivity multiplier: ${defaultDiscreteWeight(key, category).toFixed(2)} (editable analyst judgment, not a source rule).`;
+    }
     const normalized = String(category || "Not reported").toLowerCase();
     let explanation;
     if (key === "tier") {
@@ -249,7 +255,26 @@
       else rationale += " It has partial functional overlap but a less direct mission or operating-model match.";
       explanation = `${rationale} Topic coding was determined without using compensation.`;
     }
-    return `${explanation} Suggested multiplier: ${defaultDiscreteWeight(key, category).toFixed(2)}; 1.00 is the reference.`;
+    return `${explanation} App sensitivity multiplier: ${defaultDiscreteWeight(key, category).toFixed(2)}; 1.00 is the reference. This editable value is an analyst judgment, not a source rule.`;
+  }
+
+  function categoryDefinition(key, category) {
+    const fields = {
+      tier: ["reference_tier", "tier"],
+      eaAffinity: ["ea_affinity", "ea_relationship"],
+      structure: ["expected_structure"],
+      topic: ["topic_cluster"],
+      titleGroup: ["title_group"],
+    }[key] || [];
+    const value = String(category || "Not reported");
+    const candidates = value.toLowerCase() === "not coded" ? [value, "uncoded"] : [value];
+    for (const field of fields) {
+      for (const candidate of candidates) {
+        const definition = DATA.categoryExplainers?.definitions?.[field]?.[candidate];
+        if (definition) return definition;
+      }
+    }
+    return null;
   }
 
   function ensureDiscreteWeights(key) {
@@ -1327,11 +1352,92 @@
       const dd = document.createElement("dd"); dd.textContent = description;
       meta.append(dt, dd);
     });
+    renderCategoryProvenance(row);
     const cached = $("#dialog-cached");
     cached.hidden = !row.cachedSource; cached.href = row.cachedSource || "#";
     const external = $("#dialog-external");
     external.hidden = !row.sourceUrl; external.href = row.sourceUrl || "#";
     refs.dialog.showModal();
+  }
+
+  function renderCategoryProvenance(row) {
+    const details = $("#dialog-category-provenance");
+    const provenance = row.categoryProvenance;
+    details.hidden = !provenance;
+    details.open = false;
+    if (!provenance) return;
+
+    $("#dialog-provenance-confidence").textContent = `${provenance.confidence || "Unspecified"} confidence`;
+    $("#dialog-provenance-intro").textContent = [
+      provenance.classificationTiming ? `Timing: ${provenance.classificationTiming.replaceAll("_", " ")}.` : "",
+      provenance.provenanceType ? `Provenance: ${provenance.provenanceType.replaceAll("_", " ").replaceAll(" + ", "; ")}.` : "",
+      provenance.caveats ? `Caveat: ${provenance.caveats}` : "",
+    ].filter(Boolean).join(" ");
+
+    const records = $("#dialog-provenance-records");
+    records.replaceChildren();
+    const categories = [
+      ["Tier", [provenance.tier.value, provenance.tier.label].filter(Boolean).join(" · "), provenance.tier.rationale, provenance.tier.citation],
+      ["EA relationship", provenance.ea.value || "Uncoded", provenance.ea.rationale, provenance.ea.citation],
+      ["Structure", [provenance.structure.expected && `Expected: ${provenance.structure.expected}`, provenance.structure.observationFlag && `Observation flag: ${provenance.structure.observationFlag}`].filter(Boolean).join(" · ") || "Uncoded", provenance.structure.rationale, provenance.structure.citation],
+      ["Topic / model", [provenance.topic.value, provenance.topic.sourceDescription].filter(Boolean).join(" · ") || "Uncoded", provenance.topic.rationale, provenance.topic.citation],
+      ["Analysis title class", provenance.title.analysisGroup || "Uncoded", provenance.title.rationale, provenance.title.citation],
+    ];
+    const observation = row.observationCategoryProvenance;
+    if (observation) {
+      const differences = [];
+      if (observation.tier.value !== provenance.tier.value) differences.push(`selection tier ${provenance.tier.value || "uncoded"} → filing tier ${observation.tier.value || "uncoded"}`);
+      if (observation.topic.value !== provenance.topic.value) differences.push("filing-normalized topic differs from the selection-stage label");
+      categories.push([
+        "Filing observation review",
+        [observation.tier.value && `Tier ${observation.tier.value}`, observation.tier.label, observation.structure.observationFlag && `Flag: ${observation.structure.observationFlag}`].filter(Boolean).join(" · "),
+        [observation.tier.rationale, observation.structure.rationale, differences.length ? `Recorded difference: ${differences.join("; ")}.` : "Selection and filing tier/topic classifications agree."].filter(Boolean).join(" "),
+        [observation.tier.citation, observation.structure.citation].filter(Boolean).join(" | "),
+      ]);
+    }
+    categories.forEach(([label, value, rationale, citation]) => {
+      const section = document.createElement("section");
+      const heading = document.createElement("h3");
+      const headingLabel = document.createElement("span"); headingLabel.textContent = label;
+      const headingValue = document.createElement("strong"); headingValue.textContent = value;
+      heading.append(headingLabel, headingValue);
+      const description = document.createElement("p"); description.textContent = rationale || "No additional rationale was preserved.";
+      const citations = document.createElement("div"); citations.className = "provenance-citations";
+      appendCitationLinks(citations, citation);
+      section.append(heading, description, citations);
+      records.append(section);
+    });
+
+    const links = $("#dialog-provenance-links");
+    links.replaceChildren();
+    [
+      ["Category dictionary", DATA.categoryExplainers.dictionaryPath],
+      ["Row-level rationale CSV", DATA.categoryExplainers.rationalesPath],
+      ["Methodology notes", DATA.categoryExplainers.methodologyPath],
+      ["Validation report", DATA.categoryExplainers.validationPath],
+    ].forEach(([label, href]) => {
+      const anchor = document.createElement("a"); anchor.href = href; anchor.target = "_blank"; anchor.textContent = `${label} ↗`;
+      links.append(anchor);
+    });
+  }
+
+  function appendCitationLinks(container, citation) {
+    if (!citation) {
+      container.textContent = "No record-level citation preserved.";
+      return;
+    }
+    citation.split(" | ").forEach((item, index) => {
+      if (index) container.append(document.createTextNode(" · "));
+      const separator = item.indexOf("#");
+      const path = separator >= 0 ? item.slice(0, separator) : item;
+      const locator = separator >= 0 ? item.slice(separator + 1) : "";
+      if (path.startsWith("benchmark/")) {
+        const anchor = document.createElement("a");
+        anchor.href = path; anchor.target = "_blank";
+        anchor.textContent = `${path.split("/").pop()}${locator ? ` · ${locator.replaceAll(";", " · ")}` : ""}`;
+        container.append(anchor);
+      } else container.append(document.createTextNode(item));
+    });
   }
 
   function measureLabel(row = null) {
@@ -1365,7 +1471,7 @@
       const details = document.createElement("details");
       details.open = discrete.length === 1;
       const summary = document.createElement("summary"); summary.textContent = `${WEIGHT_LABELS[key]} category multipliers`;
-      const note = document.createElement("p"); note.className = "discrete-weight-note"; note.textContent = `${DISCRETE_WEIGHT_NOTES[key]} A multiplier of 1.00 is the reference value; 0 excludes a category.`;
+      const note = document.createElement("p"); note.className = "discrete-weight-note"; note.textContent = `${DISCRETE_WEIGHT_NOTES[key]} Definitions and provenance come from the preserved explainer package. Suggested multipliers are editable sensitivity judgments, not source rules; 1.00 is the reference and 0 excludes a category.`;
       const grid = document.createElement("div"); grid.className = "discrete-weight-grid";
       Object.keys(weights).sort((a, b) => a.localeCompare(b)).forEach((category) => {
         const label = document.createElement("span"); label.className = "discrete-weight-category";

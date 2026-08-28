@@ -1,0 +1,8 @@
+Category explainer validation
+category_dictionary rows: 270
+organization_category_rationale rows: 312
+evidence stream counts: {'reference_selection': 144, 'form990': 135, 'job_ad': 33}
+unique structure_flag values covered: 66
+unique job tier values covered: 16
+unique topic_cluster values covered (plus uncoded): 41 + 1
+errors: 0
