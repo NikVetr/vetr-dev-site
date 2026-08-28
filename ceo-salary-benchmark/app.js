@@ -399,15 +399,25 @@
     positionFloating(refs.organizationPreview, anchor, 10);
   }
 
-  function salary(row) {
-    const values = state.inflationAdjusted ? row.salary : row.nominalSalary;
+  function salaryForBasis(row, inflationAdjusted) {
+    const values = inflationAdjusted ? row.salary : row.nominalSalary;
     if (rowStream(row) === "jobAds" || state.stream === "combined") return values?.base ?? null;
     return values?.[state.measure] ?? null;
   }
 
+  function salary(row) { return salaryForBasis(row, state.inflationAdjusted); }
+
   function salaryRange(row) {
     if (rowStream(row) !== "jobAds") return null;
     return state.inflationAdjusted ? row.range : row.nominalRange;
+  }
+
+  function originalSalaryDisplay(row) {
+    if (rowStream(row) !== "jobAds" || row.nominalRange?.low == null || row.nominalRange?.high == null) {
+      return compactMoney(salaryForBasis(row, false));
+    }
+    if (row.nominalRange.low === row.nominalRange.high) return compactMoney(row.nominalRange.low);
+    return `${compactMoney(row.nominalRange.low)}–${compactMoney(row.nominalRange.high).replace(/^\$/, "")}`;
   }
 
   function priceBasisLabel() {
@@ -468,6 +478,7 @@
 
   function presetSelected(row) {
     const available = salary(row) != null;
+    if (state.sample === "sensitivity") return Boolean(available && (row.defaultIncluded || row.analysisStatus === "sensitivity_only"));
     if (state.sample === "clean") return Boolean(row.defaultIncluded && row.structurallyClean && available);
     if (state.sample === "tierA") return Boolean(row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary"));
     if (state.sample === "observed") return available;
@@ -760,17 +771,6 @@
     });
   }
 
-  function appendRpLegend(available = true) {
-    const item = document.createElement("span");
-    item.className = "rp-reference-legend";
-    if (available) {
-      const logo = document.createElement("img");
-      logo.src = "assets/rethink-priorities-favicon.png"; logo.alt = "";
-      item.append(logo, document.createTextNode("RP reference · not analyzed"));
-    } else item.textContent = "RP reference unavailable for this axis";
-    refs.chartLegend.append(item);
-  }
-
   function renderHistogramLegend(colorMap) {
     refs.chartLegend.replaceChildren();
     appendCategoryLegend(colorMap);
@@ -779,7 +779,6 @@
       refs.chartLegend.append(density);
     }
     const rug = document.createElement("span"); rug.innerHTML = '<i class="rug-swatch"></i> Individual salaries'; refs.chartLegend.append(rug);
-    appendRpLegend();
   }
 
   function quantilePercentiles() {
@@ -1159,7 +1158,7 @@
     refs.chartLegend.append(legend);
   }
 
-  function renderScatterLegend(colorMap, contoursShown, items, rpAvailable) {
+  function renderScatterLegend(colorMap, contoursShown, items) {
     refs.chartLegend.replaceChildren();
     appendCategoryLegend(colorMap);
     if (contoursShown) {
@@ -1167,7 +1166,6 @@
       refs.chartLegend.append(contour);
     }
     appendPointSizeLegend(items);
-    appendRpLegend(rpAvailable);
   }
 
   function appendCovarianceContours(svg, points, clipId) {
@@ -1340,7 +1338,7 @@
     xTitle.textContent = `${variable.label}${variable.logarithmic ? " (log scale)" : ""}`; svg.append(xTitle);
     const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
     yTitle.textContent = `Annual compensation (${priceBasisLabel()})`; svg.append(yTitle);
-    renderScatterLegend(colors, contoursShown, items, rpAvailable);
+    renderScatterLegend(colors, contoursShown, items);
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     const squared = items.reduce((sum, item) => sum + item.weight ** 2, 0);
     refs.statN.textContent = items.length;
@@ -1456,6 +1454,8 @@
     return filtered.sort((a, b) => {
       const value = (row) => {
         if (state.sortKey === "tier") return tierSortValue(row.tier);
+        if (state.sortKey === "adjustedSalary") return salaryForBasis(row, true) ?? -Infinity;
+        if (state.sortKey === "originalSalary") return salaryForBasis(row, false) ?? -Infinity;
         if (state.sortKey === "salary") return salary(row) ?? -Infinity;
         if (state.sortKey === "weight") return weightMap.get(row.id) || 0;
         if (["expenses", "staff", "comparabilityScore", "compensationYear"].includes(state.sortKey)) return row[state.sortKey] ?? -Infinity;
@@ -1591,15 +1591,16 @@
     tr.className = "rp-reference-row";
     tr.setAttribute("aria-label", "Rethink Priorities 2024 Form 990 reference profile; excluded from the peer distribution");
     const values = [
-      "", reference.organization, reference.title, compactMoney(salary(reference)), compactMoney(reference.expenses), String(reference.staff),
-      "", "", reference.tier, "—", reference.location, "—", reference.structure, String(reference.compensationYear), reference.sourceType,
+      "", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)), compactMoney(salaryForBasis(reference, false)),
+      compactMoney(reference.expenses), String(reference.staff), "", "", reference.tier, "—", reference.location, "—", reference.structure,
+      String(reference.compensationYear), reference.sourceType,
     ];
     values.forEach((value, index) => {
       const td = document.createElement("td");
       td.textContent = value;
       if (index === 0) td.className = "check-column";
       if (index === 1) td.className = "rp-reference-name";
-      if (index === 5) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
+      if (index === 6) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
       tr.append(td);
     });
     const source = document.createElement("td");
@@ -1674,8 +1675,16 @@
       const evidenceType = document.createElement("td");
       evidenceType.className = "evidence-cell"; evidenceType.textContent = row.sourceType || "—";
 
-      const salaryCell = document.createElement("td");
-      salaryCell.className = "money-cell"; salaryCell.textContent = compactMoney(salary(row));
+      const adjustedSalaryCell = document.createElement("td");
+      adjustedSalaryCell.className = "money-cell adjusted-salary-cell";
+      adjustedSalaryCell.textContent = compactMoney(salaryForBasis(row, true));
+      adjustedSalaryCell.title = `${money(salaryForBasis(row, true))} in ${DATA.priceBasis}`;
+      const originalSalaryCell = document.createElement("td");
+      originalSalaryCell.className = "money-cell original-salary-cell";
+      originalSalaryCell.textContent = originalSalaryDisplay(row);
+      originalSalaryCell.title = rowStream(row) === "jobAds"
+        ? `${money(row.nominalRange?.low)}–${money(row.nominalRange?.high)} advertised in the source`
+        : `${money(salaryForBasis(row, false))} reported in the source-year filing`;
 
       const weightCell = document.createElement("td");
       weightCell.className = "weight-cell";
@@ -1726,7 +1735,7 @@
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
       }
-      tr.append(toggleCell, org, title, salaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, source);
+      tr.append(toggleCell, org, title, adjustedSalaryCell, originalSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, source);
       refs.tableBody.append(tr);
     });
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
@@ -1830,6 +1839,7 @@
       ...(row.currentFilingStaff != null ? [["Latest Form 990 employee field", `${row.currentFilingStaff} on Part I, line 5 (${row.compensationYear})`]] : []),
       ["Filing-declared website", row.homepageUrl || "Not available in the preserved source"],
       ["Local provenance", row.localPath || "No cached original"],
+      ...(row.evidenceUpdate ? [["Evidence review", row.evidenceUpdate.status]] : []),
     ].forEach(([term, description]) => {
       const dt = document.createElement("dt"); dt.textContent = term;
       const dd = document.createElement("dd"); dd.textContent = description;
@@ -1921,6 +1931,9 @@
     if (row.categoryEnrichment) provenanceLinks.push(
       ["Posting enrichment CSV", DATA.categoryExplainers.jobAdEnrichmentPath],
       ["Posting enrichment methodology", DATA.categoryExplainers.jobAdEnrichmentMethodologyPath],
+    );
+    if (row.evidenceUpdate) provenanceLinks.push(
+      ["Posting evidence update", DATA.categoryExplainers.jobAdEvidenceUpdatesPath],
     );
     provenanceLinks.forEach(([label, href]) => {
       const anchor = document.createElement("a"); anchor.href = href; anchor.target = "_blank"; anchor.textContent = `${label} ↗`;
@@ -2162,7 +2175,8 @@
     refs.scatterControls.hidden = state.view !== "scatter";
     refs.binField.hidden = state.view !== "histogram";
     refs.sampleDescription.textContent = {
-      primary: "Rows retained as primary after source validation and role-structure review.",
+      primary: "Rows retained for the validated analysis after source and role-structure review.",
+      sensitivity: "The validated analysis plus records explicitly designated sensitivity-only; substantive exclusions remain unchecked.",
       clean: "Primary rows with no structural compensation or leadership flags.",
       tierA: "The narrowest peer definition: incumbent Tier A or job-ad strict-primary rows.",
       observed: "Every row with a usable salary value, including broader sensitivity cases.",
@@ -2189,7 +2203,7 @@
   const URL_FILTER_CODES = Object.freeze({ title: "h", sourceType: "v", tier: "t", topic: "o", location: "l", eaAffinity: "a", structure: "u" });
   const URL_STREAM_CODES = Object.freeze({ incumbents: "i", jobAds: "j", combined: "a" });
   const URL_MEASURE_CODES = Object.freeze({ base: "b", cash: "c", total: "t" });
-  const URL_SAMPLE_CODES = Object.freeze({ primary: "p", clean: "c", tierA: "a", observed: "o" });
+  const URL_SAMPLE_CODES = Object.freeze({ primary: "p", sensitivity: "s", clean: "c", tierA: "a", observed: "o" });
   const URL_FIT_CODES = Object.freeze({ empirical: "e", lognormal: "l", gamma: "g" });
   const URL_QUANTILE_CODES = Object.freeze({ quintiles: "q", deciles: "d", percentiles: "p", custom: "c" });
   const reverseCodes = (codes) => Object.fromEntries(Object.entries(codes).map(([key, value]) => [value, key]));
@@ -2389,7 +2403,7 @@
     state.measure = enumValue(analysis.m, ["base", "cash", "total"], state.measure);
     state.inflationAdjusted = analysis.ia !== false;
     if (state.stream === "combined") state.measure = "base";
-    state.sample = enumValue(analysis.p, ["primary", "clean", "tierA", "observed"], state.sample);
+    state.sample = enumValue(analysis.p, ["primary", "sensitivity", "clean", "tierA", "observed"], state.sample);
     state.fit = enumValue(analysis.d, ["empirical", "lognormal", "gamma"], state.fit);
     const validWeights = [...DISCRETE_WEIGHT_KEYS, "comparability", "size", "staff", "recency", "streamBalanced"];
     state.weightings = new Set((Array.isArray(analysis.w) ? analysis.w : []).filter((value) => validWeights.includes(value)));

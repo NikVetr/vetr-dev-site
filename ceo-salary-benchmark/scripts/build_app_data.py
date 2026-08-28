@@ -18,6 +18,7 @@ BENCHMARK = ROOT / "benchmark"
 DELIVERABLES = BENCHMARK / "deliverables"
 CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 ENRICHMENT = BENCHMARK / "enrichment"
+JOB_AD_EVIDENCE_UPDATES = ENRICHMENT / "job_ad_evidence_updates.csv"
 EVIDENCE_DIR = ROOT / "evidence" / "original"
 OUTPUT = ROOT / "app-data.js"
 WIKIPEDIA_PROFILES = ROOT / "data" / "organization_wikipedia_profiles.csv"
@@ -434,7 +435,37 @@ def load_job_ad_enrichment(jobs: list[dict[str, str]]) -> dict[str, dict[str, st
     return by_source
 
 
-def enriched_job_provenance(historical: dict, enrichment: dict[str, str], job: dict[str, str]) -> dict:
+def load_job_ad_evidence_updates(jobs: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+    job_by_source = {text(job["source_id"]): job for job in jobs}
+    allowed_fields = set(jobs[0])
+    updates: dict[str, dict[str, str]] = {}
+    for row in rows(JOB_AD_EVIDENCE_UPDATES):
+        source_id = text(row["source_id"])
+        organization = text(row["organization"])
+        if source_id not in job_by_source or organization != text(job_by_source[source_id]["organization"]):
+            raise ValueError(f"Job-ad evidence update does not match validated posting: {source_id}/{organization}")
+        if source_id in updates:
+            raise ValueError(f"Duplicate job-ad evidence update: {source_id}")
+        unknown = sorted(field for field in row if field not in allowed_fields | {"clear_fields"})
+        if unknown:
+            raise ValueError(f"Job-ad evidence update {source_id} has unknown fields: {unknown}")
+        clear_fields = [field.strip() for field in text(row["clear_fields"]).split("|") if field.strip()]
+        invalid_clear = sorted(set(clear_fields) - allowed_fields)
+        if invalid_clear:
+            raise ValueError(f"Job-ad evidence update {source_id} cannot clear fields: {invalid_clear}")
+        local_path = text(row["local_path"])
+        if not local_path or not (BENCHMARK / local_path).is_file():
+            raise ValueError(f"Job-ad evidence update {source_id} lacks its archived source: {local_path}")
+        updates[source_id] = {**row, "clear_fields": clear_fields}
+    return updates
+
+
+def enriched_job_provenance(
+    historical: dict,
+    enrichment: dict[str, str],
+    job: dict[str, str],
+    evidence_update: dict[str, str] | None,
+) -> dict:
     provenance = copy.deepcopy(historical)
     citation = text(enrichment["source_citation"])
     provenance["ea"] = {
@@ -455,12 +486,30 @@ def enriched_job_provenance(historical: dict, enrichment: dict[str, str], job: d
         "rationale": text(enrichment["topic_rationale"]),
         "citation": citation,
     }
-    provenance["classificationTiming"] = (
-        "tier/title=historical_nonpay_review; EA/structure/topic=post_freeze_app_enrichment"
-    )
-    provenance["provenanceType"] = (
-        "historical_nonpay_tiering + post_freeze_preserved_source_review"
-    )
+    if evidence_update:
+        provenance["tier"] = {
+            "value": text(job["tier"]),
+            "label": text(job["tier"]),
+            "rationale": text(job["inclusion_reason"]),
+            "citation": (
+                "benchmark/enrichment/job_ad_evidence_updates.csv"
+                f" | benchmark/{text(job['local_path'])}"
+            ),
+        }
+        provenance["classificationTiming"] = (
+            "tier=post_freeze_archived_source_review; title=historical_nonpay_review; "
+            "EA/structure/topic=post_freeze_app_enrichment"
+        )
+        provenance["provenanceType"] = (
+            "post_freeze_archived_evidence_update + post_freeze_preserved_source_review"
+        )
+    else:
+        provenance["classificationTiming"] = (
+            "tier/title=historical_nonpay_review; EA/structure/topic=post_freeze_app_enrichment"
+        )
+        provenance["provenanceType"] = (
+            "historical_nonpay_tiering + post_freeze_preserved_source_review"
+        )
     provenance["confidence"] = text(enrichment["confidence"])
     provenance["caveats"] = text(enrichment["caveats"])
     return provenance
@@ -570,9 +619,18 @@ def build_incumbents(
 
 def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
     jobs = rows(DELIVERABLES / "validated_job_ad_compensation.csv")
+    evidence_updates = load_job_ad_evidence_updates(jobs)
     enrichment_by_source = load_job_ad_enrichment(jobs)
     output: list[dict] = []
-    for job in jobs:
+    for original_job in jobs:
+        job = dict(original_job)
+        evidence_update = evidence_updates.get(text(job["source_id"]))
+        if evidence_update:
+            for field in evidence_update["clear_fields"]:
+                job[field] = ""
+            for field, value in evidence_update.items():
+                if field not in {"source_id", "organization", "clear_fields"} and text(value):
+                    job[field] = value
         source_id = text(job["source_id"])
         local_path = text(job["local_path"])
         cached = cache_source(source_id, local_path) if local_path else ""
@@ -633,7 +691,9 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
             "sourceType": "Job posting",
             "evidenceStream": "jobAds",
             "homepageUrl": "",
-            "categoryProvenance": enriched_job_provenance(historical_provenance, enrichment, job),
+            "categoryProvenance": enriched_job_provenance(
+                historical_provenance, enrichment, job, evidence_update
+            ),
             "historicalCategoryProvenance": historical_provenance,
             "categoryEnrichment": {
                 "classificationBasis": text(enrichment["classification_basis"]),
@@ -641,6 +701,11 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
                 "caveats": text(enrichment["caveats"]),
                 "sourceCitation": text(enrichment["source_citation"]),
             },
+            "evidenceUpdate": ({
+                "status": "post-freeze archived-source verification",
+                "updatePath": "benchmark/enrichment/job_ad_evidence_updates.csv",
+                "sourceCitation": f"benchmark/{text(job['local_path'])}",
+            } if evidence_update else None),
         })
     return output
 
@@ -686,6 +751,7 @@ def main() -> None:
             "jobAdEnrichmentPath": "benchmark/enrichment/job_ad_category_enrichment.csv",
             "jobAdEnrichmentDictionaryPath": "benchmark/enrichment/job_ad_category_dictionary.csv",
             "jobAdEnrichmentMethodologyPath": "benchmark/enrichment/job_ad_category_methodology.md",
+            "jobAdEvidenceUpdatesPath": "benchmark/enrichment/job_ad_evidence_updates.csv",
         },
         "summary": {
             "selectedReferenceOrganizations": len(incumbents),
