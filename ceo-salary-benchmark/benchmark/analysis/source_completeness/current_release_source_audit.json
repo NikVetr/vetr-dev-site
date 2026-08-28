@@ -1,5 +1,5 @@
 {
-  "audit_timestamp_utc": "2026-08-28T19:58:49+00:00",
+  "audit_timestamp_utc": "2026-08-28T20:45:21+00:00",
   "counts_by_stream": [
     {
       "derivative_bytes": 1227,
@@ -37,9 +37,9 @@
       "derivative_bytes": 225362,
       "derivative_present": 174,
       "evidence_stream": "supporting_web_source",
-      "required": 174,
-      "source_complete": 174,
-      "source_native_present": 174
+      "required": 175,
+      "source_complete": 175,
+      "source_native_present": 175
     }
   ],
   "derivative_snapshots_present": 349,
@@ -56,10 +56,10 @@
     "source_raw_count": 0,
     "xml_count": 0
   },
-  "required_source_records": 350,
+  "required_source_records": 351,
   "retrieval_status": "PASS - ALL SOURCES LOCALLY PRESERVED",
-  "source_complete_records": 227,
-  "source_native_or_frozen_local_files_present": 350,
+  "source_complete_records": 228,
+  "source_native_or_frozen_local_files_present": 351,
   "status": "FAIL - NOT SOURCE-COMPLETE",
   "validation_status": "FAIL - EXPECTED-DATA CORRECTIONS REQUIRED"
 }

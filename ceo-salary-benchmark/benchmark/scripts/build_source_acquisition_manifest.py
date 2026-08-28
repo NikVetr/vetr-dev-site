@@ -115,6 +115,51 @@ rows.append({
     **rp_state,
 })
 
+# RP's 2024 return reports zero employees. Preserve the most recent nonzero
+# value from the same Part I, line 5 field as a separately labeled 2023 source.
+rp_staff_local_path = "sources/native/form990/202433179349301723_public.pdf"
+rp_staff_path = ROOT / rp_staff_local_path
+rp_staff_metadata_path = Path(f"{rp_staff_path}.metadata.json")
+rp_staff_state = {
+    "current_status": "missing_source_native",
+    "current_local_path": "",
+    "current_sha256": "",
+    "current_byte_length": "",
+    "last_attempt_timestamp": "",
+    "last_attempt_result": "",
+}
+if rp_staff_path.is_file() and rp_staff_metadata_path.is_file():
+    rp_staff_bytes = rp_staff_path.read_bytes()
+    rp_staff_metadata = json.loads(rp_staff_metadata_path.read_text(encoding="utf-8"))
+    rp_staff_state = {
+        "current_status": "present_verified_source_native",
+        "current_local_path": rp_staff_local_path,
+        "current_sha256": hashlib.sha256(rp_staff_bytes).hexdigest(),
+        "current_byte_length": len(rp_staff_bytes),
+        "last_attempt_timestamp": clean(rp_staff_metadata.get("retrieval_timestamp_utc")),
+        "last_attempt_result": "downloaded from the organization-hosted public filing",
+    }
+rows.append({
+    "source_id": "SRC-990-RP-STAFF-2023",
+    "organization": "Rethink Priorities",
+    "evidence_stream": "supporting_web_source",
+    "required_for_source_complete_release": "yes",
+    "canonical_url": "https://rethinkpriorities.org/wp-content/uploads/2024/11/RP-2023-990-No-Schedule-B.pdf",
+    "fallback_url_1": "https://projects.propublica.org/nonprofits/organizations/843896318/202433179349301723/full",
+    "fallback_url_2": "",
+    "preferred_provenance": "organization-hosted public Form 990 PDF",
+    "expected_local_path": rp_staff_local_path,
+    "expected_mime_family": "pdf_or_html_or_text",
+    "minimum_bytes": 10000,
+    "ein": "84-3896318",
+    "irs_object_id": "202433179349301723",
+    "tax_period_begin": "2023-01-01",
+    "tax_period_end": "2023-12-31",
+    "analysis_use": "filing-derived RP staff reference; Part I line 5",
+    "validation_rule": "source-native PDF; checksum and employee count are rechecked by the app-data build",
+    **rp_staff_state,
+})
+
 # Every advertisement row is retained because inclusion/exclusion and sensitivity
 # judgments are part of the evidentiary chain.  An excluded discovery record with
 # no recoverable URL is preserved as a frozen local search record, not falsely
