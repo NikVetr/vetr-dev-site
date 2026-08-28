@@ -15,7 +15,7 @@
       ? `$${(value / 1_000_000).toFixed(value >= 10_000_000 ? 0 : 1)}M`
       : `$${Math.round(value / 1_000)}K`;
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
-  const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 43 });
+  const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
   const COMPOSITE_SCORE_TOOLTIP = "Auto-weights uses the frozen 0–100 non-pay composite, which combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1. Select Auto-weights instead of its individual component weights to avoid double-counting those dimensions.";
 
   const state = {
@@ -200,7 +200,7 @@
       else if (normalized === "strict_primary") explanation = "Strict-primary postings describe a current, full-time organization-wide CEO or ED with board accountability, an RP-like knowledge-sector role, and generally $5M–$20M core scale or 25–100 staff.";
       else if (normalized.includes("expanded_primary")) explanation = "Expanded-primary postings retain a strong organization-wide leadership match but relax a title, mission-mix, or close-fit requirement from the strict-primary posting set.";
       else if (normalized.includes("scale_unknown")) explanation = "This expanded secondary subtype has a useful role or functional match, but accessible evidence did not establish operating scale.";
-      else if (normalized.includes("scale")) explanation = "This subtype is broader because budget, expenses, or staff differ materially from RP's $7.5M core-budget and 43-employee filing anchors.";
+      else if (normalized.includes("scale")) explanation = "This subtype is broader because budget, expenses, or staff differ materially from RP's $7.5M core-budget and 57-FTE operating anchors.";
       else if (normalized.includes("structural")) explanation = "This subtype is broader because governance, affiliation, fiscal sponsorship, grantmaking, or multi-entity leadership differs from RP's organization-wide CEO structure.";
       else if (normalized.includes("broad_functional")) explanation = "This expanded subtype is included mainly for functional sensitivity: some duties overlap with RP, but the mission or operating model is less direct.";
       else if (normalized.includes("date_ambiguity")) explanation = "The posting's publication and process dates conflict, so it is retained only as a date-ambiguity sensitivity.";
@@ -769,6 +769,53 @@
     });
   }
 
+  function appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom) {
+    if (!state.markCurve || state.fit !== "empirical" || !percentiles.length || percentiles.length >= 21) return;
+    const candidates = percentiles.map((percentile) => {
+      const value = weightedQuantile(items, percentile / 100);
+      if (!Number.isFinite(value)) return null;
+      const x = xScale(value);
+      const label = svgElement("g", {
+        transform: `translate(${x} ${margin.top})`,
+        class: "empirical-quantile-mark",
+        "aria-hidden": "true",
+      });
+      const percentileLine = svgElement("text", { x: 0, y: -17, "text-anchor": "middle", class: "empirical-quantile-label" });
+      const percentilePrefix = svgElement("tspan");
+      percentilePrefix.textContent = "P";
+      const percentileSubscript = svgElement("tspan", { "baseline-shift": "sub", "font-size": "7.5" });
+      percentileSubscript.textContent = Number.isInteger(percentile) ? percentile : percentile.toFixed(1);
+      percentileLine.append(percentilePrefix, percentileSubscript);
+      const amountLine = svgElement("text", { x: 0, y: -4, "text-anchor": "middle", class: "empirical-quantile-label amount" });
+      amountLine.textContent = `$${Math.round(value / 1000)}K`;
+      label.append(percentileLine, amountLine);
+      label.setAttribute("visibility", "hidden");
+      svg.append(label);
+      const bounds = label.getBoundingClientRect();
+      label.remove();
+      label.removeAttribute("visibility");
+      return { percentile, value, x, bounds, label };
+    }).filter(Boolean);
+    const overlaps = (first, second, padding = 4) => first.right + padding > second.left
+      && second.right + padding > first.left
+      && first.bottom + padding > second.top
+      && second.bottom + padding > first.top;
+    const retained = [];
+    [...candidates]
+      .sort((first, second) => Math.abs(first.percentile - 50) - Math.abs(second.percentile - 50) || first.percentile - second.percentile)
+      .forEach((candidate) => {
+        if (retained.some((existing) => overlaps(existing.bounds, candidate.bounds))) return;
+        retained.push(candidate);
+      });
+    retained.sort((first, second) => first.x - second.x).forEach((candidate) => {
+      svg.append(svgElement("line", {
+        x1: candidate.x, x2: candidate.x, y1: margin.top, y2: plotBottom,
+        class: "empirical-quantile-guide", "aria-hidden": "true",
+      }));
+      svg.append(candidate.label);
+    });
+  }
+
   function highlightRug(id, highlighted) {
     refs.chart.querySelectorAll(".rug-line").forEach((rug) => {
       if (rug.dataset.rugId === id) rug.classList.toggle("is-highlighted", highlighted || state.focusedId === id);
@@ -785,7 +832,10 @@
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(330, refs.chartWrap.clientHeight || 360);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-    const margin = { top: 14, right: 18, bottom: 46, left: 66 };
+    const percentiles = quantilePercentiles();
+    const showEmpiricalQuantileMarks = state.markCurve && state.fit === "empirical"
+      && percentiles.length > 0 && percentiles.length < 21;
+    const margin = { top: showEmpiricalQuantileMarks ? 40 : 14, right: 18, bottom: 46, left: 66 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
@@ -837,6 +887,7 @@
     }
 
     const plotBottom = margin.top + innerHeight;
+    appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom);
     bins.forEach((bin) => {
       const x0 = xScale(domainMin + bin.index * binWidthValue) + 1;
       const x1 = xScale(domainMin + (bin.index + 1) * binWidthValue) - 1;
@@ -876,7 +927,7 @@
       svg.append(svgElement("path", { d: path, class: "density-line-outline" }));
       svg.append(svgElement("path", { d: path, class: "density-line" }));
       appendCurveQuantileMarks(
-        svg, model, quantilePercentiles(), xScale, yScale, margin,
+        svg, model, percentiles, xScale, yScale, margin,
         sumWeight, binWidthValue, domainMin, domainMax,
       );
     }

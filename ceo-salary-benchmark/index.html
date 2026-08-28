@@ -142,8 +142,8 @@
         </section>
         <section id="staff-target-field" class="weight-component-control" hidden>
           <label class="field compact">
-            <span>RP filing staff target <button class="info-tooltip" type="button" aria-label="About staff comparison" data-tooltip="The staff-count target used by staff-similarity weighting. The default is the 43 individuals employed reported on RP's 2023 Form 990, Part I, line 5—the same field used for peers. RP's 2024 return reports zero, so the most recent usable comparable filing count is used.">?</button></span>
-            <input id="target-staff" type="number" min="1" max="1000" step="1" value="43">
+            <span>RP operating staff target <button class="info-tooltip" type="button" aria-label="About staff comparison" data-tooltip="The staff-count target used by staff-similarity weighting. The default is RP's published operating scale of 57 full-time-equivalent staff. This is not the same field as peer Form 990 employee counts, so the table keeps RP's filing-comparable count of 43 separate.">?</button></span>
+            <input id="target-staff" type="number" min="1" max="1000" step="1" value="57">
             <span>Staff bandwidth <button class="info-tooltip" type="button" aria-label="About staff bandwidth" data-tooltip="Controls how quickly the staff multiplier falls with logged distance from the target. Larger values are more permissive.">?</button> <output id="staff-bandwidth-value">0.70×</output></span>
             <input id="staff-bandwidth" type="range" min="0.2" max="1.5" step="0.05" value="0.7">
           </label>
@@ -159,7 +159,7 @@
         <details id="rp-scale-reference" class="rp-scale-reference">
           <summary>Why these RP defaults?</summary>
           <p><b>$7.5M expenses:</b> RP's published 2026 core budget, excluding Special Projects. <a href="https://rethinkpriorities.org/2025-results/" target="_blank" rel="noopener noreferrer">RP plan ↗</a> · <a href="benchmark/sources/native/supporting/src-rp-2025-results.html" target="_blank">cached page</a></p>
-          <p><b>43 staff:</b> the number of individuals employed on RP's 2023 Form 990, Part I, line 5—the same source field used for peers. The 2024 return reports zero, so the most recent usable comparable filing value is used. <a href="https://rethinkpriorities.org/wp-content/uploads/2024/11/RP-2023-990-No-Schedule-B.pdf" target="_blank" rel="noopener noreferrer">complete 2023 filing ↗</a> · <a href="evidence/original/src-990-rp-staff-2023.pdf" target="_blank">cached PDF</a></p>
+          <p><b>57 FTE weighting target:</b> RP's funding-needs page reports 61 permanent staff representing 57 full-time equivalents. This operating-scale figure is used only as the editable staff-similarity target; it is not treated as filing-comparable peer metadata. <a href="https://rethinkpriorities.org/rethink-priorities-funding-needs/" target="_blank" rel="noopener noreferrer">RP funding needs ↗</a> · <a href="evidence/original/src-rp-funding-needs.html" target="_blank">cached page</a></p>
           <p><b>Table reference:</b> The frozen RP row uses the 2024 Form 990 for compensation and expenses and the 2023 Form 990 for the most recent usable filing-derived staff count. The one-year mismatch and the 2024 zero are documented in the source preview. The row remains outside the peer distribution. <a href="https://projects.propublica.org/nonprofits/organizations/843896318" target="_blank" rel="noopener noreferrer">ProPublica ↗</a> · <a href="evidence/original/src-990-rp-reference.xml" target="_blank">cached XML</a></p>
         </details>
       </div>
@@ -206,7 +206,7 @@
             <p id="quantile-basis" class="quantile-basis">Derived from the fitted lognormal distribution</p>
           </div>
           <div class="quantile-controls">
-            <label class="mark-curve-toggle"><input id="mark-curve" type="checkbox" checked> Mark curve</label>
+            <label class="mark-curve-toggle"><input id="mark-curve" type="checkbox" checked> Mark graph</label>
             <label class="inline-select">
               <span class="sr-only">Quantile levels</span>
               <select id="quantile-granularity" aria-label="Quantile levels">

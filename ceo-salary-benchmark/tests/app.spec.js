@@ -98,6 +98,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#salary-chart")).toContainText("Weighted observations per bin");
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from the fitted lognormal distribution");
   await expect(page.locator("#mark-curve")).toBeChecked();
+  await expect(page.locator("label:has(#mark-curve)")).toContainText("Mark graph");
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-tick-outline")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-tick-outline").first()).toHaveCSS("stroke", "rgba(255, 255, 255, 0.96)");
@@ -214,6 +215,23 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('input[name="distribution"][value="empirical"]').check();
   await expect(page.locator(".density-line-outline")).toHaveCount(0);
   await expect(page.locator(".density-line")).toHaveCount(0);
+  const empiricalMarkCount = await page.locator(".empirical-quantile-mark").count();
+  expect(empiricalMarkCount).toBeGreaterThan(0);
+  expect(empiricalMarkCount).toBeLessThanOrEqual(4);
+  await expect(page.locator(".empirical-quantile-guide")).toHaveCount(empiricalMarkCount);
+  await expect(page.locator(".empirical-quantile-label.amount").first()).toHaveText(/^\$\d+K$/);
+  await expect(page.locator(".empirical-quantile-guide").first()).toHaveCSS("stroke-dasharray", "5px, 4px");
+  expect(await page.locator(".empirical-quantile-guide").evaluateAll((guides) => guides.every((guide) =>
+    Number(guide.getAttribute("y1")) < Number(guide.getAttribute("y2"))))).toBe(true);
+  expect(await page.locator("#salary-chart").evaluate((svg) => {
+    const guide = svg.querySelector(".empirical-quantile-guide");
+    const block = svg.querySelector(".bar-block");
+    return Boolean(guide.compareDocumentPosition(block) & Node.DOCUMENT_POSITION_FOLLOWING);
+  })).toBe(true);
+  expect(await page.locator(".empirical-quantile-mark").evaluateAll((marks) => {
+    const rectangles = marks.map((mark) => mark.getBoundingClientRect()).sort((a, b) => a.left - b.left);
+    return rectangles.every((rectangle, index) => index === 0 || rectangle.left >= rectangles[index - 1].right + 2);
+  })).toBe(true);
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from weighted empirical ranks");
   await page.locator('input[name="distribution"][value="lognormal"]').check();
 
@@ -392,12 +410,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".chart-panel .weight-profile-slot")).toHaveCount(0);
   await expect(page.locator(".weight-profile-curve")).toHaveCount(1);
   await expect(page.locator("#rp-scale-reference")).toBeVisible();
-  await expect(page.locator("#rp-scale-reference")).toContainText("43 staff");
+  await expect(page.locator("#rp-scale-reference")).toContainText("57 FTE weighting target");
   await page.locator('#weighting-components input[value="staff"]').check();
   await expect(page.locator("#staff-target-field")).toBeVisible();
-  await expect(page.locator("#target-staff")).toHaveValue("43");
+  await expect(page.locator("#target-staff")).toHaveValue("57");
   await expect(page.locator("#expense-target-field")).toBeVisible();
   await expect(page.locator(".weight-profile-curve")).toHaveCount(2);
+  await expect(page.locator("#weight-profile-staff svg")).toHaveAttribute("aria-label", /RP operating target 57/);
   await expect(page.locator(".weight-profile-rp-reference")).toHaveCount(2);
   await expect(page.locator(".weight-profile-rp-label")).toHaveCount(2);
   await expect(page.locator(".weight-profile-axis-title")).toHaveCount(4);

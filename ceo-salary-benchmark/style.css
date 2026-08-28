@@ -213,6 +213,9 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .rug-line { stroke: var(--green); stroke-width: 1; opacity: .36; transition: opacity .1s, stroke-width .1s; }
 .rug-line.is-highlighted { stroke: var(--ink); stroke-width: 3; opacity: 1; }
 .quantile-guide { stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 4 3; pointer-events: none; }
+.empirical-quantile-guide { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 5 4; opacity: .62; pointer-events: none; }
+.empirical-quantile-label { fill: var(--ink); font-size: 10px; font-weight: 700; paint-order: stroke; stroke: rgba(255, 255, 255, .96); stroke-width: 3.5px; stroke-linejoin: round; pointer-events: none; }
+.empirical-quantile-label.amount { font-size: 9px; font-weight: 550; }
 .curve-quantile-tick-outline, .curve-quantile-tick { fill: none; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
 .curve-quantile-tick-outline { stroke: rgba(255, 255, 255, .96); stroke-width: 4; }
 .curve-quantile-tick { stroke: var(--ink); stroke-width: 1.2; }

@@ -573,8 +573,8 @@ def main() -> None:
     incumbents = build_incumbents(rationales_by_source, reference_rationales)
     jobs = build_job_ads(rationales_by_source)
     rp_reference = build_rp_reference()
-    # Preserve the previously acquired operating-headcount page in the local archive,
-    # but do not use its non-comparable FTE/permanent-staff figures analytically.
+    # Preserve the operating-headcount page used by the UI's editable staff-similarity
+    # target. The comparable RP table field remains filing-derived in build_rp_reference().
     cache_source(RP_FUNDING_SOURCE_ID, RP_FUNDING_LOCAL_PATH)
     app_rows = incumbents + jobs
     wikipedia_profiles = load_wikipedia_profiles({row["organization"] for row in app_rows})
