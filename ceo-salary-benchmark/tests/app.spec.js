@@ -3,23 +3,26 @@ const { test, expect } = require("@playwright/test");
 test("benchmark interactions and validated sources", async ({ page }) => {
   test.setTimeout(60_000);
   const errors = [];
+  const wikipediaRequests = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.route("https://en.wikipedia.org/**", (route) => route.fulfill({
-    contentType: "application/json",
-    body: JSON.stringify({ query: { pages: { 1: {
-      title: "American Immigration Council", extract: "A nonprofit immigration advocacy organization.",
-      fullurl: "https://en.wikipedia.org/wiki/American_Immigration_Council",
-    } } } }),
-  }));
+  await page.route("https://en.wikipedia.org/**", (route) => {
+    wikipediaRequests.push(route.request().url());
+    return route.fulfill({
+      contentType: "application/json",
+      body: JSON.stringify({ query: { pages: { 1: {
+        title: "Center for AI Safety", extract: "A nonprofit organization focused on artificial intelligence safety.",
+        fullurl: "https://en.wikipedia.org/wiki/Center_for_AI_Safety",
+      } } } }),
+    });
+  });
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "CEO salary benchmark" })).toBeVisible();
   await expect(page.locator(".app-header .eyebrow")).toHaveText("Rethink Priorities");
   await expect(page.locator(".app-header .subtitle")).toHaveCount(0);
-  await expect(page.locator("#archive-status")).toHaveText("349 / 349 sources");
-  await page.getByRole("button", { name: "About source and observation counts" }).hover();
-  await expect(page.locator("#help-tooltip")).toContainText("174 supporting web pages, 135 Form 990s, 32 job-ad files");
-  await expect(page.locator("#help-tooltip")).toContainText("do not become plotted salary observations");
+  await expect(page.locator("#archive-status")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "About source and observation counts" })).toHaveCount(0);
+  await expect(page.locator(".app-header .header-meta > span")).toHaveCount(1);
   for (const removedLabel of ["Analysis", "Incumbent compensation", "Row-level evidence", "Current weighted distribution"]) {
     await expect(page.getByText(removedLabel, { exact: true })).toHaveCount(0);
   }
@@ -52,6 +55,24 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     rows: 177,
     filingReviews: 122,
     packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
+  });
+  const wikipediaCoverage = await page.evaluate(() => {
+    const rows = [...window.CEO_BENCHMARK_DATA.incumbents, ...window.CEO_BENCHMARK_DATA.jobAds];
+    const profiles = new Map(rows.map((row) => [row.organization, {
+      title: row.wikipediaTitle,
+      url: row.wikipediaUrl,
+    }]));
+    return {
+      organizations: profiles.size,
+      mapped: [...profiles.values()].filter((profile) => profile.title && profile.url).length,
+      knownUnsafeMappings: ["NumFOCUS", "Sightline Institute", "ideas42", "American Immigration Council"]
+        .map((organization) => profiles.get(organization)?.title || ""),
+    };
+  });
+  expect(wikipediaCoverage).toEqual({
+    organizations: 174,
+    mapped: 98,
+    knownUnsafeMappings: ["", "", "", ""],
   });
   const methodologyResponse = await page.request.get("/benchmark/deliverables/category_explainers/methodology_notes.md");
   expect(methodologyResponse.ok()).toBe(true);
@@ -427,14 +448,24 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#source-dialog").screenshot({ path: "tmp/app-category-provenance.png" });
   await page.locator(".dialog-close").click();
 
-  const immigrationCouncil = page.locator("tbody tr").filter({ hasText: "American Immigration Council" });
-  await expect(immigrationCouncil.locator(".organization-name")).toHaveAttribute("href", /americanimmigrationcouncil\.org/i);
-  const orgCellBox = await immigrationCouncil.locator(".org-cell").boundingBox();
+  const centerForAiSafety = page.locator("tbody tr").filter({ hasText: "Center for AI Safety" });
+  await expect(centerForAiSafety.locator(".organization-name")).toHaveAttribute("href", /safe\.ai/i);
+  const orgCellBox = await centerForAiSafety.locator(".org-cell").boundingBox();
   await page.mouse.move(orgCellBox.x + orgCellBox.width - 2, orgCellBox.y + orgCellBox.height / 2);
   await expect(page.locator("#organization-preview")).toBeHidden();
-  await immigrationCouncil.locator(".organization-name").hover();
+  await centerForAiSafety.locator(".organization-name").hover();
   await expect(page.locator("#organization-preview")).toBeVisible();
-  await expect(page.locator("#organization-preview-wikipedia")).toContainText("nonprofit immigration advocacy");
+  await expect(page.locator("#organization-preview-local")).toHaveCount(0);
+  await expect(page.locator("#organization-preview-wikipedia")).toContainText("nonprofit organization focused on artificial intelligence safety");
+  expect(wikipediaRequests).toHaveLength(1);
+  expect(wikipediaRequests[0]).toContain("titles=Center+for+AI+Safety");
+  expect(wikipediaRequests[0]).not.toContain("generator=search");
+
+  const numfocus = page.locator("tbody tr").filter({ hasText: "NumFOCUS" });
+  await numfocus.locator(".organization-name").hover();
+  await expect(page.locator("#organization-preview-wikipedia")).toHaveText("No verified Wikipedia article is available for this organization.");
+  await expect(page.locator("#organization-preview-wiki")).toHaveText("Search Wikipedia ↗");
+  expect(wikipediaRequests).toHaveLength(1);
 
   await page.locator("#stream-select").selectOption("jobAds");
   await expect(page.locator("#stat-n")).toHaveText("15");

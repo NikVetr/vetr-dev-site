@@ -295,6 +295,10 @@
     return `https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(organization)}`;
   }
 
+  function wikipediaUrl(row) {
+    return row.wikipediaUrl || wikipediaSearchUrl(row.organization);
+  }
+
   function positionFloating(element, anchor, gap = 8) {
     const anchorBox = anchor.getBoundingClientRect();
     const box = element.getBoundingClientRect();
@@ -326,12 +330,13 @@
     }
   }
 
-  async function wikipediaPreview(organization) {
-    if (wikipediaCache.has(organization)) return wikipediaCache.get(organization);
+  async function wikipediaPreview(row) {
+    if (!row.wikipediaTitle) return null;
+    if (wikipediaCache.has(row.organization)) return wikipediaCache.get(row.organization);
     const request = (async () => {
       const parameters = new URLSearchParams({
-        action: "query", generator: "search", gsrsearch: `${organization} organization`, gsrnamespace: "0",
-        gsrlimit: "1", prop: "extracts|info", exintro: "1", explaintext: "1", exsentences: "2",
+        action: "query", titles: row.wikipediaTitle, prop: "extracts|info",
+        exintro: "1", explaintext: "1", exsentences: "2",
         inprop: "url", redirects: "1", format: "json", origin: "*",
       });
       const response = await fetch(`https://en.wikipedia.org/w/api.php?${parameters}`);
@@ -339,7 +344,7 @@
       const payload = await response.json();
       return Object.values(payload.query?.pages || {})[0] || null;
     })().catch(() => null);
-    wikipediaCache.set(organization, request);
+    wikipediaCache.set(row.organization, request);
     return request;
   }
 
@@ -352,23 +357,25 @@
     window.clearTimeout(organizationPreviewHideTimer);
     refs.organizationPreview.dataset.rowId = row.id;
     $("#organization-preview-title").textContent = row.organization;
-    const summary = [row.topic, row.location, row.staff != null ? `${row.staff} staff` : "", row.selectionNote]
-      .filter(Boolean).join(" · ");
-    $("#organization-preview-local").textContent = summary || "No additional local description is available.";
-    $("#organization-preview-wikipedia").textContent = "Looking for a Wikipedia summary…";
+    $("#organization-preview-wikipedia").textContent = row.wikipediaTitle
+      ? "Loading verified Wikipedia summary…"
+      : "No verified Wikipedia article is available for this organization.";
     const homepage = $("#organization-preview-homepage");
     homepage.hidden = !row.homepageUrl; homepage.href = row.homepageUrl || "#";
-    const wiki = $("#organization-preview-wiki"); wiki.href = wikipediaSearchUrl(row.organization); wiki.textContent = "Wikipedia search ↗";
+    const wiki = $("#organization-preview-wiki");
+    wiki.href = wikipediaUrl(row);
+    wiki.textContent = row.wikipediaTitle ? "Open Wikipedia article ↗" : "Search Wikipedia ↗";
     refs.organizationPreview.hidden = false;
     positionFloating(refs.organizationPreview, anchor, 10);
-    const result = await wikipediaPreview(row.organization);
+    const result = await wikipediaPreview(row);
     if (refs.organizationPreview.dataset.rowId !== row.id) return;
+    if (!row.wikipediaTitle) return;
     if (!result) {
-      $("#organization-preview-wikipedia").textContent = "No unambiguous Wikipedia preview was found; use the search link to inspect results.";
+      $("#organization-preview-wikipedia").textContent = "The verified Wikipedia summary could not be loaded.";
       return;
     }
-    $("#organization-preview-wikipedia").textContent = `Wikipedia candidate (${result.title}; verify match): ${result.extract || "No introductory summary available."}`;
-    if (result.fullurl) { wiki.href = result.fullurl; wiki.textContent = "Open Wikipedia article ↗"; }
+    $("#organization-preview-wikipedia").textContent = result.extract || "No introductory Wikipedia summary is available.";
+    if (result.fullurl) wiki.href = result.fullurl;
     positionFloating(refs.organizationPreview, anchor, 10);
   }
 
@@ -1440,7 +1447,7 @@
         const homepage = document.createElement("a"); homepage.href = row.homepageUrl; homepage.target = "_blank";
         homepage.rel = "noopener noreferrer"; homepage.textContent = "Website ↗"; orgLinks.append(homepage);
       }
-      const wiki = document.createElement("a"); wiki.href = wikipediaSearchUrl(row.organization); wiki.target = "_blank";
+      const wiki = document.createElement("a"); wiki.href = wikipediaUrl(row); wiki.target = "_blank";
       wiki.rel = "noopener noreferrer"; wiki.textContent = "Wikipedia ↗"; orgLinks.append(wiki);
       org.append(orgName, orgLinks);
 
@@ -2247,7 +2254,6 @@
   tableObserver.observe(refs.tableScroll);
   refs.organizationPreview.addEventListener("pointerenter", () => window.clearTimeout(organizationPreviewHideTimer));
   refs.organizationPreview.addEventListener("pointerleave", scheduleOrganizationPreviewHide);
-  $("#archive-status").textContent = `${DATA.summary.retrievedManifestRecords} / ${DATA.summary.retrievedManifestRecords} sources`;
   const encodedInitialState = new URL(window.location.href).searchParams.get("s");
   if (encodedInitialState) {
     try {

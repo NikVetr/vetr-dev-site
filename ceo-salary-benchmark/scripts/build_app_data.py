@@ -18,6 +18,7 @@ DELIVERABLES = BENCHMARK / "deliverables"
 CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 EVIDENCE_DIR = ROOT / "evidence" / "original"
 OUTPUT = ROOT / "app-data.js"
+WIKIPEDIA_PROFILES = ROOT / "data" / "organization_wikipedia_profiles.csv"
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -33,6 +34,30 @@ def text(value: object) -> str:
 def literal(value: object) -> str:
     """Preserve category strings such as the meaningful structure flag `none`."""
     return "" if value is None else str(value).strip()
+
+
+def load_wikipedia_profiles(organizations: set[str]) -> dict[str, dict[str, str]]:
+    profiles = rows(WIKIPEDIA_PROFILES)
+    by_organization: dict[str, dict[str, str]] = {}
+    for profile in profiles:
+        organization = text(profile["organization"])
+        if not organization or organization in by_organization:
+            raise ValueError(f"Invalid or duplicate Wikipedia profile row: {organization!r}")
+        method = text(profile["validation_method"])
+        title = text(profile["wikipedia_title"])
+        url = text(profile["wikipedia_url"])
+        if bool(title) != bool(url):
+            raise ValueError(f"Incomplete Wikipedia mapping for {organization}")
+        if title and method not in {"exact_title_or_redirect", "reviewed_override"}:
+            raise ValueError(f"Unverified Wikipedia mapping for {organization}: {method}")
+        by_organization[organization] = profile
+    missing = organizations - by_organization.keys()
+    extra = by_organization.keys() - organizations
+    if missing or extra:
+        raise ValueError(
+            f"Wikipedia profile coverage mismatch; missing={sorted(missing)}, extra={sorted(extra)}"
+        )
+    return by_organization
 
 
 def verify_category_explainer_hashes() -> None:
@@ -397,6 +422,12 @@ def main() -> None:
     definitions, rationales_by_source, reference_rationales, rationale_counts = load_category_explainers()
     incumbents = build_incumbents(rationales_by_source, reference_rationales)
     jobs = build_job_ads(rationales_by_source)
+    app_rows = incumbents + jobs
+    wikipedia_profiles = load_wikipedia_profiles({row["organization"] for row in app_rows})
+    for row in app_rows:
+        profile = wikipedia_profiles[row["organization"]]
+        row["wikipediaTitle"] = text(profile["wikipedia_title"])
+        row["wikipediaUrl"] = text(profile["wikipedia_url"])
     payload = {
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "priceBasis": "July 2026 USD",
@@ -427,6 +458,9 @@ def main() -> None:
             ),
             "quantitativeJobAds": sum(row["defaultIncluded"] for row in jobs),
             "retrievedManifestRecords": 349,
+            "verifiedWikipediaProfiles": sum(
+                bool(profile["wikipedia_title"]) for profile in wikipedia_profiles.values()
+            ),
         },
     }
     OUTPUT.write_text(
