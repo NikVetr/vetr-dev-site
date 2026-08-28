@@ -21,6 +21,9 @@ OUTPUT = ROOT / "app-data.js"
 WIKIPEDIA_PROFILES = ROOT / "data" / "organization_wikipedia_profiles.csv"
 RP_REFERENCE_SOURCE_ID = "SRC-990-RP-REFERENCE"
 RP_REFERENCE_LOCAL_PATH = "sources/native/form990/202502879349301540_public.xml"
+RP_STAFF_SOURCE_ID = "SRC-990-RP-STAFF-2023"
+RP_STAFF_LOCAL_PATH = "sources/native/form990/202433179349301723_public.pdf"
+RP_STAFF_SHA256 = "0a8031d7840e38ee76f6802e2e65206771744d4d50722ab32a9d74c0ba0edabf"
 RP_STAFF_COUNT = 43
 RP_STAFF_YEAR = 2023
 RP_STAFF_SOURCE_URL = "https://rethinkpriorities.org/wp-content/uploads/2024/11/RP-2023-990-No-Schedule-B.pdf"
@@ -241,8 +244,13 @@ def build_rp_reference() -> dict:
     if (expenses, revenue, employees) != (20_378_936, 20_599_841, 0):
         raise ValueError(f"Unexpected RP filing scale fields: expenses={expenses}, revenue={revenue}, employees={employees}")
 
+    staff_path = BENCHMARK / RP_STAFF_LOCAL_PATH
+    if hashlib.sha256(staff_path.read_bytes()).hexdigest() != RP_STAFF_SHA256:
+        raise ValueError("RP 2023 Form 990 PDF is missing or does not match the validated filing")
+
     factor = cpi_factor(2024)
     cached = cache_source(RP_REFERENCE_SOURCE_ID, RP_REFERENCE_LOCAL_PATH)
+    cached_staff = cache_source(RP_STAFF_SOURCE_ID, RP_STAFF_LOCAL_PATH)
     return {
         "id": RP_REFERENCE_SOURCE_ID,
         "organization": "Rethink Priorities",
@@ -294,8 +302,8 @@ def build_rp_reference() -> dict:
         "localPath": RP_REFERENCE_LOCAL_PATH,
         "secondarySourceLabel": "RP 2023 Form 990 staff filing",
         "secondarySourceUrl": RP_STAFF_SOURCE_URL,
-        "secondaryCachedSource": "",
-        "secondaryLocalPath": "",
+        "secondaryCachedSource": cached_staff,
+        "secondaryLocalPath": RP_STAFF_LOCAL_PATH,
         "sourceType": "Form 990",
         "evidenceStream": "incumbents",
         "homepageUrl": filing_homepage(RP_REFERENCE_LOCAL_PATH),

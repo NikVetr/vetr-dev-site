@@ -135,7 +135,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#dialog-meta")).toContainText("0 on Part I, line 5");
   await expect(page.locator("#dialog-cached")).toHaveAttribute("href", "evidence/original/src-990-rp-reference.xml");
   await expect(page.locator("#dialog-external")).toHaveAttribute("href", "https://projects.propublica.org/nonprofits/organizations/843896318");
-  await expect(page.locator("#dialog-secondary-cached")).toBeHidden();
+  await expect(page.locator("#dialog-secondary-cached")).toHaveAttribute("href", "evidence/original/src-990-rp-staff-2023.pdf");
   await expect(page.locator("#dialog-secondary-external")).toHaveAttribute("href", "https://rethinkpriorities.org/wp-content/uploads/2024/11/RP-2023-990-No-Schedule-B.pdf");
   await expect(page.locator("#dialog-category-provenance")).toBeHidden();
   await page.locator("#source-dialog").screenshot({ path: "tmp/app-rp-source-preview.png" });
