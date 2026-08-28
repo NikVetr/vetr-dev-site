@@ -79,6 +79,16 @@
         <legend>Chart view</legend>
         <label><input type="radio" name="chart-view" value="histogram" checked> Histogram</label>
         <label><input type="radio" name="chart-view" value="scatter"> Scatterplot</label>
+        <span id="contour-field" class="contour-toggle" hidden>
+          <label><input id="show-contours" type="checkbox" checked> Covariance contours</label>
+          <button class="info-tooltip" type="button" aria-label="About covariance contours" data-tooltip="Show weighted bivariate-normal data ellipses enclosing approximately 50%, 80%, and 95% of the selected points. These summarize covariance; they are not confidence intervals for a causal relationship.">?</button>
+        </span>
+      </fieldset>
+
+      <fieldset class="choice-group field axis-mode-setting">
+        <legend>Axis values <button class="info-tooltip" type="button" aria-label="About value and ratio axes" data-tooltip="Value plots one selected measure. Ratio divides one selected positive measure by another, such as salary by expenses. Fits, quantiles, ranks, and correlations use the resulting plotted values.">?</button></legend>
+        <label><input type="radio" name="axis-mode" value="value" checked> Value</label>
+        <label><input type="radio" name="axis-mode" value="ratio"> Ratio</label>
       </fieldset>
 
       <label id="bin-field" class="field compact">
@@ -181,21 +191,19 @@
         </div>
         <div id="scatter-controls" class="scatter-controls" hidden>
           <output id="scatter-correlations" class="scatter-correlations" aria-live="polite">Weighted r = —, ρ = —</output>
-          <label>Horizontal axis
-            <select id="scatter-x">
-              <option value="expenses">Annual expenses</option>
-              <option value="revenue">Annual revenue</option>
-              <option value="staff">Staff count</option>
-              <option value="comparabilityScore">Comparability score</option>
-              <option value="compensationYear">Evidence year</option>
-            </select>
-          </label>
-          <label class="contour-toggle"><input id="show-contours" type="checkbox" checked> Covariance contours <button class="info-tooltip" type="button" aria-label="About covariance contours" data-tooltip="Show weighted bivariate-normal data ellipses enclosing approximately 50%, 80%, and 95% of the selected points. These summarize covariance; they are not confidence intervals for a causal relationship.">?</button></label>
         </div>
         <div id="chart-wrap" class="chart-wrap">
           <svg id="salary-chart" role="img" aria-labelledby="chart-title chart-description"></svg>
           <p id="chart-description" class="sr-only">A weighted histogram in which each block represents one organization.</p>
           <div id="chart-tooltip" class="chart-tooltip" role="tooltip" hidden></div>
+          <div id="axis-selector-popover" class="axis-selector-popover" role="dialog" aria-modal="false" aria-labelledby="axis-selector-title" hidden>
+            <div class="axis-selector-heading">
+              <strong id="axis-selector-title">Choose axis</strong>
+              <button id="axis-selector-close" type="button" aria-label="Close axis selector">×</button>
+            </div>
+            <label><span id="axis-numerator-label">Measure</span><select id="axis-numerator"></select></label>
+            <label id="axis-denominator-field" hidden><span>Denominator</span><select id="axis-denominator"></select></label>
+          </div>
         </div>
         <div id="chart-legend" class="chart-legend" aria-label="Chart legend"></div>
       </section>
@@ -257,7 +265,6 @@
                   </details>
                 </div>
               </th>
-              <th><button type="button" class="stacked-sort" data-sort="originalSalary"><span><span>Orig. </span><span>Salary</span></span></button></th>
               <th class="filterable-column">
                 <button type="button" data-sort="expenses" aria-label="Sort by expenses; Rethink Priorities 2024 Form 990 reports $20.38 million">Expenses</button>
                 <div class="filter-menu numeric-filter-menu header-filter-menu" data-numeric-filter="expenses">
@@ -321,6 +328,7 @@
                 <button type="button" data-sort="sourceType">Evidence</button>
                 <div class="filter-menu header-filter-menu" data-filter-menu="sourceType"></div>
               </th>
+              <th><button type="button" class="stacked-sort" data-sort="reportedSalary"><span><span>Reported </span><span>Salary</span></span></button></th>
               <th>Source</th>
             </tr>
           </thead>

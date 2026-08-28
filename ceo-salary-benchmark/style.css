@@ -171,12 +171,12 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .live-stats i { font-style: normal; }
 .chart-wrap { position: relative; flex: 1 1 0; min-height: 180px; margin-top: 10px; }
 .chart-panel:has(.scatter-controls:not([hidden])) .chart-wrap { min-height: 160px; }
-.scatter-controls { display: flex; justify-content: flex-end; align-items: end; gap: 9px; margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--line); }
+.scatter-controls { display: flex; justify-content: flex-start; align-items: center; min-height: 24px; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--line); }
 .scatter-correlations { display: block; align-self: center; margin-right: auto; color: var(--ink); font-size: 9px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; white-space: nowrap; }
-.scatter-controls label { color: var(--muted); font-size: 9px; }
-.scatter-controls select { display: block; min-width: 130px; margin-top: 3px; padding-block: 5px; font-size: 10px; }
-.scatter-controls .contour-toggle { display: flex; align-items: center; gap: 4px; padding-bottom: 5px; color: var(--ink); }
-.scatter-controls input { margin: 0; accent-color: var(--green); }
+.view-setting .contour-toggle { display: flex; grid-column: 1 / -1; align-items: center; gap: 4px; margin-top: 4px; padding: 6px 8px 1px; border-top: 1px solid var(--line); color: var(--ink); font-size: 9px; }
+.view-setting .contour-toggle label { display: flex; align-items: center; gap: 5px; padding: 0; border: 0; background: transparent; }
+.view-setting .contour-toggle input { margin: 0; accent-color: var(--green); }
+.view-setting .contour-toggle .info-tooltip { width: 13px; height: 13px; font-size: 8px; }
 .weight-component-control + .weight-component-control { margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--line); }
 #comparability-profile-field { margin-top: 8px; padding-left: 0; border-left: 0; }
 .weight-profile-slot { margin-top: 7px; }
@@ -199,6 +199,16 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .rp-scale-reference p { margin: 0; padding: 0 8px 8px; color: var(--muted); font-size: 8.5px; line-height: 1.45; }
 .rp-scale-reference a { color: var(--green); font-weight: 650; text-underline-offset: 2px; }
 #salary-chart { display: block; width: 100%; height: 100%; min-height: 0; overflow: visible; }
+.axis-variable-control { cursor: pointer; }
+.axis-variable-label { fill: var(--ink); font-size: 10px; font-weight: 700; text-decoration: underline dotted color-mix(in srgb, var(--green), transparent 45%); text-underline-offset: 2px; }
+.axis-variable-control:hover .axis-variable-label, .axis-variable-control:focus .axis-variable-label { fill: var(--green); }
+.axis-variable-triangle { fill: var(--teal); }
+.axis-selector-popover { position: absolute; z-index: 25; width: min(230px, calc(100% - 16px)); padding: 9px; border: 1px solid var(--line-dark); border-radius: 7px; background: white; box-shadow: var(--shadow); }
+.axis-selector-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 7px; color: var(--ink); font-size: 11px; }
+.axis-selector-heading button { border: 0; background: transparent; color: var(--muted); font-size: 16px; line-height: 1; cursor: pointer; }
+.axis-selector-popover label { display: grid; grid-template-columns: 68px minmax(0, 1fr); align-items: center; gap: 6px; color: var(--muted); font-size: 9px; }
+.axis-selector-popover label + label { margin-top: 6px; }
+.axis-selector-popover select { padding-block: 5px; font-size: 10px; }
 .axis text { fill: var(--muted); font-size: 10px; }
 .axis line, .axis path { stroke: var(--line-dark); }
 .grid-line { stroke: color-mix(in srgb, var(--line), white 45%); stroke-width: 1; }
@@ -454,8 +464,7 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
   .chart-panel { min-height: min(480px, calc(100dvh - 24px)); max-height: calc(100dvh - 24px); }
   .chart-heading { align-items: flex-start; flex-direction: column; }
   .live-stats { justify-content: flex-start; }
-  .scatter-controls { align-items: stretch; flex-direction: column; }
-  .scatter-controls select { width: 100%; }
+  .scatter-controls { align-items: flex-start; }
   .quantile-grid, .quantile-grid.is-percentiles { grid-template-columns: repeat(2, 1fr); }
   .quantile-cell { border-bottom: 1px solid var(--line); }
   .custom-quantiles { grid-template-columns: 1fr; }

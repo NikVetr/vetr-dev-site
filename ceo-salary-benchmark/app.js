@@ -34,7 +34,10 @@
     bins: 20,
     autoBins: true,
     view: "histogram",
-    scatterX: "expenses",
+    axisMode: "value",
+    histogramAxis: { numerator: "salary", denominator: "expenses" },
+    scatterXAxis: { numerator: "expenses", denominator: "staff" },
+    scatterYAxis: { numerator: "salary", denominator: "expenses" },
     chartColor: "tier",
     showContours: true,
     quantileGranularity: "quintiles",
@@ -70,6 +73,7 @@
   const wikipediaCache = new Map();
   let organizationPreviewHideTimer = 0;
   let helpTooltipGlobalListenersBound = false;
+  let activeAxisSelector = "";
 
   const refs = {
     stream: $("#stream-select"), measure: $("#measure-select"), measureField: $("#measure-field"),
@@ -82,13 +86,17 @@
     expenseBandwidthValue: $("#expense-bandwidth-value"), staffBandwidthValue: $("#staff-bandwidth-value"),
     recencyHalfLifeValue: $("#recency-halflife-value"), discreteWeightEditors: $("#discrete-weight-editors"),
     binField: $("#bin-field"), bins: $("#bin-count"), binValue: $("#bin-value"),
-    view: [...document.querySelectorAll('input[name="chart-view"]')], scatterControls: $("#scatter-controls"),
-    scatterX: $("#scatter-x"), chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
+    view: [...document.querySelectorAll('input[name="chart-view"]')], axisMode: [...document.querySelectorAll('input[name="axis-mode"]')],
+    scatterControls: $("#scatter-controls"), contourField: $("#contour-field"),
+    chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
     comparabilityProfileField: $("#comparability-profile-field"),
     weightProfileSlots: new Map(["comparability", "size", "staff", "recency"].map((key) => [key, $(`#weight-profile-${key}`)])),
     rpScaleReference: $("#rp-scale-reference"),
     reset: $("#reset-settings"), chart: $("#salary-chart"), chartWrap: $("#chart-wrap"),
     tooltip: $("#chart-tooltip"), chartTitle: $("#chart-title"), scatterCorrelations: $("#scatter-correlations"),
+    axisSelector: $("#axis-selector-popover"), axisSelectorTitle: $("#axis-selector-title"),
+    axisNumerator: $("#axis-numerator"), axisNumeratorLabel: $("#axis-numerator-label"), axisDenominator: $("#axis-denominator"),
+    axisDenominatorField: $("#axis-denominator-field"), axisSelectorClose: $("#axis-selector-close"),
     statN: $("#stat-n"), statNUnit: $("#stat-n-unit"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
     quantileGranularity: $("#quantile-granularity"), markCurve: $("#mark-curve"), quantileGrid: $("#quantile-grid"),
     customQuantilesField: $("#custom-quantiles-field"), customQuantiles: $("#custom-quantiles"),
@@ -412,7 +420,7 @@
     return state.inflationAdjusted ? row.range : row.nominalRange;
   }
 
-  function originalSalaryDisplay(row) {
+  function reportedSalaryDisplay(row) {
     if (rowStream(row) !== "jobAds" || row.nominalRange?.low == null || row.nominalRange?.high == null) {
       return compactMoney(salaryForBasis(row, false));
     }
@@ -423,6 +431,101 @@
   function priceBasisLabel() {
     return state.inflationAdjusted ? DATA.priceBasis : "Source-year USD";
   }
+
+  function compactNumber(value) {
+    if (value == null || !Number.isFinite(value)) return "—";
+    const absolute = Math.abs(value);
+    if (absolute >= 1_000) return new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(value);
+    if (absolute >= 10) return value.toLocaleString("en-US", { maximumFractionDigits: 1 });
+    if (absolute >= 1) return value.toLocaleString("en-US", { maximumFractionDigits: 2 });
+    if (absolute >= 0.01) return value.toLocaleString("en-US", { maximumFractionDigits: 3 });
+    return value.toPrecision(3);
+  }
+
+  const numericVariables = {
+    salary: {
+      shortLabel: "Salary", label: () => `Annual compensation (${priceBasisLabel()})`,
+      value: salary, format: compactMoney, fullFormat: money, logarithmic: false,
+    },
+    expenses: {
+      shortLabel: "Expenses", label: () => "Annual expenses",
+      value: (row) => row.expenses, format: compactMoney, fullFormat: money, logarithmic: true,
+    },
+    revenue: {
+      shortLabel: "Revenue", label: () => "Annual revenue",
+      value: (row) => row.revenue, format: compactMoney, fullFormat: money, logarithmic: true,
+    },
+    staff: {
+      shortLabel: "Staff", label: () => "Staff count",
+      value: (row) => row.staff, format: (value) => value == null ? "—" : Math.round(value).toLocaleString("en-US"),
+      fullFormat: (value) => value == null ? "—" : `${Math.round(value).toLocaleString("en-US")} staff`, logarithmic: true,
+    },
+    comparabilityScore: {
+      shortLabel: "Match score", label: () => "Match score",
+      value: (row) => row.comparabilityScore, format: (value) => value == null ? "—" : `${Math.round(value)}`,
+      fullFormat: (value) => value == null ? "—" : `${Number(value).toFixed(1)} / 100`, logarithmic: false,
+    },
+    compensationYear: {
+      shortLabel: "Evidence year", label: () => "Evidence year",
+      value: (row) => row.compensationYear, format: (value) => value == null ? "—" : `${Math.round(value)}`,
+      fullFormat: (value) => value == null ? "—" : `${Math.round(value)}`, logarithmic: false,
+    },
+  };
+
+  const axisStateKeys = { histogram: "histogramAxis", scatterX: "scatterXAxis", scatterY: "scatterYAxis" };
+
+  function axisExpression(axisKey) { return state[axisStateKeys[axisKey]]; }
+
+  function normalizeAxisExpressions() {
+    if (state.axisMode !== "ratio") return;
+    Object.values(axisStateKeys).forEach((stateKey) => {
+      const expression = state[stateKey];
+      if (expression.numerator !== expression.denominator) return;
+      expression.denominator = Object.keys(numericVariables).find((key) => key !== expression.numerator);
+    });
+  }
+
+  function axisDescriptor(axisKey) {
+    const expression = axisExpression(axisKey);
+    const numerator = numericVariables[expression.numerator] || numericVariables.salary;
+    const denominator = numericVariables[expression.denominator] || numericVariables.expenses;
+    if (state.axisMode === "value") {
+      return {
+        axisKey, label: numerator.label(), shortLabel: numerator.shortLabel, format: numerator.format,
+        fullFormat: numerator.fullFormat, logarithmic: numerator.logarithmic,
+        primaryLabel: (row) => expression.numerator === "salary" ? measureLabel(row) : numerator.label(),
+        value: (row) => numerator.value(row),
+      };
+    }
+    return {
+      axisKey,
+      label: `${numerator.shortLabel} / ${denominator.shortLabel}`,
+      shortLabel: `${numerator.shortLabel} / ${denominator.shortLabel}`,
+      format: compactNumber,
+      fullFormat: (value) => value == null || !Number.isFinite(value) ? "—" : value.toLocaleString("en-US", { maximumSignificantDigits: 5 }),
+      logarithmic: true,
+      primaryLabel: () => `${numerator.shortLabel} / ${denominator.shortLabel}`,
+      value: (row) => {
+        const top = numerator.value(row);
+        const bottom = denominator.value(row);
+        return Number.isFinite(top) && Number.isFinite(bottom) && top > 0 && bottom > 0 ? top / bottom : null;
+      },
+    };
+  }
+
+  function axisItems(axisKey) {
+    const descriptor = axisDescriptor(axisKey);
+    return normalizePlottedWeights(selectedRows().map((item) => ({ ...item, value: descriptor.value(item.row) }))
+      .filter((item) => Number.isFinite(item.value) && item.value > 0));
+  }
+
+  function normalizePlottedWeights(items) {
+    const mean = items.length ? items.reduce((sum, item) => sum + item.weight, 0) / items.length : 0;
+    return mean ? items.map((item) => ({ ...item, weight: item.weight / mean })) : items;
+  }
+
+  function analysisAxisKey() { return state.view === "scatter" ? "scatterY" : "histogram"; }
+  function analysisItems() { return axisItems(analysisAxisKey()); }
 
   function baseWeight(row) {
     const latestYear = Math.max(...rows().map((item) => item.compensationYear || 0));
@@ -681,8 +784,10 @@
     if (state.fit === "gamma") {
       const mean = weightedMean(items);
       const variance = items.reduce((sum, item) => sum + (item.value - mean) ** 2 * item.weight, 0) / totalWeight;
-      const shape = Math.max(mean ** 2 / Math.max(variance, 1), 0.01);
-      const scale = Math.max(variance / mean, 1);
+      const varianceFloor = Math.max(mean ** 2 * 1e-9, Number.EPSILON);
+      const stableVariance = Math.max(variance, varianceFloor);
+      const shape = Math.max(mean ** 2 / stableVariance, 0.01);
+      const scale = Math.max(stableVariance / mean, Number.EPSILON);
       return {
         quantile: (p) => {
           let low = 0;
@@ -712,9 +817,10 @@
   }
 
   function appendRpMarker(svg, x, y, item, context = {}, size = 26) {
+    const primaryFormat = context.primaryFormat || money;
     const group = svgElement("g", {
       class: "rp-chart-marker", transform: `translate(${x} ${y})`, tabindex: "0", role: "button",
-      "aria-label": `Rethink Priorities reference, ${money(item.value)}; excluded from calculations`,
+      "aria-label": `Rethink Priorities reference, ${primaryFormat(item.value)}; excluded from calculations`,
     });
     group.append(svgElement("image", {
       href: "assets/rethink-priorities-favicon.png", x: -size / 2, y: -size / 2,
@@ -778,7 +884,7 @@
       const density = document.createElement("span"); density.innerHTML = `<i class="line-swatch"></i> ${state.fit === "gamma" ? "Gamma" : "Lognormal"} density`;
       refs.chartLegend.append(density);
     }
-    const rug = document.createElement("span"); rug.innerHTML = '<i class="rug-swatch"></i> Individual salaries'; refs.chartLegend.append(rug);
+    const rug = document.createElement("span"); rug.innerHTML = '<i class="rug-swatch"></i> Individual values'; refs.chartLegend.append(rug);
   }
 
   function quantilePercentiles() {
@@ -790,10 +896,10 @@
     return valid ? [...new Set(tokens)].sort((a, b) => a - b) : [];
   }
 
-  function appendCurveQuantileMarks(svg, model, percentiles, xScale, yScale, margin, sumWeight, binWidthValue, domainMin, domainMax) {
+  function appendCurveQuantileMarks(svg, model, percentiles, xScale, yScale, margin, sumWeight, binWidthValue, domainMin, domainMax, formatter) {
     if (!state.markCurve || !model || !percentiles.length || percentiles.length >= 21) return;
     const expectedWeight = (value) => model.density(value) * sumWeight * binWidthValue;
-    const delta = Math.max((domainMax - domainMin) / 1500, 1);
+    const delta = Math.max((domainMax - domainMin) / 1500, Number.EPSILON);
     const candidates = [];
     percentiles.forEach((percentile) => {
       const value = model.quantile(percentile / 100);
@@ -829,7 +935,7 @@
       percentileSubscript.textContent = Number.isInteger(percentile) ? percentile : percentile.toFixed(1);
       percentileLine.append(percentilePrefix, percentileSubscript);
       const amountLine = svgElement("text", { x: 0, y: 13, "text-anchor": "middle", class: "curve-quantile-label amount" });
-      amountLine.textContent = `$${Math.round(value / 1000)}K`;
+      amountLine.textContent = formatter(value);
       label.append(percentileLine, amountLine);
       label.setAttribute("visibility", "hidden");
       svg.append(label);
@@ -856,7 +962,7 @@
     });
   }
 
-  function appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom) {
+  function appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom, formatter) {
     if (!state.markCurve || state.fit !== "empirical" || !percentiles.length || percentiles.length >= 21) return;
     const candidates = percentiles.map((percentile) => {
       const value = weightedQuantile(items, percentile / 100);
@@ -874,7 +980,7 @@
       percentileSubscript.textContent = Number.isInteger(percentile) ? percentile : percentile.toFixed(1);
       percentileLine.append(percentilePrefix, percentileSubscript);
       const amountLine = svgElement("text", { x: 0, y: -4, "text-anchor": "middle", class: "empirical-quantile-label amount" });
-      amountLine.textContent = `$${Math.round(value / 1000)}K`;
+      amountLine.textContent = formatter(value);
       label.append(percentileLine, amountLine);
       label.setAttribute("visibility", "hidden");
       svg.append(label);
@@ -909,13 +1015,98 @@
     });
   }
 
+  function appendAxisControl(svg, axisKey, label, attributes) {
+    const group = svgElement("g", {
+      class: "axis-variable-control", role: "button", tabindex: "0",
+      "aria-label": `Change ${axisKey === "scatterY" ? "vertical" : "horizontal"} axis; currently ${label}`,
+    });
+    const text = svgElement("text", { ...attributes, class: "axis-variable-label" });
+    text.textContent = label;
+    group.append(text);
+    svg.append(group);
+    const textBounds = text.getBBox();
+    const isVertical = Boolean(attributes.transform);
+    const triangleX = isVertical ? Number(attributes.x) + textBounds.width / 2 + 7 : textBounds.x + textBounds.width + 7;
+    const triangleY = isVertical ? Number(attributes.y) - 3 : Number(attributes.y) - 4;
+    const triangle = svgElement("path", {
+      d: `M${triangleX},${triangleY} l7,0 l-3.5,5 z`, class: "axis-variable-triangle",
+    });
+    if (attributes.transform) triangle.setAttribute("transform", attributes.transform);
+    group.append(triangle);
+    const activate = (event) => {
+      if (event.type === "keydown" && !["Enter", " "].includes(event.key)) return;
+      event.preventDefault();
+      openAxisSelector(axisKey, group);
+    };
+    group.addEventListener("click", activate);
+    group.addEventListener("keydown", activate);
+  }
+
+  function populateAxisSelector(axisKey) {
+    const expression = axisExpression(axisKey);
+    const options = Object.entries(numericVariables).map(([value, definition]) => {
+      const option = document.createElement("option");
+      option.value = value; option.textContent = definition.label();
+      return option;
+    });
+    refs.axisNumerator.replaceChildren(...options.map((option) => option.cloneNode(true)));
+    refs.axisDenominator.replaceChildren(...options.map((option) => option.cloneNode(true)));
+    refs.axisNumerator.value = expression.numerator;
+    refs.axisDenominator.value = expression.denominator;
+    refs.axisNumeratorLabel.textContent = state.axisMode === "ratio" ? "Numerator" : "Measure";
+    refs.axisDenominatorField.hidden = state.axisMode !== "ratio";
+    refs.axisSelectorTitle.textContent = axisKey === "histogram" ? "Histogram axis"
+      : axisKey === "scatterX" ? "Horizontal axis" : "Vertical axis";
+  }
+
+  function openAxisSelector(axisKey, anchor) {
+    activeAxisSelector = axisKey;
+    populateAxisSelector(axisKey);
+    refs.axisSelector.hidden = false;
+    const wrap = refs.chartWrap.getBoundingClientRect();
+    const target = anchor.getBoundingClientRect();
+    const width = refs.axisSelector.offsetWidth;
+    const height = refs.axisSelector.offsetHeight;
+    const preferredLeft = target.left - wrap.left + target.width / 2 - width / 2;
+    const preferredTop = target.top - wrap.top - height - 8;
+    refs.axisSelector.style.left = `${clamp(preferredLeft, 8, Math.max(8, wrap.width - width - 8))}px`;
+    refs.axisSelector.style.top = `${clamp(preferredTop, 8, Math.max(8, wrap.height - height - 8))}px`;
+    refs.axisNumerator.focus();
+  }
+
+  function closeAxisSelector() {
+    activeAxisSelector = "";
+    refs.axisSelector.hidden = true;
+  }
+
+  function updateAxisExpression(part, value) {
+    if (!activeAxisSelector || !numericVariables[value]) return;
+    const expression = axisExpression(activeAxisSelector);
+    expression[part] = value;
+    if (state.axisMode === "ratio" && expression.numerator === expression.denominator) {
+      const alternative = Object.keys(numericVariables).find((key) => key !== value);
+      expression[part === "numerator" ? "denominator" : "numerator"] = alternative;
+    }
+    if (activeAxisSelector === "histogram") state.autoBins = true;
+    closeAxisSelector();
+    renderAll();
+  }
+
+  function paddedDomain(values, relativePadding = 0.08, positive = true) {
+    const low = Math.min(...values); const high = Math.max(...values);
+    const scale = Math.max(Math.abs(low), Math.abs(high), Number.EPSILON);
+    const padding = Math.max((high - low) * relativePadding, scale * 0.025, Number.EPSILON);
+    return [positive ? Math.max(0, low - padding) : low - padding, high + padding];
+  }
+
   function renderHistogram() {
-    const items = selectedRows();
+    const descriptor = axisDescriptor("histogram");
+    const items = axisItems("histogram");
     const svg = refs.chart;
     svg.replaceChildren();
     const colors = categoryColors(items);
     renderHistogramLegend(colors);
-    $("#chart-description").textContent = "A weighted histogram in which each block represents one organization.";
+    $("#chart-description").textContent = `A weighted histogram of ${descriptor.label.toLowerCase()} in which each block represents one organization.`;
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(330, refs.chartWrap.clientHeight || 360);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -929,19 +1120,19 @@
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
       empty.textContent = "No organizations have a value for the current selection.";
       svg.append(empty);
+      appendAxisControl(svg, "histogram", descriptor.label, {
+        x: width / 2 - 5, y: height - 6, "text-anchor": "middle",
+      });
       refs.statN.textContent = "0"; refs.statNeff.textContent = "0"; refs.statCenter.textContent = "—";
       return;
     }
 
     const rpRow = DATA.rpReference;
-    const rpValue = salary(rpRow);
+    const rpValue = descriptor.value(rpRow);
+    const rpAvailable = Number.isFinite(rpValue) && rpValue > 0;
     const rpItem = { row: rpRow, value: rpValue, weight: 0 };
-    const values = [...items.map((item) => item.value), rpValue].filter(Number.isFinite);
-    const rawMin = Math.min(...values);
-    const rawMax = Math.max(...values);
-    const pad = Math.max((rawMax - rawMin) * 0.08, 25_000);
-    const domainMin = Math.max(0, Math.floor((rawMin - pad) / 50_000) * 50_000);
-    const domainMax = Math.ceil((rawMax + pad) / 50_000) * 50_000;
+    const values = [...items.map((item) => item.value), ...(rpAvailable ? [rpValue] : [])];
+    const [domainMin, domainMax] = paddedDomain(values);
     const xScale = (value) => margin.left + ((value - domainMin) / (domainMax - domainMin)) * innerWidth;
     if (state.autoBins) {
       state.bins = squareBinCount(items, domainMin, domainMax, innerWidth, innerHeight);
@@ -977,10 +1168,10 @@
     }
 
     const plotBottom = margin.top + innerHeight;
-    appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom);
-    const rpX = xScale(rpValue);
+    appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom, descriptor.format);
+    const rpX = rpAvailable ? xScale(rpValue) : null;
     const rpLogoY = margin.top + 14;
-    svg.append(svgElement("line", {
+    if (rpAvailable) svg.append(svgElement("line", {
       x1: rpX, x2: rpX, y1: rpLogoY + 14, y2: plotBottom,
       class: "rp-reference-guide", "aria-hidden": "true",
     }));
@@ -995,7 +1186,7 @@
         const rect = svgElement("rect", {
           x: x0, y: y0, width: Math.max(1, x1 - x0), height: Math.max(2, y1 - y0),
           fill: colors.get(category), class: `bar-block${state.focusedId === item.row.id ? " is-focused" : ""}`,
-          tabindex: "0", role: "button", "aria-label": `${item.row.organization}, ${money(item.value)}`,
+          tabindex: "0", role: "button", "aria-label": `${item.row.organization}, ${descriptor.fullFormat(item.value)}`,
         });
         const binLow = domainMin + bin.index * binWidthValue;
         const binHigh = binLow + binWidthValue;
@@ -1003,8 +1194,9 @@
           highlightRug(item.row.id, true);
           showTooltip(event, item, {
             category,
-            chartDetail: ["Histogram bin", `${compactMoney(binLow)}–${compactMoney(binHigh)}`],
-            rankDetails: [["Salary percentile", percentilePositionLabel(items, item.value, (candidate) => candidate.value)]],
+            primaryLabel: descriptor.primaryLabel(item.row), primaryFormat: descriptor.fullFormat,
+            chartDetail: ["Histogram bin", `${descriptor.format(binLow)}–${descriptor.format(binHigh)}`],
+            rankDetails: [[`${descriptor.shortLabel} percentile`, percentilePositionLabel(items, item.value, (candidate) => candidate.value)]],
           });
         });
         rect.addEventListener("pointermove", (event) => positionTooltip(event));
@@ -1028,7 +1220,7 @@
       svg.append(svgElement("path", { d: path, class: "density-line" }));
       appendCurveQuantileMarks(
         svg, model, percentiles, xScale, yScale, margin,
-        sumWeight, binWidthValue, domainMin, domainMax,
+        sumWeight, binWidthValue, domainMin, domainMax, descriptor.format,
       );
     }
 
@@ -1045,8 +1237,9 @@
       svg.append(svgElement("line", { x1: x, x2: x, y1: margin.top, y2: plotBottom, class: "quantile-guide" }));
     }
 
-    appendRpMarker(svg, rpX, rpLogoY, rpItem, {
-      rankDetails: [["Salary percentile", percentilePositionLabel(items, rpValue, (candidate) => candidate.value, true)]],
+    if (rpAvailable) appendRpMarker(svg, rpX, rpLogoY, rpItem, {
+      primaryLabel: descriptor.primaryLabel(rpRow), primaryFormat: descriptor.fullFormat,
+      rankDetails: [[`${descriptor.shortLabel} percentile`, percentilePositionLabel(items, rpValue, (candidate) => candidate.value, true)]],
     });
 
     const tickCount = width < 650 ? 5 : 8;
@@ -1054,12 +1247,12 @@
       const value = domainMin + (i / tickCount) * (domainMax - domainMin);
       const x = xScale(value);
       const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#52879E", "font-size": 10 });
-      label.textContent = compactMoney(value);
+      label.textContent = descriptor.format(value);
       svg.append(label);
     }
-    const axisTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
-    axisTitle.textContent = `Annual compensation (${priceBasisLabel()})`;
-    svg.append(axisTitle);
+    appendAxisControl(svg, "histogram", descriptor.label, {
+      x: margin.left + innerWidth / 2 - 5, y: height - 6, "text-anchor": "middle",
+    });
     const yAxisTitle = svgElement("text", {
       x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`,
       "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700,
@@ -1071,16 +1264,8 @@
     const squared = items.reduce((sum, item) => sum + item.weight ** 2, 0);
     refs.statN.textContent = items.length;
     refs.statNeff.textContent = squared ? (totalWeight ** 2 / squared).toFixed(1) : "0";
-    refs.statCenter.textContent = compactMoney(distributionQuantile(items, 0.5));
+    refs.statCenter.textContent = descriptor.format(distributionQuantile(items, 0.5));
   }
-
-  const scatterVariables = {
-    expenses: { label: "Annual expenses", format: compactMoney, logarithmic: true },
-    revenue: { label: "Annual revenue", format: compactMoney, logarithmic: true },
-    staff: { label: "Staff count", format: (value) => Math.round(value).toLocaleString(), logarithmic: true },
-    comparabilityScore: { label: "Comparability score", format: (value) => Number(value).toFixed(0), logarithmic: false },
-    compensationYear: { label: "Evidence year", format: (value) => Number(value).toFixed(0), logarithmic: false },
-  };
   const categoryPalette = ["#2D6885", "#44B0DF", "#75CCEC", "#52879E", "#3E454A", "#B7E2F2"];
 
   function humanizeCategory(value) {
@@ -1222,8 +1407,8 @@
     return result;
   }
 
-  function weightedCorrelations(items, xAccessor) {
-    const values = items.map((item, index) => ({ index, x: xAccessor(item), y: item.value, weight: item.weight }));
+  function weightedCorrelations(items, xAccessor, yAccessor) {
+    const values = items.map((item, index) => ({ index, x: xAccessor(item), y: yAccessor(item), weight: item.weight }));
     const pearson = weightedPearson(values);
     const xRanks = weightedRanks(values, (item) => item.x);
     const yRanks = weightedRanks(values, (item) => item.y);
@@ -1238,18 +1423,19 @@
   }
 
   function renderScatter() {
-    const variable = scatterVariables[state.scatterX];
-    const items = selectedRows().filter((item) => {
-      const value = item.row[state.scatterX];
-      return value != null && Number.isFinite(value) && (!variable.logarithmic || value > 0);
-    });
+    const xDescriptor = axisDescriptor("scatterX");
+    const yDescriptor = axisDescriptor("scatterY");
+    const items = normalizePlottedWeights(selectedRows().map((item) => ({
+      ...item, xValue: xDescriptor.value(item.row), yValue: yDescriptor.value(item.row),
+    })).filter((item) => Number.isFinite(item.xValue) && item.xValue > 0 && Number.isFinite(item.yValue) && item.yValue > 0)
+      .map((item) => ({ ...item, value: item.yValue })));
     const rpRow = DATA.rpReference;
-    const rpXValue = rpRow[state.scatterX];
-    const rpValue = salary(rpRow);
-    const rpAvailable = Number.isFinite(rpXValue) && Number.isFinite(rpValue) && (!variable.logarithmic || rpXValue > 0);
+    const rpXValue = xDescriptor.value(rpRow);
+    const rpValue = yDescriptor.value(rpRow);
+    const rpAvailable = Number.isFinite(rpXValue) && rpXValue > 0 && Number.isFinite(rpValue) && rpValue > 0;
     const svg = refs.chart;
     svg.replaceChildren();
-    $("#chart-description").textContent = `A scatterplot of annual compensation against ${variable.label.toLowerCase()}.`;
+    $("#chart-description").textContent = `A scatterplot of ${yDescriptor.label.toLowerCase()} against ${xDescriptor.label.toLowerCase()}.`;
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(290, refs.chartWrap.clientHeight || 340);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -1258,51 +1444,57 @@
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
-      empty.textContent = `No selected organizations report ${variable.label.toLowerCase()}.`;
+      empty.textContent = "No selected organizations have values for both plotted axes.";
       svg.append(empty); refs.chartLegend.replaceChildren();
+      appendAxisControl(svg, "scatterX", `${xDescriptor.label}${xDescriptor.logarithmic ? " (log scale)" : ""}`, {
+        x: width / 2 - 5, y: height - 6, "text-anchor": "middle",
+      });
+      appendAxisControl(svg, "scatterY", `${yDescriptor.label}${yDescriptor.logarithmic ? " (log scale)" : ""}`, {
+        x: 14, y: height / 2, transform: `rotate(-90 14 ${height / 2})`, "text-anchor": "middle",
+      });
       updateCorrelationSummary();
       refs.statN.textContent = "0"; refs.statNeff.textContent = "0"; refs.statCenter.textContent = "—";
       return;
     }
-    const xTransform = (value) => variable.logarithmic ? Math.log(value) : value;
-    const transformedX = items.map((item) => xTransform(item.row[state.scatterX]));
-    const salaries = items.map((item) => item.value);
-    if (rpAvailable) { transformedX.push(xTransform(rpXValue)); salaries.push(rpValue); }
-    const paddedDomain = (values, minimumPadding) => {
-      const low = Math.min(...values); const high = Math.max(...values);
-      const padding = Math.max((high - low) * 0.08, minimumPadding);
-      return [low - padding, high + padding];
-    };
-    const [xMin, xMax] = paddedDomain(transformedX, variable.logarithmic ? 0.08 : 1);
-    const [rawYMin, rawYMax] = paddedDomain(salaries, 25_000);
-    const yMin = Math.max(0, rawYMin); const yMax = rawYMax;
+    const xTransform = (value) => xDescriptor.logarithmic ? Math.log(value) : value;
+    const yTransform = (value) => yDescriptor.logarithmic ? Math.log(value) : value;
+    const transformedX = items.map((item) => xTransform(item.xValue));
+    const transformedY = items.map((item) => yTransform(item.yValue));
+    if (rpAvailable) { transformedX.push(xTransform(rpXValue)); transformedY.push(yTransform(rpValue)); }
+    const [xMin, xMax] = paddedDomain(transformedX, 0.08, false);
+    const [yMin, yMax] = paddedDomain(transformedY, 0.08, false);
     const xScale = (value) => margin.left + ((xTransform(value) - xMin) / (xMax - xMin)) * innerWidth;
-    const yScale = (value) => margin.top + innerHeight - ((value - yMin) / (yMax - yMin)) * innerHeight;
+    const yScale = (value) => margin.top + innerHeight - ((yTransform(value) - yMin) / (yMax - yMin)) * innerHeight;
     for (let index = 0; index <= 4; index += 1) {
-      const yValue = yMin + (index / 4) * (yMax - yMin);
+      const transformed = yMin + (index / 4) * (yMax - yMin);
+      const yValue = yDescriptor.logarithmic ? Math.exp(transformed) : transformed;
       const y = yScale(yValue);
       svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: y, y2: y, class: "grid-line" }));
       const label = svgElement("text", { x: margin.left - 8, y: y + 3, "text-anchor": "end", fill: "#52879E", "font-size": 9 });
-      label.textContent = compactMoney(yValue); svg.append(label);
+      label.textContent = yDescriptor.format(yValue); svg.append(label);
     }
     const plotBottom = margin.top + innerHeight;
     for (let index = 0; index <= 5; index += 1) {
       const transformed = xMin + (index / 5) * (xMax - xMin);
-      const value = variable.logarithmic ? Math.exp(transformed) : transformed;
+      const value = xDescriptor.logarithmic ? Math.exp(transformed) : transformed;
       const x = margin.left + (index / 5) * innerWidth;
       svg.append(svgElement("line", { x1: x, x2: x, y1: plotBottom, y2: plotBottom + 4, stroke: "#52879E" }));
       const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#52879E", "font-size": 9 });
-      label.textContent = variable.format(value); svg.append(label);
+      label.textContent = xDescriptor.format(value); svg.append(label);
     }
     const clipId = "scatter-plot-clip";
     const defs = svgElement("defs");
     const clip = svgElement("clipPath", { id: clipId });
     clip.append(svgElement("rect", { x: margin.left, y: margin.top, width: innerWidth, height: innerHeight }));
     defs.append(clip); svg.append(defs);
-    const points = items.map((item) => ({ item, x: xScale(item.row[state.scatterX]), y: yScale(item.value) }));
+    const points = items.map((item) => ({ item, x: xScale(item.xValue), y: yScale(item.yValue) }));
     const contoursShown = appendCovarianceContours(svg, points, clipId);
+    if (state.hoverQuantile != null && state.hoverQuantile > 0) {
+      const y = yScale(state.hoverQuantile);
+      svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: y, y2: y, class: "quantile-guide" }));
+    }
     const colors = categoryColors(items);
-    const correlations = weightedCorrelations(items, (item) => xTransform(item.row[state.scatterX]));
+    const correlations = weightedCorrelations(items, (item) => xTransform(item.xValue), (item) => yTransform(item.yValue));
     points.forEach(({ item, x, y }) => {
       const category = chartCategory(item.row);
       const baseRadius = 4.5;
@@ -1310,13 +1502,14 @@
       const point = svgElement("circle", {
         cx: x, cy: y, r: radius, fill: colors.get(category), "data-weight": item.weight.toFixed(6),
         class: `scatter-point${state.focusedId === item.row.id ? " is-focused" : ""}`, tabindex: "0", role: "button",
-        "aria-label": `${item.row.organization}, ${money(item.value)}, ${variable.label} ${variable.format(item.row[state.scatterX])}`,
+        "aria-label": `${item.row.organization}, ${yDescriptor.label} ${yDescriptor.fullFormat(item.yValue)}, ${xDescriptor.label} ${xDescriptor.fullFormat(item.xValue)}`,
       });
       point.addEventListener("pointerenter", (event) => showTooltip(event, item, {
-        category, chartDetail: [variable.label, variable.format(item.row[state.scatterX])],
+        category, primaryLabel: yDescriptor.primaryLabel(item.row), primaryFormat: yDescriptor.fullFormat,
+        chartDetail: [xDescriptor.label, xDescriptor.fullFormat(item.xValue)],
         rankDetails: [
-          ["Salary percentile", percentilePositionLabel(items, item.value, (candidate) => candidate.value)],
-          [`${variable.label} percentile`, percentilePositionLabel(items, item.row[state.scatterX], (candidate) => candidate.row[state.scatterX])],
+          [`${yDescriptor.shortLabel} percentile`, percentilePositionLabel(items, item.yValue, (candidate) => candidate.yValue)],
+          [`${xDescriptor.shortLabel} percentile`, percentilePositionLabel(items, item.xValue, (candidate) => candidate.xValue)],
         ],
       }));
       point.addEventListener("pointermove", positionTooltip); point.addEventListener("pointerleave", hideTooltip);
@@ -1326,24 +1519,27 @@
     });
     if (rpAvailable) {
       appendRpMarker(svg, xScale(rpXValue), yScale(rpValue), { row: rpRow, value: rpValue, weight: 0 }, {
-        chartDetail: [variable.label, variable.format(rpXValue)],
+        primaryLabel: yDescriptor.primaryLabel(rpRow), primaryFormat: yDescriptor.fullFormat,
+        chartDetail: [xDescriptor.label, xDescriptor.fullFormat(rpXValue)],
         rankDetails: [
-          ["Salary percentile", percentilePositionLabel(items, rpValue, (candidate) => candidate.value, true)],
-          [`${variable.label} percentile`, percentilePositionLabel(items, rpXValue, (candidate) => candidate.row[state.scatterX], true)],
+          [`${yDescriptor.shortLabel} percentile`, percentilePositionLabel(items, rpValue, (candidate) => candidate.yValue, true)],
+          [`${xDescriptor.shortLabel} percentile`, percentilePositionLabel(items, rpXValue, (candidate) => candidate.xValue, true)],
         ],
       }, 28);
     }
     updateCorrelationSummary(correlations);
-    const xTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
-    xTitle.textContent = `${variable.label}${variable.logarithmic ? " (log scale)" : ""}`; svg.append(xTitle);
-    const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
-    yTitle.textContent = `Annual compensation (${priceBasisLabel()})`; svg.append(yTitle);
+    appendAxisControl(svg, "scatterX", `${xDescriptor.label}${xDescriptor.logarithmic ? " (log scale)" : ""}`, {
+      x: margin.left + innerWidth / 2 - 5, y: height - 6, "text-anchor": "middle",
+    });
+    appendAxisControl(svg, "scatterY", `${yDescriptor.label}${yDescriptor.logarithmic ? " (log scale)" : ""}`, {
+      x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle",
+    });
     renderScatterLegend(colors, contoursShown, items);
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     const squared = items.reduce((sum, item) => sum + item.weight ** 2, 0);
     refs.statN.textContent = items.length;
     refs.statNeff.textContent = squared ? (totalWeight ** 2 / squared).toFixed(1) : "0";
-    refs.statCenter.textContent = compactMoney(distributionQuantile(items, 0.5));
+    refs.statCenter.textContent = yDescriptor.format(distributionQuantile(items, 0.5));
   }
 
   function renderChart() {
@@ -1374,14 +1570,16 @@
       !context.reference && row.comparabilityScore != null ? ["Match score", `${row.comparabilityScore} / 100`] : null,
       !context.reference ? ["Effective weight", item.weight > 0 && item.weight < 0.01 ? "<0.01" : item.weight.toFixed(2)] : null,
     ].filter(Boolean);
+    const primaryLabel = context.primaryLabel || measureLabel(row);
+    const primaryFormat = context.primaryFormat || money;
     refs.tooltip.innerHTML = `
       <div class="chart-tooltip-heading">
         <strong>${escapeHtml(row.organization)}</strong>
         <span>${escapeHtml(row.title || "Executive role")}</span>
       </div>
       <div class="chart-tooltip-value">
-        <span>${escapeHtml(measureLabel(row))}</span>
-        <strong>${money(item.value)}</strong>
+        <span>${escapeHtml(primaryLabel)}</span>
+        <strong>${escapeHtml(primaryFormat(item.value))}</strong>
       </div>
       <dl>${details.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>
       <p class="chart-tooltip-hint">Click the mark to focus ${context.reference ? "the RP reference row" : "its row"} in the table.</p>`;
@@ -1406,11 +1604,12 @@
   function hideTooltip() { refs.tooltip.hidden = true; }
 
   function renderQuantiles() {
-    const items = selectedRows();
+    const descriptor = axisDescriptor(analysisAxisKey());
+    const items = analysisItems();
     const model = fitModel(items);
     refs.quantileBasis.textContent = state.fit === "empirical"
-      ? "Derived from weighted empirical ranks"
-      : `Derived from the fitted ${state.fit} distribution`;
+      ? `Derived from weighted empirical ranks for ${descriptor.shortLabel}`
+      : `Derived from the fitted ${state.fit} distribution for ${descriptor.shortLabel}`;
     refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
     const percentiles = quantilePercentiles();
     if (state.quantileGranularity === "custom") {
@@ -1426,8 +1625,8 @@
       button.type = "button";
       button.className = "quantile-cell";
       const label = percentileParts(percentile);
-      button.innerHTML = `<span>${label.number}<sup>${label.suffix}</sup> percentile</span><strong>${compactMoney(value)}</strong>`;
-      button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}`);
+      button.innerHTML = `<span>${label.number}<sup>${label.suffix}</sup> percentile</span><strong>${descriptor.format(value)}</strong>`;
+      button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${descriptor.fullFormat(value)}`);
       button.addEventListener("pointerenter", () => { state.hoverQuantile = value; renderChart(); });
       button.addEventListener("pointerleave", () => { state.hoverQuantile = null; renderChart(); });
       button.addEventListener("focus", () => { state.hoverQuantile = value; renderChart(); });
@@ -1455,7 +1654,7 @@
       const value = (row) => {
         if (state.sortKey === "tier") return tierSortValue(row.tier);
         if (state.sortKey === "adjustedSalary") return salaryForBasis(row, true) ?? -Infinity;
-        if (state.sortKey === "originalSalary") return salaryForBasis(row, false) ?? -Infinity;
+        if (state.sortKey === "reportedSalary") return salaryForBasis(row, false) ?? -Infinity;
         if (state.sortKey === "salary") return salary(row) ?? -Infinity;
         if (state.sortKey === "weight") return weightMap.get(row.id) || 0;
         if (["expenses", "staff", "comparabilityScore", "compensationYear"].includes(state.sortKey)) return row[state.sortKey] ?? -Infinity;
@@ -1591,16 +1790,16 @@
     tr.className = "rp-reference-row";
     tr.setAttribute("aria-label", "Rethink Priorities 2024 Form 990 reference profile; excluded from the peer distribution");
     const values = [
-      "", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)), compactMoney(salaryForBasis(reference, false)),
+      "", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)),
       compactMoney(reference.expenses), String(reference.staff), "", "", reference.tier, "—", reference.location, "—", reference.structure,
-      String(reference.compensationYear), reference.sourceType,
+      String(reference.compensationYear), reference.sourceType, reportedSalaryDisplay(reference),
     ];
     values.forEach((value, index) => {
       const td = document.createElement("td");
       td.textContent = value;
       if (index === 0) td.className = "check-column";
       if (index === 1) td.className = "rp-reference-name";
-      if (index === 6) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
+      if (index === 5) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
       tr.append(td);
     });
     const source = document.createElement("td");
@@ -1679,10 +1878,10 @@
       adjustedSalaryCell.className = "money-cell adjusted-salary-cell";
       adjustedSalaryCell.textContent = compactMoney(salaryForBasis(row, true));
       adjustedSalaryCell.title = `${money(salaryForBasis(row, true))} in ${DATA.priceBasis}`;
-      const originalSalaryCell = document.createElement("td");
-      originalSalaryCell.className = "money-cell original-salary-cell";
-      originalSalaryCell.textContent = originalSalaryDisplay(row);
-      originalSalaryCell.title = rowStream(row) === "jobAds"
+      const reportedSalaryCell = document.createElement("td");
+      reportedSalaryCell.className = "money-cell reported-salary-cell";
+      reportedSalaryCell.textContent = reportedSalaryDisplay(row);
+      reportedSalaryCell.title = rowStream(row) === "jobAds"
         ? `${money(row.nominalRange?.low)}–${money(row.nominalRange?.high)} advertised in the source`
         : `${money(salaryForBasis(row, false))} reported in the source-year filing`;
 
@@ -1735,7 +1934,7 @@
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
       }
-      tr.append(toggleCell, org, title, adjustedSalaryCell, originalSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, source);
+      tr.append(toggleCell, org, title, adjustedSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, reportedSalaryCell, source);
       refs.tableBody.append(tr);
     });
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
@@ -2166,14 +2365,14 @@
     const isJobs = state.stream === "jobAds";
     const isCombined = state.stream === "combined";
     refs.measureField.hidden = isJobs || isCombined;
-    refs.chartTitle.textContent = isCombined
-      ? "Schedule J base salaries + posting midpoints"
-      : isJobs
-        ? "Validated CEO / ED posting midpoints"
-        : { base: "Validated Schedule J base salaries", cash: "Validated Part VII cash / W-2 proxies", total: "Validated filing total compensation" }[state.measure];
+    const plotted = axisDescriptor(analysisAxisKey());
+    refs.chartTitle.textContent = state.view === "scatter"
+      ? `${plotted.shortLabel} by ${axisDescriptor("scatterX").shortLabel}`
+      : `Distribution of ${plotted.shortLabel}`;
     refs.statNUnit.textContent = isCombined ? "observations" : "organizations";
     refs.priceBasisStatus.textContent = priceBasisLabel();
     refs.scatterControls.hidden = state.view !== "scatter";
+    refs.contourField.hidden = state.view !== "scatter";
     refs.binField.hidden = state.view !== "histogram";
     refs.sampleDescription.textContent = {
       primary: "Rows retained for the validated analysis after source and role-structure review.",
@@ -2196,7 +2395,7 @@
     refs.binValue.value = state.bins;
   }
 
-  const URL_STATE_VERSION = 3;
+  const URL_STATE_VERSION = 4;
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
@@ -2207,6 +2406,7 @@
   const URL_SAMPLE_CODES = Object.freeze({ primary: "p", sensitivity: "s", clean: "c", tierA: "a", observed: "o" });
   const URL_FIT_CODES = Object.freeze({ empirical: "e", lognormal: "l", gamma: "g" });
   const URL_QUANTILE_CODES = Object.freeze({ quintiles: "q", deciles: "d", percentiles: "p", custom: "c" });
+  const URL_VARIABLE_CODES = Object.freeze({ salary: "s", expenses: "e", revenue: "r", staff: "f", comparabilityScore: "m", compensationYear: "y" });
   const reverseCodes = (codes) => Object.fromEntries(Object.entries(codes).map(([key, value]) => [value, key]));
   const URL_WEIGHT_KEYS = reverseCodes(URL_WEIGHT_CODES);
   const URL_FILTER_KEYS = reverseCodes(URL_FILTER_CODES);
@@ -2215,6 +2415,7 @@
   const URL_SAMPLE_KEYS = reverseCodes(URL_SAMPLE_CODES);
   const URL_FIT_KEYS = reverseCodes(URL_FIT_CODES);
   const URL_QUANTILE_KEYS = reverseCodes(URL_QUANTILE_CODES);
+  const URL_VARIABLE_KEYS = reverseCodes(URL_VARIABLE_CODES);
   const allShareRows = [...DATA.incumbents, ...DATA.jobAds];
   const shareRowCodes = new Map();
   let urlSyncReady = false;
@@ -2283,6 +2484,15 @@
     if (!state.inflationAdjusted) payload.n = 1;
     if (state.sample !== "primary") payload.p = URL_SAMPLE_CODES[state.sample];
     if (state.fit !== "lognormal") payload.g = URL_FIT_CODES[state.fit];
+    if (state.axisMode === "ratio") payload.a = 1;
+    const expressionCode = (expression) => `${URL_VARIABLE_CODES[expression.numerator]}${URL_VARIABLE_CODES[expression.denominator]}`;
+    const quantileExpression = state.view === "scatter" ? state.scatterYAxis : state.histogramAxis;
+    const nondefaultQuantileAxis = quantileExpression.numerator !== "salary"
+      || (state.axisMode === "ratio" && quantileExpression.denominator !== "expenses");
+    if (nondefaultQuantileAxis) {
+      if (state.view === "scatter") { payload.k = expressionCode(quantileExpression); payload.l = 1; }
+      else payload.h = expressionCode(quantileExpression);
+    }
     if (state.weightings.size) payload.w = [...state.weightings].map((key) => URL_WEIGHT_CODES[key]).join("");
     if (Object.keys(parameters).length) payload.x = parameters;
     if (state.quantileGranularity !== "quintiles") payload.q = URL_QUANTILE_CODES[state.quantileGranularity];
@@ -2334,7 +2544,7 @@
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === (state.inflationAdjusted ? "adjusted" : "nominal"); });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
-    refs.scatterX.value = state.scatterX;
+    refs.axisMode.forEach((radio) => { radio.checked = radio.value === state.axisMode; });
     refs.chartColor.value = state.chartColor;
     refs.showContours.checked = state.showContours;
     refs.targetExpense.value = state.targetExpense / 1_000_000;
@@ -2356,7 +2566,7 @@
   }
 
   function expandCompactUrlState(payload) {
-    if (![2, URL_STATE_VERSION].includes(payload?.v)) return payload;
+    if (![2, 3, URL_STATE_VERSION].includes(payload?.v)) return payload;
     const version = payload.v;
     const custom = {};
     (payload.c || []).forEach(([code, value]) => {
@@ -2381,6 +2591,8 @@
         m: URL_MEASURE_KEYS[payload.m], p: URL_SAMPLE_KEYS[payload.p],
         ia: payload.n !== 1,
         d: URL_FIT_KEYS[payload.g],
+        am: payload.a === 1 ? "ratio" : "value",
+        vw: payload.l === 1 ? "scatter" : "histogram", hx: payload.h, sx: payload.j, sy: payload.k,
         w: [...String(payload.w || "")].map((code) => URL_WEIGHT_KEYS[code]).filter(Boolean),
         te: payload.x?.e, ts: payload.x?.s, eb: payload.x?.b, sb: payload.x?.f, rh: payload.x?.r,
         q: URL_QUANTILE_KEYS[payload.q], qq: payload.z,
@@ -2395,7 +2607,7 @@
 
   function restoreUrlState(payload) {
     const sourceVersion = payload?.v;
-    const compactVersion = [2, URL_STATE_VERSION].includes(payload?.v);
+    const compactVersion = [2, 3, URL_STATE_VERSION].includes(payload?.v);
     payload = expandCompactUrlState(payload);
     if (!payload || payload.v !== 1 || typeof payload.a !== "object") throw new Error("Unsupported or incomplete state version.");
     const analysis = payload.a;
@@ -2416,7 +2628,19 @@
     state.bins = Math.round(finiteNumber(analysis.b, state.bins, 2, 200));
     state.autoBins = compactVersion;
     state.view = enumValue(analysis.vw, ["histogram", "scatter"], state.view);
-    state.scatterX = enumValue(analysis.x, Object.keys(scatterVariables), state.scatterX);
+    state.axisMode = enumValue(analysis.am, ["value", "ratio"], state.axisMode);
+    const decodeExpression = (encoded, fallback) => {
+      if (typeof encoded !== "string") return fallback;
+      if (encoded.length === 2 && URL_VARIABLE_KEYS[encoded[0]] && URL_VARIABLE_KEYS[encoded[1]]) {
+        return { numerator: URL_VARIABLE_KEYS[encoded[0]], denominator: URL_VARIABLE_KEYS[encoded[1]] };
+      }
+      return fallback;
+    };
+    state.histogramAxis = decodeExpression(analysis.hx, state.histogramAxis);
+    state.scatterXAxis = decodeExpression(analysis.sx, state.scatterXAxis);
+    state.scatterYAxis = decodeExpression(analysis.sy, state.scatterYAxis);
+    if (analysis.x && numericVariables[analysis.x]) state.scatterXAxis.numerator = analysis.x;
+    normalizeAxisExpressions();
     state.chartColor = enumValue(analysis.c, ["tier", "topic", "eaAffinity", "sourceType", "titleGroup", "structure"], state.chartColor);
     state.showContours = analysis.co !== 0;
     state.quantileGranularity = enumValue(analysis.q, ["quintiles", "deciles", "percentiles", "custom"], state.quantileGranularity);
@@ -2478,7 +2702,11 @@
     Object.assign(state, {
       stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
       targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
-      bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
+      bins: 20, autoBins: true, view: "histogram", axisMode: "value",
+      histogramAxis: { numerator: "salary", denominator: "expenses" },
+      scatterXAxis: { numerator: "expenses", denominator: "staff" },
+      scatterYAxis: { numerator: "salary", denominator: "expenses" },
+      chartColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95", markCurve: true,
       sortKey: "tier", sortDirection: "asc",
       filters: {
@@ -2500,7 +2728,8 @@
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === "adjusted"; });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
-    refs.scatterX.value = state.scatterX; refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
+    refs.axisMode.forEach((radio) => { radio.checked = radio.value === state.axisMode; });
+    refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
     refs.targetExpense.value = RP_WEIGHT_TARGET.expenses / 1_000_000; refs.targetStaff.value = RP_WEIGHT_TARGET.staff;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.quantileGranularity.value = "quintiles";
@@ -2569,7 +2798,22 @@
   refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); renderChart(); });
   refs.markCurve.addEventListener("change", () => { state.markCurve = refs.markCurve.checked; renderChart(); });
   refs.view.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.view = radio.value; renderAll(); } }));
-  refs.scatterX.addEventListener("change", () => { state.scatterX = refs.scatterX.value; renderChart(); });
+  refs.axisMode.forEach((radio) => radio.addEventListener("change", () => {
+    if (!radio.checked) return;
+    state.axisMode = radio.value;
+    normalizeAxisExpressions();
+    state.autoBins = true;
+    closeAxisSelector();
+    renderAll();
+  }));
+  refs.axisNumerator.addEventListener("change", () => updateAxisExpression("numerator", refs.axisNumerator.value));
+  refs.axisDenominator.addEventListener("change", () => updateAxisExpression("denominator", refs.axisDenominator.value));
+  refs.axisSelectorClose.addEventListener("click", closeAxisSelector);
+  document.addEventListener("pointerdown", (event) => {
+    if (refs.axisSelector.hidden || refs.axisSelector.contains(event.target) || event.target.closest?.(".axis-variable-control")) return;
+    closeAxisSelector();
+  });
+  document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeAxisSelector(); });
   refs.chartColor.addEventListener("change", () => { state.chartColor = refs.chartColor.value; renderAll(); });
   refs.showContours.addEventListener("change", () => { state.showContours = refs.showContours.checked; renderChart(); });
   refs.salaryMin.addEventListener("input", () => updateRange("salary", "low"));
