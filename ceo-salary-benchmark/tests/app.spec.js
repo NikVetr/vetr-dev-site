@@ -30,6 +30,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Organizations" })).toHaveCount(0);
   await expect(page.locator("#included-count")).toHaveCount(0);
   await expect(page.locator(".table-panel")).toHaveAttribute("aria-label", "Organization-level evidence table");
+  const tableHeaders = await page.locator("#organization-table thead th").evaluateAll((headers) => headers.map((header) => {
+    const explicitLabel = header.querySelector(":scope > button[data-sort], :scope > .sr-only");
+    if (explicitLabel) return explicitLabel.textContent.trim();
+    return [...header.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent.trim()).join(" ").trim();
+  }));
+  expect(tableHeaders).toEqual(["Included", "Organization", "Job title", "Salary", "Expenses", "Staff", "Weight", "Match score", "Tier", "Topic / model", "Location", "EA relation", "Structure", "Year", "Evidence", "Source"]);
+  expect(await page.locator("#organization-table .title-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThan(140);
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#measure-field")).toBeHidden();
@@ -122,9 +129,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(rpReferenceRow).toContainText("$155K");
   await expect(rpReferenceRow).toContainText("$20M");
   await expect(rpReferenceRow).toContainText("2024");
-  await expect(rpReferenceRow.locator("td").nth(11)).toHaveText("43");
-  await expect(rpReferenceRow.locator("td").nth(11)).toHaveAttribute("title", /2023 Form 990 reports 43 individuals employed/);
-  await expect(rpReferenceRow.locator("td")).toHaveCount(17);
+  await expect(rpReferenceRow.locator("td").nth(5)).toHaveText("43");
+  await expect(rpReferenceRow.locator("td").nth(5)).toHaveAttribute("title", /2023 Form 990 reports 43 individuals employed/);
+  await expect(rpReferenceRow.locator("td")).toHaveCount(16);
+  await expect(rpReferenceRow.locator(".source-cell").getByRole("button", { name: "Preview" })).toHaveCount(1);
+  await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /ProPublica/ })).toHaveCount(1);
   await expect(rpReferenceRow.locator("input")).toHaveCount(0);
   await expect(rpReferenceRow.locator("td").first()).toHaveCSS("color", "rgb(255, 255, 255)");
   await rpReferenceRow.getByRole("button", { name: "Preview" }).click();
@@ -140,7 +149,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#dialog-category-provenance")).toBeHidden();
   await page.locator("#source-dialog").screenshot({ path: "tmp/app-rp-source-preview.png" });
   await page.locator(".dialog-close").click();
-  for (const [column, cellIndex] of [["expenses", 5], ["staff", 11]]) {
+  const excludedPostingToggle = page.locator('tr[data-id="SRC-AD-MOST-2025"] .row-toggle');
+  await expect(excludedPostingToggle).not.toBeChecked();
+  await expect(excludedPostingToggle).toHaveAttribute("title", /excluded by default: Local and far below scale.*Check to include it manually/);
+  const excludedPostingRow = page.locator('tr[data-id="SRC-AD-MOST-2025"]');
+  await expect(excludedPostingRow.locator("td").nth(11)).toHaveAttribute("title", /no EA field.*no EA relationship is inferred/i);
+  await expect(excludedPostingRow.locator("td").nth(12)).toHaveAttribute("title", /no new normalized structure is inferred/i);
+  for (const [column, cellIndex] of [["expenses", 4], ["staff", 5]]) {
     const centerDifference = await rpReferenceRow.locator("td").nth(cellIndex).evaluate((cell, sortColumn) => {
       const header = document.querySelector(`thead button[data-sort="${sortColumn}"]`).closest("th");
       const cellRect = cell.getBoundingClientRect();

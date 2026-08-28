@@ -234,13 +234,9 @@
             <tr>
               <th class="check-column"><span class="sr-only">Included</span></th>
               <th><button type="button" data-sort="organization">Organization</button></th>
-              <th class="filterable-column">
+              <th class="title-column filterable-column">
                 <button type="button" data-sort="title">Job title</button>
                 <div class="filter-menu header-filter-menu" data-filter-menu="title"></div>
-              </th>
-              <th class="filterable-column">
-                <button type="button" data-sort="sourceType">Evidence</button>
-                <div class="filter-menu header-filter-menu" data-filter-menu="sourceType"></div>
               </th>
               <th class="filterable-column">
                 <button type="button" data-sort="salary">Salary</button>
@@ -278,6 +274,7 @@
                   </details>
                 </div>
               </th>
+              <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities reports 43 individuals employed on its 2023 Form 990">Staff</button></th>
               <th class="weight-column"><button type="button" data-sort="weight">Weight</button></th>
               <th><button type="button" data-sort="comparabilityScore">Match score</button></th>
               <th class="tier-column filterable-column">
@@ -292,7 +289,6 @@
                 <button type="button" data-sort="location">Location</button>
                 <div class="filter-menu header-filter-menu" data-filter-menu="location"></div>
               </th>
-              <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities reports 43 individuals employed on its 2023 Form 990">Staff</button></th>
               <th class="filterable-column">
                 <button type="button" data-sort="eaAffinity">EA relation</button>
                 <div class="filter-menu header-filter-menu" data-filter-menu="eaAffinity"></div>
@@ -302,7 +298,10 @@
                 <div class="filter-menu header-filter-menu" data-filter-menu="structure"></div>
               </th>
               <th><button type="button" data-sort="compensationYear">Year</button></th>
-              <th>Source preview</th>
+              <th class="filterable-column">
+                <button type="button" data-sort="sourceType">Evidence</button>
+                <div class="filter-menu header-filter-menu" data-filter-menu="sourceType"></div>
+              </th>
               <th>Source</th>
             </tr>
           </thead>

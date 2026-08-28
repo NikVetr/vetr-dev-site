@@ -1387,29 +1387,28 @@
     tr.className = "rp-reference-row";
     tr.setAttribute("aria-label", "Rethink Priorities 2024 Form 990 reference profile; excluded from the peer distribution");
     const values = [
-      "", reference.organization, reference.title, reference.sourceType, compactMoney(salary(reference)), compactMoney(reference.expenses),
-      "", "", reference.tier, "—", reference.location, String(reference.staff), "—", reference.structure, String(reference.compensationYear), "",
+      "", reference.organization, reference.title, compactMoney(salary(reference)), compactMoney(reference.expenses), String(reference.staff),
+      "", "", reference.tier, "—", reference.location, "—", reference.structure, String(reference.compensationYear), reference.sourceType,
     ];
     values.forEach((value, index) => {
       const td = document.createElement("td");
-      if (index === 15) {
-        const preview = document.createElement("button");
-        preview.type = "button"; preview.className = "preview-button rp-reference-preview"; preview.textContent = "Preview";
-        preview.addEventListener("click", () => openSourceDialog(reference));
-        td.append(preview);
-      } else td.textContent = value;
+      td.textContent = value;
       if (index === 0) td.className = "check-column";
       if (index === 1) td.className = "rp-reference-name";
-      if (index === 11) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
+      if (index === 5) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
       tr.append(td);
     });
     const source = document.createElement("td");
+    source.className = "source-cell";
+    const preview = document.createElement("button");
+    preview.type = "button"; preview.className = "preview-button rp-reference-preview"; preview.textContent = "Preview";
+    preview.addEventListener("click", () => openSourceDialog(reference));
     const link = document.createElement("a");
     link.className = "rp-reference-source"; link.href = reference.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "ProPublica ↗";
     const separator = document.createTextNode(" · ");
     const staffLink = document.createElement("a");
     staffLink.className = "rp-reference-source"; staffLink.href = reference.secondarySourceUrl; staffLink.target = "_blank"; staffLink.rel = "noopener noreferrer"; staffLink.textContent = "Staff 990 ↗";
-    source.append(link, separator, staffLink);
+    source.append(preview, link, separator, staffLink);
     tr.append(source);
     refs.tableBody.append(tr);
   }
@@ -1432,7 +1431,14 @@
       const toggle = document.createElement("input");
       toggle.type = "checkbox"; toggle.className = "row-toggle"; toggle.checked = available && rowInclusion(row).get(row.id);
       toggle.disabled = !available;
-      toggle.setAttribute("aria-label", available ? `Include ${row.organization}` : `${row.organization} has no ${measureLabel(row)} observation`);
+      const defaultExclusionReason = row.selectionNote || row.analysisStatus || row.auditStatus || "outside the default benchmark sample";
+      const inclusionHelp = !available
+        ? `${row.organization} has no usable ${measureLabel(row)} observation. ${defaultExclusionReason}`
+        : row.defaultIncluded
+          ? `Include ${row.organization}`
+          : `${row.organization} is excluded by default: ${defaultExclusionReason}. Check to include it manually.`;
+      toggle.setAttribute("aria-label", inclusionHelp);
+      toggle.title = inclusionHelp;
       toggle.addEventListener("change", () => { rowInclusion(row).set(row.id, toggle.checked); renderAll(); });
       toggleCell.append(toggle);
 
@@ -1496,15 +1502,25 @@
       const staff = document.createElement("td"); staff.className = "number-cell"; staff.textContent = row.staff ?? "—";
       const ea = document.createElement("td"); ea.className = "metadata-cell"; ea.textContent = row.eaAffinity || "—";
       const structure = document.createElement("td"); structure.className = "metadata-cell"; structure.textContent = row.structure || "—";
+      if (/^(not coded|uncoded)$/i.test(ea.textContent)) {
+        ea.classList.add("has-explainer");
+        ea.title = row.categoryProvenance?.ea?.rationale
+          || "EA relationship was not assessed in the preserved source and is not inferred from absence of evidence.";
+      }
+      if (/^(not extracted|not reported|uncoded)$/i.test(structure.textContent)) {
+        structure.classList.add("has-explainer");
+        structure.title = row.categoryProvenance?.structure?.rationale
+          || "No reporting or organizational structure was recoverable from the preserved source.";
+      }
       const year = document.createElement("td"); year.className = "number-cell"; year.textContent = row.compensationYear || "—";
-      const preview = document.createElement("td");
-      const previewButton = document.createElement("button"); previewButton.type = "button"; previewButton.className = "preview-button"; previewButton.textContent = "Preview";
-      previewButton.addEventListener("click", () => openSourceDialog(row)); preview.append(previewButton);
       const source = document.createElement("td");
+      source.className = "source-cell";
+      const previewButton = document.createElement("button"); previewButton.type = "button"; previewButton.className = "preview-button"; previewButton.textContent = "Preview";
+      previewButton.addEventListener("click", () => openSourceDialog(row)); source.append(previewButton);
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
-      } else source.textContent = "—";
-      tr.append(toggleCell, org, title, evidenceType, salaryCell, expenses, weightCell, comparability, tier, topic, location, staff, ea, structure, year, preview, source);
+      }
+      tr.append(toggleCell, org, title, salaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, source);
       refs.tableBody.append(tr);
     });
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
