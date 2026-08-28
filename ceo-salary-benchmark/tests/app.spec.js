@@ -21,8 +21,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   }
   await expect(page.locator(".table-footnote")).toHaveCount(0);
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
-  await expect(page.locator("#stat-n")).toHaveText("110");
-  await expect(page.locator(".bar-block")).toHaveCount(110);
+  await expect(page.locator("#stream-select")).toHaveValue("combined");
+  await expect(page.locator("#measure-field")).toBeHidden();
+  await expect(page.locator("#stat-n")).toHaveText("125");
+  await expect(page.locator(".bar-block")).toHaveCount(125);
   const explainerCoverage = await page.evaluate(() => ({
     definitions: Object.values(window.CEO_BENCHMARK_DATA.categoryExplainers.definitions)
       .reduce((total, field) => total + Object.keys(field).length, 0),
@@ -47,12 +49,19 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   });
   expect(ssrcClassifications).toEqual(["A", "A", "B"]);
   await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
+  await expect(page.locator(".density-line-outline")).toHaveCount(1);
   await expect(page.locator(".density-line")).toHaveCount(1);
-  await expect(page.locator(".rug-line")).toHaveCount(110);
-  await expect(page.locator("#salary-chart")).toContainText("Weighted organizations per bin");
+  await expect(page.locator(".density-line-outline")).toHaveAttribute("d", await page.locator(".density-line").getAttribute("d"));
+  await expect(page.locator(".density-line-outline")).toHaveCSS("stroke", "rgba(255, 255, 255, 0.96)");
+  await expect(page.locator(".rug-line")).toHaveCount(125);
+  await expect(page.locator("#salary-chart")).toContainText("Weighted observations per bin");
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from the fitted lognormal distribution");
   await expect(page.locator("#mark-curve")).toBeChecked();
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(4);
+  await expect(page.locator(".curve-quantile-tick-outline")).toHaveCount(4);
+  await expect(page.locator(".curve-quantile-tick-outline").first()).toHaveCSS("stroke", "rgba(255, 255, 255, 0.96)");
+  expect(await page.locator(".curve-quantile-tick").evaluateAll((ticks) => ticks.every((tick) => (tick.getAttribute("d").match(/M/g) || []).length === 2))).toBe(true);
+  expect(await page.locator(".curve-quantile-tick").evaluateAll((ticks) => ticks.every((tick, index) => tick.getAttribute("d") === document.querySelectorAll(".curve-quantile-tick-outline")[index].getAttribute("d")))).toBe(true);
   await expect(page.locator(".curve-quantile-mark")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-label.amount").first()).toHaveText(/^\$\d+K$/);
   await expect(page.locator(".curve-quantile-mark").first().locator("text").first()).toHaveCSS("font-size", "10px");
@@ -131,25 +140,25 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#chart-legend")).toContainText("Gamma density");
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from the fitted gamma distribution");
   await page.locator('input[name="distribution"][value="empirical"]').check();
+  await expect(page.locator(".density-line-outline")).toHaveCount(0);
   await expect(page.locator(".density-line")).toHaveCount(0);
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from weighted empirical ranks");
   await page.locator('input[name="distribution"][value="lognormal"]').check();
 
   await page.getByLabel("Include American Immigration Council").uncheck();
-  await expect(page.locator("#stat-n")).toHaveText("109");
-  await expect(page.locator(".bar-block")).toHaveCount(109);
+  await expect(page.locator("#stat-n")).toHaveText("124");
+  await expect(page.locator(".bar-block")).toHaveCount(124);
   await page.locator("#reset-settings").click();
 
-  await expect(page.locator("tbody tr")).toHaveCount(112);
-  await page.locator("#show-unavailable").check();
-  await expect(page.locator("tbody tr")).toHaveCount(144);
-  await expect(page.locator("tbody .row-toggle:disabled")).toHaveCount(32);
-  await page.locator("#show-unavailable").uncheck();
+  await expect(page.locator("#show-unavailable")).toHaveCount(0);
+  await expect(page.locator(".unavailable-toggle")).toHaveCount(0);
+  await expect(page.locator("tbody .row-toggle:disabled")).toHaveCount(0);
 
   await page.locator('[data-filter-menu="tier"] summary').click();
+  const tierOptionCount = await page.locator('[data-filter-menu="tier"] .filter-options input').count();
   await page.locator('[data-filter-menu="tier"] .filter-options label').filter({ hasText: /^C$/ }).locator("input").uncheck();
-  await expect(page.locator('[data-filter-menu="tier"] summary')).toHaveText("2 selected");
-  await expect(page.locator("#stat-n")).not.toHaveText("110");
+  await expect(page.locator('[data-filter-menu="tier"] summary')).toHaveText(`${tierOptionCount - 1} selected`);
+  await expect(page.locator("#stat-n")).not.toHaveText("125");
   const filteredN = Number(await page.locator("#stat-n").textContent());
   await expect(page.locator(".bar-block")).toHaveCount(filteredN);
 
@@ -181,14 +190,14 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#salary-range-min").fill("300000");
   await expect(page.locator("#salary-range-value")).not.toHaveText("All");
   await expect(page.locator("#salary-filter-summary")).not.toHaveText("All");
-  await expect(page.locator("#stat-n")).not.toHaveText("110");
+  await expect(page.locator("#stat-n")).not.toHaveText("125");
   await page.locator("#reset-settings").click();
   await expect(page.locator("#expense-range-min")).not.toBeVisible();
   await page.locator("#expense-filter-summary").click();
   await page.locator("#expense-range-min").fill("500");
   await expect(page.locator("#expense-range-value")).not.toHaveText("All");
   await expect(page.locator("#expense-filter-summary")).not.toHaveText("All");
-  await expect(page.locator("#stat-n")).not.toHaveText("110");
+  await expect(page.locator("#stat-n")).not.toHaveText("125");
 
   await page.locator("#reset-settings").click();
   const salaryHeader = page.locator('thead button[data-sort="salary"]');
@@ -217,11 +226,22 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(3);
 
   await page.locator("#reset-settings").click();
-  await page.getByRole("button", { name: "About match score" }).hover();
+  await expect(page.getByRole("button", { name: "About composite peer score" })).toHaveCount(0);
+  await page.locator('#weighting-components input[value="size"]').check();
+  await page.locator('#weighting-components input[value="comparability"]').check();
+  await expect(page.locator('#weighting-components input[value="comparability"]')).toBeChecked();
+  await expect(page.locator('#weighting-components input[value="size"]')).not.toBeChecked();
+  await expect(page.locator("#comparability-profile-field")).toBeVisible();
+  await expect(page.locator("#comparability-profile-field")).toHaveCSS("padding-left", "0px");
+  await expect(page.locator("#comparability-profile-field")).toHaveCSS("border-left-width", "0px");
+  await page.getByRole("button", { name: "About composite peer score" }).hover();
   await expect(page.locator("#help-tooltip")).toContainText("functional/operating-model similarity (30 points)");
   await expect(page.locator("#help-tooltip")).toContainText("assigned without using compensation");
   await expect(page.locator("#help-tooltip")).toContainText("score ÷ 75");
+  await expect(page.locator("#help-tooltip")).toContainText("avoid double-counting");
   await page.locator('#weighting-components input[value="size"]').check();
+  await expect(page.locator('#weighting-components input[value="comparability"]')).not.toBeChecked();
+  await expect(page.locator("#comparability-profile-field")).toBeHidden();
   await expect(page.locator("#size-controls")).toBeVisible();
   await expect(page.locator("#expense-target-field")).toBeVisible();
   await expect(page.locator("#weight-profile-size")).toBeVisible();
@@ -264,7 +284,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#discrete-weight-editors")).toBeVisible();
   await expect(page.locator("#discrete-weight-editors .discrete-weight-note")).toContainText("peer hierarchy");
   const tierWeightEditor = page.locator("#discrete-weight-editors details").filter({ hasText: "Tier category multipliers" });
-  await expect(tierWeightEditor.locator(".info-tooltip")).toHaveCount(3);
+  expect(await tierWeightEditor.locator(".info-tooltip").count()).toBe(await tierWeightEditor.locator('input[type="number"]').count());
   const tierAHelp = page.getByRole("button", { name: "About Tier category A" });
   await tierAHelp.scrollIntoViewIfNeeded();
   await tierAHelp.hover();
@@ -367,8 +387,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('#weighting-components input[value="sourceType"]').check();
   await expect(page.getByLabel("Evidence stream multiplier for Form 990")).toHaveValue("1");
   await expect(page.getByLabel("Evidence stream multiplier for Job posting")).toHaveValue("0.8");
-  await page.locator('#weighting-components input[value="streamBalanced"]').check();
-  await expect(page.locator("#weighting-description")).toContainText("Balanced evidence streams");
+  await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeEnabled();
+  expect(await page.locator('.stream-balance-rule input[value="streamBalanced"]').evaluate((input) => input.closest("#weighting-components"))).toBeNull();
+  await page.getByRole("button", { name: "About equalizing evidence streams" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("exactly half of the total analytical weight");
+  await page.locator('.stream-balance-rule input[value="streamBalanced"]').check();
+  await expect(page.locator("#weighting-description")).toContainText("rescaled to 50/50 total influence");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
   await expect(page.locator("#scatter-controls")).toBeVisible();
   await expect(page.locator(".scatter-point")).not.toHaveCount(0);
@@ -408,7 +432,8 @@ test("desktop and narrow layouts render", async ({ page }) => {
     return width;
   });
   expect(hiddenScrollbarWidth).toBe(overflowPanel.width);
-  await page.locator(".info-tooltip:visible").last().hover();
+  await page.getByRole("button", { name: "About evidence streams" }).hover();
+  await expect(page.locator("#help-tooltip")).toBeVisible();
   const desktopTooltip = await page.locator("#help-tooltip").boundingBox();
   expect(desktopTooltip.x + desktopTooltip.width).toBeLessThanOrEqual(1440);
   await page.screenshot({ path: "tmp/app-desktop.png", fullPage: true });
@@ -521,9 +546,18 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await page.locator("#reset-settings").click();
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
 
+  const legacyV2 = Buffer.from(JSON.stringify({ v: 2 })).toString("base64url");
+  await page.goto(`/?s=${legacyV2}`);
+  await expect(page.locator("#stream-select")).toHaveValue("incumbents");
+  await expect(page.locator("#stat-n")).toHaveText("110");
+  const legacyV1 = Buffer.from(JSON.stringify({ v: 1, a: {} })).toString("base64url");
+  await page.goto(`/?s=${legacyV1}`);
+  await expect(page.locator("#stream-select")).toHaveValue("incumbents");
+  await expect(page.locator("#stat-n")).toHaveText("110");
+
   await page.goto("/?s=not-valid-state");
   await expect(page.locator("#url-state-error")).toBeVisible();
   await expect(page.locator("#url-state-error")).toContainText("default settings");
-  await expect(page.locator("#stat-n")).toHaveText("110");
+  await expect(page.locator("#stat-n")).toHaveText("125");
   expect(errors).toEqual([]);
 });

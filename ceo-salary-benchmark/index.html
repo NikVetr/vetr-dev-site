@@ -36,9 +36,9 @@
       <label class="field">
         <span>Evidence stream <button class="info-tooltip" type="button" aria-label="About evidence streams" data-tooltip="Switch between compensation reported for current nonprofit leaders in Form 990 filings and salary ranges advertised for open executive roles.">?</button></span>
         <select id="stream-select">
+          <option value="combined" selected>All evidence: 990 base + posting midpoint</option>
           <option value="incumbents">Incumbent Form 990s</option>
           <option value="jobAds">Recruitment postings</option>
-          <option value="combined">All evidence: 990 base + posting midpoint</option>
         </select>
       </label>
 
@@ -94,12 +94,9 @@
       </label>
 
       <section class="weighting-field field" role="group" aria-labelledby="weighting-components-title">
-        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Select any number of components. Their multipliers are multiplied together, then multiplied by the editable row weight. Discrete components open with editable suggested values; 1.00 is the reference value and 0 excludes a category. With no components selected, observations receive equal base weight.">?</button></div>
+        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Individual components multiply together, then multiply the editable row weight. The Composite peer score is an alternative that already combines several dimensions, so selecting it clears the individual components to prevent double-counting. The separate 50/50 rule controls the total influence of the two evidence streams.">?</button></div>
         <div id="weighting-components" class="weighting-components">
-          <div class="weighting-component-with-help">
-            <label><input type="checkbox" value="comparability"> Match score</label>
-            <button class="info-tooltip" type="button" aria-label="About match score" data-tooltip="The frozen 0–100 non-pay comparability score combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1.">?</button>
-          </div>
+          <label><input type="checkbox" value="comparability"> Composite peer score</label>
           <label><input type="checkbox" value="size"> Expenses</label>
           <label><input type="checkbox" value="staff"> Staff</label>
           <label><input type="checkbox" value="recency"> Recency</label>
@@ -109,7 +106,10 @@
           <label><input type="checkbox" value="topic"> Topic / model</label>
           <label><input type="checkbox" value="titleGroup"> Title group</label>
           <label><input type="checkbox" value="structure"> Structure</label>
-          <label><input type="checkbox" value="streamBalanced" disabled> Balance streams</label>
+        </div>
+        <div class="stream-balance-rule">
+          <label><input type="checkbox" value="streamBalanced"> Equalize evidence streams (50/50)</label>
+          <button class="info-tooltip" type="button" aria-label="About equalizing evidence streams" data-tooltip="Available in All evidence. After all other weights are applied, it rescales Form 990s and recruitment postings so each stream contributes exactly half of the total analytical weight. This prevents the larger Form 990 sample from dominating solely because it has more observations; it does not change salaries or row inclusion.">?</button>
         </div>
       </section>
       <small id="weighting-description" class="weighting-description field-description">No components selected: equal base weights.</small>
@@ -228,11 +228,6 @@
         </div>
         <span id="included-count" class="count-badge">0 included</span>
       </div>
-      <label class="unavailable-toggle">
-        <input id="show-unavailable" type="checkbox">
-        <span id="show-unavailable-label">Show rows without this salary measure</span>
-        <button class="info-tooltip" type="button" aria-label="About unavailable observations" data-tooltip="These organizations are part of the peer universe but have no validated value for the currently selected compensation measure, so they cannot affect the histogram.">?</button>
-      </label>
       <div id="table-rp-reference-layer" class="table-rp-reference-layer" aria-label="Rethink Priorities comparison references">
         <span id="rp-expense-table-reference" class="rp-table-reference" data-reference-column="expenses">RP = $7.5M</span>
         <span id="rp-staff-table-reference" class="rp-table-reference" data-reference-column="staff">RP = 57 FTE</span>

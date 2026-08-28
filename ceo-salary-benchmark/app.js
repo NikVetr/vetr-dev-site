@@ -16,9 +16,10 @@
       : `$${Math.round(value / 1_000)}K`;
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
   const RP_REFERENCE = Object.freeze({ expenses: 7_500_000, staff: 57 });
+  const COMPOSITE_SCORE_TOOLTIP = "The frozen 0–100 non-pay composite combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1. Select this composite instead of its individual component weights to avoid double-counting those dimensions.";
 
   const state = {
-    stream: "incumbents",
+    stream: "combined",
     measure: "base",
     sample: "primary",
     fit: "lognormal",
@@ -48,7 +49,6 @@
       salary: { min: null, max: null, low: null, high: null },
       expenses: { min: null, max: null, low: null, high: null },
     },
-    showUnavailable: false,
     focusedId: "",
     hoverQuantile: null,
   };
@@ -72,7 +72,7 @@
   const refs = {
     stream: $("#stream-select"), measure: $("#measure-select"), measureField: $("#measure-field"),
     sample: $("#sample-select"), fit: [...document.querySelectorAll('input[name="distribution"]')],
-    weightingComponents: [...document.querySelectorAll('#weighting-components input[type="checkbox"]')],
+    weightingComponents: [...document.querySelectorAll('.weighting-field input[type="checkbox"]')],
     sizeControls: $("#size-controls"), expenseTargetField: $("#expense-target-field"), staffTargetField: $("#staff-target-field"),
     recencyField: $("#recency-field"), targetExpense: $("#target-expense"), targetStaff: $("#target-staff"),
     expenseBandwidth: $("#expense-bandwidth"), staffBandwidth: $("#staff-bandwidth"), recencyHalfLife: $("#recency-halflife"),
@@ -92,8 +92,6 @@
     customQuantilesError: $("#custom-quantiles-error"), chartLegend: $("#chart-legend"),
     quantileBasis: $("#quantile-basis"), sampleDescription: $("#sample-description"),
     weightingDescription: $("#weighting-description"),
-    showUnavailable: $("#show-unavailable"),
-    showUnavailableLabel: $("#show-unavailable-label"),
     salaryMin: $("#salary-range-min"), salaryMax: $("#salary-range-max"), salaryRangeValue: $("#salary-range-value"),
     salaryFilterSummary: $("#salary-filter-summary"),
     expenseMin: $("#expense-range-min"), expenseMax: $("#expense-range-max"), expenseRangeValue: $("#expense-range-value"),
@@ -121,9 +119,9 @@
 
   const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
   const WEIGHT_LABELS = {
-    comparability: "Match score", size: "Expense similarity", staff: "Staff similarity", recency: "Evidence recency",
+    comparability: "Composite peer score", size: "Expense similarity", staff: "Staff similarity", recency: "Evidence recency",
     tier: "Tier", eaAffinity: "EA relation", sourceType: "Evidence stream", topic: "Topic / model",
-    titleGroup: "Job-title group", structure: "Structure", streamBalanced: "Balanced evidence streams",
+    titleGroup: "Job-title group", structure: "Structure", streamBalanced: "50/50 evidence-stream balance",
   };
   const DISCRETE_WEIGHT_NOTES = {
     tier: "Suggested values follow the peer hierarchy: narrow primary peers receive full weight; broader, structural, and excluded sensitivity tiers receive progressively less.",
@@ -696,10 +694,14 @@
       let normalX = -Math.sin(tangentAngle);
       let normalY = Math.cos(tangentAngle);
       if (normalY > 0) { normalX *= -1; normalY *= -1; }
-      svg.append(svgElement("line", {
-        x1: x - normalX * 5, y1: y - normalY * 5, x2: x + normalX * 5, y2: y + normalY * 5,
-        class: "curve-quantile-tick",
-      }));
+      const tickOuter = 9;
+      const tickGap = 5;
+      const tickPath = [
+        `M${x - normalX * tickOuter},${y - normalY * tickOuter}L${x - normalX * tickGap},${y - normalY * tickGap}`,
+        `M${x + normalX * tickGap},${y + normalY * tickGap}L${x + normalX * tickOuter},${y + normalY * tickOuter}`,
+      ].join(" ");
+      svg.append(svgElement("path", { d: tickPath, class: "curve-quantile-tick-outline" }));
+      svg.append(svgElement("path", { d: tickPath, class: "curve-quantile-tick" }));
       let textAngle = tangentAngle * 180 / Math.PI;
       if (textAngle > 90) textAngle -= 180;
       if (textAngle < -90) textAngle += 180;
@@ -823,6 +825,7 @@
         const y = margin.top + yScale(point.expectedWeight);
         return `${index ? "L" : "M"}${x.toFixed(2)},${y.toFixed(2)}`;
       }).join("");
+      svg.append(svgElement("path", { d: path, class: "density-line-outline" }));
       svg.append(svgElement("path", { d: path, class: "density-line" }));
       appendCurveQuantileMarks(
         svg, model, quantilePercentiles(), xScale, yScale, margin,
@@ -1206,7 +1209,7 @@
   }
 
   function tableRows(weightMap = new Map()) {
-    const filtered = rows().filter((row) => (state.showUnavailable || salary(row) != null) && passesFilters(row));
+    const filtered = rows().filter((row) => salary(row) != null && passesFilters(row));
     const direction = state.sortDirection === "asc" ? 1 : -1;
     return filtered.sort((a, b) => {
       const value = (row) => {
@@ -1388,11 +1391,7 @@
       refs.tableBody.append(tr);
     });
     const count = selection.length;
-    const unavailable = rows().filter((row) => salary(row) == null).length;
     refs.includedCount.textContent = `${count} included`;
-    refs.showUnavailableLabel.textContent = state.showUnavailable
-      ? `Showing ${unavailable} rows without this salary measure`
-      : `Show ${unavailable} rows without this salary measure`;
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
       const active = button.dataset.sort === state.sortKey;
       button.dataset.active = active;
@@ -1574,10 +1573,14 @@
     refs.expenseTargetField.hidden = !state.weightings.has("size");
     refs.staffTargetField.hidden = !state.weightings.has("staff");
     refs.recencyField.hidden = !state.weightings.has("recency");
-    const active = [...state.weightings].map((key) => WEIGHT_LABELS[key]);
-    refs.weightingDescription.textContent = active.length
-      ? `Base weight = ${active.join(" × ")}. Missing continuous values receive a 0.45 multiplier.`
+    const components = [...state.weightings].filter((key) => key !== "streamBalanced").map((key) => WEIGHT_LABELS[key]);
+    const balanced = state.weightings.has("streamBalanced");
+    const baseDescription = components.length
+      ? `Base weight = ${components.join(" × ")}. Missing continuous values receive a 0.45 multiplier.`
       : "No components selected: equal base weights.";
+    refs.weightingDescription.textContent = balanced
+      ? `${baseDescription} Form 990s and recruitment postings are then rescaled to 50/50 total influence.`
+      : baseDescription;
     const discrete = DISCRETE_WEIGHT_KEYS.filter((key) => state.weightings.has(key));
     refs.discreteWeightEditors.hidden = !discrete.length;
     refs.discreteWeightEditors.replaceChildren();
@@ -1633,7 +1636,7 @@
       let axisTitle;
       if (key === "comparability") {
         values = [0, 100]; format = (value) => value.toFixed(0); parameter = "Score ÷ 75, capped at 0.25–1.75";
-        axisTitle = "Match score (0–100)";
+        axisTitle = "Composite peer score (0–100)";
       } else if (key === "size") {
         values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
         parameter = `Target ${compactMoney(state.targetExpense)} · bandwidth ${state.expenseBandwidth.toFixed(2)}`;
@@ -1666,7 +1669,16 @@
       const maxWeight = Math.max(1, ...samples.map((sample) => sample.weight)) * 1.08;
       const y = (weight) => margin.top + innerHeight - (weight / maxWeight) * innerHeight;
       const figure = document.createElement("div"); figure.className = "weight-profile-figure";
+      const heading = document.createElement("div"); heading.className = "weight-profile-heading";
       const title = document.createElement("strong"); title.textContent = WEIGHT_LABELS[key];
+      heading.append(title);
+      if (key === "comparability") {
+        const help = document.createElement("button");
+        help.type = "button"; help.className = "info-tooltip"; help.textContent = "?";
+        help.dataset.tooltip = COMPOSITE_SCORE_TOOLTIP;
+        help.setAttribute("aria-label", "About composite peer score");
+        heading.append(help);
+      }
       const description = document.createElement("span"); description.textContent = parameter;
       const referenceDescription = rpReference == null ? "" : `; RP reference ${format(rpReference)}`;
       const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]} relative weight-response curve${referenceDescription}` });
@@ -1721,7 +1733,8 @@
         "text-anchor": "middle", class: "weight-profile-axis-title",
       });
       yTitle.textContent = "Relative multiplier";
-      svg.append(xTitle, yTitle); figure.append(title, description, svg); refs.weightProfileSlots.get(key).append(figure);
+      svg.append(xTitle, yTitle); figure.append(heading, description, svg); refs.weightProfileSlots.get(key).append(figure);
+      initializeHelpTooltips(figure);
     });
   }
 
@@ -1757,7 +1770,7 @@
     refs.binValue.value = state.bins;
   }
 
-  const URL_STATE_VERSION = 2;
+  const URL_STATE_VERSION = 3;
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
@@ -1838,7 +1851,7 @@
     if (state.ranges.salary.low !== state.ranges.salary.min || state.ranges.salary.high !== state.ranges.salary.max) ranges.s = [state.ranges.salary.low, state.ranges.salary.high];
     if (state.ranges.expenses.low !== state.ranges.expenses.min || state.ranges.expenses.high !== state.ranges.expenses.max) ranges.e = [state.ranges.expenses.low, state.ranges.expenses.high];
     const payload = { v: URL_STATE_VERSION };
-    if (state.stream !== "incumbents") payload.e = URL_STREAM_CODES[state.stream];
+    if (state.stream !== "combined") payload.e = URL_STREAM_CODES[state.stream];
     if (state.measure !== "base" && state.stream === "incumbents") payload.m = URL_MEASURE_CODES[state.measure];
     if (state.sample !== "primary") payload.p = URL_SAMPLE_CODES[state.sample];
     if (state.fit !== "lognormal") payload.g = URL_FIT_CODES[state.fit];
@@ -1904,7 +1917,6 @@
     refs.quantileGranularity.value = state.quantileGranularity;
     refs.customQuantiles.value = state.customQuantiles;
     refs.markCurve.checked = state.markCurve;
-    refs.showUnavailable.checked = state.showUnavailable;
     refs.salaryMin.value = state.ranges.salary.low;
     refs.salaryMax.value = state.ranges.salary.high;
     refs.expenseMin.value = expenseSliderPosition(state.ranges.expenses.low);
@@ -1913,7 +1925,8 @@
   }
 
   function expandCompactUrlState(payload) {
-    if (payload?.v !== URL_STATE_VERSION) return payload;
+    if (![2, URL_STATE_VERSION].includes(payload?.v)) return payload;
+    const version = payload.v;
     const custom = {};
     (payload.c || []).forEach(([code, value]) => {
       const row = shareRowCodes.get(String(code));
@@ -1933,7 +1946,8 @@
     return {
       v: 1,
       a: {
-        s: URL_STREAM_KEYS[payload.e], m: URL_MEASURE_KEYS[payload.m], p: URL_SAMPLE_KEYS[payload.p],
+        s: payload.e ? URL_STREAM_KEYS[payload.e] : version === 2 ? "incumbents" : "combined",
+        m: URL_MEASURE_KEYS[payload.m], p: URL_SAMPLE_KEYS[payload.p],
         d: URL_FIT_KEYS[payload.g],
         w: [...String(payload.w || "")].map((code) => URL_WEIGHT_KEYS[code]).filter(Boolean),
         te: payload.x?.e, ts: payload.x?.s, eb: payload.x?.b, sb: payload.x?.f, rh: payload.x?.r,
@@ -1948,12 +1962,13 @@
   }
 
   function restoreUrlState(payload) {
-    const compactVersion = payload?.v === URL_STATE_VERSION;
+    const sourceVersion = payload?.v;
+    const compactVersion = [2, URL_STATE_VERSION].includes(payload?.v);
     payload = expandCompactUrlState(payload);
     if (!payload || payload.v !== 1 || typeof payload.a !== "object") throw new Error("Unsupported or incomplete state version.");
     const analysis = payload.a;
     const enumValue = (value, allowed, fallback) => allowed.includes(value) ? value : fallback;
-    state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], state.stream);
+    state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], sourceVersion === 1 ? "incumbents" : state.stream);
     state.measure = enumValue(analysis.m, ["base", "cash", "total"], state.measure);
     if (state.stream === "combined") state.measure = "base";
     state.sample = enumValue(analysis.p, ["primary", "clean", "tierA", "observed"], state.sample);
@@ -1974,7 +1989,6 @@
     state.quantileGranularity = enumValue(analysis.q, ["quintiles", "deciles", "percentiles", "custom"], state.quantileGranularity);
     state.customQuantiles = typeof analysis.qq === "string" ? analysis.qq : state.customQuantiles;
     state.markCurve = analysis.qm !== 0;
-    state.showUnavailable = analysis.u === 1;
     state.sortKey = typeof analysis.sk === "string" ? analysis.sk : state.sortKey;
     state.sortDirection = analysis.sd === "desc" ? "desc" : "asc";
     state.filters = Object.fromEntries(Object.keys(state.filters).map((key) => [key, Array.isArray(payload.f?.[key]) ? new Set(payload.f[key].map(String)) : null]));
@@ -2024,7 +2038,7 @@
     const resumeUrlSync = urlSyncReady;
     urlSyncReady = false;
     Object.assign(state, {
-      stream: "incumbents", measure: "base", sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
+      stream: "combined", measure: "base", sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
       targetExpense: RP_REFERENCE.expenses, targetStaff: RP_REFERENCE.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95", markCurve: true,
@@ -2037,7 +2051,6 @@
         salary: { min: null, max: null, low: null, high: null },
         expenses: { min: null, max: null, low: null, high: null },
       },
-      showUnavailable: false,
       focusedId: "", hoverQuantile: null,
     });
     Object.entries({ incumbents: DATA.incumbents, jobAds: DATA.jobAds }).forEach(([stream, streamRows]) => {
@@ -2052,7 +2065,7 @@
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.quantileGranularity.value = "quintiles";
     refs.markCurve.checked = true;
-    refs.customQuantiles.value = state.customQuantiles; refs.showUnavailable.checked = false;
+    refs.customQuantiles.value = state.customQuantiles;
     applyPreset(); configureRanges(); buildFilterMenus(); renderWeightControls();
     renderAll();
     clearUrlState();
@@ -2064,13 +2077,12 @@
   }
 
   refs.stream.addEventListener("change", () => {
-    state.stream = refs.stream.value; state.focusedId = ""; state.autoBins = true; state.showUnavailable = false;
+    state.stream = refs.stream.value; state.focusedId = ""; state.autoBins = true;
     if (state.stream === "combined") { state.measure = "base"; refs.measure.value = "base"; }
     state.filters = {
       title: null, sourceType: null, tier: null, topic: null, location: null,
       eaAffinity: null, structure: null,
     };
-    refs.showUnavailable.checked = false;
     applyPreset(); configureRanges(); buildFilterMenus(); renderWeightControls(); renderAll();
   });
   refs.measure.addEventListener("change", () => {
@@ -2080,7 +2092,13 @@
   refs.sample.addEventListener("change", () => { state.sample = refs.sample.value; applyPreset(); renderAll(); });
   refs.fit.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.fit = radio.value; renderAll(); } }));
   refs.weightingComponents.forEach((input) => input.addEventListener("change", () => {
-    if (input.checked) state.weightings.add(input.value); else state.weightings.delete(input.value);
+    if (input.checked && input.value === "comparability") {
+      state.weightings.clear();
+      state.weightings.add("comparability");
+    } else if (input.checked) {
+      state.weightings.delete("comparability");
+      state.weightings.add(input.value);
+    } else state.weightings.delete(input.value);
     renderWeightControls(); renderAll();
   }));
   refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || RP_REFERENCE.expenses / 1_000_000, 1, 100) * 1_000_000; renderAll(); });
@@ -2096,7 +2114,6 @@
   refs.scatterX.addEventListener("change", () => { state.scatterX = refs.scatterX.value; renderChart(); });
   refs.chartColor.addEventListener("change", () => { state.chartColor = refs.chartColor.value; renderAll(); });
   refs.showContours.addEventListener("change", () => { state.showContours = refs.showContours.checked; renderChart(); });
-  refs.showUnavailable.addEventListener("change", () => { state.showUnavailable = refs.showUnavailable.checked; renderTable(); });
   refs.salaryMin.addEventListener("input", () => updateRange("salary", "low"));
   refs.salaryMax.addEventListener("input", () => updateRange("salary", "high"));
   refs.expenseMin.addEventListener("input", () => updateRange("expenses", "low"));
