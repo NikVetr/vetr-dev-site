@@ -106,6 +106,23 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".density-line-outline")).toHaveAttribute("d", await page.locator(".density-line").getAttribute("d"));
   await expect(page.locator(".density-line-outline")).toHaveCSS("stroke", "rgba(255, 255, 255, 0.96)");
   await expect(page.locator(".rug-line")).toHaveCount(125);
+  await expect(page.locator(".rp-reference-guide")).toHaveCount(1);
+  await expect(page.locator(".rp-chart-marker")).toHaveCount(1);
+  await expect(page.locator(".rp-chart-marker image")).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
+  await expect(page.locator(".rp-chart-marker-outline")).toHaveCSS("stroke", "rgb(255, 255, 255)");
+  await expect(page.locator("#chart-legend")).toContainText("RP reference · not analyzed");
+  const rpHistogramPlacement = await page.locator("#salary-chart").evaluate((svg) => {
+    const guide = svg.querySelector(".rp-reference-guide");
+    const marker = svg.querySelector(".rp-chart-marker");
+    const block = svg.querySelector(".bar-block");
+    return {
+      guideX: Number(guide.getAttribute("x1")),
+      markerX: marker.transform.baseVal.consolidate().matrix.e,
+      guideBehindBlocks: Boolean(guide.compareDocumentPosition(block) & Node.DOCUMENT_POSITION_FOLLOWING),
+    };
+  });
+  expect(rpHistogramPlacement.markerX).toBeCloseTo(rpHistogramPlacement.guideX, 5);
+  expect(rpHistogramPlacement.guideBehindBlocks).toBe(true);
   await expect(page.locator("#salary-chart")).toContainText("Weighted observations per bin");
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from the fitted lognormal distribution");
   await expect(page.locator("#mark-curve")).toBeChecked();
@@ -206,10 +223,21 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(1);
   await expect(page.locator("#chart-tooltip")).toBeVisible();
   await expect(page.locator("#chart-tooltip .chart-tooltip-value strong")).toContainText("$");
-  await expect(page.locator("#chart-tooltip dt")).toContainText(["Histogram bin", "Peer tier", "Evidence", "Match score", "Effective weight"]);
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["Histogram bin", "Salary percentile", "Peer tier", "Evidence", "Match score", "Effective weight"]);
+  await expect(page.locator("#chart-tooltip")).toContainText(/P\d+(?:\.\d)? · weighted among 125 plotted organizations/);
   await expect(page.locator("#chart-tooltip .chart-tooltip-hint")).toContainText("focus its row");
   await page.locator("#chart-title").hover();
   await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(0);
+  await page.locator(".rp-chart-marker").hover();
+  await expect(page.locator("#chart-tooltip")).toContainText("Rethink Priorities");
+  await expect(page.locator("#chart-tooltip")).toContainText("$155,230");
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["Salary percentile", "Analytical status", "Evidence"]);
+  await expect(page.locator("#chart-tooltip")).toContainText(/P\d+(?:\.\d)? · weighted vs 125 plotted peers/);
+  await expect(page.locator("#chart-tooltip")).toContainText("excluded from all calculations");
+  await expect(page.locator("#chart-tooltip")).not.toContainText("Effective weight");
+  await expect(page.locator("#chart-tooltip .chart-tooltip-hint")).toContainText("RP reference row");
+  await page.locator(".chart-panel").screenshot({ path: "tmp/app-rp-histogram-reference.png" });
+  await page.locator("#chart-title").hover();
   const histogramTickLines = await page.locator("#salary-chart").evaluate((svg) => {
     const rug = svg.querySelector(".rug-line");
     const baseline = Number(rug.getAttribute("y1")) - 2;
@@ -278,6 +306,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#price-basis-status")).toHaveText("Source-year USD");
   await expect(page.locator("#salary-chart")).toContainText("Annual compensation (Source-year USD)");
   await expect(rpReferenceRow).toContainText("$146K");
+  await expect(page.locator(".rp-chart-marker")).toHaveAttribute("aria-label", /\$145,826/);
   await expect(caisInflationRow.locator(".money-cell").first()).toHaveText("$315K");
   await caisInflationRow.getByRole("button", { name: "Preview" }).click();
   await expect(page.locator("#dialog-value")).toHaveText("$314,534");
@@ -600,6 +629,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('input[name="chart-view"][value="scatter"]').check();
   await expect(page.locator("#scatter-controls")).toBeVisible();
   await expect(page.locator(".scatter-point")).not.toHaveCount(0);
+  await expect(page.locator(".rp-reference-guide")).toHaveCount(0);
+  await expect(page.locator(".rp-chart-marker")).toHaveCount(1);
+  await expect(page.locator("#chart-legend")).toContainText("RP reference · not analyzed");
+  await expect(page.locator("#stat-n")).toHaveText(String(await page.locator(".scatter-point").count()));
   await expect(page.locator(".correlation-annotation")).toHaveCount(0);
   await expect(page.locator("#scatter-correlations")).toHaveText(/Weighted r = -?\d\.\d{3}, ρ = -?\d\.\d{3}/);
   await expect(page.locator("#scatter-correlations")).toHaveAttribute("aria-label", /weighted Spearman rho/i);
@@ -611,11 +644,22 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   const maximumPointAreaMultiple = await page.locator(".scatter-point").evaluateAll((points) => Math.max(...points.map((point) => (Number(point.getAttribute("r")) / 4.5) ** 2)));
   expect(maximumPointAreaMultiple).toBeLessThanOrEqual(10.001);
   await expect(page.locator(".covariance-contour")).toHaveCount(3);
+  await page.locator(".scatter-point").first().hover();
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["Salary percentile", "Annual expenses percentile"]);
+  await page.locator(".rp-chart-marker").hover();
+  await expect(page.locator("#chart-tooltip")).toContainText("Rethink Priorities");
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["Annual expenses", "Salary percentile", "Annual expenses percentile", "Analytical status"]);
+  await expect(page.locator("#chart-tooltip")).toContainText(/weighted vs \d+ plotted peers/);
+  await page.locator(".chart-panel").screenshot({ path: "tmp/app-rp-scatter-reference.png" });
   await page.locator("#chart-color").selectOption("sourceType");
   await expect(page.locator("#chart-legend")).toContainText("Form 990");
   await expect(page.locator("#chart-legend")).toContainText("Job posting");
   await page.locator("#scatter-x").selectOption("staff");
   await expect(page.locator("#salary-chart")).toContainText("Staff count (log scale)");
+  await expect(page.locator(".rp-chart-marker")).toHaveCount(1);
+  await page.locator("#scatter-x").selectOption("comparabilityScore");
+  await expect(page.locator(".rp-chart-marker")).toHaveCount(0);
+  await expect(page.locator("#chart-legend")).toContainText("RP reference unavailable for this axis");
   await page.locator("#show-contours").uncheck();
   await expect(page.locator(".covariance-contour")).toHaveCount(0);
   await expect(page.locator("#table-search")).toHaveCount(0);

@@ -554,6 +554,25 @@
     return sorted.at(-1).value;
   }
 
+  function weightedPercentilePosition(items, value, accessor) {
+    const valid = items.filter((item) => Number.isFinite(accessor(item)) && item.weight > 0);
+    const totalWeight = valid.reduce((sum, item) => sum + item.weight, 0);
+    if (!valid.length || !totalWeight || !Number.isFinite(value)) return null;
+    const belowWeight = valid.reduce((sum, item) => sum + (accessor(item) < value ? item.weight : 0), 0);
+    const equalWeight = valid.reduce((sum, item) => sum + (accessor(item) === value ? item.weight : 0), 0);
+    return {
+      percentile: ((belowWeight + equalWeight / 2) / totalWeight) * 100,
+      count: valid.length,
+    };
+  }
+
+  function percentilePositionLabel(items, value, accessor, reference = false) {
+    const position = weightedPercentilePosition(items, value, accessor);
+    if (!position) return "Unavailable";
+    const percentile = position.percentile.toFixed(1).replace(/\.0$/, "");
+    return `P${percentile} · weighted ${reference ? "vs" : "among"} ${position.count} plotted ${reference ? "peers" : "organizations"}`;
+  }
+
   function normalQuantile(p) {
     const a = [-39.6968302866538, 220.946098424521, -275.928510446969, 138.357751867269, -30.6647980661472, 2.50662827745924];
     const b = [-54.4760987982241, 161.585836858041, -155.698979859887, 66.8013118877197, -13.2806815528857];
@@ -665,6 +684,36 @@
     return element;
   }
 
+  function appendRpMarker(svg, x, y, item, context = {}, size = 26) {
+    const group = svgElement("g", {
+      class: "rp-chart-marker", transform: `translate(${x} ${y})`, tabindex: "0", role: "button",
+      "aria-label": `Rethink Priorities reference, ${money(item.value)}; excluded from calculations`,
+    });
+    group.append(svgElement("rect", {
+      x: -size / 2, y: -size / 2, width: size, height: size, rx: 4,
+      class: "rp-chart-marker-outline",
+    }));
+    group.append(svgElement("image", {
+      href: "assets/rethink-priorities-favicon.png", x: -size / 2 + 2, y: -size / 2 + 2,
+      width: size - 4, height: size - 4, preserveAspectRatio: "xMidYMid meet",
+    }));
+    const tooltipEvent = (event) => {
+      if (Number.isFinite(event.clientX) && Number.isFinite(event.clientY) && (event.clientX || event.clientY)) return event;
+      const bounds = group.getBoundingClientRect();
+      return { clientX: bounds.left + bounds.width / 2, clientY: bounds.top + bounds.height / 2 };
+    };
+    const show = (event) => showTooltip(tooltipEvent(event), item, { ...context, reference: true });
+    group.addEventListener("pointerenter", show);
+    group.addEventListener("pointermove", (event) => positionTooltip(event));
+    group.addEventListener("pointerleave", hideTooltip);
+    group.addEventListener("focus", show);
+    group.addEventListener("blur", hideTooltip);
+    group.addEventListener("click", focusRpReferenceRow);
+    group.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRpReferenceRow(); });
+    svg.append(group);
+    return group;
+  }
+
   function squareBinCount(items, domainMin, domainMax, innerWidth, innerHeight) {
     let best = { bins: 20, score: Infinity };
     const model = fitModel(items);
@@ -699,6 +748,17 @@
     });
   }
 
+  function appendRpLegend(available = true) {
+    const item = document.createElement("span");
+    item.className = "rp-reference-legend";
+    if (available) {
+      const logo = document.createElement("img");
+      logo.src = "assets/rethink-priorities-favicon.png"; logo.alt = "";
+      item.append(logo, document.createTextNode("RP reference · not analyzed"));
+    } else item.textContent = "RP reference unavailable for this axis";
+    refs.chartLegend.append(item);
+  }
+
   function renderHistogramLegend(colorMap) {
     refs.chartLegend.replaceChildren();
     appendCategoryLegend(colorMap);
@@ -707,6 +767,7 @@
       refs.chartLegend.append(density);
     }
     const rug = document.createElement("span"); rug.innerHTML = '<i class="rug-swatch"></i> Individual salaries'; refs.chartLegend.append(rug);
+    appendRpLegend();
   }
 
   function quantilePercentiles() {
@@ -861,7 +922,10 @@
       return;
     }
 
-    const values = items.map((item) => item.value);
+    const rpRow = DATA.rpReference;
+    const rpValue = salary(rpRow);
+    const rpItem = { row: rpRow, value: rpValue, weight: 0 };
+    const values = [...items.map((item) => item.value), rpValue].filter(Number.isFinite);
     const rawMin = Math.min(...values);
     const rawMax = Math.max(...values);
     const pad = Math.max((rawMax - rawMin) * 0.08, 25_000);
@@ -903,6 +967,12 @@
 
     const plotBottom = margin.top + innerHeight;
     appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom);
+    const rpX = xScale(rpValue);
+    const rpLogoY = margin.top + 14;
+    svg.append(svgElement("line", {
+      x1: rpX, x2: rpX, y1: rpLogoY + 14, y2: plotBottom,
+      class: "rp-reference-guide", "aria-hidden": "true",
+    }));
     bins.forEach((bin) => {
       const x0 = xScale(domainMin + bin.index * binWidthValue) + 1;
       const x1 = xScale(domainMin + (bin.index + 1) * binWidthValue) - 1;
@@ -920,7 +990,11 @@
         const binHigh = binLow + binWidthValue;
         rect.addEventListener("pointerenter", (event) => {
           highlightRug(item.row.id, true);
-          showTooltip(event, item, { category, chartDetail: ["Histogram bin", `${compactMoney(binLow)}–${compactMoney(binHigh)}`] });
+          showTooltip(event, item, {
+            category,
+            chartDetail: ["Histogram bin", `${compactMoney(binLow)}–${compactMoney(binHigh)}`],
+            rankDetails: [["Salary percentile", percentilePositionLabel(items, item.value, (candidate) => candidate.value)]],
+          });
         });
         rect.addEventListener("pointermove", (event) => positionTooltip(event));
         rect.addEventListener("pointerleave", () => { highlightRug(item.row.id, false); hideTooltip(); });
@@ -959,6 +1033,10 @@
       const x = xScale(state.hoverQuantile);
       svg.append(svgElement("line", { x1: x, x2: x, y1: margin.top, y2: plotBottom, class: "quantile-guide" }));
     }
+
+    appendRpMarker(svg, rpX, rpLogoY, rpItem, {
+      rankDetails: [["Salary percentile", percentilePositionLabel(items, rpValue, (candidate) => candidate.value, true)]],
+    });
 
     const tickCount = width < 650 ? 5 : 8;
     for (let i = 0; i <= tickCount; i += 1) {
@@ -1069,7 +1147,7 @@
     refs.chartLegend.append(legend);
   }
 
-  function renderScatterLegend(colorMap, contoursShown, items) {
+  function renderScatterLegend(colorMap, contoursShown, items, rpAvailable) {
     refs.chartLegend.replaceChildren();
     appendCategoryLegend(colorMap);
     if (contoursShown) {
@@ -1077,6 +1155,7 @@
       refs.chartLegend.append(contour);
     }
     appendPointSizeLegend(items);
+    appendRpLegend(rpAvailable);
   }
 
   function appendCovarianceContours(svg, points, clipId) {
@@ -1154,6 +1233,10 @@
       const value = item.row[state.scatterX];
       return value != null && Number.isFinite(value) && (!variable.logarithmic || value > 0);
     });
+    const rpRow = DATA.rpReference;
+    const rpXValue = rpRow[state.scatterX];
+    const rpValue = salary(rpRow);
+    const rpAvailable = Number.isFinite(rpXValue) && Number.isFinite(rpValue) && (!variable.logarithmic || rpXValue > 0);
     const svg = refs.chart;
     svg.replaceChildren();
     $("#chart-description").textContent = `A scatterplot of annual compensation against ${variable.label.toLowerCase()}.`;
@@ -1174,6 +1257,7 @@
     const xTransform = (value) => variable.logarithmic ? Math.log(value) : value;
     const transformedX = items.map((item) => xTransform(item.row[state.scatterX]));
     const salaries = items.map((item) => item.value);
+    if (rpAvailable) { transformedX.push(xTransform(rpXValue)); salaries.push(rpValue); }
     const paddedDomain = (values, minimumPadding) => {
       const low = Math.min(...values); const high = Math.max(...values);
       const padding = Math.max((high - low) * 0.08, minimumPadding);
@@ -1220,18 +1304,31 @@
       });
       point.addEventListener("pointerenter", (event) => showTooltip(event, item, {
         category, chartDetail: [variable.label, variable.format(item.row[state.scatterX])],
+        rankDetails: [
+          ["Salary percentile", percentilePositionLabel(items, item.value, (candidate) => candidate.value)],
+          [`${variable.label} percentile`, percentilePositionLabel(items, item.row[state.scatterX], (candidate) => candidate.row[state.scatterX])],
+        ],
       }));
       point.addEventListener("pointermove", positionTooltip); point.addEventListener("pointerleave", hideTooltip);
       point.addEventListener("click", () => focusRow(item.row.id));
       point.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRow(item.row.id); });
       svg.append(point);
     });
+    if (rpAvailable) {
+      appendRpMarker(svg, xScale(rpXValue), yScale(rpValue), { row: rpRow, value: rpValue, weight: 0 }, {
+        chartDetail: [variable.label, variable.format(rpXValue)],
+        rankDetails: [
+          ["Salary percentile", percentilePositionLabel(items, rpValue, (candidate) => candidate.value, true)],
+          [`${variable.label} percentile`, percentilePositionLabel(items, rpXValue, (candidate) => candidate.row[state.scatterX], true)],
+        ],
+      }, 28);
+    }
     updateCorrelationSummary(correlations);
     const xTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
     xTitle.textContent = `${variable.label}${variable.logarithmic ? " (log scale)" : ""}`; svg.append(xTitle);
     const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
     yTitle.textContent = `Annual compensation (${priceBasisLabel()})`; svg.append(yTitle);
-    renderScatterLegend(colors, contoursShown, items);
+    renderScatterLegend(colors, contoursShown, items, rpAvailable);
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     const squared = items.reduce((sum, item) => sum + item.weight ** 2, 0);
     refs.statN.textContent = items.length;
@@ -1258,13 +1355,14 @@
     }[state.chartColor];
     const details = [
       context.chartDetail,
+      ...(context.rankDetails || []),
       range ? ["Advertised range", range] : null,
-      ["Peer tier", tier.label],
-      rowStream(row) === "jobAds" && rawTier !== tier.label ? ["Recruitment subtype", rawTier] : null,
-      colorLabel ? [`Color · ${colorLabel}`, context.category] : null,
+      context.reference ? ["Analytical status", "RP reference only · excluded from all calculations"] : ["Peer tier", tier.label],
+      !context.reference && rowStream(row) === "jobAds" && rawTier !== tier.label ? ["Recruitment subtype", rawTier] : null,
+      !context.reference && colorLabel ? [`Color · ${colorLabel}`, context.category] : null,
       evidence ? ["Evidence", evidence] : null,
-      row.comparabilityScore != null ? ["Match score", `${row.comparabilityScore} / 100`] : null,
-      ["Effective weight", item.weight > 0 && item.weight < 0.01 ? "<0.01" : item.weight.toFixed(2)],
+      !context.reference && row.comparabilityScore != null ? ["Match score", `${row.comparabilityScore} / 100`] : null,
+      !context.reference ? ["Effective weight", item.weight > 0 && item.weight < 0.01 ? "<0.01" : item.weight.toFixed(2)] : null,
     ].filter(Boolean);
     refs.tooltip.innerHTML = `
       <div class="chart-tooltip-heading">
@@ -1276,7 +1374,7 @@
         <strong>${money(item.value)}</strong>
       </div>
       <dl>${details.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>
-      <p class="chart-tooltip-hint">Click the mark to focus its row in the table.</p>`;
+      <p class="chart-tooltip-hint">Click the mark to focus ${context.reference ? "the RP reference row" : "its row"} in the table.</p>`;
     refs.tooltip.hidden = false;
     positionTooltip(event);
   }
@@ -1642,6 +1740,10 @@
     requestAnimationFrame(() => {
       refs.tableBody.querySelector(`tr[data-id="${CSS.escape(id)}"]`)?.scrollIntoView({ behavior: "smooth", block: "center" });
     });
+  }
+
+  function focusRpReferenceRow() {
+    refs.tableBody.querySelector(".rp-reference-row")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
   function openSourceDialog(row) {
