@@ -227,10 +227,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
   await page.locator("#reset-settings").click();
   await expect(page.getByRole("button", { name: "About composite peer score" })).toHaveCount(0);
+  await page.locator('.stream-balance-rule input[value="streamBalanced"]').check();
   await page.locator('#weighting-components input[value="size"]').check();
   await page.locator('#weighting-components input[value="comparability"]').check();
   await expect(page.locator('#weighting-components input[value="comparability"]')).toBeChecked();
   await expect(page.locator('#weighting-components input[value="size"]')).not.toBeChecked();
+  await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
   await expect(page.locator("#comparability-profile-field")).toBeVisible();
   await expect(page.locator("#comparability-profile-field")).toHaveCSS("padding-left", "0px");
   await expect(page.locator("#comparability-profile-field")).toHaveCSS("border-left-width", "0px");
@@ -241,6 +243,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#help-tooltip")).toContainText("avoid double-counting");
   await page.locator('#weighting-components input[value="size"]').check();
   await expect(page.locator('#weighting-components input[value="comparability"]')).not.toBeChecked();
+  await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
   await expect(page.locator("#comparability-profile-field")).toBeHidden();
   await expect(page.locator("#size-controls")).toBeVisible();
   await expect(page.locator("#expense-target-field")).toBeVisible();

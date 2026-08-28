@@ -2093,10 +2093,12 @@
   refs.fit.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.fit = radio.value; renderAll(); } }));
   refs.weightingComponents.forEach((input) => input.addEventListener("change", () => {
     if (input.checked && input.value === "comparability") {
+      const balanceStreams = state.weightings.has("streamBalanced");
       state.weightings.clear();
       state.weightings.add("comparability");
+      if (balanceStreams) state.weightings.add("streamBalanced");
     } else if (input.checked) {
-      state.weightings.delete("comparability");
+      if (input.value !== "streamBalanced") state.weightings.delete("comparability");
       state.weightings.add(input.value);
     } else state.weightings.delete(input.value);
     renderWeightControls(); renderAll();
