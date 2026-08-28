@@ -100,19 +100,10 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .dollar-basis-setting { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .axis-settings { gap: 7px; }
 .axis-settings-title { color: var(--ink); font-size: 11px; font-weight: 750; }
-.axis-setting-block { display: grid; gap: 5px; padding: 7px; border: 1px solid var(--line); background: var(--paper); }
-.axis-setting-block > strong { color: var(--green); font-size: 9.5px; }
-.axis-setting-block > strong:not(:first-child) { margin-top: 5px; padding-top: 7px; border-top: 1px solid var(--line); }
-.axis-option-row { display: grid; grid-template-columns: 37px minmax(0, 1fr); align-items: center; gap: 5px; }
-.axis-option-row > span { color: var(--muted); font-size: 8.5px; font-weight: 650; }
-.axis-choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.axis-scale-choice { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.axis-choice label { display: flex; align-items: center; justify-content: center; min-width: 0; gap: 2px; padding: 5px 3px; border: 1px solid var(--line); background: white; color: var(--ink); font-size: 8.5px; cursor: pointer; }
-.axis-choice label + label { border-left: 0; }
-.axis-choice label:first-child { border-radius: 5px 0 0 5px; }
-.axis-choice label:last-child { border-radius: 0 5px 5px 0; }
-.axis-choice input { flex: none; margin: 0; accent-color: var(--green); }
-.axis-choice label:has(input:checked) { background: var(--green-soft); color: var(--green); font-weight: 750; }
+.axis-view-settings { display: grid; grid-template-columns: minmax(0, 1fr); gap: 7px; }
+.axis-control-setting { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
+.scatter-axis-heading { color: var(--green); font-size: 9.5px; }
+.scatter-axis-heading:not(:first-child) { margin-top: 5px; padding-top: 7px; border-top: 1px solid var(--line); }
 .weighting-field { position: sticky; z-index: 8; top: -17px; margin-inline: -17px; padding: 12px 17px 9px; border: 0; border-bottom: 1px solid var(--line); background: #fff; box-shadow: 0 7px 13px rgba(45, 104, 133, .12); }
 .weighting-field::after { position: absolute; top: 0; right: -9px; bottom: 0; width: 9px; background: #fff; content: ""; pointer-events: none; }
 .weighting-title { display: flex; align-items: center; gap: 3px; }

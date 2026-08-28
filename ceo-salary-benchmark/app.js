@@ -35,7 +35,7 @@
     autoBins: true,
     view: "histogram",
     axisModes: { histogram: "value", scatterX: "value", scatterY: "value" },
-    axisScales: { histogram: "auto", scatterX: "auto", scatterY: "auto" },
+    axisScales: { histogram: "linear", scatterX: "log", scatterY: "linear" },
     histogramAxis: { numerator: "salary", denominator: "expenses" },
     scatterXAxis: { numerator: "expenses", denominator: "staff" },
     scatterYAxis: { numerator: "salary", denominator: "expenses" },
@@ -489,6 +489,11 @@
   function axisExpression(axisKey) { return state[axisStateKeys[axisKey]]; }
   function axisMode(axisKey) { return state.axisModes[axisKey]; }
 
+  function recommendedAxisScale(axisKey) {
+    const numerator = numericVariables[axisExpression(axisKey).numerator] || numericVariables.salary;
+    return axisMode(axisKey) === "ratio" || numerator.logarithmic ? "log" : "linear";
+  }
+
   function normalizeAxisExpressions(axisKey = null) {
     const axisKeys = axisKey ? [axisKey] : Object.keys(axisStateKeys);
     axisKeys.forEach((key) => {
@@ -505,8 +510,7 @@
     const denominator = numericVariables[expression.denominator] || numericVariables.expenses;
     const mode = axisMode(axisKey);
     const scaleSetting = state.axisScales[axisKey];
-    const autoLogarithmic = mode === "ratio" || numerator.logarithmic;
-    const logarithmic = scaleSetting === "log" || (scaleSetting === "auto" && autoLogarithmic);
+    const logarithmic = scaleSetting === "log";
     if (mode === "value") {
       return {
         axisKey, label: numerator.label(), shortLabel: numerator.shortLabel, format: numerator.format,
@@ -538,7 +542,7 @@
   }
 
   function axisDisplayLabel(descriptor) {
-    return `${descriptor.label}${descriptor.logarithmic ? " (log scale)" : ""}`;
+    return descriptor.label;
   }
 
   function axisItems(axisKey) {
@@ -1118,6 +1122,8 @@
       const alternative = Object.keys(numericVariables).find((key) => key !== value);
       expression[part === "numerator" ? "denominator" : "numerator"] = alternative;
     }
+    state.axisScales[activeAxisSelector] = recommendedAxisScale(activeAxisSelector);
+    syncAxisControls();
     if (activeAxisSelector === "histogram") state.autoBins = true;
     closeAxisSelector();
     renderAll();
@@ -2300,11 +2306,11 @@
       } else if (key === "size") {
         values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
         parameter = `Target ${compactMoney(state.targetExpense)} · bandwidth ${state.expenseBandwidth.toFixed(2)}`;
-        axisTitle = "Annual expenses (USD, log scale)";
+        axisTitle = "Annual expenses (USD)";
       } else if (key === "staff") {
         values = rows().map((row) => row.staff).filter((value) => value > 0); format = (value) => Math.round(value).toLocaleString(); logarithmic = true;
         parameter = `Target ${state.targetStaff.toLocaleString()} · bandwidth ${state.staffBandwidth.toFixed(2)}`;
-        axisTitle = "Staff count (log scale)";
+        axisTitle = "Staff count";
       } else {
         values = rows().map((row) => row.compensationYear).filter((value) => value > 0); format = (value) => value.toFixed(0);
         parameter = `${state.recencyHalfLife.toFixed(1)}-year half-life`;
@@ -2681,7 +2687,7 @@
     state.view = enumValue(analysis.vw, ["histogram", "scatter"], state.view);
     const restoredAxisMode = enumValue(analysis.am, ["value", "ratio"], "value");
     state.axisModes = { histogram: "value", scatterX: "value", scatterY: "value" };
-    state.axisScales = { histogram: "auto", scatterX: "auto", scatterY: "auto" };
+    state.axisScales = { histogram: "linear", scatterX: "log", scatterY: "linear" };
     if (sourceVersion === 1 || sourceVersion === 4) {
       Object.keys(state.axisModes).forEach((axisKey) => { state.axisModes[axisKey] = restoredAxisMode; });
     } else state.axisModes[state.view === "scatter" ? "scatterY" : "histogram"] = restoredAxisMode;
@@ -2697,6 +2703,7 @@
     state.scatterYAxis = decodeExpression(analysis.sy, state.scatterYAxis);
     if (analysis.x && numericVariables[analysis.x]) state.scatterXAxis.numerator = analysis.x;
     normalizeAxisExpressions();
+    Object.keys(state.axisScales).forEach((axisKey) => { state.axisScales[axisKey] = recommendedAxisScale(axisKey); });
     state.chartColor = enumValue(analysis.c, ["tier", "topic", "eaAffinity", "sourceType", "titleGroup", "structure"], state.chartColor);
     state.showContours = analysis.co !== 0;
     state.quantileGranularity = enumValue(analysis.q, ["quintiles", "deciles", "percentiles", "custom"], state.quantileGranularity);
@@ -2760,7 +2767,7 @@
       targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram",
       axisModes: { histogram: "value", scatterX: "value", scatterY: "value" },
-      axisScales: { histogram: "auto", scatterX: "auto", scatterY: "auto" },
+      axisScales: { histogram: "linear", scatterX: "log", scatterY: "linear" },
       histogramAxis: { numerator: "salary", denominator: "expenses" },
       scatterXAxis: { numerator: "expenses", denominator: "staff" },
       scatterYAxis: { numerator: "salary", denominator: "expenses" },
@@ -2860,6 +2867,8 @@
     if (!radio.checked) return;
     state.axisModes[axisKey] = radio.value;
     normalizeAxisExpressions(axisKey);
+    state.axisScales[axisKey] = recommendedAxisScale(axisKey);
+    syncAxisControls();
     if (axisKey === "histogram") state.autoBins = true;
     closeAxisSelector();
     renderAll();

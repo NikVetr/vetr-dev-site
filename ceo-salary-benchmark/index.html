@@ -86,58 +86,42 @@
       </fieldset>
 
       <section class="axis-settings field" aria-labelledby="axis-settings-title">
-        <div id="axis-settings-title" class="axis-settings-title">Axis setup <button class="info-tooltip" type="button" aria-label="About chart axes" data-tooltip="Each displayed axis can independently show one measure or a ratio of two positive measures. Auto scale uses a log axis for ratios, expenses, revenue, and staff, and a linear axis for salary, match score, and evidence year. Linear and Log override that recommendation.">?</button></div>
-        <div id="histogram-axis-settings" class="axis-setting-block">
-          <strong>Horizontal axis</strong>
-          <div class="axis-option-row">
-            <span>Values</span>
-            <div class="axis-choice" role="radiogroup" aria-label="Histogram axis values">
-              <label><input type="radio" name="histogram-axis-mode" value="value" checked> Value</label>
-              <label><input type="radio" name="histogram-axis-mode" value="ratio"> Ratio</label>
-            </div>
-          </div>
-          <div class="axis-option-row">
-            <span>Scale</span>
-            <div class="axis-choice axis-scale-choice" role="radiogroup" aria-label="Histogram axis scale">
-              <label><input type="radio" name="histogram-axis-scale" value="auto" checked> Auto</label>
-              <label><input type="radio" name="histogram-axis-scale" value="linear"> Linear</label>
-              <label><input type="radio" name="histogram-axis-scale" value="log"> Log</label>
-            </div>
-          </div>
+        <div id="axis-settings-title" class="axis-settings-title">Axis setup <button class="info-tooltip" type="button" aria-label="About chart axes" data-tooltip="Each displayed axis can independently show one measure or a ratio of two positive measures. Choosing a measure or ratio activates a sensible default scale: log for ratios, expenses, revenue, and staff; linear for salary, match score, and evidence year. You can then override it.">?</button></div>
+        <div id="histogram-axis-settings" class="axis-view-settings">
+          <fieldset class="choice-group axis-control-setting">
+            <legend>Type</legend>
+            <label><input type="radio" name="histogram-axis-mode" value="value" checked> Measure</label>
+            <label><input type="radio" name="histogram-axis-mode" value="ratio"> Ratio</label>
+          </fieldset>
+          <fieldset class="choice-group axis-control-setting">
+            <legend>Scale</legend>
+            <label><input type="radio" name="histogram-axis-scale" value="linear" checked> Linear</label>
+            <label><input type="radio" name="histogram-axis-scale" value="log"> Log</label>
+          </fieldset>
         </div>
-        <div id="scatter-axis-settings" class="axis-setting-block" hidden>
-          <strong>Horizontal axis</strong>
-          <div class="axis-option-row">
-            <span>Values</span>
-            <div class="axis-choice" role="radiogroup" aria-label="Scatterplot horizontal-axis values">
-              <label><input type="radio" name="scatter-x-axis-mode" value="value" checked> Value</label>
-              <label><input type="radio" name="scatter-x-axis-mode" value="ratio"> Ratio</label>
-            </div>
-          </div>
-          <div class="axis-option-row">
-            <span>Scale</span>
-            <div class="axis-choice axis-scale-choice" role="radiogroup" aria-label="Scatterplot horizontal-axis scale">
-              <label><input type="radio" name="scatter-x-axis-scale" value="auto" checked> Auto</label>
-              <label><input type="radio" name="scatter-x-axis-scale" value="linear"> Linear</label>
-              <label><input type="radio" name="scatter-x-axis-scale" value="log"> Log</label>
-            </div>
-          </div>
-          <strong>Vertical axis</strong>
-          <div class="axis-option-row">
-            <span>Values</span>
-            <div class="axis-choice" role="radiogroup" aria-label="Scatterplot vertical-axis values">
-              <label><input type="radio" name="scatter-y-axis-mode" value="value" checked> Value</label>
-              <label><input type="radio" name="scatter-y-axis-mode" value="ratio"> Ratio</label>
-            </div>
-          </div>
-          <div class="axis-option-row">
-            <span>Scale</span>
-            <div class="axis-choice axis-scale-choice" role="radiogroup" aria-label="Scatterplot vertical-axis scale">
-              <label><input type="radio" name="scatter-y-axis-scale" value="auto" checked> Auto</label>
-              <label><input type="radio" name="scatter-y-axis-scale" value="linear"> Linear</label>
-              <label><input type="radio" name="scatter-y-axis-scale" value="log"> Log</label>
-            </div>
-          </div>
+        <div id="scatter-axis-settings" class="axis-view-settings scatter-axis-settings" hidden>
+          <strong class="scatter-axis-heading">Horizontal axis</strong>
+          <fieldset class="choice-group axis-control-setting">
+            <legend>Type</legend>
+            <label><input type="radio" name="scatter-x-axis-mode" value="value" checked> Measure</label>
+            <label><input type="radio" name="scatter-x-axis-mode" value="ratio"> Ratio</label>
+          </fieldset>
+          <fieldset class="choice-group axis-control-setting">
+            <legend>Scale</legend>
+            <label><input type="radio" name="scatter-x-axis-scale" value="linear"> Linear</label>
+            <label><input type="radio" name="scatter-x-axis-scale" value="log" checked> Log</label>
+          </fieldset>
+          <strong class="scatter-axis-heading">Vertical axis</strong>
+          <fieldset class="choice-group axis-control-setting">
+            <legend>Type</legend>
+            <label><input type="radio" name="scatter-y-axis-mode" value="value" checked> Measure</label>
+            <label><input type="radio" name="scatter-y-axis-mode" value="ratio"> Ratio</label>
+          </fieldset>
+          <fieldset class="choice-group axis-control-setting">
+            <legend>Scale</legend>
+            <label><input type="radio" name="scatter-y-axis-scale" value="linear" checked> Linear</label>
+            <label><input type="radio" name="scatter-y-axis-scale" value="log"> Log</label>
+          </fieldset>
         </div>
       </section>
 
