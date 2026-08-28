@@ -37,6 +37,7 @@
     showContours: true,
     quantileGranularity: "quintiles",
     customQuantiles: "5, 25, 50, 75, 95",
+    markCurve: true,
     sortKey: "tier",
     sortDirection: "asc",
     filters: {
@@ -60,6 +61,10 @@
     incumbents: new Map(DATA.incumbents.map((row) => [row.id, 1])),
     jobAds: new Map(DATA.jobAds.map((row) => [row.id, 1])),
   };
+  const modifiedWeightIds = {
+    incumbents: new Set(),
+    jobAds: new Set(),
+  };
   const wikipediaCache = new Map();
   let organizationPreviewHideTimer = 0;
   let helpTooltipGlobalListenersBound = false;
@@ -82,7 +87,7 @@
     reset: $("#reset-settings"), chart: $("#salary-chart"), chartWrap: $("#chart-wrap"),
     tooltip: $("#chart-tooltip"), chartKicker: $("#chart-kicker"), chartTitle: $("#chart-title"),
     statN: $("#stat-n"), statNUnit: $("#stat-n-unit"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
-    quantileGranularity: $("#quantile-granularity"), quantileGrid: $("#quantile-grid"),
+    quantileGranularity: $("#quantile-granularity"), markCurve: $("#mark-curve"), quantileGrid: $("#quantile-grid"),
     customQuantilesField: $("#custom-quantiles-field"), customQuantiles: $("#custom-quantiles"),
     customQuantilesError: $("#custom-quantiles-error"), chartLegend: $("#chart-legend"),
     quantileBasis: $("#quantile-basis"), sampleDescription: $("#sample-description"),
@@ -98,6 +103,7 @@
     tableBody: $("#organization-table tbody"),
     includedCount: $("#included-count"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
+    urlStateError: $("#url-state-error"),
   };
 
   function rows() {
@@ -111,6 +117,7 @@
 
   function rowInclusion(row) { return inclusion[rowStream(row)]; }
   function rowCustomWeights(row) { return customWeights[rowStream(row)]; }
+  function rowModifiedWeights(row) { return modifiedWeightIds[rowStream(row)]; }
 
   const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
   const WEIGHT_LABELS = {
@@ -390,23 +397,22 @@
     return weight;
   }
 
-  function effectiveWeight(row) {
-    if (!rowInclusion(row).get(row.id)) return 0;
-    const weight = baseWeight(row) * (rowCustomWeights(row).get(row.id) ?? 1);
-    if (!state.weightings.has("streamBalanced") || state.stream !== "combined") return weight;
-    const stream = rowStream(row);
-    const streamTotal = rows().reduce((sum, candidate) => {
-      if (rowStream(candidate) !== stream || salary(candidate) == null || !passesFilters(candidate) || !rowInclusion(candidate).get(candidate.id)) return sum;
-      return sum + baseWeight(candidate) * (rowCustomWeights(candidate).get(candidate.id) ?? 1);
-    }, 0);
-    return streamTotal ? weight / streamTotal : 0;
+  function weightedSelection() {
+    const selected = rows()
+      .filter((row) => passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id))
+      .map((row) => ({ row, value: salary(row), rawWeight: baseWeight(row) * (rowCustomWeights(row).get(row.id) ?? 1) }))
+      .filter((item) => item.rawWeight > 0 && Number.isFinite(item.rawWeight));
+    if (state.weightings.has("streamBalanced") && state.stream === "combined") {
+      const streamTotals = new Map();
+      selected.forEach((item) => streamTotals.set(rowStream(item.row), (streamTotals.get(rowStream(item.row)) || 0) + item.rawWeight));
+      selected.forEach((item) => { item.rawWeight /= streamTotals.get(rowStream(item.row)) || 1; });
+    }
+    const mean = selected.length ? selected.reduce((sum, item) => sum + item.rawWeight, 0) / selected.length : 0;
+    return selected.map(({ row, value, rawWeight }) => ({ row, value, weight: mean ? rawWeight / mean : 0 }));
   }
 
   function selectedRows() {
-    return rows()
-      .filter(passesFilters)
-      .map((row) => ({ row, value: salary(row), weight: effectiveWeight(row) }))
-      .filter((item) => item.value != null && item.weight > 0);
+    return weightedSelection();
   }
 
   function passesFilters(row) {
@@ -425,17 +431,16 @@
     });
   }
 
+  function presetSelected(row) {
+    const available = salary(row) != null;
+    if (state.sample === "clean") return Boolean(row.defaultIncluded && row.structurallyClean && available);
+    if (state.sample === "tierA") return Boolean(row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary"));
+    if (state.sample === "observed") return available;
+    return Boolean(row.defaultIncluded && available);
+  }
+
   function applyPreset() {
-    for (const row of rows()) {
-      const available = salary(row) != null;
-      let selected = row.defaultIncluded && available;
-      if (state.sample === "clean") selected = row.defaultIncluded && row.structurallyClean && available;
-      if (state.sample === "tierA") {
-        selected = row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary");
-      }
-      if (state.sample === "observed") selected = available;
-      rowInclusion(row).set(row.id, selected);
-    }
+    for (const row of rows()) rowInclusion(row).set(row.id, presetSelected(row));
   }
 
   function configureRanges() {
@@ -664,6 +669,57 @@
     const rug = document.createElement("span"); rug.innerHTML = '<i class="rug-swatch"></i> Individual salaries'; refs.chartLegend.append(rug);
   }
 
+  function quantilePercentiles() {
+    if (state.quantileGranularity === "deciles") return Array.from({ length: 9 }, (_, index) => (index + 1) * 10);
+    if (state.quantileGranularity === "percentiles") return Array.from({ length: 99 }, (_, index) => index + 1);
+    if (state.quantileGranularity !== "custom") return [20, 40, 60, 80];
+    const tokens = state.customQuantiles.split(",").map((value) => Number(value.trim()));
+    const valid = tokens.length > 0 && tokens.every((value) => Number.isFinite(value) && value > 0 && value < 100);
+    return valid ? [...new Set(tokens)].sort((a, b) => a - b) : [];
+  }
+
+  function appendCurveQuantileMarks(svg, model, percentiles, xScale, yScale, margin, sumWeight, binWidthValue, domainMin, domainMax) {
+    if (!state.markCurve || !model || !percentiles.length || percentiles.length >= 21) return;
+    const expectedWeight = (value) => model.density(value) * sumWeight * binWidthValue;
+    const delta = Math.max((domainMax - domainMin) / 1500, 1);
+    percentiles.forEach((percentile) => {
+      const value = model.quantile(percentile / 100);
+      if (!Number.isFinite(value) || value < domainMin || value > domainMax) return;
+      const x = xScale(value);
+      const y = margin.top + yScale(expectedWeight(value));
+      const before = Math.max(domainMin, value - delta);
+      const after = Math.min(domainMax, value + delta);
+      const tangentAngle = Math.atan2(
+        margin.top + yScale(expectedWeight(after)) - (margin.top + yScale(expectedWeight(before))),
+        xScale(after) - xScale(before),
+      );
+      let normalX = -Math.sin(tangentAngle);
+      let normalY = Math.cos(tangentAngle);
+      if (normalY > 0) { normalX *= -1; normalY *= -1; }
+      svg.append(svgElement("line", {
+        x1: x - normalX * 5, y1: y - normalY * 5, x2: x + normalX * 5, y2: y + normalY * 5,
+        class: "curve-quantile-tick",
+      }));
+      let textAngle = tangentAngle * 180 / Math.PI;
+      if (textAngle > 90) textAngle -= 180;
+      if (textAngle < -90) textAngle += 180;
+      const labelX = x + normalX * 15;
+      const labelY = y + normalY * 15;
+      const label = svgElement("text", {
+        x: labelX, y: labelY, transform: `rotate(${textAngle} ${labelX} ${labelY})`,
+        "text-anchor": "middle", class: "curve-quantile-label",
+      });
+      const percentileLine = svgElement("tspan", { x: labelX, dy: "0" });
+      percentileLine.textContent = "P";
+      const percentileSubscript = svgElement("tspan", { "baseline-shift": "sub", "font-size": "5.5" });
+      percentileSubscript.textContent = Number.isInteger(percentile) ? percentile : percentile.toFixed(1);
+      const amountLine = svgElement("tspan", { x: labelX, dy: "8", class: "amount" });
+      amountLine.textContent = `$${Math.round(value / 1000)}K`;
+      label.append(percentileLine, percentileSubscript, amountLine);
+      svg.append(label);
+    });
+  }
+
   function highlightRug(id, highlighted) {
     refs.chart.querySelectorAll(".rug-line").forEach((rug) => {
       if (rug.dataset.rugId === id) rug.classList.toggle("is-highlighted", highlighted || state.focusedId === id);
@@ -769,6 +825,10 @@
         return `${index ? "L" : "M"}${x.toFixed(2)},${y.toFixed(2)}`;
       }).join("");
       svg.append(svgElement("path", { d: path, class: "density-line" }));
+      appendCurveQuantileMarks(
+        svg, model, quantilePercentiles(), xScale, yScale, margin,
+        sumWeight, binWidthValue, domainMin, domainMax,
+      );
     }
 
     items.forEach((item) => {
@@ -908,6 +968,52 @@
     return true;
   }
 
+  function weightedPearson(values) {
+    const total = values.reduce((sum, item) => sum + item.weight, 0);
+    if (values.length < 2 || !total) return NaN;
+    const meanX = values.reduce((sum, item) => sum + item.x * item.weight, 0) / total;
+    const meanY = values.reduce((sum, item) => sum + item.y * item.weight, 0) / total;
+    const covariance = values.reduce((sum, item) => sum + (item.x - meanX) * (item.y - meanY) * item.weight, 0);
+    const varianceX = values.reduce((sum, item) => sum + (item.x - meanX) ** 2 * item.weight, 0);
+    const varianceY = values.reduce((sum, item) => sum + (item.y - meanY) ** 2 * item.weight, 0);
+    return varianceX > 0 && varianceY > 0 ? covariance / Math.sqrt(varianceX * varianceY) : NaN;
+  }
+
+  function weightedRanks(values, accessor) {
+    const ranked = [...values].sort((a, b) => accessor(a) - accessor(b));
+    const result = new Map();
+    let cumulative = 0;
+    for (let start = 0; start < ranked.length;) {
+      let end = start + 1;
+      while (end < ranked.length && accessor(ranked[end]) === accessor(ranked[start])) end += 1;
+      const groupWeight = ranked.slice(start, end).reduce((sum, item) => sum + item.weight, 0);
+      const rank = cumulative + groupWeight / 2;
+      ranked.slice(start, end).forEach((item) => result.set(item.index, rank));
+      cumulative += groupWeight;
+      start = end;
+    }
+    return result;
+  }
+
+  function weightedCorrelations(items, xAccessor) {
+    const values = items.map((item, index) => ({ index, x: xAccessor(item), y: item.value, weight: item.weight }));
+    const pearson = weightedPearson(values);
+    const xRanks = weightedRanks(values, (item) => item.x);
+    const yRanks = weightedRanks(values, (item) => item.y);
+    const spearman = weightedPearson(values.map((item) => ({ x: xRanks.get(item.index), y: yRanks.get(item.index), weight: item.weight })));
+    return { pearson, spearman };
+  }
+
+  function appendCorrelationAnnotation(svg, x, y, correlations) {
+    const format = (value) => Number.isFinite(value) ? value.toFixed(3) : "—";
+    const group = svgElement("g", { class: "correlation-annotation", "aria-label": `Weighted Pearson r ${format(correlations.pearson)}; weighted Spearman rho ${format(correlations.spearman)}` });
+    group.append(svgElement("rect", { x, y, width: 142, height: 21, rx: 3, class: "correlation-backdrop" }));
+    const label = svgElement("text", { x: x + 6, y: y + 14 });
+    label.textContent = `Weighted r = ${format(correlations.pearson)} · ρ = ${format(correlations.spearman)}`;
+    group.append(label);
+    svg.append(group);
+  }
+
   function renderScatter() {
     const variable = scatterVariables[state.scatterX];
     const items = selectedRows().filter((item) => {
@@ -967,10 +1073,13 @@
     const points = items.map((item) => ({ item, x: xScale(item.row[state.scatterX]), y: yScale(item.value) }));
     const contoursShown = appendCovarianceContours(svg, points, clipId);
     const colors = categoryColors(items);
+    const correlations = weightedCorrelations(items, (item) => xTransform(item.row[state.scatterX]));
     points.forEach(({ item, x, y }) => {
       const category = chartCategory(item.row);
+      const baseRadius = 4.5;
+      const radius = baseRadius * Math.sqrt(clamp(item.weight, 0.16, 10));
       const point = svgElement("circle", {
-        cx: x, cy: y, r: clamp(3.5 + Math.sqrt(item.weight), 4, 8), fill: colors.get(category),
+        cx: x, cy: y, r: radius, fill: colors.get(category), "data-weight": item.weight.toFixed(6),
         class: `scatter-point${state.focusedId === item.row.id ? " is-focused" : ""}`, tabindex: "0", role: "button",
         "aria-label": `${item.row.organization}, ${money(item.value)}, ${variable.label} ${variable.format(item.row[state.scatterX])}`,
       });
@@ -982,6 +1091,7 @@
       point.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRow(item.row.id); });
       svg.append(point);
     });
+    appendCorrelationAnnotation(svg, margin.left + 6, margin.top + 6, correlations);
     const xTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
     xTitle.textContent = `${variable.label}${variable.logarithmic ? " (log scale)" : ""}`; svg.append(xTitle);
     const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
@@ -1058,15 +1168,10 @@
       ? "Derived from weighted empirical ranks"
       : `Derived from the fitted ${state.fit} distribution`;
     refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
-    let percentiles = [20, 40, 60, 80];
-    if (state.quantileGranularity === "deciles") percentiles = Array.from({ length: 9 }, (_, index) => (index + 1) * 10);
-    if (state.quantileGranularity === "percentiles") percentiles = Array.from({ length: 99 }, (_, index) => index + 1);
+    const percentiles = quantilePercentiles();
     if (state.quantileGranularity === "custom") {
-      const tokens = state.customQuantiles.split(",").map((value) => Number(value.trim()));
-      const valid = tokens.length > 0 && tokens.every((value) => Number.isFinite(value) && value > 0 && value < 100);
+      const valid = percentiles.length > 0;
       refs.customQuantilesError.textContent = valid ? "" : "Enter comma-separated values greater than 0 and less than 100.";
-      if (valid) percentiles = [...new Set(tokens)].sort((a, b) => a - b);
-      else percentiles = [];
     } else refs.customQuantilesError.textContent = "";
     refs.quantileGrid.replaceChildren();
     refs.quantileGrid.classList.toggle("is-percentiles", percentiles.length > 20);
@@ -1099,14 +1204,14 @@
     return { number: rounded, suffix };
   }
 
-  function tableRows() {
+  function tableRows(weightMap = new Map()) {
     const filtered = rows().filter((row) => (state.showUnavailable || salary(row) != null) && passesFilters(row));
     const direction = state.sortDirection === "asc" ? 1 : -1;
     return filtered.sort((a, b) => {
       const value = (row) => {
         if (state.sortKey === "tier") return tierSortValue(row.tier);
         if (state.sortKey === "salary") return salary(row) ?? -Infinity;
-        if (state.sortKey === "weight") return effectiveWeight(row);
+        if (state.sortKey === "weight") return weightMap.get(row.id) || 0;
         if (["expenses", "staff", "comparabilityScore", "compensationYear"].includes(state.sortKey)) return row[state.sortKey] ?? -Infinity;
         return String(row[state.sortKey] || "").toLowerCase();
       };
@@ -1191,7 +1296,9 @@
 
   function renderTable() {
     refs.tableBody.replaceChildren();
-    tableRows().forEach((row) => {
+    const selection = weightedSelection();
+    const weightMap = new Map(selection.map((item) => [item.row.id, item.weight]));
+    tableRows(weightMap).forEach((row) => {
       const available = salary(row) != null;
       const tr = document.createElement("tr");
       if (!rowInclusion(row).get(row.id)) tr.classList.add("is-excluded");
@@ -1240,13 +1347,19 @@
       const weightCell = document.createElement("td");
       const weightInput = document.createElement("input");
       weightInput.type = "number"; weightInput.min = "0"; weightInput.max = "10"; weightInput.step = "0.1";
-      weightInput.value = rowCustomWeights(row).get(row.id) ?? 1; weightInput.className = "weight-input";
+      const isModified = rowModifiedWeights(row).has(row.id);
+      const normalizedWeight = weightMap.get(row.id) || 0;
+      weightInput.value = isModified ? (rowCustomWeights(row).get(row.id) ?? 1) : normalizedWeight.toFixed(2);
+      weightInput.className = `weight-input${isModified ? " is-user-modified" : ""}`;
       weightInput.disabled = !available;
-      weightInput.title = `Effective weight: ${effectiveWeight(row).toFixed(2)}`;
-      weightInput.setAttribute("aria-label", `Custom weight for ${row.organization}`);
+      weightInput.title = isModified
+        ? `User multiplier: ${Number(rowCustomWeights(row).get(row.id) ?? 1).toFixed(2)} · normalized effective weight: ${normalizedWeight.toFixed(2)}`
+        : `Automatic normalized effective weight: ${normalizedWeight.toFixed(2)} (mean included weight = 1)`;
+      weightInput.setAttribute("aria-label", `${isModified ? "User multiplier" : "Automatic normalized weight"} for ${row.organization}`);
       weightInput.addEventListener("change", () => {
         const value = clamp(Number(weightInput.value) || 0, 0, 10);
         rowCustomWeights(row).set(row.id, value);
+        rowModifiedWeights(row).add(row.id);
         if (value === 0) rowInclusion(row).set(row.id, false);
         renderAll();
       });
@@ -1272,7 +1385,7 @@
       tr.append(toggleCell, org, title, evidenceType, salaryCell, expenses, weightCell, comparability, tier, topic, location, staff, ea, structure, year, preview, source);
       refs.tableBody.append(tr);
     });
-    const count = selectedRows().length;
+    const count = selection.length;
     const unavailable = rows().filter((row) => salary(row) == null).length;
     refs.includedCount.textContent = `${count} included`;
     refs.showUnavailableLabel.textContent = state.showUnavailable
@@ -1643,20 +1756,198 @@
     refs.binValue.value = state.bins;
   }
 
+  const URL_STATE_VERSION = 1;
+  let urlSyncReady = false;
+  let urlSyncFrame = 0;
+
+  function encodeUrlState(payload) {
+    const bytes = new TextEncoder().encode(JSON.stringify(payload));
+    let binary = "";
+    for (let offset = 0; offset < bytes.length; offset += 8192) {
+      binary += String.fromCharCode(...bytes.subarray(offset, offset + 8192));
+    }
+    return btoa(binary).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
+  }
+
+  function decodeUrlState(encoded) {
+    const padded = encoded.replaceAll("-", "+").replaceAll("_", "/").padEnd(Math.ceil(encoded.length / 4) * 4, "=");
+    const binary = atob(padded);
+    const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
+
+  function sharePayload() {
+    const filterState = {};
+    Object.entries(state.filters).forEach(([key, values]) => { if (values != null) filterState[key] = [...values]; });
+    const discreteOverrides = {};
+    Object.entries(state.discreteWeights).forEach(([key, values]) => {
+      const overrides = Object.fromEntries(Object.entries(values).filter(([category, value]) => value !== defaultDiscreteWeight(key, category)));
+      if (Object.keys(overrides).length) discreteOverrides[key] = overrides;
+    });
+    const inclusionOverrides = rows().reduce((result, row) => {
+      const current = Boolean(rowInclusion(row).get(row.id));
+      if (current !== presetSelected(row)) result.push([row.id, current ? 1 : 0]);
+      return result;
+    }, []);
+    const customOverrides = Object.fromEntries(Object.entries(modifiedWeightIds).map(([stream, ids]) => [
+      stream,
+      [...ids].map((id) => [id, customWeights[stream].get(id) ?? 1]),
+    ]).filter(([, values]) => values.length));
+    return {
+      v: URL_STATE_VERSION,
+      a: {
+        s: state.stream, m: state.measure, p: state.sample, d: state.fit, w: [...state.weightings],
+        te: state.targetExpense, ts: state.targetStaff, eb: state.expenseBandwidth, sb: state.staffBandwidth,
+        rh: state.recencyHalfLife, b: state.bins, vw: state.view, x: state.scatterX, c: state.chartColor,
+        co: state.showContours ? 1 : 0, q: state.quantileGranularity, qq: state.customQuantiles,
+        qm: state.markCurve ? 1 : 0, u: state.showUnavailable ? 1 : 0, sk: state.sortKey, sd: state.sortDirection,
+      },
+      ...(Object.keys(discreteOverrides).length ? { d: discreteOverrides } : {}),
+      ...(Object.keys(filterState).length ? { f: filterState } : {}),
+      r: {
+        s: [state.ranges.salary.low, state.ranges.salary.high],
+        e: [state.ranges.expenses.low, state.ranges.expenses.high],
+      },
+      ...(inclusionOverrides.length ? { i: inclusionOverrides } : {}),
+      ...(Object.keys(customOverrides).length ? { c: customOverrides } : {}),
+    };
+  }
+
+  function writeUrlState() {
+    urlSyncFrame = 0;
+    if (!urlSyncReady) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set("s", encodeUrlState(sharePayload()));
+    history.replaceState(null, "", url);
+  }
+
+  function scheduleUrlState() {
+    if (!urlSyncReady || urlSyncFrame) return;
+    urlSyncFrame = requestAnimationFrame(writeUrlState);
+  }
+
+  function clearUrlState() {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("s");
+    history.replaceState(null, "", url);
+  }
+
+  function finiteNumber(value, fallback, minimum = -Infinity, maximum = Infinity) {
+    return Number.isFinite(Number(value)) ? clamp(Number(value), minimum, maximum) : fallback;
+  }
+
+  function expenseSliderPosition(value) {
+    const range = state.ranges.expenses;
+    if (value <= range.min) return 0;
+    if (value >= range.max) return 1000;
+    return Math.round((Math.log(value / range.min) / Math.log(range.max / range.min)) * 1000);
+  }
+
+  function syncControlsFromState() {
+    refs.stream.value = state.stream;
+    refs.measure.value = state.measure;
+    refs.sample.value = state.sample;
+    refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
+    refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
+    refs.scatterX.value = state.scatterX;
+    refs.chartColor.value = state.chartColor;
+    refs.showContours.checked = state.showContours;
+    refs.targetExpense.value = state.targetExpense / 1_000_000;
+    refs.targetStaff.value = state.targetStaff;
+    refs.expenseBandwidth.value = state.expenseBandwidth;
+    refs.staffBandwidth.value = state.staffBandwidth;
+    refs.recencyHalfLife.value = state.recencyHalfLife;
+    refs.bins.value = state.bins;
+    refs.quantileGranularity.value = state.quantileGranularity;
+    refs.customQuantiles.value = state.customQuantiles;
+    refs.markCurve.checked = state.markCurve;
+    refs.showUnavailable.checked = state.showUnavailable;
+    refs.salaryMin.value = state.ranges.salary.low;
+    refs.salaryMax.value = state.ranges.salary.high;
+    refs.expenseMin.value = expenseSliderPosition(state.ranges.expenses.low);
+    refs.expenseMax.value = expenseSliderPosition(state.ranges.expenses.high);
+    updateRangeLabels();
+  }
+
+  function restoreUrlState(payload) {
+    if (!payload || payload.v !== URL_STATE_VERSION || typeof payload.a !== "object") throw new Error("Unsupported or incomplete state version.");
+    const analysis = payload.a;
+    const enumValue = (value, allowed, fallback) => allowed.includes(value) ? value : fallback;
+    state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], state.stream);
+    state.measure = enumValue(analysis.m, ["base", "cash", "total"], state.measure);
+    if (state.stream === "combined") state.measure = "base";
+    state.sample = enumValue(analysis.p, ["primary", "clean", "tierA", "observed"], state.sample);
+    state.fit = enumValue(analysis.d, ["empirical", "lognormal", "gamma"], state.fit);
+    const validWeights = [...DISCRETE_WEIGHT_KEYS, "comparability", "size", "staff", "recency", "streamBalanced"];
+    state.weightings = new Set((Array.isArray(analysis.w) ? analysis.w : []).filter((value) => validWeights.includes(value)));
+    state.targetExpense = finiteNumber(analysis.te, state.targetExpense, 1_000_000, 100_000_000);
+    state.targetStaff = finiteNumber(analysis.ts, state.targetStaff, 1, 1000);
+    state.expenseBandwidth = finiteNumber(analysis.eb, state.expenseBandwidth, 0.2, 1.5);
+    state.staffBandwidth = finiteNumber(analysis.sb, state.staffBandwidth, 0.2, 1.5);
+    state.recencyHalfLife = finiteNumber(analysis.rh, state.recencyHalfLife, 1, 12);
+    state.bins = Math.round(finiteNumber(analysis.b, state.bins, 2, 200));
+    state.autoBins = false;
+    state.view = enumValue(analysis.vw, ["histogram", "scatter"], state.view);
+    state.scatterX = enumValue(analysis.x, Object.keys(scatterVariables), state.scatterX);
+    state.chartColor = enumValue(analysis.c, ["tier", "topic", "eaAffinity", "sourceType", "titleGroup", "structure"], state.chartColor);
+    state.showContours = analysis.co !== 0;
+    state.quantileGranularity = enumValue(analysis.q, ["quintiles", "deciles", "percentiles", "custom"], state.quantileGranularity);
+    state.customQuantiles = typeof analysis.qq === "string" ? analysis.qq : state.customQuantiles;
+    state.markCurve = analysis.qm !== 0;
+    state.showUnavailable = analysis.u === 1;
+    state.sortKey = typeof analysis.sk === "string" ? analysis.sk : state.sortKey;
+    state.sortDirection = analysis.sd === "desc" ? "desc" : "asc";
+    state.filters = Object.fromEntries(Object.keys(state.filters).map((key) => [key, Array.isArray(payload.f?.[key]) ? new Set(payload.f[key].map(String)) : null]));
+    state.discreteWeights = {};
+    Object.entries(payload.d || {}).forEach(([key, overrides]) => {
+      if (!DISCRETE_WEIGHT_KEYS.includes(key) || !overrides || typeof overrides !== "object") return;
+      const values = ensureDiscreteWeights(key);
+      Object.entries(overrides).forEach(([category, value]) => { values[category] = finiteNumber(value, defaultDiscreteWeight(key, category), 0, 10); });
+    });
+    Object.keys(modifiedWeightIds).forEach((stream) => {
+      modifiedWeightIds[stream].clear();
+      (payload.c?.[stream] || []).forEach(([id, value]) => {
+        if (!customWeights[stream].has(id)) return;
+        customWeights[stream].set(id, finiteNumber(value, 1, 0, 10));
+        modifiedWeightIds[stream].add(id);
+      });
+    });
+    applyPreset();
+    configureRanges();
+    const salaryRange = payload.r?.s;
+    const expenseRange = payload.r?.e;
+    if (Array.isArray(salaryRange) && salaryRange.length === 2) {
+      state.ranges.salary.low = finiteNumber(salaryRange[0], state.ranges.salary.min, state.ranges.salary.min, state.ranges.salary.max);
+      state.ranges.salary.high = finiteNumber(salaryRange[1], state.ranges.salary.max, state.ranges.salary.low, state.ranges.salary.max);
+    }
+    if (Array.isArray(expenseRange) && expenseRange.length === 2) {
+      state.ranges.expenses.low = finiteNumber(expenseRange[0], state.ranges.expenses.min, state.ranges.expenses.min, state.ranges.expenses.max);
+      state.ranges.expenses.high = finiteNumber(expenseRange[1], state.ranges.expenses.max, state.ranges.expenses.low, state.ranges.expenses.max);
+    }
+    (payload.i || []).forEach(([id, selected]) => {
+      const row = rows().find((candidate) => candidate.id === id);
+      if (row) rowInclusion(row).set(id, selected === 1);
+    });
+    syncControlsFromState();
+  }
+
   function renderAll() {
     updateHeadings();
     renderWeightProfiles();
     renderChart();
     renderQuantiles();
     renderTable();
+    scheduleUrlState();
   }
 
   function reset() {
+    const resumeUrlSync = urlSyncReady;
+    urlSyncReady = false;
     Object.assign(state, {
       stream: "incumbents", measure: "base", sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
       targetExpense: RP_REFERENCE.expenses, targetStaff: RP_REFERENCE.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
-      quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95",
+      quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95", markCurve: true,
       sortKey: "tier", sortDirection: "asc",
       filters: {
         title: null, sourceType: null, tier: null, topic: null, location: null,
@@ -1670,6 +1961,7 @@
       focusedId: "", hoverQuantile: null,
     });
     Object.entries({ incumbents: DATA.incumbents, jobAds: DATA.jobAds }).forEach(([stream, streamRows]) => {
+      modifiedWeightIds[stream].clear();
       streamRows.forEach((row) => { inclusion[stream].set(row.id, Boolean(row.defaultIncluded)); customWeights[stream].set(row.id, 1); });
     });
     refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
@@ -1679,9 +1971,12 @@
     refs.targetExpense.value = RP_REFERENCE.expenses / 1_000_000; refs.targetStaff.value = RP_REFERENCE.staff;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.quantileGranularity.value = "quintiles";
+    refs.markCurve.checked = true;
     refs.customQuantiles.value = state.customQuantiles; refs.showUnavailable.checked = false;
     applyPreset(); configureRanges(); buildFilterMenus(); renderWeightControls();
     renderAll();
+    clearUrlState();
+    urlSyncReady = resumeUrlSync;
   }
 
   function escapeHtml(value) {
@@ -1714,8 +2009,9 @@
   refs.staffBandwidth.addEventListener("input", () => { state.staffBandwidth = Number(refs.staffBandwidth.value); renderAll(); });
   refs.recencyHalfLife.addEventListener("input", () => { state.recencyHalfLife = Number(refs.recencyHalfLife.value); renderAll(); });
   refs.bins.addEventListener("input", () => { state.autoBins = false; state.bins = Number(refs.bins.value); renderAll(); });
-  refs.quantileGranularity.addEventListener("change", () => { state.quantileGranularity = refs.quantileGranularity.value; renderQuantiles(); });
-  refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); });
+  refs.quantileGranularity.addEventListener("change", () => { state.quantileGranularity = refs.quantileGranularity.value; renderQuantiles(); renderChart(); });
+  refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); renderChart(); });
+  refs.markCurve.addEventListener("change", () => { state.markCurve = refs.markCurve.checked; renderChart(); });
   refs.view.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.view = radio.value; renderAll(); } }));
   refs.scatterX.addEventListener("change", () => { state.scatterX = refs.scatterX.value; renderChart(); });
   refs.chartColor.addEventListener("change", () => { state.chartColor = refs.chartColor.value; renderAll(); });
@@ -1726,11 +2022,14 @@
   refs.expenseMin.addEventListener("input", () => updateRange("expenses", "low"));
   refs.expenseMax.addEventListener("input", () => updateRange("expenses", "high"));
   refs.reset.addEventListener("click", reset);
+  document.addEventListener("change", scheduleUrlState);
+  document.addEventListener("input", scheduleUrlState);
   document.querySelectorAll("thead button[data-sort]").forEach((button) => button.addEventListener("click", () => {
     const key = button.dataset.sort;
     if (state.sortKey === key) state.sortDirection = state.sortDirection === "asc" ? "desc" : "asc";
     else { state.sortKey = key; state.sortDirection = "asc"; }
     renderTable();
+    scheduleUrlState();
   }));
 
   const observer = new ResizeObserver(() => renderChart());
@@ -1743,10 +2042,26 @@
   refs.rpExpenseTableReference.textContent = `RP = ${compactMoney(RP_REFERENCE.expenses)}`;
   refs.rpStaffTableReference.textContent = `RP = ${RP_REFERENCE.staff} FTE`;
   $("#archive-status").textContent = `${DATA.summary.retrievedManifestRecords} / ${DATA.summary.retrievedManifestRecords} sources archived`;
-  applyPreset();
-  configureRanges();
+  const encodedInitialState = new URL(window.location.href).searchParams.get("s");
+  if (encodedInitialState) {
+    try {
+      restoreUrlState(decodeUrlState(encodedInitialState));
+    } catch (error) {
+      applyPreset();
+      configureRanges();
+      syncControlsFromState();
+      refs.urlStateError.textContent = "This shared analysis link could not be read, so the default settings were loaded.";
+      refs.urlStateError.hidden = false;
+      console.warn("Unable to restore shared benchmark state", error);
+    }
+  } else {
+    applyPreset();
+    configureRanges();
+    syncControlsFromState();
+  }
   buildFilterMenus();
   renderWeightControls();
   initializeHelpTooltips();
   renderAll();
+  urlSyncReady = true;
 })();

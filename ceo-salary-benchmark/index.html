@@ -23,6 +23,8 @@
     </div>
   </header>
 
+  <p id="url-state-error" class="url-state-error" role="alert" hidden></p>
+
   <main class="app-shell">
     <aside class="settings-panel panel" aria-labelledby="settings-title">
       <div class="panel-heading">
@@ -194,14 +196,18 @@
             <h2 id="quantile-title">Quantiles</h2>
             <p id="quantile-basis" class="quantile-basis">Derived from the fitted lognormal distribution</p>
           </div>
-          <label class="inline-select">Breaks <button class="info-tooltip" type="button" aria-label="About quantile breaks" data-tooltip="Choose standard fifths, tenths, every percentile, or enter your own percentile levels. Values use the selected empirical or fitted distribution.">?</button>
-            <select id="quantile-granularity">
+          <div class="quantile-controls">
+            <label class="mark-curve-toggle"><input id="mark-curve" type="checkbox" checked> Mark curve</label>
+            <label class="inline-select">
+              <span class="sr-only">Quantile levels</span>
+              <select id="quantile-granularity" aria-label="Quantile levels">
               <option value="quintiles">Quintiles</option>
               <option value="deciles">Deciles</option>
               <option value="percentiles">Percentiles</option>
               <option value="custom">Custom…</option>
-            </select>
-          </label>
+              </select>
+            </label>
+          </div>
         </div>
         <label id="custom-quantiles-field" class="custom-quantiles" hidden>
           <span>Percentile levels (0–100, comma separated)</span>
@@ -304,7 +310,7 @@
           <tbody></tbody>
         </table>
       </div>
-      <p class="table-footnote">Row weights multiply the selected base-weighting rule. A zero weight is equivalent to exclusion.</p>
+      <p class="table-footnote">Automatic weights show the normalized total (mean included weight = 1). Edited cells are user multipliers; zero is equivalent to exclusion.</p>
     </aside>
   </main>
 
