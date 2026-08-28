@@ -13,6 +13,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "CEO salary benchmark" })).toBeVisible();
+  await expect(page.locator(".app-header .eyebrow")).toHaveText("Rethink Priorities");
+  await expect(page.locator(".app-header .subtitle")).toHaveCount(0);
+  await expect(page.locator("#archive-status")).toHaveText("349 / 349 sources");
+  for (const removedLabel of ["Analysis", "Incumbent compensation", "Row-level evidence", "Current weighted distribution"]) {
+    await expect(page.getByText(removedLabel, { exact: true })).toHaveCount(0);
+  }
+  await expect(page.locator(".table-footnote")).toHaveCount(0);
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
   await expect(page.locator("#stat-n")).toHaveText("110");
   await expect(page.locator(".bar-block")).toHaveCount(110);
@@ -46,8 +53,16 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from the fitted lognormal distribution");
   await expect(page.locator("#mark-curve")).toBeChecked();
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(4);
-  await expect(page.locator(".curve-quantile-label")).toHaveCount(4);
-  await expect(page.locator(".curve-quantile-label .amount").first()).toHaveText(/^\$\d+K$/);
+  await expect(page.locator(".curve-quantile-mark")).toHaveCount(4);
+  await expect(page.locator(".curve-quantile-label.amount").first()).toHaveText(/^\$\d+K$/);
+  await expect(page.locator(".curve-quantile-mark").first().locator("text").first()).toHaveCSS("font-size", "10px");
+  const curveLabelLinesOverlap = await page.locator(".curve-quantile-mark").evaluateAll((marks) => marks.some((mark) => {
+    const [percentile, amount] = mark.querySelectorAll("text");
+    const percentileBox = percentile.getBBox();
+    const amountBox = amount.getBBox();
+    return percentileBox.y + percentileBox.height > amountBox.y;
+  }));
+  expect(curveLabelLinesOverlap).toBe(false);
   await expect(page.locator("#show-rug")).toHaveCount(0);
   await expect(page.locator(".reference-band")).toHaveCount(0);
   await expect(page.locator(".density-line")).toHaveAttribute("d", /L/);
@@ -55,6 +70,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#bin-count")).toHaveAttribute("max", "200");
   await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
   await expect(page.locator("tbody .tier-cell").first()).toHaveAttribute("title", "A");
+  await expect(page.locator("tbody .tier-cell").nth(1)).toHaveAttribute("title", "A");
   await expect(page.locator("#rp-expense-table-reference")).toHaveText("RP = $7.5M");
   await expect(page.locator("#rp-staff-table-reference")).toHaveText("RP = 57 FTE");
   await expect(page.locator("#table-rp-reference-layer")).toHaveAttribute("aria-label", "Rethink Priorities comparison references");
@@ -201,6 +217,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(3);
 
   await page.locator("#reset-settings").click();
+  await page.getByRole("button", { name: "About match score" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("functional/operating-model similarity (30 points)");
+  await expect(page.locator("#help-tooltip")).toContainText("assigned without using compensation");
+  await expect(page.locator("#help-tooltip")).toContainText("score ÷ 75");
   await page.locator('#weighting-components input[value="size"]').check();
   await expect(page.locator("#size-controls")).toBeVisible();
   await expect(page.locator("#expense-target-field")).toBeVisible();
@@ -352,7 +372,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('input[name="chart-view"][value="scatter"]').check();
   await expect(page.locator("#scatter-controls")).toBeVisible();
   await expect(page.locator(".scatter-point")).not.toHaveCount(0);
-  await expect(page.locator(".correlation-annotation")).toContainText(/Weighted r = -?\d\.\d{3} · ρ = -?\d\.\d{3}/);
+  await expect(page.locator(".correlation-annotation")).toHaveCount(0);
+  await expect(page.locator("#scatter-correlations span").first()).toHaveText(/Weighted r = -?\d\.\d{3}/);
+  await expect(page.locator("#scatter-correlations span").nth(1)).toHaveText(/ρ = -?\d\.\d{3}/);
+  expect(await page.locator("#scatter-correlations").evaluate((output) => output.compareDocumentPosition(document.querySelector("#scatter-x")) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
   const maximumPointAreaMultiple = await page.locator(".scatter-point").evaluateAll((points) => Math.max(...points.map((point) => (Number(point.getAttribute("r")) / 4.5) ** 2)));
   expect(maximumPointAreaMultiple).toBeLessThanOrEqual(10.001);
   await expect(page.locator(".covariance-contour")).toHaveCount(3);
@@ -404,9 +427,12 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await scrollingPanel.evaluate((element) => { element.scrollTop = element.scrollHeight; });
   const settingsBounds = await scrollingPanel.boundingBox();
   const stickyWeightBounds = await page.locator(".weighting-field").boundingBox();
+  const stickyLegendBounds = await page.locator(".weighting-title").boundingBox();
   expect(stickyWeightBounds.y).toBeGreaterThanOrEqual(settingsBounds.y);
   expect(stickyWeightBounds.y).toBeLessThanOrEqual(settingsBounds.y + 3);
+  expect(stickyLegendBounds.y - stickyWeightBounds.y).toBeGreaterThanOrEqual(10);
   await expect(page.locator(".weighting-field")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  expect(await page.locator("#weighting-description").evaluate((description) => description.closest(".weighting-field"))).toBeNull();
   expect(stickyWeightBounds.y + stickyWeightBounds.height).toBeLessThan(settingsBounds.y + settingsBounds.height);
   await scrollingPanel.screenshot({ path: "tmp/app-sticky-weight-components.png" });
   await page.locator("#reset-settings").click();
@@ -447,6 +473,12 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await page.locator("#chart-color").selectOption("structure");
+  await page.locator("#mark-curve").uncheck();
+  await page.waitForTimeout(100);
+  expect(new URL(page.url()).searchParams.has("s")).toBe(false);
+  await page.locator("#reset-settings").click();
   const automaticWeightsBefore = await page.locator("tbody .weight-input:not(.is-user-modified)").evaluateAll((inputs) => inputs.map((input) => input.value));
   await page.locator('#weighting-components input[value="size"]').check();
   const automaticWeightsAfter = await page.locator("tbody tr:not(.is-excluded) .weight-input:not(.is-user-modified)").evaluateAll((inputs) => inputs.map((input) => Number(input.value)));
@@ -456,27 +488,32 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   const firstRow = page.locator("tbody tr").first();
   const rowId = await firstRow.getAttribute("data-id");
   const rowWeight = firstRow.locator(".weight-input");
+  expect(await rowWeight.evaluate((input) => input.scrollWidth <= input.clientWidth)).toBe(true);
   await rowWeight.fill("2");
   await rowWeight.blur();
   await expect(rowWeight).toHaveClass(/is-user-modified/);
   await firstRow.locator(".row-toggle").uncheck();
-  await page.locator('input[name="distribution"][value="gamma"]').check();
   await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await page.locator("#chart-color").selectOption("structure");
+  await page.locator("#mark-curve").uncheck();
+  await page.waitForTimeout(100);
+  expect(new URL(page.url()).searchParams.has("s")).toBe(true);
+  await page.locator('input[name="distribution"][value="gamma"]').check();
   await page.locator("#quantile-granularity").selectOption("custom");
   await page.locator("#custom-quantiles").fill("10, 50, 90");
-  await page.locator("#mark-curve").uncheck();
   await expect.poll(() => page.url()).toContain("?s=");
   await page.waitForTimeout(100);
   const sharedUrl = page.url();
-  expect(sharedUrl.length).toBeLessThan(2000);
+  expect(sharedUrl.length).toBeLessThan(500);
 
   await page.reload();
   await expect(page.locator('input[name="distribution"][value="gamma"]')).toBeChecked();
-  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
+  await expect(page.locator("#chart-color")).toHaveValue("tier");
   await expect(page.locator('#weighting-components input[value="size"]')).toBeChecked();
   await expect(page.locator("#quantile-granularity")).toHaveValue("custom");
   await expect(page.locator("#custom-quantiles")).toHaveValue("10, 50, 90");
-  await expect(page.locator("#mark-curve")).not.toBeChecked();
+  await expect(page.locator("#mark-curve")).toBeChecked();
   const restoredRow = page.locator(`tbody tr[data-id="${rowId}"]`);
   await expect(restoredRow.locator(".row-toggle")).not.toBeChecked();
   await expect(restoredRow.locator(".weight-input")).toHaveValue("2");

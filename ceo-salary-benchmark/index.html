@@ -13,12 +13,11 @@
 <body>
   <header class="app-header">
     <div>
-      <p class="eyebrow">Rethink Priorities · decision support</p>
+      <p class="eyebrow">Rethink Priorities</p>
       <h1>CEO salary benchmark</h1>
-      <p class="subtitle">Explore validated public compensation evidence, peer choices, and distribution assumptions.</p>
     </div>
     <div class="header-meta" aria-label="Dataset status">
-      <span id="archive-status">349 / 349 sources archived</span>
+      <span id="archive-status">349 / 349 sources</span>
       <span>July 2026 USD</span>
     </div>
   </header>
@@ -29,7 +28,6 @@
     <aside class="settings-panel panel" aria-labelledby="settings-title">
       <div class="panel-heading">
         <div>
-          <p class="section-label">Analysis</p>
           <h2 id="settings-title">Settings</h2>
         </div>
         <button id="reset-settings" class="text-button" type="button">Reset</button>
@@ -95,10 +93,13 @@
         <small id="color-description" class="field-description"></small>
       </label>
 
-      <fieldset class="weighting-field field">
-        <legend>Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Select any number of components. Their multipliers are multiplied together, then multiplied by the editable row weight. Discrete components open with editable suggested values; 1.00 is the reference value and 0 excludes a category. With no components selected, observations receive equal base weight.">?</button></legend>
+      <section class="weighting-field field" role="group" aria-labelledby="weighting-components-title">
+        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Select any number of components. Their multipliers are multiplied together, then multiplied by the editable row weight. Discrete components open with editable suggested values; 1.00 is the reference value and 0 excludes a category. With no components selected, observations receive equal base weight.">?</button></div>
         <div id="weighting-components" class="weighting-components">
-          <label><input type="checkbox" value="comparability"> Match score</label>
+          <div class="weighting-component-with-help">
+            <label><input type="checkbox" value="comparability"> Match score</label>
+            <button class="info-tooltip" type="button" aria-label="About match score" data-tooltip="The frozen 0–100 non-pay comparability score combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1.">?</button>
+          </div>
           <label><input type="checkbox" value="size"> Expenses</label>
           <label><input type="checkbox" value="staff"> Staff</label>
           <label><input type="checkbox" value="recency"> Recency</label>
@@ -110,8 +111,8 @@
           <label><input type="checkbox" value="structure"> Structure</label>
           <label><input type="checkbox" value="streamBalanced" disabled> Balance streams</label>
         </div>
-        <small id="weighting-description" class="field-description">No components selected: equal base weights.</small>
-      </fieldset>
+      </section>
+      <small id="weighting-description" class="weighting-description field-description">No components selected: equal base weights.</small>
 
       <section id="comparability-profile-field" class="weight-component-control" hidden aria-label="Match-score weighting response">
         <div id="weight-profile-comparability" class="weight-profile-slot"></div>
@@ -160,7 +161,6 @@
       <section class="chart-panel panel">
         <div class="chart-heading">
           <div>
-            <p class="section-label" id="chart-kicker">Incumbent compensation</p>
             <h2 id="chart-title">Validated Schedule J base salaries</h2>
           </div>
           <div class="live-stats" aria-live="polite">
@@ -170,6 +170,10 @@
           </div>
         </div>
         <div id="scatter-controls" class="scatter-controls" hidden>
+          <output id="scatter-correlations" class="scatter-correlations" aria-live="polite">
+            <span>Weighted r = —</span>
+            <span>ρ = —</span>
+          </output>
           <label>Horizontal axis
             <select id="scatter-x">
               <option value="expenses">Annual expenses</option>
@@ -192,7 +196,6 @@
       <section class="quantile-panel panel" aria-labelledby="quantile-title">
         <div class="panel-heading inline-heading">
           <div>
-            <p class="section-label">Current weighted distribution</p>
             <h2 id="quantile-title">Quantiles</h2>
             <p id="quantile-basis" class="quantile-basis">Derived from the fitted lognormal distribution</p>
           </div>
@@ -221,7 +224,6 @@
     <aside class="table-panel panel" aria-labelledby="table-title">
       <div class="table-toolbar">
         <div>
-          <p class="section-label">Row-level evidence</p>
           <h2 id="table-title">Organizations</h2>
         </div>
         <span id="included-count" class="count-badge">0 included</span>
@@ -245,7 +247,7 @@
               <th><button type="button" data-sort="sourceType">Evidence</button></th>
               <th><button type="button" data-sort="salary">Salary</button></th>
               <th><button type="button" data-sort="expenses" aria-label="Sort by expenses; Rethink Priorities comparison reference is $7.5 million">Expenses</button></th>
-              <th><button type="button" data-sort="weight">Weight</button></th>
+              <th class="weight-column"><button type="button" data-sort="weight">Weight</button></th>
               <th><button type="button" data-sort="comparabilityScore">Match score</button></th>
               <th class="tier-column"><button type="button" data-sort="tier">Tier</button></th>
               <th><button type="button" data-sort="topic">Topic / model</button></th>
@@ -258,7 +260,7 @@
               <th>Source</th>
             </tr>
             <tr class="column-filters">
-              <th></th>
+              <th class="check-column"></th>
               <th></th>
               <th><div class="filter-menu" data-filter-menu="title"></div></th>
               <th><div class="filter-menu" data-filter-menu="sourceType"></div></th>
@@ -294,7 +296,7 @@
                   </details>
                 </div>
               </th>
-              <th></th>
+              <th class="weight-column"></th>
               <th></th>
               <th class="tier-column"><div class="filter-menu" data-filter-menu="tier"></div></th>
               <th><div class="filter-menu" data-filter-menu="topic"></div></th>
@@ -310,7 +312,6 @@
           <tbody></tbody>
         </table>
       </div>
-      <p class="table-footnote">Automatic weights show the normalized total (mean included weight = 1). Edited cells are user multipliers; zero is equivalent to exclusion.</p>
     </aside>
   </main>
 
