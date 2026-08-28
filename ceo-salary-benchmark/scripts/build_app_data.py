@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import copy
 import hashlib
 import json
 import math
@@ -16,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BENCHMARK = ROOT / "benchmark"
 DELIVERABLES = BENCHMARK / "deliverables"
 CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
+ENRICHMENT = BENCHMARK / "enrichment"
 EVIDENCE_DIR = ROOT / "evidence" / "original"
 OUTPUT = ROOT / "app-data.js"
 WIKIPEDIA_PROFILES = ROOT / "data" / "organization_wikipedia_profiles.csv"
@@ -354,7 +356,9 @@ def compact_category_rationale(row: dict[str, str]) -> dict:
 
 def load_category_explainers() -> tuple[dict, dict, dict, dict[str, int]]:
     verify_category_explainer_hashes()
-    dictionary_rows = rows(CATEGORY_EXPLAINERS / "category_dictionary.csv")
+    dictionary_rows = rows(CATEGORY_EXPLAINERS / "category_dictionary.csv") + rows(
+        ENRICHMENT / "job_ad_category_dictionary.csv"
+    )
     rationale_rows = rows(CATEGORY_EXPLAINERS / "organization_category_rationale.csv")
     definitions: dict[str, dict[str, dict[str, str]]] = {}
     for row in dictionary_rows:
@@ -397,6 +401,66 @@ def load_category_explainers() -> tuple[dict, dict, dict, dict[str, int]]:
                 raise ValueError(f"Duplicate reference-selection rationale: {organization}")
             references_by_organization[organization] = compact
     return definitions, by_source, references_by_organization, rationale_counts
+
+
+def load_job_ad_enrichment(jobs: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+    enrichment_rows = rows(ENRICHMENT / "job_ad_category_enrichment.csv")
+    by_source: dict[str, dict[str, str]] = {}
+    expected = {text(job["source_id"]): text(job["organization"]) for job in jobs}
+    required = {
+        "ea_relationship", "expected_structure", "topic_cluster", "ea_rationale",
+        "structure_rationale", "topic_rationale", "source_citation", "classification_basis",
+        "confidence",
+    }
+    for row in enrichment_rows:
+        source_id = text(row["source_id"])
+        organization = text(row["organization"])
+        if source_id not in expected or organization != expected[source_id]:
+            raise ValueError(f"Job-ad enrichment does not match validated posting: {source_id}/{organization}")
+        if source_id in by_source:
+            raise ValueError(f"Duplicate job-ad enrichment row: {source_id}")
+        missing = sorted(field for field in required if not text(row[field]))
+        if missing:
+            raise ValueError(f"Job-ad enrichment {source_id} lacks required fields: {missing}")
+        verify_preserved_paths(text(row["source_citation"]), " | ")
+        by_source[source_id] = row
+    if by_source.keys() != expected.keys():
+        missing = sorted(expected.keys() - by_source.keys())
+        extra = sorted(by_source.keys() - expected.keys())
+        raise ValueError(f"Job-ad enrichment coverage mismatch; missing={missing}, extra={extra}")
+    return by_source
+
+
+def enriched_job_provenance(historical: dict, enrichment: dict[str, str], job: dict[str, str]) -> dict:
+    provenance = copy.deepcopy(historical)
+    citation = text(enrichment["source_citation"])
+    provenance["ea"] = {
+        "value": text(enrichment["ea_relationship"]),
+        "sourceValue": historical["ea"].get("sourceValue", ""),
+        "rationale": text(enrichment["ea_rationale"]),
+        "citation": citation,
+    }
+    provenance["structure"] = {
+        "expected": text(enrichment["expected_structure"]),
+        "observationFlag": historical["structure"].get("observationFlag", ""),
+        "rationale": text(enrichment["structure_rationale"]),
+        "citation": citation,
+    }
+    provenance["topic"] = {
+        "value": text(enrichment["topic_cluster"]),
+        "sourceDescription": text(job["mission_operating_model"]),
+        "rationale": text(enrichment["topic_rationale"]),
+        "citation": citation,
+    }
+    provenance["classificationTiming"] = (
+        "tier/title=historical_nonpay_review; EA/structure/topic=post_freeze_app_enrichment"
+    )
+    provenance["provenanceType"] = (
+        "historical_nonpay_tiering + post_freeze_preserved_source_review"
+    )
+    provenance["confidence"] = text(enrichment["confidence"])
+    provenance["caveats"] = text(enrichment["caveats"])
+    return provenance
 
 
 def category_rationale(
@@ -503,6 +567,7 @@ def build_incumbents(
 
 def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
     jobs = rows(DELIVERABLES / "validated_job_ad_compensation.csv")
+    enrichment_by_source = load_job_ad_enrichment(jobs)
     output: list[dict] = []
     for job in jobs:
         source_id = text(job["source_id"])
@@ -523,6 +588,8 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
         )
         source_url = text(job["resolved_url"]) or text(job["fallback_url_1"]) or text(job["canonical_url"])
         raw_title = text(job["role_title"])
+        historical_provenance = category_rationale(by_source, {}, "job_ad", source_id, text(job["organization"]))
+        enrichment = enrichment_by_source[source_id]
         output.append({
             "id": source_id,
             "organization": text(job["organization"]),
@@ -531,11 +598,13 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
             "titleGroup": title_group(raw_title),
             "rawTitle": raw_title,
             "tier": text(job["tier"]),
-            "topic": text(job["mission_operating_model"]),
-            "eaAffinity": "Not coded",
+            "topic": text(enrichment["topic_cluster"]),
+            "eaAffinity": text(enrichment["ea_relationship"]),
             "location": text(job["location"]),
             "remoteStatus": text(job["remote_status"]),
-            "structure": text(job["reporting_relationship"]),
+            "structure": text(enrichment["expected_structure"]),
+            "sourceMissionOperatingModel": text(job["mission_operating_model"]),
+            "sourceReportingRelationship": text(job["reporting_relationship"]),
             "revenue": number(job["annual_budget_or_expense"]),
             "expenses": number(job["annual_budget_or_expense"]),
             "staff": number(job["staff_count"]),
@@ -561,7 +630,14 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
             "sourceType": "Job posting",
             "evidenceStream": "jobAds",
             "homepageUrl": "",
-            "categoryProvenance": category_rationale(by_source, {}, "job_ad", source_id, text(job["organization"])),
+            "categoryProvenance": enriched_job_provenance(historical_provenance, enrichment, job),
+            "historicalCategoryProvenance": historical_provenance,
+            "categoryEnrichment": {
+                "classificationBasis": text(enrichment["classification_basis"]),
+                "confidence": text(enrichment["confidence"]),
+                "caveats": text(enrichment["caveats"]),
+                "sourceCitation": text(enrichment["source_citation"]),
+            },
         })
     return output
 
@@ -604,6 +680,9 @@ def main() -> None:
             "rationalesPath": "benchmark/deliverables/category_explainers/organization_category_rationale.csv",
             "methodologyPath": "benchmark/deliverables/category_explainers/methodology_notes.md",
             "validationPath": "benchmark/deliverables/category_explainers/validation_report.txt",
+            "jobAdEnrichmentPath": "benchmark/enrichment/job_ad_category_enrichment.csv",
+            "jobAdEnrichmentDictionaryPath": "benchmark/enrichment/job_ad_category_dictionary.csv",
+            "jobAdEnrichmentMethodologyPath": "benchmark/enrichment/job_ad_category_methodology.md",
         },
         "summary": {
             "selectedReferenceOrganizations": len(incumbents),

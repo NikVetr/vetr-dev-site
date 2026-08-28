@@ -168,16 +168,32 @@
     }
     if (key === "structure") {
       if (normalized.includes("independent nonprofit") || normalized === "board of directors" || normalized.includes("board of trustees") || normalized.includes("joint board") || normalized.includes("board (implied")) return 1;
+      if (normalized === "nonprofit network" || normalized.includes("membership nonprofit")) return normalized.includes("fiscal sponsor") ? 0.55 : 0.75;
       if (normalized.includes("boards of the affiliated")) return 0.85;
-      if (normalized.includes("membership nonprofit")) return normalized.includes("fiscal sponsor") ? 0.55 : 0.75;
-      if (normalized.includes("fiscal") || normalized.includes("international nonprofit affiliate")) return 0.55;
+      if (normalized === "affiliated nonprofit group") return 0.65;
+      if (normalized.includes("fiscal") || normalized.includes("international nonprofit affiliate") || normalized.includes("university-affiliated")) return 0.55;
       if (normalized.includes("nonprofit/project")) return 0.65;
       if (normalized.includes("advisory board")) return 0.7;
-      if (normalized.includes("chief operating officer")) return 0.35;
+      if (normalized.includes("chief operating officer") || normalized === "subordinate regional unit" || normalized === "university center") return 0.35;
+      if (normalized === "public agency / nonprofit hybrid") return 0.5;
+      if (normalized === "nonprofit funder" || normalized === "public-private grantmaking endowment") return 0.45;
+      if (normalized === "public charity / donor-advised fund") return 0.4;
+      if (normalized === "private foundation") return 0.3;
       if (normalized.includes("not extracted") || normalized.includes("not reported")) return 0.6;
       return 0.7;
     }
     if (key === "topic") {
+      const recruitmentTopics = {
+        "research, evaluation, and policy": 0.9,
+        "climate, environment, and conservation": 0.9,
+        "philanthropy and nonprofit infrastructure": 0.75,
+        "health, workforce, and biomedical research": 0.85,
+        "justice, housing, and social policy": 0.8,
+        "journalism and knowledge dissemination": 0.65,
+        "education, culture, and public engagement": 0.6,
+        "conflict prevention and security": 0.8,
+      };
+      if (recruitmentTopics[normalized] != null) return recruitmentTopics[normalized];
       if (/animal welfare|global health|catastrophic risk|biosecurity|ai,|ea infrastructure|effective giving/.test(normalized)) return 1;
       if (/grantmaking foundation|community foundation|private health foundation|endowment/.test(normalized)) return 0.45;
       if (/university|regional program leadership|direct program delivery|public-facing cultural|local investigative/.test(normalized)) return 0.55;
@@ -689,13 +705,9 @@
       class: "rp-chart-marker", transform: `translate(${x} ${y})`, tabindex: "0", role: "button",
       "aria-label": `Rethink Priorities reference, ${money(item.value)}; excluded from calculations`,
     });
-    group.append(svgElement("rect", {
-      x: -size / 2, y: -size / 2, width: size, height: size, rx: 4,
-      class: "rp-chart-marker-outline",
-    }));
     group.append(svgElement("image", {
-      href: "assets/rethink-priorities-favicon.png", x: -size / 2 + 2, y: -size / 2 + 2,
-      width: size - 4, height: size - 4, preserveAspectRatio: "xMidYMid meet",
+      href: "assets/rethink-priorities-favicon.png", x: -size / 2, y: -size / 2,
+      width: size, height: size, preserveAspectRatio: "xMidYMid meet", class: "rp-chart-marker-logo",
     }));
     const tooltipEvent = (event) => {
       if (Number.isFinite(event.clientX) && Number.isFinite(event.clientY) && (event.clientX || event.clientY)) return event;
@@ -1568,10 +1580,12 @@
     preview.type = "button"; preview.className = "preview-button rp-reference-preview"; preview.textContent = "Preview";
     preview.addEventListener("click", () => openSourceDialog(reference));
     const link = document.createElement("a");
-    link.className = "rp-reference-source"; link.href = reference.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "ProPublica ↗";
+    link.className = "rp-reference-source"; link.href = reference.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "1 ↗";
+    link.setAttribute("aria-label", "RP source 1: 2024 Form 990 on ProPublica");
     const separator = document.createTextNode(" · ");
     const staffLink = document.createElement("a");
-    staffLink.className = "rp-reference-source"; staffLink.href = reference.secondarySourceUrl; staffLink.target = "_blank"; staffLink.rel = "noopener noreferrer"; staffLink.textContent = "Staff 990 ↗";
+    staffLink.className = "rp-reference-source"; staffLink.href = reference.secondarySourceUrl; staffLink.target = "_blank"; staffLink.rel = "noopener noreferrer"; staffLink.textContent = "2 ↗";
+    staffLink.setAttribute("aria-label", "RP source 2: 2023 Form 990 staff filing");
     source.append(preview, link, separator, staffLink);
     tr.append(source);
     refs.tableBody.append(tr);
@@ -1764,6 +1778,8 @@
       ["Location / work model", [row.location, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
       ["EA relation", row.eaAffinity || "Not coded"],
       ["Organization structure", row.structure || "Not coded"],
+      ...(row.sourceMissionOperatingModel ? [["Source-native mission / model", row.sourceMissionOperatingModel]] : []),
+      ...(row.sourceReportingRelationship ? [["Source-native reporting line", row.sourceReportingRelationship]] : []),
       ["Scale", `${compactMoney(row.expenses)} expenses · ${row.staff ?? "—"} staff${row.staffFte ? ` (${row.staffFte} FTE)` : ""}`],
       ...(row.filingStaff != null ? [["Form 990 employee field", `${row.filingStaff} on Part I, line 5 (${row.staffYear || row.compensationYear})`]] : []),
       ...(row.currentFilingStaff != null ? [["Latest Form 990 employee field", `${row.currentFilingStaff} on Part I, line 5 (${row.compensationYear})`]] : []),
@@ -1822,6 +1838,20 @@
         [observation.tier.citation, observation.structure.citation].filter(Boolean).join(" | "),
       ]);
     }
+    const historical = row.historicalCategoryProvenance;
+    if (historical) {
+      const historicalValues = [
+        `EA ${historical.ea.value || "uncoded"}`,
+        `structure ${historical.structure.expected || "uncoded"}`,
+        `topic ${historical.topic.value || "uncoded"}`,
+      ].join(" · ");
+      categories.push([
+        "Historical explainer state",
+        historicalValues,
+        "The preserved historical explainer left these posting fields uncoded unless an exact frozen pre-compensation match existed. The displayed categories above come from the separate post-freeze source-review enrichment and do not rewrite that record.",
+        [historical.ea.citation, historical.structure.citation, historical.topic.citation].filter(Boolean).join(" | "),
+      ]);
+    }
     categories.forEach(([label, value, rationale, citation]) => {
       const section = document.createElement("section");
       const heading = document.createElement("h3");
@@ -1837,12 +1867,17 @@
 
     const links = $("#dialog-provenance-links");
     links.replaceChildren();
-    [
+    const provenanceLinks = [
       ["Category dictionary", DATA.categoryExplainers.dictionaryPath],
       ["Row-level rationale CSV", DATA.categoryExplainers.rationalesPath],
       ["Methodology notes", DATA.categoryExplainers.methodologyPath],
       ["Validation report", DATA.categoryExplainers.validationPath],
-    ].forEach(([label, href]) => {
+    ];
+    if (row.categoryEnrichment) provenanceLinks.push(
+      ["Posting enrichment CSV", DATA.categoryExplainers.jobAdEnrichmentPath],
+      ["Posting enrichment methodology", DATA.categoryExplainers.jobAdEnrichmentMethodologyPath],
+    );
+    provenanceLinks.forEach(([label, href]) => {
       const anchor = document.createElement("a"); anchor.href = href; anchor.target = "_blank"; anchor.textContent = `${label} ↗`;
       links.append(anchor);
     });
@@ -1862,6 +1897,11 @@
         const anchor = document.createElement("a");
         anchor.href = path; anchor.target = "_blank";
         anchor.textContent = `${path.split("/").pop()}${locator ? ` · ${locator.replaceAll(";", " · ")}` : ""}`;
+        container.append(anchor);
+      } else if (/^https?:\/\//i.test(path)) {
+        const anchor = document.createElement("a");
+        anchor.href = path; anchor.target = "_blank"; anchor.rel = "noopener noreferrer";
+        anchor.textContent = new URL(path).hostname;
         container.append(anchor);
       } else container.append(document.createTextNode(item));
     });
@@ -1914,7 +1954,7 @@
       const details = document.createElement("details");
       details.open = discrete.length === 1;
       const summary = document.createElement("summary"); summary.textContent = `${WEIGHT_LABELS[key]} category multipliers`;
-      const note = document.createElement("p"); note.className = "discrete-weight-note"; note.textContent = `${DISCRETE_WEIGHT_NOTES[key]} Definitions and provenance come from the preserved explainer package. Suggested multipliers are editable sensitivity judgments, not source rules; 1.00 is the reference and 0 excludes a category.`;
+      const note = document.createElement("p"); note.className = "discrete-weight-note"; note.textContent = `${DISCRETE_WEIGHT_NOTES[key]} Definitions and provenance come from the preserved explainer package and the separately labeled recruitment-posting enrichment. Suggested multipliers are editable sensitivity judgments, not source rules; 1.00 is the reference and 0 excludes a category.`;
       const grid = document.createElement("div"); grid.className = "discrete-weight-grid";
       Object.keys(weights).sort((a, b) => a.localeCompare(b)).forEach((category) => {
         const label = document.createElement("span"); label.className = "discrete-weight-category";

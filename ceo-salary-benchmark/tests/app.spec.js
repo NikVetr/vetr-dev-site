@@ -69,7 +69,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     packageCounts: window.CEO_BENCHMARK_DATA.categoryExplainers.rationaleCounts,
   }));
   expect(explainerCoverage).toEqual({
-    definitions: 270,
+    definitions: 283,
     rows: 177,
     filingReviews: 122,
     packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
@@ -109,7 +109,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".rp-reference-guide")).toHaveCount(1);
   await expect(page.locator(".rp-chart-marker")).toHaveCount(1);
   await expect(page.locator(".rp-chart-marker image")).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
-  await expect(page.locator(".rp-chart-marker-outline")).toHaveCSS("stroke", "rgb(255, 255, 255)");
+  await expect(page.locator(".rp-chart-marker-logo")).toHaveCSS("filter", /drop-shadow/);
+  await expect(page.locator(".rp-chart-marker rect")).toHaveCount(0);
   await expect(page.locator("#chart-legend")).toContainText("RP reference · not analyzed");
   const rpHistogramPlacement = await page.locator("#salary-chart").evaluate((svg) => {
     const guide = svg.querySelector(".rp-reference-guide");
@@ -164,7 +165,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(rpReferenceRow.locator("td").nth(5)).toHaveAttribute("title", /2023 Form 990 reports 43 individuals employed/);
   await expect(rpReferenceRow.locator("td")).toHaveCount(16);
   await expect(rpReferenceRow.locator(".source-cell").getByRole("button", { name: "Preview" })).toHaveCount(1);
-  await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /ProPublica/ })).toHaveCount(1);
+  await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /source 1/i })).toHaveText("1 ↗");
+  await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /source 2/i })).toHaveText("2 ↗");
   await expect(rpReferenceRow.locator("input")).toHaveCount(0);
   await expect(rpReferenceRow.locator("td").first()).toHaveCSS("color", "rgb(255, 255, 255)");
   await rpReferenceRow.getByRole("button", { name: "Preview" }).click();
@@ -184,8 +186,35 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(excludedPostingToggle).not.toBeChecked();
   await expect(excludedPostingToggle).toHaveAttribute("title", /excluded by default: Local and far below scale.*Check to include it manually/);
   const excludedPostingRow = page.locator('tr[data-id="SRC-AD-MOST-2025"]');
-  await expect(excludedPostingRow.locator("td").nth(11)).toHaveAttribute("title", /no EA field.*no EA relationship is inferred/i);
-  await expect(excludedPostingRow.locator("td").nth(12)).toHaveAttribute("title", /no new normalized structure is inferred/i);
+  await expect(excludedPostingRow.locator("td").nth(11)).toHaveText("functional-only");
+  await expect(excludedPostingRow.locator("td").nth(12)).toHaveText("independent nonprofit");
+  const postingEnrichmentCoverage = await page.evaluate(() => {
+    const rows = window.CEO_BENCHMARK_DATA.jobAds;
+    const definitions = window.CEO_BENCHMARK_DATA.categoryExplainers.definitions;
+    const missing = rows.filter((row) => [row.eaAffinity, row.structure, row.topic]
+      .some((value) => !value || /^(not coded|not extracted|uncoded)$/i.test(value)));
+    const missingDefinitions = rows.flatMap((row) => [
+      ["ea_relationship", row.eaAffinity],
+      ["expected_structure", row.structure],
+      ["topic_cluster", row.topic],
+    ]).filter(([field, value]) => !definitions[field]?.[value]);
+    return {
+      rows: rows.length,
+      missing: missing.map((row) => row.id),
+      missingDefinitions,
+      eaValues: [...new Set(rows.map((row) => row.eaAffinity))].sort(),
+      topicCount: new Set(rows.map((row) => row.topic)).size,
+      enriched: rows.filter((row) => row.categoryEnrichment && row.historicalCategoryProvenance).length,
+    };
+  });
+  expect(postingEnrichmentCoverage).toEqual({
+    rows: 33,
+    missing: [],
+    missingDefinitions: [],
+    eaValues: ["functional-only"],
+    topicCount: 8,
+    enriched: 33,
+  });
   for (const [column, cellIndex] of [["expenses", 4], ["staff", 5]]) {
     const centerDifference = await rpReferenceRow.locator("td").nth(cellIndex).evaluate((cell, sortColumn) => {
       const header = document.querySelector(`thead button[data-sort="${sortColumn}"]`).closest("th");
@@ -606,9 +635,21 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(hcap).toHaveCount(1);
   await hcap.getByRole("button", { name: "Preview" }).click();
   await expect(page.locator("#dialog-evidence")).toContainText("$150,000–$170,000");
+  await expect(page.locator("#dialog-meta")).toContainText("Health, workforce, and biomedical research");
+  await expect(page.locator("#dialog-meta")).toContainText("affiliated nonprofit group");
+  await expect(page.locator("#dialog-meta")).toContainText("Boards of H-CAP and H-CAP Education Association");
   await page.locator("#dialog-category-provenance summary").click();
-  await expect(page.locator("#dialog-provenance-confidence")).toHaveText("medium confidence");
+  await expect(page.locator("#dialog-provenance-confidence")).toHaveText("high confidence");
   await expect(page.locator("#dialog-provenance-records")).toContainText("expanded_secondary_structural");
+  await expect(page.locator("#dialog-provenance-records")).toContainText("Historical explainer state");
+  await expect(page.getByRole("link", { name: "Posting enrichment methodology ↗" })).toHaveAttribute("href", "benchmark/enrichment/job_ad_category_methodology.md");
+  await page.locator(".dialog-close").click();
+  const cscce = page.locator('tbody tr[data-id="SRC-AD-CSCCE"]');
+  await cscce.getByRole("button", { name: "Preview" }).click();
+  await expect(page.locator("#dialog-meta")).toContainText("fiscally sponsored project");
+  await page.locator("#dialog-category-provenance summary").click();
+  await expect(page.locator("#dialog-provenance-records")).toContainText("Community Initiatives");
+  await expect(page.locator('#dialog-provenance-records a[href="https://www.cscce.org/about/"]').first()).toHaveText("www.cscce.org");
   await page.locator(".dialog-close").click();
 
   await page.locator("#stream-select").selectOption("combined");
