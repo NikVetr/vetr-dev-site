@@ -19,6 +19,8 @@ CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 EVIDENCE_DIR = ROOT / "evidence" / "original"
 OUTPUT = ROOT / "app-data.js"
 WIKIPEDIA_PROFILES = ROOT / "data" / "organization_wikipedia_profiles.csv"
+RP_REFERENCE_SOURCE_ID = "SRC-990-RP-REFERENCE"
+RP_REFERENCE_LOCAL_PATH = "sources/native/form990/202502879349301540_public.xml"
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -158,6 +160,131 @@ def filing_homepage(local_path: str) -> str:
                 return ""
             return value if value.lower().startswith(("http://", "https://")) else f"https://{value}"
     return ""
+
+
+def local_name(element: ElementTree.Element) -> str:
+    return element.tag.rsplit("}", 1)[-1]
+
+
+def first_descendant(element: ElementTree.Element, name: str) -> str:
+    for candidate in element.iter():
+        if local_name(candidate) == name and text(candidate.text):
+            return text(candidate.text)
+    raise ValueError(f"Missing required Form 990 field: {name}")
+
+
+def person_record(root: ElementTree.Element, group_name: str, person: str) -> ElementTree.Element:
+    for group in root.iter():
+        if local_name(group) != group_name:
+            continue
+        name = next(
+            (text(element.text) for element in group.iter() if local_name(element) == "PersonNm" and text(element.text)),
+            "",
+        )
+        if name.casefold() == person.casefold():
+            return group
+    raise ValueError(f"Missing {group_name} record for {person}")
+
+
+def cpi_factor(year: int) -> float:
+    cpi_rows = rows(BENCHMARK / "data" / "cpi_u.csv")
+    target = [number(row["index_value"]) for row in cpi_rows if text(row["period"]) == "2026-07"]
+    annual = [
+        number(row["index_value"])
+        for row in cpi_rows
+        if re.fullmatch(fr"{year}-\d{{2}}", text(row["period"]))
+    ]
+    if len(target) != 1 or len(annual) != 12 or any(value is None for value in annual):
+        raise ValueError(f"Incomplete CPI series for {year} annual-average adjustment")
+    return float(target[0]) / (sum(float(value) for value in annual) / 12)
+
+
+def build_rp_reference() -> dict:
+    path = BENCHMARK / RP_REFERENCE_LOCAL_PATH
+    root = ElementTree.parse(path).getroot()
+    if first_descendant(root, "EIN") != "843896318":
+        raise ValueError("RP reference filing EIN does not match 84-3896318")
+    if first_descendant(root, "TaxPeriodBeginDt") != "2024-01-01" or first_descendant(root, "TaxPeriodEndDt") != "2024-12-31":
+        raise ValueError("RP reference filing is not the expected calendar-year 2024 return")
+
+    form990 = next((element for element in root.iter() if local_name(element) == "IRS990"), None)
+    if form990 is None:
+        raise ValueError("RP reference source does not contain Form 990")
+    part_vii = person_record(form990, "Form990PartVIISectionAGrp", "Marcus Davis")
+    schedule_j = person_record(root, "RltdOrgOfficerTrstKeyEmplGrp", "Marcus Davis")
+    title = first_descendant(part_vii, "TitleTxt")
+    if title.casefold() != "ceo":
+        raise ValueError(f"Unexpected RP top-executive title: {title}")
+
+    base = number(first_descendant(schedule_j, "BaseCompensationFilingOrgAmt"))
+    cash = number(first_descendant(part_vii, "ReportableCompFromOrgAmt"))
+    related = next((number(element.text) for element in part_vii.iter() if local_name(element) == "ReportableCompFromRltdOrgAmt"), 0) or 0
+    other = number(first_descendant(part_vii, "OtherCompensationAmt"))
+    schedule_total = number(first_descendant(schedule_j, "TotalCompensationFilingOrgAmt"))
+    if any(value is None for value in (base, cash, other, schedule_total)):
+        raise ValueError("RP reference filing lacks a required compensation field")
+    total = float(cash) + float(related) + float(other)
+    if schedule_total != total:
+        raise ValueError(f"RP Schedule J total {schedule_total} does not match Part VII total {total}")
+
+    expenses_group = next((element for element in form990.iter() if local_name(element) == "TotalFunctionalExpensesGrp"), None)
+    if expenses_group is None:
+        raise ValueError("RP reference filing lacks total functional expenses")
+    expenses = number(first_descendant(expenses_group, "TotalAmt"))
+    revenue = number(first_descendant(form990, "CYTotalRevenueAmt"))
+    employees = number(first_descendant(form990, "TotalEmployeeCnt"))
+    if (expenses, revenue, employees) != (20_378_936, 20_599_841, 0):
+        raise ValueError(f"Unexpected RP filing scale fields: expenses={expenses}, revenue={revenue}, employees={employees}")
+
+    factor = cpi_factor(2024)
+    cached = cache_source(RP_REFERENCE_SOURCE_ID, RP_REFERENCE_LOCAL_PATH)
+    return {
+        "id": RP_REFERENCE_SOURCE_ID,
+        "organization": "Rethink Priorities",
+        "executive": "Marcus Davis",
+        "title": title,
+        "titleGroup": title_group(title),
+        "rawTitle": title,
+        "tier": "Reference",
+        "topic": "RP reference organization",
+        "eaAffinity": "EA-core",
+        "location": "US",
+        "remoteStatus": "Not reported in Form 990",
+        "structure": "independent nonprofit",
+        "revenue": revenue,
+        "expenses": expenses,
+        "staff": employees,
+        "comparabilityScore": None,
+        "compensationYear": 2024,
+        "salary": {
+            "base": round(float(base) * factor, 2),
+            "cash": round(float(cash + related) * factor, 2),
+            "total": round(total * factor, 2),
+        },
+        "nominalSalary": {"base": base, "cash": cash + related, "total": total},
+        "cpiFactor": factor,
+        "cpiPeriod": "2024 annual average",
+        "defaultIncluded": False,
+        "structurallyClean": False,
+        "founder": False,
+        "analysisStatus": "reference only; excluded from peer distribution",
+        "auditStatus": "validated source-native RP Form 990 reference",
+        "selectionNote": "",
+        "evidenceText": (
+            "IRS Form 990 for the period ending 2024-12-31. Marcus Davis, CEO. "
+            f"Schedule J base: {money(base)}; Part VII cash/W-2 proxy: {money(cash + related)}; "
+            f"Part VII other compensation: {money(other)}; filing total: {money(total)}. "
+            f"The filing reports {money(expenses)} total functional expenses, {money(revenue)} total revenue, "
+            "and zero employees on Form 990 Part I, line 5."
+        ),
+        "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/843896318",
+        "canonicalUrl": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "cachedSource": cached,
+        "localPath": RP_REFERENCE_LOCAL_PATH,
+        "sourceType": "Form 990",
+        "evidenceStream": "incumbents",
+        "homepageUrl": filing_homepage(RP_REFERENCE_LOCAL_PATH),
+    }
 
 
 def compact_category_rationale(row: dict[str, str]) -> dict:
@@ -422,6 +549,7 @@ def main() -> None:
     definitions, rationales_by_source, reference_rationales, rationale_counts = load_category_explainers()
     incumbents = build_incumbents(rationales_by_source, reference_rationales)
     jobs = build_job_ads(rationales_by_source)
+    rp_reference = build_rp_reference()
     app_rows = incumbents + jobs
     wikipedia_profiles = load_wikipedia_profiles({row["organization"] for row in app_rows})
     for row in app_rows:
@@ -441,6 +569,7 @@ def main() -> None:
         },
         "incumbents": incumbents,
         "jobAds": jobs,
+        "rpReference": rp_reference,
         "categoryExplainers": {
             "definitions": definitions,
             "definitionCount": sum(len(field) for field in definitions.values()),
@@ -457,7 +586,7 @@ def main() -> None:
                 row["defaultIncluded"] and row["salary"]["base"] is not None for row in incumbents
             ),
             "quantitativeJobAds": sum(row["defaultIncluded"] for row in jobs),
-            "retrievedManifestRecords": 349,
+            "retrievedManifestRecords": len(rows(DELIVERABLES / "source_acquisition_manifest.csv")),
             "verifiedWikipediaProfiles": sum(
                 bool(profile["wikipedia_title"]) for profile in wikipedia_profiles.values()
             ),

@@ -73,7 +73,7 @@ One excluded, non-numeric row—Center for a Humane Economy—labels a November 
 - 135 of 135 Form 990 XML returns are locally preserved from official IRS bulk archives, with SHA-256 and retrieval metadata.
 - Part VII D/E/F amounts match the original extraction in 128 rows. Six other rows had no expected compensation record; one row has the substantive discrepancy described above.
 - All 15 primary quantitative job-ad ranges and all 3 sensitivity-only ranges verify against local source text or structured page data. A complete Arena mirror verifies H-CAP's $150,000-$170,000 range.
-- The archive contains all 349 manifest records. User-supplied browser captures recovered the previously blocked pages, complete H-CAP and Marine Science Institute mirrors, and ProPublica entity pages for the four formerly undefined supporting rows.
+- The archive contains all 350 manifest records. This comprises the original 349-source audit universe plus RP's own 2024 Form 990 reference filing from the official IRS TEOS bulk archive. User-supplied browser captures recovered the previously blocked pages, complete H-CAP and Marine Science Institute mirrors, and ProPublica entity pages for the four formerly undefined supporting rows.
 - Marine Science Institute's excluded role title is corrected from President and CEO to Executive Director. Its salary and location were already correct, and the correction has no quantitative effect because the row was excluded for a predeclared non-pay reason.
 
 See `compensation_extraction_audit.csv`, `job_ad_extraction_audit.csv`, and `../../deliverables/source_retrieval_status.csv` for row-level results.

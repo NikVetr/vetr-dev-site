@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import mimetypes
 import re
 from pathlib import Path
@@ -68,6 +69,51 @@ for _, r in f.iterrows():
         "last_attempt_timestamp": "",
         "last_attempt_result": "",
     })
+
+# RP itself is displayed as a non-analytical reference row. Keep its source-native
+# filing in the same acquisition and validation system as peer Form 990 evidence.
+rp_local_path = "sources/native/form990/202502879349301540_public.xml"
+rp_path = ROOT / rp_local_path
+rp_metadata_path = Path(f"{rp_path}.metadata.json")
+rp_state = {
+    "current_status": "missing_source_native",
+    "current_local_path": "",
+    "current_sha256": "",
+    "current_byte_length": "",
+    "last_attempt_timestamp": "",
+    "last_attempt_result": "",
+}
+if rp_path.is_file() and rp_metadata_path.is_file():
+    rp_bytes = rp_path.read_bytes()
+    rp_metadata = json.loads(rp_metadata_path.read_text(encoding="utf-8"))
+    rp_state = {
+        "current_status": "present_verified_source_native",
+        "current_local_path": rp_local_path,
+        "current_sha256": hashlib.sha256(rp_bytes).hexdigest(),
+        "current_byte_length": len(rp_bytes),
+        "last_attempt_timestamp": clean(rp_metadata.get("retrieval_timestamp_utc")),
+        "last_attempt_result": "downloaded from official IRS TEOS bulk archive",
+    }
+rows.append({
+    "source_id": "SRC-990-RP-REFERENCE",
+    "organization": "Rethink Priorities",
+    "evidence_stream": "form990",
+    "required_for_source_complete_release": "yes",
+    "canonical_url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+    "fallback_url_1": "https://projects.propublica.org/nonprofits/organizations/843896318",
+    "fallback_url_2": "https://projects.propublica.org/nonprofits/download-xml?object_id=202502879349301540",
+    "preferred_provenance": "official IRS e-file XML from the TEOS bulk archive",
+    "expected_local_path": rp_local_path,
+    "expected_mime_family": "xml",
+    "minimum_bytes": 10000,
+    "ein": "84-3896318",
+    "irs_object_id": "202502879349301540",
+    "tax_period_begin": "2024-01-01",
+    "tax_period_end": "2024-12-31",
+    "analysis_use": "non-analytical RP comparison row",
+    "validation_rule": "well-formed XML; EIN, tax period, CEO compensation, expenses, revenue, and employee count are rechecked by the app-data build",
+    **rp_state,
+})
 
 # Every advertisement row is retained because inclusion/exclusion and sensitivity
 # judgments are part of the evidentiary chain.  An excluded discovery record with
@@ -236,6 +282,8 @@ if OUT.exists():
     ]
     for idx, row in out.iterrows():
         if row["evidence_stream"] in {"frozen_local_input", "documented_search_record"}:
+            continue
+        if row["current_status"] == "present_verified_source_native" and row["current_local_path"]:
             continue
         prev = old_map.get(row["source_id"])
         if not prev:

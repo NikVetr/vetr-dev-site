@@ -1,12 +1,12 @@
 # Source archive status
 
-**Audit timestamp:** 2026-08-27T20:25:19+00:00  
-**Retrieval status:** **PASS - ALL SOURCES LOCALLY PRESERVED**  
+**Audit timestamp:** 2026-08-28T19:58:49+00:00
+**Retrieval status:** **PASS - ALL SOURCES LOCALLY PRESERVED**
 **Strict validation status:** **FAIL - EXPECTED-DATA CORRECTIONS REQUIRED**
 
 ## Direct answer
 
-All **349 of 349** required source records are now locally preserved. Remote acquisition is complete, including all 135 IRS XML returns, all 32 job-ad records, all 174 supporting sources, seven frozen inputs, and the documented search record.
+All **350 of 350** required source records are now locally preserved. Remote acquisition is complete, including all 136 IRS XML returns (135 peer filings plus RP's reference filing), all 32 job-ad records, all 174 supporting sources, seven frozen inputs, and the documented search record.
 
 The strict release gate still fails because it also requires the original expected extraction fields to match every source. **123** locally present records retain expected-data validation issues—principally the already documented Schedule J omissions, the Center for AI Safety correction, and two non-primary job-ad rows. These are extraction/data-contract findings, not missing-source findings. The validated app tables carry the corrected compensation fields.
 
@@ -17,14 +17,14 @@ The prior ZIP audit found:
 - **0** derivative files under `sources/raw/`, totaling **0 bytes**.
 - The ZIP's only PDF was the analytical report, not a source Form 990.
 
-A ZIP labeled `source_complete` remains gated until the corrected analytical release replaces the original expected fields. At this audit point, **226** records pass both retrieval and expected-field validation; all **349** pass retrieval.
+A ZIP labeled `source_complete` remains gated until the corrected analytical release replaces the original expected fields. At this audit point, **227** records pass both retrieval and expected-field validation; all **350** pass retrieval.
 
 ## Required archive inventory
 
 | Evidence stream | Required | Source-complete | Source-native/local present | Derivative snapshots |
 |---|---:|---:|---:|---:|
 | documented_search_record | 1 | 1 | 1 | 1 |
-| form990 | 135 | 14 | 135 | 135 |
+| form990 | 136 | 15 | 136 | 135 |
 | frozen_local_input | 7 | 7 | 7 | 7 |
 | job_ad | 32 | 30 | 32 | 32 |
 | supporting_web_source | 174 | 174 | 174 | 174 |

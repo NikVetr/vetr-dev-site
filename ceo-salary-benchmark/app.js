@@ -15,7 +15,7 @@
       ? `$${(value / 1_000_000).toFixed(value >= 10_000_000 ? 0 : 1)}M`
       : `$${Math.round(value / 1_000)}K`;
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
-  const RP_REFERENCE = Object.freeze({ expenses: 7_500_000, staff: 57 });
+  const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
   const COMPOSITE_SCORE_TOOLTIP = "Auto-weights uses the frozen 0–100 non-pay composite, which combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1. Select Auto-weights instead of its individual component weights to avoid double-counting those dimensions.";
 
   const state = {
@@ -26,8 +26,8 @@
     fit: "lognormal",
     weightings: new Set(),
     discreteWeights: {},
-    targetExpense: RP_REFERENCE.expenses,
-    targetStaff: RP_REFERENCE.staff,
+    targetExpense: RP_WEIGHT_TARGET.expenses,
+    targetStaff: RP_WEIGHT_TARGET.staff,
     expenseBandwidth: 0.7,
     staffBandwidth: 0.7,
     recencyHalfLife: 4,
@@ -1381,30 +1381,32 @@
   }
 
   function appendRpReferenceRow() {
+    const reference = DATA.rpReference;
+    if (!reference) throw new Error("RP Form 990 reference did not load.");
     const tr = document.createElement("tr");
     tr.className = "rp-reference-row";
-    tr.setAttribute("aria-label", "Rethink Priorities reference profile: 7.5 million dollar core budget and 57 full-time equivalents");
+    tr.setAttribute("aria-label", "Rethink Priorities 2024 Form 990 reference profile; excluded from the peer distribution");
     const values = [
-      "", "Rethink Priorities", "Reference organization", "Public RP profile", "—", compactMoney(RP_REFERENCE.expenses),
-      "", "", "Reference", "—", "—", `${RP_REFERENCE.staff} FTE`, "—", "—", "2026", "",
+      "", reference.organization, reference.title, reference.sourceType, compactMoney(salary(reference)), compactMoney(reference.expenses),
+      "", "", reference.tier, "—", reference.location, String(reference.staff), "—", reference.structure, String(reference.compensationYear), "",
     ];
     values.forEach((value, index) => {
       const td = document.createElement("td");
-      td.textContent = value;
+      if (index === 15) {
+        const preview = document.createElement("button");
+        preview.type = "button"; preview.className = "preview-button rp-reference-preview"; preview.textContent = "Preview";
+        preview.addEventListener("click", () => openSourceDialog(reference));
+        td.append(preview);
+      } else td.textContent = value;
       if (index === 0) td.className = "check-column";
       if (index === 1) td.className = "rp-reference-name";
+      if (index === 11) td.title = "Form 990 Part I, line 5 reports zero employees; this may not represent RP's operating headcount.";
       tr.append(td);
     });
     const source = document.createElement("td");
-    [
-      ["Budget ↗", "https://rethinkpriorities.org/2025-results/"],
-      ["Staff ↗", "https://rethinkpriorities.org/rethink-priorities-funding-needs/"],
-    ].forEach(([label, href], index) => {
-      if (index) source.append(document.createTextNode(" · "));
-      const link = document.createElement("a");
-      link.className = "rp-reference-source"; link.href = href; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = label;
-      source.append(link);
-    });
+    const link = document.createElement("a");
+    link.className = "rp-reference-source"; link.href = reference.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "ProPublica ↗";
+    source.append(link);
     tr.append(source);
     refs.tableBody.append(tr);
   }
@@ -1650,9 +1652,16 @@
 
   function measureLabel(row = null) {
     const basis = state.inflationAdjusted ? "July 2026 USD" : "source-year USD";
-    if (state.stream === "combined") return row && rowStream(row) === "jobAds"
-      ? `Posting midpoint, ${basis}`
-      : row ? `Schedule J base, ${basis}` : `Comparable salary proxy, ${basis}`;
+    if (row && rowStream(row) === "jobAds") return `Posting midpoint, ${basis}`;
+    if (row) {
+      const rowMeasure = state.stream === "incumbents" ? state.measure : "base";
+      return {
+        base: `Schedule J base, ${basis}`,
+        cash: `Part VII cash / W-2 proxy, ${basis}`,
+        total: `Filing total proxy, ${basis}`,
+      }[rowMeasure];
+    }
+    if (state.stream === "combined") return `Comparable salary proxy, ${basis}`;
     if (state.stream === "jobAds") return `Posting midpoint, ${basis}`;
     return {
       base: `Schedule J base, ${basis}`,
@@ -1751,7 +1760,7 @@
       }
       if (!values.length) return;
       let target = key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : null;
-      const rpReference = key === "size" ? RP_REFERENCE.expenses : key === "staff" ? RP_REFERENCE.staff : null;
+      const rpReference = key === "size" ? RP_WEIGHT_TARGET.expenses : key === "staff" ? RP_WEIGHT_TARGET.staff : null;
       const domainValues = [...values, target, rpReference].filter((value) => value != null && Number.isFinite(value));
       const rawMin = Math.min(...domainValues); const rawMax = Math.max(...domainValues);
       if (key === "recency") target = rawMax;
@@ -1779,7 +1788,7 @@
         heading.append(help);
       }
       const description = document.createElement("span"); description.textContent = parameter;
-      const referenceDescription = rpReference == null ? "" : `; RP reference ${format(rpReference)}`;
+      const referenceDescription = rpReference == null ? "" : `; RP operating target ${format(rpReference)}`;
       const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]} relative weight-response curve${referenceDescription}` });
       const xTicks = Array.from({ length: 4 }, (_, index) => {
         const ratio = index / 3;
@@ -1942,8 +1951,8 @@
     const customOverrides = rows().filter((row) => rowModifiedWeights(row).has(row.id))
       .map((row) => [shareRowCode(row), rowCustomWeights(row).get(row.id) ?? 1]);
     const parameters = {};
-    if (state.weightings.has("size") && state.targetExpense !== RP_REFERENCE.expenses) parameters.e = state.targetExpense;
-    if (state.weightings.has("staff") && state.targetStaff !== RP_REFERENCE.staff) parameters.s = state.targetStaff;
+    if (state.weightings.has("size") && state.targetExpense !== RP_WEIGHT_TARGET.expenses) parameters.e = state.targetExpense;
+    if (state.weightings.has("staff") && state.targetStaff !== RP_WEIGHT_TARGET.staff) parameters.s = state.targetStaff;
     if (state.weightings.has("size") && state.expenseBandwidth !== 0.7) parameters.b = state.expenseBandwidth;
     if (state.weightings.has("staff") && state.staffBandwidth !== 0.7) parameters.f = state.staffBandwidth;
     if (state.weightings.has("recency") && state.recencyHalfLife !== 4) parameters.r = state.recencyHalfLife;
@@ -2143,7 +2152,7 @@
     urlSyncReady = false;
     Object.assign(state, {
       stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
-      targetExpense: RP_REFERENCE.expenses, targetStaff: RP_REFERENCE.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
+      targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95", markCurve: true,
       sortKey: "tier", sortDirection: "asc",
@@ -2166,7 +2175,7 @@
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
     refs.scatterX.value = state.scatterX; refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
-    refs.targetExpense.value = RP_REFERENCE.expenses / 1_000_000; refs.targetStaff.value = RP_REFERENCE.staff;
+    refs.targetExpense.value = RP_WEIGHT_TARGET.expenses / 1_000_000; refs.targetStaff.value = RP_WEIGHT_TARGET.staff;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.quantileGranularity.value = "quintiles";
     refs.markCurve.checked = true;
@@ -2220,8 +2229,8 @@
     } else state.weightings.delete(input.value);
     renderWeightControls(); renderAll();
   }));
-  refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || RP_REFERENCE.expenses / 1_000_000, 1, 100) * 1_000_000; renderAll(); });
-  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || RP_REFERENCE.staff, 1, 1000); renderAll(); });
+  refs.targetExpense.addEventListener("change", () => { state.targetExpense = clamp(Number(refs.targetExpense.value) || RP_WEIGHT_TARGET.expenses / 1_000_000, 1, 100) * 1_000_000; renderAll(); });
+  refs.targetStaff.addEventListener("change", () => { state.targetStaff = clamp(Number(refs.targetStaff.value) || RP_WEIGHT_TARGET.staff, 1, 1000); renderAll(); });
   refs.expenseBandwidth.addEventListener("input", () => { state.expenseBandwidth = Number(refs.expenseBandwidth.value); renderAll(); });
   refs.staffBandwidth.addEventListener("input", () => { state.staffBandwidth = Number(refs.staffBandwidth.value); renderAll(); });
   refs.recencyHalfLife.addEventListener("input", () => { state.recencyHalfLife = Number(refs.recencyHalfLife.value); renderAll(); });

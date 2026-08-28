@@ -352,6 +352,8 @@ tbody tr.is-unavailable { opacity: .62; }
 .rp-reference-row:hover td { background: var(--green); }
 .rp-reference-row .rp-reference-name { font-size: 11px; font-weight: 800; }
 .rp-reference-row .rp-reference-source { color: white; text-decoration-color: color-mix(in srgb, white, transparent 38%); text-underline-offset: 2px; }
+.rp-reference-row .rp-reference-preview { border-color: rgba(255, 255, 255, .72); background: transparent; color: white; }
+.rp-reference-row .rp-reference-preview:hover { background: rgba(255, 255, 255, .14); }
 .check-column { width: 28px; text-align: center; }
 .row-toggle { accent-color: var(--green); }
 .org-cell { min-width: 166px; }

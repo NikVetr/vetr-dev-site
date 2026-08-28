@@ -2,9 +2,9 @@
 
 ## Archive status - read first
 
-This directory contains the analytical model, extracted evidence tables, calculations, report, and a strict source-acquisition framework. An independent source audit has now preserved all 135 IRS XML returns and found a material Schedule J omission plus one Part VII extraction error. Use `analysis/source_validation/methodology_audit.md` and the `validated_*_compensation.csv` deliverables for subsequent work; the original report is retained as the artifact that was audited.
+This directory contains the analytical model, extracted evidence tables, calculations, report, and a strict source-acquisition framework. An independent source audit has now preserved all 135 peer IRS XML returns, plus RP's reference filing, and found a material Schedule J omission plus one Part VII extraction error. Use `analysis/source_validation/methodology_audit.md` and the `validated_*_compensation.csv` deliverables for subsequent work; the original report is retained as the artifact that was audited.
 
-The local archive now contains all 349 manifest records. Remote acquisition is complete: user-supplied browser captures recovered H-CAP, Marine Science Institute, and the four formerly undefined supporting records. The strict source-complete release gate still fails because it also checks the original expected extraction fields, which retain the documented Schedule J omissions, the Center for AI Safety discrepancy, and two non-primary job-ad validation issues.
+The local archive now contains all 350 manifest records. Remote acquisition is complete: user-supplied browser captures recovered H-CAP, Marine Science Institute, and the four formerly undefined supporting records; RP's own 2024 filing was added from the official IRS TEOS bulk archive. The strict source-complete release gate still fails because it also checks the original expected extraction fields, which retain the documented Schedule J omissions, the Center for AI Safety discrepancy, and two non-primary job-ad validation issues.
 
 The earlier file named `rp_ceo_expanded_rebenchmark_complete.zip` contained derivative text snapshots and source identifiers, but no complete IRS XML returns. That filename was misleading. The corrected ordinary release is therefore named:
 
@@ -61,7 +61,7 @@ Run this command in a normal network-enabled environment:
 The command:
 
 1. Rebuilds the analytical outputs and derivative provenance layer.
-2. Creates the 349-row source-acquisition manifest.
+2. Creates the 350-row source-acquisition manifest.
 3. Downloads complete official IRS XML returns first, using a declared raw-XML mirror only when needed.
 4. Downloads employer/recruiter job materials and supporting public sources without bypassing access controls.
 5. Creates response-metadata sidecars containing requested/resolved URLs, retrieval timestamps, MIME type, byte length, HTTP headers, and SHA-256.

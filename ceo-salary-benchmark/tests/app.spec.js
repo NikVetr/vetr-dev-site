@@ -117,11 +117,24 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   const rpReferenceRow = page.locator("tbody .rp-reference-row");
   await expect(rpReferenceRow).toHaveCount(1);
   await expect(rpReferenceRow).toContainText("Rethink Priorities");
-  await expect(rpReferenceRow).toContainText("$7.5M");
-  await expect(rpReferenceRow).toContainText("57 FTE");
+  await expect(rpReferenceRow).toContainText("CEO");
+  await expect(rpReferenceRow).toContainText("Form 990");
+  await expect(rpReferenceRow).toContainText("$155K");
+  await expect(rpReferenceRow).toContainText("$20M");
+  await expect(rpReferenceRow).toContainText("2024");
+  await expect(rpReferenceRow.locator("td").nth(11)).toHaveText("0");
+  await expect(rpReferenceRow.locator("td").nth(11)).toHaveAttribute("title", /Part I, line 5/);
   await expect(rpReferenceRow.locator("td")).toHaveCount(17);
   await expect(rpReferenceRow.locator("input")).toHaveCount(0);
   await expect(rpReferenceRow.locator("td").first()).toHaveCSS("color", "rgb(255, 255, 255)");
+  await rpReferenceRow.getByRole("button", { name: "Preview" }).click();
+  await expect(page.locator("#dialog-value")).toHaveText("$155,230");
+  await expect(page.locator("#dialog-evidence")).toContainText("Schedule J base: $145,826");
+  await expect(page.locator("#dialog-evidence")).toContainText("$20,378,936 total functional expenses");
+  await expect(page.locator("#dialog-cached")).toHaveAttribute("href", "evidence/original/src-990-rp-reference.xml");
+  await expect(page.locator("#dialog-external")).toHaveAttribute("href", "https://projects.propublica.org/nonprofits/organizations/843896318");
+  await expect(page.locator("#dialog-category-provenance")).toBeHidden();
+  await page.locator(".dialog-close").click();
   for (const [column, cellIndex] of [["expenses", 5], ["staff", 11]]) {
     const centerDifference = await rpReferenceRow.locator("td").nth(cellIndex).evaluate((cell, sortColumn) => {
       const header = document.querySelector(`thead button[data-sort="${sortColumn}"]`).closest("th");
@@ -209,6 +222,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('input[name="dollar-basis"][value="nominal"]').check();
   await expect(page.locator("#price-basis-status")).toHaveText("Source-year USD");
   await expect(page.locator("#salary-chart")).toContainText("Annual compensation (Source-year USD)");
+  await expect(rpReferenceRow).toContainText("$146K");
   await expect(caisInflationRow.locator(".money-cell").first()).toHaveText("$315K");
   await caisInflationRow.getByRole("button", { name: "Preview" }).click();
   await expect(page.locator("#dialog-value")).toHaveText("$314,534");
@@ -351,12 +365,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#weight-profile-size")).toBeVisible();
   await expect(page.locator("#weight-profile-size .weight-profile-rp-reference")).toHaveCount(1);
   await expect(page.locator("#weight-profile-size .weight-profile-rp-label")).toHaveText("RP");
-  await expect(page.locator("#weight-profile-size svg")).toHaveAttribute("aria-label", /RP reference \$7\.5M/);
+  await expect(page.locator("#weight-profile-size svg")).toHaveAttribute("aria-label", /RP operating target \$7\.5M/);
   await expect(page.locator(".settings-panel #weight-profile-size")).toHaveCount(1);
   await expect(page.locator(".chart-panel .weight-profile-slot")).toHaveCount(0);
   await expect(page.locator(".weight-profile-curve")).toHaveCount(1);
   await expect(page.locator("#rp-scale-reference")).toBeVisible();
-  await expect(page.locator("#rp-scale-reference")).toContainText("$20.38M consolidated expenses");
+  await expect(page.locator("#rp-scale-reference")).toContainText("$20.38M total functional expenses");
   await page.locator('#weighting-components input[value="staff"]').check();
   await expect(page.locator("#staff-target-field")).toBeVisible();
   await expect(page.locator("#target-staff")).toHaveValue("57");

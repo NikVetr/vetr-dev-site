@@ -2388,6 +2388,16 @@ SRC-990-EXT-RESULTS-FOR-DEVELOPMENT,Results for Development,form990,sources/nati
 SRC-990-EXT-RESULTS-FOR-DEVELOPMENT,Results for Development,form990,sources/native/form990/202512739349302306_public.xml,part_vii_related,True,0,0
 SRC-990-EXT-RESULTS-FOR-DEVELOPMENT,Results for Development,form990,sources/native/form990/202512739349302306_public.xml,part_vii_other,True,13800,13800
 SRC-990-EXT-RESULTS-FOR-DEVELOPMENT,Results for Development,form990,sources/native/form990/202512739349302306_public.xml,schedule_j_base,False,blank,384084
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,file_present,True,sources/native/form990/202502879349301540_public.xml,present
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,minimum_bytes,True,10000,78873
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,sha256_recorded_matches,True,adc9db204f475d72c03baa93a953e1d26b86001ee17ecfdeab2dc914ae91d91a,adc9db204f475d72c03baa93a953e1d26b86001ee17ecfdeab2dc914ae91d91a
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,retrieval_metadata_present,True,sources/native/form990/202502879349301540_public.xml.metadata.json,present
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,metadata_source_id,True,SRC-990-RP-REFERENCE,SRC-990-RP-REFERENCE
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,metadata_local_path,True,sources/native/form990/202502879349301540_public.xml,sources/native/form990/202502879349301540_public.xml
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,metadata_byte_length,True,78873,78873
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,metadata_sha256,True,adc9db204f475d72c03baa93a953e1d26b86001ee17ecfdeab2dc914ae91d91a,adc9db204f475d72c03baa93a953e1d26b86001ee17ecfdeab2dc914ae91d91a
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,metadata_resolved_url,True,nonblank resolved URL,https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip
+SRC-990-RP-REFERENCE,Rethink Priorities,form990,sources/native/form990/202502879349301540_public.xml,metadata_retrieval_timestamp,True,nonblank UTC retrieval timestamp,2026-08-28T19:48:26+00:00
 SRC-990-EXT-ROOSEVELT-INSTITUTE,Roosevelt Institute,form990,sources/native/form990/202532729349301978_public.xml,file_present,True,sources/native/form990/202532729349301978_public.xml,present
 SRC-990-EXT-ROOSEVELT-INSTITUTE,Roosevelt Institute,form990,sources/native/form990/202532729349301978_public.xml,minimum_bytes,True,10000,77582
 SRC-990-EXT-ROOSEVELT-INSTITUTE,Roosevelt Institute,form990,sources/native/form990/202532729349301978_public.xml,sha256_recorded_matches,True,fd2289c92a90881e03847f8c55d1f0bcdc5618dd977ebd08c43f9f32ea2da35a,fd2289c92a90881e03847f8c55d1f0bcdc5618dd977ebd08c43f9f32ea2da35a

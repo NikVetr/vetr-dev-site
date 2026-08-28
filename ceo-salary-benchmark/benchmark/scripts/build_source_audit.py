@@ -154,16 +154,17 @@ def main() -> int:
             f"| {row['evidence_stream']} | {int(row['required'])} | {int(row['source_complete'])} | "
             f"{int(row['source_native_present'])} | {int(row['derivative_present'])} |"
         )
+    form990_count = int(required.loc[required.evidence_stream == "form990"].shape[0])
 
     status_text = f"""# Source archive status
 
-**Audit timestamp:** {summary['audit_timestamp_utc']}  
-**Retrieval status:** **{summary['retrieval_status']}**  
+**Audit timestamp:** {summary['audit_timestamp_utc']}
+**Retrieval status:** **{summary['retrieval_status']}**
 **Strict validation status:** **{summary['validation_status']}**
 
 ## Direct answer
 
-All **{native_count} of {required_count}** required source records are now locally preserved. Remote acquisition is complete, including all 135 IRS XML returns, all 32 job-ad records, all 174 supporting sources, seven frozen inputs, and the documented search record.
+All **{native_count} of {required_count}** required source records are now locally preserved. Remote acquisition is complete, including all {form990_count} IRS XML returns (135 peer filings plus RP's reference filing), all 32 job-ad records, all 174 supporting sources, seven frozen inputs, and the documented search record.
 
 The strict release gate still fails because it also requires the original expected extraction fields to match every source. **{required_count - complete_count}** locally present records retain expected-data validation issues—principally the already documented Schedule J omissions, the Center for AI Safety correction, and two non-primary job-ad rows. These are extraction/data-contract findings, not missing-source findings. The validated app tables carry the corrected compensation fields.
 
