@@ -21,7 +21,7 @@
         <span id="archive-status">349 / 349 sources</span>
         <button class="info-tooltip" type="button" aria-label="About source and observation counts" data-tooltip="This counts locally archived files in the source-acquisition manifest, not salary observations. It includes 174 supporting web pages, 135 Form 990s, 32 job-ad files, 7 frozen inputs, and 1 documented search record. Sources used only for peer selection, metadata, validation, or exclusions do not become plotted salary observations. Scatterplots can be smaller again when rows lack the selected horizontal-axis value.">?</button>
       </span>
-      <span>July 2026 USD</span>
+      <span id="price-basis-status">July 2026 USD</span>
     </div>
   </header>
 
@@ -44,6 +44,12 @@
           <option value="jobAds">Recruitment postings</option>
         </select>
       </label>
+
+      <fieldset class="choice-group field dollar-basis-setting">
+        <legend>Salary basis <button class="info-tooltip" type="button" aria-label="About inflation adjustment" data-tooltip="Adjusted salaries use the U.S. Bureau of Labor Statistics CPI-U for all urban consumers, U.S. city average, all items, not seasonally adjusted (CUUR0000SA0; July 2026 target index 333.918). Form 990 compensation uses the annual-average CPI for its compensation calendar year; postings use posting-month CPI when known. Unadjusted salaries show the nominal filing amount or advertised-range midpoint. Expenses and other scale fields are unchanged.">?</button></legend>
+        <label><input type="radio" name="dollar-basis" value="adjusted" checked> Adjusted</label>
+        <label><input type="radio" name="dollar-basis" value="nominal"> Unadjusted</label>
+      </fieldset>
 
       <label class="field" id="measure-field">
         <span>Compensation measure <button class="info-tooltip" type="button" aria-label="About compensation measures" data-tooltip="Schedule J base is the preferred salary measure. Part VII cash is a W-2-style cash proxy; filing total adds reported other compensation.">?</button></span>
@@ -226,10 +232,6 @@
     </section>
 
     <aside class="table-panel panel" aria-label="Organization-level evidence table">
-      <div id="table-rp-reference-layer" class="table-rp-reference-layer" aria-label="Rethink Priorities comparison references">
-        <span id="rp-expense-table-reference" class="rp-table-reference" data-reference-column="expenses">RP = $7.5M</span>
-        <span id="rp-staff-table-reference" class="rp-table-reference" data-reference-column="staff">RP = 57 FTE</span>
-      </div>
       <div class="table-scroll" tabindex="0">
         <table id="organization-table">
           <thead>

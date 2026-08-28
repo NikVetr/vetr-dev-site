@@ -21,6 +21,7 @@
   const state = {
     stream: "combined",
     measure: "base",
+    inflationAdjusted: true,
     sample: "primary",
     fit: "lognormal",
     weightings: new Set(),
@@ -71,6 +72,7 @@
 
   const refs = {
     stream: $("#stream-select"), measure: $("#measure-select"), measureField: $("#measure-field"),
+    dollarBasis: [...document.querySelectorAll('input[name="dollar-basis"]')], priceBasisStatus: $("#price-basis-status"),
     sample: $("#sample-select"), fit: [...document.querySelectorAll('input[name="distribution"]')],
     weightingComponents: [...document.querySelectorAll('.weighting-field input[type="checkbox"]')],
     sizeControls: $("#size-controls"), expenseTargetField: $("#expense-target-field"), staffTargetField: $("#staff-target-field"),
@@ -96,8 +98,7 @@
     salaryFilterSummary: $("#salary-filter-summary"), salaryFilterStatus: $("#salary-filter-status"),
     expenseMin: $("#expense-range-min"), expenseMax: $("#expense-range-max"), expenseRangeValue: $("#expense-range-value"),
     expenseFilterSummary: $("#expense-filter-summary"), expenseFilterStatus: $("#expense-filter-status"),
-    tableRpReferenceLayer: $("#table-rp-reference-layer"), tableScroll: $(".table-scroll"),
-    rpExpenseTableReference: $("#rp-expense-table-reference"), rpStaffTableReference: $("#rp-staff-table-reference"),
+    tableScroll: $(".table-scroll"),
     tableBody: $("#organization-table tbody"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
     urlStateError: $("#url-state-error"),
@@ -372,8 +373,18 @@
   }
 
   function salary(row) {
-    if (rowStream(row) === "jobAds" || state.stream === "combined") return row.salary?.base ?? null;
-    return row.salary?.[state.measure] ?? null;
+    const values = state.inflationAdjusted ? row.salary : row.nominalSalary;
+    if (rowStream(row) === "jobAds" || state.stream === "combined") return values?.base ?? null;
+    return values?.[state.measure] ?? null;
+  }
+
+  function salaryRange(row) {
+    if (rowStream(row) !== "jobAds") return null;
+    return state.inflationAdjusted ? row.range : row.nominalRange;
+  }
+
+  function priceBasisLabel() {
+    return state.inflationAdjusted ? DATA.priceBasis : "Source-year USD";
   }
 
   function baseWeight(row) {
@@ -689,6 +700,7 @@
     if (!state.markCurve || !model || !percentiles.length || percentiles.length >= 21) return;
     const expectedWeight = (value) => model.density(value) * sumWeight * binWidthValue;
     const delta = Math.max((domainMax - domainMin) / 1500, 1);
+    const candidates = [];
     percentiles.forEach((percentile) => {
       const value = model.quantile(percentile / 100);
       if (!Number.isFinite(value) || value < domainMin || value > domainMax) return;
@@ -710,8 +722,6 @@
         `M${x + normalX * tickGap},${y + normalY * tickGap}L${x + normalX * tickOuter},${y + normalY * tickOuter}`,
       ].join(" ");
       const tickPath = `M${x - normalX * tickOuter},${y - normalY * tickOuter}L${x + normalX * tickOuter},${y + normalY * tickOuter}`;
-      svg.append(svgElement("path", { d: tickOutlinePath, class: "curve-quantile-tick-outline" }));
-      svg.append(svgElement("path", { d: tickPath, class: "curve-quantile-tick" }));
       let textAngle = tangentAngle * 180 / Math.PI;
       if (textAngle > 90) textAngle -= 180;
       if (textAngle < -90) textAngle += 180;
@@ -727,7 +737,28 @@
       const amountLine = svgElement("text", { x: 0, y: 13, "text-anchor": "middle", class: "curve-quantile-label amount" });
       amountLine.textContent = `$${Math.round(value / 1000)}K`;
       label.append(percentileLine, amountLine);
+      label.setAttribute("visibility", "hidden");
       svg.append(label);
+      const bounds = label.getBoundingClientRect();
+      label.remove();
+      label.removeAttribute("visibility");
+      candidates.push({ percentile, bounds, label, tickOutlinePath, tickPath });
+    });
+    const overlaps = (first, second, padding = 3) => first.right + padding > second.left
+      && second.right + padding > first.left
+      && first.bottom + padding > second.top
+      && second.bottom + padding > first.top;
+    const retained = [];
+    [...candidates]
+      .sort((first, second) => Math.abs(first.percentile - 50) - Math.abs(second.percentile - 50) || first.percentile - second.percentile)
+      .forEach((candidate) => {
+        if (retained.some((existing) => overlaps(existing.bounds, candidate.bounds))) return;
+        retained.push(candidate);
+      });
+    retained.sort((first, second) => first.bounds.left - second.bounds.left).forEach((candidate) => {
+      svg.append(svgElement("path", { d: candidate.tickOutlinePath, class: "curve-quantile-tick-outline" }));
+      svg.append(svgElement("path", { d: candidate.tickPath, class: "curve-quantile-tick" }));
+      svg.append(candidate.label);
     });
   }
 
@@ -865,7 +896,7 @@
       svg.append(label);
     }
     const axisTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
-    axisTitle.textContent = `Annual compensation (${DATA.priceBasis})`;
+    axisTitle.textContent = `Annual compensation (${priceBasisLabel()})`;
     svg.append(axisTitle);
     const yAxisTitle = svgElement("text", {
       x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`,
@@ -1126,7 +1157,7 @@
     const xTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
     xTitle.textContent = `${variable.label}${variable.logarithmic ? " (log scale)" : ""}`; svg.append(xTitle);
     const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
-    yTitle.textContent = `Annual compensation (${DATA.priceBasis})`; svg.append(yTitle);
+    yTitle.textContent = `Annual compensation (${priceBasisLabel()})`; svg.append(yTitle);
     renderScatterLegend(colors, contoursShown, items);
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     const squared = items.reduce((sum, item) => sum + item.weight ** 2, 0);
@@ -1144,8 +1175,9 @@
     const tier = peerTierInfo(row.tier);
     const rawTier = humanizeCategory(row.tier);
     const evidence = [row.sourceType, row.compensationYear].filter(Boolean).join(" · ");
-    const range = rowStream(row) === "jobAds" && row.range
-      ? `${money(row.range.low)}–${money(row.range.high)}`
+    const displayedRange = salaryRange(row);
+    const range = displayedRange
+      ? `${money(displayedRange.low)}–${money(displayedRange.high)}`
       : "";
     const colorLabel = {
       topic: "Topic / model", eaAffinity: "EA relation", sourceType: "Evidence stream",
@@ -1341,8 +1373,38 @@
     });
   }
 
+  function appendRpReferenceRow() {
+    const tr = document.createElement("tr");
+    tr.className = "rp-reference-row";
+    tr.setAttribute("aria-label", "Rethink Priorities reference profile: 7.5 million dollar core budget and 57 full-time equivalents");
+    const values = [
+      "", "Rethink Priorities", "Reference organization", "Public RP profile", "—", compactMoney(RP_REFERENCE.expenses),
+      "", "", "Reference", "—", "—", `${RP_REFERENCE.staff} FTE`, "—", "—", "2026", "",
+    ];
+    values.forEach((value, index) => {
+      const td = document.createElement("td");
+      td.textContent = value;
+      if (index === 0) td.className = "check-column";
+      if (index === 1) td.className = "rp-reference-name";
+      tr.append(td);
+    });
+    const source = document.createElement("td");
+    [
+      ["Budget ↗", "https://rethinkpriorities.org/2025-results/"],
+      ["Staff ↗", "https://rethinkpriorities.org/rethink-priorities-funding-needs/"],
+    ].forEach(([label, href], index) => {
+      if (index) source.append(document.createTextNode(" · "));
+      const link = document.createElement("a");
+      link.className = "rp-reference-source"; link.href = href; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = label;
+      source.append(link);
+    });
+    tr.append(source);
+    refs.tableBody.append(tr);
+  }
+
   function renderTable() {
     refs.tableBody.replaceChildren();
+    appendRpReferenceRow();
     const selection = weightedSelection();
     const weightMap = new Map(selection.map((item) => [item.row.id, item.weight]));
     tableRows(weightMap).forEach((row) => {
@@ -1442,36 +1504,18 @@
         ? (state.sortDirection === "asc" ? "ascending" : "descending")
         : "none");
     });
-    scheduleTableReferencePosition();
+    scheduleTableStickyOffset();
   }
 
-  let tableReferenceFrame = null;
+  let tableStickyFrame = null;
 
-  function positionTableReferences() {
-    tableReferenceFrame = null;
-    const layerRect = refs.tableRpReferenceLayer.getBoundingClientRect();
-    const scrollRect = refs.tableScroll.getBoundingClientRect();
-    [
-      [refs.rpExpenseTableReference, "expenses"],
-      [refs.rpStaffTableReference, "staff"],
-    ].forEach(([marker, column]) => {
-      const header = document.querySelector(`thead button[data-sort="${column}"]`)?.closest("th");
-      if (!header) return;
-      const headerRect = header.getBoundingClientRect();
-      const center = headerRect.left + (headerRect.width / 2) - layerRect.left;
-      marker.style.left = `${center}px`;
-      const halfWidth = marker.offsetWidth / 2;
-      const withinViewport = headerRect.right > scrollRect.left
-        && headerRect.left < scrollRect.right
-        && center - halfWidth >= 4
-        && center + halfWidth <= layerRect.width - 4;
-      marker.classList.toggle("is-out-of-view", !withinViewport);
+  function scheduleTableStickyOffset() {
+    if (tableStickyFrame != null) cancelAnimationFrame(tableStickyFrame);
+    tableStickyFrame = requestAnimationFrame(() => {
+      tableStickyFrame = null;
+      const headerHeight = document.querySelector("#organization-table thead")?.getBoundingClientRect().height || 29;
+      refs.tableScroll.style.setProperty("--table-header-height", `${headerHeight}px`);
     });
-  }
-
-  function scheduleTableReferencePosition() {
-    if (tableReferenceFrame != null) cancelAnimationFrame(tableReferenceFrame);
-    tableReferenceFrame = requestAnimationFrame(positionTableReferences);
   }
 
   function focusRow(id) {
@@ -1494,6 +1538,8 @@
     [
       ["Executive / role", [row.executive, row.rawTitle || row.title].filter(Boolean).join(" · ") || "Not reported"],
       ["Evidence year", row.compensationYear || "Not reported"],
+      ["Displayed dollar basis", state.inflationAdjusted ? `${DATA.priceBasis} · CPI factor ${Number(row.cpiFactor || 1).toFixed(4)}×` : "Nominal source-year dollars · no CPI adjustment"],
+      ["CPI reference period", row.cpiPeriod || "Not reported"],
       ["Tier", row.tier || "Not coded"],
       ["Topic / model", row.topic || "Not coded"],
       ["Location / work model", [row.location, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
@@ -1596,11 +1642,16 @@
   }
 
   function measureLabel(row = null) {
+    const basis = state.inflationAdjusted ? "July 2026 USD" : "source-year USD";
     if (state.stream === "combined") return row && rowStream(row) === "jobAds"
-      ? "Posting midpoint, July 2026 USD"
-      : row ? "Schedule J base, July 2026 USD" : "Comparable salary proxy, July 2026 USD";
-    if (state.stream === "jobAds") return "Posting midpoint, July 2026 USD";
-    return { base: "Schedule J base, July 2026 USD", cash: "Part VII cash / W-2 proxy, July 2026 USD", total: "Filing total proxy, July 2026 USD" }[state.measure];
+      ? `Posting midpoint, ${basis}`
+      : row ? `Schedule J base, ${basis}` : `Comparable salary proxy, ${basis}`;
+    if (state.stream === "jobAds") return `Posting midpoint, ${basis}`;
+    return {
+      base: `Schedule J base, ${basis}`,
+      cash: `Part VII cash / W-2 proxy, ${basis}`,
+      total: `Filing total proxy, ${basis}`,
+    }[state.measure];
   }
 
   function renderWeightControls() {
@@ -1789,6 +1840,7 @@
         ? "Validated CEO / ED posting midpoints"
         : { base: "Validated Schedule J base salaries", cash: "Validated Part VII cash / W-2 proxies", total: "Validated filing total compensation" }[state.measure];
     refs.statNUnit.textContent = isCombined ? "observations" : "organizations";
+    refs.priceBasisStatus.textContent = priceBasisLabel();
     refs.scatterControls.hidden = state.view !== "scatter";
     refs.binField.hidden = state.view !== "histogram";
     refs.sampleDescription.textContent = {
@@ -1894,6 +1946,7 @@
     const payload = { v: URL_STATE_VERSION };
     if (state.stream !== "combined") payload.e = URL_STREAM_CODES[state.stream];
     if (state.measure !== "base" && state.stream === "incumbents") payload.m = URL_MEASURE_CODES[state.measure];
+    if (!state.inflationAdjusted) payload.n = 1;
     if (state.sample !== "primary") payload.p = URL_SAMPLE_CODES[state.sample];
     if (state.fit !== "lognormal") payload.g = URL_FIT_CODES[state.fit];
     if (state.weightings.size) payload.w = [...state.weightings].map((key) => URL_WEIGHT_CODES[key]).join("");
@@ -1944,6 +1997,7 @@
     refs.stream.value = state.stream;
     refs.measure.value = state.measure;
     refs.sample.value = state.sample;
+    refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === (state.inflationAdjusted ? "adjusted" : "nominal"); });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
     refs.scatterX.value = state.scatterX;
@@ -1989,6 +2043,7 @@
       a: {
         s: payload.e ? URL_STREAM_KEYS[payload.e] : version === 2 ? "incumbents" : "combined",
         m: URL_MEASURE_KEYS[payload.m], p: URL_SAMPLE_KEYS[payload.p],
+        ia: payload.n !== 1,
         d: URL_FIT_KEYS[payload.g],
         w: [...String(payload.w || "")].map((code) => URL_WEIGHT_KEYS[code]).filter(Boolean),
         te: payload.x?.e, ts: payload.x?.s, eb: payload.x?.b, sb: payload.x?.f, rh: payload.x?.r,
@@ -2011,6 +2066,7 @@
     const enumValue = (value, allowed, fallback) => allowed.includes(value) ? value : fallback;
     state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], sourceVersion === 1 ? "incumbents" : state.stream);
     state.measure = enumValue(analysis.m, ["base", "cash", "total"], state.measure);
+    state.inflationAdjusted = analysis.ia !== false;
     if (state.stream === "combined") state.measure = "base";
     state.sample = enumValue(analysis.p, ["primary", "clean", "tierA", "observed"], state.sample);
     state.fit = enumValue(analysis.d, ["empirical", "lognormal", "gamma"], state.fit);
@@ -2079,7 +2135,7 @@
     const resumeUrlSync = urlSyncReady;
     urlSyncReady = false;
     Object.assign(state, {
-      stream: "combined", measure: "base", sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
+      stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
       targetExpense: RP_REFERENCE.expenses, targetStaff: RP_REFERENCE.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram", scatterX: "expenses", chartColor: "tier", showContours: true,
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95", markCurve: true,
@@ -2099,6 +2155,7 @@
       streamRows.forEach((row) => { inclusion[stream].set(row.id, Boolean(row.defaultIncluded)); customWeights[stream].set(row.id, 1); });
     });
     refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
+    refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === "adjusted"; });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
     refs.scatterX.value = state.scatterX; refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
@@ -2130,6 +2187,13 @@
     state.measure = refs.measure.value; state.focusedId = ""; state.autoBins = true;
     applyPreset(); configureRanges(); renderAll();
   });
+  refs.dollarBasis.forEach((radio) => radio.addEventListener("change", () => {
+    if (!radio.checked) return;
+    state.inflationAdjusted = radio.value === "adjusted";
+    state.autoBins = true;
+    configureRanges();
+    renderAll();
+  }));
   refs.sample.addEventListener("change", () => { state.sample = refs.sample.value; applyPreset(); renderAll(); });
   refs.fit.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.fit = radio.value; renderAll(); } }));
   refs.weightingComponents.forEach((input) => input.addEventListener("change", () => {
@@ -2174,13 +2238,10 @@
 
   const observer = new ResizeObserver(() => renderChart());
   observer.observe(refs.chartWrap);
-  const tableObserver = new ResizeObserver(scheduleTableReferencePosition);
+  const tableObserver = new ResizeObserver(scheduleTableStickyOffset);
   tableObserver.observe(refs.tableScroll);
-  refs.tableScroll.addEventListener("scroll", scheduleTableReferencePosition, { passive: true });
   refs.organizationPreview.addEventListener("pointerenter", () => window.clearTimeout(organizationPreviewHideTimer));
   refs.organizationPreview.addEventListener("pointerleave", scheduleOrganizationPreviewHide);
-  refs.rpExpenseTableReference.textContent = `RP = ${compactMoney(RP_REFERENCE.expenses)}`;
-  refs.rpStaffTableReference.textContent = `RP = ${RP_REFERENCE.staff} FTE`;
   $("#archive-status").textContent = `${DATA.summary.retrievedManifestRecords} / ${DATA.summary.retrievedManifestRecords} sources`;
   const encodedInitialState = new URL(window.location.href).searchParams.get("s");
   if (encodedInitialState) {

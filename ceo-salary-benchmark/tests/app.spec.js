@@ -30,6 +30,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#measure-field")).toBeHidden();
+  await expect(page.locator('input[name="dollar-basis"][value="adjusted"]')).toBeChecked();
+  await expect(page.locator("#price-basis-status")).toHaveText("July 2026 USD");
+  await page.getByRole("button", { name: "About inflation adjustment" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("Bureau of Labor Statistics CPI-U");
+  await expect(page.locator("#help-tooltip")).toContainText("CUUR0000SA0");
+  await expect(page.locator("#help-tooltip")).toContainText("333.918");
   await expect(page.locator("#stat-n")).toHaveText("125");
   await expect(page.locator(".bar-block")).toHaveCount(125);
   const explainerCoverage = await page.evaluate(() => ({
@@ -87,27 +93,32 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
   await expect(page.locator("tbody .tier-cell").first()).toHaveAttribute("title", "A");
   await expect(page.locator("tbody .tier-cell").nth(1)).toHaveAttribute("title", "A");
-  await expect(page.locator("#rp-expense-table-reference")).toHaveText("RP = $7.5M");
-  await expect(page.locator("#rp-staff-table-reference")).toHaveText("RP = 57 FTE");
-  await expect(page.locator("#table-rp-reference-layer")).toHaveAttribute("aria-label", "Rethink Priorities comparison references");
-  expect(await page.locator("#rp-expense-table-reference").evaluate((element) => Boolean(element.closest("th")))).toBe(false);
-  expect(await page.locator("#rp-staff-table-reference").evaluate((element) => Boolean(element.closest("th")))).toBe(false);
-  for (const [column, reference, screenshot] of [
-    ["expenses", "#rp-expense-table-reference", "tmp/app-floating-rp-expenses.png"],
-    ["staff", "#rp-staff-table-reference", "tmp/app-floating-rp-staff.png"],
-  ]) {
-    const header = page.locator(`thead button[data-sort="${column}"]`).locator("xpath=..");
-    await header.evaluate((element) => element.scrollIntoView({ block: "nearest", inline: "center" }));
-    await expect(page.locator(reference)).toBeVisible();
-    const centerDifference = await page.locator(reference).evaluate((marker, sortColumn) => {
-      const target = document.querySelector(`thead button[data-sort="${sortColumn}"]`).closest("th");
-      const markerRect = marker.getBoundingClientRect();
-      const targetRect = target.getBoundingClientRect();
-      return (markerRect.left + markerRect.width / 2) - (targetRect.left + targetRect.width / 2);
+  const rpReferenceRow = page.locator("tbody .rp-reference-row");
+  await expect(rpReferenceRow).toHaveCount(1);
+  await expect(rpReferenceRow).toContainText("Rethink Priorities");
+  await expect(rpReferenceRow).toContainText("$7.5M");
+  await expect(rpReferenceRow).toContainText("57 FTE");
+  await expect(rpReferenceRow.locator("td")).toHaveCount(17);
+  await expect(rpReferenceRow.locator("input")).toHaveCount(0);
+  await expect(rpReferenceRow.locator("td").first()).toHaveCSS("color", "rgb(255, 255, 255)");
+  for (const [column, cellIndex] of [["expenses", 5], ["staff", 11]]) {
+    const centerDifference = await rpReferenceRow.locator("td").nth(cellIndex).evaluate((cell, sortColumn) => {
+      const header = document.querySelector(`thead button[data-sort="${sortColumn}"]`).closest("th");
+      const cellRect = cell.getBoundingClientRect();
+      const headerRect = header.getBoundingClientRect();
+      return (cellRect.left + cellRect.width / 2) - (headerRect.left + headerRect.width / 2);
     }, column);
-    expect(Math.abs(centerDifference)).toBeLessThan(2);
-    await page.locator(".table-panel").screenshot({ path: screenshot });
+    expect(Math.abs(centerDifference)).toBeLessThan(1);
   }
+  await page.locator(".table-scroll").evaluate((element) => { element.scrollTop = 400; });
+  const stickyReferenceGap = await rpReferenceRow.locator("td").first().evaluate((cell) => {
+    const header = document.querySelector("#organization-table thead").getBoundingClientRect();
+    return cell.getBoundingClientRect().top - header.bottom;
+  });
+  expect(Math.abs(stickyReferenceGap)).toBeLessThan(2);
+  await page.locator('thead button[data-sort="expenses"]').evaluate((element) => element.scrollIntoView({ block: "nearest", inline: "center" }));
+  await page.locator(".table-panel").screenshot({ path: "tmp/app-sticky-rp-reference.png" });
+  await page.locator(".table-scroll").evaluate((element) => { element.scrollTop = 0; element.scrollLeft = 0; });
   expect(await page.locator("#bin-field").evaluate((element) => element.previousElementSibling?.classList.contains("view-setting"))).toBe(true);
   await expect(page.locator(".method-note")).toHaveCount(0);
   const blockAspect = await page.locator(".bar-block").first().evaluate((element) => {
@@ -155,6 +166,33 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.getByLabel("Include American Immigration Council").uncheck();
   await expect(page.locator("#stat-n")).toHaveText("124");
   await expect(page.locator(".bar-block")).toHaveCount(124);
+  await page.locator("#reset-settings").click();
+
+  const cpiContract = await page.evaluate(() => {
+    const posting = window.CEO_BENCHMARK_DATA.jobAds.find((row) => row.organization === "Technical Assistance Collaborative");
+    return {
+      series: window.CEO_BENCHMARK_DATA.cpi.seriesId,
+      target: window.CEO_BENCHMARK_DATA.cpi.targetIndex,
+      midpoint: posting.nominalSalary.base,
+      range: [posting.nominalRange.low, posting.nominalRange.high],
+    };
+  });
+  expect(cpiContract).toEqual({ series: "CUUR0000SA0", target: 333.918, midpoint: 270000, range: [240000, 300000] });
+  await page.locator("#stream-select").selectOption("incumbents");
+  const caisInflationRow = page.locator('tbody tr[data-id="SRC-990-EXT-CENTER-FOR-AI-SAFETY"]');
+  await expect(caisInflationRow.locator(".money-cell").first()).toHaveText("$335K");
+  await caisInflationRow.getByRole("button", { name: "Preview" }).click();
+  await expect(page.locator("#dialog-value")).toHaveText("$334,818");
+  await expect(page.locator("#dialog-evidence")).toContainText("Schedule J base: $314,534");
+  await page.locator(".dialog-close").click();
+  await page.locator('input[name="dollar-basis"][value="nominal"]').check();
+  await expect(page.locator("#price-basis-status")).toHaveText("Source-year USD");
+  await expect(page.locator("#salary-chart")).toContainText("Annual compensation (Source-year USD)");
+  await expect(caisInflationRow.locator(".money-cell").first()).toHaveText("$315K");
+  await caisInflationRow.getByRole("button", { name: "Preview" }).click();
+  await expect(page.locator("#dialog-value")).toHaveText("$314,534");
+  await expect(page.locator("#dialog-meta")).toContainText("Nominal source-year dollars · no CPI adjustment");
+  await page.locator(".dialog-close").click();
   await page.locator("#reset-settings").click();
 
   await expect(page.locator("#show-unavailable")).toHaveCount(0);
@@ -222,7 +260,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   const tierHeaderWidth = await page.locator("thead .tier-column").first().evaluate((cell) => cell.getBoundingClientRect().width);
   expect(tierHeaderWidth).toBeLessThanOrEqual(80);
   await expect(page.locator("thead tr")).toHaveCount(1);
-  expect(await page.locator("#table-rp-reference-layer").evaluate((layer) => layer.getBoundingClientRect().height)).toBe(0);
+  await expect(page.locator("#table-rp-reference-layer")).toHaveCount(0);
   const titleHeaderCell = page.locator('thead th:has(button[data-sort="title"])');
   expect(await titleHeaderCell.locator(".header-filter-menu").evaluate((menu) => menu.getBoundingClientRect().width)).toBeLessThanOrEqual(18);
   expect(await titleHeaderCell.evaluate((header) => {
@@ -243,6 +281,20 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#custom-quantiles").fill("5, 50, 95");
   await expect(page.locator(".quantile-cell")).toHaveCount(3);
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(3);
+  await page.locator("#custom-quantiles").fill("40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50");
+  await expect(page.locator(".quantile-cell")).toHaveCount(11);
+  const declutteredMarkCount = await page.locator(".curve-quantile-mark").count();
+  expect(declutteredMarkCount).toBeGreaterThan(0);
+  expect(declutteredMarkCount).toBeLessThan(11);
+  const adjacentCurveLabelsOverlap = await page.locator(".curve-quantile-mark").evaluateAll((marks) => {
+    const rectangles = marks.map((mark) => mark.getBoundingClientRect()).sort((a, b) => a.left - b.left);
+    return rectangles.some((rectangle, index) => index > 0
+      && rectangle.left < rectangles[index - 1].right + 2
+      && rectangle.top < rectangles[index - 1].bottom + 2
+      && rectangle.bottom + 2 > rectangles[index - 1].top);
+  });
+  expect(adjacentCurveLabelsOverlap).toBe(false);
+  await page.locator(".chart-panel").screenshot({ path: "tmp/app-decluttered-curve-quantiles.png" });
 
   await page.locator("#reset-settings").click();
   await expect(page.getByRole("button", { name: "About auto-weights" })).toHaveCount(0);
@@ -533,13 +585,14 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await page.waitForTimeout(100);
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
   await page.locator("#reset-settings").click();
+  await page.locator('input[name="dollar-basis"][value="nominal"]').check();
   const automaticWeightsBefore = await page.locator("tbody .weight-input:not(.is-user-modified)").evaluateAll((inputs) => inputs.map((input) => input.value));
   await page.locator('#weighting-components input[value="size"]').check();
   const automaticWeightsAfter = await page.locator("tbody tr:not(.is-excluded) .weight-input:not(.is-user-modified)").evaluateAll((inputs) => inputs.map((input) => Number(input.value)));
   expect(automaticWeightsAfter.some((value, index) => value !== Number(automaticWeightsBefore[index]))).toBe(true);
   expect(automaticWeightsAfter.reduce((sum, value) => sum + value, 0) / automaticWeightsAfter.length).toBeCloseTo(1, 1);
 
-  const firstRow = page.locator("tbody tr").first();
+  const firstRow = page.locator("tbody tr[data-id]").first();
   const rowId = await firstRow.getAttribute("data-id");
   const rowWeight = firstRow.locator(".weight-input");
   expect(await rowWeight.evaluate((input) => input.scrollWidth <= input.clientWidth)).toBe(true);
@@ -565,6 +618,8 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
   await expect(page.locator("#chart-color")).toHaveValue("tier");
   await expect(page.locator('#weighting-components input[value="size"]')).toBeChecked();
+  await expect(page.locator('input[name="dollar-basis"][value="nominal"]')).toBeChecked();
+  await expect(page.locator("#price-basis-status")).toHaveText("Source-year USD");
   await expect(page.locator("#quantile-granularity")).toHaveValue("custom");
   await expect(page.locator("#custom-quantiles")).toHaveValue("10, 50, 90");
   await expect(page.locator("#mark-curve")).toBeChecked();
@@ -573,6 +628,7 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await expect(restoredRow.locator(".weight-input")).toHaveValue("2");
   await expect(restoredRow.locator(".weight-input")).toHaveClass(/is-user-modified/);
   await page.locator("#reset-settings").click();
+  await expect(page.locator('input[name="dollar-basis"][value="adjusted"]')).toBeChecked();
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
 
   const legacyV2 = Buffer.from(JSON.stringify({ v: 2 })).toString("base64url");

@@ -300,6 +300,8 @@ def build_incumbents(
                 "total": round(total * factor, 2) if total is not None else None,
             },
             "nominalSalary": {"base": base, "cash": cash, "total": total},
+            "cpiFactor": factor,
+            "cpiPeriod": f"{int(number(filing.get('compensation_calendar_year')))} annual average" if filing and number(filing.get("compensation_calendar_year")) else "",
             "defaultIncluded": boolean(filing.get("primary_eligible")) if filing else False,
             "structurallyClean": boolean(filing.get("structurally_clean")) if filing else False,
             "founder": text(filing.get("founder_flag")).lower() == "yes" if filing else False,
@@ -334,6 +336,9 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
         low = number(job["adjusted_min_jul2026"])
         high = number(job["adjusted_max_jul2026"])
         midpoint = number(job["adjusted_midpoint_jul2026"])
+        nominal_low = number(job["salary_min"])
+        nominal_high = number(job["salary_max"])
+        nominal_midpoint = (nominal_low + nominal_high) / 2 if nominal_low is not None and nominal_high is not None else None
         included = text(job["included_in_quantitative_analysis"])
         evidence = (
             f"Recruitment posting for {text(job['role_title'])}. "
@@ -363,11 +368,10 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
             "compensationYear": number(text(job["posting_date"])[:4]),
             "salary": {"base": midpoint, "cash": midpoint, "total": midpoint},
             "range": {"low": low, "high": high},
-            "nominalSalary": {
-                "base": number(job["salary_min"]),
-                "cash": number(job["salary_max"]),
-                "total": number(job["salary_max"]),
-            },
+            "nominalSalary": {"base": nominal_midpoint, "cash": nominal_midpoint, "total": nominal_midpoint},
+            "nominalRange": {"low": nominal_low, "high": nominal_high},
+            "cpiFactor": number(job["cpi_factor"]) or 1.0,
+            "cpiPeriod": text(job["cpi_period"]),
             "defaultIncluded": included == "yes",
             "structurallyClean": text(job["tier"]) == "strict_primary",
             "founder": False,
@@ -396,6 +400,14 @@ def main() -> None:
     payload = {
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "priceBasis": "July 2026 USD",
+        "cpi": {
+            "seriesId": "CUUR0000SA0",
+            "seriesTitle": "CPI-U, U.S. city average, all items, not seasonally adjusted",
+            "targetPeriod": "July 2026",
+            "targetIndex": 333.918,
+            "sourceUrl": "https://www.bls.gov/cpi/data.htm",
+            "localDataPath": "benchmark/data/cpi_u.csv",
+        },
         "incumbents": incumbents,
         "jobAds": jobs,
         "categoryExplainers": {
