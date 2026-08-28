@@ -246,6 +246,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#expense-filter-summary")).toHaveAttribute("data-active", "true");
   await expect(page.locator("#expense-filter-status")).toContainText("Expense filter");
   await expect(page.locator("#stat-n")).not.toHaveText("125");
+  const expenseRangeBeforeBasisChange = await page.locator("#expense-range-value").textContent();
+  await page.locator("#salary-filter-summary").locator("xpath=..").evaluate((details) => { details.open = true; });
+  await page.locator("#salary-range-min").fill("300000");
+  await page.locator('input[name="dollar-basis"][value="nominal"]').check();
+  await expect(page.locator("#salary-range-value")).toHaveText("All");
+  await expect(page.locator("#expense-range-value")).toHaveText(expenseRangeBeforeBasisChange);
+  await expect(page.locator("#expense-filter-summary")).toHaveAttribute("data-active", "true");
 
   await page.locator("#reset-settings").click();
   const salaryHeader = page.locator('thead button[data-sort="salary"]');

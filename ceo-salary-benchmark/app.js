@@ -2189,9 +2189,14 @@
   });
   refs.dollarBasis.forEach((radio) => radio.addEventListener("change", () => {
     if (!radio.checked) return;
+    const expenseRange = { ...state.ranges.expenses };
     state.inflationAdjusted = radio.value === "adjusted";
     state.autoBins = true;
     configureRanges();
+    state.ranges.expenses = expenseRange;
+    refs.expenseMin.value = expenseSliderPosition(expenseRange.low);
+    refs.expenseMax.value = expenseSliderPosition(expenseRange.high);
+    updateRangeLabels();
     renderAll();
   }));
   refs.sample.addEventListener("change", () => { state.sample = refs.sample.value; applyPreset(); renderAll(); });
