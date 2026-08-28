@@ -724,6 +724,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await cscce.getByRole("button", { name: "Preview" }).click();
   await expect(page.locator("#dialog-source-type")).toContainText("salary_discrepancy_or_unverifiable");
   await expect(page.locator("#dialog-meta")).toContainText("fiscally sponsored project");
+  await expect(page.locator("#dialog-secondary-cached")).toHaveAttribute("href", "evidence/original/src-ad-cscce-about.pdf");
+  await expect(page.locator("#dialog-secondary-cached")).toHaveText("Open cached About page");
+  await expect(page.locator("#dialog-secondary-external")).toHaveAttribute("href", "https://www.cscce.org/about/");
+  await expect(page.locator("#dialog-secondary-external")).toHaveText("Open official About page ↗");
   await page.locator("#dialog-category-provenance summary").click();
   await expect(page.locator("#dialog-provenance-records")).toContainText("Community Initiatives");
   await expect(page.locator('#dialog-provenance-records a[href="https://www.cscce.org/about/"]').first()).toHaveText("www.cscce.org");

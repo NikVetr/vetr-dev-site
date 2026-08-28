@@ -19,6 +19,15 @@ DELIVERABLES = BENCHMARK / "deliverables"
 CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 ENRICHMENT = BENCHMARK / "enrichment"
 JOB_AD_EVIDENCE_UPDATES = ENRICHMENT / "job_ad_evidence_updates.csv"
+JOB_AD_SECONDARY_SOURCES = {
+    "SRC-AD-CSCCE": {
+        "source_id": "SRC-AD-CSCCE-ABOUT",
+        "local_path": "sources/native/job_ads/src-ad-cscce-about.pdf",
+        "source_url": "https://www.cscce.org/about/",
+        "label": "official About page",
+        "cached_label": "cached About page",
+    },
+}
 EVIDENCE_DIR = ROOT / "evidence" / "original"
 OUTPUT = ROOT / "app-data.js"
 WIKIPEDIA_PROFILES = ROOT / "data" / "organization_wikipedia_profiles.csv"
@@ -634,6 +643,10 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
         source_id = text(job["source_id"])
         local_path = text(job["local_path"])
         cached = cache_source(source_id, local_path) if local_path else ""
+        secondary = JOB_AD_SECONDARY_SOURCES.get(source_id)
+        secondary_cached = cache_source(
+            secondary["source_id"], secondary["local_path"]
+        ) if secondary else ""
         low = number(job["adjusted_min_jul2026"])
         high = number(job["adjusted_max_jul2026"])
         midpoint = number(job["adjusted_midpoint_jul2026"])
@@ -687,6 +700,10 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
             "sourceUrl": source_url,
             "canonicalUrl": text(job["original_url"]) or text(job["canonical_url"]),
             "cachedSource": cached,
+            "secondaryCachedSource": secondary_cached,
+            "secondaryCachedLabel": secondary["cached_label"] if secondary else "",
+            "secondarySourceUrl": secondary["source_url"] if secondary else "",
+            "secondarySourceLabel": secondary["label"] if secondary else "",
             "localPath": local_path,
             "sourceType": "Job posting",
             "evidenceStream": "jobAds",

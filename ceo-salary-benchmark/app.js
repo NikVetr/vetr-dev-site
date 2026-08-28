@@ -1852,6 +1852,7 @@
     external.hidden = !row.sourceUrl; external.href = row.sourceUrl || "#";
     const secondaryCached = $("#dialog-secondary-cached");
     secondaryCached.hidden = !row.secondaryCachedSource; secondaryCached.href = row.secondaryCachedSource || "#";
+    secondaryCached.textContent = row.secondaryCachedLabel ? `Open ${row.secondaryCachedLabel}` : "Open cached staff source";
     const secondaryExternal = $("#dialog-secondary-external");
     secondaryExternal.hidden = !row.secondarySourceUrl; secondaryExternal.href = row.secondarySourceUrl || "#";
     secondaryExternal.textContent = row.secondarySourceLabel ? `Open ${row.secondarySourceLabel} ↗` : "Open secondary source ↗";
