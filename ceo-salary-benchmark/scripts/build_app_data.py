@@ -19,6 +19,7 @@ DELIVERABLES = BENCHMARK / "deliverables"
 CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 ENRICHMENT = BENCHMARK / "enrichment"
 JOB_AD_EVIDENCE_UPDATES = ENRICHMENT / "job_ad_evidence_updates.csv"
+EA_ROSTER_COMPENSATION = ENRICHMENT / "ea_roster_validated_compensation.csv"
 JOB_AD_SECONDARY_SOURCES = {
     "SRC-AD-CSCCE": {
         "source_id": "SRC-AD-CSCCE-ABOUT",
@@ -626,6 +627,133 @@ def build_incumbents(
     return output
 
 
+def ea_roster_category_provenance(row: dict[str, str]) -> dict:
+    citation = (
+        f"benchmark/enrichment/ea_roster_validated_compensation.csv | "
+        f"benchmark/{text(row['local_path'])}"
+    )
+    return {
+        "sourceId": text(row["source_id"]),
+        "referenceTier": text(row["reference_tier"]),
+        "selectionWave": text(row["selection_wave"]),
+        "tier": {
+            "value": text(row["reference_tier"]),
+            "label": text(row["tier_label"]),
+            "rationale": text(row["selection_note"]),
+            "citation": citation,
+        },
+        "ea": {
+            "value": text(row["ea_affinity"]),
+            "sourceValue": text(row["ea_affinity"]),
+            "rationale": "The supplied roster package's provisional EA classification is retained and explicitly labeled post-freeze; it does not determine compensation inclusion.",
+            "citation": "benchmark/enrichment/ea_roster_bundle_audit.md",
+        },
+        "structure": {
+            "expected": text(row["expected_structure"]),
+            "observationFlag": text(row["structure_flag"]),
+            "rationale": text(row["selection_note"]),
+            "citation": citation,
+        },
+        "topic": {
+            "value": text(row["topic_cluster"]),
+            "sourceDescription": text(row["topic_cluster"]),
+            "rationale": "Provisional topic retained from the supplied non-pay roster classification.",
+            "citation": "benchmark/enrichment/ea_roster_bundle_audit.md",
+        },
+        "title": {
+            "raw": text(row["ceo_title"]),
+            "analysisGroup": title_group(text(row["ceo_title"])),
+            "rationale": "The organization-wide executive title is read directly from the preserved Form 990 Part VII row.",
+            "citation": citation,
+        },
+        "classificationTiming": "post_freeze_roster_source_validation",
+        "provenanceType": "provisional_nonpay_roster_classification + source_validated_form990_compensation",
+        "confidence": "high for filing values; provisional for peer classification",
+        "caveats": "These additions are sensitivity or observed-only records and are excluded from the default validated analysis.",
+    }
+
+
+def build_ea_roster_incumbents() -> list[dict]:
+    output: list[dict] = []
+    for row in rows(EA_ROSTER_COMPENSATION):
+        source_id = text(row["source_id"])
+        local_path = text(row["local_path"])
+        schedule_j_path = text(row["schedule_j_local_path"])
+        year = int(float(text(row["compensation_calendar_year"])))
+        factor = number(row["cpi_factor"])
+        expected_factor = cpi_factor(year)
+        if factor is None or not math.isclose(factor, expected_factor, abs_tol=1e-12):
+            raise ValueError(f"EA roster CPI mismatch for {text(row['organization'])}")
+        cash = number(row["validated_cash_proxy"])
+        total = number(row["validated_total_proxy"])
+        base = number(row["validated_schedule_j_base_total"])
+        raw_title = text(row["ceo_title"])
+        app_status = "sensitivity_only" if text(row["default_inclusion_status"]) == "sensitivity" else "excluded"
+        evidence = (
+            f"Form 990 for compensation calendar year {year}. {text(row['ceo_name'])}, "
+            f"{raw_title}. Schedule J base: {money(base)}; Part VII cash/W-2 proxy: "
+            f"{money(cash)}; Part VII other compensation: {money(number(row['part_vii_other']))}; "
+            f"filing total: {money(total)}. {text(row['selection_note'])}"
+        )
+        schedule_source_id = f"{source_id}-SCHEDULE-J"
+        output.append({
+            "id": source_id,
+            "organization": text(row["organization"]),
+            "executive": text(row["ceo_name"]),
+            "title": raw_title,
+            "titleGroup": title_group(raw_title),
+            "rawTitle": raw_title,
+            "tier": text(row["reference_tier"]),
+            "topic": text(row["topic_cluster"]),
+            "eaAffinity": text(row["ea_affinity"]),
+            "location": text(row["country_or_region"]),
+            "remoteStatus": "Not reported in Form 990",
+            "structure": text(row["expected_structure"]),
+            "revenue": number(row["revenue"]),
+            "expenses": number(row["expenses"]),
+            "staff": number(row["employee_count"]),
+            "comparabilityScore": number(row["comparability_score"]) or 0,
+            "compensationYear": year,
+            "salary": {
+                "base": round(base * factor, 2) if base is not None else None,
+                "cash": round(cash * factor, 2) if cash is not None else None,
+                "total": round(total * factor, 2) if total is not None else None,
+            },
+            "nominalSalary": {"base": base, "cash": cash, "total": total},
+            "cpiFactor": factor,
+            "cpiPeriod": f"{year} annual average",
+            "defaultIncluded": False,
+            "structurallyClean": boolean(row["structurally_clean"]),
+            "founder": text(row["founder_flag"]).lower() == "yes",
+            "analysisStatus": app_status,
+            "auditStatus": text(row["audit_status"]),
+            "selectionNote": text(row["selection_note"]),
+            "evidenceText": evidence,
+            "sourceUrl": text(row["canonical_url"]),
+            "canonicalUrl": text(row["source_url"]),
+            "cachedSource": cache_source(source_id, local_path),
+            "secondaryCachedSource": cache_source(schedule_source_id, schedule_j_path) if schedule_j_path else "",
+            "secondaryCachedLabel": "cached Schedule J" if schedule_j_path else "",
+            "secondarySourceUrl": (
+                f"https://projects.propublica.org/nonprofits/full_text/"
+                f"{Path(schedule_j_path).name.split('_', 1)[0]}/IRS990ScheduleJ"
+                if schedule_j_path else ""
+            ),
+            "secondarySourceLabel": "rendered Schedule J" if schedule_j_path else "",
+            "localPath": local_path,
+            "sourceType": "Form 990",
+            "evidenceStream": "incumbents",
+            "homepageUrl": text(row["homepage_url"]),
+            "categoryProvenance": ea_roster_category_provenance(row),
+            "rosterReview": {
+                "status": text(row["selection_status"]),
+                "auditPath": "benchmark/enrichment/ea_roster_bundle_audit.md",
+                "reviewedDataPath": "benchmark/enrichment/ea_roster_validated_compensation.csv",
+            },
+        })
+    return output
+
+
 def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
     jobs = rows(DELIVERABLES / "validated_job_ad_compensation.csv")
     evidence_updates = load_job_ad_evidence_updates(jobs)
@@ -732,6 +860,12 @@ def main() -> None:
         shutil.rmtree(EVIDENCE_DIR)
     definitions, rationales_by_source, reference_rationales, rationale_counts = load_category_explainers()
     incumbents = build_incumbents(rationales_by_source, reference_rationales)
+    roster_incumbents = build_ea_roster_incumbents()
+    incumbent_ids = {row["id"] for row in incumbents}
+    duplicate_roster_ids = incumbent_ids & {row["id"] for row in roster_incumbents}
+    if duplicate_roster_ids:
+        raise ValueError(f"Duplicate EA-roster incumbent IDs: {sorted(duplicate_roster_ids)}")
+    incumbents.extend(roster_incumbents)
     jobs = build_job_ads(rationales_by_source)
     rp_reference = build_rp_reference()
     # Preserve the operating-headcount page used by the UI's editable staff-similarity
@@ -769,6 +903,8 @@ def main() -> None:
             "jobAdEnrichmentDictionaryPath": "benchmark/enrichment/job_ad_category_dictionary.csv",
             "jobAdEnrichmentMethodologyPath": "benchmark/enrichment/job_ad_category_methodology.md",
             "jobAdEvidenceUpdatesPath": "benchmark/enrichment/job_ad_evidence_updates.csv",
+            "eaRosterAuditPath": "benchmark/enrichment/ea_roster_bundle_audit.md",
+            "eaRosterReviewedCompensationPath": "benchmark/enrichment/ea_roster_validated_compensation.csv",
         },
         "summary": {
             "selectedReferenceOrganizations": len(incumbents),
@@ -781,6 +917,7 @@ def main() -> None:
             "verifiedWikipediaProfiles": sum(
                 bool(profile["wikipedia_title"]) for profile in wikipedia_profiles.values()
             ),
+            "eaRosterValidatedObservations": len(roster_incumbents),
         },
     }
     OUTPUT.write_text(
