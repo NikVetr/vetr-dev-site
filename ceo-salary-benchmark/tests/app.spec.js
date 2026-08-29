@@ -1272,6 +1272,25 @@ test("position families switch evidence, labels, controls, and compact shared st
     }
   }
 
+  await page.locator("#position-select").selectOption("programs");
+  const supportedClassification = await page.evaluate(() => {
+    const row = window.CEO_BENCHMARK_DATA.positionObservations.programs
+      .find((item) => item.positionTaxonomy?.classificationSource);
+    return {
+      id: row.id,
+      cachedSource: row.positionTaxonomy.classificationSource.cachedSource,
+      sourceUrl: row.positionTaxonomy.classificationSource.url,
+    };
+  });
+  const supportedRow = page.locator(`tr[data-id="${supportedClassification.id}"]`);
+  await supportedRow.getByRole("button", { name: "Preview" }).click();
+  await page.locator("#dialog-category-provenance").click();
+  const titleProvenance = page.locator("#dialog-provenance-records section")
+    .filter({ hasText: "Analysis title class" });
+  await expect(titleProvenance.locator(`a[href="${supportedClassification.cachedSource}"]`)).toBeVisible();
+  await expect(titleProvenance.locator(`a[href="${supportedClassification.sourceUrl}"]`)).toBeVisible();
+  await page.locator(".dialog-close").click();
+
   await page.locator("#reset-settings").click();
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator("#stream-select")).toHaveValue("combined");

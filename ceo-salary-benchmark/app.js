@@ -2351,7 +2351,7 @@
       const separator = item.indexOf("#");
       const path = separator >= 0 ? item.slice(0, separator) : item;
       const locator = separator >= 0 ? item.slice(separator + 1) : "";
-      if (path.startsWith("benchmark/")) {
+      if (path.startsWith("benchmark/") || path.startsWith("evidence/")) {
         const anchor = document.createElement("a");
         anchor.href = path; anchor.target = "_blank";
         anchor.textContent = `${path.split("/").pop()}${locator ? ` · ${locator.replaceAll(";", " · ")}` : ""}`;

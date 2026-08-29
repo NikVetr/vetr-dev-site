@@ -4,7 +4,7 @@
 
 This directory contains the analytical model, extracted evidence tables, calculations, report, and a strict source-acquisition framework. An independent source audit has now preserved all 135 peer IRS XML returns, plus RP's reference filing, and found a material Schedule J omission plus one Part VII extraction error. Use `analysis/source_validation/methodology_audit.md` and the `validated_*_compensation.csv` deliverables for subsequent work; the original report is retained as the artifact that was audited.
 
-The local archive now contains all 350 manifest records. Remote acquisition is complete: user-supplied browser captures recovered H-CAP, Marine Science Institute, and the four formerly undefined supporting records; RP's own 2024 filing was added from the official IRS TEOS bulk archive. The strict source-complete release gate still fails because it also checks the original expected extraction fields, which retain the documented Schedule J omissions, the Center for AI Safety discrepancy, and two non-primary job-ad validation issues.
+The local archive now contains all 353 manifest records. Remote acquisition is complete: user-supplied browser captures recovered H-CAP, Marine Science Institute, and the formerly undefined supporting records; RP's own 2024 filing was added from the official IRS TEOS bulk archive. The strict source-complete release gate still fails because it also checks the original expected extraction fields, which retain the documented Schedule J omissions, the Center for AI Safety discrepancy, and two non-primary job-ad validation issues.
 
 The earlier file named `rp_ceo_expanded_rebenchmark_complete.zip` contained derivative text snapshots and source identifiers, but no complete IRS XML returns. That filename was misleading. The corrected ordinary release is therefore named:
 
@@ -61,7 +61,7 @@ Run this command in a normal network-enabled environment:
 The command:
 
 1. Rebuilds the analytical outputs and derivative provenance layer.
-2. Creates the 350-row source-acquisition manifest.
+2. Creates the 353-row source-acquisition manifest.
 3. Downloads complete official IRS XML returns first, using a declared raw-XML mirror only when needed.
 4. Downloads employer/recruiter job materials and supporting public sources without bypassing access controls.
 5. Creates response-metadata sidecars containing requested/resolved URLs, retrieval timestamps, MIME type, byte length, HTTP headers, and SHA-256.
@@ -120,6 +120,12 @@ sources/native/supporting/
 ```
 
 Each downloaded file has a neighboring `.metadata.json` sidecar.
+
+## Post-validation app enrichments
+
+The application also contains a post-validation, non-CEO position layer derived from the same 136 cached Form 990 filings. `../scripts/extract_form990_positions.py` extracts all Part VII people, joins exact Schedule J records, preserves source-native titles, and assigns reviewed primary/secondary role families without changing the authoritative CEO analysis. Its 748 default peer observations and 16 sensitivity-only observations are documented in `enrichment/form990_position_methodology.md`; the row-level data, grouped taxonomy, independent audit, and hash-pinned classification-source manifest are adjacent in `enrichment/`. Because Form 990 employee reporting is threshold-selected, these distributions describe reported compensation and are not workforce-population estimates.
+
+The EA-roster payload review is also post-freeze. Only four of its 34 provisional additions had independently auditable filing compensation and were integrated as sensitivity/observed rows; the remaining 30 stay outside calculations. See `enrichment/ea_roster_bundle_audit.md` and `enrichment/ea_roster_candidate_review.csv`.
 
 ## Main analytical deliverables
 
