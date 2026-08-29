@@ -1,0 +1,31 @@
+position_key,label,page_label,menu_group,description,support_level,catalog_rows,role_eligible_rows,default_rows,default_organizations,default_schedule_j_base_rows,rp_reference_rows
+vice_president,Vice President,Vice President,Executive leadership,Vice-president titles not assigned to a more specific C-suite role.,primary,123,103,103,41,96,0
+program_director,Program Director,Program Director,Directors,"Program Director, Director of Programs, and directors of named program portfolios.",primary,35,34,34,16,28,2
+managing_director,Managing Director,Managing Director,Executive leadership,"Managing Director titles, excluding assistant and hybrid C-suite titles.",primary,37,34,34,18,30,0
+coo,COO,COO,C-suite,Chief Operating Officer and standard COO aliases.,primary,34,28,28,28,24,1
+senior_vice_president,Senior Vice President,Senior Vice President,Executive leadership,"Senior Vice President, SVP, and Senior VP aliases.",primary,29,28,27,17,27,0
+development_director,Development / Fundraising Director,Development Director,Directors,"Director-level development, fundraising, philanthropy, and advancement roles.",primary,26,26,26,26,14,0
+policy_director,Policy / Advocacy Director,Policy Director,Directors,"Director-level policy, advocacy, legislative, and government-affairs roles.",primary,28,26,25,20,20,0
+communications_director,Communications / Public Affairs Director,Communications Director,Directors,"Director-level communications, editorial, marketing, and public-affairs roles.",primary,26,22,22,22,12,0
+senior_researcher,Senior Researcher / Fellow / Analyst,Senior Researcher,Research,"Senior or principal researchers, fellows, scientists, economists, and analysts without a director or executive title.",primary,27,26,22,15,18,0
+cfo,CFO,CFO,C-suite,Chief Financial Officer and standard CFO aliases.,primary,26,20,20,20,18,0
+general_counsel,General Counsel / CLO,General Counsel,C-suite,"General Counsel and Chief Legal Officer, excluding associate, deputy, and assistant counsel.",primary,18,18,16,16,11,0
+chief_of_staff,Chief of Staff,Chief of Staff,C-suite,"Chief of Staff, excluding Deputy Chief of Staff and multi-role COO hybrids.",primary,17,16,15,15,13,0
+research_director,Research Director,Research Director,Directors,"Director-level research roles, including Directors of Research.",primary,16,15,15,13,9,0
+finance_director,Finance Director,Finance Director,Directors,"Director-level finance roles, including Director of Finance and Finance Director.",exploratory,15,14,14,14,13,0
+deputy_director,Deputy Director,Deputy Director,Executive leadership,"Deputy Director titles, excluding deputy vice presidents and deputy functional posts.",exploratory,11,11,11,9,7,0
+executive_vice_president,Executive Vice President,Executive Vice President,Executive leadership,"Executive Vice President, EVP, and Executive VP aliases.",exploratory,9,9,9,9,9,0
+chief_development_officer,Chief Development Officer,Chief Development Officer,C-suite,"Chief Development, Philanthropy, or Advancement Officer titles.",exploratory,9,9,9,9,5,0
+chief_people_officer,Chief People Officer,Chief People Officer,C-suite,"Chief People, Human Resources, Human Capital, and People-and-Culture Officer titles.",exploratory,8,8,8,8,8,0
+chief_economist,Chief Economist,Chief Economist,Limited samples,Chief Economist titles; retained internally until the public sample is large enough.,hidden,6,6,6,6,6,0
+chief_research_officer,Chief Research Officer,Chief Research Officer,Limited samples,Chief Research Officer titles; not pooled with Chief Scientist or Chief Economist.,hidden,3,3,3,3,3,0
+chief_scientist,Chief Scientist,Chief Scientist,Limited samples,Chief Scientist titles; not pooled with other research chiefs.,hidden,1,1,1,1,1,0
+cto,CTO,CTO,Limited samples,Chief Technology Officer and CTO aliases.,hidden,3,3,3,3,3,0
+cio,CIO,CIO,Limited samples,Chief Information Officer and CIO aliases.,hidden,1,1,1,1,1,0
+chief_program_officer,Chief Program Officer,Chief Program Officer,Limited samples,Chief Program or Chief Programs Officer titles.,hidden,6,6,6,6,5,0
+chief_impact_officer,Chief Impact Officer,Chief Impact Officer,Limited samples,Chief Impact Officer titles.,hidden,3,1,1,1,1,0
+chief_communications_officer,Chief Communications Officer,Chief Communications Officer,Limited samples,Chief Communications and Chief Marketing Officer titles.,hidden,4,4,4,4,3,0
+chief_strategy_officer,Chief Strategy Officer,Chief Strategy Officer,Limited samples,Chief Strategy and Chief Innovation Officer titles.,hidden,5,5,5,5,4,1
+controller,Controller,Controller,Limited samples,"Controller titles, kept separate from Finance Director.",hidden,3,3,3,3,2,0
+deputy_chief_of_staff,Deputy Chief of Staff,Deputy Chief of Staff,Limited samples,"Deputy Chief of Staff, kept separate from Chief of Staff.",hidden,1,1,1,1,1,0
+assistant_managing_director,Assistant Managing Director,Assistant Managing Director,Limited samples,"Assistant Managing Director, kept separate from Managing Director.",hidden,3,3,3,1,3,0

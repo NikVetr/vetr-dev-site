@@ -41,6 +41,33 @@ This layer extracts Form 990 Part VII, Section A people and compensation for non
 - Role-eligible peer observations retained only for sensitivity analysis: **16** (9 below-30-hour/source-anomaly rows, 6 rows with 40 related-organization hours but no identified related employer, and 1 source-labeled fractional role).
 - Taxonomy groups: **885**: **565** rule-assigned single-family groups, **75** rule-assigned multi-role groups, **120** reviewed observation-override groups, and **125** groups not published without further review.
 
+## Standardized position benchmarks
+
+The Position control uses an exclusive standardized-title layer, not the broad functional family. C-suite aliases such as COO/Chief Operating Officer are consolidated, while levels remain separate (for example Vice President, Senior Vice President, and Executive Vice President). Fourteen default executive rows with genuinely combined or ambiguous titles are retained in the extraction but excluded from strict named-position samples so they cannot enter two benchmarks at once.
+
+A position is `Primary` with at least 15 default rows across at least 12 organizations, `Exploratory` with at least 8 organizations, and hidden below 8 organizations. Sparse titles remain classified in `form990_benchmark_position_catalog.csv` rather than being pooled into misleading umbrella positions.
+
+| Standardized position | Support | Default rows | Organizations | With Schedule J base |
+|---|---|---:|---:|---:|
+| Vice President | Primary | 103 | 41 | 96 |
+| Program Director | Primary | 34 | 16 | 28 |
+| Managing Director | Primary | 34 | 18 | 30 |
+| COO | Primary | 28 | 28 | 24 |
+| Senior Vice President | Primary | 27 | 17 | 27 |
+| Development / Fundraising Director | Primary | 26 | 26 | 14 |
+| Policy / Advocacy Director | Primary | 25 | 20 | 20 |
+| Communications / Public Affairs Director | Primary | 22 | 22 | 12 |
+| Senior Researcher / Fellow / Analyst | Primary | 22 | 15 | 18 |
+| CFO | Primary | 20 | 20 | 18 |
+| General Counsel / CLO | Primary | 16 | 16 | 11 |
+| Chief of Staff | Primary | 15 | 15 | 13 |
+| Research Director | Primary | 15 | 13 | 9 |
+| Finance Director | Exploratory | 14 | 14 | 13 |
+| Deputy Director | Exploratory | 11 | 9 | 7 |
+| Executive Vice President | Exploratory | 9 | 9 | 9 |
+| Chief Development Officer | Exploratory | 9 | 9 | 5 |
+| Chief People Officer | Exploratory | 8 | 8 | 8 |
+
 ## Retained non-public records
 
 - `canonical_ceo`: **131** observations.
@@ -81,7 +108,7 @@ CEO-like titles that do not match the validated organization-wide CEO are exclud
 ## Recommended app contract
 
 - Join organization metadata once by `source_id`/EIN, but treat `observation_id` as the compensation-row key.
-- Default Position to CEO using the existing validated CEO dataset; use this layer only for the 13 non-CEO catalog values.
+- Default Position to CEO using the existing validated CEO dataset; expose the **18** supported standardized non-CEO titles from `form990_benchmark_position_catalog.csv`, not the broader functional families.
 - Keep Part VII cash, Part VII total, Schedule J base, and Schedule J total as separate compensation measures.
 - When several people from one organization share a family, use organization-balanced weights (each organization's rows sum to one) as the default or expose person-balanced weighting as an explicit sensitivity. Do not silently let larger organizations dominate.
 - RP rows are comparison markers only. Several RP families have more than one reported person, so display all applicable RP references or require a reviewed single-role choice; never include them in fit or quantile estimation.
@@ -89,6 +116,7 @@ CEO-like titles that do not match the validated organization-wide CEO are exclud
 
 ## Artifacts
 
+- `benchmark/enrichment/form990_benchmark_position_catalog.csv`: exclusive standardized-title catalog, support thresholds, and sample counts used by the Position control.
 - `benchmark/enrichment/form990_position_observations.csv`: row-level, source-linked observations and all compensation fields.
 - `benchmark/enrichment/form990_position_taxonomy.csv`: grouped title/classification review surface.
 - `benchmark/enrichment/form990_position_supporting_sources.csv`: hashed provenance manifest for non-XML classification evidence.

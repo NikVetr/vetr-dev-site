@@ -22,21 +22,7 @@ JOB_AD_EVIDENCE_UPDATES = ENRICHMENT / "job_ad_evidence_updates.csv"
 EA_ROSTER_COMPENSATION = ENRICHMENT / "ea_roster_validated_compensation.csv"
 FORM990_POSITION_OBSERVATIONS = ENRICHMENT / "form990_position_observations.csv"
 FORM990_POSITION_SUPPORTING_SOURCES = ENRICHMENT / "form990_position_supporting_sources.csv"
-POSITION_FAMILIES = (
-    ("operations", "Operations", "Operations leadership"),
-    ("finance", "Finance", "Finance leadership"),
-    ("chief_of_staff", "Chief of Staff", "Chief of Staff"),
-    ("research", "Research", "Research and science"),
-    ("programs", "Programs", "Program and impact"),
-    ("development", "Development", "Development and fundraising"),
-    ("policy", "Policy", "Policy and advocacy"),
-    ("communications", "Communications", "Communications and editorial"),
-    ("legal", "Legal", "Legal leadership"),
-    ("people", "People / HR", "People and HR"),
-    ("technology", "Technology / Data", "Technology and data"),
-    ("strategy", "Strategy", "Strategy leadership"),
-    ("general_leadership", "General Leadership", "General and deputy leadership"),
-)
+FORM990_BENCHMARK_POSITION_CATALOG = ENRICHMENT / "form990_benchmark_position_catalog.csv"
 JOB_AD_SECONDARY_SOURCES = {
     "SRC-AD-CSCCE": {
         "source_id": "SRC-AD-CSCCE-ABOUT",
@@ -227,14 +213,25 @@ def person_record(root: ElementTree.Element, group_name: str, person: str) -> El
 def cpi_factor(year: int) -> float:
     cpi_rows = rows(BENCHMARK / "data" / "cpi_u.csv")
     target = [number(row["index_value"]) for row in cpi_rows if text(row["period"]) == "2026-07"]
+    annual_average = [
+        number(row["index_value"])
+        for row in cpi_rows
+        if text(row["period"]) == f"{year}-AVG"
+    ]
     annual = [
         number(row["index_value"])
         for row in cpi_rows
         if re.fullmatch(fr"{year}-\d{{2}}", text(row["period"]))
     ]
-    if len(target) != 1 or len(annual) != 12 or any(value is None for value in annual):
+    if len(target) != 1 or len(annual_average) > 1:
         raise ValueError(f"Incomplete CPI series for {year} annual-average adjustment")
-    return float(target[0]) / (sum(float(value) for value in annual) / 12)
+    if annual_average:
+        denominator = annual_average[0]
+    elif len(annual) == 12 and not any(value is None for value in annual):
+        denominator = sum(float(value) for value in annual) / 12
+    else:
+        raise ValueError(f"Incomplete CPI series for {year} annual-average adjustment")
+    return float(target[0]) / float(denominator)
 
 
 def build_rp_reference() -> dict:
@@ -283,6 +280,7 @@ def build_rp_reference() -> dict:
     cached_staff = cache_source(RP_STAFF_SOURCE_ID, RP_STAFF_LOCAL_PATH)
     return {
         "id": RP_REFERENCE_SOURCE_ID,
+        "sourceId": RP_REFERENCE_SOURCE_ID,
         "organization": "Rethink Priorities",
         "executive": "Marcus Davis",
         "title": title,
@@ -596,6 +594,7 @@ def build_incumbents(
             raise ValueError(f"No reference-selection category rationale for {organization}")
         app_row = {
             "id": source_id or f"REF-{slug(text(peer['organization']))}",
+            "sourceId": source_id,
             "organization": organization,
             "executive": observed_name or (text(filing.get("ceo_name")) if filing else ""),
             "title": raw_title or "Not reported",
@@ -705,16 +704,20 @@ def build_ea_roster_incumbents() -> list[dict]:
         total = number(row["validated_total_proxy"])
         base = number(row["validated_schedule_j_base_total"])
         raw_title = text(row["ceo_title"])
+        return_type = text(row["return_type"])
+        average_hours = number(row["average_hours_per_week"])
         app_status = "sensitivity_only" if text(row["default_inclusion_status"]) == "sensitivity" else "excluded"
         evidence = (
-            f"Form 990 for compensation calendar year {year}. {text(row['ceo_name'])}, "
+            f"{return_type} for compensation calendar year {year}. {text(row['ceo_name'])}, "
             f"{raw_title}. Schedule J base: {money(base)}; Part VII cash/W-2 proxy: "
             f"{money(cash)}; Part VII other compensation: {money(number(row['part_vii_other']))}; "
-            f"filing total: {money(total)}. {text(row['selection_note'])}"
+            f"filing total: {money(total)}; reported weekly hours: "
+            f"{average_hours:g}. {text(row['selection_note'])}"
         )
         schedule_source_id = f"{source_id}-SCHEDULE-J"
         output.append({
             "id": source_id,
+            "sourceId": source_id,
             "organization": text(row["organization"]),
             "executive": text(row["ceo_name"]),
             "title": raw_title,
@@ -731,6 +734,7 @@ def build_ea_roster_incumbents() -> list[dict]:
             "staff": number(row["employee_count"]),
             "comparabilityScore": number(row["comparability_score"]) or 0,
             "compensationYear": year,
+            "averageHoursPerWeek": average_hours,
             "salary": {
                 "base": round(base * factor, 2) if base is not None else None,
                 "cash": round(cash * factor, 2) if cash is not None else None,
@@ -758,7 +762,7 @@ def build_ea_roster_incumbents() -> list[dict]:
             ),
             "secondarySourceLabel": "rendered Schedule J" if schedule_j_path else "",
             "localPath": local_path,
-            "sourceType": "Form 990",
+            "sourceType": return_type,
             "evidenceStream": "incumbents",
             "homepageUrl": text(row["homepage_url"]),
             "categoryProvenance": ea_roster_category_provenance(row),
@@ -780,27 +784,53 @@ def build_position_data(
     references_by_organization: dict[str, dict],
 ) -> tuple[list[dict], dict[str, list[dict]], dict[str, list[dict]]]:
     source_rows = rows(FORM990_POSITION_OBSERVATIONS)
+    catalog_source_rows = rows(FORM990_BENCHMARK_POSITION_CATALOG)
+    public_catalog_source_rows = [
+        row for row in catalog_source_rows if text(row["support_level"]) != "hidden"
+    ]
     supporting_source_rows = rows(FORM990_POSITION_SUPPORTING_SOURCES)
     supporting_sources_by_id = {
         text(row["source_id"]): row for row in supporting_source_rows
     }
     if len(supporting_sources_by_id) != len(supporting_source_rows):
         raise ValueError("Duplicate Form 990 position supporting-source IDs")
+    observed_supporting_source_ids = {
+        text(row["classification_source_id"])
+        for row in source_rows
+        if text(row["classification_source_id"])
+    }
+    if observed_supporting_source_ids != supporting_sources_by_id.keys():
+        raise ValueError(
+            "Form 990 position supporting-source manifest coverage mismatch: "
+            f"observed={sorted(observed_supporting_source_ids)}, "
+            f"manifested={sorted(supporting_sources_by_id)}"
+        )
+    for supporting_source in supporting_source_rows:
+        local_path = text(supporting_source["local_path"]).removeprefix("benchmark/")
+        path = BENCHMARK / local_path
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != text(supporting_source["sha256"]):
+            raise ValueError(
+                f"Position-classification source is missing or changed: {text(supporting_source['source_id'])}"
+            )
+        cache_source(text(supporting_source["source_id"]), local_path)
     used_supporting_source_ids: set[str] = set()
-    family_keys = {key for key, _, _ in POSITION_FAMILIES}
+    position_keys = {text(row["position_key"]) for row in public_catalog_source_rows}
+    if not position_keys or len(position_keys) != len(public_catalog_source_rows):
+        raise ValueError("Invalid or duplicate standardized-position catalog keys")
     catalog_counts: dict[str, dict[str, int]] = {
         key: {"catalog": 0, "roleEligible": 0, "defaultIncluded": 0, "organizations": 0}
-        for key in family_keys
+        for key in position_keys
     }
-    family_organizations: dict[str, set[str]] = {key: set() for key in family_keys}
-    position_rows: dict[str, list[dict]] = {key: [] for key in family_keys}
-    rp_references: dict[str, list[dict]] = {key: [] for key in family_keys}
+    position_organizations: dict[str, set[str]] = {key: set() for key in position_keys}
+    position_rows: dict[str, list[dict]] = {key: [] for key in position_keys}
+    rp_references: dict[str, list[dict]] = {key: [] for key in position_keys}
     cached_by_source: dict[str, tuple[str, str]] = {}
 
     for row in source_rows:
-        family = text(row["position_family"])
-        if family not in family_keys or not boolean(row["catalog_eligible"]):
+        position_key = text(row["benchmark_position"])
+        if position_key not in position_keys:
             continue
+        family = text(row["position_family"])
         organization = text(row["organization"])
         source_id = text(row["source_id"])
         local_path = text(row["source_local_path"]).removeprefix("benchmark/")
@@ -870,8 +900,8 @@ def build_position_data(
         base_adjusted = number(row["schedule_j_base_total_july_2026"])
         cash_adjusted = number(row["part_vii_cash_july_2026"])
         total_adjusted = number(row["part_vii_total_july_2026"])
-        role_eligible = boolean(row["role_eligible"])
-        default_included = boolean(row["default_included"])
+        role_eligible = boolean(row["benchmark_position_eligible"])
+        default_included = boolean(row["benchmark_position_default_included"])
         default_hours_eligible = boolean(row["default_hours_eligible"])
         sensitivity_only_reason = text(row["sensitivity_only_reason"])
         is_rp = boolean(row["is_rp_reference"])
@@ -952,12 +982,14 @@ def build_position_data(
         )
         app_row = {
             "id": text(row["observation_id"]),
+            "sourceId": source_id,
             "organization": organization,
             "executive": text(row["person_name"]),
             "title": text(row["native_title"]),
             "titleGroup": display_category(text(row["title_group"])),
             "rawTitle": text(row["native_title"]),
             "positionFamily": family,
+            "positionKey": position_key,
             "secondaryRoleTags": [display_category(value) for value in text(row["secondary_role_tags"]).split(";") if value],
             "seniorityGroup": display_category(text(row["seniority_group"])),
             "roleScope": text(row["role_scope"]),
@@ -1000,6 +1032,8 @@ def build_position_data(
             "positionTaxonomy": {
                 "taxonomyId": text(row["taxonomy_id"]),
                 "classificationRule": text(row["classification_rule"]),
+                "standardizedPositionRule": text(row["benchmark_position_rule"]),
+                "standardizedPositionAliasQuality": text(row["benchmark_position_alias_quality"]),
                 "confidence": text(row["classification_confidence"]),
                 "roleScope": text(row["role_scope"]),
                 "incumbencyStatus": text(row["incumbency_status"]),
@@ -1010,46 +1044,58 @@ def build_position_data(
                 "classificationSource": classification_source,
             },
         }
-        catalog_counts[family]["catalog"] += 1
-        catalog_counts[family]["roleEligible"] += int(role_eligible)
-        catalog_counts[family]["defaultIncluded"] += int(default_included)
-        if default_included:
-            family_organizations[family].add(organization)
         if is_rp:
             if role_eligible:
-                rp_references[family].append(app_row)
+                rp_references[position_key].append(app_row)
         else:
-            position_rows[family].append(app_row)
+            catalog_counts[position_key]["catalog"] += 1
+            catalog_counts[position_key]["roleEligible"] += int(role_eligible)
+            catalog_counts[position_key]["defaultIncluded"] += int(default_included)
+            if default_included:
+                position_organizations[position_key].add(organization)
+            position_rows[position_key].append(app_row)
 
     seen_ids: set[str] = set()
     for row in [item for family in position_rows.values() for item in family] + [item for family in rp_references.values() for item in family]:
         if row["id"] in seen_ids:
             raise ValueError(f"Duplicate generated position observation ID: {row['id']}")
         seen_ids.add(row["id"])
-    if used_supporting_source_ids != supporting_sources_by_id.keys():
-        raise ValueError(
-            "Form 990 position supporting-source manifest coverage mismatch: "
-            f"used={sorted(used_supporting_source_ids)}, "
-            f"manifested={sorted(supporting_sources_by_id)}"
-        )
+    if not used_supporting_source_ids <= supporting_sources_by_id.keys():
+        raise ValueError("Unmanifested supporting source entered a public position row")
 
     catalog = [{
         "key": "ceo",
         "label": "CEO",
         "pageLabel": "CEO",
+        "menuGroup": "Chief executive",
         "defaultMeasure": "base",
         "description": "The fully validated chief-executive benchmark, including incumbent Form 990s and recruitment postings.",
     }]
-    for key, label, page_label in POSITION_FAMILIES:
+    for catalog_source in public_catalog_source_rows:
+        key = text(catalog_source["position_key"])
         counts = catalog_counts[key]
-        counts["organizations"] = len(family_organizations[key])
+        counts["organizations"] = len(position_organizations[key])
+        expected_counts = {
+            "catalog": int(catalog_source["catalog_rows"]),
+            "roleEligible": int(catalog_source["role_eligible_rows"]),
+            "defaultIncluded": int(catalog_source["default_rows"]),
+            "organizations": int(catalog_source["default_organizations"]),
+        }
+        if counts != expected_counts:
+            raise ValueError(
+                f"Generated standardized-position counts changed for {key}: "
+                f"generated={counts}, extracted={expected_counts}"
+            )
         catalog.append({
             "key": key,
-            "label": label,
-            "pageLabel": page_label,
+            "label": text(catalog_source["label"]),
+            "pageLabel": text(catalog_source["page_label"]),
+            "menuGroup": text(catalog_source["menu_group"]),
+            "supportLevel": text(catalog_source["support_level"]),
             "defaultMeasure": "cash",
             "description": (
-                f"{counts['defaultIncluded']} current paid observations across {counts['organizations']} selected peer organizations. "
+                f"{text(catalog_source['description'])} {counts['defaultIncluded']} current paid observations "
+                f"across {counts['organizations']} selected peer organizations. "
                 "Part VII reportable cash is the coverage-first default; Form 990 reporting thresholds make this an upward-selected public-compensation sample."
             ),
             "counts": counts,
@@ -1098,6 +1144,7 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
         enrichment = enrichment_by_source[source_id]
         output.append({
             "id": source_id,
+            "sourceId": source_id,
             "organization": text(job["organization"]),
             "executive": "",
             "title": raw_title or "Not reported",
@@ -1175,6 +1222,23 @@ def main() -> None:
     position_catalog, position_observations, rp_references_by_position = build_position_data(
         rationales_by_source, reference_rationales
     )
+    ceo_catalog = next(position for position in position_catalog if position["key"] == "ceo")
+    ceo_rows = incumbents + jobs
+    ceo_catalog["counts"] = {
+        "catalog": len(ceo_rows),
+        "roleEligible": sum(row["salary"]["base"] is not None for row in ceo_rows),
+        "defaultIncluded": sum(row["defaultIncluded"] for row in ceo_rows),
+        "defaultAvailable": sum(
+            row["defaultIncluded"] and row["salary"]["base"] is not None for row in ceo_rows
+        ),
+        "organizations": len({
+            row["organization"] for row in ceo_rows
+            if row["defaultIncluded"] and row["salary"]["base"] is not None
+        }),
+    }
+    for position in position_catalog:
+        if position["key"] != "ceo":
+            position["counts"]["defaultAvailable"] = position["counts"]["defaultIncluded"]
     # Preserve the operating-headcount page used by the UI's editable staff-similarity
     # target. The comparable RP table field remains filing-derived in build_rp_reference().
     cache_source(RP_FUNDING_SOURCE_ID, RP_FUNDING_LOCAL_PATH)
@@ -1221,9 +1285,11 @@ def main() -> None:
             "eaRosterAuditPath": "benchmark/enrichment/ea_roster_bundle_audit.md",
             "eaRosterReviewedCompensationPath": "benchmark/enrichment/ea_roster_validated_compensation.csv",
             "positionMethodologyPath": "benchmark/enrichment/form990_position_methodology.md",
+            "positionCatalogPath": "benchmark/enrichment/form990_benchmark_position_catalog.csv",
             "positionObservationsPath": "benchmark/enrichment/form990_position_observations.csv",
             "positionTaxonomyPath": "benchmark/enrichment/form990_position_taxonomy.csv",
             "positionSupportingSourcesPath": "benchmark/enrichment/form990_position_supporting_sources.csv",
+            "autoWeightAnalysisPath": "benchmark/analysis/auto_weight_models/README.md",
         },
         "summary": {
             "selectedReferenceOrganizations": len(incumbents),

@@ -37,6 +37,7 @@ PRESERVED_SOURCES = [
     ("SRC-990-EA-FORESIGHT-INSTITUTE-SCHEDULE-J", "Foresight Institute Schedule J", "https://projects.propublica.org/nonprofits/full_text/202543179349308564/IRS990ScheduleJ", "sources/native/form990/202543179349308564_schedule_j_rendered.html", "text/html", "preserved_rendered_form990"),
     ("SRC-990-EA-LEVERAGE-RESEARCH", "Leverage Research Form 990", "https://projects.propublica.org/nonprofits/organizations/453989386/202523239349301652/full", "sources/native/form990/202523239349301652_rendered.html", "text/html", "preserved_rendered_form990"),
     ("SRC-990-EA-QUALIA-RESEARCH-INSTITUTE", "Qualia Research Institute Form 990", "https://projects.propublica.org/nonprofits/organizations/825457325/202503499349300780/full", "sources/native/form990/202503499349300780_rendered.html", "text/html", "preserved_rendered_form990"),
+    ("SRC-990-EA-MAGNIFY-MENTORING", "Magnify Mentoring Form 990-EZ", "https://projects.propublica.org/nonprofits/organizations/850696012/202601479349201500/full", "sources/native/form990/202601479349201500_rendered.html", "text/html", "preserved_rendered_form990ez"),
 ]
 
 
@@ -86,9 +87,10 @@ def main() -> None:
     with VALIDATED.open(encoding="utf-8", newline="") as handle:
         validated = {row["organization"]: row for row in csv.DictReader(handle)}
     if set(validated) != {
-        "Center for Election Science", "Foresight Institute", "Leverage Research", "Qualia Research Institute"
+        "Center for Election Science", "Foresight Institute", "Leverage Research",
+        "Qualia Research Institute", "Magnify Mentoring",
     }:
-        raise ValueError("Reviewed compensation set does not contain the expected four organizations")
+        raise ValueError("Reviewed compensation set does not contain the expected five organizations")
 
     extra_fields = [
         "bundle_sha256", "bundle_validation_status", "external_number_review",
@@ -102,10 +104,8 @@ def main() -> None:
         review["bundle_validation_status"] = "failed_16_of_17_checks_passed"
         if organization in validated:
             corrected = validated[organization]
-            review["external_number_review"] = "validated_against_preserved_rendered_form990"
-            review["app_integration_status"] = (
-                "observed_only" if organization == "Leverage Research" else "sensitivity_only"
-            )
+            review["external_number_review"] = "validated_against_preserved_rendered_filing"
+            review["app_integration_status"] = f"{corrected['default_inclusion_status']}_only"
             review["corrected_employee_count"] = corrected["employee_count"]
             review["review_note"] = corrected["selection_note"]
         else:
@@ -120,7 +120,7 @@ def main() -> None:
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(scored[0]) + extra_fields)
+        writer = csv.DictWriter(handle, fieldnames=list(scored[0]) + extra_fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(output_rows)
 
@@ -141,12 +141,12 @@ def main() -> None:
             "retrieval_or_freeze_date": "2026-08-28",
         })
     with SOURCE_MANIFEST.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(manifest_rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(manifest_rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(manifest_rows)
     print(
-        f"Wrote {OUTPUT.relative_to(ROOT)}: 34 candidates; 4 compensation observations validated; "
-        f"30 screening-only; 19 invalid scored queue rows detected. Preserved {len(manifest_rows)} sources."
+        f"Wrote {OUTPUT.relative_to(ROOT)}: 34 candidates; 5 compensation observations validated; "
+        f"29 screening-only; 19 invalid scored queue rows detected. Preserved {len(manifest_rows)} sources."
     )
 
 

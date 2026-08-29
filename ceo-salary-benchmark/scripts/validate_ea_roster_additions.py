@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import html
 import json
 import math
@@ -14,6 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "benchmark" / "enrichment" / "ea_roster_validated_compensation.csv"
 CANDIDATE_REVIEW = ROOT / "benchmark" / "enrichment" / "ea_roster_candidate_review.csv"
 APP_DATA = ROOT / "app-data.js"
+SOURCE_MANIFEST = ROOT / "benchmark" / "enrichment" / "ea_roster_source_manifest.csv"
+CPI_DATA = ROOT / "benchmark" / "data" / "cpi_u.csv"
 
 
 class IdTextParser(HTMLParser):
@@ -93,6 +96,27 @@ def close(actual: float, expected: float, label: str) -> None:
         raise ValueError(f"{label}: source={actual}, reviewed={expected}")
 
 
+def cpi_factor(year: int) -> float:
+    cpi_rows = rows(CPI_DATA)
+    target = [float(row["index_value"]) for row in cpi_rows if row["period"] == "2026-07"]
+    annual_average = [
+        float(row["index_value"])
+        for row in cpi_rows
+        if row["period"] == f"{year}-AVG"
+    ]
+    monthly = [
+        float(row["index_value"])
+        for row in cpi_rows
+        if re.fullmatch(fr"{year}-\d{{2}}", row["period"])
+    ]
+    if len(target) != 1 or len(annual_average) > 1:
+        raise ValueError(f"Incomplete CPI data for {year}")
+    denominator = annual_average[0] if annual_average else sum(monthly) / 12 if len(monthly) == 12 else None
+    if denominator is None:
+        raise ValueError(f"Incomplete CPI data for {year}")
+    return target[0] / denominator
+
+
 def app_payload() -> dict:
     prefix = "window.CEO_BENCHMARK_DATA = "
     contents = APP_DATA.read_text(encoding="utf-8").strip()
@@ -139,7 +163,18 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
             raise ValueError(f"{organization}: generated founder flag changed")
 
         for source_field, app_field in (("revenue", "revenue"), ("expenses", "expenses"), ("employee_count", "staff")):
-            close(float(generated[app_field]), required_amount(reviewed_row, source_field), f"{organization} generated {app_field}")
+            if reviewed_row[source_field]:
+                close(float(generated[app_field]), required_amount(reviewed_row, source_field), f"{organization} generated {app_field}")
+            elif generated[app_field] is not None:
+                raise ValueError(f"{organization}: generated unsupported {app_field}")
+
+        close(
+            float(generated["averageHoursPerWeek"]),
+            required_amount(reviewed_row, "average_hours_per_week"),
+            f"{organization} generated average weekly hours",
+        )
+        if generated.get("sourceType") != reviewed_row["return_type"]:
+            raise ValueError(f"{organization}: generated return type changed")
 
         factor = required_amount(reviewed_row, "cpi_factor")
         for measure, source_field in (
@@ -181,25 +216,36 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
     pooled_unsupported = sorted(unsupported & {row.get("organization", "") for row in incumbents})
     if pooled_unsupported:
         raise ValueError(f"Unsupported roster candidates entered the incumbent pool: {pooled_unsupported}")
-    if len(candidate_rows) != 34 or len(unsupported) != 30:
-        raise ValueError("Candidate-review integration boundary changed from 4 reviewed / 30 screening-only")
-    if payload.get("summary", {}).get("eaRosterValidatedObservations") != 4:
-        raise ValueError("Generated app summary does not report four reviewed roster observations")
+    if len(candidate_rows) != 34 or len(unsupported) != 29:
+        raise ValueError("Candidate-review integration boundary changed from 5 reviewed / 29 screening-only")
+    if payload.get("summary", {}).get("eaRosterValidatedObservations") != 5:
+        raise ValueError("Generated app summary does not report five reviewed roster observations")
 
 
 def validate_row(row: dict[str, str]) -> None:
     main = parsed_values(ROOT / "benchmark" / row["local_path"])
-    person_prefix = group_for_person(main, "Form990PartVIISectionAGrp", row["ceo_name"])
+    return_type = row["return_type"]
+    group = "OfficerDirectorTrusteeEmplGrp" if return_type == "Form 990-EZ" else "Form990PartVIISectionAGrp"
+    person_prefix = group_for_person(main, group, row["ceo_name"])
     if group_value(main, person_prefix, "TitleTxt").casefold() != row["ceo_title"].casefold():
         raise ValueError(f"{row['organization']}: title does not match preserved filing")
 
-    close(first_suffix(main, "/CYTotalRevenueAmt[1]"), required_amount(row, "revenue"), f"{row['organization']} revenue")
-    close(first_suffix(main, "/CYTotalExpensesAmt[1]"), required_amount(row, "expenses"), f"{row['organization']} expenses")
-    close(first_suffix(main, "/TotalEmployeeCnt[1]"), required_amount(row, "employee_count"), f"{row['organization']} staff")
+    close(
+        amount(group_value(main, person_prefix, "AverageHrsPerWkDevotedToPosRt" if return_type == "Form 990-EZ" else "AverageHoursPerWeekRt")),
+        required_amount(row, "average_hours_per_week"),
+        f"{row['organization']} average weekly hours",
+    )
 
-    filing = amount(group_value(main, person_prefix, "ReportableCompFromOrgAmt"))
-    related = amount(group_value(main, person_prefix, "ReportableCompFromRltdOrgAmt"))
-    other = amount(group_value(main, person_prefix, "OtherCompensationAmt"))
+    revenue_suffix = "/TotalRevenueAmt[1]" if return_type == "Form 990-EZ" else "/CYTotalRevenueAmt[1]"
+    expenses_suffix = "/TotalExpensesAmt[1]" if return_type == "Form 990-EZ" else "/CYTotalExpensesAmt[1]"
+    close(first_suffix(main, revenue_suffix), required_amount(row, "revenue"), f"{row['organization']} revenue")
+    close(first_suffix(main, expenses_suffix), required_amount(row, "expenses"), f"{row['organization']} expenses")
+    if row["employee_count"]:
+        close(first_suffix(main, "/TotalEmployeeCnt[1]"), required_amount(row, "employee_count"), f"{row['organization']} staff")
+
+    filing = amount(group_value(main, person_prefix, "CompensationAmt" if return_type == "Form 990-EZ" else "ReportableCompFromOrgAmt"))
+    related = 0.0 if return_type == "Form 990-EZ" else amount(group_value(main, person_prefix, "ReportableCompFromRltdOrgAmt"))
+    other = 0.0 if return_type == "Form 990-EZ" else amount(group_value(main, person_prefix, "OtherCompensationAmt"))
     close(filing, required_amount(row, "part_vii_org"), f"{row['organization']} Part VII organization compensation")
     close(related, required_amount(row, "part_vii_related"), f"{row['organization']} Part VII related compensation")
     close(other, required_amount(row, "part_vii_other"), f"{row['organization']} Part VII other compensation")
@@ -216,21 +262,36 @@ def validate_row(row: dict[str, str]) -> None:
     elif row["validated_schedule_j_base_total"]:
         raise ValueError(f"{row['organization']}: reviewed base exists without preserved Schedule J")
 
+    year = int(float(row["compensation_calendar_year"]))
     factor = required_amount(row, "cpi_factor")
-    if int(float(row["compensation_calendar_year"])) != 2024 or not math.isclose(factor, 1.0644880037701905, abs_tol=1e-12):
+    if not math.isclose(factor, cpi_factor(year), abs_tol=1e-12):
         raise ValueError(f"{row['organization']}: unexpected CPI period or factor")
+
+
+def validate_manifest(reviewed: list[dict[str, str]]) -> None:
+    manifest = {row["source_id"]: row for row in rows(SOURCE_MANIFEST)}
+    for row in reviewed:
+        source = manifest.get(row["source_id"])
+        if source is None:
+            raise ValueError(f"{row['organization']}: source is absent from the roster manifest")
+        path = ROOT / "benchmark" / source["local_path"]
+        if int(source["byte_length"]) != path.stat().st_size:
+            raise ValueError(f"{row['organization']}: manifested byte length changed")
+        if hashlib.sha256(path.read_bytes()).hexdigest() != source["sha256"]:
+            raise ValueError(f"{row['organization']}: manifested source hash changed")
 
 
 def main() -> None:
     reviewed = rows(DATA)
-    if len(reviewed) != 4 or len({row["source_id"] for row in reviewed}) != 4:
-        raise ValueError("Reviewed roster compensation must contain four unique observations")
+    if len(reviewed) != 5 or len({row["source_id"] for row in reviewed}) != 5:
+        raise ValueError("Reviewed roster compensation must contain five unique observations")
+    validate_manifest(reviewed)
     for row in reviewed:
         validate_row(row)
     validate_generated_app(reviewed)
     print(
-        f"Validated {len(reviewed)} EA-roster compensation observations against preserved rendered Forms 990; "
-        "generated values, previews, source links, default exclusions, and the 30-row screening boundary also pass."
+        f"Validated {len(reviewed)} EA-roster compensation observations against preserved rendered filings; "
+        "generated values, previews, source links, default exclusions, and the 29-row screening boundary also pass."
     )
 
 

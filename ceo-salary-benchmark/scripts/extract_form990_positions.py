@@ -32,6 +32,7 @@ OBSERVATIONS_PATH = ENRICHMENT / "form990_position_observations.csv"
 TAXONOMY_PATH = ENRICHMENT / "form990_position_taxonomy.csv"
 REPORT_PATH = ENRICHMENT / "form990_position_methodology.md"
 SUPPORTING_SOURCES_PATH = ENRICHMENT / "form990_position_supporting_sources.csv"
+POSITION_CATALOG_PATH = ENRICHMENT / "form990_benchmark_position_catalog.csv"
 
 EXPECTED_FORM990_COUNT = 136
 EXPECTED_NON_CEO_CATALOG_COUNT = 986
@@ -228,6 +229,63 @@ PUBLIC_FAMILIES = (
     "strategy",
     "general_leadership",
 )
+
+# Public position benchmarks are exact or standardized job titles, not broad
+# functional areas.  Functional family remains an independent filter.  Sparse
+# chief-role keys are still classified for auditability, but the generated
+# catalog marks them hidden until at least eight organizations are available.
+BENCHMARK_POSITIONS = (
+    ("vice_president", "Vice President", "Vice President", "Executive leadership", "Vice-president titles not assigned to a more specific C-suite role."),
+    ("program_director", "Program Director", "Program Director", "Directors", "Program Director, Director of Programs, and directors of named program portfolios."),
+    ("managing_director", "Managing Director", "Managing Director", "Executive leadership", "Managing Director titles, excluding assistant and hybrid C-suite titles."),
+    ("coo", "COO", "COO", "C-suite", "Chief Operating Officer and standard COO aliases."),
+    ("senior_vice_president", "Senior Vice President", "Senior Vice President", "Executive leadership", "Senior Vice President, SVP, and Senior VP aliases."),
+    ("development_director", "Development / Fundraising Director", "Development Director", "Directors", "Director-level development, fundraising, philanthropy, and advancement roles."),
+    ("policy_director", "Policy / Advocacy Director", "Policy Director", "Directors", "Director-level policy, advocacy, legislative, and government-affairs roles."),
+    ("communications_director", "Communications / Public Affairs Director", "Communications Director", "Directors", "Director-level communications, editorial, marketing, and public-affairs roles."),
+    ("senior_researcher", "Senior Researcher / Fellow / Analyst", "Senior Researcher", "Research", "Senior or principal researchers, fellows, scientists, economists, and analysts without a director or executive title."),
+    ("cfo", "CFO", "CFO", "C-suite", "Chief Financial Officer and standard CFO aliases."),
+    ("general_counsel", "General Counsel / CLO", "General Counsel", "C-suite", "General Counsel and Chief Legal Officer, excluding associate, deputy, and assistant counsel."),
+    ("chief_of_staff", "Chief of Staff", "Chief of Staff", "C-suite", "Chief of Staff, excluding Deputy Chief of Staff and multi-role COO hybrids."),
+    ("research_director", "Research Director", "Research Director", "Directors", "Director-level research roles, including Directors of Research."),
+    ("finance_director", "Finance Director", "Finance Director", "Directors", "Director-level finance roles, including Director of Finance and Finance Director."),
+    ("deputy_director", "Deputy Director", "Deputy Director", "Executive leadership", "Deputy Director titles, excluding deputy vice presidents and deputy functional posts."),
+    ("executive_vice_president", "Executive Vice President", "Executive Vice President", "Executive leadership", "Executive Vice President, EVP, and Executive VP aliases."),
+    ("chief_development_officer", "Chief Development Officer", "Chief Development Officer", "C-suite", "Chief Development, Philanthropy, or Advancement Officer titles."),
+    ("chief_people_officer", "Chief People Officer", "Chief People Officer", "C-suite", "Chief People, Human Resources, Human Capital, and People-and-Culture Officer titles."),
+    ("chief_economist", "Chief Economist", "Chief Economist", "Limited samples", "Chief Economist titles; retained internally until the public sample is large enough."),
+    ("chief_research_officer", "Chief Research Officer", "Chief Research Officer", "Limited samples", "Chief Research Officer titles; not pooled with Chief Scientist or Chief Economist."),
+    ("chief_scientist", "Chief Scientist", "Chief Scientist", "Limited samples", "Chief Scientist titles; not pooled with other research chiefs."),
+    ("cto", "CTO", "CTO", "Limited samples", "Chief Technology Officer and CTO aliases."),
+    ("cio", "CIO", "CIO", "Limited samples", "Chief Information Officer and CIO aliases."),
+    ("chief_program_officer", "Chief Program Officer", "Chief Program Officer", "Limited samples", "Chief Program or Chief Programs Officer titles."),
+    ("chief_impact_officer", "Chief Impact Officer", "Chief Impact Officer", "Limited samples", "Chief Impact Officer titles."),
+    ("chief_communications_officer", "Chief Communications Officer", "Chief Communications Officer", "Limited samples", "Chief Communications and Chief Marketing Officer titles."),
+    ("chief_strategy_officer", "Chief Strategy Officer", "Chief Strategy Officer", "Limited samples", "Chief Strategy and Chief Innovation Officer titles."),
+    ("controller", "Controller", "Controller", "Limited samples", "Controller titles, kept separate from Finance Director."),
+    ("deputy_chief_of_staff", "Deputy Chief of Staff", "Deputy Chief of Staff", "Limited samples", "Deputy Chief of Staff, kept separate from Chief of Staff."),
+    ("assistant_managing_director", "Assistant Managing Director", "Assistant Managing Director", "Limited samples", "Assistant Managing Director, kept separate from Managing Director."),
+)
+EXPECTED_PUBLIC_POSITION_DEFAULT_COUNTS = {
+    "vice_president": (103, 41),
+    "program_director": (34, 16),
+    "managing_director": (34, 18),
+    "coo": (28, 28),
+    "senior_vice_president": (27, 17),
+    "development_director": (26, 26),
+    "policy_director": (25, 20),
+    "communications_director": (22, 22),
+    "senior_researcher": (22, 15),
+    "cfo": (20, 20),
+    "general_counsel": (16, 16),
+    "chief_of_staff": (15, 15),
+    "research_director": (15, 13),
+    "finance_director": (14, 14),
+    "deputy_director": (11, 9),
+    "executive_vice_president": (9, 9),
+    "chief_development_officer": (9, 9),
+    "chief_people_officer": (8, 8),
+}
 
 # The source XML repeats this unpaid board row byte-for-byte. It is collapsed to
 # one stable source+person observation and surfaced through duplicate_source_rows.
@@ -1004,6 +1062,141 @@ def title_level(title: str, family: str, record_type: str, governance: bool) -> 
     return "unclassified", "unknown"
 
 
+def benchmark_position(title: str, classification: Classification) -> dict[str, str]:
+    """Assign one conservative standardized title without duplicating hybrids."""
+    empty = {
+        "key": "",
+        "rule": "not_a_supported_standardized_title",
+        "alias_quality": "",
+        "hybrid_status": "none",
+        "hybrid_reason": "",
+    }
+    if classification.record_type != "non_ceo_position":
+        return empty
+
+    def result(key: str, rule: str, quality: str = "expanded") -> dict[str, str]:
+        return {
+            "key": key,
+            "rule": rule,
+            "alias_quality": quality,
+            "hybrid_status": "none",
+            "hybrid_reason": "",
+        }
+
+    def hybrid(reason: str) -> dict[str, str]:
+        return {
+            "key": "",
+            "rule": "hybrid_title_excluded_from_strict_position_benchmark",
+            "alias_quality": "ambiguous",
+            "hybrid_status": "multi_role",
+            "hybrid_reason": reason,
+        }
+
+    has_coo = bool(re.search(r"\bCOO\b|\bCHIEF (?:OPERATING|OPERATIONS) OFFICER\b|\bCHIEF OF OPERATIONS\b", title))
+    has_cfo = bool(re.search(r"\bCFO\b|\bCHIEF FINANCIAL OFFICER\b", title))
+    has_chief_of_staff = "CHIEF OF STAFF" in title
+    has_general_counsel = bool(re.search(r"\bGENERAL COUNSEL\b|\bGEN COUNSEL\b|\bCHIEF LEGAL OFFICER\b", title))
+    has_managing_director = bool(re.search(r"\b(?:MANAGING|MG) DIR(?:ECTOR)?\b", title))
+    hybrid_rules = (
+        (r"CHIEF (?:FINANCIAL|FINANCE) AND OPERAT|\bCFOO\b|\bCFAO\b", "combined or ambiguous finance-and-operations chief"),
+        (r"\bCOO\b.*CHIEF OF STAFF|CHIEF OF STAFF.*\bCOO\b", "COO and Chief of Staff combined in one title"),
+        (r"CHIEF OPERAT(?:ING|IONS) OFFICER.*CHIEF LEGAL", "COO and Chief Legal Officer combined in one title"),
+        (r"CHIEF PROGRAM AND OPERAT|CHIEF OF PROGRAMS AND STRATEGY|CHIEF OPERATIONS AND PEOPLE", "multiple organization-wide chief functions combined in one title"),
+        (r"OPERATIONS AND CTO", "operations and technology chief combined in one title"),
+        (r"CHIEF STRATEGY AND IMPACT", "strategy and impact chief combined in one title"),
+        (r"(?<!VICE )\bPRESIDENT AND COO", "President and COO combined in one title"),
+        (r"COO AND MANAGING DIRECTOR", "COO and Managing Director combined in one title"),
+        (r"(?<!VICE )\bPRESIDENT AND CTO", "President and CTO combined in one title"),
+    )
+    for pattern, reason in hybrid_rules:
+        if re.search(pattern, title):
+            return hybrid(reason)
+
+    if "DEPUTY CHIEF OF STAFF" in title:
+        return result("deputy_chief_of_staff", "explicit_deputy_chief_of_staff", "exact")
+
+    if has_coo:
+        quality = "standard_abbreviation" if re.search(r"\bCOO\b", title) else "exact"
+        return result("coo", "standard_coo_alias", quality)
+    if has_cfo:
+        quality = "standard_abbreviation" if re.search(r"\bCFO\b", title) else "exact"
+        return result("cfo", "standard_cfo_alias", quality)
+    if classification.family == "chief_of_staff" and has_chief_of_staff:
+        return result("chief_of_staff", "explicit_chief_of_staff", "exact")
+    if has_general_counsel and not re.search(r"\b(?:ASSOCIATE|ASSOC|DEPUTY|ASSISTANT|ASST) (?:GENERAL |GEN )?COUNSEL\b", title):
+        quality = "exact" if "GENERAL COUNSEL" in title else "expanded"
+        return result("general_counsel", "general_counsel_or_clo_alias", quality)
+
+    if re.search(r"\bCHIEF (?:OF )?PEOPLE\b|\bCHIEF HUMAN (?:RESOURCES|CAPITAL)\b|\bCHIEF PEOPLE\b", title):
+        return result("chief_people_officer", "people_chief_alias")
+    if re.search(r"\bCHIEF DEVELOPMENT OFFICER\b|\bCHIEF OF DEVELOPMENT\b|\bCHIEF REVENUE OFFICER\b|\bCHIEF PHILANTHROP", title):
+        return result("chief_development_officer", "development_chief_alias")
+    if re.search(r"\bCHIEF COMMUNICATIONS? OFFICER\b|\bCHIEF COMMUNICATION OFFICE\b|\bCHIEF MARKETING OFFICER", title):
+        return result("chief_communications_officer", "communications_chief_alias")
+    if re.search(r"\bCHIEF STRATEGY OFFICER\b|\bCHIEF OF STRATEGY\b|\bCHIEF STRATEGIST\b|\bCHIEF INNOVATION OFFICER\b|\bCHF STRATEGY OFCR\b", title):
+        return result("chief_strategy_officer", "strategy_chief_alias")
+    if re.search(r"\bCHIEF PROGRAMS? OFFICER\b|\bCHIEF OF PROGRAMS\b", title):
+        return result("chief_program_officer", "program_chief_alias")
+    if re.search(r"\bCHIEF IMPACT OFFICER\b", title):
+        return result("chief_impact_officer", "explicit_chief_impact_officer", "exact")
+    if re.search(r"\bCHIEF ECONOMIST\b", title):
+        return result("chief_economist", "explicit_chief_economist", "exact")
+    if re.search(r"\bCHIEF (?:RESEARCH|RSRCH) OFFICER\b|\bCHIEF OF RESEARCH\b|\bCHIEF RSRCH\b", title):
+        return result("chief_research_officer", "research_chief_alias")
+    if re.search(r"\bCHIEF SCIENTIST\b", title):
+        return result("chief_scientist", "explicit_chief_scientist", "exact")
+    if re.search(r"\bCTO\b|\bCHIEF (?:TECHNOLOGY|TECHNICAL) OFFICER\b|\bCHIEF PRODUCT AND TECHNOLOGY\b", title):
+        quality = "standard_abbreviation" if re.search(r"\bCTO\b", title) else "exact"
+        return result("cto", "standard_cto_alias", quality)
+    if re.search(r"\bCIO\b|\bCHIEF INFORMATION OFFICER\b", title):
+        quality = "standard_abbreviation" if re.search(r"\bCIO\b", title) else "exact"
+        return result("cio", "standard_cio_alias", quality)
+
+    if re.search(r"\bEXECUTIVE VICE[- ]?PRESIDENT\b|\bEXEC VP\b|\bEVP\b", title):
+        return result("executive_vice_president", "executive_vice_president_alias")
+    if re.search(r"\bSENIOR VICE PRESIDENT\b|\bSENIOR VP\b|\bSR\.? VP\b|\bSVP\b", title):
+        return result("senior_vice_president", "senior_vice_president_alias")
+    if re.search(r"\bVICE PRESIDENT\b|\bVP\b", title):
+        return result("vice_president", "vice_president_alias")
+
+    if re.search(r"\bASSISTANT MANAGING DIRECTOR\b", title):
+        return result("assistant_managing_director", "explicit_assistant_managing_director", "exact")
+    if has_managing_director and not re.search(r"\bASS(?:ISTANT|T)\b", title):
+        return result("managing_director", "managing_director_alias")
+    if re.search(r"\bDEPUTY DIR(?:ECTOR)?\b", title) and not re.search(r"\bDEPUTY (?:VP|VICE PRESIDENT)\b", title):
+        return result("deputy_director", "deputy_director_alias")
+
+    is_director = bool(re.search(r"\b(?:DIRECTOR|DIR|DIRECOTR)\b", title))
+    if is_director:
+        family_position = None
+        if classification.family == "programs" and re.search(r"\bPROGRAMS?\b", title):
+            family_position = ("program_director", "explicit_program_director_alias")
+        elif classification.family == "research" and re.search(r"\b(?:RESEARCH|RSRCH|RESEA)\b", title):
+            family_position = ("research_director", "explicit_research_director_alias")
+        elif classification.family == "development" and re.search(r"DEVELOP|PHILANTHROP|ADVANCEMENT|GIVING|RESOURCE MOBILIZATION|REVENUE|MEMBERSHIP", title):
+            family_position = ("development_director", "explicit_development_director_alias")
+        elif classification.family == "policy" and re.search(r"POLICY|ADVOCACY|GOVERNMENT AFFAIRS|LEGISLATIVE|PUBLIC POLICY", title):
+            family_position = ("policy_director", "explicit_policy_director_alias")
+        elif classification.family == "communications" and re.search(r"COMM|PUBLIC AFFAIRS|EXTERNAL AFFAIRS|MARKETING|EDITORIAL", title):
+            family_position = ("communications_director", "explicit_communications_director_alias")
+        elif classification.family == "finance" and re.search(r"FINANCE|FINANCIAL", title):
+            family_position = ("finance_director", "explicit_finance_director_alias")
+        if family_position:
+            return result(*family_position)
+
+    if classification.family == "finance" and re.search(r"\bCONTROLLER\b", title):
+        return result("controller", "explicit_controller_title", "exact")
+
+    if (
+        classification.family == "research"
+        and re.search(r"\b(?:SENIOR|SR\.?|PRINCIPAL|DISTINGUISHED|DIST|LEAD)\b", title)
+        and re.search(r"FELLOW|RESEARCH|SCIENTIST|SCIEN|ECONOMIST|ANALY", title)
+        and classification.title_group in {"senior_individual_contributor", "functional_individual_contributor"}
+    ):
+        return result("senior_researcher", "senior_research_title")
+    return empty
+
+
 def classify_record(
     record: dict[str, str],
     canonical_ceo: bool,
@@ -1418,6 +1611,7 @@ def main() -> None:
                 exclusion_reasons.append("RP reference observation, never part of fitted peer distribution")
 
             normalized_title = normalize_title(part.get("TitleTxt", ""))
+            standardized = benchmark_position(normalized_title, classification)
             taxonomy_key = (
                 normalized_title,
                 classification.record_type,
@@ -1429,6 +1623,11 @@ def main() -> None:
                 classification.incumbency,
                 classification.rule,
                 classification.confidence,
+                standardized["key"],
+                standardized["rule"],
+                standardized["alias_quality"],
+                standardized["hybrid_status"],
+                standardized["hybrid_reason"],
             )
             taxonomy_id = stable_taxonomy_id(taxonomy_key)
             part_locator = f"Return/ReturnData/IRS990/{PART_VII_TAG}[{part_index}]"
@@ -1459,6 +1658,17 @@ def main() -> None:
                 "incumbency_status": classification.incumbency,
                 "classification_rule": classification.rule,
                 "classification_confidence": classification.confidence,
+                "benchmark_position": standardized["key"],
+                "benchmark_position_rule": standardized["rule"],
+                "benchmark_position_alias_quality": standardized["alias_quality"],
+                "benchmark_position_hybrid_status": standardized["hybrid_status"],
+                "benchmark_position_hybrid_reason": standardized["hybrid_reason"],
+                "benchmark_position_eligible": bool_text(
+                    bool(standardized["key"]) and role_eligible
+                ),
+                "benchmark_position_default_included": bool_text(
+                    bool(standardized["key"]) and default_included
+                ),
                 "classification_source_id": classification_source.get("source_id", ""),
                 "classification_source_url": classification_source.get("canonical_url", ""),
                 "classification_source_local_path": classification_source.get("local_path", ""),
@@ -1663,7 +1873,9 @@ def main() -> None:
         invariant_fields = (
             "normalized_title", "record_type", "position_family", "secondary_role_tags", "title_group",
             "seniority_group", "role_scope", "incumbency_status", "classification_rule",
-            "classification_confidence", "catalog_eligible",
+            "classification_confidence", "catalog_eligible", "benchmark_position",
+            "benchmark_position_rule", "benchmark_position_alias_quality",
+            "benchmark_position_hybrid_status", "benchmark_position_hybrid_reason",
         )
         for field in invariant_fields:
             if len({member[field] for member in members}) != 1:
@@ -1719,6 +1931,11 @@ def main() -> None:
             "incumbency_status": first["incumbency_status"],
             "classification_rule": first["classification_rule"],
             "classification_confidence": first["classification_confidence"],
+            "benchmark_position": first["benchmark_position"],
+            "benchmark_position_rule": first["benchmark_position_rule"],
+            "benchmark_position_alias_quality": first["benchmark_position_alias_quality"],
+            "benchmark_position_hybrid_status": first["benchmark_position_hybrid_status"],
+            "benchmark_position_hybrid_reason": first["benchmark_position_hybrid_reason"],
             "classification_source_ids": join_nonempty(sorted({
                 member["classification_source_id"] for member in members
             })),
@@ -1780,10 +1997,71 @@ def main() -> None:
             + json.dumps(sorted(peer_sensitivity_ids))
         )
 
+    position_keys = {definition[0] for definition in BENCHMARK_POSITIONS}
+    unknown_position_keys = {
+        row["benchmark_position"] for row in raw_observations
+        if row["benchmark_position"] and row["benchmark_position"] not in position_keys
+    }
+    if unknown_position_keys:
+        raise ValueError(f"Unknown standardized position keys: {sorted(unknown_position_keys)}")
+    position_catalog_rows = []
+    for key, label, page_label, menu_group, description in BENCHMARK_POSITIONS:
+        position_rows = [
+            row for row in raw_observations
+            if row["benchmark_position"] == key and row["is_rp_reference"] == "no"
+        ]
+        eligible = [row for row in position_rows if row["benchmark_position_eligible"] == "yes"]
+        default = [row for row in position_rows if row["benchmark_position_default_included"] == "yes"]
+        organizations = {row["organization"] for row in default}
+        support_level = (
+            "primary"
+            if len(default) >= 15 and len(organizations) >= 12
+            else "exploratory"
+            if len(organizations) >= 8
+            else "hidden"
+        )
+        position_catalog_rows.append({
+            "position_key": key,
+            "label": label,
+            "page_label": page_label,
+            "menu_group": menu_group,
+            "description": description,
+            "support_level": support_level,
+            "catalog_rows": len(position_rows),
+            "role_eligible_rows": len(eligible),
+            "default_rows": len(default),
+            "default_organizations": len(organizations),
+            "default_schedule_j_base_rows": sum(
+                bool(row["schedule_j_base_total_nominal"]) for row in default
+            ),
+            "rp_reference_rows": sum(
+                row["benchmark_position"] == key
+                and row["is_rp_reference"] == "yes"
+                and row["benchmark_position_eligible"] == "yes"
+                for row in raw_observations
+            ),
+        })
+
+    actual_public_counts = {
+        row["position_key"]: (row["default_rows"], row["default_organizations"])
+        for row in position_catalog_rows
+        if row["position_key"] in EXPECTED_PUBLIC_POSITION_DEFAULT_COUNTS
+    }
+    if actual_public_counts != EXPECTED_PUBLIC_POSITION_DEFAULT_COUNTS:
+        raise ValueError(
+            "Strict standardized-position membership changed: "
+            + json.dumps(actual_public_counts, sort_keys=True)
+        )
+
     observation_fields = list(raw_observations[0])
     taxonomy_fields = list(taxonomy_rows[0])
     write_csv(OBSERVATIONS_PATH, sorted(raw_observations, key=lambda row: (row["organization"], row["person_name"], row["observation_id"])), observation_fields)
     write_csv(TAXONOMY_PATH, taxonomy_rows, taxonomy_fields)
+    write_csv(
+        POSITION_CATALOG_PATH,
+        position_catalog_rows,
+        list(position_catalog_rows[0]),
+    )
     write_csv(
         SUPPORTING_SOURCES_PATH,
         list(POSITION_SUPPORTING_SOURCES),
@@ -1813,6 +2091,12 @@ def main() -> None:
             f"| {family.replace('_', ' ').title()} | {len(catalog)} | {len(eligible)} | "
             f"{len({row['organization'] for row in eligible})} | {len(schedule_base)} | {len(default)} |"
         )
+    standardized_position_lines = [
+        f"| {row['label']} | {row['support_level'].title()} | {row['default_rows']} | "
+        f"{row['default_organizations']} | {row['default_schedule_j_base_rows']} |"
+        for row in position_catalog_rows
+        if row["support_level"] != "hidden"
+    ]
 
     record_type_counts = Counter(row["record_type"] for row in raw_observations)
     exclusion_counts = Counter()
@@ -1858,6 +2142,16 @@ def main() -> None:
         f"- Role-eligible peer observations retained only for sensitivity analysis: **{len(sensitivity_rows):,}** (9 below-30-hour/source-anomaly rows, 6 rows with 40 related-organization hours but no identified related employer, and 1 source-labeled fractional role).",
         f"- Taxonomy groups: **{len(taxonomy_rows):,}**: **{review_status_counts['rule_assigned']:,}** rule-assigned single-family groups, **{review_status_counts['rule_assigned_multi_role']:,}** rule-assigned multi-role groups, **{review_status_counts['reviewed_observation_override']:,}** reviewed observation-override groups, and **{review_status_counts['manual_review_required']:,}** groups not published without further review.",
         "",
+        "## Standardized position benchmarks",
+        "",
+        "The Position control uses an exclusive standardized-title layer, not the broad functional family. C-suite aliases such as COO/Chief Operating Officer are consolidated, while levels remain separate (for example Vice President, Senior Vice President, and Executive Vice President). Fourteen default executive rows with genuinely combined or ambiguous titles are retained in the extraction but excluded from strict named-position samples so they cannot enter two benchmarks at once.",
+        "",
+        "A position is `Primary` with at least 15 default rows across at least 12 organizations, `Exploratory` with at least 8 organizations, and hidden below 8 organizations. Sparse titles remain classified in `form990_benchmark_position_catalog.csv` rather than being pooled into misleading umbrella positions.",
+        "",
+        "| Standardized position | Support | Default rows | Organizations | With Schedule J base |",
+        "|---|---|---:|---:|---:|",
+        *standardized_position_lines,
+        "",
         "## Retained non-public records",
         "",
         *[f"- `{label}`: **{count:,}** observations." for label, count in sorted(record_type_counts.items()) if label != "non_ceo_position"],
@@ -1892,7 +2186,7 @@ def main() -> None:
         "## Recommended app contract",
         "",
         "- Join organization metadata once by `source_id`/EIN, but treat `observation_id` as the compensation-row key.",
-        "- Default Position to CEO using the existing validated CEO dataset; use this layer only for the 13 non-CEO catalog values.",
+        f"- Default Position to CEO using the existing validated CEO dataset; expose the **{sum(row['support_level'] != 'hidden' for row in position_catalog_rows):,}** supported standardized non-CEO titles from `form990_benchmark_position_catalog.csv`, not the broader functional families.",
         "- Keep Part VII cash, Part VII total, Schedule J base, and Schedule J total as separate compensation measures.",
         "- When several people from one organization share a family, use organization-balanced weights (each organization's rows sum to one) as the default or expose person-balanced weighting as an explicit sensitivity. Do not silently let larger organizations dominate.",
         "- RP rows are comparison markers only. Several RP families have more than one reported person, so display all applicable RP references or require a reviewed single-role choice; never include them in fit or quantile estimation.",
@@ -1900,6 +2194,7 @@ def main() -> None:
         "",
         "## Artifacts",
         "",
+        "- `benchmark/enrichment/form990_benchmark_position_catalog.csv`: exclusive standardized-title catalog, support thresholds, and sample counts used by the Position control.",
         "- `benchmark/enrichment/form990_position_observations.csv`: row-level, source-linked observations and all compensation fields.",
         "- `benchmark/enrichment/form990_position_taxonomy.csv`: grouped title/classification review surface.",
         "- `benchmark/enrichment/form990_position_supporting_sources.csv`: hashed provenance manifest for non-XML classification evidence.",
