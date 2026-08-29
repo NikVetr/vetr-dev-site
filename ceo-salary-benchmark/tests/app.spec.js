@@ -255,7 +255,14 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#chart-tooltip")).toBeVisible();
   await expect(page.locator("#chart-tooltip .chart-tooltip-value strong")).toContainText("$");
   await expect(page.locator("#chart-tooltip dt")).toContainText(["Histogram bin", "Salary percentile", "Peer tier", "Evidence", "Match score", "Effective weight"]);
-  await expect(page.locator("#chart-tooltip")).toContainText(/P\d+(?:\.\d)? · weighted among 125 plotted organizations/);
+  const salaryPercentileDetail = page.locator('#chart-tooltip dl div:has(dt:text-is("Salary percentile")) dd');
+  await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 125\)$/);
+  const lognormalPercentile = await salaryPercentileDetail.textContent();
+  await page.locator('input[name="distribution"][value="empirical"]').check();
+  await page.locator(".bar-block").first().hover();
+  const empiricalPercentile = await salaryPercentileDetail.textContent();
+  expect(empiricalPercentile).not.toBe(lognormalPercentile);
+  await page.locator('input[name="distribution"][value="lognormal"]').check();
   await expect(page.locator("#chart-tooltip .chart-tooltip-hint")).toContainText("focus its row");
   await page.locator("#chart-title").hover();
   await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(0);
@@ -263,7 +270,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#chart-tooltip")).toContainText("Rethink Priorities");
   await expect(page.locator("#chart-tooltip")).toContainText("$155,230");
   await expect(page.locator("#chart-tooltip dt")).toContainText(["Salary percentile", "Analytical status", "Evidence"]);
-  await expect(page.locator("#chart-tooltip")).toContainText(/P\d+(?:\.\d)? · weighted vs 125 plotted peers/);
+  await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 125\)$/);
   await expect(page.locator("#chart-tooltip")).toContainText("excluded from all calculations");
   await expect(page.locator("#chart-tooltip")).not.toContainText("Effective weight");
   await expect(page.locator("#chart-tooltip .chart-tooltip-hint")).toContainText("RP reference row");
@@ -775,7 +782,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator(".rp-chart-marker").hover();
   await expect(page.locator("#chart-tooltip")).toContainText("Rethink Priorities");
   await expect(page.locator("#chart-tooltip dt")).toContainText(["Annual expenses", "Salary percentile", "Expenses percentile", "Analytical status"]);
-  await expect(page.locator("#chart-tooltip")).toContainText(/weighted vs \d+ plotted peers/);
+  await expect(page.locator('#chart-tooltip dl div:has(dt:text-is("Salary percentile")) dd')).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ \d+\)$/);
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-rp-scatter-reference.png" });
   await page.locator("#chart-color").selectOption("sourceType");
   await expect(page.locator("#chart-legend")).toContainText("Form 990");

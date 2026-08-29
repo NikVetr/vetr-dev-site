@@ -728,11 +728,18 @@
     };
   }
 
-  function percentilePositionLabel(items, value, accessor, reference = false) {
-    const position = weightedPercentilePosition(items, value, accessor);
+  function percentilePositionLabel(items, value, accessor) {
+    const valid = items.filter((item) => Number.isFinite(accessor(item)) && item.weight > 0);
+    const position = weightedPercentilePosition(valid, value, accessor);
     if (!position) return "Unavailable";
-    const percentile = position.percentile.toFixed(1).replace(/\.0$/, "");
-    return `P${percentile} · weighted ${reference ? "vs" : "among"} ${position.count} plotted ${reference ? "peers" : "organizations"}`;
+    const modeled = fitModel(valid.map((item) => ({ ...item, value: accessor(item) })));
+    const percentileValue = modeled?.cdf ? modeled.cdf(value) * 100 : position.percentile;
+    const belowCount = valid.reduce((count, item) => count + (accessor(item) < value ? 1 : 0), 0);
+    const equalCount = valid.reduce((count, item) => count + (accessor(item) === value ? 1 : 0), 0);
+    const rank = belowCount + (Math.max(equalCount, 1) + 1) / 2;
+    const percentile = clamp(percentileValue, 0, 100).toFixed(1).replace(/\.0$/, "");
+    const formattedRank = Number.isInteger(rank) ? rank.toFixed(0) : rank.toFixed(1);
+    return `${percentile} (#${formattedRank} / ${position.count})`;
   }
 
   function normalQuantile(p) {
@@ -755,6 +762,14 @@
     const r = q * q;
     return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q /
       (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
+  }
+
+  function normalCdf(value) {
+    const absolute = Math.abs(value);
+    const t = 1 / (1 + 0.2316419 * absolute);
+    const density = Math.exp(-(absolute ** 2) / 2) / Math.sqrt(2 * Math.PI);
+    const tail = density * t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+    return value >= 0 ? 1 - tail : tail;
   }
 
   function logGamma(z) {
@@ -811,6 +826,7 @@
       return {
         quantile: (p) => Math.exp(mu + sigma * normalQuantile(p)),
         density: (x) => x <= 0 ? 0 : Math.exp(-((Math.log(x) - mu) ** 2) / (2 * sigma ** 2)) / (x * sigma * Math.sqrt(2 * Math.PI)),
+        cdf: (x) => x <= 0 ? 0 : normalCdf((Math.log(x) - mu) / sigma),
       };
     }
     if (state.fit === "gamma") {
@@ -832,6 +848,7 @@
           return (low + high) / 2;
         },
         density: (x) => x <= 0 ? 0 : Math.exp((shape - 1) * Math.log(x) - x / scale - logGamma(shape) - shape * Math.log(scale)),
+        cdf: (x) => x <= 0 ? 0 : gammaP(shape, x / scale),
       };
     }
     return null;
@@ -1278,7 +1295,7 @@
 
     if (rpAvailable) appendRpMarker(svg, rpX, rpLogoY, rpItem, {
       primaryLabel: descriptor.primaryLabel(rpRow), primaryFormat: descriptor.fullFormat,
-      rankDetails: [[`${descriptor.shortLabel} percentile`, percentilePositionLabel(items, rpValue, (candidate) => candidate.value, true)]],
+      rankDetails: [[`${descriptor.shortLabel} percentile`, percentilePositionLabel(items, rpValue, (candidate) => candidate.value)]],
     });
 
     const tickCount = width < 650 ? 5 : 8;
@@ -1565,8 +1582,8 @@
         primaryLabel: yDescriptor.primaryLabel(rpRow), primaryFormat: yDescriptor.fullFormat,
         chartDetail: [xDescriptor.label, xDescriptor.fullFormat(rpXValue)],
         rankDetails: [
-          [`${yDescriptor.shortLabel} percentile`, percentilePositionLabel(items, rpValue, (candidate) => candidate.yValue, true)],
-          [`${xDescriptor.shortLabel} percentile`, percentilePositionLabel(items, rpXValue, (candidate) => candidate.xValue, true)],
+          [`${yDescriptor.shortLabel} percentile`, percentilePositionLabel(items, rpValue, (candidate) => candidate.yValue)],
+          [`${xDescriptor.shortLabel} percentile`, percentilePositionLabel(items, rpXValue, (candidate) => candidate.xValue)],
         ],
       }, 28);
     }
