@@ -17,8 +17,66 @@
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
   const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
   const COMPOSITE_SCORE_TOOLTIP = "Auto-weights uses the frozen 0–100 non-pay composite, which combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1. Select Auto-weights instead of its individual component weights to avoid double-counting those dimensions.";
+  const DEFAULT_POSITION = Object.freeze({
+    key: "ceo", label: "CEO", pageLabel: "CEO", defaultMeasure: "base",
+    description: "The fully validated chief-executive benchmark, including incumbent Form 990s and recruitment postings.",
+  });
+  const POSITION_CATALOG = (() => {
+    const supplied = Array.isArray(DATA.positionCatalog) ? DATA.positionCatalog : [];
+    const catalog = supplied.some((position) => position.key === "ceo")
+      ? supplied
+      : [DEFAULT_POSITION, ...supplied];
+    const byKey = new Map();
+    catalog.forEach((position) => {
+      if (!position?.key || byKey.has(position.key)) throw new Error(`Invalid or duplicate position key: ${position?.key || "blank"}`);
+      byKey.set(position.key, {
+        ...position,
+        label: position.label || position.key,
+        pageLabel: position.pageLabel || position.label || position.key,
+        defaultMeasure: ["base", "cash", "total"].includes(position.defaultMeasure)
+          ? position.defaultMeasure : position.key === "ceo" ? "base" : "cash",
+      });
+    });
+    if (!byKey.has("ceo")) byKey.set("ceo", DEFAULT_POSITION);
+    return [byKey.get("ceo"), ...[...byKey.values()].filter((position) => position.key !== "ceo")];
+  })();
+  const POSITION_BY_KEY = new Map(POSITION_CATALOG.map((position) => [position.key, position]));
+
+  function positionDefinition(key = state.position) {
+    return POSITION_BY_KEY.get(key) || POSITION_BY_KEY.get("ceo") || DEFAULT_POSITION;
+  }
+
+  function positionIncumbents(key = state.position) {
+    if (key === "ceo") return DATA.incumbents;
+    return Array.isArray(DATA.positionObservations?.[key]) ? DATA.positionObservations[key] : [];
+  }
+
+  function positionJobAds(key = state.position) {
+    return key === "ceo" ? DATA.jobAds : [];
+  }
+
+  function activeRpReferences(key = state.position) {
+    if (key === "ceo") return DATA.rpReference ? [DATA.rpReference] : [];
+    return Array.isArray(DATA.rpReferencesByPosition?.[key]) ? DATA.rpReferencesByPosition[key] : [];
+  }
+
+  const allPositionIncumbents = Object.entries(DATA.positionObservations || {})
+    .filter(([key]) => key !== "ceo")
+    .flatMap(([, positionRows]) => Array.isArray(positionRows) ? positionRows : []);
+  const allRowsByStream = {
+    incumbents: [...DATA.incumbents, ...allPositionIncumbents],
+    jobAds: [...DATA.jobAds],
+  };
+  Object.entries(allRowsByStream).forEach(([stream, streamRows]) => {
+    const ids = new Set();
+    streamRows.forEach((row) => {
+      if (!row?.id || ids.has(row.id)) throw new Error(`Missing or duplicate ${stream} observation id: ${row?.id || "blank"}`);
+      ids.add(row.id);
+    });
+  });
 
   const state = {
+    position: "ceo",
     stream: "combined",
     measure: "base",
     inflationAdjusted: true,
@@ -60,12 +118,12 @@
   };
 
   const inclusion = {
-    incumbents: new Map(DATA.incumbents.map((row) => [row.id, Boolean(row.defaultIncluded)])),
-    jobAds: new Map(DATA.jobAds.map((row) => [row.id, Boolean(row.defaultIncluded)])),
+    incumbents: new Map(allRowsByStream.incumbents.map((row) => [row.id, Boolean(row.defaultIncluded)])),
+    jobAds: new Map(allRowsByStream.jobAds.map((row) => [row.id, Boolean(row.defaultIncluded)])),
   };
   const customWeights = {
-    incumbents: new Map(DATA.incumbents.map((row) => [row.id, 1])),
-    jobAds: new Map(DATA.jobAds.map((row) => [row.id, 1])),
+    incumbents: new Map(allRowsByStream.incumbents.map((row) => [row.id, 1])),
+    jobAds: new Map(allRowsByStream.jobAds.map((row) => [row.id, 1])),
   };
   const modifiedWeightIds = {
     incumbents: new Set(),
@@ -77,7 +135,10 @@
   let activeAxisSelector = "";
 
   const refs = {
-    stream: $("#stream-select"), measure: $("#measure-select"), measureField: $("#measure-field"),
+    appTitle: $("#app-title"), appDescription: $("#app-description"),
+    position: $("#position-select"), positionDescription: $("#position-description"),
+    stream: $("#stream-select"), streamDescription: $("#stream-description"),
+    measure: $("#measure-select"), measureField: $("#measure-field"),
     dollarBasis: [...document.querySelectorAll('input[name="dollar-basis"]')], priceBasisStatus: $("#price-basis-status"),
     sample: $("#sample-select"), fit: [...document.querySelectorAll('input[name="distribution"]')],
     weightingComponents: [...document.querySelectorAll('.weighting-field input[type="checkbox"]')],
@@ -102,6 +163,7 @@
     scatterControls: $("#scatter-controls"), contourField: $("#contour-field"),
     chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
     comparabilityProfileField: $("#comparability-profile-field"),
+    autoWeightNote: $("#auto-weight-note"),
     weightProfileSlots: new Map(["comparability", "size", "staff", "recency"].map((key) => [key, $(`#weight-profile-${key}`)])),
     rpScaleReference: $("#rp-scale-reference"),
     reset: $("#reset-settings"), chart: $("#salary-chart"), chartWrap: $("#chart-wrap"),
@@ -122,15 +184,41 @@
     matchScoreMin: $("#match-score-range-min"), matchScoreMax: $("#match-score-range-max"),
     matchScoreRangeValue: $("#match-score-range-value"), matchScoreFilterSummary: $("#match-score-filter-summary"),
     matchScoreFilterStatus: $("#match-score-filter-status"),
-    tableScroll: $(".table-scroll"),
+    tablePanel: $("#evidence-table-panel"), tableScroll: $(".table-scroll"),
     tableBody: $("#organization-table tbody"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
     urlStateError: $("#url-state-error"),
   };
 
   function rows() {
-    if (state.stream === "combined") return [...DATA.incumbents, ...DATA.jobAds];
-    return state.stream === "incumbents" ? DATA.incumbents : DATA.jobAds;
+    const incumbents = positionIncumbents();
+    const jobAds = positionJobAds();
+    if (state.stream === "combined") return [...incumbents, ...jobAds];
+    return state.stream === "incumbents" ? incumbents : jobAds;
+  }
+
+  function isCeoPosition() { return state.position === "ceo"; }
+
+  function populatePositionSelect() {
+    refs.position.replaceChildren();
+    POSITION_CATALOG.forEach((position) => {
+      const option = document.createElement("option");
+      option.value = position.key;
+      option.textContent = position.label;
+      refs.position.append(option);
+    });
+    refs.position.value = state.position;
+  }
+
+  function clearAnalyticalFilters() {
+    state.filters = {
+      title: null, sourceType: null, tier: null, topic: null, location: null,
+      eaAffinity: null, structure: null,
+    };
+  }
+
+  function positionRowsForReset(key = state.position) {
+    return [...positionIncumbents(key), ...positionJobAds(key)];
   }
 
   function rowStream(row) {
@@ -140,6 +228,7 @@
   function rowInclusion(row) { return inclusion[rowStream(row)]; }
   function rowCustomWeights(row) { return customWeights[rowStream(row)]; }
   function rowModifiedWeights(row) { return modifiedWeightIds[rowStream(row)]; }
+  function roleHolder(row) { return row.executive || row.personName || ""; }
 
   const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
   const WEIGHT_LABELS = {
@@ -158,6 +247,7 @@
 
   function defaultDiscreteWeight(key, value) {
     const normalized = String(value || "").toLowerCase();
+    if (key === "titleGroup" && !isCeoPosition()) return 1;
     if (key === "tier") {
       if (normalized === "a" || normalized.includes("strict_primary") || normalized.includes("strict-primary")) return 1;
       if (normalized.includes("expanded_primary")) return 0.85;
@@ -225,7 +315,7 @@
   }
 
   function discreteWeightExplanation(key, category) {
-    const definition = categoryDefinition(key, category);
+    const definition = key === "titleGroup" && !isCeoPosition() ? null : categoryDefinition(key, category);
     if (definition) {
       const provenance = definition.provenanceType.replaceAll("_", " ").replaceAll(" + ", "; ");
       const caveat = definition.caveats ? ` Caveat: ${definition.caveats}` : "";
@@ -264,7 +354,8 @@
         ? "Form 990 denotes realized incumbent compensation reported in a nonprofit filing. It is historical and measure-specific; Part VII cash is not automatically exact base salary."
         : "Job posting denotes the inflation-adjusted midpoint of an advertised base-salary range. It is forward-looking offer evidence, not realized compensation.";
     } else if (key === "titleGroup") {
-      if (normalized === "ceo") explanation = "CEO groups Chief Executive Officer variants and most directly matches RP's organization-wide chief-executive role.";
+      if (!isCeoPosition()) explanation = "This reviewed title family organizes source-native titles within the selected position. Its suggested multiplier is neutral; users may edit it for sensitivity analysis.";
+      else if (normalized === "ceo") explanation = "CEO groups Chief Executive Officer variants and most directly matches RP's organization-wide chief-executive role.";
       else if (normalized.includes("executive director")) explanation = "Executive Director can be the organization-wide top executive, but the title is less consistent across nonprofits and sometimes denotes a narrower role.";
       else if (normalized.includes("president")) explanation = "President includes President/CEO and source-native President titles; comparability depends on whether the person is clearly the organization-wide top executive.";
       else if (normalized.includes("not reported")) explanation = "The preserved record did not provide a usable title group, so role comparability cannot be confirmed from this field.";
@@ -421,8 +512,9 @@
 
   function salaryForBasis(row, inflationAdjusted) {
     const values = inflationAdjusted ? row.salary : row.nominalSalary;
-    if (rowStream(row) === "jobAds" || state.stream === "combined") return values?.base ?? null;
-    return values?.[state.measure] ?? null;
+    const value = rowStream(row) === "jobAds" || state.stream === "combined"
+      ? values?.base : values?.[state.measure];
+    return Number.isFinite(value) && value > 0 ? value : null;
   }
 
   function salary(row) { return salaryForBasis(row, state.inflationAdjusted); }
@@ -580,15 +672,30 @@
   function weightedSelection() {
     const selected = rows()
       .filter((row) => passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id))
-      .map((row) => ({ row, value: salary(row), rawWeight: baseWeight(row) * (rowCustomWeights(row).get(row.id) ?? 1) }))
-      .filter((item) => item.rawWeight > 0 && Number.isFinite(item.rawWeight));
+      .map((row) => ({
+        row, value: salary(row), automaticWeight: baseWeight(row),
+        customWeight: rowCustomWeights(row).get(row.id) ?? 1,
+      }))
+      .filter((item) => item.automaticWeight > 0 && Number.isFinite(item.automaticWeight));
+    if (!isCeoPosition()) {
+      const organizationTotals = new Map();
+      selected.forEach((item) => {
+        const organization = String(item.row.organization || "Not reported");
+        organizationTotals.set(organization, (organizationTotals.get(organization) || 0) + item.automaticWeight);
+      });
+      selected.forEach((item) => {
+        const organization = String(item.row.organization || "Not reported");
+        item.rawWeight = (item.automaticWeight / organizationTotals.get(organization)) * item.customWeight;
+      });
+    } else selected.forEach((item) => { item.rawWeight = item.automaticWeight * item.customWeight; });
+    const positive = selected.filter((item) => item.rawWeight > 0 && Number.isFinite(item.rawWeight));
     if (state.weightings.has("streamBalanced") && state.stream === "combined") {
       const streamTotals = new Map();
-      selected.forEach((item) => streamTotals.set(rowStream(item.row), (streamTotals.get(rowStream(item.row)) || 0) + item.rawWeight));
-      selected.forEach((item) => { item.rawWeight /= streamTotals.get(rowStream(item.row)) || 1; });
+      positive.forEach((item) => streamTotals.set(rowStream(item.row), (streamTotals.get(rowStream(item.row)) || 0) + item.rawWeight));
+      positive.forEach((item) => { item.rawWeight /= streamTotals.get(rowStream(item.row)) || 1; });
     }
-    const mean = selected.length ? selected.reduce((sum, item) => sum + item.rawWeight, 0) / selected.length : 0;
-    return selected.map(({ row, value, rawWeight }) => ({ row, value, weight: mean ? rawWeight / mean : 0 }));
+    const mean = positive.length ? positive.reduce((sum, item) => sum + item.rawWeight, 0) / positive.length : 0;
+    return positive.map(({ row, value, rawWeight }) => ({ row, value, weight: mean ? rawWeight / mean : 0 }));
   }
 
   function selectedRows() {
@@ -627,16 +734,20 @@
   function configureRanges() {
     const salaries = rows().map(salary).filter((value) => value != null && Number.isFinite(value));
     const expenses = rows().map((row) => row.expenses).filter((value) => value != null && value > 0 && Number.isFinite(value));
-    const salaryMin = Math.floor(Math.min(...salaries) / 10_000) * 10_000;
-    const salaryMax = Math.ceil(Math.max(...salaries) / 10_000) * 10_000;
+    const salaryMin = salaries.length ? Math.floor(Math.min(...salaries) / 10_000) * 10_000 : 0;
+    const salaryMax = salaries.length ? Math.max(salaryMin + 10_000, Math.ceil(Math.max(...salaries) / 10_000) * 10_000) : 10_000;
+    const expenseMin = expenses.length ? Math.min(...expenses) : 1;
+    const expenseMax = expenses.length ? Math.max(expenseMin + 1, Math.max(...expenses)) : 2;
     state.ranges.salary = { min: salaryMin, max: salaryMax, low: salaryMin, high: salaryMax };
     state.ranges.expenses = {
-      min: Math.min(...expenses), max: Math.max(...expenses), low: Math.min(...expenses), high: Math.max(...expenses),
+      min: expenseMin, max: expenseMax, low: expenseMin, high: expenseMax,
     };
     state.ranges.matchScore = { min: 0, max: 100, low: 0, high: 100 };
     Object.assign(refs.salaryMin, { min: salaryMin, max: salaryMax, step: 5_000, value: salaryMin });
     Object.assign(refs.salaryMax, { min: salaryMin, max: salaryMax, step: 5_000, value: salaryMax });
+    refs.salaryMin.disabled = !salaries.length; refs.salaryMax.disabled = !salaries.length;
     refs.expenseMin.value = 0; refs.expenseMax.value = 1000;
+    refs.expenseMin.disabled = !expenses.length; refs.expenseMax.disabled = !expenses.length;
     refs.matchScoreMin.value = 0; refs.matchScoreMax.value = 100;
     updateRangeLabels();
   }
@@ -886,8 +997,8 @@
     group.addEventListener("pointerleave", hideTooltip);
     group.addEventListener("focus", show);
     group.addEventListener("blur", hideTooltip);
-    group.addEventListener("click", focusRpReferenceRow);
-    group.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRpReferenceRow(); });
+    group.addEventListener("click", () => focusRpReferenceRow(item.row.id));
+    group.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRpReferenceRow(item.row.id); });
     svg.append(group);
     return group;
   }
@@ -1161,7 +1272,8 @@
     svg.replaceChildren();
     const colors = categoryColors(items);
     renderHistogramLegend(colors);
-    $("#chart-description").textContent = `A weighted histogram of ${descriptor.label.toLowerCase()} in which each block represents one organization.`;
+    const markNoun = isCeoPosition() ? "organization" : "reported role";
+    $("#chart-description").textContent = `A weighted histogram of ${descriptor.label.toLowerCase()} in which each block represents one ${markNoun}.`;
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(330, refs.chartWrap.clientHeight || 360);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -1173,7 +1285,7 @@
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
-      empty.textContent = "No organizations have a value for the current selection.";
+      empty.textContent = `No ${isCeoPosition() ? "organizations" : "position observations"} have a value for the current selection.`;
       svg.append(empty);
       appendAxisControl(svg, "histogram", axisDisplayLabel(descriptor), {
         x: width / 2 - 5, y: height - 6, "text-anchor": "middle",
@@ -1182,11 +1294,9 @@
       return;
     }
 
-    const rpRow = DATA.rpReference;
-    const rpValue = descriptor.value(rpRow);
-    const rpAvailable = Number.isFinite(rpValue) && (!descriptor.logarithmic || rpValue > 0);
-    const rpItem = { row: rpRow, value: rpValue, weight: 0 };
-    const values = [...items.map((item) => item.value), ...(rpAvailable ? [rpValue] : [])];
+    const rpItems = activeRpReferences().map((row) => ({ row, value: descriptor.value(row), weight: 0 }))
+      .filter((item) => Number.isFinite(item.value) && (!descriptor.logarithmic || item.value > 0));
+    const values = [...items.map((item) => item.value), ...rpItems.map((item) => item.value)];
     const [axisMin, axisMax] = paddedDomain(values.map(geometry.transform), 0.08, !descriptor.logarithmic);
     const xScale = (value) => margin.left + ((geometry.transform(value) - axisMin) / (axisMax - axisMin)) * innerWidth;
     if (state.autoBins) {
@@ -1225,12 +1335,14 @@
 
     const plotBottom = margin.top + innerHeight;
     appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom, descriptor.format);
-    const rpX = rpAvailable ? xScale(rpValue) : null;
     const rpLogoY = margin.top + 14;
-    if (rpAvailable) svg.append(svgElement("line", {
-      x1: rpX, x2: rpX, y1: rpLogoY + 14, y2: plotBottom,
-      class: "rp-reference-guide", "aria-hidden": "true",
-    }));
+    rpItems.forEach((item) => {
+      const x = xScale(item.value);
+      svg.append(svgElement("line", {
+        x1: x, x2: x, y1: rpLogoY + 14, y2: plotBottom,
+        class: "rp-reference-guide", "aria-hidden": "true",
+      }));
+    });
     bins.forEach((bin) => {
       const binLow = geometry.inverse(axisMin + bin.index * binWidthAxis);
       const binHigh = geometry.inverse(axisMin + (bin.index + 1) * binWidthAxis);
@@ -1244,7 +1356,7 @@
         const rect = svgElement("rect", {
           x: x0, y: y0, width: Math.max(1, x1 - x0), height: Math.max(2, y1 - y0),
           fill: colors.get(category), class: `bar-block${state.focusedId === item.row.id ? " is-focused" : ""}`,
-          tabindex: "0", role: "button", "aria-label": `${item.row.organization}, ${descriptor.fullFormat(item.value)}`,
+          tabindex: "0", role: "button", "aria-label": `${item.row.organization}, ${item.row.title || "reported role"}, ${descriptor.fullFormat(item.value)}`,
         });
         rect.addEventListener("pointerenter", (event) => {
           highlightRug(item.row.id, true);
@@ -1293,10 +1405,10 @@
       svg.append(svgElement("line", { x1: x, x2: x, y1: margin.top, y2: plotBottom, class: "quantile-guide" }));
     }
 
-    if (rpAvailable) appendRpMarker(svg, rpX, rpLogoY, rpItem, {
-      primaryLabel: descriptor.primaryLabel(rpRow), primaryFormat: descriptor.fullFormat,
-      rankDetails: [[`${descriptor.shortLabel} percentile`, percentilePositionLabel(items, rpValue, (candidate) => candidate.value)]],
-    });
+    rpItems.forEach((item) => appendRpMarker(svg, xScale(item.value), rpLogoY, item, {
+      primaryLabel: descriptor.primaryLabel(item.row), primaryFormat: descriptor.fullFormat,
+      rankDetails: [[`${descriptor.shortLabel} percentile`, percentilePositionLabel(items, item.value, (candidate) => candidate.value)]],
+    }));
 
     const tickCount = width < 650 ? 5 : 8;
     for (let i = 0; i <= tickCount; i += 1) {
@@ -1313,7 +1425,8 @@
       x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`,
       "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700,
     });
-    yAxisTitle.textContent = state.stream === "combined" ? "Weighted observations per bin" : "Weighted organizations per bin";
+    yAxisTitle.textContent = state.stream === "combined" || !isCeoPosition()
+      ? "Weighted observations per bin" : "Weighted organizations per bin";
     svg.append(yAxisTitle);
 
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
@@ -1356,7 +1469,9 @@
 
   function chartCategory(row) {
     const raw = String(row[state.chartColor] || "Not reported");
-    return state.chartColor === "tier" ? peerTierInfo(raw).label : raw;
+    if (state.chartColor === "tier") return peerTierInfo(raw).label;
+    if (state.chartColor === "titleGroup" && !isCeoPosition()) return humanizeCategory(raw);
+    return raw;
   }
 
   function mixHex(hex, target, amount) {
@@ -1488,14 +1603,13 @@
     })).filter((item) => Number.isFinite(item.xValue) && (!xDescriptor.logarithmic || item.xValue > 0)
       && Number.isFinite(item.yValue) && (!yDescriptor.logarithmic || item.yValue > 0))
       .map((item) => ({ ...item, value: item.yValue })));
-    const rpRow = DATA.rpReference;
-    const rpXValue = xDescriptor.value(rpRow);
-    const rpValue = yDescriptor.value(rpRow);
-    const rpAvailable = Number.isFinite(rpXValue) && (!xDescriptor.logarithmic || rpXValue > 0)
-      && Number.isFinite(rpValue) && (!yDescriptor.logarithmic || rpValue > 0);
+    const rpItems = activeRpReferences().map((row) => ({
+      row, xValue: xDescriptor.value(row), yValue: yDescriptor.value(row), weight: 0,
+    })).filter((item) => Number.isFinite(item.xValue) && (!xDescriptor.logarithmic || item.xValue > 0)
+      && Number.isFinite(item.yValue) && (!yDescriptor.logarithmic || item.yValue > 0));
     const svg = refs.chart;
     svg.replaceChildren();
-    $("#chart-description").textContent = `A scatterplot of ${yDescriptor.label.toLowerCase()} against ${xDescriptor.label.toLowerCase()}.`;
+    $("#chart-description").textContent = `A scatterplot of ${yDescriptor.label.toLowerCase()} against ${xDescriptor.label.toLowerCase()} for ${positionDefinition().pageLabel} compensation observations.`;
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(290, refs.chartWrap.clientHeight || 340);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -1504,7 +1618,7 @@
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
-      empty.textContent = "No selected organizations have values for both plotted axes.";
+      empty.textContent = `No selected ${isCeoPosition() ? "organizations" : "position observations"} have values for both plotted axes.`;
       svg.append(empty); refs.chartLegend.replaceChildren();
       appendAxisControl(svg, "scatterX", axisDisplayLabel(xDescriptor), {
         x: width / 2 - 5, y: height - 6, "text-anchor": "middle",
@@ -1520,7 +1634,10 @@
     const yTransform = yGeometry.transform;
     const transformedX = items.map((item) => xTransform(item.xValue));
     const transformedY = items.map((item) => yTransform(item.yValue));
-    if (rpAvailable) { transformedX.push(xTransform(rpXValue)); transformedY.push(yTransform(rpValue)); }
+    rpItems.forEach((item) => {
+      transformedX.push(xTransform(item.xValue));
+      transformedY.push(yTransform(item.yValue));
+    });
     const [xMin, xMax] = paddedDomain(transformedX, 0.08, false);
     const [yMin, yMax] = paddedDomain(transformedY, 0.08, false);
     const xScale = (value) => margin.left + ((xTransform(value) - xMin) / (xMax - xMin)) * innerWidth;
@@ -1562,7 +1679,7 @@
       const point = svgElement("circle", {
         cx: x, cy: y, r: radius, fill: colors.get(category), "data-weight": item.weight.toFixed(6),
         class: `scatter-point${state.focusedId === item.row.id ? " is-focused" : ""}`, tabindex: "0", role: "button",
-        "aria-label": `${item.row.organization}, ${yDescriptor.label} ${yDescriptor.fullFormat(item.yValue)}, ${xDescriptor.label} ${xDescriptor.fullFormat(item.xValue)}`,
+        "aria-label": `${item.row.organization}, ${item.row.title || "reported role"}, ${yDescriptor.label} ${yDescriptor.fullFormat(item.yValue)}, ${xDescriptor.label} ${xDescriptor.fullFormat(item.xValue)}`,
       });
       point.addEventListener("pointerenter", (event) => showTooltip(event, item, {
         category, primaryLabel: yDescriptor.primaryLabel(item.row), primaryFormat: yDescriptor.fullFormat,
@@ -1577,16 +1694,16 @@
       point.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRow(item.row.id); });
       svg.append(point);
     });
-    if (rpAvailable) {
-      appendRpMarker(svg, xScale(rpXValue), yScale(rpValue), { row: rpRow, value: rpValue, weight: 0 }, {
-        primaryLabel: yDescriptor.primaryLabel(rpRow), primaryFormat: yDescriptor.fullFormat,
-        chartDetail: [xDescriptor.label, xDescriptor.fullFormat(rpXValue)],
+    rpItems.forEach((item) => {
+      appendRpMarker(svg, xScale(item.xValue), yScale(item.yValue), { ...item, value: item.yValue }, {
+        primaryLabel: yDescriptor.primaryLabel(item.row), primaryFormat: yDescriptor.fullFormat,
+        chartDetail: [xDescriptor.label, xDescriptor.fullFormat(item.xValue)],
         rankDetails: [
-          [`${yDescriptor.shortLabel} percentile`, percentilePositionLabel(items, rpValue, (candidate) => candidate.yValue)],
-          [`${xDescriptor.shortLabel} percentile`, percentilePositionLabel(items, rpXValue, (candidate) => candidate.xValue)],
+          [`${yDescriptor.shortLabel} percentile`, percentilePositionLabel(items, item.yValue, (candidate) => candidate.yValue)],
+          [`${xDescriptor.shortLabel} percentile`, percentilePositionLabel(items, item.xValue, (candidate) => candidate.xValue)],
         ],
       }, 28);
-    }
+    });
     updateCorrelationSummary(correlations);
     appendAxisControl(svg, "scatterX", axisDisplayLabel(xDescriptor), {
       x: margin.left + innerWidth / 2 - 5, y: height - 6, "text-anchor": "middle",
@@ -1635,7 +1752,7 @@
     refs.tooltip.innerHTML = `
       <div class="chart-tooltip-heading">
         <strong>${escapeHtml(row.organization)}</strong>
-        <span>${escapeHtml(row.title || "Executive role")}</span>
+        <span>${escapeHtml([row.title || "Reported role", !isCeoPosition() ? roleHolder(row) : ""].filter(Boolean).join(" · "))}</span>
       </div>
       <div class="chart-tooltip-value">
         <span>${escapeHtml(primaryLabel)}</span>
@@ -1803,7 +1920,9 @@
         const grouped = new Map();
         rows().forEach((row) => {
           const group = key === "title"
-            ? row.titleGroup || "Other executive titles"
+            ? (!isCeoPosition()
+              ? humanizeCategory(row.titleGroup || "Other reported titles")
+              : row.titleGroup || "Other executive titles")
             : areaFamily(row.topic);
           const value = String(row[key] || "Not reported");
           if (!grouped.has(group)) grouped.set(group, new Set());
@@ -1843,23 +1962,23 @@
     });
   }
 
-  function appendRpReferenceRow() {
-    const reference = DATA.rpReference;
-    if (!reference) throw new Error("RP Form 990 reference did not load.");
+  function appendRpReferenceRow(reference, index) {
     const tr = document.createElement("tr");
     tr.className = "rp-reference-row";
-    tr.setAttribute("aria-label", "Rethink Priorities 2024 Form 990 reference profile; excluded from the peer distribution");
+    tr.dataset.referenceId = reference.id;
+    tr.dataset.referenceIndex = index;
+    tr.setAttribute("aria-label", `Rethink Priorities ${reference.title || positionDefinition().label} reference profile; excluded from the peer distribution`);
     const values = [
       "", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)),
-      compactMoney(reference.expenses), String(reference.staff), "", "", reference.tier, "—", reference.location, "—", reference.structure,
-      String(reference.compensationYear), reference.sourceType, reportedSalaryDisplay(reference),
+      compactMoney(reference.expenses), reference.staff == null ? "—" : String(reference.staff), "", "", reference.tier || "Reference", "—", reference.location || "—", "—", reference.structure || "—",
+      reference.compensationYear == null ? "—" : String(reference.compensationYear), reference.sourceType || "Form 990", reportedSalaryDisplay(reference),
     ];
     values.forEach((value, index) => {
       const td = document.createElement("td");
       td.textContent = value;
       if (index === 0) td.className = "check-column";
       if (index === 1) td.className = "rp-reference-name";
-      if (index === 5) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
+      if (index === 5 && reference.staffYear === 2023 && reference.currentFilingStaff === 0) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
       tr.append(td);
     });
     const source = document.createElement("td");
@@ -1867,21 +1986,28 @@
     const preview = document.createElement("button");
     preview.type = "button"; preview.className = "preview-button rp-reference-preview"; preview.textContent = "Preview";
     preview.addEventListener("click", () => openSourceDialog(reference));
-    const link = document.createElement("a");
-    link.className = "rp-reference-source"; link.href = reference.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "1 ↗";
-    link.setAttribute("aria-label", "RP source 1: 2024 Form 990 on ProPublica");
-    const separator = document.createTextNode(" · ");
-    const staffLink = document.createElement("a");
-    staffLink.className = "rp-reference-source"; staffLink.href = reference.secondarySourceUrl; staffLink.target = "_blank"; staffLink.rel = "noopener noreferrer"; staffLink.textContent = "2 ↗";
-    staffLink.setAttribute("aria-label", "RP source 2: 2023 Form 990 staff filing");
-    source.append(preview, link, separator, staffLink);
+    source.append(preview);
+    if (reference.sourceUrl) {
+      const link = document.createElement("a");
+      link.className = "rp-reference-source"; link.href = reference.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "1 ↗";
+      link.setAttribute("aria-label", `RP source 1: ${reference.compensationYear || "reported"} Form 990`);
+      source.append(link);
+    }
+    if (reference.secondarySourceUrl) {
+      const separator = document.createTextNode(" · ");
+      const secondaryLink = document.createElement("a");
+      secondaryLink.className = "rp-reference-source"; secondaryLink.href = reference.secondarySourceUrl;
+      secondaryLink.target = "_blank"; secondaryLink.rel = "noopener noreferrer"; secondaryLink.textContent = "2 ↗";
+      secondaryLink.setAttribute("aria-label", `RP source 2: ${reference.secondarySourceLabel || "secondary filing source"}`);
+      source.append(separator, secondaryLink);
+    }
     tr.append(source);
     refs.tableBody.append(tr);
   }
 
   function renderTable() {
     refs.tableBody.replaceChildren();
-    appendRpReferenceRow();
+    activeRpReferences().forEach(appendRpReferenceRow);
     const selection = weightedSelection();
     const weightMap = new Map(selection.map((item) => [item.row.id, item.weight]));
     tableRows(weightMap).forEach((row) => {
@@ -1929,7 +2055,15 @@
       org.append(orgName, orgLinks);
 
       const title = document.createElement("td");
-      title.className = "title-cell"; title.title = row.rawTitle || row.title || ""; title.textContent = row.title || "Not reported";
+      title.className = "title-cell"; title.title = row.rawTitle || row.title || "";
+      const roleTitle = document.createElement("span");
+      roleTitle.className = "role-title"; roleTitle.textContent = row.title || "Not reported";
+      title.append(roleTitle);
+      if (!isCeoPosition() && roleHolder(row)) {
+        const roleHolderLine = document.createElement("small");
+        roleHolderLine.className = "role-holder"; roleHolderLine.textContent = roleHolder(row);
+        title.append(roleHolderLine);
+      }
 
       const evidenceType = document.createElement("td");
       evidenceType.className = "evidence-cell"; evidenceType.textContent = row.sourceType || "—";
@@ -2021,6 +2155,11 @@
       });
       const headerHeight = document.querySelector("#organization-table thead")?.getBoundingClientRect().height || 29;
       refs.tableScroll.style.setProperty("--table-header-height", `${headerHeight}px`);
+      let referenceTop = headerHeight;
+      refs.tableBody.querySelectorAll(".rp-reference-row").forEach((row) => {
+        row.style.setProperty("--rp-reference-top", `${referenceTop}px`);
+        referenceTop += row.getBoundingClientRect().height;
+      });
     });
   }
 
@@ -2069,8 +2208,9 @@
     });
   }
 
-  function focusRpReferenceRow() {
-    refs.tableBody.querySelector(".rp-reference-row")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  function focusRpReferenceRow(id = "") {
+    const selector = id ? `.rp-reference-row[data-reference-id="${CSS.escape(id)}"]` : ".rp-reference-row";
+    refs.tableBody.querySelector(selector)?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
   function openSourceDialog(row) {
@@ -2082,7 +2222,7 @@
     const meta = $("#dialog-meta");
     meta.replaceChildren();
     [
-      ["Executive / role", [row.executive, row.rawTitle || row.title].filter(Boolean).join(" · ") || "Not reported"],
+      ["Individual / role", [roleHolder(row), row.rawTitle || row.title].filter(Boolean).join(" · ") || "Not reported"],
       ["Evidence year", row.compensationYear || "Not reported"],
       ["Displayed dollar basis", state.inflationAdjusted ? `${DATA.priceBasis} · CPI factor ${Number(row.cpiFactor || 1).toFixed(4)}×` : "Nominal source-year dollars · no CPI adjustment"],
       ["CPI reference period", row.cpiPeriod || "Not reported"],
@@ -2232,7 +2372,7 @@
       const rowMeasure = state.stream === "incumbents" ? state.measure : "base";
       return {
         base: `Schedule J base, ${basis}`,
-        cash: `Part VII cash / W-2 proxy, ${basis}`,
+        cash: `Part VII reportable cash proxy, ${basis}`,
         total: `Filing total proxy, ${basis}`,
       }[rowMeasure];
     }
@@ -2240,16 +2380,30 @@
     if (state.stream === "jobAds") return `Posting midpoint, ${basis}`;
     return {
       base: `Schedule J base, ${basis}`,
-      cash: `Part VII cash / W-2 proxy, ${basis}`,
+      cash: `Part VII reportable cash proxy, ${basis}`,
       total: `Filing total proxy, ${basis}`,
     }[state.measure];
   }
 
   function renderWeightControls() {
+    if (!isCeoPosition()) {
+      state.weightings.delete("comparability");
+      state.weightings.delete("sourceType");
+    }
     if (state.stream !== "combined") state.weightings.delete("streamBalanced");
     refs.weightingComponents.forEach((input) => {
       input.checked = state.weightings.has(input.value);
-      if (input.value === "streamBalanced") input.disabled = state.stream !== "combined";
+      if (input.value === "comparability" || input.value === "sourceType") input.disabled = !isCeoPosition();
+      else if (input.value === "streamBalanced") input.disabled = state.stream !== "combined" || !isCeoPosition();
+      else input.disabled = false;
+      const label = input.closest("label");
+      if (label && (input.value === "comparability" || input.value === "sourceType")) {
+        label.title = input.disabled
+          ? (input.value === "comparability"
+            ? "Unavailable: Auto-weights was designed and frozen for the CEO peer model."
+            : "Unavailable: non-CEO positions currently contain one Form 990 evidence stream only.")
+          : "";
+      }
     });
     const continuous = ["size", "staff", "recency"];
     refs.sizeControls.hidden = !continuous.some((key) => state.weightings.has(key));
@@ -2258,9 +2412,15 @@
     refs.recencyField.hidden = !state.weightings.has("recency");
     const components = [...state.weightings].filter((key) => key !== "streamBalanced").map((key) => WEIGHT_LABELS[key]);
     const balanced = state.weightings.has("streamBalanced");
-    const baseDescription = components.length
+    let baseDescription = components.length
       ? `Base weight = ${components.join(" × ")}. Missing continuous values receive a 0.45 multiplier.`
-      : "No components selected: equal base weights.";
+      : (isCeoPosition()
+        ? "No components selected: equal base weights."
+        : "No components selected: automatic weights are equalized by selected organization.");
+    if (!isCeoPosition()) {
+      if (components.length) baseDescription += " Automatic weights are then equalized by selected organization before any user row multiplier.";
+      baseDescription += " CEO Auto-weights are disabled because the frozen composite score is role-specific.";
+    }
     refs.weightingDescription.textContent = balanced
       ? `${baseDescription} Form 990s and recruitment postings are then rescaled to 50/50 total influence.`
       : baseDescription;
@@ -2272,12 +2432,17 @@
       const details = document.createElement("details");
       details.open = discrete.length === 1;
       const summary = document.createElement("summary"); summary.textContent = `${WEIGHT_LABELS[key]} category multipliers`;
-      const note = document.createElement("p"); note.className = "discrete-weight-note"; note.textContent = `${DISCRETE_WEIGHT_NOTES[key]} Definitions and provenance come from the preserved explainer package and the separately labeled recruitment-posting enrichment. Suggested multipliers are editable sensitivity judgments, not source rules; 1.00 is the reference and 0 excludes a category.`;
+      const note = document.createElement("p"); note.className = "discrete-weight-note";
+      const componentNote = key === "titleGroup" && !isCeoPosition()
+        ? "Title families organize reviewed source-native titles within this position and begin at a neutral 1.00."
+        : DISCRETE_WEIGHT_NOTES[key];
+      note.textContent = `${componentNote} Definitions and provenance come from the preserved explainer package and the separately labeled recruitment-posting enrichment. Suggested multipliers are editable sensitivity judgments, not source rules; 1.00 is the reference and 0 excludes a category.`;
       const grid = document.createElement("div"); grid.className = "discrete-weight-grid";
       Object.keys(weights).sort((a, b) => a.localeCompare(b)).forEach((category) => {
         const label = document.createElement("span"); label.className = "discrete-weight-category";
         const labelText = document.createElement("span");
-        labelText.textContent = category; labelText.title = category;
+        const categoryLabel = key === "titleGroup" && !isCeoPosition() ? humanizeCategory(category) : category;
+        labelText.textContent = categoryLabel; labelText.title = categoryLabel;
         const help = document.createElement("button");
         help.type = "button"; help.className = "info-tooltip"; help.textContent = "?";
         help.dataset.tooltip = discreteWeightExplanation(key, category);
@@ -2421,34 +2586,70 @@
     });
   }
 
+  function updatePositionControls() {
+    const position = positionDefinition();
+    const ceo = isCeoPosition();
+    refs.position.value = position.key;
+    const description = position.description || (ceo
+      ? DEFAULT_POSITION.description
+      : "Named compensation observations reported in nonprofit Form 990 filings.");
+    refs.positionDescription.textContent = ceo
+      ? description
+      : `${description} Automatic row weights are organization-balanced so each selected peer organization has equal total influence.`;
+    refs.appTitle.textContent = `${position.pageLabel} salary benchmark`;
+    document.title = `${position.pageLabel} Salary Benchmark · vetr.dev`;
+    refs.appDescription.content = `Interactive Rethink Priorities ${position.pageLabel} salary benchmark explorer`;
+    refs.tablePanel.setAttribute("aria-label", ceo
+      ? "Organization-level evidence table"
+      : `${position.pageLabel} compensation-observation evidence table`);
+    [...refs.stream.options].forEach((option) => {
+      option.disabled = !ceo && option.value !== "incumbents";
+    });
+    refs.stream.disabled = !ceo;
+    refs.streamDescription.textContent = ceo
+      ? ""
+      : "This position currently uses incumbent compensation reported in Form 990 filings; CEO recruitment postings are not mixed into it.";
+    refs.autoWeightNote.textContent = ceo ? "Uses overall peer match" : "CEO-specific; unavailable for this position";
+  }
+
   function updateHeadings() {
+    updatePositionControls();
     const isJobs = state.stream === "jobAds";
     const isCombined = state.stream === "combined";
     refs.measureField.hidden = isJobs || isCombined;
     const plotted = axisDescriptor(analysisAxisKey());
+    const positionPrefix = isCeoPosition() ? "" : `${positionDefinition().pageLabel} · `;
     refs.chartTitle.textContent = state.view === "scatter"
-      ? `${plotted.shortLabel} by ${axisDescriptor("scatterX").shortLabel}`
-      : `Distribution of ${plotted.shortLabel}`;
-    refs.statNUnit.textContent = isCombined ? "observations" : "organizations";
+      ? `${positionPrefix}${plotted.shortLabel} by ${axisDescriptor("scatterX").shortLabel}`
+      : `${positionPrefix}Distribution of ${plotted.shortLabel}`;
+    refs.statNUnit.textContent = isCombined || !isCeoPosition() ? "observations" : "organizations";
     refs.priceBasisStatus.textContent = priceBasisLabel();
     refs.scatterControls.hidden = state.view !== "scatter";
     refs.contourField.hidden = state.view !== "scatter";
     refs.binField.hidden = state.view !== "histogram";
     refs.histogramAxisSettings.hidden = state.view !== "histogram";
     refs.scatterAxisSettings.hidden = state.view !== "scatter";
-    refs.sampleDescription.textContent = {
+    refs.sampleDescription.textContent = (!isCeoPosition() ? {
+      primary: "Current, paid, role-matched Form 990 observations included by default for this position.",
+      sensitivity: "The default position observations plus records flagged for sensitivity analysis.",
+      clean: "Default position observations without a retained structural or partial-year flag.",
+      tierA: "Position observations from the narrowest organization peer tier.",
+      observed: "Every reported observation with the selected compensation measure, including excluded or unresolved records.",
+    } : {
       primary: "Rows retained for the validated analysis after source and role-structure review.",
       sensitivity: "The validated analysis plus records explicitly designated sensitivity-only; substantive exclusions remain unchecked.",
       clean: "Primary rows with no structural compensation or leadership flags.",
       tierA: "The narrowest peer definition: incumbent Tier A or job-ad strict-primary rows.",
       observed: "Every row with a usable salary value, including broader sensitivity cases.",
-    }[state.sample];
+    })[state.sample];
     refs.colorDescription.textContent = {
       tier: "A / strict-primary is narrowest; B / secondary is broader; C / expanded is mainly a sensitivity set.",
       topic: "Mission or operating-model category coded during peer selection.",
       eaAffinity: "Degree of effective-altruist alignment or functional adjacency coded before compensation review.",
       sourceType: "Distinguishes realized Form 990 compensation from advertised job-posting midpoints.",
-      titleGroup: "A broad grouping used only for navigation; displayed job titles remain source-native.",
+      titleGroup: isCeoPosition()
+        ? "A broad grouping used only for navigation; displayed job titles remain source-native."
+        : "A reviewed role and seniority family; displayed titles remain source-native.",
       structure: "Leadership or organizational-structure coding from the validation record.",
     }[state.chartColor];
     refs.expenseBandwidthValue.value = `${state.expenseBandwidth.toFixed(2)}×`;
@@ -2457,7 +2658,7 @@
     refs.binValue.value = state.bins;
   }
 
-  const URL_STATE_VERSION = 5;
+  const URL_STATE_VERSION = 6;
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
@@ -2478,7 +2679,7 @@
   const URL_FIT_KEYS = reverseCodes(URL_FIT_CODES);
   const URL_QUANTILE_KEYS = reverseCodes(URL_QUANTILE_CODES);
   const URL_VARIABLE_KEYS = reverseCodes(URL_VARIABLE_CODES);
-  const allShareRows = [...DATA.incumbents, ...DATA.jobAds];
+  const allShareRows = [...allRowsByStream.incumbents, ...allRowsByStream.jobAds];
   const shareRowCodes = new Map();
   let urlSyncReady = false;
   let urlSyncFrame = 0;
@@ -2541,8 +2742,10 @@
     if (state.ranges.expenses.low !== state.ranges.expenses.min || state.ranges.expenses.high !== state.ranges.expenses.max) ranges.e = [state.ranges.expenses.low, state.ranges.expenses.high];
     if (state.ranges.matchScore.low !== state.ranges.matchScore.min || state.ranges.matchScore.high !== state.ranges.matchScore.max) ranges.m = [state.ranges.matchScore.low, state.ranges.matchScore.high];
     const payload = { v: URL_STATE_VERSION };
-    if (state.stream !== "combined") payload.e = URL_STREAM_CODES[state.stream];
-    if (state.measure !== "base" && state.stream === "incumbents") payload.m = URL_MEASURE_CODES[state.measure];
+    if (!isCeoPosition()) payload.o = state.position;
+    const defaultStream = isCeoPosition() ? "combined" : "incumbents";
+    if (state.stream !== defaultStream) payload.e = URL_STREAM_CODES[state.stream];
+    if (state.measure !== positionDefinition().defaultMeasure && state.stream === "incumbents") payload.m = URL_MEASURE_CODES[state.measure];
     if (!state.inflationAdjusted) payload.n = 1;
     if (state.sample !== "primary") payload.p = URL_SAMPLE_CODES[state.sample];
     if (state.fit !== "lognormal") payload.g = URL_FIT_CODES[state.fit];
@@ -2612,6 +2815,7 @@
   }
 
   function syncControlsFromState() {
+    refs.position.value = state.position;
     refs.stream.value = state.stream;
     refs.measure.value = state.measure;
     refs.sample.value = state.sample;
@@ -2640,7 +2844,7 @@
   }
 
   function expandCompactUrlState(payload) {
-    if (![2, 3, 4, URL_STATE_VERSION].includes(payload?.v)) return payload;
+    if (![2, 3, 4, 5, URL_STATE_VERSION].includes(payload?.v)) return payload;
     const version = payload.v;
     const custom = {};
     (payload.c || []).forEach(([code, value]) => {
@@ -2661,6 +2865,7 @@
     return {
       v: 1,
       a: {
+        pos: version >= 6 && POSITION_BY_KEY.has(payload.o) ? payload.o : "ceo",
         s: payload.e ? URL_STREAM_KEYS[payload.e] : version === 2 ? "incumbents" : "combined",
         m: URL_MEASURE_KEYS[payload.m], p: URL_SAMPLE_KEYS[payload.p],
         ia: payload.n !== 1,
@@ -2681,13 +2886,15 @@
 
   function restoreUrlState(payload) {
     const sourceVersion = payload?.v;
-    const compactVersion = [2, 3, 4, URL_STATE_VERSION].includes(payload?.v);
+    const compactVersion = [2, 3, 4, 5, URL_STATE_VERSION].includes(payload?.v);
     payload = expandCompactUrlState(payload);
     if (!payload || payload.v !== 1 || typeof payload.a !== "object") throw new Error("Unsupported or incomplete state version.");
     const analysis = payload.a;
     const enumValue = (value, allowed, fallback) => allowed.includes(value) ? value : fallback;
+    state.position = enumValue(analysis.pos, [...POSITION_BY_KEY.keys()], "ceo");
     state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], sourceVersion === 1 ? "incumbents" : state.stream);
-    state.measure = enumValue(analysis.m, ["base", "cash", "total"], state.measure);
+    if (!isCeoPosition()) state.stream = "incumbents";
+    state.measure = enumValue(analysis.m, ["base", "cash", "total"], positionDefinition().defaultMeasure);
     state.inflationAdjusted = analysis.ia !== false;
     if (state.stream === "combined") state.measure = "base";
     state.sample = enumValue(analysis.p, ["primary", "sensitivity", "clean", "tierA", "observed"], state.sample);
@@ -2780,7 +2987,7 @@
     const resumeUrlSync = urlSyncReady;
     urlSyncReady = false;
     Object.assign(state, {
-      stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
+      position: "ceo", stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
       targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram",
       axisModes: { histogram: "value", scatterX: "value", scatterY: "value" },
@@ -2802,11 +3009,11 @@
       },
       focusedId: "", hoverQuantile: null,
     });
-    Object.entries({ incumbents: DATA.incumbents, jobAds: DATA.jobAds }).forEach(([stream, streamRows]) => {
+    Object.entries(allRowsByStream).forEach(([stream, streamRows]) => {
       modifiedWeightIds[stream].clear();
       streamRows.forEach((row) => { inclusion[stream].set(row.id, Boolean(row.defaultIncluded)); customWeights[stream].set(row.id, 1); });
     });
-    refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
+    refs.position.value = state.position; refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === "adjusted"; });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
@@ -2827,13 +3034,37 @@
     return String(value ?? "").replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[char]);
   }
 
+  function activatePosition(key) {
+    if (!POSITION_BY_KEY.has(key)) return;
+    state.position = key;
+    state.stream = isCeoPosition() ? "combined" : "incumbents";
+    state.measure = positionDefinition().defaultMeasure;
+    state.sample = "primary";
+    state.focusedId = "";
+    state.hoverQuantile = null;
+    state.autoBins = true;
+    state.discreteWeights = {};
+    state.weightings.delete("comparability");
+    state.weightings.delete("streamBalanced");
+    clearAnalyticalFilters();
+    positionRowsForReset().forEach((row) => {
+      rowInclusion(row).set(row.id, Boolean(row.defaultIncluded));
+      rowCustomWeights(row).set(row.id, 1);
+      rowModifiedWeights(row).delete(row.id);
+    });
+    applyPreset();
+    configureRanges();
+    buildFilterMenus();
+    renderWeightControls();
+    syncControlsFromState();
+    renderAll();
+  }
+
+  refs.position.addEventListener("change", () => activatePosition(refs.position.value));
   refs.stream.addEventListener("change", () => {
     state.stream = refs.stream.value; state.focusedId = ""; state.autoBins = true;
     if (state.stream === "combined") { state.measure = "base"; refs.measure.value = "base"; }
-    state.filters = {
-      title: null, sourceType: null, tier: null, topic: null, location: null,
-      eaAffinity: null, structure: null,
-    };
+    clearAnalyticalFilters();
     applyPreset(); configureRanges(); buildFilterMenus(); renderWeightControls(); renderAll();
   });
   refs.measure.addEventListener("change", () => {
@@ -2933,6 +3164,7 @@
   tableObserver.observe(refs.tableScroll);
   refs.organizationPreview.addEventListener("pointerenter", () => window.clearTimeout(organizationPreviewHideTimer));
   refs.organizationPreview.addEventListener("pointerleave", scheduleOrganizationPreviewHide);
+  populatePositionSelect();
   const encodedInitialState = new URL(window.location.href).searchParams.get("s");
   if (encodedInitialState) {
     try {

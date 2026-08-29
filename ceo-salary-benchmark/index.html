@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Interactive Rethink Priorities CEO salary benchmark explorer">
+  <meta id="app-description" name="description" content="Interactive Rethink Priorities CEO salary benchmark explorer">
   <link rel="icon" type="image/png" href="assets/rethink-priorities-favicon.png">
   <title>CEO Salary Benchmark · vetr.dev</title>
   <link rel="stylesheet" href="assets/aspekta/variable/font-face.css">
@@ -14,7 +14,7 @@
   <header class="app-header">
     <div>
       <p class="eyebrow">Rethink Priorities</p>
-      <h1>CEO salary benchmark</h1>
+      <h1 id="app-title">CEO salary benchmark</h1>
     </div>
     <div class="header-meta" aria-label="Dataset status">
       <span id="price-basis-status">July 2026 USD</span>
@@ -32,13 +32,22 @@
         <button id="reset-settings" class="text-button" type="button">Reset</button>
       </div>
 
-      <label class="field">
+      <label class="field position-field">
+        <span>Position <button class="info-tooltip" type="button" aria-label="About position benchmarks" data-tooltip="Choose the role family to benchmark. CEO preserves the fully validated incumbent and recruitment analysis. Other roles use named compensation observations reported in Form 990 filings and may have more limited evidence or role-specific defaults. Because one filing can report several people in the same role family, automatic non-CEO weights are balanced so each selected organization has equal total influence; explicit user row multipliers are applied afterward.">?</button></span>
+        <select id="position-select">
+          <option value="ceo" selected>CEO</option>
+        </select>
+        <small id="position-description" class="field-description"></small>
+      </label>
+
+      <label id="stream-field" class="field">
         <span>Evidence stream <button class="info-tooltip" type="button" aria-label="About evidence streams" data-tooltip="Switch between compensation reported for current nonprofit leaders in Form 990 filings and salary ranges advertised for open executive roles.">?</button></span>
         <select id="stream-select">
           <option value="combined" selected>All evidence: 990 base + posting midpoint</option>
           <option value="incumbents">Incumbent Form 990s</option>
           <option value="jobAds">Recruitment postings</option>
         </select>
+        <small id="stream-description" class="field-description"></small>
       </label>
 
       <fieldset class="choice-group field dollar-basis-setting">
@@ -48,10 +57,10 @@
       </fieldset>
 
       <label class="field" id="measure-field">
-        <span>Compensation measure <button class="info-tooltip" type="button" aria-label="About compensation measures" data-tooltip="Schedule J base is the preferred salary measure. Part VII cash is a W-2-style cash proxy; filing total adds reported other compensation.">?</button></span>
+        <span>Compensation measure <button class="info-tooltip" type="button" aria-label="About compensation measures" data-tooltip="Schedule J base is exact base compensation when reported, but Schedule J is threshold-selected and therefore incomplete. Part VII reportable cash combines filing-organization and related-organization W-2/1099-style compensation; it is a more complete cash proxy, not exact salary. Filing total adds reported other compensation.">?</button></span>
         <select id="measure-select">
           <option value="base">Schedule J base</option>
-          <option value="cash">Part VII cash / W-2 proxy</option>
+          <option value="cash">Part VII cash proxy</option>
           <option value="total">Filing total proxy</option>
         </select>
       </label>
@@ -147,7 +156,7 @@
         <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Individual components multiply together, then multiply the editable row weight. Auto-weights is an alternative that derives a single multiplier from the preserved composite peer score, so selecting it clears the individual components to prevent double-counting. The separate 50/50 rule controls the total influence of the two evidence streams.">?</button></div>
         <div class="auto-weight-rule">
           <label><input type="checkbox" value="comparability"> Auto-weights</label>
-          <span>Uses overall peer match</span>
+          <span id="auto-weight-note">Uses overall peer match</span>
         </div>
         <div class="component-group-label">Individual components</div>
         <div id="weighting-components" class="weighting-components">
@@ -270,7 +279,7 @@
       </section>
     </section>
 
-    <aside class="table-panel panel" aria-label="Organization-level evidence table">
+    <aside id="evidence-table-panel" class="table-panel panel" aria-label="Organization-level evidence table">
       <div class="table-scroll" tabindex="0">
         <table id="organization-table">
           <thead>
