@@ -1,6 +1,15 @@
 (() => {
   "use strict";
 
+  const appBaseUrl = new URL(".", document.currentScript?.src || window.location.href);
+  let appBase = document.querySelector("base");
+  if (!appBase) {
+    appBase = document.createElement("base");
+    appBase.dataset.runtimeAppBase = "";
+    document.head.prepend(appBase);
+  }
+  appBase.href = appBaseUrl.href;
+
   const DATA = window.CEO_BENCHMARK_DATA;
   if (!DATA) throw new Error("Benchmark data did not load.");
 

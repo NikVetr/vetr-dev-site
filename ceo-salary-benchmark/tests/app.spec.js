@@ -18,7 +18,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.goto("/ceo-salary-benchmark/");
 
   await expect(page.getByRole("heading", { name: "CEO salary benchmark" })).toBeVisible();
-  await expect(page.locator("base")).toHaveCount(0);
+  await expect(page.locator("base[data-runtime-app-base]")).toHaveCount(1);
+  await expect(page.locator("base[data-runtime-app-base]")).toHaveAttribute(
+    "href",
+    "http://127.0.0.1:4173/ceo-salary-benchmark/",
+  );
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator(".settings-panel .panel-heading + .position-field #position-select")).toHaveCount(1);
   await expect(page.locator(".app-header .eyebrow")).toHaveText("Rethink Priorities");
