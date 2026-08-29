@@ -16,7 +16,14 @@
       : `$${Math.round(value / 1_000)}K`;
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
   const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
-  const COMPOSITE_SCORE_TOOLTIP = "Auto-weights uses the frozen 0–100 non-pay composite, which combines functional/operating-model similarity (30 points), expenses or budget (25), staff count (15), EA affinity (20), CEO structure and independence (7), and geographic/labor-market relevance (3). If staff is missing, available components are renormalized. It was assigned without using compensation. The app converts it to a multiplier of score ÷ 75, capped at 0.25–1.75, before normalizing total weights to mean 1. Select Auto-weights instead of its individual component weights to avoid double-counting those dimensions.";
+  const RP_FORM990_PROFILE = Object.freeze({
+    expenses: Number(DATA.rpReference?.expenses),
+    staff: Number(DATA.rpReference?.staff),
+  });
+  if (!(RP_FORM990_PROFILE.expenses > 0) || !(RP_FORM990_PROFILE.staff > 0)) {
+    throw new Error("The same-source RP Form 990 scale profile is unavailable.");
+  }
+  const AUTO_WEIGHT_TOOLTIP = `Auto-weights uses an outcome-free Gaussian similarity kernel on robust-standardized log Form 990 expenses and staff. Its RP anchors—${compactMoney(RP_FORM990_PROFILE.expenses)} expenses and ${RP_FORM990_PROFILE.staff} employees—use the same filing definitions as peers. The bandwidth reaches the selected effective sample size while keeping the largest normalized filing-kernel weight at or below 6; samples too small to reach the target are weighted uniformly. Missing scale values are median-imputed in log space with a missingness penalty. Recruitment postings remain uniform because their scale fields are not Form 990 measures. Optional evidence-stream balancing and user multipliers are applied afterward and may change the final effective sample size or maximum weight. The predictive audit found that scale improved out-of-sample salary prediction, while the historical composite score did not show a reliable gain; salary-trained category weights remain too unstable for a production default.`;
   const DEFAULT_POSITION = Object.freeze({
     key: "ceo", label: "CEO", pageLabel: "CEO", defaultMeasure: "base",
     description: "The fully validated chief-executive benchmark, including incumbent Form 990s and recruitment postings.",
@@ -83,6 +90,7 @@
     sample: "primary",
     fit: "lognormal",
     weightings: new Set(),
+    autoTargetEss: 35,
     discreteWeights: {},
     targetExpense: RP_WEIGHT_TARGET.expenses,
     targetStaff: RP_WEIGHT_TARGET.staff,
@@ -163,6 +171,7 @@
     scatterControls: $("#scatter-controls"), contourField: $("#contour-field"),
     chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
     comparabilityProfileField: $("#comparability-profile-field"),
+    autoTargetEss: $("#auto-target-ess"), autoTargetEssValue: $("#auto-target-ess-value"),
     autoWeightNote: $("#auto-weight-note"),
     weightProfileSlots: new Map(["comparability", "size", "staff", "recency"].map((key) => [key, $(`#weight-profile-${key}`)])),
     rpScaleReference: $("#rp-scale-reference"),
@@ -201,11 +210,20 @@
 
   function populatePositionSelect() {
     refs.position.replaceChildren();
+    const groups = new Map();
     POSITION_CATALOG.forEach((position) => {
+      const groupLabel = position.menuGroup || (position.key === "ceo" ? "Chief executive" : "Other positions");
+      if (!groups.has(groupLabel)) {
+        const group = document.createElement("optgroup");
+        group.label = groupLabel;
+        groups.set(groupLabel, group);
+        refs.position.append(group);
+      }
       const option = document.createElement("option");
       option.value = position.key;
-      option.textContent = position.label;
-      refs.position.append(option);
+      const count = position.counts?.defaultAvailable ?? position.counts?.defaultIncluded;
+      option.textContent = Number.isFinite(count) ? `${position.label} (n = ${count})` : position.label;
+      groups.get(groupLabel).append(option);
     });
     refs.position.value = state.position;
   }
@@ -576,6 +594,40 @@
     },
   };
 
+  function filingSourceId(row) {
+    return row?.sourceId || String(row?.id || "").split("::", 1)[0];
+  }
+
+  function sameFilingPositionSalary(row, positionKey) {
+    if (!row || !POSITION_BY_KEY.has(positionKey)) return null;
+    if (positionKey === state.position) return salary(row);
+    const sourceId = filingSourceId(row);
+    if (!sourceId) return null;
+    const isRpReference = row.analysisStatus === "reference_not_analyzed" || row.id === DATA.rpReference?.id;
+    const candidates = isRpReference
+      ? activeRpReferences(positionKey)
+      : positionIncumbents(positionKey).filter((candidate) => candidate.defaultIncluded);
+    const matched = candidates.filter((candidate) => (
+      filingSourceId(candidate) === sourceId
+      && candidate.id !== row.id
+      && salaryForBasis(candidate, state.inflationAdjusted) != null
+    ));
+    return matched.length === 1 ? salaryForBasis(matched[0], state.inflationAdjusted) : null;
+  }
+
+  POSITION_CATALOG.forEach((position) => {
+    const key = `position:${position.key}`;
+    numericVariables[key] = {
+      shortLabel: `${position.label} salary`,
+      label: () => `${position.label} compensation (${priceBasisLabel()}; unique same-filing match)`,
+      value: (row) => sameFilingPositionSalary(row, position.key),
+      format: compactMoney,
+      fullFormat: money,
+      logarithmic: false,
+      positionKey: position.key,
+    };
+  });
+
   const axisStateKeys = { histogram: "histogramAxis", scatterX: "scatterXAxis", scatterY: "scatterYAxis" };
 
   function axisExpression(axisKey) { return state[axisStateKeys[axisKey]]; }
@@ -651,10 +703,121 @@
   function analysisAxisKey() { return state.view === "scatter" ? "scatterY" : "histogram"; }
   function analysisItems() { return axisItems(analysisAxisKey()); }
 
-  function baseWeight(row) {
+  function sampleQuantile(values, probability) {
+    const sorted = values.filter(Number.isFinite).sort((a, b) => a - b);
+    if (!sorted.length) return NaN;
+    const position = clamp(probability, 0, 1) * (sorted.length - 1);
+    const lower = Math.floor(position); const upper = Math.ceil(position);
+    const fraction = position - lower;
+    return sorted[lower] * (1 - fraction) + sorted[upper] * fraction;
+  }
+
+  function effectiveSampleSize(weights) {
+    const sum = weights.reduce((total, value) => total + value, 0);
+    const sumSquares = weights.reduce((total, value) => total + value * value, 0);
+    return sumSquares > 0 ? (sum * sum) / sumSquares : 0;
+  }
+
+  function uniformScaleCalibration(candidateRows, status, distances = null) {
+    const distanceMap = distances || new Map(candidateRows.map((row) => [row.id, 0]));
+    return {
+      bandwidth: null,
+      ess: candidateRows.length,
+      maximum: candidateRows.length ? 1 : 0,
+      expenseScale: null,
+      staffScale: null,
+      status,
+      distances: distanceMap,
+      weights: new Map(candidateRows.map((row) => [row.id, 1])),
+    };
+  }
+
+  function scaleSimilarityCalibration(candidateRows) {
+    if (!candidateRows.length) throw new Error("Auto-weight calibration received an empty Form 990 sample.");
+    if (candidateRows.length === 1) return uniformScaleCalibration(candidateRows, "uniform_small_sample");
+    const logExpenses = candidateRows.map((row) => row.expenses > 0 ? Math.log(row.expenses) : NaN);
+    const logStaff = candidateRows.map((row) => row.staff > 0 ? Math.log(row.staff) : NaN);
+    const observedExpenses = logExpenses.filter(Number.isFinite);
+    const observedStaff = logStaff.filter(Number.isFinite);
+    if (observedExpenses.length < 2 || observedStaff.length < 2) {
+      return uniformScaleCalibration(candidateRows, "uniform_insufficient_scale");
+    }
+    const robustScale = (values) => Math.max(
+      (sampleQuantile(values, 0.75) - sampleQuantile(values, 0.25)) / 1.349,
+      0.1,
+    );
+    const expenseScale = robustScale(observedExpenses);
+    const staffScale = robustScale(observedStaff);
+    const expenseMedian = sampleQuantile(observedExpenses, 0.5);
+    const staffMedian = sampleQuantile(observedStaff, 0.5);
+    const rpExpense = Math.log(RP_FORM990_PROFILE.expenses);
+    const rpStaff = Math.log(RP_FORM990_PROFILE.staff);
+    const distances = candidateRows.map((row, index) => {
+      const expenseMissing = !Number.isFinite(logExpenses[index]);
+      const staffMissing = !Number.isFinite(logStaff[index]);
+      const expense = expenseMissing ? expenseMedian : logExpenses[index];
+      const staff = staffMissing ? staffMedian : logStaff[index];
+      const d2 = ((expense - rpExpense) / expenseScale) ** 2
+        + ((staff - rpStaff) / staffScale) ** 2
+        + Number(expenseMissing) + Number(staffMissing);
+      return { row, distance: Math.sqrt(d2) };
+    });
+    const targetEss = Math.min(state.autoTargetEss, distances.length);
+    const distanceMap = new Map(distances.map(({ row, distance }) => [row.id, distance]));
+    if (targetEss === distances.length) {
+      return uniformScaleCalibration(candidateRows, "uniform_target_exceeds_sample", distanceMap);
+    }
+    const metricsAt = (bandwidth) => {
+      const raw = distances.map(({ distance }) => Math.exp(-0.5 * (distance / bandwidth) ** 2));
+      const total = raw.reduce((sum, value) => sum + value, 0);
+      const normalized = total > 0 ? raw.map((value) => (raw.length * value) / total) : raw;
+      return {
+        raw, normalized, ess: effectiveSampleSize(raw),
+        maximum: normalized.length ? Math.max(...normalized) : 0,
+      };
+    };
+    let low = 0.05; let high = 1;
+    while (high < 512) {
+      const metrics = metricsAt(high);
+      if (metrics.ess >= targetEss && metrics.maximum <= 6) break;
+      high *= 2;
+    }
+    const feasible = metricsAt(high);
+    if (feasible.ess + 1e-8 < targetEss || feasible.maximum > 6 + 1e-8) {
+      throw new Error("Auto-weight bandwidth calibration could not satisfy its ESS and maximum-weight constraints.");
+    }
+    for (let iteration = 0; iteration < 60; iteration += 1) {
+      const midpoint = (low + high) / 2;
+      const metrics = metricsAt(midpoint);
+      if (metrics.ess >= targetEss && metrics.maximum <= 6) high = midpoint;
+      else low = midpoint;
+    }
+    const bandwidth = high;
+    const metrics = metricsAt(bandwidth);
+    return {
+      bandwidth, ess: metrics.ess, maximum: metrics.maximum,
+      expenseScale, staffScale,
+      status: "adaptive_kernel",
+      distances: distanceMap,
+      weights: new Map(distances.map(({ row }, index) => [row.id, metrics.normalized[index]])),
+    };
+  }
+
+  function autoWeightCalibrations(candidateRows) {
+    const incumbents = candidateRows.filter((row) => rowStream(row) === "incumbents");
+    return incumbents.length
+      ? new Map([["incumbents", scaleSimilarityCalibration(incumbents)]])
+      : new Map();
+  }
+
+  function baseWeight(row, autoCalibrations = new Map()) {
     const latestYear = Math.max(...rows().map((item) => item.compensationYear || 0));
     let weight = 1;
-    if (state.weightings.has("comparability")) weight *= clamp((row.comparabilityScore || 50) / 75, 0.25, 1.75);
+    if (state.weightings.has("comparability") && rowStream(row) === "incumbents") {
+      const autoWeight = autoCalibrations.get("incumbents")?.weights.get(row.id);
+      if (!Number.isFinite(autoWeight) || autoWeight <= 0) throw new Error(`Missing Auto-weight for ${row.id}.`);
+      weight *= autoWeight;
+    }
     if (state.weightings.has("size")) weight *= row.expenses && row.expenses > 0
       ? Math.exp(-0.5 * (Math.log(row.expenses / state.targetExpense) / state.expenseBandwidth) ** 2) : 0.45;
     if (state.weightings.has("staff")) weight *= row.staff && row.staff > 0
@@ -670,10 +833,14 @@
   }
 
   function weightedSelection() {
-    const selected = rows()
-      .filter((row) => passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id))
+    const candidateRows = rows()
+      .filter((row) => passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id));
+    const autoCalibrations = state.weightings.has("comparability")
+      ? autoWeightCalibrations(candidateRows)
+      : new Map();
+    const selected = candidateRows
       .map((row) => ({
-        row, value: salary(row), automaticWeight: baseWeight(row),
+        row, value: salary(row), automaticWeight: baseWeight(row, autoCalibrations),
         customWeight: rowCustomWeights(row).get(row.id) ?? 1,
       }))
       .filter((item) => item.automaticWeight > 0 && Number.isFinite(item.automaticWeight));
@@ -1207,13 +1374,30 @@
 
   function populateAxisSelector(axisKey) {
     const expression = axisExpression(axisKey);
-    const options = Object.entries(numericVariables).map(([value, definition]) => {
-      const option = document.createElement("option");
-      option.value = value; option.textContent = definition.label();
-      return option;
-    });
-    refs.axisNumerator.replaceChildren(...options.map((option) => option.cloneNode(true)));
-    refs.axisDenominator.replaceChildren(...options.map((option) => option.cloneNode(true)));
+    const buildGroups = () => {
+      const measures = document.createElement("optgroup");
+      measures.label = "Current observation / organization";
+      const positions = document.createElement("optgroup");
+      positions.label = "Unique same-filing position matches";
+      Object.entries(numericVariables).forEach(([value, definition]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        if (definition.positionKey) {
+          const pairCount = positionIncumbents().filter((row) => (
+            row.defaultIncluded && definition.value(row) != null
+          )).length;
+          option.textContent = `${POSITION_BY_KEY.get(definition.positionKey).label} compensation (paired n = ${pairCount})`;
+          option.disabled = pairCount === 0 && value !== expression.numerator && value !== expression.denominator;
+          positions.append(option);
+        } else {
+          option.textContent = definition.label();
+          measures.append(option);
+        }
+      });
+      return [measures, positions];
+    };
+    refs.axisNumerator.replaceChildren(...buildGroups());
+    refs.axisDenominator.replaceChildren(...buildGroups());
     refs.axisNumerator.value = expression.numerator;
     refs.axisDenominator.value = expression.denominator;
     refs.axisNumeratorLabel.textContent = axisMode(axisKey) === "ratio" ? "Numerator" : "Measure";
@@ -2335,6 +2519,12 @@
     if (row.evidenceUpdate) provenanceLinks.push(
       ["Posting evidence update", DATA.categoryExplainers.jobAdEvidenceUpdatesPath],
     );
+    if (row.positionTaxonomy) provenanceLinks.push(
+      ["Standardized-position catalog", DATA.categoryExplainers.positionCatalogPath],
+      ["Position methodology", DATA.categoryExplainers.positionMethodologyPath],
+      ["Position observations", DATA.categoryExplainers.positionObservationsPath],
+      ["Position taxonomy", DATA.categoryExplainers.positionTaxonomyPath],
+    );
     provenanceLinks.forEach(([label, href]) => {
       const anchor = document.createElement("a"); anchor.href = href; anchor.target = "_blank"; anchor.textContent = `${label} ↗`;
       links.append(anchor);
@@ -2386,21 +2576,25 @@
   }
 
   function renderWeightControls() {
-    if (!isCeoPosition()) {
+    if (!isCeoPosition() || state.stream === "jobAds") {
       state.weightings.delete("comparability");
+    }
+    if (!isCeoPosition()) {
       state.weightings.delete("sourceType");
     }
-    if (state.stream !== "combined") state.weightings.delete("streamBalanced");
     refs.weightingComponents.forEach((input) => {
       input.checked = state.weightings.has(input.value);
-      if (input.value === "comparability" || input.value === "sourceType") input.disabled = !isCeoPosition();
+      if (input.value === "comparability") input.disabled = !isCeoPosition() || state.stream === "jobAds";
+      else if (input.value === "sourceType") input.disabled = !isCeoPosition();
       else if (input.value === "streamBalanced") input.disabled = state.stream !== "combined" || !isCeoPosition();
       else input.disabled = false;
       const label = input.closest("label");
       if (label && (input.value === "comparability" || input.value === "sourceType")) {
         label.title = input.disabled
           ? (input.value === "comparability"
-            ? "Unavailable: Auto-weights was designed and frozen for the CEO peer model."
+            ? (isCeoPosition()
+              ? "Unavailable in recruitment-only mode: posting scale fields are not Form 990 measures."
+              : "Unavailable: the validated scale-kernel audit currently covers the CEO benchmark only.")
             : "Unavailable: non-CEO positions currently contain one Form 990 evidence stream only.")
           : "";
       }
@@ -2411,15 +2605,17 @@
     refs.staffTargetField.hidden = !state.weightings.has("staff");
     refs.recencyField.hidden = !state.weightings.has("recency");
     const components = [...state.weightings].filter((key) => key !== "streamBalanced").map((key) => WEIGHT_LABELS[key]);
-    const balanced = state.weightings.has("streamBalanced");
+    const balanced = state.weightings.has("streamBalanced") && state.stream === "combined";
     let baseDescription = components.length
-      ? `Base weight = ${components.join(" × ")}. Missing continuous values receive a 0.45 multiplier.`
+      ? state.weightings.has("comparability")
+        ? `Base weight = adaptive RP Form 990 scale similarity (target filing effective n = ${state.autoTargetEss}); recruitment postings remain uniform.`
+        : `Base weight = ${components.join(" × ")}. Missing manually weighted continuous values receive a 0.45 multiplier.`
       : (isCeoPosition()
         ? "No components selected: equal base weights."
         : "No components selected: automatic weights are equalized by selected organization.");
     if (!isCeoPosition()) {
       if (components.length) baseDescription += " Automatic weights are then equalized by selected organization before any user row multiplier.";
-      baseDescription += " CEO Auto-weights are disabled because the frozen composite score is role-specific.";
+      baseDescription += " CEO Auto-weights are disabled because the validated kernel audit has not been extended to this position.";
     }
     refs.weightingDescription.textContent = balanced
       ? `${baseDescription} Form 990s and recruitment postings are then rescaled to 50/50 total influence.`
@@ -2463,8 +2659,13 @@
     });
   }
 
-  function componentResponse(key, value) {
-    if (key === "comparability") return clamp(value / 75, 0.25, 1.75);
+  function componentResponse(key, value, autoCalibration = null) {
+    if (key === "comparability") {
+      if (!autoCalibration) return 0;
+      return autoCalibration.status === "adaptive_kernel"
+        ? Math.exp(-0.5 * (value / autoCalibration.bandwidth) ** 2)
+        : 1;
+    }
     if (key === "size") return Math.exp(-0.5 * (Math.log(value / state.targetExpense) / state.expenseBandwidth) ** 2);
     if (key === "staff") return Math.exp(-0.5 * (Math.log(value / state.targetStaff) / state.staffBandwidth) ** 2);
     const latestYear = Math.max(...rows().map((row) => row.compensationYear || 0));
@@ -2482,9 +2683,21 @@
       let logarithmic = false;
       let parameter;
       let axisTitle;
+      let autoCalibration = null;
       if (key === "comparability") {
-        values = [0, 100]; format = (value) => value.toFixed(0); parameter = "Score ÷ 75, capped at 0.25–1.75";
-        axisTitle = "Peer match score (0–100)";
+        const candidates = rows().filter((row) => (
+          rowStream(row) === "incumbents"
+          && passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id)
+        ));
+        const calibrations = autoWeightCalibrations(candidates);
+        autoCalibration = calibrations.get("incumbents");
+        if (!autoCalibration) return;
+        values = [0, ...autoCalibration.distances.values()];
+        format = (value) => value.toFixed(1);
+        parameter = autoCalibration.status === "adaptive_kernel"
+          ? `Form 990 stream · target ESS ${state.autoTargetEss} · h ${autoCalibration.bandwidth.toFixed(2)} · achieved ${autoCalibration.ess.toFixed(1)} · max ${autoCalibration.maximum.toFixed(2)}`
+          : `Form 990 stream · uniform weights · n ${autoCalibration.ess} is at or below the target or lacks enough scale variation`;
+        axisTitle = "Robust log-scale distance from RP";
       } else if (key === "size") {
         values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
         parameter = `Target ${compactMoney(state.targetExpense)} · bandwidth ${state.expenseBandwidth.toFixed(2)}`;
@@ -2499,8 +2712,8 @@
         axisTitle = "Evidence year";
       }
       if (!values.length) return;
-      let target = key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : null;
-      const rpReference = key === "size" ? RP_WEIGHT_TARGET.expenses : key === "staff" ? RP_WEIGHT_TARGET.staff : null;
+      let target = key === "comparability" ? 0 : key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : null;
+      const rpReference = key === "comparability" ? 0 : key === "size" ? RP_WEIGHT_TARGET.expenses : key === "staff" ? RP_WEIGHT_TARGET.staff : null;
       const domainValues = [...values, target, rpReference].filter((value) => value != null && Number.isFinite(value));
       const rawMin = Math.min(...domainValues); const rawMax = Math.max(...domainValues);
       if (key === "recency") target = rawMax;
@@ -2512,7 +2725,7 @@
       const samples = Array.from({ length: 81 }, (_, index) => {
         const transformed = domainMin + (index / 80) * domainSpan;
         const value = logarithmic ? Math.exp(transformed) : transformed;
-        return { value, weight: componentResponse(key, value), x: margin.left + (index / 80) * innerWidth };
+        return { value, weight: componentResponse(key, value, autoCalibration), x: margin.left + (index / 80) * innerWidth };
       });
       const maxWeight = Math.max(1, ...samples.map((sample) => sample.weight)) * 1.08;
       const y = (weight) => margin.top + innerHeight - (weight / maxWeight) * innerHeight;
@@ -2523,12 +2736,14 @@
       if (key === "comparability") {
         const help = document.createElement("button");
         help.type = "button"; help.className = "info-tooltip"; help.textContent = "?";
-        help.dataset.tooltip = COMPOSITE_SCORE_TOOLTIP;
+        help.dataset.tooltip = AUTO_WEIGHT_TOOLTIP;
         help.setAttribute("aria-label", "About auto-weights");
         heading.append(help);
       }
       const description = document.createElement("span"); description.textContent = parameter;
-      const referenceDescription = rpReference == null ? "" : `; RP operating target ${format(rpReference)}`;
+      const referenceDescription = rpReference == null ? "" : key === "comparability"
+        ? "; RP distance 0"
+        : `; RP operating target ${format(rpReference)}`;
       const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]} relative weight-response curve${referenceDescription}` });
       const xTicks = Array.from({ length: 4 }, (_, index) => {
         const ratio = index / 3;
@@ -2580,7 +2795,7 @@
         x: 10, y: margin.top + innerHeight / 2, transform: `rotate(-90 10 ${margin.top + innerHeight / 2})`,
         "text-anchor": "middle", class: "weight-profile-axis-title",
       });
-      yTitle.textContent = "Relative multiplier";
+      yTitle.textContent = key === "comparability" ? "Kernel value (0–1)" : "Relative multiplier";
       svg.append(xTitle, yTitle); figure.append(heading, description, svg); refs.weightProfileSlots.get(key).append(figure);
       initializeHelpTooltips(figure);
     });
@@ -2609,7 +2824,7 @@
     refs.streamDescription.textContent = ceo
       ? ""
       : "This position currently uses incumbent compensation reported in Form 990 filings; CEO recruitment postings are not mixed into it.";
-    refs.autoWeightNote.textContent = ceo ? "Uses overall peer match" : "CEO-specific; unavailable for this position";
+    refs.autoWeightNote.textContent = ceo ? "Adaptive Form 990 scale match" : "CEO kernel audit only";
   }
 
   function updateHeadings() {
@@ -2655,10 +2870,11 @@
     refs.expenseBandwidthValue.value = `${state.expenseBandwidth.toFixed(2)}×`;
     refs.staffBandwidthValue.value = `${state.staffBandwidth.toFixed(2)}×`;
     refs.recencyHalfLifeValue.value = `${state.recencyHalfLife.toFixed(1)} years`;
+    refs.autoTargetEssValue.value = state.autoTargetEss;
     refs.binValue.value = state.bins;
   }
 
-  const URL_STATE_VERSION = 6;
+  const URL_STATE_VERSION = 7;
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
@@ -2679,6 +2895,19 @@
   const URL_FIT_KEYS = reverseCodes(URL_FIT_CODES);
   const URL_QUANTILE_KEYS = reverseCodes(URL_QUANTILE_CODES);
   const URL_VARIABLE_KEYS = reverseCodes(URL_VARIABLE_CODES);
+  function encodeVariableKey(key) {
+    if (URL_VARIABLE_CODES[key]) return URL_VARIABLE_CODES[key];
+    if (key.startsWith("position:") && POSITION_BY_KEY.has(key.slice("position:".length))) {
+      return `p:${key.slice("position:".length)}`;
+    }
+    throw new Error(`Unsupported analysis variable: ${key}`);
+  }
+  function decodeVariableKey(token) {
+    if (URL_VARIABLE_KEYS[token]) return URL_VARIABLE_KEYS[token];
+    if (typeof token !== "string" || !token.startsWith("p:")) return "";
+    const key = token.slice(2);
+    return POSITION_BY_KEY.has(key) ? `position:${key}` : "";
+  }
   const allShareRows = [...allRowsByStream.incumbents, ...allRowsByStream.jobAds];
   const shareRowCodes = new Map();
   let urlSyncReady = false;
@@ -2737,19 +2966,22 @@
     if (state.weightings.has("size") && state.expenseBandwidth !== 0.7) parameters.b = state.expenseBandwidth;
     if (state.weightings.has("staff") && state.staffBandwidth !== 0.7) parameters.f = state.staffBandwidth;
     if (state.weightings.has("recency") && state.recencyHalfLife !== 4) parameters.r = state.recencyHalfLife;
+    if (state.weightings.has("comparability") && state.autoTargetEss !== 35) parameters.a = state.autoTargetEss;
     const ranges = {};
     if (state.ranges.salary.low !== state.ranges.salary.min || state.ranges.salary.high !== state.ranges.salary.max) ranges.s = [state.ranges.salary.low, state.ranges.salary.high];
     if (state.ranges.expenses.low !== state.ranges.expenses.min || state.ranges.expenses.high !== state.ranges.expenses.max) ranges.e = [state.ranges.expenses.low, state.ranges.expenses.high];
     if (state.ranges.matchScore.low !== state.ranges.matchScore.min || state.ranges.matchScore.high !== state.ranges.matchScore.max) ranges.m = [state.ranges.matchScore.low, state.ranges.matchScore.high];
     const payload = { v: URL_STATE_VERSION };
-    if (!isCeoPosition()) payload.o = state.position;
     const defaultStream = isCeoPosition() ? "combined" : "incumbents";
     if (state.stream !== defaultStream) payload.e = URL_STREAM_CODES[state.stream];
     if (state.measure !== positionDefinition().defaultMeasure && state.stream === "incumbents") payload.m = URL_MEASURE_CODES[state.measure];
     if (!state.inflationAdjusted) payload.n = 1;
     if (state.sample !== "primary") payload.p = URL_SAMPLE_CODES[state.sample];
     if (state.fit !== "lognormal") payload.g = URL_FIT_CODES[state.fit];
-    const expressionCode = (expression) => `${URL_VARIABLE_CODES[expression.numerator]}${URL_VARIABLE_CODES[expression.denominator]}`;
+    const expressionCode = (expression) => [
+      encodeVariableKey(expression.numerator),
+      encodeVariableKey(expression.denominator),
+    ];
     const quantileAxisKey = analysisAxisKey();
     const quantileMode = axisMode(quantileAxisKey);
     const quantileExpression = axisExpression(quantileAxisKey);
@@ -2778,6 +3010,8 @@
     if (!urlSyncReady) return;
     const url = new URL(window.location.href);
     const payload = sharePayload();
+    if (isCeoPosition()) url.searchParams.delete("position");
+    else url.searchParams.set("position", state.position);
     if (Object.keys(payload).length === 1) url.searchParams.delete("s");
     else url.searchParams.set("s", encodeUrlState(payload));
     history.replaceState(null, "", url);
@@ -2791,6 +3025,7 @@
   function clearUrlState() {
     const url = new URL(window.location.href);
     url.searchParams.delete("s");
+    url.searchParams.delete("position");
     history.replaceState(null, "", url);
   }
 
@@ -2830,6 +3065,7 @@
     refs.expenseBandwidth.value = state.expenseBandwidth;
     refs.staffBandwidth.value = state.staffBandwidth;
     refs.recencyHalfLife.value = state.recencyHalfLife;
+    refs.autoTargetEss.value = state.autoTargetEss;
     refs.bins.value = state.bins;
     refs.quantileGranularity.value = state.quantileGranularity;
     refs.customQuantiles.value = state.customQuantiles;
@@ -2843,8 +3079,8 @@
     updateRangeLabels();
   }
 
-  function expandCompactUrlState(payload) {
-    if (![2, 3, 4, 5, URL_STATE_VERSION].includes(payload?.v)) return payload;
+  function expandCompactUrlState(payload, semanticPosition = "") {
+    if (![2, 3, 4, 5, 6, URL_STATE_VERSION].includes(payload?.v)) return payload;
     const version = payload.v;
     const custom = {};
     (payload.c || []).forEach(([code, value]) => {
@@ -2865,7 +3101,9 @@
     return {
       v: 1,
       a: {
-        pos: version >= 6 && POSITION_BY_KEY.has(payload.o) ? payload.o : "ceo",
+        pos: POSITION_BY_KEY.has(semanticPosition)
+          ? semanticPosition
+          : version >= 6 && POSITION_BY_KEY.has(payload.o) ? payload.o : "ceo",
         s: payload.e ? URL_STREAM_KEYS[payload.e] : version === 2 ? "incumbents" : "combined",
         m: URL_MEASURE_KEYS[payload.m], p: URL_SAMPLE_KEYS[payload.p],
         ia: payload.n !== 1,
@@ -2873,7 +3111,7 @@
         am: payload.a === 1 ? "ratio" : "value",
         vw: payload.l === 1 ? "scatter" : "histogram", hx: payload.h, sx: payload.j, sy: payload.k,
         w: [...String(payload.w || "")].map((code) => URL_WEIGHT_KEYS[code]).filter(Boolean),
-        te: payload.x?.e, ts: payload.x?.s, eb: payload.x?.b, sb: payload.x?.f, rh: payload.x?.r,
+        te: payload.x?.e, ts: payload.x?.s, eb: payload.x?.b, sb: payload.x?.f, rh: payload.x?.r, ae: payload.x?.a,
         q: URL_QUANTILE_KEYS[payload.q], qq: payload.z,
       },
       d: discrete,
@@ -2884,10 +3122,10 @@
     };
   }
 
-  function restoreUrlState(payload) {
+  function restoreUrlState(payload, semanticPosition = "") {
     const sourceVersion = payload?.v;
-    const compactVersion = [2, 3, 4, 5, URL_STATE_VERSION].includes(payload?.v);
-    payload = expandCompactUrlState(payload);
+    const compactVersion = [2, 3, 4, 5, 6, URL_STATE_VERSION].includes(payload?.v);
+    payload = expandCompactUrlState(payload, semanticPosition);
     if (!payload || payload.v !== 1 || typeof payload.a !== "object") throw new Error("Unsupported or incomplete state version.");
     const analysis = payload.a;
     const enumValue = (value, allowed, fallback) => allowed.includes(value) ? value : fallback;
@@ -2901,11 +3139,22 @@
     state.fit = enumValue(analysis.d, ["empirical", "lognormal", "gamma"], state.fit);
     const validWeights = [...DISCRETE_WEIGHT_KEYS, "comparability", "size", "staff", "recency", "streamBalanced"];
     state.weightings = new Set((Array.isArray(analysis.w) ? analysis.w : []).filter((value) => validWeights.includes(value)));
+    if (state.weightings.has("comparability")) {
+      const preserveStreamBalance = state.weightings.has("streamBalanced");
+      state.weightings = new Set(["comparability"]);
+      if (preserveStreamBalance) state.weightings.add("streamBalanced");
+    }
+    if (!isCeoPosition()) {
+      state.weightings.delete("comparability");
+      state.weightings.delete("sourceType");
+      state.weightings.delete("streamBalanced");
+    } else if (state.stream === "jobAds") state.weightings.delete("comparability");
     state.targetExpense = finiteNumber(analysis.te, state.targetExpense, 1_000_000, 100_000_000);
     state.targetStaff = finiteNumber(analysis.ts, state.targetStaff, 1, 1000);
     state.expenseBandwidth = finiteNumber(analysis.eb, state.expenseBandwidth, 0.2, 1.5);
     state.staffBandwidth = finiteNumber(analysis.sb, state.staffBandwidth, 0.2, 1.5);
     state.recencyHalfLife = finiteNumber(analysis.rh, state.recencyHalfLife, 1, 12);
+    state.autoTargetEss = Math.round(finiteNumber(analysis.ae, state.autoTargetEss, 20, 60));
     state.bins = Math.round(finiteNumber(analysis.b, state.bins, 2, 200));
     state.autoBins = compactVersion;
     state.view = enumValue(analysis.vw, ["histogram", "scatter"], state.view);
@@ -2916,6 +3165,12 @@
       Object.keys(state.axisModes).forEach((axisKey) => { state.axisModes[axisKey] = restoredAxisMode; });
     } else state.axisModes[state.view === "scatter" ? "scatterY" : "histogram"] = restoredAxisMode;
     const decodeExpression = (encoded, fallback) => {
+      if (Array.isArray(encoded) && encoded.length === 2) {
+        const numerator = decodeVariableKey(encoded[0]);
+        const denominator = decodeVariableKey(encoded[1]);
+        if (numericVariables[numerator] && numericVariables[denominator]) return { numerator, denominator };
+        return fallback;
+      }
       if (typeof encoded !== "string") return fallback;
       if (encoded.length === 2 && URL_VARIABLE_KEYS[encoded[0]] && URL_VARIABLE_KEYS[encoded[1]]) {
         return { numerator: URL_VARIABLE_KEYS[encoded[0]], denominator: URL_VARIABLE_KEYS[encoded[1]] };
@@ -2987,7 +3242,7 @@
     const resumeUrlSync = urlSyncReady;
     urlSyncReady = false;
     Object.assign(state, {
-      position: "ceo", stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {},
+      position: "ceo", stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {}, autoTargetEss: 35,
       targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
       bins: 20, autoBins: true, view: "histogram",
       axisModes: { histogram: "value", scatterX: "value", scatterY: "value" },
@@ -3021,6 +3276,7 @@
     refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
     refs.targetExpense.value = RP_WEIGHT_TARGET.expenses / 1_000_000; refs.targetStaff.value = RP_WEIGHT_TARGET.staff;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
+    refs.autoTargetEss.value = 35; refs.autoTargetEssValue.value = 35;
     refs.quantileGranularity.value = "quintiles";
     refs.markCurve.checked = true;
     refs.customQuantiles.value = state.customQuantiles;
@@ -3091,10 +3347,10 @@
   refs.fit.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.fit = radio.value; renderAll(); } }));
   refs.weightingComponents.forEach((input) => input.addEventListener("change", () => {
     if (input.checked && input.value === "comparability") {
-      const balanceStreams = state.weightings.has("streamBalanced");
+      const preserveStreamBalance = state.weightings.has("streamBalanced");
       state.weightings.clear();
       state.weightings.add("comparability");
-      if (balanceStreams) state.weightings.add("streamBalanced");
+      if (preserveStreamBalance) state.weightings.add("streamBalanced");
     } else if (input.checked) {
       if (input.value !== "streamBalanced") state.weightings.delete("comparability");
       state.weightings.add(input.value);
@@ -3106,6 +3362,7 @@
   refs.expenseBandwidth.addEventListener("input", () => { state.expenseBandwidth = Number(refs.expenseBandwidth.value); renderAll(); });
   refs.staffBandwidth.addEventListener("input", () => { state.staffBandwidth = Number(refs.staffBandwidth.value); renderAll(); });
   refs.recencyHalfLife.addEventListener("input", () => { state.recencyHalfLife = Number(refs.recencyHalfLife.value); renderAll(); });
+  refs.autoTargetEss.addEventListener("input", () => { state.autoTargetEss = Number(refs.autoTargetEss.value); renderAll(); });
   refs.bins.addEventListener("input", () => { state.autoBins = false; state.bins = Number(refs.bins.value); renderAll(); });
   refs.quantileGranularity.addEventListener("change", () => { state.quantileGranularity = refs.quantileGranularity.value; renderQuantiles(); renderChart(); });
   refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); renderChart(); });
@@ -3165,10 +3422,12 @@
   refs.organizationPreview.addEventListener("pointerenter", () => window.clearTimeout(organizationPreviewHideTimer));
   refs.organizationPreview.addEventListener("pointerleave", scheduleOrganizationPreviewHide);
   populatePositionSelect();
-  const encodedInitialState = new URL(window.location.href).searchParams.get("s");
-  if (encodedInitialState) {
+  const initialUrl = new URL(window.location.href);
+  const encodedInitialState = initialUrl.searchParams.get("s");
+  const semanticPosition = initialUrl.searchParams.get("position") || "";
+  if (encodedInitialState || POSITION_BY_KEY.has(semanticPosition)) {
     try {
-      restoreUrlState(decodeUrlState(encodedInitialState));
+      restoreUrlState(encodedInitialState ? decodeUrlState(encodedInitialState) : { v: URL_STATE_VERSION }, semanticPosition);
     } catch (error) {
       applyPreset();
       configureRanges();

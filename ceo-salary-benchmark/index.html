@@ -33,7 +33,7 @@
       </div>
 
       <label class="field position-field">
-        <span>Position <button class="info-tooltip" type="button" aria-label="About position benchmarks" data-tooltip="Choose the role family to benchmark. CEO preserves the fully validated incumbent and recruitment analysis. Other roles use named compensation observations reported in Form 990 filings and may have more limited evidence or role-specific defaults. Because one filing can report several people in the same role family, automatic non-CEO weights are balanced so each selected organization has equal total influence; explicit user row multipliers are applied afterward.">?</button></span>
+        <span>Position <button class="info-tooltip" type="button" aria-label="About position benchmarks" data-tooltip="Choose a standardized job title, such as COO or Research Director. Equivalent abbreviations are consolidated, but seniority levels and genuinely combined titles are kept separate. CEO preserves the validated filing and recruitment evidence. Other positions use named Form 990 compensation rows; the n shown is the default salary sample, and exploratory titles have fewer than 12 organizations or 15 observations. When one filing reports several holders of the same title, organization balancing prevents that employer from receiving extra automatic influence.">?</button></span>
         <select id="position-select">
           <option value="ceo" selected>CEO</option>
         </select>
@@ -153,10 +153,10 @@
       </label>
 
       <section class="weighting-field field" role="group" aria-labelledby="weighting-components-title">
-        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Individual components multiply together, then multiply the editable row weight. Auto-weights is an alternative that derives a single multiplier from the preserved composite peer score, so selecting it clears the individual components to prevent double-counting. The separate 50/50 rule controls the total influence of the two evidence streams.">?</button></div>
+        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Individual components multiply together, then multiply the editable row weight. Auto-weights is an alternative Form 990 scale-similarity rule calibrated to a target effective sample size, so selecting it clears the individual components to prevent double-counting. Recruitment postings remain uniform unless you select another rule; the separate 50/50 evidence-stream balance remains optional.">?</button></div>
         <div class="auto-weight-rule">
           <label><input type="checkbox" value="comparability"> Auto-weights</label>
-          <span id="auto-weight-note">Uses overall peer match</span>
+          <span id="auto-weight-note">Adaptive Form 990 scale match</span>
         </div>
         <div class="component-group-label">Individual components</div>
         <div id="weighting-components" class="weighting-components">
@@ -172,12 +172,16 @@
         </div>
         <div class="stream-balance-rule">
           <label><input type="checkbox" value="streamBalanced"> Equalize evidence streams (50/50)</label>
-          <button class="info-tooltip" type="button" aria-label="About equalizing evidence streams" data-tooltip="Available in All evidence. After all other weights are applied, it rescales Form 990s and recruitment postings so each stream contributes exactly half of the total analytical weight. This prevents the larger Form 990 sample from dominating solely because it has more observations; it does not change salaries or row inclusion.">?</button>
+          <button class="info-tooltip" type="button" aria-label="About equalizing evidence streams" data-tooltip="Available in All evidence. After all automatic and user weights are applied, it rescales Form 990s and recruitment postings so each stream contributes exactly half of total analytical weight. With very few selected rows in one stream this deliberate mixture can produce a final weight above Auto-weights' filing-kernel cap; the chart's effective n and table weights show that consequence.">?</button>
         </div>
       </section>
       <small id="weighting-description" class="weighting-description field-description">No components selected: equal base weights.</small>
 
       <section id="comparability-profile-field" class="weight-component-control" hidden aria-label="Auto-weight response">
+        <label class="field compact">
+          <span>Target effective n <button class="info-tooltip" type="button" aria-label="About target effective sample size" data-tooltip="Sets how concentrated the incumbent Form 990 kernel may be. The app chooses the narrowest robust expense-and-staff similarity kernel whose effective sample size reaches this target and whose largest normalized filing weight is at most 6. If fewer filing rows remain, they receive uniform weights. Recruitment postings, optional stream balancing, axis-specific missingness, and user multipliers are applied outside this calibration; the chart reports the final effective n.">?</button> <output id="auto-target-ess-value">35</output></span>
+          <input id="auto-target-ess" type="range" min="20" max="60" step="1" value="35">
+        </label>
         <div id="weight-profile-comparability" class="weight-profile-slot"></div>
       </section>
 

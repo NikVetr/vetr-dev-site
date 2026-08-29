@@ -74,7 +74,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   }));
   expect(explainerCoverage).toEqual({
     definitions: 283,
-    rows: 181,
+    rows: 182,
     filingReviews: 122,
     packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
   });
@@ -92,7 +92,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     };
   });
   expect(wikipediaCoverage).toEqual({
-    organizations: 178,
+    organizations: 179,
     mapped: 98,
     knownUnsafeMappings: ["", "", "", ""],
   });
@@ -429,7 +429,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator(".table-scroll").evaluate((element) => { element.scrollLeft = element.scrollWidth; });
   await page.locator('[data-filter-menu="topic"] summary').click();
   const areaGroups = page.locator('[data-filter-menu="topic"] .filter-group');
-  await expect(areaGroups).toHaveCount(10);
+  await expect(areaGroups).toHaveCount(11);
   await page.locator(".table-panel").screenshot({ path: "tmp/app-area-filter-groups.png" });
   const areaValues = await page.locator('[data-filter-menu="topic"] .filter-group > label:not(.filter-group-heading) span').allTextContents();
   expect(areaValues.some((value) => /\$|\bbudget\b|\bstaff\b/i.test(value))).toBe(false);
@@ -560,10 +560,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#comparability-profile-field")).toHaveCSS("padding-left", "0px");
   await expect(page.locator("#comparability-profile-field")).toHaveCSS("border-left-width", "0px");
   await page.getByRole("button", { name: "About auto-weights" }).hover();
-  await expect(page.locator("#help-tooltip")).toContainText("functional/operating-model similarity (30 points)");
-  await expect(page.locator("#help-tooltip")).toContainText("assigned without using compensation");
-  await expect(page.locator("#help-tooltip")).toContainText("score ÷ 75");
-  await expect(page.locator("#help-tooltip")).toContainText("avoid double-counting");
+  await expect(page.locator("#help-tooltip")).toContainText("outcome-free Gaussian similarity kernel");
+  await expect(page.locator("#help-tooltip")).toContainText("robust-standardized log Form 990 expenses and staff");
+  await expect(page.locator("#help-tooltip")).toContainText("same filing definitions as peers");
+  await expect(page.locator("#help-tooltip")).toContainText("selected effective sample size");
+  await expect(page.locator("#help-tooltip")).toContainText("at or below 6");
+  await expect(page.locator("#help-tooltip")).toContainText("salary-trained category weights remain too unstable");
   await page.locator('#weighting-components input[value="size"]').check();
   await expect(page.locator('.auto-weight-rule input[value="comparability"]')).not.toBeChecked();
   await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
@@ -762,14 +764,15 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".method-note")).toHaveCount(0);
   await expect(page.locator("#stat-n")).toHaveText("125");
   await page.locator('[data-filter-menu="sourceType"] summary').click();
-  await expect(page.locator('[data-filter-menu="sourceType"] .filter-options input')).toHaveCount(2);
+  await expect(page.locator('[data-filter-menu="sourceType"] .filter-options input')).toHaveCount(3);
   await page.locator('#weighting-components input[value="sourceType"]').check();
-  await expect(page.getByLabel("Evidence stream multiplier for Form 990")).toHaveValue("1");
+  await expect(page.getByLabel("Evidence stream multiplier for Form 990", { exact: true })).toHaveValue("1");
+  await expect(page.getByLabel("Evidence stream multiplier for Form 990-EZ")).toHaveValue("1");
   await expect(page.getByLabel("Evidence stream multiplier for Job posting")).toHaveValue("0.8");
   await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeEnabled();
   expect(await page.locator('.stream-balance-rule input[value="streamBalanced"]').evaluate((input) => input.closest("#weighting-components"))).toBeNull();
   await page.getByRole("button", { name: "About equalizing evidence streams" }).hover();
-  await expect(page.locator("#help-tooltip")).toContainText("exactly half of the total analytical weight");
+  await expect(page.locator("#help-tooltip")).toContainText("exactly half of total analytical weight");
   await page.locator('.stream-balance-rule input[value="streamBalanced"]').check();
   await expect(page.locator("#weighting-description")).toContainText("rescaled to 50/50 total influence");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
@@ -928,7 +931,43 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator("#axis-selector-title")).toHaveText("Histogram axis");
   await expect(page.locator("#axis-numerator-label")).toHaveText("Measure");
   await expect(page.locator("#axis-denominator-field")).toBeHidden();
-  await expect(page.locator("#axis-numerator option")).toHaveCount(6);
+  const positionOptionCount = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog.length);
+  const currentMeasureOptions = page.locator('#axis-numerator optgroup[label="Current observation / organization"] option');
+  const sameFilingPositionOptions = page.locator('#axis-numerator optgroup[label="Unique same-filing position matches"] option');
+  const currentMeasureOptionCount = await currentMeasureOptions.count();
+  expect(currentMeasureOptionCount).toBeGreaterThan(0);
+  await expect(sameFilingPositionOptions).toHaveCount(positionOptionCount);
+  await expect(page.locator("#axis-numerator option")).toHaveCount(currentMeasureOptionCount + positionOptionCount);
+  const expectedCeoCooBasePairs = await page.evaluate(() => {
+    const data = window.CEO_BENCHMARK_DATA;
+    const filingSourceId = (row) => row.sourceId || String(row.id || "").split("::", 1)[0];
+    const coosBySource = new Map();
+    (data.positionObservations.coo || [])
+      .filter((row) => row.defaultIncluded && row.salary?.base > 0)
+      .forEach((row) => {
+        const sourceId = filingSourceId(row);
+        coosBySource.set(sourceId, [...(coosBySource.get(sourceId) || []), row]);
+      });
+    return data.incumbents.filter((row) => (
+      row.defaultIncluded
+      && row.salary?.base > 0
+      && (coosBySource.get(filingSourceId(row)) || []).length === 1
+    )).length;
+  });
+  expect(expectedCeoCooBasePairs).toBe(22);
+  await expect(page.locator('#axis-numerator option[value="position:coo"]'))
+    .toHaveText(`COO compensation (paired n = ${expectedCeoCooBasePairs})`);
+  await page.locator("#axis-selector-close").click();
+  await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
+  await horizontalAxis().click();
+  await page.locator("#axis-denominator").selectOption("position:coo");
+  await expect(page.locator("#stat-n")).toHaveText(String(expectedCeoCooBasePairs));
+  await expect(page.locator("#salary-chart")).toContainText("Salary / COO salary");
+  await page.locator(".chart-panel").screenshot({ path: "tmp/app-ceo-coo-ratio.png" });
+  await horizontalAxis().click();
+  await page.locator("#axis-denominator").selectOption("expenses");
+  await page.locator('input[name="histogram-axis-mode"][value="value"]').check();
+  await horizontalAxis().click();
   await page.locator("#axis-numerator").selectOption("expenses");
   await expect(page.locator("#salary-chart")).toContainText("Annual expenses");
   await expect(horizontalAxis()).not.toContainText("log scale");
@@ -1102,6 +1141,29 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await expect(page.locator('input[name="dollar-basis"][value="adjusted"]')).toBeChecked();
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
 
+  await page.locator('.auto-weight-rule input[value="comparability"]').check();
+  await page.locator("#auto-target-ess").fill("45");
+  await expect.poll(() => {
+    const encoded = new URL(page.url()).searchParams.get("s");
+    return encoded ? JSON.parse(Buffer.from(encoded, "base64url").toString()).x?.a : null;
+  }).toBe(45);
+  await page.reload();
+  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeChecked();
+  await expect(page.locator("#auto-target-ess")).toHaveValue("45");
+  await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).not.toBeChecked();
+  await page.locator("#reset-settings").click();
+
+  const conflictingAutoV7 = Buffer.from(JSON.stringify({ v: 7, w: "ceb" })).toString("base64url");
+  await page.goto(`/?s=${conflictingAutoV7}`);
+  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeChecked();
+  await expect(page.locator('#weighting-components input[value="size"]')).not.toBeChecked();
+  await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
+  const inapplicablePostingAutoV7 = Buffer.from(JSON.stringify({ v: 7, e: "j", w: "c" })).toString("base64url");
+  await page.goto(`/?s=${inapplicablePostingAutoV7}`);
+  await expect(page.locator("#stream-select")).toHaveValue("jobAds");
+  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).not.toBeChecked();
+  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeDisabled();
+
   const legacyV2 = Buffer.from(JSON.stringify({ v: 2 })).toString("base64url");
   await page.goto(`/?s=${legacyV2}`);
   await expect(page.locator("#stream-select")).toHaveValue("incumbents");
@@ -1134,17 +1196,73 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test("position families switch evidence, labels, controls, and compact shared state", async ({ page }) => {
+test("Auto-weights remain explicit and stable for small filing samples and stream changes", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  const auto = page.locator('.auto-weight-rule input[value="comparability"]');
+  const balance = page.locator('.stream-balance-rule input[value="streamBalanced"]');
+
+  await auto.check();
+  await expect(balance).not.toBeChecked();
+  await expect(page.locator("#weight-profile-comparability")).toContainText("Form 990 stream");
+  await expect(page.locator("#weight-profile-comparability")).toContainText("Kernel value (0–1)");
+  const automaticWeights = await page.locator("tbody tr:not(.is-excluded) .weight-input:not(.is-user-modified)")
+    .evaluateAll((inputs) => inputs.map((input) => Number(input.value)));
+  expect(automaticWeights.reduce((sum, value) => sum + value, 0) / automaticWeights.length).toBeCloseTo(1, 1);
+  expect(Math.max(...automaticWeights)).toBeLessThanOrEqual(6.01);
+
+  await page.locator("#stream-select").selectOption("incumbents");
+  const narrowSample = await page.evaluate(() => {
+    const salaries = window.CEO_BENCHMARK_DATA.incumbents
+      .filter((row) => row.defaultIncluded && row.salary?.base > 0)
+      .map((row) => row.salary.base)
+      .sort((a, b) => b - a);
+    const cutoff = Math.floor(salaries[Math.min(4, salaries.length - 1)] / 5_000) * 5_000;
+    return { cutoff, expected: salaries.filter((value) => value >= cutoff).length };
+  });
+  expect(narrowSample.expected).toBeGreaterThan(0);
+  expect(narrowSample.expected).toBeLessThan(20);
+  await page.locator("#salary-filter-summary").click();
+  await page.locator("#salary-range-min").fill(String(narrowSample.cutoff));
+  await expect(page.locator("#stat-n")).toHaveText(String(narrowSample.expected));
+  await expect(page.locator("#weight-profile-comparability")).toContainText("uniform weights");
+
+  await page.locator("#stream-select").selectOption("combined");
+  await balance.check();
+  await page.locator("#stream-select").selectOption("incumbents");
+  await expect(balance).toBeChecked();
+  await expect(balance).toBeDisabled();
+  await page.locator("#stream-select").selectOption("combined");
+  await expect(balance).toBeChecked();
+  await expect(balance).toBeEnabled();
+  await page.locator("#stream-select").selectOption("jobAds");
+  await expect(auto).not.toBeChecked();
+  await expect(auto).toBeDisabled();
+  await expect(auto.locator("xpath=..")).toHaveAttribute("title", /posting scale fields are not Form 990 measures/i);
+  expect(errors).toEqual([]);
+});
+
+test("standardized positions switch evidence, labels, controls, and semantic shared state", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
 
   const catalog = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog || []);
   const positions = new Map(catalog.map((position) => [position.key, position]));
-  expect([...positions.keys()]).toEqual(expect.arrayContaining(["ceo", "finance", "operations"]));
+  expect([...positions.keys()]).toEqual(expect.arrayContaining([
+    "ceo", "coo", "cfo", "chief_of_staff", "senior_researcher", "program_director", "research_director",
+  ]));
+  for (const staleFamilyKey of ["finance", "operations", "programs", "research"]) {
+    expect([...positions.keys()]).not.toContain(staleFamilyKey);
+  }
   await expect(page.locator("#position-select option")).toHaveCount(catalog.length);
+  for (const position of catalog) {
+    await expect(page.locator(`#position-select option[value="${position.key}"]`))
+      .toHaveText(`${position.label} (n = ${position.counts.defaultAvailable})`);
+  }
 
-  for (const key of ["finance", "operations"]) {
+  for (const key of ["coo", "program_director"]) {
     const position = positions.get(key);
     let customizedRowId = "";
     const expected = await page.evaluate((positionKey) => {
@@ -1178,7 +1296,7 @@ test("position families switch evidence, labels, controls, and compact shared st
     await expect(page.locator("tbody .rp-reference-row")).toHaveCount(expected.rpReferences);
     await expect(page.locator("tbody tr[data-id] .role-holder").first()).not.toHaveText("");
     await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeDisabled();
-    await expect(page.locator("#auto-weight-note")).toContainText("CEO-specific");
+    await expect(page.locator("#auto-weight-note")).toContainText("CEO kernel audit only");
     const sourceTypeWeight = page.locator("#weighting-components input[value='sourceType']");
     await expect(sourceTypeWeight).toBeDisabled();
     await expect(sourceTypeWeight.locator("xpath=..")).toHaveAttribute(
@@ -1195,11 +1313,11 @@ test("position families switch evidence, labels, controls, and compact shared st
     if (expected.rpReferences) {
       await expect(page.locator(".rp-chart-marker")).toHaveCount(expected.rpReferences);
       await expect(page.locator("tbody .rp-reference-row input")).toHaveCount(0);
-      await page.locator(".rp-chart-marker").first().hover();
+      await page.locator(".rp-chart-marker").first().focus();
       await expect(page.locator("#chart-tooltip")).toContainText("RP reference only");
     }
 
-    if (key === "finance") {
+    if (key === "program_director") {
       const firstEvidenceRow = page.locator("tbody tr[data-id]").first();
       const firstEvidenceId = await firstEvidenceRow.getAttribute("data-id");
       const firstEvidence = await page.evaluate(({ positionKey, rowId }) => {
@@ -1232,10 +1350,10 @@ test("position families switch evidence, labels, controls, and compact shared st
       await page.locator('#weighting-components input[value="staff"]').uncheck();
       await page.locator(".settings-panel").evaluate((panel) => { panel.scrollTop = 0; });
       await page.locator(".table-scroll").evaluate((panel) => { panel.scrollLeft = 0; });
-      await page.screenshot({ path: "tmp/app-position-finance.png", fullPage: true });
+      await page.screenshot({ path: "tmp/app-position-program-director.png", fullPage: true });
 
       const customTarget = await page.evaluate(() => {
-        const rows = window.CEO_BENCHMARK_DATA.positionObservations.finance
+        const rows = window.CEO_BENCHMARK_DATA.positionObservations.program_director
           .filter((row) => row.defaultIncluded && row.salary.cash > 0);
         const counts = rows.reduce((result, row) => ({ ...result, [row.organization]: (result[row.organization] || 0) + 1 }), {});
         const row = rows.find((candidate) => counts[candidate.organization] > 1);
@@ -1259,7 +1377,9 @@ test("position families switch evidence, labels, controls, and compact shared st
     await page.locator("#measure-select").selectOption(position.defaultMeasure);
     await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultCash));
 
-    await expect.poll(() => new URL(page.url()).searchParams.get("s")).not.toBeNull();
+    await expect.poll(() => new URL(page.url()).searchParams.get("position")).toBe(key);
+    if (customizedRowId) await expect.poll(() => new URL(page.url()).searchParams.get("s")).not.toBeNull();
+    else await expect.poll(() => new URL(page.url()).searchParams.has("s")).toBe(false);
     const sharedUrl = page.url();
     expect(sharedUrl.length).toBeLessThan(500);
     await page.reload();
@@ -1272,9 +1392,9 @@ test("position families switch evidence, labels, controls, and compact shared st
     }
   }
 
-  await page.locator("#position-select").selectOption("programs");
+  await page.locator("#position-select").selectOption("policy_director");
   const supportedClassification = await page.evaluate(() => {
-    const row = window.CEO_BENCHMARK_DATA.positionObservations.programs
+    const row = window.CEO_BENCHMARK_DATA.positionObservations.policy_director
       .find((item) => item.positionTaxonomy?.classificationSource);
     return {
       id: row.id,
@@ -1297,6 +1417,14 @@ test("position families switch evidence, labels, controls, and compact shared st
   await expect(page.locator("#stream-select")).toBeEnabled();
   await expect(page.locator("#measure-select")).toHaveValue("base");
   await expect(page.locator("#app-title")).toHaveText("CEO salary benchmark");
+  expect(new URL(page.url()).searchParams.has("s")).toBe(false);
+  expect(new URL(page.url()).searchParams.has("position")).toBe(false);
+
+  await page.goto("/?position=coo");
+  await expect(page.locator("#position-select")).toHaveValue("coo");
+  await expect(page.locator("#measure-select")).toHaveValue("cash");
+  await expect(page.locator("#stat-n")).toHaveText("28");
+  expect(new URL(page.url()).searchParams.get("position")).toBe("coo");
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
   expect(errors).toEqual([]);
 });
