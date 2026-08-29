@@ -15,7 +15,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
       } } } }),
     });
   });
-  await page.goto("/");
+  await page.goto("/ceo-salary-benchmark/");
 
   await expect(page.getByRole("heading", { name: "CEO salary benchmark" })).toBeVisible();
   await expect(page.locator("#position-select")).toHaveValue("ceo");
@@ -63,6 +63,39 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#help-tooltip")).toContainText("333.918");
   await expect(page.locator("#stat-n")).toHaveText("125");
   await expect(page.locator(".bar-block")).toHaveCount(125);
+  const screenedRosterIntegration = await page.evaluate(() => {
+    const incumbents = window.CEO_BENCHMARK_DATA.incumbents;
+    const byOrganization = (organization) => incumbents.filter((row) => row.organization === organization);
+    return {
+      projectHealthyChildren: byOrganization("Project Healthy Children").map((row) => ({
+        executive: row.executive, title: row.title, nominalSalary: row.nominalSalary,
+        expenses: row.expenses, staff: row.staff, defaultIncluded: row.defaultIncluded,
+        cachedSource: row.cachedSource,
+      })),
+      giveWell: byOrganization("GiveWell").map((row) => ({
+        nominalSalary: row.nominalSalary, defaultIncluded: row.defaultIncluded,
+      })),
+      copenhagen: byOrganization("Copenhagen Consensus Center").map((row) => ({
+        nominalSalary: row.nominalSalary, defaultIncluded: row.defaultIncluded,
+      })),
+    };
+  });
+  expect(screenedRosterIntegration).toEqual({
+    projectHealthyChildren: [{
+      executive: "FELIX BROOKS-CHURCH", title: "CEO",
+      nominalSalary: { base: 97072, cash: 97072, total: 213840 },
+      expenses: 5867621, staff: 3, defaultIncluded: true,
+      cachedSource: "evidence/original/src-990-ext-project-healthy-children.pdf",
+    }],
+    giveWell: [{
+      nominalSalary: { base: 423600, cash: 424805, total: 463395 },
+      defaultIncluded: false,
+    }],
+    copenhagen: [{
+      nominalSalary: { base: 435166, cash: 497770, total: 497770 },
+      defaultIncluded: false,
+    }],
+  });
   const explainerCoverage = await page.evaluate(() => ({
     definitions: Object.values(window.CEO_BENCHMARK_DATA.categoryExplainers.definitions)
       .reduce((total, field) => total + Object.keys(field).length, 0),
@@ -74,7 +107,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   }));
   expect(explainerCoverage).toEqual({
     definitions: 283,
-    rows: 182,
+    rows: 184,
     filingReviews: 122,
     packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
   });
@@ -92,11 +125,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     };
   });
   expect(wikipediaCoverage).toEqual({
-    organizations: 179,
-    mapped: 98,
+    organizations: 181,
+    mapped: 100,
     knownUnsafeMappings: ["", "", "", ""],
   });
-  const methodologyResponse = await page.request.get("/benchmark/deliverables/category_explainers/methodology_notes.md");
+  const methodologyResponse = await page.request.get("/ceo-salary-benchmark/benchmark/deliverables/category_explainers/methodology_notes.md");
   expect(methodologyResponse.ok()).toBe(true);
   expect(await methodologyResponse.text()).toContain("Classification layers");
   const ssrcClassifications = await page.evaluate(() => {
@@ -386,7 +419,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#sample-description")).toContainText("validated analysis");
   await page.locator("#sample-select").selectOption("sensitivity");
   await expect(page.locator("#sample-description")).toContainText("sensitivity-only");
-  await expect(page.locator("#stat-n")).toHaveText("131");
+  await expect(page.locator("#stat-n")).toHaveText("133");
   await page.locator("#sample-select").selectOption("clean");
   await expect(page.locator("#sample-description")).toContainText("structural");
   await page.locator("#reset-settings").click();
@@ -821,7 +854,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 });
 
 test("desktop and narrow layouts render", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/ceo-salary-benchmark/");
   const scrollingPanel = page.locator(".settings-panel");
   const overflowPanel = await scrollingPanel.evaluate((element) => ({
     width: element.clientWidth, scrollHeight: element.scrollHeight, clientHeight: element.clientHeight,
@@ -902,7 +935,7 @@ test("desktop and narrow layouts render", async ({ page }) => {
 test("clickable value and ratio axes drive plots, fits, quantiles, and correlations", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("/ceo-salary-benchmark/");
 
   const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
   const verticalAxis = () => page.locator('.axis-variable-control[aria-label^="Change vertical"]');
@@ -1082,7 +1115,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
 test("weights and compact shared URLs round-trip", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("/ceo-salary-benchmark/");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
   await page.locator("#chart-color").selectOption("structure");
   await page.locator("#mark-curve").uncheck();
@@ -1154,42 +1187,42 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await page.locator("#reset-settings").click();
 
   const conflictingAutoV7 = Buffer.from(JSON.stringify({ v: 7, w: "ceb" })).toString("base64url");
-  await page.goto(`/?s=${conflictingAutoV7}`);
+  await page.goto(`/ceo-salary-benchmark/?s=${conflictingAutoV7}`);
   await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeChecked();
   await expect(page.locator('#weighting-components input[value="size"]')).not.toBeChecked();
   await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
   const inapplicablePostingAutoV7 = Buffer.from(JSON.stringify({ v: 7, e: "j", w: "c" })).toString("base64url");
-  await page.goto(`/?s=${inapplicablePostingAutoV7}`);
+  await page.goto(`/ceo-salary-benchmark/?s=${inapplicablePostingAutoV7}`);
   await expect(page.locator("#stream-select")).toHaveValue("jobAds");
   await expect(page.locator('.auto-weight-rule input[value="comparability"]')).not.toBeChecked();
   await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeDisabled();
 
   const legacyV2 = Buffer.from(JSON.stringify({ v: 2 })).toString("base64url");
-  await page.goto(`/?s=${legacyV2}`);
+  await page.goto(`/ceo-salary-benchmark/?s=${legacyV2}`);
   await expect(page.locator("#stream-select")).toHaveValue("incumbents");
   await expect(page.locator("#stat-n")).toHaveText("110");
   const legacyV3 = Buffer.from(JSON.stringify({ v: 3 })).toString("base64url");
-  await page.goto(`/?s=${legacyV3}`);
+  await page.goto(`/ceo-salary-benchmark/?s=${legacyV3}`);
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#stat-n")).toHaveText("125");
   const legacyV4 = Buffer.from(JSON.stringify({ v: 4, a: 1 })).toString("base64url");
-  await page.goto(`/?s=${legacyV4}`);
+  await page.goto(`/ceo-salary-benchmark/?s=${legacyV4}`);
   await expect(page.locator('input[name="histogram-axis-mode"][value="ratio"]')).toBeChecked();
   await page.locator('input[name="chart-view"][value="scatter"]').check();
   await expect(page.locator('input[name="scatter-x-axis-mode"][value="ratio"]')).toBeChecked();
   await expect(page.locator('input[name="scatter-y-axis-mode"][value="ratio"]')).toBeChecked();
   const legacyV5 = Buffer.from(JSON.stringify({ v: 5 })).toString("base64url");
-  await page.goto(`/?s=${legacyV5}`);
+  await page.goto(`/ceo-salary-benchmark/?s=${legacyV5}`);
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   const legacyV1 = Buffer.from(JSON.stringify({ v: 1, a: {} })).toString("base64url");
-  await page.goto(`/?s=${legacyV1}`);
+  await page.goto(`/ceo-salary-benchmark/?s=${legacyV1}`);
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator("#stream-select")).toHaveValue("incumbents");
   await expect(page.locator("#stat-n")).toHaveText("110");
 
-  await page.goto("/?s=not-valid-state");
+  await page.goto("/ceo-salary-benchmark/?s=not-valid-state");
   await expect(page.locator("#url-state-error")).toBeVisible();
   await expect(page.locator("#url-state-error")).toContainText("default settings");
   await expect(page.locator("#stat-n")).toHaveText("125");
@@ -1199,7 +1232,7 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
 test("Auto-weights remain explicit and stable for small filing samples and stream changes", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("/ceo-salary-benchmark/");
   const auto = page.locator('.auto-weight-rule input[value="comparability"]');
   const balance = page.locator('.stream-balance-rule input[value="streamBalanced"]');
 
@@ -1246,17 +1279,41 @@ test("Auto-weights remain explicit and stable for small filing samples and strea
 test("standardized positions switch evidence, labels, controls, and semantic shared state", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("/ceo-salary-benchmark/");
 
   const catalog = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog || []);
   const positions = new Map(catalog.map((position) => [position.key, position]));
-  expect([...positions.keys()]).toEqual(expect.arrayContaining([
-    "ceo", "coo", "cfo", "chief_of_staff", "senior_researcher", "program_director", "research_director",
-  ]));
+  expect([...positions.keys()]).toEqual([
+    "ceo", "vice_president", "program_director", "managing_director", "coo",
+    "senior_vice_president", "development_director", "policy_director",
+    "communications_director", "senior_researcher", "cfo", "general_counsel",
+    "chief_of_staff", "research_director",
+  ]);
+  expect(catalog.filter((position) => position.key !== "ceo")
+    .every((position) => position.supportLevel === "primary")).toBe(true);
+  expect(catalog.filter((position) => position.key !== "ceo")
+    .every((position) => position.counts.defaultIncluded >= 15 && position.counts.organizations >= 12)).toBe(true);
   for (const staleFamilyKey of ["finance", "operations", "programs", "research"]) {
     expect([...positions.keys()]).not.toContain(staleFamilyKey);
   }
+  for (const withheldKey of [
+    "finance_director", "deputy_director", "executive_vice_president",
+    "chief_development_officer", "chief_people_officer", "chief_economist",
+  ]) expect([...positions.keys()]).not.toContain(withheldKey);
   await expect(page.locator("#position-select option")).toHaveCount(catalog.length);
+  await expect(page.locator("#position-selected-label")).toHaveText("CEO");
+  const selectedPositionOverlay = await page.locator(".position-select-shell").evaluate((shell) => {
+    const select = shell.querySelector("select").getBoundingClientRect();
+    const label = shell.querySelector("#position-selected-label").getBoundingClientRect();
+    return {
+      insideSelect: label.top >= select.top && label.bottom <= select.bottom,
+      shellHeightMatchesSelect: Math.abs(shell.getBoundingClientRect().height - select.height) <= 1,
+      position: getComputedStyle(shell.querySelector("#position-selected-label")).position,
+    };
+  });
+  expect(selectedPositionOverlay).toEqual({
+    insideSelect: true, shellHeightMatchesSelect: true, position: "absolute",
+  });
   for (const position of catalog) {
     await expect(page.locator(`#position-select option[value="${position.key}"]`))
       .toHaveText(`${position.label} (n = ${position.counts.defaultAvailable})`);
@@ -1277,6 +1334,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     }, key);
     await page.locator("#position-select").selectOption(key);
     await expect(page.locator("#position-select")).toHaveValue(key);
+    await expect(page.locator("#position-selected-label")).toHaveText(position.label);
     await expect(page.locator("#app-title")).toHaveText(`${position.pageLabel} salary benchmark`);
     await expect(page).toHaveTitle(`${position.pageLabel} Salary Benchmark · vetr.dev`);
     await expect(page.locator("#position-description")).toContainText(position.description);
@@ -1377,7 +1435,8 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     await page.locator("#measure-select").selectOption(position.defaultMeasure);
     await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultCash));
 
-    await expect.poll(() => new URL(page.url()).searchParams.get("position")).toBe(key);
+    await expect.poll(() => new URL(page.url()).pathname).toBe(`/${key.replaceAll("_", "-")}-salary-benchmark/`);
+    expect(new URL(page.url()).searchParams.has("position")).toBe(false);
     if (customizedRowId) await expect.poll(() => new URL(page.url()).searchParams.get("s")).not.toBeNull();
     else await expect.poll(() => new URL(page.url()).searchParams.has("s")).toBe(false);
     const sharedUrl = page.url();
@@ -1419,12 +1478,14 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   await expect(page.locator("#app-title")).toHaveText("CEO salary benchmark");
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
   expect(new URL(page.url()).searchParams.has("position")).toBe(false);
+  expect(new URL(page.url()).pathname).toBe("/ceo-salary-benchmark/");
 
-  await page.goto("/?position=coo");
+  await page.goto("/ceo-salary-benchmark/?position=coo");
   await expect(page.locator("#position-select")).toHaveValue("coo");
   await expect(page.locator("#measure-select")).toHaveValue("cash");
   await expect(page.locator("#stat-n")).toHaveText("28");
-  expect(new URL(page.url()).searchParams.get("position")).toBe("coo");
+  expect(new URL(page.url()).pathname).toBe("/coo-salary-benchmark/");
+  expect(new URL(page.url()).searchParams.has("position")).toBe(false);
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
   expect(errors).toEqual([]);
 });

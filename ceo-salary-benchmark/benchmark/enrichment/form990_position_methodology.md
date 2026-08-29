@@ -45,7 +45,7 @@ This layer extracts Form 990 Part VII, Section A people and compensation for non
 
 The Position control uses an exclusive standardized-title layer, not the broad functional family. C-suite aliases such as COO/Chief Operating Officer are consolidated, while levels remain separate (for example Vice President, Senior Vice President, and Executive Vice President). Fourteen default executive rows with genuinely combined or ambiguous titles are retained in the extraction but excluded from strict named-position samples so they cannot enter two benchmarks at once.
 
-A position is `Primary` with at least 15 default rows across at least 12 organizations, `Exploratory` with at least 8 organizations, and hidden below 8 organizations. Sparse titles remain classified in `form990_benchmark_position_catalog.csv` rather than being pooled into misleading umbrella positions.
+A position is `Primary` with at least 15 default rows across at least 12 organizations, `Exploratory` with at least 8 organizations, and hidden below 8 organizations. Only Primary positions are exposed in the public Position control. Sparse titles remain classified in `form990_benchmark_position_catalog.csv` for audit and future expansion rather than being pooled into misleading umbrella positions.
 
 | Standardized position | Support | Default rows | Organizations | With Schedule J base |
 |---|---|---:|---:|---:|
@@ -108,7 +108,7 @@ CEO-like titles that do not match the validated organization-wide CEO are exclud
 ## Recommended app contract
 
 - Join organization metadata once by `source_id`/EIN, but treat `observation_id` as the compensation-row key.
-- Default Position to CEO using the existing validated CEO dataset; expose the **18** supported standardized non-CEO titles from `form990_benchmark_position_catalog.csv`, not the broader functional families.
+- Default Position to CEO using the existing validated CEO dataset; expose the **13 Primary** standardized non-CEO titles from `form990_benchmark_position_catalog.csv`, not the broader functional families or lower-support exploratory titles.
 - Keep Part VII cash, Part VII total, Schedule J base, and Schedule J total as separate compensation measures.
 - When several people from one organization share a family, use organization-balanced weights (each organization's rows sum to one) as the default or expose person-balanced weighting as an explicit sensitivity. Do not silently let larger organizations dominate.
 - RP rows are comparison markers only. Several RP families have more than one reported person, so display all applicable RP references or require a reviewed single-role choice; never include them in fit or quantile estimation.

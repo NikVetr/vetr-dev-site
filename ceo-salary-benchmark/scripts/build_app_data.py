@@ -20,6 +20,7 @@ CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 ENRICHMENT = BENCHMARK / "enrichment"
 JOB_AD_EVIDENCE_UPDATES = ENRICHMENT / "job_ad_evidence_updates.csv"
 EA_ROSTER_COMPENSATION = ENRICHMENT / "ea_roster_validated_compensation.csv"
+INCUMBENT_COMPENSATION_UPDATES = ENRICHMENT / "incumbent_compensation_updates.csv"
 FORM990_POSITION_OBSERVATIONS = ENRICHMENT / "form990_position_observations.csv"
 FORM990_POSITION_SUPPORTING_SOURCES = ENRICHMENT / "form990_position_supporting_sources.csv"
 FORM990_BENCHMARK_POSITION_CATALOG = ENRICHMENT / "form990_benchmark_position_catalog.csv"
@@ -555,15 +556,66 @@ def category_rationale(
     return rationale
 
 
+def load_incumbent_compensation_updates(
+    validated: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], dict[str, dict[str, str]]]:
+    """Overlay audited current filings without rewriting the frozen benchmark output."""
+    if not validated:
+        raise ValueError("Validated Form 990 compensation data is empty")
+    validated_fields = set(validated[0])
+    by_source = {text(row["source_id"]): row for row in validated}
+    if len(by_source) != len(validated):
+        raise ValueError("Validated Form 990 compensation has duplicate source IDs")
+
+    updates: dict[str, dict[str, str]] = {}
+    for update in rows(INCUMBENT_COMPENSATION_UPDATES):
+        source_id = text(update["source_id"])
+        original = by_source.get(source_id)
+        if original is None:
+            raise ValueError(f"Incumbent update does not match a validated source: {source_id}")
+        if source_id in updates:
+            raise ValueError(f"Duplicate incumbent compensation update: {source_id}")
+        organization = text(update["organization"])
+        if organization != text(original["organization"]):
+            raise ValueError(f"Incumbent update organization changed for {source_id}: {organization}")
+        if text(update["ein"]).replace("-", "") != text(original["ein"]).replace("-", ""):
+            raise ValueError(f"Incumbent update EIN changed for {source_id}")
+
+        local_path = text(update["local_path"])
+        source_path = BENCHMARK / local_path
+        if not source_path.is_file():
+            raise FileNotFoundError(f"Incumbent update lacks its source-native filing: {source_path}")
+        if source_path.stat().st_size != int(update["source_byte_length"]):
+            raise ValueError(f"Incumbent update byte length changed for {source_id}")
+        if hashlib.sha256(source_path.read_bytes()).hexdigest() != text(update["source_sha256"]):
+            raise ValueError(f"Incumbent update source hash changed for {source_id}")
+        year = int(float(text(update["compensation_calendar_year"])))
+        factor = number(update["cpi_factor"])
+        if factor is None or not math.isclose(factor, cpi_factor(year), abs_tol=1e-12):
+            raise ValueError(f"Incumbent update CPI mismatch for {source_id}")
+
+        merged = dict(original)
+        for field in validated_fields:
+            value = text(update.get(field))
+            if value:
+                merged[field] = value
+        by_source[source_id] = merged
+        updates[source_id] = update
+
+    return [by_source[text(row["source_id"])] for row in validated], updates
+
+
 def build_incumbents(
     by_source: dict[tuple[str, str], dict],
     references_by_organization: dict[str, dict],
 ) -> list[dict]:
     validated = rows(DELIVERABLES / "validated_form990_compensation.csv")
+    validated, compensation_updates = load_incumbent_compensation_updates(validated)
     by_ein = {text(row["ein"]).replace("-", ""): row for row in validated if text(row["ein"])}
     by_org = {text(row["organization"]): row for row in validated}
     reference = rows(DELIVERABLES / "expanded_reference_set.csv")
     output: list[dict] = []
+    used_compensation_updates: set[str] = set()
     for peer in reference:
         filing = by_ein.get(text(peer["ein"]).replace("-", "")) or by_org.get(text(peer["organization"]))
         factor = number(filing.get("cpi_factor")) if filing else None
@@ -572,6 +624,9 @@ def build_incumbents(
         cash = number(filing.get("validated_cash_proxy")) if filing else None
         total = number(filing.get("validated_total_proxy")) if filing else None
         source_id = text(filing.get("source_id")) if filing else ""
+        compensation_update = compensation_updates.get(source_id)
+        if compensation_update:
+            used_compensation_updates.add(source_id)
         local_path = text(filing.get("local_path")) if filing else ""
         cached = cache_source(source_id, local_path) if source_id and local_path else ""
         observed_name = text(filing.get("observed_ceo_name")) if filing else ""
@@ -632,14 +687,38 @@ def build_incumbents(
             "localPath": local_path,
             "sourceType": "Form 990",
             "evidenceStream": "incumbents",
-            "homepageUrl": filing_homepage(local_path) if local_path else "",
+            "homepageUrl": (
+                text(compensation_update.get("homepage_url"))
+                if compensation_update else filing_homepage(local_path) if local_path else ""
+            ),
             "categoryProvenance": selection_rationale,
         }
         if source_id:
-            app_row["observationCategoryProvenance"] = category_rationale(
+            observation_provenance = copy.deepcopy(category_rationale(
                 by_source, {}, "form990", source_id, organization
-            )
+            ))
+            if compensation_update:
+                update_citation = (
+                    "benchmark/enrichment/incumbent_compensation_updates.csv | "
+                    f"benchmark/{local_path}"
+                )
+                observation_provenance["title"] = {
+                    "raw": raw_title,
+                    "analysisGroup": title_group(raw_title),
+                    "rationale": "The displayed title and compensation come from the newer source-native filing identified during the screened-roster entity review.",
+                    "citation": update_citation,
+                }
+                app_row["incumbentCompensationUpdate"] = {
+                    "reason": text(compensation_update["update_reason"]),
+                    "locator": text(compensation_update["evidence_locator"]),
+                    "auditPath": "benchmark/enrichment/ea_screened109_audit.md",
+                    "dataPath": "benchmark/enrichment/incumbent_compensation_updates.csv",
+                }
+            app_row["observationCategoryProvenance"] = observation_provenance
         output.append(app_row)
+    unused_updates = compensation_updates.keys() - used_compensation_updates
+    if unused_updates:
+        raise ValueError(f"Incumbent compensation updates were not used: {sorted(unused_updates)}")
     return output
 
 
@@ -786,7 +865,7 @@ def build_position_data(
     source_rows = rows(FORM990_POSITION_OBSERVATIONS)
     catalog_source_rows = rows(FORM990_BENCHMARK_POSITION_CATALOG)
     public_catalog_source_rows = [
-        row for row in catalog_source_rows if text(row["support_level"]) != "hidden"
+        row for row in catalog_source_rows if text(row["support_level"]) == "primary"
     ]
     supporting_source_rows = rows(FORM990_POSITION_SUPPORTING_SOURCES)
     supporting_sources_by_id = {
@@ -1284,6 +1363,10 @@ def main() -> None:
             "jobAdEvidenceUpdatesPath": "benchmark/enrichment/job_ad_evidence_updates.csv",
             "eaRosterAuditPath": "benchmark/enrichment/ea_roster_bundle_audit.md",
             "eaRosterReviewedCompensationPath": "benchmark/enrichment/ea_roster_validated_compensation.csv",
+            "eaScreened109AuditPath": "benchmark/enrichment/ea_screened109_audit.md",
+            "eaScreened109CandidateReviewPath": "benchmark/enrichment/ea_screened109_candidate_review.csv",
+            "eaScreened109FollowupPromptPath": "benchmark/enrichment/ea_screened109_followup_prompt.md",
+            "incumbentCompensationUpdatesPath": "benchmark/enrichment/incumbent_compensation_updates.csv",
             "positionMethodologyPath": "benchmark/enrichment/form990_position_methodology.md",
             "positionCatalogPath": "benchmark/enrichment/form990_benchmark_position_catalog.csv",
             "positionObservationsPath": "benchmark/enrichment/form990_position_observations.csv",

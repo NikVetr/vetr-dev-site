@@ -7,6 +7,7 @@ import html
 import json
 import math
 import re
+import subprocess
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -16,7 +17,51 @@ DATA = ROOT / "benchmark" / "enrichment" / "ea_roster_validated_compensation.csv
 CANDIDATE_REVIEW = ROOT / "benchmark" / "enrichment" / "ea_roster_candidate_review.csv"
 APP_DATA = ROOT / "app-data.js"
 SOURCE_MANIFEST = ROOT / "benchmark" / "enrichment" / "ea_roster_source_manifest.csv"
+INCUMBENT_UPDATES = ROOT / "benchmark" / "enrichment" / "incumbent_compensation_updates.csv"
 CPI_DATA = ROOT / "benchmark" / "data" / "cpi_u.csv"
+EXPECTED_REVIEWED_IDS = {
+    "SRC-990-EA-CENTER-FOR-ELECTION-SCIENCE",
+    "SRC-990-EA-FORESIGHT-INSTITUTE",
+    "SRC-990-EA-LEVERAGE-RESEARCH",
+    "SRC-990-EA-QUALIA-RESEARCH-INSTITUTE",
+    "SRC-990-EA-MAGNIFY-MENTORING",
+    "SRC-990-EA-GIVEWELL",
+    "SRC-990-EA-COPENHAGEN-CONSENSUS-CENTER",
+}
+PDF_EXPECTATIONS = {
+    "SRC-990-EA-GIVEWELL": {
+        "organization": "GiveWell",
+        "person": "Elie Hassenfeld",
+        "title": "Chief Executive Officer",
+        "hours": 40,
+        "revenue": 269_542_773,
+        "expenses": 183_707_000,
+        "staff": 96,
+        "part_vii_org": 424_805,
+        "part_vii_related": 0,
+        "part_vii_other": 38_590,
+        "cash": 424_805,
+        "total": 463_395,
+        "base": 423_600,
+        "text_tokens": ("ELIE HASSENFELD", "424,805", "423,600", "463,395"),
+    },
+    "SRC-990-EA-COPENHAGEN-CONSENSUS-CENTER": {
+        "organization": "Copenhagen Consensus Center",
+        "person": "Dr Bjorn Lomborg",
+        "title": "President & Founder",
+        "hours": 40,
+        "revenue": 920_765,
+        "expenses": 1_187_335,
+        "staff": 1,
+        "part_vii_org": 497_770,
+        "part_vii_related": 0,
+        "part_vii_other": 0,
+        "cash": 497_770,
+        "total": 497_770,
+        "base": 435_166,
+        "text_tokens": (),
+    },
+}
 
 
 class IdTextParser(HTMLParser):
@@ -140,7 +185,7 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
     expected_ids = {row["source_id"] for row in reviewed}
     roster_rows = [row for row in incumbents if str(row.get("id", "")).startswith("SRC-990-EA-")]
     if {row.get("id") for row in roster_rows} != expected_ids or len(roster_rows) != len(expected_ids):
-        raise ValueError("Generated app does not contain exactly the four reviewed EA-roster observations")
+        raise ValueError("Generated app does not contain exactly the reviewed EA-roster observations")
     by_id = {row["id"]: row for row in roster_rows}
 
     for reviewed_row in reviewed:
@@ -218,12 +263,54 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
         raise ValueError(f"Unsupported roster candidates entered the incumbent pool: {pooled_unsupported}")
     if len(candidate_rows) != 34 or len(unsupported) != 29:
         raise ValueError("Candidate-review integration boundary changed from 5 reviewed / 29 screening-only")
-    if payload.get("summary", {}).get("eaRosterValidatedObservations") != 5:
-        raise ValueError("Generated app summary does not report five reviewed roster observations")
+    if payload.get("summary", {}).get("eaRosterValidatedObservations") != len(reviewed):
+        raise ValueError("Generated app summary has the wrong reviewed-roster observation count")
+
+
+def validate_pdf_row(row: dict[str, str], path: Path) -> None:
+    expected = PDF_EXPECTATIONS.get(row["source_id"])
+    if expected is None:
+        raise ValueError(f"No audited PDF extraction contract for {row['source_id']}")
+    if row["organization"] != expected["organization"]:
+        raise ValueError(f"{row['source_id']}: organization changed")
+    if row["ceo_name"] != expected["person"] or row["ceo_title"] != expected["title"]:
+        raise ValueError(f"{row['organization']}: audited PDF person/title changed")
+    for field, expected_value in (
+        ("average_hours_per_week", expected["hours"]),
+        ("revenue", expected["revenue"]),
+        ("expenses", expected["expenses"]),
+        ("employee_count", expected["staff"]),
+        ("part_vii_org", expected["part_vii_org"]),
+        ("part_vii_related", expected["part_vii_related"]),
+        ("part_vii_other", expected["part_vii_other"]),
+        ("validated_cash_proxy", expected["cash"]),
+        ("validated_total_proxy", expected["total"]),
+        ("validated_schedule_j_base_total", expected["base"]),
+    ):
+        close(required_amount(row, field), expected_value, f"{row['organization']} reviewed {field}")
+    tokens = expected["text_tokens"]
+    if tokens:
+        extracted = subprocess.run(
+            ["pdftotext", "-layout", str(path), "-"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        missing = [token for token in tokens if token not in extracted]
+        if missing:
+            raise ValueError(f"{row['organization']}: audited PDF tokens are missing: {missing}")
 
 
 def validate_row(row: dict[str, str]) -> None:
-    main = parsed_values(ROOT / "benchmark" / row["local_path"])
+    source_path = ROOT / "benchmark" / row["local_path"]
+    if source_path.suffix.lower() == ".pdf":
+        validate_pdf_row(row, source_path)
+        year = int(float(row["compensation_calendar_year"]))
+        factor = required_amount(row, "cpi_factor")
+        if not math.isclose(factor, cpi_factor(year), abs_tol=1e-12):
+            raise ValueError(f"{row['organization']}: unexpected CPI period or factor")
+        return
+    main = parsed_values(source_path)
     return_type = row["return_type"]
     group = "OfficerDirectorTrusteeEmplGrp" if return_type == "Form 990-EZ" else "Form990PartVIISectionAGrp"
     person_prefix = group_for_person(main, group, row["ceo_name"])
@@ -281,17 +368,91 @@ def validate_manifest(reviewed: list[dict[str, str]]) -> None:
             raise ValueError(f"{row['organization']}: manifested source hash changed")
 
 
+def validate_screened_roster_entity_update() -> None:
+    update_rows = rows(INCUMBENT_UPDATES)
+    if len(update_rows) != 1:
+        raise ValueError("Expected exactly one entity-deduplicated incumbent filing update")
+    row = update_rows[0]
+    if row["source_id"] != "SRC-990-EXT-PROJECT-HEALTHY-CHILDREN":
+        raise ValueError("Unexpected source ID in the incumbent filing update")
+    source_path = ROOT / "benchmark" / row["local_path"]
+    if not source_path.is_file():
+        raise FileNotFoundError(f"Missing current Project Healthy Children filing: {source_path}")
+    if source_path.stat().st_size != int(row["source_byte_length"]):
+        raise ValueError("Project Healthy Children filing byte length changed")
+    if hashlib.sha256(source_path.read_bytes()).hexdigest() != row["source_sha256"]:
+        raise ValueError("Project Healthy Children filing hash changed")
+
+    expected = {
+        "observed_average_hours": 40,
+        "observed_part_vii_org": 97_072,
+        "observed_part_vii_related": 0,
+        "observed_part_vii_other": 116_768,
+        "validated_cash_proxy": 97_072,
+        "validated_total_proxy": 213_840,
+        "validated_schedule_j_base_total": 97_072,
+        "observed_schedule_j_deferred_org": 3_168,
+        "observed_schedule_j_nontaxable_org": 113_600,
+        "observed_schedule_j_total_org": 213_840,
+        "observed_revenue": 6_702_737,
+        "observed_expenses": 5_867_621,
+        "observed_employee_count": 3,
+    }
+    for field, expected_value in expected.items():
+        close(required_amount(row, field), expected_value, f"Project Healthy Children reviewed {field}")
+    if row["observed_ceo_name"] != "FELIX BROOKS-CHURCH" or row["observed_ceo_title"] != "CEO":
+        raise ValueError("Project Healthy Children current CEO identity/title changed")
+    if not math.isclose(required_amount(row, "cpi_factor"), cpi_factor(2023), abs_tol=1e-12):
+        raise ValueError("Project Healthy Children CPI factor changed")
+
+    extracted = subprocess.run(
+        ["pdftotext", "-layout", str(source_path), "-"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    required_tokens = (
+        "FELIX BROOKS-CHURCH", "97,072", "116,768", "113,600", "213,840",
+        "6,702,737", "5,867,621",
+    )
+    missing_tokens = [token for token in required_tokens if token not in extracted]
+    if missing_tokens:
+        raise ValueError(f"Project Healthy Children filing tokens are missing: {missing_tokens}")
+
+    payload = app_payload()
+    entity_rows = [
+        item for item in payload.get("incumbents", [])
+        if item.get("organization") == "Project Healthy Children"
+    ]
+    if len(entity_rows) != 1:
+        raise ValueError("Sanku / Project Healthy Children was not entity-deduplicated in the app")
+    generated = entity_rows[0]
+    if generated.get("executive") != "FELIX BROOKS-CHURCH" or generated.get("title") != "CEO":
+        raise ValueError("Generated Project Healthy Children identity/title changed")
+    for measure, expected_value in (("base", 97_072), ("cash", 97_072), ("total", 213_840)):
+        close(float(generated["nominalSalary"][measure]), expected_value, f"Project Healthy Children generated nominal {measure}")
+    for field, expected_value in (("revenue", 6_702_737), ("expenses", 5_867_621), ("staff", 3)):
+        close(float(generated[field]), expected_value, f"Project Healthy Children generated {field}")
+    cached = ROOT / generated.get("cachedSource", "")
+    if not cached.is_file() or cached.read_bytes() != source_path.read_bytes():
+        raise ValueError("Project Healthy Children current filing preview is missing or changed")
+    if generated.get("defaultIncluded") is not True:
+        raise ValueError("Project Healthy Children current filing unexpectedly left the default sample")
+
+
 def main() -> None:
     reviewed = rows(DATA)
-    if len(reviewed) != 5 or len({row["source_id"] for row in reviewed}) != 5:
-        raise ValueError("Reviewed roster compensation must contain five unique observations")
+    if {row["source_id"] for row in reviewed} != EXPECTED_REVIEWED_IDS or len(reviewed) != len(EXPECTED_REVIEWED_IDS):
+        raise ValueError("Reviewed roster compensation IDs differ from the audited release set")
     validate_manifest(reviewed)
     for row in reviewed:
         validate_row(row)
     validate_generated_app(reviewed)
+    validate_screened_roster_entity_update()
     print(
-        f"Validated {len(reviewed)} EA-roster compensation observations against preserved rendered filings; "
-        "generated values, previews, source links, default exclusions, and the 29-row screening boundary also pass."
+        f"Validated {len(reviewed)} EA-roster compensation observations against preserved source-native filings; "
+        "the entity-deduplicated current Project Healthy Children filing, generated values, previews, "
+        "source links, default exclusions, and the 29-row screening boundary also pass."
     )
 
 

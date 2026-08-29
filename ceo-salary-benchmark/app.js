@@ -34,7 +34,7 @@
       ? supplied
       : [DEFAULT_POSITION, ...supplied];
     const byKey = new Map();
-    catalog.forEach((position) => {
+    catalog.filter((position) => position.key === "ceo" || !position.supportLevel || position.supportLevel === "primary").forEach((position) => {
       if (!position?.key || byKey.has(position.key)) throw new Error(`Invalid or duplicate position key: ${position?.key || "blank"}`);
       byKey.set(position.key, {
         ...position,
@@ -48,6 +48,24 @@
     return [byKey.get("ceo"), ...[...byKey.values()].filter((position) => position.key !== "ceo")];
   })();
   const POSITION_BY_KEY = new Map(POSITION_CATALOG.map((position) => [position.key, position]));
+  const POSITION_ROUTE_KEY_BY_SLUG = new Map(
+    POSITION_CATALOG.map((position) => [`${position.key.replaceAll("_", "-")}-salary-benchmark`, position.key]),
+  );
+
+  function positionRouteSlug(key) {
+    if (!POSITION_BY_KEY.has(key)) throw new Error(`No public route for position: ${key}`);
+    return `${key.replaceAll("_", "-")}-salary-benchmark`;
+  }
+
+  function positionRoutePath(key) {
+    return `/${positionRouteSlug(key)}/`;
+  }
+
+  function positionFromPath(pathname) {
+    const segments = String(pathname || "").split("/").filter(Boolean);
+    if (segments.at(-1) === "index.html") segments.pop();
+    return POSITION_ROUTE_KEY_BY_SLUG.get(segments.at(-1) || "") || "";
+  }
 
   function positionDefinition(key = state.position) {
     return POSITION_BY_KEY.get(key) || POSITION_BY_KEY.get("ceo") || DEFAULT_POSITION;
@@ -68,7 +86,7 @@
   }
 
   const allPositionIncumbents = Object.entries(DATA.positionObservations || {})
-    .filter(([key]) => key !== "ceo")
+    .filter(([key]) => key !== "ceo" && POSITION_BY_KEY.has(key))
     .flatMap(([, positionRows]) => Array.isArray(positionRows) ? positionRows : []);
   const allRowsByStream = {
     incumbents: [...DATA.incumbents, ...allPositionIncumbents],
@@ -144,7 +162,8 @@
 
   const refs = {
     appTitle: $("#app-title"), appDescription: $("#app-description"),
-    position: $("#position-select"), positionDescription: $("#position-description"),
+    position: $("#position-select"), positionSelectedLabel: $("#position-selected-label"),
+    positionDescription: $("#position-description"),
     stream: $("#stream-select"), streamDescription: $("#stream-description"),
     measure: $("#measure-select"), measureField: $("#measure-field"),
     dollarBasis: [...document.querySelectorAll('input[name="dollar-basis"]')], priceBasisStatus: $("#price-basis-status"),
@@ -226,6 +245,7 @@
       groups.get(groupLabel).append(option);
     });
     refs.position.value = state.position;
+    refs.positionSelectedLabel.textContent = positionDefinition().label;
   }
 
   function clearAnalyticalFilters() {
@@ -2805,6 +2825,7 @@
     const position = positionDefinition();
     const ceo = isCeoPosition();
     refs.position.value = position.key;
+    refs.positionSelectedLabel.textContent = position.label;
     const description = position.description || (ceo
       ? DEFAULT_POSITION.description
       : "Named compensation observations reported in nonprofit Form 990 filings.");
@@ -3010,8 +3031,8 @@
     if (!urlSyncReady) return;
     const url = new URL(window.location.href);
     const payload = sharePayload();
-    if (isCeoPosition()) url.searchParams.delete("position");
-    else url.searchParams.set("position", state.position);
+    url.pathname = positionRoutePath(state.position);
+    url.searchParams.delete("position");
     if (Object.keys(payload).length === 1) url.searchParams.delete("s");
     else url.searchParams.set("s", encodeUrlState(payload));
     history.replaceState(null, "", url);
@@ -3024,6 +3045,7 @@
 
   function clearUrlState() {
     const url = new URL(window.location.href);
+    url.pathname = positionRoutePath("ceo");
     url.searchParams.delete("s");
     url.searchParams.delete("position");
     history.replaceState(null, "", url);
@@ -3051,6 +3073,7 @@
 
   function syncControlsFromState() {
     refs.position.value = state.position;
+    refs.positionSelectedLabel.textContent = positionDefinition().label;
     refs.stream.value = state.stream;
     refs.measure.value = state.measure;
     refs.sample.value = state.sample;
@@ -3268,7 +3291,8 @@
       modifiedWeightIds[stream].clear();
       streamRows.forEach((row) => { inclusion[stream].set(row.id, Boolean(row.defaultIncluded)); customWeights[stream].set(row.id, 1); });
     });
-    refs.position.value = state.position; refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
+    refs.position.value = state.position; refs.positionSelectedLabel.textContent = positionDefinition().label;
+    refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === "adjusted"; });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
     refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
@@ -3424,7 +3448,11 @@
   populatePositionSelect();
   const initialUrl = new URL(window.location.href);
   const encodedInitialState = initialUrl.searchParams.get("s");
-  const semanticPosition = initialUrl.searchParams.get("position") || "";
+  const pathPosition = positionFromPath(initialUrl.pathname);
+  const legacyPosition = initialUrl.searchParams.get("position") || "";
+  const semanticPosition = pathPosition && pathPosition !== "ceo"
+    ? pathPosition
+    : POSITION_BY_KEY.has(legacyPosition) ? legacyPosition : pathPosition;
   if (encodedInitialState || POSITION_BY_KEY.has(semanticPosition)) {
     try {
       restoreUrlState(encodedInitialState ? decodeUrlState(encodedInitialState) : { v: URL_STATE_VERSION }, semanticPosition);
@@ -3446,4 +3474,5 @@
   initializeHelpTooltips();
   renderAll();
   urlSyncReady = true;
+  writeUrlState();
 })();
