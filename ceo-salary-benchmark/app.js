@@ -67,6 +67,11 @@
     return POSITION_ROUTE_KEY_BY_SLUG.get(segments.at(-1) || "") || "";
   }
 
+  const INITIAL_ROUTE_POSITION = positionFromPath(window.location.pathname);
+  const USE_SEMANTIC_POSITION_ROUTES = /^https?:$/.test(window.location.protocol)
+    && Boolean(INITIAL_ROUTE_POSITION);
+  const STANDALONE_ROUTE_PATH = window.location.pathname;
+
   function positionDefinition(key = state.position) {
     return POSITION_BY_KEY.get(key) || POSITION_BY_KEY.get("ceo") || DEFAULT_POSITION;
   }
@@ -3031,8 +3036,14 @@
     if (!urlSyncReady) return;
     const url = new URL(window.location.href);
     const payload = sharePayload();
-    url.pathname = positionRoutePath(state.position);
-    url.searchParams.delete("position");
+    if (USE_SEMANTIC_POSITION_ROUTES) {
+      url.pathname = positionRoutePath(state.position);
+      url.searchParams.delete("position");
+    } else {
+      url.pathname = STANDALONE_ROUTE_PATH;
+      if (state.position === "ceo") url.searchParams.delete("position");
+      else url.searchParams.set("position", state.position);
+    }
     if (Object.keys(payload).length === 1) url.searchParams.delete("s");
     else url.searchParams.set("s", encodeUrlState(payload));
     history.replaceState(null, "", url);
@@ -3045,7 +3056,9 @@
 
   function clearUrlState() {
     const url = new URL(window.location.href);
-    url.pathname = positionRoutePath("ceo");
+    url.pathname = USE_SEMANTIC_POSITION_ROUTES
+      ? positionRoutePath("ceo")
+      : STANDALONE_ROUTE_PATH;
     url.searchParams.delete("s");
     url.searchParams.delete("position");
     history.replaceState(null, "", url);
