@@ -1,0 +1,1800 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2024v5.5">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2026-04-06T23:28:42-05:00</ReturnTs>
+    <TaxPeriodEndDt>2025-06-30</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>330700332</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>VASQUEZ &amp; COMPANY LLP</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>655 N CENTRAL AVE STE 1550</AddressLine1Txt>
+        <CityNm>GLENDALE</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>91203</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-07-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>942764520</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>PLOUGHSHARES FUND INC</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>PLOU</BusinessNameControlTxt>
+      <PhoneNum>4156682244</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>220 MONTGOMERY STREET 1093</AddressLine1Txt>
+        <CityNm>SAN FRANCISCO</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>94104</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>SAMARA DUN</PersonNm>
+      <PersonTitleTxt>EXECUTIVE DIRECTOR</PersonTitleTxt>
+      <PhoneNum>4156682244</PhoneNum>
+      <SignatureDt>2026-03-27</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>0</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>REGINA PRINCE CPA</PreparerPersonNm>
+      <PTIN>P00576936</PTIN>
+      <PhoneNum>2138731700</PhoneNum>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="10">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <AddressChangeInd>X</AddressChangeInd>
+      <PrincipalOfficerNm>SAMARA DUN</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>220 MONTGOMERY STREET 1093</AddressLine1Txt>
+        <CityNm>SAN FRANCISCO</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>94104</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>10280939</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>WWW.PLOUGHSHARES.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>1981</FormationYr>
+      <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>OUR MISSION IS TO REDUCE AND EVENTUALLY ELIMINATE THE THREAT OF NUCLEAR WEAPONS.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>18</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>17</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>23</TotalEmployeeCnt>
+      <TotalVolunteersCnt>25</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>14611</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>1922</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>2554502</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>3093896</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>0</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>0</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>2181654</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>1557425</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>363995</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>570035</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>5100151</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>5221356</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>4386302</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>3119923</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>2987274</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>2697934</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>6000</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>8710</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>1018544</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>2345093</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>1786778</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>9724669</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>7613345</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-4624518</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>-2391989</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>27342062</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>24433502</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>3332101</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>2815530</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>24009961</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>21617972</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>OUR MISSION IS TO REDUCE AND EVENTUALLY ELIMINATE THE THREAT OF NUCLEAR WEAPONS. WE DO CRITICAL WORK TO DRIVE COLLABORATIVE ACTION WITHIN THE NUCLEAR FIELD AND PROVIDE FUNDING TO EXPERTS AND ORGANIZATIONS FOCUSED ON MITIGATING THE THREAT.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>5679058</ExpenseAmt>
+      <GrantAmt>3119923</GrantAmt>
+      <Desc>PLOUGHSHARES ADVANCED ITS MISSION TO REDUCE THE THREAT OF NUCLEAR WEAPONS BY INVESTING IN ORGANIZATIONS, LEADERS, AND STRATEGIES THAT STRENGTHEN THE FIELD. THE ORGANIZATION PROVIDED GRANTS AND SUPPORT TO 46 ORGANIZATIONS IN THE UNITED STATES AND INTERNATIONALLY, ENABLING PARTNERS TO RESPOND TO EMERGING NUCLEAR RISKS, RESIST A RENEWED ARMS RACE, AND ADVOCATE FOR POLICIES THAT ENHANCE GLOBAL SECURITY. PLOUGHSHARES' FIELD-BUILDING EFFORTS CONNECTED ADVOCATES, FOSTERED COORDINATION, AND SUPPORTED COALITIONS WORKING TO PREVENT NUCLEAR TESTING AND PROMOTE DE-ESCALATION. COMMUNICATIONS INITIATIVES EXPANDED PUBLIC UNDERSTANDING OF NUCLEAR DANGERS THROUGH RESEARCH, MEDIA ENGAGEMENT, AND DIGITAL STORYTELLING, ELEVATING EXPERT VOICES AND INFORMING POLICYMAKERS AND THE PUBLIC. THROUGH THESE COMBINED EFFORTS, PLOUGHSHARES HELPED SUSTAIN A RESILIENT, EFFECTIVE NETWORK OF ACTORS DEDICATED TO REDUCING NUCLEAR THREATS.</Desc>
+      <TotalProgramServiceExpensesAmt>5679058</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc1039100001">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd referenceDocumentId="RetDoc1039600001">0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd referenceDocumentId="RetDoc1039600001">0</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd referenceDocumentId="RetDoc1039600001">0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc1040000001">0</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc1040000001">0</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc1040000001">0</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc1040000001">0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>1</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc1040000001">1</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc1040000001">1</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc1040000001">0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc1040000001">1</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc1040000001">1</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc1040000001">1</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">1</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="RetDoc1040500001">1</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="RetDoc1040500001">1</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd referenceDocumentId="RetDoc1040500001">0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>0</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>0</FundraisingActivitiesInd>
+      <GamingActivitiesInd>0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="RetDoc1041900001">1</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd referenceDocumentId="RetDoc1041900001">0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="RetDoc1042400001">1</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd referenceDocumentId="RetDoc1042900001">1</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd referenceDocumentId="RetDoc1042900001">0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd>0</DisregardedEntityInd>
+      <RelatedEntityInd>0</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>28</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>1</BackupWthldComplianceInd>
+      <EmployeeCnt>23</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>1</UnrelatedBusIncmOverLimitInd>
+      <Form990TFiledInd>1</Form990TFiledInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>0</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>18</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>17</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>1</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>1</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CO</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CT</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AK</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>FL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>GA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>HI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>IL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MD</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>ME</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MO</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NH</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NJ</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NM</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>ND</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OH</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>PA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>RI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>SC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>TN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>UT</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>VA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WV</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WI</StatesWhereCopyOfReturnIsFldCd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>JENNIFER MACIAS</BusinessNameLine1Txt>
+        </BusinessName>
+        <PhoneNum>9165728810</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>315 BAY STREET 4TH FLOOR</AddressLine1Txt>
+          <CityNm>SAN FRANCISCO</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94133</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ALEN AMINI</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>AMY MCGRATH</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BEN RHODES</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CONNIE FOOTE</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DON MORDECAI</PersonNm>
+        <TitleTxt>TREASURER</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>EMMA BELCHER</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>402031</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>43205</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ETHAN KELLY</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>GRETCHEN HUND</PersonNm>
+        <TitleTxt>CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JOHN FEIKEMA</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MARGARET A TOUGH</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MICAHEL WEAR</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MICHAEL MCQUADE</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>PHILIP AMES</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SCOTT SAGAN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SHAMIL IDRIS</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SHANNON SEDGWICK DAVIS</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SKYLER BROWN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>TYLER WIGG-STEVENSON</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ELIZABETH WARNER</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>179861</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>55535</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BONNIE FISK</PersonNm>
+        <TitleTxt>DEVELOPMENT DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>137198</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>25928</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CHARLES CROSBY</PersonNm>
+        <TitleTxt>COMMUNICATIONS &amp; MARKETING DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>144130</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>16306</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JAMSHADE FAANI</PersonNm>
+        <TitleTxt>FINANCE DIRECTOR/CONTROLLE</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>143130</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>41288</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JOHN CARL BAKER</PersonNm>
+        <TitleTxt>PROGRAMS DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>112027</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>15769</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SARA KUTCHESFAHANI</PersonNm>
+        <TitleTxt>DIRECTOR OF PROGRAMS</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>167178</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>27312</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>1285555</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>225343</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>9</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>1</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>METROPOLITAN GROUP</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>733 SW OAK STREET ROOM 100</AddressLine1Txt>
+            <CityNm>PORTLAND</CityNm>
+            <StateAbbreviationCd>OR</StateAbbreviationCd>
+            <ZIPCd>97205</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>STRATEGIC COMMUNICATIONS</ServicesDesc>
+        <CompensationAmt>117000</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>1</CntrctRcvdGreaterThan100KCnt>
+      <AllOtherContributionsAmt>3093896</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>40805</NoncashContributionsAmt>
+      <TotalContributionsAmt>3093896</TotalContributionsAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>363814</TotalRevenueColumnAmt>
+        <ExclusionAmt>363814</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>6253194</SecuritiesAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>5059583</SecuritiesAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>1193611</SecuritiesAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>1193611</TotalRevenueColumnAmt>
+        <ExclusionAmt>1193611</ExclusionAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>K-1'S FROM PARTNERSHIPS</Desc>
+        <BusinessCd>522220</BusinessCd>
+        <TotalRevenueColumnAmt>570035</TotalRevenueColumnAmt>
+        <UnrelatedBusinessRevenueAmt>14611</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>555424</ExclusionAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>570035</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>5221356</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>0</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>14611</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>2112849</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>2839923</TotalAmt>
+        <ProgramServicesAmt>2839923</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>280000</TotalAmt>
+        <ProgramServicesAmt>280000</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>621113</TotalAmt>
+        <ProgramServicesAmt>347728</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>124637</ManagementAndGeneralAmt>
+        <FundraisingAmt>148748</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>1650326</TotalAmt>
+        <ProgramServicesAmt>989282</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>230773</ManagementAndGeneralAmt>
+        <FundraisingAmt>430271</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>116791</TotalAmt>
+        <ProgramServicesAmt>69017</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>18094</ManagementAndGeneralAmt>
+        <FundraisingAmt>29680</FundraisingAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>143076</TotalAmt>
+        <ProgramServicesAmt>84771</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>21971</ManagementAndGeneralAmt>
+        <FundraisingAmt>36334</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>166628</TotalAmt>
+        <ProgramServicesAmt>97530</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>26426</ManagementAndGeneralAmt>
+        <FundraisingAmt>42672</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>16887</TotalAmt>
+        <ManagementAndGeneralAmt>16887</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>34855</TotalAmt>
+        <ManagementAndGeneralAmt>34855</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesProfFundraising>
+        <TotalAmt>8710</TotalAmt>
+        <FundraisingAmt>8710</FundraisingAmt>
+      </FeesForServicesProfFundraising>
+      <FeesForSrvcInvstMgmntFeesGrp>
+        <TotalAmt>143120</TotalAmt>
+        <ManagementAndGeneralAmt>143120</ManagementAndGeneralAmt>
+      </FeesForSrvcInvstMgmntFeesGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>468818</TotalAmt>
+        <ProgramServicesAmt>341253</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>100139</ManagementAndGeneralAmt>
+        <FundraisingAmt>27426</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>29497</TotalAmt>
+        <ProgramServicesAmt>28464</ProgramServicesAmt>
+        <FundraisingAmt>1033</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>156226</TotalAmt>
+        <ProgramServicesAmt>72935</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>18157</ManagementAndGeneralAmt>
+        <FundraisingAmt>65134</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>138546</TotalAmt>
+        <ProgramServicesAmt>80933</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>17686</ManagementAndGeneralAmt>
+        <FundraisingAmt>39927</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <OccupancyGrp>
+        <TotalAmt>386052</TotalAmt>
+        <ProgramServicesAmt>225445</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>61499</ManagementAndGeneralAmt>
+        <FundraisingAmt>99108</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>112925</TotalAmt>
+        <ProgramServicesAmt>43717</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>60673</ManagementAndGeneralAmt>
+        <FundraisingAmt>8535</FundraisingAmt>
+      </TravelGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>173713</TotalAmt>
+        <ProgramServicesAmt>113869</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>17614</ManagementAndGeneralAmt>
+        <FundraisingAmt>42230</FundraisingAmt>
+      </ConferencesMeetingsGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>4044</TotalAmt>
+        <ProgramServicesAmt>2362</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>644</ManagementAndGeneralAmt>
+        <FundraisingAmt>1038</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>11837</TotalAmt>
+        <ProgramServicesAmt>2716</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>7926</ManagementAndGeneralAmt>
+        <FundraisingAmt>1195</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>STAFF RECRUITMENT, TRAI</Desc>
+        <TotalAmt>40421</TotalAmt>
+        <ProgramServicesAmt>23482</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>6432</ManagementAndGeneralAmt>
+        <FundraisingAmt>10507</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>DUES AND SUBSCRIPTIONS</Desc>
+        <TotalAmt>36627</TotalAmt>
+        <ProgramServicesAmt>35631</ProgramServicesAmt>
+        <FundraisingAmt>996</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>BAD DEBT EXPENSE</Desc>
+        <TotalAmt>25000</TotalAmt>
+        <FundraisingAmt>25000</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>LICENSES AND PERMITS</Desc>
+        <TotalAmt>8210</TotalAmt>
+        <ManagementAndGeneralAmt>8210</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>7613345</TotalAmt>
+        <ProgramServicesAmt>5679058</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>915743</ManagementAndGeneralAmt>
+        <FundraisingAmt>1018544</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>273995</BOYAmt>
+        <EOYAmt>423796</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>55771</BOYAmt>
+        <EOYAmt>1065228</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>1882963</BOYAmt>
+        <EOYAmt>1596895</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>33354</BOYAmt>
+        <EOYAmt>70841</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>267111</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>169605</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>97506</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>18408744</BOYAmt>
+        <EOYAmt>16132866</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <InvestmentsOtherSecuritiesGrp>
+        <BOYAmt>5586461</BOYAmt>
+        <EOYAmt>3544250</EOYAmt>
+      </InvestmentsOtherSecuritiesGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>1100774</BOYAmt>
+        <EOYAmt>1502120</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>27342062</BOYAmt>
+        <EOYAmt>24433502</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>395881</BOYAmt>
+        <EOYAmt>167912</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <GrantsPayableGrp>
+        <BOYAmt>2136000</BOYAmt>
+        <EOYAmt>1358000</EOYAmt>
+      </GrantsPayableGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>800220</BOYAmt>
+        <EOYAmt>1289618</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>3332101</BOYAmt>
+        <EOYAmt>2815530</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>2219962</BOYAmt>
+        <EOYAmt>1494912</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>21789999</BOYAmt>
+        <EOYAmt>20123060</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>24009961</BOYAmt>
+        <EOYAmt>21617972</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>27342062</BOYAmt>
+        <EOYAmt>24433502</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>-2391989</ReconcilationRevenueExpnssAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>1</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>5350405</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>5293140</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>8824707</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>2554502</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>3121278</CurrentTaxYearAmt>
+        <TotalAmt>25144032</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>5350405</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>5293140</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>8824707</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>2554502</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>3121278</CurrentTaxYearAmt>
+        <TotalAmt>25144032</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>4167852</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>20976180</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>210287</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>255779</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>369801</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>184788</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>336432</CurrentTaxYearAmt>
+        <TotalAmt>1357087</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus1YearAmt>447161</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>570035</CurrentTaxYearAmt>
+        <TotalAmt>1017196</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>27518315</TotalSupportAmt>
+      <PublicSupportCY170Pct>0.76230</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.80530</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+      <Form990ScheduleAPartVIGrp>
+        <FormAndLineReferenceDesc>SCHEDULE A, PART II, LINE 10, EXPLANATION OF OTHER INCOME:</FormAndLineReferenceDesc>
+        <ExplanationTxt>FUNDRAISING INCOME - 2023 AMOUNT: $ 83,166. K-1S FOM PARTNERSHIP - 2023 AMOUNT: $ 363,995. 2024 AMOUNT: $ 570,035.</ExplanationTxt>
+      </Form990ScheduleAPartVIGrp>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleC documentId="RetDoc1039600001">
+      <TotalGrassrootsLobbyingGrp>
+        <FilingOrganizationsTotalAmt>60660</FilingOrganizationsTotalAmt>
+      </TotalGrassrootsLobbyingGrp>
+      <TotalDirectLobbyingGrp>
+        <FilingOrganizationsTotalAmt>147004</FilingOrganizationsTotalAmt>
+      </TotalDirectLobbyingGrp>
+      <TotalLobbyingExpendGrp>
+        <FilingOrganizationsTotalAmt>207664</FilingOrganizationsTotalAmt>
+      </TotalLobbyingExpendGrp>
+      <OtherExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>5471394</FilingOrganizationsTotalAmt>
+      </OtherExemptPurposeExpendGrp>
+      <TotalExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>5679058</FilingOrganizationsTotalAmt>
+      </TotalExemptPurposeExpendGrp>
+      <LobbyingNontaxableAmountGrp>
+        <FilingOrganizationsTotalAmt>433953</FilingOrganizationsTotalAmt>
+      </LobbyingNontaxableAmountGrp>
+      <GrassrootsNontaxableGrp>
+        <FilingOrganizationsTotalAmt>108488</FilingOrganizationsTotalAmt>
+      </GrassrootsNontaxableGrp>
+      <TotLbbyngGrassrootMnsNonTxGrp>
+        <FilingOrganizationsTotalAmt>0</FilingOrganizationsTotalAmt>
+      </TotLbbyngGrassrootMnsNonTxGrp>
+      <TotLbbyExpendMnsLbbyngNonTxGrp>
+        <FilingOrganizationsTotalAmt>0</FilingOrganizationsTotalAmt>
+      </TotLbbyExpendMnsLbbyngNonTxGrp>
+      <AvgLobbyingNontaxableAmountGrp>
+        <CurrentYearMinus3Amt>517764</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>536286</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>529993</CurrentYearMinus1Amt>
+        <CurrentYearAmt>433953</CurrentYearAmt>
+        <TotalAmt>2017996</TotalAmt>
+      </AvgLobbyingNontaxableAmountGrp>
+      <LobbyingCeilingAmt>3026994</LobbyingCeilingAmt>
+      <AvgTotalLobbyingExpendGrp>
+        <CurrentYearMinus3Amt>401000</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>408000</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>341500</CurrentYearMinus1Amt>
+        <CurrentYearAmt>207664</CurrentYearAmt>
+        <TotalAmt>1358164</TotalAmt>
+      </AvgTotalLobbyingExpendGrp>
+      <AvgGrassrootsNontaxableGrp>
+        <CurrentYearMinus3Amt>129441</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>134072</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>132498</CurrentYearMinus1Amt>
+        <CurrentYearAmt>108488</CurrentYearAmt>
+        <TotalAmt>504499</TotalAmt>
+      </AvgGrassrootsNontaxableGrp>
+      <GrassrootsCeilingAmt>756749</GrassrootsCeilingAmt>
+      <AvgGrassrootsLobbyingExpendGrp>
+        <CurrentYearMinus3Amt>97500</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>120750</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>123300</CurrentYearMinus1Amt>
+        <CurrentYearAmt>60660</CurrentYearAmt>
+        <TotalAmt>402210</TotalAmt>
+      </AvgGrassrootsLobbyingExpendGrp>
+    </IRS990ScheduleC>
+    <IRS990ScheduleD documentId="RetDoc1040000001">
+      <CYEndwmtFundGrp>
+        <BeginningYearBalanceAmt>21886326</BeginningYearBalanceAmt>
+        <ContributionsAmt>55278</ContributionsAmt>
+        <InvestmentEarningsOrLossesAmt>1934290</InvestmentEarningsOrLossesAmt>
+        <OtherExpendituresAmt>4499933</OtherExpendituresAmt>
+        <EndYearBalanceAmt>19375961</EndYearBalanceAmt>
+      </CYEndwmtFundGrp>
+      <CYMinus1YrEndwmtFundGrp>
+        <BeginningYearBalanceAmt>25105443</BeginningYearBalanceAmt>
+        <ContributionsAmt>5574</ContributionsAmt>
+        <InvestmentEarningsOrLossesAmt>2375309</InvestmentEarningsOrLossesAmt>
+        <OtherExpendituresAmt>5600000</OtherExpendituresAmt>
+        <EndYearBalanceAmt>21886326</EndYearBalanceAmt>
+      </CYMinus1YrEndwmtFundGrp>
+      <CYMinus2YrEndwmtFundGrp>
+        <BeginningYearBalanceAmt>25282709</BeginningYearBalanceAmt>
+        <ContributionsAmt>5724</ContributionsAmt>
+        <InvestmentEarningsOrLossesAmt>3017010</InvestmentEarningsOrLossesAmt>
+        <OtherExpendituresAmt>3200000</OtherExpendituresAmt>
+        <EndYearBalanceAmt>25105443</EndYearBalanceAmt>
+      </CYMinus2YrEndwmtFundGrp>
+      <CYMinus3YrEndwmtFundGrp>
+        <BeginningYearBalanceAmt>31809944</BeginningYearBalanceAmt>
+        <ContributionsAmt>691690</ContributionsAmt>
+        <InvestmentEarningsOrLossesAmt>-4524894</InvestmentEarningsOrLossesAmt>
+        <OtherExpendituresAmt>2500000</OtherExpendituresAmt>
+        <AdministrativeExpensesAmt>194031</AdministrativeExpensesAmt>
+        <EndYearBalanceAmt>25282709</EndYearBalanceAmt>
+      </CYMinus3YrEndwmtFundGrp>
+      <CYMinus4YrEndwmtFundGrp>
+        <BeginningYearBalanceAmt>26305964</BeginningYearBalanceAmt>
+        <ContributionsAmt>441806</ContributionsAmt>
+        <InvestmentEarningsOrLossesAmt>7916495</InvestmentEarningsOrLossesAmt>
+        <OtherExpendituresAmt>2501408</OtherExpendituresAmt>
+        <AdministrativeExpensesAmt>352913</AdministrativeExpensesAmt>
+        <EndYearBalanceAmt>31809944</EndYearBalanceAmt>
+      </CYMinus4YrEndwmtFundGrp>
+      <BoardDesignatedBalanceEOYPct>0.07200</BoardDesignatedBalanceEOYPct>
+      <PrmnntEndowmentBalanceEOYPct>0.30300</PrmnntEndowmentBalanceEOYPct>
+      <TermEndowmentBalanceEOYPct>0.62500</TermEndowmentBalanceEOYPct>
+      <EndowmentsHeldUnrelatedOrgInd>0</EndowmentsHeldUnrelatedOrgInd>
+      <EndowmentsHeldRelatedOrgInd>0</EndowmentsHeldRelatedOrgInd>
+      <LeaseholdImprovementsGrp>
+        <OtherCostOrOtherBasisAmt>23581</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>23581</DepreciationAmt>
+        <BookValueAmt>0</BookValueAmt>
+      </LeaseholdImprovementsGrp>
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>141980</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>141980</DepreciationAmt>
+        <BookValueAmt>0</BookValueAmt>
+      </EquipmentGrp>
+      <OtherLandBuildingsGrp>
+        <OtherCostOrOtherBasisAmt>101550</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>4044</DepreciationAmt>
+        <BookValueAmt>97506</BookValueAmt>
+      </OtherLandBuildingsGrp>
+      <TotalBookValueLandBuildingsAmt>97506</TotalBookValueLandBuildingsAmt>
+      <OtherSecuritiesGrp>
+        <Desc>ALTERNATIVE INVESTMENTS</Desc>
+        <BookValueAmt>3544250</BookValueAmt>
+        <MethodValuationCd>F</MethodValuationCd>
+      </OtherSecuritiesGrp>
+      <TotalBookValueSecuritiesAmt>3544250</TotalBookValueSecuritiesAmt>
+      <OtherAssetsOrgGrp>
+        <Desc>DUE TO/FROM POOLED INCOME FUND</Desc>
+        <BookValueAmt>18931</BookValueAmt>
+      </OtherAssetsOrgGrp>
+      <OtherAssetsOrgGrp>
+        <Desc>REFUNDABLE DEPOSITS</Desc>
+        <BookValueAmt>46000</BookValueAmt>
+      </OtherAssetsOrgGrp>
+      <OtherAssetsOrgGrp>
+        <Desc>OPERATING LEASE RIGHT-OF-USE ASSETS</Desc>
+        <BookValueAmt>1139082</BookValueAmt>
+      </OtherAssetsOrgGrp>
+      <OtherAssetsOrgGrp>
+        <Desc>ASSETS HELD IN TRUST - POOLED INCOME FUND</Desc>
+        <BookValueAmt>298107</BookValueAmt>
+      </OtherAssetsOrgGrp>
+      <TotalBookValueOtherAssetsAmt>1502120</TotalBookValueOtherAssetsAmt>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>OPERATING LEASE LIABILITIES</Desc>
+        <Amt>1289618</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>1289618</TotalLiabilityAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>5078236</TotalRevEtcAuditedFinclStmtAmt>
+      <RevenueNotReportedAmt>0</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>5078236</RevenueSubtotalAmt>
+      <InvestmentExpensesNotIncldAmt>143120</InvestmentExpensesNotIncldAmt>
+      <RevenueNotReportedFinclStmtAmt>143120</RevenueNotReportedFinclStmtAmt>
+      <TotalRevenuePerForm990Amt>5221356</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>7470225</TotExpnsEtcAuditedFinclStmtAmt>
+      <ExpensesNotReportedAmt>0</ExpensesNotReportedAmt>
+      <ExpensesSubtotalAmt>7470225</ExpensesSubtotalAmt>
+      <InvestmentExpensesNotIncld2Amt>143120</InvestmentExpensesNotIncld2Amt>
+      <ExpensesNotRptFinclStmtAmt>143120</ExpensesNotRptFinclStmtAmt>
+      <TotalExpensesPerForm990Amt>7613345</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART V, LINE 4:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE AMOUNT DRAWN FROM THE INVESTMENT FUND TO BE USED FOR PROGRAM AND ADMINISTRATIVE EXPENSES AND IS APPROVED ANNUALLY BY THE BOARD OF DIRECTORS AS PART OF THE ANNUAL BUDGETING PROCESS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART X, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION IS RECOGNIZED AS A TAX-EXEMPT ORGANIZATION UNDER SECTION 501(C)(3) OF THE INTERNAL REVENUE CODE (IRC) AND THE CALIFORNIA REVENUE AND TAXATION CODE SECTION 23701D. AS SUCH, IT IS GENERALLY NOT SUBJECT TO FEDERAL OR STATE INCOME TAXES, AND NO PROVISION FOR INCOME TAXES HAS BEEN INCLUDED IN THE ACCOMPANYING FINANCIAL STATEMENTS. ADDITIONALLY, THE ORGANIZATION IS CLASSIFIED AS A PUBLIC CHARITY UNDER IRC SECTIONS 509(A)(1) AND 170(B)(1)(A)(VI). HOWEVER, THE ORGANIZATION MAY BE SUBJECT TO INCOME TAX ON ANY NET INCOME EARNED FROM BUSINESS ACTIVITIES THAT ARE REGULARLY CARRIED OUT AND NOT DIRECTLY RELATED TO ITS EXEMPT PURPOSE. MANAGEMENT BELIEVES THAT ANY SUCH UNRELATED BUSINESS INCOME, IF IT EXISTS, IS NOT SIGNIFICANT ENOUGH TO IMPACT THE FINANCIAL STATEMENTS AS A WHOLE, AND THEREFORE, NO TAX PROVISION HAS BEEN RECORDED. IN ACCORDANCE WITH THE FINANCIAL ACCOUNTING STANDARDS BOARD (FASB) ACCOUNTING STANDARDS CODIFICATION (ASC) TOPIC 740, UNCERTAINTY IN INCOME TAXES, THE ORGANIZATION RECOGNIZES TAX POSITIONS IN ITS FINANCIAL STATEMENTS ONLY IF IT IS MORE LIKELY THAN NOT THAT THOSE POSITIONS WOULD BE UPHELD IN AN AUDIT, BASED ON THEIR TECHNICAL MERITS. MANAGEMENT HAS REVIEWED THE ORGANIZATION'S TAX POSITIONS, PARTICULARLY ITS ONGOING QUALIFICATION FOR TAX-EXEMPT STATUS AND ANY POTENTIAL MATERIAL TAX LIABILITIES, AND HAS CONCLUDED THAT ALL POSITIONS ARE LIKELY TO BE UPHELD IF AUDITED. AS A RESULT, NO DISCLOSURES RELATED TO UNCERTAIN TAX POSITIONS ARE REQUIRED. THE ORGANIZATION'S FEDERAL AND STATE INFORMATION RETURNS GENERALLY REMAIN SUBJECT TO EXAMINATION FOR THREE AND FOUR YEARS, RESPECTIVELY, AFTER THEY ARE FILED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="RetDoc1040500001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>CENTRAL AMERICA AND CARIBBEAN</RegionTxt>
+        <TypeOfActivitiesConductedTxt>INVESTMENTS</TypeOfActivitiesConductedTxt>
+        <RegionTotalExpendituresAmt>795417</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <SubtotalOfficesCnt>0</SubtotalOfficesCnt>
+      <SubtotalEmployeesCnt>0</SubtotalEmployeesCnt>
+      <ContinuationTotalOfficeCnt>0</ContinuationTotalOfficeCnt>
+      <ContinuationTotalEmployeeCnt>0</ContinuationTotalEmployeeCnt>
+      <TotalOfficeCnt>0</TotalOfficeCnt>
+      <TotalEmployeeCnt>0</TotalEmployeeCnt>
+      <SubtotalSpentAmt>795417</SubtotalSpentAmt>
+      <ContinuationSpentAmt>0</ContinuationSpentAmt>
+      <TotalSpentAmt>795417</TotalSpentAmt>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND) - ALBANIA, ANDORRA, AUSTRIA, BELGIUM</RegionTxt>
+        <PurposeOfGrantTxt>TO SUPPORT THE EMERGING VOICES NETWORK'S PROGRAMMING AND RECRUITMENT EFFORTS, INCLUDING RESEARCH ON THE FUTURE OF THE TREATY ON THE NON-PROLIFERATION OF NUCLEAR WEAPONS AND SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+        <CashGrantAmt>90000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>ELECTRONIC FUND OR WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND) - ALBANIA, ANDORRA, AUSTRIA, BELGIUM</RegionTxt>
+        <PurposeOfGrantTxt>TO SUPPORT ACTIVITIES OF THE WOMEN OF MIDDLE EAST NETWORK ON PEACEBUILDING, THE INCLUSION OF WOMEN EXPERTS IN DIALOGUE OPPORTUNITIES, AND ANALYSIS IN SUPPORT OF REGIONAL DIPLOMACY.</PurposeOfGrantTxt>
+        <CashGrantAmt>60000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>ELECTRONIC FUND OR WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND) - ALBANIA, ANDORRA, AUSTRIA, BELGIUM</RegionTxt>
+        <PurposeOfGrantTxt>TO SUPPORT EFFORTS TO EXPAND THE IMPACT OF THE TREATY ON THE PROHIBITION OF NUCLEAR WEAPONS AND INFORM THE GLOBAL PUBLIC ABOUT RISING NUCLEAR RISKS AND TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+        <CashGrantAmt>110000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>ELECTRONIC FUND OR WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>ELECTRONIC FUND OR WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE (INCLUDING ICELAND &amp; GREENLAND)</RegionTxt>
+        <PurposeOfGrantTxt>TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>ELECTRONIC FUND OR WIRE TRANSFER</MannerOfCashDisbursementTxt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+      </GrantsToOrgOutsideUSGrp>
+      <Total501c3OrgCnt>2</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>3</TotalOtherOrgCnt>
+      <TransferToForeignCorpInd>0</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>0</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>0</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>0</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>0</ForeignPartnershipInd>
+      <BoycottCountriesInd>0</BoycottCountriesInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>EACH GRANTEE SIGNS A GRANT AGREEMENT WHICH INCLUDES THE DESCRIPTION OF THE PROJECT BEING FUNDED, AMOUNT OF FUNDING, DURATION OF THE GRANT, AND REPORTING REQUIREMENTS. THE GRANTEE'S SIGNATURE IS ACCEPTANCE OF THE TERMS OF THE AGREEMENT. FOLLOWING THE END OF THE GRANT PERIOD, THE GRANTEE IS REQUIRED TO FURNISH A THOROUGH GRANT REPORT THAT INCLUDES FINANCIAL STATEMENTS DETAILING HOW THE GRANT WAS SPENT. PROGRAM STAFF REVIEWS GRANT REPORTS TO ENSURE THAT FUNDS WERE APPLIED TO THE APPROPRIATE ACTIVITIES AND THAT THE ENTIRE AMOUNT WAS EXPENDED PROPERLY. ANY UNSPENT FUNDS ARE REQUIRED TO BE RETURNED TO PLOUGHSHARES FUND. ANY FUTURE GRANTS ARE CONDITIONAL UPON RECEIPT OF A GRANT REPORT ACCEPTABLE TO PROGRAM STAFF.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleF>
+    <IRS990ScheduleI documentId="RetDoc1041900001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>ARMS CONTROL ASSOCIATION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1100 H STREET NW SUITE 520</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20005</ZIPCd>
+        </USAddress>
+        <RecipientEIN>237124588</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>178000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO FUND CONTINUED RESEARCH, PUBLIC EDUCATION, MEDIA OUTREACH, POLICY ADVOCACY, AND CONGRESSIONAL ENGAGEMENT ON PRESSING NUCLEAR POLICY ISSUES AND TO SUPPORT THE PHYSICISTS COALITION FOR NUCLEAR THREAT REDUCTION'S GRASSROOTS NETWORK OF SCIENTISTS AS THEY EDUCATE AND ADVOCATE FOR POLICY CHANGE.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>BACK FROM THE BRINK</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>617 S OLIVE ST SUITE 220</AddressLine1Txt>
+          <CityNm>LOS ANGELES</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>90014</ZIPCd>
+        </USAddress>
+        <RecipientEIN>475355890</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>15000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO EXPAND BACK FROM THE BRINK'S RELATIONSHIPS WITH FAITH GROUPS AND PROMOTE THEIR INVOLVEMENT IN NUCLEAR THREAT REDUCTION EFFORTS.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>BULLETIN OF THE ATOMIC SCIENTISTS</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>PO BOX 15461</AddressLine1Txt>
+          <CityNm>CHICAGO</CityNm>
+          <StateAbbreviationCd>IL</StateAbbreviationCd>
+          <ZIPCd>606155146</ZIPCd>
+        </USAddress>
+        <RecipientEIN>362136497</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>80000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT EFFORTS TO GROW, SUSTAIN, AND CONNECT A GLOBAL NETWORK OF EXPERTS AND THOUGHT LEADERS WITH AN EXPANDING GLOBAL AUDIENCE.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CARNEGIE ENDOWMENT FOR INTERNATIONAL PEACE</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1779 MASSACHUSETTS AVENUE NW</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>130552040</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>100000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO ADVANCE DIPLOMACY AND SUPPORT POLICY DIALOGUES ON KEY ISSUES, TO SUPPORT A CARNEGIE POLICY DIALOGUE ON KEY ISSUES AND TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CENTER FOR INTERNATIONAL POLICY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1050 CONNECTICUT AVENUE NW 500</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>521446207</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>60000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT RESEARCH, ADVOCACY, AND POLICYMAKER ENGAGEMENT THAT ADVANCES CIP'S GOAL OF A MORE PEACEFUL, JUST, AND SUSTAINABLE WORLD, INCLUDING THROUGH THE REDUCTION OF NUCLEAR THREATS AND TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CENTER FOR STRATEGIC AND INTERNATIONAL STUDIES</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1616 RHODE ISLAND AVE NW</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>521501082</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>COUNCIL ON STRATEGIC RISKS</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1025 CONNECTICUT AVE NW STE 1000</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>823106472</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>DAS BOMBE LLC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>115 WEST 29TH STREET 1200</AddressLine1Txt>
+          <CityNm>NEW YORK</CityNm>
+          <StateAbbreviationCd>NY</StateAbbreviationCd>
+          <ZIPCd>10001</ZIPCd>
+        </USAddress>
+        <RecipientEIN>132740460</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>8000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT A UNIVERSITY TOUR FOR THE ART INSTALLATION AND FILM "THE BOMB."</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>FCNL EDUCATION FUND</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>245 2ND STREET NE</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20002</ZIPCd>
+        </USAddress>
+        <RecipientEIN>521254489</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>20000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT EDUCATION OF POLICYMAKERS AND THE PUBLIC ABOUT SAFER NUCLEAR POLICIES AND DIPLOMACY WITH RELEVANT STATES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>FEDERATION OF AMERICAN SCIENTISTS</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1150 18TH ST NW SUITE 1000</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>237185827</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>90000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT ANALYSIS THE WORLD'S NUCLEAR WEAPONS, ONGOING RESEARCH PROJECTS, AND CONSISTENT MEDIA OUTREACH AS WELL AS RAPID RESPONSE TO CURRENT EVENTS, INCLUDING THROUGH A NEW JOURNALISTIC PARTNERSHIP WITH THE WASHINGTON POST.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>FOREIGN POLICY FOR AMERICA</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1301 K ST NW SUITE 300W</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20005</ZIPCd>
+        </USAddress>
+        <RecipientEIN>815063722</RecipientEIN>
+        <IRCSectionDesc>501(C)4</IRCSectionDesc>
+        <CashGrantAmt>125000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT ACTIVITIES PROMOTING A DIPLOMACY-FIRST FOREIGN POLICY FOR THE UNITED STATES, PARTICULARLY ON NUCLEAR WEAPONS ISSUES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>FRIENDS COMMITTEE ON NATIONAL LEGISLATION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>245 SECOND STREET NE</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20002</ZIPCd>
+        </USAddress>
+        <RecipientEIN>530178883</RecipientEIN>
+        <IRCSectionDesc>501(C)4</IRCSectionDesc>
+        <CashGrantAmt>110000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT ADVOCACY EFFORTS IN CONGRESS TO PROMOTE SAFER NUCLEAR POLICIES AND DIPLOMACY WITH RELEVANT STATES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>HERBERT SCOVILLE JR PEACE FELLOWSHIP</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>820 1ST STREET NE SUITE LL-180</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20002</ZIPCd>
+        </USAddress>
+        <RecipientEIN>521755133</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>55000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT THE PLACEMENT OF ONE TO TWO FELLOWS AT A NUCLEAR-FOCUSED NON-GOVERNMENTAL ORGANIZATION IN WASHINGTON, DC.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>HORIZON 2045 FOUNDATION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>203 FLAMINGO RD PMB 147</AddressLine1Txt>
+          <CityNm>MILL VALLEY</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94941</ZIPCd>
+        </USAddress>
+        <RecipientEIN>933515328</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>100000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT HORIZON 2045'S WORK ON IDENTIFYING AND EXECUTING DISRUPTIVE LEGAL AND NORMATIVE STRATEGIES TO HELP SHIFT THE NUCLEAR WEAPONS SYSTEM TOWARDS DISARMAMENT AND PROHIBITION.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>INKSTICK MEDIA</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>201 EAST PATRICK STREET BOX 4044</AddressLine1Txt>
+          <CityNm>FREDERICK</CityNm>
+          <StateAbbreviationCd>MD</StateAbbreviationCd>
+          <ZIPCd>21701</ZIPCd>
+        </USAddress>
+        <RecipientEIN>842451690</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>125000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT THE FOREIGN AFFAIRS, DEFENSE, AND NATIONAL SECURITY MAGAZINE INKSTICK.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>INTERNATIONAL CIVIL SOCIETY ACTION NETWORK</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1126 16TH STREET SUITE 250</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>203951175</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>190000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT ORGANIZATIONS OF THE WOMENS ALLIANCE FOR SECURITY LEADERSHIP IN SOUTH ASIA AND THE MIDDLE EAST THROUGH THE INNOVATIVE PEACE FUND.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>INTERNATIONAL CRISIS GROUP</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1629 K STREET NW SUITE 1000</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20006</ZIPCd>
+        </USAddress>
+        <RecipientEIN>525170039</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>60000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT RESEARCH, ANALYSIS, AND OUTREACH RELATED TO THE TRIGGER LIST.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>J STREET</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>PO BOX 66073</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20035</ZIPCd>
+        </USAddress>
+        <RecipientEIN>261507828</RecipientEIN>
+        <IRCSectionDesc>501(C)4</IRCSectionDesc>
+        <CashGrantAmt>50000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO ENGAGE AND MOBILIZE J STREET'S NATIONAL NETWORK TO SUPPORT A DIPLOMACY-FIRST APPROACH TO US FOREIGN POLICY.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>MARSHALLESE EDUCATIONAL INITIATIVE</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>614 EAST EMMA AVENUE SUITE 203</AddressLine1Txt>
+          <CityNm>SPRINGDALE</CityNm>
+          <StateAbbreviationCd>AR</StateAbbreviationCd>
+          <ZIPCd>72764</ZIPCd>
+        </USAddress>
+        <RecipientEIN>463148318</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>80000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT EDUCATION ABOUT THE LEGACY OF NUCLEAR WEAPONS TESTING AND JUSTICE FOR THE MARSHALLESE COMMUNITY.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>NATIONAL COMMITTEE ON NORTH KOREA</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2021 L STREET NW SUITE 101-244</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>911148123</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>85000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT THE NATIONAL COMMITTEE ON NORTH KOREA'S OUTREACH TO POLICYMAKERS AND THE PUBLIC, AS WELL AS HUMANITARIAN ADVOCACY PROMOTING DIPLOMACY BETWEEN THE UNITED STATES AND NORTH KOREA.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>NEW AMERICA</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>740 15TH ST NW 900</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20005</ZIPCd>
+        </USAddress>
+        <RecipientEIN>522096845</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>30000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT COMPARATIVE RESEARCH INTO INDIVIDUAL RESISTANCE TO WARNINGS OF NUCLEAR CATASTROPHIC RISK.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>NIAC ACTION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>PO BOX 65439</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20035</ZIPCd>
+        </USAddress>
+        <RecipientEIN>473979683</RecipientEIN>
+        <IRCSectionDesc>501(C)4</IRCSectionDesc>
+        <CashGrantAmt>50000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT ADVOCACY EFFORTS TO PROMOTE DIPLOMACY AND PREVENT WAR.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>NUCLEAR AGE PEACE FOUNDATION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>DAVID KRIEGER HOUSE1622 ANACAPA ST</AddressLine1Txt>
+          <CityNm>SANTA BARBARA</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>93101</ZIPCd>
+        </USAddress>
+        <RecipientEIN>953825265</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>15000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT THREE EMERGING LEADERS FROM KIRIBATI ADVOCATING FOR AN INTERNATIONAL TRUST FUND TO ADDRESS NUCLEAR HARMS AT THE THIRD MEETING OF STATES PARTIES FOR THE TREATY ON THE PROHIBITION OF NUCLEAR WEAPONS.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>NUCLEAR TRUTH PROJECT</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>C/O PAM KINGFISHER PO BOX 36</AddressLine1Txt>
+          <CityNm>MOODYS</CityNm>
+          <StateAbbreviationCd>OK</StateAbbreviationCd>
+          <ZIPCd>74444</ZIPCd>
+        </USAddress>
+        <RecipientEIN>931647733</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>60000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT EDUCATION, ADVOCACY AND NETWORKING ACTIVITIES FOCUSED ON HIGHLIGHTING THE ONGOING HARMS OF NUCLEAR WEAPONS AND RAISING THE PROFILE, ENGAGEMENT, AND RECOGNITION OF AFFECTED COMMUNITY MEMBERS IN THE NUCLEAR FIELD.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>NUCLEAR WATCH NEW MEXICO</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>C/O DON HANCOCKSRIC PO BOX 4524</AddressLine1Txt>
+          <CityNm>ALBUQUERQUE</CityNm>
+          <StateAbbreviationCd>NM</StateAbbreviationCd>
+          <ZIPCd>871964524</ZIPCd>
+        </USAddress>
+        <RecipientEIN>237159949</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>70000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT WORK TO CONSTRAIN THE NATIONAL NUCLEAR WEAPONS INFRASTRUCTURE AND ACT AS A WATCHDOG FOR THE NEW MEXICO-BASED NUCLEAR WEAPONS LABORATORIES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>PRESIDENT AND FELLOWS OF MIDDLEBURY COLLEGE</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>9 OLD CHAPEL ROAD</AddressLine1Txt>
+          <CityNm>MIDDLEBURY</CityNm>
+          <StateAbbreviationCd>VT</StateAbbreviationCd>
+          <ZIPCd>05753</ZIPCd>
+        </USAddress>
+        <RecipientEIN>030179298</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>205000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT A FELLOWSHIP PROGRAM FOR NUCLEAR EXPERTS IMPACTED BY THE INVASION OF UKRAINE, TO SUPPORT JEFFREY LEWIS' RESEARCH, ANALYSIS, AND MEDIA OUTREACH ON NUCLEAR AND MISSILE ACTIVITIES IN NORTH KOREA AND CHINA, TO SUPPORT ACTIVITIES OF THE MIDDLE EAST NEXT GENERATION OF ARMS CONTROL SPECIALISTS TO PROMOTE REGIONAL SECURITY IN THE MIDDLE EAST AND TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>QUINCY INSTITUTE FOR RESPONSIBLE STATECRAFT</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2000 PENNSYLVANIA AVE NW STE 7000</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>200061921</ZIPCd>
+        </USAddress>
+        <RecipientEIN>842285143</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>65000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT A PROJECT TO ADVANCE THE IDEA OF FOUR PARTY TALKS BETWEEN THE US, CHINA, SOUTH KOREA, AND NORTH KOREA WITH THE GOAL DECREASING TENSIONS BETWEEN THE US AND CHINA THROUGH TRACK II EFFORTS THAT EXPLORE PATHWAYS FOR THE US AND CHINA TO HEAD OFF RISING TENSIONS AND PROLIFERATION ON THE KOREAN PENINSULA.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>RAND CORPORATION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>PO BOX 2138</AddressLine1Txt>
+          <CityNm>SANTA MONICA</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>90407</ZIPCd>
+        </USAddress>
+        <RecipientEIN>951958142</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>80000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT RESEARCH INTO NUCLEAR ASPECTS OF THE WAR IN UKRAINE AND THE PRODUCTION OF POLICY RECOMMENDATIONS TO REDUCE FUTURE RISKS.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>RETHINK MEDIA</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2443 FILLMORE ST PMB 380-7140</AddressLine1Txt>
+          <CityNm>SAN FRANCISCO</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>941151814</ZIPCd>
+        </USAddress>
+        <RecipientEIN>462005479</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>125000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT COLLABORATIVE MEDIA TRAINING AND CONTENT CREATION RELATED TO LOCALIZED COVERAGE OF THE BULLETIN OF THE ATOMIC SCIENTISTS' ANNUAL DOOMSDAY CLOCK ANNOUNCEMENT AND TO SUPPORT RETHINK MEDIA'S EFFORTS TO ENHANCE THE MEDIA SKILLS OF THE NUCLEAR POLICY COMMUNITY AND BUILD SUPPORT FOR BETTER NUCLEAR POLICY IN THE UNITED STATES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>ROOTS ACTION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1500 W EL CAMINO AVENUE</AddressLine1Txt>
+          <CityNm>SACRAMENTO</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>95833</ZIPCd>
+        </USAddress>
+        <RecipientEIN>272301175</RecipientEIN>
+        <IRCSectionDesc>501(C)4</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT THE DEVELOPMENT AND EXECUTION OF THE NUCLEAR FUTURES FELLOWSHIP CAPSTONE PROJECT.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>SECURE FAMILIES FOUNDATION</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1301 K STREET NW SUITE 300W</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20005</ZIPCd>
+        </USAddress>
+        <RecipientEIN>853815758</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>65000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT THE EDUCATION OF MILITARY PARTNERS AND FAMILY MEMBERS ABOUT NUCLEAR WEAPONS ISSUES, AS WELL AS RELATED POLICYMAKER ENGAGEMENT.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>THE HENRY L STIMSON CENTER</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1211 CONNECTICUT AVE NW 8TH FLOOR</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>521640938</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>60000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT OVERSIGHT AND BIPARTISAN CONGRESSIONAL EDUCATION ON NUCLEAR MODERNIZATION, THE PENTAGON BUDGET, AND THE MILITARY-INDUSTRIAL COMPLEX.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>TRI-VALLEY COMMUNITIES AGAINST A RADIOACTIVE ENVIRONMENT</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>4049 1ST STREET SUITE 243</AddressLine1Txt>
+          <CityNm>LIVERMORE</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94551</ZIPCd>
+        </USAddress>
+        <RecipientEIN>943101687</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>70000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT NATIONALLY RELEVANT WATCHDOG ACTIVITIES AT LAWRENCE LIVERMORE NATIONAL LABORATORY.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>UNION OF CONCERNED SCIENTISTS</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2 BRATTLE SQUARE</AddressLine1Txt>
+          <CityNm>CAMBRIDGE</CityNm>
+          <StateAbbreviationCd>MA</StateAbbreviationCd>
+          <ZIPCd>02138</ZIPCd>
+        </USAddress>
+        <RecipientEIN>042535767</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>120000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO BRING IMPACTED COMMUNITY MEMBERS TO WASHINGTON, DC TO EDUCATE POLICY MAKERS ABOUT THE RADIATION EXPOSURE COMPENSATION ACT (RECA) AND TO SUPPORT EFFORTS TO LIMIT THE SIZE OF THE US NUCLEAR ARSENAL, LOWER THE RISK OF NUCLEAR WAR, AND PROVIDE JUSTICE TO IMPACTED COMMUNITIES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>WASHINGTON PHYSICIANS FOR SOCIAL RESPONSIBILITY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2524 16TH AVE S 300</AddressLine1Txt>
+          <CityNm>SEATTLE</CityNm>
+          <StateAbbreviationCd>WA</StateAbbreviationCd>
+          <ZIPCd>98144</ZIPCd>
+        </USAddress>
+        <RecipientEIN>911123316</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>70000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT WASHINGTON PSR'S MOVEMENT-BUILDING, COALITION WORK, AND OUTREACH TO LEGISLATORS ON NUCLEAR WEAPONS ISSUES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>WIN WITHOUT WAR EDUCATION FUND</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1 THOMAS CIRCLE NW SUITE 700</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20005</ZIPCd>
+        </USAddress>
+        <RecipientEIN>831345865</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>100000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO MOBILIZE A BROAD BASE OF PUBLIC SUPPORT FOR PROGRESSIVE FOREIGN POLICIES, INCLUDING NUCLEAR NONPROLIFERATION AND DIPLOMACY WITH NUCLEAR-ARMED STATES.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>WOMEN CROSS DMZ</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>PO BOX 657 137 N LARCHMONT BLVD</AddressLine1Txt>
+          <CityNm>LOS ANGELES</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>90004</ZIPCd>
+        </USAddress>
+        <RecipientEIN>464502325</RecipientEIN>
+        <IRCSectionDesc>501(C)3</IRCSectionDesc>
+        <CashGrantAmt>70000</CashGrantAmt>
+        <NonCashAssistanceAmt>0</NonCashAssistanceAmt>
+        <PurposeOfGrantTxt>TO SUPPORT PUBLIC AND CONGRESSIONAL WORK ADVOCATING FOR PEACE AND NUCLEAR RESTRAINT ON THE KOREAN PENINSULA.</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>32</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>5</TotalOtherOrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>GRANT PROPOSALS ARE RESEARCHED BY PROGRAM STAFF WHO THEN MAKE RECOMMENDATIONS FOR FUNDING TO THE BOARD OF DIRECTORS. ALL GRANTS ARE APPROVED BY THE BOARD OF DIRECTORS AT PERIODIC BOARD MEETINGS, OR BY A SUBSET OF BOARD MEMBERS VIA A DISCRETIONARY PROCESS FOR SMALLER GRANTS (THOSE BETWEEN $15,000 AND $25,000), OR BY AN APPOINTED SET OF BOARD MEMBERS UNDER SPECIFIC RULES AND CONDITIONS FOR GRANTS ABOVE $25,000. ADDITIONALLY, THE PRESIDENT OF PLOUGHSHARES FUND IS AUTHORIZED TO MAKE GRANTS THROUGH THE PRESIDENT'S FUND AS APPROVED BY THE BOARD. THE PARAMETERS AND PROCESS FOR UTILIZING THIS AUTHORITY ARE AS FOLLOWS: 1) THE TOTAL AMOUNT AVAILABLE TO THE PRESIDENT EACH FISCAL YEAR IS $600,000; 2) THE CAP FOR EACH GRANT IS $100,000; 3) THE CAP BETWEEN EACH BOARD MEETING IS $200,000; 4) THE PRESIDENT MUST SECURE APPROVAL FROM TWO ADDITIONAL BOARD MEMBERS AND THE BOARD CHAIR FOR PRESIDENT'S FUND INVESTMENTS, AS WELL AS CONSULT WITH PROGRAM STAFF PRIOR TO SEEKING BOARD MEMBER APPROVAL; 5) FUNDS AWARDED UNDER THIS PROCESS ARE COUNTED AGAINST THE ANNUAL GRANTMAKING BUDGET AND ARE CONSIDERED GRANTS. GRANTS IN AMOUNTS UNDER $15,000 ARE MADE BY STAFF WITH DELEGATED AUTHORITY. EACH GRANTEE SIGNS A GRANT AGREEMENT WHICH INCLUDES THE DESCRIPTION OF THE PROJECT BEING FUNDED, THE AMOUNT OF FUNDING, DURATION OF THE GRANT, DELIVERABLES TO BE PRODUCED BY THE GRANTEE AND REPORTING REQUIREMENTS. THE GRANTEE'S SIGNATURE IS ACCEPTANCE OF THE TERMS OF THE AGREEMENT. FOLLOWING THE END OF THE GRANT PERIOD, THE GRANTEE IS REQUIRED TO FURNISH A THOROUGH GRANT REPORT THAT INCLUDES FINANCIAL STATEMENTS DETAILING HOW THE GRANT WAS SPENT. PROGRAM STAFF REVIEWS GRANT REPORTS TO ENSURE THAT FUNDS WERE APPLIED TO THE APPROPRIATE ACTIVITIES AND THAT THE ENTIRE AMOUNT WAS EXPENDED PROPERLY. ANY UNSPENT FUNDS ARE REQUIRED TO BE RETURNED TO PLOUGHSHARES FUND. ANY FUTURE GRANTS ARE CONDITIONAL UPON RECEIPT OF A GRANT REPORT ACCEPTABLE TO PROGRAM STAFF.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleJ documentId="RetDoc1042400001">
+      <WrittenEmploymentContractInd>X</WrittenEmploymentContractInd>
+      <CompensationSurveyInd>X</CompensationSurveyInd>
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>0</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>0</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>0</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>0</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>0</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>0</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>0</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>0</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>0</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>EMMA BELCHER</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <BaseCompensationFilingOrgAmt>402031</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>19735</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>23470</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>445236</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>ELIZABETH WARNER</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>179861</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>11067</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>44468</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>235396</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>SARA KUTCHESFAHANI</PersonNm>
+        <TitleTxt>DIRECTOR OF PROGRAMS</TitleTxt>
+        <BaseCompensationFilingOrgAmt>167178</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>8823</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>18489</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>194490</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>JAMSHADE FAANI</PersonNm>
+        <TitleTxt>FINANCE DIRECTOR/CONTROLLE</TitleTxt>
+        <BaseCompensationFilingOrgAmt>143130</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>7676</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>33612</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>184418</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>BONNIE FISK</PersonNm>
+        <TitleTxt>DEVELOPMENT DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>137198</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>8425</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>17503</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>163126</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>CHARLES CROSBY</PersonNm>
+        <TitleTxt>COMMUNICATIONS &amp; MARKETING DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>144130</BaseCompensationFilingOrgAmt>
+        <CompensationBasedOnRltdOrgsAmt>0</CompensationBasedOnRltdOrgsAmt>
+        <BonusFilingOrganizationAmount>0</BonusFilingOrganizationAmount>
+        <BonusRelatedOrganizationsAmt>0</BonusRelatedOrganizationsAmt>
+        <OtherCompensationFilingOrgAmt>0</OtherCompensationFilingOrgAmt>
+        <OtherCompensationRltdOrgsAmt>0</OtherCompensationRltdOrgsAmt>
+        <DeferredCompensationFlngOrgAmt>8856</DeferredCompensationFlngOrgAmt>
+        <DeferredCompRltdOrgsAmt>0</DeferredCompRltdOrgsAmt>
+        <NontaxableBenefitsFilingOrgAmt>7450</NontaxableBenefitsFilingOrgAmt>
+        <NontaxableBenefitsRltdOrgsAmt>0</NontaxableBenefitsRltdOrgsAmt>
+        <TotalCompensationFilingOrgAmt>160436</TotalCompensationFilingOrgAmt>
+        <TotalCompensationRltdOrgsAmt>0</TotalCompensationRltdOrgsAmt>
+        <CompReportPrior990FilingOrgAmt>0</CompReportPrior990FilingOrgAmt>
+        <CompReportPrior990RltdOrgsAmt>0</CompReportPrior990RltdOrgsAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleM documentId="RetDoc1042900001">
+      <SecuritiesPubliclyTradedGrp>
+        <NonCashCheckboxInd>X</NonCashCheckboxInd>
+        <ContributionCnt>7</ContributionCnt>
+        <NoncashContributionsRptF990Amt>40805</NoncashContributionsRptF990Amt>
+        <MethodOfDeterminingRevenuesTxt>AVG. QUOTED PRICE</MethodOfDeterminingRevenuesTxt>
+      </SecuritiesPubliclyTradedGrp>
+      <AnyPropertyThatMustBeHeldInd>0</AnyPropertyThatMustBeHeldInd>
+      <ReviewProcessUnusualNCGiftsInd>0</ReviewProcessUnusualNCGiftsInd>
+      <ThirdPartiesUsedInd>0</ThirdPartiesUsedInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, COLUMN (B):</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION IS REPORTING IN PART I, COLUMN (B), THE NUMBER OF CONTRIBUTIONS RECEIVED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleM>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>PLOUGHSHARE FUND'S OUTSIDE CPA FIRM AND CHIEF FINANCIAL OFFICER PREPARE THE FORM 990. THE FORM IS THEN REVIEWED AND APPROVED BY THE ORGANIZATION'S AUDIT COMMITTEE. THE FORM IS PROVIDED TO THE FULL BOARD FOR REVIEW BEFORE FILING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>ALL BOARD MEMBERS AND STAFF ARE COVERED PERSONS UNDER PLOUGHSHARES FUND'S CONFLICT OF INTEREST POLICY. IN ANY ACTUAL, POSSIBLE AND/OR PERCEIVED CONFLICT OF INTEREST, AFTER REASONABLE INQUIRY, THE BOARD MEMBER OR STAFF IS REQUIRED TO ADVISE THE ORGANIZATION OF THE CONFLICT BEFORE THE ORGANIZATION MAKES A DECISION RELATED TO, OR AFFECTING, SUCH CONFLICT. IT IS THE ORGANIZATION'S POLICY TO ACKNOWLEDGE SUCH CONFLICTS OPENLY AND APPROPRIATELY. IN CASES WHERE A GRANT IS AWARDED AND ONE OR MORE OF PLOUGHSHARES FUND'S BOARD MEMBERS HAS ABSTAINED FROM VOTING ON THE PROPOSED GRANT BECAUSE OF A CONFLICT OR THE APPEARANCE THEREOF FOR EXAMPLE, HE OR SHE IS A MEMBER OF THAT ORGANIZATION'S BOARD OF DIRECTORS OR IS EMPLOYED BY THE ORGANIZATION -- SUCH CIRCUMSTANCES ARE CLEARLY IDENTIFIED IN THE MINUTES OF THAT MEETING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 15</FormAndLineReferenceDesc>
+        <ExplanationTxt>PLOUGHSGHARE FUND'S BOARD OF DIRECTORS HAS A PROCESS FOR REVIEWING AND APPROVING THE COMPENSATION OF THE PRESIDENT ON A REGULAR BASIS TO DETERMINE IT IS FAIR AND REASONABLE WITH THE GOAL OF RETAINING EMPLOYEES AT COMPENSATION LEVELS WITHIN APPROPRIATE MARKET RANGE. THE PROCESS FOR DETERMINING THE COMPENSATION PAID TO THE PRESIDENT INCLUDES THE APPROVAL OF THE COMPENSATION ARRANGEMENT IN ADVANCE, BY THE BOARD OF DIRECTORS, WITH ALL PERSONS WITH A CONFLICT OF INTEREST ABSTAINING FROM THE BOARD'S DELIBERATION AND DISCUSSION. THE BOARD REVIEWS COMPARABLE COMPENSATION DATA FOR COMPARABLE SERVICES, COMPARABLE ENTERPRISES (BY BUDGET, REVENUES, NUMBER OF EMPLOYEES, PERSONS SERVED, AND MISSION), COMPARABLE CIRCUMSTANCES (GEOGRAPHIC LOCATION AND ECONOMIC CONDITIONS/COST OF LIVING), AND OTHER FACTORS SUCH AS WHETHER THE PERSON MANAGES MULTIPLE FUNCTIONS OR DEPARTMENTS, THE EMPLOYEE'S DUTIES AND PAST PERFORMANCE HISTORY, AND THE EMPLOYEE'S BACKGROUND, SKILLS, EDUCATION, AND EXPERIENCE. THE DOCUMENTATION OF THE BOARD INCLUDES THE TERMS OF THE TRANSACTION AND THE DATE OF APPROVAL, THE MEMBERS WHO WERE PRESENT DURING THE DEBATE AND VOTE ON THE TRANSACTION, A DESCRIPTION OF THE COMPARABLE DATA AND HOW IT WAS OBTAINED, AND DOCUMENTATION OF THE BASIS FOR THE DETERMINATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>GOVERNING DOCUMENTS, THE CONFLICT OF INTEREST POLICY, AND FINANCIAL STATEMENTS ARE AVAILABLE TO THE PUBLIC UPON REQUEST.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART IX, LINE 11G</FormAndLineReferenceDesc>
+        <ExplanationTxt>MARKETING &amp; COMMUNICATIONS CONSULTING: PROGRAM SERVICE EXPENSES 65,257. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 65,257. DESIGN SERVICES: PROGRAM SERVICE EXPENSES 120. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 1,450. TOTAL EXPENSES 1,570. HUMAN RESOURCE CONSULTING: PROGRAM SERVICE EXPENSES 31,849. MANAGEMENT AND GENERAL EXPENSES 8,688. FUNDRAISING EXPENSES 14,001. TOTAL EXPENSES 54,538. PAYROLL SERVICE: PROGRAM SERVICE EXPENSES 0. MANAGEMENT AND GENERAL EXPENSES 7,506. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 7,506. PHOTOGRAPHY/VIDEOGRAPHY/AUDIO RECORDING: PROGRAM SERVICE EXPENSES 11,935. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 1,376. TOTAL EXPENSES 13,311. TEMPORARY STAFFING SERVICES: PROGRAM SERVICE EXPENSES 0. MANAGEMENT AND GENERAL EXPENSES 44,263. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 44,263. OTHER PROFESSIONAL SERVICES: PROGRAM SERVICE EXPENSES 229,343. MANAGEMENT AND GENERAL EXPENSES 38,932. FUNDRAISING EXPENSES 9,390. TOTAL EXPENSES 277,665. JANITORIAL SERVICES: PROGRAM SERVICE EXPENSES 2,749. MANAGEMENT AND GENERAL EXPENSES 750. FUNDRAISING EXPENSES 1,209. TOTAL EXPENSES 4,708.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

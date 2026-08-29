@@ -20,6 +20,23 @@ CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 ENRICHMENT = BENCHMARK / "enrichment"
 JOB_AD_EVIDENCE_UPDATES = ENRICHMENT / "job_ad_evidence_updates.csv"
 EA_ROSTER_COMPENSATION = ENRICHMENT / "ea_roster_validated_compensation.csv"
+FORM990_POSITION_OBSERVATIONS = ENRICHMENT / "form990_position_observations.csv"
+FORM990_POSITION_SUPPORTING_SOURCES = ENRICHMENT / "form990_position_supporting_sources.csv"
+POSITION_FAMILIES = (
+    ("operations", "Operations", "Operations leadership"),
+    ("finance", "Finance", "Finance leadership"),
+    ("chief_of_staff", "Chief of Staff", "Chief of Staff"),
+    ("research", "Research", "Research and science"),
+    ("programs", "Programs", "Program and impact"),
+    ("development", "Development", "Development and fundraising"),
+    ("policy", "Policy", "Policy and advocacy"),
+    ("communications", "Communications", "Communications and editorial"),
+    ("legal", "Legal", "Legal leadership"),
+    ("people", "People / HR", "People and HR"),
+    ("technology", "Technology / Data", "Technology and data"),
+    ("strategy", "Strategy", "Strategy leadership"),
+    ("general_leadership", "General Leadership", "General and deputy leadership"),
+)
 JOB_AD_SECONDARY_SOURCES = {
     "SRC-AD-CSCCE": {
         "source_id": "SRC-AD-CSCCE-ABOUT",
@@ -754,6 +771,293 @@ def build_ea_roster_incumbents() -> list[dict]:
     return output
 
 
+def display_category(value: str) -> str:
+    return " ".join(word.upper() if word in {"hr", "vp"} else word.capitalize() for word in text(value).split("_"))
+
+
+def build_position_data(
+    by_source: dict[tuple[str, str], dict],
+    references_by_organization: dict[str, dict],
+) -> tuple[list[dict], dict[str, list[dict]], dict[str, list[dict]]]:
+    source_rows = rows(FORM990_POSITION_OBSERVATIONS)
+    supporting_source_rows = rows(FORM990_POSITION_SUPPORTING_SOURCES)
+    supporting_sources_by_id = {
+        text(row["source_id"]): row for row in supporting_source_rows
+    }
+    if len(supporting_sources_by_id) != len(supporting_source_rows):
+        raise ValueError("Duplicate Form 990 position supporting-source IDs")
+    used_supporting_source_ids: set[str] = set()
+    family_keys = {key for key, _, _ in POSITION_FAMILIES}
+    catalog_counts: dict[str, dict[str, int]] = {
+        key: {"catalog": 0, "roleEligible": 0, "defaultIncluded": 0, "organizations": 0}
+        for key in family_keys
+    }
+    family_organizations: dict[str, set[str]] = {key: set() for key in family_keys}
+    position_rows: dict[str, list[dict]] = {key: [] for key in family_keys}
+    rp_references: dict[str, list[dict]] = {key: [] for key in family_keys}
+    cached_by_source: dict[str, tuple[str, str]] = {}
+
+    for row in source_rows:
+        family = text(row["position_family"])
+        if family not in family_keys or not boolean(row["catalog_eligible"]):
+            continue
+        organization = text(row["organization"])
+        source_id = text(row["source_id"])
+        local_path = text(row["source_local_path"]).removeprefix("benchmark/")
+        if source_id not in cached_by_source:
+            cached_by_source[source_id] = (cache_source(source_id, local_path), filing_homepage(local_path))
+        cached, homepage = cached_by_source[source_id]
+        classification_source_id = text(row["classification_source_id"])
+        classification_source_url = text(row["classification_source_url"])
+        classification_source_local_path = text(
+            row["classification_source_local_path"]
+        ).removeprefix("benchmark/")
+        classification_source_sha256 = text(row["classification_source_sha256"])
+        classification_source = None
+        if any((
+            classification_source_id,
+            classification_source_url,
+            classification_source_local_path,
+            classification_source_sha256,
+        )):
+            if not all((
+                classification_source_id,
+                classification_source_url,
+                classification_source_local_path,
+                classification_source_sha256,
+            )):
+                raise ValueError(
+                    f"Incomplete position-classification source fields: {text(row['observation_id'])}"
+                )
+            supporting_manifest = supporting_sources_by_id.get(classification_source_id)
+            if supporting_manifest is None:
+                raise ValueError(
+                    f"Unmanifested position-classification source: {classification_source_id}"
+                )
+            if (
+                text(supporting_manifest["observation_id"]) != text(row["observation_id"])
+                or text(supporting_manifest["canonical_url"]) != classification_source_url
+                or text(supporting_manifest["local_path"]) != f"benchmark/{classification_source_local_path}"
+                or text(supporting_manifest["sha256"]) != classification_source_sha256
+            ):
+                raise ValueError(
+                    f"Position-classification source does not match its manifest: "
+                    f"{classification_source_id}"
+                )
+            classification_source_path = BENCHMARK / classification_source_local_path
+            if not classification_source_path.is_file():
+                raise FileNotFoundError(
+                    f"Missing position-classification source: {classification_source_path}"
+                )
+            if hashlib.sha256(classification_source_path.read_bytes()).hexdigest() != classification_source_sha256:
+                raise ValueError(
+                    f"Position-classification source hash mismatch: {classification_source_id}"
+                )
+            classification_source = {
+                "id": classification_source_id,
+                "url": classification_source_url,
+                "evidenceUse": text(supporting_manifest["evidence_use"]),
+                "cachedSource": cache_source(
+                    classification_source_id, classification_source_local_path
+                ),
+                "localPath": f"benchmark/{classification_source_local_path}",
+                "sha256": classification_source_sha256,
+            }
+            used_supporting_source_ids.add(classification_source_id)
+        base_nominal = number(row["schedule_j_base_total_nominal"])
+        cash_nominal = number(row["part_vii_cash_nominal"])
+        total_nominal = number(row["part_vii_total_nominal"])
+        base_adjusted = number(row["schedule_j_base_total_july_2026"])
+        cash_adjusted = number(row["part_vii_cash_july_2026"])
+        total_adjusted = number(row["part_vii_total_july_2026"])
+        role_eligible = boolean(row["role_eligible"])
+        default_included = boolean(row["default_included"])
+        default_hours_eligible = boolean(row["default_hours_eligible"])
+        sensitivity_only_reason = text(row["sensitivity_only_reason"])
+        is_rp = boolean(row["is_rp_reference"])
+        if default_included and (not role_eligible or is_rp):
+            raise ValueError(f"Invalid default position inclusion: {text(row['observation_id'])}")
+        if default_included and not default_hours_eligible:
+            raise ValueError(f"Sub-30-hour position leaked into default inclusion: {text(row['observation_id'])}")
+        if sensitivity_only_reason and (default_included or not role_eligible):
+            raise ValueError(
+                f"Invalid sensitivity-only position status: {text(row['observation_id'])}"
+            )
+        organization_provenance = references_by_organization.get(organization) or by_source.get(("form990", source_id))
+        if organization_provenance is None and not is_rp:
+            raise ValueError(f"No organization provenance for position row: {organization}/{source_id}")
+
+        provenance = copy.deepcopy(
+            organization_provenance
+            or {
+                "tier": {"value": "Reference", "label": "RP reference", "rationale": "Display-only RP filing reference.", "citation": text(row["source_local_path"])},
+                "ea": {"value": "EA-core", "sourceValue": "EA-core", "rationale": "Rethink Priorities reference row.", "citation": text(row["source_local_path"])},
+                "structure": {"expected": "independent nonprofit", "observationFlag": "reference_not_analyzed", "rationale": "Display-only RP filing reference.", "citation": text(row["source_local_path"])},
+                "topic": {"value": "research and evidence", "sourceDescription": "research and evidence", "rationale": "Rethink Priorities reference row.", "citation": text(row["source_local_path"])},
+            }
+        )
+        provenance["title"] = {
+            "raw": text(row["native_title"]),
+            "analysisGroup": text(row["title_group"]),
+            "rationale": (
+                f"Reviewed Form 990 position taxonomy: {text(row['classification_rule'])}; "
+                f"family={family}; scope={text(row['role_scope'])}; incumbency={text(row['incumbency_status'])}."
+            ),
+            "citation": (
+                "benchmark/enrichment/form990_position_taxonomy.csv#"
+                f"taxonomy_id={text(row['taxonomy_id'])} | {text(row['source_local_path'])}#"
+                f"{text(row['part_vii_xml_locator'])}"
+            ),
+        }
+        if classification_source:
+            provenance["title"]["classificationSource"] = classification_source
+            provenance["title"]["rationale"] += (
+                f" Supporting evidence: {classification_source['evidenceUse']}"
+            )
+            provenance["title"]["citation"] += (
+                f" | {classification_source['cachedSource']}"
+                f" | {classification_source['url']}"
+            )
+        provenance["classificationTiming"] = "post_freeze_form990_position_enrichment"
+        provenance["provenanceType"] = "source_native_form990 + reviewed_position_taxonomy + preserved_nonpay_organization_metadata"
+        provenance["confidence"] = text(row["classification_confidence"])
+        provenance["caveats"] = (
+            "Form 990 non-CEO reporting is threshold-selected; this is not a complete employee salary census. "
+            + text(row["default_exclusion_reason"])
+        ).strip()
+        year = number(row["compensation_calendar_year"])
+        filing_hours = number(row["average_hours_per_week"])
+        related_hours = number(row["average_hours_related_orgs"])
+        total_hours = number(row["total_reported_hours"])
+        evidence = (
+            f"Form 990 Part VII reports {text(row['person_name'])}, {text(row['native_title'])}, "
+            f"at {filing_hours:g} filing-organization"
+            if filing_hours is not None else
+            f"Form 990 Part VII reports {text(row['person_name'])}, {text(row['native_title'])}, "
+            "with unreported filing-organization"
+        )
+        evidence += (
+            f" plus {related_hours:g} related-organization average weekly hours "
+            f"({total_hours:g} combined). "
+            if related_hours is not None and total_hours is not None else
+            f" average weekly hours ({total_hours:g} combined). "
+            if total_hours is not None else
+            " average weekly hours. "
+        )
+        evidence += (
+            f"Part VII organization-plus-related reportable compensation: {money(cash_nominal)}; "
+            f"estimated other compensation: {money(number(row['part_vii_other_nominal']))}; "
+            f"Schedule J base: {money(base_nominal)}. Form 990 reporting thresholds make this a "
+            "selected public-compensation observation, not a complete workforce salary record."
+        )
+        app_row = {
+            "id": text(row["observation_id"]),
+            "organization": organization,
+            "executive": text(row["person_name"]),
+            "title": text(row["native_title"]),
+            "titleGroup": display_category(text(row["title_group"])),
+            "rawTitle": text(row["native_title"]),
+            "positionFamily": family,
+            "secondaryRoleTags": [display_category(value) for value in text(row["secondary_role_tags"]).split(";") if value],
+            "seniorityGroup": display_category(text(row["seniority_group"])),
+            "roleScope": text(row["role_scope"]),
+            "incumbencyStatus": text(row["incumbency_status"]),
+            "averageHoursPerWeek": filing_hours,
+            "averageHoursRelatedOrgs": related_hours,
+            "totalReportedHours": total_hours,
+            "defaultHoursEligible": default_hours_eligible,
+            "sensitivityOnlyReason": sensitivity_only_reason,
+            "tier": text(row["reference_tier"]) or text(row["peer_tier"]) or ("RP" if is_rp else ""),
+            "topic": text(row["topic_cluster"]),
+            "eaAffinity": text(row["ea_affinity"]),
+            "location": text(row["country_or_region"]),
+            "remoteStatus": "Not reported in Form 990",
+            "structure": text(row["expected_structure"]),
+            "revenue": number(row["organization_revenue"]),
+            "expenses": number(row["organization_expenses"]),
+            "staff": number(row["organization_staff"]),
+            "comparabilityScore": number(row["comparability_score"]) or 0,
+            "compensationYear": int(year) if year is not None else None,
+            "salary": {"base": base_adjusted, "cash": cash_adjusted, "total": total_adjusted},
+            "nominalSalary": {"base": base_nominal, "cash": cash_nominal, "total": total_nominal},
+            "cpiFactor": number(row["cpi_factor_to_july_2026"]) or 1,
+            "cpiPeriod": f"{int(year)} annual average" if year is not None else "",
+            "defaultIncluded": default_included,
+            "structurallyClean": role_eligible and not sensitivity_only_reason and text(row["role_scope"]) == "functional" and text(row["incumbency_status"]) == "current",
+            "founder": False,
+            "analysisStatus": "reference_not_analyzed" if is_rp else "primary" if default_included else "sensitivity_only" if role_eligible else "excluded",
+            "auditStatus": f"{text(row['classification_confidence'])} confidence · {text(row['classification_rule'])}",
+            "selectionNote": text(row["default_exclusion_reason"]) or "Current paid role with reviewed functional scope.",
+            "evidenceText": evidence,
+            "sourceUrl": text(row["propublica_url"]),
+            "canonicalUrl": text(row["official_irs_url"]),
+            "cachedSource": cached,
+            "localPath": local_path,
+            "sourceType": "Form 990",
+            "evidenceStream": "incumbents",
+            "homepageUrl": homepage,
+            "categoryProvenance": provenance,
+            "positionTaxonomy": {
+                "taxonomyId": text(row["taxonomy_id"]),
+                "classificationRule": text(row["classification_rule"]),
+                "confidence": text(row["classification_confidence"]),
+                "roleScope": text(row["role_scope"]),
+                "incumbencyStatus": text(row["incumbency_status"]),
+                "sensitivityOnlyReason": sensitivity_only_reason,
+                "partViiLocator": text(row["part_vii_xml_locator"]),
+                "scheduleJLocator": text(row["schedule_j_xml_locator"]),
+                "methodologyPath": "benchmark/enrichment/form990_position_methodology.md",
+                "classificationSource": classification_source,
+            },
+        }
+        catalog_counts[family]["catalog"] += 1
+        catalog_counts[family]["roleEligible"] += int(role_eligible)
+        catalog_counts[family]["defaultIncluded"] += int(default_included)
+        if default_included:
+            family_organizations[family].add(organization)
+        if is_rp:
+            if role_eligible:
+                rp_references[family].append(app_row)
+        else:
+            position_rows[family].append(app_row)
+
+    seen_ids: set[str] = set()
+    for row in [item for family in position_rows.values() for item in family] + [item for family in rp_references.values() for item in family]:
+        if row["id"] in seen_ids:
+            raise ValueError(f"Duplicate generated position observation ID: {row['id']}")
+        seen_ids.add(row["id"])
+    if used_supporting_source_ids != supporting_sources_by_id.keys():
+        raise ValueError(
+            "Form 990 position supporting-source manifest coverage mismatch: "
+            f"used={sorted(used_supporting_source_ids)}, "
+            f"manifested={sorted(supporting_sources_by_id)}"
+        )
+
+    catalog = [{
+        "key": "ceo",
+        "label": "CEO",
+        "pageLabel": "CEO",
+        "defaultMeasure": "base",
+        "description": "The fully validated chief-executive benchmark, including incumbent Form 990s and recruitment postings.",
+    }]
+    for key, label, page_label in POSITION_FAMILIES:
+        counts = catalog_counts[key]
+        counts["organizations"] = len(family_organizations[key])
+        catalog.append({
+            "key": key,
+            "label": label,
+            "pageLabel": page_label,
+            "defaultMeasure": "cash",
+            "description": (
+                f"{counts['defaultIncluded']} current paid observations across {counts['organizations']} selected peer organizations. "
+                "Part VII reportable cash is the coverage-first default; Form 990 reporting thresholds make this an upward-selected public-compensation sample."
+            ),
+            "counts": counts,
+            "methodologyPath": "benchmark/enrichment/form990_position_methodology.md",
+        })
+    return catalog, position_rows, rp_references
+
+
 def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
     jobs = rows(DELIVERABLES / "validated_job_ad_compensation.csv")
     evidence_updates = load_job_ad_evidence_updates(jobs)
@@ -868,15 +1172,23 @@ def main() -> None:
     incumbents.extend(roster_incumbents)
     jobs = build_job_ads(rationales_by_source)
     rp_reference = build_rp_reference()
+    position_catalog, position_observations, rp_references_by_position = build_position_data(
+        rationales_by_source, reference_rationales
+    )
     # Preserve the operating-headcount page used by the UI's editable staff-similarity
     # target. The comparable RP table field remains filing-derived in build_rp_reference().
     cache_source(RP_FUNDING_SOURCE_ID, RP_FUNDING_LOCAL_PATH)
-    app_rows = incumbents + jobs
+    position_app_rows = [row for family_rows in position_observations.values() for row in family_rows]
+    position_rp_rows = [row for family_rows in rp_references_by_position.values() for row in family_rows]
+    app_rows = incumbents + jobs + position_app_rows
     wikipedia_profiles = load_wikipedia_profiles({row["organization"] for row in app_rows})
     for row in app_rows:
         profile = wikipedia_profiles[row["organization"]]
         row["wikipediaTitle"] = text(profile["wikipedia_title"])
         row["wikipediaUrl"] = text(profile["wikipedia_url"])
+    for row in position_rp_rows:
+        row["wikipediaTitle"] = ""
+        row["wikipediaUrl"] = ""
     payload = {
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "priceBasis": "July 2026 USD",
@@ -891,6 +1203,9 @@ def main() -> None:
         "incumbents": incumbents,
         "jobAds": jobs,
         "rpReference": rp_reference,
+        "positionCatalog": position_catalog,
+        "positionObservations": position_observations,
+        "rpReferencesByPosition": rp_references_by_position,
         "categoryExplainers": {
             "definitions": definitions,
             "definitionCount": sum(len(field) for field in definitions.values()),
@@ -905,6 +1220,10 @@ def main() -> None:
             "jobAdEvidenceUpdatesPath": "benchmark/enrichment/job_ad_evidence_updates.csv",
             "eaRosterAuditPath": "benchmark/enrichment/ea_roster_bundle_audit.md",
             "eaRosterReviewedCompensationPath": "benchmark/enrichment/ea_roster_validated_compensation.csv",
+            "positionMethodologyPath": "benchmark/enrichment/form990_position_methodology.md",
+            "positionObservationsPath": "benchmark/enrichment/form990_position_observations.csv",
+            "positionTaxonomyPath": "benchmark/enrichment/form990_position_taxonomy.csv",
+            "positionSupportingSourcesPath": "benchmark/enrichment/form990_position_supporting_sources.csv",
         },
         "summary": {
             "selectedReferenceOrganizations": len(incumbents),
@@ -918,6 +1237,10 @@ def main() -> None:
                 bool(profile["wikipedia_title"]) for profile in wikipedia_profiles.values()
             ),
             "eaRosterValidatedObservations": len(roster_incumbents),
+            "positionCatalogSize": len(position_catalog),
+            "positionCatalogObservations": len(position_app_rows),
+            "positionDefaultIncluded": sum(row["defaultIncluded"] for row in position_app_rows),
+            "positionRpReferences": len(position_rp_rows),
         },
     }
     OUTPUT.write_text(

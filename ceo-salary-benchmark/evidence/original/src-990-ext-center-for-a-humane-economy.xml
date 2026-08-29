@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2023v6.0">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2025-09-02T11:48:06-05:00</ReturnTs>
+    <TaxPeriodEndDt>2024-10-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>043446462</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>REARDON AND COMPANY LLP</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>111 WILLARD STREET</AddressLine1Txt>
+        <CityNm>QUINCY</CityNm>
+        <StateAbbreviationCd>MA</StateAbbreviationCd>
+        <ZIPCd>02169</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2023-11-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>832620507</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>CENTER FOR A HUMANE ECONOMY INC</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>CENT</BusinessNameControlTxt>
+      <PhoneNum>3368131677</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>PO BOX 30845</AddressLine1Txt>
+        <CityNm>BETHESDA</CityNm>
+        <StateAbbreviationCd>MD</StateAbbreviationCd>
+        <ZIPCd>20824</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>SHERRY KELLETT</PersonNm>
+      <PersonTitleTxt>TREASURER</PersonTitleTxt>
+      <PhoneNum>3368131677</PhoneNum>
+      <SignatureDt>2025-08-22</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>0</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>ANDREW J REARDON CPA</PreparerPersonNm>
+      <PTIN>P00143158</PTIN>
+      <PhoneNum>6174729434</PhoneNum>
+      <PreparationDt>2025-08-22</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2023</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="6">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <PrincipalOfficerNm>WAYNE PACELLE</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>3211 LELAND ST</AddressLine1Txt>
+        <CityNm>CHEVY CHASE</CityNm>
+        <StateAbbreviationCd>MD</StateAbbreviationCd>
+        <ZIPCd>20815</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>4266185</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>CENTERFORAHUMANEECONOMY.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2018</FormationYr>
+      <LegalDomicileStateCd>MD</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>THE CENTER IS THE FIRST NON-PROFIT ANIMAL WELFARE ORGANIZATION THAT FOCUSES ON INFLUENCING THE CONDUCT OF CORPORATIONS TO FORGE A HUMANE ECONOMIC ORDER. THE CENTER ENCOURAGES CORPORATIONS TO EMBRACE ANIMAL WELFARE AS A CORE PART OF THEIR COMMITMENT TO SOCIAL RESPONSIBILITY, BY PROMOTING REFORMS IN PURCHASING PRACTICES, RESEARCH AND DEVELOPMENT PROGRAMS, AND OTHER OPERATIONS THAT RECOGNIZE ANIMAL WELFARE IMPERATIVES.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>6</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>6</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>16</TotalEmployeeCnt>
+      <TotalVolunteersCnt>125</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>2308789</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>3254261</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>214366</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>518817</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>55742</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>96124</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>0</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>0</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>2578897</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>3869202</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>0</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>0</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>1377453</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>1574517</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>0</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>110903</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>953698</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>1630642</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>2331151</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>3205159</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>247746</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>664043</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>2534540</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>3490655</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>393099</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>680550</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>2141441</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>2810105</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>THERE ARE MANY PATHWAYS FOR IMPROVING THE LIVES OF ANIMALS, BUT ENCOURAGING CORPORATIONS TO EMBED ANIMAL PROTECTION VALUES INTO THEIR PRODUCTION PRACTICES, SUPPLY CHAINS, MARKETING EFFORTS AND RESEARCH AND DEVELOPMENT ACTIVITIES MAY BE THE MOST CONSEQUENTIAL. THE CENTER IS THE FIRST ORGANIZATION IN THE FIELD OF ANIMAL PROTECTION SOLELY FOCUSED ON INFLUENCING THE WORKINGS OF BUSINESSES TO FORGE A HUMANE ECONOMIC ORDER. THE CENTER WORKS WITH CORPORATIONS TO ALERT THEM TO THEIR RESPONSIBILITIES IN A CULTURE WHERE CONSUMERS, INVESTORS AND OTHER KEY STAKEHOLDERS ABHOR CRUELTY AND EMBRACE INNOVATION.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>2361149</ExpenseAmt>
+      <Desc>*WORKED TO SHUT DOWN ILLEGAL BUSINESS OF ANIMAL FIGHTING THROUGH INVESTIGATIONS AND WORKING WITH LAW ENFORCEMENT.*FILED LAWSUIT TO STOP U.S. FISH AND WILDLIFE SERVICE FROM KILLING HALF A MILLION BARRED OWLS.*BLOCKED CONGRESSIONAL EFFORTS BY ANTI-WOLF LAWMAKERS TO ELIMINATE PROTECTION OF WOLVES.*BUILT COALITION OF 200+ ORGANIZATIONS TO DEMAND THAT CONGRESS END THE MILK MANDATE IN SCHOOL LUNCHES.*SUCCEEDED IN STOPPING EATS ACT THAT WOULD UNDO IMPORTANT STATE LAWS TO PROTECT ANIMALS IN AGRICULTURAL PRODUCTION. *CONTINUED TO PUSH U.S. FDA TO WIND DOWN ANIMAL TESTING AND CHOOSE ALTERNATIVE METHODS OF NEW DRUG SCREENING.*INCREASED PRESSURE ON ADIDAS AND REMAINING SHOE SELLERS TO ABANDON USE OF KANGAROO SKINS IN SOCCER SHOES.SEE SCHEDULE O FOR EXPANSIVE DETAIL ON THESE AND OTHER PROGRAM SERVICE ACCOMPLISHMENTS.</Desc>
+      <TotalProgramServiceExpensesAmt>2361149</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc1039100001">1</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd referenceDocumentId="RetDoc1039500001">0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd referenceDocumentId="RetDoc1039500001">1</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd referenceDocumentId="RetDoc1039500001">0</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd>0</DonorAdvisedFundInd>
+      <ConservationEasementsInd>0</ConservationEasementsInd>
+      <CollectionsOfArtInd>0</CollectionsOfArtInd>
+      <CreditCounselingInd>0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd>0</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd>0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd>0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd>0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd>0</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd>0</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd>0</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd>0</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <ForeignActivitiesInd>0</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>0</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>0</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>0</FundraisingActivitiesInd>
+      <GamingActivitiesInd>0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd>0</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>0</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd>0</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>0</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>0</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd referenceDocumentId="RetDoc1042900001">1</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd referenceDocumentId="RetDoc1042900001">0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd>0</DisregardedEntityInd>
+      <RelatedEntityInd>0</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>0</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>19</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <EmployeeCnt>16</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>1</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>0</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>0</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>6</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>6</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>0</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>0</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>0</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>0</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>0</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>1</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>1</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>1</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>1</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>1</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>1</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>1</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>1</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CO</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>FL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MD</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NJ</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NM</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OK</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>PA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>VA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WA</StatesWhereCopyOfReturnIsFldCd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>SHERRY KELLETT</PersonNm>
+        <PhoneNum>3368131677</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>631 RAGGEDY ROAD</AddressLine1Txt>
+          <CityNm>CLYDE</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>28721</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>GERARD BOSS</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>3.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CYNTHIA GRIFFIN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>3.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SHERRY KELLETT</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>20.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MARIAN PROBST</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>MURIEL VAN HOUSEN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>5.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>RENE TATRO</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>3.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>WAYNE PACELLE</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHoursPerWeekRt>30.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>KAREN DUARTE</PersonNm>
+        <TitleTxt>DIRECTOR OF PHILANTHROPY</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>126954</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ZACHARY BENNETT</PersonNm>
+        <TitleTxt>SENIOR POLICY COUNSEL</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>125000</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>251954</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>0</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>2</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>0</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <CntrctRcvdGreaterThan100KCnt>0</CntrctRcvdGreaterThan100KCnt>
+      <AllOtherContributionsAmt>3254261</AllOtherContributionsAmt>
+      <NoncashContributionsAmt>521983</NoncashContributionsAmt>
+      <TotalContributionsAmt>3254261</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>ANIMAL WELLFARE MGMT C</Desc>
+        <BusinessCd>541611</BusinessCd>
+        <TotalRevenueColumnAmt>518817</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>518817</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>518817</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>90813</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>90813</RelatedOrExemptFuncIncomeAmt>
+      </InvestmentIncomeGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>402294</SecuritiesAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>396983</SecuritiesAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>5311</SecuritiesAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>5311</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>5311</RelatedOrExemptFuncIncomeAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>3869202</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>614941</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>0</ExclusionAmt>
+      </TotalRevenueGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>1354375</TotalAmt>
+        <ProgramServicesAmt>723509</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>570176</ManagementAndGeneralAmt>
+        <FundraisingAmt>60690</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>45484</TotalAmt>
+        <ProgramServicesAmt>37726</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>5636</ManagementAndGeneralAmt>
+        <FundraisingAmt>2122</FundraisingAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>63789</TotalAmt>
+        <ProgramServicesAmt>48047</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>12767</ManagementAndGeneralAmt>
+        <FundraisingAmt>2975</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>110869</TotalAmt>
+        <ProgramServicesAmt>60773</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>45223</ManagementAndGeneralAmt>
+        <FundraisingAmt>4873</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>87812</TotalAmt>
+        <ProgramServicesAmt>56616</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>31196</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>1650</TotalAmt>
+        <ManagementAndGeneralAmt>1650</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>114596</TotalAmt>
+        <ProgramServicesAmt>111851</ProgramServicesAmt>
+        <FundraisingAmt>2745</FundraisingAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>222515</TotalAmt>
+        <ProgramServicesAmt>208480</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>12168</ManagementAndGeneralAmt>
+        <FundraisingAmt>1867</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>29991</TotalAmt>
+        <ProgramServicesAmt>14155</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2207</ManagementAndGeneralAmt>
+        <FundraisingAmt>13629</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>60160</TotalAmt>
+        <ProgramServicesAmt>31645</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>23678</ManagementAndGeneralAmt>
+        <FundraisingAmt>4837</FundraisingAmt>
+      </InformationTechnologyGrp>
+      <OccupancyGrp>
+        <TotalAmt>125000</TotalAmt>
+        <ProgramServicesAmt>125000</ProgramServicesAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>36862</TotalAmt>
+        <ProgramServicesAmt>20735</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>15390</ManagementAndGeneralAmt>
+        <FundraisingAmt>737</FundraisingAmt>
+      </TravelGrp>
+      <InsuranceGrp>
+        <TotalAmt>11744</TotalAmt>
+        <ProgramServicesAmt>11157</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>235</ManagementAndGeneralAmt>
+        <FundraisingAmt>352</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>DIRECT ANIMAL ADVOCACY</Desc>
+        <TotalAmt>821000</TotalAmt>
+        <ProgramServicesAmt>821000</ProgramServicesAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>DONOR LIST BUILDING</Desc>
+        <TotalAmt>78032</TotalAmt>
+        <ProgramServicesAmt>62426</ProgramServicesAmt>
+        <FundraisingAmt>15606</FundraisingAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>ANIMAL CAMPAIGN SUPPLIE</Desc>
+        <TotalAmt>25134</TotalAmt>
+        <ProgramServicesAmt>23811</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1323</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>MISCELLANEOUS</Desc>
+        <TotalAmt>16146</TotalAmt>
+        <ProgramServicesAmt>4218</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>11458</ManagementAndGeneralAmt>
+        <FundraisingAmt>470</FundraisingAmt>
+      </OtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>3205159</TotalAmt>
+        <ProgramServicesAmt>2361149</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>733107</ManagementAndGeneralAmt>
+        <FundraisingAmt>110903</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>611223</BOYAmt>
+        <EOYAmt>305146</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>1861813</BOYAmt>
+        <EOYAmt>2450283</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>55488</BOYAmt>
+        <EOYAmt>724948</EOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>6016</BOYAmt>
+        <EOYAmt>10278</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>2534540</BOYAmt>
+        <EOYAmt>3490655</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>93099</BOYAmt>
+        <EOYAmt>680550</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <UnsecuredNotesLoansPayableGrp>
+        <BOYAmt>300000</BOYAmt>
+      </UnsecuredNotesLoansPayableGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>393099</BOYAmt>
+        <EOYAmt>680550</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>973935</BOYAmt>
+        <EOYAmt>1828560</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>1167506</BOYAmt>
+        <EOYAmt>981545</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>2141441</BOYAmt>
+        <EOYAmt>2810105</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>2534540</BOYAmt>
+        <EOYAmt>3490655</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>664043</ReconcilationRevenueExpnssAmt>
+      <PriorPeriodAdjustmentsAmt>4621</PriorPeriodAdjustmentsAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>0</AccountantCompileOrReviewInd>
+      <FSAuditedInd>0</FSAuditedInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>667936</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>1331821</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>3084712</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>2308789</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>3129261</CurrentTaxYearAmt>
+        <TotalAmt>10522519</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>667936</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>1331821</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>3084712</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>2308789</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>3129261</CurrentTaxYearAmt>
+        <TotalAmt>10522519</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>3861328</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>6661191</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>-13</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>302</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>8766</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>52854</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>90813</CurrentTaxYearAmt>
+        <TotalAmt>152722</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <TotalSupportAmt>10675241</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>734517</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.62400</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.53370</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleC documentId="RetDoc1039500001">
+      <Section4955OrganizationTaxAmt>0</Section4955OrganizationTaxAmt>
+      <Section4955ManagersTaxAmt>0</Section4955ManagersTaxAmt>
+      <VolunteersInd>0</VolunteersInd>
+      <PaidStaffOrManagementInd>1</PaidStaffOrManagementInd>
+      <MediaAdvertisementsInd>0</MediaAdvertisementsInd>
+      <MailingsMembersInd>0</MailingsMembersInd>
+      <PublicationsOrBroadcastInd>1</PublicationsOrBroadcastInd>
+      <PublicationsOrBroadcastAmt>14000</PublicationsOrBroadcastAmt>
+      <GrantsOtherOrganizationsInd>0</GrantsOtherOrganizationsInd>
+      <DirectContactLegislatorsInd>1</DirectContactLegislatorsInd>
+      <DirectContactLegislatorsAmt>143000</DirectContactLegislatorsAmt>
+      <RalliesDemonstrationsInd>0</RalliesDemonstrationsInd>
+      <OtherActivitiesInd>0</OtherActivitiesInd>
+      <TotalLobbyingExpendituresAmt>157000</TotalLobbyingExpendituresAmt>
+      <NotDescribedSection501c3Ind>0</NotDescribedSection501c3Ind>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART II-B, LINE 1:</FormAndLineReferenceDesc>
+        <ExplanationTxt>1E - THROUGH DIGITAL COMMUNICATIONS, THE CENTER INFORMED ITS SUPPORTERS ABOUT THE PRESENCE OF PRO-ANIMAL LEGISLATION SUCH AS THE FDA MODERNIZATION ACT AND URGED INDIVIDUALS TO REACH OUT TO THEIR FEDERAL LAWMAKERS IN SUPPORT OF THIS HUMANE-MINDED LEGISLATION. 1G - THE CENTER HAD ONE EMPLOYEE WHO SPENT PART OF HIS TIME REACHING OUT TO FEDERAL LAWMAKERS IN SUPPORT OF ANIMAL LEGISLATION. THE CENTER ALSO HIRED PUBLIC POLICY ADVOCACY FIRMS TO REACH OUT TO LAWMAKERS IN THE US HOUSE AND SENATE TO GAIN SUPPORT FOR ANIMAL WELFARE LEGISLATION BEING CONSIDERED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART II-B</FormAndLineReferenceDesc>
+        <ExplanationTxt>1E - THROUGH DIGITAL COMMUNICATIONS, THE CENTER INFORMED ITS SUPPORTERS ABOUT THE PRESENCE OF PRO-ANIMAL LEGISLATION, SUCH AS THE FDA MODERNIZATION ACT AND URGED INDIVIDUALS TO REACH OUT TO THEIR FEDERAL LAWMAKERS IN SUPPORT OF THIS HUMANE-MINDED LEGISLATION. 1G - THE CENTER HIRED PUBLIC POLICY ADVOCACY FIRMS TO REACH OUT TO LAWMAKERS IN THE HOUSE AND SENATE TO GAIN SUPPORT FOR ANIMAL WELFARE LEGISLATION BEING CONSIDERED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleC>
+    <IRS990ScheduleM documentId="RetDoc1042900001">
+      <SecuritiesPubliclyTradedGrp>
+        <NonCashCheckboxInd>X</NonCashCheckboxInd>
+        <ContributionCnt>9</ContributionCnt>
+        <NoncashContributionsRptF990Amt>396983</NoncashContributionsRptF990Amt>
+        <MethodOfDeterminingRevenuesTxt>FMV STOCK MARKET QUOTES</MethodOfDeterminingRevenuesTxt>
+      </SecuritiesPubliclyTradedGrp>
+      <AnyPropertyThatMustBeHeldInd>0</AnyPropertyThatMustBeHeldInd>
+      <ReviewProcessUnusualNCGiftsInd>0</ReviewProcessUnusualNCGiftsInd>
+      <ThirdPartiesUsedInd>0</ThirdPartiesUsedInd>
+    </IRS990ScheduleM>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART III, LINES 1, 4A, 4B AND 4C</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE OBJECTIVE OF CENTER FOR A HUMANE ECONOMY (CENTER) IS BUILDING A HUMANE ECONOMY BY TRIGGERING CHANGE WITHIN INDUSTRY AND GOVERNMENT TO BENEFIT ANIMALS. THE CENTER AND ITS SISTER ORGANIZATIONS SUCCEEDED IN 2024 IN STOPPING THE SO-CALLED EATS ACT, WHICH WAS FORMULATED TO UNDO THE MOST IMPORTANT STATE LAWS TO PROTECT ANIMALS USED IN AGRICULTURAL PRODUCTION. PUSHED BY FACTORY FARMING SPECIAL INTERESTS, INCLUDING THE CHINESE-OWNED SMITHFIELD FOODS, THE EATS ACT AIMS TO IMPOSE GESTATION-CRATE CONFINEMENT AS THE INDUSTRY STANDARD NATIONWIDE, EVEN AFTER MILLIONS OF AMERICAN VOTERS SAID THEY WANT MEAT AND EGGS SOLD IN THEIR STATES TO BE SOURCED FROM FARMS THAT ALLOW THE ANIMALS TO STAND UP, LIE DOWN, AND TURN AROUND. WE ALSO CONTINUED OUR MARCH TO PERSUADE THE ATHLETIC SHOE INDUSTRY TO PURGE ITS GLOBAL SUPPLY CHAINS OF KANGAROO SKINS, RATCHETING UP PRESSURE ON ADIDAS AND THE REMAINING SHOE-SELLERS WHO HAVE BEEN STUBBORNLY USING THE HIDES OF THESE ICONIC MARSUPIALS TO MAKE UPPERS FOR SOCCER SHOES. AND WE CONTINUED TO PUSH THE U.S. FOOD AND DRUG ADMINISTRATION - AND PHARMACEUTICAL COMPANIES CONSCRIPTED TO SEEK APPROVAL FROM THE AGENCY FOR NEW DRUGS IN THE MARKETPLACE - TO BEGIN A WIND-DOWN OF THE ERA OF ANIMAL TESTING AND TO CHOOSE SAFER, FASTER, LESS COSTLY ALTERNATIVE METHODS OF SCREENING NEW DRUGS. THE YEAR IN REVIEW: OUR EFFORTS TO DRIVE THE MORAL EVOLUTION SOCIETY'S MAJOR INSTITUTIONS IN A CAPITALIST SOCIETY, THE WORKINGS OF BUSINESS HAVE ENORMOUS IMPLICATIONS FOR ANIMALS. IN 2024, THE CENTER WORKED TO DRIVE CHANGES IN MANY OF THE BIGGEST SECTORS OF THE ECONOMY. CAGE-FREE FUTURE *IN 2024, WE BLOCKED THE EATS ACT IN CONGRESS THAT WAS AN ATTEMPT BY ACTORS IN GOVERNMENT TO RIG THE PRIVATE PRODUCTION OF ANIMALS REARED FOR FOOD. THE EXPOSING AGRICULTURAL TRADE SUPPRESSION (EATS) ACT WAS FORMULATED TO UNDO THE MOST IMPORTANT STATE LAWS TO PROTECT ANIMALS USED IN AGRICULTURE, INCLUDING PROP 12 IN CALIFORNIA AND QUESTION 3 IN MASSACHUSETTS. THOSE MEASURES SOUGHT TO HALT THE IN-STATE SALE OF PORK AND EGGS FROM PIGS KEPT IN TWO-FOOT-BY-SEVEN-FOOT CAGES AND OF LAYING HENS JAMMED IN BATTERY CAGES. TO DO THIS, WE RALLIED DEMOCRATS AND REPUBLICANS IN THE HOUSE AND SENATE TO DEFEND THESE ANTI-EXTREME-CONFINEMENT LAWS, AND THE PROPONENTS OF EATS WEREN'T ABLE TO OVERCOME OUR OPPOSITION AND THEIR LEGISLATION NEVER GOT TO THE HOUSE OR SENATE FLOOR FOR CONSIDERATION. IN OUR EFFORTS, WE HAD THE SUPPORT OF THOUSANDS OF FARMERS WHO NOW SHUN INTENSIVE SYSTEMS OF PRODUCTION AND PUT MORE EXTENSIVE SYSTEMS OF PRODUCTION TO WORK. THE ALLIANCE OF ANIMAL WELFARE ADVOCATES AND MORE HUMANE-MINDED FARMERS IS A POWERFUL IMPEDIMENT TO THE ADVANCE OF THE EATS ACT. IT CERTAINLY GAVE US A LIFT WHEN THE U.S. SUPREME COURT, IN THE PRIOR YEAR AND IN A CLOSE DECISION, REJECTED THE LEGAL CLAIMS BY THE NATIONAL PORK PRODUCERS COUNCIL (NPPC) TO GUT PROP 12. BY PIVOTING THEN TO CONGRESS, THE NPPC SEEMED DESPERATE TO FIND ANY WAY TO HOLD ONTO THEIR FACTORY FARMING SYSTEMS. WE KNOW WE'LL HAVE TO BE READY TO DEFEND THESE STATE LAWS IN 2025 AS SOME FARM-STATE LAWMAKERS GIN UP THIS ASSAULT ON STATES' RIGHTS AND ANIMAL WELFARE. *EVEN THOUGH THE NPPC LOST BEFORE THE HIGH COURT, THE TRADE GROUP AND ITS ALLIES KEEP TRYING TO FIND A WINNING LEGAL DOCTRINE IN THE FEDERAL COURTS. IN A FEDERAL COURT IN MASSACHUSETTS, WE FENDED OFF A NEW LEGAL CHALLENGE TO QUESTION 3, WHICH VOTERS APPROVED NEARLY A DECADE AGO TO HALT THE SALE OF EGGS, PORK, AND VEAL THAT COME FROM THE WORST KINDS OF FACTORY FARMS. AS WITH THE EATS ACT IN CONGRESS, WE'LL HAVE TO CONFRONT THEIR APPEALS AS OUR POLITICAL ADVERSARIES PLY EVERY PATH TO HOLD ONTO THEIR EXTREME ANIMAL-HOUSING PRACTICES. OUR DEFENSIVE MANEUVERS IN CONGRESS AND THE COURTS ARE ALSO CLEARING THE WAY FOR THE IMPLEMENTATION OF STATE FARM-ANIMAL-WELFARE POLICIES TAKING EFFECT IN THE STATES. FOR INSTANCE, IN JANUARY 2025, MICHIGAN LAW WILL REQUIRE THAT ALL EGGS SOLD IN THE STATE COME EXCLUSIVELY FROM CAGE-FREE OPERATIONS. OUR GOAL IS TO EXPAND CAGE-FREE AND CRATE-FREE LAWS, AND NOT TO SEE ANY BACKTRACKING ON THE PROGRESS WE'VE ACHIEVED. NEARLY HALF OF THE EGG INDUSTRY HAS CONVERTED TO CAGE-FREE PRODUCTION, AND NEARLY HALF OF ALL BREEDING SOWS ARE OUT OF GESTATION CRATES FOR THE BULK OF THEIR LIVES IN THE PIG INDUSTRY. WE HAVE A WAY TO GO, BUT THESE PERCENTAGES ARE UP FROM SINGLE-DIGIT NUMBERS JUST TWO DECADES AGO; IN FACT, THE FIRST STATE LAW TO LIMIT ANY FORM OF EXTREME CONFINEMENT WAS FLORIDA BANNING GESTATION CRATES IN 2002. RELYING ON ANIMAL-HOUSING STRATEGIES BUILT AROUND IMMOBILIZING ANIMALS IS, ON ITS FACE, A FORM OF EXTREME MISTREATMENT OF ANIMALS, AND HOUSING SYSTEMS BUILT ON EXTREME PRIVATION MUST GO. BE THEY PIGS OR HENS, THESE ANIMALS HAVE NEEDS AND WANTS LIKE ANY CREATURE, AND THE MOST BASIC IDEA IS THAT ANIMALS BUILT TO MOVE SHOULD BE ALLOWED TO MOVE.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART III, LINES 1, 4A, 4B AND 4C - CONTINUED</FormAndLineReferenceDesc>
+        <ExplanationTxt>KANGAROOS AREN'T SHOES BUILDING ON OUR WORK IN 2023 TO SECURE COMMITMENTS FROM PUMA, NIKE, AND NEW BALANCE TO HALT THEIR SOURCING OF KANGAROO SKINS FOR ATHLETIC SHOES, WE WORKED WITH U.K.-BASED SOKITO TO END ITS SOURCING OF KANGAROO SKIN. WE ALSO RATCHETED UP PRESSURE ON ADIDAS AND TWO JAPANESE BRANDS - MIZUNO AND ASICS, WHICH ALSO USE KANGAROO SKINS FOR THEIR SOCCER SHOES. OUR FRIENDS AND PARTNERS AT THEIR TURN CONDUCTED MULTIPLE PROTESTS AT ADIDAS FLAGSHIP STORES IN NEW YORK CITY, ENTERING THE STORES AND DEMANDING THE COMPANY HALT ITS FINANCING OF KANGAROO KILLING IN AUSTRALIA. THE CAMPAIGN TRULY WENT GLOBAL, WITH PROTESTS THROUGHOUT AUSTRALIA AND THE UNITED STATES AND ALSO ACROSS CANADA AND IN GERMANY, WHERE ADIDAS IS HEADQUARTERED. ADIDAS HAS DEFENDED ITS COMMERCE BY CLAIMING THAT AUSTRALIA HAS ASSURED THE COMPANY THAT THE "MANAGEMENT" OF KANGAROOS IS HUMANE. BUT IT'S AN EMPTY DEFENSE. THE AUSTRALIAN GOVERNMENT MANDATES THAT ANY ORPHANED JOEYS FOUND AFTER THE DUST SETTLES FROM THE NIGHT-TIME SHOOTS MUST BE KILLED BY BLUNT FORCE TRAUMA, SUCH AS HITTING THEM IN THE HEAD WITH A ROCK OR SLAMMING THEIR SKULLS AGAINST A TRUCK FENDER. THE MERE ACKNOWLEDGEMENT OF THE NEED FOR THESE "HUMANE KILLING" GUIDELINES WITH ROCKS AND FENDERS TELLS US THAT AUSTRALIA KNOWS ABOUT THE MASS ORPHANING PROBLEM IN THE FIELD. THERE IS JUST NO GOOD REASON FOR ANY USE OF KANGAROO PARTS ANY LONGER. ALTERNATIVE FABRICS ALREADY DOMINATE THE SOCCER SHOE MODELS OF ALL THE MAJOR GLOBAL BRANDS, SO THERE'S NO ARGUMENT ON FUNCTION. BACK IN 2022, THE CENTER CALCULATED THAT THE VAST MAJORITY - 94.6% - OF ALL WORLD CUP GOALS SCORED CAME FROM PLAYERS WEARING SHOES FROM HUMAN-MADE FABRICS. WHETHER YOU ARE A WEEKEND SOCCER PLAYER OR A WORLD CUP STAR, THERE'S JUST NO NEED FOR KANGAROO SKINS. THEY DON'T OUTPERFORM SHOES MADE FROM HUMAN-MADE, SUSTAINABLE FABRICS. AND REMEMBER, ALL OTHER CATEGORIES OF ATHLETIC SHOES - GOLF, TENNIS, RUNNING, (AMERICAN) FOOTBALL, CYCLING - ARE KANGAROO-LEATHER-FREE. ANIMAL FIGHTING IS THE PITS TO BE SURE, ANIMAL FIGHTING IS A BUSINESS, ALBEIT AN ILLEGAL ONE, WITH BILLIONS OF DOLLARS IN COMMERCE IN THE FORM OF GAMBLING, THE SALE OF EXPENSIVE BIRDS AND DOGS, AND ALL OF THE ECONOMIC ACTIVITY BUILT AROUND RAISING AND TRAINING ANIMALS FOR COMBAT. IN 2024, WE PREVAILED IN A FEDERAL APPEALS COURT UPHOLDING A U.S. DISTRICT COURT DECISION THAT ANIMAL FIGHTING IS BANNED ON EVERY INCH OF U.S. SOIL, INCLUDING IN THE NORTHERN MARIANA ISLANDS. THIS CASE TURNED BACK A COCKFIGHTERS' CHALLENGE TO THE 2018 NATIONAL ANIMAL-FIGHTING LAW ARGUING THE LAW SHOULD NOT APPLY TO THIS U.S. TERRITORY. WE WON EARLIER CASES IN OTHER U.S. DISTRICT COURTS (AND IN APPELLATE COURTS), AFFIRMING THAT THE NATIONAL ANIMAL-FIGHTING BAN IS CONSTITUTIONALLY SOUND AS APPLIED TO PUERTO RICO AND GUAM. WE ARE WORKING TO HIT THESE ILLEGAL BUSINESSES IN THE POCKET, WHERE IT HURTS THE MOST. THERE WERE A RECORD NUMBER OF ANIMAL FIGHTING BUSTS IN THE UNITED STATES IN 2024, AND THAT'S BECAUSE OF THE PROMINENCE OF OUR NO-TOLERANCE-FOR-ANIMAL-FIGHTING CAMPAIGN, OUR ON-THE-GROUND INVESTIGATIONS, AND OUR WORK WITH LAW ENFORCEMENT. THERE HAS BEEN A SERIES OF FEDERAL CASES AGAINST DOGFIGHTERS, INCLUDING THE APPREHENSION OF A FORMER SENIOR PENTAGON OFFICIAL KNEE-DEEP IN THE BLOOD AND GUTS OF THIS BETRAYAL OF THE HUMAN-ANIMAL BOND. THERE HAS BEEN A SLIGHT UPTICK IN FEDERAL CASES AGAINST COCKFIGHTING, BUT LOCAL SHERIFFS HAVE DONE THE SPADEWORK HERE - FROM FLORIDA TO TEXAS TO CALIFORNIA AND IN DOZENS OF OTHER STATES. WE ARE RESHAPING AND TOUGHENING UP OUR ANIMAL-FIGHTING LAWS, FEEDING INFORMATION ON THESE ONGOING CRIMES TO AUTHORITIES, AND DEMANDING RELENTLESS ACTION. THERE'S NEVER BEEN A RISKIER MOMENT FOR SCOFFLAW ANIMAL FIGHTERS, AND WE ARE WORKING TO MAKE SURE THAT THEY UNDERSTAND THE ACUTE RISKS THEY FACE. A DRAMATIC STEP-UP IN ENFORCEMENT WILL BE TRIGGERED WHEN WE PERSUADE CONGRESS TO ENACT AN EVEN STRONGER FEDERAL STATUTE TO ELIMINATE ANIMAL FIGHTING. IN 2024, WE BUILT UNPRECEDENTED LAW ENFORCEMENT SUPPORT FOR THE FIGHT ACT, WINNING THE BACKING OF THE NATIONAL SHERIFFS' ASSOCIATION AND THE NATIONAL DISTRICT ATTORNEYS' ASSOCIATION, WHICH REPRESENT ALL 5,000 ELECTED OFFICIALS IN EVERY COUNTY. MORE BROADLY, WE HAVE 760 AGENCIES AND ORGANIZATIONS ENDORSING FIGHT. PASSING THIS LEGISLATION IS AMONG OUR TOP PRIORITIES FOR 2025. THE CENTER HAS BEEN SOUNDING THE ALARM BELLS FOR A LONG TIME ABOUT THE THREAT OF ZOONOTIC DISEASES POSED BY COCKFIGHTERS WHO BREED, SHIP, AND HANDLE FIGHTING BIRDS. WE ARE QUITE CERTAIN, EVEN THOUGH THE USDA REFUSES TO DISCLOSE DETAILS, THAT COCKFIGHTING HAS PLAYED A MAJOR ROLE IN THE SPREAD OF H5N1 IN THE UNITED STATES, JUST AS IT FUELED THE SPREAD OF THE DISEASE THROUGHOUT ASIA. AS IS THE CASE WITH SO MANY FORMS OF ANIMAL ABUSE, COCKFIGHTING BRINGS ITS OWN SET OF RISKS TO SOCIETY, AND ONE OF THE BIGGEST IS THE SPREAD OF ZOONOTIC DISEASE. ENDING BEAR BAITING WE WORKED TO PROMOTE A FINAL RULEMAKING ACTION BY THE NATIONAL PARK SERVICE TO IMPOSE A BAN-BEAR BAITING ON 20 MILLION ACRES OF NATIONAL PRESERVES IN ALASKA - AN AREA THE SIZE OF SOUTH CAROLINA. CONDUCTED OFTEN BY COMMERCIAL HUNTING GUIDES - WHO CHARGE TOP DOLLAR TO SET UP KILLS OF "TROPHY BEARS" - BAITING INVOLVES SETTING OUT A PILE OF FOOD FOR A BEAR AND THEN SHOOTING THE ANIMAL WHILE HE OR SHE IS FEEDING, VIOLATING ALL NORMS OF WILDLIFE MANAGEMENT THAT FEEDING BEARS AND HABITUATING THEM TO HUMAN FOOD SOURCES IS DANGEROUS AND FOOLISH. THE RULE STOPS THAT ABUSIVE, UNSPORTING, APPALLING PRACTICE. THE NEW ADMINISTRATION AND ALASKA'S LAWMAKERS MAY TARGET THIS RULE, AND WE'LL BE READY TO DEFEND IT IN THE FEDERAL COURTS AS NECESSARY. BAITING IS UNSPORTING, DANGEROUS FOR FOREST USERS, AND A THREAT TO WILDLIFE. MODERNIZE TESTING IN DECEMBER, THE U.S. SENATE PASSED THE FDA MODERNIZATION ACT 3.0 WITHOUT DISSENT, DIRECTING THE FDA TO COMPLETE WORK ON ITS REGULATIONS TO END THE ANIMAL-TESTING MANDATE FOR NEW DRUGS AND EMBRACE 21ST CENTURY HUMAN-RELEVANT SCIENCE. THE SENATE ACTION IS A HARBINGER OF OUR LIKELY SUCCESS IN GETTING THIS MEASURE PASSED IN FINAL FORM EARLY IN THE NEW YEAR. THE FDA HAS DRAGGED ITS FEET IN EMBRACING LAW WE PASSED IN 2022 - THE FDA MODERNIZATION ACT 2.0 - TO ELIMINATE AN 84-YEAR-OLD ANIMAL-TESTING MANDATE FOR DRUG DEVELOPMENT PROTOCOLS. PHARMACEUTICAL COMPANIES AND OTHER DRUG DEVELOPERS, LONG BOUND BY THIS ARCHAIC MANDATE, ANNUALLY USE BEAGLES, PRIMATES, AND OTHER ANIMALS TO SCREEN NEW TREATMENTS AND CURES FOR THE WIDE RANGE OF HUMAN ILLNESSES. WE ESTIMATE THAT AS MUCH AS 75% OF ALL ANIMAL TESTING IS DRIVEN BY DRUG DEVELOPMENT WORK. THAT ANIMAL-TESTING POLICY IN FEDERAL LAW SINCE 1938 HAS, IN PRACTICAL TERMS, MEANT THAT THERE'S NO SUCH THING AS A "CRUELTY-FREE DRUG," BECAUSE EVERY DRUG WENT THROUGH A BATTERY OF ANIMAL TESTS - UNTIL, THAT IS, WE PASSED THE FDA MODERNIZATION 2.0 TWO YEARS AGO. THE U.S. SENATE, WITH CORY BOOKER, D-N.J., RAND PAUL, R-KY., AND ERIC SCHMITT, R-MO., LEADING THE WAY ON THE LATEST BILL, HAS TWICE PASSED BILLS TO TURN THE PAGE ON INEFFECTIVE, WASTEFUL, AND INHUMANE ANIMAL TESTING - IN SEPTEMBER 2022 AND NOW IN DECEMBER 2024. WE'VE SEEN NEARLY 1,000 NEWS STORIES AND SCIENCE PUBLICATIONS FEATURING THAT LAW AND WHAT PROFOUND CHANGES IT PROMISES TO USHER IN FOR ANIMAL WELL-BEING AND THE FUTURE OF HUMAN HEALTH AND WELLNESS, TOO. GIVE A HOOT ABOUT OWLS WE FILED A FEDERAL LAWSUIT AGAINST THE U.S. FISH AND WILDLIFE SERVICE TO STOP ITS PLAN TO KILL NEARLY HALF A MILLION BARRED OWLS IN THE PACIFIC NORTHWEST. THE PLAN IS BY FAR THE LARGEST-EVER RAPTOR KILLING PROGRAM INSTITUTED BY ANY NATION. WE ALSO BUILT A COALITION OF MORE THAN 250 GROUPS AND IT'S OUR GOAL TO BLOCK THE ENTIRE KILL BEFORE ITS SCHEDULED START-DATE IN THE SPRING OF 2025. IT APPEARS THAT THE TIMBER INDUSTRY HATCHED THE OWL-KILLING PLAN AS A WAY TO DEFLECT ATTENTION FROM ITS TIMBER-CUTTING PRACTICES. BY SCAPEGOATING BARRED OWLS, THEY CAN TURN ATTENTION AWAY FROM THEIR HABITAT DEGRADATION EFFORTS. BARRED OWLS ARE A RANGE-EXPANDING NORTH AMERICAN NATIVE SPECIES LONG PROTECTED BY THE MIGRATORY BIRD TREATY ACT. RANGE EXPANSION IS A NATURALLY OCCURRING ECOLOGICAL PHENOMENON. ESPECIALLY IN AN ERA OF CLIMATE CHANGE, WE CANNOT PUNISH SPECIES THAT ADAPT TO OPPORTUNITY OR CHANGES IN THE ENVIRONMENT CAUSED BY HUMANS. ACCORDING TO ONE STUDY, A TOTAL OF 111 OTHER NATIVE, NORTH AMERICAN BIRD SPECIES HAVE ENGAGED IN RECENT RANGE EXPANSIONS, WITH 14 OF THEM INTO MORE STATES OR PROVINCES THAN BARRED OWLS HAVE.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART III, LINES 1, 4A, 4B AND 4C - CONTINUED</FormAndLineReferenceDesc>
+        <ExplanationTxt>KEEPING WILD HORSES WILD WE WORKED WITH ALLIES TO STOP THE PLANNED ROUNDUP AND REMOVAL OF THE ICONIC WILD HORSES AT THEODORE ROOSEVELT NATIONAL PARK, WITH A MAJOR ASSIST FROM NORTH DAKOTA GOVERNOR DOUG BURGUM. THE WILD HORSES WERE PART OF THE "HUMANE ECONOMY" OF WESTERN NORTH DAKOTA. THE BEAUTIFUL HORSES, WITH THE MULTI-COLORED COATS AND THEIR FLOWING MANES, ARE A BREATHTAKING SIGHT ON THE WESTERN LANDSCAPE, ATTRACTING TENS OF THOUSANDS OF VISITORS TO THE SMALL GATEWAY TOWNS OF NORTH DAKOTA. PROTECTING AND PRESERVING THE HORSES BENEFITS THE REGIONAL ECONOMY, AND THAT'S PRECISELY WHY WE SAW SO MANY POLITICIANS IN THE STATE RALLY TO FIGHT THE NATIONAL PARK SERVICE'S OVERREACHING PLAN. BUT THE FIGHT FOR THE THEODORE ROOSEVELT NATIONAL PARK HORSES IS JUST ONE MANIFESTATION OF THE GOVERNMENT'S MISREADING OF THE PUBLIC MOOD WHEN IT COMES TO PROTECTING WILD AND FREE-ROAMING EQUINES. THE BUREAU OF LAND MANAGEMENT (BLM) IS RECKLESSLY AND EXPENSIVELY ROUNDING UP WILD HORSES AND BURROS ACROSS OUR WESTERN PUBLIC LANDS AT AN ENORMOUS COST TO THE ANIMALS AND TO AMERICAN TAXPAYERS. WITH BURGUM NOW SERVING AS INTERIOR SECRETARY, WE MAY FIND A SYMPATHETIC VOICE TO HALT THIS ABUSE OF FREE-ROAMING HORSES AND BURROS AND TO GIVE A BREAK TO TAXPAYERS UNWITTINGLY FINANCING A WASTEFUL AND INHUMANE PROGRAM THAT'S BEEN ON AUTOPILOT FOR YEARS. AS IN NORTH DAKOTA, WILD HORSES ARE SYMBOLS OF THE WEST AND THERE IS AN ENTIRE TOURISM ECONOMY BUILT AROUND VIEWING THEM. THEY CANNOT BE VIEWED IF THEY ARE ROUNDED UP AND HELD IN CAPTIVE HOLDING FACILITIES IN THE MIDWEST. ENDING GREYHOUND RACING AND HORSE SLAUGHTER FOR HUMAN CONSUMPTION WE ARE POISED TO CLOSE OUT A CENTURY OF GREYHOUND RACING AND SLAUGHTERING HORSES FOR HUMAN CONSUMPTION, GIVEN THE BREADTH OF POLITICAL SUPPORT WE'VE BUILT IN CONGRESS ON BOTH THESE POLICY REFORMS. WE PLANNED TO PASS A LEGISLATIVE AMENDMENT TO THE FARM BILL ON THESE REFORMS IN 2024, BUT CONGRESS DEFERRED ACTION ON THE LEGISLATION. WE'LL BE READY TO SECURE THESE POLICIES AND TO CLOSE OUT INHUMANE BUSINESSES NOT IN ALIGNMENT WITH AMERICAN VALUES AND NOW ON THE BACK END OF A LONG DECLINE. SAVING WOLVES WE BLOCKED CONGRESSIONAL EFFORTS BY ANTI-WOLF LAWMAKERS TO ELIMINATE FEDERAL PROTECTIONS FOR THE WILD CANIDS ACROSS MOST OF THEIR RANGE. MEANWHILE, WE SUED THE FEDERAL GOVERNMENT TO RESTORE FEDERAL PROTECTIONS FOR WOLVES IN THE NORTHERN ROCKIES, WHERE WOLVES ARE UNDER ASSAULT. THE KILLING IS PARTICULARLY RUTHLESS IN WYOMING, WHERE IT'S LEGAL TO RUN DOWN AND CRUSH WOLVES WITH SNOWMOBILES. IT'S BECAUSE OF THAT EXTREME CRUELTY THAT WE FORMULATED A NATIONAL LEGISLATIVE CAMPAIGN - THE SNOWMOBILES AREN'T WEAPONS (SAW) ACT - TO BAN USING MOTORIZED VEHICLES TO ASSAULT WOLVES AND COYOTES. WOLVES ARE NOT ONLY NATIVE WILDLIFE WHO DELIVER ECOSYSTEM SERVICES OF INCALCULABLE VALUE IN THE WEST, BUT THEY ARE AN ANTIDOTE TO THE RAPIDLY SPREADING CHRONIC WASTING DISEASE, WHICH IS THREATENING THE LONG-TERM VIABILITY OF DEER, ELK AND MOOSE IN 34 STATES AND PROVINCES. THERE IS A MULTI-BILLION-DOLLAR ECONOMY BUILT AROUND PROTECTING WILD CERVIDS AND WOLVES, ALONG WITH MOUNTAIN LIONS, WHO ARE DOING THEIR BEST TO CLEANSE HERDS OF THIS ALWAYS-FATAL DISEASE. UNDERSTANDING THE CRITICAL ROLE THAT APEX PREDATORS PLAY, WHILE ALSO UNDERSTANDING THAT THEIR LIVES MATTER TO THEM, WE ARE ALSO WORKING TO STOP ASSAULTS ON MOUNTAIN LIONS, BOBCATS, AND OTHER NATIVE CATS IN THE WEST, ALONG WITH BATTLING TO STOP THE KILLING OF BEARS FOR THEIR GALLBLADDERS AND BILE FOR TRADITIONAL CHINESE MEDICINE. HELPING COWS AND DUMPING THE MILK MANDATE WE BUILT A COALITION OF MORE THAN 200 ORGANIZATIONS DEMANDING THAT CONGRESS END THE MILK MANDATE IN THE NATIONAL SCHOOL LUNCH PROGRAM. WE WORKED WITH LAWMAKERS IN BOTH PARTIES TO INTRODUCE LEGISLATION IN THE U.S. SENATE AND U.S. HOUSE OF REPRESENTATIVES TO GIVE KIDS MORE CHOICE FOR NUTRITIOUS BEVERAGES IN THE SCHOOLS, TO STOP THE ENORMOUS WASTE OF COW'S MILK, AND TO PROVIDE MORE ACCESS FOR PLANT-BASED MILK COMPANIES TO REACH YOUNG PEOPLE. IN MAMMALIAN DESIGN, MILK IS A FORMULA PRODUCED BY MOTHERS TO NOURISH AND GROW NEONATES. BUT MILK PRODUCTION AMONG FEMALE MAMMALS DEACTIVATES AFTER THE INFANCY OF THEIR OFFSPRING. THE DAIRY INDUSTRY HAS NONETHELESS PROMOTED MILK AS AN EVERYDAY STAPLE OF THE DIET FOR AMERICANS OF ALL AGES, LABELING IT AS "NATURE'S PERFECT FOOD." THERE ARE NOW WIDESPREAD CONCERNS ABOUT THE HEALTHFULNESS OF MILK, ESPECIALLY AMONG THE ONE-THIRD OF AMERICANS WHO ARE LACTOSE INTOLERANT. THERE ARE ALSO A RANGE OF SIGNIFICANT WELFARE ISSUES FOR THE 9.4 MILLION DAIRY COWS IN THE UNITED STATES, WITH THE LATEST HEALTH ISSUE THE INFECTION OF PERHAPS A MILLION COWS WITH AVIAN INFLUENZA H5N1, OR "BIRD FLU." THE LARGER SET OF WELFARE ISSUES RELATE TO THE GENERAL DOWNGRADING OF THE FITNESS OF THE ANIMALS DUE TO THE GENETIC, PHARMACOLOGIC, AND NUTRITIONAL RE-ENGINEERING OF COWS TO PRODUCE ENORMOUS YIELDS OF MILK. THE AVERAGE U.S. COW PRODUCES 24,000 POUNDS OF MILK IN A YEAR, WITH SOME COWS PRODUCING MORE THAN 30,000 POUNDS. THAT CONTRASTS WITH ABOUT 4,000 POUNDS PER YEAR IN 1950, 7,500 IN 1975, AND 15,000 POUNDS IN 1995. HIGH-PRODUCING DAIRY COWS ARE IN SUCH POOR CONDITION THAT THEY HAVE AMBULATORY PROBLEMS EVEN AT VERY EARLY STAGES OF THEIR LIVES. IMAGES OF "DOWNER COWS" DRAGGED WITH CHAINS OR PUSHED WITH FRONT-END LOADERS INTO SLAUGHTERHOUSES WENT VIRAL IN THE FIRST DECADE OF THE 21ST CENTURY AND ETCHED INTO THE PUBLIC CONSCIOUSNESS THE APPALLING ANIMAL HANDLING PRACTICES AT SLAUGHTERHOUSES. PRESIDENT OBAMA BANNED DOWNER COWS IN THE FOOD SUPPLY IN 2008, PARTLY DRIVEN BY CONCERNS ABOUT POSSIBLE INFECTION OF THE ANIMALS WITH BSE, OR MAD COW DISEASE. COW WELFARE CONCERNS ARE MAGNIFIED BECAUSE THE "MILK MANDATE" IN THE NATIONAL SCHOOL LUNCH PROGRAM IS A PRESCRIPTION FOR MASSIVE FOOD WASTE. BETWEEN 70 AND 95% OF BLACK, PACIFIC ISLANDER AND ASIAN, NATIVE AMERICAN, AND LATINO INDIVIDUALS ARE LACTOSE INTOLERANT. IN FACT, THE NATIONAL INSTITUTES OF HEALTH REPORTS THE MAJORITY OF ALL PEOPLE HAVE A REDUCED ABILITY TO DIGEST LACTOSE AFTER INFANCY, AND LACTOSE INTOLERANCE "IS ALSO VERY COMMON IN PEOPLE OF WEST AFRICAN, ARAB, JEWISH, GREEK AND ITALIAN DESCENT." THIS LEADS TO MILLIONS OF KIDS GETTING ILL IN THE CLASSROOM (MAKING THE LEARNING EXPERIENCE MORE DIFFICULT), AND ALSO TO FOOD WASTE. ACCORDING TO THE USDA'S OWN FINDINGS, 29% OF THE CARTONS OF MILK SERVED IN OUR SCHOOLS ARE THROWN INTO TRASH CANS UNOPENED. THAT AMOUNTS TO 177 MILLION GALLONS OF MILK TOSSED IN THE TRASH EVERY YEAR. ADD IN AN ADDITIONAL WASTING OF 10% OF OPENED MILK CARTONS AND IT'S A STAGGERING 245 MILLION GALLONS OF WASTED MILK, ADDING UP TO $400 MILLION IN WASTED TAX DOLLARS A YEAR (GIVEN THAT THE USDA SPENDS $1 BILLION A YEAR FOR REIMBURSEMENTS TO SCHOOL DISTRICTS FOR COW'S MILK), WITH SCHOOLS REPORTING UNOPENED MILK CARTONS OVERFLOWING IN TRASH BINS. THE FEDERAL GOVERNMENT SHOULD NOT BE SUBSIDIZING THE MILK INDUSTRY TO THIS EXTENT, ESPECIALLY WHEN SO MUCH MILK IS WASTED AND SO MANY KIDS CANNOT HEALTHFULLY DRINK THE PRODUCT. COWS ARE SUFFERING FOR NO GOOD REASON, WITH THEIR MILK YIELD TOSSED IN THE TRASH OR CIRCLING DOWN A DRAIN. OUR CAMPAIGN TO ELIMINATE THE COW'S MILK MANDATE TAPS INTO CONSUMERS' INCREASING TASTE AND APPETITE FOR PLANT-BASED DAIRY MILK ALTERNATIVES, WHILE HONORING THE SACRIFICE THAT COWS MAKE IN AGRICULTURAL PRODUCTION. SAVING ELEPHANTS IN SOUTHERN AFRICA IN 2024, WE STARTED ON OUR CRUCIAL WORK TO BUILD A WILDLIFE TOURISM INDUSTRY, BUILT AROUND AFRICAN ELEPHANTS, IN THE MASSIVE SOUTHERN AFRICAN NATION OF ANGOLA. IT'S A CAMPAIGN THAT WILL ALSO BENEFIT ELEPHANTS AND PEOPLE IN BOTSWANA, NAMIBIA, ZAMBIA, AND ZIMBABWE, WHICH COLLECTIVELY HOST TWO THIRDS OF ALL ELEPHANTS IN AFRICA. WE'VE WE JOINED TOGETHER WITH MIKE CHASE AND KELLY LANDEN OF ELEPHANTS WITHOUT BORDERS TO HELP THE ELEPHANTS OF THIS REGION, SEEKING TO RELIEVE HUMAN-ELEPHANT CONFLICTS IN SEVERAL SOUTHERN AFRICAN NATIONS AND TO REPOPULATE ELEPHANTS IN ANGOLA, WHERE A 30-YEAR CIVIL WAR HAD RESULTED IN THE LIQUIDATION OF NEARLY ALL OF THE ELEPHANTS AND OTHER WILDLIFE IN THE STUNNINGLY BEAUTIFUL NATION. THE COLLABORATION, WHICH ALSO INCLUDES THE HALO TRUST AND THE GLOBAL COUNCILS OF ANIMAL WELLNESS ACTION AND THE CENTER, MARKS A SIGNIFICANT STEP IN CREATING THE GREAT ELEPHANT CORRIDOR, WHICH WILL ESTABLISH A SAFE MIGRATION ROUTE FOR ELEPHANTS ACROSS MULTIPLE COUNTRIES AND PROMOTE ECOTOURISM AS AN ALTERNATIVE TO TROPHY HUNTING. THE GOAL OF THIS PROJECT IS TO ULTIMATELY RELOCATE 30,000 ELEPHANTS OUT OF BOTSWANA TO REDUCE ELEPHANT/HUMAN CONFLICTS, TO REPOPULATE WILDLIFE IN ANGOLA, TO CREATE ECOTOURISM IN ANGOLA, AND TO REDUCE "JUSTIFICATION" FOR TROPHY HUNTING IN BOTSWANA BECAUSE OF OVERPOPULATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE PROCESS FOR REVIEWING THE FORM 990 PRIOR TO FILING INCLUDES CIRCULATION TO ALL BOARD MEMBERS AND THE PRESIDENT. IT IS ALSO CAREFULLY REVIEWED BY ACCOUNTING AND FINANCIAL PERSONNEL WITH EXPERIENCE IN PREPARING THIS TYPE OF DOCUMENT.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE CONFLICT OF INTEREST POLICY, WHICH WAS APPROVED BY THE BOARD OF DIRECTORS, IS CIRCULATED ON AN ANNUAL BASIS TO BOARD MEMBERS AND THE PRESIDENT WITH A REQUEST FOR DISCLOSURE OF ANY CONFLICTS NOT KNOWN TO THE BOARD. ANY CONFLICTS THAT ARISE ARE ADDRESSED IN ACCORDANCE WITH THE POLICY BY THE DISINTERESTED BOARD MEMBERS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 15</FormAndLineReferenceDesc>
+        <ExplanationTxt>IN DETERMINING COMPENSATION FOR THE TOP MANAGEMENT, OFFICERS AND OTHER KEY PERSONNEL, THE ORGANIZATION TAKES INTO ACCOUNT THE EXPERIENCE OF THE INCUMBENT AND COMPARABLE COMPENSATION DATA FOR SIMILAR POSITIONS WITHIN THE MARKET AREA.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>COPIES OF FORM 990 OR ANY GOVERNING DOCUMENTS CAN BE REQUESTED FROM THE ORGANIZATION VIA THE WEBSITE OR BY PHONE.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

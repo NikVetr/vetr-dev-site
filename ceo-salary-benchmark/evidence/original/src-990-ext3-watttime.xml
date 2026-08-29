@@ -1,0 +1,965 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" returnVersion="2024v5.0">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2026-04-07T16:46:40-04:00</ReturnTs>
+    <TaxPeriodEndDt>2025-06-30</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>521373858</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>DELEON &amp; STANG CPAS AND ADVISORS</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>150 S EAST ST STE 103</AddressLine1Txt>
+        <CityNm>FREDERICK</CityNm>
+        <StateAbbreviationCd>MD</StateAbbreviationCd>
+        <ZIPCd>217016175</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-07-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>471444637</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>WATTTIME CORPORATION</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>WATT</BusinessNameControlTxt>
+      <PhoneNum>8575403535</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>490 43RD STREET SUITE 221</AddressLine1Txt>
+        <CityNm>OAKLAND</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>94609</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>GAVIN MCCORMICK</PersonNm>
+      <PersonTitleTxt>EXECUTIVE DIRECTOR</PersonTitleTxt>
+      <PhoneNum>8575403535</PhoneNum>
+      <SignatureDt>2026-03-06</SignatureDt>
+      <DiscussWithPaidPreparerInd>true</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>false</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>RYAN CRABBS CPA</PreparerPersonNm>
+      <PTIN>P02436196</PTIN>
+      <PhoneNum>3012507400</PhoneNum>
+      <PreparationDt>2026-04-07</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="8">
+    <IRS990 documentId="RetDoc2" referenceDocumentId="RetDoc6">
+      <PrincipalOfficerNm>GAVIN MCCORMICK</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>490 43RD STREET 221</AddressLine1Txt>
+        <CityNm>OAKLAND</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>94609</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>16446600</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>false</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2014</FormationYr>
+      <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>TO RAISE AWARENESS ABOUT THE POTENTIAL TO REDUCE ENVIRONMENTAL HARM BY SHIFTING ELECTRICITY USE TO PARTICULAR TIMES; AND TO ENCOURAGE THE DEVELOPMENT AND SPREAD OF COMMON PROTOCOLS FOR THIS PRACTICE.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>3</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>2</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>38</TotalEmployeeCnt>
+      <TotalVolunteersCnt>10</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <PYContributionsGrantsAmt>18544604</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>13385612</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>2667271</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>3011001</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>80593</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>44515</CYInvestmentIncomeAmt>
+      <CYOtherRevenueAmt>5472</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>21292468</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>16446600</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>3505442</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>5130937</CYGrantsAndSimilarPaidAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>6285178</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>7630429</CYSalariesCompEmpBnftPaidAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>96055</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>6991963</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>5348374</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>16782583</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>18109740</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>4509885</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>-1663140</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>10805414</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>17572422</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>2045025</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>10475173</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>8760389</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>7097249</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>TO RAISE AWARENESS ABOUT THE POTENTIAL TO REDUCE ENVIRONMENTAL HARM BY SHIFTING ELECTRICITY USE TO PARTICULAR TIMES; TO ENCOURAGE THE DEVELOPMENT AND SPREAD OF COMMON PROTOCOLS FOR THIS PRACTICE.</MissionDesc>
+      <SignificantNewProgramSrvcInd>false</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>false</SignificantChangeInd>
+      <ExpenseAmt>16233366</ExpenseAmt>
+      <GrantAmt>5130937</GrantAmt>
+      <RevenueAmt>3011001</RevenueAmt>
+      <Desc>BELOW ARE SOME KEY HIGHLIGHTS OF WATTTIMES PROGRESS ON SEVERAL FRONTS IN FY25. 1. AER ASSISTANCE: WATTTIME CONTINUED TO GROW THE NUMBER OF PEOPLE WE WERE ABLE TO HELP AUTOMATE THEIR DEVICES TO SHIFT ELECTRICITY TO TIMES THAT REDUCE ENVIRONMENTAL HARM (WHICH WE CALL AUTOMATED EMISSIONS REDUCTION OR AER). IN FY25 WE SUPPORTED OVER 1 BILLION DEVICES TO USE AER. 2. AER EDUCATION: WE ALSO CONTINUED TO RAISE AWARENESS OF AER THROUGH GIVING TALKS, NEWS PUBLICATION, AND BY PUBLISHING FREE DATA TO ENABLE AER FREE ON SEVERAL SITES, SUCH AS CARBONTREASUREMAP.ORG, AND GRIDEMISSIONSDATA.IO. 3. RESEARCH TO MAKE AER MORE EFFECTIVE: IN FY25 WE DEVELOPED A NOVEL TECHNIQUE TO MAKE AER EVEN MORE EFFECTIVE AT REDUCING ENVIRONMENTAL HARM, BY ADDING IN BUILD MARGINAL EMISSIONS DATA. MORE INFORMATION AT GEM.WIKI/MBERS. 4. SUPPORTING HARMONIZATION OF METHODS. IN FY25, WATTTIME CONTINUED TO SUPPORT THE DEVELOPMENT AND SPREAD OF COMMON PROTOCOLS TO SHIFT ELECTRICITY USE TO CLEANER TIME, MOST NOTABLY BY SUPPORTING THE TECHNICAL WORKING GROUP FOR THE WIDELY USED GREENHOUSE GAS PROTOCOL. 5. CLIMATE TRACE EMISSIONS DATA RESEARCH: WATTTIME SERVES AS BOTH THE ELECTRICITY SECTOR LEAD, AND THE OVERALL COORDINATING SECRETARIAT, OF THE CLIMATE TRACE RESEARCH COALITION. CLIMATE TRACE COMBINES DATA FROM NUMEROUS DIFFERENT NONPROFITS, UNIVERSITIES, AND TECH COMPANIES IN ONE FREE SITE. IN FY25, THE PROJECT ESTIMATED EMISSIONS OF NUMEROUS POLLUTANTS, FROM METHANE TO SULFUR DIOXIDE, AT OVER 700 MILLION LOCATIONS WORLDWIDE. 6. EXPLORING NOVEL APPLICATIONS OF EMISSIONS DATA: IN FY25, WATTTIME ALSO SUPPORTED OTHER CLIMATE TRACE COALITION MEMBERS IN RESEARCHING WAYS TO EXTEND THE AER CONCEPT TO DEVELOP SIMILAR LOW-COST, DATA-DRIVEN WAYS TO REDUCE ENVIRONMENTAL HARM IN OTHER SECTORS OUTSIDE OF ELECTRICITY. THE COALITION PREPARED TO RELEASE SUCH TECHNIQUES IN NOVEMBER 2025.</Desc>
+      <TotalProgramServiceExpensesAmt>16233366</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="RetDoc7">true</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1">true</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc3">false</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc3">false</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc3">false</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc3">false</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd referenceDocumentId="RetDoc3">false</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc3">true</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc3">false</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc3">false</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc3">false</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc3">false</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc3">true</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc3">true</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc3">false</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <ForeignOfficeInd>true</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="RetDoc8">true</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="RetDoc8">true</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd referenceDocumentId="RetDoc8">false</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>false</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>false</FundraisingActivitiesInd>
+      <GamingActivitiesInd>false</GamingActivitiesInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="RetDoc4">true</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd referenceDocumentId="RetDoc4">false</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="RetDoc5">true</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>false</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>false</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>false</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>false</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>false</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>false</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>false</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>false</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>false</DeductibleArtContributionInd>
+      <TerminateOperationsInd>false</TerminateOperationsInd>
+      <PartialLiquidationInd>false</PartialLiquidationInd>
+      <DisregardedEntityInd>false</DisregardedEntityInd>
+      <RelatedEntityInd>false</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>false</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>true</ScheduleORequiredInd>
+      <IRPDocumentCnt>10</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>false</BackupWthldComplianceInd>
+      <EmployeeCnt>38</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>true</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>false</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>false</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>false</NondeductibleContributionsInd>
+      <IndoorTanningServicesInd>false</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>false</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>false</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>3</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>2</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>false</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>false</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>false</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>false</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>false</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>false</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>false</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>true</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>true</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>false</OfficerMailingAddressInd>
+      <LocalChaptersInd>false</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>true</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>true</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>true</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>true</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>true</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>true</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>true</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>false</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>false</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>BLUE FOX</PersonNm>
+        <PhoneNum>3212333311</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>13300 SOUTH CLEVELAND AVENUE</AddressLine1Txt>
+          <AddressLine2Txt>SUITE 895</AddressLine2Txt>
+          <CityNm>FORT MYERS</CityNm>
+          <StateAbbreviationCd>FL</StateAbbreviationCd>
+          <ZIPCd>33907</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JEREMY FREEMAN</PersonNm>
+        <TitleTxt>SOFTWARE ENG</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>238576</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>54055</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>WILLIAM COFIELD</PersonNm>
+        <TitleTxt>SR DATA SCIE</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>243857</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>20729</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LAURA CIRINCIONE</PersonNm>
+        <TitleTxt>DIR. OF PART</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>223653</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>28784</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ERIC D NGUYEN</PersonNm>
+        <TitleTxt>CHIEF PRODUC</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>215465</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>26746</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SAM KOEBRICH</PersonNm>
+        <TitleTxt>PPAL ENGINEE</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>211297</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>26897</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>GAVIN MCCORMICK</PersonNm>
+        <TitleTxt>EXECUTIVE DI</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>207505</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>19887</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SASHA SHAHIDI</PersonNm>
+        <TitleTxt>CFO / TREASU</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>146206</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>17730</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ALEXANDRIA SHUSTER</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>40.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>122686</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>23696</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SCOTT MOURA</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LYNN THOMAN</PersonNm>
+        <TitleTxt>CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>2.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>1609245</TotalReportableCompFromOrgAmt>
+      <TotalOtherCompensationAmt>218524</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>29</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>false</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>true</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>false</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>GLOBAL ENERGY MONITOR</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>1254 UTAH STREET</AddressLine1Txt>
+            <CityNm>SAN FRANCISCO</CityNm>
+            <StateAbbreviationCd>CA</StateAbbreviationCd>
+            <ZIPCd>94110</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>DATA SCIENCE</ServicesDesc>
+        <CompensationAmt>1672063</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>THE JOHN HOPKINS UNIVERSITY</BusinessNameLine1Txt>
+            <BusinessNameLine2Txt>APPLIED PHYSICS LABORATORY</BusinessNameLine2Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>11100 JOHNS HOPKINS ROAD</AddressLine1Txt>
+            <CityNm>LAUREL</CityNm>
+            <StateAbbreviationCd>MD</StateAbbreviationCd>
+            <ZIPCd>20723</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>ENGINEERING</ServicesDesc>
+        <CompensationAmt>1440249</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>ROCKY MOUNTAIN INSTITUTE</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>2490 JUNCTION PLACE</AddressLine1Txt>
+            <CityNm>BOULDER</CityNm>
+            <StateAbbreviationCd>CO</StateAbbreviationCd>
+            <ZIPCd>80301</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>DATA SCIENCE</ServicesDesc>
+        <CompensationAmt>1111244</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>THE EARTH GENOME</BusinessNameLine1Txt>
+            <BusinessNameLine2Txt>THE JOHN HOPKINS UNIVERSITY</BusinessNameLine2Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>121 PEPPER DRIVE</AddressLine1Txt>
+            <CityNm>LOS ALTOS</CityNm>
+            <StateAbbreviationCd>CA</StateAbbreviationCd>
+            <ZIPCd>94022</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>WEBSITE</ServicesDesc>
+        <CompensationAmt>1052346</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>OCEANMIND</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <ForeignAddress>
+            <AddressLine1Txt>HARWELL INNOVATION CENTRE</AddressLine1Txt>
+            <AddressLine2Txt>CURIE AVENUE</AddressLine2Txt>
+            <CityNm>LONDON</CityNm>
+            <ProvinceOrStateNm>LONDON</ProvinceOrStateNm>
+            <CountryCd>UK</CountryCd>
+          </ForeignAddress>
+        </ContractorAddress>
+        <ServicesDesc>DATA SCIENCE</ServicesDesc>
+        <CompensationAmt>628781</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>24</CntrctRcvdGreaterThan100KCnt>
+      <AllOtherContributionsAmt>13385612</AllOtherContributionsAmt>
+      <TotalContributionsAmt>13385612</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>LICENSE FEES</Desc>
+        <BusinessCd>541610</BusinessCd>
+        <TotalRevenueColumnAmt>2154744</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>2154744</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>CONSULTING FEES</Desc>
+        <BusinessCd>541610</BusinessCd>
+        <TotalRevenueColumnAmt>856257</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>856257</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>3011001</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>44515</TotalRevenueColumnAmt>
+        <ExclusionAmt>44515</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>OTHER REVENUE</Desc>
+        <TotalRevenueColumnAmt>5472</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>5472</RelatedOrExemptFuncIncomeAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>5472</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>16446600</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>3016473</RelatedOrExemptFuncIncomeAmt>
+        <ExclusionAmt>44515</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>3897849</TotalAmt>
+        <ProgramServicesAmt>3897849</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>1233088</TotalAmt>
+        <ProgramServicesAmt>1233088</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>516522</TotalAmt>
+        <ProgramServicesAmt>103553</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>345772</ManagementAndGeneralAmt>
+        <FundraisingAmt>67197</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>5848380</TotalAmt>
+        <ProgramServicesAmt>5547714</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>288384</ManagementAndGeneralAmt>
+        <FundraisingAmt>12282</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>288342</TotalAmt>
+        <ProgramServicesAmt>256135</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>28951</ManagementAndGeneralAmt>
+        <FundraisingAmt>3256</FundraisingAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>519199</TotalAmt>
+        <ProgramServicesAmt>461206</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>52130</ManagementAndGeneralAmt>
+        <FundraisingAmt>5863</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>457986</TotalAmt>
+        <ProgramServicesAmt>406830</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>45984</ManagementAndGeneralAmt>
+        <FundraisingAmt>5172</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>312330</TotalAmt>
+        <ProgramServicesAmt>368</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>311962</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>306688</TotalAmt>
+        <ManagementAndGeneralAmt>306688</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>3429047</TotalAmt>
+        <ProgramServicesAmt>3309881</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>118606</ManagementAndGeneralAmt>
+        <FundraisingAmt>560</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>112779</TotalAmt>
+        <ProgramServicesAmt>89724</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>22422</ManagementAndGeneralAmt>
+        <FundraisingAmt>633</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>640641</TotalAmt>
+        <ProgramServicesAmt>640641</ProgramServicesAmt>
+      </InformationTechnologyGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>289314</TotalAmt>
+        <ProgramServicesAmt>286258</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1964</ManagementAndGeneralAmt>
+        <FundraisingAmt>1092</FundraisingAmt>
+      </ConferencesMeetingsGrp>
+      <InterestGrp>
+        <TotalAmt>61056</TotalAmt>
+        <ManagementAndGeneralAmt>61056</ManagementAndGeneralAmt>
+      </InterestGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>16941</TotalAmt>
+        <ManagementAndGeneralAmt>16941</ManagementAndGeneralAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>89849</TotalAmt>
+        <ManagementAndGeneralAmt>89849</ManagementAndGeneralAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>BAD DEBT</Desc>
+        <TotalAmt>39500</TotalAmt>
+        <ManagementAndGeneralAmt>39500</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>BANK CHARGES</Desc>
+        <TotalAmt>35084</TotalAmt>
+        <ProgramServicesAmt>119</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>34965</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>CONTRIBUTIONS</Desc>
+        <TotalAmt>14500</TotalAmt>
+        <ManagementAndGeneralAmt>14500</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>MISCELLANEOUS</Desc>
+        <TotalAmt>645</TotalAmt>
+        <ManagementAndGeneralAmt>645</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>18109740</TotalAmt>
+        <ProgramServicesAmt>16233366</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1780319</ManagementAndGeneralAmt>
+        <FundraisingAmt>96055</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>8113071</BOYAmt>
+        <EOYAmt>6877981</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>2000000</BOYAmt>
+        <EOYAmt>9930939</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>622849</BOYAmt>
+        <EOYAmt>483251</EOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>42992</BOYAmt>
+        <EOYAmt>239650</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>92174</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>51573</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>26502</BOYAmt>
+        <EOYAmt>40601</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>10805414</BOYAmt>
+        <EOYAmt>17572422</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>1357071</BOYAmt>
+        <EOYAmt>1668698</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <DeferredRevenueGrp>
+        <BOYAmt>437954</BOYAmt>
+        <EOYAmt>306475</EOYAmt>
+      </DeferredRevenueGrp>
+      <MortgNotesPyblScrdInvstPropGrp>
+        <BOYAmt>250000</BOYAmt>
+        <EOYAmt>8500000</EOYAmt>
+      </MortgNotesPyblScrdInvstPropGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>2045025</BOYAmt>
+        <EOYAmt>10475173</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>6530671</BOYAmt>
+        <EOYAmt>-3633388</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>2229718</BOYAmt>
+        <EOYAmt>10730637</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>8760389</BOYAmt>
+        <EOYAmt>7097249</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>10805414</BOYAmt>
+        <EOYAmt>17572422</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>-1663140</ReconcilationRevenueExpnssAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>false</AccountantCompileOrReviewInd>
+      <FSAuditedInd>true</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>true</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>false</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="RetDoc7">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus4YearsAmt>8411587</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>12425096</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>10347478</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>18544602</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>13385612</CurrentTaxYearAmt>
+        <TotalAmt>63114375</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus4YearsAmt>8411587</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>12425096</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>10347478</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>18544602</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>13385612</CurrentTaxYearAmt>
+        <TotalAmt>63114375</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <SubstantialContributorsTotAmt>38766356</SubstantialContributorsTotAmt>
+      <PublicSupportTotal170Amt>24348019</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus4YearsAmt>2240</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>31392</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>80593</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>44515</CurrentTaxYearAmt>
+        <TotalAmt>158740</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <TotalSupportAmt>63273115</TotalSupportAmt>
+      <GrossReceiptsRltdActivitiesAmt>5683744</GrossReceiptsRltdActivitiesAmt>
+      <PublicSupportCY170Pct>0.38480</PublicSupportCY170Pct>
+      <PublicSupportPY170Pct>0.35920</PublicSupportPY170Pct>
+      <ThirtyThrPctSuprtTestsCY170Ind>X</ThirtyThrPctSuprtTestsCY170Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="RetDoc1">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="RetDoc3">
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>92174</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>51573</DepreciationAmt>
+        <BookValueAmt>40601</BookValueAmt>
+      </EquipmentGrp>
+      <TotalBookValueLandBuildingsAmt>40601</TotalBookValueLandBuildingsAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>16750576</TotalRevEtcAuditedFinclStmtAmt>
+      <DonatedServicesAndUseFcltsAmt>303976</DonatedServicesAndUseFcltsAmt>
+      <RevenueNotReportedAmt>303976</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>16446600</RevenueSubtotalAmt>
+      <TotalRevenuePerForm990Amt>16446600</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>18413716</TotExpnsEtcAuditedFinclStmtAmt>
+      <DonatedServicesUseFcltsAmt>303976</DonatedServicesUseFcltsAmt>
+      <ExpensesNotReportedAmt>303976</ExpensesNotReportedAmt>
+      <ExpensesSubtotalAmt>18109740</ExpensesSubtotalAmt>
+      <TotalExpensesPerForm990Amt>18109740</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>SCHEDULE D, PAGE 3, PART X</FormAndLineReferenceDesc>
+        <ExplanationTxt>WATTTIME HAS EVALUATED ITS CURRENT TAX POSITIONS AND HAS CONCLUDED THAT AS OF JUNE 30, 2025 AND 2024, IT DOES NOT HAVE ANY SIGNIFICANT UNCERTAIN TAX POSITIONS FOR WHICH A RESERVE WOULD BE NECESSARY.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="RetDoc8">
+      <GrantRecordsMaintainedInd>true</GrantRecordsMaintainedInd>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EAST ASIA &amp; THE PACIFIC</RegionTxt>
+        <EmployeeCnt>1</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>CONTRACTORS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>RESEARCH</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>6295</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE</RegionTxt>
+        <EmployeeCnt>4</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>CONTRACTORS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>RESEARCH</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>376461</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>EUROPE</RegionTxt>
+        <EmployeeCnt>2</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>GRANTMAKING</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>RESEARCH</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>1233088</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SOUTH ASIA</RegionTxt>
+        <EmployeeCnt>1</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>CONTRACTORS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>RESEARCH</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>53470</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>SOUTH AMERICA</RegionTxt>
+        <EmployeeCnt>1</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>CONTRACTORS</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>RESEARCH</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>24130</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <SubtotalEmployeesCnt>9</SubtotalEmployeesCnt>
+      <TotalEmployeeCnt>9</TotalEmployeeCnt>
+      <SubtotalSpentAmt>1693444</SubtotalSpentAmt>
+      <TotalSpentAmt>1693444</TotalSpentAmt>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE</RegionTxt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+        <CashGrantAmt>625485</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>EPAYMENT</MannerOfCashDisbursementTxt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>EUROPE</RegionTxt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+        <CashGrantAmt>607603</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE TRANSFER</MannerOfCashDisbursementTxt>
+      </GrantsToOrgOutsideUSGrp>
+      <TransferToForeignCorpInd>false</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>false</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>false</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>false</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>false</ForeignPartnershipInd>
+      <BoycottCountriesInd>false</BoycottCountriesInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>SCHEDULE F, PAGE 1, PART I, LINE 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>EACH GRANT GOES THROUGH A COMPREHENSIVE SEARCH AND APPROVAL PROCESS, INCLUDING INTERVIEWS, PILOT PROJECTS, AND REFERENCE CHECKS. GRANT CONTRACTS ENSURE LEGAL COMPLIANCE, AND RECIPIENTS ARE REQUIRED TO KEEP WRITTEN FINANCIAL ACCOUNTS, DOCUMENTS, AND RECORDS OF ALL EXPENDITURES OF GRANT FUNDS AND THE USE OF SUCH FUNDS. COPIES OF SUCH FINANCIAL ACCOUNTS, DOCUMENTS, AND RECORDS ARE TO BE FURNISHED TO WATTTIME UPON REQUEST. IN ADDITION, ALL GRANTEES SUBMIT GRANT REPORTS AT THE END OF THE GRANT PERIOD TO SHOW STATUS OF COMPLETION OF DELIVERABLES AND GRANT EXPENDITURE. SINCE 2023, WE ALSO REQUIRE INTERIM GRANT REPORTS AT THE END OF EVERY TRANCHE. OUR STAFF MEET WITH ALL GRANTEES EVERY TWO WEEKS TO EVALUATE PROGRESS TOWARDS GRANT OBJECTIVES. WATTTIME ALSO TRACKS PROGRESS TOWARD DELIVERABLES USING PROJECT MANAGEMENT TOOLS LIKE NOTION, WHERE TEAMS UPDATE THEIR PROGRESS ON DELIVERABLES AND TASKS. ALTHOUGH THIS HAS NEVER OCCURRED, OUR CONTRACTS ARE SUBJECTS TO THE LAWS OF CALIFORNIA WHICH PERMIT WATTTIME TO TAKE LEGAL ACTION FOR BREACH OF CONTRACT.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>SCHEDULE F, PAGE 1, PART I, LINE 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>EAST ASIA &amp; THE PACIFIC 6,295 0 EUROPE 376,461 0 EUROPE 1,233,088 0 SOUTH ASIA 53,470 0 SOUTH AMERICA 24,130 0</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleF>
+    <IRS990ScheduleI documentId="RetDoc4">
+      <GrantRecordsMaintainedInd>true</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>GLOBAL ENERGY MONITOR</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>440 N BARRANCA AVE 2878</AddressLine1Txt>
+          <CityNm>COVINA</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>91723</ZIPCd>
+        </USAddress>
+        <RecipientEIN>822723327</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>1668890</CashGrantAmt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CTREES</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>12 S RAYMOND AVENUE STE B</AddressLine1Txt>
+          <CityNm>PASADENA</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>91105</ZIPCd>
+        </USAddress>
+        <RecipientEIN>880538773</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>420367</CashGrantAmt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>ROCKY MOUNTAIN INSTITUTE</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2490 JUNCTION PLACE SUITE 200</AddressLine1Txt>
+          <CityNm>BOULDER</CityNm>
+          <StateAbbreviationCd>CO</StateAbbreviationCd>
+          <ZIPCd>80301</ZIPCd>
+        </USAddress>
+        <RecipientEIN>742244146</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>1111244</CashGrantAmt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>GLOBAL FISHING WATCH INC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1025 CONN AVENUE NW SUITE 200</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20036</ZIPCd>
+        </USAddress>
+        <RecipientEIN>815461345</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>170500</CashGrantAmt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>MICHIGAN STATE UNIVERSITY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>426 AUDITORIUM ROAD ROOM 360</AddressLine1Txt>
+          <CityNm>EAST LANSING</CityNm>
+          <StateAbbreviationCd>MI</StateAbbreviationCd>
+          <ZIPCd>48214</ZIPCd>
+        </USAddress>
+        <RecipientEIN>386005984</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>34016</CashGrantAmt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CARNEGIE MELLON UNIVERSITY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>5000 FORBES AVENUE</AddressLine1Txt>
+          <CityNm>PITTSBURG</CityNm>
+          <StateAbbreviationCd>PA</StateAbbreviationCd>
+          <ZIPCd>15213</ZIPCd>
+        </USAddress>
+        <RecipientEIN>250969449</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>120000</CashGrantAmt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>DUKE UNIVERSITY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2200 WEST MAIN STREET SUITE A-200</AddressLine1Txt>
+          <CityNm>DURHAM</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27705</ZIPCd>
+        </USAddress>
+        <RecipientEIN>560532129</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>174973</CashGrantAmt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>SAINT LOUIS UNIVERSITY - SCHOOL OF</BusinessNameLine1Txt>
+          <BusinessNameLine2Txt>SCIENCE AND ENGINEERING</BusinessNameLine2Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>3694 WEST PINE MALL</AddressLine1Txt>
+          <CityNm>ST LOUIS</CityNm>
+          <StateAbbreviationCd>MO</StateAbbreviationCd>
+          <ZIPCd>63108</ZIPCd>
+        </USAddress>
+        <RecipientEIN>430654872</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>197859</CashGrantAmt>
+        <PurposeOfGrantTxt>CLIMATE TRACE</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>8</Total501c3OrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>SCHEDULE I, PAGE 1, PART I, LINE 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>EACH GRANT GOES THROUGH A COMPREHENSIVE SEARCH AND APPROVAL PROCESS, INCLUDING INTERVIEWS, PILOT PROJECTS AND REFERENCE CHECKS. GRANT CONTRACTS ENSURE LEGAL COMPLIANCE AND RECIPIENTS ARE REQUIRED TO KEEP WRITTEN FINANCIAL ACCOUNTS, DOCUMENTS, AND RECORDS OF ALL EXPENDITURES OF GRANT FUNDS AND THE USE OF SUCH FUNDS. COPIES OF SUCH FINANCIAL ACCOUNTS, DOCUMENTS, AND RECORDS ARE TO BE FURNISHED TO WATTTIME UPON REQUEST. IN ADDITION, ALL GRANTEES SUBMIT GRANT REPORTS AT THE END OF THE GRANT PERIOD TO SHOW STATUS OF COMPLETION OF DELIVERABLES AND GRANT EXPENDITURE. SINCE 2023, WE ALSO REQUIRE INTERIM GRANT REPORTS AT THE END OF EVERY TRANCHE. OUR STAFF MEET WITH ALL GRANTEES EVERY TWO WEEKS TO EVALUATE PROGRESS TOWARDS GRANT OBJECTIVES, AND HAVE A GROUP MEETING WITH THEM WEEKLY. WATTTIME ALSO TRACKS PROGRESS TOWARD DELIVERABLES USING PROJECT MANAGEMENT TOOLS LIKE NOTION, WHERE TEAMS UPDATE THEIR PROGRESS ON DELIVERABLES AND TASKS. ALTHOUGH THIS HAS NEVER OCCURRED, OUR CONTRACTS ARE SUBJECTS TO THE LAWS OF CALIFORNIA WHICH PERMIT WATTTIME TO TAKE LEGAL ACTION FOR BREACH OF CONTRACT</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleJ documentId="RetDoc5">
+      <CompensationSurveyInd>X</CompensationSurveyInd>
+      <BoardOrCommitteeApprovalInd>X</BoardOrCommitteeApprovalInd>
+      <SeverancePaymentInd>false</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>false</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>false</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>false</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>false</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>false</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>false</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>false</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>false</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>JEREMY FREEMAN</PersonNm>
+        <TitleTxt>SOFTWARE ENGINEER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>238576</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>12208</DeferredCompensationFlngOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>41847</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>292631</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>WILLIAM COFIELD</PersonNm>
+        <TitleTxt>SR DATA SCIENTIST</TitleTxt>
+        <BaseCompensationFilingOrgAmt>243857</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>12207</DeferredCompensationFlngOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>8522</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>264586</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>LAURA CIRINCIONE</PersonNm>
+        <TitleTxt>DIR. OF PARTNERSHIP</TitleTxt>
+        <BaseCompensationFilingOrgAmt>223653</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>4175</DeferredCompensationFlngOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>24609</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>252437</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>ERIC D NGUYEN</PersonNm>
+        <TitleTxt>CHIEF PRODUCT OFFI.</TitleTxt>
+        <BaseCompensationFilingOrgAmt>215465</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>6861</DeferredCompensationFlngOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>19885</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>242211</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>SAM KOEBRICH</PersonNm>
+        <TitleTxt>PPAL ENGINEER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>211297</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>10623</DeferredCompensationFlngOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>16274</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>238194</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>GAVIN MCCORMICK</PersonNm>
+        <TitleTxt>EXECUTIVE DIRECTOR</TitleTxt>
+        <BaseCompensationFilingOrgAmt>207505</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>9336</DeferredCompensationFlngOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>10551</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>227392</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>SASHA SHAHIDI</PersonNm>
+        <TitleTxt>CFO / TREASURER</TitleTxt>
+        <BaseCompensationFilingOrgAmt>146206</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>7412</DeferredCompensationFlngOrgAmt>
+        <NontaxableBenefitsFilingOrgAmt>10318</NontaxableBenefitsFilingOrgAmt>
+        <TotalCompensationFilingOrgAmt>163936</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleO documentId="RetDoc6">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 2, PART III, LINE 4A</FormAndLineReferenceDesc>
+        <ExplanationTxt>BELOW ARE SOME KEY HIGHLIGHTS OF WATTTIMES PROGRESS ON SEVERAL FRONTS IN FY25. 1. AER ASSISTANCE: WATTTIME CONTINUED TO GROW THE NUMBER OF PEOPLE WE WERE ABLE TO HELP AUTOMATE THEIR DEVICES TO SHIFT ELECTRICITY TO TIMES THAT REDUCE ENVIRONMENTAL HARM (WHICH WE CALL AUTOMATED EMISSIONS REDUCTION OR AER). IN FY25 WE SUPPORTED OVER 1 BILLION DEVICES TO USE AER. 2. AER EDUCATION: WE ALSO CONTINUED TO RAISE AWARENESS OF AER THROUGH GIVING TALKS, NEWS PUBLICATION, AND BY PUBLISHING FREE DATA TO ENABLE AER FREE ON SEVERAL SITES, SUCH AS CARBONTREASUREMAP.ORG, AND GRIDEMISSIONSDATA.IO. 3. RESEARCH TO MAKE AER MORE EFFECTIVE: IN FY25 WE DEVELOPED A NOVEL TECHNIQUE TO MAKE AER EVEN MORE EFFECTIVE AT REDUCING ENVIRONMENTAL HARM, BY ADDING IN BUILD MARGINAL EMISSIONS DATA. MORE INFORMATION AT GEM.WIKI/MBERS. 4. SUPPORTING HARMONIZATION OF METHODS. IN FY25, WATTTIME CONTINUED TO SUPPORT THE DEVELOPMENT AND SPREAD OF COMMON PROTOCOLS TO SHIFT ELECTRICITY USE TO CLEANER TIME, MOST NOTABLY BY SUPPORTING THE TECHNICAL WORKING GROUP FOR THE WIDELY USED GREENHOUSE GAS PROTOCOL. 5. CLIMATE TRACE EMISSIONS DATA RESEARCH: WATTTIME SERVES AS BOTH THE ELECTRICITY SECTOR LEAD, AND THE OVERALL COORDINATING SECRETARIAT, OF THE CLIMATE TRACE RESEARCH COALITION. CLIMATE TRACE COMBINES DATA FROM NUMEROUS DIFFERENT NONPROFITS, UNIVERSITIES, AND TECH COMPANIES IN ONE FREE SITE. IN FY25, THE PROJECT ESTIMATED EMISSIONS OF NUMEROUS POLLUTANTS, FROM METHANE TO SULFUR DIOXIDE, AT OVER 700 MILLION LOCATIONS WORLDWIDE. 6. EXPLORING NOVEL APPLICATIONS OF EMISSIONS DATA: IN FY25, WATTTIME ALSO SUPPORTED OTHER CLIMATE TRACE COALITION MEMBERS IN RESEARCHING WAYS TO EXTEND THE AER CONCEPT TO DEVELOP SIMILAR LOW-COST, DATA-DRIVEN WAYS TO REDUCE ENVIRONMENTAL HARM IN OTHER SECTORS OUTSIDE OF ELECTRICITY. THE COALITION PREPARED TO RELEASE SUCH TECHNIQUES IN NOVEMBER 2025.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>BEFORE FILING, THE EXECUTIVE DIRECTOR REVIEWS THE 990 AND SENDS A COPY TO THE BOARD. BOARD MEMBERS ARE GIVEN THE OPPORTUNITY TO REVIEW BEFORE SUBMITTING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>WATTTIME REQUIRES THAT ALL EMPLOYEES AND BOARD MEMBERS REVIEW AND SIGN THE CONFLICT OF INTEREST POLICY ANNUALLY, AND THAT ANY ACTUAL, APPARENT, OR POTENTIAL CONFLICT OF INTEREST BE DISCLOSED AS SOON AS SOMEONE BECOMES AWARE OF IT. ONCE A DISCLOSURE OF AN ACTUAL, APPARENT, OR POTENTIAL CONFLICT OF INTEREST HAS BEEN SUBMITTED, AND AFTER GATHERING ANY RELEVANT INFORMATION FROM THE CONCERNED EMPLOYEE, DIRECTOR, OR OFFICER, WATTTIME WILL DETERMINE WHETHER A CONFLICT EXISTS AND, IN THE CASE OF AN EXISTING CONFLICT, WHETHER THE CONTEMPLATED TRANSACTION OR BUSINESS RELATIONSHIP MAY BE AUTHORIZED AS JUST, FAIR, LEGAL, AND REASONABLE TO WATTTIME.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 15A</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE INDEPENDENT MEMBERS OF THE BOARD ANNUALLY DESIGNATE A COMPENSATION COMMITTEE TO REVIEW THE EXECUTIVE DIRECTOR'S COMPENSATION BASED ON COMPARABILITY DATA. THE COMMITTEE THEN SUGGESTS ANY APPROPRIATE COMPENSATION CHANGES TO BE VOTED ON BY THE BOARD. THIS PROCESS IS CONCURRENTLY DOCUMENTED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PAGE 6, PART VI, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>ALL GOVERNING DOCUMENTS, CONFLICT OF INTEREST POLICY, AND FINANCIAL STATEMENTS WERE AVAILABLE TO THE PUBLIC UPON REQUEST. EXECUTIVE DIRECTOR GAVIN MCCORMICK KEPT ELECTRONIC COPIES OF ALL THESE DOCUMENTS, AND THE PRIMARY MEANS OF INSPECTION WAS DELIVERING THESE DOCUMENTS BY EMAIL UPON REQUEST.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART IX, LINE 11G</FormAndLineReferenceDesc>
+        <ExplanationTxt>OTHER PROFESSIONAL EXPENSES 0 101,806 0 CONTRACTORS 3,309,881 16,800 560 TOTAL 3,309,881 118,606 560</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

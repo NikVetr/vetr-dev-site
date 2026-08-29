@@ -1,0 +1,1213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" returnVersion="2024v5.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2026-04-24T13:59:54-04:00</ReturnTs>
+    <TaxPeriodEndDt>2024-12-31</TaxPeriodEndDt>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>743043913</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>Center for Responsible Lending</BusinessNameLine1Txt>
+      </BusinessName>
+      <InCareOfNm>% Michael Calhoun</InCareOfNm>
+      <BusinessNameControlTxt>CENT</BusinessNameControlTxt>
+      <PhoneNum>9199564400</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>302 West Main Street</AddressLine1Txt>
+        <CityNm>Durham</CityNm>
+        <StateAbbreviationCd>NC</StateAbbreviationCd>
+        <ZIPCd>277013227</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>MICHAEL CALHOUN</PersonNm>
+      <PersonTitleTxt>President</PersonTitleTxt>
+      <PhoneNum>9199564400</PhoneNum>
+      <SignatureDt>2026-04-24</SignatureDt>
+    </BusinessOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>true</IRSResponsiblePrtyInfoCurrInd>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="9">
+    <IRS990 documentId="IRS990">
+      <AmendedReturnInd>X</AmendedReturnInd>
+      <PrincipalOfficerNm>Michael Calhoun</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>302 West Main Street</AddressLine1Txt>
+        <CityNm>Durham</CityNm>
+        <StateAbbreviationCd>NC</StateAbbreviationCd>
+        <ZIPCd>277013227</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>9670335</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>false</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>www.responsiblelending.org</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2002</FormationYr>
+      <LegalDomicileStateCd>NC</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>Promoting financial fairness and economic opportunity for all, ending abusive lending practices.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>10</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>9</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>0</TotalEmployeeCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>4745498</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>5202714</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>1268590</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>4254366</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>242009</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>208455</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>6449</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>4800</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>6262546</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>9670335</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>149028</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>158166</CYGrantsAndSimilarPaidAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <CYSalariesCompEmpBnftPaidAmt>0</CYSalariesCompEmpBnftPaidAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>311104</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>6941725</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>5712330</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>7090753</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>5870496</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-828207</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>3799839</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>8305439</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>11459787</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>1341157</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>695666</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>6964282</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>10764121</NetAssetsOrFundBalancesEOYAmt>
+      <MissionDesc>Promoting financial fairness and economic opportunity for all, ending abusive lending practices.</MissionDesc>
+      <SignificantNewProgramSrvcInd>false</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>false</SignificantChangeInd>
+      <ExpenseAmt>2865613</ExpenseAmt>
+      <GrantAmt>158166</GrantAmt>
+      <Desc>Technical Assistance: Provided legal analysis and market insights on the impact of student loan policies and participated in rulemakings on these and other financial issues. Worked with industry and regulators to develop policies and definitions to support the Community Reinvestment Act, fair lending laws and other regulations. Provided technical assistance to state-based community groups and others regarding consumer financial products.</Desc>
+      <ProgSrvcAccomActy2Grp>
+        <ExpenseAmt>1071699</ExpenseAmt>
+        <Desc>Research Services: CRL provided expert analysis for reports, public comments and testimonies on the need for strong consumer protections. This included research on the risk and harms of payday loans and other lending. It surveyed consumers on financial products and their regulation.</Desc>
+      </ProgSrvcAccomActy2Grp>
+      <ProgSrvcAccomActy3Grp>
+        <ExpenseAmt>938592</ExpenseAmt>
+        <Desc>Outreach/Communications: Provided policy analysis and outreach materials to inform the public and regulators on products and policies that prevent all Americans from establishing and sustaining economic stability and security. CRL worked to make homeownership more accessible and sustainable for borrowers, save veterans from foreclosure, and enhance fair lending laws.</Desc>
+      </ProgSrvcAccomActy3Grp>
+      <TotalProgramServiceExpensesAmt>4875904</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="990A">true</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="990B">true</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd referenceDocumentId="990C">true</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd>false</DonorAdvisedFundInd>
+      <ConservationEasementsInd>false</ConservationEasementsInd>
+      <CollectionsOfArtInd>false</CollectionsOfArtInd>
+      <CreditCounselingInd>false</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>false</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="990D">true</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd>false</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd>false</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="990D">true</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="990D">true</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="990D">true</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="990D">true</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd>false</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <ForeignOfficeInd>false</ForeignOfficeInd>
+      <ForeignActivitiesInd>false</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>false</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>false</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>false</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>false</FundraisingActivitiesInd>
+      <GamingActivitiesInd>false</GamingActivitiesInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="990I">true</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>false</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd referenceDocumentId="990J">true</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>false</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>false</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>false</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>false</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>false</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>false</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>false</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>false</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>false</DeductibleArtContributionInd>
+      <TerminateOperationsInd>false</TerminateOperationsInd>
+      <PartialLiquidationInd>false</PartialLiquidationInd>
+      <DisregardedEntityInd>false</DisregardedEntityInd>
+      <RelatedEntityInd referenceDocumentId="990R">true</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TransactionWithControlEntInd>false</TransactionWithControlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>false</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>true</ScheduleORequiredInd>
+      <IRPDocumentCnt>16</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>true</BackupWthldComplianceInd>
+      <EmployeeCnt>0</EmployeeCnt>
+      <UnrelatedBusIncmOverLimitInd>false</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>false</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>false</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>false</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>false</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>false</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>false</PayPremiumsPrsnlBnftCntrctInd>
+      <Form8899Filedind>false</Form8899Filedind>
+      <Form1098CFiledInd>false</Form1098CFiledInd>
+      <IndoorTanningServicesInd>false</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>false</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>false</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>10</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>9</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>false</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>false</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>false</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>false</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>false</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>false</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>false</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>true</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>true</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>false</OfficerMailingAddressInd>
+      <LocalChaptersInd>false</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>true</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>true</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>true</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>true</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>true</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>true</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>true</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>true</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>false</InvestmentInJointVentureInd>
+      <StatesWhereCopyOfReturnIsFldCd>AK</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>AR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CO</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>CT</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>DC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>FL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>GA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>HI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>IL</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>KY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MD</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>ME</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>MS</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>ND</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NH</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NJ</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NM</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NV</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>NY</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OH</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OK</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>OR</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>PA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>RI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>SC</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>TN</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>UT</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>VA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WA</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WI</StatesWhereCopyOfReturnIsFldCd>
+      <StatesWhereCopyOfReturnIsFldCd>WV</StatesWhereCopyOfReturnIsFldCd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>Marcus Bowen</PersonNm>
+        <PhoneNum>9199564400</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>301 West Main Street</AddressLine1Txt>
+          <CityNm>Durham</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <InfoInScheduleOPartVIIInd>X</InfoInScheduleOPartVIIInd>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Elizabeth J Laderman</PersonNm>
+        <TitleTxt>Senior Researcher</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>40.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>142640</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>31041</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Andrew Kushner</PersonNm>
+        <TitleTxt>Senior Policy Counsel</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>40.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>150782</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>13510</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Michael Calhoun</PersonNm>
+        <TitleTxt>President</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>40.00</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>141227</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>22387</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Ellen Harnick</PersonNm>
+        <TitleTxt>CRL EVP</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>40.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>136684</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>21142</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Mitria Spotser</PersonNm>
+        <TitleTxt>Director Federal Policy</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>40.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>143589</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>13408</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Peter Smith</PersonNm>
+        <TitleTxt>Sr Researcher</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>40.00</AverageHoursPerWeekRltdOrgRt>
+        <HighestCompensatedEmployeeInd>X</HighestCompensatedEmployeeInd>
+        <ReportableCompFromOrgAmt>148452</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>7978</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Marcus Bowen</PersonNm>
+        <TitleTxt>Treasurer</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>40.00</AverageHoursPerWeekRltdOrgRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>105750</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>36143</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Martin Eakes</PersonNm>
+        <TitleTxt>CEODirectorSecretary</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>40.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>100961</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>35827</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Wade Henderson</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Mark Goldhaber</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Sarah Ludwig</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Nicolas Retsina</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Lisa Rice</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Amy Domini</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Laura Arce</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LaShawn Warren</PersonNm>
+        <TitleTxt>Director</TitleTxt>
+        <AverageHoursPerWeekRt>0.00</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.50</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>Ira Rheingold</PersonNm>
+        <TitleTxt>DirectorChair</TitleTxt>
+        <AverageHoursPerWeekRt>0.50</AverageHoursPerWeekRt>
+        <AverageHoursPerWeekRltdOrgRt>0.00</AverageHoursPerWeekRltdOrgRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>1070085</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>181436</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>18</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>false</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>true</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>false</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>WestFront Strategies LLC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>1201 PA Ave NWSte 530</AddressLine1Txt>
+            <CityNm>Wash</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>20004</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Consulting Fee</ServicesDesc>
+        <CompensationAmt>120000</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>Spitfire StrategiesLLC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>2300 N St NW-Ste 610</AddressLine1Txt>
+            <CityNm>Wash</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>20037</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>Consulting Fee</ServicesDesc>
+        <CompensationAmt>136872</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>2</CntrctRcvdGreaterThan100KCnt>
+      <AllOtherContributionsAmt>5202714</AllOtherContributionsAmt>
+      <TotalContributionsAmt>5202714</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>Cy Pres Award</Desc>
+        <BusinessCd>900099</BusinessCd>
+        <TotalRevenueColumnAmt>4254366</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>4254366</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>4254366</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>208455</TotalRevenueColumnAmt>
+        <ExclusionAmt>208455</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <NetIncmFromFundraisingEvtGrp>
+        <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
+      </NetIncmFromFundraisingEvtGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>Other</Desc>
+        <BusinessCd>561000</BusinessCd>
+        <TotalRevenueColumnAmt>4800</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>4800</RelatedOrExemptFuncIncomeAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>4800</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>9670335</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>4259166</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>208455</ExclusionAmt>
+      </TotalRevenueGrp>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>158166</TotalAmt>
+        <ProgramServicesAmt>158166</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>25567</TotalAmt>
+        <ProgramServicesAmt>25567</ProgramServicesAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>15199</TotalAmt>
+        <ManagementAndGeneralAmt>15199</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>335364</TotalAmt>
+        <ProgramServicesAmt>335364</ProgramServicesAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>369642</TotalAmt>
+        <ProgramServicesAmt>301799</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>46293</ManagementAndGeneralAmt>
+        <FundraisingAmt>21550</FundraisingAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>31082</TotalAmt>
+        <ProgramServicesAmt>25377</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3893</ManagementAndGeneralAmt>
+        <FundraisingAmt>1812</FundraisingAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>34680</TotalAmt>
+        <ProgramServicesAmt>28315</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4343</ManagementAndGeneralAmt>
+        <FundraisingAmt>2022</FundraisingAmt>
+      </OfficeExpensesGrp>
+      <OccupancyGrp>
+        <TotalAmt>409991</TotalAmt>
+        <ProgramServicesAmt>334742</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>51346</ManagementAndGeneralAmt>
+        <FundraisingAmt>23903</FundraisingAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>120435</TotalAmt>
+        <ProgramServicesAmt>80196</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>32069</ManagementAndGeneralAmt>
+        <FundraisingAmt>8170</FundraisingAmt>
+      </TravelGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>34109</TotalAmt>
+        <ProgramServicesAmt>27849</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>4272</ManagementAndGeneralAmt>
+        <FundraisingAmt>1988</FundraisingAmt>
+      </ConferencesMeetingsGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>14718</TotalAmt>
+        <ProgramServicesAmt>12017</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1843</ManagementAndGeneralAmt>
+        <FundraisingAmt>858</FundraisingAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>3820</TotalAmt>
+        <ProgramServicesAmt>3119</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>478</ManagementAndGeneralAmt>
+        <FundraisingAmt>223</FundraisingAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>Staff Reimb SHSC 56-1849615</Desc>
+        <TotalAmt>4163633</TotalAmt>
+        <ProgramServicesAmt>3451923</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>443563</ManagementAndGeneralAmt>
+        <FundraisingAmt>268147</FundraisingAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>154090</TotalAmt>
+        <ProgramServicesAmt>91470</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>80189</ManagementAndGeneralAmt>
+        <FundraisingAmt>-17569</FundraisingAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>5870496</TotalAmt>
+        <ProgramServicesAmt>4875904</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>683488</ManagementAndGeneralAmt>
+        <FundraisingAmt>311104</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>6381022</BOYAmt>
+        <EOYAmt>6207350</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <BOYAmt>814069</BOYAmt>
+        <EOYAmt>4454366</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>3911</BOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>39448</BOYAmt>
+        <EOYAmt>61904</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>284685</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>284685</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>14719</BOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>20739</BOYAmt>
+        <EOYAmt>28750</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>1031531</BOYAmt>
+        <EOYAmt>707417</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>8305439</BOYAmt>
+        <EOYAmt>11459787</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>514626</BOYAmt>
+        <EOYAmt>187715</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <OtherLiabilitiesGrp>
+        <BOYAmt>826531</BOYAmt>
+        <EOYAmt>507951</EOYAmt>
+      </OtherLiabilitiesGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>1341157</BOYAmt>
+        <EOYAmt>695666</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>5653448</BOYAmt>
+        <EOYAmt>9651620</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>1310834</BOYAmt>
+        <EOYAmt>1112501</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>6964282</BOYAmt>
+        <EOYAmt>10764121</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>8305439</BOYAmt>
+        <EOYAmt>11459787</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>3799839</ReconcilationRevenueExpnssAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>false</AccountantCompileOrReviewInd>
+      <FSAuditedInd>true</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>true</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>false</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="990A">
+      <SupportingOrganization509a3Ind>X</SupportingOrganization509a3Ind>
+      <SupportingOrgType1Ind>X</SupportingOrgType1Ind>
+      <SupportedOrganizationsCnt>1</SupportedOrganizationsCnt>
+      <SupportedOrgInformationGrp>
+        <SupportedOrganizationName>
+          <BusinessNameLine1Txt>Ctr for Comm Self-Help</BusinessNameLine1Txt>
+        </SupportedOrganizationName>
+        <EIN>561271685</EIN>
+        <OrganizationTypeCd>7</OrganizationTypeCd>
+        <GoverningDocumentListedInd>true</GoverningDocumentListedInd>
+        <SupportAmt>0</SupportAmt>
+        <OtherSupportAmt>0</OtherSupportAmt>
+      </SupportedOrgInformationGrp>
+      <SupportedOrganizationsTotalCnt>1</SupportedOrganizationsTotalCnt>
+      <OtherSupportSumAmt>0</OtherSupportSumAmt>
+      <Form990SchASupportingOrgGrp>
+        <ListedByNameGoverningDocInd>true</ListedByNameGoverningDocInd>
+        <SuprtOrgNoIRSDeterminationInd>false</SuprtOrgNoIRSDeterminationInd>
+        <SupportedOrgSectionC456Ind>false</SupportedOrgSectionC456Ind>
+        <SupportedOrgNotOrganizedUSInd>false</SupportedOrgNotOrganizedUSInd>
+        <OrganizationChangeSuprtOrgInd>false</OrganizationChangeSuprtOrgInd>
+        <SupportNonSupportedOrgInd>false</SupportNonSupportedOrgInd>
+        <PaymentSubstantialContribtrInd>false</PaymentSubstantialContribtrInd>
+        <LoanDisqualifiedPersonInd>false</LoanDisqualifiedPersonInd>
+        <ControlledDisqualifiedPrsnInd>false</ControlledDisqualifiedPrsnInd>
+        <DisqualifiedPrsnControllIntInd>false</DisqualifiedPrsnControllIntInd>
+        <DisqualifiedPrsnOwnrIntInd>false</DisqualifiedPrsnOwnrIntInd>
+        <ExcessBusinessHoldingsRulesInd>false</ExcessBusinessHoldingsRulesInd>
+        <ContributionControllerInd>false</ContributionControllerInd>
+        <ContributionFamilyInd>false</ContributionFamilyInd>
+        <Contribution35ControlledInd>false</Contribution35ControlledInd>
+      </Form990SchASupportingOrgGrp>
+      <Form990SchAType1SuprtOrgGrp>
+        <PowerAppointMajorityDirTrstInd>true</PowerAppointMajorityDirTrstInd>
+        <OperateBenefitNonSuprtOrgInd>false</OperateBenefitNonSuprtOrgInd>
+      </Form990SchAType1SuprtOrgGrp>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="990B">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleC documentId="990C">
+      <OrganizationBelongsAffltGrpInd>X</OrganizationBelongsAffltGrpInd>
+      <TotalDirectLobbyingGrp>
+        <FilingOrganizationsTotalAmt>335364</FilingOrganizationsTotalAmt>
+        <AffiliatedGroupTotalAmt>354776</AffiliatedGroupTotalAmt>
+      </TotalDirectLobbyingGrp>
+      <TotalLobbyingExpendGrp>
+        <FilingOrganizationsTotalAmt>335364</FilingOrganizationsTotalAmt>
+        <AffiliatedGroupTotalAmt>354776</AffiliatedGroupTotalAmt>
+      </TotalLobbyingExpendGrp>
+      <OtherExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>5535132</FilingOrganizationsTotalAmt>
+        <AffiliatedGroupTotalAmt>140699171</AffiliatedGroupTotalAmt>
+      </OtherExemptPurposeExpendGrp>
+      <TotalExemptPurposeExpendGrp>
+        <FilingOrganizationsTotalAmt>5870496</FilingOrganizationsTotalAmt>
+        <AffiliatedGroupTotalAmt>141053947</AffiliatedGroupTotalAmt>
+      </TotalExemptPurposeExpendGrp>
+      <LobbyingNontaxableAmountGrp>
+        <FilingOrganizationsTotalAmt>443525</FilingOrganizationsTotalAmt>
+        <AffiliatedGroupTotalAmt>1000000</AffiliatedGroupTotalAmt>
+      </LobbyingNontaxableAmountGrp>
+      <GrassrootsNontaxableGrp>
+        <FilingOrganizationsTotalAmt>110881</FilingOrganizationsTotalAmt>
+        <AffiliatedGroupTotalAmt>250000</AffiliatedGroupTotalAmt>
+      </GrassrootsNontaxableGrp>
+      <AvgLobbyingNontaxableAmountGrp>
+        <CurrentYearMinus3Amt>1000000</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>1000000</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>1000000</CurrentYearMinus1Amt>
+        <CurrentYearAmt>1000000</CurrentYearAmt>
+        <TotalAmt>4000000</TotalAmt>
+      </AvgLobbyingNontaxableAmountGrp>
+      <LobbyingCeilingAmt>6000000</LobbyingCeilingAmt>
+      <AvgTotalLobbyingExpendGrp>
+        <CurrentYearMinus3Amt>355594</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>331773</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>324492</CurrentYearMinus1Amt>
+        <CurrentYearAmt>354776</CurrentYearAmt>
+        <TotalAmt>1366635</TotalAmt>
+      </AvgTotalLobbyingExpendGrp>
+      <AvgGrassrootsNontaxableGrp>
+        <CurrentYearMinus3Amt>250000</CurrentYearMinus3Amt>
+        <CurrentYearMinus2Amt>250000</CurrentYearMinus2Amt>
+        <CurrentYearMinus1Amt>250000</CurrentYearMinus1Amt>
+        <CurrentYearAmt>250000</CurrentYearAmt>
+        <TotalAmt>1000000</TotalAmt>
+      </AvgGrassrootsNontaxableGrp>
+      <GrassrootsCeilingAmt>1500000</GrassrootsCeilingAmt>
+      <AvgGrassrootsLobbyingExpendGrp>
+        <CurrentYearMinus3Amt>20809</CurrentYearMinus3Amt>
+        <TotalAmt>20809</TotalAmt>
+      </AvgGrassrootsLobbyingExpendGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>General Explanation Attachment</FormAndLineReferenceDesc>
+        <ExplanationTxt>Part II-A Line 2 Self-Help Ventures Fund, 301 W. Main Street, Durham, NC 27701, EIN 56-1562750, Direct Lobbying expense $0, Grassroots Lobbying Expense $0. Part II-A Line 2 Community Development Corporation, 301 W. Main Street, Durham, NC 27701, EIN 56-1975829, Direct Lobbying expense $0, Grassroots Lobbying Expense $0. Part II-A Line 2 Self-Help Services Corporation, 301 W. Main Street, Durham, NC 27701, EIN 56-1849615, Direct Lobbying expense $0, Grassroots Lobbying Expense $0. Part II-A Line 2 Self-Help Assistance Corporation, 301 W. Main Street, Durham, NC 27701, EIN 56-1923620, Direct Lobbying expense $0, Grassroots Lobbying Expense $0. Part II-A Line 2 Center for Community Self-Help, 301 W. Main Street, Durham, NC 27701, EIN 56-1271685, Direct Lobbying expense $19,412, Grassroots Lobbying Expense $0. Part II-A Line 2 of these group members, Center for Community Self-Help and the filing organization, Center for Responsible Lending made the election under section 501 (H).</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleC>
+    <IRS990ScheduleD documentId="990D">
+      <LeaseholdImprovementsGrp>
+        <OtherCostOrOtherBasisAmt>21665</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>21665</DepreciationAmt>
+      </LeaseholdImprovementsGrp>
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>217313</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>217313</DepreciationAmt>
+      </EquipmentGrp>
+      <OtherLandBuildingsGrp>
+        <OtherCostOrOtherBasisAmt>45707</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>45707</DepreciationAmt>
+      </OtherLandBuildingsGrp>
+      <OtherAssetsOrgGrp>
+        <Desc>Payroll Deposit SHSC</Desc>
+        <BookValueAmt>205000</BookValueAmt>
+      </OtherAssetsOrgGrp>
+      <OtherAssetsOrgGrp>
+        <Desc>Operating right of use asset net</Desc>
+        <BookValueAmt>502417</BookValueAmt>
+      </OtherAssetsOrgGrp>
+      <TotalBookValueOtherAssetsAmt>707417</TotalBookValueOtherAssetsAmt>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>Operating lease liability</Desc>
+        <Amt>507951</Amt>
+      </OtherLiabilitiesOrgGrp>
+      <TotalLiabilityAmt>507951</TotalLiabilityAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>9670335</TotalRevEtcAuditedFinclStmtAmt>
+      <RevenueSubtotalAmt>9670335</RevenueSubtotalAmt>
+      <TotalRevenuePerForm990Amt>9670335</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>5870496</TotExpnsEtcAuditedFinclStmtAmt>
+      <ExpensesSubtotalAmt>5870496</ExpensesSubtotalAmt>
+      <TotalExpensesPerForm990Amt>5870496</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Part X, Line 2-Text in footnote regarding FIN 48 (ASC 740)</FormAndLineReferenceDesc>
+        <ExplanationTxt>CRL has determined that all tax positions taken for the current year ended December 31, 2024 and all years open under the statue of limitations are highly certain. Therefore, CRL has determined that no unrecognized tax liability exists.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleI documentId="990I">
+      <GrantRecordsMaintainedInd>true</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>National Association of Real Estate</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>9831 Greenbelt Road Suite 309</AddressLine1Txt>
+          <CityNm>Lanham</CityNm>
+          <StateAbbreviationCd>MD</StateAbbreviationCd>
+          <ZIPCd>20706</ZIPCd>
+        </USAddress>
+        <RecipientEIN>366125210</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Alaska Public Interest Research Gro</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>2522 Arctic Blvd</AddressLine1Txt>
+          <CityNm>Anchorage</CityNm>
+          <StateAbbreviationCd>AK</StateAbbreviationCd>
+          <ZIPCd>99503</ZIPCd>
+        </USAddress>
+        <RecipientEIN>920047627</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>New Jersey Citizen Action Education</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>75 Raritan Avenue Ste 200</AddressLine1Txt>
+          <CityNm>Highland Park</CityNm>
+          <StateAbbreviationCd>NJ</StateAbbreviationCd>
+          <ZIPCd>08904</ZIPCd>
+        </USAddress>
+        <RecipientEIN>222493628</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CommEconomic Develop Asso Michigan</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1118 S Washington St</AddressLine1Txt>
+          <CityNm>Lansing</CityNm>
+          <StateAbbreviationCd>MI</StateAbbreviationCd>
+          <ZIPCd>48911</ZIPCd>
+        </USAddress>
+        <RecipientEIN>383445097</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Center for Public Justice</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1305 Lesile Ave</AddressLine1Txt>
+          <CityNm>Alexandria</CityNm>
+          <StateAbbreviationCd>VA</StateAbbreviationCd>
+          <ZIPCd>22301</ZIPCd>
+        </USAddress>
+        <RecipientEIN>510153566</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>12000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>CASH Campaign of Maryland</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>575 S Charles Street Suite 500</AddressLine1Txt>
+          <CityNm>Baltimore</CityNm>
+          <StateAbbreviationCd>MD</StateAbbreviationCd>
+          <ZIPCd>21201</ZIPCd>
+        </USAddress>
+        <RecipientEIN>814607977</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>SaverLife</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>548 Market St PMB 46387</AddressLine1Txt>
+          <CityNm>San Francisco</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94104</ZIPCd>
+        </USAddress>
+        <RecipientEIN>912172676</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>50000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Maine Equal Justice Partners Inc</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>126 Sewall Street</AddressLine1Txt>
+          <CityNm>Augusta</CityNm>
+          <StateAbbreviationCd>ME</StateAbbreviationCd>
+          <ZIPCd>04330</ZIPCd>
+        </USAddress>
+        <RecipientEIN>043346273</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>7500</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Georgia Watch</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>55 Marietta St NW Suite 903</AddressLine1Txt>
+          <CityNm>Atlanta</CityNm>
+          <StateAbbreviationCd>GA</StateAbbreviationCd>
+          <ZIPCd>30303</ZIPCd>
+        </USAddress>
+        <RecipientEIN>161639971</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>5500</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Economic Progress Institute</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>600 Mt Pleasant Avenue</AddressLine1Txt>
+          <CityNm>Providence</CityNm>
+          <StateAbbreviationCd>RI</StateAbbreviationCd>
+          <ZIPCd>02908</ZIPCd>
+        </USAddress>
+        <RecipientEIN>320295517</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Center for Economic Integrity</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>509 E Radburn Street</AddressLine1Txt>
+          <CityNm>Tucson</CityNm>
+          <StateAbbreviationCd>AZ</StateAbbreviationCd>
+          <ZIPCd>85702</ZIPCd>
+        </USAddress>
+        <RecipientEIN>260026603</RecipientEIN>
+        <IRCSectionDesc>501c3</IRCSectionDesc>
+        <CashGrantAmt>10000</CashGrantAmt>
+        <PurposeOfGrantTxt>Combat predatory lending</PurposeOfGrantTxt>
+      </RecipientTable>
+    </IRS990ScheduleI>
+    <IRS990ScheduleJ documentId="990J">
+      <SeverancePaymentInd>false</SeverancePaymentInd>
+      <SupplementalNonqualRtrPlanInd>false</SupplementalNonqualRtrPlanInd>
+      <EquityBasedCompArrngmInd>false</EquityBasedCompArrngmInd>
+      <CompBasedOnRevenueOfFlngOrgInd>false</CompBasedOnRevenueOfFlngOrgInd>
+      <CompBsdOnRevRelatedOrgsInd>false</CompBsdOnRevRelatedOrgsInd>
+      <CompBsdNetEarnsFlngOrgInd>false</CompBsdNetEarnsFlngOrgInd>
+      <CompBsdNetEarnsRltdOrgsInd>false</CompBsdNetEarnsRltdOrgsInd>
+      <AnyNonFixedPaymentsInd>false</AnyNonFixedPaymentsInd>
+      <InitialContractExceptionInd>false</InitialContractExceptionInd>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Michael Calhoun</PersonNm>
+        <TitleTxt>President</TitleTxt>
+        <BaseCompensationFilingOrgAmt>141227</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>22387</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>163614</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Ellen Harnick</PersonNm>
+        <TitleTxt>CRL EVP</TitleTxt>
+        <BaseCompensationFilingOrgAmt>136684</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>21142</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>157826</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Andrew Kushner</PersonNm>
+        <TitleTxt>Senior Policy Counsel</TitleTxt>
+        <BaseCompensationFilingOrgAmt>150782</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>13510</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>164292</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Elizabeth J Laderman</PersonNm>
+        <TitleTxt>Senior Researcher</TitleTxt>
+        <BaseCompensationFilingOrgAmt>142640</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>31041</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>173681</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Peter Smith</PersonNm>
+        <TitleTxt>Sr Researcher</TitleTxt>
+        <BaseCompensationFilingOrgAmt>148452</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>7978</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>156430</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+      <RltdOrgOfficerTrstKeyEmplGrp>
+        <PersonNm>Mitria Spotser</PersonNm>
+        <TitleTxt>Director Federal Policy</TitleTxt>
+        <BaseCompensationFilingOrgAmt>143589</BaseCompensationFilingOrgAmt>
+        <DeferredCompensationFlngOrgAmt>13408</DeferredCompensationFlngOrgAmt>
+        <TotalCompensationFilingOrgAmt>156997</TotalCompensationFilingOrgAmt>
+      </RltdOrgOfficerTrstKeyEmplGrp>
+    </IRS990ScheduleJ>
+    <IRS990ScheduleO documentId="990O">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Amended return information</FormAndLineReferenceDesc>
+        <ExplanationTxt>An amended return is being filed to correct the classification of revenue reported in Part VIII. Revenue originally reported on Part VIII, line 1e, was reported in error and has been reclassified to Part VIII, line 1f. This correction does not affect total revenue or the organizations net assets.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990 governing body review Part VI line 11</FormAndLineReferenceDesc>
+        <ExplanationTxt>The Form 990 is prepared by staff accountants. The Chief Financial Officer, the Controller, and in-house counsel review multiple drafts and verify all answers before the form is provided to the Chief Executive Officer and board of directors for further review and comment prior to submission.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Conflict of interest policy compliance Part VI line 12c</FormAndLineReferenceDesc>
+        <ExplanationTxt>The organizations Conflict of Interest Policy covers its officers, directors or trustees, all employees of the organization or any related organizations, and family members of persons in these categories. All covered persons are required under the policy to disclose actual or potential conflicts as soon as they arise and the directors of the organization and related organizations confirm annually that there are no existing conflicts of interest. Persons with actual conflicts are prohibited from participating in any decisions relevant to the situation where the conflict exists. Most conflicts are clearly delineated by the policy; situations that are not so clear-cut are reviewed by in-house counsel, CEO, or Board, as appropriate.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>CEO executive director top management comp Part VI line 15a</FormAndLineReferenceDesc>
+        <ExplanationTxt>The organization pays its highest paid workers including the CEO, top management officials and other officers, in accordance with a salary ceiling that is confirmed annually by the board, and was last confirmed in November 2024. This ceiling is subject to adjustment for increased cost of living associated with the geographical areas in which workers are working, but is well below the average market salary for workers with comparable levels of expertise and experience.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Other officer or key employee compensation Part VI line 15b</FormAndLineReferenceDesc>
+        <ExplanationTxt>The organization pays its highest paid workers including the CEO, top management officials and other officers, in accordance with a salary ceiling that is confirmed annually by the board, and was last confirmed in November 2024. This ceiling is subject to adjustment for increased cost of living associated with the geographical areas in which workers are working, but is well below the average market salary for workers with comparable levels of expertise and experience.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Governing documents etc available to public Part VI line 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>Form 990, Part VI, Section C, Line 19: No documents available to the public.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Part VII response or note to any other line in Part VII</FormAndLineReferenceDesc>
+        <ExplanationTxt>Form 990, Part VII, Section A, Line 1a: No director or officer receives compensation for their work as a director, officer or trustee; instead, the amounts listed in columns (E) &amp; (F) are compensation paid to employees of the related organization who work 30-40 hours per week. Self-Help Services Corporation serves as the employer for all the filing organizations workers.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+    <IRS990ScheduleR documentId="990R">
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Center for Community Self-Help</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>301 West Main Street</AddressLine1Txt>
+          <CityNm>Durham</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+        <EIN>561271685</EIN>
+        <PrimaryActivitiesTxt>Economic Development</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>NC</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501c3</ExemptCodeSectionTxt>
+        <PublicCharityStatusTxt>7</PublicCharityStatusTxt>
+        <DirectControllingNACd>N/A</DirectControllingNACd>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Self-Help Community Development Cor</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>301 West Main Street</AddressLine1Txt>
+          <CityNm>Durham</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+        <EIN>561975829</EIN>
+        <PrimaryActivitiesTxt>Affordable Housing</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>NC</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501c3</ExemptCodeSectionTxt>
+        <PublicCharityStatusTxt>12a</PublicCharityStatusTxt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>CCSH Org 1</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Self-Help Credit Union</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>301 West Main Street</AddressLine1Txt>
+          <CityNm>Durham</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+        <EIN>561382971</EIN>
+        <PrimaryActivitiesTxt>Economic Development</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>NC</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501c14</ExemptCodeSectionTxt>
+        <DirectControllingNACd>N/A</DirectControllingNACd>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Self-Help Services Corporation</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>301 West Main Street</AddressLine1Txt>
+          <CityNm>Durham</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+        <EIN>561849615</EIN>
+        <PrimaryActivitiesTxt>Staffing Services</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>NC</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501c3</ExemptCodeSectionTxt>
+        <PublicCharityStatusTxt>12a</PublicCharityStatusTxt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>CCSH Org 1</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Self-Help Ventures Fund</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>301 West Main Street</AddressLine1Txt>
+          <CityNm>Durham</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+        <EIN>581562750</EIN>
+        <PrimaryActivitiesTxt>Charitable Lending</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>NC</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501c3</ExemptCodeSectionTxt>
+        <PublicCharityStatusTxt>12a</PublicCharityStatusTxt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>CCSH Org 1</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Self-Help Assistance Corporation</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>301 West Main Street</AddressLine1Txt>
+          <CityNm>Durham</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+        <EIN>561923620</EIN>
+        <PrimaryActivitiesTxt>Economic Development</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>NC</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501c3</ExemptCodeSectionTxt>
+        <PublicCharityStatusTxt>12a</PublicCharityStatusTxt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>CCSH Org 1</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Self-Help Federal Credit Union</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>301 West Main Street</AddressLine1Txt>
+          <CityNm>Durham</CityNm>
+          <StateAbbreviationCd>NC</StateAbbreviationCd>
+          <ZIPCd>27701</ZIPCd>
+        </USAddress>
+        <EIN>263016612</EIN>
+        <PrimaryActivitiesTxt>Economic Development</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>NC</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501c1</ExemptCodeSectionTxt>
+        <DirectControllingNACd>N/A</DirectControllingNACd>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>Self-Help Economic Development Inc</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>1330 Broadway Street Suite 604</AddressLine1Txt>
+          <CityNm>Oakland</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>94612</ZIPCd>
+        </USAddress>
+        <EIN>205330006</EIN>
+        <PrimaryActivitiesTxt>Financial Capability</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501c3</ExemptCodeSectionTxt>
+        <PublicCharityStatusTxt>7</PublicCharityStatusTxt>
+        <DirectControllingEntityName>
+          <BusinessNameLine1Txt>CCSH Org 1</BusinessNameLine1Txt>
+        </DirectControllingEntityName>
+        <ControlledOrganizationInd>false</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <ReceiptOfIntAnntsRntsRyltsInd>false</ReceiptOfIntAnntsRntsRyltsInd>
+      <GiftGrntOrCapContriToOthOrgInd>false</GiftGrntOrCapContriToOthOrgInd>
+      <GiftGrntCapContriFromOthOrgInd>false</GiftGrntCapContriFromOthOrgInd>
+      <LoansOrGuaranteesToOtherOrgInd>false</LoansOrGuaranteesToOtherOrgInd>
+      <LoansOrGuaranteesFromOthOrgInd>false</LoansOrGuaranteesFromOthOrgInd>
+      <DivRelatedOrganizationInd>true</DivRelatedOrganizationInd>
+      <AssetSaleToOtherOrgInd>false</AssetSaleToOtherOrgInd>
+      <AssetPurchaseFromOtherOrgInd>false</AssetPurchaseFromOtherOrgInd>
+      <AssetExchangeInd>false</AssetExchangeInd>
+      <RentalOfFacilitiesToOthOrgInd>false</RentalOfFacilitiesToOthOrgInd>
+      <RentalOfFcltsFromOthOrgInd>true</RentalOfFcltsFromOthOrgInd>
+      <PerformOfServicesForOthOrgInd>false</PerformOfServicesForOthOrgInd>
+      <PerformOfServicesByOtherOrgInd>true</PerformOfServicesByOtherOrgInd>
+      <SharingOfFacilitiesInd>true</SharingOfFacilitiesInd>
+      <PaidEmployeesSharingInd>false</PaidEmployeesSharingInd>
+      <ReimbursementPaidToOtherOrgInd>true</ReimbursementPaidToOtherOrgInd>
+      <ReimbursementPaidByOtherOrgInd>true</ReimbursementPaidByOtherOrgInd>
+      <TransferToOtherOrgInd>false</TransferToOtherOrgInd>
+      <TransferFromOtherOrgInd>false</TransferFromOtherOrgInd>
+    </IRS990ScheduleR>
+  </ReturnData>
+</Return>
