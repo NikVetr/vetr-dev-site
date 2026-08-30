@@ -42,7 +42,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     if (explicitLabel) return explicitLabel.textContent.trim();
     return [...header.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent.trim()).join(" ").trim();
   }));
-  expect(tableHeaders).toEqual(["Included", "Organization", "Job title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Match score", "Tier", "Area", "Location", "EA relation", "Structure", "Year", "Evidence", "Reported Salary", "Source"]);
+  expect(tableHeaders).toEqual(["Included", "Plot", "Organization", "Job title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Match score", "Tier", "Area", "Location", "EA relation", "Structure", "Year", "Evidence", "Reported Salary", "Source"]);
   await expect(page.locator('thead button[data-sort="adjustedSalary"] > span > span')).toHaveCount(2);
   await expect(page.locator('thead button[data-sort="reportedSalary"] > span > span')).toHaveCount(2);
   expect(await page.locator("#organization-table .title-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThan(140);
@@ -214,9 +214,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(rpReferenceRow).toContainText("$155K");
   await expect(rpReferenceRow).toContainText("$20M");
   await expect(rpReferenceRow).toContainText("2024");
-  await expect(rpReferenceRow.locator("td").nth(5)).toHaveText("43");
-  await expect(rpReferenceRow.locator("td").nth(5)).toHaveAttribute("title", /2023 Form 990 reports 43 individuals employed/);
-  await expect(rpReferenceRow.locator("td")).toHaveCount(17);
+  await expect(rpReferenceRow.locator("td").nth(1)).toHaveText("Reference");
+  await expect(rpReferenceRow.locator("td").nth(6)).toHaveText("43");
+  await expect(rpReferenceRow.locator("td").nth(6)).toHaveAttribute("title", /2023 Form 990 reports 43 individuals employed/);
+  await expect(rpReferenceRow.locator("td")).toHaveCount(18);
   await expect(rpReferenceRow.locator(".source-cell").getByRole("button", { name: "Preview" })).toHaveCount(1);
   await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /source 1/i })).toHaveText("1 ↗");
   await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /source 2/i })).toHaveText("2 ↗");
@@ -239,8 +240,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(excludedPostingToggle).not.toBeChecked();
   await expect(excludedPostingToggle).toHaveAttribute("title", /excluded by default: Local and far below scale.*Check to include it manually/);
   const excludedPostingRow = page.locator('tr[data-id="SRC-AD-MOST-2025"]');
-  await expect(excludedPostingRow.locator("td").nth(11)).toHaveText("functional-only");
-  await expect(excludedPostingRow.locator("td").nth(12)).toHaveText("independent nonprofit");
+  await expect(excludedPostingRow.locator("td").nth(12)).toHaveText("functional-only");
+  await expect(excludedPostingRow.locator("td").nth(13)).toHaveText("independent nonprofit");
   const postingEnrichmentCoverage = await page.evaluate(() => {
     const rows = window.CEO_BENCHMARK_DATA.jobAds;
     const definitions = window.CEO_BENCHMARK_DATA.categoryExplainers.definitions;
@@ -268,7 +269,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     topicCount: 8,
     enriched: 33,
   });
-  for (const [column, cellIndex] of [["expenses", 4], ["staff", 5]]) {
+  for (const [column, cellIndex] of [["expenses", 5], ["staff", 6]]) {
     const centerDifference = await rpReferenceRow.locator("td").nth(cellIndex).evaluate((cell, sortColumn) => {
       const header = document.querySelector(`thead button[data-sort="${sortColumn}"]`).closest("th");
       const cellRect = cell.getBoundingClientRect();
@@ -992,19 +993,37 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
       && (coosBySource.get(filingSourceId(row)) || []).length === 1
     )).length;
   });
-  expect(expectedCeoCooBasePairs).toBe(22);
+  expect(expectedCeoCooBasePairs).toBe(23);
   await expect(page.locator('#axis-numerator option[value="position:coo"]'))
     .toHaveText(`COO compensation (paired n = ${expectedCeoCooBasePairs})`);
   await page.locator("#axis-selector-close").click();
+  await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"]')).toHaveCount(0);
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await horizontalAxis().click();
   await page.locator("#axis-denominator").selectOption("position:coo");
   await expect(page.locator("#stat-n")).toHaveText(String(expectedCeoCooBasePairs));
   await expect(page.locator("#salary-chart")).toContainText("Salary / COO salary");
+  const checkedCeoCooEligible = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked');
+  await expect(checkedCeoCooEligible).toHaveCount(expectedCeoCooBasePairs);
+  await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .row-toggle:checked')).not.toHaveCount(0);
+  await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .plot-status').first()).toHaveText("Missing");
+  await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .weight-input').first()).toHaveValue("");
+  const plotEligibilityHeader = page.locator('thead button[data-sort="plotEligibility"]');
+  await plotEligibilityHeader.click();
+  await expect(plotEligibilityHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
+  await expect(page.locator('tbody tr[data-id]').first()).toHaveAttribute("data-plot-eligible", "true");
+  await expect(page.locator('tbody tr[data-id]').last()).toHaveAttribute("data-plot-eligible", "false");
+  await page.locator(".table-panel").screenshot({ path: "tmp/app-plot-eligibility-table.png" });
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-ceo-coo-ratio.png" });
   await horizontalAxis().click();
   await page.locator("#axis-denominator").selectOption("expenses");
+  const leadersTrustRow = page.locator('tbody tr[data-id]:has(.organization-name:text-is("The LeadersTrust"))');
+  await expect(leadersTrustRow.locator(".row-toggle")).toBeChecked();
+  await expect(leadersTrustRow).toHaveAttribute("data-plot-eligible", "false");
+  await expect(leadersTrustRow.locator(".plot-status-cell")).toHaveAttribute("title", /expenses are not reported/i);
   await page.locator('input[name="histogram-axis-mode"][value="value"]').check();
+  await expect(leadersTrustRow).toHaveAttribute("data-plot-eligible", "true");
+  await expect(leadersTrustRow.locator(".row-toggle")).toBeChecked();
   await horizontalAxis().click();
   await page.locator("#axis-numerator").selectOption("expenses");
   await expect(page.locator("#salary-chart")).toContainText("Annual expenses");
@@ -1281,6 +1300,55 @@ test("Auto-weights remain explicit and stable for small filing samples and strea
   expect(errors).toEqual([]);
 });
 
+test("plot eligibility isolates weights while preserving row intent", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+
+  const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
+  await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
+  await horizontalAxis().click();
+  await page.locator("#axis-denominator").selectOption("position:coo");
+
+  const auto = page.locator('.auto-weight-rule input[value="comparability"]');
+  await auto.check();
+  const eligibleWeights = async () => page.locator('tbody tr[data-id][data-plot-eligible="true"]')
+    .evaluateAll((tableRows) => Object.fromEntries(tableRows.map((row) => [
+      row.dataset.id,
+      row.querySelector(".weight-input").value,
+    ])));
+  const baseline = await eligibleWeights();
+  expect(Object.keys(baseline).length).toBe(23);
+
+  const ineligibleRow = page.locator('tbody tr[data-id][data-plot-eligible="false"]:has(.row-toggle:checked)').first();
+  const ineligibleId = await ineligibleRow.getAttribute("data-id");
+  const pinnedIneligibleRow = page.locator(`tbody tr[data-id="${ineligibleId}"]`);
+  await pinnedIneligibleRow.locator(".row-toggle").uncheck();
+  expect(await eligibleWeights()).toEqual(baseline);
+  await pinnedIneligibleRow.locator(".row-toggle").check();
+  expect(await eligibleWeights()).toEqual(baseline);
+
+  const savedMultiplier = page.locator(`tbody tr[data-id="${ineligibleId}"] .weight-input`);
+  await savedMultiplier.fill("2");
+  await savedMultiplier.blur();
+  await expect(savedMultiplier).toHaveValue("2");
+  await expect(savedMultiplier).toHaveClass(/is-user-modified/);
+  expect(await eligibleWeights()).toEqual(baseline);
+
+  await page.locator('input[name="histogram-axis-mode"][value="value"]').check();
+  const restoredRow = page.locator(`tbody tr[data-id="${ineligibleId}"]`);
+  await expect(restoredRow).toHaveAttribute("data-plot-eligible", "true");
+  await expect(restoredRow.locator(".row-toggle")).toBeChecked();
+  await expect(restoredRow.locator(".weight-input")).toHaveValue("2");
+  await expect(restoredRow.locator(".weight-input")).toHaveClass(/is-user-modified/);
+
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  const checkedEligible = await page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked').count();
+  await expect(page.locator(".scatter-point")).toHaveCount(checkedEligible);
+  await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .row-toggle:checked')).not.toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
 test("standardized positions switch evidence, labels, controls, and semantic shared state", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -1292,7 +1360,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     "ceo", "vice_president", "program_director", "managing_director", "coo",
     "senior_vice_president", "development_director", "policy_director",
     "communications_director", "senior_researcher", "cfo", "general_counsel",
-    "chief_of_staff", "research_director",
+    "chief_of_staff", "research_director", "finance_director",
   ]);
   expect(catalog.filter((position) => position.key !== "ceo")
     .every((position) => position.supportLevel === "primary")).toBe(true);
@@ -1302,9 +1370,42 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     expect([...positions.keys()]).not.toContain(staleFamilyKey);
   }
   for (const withheldKey of [
-    "finance_director", "deputy_director", "executive_vice_president",
+    "deputy_director", "executive_vice_president",
     "chief_development_officer", "chief_people_officer", "chief_economist",
   ]) expect([...positions.keys()]).not.toContain(withheldKey);
+  const correctedPublicTitles = await page.evaluate(() => {
+    const ids = [
+      "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::elenamuehlenbeckcfo",
+      "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::liselloyevpcoo",
+      "SRC-990-EXT-CENTER-FOR-AI-SAFETY::oliverzhangmanagingdirector",
+      "SRC-990-EXT-NEW-ROOTS-INSTITUTE::jessetandlermanaging",
+      "SRC-990-EXT-RESEARCH-AMERICA::jenniferluraysrvp",
+      "SRC-990-EXT-CENTER-FOR-DEMOCRACY-TECHNOLOGY::georgeslovergencounsel",
+      "SRC-990-EXT-PROJECT-DRAWDOWN::reshmapattni",
+      "SRC-990-EXT-PROJECT-DRAWDOWN::toodreubold",
+    ];
+    const rows = Object.entries(window.CEO_BENCHMARK_DATA.positionObservations)
+      .flatMap(([position, observations]) => observations.map((row) => ({ ...row, position })));
+    return ids.map((id) => {
+      const row = rows.find((candidate) => candidate.id === id);
+      return {
+        id, position: row?.position, executive: row?.executive,
+        rawExecutive: row?.rawExecutive, title: row?.title, rawTitle: row?.rawTitle,
+        effectiveSource: row?.positionTaxonomy?.effectiveTitleSource,
+        classificationSource: row?.positionTaxonomy?.classificationSource?.id || "",
+      };
+    });
+  });
+  expect(correctedPublicTitles).toEqual([
+    { id: "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::elenamuehlenbeckcfo", position: "cfo", executive: "ELENA MUEHLENBECK", rawExecutive: "ELENA MUEHLENBECK CFO", title: "CFO", rawTitle: "SECRETARY & TREASURER", effectiveSource: "part_vii_person_name_reviewed_spillover", classificationSource: "" },
+    { id: "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::liselloyevpcoo", position: "coo", executive: "LISEL LOY", rawExecutive: "LISEL LOY EVP COO", title: "EVP COO", rawTitle: "TREASURER", effectiveSource: "part_vii_person_name_reviewed_spillover", classificationSource: "" },
+    { id: "SRC-990-EXT-CENTER-FOR-AI-SAFETY::oliverzhangmanagingdirector", position: "managing_director", executive: "Oliver Zhang", rawExecutive: "Oliver Zhang Managing Director", title: "Managing Director", rawTitle: "Director", effectiveSource: "part_vii_person_name_reviewed_spillover", classificationSource: "" },
+    { id: "SRC-990-EXT-NEW-ROOTS-INSTITUTE::jessetandlermanaging", position: "managing_director", executive: "Jesse Tandler", rawExecutive: "Jesse Tandler Managing", title: "Managing Director", rawTitle: "Director", effectiveSource: "part_vii_person_name_reviewed_spillover", classificationSource: "SRC-POSITION-NEW-ROOTS-JESSE-TANDLER" },
+    { id: "SRC-990-EXT-RESEARCH-AMERICA::jenniferluraysrvp", position: "senior_vice_president", executive: "JENNIFER LURAY", rawExecutive: "JENNIFER LURAY SR VP", title: "SR VP", rawTitle: "STRATEGY & PUBLIC ENGAGEMENT", effectiveSource: "part_vii_person_name_reviewed_spillover", classificationSource: "" },
+    { id: "SRC-990-EXT-CENTER-FOR-DEMOCRACY-TECHNOLOGY::georgeslovergencounsel", position: "general_counsel", executive: "GEORGE SLOVER", rawExecutive: "GEORGE SLOVER - GEN COUNSEL", title: "GEN COUNSEL", rawTitle: "SR. COUNSEL COMP POL. & SECRETARY", effectiveSource: "part_vii_person_name_reviewed_spillover", classificationSource: "" },
+    { id: "SRC-990-EXT-PROJECT-DRAWDOWN::reshmapattni", position: "finance_director", executive: "RESHMA PATTNI", rawExecutive: "RESHMA PATTNI", title: "FINANCE DIRECTOR", rawTitle: "FINANCE DIRE", effectiveSource: "schedule_j_reviewed_expansion", classificationSource: "" },
+    { id: "SRC-990-EXT-PROJECT-DRAWDOWN::toodreubold", position: "communications_director", executive: "TOOD REUBOLD", rawExecutive: "TOOD REUBOLD", title: "MARKETING DIRECTOR", rawTitle: "MARKETING DI", effectiveSource: "schedule_j_reviewed_expansion", classificationSource: "" },
+  ]);
   await expect(page.locator("#position-select option")).toHaveCount(catalog.length);
   await expect(page.locator("#position-selected-label")).toHaveText("CEO");
   const selectedPositionOverlay = await page.locator(".position-select-shell").evaluate((shell) => {
@@ -1324,7 +1425,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
       .toHaveText(`${position.label} (n = ${position.counts.defaultAvailable})`);
   }
 
-  for (const key of ["coo", "program_director"]) {
+  for (const key of ["coo", "program_director", "finance_director"]) {
     const position = positions.get(key);
     let customizedRowId = "";
     const expected = await page.evaluate((positionKey) => {
@@ -1488,7 +1589,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   await page.goto("/ceo-salary-benchmark/?position=coo");
   await expect(page.locator("#position-select")).toHaveValue("coo");
   await expect(page.locator("#measure-select")).toHaveValue("cash");
-  await expect(page.locator("#stat-n")).toHaveText("28");
+  await expect(page.locator("#stat-n")).toHaveText(String(positions.get("coo").counts.defaultAvailable));
   expect(new URL(page.url()).pathname).toBe("/coo-salary-benchmark/");
   expect(new URL(page.url()).searchParams.has("position")).toBe(false);
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);

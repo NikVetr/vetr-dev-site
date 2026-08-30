@@ -35,9 +35,9 @@ SUPPORTING_SOURCES_PATH = ENRICHMENT / "form990_position_supporting_sources.csv"
 POSITION_CATALOG_PATH = ENRICHMENT / "form990_benchmark_position_catalog.csv"
 
 EXPECTED_FORM990_COUNT = 136
-EXPECTED_NON_CEO_CATALOG_COUNT = 986
-EXPECTED_ROLE_ELIGIBLE_COUNT = 769
-EXPECTED_DEFAULT_INCLUDED_COUNT = 748
+EXPECTED_NON_CEO_CATALOG_COUNT = 989
+EXPECTED_ROLE_ELIGIBLE_COUNT = 772
+EXPECTED_DEFAULT_INCLUDED_COUNT = 750
 RP_SOURCE_ID = "SRC-990-RP-REFERENCE"
 POSITION_SUPPORTING_SOURCES = (
     {
@@ -108,6 +108,36 @@ POSITION_SUPPORTING_SOURCES = (
         "local_path": "benchmark/sources/native/supporting/position_classification/pai-claire-leibowicz-framework.html",
         "canonical_url": "https://partnershiponai.org/industry-leaders-launch-framework-for-responsible-use-of-ai-generated-media/",
         "sha256": "6ad162c59a027ff1dbc1454709684523fbd2578205567dd492e748e67012d1b0",
+        "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-PAI-FELECIA-WEBB",
+        "observation_id": "SRC-990-EXT-PARTNERSHIP-ON-AI::feleciawebb",
+        "organization": "Partnership on AI",
+        "evidence_use": "Expands CSOPP to Chief Strategy Officer, Philanthropy and Partnerships.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/pai-felecia-webb-csopp.html",
+        "canonical_url": "https://partnershiponai.org/felecia-webb-joins-pai-as-chief-strategy-officer-philanthropy-and-partnerships/",
+        "sha256": "ec4d5f7df4b81fb36e9fd1350d319d2089d93d98d6ed77eb64b1d501e226a350",
+        "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-PAI-STEPHANIE-BELL",
+        "observation_id": "SRC-990-EXT-PARTNERSHIP-ON-AI::stephaniebell",
+        "organization": "Partnership on AI",
+        "evidence_use": "Expands CPIO to Chief Programs and Insights Officer.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/pai-stephanie-bell-cpio.html",
+        "canonical_url": "https://partnershiponai.org/partnership-on-ai-strengthens-team-with-respected-leaders/",
+        "sha256": "4fc506554453cb02388efe24ce5b0df14af7e1a10077fbd546a4602bb14285e8",
+        "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-NEW-ROOTS-JESSE-TANDLER",
+        "observation_id": "SRC-990-EXT-NEW-ROOTS-INSTITUTE::jessetandlermanaging",
+        "organization": "New Roots Institute",
+        "evidence_use": "Confirms Jesse Tandler's Managing Director title, which is split across the filing's PersonNm and TitleTxt fields.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/new-roots-jesse-tandler.html",
+        "canonical_url": "https://www.newrootsinstitute.org/our-team/jesse-tandler",
+        "sha256": "090fd207cf993913f0e5561fe21611451b1b5802afab833704afac3510700e53",
         "validation_status": "official_organization_page_hash_verified",
     },
     {
@@ -267,24 +297,107 @@ BENCHMARK_POSITIONS = (
     ("assistant_managing_director", "Assistant Managing Director", "Assistant Managing Director", "Limited samples", "Assistant Managing Director, kept separate from Managing Director."),
 )
 EXPECTED_PUBLIC_POSITION_DEFAULT_COUNTS = {
-    "vice_president": (103, 41),
+    "vice_president": (100, 40),
     "program_director": (34, 16),
-    "managing_director": (34, 18),
-    "coo": (28, 28),
-    "senior_vice_president": (27, 17),
+    "managing_director": (36, 20),
+    "coo": (29, 29),
+    "senior_vice_president": (28, 17),
     "development_director": (26, 26),
     "policy_director": (25, 20),
-    "communications_director": (22, 22),
+    "communications_director": (23, 23),
     "senior_researcher": (22, 15),
-    "cfo": (20, 20),
-    "general_counsel": (16, 16),
+    "cfo": (21, 21),
+    "general_counsel": (17, 17),
     "chief_of_staff": (15, 15),
     "research_director": (15, 13),
-    "finance_director": (14, 14),
+    "finance_director": (15, 15),
     "deputy_director": (11, 9),
-    "executive_vice_president": (9, 9),
+    "executive_vice_president": (12, 10),
     "chief_development_officer": (9, 9),
     "chief_people_officer": (8, 8),
+}
+
+# A few source-native Part VII records place a job title in PersonNm and a
+# corporate officer label in TitleTxt. These exact, reviewed spillovers are
+# classified and displayed using the title embedded in PersonNm, while both raw
+# XML fields remain unchanged in the observation output.
+REVIEWED_NAME_TITLE_SPILLOVERS = {
+    "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::elenamuehlenbeckcfo": {
+        "raw_person": "ELENA MUEHLENBECK CFO",
+        "raw_title": "SECRETARY & TREASURER",
+        "effective_person": "ELENA MUEHLENBECK",
+        "effective_title": "CFO",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::liselloyevpcoo": {
+        "raw_person": "LISEL LOY EVP COO",
+        "raw_title": "TREASURER",
+        "effective_person": "LISEL LOY",
+        "effective_title": "EVP COO",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-CENTER-FOR-AI-SAFETY::oliverzhangmanagingdirector": {
+        "raw_person": "Oliver Zhang Managing Director",
+        "raw_title": "Director",
+        "effective_person": "Oliver Zhang",
+        "effective_title": "Managing Director",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-NEW-ROOTS-INSTITUTE::jessetandlermanaging": {
+        "raw_person": "Jesse Tandler Managing",
+        "raw_title": "Director",
+        "effective_person": "Jesse Tandler",
+        "effective_title": "Managing Director",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-RESEARCH-AMERICA::jenniferluraysrvp": {
+        "raw_person": "JENNIFER LURAY SR VP",
+        "raw_title": "STRATEGY & PUBLIC ENGAGEMENT",
+        "effective_person": "JENNIFER LURAY",
+        "effective_title": "SR VP",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-CENTER-FOR-DEMOCRACY-TECHNOLOGY::georgeslovergencounsel": {
+        "raw_person": "GEORGE SLOVER - GEN COUNSEL",
+        "raw_title": "SR. COUNSEL COMP POL. & SECRETARY",
+        "effective_person": "GEORGE SLOVER",
+        "effective_title": "GEN COUNSEL",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+}
+
+# Schedule J sometimes contains the untruncated title for the same exactly
+# matched person. Only these reviewed pairs may replace a Part VII title for
+# classification/display; Schedule J is never used as an open-ended fallback.
+REVIEWED_SCHEDULE_J_TITLE_EXPANSIONS = {
+    "SRC-990-EXT-PROJECT-DRAWDOWN::reshmapattni": {
+        "part_vii_title": "FINANCE DIRE",
+        "schedule_j_title": "FINANCE DIRECTOR",
+        "effective_title": "FINANCE DIRECTOR",
+        "rule": "reviewed_exact_schedule_j_title_expansion",
+    },
+    "SRC-990-EXT-PROJECT-DRAWDOWN::toodreubold": {
+        "part_vii_title": "MARKETING DI",
+        "schedule_j_title": "MARKETING DIRECTOR",
+        "effective_title": "MARKETING DIRECTOR",
+        "rule": "reviewed_exact_schedule_j_title_expansion",
+    },
+}
+
+# These current Partnership on AI filing acronyms were separately reviewed.
+# Expanding them makes their functional content auditable without changing the
+# raw Part VII or Schedule J titles.
+REVIEWED_ACRONYM_TITLE_EXPANSIONS = {
+    "SRC-990-EXT-PARTNERSHIP-ON-AI::feleciawebb": {
+        "raw_title": "CSOPP",
+        "effective_title": "Chief Strategy Officer, Philanthropy and Partnerships",
+        "rule": "reviewed_organization_specific_title_acronym",
+    },
+    "SRC-990-EXT-PARTNERSHIP-ON-AI::stephaniebell": {
+        "raw_title": "CPIO",
+        "effective_title": "Chief Programs and Insights Officer",
+        "rule": "reviewed_organization_specific_title_acronym",
+    },
 }
 
 # The source XML repeats this unpaid board row byte-for-byte. It is collapsed to
@@ -346,6 +459,7 @@ SENSITIVITY_ONLY_OBSERVATIONS = {
         "related_org_hours_without_identified_related_employer"
         for person in (
             "andrewkushner",
+            "ellenharnick",
             "elizabethjladerman",
             "marcusbowen",
             "michaelcalhoun",
@@ -853,7 +967,8 @@ PRIMARY_ROLE_ORDER = (
 )
 
 GENERAL_LEADERSHIP_PATTERNS = (
-    r"\bMANAGING DIR", r"\bDEPUTY\b", r"\bEXECUTIVE VICE PRESIDENT\b", r"\bEXEC(?:\.|UTIVE)? VP\b",
+    r"\bMANAGING DIR", r"\bDEPUTY\b", r"\bEXECUTIVE VICE PRESIDENT\b",
+    r"\bEXEC(?:\.|UTIVE)? VP\b", r"\bEVP\b",
     r"\bSENIOR VICE PRESIDENT\b", r"\bSR\.? VP\b", r"\bVICE PRESIDENT\b", r"\bVP\b",
     r"\bPRESIDENT\b", r"\bDIRECTOR\b", r"\bDIR\.?\b", r"\bHEAD\b", r"\bMANAGER\b",
     r"\bMNGR\b", r"\bLEAD\b", r"\bOFFICER\b",
@@ -994,6 +1109,70 @@ def normalize_title(value: str) -> str:
     return normalized
 
 
+def effective_identity_title(
+    source_id: str,
+    part: dict[str, str],
+    schedule: dict[str, str] | None,
+) -> tuple[str, str, str, str]:
+    """Return reviewed display identity/title while preserving source fields.
+
+    The default is exactly the Part VII identity and title. Every departure is
+    observation-specific and validates the expected raw input so a later filing
+    or parser change cannot silently inherit an obsolete correction.
+    """
+    raw_person = part.get("PersonNm", "")
+    raw_title = part.get("TitleTxt", "")
+    observation_id = f"{source_id}::{normalize_name(raw_person)}"
+
+    spillover = REVIEWED_NAME_TITLE_SPILLOVERS.get(observation_id)
+    if spillover:
+        if (
+            raw_person != spillover["raw_person"]
+            or raw_title != spillover["raw_title"]
+        ):
+            raise ValueError(
+                f"Reviewed name/title spillover source fields changed: {observation_id}"
+            )
+        return (
+            spillover["effective_person"],
+            spillover["effective_title"],
+            "part_vii_person_name_reviewed_spillover",
+            spillover["rule"],
+        )
+
+    acronym = REVIEWED_ACRONYM_TITLE_EXPANSIONS.get(observation_id)
+    if acronym:
+        if raw_title != acronym["raw_title"]:
+            raise ValueError(
+                f"Reviewed title acronym source field changed: {observation_id}"
+            )
+        return (
+            raw_person,
+            acronym["effective_title"],
+            "reviewed_organization_title_acronym",
+            acronym["rule"],
+        )
+
+    schedule_expansion = REVIEWED_SCHEDULE_J_TITLE_EXPANSIONS.get(observation_id)
+    if schedule_expansion:
+        schedule_title = schedule.get("TitleTxt", "") if schedule else ""
+        if (
+            raw_title != schedule_expansion["part_vii_title"]
+            or schedule_title != schedule_expansion["schedule_j_title"]
+        ):
+            raise ValueError(
+                f"Reviewed Schedule J title expansion source fields changed: {observation_id}"
+            )
+        return (
+            raw_person,
+            schedule_expansion["effective_title"],
+            "schedule_j_reviewed_expansion",
+            schedule_expansion["rule"],
+        )
+
+    return raw_person, raw_title, "part_vii_native", "part_vii_native_title"
+
+
 def title_matches(title: str, patterns: tuple[str, ...]) -> bool:
     return any(re.search(pattern, title) for pattern in patterns)
 
@@ -1043,7 +1222,7 @@ def title_level(title: str, family: str, record_type: str, governance: bool) -> 
         return "chief_executive", "executive"
     if re.search(r"\bCHIEF\b|\b(?:COO|CFO|CTO|CIO|CPO|CDO|CFAO|CFOO)\b", title):
         return "chief_officer", "executive"
-    if re.search(r"\bPRESIDENT\b|\bEXECUTIVE VICE PRESIDENT\b|\bEVP\b", title):
+    if re.search(r"\bPRESIDENT\b|\bEXECUTIVE VICE PRESIDENT\b|\bEXECUTIVE VP\b|\bEVP\b", title):
         return "executive_leadership", "executive"
     if re.search(r"\bSENIOR VICE PRESIDENT\b|\bSR\.? VP\b|\bVICE PRESIDENT\b|\bVP\b", title):
         return "vice_president", "senior_leader"
@@ -1152,7 +1331,7 @@ def benchmark_position(title: str, classification: Classification) -> dict[str, 
         quality = "standard_abbreviation" if re.search(r"\bCIO\b", title) else "exact"
         return result("cio", "standard_cio_alias", quality)
 
-    if re.search(r"\bEXECUTIVE VICE[- ]?PRESIDENT\b|\bEXEC VP\b|\bEVP\b", title):
+    if re.search(r"\bEXECUTIVE VICE[- ]?PRESIDENT\b|\bEXECUTIVE VP\b|\bEXEC VP\b|\bEVP\b", title):
         return result("executive_vice_president", "executive_vice_president_alias")
     if re.search(r"\bSENIOR VICE PRESIDENT\b|\bSENIOR VP\b|\bSR\.? VP\b|\bSVP\b", title):
         return result("senior_vice_president", "senior_vice_president_alias")
@@ -1500,7 +1679,16 @@ def main() -> None:
             schedule_index = schedule_match[0] if schedule_match else None
             schedule = schedule_match[1] if schedule_match else None
             canonical_ceo = matches_person(person, ceo_targets)
-            classification = classify_record(part, canonical_ceo, source_id)
+            (
+                effective_person,
+                effective_title,
+                effective_title_source,
+                effective_title_rule,
+            ) = effective_identity_title(source_id, part, schedule)
+            classification_record = {**part, "TitleTxt": effective_title}
+            classification = classify_record(
+                classification_record, canonical_ceo, source_id
+            )
 
             part_org = integer(part, "ReportableCompFromOrgAmt")
             part_related = integer(part, "ReportableCompFromRltdOrgAmt")
@@ -1610,7 +1798,8 @@ def main() -> None:
             if source_id == RP_SOURCE_ID:
                 exclusion_reasons.append("RP reference observation, never part of fitted peer distribution")
 
-            normalized_title = normalize_title(part.get("TitleTxt", ""))
+            native_normalized_title = normalize_title(part.get("TitleTxt", ""))
+            normalized_title = normalize_title(effective_title)
             standardized = benchmark_position(normalized_title, classification)
             taxonomy_key = (
                 normalized_title,
@@ -1647,6 +1836,11 @@ def main() -> None:
                 "person_name": person,
                 "person_key": person_key,
                 "native_title": part.get("TitleTxt", ""),
+                "native_normalized_title": native_normalized_title,
+                "effective_person_name": effective_person,
+                "effective_title": effective_title,
+                "effective_title_source": effective_title_source,
+                "effective_title_rule": effective_title_rule,
                 "normalized_title": normalized_title,
                 "taxonomy_id": taxonomy_id,
                 "record_type": classification.record_type,
@@ -1795,6 +1989,64 @@ def main() -> None:
         ):
             raise ValueError(f"Reviewed role override was not applied: {observation_id}")
 
+    reviewed_effective_ids = (
+        REVIEWED_NAME_TITLE_SPILLOVERS.keys()
+        | REVIEWED_SCHEDULE_J_TITLE_EXPANSIONS.keys()
+        | REVIEWED_ACRONYM_TITLE_EXPANSIONS.keys()
+    )
+    if missing_effective_ids := reviewed_effective_ids - observations_by_id.keys():
+        raise ValueError(
+            f"Reviewed effective-title records do not resolve: {sorted(missing_effective_ids)}"
+        )
+    expected_effective_positions = {
+        "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::elenamuehlenbeckcfo":
+            ("ELENA MUEHLENBECK", "CFO", "finance", "cfo"),
+        "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::liselloyevpcoo":
+            ("LISEL LOY", "EVP COO", "operations", "coo"),
+        "SRC-990-EXT-CENTER-FOR-AI-SAFETY::oliverzhangmanagingdirector":
+            ("Oliver Zhang", "Managing Director", "general_leadership", "managing_director"),
+        "SRC-990-EXT-NEW-ROOTS-INSTITUTE::jessetandlermanaging":
+            ("Jesse Tandler", "Managing Director", "general_leadership", "managing_director"),
+        "SRC-990-EXT-RESEARCH-AMERICA::jenniferluraysrvp":
+            ("JENNIFER LURAY", "SR VP", "general_leadership", "senior_vice_president"),
+        "SRC-990-EXT-CENTER-FOR-DEMOCRACY-TECHNOLOGY::georgeslovergencounsel":
+            ("GEORGE SLOVER", "GEN COUNSEL", "legal", "general_counsel"),
+        "SRC-990-EXT-PROJECT-DRAWDOWN::reshmapattni":
+            ("RESHMA PATTNI", "FINANCE DIRECTOR", "finance", "finance_director"),
+        "SRC-990-EXT-PROJECT-DRAWDOWN::toodreubold":
+            ("TOOD REUBOLD", "MARKETING DIRECTOR", "communications", "communications_director"),
+        "SRC-990-EXT-PARTNERSHIP-ON-AI::feleciawebb":
+            ("FELECIA WEBB", "Chief Strategy Officer, Philanthropy and Partnerships", "strategy", "chief_strategy_officer"),
+        "SRC-990-EXT-PARTNERSHIP-ON-AI::stephaniebell":
+            ("STEPHANIE BELL", "Chief Programs and Insights Officer", "programs", ""),
+    }
+    for observation_id, expected in expected_effective_positions.items():
+        observation = observations_by_id[observation_id]
+        actual = (
+            observation["effective_person_name"],
+            observation["effective_title"],
+            observation["position_family"],
+            observation["benchmark_position"],
+        )
+        if actual != expected:
+            raise ValueError(
+                f"Reviewed effective title was not applied: {observation_id}: "
+                f"expected={expected!r}, actual={actual!r}"
+            )
+        if observation["effective_title_source"] == "part_vii_native":
+            raise ValueError(f"Reviewed effective title lacks provenance: {observation_id}")
+
+    expected_evp_rows = {
+        "SRC-990-EXT-COUNCIL-ON-STRATEGIC-RISKS::mallorystewart",
+        "SRC-990-EXT-EVIDENCE-ACTION::brettsedgewick",
+        "SRC-990-EXT-EVIDENCE-ACTION::paulbyatta",
+        "SRC-990-EXT-CENTER-FOR-RESPONSIBLE-LENDING::ellenharnick",
+    }
+    for observation_id in expected_evp_rows:
+        observation = observations_by_id[observation_id]
+        if observation["benchmark_position"] != "executive_vice_president":
+            raise ValueError(f"Executive VP alias was not applied: {observation_id}")
+
     cepr_canonical_co_executives = {
         row["observation_id"]
         for row in raw_observations
@@ -1836,7 +2088,7 @@ def main() -> None:
         for observation_id in SENSITIVITY_ONLY_OBSERVATIONS
         if observation_id.startswith("SRC-990-EXT-CENTER-FOR-RESPONSIBLE-LENDING::")
     ]
-    if len(crl_sensitivity_rows) != 6 or any(
+    if len(crl_sensitivity_rows) != 7 or any(
         row["average_hours_per_week"] not in {"0", "0.0", "0.00"}
         or row["average_hours_related_orgs"] not in {"40", "40.0", "40.00"}
         for row in crl_sensitivity_rows
@@ -1886,6 +2138,7 @@ def main() -> None:
             or first["classification_confidence"] == "low"
             else "reviewed_observation_override"
             if "reviewed" in first["classification_rule"]
+            or any(member["effective_title_source"] != "part_vii_native" for member in members)
             else "rule_assigned_multi_role"
             if first["secondary_role_tags"]
             else "rule_assigned"
@@ -1902,6 +2155,10 @@ def main() -> None:
         if first["classification_rule"].startswith("reviewed_record_override:"):
             taxonomy_notes.append(
                 "Primary family received an observation-level review because the filing title is truncated, organization-specific, or multi-function."
+            )
+        if any(member["effective_title_source"] != "part_vii_native" for member in members):
+            taxonomy_notes.append(
+                "Classification/display uses an explicit reviewed effective title; the source-native Part VII identity and title remain preserved in the observation file."
             )
         taxonomy_notes.extend(
             REVIEWED_ROLE_OVERRIDE_CITATIONS[member["observation_id"]]
@@ -1922,6 +2179,9 @@ def main() -> None:
             "taxonomy_id": taxonomy_id,
             "normalized_title": first["normalized_title"],
             "source_title_variants": join_nonempty(sorted({member["native_title"] for member in members})),
+            "effective_title_variants": join_nonempty(sorted({member["effective_title"] for member in members})),
+            "effective_title_sources": join_nonempty(sorted({member["effective_title_source"] for member in members})),
+            "effective_title_rules": join_nonempty(sorted({member["effective_title_rule"] for member in members})),
             "record_type": first["record_type"],
             "position_family": first["position_family"],
             "secondary_role_tags": first["secondary_role_tags"],
@@ -2097,6 +2357,17 @@ def main() -> None:
         for row in position_catalog_rows
         if row["support_level"] != "hidden"
     ]
+    primary_position_count = sum(
+        row["support_level"] == "primary" for row in position_catalog_rows
+    )
+    nonhidden_position_count = sum(
+        row["support_level"] != "hidden" for row in position_catalog_rows
+    )
+    default_hybrid_count = sum(
+        row["default_included"] == "yes"
+        and row["benchmark_position_hybrid_status"] == "multi_role"
+        for row in raw_observations
+    )
 
     record_type_counts = Counter(row["record_type"] for row in raw_observations)
     exclusion_counts = Counter()
@@ -2130,7 +2401,7 @@ def main() -> None:
         "",
         "## Public non-CEO catalog",
         "",
-        "`Catalog rows` retain all rows assigned to a public family, including display-only RP references. `Role-eligible` additionally requires positive Part VII cash and functional scope (not governance, program/affiliate, or uncertain). It normally requires current/full-year status, but seven explicitly reviewed source-anomaly or fractional rows remain role-eligible only so the app can expose them as sensitivity observations. `Default included` is stricter: it requires current/full-year status, at least 30 combined filing-organization plus related-organization hours per week, no explicit sensitivity-only flag, and a selected peer rather than RP. Non-CEO inclusion does not inherit CEO-specific exclusions such as a partial-year top executive.",
+        f"`Catalog rows` retain all rows assigned to a public family, including display-only RP references. `Role-eligible` additionally requires positive Part VII cash and functional scope (not governance, program/affiliate, or uncertain). It normally requires current/full-year status, but {len(sensitivity_rows)} explicitly reviewed source-anomaly or fractional peer rows remain role-eligible only so the app can expose them as sensitivity observations. `Default included` is stricter: it requires current/full-year status, at least 30 combined filing-organization plus related-organization hours per week, no explicit sensitivity-only flag, and a selected peer rather than RP. Non-CEO inclusion does not inherit CEO-specific exclusions such as a partial-year top executive.",
         "",
         "| Position family | Catalog rows | Role-eligible | Organizations | With Schedule J base | Default included |",
         "|---|---:|---:|---:|---:|---:|",
@@ -2139,14 +2410,14 @@ def main() -> None:
         f"- Catalog-eligible non-CEO observations: **{len(non_ceo):,}** (**{len(peer_catalog_rows):,}** peers plus **{len(rp_catalog_rows):,}** RP display references).",
         f"- Role-eligible paid observations: **{len(role_eligible_rows):,}** (**{len(peer_role_eligible_rows):,}** peers plus **{len(rp_role_eligible_rows):,}** RP display references).",
         f"- Default-included peer observations: **{len(default_rows):,}**.",
-        f"- Role-eligible peer observations retained only for sensitivity analysis: **{len(sensitivity_rows):,}** (9 below-30-hour/source-anomaly rows, 6 rows with 40 related-organization hours but no identified related employer, and 1 source-labeled fractional role).",
+        f"- Role-eligible peer observations retained only for sensitivity analysis: **{len(sensitivity_rows):,}** (9 below-30-hour/source-anomaly rows, 7 rows with 40 related-organization hours but no identified related employer, and 1 source-labeled fractional role).",
         f"- Taxonomy groups: **{len(taxonomy_rows):,}**: **{review_status_counts['rule_assigned']:,}** rule-assigned single-family groups, **{review_status_counts['rule_assigned_multi_role']:,}** rule-assigned multi-role groups, **{review_status_counts['reviewed_observation_override']:,}** reviewed observation-override groups, and **{review_status_counts['manual_review_required']:,}** groups not published without further review.",
         "",
         "## Standardized position benchmarks",
         "",
-        "The Position control uses an exclusive standardized-title layer, not the broad functional family. C-suite aliases such as COO/Chief Operating Officer are consolidated, while levels remain separate (for example Vice President, Senior Vice President, and Executive Vice President). Fourteen default executive rows with genuinely combined or ambiguous titles are retained in the extraction but excluded from strict named-position samples so they cannot enter two benchmarks at once.",
+        f"The Position control uses an exclusive standardized-title layer, not the broad functional family. C-suite aliases such as COO/Chief Operating Officer are consolidated, while levels remain separate (for example Vice President, Senior Vice President, and Executive Vice President). {default_hybrid_count} default executive rows with genuinely combined or ambiguous titles are retained in the extraction but excluded from strict named-position samples so they cannot enter two benchmarks at once.",
         "",
-        "A position is `Primary` with at least 15 default rows across at least 12 organizations, `Exploratory` with at least 8 organizations, and hidden below 8 organizations. Sparse titles remain classified in `form990_benchmark_position_catalog.csv` rather than being pooled into misleading umbrella positions.",
+        "A position is `Primary` with at least 15 default rows across at least 12 organizations, `Exploratory` with at least 8 organizations, and hidden below 8 organizations. Only Primary positions are exposed in the public Position control. Sparse titles remain classified in `form990_benchmark_position_catalog.csv` for audit and future expansion rather than being pooled into misleading umbrella positions.",
         "",
         "| Standardized position | Support | Default rows | Organizations | With Schedule J base |",
         "|---|---|---:|---:|---:|",
@@ -2172,21 +2443,21 @@ def main() -> None:
         "",
         "## Taxonomy and review model",
         "",
-        "The source-native title is never replaced. Each observation receives a stable source+person ID, a normalized title, a primary public family when supported, secondary functional tags for combined roles, a title-level/seniority group, scope, incumbency status, a transparent rule, and a confidence label. The taxonomy artifact groups identical classification outcomes so ambiguous and multi-function titles can be reviewed without losing row-level provenance.",
+        "The source-native Part VII person and title fields are never overwritten. Each observation receives a stable source+person ID, a reviewed effective person/title where an explicit source-internal spillover, Schedule J expansion, or organization-specific acronym has been validated, a primary public family when supported, secondary functional tags for combined roles, a title-level/seniority group, scope, incumbency status, a transparent rule, and a confidence label. Effective-title source and rule fields remain alongside the raw fields. The taxonomy artifact groups identical classification outcomes so ambiguous and multi-function titles can be reviewed without losing row-level provenance.",
         "",
         "All role-eligible and default-candidate rows were systematically audited after initial extraction, not only low-confidence or previously unmapped groups. This does not mean every row has an external biographical source: ordinary `rule_assigned` groups are classified from the source-native XML title, while `reviewed_observation_override` marks a documented row-level judgment. Combined functions normally use the first substantive function in the source title as primary, with the others retained as secondary tags. Narrow phrase rules and explicit observation-level reviews handle misleading abbreviations, truncated titles, organization-specific program names, and terms such as software development that would otherwise resemble fundraising. Generic vice-president, deputy, managing-director, director, president, and manager titles remain in General Leadership only when the source does not identify a supported function.",
         "",
         f"Official organization pages or publications are used for **{len(POSITION_SUPPORTING_SOURCES):,}** non-obvious title expansions or organization-specific classifications. These include the Bulletin of the Atomic Scientists' expansion of John Pope's `Chief Aud. Officer` to `Chief Audience Officer`, plus reviewed program-versus-internal-function distinctions. Every supporting file is cached under `benchmark/sources/native/supporting/`, hash-pinned, and recorded in `benchmark/enrichment/form990_position_supporting_sources.csv`; the canonical third-party URL remains alongside the local copy.",
         "Each externally supported observation exposes `classification_source_id`, `classification_source_url`, `classification_source_local_path`, and `classification_source_sha256` as machine-readable provenance; ordinary XML-only classifications leave these fields blank. The extractor fails if a supporting file is absent, its hash differs, or its manifest row does not resolve to exactly the intended observation. Andrea De Forest's source-native title is reviewed as Programs with Communications secondary, but no external page is attached because the available organization pages name Jennifer/Jen de Forest and identity is not reconciled.",
         "",
-        "Reviewed inclusion exceptions are also explicit. Both validated CEPR co-executives resolve to the authoritative CEO layer despite the filing's `Applebaum`/validated `Appelbaum` spelling difference. Third Way's `BOARD TREASURER` is governance because the filing reports 2 filing-organization hours, 38 related-organization hours, and compensation entirely from the related organization. Six Center for Responsible Lending rows with 0 filing-organization and 40 related-organization hours but no identified related employer, and IST's source-labeled `FRACTIONAL SVP`, are sensitivity-only rather than default comparators.",
+        "Reviewed inclusion exceptions are also explicit. Both validated CEPR co-executives resolve to the authoritative CEO layer despite the filing's `Applebaum`/validated `Appelbaum` spelling difference. Third Way's `BOARD TREASURER` is governance because the filing reports 2 filing-organization hours, 38 related-organization hours, and compensation entirely from the related organization. Seven Center for Responsible Lending rows with 0 filing-organization and 40 related-organization hours but no identified related employer, and IST's source-labeled `FRACTIONAL SVP`, are sensitivity-only rather than default comparators.",
         "",
         "CEO-like titles that do not match the validated organization-wide CEO are excluded rather than guessed. This prevents program and affiliate executives—such as project CEOs or program Executive Directors—from silently entering the CEO or general-leadership distributions. Former, interim, partial-year, governance, unpaid, program/affiliate, and uncertain rows remain in the observation file with explicit exclusion reasons.",
         "",
         "## Recommended app contract",
         "",
         "- Join organization metadata once by `source_id`/EIN, but treat `observation_id` as the compensation-row key.",
-        f"- Default Position to CEO using the existing validated CEO dataset; expose the **{sum(row['support_level'] != 'hidden' for row in position_catalog_rows):,}** supported standardized non-CEO titles from `form990_benchmark_position_catalog.csv`, not the broader functional families.",
+        f"- Default Position to CEO using the existing validated CEO dataset; expose the **{primary_position_count:,}** primary standardized non-CEO titles from `form990_benchmark_position_catalog.csv`, not the broader functional families. The catalog also retains **{nonhidden_position_count - primary_position_count:,}** exploratory titles for audit and future sample growth.",
         "- Keep Part VII cash, Part VII total, Schedule J base, and Schedule J total as separate compensation measures.",
         "- When several people from one organization share a family, use organization-balanced weights (each organization's rows sum to one) as the default or expose person-balanced weighting as an explicit sensitivity. Do not silently let larger organizations dominate.",
         "- RP rows are comparison markers only. Several RP families have more than one reported person, so display all applicable RP references or require a reviewed single-role choice; never include them in fit or quantile estimation.",

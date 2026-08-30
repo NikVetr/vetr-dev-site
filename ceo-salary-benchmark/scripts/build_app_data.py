@@ -24,6 +24,11 @@ INCUMBENT_COMPENSATION_UPDATES = ENRICHMENT / "incumbent_compensation_updates.cs
 FORM990_POSITION_OBSERVATIONS = ENRICHMENT / "form990_position_observations.csv"
 FORM990_POSITION_SUPPORTING_SOURCES = ENRICHMENT / "form990_position_supporting_sources.csv"
 FORM990_BENCHMARK_POSITION_CATALOG = ENRICHMENT / "form990_benchmark_position_catalog.csv"
+PUBLISHED_HTML_WHITESPACE_NORMALIZATION_SOURCE_IDS = {
+    "SRC-POSITION-NEW-ROOTS-JESSE-TANDLER",
+    "SRC-POSITION-PAI-FELECIA-WEBB",
+    "SRC-POSITION-PAI-STEPHANIE-BELL",
+}
 JOB_AD_SECONDARY_SOURCES = {
     "SRC-AD-CSCCE": {
         "source_id": "SRC-AD-CSCCE-ABOUT",
@@ -166,7 +171,20 @@ def cache_source(source_id: str, local_path: str) -> str:
     EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
     suffix = source.suffix.lower() or ".txt"
     destination = EVIDENCE_DIR / f"{slug(source_id)}{suffix}"
-    shutil.copy2(source, destination)
+    if suffix in {".html", ".htm"}:
+        content = source.read_bytes()
+        content = re.sub(
+            rb'("accessToken"\s*:\s*")pk\.[^"]+("\s*})',
+            rb'\1[REDACTED_MAPBOX_ACCESS_TOKEN]\2',
+            content,
+        )
+        if source_id in PUBLISHED_HTML_WHITESPACE_NORMALIZATION_SOURCE_IDS:
+            content = content.replace(b"\t", b"  ")
+            content = b"\n".join(line.rstrip(b" ") for line in content.split(b"\n"))
+        destination.write_bytes(content)
+        shutil.copystat(source, destination)
+    else:
+        shutil.copy2(source, destination)
     return str(destination.relative_to(ROOT))
 
 
@@ -909,6 +927,8 @@ def build_position_data(
         position_key = text(row["benchmark_position"])
         if position_key not in position_keys:
             continue
+        effective_person = text(row["effective_person_name"]) or text(row["person_name"])
+        effective_title = text(row["effective_title"]) or text(row["native_title"])
         family = text(row["position_family"])
         organization = text(row["organization"])
         source_id = text(row["source_id"])
@@ -1007,6 +1027,9 @@ def build_position_data(
         )
         provenance["title"] = {
             "raw": text(row["native_title"]),
+            "effective": effective_title,
+            "effectiveSource": text(row["effective_title_source"]),
+            "effectiveRule": text(row["effective_title_rule"]),
             "analysisGroup": text(row["title_group"]),
             "rationale": (
                 f"Reviewed Form 990 position taxonomy: {text(row['classification_rule'])}; "
@@ -1038,12 +1061,20 @@ def build_position_data(
         filing_hours = number(row["average_hours_per_week"])
         related_hours = number(row["average_hours_related_orgs"])
         total_hours = number(row["total_reported_hours"])
+        evidence_identity = (
+            f"Form 990 Part VII source fields report {text(row['person_name'])}, "
+            f"{text(row['native_title'])}; reviewed display/classification: "
+            f"{effective_person}, {effective_title}. "
+            if (
+                effective_person != text(row["person_name"])
+                or effective_title != text(row["native_title"])
+            )
+            else f"Form 990 Part VII reports {effective_person}, {effective_title}, "
+        )
         evidence = (
-            f"Form 990 Part VII reports {text(row['person_name'])}, {text(row['native_title'])}, "
-            f"at {filing_hours:g} filing-organization"
+            evidence_identity + f"at {filing_hours:g} filing-organization"
             if filing_hours is not None else
-            f"Form 990 Part VII reports {text(row['person_name'])}, {text(row['native_title'])}, "
-            "with unreported filing-organization"
+            evidence_identity + "with unreported filing-organization"
         )
         evidence += (
             f" plus {related_hours:g} related-organization average weekly hours "
@@ -1063,8 +1094,9 @@ def build_position_data(
             "id": text(row["observation_id"]),
             "sourceId": source_id,
             "organization": organization,
-            "executive": text(row["person_name"]),
-            "title": text(row["native_title"]),
+            "executive": effective_person,
+            "rawExecutive": text(row["person_name"]),
+            "title": effective_title,
             "titleGroup": display_category(text(row["title_group"])),
             "rawTitle": text(row["native_title"]),
             "positionFamily": family,
@@ -1111,6 +1143,8 @@ def build_position_data(
             "positionTaxonomy": {
                 "taxonomyId": text(row["taxonomy_id"]),
                 "classificationRule": text(row["classification_rule"]),
+                "effectiveTitleSource": text(row["effective_title_source"]),
+                "effectiveTitleRule": text(row["effective_title_rule"]),
                 "standardizedPositionRule": text(row["benchmark_position_rule"]),
                 "standardizedPositionAliasQuality": text(row["benchmark_position_alias_quality"]),
                 "confidence": text(row["classification_confidence"]),

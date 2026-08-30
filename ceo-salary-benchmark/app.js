@@ -632,20 +632,24 @@
     return row?.sourceId || String(row?.id || "").split("::", 1)[0];
   }
 
-  function sameFilingPositionSalary(row, positionKey) {
-    if (!row || !POSITION_BY_KEY.has(positionKey)) return null;
-    if (positionKey === state.position) return salary(row);
+  function sameFilingPositionMatches(row, positionKey) {
+    if (!row || !POSITION_BY_KEY.has(positionKey)) return [];
+    if (positionKey === state.position) return salary(row) == null ? [] : [row];
     const sourceId = filingSourceId(row);
-    if (!sourceId) return null;
+    if (!sourceId) return [];
     const isRpReference = row.analysisStatus === "reference_not_analyzed" || row.id === DATA.rpReference?.id;
     const candidates = isRpReference
       ? activeRpReferences(positionKey)
       : positionIncumbents(positionKey).filter((candidate) => candidate.defaultIncluded);
-    const matched = candidates.filter((candidate) => (
+    return candidates.filter((candidate) => (
       filingSourceId(candidate) === sourceId
       && candidate.id !== row.id
       && salaryForBasis(candidate, state.inflationAdjusted) != null
     ));
+  }
+
+  function sameFilingPositionSalary(row, positionKey) {
+    const matched = sameFilingPositionMatches(row, positionKey);
     return matched.length === 1 ? salaryForBasis(matched[0], state.inflationAdjusted) : null;
   }
 
@@ -723,19 +727,86 @@
     return descriptor.label;
   }
 
-  function axisItems(axisKey) {
-    const descriptor = axisDescriptor(axisKey);
-    return normalizePlottedWeights(selectedRows().map((item) => ({ ...item, value: descriptor.value(item.row) }))
-      .filter((item) => Number.isFinite(item.value) && item.value > 0));
+  function variableEligibility(row, variableKey, requirePositive = false) {
+    const variable = numericVariables[variableKey];
+    if (!variable) return { eligible: false, reason: "The selected measure is unavailable." };
+    const value = variable.value(row);
+    if (Number.isFinite(value) && (!requirePositive || value > 0)) return { eligible: true, value, reason: "" };
+    if (variableKey.startsWith("position:")) {
+      const positionKey = variableKey.slice("position:".length);
+      const label = POSITION_BY_KEY.get(positionKey)?.label || humanizeCategory(positionKey);
+      const matches = sameFilingPositionMatches(row, positionKey);
+      if (matches.length > 1) {
+        return { eligible: false, value: null, reason: `More than one ${label} compensation row appears in the same filing, so no unique match can be used.` };
+      }
+      return { eligible: false, value: null, reason: `No unique positive ${label} compensation row is available from the same filing.` };
+    }
+    const reasons = {
+      salary: `No usable ${measureLabel(row)} observation is available.`,
+      expenses: "Annual expenses are not reported for this observation.",
+      revenue: "Annual revenue is not reported for this observation.",
+      staff: "A comparable staff count is not reported for this observation.",
+      comparabilityScore: "A match score is not available for this observation.",
+      compensationYear: "The compensation evidence year is not reported for this observation.",
+    };
+    const label = variable.shortLabel || humanizeCategory(variableKey);
+    const reason = Number.isFinite(value) && requirePositive
+      ? `${label} must be greater than zero for this plot.`
+      : reasons[variableKey] || `${label} is not reported for this observation.`;
+    return { eligible: false, value: null, reason };
   }
 
-  function normalizePlottedWeights(items) {
-    const mean = items.length ? items.reduce((sum, item) => sum + item.weight, 0) / items.length : 0;
-    return mean ? items.map((item) => ({ ...item, weight: item.weight / mean })) : items;
+  function axisEligibility(axisKey, row) {
+    const expression = axisExpression(axisKey);
+    const descriptor = axisDescriptor(axisKey);
+    const positiveValueRequired = descriptor.logarithmic || axisKey === "histogram";
+    const numerator = variableEligibility(
+      row,
+      expression.numerator,
+      axisMode(axisKey) === "ratio" || positiveValueRequired,
+    );
+    if (!numerator.eligible) return numerator;
+    if (axisMode(axisKey) === "ratio") {
+      const denominator = variableEligibility(row, expression.denominator, true);
+      if (!denominator.eligible) return denominator;
+    }
+    const value = descriptor.value(row);
+    if (!Number.isFinite(value) || (positiveValueRequired && value <= 0)) {
+      return { eligible: false, value: null, reason: `${descriptor.shortLabel} cannot be plotted on the selected axis.` };
+    }
+    return { eligible: true, value, reason: "" };
+  }
+
+  function plotEligibility(row) {
+    if (state.view === "histogram") return axisEligibility("histogram", row);
+    const horizontal = axisEligibility("scatterX", row);
+    if (!horizontal.eligible) return { ...horizontal, reason: `Horizontal axis: ${horizontal.reason}` };
+    const vertical = axisEligibility("scatterY", row);
+    if (!vertical.eligible) return { ...vertical, reason: `Vertical axis: ${vertical.reason}` };
+    return { eligible: true, reason: "" };
+  }
+
+  function axisItems(axisKey) {
+    const descriptor = axisDescriptor(axisKey);
+    return selectedRows((row) => axisEligibility(axisKey, row).eligible)
+      .map((item) => ({ ...item, value: descriptor.value(item.row) }));
+  }
+
+  function currentPlotItems() {
+    if (state.view === "histogram") return axisItems("histogram");
+    const xDescriptor = axisDescriptor("scatterX");
+    const yDescriptor = axisDescriptor("scatterY");
+    return selectedRows((row) => plotEligibility(row).eligible)
+      .map((item) => ({
+        ...item,
+        xValue: xDescriptor.value(item.row),
+        yValue: yDescriptor.value(item.row),
+        value: yDescriptor.value(item.row),
+      }));
   }
 
   function analysisAxisKey() { return state.view === "scatter" ? "scatterY" : "histogram"; }
-  function analysisItems() { return axisItems(analysisAxisKey()); }
+  function analysisItems() { return state.view === "scatter" ? currentPlotItems() : axisItems(analysisAxisKey()); }
 
   function sampleQuantile(values, probability) {
     const sorted = values.filter(Number.isFinite).sort((a, b) => a - b);
@@ -866,9 +937,14 @@
     return weight;
   }
 
-  function weightedSelection() {
+  function weightedSelection(eligibleForPlot = () => true) {
     const candidateRows = rows()
-      .filter((row) => passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id));
+      .filter((row) => (
+        passesFilters(row)
+        && salary(row) != null
+        && rowInclusion(row).get(row.id)
+        && eligibleForPlot(row)
+      ));
     const autoCalibrations = state.weightings.has("comparability")
       ? autoWeightCalibrations(candidateRows)
       : new Map();
@@ -899,8 +975,8 @@
     return positive.map(({ row, value, rawWeight }) => ({ row, value, weight: mean ? rawWeight / mean : 0 }));
   }
 
-  function selectedRows() {
-    return weightedSelection();
+  function selectedRows(eligibleForPlot) {
+    return weightedSelection(eligibleForPlot);
   }
 
   function passesFilters(row) {
@@ -1816,11 +1892,7 @@
     const yDescriptor = axisDescriptor("scatterY");
     const xGeometry = axisGeometry(xDescriptor);
     const yGeometry = axisGeometry(yDescriptor);
-    const items = normalizePlottedWeights(selectedRows().map((item) => ({
-      ...item, xValue: xDescriptor.value(item.row), yValue: yDescriptor.value(item.row),
-    })).filter((item) => Number.isFinite(item.xValue) && (!xDescriptor.logarithmic || item.xValue > 0)
-      && Number.isFinite(item.yValue) && (!yDescriptor.logarithmic || item.yValue > 0))
-      .map((item) => ({ ...item, value: item.yValue })));
+    const items = currentPlotItems();
     const rpItems = activeRpReferences().map((row) => ({
       row, xValue: xDescriptor.value(row), yValue: yDescriptor.value(row), weight: 0,
     })).filter((item) => Number.isFinite(item.xValue) && (!xDescriptor.logarithmic || item.xValue > 0)
@@ -2042,11 +2114,12 @@
     return { number: rounded, suffix };
   }
 
-  function tableRows(weightMap = new Map()) {
+  function tableRows(weightMap = new Map(), eligibilityMap = new Map()) {
     const filtered = rows().filter((row) => salary(row) != null && passesFilters(row));
     const direction = state.sortDirection === "asc" ? 1 : -1;
     return filtered.sort((a, b) => {
       const value = (row) => {
+        if (state.sortKey === "plotEligibility") return eligibilityMap.get(row.id)?.eligible ? 0 : 1;
         if (state.sortKey === "tier") return tierSortValue(row.tier);
         if (state.sortKey === "adjustedSalary") return salaryForBasis(row, true) ?? -Infinity;
         if (state.sortKey === "reportedSalary") return salaryForBasis(row, false) ?? -Infinity;
@@ -2187,7 +2260,7 @@
     tr.dataset.referenceIndex = index;
     tr.setAttribute("aria-label", `Rethink Priorities ${reference.title || positionDefinition().label} reference profile; excluded from the peer distribution`);
     const values = [
-      "", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)),
+      "", "Reference", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)),
       compactMoney(reference.expenses), reference.staff == null ? "—" : String(reference.staff), "", "", reference.tier || "Reference", "—", reference.location || "—", "—", reference.structure || "—",
       reference.compensationYear == null ? "—" : String(reference.compensationYear), reference.sourceType || "Form 990", reportedSalaryDisplay(reference),
     ];
@@ -2195,8 +2268,9 @@
       const td = document.createElement("td");
       td.textContent = value;
       if (index === 0) td.className = "check-column";
-      if (index === 1) td.className = "rp-reference-name";
-      if (index === 5 && reference.staffYear === 2023 && reference.currentFilingStaff === 0) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
+      if (index === 1) td.className = "plot-status-cell rp-reference-status";
+      if (index === 2) td.className = "rp-reference-name";
+      if (index === 6 && reference.staffYear === 2023 && reference.currentFilingStaff === 0) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
       tr.append(td);
     });
     const source = document.createElement("td");
@@ -2226,15 +2300,19 @@
   function renderTable() {
     refs.tableBody.replaceChildren();
     activeRpReferences().forEach(appendRpReferenceRow);
-    const selection = weightedSelection();
+    const selection = currentPlotItems();
     const weightMap = new Map(selection.map((item) => [item.row.id, item.weight]));
-    tableRows(weightMap).forEach((row) => {
+    const eligibilityMap = new Map(rows().map((row) => [row.id, plotEligibility(row)]));
+    tableRows(weightMap, eligibilityMap).forEach((row) => {
       const available = salary(row) != null;
+      const eligibility = eligibilityMap.get(row.id);
       const tr = document.createElement("tr");
       if (!rowInclusion(row).get(row.id)) tr.classList.add("is-excluded");
       if (!available) tr.classList.add("is-unavailable");
+      if (!eligibility.eligible) tr.classList.add("is-plot-ineligible");
       if (state.focusedId === row.id) tr.classList.add("is-focused");
       tr.dataset.id = row.id;
+      tr.dataset.plotEligible = String(eligibility.eligible);
 
       const toggleCell = document.createElement("td");
       toggleCell.className = "check-column";
@@ -2251,6 +2329,19 @@
       toggle.title = inclusionHelp;
       toggle.addEventListener("change", () => { rowInclusion(row).set(row.id, toggle.checked); renderAll(); });
       toggleCell.append(toggle);
+
+      const eligibilityCell = document.createElement("td");
+      eligibilityCell.className = `plot-status-cell ${eligibility.eligible ? "is-eligible" : "is-missing"}`;
+      eligibilityCell.title = eligibility.eligible
+        ? "This row has all values required by the current plot axes. Its checkbox and weight determine whether it is used."
+        : eligibility.reason;
+      const eligibilityStatus = document.createElement("span");
+      eligibilityStatus.className = "plot-status";
+      eligibilityStatus.textContent = eligibility.eligible ? "Eligible" : "Missing";
+      eligibilityStatus.setAttribute("aria-label", eligibility.eligible
+        ? `${row.organization} is eligible for the current plot`
+        : `${row.organization} is ineligible for the current plot: ${eligibility.reason}`);
+      eligibilityCell.append(eligibilityStatus);
 
       const org = document.createElement("td");
       org.className = "org-cell";
@@ -2303,10 +2394,15 @@
       weightInput.type = "number"; weightInput.min = "0"; weightInput.max = "10"; weightInput.step = "0.1";
       const isModified = rowModifiedWeights(row).has(row.id);
       const normalizedWeight = weightMap.get(row.id) || 0;
-      weightInput.value = isModified ? (rowCustomWeights(row).get(row.id) ?? 1) : normalizedWeight.toFixed(2);
+      weightInput.value = isModified
+        ? (rowCustomWeights(row).get(row.id) ?? 1)
+        : eligibility.eligible ? normalizedWeight.toFixed(2) : "";
+      if (!isModified && !eligibility.eligible) weightInput.placeholder = "—";
       weightInput.className = `weight-input${isModified ? " is-user-modified" : ""}`;
       weightInput.disabled = !available;
-      weightInput.title = isModified
+      weightInput.title = !eligibility.eligible
+        ? `${isModified ? `Saved user multiplier: ${Number(rowCustomWeights(row).get(row.id) ?? 1).toFixed(2)}. ` : ""}Not applied to this plot: ${eligibility.reason}`
+        : isModified
         ? `User multiplier: ${Number(rowCustomWeights(row).get(row.id) ?? 1).toFixed(2)} · normalized effective weight: ${normalizedWeight.toFixed(2)}`
         : `Automatic normalized effective weight: ${normalizedWeight.toFixed(2)} (mean included weight = 1)`;
       weightInput.setAttribute("aria-label", `${isModified ? "User multiplier" : "Automatic normalized weight"} for ${row.organization}`);
@@ -2346,7 +2442,7 @@
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
       }
-      tr.append(toggleCell, org, title, adjustedSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, reportedSalaryCell, source);
+      tr.append(toggleCell, eligibilityCell, org, title, adjustedSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, reportedSalaryCell, source);
       refs.tableBody.append(tr);
     });
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
@@ -2722,6 +2818,7 @@
         const candidates = rows().filter((row) => (
           rowStream(row) === "incumbents"
           && passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id)
+          && plotEligibility(row).eligible
         ));
         const calibrations = autoWeightCalibrations(candidates);
         autoCalibration = calibrations.get("incumbents");
