@@ -32,10 +32,10 @@
   if (!(RP_FORM990_PROFILE.expenses > 0) || !(RP_FORM990_PROFILE.staff > 0)) {
     throw new Error("The same-source RP Form 990 scale profile is unavailable.");
   }
-  const AUTO_WEIGHT_TOOLTIP = `Auto-weights uses two outcome-free rules: salary never enters its calculation. Form 990 rows use an outcome-free Gaussian similarity kernel on robust-standardized log Form 990 expenses and staff. Its RP anchors—${compactMoney(RP_FORM990_PROFILE.expenses)} expenses and ${RP_FORM990_PROFILE.staff} employees—use the same filing definitions as peers. The bandwidth reaches the selected effective sample size while keeping the largest normalized filing-kernel weight at or below 6; samples too small to reach the target are weighted uniformly. Missing filing scale values are median-imputed in log space with a missingness penalty. Recruitment postings instead use their frozen, pay-blind match scores: each score is divided by the mean among selected eligible postings, bounded to 0.50–1.50 while preserving mean weight 1, and never trained on advertised pay. Optional evidence-stream balancing and user multipliers are applied afterward and may change the final effective sample size or maximum weight. The predictive audit found that filing scale improved out-of-sample salary prediction, while salary-trained category weights remain too unstable for a production default.`;
+  const AUTO_WEIGHT_TOOLTIP = `Automatic weights never use salary. Form 990 records receive more weight when their reported expenses and employee counts are closer to RP's Form 990 values (${compactMoney(RP_FORM990_PROFILE.expenses)} and ${RP_FORM990_PROFILE.staff} employees). Job postings use a separate similarity score based only on non-pay information. Missing organization-size information reduces a record's weight. The target effective sample size controls how concentrated the Form 990 weights may become; pay-source balancing and your adjustments are applied afterward.`;
   const DEFAULT_POSITION = Object.freeze({
     key: "ceo", label: "CEO", pageLabel: "CEO", defaultMeasure: "base",
-    description: "The fully validated chief-executive benchmark, including incumbent Form 990s and recruitment postings.",
+    description: "Reviewed CEO pay benchmark using Form 990 filings and job postings.",
   });
   const POSITION_CATALOG = (() => {
     const supplied = Array.isArray(DATA.positionCatalog) ? DATA.positionCatalog : [];
@@ -201,7 +201,6 @@
       scatterY: [...document.querySelectorAll('input[name="scatter-y-axis-scale"]')],
     },
     histogramAxisSettings: $("#histogram-axis-settings"), scatterAxisSettings: $("#scatter-axis-settings"),
-    axisSettingsContext: $("#axis-settings-context"),
     scatterControls: $("#scatter-controls"), contourField: $("#contour-field"),
     chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
     comparabilityProfileField: $("#comparability-profile-field"),
@@ -290,17 +289,17 @@
 
   const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
   const WEIGHT_LABELS = {
-    comparability: "Auto-weights", size: "Expense similarity", staff: "Staff similarity", recency: "Evidence recency",
-    tier: "Tier", eaAffinity: "EA relation", sourceType: "Evidence stream", topic: "Area",
-    titleGroup: "Job-title group", structure: "Structure", streamBalanced: "50/50 evidence-stream balance",
+    comparability: "Automatic weights", size: "Expense-size similarity", staff: "Staff-size similarity", recency: "Record age",
+    tier: "Peer group", eaAffinity: "Connection to effective altruism", sourceType: "Pay source", topic: "Mission area",
+    titleGroup: "Job-title category", structure: "Organization type", streamBalanced: "Equal influence by pay source",
   };
   const DISCRETE_WEIGHT_NOTES = {
-    tier: "Suggested values follow the peer hierarchy: narrow primary peers receive full weight; broader, structural, and excluded sensitivity tiers receive progressively less.",
-    eaAffinity: "Suggested values favor EA-core and EA-adjacent organizations, moderately weight functional-only peers, and leave uncoded observations neutral.",
-    sourceType: "Suggested values give filed incumbent compensation full weight and advertised salary midpoints slightly less weight because they are offers rather than realized pay.",
-    topic: "Suggested values favor RP cause areas and research, evidence, evaluation, policy, or advisory work; delivery-only, grantmaking, and structurally dissimilar settings receive less.",
-    titleGroup: "Suggested values give CEO roles full weight, then moderately step down Executive Director, President, other executive, and unreported titles.",
-    structure: "Suggested values favor independent, board-accountable nonprofits; affiliates, fiscally sponsored projects, unclear structures, and subordinate roles receive less.",
+    tier: "Suggested values give the closest peer groups more influence and broader comparison groups less.",
+    eaAffinity: "Suggested values give more influence to organizations with a documented connection to effective altruism, while leaving unclassified records neutral.",
+    sourceType: "Suggested values give reported Form 990 pay full influence and job-posting midpoints slightly less because postings are offers rather than pay already received.",
+    topic: "Suggested values give more influence to RP cause areas and research, evidence, evaluation, policy, or advisory work.",
+    titleGroup: "Suggested values give CEO roles full influence, followed by Executive Director, President, other executive, and unreported titles.",
+    structure: "Suggested values give more influence to independent, board-accountable nonprofits and less to affiliates, sponsored projects, unclear organizations, or subordinate roles.",
   };
 
   function defaultDiscreteWeight(key, value) {
@@ -373,51 +372,45 @@
   }
 
   function discreteWeightExplanation(key, category) {
-    const definition = key === "titleGroup" && !isCeoPosition() ? null : categoryDefinition(key, category);
-    if (definition) {
-      const provenance = definition.provenanceType.replaceAll("_", " ").replaceAll(" + ", "; ");
-      const caveat = definition.caveats ? ` Caveat: ${definition.caveats}` : "";
-      return `${definition.shortDefinition}: ${definition.operationalRule}${caveat} Provenance: ${provenance}; ${definition.confidence || "unspecified"} confidence. App sensitivity multiplier: ${defaultDiscreteWeight(key, category).toFixed(2)} (editable analyst judgment, not a source rule).`;
-    }
     const normalized = String(category || "Not reported").toLowerCase();
     let explanation;
     if (key === "tier") {
-      if (normalized === "a") explanation = "Tier A is the principal expanded peer tier: generally score ≥75, functional score ≥20, a clean organization-wide chief executive, comparable scale, and no dominant structural exclusion.";
-      else if (normalized === "b") explanation = "Tier B is a useful secondary peer: generally score ≥62 with strong EA affinity, or ≥68 for a functional-only peer, with one meaningful scale, model, geography, or structure deviation.";
-      else if (normalized === "c") explanation = "Tier C is a broad robustness tier: generally score ≥52 with a usable chief-executive observation but a weaker scale, operating-model, or geographic match.";
-      else if (normalized === "strict_primary") explanation = "Strict-primary postings describe a current, full-time organization-wide CEO or ED with board accountability, an RP-like knowledge-sector role, and generally $5M–$20M core scale or 25–100 staff.";
-      else if (normalized.includes("expanded_primary")) explanation = "Expanded-primary postings retain a strong organization-wide leadership match but relax a title, mission-mix, or close-fit requirement from the strict-primary posting set.";
-      else if (normalized.includes("scale_unknown")) explanation = "This expanded secondary subtype has a useful role or functional match, but accessible evidence did not establish operating scale.";
-      else if (normalized.includes("scale")) explanation = "This subtype is broader because budget, expenses, or staff differ materially from RP's $7.5M core-budget and 57-FTE operating anchors.";
-      else if (normalized.includes("structural")) explanation = "This subtype is broader because governance, affiliation, fiscal sponsorship, grantmaking, or multi-entity leadership differs from RP's organization-wide CEO structure.";
-      else if (normalized.includes("broad_functional")) explanation = "This expanded subtype is included mainly for functional sensitivity: some duties overlap with RP, but the mission or operating model is less direct.";
-      else if (normalized.includes("date_ambiguity")) explanation = "The posting's publication and process dates conflict, so it is retained only as a date-ambiguity sensitivity.";
-      else if (normalized.includes("older_structural")) explanation = "This is an older posting with a material structural difference and is retained only for sensitivity testing.";
-      else if (normalized.includes("fractional")) explanation = "The role is fractional or otherwise not a standard full-time organization-wide chief executive, so it is sensitivity evidence only.";
+      if (normalized === "a") explanation = "These are the closest Form 990 peers based on role, mission, organization size, and organization type.";
+      else if (normalized === "b") explanation = "These are broader Form 990 peers with one meaningful difference in size, mission, location, or organization type.";
+      else if (normalized === "c") explanation = "These are the broadest usable Form 990 peers, with larger differences from RP.";
+      else if (normalized === "strict_primary") explanation = "These job postings most closely match RP: a current, full-time top executive with board accountability and a similar knowledge-focused organization.";
+      else if (normalized.includes("expanded_primary")) explanation = "These job postings remain close matches but differ somewhat in title, mission mix, or overall fit.";
+      else if (normalized.includes("scale_unknown")) explanation = "This role is a useful match, but the available sources did not establish the organization's size.";
+      else if (normalized.includes("scale")) explanation = "This is a broader comparison because its expenses or staff size differ from RP.";
+      else if (normalized.includes("structural")) explanation = "This is a broader comparison because its governance, affiliation, sponsorship, grantmaking, or multi-organization leadership differs from RP.";
+      else if (normalized.includes("broad_functional")) explanation = "Some duties overlap with RP, but the mission or operating model is less similar.";
+      else if (normalized.includes("date_ambiguity")) explanation = "The posting's dates conflict, so it is kept only as a broader comparison case.";
+      else if (normalized.includes("older_structural")) explanation = "This is an older posting with an important organization-type difference and is kept only as a broader comparison case.";
+      else if (normalized.includes("fractional")) explanation = "The role is part-time or fractional rather than a standard full-time top executive role.";
       else if (normalized.includes("excluded_grantmaking")) explanation = "Excluded because grantmaking or pass-through stewardship dominates the operating model rather than RP-like knowledge production.";
       else if (normalized.includes("excluded_private_foundation")) explanation = "Excluded because private-foundation governance, endowment, and grantmaking responsibilities are not directly comparable with RP's public-charity operating model.";
       else if (normalized.includes("excluded_subordinate_regional")) explanation = "Excluded because the advertised role leads a regional unit beneath a parent organization rather than the whole organization.";
-      else if (normalized.includes("excluded")) explanation = "Excluded from the primary peer set after applying preregistered non-pay criteria such as role scope, operating model, scale, structure, geography, or source adequacy.";
-      else if (normalized.includes("secondary")) explanation = "Secondary postings are useful comparators with one meaningful scale, operating-model, geography, or structure deviation from the strict-primary criteria.";
-      else explanation = "This is a source-native peer tier assigned under the frozen function, scale, role, structure, geography, and source-quality rules.";
-      explanation += " Tiering was determined without using the observed compensation.";
+      else if (normalized.includes("excluded")) explanation = "This record is outside the recommended peer group because of its role, operating model, size, organization type, location, or source quality.";
+      else if (normalized.includes("secondary")) explanation = "These postings are useful comparisons with one meaningful difference in size, operating model, location, or organization type.";
+      else explanation = "This peer group was assigned from role, mission, size, organization type, location, and source quality.";
+      explanation += " Salary was not used to assign the peer group.";
     } else if (key === "eaAffinity") {
-      if (normalized.includes("core")) explanation = "EA-core means an explicit effective-altruism organization or project. The frozen comparability score assigned this category 20 of 20 EA-affinity points.";
-      else if (normalized.includes("adjacent")) explanation = "EA-adjacent means a publicly EA-linked organization, or a prominent organization in an EA-recommended or evaluated cause area, without being classified as EA-core. It received 14 of 20 EA-affinity points.";
-      else if (normalized.includes("functional")) explanation = "Functional-only means no meaningful EA relationship was required, but the organization uses evidence-first research, evaluation, policy, advisory, or related methods. It received 7 of 20 EA-affinity points.";
-      else explanation = "Not coded means the benchmark did not assign an EA-affinity category. It is not evidence that the organization has no EA relationship, so the suggested weight is neutral.";
-      explanation += " This coding was frozen or verified independently of compensation.";
+      if (normalized.includes("core")) explanation = "The organization or project explicitly identifies with effective altruism.";
+      else if (normalized.includes("adjacent")) explanation = "The organization is publicly linked to effective altruism or works prominently in a cause area often recommended by the community.";
+      else if (normalized.includes("functional")) explanation = "No connection to effective altruism was required, but the organization uses similar research, evaluation, policy, or advisory methods.";
+      else explanation = "The available review did not assign a connection category. This does not mean the organization has no connection, so the suggested weight remains neutral.";
+      explanation += " Salary was not used to assign this category.";
     } else if (key === "sourceType") {
       explanation = normalized.includes("form 990")
         ? "Form 990 denotes realized incumbent compensation reported in a nonprofit filing. It is historical and measure-specific; Part VII cash is not automatically exact base salary."
         : "Job posting denotes the inflation-adjusted midpoint of an advertised base-salary range. It is forward-looking offer evidence, not realized compensation.";
     } else if (key === "titleGroup") {
-      if (!isCeoPosition()) explanation = "This reviewed title family organizes source-native titles within the selected position. Its suggested multiplier is neutral; users may edit it for sensitivity analysis.";
+      if (!isCeoPosition()) explanation = "This category groups titles within the selected position while keeping each job title exactly as written in the source. Its suggested weight is neutral and editable.";
       else if (normalized === "ceo") explanation = "CEO groups Chief Executive Officer variants and most directly matches RP's organization-wide chief-executive role.";
       else if (normalized.includes("executive director")) explanation = "Executive Director can be the organization-wide top executive, but the title is less consistent across nonprofits and sometimes denotes a narrower role.";
-      else if (normalized.includes("president")) explanation = "President includes President/CEO and source-native President titles; comparability depends on whether the person is clearly the organization-wide top executive.";
+      else if (normalized.includes("president")) explanation = "President includes President/CEO and President titles as written in the source; similarity depends on whether the person clearly leads the whole organization.";
       else if (normalized.includes("not reported")) explanation = "The preserved record did not provide a usable title group, so role comparability cannot be confirmed from this field.";
-      else explanation = "Other executive titles contain source-native leadership roles outside the main CEO, Executive Director, and President groupings; their authority and scope are less uniform.";
+      else explanation = "Other executive titles include leadership roles outside the main CEO, Executive Director, and President groups; their authority and scope are less consistent.";
     } else if (key === "structure") {
       const structures = {
         "independent nonprofit": "A separate nonprofit legal organization with its own governance; the cleanest structural comparator to RP.",
@@ -437,38 +430,19 @@
         "chief operating officer": "The executive reports to a Chief Operating Officer and is therefore not the organization-wide top executive.",
         "not extracted": "The preserved evidence did not yield a reliable governance or reporting structure; this is missing information, not an affirmative structure classification.",
       };
-      explanation = structures[normalized] || "This is the source-derived governance, legal-entity, or executive-reporting structure used to assess whether the role is a clean organization-wide comparator.";
+      explanation = structures[normalized] || "This organization and leadership type was recorded to show how closely the role resembles RP's top-executive structure.";
     } else {
       const weight = defaultDiscreteWeight(key, category);
-      let rationale = "It is a source-derived mission and operating-model category used to assess functional similarity to RP.";
+      let rationale = "This mission and operating category is used to assess similarity to RP.";
       if (weight === 1) rationale += " It directly overlaps an RP cause area or evidence-oriented priority and receives the reference suggestion.";
       else if (weight >= 0.9) rationale += " It strongly overlaps research, evaluation, evidence, science, policy, data, or advisory work.";
       else if (weight >= 0.75) rationale += " It has a useful field-building, membership, or knowledge role, with a moderate operating-model difference.";
       else if (weight <= 0.45) rationale += " Grantmaking, foundation, or endowment activity is materially less comparable with RP's knowledge-production model.";
       else if (weight <= 0.55) rationale += " Delivery, university, regional, cultural, or local-service features make it a broader functional comparator.";
       else rationale += " It has partial functional overlap but a less direct mission or operating-model match.";
-      explanation = `${rationale} Area coding was determined without using compensation.`;
+      explanation = `${rationale} Salary was not used to assign the mission area.`;
     }
-    return `${explanation} App sensitivity multiplier: ${defaultDiscreteWeight(key, category).toFixed(2)}; 1.00 is the reference. This editable value is an analyst judgment, not a source rule.`;
-  }
-
-  function categoryDefinition(key, category) {
-    const fields = {
-      tier: ["reference_tier", "tier"],
-      eaAffinity: ["ea_affinity", "ea_relationship"],
-      structure: ["expected_structure"],
-      topic: ["topic_cluster"],
-      titleGroup: ["title_group"],
-    }[key] || [];
-    const value = String(category || "Not reported");
-    const candidates = value.toLowerCase() === "not coded" ? [value, "uncoded"] : [value];
-    for (const field of fields) {
-      for (const candidate of candidates) {
-        const definition = DATA.categoryExplainers?.definitions?.[field]?.[candidate];
-        if (definition) return definition;
-      }
-    }
-    return null;
+    return `${explanation} Suggested weight: ${defaultDiscreteWeight(key, category).toFixed(2)}; 1.00 is the reference. You can edit this value.`;
   }
 
   function ensureDiscreteWeights(key) {
@@ -596,14 +570,14 @@
 
   function compensationMeasureLabel() {
     if (isCeoPosition()) return "Salary";
-    if (state.measure === "base") return "Base compensation";
-    if (state.measure === "total") return "Total compensation";
-    return "Reportable compensation";
+    if (state.measure === "base") return "Base pay";
+    if (state.measure === "total") return "Total pay";
+    return "Reported pay";
   }
 
   function compactCompensationMeasureLabel() {
-    return isCeoPosition() ? "Salary" : state.measure === "base" ? "Base comp."
-      : state.measure === "total" ? "Total comp." : "Reportable comp.";
+    return isCeoPosition() ? "Salary" : state.measure === "base" ? "Base pay"
+      : state.measure === "total" ? "Total pay" : "Reported pay";
   }
 
   function compactNumber(value) {
@@ -618,7 +592,7 @@
 
   const numericVariables = {
     salary: {
-      get shortLabel() { return compensationMeasureLabel(); }, label: () => `Annual compensation (${priceBasisLabel()})`,
+      get shortLabel() { return compensationMeasureLabel(); }, label: () => `Annual pay (${priceBasisLabel()})`,
       value: salary, format: compactMoney, fullFormat: money, logarithmic: false,
     },
     expenses: {
@@ -635,12 +609,12 @@
       fullFormat: (value) => value == null ? "—" : `${Math.round(value).toLocaleString("en-US")} staff`, logarithmic: true,
     },
     comparabilityScore: {
-      shortLabel: "Match score", label: () => "Match score",
+      shortLabel: "Similarity score", label: () => "Similarity score",
       value: (row) => row.comparabilityScore, format: (value) => value == null ? "—" : `${Math.round(value)}`,
       fullFormat: (value) => value == null ? "—" : `${Number(value).toFixed(1)} / 100`, logarithmic: false,
     },
     compensationYear: {
-      shortLabel: "Evidence year", label: () => "Evidence year",
+      shortLabel: "Pay year", label: () => "Pay year",
       value: (row) => row.compensationYear, format: (value) => value == null ? "—" : `${Math.round(value)}`,
       fullFormat: (value) => value == null ? "—" : `${Math.round(value)}`, logarithmic: false,
     },
@@ -760,17 +734,17 @@
       return { eligible: false, value: null, reason: `No unique positive ${label} compensation row is available from the same filing.` };
     }
     const reasons = {
-      salary: `No usable ${measureLabel(row)} observation is available.`,
-      expenses: "Annual expenses are not reported for this observation.",
-      revenue: "Annual revenue is not reported for this observation.",
-      staff: "A comparable staff count is not reported for this observation.",
-      comparabilityScore: "A match score is not available for this observation.",
-      compensationYear: "The compensation evidence year is not reported for this observation.",
+      salary: `No usable ${measureLabel(row)} record is available.`,
+      expenses: "Annual expenses are not reported for this record.",
+      revenue: "Annual revenue is not reported for this record.",
+      staff: "A comparable staff count is not reported for this record.",
+      comparabilityScore: "A similarity score is not available for this record.",
+      compensationYear: "The pay year is not reported for this record.",
     };
     const label = variable.shortLabel || humanizeCategory(variableKey);
     const reason = Number.isFinite(value) && requirePositive
       ? `${label} must be greater than zero for this plot.`
-      : reasons[variableKey] || `${label} is not reported for this observation.`;
+      : reasons[variableKey] || `${label} is not reported for this record.`;
     return { eligible: false, value: null, reason };
   }
 
@@ -1152,13 +1126,13 @@
     refs.expenseFilterSummary.setAttribute("aria-label", expenseActive
       ? `Filter expenses, active range ${refs.expenseRangeValue.value}` : "Filter expenses, all values included");
     refs.matchScoreFilterSummary.setAttribute("aria-label", matchScoreActive
-      ? `Filter match score, active range ${refs.matchScoreRangeValue.value}` : "Filter match score, all values included");
+      ? `Filter similarity score, active range ${refs.matchScoreRangeValue.value}` : "Filter similarity score, all values included");
     refs.salaryFilterStatus.textContent = salaryActive
       ? `Salary filter · ${refs.salaryRangeValue.value}` : "All salaries included";
     refs.expenseFilterStatus.textContent = expenseActive
       ? `Expense filter · ${refs.expenseRangeValue.value}` : "All expenses included";
     refs.matchScoreFilterStatus.textContent = matchScoreActive
-      ? `Match score filter · ${refs.matchScoreRangeValue.value}` : "All match scores included";
+      ? `Similarity-score filter · ${refs.matchScoreRangeValue.value}` : "All similarity scores included";
     [["salary", refs.salaryMin, refs.salaryMax], ["expenses", refs.expenseMin, refs.expenseMax], ["matchScore", refs.matchScoreMin, refs.matchScoreMax]].forEach(([key, low, high]) => {
       const minimum = Number(low.min); const maximum = Number(low.max);
       const track = document.querySelector(`[data-range-filter="${key}"] .dual-range`);
@@ -1655,9 +1629,9 @@
     const expression = axisExpression(axisKey);
     const buildGroups = () => {
       const measures = document.createElement("optgroup");
-      measures.label = "Current observation / organization";
+      measures.label = "This organization or role";
       const positions = document.createElement("optgroup");
-      positions.label = "Unique same-filing position matches";
+      positions.label = "One matching role in the same filing";
       Object.entries(numericVariables).forEach(([value, definition]) => {
         const option = document.createElement("option");
         option.value = value;
@@ -1665,7 +1639,7 @@
           const pairCount = positionIncumbents().filter((row) => (
             row.defaultIncluded && definition.value(row) != null
           )).length;
-          option.textContent = `${POSITION_BY_KEY.get(definition.positionKey).label} compensation (paired n = ${pairCount})`;
+          option.textContent = `${POSITION_BY_KEY.get(definition.positionKey).label} pay · matching records: ${pairCount}`;
           option.disabled = pairCount === 0 && value !== expression.numerator && value !== expression.denominator;
           positions.append(option);
         } else {
@@ -1736,7 +1710,7 @@
     const colors = categoryColors(items);
     renderHistogramLegend(colors);
     const markNoun = isCeoPosition() ? "organization" : "reported role";
-    $("#chart-description").textContent = `A weighted histogram of ${descriptor.label.toLowerCase()} in which each block represents one ${markNoun}.`;
+    $("#chart-description").textContent = `A histogram of ${descriptor.label.toLowerCase()}. Each block represents one ${markNoun}; larger blocks have more influence when weighting is active.`;
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(330, refs.chartWrap.clientHeight || 360);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -1748,7 +1722,7 @@
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
-      empty.textContent = `No ${isCeoPosition() ? "organizations" : "position observations"} have a value for the current selection.`;
+      empty.textContent = `No ${isCeoPosition() ? "organizations" : "role records"} have a value for the current selection.`;
       svg.append(empty);
       appendAxisControl(svg, "histogram", axisDisplayLabel(descriptor), {
         x: width / 2 - 5, y: height - 6, "text-anchor": "middle",
@@ -1826,7 +1800,7 @@
           showTooltip(event, item, {
             category,
             primaryLabel: descriptor.primaryLabel(item.row), primaryFormat: descriptor.fullFormat,
-            chartDetail: ["Histogram bin", `${descriptor.format(binLow)}–${descriptor.format(binHigh)}`],
+            chartDetail: ["Histogram bar", `${descriptor.format(binLow)}–${descriptor.format(binHigh)}`],
             rankDetails: [[`${descriptor.shortLabel} percentile`, percentilePositionLabel(items, item.value, (candidate) => candidate.value)]],
           });
         });
@@ -1889,7 +1863,7 @@
       "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700,
     });
     yAxisTitle.textContent = state.stream === "combined" || !isCeoPosition()
-      ? "Weighted observations per bin" : "Weighted organizations per bin";
+      ? "Weighted records per bar" : "Weighted organizations per bar";
     svg.append(yAxisTitle);
 
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
@@ -1906,15 +1880,59 @@
       .replace(/\b\w/g, (letter) => letter.toUpperCase());
   }
 
+  function eaAffinityLabel(value) {
+    const raw = String(value || "Not classified");
+    const normalized = raw.toLowerCase();
+    if (normalized.includes("core") || normalized.includes("aligned")) return "Effective-altruism organization";
+    if (normalized.includes("adjacent")) return "Connected to effective altruism";
+    if (normalized.includes("functional")) return "Similar work; no documented connection";
+    if (/not coded|not reported|uncoded/.test(normalized)) return "Not classified";
+    return humanizeCategory(raw);
+  }
+
   function peerTierInfo(value) {
     const raw = String(value || "Not reported");
     const normalized = raw.toLowerCase();
-    if (normalized === "a" || normalized === "strict_primary" || normalized.startsWith("tier a")) return { label: "Tier A · Primary", order: 0 };
-    if (normalized === "b" || normalized === "secondary" || normalized.startsWith("secondary_") || normalized.startsWith("tier b")) return { label: "Tier B · Secondary", order: 1 };
-    if (normalized === "c" || normalized.startsWith("expanded_") || normalized.startsWith("tier c")) return { label: "Tier C · Expanded", order: 2 };
-    if (normalized.includes("sensitivity")) return { label: "Sensitivity set", order: 3 };
-    if (normalized.startsWith("excluded")) return { label: "Excluded", order: 4 };
+    if (normalized === "a" || normalized === "strict_primary" || normalized === "closest peers" || normalized.startsWith("tier a")) return { label: "Closest peers", order: 0 };
+    if (normalized === "b" || normalized === "secondary" || normalized === "broader peers" || normalized.startsWith("secondary_") || normalized.startsWith("tier b")) return { label: "Broader peers", order: 1 };
+    if (normalized === "c" || normalized === "broadest peers" || normalized.startsWith("expanded_") || normalized.startsWith("tier c")) return { label: "Broadest peers", order: 2 };
+    if (normalized === "broader case" || normalized.includes("sensitivity")) return { label: "Broader case", order: 3 };
+    if (normalized === "outside recommended group" || normalized.startsWith("excluded")) return { label: "Outside recommended group", order: 4 };
     return { label: humanizeCategory(raw), order: 5 };
+  }
+
+  function peerCategoryLabel(value) {
+    const raw = String(value || "Not reported");
+    const normalized = raw.toLowerCase();
+    const exact = {
+      a: "Form 990 · closest peers",
+      strict_primary: "Job posting · closest peers",
+      b: "Form 990 · broader peers",
+      secondary: "Job posting · broader peers",
+      secondary_scale: "Broader case · organization size differs",
+      secondary_structural: "Broader case · organization type differs",
+      c: "Form 990 · broadest peers",
+      expanded_primary_title: "Broadest case · job title differs",
+      expanded_secondary_scale: "Broadest case · organization size differs",
+      expanded_secondary_scale_unknown: "Broadest case · organization size unknown",
+      expanded_secondary_structural: "Broadest case · organization type differs",
+      expanded_broad_functional: "Broadest case · mission or work differs",
+      date_ambiguity_sensitivity: "Broader case · posting date unclear",
+      fractional_sensitivity: "Broader case · part-time role",
+      older_structural_sensitivity: "Broader case · older posting and different organization type",
+      excluded: "Outside recommended group",
+      excluded_grantmaking: "Outside recommended group · grantmaking model",
+      excluded_private_foundation: "Outside recommended group · private foundation",
+      excluded_subordinate_regional: "Outside recommended group · regional role",
+    };
+    return exact[normalized] || peerTierInfo(raw).label;
+  }
+
+  function categoryDisplayLabel(key, value) {
+    if (key === "tier") return peerCategoryLabel(value);
+    if (key === "eaAffinity") return eaAffinityLabel(value);
+    if (key === "titleGroup" && !isCeoPosition()) return humanizeCategory(value);
+    return String(value || "Not reported");
   }
 
   function tierSortValue(value) {
@@ -1933,8 +1951,7 @@
   function chartCategory(row) {
     const raw = String(row[state.chartColor] || "Not reported");
     if (state.chartColor === "tier") return peerTierInfo(raw).label;
-    if (state.chartColor === "titleGroup" && !isCeoPosition()) return humanizeCategory(raw);
-    return raw;
+    return categoryDisplayLabel(state.chartColor, raw);
   }
 
   function mixHex(hex, target, amount) {
@@ -1961,10 +1978,10 @@
     if (!sizingActive) return;
     const legend = document.createElement("span");
     legend.className = "point-size-legend";
-    legend.setAttribute("aria-label", "Point area represents normalized analytical weight");
+    legend.setAttribute("aria-label", "Larger marks have more influence in the results");
     const title = document.createElement("span");
     title.className = "point-size-legend-label";
-    title.textContent = "Point area = weight";
+    title.textContent = "Larger mark = more influence";
     legend.append(title);
     [0.5, 1, 2].forEach((weight) => {
       const key = document.createElement("span"); key.className = "point-size-key";
@@ -1981,7 +1998,7 @@
     refs.chartLegend.replaceChildren();
     appendCategoryLegend(colorMap);
     if (contoursShown) {
-      const contour = document.createElement("span"); contour.innerHTML = '<i class="contour-swatch"></i> 50 / 80 / 95% covariance contours';
+      const contour = document.createElement("span"); contour.innerHTML = '<i class="contour-swatch"></i> Approximate spread: 50 / 80 / 95%';
       refs.chartLegend.append(contour);
     }
     appendPointSizeLegend(items);
@@ -2054,6 +2071,7 @@
     const format = (value) => Number.isFinite(value) ? value.toFixed(3) : "—";
     refs.scatterCorrelations.textContent = `Weighted r = ${format(correlations.pearson)}, ρ = ${format(correlations.spearman)}`;
     refs.scatterCorrelations.setAttribute("aria-label", `Weighted Pearson r ${format(correlations.pearson)}; weighted Spearman rho ${format(correlations.spearman)}`);
+    refs.scatterCorrelations.title = "Weighted Pearson r measures linear association; weighted Spearman ρ measures rank association. Both range from −1 to +1, and association does not imply causation.";
   }
 
   function renderScatter() {
@@ -2068,7 +2086,7 @@
       && Number.isFinite(item.yValue) && (!yDescriptor.logarithmic || item.yValue > 0));
     const svg = refs.chart;
     svg.replaceChildren();
-    $("#chart-description").textContent = `A scatterplot of ${yDescriptor.label.toLowerCase()} against ${xDescriptor.label.toLowerCase()} for ${positionDefinition().pageLabel} compensation observations.`;
+    $("#chart-description").textContent = `A scatterplot of ${yDescriptor.label.toLowerCase()} against ${xDescriptor.label.toLowerCase()} for ${positionDefinition().pageLabel} pay records.`;
     const width = Math.max(520, refs.chartWrap.clientWidth || 720);
     const height = Math.max(290, refs.chartWrap.clientHeight || 340);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -2077,7 +2095,7 @@
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
-      empty.textContent = `No selected ${isCeoPosition() ? "organizations" : "position observations"} have values for both plotted axes.`;
+      empty.textContent = `No selected ${isCeoPosition() ? "organizations" : "role records"} have values for both axes.`;
       svg.append(empty); refs.chartLegend.replaceChildren();
       appendAxisControl(svg, "scatterX", axisDisplayLabel(xDescriptor), {
         x: width / 2 - 5, y: height - 6, "text-anchor": "middle",
@@ -2185,26 +2203,26 @@
   function showTooltip(event, item, context = {}) {
     const row = item.row;
     const tier = peerTierInfo(row.tier);
-    const rawTier = humanizeCategory(row.tier);
+    const detailedPeerGroup = peerCategoryLabel(row.tier);
     const evidence = [row.sourceType, row.compensationYear].filter(Boolean).join(" · ");
     const displayedRange = salaryRange(row);
     const range = displayedRange
       ? `${money(displayedRange.low)}–${money(displayedRange.high)}`
       : "";
     const colorLabel = {
-      topic: "Area", eaAffinity: "EA relation", sourceType: "Evidence stream",
-      titleGroup: "Job-title group", structure: "Structure",
+      topic: "Mission area", eaAffinity: "Connection to effective altruism", sourceType: "Pay source",
+      titleGroup: "Job-title category", structure: "Organization type",
     }[state.chartColor];
     const details = [
       context.chartDetail,
       ...(context.rankDetails || []),
       range ? ["Advertised range", range] : null,
-      context.reference ? ["Analytical status", "RP reference only · excluded from all calculations"] : ["Peer tier", tier.label],
-      !context.reference && rowStream(row) === "jobAds" && rawTier !== tier.label ? ["Recruitment subtype", rawTier] : null,
+      context.reference ? ["How this record is used", "RP reference only · shown for context, not included in results"] : ["Peer group", tier.label],
+      !context.reference && detailedPeerGroup !== tier.label ? ["Detailed peer group", detailedPeerGroup] : null,
       !context.reference && colorLabel ? [`Color · ${colorLabel}`, context.category] : null,
-      evidence ? ["Evidence", evidence] : null,
-      !context.reference && row.comparabilityScore != null ? ["Match score", `${row.comparabilityScore} / 100`] : null,
-      !context.reference ? ["Effective weight", item.weight > 0 && item.weight < 0.01 ? "<0.01" : item.weight.toFixed(2)] : null,
+      evidence ? ["Pay source", evidence] : null,
+      !context.reference && row.comparabilityScore != null ? ["Similarity score", `${row.comparabilityScore} / 100`] : null,
+      !context.reference ? ["Weight in results", item.weight > 0 && item.weight < 0.01 ? "<0.01" : item.weight.toFixed(2)] : null,
     ].filter(Boolean);
     const primaryLabel = context.primaryLabel || measureLabel(row);
     const primaryFormat = context.primaryFormat || money;
@@ -2218,7 +2236,7 @@
         <strong>${escapeHtml(primaryFormat(item.value))}</strong>
       </div>
       <dl>${details.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>
-      <p class="chart-tooltip-hint">Click the mark to focus ${context.reference ? "the RP reference row" : "its row"} in the table.</p>`;
+      <p class="chart-tooltip-hint">Select this mark to highlight ${context.reference ? "the RP reference row" : "its row"} in the table.</p>`;
     refs.tooltip.hidden = false;
     positionTooltip(event);
   }
@@ -2244,8 +2262,8 @@
     const items = analysisItems();
     const model = fitModel(items);
     refs.quantileBasis.textContent = state.fit === "empirical"
-      ? `Derived from weighted empirical ranks for ${descriptor.shortLabel}`
-      : `Derived from the fitted ${state.fit} distribution for ${descriptor.shortLabel}`;
+      ? `Based on weighted percentiles of the selected records for ${descriptor.shortLabel}`
+      : `Estimated from the fitted ${state.fit} curve for ${descriptor.shortLabel}`;
     refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
     const percentiles = quantilePercentiles();
     if (state.quantileGranularity === "custom") {
@@ -2283,11 +2301,18 @@
     return { number: rounded, suffix };
   }
 
-  function tableRows(weightMap = new Map()) {
+  function tableRows(weightMap = new Map(), eligibilityMap = new Map()) {
     const filtered = rows().filter((row) => salary(row) != null && passesFilters(row));
     const direction = state.sortDirection === "asc" ? 1 : -1;
     return filtered.sort((a, b) => {
       const value = (row) => {
+        if (state.sortKey === "inclusion") {
+          const checked = Boolean(rowInclusion(row).get(row.id));
+          const eligible = Boolean(eligibilityMap.get(row.id)?.eligible);
+          if (checked && eligible) return 0;
+          if (checked) return 1;
+          return eligible ? 2 : 3;
+        }
         if (state.sortKey === "tier") return tierSortValue(row.tier);
         if (state.sortKey === "adjustedSalary") return salaryForBasis(row, true) ?? -Infinity;
         if (state.sortKey === "reportedSalary") return salaryForBasis(row, false) ?? -Infinity;
@@ -2321,8 +2346,8 @@
     document.querySelectorAll("[data-filter-menu]").forEach((container) => {
       const key = container.dataset.filterMenu;
       const label = {
-        title: "Job title", sourceType: "Evidence", tier: "Tier", topic: "Area",
-        location: "Location", eaAffinity: "EA relation", structure: "Structure",
+        title: "Job title", sourceType: "Pay source", tier: "Peer group", topic: "Mission area",
+        location: "Location", eaAffinity: "Connection to effective altruism", structure: "Organization type",
       }[key] || key;
       const values = [...new Set(rows().map((row) => String(row[key] || "Not reported")))].sort((a, b) => a.localeCompare(b));
       const selected = state.filters[key];
@@ -2371,7 +2396,7 @@
           if (afterChange) afterChange();
           renderAll();
         });
-        const span = document.createElement("span"); span.textContent = value;
+        const span = document.createElement("span"); span.textContent = categoryDisplayLabel(key, value);
         label.append(checkbox, span); parent.append(label);
         return checkbox;
       };
@@ -2426,7 +2451,7 @@
     tr.className = "rp-reference-row";
     tr.dataset.referenceId = reference.id;
     tr.dataset.referenceIndex = index;
-    tr.setAttribute("aria-label", `Rethink Priorities ${reference.title || positionDefinition().label} reference profile; excluded from the peer distribution`);
+    tr.setAttribute("aria-label", `Rethink Priorities ${reference.title || positionDefinition().label} reference row; shown for context, not included in peer results`);
     const values = [
       "", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)),
       compactMoney(reference.expenses), reference.staff == null ? "—" : String(reference.staff), "", "", reference.tier || "Reference", "—", reference.location || "—", "—", reference.structure || "—",
@@ -2443,7 +2468,7 @@
     const source = document.createElement("td");
     source.className = "source-cell";
     const preview = document.createElement("button");
-    preview.type = "button"; preview.className = "preview-button rp-reference-preview"; preview.textContent = "Preview";
+    preview.type = "button"; preview.className = "preview-button rp-reference-preview"; preview.textContent = "View";
     preview.addEventListener("click", () => openSourceDialog(reference));
     source.append(preview);
     if (reference.sourceUrl) {
@@ -2470,7 +2495,7 @@
     const selection = currentPlotItems();
     const weightMap = new Map(selection.map((item) => [item.row.id, item.weight]));
     const eligibilityMap = new Map(rows().map((row) => [row.id, plotEligibility(row)]));
-    tableRows(weightMap).forEach((row) => {
+    tableRows(weightMap, eligibilityMap).forEach((row) => {
       const available = salary(row) != null;
       const eligibility = eligibilityMap.get(row.id);
       const tr = document.createElement("tr");
@@ -2489,12 +2514,12 @@
       const toggle = document.createElement("input");
       toggle.type = "checkbox"; toggle.className = "row-toggle"; toggle.checked = available && rowInclusion(row).get(row.id);
       toggle.disabled = !available;
-      const defaultExclusionReason = row.selectionNote || row.analysisStatus || row.auditStatus || "outside the default benchmark sample";
+      const defaultExclusionReason = plainAnalysisStatus(row.analysisStatus || row.auditStatus);
       const inclusionHelp = !available
-        ? `${row.organization} has no usable ${measureLabel(row)} observation. ${defaultExclusionReason}`
+        ? `${row.organization} has no usable pay record for ${measureLabel(row)}. ${defaultExclusionReason}.`
         : row.defaultIncluded
           ? `Include ${row.organization}`
-          : `${row.organization} is excluded by default: ${defaultExclusionReason}. Check to include it manually.`;
+          : `${row.organization} is not in the recommended peer group: ${defaultExclusionReason}. Select to include it.`;
       toggle.setAttribute("aria-label", inclusionHelp);
       toggle.title = inclusionHelp;
       toggle.addEventListener("change", () => { rowInclusion(row).set(row.id, toggle.checked); renderAll(); });
@@ -2558,11 +2583,11 @@
       weightInput.className = `weight-input${isModified ? " is-user-modified" : ""}`;
       weightInput.disabled = !available;
       weightInput.title = !eligibility.eligible
-        ? `${isModified ? `Saved user multiplier: ${Number(rowCustomWeights(row).get(row.id) ?? 1).toFixed(2)}. ` : ""}Not applied to this plot: ${eligibility.reason}`
+        ? `${isModified ? `Saved custom multiplier: ${Number(rowCustomWeights(row).get(row.id) ?? 1).toFixed(2)}. ` : ""}Not used on this chart: ${eligibility.reason}`
         : isModified
-        ? `User multiplier: ${Number(rowCustomWeights(row).get(row.id) ?? 1).toFixed(2)} · normalized effective weight: ${normalizedWeight.toFixed(2)}`
-        : `Automatic normalized effective weight: ${normalizedWeight.toFixed(2)} (mean included weight = 1)`;
-      weightInput.setAttribute("aria-label", `${isModified ? "User multiplier" : "Automatic normalized weight"} for ${row.organization}`);
+        ? `Custom multiplier: ${Number(rowCustomWeights(row).get(row.id) ?? 1).toFixed(2)} · final weight in results: ${normalizedWeight.toFixed(2)}`
+        : `Automatic weight: ${normalizedWeight.toFixed(2)} (weights are scaled so included records average 1)`;
+      weightInput.setAttribute("aria-label", `${isModified ? "Custom weight multiplier" : "Automatic weight"} for ${row.organization}`);
       weightInput.addEventListener("change", () => {
         const value = clamp(Number(weightInput.value) || 0, 0, 10);
         rowCustomWeights(row).set(row.id, value);
@@ -2574,27 +2599,27 @@
 
       const comparability = document.createElement("td");
       comparability.className = "number-cell"; comparability.textContent = row.comparabilityScore ?? "—";
-      const tier = document.createElement("td"); tier.className = "tier-cell"; tier.title = row.tier || ""; tier.textContent = row.tier || "—";
+      const tier = document.createElement("td"); tier.className = "tier-cell"; tier.textContent = peerCategoryLabel(row.tier);
       const topic = document.createElement("td"); topic.className = "topic-cell"; topic.title = row.topic || ""; topic.textContent = row.topic || "—";
       const expenses = document.createElement("td"); expenses.className = "money-cell"; expenses.textContent = compactMoney(row.expenses);
       const location = document.createElement("td"); location.className = "metadata-cell"; location.textContent = row.location || "—";
       const staff = document.createElement("td"); staff.className = "number-cell"; staff.textContent = row.staff ?? "—";
-      const ea = document.createElement("td"); ea.className = "metadata-cell"; ea.textContent = row.eaAffinity || "—";
+      const ea = document.createElement("td"); ea.className = "metadata-cell"; ea.textContent = eaAffinityLabel(row.eaAffinity);
       const structure = document.createElement("td"); structure.className = "metadata-cell"; structure.textContent = row.structure || "—";
-      if (/^(not coded|uncoded)$/i.test(ea.textContent)) {
+      if (/^(not coded|not classified|uncoded)$/i.test(ea.textContent)) {
         ea.classList.add("has-explainer");
         ea.title = row.categoryProvenance?.ea?.rationale
-          || "EA relationship was not assessed in the preserved source and is not inferred from absence of evidence.";
+          || "The saved source did not establish the organization's connection to effective altruism; blank does not mean none.";
       }
       if (/^(not extracted|not reported|uncoded)$/i.test(structure.textContent)) {
         structure.classList.add("has-explainer");
         structure.title = row.categoryProvenance?.structure?.rationale
-          || "No reporting or organizational structure was recoverable from the preserved source.";
+          || "The saved source did not provide enough information to classify the organization type.";
       }
       const year = document.createElement("td"); year.className = "number-cell"; year.textContent = row.compensationYear || "—";
       const source = document.createElement("td");
       source.className = "source-cell";
-      const previewButton = document.createElement("button"); previewButton.type = "button"; previewButton.className = "preview-button"; previewButton.textContent = "Preview";
+      const previewButton = document.createElement("button"); previewButton.type = "button"; previewButton.className = "preview-button"; previewButton.textContent = "View";
       previewButton.addEventListener("click", () => openSourceDialog(row)); source.append(previewButton);
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
@@ -2622,7 +2647,11 @@
       tableStickyFrame = null;
       document.querySelectorAll("thead th.filterable-column").forEach((header) => {
         const sortButton = header.querySelector("button[data-sort]");
-        if (sortButton) header.style.setProperty("--filter-left", `${sortButton.offsetLeft + sortButton.offsetWidth + 2}px`);
+        if (sortButton) {
+          const desiredLeft = sortButton.offsetLeft + sortButton.offsetWidth + 2;
+          const containedLeft = Math.max(0, header.clientWidth - 18);
+          header.style.setProperty("--filter-left", `${Math.min(desiredLeft, containedLeft)}px`);
+        }
       });
       const headerHeight = document.querySelector("#organization-table thead")?.getBoundingClientRect().height || 29;
       refs.tableScroll.style.setProperty("--table-header-height", `${headerHeight}px`);
@@ -2684,8 +2713,55 @@
     refs.tableBody.querySelector(selector)?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
+  function plainAuditStatus(value) {
+    const raw = String(value || "").trim();
+    const normalized = raw.toLowerCase();
+    if (!normalized) return "Source record";
+    if (normalized.startsWith("high confidence")) return "High-confidence title match";
+    if (normalized.startsWith("medium confidence")) return "Medium-confidence title match";
+    const labels = {
+      "no compensation observation": "No usable pay record",
+      no_expected_compensation_record: "No expected pay record",
+      part_vii_discrepancy: "Part VII amount differs from Schedule J",
+      salary_discrepancy_or_unverifiable: "Salary differs from the source or could not be confirmed",
+      schedule_j_base_omitted_or_mismatched: "Schedule J base pay is missing or inconsistent",
+      verified: "Verified",
+      verified_official_current_form990_pdf: "Verified current official Form 990",
+      verified_official_form990_pdf: "Verified official Form 990",
+      verified_rendered_form990: "Verified Form 990",
+      verified_rendered_form990ez: "Verified Form 990-EZ",
+      verified_source_native_scanned_form990: "Verified scanned Form 990",
+      verified_with_structural_flag: "Verified; organization type flagged",
+      wrong_or_incomplete_source: "Source is incomplete or did not match",
+      "post-freeze archived-source verification": "Verified from saved job posting",
+      "verified source-native form 990 · sensitivity-only peer review": "Verified Form 990; broader peer case",
+    };
+    return labels[normalized] || humanizeCategory(raw);
+  }
+
+  function plainAnalysisStatus(value) {
+    const normalized = String(value || "").trim().toLowerCase();
+    const labels = {
+      primary: "Included in the recommended peer group",
+      primary_with_structure_flag: "Included; organization type flagged for review",
+      primary_older_clean: "Included; older but usable record",
+      primary_current_filing: "Included; current filing",
+      primary_living_review: "Included after the latest review",
+      "selected; no clean observation": "Selected peer, but no clean pay record",
+      excluded_transition: "Excluded because of a leadership transition",
+      excluded_partial_year: "Excluded because it covers only part of a year",
+      excluded_measurement: "Excluded because the pay measure is not comparable",
+      excluded_part_time: "Excluded because the role is part-time",
+      structural_sensitivity: "Broader case because the organization type differs",
+      sensitivity_only: "Broader comparison case",
+      included: "Included",
+      no: "Not included",
+    };
+    return labels[normalized] || (normalized ? humanizeCategory(normalized) : "Outside the recommended peer group");
+  }
+
   function openSourceDialog(row) {
-    $("#dialog-source-type").textContent = `${row.sourceType} · ${row.auditStatus || "source record"}`;
+    $("#dialog-source-type").textContent = `${row.sourceType} · ${plainAuditStatus(row.auditStatus)}`;
     $("#dialog-title").textContent = row.organization;
     $("#dialog-measure-label").textContent = measureLabel(row);
     $("#dialog-value").textContent = money(salary(row));
@@ -2693,23 +2769,23 @@
     const meta = $("#dialog-meta");
     meta.replaceChildren();
     [
-      ["Individual / role", [roleHolder(row), row.rawTitle || row.title].filter(Boolean).join(" · ") || "Not reported"],
-      ["Evidence year", row.compensationYear || "Not reported"],
-      ["Displayed dollar basis", state.inflationAdjusted ? `${DATA.priceBasis} · CPI factor ${Number(row.cpiFactor || 1).toFixed(4)}×` : "Nominal source-year dollars · no CPI adjustment"],
-      ["CPI reference period", row.cpiPeriod || "Not reported"],
-      ["Tier", row.tier || "Not coded"],
-      ["Area", row.topic || "Not coded"],
-      ["Location / work model", [row.location, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
-      ["EA relation", row.eaAffinity || "Not coded"],
-      ["Organization structure", row.structure || "Not coded"],
-      ...(row.sourceMissionOperatingModel ? [["Source-native mission / model", row.sourceMissionOperatingModel]] : []),
-      ...(row.sourceReportingRelationship ? [["Source-native reporting line", row.sourceReportingRelationship]] : []),
-      ["Scale", `${compactMoney(row.expenses)} expenses · ${row.staff ?? "—"} staff${row.staffFte ? ` (${row.staffFte} FTE)` : ""}`],
-      ...(row.filingStaff != null ? [["Form 990 employee field", `${row.filingStaff} on Part I, line 5 (${row.staffYear || row.compensationYear})`]] : []),
-      ...(row.currentFilingStaff != null ? [["Latest Form 990 employee field", `${row.currentFilingStaff} on Part I, line 5 (${row.compensationYear})`]] : []),
-      ["Filing-declared website", row.homepageUrl || "Not available in the preserved source"],
-      ["Local provenance", row.localPath || "No cached original"],
-      ...(row.evidenceUpdate ? [["Evidence review", row.evidenceUpdate.status]] : []),
+      ["Person / role", [roleHolder(row), row.rawTitle || row.title].filter(Boolean).join(" · ") || "Not reported"],
+      ["Pay year", row.compensationYear || "Not reported"],
+      ["Dollar basis shown", state.inflationAdjusted ? `${DATA.priceBasis} · inflation adjustment ${Number(row.cpiFactor || 1).toFixed(4)}×` : "Original reported dollars · no inflation adjustment"],
+      ["Inflation reference period", row.cpiPeriod || "Not reported"],
+      ["Peer group", row.tier || "Not classified"],
+      ["Mission area", row.topic || "Not classified"],
+      ["Location / work arrangement", [row.location, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
+      ["Connection to effective altruism", eaAffinityLabel(row.eaAffinity)],
+      ["Organization type", row.structure || "Not classified"],
+      ...(row.sourceMissionOperatingModel ? [["Mission / operating model (source wording)", row.sourceMissionOperatingModel]] : []),
+      ...(row.sourceReportingRelationship ? [["Reporting line (source wording)", row.sourceReportingRelationship]] : []),
+      ["Organization size", `${compactMoney(row.expenses)} expenses · ${row.staff ?? "—"} staff${row.staffFte ? ` (${row.staffFte} full-time equivalents)` : ""}`],
+      ...(row.filingStaff != null ? [["Employees reported on Form 990", `${row.filingStaff} on Part I, line 5 (${row.staffYear || row.compensationYear})`]] : []),
+      ...(row.currentFilingStaff != null ? [["Employees in latest Form 990", `${row.currentFilingStaff} on Part I, line 5 (${row.compensationYear})`]] : []),
+      ["Website listed in filing", row.homepageUrl || "Not available in the saved source"],
+      ["Saved source file", row.localPath || "No saved original"],
+      ...(row.evidenceUpdate ? [["Source review status", plainAuditStatus(row.evidenceUpdate.status)]] : []),
     ].forEach(([term, description]) => {
       const dt = document.createElement("dt"); dt.textContent = term;
       const dd = document.createElement("dd"); dd.textContent = description;
@@ -2722,10 +2798,10 @@
     external.hidden = !row.sourceUrl; external.href = row.sourceUrl || "#";
     const secondaryCached = $("#dialog-secondary-cached");
     secondaryCached.hidden = !row.secondaryCachedSource; secondaryCached.href = row.secondaryCachedSource || "#";
-    secondaryCached.textContent = row.secondaryCachedLabel ? `Open ${row.secondaryCachedLabel}` : "Open cached staff source";
+    secondaryCached.textContent = row.secondaryCachedLabel ? `Open ${row.secondaryCachedLabel}` : "Open saved staff source";
     const secondaryExternal = $("#dialog-secondary-external");
     secondaryExternal.hidden = !row.secondarySourceUrl; secondaryExternal.href = row.secondarySourceUrl || "#";
-    secondaryExternal.textContent = row.secondarySourceLabel ? `Open ${row.secondarySourceLabel} ↗` : "Open secondary source ↗";
+    secondaryExternal.textContent = row.secondarySourceLabel ? `Open ${row.secondarySourceLabel} ↗` : "Open additional source ↗";
     refs.dialog.showModal();
   }
 
@@ -2736,45 +2812,44 @@
     details.open = false;
     if (!provenance) return;
 
-    $("#dialog-provenance-confidence").textContent = `${provenance.confidence || "Unspecified"} confidence`;
+    $("#dialog-provenance-confidence").textContent = `${humanizeCategory(provenance.confidence || "Unspecified")} confidence in this classification`;
     $("#dialog-provenance-intro").textContent = [
-      provenance.classificationTiming ? `Timing: ${provenance.classificationTiming.replaceAll("_", " ")}.` : "",
-      provenance.provenanceType ? `Provenance: ${provenance.provenanceType.replaceAll("_", " ").replaceAll(" + ", "; ")}.` : "",
-      provenance.caveats ? `Caveat: ${provenance.caveats}` : "",
+      "These categories were assigned without using pay.",
+      provenance.caveats ? `Important note: ${provenance.caveats}` : "",
     ].filter(Boolean).join(" ");
 
     const records = $("#dialog-provenance-records");
     records.replaceChildren();
     const categories = [
-      ["Tier", [provenance.tier.value, provenance.tier.label].filter(Boolean).join(" · "), provenance.tier.rationale, provenance.tier.citation],
-      ["EA relationship", provenance.ea.value || "Uncoded", provenance.ea.rationale, provenance.ea.citation],
-      ["Structure", [provenance.structure.expected && `Expected: ${provenance.structure.expected}`, provenance.structure.observationFlag && `Observation flag: ${provenance.structure.observationFlag}`].filter(Boolean).join(" · ") || "Uncoded", provenance.structure.rationale, provenance.structure.citation],
-      ["Area", [provenance.topic.value, provenance.topic.sourceDescription].filter(Boolean).join(" · ") || "Uncoded", provenance.topic.rationale, provenance.topic.citation],
-      ["Analysis title class", provenance.title.analysisGroup || "Uncoded", provenance.title.rationale, provenance.title.citation],
+      ["Peer group", [provenance.tier.value, provenance.tier.label].filter(Boolean).join(" · "), provenance.tier.rationale, provenance.tier.citation],
+      ["Connection to effective altruism", provenance.ea.value || "Not classified", provenance.ea.rationale, provenance.ea.citation],
+      ["Organization type", [provenance.structure.expected && `Expected type: ${provenance.structure.expected}`, provenance.structure.observationFlag && `Record flag: ${provenance.structure.observationFlag}`].filter(Boolean).join(" · ") || "Not classified", provenance.structure.rationale, provenance.structure.citation],
+      ["Mission area", [provenance.topic.value, provenance.topic.sourceDescription].filter(Boolean).join(" · ") || "Not classified", provenance.topic.rationale, provenance.topic.citation],
+      ["Job-title category", provenance.title.analysisGroup || "Not classified", provenance.title.rationale, provenance.title.citation],
     ];
     const observation = row.observationCategoryProvenance;
     if (observation) {
       const differences = [];
-      if (observation.tier.value !== provenance.tier.value) differences.push(`selection tier ${provenance.tier.value || "uncoded"} → filing tier ${observation.tier.value || "uncoded"}`);
-      if (observation.topic.value !== provenance.topic.value) differences.push("filing-normalized topic differs from the selection-stage label");
+      if (observation.tier.value !== provenance.tier.value) differences.push(`original peer group ${provenance.tier.value || "not classified"} → filed-record peer group ${observation.tier.value || "not classified"}`);
+      if (observation.topic.value !== provenance.topic.value) differences.push("the mission area used for the filed record differs from the original peer-selection label");
       categories.push([
-        "Filing observation review",
+        "Review of the filed record",
         [observation.tier.value && `Tier ${observation.tier.value}`, observation.tier.label, observation.structure.observationFlag && `Flag: ${observation.structure.observationFlag}`].filter(Boolean).join(" · "),
-        [observation.tier.rationale, observation.structure.rationale, differences.length ? `Recorded difference: ${differences.join("; ")}.` : "Selection and filing tier/topic classifications agree."].filter(Boolean).join(" "),
+        [observation.tier.rationale, observation.structure.rationale, differences.length ? `Recorded difference: ${differences.join("; ")}.` : "The peer group and mission area agree between the selection and filing reviews."].filter(Boolean).join(" "),
         [observation.tier.citation, observation.structure.citation].filter(Boolean).join(" | "),
       ]);
     }
     const historical = row.historicalCategoryProvenance;
     if (historical) {
       const historicalValues = [
-        `EA ${historical.ea.value || "uncoded"}`,
-        `structure ${historical.structure.expected || "uncoded"}`,
-        `topic ${historical.topic.value || "uncoded"}`,
+        `EA ${historical.ea.value || "not classified"}`,
+        `organization type ${historical.structure.expected || "not classified"}`,
+        `mission area ${historical.topic.value || "not classified"}`,
       ].join(" · ");
       categories.push([
-        "Historical explainer state",
+        "Earlier category record",
         historicalValues,
-        "The preserved historical explainer left these posting fields uncoded unless an exact frozen pre-compensation match existed. The displayed categories above come from the separate post-freeze source-review enrichment and do not rewrite that record.",
+        "The earlier record left these job-posting fields unclassified unless an exact pre-pay match existed. The categories shown above were added in a later source review; the original record was not changed.",
         [historical.ea.citation, historical.structure.citation, historical.topic.citation].filter(Boolean).join(" | "),
       ]);
     }
@@ -2784,7 +2859,7 @@
       const headingLabel = document.createElement("span"); headingLabel.textContent = label;
       const headingValue = document.createElement("strong"); headingValue.textContent = value;
       heading.append(headingLabel, headingValue);
-      const description = document.createElement("p"); description.textContent = rationale || "No additional rationale was preserved.";
+      const description = document.createElement("p"); description.textContent = rationale || "No additional explanation is available.";
       const citations = document.createElement("div"); citations.className = "provenance-citations";
       appendCitationLinks(citations, citation);
       section.append(heading, description, citations);
@@ -2794,23 +2869,23 @@
     const links = $("#dialog-provenance-links");
     links.replaceChildren();
     const provenanceLinks = [
-      ["Category dictionary", DATA.categoryExplainers.dictionaryPath],
-      ["Row-level rationale CSV", DATA.categoryExplainers.rationalesPath],
-      ["Methodology notes", DATA.categoryExplainers.methodologyPath],
-      ["Validation report", DATA.categoryExplainers.validationPath],
+      ["Category definitions", DATA.categoryExplainers.dictionaryPath],
+      ["Reasons for each row (CSV)", DATA.categoryExplainers.rationalesPath],
+      ["How categories were assigned", DATA.categoryExplainers.methodologyPath],
+      ["Data-quality report", DATA.categoryExplainers.validationPath],
     ];
     if (row.categoryEnrichment) provenanceLinks.push(
-      ["Posting enrichment CSV", DATA.categoryExplainers.jobAdEnrichmentPath],
-      ["Posting enrichment methodology", DATA.categoryExplainers.jobAdEnrichmentMethodologyPath],
+      ["Job-posting category data", DATA.categoryExplainers.jobAdEnrichmentPath],
+      ["How job-posting categories were assigned", DATA.categoryExplainers.jobAdEnrichmentMethodologyPath],
     );
     if (row.evidenceUpdate) provenanceLinks.push(
-      ["Posting evidence update", DATA.categoryExplainers.jobAdEvidenceUpdatesPath],
+      ["Job-posting source update", DATA.categoryExplainers.jobAdEvidenceUpdatesPath],
     );
     if (row.positionTaxonomy) provenanceLinks.push(
-      ["Standardized-position catalog", DATA.categoryExplainers.positionCatalogPath],
-      ["Position methodology", DATA.categoryExplainers.positionMethodologyPath],
-      ["Position observations", DATA.categoryExplainers.positionObservationsPath],
-      ["Position taxonomy", DATA.categoryExplainers.positionTaxonomyPath],
+      ["Standardized position list", DATA.categoryExplainers.positionCatalogPath],
+      ["How positions were grouped", DATA.categoryExplainers.positionMethodologyPath],
+      ["Position-level records", DATA.categoryExplainers.positionObservationsPath],
+      ["Position classification rules", DATA.categoryExplainers.positionTaxonomyPath],
     );
     provenanceLinks.forEach(([label, href]) => {
       const anchor = document.createElement("a"); anchor.href = href; anchor.target = "_blank"; anchor.textContent = `${label} ↗`;
@@ -2820,7 +2895,7 @@
 
   function appendCitationLinks(container, citation) {
     if (!citation) {
-      container.textContent = "No record-level citation preserved.";
+      container.textContent = "No row-specific source citation is available.";
       return;
     }
     citation.split(" | ").forEach((item, index) => {
@@ -2843,22 +2918,22 @@
   }
 
   function measureLabel(row = null) {
-    const basis = state.inflationAdjusted ? "July 2026 USD" : "source-year USD";
-    if (row && rowStream(row) === "jobAds") return `Posting midpoint, ${basis}`;
+    const basis = state.inflationAdjusted ? "July 2026 USD" : "original reported USD";
+    if (row && rowStream(row) === "jobAds") return `Job-posting midpoint, ${basis}`;
     if (row) {
       const rowMeasure = state.stream === "incumbents" ? state.measure : "base";
       return {
-        base: `Schedule J base, ${basis}`,
-        cash: `Part VII reportable cash proxy, ${basis}`,
-        total: `Filing total proxy, ${basis}`,
+        base: `Base pay (Schedule J), ${basis}`,
+        cash: `Reported cash pay (Part VII), ${basis}`,
+        total: `Total reported pay, ${basis}`,
       }[rowMeasure];
     }
-    if (state.stream === "combined") return `Comparable salary proxy, ${basis}`;
-    if (state.stream === "jobAds") return `Posting midpoint, ${basis}`;
+    if (state.stream === "combined") return `Comparable pay estimate, ${basis}`;
+    if (state.stream === "jobAds") return `Job-posting midpoint, ${basis}`;
     return {
-      base: `Schedule J base, ${basis}`,
-      cash: `Part VII reportable cash proxy, ${basis}`,
-      total: `Filing total proxy, ${basis}`,
+      base: `Base pay (Schedule J), ${basis}`,
+      cash: `Reported cash pay (Part VII), ${basis}`,
+      total: `Total reported pay, ${basis}`,
     }[state.measure];
   }
 
@@ -2877,8 +2952,8 @@
       if (label && (input.value === "comparability" || input.value === "sourceType")) {
         label.title = input.disabled
           ? (input.value === "comparability"
-            ? "Unavailable: the validated automatic-weight rules currently cover the CEO benchmark only."
-            : "Unavailable: non-CEO positions currently contain one Form 990 evidence stream only.")
+            ? "Unavailable: automatic weighting currently covers the CEO benchmark only."
+            : "Unavailable: non-CEO positions currently contain only Form 990 records.")
           : "";
       }
     });
@@ -2891,17 +2966,17 @@
     const balanced = state.weightings.has("streamBalanced") && state.stream === "combined";
     let baseDescription = components.length
       ? state.weightings.has("comparability")
-        ? `Base weight = adaptive RP Form 990 scale similarity (target filing effective n = ${state.autoTargetEss}) for filings and bounded frozen match-score similarity for recruitment postings. Salary is not used to calculate either rule.`
-        : `Base weight = ${components.join(" × ")}. Missing manually weighted continuous values receive a 0.45 multiplier.`
+        ? `Automatic weights compare Form 990 organizations with RP by expenses and staff (target effective sample size ${state.autoTargetEss}); job postings use reviewed non-pay similarity scores. Salary is not used.`
+        : `Weights combine ${components.join(" × ")}. Records missing a selected size, staff, or year value receive a reduced weight.`
       : (isCeoPosition()
-        ? "No components selected: equal base weights."
-        : "No components selected: automatic weights are equalized by selected organization.");
+        ? "No weighting options selected: every included record counts equally."
+        : "No weighting options selected: each selected organization has equal total influence.");
     if (!isCeoPosition()) {
-      if (components.length) baseDescription += " Automatic weights are then equalized by selected organization before any user row multiplier.";
-      baseDescription += " CEO Auto-weights are disabled because these validated automatic rules have not been extended to this position.";
+      if (components.length) baseDescription += " The results are then balanced so each selected organization has equal total influence before any custom row adjustment.";
+      baseDescription += " Automatic CEO weighting has not yet been extended to this position.";
     }
     refs.weightingDescription.textContent = balanced
-      ? `${baseDescription} Form 990s and recruitment postings are then rescaled to 50/50 total influence.`
+      ? `${baseDescription} Form 990 records and job postings then receive equal total influence.`
       : baseDescription;
     const discrete = DISCRETE_WEIGHT_KEYS.filter((key) => state.weightings.has(key));
     refs.discreteWeightEditors.hidden = !discrete.length;
@@ -2910,26 +2985,26 @@
       const weights = ensureDiscreteWeights(key);
       const details = document.createElement("details");
       details.open = discrete.length === 1;
-      const summary = document.createElement("summary"); summary.textContent = `${WEIGHT_LABELS[key]} category multipliers`;
+      const summary = document.createElement("summary"); summary.textContent = `${WEIGHT_LABELS[key]} category weights`;
       const note = document.createElement("p"); note.className = "discrete-weight-note";
       const componentNote = key === "titleGroup" && !isCeoPosition()
-        ? "Title families organize reviewed source-native titles within this position and begin at a neutral 1.00."
+        ? "Title categories organize job titles within this position while keeping the wording from each source. They begin at a neutral 1.00."
         : DISCRETE_WEIGHT_NOTES[key];
-      note.textContent = `${componentNote} Definitions and provenance come from the preserved explainer package and the separately labeled recruitment-posting enrichment. Suggested multipliers are editable sensitivity judgments, not source rules; 1.00 is the reference and 0 excludes a category.`;
+      note.textContent = `${componentNote} Suggested weights use reviewed non-pay categories and are editable: 1.00 is the reference and 0 removes a category from the results.`;
       const grid = document.createElement("div"); grid.className = "discrete-weight-grid";
       Object.keys(weights).sort((a, b) => a.localeCompare(b)).forEach((category) => {
         const label = document.createElement("span"); label.className = "discrete-weight-category";
         const labelText = document.createElement("span");
-        const categoryLabel = key === "titleGroup" && !isCeoPosition() ? humanizeCategory(category) : category;
+        const categoryLabel = categoryDisplayLabel(key, category);
         labelText.textContent = categoryLabel; labelText.title = categoryLabel;
         const help = document.createElement("button");
         help.type = "button"; help.className = "info-tooltip"; help.textContent = "?";
         help.dataset.tooltip = discreteWeightExplanation(key, category);
-        help.setAttribute("aria-label", `About ${WEIGHT_LABELS[key]} category ${category}`);
+        help.setAttribute("aria-label", `About ${WEIGHT_LABELS[key]} category ${categoryLabel}`);
         label.append(labelText, help);
         const input = document.createElement("input");
         input.type = "number"; input.min = "0"; input.max = "10"; input.step = "0.05"; input.value = weights[category];
-        input.setAttribute("aria-label", `${WEIGHT_LABELS[key]} multiplier for ${category}`);
+        input.setAttribute("aria-label", `${WEIGHT_LABELS[key]} multiplier for ${categoryLabel}`);
         input.addEventListener("change", () => {
           weights[category] = clamp(Number(input.value) || 0, 0, 10);
           input.value = weights[category];
@@ -2988,31 +3063,31 @@
           refs.autoTargetEssField.hidden = true;
           values = [...autoCalibration.scores.values()];
           format = (value) => value.toFixed(0);
-          parameter = `Recruitment postings · frozen match-score ratio · mean score ${autoCalibration.scoreMean.toFixed(1)} · ESS ${autoCalibration.ess.toFixed(1)} · max ${autoCalibration.maximum.toFixed(2)}`;
-          axisTitle = "Frozen match score (0–100)";
+          parameter = `Job postings · average similarity score ${autoCalibration.scoreMean.toFixed(1)} · effective sample size ${autoCalibration.ess.toFixed(1)} · largest weight ${autoCalibration.maximum.toFixed(2)}`;
+          axisTitle = "Reviewed similarity score (0–100)";
         } else {
           values = [0, ...autoCalibration.distances.values()];
           format = (value) => value.toFixed(1);
           parameter = autoCalibration.status === "adaptive_kernel"
-            ? `Form 990 stream · target ESS ${state.autoTargetEss} · h ${autoCalibration.bandwidth.toFixed(2)} · achieved ${autoCalibration.ess.toFixed(1)} · max ${autoCalibration.maximum.toFixed(2)}`
-            : `Form 990 stream · uniform weights · n ${autoCalibration.ess} is at or below the target or lacks enough scale variation`;
+            ? `Form 990 records · target effective sample size ${state.autoTargetEss} · achieved ${autoCalibration.ess.toFixed(1)} · largest weight ${autoCalibration.maximum.toFixed(2)}`
+            : `Form 990 records · equal weights because the group is small or lacks enough organization-size information`;
           if (postingCalibration) {
-            parameter += `; postings · frozen match-score ratio · ESS ${postingCalibration.ess.toFixed(1)} · max ${postingCalibration.maximum.toFixed(2)}`;
+            parameter += `; job postings · effective sample size ${postingCalibration.ess.toFixed(1)} · largest weight ${postingCalibration.maximum.toFixed(2)}`;
           }
-          axisTitle = "Robust log-scale distance from RP";
+          axisTitle = "Difference in organization size from RP (log scale)";
         }
       } else if (key === "size") {
         values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
-        parameter = `Target ${compactMoney(state.targetExpense)} · bandwidth ${state.expenseBandwidth.toFixed(2)}`;
+        parameter = `Reference ${compactMoney(state.targetExpense)} · matching range ${state.expenseBandwidth.toFixed(2)}`;
         axisTitle = "Annual expenses (USD)";
       } else if (key === "staff") {
         values = rows().map((row) => row.staff).filter((value) => value > 0); format = (value) => Math.round(value).toLocaleString(); logarithmic = true;
-        parameter = `Target ${state.targetStaff.toLocaleString()} · bandwidth ${state.staffBandwidth.toFixed(2)}`;
+        parameter = `Reference ${state.targetStaff.toLocaleString()} · matching range ${state.staffBandwidth.toFixed(2)}`;
         axisTitle = "Staff count";
       } else {
         values = rows().map((row) => row.compensationYear).filter((value) => value > 0); format = (value) => value.toFixed(0);
         parameter = `${state.recencyHalfLife.toFixed(1)}-year half-life`;
-        axisTitle = "Evidence year";
+        axisTitle = "Pay year";
       }
       if (!values.length) return;
       const postingProfile = key === "comparability" && autoCalibration?.status === "posting_match_score";
@@ -3046,9 +3121,9 @@
       }
       const description = document.createElement("span"); description.textContent = parameter;
       const referenceDescription = rpReference == null ? "" : key === "comparability"
-        ? "; RP distance 0"
+        ? "; RP reference"
         : `; RP operating target ${format(rpReference)}`;
-      const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]} relative weight-response curve${referenceDescription}` });
+      const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${WEIGHT_LABELS[key]}: how the record's weight changes${referenceDescription}` });
       const xTicks = Array.from({ length: 4 }, (_, index) => {
         const ratio = index / 3;
         const transformed = domainMin + ratio * domainSpan;
@@ -3100,8 +3175,8 @@
         "text-anchor": "middle", class: "weight-profile-axis-title",
       });
       yTitle.textContent = key === "comparability"
-        ? (postingProfile ? "Automatic weight" : "Kernel value (0–1)")
-        : "Relative multiplier";
+        ? (postingProfile ? "Automatic weight" : "Similarity weight (0–1)")
+        : "Weight multiplier";
       svg.append(xTitle, yTitle); figure.append(heading, description, svg); refs.weightProfileSlots.get(key).append(figure);
       initializeHelpTooltips(figure);
     });
@@ -3114,16 +3189,16 @@
     refs.positionSelectedLabel.textContent = position.pageLabel;
     const description = position.description || (ceo
       ? DEFAULT_POSITION.description
-      : "Named compensation observations reported in nonprofit Form 990 filings.");
+      : "Pay reported for selected roles in nonprofit Form 990 filings.");
     refs.positionDescription.textContent = ceo
       ? description
-      : `${description} Automatic row weights are organization-balanced so each selected peer organization has equal total influence.`;
+      : `${description} Records are balanced so each selected organization has equal total influence.`;
     refs.appTitle.setAttribute("aria-label", `${position.pageLabel} salary benchmark`);
     document.title = `${position.pageLabel} Salary Benchmark · vetr.dev`;
     refs.appDescription.content = `Interactive Rethink Priorities ${position.pageLabel} salary benchmark explorer`;
     refs.tablePanel.setAttribute("aria-label", ceo
-      ? "Organization-level evidence table"
-      : `${position.pageLabel} compensation-observation evidence table`);
+      ? "Organization pay table"
+      : `${position.pageLabel} pay table`);
     const tableCompensationTerm = compactCompensationMeasureLabel();
     refs.adjustedCompensationTerm.textContent = tableCompensationTerm;
     refs.reportedCompensationTerm.textContent = tableCompensationTerm;
@@ -3139,10 +3214,10 @@
     refs.stream.disabled = !ceo;
     refs.streamDescription.textContent = ceo
       ? ""
-      : "This position currently uses incumbent compensation reported in Form 990 filings; CEO recruitment postings are not mixed into it.";
+      : "This position currently uses pay reported in Form 990 filings. CEO job postings are not mixed into it.";
     refs.autoWeightNote.textContent = ceo
-      ? "Scale-matched 990s · match-scored postings"
-      : "CEO automatic rules only";
+      ? "Form 990s: similarity to RP's size · postings: non-pay similarity"
+      : "Automatic CEO weighting only";
   }
 
   function updateHeadings() {
@@ -3155,36 +3230,35 @@
     refs.chartTitle.textContent = state.view === "scatter"
       ? `${positionPrefix}${plotted.shortLabel} by ${axisDescriptor("scatterX").shortLabel}`
       : `${positionPrefix}Distribution of ${plotted.shortLabel}`;
-    refs.statNUnit.textContent = isCombined || !isCeoPosition() ? "observations" : "organizations";
+    refs.statNUnit.textContent = isCombined || !isCeoPosition() ? "records" : "organizations";
     refs.priceBasisStatus.textContent = priceBasisLabel();
     refs.scatterControls.hidden = state.view !== "scatter";
     refs.contourField.hidden = state.view !== "scatter";
     refs.binField.hidden = state.view !== "histogram";
     refs.histogramAxisSettings.hidden = state.view !== "histogram";
     refs.scatterAxisSettings.hidden = state.view !== "scatter";
-    refs.axisSettingsContext.textContent = state.view === "scatter" ? "Axes" : "Axis";
     refs.sampleDescription.textContent = (!isCeoPosition() ? {
-      primary: "Paid, role-matched Form 990 observations with no source-indicated compensation-year transition, or separately verified full-year coverage, included by default for this position.",
-      sensitivity: "The default position observations plus records flagged for sensitivity analysis.",
-      clean: "Default position observations without a retained structural or partial-year flag.",
-      tierA: "Position observations from the narrowest organization peer tier.",
-      observed: "Every reported observation with the selected compensation measure, including excluded or unresolved records.",
+      primary: "Paid records for this role with a full-year record and no known leadership transition; included by default.",
+      sensitivity: "The recommended records plus broader cases kept to show how much the results change.",
+      clean: "Recommended records from organization types similar to RP and without a partial-year concern.",
+      tierA: "Records from the closest peer group for this role.",
+      observed: "Every record with the selected pay measure, including records normally excluded or not fully resolved.",
     } : {
-      primary: "Source-validated rows retained by the dated living review: a resolved entity, positive point amount, eligible full period, and full-time solo organization-wide chief executive.",
-      sensitivity: "The living peer set plus records explicitly designated for sensitivity analysis; partial-year, part-time, and unresolved substantive exclusions remain unchecked.",
-      clean: "Primary rows with no structural compensation or leadership flags.",
-      tierA: "The narrowest peer definition: incumbent Tier A or job-ad strict-primary rows.",
-      observed: "Every row with a usable salary value, including broader sensitivity cases.",
+      primary: "Reviewed records for a confirmed organization, with pay above zero for a full year and one full-time top executive.",
+      sensitivity: "The recommended peer group plus broader comparison cases. Part-year, part-time, and unresolved cases remain unselected by default.",
+      clean: "Recommended records from organization types similar to RP and without a leadership concern.",
+      tierA: "The closest Form 990 peers and closest-matching job postings.",
+      observed: "Every record with usable pay, including broader comparison cases.",
     })[state.sample];
     refs.colorDescription.textContent = {
-      tier: "A / strict-primary is narrowest; B / secondary is broader; C / expanded is the broadest peer tier. Tier affects optional similarity weighting, not source validity.",
-      topic: "Mission or operating-model category coded during peer selection.",
-      eaAffinity: "Degree of effective-altruist alignment or functional adjacency coded before compensation review.",
-      sourceType: "Distinguishes realized Form 990 compensation from advertised job-posting midpoints.",
+      tier: "Peer groups run from closest to broader and broadest comparisons. Peer group affects optional weighting, not whether the source itself is valid.",
+      topic: "Mission or operating category assigned during peer review.",
+      eaAffinity: "Whether the organization has a documented connection to effective altruism or instead does similar work, assigned before reviewing pay.",
+      sourceType: "Separates pay reported in Form 990 filings from salary ranges advertised in job postings.",
       titleGroup: isCeoPosition()
-        ? "A broad grouping used only for navigation; displayed job titles remain source-native."
-        : "A reviewed role and seniority family; displayed titles remain source-native.",
-      structure: "Leadership or organizational-structure coding from the validation record.",
+        ? "A broad category used for navigation; job titles remain exactly as written in the source."
+        : "A reviewed role and seniority category; job titles remain exactly as written in the source.",
+      structure: "Organization and leadership type recorded during source review.",
     }[state.chartColor];
     refs.expenseBandwidthValue.value = `${state.expenseBandwidth.toFixed(2)}×`;
     refs.staffBandwidthValue.value = `${state.staffBandwidth.toFixed(2)}×`;

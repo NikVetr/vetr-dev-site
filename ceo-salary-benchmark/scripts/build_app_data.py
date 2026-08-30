@@ -1560,7 +1560,7 @@ def build_position_data(
         "pageLabel": "CEO",
         "menuGroup": "Chief executive",
         "defaultMeasure": "base",
-        "description": "The fully validated chief-executive benchmark, including incumbent Form 990s and recruitment postings.",
+        "description": "Reviewed CEO pay records from Form 990 filings and job postings.",
     }]
     for catalog_source in public_catalog_source_rows:
         key = text(catalog_source["position_key"])
@@ -1585,9 +1585,10 @@ def build_position_data(
             "supportLevel": text(catalog_source["support_level"]),
             "defaultMeasure": "cash",
             "description": (
-                f"{text(catalog_source['description'])} {counts['defaultIncluded']} current paid observations "
-                f"across {counts['organizations']} selected peer organizations. "
-                "Part VII reportable cash is the coverage-first default; Form 990 reporting thresholds make this an upward-selected public-compensation sample."
+                f"{text(catalog_source['description'])} {counts['defaultIncluded']} usable pay records "
+                f"from {counts['organizations']} selected peer organizations. "
+                "Reported cash pay from Part VII gives the broadest available coverage. "
+                "Because Form 990 only requires some employees' pay to be reported, these records may overrepresent higher-paid roles."
             ),
             "counts": counts,
             "methodologyPath": "benchmark/enrichment/form990_position_methodology.md",

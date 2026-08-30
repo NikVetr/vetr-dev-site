@@ -110,13 +110,12 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .field-description { color: var(--muted); font-size: 9.5px; line-height: 1.45; }
 .choice-group { grid-template-columns: repeat(auto-fit, minmax(min(78px, 100%), 1fr)); gap: 4px; margin-inline: 0; padding: 0; border: 0; }
 .choice-group legend { grid-column: 1 / -1; margin-bottom: 5px; padding: 0; }
-.choice-group label { display: flex; align-items: center; min-width: 0; gap: 3px; padding: 7px 4px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel-strong); font-size: clamp(8.5px, .72vw, 10.5px); letter-spacing: -.01em; white-space: nowrap; cursor: pointer; }
+.choice-group label { display: flex; align-items: center; min-width: 0; gap: 3px; padding: 7px 4px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel-strong); font-size: clamp(8.5px, .72vw, 10.5px); line-height: 1.1; letter-spacing: -.01em; white-space: normal; overflow-wrap: anywhere; cursor: pointer; }
 .choice-group input { margin: 0; accent-color: var(--green); }
 .choice-group label:has(input:checked) { background: var(--green-soft); color: var(--green); font-weight: 700; }
 .view-setting { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .dollar-basis-setting { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .axis-settings { gap: 7px; }
-.axis-settings-title { color: var(--ink); font-size: 11px; font-weight: 750; }
 .axis-view-settings { display: grid; grid-template-columns: minmax(0, 1fr); gap: 7px; }
 .axis-control-setting { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
 .scatter-axis-heading { color: var(--green); font-size: 9.5px; }
@@ -197,7 +196,7 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .chart-wrap { position: relative; flex: 1 1 0; min-height: 180px; margin-top: 10px; }
 .chart-panel:has(.scatter-controls:not([hidden])) .chart-wrap { min-height: 160px; }
 .scatter-controls { display: flex; justify-content: flex-start; align-items: center; min-height: 24px; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--line); }
-.scatter-correlations { display: block; align-self: center; margin-right: auto; color: var(--ink); font-size: 9px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; white-space: nowrap; }
+.scatter-correlations { display: block; align-self: center; margin-right: 4px; color: var(--ink); font-size: 9px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; white-space: nowrap; }
 .view-setting .contour-toggle { display: flex; grid-column: 1 / -1; align-items: center; gap: 4px; margin-top: 4px; padding: 6px 8px 1px; border-top: 1px solid var(--line); color: var(--ink); font-size: 9px; }
 .view-setting .contour-toggle label { display: flex; align-items: center; gap: 5px; padding: 0; border: 0; background: transparent; }
 .view-setting .contour-toggle input { margin: 0; accent-color: var(--green); }
@@ -340,6 +339,7 @@ thead button[data-sort]::after { content: "↕"; color: var(--muted); font-size:
 thead button[data-active="true"]::after { content: "↓"; color: var(--green); opacity: 1; }
 thead button[data-active="true"][data-direction="asc"]::after { content: "↑"; }
 .filterable-column { position: relative; padding-right: 25px; }
+.filterable-column > button[data-sort] { max-width: calc(100% - 18px); white-space: normal; line-height: 1.05; }
 .filter-menu details { position: relative; }
 .filter-menu summary { position: relative; min-width: 76px; padding: 5px 20px 5px 6px; border: 1px solid var(--line-dark); border-radius: 3px; background: white; color: var(--green); font-size: 9px; font-weight: 650; text-transform: none; letter-spacing: 0; cursor: pointer; list-style: none; }
 .filter-menu summary::-webkit-details-marker { display: none; }
@@ -409,7 +409,9 @@ tbody tr.is-plot-ineligible .source-cell a { color: #7b898f; }
 .rp-reference-row .rp-reference-preview { border-color: rgba(255, 255, 255, .72); background: transparent; color: white; }
 .rp-reference-row .rp-reference-preview:hover { background: rgba(255, 255, 255, .14); }
 .check-column { width: 28px; text-align: center; }
+.check-column > button[data-sort] { justify-content: center; width: 100%; }
 .row-toggle { accent-color: var(--green); }
+tbody tr.is-plot-ineligible .row-toggle:checked { accent-color: #7b898f; }
 .org-cell { min-width: 166px; }
 .organization-name { display: inline-block; max-width: 100%; color: var(--ink); font-size: 11px; font-weight: 700; text-decoration: none; }
 a.organization-name:hover { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
