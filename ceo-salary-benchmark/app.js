@@ -289,9 +289,9 @@
 
   const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
   const WEIGHT_LABELS = {
-    comparability: "Automatic weights", size: "Expense-size similarity", staff: "Staff-size similarity", recency: "Record age",
-    tier: "Peer group", eaAffinity: "Connection to effective altruism", sourceType: "Pay source", topic: "Mission area",
-    titleGroup: "Job-title category", structure: "Organization type", streamBalanced: "Equal influence by pay source",
+    comparability: "Automatic weights", size: "Expenses", staff: "Staff", recency: "Recency",
+    tier: "Peer group", eaAffinity: "Effective Altruism", sourceType: "Pay source", topic: "Area",
+    titleGroup: "Title", structure: "Organization type", streamBalanced: "Balance pay sources",
   };
   const DISCRETE_WEIGHT_NOTES = {
     tier: "Suggested values give the closest peer groups more influence and broader comparison groups less.",
@@ -2210,8 +2210,8 @@
       ? `${money(displayedRange.low)}–${money(displayedRange.high)}`
       : "";
     const colorLabel = {
-      topic: "Mission area", eaAffinity: "Connection to effective altruism", sourceType: "Pay source",
-      titleGroup: "Job-title category", structure: "Organization type",
+      topic: "Area", eaAffinity: "Effective Altruism", sourceType: "Pay source",
+      titleGroup: "Title group", structure: "Organization type",
     }[state.chartColor];
     const details = [
       context.chartDetail,
@@ -2346,8 +2346,8 @@
     document.querySelectorAll("[data-filter-menu]").forEach((container) => {
       const key = container.dataset.filterMenu;
       const label = {
-        title: "Job title", sourceType: "Pay source", tier: "Peer group", topic: "Mission area",
-        location: "Location", eaAffinity: "Connection to effective altruism", structure: "Organization type",
+        title: "Title", sourceType: "Pay source", tier: "Peer group", topic: "Area",
+        location: "Location", eaAffinity: "Effective Altruism", structure: "Organization type",
       }[key] || key;
       const values = [...new Set(rows().map((row) => String(row[key] || "Not reported")))].sort((a, b) => a.localeCompare(b));
       const selected = state.filters[key];
@@ -2645,14 +2645,6 @@
     if (tableStickyFrame != null) cancelAnimationFrame(tableStickyFrame);
     tableStickyFrame = requestAnimationFrame(() => {
       tableStickyFrame = null;
-      document.querySelectorAll("thead th.filterable-column").forEach((header) => {
-        const sortButton = header.querySelector("button[data-sort]");
-        if (sortButton) {
-          const desiredLeft = sortButton.offsetLeft + sortButton.offsetWidth + 2;
-          const containedLeft = Math.max(0, header.clientWidth - 18);
-          header.style.setProperty("--filter-left", `${Math.min(desiredLeft, containedLeft)}px`);
-        }
-      });
       const headerHeight = document.querySelector("#organization-table thead")?.getBoundingClientRect().height || 29;
       refs.tableScroll.style.setProperty("--table-header-height", `${headerHeight}px`);
       let referenceTop = headerHeight;
@@ -2774,9 +2766,9 @@
       ["Dollar basis shown", state.inflationAdjusted ? `${DATA.priceBasis} · inflation adjustment ${Number(row.cpiFactor || 1).toFixed(4)}×` : "Original reported dollars · no inflation adjustment"],
       ["Inflation reference period", row.cpiPeriod || "Not reported"],
       ["Peer group", row.tier || "Not classified"],
-      ["Mission area", row.topic || "Not classified"],
+      ["Area", row.topic || "Not classified"],
       ["Location / work arrangement", [row.location, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
-      ["Connection to effective altruism", eaAffinityLabel(row.eaAffinity)],
+      ["Effective Altruism", eaAffinityLabel(row.eaAffinity)],
       ["Organization type", row.structure || "Not classified"],
       ...(row.sourceMissionOperatingModel ? [["Mission / operating model (source wording)", row.sourceMissionOperatingModel]] : []),
       ...(row.sourceReportingRelationship ? [["Reporting line (source wording)", row.sourceReportingRelationship]] : []),
@@ -2822,10 +2814,10 @@
     records.replaceChildren();
     const categories = [
       ["Peer group", [provenance.tier.value, provenance.tier.label].filter(Boolean).join(" · "), provenance.tier.rationale, provenance.tier.citation],
-      ["Connection to effective altruism", provenance.ea.value || "Not classified", provenance.ea.rationale, provenance.ea.citation],
+      ["Effective Altruism", provenance.ea.value || "Not classified", provenance.ea.rationale, provenance.ea.citation],
       ["Organization type", [provenance.structure.expected && `Expected type: ${provenance.structure.expected}`, provenance.structure.observationFlag && `Record flag: ${provenance.structure.observationFlag}`].filter(Boolean).join(" · ") || "Not classified", provenance.structure.rationale, provenance.structure.citation],
-      ["Mission area", [provenance.topic.value, provenance.topic.sourceDescription].filter(Boolean).join(" · ") || "Not classified", provenance.topic.rationale, provenance.topic.citation],
-      ["Job-title category", provenance.title.analysisGroup || "Not classified", provenance.title.rationale, provenance.title.citation],
+      ["Area", [provenance.topic.value, provenance.topic.sourceDescription].filter(Boolean).join(" · ") || "Not classified", provenance.topic.rationale, provenance.topic.citation],
+      ["Title", provenance.title.analysisGroup || "Not classified", provenance.title.rationale, provenance.title.citation],
     ];
     const observation = row.observationCategoryProvenance;
     if (observation) {
@@ -3237,19 +3229,14 @@
     refs.binField.hidden = state.view !== "histogram";
     refs.histogramAxisSettings.hidden = state.view !== "histogram";
     refs.scatterAxisSettings.hidden = state.view !== "scatter";
-    refs.sampleDescription.textContent = (!isCeoPosition() ? {
-      primary: "Paid records for this role with a full-year record and no known leadership transition; included by default.",
-      sensitivity: "The recommended records plus broader cases kept to show how much the results change.",
-      clean: "Recommended records from organization types similar to RP and without a partial-year concern.",
-      tierA: "Records from the closest peer group for this role.",
-      observed: "Every record with the selected pay measure, including records normally excluded or not fully resolved.",
-    } : {
-      primary: "Reviewed records for a confirmed organization, with pay above zero for a full year and one full-time top executive.",
-      sensitivity: "The recommended peer group plus broader comparison cases. Part-year, part-time, and unresolved cases remain unselected by default.",
-      clean: "Recommended records from organization types similar to RP and without a leadership concern.",
-      tierA: "The closest Form 990 peers and closest-matching job postings.",
-      observed: "Every record with usable pay, including broader comparison cases.",
-    })[state.sample];
+    const roleLabel = positionDefinition().pageLabel;
+    refs.sampleDescription.textContent = {
+      primary: `Reviewed full-year ${roleLabel} pay records used in the main benchmark.`,
+      sensitivity: "Recommended records plus broader comparisons.",
+      clean: "Recommended records from organization types most similar to RP.",
+      tierA: "Only the closest Form 990 peers and job-posting matches.",
+      observed: "All records with usable pay, including broader comparisons.",
+    }[state.sample];
     refs.colorDescription.textContent = {
       tier: "Peer groups run from closest to broader and broadest comparisons. Peer group affects optional weighting, not whether the source itself is valid.",
       topic: "Mission or operating category assigned during peer review.",

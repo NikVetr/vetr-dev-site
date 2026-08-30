@@ -44,11 +44,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#included-count")).toHaveCount(0);
   await expect(page.locator(".table-panel")).toHaveAttribute("aria-label", "Organization pay table");
   const tableHeaders = await page.locator("#organization-table thead th").evaluateAll((headers) => headers.map((header) => {
-    const explicitLabel = header.querySelector(":scope > button[data-sort], :scope > .sr-only");
+    const explicitLabel = header.querySelector("button[data-sort], :scope > .sr-only");
     if (explicitLabel) return explicitLabel.textContent.trim();
     return [...header.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent.trim()).join(" ").trim();
   }));
-  expect(tableHeaders).toEqual(["Selected", "Organization", "Job title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Similarity score", "Peer group", "Mission area", "Location", "Connection to effective altruism", "Organization type", "Pay year", "Pay source", "Reported Salary", "Source"]);
+  expect(tableHeaders).toEqual(["Selected", "Organization", "Title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Similarity Score", "Peer Group", "Area", "Location", "Effective Altruism", "Organization Type", "Year", "Pay Source", "Reported Salary", "Source"]);
   await expect(page.locator('thead button[data-sort="adjustedSalary"] > span > span')).toHaveCount(2);
   await expect(page.locator('thead button[data-sort="reportedSalary"] > span > span')).toHaveCount(2);
   expect(await page.locator("#organization-table .title-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThan(140);
@@ -197,12 +197,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('input[name="distribution"][value="lognormal"]').check();
   await expect(page.locator("#salary-chart")).toContainText("Weighted records per bar");
   await expect(page.locator("#quantile-basis")).toHaveText("Estimated from the fitted lognormal curve for Salary");
-  await expect(page.getByRole("heading", { name: /Quantiles \(percentile cutoffs\)/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^Quantiles/ })).toBeVisible();
   await page.getByRole("button", { name: "About quantiles" }).hover();
   await expect(page.locator("#help-tooltip")).toContainText("50th percentile is the median");
-  await expect(page.locator('#quantile-granularity option[value="quintiles"]')).toHaveText("Quintiles (5 groups)");
+  await expect(page.locator('#quantile-granularity option[value="quintiles"]')).toHaveText("Quintiles");
   await expect(page.locator("#mark-curve")).toBeChecked();
-  await expect(page.locator("label:has(#mark-curve)")).toContainText("Show percentile markers");
+  await expect(page.locator("label:has(#mark-curve)")).toContainText("Mark graph");
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-tick-outline")).toHaveCount(4);
   await expect(page.locator(".curve-quantile-tick-outline").first()).toHaveCSS("stroke", "rgba(255, 255, 255, 0.96)");
@@ -229,7 +229,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".density-line")).toHaveAttribute("d", /L/);
   await expect(page.locator("#bin-count")).toHaveAttribute("min", "2");
   await expect(page.locator("#bin-count")).toHaveAttribute("max", "200");
-  await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
+  await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
   await expect(page.locator("tbody .tier-cell").first()).toHaveText("Form 990 · closest peers");
   await expect(page.locator("tbody .tier-cell").nth(1)).toHaveText("Form 990 · closest peers");
   const rpReferenceRow = page.locator("tbody .rp-reference-row");
@@ -458,10 +458,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
   await page.locator("#reset-settings").click();
   await expect(page.locator("#sample-select")).toContainText("Recommended peers");
-  await expect(page.locator("#sample-select")).toContainText("Recommended + broader cases");
-  await expect(page.locator("#sample-description")).toContainText("pay above zero for a full year");
+  await expect(page.locator("#sample-select")).toContainText("Recommended + broader");
+  await expect(page.locator('#sample-select option[value="tierA"]')).toHaveText("Closest peers only");
+  await expect(page.locator("#sample-description")).toContainText("Reviewed full-year CEO pay records");
   await page.locator("#sample-select").selectOption("sensitivity");
-  await expect(page.locator("#sample-description")).toContainText("broader comparison cases");
+  await expect(page.locator("#sample-description")).toContainText("broader comparisons");
   await expect(page.locator("#stat-n")).toHaveText("133");
   await page.locator("#stream-select").selectOption("incumbents");
   await page.locator("#measure-select").selectOption("cash");
@@ -470,7 +471,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     await expect(page.locator(`tbody tr[data-id]:has(.organization-name:text-is("${organization}")) .row-toggle`)).toBeChecked();
   }
   await page.locator("#sample-select").selectOption("clean");
-  await expect(page.locator("#sample-description")).toContainText("organization types similar to RP");
+  await expect(page.locator("#sample-description")).toContainText("organization types most similar to RP");
   await page.locator("#reset-settings").click();
   await page.locator('[data-filter-menu="title"] summary').click();
   await page.locator("#salary-filter-summary").click();
@@ -580,15 +581,15 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   const salaryHeader = page.locator('thead button[data-sort="adjustedSalary"]');
   const reportedSalaryHeader = page.locator('thead button[data-sort="reportedSalary"]');
   const titleHeader = page.locator('thead button[data-sort="title"]');
-  await expect(salaryHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "none");
+  await expect(salaryHeader.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "none");
   await salaryHeader.click();
-  await expect(salaryHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
+  await expect(salaryHeader.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
   await salaryHeader.click();
-  await expect(salaryHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "descending");
+  await expect(salaryHeader.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "descending");
   await reportedSalaryHeader.click();
-  await expect(reportedSalaryHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
+  await expect(reportedSalaryHeader.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
   await titleHeader.click();
-  await expect(titleHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
+  await expect(titleHeader.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
   const tierHeaderWidth = await page.locator("thead .tier-column").first().evaluate((cell) => cell.getBoundingClientRect().width);
   expect(tierHeaderWidth).toBeLessThanOrEqual(80);
   await expect(page.locator("thead tr")).toHaveCount(1);
@@ -596,9 +597,19 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   const filterPlacements = await page.locator("thead th.filterable-column").evaluateAll((headers) => headers.map((header) => {
     const sort = header.querySelector("button[data-sort]").getBoundingClientRect();
     const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
-    return { width: filter.width, gap: filter.left - sort.right };
+    const bounds = header.getBoundingClientRect();
+    const lineHeight = Number.parseFloat(getComputedStyle(header.querySelector("button[data-sort]")).lineHeight);
+    return {
+      width: filter.width,
+      gap: filter.left - sort.right,
+      contained: filter.left >= bounds.left && filter.right <= bounds.right,
+      lines: sort.height / lineHeight,
+    };
   }));
-  expect(filterPlacements.every(({ width, gap }) => width <= 18 && gap >= 0 && gap <= 6)).toBe(true);
+  expect(
+    filterPlacements.every(({ width, gap, contained, lines }) => width <= 18 && gap >= 4 && gap <= 5 && contained && lines <= 2.2),
+    JSON.stringify(filterPlacements),
+  ).toBe(true);
   await page.locator(".table-panel").screenshot({ path: "tmp/app-dual-salary-columns.png" });
 
   await page.locator("#reset-settings").click();
@@ -691,7 +702,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(componentOrder.slice(0, 2)).toEqual(["expense-target-field", "staff-target-field"]);
   expect(await page.locator("#expense-target-field").evaluate((element) => element.querySelector("#expense-bandwidth").compareDocumentPosition(element.querySelector("#weight-profile-size")) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
   expect(await page.locator("#staff-target-field").evaluate((element) => element.querySelector("#staff-bandwidth").compareDocumentPosition(element.querySelector("#weight-profile-staff")) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
-  await expect(page.locator("#weighting-description")).toContainText("Expense-size similarity × Staff-size similarity");
+  await expect(page.locator("#weighting-description")).toContainText("Expenses × Staff");
   await page.locator('#weighting-components input[value="tier"]').check();
   await expect(page.locator("#discrete-weight-editors")).toBeVisible();
   await expect(page.locator("#discrete-weight-editors .discrete-weight-note")).toContainText("closest peer groups");
@@ -716,23 +727,23 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.getByLabel("Peer group multiplier for Form 990 · closest peers")).toHaveValue("0.8");
 
   await page.locator('#weighting-components input[value="eaAffinity"]').check();
-  const eaWeightEditor = page.locator("#discrete-weight-editors details").filter({ hasText: "Connection to effective altruism category weights" });
+  const eaWeightEditor = page.locator("#discrete-weight-editors details").filter({ hasText: "Effective Altruism category weights" });
   await eaWeightEditor.locator("summary").click();
   expect(await eaWeightEditor.locator(".discrete-weight-grid").evaluate((grid) =>
     grid.querySelectorAll(".info-tooltip").length === grid.querySelectorAll('input[type="number"]').length)).toBe(true);
-  await page.getByRole("button", { name: "About Connection to effective altruism category Connected to effective altruism" }).hover();
+  await page.getByRole("button", { name: "About Effective Altruism category Connected to effective altruism" }).hover();
   await expect(page.locator("#help-tooltip")).toContainText("publicly linked to effective altruism");
-  await expect(page.getByLabel("Connection to effective altruism multiplier for Effective-altruism organization")).toHaveValue("1");
-  await expect(page.getByLabel("Connection to effective altruism multiplier for Connected to effective altruism")).toHaveValue("0.85");
-  await expect(page.getByLabel("Connection to effective altruism multiplier for Similar work; no documented connection")).toHaveValue("0.65");
+  await expect(page.getByLabel("Effective Altruism multiplier for Effective-altruism organization")).toHaveValue("1");
+  await expect(page.getByLabel("Effective Altruism multiplier for Connected to effective altruism")).toHaveValue("0.85");
+  await expect(page.getByLabel("Effective Altruism multiplier for Similar work; no documented connection")).toHaveValue("0.65");
   await page.locator('#weighting-components input[value="titleGroup"]').check();
-  await expect(page.getByLabel("Job-title category multiplier for CEO")).toHaveValue("1");
-  await expect(page.getByLabel("Job-title category multiplier for Executive Director")).toHaveValue("0.85");
-  await expect(page.getByLabel("Job-title category multiplier for President")).toHaveValue("0.75");
-  await expect(page.getByLabel("Job-title category multiplier for Not reported")).toHaveValue("0.35");
+  await expect(page.getByLabel("Title multiplier for CEO")).toHaveValue("1");
+  await expect(page.getByLabel("Title multiplier for Executive Director")).toHaveValue("0.85");
+  await expect(page.getByLabel("Title multiplier for President")).toHaveValue("0.75");
+  await expect(page.getByLabel("Title multiplier for Not reported")).toHaveValue("0.35");
   await page.locator('#weighting-components input[value="topic"]').check();
-  await expect(page.getByLabel("Mission area multiplier for AI, catastrophic risk, biosecurity, and technology policy")).toHaveValue("1");
-  await expect(page.getByLabel("Mission area multiplier for Research, evaluation, philanthropy infrastructure, and policy")).toHaveValue("0.9");
+  await expect(page.getByLabel("Area multiplier for AI, catastrophic risk, biosecurity, and technology policy")).toHaveValue("1");
+  await expect(page.getByLabel("Area multiplier for Research, evaluation, philanthropy infrastructure, and policy")).toHaveValue("0.9");
   await page.locator('#weighting-components input[value="structure"]').check();
   const structureWeightEditor = page.locator("#discrete-weight-editors details").filter({ hasText: "Organization type category weights" });
   await structureWeightEditor.locator("summary").click();
@@ -909,11 +920,15 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await page.goto("/ceo-salary-benchmark/");
   const scrollingPanel = page.locator(".settings-panel");
   const overflowPanel = await scrollingPanel.evaluate((element) => ({
-    width: element.clientWidth, scrollHeight: element.scrollHeight, clientHeight: element.clientHeight,
+    width: element.clientWidth, scrollWidth: element.scrollWidth,
+    scrollHeight: element.scrollHeight, clientHeight: element.clientHeight,
     gutter: getComputedStyle(element).scrollbarGutter,
+    overflowX: getComputedStyle(element).overflowX,
   }));
   expect(overflowPanel.scrollHeight).toBeGreaterThan(overflowPanel.clientHeight);
   expect(overflowPanel.gutter).toContain("stable");
+  expect(overflowPanel.overflowX).toBe("hidden");
+  expect(overflowPanel.scrollWidth).toBeLessThanOrEqual(overflowPanel.width + 1);
   const hiddenScrollbarWidth = await scrollingPanel.evaluate((element) => {
     element.style.overflowY = "hidden";
     const width = element.clientWidth;
@@ -937,6 +952,7 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await page.locator("#discrete-weight-editors").screenshot({ path: "tmp/app-discrete-weights.png" });
   await page.locator('#weighting-components input[value="eaAffinity"]').check();
   await page.locator('#weighting-components input[value="structure"]').check();
+  expect(await scrollingPanel.evaluate((element) => element.scrollWidth <= element.clientWidth + 1)).toBe(true);
   await expect(page.locator(".weighting-field")).toHaveCSS("position", "sticky");
   await scrollingPanel.evaluate((element) => { element.scrollTop = element.scrollHeight; });
   const settingsBounds = await scrollingPanel.boundingBox();
@@ -1740,7 +1756,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   await supportedRow.getByRole("button", { name: "View" }).click();
   await page.locator("#dialog-category-provenance").click();
   const titleProvenance = page.locator("#dialog-provenance-records section")
-    .filter({ hasText: "Job-title category" });
+    .filter({ hasText: "Title" });
   await expect(titleProvenance.locator(`a[href="${supportedClassification.cachedSource}"]`)).toBeVisible();
   await expect(titleProvenance.locator(`a[href="${supportedClassification.sourceUrl}"]`)).toBeVisible();
   await page.locator(".dialog-close").click();
