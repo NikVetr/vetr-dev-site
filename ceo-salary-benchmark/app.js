@@ -1427,16 +1427,19 @@
     const matrix = label.getScreenCTM();
     const screenScaleY = Math.max(matrix ? Math.hypot(matrix.c, matrix.d) : 1, 0.01);
     const renderedLineHeight = Math.min(percentileBox.height, amountBox.height) * screenScaleY;
-    const lineGapPx = clamp(renderedLineHeight * 0.24, 2, 4);
+    // SVG text bounds include more font-cell leading than the visible glyphs.
+    // Slightly overlap those bounds so the painted labels retain only a small
+    // optical gap instead of looking like two unrelated annotations.
+    const lineInsetPx = clamp(renderedLineHeight * 0.34, 4, 6);
     const guideGapPx = clamp(amountBox.height * screenScaleY * 0.55, 5, 8);
-    const lineGap = lineGapPx / screenScaleY;
+    const lineInset = lineInsetPx / screenScaleY;
     const guideGap = guideGapPx / screenScaleY;
     const amountY = -guideGap - (amountBox.y + amountBox.height + amountStroke);
     amountLine.setAttribute("y", amountY.toFixed(2));
     const amountTextTop = amountY + amountBox.y;
-    const percentileY = amountTextTop - lineGap - (percentileBox.y + percentileBox.height);
+    const percentileY = amountTextTop + lineInset - (percentileBox.y + percentileBox.height);
     percentileLine.setAttribute("y", percentileY.toFixed(2));
-    label.dataset.lineGapPx = lineGapPx.toFixed(2);
+    label.dataset.lineInsetPx = lineInsetPx.toFixed(2);
     label.dataset.guideGapPx = guideGapPx.toFixed(2);
   }
 

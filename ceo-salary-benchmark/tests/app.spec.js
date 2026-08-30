@@ -369,8 +369,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(await page.locator(".empirical-quantile-mark").evaluateAll((marks) => marks.every((mark) => {
     const percentile = mark.querySelector(".percentile").getBoundingClientRect();
     const amount = mark.querySelector(".amount").getBoundingClientRect();
-    const gap = amount.top - percentile.bottom;
-    return gap >= 2 && gap <= 4;
+    const inset = percentile.bottom - amount.top;
+    return inset >= 3.8 && inset <= 6.2;
   }))).toBe(true);
   expect(await page.locator(".empirical-quantile-guide").evaluateAll((guides) => guides.every((guide, index) => {
     const amount = document.querySelectorAll(".empirical-quantile-mark .amount")[index].getBoundingClientRect();
@@ -1646,7 +1646,7 @@ test("empirical percentile labels remain separated at common browser zooms", asy
           return {
             left: box.left,
             right: box.right,
-            targetLineGap: Number(mark.dataset.lineGapPx),
+            targetLineInset: Number(mark.dataset.lineInsetPx),
             percentileBottom: percentile.bottom,
             amountTop: amount.top,
             amountBottom: amount.bottom,
@@ -1660,10 +1660,10 @@ test("empirical percentile labels remain separated at common browser zooms", asy
     geometry.labels.forEach((label, index) => {
       expect(label.left).toBeGreaterThanOrEqual(geometry.svgLeft + 1);
       expect(label.right).toBeLessThanOrEqual(geometry.svgRight - 1);
-      const lineGap = label.amountTop - label.percentileBottom;
-      expect(lineGap).toBeGreaterThanOrEqual(1.85);
-      expect(lineGap).toBeLessThanOrEqual(4.15);
-      expect(Math.abs(lineGap - label.targetLineGap)).toBeLessThanOrEqual(0.35);
+      const lineInset = label.percentileBottom - label.amountTop;
+      expect(lineInset).toBeGreaterThanOrEqual(3.75);
+      expect(lineInset).toBeLessThanOrEqual(6.25);
+      expect(Math.abs(lineInset - label.targetLineInset)).toBeLessThanOrEqual(0.35);
       expect(label.amountBottom + 4.5).toBeLessThanOrEqual(label.guideTop);
       if (index) {
         expect(label.left).toBeGreaterThanOrEqual(geometry.labels[index - 1].right + 5);
