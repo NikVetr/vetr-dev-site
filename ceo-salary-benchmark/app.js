@@ -32,7 +32,7 @@
   if (!(RP_FORM990_PROFILE.expenses > 0) || !(RP_FORM990_PROFILE.staff > 0)) {
     throw new Error("The same-source RP Form 990 scale profile is unavailable.");
   }
-  const AUTO_WEIGHT_TOOLTIP = `Auto-weights uses an outcome-free Gaussian similarity kernel on robust-standardized log Form 990 expenses and staff. Its RP anchors—${compactMoney(RP_FORM990_PROFILE.expenses)} expenses and ${RP_FORM990_PROFILE.staff} employees—use the same filing definitions as peers. The bandwidth reaches the selected effective sample size while keeping the largest normalized filing-kernel weight at or below 6; samples too small to reach the target are weighted uniformly. Missing scale values are median-imputed in log space with a missingness penalty. Recruitment postings remain uniform because their scale fields are not Form 990 measures. Optional evidence-stream balancing and user multipliers are applied afterward and may change the final effective sample size or maximum weight. The predictive audit found that scale improved out-of-sample salary prediction, while the historical composite score did not show a reliable gain; salary-trained category weights remain too unstable for a production default.`;
+  const AUTO_WEIGHT_TOOLTIP = `Auto-weights uses two outcome-free rules: salary never enters its calculation. Form 990 rows use an outcome-free Gaussian similarity kernel on robust-standardized log Form 990 expenses and staff. Its RP anchors—${compactMoney(RP_FORM990_PROFILE.expenses)} expenses and ${RP_FORM990_PROFILE.staff} employees—use the same filing definitions as peers. The bandwidth reaches the selected effective sample size while keeping the largest normalized filing-kernel weight at or below 6; samples too small to reach the target are weighted uniformly. Missing filing scale values are median-imputed in log space with a missingness penalty. Recruitment postings instead use their frozen, pay-blind match scores: each score is divided by the mean among selected eligible postings, bounded to 0.50–1.50 while preserving mean weight 1, and never trained on advertised pay. Optional evidence-stream balancing and user multipliers are applied afterward and may change the final effective sample size or maximum weight. The predictive audit found that filing scale improved out-of-sample salary prediction, while salary-trained category weights remain too unstable for a production default.`;
   const DEFAULT_POSITION = Object.freeze({
     key: "ceo", label: "CEO", pageLabel: "CEO", defaultMeasure: "base",
     description: "The fully validated chief-executive benchmark, including incumbent Form 990s and recruitment postings.",
@@ -201,9 +201,11 @@
       scatterY: [...document.querySelectorAll('input[name="scatter-y-axis-scale"]')],
     },
     histogramAxisSettings: $("#histogram-axis-settings"), scatterAxisSettings: $("#scatter-axis-settings"),
+    axisSettingsContext: $("#axis-settings-context"),
     scatterControls: $("#scatter-controls"), contourField: $("#contour-field"),
     chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
     comparabilityProfileField: $("#comparability-profile-field"),
+    autoTargetEssField: $("#auto-target-ess-field"),
     autoTargetEss: $("#auto-target-ess"), autoTargetEssValue: $("#auto-target-ess-value"),
     autoWeightNote: $("#auto-weight-note"),
     weightProfileSlots: new Map(["comparability", "size", "staff", "recency"].map((key) => [key, $(`#weight-profile-${key}`)])),
@@ -656,7 +658,7 @@
     const isRpReference = row.analysisStatus === "reference_not_analyzed" || row.id === DATA.rpReference?.id;
     const candidates = isRpReference
       ? activeRpReferences(positionKey)
-      : positionIncumbents(positionKey).filter((candidate) => candidate.defaultIncluded);
+      : positionIncumbents(positionKey).filter(presetSelected);
     return candidates.filter((candidate) => (
       filingSourceId(candidate) === sourceId
       && candidate.id !== row.id
@@ -924,18 +926,68 @@
     };
   }
 
+  function boundedMeanOneWeights(ratios, minimum = 0.5, maximum = 1.5) {
+    if (!ratios.length || ratios.some((value) => !Number.isFinite(value) || value <= 0)) {
+      throw new Error("Posting Auto-weight normalization received an invalid score ratio.");
+    }
+    const meanAt = (multiplier) => ratios.reduce(
+      (sum, value) => sum + clamp(value * multiplier, minimum, maximum), 0,
+    ) / ratios.length;
+    let low = 0;
+    let high = 1;
+    while (meanAt(high) < 1 && high < 1e6) high *= 2;
+    if (meanAt(high) < 1) throw new Error("Posting Auto-weights could not be normalized to mean 1 within their bounds.");
+    for (let iteration = 0; iteration < 80; iteration += 1) {
+      const midpoint = (low + high) / 2;
+      if (meanAt(midpoint) >= 1) high = midpoint;
+      else low = midpoint;
+    }
+    const weights = ratios.map((value) => clamp(value * high, minimum, maximum));
+    const mean = weights.reduce((sum, value) => sum + value, 0) / weights.length;
+    if (Math.abs(mean - 1) > 1e-8) throw new Error("Posting Auto-weights did not normalize to mean 1.");
+    return { weights, multiplier: high };
+  }
+
+  function postingMatchCalibration(candidateRows) {
+    if (!candidateRows.length) throw new Error("Auto-weight calibration received an empty recruitment-posting sample.");
+    const scores = candidateRows.map((row) => {
+      const score = Number(row.comparabilityScore);
+      if (!Number.isFinite(score) || score <= 0) {
+        throw new Error(`Invalid frozen match score for recruitment posting ${row.id}.`);
+      }
+      return score;
+    });
+    const scoreMean = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+    const ratios = scores.map((score) => score / scoreMean);
+    const bounded = boundedMeanOneWeights(ratios);
+    return {
+      bandwidth: null,
+      ess: effectiveSampleSize(bounded.weights),
+      maximum: Math.max(...bounded.weights),
+      minimum: Math.min(...bounded.weights),
+      scoreMean,
+      normalizationMultiplier: bounded.multiplier,
+      status: "posting_match_score",
+      scores: new Map(candidateRows.map((row, index) => [row.id, scores[index]])),
+      weights: new Map(candidateRows.map((row, index) => [row.id, bounded.weights[index]])),
+    };
+  }
+
   function autoWeightCalibrations(candidateRows) {
     const incumbents = candidateRows.filter((row) => rowStream(row) === "incumbents");
-    return incumbents.length
-      ? new Map([["incumbents", scaleSimilarityCalibration(incumbents)]])
-      : new Map();
+    const jobAds = candidateRows.filter((row) => rowStream(row) === "jobAds");
+    const calibrations = new Map();
+    if (incumbents.length) calibrations.set("incumbents", scaleSimilarityCalibration(incumbents));
+    if (jobAds.length) calibrations.set("jobAds", postingMatchCalibration(jobAds));
+    return calibrations;
   }
 
   function baseWeight(row, autoCalibrations = new Map()) {
     const latestYear = Math.max(...rows().map((item) => item.compensationYear || 0));
     let weight = 1;
-    if (state.weightings.has("comparability") && rowStream(row) === "incumbents") {
-      const autoWeight = autoCalibrations.get("incumbents")?.weights.get(row.id);
+    if (state.weightings.has("comparability")) {
+      const stream = rowStream(row);
+      const autoWeight = autoCalibrations.get(stream)?.weights.get(row.id);
       if (!Number.isFinite(autoWeight) || autoWeight <= 0) throw new Error(`Missing Auto-weight for ${row.id}.`);
       weight *= autoWeight;
     }
@@ -980,7 +1032,18 @@
         const organization = String(item.row.organization || "Not reported");
         item.rawWeight = (item.automaticWeight / organizationTotals.get(organization)) * item.customWeight;
       });
-    } else selected.forEach((item) => { item.rawWeight = item.automaticWeight * item.customWeight; });
+    } else {
+      const balanceGroupCounts = new Map();
+      selected.forEach((item) => {
+        const group = String(item.row.organizationBalanceGroup || "").trim();
+        if (group) balanceGroupCounts.set(group, (balanceGroupCounts.get(group) || 0) + 1);
+      });
+      selected.forEach((item) => {
+        const group = String(item.row.organizationBalanceGroup || "").trim();
+        const organizationShare = group ? 1 / balanceGroupCounts.get(group) : 1;
+        item.rawWeight = item.automaticWeight * organizationShare * item.customWeight;
+      });
+    }
     const positive = selected.filter((item) => item.rawWeight > 0 && Number.isFinite(item.rawWeight));
     if (state.weightings.has("streamBalanced") && state.stream === "combined") {
       const streamTotals = new Map();
@@ -1441,6 +1504,10 @@
     percentileLine.setAttribute("y", percentileY.toFixed(2));
     label.dataset.lineInsetPx = lineInsetPx.toFixed(2);
     label.dataset.guideGapPx = guideGapPx.toFixed(2);
+    // Start the guide slightly behind the amount line. The guide is painted
+    // first, so the label's white outline masks the overlap while the visible
+    // dash still meets the bottom of the annotation.
+    return { guideStartOffset: -(guideGap + amountStroke * 3) };
   }
 
   function selectEmpiricalQuantileLabels(candidates) {
@@ -1496,7 +1563,7 @@
       label.append(percentileLine, amountLine);
       label.setAttribute("visibility", "hidden");
       svg.append(label);
-      positionQuantileLabelStack(label, percentileLine, amountLine);
+      const labelLayout = positionQuantileLabelStack(label, percentileLine, amountLine);
       const rawBounds = label.getBoundingClientRect();
       const bounds = {
         left: rawBounds.left - 3,
@@ -1508,12 +1575,15 @@
       label.remove();
       label.removeAttribute("visibility");
       if (bounds.left < svgBounds.left + 2 || bounds.right > svgBounds.right - 2) return null;
-      return { percentile, value, x, bounds, label };
+      return {
+        percentile, value, x, bounds, label,
+        guideY1: margin.top + labelLayout.guideStartOffset,
+      };
     }).filter(Boolean);
     const retained = selectEmpiricalQuantileLabels(candidates);
     retained.sort((first, second) => first.x - second.x).forEach((candidate) => {
       svg.append(svgElement("line", {
-        x1: candidate.x, x2: candidate.x, y1: margin.top, y2: plotBottom,
+        x1: candidate.x, x2: candidate.x, y1: candidate.guideY1, y2: plotBottom,
         class: "empirical-quantile-guide", "aria-hidden": "true",
       }));
       svg.append(candidate.label);
@@ -2765,15 +2835,13 @@
   }
 
   function renderWeightControls() {
-    if (!isCeoPosition() || state.stream === "jobAds") {
-      state.weightings.delete("comparability");
-    }
+    if (!isCeoPosition()) state.weightings.delete("comparability");
     if (!isCeoPosition()) {
       state.weightings.delete("sourceType");
     }
     refs.weightingComponents.forEach((input) => {
       input.checked = state.weightings.has(input.value);
-      if (input.value === "comparability") input.disabled = !isCeoPosition() || state.stream === "jobAds";
+      if (input.value === "comparability") input.disabled = !isCeoPosition();
       else if (input.value === "sourceType") input.disabled = !isCeoPosition();
       else if (input.value === "streamBalanced") input.disabled = state.stream !== "combined" || !isCeoPosition();
       else input.disabled = false;
@@ -2781,9 +2849,7 @@
       if (label && (input.value === "comparability" || input.value === "sourceType")) {
         label.title = input.disabled
           ? (input.value === "comparability"
-            ? (isCeoPosition()
-              ? "Unavailable in recruitment-only mode: posting scale fields are not Form 990 measures."
-              : "Unavailable: the validated scale-kernel audit currently covers the CEO benchmark only.")
+            ? "Unavailable: the validated automatic-weight rules currently cover the CEO benchmark only."
             : "Unavailable: non-CEO positions currently contain one Form 990 evidence stream only.")
           : "";
       }
@@ -2797,14 +2863,14 @@
     const balanced = state.weightings.has("streamBalanced") && state.stream === "combined";
     let baseDescription = components.length
       ? state.weightings.has("comparability")
-        ? `Base weight = adaptive RP Form 990 scale similarity (target filing effective n = ${state.autoTargetEss}); recruitment postings remain uniform.`
+        ? `Base weight = adaptive RP Form 990 scale similarity (target filing effective n = ${state.autoTargetEss}) for filings and bounded frozen match-score similarity for recruitment postings. Salary is not used to calculate either rule.`
         : `Base weight = ${components.join(" × ")}. Missing manually weighted continuous values receive a 0.45 multiplier.`
       : (isCeoPosition()
         ? "No components selected: equal base weights."
         : "No components selected: automatic weights are equalized by selected organization.");
     if (!isCeoPosition()) {
       if (components.length) baseDescription += " Automatic weights are then equalized by selected organization before any user row multiplier.";
-      baseDescription += " CEO Auto-weights are disabled because the validated kernel audit has not been extended to this position.";
+      baseDescription += " CEO Auto-weights are disabled because these validated automatic rules have not been extended to this position.";
     }
     refs.weightingDescription.textContent = balanced
       ? `${baseDescription} Form 990s and recruitment postings are then rescaled to 50/50 total influence.`
@@ -2851,6 +2917,12 @@
   function componentResponse(key, value, autoCalibration = null) {
     if (key === "comparability") {
       if (!autoCalibration) return 0;
+      if (autoCalibration.status === "posting_match_score") {
+        return clamp(
+          (value / autoCalibration.scoreMean) * autoCalibration.normalizationMultiplier,
+          0.5, 1.5,
+        );
+      }
       return autoCalibration.status === "adaptive_kernel"
         ? Math.exp(-0.5 * (value / autoCalibration.bandwidth) ** 2)
         : 1;
@@ -2864,6 +2936,7 @@
   function renderWeightProfiles() {
     const keys = ["comparability", "size", "staff", "recency"].filter((key) => state.weightings.has(key));
     refs.comparabilityProfileField.hidden = !state.weightings.has("comparability");
+    refs.autoTargetEssField.hidden = !state.weightings.has("comparability") || state.stream === "jobAds";
     refs.rpScaleReference.hidden = !keys.some((key) => key === "size" || key === "staff");
     refs.weightProfileSlots.forEach((slot) => slot.replaceChildren());
     keys.forEach((key) => {
@@ -2875,19 +2948,31 @@
       let autoCalibration = null;
       if (key === "comparability") {
         const candidates = rows().filter((row) => (
-          rowStream(row) === "incumbents"
-          && passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id)
+          passesFilters(row) && salary(row) != null && rowInclusion(row).get(row.id)
           && plotEligibility(row).eligible
         ));
         const calibrations = autoWeightCalibrations(candidates);
-        autoCalibration = calibrations.get("incumbents");
+        const filingCalibration = calibrations.get("incumbents");
+        const postingCalibration = calibrations.get("jobAds");
+        autoCalibration = state.stream === "jobAds" ? postingCalibration : filingCalibration || postingCalibration;
         if (!autoCalibration) return;
-        values = [0, ...autoCalibration.distances.values()];
-        format = (value) => value.toFixed(1);
-        parameter = autoCalibration.status === "adaptive_kernel"
-          ? `Form 990 stream · target ESS ${state.autoTargetEss} · h ${autoCalibration.bandwidth.toFixed(2)} · achieved ${autoCalibration.ess.toFixed(1)} · max ${autoCalibration.maximum.toFixed(2)}`
-          : `Form 990 stream · uniform weights · n ${autoCalibration.ess} is at or below the target or lacks enough scale variation`;
-        axisTitle = "Robust log-scale distance from RP";
+        if (autoCalibration.status === "posting_match_score") {
+          refs.autoTargetEssField.hidden = true;
+          values = [...autoCalibration.scores.values()];
+          format = (value) => value.toFixed(0);
+          parameter = `Recruitment postings · frozen match-score ratio · mean score ${autoCalibration.scoreMean.toFixed(1)} · ESS ${autoCalibration.ess.toFixed(1)} · max ${autoCalibration.maximum.toFixed(2)}`;
+          axisTitle = "Frozen match score (0–100)";
+        } else {
+          values = [0, ...autoCalibration.distances.values()];
+          format = (value) => value.toFixed(1);
+          parameter = autoCalibration.status === "adaptive_kernel"
+            ? `Form 990 stream · target ESS ${state.autoTargetEss} · h ${autoCalibration.bandwidth.toFixed(2)} · achieved ${autoCalibration.ess.toFixed(1)} · max ${autoCalibration.maximum.toFixed(2)}`
+            : `Form 990 stream · uniform weights · n ${autoCalibration.ess} is at or below the target or lacks enough scale variation`;
+          if (postingCalibration) {
+            parameter += `; postings · frozen match-score ratio · ESS ${postingCalibration.ess.toFixed(1)} · max ${postingCalibration.maximum.toFixed(2)}`;
+          }
+          axisTitle = "Robust log-scale distance from RP";
+        }
       } else if (key === "size") {
         values = rows().map((row) => row.expenses).filter((value) => value > 0); format = compactMoney; logarithmic = true;
         parameter = `Target ${compactMoney(state.targetExpense)} · bandwidth ${state.expenseBandwidth.toFixed(2)}`;
@@ -2902,8 +2987,9 @@
         axisTitle = "Evidence year";
       }
       if (!values.length) return;
-      let target = key === "comparability" ? 0 : key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : null;
-      const rpReference = key === "comparability" ? 0 : key === "size" ? RP_WEIGHT_TARGET.expenses : key === "staff" ? RP_WEIGHT_TARGET.staff : null;
+      const postingProfile = key === "comparability" && autoCalibration?.status === "posting_match_score";
+      let target = key === "comparability" ? (postingProfile ? null : 0) : key === "size" ? state.targetExpense : key === "staff" ? state.targetStaff : null;
+      const rpReference = key === "comparability" ? (postingProfile ? null : 0) : key === "size" ? RP_WEIGHT_TARGET.expenses : key === "staff" ? RP_WEIGHT_TARGET.staff : null;
       const domainValues = [...values, target, rpReference].filter((value) => value != null && Number.isFinite(value));
       const rawMin = Math.min(...domainValues); const rawMax = Math.max(...domainValues);
       if (key === "recency") target = rawMax;
@@ -2985,7 +3071,9 @@
         x: 10, y: margin.top + innerHeight / 2, transform: `rotate(-90 10 ${margin.top + innerHeight / 2})`,
         "text-anchor": "middle", class: "weight-profile-axis-title",
       });
-      yTitle.textContent = key === "comparability" ? "Kernel value (0–1)" : "Relative multiplier";
+      yTitle.textContent = key === "comparability"
+        ? (postingProfile ? "Automatic weight" : "Kernel value (0–1)")
+        : "Relative multiplier";
       svg.append(xTitle, yTitle); figure.append(heading, description, svg); refs.weightProfileSlots.get(key).append(figure);
       initializeHelpTooltips(figure);
     });
@@ -3024,7 +3112,9 @@
     refs.streamDescription.textContent = ceo
       ? ""
       : "This position currently uses incumbent compensation reported in Form 990 filings; CEO recruitment postings are not mixed into it.";
-    refs.autoWeightNote.textContent = ceo ? "Adaptive Form 990 scale match" : "CEO kernel audit only";
+    refs.autoWeightNote.textContent = ceo
+      ? "Scale-matched 990s · match-scored postings"
+      : "CEO automatic rules only";
   }
 
   function updateHeadings() {
@@ -3044,6 +3134,7 @@
     refs.binField.hidden = state.view !== "histogram";
     refs.histogramAxisSettings.hidden = state.view !== "histogram";
     refs.scatterAxisSettings.hidden = state.view !== "scatter";
+    refs.axisSettingsContext.textContent = state.view === "scatter" ? "Axes" : "Axis";
     refs.sampleDescription.textContent = (!isCeoPosition() ? {
       primary: "Paid, role-matched Form 990 observations with no source-indicated compensation-year transition, or separately verified full-year coverage, included by default for this position.",
       sensitivity: "The default position observations plus records flagged for sensitivity analysis.",
@@ -3358,7 +3449,7 @@
       state.weightings.delete("comparability");
       state.weightings.delete("sourceType");
       state.weightings.delete("streamBalanced");
-    } else if (state.stream === "jobAds") state.weightings.delete("comparability");
+    }
     state.targetExpense = finiteNumber(analysis.te, state.targetExpense, 1_000_000, 100_000_000);
     state.targetStaff = finiteNumber(analysis.ts, state.targetStaff, 1, 1000);
     state.expenseBandwidth = finiteNumber(analysis.eb, state.expenseBandwidth, 0.2, 1.5);

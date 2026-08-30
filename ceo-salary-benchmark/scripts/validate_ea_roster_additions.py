@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "benchmark" / "enrichment" / "ea_roster_validated_compensation.csv"
 CANDIDATE_REVIEW = ROOT / "benchmark" / "enrichment" / "ea_roster_candidate_review.csv"
+LINGERING_APP_ADDITIONS = ROOT / "benchmark" / "enrichment" / "lingering_org_app_position_additions.csv"
 APP_DATA = ROOT / "app-data.js"
 SOURCE_MANIFEST = ROOT / "benchmark" / "enrichment" / "ea_roster_source_manifest.csv"
 INCUMBENT_UPDATES = ROOT / "benchmark" / "enrichment" / "incumbent_compensation_updates.csv"
@@ -253,18 +254,38 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
             raise ValueError(f"{organization}: generated an unsupported secondary source preview")
 
     candidate_rows = rows(CANDIDATE_REVIEW)
+    lingering_rows = rows(LINGERING_APP_ADDITIONS)
+    if {
+        (row["candidate_organization"], row["person_name"], row["standardized_position"])
+        for row in lingering_rows
+    } != {
+        ("Lead Exposure Elimination Project", "TOMOS DAVIES", "coo"),
+        ("Lead Exposure Elimination Project", "CLARE DONALDSON", "ceo"),
+        ("Lead Exposure Elimination Project", "LUCIA COULTER", "ceo"),
+    }:
+        raise ValueError("Reviewed lingering-organization app boundary changed")
+    if any(row["analysis_status"] != "sensitivity_only" for row in lingering_rows):
+        raise ValueError("Lingering-organization additions must remain sensitivity-only")
+    approved_lingering_organizations = {
+        row["candidate_organization"] for row in lingering_rows
+    }
     unsupported = {
         row["organization"]
         for row in candidate_rows
         if row["app_integration_status"] == "not_integrated_no_validated_compensation"
     }
-    pooled_unsupported = sorted(unsupported & {row.get("organization", "") for row in incumbents})
+    pooled_unsupported = sorted(
+        (unsupported - approved_lingering_organizations)
+        & {row.get("organization", "") for row in incumbents}
+    )
     if pooled_unsupported:
         raise ValueError(f"Unsupported roster candidates entered the incumbent pool: {pooled_unsupported}")
     if len(candidate_rows) != 34 or len(unsupported) != 29:
         raise ValueError("Candidate-review integration boundary changed from 5 reviewed / 29 screening-only")
     if payload.get("summary", {}).get("eaRosterValidatedObservations") != len(reviewed):
         raise ValueError("Generated app summary has the wrong reviewed-roster observation count")
+    if payload.get("summary", {}).get("lingeringOrgSensitivityObservations") != len(lingering_rows):
+        raise ValueError("Generated app summary has the wrong lingering-organization count")
 
 
 def validate_pdf_row(row: dict[str, str], path: Path) -> None:
@@ -451,8 +472,8 @@ def main() -> None:
     validate_screened_roster_entity_update()
     print(
         f"Validated {len(reviewed)} EA-roster compensation observations against preserved source-native filings; "
-        "the entity-deduplicated current Project Healthy Children filing, generated values, previews, "
-        "source links, default exclusions, and the 29-row screening boundary also pass."
+        "the three LEEP sensitivity observations, entity-deduplicated current Project Healthy Children filing, "
+        "generated values, previews, source links, default exclusions, and the 29-row screening boundary also pass."
     )
 
 

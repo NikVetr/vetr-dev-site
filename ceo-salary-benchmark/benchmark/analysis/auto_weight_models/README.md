@@ -9,11 +9,12 @@ category multipliers: the sample is small and selected, important categories are
 sparse or absent for the RP target, mixed models are almost always singular, and
 the best conditional kernels under-cover their nominal 90% intervals.
 
-A defensible production alternative is a transparent, outcome-free **scale
-similarity kernel** using same-definition Form 990 expenses and employees, with
-bandwidth chosen by an effective-sample-size constraint.  Keep peer-taxonomy
-judgments as explicit user sensitivity controls.  A richer, salary-trained kernel
-can be offered only as **Model-informed (experimental)**.
+A defensible production alternative is transparent and outcome-free: use a
+**scale-similarity kernel** based on same-definition expenses and employees for
+Form 990 rows, and a bounded version of the frozen pay-blind match score for
+recruitment postings whose scale fields are not filing-comparable. Keep the richer
+peer-taxonomy judgments as explicit user sensitivity controls. A salary-trained
+kernel can be offered only as **Model-informed (experimental)**.
 
 ## Data and validation design
 
@@ -76,7 +77,13 @@ the largest tested value (2.0), another boundary-instability warning. Full topic
 adds little, and RP's special `RP reference organization` topic mismatches every
 peer equally, so it does not help target weights.
 
-## Production formula: scale similarity
+## Production formula: stream-specific outcome-free similarity
+
+The production Auto-weights use different, definition-appropriate rules within
+the two evidence streams. Salary, advertised pay, and every other compensation
+field are excluded from both calculations.
+
+### Incumbent Form 990 rows
 
 For selected peers, recompute robust log scales
 
@@ -102,15 +109,48 @@ penalty to `d2`; do not apply the current arbitrary 0.45 multiplier. Normalize
 within each evidence stream and combine streams only with an explicit mixture
 share. Do not silently treat job-posting midpoints as exchangeable with Form 990s.
 
-The production app applies this kernel only to incumbent Form 990 rows. Recruitment
-postings retain uniform automatic weights because their budget and headcount fields
-are not Form 990 definitions. The optional 50/50 stream balance is a separate,
-explicit post-kernel mixture rule. User multipliers, stream balancing, and omission
-of rows missing a selected chart axis can change the final displayed effective
-sample size or exceed the filing-kernel maximum; the chart and table report those
-final consequences. If the retained filing sample is smaller than the target ESS,
-or does not contain enough scale variation to estimate both robust scales, it is
-weighted uniformly rather than assigning an arbitrary extreme bandwidth.
+If the retained filing sample is smaller than the target ESS, or does not contain
+enough scale variation to estimate both robust scales, it is weighted uniformly
+rather than assigning an arbitrary extreme bandwidth.
+
+### Recruitment-posting rows
+
+Posting budget and headcount fields are not Form 990 definitions, so recruitment
+rows do not use the filing scale kernel. They use the frozen, pay-blind
+`comparabilityScore` assigned during peer screening. For the selected,
+plot-eligible postings, let
+
+```
+score_bar = mean(score[i])
+r[i] = score[i] / score_bar
+w[i] = clamp(k * r[i], 0.50, 1.50)
+```
+
+Choose the positive scalar `k` by bisection so that `mean(w) = 1`. This bounded
+normalization leaves a score-100 posting above a score-70 posting without allowing
+the judgment score to dominate the sample. Missing, non-finite, or nonpositive
+scores are data errors and stop rendering rather than silently receiving a neutral
+weight. The app records the posting rule's status, ESS, minimum, maximum, and
+selected-score mean for its profile display.
+
+The match-score rule is not a salary-prediction model. The frozen score had no
+demonstrated out-of-sample salary-prediction advantage in the audit above; here it
+is used only as a bounded expression of the already-frozen, compensation-blind
+peer-comparability judgment. Advertised salary midpoints never train or enter the
+weights.
+
+### Combining streams and later adjustments
+
+In recruitment-only mode, the posting rule is normalized to mean 1 among selected
+eligible postings. In combined mode, the filing and posting rules are each first
+calibrated within their own selected eligible stream. Consequently, absent another
+adjustment, total stream influence remains proportional to the number of included
+rows. The optional 50/50 stream balance is a separate, explicit post-calibration
+mixture rule.
+
+User multipliers, stream balancing, and omission of rows missing a selected chart
+axis can change the final displayed effective sample size or exceed the
+filing-kernel maximum; the chart and table report those final consequences.
 
 With same-source anchors, the scale-only conditional P25/P50/P75 is approximately
 $255k/$347k/$482k at ESS 35. This is an association-based sensitivity result, not a

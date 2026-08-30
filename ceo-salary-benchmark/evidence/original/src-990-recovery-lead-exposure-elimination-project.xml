@@ -1,0 +1,794 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2024v5.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2026-07-15T04:25:11-00:00</ReturnTs>
+    <TaxPeriodEndDt>2025-08-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>821650312</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>Alta CPA Group</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>59 Franklin St 2nd Floor</AddressLine1Txt>
+        <CityNm>Annapolis</CityNm>
+        <StateAbbreviationCd>MD</StateAbbreviationCd>
+        <ZIPCd>21401</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2024-09-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>873016729</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>LEADEXPOSUREELIMINATIONPROJECTINC</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>LEAD</BusinessNameControlTxt>
+      <PhoneNum>6306079194</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>2903 PHILADELPHIA PIKE 3557</AddressLine1Txt>
+        <CityNm>CLAYMONT</CityNm>
+        <StateAbbreviationCd>DE</StateAbbreviationCd>
+        <ZIPCd>19703</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>DANIEL WAHL</PersonNm>
+      <PersonTitleTxt>TREASURER</PersonTitleTxt>
+      <PhoneNum>6306079194</PhoneNum>
+      <SignatureDt>2026-07-15</SignatureDt>
+      <DiscussWithPaidPreparerInd>true</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>Jeffrey Griffith</PreparerPersonNm>
+      <PTIN>P01081433</PTIN>
+      <PhoneNum>4103495101</PhoneNum>
+      <PreparationDt>2026-07-15</PreparationDt>
+    </PreparerPersonGrp>
+    <TaxYr>2024</TaxYr>
+    <BuildTS>2025-03-06 01:10:19Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="7">
+    <IRS990 documentId="990" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <AddressChangeInd>X</AddressChangeInd>
+      <PrincipalOfficerNm>ANNACHRISTINA THORSHEIM</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>1133 15TH STREET NW STE 950</AddressLine1Txt>
+        <CityNm>WASHINGTON</CityNm>
+        <StateAbbreviationCd>DC</StateAbbreviationCd>
+        <ZIPCd>20005</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>5142201</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>false</GroupReturnForAffiliatesInd>
+      <Organization501c3Ind>X</Organization501c3Ind>
+      <WebsiteAddressTxt>LEADELIMINATION.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <FormationYr>2021</FormationYr>
+      <LegalDomicileStateCd>DE</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>ELIMINATE CHILDHOOD LEAD POISONING AND IMPROVE THE HEALTH, WELLBEING, AND POTENTIAL OF CHILDREN WORLDWIDE. WE START WITH ONE IMPORTANT SOURCE LEAD PAINT.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>3</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>3</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>1</TotalEmployeeCnt>
+      <TotalVolunteersCnt>3</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <PYContributionsGrantsAmt>7659626</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>3359170</CYContributionsGrantsAmt>
+      <CYProgramServiceRevenueAmt>0</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>231129</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>282784</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>2100</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>1197</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>7892855</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>3643151</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>12345</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>138561</CYGrantsAndSimilarPaidAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>612990</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>1839949</CYSalariesCompEmpBnftPaidAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>89845</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>547414</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>1464309</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>1172749</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>3442819</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>6720106</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>200332</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>9006745</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>19405179</TotalAssetsEOYAmt>
+      <TotalLiabilitiesEOYAmt>10201941</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>9006745</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>9203238</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>ELIMINATE CHILDHOOD LEAD POISONING AND IMPROVE THE HEALTH, WELLBEING, AND POTENTIAL OF CHILDREN WORLDWIDE. WE START WITH ONE IMPORTANT SOURCE LEAD PAINT.</MissionDesc>
+      <SignificantNewProgramSrvcInd>false</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>false</SignificantChangeInd>
+      <ExpenseAmt>2647705</ExpenseAmt>
+      <GrantAmt>138561</GrantAmt>
+      <Desc>LEEP WORKS TO ELIMINATE CHILDHOOD LEAD POISONING FROM PAINT BY GENERATING EVIDENCE, STRENGTHENING REGULATION, AND SUPPORTING INDUSTRY REFORMULATION. IN FY25, LEEP COMPLETED PAINT STUDIES IN 4 COUNTRIES COTE DIVOIRE, RWANDA, MALAWI, AND PAKISTAN AND SHARED RESULTS WITH KEY STAKEHOLDERS TO IDENTIFY WHERE LEAD PAINT REMAINS AVAILABLE ON THE MARKET, GUIDING TARGETED PROGRAM INTERVENTIONS. LEEP-INITIATED PAINT PROGRAMS LAUNCHED IN 11 NEW COUNTRIES FOLLOWING LEEPS STUDIES AND SUPPORT, 6 COUNTRIES ANNOUNCED INTENTIONS TO INTRODUCE LEAD PAINT REGULATION, AND 2 COUNTRIES INTRODUCED REGULATION. LEEP ALSO PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE, ENGAGING THE VAST MAJORITY OF LEAD PAINT MANUFACTURERS BY MARKET SHARE IN 9 COUNTRIES - IN 2 OF THOSE COUNTRIES, MORE THAN 50 OF MARKET SHARE TOOK ACTIVE REFORMULATION STEPS, AND IN 1 COUNTRY, 100 OF MARKET SHARE DID SO. SEE SCHEDULE O</Desc>
+      <TotalProgramServiceExpensesAmt>2647705</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind referenceDocumentId="990A">true</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="990B">true</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd>false</DonorAdvisedFundInd>
+      <ConservationEasementsInd>false</ConservationEasementsInd>
+      <CollectionsOfArtInd>false</CollectionsOfArtInd>
+      <CreditCounselingInd>false</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>false</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="990D">true</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd>false</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd>false</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd>false</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="990D">true</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="990D">true</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="990D">true</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd>false</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <ForeignOfficeInd>true</ForeignOfficeInd>
+      <ForeignActivitiesInd referenceDocumentId="990F">true</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd referenceDocumentId="990F">true</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>false</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>false</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>false</FundraisingActivitiesInd>
+      <GamingActivitiesInd>false</GamingActivitiesInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="990I">true</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd>false</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd>false</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>false</TaxExemptBondsInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <PYExcessBenefitTransInd>false</PYExcessBenefitTransInd>
+      <LoanOutstandingInd>false</LoanOutstandingInd>
+      <GrantToRelatedPersonInd>false</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd>false</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd>false</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>false</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>false</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>false</DeductibleArtContributionInd>
+      <TerminateOperationsInd>false</TerminateOperationsInd>
+      <PartialLiquidationInd>false</PartialLiquidationInd>
+      <DisregardedEntityInd>false</DisregardedEntityInd>
+      <RelatedEntityInd>false</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <ActivitiesConductedPrtshpInd>false</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>true</ScheduleORequiredInd>
+      <IRPDocumentCnt>1</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>true</BackupWthldComplianceInd>
+      <EmployeeCnt>1</EmployeeCnt>
+      <EmploymentTaxReturnsFiledInd>true</EmploymentTaxReturnsFiledInd>
+      <UnrelatedBusIncmOverLimitInd>false</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>true</ForeignFinancialAccountInd>
+      <ForeignCountryCd>UK</ForeignCountryCd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>false</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>false</NondeductibleContributionsInd>
+      <QuidProQuoContributionsInd>false</QuidProQuoContributionsInd>
+      <Form8282PropertyDisposedOfInd>false</Form8282PropertyDisposedOfInd>
+      <RcvFndsToPayPrsnlBnftCntrctInd>false</RcvFndsToPayPrsnlBnftCntrctInd>
+      <PayPremiumsPrsnlBnftCntrctInd>false</PayPremiumsPrsnlBnftCntrctInd>
+      <IndoorTanningServicesInd>false</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>false</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>false</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>3</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>3</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>false</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>false</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>false</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>false</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>false</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>false</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>false</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>true</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>true</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>false</OfficerMailingAddressInd>
+      <LocalChaptersInd>false</LocalChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>true</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>true</ConflictOfInterestPolicyInd>
+      <AnnualDisclosureCoveredPrsnInd>true</AnnualDisclosureCoveredPrsnInd>
+      <RegularMonitoringEnfrcInd>true</RegularMonitoringEnfrcInd>
+      <WhistleblowerPolicyInd>true</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>false</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>false</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>false</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>false</InvestmentInJointVentureInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <PersonNm>TOMOS DAVIES</PersonNm>
+        <PhoneNum>4375451860</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>1133 15TH STREET NW</AddressLine1Txt>
+          <CityNm>WASHINGTON</CityNm>
+          <StateAbbreviationCd>DC</StateAbbreviationCd>
+          <ZIPCd>20005</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>TOMOS DAVIES</PersonNm>
+        <TitleTxt>COO</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>109850</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>CLARE DONALDSON</PersonNm>
+        <TitleTxt>CO-EXEC. DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>74420</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>LUCIA COULTER</PersonNm>
+        <TitleTxt>CO-EXEC. DIRECTOR</TitleTxt>
+        <AverageHoursPerWeekRt>040.00</AverageHoursPerWeekRt>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>66200</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANNA CHRISTINA THORSHEIM</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHoursPerWeekRt>001.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DANIEL WAHL</PersonNm>
+        <TitleTxt>TREASURER</TitleTxt>
+        <AverageHoursPerWeekRt>001.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANDREW PLAYER</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHoursPerWeekRt>001.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>250470</TotalReportableCompFromOrgAmt>
+      <IndivRcvdGreaterThan100KCnt>1</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>false</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>false</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>false</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>VERACITY WORLDWIDE LLC</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>28 WEST 44TH STREET SUITE 1120</AddressLine1Txt>
+            <CityNm>NEW YORK</CityNm>
+            <StateAbbreviationCd>NY</StateAbbreviationCd>
+            <ZIPCd>10036</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>STRATEGIC ADVISORY STAKEHOLDER ENGAGEMENT</ServicesDesc>
+        <CompensationAmt>191300</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>INSTIGLIO</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>175 19TH ST APT 701</AddressLine1Txt>
+            <CityNm>BROOKLYN</CityNm>
+            <StateAbbreviationCd>NY</StateAbbreviationCd>
+            <ZIPCd>11232</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>STRATEGIC ADVISORY IMPLEMENTATION SUPPORT</ServicesDesc>
+        <CompensationAmt>115950</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>VITAL STRATEGIES</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>100 BROADWAY 4TH FLOOR</AddressLine1Txt>
+            <CityNm>NEW YORK</CityNm>
+            <StateAbbreviationCd>NY</StateAbbreviationCd>
+            <ZIPCd>10005</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>STRATEGIC ADVISORY IMPLEMENTATION SUPPORT</ServicesDesc>
+        <CompensationAmt>115113</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>3</CntrctRcvdGreaterThan100KCnt>
+      <GovernmentGrantsAmt>1300000</GovernmentGrantsAmt>
+      <AllOtherContributionsAmt>2059170</AllOtherContributionsAmt>
+      <TotalContributionsAmt>3359170</TotalContributionsAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>279437</TotalRevenueColumnAmt>
+        <ExclusionAmt>279437</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>1502397</SecuritiesAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>1499050</SecuritiesAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>3347</SecuritiesAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>3347</TotalRevenueColumnAmt>
+        <ExclusionAmt>3347</ExclusionAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>OTHER INCOME</Desc>
+        <BusinessCd>900099</BusinessCd>
+        <TotalRevenueColumnAmt>1197</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>1197</RelatedOrExemptFuncIncomeAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>1197</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>3643151</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>1197</RelatedOrExemptFuncIncomeAmt>
+        <ExclusionAmt>282784</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticOrgsGrp>
+        <TotalAmt>86709</TotalAmt>
+        <ProgramServicesAmt>86709</ProgramServicesAmt>
+      </GrantsToDomesticOrgsGrp>
+      <GrantsToDomesticIndividualsGrp>
+        <TotalAmt>0</TotalAmt>
+      </GrantsToDomesticIndividualsGrp>
+      <ForeignGrantsGrp>
+        <TotalAmt>51852</TotalAmt>
+        <ProgramServicesAmt>51852</ProgramServicesAmt>
+      </ForeignGrantsGrp>
+      <BenefitsToMembersGrp>
+        <TotalAmt>0</TotalAmt>
+      </BenefitsToMembersGrp>
+      <CompCurrentOfcrDirectorsGrp>
+        <TotalAmt>157358</TotalAmt>
+        <ProgramServicesAmt>124033</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>25641</ManagementAndGeneralAmt>
+        <FundraisingAmt>7684</FundraisingAmt>
+      </CompCurrentOfcrDirectorsGrp>
+      <CompDisqualPersonsGrp>
+        <TotalAmt>0</TotalAmt>
+      </CompDisqualPersonsGrp>
+      <OtherSalariesAndWagesGrp>
+        <TotalAmt>1479460</TotalAmt>
+        <ProgramServicesAmt>1166142</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>241076</ManagementAndGeneralAmt>
+        <FundraisingAmt>72242</FundraisingAmt>
+      </OtherSalariesAndWagesGrp>
+      <PensionPlanContributionsGrp>
+        <TotalAmt>0</TotalAmt>
+      </PensionPlanContributionsGrp>
+      <OtherEmployeeBenefitsGrp>
+        <TotalAmt>68971</TotalAmt>
+        <ProgramServicesAmt>54364</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>11239</ManagementAndGeneralAmt>
+        <FundraisingAmt>3368</FundraisingAmt>
+      </OtherEmployeeBenefitsGrp>
+      <PayrollTaxesGrp>
+        <TotalAmt>134160</TotalAmt>
+        <ProgramServicesAmt>105748</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>21861</ManagementAndGeneralAmt>
+        <FundraisingAmt>6551</FundraisingAmt>
+      </PayrollTaxesGrp>
+      <FeesForServicesManagementGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForServicesManagementGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>3296</TotalAmt>
+        <ProgramServicesAmt>6</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3290</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>51413</TotalAmt>
+        <ProgramServicesAmt>86</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>51327</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <FeesForServicesLobbyingGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForServicesLobbyingGrp>
+      <FeesForServicesProfFundraising></FeesForServicesProfFundraising>
+      <FeesForSrvcInvstMgmntFeesGrp>
+        <TotalAmt>0</TotalAmt>
+      </FeesForSrvcInvstMgmntFeesGrp>
+      <FeesForServicesOtherGrp>
+        <TotalAmt>521986</TotalAmt>
+        <ProgramServicesAmt>502834</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>19152</ManagementAndGeneralAmt>
+      </FeesForServicesOtherGrp>
+      <AdvertisingGrp>
+        <TotalAmt>1653</TotalAmt>
+        <ProgramServicesAmt>118</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>1535</ManagementAndGeneralAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>39633</TotalAmt>
+        <ProgramServicesAmt>18454</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>21179</ManagementAndGeneralAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>26893</TotalAmt>
+        <ProgramServicesAmt>2988</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>23905</ManagementAndGeneralAmt>
+      </InformationTechnologyGrp>
+      <RoyaltiesGrp>
+        <TotalAmt>0</TotalAmt>
+      </RoyaltiesGrp>
+      <OccupancyGrp>
+        <TotalAmt>52927</TotalAmt>
+        <ProgramServicesAmt>1605</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>51322</ManagementAndGeneralAmt>
+      </OccupancyGrp>
+      <TravelGrp>
+        <TotalAmt>344954</TotalAmt>
+        <ProgramServicesAmt>283282</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>61672</ManagementAndGeneralAmt>
+      </TravelGrp>
+      <PymtTravelEntrtnmntPubOfclGrp>
+        <TotalAmt>0</TotalAmt>
+      </PymtTravelEntrtnmntPubOfclGrp>
+      <ConferencesMeetingsGrp>
+        <TotalAmt>120574</TotalAmt>
+        <ProgramServicesAmt>120574</ProgramServicesAmt>
+      </ConferencesMeetingsGrp>
+      <InterestGrp>
+        <TotalAmt>0</TotalAmt>
+      </InterestGrp>
+      <PaymentsToAffiliatesGrp>
+        <TotalAmt>0</TotalAmt>
+      </PaymentsToAffiliatesGrp>
+      <DepreciationDepletionGrp>
+        <TotalAmt>7745</TotalAmt>
+        <ProgramServicesAmt>6840</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>905</ManagementAndGeneralAmt>
+      </DepreciationDepletionGrp>
+      <InsuranceGrp>
+        <TotalAmt>10870</TotalAmt>
+        <ProgramServicesAmt>774</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>10096</ManagementAndGeneralAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>LAB TESTING</Desc>
+        <TotalAmt>67236</TotalAmt>
+        <ProgramServicesAmt>64047</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3189</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>PAINT STUDY EXPENSES</Desc>
+        <TotalAmt>31702</TotalAmt>
+        <ProgramServicesAmt>28710</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>2992</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>STAFF DEVELOPMENT ENGAGEMENT</Desc>
+        <TotalAmt>183427</TotalAmt>
+        <ProgramServicesAmt>28539</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>154888</ManagementAndGeneralAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>0</TotalAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>3442819</TotalAmt>
+        <ProgramServicesAmt>2647705</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>705269</ManagementAndGeneralAmt>
+        <FundraisingAmt>89845</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>1604249</BOYAmt>
+        <EOYAmt>3062176</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <PledgesAndGrantsReceivableGrp>
+        <EOYAmt>166000</EOYAmt>
+      </PledgesAndGrantsReceivableGrp>
+      <AccountsReceivableGrp>
+        <EOYAmt>150146</EOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <EOYAmt>10161</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <LandBldgEquipCostOrOtherBssAmt>57360</LandBldgEquipCostOrOtherBssAmt>
+      <LandBldgEquipAccumDeprecAmt>8520</LandBldgEquipAccumDeprecAmt>
+      <LandBldgEquipBasisNetGrp>
+        <BOYAmt>32128</BOYAmt>
+        <EOYAmt>48840</EOYAmt>
+      </LandBldgEquipBasisNetGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>7370368</BOYAmt>
+        <EOYAmt>15967856</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>9006745</BOYAmt>
+        <EOYAmt>19405179</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <EOYAmt>210947</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <DeferredRevenueGrp>
+        <EOYAmt>9990994</EOYAmt>
+      </DeferredRevenueGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>10201941</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>9006745</BOYAmt>
+        <EOYAmt>6538449</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <EOYAmt>2664789</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>9006745</BOYAmt>
+        <EOYAmt>9203238</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>9006745</BOYAmt>
+        <EOYAmt>19405179</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>200332</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>-3839</NetUnrlzdGainsLossesInvstAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>false</AccountantCompileOrReviewInd>
+      <FSAuditedInd>true</FSAuditedInd>
+      <FSAuditedBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </FSAuditedBasisGrp>
+      <AuditCommitteeInd>true</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>false</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleA documentId="990A" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <PublicOrganization170Ind>X</PublicOrganization170Ind>
+      <GiftsGrantsContriRcvd170Grp>
+        <CurrentTaxYearMinus3YearsAmt>50001</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>2351068</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>7659626</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>3359170</CurrentTaxYearAmt>
+        <TotalAmt>13419865</TotalAmt>
+      </GiftsGrantsContriRcvd170Grp>
+      <TotalCalendarYear170Grp>
+        <CurrentTaxYearMinus3YearsAmt>50001</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>2351068</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>7659626</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>3359170</CurrentTaxYearAmt>
+        <TotalAmt>13419865</TotalAmt>
+      </TotalCalendarYear170Grp>
+      <PublicSupportTotal170Amt>13419865</PublicSupportTotal170Amt>
+      <GrossInvestmentIncome170Grp>
+        <CurrentTaxYearMinus1YearAmt>231129</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>282784</CurrentTaxYearAmt>
+        <TotalAmt>513913</TotalAmt>
+      </GrossInvestmentIncome170Grp>
+      <OtherIncome170Grp>
+        <CurrentTaxYearMinus1YearAmt>2190</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>1197</CurrentTaxYearAmt>
+        <TotalAmt>3387</TotalAmt>
+      </OtherIncome170Grp>
+      <TotalSupportAmt>13937165</TotalSupportAmt>
+      <First5Years170Ind>X</First5Years170Ind>
+      <PublicSupportCY170Pct>0.00000</PublicSupportCY170Pct>
+    </IRS990ScheduleA>
+    <IRS990ScheduleB documentId="990B" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleD documentId="990D" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <InclEscrowCustodialAcctLiabInd>false</InclEscrowCustodialAcctLiabInd>
+      <EquipmentGrp>
+        <OtherCostOrOtherBasisAmt>57360</OtherCostOrOtherBasisAmt>
+        <DepreciationAmt>8520</DepreciationAmt>
+        <BookValueAmt>48840</BookValueAmt>
+      </EquipmentGrp>
+      <TotalBookValueLandBuildingsAmt>48840</TotalBookValueLandBuildingsAmt>
+      <OtherSecuritiesGrp>
+        <Desc>Financial derivatives and other financial products</Desc>
+      </OtherSecuritiesGrp>
+      <OtherSecuritiesGrp>
+        <Desc>Closely-held equity interests</Desc>
+      </OtherSecuritiesGrp>
+      <OtherLiabilitiesOrgGrp>
+        <Desc>Federal income taxes</Desc>
+      </OtherLiabilitiesOrgGrp>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <TotalRevEtcAuditedFinclStmtAmt>3639312</TotalRevEtcAuditedFinclStmtAmt>
+      <NetUnrealizedGainsInvstAmt>-3839</NetUnrealizedGainsInvstAmt>
+      <RevenueNotReportedAmt>-3839</RevenueNotReportedAmt>
+      <RevenueSubtotalAmt>3643151</RevenueSubtotalAmt>
+      <TotalRevenuePerForm990Amt>3643151</TotalRevenuePerForm990Amt>
+      <TotExpnsEtcAuditedFinclStmtAmt>3442819</TotExpnsEtcAuditedFinclStmtAmt>
+      <ExpensesSubtotalAmt>3442819</ExpensesSubtotalAmt>
+      <TotalExpensesPerForm990Amt>3442819</TotalExpensesPerForm990Amt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>X 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION IS EXEMPT UNDER SECTION 501C3 OF THE INTERNAL REVENUE CODE AND IS CLASSIFIED AS OTHER THAN A PRIVATE FOUNDATION. THE ORGANIZATION IS EXEMPT FROM PAYING FEDERAL INCOME TAX ON ANY INCOME EXCEPT UNRELATED BUSINESS INCOME. NO PROVISION HAS BEEN MADE FOR INCOME TAXES AS THE ORGANIZATION HAS HAD NO UNRELATED BUSINESS INCOME. THE ORGANIZATION FOLLOWS THE GUIDANCE OF ASC 740-10 WHICH CLARIFIES THE ACCOUNTING FOR THE RECOGNITION AND MEASUREMENT OF THE BENEFITS OF INDIVIDUAL TAX POSITIONS IN THE FINANCIAL STATEMENTS, INCLUDING THOSE OF NONPROFIT ORGANIZATIONS. TAX POSITIONS MUST MEET A RECOGNITION THRESHOLD OF MORE-LIKELY-THAN-NOT IN ORDER FOR THE BENEFIT OF THOSE TAX POSITIONS TO BE RECOGNIZED IN THE ORGANIZATION FINANCIAL STATEMENTS. THE ORGANIZATION ANALYZES TAX POSITIONS TAKEN, INCLUDING THOSE RELATED TO THE REQUIREMENTS SET FORTH BY IRC SECTION 501C TO QUALIFY AS A TAX EXEMPT ORGANIZATION, ACTIVITIES PERFORMED BY VOLUNTEERS AND BOARD MEMBERS, THE REPORTING OF UNRELATED BUSINESS INCOME, AND ITS STATUS AS A TAX-EXEMPT ORGANIZATION. THE ORGANIZATION DOES NOT KNOW OF ANY TAX BENEFITS ARISING FROM UNCERTAIN TAX POSITIONS AND THERE WAS NO EFFECT ON THE ORGANIZATION FINANCIAL POSITION OR CHANGES IN NET ASSETS AS A RESULT OF ANALYZING ITS TAX POSITIONS. THE ORGANIZATION INFORMATIONAL RETURN FILINGS ARE SUBJECT TO AUDIT BY THE INTERNAL REVENUE SERVICE, GENERALLY FOR THREE YEARS AFTER FILING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleF documentId="990F" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <GrantRecordsMaintainedInd>true</GrantRecordsMaintainedInd>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>East Asia and the Pacific</RegionTxt>
+        <EmployeeCnt>4</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES AND GRANT-MAKING</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PROGRAM STAFF AND ADMINISTRATION. GENERATED EVIDENCE THROUGH PAINT STUDIES, SUPPORTED GOVERNMENTS TO IMPLEMENT AND ENFORCE LEAD PAINT REGULATION, AND PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>128488</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>South Asia</RegionTxt>
+        <EmployeeCnt>5</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES AND GRANT-MAKING</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PROGRAM STAFF AND ADMINISTRATION. GENERATED EVIDENCE THROUGH PAINT STUDIES, SUPPORTED GOVERNMENTS TO IMPLEMENT AND ENFORCE LEAD PAINT REGULATION, AND PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>187525</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>South America</RegionTxt>
+        <EmployeeCnt>4</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES AND GRANT-MAKING</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PROGRAM STAFF AND ADMINISTRATION. GENERATED EVIDENCE THROUGH PAINT STUDIES, SUPPORTED GOVERNMENTS TO IMPLEMENT AND ENFORCE LEAD PAINT REGULATION, AND PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>104238</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Central America and the Caribbean</RegionTxt>
+        <TypeOfActivitiesConductedTxt>GRANT-MAKING</TypeOfActivitiesConductedTxt>
+        <RegionTotalExpendituresAmt>4076</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Middle East and North Africa</RegionTxt>
+        <EmployeeCnt>1</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES AND GRANT-MAKING</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PROGRAM STAFF AND ADMINISTRATION. GENERATED EVIDENCE THROUGH PAINT STUDIES, SUPPORTED GOVERNMENTS TO IMPLEMENT AND ENFORCE LEAD PAINT REGULATION, AND PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>21593</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Russia and the Neighboring States</RegionTxt>
+        <EmployeeCnt>1</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES AND GRANT-MAKING</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PROGRAM STAFF AND ADMINISTRATION. GENERATED EVIDENCE THROUGH PAINT STUDIES, SUPPORTED GOVERNMENTS TO IMPLEMENT AND ENFORCE LEAD PAINT REGULATION, AND PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>9707</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Sub-Saharan Africa</RegionTxt>
+        <EmployeeCnt>9</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES AND GRANT-MAKING</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PROGRAM STAFF AND ADMINISTRATION. GENERATED EVIDENCE THROUGH PAINT STUDIES, SUPPORTED GOVERNMENTS TO IMPLEMENT AND ENFORCE LEAD PAINT REGULATION, AND PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>452305</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>Europe Including Iceland and Greenland</RegionTxt>
+        <OfficesCnt>1</OfficesCnt>
+        <EmployeeCnt>21</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PROGRAM STAFF AND ADMINISTRATION. GENERATED EVIDENCE THROUGH PAINT STUDIES, SUPPORTED GOVERNMENTS TO IMPLEMENT AND ENFORCE LEAD PAINT REGULATION, AND PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>1418170</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <AccountActivitiesOutsideUSGrp>
+        <RegionTxt>North America</RegionTxt>
+        <EmployeeCnt>2</EmployeeCnt>
+        <TypeOfActivitiesConductedTxt>PROGRAM SERVICES AND GRANT-MAKING</TypeOfActivitiesConductedTxt>
+        <SpecificServicesProvidedTxt>PROGRAM STAFF AND ADMINISTRATION. GENERATED EVIDENCE THROUGH PAINT STUDIES, SUPPORTED GOVERNMENTS TO IMPLEMENT AND ENFORCE LEAD PAINT REGULATION, AND PROVIDED TECHNICAL ASSISTANCE TO HELP PAINT MANUFACTURERS REFORMULATE</SpecificServicesProvidedTxt>
+        <RegionTotalExpendituresAmt>137788</RegionTotalExpendituresAmt>
+      </AccountActivitiesOutsideUSGrp>
+      <SubtotalOfficesCnt>1</SubtotalOfficesCnt>
+      <SubtotalEmployeesCnt>47</SubtotalEmployeesCnt>
+      <TotalOfficeCnt>1</TotalOfficeCnt>
+      <TotalEmployeeCnt>47</TotalEmployeeCnt>
+      <SubtotalSpentAmt>2463890</SubtotalSpentAmt>
+      <TotalSpentAmt>2463890</TotalSpentAmt>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>Sub-Saharan Africa</RegionTxt>
+        <PurposeOfGrantTxt>CONDUCT COUNTRY-SPECIFIC PAINT STUDIES FOR DATA COLLECTION, ASSIST GOVERNMENTS IN ENACTING LEAD PAINT REGULATIONS, AND OFFER TECHNICAL SUPPORT TO MANUFACTURERS FOR TRANSITIONING TO LEAD-FREE PAINT.</PurposeOfGrantTxt>
+        <CashGrantAmt>21531</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE</MannerOfCashDisbursementTxt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>South America</RegionTxt>
+        <PurposeOfGrantTxt>CONDUCT COUNTRY-SPECIFIC PAINT STUDIES FOR DATA COLLECTION, ASSIST GOVERNMENTS IN ENACTING LEAD PAINT REGULATIONS, AND OFFER TECHNICAL SUPPORT TO MANUFACTURERS FOR TRANSITIONING TO LEAD-FREE PAINT.</PurposeOfGrantTxt>
+        <CashGrantAmt>6515</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE</MannerOfCashDisbursementTxt>
+      </GrantsToOrgOutsideUSGrp>
+      <GrantsToOrgOutsideUSGrp>
+        <RegionTxt>East Asia and the Pacific</RegionTxt>
+        <PurposeOfGrantTxt>CONDUCT COUNTRY-SPECIFIC PAINT STUDIES FOR DATA COLLECTION, ASSIST GOVERNMENTS IN ENACTING LEAD PAINT REGULATIONS, AND OFFER TECHNICAL SUPPORT TO MANUFACTURERS FOR TRANSITIONING TO LEAD-FREE PAINT.</PurposeOfGrantTxt>
+        <CashGrantAmt>5685</CashGrantAmt>
+        <MannerOfCashDisbursementTxt>WIRE</MannerOfCashDisbursementTxt>
+      </GrantsToOrgOutsideUSGrp>
+      <Total501c3OrgCnt>3</Total501c3OrgCnt>
+      <TransferToForeignCorpInd>false</TransferToForeignCorpInd>
+      <InterestInForeignTrustInd>false</InterestInForeignTrustInd>
+      <ForeignCorpOwnershipInd>false</ForeignCorpOwnershipInd>
+      <PassiveForeignInvestmestCoInd>false</PassiveForeignInvestmestCoInd>
+      <ForeignPartnershipInd>false</ForeignPartnershipInd>
+      <BoycottCountriesInd>false</BoycottCountriesInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Part I Line 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>LEEP CONDUCTS THOROUGH DUE DILIGENCE BEFORE AWARDING FUNDS. WHICH INCLUDES REVIEWING AUDITED FINANCIAL STATEMENTS, VERIFYING REGISTRATION, CONDUCTING CHECKS ON KEY PERSONNEL, AND OBTAINING REFERENCES. FURTHERMORE, REGULAR PROJECT UPDATES, REPORTS, AND EXPLANATIONS OF EXPENDITURES ARE REQUIRED. FUNDS ARE RELEASED ONLY WHEN PROJECT MILESTONES ARE ACHIEVED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Part I Line 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION ACCOUNTS FOR EXPENDITURES IN THE LISTED REGIONS USING THE ACCRUAL METHOD OF ACCOUNTING.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleF>
+    <IRS990ScheduleI documentId="990I" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <GrantRecordsMaintainedInd>true</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>THE CORPORATION OF MERCER UNIVERSITY</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>1501 MERCER UNIVERSITY DRIVE</AddressLine1Txt>
+          <CityNm>MACON</CityNm>
+          <StateAbbreviationCd>GA</StateAbbreviationCd>
+          <ZIPCd>31207</ZIPCd>
+        </USAddress>
+        <RecipientEIN>580566167</RecipientEIN>
+        <IRCSectionDesc>501C3</IRCSectionDesc>
+        <CashGrantAmt>86709</CashGrantAmt>
+        <PurposeOfGrantTxt>SUPPORT ACTIVITIES RELATED TO LEAD ELIMINATION</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>1</Total501c3OrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Part I Line 2</FormAndLineReferenceDesc>
+        <ExplanationTxt>LEEP CONDUCTS THOROUGH DUE DILIGENCE BEFORE AWARDING FUNDS. WHICH INCLUDES REVIEWING AUDITED FINANCIAL STATEMENTS, VERIFYING REGISTRATION, CONDUCTING CHECKS ON KEY PERSONNEL, AND OBTAINING REFERENCES. FURTHERMORE, REGULAR PROJECT UPDATES, REPORTS, AND EXPLANATIONS OF EXPENDITURES ARE REQUIRED. FUNDS ARE RELEASED ONLY WHEN PROJECT MILESTONES ARE ACHIEVED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+    <IRS990ScheduleO documentId="990O" softwareId="24019898" softwareVersionNum="24.0.1.0">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE PREPARED FORM 990 IS REVIEWED BY THE ORGANIZATIONS BOARD OF DIRECTORS BEFORE IT IS FILED WITH THE IRS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section B, Line 12C</FormAndLineReferenceDesc>
+        <ExplanationTxt>ALL OFFICERS AND DIRECTORS ARE REQUIRED TO SIGN A CONFLICT OF INTEREST POLICY STATEMENT ON AN ANNUAL BASIS. IN CONNECTION WITH ANY ACTUAL OR POSSIBLE REPORTED CONFLICT OF INTEREST, AN INTERESTED PERSON MUST DISCLOSE THE EXISTENCE OF THE INTEREST AND BE GIVEN THE OPPORTUNITY TO DISCLOSE ALL MATERIAL FACTS TO THE DIRECTORS AND MEMBERS OF COMMITTEES WITH GOVERNING BODY DELEGATED POWERS. AFTER DISCLOSURE OF THE INTEREST AND ALL MATERIAL FACTS, THE INTERESTED PERSON SHALL LEAVE THE GOVERNING BODY OR COMMITTEE MEETING WHILE THE DETERMINATION OF A CONFLICT OF INTEREST IS DISCUSSED AND VOTED UPON BY THE REMAINING DIRECTORS OR COMMITTEE MEMBERS. THE GOVERNING BODY OR DESIGNATED COMMITTEE CONDUCTS PERIODIC REVIEWS TO ENSURE THAT THE ORGANIZATION DOES NOT ENGAGE IN ACTIVITIES THAT COULD JEOPARDIZE ITS TAX-EXEMPT STATUS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part VI, Section C, Line 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ORGANIZATION MAKES ITS GOVERNING DOCUMENTS, CONFLICT OF INTEREST POLICY, AND FINANCIAL STATEMENTS AVAILABLE TO THE PUBLIC UPON REQUEST.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part IX, Line 11G</FormAndLineReferenceDesc>
+        <ExplanationTxt>PROGRAM PROFESSIONAL FEES 502,834, ADMIN PROFESSIONAL FEES 19,152.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Form 990, Part III, Line 4A</FormAndLineReferenceDesc>
+        <ExplanationTxt>LEARN MORE AT HTTPS//LEADELIMINATION.ORG/2024-IN-REVIEW/.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

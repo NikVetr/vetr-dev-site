@@ -26,6 +26,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator(".settings-panel #position-select")).toHaveCount(0);
   await expect(page.locator("#app-title .title-position-select #position-select")).toHaveCount(1);
+  await expect(page.locator("#position-selected-label")).toHaveCSS("color", "rgb(62, 69, 74)");
+  await page.locator(".title-position-select").hover();
+  await expect(page.locator("#position-selected-label")).toHaveCSS("color", "rgb(45, 104, 133)");
+  await page.locator("#position-select").focus();
+  await expect(page.locator("#position-selected-label")).toHaveCSS("color", "rgb(45, 104, 133)");
   await expect(page.locator(".app-header .eyebrow")).toHaveText("Rethink Priorities");
   await expect(page.locator(".app-header .subtitle")).toHaveCount(0);
   await expect(page.locator("#archive-status")).toHaveCount(0);
@@ -113,7 +118,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   }));
   expect(explainerCoverage).toEqual({
     definitions: 283,
-    rows: 184,
+    rows: 186,
     filingReviews: 122,
     packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
   });
@@ -131,7 +136,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     };
   });
   expect(wikipediaCoverage).toEqual({
-    organizations: 181,
+    organizations: 182,
     mapped: 100,
     knownUnsafeMappings: ["", "", "", ""],
   });
@@ -374,7 +379,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   }))).toBe(true);
   expect(await page.locator(".empirical-quantile-guide").evaluateAll((guides) => guides.every((guide, index) => {
     const amount = document.querySelectorAll(".empirical-quantile-mark .amount")[index].getBoundingClientRect();
-    return amount.bottom + 5 <= guide.getBoundingClientRect().top;
+    const overlap = guide.getBoundingClientRect().top - amount.bottom;
+    return overlap >= -6 && overlap <= 0;
   }))).toBe(true);
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from weighted empirical ranks for Salary");
   await page.locator('input[name="distribution"][value="lognormal"]').check();
@@ -616,6 +622,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#help-tooltip")).toContainText("selected effective sample size");
   await expect(page.locator("#help-tooltip")).toContainText("at or below 6");
   await expect(page.locator("#help-tooltip")).toContainText("salary-trained category weights remain too unstable");
+  await expect(page.locator("#help-tooltip")).toContainText("salary never enters its calculation");
+  await expect(page.locator("#help-tooltip")).toContainText("frozen, pay-blind match scores");
+  await expect(page.locator("#help-tooltip")).toContainText("bounded to 0.50–1.50");
+  await expect(page.locator("#auto-weight-note")).toHaveText("Scale-matched 990s · match-scored postings");
   await page.locator('#weighting-components input[value="size"]').check();
   await expect(page.locator('.auto-weight-rule input[value="comparability"]')).not.toBeChecked();
   await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
@@ -960,7 +970,9 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator('input[name="histogram-axis-mode"][value="value"]')).toBeChecked();
   await expect(page.locator('input[name="histogram-axis-scale"][value="linear"]')).toBeChecked();
   await expect(page.locator("#histogram-axis-settings")).not.toContainText("Horizontal axis");
-  await expect(page.locator("#histogram-axis-settings")).toContainText("Type");
+  await expect(page.locator("#axis-settings-context")).toHaveText("Axis");
+  await expect(page.locator("#histogram-axis-settings")).toContainText("Value");
+  await expect(page.locator("#histogram-axis-settings")).not.toContainText("Type");
   expect((await page.locator("#histogram-axis-settings label").allTextContents()).map((value) => value.trim()))
     .toEqual(["Measure", "Ratio", "Linear", "Log"]);
   await expect(horizontalAxis()).not.toContainText("log scale");
@@ -1066,6 +1078,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-ratio-histogram-log.png" });
 
   await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await expect(page.locator("#axis-settings-context")).toHaveText("Axes");
   await expect(horizontalAxis()).toHaveCount(1);
   await expect(verticalAxis()).toHaveCount(1);
   await expect(page.locator("#contour-field")).toBeVisible();
@@ -1143,6 +1156,57 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(verticalAxis()).toContainText("Salary / Revenue");
   await expect(verticalAxis()).not.toContainText("log scale");
   await expect(page.locator('input[name="scatter-x-axis-mode"][value="value"]')).toBeChecked();
+  expect(errors).toEqual([]);
+});
+
+test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await page.locator("#stream-select").selectOption("incumbents");
+  await page.locator("#measure-select").selectOption("cash");
+  await page.locator("#sample-select").selectOption("sensitivity");
+
+  const leepRows = page.locator('tbody tr[data-id]:has(.organization-name:text-is("Lead Exposure Elimination Project"))');
+  await expect(leepRows).toHaveCount(2);
+  await expect(leepRows.locator(".row-toggle:checked")).toHaveCount(2);
+  const comparisonRow = page.locator('tbody tr[data-id]:has(.organization-name:text-is("Center for AI Safety"))');
+  const numericWeight = async (row) => Number(await row.locator(".weight-input").inputValue());
+  const leepWeights = await leepRows.locator(".weight-input").evaluateAll((inputs) => inputs.map((input) => Number(input.value)));
+  expect(Math.abs(leepWeights.reduce((sum, value) => sum + value, 0) - await numericWeight(comparisonRow))).toBeLessThanOrEqual(0.02);
+
+  await leepRows.first().locator(".row-toggle").uncheck();
+  expect(Math.abs(await numericWeight(leepRows.nth(1)) - await numericWeight(comparisonRow))).toBeLessThanOrEqual(0.02);
+  await leepRows.first().locator(".row-toggle").check();
+
+  const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
+  await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
+  await horizontalAxis().click();
+  await page.locator("#axis-denominator").selectOption("position:coo");
+  expect(await leepRows.evaluateAll((tableRows) => tableRows.every((row) => row.dataset.plotEligible === "true"))).toBe(true);
+  const expectedSensitivityPairs = await page.evaluate(() => {
+    const data = window.CEO_BENCHMARK_DATA;
+    const selected = (row) => row.defaultIncluded || row.analysisStatus === "sensitivity_only";
+    const sourceId = (row) => row.sourceId || String(row.id || "").split("::", 1)[0];
+    const coos = new Map();
+    (data.positionObservations.coo || []).filter((row) => selected(row) && row.salary?.cash > 0).forEach((row) => {
+      const key = sourceId(row);
+      coos.set(key, [...(coos.get(key) || []), row]);
+    });
+    return data.incumbents.filter((row) => (
+      selected(row) && row.salary?.cash > 0 && (coos.get(sourceId(row)) || []).length === 1
+    )).length;
+  });
+  await expect(page.locator("#stat-n")).toHaveText(String(expectedSensitivityPairs));
+
+  await page.goto("/coo-salary-benchmark/");
+  await page.locator("#sample-select").selectOption("sensitivity");
+  await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
+  await horizontalAxis().click();
+  await page.locator("#axis-denominator").selectOption("position:ceo");
+  const tomos = page.locator('tbody tr[data-id="SRC-990-RECOVERY-LEEP::tomos-davies"]');
+  await expect(tomos).toHaveAttribute("data-plot-eligible", "false");
+  await expect(tomos).toHaveAttribute("aria-label", /more than one CEO compensation row/i);
   expect(errors).toEqual([]);
 });
 
@@ -1225,11 +1289,13 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeChecked();
   await expect(page.locator('#weighting-components input[value="size"]')).not.toBeChecked();
   await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeChecked();
-  const inapplicablePostingAutoV7 = Buffer.from(JSON.stringify({ v: 7, e: "j", w: "c" })).toString("base64url");
-  await page.goto(`/ceo-salary-benchmark/?s=${inapplicablePostingAutoV7}`);
+  const postingAutoV7 = Buffer.from(JSON.stringify({ v: 7, e: "j", w: "c" })).toString("base64url");
+  await page.goto(`/ceo-salary-benchmark/?s=${postingAutoV7}`);
   await expect(page.locator("#stream-select")).toHaveValue("jobAds");
-  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).not.toBeChecked();
-  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeDisabled();
+  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeChecked();
+  await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeEnabled();
+  await expect(page.locator("#weight-profile-comparability")).toContainText("frozen match-score ratio");
+  await expect(page.locator("#auto-target-ess-field")).toBeHidden();
 
   const legacyV2 = Buffer.from(JSON.stringify({ v: 2 })).toString("base64url");
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV2}`);
@@ -1273,11 +1339,33 @@ test("Auto-weights remain explicit and stable for small filing samples and strea
   await auto.check();
   await expect(balance).not.toBeChecked();
   await expect(page.locator("#weight-profile-comparability")).toContainText("Form 990 stream");
+  await expect(page.locator("#weight-profile-comparability")).toContainText("postings · frozen match-score ratio");
   await expect(page.locator("#weight-profile-comparability")).toContainText("Kernel value (0–1)");
   const automaticWeights = await page.locator("tbody tr:not(.is-excluded) .weight-input:not(.is-user-modified)")
     .evaluateAll((inputs) => inputs.map((input) => Number(input.value)));
   expect(automaticWeights.reduce((sum, value) => sum + value, 0) / automaticWeights.length).toBeCloseTo(1, 1);
   expect(Math.max(...automaticWeights)).toBeLessThanOrEqual(6.01);
+  const postingAutomaticWeights = await page.locator("tbody tr[data-id]:not(.is-excluded)").evaluateAll((tableRows) => (
+    tableRows
+      .filter((row) => row.querySelector(".evidence-cell")?.textContent.trim() === "Job posting")
+      .map((row) => ({
+        score: window.CEO_BENCHMARK_DATA.jobAds.find((item) => item.id === row.dataset.id).comparabilityScore,
+        weight: Number(row.querySelector(".weight-input").value),
+      }))
+  ));
+  expect(postingAutomaticWeights.length).toBeGreaterThan(1);
+  const weightsByScore = Map.groupBy(postingAutomaticWeights, (item) => item.score);
+  expect([...weightsByScore.keys()].sort((a, b) => b - a)).toEqual([100, 70]);
+  const weight100 = weightsByScore.get(100)[0].weight;
+  const weight70 = weightsByScore.get(70)[0].weight;
+  expect(weight100).toBeGreaterThan(weight70);
+  expect(weight100).toBeCloseTo(1.32, 2);
+  expect(weight70).toBeCloseTo(0.92, 2);
+  expect(weightsByScore.get(100).every((item) => item.weight === weight100)).toBe(true);
+  expect(weightsByScore.get(70).every((item) => item.weight === weight70)).toBe(true);
+  expect(postingAutomaticWeights.reduce((sum, item) => sum + item.weight, 0) / postingAutomaticWeights.length).toBeCloseTo(1, 2);
+  expect(weight100).toBeLessThanOrEqual(1.5);
+  expect(weight70).toBeGreaterThanOrEqual(0.5);
 
   await page.locator("#stream-select").selectOption("incumbents");
   const narrowSample = await page.evaluate(() => {
@@ -1304,9 +1392,21 @@ test("Auto-weights remain explicit and stable for small filing samples and strea
   await expect(balance).toBeChecked();
   await expect(balance).toBeEnabled();
   await page.locator("#stream-select").selectOption("jobAds");
-  await expect(auto).not.toBeChecked();
-  await expect(auto).toBeDisabled();
-  await expect(auto.locator("xpath=..")).toHaveAttribute("title", /posting scale fields are not Form 990 measures/i);
+  await expect(auto).toBeChecked();
+  await expect(auto).toBeEnabled();
+  await expect(balance).toBeChecked();
+  await expect(balance).toBeDisabled();
+  await expect(page.locator("#weight-profile-comparability")).toContainText("Recruitment postings");
+  await expect(page.locator("#weight-profile-comparability")).toContainText("Frozen match score (0–100)");
+  await expect(page.locator("#weight-profile-comparability")).toContainText("Automatic weight");
+  await expect(page.locator("#auto-target-ess-field")).toBeHidden();
+  const postingOnlyWeights = await page.locator("tbody tr[data-id]:not(.is-excluded) .weight-input:not(.is-user-modified)")
+    .evaluateAll((inputs) => inputs.map((input) => Number(input.value)));
+  expect(postingOnlyWeights.reduce((sum, value) => sum + value, 0) / postingOnlyWeights.length).toBeCloseTo(1, 2);
+  await page.reload();
+  await expect(page.locator("#stream-select")).toHaveValue("jobAds");
+  await expect(auto).toBeChecked();
+  await expect(auto).toBeEnabled();
   expect(errors).toEqual([]);
 });
 
@@ -1474,7 +1574,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     await expect(page.locator("tbody .rp-reference-row")).toHaveCount(expected.rpReferences);
     await expect(page.locator("tbody tr[data-id] .role-holder").first()).not.toHaveText("");
     await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeDisabled();
-    await expect(page.locator("#auto-weight-note")).toContainText("CEO kernel audit only");
+    await expect(page.locator("#auto-weight-note")).toContainText("CEO automatic rules only");
     const sourceTypeWeight = page.locator("#weighting-components input[value='sourceType']");
     await expect(sourceTypeWeight).toBeDisabled();
     await expect(sourceTypeWeight.locator("xpath=..")).toHaveAttribute(
@@ -1664,7 +1764,8 @@ test("empirical percentile labels remain separated at common browser zooms", asy
       expect(lineInset).toBeGreaterThanOrEqual(3.75);
       expect(lineInset).toBeLessThanOrEqual(6.25);
       expect(Math.abs(lineInset - label.targetLineInset)).toBeLessThanOrEqual(0.35);
-      expect(label.amountBottom + 4.5).toBeLessThanOrEqual(label.guideTop);
+      expect(label.guideTop - label.amountBottom).toBeGreaterThanOrEqual(-6);
+      expect(label.guideTop - label.amountBottom).toBeLessThanOrEqual(0);
       if (index) {
         expect(label.left).toBeGreaterThanOrEqual(geometry.labels[index - 1].right + 5);
       }

@@ -6,7 +6,7 @@ The handoff `tmp/rp_lingering_org_additions.zip` is useful as a research lead pa
 
 The replacement bundle is a genuine second pass, not a duplicate of the earlier handoff. It adds entity and scale corrections plus historical Apollo and Empower Learning Africa USA filing leads. Those additions do not repair the evidence layer: every packaged artifact remains a researcher-written text summary, and the revised tables retain material entity, period, scale, citation, and completeness errors.
 
-The review therefore keeps the app's peer cohort unchanged. It adds a reproducible audit, locally recovers ten source-native IRS filings, and preserves every officer row from those filings in a separate raw research layer. The only clean current non-CEO records newly recovered are Lead Exposure Elimination Project's COO and two co-executive directors. They are not silently promoted into the CEO sample.
+The review therefore keeps the app's **default** peer cohort unchanged. It adds a reproducible audit, preserves every officer row from ten independently parsed IRS filings, and applies a separate pay-blind eligibility review to all 34 candidates. That review assigns eight candidates to possible sensitivity use, four to observed-only context, and 22 to not usable. Lead Exposure Elimination Project (LEEP) is the only candidate with exact named positive observations suitable for the current app: two co-executive directors enter the CEO-like sensitivity sample as separate rows, and its COO enters the COO sensitivity sample. The two co-leaders share a dynamic organization-balance group so that together they have one organization's automatic influence; neither the rows nor their compensation amounts are combined.
 
 Bundle reviewed:
 
@@ -45,7 +45,7 @@ These are useful entity-resolution and research-queue improvements. They are not
 
 ### Source layer
 
-All 109 manifest-referenced source artifacts under `sources/raw/` are short `.txt` research summaries. None is the original XML, PDF, HTML, or signed account. Nevertheless, 90 manifest rows label these summaries `source_native=yes`, and all 109 omit `original_byte_length`. Thirty-three original artifacts remain on the manual-save queue. The 109 manifest rows collapse to 89 distinct URLs, and several multi-year filing claims are consolidated behind organization navigation pages rather than one object and artifact per return.
+All 109 manifest-referenced source artifacts under the handoff's `sources/raw/` are short `.txt` research summaries. None is the original XML, PDF, HTML, or signed account. Nevertheless, 90 manifest rows label these summaries `source_native=yes`, and all 109 omit `original_byte_length`. At handoff time, 33 original artifacts remained on its manual-save queue. The 109 manifest rows collapse to 89 distinct URLs, and several multi-year filing claims are consolidated behind organization navigation pages rather than one object and artifact per return.
 
 Evidence locators are generally broad section names rather than exact XML paths or PDF page/table/row references. Several numeric claims are not present even in the associated text summary. ProPublica, registry landing pages, and search results are useful discovery aids, but are not substitutes for an available filing or signed account.
 
@@ -110,7 +110,7 @@ Ten original IRS XML returns were recovered locally and independently checked fo
 
 ProPublica's filing navigator independently displays Empower Learning Africa USA's 2025 David Sears amount of $46,427, but the corresponding original XML was not present in the currently published IRS bulk archive identified by the index. It remains a documented retrieval gap and, in any event, is affiliate-officer evidence rather than compensation for Titus Syengo or TaRL Africa's organization-wide executive.
 
-The extracted research layer contains 37 officer rows: seven exact positives, 25 explicit zeros, and five transition-only rows. The additional positives are Apollo's historical $2,554 president amount and Empower Learning Africa USA president David Sears's $46,035 affiliate amount. Neither is a current candidate-executive observation. None of the 37 rows is a new default CEO or non-CEO app observation.
+The extracted research layer contains 37 officer rows: seven exact positives, 25 explicit zeros, and five transition-only rows. The additional positives are Apollo's historical $2,554 president amount and Empower Learning Africa USA president David Sears's $46,035 affiliate amount. Neither is a current candidate-executive observation. None of the 37 rows is a new default CEO or non-CEO app observation; only the three LEEP rows pass the later sensitivity-layer peer review.
 
 The LEEP filing corrects the stale handoff:
 
@@ -120,15 +120,25 @@ The LEEP filing corrects the stale handoff:
 - Form 990 Part I: one employee, `$3,643,151` revenue, and `$3,442,819` expenses.
 - Compensation calendar year: 2024.
 
-The co-leaders remain separate source rows. Their amounts are never summed, averaged, or annualized. Tomos is an observed-only COO record, not a CEO observation.
+The co-leaders remain separate source rows. Their amounts are never summed, averaged, or annualized. Clare and Lucia are CEO-like sensitivity observations, while Tomos is a COO sensitivity observation rather than a CEO observation. All three remain excluded from default estimates.
 
 Machine-readable outputs:
 
 - `benchmark/enrichment/lingering_org_recovered_us_positions.csv`
 - `benchmark/enrichment/lingering_org_recovered_us_sources.csv`
+- `benchmark/enrichment/lingering_org_peer_eligibility_review.csv`
+- `benchmark/enrichment/lingering_org_app_position_additions.csv`
 - `scripts/audit_lingering_org_additions.py`
 
 The locally cached XML files remain under `benchmark/sources/native/form990/` and are intentionally ignored by Git alongside the rest of the source archive. The tracked source manifest records their exact paths and hashes.
+
+## Follow-up original-source acquisition
+
+The manual queue was reconciled against the existing archive and official hosts. Of its 33 requests, six artifacts were already local, 19 were newly acquired, five were retired as duplicate, erroneous, or no longer applicable requests, and three still require a browser-assisted regulator download. The consolidated acquisition layer contains 63 distinct artifacts mapped to 72 source IDs: 18 original PDFs, two original IRS XML returns, and 43 first-party or regulator HTML captures. Their byte lengths, SHA-256 hashes, MIME types, retrieval times, source URLs, and local paths are recorded in `benchmark/enrichment/lingering_org_original_source_manifest.csv`.
+
+Five PDFs (`S008`, `S036`, `S090`, `S093`, and `S112`) are image-only and remain unsuitable for numeric extraction until OCR is manually verified against the page images. Three manifest mappings (`S060`, `S082`, and duplicate mapping `S111`) point to two incomplete client-rendered HTML captures and are explicitly marked incomplete rather than treated as evidence. The only outstanding manual acquisitions are the Kenyan regulator/accounts record for Teaching at the Right Level Africa, the Philippine SEC record for Animal Empathy Philippines, and the Hebrew GuideStar Israel report for ALTER; direct URLs and requested filenames are preserved in `benchmark/enrichment/lingering_org_remaining_manual_save_requests.csv`.
+
+The acquired originals correct two discovery-layer errors: the current Empower Learning Africa USA XML is in the official IRS `2026_TEOS_XML_05B` archive, and Unlimit Health's Charity Commission organization number is `5135307`, not `5140761`. None of the newly acquired non-LEEP artifacts supplies a clean named full-year CEO amount, so they do not change the quantitative app boundary.
 
 ## Candidate treatment
 
@@ -137,7 +147,7 @@ The locally cached XML files remain under `benchmark/sources/native/form990/` an
 | Epoch | Keep setup-year zeros as raw history; no current point |
 | GovAI | Hold until U.S./U.K. employer and full-year director pay are resolved |
 | Global Change Data Lab / Our World in Data | Preserve verified metadata and unnamed band only as censored context |
-| Lead Exposure Elimination Project | Use the newer filing; retain COO/co-ED rows as observed-only |
+| Lead Exposure Elimination Project | Use the newer filing; retain the two co-ED CEO-like rows and COO only in the sensitivity sample, with co-leader organization balancing |
 | AIM / Charity Entrepreneurship | Preserve scale and transition context; no incumbent point |
 | Sinergia Animal | Hold; payroll entity and named individual amount unresolved |
 | Dansk Vegetarisk Forening | Preserve aggregate payroll/scale only |
@@ -183,6 +193,7 @@ Run:
 
 ```sh
 python3 scripts/audit_lingering_org_additions.py
+python3 scripts/validate_lingering_org_sources.py
 ```
 
-The script fails if the handoff ZIP changes, any packaged or recovered source hash changes, any expected table count changes, a recovered EIN differs, or compensation arithmetic does not reconcile. It also reports that the 109 package manifest rows represent only 89 URLs and zero source-native artifacts. Reproduction requires the retained local handoff ZIP plus the locally archived XML and metadata files listed in the tracked source manifest; those source archives are intentionally outside Git.
+The first script fails if the handoff ZIP changes, any packaged or recovered IRS source hash changes, an expected table count changes, a recovered EIN differs, or compensation arithmetic does not reconcile. It also reports that the 109 package manifest rows represent only 89 URLs and zero source-native artifacts. The second validates all 72 acquired-source mappings, 63 distinct artifacts, file signatures, hashes, XML identities, image-only and incomplete-capture boundaries, the three-item manual queue, and the 34-row peer disposition review. Reproduction requires the retained local handoff ZIP plus the locally archived XML, PDF, HTML, and metadata files listed in the tracked manifests; the source archive itself is intentionally outside Git.

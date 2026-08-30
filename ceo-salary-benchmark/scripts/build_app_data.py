@@ -24,6 +24,10 @@ INCUMBENT_COMPENSATION_UPDATES = ENRICHMENT / "incumbent_compensation_updates.cs
 FORM990_POSITION_OBSERVATIONS = ENRICHMENT / "form990_position_observations.csv"
 FORM990_POSITION_SUPPORTING_SOURCES = ENRICHMENT / "form990_position_supporting_sources.csv"
 FORM990_BENCHMARK_POSITION_CATALOG = ENRICHMENT / "form990_benchmark_position_catalog.csv"
+LINGERING_ORG_RECOVERED_POSITIONS = ENRICHMENT / "lingering_org_recovered_us_positions.csv"
+LINGERING_ORG_PEER_REVIEW = ENRICHMENT / "lingering_org_peer_eligibility_review.csv"
+LINGERING_ORG_APP_ADDITIONS = ENRICHMENT / "lingering_org_app_position_additions.csv"
+EA_ROSTER_CANDIDATE_REVIEW = ENRICHMENT / "ea_roster_candidate_review.csv"
 PUBLISHED_HTML_WHITESPACE_NORMALIZATION_SOURCE_IDS = {
     "SRC-POSITION-NEW-ROOTS-JESSE-TANDLER",
     "SRC-POSITION-PAI-FELECIA-WEBB",
@@ -872,6 +876,337 @@ def build_ea_roster_incumbents() -> list[dict]:
     return output
 
 
+def build_lingering_org_app_additions() -> tuple[list[dict], dict[str, list[dict]]]:
+    """Build the reviewed LEEP sensitivity addendum without changing frozen extracts."""
+    reviewed = rows(LINGERING_ORG_APP_ADDITIONS)
+    expected_people = {
+        ("TOMOS DAVIES", "coo"),
+        ("CLARE DONALDSON", "ceo"),
+        ("LUCIA COULTER", "ceo"),
+    }
+    if {
+        (text(row["person_name"]), text(row["standardized_position"]))
+        for row in reviewed
+    } != expected_people:
+        raise ValueError("LEEP app addendum must contain exactly the reviewed COO and two co-ED rows")
+    if len({text(row["app_observation_id"]) for row in reviewed}) != len(reviewed):
+        raise ValueError("Duplicate LEEP app observation ID")
+
+    recovered_by_person = {
+        text(row["person_name"]): row
+        for row in rows(LINGERING_ORG_RECOVERED_POSITIONS)
+        if text(row["source_id"]) == "SRC-990-RECOVERY-LEAD-EXPOSURE-ELIMINATION-PROJECT"
+    }
+    if set(recovered_by_person) != {
+        "TOMOS DAVIES",
+        "CLARE DONALDSON",
+        "LUCIA COULTER",
+        "ANNA CHRISTINA THORSHEIM",
+        "DANIEL WAHL",
+        "ANDREW PLAYER",
+    }:
+        raise ValueError("Recovered LEEP Part VII roster changed; re-review the addendum")
+
+    peer_rows = [
+        row for row in rows(LINGERING_ORG_PEER_REVIEW)
+        if text(row["candidate"]) == "Lead Exposure Elimination Project"
+    ]
+    if len(peer_rows) != 1 or text(peer_rows[0]["recommended_peer_disposition"]) != "sensitivity":
+        raise ValueError("LEEP peer-eligibility review is missing or no longer sensitivity-only")
+    peer_review = peer_rows[0]
+    required_review_phrases = {
+        "ceo_role_treatment": ["Clare Donaldson", "Lucia Coulter", "sensitivity-only", "never", "summed or averaged"],
+        "non_ceo_role_treatment": ["Tomos Davies", "COO", "sensitivity-only", "no Schedule J base"],
+    }
+    for field, phrases in required_review_phrases.items():
+        value = text(peer_review[field])
+        if any(phrase not in value for phrase in phrases):
+            raise ValueError(f"LEEP peer-review rule changed: {field}")
+
+    candidate_rows = [
+        row for row in rows(EA_ROSTER_CANDIDATE_REVIEW)
+        if text(row["organization"]) == "Lead Exposure Elimination Project"
+    ]
+    if len(candidate_rows) != 1:
+        raise ValueError("LEEP frozen pay-blind candidate row is missing or duplicated")
+    candidate = candidate_rows[0]
+    candidate_fields = {
+        "reference_tier": "A",
+        "tier_label": "Tier A directory addendum provisional",
+        "selection_wave": "EA directory cross-check addendum",
+        "topic_cluster": "global health policy and implementation",
+        "ea_affinity": "EA-core",
+        "country_or_region": "International / United Kingdom",
+        "expected_structure": "independent nonprofit",
+    }
+    if any(text(candidate[field]) != expected for field, expected in candidate_fields.items()):
+        raise ValueError("LEEP frozen non-pay classification changed; re-review the addendum")
+    if number(candidate["comparability_score"]) != 88:
+        raise ValueError("LEEP pay-blind comparability score changed; re-review the addendum")
+
+    xml_roots: dict[str, ElementTree.Element] = {}
+    cached_sources: dict[str, str] = {}
+    ceo_rows: list[dict] = []
+    position_rows: dict[str, list[dict]] = {"coo": []}
+    source_text_fields = {
+        "source_id": "source_id",
+        "candidate_organization": "candidate_organization",
+        "legal_entity": "legal_entity",
+        "ein": "ein",
+        "irs_object_id": "irs_object_id",
+        "return_type": "return_type",
+        "reporting_period_start": "reporting_period_start",
+        "reporting_period_end": "reporting_period_end",
+        "compensation_calendar_year": "compensation_calendar_year",
+        "person_name": "person_name",
+        "source_title": "source_title",
+        "staff_measure_definition": "staff_measure_definition",
+        "evidence_locator": "evidence_locator",
+        "source_sha256": "source_sha256",
+    }
+    source_number_fields = {
+        "average_hours_per_week": "average_hours_per_week",
+        "part_vii_organization": "part_vii_organization",
+        "part_vii_related": "part_vii_related",
+        "part_vii_other": "part_vii_other",
+        "part_vii_cash_proxy": "part_vii_cash_proxy",
+        "part_vii_total_proxy": "part_vii_total_proxy",
+        "revenue": "revenue",
+        "expenses": "expenses",
+        "filing_staff": "staff",
+    }
+
+    for row in reviewed:
+        person = text(row["person_name"])
+        recovered = recovered_by_person[person]
+        for reviewed_field, recovered_field in source_text_fields.items():
+            if text(row[reviewed_field]) != text(recovered[recovered_field]):
+                raise ValueError(
+                    f"LEEP reviewed/recovered text mismatch for {person}: {reviewed_field}"
+                )
+        for reviewed_field, recovered_field in source_number_fields.items():
+            if number(row[reviewed_field]) != number(recovered[recovered_field]):
+                raise ValueError(
+                    f"LEEP reviewed/recovered number mismatch for {person}: {reviewed_field}"
+                )
+        if text(recovered["outcome"]) != "validated_positive_exact" or not boolean(recovered["usable_point_observation"]):
+            raise ValueError(f"LEEP recovered row is no longer a usable exact observation: {person}")
+        expected_recovered_path = f"benchmark/{text(row['local_path'])}"
+        if text(recovered["local_path"]) != expected_recovered_path:
+            raise ValueError(f"LEEP source path changed for {person}")
+        if text(row["canonical_url"]) != text(recovered["source_url"]):
+            raise ValueError(f"LEEP official source URL changed for {person}")
+
+        factor = number(row["cpi_factor"])
+        if factor is None or not math.isclose(factor, cpi_factor(2024), abs_tol=1e-12):
+            raise ValueError(f"LEEP CPI factor mismatch for {person}")
+        if text(row["schedule_j_base_total"]):
+            raise ValueError(f"LEEP Schedule J base must remain null for {person}")
+        if text(row["default_inclusion_status"]) != "sensitivity" or boolean(row["structurally_clean"]):
+            raise ValueError(f"LEEP row must remain structurally flagged and sensitivity-only: {person}")
+        if text(row["analysis_status"]) != "sensitivity_only":
+            raise ValueError(f"LEEP analysis status changed for {person}")
+
+        local_path = text(row["local_path"])
+        source_path = BENCHMARK / local_path
+        expected_hash = text(row["source_sha256"])
+        if not source_path.is_file() or hashlib.sha256(source_path.read_bytes()).hexdigest() != expected_hash:
+            raise ValueError(f"LEEP native filing is missing or changed: {source_path}")
+        if local_path not in xml_roots:
+            root = ElementTree.parse(source_path).getroot()
+            if first_descendant(root, "ReturnTs") != text(row["return_timestamp"]):
+                raise ValueError("LEEP filing timestamp changed")
+            if first_descendant(root, "EIN") != text(row["ein"]).replace("-", ""):
+                raise ValueError("LEEP filing EIN changed")
+            if first_descendant(root, "TaxPeriodBeginDt") != text(row["reporting_period_start"]):
+                raise ValueError("LEEP filing period start changed")
+            if first_descendant(root, "TaxPeriodEndDt") != text(row["reporting_period_end"]):
+                raise ValueError("LEEP filing period end changed")
+            form990 = next((element for element in root.iter() if local_name(element) == "IRS990"), None)
+            if form990 is None:
+                raise ValueError("LEEP native source no longer contains Form 990")
+            if first_descendant(form990, "TotalEmployeeCnt") != text(row["filing_staff"]):
+                raise ValueError("LEEP filing-comparable staff count changed")
+            if first_descendant(form990, "CYTotalRevenueAmt") != text(row["revenue"]):
+                raise ValueError("LEEP filing revenue changed")
+            if first_descendant(form990, "CYTotalExpensesAmt") != text(row["expenses"]):
+                raise ValueError("LEEP filing expenses changed")
+            xml_roots[local_path] = form990
+            cached_sources[local_path] = cache_source(text(row["source_id"]), local_path)
+        part_vii = person_record(xml_roots[local_path], "Form990PartVIISectionAGrp", person)
+        xml_fields = {
+            "TitleTxt": "source_title",
+            "AverageHoursPerWeekRt": "average_hours_per_week",
+            "ReportableCompFromOrgAmt": "part_vii_organization",
+            "ReportableCompFromRltdOrgAmt": "part_vii_related",
+            "OtherCompensationAmt": "part_vii_other",
+        }
+        for xml_field, reviewed_field in xml_fields.items():
+            source_value = first_descendant(part_vii, xml_field)
+            if xml_field == "TitleTxt":
+                matches = source_value == text(row[reviewed_field])
+            else:
+                matches = number(source_value) == number(row[reviewed_field])
+            if not matches:
+                raise ValueError(f"LEEP native filing row changed for {person}: {xml_field}")
+
+        cash = number(row["part_vii_cash_proxy"])
+        total = number(row["part_vii_total_proxy"])
+        if cash is None or total is None:
+            raise ValueError(f"LEEP reviewed pay unexpectedly missing for {person}")
+        raw_title = text(row["source_title"])
+        evidence = (
+            f"Form 990 for compensation calendar year 2024 reports {person}, {raw_title}, "
+            f"at {number(row['average_hours_per_week']):g} average weekly hours. "
+            f"Part VII organization-plus-related reportable compensation: {money(cash)}; "
+            f"other compensation: {money(number(row['part_vii_other']))}; filing total: "
+            f"{money(total)}. No Schedule J base row is disclosed, so base remains unavailable. "
+            f"{text(row['selection_note'])}"
+        )
+        provenance = {
+            "tier": {
+                "value": text(row["reference_tier"]),
+                "label": text(row["tier_label"]),
+                "rationale": text(peer_review["nonpay_rationale"]),
+                "citation": "benchmark/enrichment/lingering_org_peer_eligibility_review.csv#candidate_id=4",
+            },
+            "ea": {
+                "value": text(row["ea_affinity"]),
+                "sourceValue": text(row["ea_affinity"]),
+                "rationale": "Pay-blind provisional EA relationship retained from the screened roster and reviewed separately from compensation.",
+                "citation": "benchmark/enrichment/ea_roster_candidate_review.csv#organization=Lead Exposure Elimination Project",
+            },
+            "structure": {
+                "expected": text(row["expected_structure"]),
+                "observationFlag": "filing_period_co_executive_leadership",
+                "rationale": text(peer_review["unresolved_blocker"]),
+                "citation": "benchmark/enrichment/lingering_org_peer_eligibility_review.csv#candidate_id=4",
+            },
+            "topic": {
+                "value": text(row["topic_cluster"]),
+                "sourceDescription": text(row["topic_cluster"]),
+                "rationale": "Pay-blind provisional topic retained from the screened roster candidate review.",
+                "citation": "benchmark/enrichment/ea_roster_candidate_review.csv#organization=Lead Exposure Elimination Project",
+            },
+            "title": {
+                "raw": raw_title,
+                "analysisGroup": text(row["title_group"]),
+                "rationale": "Exact title and hours are read directly from the preserved Form 990 Part VII row.",
+                "citation": f"benchmark/{local_path}#{text(row['evidence_locator'])}",
+            },
+            "classificationTiming": "post_freeze_source_recovery_and_pay_blind_peer_review",
+            "provenanceType": "source_native_form990 + reviewed_pay_blind_candidate_metadata",
+            "confidence": "high for filing values; provisional for peer classification",
+            "caveats": (
+                "Sensitivity-only. The filing-period co-executive structure and discrepancy between "
+                "Form 990 Part I line 5 employment and the current global-workforce narrative limit comparability."
+            ),
+        }
+        common = {
+            "id": text(row["app_observation_id"]),
+            "sourceId": text(row["source_id"]),
+            "organization": text(row["candidate_organization"]),
+            "executive": person,
+            "rawExecutive": person,
+            "title": raw_title,
+            "titleGroup": text(row["title_group"]),
+            "rawTitle": raw_title,
+            "tier": text(row["reference_tier"]),
+            "topic": text(row["topic_cluster"]),
+            "eaAffinity": text(row["ea_affinity"]),
+            "location": text(row["country_or_region"]),
+            "remoteStatus": "Not reported in Form 990",
+            "structure": text(row["expected_structure"]),
+            "revenue": number(row["revenue"]),
+            "expenses": number(row["expenses"]),
+            "staff": number(row["filing_staff"]),
+            "contextualScale": {
+                "staff": number(row["contextual_staff"]),
+                "staffDefinition": text(row["contextual_staff_definition"]),
+                "filingComparable": False,
+                "evidenceId": "S014",
+            },
+            "comparabilityScore": number(row["comparability_score"]),
+            "compensationYear": int(text(row["compensation_calendar_year"])),
+            "averageHoursPerWeek": number(row["average_hours_per_week"]),
+            "salary": {
+                "base": None,
+                "cash": round(cash * factor, 2),
+                "total": round(total * factor, 2),
+            },
+            "nominalSalary": {"base": None, "cash": cash, "total": total},
+            "cpiFactor": factor,
+            "cpiPeriod": "2024 annual average",
+            "defaultIncluded": False,
+            "structurallyClean": False,
+            "founder": False,
+            "analysisStatus": "sensitivity_only",
+            "auditStatus": "verified source-native Form 990 · sensitivity-only peer review",
+            "selectionNote": text(row["selection_note"]),
+            "evidenceText": evidence,
+            "sourceUrl": text(row["source_url"]),
+            "canonicalUrl": text(row["canonical_url"]),
+            "cachedSource": cached_sources[local_path],
+            "localPath": local_path,
+            "sourceType": text(row["return_type"]),
+            "evidenceStream": "incumbents",
+            "homepageUrl": text(row["homepage_url"]),
+            "evidenceLocator": text(row["evidence_locator"]),
+            "organizationBalanceGroup": text(row["organization_balance_group"]),
+            "filingLeadershipStructure": "co-executive directors",
+            "categoryProvenance": provenance,
+            "lingeringOrgReview": {
+                "recoveredDataPath": text(row["recovered_data_path"]),
+                "reviewedDataPath": "benchmark/enrichment/lingering_org_app_position_additions.csv",
+                "peerReviewPath": text(row["peer_review_path"]),
+                "sourceSha256": expected_hash,
+                "filingReturnTimestamp": text(row["return_timestamp"]),
+            },
+        }
+        if text(row["standardized_position"]) == "ceo":
+            ceo_rows.append(common)
+            continue
+
+        position_row = {
+            **common,
+            "positionFamily": text(row["position_family"]),
+            "positionKey": "coo",
+            "secondaryRoleTags": [],
+            "seniorityGroup": "Executive",
+            "roleScope": "functional",
+            "incumbencyStatus": "current",
+            "compensationYearRoleStatus": "no_transition_indicated",
+            "compensationYearRoleRule": "No transition language appears in the source-native filing row.",
+            "averageHoursRelatedOrgs": 0,
+            "totalReportedHours": number(row["average_hours_per_week"]),
+            "defaultHoursEligible": True,
+            "sensitivityOnlyReason": text(row["selection_note"]),
+            "positionTaxonomy": {
+                "taxonomyId": "LINGERING-LEEP-COO",
+                "classificationRule": "Exact source-native COO title maps directly to the COO benchmark.",
+                "effectiveTitleSource": "source_native_form990",
+                "effectiveTitleRule": "Preserve exact Form 990 title.",
+                "standardizedPositionRule": "Exact COO alias.",
+                "standardizedPositionAliasQuality": "exact",
+                "confidence": "high",
+                "roleScope": "functional",
+                "incumbencyStatus": "current",
+                "compensationYearRoleStatus": "no_transition_indicated",
+                "compensationYearRoleRule": "No transition language appears in the source-native filing row.",
+                "sensitivityOnlyReason": text(row["selection_note"]),
+                "partViiLocator": text(row["evidence_locator"]),
+                "scheduleJLocator": "",
+                "methodologyPath": "benchmark/enrichment/form990_position_methodology.md",
+                "classificationSource": None,
+            },
+        }
+        position_rows["coo"].append(position_row)
+
+    if {row["organizationBalanceGroup"] for row in ceo_rows} != {"leep-co-executive-directors-2024"}:
+        raise ValueError("LEEP co-executive observations must share one organization-balance group")
+    return ceo_rows, position_rows
+
+
 def display_category(value: str) -> str:
     return " ".join(word.upper() if word in {"hr", "vp"} else word.capitalize() for word in text(value).split("_"))
 
@@ -1336,16 +1671,37 @@ def main() -> None:
     definitions, rationales_by_source, reference_rationales, rationale_counts = load_category_explainers()
     incumbents = build_incumbents(rationales_by_source, reference_rationales)
     roster_incumbents = build_ea_roster_incumbents()
+    lingering_ceo_rows, lingering_position_rows = build_lingering_org_app_additions()
     incumbent_ids = {row["id"] for row in incumbents}
     duplicate_roster_ids = incumbent_ids & {row["id"] for row in roster_incumbents}
     if duplicate_roster_ids:
         raise ValueError(f"Duplicate EA-roster incumbent IDs: {sorted(duplicate_roster_ids)}")
     incumbents.extend(roster_incumbents)
+    incumbent_ids = {row["id"] for row in incumbents}
+    duplicate_lingering_ids = incumbent_ids & {row["id"] for row in lingering_ceo_rows}
+    if duplicate_lingering_ids:
+        raise ValueError(f"Duplicate lingering-organization incumbent IDs: {sorted(duplicate_lingering_ids)}")
+    incumbents.extend(lingering_ceo_rows)
     jobs = build_job_ads(rationales_by_source)
     rp_reference = build_rp_reference()
     position_catalog, position_observations, rp_references_by_position = build_position_data(
         rationales_by_source, reference_rationales
     )
+    for position_key, additions in lingering_position_rows.items():
+        if position_key not in position_observations:
+            raise ValueError(f"Unknown lingering-organization position key: {position_key}")
+        existing_ids = {
+            row["id"] for family_rows in position_observations.values() for row in family_rows
+        }
+        duplicate_ids = existing_ids & {row["id"] for row in additions}
+        if duplicate_ids:
+            raise ValueError(f"Duplicate lingering-organization position IDs: {sorted(duplicate_ids)}")
+        position_observations[position_key].extend(additions)
+        catalog_entry = next(
+            position for position in position_catalog if position["key"] == position_key
+        )
+        catalog_entry["counts"]["catalog"] += len(additions)
+        catalog_entry["counts"]["roleEligible"] += len(additions)
     ceo_catalog = next(position for position in position_catalog if position["key"] == "ceo")
     ceo_rows = incumbents + jobs
     ceo_catalog["counts"] = {
@@ -1408,6 +1764,11 @@ def main() -> None:
             "jobAdEvidenceUpdatesPath": "benchmark/enrichment/job_ad_evidence_updates.csv",
             "eaRosterAuditPath": "benchmark/enrichment/ea_roster_bundle_audit.md",
             "eaRosterReviewedCompensationPath": "benchmark/enrichment/ea_roster_validated_compensation.csv",
+            "lingeringOrgRecoveredPositionsPath": "benchmark/enrichment/lingering_org_recovered_us_positions.csv",
+            "lingeringOrgPeerReviewPath": "benchmark/enrichment/lingering_org_peer_eligibility_review.csv",
+            "lingeringOrgAppAdditionsPath": "benchmark/enrichment/lingering_org_app_position_additions.csv",
+            "lingeringOrgSourceManifestPath": "benchmark/enrichment/lingering_org_original_source_manifest.csv",
+            "lingeringOrgManualRequestsPath": "benchmark/enrichment/lingering_org_remaining_manual_save_requests.csv",
             "eaScreened109AuditPath": "benchmark/enrichment/ea_screened109_audit.md",
             "eaScreened109CandidateReviewPath": "benchmark/enrichment/ea_screened109_candidate_review.csv",
             "eaScreened109FollowupPromptPath": "benchmark/enrichment/ea_screened109_followup_prompt.md",
@@ -1420,7 +1781,8 @@ def main() -> None:
             "autoWeightAnalysisPath": "benchmark/analysis/auto_weight_models/README.md",
         },
         "summary": {
-            "selectedReferenceOrganizations": len(incumbents),
+            "selectedReferenceOrganizations": len({row["organization"] for row in incumbents}),
+            "incumbentObservationRows": len(incumbents),
             "primaryIncumbentObservations": sum(row["defaultIncluded"] for row in incumbents),
             "validatedBaseObservations": sum(
                 row["defaultIncluded"] and row["salary"]["base"] is not None for row in incumbents
@@ -1431,6 +1793,9 @@ def main() -> None:
                 bool(profile["wikipedia_title"]) for profile in wikipedia_profiles.values()
             ),
             "eaRosterValidatedObservations": len(roster_incumbents),
+            "lingeringOrgSensitivityObservations": len(lingering_ceo_rows) + sum(
+                len(family_rows) for family_rows in lingering_position_rows.values()
+            ),
             "positionCatalogSize": len(position_catalog),
             "positionCatalogObservations": len(position_app_rows),
             "positionDefaultIncluded": sum(row["defaultIncluded"] for row in position_app_rows),

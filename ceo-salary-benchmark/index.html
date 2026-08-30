@@ -93,10 +93,10 @@
       </fieldset>
 
       <section class="axis-settings field" aria-labelledby="axis-settings-title">
-        <div id="axis-settings-title" class="axis-settings-title">Axis setup <button class="info-tooltip" type="button" aria-label="About chart axes" data-tooltip="Each displayed axis can independently show one measure or a ratio of two positive measures. Choosing a measure or ratio activates a sensible default scale: log for ratios, expenses, revenue, and staff; linear for salary, match score, and evidence year. You can then override it.">?</button></div>
+        <div id="axis-settings-title" class="axis-settings-title"><span id="axis-settings-context">Axis</span> <button class="info-tooltip" type="button" aria-label="About chart axes" data-tooltip="Each displayed axis can independently show one measure or a ratio of two positive measures. Choosing a measure or ratio activates a sensible default scale: log for ratios, expenses, revenue, and staff; linear for salary, match score, and evidence year. You can then override it.">?</button></div>
         <div id="histogram-axis-settings" class="axis-view-settings">
           <fieldset class="choice-group axis-control-setting">
-            <legend>Type</legend>
+            <legend>Value</legend>
             <label><input type="radio" name="histogram-axis-mode" value="value" checked> Measure</label>
             <label><input type="radio" name="histogram-axis-mode" value="ratio"> Ratio</label>
           </fieldset>
@@ -109,7 +109,7 @@
         <div id="scatter-axis-settings" class="axis-view-settings scatter-axis-settings" hidden>
           <strong class="scatter-axis-heading">Horizontal axis</strong>
           <fieldset class="choice-group axis-control-setting">
-            <legend>Type</legend>
+            <legend>Value</legend>
             <label><input type="radio" name="scatter-x-axis-mode" value="value" checked> Measure</label>
             <label><input type="radio" name="scatter-x-axis-mode" value="ratio"> Ratio</label>
           </fieldset>
@@ -120,7 +120,7 @@
           </fieldset>
           <strong class="scatter-axis-heading">Vertical axis</strong>
           <fieldset class="choice-group axis-control-setting">
-            <legend>Type</legend>
+            <legend>Value</legend>
             <label><input type="radio" name="scatter-y-axis-mode" value="value" checked> Measure</label>
             <label><input type="radio" name="scatter-y-axis-mode" value="ratio"> Ratio</label>
           </fieldset>
@@ -151,10 +151,10 @@
       </label>
 
       <section class="weighting-field field" role="group" aria-labelledby="weighting-components-title">
-        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Individual components multiply together, then multiply the editable row weight. Auto-weights is an alternative Form 990 scale-similarity rule calibrated to a target effective sample size, so selecting it clears the individual components to prevent double-counting. Recruitment postings remain uniform unless you select another rule; the separate 50/50 evidence-stream balance remains optional.">?</button></div>
+        <div id="weighting-components-title" class="weighting-title">Weight components <button class="info-tooltip" type="button" aria-label="About weight components" data-tooltip="Individual components multiply together, then multiply the editable row weight. Auto-weights uses scale similarity for Form 990 rows and bounded frozen match-score similarity for recruitment postings; neither rule uses salary. Selecting Auto-weights clears the individual components to prevent double-counting; the separate 50/50 evidence-stream balance remains optional.">?</button></div>
         <div class="auto-weight-rule">
           <label><input type="checkbox" value="comparability"> Auto-weights</label>
-          <span id="auto-weight-note">Adaptive Form 990 scale match</span>
+          <span id="auto-weight-note">Scale-matched 990s · match-scored postings</span>
         </div>
         <div class="component-group-label">Individual components</div>
         <div id="weighting-components" class="weighting-components">
@@ -176,8 +176,8 @@
       <small id="weighting-description" class="weighting-description field-description">No components selected: equal base weights.</small>
 
       <section id="comparability-profile-field" class="weight-component-control" hidden aria-label="Auto-weight response">
-        <label class="field compact">
-          <span>Target effective n <button class="info-tooltip" type="button" aria-label="About target effective sample size" data-tooltip="Sets how concentrated the incumbent Form 990 kernel may be. The app chooses the narrowest robust expense-and-staff similarity kernel whose effective sample size reaches this target and whose largest normalized filing weight is at most 6. If fewer filing rows remain, they receive uniform weights. Recruitment postings, optional stream balancing, axis-specific missingness, and user multipliers are applied outside this calibration; the chart reports the final effective n.">?</button> <output id="auto-target-ess-value">35</output></span>
+        <label id="auto-target-ess-field" class="field compact">
+          <span>Target effective n <button class="info-tooltip" type="button" aria-label="About target effective sample size" data-tooltip="Sets how concentrated the incumbent Form 990 kernel may be. The app chooses the narrowest robust expense-and-staff similarity kernel whose effective sample size reaches this target and whose largest normalized filing weight is at most 6. If fewer filing rows remain, they receive uniform weights. Recruitment postings use a separate bounded, mean-one rule based on their frozen pay-blind match scores; optional stream balancing, axis-specific missingness, and user multipliers are then applied, and the chart reports the final effective n.">?</button> <output id="auto-target-ess-value">35</output></span>
           <input id="auto-target-ess" type="range" min="20" max="60" step="1" value="35">
         </label>
         <div id="weight-profile-comparability" class="weight-profile-slot"></div>
