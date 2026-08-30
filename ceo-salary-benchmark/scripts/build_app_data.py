@@ -1003,6 +1003,7 @@ def build_position_data(
         default_included = boolean(row["benchmark_position_default_included"])
         default_hours_eligible = boolean(row["default_hours_eligible"])
         sensitivity_only_reason = text(row["sensitivity_only_reason"])
+        compensation_year_role_status = text(row["compensation_year_role_status"])
         is_rp = boolean(row["is_rp_reference"])
         if default_included and (not role_eligible or is_rp):
             raise ValueError(f"Invalid default position inclusion: {text(row['observation_id'])}")
@@ -1033,7 +1034,9 @@ def build_position_data(
             "analysisGroup": text(row["title_group"]),
             "rationale": (
                 f"Reviewed Form 990 position taxonomy: {text(row['classification_rule'])}; "
-                f"family={family}; scope={text(row['role_scope'])}; incumbency={text(row['incumbency_status'])}."
+                f"family={family}; scope={text(row['role_scope'])}; "
+                f"filing incumbency={text(row['incumbency_status'])}; "
+                f"compensation-year role={compensation_year_role_status}."
             ),
             "citation": (
                 "benchmark/enrichment/form990_position_taxonomy.csv#"
@@ -1105,6 +1108,8 @@ def build_position_data(
             "seniorityGroup": display_category(text(row["seniority_group"])),
             "roleScope": text(row["role_scope"]),
             "incumbencyStatus": text(row["incumbency_status"]),
+            "compensationYearRoleStatus": compensation_year_role_status,
+            "compensationYearRoleRule": text(row["compensation_year_role_rule"]),
             "averageHoursPerWeek": filing_hours,
             "averageHoursRelatedOrgs": related_hours,
             "totalReportedHours": total_hours,
@@ -1126,11 +1131,15 @@ def build_position_data(
             "cpiFactor": number(row["cpi_factor_to_july_2026"]) or 1,
             "cpiPeriod": f"{int(year)} annual average" if year is not None else "",
             "defaultIncluded": default_included,
-            "structurallyClean": role_eligible and not sensitivity_only_reason and text(row["role_scope"]) == "functional" and text(row["incumbency_status"]) == "current",
+            "structurallyClean": role_eligible and not sensitivity_only_reason and text(row["role_scope"]) == "functional" and compensation_year_role_status in {"no_transition_indicated", "verified_full_year"},
             "founder": False,
             "analysisStatus": "reference_not_analyzed" if is_rp else "primary" if default_included else "sensitivity_only" if role_eligible else "excluded",
             "auditStatus": f"{text(row['classification_confidence'])} confidence · {text(row['classification_rule'])}",
-            "selectionNote": text(row["default_exclusion_reason"]) or "Current paid role with reviewed functional scope.",
+            "selectionNote": text(row["default_exclusion_reason"]) or (
+                "Paid role independently verified to cover the compensation calendar year with reviewed functional scope."
+                if compensation_year_role_status == "verified_full_year"
+                else "Paid role with no source-indicated compensation-year transition and reviewed functional scope."
+            ),
             "evidenceText": evidence,
             "sourceUrl": text(row["propublica_url"]),
             "canonicalUrl": text(row["official_irs_url"]),
@@ -1150,6 +1159,8 @@ def build_position_data(
                 "confidence": text(row["classification_confidence"]),
                 "roleScope": text(row["role_scope"]),
                 "incumbencyStatus": text(row["incumbency_status"]),
+                "compensationYearRoleStatus": compensation_year_role_status,
+                "compensationYearRoleRule": text(row["compensation_year_role_rule"]),
                 "sensitivityOnlyReason": sensitivity_only_reason,
                 "partViiLocator": text(row["part_vii_xml_locator"]),
                 "scheduleJLocator": text(row["schedule_j_xml_locator"]),

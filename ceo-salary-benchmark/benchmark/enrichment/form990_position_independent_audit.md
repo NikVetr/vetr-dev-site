@@ -4,135 +4,97 @@ Audit date: 2026-08-29 (America/Los_Angeles)
 
 ## Verdict
 
-**PASS, with one non-blocking manifest-status caveat.** The regenerated position observations, grouped taxonomy, sample boundaries, compensation arithmetic, reviewed effective-title corrections, and 19 externally supported classifications reconcile. No identified classification or inclusion blocker remains in the public position layer.
+**PASS, with documented sensitivity boundaries.** The generated position observations, grouped taxonomy, compensation-year eligibility, strict standardized-title membership, compensation arithmetic, and supporting-source provenance reconcile. The remaining related-employer ambiguity at Creative Commons is excluded from the default sample and retained for sensitivity analysis.
 
-This audit is independently reproducible with `python3 scripts/audit_form990_position_outputs.py`; the validator reads generated artifacts and preserved sources but does not import or invoke the extractor.
+The audit is independently reproducible with:
 
-## Scope
+```sh
+python3 scripts/audit_form990_position_outputs.py
+```
 
-The audit covered:
+The validator reads generated artifacts and preserved sources but does not import or invoke the extractor.
 
-- `benchmark/enrichment/form990_position_observations.csv`
-- `benchmark/enrichment/form990_position_taxonomy.csv`
-- `benchmark/enrichment/form990_position_supporting_sources.csv`
-- the 136 source Form 990 XML files referenced by the observation rows
-- the 19 hash-pinned classification sources referenced by the supporting-source manifest
+## Scope and cardinality
 
-The existing validated CEO dataset remains a separate authoritative layer and was checked only at the boundary: CEO and CEO-like rows must not enter the non-CEO catalog.
-
-## Cardinality and reconciliation
-
-| Check | Expected | Observed | Result |
-|---|---:|---:|---|
-| Stable observations | 2,785 | 2,785 unique observation IDs | Pass |
-| Taxonomy groups | 884 | 884 unique taxonomy IDs | Pass |
-| Catalog-eligible observations | 989 | 989 | Pass |
-| Role-eligible observations | 772 | 772 | Pass |
-| Default-included peer observations | 750 | 750 | Pass |
-| Supporting-source records | 19 | 19 unique source IDs and observation IDs | Pass |
-| Source Form 990 filings | 136 | 136 unique, well-formed, hash-matching XML files | Pass |
-
-All 884 taxonomy groups reconcile exactly to their underlying observations: record count, compensated-record count, organization count, record type, primary family, secondary tags, seniority, scope, incumbency, rule, benchmark position, and confidence all agree. The 14-title public boundary and position-family totals reproduce from the observation and catalog CSVs.
-
-## Eligibility and default-sample boundary
-
-The 772 role-eligible observations decompose into **767 peers plus five RP display references**. The 767 peer observations decompose into **750 default observations plus 17 sensitivity-only observations**:
-
-- nine rows below the 30-hour default threshold, including the five Center for Public Integrity 0.5-hour source-anomaly rows;
-- seven Center for Responsible Lending rows reporting zero filing-organization hours and 40 related-organization hours without an identified related employer; and
-- one Institute for Security and Technology row whose source title explicitly says `FRACTIONAL SVP`.
-
-Every default row is a non-CEO public-family observation with positive Part VII reportable cash, a reviewed role-eligible classification, at least 30 combined filing-plus-related weekly hours, no sensitivity-only flag, and `is_rp_reference = no`. No RP marker, low-hours row, source-labeled fractional row, governance row, program/affiliate row, uncertain row, or nonpositive-compensation row enters the default sample.
-
-## Taxonomy review status
-
-| Review status | Groups | Public-boundary result |
+| Check | Observed | Result |
 |---|---:|---|
-| `rule_assigned` | 559 | Eligible only when all row-level conditions pass |
-| `rule_assigned_multi_role` | 74 | Secondary functions retained explicitly |
-| `reviewed_observation_override` | 129 | Review rule retained in each affected observation |
-| `manual_review_required` | 122 | All are non-catalog and non-role-eligible |
+| Stable observations | 2,785 unique observation IDs | Pass |
+| Taxonomy groups | 884 unique taxonomy IDs | Pass |
+| Catalog-eligible observations | 989 | Pass |
+| Role-eligible observations | 778 | Pass |
+| Default-included peer observations | 755 | Pass |
+| Supporting classification sources | 26 unique source and observation IDs | Pass |
+| Source Form 990 filings | 136 unique, well-formed, hash-matching XML files | Pass |
+| Public primary positions | 14 non-CEO titles | Pass |
 
-The 122 manual-review groups consist of 103 unmapped-position groups and 19 generic CEO-like groups. None is exposed in the public Position catalog. No low-confidence observation is catalog-eligible, and no role-eligible row has low classification confidence.
+The 778 role-eligible observations comprise 774 peer rows and four display-only RP references. The peer rows comprise 755 default observations and 19 sensitivity-only observations:
 
-## External classification provenance
+- nine rows below the 30-hour default threshold, including five 0.5-hour source-anomaly rows;
+- seven Center for Responsible Lending rows with 40 related-organization hours but no identified related employer;
+- one source-labeled fractional Institute for Security and Technology role; and
+- two Creative Commons rows paid entirely through a controlled related entity whose employer/scale boundary is not reconciled to the filing organization.
 
-Each of the 19 supporting-source rows has:
+Every default row is a positive, paid, role-matched observation with either no source-indicated transition during the compensation calendar year or separately verified full-year coverage, at least 30 combined filing-plus-related weekly hours, reviewed functional scope, no sensitivity-only flag, and `is_rp_reference = no`. The ordinary `no_transition_indicated` status is an absence-of-transition screen, not independent proof of full-year tenure.
 
-- a unique source ID and unique target observation;
-- an existing local source whose SHA-256 equals the manifest hash;
-- an official canonical URL and an allowed validation status;
-- exact source ID, URL, local path, and hash fields on the target observation; and
-- a taxonomy group marked `reviewed_observation_override` with the source and claim in its notes.
+## Compensation-year versus filing-time status
 
-The 17 HTML snapshots contain the cited person, title, and duty evidence. Text extracted from both PDFs contains the cited title/function evidence. The official URLs were independently checked during the source audit; no user-saved replacement is presently required.
+Part VII compensation is calendar-year compensation, while a filing title can mention a later promotion or departure in the following fiscal period. The extraction now preserves both:
 
-| Observation | Primary family | Secondary tags | Independent result |
-|---|---|---|---|
-| John Pope, Bulletin of the Atomic Scientists | Communications | — | Annual report expands `Chief Aud. Officer` to Chief Audience Officer | Pass |
-| Kimberly Serrano, American Immigration Council | Programs | Communications; Research | Center role is outward-facing program, messaging, and research work | Pass |
-| Sage Sharp, Software Freedom Conservancy | Programs | People | Outreachy program role is primary; People is a title-derived secondary, not an internal-HR finding | Pass |
-| Verena Radulovic, C2ES | Programs | Policy | Business-climate council and policy portfolio | Pass |
-| Caroline Bushnell, Good Food Institute | Programs | — | Corporate-engagement program with companies and investors | Pass |
-| Elizabeth Vish, Institute for Security and Technology | Policy | Programs | Cyber foreign-policy and capacity-building portfolio | Pass |
-| Claire Leibowicz, Partnership on AI | Programs | Policy; Research | AI and Media Integrity framework and multistakeholder program | Pass |
-| Felecia Webb, Partnership on AI | Strategy | Development; Programs | Official page expands `CSOPP` to Chief Strategy Officer, Philanthropy and Partnerships | Pass |
-| Stephanie Bell, Partnership on AI | Programs | Research | Official page expands `CPIO` to Chief Programs and Insights Officer | Pass |
-| Jesse Tandler, New Roots Institute | General Leadership | — | Official profile confirms Managing Director, completing the title spilled across the filing's person/title fields | Pass |
-| Olivier Defawe, VillageReach | Programs | — | Outsourced-drone program and technical-assistance role | Pass |
-| Karen Nilsen, The Humane League | Communications | Programs; Strategy | PR, studios, organizing, and digital-engagement remit | Pass |
-| Erica Goldman, Federation of American Scientists | Policy | Research | Science-policy leadership | Pass |
-| Dina Smeltz, Chicago Council on Global Affairs | Research | Policy | Public-opinion survey research and foreign-policy remit | Pass |
-| Rachel Jean-Baptiste, Environmental Law Institute | Communications | Programs | Publications primary; Education retained from the native title | Pass |
-| Grace Hollister, Evidence Action | Communications | Development | Global communications, fundraising, and donor relations | Pass |
-| Eddie Martin Jr., CLASP | People | Strategy; Policy | Organization-wide racial-equity strategy, planning, and policy | Pass |
-| Erik Cothron, Nuclear Innovation Alliance | Research | Strategy | Official profile resolves the filing typo and confirms research/analysis work | Pass |
-| Matt Scott, Project Drawdown | Communications | Programs | Official profile expands `ENGAGEMENT D` to Director of Storytelling and Engagement | Pass |
+- `incumbency_status`, which describes the filing-time title/status text; and
+- `compensation_year_role_status`, which determines whether the named role covered the compensation calendar year.
 
-Andrea De Forest remains Programs with Communications secondary based on the source-native title. No external source is attached, correctly preserving the unresolved boundary: the available CEP pages name Jennifer/Jen de Forest rather than Andrea De Forest.
+Five later departures that previously erased complete earlier-year observations are now correctly retained: Manizha Nabieva, William Lutz, Janay Richmond, James Phelan, and Claudia Shilumani. Andrea Joy Kroboth and Celeste Brubaker are likewise retained for complete 2024 role years despite departing in 2025. Roles beginning only after the compensation year—Kena Mayberry, Immanuel Wolff, and Winnie Auma's COO appointment—remain ineligible for that position-year.
 
-## Regression checks for earlier blockers
+Month-only December endings remain conservatively excluded unless exact source evidence establishes complete calendar-year coverage.
 
-| Earlier issue | Regenerated result | Status |
-|---|---|---|
-| A misspelled MuckRock `Cheif Executive Officer` could leak into a functional family | Classified `generic_ceo_like`; non-catalog and non-eligible | Pass |
-| CEO and project/affiliate executive titles could contaminate non-CEO distributions | Canonical and generic CEO-like rows remain outside the catalog; scoped program/affiliate executives remain excluded | Pass |
-| Third Way's paid `BOARD TREASURER` could be mistaken for Finance | Governance; 2 filing hours + 38 related hours; all cash from related organization; excluded | Pass |
-| Hours threshold could ignore related-organization hours | Default threshold uses the combined filing-plus-related total | Pass |
-| CRL related-organization rows could enter the default sample | Seven rows retained only for explicit sensitivity analysis | Pass |
-| IST's fractional executive could enter the default sample | Role eligible for sensitivity, explicitly fractional, default excluded | Pass |
-| Truncated or misleading titles could fall into the wrong family | Reviewed corrections for audience, engagement, software development, energy finance, people operations, general counsel, strategy/impact, and named program roles are present | Pass |
-| Generic leadership could absorb functionally identifiable rows | Reviewed functional rows are reassigned while genuinely generic titles remain General Leadership | Pass |
-| Split/truncated/acronym titles could remain missing or misclassified | Ten exact reviewed effective-title corrections preserve raw fields and resolve to guarded observations | Pass |
-| EVP aliases could remain pooled with ordinary Vice President | Mallory Stewart, Brett Sedgewick, Paul Byatta, and CRL's Ellen Harnick resolve to Executive Vice President; CRL remains sensitivity-only | Pass |
-| External classifications could lack reproducible provenance | Nineteen official sources are cached, hash-pinned, joined, and described | Pass |
+## Corrected strict-position semantics
 
-Spot checks of previously problematic semantics also reproduce as intended:
+The independent review added fail-closed regression checks for the following boundaries:
 
-- `DIRECTOR OF PEOPLE OPERATIONS` → People, with Operations secondary;
-- `GEN. COUNSEL, SECRETARY, TREASURER` → Legal, with Finance secondary;
-- `HEAD OF SOFTWARE DEVELOPMENT` → Technology;
-- energy-finance analyst/advisor titles → Research, retaining Finance and Strategy where applicable; and
-- `CHIEF STRATEGY AND IMPACT OFFICER` → Strategy, with Programs secondary.
+- RP's Carolyn Footitt record remains filing-current but is a 2024 compensation-year transition/uncertainty record, not a clean COO reference. The reported extraction remains exact: $79,898 Part VII cash and $56,248 estimated other compensation, with no Schedule J row. RP's official 2025 report places the permanent COO appointment in 2025.
+- Clean Air Task Force's Schedule J title `TREAS/COO(THRU SEPT)` is recognized as partial and excluded.
+- Andrea Joy Kroboth's truncated `CHIEF OPERATING OFF (THRU 2/7/25)` is expanded to Chief Operating Officer and included for the complete 2024 compensation year.
+- Deputy Vice Presidents are not pooled with ordinary Vice Presidents. Only bare organization-wide Deputy Director titles enter the strict Deputy Director benchmark; functional deputies remain in their functional family or unstandardized.
+- Policy Director / General Counsel hybrids do not enter either strict single-title benchmark.
+- `Chief Technical Officer` is not treated as Chief Technology Officer. Last Mile Health's official profile places Divya Nair in health-systems strengthening and monitoring/evaluation/research/learning.
+- Results for America's `CIO` is source-verified as Chief Impact Officer, not Chief Information Officer.
+- A board `Director` token is not combined with Bradley Kuhn's compensated staff title; his effective staff title is Policy Fellow.
+- General Counsel, VP/SVP/EVP, Managing Director, Program Director, and reviewed truncation aliases receive consistent title-level metadata.
+- Reviewed person/title spillovers now correctly reconstruct Adam Shifriss, Simone Frank, James Parsons, and Vina Morris while retaining the raw Part VII fields.
 
-## Compensation and native-source integrity
+Selected strict default counts after correction include COO 28 rows/28 organizations, Vice President 101/40, Policy Director 25/20, Deputy Director 6/6, and Program Director 35/17. Hidden sparse titles remain auditable but are not exposed in the public selector.
 
-- All 136 referenced XML files are well-formed and their SHA-256 values match both the observation rows and acquisition-manifest hashes.
-- EIN, IRS object ID, and tax-period boundaries agree with the acquisition manifest for all 136 sources.
+## Taxonomy and provenance
+
+| Review status | Groups |
+|---|---:|
+| `rule_assigned` | 555 |
+| `rule_assigned_multi_role` | 70 |
+| `reviewed_observation_override` | 137 |
+| `manual_review_required` | 122 |
+
+All 884 taxonomy groups reconcile to their underlying observations for record counts, primary family, secondary tags, title/seniority level, scope, incumbency, classification rule, benchmark position, hybrid status, and confidence. No low-confidence row is role-eligible.
+
+Each of the 26 supporting-source records has a unique source ID and target observation, an official canonical URL, an existing local artifact, a matching SHA-256, and matching provenance fields on the target observation. The added source-backed disambiguations include RP's COO transition, Bradley Kuhn's board/staff split, Divya Nair's Chief Technical Officer remit, Lisa Morrison Butler's Chief Impact Officer expansion, and the CRFB and Vera person/title splits.
+
+## Compensation and source integrity
+
+- All 136 referenced XML filings are well formed and match their recorded SHA-256 values.
+- EIN, IRS object ID, and tax-period boundaries agree with the acquisition manifest.
 - There are 814 exact Schedule J matches and 813 rows with positive Schedule J base compensation.
-- Filing-organization and related-organization Schedule J totals equal the sum of base, bonus, other reportable, deferred, and nontaxable components in every matched row.
-- Part VII cash equals Schedule J base plus bonus plus other reportable compensation in 811 of 814 rows. The only differences are source-native and disclosed: Schedule J reportable compensation exceeds Part VII cash by $10 for Bradley Townsend, $1 for Alexander Main, and $602 for Conor McGurk.
+- Filing-organization and related-organization Schedule J totals equal the sum of base, bonus, other reportable, deferred, and nontaxable components for every matched row.
+- Part VII cash equals Schedule J base plus bonus plus other reportable compensation in 811 of 814 rows. The three differences are source-native and preserved: $10 for Bradley Townsend, $1 for Alexander Main, and $602 for Conor McGurk.
 
-## Residual limitations and caveat
+## Interpretation and residual caveats
 
-These are not audit failures, but they remain important for interpretation:
-
-- Form 990 Part VII is a threshold-selected list, not an employee census. Part VII cash is reportable W-2/1099 compensation, not exact base salary; Schedule J base is exact but selectively reported.
-- Multiple observations from one organization are not independent. The application should retain organization-balanced weighting as its default.
-- Several official role pages are later than the filing period. They support role interpretation, not a claim that the later title was contemporaneous in every detail.
-- The Sage Sharp People secondary tag is defensible as a secondary title function, but must not be described as evidence that the role was primarily internal HR; the source supports Programs primary.
-- In `benchmark/deliverables/source_acquisition_manifest.csv`, 121 of the 136 position-source rows currently carry `current_status = validation_failed` even though their local hashes, metadata, and XML validity independently pass. That status field is therefore not a reliable source-availability signal for this position layer and should be reconciled before it is used in UI or release-status claims. It does not indicate missing or corrupt position XML in the audited artifacts.
+- Part VII filing-plus-related compensation is reportable W-2/1099 cash compensation, not exact base salary. Exact base is available only where Schedule J reports it. The application therefore labels the default non-CEO measure as **reportable compensation**.
+- Part VII is threshold-selected and is not a workforce salary census.
+- Multiple rows from one organization are not independent; organization-balanced weighting is the default for non-CEO position views.
+- Creative Commons' Erika Drushka and Monica Granados remain role-eligible but sensitivity-only because all cash is attributed to a controlled related entity and the employer/scale pairing is unresolved.
+- Animal Equality's Jose Antonio Valle Blanco is a paid 40-hour VP and Secretary who is also a director/trustee. Retaining him is source-valid; excluding corporate/governance hybrids would be a separate estimand choice.
+- Abraham Rowe's 2023 RP COO compensation is a clean historical observation, but it should appear only if explicitly labeled historical rather than as the current RP reference.
+- In `benchmark/deliverables/source_acquisition_manifest.csv`, legacy `validation_failed` statuses on otherwise hash-valid position XML files remain unsuitable as a source-availability signal and should not drive UI claims.
 
 ## Conclusion
 
-The regenerated position layer is suitable for application integration under the documented Form 990 limitations. The expected **772 role-eligible**, **750 default-included**, **14 primary-position**, and **19 supporting-source** boundaries all pass. Raw Part VII identity/title fields remain unchanged, reviewed effective titles are explicit and fail-closed, and the unresolved Andrea/Jennifer De Forest identity is correctly left unlinked rather than guessed.
+The position layer is suitable for application use under the documented Form 990 limitations. The current **778 role-eligible**, **755 default-included**, **14 primary-position**, and **26 supporting-source** boundaries all pass independent validation. Raw source fields remain unchanged, reviewed effective fields are explicit and fail-closed, and unresolved employer boundaries are retained outside the default distribution rather than guessed.

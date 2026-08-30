@@ -36,8 +36,8 @@ POSITION_CATALOG_PATH = ENRICHMENT / "form990_benchmark_position_catalog.csv"
 
 EXPECTED_FORM990_COUNT = 136
 EXPECTED_NON_CEO_CATALOG_COUNT = 989
-EXPECTED_ROLE_ELIGIBLE_COUNT = 772
-EXPECTED_DEFAULT_INCLUDED_COUNT = 750
+EXPECTED_ROLE_ELIGIBLE_COUNT = 778
+EXPECTED_DEFAULT_INCLUDED_COUNT = 755
 RP_SOURCE_ID = "SRC-990-RP-REFERENCE"
 POSITION_SUPPORTING_SOURCES = (
     {
@@ -69,6 +69,66 @@ POSITION_SUPPORTING_SOURCES = (
         "canonical_url": "https://sfconservancy.org/news/2020/dec/02/sharp-newest-employee/",
         "sha256": "b511b956ebace0f5278358d0aad22ab3489c7c53e0b7ff455319385bccc51552",
         "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-SFC-BRADLEY-KUHN",
+        "observation_id": "SRC-990-EXT-SOFTWARE-FREEDOM-CONSERVANCY::bradleymkuhn",
+        "organization": "Software Freedom Conservancy",
+        "evidence_use": "Separates Kuhn's board Director-at-large role from his compensated staff role as Policy Fellow and Hacker-in-Residence; `Director` is not part of the staff title.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/sfc-bradley-kuhn-board.html",
+        "canonical_url": "https://sfconservancy.org/about/board/",
+        "sha256": "dd06bbedb9710f425427db4acaf631df161e062ce7cd3b0ecd046724ffa198c6",
+        "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-LMH-DIVYA-NAIR",
+        "observation_id": "SRC-990-EXT-LAST-MILE-HEALTH::divyanair",
+        "organization": "Last Mile Health",
+        "evidence_use": "Documents that Chief Technical Officer leads health-systems strengthening and global monitoring, evaluation, research, and learning; this is not the Chief Technology Officer benchmark.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/last-mile-health-divya-nair.html",
+        "canonical_url": "https://lastmilehealth.org/profiles/divya-nair/",
+        "sha256": "cc5170483b7db574b9ba56a45d3098d046e0e7d34a84dd37f9588a9daf4bc616",
+        "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-RFA-LISA-MORRISON-BUTLER",
+        "observation_id": "SRC-990-EXT-RESULTS-FOR-AMERICA::lisavmorrisonbutler",
+        "organization": "Results for America",
+        "evidence_use": "Expands the filing acronym `CIO` to Chief Impact Officer rather than Chief Information Officer.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/results-for-america-lisa-morrison-butler.html",
+        "canonical_url": "https://results4america.org/people/lisa-morrison-butler/",
+        "sha256": "ceddb5fb9be94d637143abbae523c94abd701bbf6708a4870297dbc5f46369f0",
+        "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-CRFB-ADAM-SHIFRISS",
+        "observation_id": "SRC-990-EXT-COMMITTEE-FOR-A-RESPONSIBLE-FEDERAL-BUDGET::adamshifrisssenior",
+        "organization": "Committee for a Responsible Federal Budget",
+        "evidence_use": "Corroborates that `Senior` belongs to Shifriss's job title: Senior Director of Legislative Strategy.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/crfb-adam-shifriss.html",
+        "canonical_url": "https://www.crfb.org/biography/staff/adam-shifriss",
+        "sha256": "6bda95ce963e7d96251a4543aeb71a2292a2244c1d0d4ce1f7df469b1661b199",
+        "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-CRFB-SIMONE-FRANK",
+        "observation_id": "SRC-990-EXT-COMMITTEE-FOR-A-RESPONSIBLE-FEDERAL-BUDGET::simonegfranksenior",
+        "organization": "Committee for a Responsible Federal Budget",
+        "evidence_use": "Corroborates that `Senior` belongs to Frank's job title: Senior Advisor, Finance and Operations.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/crfb-staff-members.html",
+        "canonical_url": "https://www.crfb.org/staff-members",
+        "sha256": "571f021d12a88a0fce1d8b8b7b4fae27d8f6325e23bb7ff44971d927bd3a43d9",
+        "validation_status": "official_organization_page_hash_verified",
+    },
+    {
+        "source_id": "SRC-POSITION-VERA-JAMES-PARSONS",
+        "observation_id": "SRC-990-EXT-VERA-INSTITUTE-OF-JUSTICE::jamesparsonsprogram",
+        "organization": "Vera Institute of Justice",
+        "evidence_use": "Corroborates Jim/James Parsons's identity and program/research-director history; the filing's misplaced `PROGRAM` token is restored to the title.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/vera-jim-parsons.html",
+        "canonical_url": "https://www.vera.org/newsroom/vera-institute-names-new-research-director",
+        "sha256": "7498a51aa3e8817e3f5faec1b711f3a20472f38e1fa054b59e4697e75d38999e",
+        "validation_status": "official_organization_page_hash_verified_identity_plus_source_internal_title_spill",
     },
     {
         "source_id": "SRC-POSITION-C2ES-VERENA-RADULOVIC",
@@ -230,6 +290,16 @@ POSITION_SUPPORTING_SOURCES = (
         "sha256": "6df75dbd7917a2834199aeea18c3a5f22e94abfb8c142184d99e03cc3ebe7dae",
         "validation_status": "official_organization_page_hash_verified",
     },
+    {
+        "source_id": "SRC-POSITION-RP-CAROLYN-FOOTITT-TRANSITION",
+        "observation_id": "SRC-990-RP-REFERENCE::carolynfootitt",
+        "organization": "Rethink Priorities",
+        "evidence_use": "RP's 2025 report describes Carolyn Footitt's permanent COO appointment as a 2025 leadership transition, so her 2024 filing amount is not treated as full-year incumbent COO compensation.",
+        "local_path": "benchmark/sources/native/supporting/position_classification/rp-2025-results-2026-plans.pdf",
+        "canonical_url": "https://rethinkpriorities.org/wp-content/uploads/2025/11/Rethink-Priorities-2025-Results-2026-Plans-and-Funding-Needs.pdf",
+        "sha256": "e3e05b09687154273609f35c2157b4ea7a7ea26042f38d959d931a3b0ebfc65e",
+        "validation_status": "official_publication_hash_verified_page_8",
+    },
 )
 POSITION_SUPPORTING_SOURCE_FIELDS = (
     "source_id",
@@ -281,6 +351,7 @@ BENCHMARK_POSITIONS = (
     ("finance_director", "Finance Director", "Finance Director", "Directors", "Director-level finance roles, including Director of Finance and Finance Director."),
     ("deputy_director", "Deputy Director", "Deputy Director", "Executive leadership", "Deputy Director titles, excluding deputy vice presidents and deputy functional posts."),
     ("executive_vice_president", "Executive Vice President", "Executive Vice President", "Executive leadership", "Executive Vice President, EVP, and Executive VP aliases."),
+    ("deputy_vice_president", "Deputy Vice President", "Deputy Vice President", "Limited samples", "Deputy Vice President and Deputy VP titles, kept separate from Vice President."),
     ("chief_development_officer", "Chief Development Officer", "Chief Development Officer", "C-suite", "Chief Development, Philanthropy, or Advancement Officer titles."),
     ("chief_people_officer", "Chief People Officer", "Chief People Officer", "C-suite", "Chief People, Human Resources, Human Capital, and People-and-Culture Officer titles."),
     ("chief_economist", "Chief Economist", "Chief Economist", "Limited samples", "Chief Economist titles; retained internally until the public sample is large enough."),
@@ -297,21 +368,21 @@ BENCHMARK_POSITIONS = (
     ("assistant_managing_director", "Assistant Managing Director", "Assistant Managing Director", "Limited samples", "Assistant Managing Director, kept separate from Managing Director."),
 )
 EXPECTED_PUBLIC_POSITION_DEFAULT_COUNTS = {
-    "vice_president": (100, 40),
-    "program_director": (34, 16),
+    "vice_president": (101, 40),
+    "program_director": (35, 17),
     "managing_director": (36, 20),
-    "coo": (29, 29),
+    "coo": (28, 28),
     "senior_vice_president": (28, 17),
     "development_director": (26, 26),
     "policy_director": (25, 20),
-    "communications_director": (23, 23),
+    "communications_director": (24, 23),
     "senior_researcher": (22, 15),
-    "cfo": (21, 21),
+    "cfo": (22, 22),
     "general_counsel": (17, 17),
     "chief_of_staff": (15, 15),
     "research_director": (15, 13),
     "finance_director": (15, 15),
-    "deputy_director": (11, 9),
+    "deputy_director": (6, 6),
     "executive_vice_president": (12, 10),
     "chief_development_officer": (9, 9),
     "chief_people_officer": (8, 8),
@@ -334,6 +405,34 @@ REVIEWED_NAME_TITLE_SPILLOVERS = {
         "raw_title": "TREASURER",
         "effective_person": "LISEL LOY",
         "effective_title": "EVP COO",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-COMMITTEE-FOR-A-RESPONSIBLE-FEDERAL-BUDGET::adamshifrisssenior": {
+        "raw_person": "ADAM SHIFRISS SENIOR",
+        "raw_title": "DIRECTOR OF LEGISLATIVE STRATEGY",
+        "effective_person": "ADAM SHIFRISS",
+        "effective_title": "SENIOR DIRECTOR OF LEGISLATIVE STRATEGY",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-COMMITTEE-FOR-A-RESPONSIBLE-FEDERAL-BUDGET::simonegfranksenior": {
+        "raw_person": "SIMONE G FRANK SENIOR",
+        "raw_title": "ADVISOR, FINANCE & OPERATIONS",
+        "effective_person": "SIMONE G FRANK",
+        "effective_title": "SENIOR ADVISOR, FINANCE & OPERATIONS",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-VERA-INSTITUTE-OF-JUSTICE::jamesparsonsprogram": {
+        "raw_person": "JAMES PARSONS PROGRAM",
+        "raw_title": "DIRECTOR AND SPECIAL ADVISOR",
+        "effective_person": "JAMES PARSONS",
+        "effective_title": "PROGRAM DIRECTOR AND SPECIAL ADVISOR",
+        "rule": "reviewed_part_vii_person_name_title_spill",
+    },
+    "SRC-990-EXT-VERA-INSTITUTE-OF-JUSTICE::vinamorrisdirector": {
+        "raw_person": "VINA MORRIS DIRECTOR",
+        "raw_title": "TECHNOLOGY INNOVATION AND STRATEGY",
+        "effective_person": "VINA MORRIS",
+        "effective_title": "DIRECTOR, TECHNOLOGY INNOVATION AND STRATEGY",
         "rule": "reviewed_part_vii_person_name_title_spill",
     },
     "SRC-990-EXT-CENTER-FOR-AI-SAFETY::oliverzhangmanagingdirector": {
@@ -398,6 +497,60 @@ REVIEWED_ACRONYM_TITLE_EXPANSIONS = {
         "effective_title": "Chief Programs and Insights Officer",
         "rule": "reviewed_organization_specific_title_acronym",
     },
+    "SRC-990-EXT-SOFTWARE-FREEDOM-CONSERVANCY::bradleymkuhn": {
+        "raw_title": "Director, Policy Fellow, Outgoing Treasurer",
+        "effective_title": "Policy Fellow",
+        "rule": "reviewed_staff_title_separated_from_board_and_officer_roles",
+    },
+    "SRC-990-EXT-RESULTS-FOR-AMERICA::lisavmorrisonbutler": {
+        "raw_title": "EXECUTIVE VP AND CIO",
+        "effective_title": "Executive Vice President and Chief Impact Officer",
+        "rule": "reviewed_organization_specific_title_acronym",
+    },
+    "SRC-990-EXT-ANIMAL-LEGAL-DEFENSE-FUND::andreajoykroboth": {
+        "raw_title": "CHIEF OPERATING OFF (THRU 2/7/25)",
+        "effective_title": "Chief Operating Officer (through February 7, 2025)",
+        "rule": "reviewed_unambiguous_source_title_truncation",
+    },
+}
+
+# Part VII compensation is reported for the calendar year that begins within
+# the filing period. A later fiscal-period departure must not erase a complete
+# compensation-year observation, while a later start must not create one.
+REVIEWED_COMPENSATION_YEAR_ROLE_OVERRIDES = {
+    "SRC-990-RP-REFERENCE::carolynfootitt": (
+        "partial_or_uncertain", "official_report_dates_permanent_coo_appointment_to_2025"
+    ),
+    "SRC-990-EXT-ANIMAL-LEGAL-DEFENSE-FUND::andreajoykroboth": (
+        "verified_full_year", "departure_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-VILLAGE-ENTERPRISE::celestebrubaker": (
+        "verified_full_year", "departure_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-FEDERATION-OF-AMERICAN-SCIENTISTS::manizhanabieva": (
+        "verified_full_year", "departure_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-INSTITUTE-FOR-WOMEN-S-POLICY-RESEARCH::williamlutz": (
+        "verified_full_year", "departure_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-NATIONAL-COMMITTEE-FOR-RESPONSIVE-PHILANTHROPY::janayrichmond": (
+        "verified_full_year", "departure_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-VILLAGE-ENTERPRISE::jamesphelan": (
+        "verified_full_year", "departure_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-VILLAGEREACH::claudiashilumani": (
+        "verified_full_year", "departure_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-CODE-FOR-SCIENCE-SOCIETY::kenamayberry": (
+        "not_held", "role_started_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-POPULATION-REFERENCE-BUREAU::immanuelwolff": (
+        "not_held", "role_started_after_compensation_calendar_year"
+    ),
+    "SRC-990-EXT-VILLAGE-ENTERPRISE::winnieauma": (
+        "not_held", "role_started_after_compensation_calendar_year"
+    ),
 }
 
 # The source XML repeats this unpaid board row byte-for-byte. It is collapsed to
@@ -469,6 +622,12 @@ SENSITIVITY_ONLY_OBSERVATIONS = {
     },
     "SRC-990-EXT-INSTITUTE-FOR-SECURITY-AND-TECHNOLOGY::ericdavis": (
         "source_labeled_fractional_role"
+    ),
+    "SRC-990-EXT-CREATIVE-COMMONS::erikadrushka": (
+        "related_org_compensation_with_unreconciled_employer_scale_boundary"
+    ),
+    "SRC-990-EXT-CREATIVE-COMMONS::monicagranados": (
+        "related_org_compensation_with_unreconciled_employer_scale_boundary"
     ),
 }
 
@@ -832,6 +991,15 @@ REVIEWED_ROLE_OVERRIDES: dict[str, tuple[str, tuple[str, ...], str]] = {
     "SRC-990-EXT-GOOD-FOOD-INSTITUTE::sarahdavid": (
         "legal", ("finance",), "reviewed_general_counsel_primary_function"
     ),
+    "SRC-990-EXT-ECONOMIC-POLICY-INSTITUTE::celinemcnicholas": (
+        "policy", ("legal",), "reviewed_policy_and_general_counsel_hybrid"
+    ),
+    "SRC-990-EXT-SOFTWARE-FREEDOM-CONSERVANCY::bradleymkuhn": (
+        "policy", ("research",), "reviewed_policy_fellow_staff_function"
+    ),
+    "SRC-990-EXT-LAST-MILE-HEALTH::divyanair": (
+        "programs", ("research",), "reviewed_health_systems_and_merl_function"
+    ),
     "SRC-990-EXT-GLOBAL-HEALTH-CORPS::hannahtaylor": (
         "communications", ("programs",), "reviewed_community_engagement_not_engineering"
     ),
@@ -911,7 +1079,7 @@ ROLE_PATTERNS: dict[str, tuple[str, ...]] = {
         r"\bPERSONNEL\b", r"HUMAN CAPITAL",
     ),
     "legal": (
-        r"GENERAL COUNSEL", r"\bCOUNSEL\b", r"\bLEGAL\b", r"\bATTORNEY\b", r"\bLAWYER\b",
+        r"GENERAL COUNS(?:EL)?", r"\bCOUNSEL\b", r"\bLEGAL\b", r"\bATTORNEY\b", r"\bLAWYER\b",
         r"\bDGC\b", r"\bLITIGAT",
     ),
     "development": (
@@ -1222,13 +1390,20 @@ def title_level(title: str, family: str, record_type: str, governance: bool) -> 
         return "chief_executive", "executive"
     if re.search(r"\bCHIEF\b|\b(?:COO|CFO|CTO|CIO|CPO|CDO|CFAO|CFOO)\b", title):
         return "chief_officer", "executive"
-    if re.search(r"\bPRESIDENT\b|\bEXECUTIVE VICE PRESIDENT\b|\bEXECUTIVE VP\b|\bEVP\b", title):
+    if (
+        re.search(r"\b(?:GENERAL|GEN) COUNS(?:EL)?\b", title)
+        and not re.search(r"\b(?:ASSOCIATE|ASSOC|DEPUTY|ASSISTANT|ASST) (?:GENERAL |GEN )?COUNS", title)
+    ):
+        return "chief_officer", "executive"
+    if re.search(r"\bEXECUTIVE VICE[- ]?PRESIDENT\b|\bEXEC(?:UTIVE)?\.? VP\b|\bEVP\b", title):
         return "executive_leadership", "executive"
-    if re.search(r"\bSENIOR VICE PRESIDENT\b|\bSR\.? VP\b|\bVICE PRESIDENT\b|\bVP\b", title):
+    if re.search(r"\bSENIOR VICE PRESIDENT\b|\bSENIOR VP\b|\bSR\.? VP\b|\bSVP\b|\bVICE PRESIDENT\b|\bVP\b", title):
         return "vice_president", "senior_leader"
-    if re.search(r"\bMANAGING DIR|\bDEPUTY\b", title):
+    if re.search(r"\bPRESIDENT\b", title):
+        return "executive_leadership", "executive"
+    if re.search(r"\bMANAGING DIR|\bMG DIR|\bDEPUTY\b", title):
         return "managing_or_deputy_director", "senior_leader"
-    if re.search(r"\bDIRECTOR\b|\bDIR\.?\b", title):
+    if re.search(r"\bDIRECTOR\b|\bDIRECOTR\b|\bDIR\.?\b", title):
         return "director", "senior_leader"
     if re.search(r"\bHEAD\b|\bLEAD\b", title):
         return "head_or_lead", "senior_leader"
@@ -1274,7 +1449,7 @@ def benchmark_position(title: str, classification: Classification) -> dict[str, 
     has_coo = bool(re.search(r"\bCOO\b|\bCHIEF (?:OPERATING|OPERATIONS) OFFICER\b|\bCHIEF OF OPERATIONS\b", title))
     has_cfo = bool(re.search(r"\bCFO\b|\bCHIEF FINANCIAL OFFICER\b", title))
     has_chief_of_staff = "CHIEF OF STAFF" in title
-    has_general_counsel = bool(re.search(r"\bGENERAL COUNSEL\b|\bGEN COUNSEL\b|\bCHIEF LEGAL OFFICER\b", title))
+    has_general_counsel = bool(re.search(r"\bGENERAL COUNS(?:EL)?\b|\bGEN COUNS(?:EL)?\b|\bCHIEF LEGAL OFFICER\b", title))
     has_managing_director = bool(re.search(r"\b(?:MANAGING|MG) DIR(?:ECTOR)?\b", title))
     hybrid_rules = (
         (r"CHIEF (?:FINANCIAL|FINANCE) AND OPERAT|\bCFOO\b|\bCFAO\b", "combined or ambiguous finance-and-operations chief"),
@@ -1286,6 +1461,7 @@ def benchmark_position(title: str, classification: Classification) -> dict[str, 
         (r"(?<!VICE )\bPRESIDENT AND COO", "President and COO combined in one title"),
         (r"COO AND MANAGING DIRECTOR", "COO and Managing Director combined in one title"),
         (r"(?<!VICE )\bPRESIDENT AND CTO", "President and CTO combined in one title"),
+        (r"(?:\bPOLICY\b.*GENERAL COUNS|GENERAL COUNS.*\bPOLICY\b)", "Policy Director and General Counsel combined in one title"),
     )
     for pattern, reason in hybrid_rules:
         if re.search(pattern, title):
@@ -1324,17 +1500,18 @@ def benchmark_position(title: str, classification: Classification) -> dict[str, 
         return result("chief_research_officer", "research_chief_alias")
     if re.search(r"\bCHIEF SCIENTIST\b", title):
         return result("chief_scientist", "explicit_chief_scientist", "exact")
-    if re.search(r"\bCTO\b|\bCHIEF (?:TECHNOLOGY|TECHNICAL) OFFICER\b|\bCHIEF PRODUCT AND TECHNOLOGY\b", title):
+    if re.search(r"\bCTO\b|\bCHIEF TECHNOLOGY OFFICER\b|\bCHIEF PRODUCT AND TECHNOLOGY\b", title):
         quality = "standard_abbreviation" if re.search(r"\bCTO\b", title) else "exact"
         return result("cto", "standard_cto_alias", quality)
-    if re.search(r"\bCIO\b|\bCHIEF INFORMATION OFFICER\b", title):
-        quality = "standard_abbreviation" if re.search(r"\bCIO\b", title) else "exact"
-        return result("cio", "standard_cio_alias", quality)
+    if re.search(r"\bCHIEF INFORMATION OFFICER\b", title):
+        return result("cio", "explicit_chief_information_officer", "exact")
 
-    if re.search(r"\bEXECUTIVE VICE[- ]?PRESIDENT\b|\bEXECUTIVE VP\b|\bEXEC VP\b|\bEVP\b", title):
+    if re.search(r"\bEXECUTIVE VICE[- ]?PRESIDENT\b|\bEXECUTIVE VP\b|\bEXEC\.? VP\b|\bEVP\b", title):
         return result("executive_vice_president", "executive_vice_president_alias")
     if re.search(r"\bSENIOR VICE PRESIDENT\b|\bSENIOR VP\b|\bSR\.? VP\b|\bSVP\b", title):
         return result("senior_vice_president", "senior_vice_president_alias")
+    if re.search(r"\bDEPUTY (?:VICE PRESIDENT|VP)\b", title):
+        return result("deputy_vice_president", "deputy_vice_president_alias")
     if re.search(r"\bVICE PRESIDENT\b|\bVP\b", title):
         return result("vice_president", "vice_president_alias")
 
@@ -1342,7 +1519,7 @@ def benchmark_position(title: str, classification: Classification) -> dict[str, 
         return result("assistant_managing_director", "explicit_assistant_managing_director", "exact")
     if has_managing_director and not re.search(r"\bASS(?:ISTANT|T)\b", title):
         return result("managing_director", "managing_director_alias")
-    if re.search(r"\bDEPUTY DIR(?:ECTOR)?\b", title) and not re.search(r"\bDEPUTY (?:VP|VICE PRESIDENT)\b", title):
+    if re.fullmatch(r"DEPUTY DIR(?:ECTOR)?", title):
         return result("deputy_director", "deputy_director_alias")
 
     is_director = bool(re.search(r"\b(?:DIRECTOR|DIR|DIRECOTR)\b", title))
@@ -1380,6 +1557,7 @@ def classify_record(
     record: dict[str, str],
     canonical_ceo: bool,
     source_id: str,
+    schedule_title: str = "",
 ) -> Classification:
     raw_title = record.get("TitleTxt", "")
     title = normalize_title(raw_title)
@@ -1390,7 +1568,7 @@ def classify_record(
     tags = functional_tags(title)
     forced_governance_rule = FORCED_GOVERNANCE_OBSERVATIONS.get(observation_id)
     governance = board_governance(record, title, cash) or bool(forced_governance_rule)
-    transition_text = f"{record.get('PersonNm', '')} {raw_title}"
+    transition_text = f"{record.get('PersonNm', '')} {raw_title} {schedule_title}"
     incumbency = (
         "fractional"
         if re.search(r"\bFRACTIONAL\b", transition_text, re.IGNORECASE)
@@ -1687,7 +1865,10 @@ def main() -> None:
             ) = effective_identity_title(source_id, part, schedule)
             classification_record = {**part, "TitleTxt": effective_title}
             classification = classify_record(
-                classification_record, canonical_ceo, source_id
+                classification_record,
+                canonical_ceo,
+                source_id,
+                schedule.get("TitleTxt", "") if schedule else "",
             )
 
             part_org = integer(part, "ReportableCompFromOrgAmt")
@@ -1755,12 +1936,26 @@ def main() -> None:
             sensitivity_only_reason = SENSITIVITY_ONLY_OBSERVATIONS.get(
                 observation_id, ""
             )
+            compensation_year_role_status = (
+                "no_transition_indicated"
+                if classification.incumbency == "current"
+                else "fractional"
+                if classification.incumbency == "fractional"
+                else "partial_or_uncertain"
+            )
+            compensation_year_role_rule = "derived_from_source_title_and_part_vii_status"
+            if observation_id in REVIEWED_COMPENSATION_YEAR_ROLE_OVERRIDES:
+                compensation_year_role_status, compensation_year_role_rule = (
+                    REVIEWED_COMPENSATION_YEAR_ROLE_OVERRIDES[observation_id]
+                )
             catalog_eligible = classification.family in PUBLIC_FAMILIES and classification.record_type == "non_ceo_position"
             role_eligible = (
                 catalog_eligible
                 and positive_compensation
                 and (
-                    classification.incumbency == "current"
+                    compensation_year_role_status in {
+                        "no_transition_indicated", "verified_full_year"
+                    }
                     or bool(sensitivity_only_reason)
                 )
                 and classification.scope not in {"governance", "program_or_affiliate", "uncertain"}
@@ -1769,7 +1964,9 @@ def main() -> None:
                 role_eligible
                 and source_id != RP_SOURCE_ID
                 and default_hours_eligible
-                and classification.incumbency == "current"
+                and compensation_year_role_status in {
+                    "no_transition_indicated", "verified_full_year"
+                }
                 and not sensitivity_only_reason
             )
             exclusion_reasons = []
@@ -1783,9 +1980,13 @@ def main() -> None:
                 exclusion_reasons.append("no reviewed public role-family mapping")
             if not positive_compensation:
                 exclusion_reasons.append("no positive Part VII reportable compensation")
-            if classification.incumbency == "former_or_partial":
-                exclusion_reasons.append("former, interim, or partial-year role")
-            elif classification.incumbency == "fractional":
+            if compensation_year_role_status == "not_held":
+                exclusion_reasons.append("role not held during compensation calendar year")
+            elif compensation_year_role_status == "partial_or_uncertain":
+                exclusion_reasons.append(
+                    "source indicates or cannot rule out a transition during the compensation calendar year"
+                )
+            elif compensation_year_role_status == "fractional":
                 exclusion_reasons.append("source-labeled fractional role")
             if classification.scope in {"program_or_affiliate", "uncertain"}:
                 exclusion_reasons.append(f"{classification.scope.replace('_', ' ')} scope")
@@ -1794,6 +1995,10 @@ def main() -> None:
             if sensitivity_only_reason == "related_org_hours_without_identified_related_employer":
                 exclusion_reasons.append(
                     "related-organization hours without identified related employer"
+                )
+            elif sensitivity_only_reason == "related_org_compensation_with_unreconciled_employer_scale_boundary":
+                exclusion_reasons.append(
+                    "related-organization compensation with an unreconciled employer/scale boundary"
                 )
             if source_id == RP_SOURCE_ID:
                 exclusion_reasons.append("RP reference observation, never part of fitted peer distribution")
@@ -1850,6 +2055,8 @@ def main() -> None:
                 "seniority_group": classification.seniority,
                 "role_scope": classification.scope,
                 "incumbency_status": classification.incumbency,
+                "compensation_year_role_status": compensation_year_role_status,
+                "compensation_year_role_rule": compensation_year_role_rule,
                 "classification_rule": classification.rule,
                 "classification_confidence": classification.confidence,
                 "benchmark_position": standardized["key"],
@@ -1999,6 +2206,8 @@ def main() -> None:
             f"Reviewed effective-title records do not resolve: {sorted(missing_effective_ids)}"
         )
     expected_effective_positions = {
+        "SRC-990-EXT-ANIMAL-LEGAL-DEFENSE-FUND::andreajoykroboth":
+            ("ANDREA JOY KROBOTH", "Chief Operating Officer (through February 7, 2025)", "operations", "coo"),
         "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::elenamuehlenbeckcfo":
             ("ELENA MUEHLENBECK", "CFO", "finance", "cfo"),
         "SRC-990-EXT-BIPARTISAN-POLICY-CENTER::liselloyevpcoo":
@@ -2019,6 +2228,18 @@ def main() -> None:
             ("FELECIA WEBB", "Chief Strategy Officer, Philanthropy and Partnerships", "strategy", "chief_strategy_officer"),
         "SRC-990-EXT-PARTNERSHIP-ON-AI::stephaniebell":
             ("STEPHANIE BELL", "Chief Programs and Insights Officer", "programs", ""),
+        "SRC-990-EXT-COMMITTEE-FOR-A-RESPONSIBLE-FEDERAL-BUDGET::adamshifrisssenior":
+            ("ADAM SHIFRISS", "SENIOR DIRECTOR OF LEGISLATIVE STRATEGY", "policy", "policy_director"),
+        "SRC-990-EXT-COMMITTEE-FOR-A-RESPONSIBLE-FEDERAL-BUDGET::simonegfranksenior":
+            ("SIMONE G FRANK", "SENIOR ADVISOR, FINANCE & OPERATIONS", "finance", ""),
+        "SRC-990-EXT-RESULTS-FOR-AMERICA::lisavmorrisonbutler":
+            ("LISA V MORRISON BUTLER", "Executive Vice President and Chief Impact Officer", "programs", "chief_impact_officer"),
+        "SRC-990-EXT-SOFTWARE-FREEDOM-CONSERVANCY::bradleymkuhn":
+            ("Bradley M Kuhn", "Policy Fellow", "policy", ""),
+        "SRC-990-EXT-VERA-INSTITUTE-OF-JUSTICE::jamesparsonsprogram":
+            ("JAMES PARSONS", "PROGRAM DIRECTOR AND SPECIAL ADVISOR", "programs", "program_director"),
+        "SRC-990-EXT-VERA-INSTITUTE-OF-JUSTICE::vinamorrisdirector":
+            ("VINA MORRIS", "DIRECTOR, TECHNOLOGY INNOVATION AND STRATEGY", "technology", ""),
     }
     for observation_id, expected in expected_effective_positions.items():
         observation = observations_by_id[observation_id]
@@ -2036,6 +2257,34 @@ def main() -> None:
         if observation["effective_title_source"] == "part_vii_native":
             raise ValueError(f"Reviewed effective title lacks provenance: {observation_id}")
 
+    if missing_compensation_year_overrides := (
+        REVIEWED_COMPENSATION_YEAR_ROLE_OVERRIDES.keys() - observations_by_id.keys()
+    ):
+        raise ValueError(
+            "Reviewed compensation-year role overrides do not resolve: "
+            f"{sorted(missing_compensation_year_overrides)}"
+        )
+    for observation_id, (expected_status, expected_rule) in (
+        REVIEWED_COMPENSATION_YEAR_ROLE_OVERRIDES.items()
+    ):
+        observation = observations_by_id[observation_id]
+        if (
+            observation["compensation_year_role_status"] != expected_status
+            or observation["compensation_year_role_rule"] != expected_rule
+        ):
+            raise ValueError(
+                f"Compensation-year role override was not applied: {observation_id}"
+            )
+    schedule_transition = observations_by_id[
+        "SRC-990-EXT-CLEAN-AIR-TASK-FORCE::kaymcconagha"
+    ]
+    if (
+        schedule_transition["schedule_j_title"] != "TREAS/COO(THRU SEPT)"
+        or schedule_transition["incumbency_status"] != "former_or_partial"
+        or schedule_transition["default_included"] != "no"
+    ):
+        raise ValueError("Schedule J transition text was not applied to COO incumbency")
+
     expected_evp_rows = {
         "SRC-990-EXT-COUNCIL-ON-STRATEGIC-RISKS::mallorystewart",
         "SRC-990-EXT-EVIDENCE-ACTION::brettsedgewick",
@@ -2046,6 +2295,84 @@ def main() -> None:
         observation = observations_by_id[observation_id]
         if observation["benchmark_position"] != "executive_vice_president":
             raise ValueError(f"Executive VP alias was not applied: {observation_id}")
+
+    expected_deputy_vp_rows = {
+        "SRC-990-EXT-NUCLEAR-THREAT-INITIATIVE::ericbrewer",
+        "SRC-990-EXT-NUCLEAR-THREAT-INITIATIVE::hayleyseverance",
+    }
+    if any(
+        observations_by_id[observation_id]["benchmark_position"] != "deputy_vice_president"
+        for observation_id in expected_deputy_vp_rows
+    ):
+        raise ValueError("Deputy Vice President leaked into the strict Vice President benchmark")
+    expected_deputy_directors = {
+        "SRC-990-EXT-BREAKTHROUGH-INSTITUTE::alextrembath",
+        "SRC-990-EXT-COUNCIL-ON-STRATEGIC-RISKS::johnmoulton",
+        "SRC-990-EXT-INSTITUTE-FOR-POLICY-STUDIES::kathleengaspard",
+        "SRC-990-EXT-INSTITUTE-ON-TAXATION-AND-ECONOMIC-POLICY::jonwhiten",
+        "SRC-990-EXT-MIGRATION-POLICY-INSTITUTE::nataliabanulescubogdan",
+        "SRC-990-EXT-TECHCONGRESS::gracemckinney",
+    }
+    actual_deputy_directors = {
+        row["observation_id"] for row in raw_observations
+        if row["benchmark_position"] == "deputy_director"
+    }
+    if actual_deputy_directors != expected_deputy_directors:
+        raise ValueError("Functional deputy roles leaked into strict Deputy Director")
+    epi_hybrid = observations_by_id[
+        "SRC-990-EXT-ECONOMIC-POLICY-INSTITUTE::celinemcnicholas"
+    ]
+    if (
+        epi_hybrid["secondary_role_tags"] != "legal"
+        or epi_hybrid["benchmark_position"]
+        or epi_hybrid["benchmark_position_hybrid_status"] != "multi_role"
+    ):
+        raise ValueError("Policy Director / General Counsel hybrid was not kept out of strict positions")
+    last_mile_technical = observations_by_id[
+        "SRC-990-EXT-LAST-MILE-HEALTH::divyanair"
+    ]
+    if (
+        last_mile_technical["position_family"] != "programs"
+        or last_mile_technical["secondary_role_tags"] != "research"
+        or last_mile_technical["benchmark_position"]
+    ):
+        raise ValueError("Chief Technical Officer leaked into Chief Technology Officer")
+    rfa_impact = observations_by_id[
+        "SRC-990-EXT-RESULTS-FOR-AMERICA::lisavmorrisonbutler"
+    ]
+    if (
+        rfa_impact["effective_title"] != "Executive Vice President and Chief Impact Officer"
+        or rfa_impact["benchmark_position"] != "chief_impact_officer"
+    ):
+        raise ValueError("RFA Chief Impact Officer acronym was treated as Information CIO")
+    general_counsel_rows = [
+        row for row in raw_observations
+        if row["benchmark_position"] == "general_counsel" and row["default_included"] == "yes"
+    ]
+    if not general_counsel_rows or any(
+        row["title_group"] != "chief_officer" or row["seniority_group"] != "executive"
+        for row in general_counsel_rows
+    ):
+        raise ValueError("Strict General Counsel rows are not classified as C-suite executives")
+    expected_strict_title_levels = {
+        "vice_president": ("vice_president", "senior_leader"),
+        "senior_vice_president": ("vice_president", "senior_leader"),
+        "executive_vice_president": ("executive_leadership", "executive"),
+        "managing_director": ("managing_or_deputy_director", "senior_leader"),
+        "program_director": ("director", "senior_leader"),
+        "general_counsel": ("chief_officer", "executive"),
+        "coo": ("chief_officer", "executive"),
+    }
+    for position_key, expected_level in expected_strict_title_levels.items():
+        members = [
+            row for row in raw_observations
+            if row["benchmark_position"] == position_key and row["default_included"] == "yes"
+        ]
+        if not members or any(
+            (row["title_group"], row["seniority_group"]) != expected_level
+            for row in members
+        ):
+            raise ValueError(f"Inconsistent strict title level for {position_key}")
 
     cepr_canonical_co_executives = {
         row["observation_id"]
@@ -2401,7 +2728,7 @@ def main() -> None:
         "",
         "## Public non-CEO catalog",
         "",
-        f"`Catalog rows` retain all rows assigned to a public family, including display-only RP references. `Role-eligible` additionally requires positive Part VII cash and functional scope (not governance, program/affiliate, or uncertain). It normally requires current/full-year status, but {len(sensitivity_rows)} explicitly reviewed source-anomaly or fractional peer rows remain role-eligible only so the app can expose them as sensitivity observations. `Default included` is stricter: it requires current/full-year status, at least 30 combined filing-organization plus related-organization hours per week, no explicit sensitivity-only flag, and a selected peer rather than RP. Non-CEO inclusion does not inherit CEO-specific exclusions such as a partial-year top executive.",
+        f"`Catalog rows` retain all rows assigned to a public family, including display-only RP references. `Role-eligible` additionally requires positive Part VII cash and functional scope (not governance, program/affiliate, or uncertain). It normally requires either no source-indicated transition during the compensation calendar year or a separately verified full-year role, but {len(sensitivity_rows)} explicitly reviewed source-anomaly, fractional, or entity-boundary peer rows remain role-eligible only so the app can expose them as sensitivity observations. `Default included` is stricter: it requires one of those eligible compensation-year statuses, at least 30 combined filing-organization plus related-organization hours per week, no explicit sensitivity-only flag, and a selected peer rather than RP. `No transition indicated` is an absence-of-transition screen, not independently verified tenure.",
         "",
         "| Position family | Catalog rows | Role-eligible | Organizations | With Schedule J base | Default included |",
         "|---|---:|---:|---:|---:|---:|",
@@ -2410,7 +2737,7 @@ def main() -> None:
         f"- Catalog-eligible non-CEO observations: **{len(non_ceo):,}** (**{len(peer_catalog_rows):,}** peers plus **{len(rp_catalog_rows):,}** RP display references).",
         f"- Role-eligible paid observations: **{len(role_eligible_rows):,}** (**{len(peer_role_eligible_rows):,}** peers plus **{len(rp_role_eligible_rows):,}** RP display references).",
         f"- Default-included peer observations: **{len(default_rows):,}**.",
-        f"- Role-eligible peer observations retained only for sensitivity analysis: **{len(sensitivity_rows):,}** (9 below-30-hour/source-anomaly rows, 7 rows with 40 related-organization hours but no identified related employer, and 1 source-labeled fractional role).",
+        f"- Role-eligible peer observations retained only for sensitivity analysis: **{len(sensitivity_rows):,}** (9 below-30-hour/source-anomaly rows, 7 rows with 40 related-organization hours but no identified related employer, 1 source-labeled fractional role, and 2 Creative Commons related-employer boundary rows).",
         f"- Taxonomy groups: **{len(taxonomy_rows):,}**: **{review_status_counts['rule_assigned']:,}** rule-assigned single-family groups, **{review_status_counts['rule_assigned_multi_role']:,}** rule-assigned multi-role groups, **{review_status_counts['reviewed_observation_override']:,}** reviewed observation-override groups, and **{review_status_counts['manual_review_required']:,}** groups not published without further review.",
         "",
         "## Standardized position benchmarks",
@@ -2443,14 +2770,14 @@ def main() -> None:
         "",
         "## Taxonomy and review model",
         "",
-        "The source-native Part VII person and title fields are never overwritten. Each observation receives a stable source+person ID, a reviewed effective person/title where an explicit source-internal spillover, Schedule J expansion, or organization-specific acronym has been validated, a primary public family when supported, secondary functional tags for combined roles, a title-level/seniority group, scope, incumbency status, a transparent rule, and a confidence label. Effective-title source and rule fields remain alongside the raw fields. The taxonomy artifact groups identical classification outcomes so ambiguous and multi-function titles can be reviewed without losing row-level provenance.",
+        "The source-native Part VII person and title fields are never overwritten. Each observation receives a stable source+person ID, a reviewed effective person/title where an explicit source-internal spillover, Schedule J expansion, or organization-specific acronym has been validated, a primary public family when supported, secondary functional tags for combined roles, a title-level/seniority group, scope, filing-time incumbency, compensation-year role status, a transparent rule, and a confidence label. Effective-title source and rule fields remain alongside the raw fields. The taxonomy artifact groups identical classification outcomes so ambiguous and multi-function titles can be reviewed without losing row-level provenance.",
         "",
         "All role-eligible and default-candidate rows were systematically audited after initial extraction, not only low-confidence or previously unmapped groups. This does not mean every row has an external biographical source: ordinary `rule_assigned` groups are classified from the source-native XML title, while `reviewed_observation_override` marks a documented row-level judgment. Combined functions normally use the first substantive function in the source title as primary, with the others retained as secondary tags. Narrow phrase rules and explicit observation-level reviews handle misleading abbreviations, truncated titles, organization-specific program names, and terms such as software development that would otherwise resemble fundraising. Generic vice-president, deputy, managing-director, director, president, and manager titles remain in General Leadership only when the source does not identify a supported function.",
         "",
         f"Official organization pages or publications are used for **{len(POSITION_SUPPORTING_SOURCES):,}** non-obvious title expansions or organization-specific classifications. These include the Bulletin of the Atomic Scientists' expansion of John Pope's `Chief Aud. Officer` to `Chief Audience Officer`, plus reviewed program-versus-internal-function distinctions. Every supporting file is cached under `benchmark/sources/native/supporting/`, hash-pinned, and recorded in `benchmark/enrichment/form990_position_supporting_sources.csv`; the canonical third-party URL remains alongside the local copy.",
         "Each externally supported observation exposes `classification_source_id`, `classification_source_url`, `classification_source_local_path`, and `classification_source_sha256` as machine-readable provenance; ordinary XML-only classifications leave these fields blank. The extractor fails if a supporting file is absent, its hash differs, or its manifest row does not resolve to exactly the intended observation. Andrea De Forest's source-native title is reviewed as Programs with Communications secondary, but no external page is attached because the available organization pages name Jennifer/Jen de Forest and identity is not reconciled.",
         "",
-        "Reviewed inclusion exceptions are also explicit. Both validated CEPR co-executives resolve to the authoritative CEO layer despite the filing's `Applebaum`/validated `Appelbaum` spelling difference. Third Way's `BOARD TREASURER` is governance because the filing reports 2 filing-organization hours, 38 related-organization hours, and compensation entirely from the related organization. Seven Center for Responsible Lending rows with 0 filing-organization and 40 related-organization hours but no identified related employer, and IST's source-labeled `FRACTIONAL SVP`, are sensitivity-only rather than default comparators.",
+        "Reviewed inclusion exceptions are also explicit. Both validated CEPR co-executives resolve to the authoritative CEO layer despite the filing's `Applebaum`/validated `Appelbaum` spelling difference. Third Way's `BOARD TREASURER` is governance because the filing reports 2 filing-organization hours, 38 related-organization hours, and compensation entirely from the related organization. Later departures do not erase a complete earlier compensation year, while roles beginning only after that year remain ineligible. Seven Center for Responsible Lending rows with 0 filing-organization and 40 related-organization hours but no identified related employer, IST's source-labeled `FRACTIONAL SVP`, and two Creative Commons related-employer rows are sensitivity-only rather than default comparators.",
         "",
         "CEO-like titles that do not match the validated organization-wide CEO are excluded rather than guessed. This prevents program and affiliate executives—such as project CEOs or program Executive Directors—from silently entering the CEO or general-leadership distributions. Former, interim, partial-year, governance, unpaid, program/affiliate, and uncertain rows remain in the observation file with explicit exclusion reasons.",
         "",
