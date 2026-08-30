@@ -24,7 +24,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     "http://127.0.0.1:4173/ceo-salary-benchmark/",
   );
   await expect(page.locator("#position-select")).toHaveValue("ceo");
-  await expect(page.locator(".settings-panel .panel-heading + .position-field #position-select")).toHaveCount(1);
+  await expect(page.locator(".settings-panel #position-select")).toHaveCount(0);
+  await expect(page.locator("#app-title .title-position-select #position-select")).toHaveCount(1);
   await expect(page.locator(".app-header .eyebrow")).toHaveText("Rethink Priorities");
   await expect(page.locator(".app-header .subtitle")).toHaveCount(0);
   await expect(page.locator("#archive-status")).toHaveCount(0);
@@ -363,8 +364,17 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   })).toBe(true);
   expect(await page.locator(".empirical-quantile-mark").evaluateAll((marks) => {
     const rectangles = marks.map((mark) => mark.getBoundingClientRect()).sort((a, b) => a.left - b.left);
-    return rectangles.every((rectangle, index) => index === 0 || rectangle.left >= rectangles[index - 1].right + 2);
+    return rectangles.every((rectangle, index) => index === 0 || rectangle.left >= rectangles[index - 1].right + 6);
   })).toBe(true);
+  expect(await page.locator(".empirical-quantile-mark").evaluateAll((marks) => marks.every((mark) => {
+    const percentile = mark.querySelector(".percentile").getBoundingClientRect();
+    const amount = mark.querySelector(".amount").getBoundingClientRect();
+    return percentile.bottom + 4 <= amount.top;
+  }))).toBe(true);
+  expect(await page.locator(".empirical-quantile-guide").evaluateAll((guides) => guides.every((guide, index) => {
+    const amount = document.querySelectorAll(".empirical-quantile-mark .amount")[index].getBoundingClientRect();
+    return amount.bottom + 5 <= guide.getBoundingClientRect().top;
+  }))).toBe(true);
   await expect(page.locator("#quantile-basis")).toHaveText("Derived from weighted empirical ranks for Salary");
   await page.locator('input[name="distribution"][value="lognormal"]').check();
 
@@ -1408,17 +1418,18 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   ]);
   await expect(page.locator("#position-select option")).toHaveCount(catalog.length);
   await expect(page.locator("#position-selected-label")).toHaveText("CEO");
-  const selectedPositionOverlay = await page.locator(".position-select-shell").evaluate((shell) => {
+  const selectedPositionOverlay = await page.locator(".title-position-select").evaluate((shell) => {
     const select = shell.querySelector("select").getBoundingClientRect();
     const label = shell.querySelector("#position-selected-label").getBoundingClientRect();
     return {
-      insideSelect: label.top >= select.top && label.bottom <= select.bottom,
-      shellHeightMatchesSelect: Math.abs(shell.getBoundingClientRect().height - select.height) <= 1,
-      position: getComputedStyle(shell.querySelector("#position-selected-label")).position,
+      selectCoversLabel: select.left <= label.left && select.right >= label.right
+        && select.top <= label.top && select.bottom >= label.bottom,
+      selectOpacity: getComputedStyle(shell.querySelector("select")).opacity,
+      cursor: getComputedStyle(shell.querySelector("select")).cursor,
     };
   });
   expect(selectedPositionOverlay).toEqual({
-    insideSelect: true, shellHeightMatchesSelect: true, position: "absolute",
+    selectCoversLabel: true, selectOpacity: "0", cursor: "pointer",
   });
   for (const position of catalog) {
     await expect(page.locator(`#position-select option[value="${position.key}"]`))
@@ -1440,8 +1451,8 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     }, key);
     await page.locator("#position-select").selectOption(key);
     await expect(page.locator("#position-select")).toHaveValue(key);
-    await expect(page.locator("#position-selected-label")).toHaveText(position.label);
-    await expect(page.locator("#app-title")).toHaveText(`${position.pageLabel} salary benchmark`);
+    await expect(page.locator("#position-selected-label")).toHaveText(position.pageLabel);
+    await expect(page.locator("#app-title")).toHaveAttribute("aria-label", `${position.pageLabel} salary benchmark`);
     await expect(page).toHaveTitle(`${position.pageLabel} Salary Benchmark · vetr.dev`);
     await expect(page.locator("#position-description")).toContainText(position.description);
     await expect(page.locator("#position-description")).toContainText("organization-balanced");
@@ -1454,6 +1465,9 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     await expect(page.locator('#stream-select option[value="jobAds"]')).toHaveAttribute("disabled", "");
     await expect(page.locator("#stream-description")).toContainText("CEO recruitment postings are not mixed");
     await expect(page.locator("#measure-select")).toHaveValue(position.defaultMeasure);
+    await expect(page.locator("#adjusted-compensation-term")).toHaveText("Reportable comp.");
+    await expect(page.locator("#reported-compensation-term")).toHaveText("Reportable comp.");
+    await expect(page.locator("#chart-title")).toContainText("Reportable compensation");
     await expect(page.locator("#stat-n-unit")).toHaveText("observations");
     await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultCash));
     await expect(page.locator("tbody tr[data-id]")).toHaveCount(expected.observedCash);
@@ -1538,6 +1552,8 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
 
     await page.locator("#measure-select").selectOption("base");
     await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultBase));
+    await expect(page.locator("#adjusted-compensation-term")).toHaveText("Base comp.");
+    await expect(page.locator("#reported-compensation-term")).toHaveText("Base comp.");
     await page.locator("#measure-select").selectOption(position.defaultMeasure);
     await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultCash));
 
@@ -1550,7 +1566,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     await page.reload();
     await expect(page.locator("#position-select")).toHaveValue(key);
     await expect(page.locator("#measure-select")).toHaveValue(position.defaultMeasure);
-    await expect(page.locator("#app-title")).toHaveText(`${position.pageLabel} salary benchmark`);
+    await expect(page.locator("#app-title")).toHaveAttribute("aria-label", `${position.pageLabel} salary benchmark`);
     if (customizedRowId) {
       await expect(page.locator(`tr[data-id="${customizedRowId}"] .weight-input`)).toHaveValue("2");
       await expect(page.locator(`tr[data-id="${customizedRowId}"] .weight-input`)).toHaveClass(/is-user-modified/);
@@ -1581,7 +1597,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#stream-select")).toBeEnabled();
   await expect(page.locator("#measure-select")).toHaveValue("base");
-  await expect(page.locator("#app-title")).toHaveText("CEO salary benchmark");
+  await expect(page.locator("#app-title")).toHaveAttribute("aria-label", "CEO salary benchmark");
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
   expect(new URL(page.url()).searchParams.has("position")).toBe(false);
   expect(new URL(page.url()).pathname).toBe("/ceo-salary-benchmark/");
@@ -1593,5 +1609,62 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   expect(new URL(page.url()).pathname).toBe("/coo-salary-benchmark/");
   expect(new URL(page.url()).searchParams.has("position")).toBe(false);
   expect(new URL(page.url()).searchParams.has("s")).toBe(false);
+  expect(errors).toEqual([]);
+});
+
+test("empirical percentile labels remain separated at common browser zooms", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await page.evaluate(() => document.fonts?.ready);
+  await page.locator('input[name="distribution"][value="empirical"]').check();
+  await page.locator("#quantile-granularity").selectOption("deciles");
+
+  for (const zoom of [1, 1.25, 1.5, 1]) {
+    await page.evaluate((value) => {
+      document.body.style.zoom = String(value);
+      window.dispatchEvent(new Event("resize"));
+    }, zoom);
+    await page.waitForTimeout(180);
+    if (zoom === 1.5) {
+      await page.locator(".chart-panel").screenshot({ path: "tmp/app-empirical-quantiles-zoom-150.png" });
+    }
+    const geometry = await page.locator("#salary-chart").evaluate((svg) => {
+      const svgBox = svg.getBoundingClientRect();
+      const guides = [...svg.querySelectorAll(".empirical-quantile-guide")]
+        .map((guide) => guide.getBoundingClientRect());
+      const labels = [...svg.querySelectorAll(".empirical-quantile-mark")]
+        .map((mark) => {
+          const box = mark.getBoundingClientRect();
+          const percentile = mark.querySelector(".percentile").getBoundingClientRect();
+          const amount = mark.querySelector(".amount").getBoundingClientRect();
+          const center = box.left + box.width / 2;
+          const guide = guides.reduce((nearest, candidate) => (
+            !nearest || Math.abs(candidate.left - center) < Math.abs(nearest.left - center)
+              ? candidate : nearest
+          ), null);
+          return {
+            left: box.left,
+            right: box.right,
+            percentileBottom: percentile.bottom,
+            amountTop: amount.top,
+            amountBottom: amount.bottom,
+            guideTop: guide?.top ?? Number.NEGATIVE_INFINITY,
+          };
+        })
+        .sort((first, second) => first.left - second.left);
+      return { svgLeft: svgBox.left, svgRight: svgBox.right, labels };
+    });
+    expect(geometry.labels.length).toBeGreaterThan(1);
+    geometry.labels.forEach((label, index) => {
+      expect(label.left).toBeGreaterThanOrEqual(geometry.svgLeft + 1);
+      expect(label.right).toBeLessThanOrEqual(geometry.svgRight - 1);
+      expect(label.percentileBottom + 3.5).toBeLessThanOrEqual(label.amountTop);
+      expect(label.amountBottom + 4.5).toBeLessThanOrEqual(label.guideTop);
+      if (index) {
+        expect(label.left).toBeGreaterThanOrEqual(geometry.labels[index - 1].right + 5);
+      }
+    });
+  }
   expect(errors).toEqual([]);
 });

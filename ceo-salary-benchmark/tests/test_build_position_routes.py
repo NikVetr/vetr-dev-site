@@ -24,7 +24,11 @@ class PositionRouteBuildTest(unittest.TestCase):
             "<!doctype html>\n"
             '<html><head><meta id="app-description" name="description" content="CEO benchmark">'
             "<title>Benchmark</title></head><body>"
-            '<h1 id="app-title">CEO salary benchmark</h1></body></html>\n'
+            '<h1 id="app-title" aria-label="CEO salary benchmark">'
+            '<span class="title-position-select"><span id="position-selected-label" '
+            'aria-hidden="true">CEO</span><select id="position-select">'
+            '<option value="ceo">CEO</option></select></span>'
+            '<span aria-hidden="true"> salary benchmark</span></h1></body></html>\n'
         )
         (self.app_root / "index.html").write_text(self.source_html, encoding="utf-8")
         self.catalog = self.app_root / "catalog.csv"
@@ -69,7 +73,8 @@ class PositionRouteBuildTest(unittest.TestCase):
         self.assertIn(ROUTES.GENERATED_MARKER, generated)
         self.assertIn("<title>COO Salary Benchmark · vetr.dev</title>", generated)
         self.assertIn('content="Interactive Rethink Priorities COO salary benchmark explorer"', generated)
-        self.assertIn('<h1 id="app-title">COO salary benchmark</h1>', generated)
+        self.assertIn('<h1 id="app-title" aria-label="COO salary benchmark">', generated)
+        self.assertIn('<span id="position-selected-label" aria-hidden="true">COO</span>', generated)
         self.assertEqual((self.app_root / "index.html").read_text(encoding="utf-8"), self.source_html)
         self.assertFalse((self.site_root / "finance-director-salary-benchmark").exists())
 

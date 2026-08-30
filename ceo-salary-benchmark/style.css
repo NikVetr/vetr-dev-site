@@ -47,6 +47,21 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
   background: rgba(247, 250, 251, 0.94);
 }
 .app-header h1 { margin: 1px 0 3px; font: 650 clamp(25px, 2.2vw, 36px)/1.05 "Aspekta Variable", sans-serif; letter-spacing: -0.025em; }
+.title-position-select { position: relative; display: inline-block; }
+.title-position-select > span { display: block; cursor: pointer; }
+.title-position-select select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  opacity: 0;
+  cursor: pointer;
+}
+.title-position-select:focus-within { border-radius: 3px; outline: 3px solid color-mix(in srgb, var(--focus), transparent 60%); outline-offset: 2px; }
 .eyebrow, .section-label { margin: 0; color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
 .header-meta { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 .header-meta > span, .count-badge {
@@ -89,24 +104,6 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .text-button { border: 0; background: none; color: var(--green); padding: 3px 0; cursor: pointer; font-size: 12px; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
 
 .field { display: grid; gap: 5px; margin-top: 17px; }
-.position-field { margin-top: 12px; }
-.position-select-shell { position: relative; min-width: 0; }
-.position-select-shell select { color: transparent; }
-.position-select-shell select option, .position-select-shell select optgroup { color: var(--ink); }
-.position-selected-label {
-  position: absolute;
-  inset: 1px 28px 1px 1px;
-  display: flex;
-  align-items: center;
-  min-width: 0;
-  padding: 7px 8px;
-  overflow: hidden;
-  color: var(--ink);
-  font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  pointer-events: none;
-}
 .field > span, .choice-group legend, .weighting-title { color: var(--ink); font-size: 11px; font-weight: 750; }
 .field-description { color: var(--muted); font-size: 9.5px; line-height: 1.45; }
 .choice-group { grid-template-columns: repeat(auto-fit, minmax(min(78px, 100%), 1fr)); gap: 4px; margin-inline: 0; padding: 0; border: 0; }

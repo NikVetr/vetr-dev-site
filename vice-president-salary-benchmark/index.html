@@ -16,7 +16,13 @@
   <header class="app-header">
     <div>
       <p class="eyebrow">Rethink Priorities</p>
-      <h1 id="app-title">Vice President salary benchmark</h1>
+      <h1 id="app-title" aria-label="Vice President salary benchmark"><span class="title-position-select">
+        <span id="position-selected-label" aria-hidden="true">Vice President</span>
+        <select id="position-select" aria-label="Benchmark position" aria-describedby="position-description">
+          <option value="ceo" selected>CEO</option>
+        </select>
+      </span><span aria-hidden="true"> salary benchmark</span></h1>
+      <span id="position-description" class="sr-only"></span>
     </div>
     <div class="header-meta" aria-label="Dataset status">
       <span id="price-basis-status">July 2026 USD</span>
@@ -33,17 +39,6 @@
         </div>
         <button id="reset-settings" class="text-button" type="button">Reset</button>
       </div>
-
-      <label class="field position-field">
-        <span>Position <button class="info-tooltip" type="button" aria-label="About position benchmarks" data-tooltip="Choose a standardized job title, such as COO or Research Director. Equivalent abbreviations are consolidated, but seniority levels and genuinely combined titles are kept separate. CEO preserves the validated filing and recruitment evidence. Other public positions require at least 15 default observations across 12 organizations and use named Form 990 compensation rows. Counts appear in the open menu only. When one filing reports several holders of the same title, organization balancing prevents that employer from receiving extra automatic influence.">?</button></span>
-        <div class="position-select-shell">
-          <select id="position-select" aria-describedby="position-description">
-            <option value="ceo" selected>CEO</option>
-          </select>
-          <span id="position-selected-label" class="position-selected-label" aria-hidden="true">CEO</span>
-        </div>
-        <small id="position-description" class="field-description"></small>
-      </label>
 
       <label id="stream-field" class="field">
         <span>Evidence stream <button class="info-tooltip" type="button" aria-label="About evidence streams" data-tooltip="Switch between compensation reported for current nonprofit leaders in Form 990 filings and salary ranges advertised for open executive roles.">?</button></span>
@@ -301,7 +296,7 @@
                 <div class="filter-menu header-filter-menu" data-filter-menu="title"></div>
               </th>
               <th class="filterable-column">
-                <button type="button" class="stacked-sort" data-sort="adjustedSalary"><span><span>2026 Adj. </span><span>Salary</span></span></button>
+                <button id="adjusted-compensation-sort" type="button" class="stacked-sort" data-sort="adjustedSalary"><span><span>2026 Adj. </span><span id="adjusted-compensation-term">Salary</span></span></button>
                 <div class="filter-menu numeric-filter-menu header-filter-menu" data-numeric-filter="salary">
                   <details>
                     <summary id="salary-filter-summary" aria-label="Filter salary"></summary>
@@ -381,7 +376,7 @@
                 <button type="button" data-sort="sourceType">Evidence</button>
                 <div class="filter-menu header-filter-menu" data-filter-menu="sourceType"></div>
               </th>
-              <th><button type="button" class="stacked-sort" data-sort="reportedSalary"><span><span>Reported </span><span>Salary</span></span></button></th>
+              <th><button id="reported-compensation-sort" type="button" class="stacked-sort" data-sort="reportedSalary"><span><span>Reported </span><span id="reported-compensation-term">Salary</span></span></button></th>
               <th>Source</th>
             </tr>
           </thead>

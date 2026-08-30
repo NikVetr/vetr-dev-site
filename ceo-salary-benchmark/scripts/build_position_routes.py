@@ -120,9 +120,14 @@ def render_position_route(source_html: str, canonical_href: str, route: Position
             "description metadata",
         ),
         (
-            r'(<h1\s+id="app-title">).*?(</h1>)',
+            r'(<h1\s+id="app-title"\s+aria-label=")[^"]*(")',
             rf"\g<1>{label} salary benchmark\g<2>",
-            "visible app title",
+            "app-title accessible label",
+        ),
+        (
+            r'(<span\s+id="position-selected-label"[^>]*>).*?(</span>)',
+            rf"\g<1>{label}\g<2>",
+            "visible position title",
         ),
     )
     for pattern, replacement, description in replacements:

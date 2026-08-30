@@ -226,6 +226,10 @@
     matchScoreMin: $("#match-score-range-min"), matchScoreMax: $("#match-score-range-max"),
     matchScoreRangeValue: $("#match-score-range-value"), matchScoreFilterSummary: $("#match-score-filter-summary"),
     matchScoreFilterStatus: $("#match-score-filter-status"),
+    adjustedCompensationSort: $("#adjusted-compensation-sort"),
+    adjustedCompensationTerm: $("#adjusted-compensation-term"),
+    reportedCompensationSort: $("#reported-compensation-sort"),
+    reportedCompensationTerm: $("#reported-compensation-term"),
     tablePanel: $("#evidence-table-panel"), tableScroll: $(".table-scroll"),
     tableBody: $("#organization-table tbody"), dialog: $("#source-dialog"),
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
@@ -259,7 +263,7 @@
       groups.get(groupLabel).append(option);
     });
     refs.position.value = state.position;
-    refs.positionSelectedLabel.textContent = positionDefinition().label;
+    refs.positionSelectedLabel.textContent = positionDefinition().pageLabel;
   }
 
   function clearAnalyticalFilters() {
@@ -588,6 +592,18 @@
     return state.inflationAdjusted ? DATA.priceBasis : "Source-year USD";
   }
 
+  function compensationMeasureLabel() {
+    if (isCeoPosition()) return "Salary";
+    if (state.measure === "base") return "Base compensation";
+    if (state.measure === "total") return "Total compensation";
+    return "Reportable compensation";
+  }
+
+  function compactCompensationMeasureLabel() {
+    return isCeoPosition() ? "Salary" : state.measure === "base" ? "Base comp."
+      : state.measure === "total" ? "Total comp." : "Reportable comp.";
+  }
+
   function compactNumber(value) {
     if (value == null || !Number.isFinite(value)) return "—";
     const absolute = Math.abs(value);
@@ -600,7 +616,7 @@
 
   const numericVariables = {
     salary: {
-      shortLabel: "Salary", label: () => `Annual compensation (${priceBasisLabel()})`,
+      get shortLabel() { return compensationMeasureLabel(); }, label: () => `Annual compensation (${priceBasisLabel()})`,
       value: salary, format: compactMoney, fullFormat: money, logarithmic: false,
     },
     expenses: {
@@ -1402,6 +1418,52 @@
     });
   }
 
+  function positionQuantileLabelStack(percentileLine, amountLine, lineGap = 5, guideGap = 6) {
+    percentileLine.setAttribute("y", "0");
+    amountLine.setAttribute("y", "0");
+    const percentileBox = percentileLine.getBBox();
+    const amountBox = amountLine.getBBox();
+    const percentileStroke = (Number.parseFloat(getComputedStyle(percentileLine).strokeWidth) || 0) / 2;
+    const amountStroke = (Number.parseFloat(getComputedStyle(amountLine).strokeWidth) || 0) / 2;
+    const amountY = -guideGap - (amountBox.y + amountBox.height + amountStroke);
+    amountLine.setAttribute("y", amountY.toFixed(2));
+    const amountPaintedTop = amountY + amountBox.y - amountStroke;
+    const percentileY = amountPaintedTop - lineGap
+      - (percentileBox.y + percentileBox.height + percentileStroke);
+    percentileLine.setAttribute("y", percentileY.toFixed(2));
+  }
+
+  function selectEmpiricalQuantileLabels(candidates) {
+    const locationDeduplicated = [];
+    [...candidates]
+      .sort((first, second) => Math.abs(first.percentile - 50) - Math.abs(second.percentile - 50)
+        || first.percentile - second.percentile)
+      .forEach((candidate) => {
+        if (!locationDeduplicated.some((existing) => Math.abs(existing.x - candidate.x) < 0.5)) {
+          locationDeduplicated.push(candidate);
+        }
+      });
+    const sorted = locationDeduplicated.sort((first, second) => first.bounds.right - second.bounds.right
+      || first.bounds.left - second.bounds.left || first.percentile - second.percentile);
+    const plans = [{ items: [], centrality: 0 }];
+    sorted.forEach((candidate, index) => {
+      let predecessor = index - 1;
+      while (predecessor >= 0 && sorted[predecessor].bounds.right > candidate.bounds.left) predecessor -= 1;
+      const base = plans[predecessor + 1];
+      const included = {
+        items: [...base.items, candidate],
+        centrality: base.centrality + (100 - Math.abs(candidate.percentile - 50)),
+      };
+      const excluded = plans[index];
+      plans.push(
+        included.items.length > excluded.items.length
+        || (included.items.length === excluded.items.length && included.centrality > excluded.centrality)
+          ? included : excluded,
+      );
+    });
+    return plans.at(-1).items;
+  }
+
   function appendEmpiricalQuantileMarks(svg, items, percentiles, xScale, margin, plotBottom, formatter) {
     if (!state.markCurve || state.fit !== "empirical" || !percentiles.length || percentiles.length >= 21) return;
     const candidates = percentiles.map((percentile) => {
@@ -1413,33 +1475,32 @@
         class: "empirical-quantile-mark",
         "aria-hidden": "true",
       });
-      const percentileLine = svgElement("text", { x: 0, y: -17, "text-anchor": "middle", class: "empirical-quantile-label" });
+      const percentileLine = svgElement("text", { x: 0, y: 0, "text-anchor": "middle", class: "empirical-quantile-label percentile" });
       const percentilePrefix = svgElement("tspan");
       percentilePrefix.textContent = "P";
       const percentileSubscript = svgElement("tspan", { "baseline-shift": "sub", "font-size": "7.5" });
       percentileSubscript.textContent = Number.isInteger(percentile) ? percentile : percentile.toFixed(1);
       percentileLine.append(percentilePrefix, percentileSubscript);
-      const amountLine = svgElement("text", { x: 0, y: -4, "text-anchor": "middle", class: "empirical-quantile-label amount" });
+      const amountLine = svgElement("text", { x: 0, y: 0, "text-anchor": "middle", class: "empirical-quantile-label amount" });
       amountLine.textContent = formatter(value);
       label.append(percentileLine, amountLine);
       label.setAttribute("visibility", "hidden");
       svg.append(label);
-      const bounds = label.getBoundingClientRect();
+      positionQuantileLabelStack(percentileLine, amountLine);
+      const rawBounds = label.getBoundingClientRect();
+      const bounds = {
+        left: rawBounds.left - 3,
+        right: rawBounds.right + 3,
+        top: rawBounds.top - 3,
+        bottom: rawBounds.bottom + 3,
+      };
+      const svgBounds = svg.getBoundingClientRect();
       label.remove();
       label.removeAttribute("visibility");
+      if (bounds.left < svgBounds.left + 2 || bounds.right > svgBounds.right - 2) return null;
       return { percentile, value, x, bounds, label };
     }).filter(Boolean);
-    const overlaps = (first, second, padding = 4) => first.right + padding > second.left
-      && second.right + padding > first.left
-      && first.bottom + padding > second.top
-      && second.bottom + padding > first.top;
-    const retained = [];
-    [...candidates]
-      .sort((first, second) => Math.abs(first.percentile - 50) - Math.abs(second.percentile - 50) || first.percentile - second.percentile)
-      .forEach((candidate) => {
-        if (retained.some((existing) => overlaps(existing.bounds, candidate.bounds))) return;
-        retained.push(candidate);
-      });
+    const retained = selectEmpiricalQuantileLabels(candidates);
     retained.sort((first, second) => first.x - second.x).forEach((candidate) => {
       svg.append(svgElement("line", {
         x1: candidate.x, x2: candidate.x, y1: margin.top, y2: plotBottom,
@@ -1574,7 +1635,7 @@
     const percentiles = quantilePercentiles();
     const showEmpiricalQuantileMarks = state.markCurve && state.fit === "empirical"
       && percentiles.length > 0 && percentiles.length < 21;
-    const margin = { top: showEmpiricalQuantileMarks ? 40 : 14, right: 18, bottom: 46, left: 66 };
+    const margin = { top: showEmpiricalQuantileMarks ? 44 : 14, right: 18, bottom: 46, left: 66 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
@@ -2936,19 +2997,28 @@
     const position = positionDefinition();
     const ceo = isCeoPosition();
     refs.position.value = position.key;
-    refs.positionSelectedLabel.textContent = position.label;
+    refs.positionSelectedLabel.textContent = position.pageLabel;
     const description = position.description || (ceo
       ? DEFAULT_POSITION.description
       : "Named compensation observations reported in nonprofit Form 990 filings.");
     refs.positionDescription.textContent = ceo
       ? description
       : `${description} Automatic row weights are organization-balanced so each selected peer organization has equal total influence.`;
-    refs.appTitle.textContent = `${position.pageLabel} salary benchmark`;
+    refs.appTitle.setAttribute("aria-label", `${position.pageLabel} salary benchmark`);
     document.title = `${position.pageLabel} Salary Benchmark · vetr.dev`;
     refs.appDescription.content = `Interactive Rethink Priorities ${position.pageLabel} salary benchmark explorer`;
     refs.tablePanel.setAttribute("aria-label", ceo
       ? "Organization-level evidence table"
       : `${position.pageLabel} compensation-observation evidence table`);
+    const tableCompensationTerm = compactCompensationMeasureLabel();
+    refs.adjustedCompensationTerm.textContent = tableCompensationTerm;
+    refs.reportedCompensationTerm.textContent = tableCompensationTerm;
+    refs.adjustedCompensationSort.setAttribute(
+      "aria-label", `Sort by July 2026 adjusted ${compensationMeasureLabel().toLowerCase()}`,
+    );
+    refs.reportedCompensationSort.setAttribute(
+      "aria-label", `Sort by source-reported ${compensationMeasureLabel().toLowerCase()}`,
+    );
     [...refs.stream.options].forEach((option) => {
       option.disabled = !ceo && option.value !== "incumbents";
     });
@@ -2977,7 +3047,7 @@
     refs.histogramAxisSettings.hidden = state.view !== "histogram";
     refs.scatterAxisSettings.hidden = state.view !== "scatter";
     refs.sampleDescription.textContent = (!isCeoPosition() ? {
-      primary: "Current, paid, role-matched Form 990 observations included by default for this position.",
+      primary: "Paid, role-matched Form 990 observations with no source-indicated compensation-year transition, or separately verified full-year coverage, included by default for this position.",
       sensitivity: "The default position observations plus records flagged for sensitivity analysis.",
       clean: "Default position observations without a retained structural or partial-year flag.",
       tierA: "Position observations from the narrowest organization peer tier.",
@@ -3592,6 +3662,7 @@
   renderWeightControls();
   initializeHelpTooltips();
   renderAll();
+  if (document.fonts?.ready) document.fonts.ready.then(() => renderChart());
   urlSyncReady = true;
   writeUrlState();
 })();
