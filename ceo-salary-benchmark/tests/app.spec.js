@@ -43,7 +43,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     if (explicitLabel) return explicitLabel.textContent.trim();
     return [...header.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent.trim()).join(" ").trim();
   }));
-  expect(tableHeaders).toEqual(["Included", "Plot", "Organization", "Job title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Match score", "Tier", "Area", "Location", "EA relation", "Structure", "Year", "Evidence", "Reported Salary", "Source"]);
+  expect(tableHeaders).toEqual(["Included", "Organization", "Job title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Match score", "Tier", "Area", "Location", "EA relation", "Structure", "Year", "Evidence", "Reported Salary", "Source"]);
   await expect(page.locator('thead button[data-sort="adjustedSalary"] > span > span')).toHaveCount(2);
   await expect(page.locator('thead button[data-sort="reportedSalary"] > span > span')).toHaveCount(2);
   expect(await page.locator("#organization-table .title-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThan(140);
@@ -215,10 +215,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(rpReferenceRow).toContainText("$155K");
   await expect(rpReferenceRow).toContainText("$20M");
   await expect(rpReferenceRow).toContainText("2024");
-  await expect(rpReferenceRow.locator("td").nth(1)).toHaveText("Reference");
-  await expect(rpReferenceRow.locator("td").nth(6)).toHaveText("43");
-  await expect(rpReferenceRow.locator("td").nth(6)).toHaveAttribute("title", /2023 Form 990 reports 43 individuals employed/);
-  await expect(rpReferenceRow.locator("td")).toHaveCount(18);
+  await expect(rpReferenceRow.locator("td").nth(1)).toHaveText("Rethink Priorities");
+  await expect(rpReferenceRow.locator("td").nth(5)).toHaveText("43");
+  await expect(rpReferenceRow.locator("td").nth(5)).toHaveAttribute("title", /2023 Form 990 reports 43 individuals employed/);
+  await expect(rpReferenceRow.locator("td")).toHaveCount(17);
   await expect(rpReferenceRow.locator(".source-cell").getByRole("button", { name: "Preview" })).toHaveCount(1);
   await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /source 1/i })).toHaveText("1 ↗");
   await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /source 2/i })).toHaveText("2 ↗");
@@ -241,8 +241,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(excludedPostingToggle).not.toBeChecked();
   await expect(excludedPostingToggle).toHaveAttribute("title", /excluded by default: Local and far below scale.*Check to include it manually/);
   const excludedPostingRow = page.locator('tr[data-id="SRC-AD-MOST-2025"]');
-  await expect(excludedPostingRow.locator("td").nth(12)).toHaveText("functional-only");
-  await expect(excludedPostingRow.locator("td").nth(13)).toHaveText("independent nonprofit");
+  await expect(excludedPostingRow.locator("td").nth(11)).toHaveText("functional-only");
+  await expect(excludedPostingRow.locator("td").nth(12)).toHaveText("independent nonprofit");
   const postingEnrichmentCoverage = await page.evaluate(() => {
     const rows = window.CEO_BENCHMARK_DATA.jobAds;
     const definitions = window.CEO_BENCHMARK_DATA.categoryExplainers.definitions;
@@ -270,7 +270,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     topicCount: 8,
     enriched: 33,
   });
-  for (const [column, cellIndex] of [["expenses", 5], ["staff", 6]]) {
+  for (const [column, cellIndex] of [["expenses", 4], ["staff", 5]]) {
     const centerDifference = await rpReferenceRow.locator("td").nth(cellIndex).evaluate((cell, sortColumn) => {
       const header = document.querySelector(`thead button[data-sort="${sortColumn}"]`).closest("th");
       const cellRect = cell.getBoundingClientRect();
@@ -369,7 +369,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(await page.locator(".empirical-quantile-mark").evaluateAll((marks) => marks.every((mark) => {
     const percentile = mark.querySelector(".percentile").getBoundingClientRect();
     const amount = mark.querySelector(".amount").getBoundingClientRect();
-    return percentile.bottom + 4 <= amount.top;
+    const gap = amount.top - percentile.bottom;
+    return gap >= 2 && gap <= 4;
   }))).toBe(true);
   expect(await page.locator(".empirical-quantile-guide").evaluateAll((guides) => guides.every((guide, index) => {
     const amount = document.querySelectorAll(".empirical-quantile-mark .amount")[index].getBoundingClientRect();
@@ -1016,13 +1017,12 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   const checkedCeoCooEligible = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked');
   await expect(checkedCeoCooEligible).toHaveCount(expectedCeoCooBasePairs);
   await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .row-toggle:checked')).not.toHaveCount(0);
-  await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .plot-status').first()).toHaveText("Missing");
+  await expect(page.locator('thead button[data-sort="plotEligibility"]')).toHaveCount(0);
+  await expect(page.locator(".plot-status-cell, .plot-status")).toHaveCount(0);
+  await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .organization-name').first()).toHaveCSS("color", "rgb(123, 137, 143)");
   await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .weight-input').first()).toHaveValue("");
-  const plotEligibilityHeader = page.locator('thead button[data-sort="plotEligibility"]');
-  await plotEligibilityHeader.click();
-  await expect(plotEligibilityHeader.locator("xpath=..")).toHaveAttribute("aria-sort", "ascending");
-  await expect(page.locator('tbody tr[data-id]').first()).toHaveAttribute("data-plot-eligible", "true");
-  await expect(page.locator('tbody tr[data-id]').last()).toHaveAttribute("data-plot-eligible", "false");
+  expect(await page.locator("thead th").count()).toBe(await page.locator("tbody tr[data-id]").first().locator("td").count());
+  expect(await page.locator("thead th").count()).toBe(await page.locator("tbody .rp-reference-row").first().locator("td").count());
   await page.locator(".table-panel").screenshot({ path: "tmp/app-plot-eligibility-table.png" });
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-ceo-coo-ratio.png" });
   await horizontalAxis().click();
@@ -1030,7 +1030,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   const leadersTrustRow = page.locator('tbody tr[data-id]:has(.organization-name:text-is("The LeadersTrust"))');
   await expect(leadersTrustRow.locator(".row-toggle")).toBeChecked();
   await expect(leadersTrustRow).toHaveAttribute("data-plot-eligible", "false");
-  await expect(leadersTrustRow.locator(".plot-status-cell")).toHaveAttribute("title", /expenses are not reported/i);
+  await expect(leadersTrustRow).toHaveAttribute("aria-label", /expenses are not reported/i);
   await page.locator('input[name="histogram-axis-mode"][value="value"]').check();
   await expect(leadersTrustRow).toHaveAttribute("data-plot-eligible", "true");
   await expect(leadersTrustRow.locator(".row-toggle")).toBeChecked();
@@ -1646,6 +1646,7 @@ test("empirical percentile labels remain separated at common browser zooms", asy
           return {
             left: box.left,
             right: box.right,
+            targetLineGap: Number(mark.dataset.lineGapPx),
             percentileBottom: percentile.bottom,
             amountTop: amount.top,
             amountBottom: amount.bottom,
@@ -1659,7 +1660,10 @@ test("empirical percentile labels remain separated at common browser zooms", asy
     geometry.labels.forEach((label, index) => {
       expect(label.left).toBeGreaterThanOrEqual(geometry.svgLeft + 1);
       expect(label.right).toBeLessThanOrEqual(geometry.svgRight - 1);
-      expect(label.percentileBottom + 3.5).toBeLessThanOrEqual(label.amountTop);
+      const lineGap = label.amountTop - label.percentileBottom;
+      expect(lineGap).toBeGreaterThanOrEqual(1.85);
+      expect(lineGap).toBeLessThanOrEqual(4.15);
+      expect(Math.abs(lineGap - label.targetLineGap)).toBeLessThanOrEqual(0.35);
       expect(label.amountBottom + 4.5).toBeLessThanOrEqual(label.guideTop);
       if (index) {
         expect(label.left).toBeGreaterThanOrEqual(geometry.labels[index - 1].right + 5);

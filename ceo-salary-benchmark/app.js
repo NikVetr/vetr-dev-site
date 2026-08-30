@@ -1418,19 +1418,26 @@
     });
   }
 
-  function positionQuantileLabelStack(percentileLine, amountLine, lineGap = 5, guideGap = 6) {
+  function positionQuantileLabelStack(label, percentileLine, amountLine) {
     percentileLine.setAttribute("y", "0");
     amountLine.setAttribute("y", "0");
     const percentileBox = percentileLine.getBBox();
     const amountBox = amountLine.getBBox();
-    const percentileStroke = (Number.parseFloat(getComputedStyle(percentileLine).strokeWidth) || 0) / 2;
     const amountStroke = (Number.parseFloat(getComputedStyle(amountLine).strokeWidth) || 0) / 2;
+    const matrix = label.getScreenCTM();
+    const screenScaleY = Math.max(matrix ? Math.hypot(matrix.c, matrix.d) : 1, 0.01);
+    const renderedLineHeight = Math.min(percentileBox.height, amountBox.height) * screenScaleY;
+    const lineGapPx = clamp(renderedLineHeight * 0.24, 2, 4);
+    const guideGapPx = clamp(amountBox.height * screenScaleY * 0.55, 5, 8);
+    const lineGap = lineGapPx / screenScaleY;
+    const guideGap = guideGapPx / screenScaleY;
     const amountY = -guideGap - (amountBox.y + amountBox.height + amountStroke);
     amountLine.setAttribute("y", amountY.toFixed(2));
-    const amountPaintedTop = amountY + amountBox.y - amountStroke;
-    const percentileY = amountPaintedTop - lineGap
-      - (percentileBox.y + percentileBox.height + percentileStroke);
+    const amountTextTop = amountY + amountBox.y;
+    const percentileY = amountTextTop - lineGap - (percentileBox.y + percentileBox.height);
     percentileLine.setAttribute("y", percentileY.toFixed(2));
+    label.dataset.lineGapPx = lineGapPx.toFixed(2);
+    label.dataset.guideGapPx = guideGapPx.toFixed(2);
   }
 
   function selectEmpiricalQuantileLabels(candidates) {
@@ -1486,7 +1493,7 @@
       label.append(percentileLine, amountLine);
       label.setAttribute("visibility", "hidden");
       svg.append(label);
-      positionQuantileLabelStack(percentileLine, amountLine);
+      positionQuantileLabelStack(label, percentileLine, amountLine);
       const rawBounds = label.getBoundingClientRect();
       const bounds = {
         left: rawBounds.left - 3,
@@ -2175,12 +2182,11 @@
     return { number: rounded, suffix };
   }
 
-  function tableRows(weightMap = new Map(), eligibilityMap = new Map()) {
+  function tableRows(weightMap = new Map()) {
     const filtered = rows().filter((row) => salary(row) != null && passesFilters(row));
     const direction = state.sortDirection === "asc" ? 1 : -1;
     return filtered.sort((a, b) => {
       const value = (row) => {
-        if (state.sortKey === "plotEligibility") return eligibilityMap.get(row.id)?.eligible ? 0 : 1;
         if (state.sortKey === "tier") return tierSortValue(row.tier);
         if (state.sortKey === "adjustedSalary") return salaryForBasis(row, true) ?? -Infinity;
         if (state.sortKey === "reportedSalary") return salaryForBasis(row, false) ?? -Infinity;
@@ -2321,7 +2327,7 @@
     tr.dataset.referenceIndex = index;
     tr.setAttribute("aria-label", `Rethink Priorities ${reference.title || positionDefinition().label} reference profile; excluded from the peer distribution`);
     const values = [
-      "", "Reference", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)),
+      "", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)),
       compactMoney(reference.expenses), reference.staff == null ? "—" : String(reference.staff), "", "", reference.tier || "Reference", "—", reference.location || "—", "—", reference.structure || "—",
       reference.compensationYear == null ? "—" : String(reference.compensationYear), reference.sourceType || "Form 990", reportedSalaryDisplay(reference),
     ];
@@ -2329,9 +2335,8 @@
       const td = document.createElement("td");
       td.textContent = value;
       if (index === 0) td.className = "check-column";
-      if (index === 1) td.className = "plot-status-cell rp-reference-status";
-      if (index === 2) td.className = "rp-reference-name";
-      if (index === 6 && reference.staffYear === 2023 && reference.currentFilingStaff === 0) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
+      if (index === 1) td.className = "rp-reference-name";
+      if (index === 5 && reference.staffYear === 2023 && reference.currentFilingStaff === 0) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
       tr.append(td);
     });
     const source = document.createElement("td");
@@ -2364,7 +2369,7 @@
     const selection = currentPlotItems();
     const weightMap = new Map(selection.map((item) => [item.row.id, item.weight]));
     const eligibilityMap = new Map(rows().map((row) => [row.id, plotEligibility(row)]));
-    tableRows(weightMap, eligibilityMap).forEach((row) => {
+    tableRows(weightMap).forEach((row) => {
       const available = salary(row) != null;
       const eligibility = eligibilityMap.get(row.id);
       const tr = document.createElement("tr");
@@ -2374,6 +2379,9 @@
       if (state.focusedId === row.id) tr.classList.add("is-focused");
       tr.dataset.id = row.id;
       tr.dataset.plotEligible = String(eligibility.eligible);
+      if (!eligibility.eligible) {
+        tr.setAttribute("aria-label", `${row.organization} is unavailable for the current plot: ${eligibility.reason}`);
+      }
 
       const toggleCell = document.createElement("td");
       toggleCell.className = "check-column";
@@ -2390,19 +2398,6 @@
       toggle.title = inclusionHelp;
       toggle.addEventListener("change", () => { rowInclusion(row).set(row.id, toggle.checked); renderAll(); });
       toggleCell.append(toggle);
-
-      const eligibilityCell = document.createElement("td");
-      eligibilityCell.className = `plot-status-cell ${eligibility.eligible ? "is-eligible" : "is-missing"}`;
-      eligibilityCell.title = eligibility.eligible
-        ? "This row has all values required by the current plot axes. Its checkbox and weight determine whether it is used."
-        : eligibility.reason;
-      const eligibilityStatus = document.createElement("span");
-      eligibilityStatus.className = "plot-status";
-      eligibilityStatus.textContent = eligibility.eligible ? "Eligible" : "Missing";
-      eligibilityStatus.setAttribute("aria-label", eligibility.eligible
-        ? `${row.organization} is eligible for the current plot`
-        : `${row.organization} is ineligible for the current plot: ${eligibility.reason}`);
-      eligibilityCell.append(eligibilityStatus);
 
       const org = document.createElement("td");
       org.className = "org-cell";
@@ -2503,7 +2498,7 @@
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
       }
-      tr.append(toggleCell, eligibilityCell, org, title, adjustedSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, reportedSalaryCell, source);
+      tr.append(toggleCell, org, title, adjustedSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, reportedSalaryCell, source);
       refs.tableBody.append(tr);
     });
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
