@@ -3,7 +3,7 @@
 
 The supplied ZIP is a research handoff, not an application input. This script
 checks its mechanical integrity, then independently extracts every officer row
-from the seven source-native IRS filings recovered during review. It never
+from the ten source-native IRS filings recovered during review. It never
 turns transition-year, co-leader, or explicit-zero rows into a default CEO
 benchmark observation.
 """
@@ -27,15 +27,15 @@ ZIP_ROOT = "rp_lingering_org_additions/"
 RECOVERY_POSITIONS = BENCHMARK / "enrichment" / "lingering_org_recovered_us_positions.csv"
 RECOVERY_SOURCES = BENCHMARK / "enrichment" / "lingering_org_recovered_us_sources.csv"
 
-EXPECTED_ZIP_SHA256 = "959b1c1c59613880b7565503770a75a3b45a3d2a254d67162383b7b9e7d12f89"
+EXPECTED_ZIP_SHA256 = "413e38c1ae305bc784a329b6c37a9c2675b377bd8ac4d2cb5c9c3bf37ede2844"
 EXPECTED_PACKAGE_COUNTS = {
-    "entity_resolution.csv": 47,
-    "compensation_observations.csv": 72,
-    "all_reported_positions.csv": 29,
-    "organization_scale.csv": 46,
+    "entity_resolution.csv": 49,
+    "compensation_observations.csv": 84,
+    "all_reported_positions.csv": 39,
+    "organization_scale.csv": 50,
     "classification_evidence.csv": 34,
-    "source_manifest.csv": 79,
-    "manual_save_requests.csv": 28,
+    "source_manifest.csv": 109,
+    "manual_save_requests.csv": 33,
     "candidate_summary.csv": 34,
 }
 
@@ -94,6 +94,39 @@ SOURCES = (
         "index_url": "https://apps.irs.gov/pub/epostcard/990/xml/2026/index_2026.csv",
         "download_url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202620539349200207_public.xml",
         "sha256": "f6b3330fdd43b16289aaa5d853fcaa7b9712a317a90e748da506b7ddc482e3a3",
+    },
+    {
+        "source_id": "SRC-990-RECOVERY-APOLLO-ACADEMIC-SURVEYS-2023",
+        "candidate_organization": "Apollo Academic Surveys",
+        "legal_entity": "Apollo Academic Surveys Incorporated",
+        "ein": "88-2798817",
+        "object_id": "202430789349200603",
+        "archive_url": "https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_03A.zip",
+        "index_url": "https://apps.irs.gov/pub/epostcard/990/xml/2024/index_2024.csv",
+        "download_url": "",
+        "sha256": "246402689dd7479631c42085ef95091233302f853618e14882694e8f55b42d1d",
+    },
+    {
+        "source_id": "SRC-990-RECOVERY-EMPOWER-LEARNING-AFRICA-USA-2024",
+        "candidate_organization": "Teaching at the Right Level Africa",
+        "legal_entity": "Empower Learning Africa USA",
+        "ein": "92-2014591",
+        "object_id": "202501199349301740",
+        "archive_url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_05A.zip",
+        "index_url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/index_2025.csv",
+        "download_url": "",
+        "sha256": "3c9d5d5448b9dda47374b58f6111cadf144835b0d6ecb32d1e76332f2b9dae34",
+    },
+    {
+        "source_id": "SRC-990-RECOVERY-EMPOWER-LEARNING-AFRICA-USA-2023",
+        "candidate_organization": "Teaching at the Right Level Africa",
+        "legal_entity": "Empower Learning Africa USA",
+        "ein": "92-2014591",
+        "object_id": "202410939349200436",
+        "archive_url": "https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_04A.zip",
+        "index_url": "https://apps.irs.gov/pub/epostcard/990/xml/2024/index_2024.csv",
+        "download_url": "",
+        "sha256": "c1c3f8bf8c53d19af30f31cff8b92ab9c5c33de8c2667bdd11a917714edd99d4",
     },
     {
         "source_id": "SRC-990-RECOVERY-HEALTHIER-HENS",
@@ -163,8 +196,8 @@ def audit_zip() -> dict[str, int]:
     with ZipFile(ZIP_PATH) as archive:
         if archive.testzip() is not None:
             raise ValueError("Lingering-organization ZIP is corrupt")
-        if len(archive.namelist()) != 91:
-            raise ValueError(f"Expected 91 ZIP members, found {len(archive.namelist())}")
+        if len(archive.namelist()) != 184:
+            raise ValueError(f"Expected 184 ZIP members, found {len(archive.namelist())}")
         tables = {name: read_zip_csv(archive, name) for name in EXPECTED_PACKAGE_COUNTS}
         for name, expected in EXPECTED_PACKAGE_COUNTS.items():
             if len(tables[name]) != expected:
@@ -202,7 +235,9 @@ def audit_zip() -> dict[str, int]:
         return {
             "zip_members": len(archive.namelist()),
             "sources": len(manifest),
+            "distinct_source_urls": len({row["direct_download_url"] for row in manifest}),
             "source_native_labels_on_text_summaries": sum(row["source_native"] == "yes" for row in manifest),
+            "source_native_artifacts": 0,
             "compensation_rows": len(tables["compensation_observations.csv"]),
             "part_vii_arithmetic_rows": arithmetic_checked,
         }
@@ -255,6 +290,16 @@ def disposition(source: dict[str, str], person: str, title: str, total: int) -> 
             "validated_positive_exact", "no", "not_usable",
             "Exact historical officer payment from the final return of a terminated entity, but the filing does not establish a current organization-wide executive role.",
         )
+    if object_id == "202430789349200603" and normalized_person == "CHRIS SAID" and total > 0:
+        return (
+            "validated_positive_exact", "no", "not_usable",
+            "Exact historical president payment; the current 2025 return reports zero, so this older amount is not a current salary observation.",
+        )
+    if object_id == "202501199349301740" and normalized_person == "DAVID SEARS" and total > 0:
+        return (
+            "validated_positive_exact", "no", "not_usable",
+            "Exact U.S.-affiliate president amount, not compensation for Teaching at the Right Level Africa's organization-wide executive.",
+        )
     zero_reasons = {
         "202513219349201141": "Explicit officer zero in Epoch's setup/pre-full-spinout filing; it is not evidence of current pay.",
         "202631969349301838": "Explicit zero for a low-hour board officer, not executive salary.",
@@ -262,6 +307,9 @@ def disposition(source: dict[str, str], person: str, title: str, total: int) -> 
         "202620539349200207": "Explicit zero in a Form 990-EZ officer row; this filing does not establish a positive current salary.",
         "202511359349208821": "Explicit zero in the final return of a terminated entity.",
         "202503089349302335": "Explicit zero in a pre-operations filing with zero expenses and employees; it is not a current salary point.",
+        "202430789349200603": "Explicit zero for a historical low-hour Apollo officer; it is not a salary observation.",
+        "202501199349301740": "Explicit zero for a low-hour Empower Learning Africa USA affiliate officer; it is not pay for the Africa executive.",
+        "202410939349200436": "Explicit zero in Empower Learning Africa USA's setup-year filing; it is not pay for the Africa executive.",
     }
     if total == 0:
         return "validated_zero", "no", "not_usable", zero_reasons[object_id]
@@ -418,6 +466,7 @@ def main() -> None:
         "validated_zero": zeros,
         "partial_year_or_transition": transitions,
         "new_default_ceo_observations": 0,
+        "new_default_position_observations": 0,
     }, sort_keys=True))
 
 
