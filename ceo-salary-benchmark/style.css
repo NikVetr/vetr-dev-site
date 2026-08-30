@@ -341,8 +341,8 @@ thead button[data-sort]::after { content: "↕"; color: var(--muted); font-size:
 thead button[data-active="true"]::after { content: "↓"; color: var(--green); opacity: 1; }
 thead button[data-active="true"][data-direction="asc"]::after { content: "↑"; }
 .filterable-column { position: relative; padding-right: 7px; }
-.header-controls { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; vertical-align: middle; }
-.header-controls > button[data-sort] { min-width: 0; max-width: calc(100% - 22px); white-space: normal; line-height: 1.05; }
+.header-controls { display: inline-flex; align-items: center; gap: 0; max-width: 100%; vertical-align: middle; }
+.header-controls > button[data-sort] { min-width: 0; max-width: calc(100% - 18px); white-space: normal; line-height: 1.05; }
 .filter-menu details { position: relative; }
 .filter-menu summary { position: relative; min-width: 76px; padding: 5px 20px 5px 6px; border: 1px solid var(--line-dark); border-radius: 3px; background: white; color: var(--green); font-size: 9px; font-weight: 650; text-transform: none; letter-spacing: 0; cursor: pointer; list-style: none; }
 .filter-menu summary::-webkit-details-marker { display: none; }

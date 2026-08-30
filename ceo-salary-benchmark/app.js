@@ -2685,10 +2685,21 @@
 
   function activateHeaderFilterPopover(details) {
     if (!details?.open) return;
-    document.querySelectorAll(".header-filter-menu details[open]").forEach((candidate) => {
-      if (candidate !== details) candidate.open = false;
-    });
+    closeHeaderFilterPopovers({ except: details });
     alignHeaderFilterPopover(details);
+  }
+
+  function closeHeaderFilterPopovers({ except = null, restoreFocus = false } = {}) {
+    const openDetails = [...document.querySelectorAll(".header-filter-menu details[open]")]
+      .filter((details) => details !== except);
+    if (!openDetails.length) return false;
+    const focusedDetails = openDetails.find((details) => details.contains(document.activeElement));
+    const focusTarget = restoreFocus
+      ? (focusedDetails || openDetails[0]).querySelector("summary")
+      : null;
+    openDetails.forEach((details) => { details.open = false; });
+    focusTarget?.focus();
+    return true;
   }
 
   function focusRow(id) {
@@ -3782,7 +3793,14 @@
     if (refs.axisSelector.hidden || refs.axisSelector.contains(event.target) || event.target.closest?.(".axis-variable-control")) return;
     closeAxisSelector();
   });
-  document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeAxisSelector(); });
+  document.addEventListener("pointerdown", (event) => {
+    closeHeaderFilterPopovers({ except: event.target.closest?.(".header-filter-menu details") || null });
+  }, true);
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    closeAxisSelector();
+    if (closeHeaderFilterPopovers({ restoreFocus: true })) event.preventDefault();
+  });
   refs.chartColor.addEventListener("change", () => { state.chartColor = refs.chartColor.value; renderAll(); });
   refs.showContours.addEventListener("change", () => { state.showContours = refs.showContours.checked; renderChart(); });
   refs.salaryMin.addEventListener("input", () => updateRange("salary", "low"));

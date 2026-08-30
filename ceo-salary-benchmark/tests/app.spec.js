@@ -473,10 +473,24 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#sample-select").selectOption("clean");
   await expect(page.locator("#sample-description")).toContainText("organization types most similar to RP");
   await page.locator("#reset-settings").click();
-  await page.locator('[data-filter-menu="title"] summary').click();
+  const titleFilterSummary = page.locator('[data-filter-menu="title"] summary');
+  const titleFilterDetails = page.locator('[data-filter-menu="title"] details');
+  await titleFilterSummary.click();
+  const firstTitleOption = page.locator('[data-filter-menu="title"] .filter-options input').first();
+  await firstTitleOption.click();
+  await expect(titleFilterDetails).toHaveAttribute("open", "");
+  await firstTitleOption.click();
+  await expect(titleFilterDetails).toHaveAttribute("open", "");
+  await page.locator("#chart-title").click();
+  await expect(titleFilterDetails).not.toHaveAttribute("open", "");
+  await titleFilterSummary.click();
+  await page.keyboard.press("Escape");
+  await expect(titleFilterDetails).not.toHaveAttribute("open", "");
+  await expect(titleFilterSummary).toBeFocused();
+  await titleFilterSummary.click();
   await page.locator("#salary-filter-summary").click();
   await expect(page.locator('.header-filter-menu details[open]')).toHaveCount(1);
-  await expect(page.locator('[data-filter-menu="title"] details')).not.toHaveAttribute("open", "");
+  await expect(titleFilterDetails).not.toHaveAttribute("open", "");
   await expect(page.locator('[data-numeric-filter="salary"] details')).toHaveAttribute("open", "");
   await page.locator(".table-scroll").evaluate((element) => { element.scrollLeft = 0; });
   await page.locator('[data-filter-menu="title"] summary').click();
@@ -604,10 +618,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
       gap: filter.left - sort.right,
       contained: filter.left >= bounds.left && filter.right <= bounds.right,
       lines: sort.height / lineHeight,
+      centerOffset: Math.abs((filter.top + filter.bottom - sort.top - sort.bottom) / 2),
     };
   }));
   expect(
-    filterPlacements.every(({ width, gap, contained, lines }) => width <= 18 && gap >= 4 && gap <= 5 && contained && lines <= 2.2),
+    filterPlacements.every(({ width, gap, contained, lines, centerOffset }) => (
+      width <= 18 && gap >= 0 && gap <= 0.5 && contained && lines <= 2.2 && centerOffset <= 0.75
+    )),
     JSON.stringify(filterPlacements),
   ).toBe(true);
   await page.locator(".table-panel").screenshot({ path: "tmp/app-dual-salary-columns.png" });
