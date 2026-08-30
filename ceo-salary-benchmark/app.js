@@ -1474,6 +1474,7 @@
       percentileBox,
       amountBox,
       screenScaleY,
+      renderedLineHeight,
       lineInsetPx,
       lineInset: lineInsetPx / screenScaleY,
     };
@@ -1483,14 +1484,20 @@
     const initialBox = label.getBBox();
     const initialCenter = initialBox.y + initialBox.height / 2;
     const metrics = quantileLabelMetrics(label, percentileLine, amountLine);
+    // Rotated labels need a little more breathing room than the horizontal
+    // empirical labels because their white outlines otherwise clip each other.
+    const lineSeparationPx = metrics.renderedLineHeight * 0.25;
+    const lineInsetPx = Math.max(metrics.lineInsetPx - lineSeparationPx, 0);
+    const lineInset = lineInsetPx / metrics.screenScaleY;
     const amountY = metrics.percentileBox.y + metrics.percentileBox.height
-      - metrics.lineInset - metrics.amountBox.y;
+      - lineInset - metrics.amountBox.y;
     amountLine.setAttribute("y", amountY.toFixed(2));
     const positionedBox = label.getBBox();
     const centerDelta = initialCenter - (positionedBox.y + positionedBox.height / 2);
     percentileLine.setAttribute("y", centerDelta.toFixed(2));
     amountLine.setAttribute("y", (amountY + centerDelta).toFixed(2));
-    label.dataset.lineInsetPx = metrics.lineInsetPx.toFixed(2);
+    label.dataset.lineInsetPx = lineInsetPx.toFixed(2);
+    label.dataset.lineSeparationPx = lineSeparationPx.toFixed(2);
   }
 
   function positionQuantileLabelStack(label, percentileLine, amountLine) {

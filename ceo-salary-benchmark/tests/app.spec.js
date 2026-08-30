@@ -220,8 +220,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     const matrix = mark.getScreenCTM();
     const scale = Math.hypot(matrix.c, matrix.d);
     const lineInset = (percentileBox.y + percentileBox.height - amountBox.y) * scale;
-    return lineInset >= 3.75 && lineInset <= 6.25
-      && Math.abs(lineInset - Number(mark.dataset.lineInsetPx)) <= 0.35;
+    const renderedLineHeight = Math.min(percentileBox.height, amountBox.height) * scale;
+    const separation = Number(mark.dataset.lineSeparationPx);
+    return lineInset >= 0.5 && lineInset <= 3.25
+      && Math.abs(lineInset - Number(mark.dataset.lineInsetPx)) <= 0.35
+      && Math.abs(separation - renderedLineHeight * 0.25) <= 0.35;
   }));
   expect(curveLabelSpacingMatches).toBe(true);
   await expect(page.locator("#show-rug")).toHaveCount(0);
@@ -1891,14 +1894,17 @@ test("fitted percentile labels retain compact line spacing at common browser zoo
         return {
           actual: (percentileBox.y + percentileBox.height - amountBox.y) * scale,
           target: Number(mark.dataset.lineInsetPx),
+          separation: Number(mark.dataset.lineSeparationPx),
+          renderedLineHeight: Math.min(percentileBox.height, amountBox.height) * scale,
           transform: mark.getAttribute("transform"),
         };
       }));
       expect(spacing.length).toBeGreaterThan(1);
       spacing.forEach((label) => {
-        expect(label.actual).toBeGreaterThanOrEqual(3.75);
-        expect(label.actual).toBeLessThanOrEqual(6.25);
+        expect(label.actual).toBeGreaterThanOrEqual(0.5);
+        expect(label.actual).toBeLessThanOrEqual(3.25);
         expect(Math.abs(label.actual - label.target)).toBeLessThanOrEqual(0.35);
+        expect(Math.abs(label.separation - label.renderedLineHeight * 0.25)).toBeLessThanOrEqual(0.35);
         expect(label.transform).toMatch(/translate\(.+\) rotate\(-?\d/);
       });
       if (distribution === "gamma" && zoom === 1.5) {
