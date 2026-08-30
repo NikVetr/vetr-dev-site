@@ -3170,14 +3170,14 @@
       tierA: "Position observations from the narrowest organization peer tier.",
       observed: "Every reported observation with the selected compensation measure, including excluded or unresolved records.",
     } : {
-      primary: "Rows retained for the validated analysis after source and role-structure review.",
-      sensitivity: "The validated analysis plus records explicitly designated for sensitivity analysis; substantive exclusions remain unchecked.",
+      primary: "Source-validated rows retained by the dated living review: a resolved entity, positive point amount, eligible full period, and full-time solo organization-wide chief executive.",
+      sensitivity: "The living peer set plus records explicitly designated for sensitivity analysis; partial-year, part-time, and unresolved substantive exclusions remain unchecked.",
       clean: "Primary rows with no structural compensation or leadership flags.",
       tierA: "The narrowest peer definition: incumbent Tier A or job-ad strict-primary rows.",
       observed: "Every row with a usable salary value, including broader sensitivity cases.",
     })[state.sample];
     refs.colorDescription.textContent = {
-      tier: "A / strict-primary is narrowest; B / secondary is broader; C / expanded is mainly a sensitivity set.",
+      tier: "A / strict-primary is narrowest; B / secondary is broader; C / expanded is the broadest peer tier. Tier affects optional similarity weighting, not source validity.",
       topic: "Mission or operating-model category coded during peer selection.",
       eaAffinity: "Degree of effective-altruist alignment or functional adjacency coded before compensation review.",
       sourceType: "Distinguishes realized Form 990 compensation from advertised job-posting midpoints.",

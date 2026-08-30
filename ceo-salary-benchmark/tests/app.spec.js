@@ -72,8 +72,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#help-tooltip")).toContainText("Bureau of Labor Statistics CPI-U");
   await expect(page.locator("#help-tooltip")).toContainText("CUUR0000SA0");
   await expect(page.locator("#help-tooltip")).toContainText("333.918");
-  await expect(page.locator("#stat-n")).toHaveText("125");
-  await expect(page.locator(".bar-block")).toHaveCount(125);
+  await expect(page.locator("#stat-n")).toHaveText("129");
+  await expect(page.locator(".bar-block")).toHaveCount(129);
   const screenedRosterIntegration = await page.evaluate(() => {
     const incumbents = window.CEO_BENCHMARK_DATA.incumbents;
     const byOrganization = (organization) => incumbents.filter((row) => row.organization === organization);
@@ -89,6 +89,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
       copenhagen: byOrganization("Copenhagen Consensus Center").map((row) => ({
         nominalSalary: row.nominalSalary, defaultIncluded: row.defaultIncluded,
       })),
+      livingPromotions: incumbents
+        .filter((row) => row.livingPeerReview && !row.legacyDefaultIncluded && row.defaultIncluded)
+        .map((row) => row.organization)
+        .sort(),
     };
   });
   expect(screenedRosterIntegration).toEqual({
@@ -100,12 +104,20 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     }],
     giveWell: [{
       nominalSalary: { base: 423600, cash: 424805, total: 463395 },
-      defaultIncluded: false,
+      defaultIncluded: true,
     }],
     copenhagen: [{
       nominalSalary: { base: 435166, cash: 497770, total: 497770 },
-      defaultIncluded: false,
+      defaultIncluded: true,
     }],
+    livingPromotions: [
+      "Center for Election Science",
+      "Copenhagen Consensus Center",
+      "Foresight Institute",
+      "GiveWell",
+      "Leverage Research",
+      "Magnify Mentoring",
+    ],
   });
   const explainerCoverage = await page.evaluate(() => ({
     definitions: Object.values(window.CEO_BENCHMARK_DATA.categoryExplainers.definitions)
@@ -153,7 +165,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".density-line")).toHaveCount(1);
   await expect(page.locator(".density-line-outline")).toHaveAttribute("d", await page.locator(".density-line").getAttribute("d"));
   await expect(page.locator(".density-line-outline")).toHaveCSS("stroke", "rgba(255, 255, 255, 0.96)");
-  await expect(page.locator(".rug-line")).toHaveCount(125);
+  await expect(page.locator(".rug-line")).toHaveCount(129);
   await expect(page.locator(".rp-reference-guide")).toHaveCount(1);
   await expect(page.locator(".rp-chart-marker")).toHaveCount(1);
   await expect(page.locator(".rp-chart-marker image")).toHaveAttribute("href", "assets/rethink-priorities-favicon.png");
@@ -318,7 +330,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#chart-tooltip .chart-tooltip-value strong")).toContainText("$");
   await expect(page.locator("#chart-tooltip dt")).toContainText(["Histogram bin", "Salary percentile", "Peer tier", "Evidence", "Match score", "Effective weight"]);
   const salaryPercentileDetail = page.locator('#chart-tooltip dl div:has(dt:text-is("Salary percentile")) dd');
-  await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 125\)$/);
+  await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 129\)$/);
   const lognormalPercentile = await salaryPercentileDetail.textContent();
   await page.locator('input[name="distribution"][value="empirical"]').check();
   await page.locator(".bar-block").first().hover();
@@ -332,7 +344,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#chart-tooltip")).toContainText("Rethink Priorities");
   await expect(page.locator("#chart-tooltip")).toContainText("$155,230");
   await expect(page.locator("#chart-tooltip dt")).toContainText(["Salary percentile", "Analytical status", "Evidence"]);
-  await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 125\)$/);
+  await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 129\)$/);
   await expect(page.locator("#chart-tooltip")).toContainText("excluded from all calculations");
   await expect(page.locator("#chart-tooltip")).not.toContainText("Effective weight");
   await expect(page.locator("#chart-tooltip .chart-tooltip-hint")).toContainText("RP reference row");
@@ -390,8 +402,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('input[name="distribution"][value="lognormal"]').check();
 
   await page.getByLabel("Include American Immigration Council").uncheck();
-  await expect(page.locator("#stat-n")).toHaveText("124");
-  await expect(page.locator(".bar-block")).toHaveCount(124);
+  await expect(page.locator("#stat-n")).toHaveText("128");
+  await expect(page.locator(".bar-block")).toHaveCount(128);
   await page.locator("#reset-settings").click();
 
   const cpiContract = await page.evaluate(() => {
@@ -436,20 +448,20 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator('[data-filter-menu="tier"] .filter-options label').filter({ hasText: /^C$/ }).locator("input").uncheck();
   await expect(page.locator('[data-filter-menu="tier"] summary')).toHaveAttribute("data-active", "true");
   await expect(page.locator('[data-filter-menu="tier"] .filter-status')).toHaveText(`${tierOptionCount - 1} of ${tierOptionCount} selected`);
-  await expect(page.locator("#stat-n")).not.toHaveText("125");
+  await expect(page.locator("#stat-n")).not.toHaveText("129");
   const filteredN = Number(await page.locator("#stat-n").textContent());
   await expect(page.locator(".bar-block")).toHaveCount(filteredN);
 
   await page.locator("#reset-settings").click();
-  await expect(page.locator("#sample-select")).toContainText("Validated analysis set");
-  await expect(page.locator("#sample-select")).toContainText("Validated + sensitivity");
-  await expect(page.locator("#sample-description")).toContainText("validated analysis");
+  await expect(page.locator("#sample-select")).toContainText("Living peer set");
+  await expect(page.locator("#sample-select")).toContainText("Living + sensitivity");
+  await expect(page.locator("#sample-description")).toContainText("dated living review");
   await page.locator("#sample-select").selectOption("sensitivity");
   await expect(page.locator("#sample-description")).toContainText("sensitivity analysis");
   await expect(page.locator("#stat-n")).toHaveText("133");
   await page.locator("#stream-select").selectOption("incumbents");
   await page.locator("#measure-select").selectOption("cash");
-  await expect(page.locator("#stat-n")).toHaveText("125");
+  await expect(page.locator("#stat-n")).toHaveText("126");
   for (const organization of ["Animal Equality", "Compassion in World Farming USA"]) {
     await expect(page.locator(`tbody tr[data-id]:has(.organization-name:text-is("${organization}")) .row-toggle`)).toBeChecked();
   }
@@ -522,7 +534,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#salary-range-value")).not.toHaveText("All");
   await expect(page.locator("#salary-filter-summary")).toHaveAttribute("data-active", "true");
   await expect(page.locator("#salary-filter-status")).toContainText("Salary filter");
-  await expect(page.locator("#stat-n")).not.toHaveText("125");
+  await expect(page.locator("#stat-n")).not.toHaveText("129");
   await page.locator("#reset-settings").click();
   await expect(page.locator("#expense-range-min")).not.toBeVisible();
   await page.locator("#expense-filter-summary").click();
@@ -530,7 +542,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#expense-range-value")).not.toHaveText("All");
   await expect(page.locator("#expense-filter-summary")).toHaveAttribute("data-active", "true");
   await expect(page.locator("#expense-filter-status")).toContainText("Expense filter");
-  await expect(page.locator("#stat-n")).not.toHaveText("125");
+  await expect(page.locator("#stat-n")).not.toHaveText("129");
   await page.locator("#reset-settings").click();
   const matchScoreUnfilteredN = Number(await page.locator("#stat-n").textContent());
   await expect(page.locator("#match-score-range-min")).not.toBeVisible();
@@ -832,7 +844,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator("#stream-select").selectOption("combined");
   await expect(page.locator("#measure-field")).toBeHidden();
   await expect(page.locator(".method-note")).toHaveCount(0);
-  await expect(page.locator("#stat-n")).toHaveText("125");
+  await expect(page.locator("#stat-n")).toHaveText("129");
   await page.locator('[data-filter-menu="sourceType"] summary').click();
   await expect(page.locator('[data-filter-menu="sourceType"] .filter-options input')).toHaveCount(3);
   await page.locator('#weighting-components input[value="sourceType"]').check();
@@ -1311,12 +1323,12 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   const legacyV2 = Buffer.from(JSON.stringify({ v: 2 })).toString("base64url");
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV2}`);
   await expect(page.locator("#stream-select")).toHaveValue("incumbents");
-  await expect(page.locator("#stat-n")).toHaveText("110");
+  await expect(page.locator("#stat-n")).toHaveText("114");
   const legacyV3 = Buffer.from(JSON.stringify({ v: 3 })).toString("base64url");
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV3}`);
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
-  await expect(page.locator("#stat-n")).toHaveText("125");
+  await expect(page.locator("#stat-n")).toHaveText("129");
   const legacyV4 = Buffer.from(JSON.stringify({ v: 4, a: 1 })).toString("base64url");
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV4}`);
   await expect(page.locator('input[name="histogram-axis-mode"][value="ratio"]')).toBeChecked();
@@ -1331,12 +1343,12 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV1}`);
   await expect(page.locator("#position-select")).toHaveValue("ceo");
   await expect(page.locator("#stream-select")).toHaveValue("incumbents");
-  await expect(page.locator("#stat-n")).toHaveText("110");
+  await expect(page.locator("#stat-n")).toHaveText("114");
 
   await page.goto("/ceo-salary-benchmark/?s=not-valid-state");
   await expect(page.locator("#url-state-error")).toBeVisible();
   await expect(page.locator("#url-state-error")).toContainText("default settings");
-  await expect(page.locator("#stat-n")).toHaveText("125");
+  await expect(page.locator("#stat-n")).toHaveText("129");
   expect(errors).toEqual([]);
 });
 

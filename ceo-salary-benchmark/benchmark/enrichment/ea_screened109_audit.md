@@ -4,6 +4,10 @@
 
 The screened-109 package is useful as a peer-discovery and screening artifact, but `combined_reference_set_186_screened.csv` is not a 186-observation compensation dataset and must not replace the current app data. Only source-validated, entity-deduplicated compensation extensions are added, initially to the sensitivity sample.
 
+## Living-review amendment (2026-08-30)
+
+The phrase “initially to the sensitivity sample” is material: this audit preserved a cautious first integration, not a permanent boundary. `living_peer_universe_review.csv` subsequently applies the same pay-blind source/entity/period/role rule to historical and post-freeze observations. GiveWell now enters the living default at Tier B and Copenhagen Consensus Center at Tier C. GiveWell's grantmaking model and $183.707 million filing-expense scale, and Copenhagen's founder status and one-employee scale, remain visible to the optional structure, tier, expense, and staff weights. Project Healthy Children remains a single refreshed default entity. The package's other five apparent additions still lack a usable current positive named-executive point and therefore remain research inventory rather than salary observations.
+
 ## Internal validation
 
 - Reviewed ZIP: `tmp/rp_ceo_ea_roster_screened109.zip`; SHA-256 `14881770c99974fe48d24145d2c3b4776ca310382d421713332600253697770c`.
@@ -26,7 +30,7 @@ Two genuinely new positive observations are source-complete enough to add as sen
 1. **GiveWell / The Clear Fund.** The official 2024 Form 990 reports Elie Hassenfeld, Chief Executive Officer, 40 hours; Part VII organization compensation $424,805, related compensation $0, and other compensation $38,590. Schedule J reports $423,600 base, $1,205 other reportable compensation, $38,590 nontaxable benefits, and $463,395 total. The filing reports $269,542,773 revenue, $183,707,000 total expenses, and 96 employees. The screening package's $21,361,760 operating-expense concept is not silently substituted for the filing-comparable total-expense field used elsewhere in the app.
 2. **Copenhagen Consensus Center USA.** The 2024 Form 990 reports Dr. Bjorn Lomborg, President & Founder, 40 hours; Part VII cash $497,770 with no related or other compensation. Schedule J reports $435,166 base plus a $62,604 bonus, totaling $497,770. The filing reports $920,765 revenue, $1,187,335 expenses, and one employee.
 
-Both are excluded from the validated default sample. GiveWell's grantmaking/donor-service model and very large filing expense base differ materially from RP. Copenhagen Consensus is founder-led and far below RP scale.
+At initial integration, both were excluded from the then-validated default sample. GiveWell's grantmaking/donor-service model and very large filing expense base differ materially from RP, while Copenhagen Consensus is founder-led and far below RP scale. The living-review amendment above retains those facts as Tier/structure/scale metadata and admits both clean full-time organization-wide observations.
 
 The official current Project Healthy Children / Sanku filing also corrects the existing row's stale-source note. It reports Felix Brooks-Church, CEO, 40 hours; Part VII organization compensation $97,072 and other compensation $116,768; Schedule J base $97,072, deferred compensation $3,168, nontaxable benefits $113,600, and total $213,840. The filing reports $6,702,737 revenue, $5,867,621 expenses, and three employees. This supersedes the app's older 2022 compensation observation but does not increase the entity or observation count.
 
@@ -42,4 +46,4 @@ Machine-readable dispositions are in `benchmark/enrichment/ea_screened109_candid
 
 ## Count interpretation
 
-After the two sensitivity additions, the app contains 151 incumbent organization rows and 127 positive incumbent salary observations. The default validated sample remains 116. The package's `186` number should always be labeled a provisional organization-name screening bridge, never a salary-observation count.
+After the two initial sensitivity additions, the app contained 151 incumbent organization rows and 127 positive incumbent salary observations, while the then-default sample remained 116. Subsequent source-validated additions and the living review now produce 153 incumbent rows across 152 organizations and a 122-row default cash sample. The package's `186` number should always be labeled a provisional organization-name screening bridge, never a salary-observation count.

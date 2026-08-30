@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "benchmark" / "enrichment" / "ea_roster_validated_compensation.csv"
 CANDIDATE_REVIEW = ROOT / "benchmark" / "enrichment" / "ea_roster_candidate_review.csv"
 LINGERING_APP_ADDITIONS = ROOT / "benchmark" / "enrichment" / "lingering_org_app_position_additions.csv"
+LIVING_PEER_REVIEW = ROOT / "benchmark" / "enrichment" / "living_peer_universe_review.csv"
 APP_DATA = ROOT / "app-data.js"
 SOURCE_MANIFEST = ROOT / "benchmark" / "enrichment" / "ea_roster_source_manifest.csv"
 INCUMBENT_UPDATES = ROOT / "benchmark" / "enrichment" / "incumbent_compensation_updates.csv"
@@ -188,21 +189,31 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
     if {row.get("id") for row in roster_rows} != expected_ids or len(roster_rows) != len(expected_ids):
         raise ValueError("Generated app does not contain exactly the reviewed EA-roster observations")
     by_id = {row["id"]: row for row in roster_rows}
+    living_by_id = {
+        row["observation_id"]: row for row in rows(LIVING_PEER_REVIEW)
+    }
 
     for reviewed_row in reviewed:
         organization = reviewed_row["organization"]
         generated = by_id[reviewed_row["source_id"]]
         if generated.get("organization") != organization:
             raise ValueError(f"{organization}: generated organization name changed")
-        if generated.get("defaultIncluded") is not False:
-            raise ValueError(f"{organization}: reviewed roster observations must remain default-excluded")
-        expected_status = (
-            "sensitivity_only"
-            if reviewed_row["default_inclusion_status"] == "sensitivity"
-            else "excluded"
-        )
+        living = living_by_id.get(reviewed_row["source_id"])
+        if living is None:
+            raise ValueError(f"{organization}: living peer review row is missing")
+        expected_default = reviewed_boolean(living["living_default_included"])
+        if generated.get("defaultIncluded") is not expected_default:
+            raise ValueError(f"{organization}: generated living default disposition changed")
+        if generated.get("legacyDefaultIncluded") is not False:
+            raise ValueError(f"{organization}: historical roster default must remain recorded as false")
+        expected_status = living["living_analysis_status"]
         if generated.get("analysisStatus") != expected_status:
             raise ValueError(f"{organization}: generated analysis status changed")
+        if generated.get("tier") != living["living_tier"]:
+            raise ValueError(f"{organization}: generated living tier changed")
+        generated_living = generated.get("livingPeerReview", {})
+        if generated_living.get("reason") != living["nonpay_reason"]:
+            raise ValueError(f"{organization}: generated living-review rationale changed")
         if generated.get("structurallyClean") is not reviewed_boolean(reviewed_row["structurally_clean"]):
             raise ValueError(f"{organization}: generated structural flag changed")
         if generated.get("founder") is not (reviewed_row["founder_flag"].casefold() == "yes"):
@@ -286,6 +297,17 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
         raise ValueError("Generated app summary has the wrong reviewed-roster observation count")
     if payload.get("summary", {}).get("lingeringOrgSensitivityObservations") != len(lingering_rows):
         raise ValueError("Generated app summary has the wrong lingering-organization count")
+    summary = payload.get("summary", {})
+    expected_summary = {
+        "primaryIncumbentObservations": 122,
+        "validatedBaseObservations": 114,
+        "quantitativeJobAds": 15,
+        "livingPeerReviewedObservations": 16,
+        "livingPeerPromotedObservations": 6,
+    }
+    for field, expected in expected_summary.items():
+        if summary.get(field) != expected:
+            raise ValueError(f"Generated app summary {field} changed: {summary.get(field)}")
 
 
 def validate_pdf_row(row: dict[str, str], path: Path) -> None:
@@ -473,7 +495,7 @@ def main() -> None:
     print(
         f"Validated {len(reviewed)} EA-roster compensation observations against preserved source-native filings; "
         "the three LEEP sensitivity observations, entity-deduplicated current Project Healthy Children filing, "
-        "generated values, previews, source links, default exclusions, and the 29-row screening boundary also pass."
+        "generated values, previews, source links, living-review dispositions, and the 29-row screening boundary also pass."
     )
 
 

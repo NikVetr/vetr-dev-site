@@ -20,6 +20,8 @@ CATEGORY_EXPLAINERS = DELIVERABLES / "category_explainers"
 ENRICHMENT = BENCHMARK / "enrichment"
 JOB_AD_EVIDENCE_UPDATES = ENRICHMENT / "job_ad_evidence_updates.csv"
 EA_ROSTER_COMPENSATION = ENRICHMENT / "ea_roster_validated_compensation.csv"
+LIVING_PEER_REVIEW = ENRICHMENT / "living_peer_universe_review.csv"
+LIVING_PEER_METHODOLOGY = "benchmark/enrichment/living_peer_universe_methodology.md"
 INCUMBENT_COMPENSATION_UPDATES = ENRICHMENT / "incumbent_compensation_updates.csv"
 FORM990_POSITION_OBSERVATIONS = ENRICHMENT / "form990_position_observations.csv"
 FORM990_POSITION_SUPPORTING_SOURCES = ENRICHMENT / "form990_position_supporting_sources.csv"
@@ -28,6 +30,24 @@ LINGERING_ORG_RECOVERED_POSITIONS = ENRICHMENT / "lingering_org_recovered_us_pos
 LINGERING_ORG_PEER_REVIEW = ENRICHMENT / "lingering_org_peer_eligibility_review.csv"
 LINGERING_ORG_APP_ADDITIONS = ENRICHMENT / "lingering_org_app_position_additions.csv"
 EA_ROSTER_CANDIDATE_REVIEW = ENRICHMENT / "ea_roster_candidate_review.csv"
+EXPECTED_LIVING_PEER_REVIEW_IDS = {
+    "SRC-990-EXT-CENTER-FOR-AI-SAFETY",
+    "SRC-990-EXT-INSTITUTE-FOR-WOMEN-S-POLICY-RESEARCH",
+    "SRC-990-EXT-CENTER-FOR-LAW-AND-SOCIAL-POLICY",
+    "SRC-990-EXT-ANIMAL-EQUALITY",
+    "SRC-990-EXT-COMPASSION-IN-WORLD-FARMING-USA",
+    "SRC-990-EXT-PROJECT-HEALTHY-CHILDREN",
+    "SRC-990-EA-CENTER-FOR-ELECTION-SCIENCE",
+    "SRC-990-EA-FORESIGHT-INSTITUTE",
+    "SRC-990-EA-LEVERAGE-RESEARCH",
+    "SRC-990-EA-QUALIA-RESEARCH-INSTITUTE",
+    "SRC-990-EA-MAGNIFY-MENTORING",
+    "SRC-990-EA-GIVEWELL",
+    "SRC-990-EA-COPENHAGEN-CONSENSUS-CENTER",
+    "SRC-990-RECOVERY-LEEP::clare-donaldson",
+    "SRC-990-RECOVERY-LEEP::lucia-coulter",
+    "SRC-AD-SEATTLEBG",
+}
 PUBLISHED_HTML_WHITESPACE_NORMALIZATION_SOURCE_IDS = {
     "SRC-POSITION-NEW-ROOTS-JESSE-TANDLER",
     "SRC-POSITION-PAI-FELECIA-WEBB",
@@ -127,6 +147,15 @@ def number(value: object) -> float | None:
 
 def boolean(value: object) -> bool:
     return text(value).lower() in {"true", "yes", "1"}
+
+
+def reviewed_boolean(value: object) -> bool:
+    normalized = text(value).lower()
+    if normalized in {"true", "yes", "1"}:
+        return True
+    if normalized in {"false", "no", "0"}:
+        return False
+    raise ValueError(f"Expected an explicit reviewed boolean, got {value!r}")
 
 
 def money(value: float | None) -> str:
@@ -786,7 +815,10 @@ def ea_roster_category_provenance(row: dict[str, str]) -> dict:
         "classificationTiming": "post_freeze_roster_source_validation",
         "provenanceType": "provisional_nonpay_roster_classification + source_validated_form990_compensation",
         "confidence": "high for filing values; provisional for peer classification",
-        "caveats": "These additions are sensitivity or observed-only records and are excluded from the default validated analysis.",
+        "caveats": (
+            "This is the roster package's historical post-freeze classification. "
+            "The dated living peer-universe review controls current default inclusion."
+        ),
     }
 
 
@@ -1665,6 +1697,116 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
     return output
 
 
+def apply_living_peer_review(incumbents: list[dict], jobs: list[dict]) -> dict[str, int]:
+    """Apply a dated, pay-blind admission review without rewriting frozen inputs."""
+    review_rows = rows(LIVING_PEER_REVIEW)
+    review_ids = {text(row["observation_id"]) for row in review_rows}
+    if review_ids != EXPECTED_LIVING_PEER_REVIEW_IDS or len(review_rows) != len(review_ids):
+        missing = sorted(EXPECTED_LIVING_PEER_REVIEW_IDS - review_ids)
+        extra = sorted(review_ids - EXPECTED_LIVING_PEER_REVIEW_IDS)
+        raise ValueError(
+            f"Living peer review boundary changed; missing={missing}, extra={extra}"
+        )
+
+    app_rows = incumbents + jobs
+    by_id = {row["id"]: row for row in app_rows}
+    if len(by_id) != len(app_rows):
+        raise ValueError("App observations contain duplicate IDs before the living peer review")
+    missing_app_rows = sorted(review_ids - by_id.keys())
+    if missing_app_rows:
+        raise ValueError(f"Living peer review cites missing app observations: {missing_app_rows}")
+
+    allowed_dispositions = {"default", "sensitivity", "observed_only"}
+    allowed_score_statuses = {"verified", "provisional", "unavailable"}
+    promoted = 0
+    retained_default = 0
+    for review in review_rows:
+        observation_id = text(review["observation_id"])
+        row = by_id[observation_id]
+        stream = text(review["evidence_stream"])
+        organization = text(review["organization"])
+        if stream != row["evidenceStream"] or organization != row["organization"]:
+            raise ValueError(
+                f"Living peer review identity mismatch for {observation_id}: "
+                f"{stream}/{organization}"
+            )
+
+        legacy_default = reviewed_boolean(review["legacy_default_included"])
+        living_default = reviewed_boolean(review["living_default_included"])
+        if legacy_default is not bool(row["defaultIncluded"]):
+            raise ValueError(f"Living peer review has a stale legacy default for {observation_id}")
+        disposition = text(review["observation_disposition"])
+        if disposition not in allowed_dispositions:
+            raise ValueError(f"Invalid living disposition for {observation_id}: {disposition}")
+        if living_default != (disposition == "default"):
+            raise ValueError(f"Living default/disposition conflict for {observation_id}")
+        score_status = text(review["score_status"])
+        if score_status not in allowed_score_statuses:
+            raise ValueError(f"Invalid score status for {observation_id}: {score_status}")
+        status = text(review["living_analysis_status"])
+        tier = text(review["living_tier"])
+        reason = text(review["nonpay_reason"])
+        weight_treatment = text(review["weight_treatment"])
+        review_date = text(review["review_date"])
+        if not all((status, tier, reason, weight_treatment, review_date)):
+            raise ValueError(f"Living peer review is incomplete for {observation_id}")
+        if living_default:
+            cash = row.get("salary", {}).get("cash")
+            if cash is None or cash <= 0:
+                raise ValueError(f"Living default lacks a positive compensation point: {observation_id}")
+
+        row["legacyDefaultIncluded"] = legacy_default
+        row["legacyAnalysisStatus"] = row["analysisStatus"]
+        row["legacyTier"] = row["tier"]
+        row["defaultIncluded"] = living_default
+        row["analysisStatus"] = status
+        row["tier"] = tier
+        row["selectionNote"] = reason
+        row["livingPeerReview"] = {
+            "disposition": disposition,
+            "scoreStatus": score_status,
+            "reason": reason,
+            "weightTreatment": weight_treatment,
+            "reviewDate": review_date,
+            "reviewPath": "benchmark/enrichment/living_peer_universe_review.csv",
+            "methodologyPath": LIVING_PEER_METHODOLOGY,
+        }
+
+        provenance = row.get("categoryProvenance")
+        if provenance:
+            row["preLivingCategoryProvenance"] = copy.deepcopy(provenance)
+            provenance = copy.deepcopy(provenance)
+            provenance["tier"] = {
+                **provenance.get("tier", {}),
+                "value": tier,
+                "label": f"Tier {tier} · living review" if tier in {"A", "B", "C"} else tier,
+                "rationale": reason,
+                "citation": "benchmark/enrichment/living_peer_universe_review.csv",
+            }
+            provenance["classificationTiming"] = (
+                f"{text(provenance.get('classificationTiming'))} + living_peer_review_2026-08-30"
+            ).strip(" +")
+            provenance["caveats"] = (
+                f"{text(provenance.get('caveats'))} Current disposition: {disposition}; "
+                f"score status: {score_status}."
+            ).strip()
+            row["categoryProvenance"] = provenance
+
+        promoted += int(living_default and not legacy_default)
+        retained_default += int(living_default and legacy_default)
+
+    if promoted != 6 or retained_default != 2:
+        raise ValueError(
+            f"Unexpected living-review disposition counts: promoted={promoted}, "
+            f"retained_default={retained_default}"
+        )
+    return {
+        "reviewedObservations": len(review_rows),
+        "promotedObservations": promoted,
+        "retainedDefaultObservations": retained_default,
+    }
+
+
 def main() -> None:
     if EVIDENCE_DIR.exists():
         shutil.rmtree(EVIDENCE_DIR)
@@ -1683,6 +1825,7 @@ def main() -> None:
         raise ValueError(f"Duplicate lingering-organization incumbent IDs: {sorted(duplicate_lingering_ids)}")
     incumbents.extend(lingering_ceo_rows)
     jobs = build_job_ads(rationales_by_source)
+    living_review_summary = apply_living_peer_review(incumbents, jobs)
     rp_reference = build_rp_reference()
     position_catalog, position_observations, rp_references_by_position = build_position_data(
         rationales_by_source, reference_rationales
@@ -1773,6 +1916,8 @@ def main() -> None:
             "eaScreened109CandidateReviewPath": "benchmark/enrichment/ea_screened109_candidate_review.csv",
             "eaScreened109FollowupPromptPath": "benchmark/enrichment/ea_screened109_followup_prompt.md",
             "incumbentCompensationUpdatesPath": "benchmark/enrichment/incumbent_compensation_updates.csv",
+            "livingPeerReviewPath": "benchmark/enrichment/living_peer_universe_review.csv",
+            "livingPeerMethodologyPath": LIVING_PEER_METHODOLOGY,
             "positionMethodologyPath": "benchmark/enrichment/form990_position_methodology.md",
             "positionCatalogPath": "benchmark/enrichment/form990_benchmark_position_catalog.csv",
             "positionObservationsPath": "benchmark/enrichment/form990_position_observations.csv",
@@ -1796,6 +1941,8 @@ def main() -> None:
             "lingeringOrgSensitivityObservations": len(lingering_ceo_rows) + sum(
                 len(family_rows) for family_rows in lingering_position_rows.values()
             ),
+            "livingPeerReviewedObservations": living_review_summary["reviewedObservations"],
+            "livingPeerPromotedObservations": living_review_summary["promotedObservations"],
             "positionCatalogSize": len(position_catalog),
             "positionCatalogObservations": len(position_app_rows),
             "positionDefaultIncluded": sum(row["defaultIncluded"] for row in position_app_rows),

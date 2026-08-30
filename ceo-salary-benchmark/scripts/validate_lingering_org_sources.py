@@ -22,9 +22,9 @@ EXPECTED_PACKAGE_SHA256 = "413e38c1ae305bc784a329b6c37a9c2675b377bd8ac4d2cb5c9c3
 EXPECTED_IMAGE_ONLY = {"S008", "S036", "S090", "S093", "S112"}
 EXPECTED_MANUAL_REQUESTS = {"M018", "M024", "M026"}
 EXPECTED_MANUAL_STATUSES = {
-    "M018": "paid_interactive_registry_request",
-    "M024": "paid_interactive_registry_request",
-    "M026": "manual_browser_save_available",
+    "M018": "retired_user_deprioritized",
+    "M024": "retired_user_deprioritized",
+    "M026": "retired_user_deprioritized",
 }
 EXPECTED_XML = {
     "S012": ("873016729", "2023-09-01", "2024-08-31"),
@@ -132,12 +132,12 @@ def main() -> None:
 
     manual = rows(MANUAL)
     if {row["request_id"] for row in manual} != EXPECTED_MANUAL_REQUESTS or len(manual) != 3:
-        raise ValueError("The remaining manual-acquisition boundary changed")
+        raise ValueError("The retired manual-acquisition audit boundary changed")
     manual_statuses = {row["request_id"]: row["request_status"] for row in manual}
     if manual_statuses != EXPECTED_MANUAL_STATUSES:
         raise ValueError(f"Manual-acquisition statuses changed: {manual_statuses}")
     if any(not row["direct_clickable_url"].startswith("https://") for row in manual):
-        raise ValueError("Every remaining request must retain a secure actionable URL")
+        raise ValueError("Every retired request must retain its secure discovery URL")
 
     peer_review = rows(PEER_REVIEW)
     dispositions = Counter(row["recommended_peer_disposition"] for row in peer_review)
@@ -154,7 +154,7 @@ def main() -> None:
         "artifact_types": dict(sorted(artifact_types.items())),
         "image_only_pdfs": len(image_only),
         "incomplete_html_captures": len(incomplete_html),
-        "remaining_manual_requests": len(manual),
+        "retired_manual_requests": len(manual),
         "manual_request_statuses": dict(sorted(Counter(manual_statuses.values()).items())),
         "peer_dispositions": dict(sorted(dispositions.items())),
     }, sort_keys=True))

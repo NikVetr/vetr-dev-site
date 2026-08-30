@@ -31,10 +31,11 @@ These are decision ranges, not estimated population percentiles.
 ## Evidence coverage
 
 - 450 frozen expansion candidates plus two legacy-only original-protocol peers: **452 documented organizations**.
-- **144 selected reference organizations**: 79 Tier A, 39 Tier B, and 26 Tier C.
-- **116 primary-use Form 990 incumbent observations**, including **79 structurally clean** observations.
+- **144 historically frozen selected reference organizations**: 79 Tier A, 39 Tier B, and 26 Tier C.
+- **116 historically frozen primary-use Form 990 incumbent observations**, including **79 structurally clean** observations.
 - **15 current quantitative CEO/ED recruitment advertisements**.
-- **110 independently recovered exact Schedule J base observations among 116 primary-use rows**. The original evidence table omitted these fields; `deliverables/validated_form990_compensation.csv` contains the reparsed values. Form 990 Part VII reportable compensation remains a cash/W-2 proxy, not exact base salary.
+- **110 independently recovered exact Schedule J base observations among the 116 historically frozen primary-use rows**. The original evidence table omitted these fields; `deliverables/validated_form990_compensation.csv` contains the reparsed values. Form 990 Part VII reportable compensation remains a cash/W-2 proxy, not exact base salary.
+- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **122 incumbent cash observations**, of which **114 report Schedule J base**; together with the 15 postings, the initial base view contains **129 observations across 126 organizations**. The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
 
 ## Two different reproduction commands
 
@@ -195,6 +196,6 @@ Core Python requirements are `pandas`, `numpy`, `matplotlib`, `mistune`, `weasyp
 
 ## Analytical limitations
 
-Employee count is unavailable for 73 of 116 primary observations, so the analysis separately reports expense-only, expense-plus-no-known-contradiction, and strict joint expense-and-known-staff views. Exact filing base salary is used only where Schedule J reports it; no base salary is imputed. See `KNOWN_LIMITATIONS.md` for the complete list.
+In the historically frozen analysis, employee count is unavailable for 73 of 116 primary observations, so the report separately records expense-only, expense-plus-no-known-contradiction, and strict joint expense-and-known-staff views. The current app applies the same missingness rules to its living cohort. Exact filing base salary is used only where Schedule J reports it; no base salary is imputed. See `KNOWN_LIMITATIONS.md` for the complete list.
 
 This analysis is not a legal opinion and does not replace board conflict-of-interest, comparability, or compensation-reasonableness procedures.

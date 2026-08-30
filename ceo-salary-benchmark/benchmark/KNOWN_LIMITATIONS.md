@@ -2,7 +2,7 @@
 
 1. **The earlier ZIP was not source-complete.** The file previously named `rp_ceo_expanded_rebenchmark_complete.zip` contained derivative text snapshots but no complete official IRS XML returns. The current workspace now contains all 135 XML returns, but the earlier ZIP remains an analytical reproduction archive rather than a raw-evidence archive.
 
-2. **Retrieval is complete, but the strict corrected release is not.** All 349 manifest records are locally preserved. The strict packager continues to fail closed because it requires both source presence and agreement with the original expected extraction fields; 123 records retain documented expected-data issues rather than retrieval gaps.
+2. **Retrieval is complete, but the strict corrected release is not.** All 353 current manifest records are locally preserved. The strict packager continues to fail closed because it requires both source presence and agreement with the original expected extraction fields; 123 historical records retain documented expected-data issues rather than retrieval gaps.
 
 3. **The extension is not blind to the original benchmark.** The original nine-peer pay observations and prior recommendation were known before the second and third expansion waves. Newly added candidate universes and scoring rules were frozen before systematic review of new-peer compensation, but complete analyst blindness cannot be claimed.
 
@@ -27,3 +27,5 @@
 13. **One primary filing row requires correction.** Center for AI Safety's source XML reports Part VII organization compensation of $314,534 and other compensation of $6,749, not $242,953 and $22,764. The independently validated deliverable contains the corrected values; the original report is retained unchanged as the audited artifact.
 
 14. **Later-wave score components are not fully reconstructable.** The first expansion preserves every component score, while later frozen candidate tables preserve pre-compensation descriptors but not a complete component-by-component scoring ledger. Final scores should be treated as analyst judgments until that ledger is rebuilt.
+
+15. **The frozen cohort and living app cohort are different audit layers.** The 144-reference/116-primary files remain immutable historical checkpoints. The app's dated living amendment admits six independently source-validated post-freeze observations under a fixed pay-blind role rule, producing 122 default incumbent cash rows and 114 Schedule J base rows. Their later-wave scores remain provisional and are not inputs to incumbent Auto-weights; the row-level amendment preserves every old and new disposition.
