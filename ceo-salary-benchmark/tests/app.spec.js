@@ -48,7 +48,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     if (explicitLabel) return explicitLabel.textContent.trim();
     return [...header.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent.trim()).join(" ").trim();
   }));
-  expect(tableHeaders).toEqual(["Selected", "Organization", "Title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Similarity Score", "Peer Group", "Area", "Location", "Effective Altruism", "Organization Type", "Year", "Pay Source", "Reported Salary", "Source"]);
+  expect(tableHeaders).toEqual(["Selected", "Organization", "Title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Score", "Peer Group", "Focus Area", "Location", "Effective Altruism", "Organization Type", "Year", "Pay Source", "Reported Salary", "Source"]);
   await expect(page.locator('thead button[data-sort="adjustedSalary"] > span > span')).toHaveCount(2);
   await expect(page.locator('thead button[data-sort="reportedSalary"] > span > span')).toHaveCount(2);
   expect(await page.locator("#organization-table .title-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThan(140);
@@ -230,8 +230,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#bin-count")).toHaveAttribute("min", "2");
   await expect(page.locator("#bin-count")).toHaveAttribute("max", "200");
   await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
-  await expect(page.locator("tbody .tier-cell").first()).toHaveText("Form 990 · closest peers");
-  await expect(page.locator("tbody .tier-cell").nth(1)).toHaveText("Form 990 · closest peers");
+  await expect(page.locator("tbody tr[data-id] .tier-cell").first()).toHaveText("Form 990 · closest peers");
+  await expect(page.locator("tbody tr[data-id] .tier-cell").nth(1)).toHaveText("Form 990 · closest peers");
   const rpReferenceRow = page.locator("tbody .rp-reference-row");
   await expect(rpReferenceRow).toHaveCount(1);
   await expect(rpReferenceRow).toContainText("Rethink Priorities");
@@ -243,6 +243,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(rpReferenceRow.locator("td").nth(1)).toHaveText("Rethink Priorities");
   await expect(rpReferenceRow.locator("td").nth(5)).toHaveText("43");
   await expect(rpReferenceRow.locator("td").nth(5)).toHaveAttribute("title", /2023 Form 990 reports 43 individuals employed/);
+  for (const cellIndex of [3, 4, 5, 7, 13, 15]) {
+    const [referenceAlignment, peerAlignment] = await Promise.all([
+      rpReferenceRow.locator("td").nth(cellIndex).evaluate((cell) => getComputedStyle(cell).textAlign),
+      page.locator("tbody tr[data-id]").first().locator("td").nth(cellIndex).evaluate((cell) => getComputedStyle(cell).textAlign),
+    ]);
+    expect(referenceAlignment).toBe(peerAlignment);
+  }
   await expect(rpReferenceRow.locator("td")).toHaveCount(17);
   await expect(rpReferenceRow.locator(".source-cell").getByRole("button", { name: "View" })).toHaveCount(1);
   await expect(rpReferenceRow.locator(".source-cell").getByRole("link", { name: /source 1/i })).toHaveText("1 ↗");
@@ -810,7 +817,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#chart-legend")).toContainText("Broadest peers");
   await expect(page.locator("#chart-legend")).not.toContainText("strict_primary");
   await expect(page.locator("#chart-legend .swatch")).toHaveCount(3);
-  await expect(page.locator("tbody .tier-cell").first()).toHaveText("Job posting · closest peers");
+  await expect(page.locator("tbody tr[data-id] .tier-cell").first()).toHaveText("Job posting · closest peers");
   await expect(page.getByLabel("Peer group multiplier for Job posting · closest peers")).toHaveValue("1");
   await expect(page.getByLabel("Peer group multiplier for Broadest case · job title differs")).toHaveValue("0.85");
   await expect(page.getByLabel("Peer group multiplier for Outside recommended group", { exact: true })).toHaveValue("0.1");

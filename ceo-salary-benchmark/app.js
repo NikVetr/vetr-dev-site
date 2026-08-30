@@ -2346,7 +2346,7 @@
     document.querySelectorAll("[data-filter-menu]").forEach((container) => {
       const key = container.dataset.filterMenu;
       const label = {
-        title: "Title", sourceType: "Pay source", tier: "Peer group", topic: "Area",
+        title: "Title", sourceType: "Pay source", tier: "Peer group", topic: "Focus Area",
         location: "Location", eaAffinity: "Effective Altruism", structure: "Organization type",
       }[key] || key;
       const values = [...new Set(rows().map((row) => String(row[key] || "Not reported")))].sort((a, b) => a.localeCompare(b));
@@ -2457,11 +2457,17 @@
       compactMoney(reference.expenses), reference.staff == null ? "—" : String(reference.staff), "", "", reference.tier || "Reference", "—", reference.location || "—", "—", reference.structure || "—",
       reference.compensationYear == null ? "—" : String(reference.compensationYear), reference.sourceType || "Form 990", reportedSalaryDisplay(reference),
     ];
+    const cellClasses = [
+      "check-column", "org-cell rp-reference-name", "title-cell",
+      "money-cell adjusted-salary-cell", "money-cell", "number-cell",
+      "weight-cell", "number-cell", "tier-cell", "topic-cell",
+      "metadata-cell", "metadata-cell", "metadata-cell", "number-cell",
+      "evidence-cell", "money-cell reported-salary-cell",
+    ];
     values.forEach((value, index) => {
       const td = document.createElement("td");
       td.textContent = value;
-      if (index === 0) td.className = "check-column";
-      if (index === 1) td.className = "rp-reference-name";
+      td.className = cellClasses[index];
       if (index === 5 && reference.staffYear === 2023 && reference.currentFilingStaff === 0) td.title = "RP's 2023 Form 990 reports 43 individuals employed on Part I, line 5. The 2024 filing reports zero, so the most recent usable comparable filing count is shown.";
       tr.append(td);
     });
