@@ -197,13 +197,17 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".curve-quantile-mark").first().locator("text").first()).toHaveCSS("font-size", "10px");
   await expect(page.locator(".curve-quantile-label").first()).toHaveCSS("fill", "rgb(45, 104, 133)");
   await expect(page.locator(".curve-quantile-label.amount").first()).toHaveCSS("fill", "rgb(62, 69, 74)");
-  const curveLabelLinesOverlap = await page.locator(".curve-quantile-mark").evaluateAll((marks) => marks.some((mark) => {
+  const curveLabelSpacingMatches = await page.locator(".curve-quantile-mark").evaluateAll((marks) => marks.every((mark) => {
     const [percentile, amount] = mark.querySelectorAll("text");
     const percentileBox = percentile.getBBox();
     const amountBox = amount.getBBox();
-    return percentileBox.y + percentileBox.height > amountBox.y;
+    const matrix = mark.getScreenCTM();
+    const scale = Math.hypot(matrix.c, matrix.d);
+    const lineInset = (percentileBox.y + percentileBox.height - amountBox.y) * scale;
+    return lineInset >= 3.75 && lineInset <= 6.25
+      && Math.abs(lineInset - Number(mark.dataset.lineInsetPx)) <= 0.35;
   }));
-  expect(curveLabelLinesOverlap).toBe(false);
+  expect(curveLabelSpacingMatches).toBe(true);
   await expect(page.locator("#show-rug")).toHaveCount(0);
   await expect(page.locator(".reference-band")).toHaveCount(0);
   await expect(page.locator(".density-line")).toHaveAttribute("d", /L/);
@@ -441,8 +445,14 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#sample-select")).toContainText("Validated + sensitivity");
   await expect(page.locator("#sample-description")).toContainText("validated analysis");
   await page.locator("#sample-select").selectOption("sensitivity");
-  await expect(page.locator("#sample-description")).toContainText("sensitivity-only");
+  await expect(page.locator("#sample-description")).toContainText("sensitivity analysis");
   await expect(page.locator("#stat-n")).toHaveText("133");
+  await page.locator("#stream-select").selectOption("incumbents");
+  await page.locator("#measure-select").selectOption("cash");
+  await expect(page.locator("#stat-n")).toHaveText("125");
+  for (const organization of ["Animal Equality", "Compassion in World Farming USA"]) {
+    await expect(page.locator(`tbody tr[data-id]:has(.organization-name:text-is("${organization}")) .row-toggle`)).toBeChecked();
+  }
   await page.locator("#sample-select").selectOption("clean");
   await expect(page.locator("#sample-description")).toContainText("structural");
   await page.locator("#reset-settings").click();
@@ -1186,7 +1196,8 @@ test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity
   expect(await leepRows.evaluateAll((tableRows) => tableRows.every((row) => row.dataset.plotEligible === "true"))).toBe(true);
   const expectedSensitivityPairs = await page.evaluate(() => {
     const data = window.CEO_BENCHMARK_DATA;
-    const selected = (row) => row.defaultIncluded || row.analysisStatus === "sensitivity_only";
+    const selected = (row) => row.defaultIncluded
+      || ["sensitivity_only", "structural_sensitivity"].includes(row.analysisStatus);
     const sourceId = (row) => row.sourceId || String(row.id || "").split("::", 1)[0];
     const coos = new Map();
     (data.positionObservations.coo || []).filter((row) => selected(row) && row.salary?.cash > 0).forEach((row) => {
@@ -1770,6 +1781,48 @@ test("empirical percentile labels remain separated at common browser zooms", asy
         expect(label.left).toBeGreaterThanOrEqual(geometry.labels[index - 1].right + 5);
       }
     });
+  }
+  expect(errors).toEqual([]);
+});
+
+test("fitted percentile labels retain compact line spacing at common browser zooms", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await page.evaluate(() => document.fonts?.ready);
+
+  for (const distribution of ["lognormal", "gamma"]) {
+    await page.locator(`input[name="distribution"][value="${distribution}"]`).check();
+    for (const zoom of [1, 1.25, 1.5, 1]) {
+      await page.evaluate((value) => {
+        document.body.style.zoom = String(value);
+        window.dispatchEvent(new Event("resize"));
+      }, zoom);
+      await page.waitForTimeout(180);
+      const spacing = await page.locator(".curve-quantile-mark").evaluateAll((marks) => marks.map((mark) => {
+        const percentile = mark.querySelector(".percentile");
+        const amount = mark.querySelector(".amount");
+        const percentileBox = percentile.getBBox();
+        const amountBox = amount.getBBox();
+        const matrix = mark.getScreenCTM();
+        const scale = Math.hypot(matrix.c, matrix.d);
+        return {
+          actual: (percentileBox.y + percentileBox.height - amountBox.y) * scale,
+          target: Number(mark.dataset.lineInsetPx),
+          transform: mark.getAttribute("transform"),
+        };
+      }));
+      expect(spacing.length).toBeGreaterThan(1);
+      spacing.forEach((label) => {
+        expect(label.actual).toBeGreaterThanOrEqual(3.75);
+        expect(label.actual).toBeLessThanOrEqual(6.25);
+        expect(Math.abs(label.actual - label.target)).toBeLessThanOrEqual(0.35);
+        expect(label.transform).toMatch(/translate\(.+\) rotate\(-?\d/);
+      });
+      if (distribution === "gamma" && zoom === 1.5) {
+        await page.locator(".chart-panel").screenshot({ path: "tmp/app-gamma-quantiles-zoom-150.png" });
+      }
+    }
   }
   expect(errors).toEqual([]);
 });

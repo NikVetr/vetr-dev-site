@@ -21,6 +21,11 @@ PACKAGE_MANIFEST = "rp_lingering_org_additions/source_manifest.csv"
 EXPECTED_PACKAGE_SHA256 = "413e38c1ae305bc784a329b6c37a9c2675b377bd8ac4d2cb5c9c3bf37ede2844"
 EXPECTED_IMAGE_ONLY = {"S008", "S036", "S090", "S093", "S112"}
 EXPECTED_MANUAL_REQUESTS = {"M018", "M024", "M026"}
+EXPECTED_MANUAL_STATUSES = {
+    "M018": "paid_interactive_registry_request",
+    "M024": "paid_interactive_registry_request",
+    "M026": "manual_browser_save_available",
+}
 EXPECTED_XML = {
     "S012": ("873016729", "2023-09-01", "2024-08-31"),
     "S096": ("922014591", "2025-01-01", "2025-12-31"),
@@ -128,6 +133,11 @@ def main() -> None:
     manual = rows(MANUAL)
     if {row["request_id"] for row in manual} != EXPECTED_MANUAL_REQUESTS or len(manual) != 3:
         raise ValueError("The remaining manual-acquisition boundary changed")
+    manual_statuses = {row["request_id"]: row["request_status"] for row in manual}
+    if manual_statuses != EXPECTED_MANUAL_STATUSES:
+        raise ValueError(f"Manual-acquisition statuses changed: {manual_statuses}")
+    if any(not row["direct_clickable_url"].startswith("https://") for row in manual):
+        raise ValueError("Every remaining request must retain a secure actionable URL")
 
     peer_review = rows(PEER_REVIEW)
     dispositions = Counter(row["recommended_peer_disposition"] for row in peer_review)
@@ -145,6 +155,7 @@ def main() -> None:
         "image_only_pdfs": len(image_only),
         "incomplete_html_captures": len(incomplete_html),
         "remaining_manual_requests": len(manual),
+        "manual_request_statuses": dict(sorted(Counter(manual_statuses.values()).items())),
         "peer_dispositions": dict(sorted(dispositions.items())),
     }, sort_keys=True))
 

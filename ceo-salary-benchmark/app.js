@@ -1076,7 +1076,9 @@
 
   function presetSelected(row) {
     const available = salary(row) != null;
-    if (state.sample === "sensitivity") return Boolean(available && (row.defaultIncluded || row.analysisStatus === "sensitivity_only"));
+    if (state.sample === "sensitivity") return Boolean(available && (
+      row.defaultIncluded || ["sensitivity_only", "structural_sensitivity"].includes(row.analysisStatus)
+    ));
     if (state.sample === "clean") return Boolean(row.defaultIncluded && row.structurallyClean && available);
     if (state.sample === "tierA") return Boolean(row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary"));
     if (state.sample === "observed") return available;
@@ -1447,7 +1449,7 @@
       const labelX = x + normalX * 24;
       const labelY = y + normalY * 24;
       const label = svgElement("g", { transform: `translate(${labelX} ${labelY}) rotate(${textAngle})`, class: "curve-quantile-mark" });
-      const percentileLine = svgElement("text", { x: 0, y: -7, "text-anchor": "middle", class: "curve-quantile-label" });
+      const percentileLine = svgElement("text", { x: 0, y: -7, "text-anchor": "middle", class: "curve-quantile-label percentile" });
       const percentilePrefix = svgElement("tspan");
       percentilePrefix.textContent = "P";
       const percentileSubscript = svgElement("tspan", { "baseline-shift": "sub", "font-size": "7.5" });
@@ -1458,6 +1460,7 @@
       label.append(percentileLine, amountLine);
       label.setAttribute("visibility", "hidden");
       svg.append(label);
+      positionCurveQuantileLabelStack(label, percentileLine, amountLine);
       const bounds = label.getBoundingClientRect();
       label.remove();
       label.removeAttribute("visibility");
@@ -1481,12 +1484,11 @@
     });
   }
 
-  function positionQuantileLabelStack(label, percentileLine, amountLine) {
+  function quantileLabelMetrics(label, percentileLine, amountLine) {
     percentileLine.setAttribute("y", "0");
     amountLine.setAttribute("y", "0");
     const percentileBox = percentileLine.getBBox();
     const amountBox = amountLine.getBBox();
-    const amountStroke = (Number.parseFloat(getComputedStyle(amountLine).strokeWidth) || 0) / 2;
     const matrix = label.getScreenCTM();
     const screenScaleY = Math.max(matrix ? Math.hypot(matrix.c, matrix.d) : 1, 0.01);
     const renderedLineHeight = Math.min(percentileBox.height, amountBox.height) * screenScaleY;
@@ -1494,15 +1496,41 @@
     // Slightly overlap those bounds so the painted labels retain only a small
     // optical gap instead of looking like two unrelated annotations.
     const lineInsetPx = clamp(renderedLineHeight * 0.34, 4, 6);
-    const guideGapPx = clamp(amountBox.height * screenScaleY * 0.55, 5, 8);
-    const lineInset = lineInsetPx / screenScaleY;
-    const guideGap = guideGapPx / screenScaleY;
-    const amountY = -guideGap - (amountBox.y + amountBox.height + amountStroke);
+    return {
+      percentileBox,
+      amountBox,
+      screenScaleY,
+      lineInsetPx,
+      lineInset: lineInsetPx / screenScaleY,
+    };
+  }
+
+  function positionCurveQuantileLabelStack(label, percentileLine, amountLine) {
+    const initialBox = label.getBBox();
+    const initialCenter = initialBox.y + initialBox.height / 2;
+    const metrics = quantileLabelMetrics(label, percentileLine, amountLine);
+    const amountY = metrics.percentileBox.y + metrics.percentileBox.height
+      - metrics.lineInset - metrics.amountBox.y;
     amountLine.setAttribute("y", amountY.toFixed(2));
-    const amountTextTop = amountY + amountBox.y;
-    const percentileY = amountTextTop + lineInset - (percentileBox.y + percentileBox.height);
+    const positionedBox = label.getBBox();
+    const centerDelta = initialCenter - (positionedBox.y + positionedBox.height / 2);
+    percentileLine.setAttribute("y", centerDelta.toFixed(2));
+    amountLine.setAttribute("y", (amountY + centerDelta).toFixed(2));
+    label.dataset.lineInsetPx = metrics.lineInsetPx.toFixed(2);
+  }
+
+  function positionQuantileLabelStack(label, percentileLine, amountLine) {
+    const metrics = quantileLabelMetrics(label, percentileLine, amountLine);
+    const amountStroke = (Number.parseFloat(getComputedStyle(amountLine).strokeWidth) || 0) / 2;
+    const guideGapPx = clamp(metrics.amountBox.height * metrics.screenScaleY * 0.55, 5, 8);
+    const guideGap = guideGapPx / metrics.screenScaleY;
+    const amountY = -guideGap - (metrics.amountBox.y + metrics.amountBox.height + amountStroke);
+    amountLine.setAttribute("y", amountY.toFixed(2));
+    const amountTextTop = amountY + metrics.amountBox.y;
+    const percentileY = amountTextTop + metrics.lineInset
+      - (metrics.percentileBox.y + metrics.percentileBox.height);
     percentileLine.setAttribute("y", percentileY.toFixed(2));
-    label.dataset.lineInsetPx = lineInsetPx.toFixed(2);
+    label.dataset.lineInsetPx = metrics.lineInsetPx.toFixed(2);
     label.dataset.guideGapPx = guideGapPx.toFixed(2);
     // Start the guide slightly behind the amount line. The guide is painted
     // first, so the label's white outline masks the overlap while the visible
@@ -3143,7 +3171,7 @@
       observed: "Every reported observation with the selected compensation measure, including excluded or unresolved records.",
     } : {
       primary: "Rows retained for the validated analysis after source and role-structure review.",
-      sensitivity: "The validated analysis plus records explicitly designated sensitivity-only; substantive exclusions remain unchecked.",
+      sensitivity: "The validated analysis plus records explicitly designated for sensitivity analysis; substantive exclusions remain unchecked.",
       clean: "Primary rows with no structural compensation or leadership flags.",
       tierA: "The narrowest peer definition: incumbent Tier A or job-ad strict-primary rows.",
       observed: "Every row with a usable salary value, including broader sensitivity cases.",

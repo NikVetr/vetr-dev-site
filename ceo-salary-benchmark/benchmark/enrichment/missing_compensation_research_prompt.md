@@ -223,7 +223,7 @@ Tier B next:
 
 39. **Swift Centre for Applied Forecasting** — https://www.swiftcentre.org/; United Kingdom/international. Resolve legal identity/registry, accounts, expenses, staff, Executive Director identity, employer, and pay/band.
 
-40. **Teaching at the Right Level Africa** — https://teachingattherightlevel.org/; Kenya. Resolve NGO/company registration and the CEO's employing entity; recover audited accounts, exact expense, staff/FTE, and named pay without mixing country entities.
+40. **Teaching at the Right Level Africa / Empower Learning Africa Limited** — https://teachingattherightlevel.org/; Kenya. The Kenyan legal-name lead is `EMPOWER LEARNING AFRICA LIMITED`, but no entity-prefilled public registry URL exists. Use the authenticated BRS v2 Official Search at https://brsv2.ecitizen.go.ke/ and follow https://brs.go.ke/wp-content/uploads/2023/07/How-to-Apply-OS.pdf; the search currently costs KES 650. Resolve the CEO's employing entity; recover certified annual returns/accounts, exact expense, staff/FTE, and named pay without mixing the U.S. affiliate or other country entities.
 
 41. **Unlimit Health / former SCI Foundation** — https://unlimithealth.org/; United Kingdom/Africa. Resolve charity/company identity, reporting period, current CEO/title/term, provisional £6.804 million income, £8.817 million expenses, 29 staff, and exact remuneration/band. Identify pass-through grants separately.
 
@@ -233,13 +233,13 @@ Tier C last:
 
 43. **Animal Advocacy Africa** — https://www.animaladvocacyafrica.org/; U.S. EIN 93-1669847; start at https://projects.propublica.org/nonprofits/organizations/931669847. Retrieve the native filing, exact staff, ED title/hours/pay, and operating expense separated from regrants. A preliminary later-filing lead suggests $173,506 rather than the unsupported $227,000 expense value and zero named-officer pay; validate both directly from the return.
 
-44. **Animal Empathy Philippines** — https://animalempathy.ph/. Resolve SEC/legal registration, accounts, revenue, expenses, staff, organization-wide executive identity/title, employer, and pay.
+44. **Animal Empathy Philippines, Inc.** — https://animalempathy.ph/. The official site states that this exact legal name is an SEC-registered non-stock nonprofit but does not disclose the registration number. Search it at https://checkwithsec.sec.gov.ph/check-with-sec/index and order the Articles of Incorporation, latest General Information Sheet, and latest Audited Financial Statements at https://secexpress.ph/application-form; if the interactive lookup fails, request the same records plus the SEC number from team@animalempathy.ph. Resolve accounts, revenue, expenses, staff, organization-wide executive identity/title, employer, and named pay.
 
 45. **Animal Welfare Observatory** — https://observatoriodebienestaranimal.org/; Spain. Resolve the legal association/foundation and registry, accounts, scale, executive identity, employer, and remuneration.
 
 46. **Apollo Academic Surveys** — https://www.apollosurveys.org/about/; United States. No EIN is validated and the provisional record claims one staff member. Locate the legal/fiscal host and filing first; then establish whether the Director is organization-wide and paid.
 
-47. **Association for Long Term Existence and Resilience / ALTER** — https://alter.org.il/; Israel. Resolve association number, accounts, provisional four staff, Executive Director versus Chair governance, actual employer, and named pay.
+47. **Association for Long Term Existence and Resilience / ALTER** — Israeli association 580738219; homepage: https://alter.org.il/; entity-specific GuideStar profile: https://www.guidestar.org.il/organization/580738219; exact 2024 report viewer: https://www.guidestar.org.il/VF_View_File?guid=90bbd20ee81a27e-8f188255dcb37c3f-78d93d02b80871944f0d60383b8a1a4afd49dd83b03446d0e44fd492ef55a745-86433c362dbfe5f6-3033a547f021a4ee8. Save the reCAPTCHA-protected original Hebrew report, resolve Director of Policy & Research versus organization-wide executive governance, actual employer, and named pay. GuideStar's title-level remuneration is not a named observation unless the report directly attributes it to a person.
 
 48. **Center for Reducing Suffering** — https://centerforreducingsuffering.org/; Europe/remote. Resolve legal entity/host, jurisdiction/registry, accounts, staff, Executive Director identity/title, employer, and pay.
 
