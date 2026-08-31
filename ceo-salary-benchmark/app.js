@@ -415,6 +415,25 @@
     }
   }
 
+  function expandResultsPanelForRobustness() {
+    if (window.innerWidth <= 820 || !robustnessReport?.core.some((result) => result.status === "valid")) return;
+    const analysisHeight = refs.analysisColumn.offsetHeight;
+    const resizerHeight = $("#results-panel-resizer").offsetHeight;
+    const gap = parseFloat(getComputedStyle(refs.analysisColumn).rowGap) || 0;
+    const available = Math.max(1, analysisHeight - resizerHeight - gap * 2);
+    const minimums = horizontalPanelMinimums();
+    const resultsHeight = clamp(
+      window.innerHeight * 0.5,
+      minimums.results,
+      Math.max(minimums.results, available - minimums.chart),
+    );
+    refs.analysisColumn.style.setProperty("--results-size", resultsHeight + "px");
+    refs.analysisColumn.classList.add("has-custom-results-size");
+    layoutPreferences.results = resultsHeight / Math.max(1, analysisHeight);
+    saveLayoutPreferences();
+    requestAnimationFrame(updatePanelResizerAria);
+  }
+
   function resizePanelAt(type, clientX, clientY) {
     if (type === "results") {
       const bounds = refs.analysisColumn.getBoundingClientRect();
@@ -4950,6 +4969,70 @@
     )));
   }
 
+  function robustnessCompactFilterValue(value) {
+    const text = humanizeCategory(String(value));
+    return text.length > 26 ? text.slice(0, 25).trimEnd() + "…" : text;
+  }
+
+  function robustnessPayloadFilterLabel(payload, fallbackSpec) {
+    if (fallbackSpec?.skipFilters) return "Not reapplied to the matched records";
+    const categoricalLabels = {
+      h: "Title", v: "Pay source", t: "Peer group", o: "Focus area",
+      l: "Location", a: "Effective Altruism", u: "Structure",
+    };
+    const rangeLabels = { s: "Salary", e: "Expenses", m: "Score" };
+    const categorical = Object.entries(payload?.f || {}).sort(([a], [b]) => a.localeCompare(b)).map(([code, values]) => {
+      const selected = Array.isArray(values) ? values : [];
+      const preview = selected.slice(0, 2).map(robustnessCompactFilterValue).join(", ");
+      const remainder = selected.length > 2 ? " +" + (selected.length - 2) : "";
+      return (categoricalLabels[code] || "Filter") + ": " + (preview || "none") + remainder;
+    });
+    const numeric = Object.entries(payload?.r || {}).sort(([a], [b]) => a.localeCompare(b)).map(([code, range]) => {
+      const format = code === "m" ? (value) => String(Number(value).toFixed(0)) : compactMoney;
+      const [low, high] = Array.isArray(range) ? range : [];
+      return (rangeLabels[code] || "Range") + ": " + format(low) + "–" + format(high);
+    });
+    return [...categorical, ...numeric].join("; ") || robustnessFilterLabel(fallbackSpec);
+  }
+
+  function robustnessPayloadWeightLabel(spec, payload) {
+    const details = [];
+    const parameters = payload?.x || {};
+    if (Object.hasOwn(parameters, "e")) details.push("expense target " + compactMoney(Number(parameters.e)));
+    if (Object.hasOwn(parameters, "s")) details.push("staff target " + Number(parameters.s));
+    if (Object.hasOwn(parameters, "b")) details.push("expense bandwidth " + Number(parameters.b).toFixed(2) + "×");
+    if (Object.hasOwn(parameters, "f")) details.push("staff bandwidth " + Number(parameters.f).toFixed(2) + "×");
+    if (Object.hasOwn(parameters, "r")) details.push("recency half-life " + Number(parameters.r).toFixed(1) + " years");
+    const categoryEdits = Object.entries(payload?.d || {}).flatMap(([code, values]) => (
+      Object.entries(values || {}).map(([category, value]) => {
+        const key = URL_WEIGHT_KEYS[code];
+        const label = WEIGHT_LABELS[key] || humanizeCategory(key || code);
+        return label + " " + robustnessCompactFilterValue(category) + " = " + Number(value).toFixed(2);
+      })
+    ));
+    if (categoryEdits.length) {
+      details.push(categoryEdits.slice(0, 2).join(", ") + (categoryEdits.length > 2 ? " +" + (categoryEdits.length - 2) : ""));
+    }
+    const rowEdits = Array.isArray(payload?.c) ? payload.c.length : 0;
+    if (rowEdits) details.push(rowEdits + " row weight " + (rowEdits === 1 ? "edit" : "edits"));
+    return [robustnessWeightLabel(spec), ...details].join(" · ");
+  }
+
+  function robustnessSettingValue(spec, payload, key) {
+    if (key === "sample") {
+      const rowChoices = Array.isArray(payload?.i) ? payload.i.length : 0;
+      return robustnessSampleLabel(spec.sample)
+        + (rowChoices ? " · " + rowChoices + " row " + (rowChoices === 1 ? "choice" : "choices") : "");
+    }
+    if (key === "distribution") return robustnessFitLabel(spec.fit);
+    if (key === "weighting") return robustnessPayloadWeightLabel(spec, payload);
+    if (key === "source") return robustnessPaySourceLabel(spec.stream);
+    if (key === "measure") return robustnessPayMeasureLabel(spec);
+    if (key === "basis") return spec.inflationAdjusted ? "July 2026 USD" : "Original USD";
+    if (key === "filters") return robustnessPayloadFilterLabel(payload, spec);
+    return "";
+  }
+
   function hideRobustnessTooltip() {
     refs.robustnessTooltip.hidden = true;
     refs.robustnessTooltip.removeAttribute("data-spec-id");
@@ -4977,31 +5060,51 @@
     const heading = resultElement("strong", "", result.label);
     const list = document.createElement("dl");
     const currentPayload = sharePayload();
+    const liveSpec = currentRobustnessSpec();
+    liveSpec.categoricalFilterCount = Object.values(liveSpec.filters).filter((values) => values != null).length;
+    liveSpec.rangeFilterCount = Object.values(liveSpec.ranges).filter((range) => (
+      range && range.min != null && range.max != null && (range.low > range.min || range.high < range.max)
+    )).length;
     const addRow = (label, value, settingKey = "") => {
       const row = document.createElement("div");
       const changed = Boolean(applies && settingKey
         && robustnessPayloadSettingSignature(result.applyPayload, settingKey)
           !== robustnessPayloadSettingSignature(currentPayload, settingKey));
       const term = resultElement("dt", "", label);
-      if (changed) term.append(" ", resultElement("span", "robustness-change-tag", "Changed"));
+      if (changed) {
+        const marker = resultElement("span", "robustness-change-tag", "Δ");
+        marker.setAttribute("aria-label", "Changed from the current view");
+        term.append(" ", marker);
+      }
       row.dataset.setting = settingKey || "diagnostic";
       row.dataset.changed = String(changed);
       if (changed) row.classList.add("is-changed");
-      row.append(term, resultElement("dd", "", value));
+      const detail = document.createElement("dd");
+      if (changed) {
+        const currentValue = robustnessSettingValue(liveSpec, currentPayload, settingKey);
+        const prior = resultElement("del", "robustness-current-value", currentValue);
+        const arrow = resultElement("span", "robustness-diff-arrow", "→");
+        arrow.setAttribute("aria-hidden", "true");
+        const next = resultElement("strong", "robustness-candidate-value", value);
+        detail.classList.add("robustness-value-diff");
+        detail.setAttribute("aria-label", "Current: " + currentValue + ". Selected: " + value + ".");
+        detail.append(prior, arrow, next);
+      } else detail.textContent = value;
+      row.append(term, detail);
       list.append(row);
     };
     addRow(robustnessQuantileLabel(key), money(result[key]));
-    addRow("Sample", robustnessSampleLabel(result.spec.sample), "sample");
-    addRow("Distribution", robustnessFitLabel(result.spec.fit), "distribution");
-    addRow("Weighting", robustnessWeightLabel(result.spec), "weighting");
-    addRow("Pay source", robustnessPaySourceLabel(result.spec.stream), "source");
-    addRow("Pay measure", robustnessPayMeasureLabel(result.spec), "measure");
-    addRow("Dollar basis", result.spec.inflationAdjusted ? "July 2026 USD" : "Original USD", "basis");
-    addRow("Filters", robustnessFilterLabel(result.spec), "filters");
+    addRow("Sample", robustnessSettingValue(result.spec, result.applyPayload, "sample"), "sample");
+    addRow("Distribution", robustnessSettingValue(result.spec, result.applyPayload, "distribution"), "distribution");
+    addRow("Weighting", robustnessSettingValue(result.spec, result.applyPayload, "weighting"), "weighting");
+    addRow("Pay source", robustnessSettingValue(result.spec, result.applyPayload, "source"), "source");
+    addRow("Pay measure", robustnessSettingValue(result.spec, result.applyPayload, "measure"), "measure");
+    addRow("Dollar basis", robustnessSettingValue(result.spec, result.applyPayload, "basis"), "basis");
+    addRow("Filters", robustnessSettingValue(result.spec, result.applyPayload, "filters"), "filters");
     addRow("Data", result.rowCount + " records · " + result.organizationCount + " organizations · effective n " + result.organizationEffectiveN.toFixed(1));
     const hint = resultElement(
       "p", "",
-      applies ? "Changed settings are marked. Select to apply this specification." : "This is the current analysis.",
+      applies ? "Δ marks settings that differ. Select to apply this specification." : "This is the current analysis.",
     );
     tooltip.replaceChildren(heading, list, hint);
     tooltip.dataset.specId = result.id;
@@ -5772,6 +5875,7 @@
     requestAnimationFrame(() => {
       try {
         runRobustnessAnalysis();
+        expandResultsPanelForRobustness();
       } catch (error) {
         refs.robustnessStatus.textContent = "The robustness check stopped because an analysis specification was invalid.";
         console.error("Unable to run robustness analysis", error);

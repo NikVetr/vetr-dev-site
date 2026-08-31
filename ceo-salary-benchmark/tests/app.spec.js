@@ -2319,6 +2319,45 @@ test("robustness dashboard evaluates comparable and separate sensitivity familie
   expect(errors).toEqual([]);
 });
 
+test("each completed robustness check expands results once without overriding later manual resizing", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await page.goto("/ceo-salary-benchmark/");
+
+  const results = page.locator("#results-panel");
+  const divider = page.locator("#results-panel-resizer");
+  await page.getByRole("tab", { name: "Robustness" }).click();
+  await page.getByRole("button", { name: "Run check" }).click();
+  await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
+  await expect.poll(async () => (await results.boundingBox()).height).toBeGreaterThanOrEqual(495);
+  expect((await results.boundingBox()).height).toBeLessThanOrEqual(505);
+  await page.locator("#analysis-column").screenshot({ path: "tmp/app-robustness-auto-expanded.png" });
+
+  const storedAfterRun = await page.evaluate(() => JSON.parse(localStorage.getItem("rp-salary-benchmark.layout.v1")));
+  expect(storedAfterRun.results).toBeGreaterThan(0.5);
+  await divider.focus();
+  await page.keyboard.press("ArrowDown");
+  const manuallyResizedHeight = (await results.boundingBox()).height;
+  expect(manuallyResizedHeight).toBeLessThan(490);
+
+  await page.evaluate(() => window.dispatchEvent(new Event("resize")));
+  await expect.poll(async () => Math.abs((await results.boundingBox()).height - manuallyResizedHeight)).toBeLessThanOrEqual(2);
+
+  const robustnessPoint = page.locator(
+    '.robustness-spec-point[data-spec-id="core-clean-gamma-automatic"][data-quantile="q50"]',
+  );
+  await robustnessPoint.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#robustness-status")).toContainText(/^Applied /);
+  await expect.poll(async () => Math.abs((await results.boundingBox()).height - manuallyResizedHeight)).toBeLessThanOrEqual(2);
+
+  await page.getByRole("button", { name: "Run check" }).click();
+  await expect.poll(async () => (await results.boundingBox()).height).toBeGreaterThanOrEqual(495);
+  expect((await results.boundingBox()).height).toBeLessThanOrEqual(505);
+  expect(errors).toEqual([]);
+});
+
 test("robustness points explain and apply their salary specifications", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -2418,8 +2457,20 @@ test("robustness points explain and apply their salary specifications", async ({
   await expect(tooltip.locator('[data-setting="basis"]')).toHaveAttribute("data-changed", "false");
   await expect(tooltip.locator('[data-setting="filters"]')).toHaveAttribute("data-changed", "false");
   await expect(tooltip.locator(".robustness-change-tag")).toHaveCount(3);
-  await expect(tooltip.locator('[data-setting="sample"] dt')).toHaveText(/Sample Changed/i);
-  await expect(tooltip).toContainText("Changed settings are marked");
+  await expect(tooltip.locator(".robustness-change-tag")).toHaveText(["Δ", "Δ", "Δ"]);
+  await expect(tooltip.locator(".robustness-change-tag").first()).toHaveAttribute(
+    "aria-label", "Changed from the current view",
+  );
+  await expect(tooltip.locator('[data-setting="sample"] dt')).toHaveText("Sample Δ");
+  await expect(tooltip.locator('[data-setting="sample"] dd del')).toHaveText("Recommended peers");
+  await expect(tooltip.locator('[data-setting="sample"] dd strong')).toHaveText("Similar organization types");
+  await expect(tooltip.locator('[data-setting="sample"] .robustness-diff-arrow')).toHaveText("→");
+  await expect(tooltip.locator('[data-setting="sample"] .robustness-diff-arrow')).toHaveAttribute("aria-hidden", "true");
+  await expect(tooltip.locator('[data-setting="sample"] dd')).toHaveAttribute(
+    "aria-label", "Current: Recommended peers. Selected: Similar organization types.",
+  );
+  await expect(tooltip.locator('[data-setting="source"] dd del')).toHaveCount(0);
+  await expect(tooltip).toContainText("Δ marks settings that differ");
   await page.screenshot({ path: "tmp/app-robustness-tooltip.png" });
   await page.locator(".robustness-current-point").nth(1).focus();
   await expect(tooltip).toBeVisible();
@@ -2498,12 +2549,29 @@ test("robustness change markers follow live filters and row choices", async ({ p
   await matchingTarget.focus();
   await expect(tooltip.locator('[data-setting="filters"]')).toHaveAttribute("data-changed", "true");
   await expect(tooltip.locator('[data-setting="sample"]')).toHaveAttribute("data-changed", "false");
+  const filterDiff = tooltip.locator('[data-setting="filters"] dd');
+  await expect(filterDiff.locator("del")).toBeVisible();
+  await expect(filterDiff.locator("strong")).toBeVisible();
+  const filterValues = await filterDiff.locator("del, strong").allTextContents();
+  expect(filterValues[0]).not.toBe(filterValues[1]);
+
+  await page.locator('.weighting-field input[value="comparability"]').check();
+  await page.locator("#auto-target-ess").fill("45");
+  const automaticTarget = page.locator(
+    '.robustness-spec-point[data-spec-id="core-primary-lognormal-automatic"][data-quantile="q50"]',
+  );
+  await automaticTarget.focus();
+  await expect(tooltip.locator('[data-setting="weighting"] dd del')).toContainText("target eff. n 45");
+  await expect(tooltip.locator('[data-setting="weighting"] dd strong')).toContainText("target eff. n 35");
+  await page.locator('.weighting-field input[value="comparability"]').uncheck();
 
   const selectedRow = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked').first();
   const selectedRowId = await selectedRow.locator("xpath=ancestor::tr").getAttribute("data-id");
   await page.locator(`tbody tr[data-id="${selectedRowId}"] .row-toggle`).uncheck();
   await matchingTarget.focus();
   await expect(tooltip.locator('[data-setting="sample"]')).toHaveAttribute("data-changed", "true");
+  await expect(tooltip.locator('[data-setting="sample"] dd del')).toContainText("row choice");
+  await expect(tooltip.locator('[data-setting="sample"] dd strong')).toHaveText("Recommended peers");
 
   const currentMedianPoint = page.locator(".robustness-current-point").nth(1);
   const lognormalCurrentLabel = await currentMedianPoint.getAttribute("aria-label");

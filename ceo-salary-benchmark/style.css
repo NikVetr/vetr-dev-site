@@ -396,14 +396,18 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .robustness-pointer-overlay.is-actionable { cursor: pointer; }
 .robustness-label { fill: var(--ink); font-size: 11px; font-weight: 650; }
 .robustness-tick { fill: var(--green); font-size: 11px; }
-.robustness-tooltip { position: fixed; z-index: 110; width: min(290px, calc(100vw - 16px)); padding: 9px 11px; border: 1px solid var(--green); background: var(--ink); color: white; box-shadow: var(--shadow); font-size: 11px; line-height: 1.35; pointer-events: none; }
-.robustness-tooltip strong { display: block; font-size: 12px; }
+.robustness-tooltip { position: fixed; z-index: 110; width: min(320px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow: hidden; padding: 9px 11px; border: 1px solid var(--green); background: var(--ink); color: white; box-shadow: var(--shadow); font-size: 11px; line-height: 1.35; pointer-events: none; }
+.robustness-tooltip > strong { display: block; font-size: 12px; }
 .robustness-tooltip dl { margin: 6px 0 0; }
 .robustness-tooltip dl div { display: grid; grid-template-columns: minmax(82px, .8fr) minmax(0, 1.2fr); gap: 8px; padding: 1px 0; }
 .robustness-tooltip dl div.is-changed { margin-inline: -5px; padding-inline: 4px; border-left: 2px solid var(--line-dark); background: color-mix(in srgb, var(--teal), transparent 82%); }
 .robustness-tooltip dt { color: var(--line); }
 .robustness-tooltip dd { margin: 0; font-weight: 650; overflow-wrap: anywhere; }
-.robustness-change-tag { display: inline-block; margin-left: 4px; color: #fff; font-size: 9.5px; font-weight: 750; letter-spacing: .02em; text-transform: uppercase; }
+.robustness-value-diff { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 5px; }
+.robustness-value-diff del { color: var(--line); font-weight: 500; text-decoration-color: #fff; text-decoration-thickness: 1px; }
+.robustness-diff-arrow { color: var(--line-dark); font-weight: 750; }
+.robustness-value-diff strong { color: #fff; font-size: inherit; font-weight: 800; }
+.robustness-change-tag { display: inline-block; margin-left: 3px; color: #fff; font-size: 11px; font-weight: 800; line-height: 1; }
 .robustness-tooltip p { margin: 6px 0 0; color: var(--line); font-size: 10.5px; }
 .robustness-comparisons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 9px; }
 .robustness-comparison { min-width: 0; padding-top: 7px; border-top: 1px solid var(--line); }
