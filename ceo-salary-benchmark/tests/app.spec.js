@@ -182,7 +182,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
       guideBehindBlocks: Boolean(guide.compareDocumentPosition(block) & Node.DOCUMENT_POSITION_FOLLOWING),
     };
   });
-  expect(rpHistogramPlacement.markerX).toBeCloseTo(rpHistogramPlacement.guideX, 5);
+  expect(Math.abs(rpHistogramPlacement.markerX - rpHistogramPlacement.guideX)).toBeLessThan(0.001);
   expect(rpHistogramPlacement.guideBehindBlocks).toBe(true);
   const rpPercentilesByDistribution = {};
   for (const distribution of ["lognormal", "gamma", "empirical"]) {
@@ -1025,6 +1025,194 @@ test("desktop and narrow layouts render", async ({ page }) => {
   expect(chartTooltipBox.x + chartTooltipBox.width).toBeLessThanOrEqual(390);
   expect(chartTooltipBox.y + chartTooltipBox.height).toBeLessThanOrEqual(844);
   await page.screenshot({ path: "tmp/app-mobile.png", fullPage: true });
+});
+
+test("panel dividers resize, persist, and make charts reflow to their containers", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.setViewportSize({ width: 1800, height: 1000 });
+  await page.goto("/ceo-salary-benchmark/");
+  const initialUrl = page.url();
+
+  const settings = page.locator("#settings-panel");
+  const table = page.locator("#evidence-table-panel");
+  const chart = page.locator("#chart-panel");
+  const settingsDivider = page.locator('#settings-panel-resizer[role="separator"]');
+  const tableDivider = page.locator('#table-panel-resizer[role="separator"]');
+  const resultsDivider = page.locator('#results-panel-resizer[role="separator"]');
+  const chartChildrenAreContained = () => chart.evaluate((panel) => {
+    const panelBox = panel.getBoundingClientRect();
+    const children = [
+      panel.querySelector(".chart-heading"),
+      panel.querySelector(".scatter-controls:not([hidden])"),
+      panel.querySelector("#chart-wrap"),
+      panel.querySelector("#chart-legend"),
+    ].filter(Boolean);
+    const legend = panel.querySelector("#chart-legend");
+    const wrap = panel.querySelector("#chart-wrap");
+    return panel.scrollHeight <= panel.clientHeight + 1
+      && children.every((child) => {
+        const box = child.getBoundingClientRect();
+        return box.top >= panelBox.top - 1 && box.bottom <= panelBox.bottom + 1;
+      })
+      && legend.offsetHeight >= 14
+      && wrap.offsetHeight >= 80;
+  });
+  await expect(settingsDivider).toBeVisible();
+  await expect(tableDivider).toBeVisible();
+  await expect(resultsDivider).toBeVisible();
+  expect((await page.locator("#results-panel").boundingBox()).height).toBeLessThan(200);
+
+  const settingsBefore = await settings.boundingBox();
+  const settingsHandle = await settingsDivider.boundingBox();
+  await page.mouse.move(settingsHandle.x + settingsHandle.width / 2, settingsHandle.y + settingsHandle.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(settingsHandle.x + settingsHandle.width / 2 + 72, settingsHandle.y + settingsHandle.height / 2, { steps: 5 });
+  await page.mouse.up();
+  await expect.poll(async () => (await settings.boundingBox()).width).toBeGreaterThan(settingsBefore.width + 55);
+
+  const tableBefore = await table.boundingBox();
+  const tableHandle = await tableDivider.boundingBox();
+  await page.mouse.move(tableHandle.x + tableHandle.width / 2, tableHandle.y + tableHandle.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(tableHandle.x + tableHandle.width / 2 - 64, tableHandle.y + tableHandle.height / 2, { steps: 5 });
+  await page.mouse.up();
+  await expect.poll(async () => (await table.boundingBox()).width).toBeGreaterThan(tableBefore.width + 48);
+
+  const chartBefore = await chart.boundingBox();
+  const resultsHandle = await resultsDivider.boundingBox();
+  await page.mouse.move(resultsHandle.x + resultsHandle.width / 2, resultsHandle.y + resultsHandle.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(resultsHandle.x + resultsHandle.width / 2, resultsHandle.y + resultsHandle.height / 2 + 70, { steps: 5 });
+  await page.mouse.up();
+  await expect.poll(async () => (await chart.boundingBox()).height).toBeGreaterThan(chartBefore.height + 52);
+
+  const chartGeometry = await page.locator("#salary-chart").evaluate((svg) => {
+    const wrap = document.querySelector("#chart-wrap").getBoundingClientRect();
+    const values = svg.getAttribute("viewBox").split(/\s+/).map(Number);
+    return { wrapWidth: wrap.width, wrapHeight: wrap.height, viewWidth: values[2], viewHeight: values[3] };
+  });
+  expect(Math.abs(chartGeometry.wrapWidth - chartGeometry.viewWidth)).toBeLessThanOrEqual(2);
+  expect(Math.abs(chartGeometry.wrapHeight - chartGeometry.viewHeight)).toBeLessThanOrEqual(2);
+  expect(page.url()).toBe(initialUrl);
+
+  const storedLayout = await page.evaluate(() => JSON.parse(localStorage.getItem("rp-salary-benchmark.layout.v1")));
+  expect(storedLayout.version).toBe(1);
+  const persistedWidth = (await settings.boundingBox()).width;
+  const persistedTableWidth = (await table.boundingBox()).width;
+  const persistedChartHeight = (await chart.boundingBox()).height;
+  await page.reload();
+  await expect.poll(async () => Math.abs((await settings.boundingBox()).width - persistedWidth)).toBeLessThanOrEqual(3);
+  expect(Math.abs((await table.boundingBox()).width - persistedTableWidth)).toBeLessThanOrEqual(3);
+  expect(Math.abs((await chart.boundingBox()).height - persistedChartHeight)).toBeLessThanOrEqual(3);
+  expect(page.url()).toBe(initialUrl);
+
+  for (const divider of [settingsDivider, tableDivider, resultsDivider]) {
+    const aria = await divider.evaluate((element) => ({
+      minimum: Number(element.getAttribute("aria-valuemin")),
+      current: Number(element.getAttribute("aria-valuenow")),
+      maximum: Number(element.getAttribute("aria-valuemax")),
+    }));
+    expect(aria.current).toBeGreaterThanOrEqual(aria.minimum);
+    expect(aria.current).toBeLessThanOrEqual(aria.maximum);
+  }
+
+  const keyboardWidth = (await settings.boundingBox()).width;
+  await settingsDivider.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect.poll(async () => (await settings.boundingBox()).width).toBeGreaterThan(keyboardWidth + 10);
+  await page.keyboard.press("Home");
+  await expect.poll(async () => (await settings.boundingBox()).width).toBeLessThan(keyboardWidth - 20);
+
+  await page.evaluate(() => {
+    document.body.style.zoom = "1.5";
+    window.dispatchEvent(new Event("resize"));
+  });
+  const zoomedSettingsBefore = await settings.boundingBox();
+  const zoomedHandle = await settingsDivider.boundingBox();
+  await page.mouse.move(zoomedHandle.x + zoomedHandle.width / 2, zoomedHandle.y + zoomedHandle.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(zoomedHandle.x + zoomedHandle.width / 2 + 60, zoomedHandle.y + zoomedHandle.height / 2, { steps: 4 });
+  await page.mouse.up();
+  await expect.poll(async () => (await settings.boundingBox()).width).toBeGreaterThan(zoomedSettingsBefore.width + 45);
+  await page.evaluate(() => {
+    document.body.style.zoom = "1";
+    window.dispatchEvent(new Event("resize"));
+  });
+
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await page.locator("#chart-color").selectOption("topic");
+  const desktopSettingsHandle = await settingsDivider.boundingBox();
+  await page.mouse.move(desktopSettingsHandle.x + desktopSettingsHandle.width / 2, desktopSettingsHandle.y + desktopSettingsHandle.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(1799, desktopSettingsHandle.y + desktopSettingsHandle.height / 2, { steps: 6 });
+  await page.mouse.up();
+  await expect.poll(async () => (await chart.boundingBox()).width).toBeLessThanOrEqual(365);
+  const compactDesktopAnalysis = await page.locator("#analysis-column").boundingBox();
+  const desktopResultsHandle = await resultsDivider.boundingBox();
+  await page.mouse.move(desktopResultsHandle.x + desktopResultsHandle.width / 2, desktopResultsHandle.y + desktopResultsHandle.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(desktopResultsHandle.x + desktopResultsHandle.width / 2, compactDesktopAnalysis.y + 1, { steps: 6 });
+  await page.mouse.up();
+  await expect.poll(chartChildrenAreContained).toBe(true);
+  expect((await page.locator("#results-panel").boundingBox()).height).toBeGreaterThan(300);
+  await settingsDivider.focus();
+  await page.keyboard.press("Home");
+  await resultsDivider.focus();
+  await page.keyboard.press("Home");
+  await page.locator('input[name="chart-view"][value="histogram"]').check();
+
+  await page.setViewportSize({ width: 1024, height: 486 });
+  await expect(settingsDivider).toBeVisible();
+  await expect(resultsDivider).toBeVisible();
+  await expect(tableDivider).toBeHidden();
+  await resultsDivider.focus();
+  await page.keyboard.press("Home");
+  const compactChartHeight = (await chart.boundingBox()).height;
+  const compactResultsHandle = await resultsDivider.boundingBox();
+  await page.mouse.move(compactResultsHandle.x + compactResultsHandle.width / 2, compactResultsHandle.y + compactResultsHandle.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(compactResultsHandle.x + compactResultsHandle.width / 2, compactResultsHandle.y + compactResultsHandle.height / 2 + 1);
+  await page.mouse.up();
+  await expect.poll(async () => Math.abs((await chart.boundingBox()).height - compactChartHeight)).toBeLessThan(10);
+  await expect.poll(async () => page.locator("#salary-chart").evaluate((svg) => {
+    const wrap = document.querySelector("#chart-wrap").getBoundingClientRect();
+    const values = svg.getAttribute("viewBox").split(/\s+/).map(Number);
+    return Math.abs(wrap.width - values[2]) <= 2 && Math.abs(wrap.height - values[3]) <= 2;
+  })).toBe(true);
+
+  const compactAnalysis = await page.locator("#analysis-column").boundingBox();
+  const dragResultsDividerTo = async (clientY) => {
+    const handle = await resultsDivider.boundingBox();
+    await page.mouse.move(handle.x + handle.width / 2, handle.y + handle.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(handle.x + handle.width / 2, clientY, { steps: 5 });
+    await page.mouse.up();
+  };
+  await dragResultsDividerTo(compactAnalysis.y + 1);
+  await expect.poll(chartChildrenAreContained).toBe(true);
+  const expandedResultsHeight = (await page.locator("#results-panel").boundingBox()).height;
+  await dragResultsDividerTo(compactAnalysis.y + compactAnalysis.height - 1);
+  const compactResultsHeight = (await page.locator("#results-panel").boundingBox()).height;
+  expect(expandedResultsHeight - compactResultsHeight).toBeGreaterThan(30);
+  await dragResultsDividerTo(compactAnalysis.y + 1);
+  await expect.poll(chartChildrenAreContained).toBe(true);
+
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await page.locator("#chart-color").selectOption("topic");
+  await expect.poll(async () => page.locator("#salary-chart").evaluate((svg) => {
+    const wrap = document.querySelector("#chart-wrap").getBoundingClientRect();
+    const values = svg.getAttribute("viewBox").split(/\s+/).map(Number);
+    return Math.abs(wrap.width - values[2]) <= 2 && Math.abs(wrap.height - values[3]) <= 2;
+  })).toBe(true);
+  await expect.poll(chartChildrenAreContained).toBe(true);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(settingsDivider).toBeHidden();
+  await expect(resultsDivider).toBeHidden();
+  await expect(tableDivider).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  expect(errors).toEqual([]);
 });
 
 test("clickable value and ratio axes drive plots, fits, quantiles, and correlations", async ({ page }) => {
@@ -2055,6 +2243,81 @@ test("robustness dashboard evaluates comparable and separate sensitivity familie
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
   await page.locator(".results-panel").screenshot({ path: "tmp/app-robustness-mobile.png" });
+  expect(errors).toEqual([]);
+});
+
+test("robustness points explain and apply their salary specifications", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
+  await expect(page.locator("#chart-title")).toContainText("Salary / Expenses");
+
+  await page.getByRole("tab", { name: "Robustness" }).click();
+  await page.getByRole("button", { name: "Run check" }).click();
+  await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
+
+  const target = page.locator(
+    '.robustness-spec-point[data-spec-id="core-clean-gamma-automatic"][data-quantile="q50"]',
+  );
+  const expectedMedian = await page.locator(".robustness-table tbody tr")
+    .filter({ hasText: "Similar organization types · Gamma · Automatic" })
+    .locator("td").nth(2).textContent();
+  await expect(target).toHaveAttribute("role", "button");
+  await expect(target).toHaveAttribute("aria-label", /Median \$[\d,]+.*records from .*organizations.*Select to apply/);
+  await expect(page.locator('.robustness-spec-point[tabindex="0"], .robustness-current-point[tabindex="0"]')).toHaveCount(3);
+  const nearbyPointCount = await page.locator('.robustness-spec-point[data-quantile="q50"]').evaluateAll((groups, id) => {
+    const points = groups.map((group) => {
+      const circle = group.querySelector(".robustness-point");
+      return { id: group.dataset.specId, x: Number(circle?.getAttribute("cx")), y: Number(circle?.getAttribute("cy")) };
+    });
+    const selected = points.find((point) => point.id === id);
+    return points.filter((point) => point !== selected && Math.hypot(point.x - selected.x, point.y - selected.y) < 18).length;
+  }, "core-clean-gamma-automatic");
+  expect(nearbyPointCount).toBeGreaterThan(0);
+
+  const overlay = page.locator(".robustness-pointer-overlay");
+  const pointBox = await target.locator(".robustness-point").boundingBox();
+  const overlayBox = await overlay.boundingBox();
+  expect(pointBox).not.toBeNull();
+  expect(overlayBox).not.toBeNull();
+  const targetPosition = {
+    x: pointBox.x + pointBox.width / 2 - overlayBox.x,
+    y: pointBox.y + pointBox.height / 2 - overlayBox.y,
+  };
+  await overlay.hover({ position: targetPosition });
+  const tooltip = page.locator("#robustness-tooltip");
+  await expect(tooltip).toBeVisible();
+  await expect(tooltip).toContainText("Similar organization types");
+  await expect(tooltip).toContainText("Gamma");
+  await expect(tooltip).toContainText("Automatic");
+  await expect(tooltip).toContainText(/\d+ records · \d+ organizations · effective n/);
+  await page.screenshot({ path: "tmp/app-robustness-tooltip.png" });
+  await target.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(target).not.toBeFocused();
+  await target.focus();
+  await page.keyboard.press("Escape");
+  await expect(tooltip).toBeHidden();
+
+  await overlay.click({ position: targetPosition });
+  await expect(page.locator("#sample-select")).toHaveValue("clean");
+  await expect(page.locator('input[name="distribution"][value="gamma"]')).toBeChecked();
+  await expect(page.locator('.weighting-field input[value="comparability"]')).toBeChecked();
+  await expect(page.locator('input[name="histogram-axis-mode"][value="value"]')).toBeChecked();
+  await expect(page.locator("#chart-title")).toContainText("Distribution of Salary");
+  await expect(page.locator("#stat-center")).toHaveText(expectedMedian || "");
+  await expect(page.locator("#robustness-status")).toContainText("Applied Similar organization types");
+
+  const keyboardTarget = page.locator(
+    '.robustness-spec-point[data-spec-id="core-primary-empirical-equal"][data-quantile="q50"]',
+  );
+  await keyboardTarget.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#sample-select")).toHaveValue("primary");
+  await expect(page.locator('input[name="distribution"][value="empirical"]')).toBeChecked();
+  await expect(page.locator('.weighting-field input[value="comparability"]')).not.toBeChecked();
+  await expect(keyboardTarget).toBeFocused();
   expect(errors).toEqual([]);
 });
 

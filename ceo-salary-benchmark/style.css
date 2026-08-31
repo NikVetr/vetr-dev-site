@@ -77,9 +77,11 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
   white-space: nowrap;
 }
 .app-shell {
+  --settings-size: 15.6%;
+  --table-size: 34.8%;
   display: grid;
-  grid-template-columns: minmax(218px, 0.52fr) minmax(510px, 1.65fr) minmax(450px, 1.16fr);
-  gap: 12px;
+  grid-template-columns: minmax(218px, var(--settings-size)) 10px minmax(360px, 1fr) 10px minmax(350px, var(--table-size));
+  gap: 2px;
   height: calc(100dvh - 104px);
   min-height: 0;
   padding: 12px;
@@ -97,10 +99,24 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
   scrollbar-gutter: stable;
   border-radius: 14px 4px 4px 14px;
 }
-.analysis-column { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; min-width: 0; min-height: 0; }
-.chart-panel { display: flex; min-width: 0; min-height: 0; max-height: calc(100dvh - 128px); padding: 18px 18px 12px; border-radius: 4px; overflow: hidden; flex-direction: column; }
-.quantile-panel { max-height: min(400px, 46dvh); padding: 0 18px 17px; border-radius: 4px; overflow: auto; scrollbar-gutter: stable; }
+.analysis-column { display: grid; grid-template-rows: minmax(326px, 1fr) 10px minmax(112px, auto); gap: 2px; min-width: 0; min-height: 0; container-type: inline-size; }
+.analysis-column.has-custom-results-size { grid-template-rows: minmax(326px, 1fr) 10px minmax(112px, var(--results-size)); }
+.chart-panel { display: flex; min-width: 0; min-height: 0; padding: 18px 18px 12px; border-radius: 4px; overflow: hidden; flex-direction: column; }
+.quantile-panel { min-height: 0; max-height: min(400px, 46dvh); padding: 0 18px 17px; border-radius: 4px; overflow: auto; scrollbar-gutter: stable; }
+.analysis-column.has-custom-results-size .quantile-panel { max-height: none; }
 .table-panel { position: relative; display: flex; flex-direction: column; padding: 0 0 10px; border-radius: 4px 14px 14px 4px; overflow: hidden; }
+
+.panel-resizer { position: relative; z-index: 12; min-width: 0; min-height: 0; border: 0; outline: 0; touch-action: none; user-select: none; }
+.panel-resizer::before { position: absolute; border-radius: 999px; background: var(--green); content: ""; opacity: 0; transition: opacity 120ms ease; }
+.panel-resizer:hover::before, .panel-resizer:focus-visible::before, .panel-resizer.is-active::before { opacity: .82; }
+.panel-resizer:focus-visible { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--teal), transparent 30%); }
+.panel-resizer-vertical { cursor: col-resize; }
+.panel-resizer-vertical::before { top: 12px; bottom: 12px; left: 50%; width: 2px; transform: translateX(-50%); }
+.panel-resizer-horizontal { cursor: row-resize; }
+.panel-resizer-horizontal::before { top: 50%; right: 12px; left: 12px; height: 2px; transform: translateY(-50%); }
+body.is-resizing-panels.is-resizing-vertical { cursor: col-resize; user-select: none; }
+body.is-resizing-panels.is-resizing-horizontal { cursor: row-resize; user-select: none; }
+body.is-resizing-panels * { cursor: inherit !important; }
 
 .panel-heading, .chart-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .panel-heading h2, .chart-heading h2 { margin: 3px 0 0; font: 650 18px/1.15 "Aspekta Variable", sans-serif; }
@@ -369,8 +385,23 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .robustness-current { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 2; }
 .robustness-point { fill: var(--green); stroke: #fff; stroke-width: 1.5; }
 .robustness-point.is-current { fill: var(--ink); }
+.robustness-point-hit { fill: transparent; pointer-events: none; }
+.robustness-spec-point, .robustness-current-point { outline: none; pointer-events: none; }
+.robustness-spec-point.is-hovered .robustness-point, .robustness-spec-point:focus-visible .robustness-point,
+.robustness-current-point.is-hovered .robustness-point, .robustness-current-point:focus-visible .robustness-point { stroke: var(--ink); stroke-width: 2.5; }
+.robustness-spec-point:focus-visible .robustness-point-hit,
+.robustness-current-point:focus-visible .robustness-point-hit { fill: color-mix(in srgb, var(--teal), transparent 82%); }
+.robustness-pointer-overlay { fill: transparent; pointer-events: all; cursor: default; }
+.robustness-pointer-overlay.is-actionable { cursor: pointer; }
 .robustness-label { fill: var(--ink); font-size: 11px; font-weight: 650; }
 .robustness-tick { fill: var(--green); font-size: 11px; }
+.robustness-tooltip { position: fixed; z-index: 110; width: min(290px, calc(100vw - 16px)); padding: 9px 11px; border: 1px solid var(--green); background: var(--ink); color: white; box-shadow: var(--shadow); font-size: 11px; line-height: 1.35; pointer-events: none; }
+.robustness-tooltip strong { display: block; font-size: 12px; }
+.robustness-tooltip dl { margin: 6px 0 0; }
+.robustness-tooltip dl div { display: grid; grid-template-columns: minmax(82px, .8fr) minmax(0, 1.2fr); gap: 8px; padding: 1px 0; }
+.robustness-tooltip dt { color: var(--line); }
+.robustness-tooltip dd { margin: 0; font-weight: 650; overflow-wrap: anywhere; }
+.robustness-tooltip p { margin: 6px 0 0; color: var(--line); font-size: 10.5px; }
 .robustness-comparisons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 9px; }
 .robustness-comparison { min-width: 0; padding-top: 7px; border-top: 1px solid var(--line); }
 .robustness-comparison-list { display: grid; gap: 3px; }
@@ -558,7 +589,11 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 [hidden] { display: none !important; }
 
 @media (max-width: 1250px) {
-  .app-shell { grid-template-columns: 235px minmax(520px, 1fr); grid-template-rows: calc(100dvh - 128px) 520px; height: auto; }
+  .app-shell { grid-template-columns: minmax(218px, var(--settings-size)) 10px minmax(420px, 1fr); grid-template-rows: calc(100dvh - 128px) 520px; height: auto; }
+  #settings-panel { grid-column: 1; grid-row: 1; }
+  #settings-panel-resizer { grid-column: 2; grid-row: 1; }
+  .analysis-column { grid-column: 3; grid-row: 1; }
+  #table-panel-resizer { display: none; }
   .table-panel { grid-column: 1 / -1; min-height: 520px; border-radius: 4px 4px 14px 14px; }
   .settings-panel { border-radius: 14px 4px 4px 4px; }
   .analysis-column { min-height: 0; }
@@ -568,6 +603,7 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
   .app-header { align-items: flex-start; flex-direction: column; min-height: 0; }
   .header-meta { justify-content: flex-start; }
   .app-shell { display: block; height: auto; min-height: 0; padding: 8px; }
+  .panel-resizer { display: none; }
   .settings-panel, .chart-panel, .quantile-panel, .table-panel { margin-bottom: 8px; border-radius: 6px; }
   .settings-panel { max-height: none; }
   .analysis-column { display: block; min-height: 0; }
@@ -595,10 +631,29 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
   .category-provenance-records p, .provenance-citations { margin-left: 0; }
 }
 
+@container (max-width: 520px) {
+  .chart-heading { align-items: flex-start; flex-direction: column; }
+  .live-stats { justify-content: flex-start; width: 100%; }
+  .chart-legend { min-height: 22px; max-height: 22px; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
+  .chart-legend span { flex: none; white-space: nowrap; }
+}
+
 @media (max-height: 720px) and (min-width: 821px) {
   .app-shell { min-height: 0; }
-  .analysis-column { min-height: 0; }
-  .chart-panel { max-height: calc(100dvh - 128px); }
+  .analysis-column { grid-template-rows: minmax(210px, 1fr) 10px minmax(92px, auto); min-height: 0; }
+  .analysis-column.has-custom-results-size { grid-template-rows: minmax(210px, 1fr) 10px minmax(92px, var(--results-size)); }
   .chart-heading h2 { font-size: 16px; }
+  .chart-panel { padding-block: 14px 10px; }
   .chart-wrap { min-height: 80px; }
+  .chart-panel:has(.scatter-controls:not([hidden])) .chart-wrap { min-height: 80px; }
+  .chart-legend { min-height: 22px; max-height: 22px; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
+  .chart-legend span { flex: none; white-space: nowrap; }
+  .quantile-panel { max-height: clamp(92px, calc(100dvh - 352px), min(400px, 46dvh)); }
+}
+
+@media (max-height: 720px) and (min-width: 821px) {
+  @container (max-width: 520px) {
+    .chart-panel { min-height: 246px; }
+    .quantile-panel { max-height: clamp(92px, calc(100dvh - 388px), min(400px, 46dvh)); }
+  }
 }

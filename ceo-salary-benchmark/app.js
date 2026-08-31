@@ -157,6 +157,13 @@
     hoverQuantile: null,
   };
 
+  const LAYOUT_STORAGE_KEY = "rp-salary-benchmark.layout.v1";
+  const DEFAULT_LAYOUT = Object.freeze({ settings: 0.156, table: 0.348, results: null });
+  const PANEL_MINIMUMS = Object.freeze({
+    settings: 218, analysisDesktop: 360, analysisMedium: 420, table: 350,
+    chart: 326, results: 112, shortChart: 210, shortCompactChart: 246, shortResults: 92,
+  });
+
   const inclusion = {
     incumbents: new Map(allRowsByStream.incumbents.map((row) => [row.id, Boolean(row.defaultIncluded)])),
     jobAds: new Map(allRowsByStream.jobAds.map((row) => [row.id, Boolean(row.defaultIncluded)])),
@@ -175,6 +182,9 @@
   let activeAxisSelector = "";
 
   const refs = {
+    appShell: $("#app-shell"), settingsPanel: $("#settings-panel"), analysisColumn: $("#analysis-column"),
+    chartPanel: $("#chart-panel"), resultsPanel: $("#results-panel"),
+    panelResizers: [...document.querySelectorAll(".panel-resizer")],
     appTitle: $("#app-title"), appDescription: $("#app-description"),
     position: $("#position-select"), positionSelectedLabel: $("#position-selected-label"),
     positionDescription: $("#position-description"),
@@ -228,7 +238,7 @@
     robustnessWeightingOption: $("#robustness-weighting-option"), robustnessSourceOption: $("#robustness-source-option"),
     robustnessPostingOption: $("#robustness-posting-option"),
     robustnessRun: $("#robustness-run"), robustnessStatus: $("#robustness-status"),
-    robustnessResults: $("#robustness-results"),
+    robustnessResults: $("#robustness-results"), robustnessTooltip: $("#robustness-tooltip"),
     weightingDescription: $("#weighting-description"),
     salaryMin: $("#salary-range-min"), salaryMax: $("#salary-range-max"), salaryRangeValue: $("#salary-range-value"),
     salaryFilterSummary: $("#salary-filter-summary"), salaryFilterStatus: $("#salary-filter-status"),
@@ -246,6 +256,277 @@
     helpTooltip: $("#help-tooltip"), organizationPreview: $("#organization-preview"),
     urlStateError: $("#url-state-error"),
   };
+
+  function loadLayoutPreferences() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(LAYOUT_STORAGE_KEY) || "null");
+      if (!stored || stored.version !== 1) return { ...DEFAULT_LAYOUT };
+      const ratio = (value, fallback) => Number.isFinite(Number(value))
+        ? clamp(Number(value), 0.05, 0.8) : fallback;
+      return {
+        settings: ratio(stored.settings, DEFAULT_LAYOUT.settings),
+        table: ratio(stored.table, DEFAULT_LAYOUT.table),
+        results: stored.results == null ? null : ratio(stored.results, DEFAULT_LAYOUT.results),
+      };
+    } catch (error) {
+      console.warn("Unable to read saved panel sizes", error);
+      return { ...DEFAULT_LAYOUT };
+    }
+  }
+
+  let layoutPreferences = loadLayoutPreferences();
+  let layoutApplyFrame = 0;
+
+  function shellLayoutMetrics() {
+    const bounds = refs.appShell.getBoundingClientRect();
+    const styles = getComputedStyle(refs.appShell);
+    const paddingLeft = parseFloat(styles.paddingLeft) || 0;
+    const paddingRight = parseFloat(styles.paddingRight) || 0;
+    const gap = parseFloat(styles.columnGap) || 0;
+    const layoutWidth = refs.appShell.offsetWidth || refs.appShell.clientWidth || bounds.width || 1;
+    const scaleX = bounds.width / layoutWidth || 1;
+    const visibleResizers = refs.panelResizers.filter((resizer) => (
+      resizer.classList.contains("panel-resizer-vertical") && getComputedStyle(resizer).display !== "none"
+    ));
+    const contentWidth = Math.max(1, refs.appShell.clientWidth - paddingLeft - paddingRight);
+    const resizerWidth = visibleResizers.reduce((sum, resizer) => sum + resizer.offsetWidth, 0);
+    const columnCount = window.innerWidth <= 1250 ? 3 : 5;
+    return {
+      left: bounds.left + paddingLeft * scaleX,
+      right: bounds.right - paddingRight * scaleX,
+      scaleX,
+      gap,
+      contentWidth,
+      availablePanelWidth: Math.max(1, contentWidth - resizerWidth - gap * (columnCount - 1)),
+    };
+  }
+
+  function horizontalPanelMinimums() {
+    if (window.innerHeight > 720) {
+      return { chart: PANEL_MINIMUMS.chart, results: PANEL_MINIMUMS.results };
+    }
+    const compactChart = refs.chartPanel.offsetWidth > 0 && refs.chartPanel.offsetWidth <= 520;
+    return {
+      chart: compactChart ? PANEL_MINIMUMS.shortCompactChart : PANEL_MINIMUMS.shortChart,
+      results: PANEL_MINIMUMS.shortResults,
+    };
+  }
+
+  function updatePanelResizerAria() {
+    const metrics = shellLayoutMetrics();
+    const shellWidth = metrics.contentWidth;
+    const analysisHeight = Math.max(1, refs.analysisColumn.offsetHeight);
+    const analysisMinimum = window.innerWidth <= 1250 ? PANEL_MINIMUMS.analysisMedium : PANEL_MINIMUMS.analysisDesktop;
+    const horizontalMinimums = horizontalPanelMinimums();
+    refs.panelResizers.forEach((resizer) => {
+      let percent; let minimum; let maximum; let label;
+      if (resizer.dataset.resizer === "settings") {
+        const otherWidth = window.innerWidth > 1250 ? refs.tablePanel.offsetWidth : 0;
+        percent = refs.settingsPanel.offsetWidth / shellWidth * 100;
+        minimum = PANEL_MINIMUMS.settings / shellWidth * 100;
+        maximum = (metrics.availablePanelWidth - otherWidth - analysisMinimum) / shellWidth * 100;
+        label = "Settings panel " + Math.round(percent) + "% wide";
+      } else if (resizer.dataset.resizer === "table") {
+        percent = refs.tablePanel.offsetWidth / shellWidth * 100;
+        minimum = PANEL_MINIMUMS.table / shellWidth * 100;
+        maximum = (metrics.availablePanelWidth - refs.settingsPanel.offsetWidth - analysisMinimum) / shellWidth * 100;
+        label = "Table panel " + Math.round(percent) + "% wide";
+      } else {
+        const resizerHeight = resizer.offsetHeight;
+        const gap = parseFloat(getComputedStyle(refs.analysisColumn).rowGap) || 0;
+        const available = Math.max(1, analysisHeight - resizerHeight - gap * 2);
+        percent = refs.chartPanel.offsetHeight / analysisHeight * 100;
+        minimum = horizontalMinimums.chart / analysisHeight * 100;
+        maximum = (available - horizontalMinimums.results) / analysisHeight * 100;
+        label = "Chart panel " + Math.round(percent) + "% tall";
+      }
+      const boundedMinimum = clamp(Math.round(minimum), 0, 100);
+      const boundedMaximum = clamp(Math.round(Math.max(minimum, maximum)), boundedMinimum, 100);
+      const boundedValue = clamp(Math.round(percent), boundedMinimum, boundedMaximum);
+      resizer.setAttribute("aria-valuemin", boundedMinimum);
+      resizer.setAttribute("aria-valuemax", boundedMaximum);
+      resizer.setAttribute("aria-valuenow", boundedValue);
+      resizer.setAttribute("aria-valuetext", label);
+    });
+  }
+
+  function applyLayoutPreferences() {
+    cancelAnimationFrame(layoutApplyFrame);
+    layoutApplyFrame = 0;
+    if (window.innerWidth <= 820) {
+      refs.appShell.style.removeProperty("--settings-size");
+      refs.appShell.style.removeProperty("--table-size");
+      refs.analysisColumn.style.removeProperty("--results-size");
+      refs.analysisColumn.classList.remove("has-custom-results-size");
+      updatePanelResizerAria();
+      return;
+    }
+    const metrics = shellLayoutMetrics();
+    const analysisMinimum = window.innerWidth <= 1250 ? PANEL_MINIMUMS.analysisMedium : PANEL_MINIMUMS.analysisDesktop;
+    if (window.innerWidth <= 1250) {
+      const settingsWidth = clamp(
+        layoutPreferences.settings * metrics.contentWidth,
+        PANEL_MINIMUMS.settings,
+        Math.max(PANEL_MINIMUMS.settings, metrics.availablePanelWidth - analysisMinimum),
+      );
+      refs.appShell.style.setProperty("--settings-size", settingsWidth + "px");
+      refs.appShell.style.removeProperty("--table-size");
+    } else {
+      let settingsWidth = Math.max(PANEL_MINIMUMS.settings, layoutPreferences.settings * metrics.contentWidth);
+      let tableWidth = Math.max(PANEL_MINIMUMS.table, layoutPreferences.table * metrics.contentWidth);
+      const maximumCombined = Math.max(PANEL_MINIMUMS.settings + PANEL_MINIMUMS.table, metrics.availablePanelWidth - analysisMinimum);
+      if (settingsWidth + tableWidth > maximumCombined) {
+        const reducible = (settingsWidth - PANEL_MINIMUMS.settings) + (tableWidth - PANEL_MINIMUMS.table);
+        const reduction = settingsWidth + tableWidth - maximumCombined;
+        if (reducible > 0) {
+          settingsWidth -= reduction * (settingsWidth - PANEL_MINIMUMS.settings) / reducible;
+          tableWidth -= reduction * (tableWidth - PANEL_MINIMUMS.table) / reducible;
+        }
+      }
+      refs.appShell.style.setProperty("--settings-size", settingsWidth + "px");
+      refs.appShell.style.setProperty("--table-size", tableWidth + "px");
+    }
+    if (layoutPreferences.results == null) {
+      refs.analysisColumn.style.removeProperty("--results-size");
+      refs.analysisColumn.classList.remove("has-custom-results-size");
+    }
+    else {
+      const analysisHeight = refs.analysisColumn.offsetHeight;
+      const resizerHeight = $("#results-panel-resizer").offsetHeight;
+      const gap = parseFloat(getComputedStyle(refs.analysisColumn).rowGap) || 0;
+      const available = Math.max(1, analysisHeight - resizerHeight - gap * 2);
+      const minimums = horizontalPanelMinimums();
+      const resultsHeight = clamp(
+        layoutPreferences.results * analysisHeight,
+        minimums.results,
+        Math.max(minimums.results, available - minimums.chart),
+      );
+      refs.analysisColumn.style.setProperty("--results-size", resultsHeight + "px");
+      refs.analysisColumn.classList.add("has-custom-results-size");
+    }
+    requestAnimationFrame(updatePanelResizerAria);
+  }
+
+  function saveLayoutPreferences() {
+    try {
+      localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify({ version: 1, ...layoutPreferences }));
+    } catch (error) {
+      console.warn("Unable to save panel sizes", error);
+    }
+  }
+
+  function resizePanelAt(type, clientX, clientY) {
+    if (type === "results") {
+      const bounds = refs.analysisColumn.getBoundingClientRect();
+      const analysisHeight = refs.analysisColumn.offsetHeight || bounds.height;
+      const scaleY = bounds.height / analysisHeight || 1;
+      const resizerHeight = $("#results-panel-resizer").offsetHeight;
+      const gap = parseFloat(getComputedStyle(refs.analysisColumn).rowGap) || 0;
+      const available = Math.max(1, analysisHeight - resizerHeight - gap * 2);
+      const minimums = horizontalPanelMinimums();
+      const pointerFromBottom = (bounds.bottom - clientY) / scaleY;
+      const requestedHeight = pointerFromBottom - gap - resizerHeight / 2;
+      const resultsHeight = clamp(requestedHeight, minimums.results, Math.max(minimums.results, available - minimums.chart));
+      refs.analysisColumn.style.setProperty("--results-size", resultsHeight + "px");
+      refs.analysisColumn.classList.add("has-custom-results-size");
+      layoutPreferences.results = refs.resultsPanel.offsetHeight / Math.max(1, analysisHeight);
+      updatePanelResizerAria();
+      return;
+    }
+    const metrics = shellLayoutMetrics();
+    const resizerWidth = type === "settings" ? $("#settings-panel-resizer").offsetWidth : $("#table-panel-resizer").offsetWidth;
+    const boundaryOffset = metrics.gap + resizerWidth / 2;
+    const analysisMinimum = window.innerWidth <= 1250 ? PANEL_MINIMUMS.analysisMedium : PANEL_MINIMUMS.analysisDesktop;
+    if (type === "settings") {
+      const otherWidth = window.innerWidth > 1250 ? refs.tablePanel.offsetWidth : 0;
+      const maximum = metrics.availablePanelWidth - otherWidth - analysisMinimum;
+      const requestedWidth = (clientX - metrics.left) / metrics.scaleX - boundaryOffset;
+      const width = clamp(requestedWidth, PANEL_MINIMUMS.settings, Math.max(PANEL_MINIMUMS.settings, maximum));
+      refs.appShell.style.setProperty("--settings-size", width + "px");
+      layoutPreferences.settings = refs.settingsPanel.offsetWidth / metrics.contentWidth;
+    } else {
+      const settingsWidth = refs.settingsPanel.offsetWidth;
+      const maximum = metrics.availablePanelWidth - settingsWidth - analysisMinimum;
+      const requestedWidth = (metrics.right - clientX) / metrics.scaleX - boundaryOffset;
+      const width = clamp(requestedWidth, PANEL_MINIMUMS.table, Math.max(PANEL_MINIMUMS.table, maximum));
+      refs.appShell.style.setProperty("--table-size", width + "px");
+      layoutPreferences.table = refs.tablePanel.offsetWidth / metrics.contentWidth;
+    }
+    updatePanelResizerAria();
+  }
+
+  function resetPanelSize(type) {
+    layoutPreferences = { ...layoutPreferences, [type]: DEFAULT_LAYOUT[type] };
+    applyLayoutPreferences();
+    saveLayoutPreferences();
+  }
+
+  function initPanelResizers() {
+    refs.panelResizers.forEach((resizer) => {
+      const type = resizer.dataset.resizer;
+      let pendingPoint = null;
+      let resizeFrame = 0;
+      const applyPendingPoint = () => {
+        resizeFrame = 0;
+        if (!pendingPoint) return;
+        resizePanelAt(type, pendingPoint.x, pendingPoint.y);
+      };
+      const move = (event) => {
+        pendingPoint = { x: event.clientX, y: event.clientY };
+        if (!resizeFrame) resizeFrame = requestAnimationFrame(applyPendingPoint);
+      };
+      const finish = (event) => {
+        if (resizeFrame) {
+          cancelAnimationFrame(resizeFrame);
+          applyPendingPoint();
+        }
+        if (event.pointerId != null && resizer.hasPointerCapture?.(event.pointerId)) resizer.releasePointerCapture(event.pointerId);
+        resizer.classList.remove("is-active");
+        document.body.classList.remove("is-resizing-panels", "is-resizing-vertical", "is-resizing-horizontal");
+        saveLayoutPreferences();
+      };
+      resizer.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0) return;
+        event.preventDefault();
+        hideTooltip();
+        hideRobustnessTooltip();
+        closeAxisSelector();
+        resizer.classList.add("is-active");
+        document.body.classList.add("is-resizing-panels", type === "results" ? "is-resizing-horizontal" : "is-resizing-vertical");
+        resizer.setPointerCapture(event.pointerId);
+      });
+      resizer.addEventListener("pointermove", (event) => {
+        if (!resizer.hasPointerCapture?.(event.pointerId)) return;
+        move(event);
+      });
+      resizer.addEventListener("pointerup", finish);
+      resizer.addEventListener("pointercancel", finish);
+      resizer.addEventListener("lostpointercapture", finish);
+      resizer.addEventListener("dblclick", () => resetPanelSize(type));
+      resizer.addEventListener("keydown", (event) => {
+        if (event.key === "Home") {
+          event.preventDefault();
+          resetPanelSize(type);
+          return;
+        }
+        const step = event.shiftKey ? 48 : 16;
+        const bounds = resizer.getBoundingClientRect();
+        let x = bounds.left + bounds.width / 2;
+        let y = bounds.top + bounds.height / 2;
+        if (type === "results" && ["ArrowUp", "ArrowDown"].includes(event.key)) y += event.key === "ArrowUp" ? -step : step;
+        else if (type !== "results" && ["ArrowLeft", "ArrowRight"].includes(event.key)) x += event.key === "ArrowLeft" ? -step : step;
+        else return;
+        event.preventDefault();
+        resizePanelAt(type, x, y);
+        saveLayoutPreferences();
+      });
+    });
+    applyLayoutPreferences();
+    window.addEventListener("resize", () => {
+      cancelAnimationFrame(layoutApplyFrame);
+      layoutApplyFrame = requestAnimationFrame(applyLayoutPreferences);
+    });
+  }
 
   function rows() {
     const incumbents = positionIncumbents();
@@ -1718,6 +1999,14 @@
     return [positive ? Math.max(0, low - padding) : low - padding, high + padding];
   }
 
+  function measuredChartSize() {
+    const bounds = refs.chartWrap.getBoundingClientRect();
+    return {
+      width: Math.max(1, Math.round(bounds.width || refs.chartWrap.clientWidth || 720)),
+      height: Math.max(1, Math.round(bounds.height || refs.chartWrap.clientHeight || 340)),
+    };
+  }
+
   function renderHistogram() {
     const descriptor = axisDescriptor("histogram");
     const geometry = axisGeometry(descriptor);
@@ -1728,13 +2017,19 @@
     renderHistogramLegend(colors);
     const markNoun = isCeoPosition() ? "organization" : "reported role";
     $("#chart-description").textContent = `A histogram of ${descriptor.label.toLowerCase()}. Each block represents one ${markNoun}; larger blocks have more influence when weighting is active.`;
-    const width = Math.max(520, refs.chartWrap.clientWidth || 720);
-    const height = Math.max(330, refs.chartWrap.clientHeight || 360);
+    const { width, height } = measuredChartSize();
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
     const percentiles = quantilePercentiles();
     const showEmpiricalQuantileMarks = state.markCurve && state.fit === "empirical"
       && percentiles.length > 0 && percentiles.length < 21;
-    const margin = { top: showEmpiricalQuantileMarks ? 44 : 14, right: 18, bottom: 46, left: 66 };
+    const compactWidth = width < 480;
+    const compactHeight = height < 230;
+    const margin = {
+      top: showEmpiricalQuantileMarks ? (compactHeight ? 36 : 44) : (compactHeight ? 9 : 14),
+      right: compactWidth ? 9 : 18,
+      bottom: compactHeight ? 37 : 46,
+      left: compactWidth ? 56 : 66,
+    };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
@@ -1777,7 +2072,7 @@
     const maxWeight = Math.max(...bins.map((bin) => bin.total), densityPeak, 1) * 1.1;
     const yScale = (weight) => innerHeight - (weight / maxWeight) * innerHeight;
 
-    const gridTicks = 4;
+    const gridTicks = clamp(Math.floor(innerHeight / 55), 2, 4);
     for (let i = 0; i <= gridTicks; i += 1) {
       const value = (maxWeight * i) / gridTicks;
       const y = margin.top + yScale(value);
@@ -1864,7 +2159,7 @@
       rankDetails: [[`${descriptor.shortLabel} percentile`, percentilePositionLabel(items, item.value, (candidate) => candidate.value)]],
     }));
 
-    const tickCount = width < 650 ? 5 : 8;
+    const tickCount = clamp(Math.floor(innerWidth / 90), 3, 8);
     for (let i = 0; i <= tickCount; i += 1) {
       const value = geometry.inverse(axisMin + (i / tickCount) * (axisMax - axisMin));
       const x = xScale(value);
@@ -2104,10 +2399,16 @@
     const svg = refs.chart;
     svg.replaceChildren();
     $("#chart-description").textContent = `A scatterplot of ${yDescriptor.label.toLowerCase()} against ${xDescriptor.label.toLowerCase()} for ${positionDefinition().pageLabel} pay records.`;
-    const width = Math.max(520, refs.chartWrap.clientWidth || 720);
-    const height = Math.max(290, refs.chartWrap.clientHeight || 340);
+    const { width, height } = measuredChartSize();
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-    const margin = { top: 14, right: 18, bottom: 50, left: 72 };
+    const compactWidth = width < 480;
+    const compactHeight = height < 230;
+    const margin = {
+      top: compactHeight ? 9 : 14,
+      right: compactWidth ? 9 : 18,
+      bottom: compactHeight ? 40 : 50,
+      left: compactWidth ? 58 : 72,
+    };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
     if (!items.length) {
@@ -2136,8 +2437,9 @@
     const [yMin, yMax] = paddedDomain(transformedY, 0.08, false);
     const xScale = (value) => margin.left + ((xTransform(value) - xMin) / (xMax - xMin)) * innerWidth;
     const yScale = (value) => margin.top + innerHeight - ((yTransform(value) - yMin) / (yMax - yMin)) * innerHeight;
-    for (let index = 0; index <= 4; index += 1) {
-      const transformed = yMin + (index / 4) * (yMax - yMin);
+    const yTickCount = clamp(Math.floor(innerHeight / 55), 2, 4);
+    for (let index = 0; index <= yTickCount; index += 1) {
+      const transformed = yMin + (index / yTickCount) * (yMax - yMin);
       const yValue = yGeometry.inverse(transformed);
       const y = yScale(yValue);
       svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: y, y2: y, class: "grid-line" }));
@@ -2145,10 +2447,11 @@
       label.textContent = yDescriptor.format(yValue); svg.append(label);
     }
     const plotBottom = margin.top + innerHeight;
-    for (let index = 0; index <= 5; index += 1) {
-      const transformed = xMin + (index / 5) * (xMax - xMin);
+    const xTickCount = clamp(Math.floor(innerWidth / 90), 3, 6);
+    for (let index = 0; index <= xTickCount; index += 1) {
+      const transformed = xMin + (index / xTickCount) * (xMax - xMin);
       const value = xGeometry.inverse(transformed);
-      const x = margin.left + (index / 5) * innerWidth;
+      const x = margin.left + (index / xTickCount) * innerWidth;
       svg.append(svgElement("line", { x1: x, x2: x, y1: plotBottom, y2: plotBottom + 4, stroke: "#52879E" }));
       const label = svgElement("text", { x, y: plotBottom + 20, "text-anchor": "middle", fill: "#52879E", "font-size": 9 });
       label.textContent = xDescriptor.format(value); svg.append(label);
@@ -3334,6 +3637,8 @@
   let robustnessReport = null;
   let robustnessResultWidth = 0;
   let robustnessResizeFrame = 0;
+  let chartResizeFrame = 0;
+  let chartResizeKey = "";
 
   function shareRowCode(row) {
     let hash = 0x811c9dc5;
@@ -3755,6 +4060,50 @@
     state.axisModes.scatterX = presentation.scatterXMode;
   }
 
+  function applyAnalysisPayloadTransaction(nextPayload, nextPosition) {
+    if (nextPayload?.v !== URL_STATE_VERSION || !POSITION_BY_KEY.has(nextPosition)) {
+      return { ok: false, error: new Error("Unsupported analysis state.") };
+    }
+    const presentation = presentationState();
+    const previousPayload = sharePayload();
+    const previousPosition = state.position;
+    const previousActiveScenarioId = activeScenarioId;
+    const resumeUrlSync = urlSyncReady;
+    urlSyncReady = false;
+    try {
+      reset();
+      restoreUrlState(structuredClone(nextPayload), nextPosition);
+      const restoredView = state.view;
+      const restoredAxisSignature = scenarioSummary().axisSignature;
+      restorePresentationState(presentation);
+      if (scenarioSummary().axisSignature !== restoredAxisSignature) state.view = restoredView;
+      state.focusedId = "";
+      state.hoverQuantile = null;
+      buildFilterMenus();
+      renderWeightControls();
+      syncControlsFromState();
+      renderAll();
+      return { ok: true };
+    } catch (error) {
+      try {
+        reset();
+        restoreUrlState(previousPayload, previousPosition);
+        restorePresentationState(presentation);
+        activeScenarioId = previousActiveScenarioId;
+        buildFilterMenus();
+        renderWeightControls();
+        syncControlsFromState();
+        renderAll();
+      } catch (rollbackError) {
+        console.error("Unable to restore the analysis after a failed state change", rollbackError);
+      }
+      return { ok: false, error };
+    } finally {
+      urlSyncReady = resumeUrlSync;
+      if (urlSyncReady) writeUrlState();
+    }
+  }
+
   function applySavedScenario(id) {
     const scenario = savedScenarios.find((candidate) => candidate.id === id);
     if (!scenario) return;
@@ -3767,50 +4116,19 @@
       console.warn("Unable to decode saved benchmark scenario", error);
       return;
     }
-    const presentation = presentationState();
-    const previousPayload = sharePayload();
-    const previousPosition = state.position;
-    const previousActiveScenarioId = activeScenarioId;
-    const resumeUrlSync = urlSyncReady;
-    urlSyncReady = false;
-    try {
-      reset();
-      restoreUrlState(nextPayload, scenario.position);
-      const restoredView = state.view;
-      const restoredAxisSignature = scenarioSummary().axisSignature;
-      restorePresentationState(presentation);
-      if (scenarioSummary().axisSignature !== restoredAxisSignature) state.view = restoredView;
-      state.focusedId = "";
-      state.hoverQuantile = null;
-      buildFilterMenus();
-      renderWeightControls();
-      syncControlsFromState();
+    const applied = applyAnalysisPayloadTransaction(nextPayload, scenario.position);
+    if (applied.ok) {
       scenario.encodedState = encodeUrlState(sharePayload());
       scenario.summary = scenarioSummary();
       scenario.dataGeneratedAt = DATA.generatedAt || DATA.generated || "";
       scenario.updatedAt = new Date().toISOString();
       activeScenarioId = scenario.id;
       persistSavedScenarios();
-      renderAll();
+      renderScenarioComparison();
       refs.scenarioStatus.textContent = scenario.name + " applied.";
-    } catch (error) {
-      try {
-        reset();
-        restoreUrlState(previousPayload, previousPosition);
-        restorePresentationState(presentation);
-        activeScenarioId = previousActiveScenarioId;
-        buildFilterMenus();
-        renderWeightControls();
-        syncControlsFromState();
-        renderAll();
-      } catch (rollbackError) {
-        console.error("Unable to restore the analysis after a failed scenario apply", rollbackError);
-      }
+    } else {
       refs.scenarioStatus.textContent = scenario.name + " could not be applied; the prior analysis was restored.";
-      console.warn("Unable to apply saved benchmark scenario", error);
-    } finally {
-      urlSyncReady = resumeUrlSync;
-      if (urlSyncReady) writeUrlState();
+      console.warn("Unable to apply saved benchmark scenario", applied.error);
     }
   }
 
@@ -4169,16 +4487,59 @@
     };
   }
 
-  function robustnessSpecLabel(spec) {
-    const sample = {
+  function robustnessSampleLabel(sample) {
+    return {
       tierA: "Closest peers", primary: "Recommended peers",
       clean: "Similar organization types", sensitivity: "Recommended + broader",
-    }[spec.sample] || humanizeCategory(spec.sample);
-    const fit = { empirical: "Empirical", lognormal: "Lognormal", gamma: "Gamma" }[spec.fit];
-    const weight = spec.weightMode === "automatic" ? "Automatic (target eff. n " + spec.autoTargetEss + ")"
-      : spec.weightMode === "equal" ? (spec.position === "ceo" ? "Equal (co-leaders share)" : "Equal organizations")
-        : "Current weights";
+    }[sample] || humanizeCategory(sample);
+  }
+
+  function robustnessFitLabel(fit) {
+    return { empirical: "Empirical", lognormal: "Lognormal", gamma: "Gamma" }[fit] || humanizeCategory(fit);
+  }
+
+  function robustnessWeightLabel(spec) {
+    if (spec.weightMode === "automatic") return "Automatic (target eff. n " + spec.autoTargetEss + ")";
+    if (spec.weightMode === "equal") return spec.position === "ceo" ? "Equal (co-leaders share)" : "Equal organizations";
+    const keys = spec.weightings instanceof Set ? [...spec.weightings] : [...(spec.weightingKeys || [])];
+    if (!keys.length) return "Equal base weights";
+    if (keys.includes("comparability")) {
+      return keys.includes("streamBalanced") ? "Automatic + 50/50 sources" : "Automatic";
+    }
+    return keys.map((key) => WEIGHT_LABELS[key] || humanizeCategory(key)).join(" × ");
+  }
+
+  function robustnessSpecLabel(spec) {
+    const sample = robustnessSampleLabel(spec.sample);
+    const fit = robustnessFitLabel(spec.fit);
+    const weight = robustnessWeightLabel(spec);
     return sample + " · " + fit + " · " + weight;
+  }
+
+  function robustnessCoreApplyPayload(basePayload, spec) {
+    const payload = structuredClone(basePayload);
+    delete payload.a;
+    delete payload.h;
+    delete payload.k;
+    delete payload.l;
+    delete payload.i;
+    if (spec.sample === "primary") delete payload.p;
+    else payload.p = URL_SAMPLE_CODES[spec.sample];
+    if (spec.fit === "lognormal") delete payload.g;
+    else payload.g = URL_FIT_CODES[spec.fit];
+    if (spec.weightMode === "equal") {
+      delete payload.w;
+      delete payload.x;
+      delete payload.d;
+      delete payload.c;
+    } else if (spec.weightMode === "automatic") {
+      payload.w = URL_WEIGHT_CODES.comparability;
+      delete payload.d;
+      delete payload.c;
+      if (spec.autoTargetEss === 35) delete payload.x;
+      else payload.x = { a: spec.autoTargetEss };
+    }
+    return payload;
   }
 
   function evaluateRobustnessSpec(spec, metadata = {}) {
@@ -4187,10 +4548,16 @@
       family: metadata.family || "Core",
       label: metadata.label || robustnessSpecLabel(spec),
       spec: {
-        sample: spec.sample, fit: spec.fit, weightMode: spec.weightMode,
-        stream: spec.stream, inflationAdjusted: spec.inflationAdjusted,
-        streamBalanced: spec.streamBalanced,
+        position: spec.position, sample: spec.sample, fit: spec.fit, weightMode: spec.weightMode,
+        stream: spec.stream, measure: spec.measure, inflationAdjusted: spec.inflationAdjusted,
+        streamBalanced: spec.streamBalanced, autoTargetEss: spec.autoTargetEss,
+        weightingKeys: [...(spec.weightings || [])],
+        categoricalFilterCount: Object.values(spec.filters || {}).filter((values) => values != null).length,
+        rangeFilterCount: Object.values(spec.ranges || {}).filter((range) => (
+          range && range.min != null && range.max != null && (range.low > range.min || range.high < range.max)
+        )).length,
       },
+      applyPayload: metadata.applyPayload ? structuredClone(metadata.applyPayload) : null,
       status: "error", warning: "", rowCount: 0, organizationCount: 0,
       rowEffectiveN: 0, organizationEffectiveN: 0, maximumOrganizationShare: 0,
       q25: NaN, q50: NaN, q75: NaN, sourceCounts: {}, calibrations: [],
@@ -4259,6 +4626,7 @@
     const fingerprint = analyticalFingerprint();
     const dimensions = new Set(refs.robustnessDimensions.filter((input) => input.checked && !input.disabled).map((input) => input.value));
     const baseSpec = currentRobustnessSpec();
+    const basePayload = sharePayload();
     const options = robustnessOptionValues(dimensions, baseSpec);
     const core = [];
     options.samples.forEach((sample) => options.fits.forEach((fit) => options.weights.forEach((weightMode) => {
@@ -4271,6 +4639,7 @@
       core.push(evaluateRobustnessSpec(spec, {
         id: ["core", sample, fit, weightMode].join("-"),
         family: "Core", label: robustnessSpecLabel(spec),
+        applyPayload: robustnessCoreApplyPayload(basePayload, spec),
       }));
     })));
     const source = [];
@@ -4383,6 +4752,125 @@
     return candidates[0] || null;
   }
 
+  function robustnessPaySourceLabel(stream) {
+    return { incumbents: "Form 990s", jobAds: "Job postings", combined: "All sources" }[stream] || humanizeCategory(stream);
+  }
+
+  function robustnessPayMeasureLabel(spec) {
+    if (spec.stream === "jobAds") return "Advertised midpoint";
+    if (spec.stream === "combined") return "Base pay + advertised midpoint";
+    return { base: "Schedule J base pay", cash: "Part VII reported cash", total: "Total reported pay" }[spec.measure]
+      || humanizeCategory(spec.measure);
+  }
+
+  function robustnessFilterLabel(spec) {
+    const categorical = Number(spec.categoricalFilterCount || 0);
+    const numeric = Number(spec.rangeFilterCount || 0);
+    if (!categorical && !numeric) return "None";
+    return [
+      categorical ? categorical + " column" + (categorical === 1 ? "" : "s") : "",
+      numeric ? numeric + " range" + (numeric === 1 ? "" : "s") : "",
+    ].filter(Boolean).join(" + ") + " retained";
+  }
+
+  function robustnessQuantileLabel(key) {
+    return { q25: "25th percentile", q50: "Median", q75: "75th percentile" }[key] || key;
+  }
+
+  function hideRobustnessTooltip() {
+    refs.robustnessTooltip.hidden = true;
+    refs.robustnessTooltip.removeAttribute("data-spec-id");
+  }
+
+  function positionRobustnessTooltip(event, anchor) {
+    if (refs.robustnessTooltip.hidden) return;
+    const anchorBounds = anchor.getBoundingClientRect();
+    const pointerX = Number.isFinite(event?.clientX) && event.clientX > 0
+      ? event.clientX : anchorBounds.left + anchorBounds.width / 2;
+    const pointerY = Number.isFinite(event?.clientY) && event.clientY > 0
+      ? event.clientY : anchorBounds.top + anchorBounds.height / 2;
+    const width = refs.robustnessTooltip.offsetWidth;
+    const height = refs.robustnessTooltip.offsetHeight;
+    let left = pointerX + 12;
+    if (left + width > window.innerWidth - 8) left = pointerX - width - 12;
+    let top = pointerY - height - 12;
+    if (top < 8) top = pointerY + 12;
+    refs.robustnessTooltip.style.left = clamp(left, 8, Math.max(8, window.innerWidth - width - 8)) + "px";
+    refs.robustnessTooltip.style.top = clamp(top, 8, Math.max(8, window.innerHeight - height - 8)) + "px";
+  }
+
+  function showRobustnessTooltip(event, anchor, result, key, { applies = true } = {}) {
+    const tooltip = refs.robustnessTooltip;
+    const heading = resultElement("strong", "", result.label);
+    const list = document.createElement("dl");
+    const addRow = (label, value) => {
+      const row = document.createElement("div");
+      row.append(resultElement("dt", "", label), resultElement("dd", "", value));
+      list.append(row);
+    };
+    addRow(robustnessQuantileLabel(key), money(result[key]));
+    addRow("Sample", robustnessSampleLabel(result.spec.sample));
+    addRow("Distribution", robustnessFitLabel(result.spec.fit));
+    addRow("Weighting", robustnessWeightLabel(result.spec));
+    addRow("Pay source", robustnessPaySourceLabel(result.spec.stream));
+    addRow("Pay measure", robustnessPayMeasureLabel(result.spec));
+    addRow("Dollar basis", result.spec.inflationAdjusted ? "July 2026 USD" : "Original USD");
+    addRow("Filters", robustnessFilterLabel(result.spec));
+    addRow("Data", result.rowCount + " records · " + result.organizationCount + " organizations · effective n " + result.organizationEffectiveN.toFixed(1));
+    const hint = resultElement("p", "", applies ? "Select to apply this specification." : "This is the current analysis.");
+    tooltip.replaceChildren(heading, list, hint);
+    tooltip.dataset.specId = result.id;
+    tooltip.hidden = false;
+    positionRobustnessTooltip(event, anchor);
+  }
+
+  function robustnessPointAriaLabel(result, key, applies = true) {
+    return result.label + ". " + robustnessQuantileLabel(key) + " " + money(result[key]) + ". "
+      + result.rowCount + " records from " + result.organizationCount + " organizations; effective n "
+      + result.organizationEffectiveN.toFixed(1) + ". " + (applies ? "Select to apply." : "Current analysis.");
+  }
+
+  function applyRobustnessResult(result, key, { restoreFocus = false } = {}) {
+    if (result.status !== "valid" || !result.applyPayload) return;
+    hideRobustnessTooltip();
+    const applied = applyAnalysisPayloadTransaction(result.applyPayload, result.spec.position);
+    if (!applied.ok) {
+      refs.robustnessStatus.textContent = "This specification could not be applied; the prior analysis was restored.";
+      console.warn("Unable to apply robustness specification", applied.error);
+      return;
+    }
+    runRobustnessAnalysis();
+    refs.robustnessStatus.textContent = "Applied " + result.label + " and refreshed the robustness check.";
+    if (restoreFocus) requestAnimationFrame(() => {
+      refs.robustnessResults.querySelector(
+        '.robustness-spec-point[data-spec-id="' + result.id + '"][data-quantile="' + key + '"]',
+      )?.focus({ preventScroll: true });
+    });
+  }
+
+  function robustnessPointPositions(results, key, x, y) {
+    const candidates = [-8, -4, 0, 4, 8].flatMap((dx) => (
+      [-10, -5, 0, 5, 10].map((dy) => ({ dx, dy, displacement: dx ** 2 + dy ** 2 }))
+    )).sort((a, b) => a.displacement - b.displacement);
+    const placed = [];
+    return results.map((result) => {
+      const baseX = x(result[key]);
+      const scored = candidates.map((candidate) => {
+        const pointX = baseX + candidate.dx;
+        const pointY = y + candidate.dy;
+        const nearest = placed.length ? Math.min(...placed.map((point) => (
+          Math.hypot(point.x - pointX, point.y - pointY)
+        ))) : Infinity;
+        return { ...candidate, x: pointX, y: pointY, nearest };
+      });
+      const selected = scored.find((candidate) => candidate.nearest >= 8)
+        || scored.sort((a, b) => b.nearest - a.nearest || a.displacement - b.displacement)[0];
+      const point = { result, x: selected.x, y: selected.y };
+      placed.push(point);
+      return point;
+    });
+  }
+
   function robustnessChart(report, descriptionId) {
     const valid = report.core.filter((result) => result.status === "valid");
     if (!valid.length) return resultElement("p", "robustness-warning", "No core specification met the minimum peer-set requirements.");
@@ -4412,7 +4900,9 @@
       "aria-label": "Core robustness ranges for the 25th percentile, median, and 75th percentile",
       "aria-describedby": descriptionId,
     });
+    const pointerPoints = [];
     keys.forEach(([key, label], rowIndex) => {
+      const rowTargets = [];
       const y = margin.top + 18 + rowIndex * 28;
       const range = robustnessRange(valid, key);
       const labelNode = svgElement("text", { x: margin.left - 8, y: y + 3, "text-anchor": "end", class: "robustness-label" });
@@ -4421,26 +4911,63 @@
       svg.append(svgElement("line", {
         x1: x(range[0]), x2: x(range[1]), y1: y, y2: y, class: "robustness-range",
       }));
-      valid.forEach((result, index) => {
-        const point = svgElement("circle", {
-          cx: x(result[key]), cy: y + ((index % 5) - 2) * 1.25, r: 3.1, class: "robustness-point",
+      robustnessPointPositions(valid, key, x, y).forEach(({ result, x: pointX, y: pointY }) => {
+        const target = svgElement("g", {
+          class: "robustness-spec-point", tabindex: "-1", role: "button",
+          "data-spec-id": result.id, "data-quantile": key,
+          "aria-label": robustnessPointAriaLabel(result, key),
+          "aria-describedby": "robustness-tooltip",
         });
-        const title = svgElement("title");
-        title.textContent = result.label + ": " + money(result[key]);
-        point.append(title);
-        svg.append(point);
+        target.append(
+          svgElement("circle", { cx: pointX, cy: pointY, r: 9, class: "robustness-point-hit" }),
+          svgElement("circle", { cx: pointX, cy: pointY, r: 3.1, class: "robustness-point" }),
+        );
+        target.addEventListener("focus", (event) => showRobustnessTooltip(event, target, result, key));
+        target.addEventListener("blur", hideRobustnessTooltip);
+        target.addEventListener("keydown", (event) => {
+          if (!["Enter", " "].includes(event.key)) return;
+          event.preventDefault();
+          applyRobustnessResult(result, key, { restoreFocus: true });
+        });
+        rowTargets.push(target);
+        pointerPoints.push({ x: pointX, y: pointY, target, result, key, applies: true });
+        svg.append(target);
       });
       if (report.current.status === "valid") {
         const centerX = x(report.current[key]);
-        const point = svgElement("rect", {
-          x: centerX - 4, y: y - 4, width: 8, height: 8,
-          transform: "rotate(45 " + centerX + " " + y + ")", class: "robustness-point is-current",
+        const target = svgElement("g", {
+          class: "robustness-current-point", tabindex: "-1", role: "img",
+          "aria-label": robustnessPointAriaLabel(report.current, key, false),
+          "aria-describedby": "robustness-tooltip",
         });
-        const title = svgElement("title");
-        title.textContent = "Current analysis: " + money(report.current[key]);
-        point.append(title);
-        svg.append(point);
+        target.append(
+          svgElement("circle", { cx: centerX, cy: y, r: 9, class: "robustness-point-hit" }),
+          svgElement("rect", {
+            x: centerX - 4, y: y - 4, width: 8, height: 8,
+            transform: "rotate(45 " + centerX + " " + y + ")", class: "robustness-point is-current",
+          }),
+        );
+        target.addEventListener("focus", (event) => showRobustnessTooltip(event, target, report.current, key, { applies: false }));
+        target.addEventListener("blur", hideRobustnessTooltip);
+        rowTargets.push(target);
+        pointerPoints.unshift({ x: centerX, y, target, result: report.current, key, applies: false });
+        svg.append(target);
       }
+      rowTargets.forEach((target, index) => {
+        if (index === 0) target.setAttribute("tabindex", "0");
+        target.addEventListener("focus", () => {
+          rowTargets.forEach((candidate) => candidate.setAttribute("tabindex", candidate === target ? "0" : "-1"));
+        });
+        target.addEventListener("keydown", (event) => {
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          const currentIndex = rowTargets.indexOf(target);
+          const nextIndex = event.key === "Home" ? 0
+            : event.key === "End" ? rowTargets.length - 1
+              : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + rowTargets.length) % rowTargets.length;
+          rowTargets[nextIndex].focus();
+        });
+      });
     });
     const axisY = height - margin.bottom;
     svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: axisY, y2: axisY, class: "robustness-axis" }));
@@ -4452,6 +4979,43 @@
       label.textContent = compactMoney(value);
       svg.append(label);
     }
+    let hoveredPoint = null;
+    const overlay = svgElement("rect", {
+      x: Math.max(0, margin.left - 14), y: Math.max(0, margin.top),
+      width: width - margin.left - margin.right + 28,
+      height: axisY - margin.top - 2,
+      class: "robustness-pointer-overlay", "aria-hidden": "true",
+    });
+    const nearestPoint = (event) => {
+      const matrix = svg.getScreenCTM();
+      if (!matrix) return null;
+      const point = svg.createSVGPoint();
+      point.x = event.clientX;
+      point.y = event.clientY;
+      const local = point.matrixTransform(matrix.inverse());
+      const nearest = pointerPoints.reduce((best, candidate) => {
+        const distance = Math.hypot(candidate.x - local.x, candidate.y - local.y);
+        return !best || distance < best.distance ? { ...candidate, distance } : best;
+      }, null);
+      return nearest?.distance <= 15 ? nearest : null;
+    };
+    const setHoveredPoint = (event, point) => {
+      if (hoveredPoint?.target !== point?.target) {
+        hoveredPoint?.target.classList.remove("is-hovered");
+        point?.target.classList.add("is-hovered");
+        hoveredPoint = point;
+        if (point) showRobustnessTooltip(event, point.target, point.result, point.key, { applies: point.applies });
+        else hideRobustnessTooltip();
+      } else if (point) positionRobustnessTooltip(event, point.target);
+      overlay.classList.toggle("is-actionable", Boolean(point?.applies));
+    };
+    overlay.addEventListener("pointermove", (event) => setHoveredPoint(event, nearestPoint(event)));
+    overlay.addEventListener("pointerleave", (event) => setHoveredPoint(event, null));
+    overlay.addEventListener("click", (event) => {
+      const point = nearestPoint(event);
+      if (point?.applies) applyRobustnessResult(point.result, point.key);
+    });
+    svg.append(overlay);
     return svg;
   }
 
@@ -4519,6 +5083,7 @@
   }
 
   function renderRobustnessReport() {
+    hideRobustnessTooltip();
     refs.robustnessResults.replaceChildren();
     if (!robustnessReport) return;
     const report = robustnessReport;
@@ -5052,6 +5617,7 @@
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
     closeAxisSelector();
+    hideRobustnessTooltip();
     if (closeHeaderFilterPopovers({ restoreFocus: true })) event.preventDefault();
   });
   refs.chartColor.addEventListener("change", () => { state.chartColor = refs.chartColor.value; renderAll(); });
@@ -5077,7 +5643,15 @@
     scheduleUrlState();
   }));
 
-  const observer = new ResizeObserver(() => renderChart());
+  initPanelResizers();
+  const observer = new ResizeObserver((entries) => {
+    const bounds = entries[0]?.contentRect;
+    const key = Math.round(bounds?.width || 0) + "x" + Math.round(bounds?.height || 0);
+    if (key === chartResizeKey) return;
+    chartResizeKey = key;
+    cancelAnimationFrame(chartResizeFrame);
+    chartResizeFrame = requestAnimationFrame(renderChart);
+  });
   observer.observe(refs.chartWrap);
   const robustnessObserver = new ResizeObserver((entries) => {
     const width = Math.round(entries[0]?.contentRect.width || 0);

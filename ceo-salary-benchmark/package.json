@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "build:data": "python3 scripts/build_app_data.py",
-    "build:routes": "python3 scripts/build_position_routes.py --site-root ..",
+    "build:routes": "python3 scripts/build_position_routes.py",
     "build": "npm run build:data && npm run build:routes",
-    "serve": "python3 -m http.server 4173 --bind 127.0.0.1 --directory ..",
+    "serve": "python3 scripts/serve_local.py --port 4173 --bind 127.0.0.1",
     "test": "playwright test"
   },
   "devDependencies": {
