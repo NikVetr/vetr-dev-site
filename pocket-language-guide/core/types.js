@@ -134,7 +134,9 @@
 
 /** @typedef {{x:number,y:number,w:number,h:number,conceptId?:string,sectionId?:string}} HitBox */
 
-/** @typedef {{rects:Rect[], runs:TextRun[], icons:IconMark[], hits:HitBox[]}} Face */
+/** `rotate` is a whole-page rotation in degrees, set by imposition when a
+ * duplex flip would otherwise print the back of a card upside down.
+ * @typedef {{rects:Rect[], runs:TextRun[], icons:IconMark[], hits:HitBox[], rotate?:number}} Face */
 
 /**
  * @typedef {Object} Warning

@@ -1,0 +1,24 @@
+{
+  "packs": [
+    {
+      "target": "en",
+      "source": "zh-Hans",
+      "scale": 1.298,
+      "faces": 4,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 358,
+      "warnings": []
+    },
+    {
+      "target": "zh-Hans",
+      "source": "en",
+      "scale": 1.0382,
+      "faces": 4,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 358,
+      "warnings": []
+    }
+  ]
+}

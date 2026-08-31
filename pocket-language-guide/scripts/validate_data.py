@@ -6,6 +6,7 @@ registry references resolve, every concept has text in every ready language,
 text is NFC, and safety-critical sections carry reviewed content.
 """
 import csv
+import json
 import sys
 import unicodedata
 from pathlib import Path
@@ -119,6 +120,21 @@ def main():
         for row in load(path.relative_to(DATA)):
             if row["concept_id"] not in concepts:
                 errors.append(f"{path.name}: unknown concept_id {row['concept_id']!r}")
+
+    # Coverage drives the gallery. Declared status is intent; this is fact, and a
+    # language with no rows must not offer a button that produces an empty sheet.
+    coverage = {"total": len(concepts), "languages": {}}
+    for code in languages:
+        have = 0
+        for group in groups:
+            rel = f"lang/{code}/{group}.csv"
+            if (DATA / rel).exists():
+                have += sum(1 for r in load(rel) if r["text"].strip() or
+                            concepts.get(r["concept_id"], {}).get("default_template") == "note")
+        coverage["languages"][code] = have
+    (DATA / "coverage.json").write_text(json.dumps(coverage, indent=2) + "\n", encoding="utf-8")
+    print(f"data/coverage.json  " + ", ".join(
+        f"{c}={n}" for c, n in coverage["languages"].items() if n))
 
     for w in warnings:
         print(f"warn  {w}")

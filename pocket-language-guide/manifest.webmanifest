@@ -1,0 +1,11 @@
+{
+  "name": "Pocket Language Guide",
+  "short_name": "Pocket Guide",
+  "description": "Printable pocket-sized vocabulary and phrase guides for any language pair.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b67a3",
+  "icons": []
+}

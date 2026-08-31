@@ -74,18 +74,28 @@ export async function loadFontsFor(ctx, target, source) {
 }
 
 /**
- * Join the corpus for a pair and solve the sheet.
+ * Join the corpus for a pair and solve the sheet. Returns the intermediate pieces
+ * too, because the studio needs the same rows for its content tree and must not
+ * re-derive them -- and because forgetting to load the fonts first is exactly the
+ * kind of mistake a single entry point prevents.
  * @param {SheetContext} ctx
  * @param {import('./types.js').SheetSpec} spec
- * @returns {Promise<{blocks:import('./types.js').Block[], plan:import('./types.js').LayoutPlan}>}
+ * @param {import('./pack.js').SheetEdits} [edits]
  */
-export async function buildSheet(ctx, spec) {
+export async function buildSheet(ctx, spec, edits) {
   const { corpus, measurer, loadText } = ctx;
   await loadFontsFor(ctx, spec.target, spec.source);
   const theme = await ctx.theme(spec.themeId);
   const targetRows = await loadLanguage(loadText, spec.target, corpus.groups);
   const sourceRows = await loadLanguage(loadText, spec.source, corpus.groups);
   const respell = await loadRespellOverrides(loadText, spec.target, spec.source, spec.accent);
-  const blocks = buildBlocks({ corpus, targetRows, sourceRows, respell, spec });
-  return { blocks, plan: layout({ blocks, theme, spec, corpus, measurer }) };
+  const blocks = buildBlocks({ corpus, targetRows, sourceRows, respell, spec, edits });
+  return {
+    blocks,
+    theme,
+    targetRows,
+    sourceRows,
+    respell,
+    plan: layout({ blocks, theme, spec, corpus, measurer }),
+  };
 }

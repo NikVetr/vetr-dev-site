@@ -87,12 +87,24 @@ export async function loadRespellOverrides(loadText, target, source, accent) {
 }
 
 /**
+ * A user's item-level edits, layered over the corpus. Overrides replace field
+ * values for an existing concept; extras are new items the corpus never had, which
+ * is how someone adds their own vocabulary -- or an external model's -- without
+ * the corpus having to change.
+ * @typedef {Object} SheetEdits
+ * @property {Record<string,{values:Partial<Record<import('./types.js').FieldId,string>>, include:boolean}>} overrides
+ * @property {{conceptId:string, sectionId:string, template:string, weight:number,
+ *            values:Partial<Record<import('./types.js').FieldId,string>>}[]} extras
+ */
+
+/**
  * @typedef {Object} PackInput
  * @property {Awaited<ReturnType<typeof loadCorpus>>} corpus
  * @property {Record<string,Record<string,string>>} targetRows
  * @property {Record<string,Record<string,string>>} sourceRows
  * @property {Record<string,string>} respell
  * @property {import('./types.js').SheetSpec} spec
+ * @property {SheetEdits} [edits]
  */
 
 /**
@@ -102,16 +114,31 @@ export async function loadRespellOverrides(loadText, target, source, accent) {
  * @param {PackInput} input
  * @returns {import('./types.js').Block[]}
  */
-export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec }) {
+export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec, edits }) {
   const { selection } = spec;
+  const overrides = edits?.overrides ?? {};
+  const extras = edits?.extras ?? [];
   /** @type {import('./types.js').Block[]} */ const blocks = [];
 
   for (const section of corpus.sections) {
     if (selection.sections[section.section_id] === false) continue;
-    const concepts = (corpus.conceptsByGroup[section.group] ?? [])
-      .filter((c) => c.section_id === section.section_id)
+    const own = (corpus.conceptsByGroup[section.group] ?? [])
+      .filter((c) => c.section_id === section.section_id);
+    // Custom items join the section they name, after its own concepts.
+    const custom = extras
+      .filter((e) => e.sectionId === section.section_id)
+      .map((e) => ({
+        concept_id: e.conceptId,
+        section_id: e.sectionId,
+        default_template: e.template,
+        importance: String(e.weight),
+        rank: '9999',
+        custom: '1',
+      }));
+    const concepts = [...own, ...custom]
       .filter((c) => selection.items[c.concept_id] !== false)
-      .filter((c) => targetRows[c.concept_id] && sourceRows[c.concept_id]);
+      .filter((c) => overrides[c.concept_id]?.include !== false)
+      .filter((c) => c.custom === '1' || (targetRows[c.concept_id] && sourceRows[c.concept_id]));
     if (!concepts.length) continue;
 
     blocks.push({
@@ -134,7 +161,8 @@ export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec }) {
           sectionId: section.section_id,
           colorRole: section.color_role,
           stretch: 0,
-          text: sourceRows[concept.concept_id].text,
+          text: overrides[concept.concept_id]?.values.gloss
+            ?? sourceRows[concept.concept_id].text,
         });
         continue;
       }
@@ -149,9 +177,15 @@ export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec }) {
         };
         blocks.push(run);
       }
-      /** @type {import('./types.js').ItemRow[]} */ (run.rows).push(
-        itemRow(concept, targetRows[concept.concept_id], sourceRows[concept.concept_id], respell, spec),
-      );
+      /** @type {import('./types.js').ItemRow[]} */ (run.rows).push(itemRow(
+        concept,
+        targetRows[concept.concept_id],
+        sourceRows[concept.concept_id],
+        respell,
+        spec,
+        overrides[concept.concept_id]?.values,
+        extras.find((e) => e.conceptId === concept.concept_id)?.values,
+      ));
     }
   }
   return blocks;
@@ -159,29 +193,38 @@ export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec }) {
 
 /**
  * @param {Record<string,string>} concept
- * @param {Record<string,string>} target
- * @param {Record<string,string>} source
+ * @param {Record<string,string>|undefined} target
+ * @param {Record<string,string>|undefined} source
  * @param {Record<string,string>} respell
  * @param {import('./types.js').SheetSpec} spec
+ * @param {Partial<Record<import('./types.js').FieldId,string>>} [override]
+ * @param {Partial<Record<import('./types.js').FieldId,string>>} [custom]
  * @returns {import('./types.js').ItemRow}
  */
-function itemRow(concept, target, source, respell, spec) {
-  return {
-    conceptId: concept.concept_id,
-    weight: Number(concept.importance),
-    values: {
-      script: target.text,
-      script_alt: target.text_alt || '',
-      roman: target[`romanization_${spec.romanization}`] ?? '',
-      ipa: target.ipa || '',
-      literal: target.literal || '',
-      gloss: source.text,
-      // The numeral column of a number table is a source-language label, so it
-      // reads from the same cell as the gloss; templates pick one or the other.
-      numeral: source.text,
-      respell: respell[concept.concept_id] ?? '',
-    },
+function itemRow(concept, target, source, respell, spec, override, custom) {
+  const base = {
+    script: target?.text ?? '',
+    script_alt: target?.text_alt || '',
+    roman: target?.[`romanization_${spec.romanization}`] ?? '',
+    ipa: target?.ipa || '',
+    literal: target?.literal || '',
+    gloss: source?.text ?? '',
+    // The numeral column of a number table is a source-language label, so it
+    // reads from the same cell as the gloss; templates pick one or the other.
+    numeral: source?.text ?? '',
+    respell: respell[concept.concept_id] ?? '',
   };
+  // Blank cells in an edited CSV mean "leave it alone", not "delete it": a user
+  // clearing one column by accident should not silently drop content.
+  const merged = { ...base };
+  for (const layer of [custom, override]) {
+    if (!layer) continue;
+    for (const [key, value] of Object.entries(layer)) {
+      if (value !== undefined && value !== '') merged[/** @type {'script'} */ (key)] = value;
+    }
+  }
+  if (merged.numeral === base.numeral && merged.gloss !== base.gloss) merged.numeral = merged.gloss;
+  return { conceptId: concept.concept_id, weight: Number(concept.importance), values: merged };
 }
 
 /**

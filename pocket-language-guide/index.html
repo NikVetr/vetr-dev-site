@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pocket Language Guide — printable phrase cards for any language</title>
+<meta name="description" content="Free, printable pocket-sized vocabulary and phrase guides. Pick a language, customise it, export a high-resolution PDF or PNG. Works offline.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="./">Pocket Language Guide</a>
+    <div class="spacer"></div>
+    <div class="reader-picker">
+      <label for="reader">I speak</label>
+      <select id="reader"></select>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Printable pocket guides</h1>
+  <p class="lede">
+    Pick a language and get a pocket-sized phrase card built to print, cut and laminate.
+    Every sheet is typeset to fill its columns exactly. Customise the sections and the
+    layout, or take the default and export straight away.
+  </p>
+
+  <div id="gallery" class="gallery" aria-busy="true">
+    <p class="muted">Loading languages…</p>
+  </div>
+</main>
+
+<script type="module" src="ui/gallery.js"></script>
+</body>
+</html>

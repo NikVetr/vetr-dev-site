@@ -10,7 +10,7 @@
     "validate": "python3 scripts/validate_data.py",
     "prerender": "node scripts/prerender_packs.mjs",
     "test:unit": "node --test tests/*.test.mjs",
-    "test": "npm run test:unit && npx playwright test",
+    "test": "npm run validate && npm run check && npm run test:unit && npx playwright test",
     "vendor": "node scripts/build_vendor.mjs",
     "icons": "node scripts/extract_icons.mjs",
     "preview": "node scripts/render_preview.mjs"

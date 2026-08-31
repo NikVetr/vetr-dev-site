@@ -44,6 +44,9 @@ export function faceToSvg(face, plan, opts) {
     + `viewBox="0 0 ${num(pageW)} ${num(pageH)}">`,
   );
   out.push(`<rect x="0" y="0" width="${num(pageW)}" height="${num(pageH)}" fill="${opts.background ?? '#FFFFFF'}"/>`);
+  if (face.rotate) {
+    out.push(`<g transform="rotate(${num(face.rotate)} ${num(pageW / 2)} ${num(pageH / 2)})">`);
+  }
 
   for (const r of face.rects) {
     const radius = r.r ? ` rx="${num(r.r)}"` : '';
@@ -79,6 +82,7 @@ export function faceToSvg(face, plan, opts) {
     );
   }
 
+  if (face.rotate) out.push('</g>');
   if (opts.showBleed && opts.bleed) out.push(cropMarks(pageW, pageH, opts.bleed));
   out.push('</svg>');
   return out.join('\n');

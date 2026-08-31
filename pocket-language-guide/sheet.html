@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Export a pocket guide</title>
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="./">Pocket Language Guide</a>
+    <div class="spacer"></div>
+    <a class="btn" id="to-studio" href="customize.html">Customise in the studio →</a>
+  </div>
+</header>
+
+<main class="container">
+  <h1 id="title">Pocket guide</h1>
+  <p class="lede" id="subtitle"></p>
+
+  <div class="row" style="align-items: flex-start; gap: 1.8rem;">
+    <form id="options" style="flex: 0 0 260px;">
+      <div class="field">
+        <label for="geometry"><span>Card size and columns</span></label>
+        <select id="geometry"></select>
+      </div>
+      <div class="field">
+        <label for="paper"><span>Paper and printer</span></label>
+        <select id="paper"></select>
+      </div>
+      <div class="field">
+        <label for="ink"><span>Ink</span></label>
+        <select id="ink">
+          <option value="full">Full colour</option>
+          <option value="low-ink">Low ink — coloured rules, no shading</option>
+          <option value="mono">Black and white</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="preset"><span>What to include</span></label>
+        <select id="preset">
+          <option value="">Everything</option>
+          <option value="core">Essentials only</option>
+          <option value="transit">Getting around</option>
+          <option value="food">Eating and shopping</option>
+          <option value="lodging">Hotels and buildings</option>
+          <option value="outdoors">Hiking and outdoors</option>
+          <option value="health">Health and emergencies</option>
+        </select>
+      </div>
+
+      <div class="row" style="margin-top: 1rem;">
+        <button type="button" class="primary" id="pdf">Export PDF</button>
+        <button type="button" id="png">PNG (600 dpi)</button>
+        <button type="button" id="svg">SVG</button>
+      </div>
+      <p class="status" id="status"></p>
+      <ul class="warnings" id="warnings"></ul>
+    </form>
+
+    <div style="flex: 1; min-width: 320px;">
+      <div class="face-grid" id="faces"></div>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="ui/sheet-options.js"></script>
+</body>
+</html>

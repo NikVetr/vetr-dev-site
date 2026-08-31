@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customise a pocket guide</title>
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+<header class="site-header">
+  <div class="container" style="width: min(100% - 2rem, none);">
+    <a class="brand" href="./">Pocket Language Guide</a>
+    <span class="muted small" id="pair"></span>
+    <div class="spacer"></div>
+    <span class="status" id="status"></span>
+    <button type="button" class="primary" id="pdf">Export PDF</button>
+    <button type="button" id="png">PNG</button>
+  </div>
+</header>
+
+<div class="banner" id="banner">
+  <span>Too many options?</span>
+  <button type="button" class="ghost" id="quiz-open" style="text-decoration: underline;">Help me decide.</button>
+  <div class="spacer"></div>
+  <button type="button" class="ghost" id="banner-hide" aria-label="Hide this banner">Hide</button>
+</div>
+
+<main class="studio">
+  <section aria-label="Formatting">
+    <h2 class="panel-title">Format</h2>
+    <div class="field">
+      <label for="geometry"><span>Card size and columns</span></label>
+      <select id="geometry"></select>
+    </div>
+    <div class="field">
+      <label for="paper"><span>Paper and printer</span></label>
+      <select id="paper"></select>
+    </div>
+    <div class="field">
+      <label for="source"><span>Glossed into</span></label>
+      <select id="source"></select>
+    </div>
+    <div class="field">
+      <label for="romanization"><span>Romanisation</span></label>
+      <select id="romanization"></select>
+    </div>
+    <div class="field">
+      <label for="ink"><span>Ink</span></label>
+      <select id="ink">
+        <option value="full">Full colour</option>
+        <option value="low-ink">Low ink</option>
+        <option value="mono">Black and white</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="faces"><span>Faces</span></label>
+      <input type="number" id="faces" min="1" max="12" step="1">
+    </div>
+    <div class="field">
+      <label for="scale"><span>Type size</span></label>
+      <select id="scale">
+        <option value="0">Fit to the faces above</option>
+        <option value="0.9">Smaller (0.9×)</option>
+        <option value="1">Reference (1×)</option>
+        <option value="1.1">Larger (1.1×)</option>
+        <option value="1.25">Large print (1.25×)</option>
+      </select>
+    </div>
+
+    <h2 class="panel-title" style="margin-top: 1.2rem;">Columns shown</h2>
+    <div id="fields"></div>
+
+    <h2 class="panel-title" style="margin-top: 1.2rem;">Cut into cards</h2>
+    <div class="field">
+      <label for="flip"><span>Your printer flips on the…</span></label>
+      <select id="flip">
+        <option value="">Don't split — full sheets</option>
+        <option value="short-edge">Short edge (no rotation)</option>
+        <option value="long-edge">Long edge (back rotated)</option>
+      </select>
+    </div>
+    <p class="small muted" id="flip-note" style="margin-top: -.3rem;"></p>
+
+    <h2 class="panel-title" style="margin-top: 1.2rem;">Files</h2>
+    <div class="row">
+      <button type="button" id="svg">SVG</button>
+      <button type="button" id="csv-out">Export CSV</button>
+      <button type="button" id="csv-in">Import CSV</button>
+      <input type="file" id="csv-file" accept=".csv,text/csv" class="visually-hidden">
+    </div>
+  </section>
+
+  <section class="canvas" aria-label="Pages">
+    <div class="row">
+      <button type="button" id="grid-toggle">⊞ All faces</button>
+      <span class="spacer"></span>
+      <span class="small muted" id="canvas-note"></span>
+    </div>
+    <div id="face-area"></div>
+  </section>
+
+  <section aria-label="Content">
+    <h2 class="panel-title">Content</h2>
+    <ul class="warnings" id="warnings"></ul>
+    <div class="row small" style="margin-bottom: .5rem;">
+      <button type="button" class="ghost" id="all-on">All on</button>
+      <button type="button" class="ghost" id="all-off">All off</button>
+      <button type="button" class="ghost" id="balance">Balance columns</button>
+      <span class="spacer"></span>
+      <span class="muted" id="counts"></span>
+    </div>
+    <div class="diff" id="diff" hidden></div>
+    <ul class="tree" id="tree"></ul>
+  </section>
+</main>
+
+<script type="module" src="ui/studio.js"></script>
+</body>
+</html>

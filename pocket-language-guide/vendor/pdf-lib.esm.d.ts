@@ -22,6 +22,7 @@ export interface PDFPageDrawOptions {
 
 export interface PDFPage {
   getSize(): { width: number; height: number };
+  setRotation(angle: unknown): void;
   drawRectangle(options: PDFPageDrawOptions): void;
   drawText(text: string, options: PDFPageDrawOptions): void;
   drawSvgPath(path: string, options: PDFPageDrawOptions & { scale?: number }): void;
@@ -47,3 +48,4 @@ export const PDFDocument: {
 };
 
 export function rgb(r: number, g: number, b: number): unknown;
+export function degrees(value: number): unknown;

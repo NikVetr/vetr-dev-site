@@ -9,7 +9,7 @@
 // PDF's y axis points up from the bottom-left; the plan's points down from the
 // top-left. That conversion happens here and nowhere else.
 
-import { PDFDocument, rgb } from '../vendor/pdf-lib.esm.js';
+import { PDFDocument, rgb, degrees } from '../vendor/pdf-lib.esm.js';
 import * as fontkit from '../vendor/fontkit.esm.js';
 
 /** @param {string} hex `#RRGGBB` */
@@ -61,6 +61,9 @@ export async function planToPdf(plan, opts) {
 
   for (const face of plan.faces) {
     const page = doc.addPage([plan.pageW, plan.pageH]);
+    // A whole-page rotation, which printers honour, rather than transforming every
+    // run: imposition uses it so the back of a card is not printed upside down.
+    if (face.rotate) page.setRotation(degrees(face.rotate));
     const flip = (/** @type {number} */ y) => plan.pageH - y;
 
     for (const r of face.rects) {
