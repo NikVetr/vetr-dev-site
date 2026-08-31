@@ -19,7 +19,11 @@ SOURCES = {
     "NotoSans-BoldItalic.ttf": f"{NOTO}/NotoSans/hinted/ttf/NotoSans-BoldItalic.ttf",
     "NotoSansArabic-Regular.ttf": f"{NOTO}/NotoSansArabic/hinted/ttf/NotoSansArabic-Regular.ttf",
     "NotoSansArabic-Bold.ttf": f"{NOTO}/NotoSansArabic/hinted/ttf/NotoSansArabic-Bold.ttf",
-    # Variable; subset_fonts.py pins static weight instances out of these.
+    # Variable; subset_fonts.py pins static instances out of these. The upright
+    # and italic Noto Sans variables carry a width axis, which is what supplies
+    # the condensed face the reference sheet used for its dense tables.
+    "NotoSans-var.ttf": f"{GFONTS}/notosans/NotoSans%5Bwdth,wght%5D.ttf",
+    "NotoSans-Italic-var.ttf": f"{GFONTS}/notosans/NotoSans-Italic%5Bwdth,wght%5D.ttf",
     "NotoSansSC-var.ttf": f"{GFONTS}/notosanssc/NotoSansSC%5Bwght%5D.ttf",
     "NotoSansJP-var.ttf": f"{GFONTS}/notosansjp/NotoSansJP%5Bwght%5D.ttf",
 }

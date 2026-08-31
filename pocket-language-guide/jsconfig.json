@@ -4,6 +4,7 @@
     "module": "ES2022",
     "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
     "checkJs": true,
     "noEmit": true,
     "strict": true,
@@ -11,6 +12,6 @@
     "noUncheckedIndexedAccess": false,
     "allowJs": true
   },
-  "include": ["core/**/*.js", "render/**/*.js", "ui/**/*.js", "scripts/**/*.mjs", "tests/**/*.mjs"],
+  "include": ["vendor/*.d.ts", "core/**/*.js", "render/**/*.js", "ui/**/*.js", "scripts/**/*.mjs", "tests/**/*.mjs"],
   "exclude": ["node_modules", "vendor", "tmp"]
 }

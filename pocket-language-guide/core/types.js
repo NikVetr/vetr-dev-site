@@ -24,6 +24,7 @@
  * @property {boolean} italic
  * @property {'ink'|'muted'|'section'} color
  * @property {'start'|'end'|'center'} align
+ * @property {boolean} [condensed]  use the narrow Latin face, cf. \tablelatin
  */
 
 /**
@@ -45,9 +46,9 @@
  * @property {number} rulePt     bottom hairline
  * @property {number} stretch    glue weight after each item (the `\rowflex` fil)
  * @property {number} [rowStretch]  multiplies grid row height, cf. `\arraystretch`
- * @property {number} [minFrac]     per-row split search bounds
+ * @property {'top'|'middle'} [valign] cell alignment within a grid row
+ * @property {number} [minFrac]     column-width search bounds, as fractions of usable width
  * @property {number} [maxFrac]
- * @property {number} [usableFrac]  fraction of width the split may consume
  */
 
 /**
@@ -113,7 +114,7 @@
  * @property {{sections:Record<string,boolean>, items:Record<string,boolean>}} selection
  */
 
-/** @typedef {{x:number,y:number,w:number,h:number,fill:string}} Rect */
+/** @typedef {{x:number,y:number,w:number,h:number,fill:string,r?:number}} Rect */
 
 /** Text already broken to a single line and positioned. Renderers do not re-wrap.
  * @typedef {Object} TextRun
@@ -128,7 +129,8 @@
  * @property {'ltr'|'rtl'} dir
  */
 
-/** @typedef {{x:number,y:number,size:number,path:string,fill:string}} IconMark */
+/** Icon geometry; `name` is resolved against data/icons.json by the renderer.
+ * @typedef {{x:number,y:number,size:number,name:string,fill:string}} IconMark */
 
 /** @typedef {{x:number,y:number,w:number,h:number,conceptId?:string,sectionId?:string}} HitBox */
 
