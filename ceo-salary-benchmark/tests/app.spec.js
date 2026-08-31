@@ -1914,3 +1914,187 @@ test("fitted percentile labels retain compact line spacing at common browser zoo
   }
   expect(errors).toEqual([]);
 });
+
+test("named scenarios preserve analytical snapshots and compare side by side", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await page.evaluate(() => localStorage.removeItem("rp-salary-benchmark.scenarios.v1"));
+  await page.reload();
+
+  const quantilesTab = page.getByRole("tab", { name: "Quantiles" });
+  await quantilesTab.focus();
+  await quantilesTab.press("End");
+  await expect(page.getByRole("tab", { name: "Robustness" })).toBeFocused();
+  await page.getByRole("tab", { name: "Robustness" }).press("Home");
+  await expect(quantilesTab).toBeFocused();
+
+  await page.getByRole("tab", { name: /Compare/ }).click();
+  await page.locator("#scenario-name").fill("Recommended model");
+  await page.getByRole("button", { name: "Save current" }).click();
+  await expect(page.locator("#scenario-count")).toHaveText("1 / 4 saved");
+
+  await page.locator("#sample-select").selectOption("sensitivity");
+  await page.locator('input[name="distribution"][value="empirical"]').check();
+  await page.locator('.weighting-field input[value="comparability"]').check();
+  await page.getByRole("tab", { name: /Compare/ }).click();
+  await page.locator("#scenario-name").fill("Broader empirical");
+  await page.getByRole("button", { name: "Save current" }).click();
+
+  await expect(page.locator(".scenario-name-input")).toHaveCount(2);
+  await expect(page.locator("#scenario-count")).toHaveText("2 / 4 saved");
+  const medianRow = page.locator(".scenario-table tbody tr").filter({ has: page.getByRole("rowheader", { name: "Median" }) });
+  const medianValues = await medianRow.locator(".scenario-metric-value").allTextContents();
+  expect(medianValues).toHaveLength(2);
+  expect(medianValues[0]).not.toBe(medianValues[1]);
+  await expect(medianRow.locator("td").first().locator(".scenario-delta")).toHaveCount(0);
+  await expect(medianRow.locator("td").nth(1)).toHaveAttribute("headers", /scenario-metric-\d+ scenario-column-1/);
+  await expect(page.getByRole("button", { name: "Apply Recommended model" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Update with current Broader empirical" })).toBeDisabled();
+  await expect(page.locator(".scenario-table thead th").nth(2)).toContainText("Current analysis");
+  await page.locator(".results-panel").screenshot({ path: "tmp/app-scenario-comparison.png" });
+
+  await page.locator("#bin-count").fill("47");
+  await page.locator("#chart-color").selectOption("topic");
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await expect(page.locator(".scenario-table thead th").nth(2)).toContainText("Current analysis");
+
+  await page.getByRole("button", { name: "Apply Recommended model" }).click();
+  await expect(page.locator("#sample-select")).toHaveValue("primary");
+  await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
+  await expect(page.locator('.weighting-field input[value="comparability"]')).not.toBeChecked();
+  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await expect(page.locator("#bin-count")).toHaveValue("47");
+  await expect(page.locator("#chart-color")).toHaveValue("topic");
+
+  await page.reload();
+  await page.getByRole("tab", { name: /Compare/ }).click();
+  await expect(page.locator(".scenario-name-input")).toHaveCount(2);
+  expect(errors).toEqual([]);
+});
+
+test("scenario deltas do not compare different pay definitions", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await page.evaluate(() => localStorage.removeItem("rp-salary-benchmark.scenarios.v1"));
+  await page.reload();
+  await page.locator("#stream-select").selectOption("incumbents");
+  await page.getByRole("tab", { name: /Compare/ }).click();
+  await page.locator("#scenario-name").fill("Base pay");
+  await page.getByRole("button", { name: "Save current" }).click();
+  await page.locator("#measure-select").selectOption("cash");
+  await page.getByRole("tab", { name: /Compare/ }).click();
+  await page.locator("#scenario-name").fill("Reported cash");
+  await page.getByRole("button", { name: "Save current" }).click();
+  const medianRow = page.locator(".scenario-table tbody tr").filter({ has: page.getByRole("rowheader", { name: "Median" }) });
+  await expect(medianRow.locator("td").nth(1)).toContainText("Different quantity or pay definition");
+  expect(errors).toEqual([]);
+});
+
+test("invalid saved scenarios are skipped without changing the analysis", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  const median = await page.locator("#stat-center").textContent();
+  await page.evaluate(() => localStorage.setItem("rp-salary-benchmark.scenarios.v1", JSON.stringify({
+    version: 1,
+    scenarios: [{
+      id: "broken", name: "Broken", position: "ceo", encodedState: "not-valid-base64",
+      summary: { p25: 1, p50: 2, p75: 3, effectiveN: 4, formatted: {} },
+    }],
+  })));
+  await page.reload();
+  await expect(page.locator("#stat-center")).toHaveText(median || "");
+  await page.getByRole("tab", { name: /Compare/ }).click();
+  await expect(page.locator("#scenario-status")).toContainText("invalid saved scenario was skipped");
+  await expect(page.locator(".scenario-name-input")).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test("robustness dashboard evaluates comparable and separate sensitivity families", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  const before = {
+    url: page.url(),
+    median: await page.locator("#stat-center").textContent(),
+    records: await page.locator("#stat-n").textContent(),
+  };
+
+  await page.getByRole("tab", { name: "Robustness" }).click();
+  await expect(page.locator("#results-panel-robustness")).toContainText("not confidence intervals");
+  await page.getByRole("button", { name: "Run check" }).click();
+  await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
+
+  const rows = page.locator(".robustness-table tbody tr");
+  await expect(rows).toHaveCount(36);
+  await expect(rows.filter({ hasText: /^Core/ })).toHaveCount(24);
+  await expect(rows.filter({ hasText: /^Pay source/ })).toHaveCount(4);
+  await expect(rows.filter({ hasText: /^Pay measure/ })).toHaveCount(3);
+  await expect(rows.filter({ hasText: /^Ad range/ })).toHaveCount(3);
+  await expect(rows.filter({ hasText: /^Dollar basis/ })).toHaveCount(2);
+  await expect(page.locator(".robustness-summary")).toContainText("Median range");
+  const robustnessSvg = page.locator(".robustness-figure svg");
+  await expect(robustnessSvg).toBeVisible();
+  await expect(robustnessSvg).toHaveAttribute("aria-describedby", "robustness-chart-description");
+  await expect(page.locator("#robustness-chart-description")).toContainText("current salary specification");
+  await expect(page.locator("#robustness-results")).not.toHaveAttribute("aria-live", /.+/);
+  await page.locator(".results-panel").screenshot({ path: "tmp/app-robustness-dashboard.png" });
+
+  expect(page.url()).toBe(before.url);
+  expect(await page.locator("#stat-center").textContent()).toBe(before.median);
+  expect(await page.locator("#stat-n").textContent()).toBe(before.records);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.getByRole("tab", { name: "Robustness" })).toBeVisible();
+  await expect.poll(async () => page.locator(".robustness-label").first().evaluate((label) => {
+    const transform = label.getScreenCTM();
+    return Number.parseFloat(getComputedStyle(label).fontSize) * Math.abs(transform?.a || 0);
+  })).toBeGreaterThanOrEqual(10.5);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+  await page.locator(".results-panel").screenshot({ path: "tmp/app-robustness-mobile.png" });
+  expect(errors).toEqual([]);
+});
+
+test("robustness current marker honors row choices and pay-source checks ignore the pay-source filter", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  const eligibleRows = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked');
+  await expect(eligibleRows).not.toHaveCount(0);
+  const selectedRowId = await eligibleRows.first().locator("xpath=../..").getAttribute("data-id");
+  await page.locator(`tbody tr[data-id="${selectedRowId}"] .row-toggle`).uncheck();
+
+  await page.locator('[data-filter-menu="sourceType"] summary').click();
+  await page.locator('[data-filter-menu="sourceType"] .filter-options label').filter({ hasText: /^Job posting$/ }).locator("input").uncheck();
+  const currentRecordCount = Number(await page.locator("#stat-n").textContent());
+  await page.getByRole("tab", { name: "Robustness" }).click();
+  await page.getByRole("button", { name: "Run check" }).click();
+  await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
+  await expect(page.locator("#robustness-chart-description")).toContainText("based on " + currentRecordCount + " records");
+  const postingSourceRow = page.locator(".robustness-table tbody tr").filter({ hasText: "Job-posting midpoint" });
+  await expect(postingSourceRow.locator("td").nth(2)).not.toHaveText("—");
+  await expect(page.locator(".robustness-table tbody")).toContainText("Automatic (target eff. n 35)");
+  expect(errors).toEqual([]);
+});
+
+test("non-CEO robustness omits unsupported source and automatic-weight alternatives", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/coo-salary-benchmark/");
+  await page.getByRole("tab", { name: "Robustness" }).click();
+  await expect(page.locator('#robustness-weighting-option input')).toBeDisabled();
+  await expect(page.locator('#robustness-source-option input')).toBeDisabled();
+  await expect(page.locator('#robustness-posting-option input')).toBeDisabled();
+  await page.getByRole("button", { name: "Run check" }).click();
+  await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
+  const rows = page.locator(".robustness-table tbody tr");
+  await expect(rows).toHaveCount(17);
+  await expect(rows.filter({ hasText: /^Core/ })).toHaveCount(12);
+  await expect(rows.filter({ hasText: /^Pay measure/ })).toHaveCount(3);
+  await expect(rows.filter({ hasText: /^Dollar basis/ })).toHaveCount(2);
+  await expect(rows.filter({ hasText: /^Pay source|^Ad range/ })).toHaveCount(0);
+  expect(errors).toEqual([]);
+});

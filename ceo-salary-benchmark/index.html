@@ -253,31 +253,71 @@
         <div id="chart-legend" class="chart-legend" aria-label="Chart legend"></div>
       </section>
 
-      <section class="quantile-panel panel" aria-labelledby="quantile-title">
-        <div class="panel-heading inline-heading">
-          <div>
-            <h2 id="quantile-title">Quantiles <button class="info-tooltip" type="button" aria-label="About quantiles" data-tooltip="Quantiles divide the selected records into equal-sized groups. The 50th percentile is the median.">?</button></h2>
-            <p id="quantile-basis" class="quantile-basis">Estimated from the fitted lognormal curve</p>
-          </div>
-          <div class="quantile-controls">
-            <label class="mark-curve-toggle"><input id="mark-curve" type="checkbox" checked> Mark graph</label>
-            <label class="inline-select">
-              <span class="sr-only">Quantile levels</span>
-              <select id="quantile-granularity" aria-label="Quantile levels">
-              <option value="quintiles">Quintiles</option>
-              <option value="deciles">Deciles</option>
-              <option value="percentiles">Percentiles</option>
-              <option value="custom">Custom…</option>
-              </select>
-            </label>
-          </div>
+      <section class="quantile-panel results-panel panel" aria-labelledby="results-title">
+        <h2 id="results-title" class="sr-only">Results</h2>
+        <div class="results-tabs" role="tablist" aria-label="Result views">
+          <button id="results-tab-quantiles" type="button" role="tab" aria-selected="true" aria-controls="results-panel-quantiles" tabindex="0">Quantiles</button>
+          <button id="results-tab-compare" type="button" role="tab" aria-selected="false" aria-controls="results-panel-compare" tabindex="-1">Compare <span id="scenario-tab-count" aria-label="No saved scenarios">0</span></button>
+          <button id="results-tab-robustness" type="button" role="tab" aria-selected="false" aria-controls="results-panel-robustness" tabindex="-1">Robustness</button>
         </div>
-        <label id="custom-quantiles-field" class="custom-quantiles" hidden>
-          <span>Percentiles (0–100, comma-separated)</span>
-          <input id="custom-quantiles" type="text" value="5, 25, 50, 75, 95" inputmode="decimal">
-          <small id="custom-quantiles-error" role="alert"></small>
-        </label>
-        <div id="quantile-grid" class="quantile-grid"></div>
+
+        <section id="results-panel-quantiles" class="results-tab-panel" role="tabpanel" aria-labelledby="results-tab-quantiles">
+          <h2 class="sr-only">Quantiles</h2>
+          <div class="panel-heading inline-heading">
+            <p class="quantile-basis"><span id="quantile-basis">Estimated from the fitted lognormal curve</span> <button class="info-tooltip" type="button" aria-label="About quantiles" data-tooltip="Quantiles are salary cutoffs that divide the selected distribution into ordered shares. The 50th percentile is the median: half of the weighted distribution is below it and half is above it.">?</button></p>
+            <div class="quantile-controls">
+              <label class="mark-curve-toggle"><input id="mark-curve" type="checkbox" checked> Mark graph</label>
+              <label class="inline-select">
+                <span class="sr-only">Quantile levels</span>
+                <select id="quantile-granularity" aria-label="Quantile levels">
+                <option value="quintiles">Quintiles</option>
+                <option value="deciles">Deciles</option>
+                <option value="percentiles">Percentiles</option>
+                <option value="custom">Custom…</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <label id="custom-quantiles-field" class="custom-quantiles" hidden>
+            <span>Percentiles (0–100, comma-separated)</span>
+            <input id="custom-quantiles" type="text" value="5, 25, 50, 75, 95" inputmode="decimal">
+            <small id="custom-quantiles-error" role="alert"></small>
+          </label>
+          <div id="quantile-grid" class="quantile-grid"></div>
+        </section>
+
+        <section id="results-panel-compare" class="results-tab-panel" role="tabpanel" aria-labelledby="results-tab-compare" hidden>
+          <div class="scenario-toolbar">
+            <label>
+              <span>Scenario name</span>
+              <input id="scenario-name" type="text" maxlength="40" placeholder="Scenario 1">
+            </label>
+            <button id="scenario-save" class="result-action" type="button">Save current</button>
+            <span id="scenario-count">0 / 4 saved</span>
+          </div>
+          <p id="scenario-help" class="result-note">Save two to four analytical configurations to compare their assumptions and results. Scenarios are stored only in this browser.</p>
+          <p id="scenario-status" class="result-status" role="status" aria-live="polite"></p>
+          <div id="scenario-comparison" class="scenario-comparison"></div>
+        </section>
+
+        <section id="results-panel-robustness" class="results-tab-panel" role="tabpanel" aria-labelledby="results-tab-robustness" hidden>
+          <div class="robustness-toolbar">
+            <fieldset>
+              <legend>Vary</legend>
+              <label><input type="checkbox" name="robustness-dimension" value="distribution" checked> Distribution</label>
+              <label><input type="checkbox" name="robustness-dimension" value="sample" checked> Sample</label>
+              <label id="robustness-weighting-option"><input type="checkbox" name="robustness-dimension" value="weighting" checked> Weighting</label>
+              <label id="robustness-source-option"><input type="checkbox" name="robustness-dimension" value="source" checked> Pay source</label>
+              <label><input type="checkbox" name="robustness-dimension" value="measure" checked> Pay measure</label>
+              <label id="robustness-posting-option"><input type="checkbox" name="robustness-dimension" value="posting" checked> Ad range</label>
+              <label><input type="checkbox" name="robustness-dimension" value="dollars" checked> Dollar basis</label>
+            </fieldset>
+            <button id="robustness-run" class="result-action" type="button">Run check</button>
+          </div>
+          <p class="result-note">This check always evaluates pay for the selected position, even when the chart shows another quantity. The main range varies comparable model, sample, and weighting choices. Pay-source and dollar-basis checks are shown separately. These are sensitivity results, not confidence intervals.</p>
+          <p id="robustness-status" class="result-status" role="status" aria-live="polite">Run the check to compare the selected alternatives for the current position.</p>
+          <div id="robustness-results"></div>
+        </section>
       </section>
     </section>
 

@@ -219,6 +219,16 @@
     customQuantilesField: $("#custom-quantiles-field"), customQuantiles: $("#custom-quantiles"),
     customQuantilesError: $("#custom-quantiles-error"), chartLegend: $("#chart-legend"),
     quantileBasis: $("#quantile-basis"), sampleDescription: $("#sample-description"),
+    resultsTabs: [...document.querySelectorAll('[role="tab"][aria-controls^="results-panel-"]')],
+    resultsPanels: [...document.querySelectorAll('.results-tab-panel[role="tabpanel"]')],
+    scenarioTabCount: $("#scenario-tab-count"), scenarioName: $("#scenario-name"),
+    scenarioSave: $("#scenario-save"), scenarioCount: $("#scenario-count"),
+    scenarioStatus: $("#scenario-status"), scenarioComparison: $("#scenario-comparison"),
+    robustnessDimensions: [...document.querySelectorAll('input[name="robustness-dimension"]')],
+    robustnessWeightingOption: $("#robustness-weighting-option"), robustnessSourceOption: $("#robustness-source-option"),
+    robustnessPostingOption: $("#robustness-posting-option"),
+    robustnessRun: $("#robustness-run"), robustnessStatus: $("#robustness-status"),
+    robustnessResults: $("#robustness-results"),
     weightingDescription: $("#weighting-description"),
     salaryMin: $("#salary-range-min"), salaryMax: $("#salary-range-max"), salaryRangeValue: $("#salary-range-value"),
     salaryFilterSummary: $("#salary-filter-summary"), salaryFilterStatus: $("#salary-filter-status"),
@@ -302,9 +312,9 @@
     structure: "Suggested values give more influence to independent, board-accountable nonprofits and less to affiliates, sponsored projects, unclear organizations, or subordinate roles.",
   };
 
-  function defaultDiscreteWeight(key, value) {
+  function defaultDiscreteWeight(key, value, positionKey = state.position) {
     const normalized = String(value || "").toLowerCase();
-    if (key === "titleGroup" && !isCeoPosition()) return 1;
+    if (key === "titleGroup" && positionKey !== "ceo") return 1;
     if (key === "tier") {
       if (normalized === "a" || normalized.includes("strict_primary") || normalized.includes("strict-primary")) return 1;
       if (normalized.includes("expanded_primary")) return 0.85;
@@ -829,7 +839,7 @@
     };
   }
 
-  function scaleSimilarityCalibration(candidateRows) {
+  function scaleSimilarityCalibration(candidateRows, requestedTargetEss = state.autoTargetEss) {
     if (!candidateRows.length) throw new Error("Auto-weight calibration received an empty Form 990 sample.");
     if (candidateRows.length === 1) return uniformScaleCalibration(candidateRows, "uniform_small_sample");
     const logExpenses = candidateRows.map((row) => row.expenses > 0 ? Math.log(row.expenses) : NaN);
@@ -859,7 +869,7 @@
         + Number(expenseMissing) + Number(staffMissing);
       return { row, distance: Math.sqrt(d2) };
     });
-    const targetEss = Math.min(state.autoTargetEss, distances.length);
+    const targetEss = Math.min(requestedTargetEss, distances.length);
     const distanceMap = new Map(distances.map(({ row, distance }) => [row.id, distance]));
     if (targetEss === distances.length) {
       return uniformScaleCalibration(candidateRows, "uniform_target_exceeds_sample", distanceMap);
@@ -947,11 +957,11 @@
     };
   }
 
-  function autoWeightCalibrations(candidateRows) {
+  function autoWeightCalibrations(candidateRows, targetEss = state.autoTargetEss) {
     const incumbents = candidateRows.filter((row) => rowStream(row) === "incumbents");
     const jobAds = candidateRows.filter((row) => rowStream(row) === "jobAds");
     const calibrations = new Map();
-    if (incumbents.length) calibrations.set("incumbents", scaleSimilarityCalibration(incumbents));
+    if (incumbents.length) calibrations.set("incumbents", scaleSimilarityCalibration(incumbents, targetEss));
     if (jobAds.length) calibrations.set("jobAds", postingMatchCalibration(jobAds));
     return calibrations;
   }
@@ -1259,10 +1269,10 @@
     return 1 - Math.exp(-x + shape * Math.log(x) - logGamma(shape)) * h;
   }
 
-  function fitModel(items) {
+  function fitModel(items, fit = state.fit) {
     if (items.length < 2) return null;
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
-    if (state.fit === "lognormal") {
+    if (fit === "lognormal") {
       const mu = items.reduce((sum, item) => sum + Math.log(item.value) * item.weight, 0) / totalWeight;
       const variance = items.reduce((sum, item) => sum + (Math.log(item.value) - mu) ** 2 * item.weight, 0) / totalWeight;
       const sigma = Math.sqrt(Math.max(variance, 1e-9));
@@ -1272,7 +1282,7 @@
         cdf: (x) => x <= 0 ? 0 : normalCdf((Math.log(x) - mu) / sigma),
       };
     }
-    if (state.fit === "gamma") {
+    if (fit === "gamma") {
       const mean = weightedMean(items);
       const variance = items.reduce((sum, item) => sum + (item.value - mean) ** 2 * item.weight, 0) / totalWeight;
       const varianceFloor = Math.max(mean ** 2 * 1e-9, Number.EPSILON);
@@ -1297,8 +1307,8 @@
     return null;
   }
 
-  function distributionQuantile(items, p) {
-    const model = fitModel(items);
+  function distributionQuantile(items, p, fit = state.fit) {
+    const model = fitModel(items, fit);
     return model ? model.quantile(p) : weightedQuantile(items, p);
   }
 
@@ -3316,6 +3326,14 @@
   const shareRowCodes = new Map();
   let urlSyncReady = false;
   let urlSyncFrame = 0;
+  const SCENARIO_STORAGE_KEY = "rp-salary-benchmark.scenarios.v1";
+  const MAX_SCENARIOS = 4;
+  let savedScenarios = [];
+  let activeScenarioId = "";
+  let activeResultsTab = "quantiles";
+  let robustnessReport = null;
+  let robustnessResultWidth = 0;
+  let robustnessResizeFrame = 0;
 
   function shareRowCode(row) {
     let hash = 0x811c9dc5;
@@ -3350,13 +3368,19 @@
 
   function sharePayload() {
     const filterState = {};
-    Object.entries(state.filters).forEach(([key, values]) => { if (values != null) filterState[URL_FILTER_CODES[key]] = [...values]; });
-    const discreteOverrides = {};
-    Object.entries(state.discreteWeights).forEach(([key, values]) => {
-      if (!state.weightings.has(key)) return;
-      const overrides = Object.fromEntries(Object.entries(values).filter(([category, value]) => value !== defaultDiscreteWeight(key, category)));
-      if (Object.keys(overrides).length) discreteOverrides[URL_WEIGHT_CODES[key]] = overrides;
+    Object.entries(state.filters).forEach(([key, values]) => {
+      if (values != null) filterState[URL_FILTER_CODES[key]] = [...values].map(String).sort((a, b) => a.localeCompare(b));
     });
+    const discreteOverrides = {};
+    Object.entries(state.discreteWeights)
+      .sort(([a], [b]) => String(URL_WEIGHT_CODES[a]).localeCompare(String(URL_WEIGHT_CODES[b])))
+      .forEach(([key, values]) => {
+      if (!state.weightings.has(key)) return;
+      const overrides = Object.fromEntries(Object.entries(values)
+        .filter(([category, value]) => value !== defaultDiscreteWeight(key, category))
+        .sort(([a], [b]) => a.localeCompare(b)));
+      if (Object.keys(overrides).length) discreteOverrides[URL_WEIGHT_CODES[key]] = overrides;
+      });
     const inclusionOverrides = rows().reduce((result, row) => {
       const current = Boolean(rowInclusion(row).get(row.id));
       if (current !== presetSelected(row)) result.push([shareRowCode(row), current ? 1 : 0]);
@@ -3397,7 +3421,8 @@
       else payload.h = expressionCode(quantileExpression);
     }
     if (state.view === "scatter" && (quantileMode === "ratio" || nondefaultQuantileExpression)) payload.l = 1;
-    if (state.weightings.size) payload.w = [...state.weightings].map((key) => URL_WEIGHT_CODES[key]).join("");
+    if (state.weightings.size) payload.w = [...state.weightings]
+      .map((key) => URL_WEIGHT_CODES[key]).sort((a, b) => a.localeCompare(b)).join("");
     if (Object.keys(parameters).length) payload.x = parameters;
     if (state.quantileGranularity !== "quintiles") payload.q = URL_QUANTILE_CODES[state.quantileGranularity];
     if (state.quantileGranularity === "custom") payload.z = state.customQuantiles;
@@ -3407,6 +3432,1168 @@
     if (inclusionOverrides.length) payload.i = inclusionOverrides;
     if (customOverrides.length) payload.c = customOverrides;
     return payload;
+  }
+
+  function analyticalFingerprint() {
+    return state.position + "|" + encodeUrlState(sharePayload());
+  }
+
+  function resultElement(name, className = "", textContent = "") {
+    const element = document.createElement(name);
+    if (className) element.className = className;
+    if (textContent !== "") element.textContent = textContent;
+    return element;
+  }
+
+  function resultsTabKey(tab) {
+    return tab.id.replace("results-tab-", "");
+  }
+
+  function activateResultsTab(key, { focus = false } = {}) {
+    if (!["quantiles", "compare", "robustness"].includes(key)) return;
+    activeResultsTab = key;
+    refs.resultsTabs.forEach((tab) => {
+      const active = resultsTabKey(tab) === key;
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (active && focus) tab.focus();
+    });
+    refs.resultsPanels.forEach((panel) => {
+      panel.hidden = panel.id !== "results-panel-" + key;
+    });
+    if (key === "compare") renderScenarioComparison();
+    if (key === "robustness") updateRobustnessAvailability();
+  }
+
+  function resultsTabKeyFromKeyboard(event) {
+    const current = refs.resultsTabs.indexOf(event.currentTarget);
+    if (event.key === "Home") return resultsTabKey(refs.resultsTabs[0]);
+    if (event.key === "End") return resultsTabKey(refs.resultsTabs.at(-1));
+    if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return "";
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    return resultsTabKey(refs.resultsTabs[(current + direction + refs.resultsTabs.length) % refs.resultsTabs.length]);
+  }
+
+  function scenarioFormatKind(axisKey) {
+    const descriptor = axisDescriptor(axisKey);
+    if (descriptor.mode === "ratio") return "number";
+    const variableKey = axisExpression(axisKey).numerator;
+    return ["salary", "expenses", "revenue"].includes(variableKey) || variableKey.startsWith("position:")
+      ? "money" : "number";
+  }
+
+  function scenarioFormatValue(value, kind) {
+    return kind === "money" ? compactMoney(value) : compactNumber(value);
+  }
+
+  function scenarioDelta(value, baseline, kind) {
+    if (!Number.isFinite(value) || !Number.isFinite(baseline)) return "";
+    const difference = value - baseline;
+    if (Math.abs(difference) < 1e-12) return "No change";
+    const sign = difference > 0 ? "+" : "−";
+    return sign + scenarioFormatValue(Math.abs(difference), kind);
+  }
+
+  function scenarioWeightLabel() {
+    if (!state.weightings.size) return "Equal base weights";
+    if (state.weightings.has("comparability")) {
+      return state.weightings.has("streamBalanced") ? "Automatic + 50/50 sources" : "Automatic";
+    }
+    return [...state.weightings].map((key) => WEIGHT_LABELS[key] || humanizeCategory(key)).join(" × ");
+  }
+
+  function scenarioFilterLabel() {
+    const categorical = Object.values(state.filters).filter((values) => values != null).length;
+    const numeric = Object.values(state.ranges).filter((range) => (
+      range && (range.low > range.min || range.high < range.max)
+    )).length;
+    if (!categorical && !numeric) return "None";
+    return [categorical ? categorical + " column" + (categorical === 1 ? "" : "s") : "", numeric ? numeric + " range" + (numeric === 1 ? "" : "s") : ""]
+      .filter(Boolean).join(" + ");
+  }
+
+  function scenarioWeightParameterLabel() {
+    const values = [];
+    if (state.weightings.has("comparability")) values.push("Target eff. n " + state.autoTargetEss);
+    if (state.weightings.has("size")) values.push("Expenses " + compactMoney(state.targetExpense) + ", bw " + state.expenseBandwidth.toFixed(2));
+    if (state.weightings.has("staff")) values.push("Staff " + compactNumber(state.targetStaff) + ", bw " + state.staffBandwidth.toFixed(2));
+    if (state.weightings.has("recency")) values.push("Half-life " + state.recencyHalfLife.toFixed(1) + " years");
+    return values.length ? values.join("; ") : "Defaults";
+  }
+
+  function scenarioRpSummary(items, descriptor, formatKind) {
+    const references = activeRpReferences().map((row) => descriptor.value(row)).filter((value) => Number.isFinite(value) && value > 0);
+    if (references.length !== 1 || !items.length) return { value: NaN, formatted: "Unavailable", percentile: NaN };
+    const value = references[0];
+    const model = fitModel(items);
+    const empirical = weightedPercentilePosition(items, value, (item) => item.value).percentile;
+    const percentile = model?.cdf ? model.cdf(value) * 100 : empirical;
+    return {
+      value,
+      formatted: scenarioFormatValue(value, formatKind),
+      percentile: Number.isFinite(percentile) ? clamp(percentile, 0, 100) : NaN,
+    };
+  }
+
+  function scenarioSummary() {
+    const items = analysisItems();
+    const axisKey = analysisAxisKey();
+    const descriptor = axisDescriptor(axisKey);
+    const formatKind = scenarioFormatKind(axisKey);
+    const values = [0.25, 0.5, 0.75].map((probability) => distributionQuantile(items, probability));
+    const expression = axisExpression(axisKey);
+    const expressionVariables = [expression.numerator, axisMode(axisKey) === "ratio" ? expression.denominator : ""];
+    const usesPay = expressionVariables.some((key) => key === "salary" || key.startsWith("position:"));
+    const payDefinition = usesPay ? state.stream + ":" + (state.stream === "incumbents" ? state.measure : "base") : "";
+    const organizationCount = new Set(items.map((item) => String(item.row.organization || item.row.id))).size;
+    const sourceLabel = {
+      incumbents: "Form 990s", jobAds: "Job postings", combined: "All sources",
+    }[state.stream];
+    const measureLabel = state.stream === "incumbents"
+      ? { base: "Schedule J base", cash: "Part VII cash", total: "Total reported pay" }[state.measure]
+      : state.stream === "jobAds" ? "Advertised midpoint" : "Base pay + advertised midpoint";
+    const payload = sharePayload();
+    const discreteEditCount = Object.values(payload.d || {}).reduce((total, values) => total + Object.keys(values).length, 0);
+    const rowWeightEditCount = payload.c?.length || 0;
+    const rp = scenarioRpSummary(items, descriptor, formatKind);
+    const summary = {
+      axisSignature: [
+        state.position, axisMode(axisKey), expression.numerator,
+        axisMode(axisKey) === "ratio" ? expression.denominator : "", payDefinition,
+        state.inflationAdjusted ? "adjusted" : "nominal",
+      ].join("|"),
+      axisLabel: descriptor.shortLabel,
+      formatKind,
+      position: positionDefinition().label,
+      source: sourceLabel,
+      measure: measureLabel,
+      basis: state.inflationAdjusted ? "July 2026 USD" : "Original USD",
+      sample: {
+        primary: "Recommended peers", sensitivity: "Recommended + broader",
+        clean: "Similar organization types", tierA: "Closest peers only", observed: "All usable salaries",
+      }[state.sample],
+      distribution: { empirical: "Empirical", lognormal: "Lognormal", gamma: "Gamma" }[state.fit],
+      weighting: scenarioWeightLabel(),
+      filters: scenarioFilterLabel(),
+      peerOverrides: (payload.i?.length || 0) + " row" + ((payload.i?.length || 0) === 1 ? "" : "s"),
+      weightEdits: (rowWeightEditCount + discreteEditCount) + " edit" + ((rowWeightEditCount + discreteEditCount) === 1 ? "" : "s"),
+      weightParameters: scenarioWeightParameterLabel(),
+      records: items.length,
+      organizations: organizationCount,
+      effectiveN: effectiveSampleSize(items.map((item) => item.weight)),
+      rpValue: rp.value,
+      rpPercentile: rp.percentile,
+      p25: values[0], p50: values[1], p75: values[2],
+    };
+    summary.formatted = {
+      p25: scenarioFormatValue(summary.p25, formatKind),
+      p50: scenarioFormatValue(summary.p50, formatKind),
+      p75: scenarioFormatValue(summary.p75, formatKind),
+      rpValue: rp.formatted,
+    };
+    return summary;
+  }
+
+  function validStoredScenario(value) {
+    const structurallyValid = value && typeof value.id === "string" && typeof value.name === "string"
+      && typeof value.position === "string" && POSITION_BY_KEY.has(value.position)
+      && typeof value.encodedState === "string" && value.summary && typeof value.summary === "object"
+      && [value.summary.p25, value.summary.p50, value.summary.p75, value.summary.effectiveN]
+        .every((number) => Number.isFinite(Number(number)))
+      && value.summary.formatted && typeof value.summary.formatted === "object";
+    if (!structurallyValid) return false;
+    try {
+      return decodeUrlState(value.encodedState)?.v === URL_STATE_VERSION;
+    } catch {
+      return false;
+    }
+  }
+
+  function loadSavedScenarios() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(SCENARIO_STORAGE_KEY) || "{\"version\":1,\"scenarios\":[]}");
+      if (stored?.version !== 1 || !Array.isArray(stored.scenarios)) throw new Error("Unsupported scenario workspace.");
+      savedScenarios = stored.scenarios.filter(validStoredScenario).slice(0, MAX_SCENARIOS);
+      const skipped = stored.scenarios.length - savedScenarios.length;
+      if (skipped > 0) refs.scenarioStatus.textContent = skipped + " invalid saved scenario" + (skipped === 1 ? " was" : "s were") + " skipped.";
+    } catch (error) {
+      savedScenarios = [];
+      refs.scenarioStatus.textContent = "Saved scenarios could not be read; this tab will use a temporary workspace.";
+      console.warn("Unable to read saved benchmark scenarios", error);
+    }
+  }
+
+  function persistSavedScenarios() {
+    try {
+      localStorage.setItem(SCENARIO_STORAGE_KEY, JSON.stringify({ version: 1, scenarios: savedScenarios }));
+      return true;
+    } catch (error) {
+      refs.scenarioStatus.textContent = "Browser storage is unavailable; scenarios will last only until this page closes.";
+      console.warn("Unable to save benchmark scenarios", error);
+      return false;
+    }
+  }
+
+  function nextScenarioName() {
+    let index = 1;
+    const names = new Set(savedScenarios.map((scenario) => scenario.name));
+    while (names.has("Scenario " + index)) index += 1;
+    return "Scenario " + index;
+  }
+
+  function saveCurrentScenario() {
+    if (savedScenarios.length >= MAX_SCENARIOS) {
+      refs.scenarioStatus.textContent = "Four scenarios are already saved. Update or remove one before adding another.";
+      return;
+    }
+    const encodedState = encodeUrlState(sharePayload());
+    const position = state.position;
+    if (savedScenarios.some((scenario) => scenario.position === position && scenario.encodedState === encodedState)) {
+      refs.scenarioStatus.textContent = "This exact analytical scenario is already saved.";
+      return;
+    }
+    const name = refs.scenarioName.value.trim().slice(0, 40) || nextScenarioName();
+    const timestamp = new Date().toISOString();
+    const scenario = {
+      id: globalThis.crypto?.randomUUID?.() || String(Date.now()) + "-" + Math.random().toString(36).slice(2),
+      name, position, encodedState, createdAt: timestamp, updatedAt: timestamp,
+      dataGeneratedAt: DATA.generatedAt || DATA.generated || "",
+      summary: scenarioSummary(),
+    };
+    savedScenarios.push(scenario);
+    activeScenarioId = scenario.id;
+    persistSavedScenarios();
+    refs.scenarioName.value = "";
+    refs.scenarioStatus.textContent = name + " saved.";
+    renderScenarioComparison();
+  }
+
+  function updateSavedScenario(id) {
+    const scenario = savedScenarios.find((candidate) => candidate.id === id);
+    if (!scenario) return;
+    if (scenario.position !== state.position && !window.confirm("Update " + scenario.name + " with the current " + positionDefinition().label + " analysis?")) return;
+    scenario.position = state.position;
+    scenario.encodedState = encodeUrlState(sharePayload());
+    scenario.updatedAt = new Date().toISOString();
+    scenario.dataGeneratedAt = DATA.generatedAt || DATA.generated || "";
+    scenario.summary = scenarioSummary();
+    activeScenarioId = scenario.id;
+    persistSavedScenarios();
+    refs.scenarioStatus.textContent = scenario.name + " updated.";
+    renderScenarioComparison();
+  }
+
+  function renameSavedScenario(id, name) {
+    const scenario = savedScenarios.find((candidate) => candidate.id === id);
+    if (!scenario) return;
+    scenario.name = String(name || "").trim().slice(0, 40) || "Untitled scenario";
+    scenario.updatedAt = new Date().toISOString();
+    persistSavedScenarios();
+    refs.scenarioStatus.textContent = "Scenario renamed to " + scenario.name + ".";
+    renderScenarioComparison();
+  }
+
+  function removeSavedScenario(id) {
+    const scenario = savedScenarios.find((candidate) => candidate.id === id);
+    if (!scenario) return;
+    if (!window.confirm("Remove the saved scenario “" + scenario.name + "”?")) return;
+    savedScenarios = savedScenarios.filter((candidate) => candidate.id !== id);
+    if (activeScenarioId === id) activeScenarioId = "";
+    persistSavedScenarios();
+    refs.scenarioStatus.textContent = scenario.name + " removed.";
+    renderScenarioComparison();
+  }
+
+  function savedScenarioUrl(scenario) {
+    const url = new URL(window.location.href);
+    if (USE_SEMANTIC_POSITION_ROUTES) {
+      url.pathname = positionRoutePath(scenario.position);
+      url.searchParams.delete("position");
+    } else {
+      url.pathname = STANDALONE_ROUTE_PATH;
+      if (scenario.position === "ceo") url.searchParams.delete("position");
+      else url.searchParams.set("position", scenario.position);
+    }
+    const payload = decodeUrlState(scenario.encodedState);
+    if (Object.keys(payload).length === 1) url.searchParams.delete("s");
+    else url.searchParams.set("s", scenario.encodedState);
+    return url.href;
+  }
+
+  async function copySavedScenarioLink(id) {
+    const scenario = savedScenarios.find((candidate) => candidate.id === id);
+    if (!scenario) return;
+    try {
+      await navigator.clipboard.writeText(savedScenarioUrl(scenario));
+      refs.scenarioStatus.textContent = scenario.name + " link copied.";
+    } catch (error) {
+      refs.scenarioStatus.textContent = "The scenario link could not be copied in this browser.";
+      console.warn("Unable to copy saved scenario link", error);
+    }
+  }
+
+  function presentationState() {
+    return {
+      view: state.view, bins: state.bins, autoBins: state.autoBins, chartColor: state.chartColor,
+      axisScales: { ...state.axisScales }, showContours: state.showContours,
+      markCurve: state.markCurve, sortKey: state.sortKey, sortDirection: state.sortDirection,
+      scatterXAxis: { ...state.scatterXAxis }, scatterXMode: state.axisModes.scatterX,
+    };
+  }
+
+  function restorePresentationState(presentation) {
+    state.view = presentation.view;
+    state.bins = presentation.bins;
+    state.autoBins = presentation.autoBins;
+    state.chartColor = presentation.chartColor;
+    state.axisScales = { ...presentation.axisScales };
+    state.showContours = presentation.showContours;
+    state.markCurve = presentation.markCurve;
+    state.sortKey = presentation.sortKey;
+    state.sortDirection = presentation.sortDirection;
+    state.scatterXAxis = { ...presentation.scatterXAxis };
+    state.axisModes.scatterX = presentation.scatterXMode;
+  }
+
+  function applySavedScenario(id) {
+    const scenario = savedScenarios.find((candidate) => candidate.id === id);
+    if (!scenario) return;
+    let nextPayload;
+    try {
+      nextPayload = decodeUrlState(scenario.encodedState);
+      if (nextPayload?.v !== URL_STATE_VERSION) throw new Error("Unsupported saved-state version.");
+    } catch (error) {
+      refs.scenarioStatus.textContent = scenario.name + " could not be read and was not applied.";
+      console.warn("Unable to decode saved benchmark scenario", error);
+      return;
+    }
+    const presentation = presentationState();
+    const previousPayload = sharePayload();
+    const previousPosition = state.position;
+    const previousActiveScenarioId = activeScenarioId;
+    const resumeUrlSync = urlSyncReady;
+    urlSyncReady = false;
+    try {
+      reset();
+      restoreUrlState(nextPayload, scenario.position);
+      const restoredView = state.view;
+      const restoredAxisSignature = scenarioSummary().axisSignature;
+      restorePresentationState(presentation);
+      if (scenarioSummary().axisSignature !== restoredAxisSignature) state.view = restoredView;
+      state.focusedId = "";
+      state.hoverQuantile = null;
+      buildFilterMenus();
+      renderWeightControls();
+      syncControlsFromState();
+      scenario.encodedState = encodeUrlState(sharePayload());
+      scenario.summary = scenarioSummary();
+      scenario.dataGeneratedAt = DATA.generatedAt || DATA.generated || "";
+      scenario.updatedAt = new Date().toISOString();
+      activeScenarioId = scenario.id;
+      persistSavedScenarios();
+      renderAll();
+      refs.scenarioStatus.textContent = scenario.name + " applied.";
+    } catch (error) {
+      try {
+        reset();
+        restoreUrlState(previousPayload, previousPosition);
+        restorePresentationState(presentation);
+        activeScenarioId = previousActiveScenarioId;
+        buildFilterMenus();
+        renderWeightControls();
+        syncControlsFromState();
+        renderAll();
+      } catch (rollbackError) {
+        console.error("Unable to restore the analysis after a failed scenario apply", rollbackError);
+      }
+      refs.scenarioStatus.textContent = scenario.name + " could not be applied; the prior analysis was restored.";
+      console.warn("Unable to apply saved benchmark scenario", error);
+    } finally {
+      urlSyncReady = resumeUrlSync;
+      if (urlSyncReady) writeUrlState();
+    }
+  }
+
+  function scenarioMetricCell(scenario, metric, baseline, { scenarioHeaderId = "", metricHeaderId = "", stale = false, baselineStale = false } = {}) {
+    const cell = document.createElement("td");
+    if (scenarioHeaderId && metricHeaderId) cell.setAttribute("headers", metricHeaderId + " " + scenarioHeaderId);
+    const value = scenario.summary[metric.key];
+    if (stale && metric.dataDependent) {
+      cell.textContent = "Refresh needed";
+      cell.classList.add("scenario-stale-cell");
+      return cell;
+    }
+    if (metric.numeric) {
+      const main = resultElement("span", "scenario-metric-value", metric.format(scenario.summary, value));
+      cell.append(main);
+      if (baseline && !baselineStale && scenario.summary.axisSignature === baseline.summary.axisSignature) {
+        const delta = scenarioDelta(value, baseline.summary[metric.key], metric.deltaKind || scenario.summary.formatKind);
+        if (delta) cell.append(resultElement("small", "scenario-delta", delta + " vs " + baseline.name));
+      } else if (baseline) {
+        cell.append(resultElement("small", "scenario-delta", baselineStale ? "Baseline needs refresh" : "Different quantity or pay definition"));
+      }
+    } else {
+      cell.textContent = String(value ?? "—");
+      if (baseline && value !== baseline.summary[metric.key]) cell.classList.add("scenario-assumption-different");
+    }
+    return cell;
+  }
+
+  function renderScenarioComparison() {
+    const count = savedScenarios.length;
+    refs.scenarioTabCount.textContent = count;
+    refs.scenarioTabCount.setAttribute("aria-label", count + " saved scenario" + (count === 1 ? "" : "s"));
+    refs.scenarioCount.textContent = count + " / " + MAX_SCENARIOS + " saved";
+    refs.scenarioSave.disabled = count >= MAX_SCENARIOS;
+    refs.scenarioName.placeholder = nextScenarioName();
+    refs.scenarioComparison.replaceChildren();
+    if (!count) {
+      refs.scenarioComparison.append(resultElement("p", "scenario-empty", "No scenarios saved yet."));
+      return;
+    }
+    const wrapper = resultElement("div", "scenario-table-wrap");
+    const table = resultElement("table", "scenario-table");
+    const caption = resultElement("caption", "sr-only", "Saved analytical scenario comparison");
+    table.append(caption);
+    const thead = document.createElement("thead");
+    const header = document.createElement("tr");
+    const metricHeading = document.createElement("th");
+    metricHeading.scope = "col";
+    metricHeading.id = "scenario-metric-heading";
+    metricHeading.textContent = "Metric";
+    header.append(metricHeading);
+    const currentDataVersion = DATA.generatedAt || DATA.generated || "";
+    const scenarioHeaderIds = new Map();
+    savedScenarios.forEach((scenario, scenarioIndex) => {
+      const heading = document.createElement("th");
+      heading.scope = "col";
+      heading.id = "scenario-column-" + scenarioIndex;
+      scenarioHeaderIds.set(scenario.id, heading.id);
+      const accessibleName = resultElement("span", "sr-only", scenario.name);
+      accessibleName.id = heading.id + "-name";
+      heading.append(accessibleName);
+      const name = resultElement("input", "scenario-name-input");
+      name.type = "text";
+      name.maxLength = 40;
+      name.value = scenario.name;
+      name.setAttribute("aria-label", "Rename " + scenario.name);
+      name.dataset.scenarioName = scenario.id;
+      heading.append(name);
+      const actions = resultElement("div", "scenario-column-actions");
+      const current = scenario.position === state.position && scenario.encodedState === encodeUrlState(sharePayload());
+      [["apply", "Apply"], ["update", "Update with current"], ["copy", "Copy link"], ["remove", "Remove"]].forEach(([action, label]) => {
+        const button = resultElement("button", "", label);
+        button.type = "button";
+        button.setAttribute("aria-label", label + " " + scenario.name);
+        button.dataset.scenarioAction = action;
+        button.dataset.scenarioId = scenario.id;
+        if (action === "update" && current) button.disabled = true;
+        actions.append(button);
+      });
+      heading.append(actions);
+      if (current) heading.append(resultElement("small", "scenario-delta", "Current analysis"));
+      else if (activeScenarioId === scenario.id) heading.append(resultElement("small", "scenario-delta", "Edited from this scenario"));
+      if (scenarioIndex === 0) heading.append(resultElement("small", "scenario-delta", "Baseline"));
+      const savedDataVersion = scenario.dataGeneratedAt;
+      if (savedDataVersion && currentDataVersion && savedDataVersion !== currentDataVersion) {
+        heading.append(resultElement("small", "scenario-stale", "Saved under an older data version"));
+      }
+      header.append(heading);
+    });
+    thead.append(header);
+    table.append(thead);
+    const tbody = document.createElement("tbody");
+    const metrics = [
+      { key: "p25", label: "25th percentile", numeric: true, dataDependent: true, format: (summary) => summary.formatted.p25 },
+      { key: "p50", label: "Median", numeric: true, dataDependent: true, format: (summary) => summary.formatted.p50 },
+      { key: "p75", label: "75th percentile", numeric: true, dataDependent: true, format: (summary) => summary.formatted.p75 },
+      { key: "rpValue", label: "RP reference", numeric: true, dataDependent: true, format: (summary) => summary.formatted.rpValue || "Unavailable" },
+      { key: "rpPercentile", label: "RP percentile", numeric: true, dataDependent: true, deltaKind: "number", format: (_summary, value) => Number.isFinite(value) ? "P" + value.toFixed(1) : "Unavailable" },
+      { key: "records", label: "Records", numeric: false, dataDependent: true },
+      { key: "organizations", label: "Organizations", numeric: false, dataDependent: true },
+      { key: "effectiveN", label: "Effective n", numeric: false, dataDependent: true },
+      { key: "axisLabel", label: "Outcome", numeric: false },
+      { key: "position", label: "Position", numeric: false },
+      { key: "sample", label: "Sample", numeric: false },
+      { key: "source", label: "Pay source", numeric: false },
+      { key: "measure", label: "Pay measure", numeric: false },
+      { key: "distribution", label: "Distribution", numeric: false },
+      { key: "weighting", label: "Weighting", numeric: false },
+      { key: "weightParameters", label: "Weight parameters", numeric: false },
+      { key: "filters", label: "Filters", numeric: false },
+      { key: "peerOverrides", label: "Peer overrides", numeric: false },
+      { key: "weightEdits", label: "Weight edits", numeric: false },
+      { key: "basis", label: "Dollar basis", numeric: false },
+    ];
+    metrics.forEach((metric, metricIndex) => {
+      const row = document.createElement("tr");
+      const heading = document.createElement("th");
+      heading.scope = "row";
+      heading.id = "scenario-metric-" + metricIndex;
+      heading.textContent = metric.label;
+      row.append(heading);
+      savedScenarios.forEach((scenario, scenarioIndex) => {
+        const scenarioHeaderId = scenarioHeaderIds.get(scenario.id);
+        const stale = Boolean(scenario.dataGeneratedAt && currentDataVersion && scenario.dataGeneratedAt !== currentDataVersion);
+        const baseline = scenarioIndex === 0 ? null : savedScenarios[0];
+        const baselineStale = Boolean(baseline?.dataGeneratedAt && currentDataVersion && baseline.dataGeneratedAt !== currentDataVersion);
+        if (metric.key === "effectiveN" && !stale) {
+          const cell = document.createElement("td");
+          cell.setAttribute("headers", heading.id + " " + scenarioHeaderId);
+          cell.textContent = Number(scenario.summary.effectiveN || 0).toFixed(1);
+          row.append(cell);
+        } else row.append(scenarioMetricCell(scenario, metric, baseline, {
+          scenarioHeaderId, metricHeaderId: heading.id, stale, baselineStale,
+        }));
+      });
+      tbody.append(row);
+    });
+    table.append(tbody);
+    wrapper.append(table);
+    refs.scenarioComparison.append(wrapper);
+  }
+
+  function robustnessFiltersSnapshot() {
+    return Object.fromEntries(Object.entries(state.filters).map(([key, values]) => [
+      key, values == null ? null : new Set(values),
+    ]));
+  }
+
+  function robustnessRangesSnapshot() {
+    return Object.fromEntries(Object.entries(state.ranges).map(([key, range]) => [key, { ...range }]));
+  }
+
+  function currentRobustnessSpec() {
+    const positionRows = [...positionIncumbents(state.position), ...positionJobAds(state.position)];
+    return {
+      position: state.position,
+      stream: state.stream,
+      measure: state.measure,
+      inflationAdjusted: state.inflationAdjusted,
+      sample: state.sample,
+      fit: state.fit,
+      weightMode: "current",
+      membershipMode: "exact",
+      selectedIds: new Set(positionRows.filter((row) => rowInclusion(row).get(row.id)).map((row) => row.id)),
+      postingPoint: "midpoint",
+      skipFilters: false,
+      streamBalanced: state.weightings.has("streamBalanced"),
+      autoTargetEss: state.autoTargetEss,
+      weightings: new Set(state.weightings),
+      targetExpense: state.targetExpense,
+      targetStaff: state.targetStaff,
+      expenseBandwidth: state.expenseBandwidth,
+      staffBandwidth: state.staffBandwidth,
+      recencyHalfLife: state.recencyHalfLife,
+      discreteWeights: structuredClone(state.discreteWeights),
+      customWeights: new Map(positionRows.map((row) => [row.id, rowCustomWeights(row).get(row.id) ?? 1])),
+      filters: robustnessFiltersSnapshot(),
+      ranges: robustnessRangesSnapshot(),
+    };
+  }
+
+  function robustnessRowsForSpec(spec) {
+    const incumbents = positionIncumbents(spec.position);
+    const jobAds = positionJobAds(spec.position);
+    if (spec.stream === "incumbents") return incumbents;
+    if (spec.stream === "jobAds") return jobAds;
+    if (spec.stream === "combined") return [...incumbents, ...jobAds];
+    throw new Error("Unsupported robustness pay source.");
+  }
+
+  function robustnessSalary(row, spec) {
+    if (rowStream(row) === "jobAds" && spec.postingPoint && spec.postingPoint !== "midpoint") {
+      const range = spec.inflationAdjusted ? row.range : row.nominalRange;
+      const value = range?.[spec.postingPoint];
+      return Number.isFinite(value) && value > 0 ? value : null;
+    }
+    const values = spec.inflationAdjusted ? row.salary : row.nominalSalary;
+    const measure = rowStream(row) === "jobAds" || spec.stream === "combined" ? "base" : spec.measure;
+    const value = values?.[measure];
+    return Number.isFinite(value) && value > 0 ? value : null;
+  }
+
+  function robustnessPresetSelected(row, spec) {
+    const available = robustnessSalary(row, spec) != null;
+    if (spec.membershipMode === "exact" || spec.membershipMode === "cohort") {
+      return Boolean(available && spec.selectedIds?.has(row.id));
+    }
+    if (spec.sample === "sensitivity") return Boolean(available && (
+      row.defaultIncluded || ["sensitivity_only", "structural_sensitivity"].includes(row.analysisStatus)
+    ));
+    if (spec.sample === "clean") return Boolean(row.defaultIncluded && row.structurallyClean && available);
+    if (spec.sample === "tierA") return Boolean(row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary"));
+    if (spec.sample === "observed") return available;
+    if (spec.sample !== "primary") throw new Error("Unsupported robustness sample.");
+    return Boolean(row.defaultIncluded && available);
+  }
+
+  function robustnessPassesFilters(row, spec) {
+    if (spec.skipFilters) return true;
+    const categorical = Object.entries(spec.filters).every(([key, selected]) => {
+      if (selected == null) return true;
+      return selected.has(String(row[key] || "Not reported"));
+    });
+    if (!categorical) return false;
+    return ["salary", "expenses", "matchScore"].every((key) => {
+      const range = spec.ranges[key];
+      if (!range || range.min == null || range.max == null) return true;
+      const restricted = range.low > range.min || range.high < range.max;
+      const value = key === "salary" ? robustnessSalary(row, spec)
+        : key === "expenses" ? row.expenses : row.comparabilityScore;
+      if (value == null) return !restricted;
+      return value >= range.low && value <= range.high;
+    });
+  }
+
+  function robustnessDiscreteWeight(spec, key, category) {
+    const explicit = spec.discreteWeights?.[key]?.[category];
+    return Number.isFinite(explicit) ? explicit : defaultDiscreteWeight(key, category, spec.position);
+  }
+
+  function robustnessBaseWeight(row, spec, calibrations, latestYear) {
+    const activeWeights = spec.weightMode === "automatic" ? new Set(["comparability"])
+      : spec.weightMode === "equal" ? new Set() : spec.weightings;
+    let weight = 1;
+    if (activeWeights.has("comparability")) {
+      const value = calibrations.get(rowStream(row))?.weights.get(row.id);
+      if (!Number.isFinite(value) || value <= 0) throw new Error("An Automatic weight is unavailable.");
+      weight *= value;
+    }
+    if (activeWeights.has("size")) weight *= row.expenses > 0
+      ? Math.exp(-0.5 * (Math.log(row.expenses / spec.targetExpense) / spec.expenseBandwidth) ** 2) : 0.45;
+    if (activeWeights.has("staff")) weight *= row.staff > 0
+      ? Math.exp(-0.5 * (Math.log(row.staff / spec.targetStaff) / spec.staffBandwidth) ** 2) : 0.45;
+    if (activeWeights.has("recency")) weight *= row.compensationYear
+      ? 0.5 ** (Math.max(0, latestYear - row.compensationYear) / spec.recencyHalfLife) : 0.45;
+    DISCRETE_WEIGHT_KEYS.forEach((key) => {
+      if (!activeWeights.has(key)) return;
+      const category = String(row[key] || "Not reported");
+      weight *= robustnessDiscreteWeight(spec, key, category);
+    });
+    return weight;
+  }
+
+  function robustnessWeightedSelection(spec) {
+    const candidateRows = robustnessRowsForSpec(spec).filter((row) => (
+      robustnessPresetSelected(row, spec) && robustnessPassesFilters(row, spec)
+    ));
+    if (!candidateRows.length) return { items: [], calibrationWarnings: [], calibrations: [] };
+    const usesAutomatic = spec.weightMode === "automatic"
+      || (spec.weightMode === "current" && spec.weightings.has("comparability"));
+    const calibrations = usesAutomatic
+      ? autoWeightCalibrations(candidateRows, spec.autoTargetEss)
+      : new Map();
+    const latestYear = Math.max(...candidateRows.map((row) => row.compensationYear || 0));
+    const selected = candidateRows.map((row) => {
+      const automaticWeight = robustnessBaseWeight(row, spec, calibrations, latestYear);
+      const customWeight = spec.weightMode === "current" ? spec.customWeights.get(row.id) ?? 1 : 1;
+      return { row, value: robustnessSalary(row, spec), automaticWeight, customWeight };
+    }).filter((item) => (
+      Number.isFinite(item.value) && item.value > 0
+      && Number.isFinite(item.automaticWeight) && item.automaticWeight > 0
+    ));
+    if (spec.position !== "ceo") {
+      const organizationTotals = new Map();
+      selected.forEach((item) => {
+        const organization = String(item.row.organization || "Not reported");
+        organizationTotals.set(organization, (organizationTotals.get(organization) || 0) + item.automaticWeight);
+      });
+      selected.forEach((item) => {
+        const organization = String(item.row.organization || "Not reported");
+        item.rawWeight = (item.automaticWeight / organizationTotals.get(organization)) * item.customWeight;
+      });
+    } else {
+      const balanceGroupCounts = new Map();
+      selected.forEach((item) => {
+        const group = String(item.row.organizationBalanceGroup || "").trim();
+        if (group) balanceGroupCounts.set(group, (balanceGroupCounts.get(group) || 0) + 1);
+      });
+      selected.forEach((item) => {
+        const group = String(item.row.organizationBalanceGroup || "").trim();
+        const organizationShare = group ? 1 / balanceGroupCounts.get(group) : 1;
+        item.rawWeight = item.automaticWeight * organizationShare * item.customWeight;
+      });
+    }
+    const positive = selected.filter((item) => Number.isFinite(item.rawWeight) && item.rawWeight > 0);
+    const balanceStreams = spec.streamBalanced || (
+      spec.weightMode === "current" && spec.weightings.has("streamBalanced")
+    );
+    if (balanceStreams && spec.stream === "combined") {
+      const streamTotals = new Map();
+      positive.forEach((item) => {
+        const stream = rowStream(item.row);
+        streamTotals.set(stream, (streamTotals.get(stream) || 0) + item.rawWeight);
+      });
+      if (!streamTotals.get("incumbents") || !streamTotals.get("jobAds")) {
+        throw new Error("Both pay sources are required for 50/50 balancing.");
+      }
+      positive.forEach((item) => { item.rawWeight /= streamTotals.get(rowStream(item.row)); });
+    }
+    const mean = positive.reduce((sum, item) => sum + item.rawWeight, 0) / positive.length;
+    if (!Number.isFinite(mean) || mean <= 0) throw new Error("Final robustness weights are invalid.");
+    const calibrationWarnings = [];
+    const calibrationDetails = [];
+    calibrations.forEach((calibration, stream) => {
+      calibrationDetails.push({
+        stream, status: calibration.status, effectiveN: calibration.ess, maximum: calibration.maximum,
+      });
+      const source = stream === "incumbents" ? "Form 990" : "Job posting";
+      if (calibration.status === "uniform_target_exceeds_sample") {
+        calibrationWarnings.push(source + " Automatic weights reverted to equal weights because the target effective n reached the available sample size.");
+      } else if (calibration.status === "uniform_insufficient_scale") {
+        calibrationWarnings.push(source + " Automatic weights reverted to equal weights because too little comparable scale data were available.");
+      } else if (calibration.status === "uniform_small_sample") {
+        calibrationWarnings.push(source + " Automatic weights reverted to equal weights because only one record was available.");
+      }
+    });
+    return {
+      items: positive.map((item) => ({ row: item.row, value: item.value, weight: item.rawWeight / mean })),
+      calibrationWarnings,
+      calibrations: calibrationDetails,
+    };
+  }
+
+  function organizationWeightDiagnostics(items) {
+    const totals = new Map();
+    items.forEach((item) => {
+      const organization = String(item.row.organization || item.row.id);
+      totals.set(organization, (totals.get(organization) || 0) + item.weight);
+    });
+    const total = [...totals.values()].reduce((sum, value) => sum + value, 0);
+    const shares = [...totals.values()].map((value) => value / total);
+    return {
+      count: totals.size,
+      effectiveN: shares.length ? 1 / shares.reduce((sum, value) => sum + value ** 2, 0) : 0,
+      maximumShare: shares.length ? Math.max(...shares) : 0,
+    };
+  }
+
+  function robustnessSpecLabel(spec) {
+    const sample = {
+      tierA: "Closest peers", primary: "Recommended peers",
+      clean: "Similar organization types", sensitivity: "Recommended + broader",
+    }[spec.sample] || humanizeCategory(spec.sample);
+    const fit = { empirical: "Empirical", lognormal: "Lognormal", gamma: "Gamma" }[spec.fit];
+    const weight = spec.weightMode === "automatic" ? "Automatic (target eff. n " + spec.autoTargetEss + ")"
+      : spec.weightMode === "equal" ? (spec.position === "ceo" ? "Equal (co-leaders share)" : "Equal organizations")
+        : "Current weights";
+    return sample + " · " + fit + " · " + weight;
+  }
+
+  function evaluateRobustnessSpec(spec, metadata = {}) {
+    const base = {
+      id: metadata.id || Math.random().toString(36).slice(2),
+      family: metadata.family || "Core",
+      label: metadata.label || robustnessSpecLabel(spec),
+      spec: {
+        sample: spec.sample, fit: spec.fit, weightMode: spec.weightMode,
+        stream: spec.stream, inflationAdjusted: spec.inflationAdjusted,
+        streamBalanced: spec.streamBalanced,
+      },
+      status: "error", warning: "", rowCount: 0, organizationCount: 0,
+      rowEffectiveN: 0, organizationEffectiveN: 0, maximumOrganizationShare: 0,
+      q25: NaN, q50: NaN, q75: NaN, sourceCounts: {}, calibrations: [],
+    };
+    try {
+      const selection = robustnessWeightedSelection(spec);
+      const items = selection.items;
+      base.calibrations = selection.calibrations;
+      base.rowCount = items.length;
+      const organizations = organizationWeightDiagnostics(items);
+      base.organizationCount = organizations.count;
+      base.rowEffectiveN = effectiveSampleSize(items.map((item) => item.weight));
+      base.organizationEffectiveN = organizations.effectiveN;
+      base.maximumOrganizationShare = organizations.maximumShare;
+      items.forEach((item) => {
+        const source = rowStream(item.row);
+        base.sourceCounts[source] = (base.sourceCounts[source] || 0) + 1;
+      });
+      if (organizations.count < 5) throw new Error("Fewer than five organizations.");
+      if (organizations.effectiveN < 3) throw new Error("Organization-level effective n is below 3.");
+      if (new Set(items.map((item) => item.value)).size < 2) throw new Error("Pay values have no usable dispersion.");
+      if (spec.fit !== "empirical" && !fitModel(items, spec.fit)) throw new Error("The fitted distribution is unavailable.");
+      base.q25 = distributionQuantile(items, 0.25, spec.fit);
+      base.q50 = distributionQuantile(items, 0.5, spec.fit);
+      base.q75 = distributionQuantile(items, 0.75, spec.fit);
+      if (![base.q25, base.q50, base.q75].every((value) => Number.isFinite(value) && value > 0)) {
+        throw new Error("A requested quartile could not be estimated.");
+      }
+      base.status = "valid";
+      const warnings = [...selection.calibrationWarnings];
+      if (organizations.count < 10 || organizations.effectiveN < 8) warnings.push("Small peer set; descriptive only.");
+      else if (organizations.maximumShare > 0.2) warnings.push("One organization has more than 20% of the influence.");
+      base.warning = warnings.join(" ");
+    } catch (error) {
+      base.status = "error";
+      base.warning = error instanceof Error ? error.message : String(error);
+    }
+    return base;
+  }
+
+  function robustnessOptionValues(selectedDimensions, baseSpec) {
+    return {
+      fits: selectedDimensions.has("distribution") ? ["empirical", "lognormal", "gamma"] : [baseSpec.fit],
+      samples: selectedDimensions.has("sample")
+        ? ["tierA", "primary", "clean", "sensitivity"] : [baseSpec.sample],
+      weights: selectedDimensions.has("weighting") && baseSpec.position === "ceo"
+        ? ["equal", "automatic"] : [selectedDimensions.has("weighting") ? "equal" : "current"],
+    };
+  }
+
+  function robustnessFiltersWithoutPaySource(filters) {
+    const cloned = Object.fromEntries(Object.entries(filters).map(([key, values]) => [
+      key, values == null ? null : new Set(values),
+    ]));
+    cloned.sourceType = null;
+    return cloned;
+  }
+
+  function robustnessCohortIds(spec, predicate = () => true) {
+    return new Set(robustnessRowsForSpec(spec).filter((row) => (
+      robustnessPresetSelected(row, spec) && robustnessPassesFilters(row, spec) && predicate(row)
+    )).map((row) => row.id));
+  }
+
+  function runRobustnessAnalysis() {
+    const fingerprint = analyticalFingerprint();
+    const dimensions = new Set(refs.robustnessDimensions.filter((input) => input.checked && !input.disabled).map((input) => input.value));
+    const baseSpec = currentRobustnessSpec();
+    const options = robustnessOptionValues(dimensions, baseSpec);
+    const core = [];
+    options.samples.forEach((sample) => options.fits.forEach((fit) => options.weights.forEach((weightMode) => {
+      const spec = {
+        ...baseSpec, sample, fit, weightMode, streamBalanced: false,
+        membershipMode: "preset",
+        autoTargetEss: weightMode === "automatic" ? 35 : baseSpec.autoTargetEss,
+        weightings: weightMode === "current" ? new Set(baseSpec.weightings) : new Set(),
+      };
+      core.push(evaluateRobustnessSpec(spec, {
+        id: ["core", sample, fit, weightMode].join("-"),
+        family: "Core", label: robustnessSpecLabel(spec),
+      }));
+    })));
+    const source = [];
+    if (dimensions.has("source") && baseSpec.position === "ceo") {
+      const sourceFilters = robustnessFiltersWithoutPaySource(baseSpec.filters);
+      [
+        { stream: "incumbents", streamBalanced: false, label: "Form 990 base pay" },
+        { stream: "jobAds", streamBalanced: false, label: "Job-posting midpoint" },
+        { stream: "combined", streamBalanced: false, label: "All sources · unbalanced influence" },
+        { stream: "combined", streamBalanced: true, label: "All sources · 50/50 influence" },
+      ].forEach((option) => {
+        const spec = {
+          ...baseSpec, stream: option.stream, measure: "base", sample: "primary",
+          fit: "lognormal", weightMode: "equal", weightings: new Set(),
+          streamBalanced: option.streamBalanced, membershipMode: "preset", filters: sourceFilters,
+        };
+        source.push(evaluateRobustnessSpec(spec, {
+          id: "source-" + option.stream + "-" + Number(option.streamBalanced),
+          family: "Pay source", label: option.label,
+        }));
+      });
+    }
+    const measures = [];
+    if (dimensions.has("measure")) {
+      const measureBase = {
+        ...baseSpec, stream: "incumbents", measure: "base", sample: "primary",
+        fit: "lognormal", weightMode: "equal", weightings: new Set(), streamBalanced: false,
+        membershipMode: "preset", filters: robustnessFiltersWithoutPaySource(baseSpec.filters),
+      };
+      const cohort = robustnessCohortIds(measureBase, (row) => ["base", "cash", "total"].every((measure) => {
+        const values = measureBase.inflationAdjusted ? row.salary : row.nominalSalary;
+        return Number.isFinite(values?.[measure]) && values[measure] > 0;
+      }));
+      [["base", "Schedule J base pay"], ["cash", "Part VII reported cash"], ["total", "Total reported pay"]].forEach(([measure, label]) => {
+        const spec = { ...measureBase, measure, membershipMode: "cohort", selectedIds: cohort, skipFilters: true };
+        measures.push(evaluateRobustnessSpec(spec, {
+          id: "measure-" + measure, family: "Pay measure", label,
+        }));
+      });
+    }
+    const posting = [];
+    if (dimensions.has("posting") && baseSpec.position === "ceo") {
+      const postingBase = {
+        ...baseSpec, stream: "jobAds", measure: "base", sample: "primary",
+        fit: "lognormal", weightMode: "equal", weightings: new Set(), streamBalanced: false,
+        membershipMode: "preset", filters: robustnessFiltersWithoutPaySource(baseSpec.filters),
+      };
+      const cohort = robustnessCohortIds(postingBase, (row) => {
+        const range = postingBase.inflationAdjusted ? row.range : row.nominalRange;
+        return Number.isFinite(range?.low) && range.low > 0 && Number.isFinite(range?.high) && range.high > 0;
+      });
+      [["low", "Advertised lower bound"], ["midpoint", "Advertised midpoint"], ["high", "Advertised upper bound"]].forEach(([postingPoint, label]) => {
+        const spec = { ...postingBase, postingPoint, membershipMode: "cohort", selectedIds: cohort, skipFilters: true };
+        posting.push(evaluateRobustnessSpec(spec, {
+          id: "posting-" + postingPoint, family: "Ad range", label,
+        }));
+      });
+    }
+    const dollars = [];
+    if (dimensions.has("dollars")) {
+      const cohort = robustnessCohortIds(baseSpec);
+      [true, false].forEach((inflationAdjusted) => {
+        const spec = {
+          ...baseSpec, inflationAdjusted, membershipMode: "cohort", selectedIds: cohort, skipFilters: true,
+        };
+        dollars.push(evaluateRobustnessSpec(spec, {
+          id: "dollars-" + (inflationAdjusted ? "adjusted" : "nominal"),
+          family: "Dollar basis",
+          label: inflationAdjusted ? "Inflation adjusted · July 2026 USD" : "Original reported USD",
+        }));
+      });
+    }
+    const current = evaluateRobustnessSpec(baseSpec, {
+      id: "current", family: "Current", label: "Current salary specification",
+    });
+    robustnessReport = {
+      fingerprint, position: positionDefinition().label, basis: baseSpec.inflationAdjusted ? "July 2026 USD" : "Original USD",
+      dimensions: [...dimensions], core, source, measures, posting, dollars, current, generatedAt: new Date().toISOString(),
+    };
+    renderRobustnessReport();
+    const valid = [...core, ...source, ...measures, ...posting, ...dollars].filter((result) => result.status === "valid").length;
+    const total = core.length + source.length + measures.length + posting.length + dollars.length;
+    refs.robustnessStatus.textContent = valid + " of " + total + " specifications produced usable results.";
+  }
+
+  function robustnessRange(results, key) {
+    const values = results.filter((result) => result.status === "valid").map((result) => result[key]).filter(Number.isFinite);
+    return values.length ? [Math.min(...values), Math.max(...values)] : [NaN, NaN];
+  }
+
+  function robustnessRangeLabel(range) {
+    return range.every(Number.isFinite) ? compactMoney(range[0]) + "–" + compactMoney(range[1]) : "Unavailable";
+  }
+
+  function robustnessLargestDriver(report) {
+    const dimensions = [
+      ["sample", "Sample"], ["fit", "Distribution"], ["weightMode", "Weighting"],
+    ];
+    const candidates = dimensions.map(([key, label]) => {
+      const groups = new Map();
+      report.core.filter((result) => result.status === "valid").forEach((result) => {
+        const option = result.spec[key];
+        if (!groups.has(option)) groups.set(option, []);
+        groups.get(option).push(result.q50);
+      });
+      const medians = [...groups.values()].map((values) => sampleQuantile(values, 0.5));
+      return { label, spread: medians.length > 1 ? Math.max(...medians) - Math.min(...medians) : 0 };
+    }).filter((candidate) => candidate.spread > 0);
+    candidates.sort((a, b) => b.spread - a.spread);
+    return candidates[0] || null;
+  }
+
+  function robustnessChart(report, descriptionId) {
+    const valid = report.core.filter((result) => result.status === "valid");
+    if (!valid.length) return resultElement("p", "robustness-warning", "No core specification met the minimum peer-set requirements.");
+    const width = Math.max(300, Math.floor(refs.robustnessResults.getBoundingClientRect().width || 720));
+    const height = 132;
+    const margin = { left: width < 420 ? 54 : 64, right: width < 420 ? 8 : 14, top: 8, bottom: 24 };
+    const keys = [
+      ["q25", "P25"], ["q50", "Median"], ["q75", "P75"],
+    ];
+    const values = valid.flatMap((result) => keys.map(([key]) => result[key]));
+    keys.forEach(([key]) => {
+      if (report.current.status === "valid") values.push(report.current[key]);
+    });
+    let minimum = Math.min(...values);
+    let maximum = Math.max(...values);
+    if (!(maximum > minimum)) {
+      minimum *= 0.95;
+      maximum *= 1.05;
+    }
+    const padding = (maximum - minimum) * 0.04;
+    minimum = Math.max(0, minimum - padding);
+    maximum += padding;
+    const x = (value) => margin.left + ((value - minimum) / (maximum - minimum)) * (width - margin.left - margin.right);
+    const svg = svgElement("svg", {
+      viewBox: "0 0 " + width + " " + height,
+      role: "img",
+      "aria-label": "Core robustness ranges for the 25th percentile, median, and 75th percentile",
+      "aria-describedby": descriptionId,
+    });
+    keys.forEach(([key, label], rowIndex) => {
+      const y = margin.top + 18 + rowIndex * 28;
+      const range = robustnessRange(valid, key);
+      const labelNode = svgElement("text", { x: margin.left - 8, y: y + 3, "text-anchor": "end", class: "robustness-label" });
+      labelNode.textContent = label;
+      svg.append(labelNode);
+      svg.append(svgElement("line", {
+        x1: x(range[0]), x2: x(range[1]), y1: y, y2: y, class: "robustness-range",
+      }));
+      valid.forEach((result, index) => {
+        const point = svgElement("circle", {
+          cx: x(result[key]), cy: y + ((index % 5) - 2) * 1.25, r: 3.1, class: "robustness-point",
+        });
+        const title = svgElement("title");
+        title.textContent = result.label + ": " + money(result[key]);
+        point.append(title);
+        svg.append(point);
+      });
+      if (report.current.status === "valid") {
+        const centerX = x(report.current[key]);
+        const point = svgElement("rect", {
+          x: centerX - 4, y: y - 4, width: 8, height: 8,
+          transform: "rotate(45 " + centerX + " " + y + ")", class: "robustness-point is-current",
+        });
+        const title = svgElement("title");
+        title.textContent = "Current analysis: " + money(report.current[key]);
+        point.append(title);
+        svg.append(point);
+      }
+    });
+    const axisY = height - margin.bottom;
+    svg.append(svgElement("line", { x1: margin.left, x2: width - margin.right, y1: axisY, y2: axisY, class: "robustness-axis" }));
+    for (let index = 0; index <= 4; index += 1) {
+      const value = minimum + (index / 4) * (maximum - minimum);
+      const xPosition = x(value);
+      svg.append(svgElement("line", { x1: xPosition, x2: xPosition, y1: axisY, y2: axisY + 4, class: "robustness-axis" }));
+      const label = svgElement("text", { x: xPosition, y: axisY + 14, "text-anchor": "middle", class: "robustness-tick" });
+      label.textContent = compactMoney(value);
+      svg.append(label);
+    }
+    return svg;
+  }
+
+  function appendRobustnessComparison(parent, title, results, note = "") {
+    if (!results.length) return;
+    const section = resultElement("section", "robustness-comparison");
+    section.append(resultElement("h3", "", title));
+    if (note) section.append(resultElement("p", "result-note", note));
+    const list = resultElement("div", "robustness-comparison-list");
+    results.forEach((result) => {
+      const row = resultElement("div", "robustness-comparison-row");
+      row.append(resultElement("span", "", result.label));
+      row.append(resultElement("strong", "", result.status === "valid" ? compactMoney(result.q50) : "Unavailable"));
+      if (result.warning) row.title = result.warning;
+      list.append(row);
+    });
+    section.append(list);
+    parent.append(section);
+  }
+
+  function robustnessAuditTable(report) {
+    const details = resultElement("details", "robustness-audit");
+    const all = [...report.core, ...report.source, ...report.measures, ...report.posting, ...report.dollars];
+    const summary = resultElement("summary", "", "View all " + all.length + " specifications");
+    details.append(summary);
+    const wrapper = resultElement("div", "robustness-table-wrap");
+    const table = resultElement("table", "robustness-table");
+    const caption = resultElement("caption", "sr-only", "All robustness specifications and results");
+    table.append(caption);
+    const thead = document.createElement("thead");
+    const header = document.createElement("tr");
+    ["Family", "Specification", "P25", "Median", "P75", "Records", "Orgs", "Org. eff. n", "Max org. share", "Warning"].forEach((label) => {
+      const cell = document.createElement("th");
+      cell.scope = "col";
+      cell.textContent = label;
+      header.append(cell);
+    });
+    thead.append(header);
+    table.append(thead);
+    const tbody = document.createElement("tbody");
+    all.forEach((result) => {
+      const row = document.createElement("tr");
+      if (result.status !== "valid") row.classList.add("is-invalid");
+      const values = [
+        result.family, result.label,
+        result.status === "valid" ? compactMoney(result.q25) : "—",
+        result.status === "valid" ? compactMoney(result.q50) : "—",
+        result.status === "valid" ? compactMoney(result.q75) : "—",
+        result.rowCount, result.organizationCount, result.organizationEffectiveN.toFixed(1),
+        (result.maximumOrganizationShare * 100).toFixed(1) + "%", result.warning || "",
+      ];
+      values.forEach((value, index) => {
+        const cell = document.createElement(index === 1 ? "th" : "td");
+        if (index === 1) cell.scope = "row";
+        cell.textContent = value;
+        if (index >= 2 && index <= 8) cell.classList.add("is-number");
+        row.append(cell);
+      });
+      tbody.append(row);
+    });
+    table.append(tbody);
+    wrapper.append(table);
+    details.append(wrapper);
+    return details;
+  }
+
+  function renderRobustnessReport() {
+    refs.robustnessResults.replaceChildren();
+    if (!robustnessReport) return;
+    const report = robustnessReport;
+    const validCore = report.core.filter((result) => result.status === "valid");
+    const summary = resultElement("div", "robustness-summary");
+    [
+      ["P25 range", robustnessRangeLabel(robustnessRange(validCore, "q25"))],
+      ["Median range", robustnessRangeLabel(robustnessRange(validCore, "q50"))],
+      ["P75 range", robustnessRangeLabel(robustnessRange(validCore, "q75"))],
+      ["Usable core specs", validCore.length + " / " + report.core.length],
+    ].forEach(([label, value]) => {
+      const item = document.createElement("div");
+      item.append(resultElement("span", "", label), resultElement("strong", "", value));
+      summary.append(item);
+    });
+    refs.robustnessResults.append(summary);
+    const figure = resultElement("section", "robustness-figure");
+    figure.append(resultElement("h3", "", "Comparable specification range"));
+    const chartDescription = resultElement(
+      "p", "sr-only",
+      "Across usable core specifications, the 25th percentile ranges from " + robustnessRangeLabel(robustnessRange(validCore, "q25"))
+        + ", the median ranges from " + robustnessRangeLabel(robustnessRange(validCore, "q50"))
+        + ", and the 75th percentile ranges from " + robustnessRangeLabel(robustnessRange(validCore, "q75"))
+        + ". The current salary specification is " + (report.current.status === "valid"
+          ? compactMoney(report.current.q25) + ", " + compactMoney(report.current.q50) + ", and " + compactMoney(report.current.q75)
+            + ", respectively, based on " + report.current.rowCount + " records from " + report.current.organizationCount + " organizations."
+          : "unavailable."),
+    );
+    chartDescription.id = "robustness-chart-description";
+    figure.append(chartDescription, robustnessChart(report, chartDescription.id));
+    refs.robustnessResults.append(figure);
+    const driver = robustnessLargestDriver(report);
+    if (driver) {
+      refs.robustnessResults.append(resultElement(
+        "p", "result-note",
+        "Largest typical median shift among the varied core choices: " + driver.label + " (" + compactMoney(driver.spread) + "). The dark diamond is the current salary specification.",
+      ));
+    }
+    const comparisons = resultElement("div", "robustness-comparisons");
+    appendRobustnessComparison(
+      comparisons, "Pay-source check", report.source,
+      "All four use Recommended peers, a lognormal fit, and equal base influence. Different evidence types do not expand the core range.",
+    );
+    appendRobustnessComparison(
+      comparisons, "Reported-pay measure check", report.measures,
+      "Base, reported cash, and total pay use the same Form 990 records with all three measures available.",
+    );
+    appendRobustnessComparison(
+      comparisons, "Job-posting range check", report.posting,
+      "Lower bounds, midpoints, and upper bounds use the same job postings.",
+    );
+    appendRobustnessComparison(
+      comparisons, "Dollar-basis check", report.dollars,
+      "Adjusted and original dollars use the same records and are not combined into one range.",
+    );
+    if (comparisons.childElementCount) refs.robustnessResults.append(comparisons);
+    refs.robustnessResults.append(robustnessAuditTable(report));
+  }
+
+  function updateRobustnessAvailability() {
+    const weightingInput = refs.robustnessWeightingOption.querySelector("input");
+    const sourceInput = refs.robustnessSourceOption.querySelector("input");
+    const postingInput = refs.robustnessPostingOption.querySelector("input");
+    const ceo = isCeoPosition();
+    weightingInput.disabled = !ceo;
+    refs.robustnessWeightingOption.title = ceo ? "" : "Automatic weights are available only for the CEO benchmark.";
+    sourceInput.disabled = !ceo;
+    refs.robustnessSourceOption.title = ceo ? "" : "Other supported positions use Form 990 evidence only.";
+    postingInput.disabled = !ceo;
+    refs.robustnessPostingOption.title = ceo ? "" : "Job-posting range checks are available only for the CEO benchmark.";
+    if (robustnessReport) {
+      const stale = robustnessReport.fingerprint !== analyticalFingerprint();
+      if (stale) refs.robustnessStatus.textContent = "Settings changed since this check was run. Run it again to refresh the results.";
+      renderRobustnessReport();
+    }
   }
 
   function writeUrlState() {
@@ -3649,12 +4836,15 @@
     renderChart();
     renderQuantiles();
     renderTable();
+    renderScenarioComparison();
+    updateRobustnessAvailability();
     scheduleUrlState();
   }
 
   function reset() {
     const resumeUrlSync = urlSyncReady;
     urlSyncReady = false;
+    activeScenarioId = "";
     Object.assign(state, {
       position: "ceo", stream: "combined", measure: "base", inflationAdjusted: true, sample: "primary", fit: "lognormal", weightings: new Set(), discreteWeights: {}, autoTargetEss: 35,
       targetExpense: RP_WEIGHT_TARGET.expenses, targetStaff: RP_WEIGHT_TARGET.staff, expenseBandwidth: 0.7, staffBandwidth: 0.7, recencyHalfLife: 4,
@@ -3730,6 +4920,56 @@
     syncControlsFromState();
     renderAll();
   }
+
+  refs.resultsTabs.forEach((tab) => {
+    tab.addEventListener("click", () => activateResultsTab(resultsTabKey(tab)));
+    tab.addEventListener("keydown", (event) => {
+      const key = resultsTabKeyFromKeyboard(event);
+      if (!key) return;
+      event.preventDefault();
+      activateResultsTab(key, { focus: true });
+    });
+  });
+  refs.scenarioSave.addEventListener("click", saveCurrentScenario);
+  refs.scenarioName.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    saveCurrentScenario();
+  });
+  refs.scenarioComparison.addEventListener("change", (event) => {
+    const id = event.target.dataset.scenarioName;
+    if (id) renameSavedScenario(id, event.target.value);
+  });
+  refs.scenarioComparison.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-scenario-action]");
+    if (!button) return;
+    const id = button.dataset.scenarioId;
+    if (button.dataset.scenarioAction === "apply") applySavedScenario(id);
+    if (button.dataset.scenarioAction === "update") updateSavedScenario(id);
+    if (button.dataset.scenarioAction === "copy") copySavedScenarioLink(id);
+    if (button.dataset.scenarioAction === "remove") removeSavedScenario(id);
+  });
+  refs.robustnessRun.addEventListener("click", () => {
+    refs.robustnessRun.disabled = true;
+    refs.robustnessResults.setAttribute("aria-busy", "true");
+    refs.robustnessStatus.textContent = "Calculating sensitivity specifications…";
+    requestAnimationFrame(() => {
+      try {
+        runRobustnessAnalysis();
+      } catch (error) {
+        refs.robustnessStatus.textContent = "The robustness check stopped because an analysis specification was invalid.";
+        console.error("Unable to run robustness analysis", error);
+      } finally {
+        refs.robustnessRun.disabled = false;
+        refs.robustnessResults.removeAttribute("aria-busy");
+      }
+    });
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key !== SCENARIO_STORAGE_KEY) return;
+    loadSavedScenarios();
+    renderScenarioComparison();
+  });
 
   refs.position.addEventListener("change", () => activatePosition(refs.position.value));
   refs.stream.addEventListener("change", () => {
@@ -3839,11 +5079,21 @@
 
   const observer = new ResizeObserver(() => renderChart());
   observer.observe(refs.chartWrap);
+  const robustnessObserver = new ResizeObserver((entries) => {
+    const width = Math.round(entries[0]?.contentRect.width || 0);
+    if (!robustnessReport || activeResultsTab !== "robustness" || Math.abs(width - robustnessResultWidth) <= 1) return;
+    robustnessResultWidth = width;
+    cancelAnimationFrame(robustnessResizeFrame);
+    robustnessResizeFrame = requestAnimationFrame(renderRobustnessReport);
+  });
+  robustnessObserver.observe(refs.robustnessResults);
   const tableObserver = new ResizeObserver(scheduleTableStickyOffset);
   tableObserver.observe(refs.tableScroll);
   refs.organizationPreview.addEventListener("pointerenter", () => window.clearTimeout(organizationPreviewHideTimer));
   refs.organizationPreview.addEventListener("pointerleave", scheduleOrganizationPreviewHide);
   populatePositionSelect();
+  loadSavedScenarios();
+  activateResultsTab("quantiles");
   const initialUrl = new URL(window.location.href);
   const encodedInitialState = initialUrl.searchParams.get("s");
   const pathPosition = positionFromPath(initialUrl.pathname);
