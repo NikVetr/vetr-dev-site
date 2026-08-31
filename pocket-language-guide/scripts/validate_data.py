@@ -38,6 +38,7 @@ def main():
     languages = {r["bcp47"]: r for r in load("registry/languages.csv")}
     sections = {r["section_id"]: r for r in load("registry/sections.csv")}
     papers = load("registry/paper.csv")
+    regions = {r["iso3166"]: r for r in load("registry/regions.csv")}
 
     for code, lang in languages.items():
         for field in ("script", "script_alt"):
@@ -53,6 +54,28 @@ def main():
             errors.append(f"languages.csv: {code} has no speak_label")
     if not papers:
         errors.append("registry/paper.csv: no presets")
+
+    for code, region in regions.items():
+        if len(code) != 2 or code != code.upper() or not code.isalpha():
+            errors.append(f"regions.csv: bad code {code!r} (want ISO 3166-1 alpha-2)")
+        try:
+            confidence = int(region["confidence"])
+        except ValueError:
+            errors.append(f"regions.csv: {code} confidence {region['confidence']!r} is not a number")
+            continue
+        # Emergency numbers get printed and acted on, so a claim that they were
+        # reviewed has to come with a source and a date.
+        if confidence >= MIN_SAFE_CONFIDENCE:
+            if not region["source"].strip():
+                errors.append(f"regions.csv: {code} claims confidence {confidence} with no source")
+            if not region["verified_at"].strip():
+                errors.append(f"regions.csv: {code} claims confidence {confidence} with no verified_at")
+
+    for code, lang in languages.items():
+        for region in filter(None, lang["regions"].split(";")):
+            if region not in regions:
+                errors.append(f"languages.csv: {code} lists region {region!r}, "
+                              "which registry/regions.csv does not define")
 
     groups = sorted({s["group"] for s in sections.values()})
     # "ready" must be complete; "draft" may be partial while the content track fills it in.
@@ -140,6 +163,12 @@ def main():
                             concepts.get(r["concept_id"], {}).get("default_template") == "note")
         coverage["languages"][code] = have
     (DATA / "coverage.json").write_text(json.dumps(coverage, indent=2) + "\n", encoding="utf-8")
+    reviewed = sum(1 for r in regions.values() if int(r["confidence"] or 0) >= MIN_SAFE_CONFIDENCE)
+    if reviewed < len(regions):
+        warnings.append(f"registry/regions.csv: {len(regions) - reviewed} of {len(regions)} "
+                        "regions have unreviewed emergency numbers, which are withheld "
+                        "from sheets until a fluent speaker confirms them")
+
     print(f"data/coverage.json  " + ", ".join(
         f"{c}={n}" for c, n in coverage["languages"].items() if n))
 

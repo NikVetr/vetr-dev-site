@@ -9,6 +9,34 @@
 // a solve is debounced -- would swap the checkbox out from under a reader who is
 // working through a list of them.
 
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+/**
+ * The section's own icon, in its own colour -- the same mark that appears on the
+ * printed page, so the list and the sheet read as the same thing.
+ * @param {{viewBox:number, strokeWidth:number, paths:Record<string,string[]>}} icons
+ * @param {string} name @param {string} color
+ */
+function sectionIcon(icons, name, color) {
+  const paths = icons.paths[name];
+  if (!paths) return null;
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${icons.viewBox} ${icons.viewBox}`);
+  svg.setAttribute('class', 'tree-icon');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', color);
+  svg.setAttribute('stroke-width', String(icons.strokeWidth));
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  for (const d of paths) {
+    const path = document.createElementNS(SVG_NS, 'path');
+    path.setAttribute('d', d);
+    svg.append(path);
+  }
+  return svg;
+}
+
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
   const node = document.createElement(tag);
@@ -31,6 +59,8 @@ function el(tag, attrs = {}, kids = []) {
  * @property {any} theme
  * @property {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>})=>void} onToggle
  * @property {(conceptId:string|null)=>void} onHover
+ * @property {any} icons                     data/icons.json
+ * @property {import('../core/pack.js').SheetEdits} edits
  */
 
 /**
@@ -47,9 +77,16 @@ export function createTree(input) {
   /** @type {Node[]} */ const nodes = [];
 
   for (const section of corpus.sections) {
-    const concepts = (corpus.conceptsByGroup[section.group] ?? [])
+    const own = (corpus.conceptsByGroup[section.group] ?? [])
       .filter((c) => c.section_id === section.section_id)
-      .filter((c) => input.targetRows[c.concept_id] && input.sourceRows[c.concept_id]);
+      .filter((c) => input.targetRows[c.concept_id] && input.sourceRows[c.concept_id])
+      .map((c) => ({ conceptId: c.concept_id, custom: false }));
+    // Terms the reader added live in the same list as the corpus ones, marked so
+    // they can be told apart and removed.
+    const custom = input.edits.extras
+      .filter((e) => e.sectionId === section.section_id)
+      .map((e) => ({ conceptId: e.conceptId, custom: true }));
+    const concepts = [...own, ...custom];
     if (!concepts.length) continue;
 
     const sectionBox = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
@@ -57,9 +94,11 @@ export function createTree(input) {
       input.onToggle({ sections: { [section.section_id]: sectionBox.checked } });
     });
     const count = el('span', { class: 'count' });
+    const color = theme.colors.roles[section.color_role];
+    const icon = section.icon ? sectionIcon(input.icons, section.icon, color) : null;
     const summary = el('summary', {}, [
       sectionBox,
-      el('span', { class: 'dot', style: `background:${theme.colors.roles[section.color_role]}` }),
+      icon ?? el('span', { class: 'dot', style: `background:${color}` }),
       el('span', { text: section.title_en }),
       count,
     ]);
@@ -69,16 +108,21 @@ export function createTree(input) {
     const list = el('ul', { class: 'items' }, concepts.map((concept) => {
       const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
       box.addEventListener('change', () => {
-        input.onToggle({ items: { [concept.concept_id]: box.checked } });
+        input.onToggle({ items: { [concept.conceptId]: box.checked } });
       });
       const target = el('span', { class: 'target', lang: spec.target });
       const gloss = el('span', { class: 'gloss', lang: spec.source });
-      const li = el('li', { 'data-concept': concept.concept_id }, [
-        el('label', {}, [box, target, gloss]),
+      const li = el('li', { 'data-concept': concept.conceptId }, [
+        el('label', {}, [
+          box,
+          target,
+          gloss,
+          ...(concept.custom ? [el('span', { class: 'tag mine', text: 'mine' })] : []),
+        ]),
       ]);
-      li.addEventListener('mouseenter', () => input.onHover(concept.concept_id));
+      li.addEventListener('mouseenter', () => input.onHover(concept.conceptId));
       li.addEventListener('mouseleave', () => input.onHover(null));
-      items.push({ conceptId: concept.concept_id, box, target, gloss });
+      items.push({ conceptId: concept.conceptId, box, target, gloss });
       return li;
     }));
 
@@ -110,8 +154,8 @@ export function createTree(input) {
           item.target.textContent = row.values.script ?? '';
           item.gloss.textContent = row.values.gloss ?? '';
         } else if (!item.target.textContent) {
-          item.target.textContent = input.targetRows[item.conceptId].text;
-          item.gloss.textContent = input.sourceRows[item.conceptId].text;
+          item.target.textContent = input.targetRows[item.conceptId]?.text ?? '';
+          item.gloss.textContent = input.sourceRows[item.conceptId]?.text ?? '';
         }
       }
       section.count.textContent = `${included}/${section.items.length}`;

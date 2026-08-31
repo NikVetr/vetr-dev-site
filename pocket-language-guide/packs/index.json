@@ -3,7 +3,7 @@
     {
       "target": "en",
       "source": "zh-Hans",
-      "scale": 1.298,
+      "scale": 1.2023,
       "faces": 4,
       "pageW": 504,
       "pageH": 360,
@@ -13,7 +13,7 @@
     {
       "target": "zh-Hans",
       "source": "en",
-      "scale": 1.0382,
+      "scale": 0.9683,
       "faces": 4,
       "pageW": 504,
       "pageH": 360,

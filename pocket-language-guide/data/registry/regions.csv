@@ -1,0 +1,50 @@
+iso3166,name_en,emergency_numbers,currency,confidence,source,verified_at
+CN,China,110 police;119 fire;120 ambulance,CNY,2,verified reference sheet (latex-reference-v2),2026-08-30
+US,United States,911 all services,USD,2,internationally documented single number,2026-08-31
+CA,Canada,911 all services,CAD,2,internationally documented single number,2026-08-31
+GB,United Kingdom,999 all services;112 also works,GBP,2,internationally documented single number,2026-08-31
+IE,Ireland,112 all services;999 also works,EUR,2,EU-wide 112,2026-08-31
+AU,Australia,000 all services,AUD,2,internationally documented single number,2026-08-31
+NZ,New Zealand,111 all services,NZD,2,internationally documented single number,2026-08-31
+ES,Spain,112 all services,EUR,2,EU-wide 112,2026-08-31
+FR,France,112 all services;15 medical;17 police;18 fire,EUR,2,EU-wide 112,2026-08-31
+BE,Belgium,112 all services,EUR,2,EU-wide 112,2026-08-31
+DE,Germany,112 fire and ambulance;110 police,EUR,2,EU-wide 112,2026-08-31
+AT,Austria,112 all services,EUR,2,EU-wide 112,2026-08-31
+PT,Portugal,112 all services,EUR,2,EU-wide 112,2026-08-31
+CY,Cyprus,112 all services,EUR,2,EU-wide 112,2026-08-31
+JP,Japan,110 police;119 fire and ambulance,JPY,1,needs a fluent reviewer,
+KR,South Korea,112 police;119 fire and ambulance,KRW,1,needs a fluent reviewer,
+SG,Singapore,999 police;995 fire and ambulance,SGD,1,needs a fluent reviewer,
+MY,Malaysia,999 all services,MYR,1,needs a fluent reviewer,
+TH,Thailand,191 police;199 fire;1669 ambulance,THB,1,needs a fluent reviewer,
+VN,Viet Nam,113 police;114 fire;115 ambulance,VND,1,needs a fluent reviewer,
+ID,Indonesia,112 all services,IDR,1,needs a fluent reviewer,
+IN,India,112 all services,INR,1,needs a fluent reviewer,
+MX,Mexico,911 all services,MXN,1,needs a fluent reviewer,
+AR,Argentina,911 all services,ARS,1,needs a fluent reviewer,
+CO,Colombia,123 all services,COP,1,needs a fluent reviewer,
+CL,Chile,133 police;132 fire;131 ambulance,CLP,1,needs a fluent reviewer,
+PE,Peru,105 police;116 fire;106 ambulance,PEN,1,needs a fluent reviewer,
+BR,Brazil,190 police;193 fire;192 ambulance,BRL,1,needs a fluent reviewer,
+CH,Switzerland,112 all services;117 police;118 fire;144 ambulance,CHF,1,needs a fluent reviewer,
+SA,Saudi Arabia,999 police;998 fire;997 ambulance,SAR,1,needs a fluent reviewer,
+AE,United Arab Emirates,999 police;997 fire;998 ambulance,AED,1,needs a fluent reviewer,
+EG,Egypt,122 police;180 fire;123 ambulance,EGP,1,needs a fluent reviewer,
+MA,Morocco,19 police;15 ambulance,MAD,1,needs a fluent reviewer,
+JO,Jordan,911 all services,JOD,1,needs a fluent reviewer,
+IQ,Iraq,104 police;115 ambulance,IQD,1,needs a fluent reviewer,
+TR,Turkey,112 all services,TRY,1,needs a fluent reviewer,
+RU,Russia,112 all services;102 police;101 fire;103 ambulance,RUB,1,needs a fluent reviewer,
+BY,Belarus,112 all services,BYN,1,needs a fluent reviewer,
+KZ,Kazakhstan,112 all services,KZT,1,needs a fluent reviewer,
+KG,Kyrgyzstan,112 all services,KGS,1,needs a fluent reviewer,
+ZA,South Africa,10111 police;10177 ambulance,ZAR,1,needs a fluent reviewer,
+KE,Kenya,999 all services;112 also works,KES,1,needs a fluent reviewer,
+TZ,Tanzania,112 all services,TZS,1,needs a fluent reviewer,
+UG,Uganda,999 all services;112 also works,UGX,1,needs a fluent reviewer,
+CD,DR Congo,112 all services,CDF,1,needs a fluent reviewer,
+SN,Senegal,17 police;18 fire,XOF,1,needs a fluent reviewer,
+CI,Côte d'Ivoire,111 police;180 fire,XOF,1,needs a fluent reviewer,
+AO,Angola,113 police;115 ambulance,AOA,1,needs a fluent reviewer,
+MZ,Mozambique,119 police;198 ambulance,MZN,1,needs a fluent reviewer,

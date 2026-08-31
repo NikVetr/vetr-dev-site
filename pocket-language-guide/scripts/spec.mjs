@@ -10,6 +10,9 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     accent: `${source}-US`,
     romanization: 'pinyin',
     register: 'neutral',
+    // Overridden by callers that know better; the app derives it from the
+    // target language's first listed region.
+    region: target === 'zh-Hans' ? 'CN' : '',
     fieldSet: ['script', 'roman', 'gloss', 'respell', 'numeral'],
     geometry: { ...presets.geometry['card-7x5-4col'] },
     paper: {

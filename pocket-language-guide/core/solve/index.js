@@ -5,6 +5,7 @@
 // and none of them makes a layout decision.
 
 import { resolveField } from '../fonts.js';
+import { emergencyNote } from '../pack.js';
 import { buildAtoms } from './atoms.js';
 import { breakColumns } from './columnbreak.js';
 import { placeColumn } from './justify.js';
@@ -172,6 +173,25 @@ export function layout(input) {
           + 'their icons and titles alone.'
         : 'Low ink: row shading is off. Coloured rules are kept, since they carry '
           + 'the section coding.',
+    });
+  }
+  // Emergency numbers are the one thing on the sheet that must not be guessed, so
+  // an unreviewed set is left off and said out loud rather than quietly printed.
+  const emergency = emergencyNote(corpus, spec.region);
+  if (spec.region && !emergency) {
+    warnings.push({
+      code: 'no-emergency-numbers',
+      severity: 'warn',
+      message: `No emergency numbers on file for ${spec.region}. Look them up before `
+        + 'you travel and add them with the CSV import.',
+    });
+  } else if (emergency?.reason === 'unreviewed') {
+    warnings.push({
+      code: 'emergency-unreviewed',
+      severity: 'warn',
+      message: `The emergency numbers on file for ${emergency.region.name_en} have not `
+        + 'been checked by a fluent speaker, so they are left off the sheet. Verify them '
+        + 'and raise their confidence, or add your own with the CSV import.',
     });
   }
   if (box.clipped) {

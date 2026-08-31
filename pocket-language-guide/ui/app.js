@@ -83,7 +83,7 @@ export async function ensureFontCss(ctx, target, source) {
  * A sheet spec with everything resolved. `scale: 0` means auto-fit.
  * @param {Awaited<ReturnType<typeof browserSheetContext>>} ctx
  * @param {any} presets
- * @param {{target:string, source:string, geometry?:string, paper?:string}} choice
+ * @param {{target:string, source:string, geometry?:string, paper?:string, region?:string}} choice
  * @returns {import('../core/types.js').SheetSpec}
  */
 export function makeSpec(ctx, presets, choice) {
@@ -96,6 +96,9 @@ export function makeSpec(ctx, presets, choice) {
 
   const target = ctx.corpus.languages[choice.target];
   const romanization = (target.romanizations || '').split(';').filter(Boolean)[0] ?? '';
+  // The first region listed for a language is the one it is most associated with,
+  // which is the right default for someone visiting.
+  const region = choice.region ?? (target.regions || '').split(';').filter(Boolean)[0] ?? '';
 
   return {
     target: choice.target,
@@ -103,6 +106,7 @@ export function makeSpec(ctx, presets, choice) {
     accent: `${choice.source}-US`,
     romanization,
     register: 'neutral',
+    region,
     fieldSet: ['script', 'roman', 'gloss', 'respell', 'numeral'],
     geometry: { ...geometry },
     paper: {
@@ -129,6 +133,7 @@ export function pairFromQuery(params, fallbackSource) {
     source: params.get('source') ?? fallbackSource,
     geometry: params.get('geometry') ?? undefined,
     paper: params.get('paper') ?? undefined,
+    region: params.get('region') ?? undefined,
   };
 }
 

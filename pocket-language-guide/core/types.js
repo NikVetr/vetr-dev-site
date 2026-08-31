@@ -105,6 +105,7 @@
  * @property {string} accent
  * @property {string} romanization
  * @property {string} register
+ * @property {string} region  ISO 3166-1 alpha-2; supplies local emergency numbers
  * @property {FieldId[]} fieldSet
  * @property {Geometry} geometry
  * @property {PaperSpec} paper

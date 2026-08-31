@@ -26,6 +26,7 @@ export async function loadCorpus(loadText) {
   const scripts = index(await read('data/registry/scripts.csv'), 'iso15924');
   const languages = index(await read('data/registry/languages.csv'), 'bcp47');
   const paper = index(await read('data/registry/paper.csv'), 'preset_id');
+  const regions = index(await read('data/registry/regions.csv'), 'iso3166');
   const sectionRows = await read('data/registry/sections.csv');
   sectionRows.sort((a, b) => Number(a.rank) - Number(b.rank));
 
@@ -41,6 +42,7 @@ export async function loadCorpus(loadText) {
     scripts,
     languages,
     paper,
+    regions,
     sections: sectionRows,
     sectionById: index(sectionRows, 'section_id'),
     groups,
@@ -108,6 +110,29 @@ export async function loadRespellOverrides(loadText, target, source, accent) {
  */
 
 /**
+ * Which section carries the local emergency numbers, and the minimum confidence
+ * they must have been reviewed to. Wrong numbers here are worse than none.
+ */
+const EMERGENCY_SECTION = 'emergency-medical';
+const MIN_EMERGENCY_CONFIDENCE = 2;
+
+/**
+ * The local emergency numbers as a note, or null if this region has none we are
+ * willing to print. Returned rather than pushed so the caller can also warn.
+ * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus
+ * @param {string} regionCode
+ */
+export function emergencyNote(corpus, regionCode) {
+  const region = corpus.regions[regionCode];
+  if (!region || !region.emergency_numbers.trim()) return null;
+  if (Number(region.confidence) < MIN_EMERGENCY_CONFIDENCE) {
+    return { text: null, region, reason: 'unreviewed' };
+  }
+  const numbers = region.emergency_numbers.split(';').map((n) => n.trim()).filter(Boolean);
+  return { text: `In ${region.name_en}: ${numbers.join(' · ')}`, region, reason: null };
+}
+
+/**
  * Assemble ordered blocks for the sheet. A section contributes one heading plus
  * one block per contiguous run of concepts sharing a template, which is how the
  * reference mixes a phrase grid and phrase rows under a single heading.
@@ -150,6 +175,22 @@ export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec, edi
       text: section.title_en,
       icon: section.icon || null,
     });
+
+    // The reference sheet printed 110/119/120 straight after the emergency
+    // heading. Those are facts about the country, not the language, so they come
+    // from the region registry and lead the section here too.
+    if (section.section_id === EMERGENCY_SECTION) {
+      const note = emergencyNote(corpus, spec.region);
+      if (note?.text) {
+        blocks.push({
+          kind: 'note',
+          sectionId: section.section_id,
+          colorRole: section.color_role,
+          stretch: 0,
+          text: note.text,
+        });
+      }
+    }
 
     /** @type {import('./types.js').Block|null} */ let run = null;
     for (const concept of concepts) {

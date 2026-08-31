@@ -8,6 +8,7 @@
 // the genuinely list-shaped ones (paper, language, romanisation) stay as menus.
 
 import { ARRANGEMENTS, arrangementShape } from '../core/solve/arrange.js';
+import { flagEmoji, flagsSupported } from './flags.js';
 import {
   pageGlyph, facesGlyph, densityGlyph, inkGlyph, paletteGlyph, itemGlyph, cutGlyph,
   typeGlyph, segmented, panelField,
@@ -262,6 +263,21 @@ export function createFormatPanel(input) {
     (value) => emit({ source: value, accent: `${value}-US` }),
   );
 
+  // Where you are going, which decides the local emergency numbers. Only the
+  // countries the target language is actually spoken in are offered.
+  const regionCodes = (corpus.languages[spec.target].regions || '').split(';').filter(Boolean);
+  const region = regionCodes.length > 1
+    ? menu(
+      'region', 'Where you are going',
+      regionCodes.map((code) => ({
+        value: code,
+        text: `${flagsSupported() ? `${flagEmoji(code)} ` : ''}${corpus.regions[code]?.name_en ?? code}`,
+      })),
+      spec.region,
+      (value) => emit({ region: value }),
+    )
+    : null;
+
   const systems = (corpus.languages[spec.target].romanizations || '').split(';').filter(Boolean);
   const romanization = menu(
     'romanization', 'Romanisation',
@@ -304,6 +320,7 @@ export function createFormatPanel(input) {
     paper.wrap,
     source.wrap,
     romanization.wrap,
+    ...(region ? [region.wrap] : []),
   );
 
   return {
@@ -319,6 +336,7 @@ export function createFormatPanel(input) {
       theme.select(next.themeId);
       ink.select(next.inkMode);
       paper.select.value = next.paper.presetId;
+      if (region) region.select.value = next.region;
       source.select.value = next.source;
       romanization.select.value = next.romanization;
       for (const [field, box] of fieldBoxes) {

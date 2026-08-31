@@ -349,3 +349,17 @@ svg.glyph .g-count { font-size: 8px; fill: var(--muted); text-anchor: end; }
 .field-toggles label { display: flex; gap: 0.4em; align-items: center; cursor: pointer; }
 svg.glyph .g-letter { fill: #55606b; font-weight: 700; text-anchor: middle; font-family: var(--ui); }
 svg.glyph .g-bracket { stroke: var(--accent); stroke-width: 1; fill: none; }
+
+.tree-icon { width: 13px; height: 13px; flex: none; }
+
+/* --- add a term ---------------------------------------------------------- */
+
+details.add-term {
+  margin-top: var(--space-3); border-top: 1px solid var(--line); padding-top: var(--space-2);
+}
+details.add-term > summary {
+  cursor: pointer; font-size: var(--fs--1); font-weight: 600; color: var(--accent);
+}
+details.add-term .field { margin-bottom: var(--space-1); }
+details.add-term input[type="text"] { width: 100%; }
+.tag.mine { border-color: var(--accent); color: var(--accent); font-size: 0.68rem; }

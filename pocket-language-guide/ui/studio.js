@@ -19,6 +19,7 @@ import { renderFaces, highlight } from './preview.js';
 import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from './io.js';
 import { openQuiz, applyQuiz } from './quiz.js';
 import { attachHandles } from './handles.js';
+import { createAddTerm } from './add-term.js';
 
 const BANNER_KEY = 'plg.banner-hidden';
 const SOLVE_DEBOUNCE_MS = 120;
@@ -48,6 +49,8 @@ async function main() {
   let manifest = /** @type {any} */ (null);
   /** @type {Awaited<ReturnType<typeof buildSheet>>|null} */ let built = null;
   /** @type {ReturnType<typeof createTree>|null} */ let updateTree = null;
+  let treeKey = '';
+  /** @type {ReturnType<typeof createAddTerm>|null} */ let addTerm = null;
   /** @type {(()=>void)|null} */ let detachHandles = null;
   /** @type {ReturnType<typeof setTimeout>|undefined} */ let pending;
 
@@ -115,9 +118,12 @@ async function main() {
     const shown = blocks.reduce((n, b) => n + (b.rows?.length ?? 0), 0);
     $('counts').textContent = `${shown} of ${total} items`;
 
-    // Built once; afterwards only checkboxes and counts change, so scroll position
-    // and expanded sections survive a re-solve.
-    if (!updateTree) {
+    // Rebuilt only when its shape changes -- a term added or removed. Otherwise
+    // only checkboxes and counts change, so scroll position and expanded sections
+    // survive a re-solve.
+    const nextTreeKey = edits.extras.map((e) => e.conceptId).join('|');
+    if (!updateTree || nextTreeKey !== treeKey) {
+      treeKey = nextTreeKey;
       updateTree = createTree({
         root: $('tree'),
         corpus: ctx.corpus,
@@ -125,6 +131,8 @@ async function main() {
         sourceRows,
         spec,
         theme,
+        icons,
+        edits,
         onToggle: (patch) => {
           spec = {
             ...spec,
@@ -139,6 +147,30 @@ async function main() {
       });
     }
     updateTree(spec, blocks);
+    // Custom items are written into the same edits an import produces, so a term
+    // typed here and a term imported from a CSV behave identically.
+    if (!addTerm) {
+      addTerm = createAddTerm({
+        root: $('add-term'),
+        corpus: ctx.corpus,
+        spec: () => spec,
+        edits: () => edits,
+        onAdd: (entry) => {
+          edits = { ...edits, extras: [...edits.extras, entry] };
+          saveEdits(spec.target, spec.source, edits);
+          // A new item is worth nothing if its section is switched off.
+          spec = {
+            ...spec,
+            selection: {
+              sections: { ...spec.selection.sections, [entry.sectionId]: true },
+              items: { ...spec.selection.items, [entry.conceptId]: true },
+            },
+          };
+          schedule();
+        },
+      });
+    }
+    addTerm.sync();
     format.sync(spec);
     renderCanvas();
   }
