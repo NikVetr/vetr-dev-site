@@ -119,6 +119,12 @@ def build_face(stack, weight, italic, source, chars):
     options.notdef_outline = True
     options.drop_tables += ["DSIG"]
     options.recalc_bounds = True
+    # Strip TrueType hinting. It only affects low-resolution screen rasterisation,
+    # which never applies to a 600dpi print, and it also matters for correctness:
+    # fontkit's subsetter -- the one pdf-lib calls when embedding -- silently drops
+    # glyphs that carry instructions, so a hinted face loses most of its Latin in
+    # the exported PDF. Also makes the files meaningfully smaller.
+    options.hinting = False
     subsetter = subset.Subsetter(options=options)
     subsetter.populate(unicodes=chars & set(font.getBestCmap()))
     subsetter.subset(font)

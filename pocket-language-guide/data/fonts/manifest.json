@@ -8,8 +8,8 @@
       "italic": false,
       "file": "latin-400",
       "glyphs": 1505,
-      "ttfBytes": 209848,
-      "woff2Bytes": 84172,
+      "ttfBytes": 136792,
+      "woff2Bytes": 57576,
       "source": "NotoSans-Regular.ttf"
     },
     {
@@ -18,8 +18,8 @@
       "italic": false,
       "file": "latin-700",
       "glyphs": 1505,
-      "ttfBytes": 210736,
-      "woff2Bytes": 86956,
+      "ttfBytes": 137340,
+      "woff2Bytes": 60316,
       "source": "NotoSans-Bold.ttf"
     },
     {
@@ -28,8 +28,8 @@
       "italic": true,
       "file": "latin-400i",
       "glyphs": 1511,
-      "ttfBytes": 215264,
-      "woff2Bytes": 84860,
+      "ttfBytes": 141296,
+      "woff2Bytes": 59296,
       "source": "NotoSans-Italic.ttf"
     },
     {
@@ -38,8 +38,8 @@
       "italic": true,
       "file": "latin-700i",
       "glyphs": 1511,
-      "ttfBytes": 216732,
-      "woff2Bytes": 86552,
+      "ttfBytes": 140448,
+      "woff2Bytes": 60384,
       "source": "NotoSans-BoldItalic.ttf"
     },
     {
@@ -48,8 +48,8 @@
       "italic": false,
       "file": "latin-cond-400",
       "glyphs": 1527,
-      "ttfBytes": 146832,
-      "woff2Bytes": 63972,
+      "ttfBytes": 146804,
+      "woff2Bytes": 64028,
       "source": "NotoSans-var.ttf"
     },
     {
@@ -58,8 +58,8 @@
       "italic": false,
       "file": "latin-cond-700",
       "glyphs": 1527,
-      "ttfBytes": 147952,
-      "woff2Bytes": 66424,
+      "ttfBytes": 147920,
+      "woff2Bytes": 66552,
       "source": "NotoSans-var.ttf"
     },
     {
@@ -68,8 +68,8 @@
       "italic": true,
       "file": "latin-cond-400i",
       "glyphs": 1533,
-      "ttfBytes": 153540,
-      "woff2Bytes": 66988,
+      "ttfBytes": 153512,
+      "woff2Bytes": 67000,
       "source": "NotoSans-Italic-var.ttf"
     },
     {
@@ -78,8 +78,8 @@
       "italic": true,
       "file": "latin-cond-700i",
       "glyphs": 1533,
-      "ttfBytes": 154236,
-      "woff2Bytes": 69104,
+      "ttfBytes": 154204,
+      "woff2Bytes": 69188,
       "source": "NotoSans-Italic-var.ttf"
     },
     {
@@ -88,8 +88,8 @@
       "italic": false,
       "file": "cjk-sc-400",
       "glyphs": 4847,
-      "ttfBytes": 1285284,
-      "woff2Bytes": 591652,
+      "ttfBytes": 1285260,
+      "woff2Bytes": 592020,
       "source": "NotoSansSC-var.ttf"
     },
     {
@@ -98,8 +98,8 @@
       "italic": false,
       "file": "cjk-sc-700",
       "glyphs": 4847,
-      "ttfBytes": 1284992,
-      "woff2Bytes": 606068,
+      "ttfBytes": 1284968,
+      "woff2Bytes": 606276,
       "source": "NotoSansSC-var.ttf"
     },
     {
@@ -108,8 +108,8 @@
       "italic": false,
       "file": "cjk-jp-400",
       "glyphs": 5073,
-      "ttfBytes": 1392392,
-      "woff2Bytes": 595552,
+      "ttfBytes": 1392368,
+      "woff2Bytes": 594900,
       "source": "NotoSansJP-var.ttf"
     },
     {
@@ -118,8 +118,8 @@
       "italic": false,
       "file": "cjk-jp-700",
       "glyphs": 5073,
-      "ttfBytes": 1393904,
-      "woff2Bytes": 607876,
+      "ttfBytes": 1393880,
+      "woff2Bytes": 607752,
       "source": "NotoSansJP-var.ttf"
     },
     {
@@ -128,8 +128,8 @@
       "italic": false,
       "file": "arabic-400",
       "glyphs": 1304,
-      "ttfBytes": 200872,
-      "woff2Bytes": 64240,
+      "ttfBytes": 112348,
+      "woff2Bytes": 40536,
       "source": "NotoSansArabic-Regular.ttf"
     },
     {
@@ -138,8 +138,8 @@
       "italic": false,
       "file": "arabic-700",
       "glyphs": 1304,
-      "ttfBytes": 226960,
-      "woff2Bytes": 67292,
+      "ttfBytes": 112080,
+      "woff2Bytes": 41008,
       "source": "NotoSansArabic-Bold.ttf"
     }
   ]

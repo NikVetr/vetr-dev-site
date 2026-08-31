@@ -12,6 +12,9 @@ export interface PDFPageDrawOptions {
   size?: number;
   font?: PDFFont;
   color?: unknown;
+  borderColor?: unknown;
+  borderWidth?: number;
+  borderLineCap?: number;
   opacity?: number;
   rotate?: unknown;
   lineHeight?: number;
