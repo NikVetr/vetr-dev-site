@@ -27,9 +27,9 @@ test.describe('help me decide', () => {
     await expect(page.locator('#counts')).not.toContainText('358 of 359');
     await expect(page.locator('.banner')).toBeHidden();
     // Large print asked for bigger type, not the same content shrunk.
-    await expect(page.locator('#scale')).toHaveValue('1.25');
-    await expect(page.locator('#fields input[data-field="respell"]')).not.toBeChecked();
-    await expect(page.locator('#fields input[data-field="roman"]')).toBeChecked();
+    await expect(page.getByRole('radio', { name: 'X-large' })).toHaveAttribute('aria-checked', 'true');
+    await expect(page.locator('.field-toggles input[data-field="respell"]')).not.toBeChecked();
+    await expect(page.locator('.field-toggles input[data-field="roman"]')).toBeChecked();
     await expect(page.locator('.face.focused')).toBeVisible();
   });
 
@@ -54,17 +54,21 @@ test.describe('drag handles', () => {
     const box = await grip.boundingBox();
     if (!box) throw new Error('no handle to drag');
 
-    const before = await page.locator('#status').textContent();
+    const leftOf = () => grip.evaluate((node) => Number.parseFloat(node.style.left));
+    const before = await leftOf();
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
     await page.mouse.down();
     // Halfway through the drag the readout should be showing inches and points.
-    await page.mouse.move(box.x + box.width / 2 + 40, box.y + box.height / 2, { steps: 8 });
+    await page.mouse.move(box.x + box.width / 2 + 14, box.y + box.height / 2, { steps: 6 });
     await expect(page.locator('.handle-readout')).toContainText('Left margin');
     await expect(page.locator('.handle-readout')).toContainText('in (');
     await page.mouse.up();
 
-    // Committing on release re-solves; a much wider margin means a smaller fit.
-    await expect(page.locator('#status')).not.toHaveText(before ?? '');
+    // Committing on release re-solves, and the new margin has to survive it: the
+    // geometry preset must not be re-read and quietly overwrite the drag.
     await expect(page.locator('.face.focused')).toBeVisible();
+    await expect.poll(leftOf).toBeGreaterThan(before + 0.5);
+    // The sheet still lays out, just with a narrower content box.
+    await expect(page.locator('#status')).toContainText('faces at');
   });
 });

@@ -4,6 +4,7 @@
 // lines, so every renderer -- DOM preview, SVG/PNG, PDF -- draws the same thing
 // and none of them makes a layout decision.
 
+import { resolveField } from '../fonts.js';
 import { buildAtoms } from './atoms.js';
 import { breakColumns } from './columnbreak.js';
 import { placeColumn } from './justify.js';
@@ -40,18 +41,52 @@ export function contentBox(g, paper) {
 }
 
 /**
- * Smallest type size any field would use at scale 1, and the floor imposed by the
- * target script and the chosen paper.
- * @param {any} theme
- * @param {Record<string,string>} script
- * @param {import('../types.js').PaperSpec} paper
+ * How far the type may shrink before something becomes illegible.
+ *
+ * Each field has its own floor, because each is written in its own script: a
+ * romanisation or a respelling is Latin and reads fine at 4.4pt, while Han needs
+ * 5pt to stay distinguishable. Applying the target script's floor to every field
+ * -- as this once did -- pinned the whole sheet to the strictest script it
+ * contained and left auto-fit almost no room to work in.
+ *
+ * @param {SolveInput} input
+ * @returns {{scaleFloor:number, binding:{field:string, size:number, floor:number, script:string}|null}}
  */
-function sizeFloor(theme, script, paper) {
-  const sizes = Object.values(theme.templates)
-    .flatMap((/** @type {any} */ t) => t.fields.map((/** @type {any} */ f) => f.size));
+function legibilityFloor(input) {
+  const { theme, spec, corpus } = input;
+  const targetIso = corpus.languages[spec.target].script;
+  const sourceIso = corpus.languages[spec.source].script;
+  const shown = new Set(spec.fieldSet);
+
+  /** @type {{field:string, size:number, floor:number, script:string}[]} */ const limits = [];
+  const add = (/** @type {string} */ field, /** @type {number} */ size, /** @type {string} */ iso) => {
+    const script = corpus.scripts[iso];
+    if (!script) return;
+    limits.push({
+      field,
+      size,
+      floor: Number(script.min_size_pt) + Number(spec.paper.minSizeDelta),
+      script: script.name,
+    });
+  };
+
+  for (const template of Object.values(theme.templates)) {
+    for (const f of /** @type {any} */ (template).fields) {
+      if (!shown.has(f.field)) continue;
+      add(f.field, f.size, resolveField(f.field, targetIso, sourceIso, corpus.scripts).iso);
+    }
+  }
+  // Notes are prose in the reader's own language.
+  add('note', theme.note.size, sourceIso);
+
+  if (!limits.length) return { scaleFloor: SCALE_MIN, binding: null };
+  let binding = limits[0];
+  for (const limit of limits) {
+    if (limit.floor / limit.size > binding.floor / binding.size) binding = limit;
+  }
   return {
-    smallest: Math.min(...sizes, theme.note.size),
-    floor: Number(script.min_size_pt) + Number(paper.minSizeDelta),
+    scaleFloor: Math.max(SCALE_MIN, binding.floor / binding.size),
+    binding,
   };
 }
 
@@ -75,33 +110,36 @@ export function layout(input) {
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
   const targetScript = corpus.scripts[corpus.languages[spec.target].script];
-  const { smallest, floor } = sizeFloor(theme, targetScript, spec.paper);
-  const scaleFloor = Math.max(SCALE_MIN, floor / smallest);
+  const { scaleFloor, binding } = legibilityFloor(input);
 
   const measureOnly = (/** @type {number} */ scale) => buildAtoms({
     blocks, theme, spec, corpus, measurer, colWidth: box.colWidth, scale, withPaint: false,
   });
 
   let scale = spec.scale;
+  let noFit = false;
   if (spec.scale <= 0) {
     const fitted = autofit(measureOnly, box.height, bins, scaleFloor);
     scale = fitted ?? scaleFloor;
-    if (fitted === null) {
-      warnings.push({
-        code: 'no-fit',
-        severity: 'error',
-        message: `Content will not fit ${spec.geometry.faces} face(s) of `
-          + `${spec.geometry.columns} columns at any legible size. Remove sections, `
-          + 'add a face, or add a column.',
-      });
-    }
+    noFit = fitted === null;
   }
-  if (smallest * scale < floor - 1e-6) {
+  if (noFit) {
+    warnings.push({
+      code: 'no-fit',
+      severity: 'error',
+      message: `The content will not fit ${spec.geometry.faces} `
+        + `${spec.geometry.faces === 1 ? 'face' : 'faces'} of ${spec.geometry.columns} `
+        + `${spec.geometry.columns === 1 ? 'column' : 'columns'} at a legible size.`,
+      fixes: findFixes(input, box, scaleFloor),
+    });
+  }
+  if (binding && binding.size * scale < binding.floor - 1e-6) {
     warnings.push({
       code: 'below-min-size',
       severity: 'warn',
-      message: `Smallest text is ${(smallest * scale).toFixed(2)}pt, below the `
-        + `${floor.toFixed(2)}pt floor for ${targetScript.name} on this paper.`,
+      message: `The smallest ${binding.script} text is `
+        + `${(binding.size * scale).toFixed(2)}pt, below the ${binding.floor.toFixed(2)}pt `
+        + 'this paper can hold legibly.',
     });
   }
   if (targetScript.word_break === 'dict') {
@@ -150,7 +188,20 @@ export function layout(input) {
   });
   const broken = breakColumns(atoms, box.height, bins);
   if (broken.failure) {
-    warnings.push({ code: 'break-failed', severity: 'error', message: broken.failure });
+    // Only speak once. The no-fit warning above already explains this in the
+    // reader's terms and carries the remedies; the breaker's own message is
+    // internal detail.
+    if (!noFit) {
+      warnings.push({
+        code: 'break-failed',
+        severity: 'error',
+        message: spec.scale > 0
+          ? `At ${spec.scale.toFixed(2)}x the content does not fit `
+            + `${spec.geometry.faces * spec.geometry.columns} columns.`
+          : broken.failure,
+        fixes: findFixes(input, box, scaleFloor),
+      });
+    }
     return {
       pageW: spec.geometry.pageW, pageH: spec.geometry.pageH,
       faces: [], warnings, scale, looseness: [],
@@ -194,6 +245,94 @@ export function layout(input) {
   return {
     pageW: spec.geometry.pageW, pageH: spec.geometry.pageH, faces, warnings, scale, looseness,
   };
+}
+
+/** How far to look when searching for a geometry that would fit. */
+const MAX_EXTRA_FACES = 8;
+const MAX_EXTRA_COLUMNS = 3;
+
+/**
+ * Remedies for content that will not fit, each verified to actually work rather
+ * than merely suggested. Ordered by how little they disturb the sheet: more faces
+ * first (same look, more paper), then more columns (denser look, same paper), then
+ * dropping the least important sections.
+ *
+ * @param {SolveInput} input
+ * @param {ReturnType<typeof contentBox>} box
+ * @param {number} scaleFloor
+ * @returns {import('../types.js').WarningFix[]}
+ */
+function findFixes(input, box, scaleFloor) {
+  const { blocks, theme, spec, corpus, measurer } = input;
+  /** @type {import('../types.js').WarningFix[]} */ const fixes = [];
+
+  /** @param {import('../types.js').Geometry} geometry */
+  const fitsWith = (geometry) => {
+    const probeBox = contentBox(geometry, spec.paper);
+    if (probeBox.colWidth < 40 || probeBox.height < 40) return false;
+    const atoms = buildAtoms({
+      blocks, theme, spec: { ...spec, geometry }, corpus, measurer,
+      colWidth: probeBox.colWidth, scale: scaleFloor, withPaint: false,
+    });
+    const bins = geometry.faces * geometry.columns;
+    return !breakColumns(atoms, probeBox.height, bins).failure;
+  };
+
+  for (let extra = 1; extra <= MAX_EXTRA_FACES; extra += 1) {
+    const faces = spec.geometry.faces + extra;
+    if (!fitsWith({ ...spec.geometry, faces })) continue;
+    fixes.push({
+      label: `Use ${faces} faces instead of ${spec.geometry.faces}`,
+      patch: { geometry: { ...spec.geometry, faces } },
+    });
+    break;
+  }
+
+  for (let extra = 1; extra <= MAX_EXTRA_COLUMNS; extra += 1) {
+    const columns = spec.geometry.columns + extra;
+    if (!fitsWith({ ...spec.geometry, columns })) continue;
+    fixes.push({
+      label: `Use ${columns} columns instead of ${spec.geometry.columns}`,
+      patch: { geometry: { ...spec.geometry, columns } },
+    });
+    break;
+  }
+
+  // Last resort: shed sections, least important first, until it fits. Reported as
+  // a count so the reader knows the size of the concession before taking it.
+  const ranked = [...corpus.sections]
+    .filter((section) => blocks.some((b) => b.sectionId === section.section_id))
+    .sort((a, b) => Number(a.importance) - Number(b.importance));
+  /** @type {Record<string,boolean>} */ const dropped = {};
+  for (const section of ranked) {
+    dropped[section.section_id] = false;
+    const kept = blocks.filter((b) => dropped[b.sectionId] !== false);
+    const atoms = buildAtoms({
+      blocks: kept, theme, spec, corpus, measurer,
+      colWidth: box.colWidth, scale: scaleFloor, withPaint: false,
+    });
+    const bins = spec.geometry.faces * spec.geometry.columns;
+    if (breakColumns(atoms, box.height, bins).failure) continue;
+    const count = Object.keys(dropped).length;
+    fixes.push({
+      label: `Drop the ${count} least important ${count === 1 ? 'section' : 'sections'}`,
+      patch: {
+        selection: {
+          sections: { ...spec.selection.sections, ...dropped },
+          items: spec.selection.items,
+        },
+      },
+    });
+    break;
+  }
+
+  if (spec.scale > 0) {
+    fixes.unshift({
+      label: 'Fit the type to the page automatically',
+      patch: { scale: 0 },
+    });
+  }
+  return fixes;
 }
 
 /**

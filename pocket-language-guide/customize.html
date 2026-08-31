@@ -31,65 +31,7 @@
 <main class="studio">
   <section aria-label="Formatting">
     <h2 class="panel-title">Format</h2>
-    <div class="field">
-      <label for="geometry"><span>Card size and columns</span></label>
-      <select id="geometry"></select>
-    </div>
-    <div class="field">
-      <label for="paper"><span>Paper and printer</span></label>
-      <select id="paper"></select>
-    </div>
-    <div class="field">
-      <label for="source"><span>Glossed into</span></label>
-      <select id="source"></select>
-    </div>
-    <div class="field">
-      <label for="romanization"><span>Romanisation</span></label>
-      <select id="romanization"></select>
-    </div>
-    <div class="field">
-      <label for="theme"><span>Colours</span></label>
-      <select id="theme">
-        <option value="latex-reference">Reference palette</option>
-        <option value="cvd-safe">High contrast (colour-vision safe)</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="ink"><span>Ink</span></label>
-      <select id="ink">
-        <option value="full">Full colour</option>
-        <option value="low-ink">Low ink</option>
-        <option value="mono">Black and white</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="faces"><span>Faces</span></label>
-      <input type="number" id="faces" min="1" max="12" step="1">
-    </div>
-    <div class="field">
-      <label for="scale"><span>Type size</span></label>
-      <select id="scale">
-        <option value="0">Fit to the faces above</option>
-        <option value="0.9">Smaller (0.9×)</option>
-        <option value="1">Reference (1×)</option>
-        <option value="1.1">Larger (1.1×)</option>
-        <option value="1.25">Large print (1.25×)</option>
-      </select>
-    </div>
-
-    <h2 class="panel-title" style="margin-top: 1.2rem;">Columns shown</h2>
-    <div id="fields"></div>
-
-    <h2 class="panel-title" style="margin-top: 1.2rem;">Cut into cards</h2>
-    <div class="field">
-      <label for="flip"><span>Your printer flips on the…</span></label>
-      <select id="flip">
-        <option value="">Don't split — full sheets</option>
-        <option value="short-edge">Short edge (no rotation)</option>
-        <option value="long-edge">Long edge (back rotated)</option>
-      </select>
-    </div>
-    <p class="small muted" id="flip-note" style="margin-top: -.3rem;"></p>
+    <div id="format"></div>
 
     <h2 class="panel-title" style="margin-top: 1.2rem;">Files</h2>
     <div class="row">

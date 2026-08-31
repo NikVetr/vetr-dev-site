@@ -1,17 +1,17 @@
-bcp47,endonym,exonym_en,script,script_alt,romanizations,badge,status
-en,English,English,Latn,,,Aa,ready
-es,Español,Spanish,Latn,,,Áé,draft
-zh-Hans,简体中文,Chinese (Simplified),Hans,Hant,pinyin,中,ready
-ja,日本語,Japanese,Jpan,,hepburn;kunrei,あ,draft
-ar,العربية,Arabic,Arab,,dinal31635,ع,draft
-fr,Français,French,Latn,,,Àç,planned
-de,Deutsch,German,Latn,,,Äß,planned
-pt,Português,Portuguese,Latn,,,Ãç,planned
-ko,한국어,Korean,Kore,,revised;mccune,한,planned
-hi,हिन्दी,Hindi,Deva,,iast;hunterian,अ,planned
-th,ไทย,Thai,Thai,,rtgs,ก,planned
-ru,Русский,Russian,Cyrl,,bgn,Яж,planned
-id,Bahasa Indonesia,Indonesian,Latn,,,Aa,planned
-sw,Kiswahili,Swahili,Latn,,,Aa,planned
-tr,Türkçe,Turkish,Latn,,,Şğ,planned
-vi,Tiếng Việt,Vietnamese,Latn,,,Ệ,planned
+bcp47,endonym,exonym_en,script,script_alt,romanizations,badge,status,regions,speak_label
+en,English,English,Latn,,,Aa,ready,GB;US;CA;AU;NZ;IE;ZA;IN,I speak
+es,Español,Spanish,Latn,,,Áé,draft,ES;MX;AR;CO;CL;PE,Hablo
+zh-Hans,简体中文,Chinese (Simplified),Hans,Hant,pinyin,中,ready,CN;SG;MY,我说
+ja,日本語,Japanese,Jpan,,hepburn;kunrei,あ,draft,JP,話せる言語
+ar,العربية,Arabic,Arab,,dinal31635,ع,draft,SA;EG;AE;MA;JO;IQ,أتحدث
+fr,Français,French,Latn,,,Àç,planned,FR;CA;BE;CH;SN;CI,Je parle
+de,Deutsch,German,Latn,,,Äß,planned,DE;AT;CH,Ich spreche
+pt,Português,Portuguese,Latn,,,Ãç,planned,PT;BR;AO;MZ,Eu falo
+ko,한국어,Korean,Kore,,revised;mccune,한,planned,KR,사용 언어
+hi,हिन्दी,Hindi,Deva,,iast;hunterian,अ,planned,IN,मैं बोलता हूँ
+th,ไทย,Thai,Thai,,rtgs,ก,planned,TH,ฉันพูด
+ru,Русский,Russian,Cyrl,,bgn,Яж,planned,RU;BY;KZ;KG,Я говорю на
+id,Bahasa Indonesia,Indonesian,Latn,,,Aa,planned,ID,Saya berbicara
+sw,Kiswahili,Swahili,Latn,,,Aa,planned,TZ;KE;UG;CD,Ninasema
+tr,Türkçe,Turkish,Latn,,,Şğ,planned,TR;CY,Konuştuğum dil
+vi,Tiếng Việt,Vietnamese,Latn,,,Ệ,planned,VN,Tôi nói

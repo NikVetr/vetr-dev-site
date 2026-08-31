@@ -110,6 +110,8 @@
  * @property {PaperSpec} paper
  * @property {string} themeId
  * @property {'full'|'low-ink'|'mono'} inkMode
+ * @property {number} density  extra points of separation between text elements
+ * @property {'two-column'|'one-row'|'stacked'} arrangement  item field layout
  * @property {number} scale
  * @property {{sections:Record<string,boolean>, items:Record<string,boolean>}} selection
  */
@@ -139,10 +141,19 @@
  * @typedef {{rects:Rect[], runs:TextRun[], icons:IconMark[], hits:HitBox[], rotate?:number}} Face */
 
 /**
+ * A remedy the reader can apply with one click. `patch` is a shallow overlay on
+ * the SheetSpec, so a warning can offer the fix rather than only describe it.
+ * @typedef {Object} WarningFix
+ * @property {string} label
+ * @property {Partial<SheetSpec>} patch
+ */
+
+/**
  * @typedef {Object} Warning
  * @property {string} code
  * @property {'info'|'warn'|'error'} severity
  * @property {string} message
+ * @property {WarningFix[]} [fixes]
  * @property {number} [faceIndex]
  * @property {string} [conceptId]
  */

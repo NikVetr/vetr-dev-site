@@ -44,6 +44,13 @@ def main():
             iso = lang[field]
             if iso and iso not in scripts:
                 errors.append(f"languages.csv: {code} references unknown script {iso!r}")
+        # Flags are built from these, so a malformed code would render as tofu.
+        for region in filter(None, lang["regions"].split(";")):
+            if len(region) != 2 or not region.isalpha() or region != region.upper():
+                errors.append(f"languages.csv: {code} has bad region code {region!r} "
+                              "(want ISO 3166-1 alpha-2, uppercase)")
+        if not lang["speak_label"].strip():
+            errors.append(f"languages.csv: {code} has no speak_label")
     if not papers:
         errors.append("registry/paper.csv: no presets")
 

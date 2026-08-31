@@ -23,9 +23,10 @@ const targetRows = await loadLanguage(ctx.loadText, spec.target, ctx.corpus.grou
 const sourceRows = await loadLanguage(ctx.loadText, spec.source, ctx.corpus.groups);
 const respell = await loadRespellOverrides(ctx.loadText, spec.target, spec.source, spec.accent);
 const blocks = buildBlocks({ corpus: ctx.corpus, targetRows, sourceRows, respell, spec });
+const fitted = (await buildSheet(ctx, { ...spec, scale: 0 })).plan.scale;
 const atoms = buildAtoms({
   blocks, theme, spec, corpus: ctx.corpus, measurer: ctx.measurer,
-  colWidth: box.colWidth, scale: 1, withPaint: true,
+  colWidth: box.colWidth, scale: fitted, withPaint: true,
 });
 
 test('content box reproduces the reference geometry', () => {

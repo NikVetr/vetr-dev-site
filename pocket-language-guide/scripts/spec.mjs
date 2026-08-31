@@ -22,6 +22,8 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     },
     themeId: 'latex-reference',
     inkMode: 'full',
+    density: 0.7,
+    arrangement: 'two-column',
     scale: 1,
     selection: { sections: {}, items: {} },
     ...overrides,

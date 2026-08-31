@@ -115,6 +115,8 @@ export function makeSpec(ctx, presets, choice) {
     },
     themeId: 'latex-reference',
     inkMode: 'full',
+    density: 0.7,
+    arrangement: 'two-column',
     scale: 0,
     selection: { sections: {}, items: {} },
   };

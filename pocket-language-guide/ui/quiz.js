@@ -132,7 +132,7 @@ export function applyQuiz(spec, corpus, answers) {
     ...spec,
     fieldSet: fields,
     // Large print means fewer, bigger items rather than the same content shrunk.
-    scale: answers.print === 'large' ? 1.25 : 0,
+    scale: answers.print === 'large' ? 1.3 : 0,
     selection: answers.interests.length
       ? defaultSelection(corpus, answers.interests)
       : { sections: {}, items: {} },

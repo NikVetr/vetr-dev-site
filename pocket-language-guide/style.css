@@ -283,3 +283,69 @@ dialog.quiz legend { font-size: var(--fs--1); color: var(--muted); padding-inlin
 .quiz-option {
   display: flex; gap: 0.5em; align-items: baseline; padding: 0.2em 0; cursor: pointer;
 }
+
+.warnings .fixes { margin-top: 0.4em; gap: var(--space-1); }
+button.fix {
+  font-size: inherit; padding: 0.2em 0.6em; background: var(--paper);
+  border-color: currentColor; color: inherit; font-weight: 600;
+}
+button.fix:hover { background: rgb(255 255 255 / 70%); }
+
+/* --- flags and the multilingual picker label ------------------------------ */
+
+.card-titles { min-width: 0; }
+.flags { display: flex; gap: 0.2em; margin-top: 0.25em; line-height: 1; flex-wrap: wrap; }
+.flag { font-size: 0.95rem; }
+.flags.as-codes .flag {
+  font-size: var(--fs--1); font-weight: 600; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 3px; padding: 0 0.25em; line-height: 1.35;
+}
+.flag.more { font-size: var(--fs--1); color: var(--muted); align-self: center; }
+
+#reader-label {
+  display: inline-block; min-width: 6.5ch; text-align: end;
+  transition: opacity 200ms;
+}
+#reader-label.fading { opacity: 0; }
+
+/* --- glyph settings controls ---------------------------------------------- */
+
+.panel-field { margin-bottom: var(--space-3); }
+.panel-field-title {
+  display: block; font-size: var(--fs--1); color: var(--muted); margin-bottom: 0.25em;
+}
+.panel-note { margin: 0.35em 0 0; }
+
+.segmented { display: flex; flex-wrap: wrap; gap: 4px; }
+.segment {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 4px 5px 3px; min-width: 44px; border: 1px solid var(--line);
+  border-radius: var(--radius-sm); background: var(--paper); cursor: pointer;
+}
+.segment:hover { background: var(--surface); }
+.segment.current {
+  border-color: var(--accent); background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.segment-caption {
+  font-size: 0.66rem; line-height: 1.1; color: var(--muted); text-align: center;
+  max-width: 6.5em; overflow-wrap: anywhere;
+}
+.segment.current .segment-caption { color: var(--accent); font-weight: 600; }
+
+svg.glyph { display: block; }
+svg.glyph .g-page { fill: #fff; stroke: var(--muted); stroke-width: 0.8; }
+svg.glyph .g-col { fill: #ccd6de; }
+svg.glyph .g-ink { fill: #55606b; }
+svg.glyph .g-ink.faint { fill: #aeb8c1; }
+svg.glyph .g-shade { fill: #eef2f5; }
+svg.glyph .g-accent { fill: var(--accent); }
+svg.glyph .g-cut { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 2; fill: none; }
+svg.glyph .g-mark { fill: var(--accent); }
+svg.glyph .g-count { font-size: 8px; fill: var(--muted); text-anchor: end; }
+.segment.current svg.glyph .g-col { fill: #a9c6da; }
+
+.field-toggles { display: flex; flex-direction: column; gap: 1px; }
+.field-toggles label { display: flex; gap: 0.4em; align-items: center; cursor: pointer; }
+svg.glyph .g-letter { fill: #55606b; font-weight: 700; text-anchor: middle; font-family: var(--ui); }
+svg.glyph .g-bracket { stroke: var(--accent); stroke-width: 1; fill: none; }

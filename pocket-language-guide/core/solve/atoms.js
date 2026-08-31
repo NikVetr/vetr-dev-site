@@ -12,6 +12,7 @@
 import { resolveField, isTargetSide } from '../fonts.js';
 import { inkWidth } from '../measure.js';
 import { chooseSplit, chooseSharedWidths } from './rowsplit.js';
+import { arrangeTemplate } from './arrange.js';
 
 const KEEP_ROWS = 2;
 
@@ -74,6 +75,10 @@ function makePalette(theme, inkMode) {
  * @param {number} ctx.scale
  */
 function makeContext({ theme, spec, corpus, measurer, colWidth, scale }) {
+  // Breathing room between text elements, in points at the current scale. The
+  // reference sheet's padding is essentially zero -- consecutive rows are held
+  // apart by a 0.22pt rule alone -- which is tight enough to read as cramped.
+  const density = (spec.density ?? 0) * scale;
   const targetLang = corpus.languages[spec.target];
   const sourceLang = corpus.languages[spec.source];
   if (!targetLang) throw new Error(`unknown target language ${spec.target}`);
@@ -110,6 +115,7 @@ function makeContext({ theme, spec, corpus, measurer, colWidth, scale }) {
     measurer,
     colWidth,
     scale,
+    density,
     palette,
     shown,
     styleFor,
@@ -187,12 +193,12 @@ function headingAtom(ctx, block) {
   };
   const color = ctx.palette.roles[block.colorRole];
   const iconW = h.iconSize > 0 && block.icon ? h.iconSize * s + h.iconGap * s : 0;
-  const textTop = h.spaceBefore * s;
+  const textTop = h.spaceBefore * s + ctx.density * 0.5;
   const painted = paintField(ctx, block.text ?? '', style, {
     x: iconW, y: textTop, w: ctx.colWidth - iconW, align: 'start', fill: ctx.palette.ink,
   });
   const ruleY = textTop + painted.height + h.gapBeforeRule * s;
-  const height = ruleY + h.rulePt + h.gapAfterRule * s;
+  const height = ruleY + h.rulePt + h.gapAfterRule * s + ctx.density * 0.5;
 
   /** @type {IconMark[]} */ const icons = [];
   if (iconW > 0 && block.icon) {
@@ -255,10 +261,14 @@ function resolveAlign(align, mirror) {
  * @returns {Atom[]}
  */
 function itemAtoms(ctx, block, rows, withPaint) {
-  const template = ctx.theme.templates[block.templateId ?? 'entry'];
-  if (!template) throw new Error(`unknown template ${block.templateId}`);
+  const base = ctx.theme.templates[block.templateId ?? 'entry'];
+  if (!base) throw new Error(`unknown template ${block.templateId}`);
+  const template = arrangeTemplate(base, ctx.spec.arrangement ?? 'two-column', ctx.shown);
   const s = ctx.scale;
   const pad = template.pad.map((/** @type {number} */ v) => v * s);
+  pad[0] += ctx.density;
+  pad[2] += ctx.density;
+  const rowGap = template.rowGap * s + ctx.density * 0.6;
   const gutter = template.colGap * s * (template.cols - 1);
   const avail = ctx.colWidth - pad[3] - pad[1] - gutter;
   const grids = rows.map((row) => cellGrid(ctx, template, row));
@@ -279,7 +289,7 @@ function itemAtoms(ctx, block, rows, withPaint) {
       const live = cells.filter((c) => c.text !== '');
       const height = live.reduce(
         (sum, c, k) => sum + ctx.measurer.wrap(c.text, widths[j], c.style).height
-          + (k > 0 ? template.rowGap * s : 0),
+          + (k > 0 ? rowGap : 0),
         0,
       );
       return { live, height };
@@ -304,7 +314,7 @@ function itemAtoms(ctx, block, rows, withPaint) {
       const stackHeight = stacks[j].height;
       let y = pad[0] + (template.valign === 'middle' ? (gridHeight - stackHeight) / 2 : 0);
       live.forEach((cell, k) => {
-        if (k > 0) y += template.rowGap * s;
+        if (k > 0) y += rowGap;
         const painted = paintField(ctx, cell.text, cell.style, {
           x, y, w: widths[j],
           align: resolveAlign(cell.fs.align, ctx.mirror),
@@ -356,6 +366,8 @@ function noteAtom(ctx, block, withPaint) {
   const n = ctx.theme.note;
   const s = ctx.scale;
   const pad = n.pad.map((/** @type {number} */ v) => v * s);
+  pad[0] += ctx.density;
+  pad[2] += ctx.density;
   const style = {
     stack: ctx.sourceStack.stack,
     dir: ctx.sourceStack.dir,

@@ -47,19 +47,48 @@ test.describe('studio', () => {
     await expect(page.locator('#counts')).toContainText('358 of 359');
   });
 
-  test('a geometry that cannot hold the content fails loudly', async ({ page }) => {
+  test('a geometry that cannot hold the content fails loudly, once', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
-    await page.selectOption('#geometry', 'wallet-2col');
-    await expect(page.locator('#warnings li.error').first()).toContainText('will not fit');
+    await page.getByRole('radio', { name: 'Credit-card size' }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
+    // One message in the reader's terms, not that plus the breaker's internals.
+    await expect(page.locator('#warnings li.error')).toHaveCount(1);
+    await expect(page.locator('#warnings li.error')).toContainText('will not fit');
+  });
+
+  test('an unfittable sheet offers fixes that actually fix it', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    await page.getByRole('radio', { name: 'A6' }).click();
+    await expect(page.locator('#status')).toContainText('nothing to lay out');
+
+    const fix = page.locator('button.fix').first();
+    await expect(fix).toContainText('faces instead of');
+    await fix.click();
+
+    // The remedy was verified before being offered, so it has to clear the error.
+    await expect(page.locator('#warnings li.error')).toHaveCount(0);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    // And the panel reflects the change it made, rather than still showing 4.
+    await expect(page.getByRole('radiogroup', { name: 'Faces' })
+      .getByRole('radio', { name: '6', exact: true })).toHaveAttribute('aria-checked', 'true');
+  });
+
+  test('balancing is refused, with a reason, while the sheet does not fit', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    await page.getByRole('radio', { name: 'Credit-card size' }).click();
+    await expect(page.locator('#status')).toContainText('nothing to lay out');
+    await page.locator('#balance').click();
+    await expect(page.locator('#diff p')).toContainText('does not fit yet');
   });
 
   test('balancing proposes reasoned additions and applying them adds items', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
-    await page.selectOption('#scale', '1');
-    await expect(page.locator('#status')).toContainText('1.00×');
+    await page.getByRole('radio', { name: 'Small' }).click();
+    await expect(page.locator('#status')).toContainText('0.90x');
 
     const boxes = page.locator('.items input[type=checkbox]');
     const count = await boxes.count();
@@ -91,8 +120,8 @@ test.describe('studio', () => {
     await page.locator('#pdf').click();
     expect((await sheet).suggestedFilename()).toBe('chinese-simplified-pocket-guide.pdf');
 
-    await page.selectOption('#flip', 'short-edge');
-    await expect(page.locator('#flip-note')).toContainText('four double-sided cards');
+    await page.getByRole('radio', { name: 'Short edge' }).click();
+    await expect(page.locator('.panel-note')).toContainText('four double-sided cards');
     const cards = page.waitForEvent('download');
     await page.locator('#pdf').click();
     expect((await cards).suggestedFilename()).toBe('chinese-simplified-pocket-guide-cards.pdf');

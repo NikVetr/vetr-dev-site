@@ -6,6 +6,7 @@ import {
   browserSheetContext, loadText, loadLanguages, readerLanguage, registerOffline,
   saveForOffline, setReaderLanguage, showFatal,
 } from './app.js';
+import { regionRow } from './flags.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -32,11 +33,15 @@ function card(lang, packs, reader, coverage) {
   const have = Math.min(coverage.languages[lang.bcp47] ?? 0, coverage.languages[reader] ?? 0);
   const query = `?target=${encodeURIComponent(lang.bcp47)}&source=${encodeURIComponent(reader)}`;
 
+  const flags = regionRow(lang.regions, {
+    label: `${lang.exonym_en} is spoken in ${lang.regions.split(';').join(', ')}`,
+  });
   const head = el('div', { class: 'card-head' }, [
     el('span', { class: 'card-badge', 'aria-hidden': 'true', text: lang.badge }),
-    el('span', {}, [
+    el('span', { class: 'card-titles' }, [
       el('div', { class: 'card-name', text: lang.exonym_en }),
       el('div', { class: 'small muted', text: lang.endonym, lang: lang.bcp47 }),
+      ...(flags ? [flags] : []),
     ]),
   ]);
 
@@ -90,6 +95,47 @@ function card(lang, packs, reader, coverage) {
   return el('article', { class: 'card' }, [head, thumb, el('div', { class: 'card-actions' }, actions)]);
 }
 
+/**
+ * Rotate the picker's label through the languages we can gloss into. The reader's
+ * own language leads, so the common case needs no waiting; the rest follow so
+ * someone who reads none of the earlier ones still finds it. Held static under
+ * prefers-reduced-motion.
+ * @param {Record<string,string>[]} languages
+ * @param {()=>string} currentReader
+ */
+function cycleSpeakLabel(languages, currentReader) {
+  const label = document.getElementById('reader-label');
+  if (!label) return;
+  const usable = languages.filter((l) => l.speak_label);
+
+  const ordered = () => {
+    const reader = currentReader();
+    const mine = usable.filter((l) => l.bcp47 === reader);
+    return [...mine, ...usable.filter((l) => l.bcp47 !== reader)];
+  };
+
+  /** @param {Record<string,string>} lang */
+  const show = (lang) => {
+    label.textContent = lang.speak_label;
+    label.lang = lang.bcp47;
+    label.dir = lang.bcp47 === 'ar' ? 'rtl' : 'ltr';
+  };
+
+  show(ordered()[0]);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let i = 0;
+  setInterval(() => {
+    const list = ordered();
+    i = (i + 1) % list.length;
+    label.classList.add('fading');
+    setTimeout(() => {
+      show(list[i]);
+      label.classList.remove('fading');
+    }, 220);
+  }, 2600);
+}
+
 async function main() {
   registerOffline();
   const languages = await loadLanguages();
@@ -110,6 +156,7 @@ async function main() {
     picker.append(el('option', { value: lang.bcp47, text: `${lang.endonym} (${lang.exonym_en})` }));
   }
   picker.value = reader;
+  cycleSpeakLabel(languages, () => picker.value);
   picker.addEventListener('change', () => {
     setReaderLanguage(picker.value);
     render(picker.value);
