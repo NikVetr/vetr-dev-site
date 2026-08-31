@@ -1,0 +1,17 @@
+bcp47,endonym,exonym_en,script,script_alt,romanizations,font_stack,badge,status
+en,English,English,Latn,,,latin,Aa,ready
+es,Español,Spanish,Latn,,,latin,Áé,draft
+zh-Hans,简体中文,Chinese (Simplified),Hans,Hant,pinyin,cjk-sc,中,ready
+ja,日本語,Japanese,Jpan,,hepburn;kunrei,cjk-jp,あ,draft
+ar,العربية,Arabic,Arab,,dinal31635,arabic,ع,draft
+fr,Français,French,Latn,,,latin,Àç,planned
+de,Deutsch,German,Latn,,,latin,Äß,planned
+pt,Português,Portuguese,Latn,,,latin,Ãç,planned
+ko,한국어,Korean,Kore,,revised;mccune,cjk-kr,한,planned
+hi,हिन्दी,Hindi,Deva,,iast;hunterian,deva,अ,planned
+th,ไทย,Thai,Thai,,rtgs,thai,ก,planned
+ru,Русский,Russian,Cyrl,,bgn,cyrl,Яж,planned
+id,Bahasa Indonesia,Indonesian,Latn,,,latin,Aa,planned
+sw,Kiswahili,Swahili,Latn,,,latin,Aa,planned
+tr,Türkçe,Turkish,Latn,,,latin,Şğ,planned
+vi,Tiếng Việt,Vietnamese,Latn,,,latin,Ệ,planned

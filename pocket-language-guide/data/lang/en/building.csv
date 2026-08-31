@@ -1,0 +1,18 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,What room number is this?,,,,2,latex-reference-v2
+building-help.i-am-lost,I am lost,,,,2,latex-reference-v2
+building-help.where-is-reception,Where is reception?,,,,2,latex-reference-v2
+building-help.where-is-a-power-outlet,Where is a power outlet?,,,,2,latex-reference-v2
+in-a-building.is-this-the-correct-entrance,Is this the correct entrance?,,,,2,latex-reference-v2
+in-a-building.where-is-the-restroom,Where is the restroom?,,,,2,latex-reference-v2
+in-a-building.do-you-have-wi-fi,Do you have Wi-Fi?,,,,2,latex-reference-v2
+in-a-building.what-is-the-wi-fi-password,What is the Wi-Fi password?,,,,2,latex-reference-v2
+in-a-building.which-floor,Which floor?,,,,2,latex-reference-v2
+building-words.elevator,elevator,,,,2,latex-reference-v2
+building-words.stairs,stairs,,,,2,latex-reference-v2
+building-words.entrance,entrance,,,,2,latex-reference-v2
+building-words.exit,exit,,,,2,latex-reference-v2
+building-words.men,men,,,,2,latex-reference-v2
+building-words.women,women,,,,2,latex-reference-v2
+building-words.door,door,,,,2,latex-reference-v2
+building-words.key,key,,,,2,latex-reference-v2

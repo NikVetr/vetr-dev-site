@@ -1,0 +1,21 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+hotel-words.passport,passport,,,,2,latex-reference-v2
+hotel-words.room-key-card,room key card,,,,2,latex-reference-v2
+hotel-words.check-in,check-in,,,,2,latex-reference-v2
+hotel-words.check-out,check-out,,,,2,latex-reference-v2
+hotel-basics.are-any-rooms-available,Are any rooms available?,,,,2,latex-reference-v2
+hotel-basics.there-are-two-of-us,There are two of us,,,,2,latex-reference-v2
+hotel-basics.i-have-a-reservation,I have a reservation,,,,2,latex-reference-v2
+hotel-basics.can-i-charge-my-phone,Can I charge my phone?,,,,2,latex-reference-v2
+hotel-basics.i-would-like-a-non-smoking-room,I would like a non-smoking room,,,,2,latex-reference-v2
+hotel-basics.i-would-like-a-quiet-room,I would like a quiet room,,,,2,latex-reference-v2
+hotel-basics.is-there-a-washing-machine,Is there a washing machine?,,,,2,latex-reference-v2
+hotel-requests.can-i-check-out-later,Can I check out later?,,,,2,latex-reference-v2
+hotel-requests.what-time-does-breakfast-start,What time does breakfast start?,,,,2,latex-reference-v2
+hotel-requests.can-i-store-my-luggage,Can I store my luggage?,,,,2,latex-reference-v2
+hotel-requests.no-housekeeping,No housekeeping,,,,2,latex-reference-v2
+room-problems.there-is-a-problem-with-the-room,There is a problem with the room,,,,2,latex-reference-v2
+room-problems.the-air-conditioning-is-broken,The air conditioning is broken,,,,2,latex-reference-v2
+room-problems.there-is-no-hot-water,There is no hot water,,,,2,latex-reference-v2
+room-problems.can-i-change-rooms,Can I change rooms?,,,,2,latex-reference-v2
+room-problems.the-room-is-too-noisy,The room is too noisy,,,,2,latex-reference-v2

@@ -1,0 +1,69 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+directions.where-is,Where is {} ?,,,,2,latex-reference-v2
+directions.how-do-i-get-to,How do I get to {} ?,,,,2,latex-reference-v2
+directions.is-it-far,Is it far?,,,,2,latex-reference-v2
+directions.how-long-on-foot,How long on foot?,,,,2,latex-reference-v2
+quick-directions.go-straight,Go straight,,,,2,latex-reference-v2
+quick-directions.turn-left,Turn left,,,,2,latex-reference-v2
+quick-directions.turn-right,Turn right,,,,2,latex-reference-v2
+quick-directions.this-way,This way,,,,2,latex-reference-v2
+quick-directions.that-way,That way,,,,2,latex-reference-v2
+quick-directions.on-the-left,On the left,,,,2,latex-reference-v2
+quick-directions.on-the-right,On the right,,,,2,latex-reference-v2
+quick-directions.across-from-here,Across from here,,,,2,latex-reference-v2
+quick-directions.in-front,In front,,,,2,latex-reference-v2
+quick-directions.behind,Behind,,,,2,latex-reference-v2
+taxi.please-take-me-here,Please take me here,,,,2,latex-reference-v2
+taxi.please-send-me-the-address,Please send me the address,,,,2,latex-reference-v2
+taxi.we-need-the-east-gate-not-the-south-gate,"We need the East Gate, not the South Gate",,,,2,latex-reference-v2
+taxi.please-stop-here,Please stop here,,,,2,latex-reference-v2
+taxi.can-you-wait-for-me-here,Can you wait for me here?,,,,2,latex-reference-v2
+taxi.we-need-to-catch-the-high-speed-train,We need to catch the high-speed train,,,,2,latex-reference-v2
+taxi.please-use-the-meter,Please use the meter,,,,2,latex-reference-v2
+transit-rides.two-tickets,Two tickets,,,,2,latex-reference-v2
+transit-rides.where-is-the-subway-station,Where is the subway station?,,,,2,latex-reference-v2
+transit-rides.does-this-bus-train-go-to,Does this bus / train go to {} ?,,,,2,latex-reference-v2
+transit-rides.what-is-the-next-stop,What is the next stop?,,,,2,latex-reference-v2
+transit-rides.please-tell-me-where-to-get-off,Please tell me where to get off,,,,2,latex-reference-v2
+transit-rides.is-this-direct,Is this direct?,,,,2,latex-reference-v2
+transit-rides.do-i-need-to-transfer,Do I need to transfer?,,,,2,latex-reference-v2
+transit-rides.is-it-delayed,Is it delayed?,,,,2,latex-reference-v2
+transit-rides.i-am-in-a-hurry,I am in a hurry,,,,2,latex-reference-v2
+transit-rides.which-platform,Which platform?,,,,2,latex-reference-v2
+transit-rides.what-time-is-the-next-one,What time is the next one?,,,,2,latex-reference-v2
+transit-rides.i-went-past-my-stop,I went past my stop,,,,2,latex-reference-v2
+place-words.scenic-area,scenic area,,,,2,latex-reference-v2
+place-words.visitor-center,visitor center,,,,2,latex-reference-v2
+place-words.railway-station,railway station,,,,2,latex-reference-v2
+place-words.airport,airport,,,,2,latex-reference-v2
+place-words.service-desk,service desk,,,,2,latex-reference-v2
+place-words.bus-stop,bus stop,,,,2,latex-reference-v2
+place-words.luggage-storage,luggage storage,,,,2,latex-reference-v2
+pickup-meeting.where-is-the-pickup-point,Where is the pickup point?,,,,2,latex-reference-v2
+pickup-meeting.please-send-me-the-pickup-point,Please send me the pickup point,,,,2,latex-reference-v2
+pickup-meeting.please-pick-us-up-here,Please pick us up here,,,,2,latex-reference-v2
+pickup-meeting.meet-us-at,Meet us at {},,,,2,latex-reference-v2
+pickup-meeting.please-call-me-a-ride,Please call me a ride,,,,2,latex-reference-v2
+rail-station-words.high-speed-rail,high-speed rail,,,,2,latex-reference-v2
+rail-station-words.maglev,maglev,,,,2,latex-reference-v2
+rail-station-words.transfer,transfer,,,,2,latex-reference-v2
+rail-station-words.ticket-gate,ticket gate,,,,2,latex-reference-v2
+rail-station-words.platform,platform,,,,2,latex-reference-v2
+rail-station-words.ticket-office,ticket office,,,,2,latex-reference-v2
+rail-station-words.waiting-room,waiting room,,,,2,latex-reference-v2
+rail-station-words.train-number,train number,,,,2,latex-reference-v2
+rail-station-words.carriage,carriage,,,,2,latex-reference-v2
+rail-station-words.seat,seat,,,,2,latex-reference-v2
+rail-station-words.last-train,last train,,,,2,latex-reference-v2
+rail-station-words.delayed,delayed,,,,2,latex-reference-v2
+rail-station-words.final-stop,final stop,,,,2,latex-reference-v2
+common-signs.open-on,open / on,,,,2,latex-reference-v2
+common-signs.closed-off,closed / off,,,,2,latex-reference-v2
+common-signs.occupied,occupied,,,,2,latex-reference-v2
+common-signs.vacant,vacant,,,,2,latex-reference-v2
+common-signs.caution,caution,,,,2,latex-reference-v2
+common-signs.no-entry,no entry,,,,2,latex-reference-v2
+common-signs.no-smoking,no smoking,,,,2,latex-reference-v2
+common-signs.no-photography,no photography,,,,2,latex-reference-v2
+common-signs.do-not-touch,do not touch,,,,2,latex-reference-v2
+common-signs.temporarily-closed,temporarily closed,,,,2,latex-reference-v2

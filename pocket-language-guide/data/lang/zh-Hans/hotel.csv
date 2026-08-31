@@ -1,0 +1,21 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+hotel-words.passport,护照,,hùzhào,,,2,latex-reference-v2
+hotel-words.room-key-card,房卡,,fángkǎ,,,2,latex-reference-v2
+hotel-words.check-in,入住,,rùzhù,,,2,latex-reference-v2
+hotel-words.check-out,退房,,tuìfáng,,,2,latex-reference-v2
+hotel-basics.are-any-rooms-available,有空房吗？,,yǒu kòngfáng ma?,,,2,latex-reference-v2
+hotel-basics.there-are-two-of-us,我们两个人,,wǒmen liǎng gè rén,,,2,latex-reference-v2
+hotel-basics.i-have-a-reservation,我有预订,,wǒ yǒu yùdìng,,,2,latex-reference-v2
+hotel-basics.can-i-charge-my-phone,可以给手机充电吗？,,kěyǐ gěi shǒujī chōngdiàn ma?,,,2,latex-reference-v2
+hotel-basics.i-would-like-a-non-smoking-room,我要无烟房,,wǒ yào wúyān fáng,,,2,latex-reference-v2
+hotel-basics.i-would-like-a-quiet-room,我要安静的房间,,wǒ yào ānjìng de fángjiān,,,2,latex-reference-v2
+hotel-basics.is-there-a-washing-machine,有洗衣机吗？,,yǒu xǐyījī ma?,,,2,latex-reference-v2
+hotel-requests.can-i-check-out-later,可以晚点退房吗？,,kěyǐ wǎndiǎn tuìfáng ma?,,,2,latex-reference-v2
+hotel-requests.what-time-does-breakfast-start,早餐几点开始？,,zǎocān jǐ diǎn kāishǐ?,,,2,latex-reference-v2
+hotel-requests.can-i-store-my-luggage,可以寄存行李吗？,,kěyǐ jìcún xíngli ma?,,,2,latex-reference-v2
+hotel-requests.no-housekeeping,不用打扫,,bú yòng dǎsǎo,,,2,latex-reference-v2
+room-problems.there-is-a-problem-with-the-room,房间有问题,,fángjiān yǒu wèntí,,,2,latex-reference-v2
+room-problems.the-air-conditioning-is-broken,空调坏了,,kòngtiáo huài le,,,2,latex-reference-v2
+room-problems.there-is-no-hot-water,没有热水,,méiyǒu rèshuǐ,,,2,latex-reference-v2
+room-problems.can-i-change-rooms,可以换房吗？,,kěyǐ huàn fáng ma?,,,2,latex-reference-v2
+room-problems.the-room-is-too-noisy,房间太吵了,,fángjiān tài chǎo le,,,2,latex-reference-v2

@@ -1,0 +1,40 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+social-basics.hello,你好,,nǐ hǎo,,,2,latex-reference-v2
+social-basics.hello-polite,您好,,nín hǎo,,,2,latex-reference-v2
+social-basics.good-morning,早上好,,zǎoshang hǎo,,,2,latex-reference-v2
+social-basics.good-evening,晚上好,,wǎnshang hǎo,,,2,latex-reference-v2
+social-basics.goodbye,再见,,zàijiàn,,,2,latex-reference-v2
+social-basics.thank-you,谢谢,,xièxie,,,2,latex-reference-v2
+social-basics.you-are-welcome,不客气,,bú kèqi,,,2,latex-reference-v2
+social-basics.excuse-me-sorry,不好意思,,bù hǎo yìsi,,,2,latex-reference-v2
+social-basics.sorry,对不起,,duìbuqǐ,,,2,latex-reference-v2
+social-basics.no-problem,没关系,,méi guānxi,,,2,latex-reference-v2
+social-basics.i-do-not-know,我不知道,,wǒ bù zhīdào,,,2,latex-reference-v2
+communication.i-do-not-speak-chinese,我不会说中文,,wǒ bú huì shuō Zhōngwén,,,2,latex-reference-v2
+communication.i-speak-only-a-little-chinese,我只会说一点儿中文,,wǒ zhǐ huì shuō yìdiǎnr Zhōngwén,,,2,latex-reference-v2
+communication.do-you-speak-english,你会说英语吗？,,nǐ huì shuō Yīngyǔ ma?,,,2,latex-reference-v2
+communication.please-speak-more-slowly,请说慢一点,,qǐng shuō màn yìdiǎn,,,2,latex-reference-v2
+communication.i-do-not-understand-spoken,我听不懂,,wǒ tīng bu dǒng,,,2,latex-reference-v2
+communication.i-cannot-read-understand,我看不懂,,wǒ kàn bu dǒng,,,2,latex-reference-v2
+communication.please-say-it-again,请再说一遍,,qǐng zài shuō yí biàn,,,2,latex-reference-v2
+communication.please-write-it-down,请写下来,,qǐng xiě xiàlai,,,2,latex-reference-v2
+communication.please-wait-a-moment,请等一下,,qǐng děng yíxià,,,2,latex-reference-v2
+communication.can-you-help-me,你能帮我吗？,,nǐ néng bāng wǒ ma?,,,2,latex-reference-v2
+communication.please-show-me-the-chinese-text,请给我看中文,,qǐng gěi wǒ kàn Zhōngwén,,,2,latex-reference-v2
+quick-responses.please-go-ahead,请,,qǐng,,,2,latex-reference-v2
+quick-responses.yes-right,是,,shì,,,2,latex-reference-v2
+quick-responses.no-not,不是,,bú shì,,,2,latex-reference-v2
+quick-responses.okay-can,可以,,kěyǐ,,,2,latex-reference-v2
+quick-responses.cannot-not-allowed,不可以,,bù kěyǐ,,,2,latex-reference-v2
+quick-responses.works-okay,行,,xíng,,,2,latex-reference-v2
+quick-responses.does-not-work-no,不行,,bù xíng,,,2,latex-reference-v2
+phone-translation.i-am-using-phone-translation,我在用手机翻译,,wǒ zài yòng shǒujī fānyì,,,2,latex-reference-v2
+phone-translation.please-speak-toward-the-phone,请对着手机说,,qǐng duìzhe shǒujī shuō,,,2,latex-reference-v2
+phone-translation.one-sentence-at-a-time-please,请一句一句地说,,qǐng yí jù yí jù de shuō,,,2,latex-reference-v2
+phone-text-power.please-type-it-for-me,请打字给我看,,qǐng dǎzì gěi wǒ kàn,,,2,latex-reference-v2
+phone-text-power.please-write-the-place-name-in-chinese,请把地名写成中文,,qǐng bǎ dìmíng xiě chéng Zhōngwén,,,2,latex-reference-v2
+phone-text-power.please-use-simple-words,请用简单的话说,,qǐng yòng jiǎndān de huà shuō,,,2,latex-reference-v2
+phone-text-power.my-phone-battery-is-low,我的手机快没电了,,wǒ de shǒujī kuài méi diàn le,,,2,latex-reference-v2
+phone-text-power.do-you-have-a-power-bank,有充电宝吗？,,yǒu chōngdiànbǎo ma?,,,2,latex-reference-v2
+phone-text-power.the-translation-may-be-inaccurate,翻译可能不准确,,fānyì kěnéng bù zhǔnquè,,,2,latex-reference-v2
+phone-text-power.please-confirm,请确认一下,,qǐng quèrèn yíxià,,,2,latex-reference-v2

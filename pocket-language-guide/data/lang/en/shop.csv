@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Pay by card?,,,,2,latex-reference-v2
+payment-receipt.pay-cash,Pay cash?,,,,2,latex-reference-v2
+payment-receipt.pay-by-qr-code,Pay by QR code?,,,,2,latex-reference-v2
+payment-receipt.a-receipt-please,"A receipt, please",,,,2,latex-reference-v2
+shopping.i-am-just-looking,I am just looking,,,,2,latex-reference-v2
+shopping.how-much-is-this,How much is this?,,,,2,latex-reference-v2
+shopping.that-is-too-expensive,That is too expensive,,,,2,latex-reference-v2
+shopping.can-it-be-a-little-cheaper,Can it be a little cheaper?,,,,2,latex-reference-v2
+color-size-returns.do-you-have-another-color,Do you have another color?,,,,2,latex-reference-v2
+color-size-returns.do-you-have-another-size,Do you have another size?,,,,2,latex-reference-v2
+color-size-returns.may-i-try-it-on,May I try it on?,,,,2,latex-reference-v2
+color-size-returns.can-i-return-it,Can I return it?,,,,2,latex-reference-v2
+color-size-returns.can-i-exchange-it,Can I exchange it?,,,,2,latex-reference-v2
+color-size-returns.do-you-have-a-bag,Do you have a bag?,,,,2,latex-reference-v2
+tax-refund.can-i-get-a-tax-refund,Can I get a tax refund?,,,,2,latex-reference-v2

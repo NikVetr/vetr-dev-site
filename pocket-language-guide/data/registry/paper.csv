@@ -1,0 +1,7 @@
+preset_id,name,paper_w,paper_h,borderless,overspray_pct,nonprintable_pt,media,min_rule_pt,min_size_delta
+et8550-5x7-photo-borderless,"Epson ET-8550 · 5×7 photo, borderless",504,360,1,2.5,0,photo,0.20,0
+et8550-5x7-photo-bordered,"Epson ET-8550 · 5×7 photo, bordered",504,360,0,0,8.5,photo,0.20,0
+photo-4x6-borderless,"4×6 photo, borderless",432,288,1,2.5,0,photo,0.20,0
+inkjet-letter-plain,"Generic inkjet · Letter, plain",612,792,0,0,9,plain,0.35,0.5
+laser-a4-plain,"Generic laser · A4, plain",595.28,841.89,0,0,14,plain,0.25,0.25
+print-shop-bleed,"Print shop · with 3mm bleed",504,360,1,0,0,coated,0.15,0

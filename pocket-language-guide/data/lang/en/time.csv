@@ -1,0 +1,41 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,What time is it?,,,,2,latex-reference-v2
+time-scheduling.how-many-minutes,How many minutes?,,,,2,latex-reference-v2
+time-scheduling.what-time-should-we-meet,What time should we meet?,,,,2,latex-reference-v2
+time-scheduling.can-we-change-the-time,Can we change the time?,,,,2,latex-reference-v2
+time-scheduling.when-is-convenient,When is convenient?,,,,2,latex-reference-v2
+time-scheduling.what-is-today-s-date,What is today's date?,,,,2,latex-reference-v2
+time-scheduling.what-day-is-it-today,What day is it today?,,,,2,latex-reference-v2
+time-scheduling.what-time-does-it-open,What time does it open?,,,,2,latex-reference-v2
+time-scheduling.what-time-does-it-close,What time does it close?,,,,2,latex-reference-v2
+time-words.today,today,,,,2,latex-reference-v2
+time-words.tomorrow,tomorrow,,,,2,latex-reference-v2
+time-words.yesterday,yesterday,,,,2,latex-reference-v2
+time-words.this-week,this week,,,,2,latex-reference-v2
+time-words.next-week,next week,,,,2,latex-reference-v2
+time-words.morning,morning,,,,2,latex-reference-v2
+time-words.afternoon,afternoon,,,,2,latex-reference-v2
+time-words.evening,evening,,,,2,latex-reference-v2
+time-words.spring,spring,,,,2,latex-reference-v2
+time-words.summer,summer,,,,2,latex-reference-v2
+time-words.fall,fall,,,,2,latex-reference-v2
+time-words.winter,winter,,,,2,latex-reference-v2
+days-of-week.monday,Monday,,,,2,latex-reference-v2
+days-of-week.tuesday,Tuesday,,,,2,latex-reference-v2
+days-of-week.wednesday,Wednesday,,,,2,latex-reference-v2
+days-of-week.thursday,Thursday,,,,2,latex-reference-v2
+days-of-week.friday,Friday,,,,2,latex-reference-v2
+days-of-week.saturday,Saturday,,,,2,latex-reference-v2
+days-of-week.sunday,Sunday,,,,2,latex-reference-v2
+months.january,January,,,,2,latex-reference-v2
+months.february,February,,,,2,latex-reference-v2
+months.march,March,,,,2,latex-reference-v2
+months.april,April,,,,2,latex-reference-v2
+months.may,May,,,,2,latex-reference-v2
+months.june,June,,,,2,latex-reference-v2
+months.july,July,,,,2,latex-reference-v2
+months.august,August,,,,2,latex-reference-v2
+months.september,September,,,,2,latex-reference-v2
+months.october,October,,,,2,latex-reference-v2
+months.november,November,,,,2,latex-reference-v2
+months.december,December,,,,2,latex-reference-v2

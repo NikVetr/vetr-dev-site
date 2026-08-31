@@ -1,0 +1,6 @@
+concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
+introductions.my-name-is,introductions,entry,template,my-name-is,1,0.700,introductions.my-name-is,0,1,neutral,
+introductions.nice-to-meet-you,introductions,entry,phrase,nice-to-meet-you,2,0.656,introductions.nice-to-meet-you,0,0,neutral,
+introductions.what-is-your-name,introductions,entry,phrase,what-is-your-name,3,0.612,introductions.what-is-your-name,0,0,neutral,
+introductions.we-are-traveling-together,introductions,entry,phrase,we-are-traveling-together,4,0.569,introductions.we-are-traveling-together,0,0,neutral,
+introductions.this-is-my-friend,introductions,entry,phrase,this-is-my-friend,5,0.525,introductions.this-is-my-friend,0,0,neutral,

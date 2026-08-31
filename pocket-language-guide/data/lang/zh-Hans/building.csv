@@ -1,0 +1,18 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,这是几号房？,,zhè shì jǐ hào fáng?,,,2,latex-reference-v2
+building-help.i-am-lost,我迷路了,,wǒ mílù le,,,2,latex-reference-v2
+building-help.where-is-reception,前台在哪里？,,qiántái zài nǎlǐ?,,,2,latex-reference-v2
+building-help.where-is-a-power-outlet,插座在哪里？,,chāzuò zài nǎlǐ?,,,2,latex-reference-v2
+in-a-building.is-this-the-correct-entrance,这是正确的入口吗？,,zhè shì zhèngquè de rùkǒu ma?,,,2,latex-reference-v2
+in-a-building.where-is-the-restroom,洗手间在哪里？,,xǐshǒujiān zài nǎlǐ?,,,2,latex-reference-v2
+in-a-building.do-you-have-wi-fi,有无线网吗？,,yǒu wúxiànwǎng ma?,,,2,latex-reference-v2
+in-a-building.what-is-the-wi-fi-password,Wi-Fi 密码是什么？,,Wi-Fi mìmǎ shì shénme?,,,2,latex-reference-v2
+in-a-building.which-floor,在几楼？,,zài jǐ lóu?,,,2,latex-reference-v2
+building-words.elevator,电梯,,diàntī,,,2,latex-reference-v2
+building-words.stairs,楼梯,,lóutī,,,2,latex-reference-v2
+building-words.entrance,入口,,rùkǒu,,,2,latex-reference-v2
+building-words.exit,出口,,chūkǒu,,,2,latex-reference-v2
+building-words.men,男,,nán,,,2,latex-reference-v2
+building-words.women,女,,nǚ,,,2,latex-reference-v2
+building-words.door,门,,mén,,,2,latex-reference-v2
+building-words.key,钥匙,,yàoshi,,,2,latex-reference-v2

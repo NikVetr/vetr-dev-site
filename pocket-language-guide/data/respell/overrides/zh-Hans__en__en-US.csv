@@ -1,0 +1,359 @@
+concept_id,respell
+building-help.what-room-number-is-this,juh shir jee how fahng
+building-help.i-am-lost,waw mee-loo luh
+building-help.where-is-reception,chyen-tye dzye nah-lee
+building-help.where-is-a-power-outlet,chah-dzwaw dzye nah-lee
+in-a-building.is-this-the-correct-entrance,juh shir jung-chweh duh roo-koh ma
+in-a-building.where-is-the-restroom,syee-show-jyen dzye nah-lee
+in-a-building.do-you-have-wi-fi,yoh woo-shyen-wahng ma
+in-a-building.what-is-the-wi-fi-password,wee-fye mee-mah shir shun-muh
+in-a-building.which-floor,dzye jee loh
+building-words.elevator,dyen-tee
+building-words.stairs,loh-tee
+building-words.entrance,roo-koh
+building-words.exit,choo-koh
+building-words.men,nahn
+building-words.women,nyoo
+building-words.door,mun
+building-words.key,yow-shih
+pronouns-verbs.i-me,waw
+pronouns-verbs.we-us,waw-men
+pronouns-verbs.you,nee
+pronouns-verbs.you-polite,neen
+pronouns-verbs.he-him,tah
+pronouns-verbs.she-her,tah
+pronouns-verbs.they-them,tah-men
+pronouns-verbs.my-mine,waw duh
+pronouns-verbs.your-yours,nee duh
+pronouns-verbs.be-called-call,jyaow
+pronouns-verbs.have,yoh
+pronouns-verbs.do-not-have,may-yoh
+pronouns-verbs.go,chyoo
+pronouns-verbs.come,lye
+pronouns-verbs.would-like,shyahng
+pronouns-verbs.want,yow
+pronouns-verbs.look-for,jaow
+pronouns-verbs.buy,mye
+pronouns-verbs.like,syee-hwahn
+pronouns-verbs.need,syoo-yow
+question-words.what,shun-muh
+question-words.where,nah-lee
+question-words.who,shay
+question-words.which-one,nah-guh
+question-words.when,shun-muh shir-hoh
+question-words.how,dzun-muh
+question-words.how-much-many,dwaw-shaow
+question-words.how-many,jee
+question-words.why,way-shun-muh
+question-words.this,juh-guh
+question-words.that,nah-guh
+question-words.here,juh-lee
+question-words.there,nah-lee
+question-words.a-little,ee-dyar
+question-words.some,ee-shyeh
+question-words.very,hun
+question-words.too,tye
+question-words.also,yeh
+question-words.all-both,doh
+emergency-medical.help,jyoh-meeng
+emergency-medical.please-call-an-ambulance,cheeng bahng waw jyaow jyoh-hoo-chuh
+emergency-medical.i-need-a-doctor,waw syoo-yow ee-shung
+emergency-medical.i-am-sick,waw shung-beeng luh
+emergency-medical.i-am-injured,waw show-shahng luh
+emergency-medical.it-hurts-here,juh-lee tung
+emergency-medical.where-is-a-pharmacy,yow-dyen dzye nah-lee
+emergency-medical.please-take-me-to-a-hospital,cheeng dye waw chyoo ee-ywen
+lost-rescue.i-lost-my-passport,waw duh hoo-jow dyoh luh
+lost-rescue.i-lost-my-phone,waw duh show-jee dyoh luh
+lost-rescue.please-call-the-police,cheeng baow-jeeng
+lost-rescue.we-are-here,waw-men dzye juh-lee
+lost-rescue.please-look-at-my-location-pin,cheeng kahn waw duh deeng-way
+lost-rescue.i-cannot-walk,waw dzoh boo dong luh
+lost-rescue.i-sprained-my-ankle,waw nyoh-shahng jyaow luh
+lost-rescue.please-contact-rescue,cheeng lyen-shee jyoh-ywen-dway
+lost-rescue.my-companion-is-missing,waw duh tong-bahn boo jyen luh
+dietary-needs.no-meat,boo yow roh
+dietary-needs.no-eggs,boo yow jee-dahn
+dietary-needs.not-spicy,boo yow lah
+dietary-needs.less-spicy,shaow lah
+dietary-needs.no-peanuts,boo yow hwah-shung
+dietary-needs.no-nuts,boo yow jyen-gwaw
+dietary-needs.no-seafood,boo yow hi-shyen
+dietary-needs.i-am-vegetarian,waw chih soo
+dietary-needs.i-am-vegan,waw chih chwin soo
+dietary-needs.i-do-not-eat,waw boo chih {}
+dietary-needs.i-am-allergic-to,waw dway {} gwaw-min
+food-ordering.table-for-two,lyahng way
+food-ordering.is-a-table-available,yoh way-dzuh ma
+food-ordering.menu-please,cheeng gay waw ts-eye-dahn
+food-ordering.i-want-this,waw yow juh-guh
+food-ordering.do-you-have-drinking-water,yoh een-yong-shway ma
+food-ordering.to-go-please,cheeng dah-baow
+food-ordering.check-please,cheeng jyeh-jahng
+food-ordering.does-it-contain,lee-myen yoh {} ma
+food-ordering.is-this-vegetarian,juh-guh shir soo duh ma
+trail-words.trail,boo-dow
+trail-words.trailhead,dung-shan-koh
+trail-words.summit,shahn-deeng
+trail-words.viewpoint,gwan-jing-tye
+trail-words.cableway,swaw-dow
+trail-words.shuttle-bus,jyeh-baw-chuh
+trail-words.park-shuttle,hwan-bow-chu
+trail-words.steps,tye-jyeh
+trail-words.up-uphill,shahng-syeeng
+trail-words.down-downhill,shyah-syeeng
+trail-words.one-way,dahn-chung
+trail-words.round-trip,wahng-fahn
+hiking-parks.is-this-the-way-to,juh shir chyoo {} duh loo ma
+hiking-parks.where-is-the-trailhead,dung-shan-koh dzye nah-lee
+hiking-parks.how-long-to-the-summit,dow shahn-deeng yow dwaw-jyoh
+hiking-parks.how-long-to-the-viewpoint,dow gwan-jing-tye yow dwaw-jyoh
+hiking-parks.which-route-is-easier,nah tyaow loo-shyen bee-jyaow rong-yee
+trail-conditions.how-long-is-the-full-route,chwan-chung dwaw chahng
+trail-conditions.can-we-return-the-same-way,nung ywen-loo fahn-hway ma
+trail-conditions.can-we-return-before-dark,tyen-hay chyen nung hway-lye ma
+trail-conditions.is-the-trail-open,juh tyaow boo-dow kye-fahng ma
+trail-conditions.is-the-route-steep,juh tyaow loo doh ma
+trail-conditions.is-the-path-slippery,loo hwah ma
+trail-transport.how-long-is-the-queue,pye-dway yow dwaw-jyoh
+trail-transport.what-time-is-the-last-shuttle,jyeh-baw-chuh dzway-wahn jee-dyen
+trail-transport.when-does-the-cableway-stop,swaw-dow jee-dyen teeng-yoon
+trail-transport.where-can-we-buy-water,nah-lee kuh-yee mye shway
+trail-transport.where-can-we-refill-water,nah-lee kuh-yee jyeh shway
+trail-transport.is-there-cell-signal-here,juh-lee yoh show-jee sheen-how ma
+trail-transport.do-you-have-a-map,yoh dee-too ma
+trail-warnings.open,kye-fahng
+trail-warnings.closed,fung-bee
+trail-warnings.maintenance,way-shyoh
+trail-warnings.steep-slope,doh-pwaw
+trail-warnings.caution-slippery,syaow-sheen loo-hwah
+trail-warnings.danger,way-shyen
+trail-warnings.beware-falling-rocks,joo-yee lwaw-shir
+trail-warnings.first-aid-station,jee-jyoh-jahn
+trail-warnings.service-suspended,dzahn-teeng yoon-yeeng
+trail-landmarks.trail-marker,loo-byaow
+trail-landmarks.fork-junction,chah-loo
+trail-landmarks.boardwalk-cliff-path,jahn-dow
+trail-landmarks.start,chee-dyen
+trail-landmarks.end,jong-dyen
+trail-landmarks.elevation,hi-bah
+trail-landmarks.sunset,rih-lwaw
+trail-landmarks.restroom,way-shung-jen
+trail-landmarks.water-point,een-shway-den
+hotel-words.passport,hoo-jow
+hotel-words.room-key-card,fahng-kah
+hotel-words.check-in,roo-joo
+hotel-words.check-out,tway-fahng
+hotel-basics.are-any-rooms-available,yoh kohng-fahng ma
+hotel-basics.there-are-two-of-us,waw-men lyahng guh run
+hotel-basics.i-have-a-reservation,waw yoh yew-deeng
+hotel-basics.can-i-charge-my-phone,kuh-yee gay show-jee chohng-dyen ma
+hotel-basics.i-would-like-a-non-smoking-room,waw yow woo-yen fahng
+hotel-basics.i-would-like-a-quiet-room,waw yow ahn-jeeng duh fahng-jyen
+hotel-basics.is-there-a-washing-machine,yoh syee-ee-jee ma
+hotel-requests.can-i-check-out-later,kuh-yee wahn-dyen tway-fahng ma
+hotel-requests.what-time-does-breakfast-start,dzow-tsahn jee-dyen kye-shir
+hotel-requests.can-i-store-my-luggage,kuh-yee jee-tswun sheeng-lee ma
+hotel-requests.no-housekeeping,boo yong dah-sow
+room-problems.there-is-a-problem-with-the-room,fahng-jyen yoh wun-tee
+room-problems.the-air-conditioning-is-broken,kohng-tyaow hwye luh
+room-problems.there-is-no-hot-water,may-yoh ruh-shway
+room-problems.can-i-change-rooms,kuh-yee hwahn fahng ma
+room-problems.the-room-is-too-noisy,fahng-jyen tye chaow luh
+introductions.my-name-is,waw jyaow {}
+introductions.nice-to-meet-you,hun gaow-sheeng run-shih nee
+introductions.what-is-your-name,nee jyaow shun-muh meeng-dzuh
+introductions.we-are-traveling-together,waw-men ee-chee lyoo-syeeng
+introductions.this-is-my-friend,juh shir waw duh pung-yoh
+numbers-money.l-ng,leeng
+numbers-money.y,ee
+numbers-money.r,are
+numbers-money.li-ng,lyahng
+numbers-money.s-n,sahn
+numbers-money.s,suh
+numbers-money.w,woo
+numbers-money.li,lyoh
+numbers-money.q,chee
+numbers-money.b,bah
+numbers-money.ji,jyoh
+numbers-money.sh,shir
+numbers-money.y-b-i,yee-bye
+numbers-money.y-qi-n,yee-chyen
+numbers-money.y-w-n,yee-wahn
+numbers-money.b-n,bahn
+numbers-money.yu-n,ywen
+numbers-money.ku-i,kwye
+attractions-tickets.where-can-i-buy-tickets,nah-lee kuh-yee mye pyow
+attractions-tickets.do-i-need-a-reservation,syoo-yow yew-yweh ma
+attractions-tickets.what-is-the-latest-entry-time,dzway-wahn jee-dyen roo-ywen
+attractions-tickets.are-there-lockers,yoh jee-tswun-gway ma
+attractions-tickets.may-i-take-photos,kuh-yee pie-jow ma
+attractions-tickets.please-take-a-photo-of-us,cheeng bahng waw-men pie jahng jow-pyen
+payment-receipt.pay-by-card,kuh-yee shwah-kah ma
+payment-receipt.pay-cash,kuh-yee foo shyen-jeen ma
+payment-receipt.pay-by-qr-code,kuh-yee saow-mah ma
+payment-receipt.a-receipt-please,cheeng gay waw show-jyoo
+shopping.i-am-just-looking,waw jir-shir kahn-kahn
+shopping.how-much-is-this,juh-guh dwaw-shaow chyen
+shopping.that-is-too-expensive,tye gway luh
+shopping.can-it-be-a-little-cheaper,kuh-yee pyen-yee ee-dyen ma
+color-size-returns.do-you-have-another-color,yoh byeh duh yen-suh ma
+color-size-returns.do-you-have-another-size,yoh byeh duh chir-mah ma
+color-size-returns.may-i-try-it-on,waw kuh-yee shir yee-shyah ma
+color-size-returns.can-i-return-it,kuh-yee tway ma
+color-size-returns.can-i-exchange-it,kuh-yee hwahn ma
+color-size-returns.do-you-have-a-bag,yoh dye-dzuh ma
+tax-refund.can-i-get-a-tax-refund,kuh-yee tway-shway ma
+social-basics.hello,nee how
+social-basics.hello-polite,neen how
+social-basics.good-morning,dzow-shahng how
+social-basics.good-evening,wahn-shahng how
+social-basics.goodbye,dzye-jyen
+social-basics.thank-you,syeh-syeh
+social-basics.you-are-welcome,boo kuh-chee
+social-basics.excuse-me-sorry,boo how ee-suh
+social-basics.sorry,dway-boo-chee
+social-basics.no-problem,may gwan-shee
+social-basics.i-do-not-know,waw boo zhih-dow
+communication.i-do-not-speak-chinese,waw boo hway shwaw jong-wun
+communication.i-speak-only-a-little-chinese,waw jir hway shwaw ee-dyar jong-wun
+communication.do-you-speak-english,nee hway shwaw eeng-yoo ma
+communication.please-speak-more-slowly,cheeng shwaw mahn ee-dyen
+communication.i-do-not-understand-spoken,waw teeng boo dong
+communication.i-cannot-read-understand,waw kahn boo dong
+communication.please-say-it-again,cheeng dzye shwaw yee byen
+communication.please-write-it-down,cheeng syeh shyah-lye
+communication.please-wait-a-moment,cheeng dung yee-shyah
+communication.can-you-help-me,nee nung bahng waw ma
+communication.please-show-me-the-chinese-text,cheeng gay waw kahn jong-wun
+quick-responses.please-go-ahead,cheeng
+quick-responses.yes-right,shir
+quick-responses.no-not,boo shir
+quick-responses.okay-can,kuh-yee
+quick-responses.cannot-not-allowed,boo kuh-yee
+quick-responses.works-okay,syeeng
+quick-responses.does-not-work-no,boo syeeng
+phone-translation.i-am-using-phone-translation,waw dzye yong show-jee fahn-yee
+phone-translation.please-speak-toward-the-phone,cheeng dway-juh show-jee shwaw
+phone-translation.one-sentence-at-a-time-please,cheeng yee jyoo yee jyoo duh shwaw
+phone-text-power.please-type-it-for-me,cheeng dah-dzuh gay waw kahn
+phone-text-power.please-write-the-place-name-in-chinese,cheeng bah dee-meeng syeh chung jong-wun
+phone-text-power.please-use-simple-words,cheeng yong jyen-dahn duh hwah shwaw
+phone-text-power.my-phone-battery-is-low,waw duh show-jee kwye may dyen luh
+phone-text-power.do-you-have-a-power-bank,yoh chohng-dyen-baow ma
+phone-text-power.the-translation-may-be-inaccurate,fahn-yee kuh-nung boo joon-chweh
+phone-text-power.please-confirm,cheeng chweh-run yee-shyah
+time-scheduling.what-time-is-it,shyen-dzye jee-dyen
+time-scheduling.how-many-minutes,jee fun-jong
+time-scheduling.what-time-should-we-meet,jee-dyen jyen
+time-scheduling.can-we-change-the-time,kuh-yee guy shir-jyen ma
+time-scheduling.when-is-convenient,shun-muh shir-hoh fahng-byen
+time-scheduling.what-is-today-s-date,jeen-tyen jee how
+time-scheduling.what-day-is-it-today,jeen-tyen sheeng-chee jee
+time-scheduling.what-time-does-it-open,jee-dyen kye-mun
+time-scheduling.what-time-does-it-close,jee-dyen gwan-mun
+time-words.today,jeen-tyen
+time-words.tomorrow,ming-tyen
+time-words.yesterday,dzwaw-tyen
+time-words.this-week,juh-guh sheeng-chee
+time-words.next-week,shyah-guh sheeng-chee
+time-words.morning,dzow-shahng
+time-words.afternoon,shyah-woo
+time-words.evening,wahn-shahng
+time-words.spring,choon
+time-words.summer,shyah
+time-words.fall,chyoh
+time-words.winter,dong
+days-of-week.monday,sheeng-chee ee
+days-of-week.tuesday,sheeng-chee are
+days-of-week.wednesday,sheeng-chee sahn
+days-of-week.thursday,sheeng-chee suh
+days-of-week.friday,sheeng-chee woo
+days-of-week.saturday,sheeng-chee lyoh
+days-of-week.sunday,sheeng-chee rr
+months.january,ee yweh
+months.february,are yweh
+months.march,sahn yweh
+months.april,suh yweh
+months.may,woo yweh
+months.june,lyoh yweh
+months.july,chee yweh
+months.august,bah yweh
+months.september,jyoh yweh
+months.october,shir yweh
+months.november,shir-ee yweh
+months.december,shir-are yweh
+directions.where-is,{} dzye nah-lee
+directions.how-do-i-get-to,dow {} dzun-muh dzoh
+directions.is-it-far,ywen boo ywen
+directions.how-long-on-foot,dzoh-loo yow dwaw-jyoh
+quick-directions.go-straight,ee-jir dzoh
+quick-directions.turn-left,dzwaw jwahn
+quick-directions.turn-right,yoh jwahn
+quick-directions.this-way,juh-byen
+quick-directions.that-way,nah-byen
+quick-directions.on-the-left,dzye dzwaw-byen
+quick-directions.on-the-right,dzye yoh-byen
+quick-directions.across-from-here,dzye dway-myen
+quick-directions.in-front,dzye chyen-myen
+quick-directions.behind,dzye hoh-myen
+taxi.please-take-me-here,cheeng dye waw chyoo juh-lee
+taxi.please-send-me-the-address,cheeng bah dee-jir fah gay waw
+taxi.we-need-the-east-gate-not-the-south-gate,"waw-men chyoo dong-mun, boo shir nahn-mun"
+taxi.please-stop-here,cheeng dzye juh-lee teeng
+taxi.can-you-wait-for-me-here,kuh-yee dzye juh-lee dung waw ma
+taxi.we-need-to-catch-the-high-speed-train,waw-men yow gahn gaow-tyeh
+taxi.please-use-the-meter,cheeng dah-kye jee-jyah-chee
+transit-rides.two-tickets,lyahng jahng pyow
+transit-rides.where-is-the-subway-station,dee-tyeh-jahn dzye nah-lee
+transit-rides.does-this-bus-train-go-to,juh tahng chuh chyoo {} ma
+transit-rides.what-is-the-next-stop,shyah yee jahn shir shun-muh
+transit-rides.please-tell-me-where-to-get-off,cheeng gaow-soo waw dzye nah jahn shyah chuh
+transit-rides.is-this-direct,juh shir jir-dah chuh ma
+transit-rides.do-i-need-to-transfer,syoo-yow hwahn-chung ma
+transit-rides.is-it-delayed,chuh wahn-dyen luh ma
+transit-rides.i-am-in-a-hurry,waw gahn shir-jyen
+transit-rides.which-platform,nah-guh jahn-tye
+transit-rides.what-time-is-the-next-one,shyah ee bahn jee-dyen
+transit-rides.i-went-past-my-stop,waw dzwaw gwaw-jahn luh
+place-words.scenic-area,jeeng-chyoo
+place-words.visitor-center,yoh-kuh jong-sheen
+place-words.railway-station,hwa-chuh-jan
+place-words.airport,jee-chahng
+place-words.service-desk,foo-woo-tye
+place-words.bus-stop,gong-jyow-jan
+place-words.luggage-storage,sheeng-lee jee-tswun
+pickup-meeting.where-is-the-pickup-point,shahng-chuh-dyen dzye nah-lee
+pickup-meeting.please-send-me-the-pickup-point,cheeng bah shahng-chuh-dyen fah gay waw
+pickup-meeting.please-pick-us-up-here,cheeng dzye juh-lee jyeh waw-men
+pickup-meeting.meet-us-at,waw-men dzye {} jee-huh
+pickup-meeting.please-call-me-a-ride,cheeng bahng waw jyaow chuh
+rail-station-words.high-speed-rail,gaow-tyeh
+rail-station-words.maglev,tsuh-foo
+rail-station-words.transfer,hwahn-chung
+rail-station-words.ticket-gate,jyen-pyow-koh
+rail-station-words.platform,jahn-tye
+rail-station-words.ticket-office,show-pyow choo
+rail-station-words.waiting-room,hoh-chuh-shir
+rail-station-words.train-number,chuh-tsuh
+rail-station-words.carriage,chuh-shyahng
+rail-station-words.seat,dzwaw-way
+rail-station-words.last-train,mwaw-bahn-chuh
+rail-station-words.delayed,wahn-dyen
+rail-station-words.final-stop,jong-dyen-jahn
+common-signs.open-on,kye
+common-signs.closed-off,gwan
+common-signs.occupied,yoh-run
+common-signs.vacant,woo-run
+common-signs.caution,syaow-sheen
+common-signs.no-entry,jeen-jir roo-nay
+common-signs.no-smoking,jeen-jir shee-yen
+common-signs.no-photography,jeen-jir pie-jow
+common-signs.do-not-touch,cheeng woo choo-mwaw
+common-signs.temporarily-closed,dzahn-teeng kye-fahng
+utility-templates.i-want-to-go-to,waw shyahng chyoo {}
+utility-templates.please-give-me,cheeng gay waw {}
+utility-templates.may-i,waw kuh-yee {} ma
+utility-templates.please-do-not-add,cheeng boo yow fahng {}
+utility-templates.do-you-have,yoh may-yoh {}
+utility-templates.please-write-the-number,cheeng syeh shoo-dzuh

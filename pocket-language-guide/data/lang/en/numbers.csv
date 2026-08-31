@@ -1,0 +1,20 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,0,,,,2,latex-reference-v2
+numbers-money.y,1,,,,2,latex-reference-v2
+numbers-money.r,2,,,,2,latex-reference-v2
+numbers-money.li-ng,2 + classifier,,,,2,latex-reference-v2
+numbers-money.s-n,3,,,,2,latex-reference-v2
+numbers-money.s,4,,,,2,latex-reference-v2
+numbers-money.w,5,,,,2,latex-reference-v2
+numbers-money.li,6,,,,2,latex-reference-v2
+numbers-money.q,7,,,,2,latex-reference-v2
+numbers-money.b,8,,,,2,latex-reference-v2
+numbers-money.ji,9,,,,2,latex-reference-v2
+numbers-money.sh,10,,,,2,latex-reference-v2
+numbers-money.y-b-i,100,,,,2,latex-reference-v2
+numbers-money.y-qi-n,"1,000",,,,2,latex-reference-v2
+numbers-money.y-w-n,"10,000",,,,2,latex-reference-v2
+numbers-money.b-n,1/2,,,,2,latex-reference-v2
+numbers-money.yu-n,yuan,,,,2,latex-reference-v2
+numbers-money.ku-i,yuan (spoken),,,,2,latex-reference-v2
+numbers-money.number-and-classifier-notes,Build numbers: 11 十一 shíyī; 20 二十 èrshí; 21 二十一 èrshíyī. Phone numbers: 1 is often 幺 yāo. Common classifiers: 个 ge general; 位 wèi people; 张 zhāng tickets / flat objects; 杯 bēi cups; 瓶 píng bottles. 角 / 毛 jiǎo / máo = 0.1 yuan; 分 fēn = 0.01 yuan.,,,,2,latex-reference-v2

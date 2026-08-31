@@ -1,0 +1,91 @@
+{
+  "id": "latex-reference",
+  "name": "Reference",
+  "note": "Type scale, rules and spacing transcribed from the hand-tuned XeLaTeX source. Glue weights are ratios, not absolutes: only their proportions affect the flush-column solve.",
+  "colors": {
+    "ink": "#111820",
+    "muted": "#3F4A55",
+    "rule": "#BCC6CF",
+    "shade": "#F4F6F8",
+    "paper": "#FFFFFF",
+    "roles": {
+      "comm": "#0B67A3",
+      "money": "#B45100",
+      "move": "#237547",
+      "stay": "#6D3AA5",
+      "alert": "#B3261E"
+    }
+  },
+  "headings": {
+    "1": { "size": 7.54, "leading": 7.68, "iconSize": 6.92, "iconGap": 2.4, "spaceBefore": 0.45, "gapBeforeRule": 0.55, "rulePt": 0.90, "gapAfterRule": 0.62 },
+    "2": { "size": 6.08, "leading": 6.24, "iconSize": 0, "iconGap": 0, "spaceBefore": 0.76, "gapBeforeRule": 1.35, "rulePt": 0.40, "gapAfterRule": 0.14 },
+    "3": { "size": 6.14, "leading": 6.24, "iconSize": 5.36, "iconGap": 2.1, "spaceBefore": 0.76, "gapBeforeRule": 1.35, "rulePt": 0.48, "gapAfterRule": 0.14 }
+  },
+  "sectionSep": { "natural": 0.75, "stretch": 1.2 },
+  "templates": {
+    "entry": {
+      "id": "entry",
+      "rows": 2, "cols": 2, "widthMode": "per-row",
+      "pad": [0.10, 0.94, 0.08, 1.78],
+      "colGap": 1.2, "rowGap": -0.34,
+      "shadeAlternate": true, "accentPt": 0.92, "rulePt": 0.22, "stretch": 1.0,
+      "minFrac": 0.235, "maxFrac": 0.745, "usableFrac": 0.985,
+      "fields": [
+        { "field": "script",  "row": 0, "col": 0, "size": 7.30, "leading": 7.47, "bold": true,  "italic": false, "color": "ink",   "align": "start" },
+        { "field": "roman",   "row": 1, "col": 0, "size": 5.53, "leading": 5.68, "bold": false, "italic": true,  "color": "ink",   "align": "start" },
+        { "field": "gloss",   "row": 0, "col": 1, "size": 7.01, "leading": 7.18, "bold": true,  "italic": false, "color": "ink",   "align": "end" },
+        { "field": "respell", "row": 1, "col": 1, "size": 5.22, "leading": 5.37, "bold": false, "italic": true,  "color": "muted", "align": "end" }
+      ]
+    },
+    "ref": {
+      "id": "ref",
+      "rows": 1, "cols": 4, "widthMode": "shared",
+      "pad": [0.10, 0.85, 0.12, 1.72],
+      "colGap": 1.2, "rowGap": 0,
+      "shadeAlternate": true, "accentPt": 0.92, "rulePt": 0.22, "stretch": 0.85,
+      "rowStretch": 1.04,
+      "fields": [
+        { "field": "script",  "row": 0, "col": 0, "size": 5.56, "leading": 5.74, "bold": true,  "italic": false, "color": "ink",   "align": "start" },
+        { "field": "roman",   "row": 0, "col": 1, "size": 5.56, "leading": 5.74, "bold": false, "italic": true,  "color": "ink",   "align": "start" },
+        { "field": "gloss",   "row": 0, "col": 2, "size": 5.56, "leading": 5.74, "bold": true,  "italic": false, "color": "ink",   "align": "start" },
+        { "field": "respell", "row": 0, "col": 3, "size": 5.56, "leading": 5.74, "bold": false, "italic": true,  "color": "muted", "align": "end" }
+      ]
+    },
+    "refphrase": {
+      "id": "refphrase",
+      "rows": 1, "cols": 4, "widthMode": "shared",
+      "pad": [0.10, 0.85, 0.12, 1.72],
+      "colGap": 1.2, "rowGap": 0,
+      "shadeAlternate": true, "accentPt": 0.92, "rulePt": 0.22, "stretch": 0.85,
+      "rowStretch": 1.02,
+      "fields": [
+        { "field": "script",  "row": 0, "col": 0, "size": 5.90, "leading": 6.08, "bold": true,  "italic": false, "color": "ink",   "align": "start" },
+        { "field": "roman",   "row": 0, "col": 1, "size": 5.90, "leading": 6.08, "bold": false, "italic": true,  "color": "ink",   "align": "start" },
+        { "field": "gloss",   "row": 0, "col": 2, "size": 5.90, "leading": 6.08, "bold": true,  "italic": false, "color": "ink",   "align": "start" },
+        { "field": "respell", "row": 0, "col": 3, "size": 5.90, "leading": 6.08, "bold": false, "italic": true,  "color": "muted", "align": "end" }
+      ]
+    },
+    "num": {
+      "id": "num",
+      "rows": 1, "cols": 4, "widthMode": "shared",
+      "pad": [0.10, 0.85, 0.14, 1.72],
+      "colGap": 1.2, "rowGap": 0,
+      "shadeAlternate": true, "accentPt": 0.92, "rulePt": 0.22, "stretch": 0.85,
+      "rowStretch": 1.04,
+      "fields": [
+        { "field": "numeral", "row": 0, "col": 0, "size": 5.56, "leading": 5.74, "bold": true,  "italic": false, "color": "ink",   "align": "center" },
+        { "field": "script",  "row": 0, "col": 1, "size": 5.56, "leading": 5.74, "bold": true,  "italic": false, "color": "ink",   "align": "center" },
+        { "field": "roman",   "row": 0, "col": 2, "size": 5.56, "leading": 5.74, "bold": false, "italic": true,  "color": "ink",   "align": "start" },
+        { "field": "respell", "row": 0, "col": 3, "size": 5.56, "leading": 5.74, "bold": false, "italic": true,  "color": "muted", "align": "end" }
+      ]
+    }
+  },
+  "note": {
+    "size": 5.24, "leading": 6.55, "pad": [0.55, 1.25, 0.50, 1.75],
+    "radius": 1.2, "spaceBefore": 0.55, "stretch": 0.85
+  },
+  "noteStrong": {
+    "size": 5.56, "leading": 5.70, "pad": [0.0, 0.0, 0.45, 0.0],
+    "radius": 0, "spaceBefore": 0.0, "stretch": 0.85, "bold": true, "shaded": false
+  }
+}

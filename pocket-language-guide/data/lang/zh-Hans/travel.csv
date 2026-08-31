@@ -1,0 +1,69 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+directions.where-is,{}在哪里？,,{} zài nǎlǐ?,,,2,latex-reference-v2
+directions.how-do-i-get-to,到{}怎么走？,,dào {} zěnme zǒu?,,,2,latex-reference-v2
+directions.is-it-far,远不远？,,yuǎn bù yuǎn?,,,2,latex-reference-v2
+directions.how-long-on-foot,走路要多久？,,zǒulù yào duōjiǔ?,,,2,latex-reference-v2
+quick-directions.go-straight,一直走,,yìzhí zǒu,,,2,latex-reference-v2
+quick-directions.turn-left,左转,,zuǒ zhuǎn,,,2,latex-reference-v2
+quick-directions.turn-right,右转,,yòu zhuǎn,,,2,latex-reference-v2
+quick-directions.this-way,这边,,zhèbiān,,,2,latex-reference-v2
+quick-directions.that-way,那边,,nàbiān,,,2,latex-reference-v2
+quick-directions.on-the-left,在左边,,zài zuǒbiān,,,2,latex-reference-v2
+quick-directions.on-the-right,在右边,,zài yòubiān,,,2,latex-reference-v2
+quick-directions.across-from-here,在对面,,zài duìmiàn,,,2,latex-reference-v2
+quick-directions.in-front,在前面,,zài qiánmiàn,,,2,latex-reference-v2
+quick-directions.behind,在后面,,zài hòumiàn,,,2,latex-reference-v2
+taxi.please-take-me-here,请带我去这里,,qǐng dài wǒ qù zhèlǐ,,,2,latex-reference-v2
+taxi.please-send-me-the-address,请把地址发给我,,qǐng bǎ dìzhǐ fā gěi wǒ,,,2,latex-reference-v2
+taxi.we-need-the-east-gate-not-the-south-gate,我们去东门，不是南门,,"wǒmen qù Dōngmén, bú shì Nánmén",,,2,latex-reference-v2
+taxi.please-stop-here,请在这里停,,qǐng zài zhèlǐ tíng,,,2,latex-reference-v2
+taxi.can-you-wait-for-me-here,可以在这里等我吗？,,kěyǐ zài zhèlǐ děng wǒ ma?,,,2,latex-reference-v2
+taxi.we-need-to-catch-the-high-speed-train,我们要赶高铁,,wǒmen yào gǎn gāotiě,,,2,latex-reference-v2
+taxi.please-use-the-meter,请打开计价器,,qǐng dǎkāi jìjiàqì,,,2,latex-reference-v2
+transit-rides.two-tickets,两张票,,liǎng zhāng piào,,,2,latex-reference-v2
+transit-rides.where-is-the-subway-station,地铁站在哪里？,,dìtiězhàn zài nǎlǐ?,,,2,latex-reference-v2
+transit-rides.does-this-bus-train-go-to,这趟车去{}吗？,,zhè tàng chē qù {} ma?,,,2,latex-reference-v2
+transit-rides.what-is-the-next-stop,下一站是什么？,,xià yí zhàn shì shénme?,,,2,latex-reference-v2
+transit-rides.please-tell-me-where-to-get-off,请告诉我在哪站下车,,qǐng gàosu wǒ zài nǎ zhàn xià chē,,,2,latex-reference-v2
+transit-rides.is-this-direct,这是直达车吗？,,zhè shì zhídá chē ma?,,,2,latex-reference-v2
+transit-rides.do-i-need-to-transfer,需要换乘吗？,,xūyào huànchéng ma?,,,2,latex-reference-v2
+transit-rides.is-it-delayed,车晚点了吗？,,chē wǎndiǎn le ma?,,,2,latex-reference-v2
+transit-rides.i-am-in-a-hurry,我赶时间,,wǒ gǎn shíjiān,,,2,latex-reference-v2
+transit-rides.which-platform,哪个站台？,,nǎge zhàntái?,,,2,latex-reference-v2
+transit-rides.what-time-is-the-next-one,下一班几点？,,xià yì bān jǐ diǎn?,,,2,latex-reference-v2
+transit-rides.i-went-past-my-stop,我坐过站了,,wǒ zuò guòzhàn le,,,2,latex-reference-v2
+place-words.scenic-area,景区,,jǐngqū,,,2,latex-reference-v2
+place-words.visitor-center,游客中心,,yóukè zhōngxīn,,,2,latex-reference-v2
+place-words.railway-station,火车站,,huǒchēzhàn,,,2,latex-reference-v2
+place-words.airport,机场,,jīchǎng,,,2,latex-reference-v2
+place-words.service-desk,服务台,,fúwùtái,,,2,latex-reference-v2
+place-words.bus-stop,公交站,,gōngjiāozhàn,,,2,latex-reference-v2
+place-words.luggage-storage,行李寄存,,xíngli jìcún,,,2,latex-reference-v2
+pickup-meeting.where-is-the-pickup-point,上车点在哪里？,,shàngchēdiǎn zài nǎlǐ?,,,2,latex-reference-v2
+pickup-meeting.please-send-me-the-pickup-point,请把上车点发给我,,qǐng bǎ shàngchēdiǎn fā gěi wǒ,,,2,latex-reference-v2
+pickup-meeting.please-pick-us-up-here,请在这里接我们,,qǐng zài zhèlǐ jiē wǒmen,,,2,latex-reference-v2
+pickup-meeting.meet-us-at,我们在{}集合,,wǒmen zài {} jíhé,,,2,latex-reference-v2
+pickup-meeting.please-call-me-a-ride,请帮我叫车,,qǐng bāng wǒ jiào chē,,,2,latex-reference-v2
+rail-station-words.high-speed-rail,高铁,,gāotiě,,,2,latex-reference-v2
+rail-station-words.maglev,磁浮,,cífú,,,2,latex-reference-v2
+rail-station-words.transfer,换乘,,huànchéng,,,2,latex-reference-v2
+rail-station-words.ticket-gate,检票口,,jiǎnpiàokǒu,,,2,latex-reference-v2
+rail-station-words.platform,站台,,zhàntái,,,2,latex-reference-v2
+rail-station-words.ticket-office,售票处,,shòupiàochù,,,2,latex-reference-v2
+rail-station-words.waiting-room,候车室,,hòuchēshì,,,2,latex-reference-v2
+rail-station-words.train-number,车次,,chēcì,,,2,latex-reference-v2
+rail-station-words.carriage,车厢,,chēxiāng,,,2,latex-reference-v2
+rail-station-words.seat,座位,,zuòwèi,,,2,latex-reference-v2
+rail-station-words.last-train,末班车,,mòbānchē,,,2,latex-reference-v2
+rail-station-words.delayed,晚点,,wǎndiǎn,,,2,latex-reference-v2
+rail-station-words.final-stop,终点站,,zhōngdiǎnzhàn,,,2,latex-reference-v2
+common-signs.open-on,开,,kāi,,,2,latex-reference-v2
+common-signs.closed-off,关,,guān,,,2,latex-reference-v2
+common-signs.occupied,有人,,yǒurén,,,2,latex-reference-v2
+common-signs.vacant,无人,,wúrén,,,2,latex-reference-v2
+common-signs.caution,小心,,xiǎoxīn,,,2,latex-reference-v2
+common-signs.no-entry,禁止入内,,jìnzhǐ rùnèi,,,2,latex-reference-v2
+common-signs.no-smoking,禁止吸烟,,jìnzhǐ xīyān,,,2,latex-reference-v2
+common-signs.no-photography,禁止拍照,,jìnzhǐ pāizhào,,,2,latex-reference-v2
+common-signs.do-not-touch,请勿触摸,,qǐng wù chùmō,,,2,latex-reference-v2
+common-signs.temporarily-closed,暂停开放,,zàntíng kāifàng,,,2,latex-reference-v2

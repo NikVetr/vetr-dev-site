@@ -1,0 +1,40 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,I / me,,,,2,latex-reference-v2
+pronouns-verbs.we-us,we / us,,,,2,latex-reference-v2
+pronouns-verbs.you,you,,,,2,latex-reference-v2
+pronouns-verbs.you-polite,you (polite),,,,2,latex-reference-v2
+pronouns-verbs.he-him,he / him,,,,2,latex-reference-v2
+pronouns-verbs.she-her,she / her,,,,2,latex-reference-v2
+pronouns-verbs.they-them,they / them,,,,2,latex-reference-v2
+pronouns-verbs.my-mine,my / mine,,,,2,latex-reference-v2
+pronouns-verbs.your-yours,your / yours,,,,2,latex-reference-v2
+pronouns-verbs.be-called-call,be called / call,,,,2,latex-reference-v2
+pronouns-verbs.have,have,,,,2,latex-reference-v2
+pronouns-verbs.do-not-have,do not have,,,,2,latex-reference-v2
+pronouns-verbs.go,go,,,,2,latex-reference-v2
+pronouns-verbs.come,come,,,,2,latex-reference-v2
+pronouns-verbs.would-like,would like,,,,2,latex-reference-v2
+pronouns-verbs.want,want,,,,2,latex-reference-v2
+pronouns-verbs.look-for,look for,,,,2,latex-reference-v2
+pronouns-verbs.buy,buy,,,,2,latex-reference-v2
+pronouns-verbs.like,like,,,,2,latex-reference-v2
+pronouns-verbs.need,need,,,,2,latex-reference-v2
+question-words.what,what,,,,2,latex-reference-v2
+question-words.where,where,,,,2,latex-reference-v2
+question-words.who,who,,,,2,latex-reference-v2
+question-words.which-one,which one,,,,2,latex-reference-v2
+question-words.when,when,,,,2,latex-reference-v2
+question-words.how,how,,,,2,latex-reference-v2
+question-words.how-much-many,how much / many,,,,2,latex-reference-v2
+question-words.how-many,how many,,,,2,latex-reference-v2
+question-words.why,why,,,,2,latex-reference-v2
+question-words.this,this,,,,2,latex-reference-v2
+question-words.that,that,,,,2,latex-reference-v2
+question-words.here,here,,,,2,latex-reference-v2
+question-words.there,there,,,,2,latex-reference-v2
+question-words.a-little,a little,,,,2,latex-reference-v2
+question-words.some,some,,,,2,latex-reference-v2
+question-words.very,very,,,,2,latex-reference-v2
+question-words.too,too,,,,2,latex-reference-v2
+question-words.also,also,,,,2,latex-reference-v2
+question-words.all-both,all / both,,,,2,latex-reference-v2

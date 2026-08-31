@@ -1,0 +1,49 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+trail-words.trail,trail,,,,2,latex-reference-v2
+trail-words.trailhead,trailhead,,,,2,latex-reference-v2
+trail-words.summit,summit,,,,2,latex-reference-v2
+trail-words.viewpoint,viewpoint,,,,2,latex-reference-v2
+trail-words.cableway,cableway,,,,2,latex-reference-v2
+trail-words.shuttle-bus,shuttle bus,,,,2,latex-reference-v2
+trail-words.park-shuttle,park shuttle,,,,2,latex-reference-v2
+trail-words.steps,steps,,,,2,latex-reference-v2
+trail-words.up-uphill,up / uphill,,,,2,latex-reference-v2
+trail-words.down-downhill,down / downhill,,,,2,latex-reference-v2
+trail-words.one-way,one-way,,,,2,latex-reference-v2
+trail-words.round-trip,round trip,,,,2,latex-reference-v2
+hiking-parks.is-this-the-way-to,Is this the way to {} ?,,,,2,latex-reference-v2
+hiking-parks.where-is-the-trailhead,Where is the trailhead?,,,,2,latex-reference-v2
+hiking-parks.how-long-to-the-summit,How long to the summit?,,,,2,latex-reference-v2
+hiking-parks.how-long-to-the-viewpoint,How long to the viewpoint?,,,,2,latex-reference-v2
+hiking-parks.which-route-is-easier,Which route is easier?,,,,2,latex-reference-v2
+trail-conditions.how-long-is-the-full-route,How long is the full route?,,,,2,latex-reference-v2
+trail-conditions.can-we-return-the-same-way,Can we return the same way?,,,,2,latex-reference-v2
+trail-conditions.can-we-return-before-dark,Can we return before dark?,,,,2,latex-reference-v2
+trail-conditions.is-the-trail-open,Is the trail open?,,,,2,latex-reference-v2
+trail-conditions.is-the-route-steep,Is the route steep?,,,,2,latex-reference-v2
+trail-conditions.is-the-path-slippery,Is the path slippery?,,,,2,latex-reference-v2
+trail-transport.how-long-is-the-queue,How long is the queue?,,,,2,latex-reference-v2
+trail-transport.what-time-is-the-last-shuttle,What time is the last shuttle?,,,,2,latex-reference-v2
+trail-transport.when-does-the-cableway-stop,When does the cableway stop?,,,,2,latex-reference-v2
+trail-transport.where-can-we-buy-water,Where can we buy water?,,,,2,latex-reference-v2
+trail-transport.where-can-we-refill-water,Where can we refill water?,,,,2,latex-reference-v2
+trail-transport.is-there-cell-signal-here,Is there cell signal here?,,,,2,latex-reference-v2
+trail-transport.do-you-have-a-map,Do you have a map?,,,,2,latex-reference-v2
+trail-warnings.open,open,,,,2,latex-reference-v2
+trail-warnings.closed,closed,,,,2,latex-reference-v2
+trail-warnings.maintenance,maintenance,,,,2,latex-reference-v2
+trail-warnings.steep-slope,steep slope,,,,2,latex-reference-v2
+trail-warnings.caution-slippery,caution: slippery,,,,2,latex-reference-v2
+trail-warnings.danger,danger,,,,2,latex-reference-v2
+trail-warnings.beware-falling-rocks,beware falling rocks,,,,2,latex-reference-v2
+trail-warnings.first-aid-station,first-aid station,,,,2,latex-reference-v2
+trail-warnings.service-suspended,service suspended,,,,2,latex-reference-v2
+trail-landmarks.trail-marker,trail marker,,,,2,latex-reference-v2
+trail-landmarks.fork-junction,fork / junction,,,,2,latex-reference-v2
+trail-landmarks.boardwalk-cliff-path,boardwalk / cliff path,,,,2,latex-reference-v2
+trail-landmarks.start,start,,,,2,latex-reference-v2
+trail-landmarks.end,end,,,,2,latex-reference-v2
+trail-landmarks.elevation,elevation,,,,2,latex-reference-v2
+trail-landmarks.sunset,sunset,,,,2,latex-reference-v2
+trail-landmarks.restroom,restroom,,,,2,latex-reference-v2
+trail-landmarks.water-point,water point,,,,2,latex-reference-v2

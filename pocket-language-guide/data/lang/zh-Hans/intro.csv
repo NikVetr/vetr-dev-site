@@ -1,0 +1,6 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+introductions.my-name-is,我叫{},,wǒ jiào {},,,2,latex-reference-v2
+introductions.nice-to-meet-you,很高兴认识你,,hěn gāoxìng rènshi nǐ,,,2,latex-reference-v2
+introductions.what-is-your-name,你叫什么名字？,,nǐ jiào shénme míngzi?,,,2,latex-reference-v2
+introductions.we-are-traveling-together,我们一起旅行,,wǒmen yìqǐ lǚxíng,,,2,latex-reference-v2
+introductions.this-is-my-friend,这是我的朋友,,zhè shì wǒ de péngyou,,,2,latex-reference-v2

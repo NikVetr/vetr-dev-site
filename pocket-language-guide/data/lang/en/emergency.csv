@@ -1,0 +1,18 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+emergency-medical.help,Help!,,,,2,latex-reference-v2
+emergency-medical.please-call-an-ambulance,Please call an ambulance,,,,2,latex-reference-v2
+emergency-medical.i-need-a-doctor,I need a doctor,,,,2,latex-reference-v2
+emergency-medical.i-am-sick,I am sick,,,,2,latex-reference-v2
+emergency-medical.i-am-injured,I am injured,,,,2,latex-reference-v2
+emergency-medical.it-hurts-here,It hurts here,,,,2,latex-reference-v2
+emergency-medical.where-is-a-pharmacy,Where is a pharmacy?,,,,2,latex-reference-v2
+emergency-medical.please-take-me-to-a-hospital,Please take me to a hospital,,,,2,latex-reference-v2
+lost-rescue.i-lost-my-passport,I lost my passport,,,,2,latex-reference-v2
+lost-rescue.i-lost-my-phone,I lost my phone,,,,2,latex-reference-v2
+lost-rescue.please-call-the-police,Please call the police,,,,2,latex-reference-v2
+lost-rescue.we-are-here,We are here,,,,2,latex-reference-v2
+lost-rescue.please-look-at-my-location-pin,Please look at my location pin,,,,2,latex-reference-v2
+lost-rescue.i-cannot-walk,I cannot walk,,,,2,latex-reference-v2
+lost-rescue.i-sprained-my-ankle,I sprained my ankle,,,,2,latex-reference-v2
+lost-rescue.please-contact-rescue,Please contact rescue,,,,2,latex-reference-v2
+lost-rescue.my-companion-is-missing,My companion is missing,,,,2,latex-reference-v2

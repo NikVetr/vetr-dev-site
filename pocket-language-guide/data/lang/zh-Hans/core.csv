@@ -1,0 +1,40 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,我,,wǒ,,,2,latex-reference-v2
+pronouns-verbs.we-us,我们,,wǒmen,,,2,latex-reference-v2
+pronouns-verbs.you,你,,nǐ,,,2,latex-reference-v2
+pronouns-verbs.you-polite,您,,nín,,,2,latex-reference-v2
+pronouns-verbs.he-him,他,,tā,,,2,latex-reference-v2
+pronouns-verbs.she-her,她,,tā,,,2,latex-reference-v2
+pronouns-verbs.they-them,他们,,tāmen,,,2,latex-reference-v2
+pronouns-verbs.my-mine,我的,,wǒ de,,,2,latex-reference-v2
+pronouns-verbs.your-yours,你的,,nǐ de,,,2,latex-reference-v2
+pronouns-verbs.be-called-call,叫,,jiào,,,2,latex-reference-v2
+pronouns-verbs.have,有,,yǒu,,,2,latex-reference-v2
+pronouns-verbs.do-not-have,没有,,méiyǒu,,,2,latex-reference-v2
+pronouns-verbs.go,去,,qù,,,2,latex-reference-v2
+pronouns-verbs.come,来,,lái,,,2,latex-reference-v2
+pronouns-verbs.would-like,想,,xiǎng,,,2,latex-reference-v2
+pronouns-verbs.want,要,,yào,,,2,latex-reference-v2
+pronouns-verbs.look-for,找,,zhǎo,,,2,latex-reference-v2
+pronouns-verbs.buy,买,,mǎi,,,2,latex-reference-v2
+pronouns-verbs.like,喜欢,,xǐhuan,,,2,latex-reference-v2
+pronouns-verbs.need,需要,,xūyào,,,2,latex-reference-v2
+question-words.what,什么,,shénme,,,2,latex-reference-v2
+question-words.where,哪里,,nǎlǐ,,,2,latex-reference-v2
+question-words.who,谁,,shéi,,,2,latex-reference-v2
+question-words.which-one,哪个,,nǎge,,,2,latex-reference-v2
+question-words.when,什么时候,,shénme shíhou,,,2,latex-reference-v2
+question-words.how,怎么,,zěnme,,,2,latex-reference-v2
+question-words.how-much-many,多少,,duōshao,,,2,latex-reference-v2
+question-words.how-many,几,,jǐ,,,2,latex-reference-v2
+question-words.why,为什么,,wèishénme,,,2,latex-reference-v2
+question-words.this,这个,,zhège,,,2,latex-reference-v2
+question-words.that,那个,,nàge,,,2,latex-reference-v2
+question-words.here,这里,,zhèlǐ,,,2,latex-reference-v2
+question-words.there,那里,,nàlǐ,,,2,latex-reference-v2
+question-words.a-little,一点儿,,yìdiǎnr,,,2,latex-reference-v2
+question-words.some,一些,,yìxiē,,,2,latex-reference-v2
+question-words.very,很,,hěn,,,2,latex-reference-v2
+question-words.too,太,,tài,,,2,latex-reference-v2
+question-words.also,也,,yě,,,2,latex-reference-v2
+question-words.all-both,都,,dōu,,,2,latex-reference-v2

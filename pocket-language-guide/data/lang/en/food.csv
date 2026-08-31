@@ -1,0 +1,21 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,No meat,,,,2,latex-reference-v2
+dietary-needs.no-eggs,No eggs,,,,2,latex-reference-v2
+dietary-needs.not-spicy,Not spicy,,,,2,latex-reference-v2
+dietary-needs.less-spicy,Less spicy,,,,2,latex-reference-v2
+dietary-needs.no-peanuts,No peanuts,,,,2,latex-reference-v2
+dietary-needs.no-nuts,No nuts,,,,2,latex-reference-v2
+dietary-needs.no-seafood,No seafood,,,,2,latex-reference-v2
+dietary-needs.i-am-vegetarian,I am vegetarian,,,,2,latex-reference-v2
+dietary-needs.i-am-vegan,I am vegan,,,,2,latex-reference-v2
+dietary-needs.i-do-not-eat,I do not eat {},,,,2,latex-reference-v2
+dietary-needs.i-am-allergic-to,I am allergic to {},,,,2,latex-reference-v2
+food-ordering.table-for-two,Table for two,,,,2,latex-reference-v2
+food-ordering.is-a-table-available,Is a table available?,,,,2,latex-reference-v2
+food-ordering.menu-please,"Menu, please",,,,2,latex-reference-v2
+food-ordering.i-want-this,I want this,,,,2,latex-reference-v2
+food-ordering.do-you-have-drinking-water,Do you have drinking water?,,,,2,latex-reference-v2
+food-ordering.to-go-please,"To go, please",,,,2,latex-reference-v2
+food-ordering.check-please,"Check, please",,,,2,latex-reference-v2
+food-ordering.does-it-contain,Does it contain {} ?,,,,2,latex-reference-v2
+food-ordering.is-this-vegetarian,Is this vegetarian?,,,,2,latex-reference-v2

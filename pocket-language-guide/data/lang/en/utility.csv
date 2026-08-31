@@ -1,0 +1,7 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,I want to go to {},,,,2,latex-reference-v2
+utility-templates.please-give-me,Please give me {},,,,2,latex-reference-v2
+utility-templates.may-i,May I {} ?,,,,2,latex-reference-v2
+utility-templates.please-do-not-add,Please do not add {},,,,2,latex-reference-v2
+utility-templates.do-you-have,Do you have {} ?,,,,2,latex-reference-v2
+utility-templates.please-write-the-number,Please write the number,,,,2,latex-reference-v2

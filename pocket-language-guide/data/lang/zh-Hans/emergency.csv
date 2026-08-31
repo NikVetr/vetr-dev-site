@@ -1,0 +1,18 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+emergency-medical.help,救命！,,jiùmìng!,,,2,latex-reference-v2
+emergency-medical.please-call-an-ambulance,请帮我叫救护车,,qǐng bāng wǒ jiào jiùhùchē,,,2,latex-reference-v2
+emergency-medical.i-need-a-doctor,我需要医生,,wǒ xūyào yīshēng,,,2,latex-reference-v2
+emergency-medical.i-am-sick,我生病了,,wǒ shēngbìng le,,,2,latex-reference-v2
+emergency-medical.i-am-injured,我受伤了,,wǒ shòushāng le,,,2,latex-reference-v2
+emergency-medical.it-hurts-here,这里疼,,zhèlǐ téng,,,2,latex-reference-v2
+emergency-medical.where-is-a-pharmacy,药店在哪里？,,yàodiàn zài nǎlǐ?,,,2,latex-reference-v2
+emergency-medical.please-take-me-to-a-hospital,请带我去医院,,qǐng dài wǒ qù yīyuàn,,,2,latex-reference-v2
+lost-rescue.i-lost-my-passport,我的护照丢了,,wǒ de hùzhào diū le,,,2,latex-reference-v2
+lost-rescue.i-lost-my-phone,我的手机丢了,,wǒ de shǒujī diū le,,,2,latex-reference-v2
+lost-rescue.please-call-the-police,请报警,,qǐng bàojǐng,,,2,latex-reference-v2
+lost-rescue.we-are-here,我们在这里,,wǒmen zài zhèlǐ,,,2,latex-reference-v2
+lost-rescue.please-look-at-my-location-pin,请看我的定位,,qǐng kàn wǒ de dìngwèi,,,2,latex-reference-v2
+lost-rescue.i-cannot-walk,我走不动了,,wǒ zǒu bu dòng le,,,2,latex-reference-v2
+lost-rescue.i-sprained-my-ankle,我扭伤脚了,,wǒ niǔshāng jiǎo le,,,2,latex-reference-v2
+lost-rescue.please-contact-rescue,请联系救援队,,qǐng liánxì jiùyuánduì,,,2,latex-reference-v2
+lost-rescue.my-companion-is-missing,我的同伴不见了,,wǒ de tóngbàn bú jiàn le,,,2,latex-reference-v2

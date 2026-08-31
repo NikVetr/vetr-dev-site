@@ -1,0 +1,21 @@
+{
+  "name": "pocket-language-guide",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Printable pocket-sized vocabulary and phrase guides for any language pair.",
+  "type": "module",
+  "scripts": {
+    "serve": "npx http-server . -p 8080 -c-1",
+    "check": "npx tsc -p jsconfig.json",
+    "validate": "python3 scripts/validate_data.py",
+    "prerender": "node scripts/prerender_packs.mjs",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test": "npm run test:unit && npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.4.0",
+    "http-server": "^14.1.1",
+    "typescript": "^5.7.0"
+  }
+}

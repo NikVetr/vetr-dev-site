@@ -1,0 +1,7 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,我想去{},,wǒ xiǎng qù {},,,2,latex-reference-v2
+utility-templates.please-give-me,请给我{},,qǐng gěi wǒ {},,,2,latex-reference-v2
+utility-templates.may-i,我可以{}吗？,,wǒ kěyǐ {} ma?,,,2,latex-reference-v2
+utility-templates.please-do-not-add,请不要放{},,qǐng bú yào fàng {},,,2,latex-reference-v2
+utility-templates.do-you-have,有没有{}？,,yǒu méiyǒu {}?,,,2,latex-reference-v2
+utility-templates.please-write-the-number,请写数字,,qǐng xiě shùzì,,,2,latex-reference-v2

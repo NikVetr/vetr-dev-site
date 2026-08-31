@@ -1,0 +1,6 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,My name is {},,,,2,latex-reference-v2
+introductions.nice-to-meet-you,Nice to meet you,,,,2,latex-reference-v2
+introductions.what-is-your-name,What is your name?,,,,2,latex-reference-v2
+introductions.we-are-traveling-together,We are traveling together,,,,2,latex-reference-v2
+introductions.this-is-my-friend,This is my friend,,,,2,latex-reference-v2
