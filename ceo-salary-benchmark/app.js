@@ -158,7 +158,7 @@
   };
 
   const LAYOUT_STORAGE_KEY = "rp-salary-benchmark.layout.v1";
-  const DEFAULT_LAYOUT = Object.freeze({ settings: 0.156, table: 0.348, results: null });
+  const DEFAULT_LAYOUT = Object.freeze({ settings: 0.156, table: 0.348, results: 0.25 });
   const PANEL_MINIMUMS = Object.freeze({
     settings: 218, analysisDesktop: 360, analysisMedium: 420, table: 350,
     chart: 326, results: 112, shortChart: 210, shortCompactChart: 246, shortResults: 92,
@@ -266,7 +266,7 @@
       return {
         settings: ratio(stored.settings, DEFAULT_LAYOUT.settings),
         table: ratio(stored.table, DEFAULT_LAYOUT.table),
-        results: stored.results == null ? null : ratio(stored.results, DEFAULT_LAYOUT.results),
+        results: stored.results == null ? DEFAULT_LAYOUT.results : ratio(stored.results, DEFAULT_LAYOUT.results),
       };
     } catch (error) {
       console.warn("Unable to read saved panel sizes", error);
@@ -276,6 +276,32 @@
 
   let layoutPreferences = loadLayoutPreferences();
   let layoutApplyFrame = 0;
+  let resultsPanelAnimationTimer = 0;
+  let transientResultsRatio = null;
+
+  function stopResultsPanelSizeAnimation({ freeze = false } = {}) {
+    const active = Boolean(resultsPanelAnimationTimer)
+      || refs.analysisColumn.classList.contains("is-animating-results-size");
+    if (!active) return false;
+    let currentHeight = null;
+    if (freeze) {
+      const columnBounds = refs.analysisColumn.getBoundingClientRect();
+      const scaleY = columnBounds.height / Math.max(1, refs.analysisColumn.offsetHeight) || 1;
+      currentHeight = refs.resultsPanel.getBoundingClientRect().height / scaleY;
+    }
+    if (resultsPanelAnimationTimer) window.clearTimeout(resultsPanelAnimationTimer);
+    resultsPanelAnimationTimer = 0;
+    refs.analysisColumn.classList.remove("is-animating-results-size");
+    if (currentHeight != null) refs.analysisColumn.style.setProperty("--results-size", currentHeight + "px");
+    requestAnimationFrame(updatePanelResizerAria);
+    return true;
+  }
+
+  function beginManualResultsResize() {
+    stopResultsPanelSizeAnimation({ freeze: true });
+    transientResultsRatio = null;
+    layoutPreferences.results = refs.resultsPanel.offsetHeight / Math.max(1, refs.analysisColumn.offsetHeight);
+  }
 
   function shellLayoutMetrics() {
     const bounds = refs.appShell.getBoundingClientRect();
@@ -386,7 +412,8 @@
       refs.appShell.style.setProperty("--settings-size", settingsWidth + "px");
       refs.appShell.style.setProperty("--table-size", tableWidth + "px");
     }
-    if (layoutPreferences.results == null) {
+    const resultsRatio = transientResultsRatio ?? layoutPreferences.results;
+    if (resultsRatio == null) {
       refs.analysisColumn.style.removeProperty("--results-size");
       refs.analysisColumn.classList.remove("has-custom-results-size");
     }
@@ -397,7 +424,7 @@
       const available = Math.max(1, analysisHeight - resizerHeight - gap * 2);
       const minimums = horizontalPanelMinimums();
       const resultsHeight = clamp(
-        layoutPreferences.results * analysisHeight,
+        resultsRatio * analysisHeight,
         minimums.results,
         Math.max(minimums.results, available - minimums.chart),
       );
@@ -427,15 +454,20 @@
       minimums.results,
       Math.max(minimums.results, available - minimums.chart),
     );
+    stopResultsPanelSizeAnimation({ freeze: true });
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      refs.analysisColumn.classList.add("is-animating-results-size");
+      resultsPanelAnimationTimer = window.setTimeout(stopResultsPanelSizeAnimation, 440);
+    }
     refs.analysisColumn.style.setProperty("--results-size", resultsHeight + "px");
     refs.analysisColumn.classList.add("has-custom-results-size");
-    layoutPreferences.results = resultsHeight / Math.max(1, analysisHeight);
-    saveLayoutPreferences();
+    transientResultsRatio = resultsHeight / Math.max(1, analysisHeight);
     requestAnimationFrame(updatePanelResizerAria);
   }
 
   function resizePanelAt(type, clientX, clientY) {
     if (type === "results") {
+      beginManualResultsResize();
       const bounds = refs.analysisColumn.getBoundingClientRect();
       const analysisHeight = refs.analysisColumn.offsetHeight || bounds.height;
       const scaleY = bounds.height / analysisHeight || 1;
@@ -475,6 +507,10 @@
   }
 
   function resetPanelSize(type) {
+    if (type === "results") {
+      stopResultsPanelSizeAnimation({ freeze: true });
+      transientResultsRatio = null;
+    }
     layoutPreferences = { ...layoutPreferences, [type]: DEFAULT_LAYOUT[type] };
     applyLayoutPreferences();
     saveLayoutPreferences();
@@ -507,6 +543,7 @@
       resizer.addEventListener("pointerdown", (event) => {
         if (event.button !== 0) return;
         event.preventDefault();
+        if (type === "results") beginManualResultsResize();
         hideTooltip();
         hideRobustnessTooltip();
         closeAxisSelector();
@@ -539,6 +576,16 @@
         resizePanelAt(type, x, y);
         saveLayoutPreferences();
       });
+    });
+    refs.analysisColumn.addEventListener("transitionend", (event) => {
+      if (event.target === refs.analysisColumn && event.propertyName === "grid-template-rows") {
+        stopResultsPanelSizeAnimation();
+      }
+    });
+    refs.analysisColumn.addEventListener("transitioncancel", (event) => {
+      if (event.target === refs.analysisColumn && event.propertyName === "grid-template-rows") {
+        stopResultsPanelSizeAnimation({ freeze: true });
+      }
     });
     applyLayoutPreferences();
     window.addEventListener("resize", () => {

@@ -1134,7 +1134,12 @@ test("panel dividers resize, persist, and make charts reflow to their containers
   await expect(settingsDivider).toBeVisible();
   await expect(tableDivider).toBeVisible();
   await expect(resultsDivider).toBeVisible();
-  expect((await page.locator("#results-panel").boundingBox()).height).toBeLessThan(200);
+  const defaultResultsRatio = await page.evaluate(() => (
+    document.querySelector("#results-panel").getBoundingClientRect().height
+      / document.querySelector("#analysis-column").getBoundingClientRect().height
+  ));
+  expect(defaultResultsRatio).toBeGreaterThanOrEqual(0.24);
+  expect(defaultResultsRatio).toBeLessThanOrEqual(0.26);
 
   const settingsBefore = await settings.boundingBox();
   const settingsHandle = await settingsDivider.boundingBox();
@@ -2327,19 +2332,40 @@ test("each completed robustness check expands results once without overriding la
 
   const results = page.locator("#results-panel");
   const divider = page.locator("#results-panel-resizer");
+  const analysis = page.locator("#analysis-column");
+  const defaultRatio = await page.evaluate(() => {
+    const resultsPanel = document.querySelector("#results-panel");
+    const analysisColumn = document.querySelector("#analysis-column");
+    return resultsPanel.getBoundingClientRect().height / analysisColumn.getBoundingClientRect().height;
+  });
+  expect(defaultRatio).toBeGreaterThanOrEqual(0.24);
+  expect(defaultRatio).toBeLessThanOrEqual(0.26);
+  await analysis.screenshot({ path: "tmp/app-results-default-quarter.png" });
+
   await page.getByRole("tab", { name: "Robustness" }).click();
   await page.getByRole("button", { name: "Run check" }).click();
   await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
+  await expect(analysis).toHaveClass(/is-animating-results-size/);
+  await expect.poll(async () => analysis.evaluate((column) => getComputedStyle(column).transitionDuration)).toBe("0.4s");
+  await expect(analysis).not.toHaveClass(/is-animating-results-size/);
   await expect.poll(async () => (await results.boundingBox()).height).toBeGreaterThanOrEqual(495);
   expect((await results.boundingBox()).height).toBeLessThanOrEqual(505);
   await page.locator("#analysis-column").screenshot({ path: "tmp/app-robustness-auto-expanded.png" });
 
   const storedAfterRun = await page.evaluate(() => JSON.parse(localStorage.getItem("rp-salary-benchmark.layout.v1")));
-  expect(storedAfterRun.results).toBeGreaterThan(0.5);
+  expect(storedAfterRun).toBeNull();
+  await page.locator('#settings-panel-resizer').focus();
+  await page.keyboard.press("ArrowRight");
+  const storedAfterOtherResize = await page.evaluate(() => JSON.parse(localStorage.getItem("rp-salary-benchmark.layout.v1")));
+  expect(storedAfterOtherResize.results).toBeGreaterThanOrEqual(0.24);
+  expect(storedAfterOtherResize.results).toBeLessThanOrEqual(0.26);
+
   await divider.focus();
   await page.keyboard.press("ArrowDown");
   const manuallyResizedHeight = (await results.boundingBox()).height;
   expect(manuallyResizedHeight).toBeLessThan(490);
+  const storedAfterResize = await page.evaluate(() => JSON.parse(localStorage.getItem("rp-salary-benchmark.layout.v1")));
+  expect(storedAfterResize.results).toBeGreaterThan(0.2);
 
   await page.evaluate(() => window.dispatchEvent(new Event("resize")));
   await expect.poll(async () => Math.abs((await results.boundingBox()).height - manuallyResizedHeight)).toBeLessThanOrEqual(2);
@@ -2353,8 +2379,37 @@ test("each completed robustness check expands results once without overriding la
   await expect.poll(async () => Math.abs((await results.boundingBox()).height - manuallyResizedHeight)).toBeLessThanOrEqual(2);
 
   await page.getByRole("button", { name: "Run check" }).click();
+  await expect(analysis).toHaveClass(/is-animating-results-size/);
+  await divider.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(analysis).not.toHaveClass(/is-animating-results-size/);
+  const interruptedManualHeight = (await results.boundingBox()).height;
+  expect(interruptedManualHeight).toBeLessThan(495);
+
+  await page.getByRole("button", { name: "Run check" }).click();
+  await expect(analysis).toHaveClass(/is-animating-results-size/);
+  await expect(analysis).not.toHaveClass(/is-animating-results-size/);
   await expect.poll(async () => (await results.boundingBox()).height).toBeGreaterThanOrEqual(495);
   expect((await results.boundingBox()).height).toBeLessThanOrEqual(505);
+
+  await page.reload();
+  await expect.poll(async () => Math.abs((await results.boundingBox()).height - interruptedManualHeight)).toBeLessThanOrEqual(3);
+  expect(errors).toEqual([]);
+});
+
+test("robustness auto-expansion is immediate when reduced motion is requested", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await page.goto("/ceo-salary-benchmark/");
+  await page.getByRole("tab", { name: "Robustness" }).click();
+  await page.getByRole("button", { name: "Run check" }).click();
+  await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
+  await expect(page.locator("#analysis-column")).not.toHaveClass(/is-animating-results-size/);
+  const resultsHeight = (await page.locator("#results-panel").boundingBox()).height;
+  expect(resultsHeight).toBeGreaterThanOrEqual(495);
+  expect(resultsHeight).toBeLessThanOrEqual(505);
   expect(errors).toEqual([]);
 });
 

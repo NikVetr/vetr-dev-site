@@ -101,6 +101,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 }
 .analysis-column { display: grid; grid-template-rows: minmax(326px, 1fr) 10px minmax(112px, auto); gap: 2px; min-width: 0; min-height: 0; container-type: inline-size; }
 .analysis-column.has-custom-results-size { grid-template-rows: minmax(326px, 1fr) 10px minmax(112px, var(--results-size)); }
+.analysis-column.is-animating-results-size { transition: grid-template-rows 400ms cubic-bezier(.22, 1, .36, 1); }
 .chart-panel { display: flex; min-width: 0; min-height: 0; padding: 18px 18px 12px; border-radius: 4px; overflow: hidden; flex-direction: column; }
 .quantile-panel { min-height: 0; max-height: min(400px, 46dvh); padding: 0 18px 17px; border-radius: 4px; overflow: auto; scrollbar-gutter: stable; }
 .analysis-column.has-custom-results-size .quantile-panel { max-height: none; }
@@ -117,6 +118,10 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 body.is-resizing-panels.is-resizing-vertical { cursor: col-resize; user-select: none; }
 body.is-resizing-panels.is-resizing-horizontal { cursor: row-resize; user-select: none; }
 body.is-resizing-panels * { cursor: inherit !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .analysis-column.is-animating-results-size { transition: none; }
+}
 
 .panel-heading, .chart-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .panel-heading h2, .chart-heading h2 { margin: 3px 0 0; font: 650 18px/1.15 "Aspekta Variable", sans-serif; }
