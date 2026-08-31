@@ -36,7 +36,11 @@ if (geometry) {
   if (!presets.geometry[geometry]) throw new Error(`no geometry preset "${geometry}"`);
   base.geometry = { ...presets.geometry[geometry] };
 }
-const spec = { ...base, scale: args.scale === 'auto' ? 0 : Number(args.scale ?? 1) };
+const spec = {
+  ...base,
+  themeId: args.theme ?? base.themeId,
+  scale: args.scale === 'auto' ? 0 : Number(args.scale ?? 1),
+};
 
 const t0 = performance.now();
 const { plan } = await buildSheet(ctx, spec);

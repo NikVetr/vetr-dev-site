@@ -112,6 +112,30 @@ export function layout(input) {
         + 'implemented yet; lines may break mid-word.',
     });
   }
+  const thinnest = Math.min(
+    ...Object.values(theme.templates).map((/** @type {any} */ t) => Math.min(t.rulePt, t.accentPt)),
+    ...Object.values(theme.headings).map((/** @type {any} */ h) => h.rulePt),
+  );
+  if (thinnest < spec.paper.minRulePt - 1e-6) {
+    warnings.push({
+      code: 'hairline-too-thin',
+      severity: 'warn',
+      message: `The thinnest rule is ${thinnest.toFixed(2)}pt, below the `
+        + `${spec.paper.minRulePt.toFixed(2)}pt this paper can hold. It may print `
+        + 'as nothing. Try photo stock, or a theme with heavier rules.',
+    });
+  }
+  if (spec.inkMode !== 'full') {
+    warnings.push({
+      code: 'ink-mode',
+      severity: 'info',
+      message: spec.inkMode === 'mono'
+        ? 'Black and white: section colours are gone, so headings are told apart by '
+          + 'their icons and titles alone.'
+        : 'Low ink: row shading is off. Coloured rules are kept, since they carry '
+          + 'the section coding.',
+    });
+  }
   if (box.clipped) {
     warnings.push({
       code: 'margin-below-safe-area',

@@ -9,6 +9,8 @@ import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.j
 import { proposeBalance } from '../core/solve/weights.js';
 import { contentBox } from '../core/solve/index.js';
 import { splitCards } from '../render/impose.js';
+import { openQuiz, applyQuiz } from './quiz.js';
+import { attachHandles } from './handles.js';
 import { createTree, revealItem } from './content-tree.js';
 import { renderFaces, highlight } from './preview.js';
 import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from './io.js';
@@ -68,6 +70,7 @@ async function main() {
   $('fields').replaceChildren(...Object.entries(FIELD_LABELS).map(([field, label]) => {
     const box = document.createElement('input');
     box.type = 'checkbox';
+    box.dataset.field = field;
     box.checked = spec.fieldSet.includes(/** @type {any} */ (field));
     box.addEventListener('change', () => {
       const next = new Set(spec.fieldSet);
@@ -89,6 +92,7 @@ async function main() {
   sel('paper').value = spec.paper.presetId;
   sel('source').value = spec.source;
   sel('romanization').value = spec.romanization;
+  sel('theme').value = spec.themeId;
   /** @type {HTMLInputElement} */ ($('faces')).value = String(spec.geometry.faces);
 
   if (localStorage.getItem(BANNER_KEY) === '1') $('banner').hidden = true;
@@ -96,24 +100,46 @@ async function main() {
     $('banner').hidden = true;
     localStorage.setItem(BANNER_KEY, '1');
   });
-  $('quiz-open').addEventListener('click', () => {
-    location.href = `sheet.html?target=${encodeURIComponent(spec.target)}`
-      + `&source=${encodeURIComponent(spec.source)}`;
+  $('quiz-open').addEventListener('click', async () => {
+    const answers = await openQuiz();
+    if (!answers) return;
+    spec = applyQuiz(spec, ctx.corpus, answers);
+    // Reflect the answers in the controls the reader can still adjust.
+    sel('scale').value = String(spec.scale);
+    for (const box of $('fields').querySelectorAll('input[type=checkbox]')) {
+      if (box instanceof HTMLInputElement && box.dataset.field) {
+        box.checked = spec.fieldSet.includes(/** @type {any} */ (box.dataset.field));
+      }
+    }
+    $('banner').hidden = true;
+    schedule();
   });
 
   // --- solving ------------------------------------------------------------
 
+  let appliedPreset = choice.geometry ?? 'card-7x5-4col';
+
+  /**
+   * Fold the control values into the spec. Geometry is only taken from the preset
+   * when the preset itself changed -- otherwise margins and the column gap are
+   * whatever the reader last dragged them to, and re-reading the preset on every
+   * solve would silently undo that.
+   */
   function readControls() {
-    const geometry = presets.geometry[sel('geometry').value];
+    const presetId = sel('geometry').value;
+    const changedPreset = presetId !== appliedPreset;
+    appliedPreset = presetId;
+    const base = changedPreset ? presets.geometry[presetId] : spec.geometry;
     return {
       ...spec,
       source: sel('source').value,
       romanization: sel('romanization').value,
+      themeId: sel('theme').value,
       inkMode: /** @type {any} */ (sel('ink').value),
       scale: Number(sel('scale').value),
       geometry: {
-        ...geometry,
-        faces: Math.max(1, Number(/** @type {HTMLInputElement} */ ($('faces')).value) || geometry.faces),
+        ...base,
+        faces: Math.max(1, Number(/** @type {HTMLInputElement} */ ($('faces')).value) || base.faces),
       },
       paper: makeSpec(ctx, presets, { ...choice, paper: sel('paper').value }).paper,
     };
@@ -174,20 +200,15 @@ async function main() {
       });
     }
     updateTree(spec, blocks);
-
-    renderFaces({
-      root: $('face-area'),
-      plan,
-      svgs,
-      focused,
-      onFocus: (i) => { focused = i; renderCanvas(); },
-      onPick: (id) => revealItem($('tree'), id),
-      onHover: (id) => highlight($('face-area'), id),
-    });
+    renderCanvas();
   }
+
+  /** @type {(()=>void)|null} */ let detachHandles = null;
 
   function renderCanvas() {
     if (!plan) return;
+    detachHandles?.();
+    detachHandles = null;
     $('canvas-note').textContent = focused === null
       ? 'Click a face to work on it'
       : 'Click a row to find it in the content list';
@@ -200,6 +221,21 @@ async function main() {
       onPick: (id) => revealItem($('tree'), id),
       onHover: (id) => highlight($('face-area'), id),
     });
+    addHandles();
+  }
+
+  /** Margin and gap bars, on the focused face only. */
+  function addHandles() {
+    const focusedFace = $('face-area').querySelector('.face.focused');
+    if (!(focusedFace instanceof HTMLElement)) return;
+    detachHandles = attachHandles({
+      face: focusedFace,
+      spec,
+      onCommit: (geometry) => {
+        spec = { ...spec, geometry };
+        schedule();
+      },
+    });
   }
 
   function schedule() {
@@ -209,7 +245,12 @@ async function main() {
 
   // --- wiring -------------------------------------------------------------
 
-  for (const id of ['geometry', 'paper', 'source', 'romanization', 'ink', 'scale', 'faces']) {
+  sel('geometry').addEventListener('change', () => {
+    const preset = presets.geometry[sel('geometry').value];
+    /** @type {HTMLInputElement} */ ($('faces')).value = String(preset.faces);
+    schedule();
+  });
+  for (const id of ['paper', 'source', 'romanization', 'theme', 'ink', 'scale', 'faces']) {
     $(id).addEventListener('change', schedule);
   }
   $('grid-toggle').addEventListener('click', () => {

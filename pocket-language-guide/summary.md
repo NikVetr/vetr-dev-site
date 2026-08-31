@@ -119,6 +119,36 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   Clicking a row on a face reveals it in the content tree and vice versa. The
   tree is built once and updated in place so scroll position and expanded
   sections survive a re-solve.
+  - **`ui/quiz.js`** — the banner's *Help me decide*. Three questions set the
+    things a newcomer cannot guess at: which sections earn their space, whether
+    romanisation and respelling are useful or noise (a reader who knows the script
+    needs no respelling; one with no script needs little else), and whether to
+    prefer more items or larger type.
+  - **`ui/handles.js`** — drag bars on the focused face for margins and the column
+    gap. Dragging shows a guide and a readout but does not re-solve, since a solve
+    takes a few hundred milliseconds; geometry is committed on release. Note that
+    `readControls()` deliberately only re-reads the geometry preset when the preset
+    itself changed — otherwise every solve would silently undo a drag.
+
+## Themes and accessibility
+
+`data/themes/latex-reference.json` is the reference palette: five semantic colours,
+transcribed from the original.
+
+`data/themes/cvd-safe.json` exists because section colour is the sheet's main
+category cue, and the reference palette collapses under red-green colour
+blindness — blue and purple are near-identical under both deuteranopia and
+protanopia. Its five colours maximise the minimum pairwise separation under
+simulated deuteranopia, protanopia and tritanopia, subject to at least 4.6:1
+contrast on white (which a 0.92pt rule and 5.5pt bold type need): worst-case
+separation 0.148 against the reference's 0.019. The cost is semantic — green
+cannot coexist safely with red, so transport and outdoors lose it — which is why
+this is an alternative a reader chooses, not the default. Headings keep their
+icons and titles, so colour is never the only cue.
+
+Each theme has both a `description` (prose) and a `note` (the note-template
+style). These once collided as one key and JSON silently kept the last;
+`tests/theme.test.mjs` now asserts the shape.
 
 ## Print and paper
 
@@ -176,6 +206,33 @@ fitted scale, identical output for identical input. Browser specs drive the real
 pages, including a PDF export with the network switched off. `tests/render.spec.js`
 renders the same plan through both renderers and compares ink, which is how a
 dropped glyph or an unloaded font gets caught.
+
+## Deliberately not built yet
+
+Named so nobody has to rediscover the gap:
+
+- **Corpus beyond Mandarin.** By design: the content track is separate, so this
+  ships schemas, validators, confidence gating, agent prompt templates and the
+  real Mandarin corpus, and leaves bulk generation to run against a frozen schema.
+  `es`, `ja` and `ar` are registered with a `draft` status and no rows; the gallery
+  reads `data/coverage.json` rather than that status, so they never offer a button
+  that would yield an empty sheet.
+- **IPA.** The reference sheet carried no IPA, so the `ipa` column is empty
+  throughout. The respelling transducer (`data/respell/<src>/rules.yaml`) that
+  would consume it is therefore also unwritten; `zh-Hans → en-US` respellings ship
+  as the hand-curated override layer they already were.
+- **Dictionary line breaking** for Thai and Khmer. `scripts.csv` marks them
+  `word_break: dict`; the measurer falls back to breaking anywhere and the solver
+  raises a warning, rather than pretending.
+- **A duplex check overlay.** Both flip orders ship and the studio explains what
+  each produces, but there is no side-by-side superimposition yet.
+- **UI translation.** `ui/` strings are English. A free global resource needs its
+  own chrome translated and RTL-mirrored.
+- **Per-row split overrides.** The drag handles cover margins and the column gap;
+  dragging an individual row's internal divider would need per-row overrides
+  threaded through `atoms.js`.
+- **A reviewer queue.** `content/CONTRIBUTING.md` defines the confidence tiers and
+  the validator enforces the safety gate, but there is no review UI.
 
 ## Notes worth keeping
 

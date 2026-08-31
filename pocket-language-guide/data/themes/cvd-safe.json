@@ -1,7 +1,7 @@
 {
-  "id": "latex-reference",
-  "name": "Reference",
-  "description": "Type scale, rules and spacing transcribed from the hand-tuned XeLaTeX source. Glue weights are ratios, not absolutes: only their proportions affect the flush-column solve. Five semantic colours -- blue for communication, orange for money and food, green for transport and outdoors, purple for lodging and time, red for emergencies.",
+  "id": "cvd-safe",
+  "name": "High contrast (colour-vision safe)",
+  "description": "Same type scale as the reference theme, different palette. Section colour is the sheet's main category cue, and under red-green colour blindness the reference palette collapses: blue and purple are near-identical under both deuteranopia and protanopia (worst-case separation 0.019), and green sits next to orange and red. These five maximise the minimum pairwise separation under simulated deuteranopia, protanopia and tritanopia, subject to at least 4.6:1 contrast on white -- which a 0.92pt rule and 5.5pt bold type need. Worst-case separation is 0.148, roughly eight times better. The cost is semantic: green cannot coexist safely with red, so transport and outdoors lose it. Headings keep their icons and titles, which carry the category regardless of colour.",
   "note": {
     "size": 5.24,
     "leading": 6.55,
@@ -17,16 +17,16 @@
   },
   "colors": {
     "ink": "#111820",
-    "muted": "#3F4A55",
+    "muted": "#333B44",
     "rule": "#BCC6CF",
     "shade": "#F4F6F8",
     "paper": "#FFFFFF",
     "roles": {
-      "comm": "#0B67A3",
-      "money": "#B45100",
-      "move": "#237547",
-      "stay": "#6D3AA5",
-      "alert": "#B3261E"
+      "comm": "#2B79AD",
+      "money": "#8C7207",
+      "move": "#AD4E74",
+      "stay": "#07078C",
+      "alert": "#8C0707"
     }
   },
   "headings": {
