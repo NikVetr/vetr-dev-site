@@ -619,21 +619,30 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("thead tr")).toHaveCount(1);
   await expect(page.locator("#table-rp-reference-layer")).toHaveCount(0);
   const filterPlacements = await page.locator("thead th.filterable-column").evaluateAll((headers) => headers.map((header) => {
-    const sort = header.querySelector("button[data-sort]").getBoundingClientRect();
+    const controls = header.querySelector(".header-controls").getBoundingClientRect();
+    const sortButton = header.querySelector("button[data-sort]");
+    const sort = sortButton.getBoundingClientRect();
     const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
     const bounds = header.getBoundingClientRect();
-    const lineHeight = Number.parseFloat(getComputedStyle(header.querySelector("button[data-sort]")).lineHeight);
+    const sortIcon = getComputedStyle(sortButton, "::after");
+    const sortIconTop = controls.top + Number.parseFloat(sortIcon.top);
+    const sortIconRight = controls.right - Number.parseFloat(sortIcon.right);
     return {
       width: filter.width,
-      gap: filter.left - sort.right,
-      contained: filter.left >= bounds.left && filter.right <= bounds.right,
-      lines: sort.height / lineHeight,
-      centerOffset: Math.abs((filter.top + filter.bottom - sort.top - sort.bottom) / 2),
+      height: filter.height,
+      verticalGap: filter.top - sortIconTop - Number.parseFloat(sortIcon.height),
+      rightOffset: Math.abs(filter.right - sortIconRight),
+      contained: controls.left >= bounds.left && controls.right <= bounds.right
+        && filter.left >= controls.left && filter.right <= controls.right,
+      sortTargetHeight: sort.height,
+      controlHeight: controls.height,
     };
   }));
   expect(
-    filterPlacements.every(({ width, gap, contained, lines, centerOffset }) => (
-      width <= 18 && gap >= 0 && gap <= 0.5 && contained && lines <= 2.2 && centerOffset <= 0.75
+    filterPlacements.every(({ width, height, verticalGap, rightOffset, contained, sortTargetHeight, controlHeight }) => (
+      width >= 24 && width <= 24.5 && height >= 24 && height <= 24.5
+      && verticalGap >= 1.5 && verticalGap <= 2.5
+      && rightOffset <= 0.5 && contained && sortTargetHeight >= 48 && controlHeight >= 48
     )),
     JSON.stringify(filterPlacements),
   ).toBe(true);
@@ -940,6 +949,70 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#table-search")).toHaveCount(0);
   await expect(page.locator('thead button[data-sort="remoteStatus"]')).toHaveCount(0);
 
+  expect(errors).toEqual([]);
+});
+
+test("table headers stack compact sort and filter controls at desktop and constrained widths", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+
+  for (const { width, height, screenshot } of [
+    { width: 1440, height: 900, screenshot: "tmp/app-table-header-controls-desktop.png" },
+    { width: 900, height: 720, screenshot: "tmp/app-table-header-controls-constrained.png" },
+  ]) {
+    await page.setViewportSize({ width, height });
+    await page.goto("/ceo-salary-benchmark/");
+    await page.locator(".table-panel").scrollIntoViewIfNeeded();
+
+    const placements = await page.locator("thead th.filterable-column").evaluateAll((headers) => headers.map((header) => {
+      const bounds = header.getBoundingClientRect();
+      const controls = header.querySelector(".header-controls").getBoundingClientRect();
+      const sortButton = header.querySelector("button[data-sort]");
+      const sort = sortButton.getBoundingClientRect();
+      const sortIcon = getComputedStyle(sortButton, "::after");
+      const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
+      const sortIconTop = controls.top + Number.parseFloat(sortIcon.top);
+      const sortIconRight = controls.right - Number.parseFloat(sortIcon.right);
+      return {
+        filterWidth: filter.width,
+        filterHeight: filter.height,
+        verticalGap: filter.top - sortIconTop - Number.parseFloat(sortIcon.height),
+        rightOffset: Math.abs(filter.right - sortIconRight),
+        contained: controls.left >= bounds.left && controls.right <= bounds.right
+          && filter.left >= controls.left && filter.right <= controls.right,
+        sortTargetHeight: sort.height,
+        controlHeight: controls.height,
+      };
+    }));
+    expect(placements.length).toBeGreaterThan(0);
+    expect(placements.every((placement) => (
+      placement.filterWidth >= 24 && placement.filterWidth <= 24.5
+      && placement.filterHeight >= 24 && placement.filterHeight <= 24.5
+      && placement.verticalGap >= 1.5 && placement.verticalGap <= 2.5
+      && placement.rightOffset <= 0.5 && placement.contained
+      && placement.sortTargetHeight >= 48 && placement.controlHeight >= 48
+    )), JSON.stringify(placements)).toBe(true);
+
+    const titleSort = page.locator('thead button[data-sort="title"]');
+    await titleSort.focus();
+    await page.keyboard.press("Enter");
+    await expect(titleSort.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
+
+    const titleFilter = page.locator('[data-filter-menu="title"] summary');
+    await titleFilter.focus();
+    await expect(titleFilter).toHaveCSS("outline-style", "solid");
+    await page.keyboard.press("Enter");
+    await expect(titleFilter.locator("xpath=..")).toHaveAttribute("open", "");
+    const firstOption = page.locator('[data-filter-menu="title"] .filter-options input').first();
+    await firstOption.focus();
+    await page.keyboard.press("Space");
+    await expect(titleFilter).toHaveAttribute("data-active", "true");
+    await page.keyboard.press("Escape");
+    await expect(titleFilter.locator("xpath=..")).not.toHaveAttribute("open", "");
+    await expect(titleFilter).toBeFocused();
+
+    await page.locator(".table-panel").screenshot({ path: screenshot });
+  }
   expect(errors).toEqual([]);
 });
 
@@ -2257,6 +2330,51 @@ test("robustness points explain and apply their salary specifications", async ({
   await page.getByRole("button", { name: "Run check" }).click();
   await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
 
+  const audit = page.locator(".robustness-audit");
+  const auditSummary = audit.locator("summary");
+  const auditTableWrap = audit.locator(".robustness-table-wrap");
+  await expect(audit).not.toHaveAttribute("open", "");
+  await auditSummary.focus();
+  await page.keyboard.press("Enter");
+  await expect(audit).toHaveAttribute("open", "");
+  await expect(auditSummary).toHaveAttribute("aria-expanded", "true");
+  await expect(auditSummary).toContainText(/^Hide all \d+ specifications$/);
+  await expect(auditTableWrap).toBeVisible();
+  await expect(audit.locator("tbody tr")).toHaveCount(36);
+  await expect.poll(() => auditTableWrap.evaluate((node) => {
+    const bounds = node.getBoundingClientRect();
+    return Math.max(0, Math.min(bounds.bottom, innerHeight) - Math.max(bounds.top, 0));
+  })).toBeGreaterThan(100);
+  await page.locator(".results-panel").screenshot({ path: "tmp/app-robustness-audit-open.png" });
+  await expect(auditSummary).toBeFocused();
+  await page.setViewportSize({ width: 1320, height: 860 });
+  await expect(audit).toHaveAttribute("open", "");
+  await expect(auditSummary).toBeFocused();
+  await auditTableWrap.focus();
+  await expect(auditTableWrap).toBeFocused();
+  await page.keyboard.press("PageDown");
+  await expect.poll(() => auditTableWrap.evaluate((node) => node.scrollTop)).toBeGreaterThan(0);
+  await auditTableWrap.evaluate((node) => { node.scrollLeft = 120; });
+  await expect.poll(() => auditTableWrap.evaluate((node) => node.scrollLeft)).toBeGreaterThan(0);
+  const auditScroll = await auditTableWrap.evaluate((node) => ({ top: node.scrollTop, left: node.scrollLeft }));
+  await page.setViewportSize({ width: 1180, height: 820 });
+  await expect(audit).toHaveAttribute("open", "");
+  await expect(auditSummary).toHaveAttribute("aria-expanded", "true");
+  await expect(auditTableWrap).toBeFocused();
+  const resizedAuditMaximums = await auditTableWrap.evaluate((node) => ({
+    top: node.scrollHeight - node.clientHeight,
+    left: node.scrollWidth - node.clientWidth,
+  }));
+  await expect.poll(() => auditTableWrap.evaluate((node) => node.scrollTop))
+    .toBeGreaterThanOrEqual(Math.min(auditScroll.top, resizedAuditMaximums.top));
+  await expect.poll(() => auditTableWrap.evaluate((node) => node.scrollLeft))
+    .toBeGreaterThanOrEqual(Math.min(auditScroll.left, resizedAuditMaximums.left));
+  await auditSummary.click();
+  await expect(audit).not.toHaveAttribute("open", "");
+  await expect(auditSummary).toHaveAttribute("aria-expanded", "false");
+  await expect(auditSummary).toContainText(/^View all \d+ specifications$/);
+  await expect(auditTableWrap).not.toBeVisible();
+
   const target = page.locator(
     '.robustness-spec-point[data-spec-id="core-clean-gamma-automatic"][data-quantile="q50"]',
   );
@@ -2292,7 +2410,21 @@ test("robustness points explain and apply their salary specifications", async ({
   await expect(tooltip).toContainText("Gamma");
   await expect(tooltip).toContainText("Automatic");
   await expect(tooltip).toContainText(/\d+ records · \d+ organizations · effective n/);
+  await expect(tooltip.locator('[data-setting="sample"]')).toHaveAttribute("data-changed", "true");
+  await expect(tooltip.locator('[data-setting="distribution"]')).toHaveAttribute("data-changed", "true");
+  await expect(tooltip.locator('[data-setting="weighting"]')).toHaveAttribute("data-changed", "true");
+  await expect(tooltip.locator('[data-setting="source"]')).toHaveAttribute("data-changed", "false");
+  await expect(tooltip.locator('[data-setting="measure"]')).toHaveAttribute("data-changed", "false");
+  await expect(tooltip.locator('[data-setting="basis"]')).toHaveAttribute("data-changed", "false");
+  await expect(tooltip.locator('[data-setting="filters"]')).toHaveAttribute("data-changed", "false");
+  await expect(tooltip.locator(".robustness-change-tag")).toHaveCount(3);
+  await expect(tooltip.locator('[data-setting="sample"] dt')).toHaveText(/Sample Changed/i);
+  await expect(tooltip).toContainText("Changed settings are marked");
   await page.screenshot({ path: "tmp/app-robustness-tooltip.png" });
+  await page.locator(".robustness-current-point").nth(1).focus();
+  await expect(tooltip).toBeVisible();
+  await expect(tooltip).toContainText("This is the current analysis");
+  await expect(tooltip.locator('[data-changed="true"]')).toHaveCount(0);
   await target.focus();
   await page.keyboard.press("ArrowRight");
   await expect(target).not.toBeFocused();
@@ -2318,6 +2450,79 @@ test("robustness points explain and apply their salary specifications", async ({
   await expect(page.locator('input[name="distribution"][value="empirical"]')).toBeChecked();
   await expect(page.locator('.weighting-field input[value="comparability"]')).not.toBeChecked();
   await expect(keyboardTarget).toBeFocused();
+  await page.keyboard.press("Control+z");
+  await expect(page.locator("#sample-select")).toHaveValue("clean");
+  await expect(page.locator('input[name="distribution"][value="gamma"]')).toBeChecked();
+  await expect(page.locator('.weighting-field input[value="comparability"]')).toBeChecked();
+  await page.keyboard.press("Control+Shift+z");
+  await expect(page.locator("#sample-select")).toHaveValue("primary");
+  await expect(page.locator('input[name="distribution"][value="empirical"]')).toBeChecked();
+  await expect(page.locator('.weighting-field input[value="comparability"]')).not.toBeChecked();
+  expect(errors).toEqual([]);
+});
+
+test("robustness change markers follow live filters and row choices", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+
+  const tierSummary = page.locator('[data-filter-menu="tier"] summary');
+  const tierOptions = page.locator('[data-filter-menu="tier"] .filter-options input');
+  expect(await tierOptions.count()).toBeGreaterThan(1);
+  await tierSummary.click();
+  await tierOptions.nth(0).uncheck();
+  await tierSummary.click();
+
+  await page.getByRole("tab", { name: "Robustness" }).click();
+  await page.getByRole("button", { name: "Run check" }).click();
+  const tooltip = page.locator("#robustness-tooltip");
+  const matchingTarget = page.locator(
+    '.robustness-spec-point[data-spec-id="core-primary-lognormal-equal"][data-quantile="q50"]',
+  );
+  await matchingTarget.focus();
+  await expect(tooltip.locator('[data-setting="sample"]')).toHaveAttribute("data-changed", "false");
+  await expect(tooltip.locator('[data-setting="filters"]')).toHaveAttribute("data-changed", "false");
+  const initialCurrentLabel = await page.locator(".robustness-current-point").nth(1).getAttribute("aria-label");
+  await page.locator('input[name="distribution"][value="gamma"]').check();
+  await expect(page.locator(".robustness-current-point").nth(1))
+    .not.toHaveAttribute("aria-label", initialCurrentLabel || "");
+  await page.locator('input[name="distribution"][value="lognormal"]').check();
+  await expect(page.locator(".robustness-current-point").nth(1))
+    .toHaveAttribute("aria-label", initialCurrentLabel || "");
+  await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
+
+  await tierSummary.click();
+  await tierOptions.nth(0).check();
+  await tierOptions.nth(1).uncheck();
+  await tierSummary.click();
+  await matchingTarget.focus();
+  await expect(tooltip.locator('[data-setting="filters"]')).toHaveAttribute("data-changed", "true");
+  await expect(tooltip.locator('[data-setting="sample"]')).toHaveAttribute("data-changed", "false");
+
+  const selectedRow = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked').first();
+  const selectedRowId = await selectedRow.locator("xpath=ancestor::tr").getAttribute("data-id");
+  await page.locator(`tbody tr[data-id="${selectedRowId}"] .row-toggle`).uncheck();
+  await matchingTarget.focus();
+  await expect(tooltip.locator('[data-setting="sample"]')).toHaveAttribute("data-changed", "true");
+
+  const currentMedianPoint = page.locator(".robustness-current-point").nth(1);
+  const lognormalCurrentLabel = await currentMedianPoint.getAttribute("aria-label");
+  await page.locator('input[name="distribution"][value="gamma"]').check();
+  const liveGammaTarget = page.locator(
+    '.robustness-spec-point[data-spec-id="core-primary-gamma-equal"][data-quantile="q50"]',
+  );
+  await liveGammaTarget.focus();
+  await expect(tooltip.locator('[data-setting="distribution"]')).toHaveAttribute("data-changed", "false");
+  await expect(currentMedianPoint).toHaveAttribute("aria-label", /current salary specification/i);
+  await expect(currentMedianPoint).not.toHaveAttribute("aria-label", lognormalCurrentLabel || "");
+  await currentMedianPoint.focus();
+  await expect(tooltip).toContainText("This is the current analysis");
+  await expect(tooltip.locator('[data-changed="true"]')).toHaveCount(0);
+  await page.locator("#position-select").selectOption("coo");
+  await expect(page.locator("#robustness-results")).toBeEmpty();
+  await expect(page.locator("#robustness-status")).toHaveText(
+    "Run the check to compare the selected alternatives for the current position.",
+  );
   expect(errors).toEqual([]);
 });
 
@@ -2341,6 +2546,103 @@ test("robustness current marker honors row choices and pay-source checks ignore 
   await expect(postingSourceRow.locator("td").nth(2)).not.toHaveText("—");
   await expect(page.locator(".robustness-table tbody")).toContainText("Automatic (target eff. n 35)");
   expect(errors).toEqual([]);
+});
+
+test("benchmark changes can be undone and redone without replacing native field undo", async ({ page }) => {
+  await page.goto("/ceo-salary-benchmark/");
+  const undo = () => page.keyboard.press("Control+z");
+  const redo = () => page.keyboard.press("Control+Shift+z");
+
+  const selectedRow = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked').first();
+  const selectedRowId = await selectedRow.locator("xpath=ancestor::tr").getAttribute("data-id");
+  const selectedRowToggle = () => page.locator(`tbody tr[data-id="${selectedRowId}"] .row-toggle`);
+
+  await page.locator('input[name="distribution"][value="gamma"]').check();
+  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await page.locator('thead button[data-sort="expenses"]').click();
+  await selectedRowToggle().uncheck();
+  await expect(selectedRowToggle()).not.toBeChecked();
+
+  await undo();
+  await expect(selectedRowToggle()).toBeChecked();
+  await undo();
+  await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=ancestor::th"))
+    .toHaveAttribute("aria-sort", "ascending");
+  await undo();
+  await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
+  await undo();
+  await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
+
+  await redo();
+  await expect(page.locator('input[name="distribution"][value="gamma"]')).toBeChecked();
+  await redo();
+  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await redo();
+  await expect(page.locator('thead button[data-sort="expenses"]').locator("xpath=ancestor::th"))
+    .toHaveAttribute("aria-sort", "ascending");
+  await redo();
+  await expect(selectedRowToggle()).not.toBeChecked();
+
+  await undo();
+  await expect(selectedRowToggle()).toBeChecked();
+  await page.locator("#sample-select").selectOption("clean");
+  await redo();
+  await expect(page.locator("#sample-select")).toHaveValue("clean");
+  await expect(selectedRowToggle()).toBeChecked();
+
+  await page.locator('input[name="chart-view"][value="histogram"]').check();
+  const originalBins = await page.locator("#bin-count").inputValue();
+  await page.locator("#bin-count").evaluate((input) => {
+    [41, 42, 43].forEach((value) => {
+      input.value = String(value);
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  await expect(page.locator("#bin-count")).toHaveValue("43");
+  await undo();
+  await expect(page.locator("#bin-count")).toHaveValue(originalBins);
+  await undo();
+  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+
+  const editableWeight = page.locator("tbody .weight-input:not(:disabled)").first();
+  const weightBefore = await editableWeight.inputValue();
+  await editableWeight.fill("2");
+  await page.keyboard.press("Control+z");
+  await expect(editableWeight).toHaveValue(weightBefore);
+  await expect(page.locator("#sample-select")).toHaveValue("clean");
+
+  await page.locator("#sample-select").focus();
+  await page.keyboard.press("Control+y");
+  await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
+  await page.keyboard.press("Meta+z");
+  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await page.keyboard.press("Meta+Shift+z");
+  await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
+
+  await page.goto("/ceo-salary-benchmark/");
+  await page.locator("#quantile-granularity").selectOption("custom");
+  const customQuantiles = page.locator("#custom-quantiles");
+  const originalCustomQuantiles = await customQuantiles.inputValue();
+  await customQuantiles.focus();
+  await page.keyboard.press("End");
+  await page.keyboard.type(", 90");
+  await expect(customQuantiles).not.toHaveValue(originalCustomQuantiles);
+  for (let attempt = 0; attempt < 8 && await customQuantiles.inputValue() !== originalCustomQuantiles; attempt += 1) {
+    await page.keyboard.press("Control+z");
+  }
+  await expect(customQuantiles).toHaveValue(originalCustomQuantiles);
+  await customQuantiles.focus();
+  await page.keyboard.press("End");
+  await page.keyboard.type(", 80");
+  await expect(customQuantiles).not.toHaveValue(originalCustomQuantiles);
+  await page.locator("#quantile-granularity").focus();
+  await page.keyboard.press("Control+z");
+  await expect(customQuantiles).toHaveValue(originalCustomQuantiles);
+  await expect(page.locator("#quantile-granularity")).toHaveValue("custom");
+  await page.locator("#quantile-granularity").focus();
+  await page.keyboard.press("Control+z");
+  await expect(page.locator("#quantile-granularity")).toHaveValue("quintiles");
 });
 
 test("non-CEO robustness omits unsupported source and automatic-weight alternatives", async ({ page }) => {

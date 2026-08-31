@@ -3639,6 +3639,12 @@
   let robustnessResizeFrame = 0;
   let chartResizeFrame = 0;
   let chartResizeKey = "";
+  const HISTORY_LIMIT = 80;
+  let undoHistory = [];
+  let redoHistory = [];
+  let currentHistoryEntry = null;
+  let historyRestoring = false;
+  let historyCoalesceKey = "";
 
   function shareRowCode(row) {
     let hash = 0x811c9dc5;
@@ -4058,6 +4064,147 @@
     state.sortDirection = presentation.sortDirection;
     state.scatterXAxis = { ...presentation.scatterXAxis };
     state.axisModes.scatterX = presentation.scatterXMode;
+  }
+
+  function benchmarkHistorySnapshot() {
+    const stateSnapshot = structuredClone(state);
+    stateSnapshot.weightings = [...state.weightings].sort((a, b) => a.localeCompare(b));
+    stateSnapshot.filters = Object.fromEntries(Object.entries(state.filters).map(([key, values]) => [
+      key,
+      values == null ? null : [...values].map(String).sort((a, b) => a.localeCompare(b)),
+    ]));
+    delete stateSnapshot.focusedId;
+    delete stateSnapshot.hoverQuantile;
+    delete stateSnapshot.autoBins;
+    const rowState = Object.fromEntries(Object.keys(allRowsByStream).map((stream) => [stream, {
+      inclusion: allRowsByStream[stream].map((row) => [row.id, Boolean(inclusion[stream].get(row.id))]),
+      customWeights: allRowsByStream[stream].map((row) => [row.id, customWeights[stream].get(row.id) ?? 1]),
+      modifiedWeightIds: [...modifiedWeightIds[stream]].sort((a, b) => a.localeCompare(b)),
+    }]));
+    return {
+      version: 1,
+      state: stateSnapshot,
+      rowState,
+      activeResultsTab,
+    };
+  }
+
+  function historyEntry(snapshot = benchmarkHistorySnapshot()) {
+    return { snapshot, signature: JSON.stringify(snapshot) };
+  }
+
+  function initializeBenchmarkHistory() {
+    undoHistory = [];
+    redoHistory = [];
+    currentHistoryEntry = historyEntry();
+    historyCoalesceKey = "";
+  }
+
+  function recordBenchmarkHistory(coalesceKey = "") {
+    if (historyRestoring || !currentHistoryEntry) return;
+    const nextEntry = historyEntry();
+    if (nextEntry.signature === currentHistoryEntry.signature) return;
+    const coalescing = Boolean(coalesceKey && coalesceKey === historyCoalesceKey);
+    if (!coalescing) {
+      undoHistory.push(currentHistoryEntry);
+      if (undoHistory.length > HISTORY_LIMIT) undoHistory.shift();
+    } else if (undoHistory.at(-1)?.signature === nextEntry.signature) {
+      undoHistory.pop();
+      currentHistoryEntry = nextEntry;
+      redoHistory = [];
+      historyCoalesceKey = "";
+      return;
+    }
+    currentHistoryEntry = nextEntry;
+    redoHistory = [];
+    historyCoalesceKey = coalesceKey;
+  }
+
+  function restoreBenchmarkHistorySnapshot(snapshot) {
+    if (!snapshot || snapshot.version !== 1 || !snapshot.state || !snapshot.rowState) {
+      throw new Error("Unsupported benchmark history state.");
+    }
+    const restoredState = structuredClone(snapshot.state);
+    restoredState.weightings = new Set(restoredState.weightings || []);
+    restoredState.filters = Object.fromEntries(Object.entries(restoredState.filters || {}).map(([key, values]) => [
+      key,
+      values == null ? null : new Set(values.map(String)),
+    ]));
+    restoredState.focusedId = "";
+    restoredState.hoverQuantile = null;
+    restoredState.autoBins = false;
+    Object.assign(state, restoredState);
+    Object.entries(snapshot.rowState).forEach(([stream, values]) => {
+      if (!inclusion[stream] || !customWeights[stream] || !modifiedWeightIds[stream]) return;
+      values.inclusion.forEach(([id, selected]) => {
+        if (inclusion[stream].has(id)) inclusion[stream].set(id, Boolean(selected));
+      });
+      values.customWeights.forEach(([id, value]) => {
+        if (customWeights[stream].has(id)) customWeights[stream].set(id, Number(value));
+      });
+      modifiedWeightIds[stream].clear();
+      values.modifiedWeightIds.forEach((id) => {
+        if (customWeights[stream].has(id)) modifiedWeightIds[stream].add(id);
+      });
+    });
+    activeResultsTab = ["quantiles", "compare", "robustness"].includes(snapshot.activeResultsTab)
+      ? snapshot.activeResultsTab : "quantiles";
+    closeAxisSelector();
+    hideTooltip();
+    hideRobustnessTooltip();
+    refs.helpTooltip.hidden = true;
+    refs.organizationPreview.hidden = true;
+    closeHeaderFilterPopovers();
+    buildFilterMenus();
+    renderWeightControls();
+    syncControlsFromState();
+    activateResultsTab(activeResultsTab);
+    renderAll();
+  }
+
+  function stepBenchmarkHistory(direction) {
+    const source = direction === "undo" ? undoHistory : redoHistory;
+    const destination = direction === "undo" ? redoHistory : undoHistory;
+    if (!source.length || !currentHistoryEntry || historyRestoring) return false;
+    const nextEntry = source.pop();
+    const previousEntry = currentHistoryEntry;
+    const resumeUrlSync = urlSyncReady;
+    historyRestoring = true;
+    urlSyncReady = false;
+    try {
+      restoreBenchmarkHistorySnapshot(nextEntry.snapshot);
+      destination.push(previousEntry);
+      if (destination.length > HISTORY_LIMIT) destination.shift();
+      currentHistoryEntry = historyEntry();
+      historyCoalesceKey = "";
+      return true;
+    } catch (error) {
+      source.push(nextEntry);
+      console.error(`Unable to ${direction} the benchmark change`, error);
+      return false;
+    } finally {
+      urlSyncReady = resumeUrlSync;
+      if (urlSyncReady) writeUrlState();
+      historyRestoring = false;
+    }
+  }
+
+  function historyControlKey(target) {
+    if (!(target instanceof Element)) return "document";
+    const rowId = target.closest("tr[data-id]")?.dataset.id || "";
+    return [
+      target.id || target.getAttribute("name") || target.getAttribute("aria-label")
+        || target.dataset.sort || target.className || target.tagName,
+      rowId,
+    ].map(String).join(":");
+  }
+
+  function hasNativeUndo(target) {
+    if (!(target instanceof Element)) return false;
+    if (target.closest('[contenteditable=""], [contenteditable="true"]')) return true;
+    if (target instanceof HTMLTextAreaElement) return true;
+    if (!(target instanceof HTMLInputElement)) return false;
+    return ["text", "search", "email", "url", "tel", "password", "number"].includes(target.type);
   }
 
   function applyAnalysisPayloadTransaction(nextPayload, nextPosition) {
@@ -4502,9 +4649,10 @@
     if (spec.weightMode === "automatic") return "Automatic (target eff. n " + spec.autoTargetEss + ")";
     if (spec.weightMode === "equal") return spec.position === "ceo" ? "Equal (co-leaders share)" : "Equal organizations";
     const keys = spec.weightings instanceof Set ? [...spec.weightings] : [...(spec.weightingKeys || [])];
-    if (!keys.length) return "Equal base weights";
+    if (!keys.length) return spec.position === "ceo" ? "Equal (co-leaders share)" : "Equal organizations";
     if (keys.includes("comparability")) {
-      return keys.includes("streamBalanced") ? "Automatic + 50/50 sources" : "Automatic";
+      const automatic = "Automatic (target eff. n " + spec.autoTargetEss + ")";
+      return keys.includes("streamBalanced") ? automatic + " + 50/50 sources" : automatic;
     }
     return keys.map((key) => WEIGHT_LABELS[key] || humanizeCategory(key)).join(" × ");
   }
@@ -4552,6 +4700,10 @@
         stream: spec.stream, measure: spec.measure, inflationAdjusted: spec.inflationAdjusted,
         streamBalanced: spec.streamBalanced, autoTargetEss: spec.autoTargetEss,
         weightingKeys: [...(spec.weightings || [])],
+        customWeightEditCount: spec.weightMode === "current"
+          ? [...(spec.customWeights || new Map()).values()].filter((value) => Math.abs(Number(value) - 1) > 1e-9).length
+          : 0,
+        skipFilters: Boolean(spec.skipFilters),
         categoricalFilterCount: Object.values(spec.filters || {}).filter((values) => values != null).length,
         rangeFilterCount: Object.values(spec.ranges || {}).filter((range) => (
           range && range.min != null && range.max != null && (range.low > range.min || range.high < range.max)
@@ -4606,6 +4758,12 @@
       weights: selectedDimensions.has("weighting") && baseSpec.position === "ceo"
         ? ["equal", "automatic"] : [selectedDimensions.has("weighting") ? "equal" : "current"],
     };
+  }
+
+  function robustnessCompletionLabel(report) {
+    const results = [...report.core, ...report.source, ...report.measures, ...report.posting, ...report.dollars];
+    const valid = results.filter((result) => result.status === "valid").length;
+    return valid + " of " + results.length + " specifications produced usable results.";
   }
 
   function robustnessFiltersWithoutPaySource(filters) {
@@ -4716,13 +4874,12 @@
       id: "current", family: "Current", label: "Current salary specification",
     });
     robustnessReport = {
-      fingerprint, position: positionDefinition().label, basis: baseSpec.inflationAdjusted ? "July 2026 USD" : "Original USD",
+      fingerprint, positionKey: baseSpec.position, position: positionDefinition().label,
+      basis: baseSpec.inflationAdjusted ? "July 2026 USD" : "Original USD",
       dimensions: [...dimensions], core, source, measures, posting, dollars, current, generatedAt: new Date().toISOString(),
     };
     renderRobustnessReport();
-    const valid = [...core, ...source, ...measures, ...posting, ...dollars].filter((result) => result.status === "valid").length;
-    const total = core.length + source.length + measures.length + posting.length + dollars.length;
-    refs.robustnessStatus.textContent = valid + " of " + total + " specifications produced usable results.";
+    refs.robustnessStatus.textContent = robustnessCompletionLabel(robustnessReport);
   }
 
   function robustnessRange(results, key) {
@@ -4764,6 +4921,7 @@
   }
 
   function robustnessFilterLabel(spec) {
+    if (spec.skipFilters) return "Not reapplied to the matched records";
     const categorical = Number(spec.categoricalFilterCount || 0);
     const numeric = Number(spec.rangeFilterCount || 0);
     if (!categorical && !numeric) return "None";
@@ -4775,6 +4933,21 @@
 
   function robustnessQuantileLabel(key) {
     return { q25: "25th percentile", q50: "Median", q75: "75th percentile" }[key] || key;
+  }
+
+  function robustnessPayloadSettingSignature(payload, key) {
+    const keys = {
+      sample: ["p", "i"],
+      distribution: ["g"],
+      weighting: ["w", "x", "d", "c"],
+      source: ["e"],
+      measure: ["m"],
+      basis: ["n"],
+      filters: ["f", "r"],
+    }[key] || [];
+    return JSON.stringify(keys.map((token) => (
+      payload && Object.hasOwn(payload, token) ? payload[token] : null
+    )));
   }
 
   function hideRobustnessTooltip() {
@@ -4803,21 +4976,33 @@
     const tooltip = refs.robustnessTooltip;
     const heading = resultElement("strong", "", result.label);
     const list = document.createElement("dl");
-    const addRow = (label, value) => {
+    const currentPayload = sharePayload();
+    const addRow = (label, value, settingKey = "") => {
       const row = document.createElement("div");
-      row.append(resultElement("dt", "", label), resultElement("dd", "", value));
+      const changed = Boolean(applies && settingKey
+        && robustnessPayloadSettingSignature(result.applyPayload, settingKey)
+          !== robustnessPayloadSettingSignature(currentPayload, settingKey));
+      const term = resultElement("dt", "", label);
+      if (changed) term.append(" ", resultElement("span", "robustness-change-tag", "Changed"));
+      row.dataset.setting = settingKey || "diagnostic";
+      row.dataset.changed = String(changed);
+      if (changed) row.classList.add("is-changed");
+      row.append(term, resultElement("dd", "", value));
       list.append(row);
     };
     addRow(robustnessQuantileLabel(key), money(result[key]));
-    addRow("Sample", robustnessSampleLabel(result.spec.sample));
-    addRow("Distribution", robustnessFitLabel(result.spec.fit));
-    addRow("Weighting", robustnessWeightLabel(result.spec));
-    addRow("Pay source", robustnessPaySourceLabel(result.spec.stream));
-    addRow("Pay measure", robustnessPayMeasureLabel(result.spec));
-    addRow("Dollar basis", result.spec.inflationAdjusted ? "July 2026 USD" : "Original USD");
-    addRow("Filters", robustnessFilterLabel(result.spec));
+    addRow("Sample", robustnessSampleLabel(result.spec.sample), "sample");
+    addRow("Distribution", robustnessFitLabel(result.spec.fit), "distribution");
+    addRow("Weighting", robustnessWeightLabel(result.spec), "weighting");
+    addRow("Pay source", robustnessPaySourceLabel(result.spec.stream), "source");
+    addRow("Pay measure", robustnessPayMeasureLabel(result.spec), "measure");
+    addRow("Dollar basis", result.spec.inflationAdjusted ? "July 2026 USD" : "Original USD", "basis");
+    addRow("Filters", robustnessFilterLabel(result.spec), "filters");
     addRow("Data", result.rowCount + " records · " + result.organizationCount + " organizations · effective n " + result.organizationEffectiveN.toFixed(1));
-    const hint = resultElement("p", "", applies ? "Select to apply this specification." : "This is the current analysis.");
+    const hint = resultElement(
+      "p", "",
+      applies ? "Changed settings are marked. Select to apply this specification." : "This is the current analysis.",
+    );
     tooltip.replaceChildren(heading, list, hint);
     tooltip.dataset.specId = result.id;
     tooltip.hidden = false;
@@ -5036,12 +5221,23 @@
     parent.append(section);
   }
 
-  function robustnessAuditTable(report) {
+  function robustnessAuditTable(report, initialState = {}) {
+    const initiallyOpen = Boolean(initialState.open);
     const details = resultElement("details", "robustness-audit");
     const all = [...report.core, ...report.source, ...report.measures, ...report.posting, ...report.dollars];
-    const summary = resultElement("summary", "", "View all " + all.length + " specifications");
+    const collapsedLabel = "View all " + all.length + " specifications";
+    const expandedLabel = "Hide all " + all.length + " specifications";
+    const summary = resultElement("summary", "", collapsedLabel);
+    const wrapperId = "robustness-all-specifications";
+    summary.setAttribute("aria-controls", wrapperId);
+    summary.setAttribute("aria-expanded", "false");
     details.append(summary);
     const wrapper = resultElement("div", "robustness-table-wrap");
+    wrapper.id = wrapperId;
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute("aria-label", "All robustness specifications; scroll to see every column and row");
+    wrapper.scrollTop = Number(initialState.scrollTop || 0);
+    wrapper.scrollLeft = Number(initialState.scrollLeft || 0);
     const table = resultElement("table", "robustness-table");
     const caption = resultElement("caption", "sr-only", "All robustness specifications and results");
     table.append(caption);
@@ -5079,11 +5275,40 @@
     table.append(tbody);
     wrapper.append(table);
     details.append(wrapper);
+    const syncDisclosureState = () => {
+      summary.textContent = details.open ? expandedLabel : collapsedLabel;
+      summary.setAttribute("aria-expanded", String(details.open));
+    };
+    details.open = initiallyOpen;
+    syncDisclosureState();
+    let suppressInitialToggle = initiallyOpen;
+    details.addEventListener("toggle", () => {
+      syncDisclosureState();
+      if (suppressInitialToggle) {
+        suppressInitialToggle = false;
+        return;
+      }
+      if (details.open) {
+        requestAnimationFrame(() => wrapper.scrollIntoView({ block: "nearest", inline: "nearest" }));
+      }
+    });
     return details;
   }
 
   function renderRobustnessReport() {
     hideRobustnessTooltip();
+    const previousAudit = refs.robustnessResults.querySelector(".robustness-audit");
+    const previousAuditWrapper = previousAudit?.querySelector(".robustness-table-wrap");
+    const auditState = {
+      open: Boolean(previousAudit?.open),
+      scrollTop: previousAuditWrapper?.scrollTop || 0,
+      scrollLeft: previousAuditWrapper?.scrollLeft || 0,
+      wrapperFocused: document.activeElement === previousAuditWrapper,
+      summaryFocused: document.activeElement === previousAudit?.querySelector("summary"),
+      panelScrollTop: refs.resultsPanel.scrollTop,
+    };
+    const measuredWidth = Math.round(refs.robustnessResults.getBoundingClientRect().width || 0);
+    if (measuredWidth) robustnessResultWidth = measuredWidth;
     refs.robustnessResults.replaceChildren();
     if (!robustnessReport) return;
     const report = robustnessReport;
@@ -5140,7 +5365,21 @@
       "Adjusted and original dollars use the same records and are not combined into one range.",
     );
     if (comparisons.childElementCount) refs.robustnessResults.append(comparisons);
-    refs.robustnessResults.append(robustnessAuditTable(report));
+    const audit = robustnessAuditTable(report, auditState);
+    refs.robustnessResults.append(audit);
+    const nextSummary = audit.querySelector("summary");
+    if (auditState.open) {
+      const nextWrapper = audit.querySelector(".robustness-table-wrap");
+      const restoreAuditReadingPosition = () => {
+        nextWrapper.scrollTop = auditState.scrollTop;
+        nextWrapper.scrollLeft = auditState.scrollLeft;
+        refs.resultsPanel.scrollTop = auditState.panelScrollTop;
+        if (auditState.wrapperFocused) nextWrapper.focus({ preventScroll: true });
+        else if (auditState.summaryFocused) nextSummary.focus({ preventScroll: true });
+      };
+      restoreAuditReadingPosition();
+      requestAnimationFrame(restoreAuditReadingPosition);
+    } else if (auditState.summaryFocused) nextSummary.focus({ preventScroll: true });
   }
 
   function updateRobustnessAvailability() {
@@ -5154,9 +5393,21 @@
     refs.robustnessSourceOption.title = ceo ? "" : "Other supported positions use Form 990 evidence only.";
     postingInput.disabled = !ceo;
     refs.robustnessPostingOption.title = ceo ? "" : "Job-posting range checks are available only for the CEO benchmark.";
+    if (robustnessReport && robustnessReport.positionKey !== state.position) {
+      robustnessReport = null;
+      robustnessResultWidth = 0;
+      hideRobustnessTooltip();
+      refs.robustnessResults.replaceChildren();
+      refs.robustnessStatus.textContent = "Run the check to compare the selected alternatives for the current position.";
+    }
     if (robustnessReport) {
       const stale = robustnessReport.fingerprint !== analyticalFingerprint();
-      if (stale) refs.robustnessStatus.textContent = "Settings changed since this check was run. Run it again to refresh the results.";
+      refs.robustnessStatus.textContent = stale
+        ? "Settings changed since this check was run. Run it again to refresh the results."
+        : robustnessCompletionLabel(robustnessReport);
+      robustnessReport.current = evaluateRobustnessSpec(currentRobustnessSpec(), {
+        id: "current", family: "Current", label: "Current salary specification",
+      });
       renderRobustnessReport();
     }
   }
@@ -5642,6 +5893,32 @@
     renderTable();
     scheduleUrlState();
   }));
+  document.addEventListener("input", (event) => {
+    recordBenchmarkHistory(historyControlKey(event.target));
+  });
+  document.addEventListener("change", (event) => {
+    recordBenchmarkHistory();
+    if (historyCoalesceKey === historyControlKey(event.target)) historyCoalesceKey = "";
+  });
+  document.addEventListener("click", () => {
+    recordBenchmarkHistory();
+    historyCoalesceKey = "";
+  });
+  document.addEventListener("keydown", (event) => {
+    const nativeUndo = hasNativeUndo(event.target);
+    if (!nativeUndo && !event.altKey && (event.ctrlKey || event.metaKey)) {
+      const key = event.key.toLowerCase();
+      const direction = key === "z" ? (event.shiftKey ? "redo" : "undo")
+        : key === "y" && !event.shiftKey ? "redo" : "";
+      if (direction) {
+        if (stepBenchmarkHistory(direction)) event.preventDefault();
+        return;
+      }
+    }
+    if (nativeUndo) return;
+    recordBenchmarkHistory();
+    historyCoalesceKey = "";
+  });
 
   initPanelResizers();
   const observer = new ResizeObserver((entries) => {
@@ -5698,4 +5975,5 @@
   if (document.fonts?.ready) document.fonts.ready.then(() => renderChart());
   urlSyncReady = true;
   writeUrlState();
+  initializeBenchmarkHistory();
 })();
