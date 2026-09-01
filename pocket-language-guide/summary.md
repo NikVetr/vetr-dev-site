@@ -32,6 +32,14 @@ minimum size.
 Every column is flush at the top *and* the bottom, an item never splits across a
 column, and a section heading is never stranded at the foot of one.
 
+PDF is one file. PNG and SVG are one file *per face*, so a multi-face export is a
+single zip (`core/zip.js`, store-only — the payload is already-compressed PNG, and
+pinning the timestamps keeps identical input producing identical bytes). Calling
+`download()` once per face, which is what it used to do, makes Chrome raise its
+"Download multiple files?" prompt and gate all but the first. Export buttons take
+themselves out of service and count faces as they go, because a 600dpi six-face
+render takes seconds and the previous feedback was none.
+
 ## Architecture
 
 One solver, one intermediate representation, two renderers.
@@ -235,6 +243,43 @@ icons and titles, so colour is never the only cue.
 Each theme has both a `description` (prose) and a `note` (the note-template
 style). These once collided as one key and JSON silently kept the last;
 `tests/theme.test.mjs` now asserts the shape.
+
+Every section has an icon, so the tree and the sheet both carry a shape as well as
+a colour. Five sections had none and fell back to an 8pt coloured square, which is
+the one place the coding *was* colour alone. Those five are level-2 headings, which
+the reference sheet prints without a mark, so their icons appear in the studio and
+not on the page.
+
+### The keyboard contract
+
+The app was effectively mouse-only: eleven segmented controls declared
+`role="radiogroup"` and a roving tabindex but had no key handler, and the page
+canvas had ninety-five interactive targets and no focusable node at all.
+
+There are three roving-tabindex widgets now — the settings groups, the face
+chooser, and the rows on a face — and they answer arrows, `Home` and `End`
+identically, because a reader should not have to learn three sets of keys. The
+index arithmetic is four lines in `ui/keys.js`, shared rather than reimplemented.
+
+The canvas deliberately spends **two** tab stops, not ninety-two: the face chooser
+is one stop and the row layer is another, with arrows moving inside them. Ninety
+stops would wall the content panel off behind the canvas, and the count would vary
+with the layout (a credit-card sheet has fourteen faces), so the tab order would
+depend on the geometry. `role="toolbar"` for the face choosers, since that is the
+pattern that sanctions roving tabindex over buttons; `listbox`/`option` for the
+rows, since position-in-set is genuinely useful over ninety of them.
+
+One consequence worth knowing: every node in the canvas is replaced on each
+render, so choosing a face would otherwise drop a keyboard reader back to the top
+of the document. `focusMark`/`refocus` in `ui/preview.js` carry focus across the
+rebuild in terms that survive it.
+
+The gallery's `I speak` collage is decoration — one idea repeated in five
+languages — so it is hidden from assistive technology, which also stops it from
+becoming the language select's accessible name (it computed to the entire
+collage). Its opacity floor is 0.62, giving 3.28:1 against white, rather than the
+0.16 that rendered the faintest layer effectively invisible. Five distinct steps
+remain, so it still reads as a fade.
 
 ## Type size is not one multiplier
 
