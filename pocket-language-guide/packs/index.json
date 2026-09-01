@@ -3,37 +3,46 @@
     {
       "target": "en",
       "source": "es",
-      "scale": 0.91,
+      "scale": 0.95,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
+      "items": 613,
       "warnings": []
     },
     {
       "target": "en",
       "source": "zh-Hans",
-      "scale": 0.45,
+      "scale": 0.51,
       "faces": 4,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
+      "items": 613,
       "warnings": []
     },
     {
       "target": "en",
       "source": "ja",
-      "scale": 0.97,
+      "scale": 1,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
-      "warnings": []
+      "warnings": [
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
     },
     {
       "target": "en",
       "source": "ar",
-      "scale": 0.86,
+      "scale": 0.95,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -42,6 +51,12 @@
         {
           "code": "paper-too-coarse",
           "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.22"
+          },
           "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
         }
       ]
@@ -49,7 +64,7 @@
     {
       "target": "en",
       "source": "fr",
-      "scale": 0.87,
+      "scale": 0.95,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -59,7 +74,7 @@
     {
       "target": "en",
       "source": "de",
-      "scale": 0.88,
+      "scale": 0.93,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -69,23 +84,37 @@
     {
       "target": "en",
       "source": "ko",
-      "scale": 1,
-      "faces": 6,
+      "scale": 0.45,
+      "faces": 4,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
-      "warnings": [
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
+      "items": 613,
+      "warnings": []
     },
     {
       "target": "es",
       "source": "en",
+      "scale": 0.52,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": []
+    },
+    {
+      "target": "es",
+      "source": "zh-Hans",
       "scale": 0.49,
+      "faces": 4,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
+      "warnings": []
+    },
+    {
+      "target": "es",
+      "source": "ja",
+      "scale": 1,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -94,42 +123,22 @@
     },
     {
       "target": "es",
-      "source": "zh-Hans",
-      "scale": 1,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": [
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "es",
-      "source": "ja",
+      "source": "ar",
       "scale": 0.92,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
-      "warnings": []
-    },
-    {
-      "target": "es",
-      "source": "ar",
-      "scale": 0.81,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
       "warnings": [
         {
           "code": "paper-too-coarse",
           "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.22"
+          },
           "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
         }
       ]
@@ -137,7 +146,7 @@
     {
       "target": "es",
       "source": "fr",
-      "scale": 0.83,
+      "scale": 0.9,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -147,7 +156,7 @@
     {
       "target": "es",
       "source": "de",
-      "scale": 0.83,
+      "scale": 0.9,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -161,11 +170,14 @@
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
+      "items": 613,
       "warnings": [
         {
           "code": "loose-columns",
           "severity": "info",
+          "params": {
+            "count": 1
+          },
           "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
@@ -173,478 +185,197 @@
     {
       "target": "zh-Hans",
       "source": "en",
-      "scale": 0.46,
+      "scale": 0.53,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 617,
-      "warnings": [
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
+      "items": 619,
+      "warnings": []
     },
     {
       "target": "zh-Hans",
       "source": "es",
-      "scale": 0.75,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": []
-    },
-    {
-      "target": "zh-Hans",
-      "source": "ja",
-      "scale": 0.83,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": []
-    },
-    {
-      "target": "zh-Hans",
-      "source": "ar",
-      "scale": 0.6,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        }
-      ]
-    },
-    {
-      "target": "zh-Hans",
-      "source": "fr",
-      "scale": 0.74,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": [
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "zh-Hans",
-      "source": "de",
-      "scale": 0.74,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": []
-    },
-    {
-      "target": "zh-Hans",
-      "source": "ko",
-      "scale": 0.99,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": []
-    },
-    {
-      "target": "ja",
-      "source": "en",
-      "scale": 0.58,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": [
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "ja",
-      "source": "es",
-      "scale": 0.5,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": []
-    },
-    {
-      "target": "ja",
-      "source": "zh-Hans",
-      "scale": 0.67,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": []
-    },
-    {
-      "target": "ja",
-      "source": "ar",
-      "scale": 1,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "ja",
-      "source": "fr",
-      "scale": 0.49,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": []
-    },
-    {
-      "target": "ja",
-      "source": "de",
-      "scale": 0.47,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": []
-    },
-    {
-      "target": "ja",
-      "source": "ko",
-      "scale": 0.65,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": []
-    },
-    {
-      "target": "ar",
-      "source": "en",
-      "scale": 0.67,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
-    },
-    {
-      "target": "ar",
-      "source": "es",
-      "scale": 0.98,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
-    },
-    {
-      "target": "ar",
-      "source": "zh-Hans",
-      "scale": 1,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "ar",
-      "source": "ja",
-      "scale": 1,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "ar",
-      "source": "fr",
-      "scale": 0.97,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
-    },
-    {
-      "target": "ar",
-      "source": "de",
-      "scale": 0.94,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "ar",
-      "source": "ko",
-      "scale": 1,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "fr",
-      "source": "en",
-      "scale": 0.47,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": []
-    },
-    {
-      "target": "fr",
-      "source": "es",
-      "scale": 0.84,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": []
-    },
-    {
-      "target": "fr",
-      "source": "zh-Hans",
-      "scale": 1,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": [
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "fr",
-      "source": "ja",
-      "scale": 0.89,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": []
-    },
-    {
-      "target": "fr",
-      "source": "ar",
-      "scale": 0.77,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        }
-      ]
-    },
-    {
-      "target": "fr",
-      "source": "de",
       "scale": 0.82,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
+      "items": 619,
       "warnings": []
     },
     {
-      "target": "fr",
-      "source": "ko",
-      "scale": 1,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": []
-    },
-    {
-      "target": "de",
-      "source": "en",
-      "scale": 0.47,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": []
-    },
-    {
-      "target": "de",
-      "source": "es",
-      "scale": 0.81,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": []
-    },
-    {
-      "target": "de",
-      "source": "zh-Hans",
-      "scale": 1,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 611,
-      "warnings": [
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "de",
+      "target": "zh-Hans",
       "source": "ja",
-      "scale": 0.89,
+      "scale": 0.97,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
+      "items": 617,
       "warnings": []
     },
     {
-      "target": "de",
+      "target": "zh-Hans",
       "source": "ar",
       "scale": 0.76,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
+      "items": 617,
       "warnings": [
         {
           "code": "paper-too-coarse",
           "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.22"
+          },
           "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
         }
       ]
     },
     {
-      "target": "de",
+      "target": "zh-Hans",
       "source": "fr",
-      "scale": 0.81,
+      "scale": 0.86,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
+      "items": 617,
       "warnings": []
     },
     {
-      "target": "de",
+      "target": "zh-Hans",
+      "source": "de",
+      "scale": 0.84,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": []
+    },
+    {
+      "target": "zh-Hans",
       "source": "ko",
       "scale": 1,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
-      "items": 611,
+      "items": 614,
       "warnings": []
     },
     {
-      "target": "ko",
+      "target": "ja",
       "source": "en",
-      "scale": 0.79,
+      "scale": 0.64,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": [
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "ja",
+      "source": "es",
+      "scale": 0.55,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": []
+    },
+    {
+      "target": "ja",
+      "source": "zh-Hans",
+      "scale": 0.77,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": []
+    },
+    {
+      "target": "ja",
+      "source": "ar",
+      "scale": 1,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.22"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "ja",
+      "source": "fr",
+      "scale": 0.56,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": []
+    },
+    {
+      "target": "ja",
+      "source": "de",
+      "scale": 0.51,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": []
+    },
+    {
+      "target": "ja",
+      "source": "ko",
+      "scale": 0.75,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "ar",
+      "source": "en",
+      "scale": 0.71,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -653,20 +384,26 @@
         {
           "code": "emergency-unreviewed",
           "severity": "warn",
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+          "params": {
+            "region": "Saudi Arabia"
+          },
+          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
         },
         {
           "code": "loose-columns",
           "severity": "info",
+          "params": {
+            "count": 1
+          },
           "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
-      "target": "ko",
+      "target": "ar",
       "source": "es",
-      "scale": 0.67,
-      "faces": 6,
+      "scale": 1,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 612,
@@ -674,82 +411,24 @@
         {
           "code": "emergency-unreviewed",
           "severity": "warn",
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
-    },
-    {
-      "target": "ko",
-      "source": "zh-Hans",
-      "scale": 0.96,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
-    },
-    {
-      "target": "ko",
-      "source": "ja",
-      "scale": 0.79,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
-    },
-    {
-      "target": "ko",
-      "source": "ar",
-      "scale": 0.55,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+          "params": {
+            "region": "Saudi Arabia"
+          },
+          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
         },
         {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
-      "target": "ko",
-      "source": "fr",
-      "scale": 0.67,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
-    },
-    {
-      "target": "ko",
-      "source": "de",
+      "target": "ar",
+      "source": "zh-Hans",
       "scale": 0.64,
       "faces": 6,
       "pageW": 504,
@@ -759,6 +438,437 @@
         {
           "code": "emergency-unreviewed",
           "severity": "warn",
+          "params": {
+            "region": "Saudi Arabia"
+          },
+          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ar",
+      "source": "ja",
+      "scale": 0.49,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "Saudi Arabia"
+          },
+          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ar",
+      "source": "fr",
+      "scale": 1,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "Saudi Arabia"
+          },
+          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "ar",
+      "source": "de",
+      "scale": 0.99,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "Saudi Arabia"
+          },
+          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ar",
+      "source": "ko",
+      "scale": 0.59,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "Saudi Arabia"
+          },
+          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "fr",
+      "source": "en",
+      "scale": 0.52,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": []
+    },
+    {
+      "target": "fr",
+      "source": "es",
+      "scale": 0.9,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": []
+    },
+    {
+      "target": "fr",
+      "source": "zh-Hans",
+      "scale": 1,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": [
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "fr",
+      "source": "ja",
+      "scale": 1,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": []
+    },
+    {
+      "target": "fr",
+      "source": "ar",
+      "scale": 0.84,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.22"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        }
+      ]
+    },
+    {
+      "target": "fr",
+      "source": "de",
+      "scale": 0.88,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": []
+    },
+    {
+      "target": "fr",
+      "source": "ko",
+      "scale": 1,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": [
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "en",
+      "scale": 0.51,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": []
+    },
+    {
+      "target": "de",
+      "source": "es",
+      "scale": 0.89,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": []
+    },
+    {
+      "target": "de",
+      "source": "zh-Hans",
+      "scale": 1,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": [
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "ja",
+      "scale": 0.97,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": []
+    },
+    {
+      "target": "de",
+      "source": "ar",
+      "scale": 0.84,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.22"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "fr",
+      "scale": 0.88,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": []
+    },
+    {
+      "target": "de",
+      "source": "ko",
+      "scale": 1,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
+      "warnings": [
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "ko",
+      "source": "en",
+      "scale": 0.85,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "South Korea"
+          },
+          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ko",
+      "source": "es",
+      "scale": 0.73,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "South Korea"
+          },
+          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ko",
+      "source": "zh-Hans",
+      "scale": 1,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "South Korea"
+          },
+          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ko",
+      "source": "ja",
+      "scale": 0.88,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "South Korea"
+          },
+          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ko",
+      "source": "ar",
+      "scale": 0.66,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.22"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "South Korea"
+          },
+          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ko",
+      "source": "fr",
+      "scale": 0.73,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "South Korea"
+          },
+          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+        }
+      ]
+    },
+    {
+      "target": "ko",
+      "source": "de",
+      "scale": 0.69,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 612,
+      "warnings": [
+        {
+          "code": "emergency-unreviewed",
+          "severity": "warn",
+          "params": {
+            "region": "South Korea"
+          },
           "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
         }
       ]
