@@ -121,6 +121,7 @@ export function makeSpec(ctx, presets, choice) {
     themeId: 'latex-reference',
     typeface: 'sans',
     inkMode: 'full',
+    autoFaces: true,
     density: 0.7,
     arrangement: 'two-column',
     scale: 0,

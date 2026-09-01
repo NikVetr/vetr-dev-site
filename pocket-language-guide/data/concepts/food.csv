@@ -19,3 +19,8 @@ food-ordering.to-go-please,food-ordering,entry,phrase,to-go-please,6,0.759,food-
 food-ordering.check-please,food-ordering,entry,phrase,check-please,7,0.731,food-ordering.check-please,0,0,neutral,
 food-ordering.does-it-contain,food-ordering,entry,template,does-it-contain,8,0.703,food-ordering.does-it-contain,0,1,neutral,
 food-ordering.is-this-vegetarian,food-ordering,entry,phrase,is-this-vegetarian,9,0.675,food-ordering.is-this-vegetarian,0,0,neutral,
+dietary-needs.does-it-contain-fish-stock,dietary-needs,refphrase,phrase,does-it-contain-fish-stock,1008,0.680,dietary-needs.does-it-contain-fish-stock,0,0,neutral,
+dietary-needs.i-have-a-severe-allergy-to,dietary-needs,entry,template,i-have-a-severe-allergy-to,1013,0.680,dietary-needs.i-have-a-severe-allergy-to,0,1,neutral,
+food-ordering.what-do-you-recommend,food-ordering,entry,phrase,what-do-you-recommend,1004,0.765,food-ordering.what-do-you-recommend,0,0,neutral,
+food-ordering.water-please,food-ordering,entry,phrase,water-please,1006,0.765,food-ordering.water-please,0,0,neutral,
+food-ordering.can-a-vegetarian-eat-this,food-ordering,entry,phrase,can-a-vegetarian-eat-this,1010,0.765,food-ordering.can-a-vegetarian-eat-this,0,0,neutral,

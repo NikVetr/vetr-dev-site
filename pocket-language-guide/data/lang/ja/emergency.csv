@@ -1,0 +1,19 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+lost-rescue.i-lost-my-passport,パスポートをなくしました,,pasupōto o nakushimashita,,,2,japanese-reviewed-v6
+lost-rescue.i-lost-my-phone,スマホをなくしました,,sumaho o nakushimashita,,,2,japanese-reviewed-v6
+lost-rescue.please-call-the-police,警察を呼んでください,,keisatsu o yonde kudasai,,,2,japanese-reviewed-v6
+lost-rescue.we-are-here,私たちはここにいます,,watashitachi wa koko ni imasu,,,2,japanese-reviewed-v6
+lost-rescue.please-look-at-my-current-location,現在地を見てください,,genzaichi o mite kudasai,,,2,japanese-reviewed-v6
+lost-rescue.i-cannot-walk,歩けません,,arukemasen,,,2,japanese-reviewed-v6
+lost-rescue.i-sprained-my-ankle,足首をひねりました,,ashikubi o hinerimashita,,,2,japanese-reviewed-v6
+lost-rescue.please-contact-rescue,救助隊に連絡してください,,kyūjotai ni renraku shite kudasai,,,2,japanese-reviewed-v6
+lost-rescue.my-companion-is-missing,仲間が見つかりません,,nakama ga mitsukarimasen,,,2,japanese-reviewed-v6
+emergency-medical.help,助けて！,,tasukete!,,,2,japanese-reviewed-v6
+emergency-medical.please-call-an-ambulance,救急車を呼んでください,,kyūkyūsha o yonde kudasai,,,2,japanese-reviewed-v6
+emergency-medical.i-need-a-doctor,医者が必要です,,isha ga hitsuyō desu,,,2,japanese-reviewed-v6
+emergency-medical.i-feel-unwell,具合が悪いです,,guai ga warui desu,,,2,japanese-reviewed-v6
+emergency-medical.i-am-sick,病気です,,byōki desu,,,2,japanese-reviewed-v6
+emergency-medical.i-am-injured,けがをしました,,kega o shimashita,,,2,japanese-reviewed-v6
+emergency-medical.it-hurts-here,ここが痛いです,,koko ga itai desu,,,2,japanese-reviewed-v6
+emergency-medical.where-is-a-pharmacy,薬局はどこですか？,,yakkyoku wa doko desu ka?,,,2,japanese-reviewed-v6
+emergency-medical.please-take-me-to-a-hospital,病院に連れて行ってください,,byōin ni tsurete itte kudasai,,,2,japanese-reviewed-v6

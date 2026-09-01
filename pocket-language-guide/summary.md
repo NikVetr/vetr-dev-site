@@ -13,12 +13,12 @@ A **sheet** is a set of **faces**. The default geometry is 7×5in faces of four
 columns, printed double-sided on 5×7 photo paper; cut each sheet down the middle
 and you have double-sided 3½×5in cards.
 
-**How many faces is a consequence, not a setting.** `geometry.faces: 0` means auto:
-the fewest faces that hold the content legibly, stepping in twos because a
-double-sided sheet is two faces and an odd count means running one with a blank
-back. On the shipped corpus that resolves to four at 0.97× — the same answer the
-reference sheet arrived at by hand. Ask for larger type and it grows to six or
-eight rather than failing.
+**How many faces is mostly a consequence, not a setting.** `spec.autoFaces` lets the
+solver move the count, in pairs, because a double-sided sheet is two faces. It is
+anchored on the card's natural count rather than minimised: it gives up a pair only
+if the content still fits at full size, so losing paper never costs type size, and
+takes a pair only when the content will not fit at all. Every shipped pair settles
+on four faces — the answer both reference sheets reached by hand.
 
 Every column is flush at the top *and* the bottom, an item never splits across a
 column, and a section heading is never stranded at the foot of one.
@@ -221,6 +221,31 @@ Each theme has both a `description` (prose) and a `note` (the note-template
 style). These once collided as one key and JSON silently kept the last;
 `tests/theme.test.mjs` now asserts the shape.
 
+## Type size is not one multiplier
+
+The reference sheets prove a single scale is the wrong knob. The Mandarin edition
+sets its smallest Latin at 4.73pt; the Japanese one goes to 4.44pt while keeping
+Japanese *larger*, because Latin stays readable smaller than kanji does. Scaling
+every field in lockstep cannot express that, and with a uniform scale the Japanese
+corpus needed six faces where the reference fits four.
+
+So below the nominal size each field travels toward **its own** floor:
+
+```
+scale >= 1 :  size = nominal * scale
+scale <  1 :  size = floor + (nominal - floor) * scale
+```
+
+Scale 1 is the theme's size, scale 0 is every field at the smallest its script can
+carry, and the two meet continuously. `data/registry/scripts.csv` holds the floors:
+4.4pt Latin, 5.0pt Han and Japanese, 5.4pt Devanagari and Thai. Nothing can render
+below its floor now, so there is no separate "scale floor" to compute and no
+below-minimum warning to emit — the only remaining case is paper so coarse that its
+minimum exceeds a theme size, which is reported.
+
+On the Japanese pack this lands at 4.79pt Latin over 5.27pt Japanese: four faces,
+like the reference, and a little more legible than the reference's own 4.44pt.
+
 ## Spacing
 
 The reference sheet's item padding is essentially zero: consecutive rows are held
@@ -266,8 +291,23 @@ npm run prerender   # solve + render → packs/  (after any corpus or engine cha
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
 ```
 
-`scripts/port_latex_corpus.py` extracted the original 359 concepts from the
-reference XeLaTeX sheet and is kept because it documents each row's provenance.
+`scripts/latex_corpus.py` reads the reference XeLaTeX sheets;
+`scripts/port_latex_corpus.py` seeded the corpus from the Mandarin one, and
+`scripts/port_language.py` merges each later sheet into it. Both are kept because
+they document where every row came from.
+
+Merging is the data model earning its keep. The Japanese sheet contributed 366
+rows: 312 matched concepts that already existed and 54 were new, so the bank is
+413 concepts and **six** language pairs render — including `zh-Hans ← ja` and
+`ja ← zh-Hans`, which nobody wrote. Matching is on a normalised English gloss,
+against the exact section first and then its group, because two sheets can file
+the same phrase under different panels ("Can I charge my phone?" is hotel basics
+in one and hotel requests in the other).
+
+One consequence worth knowing: for a concept both sheets carry, the row order
+comes from whichever sheet was ported first. Order within a section is authored
+intent, and the later sheet's is partly lost. Per-language ordering would need a
+rank column in every language file, which has not seemed worth it yet.
 
 Types are enforced without a build: JSDoc annotations plus `jsconfig.json` with
 `checkJs`, checked by `npm run check` (`tsc` emits nothing).
@@ -297,12 +337,15 @@ dropped glyph or an unloaded font gets caught.
 
 Named so nobody has to rediscover the gap:
 
-- **Corpus beyond Mandarin.** By design: the content track is separate, so this
-  ships schemas, validators, confidence gating, agent prompt templates and the
-  real Mandarin corpus, and leaves bulk generation to run against a frozen schema.
-  `es`, `ja` and `ar` are registered with a `draft` status and no rows; the gallery
-  reads `data/coverage.json` rather than that status, so they never offer a button
-  that would yield an empty sheet.
+- **Corpus beyond Mandarin and Japanese.** By design: the content track is
+  separate, so this ships schemas, validators, confidence gating, agent prompt
+  templates and two real corpora, and leaves bulk generation to run against a
+  frozen schema. `es` and `ar` are registered with no rows; the gallery reads
+  `data/coverage.json` rather than the declared status, so they never offer a
+  button that would yield an empty sheet. No single language covers the whole bank
+  (Mandarin 86%, Japanese 88%), which is why completeness is not an error.
+- **A serif Japanese face.** `cjk-jp-serif` is not shipped, so a serif Japanese
+  sheet falls back to the sans face for its Japanese columns.
 - **Emergency numbers for most countries.** 14 of 49 regions are marked reviewed;
   the rest carry plausible numbers at `confidence: 1` so a reviewer has something
   to check rather than research from scratch, and are withheld from sheets until

@@ -76,6 +76,22 @@ function makePalette(theme, inkMode) {
  * @param {number} ctx.scale
  */
 function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale }) {
+  /**
+   * How a type size responds to the scale.
+   *
+   * A single multiplier applied to every field cannot express what the reference
+   * sheets actually do: the Japanese edition sets its Latin respellings at 4.44pt
+   * while keeping Japanese larger, because Latin stays readable smaller than kanji
+   * does. So below the nominal size each field travels toward *its own* floor
+   * rather than shrinking in lockstep -- scale 1 is the theme's size, scale 0 is
+   * every field at the smallest its script can carry, and above 1 it is a plain
+   * multiplier.
+   * @param {number} nominal @param {number} floor
+   */
+  const sizeAt = (nominal, floor) => {
+    const limit = Math.min(floor, nominal);
+    return scale > 1 ? nominal * scale : limit + (nominal - limit) * scale;
+  };
   // Breathing room between text elements, in points at the current scale. The
   // reference sheet's padding is essentially zero -- consecutive rows are held
   // apart by a 0.22pt rule alone -- which is tight enough to read as cramped.
@@ -94,7 +110,8 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
   const styleFor = (fs) => {
     const { stack, dir, iso } = resolveField(fs.field, targetLang.script, sourceLang.script, corpus.scripts);
     const script = corpus.scripts[iso];
-    const size = fs.size * scale;
+    const floor = Number(script.min_size_pt) + Number(spec.paper.minSizeDelta);
+    const size = sizeAt(fs.size, floor);
     // Dense reference tables ask for the narrow Latin face. Only Latin has one; for
     // any other script the request is simply ignored.
     const base = fs.condensed && stack === 'latin' ? 'latin-cond' : stack;
@@ -103,9 +120,9 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
       dir,
       wordBreak: /** @type {'space'|'any'|'dict'} */ (script.word_break),
       size,
-      // Per-script floor: the reference's 1.02x leading is safe for Latin and Han
-      // but clips Devanagari, Thai and Arabic.
-      leading: Math.max(fs.leading * scale, size * Number(script.leading_factor)),
+      // Leading keeps the theme's ratio to the size, with a per-script floor: the
+      // reference's 1.02x is safe for Latin and Han but clips Devanagari and Thai.
+      leading: Math.max(size * (fs.leading / fs.size), size * Number(script.leading_factor)),
       weight: fs.bold ? 700 : 400,
       italic: fs.italic,
       slotAsRule: isTargetSide(fs.field),
@@ -119,6 +136,7 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
     measurer,
     colWidth,
     scale,
+    sizeAt,
     density,
     palette,
     shown,
@@ -132,6 +150,8 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
       const resolved = resolveField('gloss', targetLang.script, sourceLang.script, corpus.scripts);
       return { ...resolved, stack: registry.stackFor(resolved.stack, typeface) };
     })(),
+    sourceFloor: Number(corpus.scripts[sourceLang.script].min_size_pt)
+      + Number(spec.paper.minSizeDelta),
     // Advanced by itemAtoms: the reference alternates row shading per section.
     rowIndex: 0,
   };
@@ -188,12 +208,13 @@ function headingAtom(ctx, block) {
   const level = block.level ?? 1;
   const h = ctx.theme.headings[String(level)];
   const s = ctx.scale;
+  const size = ctx.sizeAt(h.size, ctx.sourceFloor);
   const style = {
     stack: ctx.sourceStack.stack,
     dir: ctx.sourceStack.dir,
     wordBreak: /** @type {'space'} */ ('space'),
-    size: h.size * s,
-    leading: h.leading * s,
+    size,
+    leading: size * (h.leading / h.size),
     weight: 700,
     italic: false,
     slotAsRule: false,
@@ -375,12 +396,13 @@ function noteAtom(ctx, block, withPaint) {
   const pad = n.pad.map((/** @type {number} */ v) => v * s);
   pad[0] += ctx.density;
   pad[2] += ctx.density;
+  const size = ctx.sizeAt(n.size, ctx.sourceFloor);
   const style = {
     stack: ctx.sourceStack.stack,
     dir: ctx.sourceStack.dir,
     wordBreak: /** @type {'space'} */ ('space'),
-    size: n.size * s,
-    leading: n.leading * s,
+    size,
+    leading: size * (n.leading / n.size),
     weight: 400,
     italic: false,
     slotAsRule: false,

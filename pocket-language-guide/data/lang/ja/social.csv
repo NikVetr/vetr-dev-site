@@ -1,0 +1,44 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+social-basics.hello,こんにちは,,konnichiwa,,,2,japanese-reviewed-v6
+social-basics.good-morning,おはようございます,,ohayō gozaimasu,,,2,japanese-reviewed-v6
+social-basics.good-evening,こんばんは,,konbanwa,,,2,japanese-reviewed-v6
+social-basics.good-night,おやすみなさい,,oyasumi nasai,,,2,japanese-reviewed-v6
+social-basics.goodbye,さようなら,,sayōnara,,,2,japanese-reviewed-v6
+social-basics.thank-you,ありがとうございます,,arigatō gozaimasu,,,2,japanese-reviewed-v6
+social-basics.you-are-welcome,どういたしまして,,dō itashimashite,,,2,japanese-reviewed-v6
+social-basics.excuse-me-sorry,すみません,,sumimasen,,,2,japanese-reviewed-v6
+social-basics.sorry,ごめんなさい,,gomen nasai,,,2,japanese-reviewed-v6
+social-basics.okay-fine-i-am-okay,大丈夫です,,daijōbu desu,,,2,japanese-reviewed-v6
+social-basics.i-do-not-know,知りません,,shirimasen,,,2,japanese-reviewed-v6
+quick-responses.please-go-ahead,どうぞ,,dōzo,,,2,japanese-reviewed-v6
+quick-responses.yes-right,はい,,hai,,,2,japanese-reviewed-v6
+quick-responses.no-not,いいえ,,iie,,,2,japanese-reviewed-v6
+quick-responses.can-possible,できます,,dekimasu,,,2,japanese-reviewed-v6
+quick-responses.cannot-not-possible,できません,,dekimasen,,,2,japanese-reviewed-v6
+quick-responses.okay-fine,大丈夫です,,daijōbu desu,,,2,japanese-reviewed-v6
+quick-responses.no-good-not-allowed-will-not-work,だめです,,dame desu,,,2,japanese-reviewed-v6
+communication.i-do-not-speak-japanese,日本語は話せません,,nihongo wa hanasemasen,,,2,japanese-reviewed-v6
+communication.i-speak-only-a-little-japanese,日本語は少しだけ話せます,,nihongo wa sukoshi dake hanasemasu,,,2,japanese-reviewed-v6
+communication.do-you-speak-english,英語を話せますか？,,eigo o hanasemasu ka?,,,2,japanese-reviewed-v6
+communication.please-speak-more-slowly,もっとゆっくり話してください,,motto yukkuri hanashite kudasai,,,2,japanese-reviewed-v6
+communication.i-cannot-make-out-what-you-are-saying,聞き取れません,,kikitoremasen,,,2,japanese-reviewed-v6
+communication.i-do-not-understand,わかりません,,wakarimasen,,,2,japanese-reviewed-v6
+communication.i-cannot-read-it,読めません,,yomemasen,,,2,japanese-reviewed-v6
+communication.please-say-it-again,もう一度言ってください,,mō ichido itte kudasai,,,2,japanese-reviewed-v6
+communication.please-write-it-down,書いてください,,kaite kudasai,,,2,japanese-reviewed-v6
+communication.please-wait-a-moment,少し待ってください,,sukoshi matte kudasai,,,2,japanese-reviewed-v6
+communication.can-you-help-me,手伝ってもらえますか？,,tetsudatte moraemasu ka?,,,2,japanese-reviewed-v6
+communication.please-show-me-the-japanese-text,日本語の文を見せてください,,nihongo no bun o misete kudasai,,,2,japanese-reviewed-v6
+communication.please-write-it-in-roman-letters,ローマ字で書いてください,,rōmaji de kaite kudasai,,,2,japanese-reviewed-v6
+phone-translation.i-am-using-phone-translation,スマホで翻訳しています,,sumaho de hon'yaku shiteimasu,,,2,japanese-reviewed-v6
+phone-translation.please-speak-toward-the-phone,スマホに向かって話してください,,sumaho ni mukatte hanashite kudasai,,,2,japanese-reviewed-v6
+phone-translation.one-sentence-at-a-time-please,一文ずつ話してください,,ichibun zutsu hanashite kudasai,,,2,japanese-reviewed-v6
+phone-translation.please-type-it-and-show-me,入力して見せてください,,nyūryoku shite misete kudasai,,,2,japanese-reviewed-v6
+phone-translation.please-write-the-place-name-in-japanese,地名を日本語で書いてください,,chimei o nihongo de kaite kudasai,,,2,japanese-reviewed-v6
+phone-translation.please-look-at-the-screen,画面を見てください,,gamen o mite kudasai,,,2,japanese-reviewed-v6
+phone-text-power.please-use-simple-words,簡単な言葉で話してください,,kantan na kotoba de hanashite kudasai,,,2,japanese-reviewed-v6
+phone-text-power.my-phone-battery-is-low,スマホの充電がもうすぐ切れます,,sumaho no jūden ga mōsugu kiremasu,,,2,japanese-reviewed-v6
+phone-text-power.do-you-have-a-power-bank,モバイルバッテリーはありますか？,,mobairu batterī wa arimasu ka?,,,2,japanese-reviewed-v6
+phone-text-power.may-i-charge-my-phone-here,ここでスマホを充電してもいいですか？,,koko de sumaho o jūden shite mo ii desu ka?,,,2,japanese-reviewed-v6
+phone-text-power.the-translation-may-be-inaccurate,翻訳が正確でないかもしれません,,hon'yaku ga seikaku de nai kamo shiremasen,,,2,japanese-reviewed-v6
+phone-text-power.please-confirm,確認してください,,kakunin shite kudasai,,,2,japanese-reviewed-v6

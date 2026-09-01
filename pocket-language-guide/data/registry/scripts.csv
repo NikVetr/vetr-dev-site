@@ -2,8 +2,8 @@ iso15924,name,direction,needs_shaping,leading_factor,min_size_pt,word_break,font
 Latn,Latin,ltr,0,1.02,4.4,space,latin
 Hans,Han (Simplified),ltr,0,1.02,5.0,any,cjk-sc
 Hant,Han (Traditional),ltr,0,1.02,5.0,any,cjk-sc
-Jpan,Japanese,ltr,0,1.04,5.0,any,cjk-jp
-Kore,Korean,ltr,0,1.04,5.0,any,cjk-jp
+Jpan,Japanese,ltr,0,1.02,5.0,any,cjk-jp
+Kore,Korean,ltr,0,1.02,5.0,any,cjk-jp
 Cyrl,Cyrillic,ltr,0,1.02,4.4,space,latin
 Grek,Greek,ltr,0,1.02,4.4,space,latin
 Arab,Arabic,rtl,1,1.30,5.4,space,arabic

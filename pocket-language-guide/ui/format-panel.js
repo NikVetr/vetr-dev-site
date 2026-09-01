@@ -16,7 +16,7 @@ import {
 import { familyFor } from '../render/fonts.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
-// 0 is auto. Faces come in pairs because a double-sided sheet is two of them.
+// 0 selects auto. Faces come in pairs: a double-sided sheet is two of them.
 const FACE_CHOICES = [0, 2, 4, 6, 8, 10];
 const SCALE_CHOICES = [
   { value: 0, caption: 'Fit' },
@@ -129,7 +129,8 @@ export function createFormatPanel(input) {
       };
     }),
     // A different card is a different sheet: take its margins, gap, columns and
-    // faces wholesale rather than keeping values tuned for the old shape.
+    // natural face count wholesale rather than keeping values tuned for the old
+    // shape.
     onChange: (id) => emit({ geometry: { ...presets.geometry[id] } }),
   });
 
@@ -149,7 +150,7 @@ export function createFormatPanel(input) {
 
   const faces = segmented({
     label: 'Faces',
-    value: spec.geometry.faces,
+    value: spec.autoFaces ? 0 : spec.geometry.faces,
     options: FACE_CHOICES.map((n) => ({
       value: n,
       caption: n === 0 ? 'Auto' : String(n),
@@ -158,7 +159,11 @@ export function createFormatPanel(input) {
         : `${n} ${n === 1 ? 'face' : 'faces'}`,
       glyph: facesGlyph(n),
     })),
-    onChange: (n) => emit({ geometry: { ...spec.geometry, faces: n } }),
+    // Auto keeps whatever count is there as its starting point, so switching to it
+    // does not throw away the card's natural pairing.
+    onChange: (n) => emit(n === 0
+      ? { autoFaces: true }
+      : { autoFaces: false, geometry: { ...spec.geometry, faces: n } }),
   });
   const autoFacesCaption = /** @type {HTMLElement|null} */ (
     faces.group.querySelector('.segment .segment-caption')
@@ -375,10 +380,10 @@ export function createFormatPanel(input) {
       spec = next;
       size.select(presetOf());
       columns.select(next.geometry.columns);
-      faces.select(next.geometry.faces);
+      faces.select(next.autoFaces ? 0 : next.geometry.faces);
       // Auto is only useful if it says what it decided.
       if (autoFacesCaption) {
-        autoFacesCaption.textContent = next.geometry.faces <= 0 && resolvedFaces
+        autoFacesCaption.textContent = next.autoFaces && resolvedFaces
           ? `Auto · ${resolvedFaces}`
           : 'Auto';
       }

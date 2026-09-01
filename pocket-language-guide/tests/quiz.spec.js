@@ -9,7 +9,7 @@ test.describe('help me decide', () => {
 
   test('the quiz narrows the sheet and syncs the controls it changed', async ({ page }) => {
     await page.goto(STUDIO);
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
 
     await page.locator('#quiz-open').click();
     const quiz = page.locator('dialog.quiz');
@@ -24,7 +24,7 @@ test.describe('help me decide', () => {
     await expect(quiz).toHaveCount(0);
 
     // Fewer items than everything, and the banner steps out of the way.
-    await expect(page.locator('#counts')).not.toContainText('358 of 359');
+    await expect(page.locator('#counts')).not.toContainText('358 of 413');
     await expect(page.locator('.banner')).toBeHidden();
     // Large print asked for bigger type, not the same content shrunk.
     await expect(page.getByRole('radio', { name: 'X-large' })).toHaveAttribute('aria-checked', 'true');
@@ -35,11 +35,11 @@ test.describe('help me decide', () => {
 
   test('cancelling changes nothing', async ({ page }) => {
     await page.goto(STUDIO);
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
     await page.locator('#quiz-open').click();
     await page.locator('dialog.quiz').getByRole('button', { name: 'Cancel' }).click();
     await expect(page.locator('dialog.quiz')).toHaveCount(0);
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
   });
 });
 

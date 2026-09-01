@@ -1,5 +1,5 @@
 {
-  "note": "Geometry and paper presets. pageW/pageH and all margins are in points. \"faces\": 0 means auto -- the fewest pairs of faces that hold the content legibly, since a sheet printed double-sided is two faces.",
+  "note": "Geometry and paper presets. pageW/pageH and all margins are in points. \"faces\" is the card's natural count -- a double-sided sheet is two faces -- and is the anchor auto starts from, not a hard limit.",
   "geometry": {
     "card-7x5-4col": {
       "name": "7×5in landscape · 4 columns",
@@ -11,7 +11,7 @@
       "marginRight": 7.2,
       "columns": 4,
       "columnGap": 3.65,
-      "faces": 0,
+      "faces": 4,
       "note": "Matches the reference sheet: 1.662in columns, 0.0507in gap."
     },
     "card-5x7-3col": {
@@ -24,7 +24,7 @@
       "marginRight": 7.2,
       "columns": 3,
       "columnGap": 3.65,
-      "faces": 0
+      "faces": 4
     },
     "card-4x6-3col": {
       "name": "6×4in landscape · 3 columns",
@@ -36,7 +36,7 @@
       "marginRight": 7.2,
       "columns": 3,
       "columnGap": 3.65,
-      "faces": 0
+      "faces": 4
     },
     "a6-2col": {
       "name": "A6 portrait · 2 columns",
@@ -48,7 +48,7 @@
       "marginRight": 9,
       "columns": 2,
       "columnGap": 4,
-      "faces": 0
+      "faces": 4
     },
     "wallet-2col": {
       "name": "Credit-card size · 2 columns",
@@ -60,7 +60,7 @@
       "marginRight": 5,
       "columns": 2,
       "columnGap": 3,
-      "faces": 0
+      "faces": 6
     }
   }
 }

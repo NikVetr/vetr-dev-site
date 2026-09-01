@@ -10,7 +10,9 @@ import { buildAtoms } from './atoms.js';
 import { breakColumns } from './columnbreak.js';
 import { placeColumn } from './justify.js';
 
-const SCALE_MIN = 0.5;
+// Scale 0 puts every field at the smallest size its own script can carry, so the
+// search has no separate floor to respect.
+const SCALE_MIN = 0.02;
 const SCALE_MAX = 1.8;
 const AUTOFIT_STEPS = 7;
 
@@ -48,53 +50,30 @@ export function contentBox(g, paper) {
 }
 
 /**
- * How far the type may shrink before something becomes illegible.
- *
- * Each field has its own floor, because each is written in its own script: a
- * romanisation or a respelling is Latin and reads fine at 4.4pt, while Han needs
- * 5pt to stay distinguishable. Applying the target script's floor to every field
- * -- as this once did -- pinned the whole sheet to the strictest script it
- * contained and left auto-fit almost no room to work in.
- *
+ * Whether the chosen paper demands a larger minimum than the theme's smallest
+ * field, which is the one case where "smallest legible size" cannot be honoured.
  * @param {SolveInput} input
- * @returns {{scaleFloor:number, binding:{field:string, size:number, floor:number, script:string}|null}}
  */
-function legibilityFloor(input) {
+function paperTooCoarse(input) {
   const { theme, spec, corpus } = input;
   const targetIso = corpus.languages[spec.target].script;
   const sourceIso = corpus.languages[spec.source].script;
   const shown = new Set(spec.fieldSet);
-
-  /** @type {{field:string, size:number, floor:number, script:string}[]} */ const limits = [];
-  const add = (/** @type {string} */ field, /** @type {number} */ size, /** @type {string} */ iso) => {
-    const script = corpus.scripts[iso];
-    if (!script) return;
-    limits.push({
-      field,
-      size,
-      floor: Number(script.min_size_pt) + Number(spec.paper.minSizeDelta),
-      script: script.name,
-    });
-  };
+  /** @type {{field:string, size:number, floor:number, script:string}|null} */ let worst = null;
 
   for (const template of Object.values(theme.templates)) {
     for (const f of /** @type {any} */ (template).fields) {
       if (!shown.has(f.field)) continue;
-      add(f.field, f.size, resolveField(f.field, targetIso, sourceIso, corpus.scripts).iso);
+      const iso = resolveField(f.field, targetIso, sourceIso, corpus.scripts).iso;
+      const script = corpus.scripts[iso];
+      if (!script) continue;
+      const floor = Number(script.min_size_pt) + Number(spec.paper.minSizeDelta);
+      if (floor > f.size && (!worst || floor - f.size > worst.floor - worst.size)) {
+        worst = { field: f.field, size: f.size, floor, script: script.name };
+      }
     }
   }
-  // Notes are prose in the reader's own language.
-  add('note', theme.note.size, sourceIso);
-
-  if (!limits.length) return { scaleFloor: SCALE_MIN, binding: null };
-  let binding = limits[0];
-  for (const limit of limits) {
-    if (limit.floor / limit.size > binding.floor / binding.size) binding = limit;
-  }
-  return {
-    scaleFloor: Math.max(SCALE_MIN, binding.floor / binding.size),
-    binding,
-  };
+  return worst;
 }
 
 /**
@@ -117,14 +96,16 @@ export function layout(input) {
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
   const targetScript = corpus.scripts[corpus.languages[spec.target].script];
-  const { scaleFloor, binding } = legibilityFloor(input);
+  // Nothing can render below its script's floor now, so the search runs from 0.
+  const scaleFloor = SCALE_MIN;
+  const coarse = paperTooCoarse(input);
 
   const measureOnly = (/** @type {number} */ scale) => buildAtoms({
     blocks, theme, spec, corpus, measurer, registry, colWidth: box.colWidth, scale,
     withPaint: false,
   });
 
-  const autoFaces = spec.geometry.faces <= 0;
+  const autoFaces = spec.autoFaces !== false;
   const resolved = autoFaces
     ? solveFaces(measureOnly, box, spec, scaleFloor)
     : { faces: spec.geometry.faces, scale: null };
@@ -156,13 +137,13 @@ export function layout(input) {
       fixes: findFixes(input, box, scaleFloor),
     });
   }
-  if (binding && binding.size * scale < binding.floor - 1e-6) {
+  if (coarse) {
     warnings.push({
-      code: 'below-min-size',
+      code: 'paper-too-coarse',
       severity: 'warn',
-      message: `The smallest ${binding.script} text is `
-        + `${(binding.size * scale).toFixed(2)}pt, below the ${binding.floor.toFixed(2)}pt `
-        + 'this paper can hold legibly.',
+      message: `This paper needs ${coarse.script} text at ${coarse.floor.toFixed(2)}pt, but the `
+        + `theme sets its ${coarse.field} column at ${coarse.size.toFixed(2)}pt. That column is `
+        + 'enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type.',
     });
   }
   if (targetScript.word_break === 'dict') {
@@ -299,54 +280,15 @@ export function layout(input) {
   };
 }
 
-/**
- * Fewest faces that hold the content legibly, and the type scale to use in them.
- *
- * Content height at the smallest legible type gives a hard lower bound on the face
- * count -- nothing can fit in fewer, however the type is set -- so the search
- * starts there instead of at two, and the first count that works is the answer.
- * Usually that is one auto-fit rather than several.
- *
- * @param {(scale:number)=>import('./atoms.js').Atom[]} build
- * @param {ReturnType<typeof contentBox>} box
- * @param {import('../types.js').SheetSpec} spec
- * @param {number} scaleFloor
- * @returns {{faces:number, scale:number|null}}
- */
-function solveFaces(build, box, spec, scaleFloor) {
-  const perFace = box.height * spec.geometry.columns;
-  if (perFace <= 0) return { faces: FACE_STEP, scale: null };
-
-  const smallest = build(scaleFloor);
-  const natural = smallest.reduce(
-    (sum, atom, i) => sum + atom.height + (i ? atom.gapBefore.natural : 0),
-    0,
-  );
-  const lowerBound = Math.max(FACE_STEP, Math.ceil(natural / perFace));
-  const start = Math.ceil(lowerBound / FACE_STEP) * FACE_STEP;
-
-  for (let n = start; n <= MAX_AUTO_FACES; n += FACE_STEP) {
-    const bins = n * spec.geometry.columns;
-    if (spec.scale > 0) {
-      const atoms = build(spec.scale);
-      if (!breakColumns(atoms, box.height, bins).failure) return { faces: n, scale: spec.scale };
-    } else {
-      const fitted = autofit(build, box.height, bins, scaleFloor);
-      if (fitted !== null) return { faces: n, scale: fitted };
-    }
-  }
-  return { faces: MAX_AUTO_FACES, scale: null };
-}
-
 /** How far to look when searching for a geometry that would fit. */
-const MAX_EXTRA_FACES = 8;
 const MAX_EXTRA_COLUMNS = 3;
 
 /**
  * Remedies for content that will not fit, each verified to actually work rather
- * than merely suggested. Ordered by how little they disturb the sheet: more faces
- * first (same look, more paper), then more columns (denser look, same paper), then
- * dropping the least important sections.
+ * than merely suggested. Ordered by how little they disturb the sheet: more
+ * columns first (same paper, denser look), then dropping the least important
+ * sections. Adding faces is not offered while auto is on, because auto already
+ * searched that.
  *
  * @param {SolveInput} input
  * @param {ReturnType<typeof contentBox>} box
@@ -365,14 +307,11 @@ function findFixes(input, box, scaleFloor) {
       blocks, theme, spec: { ...spec, geometry }, corpus, measurer, registry,
       colWidth: probeBox.colWidth, scale: scaleFloor, withPaint: false,
     });
-    const bins = geometry.faces * geometry.columns;
-    return !breakColumns(atoms, probeBox.height, bins).failure;
+    return !breakColumns(atoms, probeBox.height, geometry.faces * geometry.columns).failure;
   };
 
-  // Auto already searched the face counts, so suggesting more of them would be
-  // repeating a question that has been answered.
-  if (spec.geometry.faces > 0) {
-    for (let extra = 1; extra <= MAX_EXTRA_FACES; extra += 1) {
+  if (spec.autoFaces === false) {
+    for (let extra = FACE_STEP; extra <= MAX_AUTO_FACES; extra += FACE_STEP) {
       const faces = spec.geometry.faces + extra;
       if (!fitsWith({ ...spec.geometry, faces })) continue;
       fixes.push({
@@ -381,8 +320,7 @@ function findFixes(input, box, scaleFloor) {
       });
       break;
     }
-  } else {
-    fixes.push({ label: 'Let the type size fit the page', patch: { scale: 0 } });
+    fixes.push({ label: 'Let the page count follow the content', patch: { autoFaces: true } });
   }
 
   for (let extra = 1; extra <= MAX_EXTRA_COLUMNS; extra += 1) {
@@ -423,12 +361,55 @@ function findFixes(input, box, scaleFloor) {
     break;
   }
 
-  if (spec.scale > 0 && spec.geometry.faces > 0) {
-    fixes.unshift({ label: 'Fit the type to the page automatically', patch: { scale: 0 } });
-  }
   // A fix offered twice is a fix that looks broken.
   const seen = new Set();
   return fixes.filter((fix) => !seen.has(fix.label) && seen.add(fix.label));
+}
+
+/**
+ * How many faces to use, and the type scale to use in them.
+ *
+ * Not simply the fewest that fit. Now that each field shrinks toward its own floor,
+ * fewer faces is always achievable by making everything tiny, which is not what
+ * anyone wants. So the search is anchored on the card's natural count -- two sheets
+ * of photo paper is four faces -- and moves off it only for a reason:
+ *
+ *   - it gives up a pair only if the content still fits at full size, so losing
+ *     paper never costs type size;
+ *   - it takes a pair only when the content will not fit at all.
+ *
+ * That is what the reference sheets do by hand: both settled on four faces and let
+ * the type find its own size, which for Japanese meant 4.4pt respellings.
+ *
+ * @param {(scale:number)=>import('./atoms.js').Atom[]} build
+ * @param {ReturnType<typeof contentBox>} box
+ * @param {import('../types.js').SheetSpec} spec
+ * @param {number} scaleFloor
+ * @returns {{faces:number, scale:number|null}}
+ */
+function solveFaces(build, box, spec, scaleFloor) {
+  const columns = spec.geometry.columns;
+  /** @param {number} faces @param {number} scale */
+  const fitsAt = (faces, scale) => !breakColumns(
+    build(scale), box.height, faces * columns,
+  ).failure;
+
+  const anchor = Math.max(FACE_STEP, spec.geometry.faces || FACE_STEP);
+  let faces = anchor;
+
+  // Give up paper only when it is free.
+  while (faces - FACE_STEP >= FACE_STEP && fitsAt(faces - FACE_STEP, 1)) {
+    faces -= FACE_STEP;
+  }
+  // Take paper only when there is no alternative.
+  const wanted = spec.scale > 0 ? spec.scale : scaleFloor;
+  while (faces <= MAX_AUTO_FACES && !fitsAt(faces, wanted)) {
+    faces += FACE_STEP;
+  }
+  if (faces > MAX_AUTO_FACES) return { faces: MAX_AUTO_FACES, scale: null };
+
+  if (spec.scale > 0) return { faces, scale: spec.scale };
+  return { faces, scale: autofit(build, box.height, faces * columns, scaleFloor) };
 }
 
 /**

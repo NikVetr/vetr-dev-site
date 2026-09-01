@@ -1,0 +1,17 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+tax-refund.is-tax-free-shopping-available,免税できますか？,,menzei dekimasu ka?,,,2,japanese-reviewed-v6
+shopping.i-am-just-looking,見ているだけです,,miteiru dake desu,,,2,japanese-reviewed-v6
+shopping.how-much-is-this,これはいくらですか？,,kore wa ikura desu ka?,,,2,japanese-reviewed-v6
+shopping.that-is-too-expensive,高すぎます,,takasugimasu,,,2,japanese-reviewed-v6
+shopping.is-there-a-discount,割引はありますか？,,waribiki wa arimasu ka?,,,2,japanese-reviewed-v6
+color-size-returns.do-you-have-another-color,別の色はありますか？,,betsu no iro wa arimasu ka?,,,2,japanese-reviewed-v6
+color-size-returns.do-you-have-another-size,別のサイズはありますか？,,betsu no saizu wa arimasu ka?,,,2,japanese-reviewed-v6
+color-size-returns.may-i-try-it-on,試着してもいいですか？,,shichaku shite mo ii desu ka?,,,2,japanese-reviewed-v6
+color-size-returns.can-i-return-it,返品できますか？,,henpin dekimasu ka?,,,2,japanese-reviewed-v6
+color-size-returns.can-i-exchange-it,交換できますか？,,kōkan dekimasu ka?,,,2,japanese-reviewed-v6
+color-size-returns.do-you-have-a-bag,袋はありますか？,,fukuro wa arimasu ka?,,,2,japanese-reviewed-v6
+payment-receipt.pay-by-card,カードで払えますか？,,kādo de haraemasu ka?,,,2,japanese-reviewed-v6
+payment-receipt.pay-cash,現金で払えますか？,,genkin de haraemasu ka?,,,2,japanese-reviewed-v6
+payment-receipt.pay-by-qr-code,QRコードで払えますか？,,kyū āru kōdo de haraemasu ka?,,,2,japanese-reviewed-v6
+payment-receipt.a-receipt-please,レシートをください,,reshīto o kudasai,,,2,japanese-reviewed-v6
+payment-receipt.please-write-the-number,数字を書いてください,,sūji o kaite kudasai,,,2,japanese-reviewed-v6

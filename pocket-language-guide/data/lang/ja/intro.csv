@@ -1,0 +1,6 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+introductions.my-name-is,名前は{}です,,namae wa {} desu,,,2,japanese-reviewed-v6
+introductions.nice-to-meet-you,はじめまして,,hajimemashite,,,2,japanese-reviewed-v6
+introductions.what-is-your-name,お名前は何ですか？,,onamae wa nan desu ka?,,,2,japanese-reviewed-v6
+introductions.we-are-traveling-together,一緒に旅行しています,,issho ni ryokō shiteimasu,,,2,japanese-reviewed-v6
+introductions.this-is-my-friend,こちらは私の友達です,,kochira wa watashi no tomodachi desu,,,2,japanese-reviewed-v6

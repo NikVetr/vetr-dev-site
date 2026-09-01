@@ -16,3 +16,5 @@ lost-rescue.i-cannot-walk,lost-rescue,entry,phrase,i-cannot-walk,6,0.726,lost-re
 lost-rescue.i-sprained-my-ankle,lost-rescue,entry,phrase,i-sprained-my-ankle,7,0.699,lost-rescue.i-sprained-my-ankle,0,0,neutral,
 lost-rescue.please-contact-rescue,lost-rescue,entry,phrase,please-contact-rescue,8,0.672,lost-rescue.please-contact-rescue,0,0,neutral,
 lost-rescue.my-companion-is-missing,lost-rescue,entry,phrase,my-companion-is-missing,9,0.645,lost-rescue.my-companion-is-missing,0,0,neutral,
+lost-rescue.please-look-at-my-current-location,lost-rescue,entry,phrase,please-look-at-my-current-location,1005,0.731,lost-rescue.please-look-at-my-current-location,0,0,neutral,
+emergency-medical.i-feel-unwell,emergency-medical,entry,phrase,i-feel-unwell,1004,0.850,emergency-medical.i-feel-unwell,0,0,neutral,

@@ -40,21 +40,25 @@ test.describe('studio', () => {
 
   test('turning a section off re-solves with fewer items', async ({ page }) => {
     await page.goto(STUDIO);
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
     await page.locator('.tree summary input[type=checkbox]').first().uncheck();
-    await expect(page.locator('#counts')).not.toContainText('358 of 359');
+    await expect(page.locator('#counts')).not.toContainText('358 of 413');
     await page.locator('.tree summary input[type=checkbox]').first().check();
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
   });
 
-  test('a small card just uses more faces instead of failing', async ({ page }) => {
+  test('a small card takes more faces instead of failing', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('#status')).toContainText('4 faces');
+    await expect(page.locator('.face-strip .face')).toHaveCount(4);
     await page.getByRole('radio', { name: 'Credit-card size' }).click();
-    // Auto grows the face count rather than reporting an error.
-    await expect(page.locator('#status')).not.toContainText('4 faces');
+    // Auto takes more pairs rather than reporting an error, and says how many.
+    // Counting elements rather than matching "4 faces", which "14 faces" contains.
+    await expect.poll(() => page.locator('.face-strip .face').count()).toBeGreaterThan(4);
     await expect(page.locator('#warnings li.error')).toHaveCount(0);
     await expect(page.locator('.face.focused')).toBeVisible();
+    await expect(page.getByRole('radiogroup', { name: 'Faces' })
+      .getByRole('radio', { name: /^Auto/ })).toContainText('·');
   });
 
   test('a pinned face count that cannot hold the content fails loudly, once', async ({ page }) => {
@@ -124,7 +128,7 @@ test.describe('studio', () => {
     const boxes = page.locator('.items input[type=checkbox]');
     const count = await boxes.count();
     for (let i = 0; i < count; i += 9) await boxes.nth(i).click({ force: true });
-    await expect(page.locator('#counts')).not.toContainText('358 of 359');
+    await expect(page.locator('#counts')).not.toContainText('358 of 413');
 
     const before = Number((await page.locator('#counts').textContent())?.match(/(\d+) of/)?.[1]);
     await page.locator('#balance').click();
@@ -158,7 +162,7 @@ test.describe('studio', () => {
 
   test('a CSV round trip merges by concept_id instead of duplicating', async ({ page }) => {
     await page.goto(STUDIO);
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
 
     const out = page.waitForEvent('download');
     await page.locator('#csv-out').click();
@@ -172,7 +176,7 @@ test.describe('studio', () => {
     await page.locator('#csv-file').setInputFiles({
       name: 'edited.csv', mimeType: 'text/csv', buffer: Buffer.from(edited, 'utf8'),
     });
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
     await expect(page.locator('.items li', { hasText: 'Hi there' })).toHaveCount(1);
   });
 });

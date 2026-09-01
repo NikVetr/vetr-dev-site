@@ -1,0 +1,32 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,私,,watashi,,,2,japanese-reviewed-v6
+pronouns-verbs.we-us,私たち,,watashitachi,,,2,japanese-reviewed-v6
+pronouns-verbs.there-is-have,あります,,arimasu,,,2,japanese-reviewed-v6
+pronouns-verbs.there-is-not-do-not-have,ありません,,arimasen,,,2,japanese-reviewed-v6
+pronouns-verbs.want-to-verb,〜たいです,,tai desu,,,2,japanese-reviewed-v6
+pronouns-verbs.want-thing,〜が欲しいです,,ga hoshii desu,,,2,japanese-reviewed-v6
+pronouns-verbs.need-thing,〜が必要です,,ga hitsuyō desu,,,2,japanese-reviewed-v6
+pronouns-verbs.looking-for-thing,〜を探しています,,o sagashiteimasu,,,2,japanese-reviewed-v6
+pronouns-verbs.go,行きます,,ikimasu,,,2,japanese-reviewed-v6
+pronouns-verbs.come,来ます,,kimasu,,,2,japanese-reviewed-v6
+pronouns-verbs.buy,買います,,kaimasu,,,2,japanese-reviewed-v6
+pronouns-verbs.like,好きです,,suki desu,,,2,japanese-reviewed-v6
+question-words.what,何,,nani,,,2,japanese-reviewed-v6
+question-words.where,どこ,,doko,,,2,japanese-reviewed-v6
+question-words.who,誰,,dare,,,2,japanese-reviewed-v6
+question-words.which-one,どれ,,dore,,,2,japanese-reviewed-v6
+question-words.when,いつ,,itsu,,,2,japanese-reviewed-v6
+question-words.how,どう,,dō,,,2,japanese-reviewed-v6
+question-words.how-much-what-price,いくら,,ikura,,,2,japanese-reviewed-v6
+question-words.how-many,いくつ,,ikutsu,,,2,japanese-reviewed-v6
+question-words.why,なぜ,,naze,,,2,japanese-reviewed-v6
+question-words.this,これ,,kore,,,2,japanese-reviewed-v6
+question-words.that,それ,,sore,,,2,japanese-reviewed-v6
+question-words.here,ここ,,koko,,,2,japanese-reviewed-v6
+question-words.there,そこ,,soko,,,2,japanese-reviewed-v6
+question-words.a-little,少し,,sukoshi,,,2,japanese-reviewed-v6
+question-words.some,いくつか,,ikutsuka,,,2,japanese-reviewed-v6
+question-words.very,とても,,totemo,,,2,japanese-reviewed-v6
+question-words.too,〜すぎる,,sugiru,,,2,japanese-reviewed-v6
+question-words.also,〜も,,mo,,,2,japanese-reviewed-v6
+question-words.all-both,全部／両方,,zenbu / ryōhō,,,2,japanese-reviewed-v6

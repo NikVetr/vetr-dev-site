@@ -1,0 +1,24 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+hotel-basics.are-any-rooms-available,空室はありますか？,,kūshitsu wa arimasu ka?,,,2,japanese-reviewed-v6
+hotel-basics.there-are-two-of-us,二人です,,futari desu,,,2,japanese-reviewed-v6
+hotel-basics.i-have-a-reservation,予約しています,,yoyaku shiteimasu,,,2,japanese-reviewed-v6
+hotel-basics.is-wi-fi-free,Wi-Fiは無料ですか？,,wai-fai wa muryō desu ka?,,,2,japanese-reviewed-v6
+hotel-words.passport,パスポート,,pasupōto,,,2,japanese-reviewed-v6
+hotel-words.room-key-card,ルームキー,,rūmu kī,,,2,japanese-reviewed-v6
+hotel-words.check-in,チェックイン,,chekkuin,,,2,japanese-reviewed-v6
+hotel-words.check-out,チェックアウト,,chekkuauto,,,2,japanese-reviewed-v6
+hotel-words.luggage-storage,荷物預かり,,nimotsu azukari,,,2,japanese-reviewed-v6
+room-problems.there-is-a-problem-with-the-room,部屋に問題があります,,heya ni mondai ga arimasu,,,2,japanese-reviewed-v6
+room-problems.the-air-conditioning-is-broken,エアコンが壊れています,,eakon ga kowareteimasu,,,2,japanese-reviewed-v6
+room-problems.there-is-no-hot-water,お湯が出ません,,oyu ga demasen,,,2,japanese-reviewed-v6
+room-problems.can-i-change-rooms,部屋を変えられますか？,,heya o kaeraremasu ka?,,,2,japanese-reviewed-v6
+room-problems.the-room-is-too-noisy,部屋がうるさすぎます,,heya ga urusasugimasu,,,2,japanese-reviewed-v6
+hotel-basics.can-i-charge-my-phone,スマホを充電できますか？,,sumaho o jūden dekimasu ka?,,,2,japanese-reviewed-v6
+hotel-basics.i-would-like-a-non-smoking-room,禁煙室をお願いします,,kin'enshitsu o onegaishimasu,,,2,japanese-reviewed-v6
+hotel-basics.i-would-like-a-quiet-room,静かな部屋をお願いします,,shizuka na heya o onegaishimasu,,,2,japanese-reviewed-v6
+hotel-requests.another-towel-please,タオルをもう一枚お願いします,,taoru o mō ichimai onegaishimasu,,,2,japanese-reviewed-v6
+hotel-basics.is-there-a-washing-machine,洗濯機はありますか？,,sentakuki wa arimasu ka?,,,2,japanese-reviewed-v6
+hotel-requests.can-i-check-out-later,レイトチェックアウトできますか？,,reito chekkuauto dekimasu ka?,,,2,japanese-reviewed-v6
+hotel-requests.what-time-does-breakfast-start,朝食は何時からですか？,,chōshoku wa nanji kara desu ka?,,,2,japanese-reviewed-v6
+hotel-requests.can-i-store-my-luggage,荷物を預けられますか？,,nimotsu o azukeraremasu ka?,,,2,japanese-reviewed-v6
+hotel-requests.no-housekeeping,掃除は不要です,,sōji wa fuyō desu,,,2,japanese-reviewed-v6

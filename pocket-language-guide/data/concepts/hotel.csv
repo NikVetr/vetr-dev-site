@@ -19,3 +19,6 @@ room-problems.the-air-conditioning-is-broken,room-problems,entry,phrase,the-air-
 room-problems.there-is-no-hot-water,room-problems,entry,phrase,there-is-no-hot-water,3,0.473,room-problems.there-is-no-hot-water,0,0,neutral,
 room-problems.can-i-change-rooms,room-problems,entry,phrase,can-i-change-rooms,4,0.439,room-problems.can-i-change-rooms,0,0,neutral,
 room-problems.the-room-is-too-noisy,room-problems,entry,phrase,the-room-is-too-noisy,5,0.405,room-problems.the-room-is-too-noisy,0,0,neutral,
+hotel-basics.is-wi-fi-free,hotel-basics,entry,phrase,is-wi-fi-free,1004,0.646,hotel-basics.is-wi-fi-free,0,0,neutral,
+hotel-words.luggage-storage,hotel-words,ref,word,luggage-storage,1005,0.544,hotel-words.luggage-storage,0,0,neutral,
+hotel-requests.another-towel-please,hotel-requests,entry,phrase,another-towel-please,1004,0.493,hotel-requests.another-towel-please,0,0,neutral,

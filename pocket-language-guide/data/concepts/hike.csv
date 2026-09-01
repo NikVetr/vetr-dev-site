@@ -47,3 +47,5 @@ trail-landmarks.elevation,trail-landmarks,ref,word,elevation,6,0.338,trail-landm
 trail-landmarks.sunset,trail-landmarks,ref,word,sunset,7,0.325,trail-landmarks.sunset,0,0,neutral,
 trail-landmarks.restroom,trail-landmarks,ref,word,restroom,8,0.312,trail-landmarks.restroom,0,0,neutral,
 trail-landmarks.water-point,trail-landmarks,ref,word,water-point,9,0.300,trail-landmarks.water-point,0,0,neutral,
+hiking-parks.is-this-trail-suitable-for-beginners,hiking-parks,entry,phrase,is-this-trail-suitable-for-beginners,1006,0.408,hiking-parks.is-this-trail-suitable-for-beginners,0,0,neutral,
+trail-transport.how-long-is-the-wait,trail-transport,refphrase,phrase,how-long-is-the-wait,1001,0.357,trail-transport.how-long-is-the-wait,0,0,neutral,

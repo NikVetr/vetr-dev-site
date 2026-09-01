@@ -2,7 +2,7 @@ bcp47,endonym,exonym_en,script,script_alt,romanizations,badge,status,regions,spe
 en,English,English,Latn,,,Aa,ready,GB;US;CA;AU;NZ;IE;ZA;IN,I speak
 es,Español,Spanish,Latn,,,Áé,draft,ES;MX;AR;CO;CL;PE,Hablo
 zh-Hans,简体中文,Chinese (Simplified),Hans,Hant,pinyin,中,ready,CN;SG;MY,我说
-ja,日本語,Japanese,Jpan,,hepburn;kunrei,あ,draft,JP,話せる言語
+ja,日本語,Japanese,Jpan,,hepburn;kunrei,あ,ready,JP,話せる言語
 ar,العربية,Arabic,Arab,,dinal31635,ع,draft,SA;EG;AE;MA;JO;IQ,أتحدث
 fr,Français,French,Latn,,,Àç,planned,FR;CA;BE;CH;SN;CI,Je parle
 de,Deutsch,German,Latn,,,Äß,planned,DE;AT;CH,Ich spreche

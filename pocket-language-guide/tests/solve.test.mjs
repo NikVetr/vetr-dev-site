@@ -136,14 +136,40 @@ test('a fixed face count is honoured rather than overridden', async () => {
   assert.equal(plan.faces.length, 6);
 });
 
-test('too little room is reported, not silently truncated', async () => {
+test('a pinned face count with too little room is reported, not truncated', async () => {
   const cramped = {
     ...spec,
-    geometry: { ...spec.geometry, faces: 1, columns: 2 },
+    autoFaces: false,
+    geometry: { ...spec.geometry, faces: 2, columns: 2 },
     scale: 0,
   };
   const { plan } = await buildSheet(ctx, cramped);
   const codes = plan.warnings.map((w) => w.code);
   assert.ok(codes.includes('no-fit') || codes.includes('break-failed'),
     `expected a failure warning, got ${codes.join(', ')}`);
+  const fixes = plan.warnings.flatMap((w) => w.fixes ?? []).map((f) => f.label);
+  assert.ok(fixes.length > 0, 'a failure should come with something to do about it');
+  assert.ok(fixes.some((l) => /page count follow/.test(l)),
+    `expected an auto-faces remedy, got ${fixes.join(' | ')}`);
+});
+
+test('auto keeps the card\'s natural face count unless there is a reason to move', async () => {
+  // Both reference sheets settled on four faces and let the type find its size.
+  for (const [target, source] of [['zh-Hans', 'en'], ['ja', 'en'], ['en', 'ja']]) {
+    const { plan } = await buildSheet(ctx, { ...(await referenceSpec(target, source)), scale: 0 });
+    assert.equal(plan.faces.length, 4, `${target} <- ${source}`);
+    assert.deepEqual(plan.warnings.filter((w) => w.severity === 'error'), []);
+  }
+});
+
+test('each field shrinks toward its own floor, not in lockstep', async () => {
+  // The Japanese sheet only fits four faces because its Latin respellings go
+  // smaller than its Japanese does -- which a single multiplier cannot express.
+  const { plan } = await buildSheet(ctx, { ...(await referenceSpec('ja', 'en')), scale: 0 });
+  const sizes = plan.faces.flatMap((f) => f.runs.map((r) => ({ font: r.fontId, size: r.size })));
+  const latin = Math.min(...sizes.filter((s) => s.font.startsWith('latin')).map((s) => s.size));
+  const japanese = Math.min(...sizes.filter((s) => s.font.startsWith('cjk')).map((s) => s.size));
+  assert.ok(latin < japanese, `latin ${latin.toFixed(2)}pt should go below japanese ${japanese.toFixed(2)}pt`);
+  assert.ok(latin >= 4.4 - 0.01, `latin ${latin.toFixed(2)}pt below its 4.4pt floor`);
+  assert.ok(japanese >= 5.0 - 0.01, `japanese ${japanese.toFixed(2)}pt below its 5.0pt floor`);
 });

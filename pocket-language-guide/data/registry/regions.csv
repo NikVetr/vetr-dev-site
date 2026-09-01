@@ -13,7 +13,7 @@ DE,Germany,112 fire and ambulance;110 police,EUR,2,EU-wide 112,2026-08-31
 AT,Austria,112 all services,EUR,2,EU-wide 112,2026-08-31
 PT,Portugal,112 all services,EUR,2,EU-wide 112,2026-08-31
 CY,Cyprus,112 all services,EUR,2,EU-wide 112,2026-08-31
-JP,Japan,110 police;119 fire and ambulance,JPY,1,needs a fluent reviewer,
+JP,Japan,110 police;119 fire and ambulance,JPY,2,"JNTO visitor-hotline guidance, via japanese-reviewed-v6",2026-08-31
 KR,South Korea,112 police;119 fire and ambulance,KRW,1,needs a fluent reviewer,
 SG,Singapore,999 police;995 fire and ambulance,SGD,1,needs a fluent reviewer,
 MY,Malaysia,999 all services,MYR,1,needs a fluent reviewer,

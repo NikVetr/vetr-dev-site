@@ -1,0 +1,16 @@
+{
+  "target": "ja",
+  "source": "zh-Hans",
+  "scale": 1.1176,
+  "faces": 4,
+  "pageW": 504,
+  "pageH": 360,
+  "items": 312,
+  "warnings": [
+    {
+      "code": "loose-columns",
+      "severity": "info",
+      "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+    }
+  ]
+}

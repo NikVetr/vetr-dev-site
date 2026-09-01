@@ -1,0 +1,50 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+hiking-parks.is-this-the-way-to,これは{}への道ですか？,,kore wa {} e no michi desu ka?,,,2,japanese-reviewed-v6
+hiking-parks.where-is-the-trailhead,登山口はどこですか？,,tozanguchi wa doko desu ka?,,,2,japanese-reviewed-v6
+hiking-parks.how-long-to-the-summit,山頂までどのくらいですか？,,sanchō made dono kurai desu ka?,,,2,japanese-reviewed-v6
+hiking-parks.how-long-to-the-viewpoint,展望台までどのくらいですか？,,tenbōdai made dono kurai desu ka?,,,2,japanese-reviewed-v6
+hiking-parks.which-route-is-easier,どのルートが楽ですか？,,dono rūto ga raku desu ka?,,,2,japanese-reviewed-v6
+hiking-parks.is-this-trail-suitable-for-beginners,この登山道は初心者向けですか？,,kono tozandō wa shoshinsha muke desu ka?,,,2,japanese-reviewed-v6
+trail-words.trail,登山道,,tozandō,,,2,japanese-reviewed-v6
+trail-words.trailhead,登山口,,tozanguchi,,,2,japanese-reviewed-v6
+trail-words.summit,山頂,,sanchō,,,2,japanese-reviewed-v6
+trail-words.viewpoint,展望台,,tenbōdai,,,2,japanese-reviewed-v6
+trail-words.cableway,ロープウェイ,,rōpuwei,,,2,japanese-reviewed-v6
+trail-words.shuttle-bus,シャトルバス,,shatoru basu,,,2,japanese-reviewed-v6
+trail-words.park-shuttle,園内バス,,ennai basu,,,2,japanese-reviewed-v6
+trail-words.steps,階段,,kaidan,,,2,japanese-reviewed-v6
+trail-words.up-uphill,上り,,nobori,,,2,japanese-reviewed-v6
+trail-words.down-downhill,下り,,kudari,,,2,japanese-reviewed-v6
+trail-words.one-way,片道,,katamichi,,,2,japanese-reviewed-v6
+trail-words.round-trip,往復,,ōfuku,,,2,japanese-reviewed-v6
+trail-transport.how-long-is-the-wait,待ち時間はどのくらいですか？,,machijikan wa dono kurai desu ka?,,,2,japanese-reviewed-v6
+trail-transport.what-time-is-the-last-shuttle,最終シャトルは何時ですか？,,saishū shatoru wa nanji desu ka?,,,2,japanese-reviewed-v6
+trail-transport.when-does-the-cableway-stop,ロープウェイは何時までですか？,,rōpuwei wa nanji made desu ka?,,,2,japanese-reviewed-v6
+trail-transport.where-can-we-buy-water,水はどこで買えますか？,,mizu wa doko de kaemasu ka?,,,2,japanese-reviewed-v6
+trail-transport.where-can-we-refill-water,給水所はどこですか？,,kyūsuijo wa doko desu ka?,,,2,japanese-reviewed-v6
+trail-transport.is-there-cell-signal-here,ここは電波が入りますか？,,koko wa denpa ga hairimasu ka?,,,2,japanese-reviewed-v6
+trail-transport.do-you-have-a-map,地図はありますか？,,chizu wa arimasu ka?,,,2,japanese-reviewed-v6
+trail-warnings.open,通行可,,tsūkōka,,,2,japanese-reviewed-v6
+trail-warnings.closed,通行止め,,tsūkōdome,,,2,japanese-reviewed-v6
+trail-warnings.maintenance,整備中,,seibichū,,,2,japanese-reviewed-v6
+trail-warnings.steep-slope,急坂,,kyūzaka,,,2,japanese-reviewed-v6
+trail-warnings.caution-slippery,滑りやすい,,suberiyasui,,,2,japanese-reviewed-v6
+trail-warnings.danger,危険,,kiken,,,2,japanese-reviewed-v6
+trail-warnings.beware-falling-rocks,落石注意,,rakuseki chūi,,,2,japanese-reviewed-v6
+trail-warnings.first-aid-station,救護所,,kyūgosho,,,2,japanese-reviewed-v6
+trail-warnings.service-suspended,運休,,unkyū,,,2,japanese-reviewed-v6
+trail-conditions.how-long-is-the-full-route,全行程はどのくらいですか？,,zen kōtei wa dono kurai desu ka?,,,2,japanese-reviewed-v6
+trail-conditions.can-we-return-the-same-way,同じ道で戻れますか？,,onaji michi de modoremasu ka?,,,2,japanese-reviewed-v6
+trail-conditions.can-we-return-before-dark,暗くなる前に戻れますか？,,kuraku naru mae ni modoremasu ka?,,,2,japanese-reviewed-v6
+trail-conditions.is-the-trail-open,この登山道は開いていますか？,,kono tozandō wa aiteimasu ka?,,,2,japanese-reviewed-v6
+trail-conditions.is-the-route-steep,この道は急ですか？,,kono michi wa kyū desu ka?,,,2,japanese-reviewed-v6
+trail-conditions.is-the-path-slippery,道は滑りやすいですか？,,michi wa suberiyasui desu ka?,,,2,japanese-reviewed-v6
+trail-landmarks.trail-marker,道標,,michishirube,,,2,japanese-reviewed-v6
+trail-landmarks.fork-junction,分岐,,bunki,,,2,japanese-reviewed-v6
+trail-landmarks.boardwalk-cliff-path,木道／桟道,,mokudō / sandō,,,2,japanese-reviewed-v6
+trail-landmarks.start,起点,,kiten,,,2,japanese-reviewed-v6
+trail-landmarks.end,終点,,shūten,,,2,japanese-reviewed-v6
+trail-landmarks.elevation,標高,,hyōkō,,,2,japanese-reviewed-v6
+trail-landmarks.sunset,日没,,nichibotsu,,,2,japanese-reviewed-v6
+trail-landmarks.restroom,トイレ,,toire,,,2,japanese-reviewed-v6
+trail-landmarks.water-point,給水所,,kyūsuijo,,,2,japanese-reviewed-v6

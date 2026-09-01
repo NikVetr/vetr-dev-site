@@ -14,3 +14,6 @@ color-size-returns.can-i-return-it,color-size-returns,entry,phrase,can-i-return-
 color-size-returns.can-i-exchange-it,color-size-returns,entry,phrase,can-i-exchange-it,5,0.440,color-size-returns.can-i-exchange-it,0,0,neutral,
 color-size-returns.do-you-have-a-bag,color-size-returns,entry,phrase,do-you-have-a-bag,6,0.413,color-size-returns.do-you-have-a-bag,0,0,neutral,
 tax-refund.can-i-get-a-tax-refund,tax-refund,entry,phrase,can-i-get-a-tax-refund,1,0.400,tax-refund.can-i-get-a-tax-refund,0,0,neutral,
+tax-refund.is-tax-free-shopping-available,tax-refund,entry,phrase,is-tax-free-shopping-available,1001,0.340,tax-refund.is-tax-free-shopping-available,0,0,neutral,
+shopping.is-there-a-discount,shopping,entry,phrase,is-there-a-discount,1004,0.629,shopping.is-there-a-discount,0,0,neutral,
+payment-receipt.please-write-the-number,payment-receipt,refphrase,phrase,please-write-the-number,1005,0.697,payment-receipt.please-write-the-number,0,0,neutral,

@@ -18,3 +18,7 @@ numbers-money.b-n,numbers-money,num,number,item,16,0.760,numbers-money.misc,15,0
 numbers-money.yu-n,numbers-money,num,number,item,17,0.747,numbers-money.misc,16,0,neutral,
 numbers-money.ku-i,numbers-money,num,number,item,18,0.733,numbers-money.misc,17,0,neutral,
 numbers-money.number-and-classifier-notes,numbers-money,note,note,number-and-classifier-notes,19,0.720,numbers-money.number-and-classifier-notes,0,0,neutral,
+numbers-money.2-items,numbers-money,num,number,2-items,1004,0.816,numbers-money.2-items,0,0,neutral,
+numbers-money.yen,numbers-money,num,number,yen,1017,0.816,numbers-money.yen,0,0,neutral,
+numbers-money.yen-symbol,numbers-money,num,number,yen-symbol,1018,0.816,numbers-money.yen,0,0,neutral,
+numbers-money.number-and-classifier-notes-2,numbers-money,note,note,number-and-classifier-notes,1019,0.816,numbers-money.number-and-classifier-notes,0,0,neutral,

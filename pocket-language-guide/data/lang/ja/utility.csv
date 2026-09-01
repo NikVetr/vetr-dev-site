@@ -1,0 +1,6 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,{}に行きたいです,,{} ni ikitai desu,,,2,japanese-reviewed-v6
+utility-templates.please-give-me,{}をください,,{} o kudasai,,,2,japanese-reviewed-v6
+utility-templates.may-i,{}してもいいですか？,,{} shite mo ii desu ka?,,,2,japanese-reviewed-v6
+utility-templates.please-do-not-add,{}を入れないでください,,{} o irenaide kudasai,,,2,japanese-reviewed-v6
+utility-templates.do-you-have,{}はありますか？,,{} wa arimasu ka?,,,2,japanese-reviewed-v6

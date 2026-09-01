@@ -1,18 +1,24 @@
 // The reference sheet's SheetSpec, shared by the dev scripts and the tests.
 import { readFile } from 'node:fs/promises';
+import { parseTable } from '../core/csv.js';
 
 /** @returns {Promise<import('../core/types.js').SheetSpec>} */
 export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides = {}) {
   const presets = JSON.parse(await readFile('data/presets.json', 'utf8'));
+  const languages = parseTable(await readFile('data/registry/languages.csv', 'utf8'));
+  const lang = languages.find((l) => l.bcp47 === target);
+  if (!lang) throw new Error(`unknown language ${target}`);
   return {
     target,
     source,
     accent: `${source}-US`,
-    romanization: 'pinyin',
+    // Derived, not hardcoded: pinning this to Pinyin silently dropped Hepburn from
+    // every Japanese sheet.
+    romanization: (lang.romanizations || '').split(';').filter(Boolean)[0] ?? '',
     register: 'neutral',
-    // Overridden by callers that know better; the app derives it from the
-    // target language's first listed region.
-    region: target === 'zh-Hans' ? 'CN' : '',
+    // The country a language is most associated with, which is where its local
+    // emergency numbers come from.
+    region: (lang.regions || '').split(';').filter(Boolean)[0] ?? '',
     fieldSet: ['script', 'roman', 'gloss', 'respell', 'numeral'],
     // faces: 0 in the preset means auto, which is what the app defaults to.
     geometry: { ...presets.geometry['card-7x5-4col'] },
@@ -27,6 +33,7 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     themeId: 'latex-reference',
     typeface: 'sans',
     inkMode: 'full',
+    autoFaces: true,
     density: 0.7,
     arrangement: 'two-column',
     // 0 means fit: with faces on auto too, that resolves to the fewest pairs of

@@ -1,0 +1,24 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+dietary-needs.no-meat,肉なしでお願いします,,niku nashi de onegaishimasu,,,2,japanese-reviewed-v6
+dietary-needs.no-eggs,卵なしでお願いします,,tamago nashi de onegaishimasu,,,2,japanese-reviewed-v6
+dietary-needs.not-spicy,辛くしないでください,,karaku shinaide kudasai,,,2,japanese-reviewed-v6
+dietary-needs.less-spicy,辛さ控えめでお願いします,,karasa hikaeme de onegaishimasu,,,2,japanese-reviewed-v6
+dietary-needs.no-peanuts,ピーナッツなしでお願いします,,pīnattsu nashi de onegaishimasu,,,2,japanese-reviewed-v6
+dietary-needs.no-nuts,ナッツなしでお願いします,,nattsu nashi de onegaishimasu,,,2,japanese-reviewed-v6
+dietary-needs.no-seafood,海鮮なしでお願いします,,kaisen nashi de onegaishimasu,,,2,japanese-reviewed-v6
+dietary-needs.does-it-contain-fish-stock,魚のだしは入っていますか？,,sakana no dashi wa haitteimasu ka?,,,2,japanese-reviewed-v6
+dietary-needs.i-am-vegetarian,私はベジタリアンです,,watashi wa bejitarian desu,,,2,japanese-reviewed-v6
+dietary-needs.i-am-vegan,私はヴィーガンです,,watashi wa vīgan desu,,,2,japanese-reviewed-v6
+dietary-needs.i-do-not-eat,{}は食べません,,{} wa tabemasen,,,2,japanese-reviewed-v6
+dietary-needs.i-am-allergic-to,{}にアレルギーがあります,,{} ni arerugī ga arimasu,,,2,japanese-reviewed-v6
+dietary-needs.i-have-a-severe-allergy-to,{}に重いアレルギーがあります,,{} ni omoi arerugī ga arimasu,,,2,japanese-reviewed-v6
+food-ordering.table-for-two,二人です,,futari desu,,,2,japanese-reviewed-v6
+food-ordering.is-a-table-available,席はありますか？,,seki wa arimasu ka?,,,2,japanese-reviewed-v6
+food-ordering.menu-please,メニューをお願いします,,menyū o onegaishimasu,,,2,japanese-reviewed-v6
+food-ordering.what-do-you-recommend,おすすめは何ですか？,,osusume wa nan desu ka?,,,2,japanese-reviewed-v6
+food-ordering.i-want-this,これをお願いします,,kore o onegaishimasu,,,2,japanese-reviewed-v6
+food-ordering.water-please,お水をお願いします,,omizu o onegaishimasu,,,2,japanese-reviewed-v6
+food-ordering.to-go-please,持ち帰りでお願いします,,mochikaeri de onegaishimasu,,,2,japanese-reviewed-v6
+food-ordering.check-please,お会計をお願いします,,okaikei o onegaishimasu,,,2,japanese-reviewed-v6
+food-ordering.does-it-contain,{}が入っていますか？,,{} ga haitteimasu ka?,,,2,japanese-reviewed-v6
+food-ordering.can-a-vegetarian-eat-this,これはベジタリアンでも食べられますか？,,kore wa bejitarian demo taberaremasu ka?,,,2,japanese-reviewed-v6

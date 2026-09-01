@@ -30,7 +30,7 @@ test.describe('adding your own term', () => {
     await page.goto(STUDIO);
     await page.evaluate(() => localStorage.clear());
     await page.reload();
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
   }
 
   test('reaches the tree and the sheet, and survives a reload', async ({ page }) => {
@@ -42,7 +42,7 @@ test.describe('adding your own term', () => {
     await page.fill('#add-gloss', 'I am staying at the Beijing Hotel');
     await page.getByRole('button', { name: 'Add to the sheet' }).click();
 
-    await expect(page.locator('#counts')).toContainText('359 of 359');
+    await expect(page.locator('#counts')).toContainText('359 of 413');
     const mine = page.locator('.items li', { hasText: 'Beijing Hotel' });
     await expect(mine).toHaveCount(1);
     await expect(mine.locator('.tag.mine')).toBeVisible();
@@ -50,7 +50,7 @@ test.describe('adding your own term', () => {
 
     // Kept in local storage, so a reload does not lose it.
     await page.reload();
-    await expect(page.locator('#counts')).toContainText('359 of 359');
+    await expect(page.locator('#counts')).toContainText('359 of 413');
     await expect(page.locator('.items li', { hasText: 'Beijing Hotel' })).toHaveCount(1);
   });
 
@@ -60,7 +60,7 @@ test.describe('adding your own term', () => {
     await page.fill('#add-script', '只有一边');
     await page.getByRole('button', { name: 'Add to the sheet' }).click();
     await expect(page.locator('details.add-term p')).toContainText('Both language fields');
-    await expect(page.locator('#counts')).toContainText('358 of 359');
+    await expect(page.locator('#counts')).toContainText('358 of 413');
   });
 });
 

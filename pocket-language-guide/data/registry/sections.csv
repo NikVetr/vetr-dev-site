@@ -9,7 +9,7 @@ time-scheduling,time,stay,1,clock,Time + scheduling,70,universal,core;transit,0.
 time-words,time,stay,1,hourglass,Time words,80,universal,core,0.78
 days-of-week,time,stay,1,calendar-days,Days of the week,90,universal,core,0.62
 months,time,stay,1,calendar,Months,100,universal,core,0.50
-pronouns-verbs,core,comm,1,languages,Pronouns + core verbs,110,universal,core,0.92
+pronouns-verbs,core,comm,1,languages,Core words + patterns,110,universal,core,0.92
 question-words,core,comm,1,circle-help,Question + small words,120,universal,core,0.90
 payment-receipt,shop,money,3,credit-card,Payment + receipt,130,universal,shopping;food,0.82
 numbers-money,numbers,money,1,arrow-down-0-1,Numbers + money,140,universal,core;shopping,0.96

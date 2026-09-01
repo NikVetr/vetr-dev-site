@@ -1,0 +1,366 @@
+concept_id,respell
+social-basics.hello,kohn-nih-chih-wah
+social-basics.good-morning,oh-hah-yohh goh-zah-i-mahss
+social-basics.good-evening,kohm-bahn-wah
+social-basics.good-night,oh-yah-su-mih nah-sah-i
+social-basics.goodbye,sah-yohh-nah-rah
+social-basics.thank-you,ah-rih-gah-tohh goh-zah-i-mahss
+social-basics.you-are-welcome,dohh ih-tah-shih-mah-shih-teh
+social-basics.excuse-me-sorry,su-mih-mah-sehn
+social-basics.sorry,goh-mehn nah-sah-i
+social-basics.okay-fine-i-am-okay,dah-i-johh-bu dess
+social-basics.i-do-not-know,shih-rih-mah-sehn
+quick-responses.please-go-ahead,dohh-zoh
+quick-responses.yes-right,hah-i
+quick-responses.no-not,ee-eh
+quick-responses.can-possible,deh-kih-mahss
+quick-responses.cannot-not-possible,deh-kih-mah-sehn
+quick-responses.okay-fine,dah-i-johh-bu dess
+quick-responses.no-good-not-allowed-will-not-work,dah-meh dess
+days-of-week.monday,geh-tsu-yohh-bih
+days-of-week.tuesday,kah-yohh-bih
+days-of-week.wednesday,su-i-yohh-bih
+days-of-week.thursday,moh-ku-yohh-bih
+days-of-week.friday,kihn-yohh-bih
+days-of-week.saturday,doh-yohh-bih
+days-of-week.sunday,nih-chih-yohh-bih
+communication.i-do-not-speak-japanese,nih-hohn-goh wah hah-nah-seh-mah-sehn
+communication.i-speak-only-a-little-japanese,nih-hohn-goh wah su-koh-shih dah-keh hah-nah-seh-mahss
+communication.do-you-speak-english,ehh-goh oh hah-nah-seh-mahss kah?
+communication.please-speak-more-slowly,mot-toh yuk-ku-rih hah-nah-shih-teh ku-dah-sah-i
+communication.i-cannot-make-out-what-you-are-saying,kih-kih-toh-reh-mah-sehn
+communication.i-do-not-understand,wah-kah-rih-mah-sehn
+communication.i-cannot-read-it,yoh-meh-mah-sehn
+communication.please-say-it-again,mohh ih-chih-doh it-teh ku-dah-sah-i
+communication.please-write-it-down,kah-i-teh ku-dah-sah-i
+communication.please-wait-a-moment,su-koh-shih mat-teh ku-dah-sah-i
+communication.can-you-help-me,teh-tsu-dat-teh moh-rah-eh-mahss kah?
+communication.please-show-me-the-japanese-text,nih-hohn-goh noh bun oh mih-seh-teh ku-dah-sah-i
+communication.please-write-it-in-roman-letters,rohh-mah-jih deh kah-i-teh ku-dah-sah-i
+months.january,ih-chih-gah-tsu
+months.february,nih-gah-tsu
+months.march,sahn-gah-tsu
+months.april,shih-gah-tsu
+months.may,goh-gah-tsu
+months.june,roh-ku-gah-tsu
+months.july,shih-chih-gah-tsu
+months.august,hah-chih-gah-tsu
+months.september,ku-gah-tsu
+months.october,joo-gah-tsu
+months.november,joo-i-chih-gah-tsu
+months.december,joo-nih-gah-tsu
+phone-translation.i-am-using-phone-translation,su-mah-hoh deh hohn-yah-ku shih-teh-i-mahss
+phone-translation.please-speak-toward-the-phone,su-mah-hoh nih mu-kat-teh hah-nah-shih-teh ku-dah-sah-i
+phone-translation.one-sentence-at-a-time-please,ih-chih-bun zu-tsu hah-nah-shih-teh ku-dah-sah-i
+phone-translation.please-type-it-and-show-me,nyoo-ryoh-ku shih-teh mih-seh-teh ku-dah-sah-i
+phone-translation.please-write-the-place-name-in-japanese,chih-mehh oh nih-hohn-goh deh kah-i-teh ku-dah-sah-i
+phone-translation.please-look-at-the-screen,gah-mehn oh mih-teh ku-dah-sah-i
+introductions.my-name-is,nah-mah-eh wah {} dess
+introductions.nice-to-meet-you,hah-jih-meh-mah-shih-teh
+introductions.what-is-your-name,oh-nah-mah-eh wah nahn dess kah?
+introductions.we-are-traveling-together,ish-shoh nih ryoh-kohh shih-teh-i-mahss
+introductions.this-is-my-friend,koh-chih-rah wah wah-tah-shih noh toh-moh-dah-chih dess
+time-words.today,kyohh
+time-words.tomorrow,ah-shih-tah
+time-words.yesterday,kih-nohh
+time-words.this-week,kohn-shoo
+time-words.next-week,rah-i-shoo
+time-words.morning,ah-sah
+time-words.afternoon,goh-goh
+time-words.evening,yoo-gah-tah
+time-words.night,yoh-ru
+time-words.spring,hah-ru
+time-words.summer,nah-tsu
+time-words.fall,ah-kih
+time-words.winter,fu-yu
+phone-text-power.please-use-simple-words,kahn-tahn nah koh-toh-bah deh hah-nah-shih-teh ku-dah-sah-i
+phone-text-power.my-phone-battery-is-low,su-mah-hoh noh joo-dehn gah mohh-su-gu kih-reh-mahss
+phone-text-power.do-you-have-a-power-bank,moh-bah-i-ru bat-teh-ree wah ah-rih-mahss kah?
+phone-text-power.may-i-charge-my-phone-here,koh-koh deh su-mah-hoh oh joo-dehn shih-teh moh ee dess kah?
+phone-text-power.the-translation-may-be-inaccurate,hohn-yah-ku gah sehh-kah-ku deh nah-i kah-moh shih-reh-mah-sehn
+phone-text-power.please-confirm,kah-ku-nihn shih-teh ku-dah-sah-i
+time-scheduling.what-time-is-it,ih-mah nahn-jih dess kah?
+time-scheduling.how-long-does-it-take,nahm-pun kah-kah-rih-mahss kah?
+time-scheduling.what-time-should-we-meet,nahn-jih nih ah-i-mah-shohh kah?
+time-scheduling.can-we-change-the-time,jih-kahn oh kah-eh-rah-reh-mahss kah?
+time-scheduling.when-is-convenient,ih-tsu gah tsu-gohh ee dess kah?
+time-scheduling.what-is-today-s-date,kyohh wah nahn-nih-chih dess kah?
+time-scheduling.what-day-is-it-today,kyohh wah nahn-yohh-bih dess kah?
+time-scheduling.what-time-does-it-open,nahn-jih nih ah-kih-mahss kah?
+time-scheduling.what-time-does-it-close,nahn-jih nih shih-mah-rih-mahss kah?
+dietary-needs.no-meat,nih-ku nah-shih deh oh-neh-gah-i-shih-mahss
+dietary-needs.no-eggs,tah-mah-goh nah-shih deh oh-neh-gah-i-shih-mahss
+dietary-needs.not-spicy,kah-rah-ku shih-nah-i-deh ku-dah-sah-i
+dietary-needs.less-spicy,kah-rah-sah hih-kah-eh-meh deh oh-neh-gah-i-shih-mahss
+dietary-needs.no-peanuts,pee-nat-tsu nah-shih deh oh-neh-gah-i-shih-mahss
+dietary-needs.no-nuts,nat-tsu nah-shih deh oh-neh-gah-i-shih-mahss
+dietary-needs.no-seafood,kah-i-sehn nah-shih deh oh-neh-gah-i-shih-mahss
+dietary-needs.does-it-contain-fish-stock,sah-kah-nah noh dah-shih wah hah-it-teh-i-mahss kah?
+dietary-needs.i-am-vegetarian,wah-tah-shih wah beh-jih-tah-rih-ahn dess
+dietary-needs.i-am-vegan,wah-tah-shih wah vee-gahn dess
+dietary-needs.i-do-not-eat,{} wah tah-beh-mah-sehn
+dietary-needs.i-am-allergic-to,{} nih ah-reh-ru-gee gah ah-rih-mahss
+dietary-needs.i-have-a-severe-allergy-to,{} nih oh-moh-i ah-reh-ru-gee gah ah-rih-mahss
+pronouns-verbs.i-me,wah-tah-shih
+pronouns-verbs.we-us,wah-tah-shih-tah-chih
+pronouns-verbs.there-is-have,ah-rih-mahss
+pronouns-verbs.there-is-not-do-not-have,ah-rih-mah-sehn
+pronouns-verbs.want-to-verb,tah-i dess
+pronouns-verbs.want-thing,gah hoh-shee dess
+pronouns-verbs.need-thing,gah hih-tsu-yohh dess
+pronouns-verbs.looking-for-thing,oh sah-gah-shih-teh-i-mahss
+pronouns-verbs.go,ih-kih-mahss
+pronouns-verbs.come,kih-mahss
+pronouns-verbs.buy,kah-i-mahss
+pronouns-verbs.like,su-kih dess
+food-ordering.table-for-two,fu-tah-rih dess
+food-ordering.is-a-table-available,seh-kih wah ah-rih-mahss kah?
+food-ordering.menu-please,meh-nyoo oh oh-neh-gah-i-shih-mahss
+food-ordering.what-do-you-recommend,oh-su-su-meh wah nahn dess kah?
+food-ordering.i-want-this,koh-reh oh oh-neh-gah-i-shih-mahss
+food-ordering.water-please,oh-mih-zu oh oh-neh-gah-i-shih-mahss
+food-ordering.to-go-please,moh-chih-kah-eh-rih deh oh-neh-gah-i-shih-mahss
+food-ordering.check-please,oh-kah-i-kehh oh oh-neh-gah-i-shih-mahss
+food-ordering.does-it-contain,{} gah hah-it-teh-i-mahss kah?
+food-ordering.can-a-vegetarian-eat-this,koh-reh wah beh-jih-tah-rih-ahn deh-moh tah-beh-rah-reh-mahss kah?
+question-words.what,nah-nih
+question-words.where,doh-koh
+question-words.who,dah-reh
+question-words.which-one,doh-reh
+question-words.when,ih-tsu
+question-words.how,dohh
+question-words.how-much-what-price,ih-ku-rah
+question-words.how-many,ih-ku-tsu
+question-words.why,nah-zeh
+question-words.this,koh-reh
+question-words.that,soh-reh
+question-words.here,koh-koh
+question-words.there,soh-koh
+question-words.a-little,su-koh-shih
+question-words.some,ih-ku-tsu-kah
+question-words.very,toh-teh-moh
+question-words.too,su-gih-ru
+question-words.also,moh
+question-words.all-both,zehm-bu / ryohh-hohh
+tax-refund.is-tax-free-shopping-available,mehn-zehh deh-kih-mahss kah?
+numbers-money.l-ng,rehh
+numbers-money.y,ih-chih
+numbers-money.r,nih
+numbers-money.2-items,fu-tah-tsu
+numbers-money.s-n,sahn
+numbers-money.s,yohn
+numbers-money.w,goh
+numbers-money.li,roh-ku
+numbers-money.q,nah-nah
+numbers-money.b,hah-chih
+numbers-money.ji,kyoo
+numbers-money.sh,joo
+numbers-money.y-b-i,hyah-ku
+numbers-money.y-qi-n,sehn
+numbers-money.y-w-n,ih-chih-mahn
+numbers-money.b-n,hahm-bun
+numbers-money.yen,ehn
+numbers-money.yen-symbol,ehn
+utility-templates.i-want-to-go-to,{} nih ih-kih-tah-i dess
+utility-templates.please-give-me,{} oh ku-dah-sah-i
+utility-templates.may-i,{} shih-teh moh ee dess kah?
+utility-templates.please-do-not-add,{} oh ih-reh-nah-i-deh ku-dah-sah-i
+utility-templates.do-you-have,{} wah ah-rih-mahss kah?
+hotel-basics.are-any-rooms-available,koo-shih-tsu wah ah-rih-mahss kah?
+hotel-basics.there-are-two-of-us,fu-tah-rih dess
+hotel-basics.i-have-a-reservation,yoh-yah-ku shih-teh-i-mahss
+hotel-basics.is-wi-fi-free,wah-i-fah-i wah mu-ryohh dess kah?
+shopping.i-am-just-looking,mih-teh-i-ru dah-keh dess
+shopping.how-much-is-this,koh-reh wah ih-ku-rah dess kah?
+shopping.that-is-too-expensive,tah-kah-su-gih-mahss
+shopping.is-there-a-discount,wah-rih-bih-kih wah ah-rih-mahss kah?
+color-size-returns.do-you-have-another-color,beh-tsu noh ih-roh wah ah-rih-mahss kah?
+color-size-returns.do-you-have-another-size,beh-tsu noh sah-i-zu wah ah-rih-mahss kah?
+color-size-returns.may-i-try-it-on,shih-chah-ku shih-teh moh ee dess kah?
+color-size-returns.can-i-return-it,hehm-pihn deh-kih-mahss kah?
+color-size-returns.can-i-exchange-it,kohh-kahn deh-kih-mahss kah?
+color-size-returns.do-you-have-a-bag,fu-ku-roh wah ah-rih-mahss kah?
+payment-receipt.pay-by-card,kaah-doh deh hah-rah-eh-mahss kah?
+payment-receipt.pay-cash,gehn-kihn deh hah-rah-eh-mahss kah?
+payment-receipt.pay-by-qr-code,kyoo aah-ru kohh-doh deh hah-rah-eh-mahss kah?
+payment-receipt.a-receipt-please,reh-shee-toh oh ku-dah-sah-i
+payment-receipt.please-write-the-number,soo-jih oh kah-i-teh ku-dah-sah-i
+hotel-words.passport,pah-su-pohh-toh
+hotel-words.room-key-card,roo-mu kee
+hotel-words.check-in,chek-ku-in
+hotel-words.check-out,chek-ku-ah-u-toh
+hotel-words.luggage-storage,nih-moh-tsu ah-zu-kah-rih
+transit-rides.two-tickets,kip-pu oh nih-mah-i ku-dah-sah-i
+transit-rides.can-i-use-this-ticket,koh-noh kip-pu deh noh-reh-mahss kah?
+transit-rides.where-is-the-subway-station,chih-kah-teh-tsu noh eh-kih wah doh-koh dess kah?
+transit-rides.does-this-bus-train-go-to,koh-noh bah-su / dehn-shah wah {} nih ih-kih-mahss kah?
+transit-rides.what-is-the-next-stop,tsu-gih noh eh-kih wah doh-koh dess kah?
+transit-rides.please-tell-me-where-to-get-off,doh-koh deh oh-rih-ru kah oh-shih-eh-teh ku-dah-sah-i
+transit-rides.is-this-direct,koh-reh wah choh-ku-tsoo dess kah?
+transit-rides.do-i-need-to-transfer,noh-rih-kah-eh gah hih-tsu-yohh dess kah?
+transit-rides.is-it-delayed,oh-ku-reh-teh-i-mahss kah?
+transit-rides.i-am-in-a-hurry,ih-soh-i-deh-i-mahss
+transit-rides.which-platform,nahm-bahn hohh-mu dess kah?
+transit-rides.what-time-is-the-next-one,tsu-gih wah nahn-jih dess kah?
+transit-rides.i-went-past-my-stop,noh-rih-su-goh-shih-mah-shih-tah
+building-help.i-am-lost,mih-chih nih mah-yoh-i-mah-shih-tah
+building-help.where-is-reception,u-keh-tsu-keh wah doh-koh dess kah?
+building-help.where-is-a-power-outlet,kohn-sehn-toh wah doh-koh dess kah?
+taxi.please-take-me-here,koh-koh eh it-teh ku-dah-sah-i
+taxi.please-send-me-the-address,joo-shoh oh oh-kut-teh ku-dah-sah-i
+taxi.we-need-the-east-gate-not-the-south-gate,"hih-gah-shih-gu-chih dess, mih-nah-mih-gu-chih deh-wah ah-rih-mah-sehn"
+taxi.please-stop-here,koh-koh deh toh-meh-teh ku-dah-sah-i
+taxi.i-will-get-off-here,koh-koh deh oh-rih-mahss
+taxi.can-you-wait-for-me-here,koh-koh deh mat-teh moh-rah-eh-mahss kah?
+taxi.please-get-me-there-in-time-for-the-shinkansen,shihn-kahn-sehn nih mah-nih-ah-u yohh nih oh-neh-gah-i-shih-mahss
+taxi.please-use-the-meter,mehh-taah oh tsu-kat-teh ku-dah-sah-i
+room-problems.there-is-a-problem-with-the-room,heh-yah nih mohn-dah-i gah ah-rih-mahss
+room-problems.the-air-conditioning-is-broken,eh-ah-kohn gah koh-wah-reh-teh-i-mahss
+room-problems.there-is-no-hot-water,oh-yu gah deh-mah-sehn
+room-problems.can-i-change-rooms,heh-yah oh kah-eh-rah-reh-mahss kah?
+room-problems.the-room-is-too-noisy,heh-yah gah u-ru-sah-su-gih-mahss
+building-words.elevator,eh-reh-behh-taah
+building-words.stairs,kah-i-dahn
+building-words.entrance,ih-rih-gu-chih
+building-words.exit,deh-gu-chih
+building-words.men,dahn-sehh
+building-words.women,joh-sehh
+building-words.door,doh-ah
+building-words.key,kah-gih
+building-help.what-room-number-is-this,koh-reh wah nahn-gohh-shih-tsu dess kah?
+in-a-building.is-this-the-correct-entrance,koh-koh gah tah-dah-shee ih-rih-gu-chih dess kah?
+in-a-building.where-is-the-restroom,toh-i-reh wah doh-koh dess kah?
+in-a-building.do-you-have-wi-fi,wah-i-fah-i wah ah-rih-mahss kah?
+in-a-building.what-is-the-wi-fi-password,wah-i-fah-i noh pah-su-waah-doh wah nahn dess kah?
+in-a-building.which-floor,nahn-kah-i dess kah?
+directions.where-is,{} wah doh-koh dess kah?
+directions.how-do-i-get-to,{} eh wah dohh ih-keh-bah ee dess kah?
+directions.is-it-far,tohh-i dess kah?
+directions.how-long-on-foot,ah-ru-i-teh doh-noh ku-rah-i dess kah?
+quick-directions.go-straight,mas-su-gu it-teh ku-dah-sah-i
+quick-directions.turn-left,hih-dah-rih nih mah-gat-teh ku-dah-sah-i
+quick-directions.turn-right,mih-gih nih mah-gat-teh ku-dah-sah-i
+quick-directions.this-way,koh-chih-rah dess
+quick-directions.that-way,ah-chih-rah dess
+quick-directions.on-the-left,hih-dah-rih-gah-wah dess
+quick-directions.on-the-right,mih-gih-gah-wah dess
+quick-directions.across-from-here,mu-kah-i-gah-wah dess
+quick-directions.in-front,mah-eh dess
+quick-directions.behind,u-shih-roh dess
+pickup-meeting.where-is-the-pickup-point,johh-shah bah-shoh wah doh-koh dess kah?
+pickup-meeting.please-send-me-the-pickup-point,johh-shah bah-shoh oh oh-kut-teh ku-dah-sah-i
+pickup-meeting.please-pick-us-up-here,koh-koh nih mu-kah-eh nih kih-teh ku-dah-sah-i
+pickup-meeting.meet-us-at,{} deh ah-i-mah-shohh
+pickup-meeting.please-call-a-taxi,tah-ku-shee oh yohn-deh ku-dah-sah-i
+hotel-basics.can-i-charge-my-phone,su-mah-hoh oh joo-dehn deh-kih-mahss kah?
+hotel-basics.i-would-like-a-non-smoking-room,kihn-ehn-shih-tsu oh oh-neh-gah-i-shih-mahss
+hotel-basics.i-would-like-a-quiet-room,shih-zu-kah nah heh-yah oh oh-neh-gah-i-shih-mahss
+hotel-requests.another-towel-please,tah-oh-ru oh mohh ih-chih-mah-i oh-neh-gah-i-shih-mahss
+hotel-basics.is-there-a-washing-machine,sehn-tah-ku-kih wah ah-rih-mahss kah?
+hotel-requests.can-i-check-out-later,reh-i-toh chek-ku-ah-u-toh deh-kih-mahss kah?
+hotel-requests.what-time-does-breakfast-start,chohh-shoh-ku wah nahn-jih kah-rah dess kah?
+hotel-requests.can-i-store-my-luggage,nih-moh-tsu oh ah-zu-keh-rah-reh-mahss kah?
+hotel-requests.no-housekeeping,sohh-jih wah fu-yohh dess
+lost-rescue.i-lost-my-passport,pah-su-pohh-toh oh nah-ku-shih-mah-shih-tah
+lost-rescue.i-lost-my-phone,su-mah-hoh oh nah-ku-shih-mah-shih-tah
+lost-rescue.please-call-the-police,kehh-sah-tsu oh yohn-deh ku-dah-sah-i
+lost-rescue.we-are-here,wah-tah-shih-tah-chih wah koh-koh nih ih-mahss
+lost-rescue.please-look-at-my-current-location,gehn-zah-i-chih oh mih-teh ku-dah-sah-i
+lost-rescue.i-cannot-walk,ah-ru-keh-mah-sehn
+lost-rescue.i-sprained-my-ankle,ah-shih-ku-bih oh hih-neh-rih-mah-shih-tah
+lost-rescue.please-contact-rescue,kyoo-joh-tah-i nih rehn-rah-ku shih-teh ku-dah-sah-i
+lost-rescue.my-companion-is-missing,nah-kah-mah gah mih-tsu-kah-rih-mah-sehn
+hiking-parks.is-this-the-way-to,koh-reh wah {} eh noh mih-chih dess kah?
+hiking-parks.where-is-the-trailhead,toh-zahn-gu-chih wah doh-koh dess kah?
+hiking-parks.how-long-to-the-summit,sahn-chohh mah-deh doh-noh ku-rah-i dess kah?
+hiking-parks.how-long-to-the-viewpoint,tehm-bohh-dah-i mah-deh doh-noh ku-rah-i dess kah?
+hiking-parks.which-route-is-easier,doh-noh roo-toh gah rah-ku dess kah?
+hiking-parks.is-this-trail-suitable-for-beginners,koh-noh toh-zahn-dohh wah shoh-shihn-shah mu-keh dess kah?
+attractions-tickets.where-can-i-buy-tickets,chih-ket-toh wah doh-koh deh kah-eh-mahss kah?
+attractions-tickets.do-i-need-a-reservation,yoh-yah-ku gah hih-tsu-yohh dess kah?
+attractions-tickets.what-is-the-latest-entry-time,sah-i-shoo nyoo-johh wah nahn-jih dess kah?
+attractions-tickets.are-there-lockers,koh-in rok-kaah wah ah-rih-mahss kah?
+attractions-tickets.may-i-take-photos,shah-shihn oh tot-teh moh ee dess kah?
+attractions-tickets.could-you-take-a-photo-for-us,shah-shihn oh tot-teh moh-rah-eh-mahss kah?
+trail-words.trail,toh-zahn-dohh
+trail-words.trailhead,toh-zahn-gu-chih
+trail-words.summit,sahn-chohh
+trail-words.viewpoint,tehm-bohh-dah-i
+trail-words.cableway,rohh-pu-weh-i
+trail-words.shuttle-bus,shah-toh-ru bah-su
+trail-words.park-shuttle,ehn-nah-i bah-su
+trail-words.steps,kah-i-dahn
+trail-words.up-uphill,noh-boh-rih
+trail-words.down-downhill,ku-dah-rih
+trail-words.one-way,kah-tah-mih-chih
+trail-words.round-trip,ohh-fu-ku
+common-signs.open-operating,ehh-gyohh-choo
+common-signs.closed,hehh-tehn
+common-signs.stopped-stop,tehh-shih
+common-signs.occupied,shih-yohh-choo
+common-signs.vacant,ah-kih
+common-signs.caution,choo-i
+common-signs.no-entry,tah-chee-rih kihn-shih
+common-signs.no-smoking,kihn-ehn
+common-signs.no-photography,sah-tsu-ehh kihn-shih
+common-signs.do-not-touch,sah-wah-rah-nah-i-deh ku-dah-sah-i
+common-signs.temporarily-closed,ih-chih-jih hehh-sah
+trail-transport.how-long-is-the-wait,mah-chih-jih-kahn wah doh-noh ku-rah-i dess kah?
+trail-transport.what-time-is-the-last-shuttle,sah-i-shoo shah-toh-ru wah nahn-jih dess kah?
+trail-transport.when-does-the-cableway-stop,rohh-pu-weh-i wah nahn-jih mah-deh dess kah?
+trail-transport.where-can-we-buy-water,mih-zu wah doh-koh deh kah-eh-mahss kah?
+trail-transport.where-can-we-refill-water,kyoo-su-i-joh wah doh-koh dess kah?
+trail-transport.is-there-cell-signal-here,koh-koh wah dehm-pah gah hah-i-rih-mahss kah?
+trail-transport.do-you-have-a-map,chih-zu wah ah-rih-mahss kah?
+rail-station-words.high-speed-rail,shihn-kahn-sehn
+rail-station-words.maglev,rih-nih-ah
+rail-station-words.transfer,noh-rih-kah-eh
+rail-station-words.ticket-gate,kah-i-sah-tsu-gu-chih
+rail-station-words.platform,hohh-mu
+rail-station-words.ticket-office,kip-pu u-rih-bah
+rail-station-words.waiting-room,mah-chih-ah-i-shih-tsu
+rail-station-words.train-number,resh-shah bahn-gohh
+rail-station-words.carriage,gohh-shah
+rail-station-words.seat,zah-seh-kih
+rail-station-words.last-train,shoo-dehn
+rail-station-words.delayed,chih-ehn
+rail-station-words.final-stop,shoo-tehn
+trail-warnings.open,tsoo-kohh-kah
+trail-warnings.closed,tsoo-kohh-doh-meh
+trail-warnings.maintenance,sehh-bih-choo
+trail-warnings.steep-slope,kyoo-zah-kah
+trail-warnings.caution-slippery,su-beh-rih-yah-su-i
+trail-warnings.danger,kih-kehn
+trail-warnings.beware-falling-rocks,rah-ku-seh-kih choo-i
+trail-warnings.first-aid-station,kyoo-goh-shoh
+trail-warnings.service-suspended,un-kyoo
+place-words.tourist-spot-sightseeing-area,kahn-kohh-chih
+place-words.visitor-center,kahn-kohh ahn-nah-i-joh
+place-words.railway-station,eh-kih
+place-words.airport,koo-kohh
+place-words.service-desk,ahn-nah-i-joh
+place-words.bus-stop,bah-su-tehh
+trail-conditions.how-long-is-the-full-route,zehn kohh-tehh wah doh-noh ku-rah-i dess kah?
+trail-conditions.can-we-return-the-same-way,oh-nah-jih mih-chih deh moh-doh-reh-mahss kah?
+trail-conditions.can-we-return-before-dark,ku-rah-ku nah-ru mah-eh nih moh-doh-reh-mahss kah?
+trail-conditions.is-the-trail-open,koh-noh toh-zahn-dohh wah ah-i-teh-i-mahss kah?
+trail-conditions.is-the-route-steep,koh-noh mih-chih wah kyoo dess kah?
+trail-conditions.is-the-path-slippery,mih-chih wah su-beh-rih-yah-su-i dess kah?
+trail-landmarks.trail-marker,mih-chih-shih-ru-beh
+trail-landmarks.fork-junction,bun-kih
+trail-landmarks.boardwalk-cliff-path,moh-ku-dohh / sahn-dohh
+trail-landmarks.start,kih-tehn
+trail-landmarks.end,shoo-tehn
+trail-landmarks.elevation,hyohh-kohh
+trail-landmarks.sunset,nih-chih-boh-tsu
+trail-landmarks.restroom,toh-i-reh
+trail-landmarks.water-point,kyoo-su-i-joh
+emergency-medical.help,tah-su-keh-teh!
+emergency-medical.please-call-an-ambulance,kyoo-kyoo-shah oh yohn-deh ku-dah-sah-i
+emergency-medical.i-need-a-doctor,ih-shah gah hih-tsu-yohh dess
+emergency-medical.i-feel-unwell,gu-ah-i gah wah-ru-i dess
+emergency-medical.i-am-sick,byohh-kih dess
+emergency-medical.i-am-injured,keh-gah oh shih-mah-shih-tah
+emergency-medical.it-hurts-here,koh-koh gah ih-tah-i dess
+emergency-medical.where-is-a-pharmacy,yak-kyoh-ku wah doh-koh dess kah?
+emergency-medical.please-take-me-to-a-hospital,byohh-in nih tsu-reh-teh it-teh ku-dah-sah-i

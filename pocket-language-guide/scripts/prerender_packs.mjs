@@ -43,12 +43,7 @@ for (const { target, source } of pairs) {
   await rm(dir, { recursive: true, force: true });
   await mkdir(dir, { recursive: true });
 
-  const spec = {
-    ...(await referenceSpec(target, source)),
-    // The country a language is most associated with, for local emergency numbers.
-    region: (ctx.corpus.languages[target].regions || '').split(';')[0] ?? '',
-    scale: 0,
-  };
+  const spec = { ...(await referenceSpec(target, source)), scale: 0 };
   const { plan } = await buildSheet(ctx, spec);
   const errors = plan.warnings.filter((w) => w.severity === 'error');
   if (errors.length) throw new Error(`${dir}: ${errors.map((e) => e.message).join('; ')}`);
