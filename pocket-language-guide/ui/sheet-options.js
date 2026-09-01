@@ -11,7 +11,8 @@ import { buildSheet, stacksFor } from '../core/sheet.js';
 import { defaultSelection } from '../core/pack.js';
 import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.js';
 import {
-  pageGlyph, typefaceGlyph, inkGlyph, dpiGlyph, densityGlyph, segmented, panelField,
+  pageGlyph, typefaceGlyph, inkGlyph, dpiGlyph, paddingGlyph, PADDING_CHOICES,
+  segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
@@ -104,16 +105,16 @@ async function main() {
     onChange: (value) => set({ typeface: value }),
   });
 
-  const density = segmented({
-    label: 'Row spacing',
-    value: 0.7,
-    options: [[0, 'Tight'], [0.7, 'Normal'], [1.6, 'Airy']].map(([value, caption], i) => ({
-      value: /** @type {number} */ (value),
-      caption: /** @type {string} */ (caption),
-      title: `${caption} spacing`,
-      glyph: densityGlyph(i),
+  const padding = segmented({
+    label: 'Breathing room around text',
+    value: spec.padding,
+    options: PADDING_CHOICES.map((choice, i) => ({
+      value: choice.value,
+      caption: choice.caption,
+      title: `${choice.caption} padding`,
+      glyph: paddingGlyph(i),
     })),
-    onChange: (value) => set({ density: value }),
+    onChange: (value) => set({ padding: value }),
   });
 
   const ink = segmented({
@@ -160,7 +161,7 @@ async function main() {
   $('controls').replaceChildren(
     panelField('Card size', [card.group]),
     panelField('Typeface', [typeface.group]),
-    panelField('Row spacing', [density.group]),
+    panelField('Text padding', [padding.group]),
     panelField('Ink', [ink.group]),
     menu('paper', 'Paper and printer', paper),
     menu('preset', 'What to include', preset),

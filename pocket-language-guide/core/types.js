@@ -113,7 +113,9 @@
  * @property {'sans'|'serif'} typeface  scripts without one fall back to sans
  * @property {'full'|'low-ink'|'mono'} inkMode
  * @property {boolean} autoFaces  let the solver add or drop pairs of faces
- * @property {number} density  extra points of separation between text elements
+ * @property {number} padding  extra breathing room around every text element, in
+ *   points at nominal type size. Named for what it does: larger means more space.
+ *   It was called `density`, which meant the opposite of its effect.
  * @property {'two-column'|'one-row'|'stacked'} arrangement  item field layout
  * @property {number} scale
  * @property {{sections:Record<string,boolean>, items:Record<string,boolean>}} selection

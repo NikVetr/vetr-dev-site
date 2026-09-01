@@ -324,16 +324,29 @@ function itemRow(concept, target, source, respell, spec, override, custom) {
 
 /**
  * Default selection: every section whose audience tags overlap the reader's
- * interests. With no interests given, everything is on.
- * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus
+ * interests. With no interests given, everything except the `default_on: 0`
+ * sections is on.
+ *
+ * Typed to the section rows alone rather than to a whole corpus, because
+ * `referenceSpec` builds a spec without ever loading one.
+ * @param {{sections:Record<string,string>[]}} corpus
  * @param {string[]} interests
  */
 export function defaultSelection(corpus, interests = []) {
   /** @type {Record<string,boolean>} */ const sections = {};
-  if (interests.length) {
-    for (const section of corpus.sections) {
+  for (const section of corpus.sections) {
+    if (interests.length) {
+      // The quiz is an explicit request, so it decides on its own and a section's
+      // `default_on` does not veto it.
       const tags = section.audience_tags.split(';').filter(Boolean);
       sections[section.section_id] = tags.some((t) => t === 'core' || interests.includes(t));
+    } else if (section.default_on === '0') {
+      // On the shelf but not on the card. The corpus carries more than a pocket
+      // sheet can hold, and a section that a traveler needs once (customs, buying
+      // a SIM) or only if it applies to them (chronic medication, travelling with
+      // children) should not push the everyday content onto extra paper. One click
+      // in the content panel, or one answer in the quiz, brings it back.
+      sections[section.section_id] = false;
     }
   }
   return { sections, items: /** @type {Record<string,boolean>} */ ({}) };

@@ -93,10 +93,31 @@ export function facesGlyph(count) {
 }
 
 /** Rows at three spacings, so "roomy" looks roomy. @param {number} level 0..2 */
-export function densityGlyph(level) {
+/**
+ * Points of extra breathing room around every text element, at nominal type size.
+ *
+ * `Tight` is 0, which reproduces the hand-built LaTeX original exactly -- its
+ * padding really is almost nil, with consecutive rows held apart by a 0.22pt rule
+ * alone. That is deliberate there and reads as cramped everywhere else, so the
+ * default sits one step up.
+ */
+export const PADDING_CHOICES = [
+  { value: 0, caption: 'Tight' },
+  { value: 0.8, caption: 'Normal' },
+  { value: 1.6, caption: 'Roomy' },
+  { value: 2.6, caption: 'Airy' },
+  { value: 3.6, caption: 'Extra' },
+];
+
+/**
+ * Breathing room, drawn as the gap between rows. Index-matched to
+ * PADDING_CHOICES above.
+ * @param {number} level
+ */
+export function paddingGlyph(level) {
   const box = 30;
   const svg = frame(box, box);
-  const gap = [1.2, 3, 5][level];
+  const gap = [0.8, 1.8, 3, 4.4, 6][level];
   const barH = 2.4;
   const pitch = barH + gap;
   const count = Math.max(2, Math.floor((box - 4) / pitch));

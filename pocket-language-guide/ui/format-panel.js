@@ -11,7 +11,7 @@ import { hasContent } from '../core/pack.js';
 import { ARRANGEMENTS, arrangementShape } from '../core/solve/arrange.js';
 import { flagEmoji, flagsSupported } from './flags.js';
 import {
-  pageGlyph, facesGlyph, densityGlyph, inkGlyph, paletteGlyph, itemGlyph, cutGlyph,
+  pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph, paletteGlyph, itemGlyph, cutGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
@@ -25,11 +25,6 @@ const SCALE_CHOICES = [
   { value: 1, caption: 'Medium' },
   { value: 1.15, caption: 'Large' },
   { value: 1.3, caption: 'X-large' },
-];
-const DENSITY_CHOICES = [
-  { value: 0, caption: 'Tight' },
-  { value: 0.7, caption: 'Normal' },
-  { value: 1.6, caption: 'Airy' },
 ];
 const TYPEFACE_CHOICES = /** @type {const} */ ([
   { value: 'sans', caption: 'Sans', stack: 'latin' },
@@ -196,16 +191,16 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ typeface: value }),
   });
 
-  const density = segmented({
-    label: 'Spacing between rows',
-    value: spec.density,
-    options: DENSITY_CHOICES.map((choice, i) => ({
+  const padding = segmented({
+    label: 'Breathing room around text',
+    value: spec.padding,
+    options: PADDING_CHOICES.map((choice, i) => ({
       value: choice.value,
       caption: choice.caption,
       title: `${choice.caption} spacing`,
-      glyph: densityGlyph(i),
+      glyph: paddingGlyph(i),
     })),
-    onChange: (value) => emit({ density: value }),
+    onChange: (value) => emit({ padding: value }),
   });
 
   const arrangement = segmented({
@@ -363,7 +358,7 @@ export function createFormatPanel(input) {
     panelField('Typeface', [typefaceControl.group]),
     panelField('Type size', [typeSize.group]),
     panelField('Entry layout', [arrangement.group]),
-    panelField('Row spacing', [density.group]),
+    panelField('Text padding', [padding.group]),
     panelField('Colours', [theme.group]),
     panelField('Ink', [ink.group]),
     panelField('Cut into cards', [cutControl.group, cutNote]),
@@ -393,7 +388,7 @@ export function createFormatPanel(input) {
       }
       typefaceControl.select(next.typeface);
       typeSize.select(next.scale);
-      density.select(next.density);
+      padding.select(next.padding);
       arrangement.select(next.arrangement);
       theme.select(next.themeId);
       ink.select(next.inkMode);

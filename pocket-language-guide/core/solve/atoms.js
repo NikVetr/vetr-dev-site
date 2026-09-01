@@ -92,15 +92,34 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
     const limit = Math.min(floor, nominal);
     return scale > 1 ? nominal * scale : limit + (nominal - limit) * scale;
   };
-  // Breathing room between text elements, in points at the current scale. The
-  // reference sheet's padding is essentially zero -- consecutive rows are held
-  // apart by a 0.22pt rule alone -- which is tight enough to read as cramped.
-  const density = (spec.density ?? 0) * scale;
   const targetLang = corpus.languages[spec.target];
   const sourceLang = corpus.languages[spec.source];
   if (!targetLang) throw new Error(`unknown target language ${spec.target}`);
   if (!sourceLang) throw new Error(`unknown source language ${spec.source}`);
   const targetScriptRow = corpus.scripts[targetLang.script];
+
+  /**
+   * How spacing responds to the scale -- which is *not* how the scale itself does.
+   *
+   * Padding used to be `spec.padding * scale`, and that quietly stopped being
+   * right when each field started travelling toward its own legibility floor
+   * rather than shrinking in lockstep. Type stops shrinking; padding kept going.
+   * Measured on the Japanese reference sheet at its fitted 0.478: the largest type
+   * renders at 84% of nominal while the padding sat at 48% -- 57% of the breathing
+   * room the type size implies, which is why it read as tighter than the LaTeX
+   * original it reproduces. Spacing now follows the same curve the type does, so
+   * the proportion between them holds at every scale.
+   */
+  const spacingRatio = (() => {
+    const nominal = theme.templates.entry?.fields?.[0]?.size ?? 7.3;
+    const floor = Number(targetScriptRow.min_size_pt) + Number(spec.paper.minSizeDelta);
+    return sizeAt(nominal, floor) / nominal;
+  })();
+  // Extra breathing room the reader asked for, on top of the theme's own padding.
+  // The reference sheet's is essentially zero -- consecutive rows are held apart by
+  // a 0.22pt rule alone -- which is tight enough to read as cramped even before the
+  // scaling bug above.
+  const padding = (spec.padding ?? 0) * spacingRatio;
   const palette = makePalette(theme, spec.inkMode);
   const shown = new Set(spec.fieldSet);
 
@@ -137,7 +156,8 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
     colWidth,
     scale,
     sizeAt,
-    density,
+    padding,
+    spacingRatio,
     palette,
     shown,
     styleFor,
@@ -221,12 +241,12 @@ function headingAtom(ctx, block) {
   };
   const color = ctx.palette.roles[block.colorRole];
   const iconW = h.iconSize > 0 && block.icon ? h.iconSize * s + h.iconGap * s : 0;
-  const textTop = h.spaceBefore * s + ctx.density * 0.5;
+  const textTop = h.spaceBefore * ctx.spacingRatio + ctx.padding * 0.5;
   const painted = paintField(ctx, block.text ?? '', style, {
     x: iconW, y: textTop, w: ctx.colWidth - iconW, align: 'start', fill: ctx.palette.ink,
   });
-  const ruleY = textTop + painted.height + h.gapBeforeRule * s;
-  const height = ruleY + h.rulePt + h.gapAfterRule * s + ctx.density * 0.5;
+  const ruleY = textTop + painted.height + h.gapBeforeRule * ctx.spacingRatio;
+  const height = ruleY + h.rulePt + h.gapAfterRule * ctx.spacingRatio + ctx.padding * 0.5;
 
   /** @type {IconMark[]} */ const icons = [];
   if (iconW > 0 && block.icon) {
@@ -293,11 +313,18 @@ function itemAtoms(ctx, block, rows, withPaint) {
   if (!base) throw new Error(`unknown template ${block.templateId}`);
   const template = arrangeTemplate(base, ctx.spec.arrangement ?? 'two-column', ctx.shown);
   const s = ctx.scale;
-  const pad = template.pad.map((/** @type {number} */ v) => v * s);
-  pad[0] += ctx.density;
-  pad[2] += ctx.density;
-  const rowGap = template.rowGap * s + ctx.density * 0.6;
-  const gutter = template.colGap * s * (template.cols - 1);
+  const pad = template.pad.map((/** @type {number} */ v, /** @type {number} */ i) => (
+    // 0 and 2 are top and bottom: breathing room, so they follow the spacing
+    // curve. 1 and 3 are the horizontal insets that place the accent rule and set
+    // the usable width, so they stay on the type scale -- widening those moves
+    // where text wraps rather than giving it air.
+    v * (i % 2 === 0 ? ctx.spacingRatio : s)
+  ));
+  pad[0] += ctx.padding;
+  pad[2] += ctx.padding;
+  const rowGap = template.rowGap * ctx.spacingRatio + ctx.padding * 0.6;
+  const colGap = template.colGap * ctx.spacingRatio + ctx.padding * 0.5;
+  const gutter = colGap * (template.cols - 1);
   const avail = ctx.colWidth - pad[3] - pad[1] - gutter;
   const grids = rows.map((row) => cellGrid(ctx, template, row));
 
@@ -352,7 +379,7 @@ function itemAtoms(ctx, block, rows, withPaint) {
         runs.push(...painted.runs);
         y += painted.height;
       });
-      x += widths[j] + template.colGap * s;
+      x += widths[j] + colGap;
     });
 
     const atom = atomShell(ctx, block, height, i, template);
@@ -393,9 +420,11 @@ function atomShell(ctx, block, height, i, template) {
 function noteAtom(ctx, block, withPaint) {
   const n = ctx.theme.note;
   const s = ctx.scale;
-  const pad = n.pad.map((/** @type {number} */ v) => v * s);
-  pad[0] += ctx.density;
-  pad[2] += ctx.density;
+  const pad = n.pad.map((/** @type {number} */ v, /** @type {number} */ i) => (
+    v * (i % 2 === 0 ? ctx.spacingRatio : s)
+  ));
+  pad[0] += ctx.padding;
+  pad[2] += ctx.padding;
   const size = ctx.sizeAt(n.size, ctx.sourceFloor);
   const style = {
     stack: ctx.sourceStack.stack,

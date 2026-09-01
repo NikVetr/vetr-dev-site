@@ -39,7 +39,7 @@ if (geometry) {
 const spec = {
   ...base,
   themeId: args.theme ?? base.themeId,
-  density: args.density === undefined ? base.density : Number(args.density),
+  padding: args.padding === undefined ? base.padding : Number(args.padding),
   arrangement: /** @type {any} */ (args.arrangement ?? base.arrangement),
   scale: args.scale === 'auto' ? 0 : Number(args.scale ?? 1),
 };

@@ -14,6 +14,17 @@ import { placeColumn } from './justify.js';
 // search has no separate floor to respect.
 const SCALE_MIN = 0.02;
 const SCALE_MAX = 1.8;
+/**
+ * Auto-fit will not inflate type past the theme's own sizes, even when there is
+ * room. Those sizes were transcribed from a hand-tuned original, so exceeding them
+ * is not an improvement -- and for a CJK target it actively hurts: a Japanese
+ * entry that fits on one line at nominal size wraps at 1.04x, because the string
+ * has almost no break opportunities. Leftover space goes to the glue instead,
+ * which is what the LaTeX original did with its `fil` row stretch and is where its
+ * airiness came from. A reader who wants bigger type can still ask for it; SCALE_MAX
+ * is the ceiling for that explicit choice.
+ */
+const AUTO_SCALE_MAX = 1;
 const AUTOFIT_STEPS = 7;
 
 // A sheet is printed double-sided, so faces come in pairs: one sheet is two faces,
@@ -456,7 +467,7 @@ function solveFaces(build, box, spec, scaleFloor) {
  * @returns {number|null}
  */
 function autofit(build, height, bins, scaleFloor) {
-  const clamp = (/** @type {number} */ s) => Math.min(SCALE_MAX, Math.max(scaleFloor, s));
+  const clamp = (/** @type {number} */ s) => Math.min(AUTO_SCALE_MAX, Math.max(scaleFloor, s));
   const fits = (/** @type {number} */ scale) => !breakColumns(build(scale), height, bins).failure;
 
   const atoms = build(1);
@@ -464,11 +475,11 @@ function autofit(build, height, bins, scaleFloor) {
   const guess = clamp(Math.sqrt((height * bins) / Math.max(1, natural)));
 
   let lo = scaleFloor;
-  let hi = SCALE_MAX;
+  let hi = AUTO_SCALE_MAX;
   if (fits(guess)) {
     lo = guess;
     hi = clamp(guess * 1.25);
-    if (fits(hi)) return hi === SCALE_MAX ? SCALE_MAX : hi;
+    if (fits(hi)) return hi === AUTO_SCALE_MAX ? AUTO_SCALE_MAX : hi;
   } else {
     hi = guess;
     lo = clamp(guess * 0.8);

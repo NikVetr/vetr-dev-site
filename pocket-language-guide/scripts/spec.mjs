@@ -1,11 +1,13 @@
 // The reference sheet's SheetSpec, shared by the dev scripts and the tests.
 import { readFile } from 'node:fs/promises';
 import { parseTable } from '../core/csv.js';
+import { defaultSelection } from '../core/pack.js';
 
 /** @returns {Promise<import('../core/types.js').SheetSpec>} */
 export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides = {}) {
   const presets = JSON.parse(await readFile('data/presets.json', 'utf8'));
   const languages = parseTable(await readFile('data/registry/languages.csv', 'utf8'));
+  const sections = parseTable(await readFile('data/registry/sections.csv', 'utf8'));
   const lang = languages.find((l) => l.bcp47 === target);
   if (!lang) throw new Error(`unknown language ${target}`);
   return {
@@ -34,13 +36,15 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     typeface: 'sans',
     inkMode: 'full',
     autoFaces: true,
-    density: 0.7,
+    padding: 0.8,
     arrangement: 'two-column',
     // 0 means fit: with faces on auto too, that resolves to the fewest pairs of
     // faces at the largest legible type -- the same answer the reference sheet
     // arrived at by hand.
     scale: 0,
-    selection: { sections: {}, items: {} },
+    // Sections marked `default_on: 0` start off, so the default sheet stays the
+    // size the reference sheets were rather than growing with the corpus.
+    selection: defaultSelection({ sections }),
     ...overrides,
   };
 }

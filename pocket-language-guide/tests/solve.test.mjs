@@ -114,8 +114,20 @@ test('auto faces picks the fewest pairs that hold the content legibly', async ()
   assert.equal(plan.faces.length, 4);
   assert.equal(plan.geometry.faces, 4);
   assert.equal(plan.faces.length % 2, 0, 'a sheet is two faces, so the count must be even');
-  assert.ok(plan.scale > 0.9 && plan.scale < 1.3, `scale ${plan.scale}`);
+  assert.ok(plan.scale > 0.7 && plan.scale <= 1, `scale ${plan.scale}`);
   assert.deepEqual(plan.warnings.filter((w) => w.severity === 'error'), []);
+});
+
+test('auto-fit never inflates type past the theme\'s own sizes', async () => {
+  // Above nominal it is not an improvement, and for a CJK target it wraps entries
+  // that fit on one line at the designed size. Leftover room becomes glue instead.
+  for (const [target, source] of [['en', 'ja'], ['en', 'zh-Hans'], ['zh-Hans', 'ja']]) {
+    const { plan } = await buildSheet(ctx, { ...(await referenceSpec(target, source)), scale: 0 });
+    assert.ok(plan.scale <= 1 + 1e-9, `${target} <- ${source} auto-fitted to ${plan.scale}`);
+  }
+  // An explicit request still gets bigger type than nominal.
+  const big = await buildSheet(ctx, { ...spec, scale: 1.3 });
+  assert.ok(big.plan.scale > 1, `explicit 1.3x gave ${big.plan.scale}`);
 });
 
 test('bigger type means more faces, not a broken sheet', async () => {
@@ -153,13 +165,32 @@ test('a pinned face count with too little room is reported, not truncated', asyn
     `expected an auto-faces remedy, got ${fixes.join(' | ')}`);
 });
 
-test('auto keeps the card\'s natural face count unless there is a reason to move', async () => {
-  // Both reference sheets settled on four faces and let the type find its size.
+test('auto reproduces the hand-built originals at their own spacing', async () => {
+  // Both reference sheets settled on four faces by hand. They were typeset with
+  // almost no padding -- consecutive rows held apart by a 0.22pt rule -- which is
+  // `padding: 0`. At that spacing the solver must still reach four, because
+  // matching the originals is the acceptance criterion for the whole engine.
   for (const [target, source] of [['zh-Hans', 'en'], ['ja', 'en'], ['en', 'ja']]) {
-    const { plan } = await buildSheet(ctx, { ...(await referenceSpec(target, source)), scale: 0 });
+    const { plan } = await buildSheet(ctx, {
+      ...(await referenceSpec(target, source)), scale: 0, padding: 0,
+    });
     assert.equal(plan.faces.length, 4, `${target} <- ${source}`);
     assert.deepEqual(plan.warnings.filter((w) => w.severity === 'error'), []);
   }
+});
+
+test('asking for more padding costs paper, never legibility', async () => {
+  // The densest pair cannot hold its content on four faces once the text is given
+  // room to breathe, so auto takes a pair rather than shrinking the type toward
+  // its floor. That is the intended trade and the reason padding is a control.
+  const base = { ...(await referenceSpec('ja', 'en')), scale: 0 };
+  const tight = (await buildSheet(ctx, { ...base, padding: 0 })).plan;
+  const roomy = (await buildSheet(ctx, { ...base, padding: 1.6 })).plan;
+  assert.equal(tight.faces.length, 4);
+  assert.ok(roomy.faces.length > tight.faces.length,
+    `padding should buy faces: ${tight.faces.length} -> ${roomy.faces.length}`);
+  assert.ok(roomy.scale > tight.scale,
+    `and the type should not get smaller: ${tight.scale} -> ${roomy.scale}`);
 });
 
 test('each field shrinks toward its own floor, not in lockstep', async () => {
