@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "serve": "npx http-server . -p 8080 -c-1",
-    "check": "tsc -p jsconfig.json && node scripts/build_shell.mjs --check",
+    "check": "tsc -p jsconfig.json && node scripts/build_shell.mjs --check && node scripts/check_i18n.mjs --check",
     "validate": "python3 scripts/validate_data.py",
     "prerender": "node scripts/prerender_packs.mjs",
     "test:unit": "node --test tests/*.test.mjs",
@@ -14,7 +14,8 @@
     "vendor": "node scripts/build_vendor.mjs",
     "icons": "node scripts/extract_icons.mjs",
     "preview": "node scripts/render_preview.mjs",
-    "shell": "node scripts/build_shell.mjs"
+    "shell": "node scripts/build_shell.mjs",
+    "i18n": "node scripts/check_i18n.mjs"
   },
   "devDependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

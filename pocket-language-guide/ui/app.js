@@ -6,6 +6,7 @@
 
 import { parseTable } from '../core/csv.js';
 import { defaultSelection, hasContent, respellOverrideFile } from '../core/pack.js';
+import { messagesReady, t } from './i18n.js';
 import { createSheetContext, stacksFor } from '../core/sheet.js';
 import { familyFor, fontFaceCss } from '../render/fonts.js';
 
@@ -157,7 +158,7 @@ export function makeSpec(ctx, presets, choice) {
     typeface: 'sans',
     inkMode: 'full',
     autoFaces: true,
-    padding: 0.8,
+    padding: 0.5,
     arrangement: 'two-column',
     scale: 0,
     selection: defaultSelection(ctx.corpus),
@@ -274,7 +275,11 @@ export function showFatal(err) {
   const box = document.createElement('div');
   box.className = 'container';
   box.style.padding = '1rem';
-  box.innerHTML = '<h2>Something went wrong</h2>';
+  const heading = document.createElement('h2');
+  // A fatal can fire before a catalogue has loaded, and `t` falls back to the key
+  // in that case. English is a better thing to show someone than `common.somethingWrong`.
+  heading.textContent = messagesReady() ? t('common.somethingWrong') : 'Something went wrong';
+  box.append(heading);
   const p = document.createElement('p');
   p.className = 'muted';
   p.textContent = message;

@@ -157,7 +157,12 @@
  * @typedef {Object} Warning
  * @property {string} code
  * @property {'info'|'warn'|'error'} severity
- * @property {string} message
+ * @property {string} message  English, and the fallback: Node-side scripts print this
+ * @property {Record<string, string|number>} [params] values the translated form
+ *   interpolates. The solver cannot translate -- it has no business knowing what
+ *   language the interface is in -- so it emits a stable `code` plus the numbers,
+ *   and the UI looks up `warn.<code>` and fills them in. A code with no catalogue
+ *   entry falls back to `message`, so an untranslated warning is still a warning.
  * @property {WarningFix[]} [fixes]
  * @property {number} [faceIndex]
  * @property {string} [conceptId]

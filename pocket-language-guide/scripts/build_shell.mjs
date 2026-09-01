@@ -37,7 +37,10 @@ const ENTRY_FILES = [
 ];
 
 /** Everything in these directories, non-recursively. */
-const DATA_DIRS = ['data/registry', 'data/themes', 'data/respell/overrides'];
+// data/i18n is in here because the interface has to keep working offline in the
+// reader's own language, not fall back to English the moment the network goes.
+const DATA_DIRS = ['data/registry', 'data/registry/section-titles', 'data/themes',
+  'data/respell/overrides', 'data/i18n'];
 
 /** @param {string} dir @returns {Promise<string[]>} */
 async function walk(dir) {

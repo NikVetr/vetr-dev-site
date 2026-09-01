@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Export a pocket guide</title>
+<title data-i18n="quick.docTitle">Export a pocket guide</title>
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg">
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
-<a class="skip-link" href="#faces">Skip to the sheet</a>
+<a class="skip-link" href="#faces" data-i18n="nav.skipToSheet">Skip to the sheet</a>
 <header class="site-header">
   <div class="container">
-    <a class="brand" href="./">Pocket Language Guide</a>
+    <a class="brand" href="./" data-i18n="nav.brand">Pocket Language Guide</a>
     <div class="spacer"></div>
-    <a class="btn" id="to-studio" href="customize.html">Customise in the studio →</a>
+    <a class="btn" id="to-studio" href="customize.html" data-i18n="nav.toStudio">Customise in the studio →</a>
+    <a class="btn ghost back-link" href="./" data-i18n="nav.back">← All languages</a>
   </div>
 </header>
 
@@ -27,16 +28,16 @@
   </div>
 
   <div class="sheet-body">
-    <form id="options" class="sheet-options" aria-label="Options">
+    <form id="options" class="sheet-options" data-i18n-label="quick.optionsLabel" aria-label="Options">
       <div id="controls"></div>
 
       <div class="export-block">
-        <button type="button" class="primary big" id="pdf">Export PDF</button>
+        <button type="button" class="primary big" id="pdf" data-i18n="common.exportPdf">Export PDF</button>
         <!-- Above the buttons it applies to, not below them. -->
         <div id="dpi-control"></div>
         <div class="row">
-          <button type="button" id="png">PNG</button>
-          <button type="button" id="svg">SVG</button>
+          <button type="button" id="png" data-i18n="common.png">PNG</button>
+          <button type="button" id="svg" data-i18n="common.svg">SVG</button>
         </div>
         <p class="status" id="status"></p>
         <ul class="warnings" id="warnings"></ul>
@@ -44,8 +45,8 @@
     </form>
 
     <div class="sheet-preview">
-      <div class="face-grid" id="faces" aria-label="Sheet preview" tabindex="-1">
-        <p class="muted loading">Typesetting your sheet…</p>
+      <div class="face-grid" id="faces" data-i18n-label="quick.previewLabel" aria-label="Sheet preview" tabindex="-1">
+        <p class="muted loading" data-i18n="quick.typesetting">Typesetting your sheet…</p>
       </div>
     </div>
   </div>

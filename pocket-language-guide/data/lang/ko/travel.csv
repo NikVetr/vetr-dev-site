@@ -109,3 +109,5 @@ common-signs.temporarily-closed,임시 휴업,,imsi hyueop,,,2,ko-agent-v1
 common-signs.open-operating,영업 중,운영 중,yeongeop jung,,,2,ko-agent-v1
 common-signs.closed,영업 종료,휴업,yeongeop jongnyo,,,2,ko-agent-v1
 common-signs.stopped-stop,정지,,jeongji,,,2,ko-agent-v1
+transit-rides.do-i-need-to-validate,이 표 개찰해야 해요?,,i pyo gaechalhaeya haeyo?,,,2,ko-agent-v1
+rail-station-words.ticket-validator,개찰기,검표기,gaechalgi,,,2,ko-agent-v1

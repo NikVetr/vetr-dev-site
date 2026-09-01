@@ -156,7 +156,12 @@ label { display: block; }
   font-size: 1.25rem; line-height: 1; min-width: 1.6em; text-align: center; color: var(--accent);
 }
 .card-name { font-weight: 600; }
-.card-coverage { font-size: 0.7rem; color: var(--muted); margin-top: 0.1em; }
+/* The thumbnail is a button so it can open the preview; it must not look like one. */
+.card-thumb-button {
+  display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in;
+}
+.card-thumb-button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.card-thumb-button:hover .card-thumb { filter: brightness(0.97); }
 .card-thumb {
   display: block; width: 100%; aspect-ratio: 7 / 5; object-fit: cover; object-position: top left;
   background: var(--surface); border-block: 1px solid var(--line-soft);
@@ -399,7 +404,74 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
   font-size: 0.7rem; font-weight: 600; color: var(--muted); text-align: center;
   border: 1px solid var(--line); border-radius: 3px; padding: 0 0.2em; line-height: 1.3;
 }
-.flag.more { font-size: 0.7rem; color: var(--muted); align-self: center; text-align: center; }
+.flag.more {
+  font-size: 0.7rem; color: var(--muted); align-self: center; text-align: center;
+  position: relative; cursor: default;
+}
+.flag.more:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 3px; }
+/* The flags "+3" stands for, revealed on the spot. Absolutely positioned so showing
+   them cannot reflow the card underneath. */
+.flag-rest {
+  position: absolute; inset-inline-end: 0; top: calc(100% + 3px); z-index: 5;
+  display: none; gap: 3px; padding: 0.25em 0.4em; white-space: nowrap;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgb(17 24 32 / 12%);
+}
+.flag.more:hover .flag-rest, .flag.more:focus-visible .flag-rest { display: flex; }
+
+/* A closer look at a card, without leaving the gallery or loading the solver. */
+dialog.preview-dialog {
+  border: 1px solid var(--line); border-radius: var(--radius); padding: var(--space-3);
+  max-width: 46rem; width: calc(100% - 2rem); font: inherit; color: var(--ink);
+  position: relative;
+}
+dialog.preview-dialog::backdrop { background: rgb(17 24 32 / 55%); }
+dialog.preview-dialog h2 { margin: 0 2rem var(--space-2) 0; font-size: var(--fs-1); }
+dialog.preview-dialog img {
+  display: block; width: 100%; height: auto; border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm); background: var(--paper);
+}
+dialog.preview-dialog p { margin: var(--space-2) 0; }
+.preview-close {
+  position: absolute; inset-inline-end: var(--space-2); top: var(--space-2);
+  border: 1px solid var(--line-soft); background: var(--surface); color: var(--muted);
+  border-radius: var(--radius-sm); width: 1.9rem; height: 1.9rem; font-size: 1.1rem;
+  line-height: 1; cursor: pointer;
+}
+.preview-close:hover { background: var(--surface-2); color: var(--ink); }
+
+/* Back to the gallery. Rightmost in the header, but quiet: the export button beside
+   it is the loud one. */
+.back-link { white-space: nowrap; }
+
+/* The "I speak" control. Collapsed it is just the endonym; the list adds the name
+   in the reader's own language, greyed and pushed to the trailing edge so the two
+   read as a name and a gloss rather than as one long string. */
+.lang-picker { position: relative; }
+.lang-picker-button {
+  font: inherit; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 0.25em 1.6em 0.25em 0.6em; cursor: pointer; min-width: 7rem; text-align: start;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: right 0.7em top 55%, right 0.42em top 55%;
+  background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+}
+.lang-picker-button:hover { background-color: var(--surface); }
+.lang-picker-list {
+  position: absolute; inset-inline-end: 0; top: calc(100% + 4px); z-index: 20;
+  margin: 0; padding: 0.25rem; list-style: none; min-width: 100%; max-height: 60vh;
+  overflow-y: auto; background: var(--paper); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); box-shadow: 0 4px 16px rgb(17 24 32 / 14%);
+}
+.lang-picker-option {
+  display: flex; gap: var(--space-3); align-items: baseline; justify-content: space-between;
+  padding: 0.3em 0.6em; border-radius: var(--radius-sm); cursor: pointer; white-space: nowrap;
+}
+.lang-picker-option:hover { background: var(--surface-2); }
+.lang-picker-option:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.lang-picker-option.current { font-weight: 600; }
+.lang-picker-aside { color: var(--muted); font-size: var(--fs--1); text-align: end; }
 
 /* A static collage: the reader's own label leads, the rest recede. No motion. */
 #reader-label {
@@ -452,12 +524,11 @@ svg.glyph .g-shade { fill: #eef2f5; }
 svg.glyph .g-accent { fill: var(--accent); }
 svg.glyph .g-cut { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 2; fill: none; }
 svg.glyph .g-mark { fill: var(--accent); }
-/* Baseline and anchor are set in ui/glyphs.js at the very corner of the 30-unit
-   box, so the count is lifted clear of the edge and given a paper halo to stay
-   legible over the little pages it sits on. */
+/* The count now has a reserved strip along the bottom of the 30-unit box rather
+   than being tucked into the corner on top of the drawing, so it is centred and
+   needs no halo to stay legible. */
 svg.glyph .g-count {
-  font-size: 7px; fill: var(--muted); text-anchor: end; transform: translateY(-1.5px);
-  paint-order: stroke; stroke: var(--paper); stroke-width: 1.6px; stroke-linejoin: round;
+  font-size: 7.5px; fill: var(--muted); text-anchor: middle;
 }
 .segment.current svg.glyph .g-col { fill: #a9c6da; }
 

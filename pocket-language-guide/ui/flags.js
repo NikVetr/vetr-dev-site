@@ -67,11 +67,26 @@ export function regionRow(regions, opts = {}) {
     chip.title = code;
     row.append(chip);
   }
-  if (codes.length > shown.length) {
+  const rest = codes.slice(shown.length);
+  if (rest.length) {
+    // The hidden flags are rendered, not summarised: pointing at "+3" should show
+    // you the three, and a tooltip of country codes is not that. They sit in a
+    // popover so revealing them cannot reflow the card behind it.
     const more = document.createElement('span');
     more.className = 'flag more';
-    more.textContent = `+${codes.length - shown.length}`;
-    more.title = codes.slice(shown.length).join(', ');
+    more.textContent = `+${rest.length}`;
+    more.tabIndex = 0;
+    more.title = rest.join(', ');
+    const popover = document.createElement('span');
+    popover.className = 'flag-rest';
+    for (const code of rest) {
+      const chip = document.createElement('span');
+      chip.className = 'flag';
+      chip.textContent = flagsSupported() ? flagEmoji(code) : code;
+      chip.title = code;
+      popover.append(chip);
+    }
+    more.append(popover);
     row.append(more);
   }
   return row;

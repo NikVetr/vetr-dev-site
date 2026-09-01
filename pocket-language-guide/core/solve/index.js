@@ -164,8 +164,9 @@ export function layout(input) {
   }
   if (noFit) {
     warnings.push({
-      code: 'no-fit',
+      code: autoFaces ? 'no-fit.auto' : 'no-fit.pinned',
       severity: 'error',
+      params: { faces: autoFaces ? MAX_AUTO_FACES : faces, columns: spec.geometry.columns },
       message: autoFaces
         ? `Even ${MAX_AUTO_FACES} faces of ${spec.geometry.columns} `
           + `${spec.geometry.columns === 1 ? 'column' : 'columns'} will not hold this at a `
@@ -180,6 +181,12 @@ export function layout(input) {
     warnings.push({
       code: 'paper-too-coarse',
       severity: 'warn',
+      params: {
+        script: coarse.script,
+        floor: coarse.floor.toFixed(2),
+        field: coarse.field,
+        size: coarse.size.toFixed(2),
+      },
       message: `This paper needs ${coarse.script} text at ${coarse.floor.toFixed(2)}pt, but the `
         + `theme sets its ${coarse.field} column at ${coarse.size.toFixed(2)}pt. That column is `
         + 'enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type.',
@@ -189,6 +196,7 @@ export function layout(input) {
     warnings.push({
       code: 'no-dictionary-breaking',
       severity: 'warn',
+      params: { script: targetScript.name },
       message: `${targetScript.name} needs dictionary line breaking, which is not `
         + 'implemented yet; lines may break mid-word.',
     });
@@ -201,6 +209,7 @@ export function layout(input) {
     warnings.push({
       code: 'hairline-too-thin',
       severity: 'warn',
+      params: { thinnest: thinnest.toFixed(2), minimum: spec.paper.minRulePt.toFixed(2) },
       message: `The thinnest rule is ${thinnest.toFixed(2)}pt, below the `
         + `${spec.paper.minRulePt.toFixed(2)}pt this paper can hold. It may print `
         + 'as nothing. Try photo stock, or a theme with heavier rules.',
@@ -208,7 +217,7 @@ export function layout(input) {
   }
   if (spec.inkMode !== 'full') {
     warnings.push({
-      code: 'ink-mode',
+      code: spec.inkMode === 'mono' ? 'ink-mode.mono' : 'ink-mode.lowInk',
       severity: 'info',
       message: spec.inkMode === 'mono'
         ? 'Black and white: section colours are gone, so headings are told apart by '
@@ -224,6 +233,7 @@ export function layout(input) {
     warnings.push({
       code: 'no-emergency-numbers',
       severity: 'warn',
+      params: { region: spec.region },
       message: `No emergency numbers on file for ${spec.region}. Look them up before `
         + 'you travel and add them with the CSV import.',
     });
@@ -231,6 +241,7 @@ export function layout(input) {
     warnings.push({
       code: 'emergency-unreviewed',
       severity: 'warn',
+      params: { region: emergency.region.name_en },
       message: `The emergency numbers on file for ${emergency.region.name_en} have not `
         + 'been checked by a fluent speaker, so they are left off the sheet. Verify them '
         + 'and raise their confidence, or add your own with the CSV import.',
@@ -240,6 +251,7 @@ export function layout(input) {
     warnings.push({
       code: 'margin-below-safe-area',
       severity: 'warn',
+      params: { inset: box.insetX.toFixed(1), preset: spec.paper.presetId },
       message: `Margins were widened to ${box.insetX.toFixed(1)}pt to stay inside `
         + `the ${spec.paper.presetId} printable area.`,
     });
@@ -269,6 +281,10 @@ export function layout(input) {
       warnings.push({
         code: 'break-failed',
         severity: 'error',
+        params: {
+          scale: spec.scale.toFixed(2),
+          columns: spec.geometry.faces * spec.geometry.columns,
+        },
         message: spec.scale > 0
           ? `At ${spec.scale.toFixed(2)}x the content does not fit `
             + `${spec.geometry.faces * spec.geometry.columns} columns.`
@@ -310,6 +326,7 @@ export function layout(input) {
     warnings.push({
       code: 'card-too-small',
       severity: 'warn',
+      params: { faces },
       message: `Even ${faces} faces of this card leave the type near its smallest `
         + 'readable size. A larger card, or fewer sections, would read better.',
       fixes: findFixes(input, box, scaleFloor),
@@ -321,6 +338,7 @@ export function layout(input) {
     warnings.push({
       code: 'loose-columns',
       severity: 'info',
+      params: { count: loose },
       message: `${loose} column(s) could not be filled evenly. Try "Balance columns" `
         + 'to propose items that would take up the space.',
     });

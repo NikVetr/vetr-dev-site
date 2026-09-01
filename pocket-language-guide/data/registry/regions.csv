@@ -21,30 +21,30 @@ TH,Thailand,191 police;199 fire;1669 ambulance,THB,1,needs a fluent reviewer,
 VN,Viet Nam,113 police;114 fire;115 ambulance,VND,1,needs a fluent reviewer,
 ID,Indonesia,112 all services,IDR,1,needs a fluent reviewer,
 IN,India,112 all services,INR,1,needs a fluent reviewer,
-MX,Mexico,911 all services,MXN,1,needs a fluent reviewer,
-AR,Argentina,911 all services,ARS,1,needs a fluent reviewer,
-CO,Colombia,123 all services,COP,1,needs a fluent reviewer,
-CL,Chile,133 police;132 fire;131 ambulance,CLP,1,needs a fluent reviewer,
-PE,Peru,105 police;116 fire;106 ambulance,PEN,1,needs a fluent reviewer,
-BR,Brazil,190 police;193 fire;192 ambulance,BRL,1,needs a fluent reviewer,
-CH,Switzerland,112 all services;117 police;118 fire;144 ambulance,CHF,1,needs a fluent reviewer,
+MX,Mexico,911 all services,MXN,2,"IFT acuerdo establishing 911 as the single national number, with gob.mx/911",2026-09-01
+AR,Argentina,911 police and ambulance;100 fire,ARS,2,"Ley 25.367 national single number, with argentina.gob.ar emergency listing",2026-09-01
+CO,Colombia,123 all services,COP,2,Policia Nacional de Colombia single national emergency line,2026-09-01
+CL,Chile,133 police;131 ambulance;132 fire,CLP,2,Chilean foreign ministry consular and visitor guidance,2026-09-01
+PE,Peru,105 police;116 fire and ambulance,PEN,2,"gob.pe national emergency-number listing, with CGBVP 116 dispatch record",2026-09-01
+BR,Brazil,190 police;192 ambulance;193 fire,BRL,2,ANATEL national three-digit emergency code table,2026-09-01
+CH,Switzerland,112 all services;144 ambulance;117 police;118 fire,CHF,2,ch.ch federal emergency-number page,2026-09-01
 SA,Saudi Arabia,999 police;998 fire;997 ambulance,SAR,1,needs a fluent reviewer,
 AE,United Arab Emirates,999 police;997 fire;998 ambulance,AED,1,needs a fluent reviewer,
 EG,Egypt,122 police;180 fire;123 ambulance,EGP,1,needs a fluent reviewer,
 MA,Morocco,19 police;15 ambulance,MAD,1,needs a fluent reviewer,
 JO,Jordan,911 all services,JOD,1,needs a fluent reviewer,
 IQ,Iraq,104 police;115 ambulance,IQD,1,needs a fluent reviewer,
-TR,Turkey,112 all services,TRY,1,needs a fluent reviewer,
-RU,Russia,112 all services;102 police;101 fire;103 ambulance,RUB,1,needs a fluent reviewer,
-BY,Belarus,112 all services,BYN,1,needs a fluent reviewer,
-KZ,Kazakhstan,112 all services,KZT,1,needs a fluent reviewer,
-KG,Kyrgyzstan,112 all services,KGS,1,needs a fluent reviewer,
-ZA,South Africa,10111 police;10177 ambulance,ZAR,1,needs a fluent reviewer,
-KE,Kenya,999 all services;112 also works,KES,1,needs a fluent reviewer,
-TZ,Tanzania,112 all services,TZS,1,needs a fluent reviewer,
-UG,Uganda,999 all services;112 also works,UGX,1,needs a fluent reviewer,
-CD,DR Congo,112 all services,CDF,1,needs a fluent reviewer,
-SN,Senegal,17 police;18 fire,XOF,1,needs a fluent reviewer,
-CI,Côte d'Ivoire,111 police;180 fire,XOF,1,needs a fluent reviewer,
-AO,Angola,113 police;115 ambulance,AOA,1,needs a fluent reviewer,
-MZ,Mozambique,119 police;198 ambulance,MZN,1,needs a fluent reviewer,
+TR,Turkey,112 all services,TRY,2,Interior Ministry single-number 112 policy,2026-09-01
+RU,Russia,112 all services;103 ambulance;102 police,RUB,2,MChS Russia unified 112 guidance,2026-09-01
+BY,Belarus,112 all services;103 ambulance;102 police,BYN,2,MChS Belarus 112 dispatch service,2026-09-01
+KZ,Kazakhstan,112 all services;103 ambulance;102 police,KZT,2,MChS Kazakhstan unified 112 dispatch service,2026-09-01
+KG,Kyrgyzstan,112 all services,KGS,2,MChS Kyrgyzstan unified 112 dispatch service,2026-09-01
+ZA,South Africa,10111 police;10177 ambulance;112 also works,ZAR,2,SAPS 10111 centre and provincial government emergency list,2026-09-01
+KE,Kenya,999 all services;112 also works;911 also works,KES,2,National Police Service published 24/7 hotlines,2026-09-01
+TZ,Tanzania,112 all services,TZS,2,UK FCDO and Government of Canada travel advice,2026-09-01
+UG,Uganda,999 all services;112 also works,UGX,2,Uganda Police Force published emergency line,2026-09-01
+CD,DR Congo,,CDF,1,needs a fluent reviewer,
+SN,Senegal,17 police;18 fire;1515 medical,XOF,2,Senegalese Ministry of Health SAMU guidance,2026-09-01
+CI,Côte d'Ivoire,111 police;180 fire;185 ambulance,XOF,2,UK FCDO and French embassy emergency listings,2026-09-01
+AO,Angola,111 all services,AOA,2,Angolan CISP unified emergency number; Portuguese MNE lists 111 as national,2026-09-01
+MZ,Mozambique,119 police;198 fire;112 also works,MZN,2,Mozambican government emergency contact listings and Portuguese MNE advice,2026-09-01

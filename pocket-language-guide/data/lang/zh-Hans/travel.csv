@@ -112,3 +112,5 @@ common-signs.stopped-stop,停,,tíng,,,2,zh-Hans-agent-v1
 taxi.i-will-get-off-here,我在这里下车,,wǒ zài zhèlǐ xià chē,,,2,zh-Hans-agent-v1
 pickup-meeting.please-call-a-taxi,请帮我叫出租车,,qǐng bāng wǒ jiào chūzūchē,,,2,zh-Hans-agent-v1
 taxi.please-get-me-there-in-time-for-the-shinkansen,我要赶新干线，请快点,,"wǒ yào gǎn Xīngànxiàn, qǐng kuài diǎn",,,2,zh-Hans-agent-v1
+transit-rides.do-i-need-to-validate,上车前需要验票吗？,,shàng chē qián xūyào yànpiào ma?,,,2,zh-Hans-agent-v1
+rail-station-words.ticket-validator,闸机,閘機,zhájī,,,2,zh-Hans-agent-v1

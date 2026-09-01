@@ -16,15 +16,18 @@ import {
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
+import { warningText, applyStatic, loadUiLanguage, t } from './i18n.js';
 
+// Module scope, so the words cannot be looked up here: the keys are, and the
+// menu resolves them when it is built.
 const AUDIENCES = [
-  { value: '', text: 'Everything we have' },
-  { value: 'core', text: 'Just the essentials' },
-  { value: 'transit', text: 'Getting around' },
-  { value: 'food', text: 'Eating and shopping' },
-  { value: 'lodging', text: 'Hotels and buildings' },
-  { value: 'outdoors', text: 'Hiking and parks' },
-  { value: 'health', text: 'Health and emergencies' },
+  { value: '', textKey: 'preset.everything' },
+  { value: 'core', textKey: 'preset.core' },
+  { value: 'transit', textKey: 'quiz.interest.transit' },
+  { value: 'food', textKey: 'quiz.interest.food' },
+  { value: 'lodging', textKey: 'quiz.interest.lodging' },
+  { value: 'outdoors', textKey: 'quiz.interest.outdoors' },
+  { value: 'health', textKey: 'quiz.interest.health' },
 ];
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
@@ -32,6 +35,10 @@ const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.get
 async function main() {
   const { languages, coverage } = await loadLanguages();
   const choice = pairFromQuery(new URLSearchParams(location.search), readerLanguage(languages, coverage));
+  // The interface language is the one the sheet is glossed into -- the reader's
+  // own -- so it is loaded before anything is drawn, static markup included.
+  await loadUiLanguage(choice.source, loadText);
+  applyStatic();
   const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
@@ -40,12 +47,13 @@ async function main() {
 
   const target = ctx.corpus.languages[choice.target];
   const source = ctx.corpus.languages[choice.source];
-  document.title = `${target.exonym_en} pocket guide`;
-  $('title').textContent = `${target.exonym_en} pocket guide`;
-  $('subtitle').textContent = `Glossed into ${source.exonym_en}. Print double-sided, `
-    + 'cut down the middle, and you have four pocket cards.';
+  document.title = t('quick.heading', { language: target.exonym_en });
+  $('title').textContent = t('quick.heading', { language: target.exonym_en });
+  $('subtitle').textContent = t('quick.subtitle', { source: source.exonym_en });
   const flags = regionRow(target.regions, {
-    label: `${target.exonym_en} is spoken in ${target.regions.split(';').join(', ')}`,
+    label: t('gallery.spokenIn', {
+      language: target.exonym_en, regions: target.regions.split(';').join(', '),
+    }),
   });
   if (flags) $('pair-flags').append(flags);
 
@@ -74,7 +82,7 @@ async function main() {
   // --- controls -----------------------------------------------------------
 
   const card = segmented({
-    label: 'Card size',
+    label: t('format.cardSize'),
     value: choice.geometry ?? 'card-7x5-4col',
     options: Object.entries(presets.geometry).map(([id, raw]) => {
       const g = /** @type {any} */ (raw);
@@ -90,40 +98,41 @@ async function main() {
 
   /** @type {{value:'sans'|'serif', caption:string, stack:string}[]} */
   const typefaces = [
-    { value: 'sans', caption: 'Sans', stack: 'latin' },
-    { value: 'serif', caption: 'Serif', stack: 'latin-serif' },
+    { value: 'sans', caption: t('format.typeface.sans'), stack: 'latin' },
+    { value: 'serif', caption: t('format.typeface.serif'), stack: 'latin-serif' },
   ];
   const typeface = segmented({
-    label: 'Typeface',
+    label: t('format.typeface'),
     value: /** @type {'sans'|'serif'} */ ('sans'),
-    options: typefaces.map((t) => ({
-      value: t.value,
-      caption: t.caption,
-      title: t.caption,
-      glyph: typefaceGlyph(`"${familyFor(t.stack)}", ${t.value}-serif`),
+    options: typefaces.map((face) => ({
+      value: face.value,
+      caption: face.caption,
+      title: face.caption,
+      glyph: typefaceGlyph(`"${familyFor(face.stack)}", ${face.value}-serif`),
     })),
     onChange: (value) => set({ typeface: value }),
   });
 
   const padding = segmented({
-    label: 'Breathing room around text',
+    label: t('format.breathingRoom'),
     value: spec.padding,
     options: PADDING_CHOICES.map((choice, i) => ({
       value: choice.value,
-      caption: choice.caption,
-      title: `${choice.caption} padding`,
+      caption: t(choice.captionKey),
+      title: t('format.paddingTitle', { padding: t(choice.captionKey) }),
       glyph: paddingGlyph(i),
     })),
     onChange: (value) => set({ padding: value }),
   });
 
   const ink = segmented({
-    label: 'Ink',
+    label: t('format.ink'),
     value: /** @type {'full'|'low-ink'|'mono'} */ ('full'),
-    options: /** @type {const} */ ([['full', 'Colour'], ['low-ink', 'Low ink'], ['mono', 'Mono']])
-      .map(([value, caption]) => ({
-        value, caption, title: caption, glyph: inkGlyph(value, roles),
-      })),
+    options: /** @type {const} */ ([
+      ['full', 'format.ink.full'], ['low-ink', 'format.ink.lowInk'], ['mono', 'format.ink.mono'],
+    ]).map(([value, captionKey]) => ({
+      value, caption: t(captionKey), title: t(captionKey), glyph: inkGlyph(value, roles),
+    })),
     onChange: (value) => set({ inkMode: value }),
   });
 
@@ -137,7 +146,7 @@ async function main() {
 
   const preset = document.createElement('select');
   preset.id = 'preset';
-  for (const a of AUDIENCES) preset.append(new Option(a.text, a.value));
+  for (const a of AUDIENCES) preset.append(new Option(t(a.textKey), a.value));
   preset.addEventListener('change', () => {
     audience = preset.value;
     set({
@@ -159,28 +168,29 @@ async function main() {
   };
 
   $('controls').replaceChildren(
-    panelField('Card size', [card.group]),
-    panelField('Typeface', [typeface.group]),
-    panelField('Text padding', [padding.group]),
-    panelField('Ink', [ink.group]),
-    menu('paper', 'Paper and printer', paper),
-    menu('preset', 'What to include', preset),
+    panelField(t('format.cardSize'), [card.group]),
+    panelField(t('format.typeface'), [typeface.group]),
+    panelField(t('format.textPadding'), [padding.group]),
+    panelField(t('format.ink'), [ink.group]),
+    menu('paper', t('format.paper'), paper),
+    menu('preset', t('format.whatToInclude'), preset),
   );
 
   const dpiControl = segmented({
-    label: 'PNG resolution',
+    label: t('format.pngResolution'),
     value: 600,
-    options: [[150, 'Screen'], [300, 'Print'], [600, 'Photo']].map(([value, caption]) => ({
-      value: /** @type {number} */ (value),
-      caption: /** @type {string} */ (caption),
-      title: `${value} dpi`,
-      glyph: dpiGlyph(/** @type {number} */ (value)),
-    })),
+    options: [[150, 'format.dpi.screen'], [300, 'format.dpi.print'], [600, 'format.dpi.photo']]
+      .map(([value, captionKey]) => ({
+        value: /** @type {number} */ (value),
+        caption: t(/** @type {string} */ (captionKey)),
+        title: t('format.dpiTitle', { dpi: /** @type {number} */ (value) }),
+        glyph: dpiGlyph(/** @type {number} */ (value)),
+      })),
     onChange: (value) => { dpi = value; },
   });
   // Labelled like every other control on the page; three bare glyph buttons under
   // the export row read as decoration rather than as a setting.
-  $('dpi-control').append(panelField('PNG resolution', [dpiControl.group]));
+  $('dpi-control').append(panelField(t('format.pngResolution'), [dpiControl.group]));
 
   // --- solving and export -------------------------------------------------
 
@@ -201,7 +211,7 @@ async function main() {
       for (const [i, svg] of svgs.entries()) {
         const holder = document.createElement('div');
         holder.className = 'face';
-        holder.setAttribute('aria-label', `Face ${i + 1} of ${svgs.length}`);
+        holder.setAttribute('aria-label', t('preview.faceOf', { n: i + 1, total: svgs.length }));
         holder.innerHTML = svg;
         container.append(holder);
       }
@@ -213,13 +223,17 @@ async function main() {
       .map((w) => {
         const li = document.createElement('li');
         li.className = w.severity;
-        li.textContent = w.message;
+        li.textContent = warningText(w);
         return li;
       }));
     $('status').dataset.busy = '0';
     $('status').textContent = plan.faces.length
-      ? `${plan.faces.length} faces · ${plan.faces.length / 2} sheets · type ${plan.scale.toFixed(2)}×`
-      : 'Nothing to show.';
+      ? t('quick.status', {
+        faces: plan.faces.length,
+        sheets: plan.faces.length / 2,
+        scale: plan.scale.toFixed(2),
+      })
+      : t('quick.nothing');
   }
 
   const name = `${target.exonym_en.toLowerCase().replace(/\W+/g, '-').replace(/^-|-$/g, '')}-pocket-guide`;
@@ -231,12 +245,13 @@ async function main() {
     };
   };
 
-  $('pdf').addEventListener('click', () => withBusy($('pdf'), 'Building PDF…', () => exportPdf(
-    input(), { title: `${target.exonym_en} pocket guide`, language: choice.source },
+  $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), () => exportPdf(
+    input(),
+    { title: t('quick.heading', { language: target.exonym_en }), language: choice.source },
   )).catch(showFatal));
-  $('png').addEventListener('click', () => withBusy($('png'), 'Rendering…',
+  $('png').addEventListener('click', () => withBusy($('png'), t('common.rendering'),
     (onProgress) => exportPng({ ...input(), onProgress }, dpi)).catch(showFatal));
-  $('svg').addEventListener('click', () => withBusy($('svg'), 'Building SVG…',
+  $('svg').addEventListener('click', () => withBusy($('svg'), t('common.buildingSvg'),
     () => exportSvg(input())).catch(showFatal));
 
   await refresh();

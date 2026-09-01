@@ -47,3 +47,7 @@ atm-cash.exchange-rate,atm-cash,ref,word,exchange-rate,22,0.540,atm-cash.exchang
 atm-cash.bank,atm-cash,ref,word,bank,23,0.530,atm-cash.bank,0,0,neutral,,
 atm-cash.money-exchange,atm-cash,ref,word,money-exchange,24,0.520,atm-cash.money-exchange,0,0,neutral,,Sign on a bureau de change.
 atm-cash.pin,atm-cash,ref,word,pin,25,0.500,atm-cash.pin,0,0,neutral,,Keypad prompt. Most machines abroad accept only four digits.
+numbers-money.won,numbers-money,ref,word,won,1020,0.800,numbers-money.currency,0,0,neutral,ko,Korean currency.
+numbers-money.won-symbol,numbers-money,ref,word,won-symbol,1021,0.740,numbers-money.currency,1,0,neutral,ko,The symbol as printed on a price.
+numbers-money.euro,numbers-money,ref,word,euro,1022,0.800,numbers-money.currency,0,0,neutral,de;fr;es,Pronounced differently in each of the three.
+numbers-money.euro-symbol,numbers-money,ref,word,euro-symbol,1023,0.740,numbers-money.currency,1,0,neutral,de;fr;es,The symbol as printed on a price.

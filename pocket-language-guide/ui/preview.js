@@ -11,6 +11,7 @@
 // the strip is one stop and the hit layer is one stop, each walked with the arrow
 // keys -- the same contract the settings panels use, hence the shared key handling.
 
+import { t } from './i18n.js';
 import { nextIndex } from './keys.js';
 
 /**
@@ -105,7 +106,7 @@ function roving(container, items, active) {
  * @param {HTMLElement} container @param {HTMLElement[]} faces @param {number} active */
 function faceChooser(container, faces, active) {
   container.setAttribute('role', 'toolbar');
-  container.setAttribute('aria-label', 'Faces');
+  container.setAttribute('aria-label', t('preview.faces'));
   roving(container, faces, active);
 }
 
@@ -166,7 +167,7 @@ function faceNode(input, svg, index, interactive) {
   const node = document.createElement('div');
   node.className = interactive ? 'face focused' : 'face';
   node.innerHTML = svg;
-  const name = `Face ${index + 1} of ${input.svgs.length}`;
+  const name = t('preview.faceOf', { n: index + 1, total: input.svgs.length });
 
   if (!interactive) {
     // A bare div takes no accessible name and cannot be operated; as a button the
@@ -185,7 +186,7 @@ function faceNode(input, svg, index, interactive) {
   const layer = document.createElement('div');
   layer.className = 'hit-layer';
   layer.setAttribute('role', 'listbox');
-  layer.setAttribute('aria-label', 'Rows on this face');
+  layer.setAttribute('aria-label', t('preview.rowsOnFace'));
   const face = input.plan.faces[index];
   const { pageW, pageH } = input.plan;
   /** @type {HTMLElement[]} */ const boxes = [];
@@ -203,7 +204,7 @@ function faceNode(input, svg, index, interactive) {
     box.style.top = `${(hit.y / pageH) * 100}%`;
     box.style.width = `${(hit.w / pageW) * 100}%`;
     box.style.height = `${(hit.h / pageH) * 100}%`;
-    box.title = 'Show in the content list';
+    box.title = t('preview.showInList');
     box.addEventListener('click', () => input.onPick(conceptId));
     box.addEventListener('mouseenter', () => input.onHover(conceptId));
     box.addEventListener('mouseleave', () => input.onHover(null));
@@ -232,9 +233,7 @@ function duplexCheck(sides) {
   wrap.className = 'duplex';
   const note = document.createElement('p');
   note.className = 'small muted';
-  note.textContent = 'Each card with its own back laid over it in red. If the red '
-    + 'words belong on the back of the black ones, the flip setting matches your '
-    + 'printer. If they are the same column twice, switch it.';
+  note.textContent = t('preview.duplexNote');
   wrap.append(note);
 
   const grid = document.createElement('div');
@@ -242,7 +241,7 @@ function duplexCheck(sides) {
   for (let i = 0; i + 1 < sides.length; i += 2) {
     const card = document.createElement('div');
     card.className = 'duplex-card';
-    card.setAttribute('aria-label', `Card ${i / 2 + 1}, front and back overlaid`);
+    card.setAttribute('aria-label', t('preview.cardPair', { n: i / 2 + 1 }));
     const front = document.createElement('div');
     front.className = 'duplex-side front';
     front.innerHTML = sides[i];
@@ -251,7 +250,7 @@ function duplexCheck(sides) {
     back.innerHTML = sides[i + 1];
     const label = document.createElement('span');
     label.className = 'duplex-label';
-    label.textContent = `Card ${i / 2 + 1}`;
+    label.textContent = t('preview.cardLabel', { n: i / 2 + 1 });
     card.append(front, back, label);
     grid.append(card);
   }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pocket Language Guide — printable phrase cards for any language</title>
+<title data-i18n="gallery.docTitle">Pocket Language Guide — printable phrase cards for any language</title>
 <meta name="description" content="Free, printable pocket-sized vocabulary and phrase guides. Pick a language, customise it, export a high-resolution PDF or PNG. Works offline.">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg">
@@ -11,31 +11,28 @@
 <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
-<a class="skip-link" href="#gallery">Skip to the languages</a>
+<a class="skip-link" href="#gallery" data-i18n="nav.skipToLanguages">Skip to the languages</a>
 <header class="site-header">
   <div class="container">
-    <a class="brand" href="./">Pocket Language Guide</a>
+    <a class="brand" href="./" data-i18n="nav.brand">Pocket Language Guide</a>
     <div class="spacer"></div>
     <div class="reader-picker">
-      <label for="reader">
-        <span id="reader-label">I speak</span>
-        <span class="visually-hidden">— choose the language you already read</span>
-      </label>
-      <select id="reader"></select>
+      <span id="reader-label">I speak</span>
+      <div id="reader"></div>
     </div>
   </div>
 </header>
 
 <main class="container">
-  <h1>Printable pocket guides</h1>
-  <p class="lede">
+  <h1 data-i18n="gallery.heading">Printable pocket guides</h1>
+  <p class="lede" data-i18n="gallery.lede">
     Pick a language and get a pocket-sized phrase card built to print, cut and laminate.
     Every sheet is typeset to fill its columns exactly. Customise the sections and the
     layout, or take the default and export straight away.
   </p>
 
   <div id="gallery" class="gallery" aria-busy="true" tabindex="-1">
-    <p class="muted">Loading languages…</p>
+    <p class="muted" data-i18n="gallery.loading">Loading languages…</p>
   </div>
 </main>
 

@@ -181,7 +181,7 @@ test('a pinned face count with too little room is reported, not truncated', asyn
   };
   const { plan } = await buildSheet(ctx, cramped);
   const codes = plan.warnings.map((w) => w.code);
-  assert.ok(codes.includes('no-fit') || codes.includes('break-failed'),
+  assert.ok(codes.some((c) => c.startsWith('no-fit')) || codes.includes('break-failed'),
     `expected a failure warning, got ${codes.join(', ')}`);
   const fixes = plan.warnings.flatMap((w) => w.fixes ?? []).map((f) => f.label);
   assert.ok(fixes.length > 0, 'a failure should come with something to do about it');

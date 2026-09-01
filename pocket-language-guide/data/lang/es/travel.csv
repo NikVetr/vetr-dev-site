@@ -112,3 +112,5 @@ common-signs.temporarily-closed,Cerrado temporalmente,,,,2,es-agent-v1
 common-signs.open-operating,En servicio,,,,2,es-agent-v1
 common-signs.closed,Cerrado,,,,2,es-agent-v1
 common-signs.stopped-stop,Detenido,Fuera de servicio,,,2,es-agent-v1
+transit-rides.do-i-need-to-validate,¿Tengo que validar este boleto?,este billete,,,2,es-agent-v1
+rail-station-words.ticket-validator,validadora,canceladora · validador,,,2,es-agent-v1

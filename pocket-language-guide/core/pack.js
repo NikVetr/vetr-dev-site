@@ -66,6 +66,28 @@ export async function loadCorpus(loadText) {
 }
 
 /**
+ * Section headings in the reader's language.
+ *
+ * A heading is structural text the *source*-language reader reads, so on a
+ * `zh-Hans <- ja` sheet it belongs in Japanese -- it was English regardless, which
+ * left a French card with French glosses under headings like "Phone, text + power".
+ * Absent file means English, which is the same fallback the interface uses.
+ * @param {LoadText} loadText @param {string} code
+ * @returns {Promise<Record<string,string>>}
+ */
+export async function loadSectionTitles(loadText, code) {
+  const rel = `data/registry/section-titles/${code}.csv`;
+  try {
+    /** @type {Record<string,string>} */ const out = {};
+    for (const row of parseTable(await loadText(rel), rel)) out[row.section_id] = row.title;
+    return out;
+  } catch (err) {
+    if (isMissingFile(err)) return {};
+    throw err;
+  }
+}
+
+/**
  * Whether a concept belongs on a sheet for this target. Empty `applies_to` means
  * every target, which is almost all of them.
  * @param {Record<string,string>} concept @param {string} target
@@ -171,6 +193,8 @@ export async function loadRespellOverrides(loadText, target, source, accent) {
  * @property {Record<string,string>} respell
  * @property {import('./types.js').SheetSpec} spec
  * @property {SheetEdits} [edits]
+ * @property {Record<string,string>} [sectionTitles] headings in the source language;
+ *   absent or incomplete falls back to `title_en`
  */
 
 /**
@@ -203,7 +227,9 @@ export function emergencyNote(corpus, regionCode) {
  * @param {PackInput} input
  * @returns {import('./types.js').Block[]}
  */
-export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec, edits }) {
+export function buildBlocks({
+  corpus, targetRows, sourceRows, respell, spec, edits, sectionTitles,
+}) {
   const { selection } = spec;
   const overrides = edits?.overrides ?? {};
   const extras = edits?.extras ?? [];
@@ -241,7 +267,7 @@ export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec, edi
       colorRole: section.color_role,
       stretch: 0,
       level: /** @type {1|2|3} */ (Number(section.default_level)),
-      text: section.title_en,
+      text: sectionTitles?.[section.section_id] || section.title_en,
       icon: section.icon || null,
     });
 

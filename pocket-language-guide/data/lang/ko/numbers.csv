@@ -39,3 +39,5 @@ numbers-money.y-b-i,백,,baek,,,2,ko-agent-v1
 numbers-money.y-qi-n,천,,cheon,,,2,ko-agent-v1
 numbers-money.y-w-n,만,,man,,,2,ko-agent-v1
 numbers-money.b-n,반,,ban,,,2,ko-agent-v1
+numbers-money.won,원,,won,,,2,ko-agent-v1
+numbers-money.won-symbol,₩,,won,,,2,ko-agent-v1

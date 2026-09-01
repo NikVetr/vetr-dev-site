@@ -6,16 +6,19 @@
 // afterwards; this only picks a starting point.
 
 import { defaultSelection } from '../core/pack.js';
+import { t } from './i18n.js';
 
+// Keys rather than words: this is module scope, evaluated before a catalogue is
+// loaded, so each option is named where it is built.
 const INTERESTS = [
-  { tag: 'transit', label: 'Getting around', hint: 'directions, taxis, trains, signs' },
-  { tag: 'food', label: 'Eating and shopping', hint: 'ordering, allergies, prices, paying' },
-  { tag: 'lodging', label: 'Hotels and buildings', hint: 'checking in, rooms, Wi-Fi, floors' },
-  { tag: 'outdoors', label: 'Hiking and parks', hint: 'trails, shuttles, warnings, weather' },
-  { tag: 'social', label: 'Meeting people', hint: 'greetings, introductions, small talk' },
-  { tag: 'health', label: 'Health and emergencies', hint: 'pharmacy, doctor, lost items' },
-  { tag: 'business', label: 'Work and paperwork', hint: 'receipts, tax refunds, formalities' },
-  { tag: 'family', label: 'Travelling with family', hint: 'tickets, attractions, photos' },
+  { tag: 'transit', labelKey: 'quiz.interest.transit', hintKey: 'quiz.interest.transit.hint' },
+  { tag: 'food', labelKey: 'quiz.interest.food', hintKey: 'quiz.interest.food.hint' },
+  { tag: 'lodging', labelKey: 'quiz.interest.lodging', hintKey: 'quiz.interest.lodging.hint' },
+  { tag: 'outdoors', labelKey: 'quiz.interest.outdoors', hintKey: 'quiz.interest.outdoors.hint' },
+  { tag: 'social', labelKey: 'quiz.interest.social', hintKey: 'quiz.interest.social.hint' },
+  { tag: 'health', labelKey: 'quiz.interest.health', hintKey: 'quiz.interest.health.hint' },
+  { tag: 'business', labelKey: 'quiz.interest.business', hintKey: 'quiz.interest.business.hint' },
+  { tag: 'family', labelKey: 'quiz.interest.family', hintKey: 'quiz.interest.family.hint' },
 ];
 
 /**
@@ -50,44 +53,44 @@ export function openQuiz() {
     return el('label', { class: 'quiz-option' }, [
       box,
       el('span', {}, [
-        el('strong', { text: item.label }),
-        el('span', { class: 'small muted', text: ` — ${item.hint}` }),
+        el('strong', { text: t(item.labelKey) }),
+        el('span', { class: 'small muted', text: t('quiz.hintAside', { hint: t(item.hintKey) }) }),
       ]),
     ]);
   });
 
   const proficiency = /** @type {HTMLSelectElement} */ (el('select', { id: 'quiz-prof' }));
   proficiency.append(
-    new Option('None at all', 'none'),
-    new Option('A few phrases', 'some'),
-    new Option('I can read some of the script', 'reading'),
+    new Option(t('quiz.prof.none'), 'none'),
+    new Option(t('quiz.prof.some'), 'some'),
+    new Option(t('quiz.prof.reading'), 'reading'),
   );
 
   const print = /** @type {HTMLSelectElement} */ (el('select', { id: 'quiz-print' }));
   print.append(
-    new Option('As much as fits — pocket sized', 'pocket'),
-    new Option('Fewer items, larger type', 'large'),
+    new Option(t('quiz.print.pocket'), 'pocket'),
+    new Option(t('quiz.print.large'), 'large'),
   );
 
   dialog.append(
-    el('h2', { text: 'Let’s narrow it down' }),
-    el('p', { class: 'lede', text: 'Three questions. You can change anything afterwards.' }),
+    el('h2', { text: t('quiz.heading') }),
+    el('p', { class: 'lede', text: t('quiz.lede') }),
     el('fieldset', {}, [
-      el('legend', { text: 'What will you be doing?' }),
+      el('legend', { text: t('quiz.doing') }),
       ...boxes,
     ]),
     el('div', { class: 'field' }, [
-      el('label', { for: 'quiz-prof' }, [el('span', { text: 'How much of the language do you have?' })]),
+      el('label', { for: 'quiz-prof' }, [el('span', { text: t('quiz.proficiency') })]),
       proficiency,
     ]),
     el('div', { class: 'field' }, [
-      el('label', { for: 'quiz-print' }, [el('span', { text: 'Print size' })]),
+      el('label', { for: 'quiz-print' }, [el('span', { text: t('quiz.printSize') })]),
       print,
     ]),
   );
 
-  const cancel = el('button', { type: 'button', text: 'Cancel' });
-  const apply = el('button', { type: 'button', class: 'primary', text: 'Build my sheet' });
+  const cancel = el('button', { type: 'button', text: t('quiz.cancel') });
+  const apply = el('button', { type: 'button', class: 'primary', text: t('quiz.build') });
   dialog.append(el('div', { class: 'row', style: 'justify-content:flex-end' }, [cancel, apply]));
 
   document.body.append(dialog);

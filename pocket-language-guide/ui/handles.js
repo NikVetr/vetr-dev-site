@@ -12,6 +12,7 @@
 // does not make it obvious that the text is being reflowed.
 
 import { contentBox } from '../core/solve/index.js';
+import { t } from './i18n.js';
 
 /** Smallest margin worth offering; the printer's own limit is applied on top. */
 const MIN_MARGIN_PT = 2;
@@ -121,8 +122,13 @@ export function attachHandles({ face, spec, onCommit }) {
         readout.textContent = kind === 'columnGap'
           // What the reader cares about is not the gutter but what it does to the
           // columns, so say both.
-          ? `Gap ${value.toFixed(1)}pt · columns ${boxFor({ columnGap: value }).colWidth.toFixed(1)}pt wide`
-          : `${title} ${(value / 72).toFixed(3)}in (${value.toFixed(1)}pt)`;
+          ? t('handles.gapReadout', {
+            gap: value.toFixed(1),
+            width: boxFor({ columnGap: value }).colWidth.toFixed(1),
+          })
+          : t('handles.marginReadout', {
+            name: title, inches: (value / 72).toFixed(3), points: value.toFixed(1),
+          });
         if (kind === 'columnGap') {
           for (const placeGutter of gutterPlacers) placeGutter(value);
         } else {
@@ -149,13 +155,13 @@ export function attachHandles({ face, spec, onCommit }) {
     return grip;
   }
 
-  add('marginLeft', 'Left margin');
-  add('marginRight', 'Right margin');
-  add('marginTop', 'Top margin');
-  add('marginBottom', 'Bottom margin');
+  add('marginLeft', t('handles.marginLeft'));
+  add('marginRight', t('handles.marginRight'));
+  add('marginTop', t('handles.marginTop'));
+  add('marginBottom', t('handles.marginBottom'));
   // One bar per gutter, because a single bar at the first gutter reads as an
   // arbitrary line rather than as the thing that sets every gutter.
-  for (let i = 0; i < g.columns - 1; i += 1) add('columnGap', 'Column gap', i);
+  for (let i = 0; i < g.columns - 1; i += 1) add('columnGap', t('handles.columnGap'), i);
 
   face.append(layer);
   return () => layer.remove();

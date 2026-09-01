@@ -328,15 +328,13 @@ function itemAtoms(ctx, block, rows, withPaint) {
   if (!base) throw new Error(`unknown template ${block.templateId}`);
   const template = arrangeTemplate(base, ctx.spec.arrangement ?? 'two-column', ctx.shown);
   const s = ctx.scale;
-  const pad = template.pad.map((/** @type {number} */ v, /** @type {number} */ i) => (
-    // 0 and 2 are top and bottom: breathing room, so they follow the spacing
-    // curve. 1 and 3 are the horizontal insets that place the accent rule and set
-    // the usable width, so they stay on the type scale -- widening those moves
-    // where text wraps rather than giving it air.
-    v * (i % 2 === 0 ? ctx.spacingRatio : s)
-  ));
-  pad[0] += ctx.padding;
-  pad[2] += ctx.padding;
+  // All four sides, not just top and bottom. Holding the horizontal insets back was
+  // meant to protect the usable width, but those insets are exactly the gap between
+  // the text and the accent rule down the left edge -- so turning padding up moved
+  // the two halves of an entry apart while leaving the text jammed against the bar,
+  // which is not what "more breathing room" means. The width it costs is about 1%
+  // of a column.
+  const pad = template.pad.map((/** @type {number} */ v) => v * ctx.spacingRatio + ctx.padding);
   const rowGap = template.rowGap * ctx.spacingRatio + ctx.padding * 0.6;
   const colGap = template.colGap * ctx.spacingRatio + ctx.padding * 0.5;
   const gutter = colGap * (template.cols - 1);
@@ -435,11 +433,7 @@ function atomShell(ctx, block, height, i, template) {
 function noteAtom(ctx, block, withPaint) {
   const n = ctx.theme.note;
   const s = ctx.scale;
-  const pad = n.pad.map((/** @type {number} */ v, /** @type {number} */ i) => (
-    v * (i % 2 === 0 ? ctx.spacingRatio : s)
-  ));
-  pad[0] += ctx.padding;
-  pad[2] += ctx.padding;
+  const pad = n.pad.map((/** @type {number} */ v) => v * ctx.spacingRatio + ctx.padding);
   const size = ctx.sizeAt(n.size, ctx.sourceFloor);
   const style = {
     stack: ctx.sourceStack.stack,

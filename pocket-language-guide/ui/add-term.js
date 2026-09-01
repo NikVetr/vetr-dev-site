@@ -5,6 +5,8 @@
 // not require exporting a file and importing it back. This writes the same
 // `edits.extras` entry that an import would, so the two paths agree.
 
+import { t } from './i18n.js';
+
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
   const node = document.createElement(tag);
@@ -45,7 +47,7 @@ function makeId(sectionId, gloss, taken) {
 /** @param {AddTermInput} input */
 export function createAddTerm(input) {
   const details = /** @type {HTMLDetailsElement} */ (el('details', { class: 'add-term' }));
-  details.append(el('summary', { text: 'Add your own term' }));
+  details.append(el('summary', { text: t('addTerm.summary') }));
 
   const section = /** @type {HTMLSelectElement} */ (el('select', { id: 'add-section' }));
   for (const s of input.corpus.sections) {
@@ -54,10 +56,18 @@ export function createAddTerm(input) {
 
   const spec = input.spec();
   const fields = /** @type {const} */ ([
-    { key: 'script', label: `In ${input.corpus.languages[spec.target].exonym_en}`, lang: spec.target },
-    { key: 'roman', label: 'Romanisation (optional)', lang: '' },
-    { key: 'gloss', label: `In ${input.corpus.languages[spec.source].exonym_en}`, lang: spec.source },
-    { key: 'respell', label: 'Say-it-like (optional)', lang: '' },
+    {
+      key: 'script',
+      label: t('addTerm.inLanguage', { language: input.corpus.languages[spec.target].exonym_en }),
+      lang: spec.target,
+    },
+    { key: 'roman', label: t('addTerm.optional', { label: t('field.roman') }), lang: '' },
+    {
+      key: 'gloss',
+      label: t('addTerm.inLanguage', { language: input.corpus.languages[spec.source].exonym_en }),
+      lang: spec.source,
+    },
+    { key: 'respell', label: t('addTerm.optional', { label: t('field.respell') }), lang: '' },
   ]);
 
   /** @type {Record<string, HTMLInputElement>} */ const inputs = {};
@@ -73,7 +83,7 @@ export function createAddTerm(input) {
 
   const error = el('p', { class: 'small', style: 'color:var(--alert);margin:0' });
   error.hidden = true;
-  const submit = el('button', { type: 'button', class: 'primary', text: 'Add to the sheet' });
+  const submit = el('button', { type: 'button', class: 'primary', text: t('addTerm.add') });
 
   submit.addEventListener('click', () => {
     const values = {
@@ -85,7 +95,7 @@ export function createAddTerm(input) {
     // Both sides are required: a row with only one is not a translation.
     if (!values.script || !values.gloss) {
       error.hidden = false;
-      error.textContent = 'Both language fields are needed.';
+      error.textContent = t('addTerm.bothNeeded');
       return;
     }
     error.hidden = true;
@@ -108,7 +118,7 @@ export function createAddTerm(input) {
 
   details.append(
     el('div', { class: 'field' }, [
-      el('label', { for: 'add-section' }, [el('span', { text: 'Section' })]),
+      el('label', { for: 'add-section' }, [el('span', { text: t('addTerm.section') })]),
       section,
     ]),
     ...rows,
@@ -122,8 +132,12 @@ export function createAddTerm(input) {
     sync() {
       const next = input.spec();
       const labels = details.querySelectorAll('.field label span');
-      labels[1].textContent = `In ${input.corpus.languages[next.target].exonym_en}`;
-      labels[3].textContent = `In ${input.corpus.languages[next.source].exonym_en}`;
+      labels[1].textContent = t('addTerm.inLanguage', {
+        language: input.corpus.languages[next.target].exonym_en,
+      });
+      labels[3].textContent = t('addTerm.inLanguage', {
+        language: input.corpus.languages[next.source].exonym_en,
+      });
       inputs.script.lang = next.target;
       inputs.gloss.lang = next.source;
     },

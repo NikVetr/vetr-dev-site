@@ -9,6 +9,8 @@
 // a solve is debounced -- would swap the checkbox out from under a reader who is
 // working through a list of them.
 
+import { t } from './i18n.js';
+
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 /**
@@ -92,7 +94,7 @@ export function createTree(input) {
     // Named with aria-label rather than a <label>: a label around the title would
     // make clicking the title toggle the checkbox instead of opening the section.
     const sectionBox = /** @type {HTMLInputElement} */ (el('input', {
-      type: 'checkbox', 'aria-label': `Include ${section.title_en}`,
+      type: 'checkbox', 'aria-label': t('tree.include', { section: section.title_en }),
     }));
     sectionBox.addEventListener('change', () => {
       input.onToggle({ sections: { [section.section_id]: sectionBox.checked } });
@@ -121,7 +123,7 @@ export function createTree(input) {
           box,
           target,
           gloss,
-          ...(concept.custom ? [el('span', { class: 'tag mine', text: 'mine' })] : []),
+          ...(concept.custom ? [el('span', { class: 'tag mine', text: t('tree.mine') })] : []),
         ]),
       ]);
       li.addEventListener('mouseenter', () => input.onHover(concept.conceptId));

@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { faceCount } from './counts.js';
+import { pickReader } from './controls.js';
 
 // The primary use case: abroad, no data, still needs to produce a printable file.
 test('saves a language for offline, then exports with the network off', async ({ page, context }) => {
@@ -29,7 +30,7 @@ test('saves a pair that has no curated respellings', async ({ page, context }) =
   await page.goto('/');
   await expect(page.locator('.card').first()).toBeVisible();
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
-  await page.selectOption('#reader', 'ja');
+  await pickReader(page, '日本語');
 
   const save = page.locator('[data-offline="zh-Hans"]');
   await save.click();

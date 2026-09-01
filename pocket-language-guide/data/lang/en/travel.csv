@@ -112,3 +112,5 @@ directions.north,north,,,,2,expansion-v1
 directions.south,south,,,,2,expansion-v1
 directions.east,east,,,,2,expansion-v1
 directions.west,west,,,,2,expansion-v1
+transit-rides.do-i-need-to-validate,Do I need to validate this ticket?,,,,2,coordinator-gaps-v1
+rail-station-words.ticket-validator,ticket validator,,,,2,coordinator-gaps-v1

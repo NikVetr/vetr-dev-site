@@ -25,11 +25,23 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 
+# Headers are taken from the files on disk where they exist, and these are only the
+# fallback for a fresh corpus. Hardcoding them silently dropped the `applies_to`
+# column -- added after this script was written -- on a later re-run, which took the
+# scoping of every target-specific concept with it. A migration tool must not assume
+# it knows every column.
 SECTION_HEADER = ["section_id", "group", "color_role", "default_level", "icon",
                   "title_en", "rank", "scope", "audience_tags", "importance", "default_on"]
 CONCEPT_HEADER = ["concept_id", "section_id", "default_template", "kind", "slug_en", "rank",
-                  "importance", "cluster_id", "cluster_rank", "slots", "register", "notes"]
+                  "importance", "cluster_id", "cluster_rank", "slots", "register", "applies_to",
+                  "notes"]
 EN_HEADER = ["concept_id", "text", "text_alt", "ipa", "literal", "confidence", "provenance"]
+
+
+def header_of(rel, fallback):
+    """The columns a file already has, so a later-added one is never dropped."""
+    rows = read(rel)
+    return list(rows[0].keys()) if rows else fallback
 
 # Colour encodes the block a panel belongs to, the way the reference sheet used it,
 # so a section's role follows its group. Two agents picked `stay` for a `building`

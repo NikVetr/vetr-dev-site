@@ -47,3 +47,5 @@ numbers-money.2-items,dos,dos unidades,,,1,es-agent-v1
 numbers-money.yen,el yen,,,,2,es-agent-v1
 numbers-money.yen-symbol,¥,yen,,,2,es-agent-v1
 numbers-money.number-and-classifier-notes-2,"Dinero: el punto separa los miles y la coma los decimales: 1.500,50. Céntimo (España) o centavo (América) = 0,01. «billete» = papel; «moneda» = metal; «cambio» o «vuelto» = lo que le devuelven; «suelto» o «sencillo» = monedas pequeñas. Monedas: euro (España), peso (México, Argentina, Chile, Colombia), sol (Perú).",,,,2,es-agent-v1
+numbers-money.euro,el euro,,,,2,es-agent-v1
+numbers-money.euro-symbol,€,euro,,,2,es-agent-v1

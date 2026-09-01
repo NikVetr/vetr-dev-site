@@ -65,18 +65,22 @@ export function facesGlyph(count) {
   const box = 30;
   const svg = frame(box, box);
   if (count <= 0) {
-    svg.append(svgEl('rect', { x: 2, y: 6, width: 11, height: 18, rx: 1, class: 'g-page' }));
-    svg.append(svgEl('rect', { x: 15, y: 6, width: 11, height: 18, rx: 1, class: 'g-page' }));
-    svg.append(svgEl('path', {
-      d: 'M22 13 h7 M25.5 9.5 v7', class: 'g-bracket',
-    }));
+    // Two pages and a plus meaning "and as many more as it takes". The plus used to
+    // be drawn across the second page; it now sits in its own column to the right.
+    svg.append(svgEl('rect', { x: 2, y: 7, width: 9, height: 16, rx: 1, class: 'g-page' }));
+    svg.append(svgEl('rect', { x: 12.5, y: 7, width: 9, height: 16, rx: 1, class: 'g-page' }));
+    svg.append(svgEl('path', { d: 'M23.5 15 h5 M26 12.5 v5', class: 'g-bracket' }));
     return svg;
   }
   const shown = Math.min(count, 6);
   const cols = shown <= 2 ? shown : Math.ceil(shown / 2);
   const rows = shown <= 2 ? 1 : 2;
+  const overflow = count > shown;
+  // A "+2" needs its own strip. It used to be placed over the bottom-right page,
+  // which put digits on top of the drawing at every count above six.
+  const bottom = overflow ? 9 : 4;
   const cw = (box - 4 - (cols - 1) * 2) / cols;
-  const ch = (box - 8 - (rows - 1) * 2) / rows;
+  const ch = (box - 4 - bottom - (rows - 1) * 2) / rows;
   for (let i = 0; i < shown; i += 1) {
     svg.append(svgEl('rect', {
       x: 2 + (i % cols) * (cw + 2),
@@ -84,8 +88,8 @@ export function facesGlyph(count) {
       width: cw, height: ch, rx: 1, class: 'g-page',
     }));
   }
-  if (count > shown) {
-    const label = svgEl('text', { x: box - 1, y: box - 1, class: 'g-count' });
+  if (overflow) {
+    const label = svgEl('text', { x: box / 2, y: box - 1, class: 'g-count' });
     label.textContent = `+${count - shown}`;
     svg.append(label);
   }
@@ -100,13 +104,17 @@ export function facesGlyph(count) {
  * padding really is almost nil, with consecutive rows held apart by a 0.22pt rule
  * alone. That is deliberate there and reads as cramped everywhere else, so the
  * default sits one step up.
+ *
+ * Carries a caption *key* rather than a caption: this is module scope, evaluated
+ * before any catalogue is loaded, so the words are looked up where the option is
+ * built.
  */
 export const PADDING_CHOICES = [
-  { value: 0, caption: 'Tight' },
-  { value: 0.8, caption: 'Normal' },
-  { value: 1.6, caption: 'Roomy' },
-  { value: 2.6, caption: 'Airy' },
-  { value: 3.6, caption: 'Extra' },
+  { value: 0, captionKey: 'format.padding.tight' },
+  { value: 0.5, captionKey: 'format.padding.normal' },
+  { value: 0.9, captionKey: 'format.padding.roomy' },
+  { value: 1.4, captionKey: 'format.padding.airy' },
+  { value: 2.0, captionKey: 'format.padding.extra' },
 ];
 
 /**

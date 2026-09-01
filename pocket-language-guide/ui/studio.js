@@ -20,6 +20,7 @@ import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from
 import { openQuiz, applyQuiz } from './quiz.js';
 import { attachHandles } from './handles.js';
 import { createAddTerm } from './add-term.js';
+import { warningText, applyStatic, loadUiLanguage, t } from './i18n.js';
 
 const BANNER_KEY = 'plg.banner-hidden';
 // A full solve is a few hundred milliseconds of synchronous work, so the debounce
@@ -33,6 +34,10 @@ const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.get
 async function main() {
   const { languages, coverage } = await loadLanguages();
   const choice = pairFromQuery(new URLSearchParams(location.search), readerLanguage(languages, coverage));
+  // The interface language is the one the sheet is glossed into -- the reader's
+  // own -- so it is loaded before anything is drawn, static markup included.
+  await loadUiLanguage(choice.source, loadText);
+  applyStatic();
   const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
@@ -134,17 +139,19 @@ async function main() {
     else if (focused === null && !gridByChoice) focused = 0;
     else if (focused !== null && focused >= svgs.length) focused = 0;
 
-    $('pair').textContent = `${ctx.corpus.languages[spec.target].exonym_en} to `
-      + `${ctx.corpus.languages[spec.source].exonym_en}`;
+    $('pair').textContent = t('studio.pair', {
+      target: ctx.corpus.languages[spec.target].exonym_en,
+      source: ctx.corpus.languages[spec.source].exonym_en,
+    });
     $('status').dataset.busy = '0';
     $('status').textContent = plan.faces.length
-      ? `${plan.faces.length} faces at ${plan.scale.toFixed(2)}x`
-      : 'nothing to lay out';
+      ? t('studio.status', { faces: plan.faces.length, scale: plan.scale.toFixed(2) })
+      : t('studio.nothingToLayOut');
     $('warnings').replaceChildren(...plan.warnings.map(renderWarning));
 
     const total = Object.keys(ctx.corpus.concepts).length;
     const shown = blocks.reduce((n, b) => n + (b.rows?.length ?? 0), 0);
-    $('counts').textContent = `${shown} of ${total} items`;
+    $('counts').textContent = t('studio.counts', { included: shown, total });
 
     // Rebuilt only when its shape changes -- a term added or removed. Otherwise
     // only checkboxes and counts change, so scroll position and expanded sections
@@ -210,7 +217,7 @@ async function main() {
   function renderWarning(warning) {
     const li = document.createElement('li');
     li.className = warning.severity;
-    li.append(document.createTextNode(warning.message));
+    li.append(document.createTextNode(warningText(warning)));
     if (!warning.fixes?.length) return li;
 
     const row = document.createElement('div');
@@ -243,7 +250,7 @@ async function main() {
     if (flip && plan.faces.length) {
       const cards = splitCards(plan, { flip });
       const sides = faceSvgs({ plan: cards, manifest, icons, stacks: [], name: 'x' });
-      $('canvas-note').textContent = 'Checking front-to-back alignment';
+      $('canvas-note').textContent = t('studio.duplexChecking');
       renderFaces({
         root: $('face-area'),
         plan: cards,
@@ -259,8 +266,8 @@ async function main() {
 
     // "Click" would now be wrong: both are keyboard actions too.
     $('canvas-note').textContent = focused === null
-      ? 'Choose a face to work on it'
-      : 'Choose a row to find it in the content list';
+      ? t('studio.chooseFace')
+      : t('studio.chooseRow');
     renderFaces({
       root: $('face-area'),
       plan,
@@ -310,8 +317,7 @@ async function main() {
         adds: [],
         removes: [],
         slack: 0,
-        note: 'The sheet does not fit yet, so there is no whitespace to fill. '
-          + 'Clear the errors above first.',
+        note: t('studio.balanceBlocked'),
       });
       return;
     }
@@ -365,14 +371,14 @@ async function main() {
     const dismiss = document.createElement('button');
     dismiss.type = 'button';
     dismiss.className = 'ghost';
-    dismiss.textContent = diff.adds.length ? 'Reject all' : 'Close';
+    dismiss.textContent = diff.adds.length ? t('studio.rejectAll') : t('studio.close');
     dismiss.addEventListener('click', () => { panel.hidden = true; });
     actions.append(dismiss);
     if (diff.adds.length) {
       const apply = document.createElement('button');
       apply.type = 'button';
       apply.className = 'primary';
-      apply.textContent = 'Add the ticked items';
+      apply.textContent = t('studio.addTicked');
       apply.addEventListener('click', () => {
         /** @type {Record<string,boolean>} */ const items = {};
         for (const box of boxes) {
@@ -409,16 +415,16 @@ async function main() {
     };
   };
 
-  $('pdf').addEventListener('click', () => withBusy($('pdf'), 'Building PDF…', () => exportPdf(
+  $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), () => exportPdf(
     exportInput(),
     {
-      title: `${ctx.corpus.languages[spec.target].exonym_en} pocket guide`,
+      title: t('quick.heading', { language: ctx.corpus.languages[spec.target].exonym_en }),
       language: spec.source,
     },
   )).catch(showFatal));
-  $('png').addEventListener('click', () => withBusy($('png'), 'Rendering…',
+  $('png').addEventListener('click', () => withBusy($('png'), t('common.rendering'),
     (onProgress) => exportPng({ ...exportInput(), onProgress }, pngDpi)).catch(showFatal));
-  $('svg').addEventListener('click', () => withBusy($('svg'), 'Building SVG…',
+  $('svg').addEventListener('click', () => withBusy($('svg'), t('common.buildingSvg'),
     () => exportSvg(exportInput())).catch(showFatal));
 
   $('csv-out').addEventListener('click', () => {
@@ -432,11 +438,15 @@ async function main() {
       const result = importSheetCsv(await file.text(), ctx.corpus, edits);
       edits = result.edits;
       saveEdits(spec.target, spec.source, edits);
-      alert(`Imported ${result.updated} edits and ${result.added} new items.`
-        + (result.problems.length ? `\n\nSkipped:\n${result.problems.slice(0, 8).join('\n')}` : ''));
+      const skipped = result.problems.length
+        ? t('studio.importSkipped', { problems: result.problems.slice(0, 8).join('\n') })
+        : '';
+      alert(t('studio.imported', { updated: result.updated, added: result.added, skipped }));
       schedule();
     } catch (err) {
-      alert(`Import failed: ${err instanceof Error ? err.message : String(err)}`);
+      alert(t('studio.importFailed', {
+        reason: err instanceof Error ? err.message : String(err),
+      }));
     } finally {
       /** @type {HTMLInputElement} */ ($('csv-file')).value = '';
     }
@@ -446,7 +456,7 @@ async function main() {
     const reset = document.createElement('button');
     reset.type = 'button';
     reset.className = 'ghost small';
-    reset.textContent = 'Discard my edits';
+    reset.textContent = t('studio.discardEdits');
     reset.addEventListener('click', () => {
       clearEdits(spec.target, spec.source);
       edits = loadEdits(spec.target, spec.source);

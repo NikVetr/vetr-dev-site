@@ -47,3 +47,7 @@ atm-cash.exchange-rate,exchange rate,,,,2,expansion-v1
 atm-cash.bank,bank,,,,2,expansion-v1
 atm-cash.money-exchange,money exchange,,,,2,expansion-v1
 atm-cash.pin,PIN,,,,2,expansion-v1
+numbers-money.won,won,,,,2,coordinator-gaps-v1
+numbers-money.won-symbol,won (symbol),,,,2,coordinator-gaps-v1
+numbers-money.euro,euro,,,,2,coordinator-gaps-v1
+numbers-money.euro-symbol,euro (symbol),,,,2,coordinator-gaps-v1

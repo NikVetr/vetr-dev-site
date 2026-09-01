@@ -36,7 +36,7 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     typeface: 'sans',
     inkMode: 'full',
     autoFaces: true,
-    padding: 0.8,
+    padding: 0.5,
     arrangement: 'two-column',
     // 0 means fit: with faces on auto too, that resolves to the fewest pairs of
     // faces at the largest legible type -- the same answer the reference sheet

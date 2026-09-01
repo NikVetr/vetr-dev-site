@@ -15,51 +15,54 @@ import {
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
+import { t } from './i18n.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
 // 0 selects auto. Faces come in pairs: a double-sided sheet is two of them.
 const FACE_CHOICES = [0, 2, 4, 6, 8, 10];
+// These tables are module scope, evaluated before a catalogue exists, so they
+// carry message keys and the words are looked up where each option is built.
 const SCALE_CHOICES = [
-  { value: 0, caption: 'Fit' },
-  { value: 0.9, caption: 'Small' },
-  { value: 1, caption: 'Medium' },
-  { value: 1.15, caption: 'Large' },
-  { value: 1.3, caption: 'X-large' },
+  { value: 0, captionKey: 'format.scale.fit' },
+  { value: 0.9, captionKey: 'format.scale.small' },
+  { value: 1, captionKey: 'format.scale.medium' },
+  { value: 1.15, captionKey: 'format.scale.large' },
+  { value: 1.3, captionKey: 'format.scale.xlarge' },
 ];
 const TYPEFACE_CHOICES = /** @type {const} */ ([
-  { value: 'sans', caption: 'Sans', stack: 'latin' },
-  { value: 'serif', caption: 'Serif', stack: 'latin-serif' },
+  { value: 'sans', captionKey: 'format.typeface.sans', stack: 'latin' },
+  { value: 'serif', captionKey: 'format.typeface.serif', stack: 'latin-serif' },
 ]);
 const DPI_CHOICES = [
-  { value: 150, caption: 'Screen' },
-  { value: 300, caption: 'Print' },
-  { value: 600, caption: 'Photo' },
+  { value: 150, captionKey: 'format.dpi.screen' },
+  { value: 300, captionKey: 'format.dpi.print' },
+  { value: 600, captionKey: 'format.dpi.photo' },
 ];
 const INK_CHOICES = /** @type {const} */ ([
-  { value: 'full', caption: 'Colour' },
-  { value: 'low-ink', caption: 'Low ink' },
-  { value: 'mono', caption: 'Mono' },
+  { value: 'full', captionKey: 'format.ink.full' },
+  { value: 'low-ink', captionKey: 'format.ink.lowInk' },
+  { value: 'mono', captionKey: 'format.ink.mono' },
 ]);
 const CUT_CHOICES = /** @type {const} */ ([
-  { value: '', caption: 'Whole' },
-  { value: 'short-edge', caption: 'Short edge' },
-  { value: 'long-edge', caption: 'Long edge' },
+  { value: '', captionKey: 'format.cut.whole' },
+  { value: 'short-edge', captionKey: 'format.cut.shortEdge' },
+  { value: 'long-edge', captionKey: 'format.cut.longEdge' },
 ]);
 
-const FIELD_LABELS = /** @type {const} */ ({
-  script: 'Their script',
-  script_alt: 'Other script',
-  roman: 'Romanisation',
-  ipa: 'IPA',
-  gloss: 'Your language',
-  respell: 'Say-it-like',
-  literal: 'Literal',
+const FIELD_LABEL_KEYS = /** @type {const} */ ({
+  script: 'field.script',
+  script_alt: 'field.script_alt',
+  roman: 'field.roman',
+  ipa: 'field.ipa',
+  gloss: 'field.gloss',
+  respell: 'field.respell',
+  literal: 'field.literal',
 });
 
-const CUT_NOTES = {
-  '': 'Print double-sided. Each sheet is one face on the front, one on the back.',
-  'short-edge': 'Cut each sheet down the middle: four double-sided cards. Nothing is rotated.',
-  'long-edge': 'Same four cards, with each back pre-rotated so it comes out upright.',
+const CUT_NOTE_KEYS = {
+  '': 'cut.hint.whole',
+  'short-edge': 'cut.hint.shortEdge',
+  'long-edge': 'cut.hint.longEdge',
 };
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
@@ -113,7 +116,7 @@ export function createFormatPanel(input) {
   // --- card size ----------------------------------------------------------
 
   const size = segmented({
-    label: 'Card size',
+    label: t('format.cardSize'),
     value: presetOf(),
     options: Object.entries(presets.geometry).map(([id, raw]) => {
       const g = /** @type {any} */ (raw);
@@ -133,26 +136,26 @@ export function createFormatPanel(input) {
   // --- columns and faces --------------------------------------------------
 
   const columns = segmented({
-    label: 'Columns per face',
+    label: t('format.columnsPerFace'),
     value: spec.geometry.columns,
     options: COLUMN_CHOICES.map((n) => ({
       value: n,
       caption: String(n),
-      title: `${n} ${n === 1 ? 'column' : 'columns'}`,
+      title: t('format.columnsTitle', { count: n }),
       glyph: pageGlyph({ pageW: spec.geometry.pageW, pageH: spec.geometry.pageH, columns: n }),
     })),
     onChange: (n) => emit({ geometry: { ...spec.geometry, columns: n } }),
   });
 
   const faces = segmented({
-    label: 'Faces',
+    label: t('format.faces'),
     value: spec.autoFaces ? 0 : spec.geometry.faces,
     options: FACE_CHOICES.map((n) => ({
       value: n,
-      caption: n === 0 ? 'Auto' : String(n),
+      caption: n === 0 ? t('format.faces.auto') : String(n),
       title: n === 0
-        ? 'As many as the content needs, in pairs'
-        : `${n} ${n === 1 ? 'face' : 'faces'}`,
+        ? t('format.autoFaces')
+        : t('format.facesTitle', { count: n }),
       glyph: facesGlyph(n),
     })),
     // Auto keeps whatever count is there as its starting point, so switching to it
@@ -168,43 +171,43 @@ export function createFormatPanel(input) {
   // --- spacing, arrangement, colour ---------------------------------------
 
   const typeSize = segmented({
-    label: 'Type size',
+    label: t('format.typeSize'),
     value: spec.scale,
     options: SCALE_CHOICES.map((choice) => ({
       value: choice.value,
-      caption: choice.caption,
-      title: choice.value === 0 ? 'Fit the type to the faces you asked for' : `${choice.value}x`,
+      caption: t(choice.captionKey),
+      title: choice.value === 0 ? t('format.fitTitle') : t('format.scaleTitle', { scale: choice.value }),
       glyph: typeGlyph(choice.value),
     })),
     onChange: (value) => emit({ scale: value }),
   });
 
   const typefaceControl = segmented({
-    label: 'Typeface',
+    label: t('format.typeface'),
     value: spec.typeface,
     options: TYPEFACE_CHOICES.map((choice) => ({
       value: choice.value,
-      caption: choice.caption,
-      title: choice.caption,
+      caption: t(choice.captionKey),
+      title: t(choice.captionKey),
       glyph: typefaceGlyph(`"${familyFor(choice.stack)}", ${choice.value}-serif`),
     })),
     onChange: (value) => emit({ typeface: value }),
   });
 
   const padding = segmented({
-    label: 'Breathing room around text',
+    label: t('format.breathingRoom'),
     value: spec.padding,
     options: PADDING_CHOICES.map((choice, i) => ({
       value: choice.value,
-      caption: choice.caption,
-      title: `${choice.caption} spacing`,
+      caption: t(choice.captionKey),
+      title: t('format.paddingTitle', { padding: t(choice.captionKey) }),
       glyph: paddingGlyph(i),
     })),
     onChange: (value) => emit({ padding: value }),
   });
 
   const arrangement = segmented({
-    label: 'How each entry is laid out',
+    label: t('format.entryLayoutLong'),
     value: spec.arrangement,
     options: ARRANGEMENTS.map((a) => ({
       value: a.id,
@@ -216,11 +219,11 @@ export function createFormatPanel(input) {
   });
 
   const theme = segmented({
-    label: 'Colours',
+    label: t('format.colours'),
     value: spec.themeId,
     options: Object.keys(themes).map((id) => ({
       value: id,
-      caption: id === 'cvd-safe' ? 'Accessible' : 'Reference',
+      caption: id === 'cvd-safe' ? t('format.theme.accessible') : t('format.theme.reference'),
       title: themes[id]?.name ?? id,
       glyph: paletteGlyph(roles(id)),
     })),
@@ -228,24 +231,24 @@ export function createFormatPanel(input) {
   });
 
   const ink = segmented({
-    label: 'Ink',
+    label: t('format.ink'),
     value: spec.inkMode,
     options: INK_CHOICES.map((choice) => ({
       value: choice.value,
-      caption: choice.caption,
-      title: choice.caption,
+      caption: t(choice.captionKey),
+      title: t(choice.captionKey),
       glyph: inkGlyph(choice.value, roles(spec.themeId)),
     })),
     onChange: (value) => emit({ inkMode: value }),
   });
 
   const dpi = segmented({
-    label: 'PNG resolution',
+    label: t('format.pngResolution'),
     value: 600,
     options: DPI_CHOICES.map((choice) => ({
       value: choice.value,
-      caption: choice.caption,
-      title: `${choice.value} dpi`,
+      caption: t(choice.captionKey),
+      title: t('format.dpiTitle', { dpi: choice.value }),
       glyph: dpiGlyph(choice.value),
     })),
     onChange: (value) => input.onDpiChange(value),
@@ -253,19 +256,19 @@ export function createFormatPanel(input) {
 
   // --- cutting ------------------------------------------------------------
 
-  const cutNote = el('p', { class: 'small muted panel-note', text: CUT_NOTES[''] });
+  const cutNote = el('p', { class: 'small muted panel-note', text: t(CUT_NOTE_KEYS['']) });
   const cutControl = segmented({
-    label: 'Cut into cards',
+    label: t('format.cutIntoCards'),
     value: cut,
     options: CUT_CHOICES.map((choice) => ({
       value: choice.value,
-      caption: choice.caption,
-      title: choice.caption,
+      caption: t(choice.captionKey),
+      title: t(choice.captionKey),
       glyph: cutGlyph(choice.value),
     })),
     onChange: (value) => {
       cut = value;
-      cutNote.textContent = CUT_NOTES[value];
+      cutNote.textContent = t(CUT_NOTE_KEYS[value]);
       input.onCutChange(value);
     },
   });
@@ -290,7 +293,7 @@ export function createFormatPanel(input) {
   }
 
   const paper = menu(
-    'paper', 'Paper and printer',
+    'paper', t('format.paper'),
     Object.values(corpus.paper).map((p) => ({ value: p.preset_id, text: p.name })),
     spec.paper.presetId,
     (value) => input.onChange({ paper: paperSpec(corpus, value) }),
@@ -300,10 +303,13 @@ export function createFormatPanel(input) {
   // planned or drafted: offering a gloss language with no data produced a blank
   // sheet and fifteen 404s, and said nothing about why.
   const source = menu(
-    'source', 'Glossed into',
+    'source', t('format.glossedInto'),
     languages
       .filter((l) => l.bcp47 !== spec.target && hasContent(corpus.coverage, l.bcp47))
-      .map((l) => ({ value: l.bcp47, text: `${l.endonym} (${l.exonym_en})` })),
+      .map((l) => ({
+        value: l.bcp47,
+        text: t('gallery.pickerOption', { endonym: l.endonym, exonym: l.exonym_en }),
+      })),
     spec.source,
     (value) => emit({ source: value, accent: `${value}-US` }),
   );
@@ -313,7 +319,7 @@ export function createFormatPanel(input) {
   const regionCodes = (corpus.languages[spec.target].regions || '').split(';').filter(Boolean);
   const region = regionCodes.length > 1
     ? menu(
-      'region', 'Where you are going',
+      'region', t('format.region'),
       regionCodes.map((code) => ({
         value: code,
         text: `${flagsSupported() ? `${flagEmoji(code)} ` : ''}${corpus.regions[code]?.name_en ?? code}`,
@@ -325,8 +331,10 @@ export function createFormatPanel(input) {
 
   const systems = (corpus.languages[spec.target].romanizations || '').split(';').filter(Boolean);
   const romanization = menu(
-    'romanization', 'Romanisation',
-    systems.length ? systems.map((v) => ({ value: v, text: v })) : [{ value: '', text: 'none' }],
+    'romanization', t('format.romanisation'),
+    systems.length
+      ? systems.map((v) => ({ value: v, text: v }))
+      : [{ value: '', text: t('format.romanisation.none') }],
     spec.romanization,
     (value) => emit({ romanization: value }),
   );
@@ -336,7 +344,7 @@ export function createFormatPanel(input) {
 
   const fieldRow = el('div', { class: 'field-toggles' });
   /** @type {Map<string, HTMLInputElement>} */ const fieldBoxes = new Map();
-  for (const [field, label] of Object.entries(FIELD_LABELS)) {
+  for (const [field, labelKey] of Object.entries(FIELD_LABEL_KEYS)) {
     const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
     box.dataset.field = field;
     box.checked = spec.fieldSet.includes(/** @type {any} */ (field));
@@ -348,22 +356,22 @@ export function createFormatPanel(input) {
       emit({ fieldSet: [.../** @type {any} */ (next), 'numeral'] });
     });
     fieldBoxes.set(field, box);
-    fieldRow.append(el('label', { class: 'small' }, [box, document.createTextNode(label)]));
+    fieldRow.append(el('label', { class: 'small' }, [box, document.createTextNode(t(labelKey))]));
   }
 
   root.replaceChildren(
-    panelField('Card', [size.group]),
-    panelField('Columns', [columns.group]),
-    panelField('Faces', [faces.group]),
-    panelField('Typeface', [typefaceControl.group]),
-    panelField('Type size', [typeSize.group]),
-    panelField('Entry layout', [arrangement.group]),
-    panelField('Text padding', [padding.group]),
-    panelField('Colours', [theme.group]),
-    panelField('Ink', [ink.group]),
-    panelField('Cut into cards', [cutControl.group, cutNote]),
-    panelField('PNG resolution', [dpi.group]),
-    panelField('Columns shown', [fieldRow]),
+    panelField(t('format.card'), [size.group]),
+    panelField(t('format.columns'), [columns.group]),
+    panelField(t('format.faces'), [faces.group]),
+    panelField(t('format.typeface'), [typefaceControl.group]),
+    panelField(t('format.typeSize'), [typeSize.group]),
+    panelField(t('format.entryLayout'), [arrangement.group]),
+    panelField(t('format.textPadding'), [padding.group]),
+    panelField(t('format.colours'), [theme.group]),
+    panelField(t('format.ink'), [ink.group]),
+    panelField(t('format.cutIntoCards'), [cutControl.group, cutNote]),
+    panelField(t('format.pngResolution'), [dpi.group]),
+    panelField(t('format.columnsShown'), [fieldRow]),
     paper.wrap,
     source.wrap,
     romanization.wrap,
@@ -383,8 +391,8 @@ export function createFormatPanel(input) {
       // Auto is only useful if it says what it decided.
       if (autoFacesCaption) {
         autoFacesCaption.textContent = next.autoFaces && resolvedFaces
-          ? `Auto · ${resolvedFaces}`
-          : 'Auto';
+          ? t('format.faces.autoResolved', { faces: resolvedFaces })
+          : t('format.faces.auto');
       }
       typefaceControl.select(next.typeface);
       typeSize.select(next.scale);

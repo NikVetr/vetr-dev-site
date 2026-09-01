@@ -112,3 +112,5 @@ common-signs.temporarily-closed,common-signs,ref,word,temporarily-closed,10,0.60
 common-signs.open-operating,common-signs,ref,word,open-operating,1001,0.680,common-signs.open-operating,0,0,neutral,,
 common-signs.closed,common-signs,ref,word,closed,1002,0.680,common-signs.closed,0,0,neutral,,
 common-signs.stopped-stop,common-signs,ref,word,stopped-stop,1003,0.680,common-signs.stopped-stop,0,0,neutral,,
+transit-rides.do-i-need-to-validate,transit-rides,entry,phrase,do-i-need-to-validate,1003,0.780,transit-rides.validate,0,0,neutral,,"Stamping or tapping a ticket before boarding. An unvalidated ticket is fined as travelling without one across German-speaking Europe, Italy and much of central Europe, and the machine is easy to walk past. Must ask about validating, not buying."
+rail-station-words.ticket-validator,rail-station-words,ref,word,ticket-validator,14,0.660,rail-station-words.validate,1,0,neutral,,"The machine itself, so a reader can find it. Use the word printed on it."

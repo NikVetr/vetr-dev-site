@@ -7,6 +7,8 @@ import {
   saveForOffline, setReaderLanguage, showFatal,
 } from './app.js';
 import { regionRow } from './flags.js';
+import { languagePicker } from './language-picker.js';
+import { applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -21,12 +23,45 @@ function el(tag, attrs = {}, kids = []) {
 }
 
 /**
+ * A closer look at a language's default card, without leaving the page. The
+ * gallery deliberately does not load the solver, so this shows the pre-rendered
+ * first face rather than typesetting anything -- the studio is one click away for
+ * the rest.
+ * @param {{name:string, key:string, query:string}} card
+ */
+function openPreview({ name, key, query }) {
+  const dialog = document.createElement('dialog');
+  dialog.className = 'preview-dialog';
+  dialog.append(
+    el('h2', { text: t('gallery.previewTitle', { language: name }) }),
+    el('img', { src: `packs/${key}/thumb.png`, alt: t('gallery.thumbAlt', { language: name }) }),
+    el('p', { class: 'small muted', text: t('gallery.previewNote') }),
+    el('div', { class: 'row' }, [
+      el('a', { class: 'btn primary', href: `sheet.html${query}`, text: t('gallery.export') }),
+      el('a', { class: 'btn', href: `customize.html${query}`, text: t('gallery.customise') }),
+    ]),
+  );
+  const close = el('button', { type: 'button', class: 'preview-close', text: '\u00d7' });
+  close.setAttribute('aria-label', t('gallery.previewClose'));
+  close.addEventListener('click', () => dialog.close());
+  dialog.prepend(close);
+  // Clicking the backdrop closes it, which is what everyone expects of a lightbox.
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener('close', () => dialog.remove());
+  document.body.append(dialog);
+  dialog.showModal();
+}
+
+/**
  * @param {Record<string,string>} lang
  * @param {Set<string>} packs   `target__source` keys that exist
  * @param {string} reader
  * @param {{total:number, languages:Record<string,number>}} coverage
  */
 function card(lang, packs, reader, coverage) {
+  const name = languageName(lang.bcp47, lang.exonym_en);
   const key = `${lang.bcp47}__${reader}`;
   const hasPack = packs.has(key);
   // A pair can only render what both sides have.
@@ -34,51 +69,55 @@ function card(lang, packs, reader, coverage) {
   const query = `?target=${encodeURIComponent(lang.bcp47)}&source=${encodeURIComponent(reader)}`;
 
   const flags = regionRow(lang.regions, {
-    label: `${lang.exonym_en} is spoken in ${lang.regions.split(';').join(', ')}`,
+    label: t('gallery.spokenIn', { language: name, regions: lang.regions.split(';').join(', ') }),
   });
   const head = el('div', { class: 'card-head' }, [
     el('span', { class: 'card-badge', 'aria-hidden': 'true', text: lang.badge }),
     el('span', { class: 'card-titles' }, [
-      el('div', { class: 'card-name', text: lang.exonym_en }),
+      el('div', { class: 'card-name', text: name }),
       el('div', { class: 'small muted', text: lang.endonym, lang: lang.bcp47 }),
-      // Coverage belongs beside the name, not in the action row: as a chip there it
-      // pushed the three buttons off the edge of the card.
-      ...(have && have < coverage.total
-        ? [el('div', { class: 'card-coverage', text: `${have} of ${coverage.total} phrases` })]
-        : []),
     ]),
     ...(flags ? [flags] : []),
   ]);
 
   const thumb = hasPack && have
-    ? el('img', {
+    ? el('button', {
+      type: 'button',
+      class: 'card-thumb-button',
+      'data-i18n-label': 'gallery.previewOpen',
+      'aria-label': t('gallery.previewOpen', { language: name }),
+    }, [el('img', {
       class: 'card-thumb',
       src: `packs/${key}/thumb.png`,
-      alt: `First face of the default ${lang.exonym_en} guide`,
+      alt: t('gallery.thumbAlt', { language: name }),
       loading: 'lazy',
       decoding: 'async',
-    })
+    })])
     : el('div', { class: 'card-thumb placeholder' }, [
       el('span', {
         text: have
-          ? `${have} of ${coverage.total} phrases translated`
-          : 'Not translated yet',
+          ? t('gallery.coverageLong', { have, total: coverage.total })
+          : t('gallery.notTranslated'),
       }),
     ]);
 
   /** @type {(Node|string)[]} */ const actions = [];
   if (!have) {
-    actions.push(el('span', { class: 'tag planned', text: 'help translate' }));
+    actions.push(el('span', { class: 'tag planned', text: t('gallery.helpTranslate') }));
   } else {
-    actions.push(el('a', { class: 'btn primary', href: `sheet.html${query}`, text: 'Export' }));
-    actions.push(el('a', { class: 'btn', href: `customize.html${query}`, text: 'Customise' }));
+    actions.push(el('a', {
+      class: 'btn primary', href: `sheet.html${query}`, text: t('gallery.export'),
+    }));
+    actions.push(el('a', {
+      class: 'btn', href: `customize.html${query}`, text: t('gallery.customise'),
+    }));
     const offline = el('button', {
-      type: 'button', class: 'btn', text: 'Offline',
-      title: 'Save this language for use without a network',
+      type: 'button', class: 'btn', text: t('gallery.offline'),
+      title: t('gallery.offlineTitle'),
       'data-offline': lang.bcp47,
     });
     offline.addEventListener('click', async () => {
-      offline.textContent = 'Saving…';
+      offline.textContent = t('gallery.saving');
       /** @type {HTMLButtonElement} */ (offline).disabled = true;
       try {
         const ctx = await browserSheetContext();
@@ -86,15 +125,18 @@ function card(lang, packs, reader, coverage) {
         const result = await saveForOffline({
           corpus: ctx.corpus, target: lang.bcp47, source: reader, manifest,
         });
-        offline.textContent = result.ok ? 'Saved' : 'Partly saved';
+        offline.textContent = result.ok ? t('gallery.saved') : t('gallery.partlySaved');
       } catch (err) {
-        offline.textContent = 'Could not save';
+        offline.textContent = t('gallery.saveFailed');
         console.warn('[plg]', err);
       }
     });
     actions.push(offline);
   }
 
+  if (thumb instanceof HTMLButtonElement) {
+    thumb.addEventListener('click', () => openPreview({ name, key, query }));
+  }
   return el('article', { class: 'card' }, [head, thumb, el('div', { class: 'card-actions' }, actions)]);
 }
 
@@ -156,6 +198,10 @@ async function main() {
   registerOffline();
   const { languages, coverage } = await loadLanguages();
   const reader = readerLanguage(languages, coverage);
+  // The interface language is the reader's own, so this has to happen before
+  // anything is drawn -- including the static markup.
+  await loadUiLanguage(reader, loadText);
+  applyStatic();
 
   /** @type {Set<string>} */ let packs = new Set();
   try {
@@ -165,17 +211,28 @@ async function main() {
     // No pre-rendered packs yet; cards still work, they just have no thumbnail.
   }
 
-  const picker = /** @type {HTMLSelectElement} */ (document.getElementById('reader'));
-  for (const lang of languages.filter((l) => l.status !== 'planned')) {
-    picker.append(el('option', { value: lang.bcp47, text: `${lang.endonym} (${lang.exonym_en})` }));
-  }
-  picker.value = reader;
-  renderSpeakCollage(languages, reader);
-  picker.addEventListener('change', () => {
-    setReaderLanguage(picker.value);
-    renderSpeakCollage(languages, picker.value);
-    render(picker.value);
+  const mount = /** @type {HTMLElement} */ (document.getElementById('reader'));
+  // Collapsed it shows only the endonym -- "Deutsch", not "Deutsch (German)" --
+  // because that is the word you scan for. The name in the reader's own language
+  // earns its place only in the open list, set grey and to the trailing edge.
+  languagePicker({
+    mount,
+    label: t('nav.readerHint'),
+    value: reader,
+    options: languages
+      .filter((l) => l.status !== 'planned')
+      .map((l) => ({
+        value: l.bcp47,
+        name: l.endonym,
+        aside: languageName(l.bcp47, l.exonym_en),
+      })),
+    onChange: (value) => {
+      setReaderLanguage(value);
+      renderSpeakCollage(languages, value);
+      render(value);
+    },
   });
+  renderSpeakCollage(languages, reader);
 
   /** @param {string} readerCode */
   function render(readerCode) {

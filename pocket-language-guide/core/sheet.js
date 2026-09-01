@@ -7,7 +7,9 @@
 
 import { createFontRegistry } from './fonts.js';
 import { createMeasurer } from './measure.js';
-import { loadCorpus, loadLanguage, loadRespellOverrides, buildBlocks } from './pack.js';
+import {
+  loadCorpus, loadLanguage, loadRespellOverrides, loadSectionTitles, buildBlocks,
+} from './pack.js';
 import { layout } from './solve/index.js';
 
 /**
@@ -98,7 +100,11 @@ export async function buildSheet(ctx, spec, edits) {
   const respell = ctx.corpus.respellOverrides.has(`${spec.target}__${spec.source}__${spec.accent}`)
     ? await loadRespellOverrides(loadText, spec.target, spec.source, spec.accent)
     : {};
-  const blocks = buildBlocks({ corpus, targetRows, sourceRows, respell, spec, edits });
+  // Headings are read by the source-language reader, so they follow the gloss.
+  const sectionTitles = await loadSectionTitles(loadText, spec.source);
+  const blocks = buildBlocks({
+    corpus, targetRows, sourceRows, respell, spec, edits, sectionTitles,
+  });
   return {
     blocks,
     theme,

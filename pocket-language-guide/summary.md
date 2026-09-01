@@ -277,6 +277,57 @@ both now, and dropping the attribute also stops SVG reversing a numeral piece.
 
 What is *not* handled is bidi proper; see "Deliberately not built yet".
 
+### Interface language
+
+The interface language is the reader's **own** language -- the one already chosen in
+the header and persisted -- not a separate setting. Somebody who reads Korean wants
+a Korean interface and Korean glosses; asking twice would be asking the same
+question twice, and it makes the picker that was already there do something more
+useful than it did.
+
+`data/i18n/en.json` is the source of truth and holds every key. Every other
+catalogue is a *partial overlay*: a key it omits falls back to English rather than
+rendering a bare key, so a half-translated language degrades to a mixed interface
+instead of a broken one, and a language with no catalogue at all is simply English
+-- exactly what it was before. Static markup carries `data-i18n="key"`; anything
+built in JavaScript calls `t('key', vars)`. Both read the same catalogue, so a
+string lives in one place regardless of which side of that line it is drawn on.
+
+Three decisions worth keeping:
+
+**Placeholders, never concatenation.** `t('studio.status', { faces, scale })`, not
+three fragments glued together. Word order is exactly what differs between
+languages, and `4 faces at 0.87x` cannot be reassembled correctly in Japanese or
+Arabic from parts chosen for English.
+
+**No plural machinery.** English switches `column`/`columns`; other languages have
+different rules, and CLDR plural categories are far more apparatus than this needs.
+So the strings are phrased to need no agreement -- "Some columns could not be filled
+evenly ({count})" rather than "{count} column(s)". That is a constraint on the
+English, and it is cheaper than the alternative.
+
+**Language names come from the platform.** `Intl.DisplayNames` already knows every
+language's name in every locale, which is a better answer than carrying sixteen
+names across eight catalogues and keeping them in step.
+
+The solver cannot translate -- it has no business knowing what language the
+interface is in -- so a `Warning` carries a stable `code`, the English `message`
+(which is also what the Node-side scripts print), and a `params` object. The UI
+looks up `warn.<code>` and interpolates. A code with no catalogue entry falls back
+to `message`, so a warning is never lost to a missing key.
+
+`npm run i18n` checks the catalogue against the code: a key referenced but not
+defined fails the build, because the reader would see the bare key. A key defined
+but never referenced is only reported -- it wastes a translator's time rather than
+breaking anything, and it is the normal state while a catalogue is written ahead of
+its call sites. The same script reports each language's coverage.
+
+Right-to-left needed almost nothing: the stylesheet was already written in logical
+properties (`padding-inline`, `border-end-start-radius`), so setting
+`document.documentElement.dir` mirrors the whole interface with no overflow. The one
+physical offset left is the drag handle's, and that is sheet geometry rather than
+interface direction.
+
 ### The keyboard contract
 
 The app was effectively mouse-only: eleven segmented controls declared
