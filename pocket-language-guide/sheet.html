@@ -10,6 +10,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
+<a class="skip-link" href="#faces">Skip to the sheet</a>
 <header class="site-header">
   <div class="container">
     <a class="brand" href="./">Pocket Language Guide</a>
@@ -21,8 +22,8 @@
 <main class="container sheet-page">
   <div class="sheet-head">
     <h1 id="title">Pocket guide</h1>
-    <div class="sheet-where"><span id="pair-flags"></span></div>
     <p class="lede" id="subtitle"></p>
+    <div class="sheet-where"><span id="pair-flags"></span></div>
   </div>
 
   <div class="sheet-body">
@@ -31,18 +32,19 @@
 
       <div class="export-block">
         <button type="button" class="primary big" id="pdf">Export PDF</button>
+        <!-- Above the buttons it applies to, not below them. -->
+        <div id="dpi-control"></div>
         <div class="row">
           <button type="button" id="png">PNG</button>
           <button type="button" id="svg">SVG</button>
         </div>
-        <div id="dpi-control"></div>
         <p class="status" id="status"></p>
         <ul class="warnings" id="warnings"></ul>
       </div>
     </form>
 
     <div class="sheet-preview">
-      <div class="face-grid" id="faces" aria-label="Sheet preview"></div>
+      <div class="face-grid" id="faces" aria-label="Sheet preview" tabindex="-1"></div>
     </div>
   </div>
 </main>

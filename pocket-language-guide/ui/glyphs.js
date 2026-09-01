@@ -8,6 +8,8 @@
 // 3-column A6 and a 3-column 4x6 differ only in proportion, and nobody should have
 // to hover to find out which is which.
 
+import { nextIndex } from './keys.js';
+
 const NS = 'http://www.w3.org/2000/svg';
 
 /** @param {string} tag @param {Record<string,string|number>} attrs */
@@ -280,7 +282,7 @@ export function segmented({ label, options, value, onChange }) {
   group.setAttribute('role', 'radiogroup');
   group.setAttribute('aria-label', label);
 
-  /** @type {Map<T, HTMLButtonElement>} */ const buttons = new Map();
+  /** @type {{value:T, button:HTMLButtonElement}[]} */ const items = [];
   for (const option of options) {
     const button = document.createElement('button');
     button.type = 'button';
@@ -296,18 +298,38 @@ export function segmented({ label, options, value, onChange }) {
       select(option.value);
       onChange(option.value);
     });
-    buttons.set(option.value, button);
+    items.push({ value: option.value, button });
     group.append(button);
   }
 
+  // The radiogroup contract: one tab stop for the group, and arrows move focus and
+  // the selection together so every option is one keypress away. Space and Enter
+  // need nothing here -- they already fire the buttons' own click.
+  group.addEventListener('keydown', (event) => {
+    const from = items.findIndex((item) => item.button === event.target);
+    const to = from < 0 ? -1 : nextIndex(event.key, from, items.length);
+    if (to < 0) return;
+    event.preventDefault();
+    select(items[to].value);
+    items[to].button.focus();
+    onChange(items[to].value);
+  });
+
   /** @param {T} next */
   function select(next) {
-    for (const [key, button] of buttons) {
+    let matched = false;
+    for (const { value: key, button } of items) {
       const on = key === next;
+      matched ||= on;
       button.classList.toggle('current', on);
       button.setAttribute('aria-checked', String(on));
       button.tabIndex = on ? 0 : -1;
     }
+    // A value outside the options -- a custom geometry matching no card preset --
+    // would otherwise leave every option at -1 and drop the whole group out of the
+    // tab order. An empty radiogroup still has to be reachable, so the first
+    // option holds the stop.
+    if (!matched && items.length) items[0].button.tabIndex = 0;
   }
   select(value);
 

@@ -10,8 +10,11 @@
 <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
+<a class="skip-link" href="#face-area">Skip to the sheet</a>
 <header class="site-header">
-  <div class="container" style="width: min(100% - 2rem, none);">
+  <!-- The studio is full-width, so its header must be too: the shared .container
+       cap left the brand 250px inboard of the panel it sits above. -->
+  <div class="container container-wide">
     <a class="brand" href="./">Pocket Language Guide</a>
     <span class="muted small" id="pair"></span>
     <div class="spacer"></div>
@@ -29,6 +32,7 @@
 </div>
 
 <main class="studio">
+  <h1 class="visually-hidden">Customise a pocket language guide</h1>
   <section aria-label="Formatting">
     <h2 class="panel-title">Format</h2>
     <div id="format"></div>
@@ -38,7 +42,9 @@
       <button type="button" id="svg">SVG</button>
       <button type="button" id="csv-out">Export CSV</button>
       <button type="button" id="csv-in">Import CSV</button>
-      <input type="file" id="csv-file" accept=".csv,text/csv" class="visually-hidden">
+      <!-- Driven by the button above, so it is not its own tab stop. -->
+      <input type="file" id="csv-file" accept=".csv,text/csv" class="visually-hidden"
+             tabindex="-1" aria-hidden="true">
     </div>
   </section>
 
@@ -48,7 +54,7 @@
       <span class="spacer"></span>
       <span class="small muted" id="canvas-note"></span>
     </div>
-    <div id="face-area"></div>
+    <div id="face-area" tabindex="-1"></div>
   </section>
 
   <section aria-label="Content">

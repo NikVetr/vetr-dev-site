@@ -89,7 +89,11 @@ export function createTree(input) {
     const concepts = [...own, ...custom];
     if (!concepts.length) continue;
 
-    const sectionBox = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
+    // Named with aria-label rather than a <label>: a label around the title would
+    // make clicking the title toggle the checkbox instead of opening the section.
+    const sectionBox = /** @type {HTMLInputElement} */ (el('input', {
+      type: 'checkbox', 'aria-label': `Include ${section.title_en}`,
+    }));
     sectionBox.addEventListener('change', () => {
       input.onToggle({ sections: { [section.section_id]: sectionBox.checked } });
     });

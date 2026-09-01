@@ -3,6 +3,7 @@
 // Every path runs client-side with no network, which is what makes the app usable
 // where it is actually needed -- abroad, on a phone, with no data.
 
+import { zip } from '../core/zip.js';
 import { planToSvg } from '../render/svg.js';
 import { planToPdf } from '../render/pdf.js';
 import { cssFaces, fontFaceCss } from '../render/fonts.js';
@@ -44,7 +45,35 @@ function withStyle(svg, css) {
   return svg.replace('>', `><style>${css}</style>`);
 }
 
-/** @typedef {{plan:import('../core/types.js').LayoutPlan, manifest:any, icons:any, stacks:string[], name:string}} ExportInput */
+/**
+ * @typedef {Object} ExportInput
+ * @property {import('../core/types.js').LayoutPlan} plan
+ * @property {any} manifest
+ * @property {any} icons
+ * @property {string[]} stacks
+ * @property {string} name
+ * @property {(done:number, total:number)=>void} [onProgress] called per face, so a
+ *   six-face 600dpi export can say how far along it is instead of just freezing
+ */
+
+/**
+ * Deliver one file, or an archive if there are several. Firing download() once per
+ * face made Chrome raise its "Download multiple files?" prompt and gate all but
+ * the first.
+ * @param {ZipEntry[]} files @param {string} name
+ */
+function deliver(files, name) {
+  if (files.length === 1) {
+    download(new Blob([/** @type {BlobPart} */ (files[0].bytes)], { type: files[0].type }), files[0].name);
+    return;
+  }
+  download(
+    new Blob([/** @type {BlobPart} */ (zip(files).slice())], { type: 'application/zip' }),
+    `${name}.zip`,
+  );
+}
+
+/** @typedef {{name:string, bytes:Uint8Array, type:string}} ZipEntry */
 
 /** SVG strings for each face, ready to draw or save. @param {ExportInput} input */
 export function faceSvgs({ plan, manifest, icons }) {
@@ -55,13 +84,12 @@ export function faceSvgs({ plan, manifest, icons }) {
 export async function exportSvg(input) {
   const css = await inlineFontCss(input.manifest, input.stacks);
   const svgs = faceSvgs(input).map((s) => withStyle(s, css));
-  if (svgs.length === 1) {
-    download(new Blob([svgs[0]], { type: 'image/svg+xml' }), `${input.name}.svg`);
-    return;
-  }
-  svgs.forEach((svg, i) => {
-    download(new Blob([svg], { type: 'image/svg+xml' }), `${input.name}-face-${i + 1}.svg`);
-  });
+  const encoder = new TextEncoder();
+  deliver(svgs.map((svg, i) => ({
+    name: svgs.length === 1 ? `${input.name}.svg` : `${input.name}-face-${i + 1}.svg`,
+    bytes: encoder.encode(svg),
+    type: 'image/svg+xml',
+  })), input.name);
 }
 
 /** @param {ExportInput} input @param {number} dpi */
@@ -69,6 +97,7 @@ export async function exportPng(input, dpi = 600) {
   const css = await inlineFontCss(input.manifest, input.stacks);
   const scale = dpi / 72;
   const svgs = faceSvgs(input);
+  /** @type {ZipEntry[]} */ const files = [];
   for (const [i, raw] of svgs.entries()) {
     const svg = withStyle(raw, css);
     const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
@@ -91,11 +120,17 @@ export async function exportPng(input, dpi = 600) {
       const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
       if (!blob) throw new Error('canvas produced no PNG');
       const suffix = svgs.length === 1 ? '' : `-face-${i + 1}`;
-      download(blob, `${input.name}${suffix}-${dpi}dpi.png`);
+      files.push({
+        name: `${input.name}${suffix}-${dpi}dpi.png`,
+        bytes: new Uint8Array(await blob.arrayBuffer()),
+        type: 'image/png',
+      });
+      input.onProgress?.(i + 1, svgs.length);
     } finally {
       URL.revokeObjectURL(url);
     }
   }
+  deliver(files, `${input.name}-${dpi}dpi`);
 }
 
 /** @param {ExportInput} input @param {{title?:string, language?:string}} meta */
