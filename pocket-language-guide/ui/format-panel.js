@@ -123,7 +123,13 @@ export function createFormatPanel(input) {
       const g = /** @type {any} */ (raw);
       return {
         value: id,
-        caption: g.name.split('·')[0].trim().replace('landscape', '').replace('portrait', '').trim(),
+        // The name is a dimension for four of the five presets, which needs no
+        // translating; the wallet card is a description, and stood out as the one
+        // English string in an otherwise translated panel. A preset can therefore
+        // name a caption key, and only that one does.
+        caption: g.captionKey
+          ? t(g.captionKey)
+          : g.name.split('·')[0].trim().replace('landscape', '').replace('portrait', '').trim(),
         title: g.name,
         glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
       };

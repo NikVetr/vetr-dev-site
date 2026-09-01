@@ -1,0 +1,60 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,Какой номер комнаты?,,Kakoy nomer komnaty?,,,2,ru-agent-v1
+building-help.i-am-lost,Я заблудился,Я заблудилась,Ya zabludilsya,,,2,ru-agent-v1
+building-help.where-is-reception,Где ресепшн?,Где администратор?,Gde resepshn?,,,2,ru-agent-v1
+building-help.where-is-a-power-outlet,Где розетка?,,Gde rozetka?,,,2,ru-agent-v1
+accessibility.step-free,Есть вход без ступенек?,Есть безбарьерный вход?,Yestʼ vkhod bez stupenek?,,,2,ru-agent-v1
+accessibility.wheelchair-access,Есть доступ для инвалидной коляски?,,Yestʼ dostup dlya invalidnoy kolyaski?,,,2,ru-agent-v1
+accessibility.elevator,Есть лифт?,,Yestʼ lift?,,,2,ru-agent-v1
+accessibility.ramp,Есть пандус?,,Yestʼ pandus?,,,2,ru-agent-v1
+accessibility.how-many-steps,Сколько там ступенек?,,Skolʼko tam stupenek?,,,2,ru-agent-v1
+accessibility.cannot-climb-stairs,Я не могу подняться по лестнице.,,Ya ne mogu podnyatʼsya po lestnitse.,,,2,ru-agent-v1
+accessibility.need-to-sit-down,Мне надо сесть.,,Mne nado sestʼ.,,,2,ru-agent-v1
+accessibility.accessible-restroom,Есть туалет для инвалидов?,,Yestʼ tualet dlya invalidov?,,,2,ru-agent-v1
+accessibility.station-assistance,Есть сопровождение на станции?,,Yestʼ soprovozhdeniye na stantsii?,,,2,ru-agent-v1
+accessibility.help-me-carry,"Помогите донести, пожалуйста.",,"Pomogite donesti, pozhaluysta.",,,2,ru-agent-v1
+accessibility.board-first,Можно мне зайти первым?,Можно мне зайти первой?,Mozhno mne zayti pervym?,,,2,ru-agent-v1
+accessibility.door-width,Какая ширина двери?,,Kakaya shirina dveri?,,,2,ru-agent-v1
+accessibility.wheelchair-width,Ширина моей коляски {} см.,,Shirina moyey kolyaski {} sm.,,,2,ru-agent-v1
+accessibility.hard-of-hearing,Я плохо слышу.,,Ya plokho slyshu.,,,2,ru-agent-v1
+accessibility.speak-louder,"Говорите громче, пожалуйста.",,"Govorite gromche, pozhaluysta.",,,2,ru-agent-v1
+accessibility.visually-impaired,Я слабовидящий,Я слабовидящая,Ya slabovidyashchiy,,,2,ru-agent-v1
+accessibility.take-your-arm,Можно взять вас под руку?,,Mozhno vzyatʼ vas pod ^ruku?,,,2,ru-agent-v1
+accessibility.guide-dog,Это моя собака-поводырь.,,Eto moya sobaka-povodyrʼ.,,,2,ru-agent-v1
+in-a-building.is-this-the-correct-entrance,Это правильный вход?,,Eto pravilʼnyy vkhod?,,,2,ru-agent-v1
+in-a-building.do-you-have-wi-fi,У вас есть Wi-Fi?,,U vas yestʼ Wi-Fi?,,,2,ru-agent-v1
+in-a-building.what-is-the-wi-fi-password,Какой пароль от Wi-Fi?,,Kakoy parolʼ ot Wi-Fi?,,,2,ru-agent-v1
+in-a-building.which-floor,Какой этаж?,,Kakoy etazh?,,,2,ru-agent-v1
+toilets.where-toilet,Где туалет?,,Gde tualet?,,,2,ru-agent-v1
+toilets.where-public-toilet,Где общественный туалет?,,Gde obshchestvennyy tualet?,,,2,ru-agent-v1
+toilets.may-i-use-the-toilet,Можно в туалет?,Можно воспользоваться туалетом?,Mozhno v tualet?,,,2,ru-agent-v1
+toilets.is-it-only-for-customers,Только для клиентов?,,Tolʼko dlya kliyentov?,,,2,ru-agent-v1
+toilets.toilet-wc,Туалет,WC,Tualet,,,2,ru-agent-v1
+toilets.is-it-free,Это бесплатно?,,Eto besplatno?,,,2,ru-agent-v1
+toilets.do-i-need-a-coin,Нужен жетон или монета?,,Nuzhen zheton ili moneta?,,,2,ru-agent-v1
+toilets.is-the-tap-water-safe-to-drink,Можно пить воду из-под крана?,,Mozhno pitʼ vodu iz-pod krana?,,,2,ru-agent-v1
+toilets.it-is-urgent,Это срочно.,,Eto srochno.,,,2,ru-agent-v1
+toilets.may-i-have-the-toilet-key,Можно ключ от туалета?,,Mozhno klyuch ot tualeta?,,,2,ru-agent-v1
+toilets.there-is-no-toilet-paper,Нет туалетной бумаги.,,Net tualetnoy bumagi.,,,2,ru-agent-v1
+toilets.toilet-paper,туалетная бумага,,tualetnaya bumaga,,,2,ru-agent-v1
+toilets.it-is-out-of-order,Не работает.,,Ne rabotayet.,,,2,ru-agent-v1
+toilets.out-of-order,Не работает,,Ne rabotayet,,,2,ru-agent-v1
+toilets.mens-toilet,мужской туалет,М,muzhskoy tualet,,,2,ru-agent-v1
+toilets.womens-toilet,женский туалет,Ж,zhenskiy tualet,,,2,ru-agent-v1
+toilets.drinking-water,питьевая вода,,pitʼyevaya voda,,,2,ru-agent-v1
+toilets.not-for-drinking,Не питьевая вода,Техническая вода,Ne pitʼyevaya voda,,,2,ru-agent-v1
+toilets.accessible-toilet,туалет для инвалидов,,tualet dlya invalidov,,,2,ru-agent-v1
+toilets.where-can-i-wash-my-hands,Где можно помыть руки?,,Gde mozhno pomytʼ ruki?,,,2,ru-agent-v1
+toilets.can-i-flush-the-paper,Бумагу можно смывать?,,Bumagu mozhno smyvatʼ?,,,2,ru-agent-v1
+toilets.is-there-a-toilet-on-board,На борту есть туалет?,В вагоне есть туалет?,Na bortu yestʼ tualet?,,,2,ru-agent-v1
+toilets.the-toilet-will-not-flush,Туалет не смывается.,,Tualet ne smyvayetsya.,,,2,ru-agent-v1
+toilets.baby-change,пеленальный столик,,pelenalʼnyy stolik,,,2,ru-agent-v1
+toilets.squat-toilet,напольный туалет,чаша Генуя,napolʼnyy tualet,,,1,ru-agent-v1
+building-words.elevator,лифт,,lift,,,2,ru-agent-v1
+building-words.stairs,лестница,,lestnitsa,,,2,ru-agent-v1
+building-words.entrance,вход,,vkhod,,,2,ru-agent-v1
+building-words.exit,выход,,vykhod,,,2,ru-agent-v1
+building-words.men,мужчины,М,muzhchiny,,,2,ru-agent-v1
+building-words.women,женщины,Ж,zhenshchiny,,,2,ru-agent-v1
+building-words.door,дверь,,dverʼ,,,2,ru-agent-v1
+building-words.key,ключ,,klyuch,,,2,ru-agent-v1

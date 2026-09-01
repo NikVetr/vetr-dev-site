@@ -36,8 +36,16 @@ async function sources(dir) {
   return out;
 }
 
+/**
+ * Data files that name a key rather than carrying the string. A geometry preset
+ * whose caption is a description rather than a dimension says which key to draw it
+ * from, so the reference lives in JSON and the scan has to follow it there.
+ */
+const DATA = ['data/presets.json'];
+
 const files = (await Promise.all(CODE.map(sources))).flat()
-  .filter((rel) => !NOT_A_CONSUMER.has(rel));
+  .filter((rel) => !NOT_A_CONSUMER.has(rel))
+  .concat(DATA);
 /** @type {Map<string, string[]>} */ const used = new Map();
 for (const rel of files) {
   const text = await readFile(join(ROOT, rel), 'utf8');
@@ -49,7 +57,7 @@ for (const rel of files) {
     // Constant tables hold the key rather than the string, because they are built
     // at module load -- before a catalogue exists -- and resolved when the control
     // is drawn. Without this the scan calls all of them unused.
-    /\b(?:caption|text|label|hint|title|note)Key:\s*'([\w.-]+)'/g,
+    /\b"?(?:caption|text|label|hint|title|note)Key"?:\s*['"]([\w.-]+)['"]/g,
     // ... and a few sit in a map from a value to its key, looked up at draw time
     // (which field is shown, which cut mode is chosen).
     /:\s*'((?:field|cut|common)\.[\w.-]+)'/g,

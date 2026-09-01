@@ -9,8 +9,12 @@
 // It used to also commit sheet.pdf and a full-resolution PNG per face. Nothing read
 // them -- the gallery's Export button goes to sheet.html, which solves and exports
 // in the browser, because client-side export is the whole architecture -- and they
-// cost 13MB across six pairs. Eight ready languages make 56 ordered pairs, which
-// would have been well over 200MB of unread binaries in the repository.
+// cost 13MB across six pairs. Twelve ready languages make 132 ordered pairs, which
+// would have been half a gigabyte of unread binaries in the repository.
+//
+// Even the thumbnails grow as the square of the language count, so
+// `scripts/optimize_thumbs.py` runs after this one (via the `postprerender` hook)
+// and reindexes each screenshot to an exact palette: 16.4MB becomes 5.0MB.
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { createSheetContext, buildSheet, stacksFor } from '../core/sheet.js';
 import { planToSvg } from '../render/svg.js';

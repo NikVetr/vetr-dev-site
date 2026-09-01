@@ -24,10 +24,12 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 - it takes a pair while the type would otherwise sit near its floor.
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
-is a deliberately tight layout that should not be second-guessed. On 7×5in every
-shipped pair settles on four faces — the answer both reference sheets reached by
-hand. A6 takes six, and a credit-card sheet takes sixteen rather than printing at
-minimum size.
+is a deliberately tight layout that should not be second-guessed. On 7×5in, 114 of
+the 132 shipped pairs settle on six faces, ten on eight — Arabic mostly, which needs
+the loosest leading here — and eight on four. The reference sheets reached four by
+hand, against a bank of 413 concepts; it is 763 now, so six is the same answer at
+the new size. A credit-card sheet takes sixteen rather than printing at minimum
+size.
 
 Every column is flush at the top *and* the bottom, an item never splits across a
 column, and a section heading is never stranded at the foot of one.
@@ -308,7 +310,7 @@ English, and it is cheaper than the alternative.
 
 **Language names come from the platform.** `Intl.DisplayNames` already knows every
 language's name in every locale, which is a better answer than carrying sixteen
-names across eight catalogues and keeping them in step.
+names across twelve catalogues and keeping them in step.
 
 The solver cannot translate -- it has no business knowing what language the
 interface is in -- so a `Warning` carries a stable `code`, the English `message`
@@ -434,7 +436,7 @@ npm run vendor      # esbuild → vendor/{fontkit,pdf-lib}.esm.js  (rarely)
 npm run icons       # Lucide SVG → data/icons.json, normalised to path data
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
                     #   thumbnails only, one per pair, then indexed down to a
-                    #   fifth-bit palette: 56 pairs in 2.2MB rather than 7.2MB
+                    #   fifth-bit palette: 132 pairs in 5.0MB rather than 16.4MB
 npm run shell       # data/shell.json + the respell index + sw.js VERSION
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
 ```
@@ -458,14 +460,19 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **751 concepts across 57 sections in eight languages**, which is
-**56 ordered pairs** — every one of which renders, and only eight of which anyone
-wrote a sheet for. That ratio is the whole argument for joining on `concept_id`
-instead of storing pairs.
+The bank is now **763 concepts across 57 sections in twelve languages**, which is
+**132 ordered pairs** — every one of which renders, and two of which anyone wrote a
+sheet for. That ratio is the whole argument for joining on `concept_id` instead of
+storing pairs: the twelfth language added 743 rows and 22 new pairs.
 
-The expansion past the two hand-built sheets was done by ten agents: three
-designing new content against non-overlapping scopes, then one per language
-translating the whole bank. Two details of that are worth keeping.
+Every pack covers 100% of the concepts that apply to it. The qualifier is doing
+work: a concept can name the languages it belongs to, so the Korean won and the
+Turkish lira are not gaps in Spanish, and the validator counts each language
+against its own applicable set rather than the whole bank.
+
+The expansion past the two hand-built sheets was done by agents, one per language
+so that none of them had to hold two orthographies at once, plus three designing
+new content against non-overlapping scopes. Two details of that are worth keeping.
 
 First, the gaps were concrete. "Toilet" appeared **zero** times in the original
 413 concepts. Pharmacy and police had one phrase each. `directions` had four items
@@ -480,7 +487,27 @@ enumerate or it is a potentially fatal allergy mistranslation; Arabic `لبن` i
 in Egypt and yoghurt in the Levant; Spanish `coger` is obscene across most of Latin
 America; Korean `간질` was replaced in law and now carries stigma; and tipping
 questions ask what is customary rather than how much, because in Japan, China and
-Korea the answer is "nothing".
+Korea the answer is "nothing". The later packs kept finding the same shape of
+problem: Portuguese `frutos secos` also means dried fruit and is not the labelling
+term (tree nuts are `frutos de casca rija`, and peanut is legally separate);
+Turkish `fıstık` alone means pistachio, so peanut has to be `yer fıstığı`; Russian
+`Регидрон` is the brand a pharmacist answers to where the descriptive phrase gets a
+blank look; and Vietnamese fish sauce is in enough dishes that "does this contain
+fish stock" is better asked as `Món này có nước mắm không ạ?`.
+
+Third, three of the four newest packs had to answer a question their language
+forces on any phrasebook, and the answer shapes hundreds of rows rather than one.
+Portuguese chose the European variety as primary and carries Brazilian forms in
+`text_alt`, because `banheiro` means *lifeguard* in Portugal while `casa de banho`
+is merely unusual in Brazil — an asymmetry in the cost of being wrong. Vietnamese
+omits the second person entirely, because the correct word depends on the
+addressee's age and gender and a card handed to a stranger cannot know; politeness
+rides on the particle `ạ` instead. Turkish rephrased sixteen slot rows so the fill
+needs no case ending, since vowel harmony makes a frame like `{}'a gitmek
+istiyorum` wrong for many fills. Russian could not do the same everywhere and says
+so: twenty-one slot rows are listed in the pack's own notes as correct for some
+fills and not others, on the grounds that a Russian hearing *«Я из Америка»*
+understands it, whereas a stilted case-proof frame would read as broken.
 
 ### Concepts that are not universal
 
@@ -495,9 +522,10 @@ Four translation agents flagged it independently before it was fixed.
 Four concepts went further and hardcoded a language *name*: "I do not speak
 Chinese" and "I do not speak Japanese" were separate entries. Invisible with two
 languages, since each sheet carried only its own; with eight, the Spanish sheet
-printed both. They are now one concept each, glossed "I do not speak this
-language", and every pack renders it self-referentially. Before the merge the
-Korean sheet had no way to say "I do not speak Korean" at all.
+printed both -- two concepts per language, which at twelve would have been
+twenty-four entries saying the same thing. They are now one concept each, glossed
+"I do not speak this language", and every pack renders it self-referentially.
+Before the merge the Korean sheet had no way to say "I do not speak Korean" at all.
 
 `default_on: 0` on a *section* keeps it off the default card while leaving it one
 click away. A pocket sheet holds less than the corpus does, and it should: seven of
@@ -565,11 +593,20 @@ For a print artifact, refusing beats printing something subtly wrong.
 
 Named so nobody has to rediscover the gap:
 
-- **Corpus beyond the eight shipped languages.** Portuguese, Hindi, Thai, Russian,
-  Indonesian, Swahili, Turkish and Vietnamese are registered with no rows. Nothing
-  offers them: `hasContent` reads `data/coverage.json` rather than the declared
-  status, so a language with no data cannot be picked as a target or a gloss, and
-  the gallery shows it as "help translate".
+- **Corpus beyond the twelve shipped languages.** Hindi, Thai, Indonesian and
+  Swahili are registered with no rows. Nothing offers them: `hasContent` reads
+  `data/coverage.json` rather than the declared status, so a language with no data
+  cannot be picked as a target or a gloss, and the gallery shows it as "help
+  translate". Hindi needs no font work -- the shipped Noto Sans covers all 128
+  Devanagari codepoints and carries the `dev2`/`deva` GSUB features -- but **Thai
+  needs a new stack**, because that face has none of its 128 glyphs, and dictionary
+  line breaking besides.
+- **Respellings for readers who do not read English.** Every pack ships
+  `<target>__en__en-US` and nothing else, so the pronunciation column appears only
+  on a sheet glossed into English. A Turkish speaker learning Spanish gets the
+  Spanish and the Turkish gloss but no say-it-like column. Filling that in means
+  either a transducer per source language or a curated layer per pair, and the
+  transducer wants the `ipa` column that is also still empty.
 - **Digits inside right-to-left text.** The renderer shapes a run right-to-left as
   a whole and nothing here implements the bidi algorithm's rule that digits stay
   left-to-right inside it, so Arabic-Indic `١٠` printed as `٠١` and `١/٢` as `٢/١`.
@@ -592,8 +629,8 @@ Named so nobody has to rediscover the gap:
   the FCDO values recorded for a future reviewer.
 - **IPA.** The reference sheet carried no IPA, so the `ipa` column is empty
   throughout. The respelling transducer (`data/respell/<src>/rules.yaml`) that
-  would consume it is therefore also unwritten; `zh-Hans → en-US` respellings ship
-  as the hand-curated override layer they already were.
+  would consume it is therefore also unwritten; all eleven `→ en-US` respellings
+  ship as the hand-curated override layer the Mandarin one already was.
 - **Dictionary line breaking** for Thai and Khmer. `scripts.csv` marks them
   `word_break: dict`; the measurer falls back to breaking anywhere and the solver
   raises a warning, rather than pretending.
@@ -610,6 +647,18 @@ Three failure modes here were silent rather than loud, and the fixes are load-be
 - **fontkit's subsetter drops glyphs carrying TrueType hinting instructions**, so
   the exported PDF lost most of its Latin while CJK survived. `subset_fonts.py`
   strips hinting, which is irrelevant at print resolution anyway.
+- **fontkit's subsetter also corrupts glyph data from a long-`loca` face.** It
+  copies glyph buffers verbatim and then, if the subset it produced is small enough
+  for the short `loca` format, halves every offset to store it -- and fontTools
+  leaves glyph data odd-length when it writes the long format, because long `loca`
+  stores byte offsets and does not need alignment. Halving an odd offset truncates
+  it and every glyph after the first odd one is read a byte off. `subset_fonts.py`
+  pads every glyph to four bytes, and `tests/fonts.test.mjs` asserts the property
+  rather than the padding. The trigger is a large source face embedded with a small
+  subset, which is why it hid for so long: the CJK faces have always been
+  long-`loca`, but the reference sheet embeds enough Han that the output stayed
+  long-`loca` too. A face where the target script barely appears would have lost it.
+  Twelve of the thirty faces fail the test on the build before the fix.
 - **Chrome will not load `file://` subresources from an `about:blank` document**, so
   rasterising via `setContent` fell back to a default font and produced output
   that looked subtly wrong rather than obviously broken.

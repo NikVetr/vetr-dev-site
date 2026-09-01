@@ -112,3 +112,5 @@ common-signs.stopped-stop,停止,,teishi,,,2,japanese-reviewed-v6
 taxi.i-will-get-off-here,ここで降ります,,koko de orimasu,,,2,japanese-reviewed-v6
 pickup-meeting.please-call-a-taxi,タクシーを呼んでください,,takushī o yonde kudasai,,,2,japanese-reviewed-v6
 taxi.please-get-me-there-in-time-for-the-shinkansen,新幹線に間に合うようにお願いします,,shinkansen ni maniau yō ni onegaishimasu,,,2,japanese-reviewed-v6
+transit-rides.do-i-need-to-validate,この切符は自動改札を通れますか？,ICカードはどこにタッチしますか？,kono kippu wa jidō kaisatsu o tōremasu ka?,,,1,ja-gaps-v1
+rail-station-words.ticket-validator,自動改札機,改札機,jidō kaisatsuki,,,2,ja-gaps-v1

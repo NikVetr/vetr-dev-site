@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Где купить билеты?,,Gde kupitʼ bilety?,,,2,ru-agent-v1
+attractions-tickets.do-i-need-a-reservation,Нужно бронировать?,,Nuzhno bronirovatʼ?,,,2,ru-agent-v1
+attractions-tickets.what-is-the-latest-entry-time,До скольки пускают?,,Do skolʼki puskayut?,,,2,ru-agent-v1
+attractions-tickets.are-there-lockers,Есть камеры хранения?,,Yestʼ kamery khraneniya?,,,2,ru-agent-v1
+attractions-tickets.may-i-take-photos,Можно фотографировать?,,Mozhno fotografirovatʼ?,,,2,ru-agent-v1
+attractions-tickets.please-take-a-photo-of-us,"Сфотографируйте нас, пожалуйста.",,"Sfotografiruyte nas, pozhaluysta.",,,2,ru-agent-v1
+attractions-tickets.could-you-take-a-photo-for-us,Можете нас сфотографировать?,,Mozhete nas sfotografirovatʼ?,,,2,ru-agent-v1

@@ -1,0 +1,138 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+emergency-medical.help,Помогите!,,Pomogite!,,,2,ru-agent-v1
+emergency-medical.please-call-an-ambulance,Вызовите скорую!,Вызовите скорую помощь!,Vyzovite skoruyu!,,,2,ru-agent-v1
+emergency-medical.i-need-a-doctor,Мне нужен врач.,,Mne nuzhen vrach.,,,2,ru-agent-v1
+emergency-medical.i-am-sick,Я болен,Я больна,Ya bolen,,,2,ru-agent-v1
+emergency-medical.i-am-injured,У меня травма.,,U menya travma.,,I have an injury,2,ru-agent-v1
+emergency-medical.it-hurts-here,Болит здесь.,,Bolit zdesʼ.,,,2,ru-agent-v1
+emergency-medical.where-is-a-pharmacy,Где аптека?,,Gde apteka?,,,2,ru-agent-v1
+emergency-medical.please-take-me-to-a-hospital,Отвезите меня в больницу.,,Otvezite menya v bolʼnitsu.,,,2,ru-agent-v1
+emergency-medical.i-feel-unwell,Мне плохо.,,Mne plokho.,,,2,ru-agent-v1
+emergency-medical.this-is-an-emergency,Это экстренный случай.,Это срочно!,Eto ekstrennyy sluchay.,,,2,ru-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,У меня анафилактический шок.,У меня тяжёлая аллергическая реакция.,U menya anafilakticheskiy shok.,,,2,ru-agent-v1
+emergency-medical.i-cannot-breathe,Я не могу дышать.,,Ya ne mogu dyshatʼ.,,,2,ru-agent-v1
+emergency-medical.i-am-bleeding-badly,У меня сильное кровотечение.,,U menya silʼnoye krovotecheniye.,,,2,ru-agent-v1
+emergency-medical.i-have-chest-pain,У меня боль в груди.,,U menya bolʼ v grudi.,,,2,ru-agent-v1
+emergency-medical.this-person-is-unconscious,Этот человек без сознания.,,Etot chelovek bez soznaniya.,,,2,ru-agent-v1
+emergency-medical.where-is-the-nearest-hospital,Где ближайшая больница?,,Gde blizhayshaya bolʼnitsa?,,,2,ru-agent-v1
+emergency-medical.what-is-the-emergency-number,Какой номер экстренных служб?,,Kakoy nomer ekstrennykh sluzhb?,,,2,ru-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Есть англоговорящий врач?,"Есть врач, который говорит по-английски?",Yestʼ anglogovoryashchiy vrach?,,,2,ru-agent-v1
+emergency-medical.i-think-a-bone-is-broken,"Кажется, у меня перелом.",,"Kazhetsya, u menya perelom.",,,2,ru-agent-v1
+emergency-medical.please-call-my-emergency-contact,Позвоните моему экстренному контакту.,Позвоните моим родственникам.,Pozvonite moyemu ekstrennomu kontaktu.,,,2,ru-agent-v1
+emergency-medical.i-have-travel-insurance,У меня есть туристическая страховка.,,U menya yestʼ turisticheskaya strakhovka.,,,2,ru-agent-v1
+medical-conditions.i-am-diabetic,У меня диабет.,,U menya diabet.,,,2,ru-agent-v1
+medical-conditions.i-need-insulin,Мне нужен инсулин.,,Mne nuzhen insulin.,,,2,ru-agent-v1
+medical-conditions.i-have-asthma,У меня астма.,,U menya astma.,,,2,ru-agent-v1
+medical-conditions.i-have-a-heart-condition,У меня болезнь сердца.,,U menya boleznʼ serdtsa.,,,2,ru-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,У меня аллергия на пенициллин.,,U menya allergiya na penitsillin.,,,2,ru-agent-v1
+medical-conditions.i-have-epilepsy,У меня эпилепсия.,,U menya epilepsiya.,,,2,ru-agent-v1
+medical-conditions.my-blood-sugar-is-low,У меня низкий сахар в крови.,,U menya nizkiy sakhar v krovi.,,,2,ru-agent-v1
+medical-conditions.i-need-my-inhaler,Мне нужен мой ингалятор.,,Mne nuzhen moy ingalyator.,,,2,ru-agent-v1
+medical-conditions.i-am-pregnant,Я беременна.,,Ya beremenna.,,,2,ru-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,У меня есть автоинъектор с адреналином.,шприц-ручка с адреналином,U menya yestʼ avtoinˮyektor s adrenalinom.,,,2,ru-agent-v1
+medical-conditions.i-take-medicine-for,Я принимаю лекарство от {}.,,Ya prinimayu lekarstvo ot {}.,,,2,ru-agent-v1
+medical-conditions.i-take-blood-thinners,Я принимаю антикоагулянты.,,Ya prinimayu antikoagulyanty.,,,2,ru-agent-v1
+medical-conditions.medicine-allergy,Аллергия на лекарства: {},,Allergiya na lekarstva: {},,,2,ru-agent-v1
+medical-conditions.this-card-lists-my-conditions,На этой карточке мои диагнозы.,,Na etoy kartochke moi diagnozy.,,,2,ru-agent-v1
+medical-conditions.this-is-my-medicine,Это моё лекарство.,,Eto moyë lekarstvo.,,,2,ru-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,Дайте мне сахар или сок.,,Dayte mne sakhar ili sok.,,,2,ru-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,Введите в наружную часть бедра.,,Vvedite v naruzhnuyu chastʼ bedra.,,,2,ru-agent-v1
+medical-conditions.my-blood-type-is,Моя группа крови — {}.,,Moya gruppa krovi — {}.,,,2,ru-agent-v1
+medical-conditions.do-not-give-me,Не давайте мне {}.,,Ne davayte mne {}.,,,2,ru-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,У меня аллергия на аспирин и ибупрофен.,,U menya allergiya na aspirin i ibuprofen.,,,2,ru-agent-v1
+medical-conditions.my-injector-is-in-my-bag,Мой инъектор в сумке.,,Moy inˮyektor v sumke.,,,2,ru-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,У меня аллергия на сульфаниламиды.,,U menya allergiya na sulʼfanilamidy.,,,2,ru-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,Какая аптека сейчас открыта?,,Kakaya apteka seychas otkryta?,,,2,ru-agent-v1
+pharmacy-symptoms.i-need-medicine-for,Мне нужно лекарство от {}.,,Mne nuzhno lekarstvo ot {}.,,,2,ru-agent-v1
+pharmacy-symptoms.i-have-a-fever,У меня температура.,,U menya temperatura.,,I have a temperature,2,ru-agent-v1
+pharmacy-symptoms.i-have-diarrhea,У меня диарея.,У меня понос.,U menya diareya.,,,2,ru-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Где круглосуточная аптека?,,Gde kruglosutochnaya apteka?,,,2,ru-agent-v1
+pharmacy-symptoms.painkiller,обезболивающее,,obezbolivayushcheye,,,2,ru-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,Нужен рецепт?,,Nuzhen retsept?,,,2,ru-agent-v1
+pharmacy-symptoms.i-have-a-headache,У меня болит голова.,,U menya bolit golova.,,,2,ru-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,парацетамол,,paratsetamol,,,2,ru-agent-v1
+pharmacy-symptoms.how-much-should-i-take,Сколько принимать?,,Skolʼko prinimatʼ?,,,2,ru-agent-v1
+pharmacy-symptoms.i-am-vomiting,У меня рвота.,,U menya rvota.,,,2,ru-agent-v1
+pharmacy-symptoms.rehydration-salts,Регидрон,соли для регидратации,Regidron,,,2,ru-agent-v1
+pharmacy-symptoms.how-many-times-a-day,Сколько раз в день?,,Skolʼko raz v denʼ?,,,2,ru-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,У меня болит живот.,,U menya bolit zhivot.,,,2,ru-agent-v1
+pharmacy-symptoms.i-have-a-cough,У меня кашель.,,U menya kashelʼ.,,,2,ru-agent-v1
+pharmacy-symptoms.antihistamine,средство от аллергии,антигистаминное,sredstvo ot allergii,,,2,ru-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,средство от диареи,лоперамид,sredstvo ot diarei,,,2,ru-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,Это можно принимать с {}?,,Eto mozhno prinimatʼ s {}?,,,2,ru-agent-v1
+pharmacy-symptoms.i-feel-dizzy,У меня кружится голова.,,U menya kruzhitsya golova.,,,2,ru-agent-v1
+pharmacy-symptoms.ibuprofen,ибупрофен,,ibuprofen,,,2,ru-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,У меня болит горло.,,U menya bolit gorlo.,,,2,ru-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,Это лекарство у вас есть?,,Eto lekarstvo u vas yestʼ?,,,2,ru-agent-v1
+pharmacy-symptoms.bandage,бинт,пластырь,bint,,,2,ru-agent-v1
+pharmacy-symptoms.the-pain-is-severe,Боль очень сильная.,,Bolʼ ochenʼ silʼnaya.,,,2,ru-agent-v1
+pharmacy-symptoms.antiseptic,антисептик,хлоргексидин,antiseptik,,,2,ru-agent-v1
+pharmacy-symptoms.i-feel-nauseous,Меня тошнит.,,Menya toshnit.,,it nauseates me,2,ru-agent-v1
+pharmacy-symptoms.i-have-a-rash,У меня сыпь.,,U menya sypʼ.,,,2,ru-agent-v1
+pharmacy-symptoms.before-or-after-food,До еды или после?,,Do yedy ili posle?,,,2,ru-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,"Кажется, это воспалилось.",,"Kazhetsya, eto vospalilosʼ.",,,2,ru-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,таблетки от укачивания,,tabletki ot ukachivaniya,,,2,ru-agent-v1
+pharmacy-symptoms.i-have-a-cut,У меня порез.,,U menya porez.,,,2,ru-agent-v1
+pharmacy-symptoms.antacid,средство от изжоги,антацид,sredstvo ot izzhogi,,,2,ru-agent-v1
+pharmacy-symptoms.i-have-a-burn,У меня ожог.,,U menya ozhog.,,,2,ru-agent-v1
+pharmacy-symptoms.it-started-days-ago,Это началось {} дней назад.,,Eto nachalosʼ {} dney nazad.,,,2,ru-agent-v1
+pharmacy-symptoms.cough-medicine,средство от кашля,,sredstvo ot kashlya,,,2,ru-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,Это можно при беременности?,,Eto mozhno pri beremennosti?,,,2,ru-agent-v1
+body-parts.head,голова,,golova,,,2,ru-agent-v1
+body-parts.stomach,живот,,zhivot,,,2,ru-agent-v1
+body-parts.back,спина,,spina,,,2,ru-agent-v1
+body-parts.throat,горло,,gorlo,,,2,ru-agent-v1
+body-parts.tooth,зуб,,zub,,,2,ru-agent-v1
+body-parts.chest,грудь,,grudʼ,,,2,ru-agent-v1
+body-parts.eye,глаз,,glaz,,,2,ru-agent-v1
+body-parts.ear,ухо,,ukho,,,2,ru-agent-v1
+body-parts.leg,нога,,noga,,,2,ru-agent-v1
+body-parts.arm,рука,,ruka,,,2,ru-agent-v1
+body-parts.foot,ступня,нога,stupnya,,,2,ru-agent-v1
+body-parts.hand,кисть,рука,kistʼ,,,2,ru-agent-v1
+body-parts.knee,колено,,koleno,,,2,ru-agent-v1
+body-parts.ankle,щиколотка,голеностоп,shchikolotka,,,2,ru-agent-v1
+body-parts.skin,кожа,,kozha,,,2,ru-agent-v1
+lost-rescue.i-lost-my-passport,У меня пропал паспорт.,Я потерял паспорт.,U menya propal pasport.,,my passport has gone,2,ru-agent-v1
+lost-rescue.i-lost-my-phone,У меня пропал телефон.,,U menya propal telefon.,,,2,ru-agent-v1
+lost-rescue.please-call-the-police,"Вызовите полицию, пожалуйста.",,"Vyzovite politsiyu, pozhaluysta.",,,2,ru-agent-v1
+lost-rescue.we-are-here,Мы здесь.,,My zdesʼ.,,,2,ru-agent-v1
+lost-rescue.please-look-at-my-location-pin,Посмотрите мою метку на карте.,,Posmotrite moyu metku na karte.,,,2,ru-agent-v1
+lost-rescue.i-cannot-walk,Я не могу идти.,,Ya ne mogu idti.,,,2,ru-agent-v1
+lost-rescue.i-sprained-my-ankle,У меня растяжение ноги.,Я подвернул ногу.,U menya rastyazheniye nogi.,,,2,ru-agent-v1
+lost-rescue.please-contact-rescue,Свяжитесь со спасателями.,,Svyazhitesʼ so spasatelyami.,,,2,ru-agent-v1
+lost-rescue.my-companion-is-missing,Пропал мой спутник.,,Propal moy sputnik.,,,2,ru-agent-v1
+lost-rescue.please-look-at-my-current-location,"Посмотрите, где я нахожусь.",,"Posmotrite, gde ya nakhozhusʼ.",,,2,ru-agent-v1
+lost-rescue.my-child-is-missing,Пропал мой ребёнок.,,Propal moy rebënok.,,,2,ru-agent-v1
+lost-rescue.i-do-not-know-where-i-am,"Я не знаю, где я.",,"Ya ne znayu, gde ya.",,,2,ru-agent-v1
+lost-rescue.my-friend-is-hurt,Мой друг ранен.,Моя подруга ранена.,Moy drug ranen.,,,2,ru-agent-v1
+lost-rescue.i-lost-my-wallet,У меня пропал кошелёк.,,U menya propal koshelëk.,,,2,ru-agent-v1
+lost-rescue.i-lost-my-bag,У меня пропала сумка.,,U menya propala sumka.,,,2,ru-agent-v1
+lost-rescue.where-is-lost-and-found,Где бюро находок?,Где стол находок?,Gde byuro nakhodok?,,,2,ru-agent-v1
+lost-rescue.i-cannot-find-my-hotel,Я не могу найти свой отель.,,Ya ne mogu nayti svoy otelʼ.,,,2,ru-agent-v1
+lost-rescue.i-left-it-on-the-train,Это осталось в поезде.,Я забыл это в поезде.,Eto ostalosʼ v poyezde.,,,2,ru-agent-v1
+lost-rescue.i-cannot-get-down,Я не могу спуститься.,,Ya ne mogu spustitʼsya.,,,2,ru-agent-v1
+police-consulate.where-is-the-police-station,Где отделение полиции?,,Gde otdeleniye politsii?,,,2,ru-agent-v1
+police-consulate.i-want-to-report-a-theft,Я хочу заявить о краже.,,Ya khochu zayavitʼ o krazhe.,,,2,ru-agent-v1
+police-consulate.my-bag-was-stolen,У меня украли сумку.,,U menya ukrali sumku.,,they stole my bag,2,ru-agent-v1
+police-consulate.my-passport-was-stolen,У меня украли паспорт.,,U menya ukrali pasport.,,,2,ru-agent-v1
+police-consulate.someone-is-following-me,За мной кто-то идёт.,,Za mnoy kto-^to idët.,,,2,ru-agent-v1
+police-consulate.i-need-a-written-police-report,Мне нужен талон-уведомление.,Мне нужна справка из полиции.,Mne nuzhen talon-uvedomleniye.,,police receipt slip,2,ru-agent-v1
+police-consulate.i-want-to-contact-my-embassy,Я хочу связаться с посольством.,,Ya khochu svyazatʼsya s posolʼstvom.,,,2,ru-agent-v1
+police-consulate.i-need-it-for-my-insurance,Это нужно для страховки.,,Eto nuzhno dlya strakhovki.,,,2,ru-agent-v1
+police-consulate.i-need-an-interpreter,Мне нужен переводчик.,,Mne nuzhen perevodchik.,,,2,ru-agent-v1
+police-consulate.please-leave-me-alone,Оставьте меня в покое.,,Ostavʼte menya v pokoye.,,,2,ru-agent-v1
+police-consulate.i-was-robbed,Меня ограбили.,,Menya ograbili.,,they robbed me,2,ru-agent-v1
+police-consulate.i-want-a-lawyer,Я хочу адвоката.,,Ya khochu advokata.,,,2,ru-agent-v1
+police-consulate.please-notify-my-consulate,Сообщите в моё консульство.,,Soobshchite v moyë konsulʼstvo.,,,2,ru-agent-v1
+police-consulate.i-am-calling-the-police,Я звоню в полицию.,,Ya zvonyu v politsiyu.,,,2,ru-agent-v1
+police-consulate.am-i-under-arrest,Я задержан?,Я задержана?,Ya zaderzhan?,,,2,ru-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,"Нет, спасибо, мне не интересно.",,"Net, spasibo, mne ne interesno.",,,2,ru-agent-v1
+police-consulate.someone-attacked-me,На меня напали.,,Na menya napali.,,they attacked me,2,ru-agent-v1
+police-consulate.i-did-not-agree-to-this-price,Мы договаривались о другой цене.,,My dogovarivalisʼ o drugoy tsene.,,we agreed a different price,2,ru-agent-v1
+police-consulate.please-write-the-report-number,Напишите номер заявления.,Напишите номер КУСП.,Napishite nomer zayavleniya.,,,2,ru-agent-v1
+police-consulate.it-happened-here,Это случилось здесь.,,Eto sluchilosʼ zdesʼ.,,,2,ru-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,Можно копию заявления?,,Mozhno kopiyu zayavleniya?,,,2,ru-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,"Не подпишу то, что не могу прочитать.",,"Ne podpishu to, chto ne mogu prochitatʼ.",,,2,ru-agent-v1
+police-consulate.am-i-free-to-go,Я могу идти?,,Ya mogu idti?,,,2,ru-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,Я не хочу идти с вами.,,Ya ne khochu idti s vami.,,,2,ru-agent-v1

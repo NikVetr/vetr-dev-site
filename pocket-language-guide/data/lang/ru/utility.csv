@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Мне нужно в {}.,,Mne nuzhno v {}.,,,2,ru-agent-v1
+utility-templates.please-give-me,"Дайте, пожалуйста, {}.",,"Dayte, pozhaluysta, {}.",,,2,ru-agent-v1
+utility-templates.may-i,Можно {} ?,,Mozhno {} ?,,,2,ru-agent-v1
+utility-templates.please-do-not-add,"Без {}, пожалуйста.",,"Bez {}, pozhaluysta.",,,2,ru-agent-v1
+utility-templates.do-you-have,У вас есть {} ?,,U vas yestʼ {} ?,,,2,ru-agent-v1
+utility-templates.please-write-the-number,"Напишите число, пожалуйста.",,"Napishite chislo, pozhaluysta.",,,2,ru-agent-v1
+utility-templates.i-need,Мне нужен {}.,,Mne nuzhen {}.,,,2,ru-agent-v1
+utility-templates.is-there-nearby,Здесь рядом есть {}?,,Zdesʼ ryadom yestʼ {}?,,,2,ru-agent-v1
+utility-templates.how-much-is,Сколько стоит {}?,,Skolʼko stoit {}?,,,2,ru-agent-v1
+utility-templates.is-this,Это {}?,,Eto {}?,,,2,ru-agent-v1
+utility-templates.please,"{}, пожалуйста.",,"{}, pozhaluysta.",,,2,ru-agent-v1
+utility-templates.i-am-looking-for,Я ищу {}.,,Ya ishchu {}.,,,2,ru-agent-v1
+utility-templates.do-you-accept,Вы принимаете {}?,,Vy prinimayete {}?,,,2,ru-agent-v1
+utility-templates.i-cannot-find,Я не могу найти {}.,,Ya ne mogu nayti {}.,,,2,ru-agent-v1
+utility-templates.there-is-a-problem-with,Проблема: {},,Problema: {},,,2,ru-agent-v1

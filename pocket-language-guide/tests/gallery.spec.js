@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { pickReader } from './controls.js';
+import { untranslatedEndonym } from './registry.js';
 
 test.describe('gallery', () => {
   test('lists languages, honest about what is translated', async ({ page }) => {
@@ -16,12 +17,14 @@ test.describe('gallery', () => {
     await expect(chinese.getByRole('link', { name: 'Export' })).toBeVisible();
 
     // A language with no corpus must not offer a button that yields an empty sheet.
-    // Portuguese, not French: French has a full pack now. This assertion is about
-    // the "not translated yet" state, so it needs a language that genuinely is not.
-    const french = page.locator('.card', { hasText: 'Português' });
-    await expect(french.getByText('Not translated yet')).toBeVisible();
-    await expect(french.getByRole('link', { name: 'Export' })).toHaveCount(0);
-    await expect(french.getByText('help translate')).toBeVisible();
+    // Which language that is comes from the registry, because naming one meant
+    // rewriting this assertion every time a pack landed.
+    const waiting = untranslatedEndonym();
+    test.skip(!waiting, 'every registered language has a pack');
+    const untranslatedCard = page.locator('.card', { hasText: waiting });
+    await expect(untranslatedCard.getByText('Not translated yet')).toBeVisible();
+    await expect(untranslatedCard.getByRole('link', { name: 'Export' })).toHaveCount(0);
+    await expect(untranslatedCard.getByText('help translate')).toBeVisible();
 
     expect(failures).toEqual([]);
   });

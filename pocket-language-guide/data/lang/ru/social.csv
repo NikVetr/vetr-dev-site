@@ -1,0 +1,99 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+social-basics.hello,Здравствуйте,,Zdravstvuyte,,,2,ru-agent-v1
+social-basics.hello-polite,Добрый день,,Dobryy denʼ,,,2,ru-agent-v1
+social-basics.good-morning,Доброе утро,,Dobroye utro,,,2,ru-agent-v1
+social-basics.good-evening,Добрый вечер,,Dobryy vecher,,,2,ru-agent-v1
+social-basics.goodbye,До свидания,,Do svidaniya,,,2,ru-agent-v1
+social-basics.thank-you,Спасибо,,Spasibo,,,2,ru-agent-v1
+social-basics.you-are-welcome,Пожалуйста,Не за что,Pozhaluysta,,,2,ru-agent-v1
+social-basics.excuse-me-sorry,Извините,,Izvinite,,,2,ru-agent-v1
+social-basics.sorry,Простите,,Prostite,,,2,ru-agent-v1
+social-basics.no-problem,Ничего страшного,,Nichego strashnogo,,,2,ru-agent-v1
+social-basics.i-do-not-know,Я не знаю,,Ya ne znayu,,,2,ru-agent-v1
+social-basics.good-night,Спокойной ночи,,Spokoynoy nochi,,,2,ru-agent-v1
+social-basics.okay-fine-i-am-okay,Всё хорошо,,Vsë khorosho,,,2,ru-agent-v1
+communication.i-do-not-speak-this-language,Я не говорю на этом языке.,,Ya ne govoryu na etom yazyke.,,,2,ru-agent-v1
+communication.i-speak-only-a-little-of-this,Я говорю совсем немного.,,Ya govoryu sovsem nemnogo.,,,2,ru-agent-v1
+communication.do-you-speak-english,Вы говорите по-английски?,,Vy govorite po-angliyski?,,,2,ru-agent-v1
+communication.please-speak-more-slowly,"Говорите медленнее, пожалуйста.",,"Govorite medlenneye, pozhaluysta.",,,2,ru-agent-v1
+communication.i-do-not-understand-spoken,Не понимаю.,,Ne ponimayu.,,,2,ru-agent-v1
+communication.i-cannot-read-understand,Не читаю и не понимаю.,,Ne chitayu i ne ponimayu.,,,2,ru-agent-v1
+communication.please-say-it-again,"Повторите, пожалуйста.",,"Povtorite, pozhaluysta.",,,2,ru-agent-v1
+communication.please-write-it-down,"Напишите, пожалуйста.",,"Napishite, pozhaluysta.",,,2,ru-agent-v1
+communication.please-wait-a-moment,"Подождите, пожалуйста.",,"Podozhdite, pozhaluysta.",,,2,ru-agent-v1
+communication.can-you-help-me,Вы можете помочь?,,Vy mozhete pomochʼ?,,,2,ru-agent-v1
+communication.please-show-me-the-text,Покажите мне текст.,,Pokazhite mne tekst.,,,2,ru-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,"Я не разбираю, что вы говорите.",,"Ya ne razbirayu, chto vy govorite.",,,2,ru-agent-v1
+communication.i-do-not-understand,Я не понимаю.,,Ya ne ponimayu.,,,2,ru-agent-v1
+communication.i-cannot-read-it,Я не могу это прочитать.,,Ya ne mogu eto prochitatʼ.,,,2,ru-agent-v1
+quick-responses.please-go-ahead,пожалуйста,,pozhaluysta,,,2,ru-agent-v1
+quick-responses.yes-right,да / верно,,da / verno,,,2,ru-agent-v1
+quick-responses.no-not,нет / не,,net / ne,,,2,ru-agent-v1
+quick-responses.okay-can,хорошо / можно,,khorosho / mozhno,,,2,ru-agent-v1
+quick-responses.cannot-not-allowed,нельзя,,nelʼzya,,,2,ru-agent-v1
+quick-responses.works-okay,работает,,rabotayet,,,2,ru-agent-v1
+quick-responses.does-not-work-no,не работает,,ne rabotayet,,,2,ru-agent-v1
+quick-responses.can-possible,можно,,mozhno,,,2,ru-agent-v1
+quick-responses.cannot-not-possible,нельзя / невозможно,,nelʼzya / nevozmozhno,,,2,ru-agent-v1
+quick-responses.okay-fine,ладно,,ladno,,,2,ru-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,не годится / нельзя,,ne goditsya / nelʼzya,,,2,ru-agent-v1
+phone-translation.i-am-using-phone-translation,Я использую переводчик в телефоне.,,Ya ispolʼzuyu perevodchik v telefone.,,,2,ru-agent-v1
+phone-translation.please-speak-toward-the-phone,"Говорите в телефон, пожалуйста.",,"Govorite v telefon, pozhaluysta.",,,2,ru-agent-v1
+phone-translation.please-write-the-place-name,Напишите здесь название места.,,Napishite zdesʼ nazvaniye mesta.,,,2,ru-agent-v1
+phone-translation.one-sentence-at-a-time-please,"По одному предложению, пожалуйста.",,"Po odnomu predlozheniyu, pozhaluysta.",,,2,ru-agent-v1
+phone-translation.please-type-it-and-show-me,Наберите и покажите мне.,,Naberite i pokazhite mne.,,,2,ru-agent-v1
+phone-translation.please-look-at-the-screen,Посмотрите на экран.,,Posmotrite na ekran.,,,2,ru-agent-v1
+phone-text-power.please-type-it-for-me,"Наберите, пожалуйста.",,"Naberite, pozhaluysta.",,,2,ru-agent-v1
+phone-text-power.please-use-simple-words,Говорите простыми словами.,,Govorite prostymi slovami.,,,2,ru-agent-v1
+phone-text-power.my-phone-battery-is-low,У меня садится батарея.,,U menya saditsya batareya.,,,2,ru-agent-v1
+phone-text-power.do-you-have-a-power-bank,У вас есть повербанк?,внешний аккумулятор,U vas yestʼ poverbank?,,,2,ru-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,Перевод может быть неточным.,,Perevod mozhet bytʼ netochnym.,,,2,ru-agent-v1
+phone-text-power.please-confirm,"Подтвердите, пожалуйста.",,"Podtverdite, pozhaluysta.",,,2,ru-agent-v1
+phone-text-power.may-i-charge-my-phone-here,Можно здесь зарядить телефон?,,Mozhno zdesʼ zaryaditʼ telefon?,,,2,ru-agent-v1
+sim-data.i-would-like-a-tourist-sim,Нужна сим-карта для туристов.,,Nuzhna sim-karta dlya turistov.,,,2,ru-agent-v1
+sim-data.may-i-use-your-wifi,Можно воспользоваться вашим Wi-Fi?,,Mozhno vospolʼzovatʼsya vashim Wi-Fi?,,,2,ru-agent-v1
+sim-data.how-much-data-is-included,Сколько гигабайт включено?,,Skolʼko gigabayt vklyucheno?,,,2,ru-agent-v1
+sim-data.do-you-need-my-passport,Вам нужен мой паспорт?,,Vam nuzhen moy pasport?,,,2,ru-agent-v1
+sim-data.how-long-is-it-valid,Сколько действует?,,Skolʼko deystvuyet?,,,2,ru-agent-v1
+sim-data.please-activate-it,"Активируйте, пожалуйста.",,"Aktiviruyte, pozhaluysta.",,,2,ru-agent-v1
+sim-data.do-you-have-an-esim,У вас есть eSIM?,,U vas yestʼ eSIM?,,,2,ru-agent-v1
+sim-data.my-data-is-not-working,У меня не работает интернет.,,U menya ne rabotayet internet.,,,2,ru-agent-v1
+sim-data.does-it-need-registration,Нужна регистрация?,,Nuzhna registratsiya?,,,2,ru-agent-v1
+sim-data.i-have-no-signal,Нет связи.,,Net svyazi.,,,2,ru-agent-v1
+sim-data.please-write-the-wifi-password,Напишите пароль от Wi-Fi.,,Napishite parolʼ ot Wi-Fi.,,,2,ru-agent-v1
+sim-data.sim-card,сим-карта,,sim-karta,,,2,ru-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Где купить переходник для розетки?,,Gde kupitʼ perekhodnik dlya rozetki?,,,2,ru-agent-v1
+sim-data.mobile-data,мобильный интернет,,mobilʼnyy internet,,,2,ru-agent-v1
+sim-data.can-i-top-up-this-sim,Можно пополнить эту сим-карту?,,Mozhno popolnitʼ etu sim-kartu?,,,2,ru-agent-v1
+sim-data.top-up,пополнение счёта,,popolneniye schëta,,,2,ru-agent-v1
+sim-data.is-there-coverage-in,{} — там есть связь?,,{} — tam yestʼ svyazʼ?,,,2,ru-agent-v1
+sim-data.signal,связь / сигнал,,svyazʼ / signal,,,2,ru-agent-v1
+sim-data.esim,eSIM,,eSIM,,,2,ru-agent-v1
+sim-data.prepaid,предоплата,,predoplata,,,2,ru-agent-v1
+sim-data.roaming,роуминг,,rouming,,,2,ru-agent-v1
+etiquette.is-this-allowed,Это можно?,,Eto mozhno?,,,2,ru-agent-v1
+etiquette.is-tipping-expected,Здесь принято давать чаевые?,,Zdesʼ prinyato davatʼ chayevyye?,,,2,ru-agent-v1
+etiquette.is-service-included,Обслуживание включено?,,Obsluzhivaniye vklyucheno?,,,2,ru-agent-v1
+etiquette.may-i-enter,Можно войти?,,Mozhno voyti?,,,2,ru-agent-v1
+etiquette.remove-shoes,Нужно разуться?,,Nuzhno razutʼsya?,,,2,ru-agent-v1
+etiquette.photo-of-you,Можно вас сфотографировать?,,Mozhno vas sfotografirovatʼ?,,,2,ru-agent-v1
+etiquette.may-i-sit-here,Можно здесь сесть?,,Mozhno zdesʼ sestʼ?,,,2,ru-agent-v1
+etiquette.queue-for,Это очередь в {}?,,Eto ocheredʼ v {}?,,,2,ru-agent-v1
+etiquette.dressed-appropriately,Я нормально одет?,Я нормально одета?,Ya normalʼno odet?,,,2,ru-agent-v1
+etiquette.did-not-mean-to-offend,Я не хотел вас обидеть.,Я не хотела вас обидеть.,Ya ne khotel vas obidetʼ.,,,2,ru-agent-v1
+etiquette.what-is-customary,Как здесь принято?,,Kak zdesʼ prinyato?,,,2,ru-agent-v1
+etiquette.keep-the-change,Сдачи не надо.,,Sdachi ne nado.,,,2,ru-agent-v1
+children.cannot-find-my-child,Я не могу найти ребёнка.,,Ya ne mogu nayti rebënka.,,,2,ru-agent-v1
+children.make-an-announcement,"Сделайте объявление, пожалуйста.",,"Sdelayte obˮyavleniye, pozhaluysta.",,,2,ru-agent-v1
+children.child-age,Моему ребёнку {} лет.,,Moyemu rebënku {} let.,,,2,ru-agent-v1
+children.high-chair,Есть детский стульчик?,,Yestʼ detskiy stulʼchik?,,,2,ru-agent-v1
+children.baby-changing-room,Где комната матери и ребёнка?,Где пеленальная комната?,Gde komnata materi i rebënka?,,,2,ru-agent-v1
+children.childrens-menu,Есть детское меню?,,Yestʼ detskoye menyu?,,,2,ru-agent-v1
+children.suitable-for-children,Это подходит детям?,,Eto podkhodit detyam?,,,2,ru-agent-v1
+children.minimum-age,С какого возраста можно?,,S kakogo vozrasta mozhno?,,,2,ru-agent-v1
+children.do-children-pay,Дети платят?,,Deti platyat?,,,2,ru-agent-v1
+children.crib,Есть детская кроватка?,,Yestʼ detskaya krovatka?,,,2,ru-agent-v1
+children.warm-this-bottle,"Подогрейте бутылочку, пожалуйста.",,"Podogreyte butylochku, pozhaluysta.",,,2,ru-agent-v1
+children.car-seat,Нам нужно детское кресло.,,Nam nuzhno detskoye kreslo.,,,2,ru-agent-v1
+children.stroller,коляска,,kolyaska,,,2,ru-agent-v1
+children.playground,Есть детская площадка?,,Yestʼ detskaya ploshchadka?,,,2,ru-agent-v1

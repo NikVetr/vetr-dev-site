@@ -30,6 +30,7 @@
   "format.breathingRoom": "글자 주변 여유 공간",
   "format.card": "카드",
   "format.cardSize": "카드 크기",
+  "format.card.creditCard": "카드",
   "format.colours": "색상",
   "format.columns": "단 수",
   "format.columnsPerFace": "면당 단 수",

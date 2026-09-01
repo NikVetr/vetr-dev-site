@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { counts, expectIncluded, expectIncludedNot, faceCount } from './counts.js';
+import { translated, untranslated } from './registry.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
 
@@ -58,7 +59,7 @@ test.describe('studio', () => {
     await page.goto(STUDIO);
     const faces = await faceCount(page);
     await expect(page.locator('.face-strip .face')).toHaveCount(faces);
-    await page.getByRole('radio', { name: 'Credit-card size' }).click();
+    await page.getByRole('radio', { name: 'Credit card' }).click();
     // Auto takes more pairs rather than reporting an error, and says how many.
     // Counting elements rather than matching "4 faces", which "14 faces" contains.
     await expect.poll(() => page.locator('.face-strip .face').count()).toBeGreaterThan(4);
@@ -71,7 +72,7 @@ test.describe('studio', () => {
   test('a pinned face count that cannot hold the content fails loudly, once', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
-    await page.getByRole('radio', { name: 'Credit-card size' }).click();
+    await page.getByRole('radio', { name: 'Credit card' }).click();
     await page.getByRole('radiogroup', { name: 'Faces' })
       .getByRole('radio', { name: '2', exact: true }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
@@ -100,7 +101,7 @@ test.describe('studio', () => {
   test('balancing is refused, with a reason, while the sheet does not fit', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
-    await page.getByRole('radio', { name: 'Credit-card size' }).click();
+    await page.getByRole('radio', { name: 'Credit card' }).click();
     await page.getByRole('radiogroup', { name: 'Faces' })
       .getByRole('radio', { name: '2', exact: true }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
@@ -194,18 +195,23 @@ test.describe('studio', () => {
 });
 
 // Registry `status` is editorial intent; only rows on file decide what is offered.
-// Spanish and Arabic are registered with none, and offering them produced fifteen
-// 404s and a blank sheet that said nothing about why.
+// A language registered with none produced fifteen 404s and a blank sheet that said
+// nothing about why. Which languages those are comes from the registry rather than a
+// list here, because the list was wrong within a day of being written twice over --
+// first Spanish, then Portuguese, each named as untranslated and then translated.
 test('the gloss menu offers only languages with rows on file', async ({ page }) => {
   await page.goto('/customize.html?target=zh-Hans&source=en');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
 
   const offered = await page.locator('#source option').evaluateAll((os) => os.map((o) => o.value));
-  expect(offered).toContain('ja');
-  expect(offered).toContain('es');            // has rows now, so it is offered
-  expect(offered).not.toContain('pt');        // registered, but no rows on file
-  expect(offered).not.toContain('th');
-  expect(offered).not.toContain('zh-Hans');   // it is the target
+  for (const lang of translated) {
+    if (lang.bcp47 === 'zh-Hans') continue;   // it is the target
+    expect(offered, `${lang.bcp47} has rows`).toContain(lang.bcp47);
+  }
+  for (const lang of untranslated) {
+    expect(offered, `${lang.bcp47} has no rows`).not.toContain(lang.bcp47);
+  }
+  expect(offered).not.toContain('zh-Hans');   // never a gloss into the target
 });
 
 test('the tree, the sheet and the term picker all call a section the same thing', async ({ page }) => {

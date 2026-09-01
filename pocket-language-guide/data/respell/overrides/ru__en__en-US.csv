@@ -1,0 +1,744 @@
+concept_id,respell
+building-help.what-room-number-is-this,ka-KOY NOH-myer KOM-na-ti
+accessibility.step-free,yest fkhot byes stoo-PYEH-nyek
+in-a-building.is-this-the-correct-entrance,EH-ta PRAH-vil-niy fkhot
+toilets.where-toilet,gdyeh too-a-LYET
+building-words.elevator,leeft
+pronouns-verbs.i-me,yah / myi-NYAH
+question-words.what,shto
+emergency-medical.help,pa-ma-GEE-tye
+medical-conditions.i-am-diabetic,oo myi-NYAH di-a-BYET
+pharmacy-symptoms.which-pharmacy-is-open-now,ka-KAH-ya ap-TYEH-ka si-CHAS at-KRIH-ta
+body-parts.head,ga-la-VAH
+lost-rescue.i-lost-my-passport,oo myi-NYAH pra-PAL PAS-part
+police-consulate.where-is-the-police-station,gdyeh a-dyi-LYEH-ni-ye pa-LEE-tsi-i
+dietary-needs.no-meat,byez MYAH-sa
+food-ordering.table-for-two,STOH-lik na dva-EEKH
+trail-words.trail,tra-PAH
+weather.forecast,ka-KOY prag-NOS pa-GOH-di
+hiking-parks.is-this-the-way-to,{} v EH-too STOH-ra-noo
+trail-conditions.how-long-is-the-full-route,ka-KAH-ya dli-NAH fsi-VOH mar-SHROO-ta
+trail-transport.how-long-is-the-queue,ka-KAH-ya OH-che-ryet
+trail-warnings.open,at-KRIH-ta
+trail-landmarks.trail-marker,mar-KEE-raf-ka tra-PIH
+hotel-words.passport,PAS-part
+hotel-basics.are-any-rooms-available,yest sva-BOD-ni-ye na-myi-RAH
+hotel-requests.can-i-check-out-later,MOZH-na VIH-ye-khat POH-zhe
+room-problems.there-is-a-problem-with-the-room,v NOH-mye-rye pra-BLYEH-ma
+laundry.please-wash-these-clothes,pas-ti-RAY-tye EH-too a-DYEZH-doo pa-ZHAL-sta
+introductions.my-name-is,myi-NYAH za-VOOT {}
+numbers-money.l-ng,nol
+atm-cash.where-is-an-atm,gdyeh ban-ka-MAT
+attractions-tickets.where-can-i-buy-tickets,gdyeh koo-PEET bi-LYEH-ti
+payment-receipt.pay-by-card,KAR-tay
+shopping.i-am-just-looking,yah PROS-ta sma-TRYOO
+color-size-returns.do-you-have-another-color,yest droo-GOY tsvyet
+tax-refund.can-i-get-a-tax-refund,MOZH-na vyir-NOOT na-LOK
+social-basics.hello,ZDRAST-vooy-tye
+communication.i-do-not-speak-this-language,yah nyi ga-va-RYOO na EH-tam yi-zi-KYEH
+quick-responses.please-go-ahead,pa-ZHAL-sta
+phone-translation.i-am-using-phone-translation,yah is-POL-zoo-yoo pyi-ryi-VOH-chik f tyi-lyi-FOH-nye
+phone-text-power.please-type-it-for-me,na-byi-REE-tye pa-ZHAL-sta
+sim-data.i-would-like-a-tourist-sim,noozh-NAH seem-KAR-ta dlya too-REES-taf
+etiquette.is-this-allowed,EH-ta MOZH-na
+children.cannot-find-my-child,yah nyi ma-GOO nay-TEE ryi-BYON-ka
+time-scheduling.what-time-is-it,SKOL-ka VRYEH-mye-ni
+time-words.today,si-VOD-nya
+days-of-week.monday,pa-nyi-DYEL-nik
+months.january,yin-VAR
+directions.where-is,gdyeh {}
+quick-directions.go-straight,PRYAH-ma
+taxi.please-take-me-here,at-vyi-ZEE-tye myi-NYAH syoo-DAH
+transit-rides.two-tickets,dvah bi-LYEH-ta
+border-customs.i-am-a-tourist,yah too-REEST
+pickup-meeting.where-is-the-pickup-point,gdyeh MYES-ta pa-SAT-ki
+rail-station-words.high-speed-rail,ska-ras-NOY POH-yest
+common-signs.open-on,at-KRIH-ta / fklyoo-chi-NOH
+utility-templates.i-want-to-go-to,mnyeh NOOZH-na v {}
+building-help.i-am-lost,yah za-bloo-DEEL-sya
+accessibility.wheelchair-access,yest DOS-toop dlya in-va-LEED-nay ka-LYAH-ski
+toilets.where-public-toilet,gdyeh ap-SHCHEST-vye-niy too-a-LYET
+building-words.stairs,LYES-ni-tsa
+pronouns-verbs.we-us,mih / nas
+question-words.where,gdyeh
+emergency-medical.please-call-an-ambulance,VIH-za-vi-tye SKOH-roo-yoo
+medical-conditions.i-need-insulin,mnyeh NOO-zhen in-soo-LEEN
+pharmacy-symptoms.i-need-medicine-for,mnyeh NOOZH-na li-KAR-stva at {}
+body-parts.stomach,zhi-VOT
+lost-rescue.i-lost-my-phone,oo myi-NYAH pra-PAL tyi-lyi-FON
+police-consulate.i-want-to-report-a-theft,yah kha-CHOO za-yi-VEET a KRAH-zhe
+dietary-needs.no-eggs,byez yi-EETS
+food-ordering.is-a-table-available,yest sva-BOD-niy STOH-lik
+trail-words.trailhead,na-CHAH-la tra-PIH
+weather.will-it-rain,si-VOD-nya BOO-dyet dosht
+hiking-parks.where-is-the-trailhead,gdyeh na-CHAH-la tra-PIH
+trail-conditions.can-we-return-the-same-way,MOZH-na vyir-NOOT-sa tyem zhe poo-TYOM
+trail-transport.what-time-is-the-last-shuttle,kag-DAH pa-SLYED-niy shatl
+trail-warnings.closed,za-KRIH-ta
+trail-landmarks.fork-junction,raz-VEEL-ka
+hotel-words.room-key-card,klyooch-KAR-ta
+hotel-basics.there-are-two-of-us,nas DVOH-ye
+hotel-requests.what-time-does-breakfast-start,va SKOL-ka ZAF-trak
+room-problems.the-air-conditioning-is-broken,kan-di-tsi-a-NYER nyi ra-BOH-ta-yet
+laundry.where-is-a-laundromat,gdyeh PRAH-chech-na-ya
+introductions.nice-to-meet-you,OH-chen pri-YAT-na
+numbers-money.y,a-DEEN
+atm-cash.does-this-atm-take-foreign-cards,ban-ka-MAT pri-ni-MAH-yet i-nas-TRAH-ni-ye KAR-ti
+attractions-tickets.do-i-need-a-reservation,NOOZH-na bra-NEE-ra-vat
+payment-receipt.pay-cash,na-LEECH-ni-mi
+shopping.how-much-is-this,SKOL-ka EH-ta STOH-it
+color-size-returns.do-you-have-another-size,yest droo-GOY raz-MYER
+social-basics.hello-polite,DOH-briy dyen
+communication.i-speak-only-a-little-of-this,yah ga-va-RYOO saf-SYEM nyim-NOH-ga
+quick-responses.yes-right,dah / VYER-na
+phone-translation.please-speak-toward-the-phone,ga-va-REE-tye f tyi-lyi-FON pa-ZHAL-sta
+phone-translation.please-write-the-place-name,na-pi-SHIH-tye zdyes naz-VAH-ni-ye MYES-ta
+sim-data.may-i-use-your-wifi,MOZH-na vas-POL-za-vat-sa VAH-shim Wi-Fi
+etiquette.is-tipping-expected,zdyes PREE-nya-ta da-VAT cha-yi-VIH-ye
+children.make-an-announcement,ZDYEH-lay-tye a-byi-VLYEH-ni-ye pa-ZHAL-sta
+time-scheduling.how-many-minutes,SKOL-ka mi-NOOT
+time-words.tomorrow,ZAF-tra
+days-of-week.tuesday,FTOR-nik
+months.february,fyi-VRAL
+directions.how-do-i-get-to,{} kak too-DAH da-YEH-khat
+quick-directions.turn-left,na-LYEH-va
+taxi.please-send-me-the-address,pri-SHLEE-tye mnyeh AH-dryes
+transit-rides.where-is-the-subway-station,gdyeh STAN-tsi-ya myi-TROH
+place-words.visitor-center,too-ris-TEE-che-skiy tsentr
+border-customs.here-is-my-passport,vot moy PAS-part
+pickup-meeting.please-send-me-the-pickup-point,pri-SHLEE-tye MYES-ta pa-SAT-ki
+common-signs.closed-off,za-KRIH-ta / VIH-klyoo-che-na
+utility-templates.please-give-me,DAY-tye pa-ZHAL-sta {}
+building-help.where-is-reception,gdyeh ri-SEPSHN
+accessibility.elevator,yest leeft
+in-a-building.do-you-have-wi-fi,oo vas yest Wi-Fi
+toilets.may-i-use-the-toilet,MOZH-na f too-a-LYET
+building-words.entrance,fkhot
+pronouns-verbs.you,tih / tyi-BYAH
+question-words.who,ktoh
+emergency-medical.i-need-a-doctor,mnyeh NOO-zhen vrach
+medical-conditions.i-have-asthma,oo myi-NYAH AST-ma
+pharmacy-symptoms.i-have-a-fever,oo myi-NYAH tyim-pyi-ra-TOO-ra
+body-parts.back,spi-NAH
+lost-rescue.please-call-the-police,VIH-za-vi-tye pa-LEE-tsi-yoo pa-ZHAL-sta
+police-consulate.my-bag-was-stolen,oo myi-NYAH oo-KRAH-li SOOM-koo
+dietary-needs.not-spicy,nyi OS-tra-ye
+food-ordering.menu-please,myi-NYOO pa-ZHAL-sta
+trail-words.summit,vyir-SHIH-na
+weather.is-it-safe-today,si-VOD-nya byi-za-PAS-na
+hiking-parks.how-long-to-the-summit,SKOL-ka it-TEE da vyir-SHIH-ni
+trail-conditions.can-we-return-before-dark,oos-PYEH-yem vyir-NOOT-sa da tyim-na-TIH
+trail-transport.when-does-the-cableway-stop,da SKOL-ki ra-BOH-ta-yet ka-NAT-ka
+trail-warnings.maintenance,tyikh-NEE-che-ski-ye ra-BOH-ti
+trail-landmarks.boardwalk-cliff-path,nas-TEEL / tra-PAH vdol a-BRIH-va
+hotel-words.check-in,za-syi-LYEH-ni-ye
+hotel-basics.i-have-a-reservation,oo myi-NYAH yest bron
+hotel-requests.can-i-store-my-luggage,MOZH-na as-TAH-vit ba-GASH
+room-problems.there-is-no-hot-water,nyet ga-RYAH-chey va-DIH
+laundry.when-will-it-be-ready,kag-DAH BOO-dyet ga-TOH-va
+introductions.what-is-your-name,kak vas za-VOOT
+numbers-money.r,dvah
+atm-cash.the-atm-kept-my-card,ban-ka-MAT za-BRAL ma-YOO KAR-too
+attractions-tickets.what-is-the-latest-entry-time,da SKOL-ki poo-SKAH-yoot
+payment-receipt.pay-by-qr-code,pa QR-KOH-doo
+shopping.that-is-too-expensive,EH-ta SLEESH-kam DOH-ra-ga
+color-size-returns.may-i-try-it-on,MOZH-na pa-MYEH-rit
+social-basics.good-morning,DOH-bra-ye OO-tra
+communication.do-you-speak-english,vih ga-va-REE-tye pa-an-GLEEY-ski
+quick-responses.no-not,nyet / nyi
+phone-translation.one-sentence-at-a-time-please,pa ad-na-MOO pryid-la-ZHEH-ni-yoo pa-ZHAL-sta
+phone-text-power.please-use-simple-words,ga-va-REE-tye PROS-ti-mi sla-VAH-mi
+sim-data.how-much-data-is-included,SKOL-ka gi-ga-BAYT fklyoo-chi-NOH
+etiquette.is-service-included,ap-SLOO-zhi-va-ni-ye fklyoo-chi-NOH
+children.child-age,ma-yi-MOO ryi-BYON-koo {} lyet
+time-scheduling.what-time-should-we-meet,va SKOL-ka FSTRYEH-tim-sya
+time-words.yesterday,fchi-RAH
+days-of-week.wednesday,sryi-DAH
+months.march,mart
+directions.is-it-far,EH-ta da-lyi-KOH
+quick-directions.turn-right,na-PRAH-va
+taxi.we-need-the-east-gate-not-the-south-gate,nam noozh-NIH vas-TOCH-ni-ye va-ROH-ta nyi YOOZH-ni-ye
+transit-rides.does-this-bus-train-go-to,EH-tat af-TOH-boos i-DYOT da {}
+place-words.railway-station,vag-ZAL
+border-customs.i-am-staying-for-days,yah na {} dnyey
+pickup-meeting.please-pick-us-up-here,za-byi-REE-tye nas zdyes
+rail-station-words.transfer,pyi-ryi-SAT-ka
+common-signs.occupied,ZAH-nya-ta
+utility-templates.may-i,MOZH-na {}
+building-help.where-is-a-power-outlet,gdyeh ra-ZYET-ka
+accessibility.ramp,yest PAN-doos
+in-a-building.what-is-the-wi-fi-password,ka-KOY pa-ROL at Wi-Fi
+toilets.is-it-only-for-customers,TOL-ka dlya kli-YEN-taf
+building-words.exit,VIH-khat
+pronouns-verbs.you-polite,vih / vas
+question-words.which-one,ka-KOY
+emergency-medical.i-am-sick,yah BOH-lyen
+medical-conditions.i-have-a-heart-condition,oo myi-NYAH ba-LYEZN SYER-tsa
+pharmacy-symptoms.i-have-diarrhea,oo myi-NYAH di-a-RYEH-ya
+body-parts.throat,GOR-la
+lost-rescue.we-are-here,mih zdyes
+police-consulate.my-passport-was-stolen,oo myi-NYAH oo-KRAH-li PAS-part
+dietary-needs.less-spicy,MYEH-nye-ye OS-tra-ye
+food-ordering.i-want-this,yah kha-CHOO vot EH-ta
+trail-words.viewpoint,sma-tra-VAH-ya pla-SHCHAT-ka
+weather.how-cold-at-night,SKOL-ka GRAH-doo-saf NOH-chyoo
+hiking-parks.how-long-to-the-viewpoint,SKOL-ka it-TEE da sma-tra-VOY pla-SHCHAT-ki
+trail-conditions.is-the-trail-open,tra-PAH at-KRIH-ta
+trail-transport.where-can-we-buy-water,gdyeh MOZH-na koo-PEET VOH-doo
+trail-warnings.steep-slope,kroo-TOY sklon
+trail-landmarks.start,na-CHAH-la
+hotel-words.check-out,VIH-yest
+hotel-basics.can-i-charge-my-phone,MOZH-na za-ryi-DEET tyi-lyi-FON
+hotel-requests.no-housekeeping,oo-BOR-ka nyi noozh-NAH
+room-problems.can-i-change-rooms,MOZH-na pa-myi-NYAT NOH-myer
+laundry.how-much-per-kilo,SKOL-ka za ki-la-GRAM
+introductions.we-are-traveling-together,mih poo-tyi-SHEST-voo-yem VMYES-tye
+atm-cash.is-there-a-fee,yest ka-MEE-si-ya
+attractions-tickets.are-there-lockers,yest KAH-mye-ri khra-NYEH-ni-ya
+payment-receipt.a-receipt-please,chek pa-ZHAL-sta
+shopping.can-it-be-a-little-cheaper,MOZH-na choot dyi-SHEH-vlye
+color-size-returns.can-i-return-it,MOZH-na vyir-NOOT
+social-basics.good-evening,DOH-briy VYEH-cher
+communication.please-speak-more-slowly,ga-va-REE-tye MYED-lye-nye-ye pa-ZHAL-sta
+quick-responses.okay-can,kha-ra-SHOH / MOZH-na
+phone-text-power.my-phone-battery-is-low,oo myi-NYAH sa-DEET-sa ba-ta-RYEH-ya
+sim-data.do-you-need-my-passport,vam NOO-zhen moy PAS-part
+etiquette.may-i-enter,MOZH-na vay-TEE
+children.high-chair,yest DYET-skiy STOOL-chik
+time-scheduling.can-we-change-the-time,MOZH-na pyi-ryi-nyis-TEE VRYEH-mya
+time-words.this-week,na EH-tay nyi-DYEH-lye
+days-of-week.thursday,chit-VYERK
+months.april,a-PRYEL
+directions.how-long-on-foot,SKOL-ka it-TEE pyish-KOM
+quick-directions.this-way,syoo-DAH
+taxi.please-stop-here,as-ta-na-VEE-tyes zdyes pa-ZHAL-sta
+transit-rides.what-is-the-next-stop,ka-KAH-ya SLYEH-doo-yoo-shcha-ya as-ta-NOF-ka
+place-words.airport,a-e-ra-PORT
+border-customs.nothing-to-declare,NYEH-chi-va dyi-kla-REE-ra-vat
+pickup-meeting.meet-us-at,FSTRYEH-tim-sya zdyes {}
+rail-station-words.ticket-gate,toor-ni-KYET
+common-signs.vacant,sva-BOD-na
+utility-templates.please-do-not-add,byes {} pa-ZHAL-sta
+accessibility.how-many-steps,SKOL-ka tam stoo-PYEH-nyek
+in-a-building.which-floor,ka-KOY e-TASH
+toilets.toilet-wc,too-a-LYET
+building-words.men,moo-SHCHEE-ni
+pronouns-verbs.he-him,on / yi-VOH
+question-words.when,kag-DAH
+emergency-medical.i-am-injured,oo myi-NYAH TRAV-ma
+medical-conditions.i-am-allergic-to-penicillin,oo myi-NYAH a-lyir-GEE-ya na pyi-ni-tsi-LEEN
+pharmacy-symptoms.where-is-an-all-night-pharmacy,gdyeh kroo-gla-SOO-tach-na-ya ap-TYEH-ka
+body-parts.tooth,zoop
+lost-rescue.please-look-at-my-location-pin,pas-ma-TREE-tye ma-YOO MYET-koo na KAR-tye
+police-consulate.someone-is-following-me,za mnoy ktohtoh i-DYOT
+dietary-needs.no-peanuts,byez a-RAH-khi-sa
+food-ordering.do-you-have-drinking-water,oo vas yest pi-tyi-VAH-ya va-DAH
+trail-words.cableway,ka-NAT-na-ya da-ROH-ga
+weather.rain,dosht
+hiking-parks.which-route-is-easier,ka-KOY mar-SHROOT LYEKH-che
+trail-conditions.is-the-route-steep,mar-SHROOT kroo-TOY
+trail-transport.where-can-we-refill-water,gdyeh MOZH-na na-BRAT va-DIH
+trail-warnings.caution-slippery,as-ta-ROZH-na SKOL-ska
+trail-landmarks.end,ka-NYETS
+hotel-basics.i-would-like-a-non-smoking-room,NOO-zhen NOH-myer dlya nyi-koo-RYAH-shchikh
+room-problems.the-room-is-too-noisy,v NOH-mye-rye OH-chen SHOOM-na
+laundry.can-it-be-ready-today,MOZH-na si-VOD-nya
+introductions.this-is-my-friend,EH-ta moy drook
+numbers-money.s-n,tree
+atm-cash.the-card-was-declined,KAR-too nyi PREE-nya-li
+attractions-tickets.may-i-take-photos,MOZH-na fa-ta-gra-FEE-ra-vat
+color-size-returns.can-i-exchange-it,MOZH-na ab-myi-NYAT
+social-basics.goodbye,da svi-DAH-ni-ya
+communication.i-do-not-understand-spoken,nyi pa-ni-MAH-yoo
+quick-responses.cannot-not-allowed,nyil-ZYAH
+phone-text-power.do-you-have-a-power-bank,oo vas yest pa-vyir-BANK
+sim-data.how-long-is-it-valid,SKOL-ka DYEYST-voo-yet
+etiquette.remove-shoes,NOOZH-na ra-ZOOT-sa
+children.baby-changing-room,gdyeh KOM-na-ta MAH-tye-ri i ryi-BYON-ka
+time-scheduling.when-is-convenient,kag-DAH vam oo-DOB-na
+time-words.next-week,na SLYEH-doo-yoo-shchey nyi-DYEH-lye
+days-of-week.friday,PYAT-ni-tsa
+months.may,may
+directions.please-show-me-on-the-map,pa-ka-ZHIH-tye na KAR-tye pa-ZHAL-sta
+quick-directions.that-way,too-DAH
+taxi.can-you-wait-for-me-here,MOH-zhe-tye myi-NYAH zdyes pa-dazh-DAT
+transit-rides.please-tell-me-where-to-get-off,ska-ZHIH-tye gdyeh mnyeh VIHY-ti
+place-words.service-desk,SPRAH-vach-na-ya
+border-customs.i-am-staying-at,moy AH-dryes {}
+pickup-meeting.please-call-me-a-ride,VIH-za-vi-tye mnyeh ma-SHIH-noo
+rail-station-words.platform,plat-FOR-ma
+common-signs.caution,vni-MAH-ni-ye
+utility-templates.do-you-have,oo vas yest {}
+accessibility.cannot-climb-stairs,yah nyi ma-GOO pad-NYAT-sa pa LYES-ni-tse
+toilets.is-it-free,EH-ta byis-PLAT-na
+building-words.women,ZHEN-shchi-ni
+pronouns-verbs.she-her,a-NAH / yi-YOH
+question-words.how,kak
+emergency-medical.it-hurts-here,ba-LEET zdyes
+medical-conditions.i-have-epilepsy,oo myi-NYAH e-pi-LYEP-si-ya
+pharmacy-symptoms.painkiller,a-byiz-BOH-li-va-yoo-shche-ye
+body-parts.chest,groot
+lost-rescue.i-cannot-walk,yah nyi ma-GOO it-TEE
+police-consulate.i-need-a-written-police-report,mnyeh NOO-zhen ta-LON-oo-vyi-dam-LYEH-ni-ye
+dietary-needs.no-nuts,byez a-RYEH-khaf
+food-ordering.to-go-please,s sa-BOY pa-ZHAL-sta
+trail-words.shuttle-bus,shatl
+weather.snow,snyek
+trail-conditions.is-the-path-slippery,tra-PAH SKOL-ska-ya
+trail-transport.is-there-cell-signal-here,zdyes yest svyas
+trail-warnings.danger,a-PAS-na
+trail-landmarks.elevation,vi-sa-TAH
+hotel-basics.i-would-like-a-quiet-room,NOO-zhen TEE-khiy NOH-myer
+room-problems.the-key-does-not-work,klyooch nyi ra-BOH-ta-yet
+laundry.please-do-not-use-bleach,byez ad-BYEH-li-va-tye-lya pa-ZHAL-sta
+introductions.i-am-from,yah iz {}
+numbers-money.s,chi-TIH-rye
+atm-cash.what-is-the-exchange-rate,ka-KOY koors
+attractions-tickets.please-take-a-photo-of-us,sfa-ta-gra-FEE-rooy-tye nas pa-ZHAL-sta
+color-size-returns.do-you-have-a-bag,pa-KYET yest
+social-basics.thank-you,spa-SEE-ba
+communication.i-cannot-read-understand,nyi chi-TAH-yoo i nyi pa-ni-MAH-yoo
+quick-responses.works-okay,ra-BOH-ta-yet
+phone-text-power.the-translation-may-be-inaccurate,pyi-ryi-VOT MOH-zhet biht nyi-TOCH-nim
+sim-data.please-activate-it,ak-ti-VEE-rooy-tye pa-ZHAL-sta
+etiquette.photo-of-you,MOZH-na vas sfa-ta-gra-FEE-ra-vat
+children.childrens-menu,yest DYET-ska-ye myi-NYOO
+time-scheduling.what-is-today-s-date,ka-KOH-ye si-VOD-nya chi-SLOH
+time-words.morning,OO-tra
+days-of-week.saturday,soo-BOH-ta
+months.june,i-YOON
+directions.where-is-the-nearest,gdyeh bli-ZHAY-shiy {}
+quick-directions.on-the-left,SLYEH-va
+taxi.we-need-to-catch-the-high-speed-train,nam NOOZH-na oos-PYET na ska-ras-NOY POH-yest
+transit-rides.is-this-direct,EH-ta byes pyi-ryi-SAH-dak
+place-words.bus-stop,as-ta-NOF-ka
+border-customs.i-am-here-for-business,yah pa ra-BOH-tye
+rail-station-words.ticket-office,KAH-si
+common-signs.no-entry,fkhot vas-pryi-SHCHON
+utility-templates.please-write-the-number,na-pi-SHIH-tye chi-SLOH pa-ZHAL-sta
+accessibility.need-to-sit-down,mnyeh NAH-da syest
+toilets.do-i-need-a-coin,NOO-zhen zhi-TON EE-li ma-NYEH-ta
+building-words.door,dvyer
+pronouns-verbs.they-them,a-NEE / eekh
+question-words.how-much-many,SKOL-ka
+emergency-medical.where-is-a-pharmacy,gdyeh ap-TYEH-ka
+medical-conditions.my-blood-sugar-is-low,oo myi-NYAH NEE-skiy SAH-khar f KROH-vi
+pharmacy-symptoms.do-i-need-a-prescription,NOO-zhen ryi-TSEPT
+body-parts.eye,glas
+lost-rescue.i-sprained-my-ankle,oo myi-NYAH ras-tyi-ZHEH-ni-ye NOH-gi
+police-consulate.i-want-to-contact-my-embassy,yah kha-CHOO svyi-ZAT-sa s pa-SOL-stvam
+dietary-needs.no-seafood,byez ma-ryi-pra-DOOK-taf
+food-ordering.check-please,shchot pa-ZHAL-sta
+trail-words.park-shuttle,af-TOH-boos pa PAR-koo
+weather.wind,VYEH-tyer
+trail-transport.do-you-have-a-map,oo vas yest KAR-ta
+trail-warnings.beware-falling-rocks,as-ta-ROZH-na kam-nyi-PAT
+trail-landmarks.sunset,za-KAT
+hotel-basics.is-there-a-washing-machine,yest sti-RAL-na-ya ma-SHIH-na
+room-problems.the-toilet-will-not-flush,too-a-LYET nyi smi-VAH-yet-sa
+laundry.laundromat,PRAH-chech-na-ya
+introductions.where-are-you-from,at-KOO-da vih
+numbers-money.w,pyat
+atm-cash.no-money-came-out,DYEN-gi nyi VIH-shli
+social-basics.you-are-welcome,pa-ZHAL-sta
+communication.please-say-it-again,paf-ta-REE-tye pa-ZHAL-sta
+quick-responses.does-not-work-no,nyi ra-BOH-ta-yet
+phone-text-power.please-confirm,pat-vyir-DEE-tye pa-ZHAL-sta
+sim-data.do-you-have-an-esim,oo vas yest eSIM
+etiquette.may-i-sit-here,MOZH-na zdyes syest
+children.suitable-for-children,EH-ta pat-KHOH-dit DYEH-tyam
+time-scheduling.what-day-is-it-today,ka-KOY si-VOD-nya dyen
+time-words.afternoon,dyen
+days-of-week.sunday,vas-kryi-SYEH-nye
+months.july,i-YOOL
+directions.where-am-i,gdyeh yah na-kha-ZHOOS
+quick-directions.on-the-right,SPRAH-va
+taxi.please-use-the-meter,fklyoo-CHEE-tye SHCHOH-chik pa-ZHAL-sta
+transit-rides.do-i-need-to-transfer,NOOZH-na DYEH-lat pyi-ryi-SAT-koo
+place-words.luggage-storage,KAH-mye-ra khra-NYEH-ni-ya
+border-customs.i-have-a-return-ticket,oo myi-NYAH yest a-BRAT-niy bi-LYET
+rail-station-words.waiting-room,zal a-zhi-DAH-ni-ya
+common-signs.no-smoking,nyi koo-REET
+utility-templates.i-need,mnyeh NOO-zhen {}
+accessibility.accessible-restroom,yest too-a-LYET dlya in-va-LEE-daf
+toilets.is-the-tap-water-safe-to-drink,MOZH-na peet VOH-doo is-pat KRAH-na
+building-words.key,klyooch
+pronouns-verbs.my-mine,moy / ma-YAH
+question-words.how-many,SKOL-ka shtook
+emergency-medical.please-take-me-to-a-hospital,at-vyi-ZEE-tye myi-NYAH v bal-NEE-tsoo
+medical-conditions.i-need-my-inhaler,mnyeh NOO-zhen moy in-ga-LYAH-tar
+pharmacy-symptoms.i-have-a-headache,oo myi-NYAH ba-LEET ga-la-VAH
+body-parts.ear,OO-kha
+lost-rescue.please-contact-rescue,svyi-ZHIH-tyes sa spa-SAH-tye-lya-mi
+police-consulate.i-need-it-for-my-insurance,EH-ta NOOZH-na dlya stra-KHOF-ki
+dietary-needs.i-am-vegetarian,yah vyi-gyi-ta-ri-AH-nyets
+food-ordering.does-it-contain,zdyes yest {}
+trail-words.steps,stoo-PYEH-ni
+weather.storm,shtorm
+trail-warnings.first-aid-station,myit-POONKT
+room-problems.the-light-does-not-work,svyet nyi ra-BOH-ta-yet
+laundry.please-iron-this,pa-GLAH-tye EH-ta pa-ZHAL-sta
+introductions.how-are-you,kak dyi-LAH
+numbers-money.li,shest
+atm-cash.where-can-i-change-money,gdyeh MOZH-na ab-myi-NYAT va-LYOO-too
+social-basics.excuse-me-sorry,iz-vi-NEE-tye
+communication.please-write-it-down,na-pi-SHIH-tye pa-ZHAL-sta
+sim-data.my-data-is-not-working,oo myi-NYAH nyi ra-BOH-ta-yet in-ter-NET
+etiquette.queue-for,EH-ta OH-che-ryet v {}
+children.minimum-age,s ka-KOH-va VOZ-ras-ta MOZH-na
+time-scheduling.what-time-does-it-open,va SKOL-ka at-kri-VAH-yet-sa
+time-words.evening,VYEH-cher
+months.august,AV-goost
+directions.which-way,f ka-KOO-yoo STOH-ra-noo
+quick-directions.across-from-here,na-PROH-tif
+transit-rides.is-it-delayed,yest a-paz-DAH-ni-ye
+border-customs.i-am-visiting-family,yah k ROTST-vye-ni-kam
+rail-station-words.train-number,NOH-myer POH-yez-da
+common-signs.no-photography,fa-ta-SYOM-ka za-pryi-shchi-NAH
+utility-templates.is-there-nearby,zdyes RYAH-dam yest {}
+accessibility.station-assistance,yest sa-pra-vazh-DYEH-ni-ye na STAN-tsi-i
+toilets.it-is-urgent,EH-ta SROCH-na
+pronouns-verbs.your-yours,vash / VAH-sha
+question-words.why,pa-chi-MOO
+medical-conditions.i-am-pregnant,yah byi-RYEH-mye-na
+pharmacy-symptoms.paracetamol-acetaminophen,pa-ra-tsi-ta-MOL
+body-parts.leg,na-GAH
+lost-rescue.my-companion-is-missing,pra-PAL moy SPOOT-nik
+police-consulate.i-need-an-interpreter,mnyeh NOO-zhen pyi-ryi-VOH-chik
+dietary-needs.i-am-vegan,yah vyi-GAN
+food-ordering.is-this-vegetarian,EH-ta vyi-gyi-ta-ri-AN-ska-ye
+trail-words.up-uphill,vvyerkh / v GOH-roo
+weather.ice,ga-la-LYOT
+trail-warnings.service-suspended,dvi-ZHEH-ni-ye pri-as-ta-NOH-vlye-na
+trail-landmarks.water-point,is-TOCH-nik va-DIH
+room-problems.please-send-someone,pri-SHLEE-tye pa-ZHAL-sta MAS-tye-ra
+laundry.detergent,sti-RAL-niy pa-ra-SHOK
+introductions.i-am-a-tourist,yah too-REEST
+numbers-money.q,syem
+atm-cash.the-machine-is-out-of-service,ban-ka-MAT nyi ra-BOH-ta-yet
+social-basics.sorry,pras-TEE-tye
+communication.please-wait-a-moment,pa-dazh-DEE-tye pa-ZHAL-sta
+sim-data.does-it-need-registration,noozh-NAH ryi-gis-TRAH-tsi-ya
+etiquette.dressed-appropriately,yah nar-MAL-na a-DYET
+children.do-children-pay,DYEH-ti PLAH-tyat
+time-scheduling.what-time-does-it-close,va SKOL-ka za-kri-VAH-yet-sa
+time-words.spring,vyis-NAH
+months.september,syin-TYABR
+directions.can-i-walk-there,too-DAH MOZH-na day-TEE pyish-KOM
+quick-directions.in-front,fpyi-ryi-DEE
+transit-rides.i-am-in-a-hurry,yah spyi-SHOO
+border-customs.this-is-for-personal-use,EH-ta dlya LEECH-na-ga POL-za-va-ni-ya
+rail-station-words.carriage,va-GON
+common-signs.do-not-touch,roo-KAH-mi nyi TROH-gat
+utility-templates.how-much-is,SKOL-ka STOH-it {}
+accessibility.help-me-carry,pa-ma-GEE-tye da-nyis-TEE pa-ZHAL-sta
+toilets.may-i-have-the-toilet-key,MOZH-na klyooch at too-a-LYEH-ta
+pronouns-verbs.be-called-call,za-VOOT / na-zi-VAH-yet-sa
+question-words.this,EH-ta
+medical-conditions.i-carry-an-adrenaline-injector,oo myi-NYAH yest af-ta-i-NYEK-tar s a-dryi-na-LEE-nam
+pharmacy-symptoms.how-much-should-i-take,SKOL-ka pri-ni-MAT
+body-parts.arm,roo-KAH
+police-consulate.please-leave-me-alone,as-TAF-tye myi-NYAH f pa-KOH-ye
+dietary-needs.i-do-not-eat,yah nyi yem {}
+trail-words.down-downhill,vnees / pad GOH-roo
+weather.fog,too-MAN
+room-problems.the-heating-does-not-work,a-ta-PLYEH-ni-ye nyi ra-BOH-ta-yet
+laundry.dry-cleaning,khim-CHEEST-ka
+introductions.this-is-my-husband-wife,EH-ta moy moosh / ma-YAH zhi-NAH
+numbers-money.b,VOH-syem
+atm-cash.please-give-me-smaller-notes,DAY-tye pa-ZHAL-sta koo-PYOO-ri pa-MYEN-she
+social-basics.no-problem,ni-chi-VOH STRASH-na-va
+communication.can-you-help-me,vih MOH-zhe-tye pa-MOCH
+sim-data.i-have-no-signal,nyet SVYAH-zi
+etiquette.did-not-mean-to-offend,yah nyi kha-TYEL vas a-BEE-dyet
+children.crib,yest DYET-ska-ya kra-VAT-ka
+time-words.summer,LYEH-ta
+months.october,ak-TYABR
+directions.how-far-is-it,kak da-lyi-KOH
+quick-directions.behind,ZAH-di
+transit-rides.which-platform,s ka-KOY plat-FOR-mi
+border-customs.i-am-in-transit,yah tran-ZEE-tam
+rail-station-words.seat,MYES-ta
+common-signs.temporarily-closed,VRYEH-mye-na za-KRIH-ta
+utility-templates.is-this,EH-ta {}
+accessibility.board-first,MOZH-na mnyeh zay-TEE PYER-vim
+toilets.there-is-no-toilet-paper,nyet too-a-LYET-nay boo-MAH-gi
+pronouns-verbs.have,oo myi-NYAH yest
+question-words.that,toh
+medical-conditions.i-take-medicine-for,yah pri-ni-MAH-yoo li-KAR-stva at {}
+pharmacy-symptoms.i-am-vomiting,oo myi-NYAH RVOH-ta
+body-parts.foot,stoop-NYAH
+police-consulate.i-was-robbed,myi-NYAH a-GRAH-bi-li
+dietary-needs.i-am-allergic-to,oo myi-NYAH a-lyir-GEE-ya na {}
+trail-words.one-way,v ad-NOO STOH-ra-noo
+weather.heat,zha-RAH
+laundry.dryer,soo-SHIHL-ka
+introductions.this-is-my-daughter-son,EH-ta ma-YAH doch / moy sihn
+numbers-money.ji,DYEH-vyat
+atm-cash.do-you-have-change,oo vas yest raz-MYEN
+social-basics.i-do-not-know,yah nyi ZNAH-yoo
+communication.please-show-me-the-text,pa-ka-ZHIH-tye mnyeh tyekst
+sim-data.please-write-the-wifi-password,na-pi-SHIH-tye pa-ROL at Wi-Fi
+etiquette.what-is-customary,kak zdyes PREE-nya-ta
+children.warm-this-bottle,pa-da-GRYEY-tye boo-TIH-lach-koo pa-ZHAL-sta
+time-words.fall,OH-syen
+months.november,na-YABR
+directions.which-exit,ka-KOY VIH-khat
+transit-rides.what-time-is-the-next-one,kag-DAH SLYEH-doo-yoo-shchiy
+border-customs.i-have-in-cash,oo myi-NYAH {} na-LEECH-ni-mi
+rail-station-words.last-train,pa-SLYED-niy POH-yest
+utility-templates.please,{} pa-ZHAL-sta
+accessibility.door-width,ka-KAH-ya shi-ri-NAH DVYEH-ri
+toilets.toilet-paper,too-a-LYET-na-ya boo-MAH-ga
+pronouns-verbs.do-not-have,oo myi-NYAH nyet
+question-words.here,zdyes
+medical-conditions.i-take-blood-thinners,yah pri-ni-MAH-yoo an-ti-ka-a-goo-LYAN-ti
+pharmacy-symptoms.rehydration-salts,ryi-gi-DRON
+body-parts.hand,keest
+police-consulate.i-want-a-lawyer,yah kha-CHOO ad-va-KAH-ta
+trail-words.round-trip,too-DAH i a-BRAT-na
+weather.cold,KHOH-lat
+laundry.coin-operated,a-PLAH-ta ma-NYEH-ta-mi
+introductions.i-am-traveling-alone,yah poo-tyi-SHEST-voo-yoo a-DEEN
+numbers-money.sh,DYEH-syat
+atm-cash.may-i-pay-in,MOZH-na za-pla-TEET v {}
+sim-data.sim-card,seem-KAR-ta
+etiquette.keep-the-change,ZDAH-chi nyi NAH-da
+children.car-seat,nam NOOZH-na DYET-ska-ye KRYEH-sla
+time-words.winter,zi-MAH
+months.december,dyi-KABR
+directions.can-you-show-me-the-way,vih MOH-zhe-tye pa-ka-ZAT da-ROH-goo
+transit-rides.i-went-past-my-stop,yah pra-YEH-khal sva-YOO as-ta-NOF-koo
+border-customs.this-is-a-gift,EH-ta pa-DAH-rak
+rail-station-words.delayed,za-DYER-zhi-va-yet-sa
+utility-templates.i-am-looking-for,yah i-SHCHOO {}
+accessibility.wheelchair-width,shi-ri-NAH ma-YEY ka-LYAH-ski {} san-ti-MYET-raf
+toilets.it-is-out-of-order,nyi ra-BOH-ta-yet
+pronouns-verbs.go,it-TEE / YEH-khat
+question-words.there,tam
+medical-conditions.medicine-allergy,a-lyir-GEE-ya na li-KAR-stva {}
+pharmacy-symptoms.how-many-times-a-day,SKOL-ka ras v dyen
+body-parts.knee,ka-LYEH-na
+police-consulate.please-notify-my-consulate,sa-ap-SHCHEE-tye v ma-YOH KON-sool-stva
+weather.humid,VLAZH-na
+numbers-money.y-b-i,stoh
+atm-cash.please-charge-in-local-currency,spi-SHIH-tye v MYES-nay va-LYOO-tye
+sim-data.where-can-i-buy-a-plug-adapter,gdyeh koo-PEET pyi-ryi-KHOD-nik dlya ra-ZYET-ki
+children.stroller,ka-LYAH-ska
+directions.north,SYEH-vyer
+border-customs.where-do-i-collect-my-baggage,gdyeh pa-loo-CHEET ba-GASH
+rail-station-words.final-stop,ka-NYECH-na-ya
+utility-templates.do-you-accept,vih pri-ni-MAH-ye-tye {}
+accessibility.hard-of-hearing,yah PLOH-kha SLIH-shoo
+toilets.out-of-order,nyi ra-BOH-ta-yet
+pronouns-verbs.come,priy-TEE
+question-words.a-little,nyim-NOH-ga
+medical-conditions.this-card-lists-my-conditions,na EH-tay KAR-tach-kye ma-EE di-AG-na-zi
+pharmacy-symptoms.i-have-a-stomach-ache,oo myi-NYAH ba-LEET zhi-VOT
+body-parts.ankle,SHCHEE-ka-lat-ka
+police-consulate.i-am-calling-the-police,yah zva-NYOO f pa-LEE-tsi-yoo
+weather.sunrise,vas-KHOT
+numbers-money.y-qi-n,TIH-sya-cha
+atm-cash.where-can-i-get-coins,gdyeh vzyat ma-NYEH-ti
+sim-data.mobile-data,ma-BEEL-niy in-ter-NET
+children.playground,yest DYET-ska-ya pla-SHCHAT-ka
+directions.south,yook
+border-customs.how-long-may-i-stay,SKOL-ka yah ma-GOO zdyes pra-BIHT
+rail-station-words.ticket-validator,va-li-DAH-tar
+utility-templates.i-cannot-find,yah nyi ma-GOO nay-TEE {}
+accessibility.speak-louder,ga-va-REE-tye GROM-che pa-ZHAL-sta
+toilets.mens-toilet,moosh-SKOY too-a-LYET
+pronouns-verbs.would-like,kha-TYEL bi
+question-words.some,NYEH-skal-ka
+medical-conditions.this-is-my-medicine,EH-ta ma-YOH li-KAR-stva
+pharmacy-symptoms.i-have-a-cough,oo myi-NYAH KAH-shel
+body-parts.skin,KOH-zha
+police-consulate.am-i-under-arrest,yah za-DYER-zhan
+weather.flood,na-vad-NYEH-ni-ye
+numbers-money.y-w-n,DYEH-syat TIH-syach
+atm-cash.is-there-a-minimum-for-cards,yest mi-ni-MAL-na-ya SOO-ma dlya KAR-ti
+sim-data.can-i-top-up-this-sim,MOZH-na pa-pal-NEET EH-too seem-KAR-too
+directions.east,vas-TOK
+border-customs.i-have-a-connecting-flight,oo myi-NYAH sti-KOH-vach-niy ryeys
+utility-templates.there-is-a-problem-with,pra-BLYEH-ma {}
+accessibility.visually-impaired,yah sla-ba-VEE-dya-shchiy
+toilets.womens-toilet,ZHEN-skiy too-a-LYET
+pronouns-verbs.want,kha-CHOO
+question-words.very,OH-chen
+medical-conditions.please-give-me-sugar-or-juice,DAY-tye mnyeh SAH-khar EE-li sok
+pharmacy-symptoms.antihistamine,SRYET-stva at a-lyir-GEE-i
+police-consulate.no-thank-you-i-am-not-interested,nyet spa-SEE-ba mnyeh nyi in-tyi-RYES-na
+weather.avalanche-risk,la-VEE-na-ya a-PAS-nast
+numbers-money.b-n,pa-la-VEE-na
+atm-cash.atm,ban-ka-MAT
+sim-data.top-up,pa-POL-nye-ni-ye SHCHOH-ta
+directions.west,ZAH-pat
+border-customs.may-i-have-an-entry-stamp,MOZH-na shtamp a VYEZ-dye
+accessibility.take-your-arm,MOZH-na vzyat vas pad roo-koo
+toilets.drinking-water,pi-tyi-VAH-ya va-DAH
+pronouns-verbs.look-for,i-SKAT
+question-words.too,SLEESH-kam
+medical-conditions.inject-it-into-my-outer-thigh,vyi-DEE-tye v na-ROOZH-noo-yoo chast byi-DRAH
+pharmacy-symptoms.anti-diarrhea-medicine,SRYET-stva ad di-a-RYEH-i
+police-consulate.someone-attacked-me,na myi-NYAH na-PAH-li
+atm-cash.banknote,koo-PYOO-ra
+sim-data.is-there-coverage-in,{} tam yest svyas
+border-customs.visa,VEE-za
+accessibility.guide-dog,EH-ta ma-YAH sa-BAH-ka-pa-va-DIHR
+toilets.not-for-drinking,nyi pi-tyi-VAH-ya va-DAH
+pronouns-verbs.buy,koo-PEET
+question-words.also,TOH-zhe
+medical-conditions.my-blood-type-is,ma-YAH GROO-pa KROH-vi {}
+pharmacy-symptoms.is-this-safe-to-take-with,EH-ta MOZH-na pri-ni-MAT s {}
+police-consulate.i-did-not-agree-to-this-price,mih da-ga-VAH-ri-va-lis a droo-GOY tsi-NYEH
+atm-cash.coin,ma-NYEH-ta
+sim-data.signal,svyas / sig-NAL
+border-customs.i-have-no-food-or-plants,oo myi-NYAH nyet pra-DOOK-taf i ras-TYEH-niy
+toilets.accessible-toilet,too-a-LYET dlya in-va-LEE-daf
+pronouns-verbs.like,NRAH-vit-sa
+question-words.all-both,fsyeh / OH-ba
+medical-conditions.do-not-give-me,nyi da-VAY-tye mnyeh {}
+pharmacy-symptoms.i-feel-dizzy,oo myi-NYAH KROO-zhit-sa ga-la-VAH
+police-consulate.please-write-the-report-number,na-pi-SHIH-tye NOH-myer za-yi-VLYEH-ni-ya
+atm-cash.cash-only,TOL-ka na-LEECH-ni-ye
+sim-data.esim,eSIM
+border-customs.passport-control,pas-PORT-niy kan-TROL
+toilets.where-can-i-wash-my-hands,gdyeh MOZH-na pa-MIHT ROO-ki
+pronouns-verbs.need,NOOZH-na
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,oo myi-NYAH a-lyir-GEE-ya na as-pi-REEN i i-boo-pra-FYEN
+pharmacy-symptoms.ibuprofen,i-boo-pra-FYEN
+police-consulate.it-happened-here,EH-ta sloo-CHEE-las zdyes
+atm-cash.fee,ka-MEE-si-ya
+sim-data.prepaid,pryi-da-PLAH-ta
+border-customs.customs,ta-MOZH-nya
+toilets.can-i-flush-the-paper,boo-MAH-goo MOZH-na smi-VAT
+medical-conditions.my-injector-is-in-my-bag,moy i-NYEK-tar f SOOM-kye
+pharmacy-symptoms.i-have-a-sore-throat,oo myi-NYAH ba-LEET GOR-la
+police-consulate.may-i-have-a-copy-of-the-report,MOZH-na KOH-pi-yoo za-yi-VLYEH-ni-ya
+atm-cash.change,ZDAH-cha
+sim-data.roaming,ROH-oo-mink
+border-customs.baggage-claim,VIH-da-cha ba-ga-ZHAH
+toilets.is-there-a-toilet-on-board,na BOR-too yest too-a-LYET
+medical-conditions.i-am-allergic-to-sulfa-drugs,oo myi-NYAH a-lyir-GEE-ya na sool-fa-ni-la-MEE-di
+pharmacy-symptoms.can-i-get-this-medicine-here,EH-ta li-KAR-stva oo vas yest
+police-consulate.i-will-not-sign-anything-i-cannot-read,nyi pat-pi-SHOO toh shto nyi ma-GOO pra-chi-TAT
+atm-cash.exchange-rate,koors va-LYOOT
+border-customs.customs-declaration,ta-MOH-zhe-na-ya dyi-kla-RAH-tsi-ya
+toilets.the-toilet-will-not-flush,too-a-LYET nyi smi-VAH-yet-sa
+pharmacy-symptoms.bandage,beent
+police-consulate.am-i-free-to-go,yah ma-GOO it-TEE
+atm-cash.bank,bank
+border-customs.arrival-card,mi-gra-tsi-OH-na-ya KAR-ta
+toilets.baby-change,pyi-lyi-NAL-niy STOH-lik
+pharmacy-symptoms.the-pain-is-severe,bol OH-chen SEEL-na-ya
+police-consulate.i-do-not-want-to-go-with-you,yah nyi kha-CHOO it-TEE s VAH-mi
+atm-cash.money-exchange,ab-MYEN va-LYOO-ti
+border-customs.transit,tran-ZEET
+toilets.squat-toilet,na-POL-niy too-a-LYET
+pharmacy-symptoms.antiseptic,an-ti-SYEP-tik
+atm-cash.pin,peen-kot
+border-customs.boarding-pass,pa-SAH-dach-niy ta-LON
+pharmacy-symptoms.i-feel-nauseous,myi-NYAH tash-NEET
+pharmacy-symptoms.i-have-a-rash,oo myi-NYAH sihp
+pharmacy-symptoms.before-or-after-food,da yi-DIH EE-li POH-slye
+pharmacy-symptoms.i-think-it-is-infected,KAH-zhet-sa EH-ta vas-pa-LEE-las
+pharmacy-symptoms.motion-sickness-tablets,ta-BLYET-ki at oo-KAH-chi-va-ni-ya
+pharmacy-symptoms.i-have-a-cut,oo myi-NYAH pa-RYES
+pharmacy-symptoms.antacid,SRYET-stva at i-ZHOH-gi
+pharmacy-symptoms.i-have-a-burn,oo myi-NYAH a-ZHOK
+pharmacy-symptoms.it-started-days-ago,EH-ta na-cha-LOS {} dnyey na-ZAT
+pharmacy-symptoms.cough-medicine,SRYET-stva at KAH-shlya
+pharmacy-symptoms.is-this-safe-during-pregnancy,EH-ta MOZH-na pri byi-RYEH-mye-nas-ti
+trail-transport.how-long-is-the-wait,SKOL-ka zhdat
+tax-refund.is-tax-free-shopping-available,oo vas yest taks-free
+place-words.tourist-spot-sightseeing-area,das-ta-pri-myi-CHAH-tyel-nast
+common-signs.open-operating,ra-BOH-ta-yet
+time-scheduling.how-long-does-it-take,SKOL-ka EH-ta zay-MYOT
+transit-rides.can-i-use-this-ticket,EH-tat bi-LYET pa-day-DYOT
+common-signs.closed,za-KRIH-ta
+pronouns-verbs.there-is-have,yest
+common-signs.stopped-stop,stop
+transit-rides.do-i-need-to-validate,NOOZH-na pri-la-ZHIHT bi-LYET k va-li-DAH-ta-roo
+pronouns-verbs.there-is-not-do-not-have,nyet
+emergency-medical.i-feel-unwell,mnyeh PLOH-kha
+food-ordering.what-do-you-recommend,shto pa-sa-VYEH-too-ye-tye
+hotel-basics.is-wi-fi-free,Wi-Fi byis-PLAT-niy
+hotel-requests.another-towel-please,yi-SHCHOH ad-NOH pa-la-TYEN-tse pa-ZHAL-sta
+shopping.is-there-a-discount,yest SKEET-ka
+social-basics.good-night,spa-KOY-nay NOH-chi
+quick-responses.can-possible,MOZH-na
+phone-translation.please-type-it-and-show-me,na-byi-REE-tye i pa-ka-ZHIH-tye mnyeh
+phone-text-power.may-i-charge-my-phone-here,MOZH-na zdyes za-ryi-DEET tyi-lyi-FON
+pronouns-verbs.want-to-verb,kha-CHOO [gla-GOL]
+emergency-medical.this-is-an-emergency,EH-ta EKS-trye-niy SLOO-chay
+lost-rescue.please-look-at-my-current-location,pas-ma-TREE-tye gdyeh yah na-kha-ZHOOS
+hotel-words.luggage-storage,KAH-mye-ra khra-NYEH-ni-ya
+hotel-basics.how-much-per-night,SKOL-ka za noch
+hotel-requests.what-time-is-check-out,va SKOL-ka VIH-yest
+payment-receipt.please-write-the-number,na-pi-SHIH-tye SOO-moo
+shopping.where-do-i-pay,gdyeh pla-TEET
+communication.i-cannot-make-out-what-you-are-saying,yah nyi raz-bi-RAH-yoo shto vih ga-va-REE-tye
+quick-responses.cannot-not-possible,nyil-ZYAH / nyi-vaz-MOZH-na
+taxi.i-will-get-off-here,yah VIHY-doo zdyes
+pickup-meeting.please-call-a-taxi,VIH-za-vi-tye tak-SEE pa-ZHAL-sta
+pronouns-verbs.want-thing,kha-CHOO [pryid-MYET]
+emergency-medical.i-am-having-a-severe-allergic-reaction,oo myi-NYAH a-na-fi-lak-TEE-che-skiy shok
+lost-rescue.my-child-is-missing,pra-PAL moy ryi-BYOH-nak
+food-ordering.water-please,VOH-doo pa-ZHAL-sta
+hiking-parks.is-this-trail-suitable-for-beginners,EH-ta tra-PAH pat-KHOH-dit na-vich-KAM
+hotel-basics.is-breakfast-included,ZAF-trak fklyoo-CHON
+hotel-requests.can-i-check-in-early,MOZH-na za-syi-LEET-sa RAN-she
+attractions-tickets.could-you-take-a-photo-for-us,MOH-zhe-tye nas sfa-ta-gra-FEE-ra-vat
+payment-receipt.how-much-in-total,SKOL-ka fsi-VOH
+shopping.i-will-take-this,yah vaz-MOO EH-ta
+communication.i-do-not-understand,yah nyi pa-ni-MAH-yoo
+quick-responses.okay-fine,LAD-na
+phone-translation.please-look-at-the-screen,pas-ma-TREE-tye na e-KRAN
+pronouns-verbs.need-thing,mnyeh NOO-zhen [pryid-MYET]
+question-words.how-much-what-price,SKOL-ka STOH-it
+emergency-medical.i-cannot-breathe,yah nyi ma-GOO di-SHAT
+lost-rescue.i-do-not-know-where-i-am,yah nyi ZNAH-yoo gdyeh yah
+hotel-basics.may-i-see-the-room,MOZH-na pas-ma-TRYET NOH-myer
+hotel-requests.another-night,MOZH-na as-TAT-sa yi-SHCHOH na noch
+payment-receipt.can-we-pay-separately,MOZH-na za-pla-TEET a-DYEL-na
+shopping.what-is-this,shto EH-ta
+communication.i-cannot-read-it,yah nyi ma-GOO EH-ta pra-chi-TAT
+quick-responses.no-good-not-allowed-will-not-work,nyi ga-DEET-sa / nyil-ZYAH
+pronouns-verbs.looking-for-thing,yah i-SHCHOO [pryid-MYET]
+emergency-medical.i-am-bleeding-badly,oo myi-NYAH SEEL-na-ye kra-va-tyi-CHEH-ni-ye
+lost-rescue.my-friend-is-hurt,moy drook RAH-nyen
+dietary-needs.does-it-contain-fish-stock,zdyes yest RIHB-niy bool-YON
+hotel-basics.for-nights,na {} na-CHEY
+hotel-requests.is-there-a-safe,yest syeyf
+payment-receipt.is-tax-included,na-LOK fklyoo-CHON
+shopping.where-can-i-buy,gdyeh MOZH-na koo-PEET {}
+emergency-medical.i-have-chest-pain,oo myi-NYAH bol v groo-DEE
+lost-rescue.i-lost-my-wallet,oo myi-NYAH pra-PAL ka-shi-LYOK
+hotel-basics.two-beds,dvyeh kra-VAH-ti pa-ZHAL-sta
+hotel-requests.another-blanket,yi-SHCHOH ad-NOH a-dyi-YAH-la pa-ZHAL-sta
+payment-receipt.my-card-was-declined,ma-YOO KAR-too nyi PREE-nya-li
+shopping.do-you-have-this-in-stock,EH-ta yest v na-LEE-chi-i
+time-words.night,noch
+emergency-medical.this-person-is-unconscious,EH-tat chi-la-VYEK byes saz-NAH-ni-ya
+lost-rescue.i-lost-my-bag,oo myi-NYAH pra-PAH-la SOOM-ka
+food-ordering.can-a-vegetarian-eat-this,EH-ta MOZH-na vyi-gyi-ta-ri-AN-tsoo
+hotel-basics.is-there-air-conditioning,yest kan-di-tsi-a-NYER
+hotel-requests.wake-up-call,raz-boo-DEE-tye myi-NYAH f {} pa-ZHAL-sta
+payment-receipt.the-bill-is-wrong,KAH-zhet-sa f SHCHOH-tye a-SHIHP-ka
+shopping.two-of-these,dvah ta-KEEKH pa-ZHAL-sta
+social-basics.okay-fine-i-am-okay,fsyoh kha-ra-SHOH
+emergency-medical.where-is-the-nearest-hospital,gdyeh bli-ZHAY-sha-ya bal-NEE-tsa
+lost-rescue.where-is-lost-and-found,gdyeh byoo-ROH na-KHOH-dak
+payment-receipt.i-already-paid,EH-ta oo-ZHEH a-PLAH-che-na
+shopping.what-is-it-made-of,is chi-VOH EH-ta ZDYEH-la-na
+emergency-medical.what-is-the-emergency-number,ka-KOY NOH-myer EKS-trye-nikh slooshp
+lost-rescue.i-cannot-find-my-hotel,yah nyi ma-GOO nay-TEE svoy a-TEL
+emergency-medical.is-there-a-doctor-who-speaks-english,yest an-gla-ga-va-RYAH-shchiy vrach
+lost-rescue.i-left-it-on-the-train,EH-ta as-TAH-las f POH-yez-dye
+dietary-needs.i-have-a-severe-allergy-to,oo myi-NYAH tyi-ZHOH-la-ya a-lyir-GEE-ya na {}
+emergency-medical.i-think-a-bone-is-broken,KAH-zhet-sa oo myi-NYAH pyi-ryi-LOM
+lost-rescue.i-cannot-get-down,yah nyi ma-GOO spoos-TEET-sa
+emergency-medical.please-call-my-emergency-contact,paz-va-NEE-tye ma-yi-MOO EKS-trye-na-moo KON-tak-too
+emergency-medical.i-have-travel-insurance,oo myi-NYAH yest too-ris-TEE-che-ska-ya stra-KHOF-ka
+numbers-money.ruble,roobl
+numbers-money.ruble-symbol,roobl

@@ -1,0 +1,26 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Без мяса.,,Bez myasa.,,,2,ru-agent-v1
+dietary-needs.no-eggs,Без яиц.,,Bez yaits.,,,2,ru-agent-v1
+dietary-needs.not-spicy,Не острое.,,Ne ostroye.,,,2,ru-agent-v1
+dietary-needs.less-spicy,Менее острое.,,Meneye ostroye.,,,2,ru-agent-v1
+dietary-needs.no-peanuts,Без арахиса.,,Bez arakhisa.,,,2,ru-agent-v1
+dietary-needs.no-nuts,Без орехов.,,Bez orekhov.,,,2,ru-agent-v1
+dietary-needs.no-seafood,Без морепродуктов.,,Bez moreproduktov.,,,2,ru-agent-v1
+dietary-needs.i-am-vegetarian,Я вегетарианец,Я вегетарианка,Ya vegetarianets,,,2,ru-agent-v1
+dietary-needs.i-am-vegan,Я веган,Я веганка,Ya vegan,,,2,ru-agent-v1
+dietary-needs.i-do-not-eat,Я не ем {}.,,Ya ne yem {}.,,,2,ru-agent-v1
+dietary-needs.i-am-allergic-to,У меня аллергия на {}.,,U menya allergiya na {}.,,,2,ru-agent-v1
+dietary-needs.does-it-contain-fish-stock,Здесь есть рыбный бульон?,,Zdesʼ yestʼ rybnyy bulʼon?,,,2,ru-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,У меня тяжёлая аллергия на {}.,,U menya tyazhëlaya allergiya na {}.,,,2,ru-agent-v1
+food-ordering.table-for-two,Столик на двоих.,,Stolik na dvoikh.,,,2,ru-agent-v1
+food-ordering.is-a-table-available,Есть свободный столик?,,Yestʼ svobodnyy stolik?,,,2,ru-agent-v1
+food-ordering.menu-please,"Меню, пожалуйста.",,"Menyu, pozhaluysta.",,,2,ru-agent-v1
+food-ordering.i-want-this,Я хочу вот это.,,Ya khochu vot eto.,,,2,ru-agent-v1
+food-ordering.do-you-have-drinking-water,У вас есть питьевая вода?,,U vas yestʼ pitʼyevaya voda?,,,2,ru-agent-v1
+food-ordering.to-go-please,"С собой, пожалуйста.",,"S soboy, pozhaluysta.",,,2,ru-agent-v1
+food-ordering.check-please,"Счёт, пожалуйста.",,"Schët, pozhaluysta.",,,2,ru-agent-v1
+food-ordering.does-it-contain,Здесь есть {} ?,,Zdesʼ yestʼ {} ?,,,2,ru-agent-v1
+food-ordering.is-this-vegetarian,Это вегетарианское?,,Eto vegetarianskoye?,,,2,ru-agent-v1
+food-ordering.what-do-you-recommend,Что посоветуете?,,Chto posovetuyete?,,,2,ru-agent-v1
+food-ordering.water-please,"Воду, пожалуйста.",,"Vodu, pozhaluysta.",,,2,ru-agent-v1
+food-ordering.can-a-vegetarian-eat-this,Это можно вегетарианцу?,,Eto mozhno vegetariantsu?,,,2,ru-agent-v1

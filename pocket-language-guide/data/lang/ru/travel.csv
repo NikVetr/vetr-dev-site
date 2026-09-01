@@ -1,0 +1,113 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+directions.where-is,Где {} ?,,Gde {} ?,,,2,ru-agent-v1
+directions.how-do-i-get-to,{} — как туда доехать?,,{} — kak tuda doyekhatʼ?,,,2,ru-agent-v1
+directions.is-it-far,Это далеко?,,Eto daleko?,,,2,ru-agent-v1
+directions.how-long-on-foot,Сколько идти пешком?,,Skolʼko idti peshkom?,,,2,ru-agent-v1
+directions.please-show-me-on-the-map,"Покажите на карте, пожалуйста.",,"Pokazhite na karte, pozhaluysta.",,,2,ru-agent-v1
+directions.where-is-the-nearest,Где ближайший {}?,,Gde blizhayshiy {}?,,,2,ru-agent-v1
+directions.where-am-i,Где я нахожусь?,,Gde ya nakhozhusʼ?,,,2,ru-agent-v1
+directions.which-way,В какую сторону?,,V kakuyu storonu?,,,2,ru-agent-v1
+directions.can-i-walk-there,Туда можно дойти пешком?,,Tuda mozhno doyti peshkom?,,,2,ru-agent-v1
+directions.how-far-is-it,Как далеко?,,Kak daleko?,,,2,ru-agent-v1
+directions.which-exit,Какой выход?,,Kakoy vykhod?,,,2,ru-agent-v1
+directions.can-you-show-me-the-way,Вы можете показать дорогу?,,Vy mozhete pokazatʼ dorogu?,,,2,ru-agent-v1
+directions.north,север,,sever,,,2,ru-agent-v1
+directions.south,юг,,yug,,,2,ru-agent-v1
+directions.east,восток,,vostok,,,2,ru-agent-v1
+directions.west,запад,,zapad,,,2,ru-agent-v1
+quick-directions.go-straight,Прямо,,Pryamo,,,2,ru-agent-v1
+quick-directions.turn-left,Налево,,Nalevo,,,2,ru-agent-v1
+quick-directions.turn-right,Направо,,Napravo,,,2,ru-agent-v1
+quick-directions.this-way,Сюда,,Syuda,,,2,ru-agent-v1
+quick-directions.that-way,Туда,,Tuda,,,2,ru-agent-v1
+quick-directions.on-the-left,Слева,,Sleva,,,2,ru-agent-v1
+quick-directions.on-the-right,Справа,,Sprava,,,2,ru-agent-v1
+quick-directions.across-from-here,Напротив,,Naprotiv,,,2,ru-agent-v1
+quick-directions.in-front,Впереди,,Vperedi,,,2,ru-agent-v1
+quick-directions.behind,Сзади,,Szadi,,,2,ru-agent-v1
+taxi.please-take-me-here,Отвезите меня сюда.,,Otvezite menya syuda.,,,2,ru-agent-v1
+taxi.please-send-me-the-address,Пришлите мне адрес.,,Prishlite mne adres.,,,2,ru-agent-v1
+taxi.we-need-the-east-gate-not-the-south-gate,"Нам нужны восточные ворота, не южные.",,"Nam nuzhny vostochnyye vorota, ne yuzhnyye.",,,2,ru-agent-v1
+taxi.please-stop-here,"Остановитесь здесь, пожалуйста.",,"Ostanovitesʼ zdesʼ, pozhaluysta.",,,2,ru-agent-v1
+taxi.can-you-wait-for-me-here,Можете меня здесь подождать?,,Mozhete menya zdesʼ podozhdatʼ?,,,2,ru-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,Нам нужно успеть на скоростной поезд.,,Nam nuzhno uspetʼ na skorostnoy poyezd.,,,2,ru-agent-v1
+taxi.please-use-the-meter,"Включите счётчик, пожалуйста.",,"Vklyuchite schëtchik, pozhaluysta.",,,2,ru-agent-v1
+taxi.i-will-get-off-here,Я выйду здесь.,,Ya vyydu zdesʼ.,,,2,ru-agent-v1
+transit-rides.two-tickets,Два билета.,,Dva bileta.,,,2,ru-agent-v1
+transit-rides.where-is-the-subway-station,Где станция метро?,,Gde stantsiya metro?,,,2,ru-agent-v1
+transit-rides.does-this-bus-train-go-to,Этот автобус идёт до {} ?,,Etot avtobus idët do {} ?,,,2,ru-agent-v1
+transit-rides.what-is-the-next-stop,Какая следующая остановка?,,Kakaya sleduyushchaya ostanovka?,,,2,ru-agent-v1
+transit-rides.please-tell-me-where-to-get-off,"Скажите, где мне выйти.",,"Skazhite, gde mne vyyti.",,,2,ru-agent-v1
+transit-rides.is-this-direct,Это без пересадок?,,Eto bez peresadok?,,,2,ru-agent-v1
+transit-rides.do-i-need-to-transfer,Нужно делать пересадку?,,Nuzhno delatʼ peresadku?,,,2,ru-agent-v1
+transit-rides.is-it-delayed,Есть опоздание?,,Yestʼ opozdaniye?,,,2,ru-agent-v1
+transit-rides.i-am-in-a-hurry,Я спешу.,,Ya speshu.,,,2,ru-agent-v1
+transit-rides.which-platform,С какой платформы?,,S kakoy platformy?,,,2,ru-agent-v1
+transit-rides.what-time-is-the-next-one,Когда следующий?,,Kogda sleduyushchiy?,,,2,ru-agent-v1
+transit-rides.i-went-past-my-stop,Я проехал свою остановку.,Я проехала свою остановку.,Ya proyekhal svoyu ostanovku.,,,2,ru-agent-v1
+transit-rides.can-i-use-this-ticket,Этот билет подойдёт?,,Etot bilet podoydët?,,,2,ru-agent-v1
+place-words.visitor-center,туристический центр,,turisticheskiy tsentr,,,2,ru-agent-v1
+place-words.railway-station,вокзал,железнодорожный вокзал,vokzal,,,2,ru-agent-v1
+place-words.airport,аэропорт,,aeroport,,,2,ru-agent-v1
+place-words.service-desk,справочная,информация,spravochnaya,,,2,ru-agent-v1
+place-words.bus-stop,остановка,,ostanovka,,,2,ru-agent-v1
+place-words.luggage-storage,камера хранения,,kamera khraneniya,,,2,ru-agent-v1
+place-words.tourist-spot-sightseeing-area,достопримечательность,,dostoprimechatelʼnostʼ,,,2,ru-agent-v1
+border-customs.i-am-a-tourist,Я турист,,Ya turist,,,2,ru-agent-v1
+border-customs.here-is-my-passport,Вот мой паспорт.,,Vot moy pasport.,,,2,ru-agent-v1
+border-customs.i-am-staying-for-days,Я на {} дней.,,Ya na {} dney.,,,2,ru-agent-v1
+border-customs.nothing-to-declare,Нечего декларировать,Зелёный коридор,Nechego deklarirovatʼ,,,2,ru-agent-v1
+border-customs.i-am-staying-at,Мой адрес: {},,Moy adres: {},,,2,ru-agent-v1
+border-customs.i-am-here-for-business,Я по работе,,Ya po rabote,,,2,ru-agent-v1
+border-customs.i-have-a-return-ticket,У меня есть обратный билет.,,U menya yestʼ obratnyy bilet.,,,2,ru-agent-v1
+border-customs.i-am-visiting-family,Я к родственникам,,Ya k rodstvennikam,,,2,ru-agent-v1
+border-customs.this-is-for-personal-use,Это для личного пользования,,Eto dlya lichnogo polʼzovaniya,,,2,ru-agent-v1
+border-customs.i-am-in-transit,Я транзитом,,Ya tranzitom,,,2,ru-agent-v1
+border-customs.i-have-in-cash,У меня {} наличными.,,U menya {} nalichnymi.,,,2,ru-agent-v1
+border-customs.this-is-a-gift,Это подарок,,Eto podarok,,,2,ru-agent-v1
+border-customs.where-do-i-collect-my-baggage,Где получить багаж?,,Gde poluchitʼ bagazh?,,,2,ru-agent-v1
+border-customs.how-long-may-i-stay,Сколько я могу здесь пробыть?,,Skolʼko ya mogu zdesʼ probytʼ?,,,2,ru-agent-v1
+border-customs.i-have-a-connecting-flight,У меня стыковочный рейс.,,U menya stykovochnyy reys.,,,2,ru-agent-v1
+border-customs.may-i-have-an-entry-stamp,Можно штамп о въезде?,,Mozhno shtamp o vˮyezde?,,,2,ru-agent-v1
+border-customs.visa,виза,,viza,,,2,ru-agent-v1
+border-customs.i-have-no-food-or-plants,У меня нет продуктов и растений.,,U menya net produktov i rasteniy.,,,2,ru-agent-v1
+border-customs.passport-control,паспортный контроль,,pasportnyy kontrolʼ,,,2,ru-agent-v1
+border-customs.customs,таможня,,tamozhnya,,,2,ru-agent-v1
+border-customs.baggage-claim,выдача багажа,,vydacha bagazha,,,2,ru-agent-v1
+border-customs.customs-declaration,таможенная декларация,,tamozhennaya deklaratsiya,,,2,ru-agent-v1
+border-customs.arrival-card,миграционная карта,,migratsionnaya karta,,,2,ru-agent-v1
+border-customs.transit,транзит,,tranzit,,,2,ru-agent-v1
+border-customs.boarding-pass,посадочный талон,,posadochnyy talon,,,2,ru-agent-v1
+pickup-meeting.where-is-the-pickup-point,Где место посадки?,,Gde mesto posadki?,,,2,ru-agent-v1
+pickup-meeting.please-send-me-the-pickup-point,Пришлите место посадки.,,Prishlite mesto posadki.,,,2,ru-agent-v1
+pickup-meeting.please-pick-us-up-here,Заберите нас здесь.,,Zaberite nas zdesʼ.,,,2,ru-agent-v1
+pickup-meeting.meet-us-at,Встретимся здесь: {},,Vstretimsya zdesʼ: {},,,2,ru-agent-v1
+pickup-meeting.please-call-me-a-ride,Вызовите мне машину.,,Vyzovite mne mashinu.,,,2,ru-agent-v1
+pickup-meeting.please-call-a-taxi,"Вызовите такси, пожалуйста.",,"Vyzovite taksi, pozhaluysta.",,,2,ru-agent-v1
+rail-station-words.high-speed-rail,скоростной поезд,,skorostnoy poyezd,,,2,ru-agent-v1
+rail-station-words.transfer,пересадка,,peresadka,,,2,ru-agent-v1
+rail-station-words.ticket-gate,турникет,,turniket,,,2,ru-agent-v1
+rail-station-words.platform,платформа,путь,platforma,,,2,ru-agent-v1
+rail-station-words.ticket-office,кассы,,kassy,,,2,ru-agent-v1
+rail-station-words.waiting-room,зал ожидания,,zal ozhidaniya,,,2,ru-agent-v1
+rail-station-words.train-number,номер поезда,,nomer poyezda,,,2,ru-agent-v1
+rail-station-words.carriage,вагон,,vagon,,,2,ru-agent-v1
+rail-station-words.seat,место,,mesto,,,2,ru-agent-v1
+rail-station-words.last-train,последний поезд,,posledniy poyezd,,,2,ru-agent-v1
+rail-station-words.delayed,задерживается,,zaderzhivayetsya,,,2,ru-agent-v1
+rail-station-words.final-stop,конечная,,konechnaya,,,2,ru-agent-v1
+common-signs.open-on,открыто / включено,,otkryto / vklyucheno,,,2,ru-agent-v1
+common-signs.closed-off,закрыто / выключено,,zakryto / vyklyucheno,,,2,ru-agent-v1
+common-signs.occupied,занято,,zanyato,,,2,ru-agent-v1
+common-signs.vacant,свободно,,svobodno,,,2,ru-agent-v1
+common-signs.caution,внимание,,vnimaniye,,,2,ru-agent-v1
+common-signs.no-entry,вход воспрещён,нет входа,vkhod vospreshchën,,,2,ru-agent-v1
+common-signs.no-smoking,не курить,,ne kuritʼ,,,2,ru-agent-v1
+common-signs.no-photography,фотосъёмка запрещена,,fotosˮyëmka zapreshchena,,,2,ru-agent-v1
+common-signs.do-not-touch,руками не трогать,,rukami ne trogatʼ,,,2,ru-agent-v1
+common-signs.temporarily-closed,временно закрыто,,vremenno zakryto,,,2,ru-agent-v1
+common-signs.open-operating,работает,,rabotayet,,,2,ru-agent-v1
+common-signs.closed,закрыто,,zakryto,,,2,ru-agent-v1
+common-signs.stopped-stop,стоп,остановитесь,stop,,,2,ru-agent-v1
+transit-rides.do-i-need-to-validate,Нужно приложить билет к валидатору?,Билет нужно компостировать?,Nuzhno prilozhitʼ bilet k validatoru?,,,2,ru-agent-v1
+rail-station-words.ticket-validator,валидатор,компостер,validator,,,2,ru-agent-v1

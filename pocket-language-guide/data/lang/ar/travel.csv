@@ -112,3 +112,5 @@ common-signs.temporarily-closed,مغلق مؤقتاً,,mughlaq muʾaqqatan,,,2,a
 common-signs.open-operating,يعمل,قيد التشغيل,yaʿmal,,,2,ar-agent-v1
 common-signs.closed,مغلق,,mughlaq,,,2,ar-agent-v1
 common-signs.stopped-stop,متوقّف,توقّف,mutawaqqif,,,2,ar-agent-v1
+transit-rides.do-i-need-to-validate,هل يجب تمرير التذكرة قبل الصعود؟,هل يجب تأشير التذكرة؟,hal yajib tamrīr al-tadhkirah qabl al-ṣuʿūd?,,must the ticket be swiped before boarding,1,ar-gaps-v1
+rail-station-words.ticket-validator,قارئ البطاقات,جهاز التأشير,qāriʾ al-biṭāqāt,,card reader,1,ar-gaps-v1

@@ -30,6 +30,7 @@
   "format.breathingRoom": "文字周围的留白",
   "format.card": "卡片",
   "format.cardSize": "卡片尺寸",
+  "format.card.creditCard": "卡片",
   "format.colours": "配色",
   "format.columns": "分栏",
   "format.columnsPerFace": "每面栏数",

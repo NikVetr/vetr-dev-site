@@ -2,7 +2,7 @@
   "note": "Geometry and paper presets. pageW/pageH and all margins are in points. \"faces\" is the card's natural count -- a double-sided sheet is two faces -- and is the anchor auto starts from, not a hard limit.",
   "geometry": {
     "card-7x5-4col": {
-      "name": "7×5in landscape · 4 columns",
+      "name": "7\u00d75in landscape \u00b7 4 columns",
       "pageW": 504,
       "pageH": 360,
       "marginTop": 4.68,
@@ -15,7 +15,7 @@
       "note": "Matches the reference sheet: 1.662in columns, 0.0507in gap."
     },
     "card-5x7-3col": {
-      "name": "5×7in portrait · 3 columns",
+      "name": "5\u00d77in portrait \u00b7 3 columns",
       "pageW": 360,
       "pageH": 504,
       "marginTop": 4.68,
@@ -27,7 +27,7 @@
       "faces": 4
     },
     "card-4x6-3col": {
-      "name": "6×4in landscape · 3 columns",
+      "name": "6\u00d74in landscape \u00b7 3 columns",
       "pageW": 432,
       "pageH": 288,
       "marginTop": 4.68,
@@ -39,7 +39,7 @@
       "faces": 4
     },
     "a6-2col": {
-      "name": "A6 portrait · 2 columns",
+      "name": "A6 portrait \u00b7 2 columns",
       "pageW": 297.64,
       "pageH": 419.53,
       "marginTop": 8,
@@ -51,7 +51,7 @@
       "faces": 4
     },
     "wallet-2col": {
-      "name": "Credit-card size · 2 columns",
+      "name": "Credit-card size \u00b7 2 columns",
       "pageW": 242.65,
       "pageH": 153.07,
       "marginTop": 4,
@@ -60,7 +60,8 @@
       "marginRight": 5,
       "columns": 2,
       "columnGap": 3,
-      "faces": 6
+      "faces": 6,
+      "captionKey": "format.card.creditCard"
     }
   }
 }

@@ -1,0 +1,53 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+hotel-words.passport,паспорт,,pasport,,,2,ru-agent-v1
+hotel-words.room-key-card,ключ-карта,,klyuch-karta,,,2,ru-agent-v1
+hotel-words.check-in,заселение,,zaseleniye,,,2,ru-agent-v1
+hotel-words.check-out,выезд,,vyyezd,,,2,ru-agent-v1
+hotel-words.luggage-storage,камера хранения,,kamera khraneniya,,,2,ru-agent-v1
+hotel-basics.are-any-rooms-available,Есть свободные номера?,,Yestʼ svobodnyye nomera?,,,2,ru-agent-v1
+hotel-basics.there-are-two-of-us,Нас двое.,,Nas dvoye.,,,2,ru-agent-v1
+hotel-basics.i-have-a-reservation,У меня есть бронь.,,U menya yestʼ bronʼ.,,,2,ru-agent-v1
+hotel-basics.can-i-charge-my-phone,Можно зарядить телефон?,,Mozhno zaryaditʼ telefon?,,,2,ru-agent-v1
+hotel-basics.i-would-like-a-non-smoking-room,Нужен номер для некурящих.,,Nuzhen nomer dlya nekuryashchikh.,,,2,ru-agent-v1
+hotel-basics.i-would-like-a-quiet-room,Нужен тихий номер.,,Nuzhen tikhiy nomer.,,,2,ru-agent-v1
+hotel-basics.is-there-a-washing-machine,Есть стиральная машина?,,Yestʼ stiralʼnaya mashina?,,,2,ru-agent-v1
+hotel-basics.is-wi-fi-free,Wi-Fi бесплатный?,,Wi-Fi besplatnyy?,,,2,ru-agent-v1
+hotel-basics.how-much-per-night,Сколько за ночь?,,Skolʼko za nochʼ?,,,2,ru-agent-v1
+hotel-basics.is-breakfast-included,Завтрак включён?,,Zavtrak vklyuchën?,,,2,ru-agent-v1
+hotel-basics.may-i-see-the-room,Можно посмотреть номер?,,Mozhno posmotretʼ nomer?,,,2,ru-agent-v1
+hotel-basics.for-nights,На {} ночей.,,Na {} nochey.,,,2,ru-agent-v1
+hotel-basics.two-beds,"Две кровати, пожалуйста.",,"Dve krovati, pozhaluysta.",,,2,ru-agent-v1
+hotel-basics.is-there-air-conditioning,Есть кондиционер?,,Yestʼ konditsioner?,,,2,ru-agent-v1
+hotel-requests.can-i-check-out-later,Можно выехать позже?,,Mozhno vyyekhatʼ pozzhe?,,,2,ru-agent-v1
+hotel-requests.what-time-does-breakfast-start,Во сколько завтрак?,,Vo skolʼko zavtrak?,,,2,ru-agent-v1
+hotel-requests.can-i-store-my-luggage,Можно оставить багаж?,,Mozhno ostavitʼ bagazh?,,,2,ru-agent-v1
+hotel-requests.no-housekeeping,Уборка не нужна.,,Uborka ne nuzhna.,,,2,ru-agent-v1
+hotel-requests.another-towel-please,"Ещё одно полотенце, пожалуйста.",,"Yeshchë odno polotentse, pozhaluysta.",,,2,ru-agent-v1
+hotel-requests.what-time-is-check-out,Во сколько выезд?,,Vo skolʼko vyyezd?,,,2,ru-agent-v1
+hotel-requests.can-i-check-in-early,Можно заселиться раньше?,,Mozhno zaselitʼsya ranʼshe?,,,2,ru-agent-v1
+hotel-requests.another-night,Можно остаться ещё на ночь?,,Mozhno ostatʼsya yeshchë na nochʼ?,,,2,ru-agent-v1
+hotel-requests.is-there-a-safe,Есть сейф?,,Yestʼ seyf?,,,2,ru-agent-v1
+hotel-requests.another-blanket,"Ещё одно одеяло, пожалуйста.",,"Yeshchë odno odeyalo, pozhaluysta.",,,2,ru-agent-v1
+hotel-requests.wake-up-call,"Разбудите меня в {}, пожалуйста.",,"Razbudite menya v {}, pozhaluysta.",,,2,ru-agent-v1
+room-problems.there-is-a-problem-with-the-room,В номере проблема.,,V nomere problema.,,,2,ru-agent-v1
+room-problems.the-air-conditioning-is-broken,Кондиционер не работает.,,Konditsioner ne rabotayet.,,,2,ru-agent-v1
+room-problems.there-is-no-hot-water,Нет горячей воды.,,Net goryachey vody.,,,2,ru-agent-v1
+room-problems.can-i-change-rooms,Можно поменять номер?,,Mozhno pomenyatʼ nomer?,,,2,ru-agent-v1
+room-problems.the-room-is-too-noisy,В номере очень шумно.,,V nomere ochenʼ shumno.,,,2,ru-agent-v1
+room-problems.the-key-does-not-work,Ключ не работает.,,Klyuch ne rabotayet.,,,2,ru-agent-v1
+room-problems.the-toilet-will-not-flush,Туалет не смывается.,,Tualet ne smyvayetsya.,,,2,ru-agent-v1
+room-problems.the-light-does-not-work,Свет не работает.,,Svet ne rabotayet.,,,2,ru-agent-v1
+room-problems.please-send-someone,"Пришлите, пожалуйста, мастера.",,"Prishlite, pozhaluysta, mastera.",,,2,ru-agent-v1
+room-problems.the-heating-does-not-work,Отопление не работает.,,Otopleniye ne rabotayet.,,,2,ru-agent-v1
+laundry.please-wash-these-clothes,"Постирайте эту одежду, пожалуйста.",,"Postirayte etu odezhdu, pozhaluysta.",,,2,ru-agent-v1
+laundry.where-is-a-laundromat,Где прачечная?,Где прачечная самообслуживания?,Gde prachechnaya?,,,2,ru-agent-v1
+laundry.when-will-it-be-ready,Когда будет готово?,,Kogda budet gotovo?,,,2,ru-agent-v1
+laundry.how-much-per-kilo,Сколько за килограмм?,,Skolʼko za kilogramm?,,,2,ru-agent-v1
+laundry.can-it-be-ready-today,Можно сегодня?,,Mozhno segodnya?,,,2,ru-agent-v1
+laundry.please-do-not-use-bleach,"Без отбеливателя, пожалуйста.",,"Bez otbelivatelya, pozhaluysta.",,,2,ru-agent-v1
+laundry.laundromat,прачечная,,prachechnaya,,,2,ru-agent-v1
+laundry.please-iron-this,"Погладьте это, пожалуйста.",,"Pogladʼte eto, pozhaluysta.",,,2,ru-agent-v1
+laundry.detergent,стиральный порошок,,stiralʼnyy poroshok,,,2,ru-agent-v1
+laundry.dry-cleaning,химчистка,,khimchistka,,,2,ru-agent-v1
+laundry.dryer,сушилка,,sushilka,,,2,ru-agent-v1
+laundry.coin-operated,оплата монетами,,oplata monetami,,,2,ru-agent-v1

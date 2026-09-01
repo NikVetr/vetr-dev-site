@@ -19,20 +19,26 @@ import fontkit from '@pdf-lib/fontkit';
 
 const manifest = JSON.parse(await readFile('data/fonts/manifest.json', 'utf8'));
 
-/** The bytes fontkit would hand pdf-lib for these glyphs. */
+/**
+ * The bytes fontkit would hand pdf-lib for these glyphs.
+ * @param {any} font @param {number[]} gids
+ */
 function subsetBytes(font, gids) {
   const subset = font.createSubset();
   const mapped = gids.map((gid) => subset.includeGlyph(gid));
   return new Promise((resolve, reject) => {
     /** @type {Buffer[]} */ const chunks = [];
     subset.encodeStream()
-      .on('data', (chunk) => chunks.push(chunk))
+      .on('data', (/** @type {Buffer} */ chunk) => chunks.push(chunk))
       .on('error', reject)
       .on('end', () => resolve({ bytes: Buffer.concat(chunks), mapped }));
   });
 }
 
-/** Whether a glyph draws anything, without letting a corrupt read throw. */
+/**
+ * Whether a glyph draws anything, without letting a corrupt read throw.
+ * @param {any} font @param {number} gid
+ */
 function draws(font, gid) {
   try {
     const path = font.getGlyph(gid).path;

@@ -452,6 +452,10 @@ dialog.preview-dialog p { margin: var(--space-2) 0; }
   display: flex; align-items: center; gap: var(--space-2);
   margin-top: var(--space-1); padding: var(--space-1) 0;
 }
+/* `display: flex` above outranks the user agent's `[hidden] { display: none }`, so
+   without this the slider sat under every ladder whether Custom was chosen or not,
+   showing a value that was not in effect. Same shape as `.banner[hidden]`. */
+.numeric-custom[hidden] { display: none; }
 .numeric-custom input[type="range"] { flex: 1 1 auto; min-width: 0; accent-color: var(--accent); }
 .numeric-box {
   flex: 0 0 4.6rem; font: inherit; font-size: var(--fs--1); color: var(--ink);

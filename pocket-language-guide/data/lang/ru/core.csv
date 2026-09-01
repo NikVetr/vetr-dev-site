@@ -1,0 +1,47 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,я / меня,,ya / menya,,,2,ru-agent-v1
+pronouns-verbs.we-us,мы / нас,,my / nas,,,2,ru-agent-v1
+pronouns-verbs.you,ты / тебя,,ty / tebya,,,2,ru-agent-v1
+pronouns-verbs.you-polite,вы / вас,,vy / vas,,,2,ru-agent-v1
+pronouns-verbs.he-him,он / его,,on / yego,,,2,ru-agent-v1
+pronouns-verbs.she-her,она / её,,ona / yeyë,,,2,ru-agent-v1
+pronouns-verbs.they-them,они / их,,oni / ikh,,,2,ru-agent-v1
+pronouns-verbs.my-mine,мой / моя,,moy / moya,,,2,ru-agent-v1
+pronouns-verbs.your-yours,ваш / ваша,,vash / vasha,,,2,ru-agent-v1
+pronouns-verbs.be-called-call,зовут / называется,,zovut / nazyvayetsya,,,2,ru-agent-v1
+pronouns-verbs.have,у меня есть,,u menya yestʼ,,,2,ru-agent-v1
+pronouns-verbs.do-not-have,у меня нет,,u menya net,,,2,ru-agent-v1
+pronouns-verbs.go,идти / ехать,,idti / yekhatʼ,,on foot / by vehicle,2,ru-agent-v1
+pronouns-verbs.come,прийти,,priyti,,,2,ru-agent-v1
+pronouns-verbs.would-like,хотел бы,хотела бы,khotel by,,,2,ru-agent-v1
+pronouns-verbs.want,хочу,,khochu,,,2,ru-agent-v1
+pronouns-verbs.look-for,искать,,iskatʼ,,,2,ru-agent-v1
+pronouns-verbs.buy,купить,,kupitʼ,,,2,ru-agent-v1
+pronouns-verbs.like,нравится,,nravitsya,,,2,ru-agent-v1
+pronouns-verbs.need,нужно,,nuzhno,,,2,ru-agent-v1
+pronouns-verbs.there-is-have,есть,,yestʼ,,,2,ru-agent-v1
+pronouns-verbs.there-is-not-do-not-have,нет,,net,,,2,ru-agent-v1
+pronouns-verbs.want-to-verb,хочу [глагол],,khochu [glagol],,,2,ru-agent-v1
+pronouns-verbs.want-thing,хочу [предмет],,khochu [predmet],,,2,ru-agent-v1
+pronouns-verbs.need-thing,мне нужен [предмет],,mne nuzhen [predmet],,,2,ru-agent-v1
+pronouns-verbs.looking-for-thing,я ищу [предмет],,ya ishchu [predmet],,,2,ru-agent-v1
+question-words.what,что,,chto,,,2,ru-agent-v1
+question-words.where,где,,gde,,,2,ru-agent-v1
+question-words.who,кто,,kto,,,2,ru-agent-v1
+question-words.which-one,какой,,kakoy,,,2,ru-agent-v1
+question-words.when,когда,,kogda,,,2,ru-agent-v1
+question-words.how,как,,kak,,,2,ru-agent-v1
+question-words.how-much-many,сколько,,skolʼko,,,2,ru-agent-v1
+question-words.how-many,сколько штук,,skolʼko shtuk,,,2,ru-agent-v1
+question-words.why,почему,,pochemu,,,2,ru-agent-v1
+question-words.this,это,,eto,,,2,ru-agent-v1
+question-words.that,то,вон то,to,,,2,ru-agent-v1
+question-words.here,здесь,,zdesʼ,,,2,ru-agent-v1
+question-words.there,там,,tam,,,2,ru-agent-v1
+question-words.a-little,немного,,nemnogo,,,2,ru-agent-v1
+question-words.some,несколько,,neskolʼko,,,2,ru-agent-v1
+question-words.very,очень,,ochenʼ,,,2,ru-agent-v1
+question-words.too,слишком,,slishkom,,,2,ru-agent-v1
+question-words.also,тоже,,tozhe,,,2,ru-agent-v1
+question-words.all-both,все / оба,,vse / oba,,,2,ru-agent-v1
+question-words.how-much-what-price,Сколько стоит?,,Skolʼko stoit?,,,2,ru-agent-v1
