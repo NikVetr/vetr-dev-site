@@ -104,6 +104,7 @@ function legibilityFloor(input) {
  * @property {import('../types.js').SheetSpec} spec
  * @property {Awaited<ReturnType<import('../pack.js').loadCorpus>>} corpus
  * @property {ReturnType<import('../measure.js').createMeasurer>} measurer
+ * @property {ReturnType<import('../fonts.js').createFontRegistry>} registry
  */
 
 /**
@@ -111,7 +112,7 @@ function legibilityFloor(input) {
  * @returns {import('../types.js').LayoutPlan}
  */
 export function layout(input) {
-  const { blocks, theme, spec, corpus, measurer } = input;
+  const { blocks, theme, spec, corpus, measurer, registry } = input;
   const box = contentBox(spec.geometry, spec.paper);
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
@@ -119,7 +120,8 @@ export function layout(input) {
   const { scaleFloor, binding } = legibilityFloor(input);
 
   const measureOnly = (/** @type {number} */ scale) => buildAtoms({
-    blocks, theme, spec, corpus, measurer, colWidth: box.colWidth, scale, withPaint: false,
+    blocks, theme, spec, corpus, measurer, registry, colWidth: box.colWidth, scale,
+    withPaint: false,
   });
 
   const autoFaces = spec.geometry.faces <= 0;
@@ -227,7 +229,7 @@ export function layout(input) {
   // resolved count, so auto is invisible past this point.
   const geometry = { ...spec.geometry, faces };
   const atoms = buildAtoms({
-    blocks, theme, spec: { ...spec, geometry }, corpus, measurer,
+    blocks, theme, spec: { ...spec, geometry }, corpus, measurer, registry,
     colWidth: box.colWidth, scale, withPaint: true,
   });
   const broken = breakColumns(atoms, box.height, bins);
@@ -352,7 +354,7 @@ const MAX_EXTRA_COLUMNS = 3;
  * @returns {import('../types.js').WarningFix[]}
  */
 function findFixes(input, box, scaleFloor) {
-  const { blocks, theme, spec, corpus, measurer } = input;
+  const { blocks, theme, spec, corpus, measurer, registry } = input;
   /** @type {import('../types.js').WarningFix[]} */ const fixes = [];
 
   /** @param {import('../types.js').Geometry} geometry */
@@ -360,7 +362,7 @@ function findFixes(input, box, scaleFloor) {
     const probeBox = contentBox(geometry, spec.paper);
     if (probeBox.colWidth < 40 || probeBox.height < 40) return false;
     const atoms = buildAtoms({
-      blocks, theme, spec: { ...spec, geometry }, corpus, measurer,
+      blocks, theme, spec: { ...spec, geometry }, corpus, measurer, registry,
       colWidth: probeBox.colWidth, scale: scaleFloor, withPaint: false,
     });
     const bins = geometry.faces * geometry.columns;
@@ -403,7 +405,7 @@ function findFixes(input, box, scaleFloor) {
     dropped[section.section_id] = false;
     const kept = blocks.filter((b) => dropped[b.sectionId] !== false);
     const atoms = buildAtoms({
-      blocks: kept, theme, spec, corpus, measurer,
+      blocks: kept, theme, spec, corpus, measurer, registry,
       colWidth: box.colWidth, scale: scaleFloor, withPaint: false,
     });
     const bins = spec.geometry.faces * spec.geometry.columns;

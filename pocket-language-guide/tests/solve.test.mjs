@@ -27,7 +27,8 @@ const solved = (await buildSheet(ctx, spec)).plan;
 const bins = solved.geometry.faces * solved.geometry.columns;
 const atoms = buildAtoms({
   blocks, theme, spec: { ...spec, geometry: solved.geometry }, corpus: ctx.corpus,
-  measurer: ctx.measurer, colWidth: box.colWidth, scale: solved.scale, withPaint: true,
+  measurer: ctx.measurer, registry: ctx.registry, colWidth: box.colWidth,
+  scale: solved.scale, withPaint: true,
 });
 
 test('content box reproduces the reference geometry', () => {

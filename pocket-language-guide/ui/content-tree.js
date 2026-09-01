@@ -148,7 +148,12 @@ export function createTree(input) {
       for (const item of section.items) {
         const row = shown.get(item.conceptId);
         if (row) included += 1;
-        item.box.checked = Boolean(row);
+        // A checkbox states intent, so it follows the selection. Deriving it from
+        // the solved blocks instead let an in-flight solve tick a box back on
+        // moments after it was cleared, because that solve had started from the
+        // older selection. The count below is the outcome, and does come from
+        // the blocks.
+        item.box.checked = on && nextSpec.selection.items[item.conceptId] !== false;
         item.box.disabled = !on;
         if (row) {
           item.target.textContent = row.values.script ?? '';

@@ -24,6 +24,11 @@ SOURCES = {
     # the condensed face the reference sheet used for its dense tables.
     "NotoSans-var.ttf": f"{GFONTS}/notosans/NotoSans%5Bwdth,wght%5D.ttf",
     "NotoSans-Italic-var.ttf": f"{GFONTS}/notosans/NotoSans-Italic%5Bwdth,wght%5D.ttf",
+    # The serif typeface option. Also carries a width axis, so its dense tables get
+    # the same condensed treatment the sans ones do.
+    "NotoSerif-var.ttf": f"{GFONTS}/notoserif/NotoSerif%5Bwdth,wght%5D.ttf",
+    "NotoSerif-Italic-var.ttf": f"{GFONTS}/notoserif/NotoSerif-Italic%5Bwdth,wght%5D.ttf",
+    "NotoSerifSC-var.ttf": f"{GFONTS}/notoserifsc/NotoSerifSC%5Bwght%5D.ttf",
     "NotoSansSC-var.ttf": f"{GFONTS}/notosanssc/NotoSansSC%5Bwght%5D.ttf",
     "NotoSansJP-var.ttf": f"{GFONTS}/notosansjp/NotoSansJP%5Bwght%5D.ttf",
 }

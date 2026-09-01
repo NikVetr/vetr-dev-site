@@ -189,6 +189,18 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
     importing it back, so this writes the same `edits.extras` entry an import
     would. The two paths are the same path.
 
+## Typeface, and what "font options" costs
+
+`spec.typeface` is `sans` or `serif`. Stack names gain a suffix -- `latin` becomes
+`latin-serif` -- and a variant we do not ship falls back to the sans face rather
+than failing: a serif sheet with one sans column is a compromise, a crash is not.
+Noto Serif carries a width axis, so its dense tables get the same condensed
+treatment the sans ones do.
+
+Subsetting a variable font requires pinning *every* axis. Leaving one free keeps
+`fvar` and `gvar` alive, and subsetting a partially-instanced font trips over
+glyphs `gvar` never carried.
+
 ## Themes and accessibility
 
 `data/themes/latex-reference.json` is the reference palette: five semantic colours,
@@ -234,6 +246,12 @@ pairs the halves for duplexing; which half backs which depends on the axis the
 printer flips about, and getting it wrong is only discovered after cutting, so
 both orders are offered. `long-edge` pre-rotates each back via a page-level
 rotation. `nUp` tiles faces onto Letter or A4 with trim marks.
+
+Choosing a cut turns the canvas into a **duplex check**: each card with its own
+back laid over it in red, its shading and rules dropped so the front stays
+readable. If the red words belong on the back of the black ones the flip setting
+matches the printer; if they are the same column twice, it does not. That is
+cheaper to learn there than after cutting.
 
 ## Build steps
 
@@ -296,8 +314,6 @@ Named so nobody has to rediscover the gap:
 - **Dictionary line breaking** for Thai and Khmer. `scripts.csv` marks them
   `word_break: dict`; the measurer falls back to breaking anywhere and the solver
   raises a warning, rather than pretending.
-- **A duplex check overlay.** Both flip orders ship and the studio explains what
-  each produces, but there is no side-by-side superimposition yet.
 - **UI translation.** `ui/` strings are English. A free global resource needs its
   own chrome translated and RTL-mirrored.
 - **Per-row split overrides.** The drag handles cover margins and the column gap;

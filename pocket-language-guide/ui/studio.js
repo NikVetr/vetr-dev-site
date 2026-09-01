@@ -22,7 +22,10 @@ import { attachHandles } from './handles.js';
 import { createAddTerm } from './add-term.js';
 
 const BANNER_KEY = 'plg.banner-hidden';
-const SOLVE_DEBOUNCE_MS = 120;
+// A full solve is a few hundred milliseconds of synchronous work, so the debounce
+// has to be long enough that working down a list of checkboxes coalesces into one
+// solve rather than queueing one per click.
+const SOLVE_DEBOUNCE_MS = 260;
 const THEME_IDS = ['latex-reference', 'cvd-safe'];
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
@@ -53,10 +56,34 @@ async function main() {
   /** @type {ReturnType<typeof createAddTerm>|null} */ let addTerm = null;
   /** @type {(()=>void)|null} */ let detachHandles = null;
   /** @type {ReturnType<typeof setTimeout>|undefined} */ let pending;
+  let pngDpi = 600;
 
+  let solving = false;
+  let dirty = false;
+
+  /**
+   * Re-solve soon. Only one solve runs at a time: anything that arrives while one
+   * is in flight is folded into a single follow-up, so a burst of toggles cannot
+   * pile up a queue of them.
+   */
   function schedule() {
+    if (solving) {
+      dirty = true;
+      return;
+    }
     clearTimeout(pending);
-    pending = setTimeout(() => solve().catch(showFatal), SOLVE_DEBOUNCE_MS);
+    pending = setTimeout(() => {
+      solving = true;
+      solve()
+        .catch(showFatal)
+        .finally(() => {
+          solving = false;
+          if (dirty) {
+            dirty = false;
+            schedule();
+          }
+        });
+    }, SOLVE_DEBOUNCE_MS);
   }
 
   const format = createFormatPanel({
@@ -71,6 +98,7 @@ async function main() {
       schedule();
     },
     onCutChange: () => renderCanvas(),
+    onDpiChange: (dpi) => { pngDpi = dpi; },
   });
 
   // --- banner and quiz ----------------------------------------------------
@@ -95,12 +123,12 @@ async function main() {
     // Yield so the busy state paints before the solver takes the main thread.
     await new Promise((r) => setTimeout(r, 0));
 
-    manifest = await ensureFontCss(ctx, spec.target, spec.source);
+    manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface);
     built = await buildSheet(ctx, spec, edits);
     const { theme, targetRows, sourceRows } = built;
     blocks = built.blocks;
     plan = built.plan;
-    const stacks = stacksFor(ctx.corpus, spec.target, spec.source);
+    const stacks = stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface);
     svgs = plan.faces.length ? faceSvgs({ plan, manifest, icons, stacks, name: 'x' }) : [];
     if (!svgs.length) focused = null;
     else if (focused === null && !gridByChoice) focused = 0;
@@ -208,6 +236,27 @@ async function main() {
     if (!plan) return;
     detachHandles?.();
     detachHandles = null;
+
+    // With a cut selected, the canvas becomes a duplex check: what matters then is
+    // whether front and back pair up, not what a single face looks like.
+    const flip = format.cut();
+    if (flip && plan.faces.length) {
+      const cards = splitCards(plan, { flip });
+      const sides = faceSvgs({ plan: cards, manifest, icons, stacks: [], name: 'x' });
+      $('canvas-note').textContent = 'Checking front-to-back alignment';
+      renderFaces({
+        root: $('face-area'),
+        plan: cards,
+        svgs: sides,
+        focused: null,
+        duplex: sides,
+        onFocus: () => {},
+        onPick: () => {},
+        onHover: () => {},
+      });
+      return;
+    }
+
     $('canvas-note').textContent = focused === null
       ? 'Click a face to work on it'
       : 'Click a row to find it in the content list';
@@ -271,6 +320,7 @@ async function main() {
       spec,
       theme: built.theme,
       measurer: ctx.measurer,
+      registry: ctx.registry,
       targetRows: built.targetRows,
       sourceRows: built.sourceRows,
       respell: built.respell,
@@ -354,7 +404,7 @@ async function main() {
       manifest,
       icons,
       name: flip ? `${name()}-cards` : name(),
-      stacks: stacksFor(ctx.corpus, spec.target, spec.source),
+      stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface),
     };
   };
 
@@ -362,7 +412,7 @@ async function main() {
     title: `${ctx.corpus.languages[spec.target].exonym_en} pocket guide`,
     language: spec.source,
   }).catch(showFatal));
-  $('png').addEventListener('click', () => exportPng(exportInput(), 600).catch(showFatal));
+  $('png').addEventListener('click', () => exportPng(exportInput(), pngDpi).catch(showFatal));
   $('svg').addEventListener('click', () => exportSvg(exportInput()).catch(showFatal));
 
   $('csv-out').addEventListener('click', () => {

@@ -11,8 +11,9 @@ import { ARRANGEMENTS, arrangementShape } from '../core/solve/arrange.js';
 import { flagEmoji, flagsSupported } from './flags.js';
 import {
   pageGlyph, facesGlyph, densityGlyph, inkGlyph, paletteGlyph, itemGlyph, cutGlyph,
-  typeGlyph, segmented, panelField,
+  typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
+import { familyFor } from '../render/fonts.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
 // 0 is auto. Faces come in pairs because a double-sided sheet is two of them.
@@ -28,6 +29,15 @@ const DENSITY_CHOICES = [
   { value: 0, caption: 'Tight' },
   { value: 0.7, caption: 'Normal' },
   { value: 1.6, caption: 'Airy' },
+];
+const TYPEFACE_CHOICES = /** @type {const} */ ([
+  { value: 'sans', caption: 'Sans', stack: 'latin' },
+  { value: 'serif', caption: 'Serif', stack: 'latin-serif' },
+]);
+const DPI_CHOICES = [
+  { value: 150, caption: 'Screen' },
+  { value: 300, caption: 'Print' },
+  { value: 600, caption: 'Photo' },
 ];
 const INK_CHOICES = /** @type {const} */ ([
   { value: 'full', caption: 'Colour' },
@@ -78,6 +88,7 @@ function el(tag, attrs = {}, kids = []) {
  * @property {Record<string,any>} themes            id -> theme, for palette swatches
  * @property {(patch:Partial<import('../core/types.js').SheetSpec>)=>void} onChange
  * @property {(flip:''|'short-edge'|'long-edge')=>void} onCutChange
+ * @property {(dpi:number)=>void} onDpiChange
  */
 
 /**
@@ -167,6 +178,18 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ scale: value }),
   });
 
+  const typefaceControl = segmented({
+    label: 'Typeface',
+    value: spec.typeface,
+    options: TYPEFACE_CHOICES.map((choice) => ({
+      value: choice.value,
+      caption: choice.caption,
+      title: choice.caption,
+      glyph: typefaceGlyph(`"${familyFor(choice.stack)}", ${choice.value}-serif`),
+    })),
+    onChange: (value) => emit({ typeface: value }),
+  });
+
   const density = segmented({
     label: 'Spacing between rows',
     value: spec.density,
@@ -213,6 +236,18 @@ export function createFormatPanel(input) {
       glyph: inkGlyph(choice.value, roles(spec.themeId)),
     })),
     onChange: (value) => emit({ inkMode: value }),
+  });
+
+  const dpi = segmented({
+    label: 'PNG resolution',
+    value: 600,
+    options: DPI_CHOICES.map((choice) => ({
+      value: choice.value,
+      caption: choice.caption,
+      title: `${choice.value} dpi`,
+      glyph: dpiGlyph(choice.value),
+    })),
+    onChange: (value) => input.onDpiChange(value),
   });
 
   // --- cutting ------------------------------------------------------------
@@ -316,12 +351,14 @@ export function createFormatPanel(input) {
     panelField('Card', [size.group]),
     panelField('Columns', [columns.group]),
     panelField('Faces', [faces.group]),
+    panelField('Typeface', [typefaceControl.group]),
     panelField('Type size', [typeSize.group]),
     panelField('Entry layout', [arrangement.group]),
     panelField('Row spacing', [density.group]),
     panelField('Colours', [theme.group]),
     panelField('Ink', [ink.group]),
     panelField('Cut into cards', [cutControl.group, cutNote]),
+    panelField('PNG resolution', [dpi.group]),
     panelField('Columns shown', [fieldRow]),
     paper.wrap,
     source.wrap,
@@ -345,6 +382,7 @@ export function createFormatPanel(input) {
           ? `Auto · ${resolvedFaces}`
           : 'Auto';
       }
+      typefaceControl.select(next.typeface);
       typeSize.select(next.scale);
       density.select(next.density);
       arrangement.select(next.arrangement);

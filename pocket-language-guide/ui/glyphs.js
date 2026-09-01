@@ -203,6 +203,42 @@ export function typeGlyph(scale) {
   return svg;
 }
 
+/**
+ * A typeface, shown by drawing in it. `family` is a CSS font-family that must
+ * already be loaded, so the sample is the real face rather than an impression of it.
+ * @param {string} family
+ */
+export function typefaceGlyph(family) {
+  const box = 30;
+  const svg = frame(box, box);
+  const sample = svgEl('text', {
+    x: box / 2, y: 21, 'font-size': 17, 'font-family': family, class: 'g-sample',
+  });
+  sample.textContent = 'Aa';
+  svg.append(sample);
+  return svg;
+}
+
+/**
+ * Export resolution, as a page with a coarse or fine grain over it.
+ * @param {number} dpi
+ */
+export function dpiGlyph(dpi) {
+  const box = 30;
+  const svg = frame(box, box);
+  svg.append(svgEl('rect', { x: 5, y: 4, width: 20, height: 22, rx: 1.5, class: 'g-page' }));
+  const step = dpi >= 600 ? 2 : dpi >= 300 ? 3.4 : 5.2;
+  for (let x = 7; x < 24; x += step) {
+    for (let y = 6; y < 24; y += step) {
+      svg.append(svgEl('rect', {
+        x, y, width: Math.max(0.7, step - 1), height: Math.max(0.7, step - 1),
+        class: 'g-ink faint',
+      }));
+    }
+  }
+  return svg;
+}
+
 /** A sheet whole, or cut down the middle with the back's orientation shown.
  * @param {''|'short-edge'|'long-edge'} flip */
 export function cutGlyph(flip) {

@@ -24,6 +24,7 @@ const MIN_WORTH_FILLING_PT = 8;
  * @property {import('../types.js').SheetSpec} spec
  * @property {any} theme
  * @property {ReturnType<import('../measure.js').createMeasurer>} measurer
+ * @property {ReturnType<import('../fonts.js').createFontRegistry>} registry
  * @property {Record<string,Record<string,string>>} targetRows
  * @property {Record<string,Record<string,string>>} sourceRows
  * @property {Record<string,string>} respell
@@ -137,7 +138,7 @@ export function proposeBalance(input) {
  * @returns {Map<string,number>}
  */
 function measureHeights(input, candidates) {
-  const { corpus, spec, theme, measurer, colWidth, plan } = input;
+  const { corpus, spec, theme, measurer, registry, colWidth, plan } = input;
   /** @type {Map<string,number>} */ const out = new Map();
 
   // One synthetic block per template, so each candidate is measured in the shape
@@ -170,7 +171,7 @@ function measureHeights(input, candidates) {
       })),
     }];
     const atoms = buildAtoms({
-      blocks: probe, theme, spec, corpus, measurer, colWidth,
+      blocks: probe, theme, spec, corpus, measurer, registry, colWidth,
       scale: plan.scale, withPaint: false,
     });
     // buildAtoms emits one atom per row for an items block, in order.
@@ -191,8 +192,8 @@ function measureHeights(input, candidates) {
 export function fits(input, blocks) {
   const atoms = buildAtoms({
     blocks, theme: input.theme, spec: input.spec, corpus: input.corpus,
-    measurer: input.measurer, colWidth: input.colWidth, scale: input.plan.scale,
-    withPaint: false,
+    measurer: input.measurer, registry: input.registry, colWidth: input.colWidth,
+    scale: input.plan.scale, withPaint: false,
   });
   const bins = input.spec.geometry.faces * input.spec.geometry.columns;
   return !breakColumns(atoms, input.colHeight, bins).failure;

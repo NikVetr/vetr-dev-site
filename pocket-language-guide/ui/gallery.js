@@ -95,45 +95,44 @@ function card(lang, packs, reader, coverage) {
   return el('article', { class: 'card' }, [head, thumb, el('div', { class: 'card-actions' }, actions)]);
 }
 
+/** How many other languages to show beside the reader's own. */
+const COLLAGE_DEPTH = 5;
+
 /**
- * Rotate the picker's label through the languages we can gloss into. The reader's
- * own language leads, so the common case needs no waiting; the rest follow so
- * someone who reads none of the earlier ones still finds it. Held static under
- * prefers-reduced-motion.
+ * The picker's label as a collage: the reader's own language at full strength, the
+ * others receding behind it. Nothing moves -- a header that animates on its own is
+ * a distraction on a page you came to read -- but it still says "this is where you
+ * choose your language" to someone who reads none of the others.
  * @param {Record<string,string>[]} languages
- * @param {()=>string} currentReader
+ * @param {string} reader
  */
-function cycleSpeakLabel(languages, currentReader) {
+function renderSpeakCollage(languages, reader) {
   const label = document.getElementById('reader-label');
   if (!label) return;
   const usable = languages.filter((l) => l.speak_label);
+  const mine = usable.find((l) => l.bcp47 === reader);
+  const others = usable.filter((l) => l.bcp47 !== reader).slice(0, COLLAGE_DEPTH);
 
-  const ordered = () => {
-    const reader = currentReader();
-    const mine = usable.filter((l) => l.bcp47 === reader);
-    return [...mine, ...usable.filter((l) => l.bcp47 !== reader)];
+  /** @param {Record<string,string>} lang @param {number} depth */
+  const chip = (lang, depth) => {
+    const span = document.createElement('span');
+    span.className = depth === 0 ? 'speak lead' : 'speak';
+    span.textContent = lang.speak_label;
+    span.lang = lang.bcp47;
+    if (lang.bcp47 === 'ar') span.dir = 'rtl';
+    // Each step back is fainter and slightly smaller, so the eye lands on the
+    // reader's own first and reads the rest as context rather than as a list.
+    if (depth > 0) {
+      span.style.opacity = String(Math.max(0.14, 0.52 - (depth - 1) * 0.09));
+      span.style.fontSize = `${Math.max(0.66, 0.86 - (depth - 1) * 0.04)}rem`;
+    }
+    return span;
   };
 
-  /** @param {Record<string,string>} lang */
-  const show = (lang) => {
-    label.textContent = lang.speak_label;
-    label.lang = lang.bcp47;
-    label.dir = lang.bcp47 === 'ar' ? 'rtl' : 'ltr';
-  };
-
-  show(ordered()[0]);
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  let i = 0;
-  setInterval(() => {
-    const list = ordered();
-    i = (i + 1) % list.length;
-    label.classList.add('fading');
-    setTimeout(() => {
-      show(list[i]);
-      label.classList.remove('fading');
-    }, 220);
-  }, 2600);
+  label.replaceChildren(
+    ...others.slice().reverse().map((lang, i) => chip(lang, others.length - i)),
+    ...(mine ? [chip(mine, 0)] : []),
+  );
 }
 
 async function main() {
@@ -156,9 +155,10 @@ async function main() {
     picker.append(el('option', { value: lang.bcp47, text: `${lang.endonym} (${lang.exonym_en})` }));
   }
   picker.value = reader;
-  cycleSpeakLabel(languages, () => picker.value);
+  renderSpeakCollage(languages, reader);
   picker.addEventListener('change', () => {
     setReaderLanguage(picker.value);
+    renderSpeakCollage(languages, picker.value);
     render(picker.value);
   });
 

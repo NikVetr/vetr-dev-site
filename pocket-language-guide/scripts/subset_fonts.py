@@ -37,6 +37,7 @@ ARABIC_RANGES = [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
 # reference tables need a narrower Latin face or their four columns cannot hold a
 # gloss and a respelling on one line.
 CONDENSED_WDTH = 87.5
+NORMAL_WDTH = 100
 
 FACES = {
     ("latin", 400, False): "NotoSans-Regular.ttf",
@@ -53,11 +54,25 @@ FACES = {
     ("cjk-jp", 700, False): "NotoSansJP-var.ttf",
     ("arabic", 400, False): "NotoSansArabic-Regular.ttf",
     ("arabic", 700, False): "NotoSansArabic-Bold.ttf",
+    # Serif variants of the stacks that have one. Scripts without a serif here fall
+    # back to their sans face at runtime rather than failing.
+    ("latin-serif", 400, False): "NotoSerif-var.ttf",
+    ("latin-serif", 700, False): "NotoSerif-var.ttf",
+    ("latin-serif", 400, True): "NotoSerif-Italic-var.ttf",
+    ("latin-serif", 700, True): "NotoSerif-Italic-var.ttf",
+    ("latin-cond-serif", 400, False): "NotoSerif-var.ttf",
+    ("latin-cond-serif", 700, False): "NotoSerif-var.ttf",
+    ("latin-cond-serif", 400, True): "NotoSerif-Italic-var.ttf",
+    ("latin-cond-serif", 700, True): "NotoSerif-Italic-var.ttf",
+    ("cjk-sc-serif", 400, False): "NotoSerifSC-var.ttf",
+    ("cjk-sc-serif", 700, False): "NotoSerifSC-var.ttf",
 }
 
 # Which language directories feed each stack's corpus-character union.
 STACK_LANGS = {"latin": ["en", "es"], "latin-cond": ["en", "es"],
-               "cjk-sc": ["zh-Hans"], "cjk-jp": ["ja"], "arabic": ["ar"]}
+               "latin-serif": ["en", "es"], "latin-cond-serif": ["en", "es"],
+               "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
+               "cjk-jp": ["ja"], "arabic": ["ar"]}
 
 
 def expand(ranges):
@@ -92,9 +107,9 @@ def corpus_chars(langs):
 
 def coverage(stack):
     chars = expand(LATIN_RANGES) | corpus_chars(STACK_LANGS[stack])
-    if stack == "latin-cond":
+    if stack in ("latin-cond", "latin-serif", "latin-cond-serif"):
         return chars
-    if stack == "cjk-sc":
+    if stack in ("cjk-sc", "cjk-sc-serif"):
         # GB2312 level 1: the ~3.7k characters of everyday written Chinese.
         chars |= expand(CJK_PUNCT) | legacy_charset("gb2312", range(0xB0, 0xD8), range(0xA1, 0xFF))
     elif stack == "cjk-jp":
@@ -109,8 +124,11 @@ def build_face(stack, weight, italic, source, chars):
     font = TTFont(SRC / source, fontNumber=0)
     if "fvar" in font:
         axes = {"wght": weight}
-        if stack == "latin-cond":
-            axes["wdth"] = CONDENSED_WDTH
+        # Pin every axis the font has. Leaving one free keeps fvar and gvar alive,
+        # and subsetting a partially-instanced variable font trips over glyphs that
+        # gvar never carried.
+        if "wdth" in {a.axisTag for a in font["fvar"].axes}:
+            axes["wdth"] = CONDENSED_WDTH if stack.startswith("latin-cond") else NORMAL_WDTH
         instancer.instantiateVariableFont(font, axes, inplace=True, updateFontNames=True)
 
     options = subset.Options()

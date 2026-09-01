@@ -35,6 +35,7 @@ async function sheetWithGaps(fraction) {
       spec: withGaps,
       theme: built.theme,
       measurer: ctx.measurer,
+      registry: ctx.registry,
       targetRows: built.targetRows,
       sourceRows: built.sourceRows,
       respell: built.respell,
@@ -56,6 +57,7 @@ test('a flush sheet gets no proposals', async () => {
     spec: { ...spec, geometry: built.plan.geometry },
     theme: built.theme,
     measurer: ctx.measurer,
+    registry: ctx.registry,
     targetRows: built.targetRows, sourceRows: built.sourceRows, respell: built.respell,
     blocks: built.blocks, plan: built.plan, colWidth: box.colWidth, colHeight: box.height,
   });

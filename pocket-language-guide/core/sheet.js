@@ -45,26 +45,31 @@ export async function createSheetContext({ loadText, loadBytes }) {
 }
 
 /**
- * Font stacks a language pair needs, including the Latin one romanisation uses.
+ * Font stacks a language pair needs, including the Latin one romanisation uses and
+ * the serif variants if a serif sheet was asked for.
  * @param {SheetContext['corpus']} corpus @param {string} target @param {string} source
+ * @param {'sans'|'serif'} [typeface]
  */
-export function stacksFor(corpus, target, source) {
+export function stacksFor(corpus, target, source, typeface = 'sans') {
   const of = (/** @type {string} */ code) => {
     const lang = corpus.languages[code];
     if (!lang) throw new Error(`unknown language ${code}`);
     return corpus.scripts[lang.script].font_stack;
   };
   // latin-cond always travels with latin: the table templates ask for it.
-  return [...new Set(['latin', 'latin-cond', of(target), of(source)])];
+  const base = [...new Set(['latin', 'latin-cond', of(target), of(source)])];
+  if (typeface === 'sans') return base;
+  return [...new Set([...base, ...base.map((stack) => `${stack}-${typeface}`)])];
 }
 
 /**
  * Load the fonts a pair needs. Split from solving so the studio can show a
  * loading state, and so a gallery page never pays for a CJK face it will not use.
  * @param {SheetContext} ctx @param {string} target @param {string} source
+ * @param {'sans'|'serif'} [typeface]
  */
-export async function loadFontsFor(ctx, target, source) {
-  const files = ctx.registry.filesFor(stacksFor(ctx.corpus, target, source));
+export async function loadFontsFor(ctx, target, source, typeface = 'sans') {
+  const files = ctx.registry.filesFor(stacksFor(ctx.corpus, target, source, typeface));
   await ctx.registry.load(files.map((file) => {
     const parts = /^(.*)-(\d+)(i?)$/.exec(file);
     if (!parts) throw new Error(`unparsable face id ${file}`);
@@ -83,8 +88,8 @@ export async function loadFontsFor(ctx, target, source) {
  * @param {import('./pack.js').SheetEdits} [edits]
  */
 export async function buildSheet(ctx, spec, edits) {
-  const { corpus, measurer, loadText } = ctx;
-  await loadFontsFor(ctx, spec.target, spec.source);
+  const { corpus, measurer, registry, loadText } = ctx;
+  await loadFontsFor(ctx, spec.target, spec.source, spec.typeface ?? 'sans');
   const theme = await ctx.theme(spec.themeId);
   const targetRows = await loadLanguage(loadText, spec.target, corpus.groups);
   const sourceRows = await loadLanguage(loadText, spec.source, corpus.groups);
@@ -96,6 +101,6 @@ export async function buildSheet(ctx, spec, edits) {
     targetRows,
     sourceRows,
     respell,
-    plan: layout({ blocks, theme, spec, corpus, measurer }),
+    plan: layout({ blocks, theme, spec, corpus, measurer, registry }),
   };
 }

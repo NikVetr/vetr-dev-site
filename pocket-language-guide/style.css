@@ -321,11 +321,18 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
 }
 .flag.more { font-size: 0.66rem; color: var(--muted); align-self: center; text-align: center; }
 
+/* A static collage: the reader's own label leads, the rest recede. No motion. */
 #reader-label {
-  display: inline-block; min-width: 6.5ch; text-align: end;
-  transition: opacity 200ms;
+  display: flex; align-items: baseline; gap: 0.45em; flex-wrap: wrap;
+  justify-content: flex-end; row-gap: 0;
 }
-#reader-label.fading { opacity: 0; }
+.speak { white-space: nowrap; color: var(--muted); }
+.speak.lead { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 760px) {
+  /* On a narrow screen the collage would push the picker off; the lead is enough. */
+  .speak:not(.lead) { display: none; }
+}
 
 /* --- glyph settings controls ---------------------------------------------- */
 
@@ -382,3 +389,30 @@ details.add-term > summary {
 details.add-term .field { margin-bottom: var(--space-1); }
 details.add-term input[type="text"] { width: 100%; }
 .tag.mine { border-color: var(--accent); color: var(--accent); font-size: 0.68rem; }
+svg.glyph .g-sample { fill: var(--ink); text-anchor: middle; }
+
+/* --- duplex check -------------------------------------------------------- */
+
+.duplex { display: flex; flex-direction: column; gap: var(--space-2); }
+.duplex-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-2);
+}
+.duplex-card {
+  position: relative; background: #fff; border: 1px solid var(--line);
+  border-radius: var(--radius-sm); overflow: hidden;
+}
+.duplex-side { position: relative; }
+.duplex-side svg { display: block; width: 100%; height: auto; }
+/* The back is drawn as red words only: its shading and rules are dropped so the
+   front stays readable underneath. Presentation attributes on the SVG lose to
+   these rules, so no !important is needed. */
+.duplex-side.back { position: absolute; inset: 0; }
+.duplex-side.back svg rect { fill: none; }
+.duplex-side.back svg text { fill: #c0392b; }
+.duplex-side.back svg g { stroke: #c0392b; }
+.duplex-label {
+  position: absolute; inset-block-start: 2px; inset-inline-start: 4px;
+  font-size: var(--fs--1); font-weight: 600; color: var(--accent);
+  background: rgb(255 255 255 / 75%); padding: 0 0.3em; border-radius: 3px;
+}

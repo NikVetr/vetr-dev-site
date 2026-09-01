@@ -71,10 +71,11 @@ function makePalette(theme, inkMode) {
  * @param {import('../types.js').SheetSpec} ctx.spec
  * @param {Awaited<ReturnType<import('../pack.js').loadCorpus>>} ctx.corpus
  * @param {ReturnType<import('../measure.js').createMeasurer>} ctx.measurer
+ * @param {ReturnType<import('../fonts.js').createFontRegistry>} ctx.registry
  * @param {number} ctx.colWidth
  * @param {number} ctx.scale
  */
-function makeContext({ theme, spec, corpus, measurer, colWidth, scale }) {
+function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale }) {
   // Breathing room between text elements, in points at the current scale. The
   // reference sheet's padding is essentially zero -- consecutive rows are held
   // apart by a 0.22pt rule alone -- which is tight enough to read as cramped.
@@ -87,15 +88,18 @@ function makeContext({ theme, spec, corpus, measurer, colWidth, scale }) {
   const palette = makePalette(theme, spec.inkMode);
   const shown = new Set(spec.fieldSet);
 
+  const typeface = spec.typeface ?? 'sans';
+
   /** @param {import('../types.js').FieldStyle} fs @returns {import('../measure.js').RunStyle} */
   const styleFor = (fs) => {
     const { stack, dir, iso } = resolveField(fs.field, targetLang.script, sourceLang.script, corpus.scripts);
     const script = corpus.scripts[iso];
     const size = fs.size * scale;
+    // Dense reference tables ask for the narrow Latin face. Only Latin has one; for
+    // any other script the request is simply ignored.
+    const base = fs.condensed && stack === 'latin' ? 'latin-cond' : stack;
     return {
-      // Dense reference tables ask for the narrow Latin face. Only Latin has one;
-      // for any other script the request is simply ignored.
-      stack: fs.condensed && stack === 'latin' ? 'latin-cond' : stack,
+      stack: registry.stackFor(base, typeface),
       dir,
       wordBreak: /** @type {'space'|'any'|'dict'} */ (script.word_break),
       size,
@@ -124,7 +128,10 @@ function makeContext({ theme, spec, corpus, measurer, colWidth, scale }) {
     mirror: targetScriptRow.direction === 'rtl',
     /** @param {import('../types.js').FieldStyle} fs @param {string} role */
     colorFor: (fs, role) => (fs.color === 'section' ? palette.roles[role] : palette[fs.color]),
-    sourceStack: resolveField('gloss', targetLang.script, sourceLang.script, corpus.scripts),
+    sourceStack: (() => {
+      const resolved = resolveField('gloss', targetLang.script, sourceLang.script, corpus.scripts);
+      return { ...resolved, stack: registry.stackFor(resolved.stack, typeface) };
+    })(),
     // Advanced by itemAtoms: the reference alternates row shading per section.
     rowIndex: 0,
   };
@@ -433,13 +440,16 @@ function fuse(atoms, index, count) {
  * @param {import('../types.js').SheetSpec} args.spec
  * @param {Awaited<ReturnType<import('../pack.js').loadCorpus>>} args.corpus
  * @param {ReturnType<import('../measure.js').createMeasurer>} args.measurer
+ * @param {ReturnType<import('../fonts.js').createFontRegistry>} args.registry
  * @param {number} args.colWidth
  * @param {number} args.scale
  * @param {boolean} [args.withPaint]
  * @returns {Atom[]}
  */
-export function buildAtoms({ blocks, theme, spec, corpus, measurer, colWidth, scale, withPaint = true }) {
-  const ctx = makeContext({ theme, spec, corpus, measurer, colWidth, scale });
+export function buildAtoms({
+  blocks, theme, spec, corpus, measurer, registry, colWidth, scale, withPaint = true,
+}) {
+  const ctx = makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale });
 
   /** @type {Atom[]} */ const atoms = [];
   for (const block of blocks) {

@@ -14,12 +14,22 @@
  * @property {(index:number|null)=>void} onFocus
  * @property {(conceptId:string)=>void} onPick
  * @property {(conceptId:string|null)=>void} onHover
+ * @property {string[]} [duplex]  card sides, front and back interleaved: when
+ *   present the canvas shows the pairs superimposed instead of the faces
  */
 
 /** @param {PreviewInput} input */
 export function renderFaces(input) {
   const { root, plan, svgs, focused } = input;
   root.replaceChildren();
+
+  // Which half backs which is only discovered after cutting, so show it before:
+  // each card's two sides superimposed, front dark and back red, so a
+  // mis-set duplex driver is obvious rather than expensive.
+  if (input.duplex) {
+    root.append(duplexCheck(input.duplex));
+    return;
+  }
 
   if (focused === null) {
     const grid = document.createElement('div');
@@ -79,6 +89,42 @@ function faceNode(input, svg, index, interactive) {
   }
   node.append(layer);
   return node;
+}
+
+/**
+ * Card fronts and backs overlaid in pairs, for checking a duplex setting.
+ * @param {string[]} sides  front, back, front, back, ...
+ */
+function duplexCheck(sides) {
+  const wrap = document.createElement('div');
+  wrap.className = 'duplex';
+  const note = document.createElement('p');
+  note.className = 'small muted';
+  note.textContent = 'Each card with its own back laid over it in red. If the red '
+    + 'words belong on the back of the black ones, the flip setting matches your '
+    + 'printer. If they are the same column twice, switch it.';
+  wrap.append(note);
+
+  const grid = document.createElement('div');
+  grid.className = 'duplex-grid';
+  for (let i = 0; i + 1 < sides.length; i += 2) {
+    const card = document.createElement('div');
+    card.className = 'duplex-card';
+    card.setAttribute('aria-label', `Card ${i / 2 + 1}, front and back overlaid`);
+    const front = document.createElement('div');
+    front.className = 'duplex-side front';
+    front.innerHTML = sides[i];
+    const back = document.createElement('div');
+    back.className = 'duplex-side back';
+    back.innerHTML = sides[i + 1];
+    const label = document.createElement('span');
+    label.className = 'duplex-label';
+    label.textContent = `Card ${i / 2 + 1}`;
+    card.append(front, back, label);
+    grid.append(card);
+  }
+  wrap.append(grid);
+  return wrap;
 }
 
 /**

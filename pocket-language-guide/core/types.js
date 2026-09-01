@@ -110,6 +110,7 @@
  * @property {Geometry} geometry
  * @property {PaperSpec} paper
  * @property {string} themeId
+ * @property {'sans'|'serif'} typeface  scripts without one fall back to sans
  * @property {'full'|'low-ink'|'mono'} inkMode
  * @property {number} density  extra points of separation between text elements
  * @property {'two-column'|'one-row'|'stacked'} arrangement  item field layout

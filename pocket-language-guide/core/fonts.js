@@ -26,6 +26,9 @@ const FIELD_SIDE = {
 export function createFontRegistry(loadBytes, manifest) {
   /** @type {Map<string,Face>} */ const loaded = new Map();
   const available = new Set(manifest.faces.map((f) => `${f.stack}|${f.weight}|${f.italic}`));
+  const stacks = new Set(manifest.faces.map((f) => f.stack));
+  /** @param {string} stack */
+  const hasStack = (stack) => stacks.has(stack);
 
   /** Nearest available face in a stack: italics and bold are optional per stack. */
   /** @param {string} stack @param {number} weight @param {boolean} italic */
@@ -37,6 +40,19 @@ export function createFontRegistry(loadBytes, manifest) {
   }
 
   return {
+    /**
+     * The stack to use for a base stack and a chosen typeface. Not every script has
+     * every typeface -- there is no condensed Arabic serif here -- so a missing
+     * variant falls back to the sans face rather than failing: a serif sheet with
+     * one sans column is a compromise, a crash is not.
+     * @param {string} base @param {'sans'|'serif'} typeface
+     */
+    stackFor(base, typeface) {
+      if (typeface === 'sans') return base;
+      const variant = `${base}-${typeface}`;
+      return stacks.has(variant) ? variant : base;
+    },
+
     /** @param {{stack:string,weight:number,italic:boolean}[]} wanted */
     async load(wanted) {
       for (const w of wanted) {
@@ -68,6 +84,9 @@ export function createFontRegistry(loadBytes, manifest) {
       const wanted = [[400, false], [700, false], [400, true], [700, true]];
       const files = new Set();
       for (const stack of stacks) {
+        // A serif variant we do not ship is not an error here: stackFor falls back
+        // to the sans face, so there is simply nothing to preload.
+        if (!stacks.includes(stack) || !hasStack(stack)) continue;
         for (const [weight, italic] of wanted) {
           const p = pick(stack, weight, italic);
           files.add(`${p.stack}-${p.weight}${p.italic ? 'i' : ''}`);

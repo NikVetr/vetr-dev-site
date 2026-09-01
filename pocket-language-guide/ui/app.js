@@ -63,10 +63,11 @@ export function setReaderLanguage(code) {
  * committed to advance widths measured from these exact files.
  * @param {Awaited<ReturnType<typeof browserSheetContext>>} ctx
  * @param {string} target @param {string} source
+ * @param {'sans'|'serif'} [typeface]
  */
-export async function ensureFontCss(ctx, target, source) {
+export async function ensureFontCss(ctx, target, source, typeface = 'sans') {
   const manifest = JSON.parse(await loadText('data/fonts/manifest.json'));
-  const stacks = stacksFor(ctx.corpus, target, source);
+  const stacks = stacksFor(ctx.corpus, target, source, typeface);
   const id = `plg-fonts-${stacks.join('-')}`;
   if (!document.getElementById(id)) {
     const style = document.createElement('style');
@@ -118,6 +119,7 @@ export function makeSpec(ctx, presets, choice) {
       minSizeDelta: Number(paper.min_size_delta),
     },
     themeId: 'latex-reference',
+    typeface: 'sans',
     inkMode: 'full',
     density: 0.7,
     arrangement: 'two-column',
