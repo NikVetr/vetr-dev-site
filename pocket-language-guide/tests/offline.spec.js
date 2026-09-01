@@ -8,7 +8,7 @@ test('saves a language for offline, then exports with the network off', async ({
 
   const save = page.locator('[data-offline="zh-Hans"]');
   await save.click();
-  await expect(save).toHaveText('Saved offline', { timeout: 180_000 });
+  await expect(save).toHaveText('Saved', { timeout: 180_000 });
 
   await context.setOffline(true);
   await page.goto('/customize.html?target=zh-Hans&source=en');

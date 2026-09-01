@@ -133,6 +133,7 @@ label { display: block; }
   font-size: 1.25rem; line-height: 1; min-width: 1.6em; text-align: center; color: var(--accent);
 }
 .card-name { font-weight: 600; }
+.card-coverage { font-size: 0.7rem; color: var(--muted); margin-top: 0.1em; }
 .card-thumb {
   display: block; width: 100%; aspect-ratio: 7 / 5; object-fit: cover; object-position: top left;
   background: var(--surface); border-block: 1px solid var(--line-soft);

@@ -41,6 +41,11 @@ function card(lang, packs, reader, coverage) {
     el('span', { class: 'card-titles' }, [
       el('div', { class: 'card-name', text: lang.exonym_en }),
       el('div', { class: 'small muted', text: lang.endonym, lang: lang.bcp47 }),
+      // Coverage belongs beside the name, not in the action row: as a chip there it
+      // pushed the three buttons off the edge of the card.
+      ...(have && have < coverage.total
+        ? [el('div', { class: 'card-coverage', text: `${have} of ${coverage.total} phrases` })]
+        : []),
     ]),
     ...(flags ? [flags] : []),
   ]);
@@ -65,13 +70,11 @@ function card(lang, packs, reader, coverage) {
   if (!have) {
     actions.push(el('span', { class: 'tag planned', text: 'help translate' }));
   } else {
-    if (have < coverage.total) {
-      actions.push(el('span', { class: 'tag draft', text: `${have} phrases` }));
-    }
     actions.push(el('a', { class: 'btn primary', href: `sheet.html${query}`, text: 'Export' }));
     actions.push(el('a', { class: 'btn', href: `customize.html${query}`, text: 'Customise' }));
     const offline = el('button', {
-      type: 'button', class: 'btn small', text: 'Save offline',
+      type: 'button', class: 'btn', text: 'Offline',
+      title: 'Save this language for use without a network',
       'data-offline': lang.bcp47,
     });
     offline.addEventListener('click', async () => {
@@ -83,7 +86,7 @@ function card(lang, packs, reader, coverage) {
         const result = await saveForOffline({
           corpus: ctx.corpus, target: lang.bcp47, source: reader, manifest,
         });
-        offline.textContent = result.ok ? 'Saved offline' : 'Partly saved';
+        offline.textContent = result.ok ? 'Saved' : 'Partly saved';
       } catch (err) {
         offline.textContent = 'Could not save';
         console.warn('[plg]', err);
