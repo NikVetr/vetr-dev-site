@@ -433,10 +433,19 @@ artifacts, following the `ceo-salary-benchmark/scripts/` precedent:
 npm run vendor      # esbuild → vendor/{fontkit,pdf-lib}.esm.js  (rarely)
 npm run icons       # Lucide SVG → data/icons.json, normalised to path data
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
-                    #   thumbnails only, one per pair: 56 pairs in 7.2MB
+                    #   thumbnails only, one per pair, then indexed down to a
+                    #   fifth-bit palette: 56 pairs in 2.2MB rather than 7.2MB
 npm run shell       # data/shell.json + the respell index + sw.js VERSION
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
 ```
+
+The Python side needs `fontTools` for the fonts and `Pillow` for the thumbnails.
+`packs/` grows as the square of the ready-language count -- every language pairs
+with every other -- so `scripts/optimize_thumbs.py` runs automatically after
+`npm run prerender` and reindexes each screenshot to an exact palette. It is a
+lossless indexing of a five-bit-per-channel rounding, which moves no pixel by
+more than 4/255 and leaves pure white alone, and it is deterministic so a
+re-render of unchanged content produces byte-identical files.
 
 `scripts/latex_corpus.py` reads the reference XeLaTeX sheets;
 `scripts/port_latex_corpus.py` seeded the corpus from the Mandarin one, and

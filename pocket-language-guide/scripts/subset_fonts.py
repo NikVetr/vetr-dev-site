@@ -23,7 +23,14 @@ SRC = ROOT / "tmp" / "fonts-src"
 OUT = ROOT / "data" / "fonts"
 
 # Latin, IPA extensions, combining marks, general punctuation, currency.
+#
+# Cyrillic and Latin Extended Additional are here rather than left to the corpus
+# union because the add-your-own-term editor lets someone type a word the corpus
+# never contained, offline, with no font left to fall back to. Russian needs the
+# first block and Vietnamese the second, and between them they cost about 20KB a
+# face -- cheap next to a reader finding tofu in the one row they wrote themselves.
 LATIN_RANGES = [(0x20, 0x24F), (0x250, 0x2AF), (0x2B0, 0x2FF), (0x300, 0x36F),
+                (0x400, 0x4FF), (0x1E00, 0x1EFF),
                 (0x2000, 0x206F), (0x20A0, 0x20BF), (0x2100, 0x214F), (0x2190, 0x21FF)]
 CJK_PUNCT = [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF)]
 KANA = [(0x3040, 0x30FF), (0x31F0, 0x31FF)]
@@ -80,7 +87,8 @@ FACES = {
 }
 
 # Which language directories feed each stack's corpus-character union.
-ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja"]
+ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
+             "pt", "ru", "tr", "vi"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],

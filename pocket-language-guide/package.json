@@ -9,6 +9,7 @@
     "check": "tsc -p jsconfig.json && node scripts/build_shell.mjs --check && node scripts/check_i18n.mjs --check",
     "validate": "python3 scripts/validate_data.py",
     "prerender": "node scripts/prerender_packs.mjs",
+    "postprerender": "python3 scripts/optimize_thumbs.py",
     "test:unit": "node --test tests/*.test.mjs",
     "test": "npm run validate && npm run check && npm run test:unit && npx playwright test",
     "vendor": "node scripts/build_vendor.mjs",

@@ -420,15 +420,20 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
 .flag.more:hover .flag-rest, .flag.more:focus-visible .flag-rest { display: flex; }
 
 /* A closer look at a card, without leaving the gallery or loading the solver. */
+/* The gallery lightbox. Capped at the thumbnail's own 480px rather than the 46rem
+   it started at: the pre-rendered PNG has no more detail to give, and a card blown
+   up past its pixels looks like a rendering fault rather than a preview. Someone
+   who wants to read the rows goes through to the studio, which solves live. */
 dialog.preview-dialog {
   border: 1px solid var(--line); border-radius: var(--radius); padding: var(--space-3);
-  max-width: 46rem; width: calc(100% - 2rem); font: inherit; color: var(--ink);
+  max-width: 32rem; width: calc(100% - 2rem); font: inherit; color: var(--ink);
   position: relative;
 }
 dialog.preview-dialog::backdrop { background: rgb(17 24 32 / 55%); }
 dialog.preview-dialog h2 { margin: 0 2rem var(--space-2) 0; font-size: var(--fs-1); }
 dialog.preview-dialog img {
-  display: block; width: 100%; height: auto; border: 1px solid var(--line-soft);
+  display: block; width: 100%; max-width: 480px; height: auto; margin-inline: auto;
+  border: 1px solid var(--line-soft);
   border-radius: var(--radius-sm); background: var(--paper);
 }
 dialog.preview-dialog p { margin: var(--space-2) 0; }
