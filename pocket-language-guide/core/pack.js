@@ -28,6 +28,18 @@ export async function loadCorpus(loadText) {
   const paper = index(await read('data/registry/paper.csv'), 'preset_id');
   const regions = index(await read('data/registry/regions.csv'), 'iso3166');
   const sectionRows = await read('data/registry/sections.csv');
+  // How many concepts each language actually has rows for. `status` in the
+  // registry is an editorial intent ("we mean to do Spanish"); this is the fact,
+  // and it is what decides whether a language can be offered as a target or a
+  // gloss. The two used to be conflated, so the studio offered Spanish glosses
+  // and then 404ed on every data/lang/es file and rendered a blank sheet.
+  const coverage = JSON.parse(await loadText('data/coverage.json'));
+  // Which (target, source, accent) triples someone has hand-curated respellings
+  // for. Most have none, so knowing the list up front avoids asking for files that
+  // were never written.
+  const respellOverrides = new Set(
+    /** @type {string[]} */ (JSON.parse(await loadText('data/respell/overrides/index.json'))),
+  );
   sectionRows.sort((a, b) => Number(a.rank) - Number(b.rank));
 
   const groups = [...new Set(sectionRows.map((s) => s.group))];
@@ -41,6 +53,8 @@ export async function loadCorpus(loadText) {
   return {
     scripts,
     languages,
+    coverage,
+    respellOverrides,
     paper,
     regions,
     sections: sectionRows,
@@ -49,6 +63,21 @@ export async function loadCorpus(loadText) {
     conceptsByGroup,
     concepts: index(Object.values(conceptsByGroup).flat(), 'concept_id'),
   };
+}
+
+/**
+ * Whether a language has enough rows to render a sheet from. A handful of stray
+ * rows is not a language pack, so this asks for a real fraction of the bank.
+ *
+ * This is the one place that decides, because the registry's `status` column is
+ * editorial intent and had been standing in for the fact: the studio offered
+ * Spanish glosses, 404ed on all fifteen data files, and rendered a blank sheet
+ * without saying anything.
+ * @param {{total:number, languages:Record<string,number>}} coverage
+ * @param {string} bcp47
+ */
+export function hasContent(coverage, bcp47) {
+  return (coverage.languages[bcp47] ?? 0) >= coverage.total * 0.25;
 }
 
 /**
@@ -73,12 +102,21 @@ export async function loadLanguage(loadText, bcp47, groups) {
 }
 
 /**
+ * Path of the curated respelling file for a triple. `corpus.respellOverrides` says
+ * whether it exists.
+ * @param {string} target @param {string} source @param {string} accent
+ */
+export function respellOverrideFile(target, source, accent) {
+  return `data/respell/overrides/${target}__${source}__${accent}.csv`;
+}
+
+/**
  * Hand-curated respellings for one (target, source, accent) triple. Sparse by
- * design: the transducer covers the rest.
+ * design: most pairs have none, and the transducer covers the rest.
  * @param {LoadText} loadText @param {string} target @param {string} source @param {string} accent
  */
 export async function loadRespellOverrides(loadText, target, source, accent) {
-  const rel = `data/respell/overrides/${target}__${source}__${accent}.csv`;
+  const rel = respellOverrideFile(target, source, accent);
   /** @type {Record<string,string>} */ const out = {};
   try {
     for (const row of parseTable(await loadText(rel), rel)) out[row.concept_id] = row.respell;

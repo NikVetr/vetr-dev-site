@@ -5,7 +5,7 @@
 
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
-  pairFromQuery, readerLanguage, showFatal,
+  pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy,
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { defaultSelection } from '../core/pack.js';
@@ -29,8 +29,8 @@ const AUDIENCES = [
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
 async function main() {
-  const languages = await loadLanguages();
-  const choice = pairFromQuery(new URLSearchParams(location.search), readerLanguage(languages));
+  const { languages, coverage } = await loadLanguages();
+  const choice = pairFromQuery(new URLSearchParams(location.search), readerLanguage(languages, coverage));
   const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
@@ -158,7 +158,7 @@ async function main() {
   };
 
   $('controls').replaceChildren(
-    panelField('Card', [card.group]),
+    panelField('Card size', [card.group]),
     panelField('Typeface', [typeface.group]),
     panelField('Row spacing', [density.group]),
     panelField('Ink', [ink.group]),
@@ -177,13 +177,15 @@ async function main() {
     })),
     onChange: (value) => { dpi = value; },
   });
-  $('dpi-control').append(dpiControl.group);
+  // Labelled like every other control on the page; three bare glyph buttons under
+  // the export row read as decoration rather than as a setting.
+  $('dpi-control').append(panelField('PNG resolution', [dpiControl.group]));
 
   // --- solving and export -------------------------------------------------
 
   async function refresh() {
     $('status').dataset.busy = '1';
-    await new Promise((r) => setTimeout(r, 0));
+    await afterPaint();
     manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface);
     const built = await buildSheet(ctx, spec);
     plan = built.plan;
@@ -228,11 +230,13 @@ async function main() {
     };
   };
 
-  $('pdf').addEventListener('click', () => exportPdf(input(), {
-    title: `${target.exonym_en} pocket guide`, language: choice.source,
-  }).catch(showFatal));
-  $('png').addEventListener('click', () => exportPng(input(), dpi).catch(showFatal));
-  $('svg').addEventListener('click', () => exportSvg(input()).catch(showFatal));
+  $('pdf').addEventListener('click', () => withBusy($('pdf'), 'Building PDF…', () => exportPdf(
+    input(), { title: `${target.exonym_en} pocket guide`, language: choice.source },
+  )).catch(showFatal));
+  $('png').addEventListener('click', () => withBusy($('png'), 'Rendering…',
+    (onProgress) => exportPng({ ...input(), onProgress }, dpi)).catch(showFatal));
+  $('svg').addEventListener('click', () => withBusy($('svg'), 'Building SVG…',
+    () => exportSvg(input())).catch(showFatal));
 
   await refresh();
 }

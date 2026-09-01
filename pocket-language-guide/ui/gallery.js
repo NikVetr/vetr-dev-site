@@ -102,6 +102,15 @@ function card(lang, packs, reader, coverage) {
 const COLLAGE_DEPTH = 5;
 
 /**
+ * The ends of the fade. These are words, not texture: `--muted` at the 0.16 the
+ * ramp used to bottom out at composites to 1.3:1 on the header's white, which
+ * looks like a rendering fault rather than type. 0.62 holds 3.28:1 and, with the
+ * size ramp, still sits plainly behind the lead.
+ */
+const FAINTEST = 0.62;
+const NEAREST = 0.9;
+
+/**
  * The picker's label as a collage: the reader's own language at full strength, the
  * others receding behind it. Nothing moves -- a header that animates on its own is
  * a distraction on a page you came to read -- but it still says "this is where you
@@ -115,6 +124,7 @@ function renderSpeakCollage(languages, reader) {
   const usable = languages.filter((l) => l.speak_label);
   const mine = usable.find((l) => l.bcp47 === reader);
   const others = usable.filter((l) => l.bcp47 !== reader).slice(0, COLLAGE_DEPTH);
+  const fade = (NEAREST - FAINTEST) / Math.max(1, COLLAGE_DEPTH - 1);
 
   /** @param {Record<string,string>} lang @param {number} depth */
   const chip = (lang, depth) => {
@@ -126,8 +136,12 @@ function renderSpeakCollage(languages, reader) {
     // Each step back is fainter and slightly smaller, so the eye lands on the
     // reader's own first and reads the rest as context rather than as a list.
     if (depth > 0) {
-      span.style.opacity = String(Math.max(0.14, 0.52 - (depth - 1) * 0.09));
+      span.style.opacity = String(Math.max(FAINTEST, NEAREST - (depth - 1) * fade));
       span.style.fontSize = `${Math.max(0.66, 0.86 - (depth - 1) * 0.04)}rem`;
+      // The repetitions say "many languages" by repeating one idea, so they are
+      // decoration. Left exposed they became the <select>'s accessible name, which
+      // announced five translations of "I speak" before naming the control.
+      span.setAttribute('aria-hidden', 'true');
     }
     return span;
   };
@@ -140,10 +154,8 @@ function renderSpeakCollage(languages, reader) {
 
 async function main() {
   registerOffline();
-  const languages = await loadLanguages();
-  const reader = readerLanguage(languages);
-
-  const coverage = JSON.parse(await loadText('data/coverage.json'));
+  const { languages, coverage } = await loadLanguages();
+  const reader = readerLanguage(languages, coverage);
 
   /** @type {Set<string>} */ let packs = new Set();
   try {

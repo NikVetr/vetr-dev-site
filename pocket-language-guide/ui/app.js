@@ -5,6 +5,7 @@
 // corpus or a CJK font; the studio loads everything.
 
 import { parseTable } from '../core/csv.js';
+import { hasContent, respellOverrideFile } from '../core/pack.js';
 import { createSheetContext, stacksFor } from '../core/sheet.js';
 import { fontFaceCss } from '../render/fonts.js';
 
@@ -28,19 +29,27 @@ export function browserSheetContext() {
   return createSheetContext({ loadText, loadBytes });
 }
 
-/** Just the language registry, for pages that need nothing else. */
+/**
+ * The language registry together with how many rows each language actually has.
+ * Pages need both: `status` says what we mean to do, coverage says what is on
+ * file, and only the second one may decide what to offer.
+ */
 export async function loadLanguages() {
-  const rows = parseTable(await loadText('data/registry/languages.csv'), 'languages.csv');
-  return rows;
+  return {
+    languages: parseTable(await loadText('data/registry/languages.csv'), 'languages.csv'),
+    coverage: JSON.parse(await loadText('data/coverage.json')),
+  };
 }
 
 /**
  * The reader's own language: a saved choice, else the best match from the
- * browser, else English. Only languages we can actually gloss into are offered.
+ * browser, else English. Only languages we can actually gloss into are offered --
+ * a Spanish browser used to land on a target we have no Spanish rows for.
  * @param {Record<string,string>[]} languages
+ * @param {{total:number, languages:Record<string,number>}} coverage
  */
-export function readerLanguage(languages) {
-  const usable = new Set(languages.filter((l) => l.status !== 'planned').map((l) => l.bcp47));
+export function readerLanguage(languages, coverage) {
+  const usable = new Set(languages.filter((l) => hasContent(coverage, l.bcp47)).map((l) => l.bcp47));
   const saved = localStorage.getItem(READER_KEY);
   if (saved && usable.has(saved)) return saved;
   for (const tag of navigator.languages ?? []) {
@@ -140,6 +149,39 @@ export function pairFromQuery(params, fallbackSource) {
   };
 }
 
+/** Resolve once the browser has actually painted. */
+export function afterPaint() {
+  // A `setTimeout(0)` does not do this: macrotasks run before the next frame, so a
+  // busy indicator set immediately before a long synchronous solve never reached
+  // the screen -- measured as a full second with no repaint at all. Two frames:
+  // one to run our callback, the next to guarantee the first one's paint landed.
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => requestAnimationFrame(() => resolve(null)));
+  });
+}
+
+/**
+ * Run a slow button action with the button visibly out of service. A 600dpi
+ * six-face export takes seconds, and the only previous feedback was that nothing
+ * appeared to happen.
+ * @param {HTMLElement} button
+ * @param {string} label            shown while it runs
+ * @param {(onProgress:(done:number,total:number)=>void)=>Promise<void>} run
+ */
+export async function withBusy(button, label, run) {
+  const target = /** @type {HTMLButtonElement} */ (button);
+  const original = target.textContent;
+  target.disabled = true;
+  target.textContent = label;
+  await afterPaint();
+  try {
+    await run((done, total) => { target.textContent = `${label} ${done}/${total}`; });
+  } finally {
+    target.disabled = false;
+    target.textContent = original;
+  }
+}
+
 /** Trigger a download without leaving the page. @param {Blob} blob @param {string} name */
 export function download(blob, name) {
   const url = URL.createObjectURL(blob);
@@ -176,7 +218,12 @@ export async function saveForOffline({ corpus, target, source, manifest }) {
     urls.push(`data/lang/${target}/${group}.csv`);
     urls.push(`data/lang/${source}/${group}.csv`);
   }
-  urls.push(`data/respell/overrides/${target}__${source}__${source}-US.csv`);
+  // Only the curated files that exist: asking for one that was never written made
+  // the worker report a partial save and the button stop at "Partly saved".
+  const accent = `${source}-US`;
+  if (corpus.respellOverrides.has(`${target}__${source}__${accent}`)) {
+    urls.push(respellOverrideFile(target, source, accent));
+  }
   for (const face of manifest.faces.filter((/** @type {any} */ f) => stacks.includes(f.stack))) {
     urls.push(`data/fonts/${face.file}.woff2`, `data/fonts/${face.file}.ttf`);
   }

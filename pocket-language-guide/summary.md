@@ -206,6 +206,12 @@ than failing: a serif sheet with one sans column is a compromise, a crash is not
 Noto Serif carries a width axis, so its dense tables get the same condensed
 treatment the sans ones do.
 
+Every stack a shipped language needs now has both variants, including
+`cjk-jp-serif` (Noto Serif JP), which was the one place the fallback was visible:
+choosing Serif with Japanese silently kept sans kanji. The fallback stays because
+it is the right behaviour for the next script somebody adds, not because anything
+currently relies on it.
+
 Subsetting a variable font requires pinning *every* axis. Leaving one free keeps
 `fvar` and `gvar` alive, and subsetting a partially-instanced font trips over
 glyphs `gvar` never carried.
@@ -297,6 +303,7 @@ artifacts, following the `ceo-salary-benchmark/scripts/` precedent:
 npm run vendor      # esbuild → vendor/{fontkit,pdf-lib}.esm.js  (rarely)
 npm run icons       # Lucide SVG → data/icons.json, normalised to path data
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
+npm run shell       # data/shell.json + the respell index + sw.js VERSION
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
 ```
 
@@ -321,8 +328,15 @@ rank column in every language file, which has not seemed worth it yet.
 Types are enforced without a build: JSDoc annotations plus `jsconfig.json` with
 `checkJs`, checked by `npm run check` (`tsc` emits nothing).
 
-`sw.js` precaches the shell; its `VERSION` constant must be bumped when a shell
-file changes, since there is no build step to do it automatically.
+`sw.js` precaches the shell, but it no longer carries the list. That list was
+hand-written and drifted immediately: seven modules were missing, so the studio
+would have failed with the network off — the one situation the app exists for.
+`npm run shell` derives it from what is on disk into `data/shell.json`, sets
+`VERSION` to a content hash of those files so a deploy re-primes the cache with no
+one remembering to bump anything, and writes
+`data/respell/overrides/index.json` — the list of hand-curated respelling files,
+so the app stops asking for triples nobody wrote. `npm run check` runs the same
+script with `--check`, which fails if either file is stale.
 
 ## Testing
 
@@ -353,8 +367,6 @@ Named so nobody has to rediscover the gap:
   `data/coverage.json` rather than the declared status, so they never offer a
   button that would yield an empty sheet. No single language covers the whole bank
   (Mandarin 86%, Japanese 88%), which is why completeness is not an error.
-- **A serif Japanese face.** `cjk-jp-serif` is not shipped, so a serif Japanese
-  sheet falls back to the sans face for its Japanese columns.
 - **Emergency numbers for most countries.** 14 of 49 regions are marked reviewed;
   the rest carry plausible numbers at `confidence: 1` so a reviewer has something
   to check rather than research from scratch, and are withheld from sheets until

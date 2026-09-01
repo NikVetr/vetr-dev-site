@@ -93,7 +93,11 @@ export async function buildSheet(ctx, spec, edits) {
   const theme = await ctx.theme(spec.themeId);
   const targetRows = await loadLanguage(loadText, spec.target, corpus.groups);
   const sourceRows = await loadLanguage(loadText, spec.source, corpus.groups);
-  const respell = await loadRespellOverrides(loadText, spec.target, spec.source, spec.accent);
+  // A pair with no curated respellings is the normal case, not a failure, so do
+  // not ask the network for a file the index says was never written.
+  const respell = ctx.corpus.respellOverrides.has(`${spec.target}__${spec.source}__${spec.accent}`)
+    ? await loadRespellOverrides(loadText, spec.target, spec.source, spec.accent)
+    : {};
   const blocks = buildBlocks({ corpus, targetRows, sourceRows, respell, spec, edits });
   return {
     blocks,

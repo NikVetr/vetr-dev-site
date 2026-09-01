@@ -180,3 +180,17 @@ test.describe('studio', () => {
     await expect(page.locator('.items li', { hasText: 'Hi there' })).toHaveCount(1);
   });
 });
+
+// Registry `status` is editorial intent; only rows on file decide what is offered.
+// Spanish and Arabic are registered with none, and offering them produced fifteen
+// 404s and a blank sheet that said nothing about why.
+test('the gloss menu offers only languages with rows on file', async ({ page }) => {
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+
+  const offered = await page.locator('#source option').evaluateAll((os) => os.map((o) => o.value));
+  expect(offered).toContain('ja');
+  expect(offered).not.toContain('es');
+  expect(offered).not.toContain('ar');
+  expect(offered).not.toContain('zh-Hans');   // it is the target
+});

@@ -6,7 +6,7 @@
 
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
-  pairFromQuery, readerLanguage, showFatal,
+  pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy,
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { contentBox } from '../core/solve/index.js';
@@ -31,8 +31,8 @@ const THEME_IDS = ['latex-reference', 'cvd-safe'];
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
 async function main() {
-  const languages = await loadLanguages();
-  const choice = pairFromQuery(new URLSearchParams(location.search), readerLanguage(languages));
+  const { languages, coverage } = await loadLanguages();
+  const choice = pairFromQuery(new URLSearchParams(location.search), readerLanguage(languages, coverage));
   const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
@@ -121,7 +121,7 @@ async function main() {
   async function solve() {
     $('status').dataset.busy = '1';
     // Yield so the busy state paints before the solver takes the main thread.
-    await new Promise((r) => setTimeout(r, 0));
+    await afterPaint();
 
     manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface);
     built = await buildSheet(ctx, spec, edits);
@@ -257,9 +257,10 @@ async function main() {
       return;
     }
 
+    // "Click" would now be wrong: both are keyboard actions too.
     $('canvas-note').textContent = focused === null
-      ? 'Click a face to work on it'
-      : 'Click a row to find it in the content list';
+      ? 'Choose a face to work on it'
+      : 'Choose a row to find it in the content list';
     renderFaces({
       root: $('face-area'),
       plan,
@@ -408,12 +409,17 @@ async function main() {
     };
   };
 
-  $('pdf').addEventListener('click', () => exportPdf(exportInput(), {
-    title: `${ctx.corpus.languages[spec.target].exonym_en} pocket guide`,
-    language: spec.source,
-  }).catch(showFatal));
-  $('png').addEventListener('click', () => exportPng(exportInput(), pngDpi).catch(showFatal));
-  $('svg').addEventListener('click', () => exportSvg(exportInput()).catch(showFatal));
+  $('pdf').addEventListener('click', () => withBusy($('pdf'), 'Building PDF…', () => exportPdf(
+    exportInput(),
+    {
+      title: `${ctx.corpus.languages[spec.target].exonym_en} pocket guide`,
+      language: spec.source,
+    },
+  )).catch(showFatal));
+  $('png').addEventListener('click', () => withBusy($('png'), 'Rendering…',
+    (onProgress) => exportPng({ ...exportInput(), onProgress }, pngDpi)).catch(showFatal));
+  $('svg').addEventListener('click', () => withBusy($('svg'), 'Building SVG…',
+    () => exportSvg(exportInput())).catch(showFatal));
 
   $('csv-out').addEventListener('click', () => {
     exportSheetCsv({ corpus: ctx.corpus, blocks, spec, edits, name: name() });

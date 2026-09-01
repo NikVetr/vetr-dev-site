@@ -7,6 +7,7 @@
 // Most choices here are about shape, so they are drawn rather than described. Only
 // the genuinely list-shaped ones (paper, language, romanisation) stay as menus.
 
+import { hasContent } from '../core/pack.js';
 import { ARRANGEMENTS, arrangementShape } from '../core/solve/arrange.js';
 import { flagEmoji, flagsSupported } from './flags.js';
 import {
@@ -300,10 +301,13 @@ export function createFormatPanel(input) {
     (value) => input.onChange({ paper: paperSpec(corpus, value) }),
   );
 
+  // Only languages with rows on file, not every language the registry lists as
+  // planned or drafted: offering a gloss language with no data produced a blank
+  // sheet and fifteen 404s, and said nothing about why.
   const source = menu(
     'source', 'Glossed into',
     languages
-      .filter((l) => l.status !== 'planned' && l.bcp47 !== spec.target)
+      .filter((l) => l.bcp47 !== spec.target && hasContent(corpus.coverage, l.bcp47))
       .map((l) => ({ value: l.bcp47, text: `${l.endonym} (${l.exonym_en})` })),
     spec.source,
     (value) => emit({ source: value, accent: `${value}-US` }),
