@@ -22,16 +22,20 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "tmp" / "fonts-src"
 OUT = ROOT / "data" / "fonts"
 
-# Latin, IPA extensions, combining marks, general punctuation, currency.
-#
-# Cyrillic and Latin Extended Additional are here rather than left to the corpus
-# union because the add-your-own-term editor lets someone type a word the corpus
-# never contained, offline, with no font left to fall back to. Russian needs the
-# first block and Vietnamese the second, and between them they cost about 20KB a
-# face -- cheap next to a reader finding tofu in the one row they wrote themselves.
+# Latin, IPA extensions, combining marks, general punctuation, currency. Every
+# stack gets these: the gloss column is Latin whatever the target script is.
 LATIN_RANGES = [(0x20, 0x24F), (0x250, 0x2AF), (0x2B0, 0x2FF), (0x300, 0x36F),
-                (0x400, 0x4FF), (0x1E00, 0x1EFF),
                 (0x2000, 0x206F), (0x20A0, 0x20BF), (0x2100, 0x214F), (0x2190, 0x21FF)]
+# Cyrillic and Latin Extended Additional, for the `latin` stacks only.
+#
+# These are here rather than left to the corpus union because the add-your-own-term
+# editor lets someone type a word the corpus never contained, offline, with no font
+# left to fall back to. Russian needs the first block and Vietnamese the second, and
+# together they cost about 16KB a face. They are kept off the CJK and Arabic stacks
+# because `scripts.csv` routes Cyrillic and Vietnamese to `latin` -- a Mandarin card
+# glossed in Russian sets the Russian in the Latin face, so the CJK face would carry
+# 500 glyphs it can never be asked to draw, in the largest files here.
+LATIN_EXTRA_RANGES = [(0x400, 0x4FF), (0x1E00, 0x1EFF)]
 CJK_PUNCT = [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF)]
 KANA = [(0x3040, 0x30FF), (0x31F0, 0x31FF)]
 # Jamo, so a Hangul syllable that is stored decomposed still has parts to shape.
@@ -129,6 +133,8 @@ def corpus_chars(langs):
 
 def coverage(stack):
     chars = expand(LATIN_RANGES) | corpus_chars(STACK_LANGS[stack])
+    if stack.startswith("latin"):
+        chars |= expand(LATIN_EXTRA_RANGES)
     if stack in ("latin-cond", "latin-serif", "latin-cond-serif"):
         return chars
     if stack in ("cjk-sc", "cjk-sc-serif"):
