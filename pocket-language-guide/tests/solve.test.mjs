@@ -173,3 +173,14 @@ test('each field shrinks toward its own floor, not in lockstep', async () => {
   assert.ok(latin >= 4.4 - 0.01, `latin ${latin.toFixed(2)}pt below its 4.4pt floor`);
   assert.ok(japanese >= 5.0 - 0.01, `japanese ${japanese.toFixed(2)}pt below its 5.0pt floor`);
 });
+
+test('an empty selection reports itself instead of measuring as NaN', async () => {
+  /** @type {Record<string, boolean>} */ const off = {};
+  for (const s of ctx.corpus.sections) off[s.section_id] = false;
+  const { plan } = await buildSheet(ctx, {
+    ...spec, selection: { ...spec.selection, sections: off },
+  });
+  assert.ok(plan.looseness.every(Number.isFinite), `looseness ${plan.looseness}`);
+  assert.equal(plan.looseness.length, plan.geometry.faces * plan.geometry.columns);
+  assert.ok(plan.warnings.some((w) => w.code === 'nothing-selected'));
+});

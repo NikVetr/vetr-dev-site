@@ -33,7 +33,17 @@ const LAST_COLUMN_RELIEF = 0.15;
 export function breakColumns(atoms, height, bins) {
   const n = atoms.length;
   const empty = { columns: [], slack: [], cost: Infinity, failure: /** @type {string|null} */ (null) };
-  if (!n) return { ...empty, cost: 0, columns: [], slack: [] };
+  // No content is a valid assignment: every column is empty and entirely slack.
+  // Returning bare `[]` here instead made the caller read slack[bin] as undefined
+  // and report "NaNpt of whitespace" once every section was switched off.
+  if (!n) {
+    return {
+      columns: Array.from({ length: bins }, () => []),
+      slack: Array.from({ length: bins }, () => height),
+      cost: 0,
+      failure: null,
+    };
+  }
 
   const tooTall = atoms.findIndex((a) => a.height > height + 0.01);
   if (tooTall >= 0) {

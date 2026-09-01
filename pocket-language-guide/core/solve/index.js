@@ -219,6 +219,14 @@ export function layout(input) {
     blocks, theme, spec: { ...spec, geometry }, corpus, measurer, registry,
     colWidth: box.colWidth, scale, withPaint: true,
   });
+  if (!atoms.length) {
+    warnings.push({
+      code: 'nothing-selected',
+      severity: 'warn',
+      message: 'Nothing is selected, so the sheet is blank. Switch a section back on '
+        + 'in the content panel.',
+    });
+  }
   const broken = breakColumns(atoms, box.height, bins);
   if (broken.failure) {
     // Only speak once. The no-fit warning above already explains this in the
@@ -276,7 +284,7 @@ export function layout(input) {
   }
 
   const loose = looseness.filter((r) => r > box.height * LOOSE_FRACTION).length;
-  if (loose) {
+  if (loose && atoms.length) {
     warnings.push({
       code: 'loose-columns',
       severity: 'info',
