@@ -66,6 +66,16 @@ what you download.
 `core/sheet.js` is the single entry point that wires corpus, fonts, measurer,
 theme, join and solve together. Going around it is how you forget to load a font.
 
+A solve costs 0.4-2.0s depending on the pair, and two things keep it there as the
+corpus grows. Atoms are memoised by scale, because they depend on the type scale
+and the column width but not on how many columns there are — so every candidate
+face count can share them. And the face search asks "does the comfort threshold
+fit?" rather than running a whole fit search per candidate: those are the same
+question, since the fitted scale is the largest one that fits and fitting is
+monotone in scale. One measurement instead of a search, at the same scale every
+time. Together they took the fully translated Japanese sheet from 3.4s to 1.9s
+with byte-identical output.
+
 ### Why fontkit for measurement
 
 The solver needs advance widths; the PDF needs glyph ids. Both come from the same
@@ -250,6 +260,23 @@ the one place the coding *was* colour alone. Those five are level-2 headings, wh
 the reference sheet prints without a mark, so their icons appear in the studio and
 not on the page.
 
+### Right-to-left
+
+Arabic is the first RTL target, and it found two things.
+
+`paintField` walked pieces left-to-right regardless of direction, so every
+multi-word Arabic phrase printed with its words in the wrong order — "as-salām
+ʿalaykum" came out as "ʿalaykum as-salām". An RTL line starts at its right edge,
+and because a piece's trailing space sits to the *left* of its word, the ink is
+flushed to the right of its advance box rather than the left.
+
+The renderers also disagreed about what `run.x` meant: SVG's `direction="rtl"`
+anchors text at its right edge, pdf-lib anchors at the left. One plan, two
+drawings — which defeats the point of having a plan. `run.x` is the left edge in
+both now, and dropping the attribute also stops SVG reversing a numeral piece.
+
+What is *not* handled is bidi proper; see "Deliberately not built yet".
+
 ### The keyboard contract
 
 The app was effectively mouse-only: eleven segmented controls declared
@@ -348,6 +375,7 @@ artifacts, following the `ceo-salary-benchmark/scripts/` precedent:
 npm run vendor      # esbuild → vendor/{fontkit,pdf-lib}.esm.js  (rarely)
 npm run icons       # Lucide SVG → data/icons.json, normalised to path data
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
+                    #   thumbnails only, one per pair: 56 pairs in 7.2MB
 npm run shell       # data/shell.json + the respell index + sw.js VERSION
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
 ```
@@ -358,12 +386,57 @@ python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts
 they document where every row came from.
 
 Merging is the data model earning its keep. The Japanese sheet contributed 366
-rows: 312 matched concepts that already existed and 54 were new, so the bank is
-413 concepts and **six** language pairs render — including `zh-Hans ← ja` and
-`ja ← zh-Hans`, which nobody wrote. Matching is on a normalised English gloss,
-against the exact section first and then its group, because two sheets can file
-the same phrase under different panels ("Can I charge my phone?" is hotel basics
-in one and hotel requests in the other).
+rows: 312 matched concepts that already existed and 54 were new. Matching is on a
+normalised English gloss, against the exact section first and then its group,
+because two sheets can file the same phrase under different panels ("Can I charge
+my phone?" is hotel basics in one and hotel requests in the other).
+
+The bank is now **751 concepts across 57 sections in eight languages**, which is
+**56 ordered pairs** — every one of which renders, and only eight of which anyone
+wrote a sheet for. That ratio is the whole argument for joining on `concept_id`
+instead of storing pairs.
+
+The expansion past the two hand-built sheets was done by ten agents: three
+designing new content against non-overlapping scopes, then one per language
+translating the whole bank. Two details of that are worth keeping.
+
+First, the gaps were concrete. "Toilet" appeared **zero** times in the original
+413 concepts. Pharmacy and police had one phrase each. `directions` had four items
+at importance 0.94. There was nothing about obtaining money, crossing a border,
+accessibility, or what to say to police to get a report an insurer will accept.
+
+Second, external verification changed the wording rather than confirming it, which
+is why it was worth doing: dispatchers are trained on "anaphylaxis" and not
+"severe allergic reaction", and the equivalent term differs from the clinical one
+in every language; German `Meeresfrüchte` excludes fish, so "no seafood" has to
+enumerate or it is a potentially fatal allergy mistranslation; Arabic `لبن` is milk
+in Egypt and yoghurt in the Levant; Spanish `coger` is obscene across most of Latin
+America; Korean `간질` was replaced in law and now carries stigma; and tipping
+questions ask what is customary rather than how much, because in Japan, China and
+Korea the answer is "nothing".
+
+### Concepts that are not universal
+
+Two columns keep a growing bank from wrecking the sheets it feeds.
+
+`applies_to` on a concept limits it to particular targets. The bank was seeded from
+Chinese and then Japanese sheets, so Chinese measure words, the yuan, Japanese
+counters, a Chinese land-use category and "please write it in Roman letters"
+arrived dressed as universal entries — and the Spanish sheet printed all of them.
+Four translation agents flagged it independently before it was fixed.
+
+Four concepts went further and hardcoded a language *name*: "I do not speak
+Chinese" and "I do not speak Japanese" were separate entries. Invisible with two
+languages, since each sheet carried only its own; with eight, the Spanish sheet
+printed both. They are now one concept each, glossed "I do not speak this
+language", and every pack renders it self-referentially. Before the merge the
+Korean sheet had no way to say "I do not speak Korean" at all.
+
+`default_on: 0` on a *section* keeps it off the default card while leaving it one
+click away. A pocket sheet holds less than the corpus does, and it should: seven of
+the thirteen new sections are things a traveler needs once (customs, buying a SIM)
+or only if they apply to them (chronic medication, children, accessibility). The
+onboarding quiz turns them on from `audience_tags`.
 
 One consequence worth knowing: for a concept both sheets carry, the row order
 comes from whichever sheet was ported first. Order within a section is authored
@@ -425,13 +498,23 @@ For a print artifact, refusing beats printing something subtly wrong.
 
 Named so nobody has to rediscover the gap:
 
-- **Corpus beyond Mandarin and Japanese.** By design: the content track is
-  separate, so this ships schemas, validators, confidence gating, agent prompt
-  templates and two real corpora, and leaves bulk generation to run against a
-  frozen schema. `es` and `ar` are registered with no rows; the gallery reads
-  `data/coverage.json` rather than the declared status, so they never offer a
-  button that would yield an empty sheet. No single language covers the whole bank
-  (Mandarin 86%, Japanese 88%), which is why completeness is not an error.
+- **Corpus beyond the eight shipped languages.** Portuguese, Hindi, Thai, Russian,
+  Indonesian, Swahili, Turkish and Vietnamese are registered with no rows. Nothing
+  offers them: `hasContent` reads `data/coverage.json` rather than the declared
+  status, so a language with no data cannot be picked as a target or a gloss, and
+  the gallery shows it as "help translate".
+- **Digits inside right-to-left text.** The renderer shapes a run right-to-left as
+  a whole and nothing here implements the bidi algorithm's rule that digits stay
+  left-to-right inside it, so Arabic-Indic `١٠` printed as `٠١` and `١/٢` as `٢/١`.
+  The validator now refuses more than one digit in an RTL row and says why; the
+  five Arabic numeral rows carry the spelled-out word with the numeral in
+  `text_alt`, which is what its translator proposed. Fixing it properly means
+  splitting a piece into bidi runs, which changes measurement, so it is deferred
+  rather than hidden.
+- **Gendered self-description.** Arabic rows use the masculine singular, and
+  Spanish and German prefer genderless constructions where one exists and `/a`
+  where it does not. Encoding both would double the corpus for a card that has no
+  room for it.
 - **Emergency numbers for most countries.** 14 of 49 regions are marked reviewed;
   the rest carry plausible numbers at `confidence: 1` so a reviewer has something
   to check rather than research from scratch, and are withheld from sheets until
