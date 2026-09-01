@@ -111,6 +111,10 @@ def main():
         errors.append("no concepts found at all")
 
     for code in ready + partial:
+        # Whether this language reads right to left, which decides whether a digit
+        # in its text is a bidi hazard.
+        lang = languages.get(code, {})
+        rtl = scripts.get(lang.get("script", ""), {}).get("direction") == "rtl"
         seen = set()
         for group in groups:
             rel = f"lang/{code}/{group}.csv"
@@ -143,6 +147,16 @@ def main():
                     errors.append(f"{rel}: {cid} is a note and prints in the source "
                                   f"face, but quotes non-Latin text ({quoted}), which "
                                   f"will render as tofu. Romanise it.")
+                # A right-to-left row carrying more than one digit will print with
+                # the digits reversed -- 10 as 01, 1/2 as 2/1. The renderer shapes
+                # a run right-to-left as a whole and nothing here implements the
+                # bidi algorithm's rule that digits stay left-to-right inside an
+                # RTL run, so the data has to keep them apart. Spell the number out
+                # and put the numeral in text_alt.
+                if rtl and sum(c.isdigit() for c in text) > 1:
+                    errors.append(f"{rel}: {cid} is right-to-left and holds more than "
+                                  f"one digit ({text!r}), which will print reversed. "
+                                  "Spell it out and move the numeral to text_alt.")
                 section = concepts[cid]["section_id"]
                 if section in SAFETY_CRITICAL:
                     try:

@@ -1,8 +1,8 @@
-concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
-attractions-tickets.where-can-i-buy-tickets,attractions-tickets,entry,phrase,where-can-i-buy-tickets,1,0.700,attractions-tickets.where-can-i-buy-tickets,0,0,neutral,
-attractions-tickets.do-i-need-a-reservation,attractions-tickets,entry,phrase,do-i-need-a-reservation,2,0.665,attractions-tickets.do-i-need-a-reservation,0,0,neutral,
-attractions-tickets.what-is-the-latest-entry-time,attractions-tickets,entry,phrase,what-is-the-latest-entry-time,3,0.630,attractions-tickets.what-is-the-latest-entry-time,0,0,neutral,
-attractions-tickets.are-there-lockers,attractions-tickets,entry,phrase,are-there-lockers,4,0.595,attractions-tickets.are-there-lockers,0,0,neutral,
-attractions-tickets.may-i-take-photos,attractions-tickets,entry,phrase,may-i-take-photos,5,0.560,attractions-tickets.may-i-take-photos,0,0,neutral,
-attractions-tickets.please-take-a-photo-of-us,attractions-tickets,entry,phrase,please-take-a-photo-of-us,6,0.525,attractions-tickets.please-take-a-photo-of-us,0,0,neutral,
-attractions-tickets.could-you-take-a-photo-for-us,attractions-tickets,entry,phrase,could-you-take-a-photo-for-us,1006,0.595,attractions-tickets.could-you-take-a-photo-for-us,0,0,neutral,
+concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,applies_to,notes
+attractions-tickets.where-can-i-buy-tickets,attractions-tickets,entry,phrase,where-can-i-buy-tickets,1,0.700,attractions-tickets.where-can-i-buy-tickets,0,0,neutral,,
+attractions-tickets.do-i-need-a-reservation,attractions-tickets,entry,phrase,do-i-need-a-reservation,2,0.665,attractions-tickets.do-i-need-a-reservation,0,0,neutral,,
+attractions-tickets.what-is-the-latest-entry-time,attractions-tickets,entry,phrase,what-is-the-latest-entry-time,3,0.630,attractions-tickets.what-is-the-latest-entry-time,0,0,neutral,,
+attractions-tickets.are-there-lockers,attractions-tickets,entry,phrase,are-there-lockers,4,0.595,attractions-tickets.are-there-lockers,0,0,neutral,,
+attractions-tickets.may-i-take-photos,attractions-tickets,entry,phrase,may-i-take-photos,5,0.560,attractions-tickets.may-i-take-photos,0,0,neutral,,
+attractions-tickets.please-take-a-photo-of-us,attractions-tickets,entry,phrase,please-take-a-photo-of-us,6,0.525,attractions-tickets.please-take-a-photo-of-us,0,0,neutral,,
+attractions-tickets.could-you-take-a-photo-for-us,attractions-tickets,entry,phrase,could-you-take-a-photo-for-us,1006,0.595,attractions-tickets.could-you-take-a-photo-for-us,0,0,neutral,,

@@ -1,53 +1,53 @@
-concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
-laundry.please-wash-these-clothes,laundry,refphrase,phrase,please-wash-these-clothes,1,0.420,laundry.please-wash-these-clothes,0,0,neutral,
-laundry.where-is-a-laundromat,laundry,refphrase,phrase,where-is-a-laundromat,2,0.400,laundry.laundromat,0,0,neutral,"US 'laundromat', UK 'launderette'; give the local shop name."
-laundry.when-will-it-be-ready,laundry,refphrase,phrase,when-will-it-be-ready,3,0.390,laundry.ready,0,0,neutral,
-laundry.how-much-per-kilo,laundry,refphrase,phrase,how-much-per-kilo,4,0.370,laundry.how-much-per-kilo,0,0,neutral,Wash-and-fold is priced by weight in most of Asia and Latin America.
-laundry.can-it-be-ready-today,laundry,refphrase,phrase,can-it-be-ready-today,5,0.360,laundry.ready,1,0,neutral,
-laundry.please-do-not-use-bleach,laundry,refphrase,phrase,please-do-not-use-bleach,6,0.350,laundry.please-do-not-use-bleach,0,0,neutral,
-laundry.laundromat,laundry,ref,word,laundromat,7,0.340,laundry.laundromat,1,0,neutral,
-laundry.please-iron-this,laundry,refphrase,phrase,please-iron-this,8,0.330,laundry.please-iron-this,0,0,neutral,
-laundry.detergent,laundry,ref,word,detergent,9,0.320,laundry.detergent,0,0,neutral,
-laundry.dry-cleaning,laundry,ref,word,dry-cleaning,10,0.310,laundry.dry-cleaning,0,0,neutral,
-laundry.dryer,laundry,ref,word,dryer,11,0.300,laundry.dryer,0,0,neutral,
-laundry.coin-operated,laundry,ref,word,coin-operated,12,0.280,laundry.coin-operated,0,0,neutral,Sign on self-service machines.
-hotel-words.passport,hotel-words,ref,word,passport,1,0.640,hotel-words.passport,0,0,neutral,
-hotel-words.room-key-card,hotel-words,ref,word,room-key-card,2,0.587,hotel-words.room-key-card,0,0,neutral,
-hotel-words.check-in,hotel-words,ref,word,check-in,3,0.533,hotel-words.check-in,0,0,neutral,
-hotel-words.check-out,hotel-words,ref,word,check-out,4,0.480,hotel-words.check-out,0,0,neutral,
-hotel-words.luggage-storage,hotel-words,ref,word,luggage-storage,1005,0.544,hotel-words.luggage-storage,0,0,neutral,
-hotel-basics.are-any-rooms-available,hotel-basics,entry,phrase,are-any-rooms-available,1,0.760,hotel-basics.are-any-rooms-available,0,0,neutral,
-hotel-basics.there-are-two-of-us,hotel-basics,entry,phrase,there-are-two-of-us,2,0.728,hotel-basics.there-are-two-of-us,0,0,neutral,
-hotel-basics.i-have-a-reservation,hotel-basics,entry,phrase,i-have-a-reservation,3,0.697,hotel-basics.i-have-a-reservation,0,0,neutral,
-hotel-basics.can-i-charge-my-phone,hotel-basics,entry,phrase,can-i-charge-my-phone,4,0.665,hotel-basics.can-i-charge-my-phone,0,0,neutral,
-hotel-basics.i-would-like-a-non-smoking-room,hotel-basics,entry,phrase,i-would-like-a-non-smoking-room,5,0.633,hotel-basics.i-would-like-a-non-smoking-room,0,0,neutral,
-hotel-basics.i-would-like-a-quiet-room,hotel-basics,entry,phrase,i-would-like-a-quiet-room,6,0.602,hotel-basics.i-would-like-a-quiet-room,0,0,neutral,
-hotel-basics.is-there-a-washing-machine,hotel-basics,entry,phrase,is-there-a-washing-machine,7,0.570,hotel-basics.is-there-a-washing-machine,0,0,neutral,
-hotel-basics.is-wi-fi-free,hotel-basics,entry,phrase,is-wi-fi-free,1004,0.646,hotel-basics.is-wi-fi-free,0,0,neutral,
-hotel-basics.how-much-per-night,hotel-basics,entry,phrase,how-much-per-night,1005,0.745,hotel-basics.price,0,0,neutral,
-hotel-basics.is-breakfast-included,hotel-basics,entry,phrase,is-breakfast-included,1006,0.710,hotel-basics.breakfast,0,0,neutral,
-hotel-basics.may-i-see-the-room,hotel-basics,entry,phrase,may-i-see-the-room,1007,0.680,hotel-basics.view-room,0,0,polite,Normal and expected at walk-in guesthouses in much of the world.
-hotel-basics.for-nights,hotel-basics,entry,template,for-nights,1008,0.655,hotel-basics.nights,0,1,neutral,Slot is a number of nights.
-hotel-basics.two-beds,hotel-basics,entry,phrase,two-beds,1009,0.620,hotel-basics.beds,0,0,neutral,Asks for two separate beds rather than one double.
-hotel-basics.is-there-air-conditioning,hotel-basics,entry,phrase,is-there-air-conditioning,1010,0.590,hotel-basics.climate,0,0,neutral,
-hotel-requests.can-i-check-out-later,hotel-requests,entry,phrase,can-i-check-out-later,1,0.580,hotel-requests.can-i-check-out-later,0,0,neutral,
-hotel-requests.what-time-does-breakfast-start,hotel-requests,entry,phrase,what-time-does-breakfast-start,2,0.532,hotel-requests.what-time-does-breakfast-start,0,0,neutral,
-hotel-requests.can-i-store-my-luggage,hotel-requests,entry,phrase,can-i-store-my-luggage,3,0.483,hotel-requests.can-i-store-my-luggage,0,0,neutral,
-hotel-requests.no-housekeeping,hotel-requests,entry,phrase,no-housekeeping,4,0.435,hotel-requests.no-housekeeping,0,0,neutral,
-hotel-requests.another-towel-please,hotel-requests,entry,phrase,another-towel-please,1004,0.493,hotel-requests.another-towel-please,0,0,neutral,
-hotel-requests.what-time-is-check-out,hotel-requests,entry,phrase,what-time-is-check-out,1005,0.570,hotel-requests.checkout,0,0,neutral,
-hotel-requests.can-i-check-in-early,hotel-requests,entry,phrase,can-i-check-in-early,1006,0.545,hotel-requests.checkin,0,0,neutral,
-hotel-requests.another-night,hotel-requests,entry,phrase,another-night,1007,0.510,hotel-requests.extend,0,0,neutral,Extends the stay by one night.
-hotel-requests.is-there-a-safe,hotel-requests,entry,phrase,is-there-a-safe,1008,0.470,hotel-requests.safe,0,0,neutral,A lockable safe for valuables in the room or at reception.
-hotel-requests.another-blanket,hotel-requests,entry,phrase,another-blanket,1009,0.450,hotel-requests.extra-item,1,0,polite,Clustered with hotel-requests.another-towel-please.
-hotel-requests.wake-up-call,hotel-requests,entry,template,wake-up-call,1010,0.420,hotel-requests.wake-up,0,1,polite,Slot is a clock time.
-room-problems.there-is-a-problem-with-the-room,room-problems,entry,phrase,there-is-a-problem-with-the-room,1,0.540,room-problems.there-is-a-problem-with-the-room,0,0,neutral,
-room-problems.the-air-conditioning-is-broken,room-problems,entry,phrase,the-air-conditioning-is-broken,2,0.506,room-problems.the-air-conditioning-is-broken,0,0,neutral,
-room-problems.there-is-no-hot-water,room-problems,entry,phrase,there-is-no-hot-water,3,0.473,room-problems.there-is-no-hot-water,0,0,neutral,
-room-problems.can-i-change-rooms,room-problems,entry,phrase,can-i-change-rooms,4,0.439,room-problems.can-i-change-rooms,0,0,neutral,
-room-problems.the-room-is-too-noisy,room-problems,entry,phrase,the-room-is-too-noisy,5,0.405,room-problems.the-room-is-too-noisy,0,0,neutral,
-room-problems.the-key-does-not-work,room-problems,entry,phrase,the-key-does-not-work,6,0.520,room-problems.key,0,0,neutral,Covers a key card that will not open the door.
-room-problems.the-toilet-will-not-flush,room-problems,entry,phrase,the-toilet-will-not-flush,7,0.490,room-problems.plumbing,0,0,neutral,
-room-problems.the-light-does-not-work,room-problems,entry,phrase,the-light-does-not-work,8,0.455,room-problems.electrical,0,0,neutral,
-room-problems.please-send-someone,room-problems,entry,phrase,please-send-someone,9,0.425,room-problems.repair,0,0,polite,Asks for a staff member to come and fix the problem.
-room-problems.the-heating-does-not-work,room-problems,entry,phrase,the-heating-does-not-work,10,0.390,room-problems.climate,1,0,neutral,Clustered with room-problems.the-air-conditioning-is-broken.
+concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,applies_to,notes
+hotel-words.passport,hotel-words,ref,word,passport,1,0.640,hotel-words.passport,0,0,neutral,,
+hotel-words.room-key-card,hotel-words,ref,word,room-key-card,2,0.587,hotel-words.room-key-card,0,0,neutral,,
+hotel-words.check-in,hotel-words,ref,word,check-in,3,0.533,hotel-words.check-in,0,0,neutral,,
+hotel-words.check-out,hotel-words,ref,word,check-out,4,0.480,hotel-words.check-out,0,0,neutral,,
+hotel-words.luggage-storage,hotel-words,ref,word,luggage-storage,1005,0.544,hotel-words.luggage-storage,0,0,neutral,,
+hotel-basics.are-any-rooms-available,hotel-basics,entry,phrase,are-any-rooms-available,1,0.760,hotel-basics.are-any-rooms-available,0,0,neutral,,
+hotel-basics.there-are-two-of-us,hotel-basics,entry,phrase,there-are-two-of-us,2,0.728,hotel-basics.there-are-two-of-us,0,0,neutral,,
+hotel-basics.i-have-a-reservation,hotel-basics,entry,phrase,i-have-a-reservation,3,0.697,hotel-basics.i-have-a-reservation,0,0,neutral,,
+hotel-basics.can-i-charge-my-phone,hotel-basics,entry,phrase,can-i-charge-my-phone,4,0.665,hotel-basics.can-i-charge-my-phone,0,0,neutral,,
+hotel-basics.i-would-like-a-non-smoking-room,hotel-basics,entry,phrase,i-would-like-a-non-smoking-room,5,0.633,hotel-basics.i-would-like-a-non-smoking-room,0,0,neutral,,
+hotel-basics.i-would-like-a-quiet-room,hotel-basics,entry,phrase,i-would-like-a-quiet-room,6,0.602,hotel-basics.i-would-like-a-quiet-room,0,0,neutral,,
+hotel-basics.is-there-a-washing-machine,hotel-basics,entry,phrase,is-there-a-washing-machine,7,0.570,hotel-basics.is-there-a-washing-machine,0,0,neutral,,
+hotel-basics.is-wi-fi-free,hotel-basics,entry,phrase,is-wi-fi-free,1004,0.646,hotel-basics.is-wi-fi-free,0,0,neutral,,
+hotel-basics.how-much-per-night,hotel-basics,entry,phrase,how-much-per-night,1005,0.745,hotel-basics.price,0,0,neutral,,
+hotel-basics.is-breakfast-included,hotel-basics,entry,phrase,is-breakfast-included,1006,0.710,hotel-basics.breakfast,0,0,neutral,,
+hotel-basics.may-i-see-the-room,hotel-basics,entry,phrase,may-i-see-the-room,1007,0.680,hotel-basics.view-room,0,0,polite,,Normal and expected at walk-in guesthouses in much of the world.
+hotel-basics.for-nights,hotel-basics,entry,template,for-nights,1008,0.655,hotel-basics.nights,0,1,neutral,,Slot is a number of nights.
+hotel-basics.two-beds,hotel-basics,entry,phrase,two-beds,1009,0.620,hotel-basics.beds,0,0,neutral,,Asks for two separate beds rather than one double.
+hotel-basics.is-there-air-conditioning,hotel-basics,entry,phrase,is-there-air-conditioning,1010,0.590,hotel-basics.climate,0,0,neutral,,
+hotel-requests.can-i-check-out-later,hotel-requests,entry,phrase,can-i-check-out-later,1,0.580,hotel-requests.can-i-check-out-later,0,0,neutral,,
+hotel-requests.what-time-does-breakfast-start,hotel-requests,entry,phrase,what-time-does-breakfast-start,2,0.532,hotel-requests.what-time-does-breakfast-start,0,0,neutral,,
+hotel-requests.can-i-store-my-luggage,hotel-requests,entry,phrase,can-i-store-my-luggage,3,0.483,hotel-requests.can-i-store-my-luggage,0,0,neutral,,
+hotel-requests.no-housekeeping,hotel-requests,entry,phrase,no-housekeeping,4,0.435,hotel-requests.no-housekeeping,0,0,neutral,,
+hotel-requests.another-towel-please,hotel-requests,entry,phrase,another-towel-please,1004,0.493,hotel-requests.another-towel-please,0,0,neutral,,
+hotel-requests.what-time-is-check-out,hotel-requests,entry,phrase,what-time-is-check-out,1005,0.570,hotel-requests.checkout,0,0,neutral,,
+hotel-requests.can-i-check-in-early,hotel-requests,entry,phrase,can-i-check-in-early,1006,0.545,hotel-requests.checkin,0,0,neutral,,
+hotel-requests.another-night,hotel-requests,entry,phrase,another-night,1007,0.510,hotel-requests.extend,0,0,neutral,,Extends the stay by one night.
+hotel-requests.is-there-a-safe,hotel-requests,entry,phrase,is-there-a-safe,1008,0.470,hotel-requests.safe,0,0,neutral,,A lockable safe for valuables in the room or at reception.
+hotel-requests.another-blanket,hotel-requests,entry,phrase,another-blanket,1009,0.450,hotel-requests.extra-item,1,0,polite,,Clustered with hotel-requests.another-towel-please.
+hotel-requests.wake-up-call,hotel-requests,entry,template,wake-up-call,1010,0.420,hotel-requests.wake-up,0,1,polite,,Slot is a clock time.
+room-problems.there-is-a-problem-with-the-room,room-problems,entry,phrase,there-is-a-problem-with-the-room,1,0.540,room-problems.there-is-a-problem-with-the-room,0,0,neutral,,
+room-problems.the-air-conditioning-is-broken,room-problems,entry,phrase,the-air-conditioning-is-broken,2,0.506,room-problems.the-air-conditioning-is-broken,0,0,neutral,,
+room-problems.there-is-no-hot-water,room-problems,entry,phrase,there-is-no-hot-water,3,0.473,room-problems.there-is-no-hot-water,0,0,neutral,,
+room-problems.can-i-change-rooms,room-problems,entry,phrase,can-i-change-rooms,4,0.439,room-problems.can-i-change-rooms,0,0,neutral,,
+room-problems.the-room-is-too-noisy,room-problems,entry,phrase,the-room-is-too-noisy,5,0.405,room-problems.the-room-is-too-noisy,0,0,neutral,,
+room-problems.the-key-does-not-work,room-problems,entry,phrase,the-key-does-not-work,6,0.520,room-problems.key,0,0,neutral,,Covers a key card that will not open the door.
+room-problems.the-toilet-will-not-flush,room-problems,entry,phrase,the-toilet-will-not-flush,7,0.490,room-problems.plumbing,0,0,neutral,,
+room-problems.the-light-does-not-work,room-problems,entry,phrase,the-light-does-not-work,8,0.455,room-problems.electrical,0,0,neutral,,
+room-problems.please-send-someone,room-problems,entry,phrase,please-send-someone,9,0.425,room-problems.repair,0,0,polite,,Asks for a staff member to come and fix the problem.
+room-problems.the-heating-does-not-work,room-problems,entry,phrase,the-heating-does-not-work,10,0.390,room-problems.climate,1,0,neutral,,Clustered with room-problems.the-air-conditioning-is-broken.
+laundry.please-wash-these-clothes,laundry,refphrase,phrase,please-wash-these-clothes,1,0.420,laundry.please-wash-these-clothes,0,0,neutral,,
+laundry.where-is-a-laundromat,laundry,refphrase,phrase,where-is-a-laundromat,2,0.400,laundry.laundromat,0,0,neutral,,"US 'laundromat', UK 'launderette'; give the local shop name."
+laundry.when-will-it-be-ready,laundry,refphrase,phrase,when-will-it-be-ready,3,0.390,laundry.ready,0,0,neutral,,
+laundry.how-much-per-kilo,laundry,refphrase,phrase,how-much-per-kilo,4,0.370,laundry.how-much-per-kilo,0,0,neutral,,Wash-and-fold is priced by weight in most of Asia and Latin America.
+laundry.can-it-be-ready-today,laundry,refphrase,phrase,can-it-be-ready-today,5,0.360,laundry.ready,1,0,neutral,,
+laundry.please-do-not-use-bleach,laundry,refphrase,phrase,please-do-not-use-bleach,6,0.350,laundry.please-do-not-use-bleach,0,0,neutral,,
+laundry.laundromat,laundry,ref,word,laundromat,7,0.340,laundry.laundromat,1,0,neutral,,
+laundry.please-iron-this,laundry,refphrase,phrase,please-iron-this,8,0.330,laundry.please-iron-this,0,0,neutral,,
+laundry.detergent,laundry,ref,word,detergent,9,0.320,laundry.detergent,0,0,neutral,,
+laundry.dry-cleaning,laundry,ref,word,dry-cleaning,10,0.310,laundry.dry-cleaning,0,0,neutral,,
+laundry.dryer,laundry,ref,word,dryer,11,0.300,laundry.dryer,0,0,neutral,,
+laundry.coin-operated,laundry,ref,word,coin-operated,12,0.280,laundry.coin-operated,0,0,neutral,,Sign on self-service machines.

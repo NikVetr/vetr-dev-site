@@ -72,13 +72,17 @@ export function faceToSvg(face, plan, opts) {
     const f = opts.faces[run.fontId];
     if (!f) throw new Error(`no CSS face registered for "${run.fontId}"`);
     const style = f.italic ? ' font-style="italic"' : '';
-    const dir = run.dir === 'rtl' ? ' direction="rtl"' : '';
-    // xml:space keeps a leading or trailing space inside a run, which matters
-    // because run x positions were measured with those spaces included.
+    // Deliberately no `direction="rtl"`. With it, SVG anchors the text at its
+    // right edge while pdf-lib anchors at the left, so the same plan drew in two
+    // places -- and the two renderers agreeing by construction is the point of
+    // having a plan at all. `run.x` is the left edge in both. A run is one word,
+    // and the browser still shapes and orders it right-to-left from its own bidi
+    // pass; what it must not do is re-anchor the line. It also leaves a numeral
+    // piece like "1/2" alone, which `direction="rtl"` would have reversed.
     out.push(
       `<text x="${num(run.x)}" y="${num(run.y)}" font-family="${esc(f.family)}" `
-      + `font-size="${num(run.size)}" font-weight="${f.weight}"${style}${dir} `
-      + `fill="${run.fill}" xml:space="preserve">${esc(run.text)}</text>`,
+      + `font-size="${num(run.size)}" font-weight="${f.weight}"${style} `
+      + `fill="${run.fill}">${esc(run.text)}</text>`,
     );
   }
 

@@ -44,3 +44,22 @@ export async function expectIncludedNot(page, from) {
   );
   return counts(page);
 }
+
+/**
+ * The face count the studio settled on, read from its own status line. Tests used
+ * to hardcode 4, which was true only while the corpus was 413 concepts; auto faces
+ * follow the content by design, so the number is not the invariant -- the agreement
+ * between the status line, the face strip and the plan is.
+ * @param {import('@playwright/test').Page} page
+ * @returns {Promise<number>}
+ */
+export async function faceCount(page) {
+  const status = page.locator('#status');
+  await expect(status).toHaveText(/\d+ faces/, { timeout: 120_000 });
+  const text = (await status.textContent()) ?? '';
+  const m = /(\d+) faces/.exec(text);
+  if (!m) throw new Error(`unreadable status: ${JSON.stringify(text)}`);
+  const faces = Number(m[1]);
+  expect(faces % 2).toBe(0);
+  return faces;
+}

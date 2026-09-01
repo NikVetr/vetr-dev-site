@@ -26,6 +26,14 @@ const SCALE_MAX = 1.8;
  */
 const AUTO_SCALE_MAX = 1;
 const AUTOFIT_STEPS = 7;
+/**
+ * The fit search runs on a grid rather than on the continuum. 0.005 of scale is
+ * well under a tenth of a point of type, so nothing visible is lost -- and it
+ * means every candidate face count probes the *same* scales, which lets them share
+ * measured atoms. Without it the searches drifted apart and each face count paid
+ * for its own measurement: 4.6s on the fully translated Japanese sheet.
+ */
+const SCALE_STEP = 0.01;
 
 // A sheet is printed double-sided, so faces come in pairs: one sheet is two faces,
 // and an odd count means running a sheet with a blank back. Auto therefore steps in
@@ -37,10 +45,10 @@ const MAX_AUTO_FACES = 24;
 // spends another pair of faces instead. Set under the Japanese reference sheet's
 // own 0.478, which is a legitimate, deliberately tight layout that should not be
 // second-guessed.
-const COMFORT = 0.45;
+export const COMFORT = 0.45;
 
 /** A column left this fraction of itself empty is reported as loose. */
-const LOOSE_FRACTION = 0.06;
+export const LOOSE_FRACTION = 0.06;
 
 /**
  * Usable content box, after the printer's own margins. Borderless printing
@@ -117,10 +125,24 @@ export function layout(input) {
   const scaleFloor = SCALE_MIN;
   const coarse = paperTooCoarse(input);
 
-  const measureOnly = (/** @type {number} */ scale) => buildAtoms({
-    blocks, theme, spec, corpus, measurer, registry, colWidth: box.colWidth, scale,
-    withPaint: false,
-  });
+  // Atoms depend on the scale and the column width, not on how many columns there
+  // are, so the same set is valid for every candidate face count. Auto-faces tries
+  // several counts and each runs its own fit search, which meant the same scales
+  // were measured three times over -- 4.6s on the fully translated Japanese sheet.
+  // The breaker only reads atoms, so sharing them is safe.
+  /** @type {Map<number, import('./atoms.js').Atom[]>} */ const measured = new Map();
+  const measureOnly = (/** @type {number} */ scale) => {
+    const key = Math.round(scale * 1e6);
+    let atoms = measured.get(key);
+    if (!atoms) {
+      atoms = buildAtoms({
+        blocks, theme, spec, corpus, measurer, registry, colWidth: box.colWidth, scale,
+        withPaint: false,
+      });
+      measured.set(key, atoms);
+    }
+    return atoms;
+  };
 
   const autoFaces = spec.autoFaces !== false;
   const resolved = autoFaces
@@ -447,12 +469,15 @@ function solveFaces(build, box, spec, scaleFloor) {
   }
 
   // Otherwise take another pair while the type would still be squeezed.
-  let fitted = fittedAt(faces);
-  while (faces < MAX_AUTO_FACES && (fitted === null || fitted < COMFORT)) {
-    faces += FACE_STEP;
-    fitted = fittedAt(faces);
-  }
-  return { faces, scale: fitted };
+  //
+  // "The fitted scale is below COMFORT" and "COMFORT does not fit" are the same
+  // statement, because the fitted scale is the largest one that fits and fitting
+  // is monotone in scale. Testing the second is one measurement instead of a whole
+  // search -- and it is a measurement at the *same* scale for every candidate face
+  // count, so after the first it is free. That took the fully translated Japanese
+  // sheet from 3.3s to well under a second.
+  while (faces < MAX_AUTO_FACES && !fitsAt(faces, COMFORT)) faces += FACE_STEP;
+  return { faces, scale: fittedAt(faces) };
 }
 
 /**
@@ -467,7 +492,10 @@ function solveFaces(build, box, spec, scaleFloor) {
  * @returns {number|null}
  */
 function autofit(build, height, bins, scaleFloor) {
-  const clamp = (/** @type {number} */ s) => Math.min(AUTO_SCALE_MAX, Math.max(scaleFloor, s));
+  const snap = (/** @type {number} */ s) => Math.round(s / SCALE_STEP) * SCALE_STEP;
+  const clamp = (/** @type {number} */ s) => snap(
+    Math.min(AUTO_SCALE_MAX, Math.max(scaleFloor, s)),
+  );
   const fits = (/** @type {number} */ scale) => !breakColumns(build(scale), height, bins).failure;
 
   const atoms = build(1);
@@ -490,7 +518,8 @@ function autofit(build, height, bins, scaleFloor) {
   }
 
   for (let i = 0; i < AUTOFIT_STEPS; i += 1) {
-    const mid = (lo + hi) / 2;
+    const mid = snap((lo + hi) / 2);
+    if (mid <= lo || mid >= hi) break;
     if (fits(mid)) lo = mid;
     else hi = mid;
   }

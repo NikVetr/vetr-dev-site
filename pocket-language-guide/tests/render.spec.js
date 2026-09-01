@@ -63,7 +63,11 @@ test.describe('renderers', () => {
   test('the exported PDF is vector, selectable and exactly the requested size', async () => {
     const info = execFileSync('pdfinfo', ['tmp/spec/sheet.pdf']).toString();
     expect(info).toContain('Page size:       504 x 360 pts');
-    expect(info).toContain('Pages:           4');
+    // One PDF page per face, however many the content needed, and always an even
+    // number because a sheet is printed on both sides.
+    const pages = Number(/Pages:\s+(\d+)/.exec(info)?.[1]);
+    expect(pages).toBeGreaterThanOrEqual(4);
+    expect(pages % 2).toBe(0);
 
     const fonts = execFileSync('pdffonts', ['tmp/spec/sheet.pdf']).toString();
     expect(fonts).toContain('CID TrueType');

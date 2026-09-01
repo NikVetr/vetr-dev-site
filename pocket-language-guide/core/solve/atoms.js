@@ -190,14 +190,27 @@ function paintField(ctx, text, style, box) {
   const { lines } = ctx.measurer.wrap(text, box.w, style);
   const baseline = ctx.measurer.baselineOffset(style);
 
+  // Pieces are in logical order. A right-to-left line therefore starts at its
+  // *right* edge and walks left, which is the whole of what was wrong with Arabic:
+  // laid out left-to-right, "as-salam alaykum" printed with the words in the
+  // opposite order to the one an Arabic reader reads them in.
+  const rtl = style.dir === 'rtl';
+
   lines.forEach((line, i) => {
     const width = inkWidth(line);
     const offset = box.align === 'end' ? box.w - width
       : box.align === 'center' ? (box.w - width) / 2
         : 0;
-    let x = box.x + offset;
+    const left = box.x + offset;
     const y = box.y + i * style.leading;
+    // Where the next piece's advance box begins, measured from the line's start
+    // edge -- the left for ltr, the right for rtl.
+    let cursor = rtl ? left + width : left;
     for (const piece of line) {
+      // `w` carries any trailing space, `inkW` does not. In a right-to-left line
+      // that space sits to the *left* of the word, so the ink has to be flushed to
+      // the right of its advance box rather than the left.
+      const x = rtl ? cursor - piece.inkW : cursor;
       if (piece.type === 'slot') {
         // An open slot is a rule sitting just under the baseline, not a run of
         // underscores -- which is what made the reference's CJK slots space badly.
@@ -207,12 +220,14 @@ function paintField(ctx, text, style, box) {
         });
       } else if (piece.text.trim() !== '') {
         runs.push({
-          text: piece.text, x, y: y + baseline, fontId: ctx.measurer.faceKey(style),
+          // Trimmed, because the position now comes from the ink width: leaving the
+          // space in would draw it on the wrong side of a right-to-left word.
+          text: piece.text.trim(), x, y: y + baseline, fontId: ctx.measurer.faceKey(style),
           size: style.size, fill: box.fill, bold: style.weight >= 700,
           italic: style.italic, dir: style.dir,
         });
       }
-      x += piece.w;
+      cursor += rtl ? -piece.w : piece.w;
     }
   });
 

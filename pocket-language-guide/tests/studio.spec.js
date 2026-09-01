@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { counts, expectIncluded, expectIncludedNot } from './counts.js';
+import { counts, expectIncluded, expectIncludedNot, faceCount } from './counts.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
 
@@ -14,18 +14,19 @@ test.describe('studio', () => {
     await page.goto(STUDIO);
 
     await expect(page.locator('.face.focused')).toBeVisible();
-    await expect(page.locator('#status')).toContainText('4 faces');
+    const faces = await faceCount(page);
     await expect(page.locator('.studio > section')).toHaveCount(3);
     // Every face is reachable from the thumbnail strip.
-    await expect(page.locator('.face-strip .face')).toHaveCount(4);
+    await expect(page.locator('.face-strip .face')).toHaveCount(faces);
     expect(failures).toEqual([]);
   });
 
   test('a face grid and a focused face swap places', async ({ page }) => {
     await page.goto(STUDIO);
+    const faces = await faceCount(page);
     await expect(page.locator('.face.focused')).toHaveCount(1);
     await page.locator('#grid-toggle').click();
-    await expect(page.locator('.face-grid .face')).toHaveCount(4);
+    await expect(page.locator('.face-grid .face')).toHaveCount(faces);
     await expect(page.locator('.face.focused')).toHaveCount(0);
     await page.locator('.face-grid .face').nth(2).click();
     await expect(page.locator('.face.focused')).toHaveCount(1);
@@ -55,8 +56,8 @@ test.describe('studio', () => {
 
   test('a small card takes more faces instead of failing', async ({ page }) => {
     await page.goto(STUDIO);
-    await expect(page.locator('#status')).toContainText('4 faces');
-    await expect(page.locator('.face-strip .face')).toHaveCount(4);
+    const faces = await faceCount(page);
+    await expect(page.locator('.face-strip .face')).toHaveCount(faces);
     await page.getByRole('radio', { name: 'Credit-card size' }).click();
     // Auto takes more pairs rather than reporting an error, and says how many.
     // Counting elements rather than matching "4 faces", which "14 faces" contains.
@@ -109,15 +110,18 @@ test.describe('studio', () => {
 
   test('auto reports the face count it settled on', async ({ page }) => {
     await page.goto(STUDIO);
-    await expect(page.locator('#status')).toContainText('4 faces');
+    const faces = await faceCount(page);
     const auto = page.getByRole('radiogroup', { name: 'Faces' })
       .getByRole('radio', { name: /^Auto/ });
     await expect(auto).toHaveAttribute('aria-checked', 'true');
-    await expect(auto).toContainText('4');
+    // The point is that Auto reports what it resolved to, not that it resolved to
+    // any particular number -- the count follows the content.
+    await expect(auto).toContainText(String(faces));
 
     // Bigger type needs more of them, and auto says so.
     await page.getByRole('radio', { name: 'X-large' }).click();
-    await expect(auto).not.toContainText('4');
+    await expect.poll(async () => faceCount(page), { timeout: 120_000 })
+      .toBeGreaterThan(faces);
     await expect(page.locator('#warnings li.error')).toHaveCount(0);
   });
 
@@ -198,7 +202,8 @@ test('the gloss menu offers only languages with rows on file', async ({ page }) 
 
   const offered = await page.locator('#source option').evaluateAll((os) => os.map((o) => o.value));
   expect(offered).toContain('ja');
-  expect(offered).not.toContain('es');
-  expect(offered).not.toContain('ar');
+  expect(offered).toContain('es');            // has rows now, so it is offered
+  expect(offered).not.toContain('pt');        // registered, but no rows on file
+  expect(offered).not.toContain('th');
   expect(offered).not.toContain('zh-Hans');   // it is the target
 });

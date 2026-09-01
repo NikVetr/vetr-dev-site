@@ -48,8 +48,13 @@ async function sheetWithGaps(fraction) {
 }
 
 test('a flush sheet gets no proposals', async () => {
+  // Asserted against a flush plan rather than against the default sheet. Faces come
+  // in pairs, so the default now has real slack in its last pair and proposing
+  // items for it is the correct answer -- which made this test measure the corpus
+  // size instead of the rule it is about.
   const spec = await referenceSpec();
   const built = await buildSheet(ctx, spec);
+  built.plan = { ...built.plan, looseness: built.plan.looseness.map(() => 0) };
   const box = contentBox(spec.geometry, spec.paper);
   const diff = proposeBalance({
     corpus: ctx.corpus,

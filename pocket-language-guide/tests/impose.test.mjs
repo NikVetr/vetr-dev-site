@@ -11,10 +11,11 @@ const ctx = await createSheetContext({
 });
 const { plan } = await buildSheet(ctx, { ...(await referenceSpec()), scale: 0 });
 
-test('four faces become eight card sides at half the width', () => {
+test('every face becomes two card sides at half the width', () => {
   const cards = splitCards(plan);
-  assert.equal(plan.faces.length, 4);
-  assert.equal(cards.faces.length, 8);
+  // Not a fixed count: the face count follows the content, and the corpus grows.
+  assert.ok(plan.faces.length >= 4 && plan.faces.length % 2 === 0, `${plan.faces.length} faces`);
+  assert.equal(cards.faces.length, plan.faces.length * 2);
   assert.equal(cards.pageW, plan.pageW / 2);
   assert.equal(cards.pageH, plan.pageH);
 });
@@ -38,7 +39,9 @@ test('the flip axis decides which half backs which, and only one needs rotating'
   assert.deepEqual(short.faces[0].runs.map((r) => r.text), long.faces[0].runs.map((r) => r.text));
   assert.notDeepEqual(short.faces[1].runs.map((r) => r.text), long.faces[1].runs.map((r) => r.text));
   assert.ok(short.faces.every((f) => !f.rotate), 'short-edge should need no rotation');
-  assert.ok(long.faces.filter((f) => f.rotate === 180).length === 4, 'each back should be rotated');
+  // Half the card sides are backs, whatever the face count.
+  const backs = long.faces.filter((f) => f.rotate === 180).length;
+  assert.equal(backs, long.faces.length / 2, 'each back should be rotated');
 });
 
 test('an odd face count is refused rather than silently mispaired', () => {

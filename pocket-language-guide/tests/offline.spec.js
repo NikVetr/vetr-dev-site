@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { faceCount } from './counts.js';
 
 // The primary use case: abroad, no data, still needs to produce a printable file.
 test('saves a language for offline, then exports with the network off', async ({ page, context }) => {
@@ -13,7 +14,7 @@ test('saves a language for offline, then exports with the network off', async ({
   await context.setOffline(true);
   await page.goto('/customize.html?target=zh-Hans&source=en');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
-  await expect(page.locator('#status')).toContainText('4 faces');
+  await faceCount(page);
 
   const download = page.waitForEvent('download', { timeout: 180_000 });
   await page.locator('#pdf').click();

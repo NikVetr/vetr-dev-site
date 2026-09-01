@@ -15,7 +15,9 @@ test.describe('gallery', () => {
     await expect(chinese.getByRole('link', { name: 'Export' })).toBeVisible();
 
     // A language with no corpus must not offer a button that yields an empty sheet.
-    const french = page.locator('.card', { hasText: 'French' });
+    // Portuguese, not French: French has a full pack now. This assertion is about
+    // the "not translated yet" state, so it needs a language that genuinely is not.
+    const french = page.locator('.card', { hasText: 'Portuguese' });
     await expect(french.getByText('Not translated yet')).toBeVisible();
     await expect(french.getByRole('link', { name: 'Export' })).toHaveCount(0);
     await expect(french.getByText('help translate')).toBeVisible();

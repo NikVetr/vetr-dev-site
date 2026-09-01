@@ -66,6 +66,16 @@ export async function loadCorpus(loadText) {
 }
 
 /**
+ * Whether a concept belongs on a sheet for this target. Empty `applies_to` means
+ * every target, which is almost all of them.
+ * @param {Record<string,string>} concept @param {string} target
+ */
+export function appliesTo(concept, target) {
+  const only = concept.applies_to;
+  return !only || only.split(';').includes(target);
+}
+
+/**
  * Whether a language has enough rows to render a sheet from. A handful of stray
  * rows is not a language pack, so this asks for a real fraction of the bank.
  *
@@ -217,6 +227,11 @@ export function buildBlocks({ corpus, targetRows, sourceRows, respell, spec, edi
     const concepts = [...own, ...custom]
       .filter((c) => selection.items[c.concept_id] !== false)
       .filter((c) => overrides[c.concept_id]?.include !== false)
+      // A few concepts only mean something for one target. The bank was seeded
+      // from Chinese and Japanese sheets, so Chinese measure words, the yuan,
+      // Japanese counters and "write it in Roman letters" arrived dressed as
+      // universal entries -- and a Spanish sheet was printing all of them.
+      .filter((c) => appliesTo(c, spec.target))
       .filter((c) => c.custom === '1' || (targetRows[c.concept_id] && sourceRows[c.concept_id]));
     if (!concepts.length) continue;
 

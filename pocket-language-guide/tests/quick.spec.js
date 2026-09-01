@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { faceCount } from './counts.js';
 
 const SHEET = '/sheet.html?target=zh-Hans&source=en';
 
@@ -9,16 +10,22 @@ test.describe('the quick export page', () => {
     page.on('response', (r) => { if (r.status() >= 400) failures.push(`${r.status()} ${r.url()}`); });
 
     await page.goto(SHEET);
-    await expect(page.locator('.face')).toHaveCount(4);
-    await expect(page.locator('#status')).toContainText('2 sheets');
+    // However many faces the content needs, the sheet count must be half of them:
+    // a sheet is printed on both sides.
+    await expect(page.locator('#status')).toHaveText(/\d+ faces · \d+ sheets/, { timeout: 120_000 });
+    const status = (await page.locator('#status').textContent()) ?? '';
+    const [, faces, sheets] = /(\d+) faces · (\d+) sheets/.exec(status) ?? [];
+    await expect(page.locator('.face')).toHaveCount(Number(faces));
+    expect(Number(sheets)).toBe(Number(faces) / 2);
 
     // A smaller card takes more faces.
+    const wide = await page.locator('.face').count();
     await page.getByRole('radio', { name: 'A6' }).click();
-    await expect.poll(() => page.locator('.face').count()).toBeGreaterThan(4);
+    await expect.poll(() => page.locator('.face').count()).toBeGreaterThan(wide);
 
     // Serif changes which faces the sheet is drawn in.
     await page.getByRole('radio', { name: '7×5in' }).click();
-    await expect.poll(() => page.locator('.face').count()).toBe(4);
+    await expect.poll(() => page.locator('.face').count()).toBe(wide);
     const families = () => page.evaluate(() => [...new Set(
       [...document.querySelectorAll('.face svg text')].map((t) => t.getAttribute('font-family')),
     )].join(' '));
@@ -37,7 +44,7 @@ test.describe('the quick export page', () => {
 
   test('exports a PDF at the chosen resolution and links to the studio', async ({ page }) => {
     await page.goto(SHEET);
-    await expect(page.locator('.face')).toHaveCount(4);
+    await expect(page.locator('.face').first()).toBeVisible();
 
     const pdf = page.waitForEvent('download');
     await page.locator('#pdf').click();

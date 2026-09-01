@@ -1,32 +1,32 @@
-concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
-payment-receipt.pay-by-card,payment-receipt,refphrase,phrase,pay-by-card,1,0.820,payment-receipt.pay-by-card,0,0,neutral,
-payment-receipt.pay-cash,payment-receipt,refphrase,phrase,pay-cash,2,0.752,payment-receipt.pay-cash,0,0,neutral,
-payment-receipt.pay-by-qr-code,payment-receipt,refphrase,phrase,pay-by-qr-code,3,0.683,payment-receipt.pay-by-qr-code,0,0,neutral,
-payment-receipt.a-receipt-please,payment-receipt,refphrase,word,a-receipt-please,4,0.615,payment-receipt.a-receipt-please,0,0,neutral,
-payment-receipt.please-write-the-number,payment-receipt,refphrase,phrase,please-write-the-number,1005,0.697,payment-receipt.please-write-the-number,0,0,neutral,
-payment-receipt.how-much-in-total,payment-receipt,refphrase,phrase,how-much-in-total,1006,0.780,payment-receipt.total,0,0,neutral,
-payment-receipt.can-we-pay-separately,payment-receipt,refphrase,phrase,can-we-pay-separately,1007,0.730,payment-receipt.split,0,0,neutral,Asks to split the bill between people.
-payment-receipt.is-tax-included,payment-receipt,refphrase,phrase,is-tax-included,1008,0.660,payment-receipt.tax,0,0,neutral,Asks whether the quoted price already includes tax.
-payment-receipt.my-card-was-declined,payment-receipt,refphrase,phrase,my-card-was-declined,1009,0.640,payment-receipt.card,0,0,neutral,Stated so the cashier retries or offers another method.
-payment-receipt.the-bill-is-wrong,payment-receipt,refphrase,phrase,the-bill-is-wrong,1010,0.590,payment-receipt.dispute,0,0,polite,"Should read as a polite query, not an accusation."
-payment-receipt.i-already-paid,payment-receipt,refphrase,phrase,i-already-paid,1011,0.560,payment-receipt.dispute,1,0,neutral,
-shopping.i-am-just-looking,shopping,entry,phrase,i-am-just-looking,1,0.740,shopping.i-am-just-looking,0,0,neutral,
-shopping.how-much-is-this,shopping,entry,phrase,how-much-is-this,2,0.678,shopping.how-much-is-this,0,0,neutral,
-shopping.that-is-too-expensive,shopping,entry,phrase,that-is-too-expensive,3,0.617,shopping.that-is-too-expensive,0,0,neutral,
-shopping.can-it-be-a-little-cheaper,shopping,entry,phrase,can-it-be-a-little-cheaper,4,0.555,shopping.can-it-be-a-little-cheaper,0,0,neutral,
-shopping.is-there-a-discount,shopping,entry,phrase,is-there-a-discount,1004,0.629,shopping.is-there-a-discount,0,0,neutral,
-shopping.where-do-i-pay,shopping,entry,phrase,where-do-i-pay,1005,0.700,shopping.pay,0,0,neutral,
-shopping.i-will-take-this,shopping,entry,phrase,i-will-take-this,1006,0.660,shopping.buy,0,0,neutral,Closes the sale while pointing at the item.
-shopping.what-is-this,shopping,entry,phrase,what-is-this,1007,0.640,shopping.identify,0,0,neutral,Very high value at markets and food stalls.
-shopping.where-can-i-buy,shopping,entry,template,where-can-i-buy,1008,0.600,shopping.find,0,1,neutral,Slot is a product.
-shopping.do-you-have-this-in-stock,shopping,entry,phrase,do-you-have-this-in-stock,1009,0.580,shopping.stock,0,0,neutral,
-shopping.two-of-these,shopping,entry,phrase,two-of-these,1010,0.540,shopping.quantity,0,0,neutral,"Said while pointing; the number is the common case, not a slot, to keep the row short."
-shopping.what-is-it-made-of,shopping,entry,phrase,what-is-it-made-of,1011,0.510,shopping.identify,1,0,neutral,Materials and ingredients; useful for allergies and for customs rules.
-color-size-returns.do-you-have-another-color,color-size-returns,entry,phrase,do-you-have-another-color,1,0.550,color-size-returns.do-you-have-another-color,0,0,neutral,
-color-size-returns.do-you-have-another-size,color-size-returns,entry,phrase,do-you-have-another-size,2,0.522,color-size-returns.do-you-have-another-size,0,0,neutral,
-color-size-returns.may-i-try-it-on,color-size-returns,entry,phrase,may-i-try-it-on,3,0.495,color-size-returns.may-i-try-it-on,0,0,neutral,
-color-size-returns.can-i-return-it,color-size-returns,entry,phrase,can-i-return-it,4,0.468,color-size-returns.can-i-return-it,0,0,neutral,
-color-size-returns.can-i-exchange-it,color-size-returns,entry,phrase,can-i-exchange-it,5,0.440,color-size-returns.can-i-exchange-it,0,0,neutral,
-color-size-returns.do-you-have-a-bag,color-size-returns,entry,phrase,do-you-have-a-bag,6,0.413,color-size-returns.do-you-have-a-bag,0,0,neutral,
-tax-refund.can-i-get-a-tax-refund,tax-refund,entry,phrase,can-i-get-a-tax-refund,1,0.400,tax-refund.can-i-get-a-tax-refund,0,0,neutral,
-tax-refund.is-tax-free-shopping-available,tax-refund,entry,phrase,is-tax-free-shopping-available,1001,0.340,tax-refund.is-tax-free-shopping-available,0,0,neutral,
+concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,applies_to,notes
+payment-receipt.pay-by-card,payment-receipt,refphrase,phrase,pay-by-card,1,0.820,payment-receipt.pay-by-card,0,0,neutral,,
+payment-receipt.pay-cash,payment-receipt,refphrase,phrase,pay-cash,2,0.752,payment-receipt.pay-cash,0,0,neutral,,
+payment-receipt.pay-by-qr-code,payment-receipt,refphrase,phrase,pay-by-qr-code,3,0.683,payment-receipt.pay-by-qr-code,0,0,neutral,,
+payment-receipt.a-receipt-please,payment-receipt,refphrase,word,a-receipt-please,4,0.615,payment-receipt.a-receipt-please,0,0,neutral,,
+payment-receipt.please-write-the-number,payment-receipt,refphrase,phrase,please-write-the-number,1005,0.697,payment-receipt.please-write-the-number,0,0,neutral,,
+payment-receipt.how-much-in-total,payment-receipt,refphrase,phrase,how-much-in-total,1006,0.780,payment-receipt.total,0,0,neutral,,
+payment-receipt.can-we-pay-separately,payment-receipt,refphrase,phrase,can-we-pay-separately,1007,0.730,payment-receipt.split,0,0,neutral,,Asks to split the bill between people.
+payment-receipt.is-tax-included,payment-receipt,refphrase,phrase,is-tax-included,1008,0.660,payment-receipt.tax,0,0,neutral,,Asks whether the quoted price already includes tax.
+payment-receipt.my-card-was-declined,payment-receipt,refphrase,phrase,my-card-was-declined,1009,0.640,payment-receipt.card,0,0,neutral,,Stated so the cashier retries or offers another method.
+payment-receipt.the-bill-is-wrong,payment-receipt,refphrase,phrase,the-bill-is-wrong,1010,0.590,payment-receipt.dispute,0,0,polite,,"Should read as a polite query, not an accusation."
+payment-receipt.i-already-paid,payment-receipt,refphrase,phrase,i-already-paid,1011,0.560,payment-receipt.dispute,1,0,neutral,,
+shopping.i-am-just-looking,shopping,entry,phrase,i-am-just-looking,1,0.740,shopping.i-am-just-looking,0,0,neutral,,
+shopping.how-much-is-this,shopping,entry,phrase,how-much-is-this,2,0.678,shopping.how-much-is-this,0,0,neutral,,
+shopping.that-is-too-expensive,shopping,entry,phrase,that-is-too-expensive,3,0.617,shopping.that-is-too-expensive,0,0,neutral,,
+shopping.can-it-be-a-little-cheaper,shopping,entry,phrase,can-it-be-a-little-cheaper,4,0.555,shopping.can-it-be-a-little-cheaper,0,0,neutral,,
+shopping.is-there-a-discount,shopping,entry,phrase,is-there-a-discount,1004,0.629,shopping.is-there-a-discount,0,0,neutral,,
+shopping.where-do-i-pay,shopping,entry,phrase,where-do-i-pay,1005,0.700,shopping.pay,0,0,neutral,,
+shopping.i-will-take-this,shopping,entry,phrase,i-will-take-this,1006,0.660,shopping.buy,0,0,neutral,,Closes the sale while pointing at the item.
+shopping.what-is-this,shopping,entry,phrase,what-is-this,1007,0.640,shopping.identify,0,0,neutral,,Very high value at markets and food stalls.
+shopping.where-can-i-buy,shopping,entry,template,where-can-i-buy,1008,0.600,shopping.find,0,1,neutral,,Slot is a product.
+shopping.do-you-have-this-in-stock,shopping,entry,phrase,do-you-have-this-in-stock,1009,0.580,shopping.stock,0,0,neutral,,
+shopping.two-of-these,shopping,entry,phrase,two-of-these,1010,0.540,shopping.quantity,0,0,neutral,,"Said while pointing; the number is the common case, not a slot, to keep the row short."
+shopping.what-is-it-made-of,shopping,entry,phrase,what-is-it-made-of,1011,0.510,shopping.identify,1,0,neutral,,Materials and ingredients; useful for allergies and for customs rules.
+color-size-returns.do-you-have-another-color,color-size-returns,entry,phrase,do-you-have-another-color,1,0.550,color-size-returns.do-you-have-another-color,0,0,neutral,,
+color-size-returns.do-you-have-another-size,color-size-returns,entry,phrase,do-you-have-another-size,2,0.522,color-size-returns.do-you-have-another-size,0,0,neutral,,
+color-size-returns.may-i-try-it-on,color-size-returns,entry,phrase,may-i-try-it-on,3,0.495,color-size-returns.may-i-try-it-on,0,0,neutral,,
+color-size-returns.can-i-return-it,color-size-returns,entry,phrase,can-i-return-it,4,0.468,color-size-returns.can-i-return-it,0,0,neutral,,
+color-size-returns.can-i-exchange-it,color-size-returns,entry,phrase,can-i-exchange-it,5,0.440,color-size-returns.can-i-exchange-it,0,0,neutral,,
+color-size-returns.do-you-have-a-bag,color-size-returns,entry,phrase,do-you-have-a-bag,6,0.413,color-size-returns.do-you-have-a-bag,0,0,neutral,,
+tax-refund.can-i-get-a-tax-refund,tax-refund,entry,phrase,can-i-get-a-tax-refund,1,0.400,tax-refund.can-i-get-a-tax-refund,0,0,neutral,,
+tax-refund.is-tax-free-shopping-available,tax-refund,entry,phrase,is-tax-free-shopping-available,1001,0.340,tax-refund.is-tax-free-shopping-available,0,0,neutral,,

@@ -1,13 +1,13 @@
-concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
-introductions.my-name-is,introductions,entry,template,my-name-is,1,0.700,introductions.my-name-is,0,1,neutral,
-introductions.nice-to-meet-you,introductions,entry,phrase,nice-to-meet-you,2,0.656,introductions.nice-to-meet-you,0,0,neutral,
-introductions.what-is-your-name,introductions,entry,phrase,what-is-your-name,3,0.612,introductions.what-is-your-name,0,0,neutral,
-introductions.we-are-traveling-together,introductions,entry,phrase,we-are-traveling-together,4,0.569,introductions.we-are-traveling-together,0,0,neutral,
-introductions.this-is-my-friend,introductions,entry,phrase,this-is-my-friend,5,0.525,introductions.this-is-my-friend,0,0,neutral,
-introductions.i-am-from,introductions,entry,template,i-am-from,6,0.680,introductions.origin,0,1,neutral,Slot is a country or city.
-introductions.where-are-you-from,introductions,entry,phrase,where-are-you-from,7,0.640,introductions.origin,1,0,neutral,
-introductions.how-are-you,introductions,entry,phrase,how-are-you,8,0.600,introductions.greeting,0,0,neutral,"Absent from social-basics; render as the ordinary local greeting-question, not a literal health enquiry."
-introductions.i-am-a-tourist,introductions,entry,phrase,i-am-a-tourist,9,0.580,introductions.purpose,0,0,neutral,Explains the traveler's situation in one row.
-introductions.this-is-my-husband-wife,introductions,entry,phrase,this-is-my-husband-wife,10,0.550,introductions.family,0,0,neutral,One row carrying both words so the traveler picks the right one; most languages need separate terms.
-introductions.this-is-my-daughter-son,introductions,entry,phrase,this-is-my-daughter-son,11,0.510,introductions.family,1,0,neutral,
-introductions.i-am-traveling-alone,introductions,entry,phrase,i-am-traveling-alone,12,0.490,introductions.purpose,1,0,neutral,"Needed at hotels, tours and border desks."
+concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,applies_to,notes
+introductions.my-name-is,introductions,entry,template,my-name-is,1,0.700,introductions.my-name-is,0,1,neutral,,
+introductions.nice-to-meet-you,introductions,entry,phrase,nice-to-meet-you,2,0.656,introductions.nice-to-meet-you,0,0,neutral,,
+introductions.what-is-your-name,introductions,entry,phrase,what-is-your-name,3,0.612,introductions.what-is-your-name,0,0,neutral,,
+introductions.we-are-traveling-together,introductions,entry,phrase,we-are-traveling-together,4,0.569,introductions.we-are-traveling-together,0,0,neutral,,
+introductions.this-is-my-friend,introductions,entry,phrase,this-is-my-friend,5,0.525,introductions.this-is-my-friend,0,0,neutral,,
+introductions.i-am-from,introductions,entry,template,i-am-from,6,0.680,introductions.origin,0,1,neutral,,Slot is a country or city.
+introductions.where-are-you-from,introductions,entry,phrase,where-are-you-from,7,0.640,introductions.origin,1,0,neutral,,
+introductions.how-are-you,introductions,entry,phrase,how-are-you,8,0.600,introductions.greeting,0,0,neutral,,"Absent from social-basics; render as the ordinary local greeting-question, not a literal health enquiry."
+introductions.i-am-a-tourist,introductions,entry,phrase,i-am-a-tourist,9,0.580,introductions.purpose,0,0,neutral,,Explains the traveler's situation in one row.
+introductions.this-is-my-husband-wife,introductions,entry,phrase,this-is-my-husband-wife,10,0.550,introductions.family,0,0,neutral,,One row carrying both words so the traveler picks the right one; most languages need separate terms.
+introductions.this-is-my-daughter-son,introductions,entry,phrase,this-is-my-daughter-son,11,0.510,introductions.family,1,0,neutral,,
+introductions.i-am-traveling-alone,introductions,entry,phrase,i-am-traveling-alone,12,0.490,introductions.purpose,1,0,neutral,,"Needed at hotels, tours and border desks."
