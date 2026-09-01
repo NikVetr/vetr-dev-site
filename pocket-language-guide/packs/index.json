@@ -382,14 +382,6 @@
       "items": 612,
       "warnings": [
         {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "Saudi Arabia"
-          },
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        },
-        {
           "code": "loose-columns",
           "severity": "info",
           "params": {
@@ -409,14 +401,6 @@
       "items": 612,
       "warnings": [
         {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "Saudi Arabia"
-          },
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        },
-        {
           "code": "loose-columns",
           "severity": "info",
           "params": {
@@ -434,33 +418,24 @@
       "pageW": 504,
       "pageH": 360,
       "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "Saudi Arabia"
-          },
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     },
     {
       "target": "ar",
       "source": "ja",
-      "scale": 0.49,
+      "scale": 0.48,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
       "items": 612,
       "warnings": [
         {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
+          "code": "loose-columns",
+          "severity": "info",
           "params": {
-            "region": "Saudi Arabia"
+            "count": 1
           },
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -473,14 +448,6 @@
       "pageH": 360,
       "items": 612,
       "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "Saudi Arabia"
-          },
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        },
         {
           "code": "loose-columns",
           "severity": "info",
@@ -499,16 +466,7 @@
       "pageW": 504,
       "pageH": 360,
       "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "Saudi Arabia"
-          },
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     },
     {
       "target": "ar",
@@ -518,16 +476,7 @@
       "pageW": 504,
       "pageH": 360,
       "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "Saudi Arabia"
-          },
-          "message": "The emergency numbers on file for Saudi Arabia have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     },
     {
       "target": "fr",
@@ -732,21 +681,12 @@
     {
       "target": "ko",
       "source": "en",
-      "scale": 0.85,
+      "scale": 0.84,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "South Korea"
-          },
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     },
     {
       "target": "ko",
@@ -756,16 +696,7 @@
       "pageW": 504,
       "pageH": 360,
       "items": 614,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "South Korea"
-          },
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     },
     {
       "target": "ko",
@@ -775,16 +706,7 @@
       "pageW": 504,
       "pageH": 360,
       "items": 614,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "South Korea"
-          },
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     },
     {
       "target": "ko",
@@ -794,16 +716,7 @@
       "pageW": 504,
       "pageH": 360,
       "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "South Korea"
-          },
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     },
     {
       "target": "ko",
@@ -824,14 +737,6 @@
             "size": "5.22"
           },
           "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.22pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "South Korea"
-          },
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
         }
       ]
     },
@@ -843,16 +748,7 @@
       "pageW": 504,
       "pageH": 360,
       "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "South Korea"
-          },
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     },
     {
       "target": "ko",
@@ -862,16 +758,7 @@
       "pageW": 504,
       "pageH": 360,
       "items": 612,
-      "warnings": [
-        {
-          "code": "emergency-unreviewed",
-          "severity": "warn",
-          "params": {
-            "region": "South Korea"
-          },
-          "message": "The emergency numbers on file for South Korea have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import."
-        }
-      ]
+      "warnings": []
     }
   ]
 }

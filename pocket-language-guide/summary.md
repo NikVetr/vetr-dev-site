@@ -328,6 +328,13 @@ properties (`padding-inline`, `border-end-start-radius`), so setting
 physical offset left is the drag handle's, and that is sheet geometry rather than
 interface direction.
 
+Section headings are the other half of this, and they run the other way. A heading
+is structural text the *source*-language reader reads, so on a `zh-Hans ← ja` sheet
+it belongs in Japanese. `data/registry/section-titles/<code>.csv` holds them and
+`buildSheet` picks by `spec.source`, falling back to `title_en`. That lives in the
+registry rather than in `data/i18n/` because the *sheet* needs it, and the sheet is
+rendered by `core/`, which has no business reaching into a UI catalogue.
+
 ### The keyboard contract
 
 The app was effectively mouse-only: eleven segmented controls declared
