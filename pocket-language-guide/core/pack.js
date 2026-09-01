@@ -81,6 +81,18 @@ export function hasContent(coverage, bcp47) {
 }
 
 /**
+ * Whether a failed load means the file is absent rather than momentarily
+ * unreachable: a 404 in the browser, ENOENT in Node. The distinction matters
+ * because a draft language really has no file for some sections, while a 503 from
+ * a warming CDN or a dropped connection means we failed to fetch rows that exist
+ * -- and treating those alike printed a sheet quietly missing whole sections.
+ * @param {any} err
+ */
+export function isMissingFile(err) {
+  return err?.status === 404 || err?.code === 'ENOENT';
+}
+
+/**
  * One language's realizations, keyed by concept_id. Missing concepts are simply
  * absent -- draft languages are legitimately partial.
  * @param {LoadText} loadText @param {string} bcp47 @param {string[]} groups
@@ -91,8 +103,12 @@ export async function loadLanguage(loadText, bcp47, groups) {
     let text;
     try {
       text = await loadText(`data/lang/${bcp47}/${group}.csv`);
-    } catch {
-      continue;
+    } catch (err) {
+      // A draft language legitimately has no file for some groups. Anything other
+      // than "absent" means we failed to fetch rows that do exist, and carrying on
+      // would print a sheet silently missing a section -- possibly Emergency.
+      if (isMissingFile(err)) continue;
+      throw err;
     }
     for (const row of parseTable(text, `data/lang/${bcp47}/${group}.csv`)) {
       rows[row.concept_id] = row;

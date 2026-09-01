@@ -401,6 +401,26 @@ pages, including a PDF export with the network switched off. `tests/render.spec.
 renders the same plan through both renderers and compares ink, which is how a
 dropped glyph or an unloaded font gets caught.
 
+## When a load fails
+
+Offline is the primary use case, and the state between "online" and "offline" is
+the one that bites: a warming CDN or a dropped connection fails *some* requests.
+The app used to carry on through that. A 503 on `data/lang/ja/social.csv` printed
+a sheet quietly missing a whole section -- possibly Emergency -- and a 503 on a
+`.woff2` printed one typeset in a fallback face whose advances differ from the
+ones every box was measured against, because measurement reads the `.ttf` and
+display reads the `.woff2`.
+
+Both now refuse. `isMissingFile` in `core/pack.js` separates *absent* (404 in the
+browser, ENOENT in Node) from *unreachable*: a draft language genuinely has no
+file for some groups and that is fine, while anything else is a failure to fetch
+rows that exist. `ensureFontCss` checks the faces it actually asked for -- not
+every face in `document.fonts`, which still holds the previous typeface's -- and
+names the ones that did not arrive. `tests/offline.spec.js` asserts both, and
+asserts the page recovers once the network does.
+
+For a print artifact, refusing beats printing something subtly wrong.
+
 ## Deliberately not built yet
 
 Named so nobody has to rediscover the gap:

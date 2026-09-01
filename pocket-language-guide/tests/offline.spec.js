@@ -38,3 +38,21 @@ test('saves a pair that has no curated respellings', async ({ page, context }) =
   await page.goto('/customize.html?target=zh-Hans&source=ja');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
 });
+
+// A flaky connection is the same situation as no connection, only worse: the app
+// used to carry on and print a sheet quietly missing whole sections, which for a
+// safety-critical artifact is worse than refusing.
+test('a failed data or font fetch is reported, not printed around', async ({ page }) => {
+  for (const pattern of ['**/data/lang/ja/social.csv', '**/data/fonts/cjk-jp-400.woff2']) {
+    await page.route(pattern, (route) => route.fulfill({ status: 503, body: 'nope' }));
+    await page.goto('/sheet.html?target=ja&source=en');
+    await expect(page.locator('body')).toContainText('Something went wrong', { timeout: 60_000 });
+    await expect(page.locator('#faces .face')).toHaveCount(0);
+    await page.unroute(pattern);
+  }
+
+  // And the same page is fine once the network is.
+  await page.goto('/sheet.html?target=ja&source=en');
+  await expect(page.locator('#faces .face').first()).toBeVisible({ timeout: 90_000 });
+  await expect(page.locator('body')).not.toContainText('Something went wrong');
+});

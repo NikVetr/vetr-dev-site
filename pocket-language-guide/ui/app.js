@@ -7,21 +7,34 @@
 import { parseTable } from '../core/csv.js';
 import { hasContent, respellOverrideFile } from '../core/pack.js';
 import { createSheetContext, stacksFor } from '../core/sheet.js';
-import { fontFaceCss } from '../render/fonts.js';
+import { familyFor, fontFaceCss } from '../render/fonts.js';
 
 const READER_KEY = 'plg.reader';
+
+/**
+ * A fetch that failed, carrying the status so `isMissingFile` in core/pack.js can
+ * tell "this file does not exist" from "we could not get a file that does".
+ */
+class LoadError extends Error {
+  /** @param {string} rel @param {number} status */
+  constructor(rel, status) {
+    super(`${rel}: HTTP ${status}`);
+    this.name = 'LoadError';
+    this.status = status;
+  }
+}
 
 /** @param {string} rel */
 export async function loadText(rel) {
   const res = await fetch(rel, { cache: 'no-cache' });
-  if (!res.ok) throw new Error(`${rel}: HTTP ${res.status}`);
+  if (!res.ok) throw new LoadError(rel, res.status);
   return res.text();
 }
 
 /** @param {string} rel */
 export async function loadBytes(rel) {
   const res = await fetch(rel, { cache: 'no-cache' });
-  if (!res.ok) throw new Error(`${rel}: HTTP ${res.status}`);
+  if (!res.ok) throw new LoadError(rel, res.status);
   return new Uint8Array(await res.arrayBuffer());
 }
 
@@ -84,7 +97,20 @@ export async function ensureFontCss(ctx, target, source, typeface = 'sans') {
     style.textContent = fontFaceCss(manifest, stacks);
     document.head.append(style);
   }
-  await Promise.allSettled([...document.fonts].map((f) => f.load()));
+  // The solver measured advances from the .ttf, so a .woff2 that fails to arrive
+  // does not degrade the preview -- it makes it wrong, drawing in a fallback face
+  // whose advances differ from the ones every box was sized against. The
+  // pre-render path already refuses to continue here; so does this one now.
+  const families = new Set(stacks.map(familyFor));
+  const wanted = [...document.fonts].filter((f) => families.has(f.family.replace(/"/g, '')));
+  const results = await Promise.allSettled(wanted.map((f) => f.load()));
+  const failed = wanted
+    .filter((_, i) => results[i].status === 'rejected')
+    .map((f) => `${f.family} ${f.weight}${f.style === 'italic' ? ' italic' : ''}`);
+  if (failed.length) {
+    throw new Error(`these fonts could not be loaded, so the sheet would be `
+      + `typeset in the wrong face: ${failed.join(', ')}`);
+  }
   await document.fonts.ready;
   return manifest;
 }
