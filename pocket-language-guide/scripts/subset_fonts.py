@@ -184,6 +184,21 @@ def build_face(stack, weight, italic, source, chars):
     subsetter.populate(unicodes=chars & set(font.getBestCmap()))
     subsetter.subset(font)
 
+    # Pad every glyph out to a four-byte boundary.
+    #
+    # fontkit -- the subsetter pdf-lib calls on the way into a PDF -- copies glyph
+    # data verbatim and then, if the subset it produced is small enough for the
+    # short `loca` format, halves every offset to store it. Halving an odd offset
+    # truncates it, and every glyph after that point is read from one byte off: the
+    # exported PDF loses most of its type while the on-screen preview, which reads
+    # the woff2 through the browser, stays perfect. fontTools only aligns glyph data
+    # when it is writing short `loca` itself, so a face large enough to need the
+    # long format -- which the Latin ones became when they took on Cyrillic --
+    # silently starts producing broken PDFs. Four-byte alignment costs about 3KB a
+    # face and makes the halving lossless whichever format fontkit picks.
+    if "glyf" in font:
+        font["glyf"].padding = 4
+
     # Pin the head table's timestamps. fontTools stamps the current time on save,
     # which made every one of the ~50 committed faces show as modified on every
     # run -- about 7MB of churn for no change at all -- and broke the invariant
