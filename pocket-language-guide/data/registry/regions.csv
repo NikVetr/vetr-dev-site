@@ -14,13 +14,13 @@ AT,Austria,112 all services,EUR,2,EU-wide 112,2026-08-31
 PT,Portugal,112 all services,EUR,2,EU-wide 112,2026-08-31
 CY,Cyprus,112 all services,EUR,2,EU-wide 112,2026-08-31
 JP,Japan,110 police;119 fire and ambulance,JPY,2,"JNTO visitor-hotline guidance, via japanese-reviewed-v6",2026-08-31
-KR,South Korea,112 police;119 fire and ambulance,KRW,1,needs a fluent reviewer,
-SG,Singapore,999 police;995 fire and ambulance,SGD,1,needs a fluent reviewer,
-MY,Malaysia,999 all services,MYR,1,needs a fluent reviewer,
-TH,Thailand,191 police;199 fire;1669 ambulance,THB,1,needs a fluent reviewer,
-VN,Viet Nam,113 police;114 fire;115 ambulance,VND,1,needs a fluent reviewer,
-ID,Indonesia,112 all services,IDR,1,needs a fluent reviewer,
-IN,India,112 all services,INR,1,needs a fluent reviewer,
+KR,South Korea,112 police;119 fire and ambulance,KRW,2,Korean National Police Agency 112 and National Fire Agency 119,2026-09-01
+SG,Singapore,999 police;995 fire and ambulance,SGD,2,Singapore Civil Defence Force 995 and Singapore Police Force 999,2026-09-01
+MY,Malaysia,999 all services,MYR,2,Malaysia Emergency Response Services (MERS) 999,2026-09-01
+TH,Thailand,191 police;1669 ambulance;199 fire;1155 tourist police,THB,2,Tourism Authority of Thailand and Royal Thai Police published numbers,2026-09-01
+VN,Viet Nam,113 police;114 fire;115 ambulance,VND,2,"Vietnamese national emergency numbers, per government portals",2026-09-01
+ID,Indonesia,112 all services;110 police;119 ambulance,IDR,2,"Komdigi Call Center 112, with the national lines it is replacing",2026-09-01
+IN,India,112 all services;100 police;108 ambulance,INR,2,"Ministry of Home Affairs ERSS, deployed in all 36 states and union territories",2026-09-01
 MX,Mexico,911 all services,MXN,2,"IFT acuerdo establishing 911 as the single national number, with gob.mx/911",2026-09-01
 AR,Argentina,911 police and ambulance;100 fire,ARS,2,"Ley 25.367 national single number, with argentina.gob.ar emergency listing",2026-09-01
 CO,Colombia,123 all services,COP,2,Policia Nacional de Colombia single national emergency line,2026-09-01
@@ -28,12 +28,12 @@ CL,Chile,133 police;131 ambulance;132 fire,CLP,2,Chilean foreign ministry consul
 PE,Peru,105 police;116 fire and ambulance,PEN,2,"gob.pe national emergency-number listing, with CGBVP 116 dispatch record",2026-09-01
 BR,Brazil,190 police;192 ambulance;193 fire,BRL,2,ANATEL national three-digit emergency code table,2026-09-01
 CH,Switzerland,112 all services;144 ambulance;117 police;118 fire,CHF,2,ch.ch federal emergency-number page,2026-09-01
-SA,Saudi Arabia,999 police;998 fire;997 ambulance,SAR,1,needs a fluent reviewer,
-AE,United Arab Emirates,999 police;997 fire;998 ambulance,AED,1,needs a fluent reviewer,
-EG,Egypt,122 police;180 fire;123 ambulance,EGP,1,needs a fluent reviewer,
-MA,Morocco,19 police;15 ambulance,MAD,1,needs a fluent reviewer,
-JO,Jordan,911 all services,JOD,1,needs a fluent reviewer,
-IQ,Iraq,104 police;115 ambulance,IQD,1,needs a fluent reviewer,
+SA,Saudi Arabia,911 all services;999 police;997 ambulance;998 fire,SAR,2,Saudi CST national numbering plan; 911 unified centres in the main regions,2026-09-01
+AE,United Arab Emirates,999 police;998 ambulance;997 fire,AED,2,"UAE Government official portal, handling emergencies",2026-09-01
+EG,Egypt,122 police;123 ambulance;180 fire,EGP,2,UK FCDO travel advice for Egypt; 123 confirmed by the Egyptian Ambulance Authority,2026-09-01
+MA,Morocco,190 police;150 fire and ambulance;177 gendarmerie,MAD,2,UK FCDO travel advice for Morocco,2026-09-01
+JO,Jordan,911 all services,JOD,2,"Jordan Public Security Directorate 911, corroborated by UK FCDO",2026-09-01
+IQ,Iraq,911 police;122 ambulance;115 fire,IQD,1,needs a fluent reviewer,
 TR,Turkey,112 all services,TRY,2,Interior Ministry single-number 112 policy,2026-09-01
 RU,Russia,112 all services;103 ambulance;102 police,RUB,2,MChS Russia unified 112 guidance,2026-09-01
 BY,Belarus,112 all services;103 ambulance;102 police,BYN,2,MChS Belarus 112 dispatch service,2026-09-01
