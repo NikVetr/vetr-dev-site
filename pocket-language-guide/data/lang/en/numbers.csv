@@ -17,11 +17,11 @@ numbers-money.y-w-n,"10,000",,,,2,latex-reference-v2
 numbers-money.b-n,1/2,,,,2,latex-reference-v2
 numbers-money.yu-n,yuan,,,,2,latex-reference-v2
 numbers-money.ku-i,yuan (spoken),,,,2,latex-reference-v2
-numbers-money.number-and-classifier-notes,Build numbers: 11 十一 shíyī; 20 二十 èrshí; 21 二十一 èrshíyī. Phone numbers: 1 is often 幺 yāo. Common classifiers: 个 ge general; 位 wèi people; 张 zhāng tickets / flat objects; 杯 bēi cups; 瓶 píng bottles. 角 / 毛 jiǎo / máo = 0.1 yuan; 分 fēn = 0.01 yuan.,,,,2,latex-reference-v2
+numbers-money.number-and-classifier-notes,"Build numbers: 11 = shi yi; 20 = er shi; 21 = er shi yi. Phone numbers: 1 is often yao. Classifiers: ge (general), wei (people), zhang (tickets / flat), bei (cups), ping (bottles). jiao / mao = 0.1 yuan; fen = 0.01 yuan.",,,,2,latex-reference-v2
 numbers-money.2-items,2 items,,,,2,japanese-reviewed-v6
 numbers-money.yen,yen,,,,2,japanese-reviewed-v6
 numbers-money.yen-symbol,yen (symbol),,,,2,japanese-reviewed-v6
-numbers-money.number-and-classifier-notes-2,Build numbers: 11 十一 shíyī; 20 二十 èrshí; 21 二十一 èrshíyī. Phone numbers: 1 is often 幺 yāo. Common classifiers: 个 ge general; 位 wèi people; 张 zhāng tickets / flat objects; 杯 bēi cups; 瓶 píng bottles. 角 / 毛 jiǎo / máo = 0.1 yuan; 分 fēn = 0.01 yuan.,,,,2,japanese-reviewed-v6
+numbers-money.number-and-classifier-notes-2,"Build numbers: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Counters: -tsu (things), -mai (flat), -hon (long), -nin (people), -hai (cups). Phone: 0 = zero or maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,japanese-reviewed-v6
 atm-cash.where-is-an-atm,Where is an ATM?,,,,2,expansion-v1
 atm-cash.does-this-atm-take-foreign-cards,Does this ATM take foreign cards?,,,,2,expansion-v1
 atm-cash.the-atm-kept-my-card,The ATM kept my card,,,,2,expansion-v1

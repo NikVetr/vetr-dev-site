@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { counts, expectIncluded } from './counts.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
 
@@ -30,11 +31,13 @@ test.describe('adding your own term', () => {
     await page.goto(STUDIO);
     await page.evaluate(() => localStorage.clear());
     await page.reload();
-    await expect(page.locator('#counts')).toContainText('358 of 413');
+    const base = await counts(page);
+    expect(base.included).toBeGreaterThan(0);
+    return base.included;
   }
 
   test('reaches the tree and the sheet, and survives a reload', async ({ page }) => {
-    await freshStudio(page);
+    const base = await freshStudio(page);
 
     await page.locator('details.add-term summary').click();
     await page.selectOption('#add-section', 'introductions');
@@ -42,7 +45,7 @@ test.describe('adding your own term', () => {
     await page.fill('#add-gloss', 'I am staying at the Beijing Hotel');
     await page.getByRole('button', { name: 'Add to the sheet' }).click();
 
-    await expect(page.locator('#counts')).toContainText('359 of 413');
+    await expectIncluded(page, base + 1);
     const mine = page.locator('.items li', { hasText: 'Beijing Hotel' });
     await expect(mine).toHaveCount(1);
     await expect(mine.locator('.tag.mine')).toBeVisible();
@@ -50,17 +53,17 @@ test.describe('adding your own term', () => {
 
     // Kept in local storage, so a reload does not lose it.
     await page.reload();
-    await expect(page.locator('#counts')).toContainText('359 of 413');
+    await expectIncluded(page, base + 1);
     await expect(page.locator('.items li', { hasText: 'Beijing Hotel' })).toHaveCount(1);
   });
 
   test('a half-filled term is refused', async ({ page }) => {
-    await freshStudio(page);
+    const base = await freshStudio(page);
     await page.locator('details.add-term summary').click();
     await page.fill('#add-script', '只有一边');
     await page.getByRole('button', { name: 'Add to the sheet' }).click();
     await expect(page.locator('details.add-term p')).toContainText('Both language fields');
-    await expect(page.locator('#counts')).toContainText('358 of 413');
+    await expectIncluded(page, base);
   });
 });
 

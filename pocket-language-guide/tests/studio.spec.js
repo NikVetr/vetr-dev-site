@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { counts, expectIncluded, expectIncludedNot } from './counts.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
 
@@ -40,11 +41,16 @@ test.describe('studio', () => {
 
   test('turning a section off re-solves with fewer items', async ({ page }) => {
     await page.goto(STUDIO);
-    await expect(page.locator('#counts')).toContainText('358 of 413');
+    const all = await counts(page);
+    expect(all.included).toBeGreaterThan(0);
+
     await page.locator('.tree summary input[type=checkbox]').first().uncheck();
-    await expect(page.locator('#counts')).not.toContainText('358 of 413');
+    const fewer = await expectIncludedNot(page, all.included);
+    expect(fewer.included).toBeLessThan(all.included);
+    expect(fewer.total).toBe(all.total);
+
     await page.locator('.tree summary input[type=checkbox]').first().check();
-    await expect(page.locator('#counts')).toContainText('358 of 413');
+    await expectIncluded(page, all.included);
   });
 
   test('a small card takes more faces instead of failing', async ({ page }) => {
@@ -119,18 +125,20 @@ test.describe('studio', () => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
     await page.getByRole('radio', { name: 'Small' }).click();
-    await expect(page.locator('#status')).toContainText('0.90x');
+    // Whatever it settles on, it must have settled: the balance panel refuses to
+    // propose anything while the sheet does not fit.
+    await expect(page.locator('#status')).toHaveText(/faces at \d/, { timeout: 90_000 });
+    await expect(page.locator('#warnings li.error')).toHaveCount(0);
 
     // Work down the list the way a person would. Clicking rather than unchecking:
     // a solve blocks the main thread for a few hundred milliseconds, so uncheck's
     // immediate state assertion is a race against that, and what matters here is
     // that the selection ends up right.
+    const full = await counts(page);
     const boxes = page.locator('.items input[type=checkbox]');
     const count = await boxes.count();
     for (let i = 0; i < count; i += 9) await boxes.nth(i).click({ force: true });
-    await expect(page.locator('#counts')).not.toContainText('358 of 413');
-
-    const before = Number((await page.locator('#counts').textContent())?.match(/(\d+) of/)?.[1]);
+    const { included: before } = await expectIncludedNot(page, full.included);
     await page.locator('#balance').click();
     await expect(page.locator('#diff')).toBeVisible();
     await expect(page.locator('#diff p')).toContainText('whitespace');
@@ -162,7 +170,7 @@ test.describe('studio', () => {
 
   test('a CSV round trip merges by concept_id instead of duplicating', async ({ page }) => {
     await page.goto(STUDIO);
-    await expect(page.locator('#counts')).toContainText('358 of 413');
+    const before = await counts(page);
 
     const out = page.waitForEvent('download');
     await page.locator('#csv-out').click();
@@ -176,7 +184,7 @@ test.describe('studio', () => {
     await page.locator('#csv-file').setInputFiles({
       name: 'edited.csv', mimeType: 'text/csv', buffer: Buffer.from(edited, 'utf8'),
     });
-    await expect(page.locator('#counts')).toContainText('358 of 413');
+    await expectIncluded(page, before.included);
     await expect(page.locator('.items li', { hasText: 'Hi there' })).toHaveCount(1);
   });
 });

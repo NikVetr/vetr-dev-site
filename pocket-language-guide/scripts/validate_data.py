@@ -16,7 +16,10 @@ DATA = ROOT / "data"
 
 # Wrong content here can cause harm, so machine-unreviewed rows (confidence < 2)
 # are refused outright rather than shown with a caveat.
-SAFETY_CRITICAL = {"emergency-medical", "lost-rescue", "dietary-needs"}
+SAFETY_CRITICAL = {"emergency-medical", "lost-rescue", "dietary-needs",
+                   # Added with the expansion. Every translator was told these
+                   # require a verified row, so the gate has to hold them to it.
+                   "pharmacy-symptoms", "medical-conditions", "police-consulate"}
 MIN_SAFE_CONFIDENCE = 2
 
 errors = []
@@ -129,6 +132,17 @@ def main():
                 if text.strip() and text.count("{}") != slots:
                     errors.append(f"{rel}: {cid} has {text.count('{}')} slots, "
                                   f"concept declares {slots}")
+                # A note prints in the *source* face, because it is prose the
+                # reader reads rather than something they show to anyone. Quoting
+                # the target script inside one therefore renders as tofu -- which
+                # is exactly what the shipped Mandarin card did, with its number
+                # note full of empty boxes. Romanised advice is what the reader can
+                # act on anyway.
+                if is_note and any(ord(c) > 0x2FF for c in text):
+                    quoted = "".join(sorted({c for c in text if ord(c) > 0x2FF}))
+                    errors.append(f"{rel}: {cid} is a note and prints in the source "
+                                  f"face, but quotes non-Latin text ({quoted}), which "
+                                  f"will render as tofu. Romanise it.")
                 section = concepts[cid]["section_id"]
                 if section in SAFETY_CRITICAL:
                     try:
