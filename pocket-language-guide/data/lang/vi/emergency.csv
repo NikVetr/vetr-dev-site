@@ -1,0 +1,138 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+emergency-medical.help,Cứu với!,Cứu tôi với!,,,2,vi-agent-v1
+emergency-medical.please-call-an-ambulance,Xin gọi xe cấp cứu,Xin gọi 115,,,2,vi-agent-v1
+emergency-medical.i-need-a-doctor,Tôi cần bác sĩ,,,,2,vi-agent-v1
+emergency-medical.i-am-sick,Tôi bị bệnh,,,,2,vi-agent-v1
+emergency-medical.i-am-injured,Tôi bị thương,,,,2,vi-agent-v1
+emergency-medical.it-hurts-here,Tôi đau ở đây,,,,2,vi-agent-v1
+emergency-medical.where-is-a-pharmacy,Nhà thuốc ở đâu ạ?,Hiệu thuốc ở đâu ạ?,,,2,vi-agent-v1
+emergency-medical.please-take-me-to-a-hospital,Xin đưa tôi đến bệnh viện,,,,2,vi-agent-v1
+emergency-medical.i-feel-unwell,Tôi thấy không khỏe,,,,2,vi-agent-v1
+emergency-medical.this-is-an-emergency,Đây là trường hợp khẩn cấp,,,,2,vi-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,Tôi bị sốc phản vệ,Tôi bị phản vệ,,anaphylaxis,2,vi-agent-v1
+emergency-medical.i-cannot-breathe,Tôi không thở được,,,,2,vi-agent-v1
+emergency-medical.i-am-bleeding-badly,Tôi chảy máu nhiều,,,,2,vi-agent-v1
+emergency-medical.i-have-chest-pain,Tôi bị đau ngực,,,,2,vi-agent-v1
+emergency-medical.this-person-is-unconscious,Người này bất tỉnh,,,,2,vi-agent-v1
+emergency-medical.where-is-the-nearest-hospital,Bệnh viện gần nhất ở đâu ạ?,,,,2,vi-agent-v1
+emergency-medical.what-is-the-emergency-number,Số khẩn cấp là số mấy ạ?,,,,2,vi-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Có bác sĩ nói tiếng Anh không ạ?,,,,2,vi-agent-v1
+emergency-medical.i-think-a-bone-is-broken,Tôi nghĩ bị gãy xương,,,,2,vi-agent-v1
+emergency-medical.please-call-my-emergency-contact,Xin gọi người liên hệ khẩn cấp của tôi,,,,2,vi-agent-v1
+emergency-medical.i-have-travel-insurance,Tôi có bảo hiểm du lịch,,,,2,vi-agent-v1
+medical-conditions.i-am-diabetic,Tôi bị tiểu đường,Tôi bị đái tháo đường,,,2,vi-agent-v1
+medical-conditions.i-need-insulin,Tôi cần insulin,,,,2,vi-agent-v1
+medical-conditions.i-have-asthma,Tôi bị hen suyễn,Tôi bị hen phế quản,,,2,vi-agent-v1
+medical-conditions.i-have-a-heart-condition,Tôi bị bệnh tim,,,,2,vi-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,Tôi dị ứng penicillin,,,,2,vi-agent-v1
+medical-conditions.i-have-epilepsy,Tôi bị động kinh,,,,2,vi-agent-v1
+medical-conditions.my-blood-sugar-is-low,Tôi bị hạ đường huyết,,,,2,vi-agent-v1
+medical-conditions.i-need-my-inhaler,Tôi cần bình xịt hen,Tôi cần thuốc xịt hen,,,2,vi-agent-v1
+medical-conditions.i-am-pregnant,Tôi đang mang thai,Tôi có thai,,,2,vi-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,Tôi có bút tiêm adrenalin,Bút tiêm tự động epinephrine,,,2,vi-agent-v1
+medical-conditions.i-take-medicine-for,Tôi uống thuốc trị {},,,,2,vi-agent-v1
+medical-conditions.i-take-blood-thinners,Tôi dùng thuốc chống đông máu,,,,2,vi-agent-v1
+medical-conditions.medicine-allergy,Dị ứng thuốc: {},,,,2,vi-agent-v1
+medical-conditions.this-card-lists-my-conditions,Thẻ này ghi bệnh của tôi,,,,2,vi-agent-v1
+medical-conditions.this-is-my-medicine,Đây là thuốc của tôi,,,,2,vi-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,Xin cho tôi đường hoặc nước ngọt,,,,2,vi-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,Tiêm vào mặt ngoài đùi tôi,,,,2,vi-agent-v1
+medical-conditions.my-blood-type-is,Nhóm máu của tôi là {},,,,2,vi-agent-v1
+medical-conditions.do-not-give-me,Đừng cho tôi dùng {},,,,2,vi-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Tôi dị ứng aspirin và ibuprofen,,,,2,vi-agent-v1
+medical-conditions.my-injector-is-in-my-bag,Bút tiêm của tôi ở trong túi,,,,2,vi-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,Tôi dị ứng thuốc sulfa,Kháng sinh nhóm sulfamid,,,2,vi-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,Nhà thuốc nào đang mở cửa ạ?,,,,2,vi-agent-v1
+pharmacy-symptoms.i-need-medicine-for,Tôi cần thuốc trị {},,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-a-fever,Tôi bị sốt,,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-diarrhea,Tôi bị tiêu chảy,,,,2,vi-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Nhà thuốc nào mở ban đêm ạ?,Nhà thuốc 24/24 ở đâu ạ?,,,2,vi-agent-v1
+pharmacy-symptoms.painkiller,Thuốc giảm đau,,,,2,vi-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,Có cần đơn thuốc không ạ?,Có cần toa thuốc không ạ?,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-a-headache,Tôi bị đau đầu,Tôi bị nhức đầu,,,2,vi-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,Paracetamol,Panadol · Hapacol,,,2,vi-agent-v1
+pharmacy-symptoms.how-much-should-i-take,Uống bao nhiêu ạ?,,,,2,vi-agent-v1
+pharmacy-symptoms.i-am-vomiting,Tôi bị nôn,Tôi bị ói,,,2,vi-agent-v1
+pharmacy-symptoms.rehydration-salts,Oresol,Gói bù nước điện giải,,,2,vi-agent-v1
+pharmacy-symptoms.how-many-times-a-day,Ngày uống mấy lần ạ?,,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,Tôi bị đau bụng,,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-a-cough,Tôi bị ho,,,,2,vi-agent-v1
+pharmacy-symptoms.antihistamine,Thuốc chống dị ứng,Thuốc kháng histamin,,,2,vi-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,Thuốc cầm tiêu chảy,Loperamid · Berberin,,,2,vi-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,Uống chung với {} được không ạ?,,,,2,vi-agent-v1
+pharmacy-symptoms.i-feel-dizzy,Tôi bị chóng mặt,,,,2,vi-agent-v1
+pharmacy-symptoms.ibuprofen,Ibuprofen,,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,Tôi bị đau họng,,,,2,vi-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,Ở đây có thuốc này không ạ?,,,,2,vi-agent-v1
+pharmacy-symptoms.bandage,Băng gạc,Băng y tế,,,2,vi-agent-v1
+pharmacy-symptoms.the-pain-is-severe,Tôi đau dữ dội,,,,2,vi-agent-v1
+pharmacy-symptoms.antiseptic,Thuốc sát trùng,Povidine · Betadine,,,2,vi-agent-v1
+pharmacy-symptoms.i-feel-nauseous,Tôi buồn nôn,,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-a-rash,Tôi bị nổi mẩn,Tôi bị phát ban,,,2,vi-agent-v1
+pharmacy-symptoms.before-or-after-food,Uống trước hay sau khi ăn ạ?,,,,2,vi-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,Tôi nghĩ nó bị nhiễm trùng,,,,2,vi-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,Thuốc chống say xe,,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-a-cut,Tôi có vết cắt,Tôi bị đứt tay,,,2,vi-agent-v1
+pharmacy-symptoms.antacid,Thuốc đau dạ dày,Thuốc trung hòa axit,,,2,vi-agent-v1
+pharmacy-symptoms.i-have-a-burn,Tôi bị bỏng,Tôi bị phỏng,,,2,vi-agent-v1
+pharmacy-symptoms.it-started-days-ago,Bị từ {} ngày trước,,,,2,vi-agent-v1
+pharmacy-symptoms.cough-medicine,Thuốc ho,,,,2,vi-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,Đang mang thai uống được không ạ?,,,,2,vi-agent-v1
+body-parts.head,Đầu,,,,2,vi-agent-v1
+body-parts.stomach,Bụng,,,,2,vi-agent-v1
+body-parts.back,Lưng,,,,2,vi-agent-v1
+body-parts.throat,Họng,Cổ họng,,,2,vi-agent-v1
+body-parts.tooth,Răng,,,,2,vi-agent-v1
+body-parts.chest,Ngực,,,,2,vi-agent-v1
+body-parts.eye,Mắt,,,,2,vi-agent-v1
+body-parts.ear,Tai,,,,2,vi-agent-v1
+body-parts.leg,Chân,,,,2,vi-agent-v1
+body-parts.arm,Cánh tay,,,,2,vi-agent-v1
+body-parts.foot,Bàn chân,,,,2,vi-agent-v1
+body-parts.hand,Bàn tay,,,,2,vi-agent-v1
+body-parts.knee,Đầu gối,,,,2,vi-agent-v1
+body-parts.ankle,Cổ chân,Mắt cá chân,,,2,vi-agent-v1
+body-parts.skin,Da,,,,2,vi-agent-v1
+lost-rescue.i-lost-my-passport,Tôi mất hộ chiếu,,,,2,vi-agent-v1
+lost-rescue.i-lost-my-phone,Tôi mất điện thoại,,,,2,vi-agent-v1
+lost-rescue.please-call-the-police,Xin gọi công an,Xin gọi 113,,,2,vi-agent-v1
+lost-rescue.we-are-here,Chúng tôi ở đây,,,,2,vi-agent-v1
+lost-rescue.please-look-at-my-location-pin,Xin xem ghim vị trí của tôi,,,,2,vi-agent-v1
+lost-rescue.i-cannot-walk,Tôi không đi được,,,,2,vi-agent-v1
+lost-rescue.i-sprained-my-ankle,Tôi bị bong gân cổ chân,Tôi bị trẹo chân,,,2,vi-agent-v1
+lost-rescue.please-contact-rescue,Xin liên hệ đội cứu hộ,,,,2,vi-agent-v1
+lost-rescue.my-companion-is-missing,Người đi cùng tôi bị lạc,,,,2,vi-agent-v1
+lost-rescue.please-look-at-my-current-location,Xin xem vị trí hiện tại của tôi,,,,2,vi-agent-v1
+lost-rescue.my-child-is-missing,Con tôi bị lạc,,,,2,vi-agent-v1
+lost-rescue.i-do-not-know-where-i-am,Tôi không biết mình đang ở đâu,,,,2,vi-agent-v1
+lost-rescue.my-friend-is-hurt,Bạn tôi bị thương,,,,2,vi-agent-v1
+lost-rescue.i-lost-my-wallet,Tôi mất ví,Tôi mất bóp,,,2,vi-agent-v1
+lost-rescue.i-lost-my-bag,Tôi mất túi xách,,,,2,vi-agent-v1
+lost-rescue.where-is-lost-and-found,Chỗ nhận đồ thất lạc ở đâu ạ?,,,,2,vi-agent-v1
+lost-rescue.i-cannot-find-my-hotel,Tôi không tìm được khách sạn,,,,2,vi-agent-v1
+lost-rescue.i-left-it-on-the-train,Tôi để quên trên tàu,,,,2,vi-agent-v1
+lost-rescue.i-cannot-get-down,Tôi không xuống được,,,,2,vi-agent-v1
+police-consulate.where-is-the-police-station,Đồn công an ở đâu ạ?,,,,2,vi-agent-v1
+police-consulate.i-want-to-report-a-theft,Tôi muốn trình báo mất trộm,,,,2,vi-agent-v1
+police-consulate.my-bag-was-stolen,Tôi bị lấy cắp túi xách,,,,2,vi-agent-v1
+police-consulate.my-passport-was-stolen,Tôi bị lấy cắp hộ chiếu,,,,2,vi-agent-v1
+police-consulate.someone-is-following-me,Có người đang bám theo tôi,,,,2,vi-agent-v1
+police-consulate.i-need-a-written-police-report,Tôi cần biên bản của công an,,,,2,vi-agent-v1
+police-consulate.i-want-to-contact-my-embassy,Tôi muốn liên hệ đại sứ quán,,,,2,vi-agent-v1
+police-consulate.i-need-it-for-my-insurance,Tôi cần cái này cho bảo hiểm,,,,2,vi-agent-v1
+police-consulate.i-need-an-interpreter,Tôi cần người phiên dịch,,,,2,vi-agent-v1
+police-consulate.please-leave-me-alone,Xin để tôi yên,,,,2,vi-agent-v1
+police-consulate.i-was-robbed,Tôi bị cướp,,,,2,vi-agent-v1
+police-consulate.i-want-a-lawyer,Tôi muốn có luật sư,,,,2,vi-agent-v1
+police-consulate.please-notify-my-consulate,Xin báo cho lãnh sự quán của tôi,,,,2,vi-agent-v1
+police-consulate.i-am-calling-the-police,Tôi sẽ gọi công an,,,,2,vi-agent-v1
+police-consulate.am-i-under-arrest,Tôi có bị bắt không ạ?,,,,2,vi-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,"Không, cảm ơn. Tôi không quan tâm",,,,2,vi-agent-v1
+police-consulate.someone-attacked-me,Có người hành hung tôi,,,,2,vi-agent-v1
+police-consulate.i-did-not-agree-to-this-price,Tôi không đồng ý giá này,,,,2,vi-agent-v1
+police-consulate.please-write-the-report-number,Xin ghi số biên bản,,,,2,vi-agent-v1
+police-consulate.it-happened-here,Việc xảy ra ở đây,,,,2,vi-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,Cho tôi xin bản sao biên bản ạ,,,,2,vi-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,Tôi không ký giấy tờ mình không đọc được,,,,2,vi-agent-v1
+police-consulate.am-i-free-to-go,Tôi được về chưa ạ?,,,,2,vi-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,Tôi không muốn đi cùng,,,,2,vi-agent-v1

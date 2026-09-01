@@ -1,0 +1,744 @@
+concept_id,respell
+building-help.what-room-number-is-this,kwal EH oo NOO-muh-roo DESH-tah SAH-lah
+accessibility.step-free,ah ah-SEH-soo seng duh-GROWSH
+in-a-building.is-this-the-correct-entrance,ESH-tah EH ah eng-TRAH-dah SEHR-tah
+toilets.where-toilet,ONG-dee EH ah KAH-zah duh BAH-nyoo
+building-words.elevator,oo ee-luh-vah-DOR
+pronouns-verbs.i-me,EH-oo / muh
+question-words.what,oo KAY
+emergency-medical.help,soo-KOH-hoo
+medical-conditions.i-am-diabetic,TEH-nyoo dyah-BEH-tish
+pharmacy-symptoms.which-pharmacy-is-open-now,kuh far-MAH-syah shtah ah-BEHR-tah ah-GOH-rah
+body-parts.head,ah kah-BEH-sah
+lost-rescue.i-lost-my-passport,per-DEE oo MEH-oo pah-sah-POR-tuh
+police-consulate.where-is-the-police-station,ONG-duh FEE-kah ah shKWAH-drah dah poo-LEE-syah
+dietary-needs.no-meat,seng KAR-nuh
+food-ordering.table-for-two,MEH-zah PAH-rah DOYSH
+trail-words.trail,oo TREE-lyoo
+weather.forecast,kwal EH ah pruh-vee-ZOWNG doo TENG-poo
+hiking-parks.is-this-the-way-to,EH ESH-tuh oo kah-MEE-nyoo PAH-rah {}
+trail-conditions.how-long-is-the-full-route,kuh deesh-TANG-syah teng oo per-KOOR-soo TOH-doo
+trail-transport.how-long-is-the-queue,KWANG-too TENG-poo duh FEE-lah
+trail-warnings.open,ah-BEHR-too
+trail-landmarks.trail-marker,ah MAR-kah doo TREE-lyoo
+hotel-words.passport,oo pah-sah-POR-tuh
+hotel-basics.are-any-rooms-available,TAY-eng KWAR-toosh deesh-poo-NEE-vaysh
+hotel-requests.can-i-check-out-later,POH-soo fah-ZER shehk-OWT MYSH TAR-duh
+room-problems.there-is-a-problem-with-the-room,ah oong proo-BLEH-mah noo KWAR-too
+laundry.please-wash-these-clothes,"LAH-vuh ESH-tah HOH-pah, poor fah-VOR"
+introductions.my-name-is,SHAH-moo-muh {}
+numbers-money.l-ng,ZEH-roo
+atm-cash.where-is-an-atm,ONG-duh AH oong mool-tee-BANG-koo
+attractions-tickets.where-can-i-buy-tickets,ONG-duh POH-soo kong-PRAR bee-LYEH-tish
+payment-receipt.pay-by-card,pah-GAR kong kar-TOWNG
+shopping.i-am-just-looking,shtoh SAW ah VER
+color-size-returns.do-you-have-another-color,teng OH-trah KOR
+tax-refund.can-i-get-a-tax-refund,POH-soo puh-DEER oo huh-eng-BOL-soo doo EE-vah
+social-basics.hello,oh-LAH
+communication.i-do-not-speak-this-language,nowng FAH-loo ESH-tah LEENG-gwah
+quick-responses.please-go-ahead,fahzh fah-VOR
+phone-translation.i-am-using-phone-translation,shtoh ah oo-ZAR oong trah-doo-TOR ow-too-MAH-tee-koo
+phone-text-power.please-type-it-for-me,"shKREH-vah PAH-rah MEENG, poor fah-VOR"
+sim-data.i-would-like-a-tourist-sim,kuh-REE-ah oong kar-TOWNG SEENG PAH-rah too-REESH-tah
+etiquette.is-this-allowed,EESH-too EH per-mee-TEE-doo
+children.cannot-find-my-child,nowng kong-SEE-goo eng-kong-TRAR oo MEH-oo FEE-lyoo
+time-scheduling.what-time-is-it,kee OH-rahsh SOWNG
+time-words.today,OH-zhuh
+days-of-week.monday,suh-GOONG-dah-FAY-rah
+months.january,zhah-NAY-roo
+directions.where-is,ONG-duh FEE-kah {}
+quick-directions.go-straight,SEE-gah eng FRENG-tuh
+taxi.please-take-me-here,"LEH-vuh-muh ah ESH-tuh eng-duh-REH-soo, poor fah-VOR"
+transit-rides.two-tickets,doysh bee-LYEH-tish
+border-customs.i-am-a-tourist,soh too-REESH-tah
+pickup-meeting.where-is-the-pickup-point,ONG-dee EH oo PONG-too duh huh-KOH-lyah
+rail-station-words.high-speed-rail,oo kong-BOY-oo duh AL-tah vuh-loo-see-DAH-duh
+common-signs.open-on,ah-BEHR-too
+utility-templates.i-want-to-go-to,KEH-roo EER PAH-rah {}
+building-help.i-am-lost,shtoh per-DEE-doo
+accessibility.wheelchair-access,EH ah-suh-SEE-vel ah kah-DAY-rahzh duh HOH-dahsh
+toilets.where-public-toilet,ONG-duh AH OO-mah KAH-zah duh BAH-nyoo POO-blee-kah
+building-words.stairs,ahzh shKAH-dahsh
+pronouns-verbs.we-us,NAWSH / noosh
+question-words.where,ONG-duh
+emergency-medical.please-call-an-ambulance,"SHAH-muh OO-mah ang-boo-LANG-syah, poor fah-VOR"
+medical-conditions.i-need-insulin,pruh-SEE-zoo duh eeng-soo-LEE-nah
+pharmacy-symptoms.i-need-medicine-for,pruh-SEE-zoo duh oong muh-dee-kah-MENG-too PAH-rah {}
+body-parts.stomach,ah bah-HEE-gah
+lost-rescue.i-lost-my-phone,per-DEE oo MEH-oo tuh-luh-MAW-vel
+police-consulate.i-want-to-report-a-theft,KEH-roo duh-noong-SYAR oong HOH-boo
+dietary-needs.no-eggs,seng OH-voosh
+food-ordering.is-a-table-available,ah MEH-zah LEE-vruh
+trail-words.trailhead,oo ee-NEE-syoo doo TREE-lyoo
+weather.will-it-rain,vy shoo-VER OH-zhuh
+hiking-parks.where-is-the-trailhead,ONG-duh koo-MEH-sah oo TREE-lyoo
+trail-conditions.can-we-return-the-same-way,poo-DEH-moosh vol-TAR PEH-loo MEZH-moo kah-MEE-nyoo
+trail-transport.what-time-is-the-last-shuttle,ah kee OH-rahzh EH oo OOL-tee-moo ow-too-KAH-hoo
+trail-warnings.closed,eng-suh-HAH-doo
+trail-landmarks.fork-junction,ah bee-foor-kah-SOWNG
+hotel-words.room-key-card,oo kar-TOWNG doo KWAR-too
+hotel-basics.there-are-two-of-us,SOH-moosh DOYSH
+hotel-requests.what-time-does-breakfast-start,ah kee OH-rahsh koo-MEH-sah oo puh-KEH-noo-al-MOH-soo
+room-problems.the-air-conditioning-is-broken,oo AR kong-dee-syoo-NAH-doo shtah ah-vah-RYAH-doo
+laundry.where-is-a-laundromat,ONG-duh AH OO-mah lah-vang-dah-REE-ah self-SER-veesh
+introductions.nice-to-meet-you,MWEENG-too prah-ZER
+numbers-money.y,oong
+atm-cash.does-this-atm-take-foreign-cards,ESH-tah MAH-kee-nah ah-SAY-tah kar-TOYNGSH shtrang-ZHAY-roosh
+attractions-tickets.do-i-need-a-reservation,EH pruh-SEE-zoo huh-zer-VAR
+payment-receipt.pay-cash,pah-GAR eng dee-NYAY-roo
+shopping.how-much-is-this,KWANG-too KOOSH-tah EESH-too
+color-size-returns.do-you-have-another-size,teng OH-troo tah-MAH-nyoo
+social-basics.hello-polite,bong DEE-ah
+communication.i-speak-only-a-little-of-this,FAH-loo SAW oong POH-koo DESH-tah LEENG-gwah
+quick-responses.yes-right,seeng
+phone-translation.please-speak-toward-the-phone,"FAH-luh PAH-rah oo tuh-luh-MAW-vel, poor fah-VOR"
+phone-translation.please-write-the-place-name,shKREH-vah ah-KEE oo NOH-muh doo loo-GAR
+sim-data.may-i-use-your-wifi,POH-soo oo-ZAR oo WY-fy
+etiquette.is-tipping-expected,EH koosh-TOO-muh DAR gor-ZHEH-tah
+children.make-an-announcement,"POH-deng fah-ZER oong ah-NOONG-syoo, poor fah-VOR"
+time-scheduling.how-many-minutes,KWANG-toosh mee-NOO-toosh
+time-words.tomorrow,ah-mah-NYANG
+days-of-week.tuesday,TER-sah-FAY-rah
+months.february,fuh-vuh-RAY-roo
+directions.how-do-i-get-to,KOH-moo suh VY PAH-rah {}
+quick-directions.turn-left,VEE-ruh ah shKER-dah
+taxi.please-send-me-the-address,"eng-VEE-uh-muh oo eng-duh-REH-soo, poor fah-VOR"
+transit-rides.where-is-the-subway-station,ONG-duh FEE-kah ah shtah-SOWNG duh MEH-troo
+place-words.visitor-center,oo SENG-troo duh vee-zee-TANG-tish
+border-customs.here-is-my-passport,ah-KEE shtah oo MEH-oo pah-sah-POR-tuh
+pickup-meeting.please-send-me-the-pickup-point,eng-VEE-uh-muh oo PONG-too duh huh-KOH-lyah
+common-signs.closed-off,fuh-SHAH-doo
+utility-templates.please-give-me,"DAY-muh {}, poor fah-VOR"
+building-help.where-is-reception,ONG-dee EH ah huh-suh-SOWNG
+accessibility.elevator,ah ee-luh-vah-DOR
+in-a-building.do-you-have-wi-fi,teng WY-fy
+toilets.may-i-use-the-toilet,POH-soo oo-ZAR ah KAH-zah duh BAH-nyoo
+building-words.entrance,ah eng-TRAH-dah
+pronouns-verbs.you,voh-SAY
+question-words.who,KENG
+emergency-medical.i-need-a-doctor,pruh-SEE-zoo duh oong MEH-dee-koo
+medical-conditions.i-have-asthma,TEH-nyoo AZH-mah
+pharmacy-symptoms.i-have-a-fever,TEH-nyoo FEH-bruh
+body-parts.back,ahzh KOSH-tahsh
+lost-rescue.please-call-the-police,"SHAH-muh ah poo-LEE-syah, poor fah-VOR"
+police-consulate.my-bag-was-stolen,hoh-BAH-rowng-muh ah MAH-lah
+dietary-needs.not-spicy,seng pee-KANG-tuh
+food-ordering.menu-please,"ah ee-MENG-tah, poor fah-VOR"
+trail-words.summit,oo KOO-muh
+weather.is-it-safe-today,OH-zhee EH suh-GOO-roo
+hiking-parks.how-long-to-the-summit,KWANG-too TENG-poo ah-TEH ow KOO-muh
+trail-conditions.can-we-return-before-dark,poo-DEH-moosh vol-TAR ANG-tish dish-koo-ruh-SER
+trail-transport.when-does-the-cableway-stop,ah kee OH-rahsh FEH-shah oo tuh-luh-FEH-ree-koo
+trail-warnings.maintenance,mah-noo-teng-SOWNG
+trail-landmarks.boardwalk-cliff-path,oo pah-sah-DEE-soo
+hotel-words.check-in,oo shehk-EEN
+hotel-basics.i-have-a-reservation,TEH-nyoo huh-ZEHR-vah
+hotel-requests.can-i-store-my-luggage,POH-soo day-SHAR ah bah-GAH-zheng
+room-problems.there-is-no-hot-water,nowng AH AH-gwah KENG-tuh
+laundry.when-will-it-be-ready,KWANG-doo FEE-kah PRONG-too
+introductions.what-is-your-name,KOH-moo suh SHAH-mah
+numbers-money.r,doysh
+atm-cash.the-atm-kept-my-card,ah MAH-kee-nah fee-KOH kong oo MEH-oo kar-TOWNG
+attractions-tickets.what-is-the-latest-entry-time,kwal EH ah OOL-tee-mah OH-rah duh eng-TRAH-dah
+payment-receipt.pay-by-qr-code,pah-GAR kong KAW-dee-goo koo-EH-huh
+shopping.that-is-too-expensive,EH MWEENG-too KAH-roo
+color-size-returns.may-i-try-it-on,POH-soo shpuh-ree-meng-TAR
+social-basics.good-morning,bong DEE-ah
+communication.do-you-speak-english,FAH-lah eeng-GLESH
+quick-responses.no-not,nowng
+phone-translation.one-sentence-at-a-time-please,"OO-mah FRAH-zuh duh KAH-dah VESH, poor fah-VOR"
+phone-text-power.please-use-simple-words,"OO-zuh pah-LAH-vrahsh SEENG-plish, poor fah-VOR"
+sim-data.how-much-data-is-included,KWANG-toosh DAH-doosh shtowng eeng-KLWEE-doosh
+etiquette.is-service-included,oo ser-VEE-soo shtah eeng-KLWEE-doo
+children.child-age,oo MEH-oo FEE-lyoo teng {} AH-noosh
+time-scheduling.what-time-should-we-meet,ah kee OH-rahsh noosh eng-kong-TRAH-moosh
+time-words.yesterday,ONG-teng
+days-of-week.wednesday,KWAR-tah-FAY-rah
+months.march,MAR-soo
+directions.is-it-far,EH LONG-zhuh
+quick-directions.turn-right,VEE-ruh ah dee-RAY-tah
+taxi.we-need-the-east-gate-not-the-south-gate,"kuh-REH-moosh ah POR-tah LESH-tuh, nowng ah POR-tah SOOL"
+transit-rides.does-this-bus-train-go-to,ESH-tuh ow-too-KAH-hoo oh kong-BOY-oo VY PAH-rah {}
+place-words.railway-station,ah shtah-SOWNG duh kong-BOY-oosh
+border-customs.i-am-staying-for-days,FEE-koo {} DEE-ahsh
+pickup-meeting.please-pick-us-up-here,VEH-nyah boosh-KAR-noosh ah-KEE
+rail-station-words.transfer,oo trangzh-BOR-doo
+common-signs.occupied,oh-koo-PAH-doo
+utility-templates.may-i,POH-soo {}
+building-help.where-is-a-power-outlet,ONG-duh AH OO-mah too-MAH-dah
+accessibility.ramp,ah HANG-pah
+in-a-building.what-is-the-wi-fi-password,kwal EH ah pah-LAH-vrah-PAH-suh doo WY-fy
+toilets.is-it-only-for-customers,EH SAW PAH-rah klee-ENG-tish
+building-words.exit,ah sah-EE-dah
+pronouns-verbs.you-polite,oo suh-NYOR / ah suh-NYOH-rah
+question-words.which-one,KWAL
+emergency-medical.i-am-sick,shtoh DWENG-tuh
+medical-conditions.i-have-a-heart-condition,TEH-nyoo oong proo-BLEH-mah kar-DEE-ah-koo
+pharmacy-symptoms.i-have-diarrhea,TEH-nyoo dee-ah-HAY-ah
+body-parts.throat,ah gar-GANG-tah
+lost-rescue.we-are-here,sh-TAH-moosh ah-KEE
+police-consulate.my-passport-was-stolen,hoh-BAH-rowng-muh oo pah-sah-POR-tuh
+dietary-needs.less-spicy,MEH-noosh pee-KANG-tuh
+food-ordering.i-want-this,KEH-roo EESH-too
+trail-words.viewpoint,oo mee-rah-DOH-roo
+weather.how-cold-at-night,kuh FREE-oo FAHZH duh NOY-tuh
+hiking-parks.how-long-to-the-viewpoint,KWANG-too TENG-poo ah-TEH ow mee-rah-DOH-roo
+trail-conditions.is-the-trail-open,oo TREE-lyoo shtah ah-BEHR-too
+trail-transport.where-can-we-buy-water,ONG-duh poo-DEH-moosh kong-PRAR AH-gwah
+trail-warnings.steep-slope,eng-KOSH-tah EENG-gruh-muh
+trail-landmarks.start,ee-NEE-syoo
+hotel-words.check-out,oo shehk-OWT
+hotel-basics.can-i-charge-my-phone,POH-soo kah-huh-GAR oo tuh-luh-MAW-vel
+hotel-requests.no-housekeeping,nowng EH pruh-SEE-zoo leeng-PAR oo KWAR-too
+room-problems.can-i-change-rooms,POH-soo moo-DAR duh KWAR-too
+laundry.how-much-per-kilo,KWANG-too KOOSH-tah poor KEE-loo
+introductions.we-are-traveling-together,vyah-ZHAH-moosh ZHOONG-toosh
+atm-cash.is-there-a-fee,ah koo-mee-SOWNG
+attractions-tickets.are-there-lockers,ah kah-SEE-foosh
+payment-receipt.a-receipt-please,"oong huh-SEE-boo, poor fah-VOR"
+shopping.can-it-be-a-little-cheaper,POH-duh SER oong POH-koo MYZH bah-RAH-too
+color-size-returns.can-i-return-it,POH-soo duh-vol-VER
+social-basics.good-evening,BOH-ah NOY-tuh
+communication.please-speak-more-slowly,"FAH-luh MYSH duh-vah-GAR, poor fah-VOR"
+quick-responses.okay-can,duh ah-KOR-doo
+phone-text-power.my-phone-battery-is-low,shtoh KWAH-zuh seng bah-tuh-REE-ah
+sim-data.do-you-need-my-passport,pruh-SEE-zah doo MEH-oo pah-sah-POR-tuh
+etiquette.may-i-enter,POH-soo eng-TRAR
+children.high-chair,teng kah-DAY-rah AL-tah PAH-rah kree-ANG-sahsh
+time-scheduling.can-we-change-the-time,poo-DEH-moosh moo-DAR ah OH-rah
+time-words.this-week,ESH-tah suh-MAH-nah
+days-of-week.thursday,KEENG-tah-FAY-rah
+months.april,ah-BREEL
+directions.how-long-on-foot,KWANG-too TENG-poo ah PEH
+quick-directions.this-way,poor ah-KEE
+taxi.please-stop-here,"PAH-ruh ah-KEE, poor fah-VOR"
+transit-rides.what-is-the-next-stop,kwal EH ah PRAW-see-mah pah-RAH-zheng
+place-words.airport,oo ah-eh-roo-POR-too
+border-customs.nothing-to-declare,NAH-dah ah duh-klah-RAR
+pickup-meeting.meet-us-at,eng-KONG-truh-noosh eng {}
+rail-station-words.ticket-gate,ah kang-SEH-lah
+common-signs.vacant,LEE-vruh
+utility-templates.please-do-not-add,"seng {}, poor fah-VOR"
+accessibility.how-many-steps,KWANG-toosh duh-GROWSH SOWNG
+in-a-building.which-floor,kuh ang-DAR
+toilets.toilet-wc,vay-SAY
+building-words.men,OH-mengsh
+pronouns-verbs.he-him,EH-luh
+question-words.when,KWANG-doo
+emergency-medical.i-am-injured,shtoh feh-REE-doo
+medical-conditions.i-am-allergic-to-penicillin,soh ah-LEHR-zhee-koo ah puh-nee-see-LEE-nah
+pharmacy-symptoms.where-is-an-all-night-pharmacy,ONG-duh AH OO-mah far-MAH-syah duh ser-VEE-soo
+body-parts.tooth,oo DENG-tuh
+lost-rescue.please-look-at-my-location-pin,VAY-zhah oo MEH-oo PONG-too noo MAH-pah
+police-consulate.someone-is-following-me,al-GENG shtah ah suh-GEER-muh
+dietary-needs.no-peanuts,seng ah-meng-doo-EENG
+food-ordering.do-you-have-drinking-water,teng AH-gwah poo-TAH-vel
+trail-words.cableway,oo tuh-luh-FEH-ree-koo
+weather.rain,ah SHOO-vah
+hiking-parks.which-route-is-easier,kwal EH oo per-KOOR-soo MYSH FAH-seel
+trail-conditions.is-the-route-steep,oo per-KOOR-soo EH EENG-gruh-muh
+trail-transport.where-can-we-refill-water,ONG-duh poo-DEH-moosh eng-SHER ahzh gah-HAH-fahsh
+trail-warnings.caution-slippery,ah-teng-SOWNG: PEE-zoo shkoo-huh-gah-DEE-oo
+trail-landmarks.end,FEENG
+hotel-basics.i-would-like-a-non-smoking-room,kuh-REE-ah oong KWAR-too PAH-rah nowng foo-mah-DOH-rish
+room-problems.the-room-is-too-noisy,oo KWAR-too EH MWEENG-too bah-roo-LYENG-too
+laundry.can-it-be-ready-today,POH-duh fee-KAR PRONG-too OH-zhuh
+introductions.this-is-my-friend,ESH-tuh EH oo MEH-oo ah-MEE-goo
+numbers-money.s-n,TRESH
+atm-cash.the-card-was-declined,oo kar-TOWNG foy huh-koo-ZAH-doo
+attractions-tickets.may-i-take-photos,POH-soo tee-RAR foo-too-grah-FEE-ahsh
+color-size-returns.can-i-exchange-it,POH-soo troo-KAR
+social-basics.goodbye,ah-DEH-oosh
+communication.i-do-not-understand-spoken,nowng eng-TENG-doo oo kuh DEESH
+quick-responses.cannot-not-allowed,nowng POH-duh
+phone-text-power.do-you-have-a-power-bank,teng oong kah-huh-gah-DOR poor-TAH-teel
+sim-data.how-long-is-it-valid,KWANG-too TENG-poo EH VAH-lee-doo
+etiquette.remove-shoes,DEH-voo tee-RAR oosh sah-PAH-toosh
+children.baby-changing-room,ONG-duh FEE-kah oo fral-DAH-ryoo
+time-scheduling.when-is-convenient,ah kee OH-rahzh EH muh-LYOR
+time-words.next-week,ah PRAW-see-mah suh-MAH-nah
+days-of-week.friday,SAYSH-tah-FAY-rah
+months.may,MY-oo
+directions.please-show-me-on-the-map,"MOSH-truh-muh noo MAH-pah, poor fah-VOR"
+quick-directions.that-way,poor ah-LEE
+taxi.can-you-wait-for-me-here,POH-duh shpuh-RAR poor MEENG ah-KEE
+transit-rides.please-tell-me-where-to-get-off,DEE-gah-muh ONG-duh DEH-voo sah-EER
+place-words.service-desk,oo bal-KOWNG duh ah-teng-dee-MENG-too
+border-customs.i-am-staying-at,FEE-koo eng {}
+pickup-meeting.please-call-me-a-ride,"SHAH-muh-muh oong KAH-hoo, poor fah-VOR"
+rail-station-words.platform,ah plah-tah-FOR-mah
+common-signs.caution,ah-teng-SOWNG
+utility-templates.do-you-have,teng {}
+accessibility.cannot-climb-stairs,nowng kong-SEE-goo soo-BEER shKAH-dahsh
+toilets.is-it-free,EH GRAH-teesh
+building-words.women,moo-LYEH-rish
+pronouns-verbs.she-her,EH-lah
+question-words.how,KOH-moo
+emergency-medical.it-hurts-here,DOY ah-KEE
+medical-conditions.i-have-epilepsy,TEH-nyoo eh-pee-lep-SEE-ah
+pharmacy-symptoms.painkiller,ah-nal-ZHEH-zee-koo
+body-parts.chest,oo PAY-too
+lost-rescue.i-cannot-walk,nowng kong-SEE-goo ang-DAR
+police-consulate.i-need-a-written-police-report,pruh-SEE-zoo dah KAY-shah poor shKREE-too
+dietary-needs.no-nuts,seng FROO-toosh duh KAHSH-kah HEE-zhah
+food-ordering.to-go-please,"PAH-rah luh-VAR, poor fah-VOR"
+trail-words.shuttle-bus,oo ow-too-KAH-hoo duh lee-gah-SOWNG
+weather.snow,ah NEH-vuh
+trail-conditions.is-the-path-slippery,oo kah-MEE-nyoo shtah shkoo-huh-gah-DEE-oo
+trail-transport.is-there-cell-signal-here,ah HEH-duh ah-KEE
+trail-warnings.danger,puh-REE-goo
+trail-landmarks.elevation,al-tee-TOO-duh
+hotel-basics.i-would-like-a-quiet-room,kuh-REE-ah oong KWAR-too see-leng-SYOH-zoo
+room-problems.the-key-does-not-work,oo kar-TOWNG nowng AH-bruh ah POR-tah
+laundry.please-do-not-use-bleach,"nowng OO-zuh lee-SHEE-vyah, poor fah-VOR"
+introductions.i-am-from,soh duh {}
+numbers-money.s,KWAH-troo
+atm-cash.what-is-the-exchange-rate,kwal EH ah TAH-shah duh KANG-byoo
+attractions-tickets.please-take-a-photo-of-us,"TEE-ruh-noosh OO-mah foo-too-grah-FEE-ah, poor fah-VOR"
+color-size-returns.do-you-have-a-bag,teng oong SAH-koo
+social-basics.thank-you,oh-bree-GAH-doo
+communication.i-cannot-read-understand,nowng SAY LER EESH-too
+quick-responses.works-okay,foong-SYOH-nah
+phone-text-power.the-translation-may-be-inaccurate,ah trah-doo-SOWNG POH-duh shTAR ee-HAH-dah
+sim-data.please-activate-it,"POH-duh ah-tee-VAR, poor fah-VOR"
+etiquette.photo-of-you,POH-soo tee-RAR OO-mah FAW-too SOO-ah
+children.childrens-menu,ah muh-NOO PAH-rah kree-ANG-sahsh
+time-scheduling.what-is-today-s-date,kwal EH ah DAH-tah duh OH-zhuh
+time-words.morning,ah mah-NYANG
+days-of-week.saturday,SAH-bah-doo
+months.june,ZHOO-nyoo
+directions.where-is-the-nearest,ONG-duh FEE-kah oo {} MYSH PRAW-see-moo
+quick-directions.on-the-left,ah shKER-dah
+taxi.we-need-to-catch-the-high-speed-train,TEH-moosh duh ah-pah-NYAR oo kong-BOY-oo HAH-pee-doo
+transit-rides.is-this-direct,EH dee-REH-too
+place-words.bus-stop,ah pah-RAH-zheng duh ow-too-KAH-hoo
+border-customs.i-am-here-for-business,VEH-nyoo eng nuh-GAW-syoosh
+rail-station-words.ticket-office,ah bee-lyuh-TAY-rah
+common-signs.no-entry,eng-TRAH-dah proo-ee-BEE-dah
+utility-templates.please-write-the-number,"shKREH-vah oo NOO-muh-roo, poor fah-VOR"
+accessibility.need-to-sit-down,pruh-SEE-zoo duh muh seng-TAR
+toilets.do-i-need-a-coin,EH pruh-SEE-zoo MWEH-dah oh FEE-shah
+building-words.door,ah POR-tah
+pronouns-verbs.they-them,EH-lish / EH-lahsh
+question-words.how-much-many,KWANG-too
+emergency-medical.where-is-a-pharmacy,ONG-duh FEE-kah OO-mah far-MAH-syah
+medical-conditions.my-blood-sugar-is-low,oo MEH-oo ah-SOO-kar noo SANG-guh shtah BY-shoo
+pharmacy-symptoms.do-i-need-a-prescription,EH pruh-SEE-zoo huh-SAY-tah MEH-dee-kah
+body-parts.eye,oo OH-lyoo
+lost-rescue.i-sprained-my-ankle,tor-SEE oo tor-noo-ZEH-loo
+police-consulate.i-want-to-contact-my-embassy,KEH-roo kong-tak-TAR ah MEE-nyah eng-by-SHAH-dah
+dietary-needs.no-seafood,seng mah-REESH-koo neng PAY-shuh
+food-ordering.check-please,"ah KONG-tah, poor fah-VOR"
+trail-words.park-shuttle,oo ow-too-KAH-hoo doo PAR-kuh
+weather.wind,oo VENG-too
+trail-transport.do-you-have-a-map,teng oong MAH-pah
+trail-warnings.beware-falling-rocks,ah-teng-SOWNG ah KEH-dah duh PEH-drahsh
+trail-landmarks.sunset,oo POR doo SOL
+hotel-basics.is-there-a-washing-machine,ah MAH-kee-nah duh lah-VAR
+room-problems.the-toilet-will-not-flush,oo ow-too-KLEEZH-moo nowng foong-SYOH-nah
+laundry.laundromat,ah lah-vang-dah-REE-ah self-SER-veesh
+introductions.where-are-you-from,duh ONG-dee EH
+numbers-money.w,SEENG-koo
+atm-cash.no-money-came-out,nowng sah-EE-oo dee-NYAY-roo
+social-basics.you-are-welcome,duh NAH-dah
+communication.please-say-it-again,"huh-PEE-tah, poor fah-VOR"
+quick-responses.does-not-work-no,nowng foong-SYOH-nah
+phone-text-power.please-confirm,"kong-FEER-muh, poor fah-VOR"
+sim-data.do-you-have-an-esim,teng ee-SEENG
+etiquette.may-i-sit-here,POH-soo seng-TAR-muh ah-KEE
+children.suitable-for-children,EESH-too EH ah-duh-KWAH-doo PAH-rah kree-ANG-sahsh
+time-scheduling.what-day-is-it-today,kuh DEE-ah EH OH-zhuh
+time-words.afternoon,ah TAR-duh
+days-of-week.sunday,doo-MEENG-goo
+months.july,ZHOO-lyoo
+directions.where-am-i,ONG-duh shTOH
+quick-directions.on-the-right,ah dee-RAY-tah
+taxi.please-use-the-meter,"LEE-guh oo tak-SEE-muh-troo, poor fah-VOR"
+transit-rides.do-i-need-to-transfer,TEH-nyoo duh fah-ZER trangzh-BOR-doo
+place-words.luggage-storage,oo duh-PAW-zee-too duh bah-GAH-zheng
+border-customs.i-have-a-return-ticket,TEH-nyoo bee-LYEH-tuh duh huh-GREH-soo
+rail-station-words.waiting-room,ah SAH-lah duh shPEH-rah
+common-signs.no-smoking,proo-ee-BEE-doo foo-MAR
+utility-templates.i-need,pruh-SEE-zoo duh {}
+accessibility.accessible-restroom,ah KAH-zah duh BAH-nyoo ah-suh-SEE-vel
+toilets.is-the-tap-water-safe-to-drink,ah AH-gwah dah tor-NAY-rah EH poo-TAH-vel
+building-words.key,ah SHAH-vuh
+pronouns-verbs.my-mine,oo MEH-oo / ah MEE-nyah
+question-words.how-many,KWANG-toosh
+emergency-medical.please-take-me-to-a-hospital,"LEH-vuh-muh ah oong osh-pee-TAL, poor fah-VOR"
+medical-conditions.i-need-my-inhaler,pruh-SEE-zoo doo MEH-oo ee-nah-lah-DOR
+pharmacy-symptoms.i-have-a-headache,TEH-nyoo DOR duh kah-BEH-sah
+body-parts.ear,oo oh-VEE-doo
+lost-rescue.please-contact-rescue,"SHAH-muh oo hezh-GAH-tuh, poor fah-VOR"
+police-consulate.i-need-it-for-my-insurance,pruh-SEE-zoo DEESH-too PAH-rah oo suh-GOO-roo
+dietary-needs.i-am-vegetarian,soh vuh-zhuh-tah-RYAH-noo
+food-ordering.does-it-contain,LEH-vah {}
+trail-words.steps,oosh duh-GROWSH
+weather.storm,ah teng-pish-TAH-duh
+trail-warnings.first-aid-station,POSH-too duh pree-MAY-roosh soo-KOH-hoosh
+room-problems.the-light-does-not-work,ah LOOSH nowng foong-SYOH-nah
+laundry.please-iron-this,"PAH-suh EESH-too ah FEH-hoo, poor fah-VOR"
+introductions.how-are-you,KOH-moo shTAH
+numbers-money.li,SAYSH
+atm-cash.where-can-i-change-money,ONG-duh POH-soo troo-KAR dee-NYAY-roo
+social-basics.excuse-me-sorry,kong lee-SENG-sah
+communication.please-write-it-down,"shKREH-vah, poor fah-VOR"
+sim-data.my-data-is-not-working,oosh DAH-doosh MAW-vaysh nowng foong-SYOH-nowng
+etiquette.queue-for,ESH-tah EH ah FEE-lah PAH-rah {}
+children.minimum-age,kwal EH ah ee-DAH-duh MEE-nee-mah
+time-scheduling.what-time-does-it-open,ah kee OH-rahzh AH-bruh
+time-words.evening,oo FEENG dah TAR-duh
+months.august,ah-GOSH-too
+directions.which-way,PAH-rah kuh LAH-doo
+quick-directions.across-from-here,eng FRENG-tuh dah-KEE
+transit-rides.is-it-delayed,shtah ah-trah-ZAH-doo
+border-customs.i-am-visiting-family,VEH-nyoo vee-zee-TAR fah-mee-LYAH-rish
+rail-station-words.train-number,oo NOO-muh-roo doo kong-BOY-oo
+common-signs.no-photography,proo-ee-BEE-doo foo-too-grah-FAR
+utility-templates.is-there-nearby,ah {} ah-KEE PEHR-too
+accessibility.station-assistance,ah ah-seesh-TENG-syah nah shtah-SOWNG
+toilets.it-is-urgent,EH oor-ZHENG-tuh
+pronouns-verbs.your-yours,oo SEH-oo / ah SOO-ah
+question-words.why,poor-KAY
+medical-conditions.i-am-pregnant,shtoh GRAH-vee-dah
+pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-suh-tah-MOL
+body-parts.leg,ah PEHR-nah
+lost-rescue.my-companion-is-missing,oo MEH-oo ah-kong-pah-NYANG-tuh duh-zah-pah-ruh-SEH-oo
+police-consulate.i-need-an-interpreter,pruh-SEE-zoo duh oong eeng-TEHR-pruh-tuh
+dietary-needs.i-am-vegan,soh vuh-GAH-noo
+food-ordering.is-this-vegetarian,EESH-too EH vuh-zhuh-tah-RYAH-noo
+trail-words.up-uphill,ah soo-BEE-dah
+weather.ice,oo ZHEH-loo
+trail-warnings.service-suspended,ser-VEE-soo soosh-PENG-soo
+trail-landmarks.water-point,oo PONG-too DAH-gwah
+room-problems.please-send-someone,POH-deng mang-DAR al-GENG huh-pah-RAR
+laundry.detergent,oo duh-ter-ZHENG-tuh
+introductions.i-am-a-tourist,soh too-REESH-tah
+numbers-money.q,SEH-tuh
+atm-cash.the-machine-is-out-of-service,ah MAH-kee-nah shtah FOH-rah duh ser-VEE-soo
+social-basics.sorry,dish-KOOL-puh
+communication.please-wait-a-moment,"oong moo-MENG-too, poor fah-VOR"
+sim-data.does-it-need-registration,EH pruh-SEE-zoo huh-zheesh-TAR
+etiquette.dressed-appropriately,shtoh vish-TEE-doo ah-duh-kwah-dah-MENG-tuh
+children.do-children-pay,ahsh kree-ANG-sahsh PAH-gowng
+time-scheduling.what-time-does-it-close,ah kee OH-rahsh FEH-shah
+time-words.spring,ah pree-mah-VEH-rah
+months.september,suh-TENG-broo
+directions.can-i-walk-there,POH-soo EER ah PEH
+quick-directions.in-front,ah FRENG-tuh
+transit-rides.i-am-in-a-hurry,shtoh kong PREH-sah
+border-customs.this-is-for-personal-use,EH PAH-rah OO-zoo puh-SWAL
+rail-station-words.carriage,ah kah-HWAH-zheng
+common-signs.do-not-touch,nowng too-KAR
+utility-templates.how-much-is,KWANG-too KOOSH-tah {}
+accessibility.help-me-carry,"ah-ZHOO-duh-muh ah luh-VAR EESH-too, poor fah-VOR"
+toilets.may-i-have-the-toilet-key,POH-duh DAR-muh ah SHAH-vuh dah KAH-zah duh BAH-nyoo
+pronouns-verbs.be-called-call,shah-MAR-suh
+question-words.this,EESH-too
+medical-conditions.i-carry-an-adrenaline-injector,TEH-nyoo OO-mah kah-NEH-tah duh ah-druh-nah-LEE-nah
+pharmacy-symptoms.how-much-should-i-take,kuh kwang-tee-DAH-duh DEH-voo too-MAR
+body-parts.arm,oo BRAH-soo
+police-consulate.please-leave-me-alone,DAY-shuh-muh eng PASH
+dietary-needs.i-do-not-eat,nowng KOH-moo {}
+trail-words.down-downhill,ah dish-SEE-dah
+weather.fog,oo nuh-voo-AY-roo
+room-problems.the-heating-does-not-work,oo ah-kuh-see-MENG-too nowng foong-SYOH-nah
+laundry.dry-cleaning,ah leeng-PEH-zah ah SEH-koo
+introductions.this-is-my-husband-wife,oo MEH-oo mah-REE-doo / ah MEE-nyah moo-LYER
+numbers-money.b,OY-too
+atm-cash.please-give-me-smaller-notes,"NAW-tahzh MYSH puh-KEH-nahsh, poor fah-VOR"
+social-basics.no-problem,nowng AH proo-BLEH-mah
+communication.can-you-help-me,POH-duh ah-zhoo-DAR-muh
+sim-data.i-have-no-signal,nowng TEH-nyoo HEH-duh
+etiquette.did-not-mean-to-offend,"dish-KOOL-puh, nowng KEESH oh-feng-DER"
+children.crib,teng BER-soo
+time-words.summer,oo vuh-ROWNG
+months.october,oh-TOO-broo
+directions.how-far-is-it,ah kuh deesh-TANG-syah FEE-kah
+quick-directions.behind,ah-TRAHSH
+transit-rides.which-platform,kwal EH ah plah-tah-FOR-mah
+border-customs.i-am-in-transit,shtoh eng TRANG-zee-too
+rail-station-words.seat,oo loo-GAR
+common-signs.temporarily-closed,eng-suh-HAH-doo teng-poo-rah-rya-MENG-tuh
+utility-templates.is-this,EESH-too EH {}
+accessibility.board-first,POH-soo eng-bar-KAR pree-MAY-roo
+toilets.there-is-no-toilet-paper,nowng AH pah-PEL ee-ZHYEH-nee-koo
+pronouns-verbs.have,TER
+question-words.that,EE-soo
+medical-conditions.i-take-medicine-for,TOH-moo muh-dee-kah-SOWNG PAH-rah {}
+pharmacy-symptoms.i-am-vomiting,shtoh ah voo-mee-TAR
+body-parts.foot,oo PEH
+police-consulate.i-was-robbed,fwee hoh-BAH-doo
+dietary-needs.i-am-allergic-to,soh ah-LEHR-zhee-koo ah {}
+trail-words.one-way,SAW duh EE-dah
+weather.heat,oo kah-LOR
+laundry.dryer,ah MAH-kee-nah duh suh-KAR
+introductions.this-is-my-daughter-son,ah MEE-nyah FEE-lyah / oo MEH-oo FEE-lyoo
+numbers-money.ji,NAW-vuh
+atm-cash.do-you-have-change,teng TROH-koo
+social-basics.i-do-not-know,nowng SAY
+communication.please-show-me-the-text,"MOSH-truh-muh oo TESH-too, poor fah-VOR"
+sim-data.please-write-the-wifi-password,shKREH-vah ah pah-LAH-vrah-PAH-suh doo WY-fy
+etiquette.what-is-customary,oo kee EH koosh-TOO-muh ah-KEE
+children.warm-this-bottle,POH-duh ah-kuh-SER ESH-tuh bee-buh-ROWNG
+time-words.fall,oo oh-TOH-noo
+months.november,noo-VENG-broo
+directions.which-exit,kuh sah-EE-dah
+transit-rides.what-time-is-the-next-one,ah kee OH-rahzh EH oo PRAW-see-moo
+border-customs.i-have-in-cash,TEH-nyoo {} eng dee-NYAY-roo
+rail-station-words.last-train,oo OOL-tee-moo kong-BOY-oo
+utility-templates.please,"{}, poor fah-VOR"
+accessibility.door-width,kwal EH ah lar-GOO-rah dah POR-tah
+toilets.toilet-paper,pah-PEL ee-ZHYEH-nee-koo
+pronouns-verbs.do-not-have,nowng TER
+question-words.here,ah-KEE
+medical-conditions.i-take-blood-thinners,TOH-moo ang-tee-kwah-goo-LANG-tish
+pharmacy-symptoms.rehydration-salts,sighsh duh hay-drah-tah-SOWNG oh-RAL
+body-parts.hand,ah MOWNG
+police-consulate.i-want-a-lawyer,KEH-roo oong ad-voo-GAH-doo
+trail-words.round-trip,EE-dah ee VOL-tah
+weather.cold,oo FREE-oo
+laundry.coin-operated,foong-SYOH-nah ah MWEH-dahsh
+introductions.i-am-traveling-alone,VYAH-zhoo soo-ZEE-nyoo
+numbers-money.sh,DEHSH
+atm-cash.may-i-pay-in,POH-soo pah-GAR eng {}
+sim-data.sim-card,oo kar-TOWNG SEENG
+etiquette.keep-the-change,FEE-kuh kong oo TROH-koo
+children.car-seat,pruh-see-ZAH-moosh duh OO-mah kah-DAY-rah OW-too
+time-words.winter,oo eeng-VEHR-noo
+months.december,duh-ZENG-broo
+directions.can-you-show-me-the-way,POH-duh eeng-dee-KAR-muh oo kah-MEE-nyoo
+transit-rides.i-went-past-my-stop,pah-SAY ah MEE-nyah pah-RAH-zheng
+border-customs.this-is-a-gift,EH oong pruh-ZENG-tuh
+rail-station-words.delayed,ah-trah-ZAH-doo
+utility-templates.i-am-looking-for,proo-KOO-roo {}
+accessibility.wheelchair-width,ah MEE-nyah kah-DAY-rah duh HOH-dahsh teng {} seng-TEE-muh-troosh duh lar-GOO-rah
+toilets.it-is-out-of-order,shtah ah-vah-RYAH-doo
+pronouns-verbs.go,EER
+question-words.there,ah-LEE
+medical-conditions.medicine-allergy,ah-lehr-ZHEE-ah ah muh-dee-kah-MENG-toosh: {}
+pharmacy-symptoms.how-many-times-a-day,KWANG-tahzh VEH-zish poor DEE-ah
+body-parts.knee,oo zhoo-EH-lyoo
+police-consulate.please-notify-my-consulate,"ah-VEE-zuh oo MEH-oo kong-soo-LAH-doo, poor fah-VOR"
+weather.humid,OO-mee-doo
+numbers-money.y-b-i,SENG
+atm-cash.please-charge-in-local-currency,"KAW-bruh eng MWEH-dah loo-KAL, poor fah-VOR"
+sim-data.where-can-i-buy-a-plug-adapter,ONG-duh POH-soo kong-PRAR oong ah-dahp-tah-DOR duh too-MAH-dah
+children.stroller,oo kah-HEE-nyoo duh buh-BEH
+directions.north,NOR-tuh
+border-customs.where-do-i-collect-my-baggage,ONG-duh huh-KOH-lyoo ah MEE-nyah bah-GAH-zheng
+rail-station-words.final-stop,oo desh-TEE-noo fee-NAL
+utility-templates.do-you-accept,ah-SAY-towng {}
+accessibility.hard-of-hearing,TEH-nyoo duh-fee-SYENG-syah ow-dee-TEE-vah
+toilets.out-of-order,ah-vah-RYAH-doo
+pronouns-verbs.come,VEER
+question-words.a-little,oong POH-koo
+medical-conditions.this-card-lists-my-conditions,ESH-tuh kar-TOWNG eeng-DEE-kah ahzh MEE-nyahzh doo-ENG-sahsh
+pharmacy-symptoms.i-have-a-stomach-ache,TEH-nyoo DOR duh bah-HEE-gah
+body-parts.ankle,oo tor-noo-ZEH-loo
+police-consulate.i-am-calling-the-police,voh shah-MAR ah poo-LEE-syah
+weather.sunrise,oo nahsh-SER doo SOL
+numbers-money.y-qi-n,MEEL
+atm-cash.where-can-i-get-coins,ONG-duh kong-SEE-goo MWEH-dahsh
+sim-data.mobile-data,DAH-doosh MAW-vaysh
+children.playground,ah oong PAR-kuh eeng-fang-TEEL
+directions.south,SOOL
+border-customs.how-long-may-i-stay,KWANG-too TENG-poo POH-soo fee-KAR
+rail-station-words.ticket-validator,oo vah-lee-dah-DOR
+utility-templates.i-cannot-find,nowng kong-SEE-goo eng-kong-TRAR {}
+accessibility.speak-louder,"FAH-luh MYSH AL-too, poor fah-VOR"
+toilets.mens-toilet,OH-mengsh
+pronouns-verbs.would-like,kuh-REE-ah
+question-words.some,al-GOONG
+medical-conditions.this-is-my-medicine,ESH-tuh EH oo MEH-oo muh-dee-kah-MENG-too
+pharmacy-symptoms.i-have-a-cough,TEH-nyoo TOH-suh
+body-parts.skin,ah PEH-luh
+police-consulate.am-i-under-arrest,shtoh duh-TEE-doo
+weather.flood,ah ee-noong-dah-SOWNG
+numbers-money.y-w-n,DEHZH MEEL
+atm-cash.is-there-a-minimum-for-cards,ah MEE-nee-moo PAH-rah kar-TOWNG
+sim-data.can-i-top-up-this-sim,POH-soo kah-huh-GAR ESH-tuh kar-TOWNG
+directions.east,LESH-tuh
+border-customs.i-have-a-connecting-flight,TEH-nyoo oong VOH-oo duh lee-gah-SOWNG
+utility-templates.there-is-a-problem-with,ah oong proo-BLEH-mah kong {}
+accessibility.visually-impaired,TEH-nyoo duh-fee-SYENG-syah vee-ZWAL
+toilets.womens-toilet,suh-NYOH-rahsh
+pronouns-verbs.want,kuh-RER
+question-words.very,MWEENG-too
+medical-conditions.please-give-me-sugar-or-juice,"DAY-muh ah-SOO-kar oh SOO-moo, poor fah-VOR"
+pharmacy-symptoms.antihistamine,ang-tee-eesh-tah-MEE-nee-koo
+police-consulate.no-thank-you-i-am-not-interested,"nowng, oh-bree-GAH-doo. nowng TEH-nyoo eeng-tuh-REH-suh"
+weather.avalanche-risk,HEESH-koo duh ah-vah-LANG-shuh
+numbers-money.b-n,MAY-oo
+atm-cash.atm,oo mool-tee-BANG-koo
+sim-data.top-up,oo kah-huh-gah-MENG-too
+directions.west,WESH-tuh
+border-customs.may-i-have-an-entry-stamp,POH-duh kah-reeng-BAR oo pah-sah-POR-tuh
+accessibility.take-your-arm,POH-soo ah-poy-AR-muh noo SEH-oo BRAH-soo
+toilets.drinking-water,AH-gwah poo-TAH-vel
+pronouns-verbs.look-for,proo-koo-RAR
+question-words.too,duh-mah-ZYAH-doo
+medical-conditions.inject-it-into-my-outer-thigh,eeng-ZHEH-tuh nah PAR-tuh duh FOH-rah dah KOH-shah
+pharmacy-symptoms.anti-diarrhea-medicine,ang-tee-dee-ah-HAY-koo
+police-consulate.someone-attacked-me,fwee ah-gruh-DEE-doo
+atm-cash.banknote,ah NAW-tah
+sim-data.is-there-coverage-in,ah HEH-duh eng {}
+border-customs.visa,oo VEESH-too
+accessibility.guide-dog,ESH-tuh EH oo MEH-oo kowng-GEE-ah
+toilets.not-for-drinking,AH-gwah nowng poo-TAH-vel
+pronouns-verbs.buy,kong-PRAR
+question-words.also,tang-BENG
+medical-conditions.my-blood-type-is,oo MEH-oo GROO-poo sang-GWEE-nyoo EH {}
+pharmacy-symptoms.is-this-safe-to-take-with,POH-soo too-MAR EESH-too kong {}
+police-consulate.i-did-not-agree-to-this-price,nowng kong-kor-DAY kong ESH-tuh PREH-soo
+atm-cash.coin,ah MWEH-dah
+sim-data.signal,ah HEH-duh
+border-customs.i-have-no-food-or-plants,nowng TRAH-goo ah-lee-MENG-toosh neng PLANG-tahsh
+toilets.accessible-toilet,KAH-zah duh BAH-nyoo ah-suh-SEE-vel
+pronouns-verbs.like,goosh-TAR duh
+question-words.all-both,TOH-doosh
+medical-conditions.do-not-give-me,nowng muh DAY {}
+pharmacy-symptoms.i-feel-dizzy,shtoh kong tong-TOO-rahsh
+police-consulate.please-write-the-report-number,shKREH-vah oo NOO-muh-roo dah KAY-shah
+atm-cash.cash-only,SAW dee-NYAY-roo
+sim-data.esim,ee-SEENG
+border-customs.passport-control,kong-TROH-loo duh pah-sah-POR-tish
+toilets.where-can-i-wash-my-hands,ONG-duh POH-soo lah-VAR ahzh MOWNGSH
+pronouns-verbs.need,pruh-see-ZAR duh
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,soh ah-LEHR-zhee-koo ah ash-pee-REE-nah ee ow ee-boo-proo-FEH-noo
+pharmacy-symptoms.ibuprofen,ee-boo-proo-FEH-noo
+police-consulate.it-happened-here,ah-kong-tuh-SEH-oo ah-KEE
+atm-cash.fee,ah koo-mee-SOWNG
+sim-data.prepaid,preh-PAH-goo
+border-customs.customs,al-FANG-duh-gah
+toilets.can-i-flush-the-paper,POH-soo day-TAR oo pah-PEL nah sah-NEE-tah
+medical-conditions.my-injector-is-in-my-bag,ah MEE-nyah kah-NEH-tah duh ah-druh-nah-LEE-nah shtah nah MAH-lah
+pharmacy-symptoms.i-have-a-sore-throat,TEH-nyoo DOR duh gar-GANG-tah
+police-consulate.may-i-have-a-copy-of-the-report,POH-soo TER OO-mah KAW-pyah dah KAY-shah
+atm-cash.change,oo TROH-koo
+sim-data.roaming,HOH-ming
+border-customs.baggage-claim,huh-KOH-lyah duh bah-GAH-zheng
+toilets.is-there-a-toilet-on-board,ah KAH-zah duh BAH-nyoo ah BOR-doo
+medical-conditions.i-am-allergic-to-sulfa-drugs,soh ah-LEHR-zhee-koo ah sool-fah-MEE-dahsh
+pharmacy-symptoms.can-i-get-this-medicine-here,POH-soo kong-PRAR ESH-tuh muh-dee-kah-MENG-too ah-KEE
+police-consulate.i-will-not-sign-anything-i-cannot-read,nowng ah-SEE-noo NAH-dah kuh nowng kong-SEE-gah LER
+atm-cash.exchange-rate,ah TAH-shah duh KANG-byoo
+border-customs.customs-declaration,duh-klah-rah-SOWNG ah-dwah-NAY-rah
+toilets.the-toilet-will-not-flush,oo ow-too-KLEEZH-moo nowng foong-SYOH-nah
+pharmacy-symptoms.bandage,lee-gah-DOO-rah
+police-consulate.am-i-free-to-go,POH-soo EER eng-BOH-rah
+atm-cash.bank,oo BANG-koo
+border-customs.arrival-card,kar-TOWNG duh duh-zeng-BAR-kuh
+toilets.baby-change,fral-DAH-ryoo
+pharmacy-symptoms.the-pain-is-severe,ah DOR EH MWEENG-too FOR-tuh
+police-consulate.i-do-not-want-to-go-with-you,nowng KEH-roo EER kong-SEE-goo
+atm-cash.money-exchange,KANG-byoo
+border-customs.transit,TRANG-zee-too
+toilets.squat-toilet,sah-NEE-tah TOOR-kah
+pharmacy-symptoms.antiseptic,ang-tee-SEH-tee-koo
+atm-cash.pin,oo PEEN
+border-customs.boarding-pass,kar-TOWNG duh eng-BAR-kuh
+pharmacy-symptoms.i-feel-nauseous,TEH-nyoo NOW-zyahsh
+pharmacy-symptoms.i-have-a-rash,TEH-nyoo OO-mah ee-roop-SOWNG nah PEH-luh
+pharmacy-symptoms.before-or-after-food,ANG-tish oh duh-POYSH dahzh huh-fay-SOYNGSH
+pharmacy-symptoms.i-think-it-is-infected,AH-shoo kuh shtah eeng-fuh-TAH-doo
+pharmacy-symptoms.motion-sickness-tablets,kong-pree-MEE-doosh PAH-rah oo eng-ZHOH-oo
+pharmacy-symptoms.i-have-a-cut,TEH-nyoo oong KOR-tuh
+pharmacy-symptoms.antacid,ang-tee-AH-see-doo
+pharmacy-symptoms.i-have-a-burn,TEH-nyoo OO-mah kay-mah-DOO-rah
+pharmacy-symptoms.it-started-days-ago,koo-muh-SOH ah {} DEE-ahsh
+pharmacy-symptoms.cough-medicine,shah-ROH-puh PAH-rah ah TOH-suh
+pharmacy-symptoms.is-this-safe-during-pregnancy,POH-soo too-MAR EESH-too nah grah-vee-DESH
+trail-transport.how-long-is-the-wait,KWANG-too TENG-poo suh shPEH-rah
+tax-refund.is-tax-free-shopping-available,FAH-zeng taks FREE
+place-words.tourist-spot-sightseeing-area,ah ZOH-nah too-REESH-tee-kah
+common-signs.open-operating,eng foong-syoo-nah-MENG-too
+time-scheduling.how-long-does-it-take,KWANG-too TENG-poo duh-MOH-rah
+transit-rides.can-i-use-this-ticket,POH-soo oo-ZAR ESH-tuh bee-LYEH-tuh
+common-signs.closed,fuh-SHAH-doo
+pronouns-verbs.there-is-have,AH
+common-signs.stopped-stop,pah-RAH-doo
+transit-rides.do-i-need-to-validate,TEH-nyoo duh vah-lee-DAR ESH-tuh bee-LYEH-tuh
+pronouns-verbs.there-is-not-do-not-have,nowng AH
+emergency-medical.i-feel-unwell,SEENG-too-muh MAL
+food-ordering.what-do-you-recommend,oo kuh huh-koo-MENG-dah
+hotel-basics.is-wi-fi-free,oo WY-fy EH GRAH-teesh
+hotel-requests.another-towel-please,"MYZH OO-mah TWAH-lyah, poor fah-VOR"
+shopping.is-there-a-discount,ah dish-KONG-too
+social-basics.good-night,BOH-ah NOY-tuh
+quick-responses.can-possible,EH poo-SEE-vel
+phone-translation.please-type-it-and-show-me,"shKREH-vah ee MOSH-truh-muh, poor fah-VOR"
+phone-text-power.may-i-charge-my-phone-here,POH-soo kah-huh-GAR oo tuh-luh-MAW-vel ah-KEE
+pronouns-verbs.want-to-verb,KEH-roo + eeng-fee-nee-TEE-voo
+emergency-medical.this-is-an-emergency,EH OO-mah ee-mer-ZHENG-syah
+lost-rescue.please-look-at-my-current-location,VAY-zhah ah MEE-nyah loo-kah-lee-zah-SOWNG ah-TWAL
+hotel-words.luggage-storage,oo duh-PAW-zee-too duh bah-GAH-zheng
+hotel-basics.how-much-per-night,KWANG-too KOOSH-tah poor NOY-tuh
+hotel-requests.what-time-is-check-out,ah kee OH-rahzh EH oo shehk-OWT
+payment-receipt.please-write-the-number,"shKREH-vah oo NOO-muh-roo, poor fah-VOR"
+shopping.where-do-i-pay,ONG-duh suh PAH-gah
+communication.i-cannot-make-out-what-you-are-saying,nowng kong-SEE-goo per-suh-BER oo kuh DEESH
+quick-responses.cannot-not-possible,nowng EH poo-SEE-vel
+taxi.i-will-get-off-here,SY-oo ah-KEE
+pickup-meeting.please-call-a-taxi,"SHAH-muh oong TAK-see, poor fah-VOR"
+pronouns-verbs.want-thing,KEH-roo + KOY-zah
+emergency-medical.i-am-having-a-severe-allergic-reaction,shtoh kong ah-nah-fee-LAK-syah: heh-ah-SOWNG ah-LEHR-zhee-kah GRAH-vuh
+lost-rescue.my-child-is-missing,oo MEH-oo FEE-lyoo duh-zah-pah-ruh-SEH-oo
+food-ordering.water-please,"AH-gwah, poor fah-VOR"
+hiking-parks.is-this-trail-suitable-for-beginners,ESH-tuh TREE-lyoo EH PAH-rah preeng-see-PYANG-tish
+hotel-basics.is-breakfast-included,oo puh-KEH-noo-al-MOH-soo shtah eeng-KLWEE-doo
+hotel-requests.can-i-check-in-early,POH-soo fah-ZER shehk-EEN MYSH SEH-doo
+attractions-tickets.could-you-take-a-photo-for-us,POH-duh tee-RAR-noosh OO-mah FAW-too
+payment-receipt.how-much-in-total,KWANG-too EH ow TOH-doo
+shopping.i-will-take-this,LEH-voo EESH-too
+communication.i-do-not-understand,nowng eng-TENG-doo
+quick-responses.okay-fine,shtah BENG
+phone-translation.please-look-at-the-screen,"OH-lyuh PAH-rah oo ee-KRANG, poor fah-VOR"
+pronouns-verbs.need-thing,pruh-SEE-zoo duh + KOY-zah
+question-words.how-much-what-price,KWANG-too KOOSH-tah
+emergency-medical.i-cannot-breathe,nowng kong-SEE-goo hesh-pee-RAR
+lost-rescue.i-do-not-know-where-i-am,nowng SAY ONG-duh shtoh
+hotel-basics.may-i-see-the-room,POH-soo VER oo KWAR-too
+hotel-requests.another-night,POH-soo fee-KAR MYZH OO-mah NOY-tuh
+payment-receipt.can-we-pay-separately,poo-DEH-moosh pah-GAR eng suh-pah-RAH-doo
+shopping.what-is-this,oo kee EH EESH-too
+communication.i-cannot-read-it,nowng kong-SEE-goo LER EESH-too
+quick-responses.no-good-not-allowed-will-not-work,nowng EH per-mee-TEE-doo
+pronouns-verbs.looking-for-thing,proo-KOO-roo + KOY-zah
+emergency-medical.i-am-bleeding-badly,shtoh ah sang-GRAR MWEENG-too
+lost-rescue.my-friend-is-hurt,oo MEH-oo ah-MEE-goo shtah feh-REE-doo
+dietary-needs.does-it-contain-fish-stock,LEH-vah KAL-doo duh PAY-shuh
+hotel-basics.for-nights,PAH-rah {} NOY-tish
+hotel-requests.is-there-a-safe,ah KAW-fruh
+payment-receipt.is-tax-included,oo EE-vah shtah eeng-KLWEE-doo
+shopping.where-can-i-buy,ONG-duh POH-soo kong-PRAR {}
+emergency-medical.i-have-chest-pain,TEH-nyoo DOR noo PAY-too
+lost-rescue.i-lost-my-wallet,per-DEE ah MEE-nyah kar-TAY-rah
+hotel-basics.two-beds,"DOO-ahsh KAH-mahsh, poor fah-VOR"
+hotel-requests.another-blanket,"MYZH oong koo-ber-TOR, poor fah-VOR"
+payment-receipt.my-card-was-declined,oo MEH-oo kar-TOWNG foy huh-koo-ZAH-doo
+shopping.do-you-have-this-in-stock,teng EESH-too eng SHTOK
+time-words.night,ah NOY-tuh
+emergency-medical.this-person-is-unconscious,ESH-tah puh-SOH-ah shtah eeng-kong-SYENG-tuh
+lost-rescue.i-lost-my-bag,per-DEE ah MEE-nyah MAH-lah
+food-ordering.can-a-vegetarian-eat-this,oong vuh-zhuh-tah-RYAH-noo POH-duh koo-MER EESH-too
+hotel-basics.is-there-air-conditioning,ah AR kong-dee-syoo-NAH-doo
+hotel-requests.wake-up-call,"ah-KOR-duh-muh ahzh {}, poor fah-VOR"
+payment-receipt.the-bill-is-wrong,AH-shoo kuh ah KONG-tah shtah ee-HAH-dah
+shopping.two-of-these,"DOYZH DESH-tish, poor fah-VOR"
+social-basics.okay-fine-i-am-okay,shtoh BENG
+emergency-medical.where-is-the-nearest-hospital,ONG-duh FEE-kah oo osh-pee-TAL MYSH PRAW-see-moo
+lost-rescue.where-is-lost-and-found,ONG-duh SOWNG oosh per-DEE-doosh ee ah-SHAH-doosh
+payment-receipt.i-already-paid,zhah pah-GAY
+shopping.what-is-it-made-of,duh kee EH FAY-too
+emergency-medical.what-is-the-emergency-number,kwal EH oo NOO-muh-roo duh ee-mer-ZHENG-syah
+lost-rescue.i-cannot-find-my-hotel,nowng kong-SEE-goo eng-kong-TRAR oo MEH-oo oh-TEL
+emergency-medical.is-there-a-doctor-who-speaks-english,ah al-GOONG MEH-dee-koo kuh FAH-luh eeng-GLESH
+lost-rescue.i-left-it-on-the-train,day-SHAY noo kong-BOY-oo
+dietary-needs.i-have-a-severe-allergy-to,TEH-nyoo ah-lehr-ZHEE-ah GRAH-vuh ah {}
+emergency-medical.i-think-a-bone-is-broken,AH-shoo kuh par-TEE oong OH-soo
+lost-rescue.i-cannot-get-down,nowng kong-SEE-goo desh-SER
+emergency-medical.please-call-my-emergency-contact,LEE-guh PAH-rah oo MEH-oo kong-TAK-too duh ee-mer-ZHENG-syah
+emergency-medical.i-have-travel-insurance,TEH-nyoo suh-GOO-roo duh VYAH-zheng
+numbers-money.euro,EW-roo
+numbers-money.euro-symbol,EW-roo

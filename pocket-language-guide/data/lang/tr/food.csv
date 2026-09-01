@@ -1,0 +1,26 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Et olmasın.,,,,2,tr-agent-v1
+dietary-needs.no-eggs,Yumurta olmasın.,,,,2,tr-agent-v1
+dietary-needs.not-spicy,Acı olmasın.,,,,2,tr-agent-v1
+dietary-needs.less-spicy,Az acı olsun.,,,,2,tr-agent-v1
+dietary-needs.no-peanuts,Yer fıstığı olmasın.,,,,2,tr-agent-v1
+dietary-needs.no-nuts,Sert kabuklu yemiş olmasın.,Kuruyemiş olmasın.,,,2,tr-agent-v1
+dietary-needs.no-seafood,Deniz ürünü olmasın.,,,,2,tr-agent-v1
+dietary-needs.i-am-vegetarian,Vejetaryenim.,,,,2,tr-agent-v1
+dietary-needs.i-am-vegan,Veganım.,,,,2,tr-agent-v1
+dietary-needs.i-do-not-eat,{} yemiyorum.,,,,2,tr-agent-v1
+dietary-needs.i-am-allergic-to,{} alerjim var.,,,,2,tr-agent-v1
+dietary-needs.does-it-contain-fish-stock,İçinde balık suyu var mı?,,,,2,tr-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,Ağır {} alerjim var.,,,,2,tr-agent-v1
+food-ordering.table-for-two,İki kişilik masa.,,,,2,tr-agent-v1
+food-ordering.is-a-table-available,Boş masa var mı?,,,,2,tr-agent-v1
+food-ordering.menu-please,"Menü, lütfen.",,,,2,tr-agent-v1
+food-ordering.i-want-this,Bunu istiyorum.,,,,2,tr-agent-v1
+food-ordering.do-you-have-drinking-water,İçme suyu var mı?,,,,2,tr-agent-v1
+food-ordering.to-go-please,"Paket olsun, lütfen.",,,,2,tr-agent-v1
+food-ordering.check-please,"Hesap, lütfen.",,,,2,tr-agent-v1
+food-ordering.does-it-contain,İçinde {} var mı?,,,,2,tr-agent-v1
+food-ordering.is-this-vegetarian,Bu vejetaryen mi?,,,,2,tr-agent-v1
+food-ordering.what-do-you-recommend,Ne tavsiye edersiniz?,,,,2,tr-agent-v1
+food-ordering.water-please,"Su, lütfen.",,,,2,tr-agent-v1
+food-ordering.can-a-vegetarian-eat-this,Vejetaryen bunu yiyebilir mi?,,,,2,tr-agent-v1

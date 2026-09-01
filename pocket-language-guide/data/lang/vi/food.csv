@@ -1,0 +1,26 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Không thịt,,,,2,vi-agent-v1
+dietary-needs.no-eggs,Không trứng,,,,2,vi-agent-v1
+dietary-needs.not-spicy,Không cay,,,,2,vi-agent-v1
+dietary-needs.less-spicy,Ít cay thôi,,,,2,vi-agent-v1
+dietary-needs.no-peanuts,Không đậu phộng,Không lạc,,,2,vi-agent-v1
+dietary-needs.no-nuts,Không các loại hạt,,,,2,vi-agent-v1
+dietary-needs.no-seafood,Không hải sản,Không tôm cua sò ốc,,,2,vi-agent-v1
+dietary-needs.i-am-vegetarian,Tôi ăn chay,,,"no meat, fish or fish sauce",2,vi-agent-v1
+dietary-needs.i-am-vegan,Tôi ăn thuần chay,"Chay, không trứng sữa",,,2,vi-agent-v1
+dietary-needs.i-do-not-eat,Tôi không ăn {},,,,2,vi-agent-v1
+dietary-needs.i-am-allergic-to,Tôi bị dị ứng với {},,,,2,vi-agent-v1
+dietary-needs.does-it-contain-fish-stock,Món này có nước mắm không ạ?,Có nước dùng cá không ạ?,,fish sauce,2,vi-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,Tôi bị dị ứng nặng với {},,,,2,vi-agent-v1
+food-ordering.table-for-two,Bàn cho hai người,,,,2,vi-agent-v1
+food-ordering.is-a-table-available,Còn bàn trống không ạ?,,,,2,vi-agent-v1
+food-ordering.menu-please,Cho tôi thực đơn ạ,Cho tôi cái menu ạ,,,2,vi-agent-v1
+food-ordering.i-want-this,Tôi muốn món này,,,,2,vi-agent-v1
+food-ordering.do-you-have-drinking-water,Có nước uống không ạ?,,,,2,vi-agent-v1
+food-ordering.to-go-please,Cho tôi mang về ạ,Cho tôi mang đi ạ,,,2,vi-agent-v1
+food-ordering.check-please,Tính tiền ạ,Cho tôi tính tiền ạ,,,2,vi-agent-v1
+food-ordering.does-it-contain,Món này có {} không ạ?,,,,2,vi-agent-v1
+food-ordering.is-this-vegetarian,Món này là món chay ạ?,,,,2,vi-agent-v1
+food-ordering.what-do-you-recommend,Nên gọi món gì ạ?,,,,2,vi-agent-v1
+food-ordering.water-please,Cho tôi nước ạ,,,,2,vi-agent-v1
+food-ordering.can-a-vegetarian-eat-this,Người ăn chay ăn được không ạ?,,,,2,vi-agent-v1

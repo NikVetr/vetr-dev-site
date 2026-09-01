@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Quẹt thẻ được không ạ?,,,,2,vi-agent-v1
+payment-receipt.pay-cash,Trả tiền mặt ạ?,,,,2,vi-agent-v1
+payment-receipt.pay-by-qr-code,Quét mã QR được không ạ?,,,,2,vi-agent-v1
+payment-receipt.a-receipt-please,Cho tôi hóa đơn ạ,,,,2,vi-agent-v1
+payment-receipt.please-write-the-number,Xin ghi số ra giấy,,,,2,vi-agent-v1
+payment-receipt.how-much-in-total,Tổng cộng bao nhiêu ạ?,,,,2,vi-agent-v1
+payment-receipt.can-we-pay-separately,Trả riêng được không ạ?,,,,2,vi-agent-v1
+payment-receipt.is-tax-included,Đã gồm thuế chưa ạ?,,,,2,vi-agent-v1
+payment-receipt.my-card-was-declined,Thẻ của tôi bị từ chối,,,,2,vi-agent-v1
+payment-receipt.the-bill-is-wrong,Hóa đơn hình như nhầm ạ,,,,2,vi-agent-v1
+payment-receipt.i-already-paid,Tôi trả rồi ạ,,,,2,vi-agent-v1
+shopping.i-am-just-looking,Tôi xem thôi ạ,,,,2,vi-agent-v1
+shopping.how-much-is-this,Cái này bao nhiêu ạ?,,,,2,vi-agent-v1
+shopping.that-is-too-expensive,Đắt quá,Mắc quá,,,2,vi-agent-v1
+shopping.can-it-be-a-little-cheaper,Bớt chút được không ạ?,,,,2,vi-agent-v1
+shopping.is-there-a-discount,Có giảm giá không ạ?,,,,2,vi-agent-v1
+shopping.where-do-i-pay,Trả tiền ở đâu ạ?,,,,2,vi-agent-v1
+shopping.i-will-take-this,Tôi lấy cái này,,,,2,vi-agent-v1
+shopping.what-is-this,Cái này là gì ạ?,,,,2,vi-agent-v1
+shopping.where-can-i-buy,Mua {} ở đâu ạ?,,,,2,vi-agent-v1
+shopping.do-you-have-this-in-stock,Còn hàng không ạ?,,,,2,vi-agent-v1
+shopping.two-of-these,Cho tôi hai cái ạ,,,,2,vi-agent-v1
+shopping.what-is-it-made-of,Cái này làm bằng gì ạ?,,,,2,vi-agent-v1
+color-size-returns.do-you-have-another-color,Có màu khác không ạ?,,,,2,vi-agent-v1
+color-size-returns.do-you-have-another-size,Có cỡ khác không ạ?,,,,2,vi-agent-v1
+color-size-returns.may-i-try-it-on,Cho tôi mặc thử ạ,,,,2,vi-agent-v1
+color-size-returns.can-i-return-it,Trả lại được không ạ?,,,,2,vi-agent-v1
+color-size-returns.can-i-exchange-it,Đổi được không ạ?,,,,2,vi-agent-v1
+color-size-returns.do-you-have-a-bag,Cho tôi cái túi ạ,,,,2,vi-agent-v1
+tax-refund.can-i-get-a-tax-refund,Tôi được hoàn thuế không ạ?,,,,2,vi-agent-v1
+tax-refund.is-tax-free-shopping-available,Ở đây có hoàn thuế VAT không ạ?,,,,2,vi-agent-v1

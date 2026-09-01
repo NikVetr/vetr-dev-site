@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Quero ir para {},,,,2,pt-agent-v1
+utility-templates.please-give-me,"Dê-me {}, por favor","Me dê {}, por favor",,,2,pt-agent-v1
+utility-templates.may-i,Posso {}?,,,,2,pt-agent-v1
+utility-templates.please-do-not-add,"Sem {}, por favor",,,"without {}, please",2,pt-agent-v1
+utility-templates.do-you-have,Tem {}?,,,,2,pt-agent-v1
+utility-templates.please-write-the-number,"Escreva o número, por favor",,,,2,pt-agent-v1
+utility-templates.i-need,Preciso de {},,,,2,pt-agent-v1
+utility-templates.is-there-nearby,Há {} aqui perto?,,,,2,pt-agent-v1
+utility-templates.how-much-is,Quanto custa {}?,,,,2,pt-agent-v1
+utility-templates.is-this,Isto é {}?,,,,2,pt-agent-v1
+utility-templates.please,"{}, por favor",,,,2,pt-agent-v1
+utility-templates.i-am-looking-for,Procuro {},,,,2,pt-agent-v1
+utility-templates.do-you-accept,Aceitam {}?,,,,2,pt-agent-v1
+utility-templates.i-cannot-find,Não consigo encontrar {},,,,2,pt-agent-v1
+utility-templates.there-is-a-problem-with,Há um problema com {},,,,2,pt-agent-v1

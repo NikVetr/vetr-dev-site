@@ -1,0 +1,60 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,Đây là phòng số mấy ạ?,,,,2,vi-agent-v1
+building-help.i-am-lost,Tôi bị lạc,,,,2,vi-agent-v1
+building-help.where-is-reception,Lễ tân ở đâu ạ?,Quầy tiếp tân ở đâu ạ?,,,2,vi-agent-v1
+building-help.where-is-a-power-outlet,Ổ cắm điện ở đâu ạ?,,,,2,vi-agent-v1
+accessibility.step-free,Có lối vào không bậc thang không ạ?,,,,2,vi-agent-v1
+accessibility.wheelchair-access,Xe lăn vào được không ạ?,,,,2,vi-agent-v1
+accessibility.elevator,Ở đây có thang máy không ạ?,,,,2,vi-agent-v1
+accessibility.ramp,Ở đây có đường dốc không ạ?,,,,2,vi-agent-v1
+accessibility.how-many-steps,Có bao nhiêu bậc thang ạ?,,,,2,vi-agent-v1
+accessibility.cannot-climb-stairs,Tôi không leo cầu thang được,,,,2,vi-agent-v1
+accessibility.need-to-sit-down,Tôi cần ngồi nghỉ,,,,2,vi-agent-v1
+accessibility.accessible-restroom,Có nhà vệ sinh cho người khuyết tật không?,,,,2,vi-agent-v1
+accessibility.station-assistance,Ở ga có hỗ trợ người khuyết tật không ạ?,,,,2,vi-agent-v1
+accessibility.help-me-carry,Xin giúp tôi mang cái này,,,,2,vi-agent-v1
+accessibility.board-first,Tôi lên trước được không ạ?,,,,2,vi-agent-v1
+accessibility.door-width,Cửa rộng bao nhiêu ạ?,,,,2,vi-agent-v1
+accessibility.wheelchair-width,Xe lăn của tôi rộng {} cm,,,,2,vi-agent-v1
+accessibility.hard-of-hearing,Tôi nghe kém,Tôi bị khiếm thính,,,2,vi-agent-v1
+accessibility.speak-louder,Xin nói to hơn,,,,2,vi-agent-v1
+accessibility.visually-impaired,Tôi bị khiếm thị,,,,2,vi-agent-v1
+accessibility.take-your-arm,Cho tôi vịn tay được không ạ?,,,,2,vi-agent-v1
+accessibility.guide-dog,Đây là chó dẫn đường của tôi,,,,2,vi-agent-v1
+in-a-building.is-this-the-correct-entrance,Đây có đúng lối vào không ạ?,,,,2,vi-agent-v1
+in-a-building.do-you-have-wi-fi,Ở đây có Wi-Fi không ạ?,,,,2,vi-agent-v1
+in-a-building.what-is-the-wi-fi-password,Mật khẩu Wi-Fi là gì ạ?,,,,2,vi-agent-v1
+in-a-building.which-floor,Tầng mấy ạ?,,,,2,vi-agent-v1
+toilets.where-toilet,Nhà vệ sinh ở đâu ạ?,,,,2,vi-agent-v1
+toilets.where-public-toilet,Nhà vệ sinh công cộng ở đâu ạ?,,,,2,vi-agent-v1
+toilets.may-i-use-the-toilet,Tôi dùng nhà vệ sinh được không ạ?,,,,2,vi-agent-v1
+toilets.is-it-only-for-customers,Chỉ dành cho khách hàng ạ?,,,,2,vi-agent-v1
+toilets.toilet-wc,Nhà vệ sinh,WC · Toilet,,,2,vi-agent-v1
+toilets.is-it-free,Có miễn phí không ạ?,,,,2,vi-agent-v1
+toilets.do-i-need-a-coin,Có cần tiền xu hay thẻ không ạ?,,,,2,vi-agent-v1
+toilets.is-the-tap-water-safe-to-drink,Nước máy uống được không ạ?,,,,2,vi-agent-v1
+toilets.it-is-urgent,Gấp lắm ạ,,,,2,vi-agent-v1
+toilets.may-i-have-the-toilet-key,Cho tôi mượn chìa khóa nhà vệ sinh ạ,,,,2,vi-agent-v1
+toilets.there-is-no-toilet-paper,Hết giấy vệ sinh rồi ạ,,,,2,vi-agent-v1
+toilets.toilet-paper,Giấy vệ sinh,,,,2,vi-agent-v1
+toilets.it-is-out-of-order,Bị hỏng rồi ạ,,,,2,vi-agent-v1
+toilets.out-of-order,Hỏng,Đang sửa,,,2,vi-agent-v1
+toilets.mens-toilet,Nhà vệ sinh nam,Nam,,,2,vi-agent-v1
+toilets.womens-toilet,Nhà vệ sinh nữ,Nữ,,,2,vi-agent-v1
+toilets.drinking-water,Nước uống,Nước uống được,,,2,vi-agent-v1
+toilets.not-for-drinking,Nước không uống được,Không phải nước uống,,,2,vi-agent-v1
+toilets.accessible-toilet,Nhà vệ sinh người khuyết tật,,,,2,vi-agent-v1
+toilets.where-can-i-wash-my-hands,Tôi rửa tay ở đâu được ạ?,,,,2,vi-agent-v1
+toilets.can-i-flush-the-paper,Bỏ giấy vào bồn cầu được không ạ?,,,,2,vi-agent-v1
+toilets.is-there-a-toilet-on-board,Trên xe có nhà vệ sinh không ạ?,Trên tàu có nhà vệ sinh không ạ?,,,2,vi-agent-v1
+toilets.the-toilet-will-not-flush,Bồn cầu không xả nước được,,,,2,vi-agent-v1
+toilets.baby-change,Phòng thay tã,Bàn thay tã,,,2,vi-agent-v1
+toilets.squat-toilet,Bồn cầu xổm,Xí xổm,,,2,vi-agent-v1
+building-words.elevator,Thang máy,,,,2,vi-agent-v1
+building-words.stairs,Cầu thang,,,,2,vi-agent-v1
+building-words.entrance,Lối vào,,,,2,vi-agent-v1
+building-words.exit,Lối ra,Exit,,,2,vi-agent-v1
+building-words.men,Nam,,,,2,vi-agent-v1
+building-words.women,Nữ,,,,2,vi-agent-v1
+building-words.door,Cửa,,,,2,vi-agent-v1
+building-words.key,Chìa khóa,,,,2,vi-agent-v1

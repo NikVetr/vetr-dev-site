@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,eu / me,,,,2,pt-agent-v1
+pronouns-verbs.we-us,nós / nos,,,,2,pt-agent-v1
+pronouns-verbs.you,você,tu,,,2,pt-agent-v1
+pronouns-verbs.you-polite,o senhor / a senhora,,,,2,pt-agent-v1
+pronouns-verbs.he-him,ele,,,,2,pt-agent-v1
+pronouns-verbs.she-her,ela,,,,2,pt-agent-v1
+pronouns-verbs.they-them,eles / elas,,,,2,pt-agent-v1
+pronouns-verbs.my-mine,o meu / a minha,,,,2,pt-agent-v1
+pronouns-verbs.your-yours,o seu / a sua,,,,2,pt-agent-v1
+pronouns-verbs.be-called-call,chamar-se,se chamar,,,2,pt-agent-v1
+pronouns-verbs.have,ter,,,,2,pt-agent-v1
+pronouns-verbs.do-not-have,não ter,,,,2,pt-agent-v1
+pronouns-verbs.go,ir,,,,2,pt-agent-v1
+pronouns-verbs.come,vir,,,,2,pt-agent-v1
+pronouns-verbs.would-like,queria,gostaria de,,,2,pt-agent-v1
+pronouns-verbs.want,querer,,,,2,pt-agent-v1
+pronouns-verbs.look-for,procurar,,,,2,pt-agent-v1
+pronouns-verbs.buy,comprar,,,,2,pt-agent-v1
+pronouns-verbs.like,gostar de,,,,2,pt-agent-v1
+pronouns-verbs.need,precisar de,,,,2,pt-agent-v1
+pronouns-verbs.there-is-have,há,tem,,,2,pt-agent-v1
+pronouns-verbs.there-is-not-do-not-have,não há,não tem,,,2,pt-agent-v1
+pronouns-verbs.want-to-verb,quero + infinitivo,,,,2,pt-agent-v1
+pronouns-verbs.want-thing,quero + coisa,,,,2,pt-agent-v1
+pronouns-verbs.need-thing,preciso de + coisa,,,,2,pt-agent-v1
+pronouns-verbs.looking-for-thing,procuro + coisa,,,,2,pt-agent-v1
+question-words.what,o quê,que,,,2,pt-agent-v1
+question-words.where,onde,,,,2,pt-agent-v1
+question-words.who,quem,,,,2,pt-agent-v1
+question-words.which-one,qual,,,,2,pt-agent-v1
+question-words.when,quando,,,,2,pt-agent-v1
+question-words.how,como,,,,2,pt-agent-v1
+question-words.how-much-many,quanto,,,,2,pt-agent-v1
+question-words.how-many,quantos,,,,2,pt-agent-v1
+question-words.why,porquê,por quê,,,2,pt-agent-v1
+question-words.this,isto,,,,2,pt-agent-v1
+question-words.that,isso,aquilo,,,2,pt-agent-v1
+question-words.here,aqui,,,,2,pt-agent-v1
+question-words.there,ali,lá,,,2,pt-agent-v1
+question-words.a-little,um pouco,,,,2,pt-agent-v1
+question-words.some,algum,alguns,,,2,pt-agent-v1
+question-words.very,muito,,,,2,pt-agent-v1
+question-words.too,demasiado,demais,,,2,pt-agent-v1
+question-words.also,também,,,,2,pt-agent-v1
+question-words.all-both,todos,ambos,,,2,pt-agent-v1
+question-words.how-much-what-price,quanto custa,,,,2,pt-agent-v1

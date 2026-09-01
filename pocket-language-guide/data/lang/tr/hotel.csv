@@ -1,0 +1,53 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+hotel-words.passport,pasaport,,,,2,tr-agent-v1
+hotel-words.room-key-card,oda kartı,oda anahtarı,,,2,tr-agent-v1
+hotel-words.check-in,giriş,check-in,,,2,tr-agent-v1
+hotel-words.check-out,çıkış,check-out,,,2,tr-agent-v1
+hotel-words.luggage-storage,emanet,bagaj odası,,,2,tr-agent-v1
+hotel-basics.are-any-rooms-available,Boş odanız var mı?,,,,2,tr-agent-v1
+hotel-basics.there-are-two-of-us,İki kişiyiz.,,,,2,tr-agent-v1
+hotel-basics.i-have-a-reservation,Rezervasyonum var.,,,,2,tr-agent-v1
+hotel-basics.can-i-charge-my-phone,Telefonumu şarj edebilir miyim?,,,,2,tr-agent-v1
+hotel-basics.i-would-like-a-non-smoking-room,Sigara içilmeyen oda istiyorum.,,,,2,tr-agent-v1
+hotel-basics.i-would-like-a-quiet-room,Sessiz bir oda istiyorum.,,,,2,tr-agent-v1
+hotel-basics.is-there-a-washing-machine,Çamaşır makinesi var mı?,,,,2,tr-agent-v1
+hotel-basics.is-wi-fi-free,Wi-Fi ücretsiz mi?,,,,2,tr-agent-v1
+hotel-basics.how-much-per-night,Geceliği ne kadar?,,,,2,tr-agent-v1
+hotel-basics.is-breakfast-included,Kahvaltı dahil mi?,,,,2,tr-agent-v1
+hotel-basics.may-i-see-the-room,Odayı görebilir miyim?,,,,2,tr-agent-v1
+hotel-basics.for-nights,{} gece için.,,,,2,tr-agent-v1
+hotel-basics.two-beds,"İki tek yatak, lütfen.",,,,2,tr-agent-v1
+hotel-basics.is-there-air-conditioning,Klima var mı?,,,,2,tr-agent-v1
+hotel-requests.can-i-check-out-later,Daha geç çıkabilir miyim?,,,,2,tr-agent-v1
+hotel-requests.what-time-does-breakfast-start,Kahvaltı kaçta başlıyor?,,,,2,tr-agent-v1
+hotel-requests.can-i-store-my-luggage,Bagajımı bırakabilir miyim?,,,,2,tr-agent-v1
+hotel-requests.no-housekeeping,Oda temizliği istemiyorum.,,,,2,tr-agent-v1
+hotel-requests.another-towel-please,"Bir havlu daha, lütfen.",,,,2,tr-agent-v1
+hotel-requests.what-time-is-check-out,Çıkış saati kaç?,,,,2,tr-agent-v1
+hotel-requests.can-i-check-in-early,Erken giriş yapabilir miyim?,,,,2,tr-agent-v1
+hotel-requests.another-night,Bir gece daha kalabilir miyim?,,,,2,tr-agent-v1
+hotel-requests.is-there-a-safe,Kasa var mı?,,,,2,tr-agent-v1
+hotel-requests.another-blanket,"Bir battaniye daha, lütfen.",,,,2,tr-agent-v1
+hotel-requests.wake-up-call,Uyandırma saati: {},,,,2,tr-agent-v1
+room-problems.there-is-a-problem-with-the-room,Odada bir sorun var.,,,,2,tr-agent-v1
+room-problems.the-air-conditioning-is-broken,Klima bozuk.,,,,2,tr-agent-v1
+room-problems.there-is-no-hot-water,Sıcak su yok.,,,,2,tr-agent-v1
+room-problems.can-i-change-rooms,Oda değiştirebilir miyim?,,,,2,tr-agent-v1
+room-problems.the-room-is-too-noisy,Oda çok gürültülü.,,,,2,tr-agent-v1
+room-problems.the-key-does-not-work,Kart kapıyı açmıyor.,,,,2,tr-agent-v1
+room-problems.the-toilet-will-not-flush,Sifon çalışmıyor.,,,,2,tr-agent-v1
+room-problems.the-light-does-not-work,Işık yanmıyor.,,,,2,tr-agent-v1
+room-problems.please-send-someone,Tamir için birini gönderin.,,,,2,tr-agent-v1
+room-problems.the-heating-does-not-work,Isıtma çalışmıyor.,Kalorifer çalışmıyor.,,,2,tr-agent-v1
+laundry.please-wash-these-clothes,"Bunları yıkayın, lütfen.",,,,2,tr-agent-v1
+laundry.where-is-a-laundromat,Çamaşırhane nerede?,,,,2,tr-agent-v1
+laundry.when-will-it-be-ready,Ne zaman hazır olur?,,,,2,tr-agent-v1
+laundry.how-much-per-kilo,Kilosu ne kadar?,,,,2,tr-agent-v1
+laundry.can-it-be-ready-today,Bugün hazır olur mu?,,,,2,tr-agent-v1
+laundry.please-do-not-use-bleach,Çamaşır suyu kullanmayın.,,,,2,tr-agent-v1
+laundry.laundromat,çamaşırhane,,,,2,tr-agent-v1
+laundry.please-iron-this,"Bunu ütüleyin, lütfen.",,,,2,tr-agent-v1
+laundry.detergent,deterjan,,,,2,tr-agent-v1
+laundry.dry-cleaning,kuru temizleme,,,,2,tr-agent-v1
+laundry.dryer,kurutma makinesi,,,,2,tr-agent-v1
+laundry.coin-operated,jetonlu,bozuk paralı,,,2,tr-agent-v1

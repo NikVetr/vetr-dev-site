@@ -1,0 +1,66 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+trail-words.trail,patika,yürüyüş yolu,,,2,tr-agent-v1
+trail-words.trailhead,yol başlangıcı,patika girişi,,,2,tr-agent-v1
+trail-words.summit,zirve,,,,2,tr-agent-v1
+trail-words.viewpoint,seyir terası,manzara noktası,,,2,tr-agent-v1
+trail-words.cableway,teleferik,,,,2,tr-agent-v1
+trail-words.shuttle-bus,servis otobüsü,ring,,,2,tr-agent-v1
+trail-words.park-shuttle,park servisi,ring aracı,,,1,tr-agent-v1
+trail-words.steps,basamaklar,merdiven,,,2,tr-agent-v1
+trail-words.up-uphill,yukarı / yokuş yukarı,,,,2,tr-agent-v1
+trail-words.down-downhill,aşağı / yokuş aşağı,,,,2,tr-agent-v1
+trail-words.one-way,tek yön,,,,2,tr-agent-v1
+trail-words.round-trip,gidiş-dönüş,,,,2,tr-agent-v1
+weather.forecast,Hava durumu nasıl?,,,,2,tr-agent-v1
+weather.will-it-rain,Bugün yağmur var mı?,,,,2,tr-agent-v1
+weather.is-it-safe-today,Bugün güvenli mi?,,,,2,tr-agent-v1
+weather.how-cold-at-night,Geceleri kaç dereceye düşüyor?,,,,2,tr-agent-v1
+weather.rain,yağmur,,,,2,tr-agent-v1
+weather.snow,kar,,,,2,tr-agent-v1
+weather.wind,rüzgâr,,,,2,tr-agent-v1
+weather.storm,fırtına,,,,2,tr-agent-v1
+weather.ice,buzlanma,buz,,,2,tr-agent-v1
+weather.fog,sis,,,,2,tr-agent-v1
+weather.heat,sıcak,aşırı sıcak,,,2,tr-agent-v1
+weather.cold,soğuk,,,,2,tr-agent-v1
+weather.humid,nemli,,,,2,tr-agent-v1
+weather.sunrise,gün doğumu,,,,2,tr-agent-v1
+weather.flood,sel,,,,2,tr-agent-v1
+weather.avalanche-risk,çığ riski,,,,2,tr-agent-v1
+hiking-parks.is-this-the-way-to,{} yolu bu mu?,,,,2,tr-agent-v1
+hiking-parks.where-is-the-trailhead,Yol başlangıcı nerede?,,,,2,tr-agent-v1
+hiking-parks.how-long-to-the-summit,Zirveye ne kadar var?,,,,2,tr-agent-v1
+hiking-parks.how-long-to-the-viewpoint,Seyir terasına ne kadar var?,,,,2,tr-agent-v1
+hiking-parks.which-route-is-easier,Hangi yol daha kolay?,,,,2,tr-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,Bu yol yeni başlayanlara uygun mu?,,,,2,tr-agent-v1
+trail-conditions.how-long-is-the-full-route,Tüm yol ne kadar sürer?,,,,2,tr-agent-v1
+trail-conditions.can-we-return-the-same-way,Aynı yoldan dönebilir miyiz?,,,,2,tr-agent-v1
+trail-conditions.can-we-return-before-dark,Karanlıktan önce döner miyiz?,,,,2,tr-agent-v1
+trail-conditions.is-the-trail-open,Yol açık mı?,,,,2,tr-agent-v1
+trail-conditions.is-the-route-steep,Yol dik mi?,,,,2,tr-agent-v1
+trail-conditions.is-the-path-slippery,Yol kaygan mı?,,,,2,tr-agent-v1
+trail-transport.how-long-is-the-queue,Kuyruk ne kadar?,,,,2,tr-agent-v1
+trail-transport.what-time-is-the-last-shuttle,Son servis saat kaçta?,,,,2,tr-agent-v1
+trail-transport.when-does-the-cableway-stop,Teleferik kaçta kapanıyor?,,,,2,tr-agent-v1
+trail-transport.where-can-we-buy-water,Nereden su alabiliriz?,,,,2,tr-agent-v1
+trail-transport.where-can-we-refill-water,Nerede su doldurabiliriz?,,,,2,tr-agent-v1
+trail-transport.is-there-cell-signal-here,Burada telefon çekiyor mu?,,,,2,tr-agent-v1
+trail-transport.do-you-have-a-map,Haritanız var mı?,,,,2,tr-agent-v1
+trail-transport.how-long-is-the-wait,Ne kadar beklenir?,,,,2,tr-agent-v1
+trail-warnings.open,açık,,,,2,tr-agent-v1
+trail-warnings.closed,kapalı,,,,2,tr-agent-v1
+trail-warnings.maintenance,bakım çalışması,bakımda,,,2,tr-agent-v1
+trail-warnings.steep-slope,dik yokuş,,,,2,tr-agent-v1
+trail-warnings.caution-slippery,dikkat: kaygan zemin,,,,2,tr-agent-v1
+trail-warnings.danger,tehlike,,,,2,tr-agent-v1
+trail-warnings.beware-falling-rocks,dikkat: taş düşebilir,,,,2,tr-agent-v1
+trail-warnings.first-aid-station,ilk yardım noktası,,,,2,tr-agent-v1
+trail-warnings.service-suspended,seferler iptal,hizmet dışı,,,2,tr-agent-v1
+trail-landmarks.trail-marker,yol işareti,,,,2,tr-agent-v1
+trail-landmarks.fork-junction,yol ayrımı,kavşak,,,2,tr-agent-v1
+trail-landmarks.boardwalk-cliff-path,ahşap yol / uçurum patikası,,,,1,tr-agent-v1
+trail-landmarks.start,başlangıç,,,,2,tr-agent-v1
+trail-landmarks.end,bitiş,,,,2,tr-agent-v1
+trail-landmarks.elevation,rakım,yükseklik,,,2,tr-agent-v1
+trail-landmarks.sunset,gün batımı,,,,2,tr-agent-v1
+trail-landmarks.water-point,su noktası,çeşme,,,2,tr-agent-v1

@@ -1,0 +1,113 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+directions.where-is,{} ở đâu ạ?,,,,2,vi-agent-v1
+directions.how-do-i-get-to,Đi {} thế nào ạ?,,,,2,vi-agent-v1
+directions.is-it-far,Có xa không ạ?,,,,2,vi-agent-v1
+directions.how-long-on-foot,Đi bộ mất bao lâu ạ?,,,,2,vi-agent-v1
+directions.please-show-me-on-the-map,Xin chỉ giúp trên bản đồ,,,,2,vi-agent-v1
+directions.where-is-the-nearest,{} gần nhất ở đâu ạ?,,,,2,vi-agent-v1
+directions.where-am-i,Tôi đang ở đâu ạ?,,,,2,vi-agent-v1
+directions.which-way,Đi hướng nào ạ?,,,,2,vi-agent-v1
+directions.can-i-walk-there,Đi bộ đến được không ạ?,,,,2,vi-agent-v1
+directions.how-far-is-it,Bao xa ạ?,,,,2,vi-agent-v1
+directions.which-exit,Lối ra nào ạ?,,,,2,vi-agent-v1
+directions.can-you-show-me-the-way,Chỉ đường giúp tôi với ạ,,,,2,vi-agent-v1
+directions.north,Bắc,,,,2,vi-agent-v1
+directions.south,Nam,,,,2,vi-agent-v1
+directions.east,Đông,,,,2,vi-agent-v1
+directions.west,Tây,,,,2,vi-agent-v1
+quick-directions.go-straight,Đi thẳng,,,,2,vi-agent-v1
+quick-directions.turn-left,Rẽ trái,Quẹo trái,,,2,vi-agent-v1
+quick-directions.turn-right,Rẽ phải,Quẹo phải,,,2,vi-agent-v1
+quick-directions.this-way,Lối này,,,,2,vi-agent-v1
+quick-directions.that-way,Lối kia,,,,2,vi-agent-v1
+quick-directions.on-the-left,Bên trái,,,,2,vi-agent-v1
+quick-directions.on-the-right,Bên phải,,,,2,vi-agent-v1
+quick-directions.across-from-here,Đối diện đây,,,,2,vi-agent-v1
+quick-directions.in-front,Phía trước,,,,2,vi-agent-v1
+quick-directions.behind,Phía sau,,,,2,vi-agent-v1
+taxi.please-take-me-here,Xin chở tôi đến đây,,,,2,vi-agent-v1
+taxi.please-send-me-the-address,Xin gửi địa chỉ cho tôi,,,,2,vi-agent-v1
+taxi.we-need-the-east-gate-not-the-south-gate,"Cổng Đông, không phải cổng Nam",,,,2,vi-agent-v1
+taxi.please-stop-here,Xin dừng ở đây,Cho xuống đây ạ,,,2,vi-agent-v1
+taxi.can-you-wait-for-me-here,Chờ tôi ở đây được không ạ?,,,,2,vi-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,Chúng tôi phải kịp tàu cao tốc,,,,2,vi-agent-v1
+taxi.please-use-the-meter,Xin bật đồng hồ,,,,2,vi-agent-v1
+taxi.i-will-get-off-here,Cho tôi xuống đây,,,,2,vi-agent-v1
+transit-rides.two-tickets,Cho tôi hai vé,,,,2,vi-agent-v1
+transit-rides.where-is-the-subway-station,Ga tàu điện ngầm ở đâu ạ?,Ga metro ở đâu ạ?,,,2,vi-agent-v1
+transit-rides.does-this-bus-train-go-to,Xe này có đi {} không ạ?,,,,2,vi-agent-v1
+transit-rides.what-is-the-next-stop,Trạm sau là trạm nào ạ?,,,,2,vi-agent-v1
+transit-rides.please-tell-me-where-to-get-off,Xin báo tôi chỗ xuống,,,,2,vi-agent-v1
+transit-rides.is-this-direct,Có đi thẳng không ạ?,,,,2,vi-agent-v1
+transit-rides.do-i-need-to-transfer,Có phải đổi xe không ạ?,,,,2,vi-agent-v1
+transit-rides.is-it-delayed,Có bị trễ không ạ?,Có bị muộn không ạ?,,,2,vi-agent-v1
+transit-rides.i-am-in-a-hurry,Tôi đang vội,,,,2,vi-agent-v1
+transit-rides.which-platform,Sân ga nào ạ?,,,,2,vi-agent-v1
+transit-rides.what-time-is-the-next-one,Chuyến sau mấy giờ ạ?,,,,2,vi-agent-v1
+transit-rides.i-went-past-my-stop,Tôi đi quá trạm rồi,,,,2,vi-agent-v1
+transit-rides.can-i-use-this-ticket,Vé này dùng được không ạ?,,,,2,vi-agent-v1
+place-words.visitor-center,Trung tâm du khách,,,,2,vi-agent-v1
+place-words.railway-station,Ga tàu hỏa,Ga xe lửa,,,2,vi-agent-v1
+place-words.airport,Sân bay,,,,2,vi-agent-v1
+place-words.service-desk,Quầy dịch vụ,,,,2,vi-agent-v1
+place-words.bus-stop,Trạm xe buýt,Bến xe buýt,,,2,vi-agent-v1
+place-words.luggage-storage,Nơi gửi hành lý,,,,2,vi-agent-v1
+place-words.tourist-spot-sightseeing-area,Khu du lịch,Điểm tham quan,,,2,vi-agent-v1
+border-customs.i-am-a-tourist,Tôi đi du lịch,,,,2,vi-agent-v1
+border-customs.here-is-my-passport,Hộ chiếu của tôi đây,,,,2,vi-agent-v1
+border-customs.i-am-staying-for-days,Tôi ở {} ngày,,,,2,vi-agent-v1
+border-customs.nothing-to-declare,Không có gì khai báo,,,,2,vi-agent-v1
+border-customs.i-am-staying-at,Tôi ở tại {},,,,2,vi-agent-v1
+border-customs.i-am-here-for-business,Tôi đi công tác,,,,2,vi-agent-v1
+border-customs.i-have-a-return-ticket,Tôi có vé khứ hồi,,,,2,vi-agent-v1
+border-customs.i-am-visiting-family,Tôi thăm gia đình,,,,2,vi-agent-v1
+border-customs.this-is-for-personal-use,Đồ dùng cá nhân,,,,2,vi-agent-v1
+border-customs.i-am-in-transit,Tôi quá cảnh,,,,2,vi-agent-v1
+border-customs.i-have-in-cash,Tôi mang theo {} tiền mặt,,,,2,vi-agent-v1
+border-customs.this-is-a-gift,Đây là quà,,,,2,vi-agent-v1
+border-customs.where-do-i-collect-my-baggage,Lấy hành lý ở đâu ạ?,,,,2,vi-agent-v1
+border-customs.how-long-may-i-stay,Tôi được ở bao lâu ạ?,,,,2,vi-agent-v1
+border-customs.i-have-a-connecting-flight,Tôi có chuyến bay nối,,,,2,vi-agent-v1
+border-customs.may-i-have-an-entry-stamp,Cho tôi xin dấu nhập cảnh ạ,,,,2,vi-agent-v1
+border-customs.visa,Thị thực,Visa,,,2,vi-agent-v1
+border-customs.i-have-no-food-or-plants,Tôi không mang thực phẩm hay cây,,,,2,vi-agent-v1
+border-customs.passport-control,Nhập cảnh,Kiểm soát hộ chiếu,,,2,vi-agent-v1
+border-customs.customs,Hải quan,,,,2,vi-agent-v1
+border-customs.baggage-claim,Nhận hành lý,,,,2,vi-agent-v1
+border-customs.customs-declaration,Tờ khai hải quan,,,,2,vi-agent-v1
+border-customs.arrival-card,Tờ khai nhập cảnh,,,,2,vi-agent-v1
+border-customs.transit,Quá cảnh,,,,2,vi-agent-v1
+border-customs.boarding-pass,Thẻ lên máy bay,,,,2,vi-agent-v1
+pickup-meeting.where-is-the-pickup-point,Điểm đón khách ở đâu ạ?,,,,2,vi-agent-v1
+pickup-meeting.please-send-me-the-pickup-point,Xin gửi điểm đón cho tôi,,,,2,vi-agent-v1
+pickup-meeting.please-pick-us-up-here,Xin đón chúng tôi ở đây,,,,2,vi-agent-v1
+pickup-meeting.meet-us-at,Gặp chúng tôi ở {},,,,2,vi-agent-v1
+pickup-meeting.please-call-me-a-ride,Xin gọi xe giúp tôi,Xin đặt Grab giúp tôi,,,2,vi-agent-v1
+pickup-meeting.please-call-a-taxi,Xin gọi taxi giúp tôi,,,,2,vi-agent-v1
+rail-station-words.high-speed-rail,Tàu cao tốc,,,,2,vi-agent-v1
+rail-station-words.transfer,Đổi tàu,Chuyển tuyến,,,2,vi-agent-v1
+rail-station-words.ticket-gate,Cổng soát vé,,,,2,vi-agent-v1
+rail-station-words.platform,Sân ga,Ke ga,,,2,vi-agent-v1
+rail-station-words.ticket-office,Phòng bán vé,Quầy bán vé,,,2,vi-agent-v1
+rail-station-words.waiting-room,Phòng chờ,,,,2,vi-agent-v1
+rail-station-words.train-number,Số hiệu tàu,,,,2,vi-agent-v1
+rail-station-words.carriage,Toa tàu,,,,2,vi-agent-v1
+rail-station-words.seat,Chỗ ngồi,,,,2,vi-agent-v1
+rail-station-words.last-train,Chuyến tàu cuối,,,,2,vi-agent-v1
+rail-station-words.delayed,Chậm chuyến,Trễ giờ,,,2,vi-agent-v1
+rail-station-words.final-stop,Ga cuối,,,,2,vi-agent-v1
+common-signs.open-on,Mở,Bật,,,2,vi-agent-v1
+common-signs.closed-off,Đóng,Tắt,,,2,vi-agent-v1
+common-signs.occupied,Có người,,,,2,vi-agent-v1
+common-signs.vacant,Trống,,,,2,vi-agent-v1
+common-signs.caution,Chú ý,Cẩn thận,,,2,vi-agent-v1
+common-signs.no-entry,Cấm vào,,,,2,vi-agent-v1
+common-signs.no-smoking,Cấm hút thuốc,,,,2,vi-agent-v1
+common-signs.no-photography,Cấm chụp ảnh,,,,2,vi-agent-v1
+common-signs.do-not-touch,Không chạm vào,Cấm sờ,,,2,vi-agent-v1
+common-signs.temporarily-closed,Tạm đóng cửa,Tạm nghỉ,,,2,vi-agent-v1
+common-signs.open-operating,Đang hoạt động,Đang mở cửa,,,2,vi-agent-v1
+common-signs.closed,Đóng cửa,,,,2,vi-agent-v1
+common-signs.stopped-stop,Dừng,Ngừng,,,2,vi-agent-v1
+transit-rides.do-i-need-to-validate,Có cần quét vé trước không ạ?,,,,2,vi-agent-v1
+rail-station-words.ticket-validator,Máy soát vé,Cổng soát vé,,,2,vi-agent-v1

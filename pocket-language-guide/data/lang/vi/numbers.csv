@@ -1,0 +1,43 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,không,0,,,2,vi-agent-v1
+numbers-money.y,một,1,,,2,vi-agent-v1
+numbers-money.r,hai,2,,,2,vi-agent-v1
+numbers-money.s-n,ba,3,,,2,vi-agent-v1
+numbers-money.s,bốn,4,,,2,vi-agent-v1
+numbers-money.w,năm,5,,,2,vi-agent-v1
+numbers-money.li,sáu,6,,,2,vi-agent-v1
+numbers-money.q,bảy,7,,,2,vi-agent-v1
+numbers-money.b,tám,8,,,2,vi-agent-v1
+numbers-money.ji,chín,9,,,2,vi-agent-v1
+numbers-money.sh,mười,10,,,2,vi-agent-v1
+numbers-money.y-b-i,một trăm,100,,,2,vi-agent-v1
+numbers-money.y-qi-n,một nghìn,một ngàn,,,2,vi-agent-v1
+numbers-money.y-w-n,mười nghìn,mười ngàn,,,2,vi-agent-v1
+numbers-money.b-n,một nửa,rưỡi,,,2,vi-agent-v1
+atm-cash.where-is-an-atm,Máy ATM ở đâu ạ?,Cây ATM ở đâu ạ?,,,2,vi-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,Máy này nhận thẻ nước ngoài không ạ?,,,,2,vi-agent-v1
+atm-cash.the-atm-kept-my-card,Máy nuốt thẻ của tôi,,,,2,vi-agent-v1
+atm-cash.is-there-a-fee,Có mất phí không ạ?,,,,2,vi-agent-v1
+atm-cash.the-card-was-declined,Thẻ bị từ chối,,,,2,vi-agent-v1
+atm-cash.what-is-the-exchange-rate,Tỷ giá bao nhiêu ạ?,,,,2,vi-agent-v1
+atm-cash.no-money-came-out,Máy không nhả tiền,,,,2,vi-agent-v1
+atm-cash.where-can-i-change-money,Đổi tiền ở đâu ạ?,,,,2,vi-agent-v1
+atm-cash.the-machine-is-out-of-service,Máy không hoạt động,,,,2,vi-agent-v1
+atm-cash.please-give-me-smaller-notes,Xin cho tôi tờ nhỏ hơn,,,,2,vi-agent-v1
+atm-cash.do-you-have-change,Có tiền lẻ không ạ?,,,,2,vi-agent-v1
+atm-cash.may-i-pay-in,Trả bằng {} được không ạ?,,,,2,vi-agent-v1
+atm-cash.please-charge-in-local-currency,Xin tính bằng tiền Việt,Xin tính bằng nội tệ,,,2,vi-agent-v1
+atm-cash.where-can-i-get-coins,Đổi tiền xu ở đâu ạ?,,,,2,vi-agent-v1
+atm-cash.is-there-a-minimum-for-cards,Thẻ có mức tối thiểu không ạ?,,,,2,vi-agent-v1
+atm-cash.atm,Máy ATM,Cây ATM,,,2,vi-agent-v1
+atm-cash.banknote,Tờ tiền,,,,2,vi-agent-v1
+atm-cash.coin,Tiền xu,,,,2,vi-agent-v1
+atm-cash.cash-only,Chỉ nhận tiền mặt,,,,2,vi-agent-v1
+atm-cash.fee,Phí,Lệ phí,,,2,vi-agent-v1
+atm-cash.change,Tiền thừa,Tiền thối,,,2,vi-agent-v1
+atm-cash.exchange-rate,Tỷ giá,,,,2,vi-agent-v1
+atm-cash.bank,Ngân hàng,,,,2,vi-agent-v1
+atm-cash.money-exchange,Đổi ngoại tệ,Thu đổi ngoại tệ,,,2,vi-agent-v1
+atm-cash.pin,Mã PIN,,,,2,vi-agent-v1
+numbers-money.dong,đồng,VNĐ,,,2,coordinator-gaps-v2
+numbers-money.dong-symbol,₫,VNĐ,,,2,coordinator-gaps-v2

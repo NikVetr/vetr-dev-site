@@ -1,0 +1,43 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,Que horas são?,,,,2,pt-agent-v1
+time-scheduling.how-many-minutes,Quantos minutos?,,,,2,pt-agent-v1
+time-scheduling.what-time-should-we-meet,A que horas nos encontramos?,,,,2,pt-agent-v1
+time-scheduling.can-we-change-the-time,Podemos mudar a hora?,,,,2,pt-agent-v1
+time-scheduling.when-is-convenient,A que horas é melhor?,,,,2,pt-agent-v1
+time-scheduling.what-is-today-s-date,Qual é a data de hoje?,,,,2,pt-agent-v1
+time-scheduling.what-day-is-it-today,Que dia é hoje?,,,,2,pt-agent-v1
+time-scheduling.what-time-does-it-open,A que horas abre?,,,,2,pt-agent-v1
+time-scheduling.what-time-does-it-close,A que horas fecha?,,,,2,pt-agent-v1
+time-scheduling.how-long-does-it-take,Quanto tempo demora?,Quanto tempo leva?,,,2,pt-agent-v1
+time-words.today,hoje,,,,2,pt-agent-v1
+time-words.tomorrow,amanhã,,,,2,pt-agent-v1
+time-words.yesterday,ontem,,,,2,pt-agent-v1
+time-words.this-week,esta semana,,,,2,pt-agent-v1
+time-words.next-week,a próxima semana,,,,2,pt-agent-v1
+time-words.morning,a manhã,,,,2,pt-agent-v1
+time-words.afternoon,a tarde,,,,2,pt-agent-v1
+time-words.evening,o fim da tarde,o serão,,,2,pt-agent-v1
+time-words.spring,a primavera,,,,2,pt-agent-v1
+time-words.summer,o verão,,,,2,pt-agent-v1
+time-words.fall,o outono,,,,2,pt-agent-v1
+time-words.winter,o inverno,,,,2,pt-agent-v1
+time-words.night,a noite,,,,2,pt-agent-v1
+days-of-week.monday,segunda-feira,segunda,,,2,pt-agent-v1
+days-of-week.tuesday,terça-feira,terça,,,2,pt-agent-v1
+days-of-week.wednesday,quarta-feira,quarta,,,2,pt-agent-v1
+days-of-week.thursday,quinta-feira,quinta,,,2,pt-agent-v1
+days-of-week.friday,sexta-feira,sexta,,,2,pt-agent-v1
+days-of-week.saturday,sábado,,,,2,pt-agent-v1
+days-of-week.sunday,domingo,,,,2,pt-agent-v1
+months.january,janeiro,,,,2,pt-agent-v1
+months.february,fevereiro,,,,2,pt-agent-v1
+months.march,março,,,,2,pt-agent-v1
+months.april,abril,,,,2,pt-agent-v1
+months.may,maio,,,,2,pt-agent-v1
+months.june,junho,,,,2,pt-agent-v1
+months.july,julho,,,,2,pt-agent-v1
+months.august,agosto,,,,2,pt-agent-v1
+months.september,setembro,,,,2,pt-agent-v1
+months.october,outubro,,,,2,pt-agent-v1
+months.november,novembro,,,,2,pt-agent-v1
+months.december,dezembro,,,,2,pt-agent-v1

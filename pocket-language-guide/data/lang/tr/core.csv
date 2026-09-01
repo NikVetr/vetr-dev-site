@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,ben / beni,bana,,,2,tr-agent-v1
+pronouns-verbs.we-us,biz / bizi,bize,,,2,tr-agent-v1
+pronouns-verbs.you,sen / seni,sana,,,2,tr-agent-v1
+pronouns-verbs.you-polite,siz / sizi,size,,,2,tr-agent-v1
+pronouns-verbs.he-him,o / onu,ona,,,2,tr-agent-v1
+pronouns-verbs.she-her,o / onu,ona,,,2,tr-agent-v1
+pronouns-verbs.they-them,onlar / onları,onlara,,,2,tr-agent-v1
+pronouns-verbs.my-mine,benim / benimki,,,,2,tr-agent-v1
+pronouns-verbs.your-yours,sizin / sizinki,senin / seninki,,,2,tr-agent-v1
+pronouns-verbs.be-called-call,adı … olmak / çağırmak,,,,1,tr-agent-v1
+pronouns-verbs.have,bende var,sahip olmak,,,2,tr-agent-v1
+pronouns-verbs.do-not-have,bende yok,,,,2,tr-agent-v1
+pronouns-verbs.go,gitmek,,,,2,tr-agent-v1
+pronouns-verbs.come,gelmek,,,,2,tr-agent-v1
+pronouns-verbs.would-like,istiyorum,,,,2,tr-agent-v1
+pronouns-verbs.want,istemek,,,,2,tr-agent-v1
+pronouns-verbs.look-for,aramak,,,,2,tr-agent-v1
+pronouns-verbs.buy,almak,satın almak,,,2,tr-agent-v1
+pronouns-verbs.like,beğenmek,hoşlanmak,,,2,tr-agent-v1
+pronouns-verbs.need,lazım olmak,gerekmek,,,2,tr-agent-v1
+pronouns-verbs.there-is-have,var,,,,2,tr-agent-v1
+pronouns-verbs.there-is-not-do-not-have,yok,,,,2,tr-agent-v1
+pronouns-verbs.want-to-verb,[fiil]-mek istiyorum,,,,2,tr-agent-v1
+pronouns-verbs.want-thing,[şey] istiyorum,,,,2,tr-agent-v1
+pronouns-verbs.need-thing,[şey] lazım,,,,2,tr-agent-v1
+pronouns-verbs.looking-for-thing,[şey] arıyorum,,,,2,tr-agent-v1
+question-words.what,ne,,,,2,tr-agent-v1
+question-words.where,nerede,nereye / nereden,,,2,tr-agent-v1
+question-words.who,kim,,,,2,tr-agent-v1
+question-words.which-one,hangisi,,,,2,tr-agent-v1
+question-words.when,ne zaman,,,,2,tr-agent-v1
+question-words.how,nasıl,,,,2,tr-agent-v1
+question-words.how-much-many,ne kadar,kaç,,,2,tr-agent-v1
+question-words.how-many,kaç tane,,,,2,tr-agent-v1
+question-words.why,neden,niçin,,,2,tr-agent-v1
+question-words.this,bu,,,,2,tr-agent-v1
+question-words.that,şu,o,,,2,tr-agent-v1
+question-words.here,burada,burası,,,2,tr-agent-v1
+question-words.there,orada,orası,,,2,tr-agent-v1
+question-words.a-little,biraz,,,,2,tr-agent-v1
+question-words.some,birkaç,biraz,,,2,tr-agent-v1
+question-words.very,çok,,,,2,tr-agent-v1
+question-words.too,fazla,aşırı,,,1,tr-agent-v1
+question-words.also,ayrıca,de / da,,,2,tr-agent-v1
+question-words.all-both,hepsi,her ikisi,,,2,tr-agent-v1
+question-words.how-much-what-price,Kaç para?,Fiyatı ne kadar?,,,2,tr-agent-v1

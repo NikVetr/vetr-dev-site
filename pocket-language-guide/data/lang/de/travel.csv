@@ -112,3 +112,5 @@ common-signs.temporarily-closed,vorübergehend geschlossen,zeitweise geschlossen
 common-signs.open-operating,in Betrieb,,,,2,de-agent-v1
 common-signs.closed,geschlossen,Ruhetag,,,2,de-agent-v1
 common-signs.stopped-stop,Halt,außer Betrieb,,,2,de-agent-v1
+transit-rides.do-i-need-to-validate,Muss ich das Ticket entwerten?,Muss ich die Fahrkarte abstempeln?,,,2,coordinator-gaps-v2
+rail-station-words.ticket-validator,Entwerter,Fahrscheinentwerter,,,2,coordinator-gaps-v2

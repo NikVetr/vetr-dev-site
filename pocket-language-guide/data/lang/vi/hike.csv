@@ -1,0 +1,66 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+trail-words.trail,Đường mòn,,,,2,vi-agent-v1
+trail-words.trailhead,Điểm xuất phát,,,,2,vi-agent-v1
+trail-words.summit,Đỉnh núi,,,,2,vi-agent-v1
+trail-words.viewpoint,Điểm ngắm cảnh,,,,2,vi-agent-v1
+trail-words.cableway,Cáp treo,,,,2,vi-agent-v1
+trail-words.shuttle-bus,Xe trung chuyển,,,,2,vi-agent-v1
+trail-words.park-shuttle,Xe điện tham quan,Xe trung chuyển,,,2,vi-agent-v1
+trail-words.steps,Bậc thang,,,,2,vi-agent-v1
+trail-words.up-uphill,Lên dốc,,,,2,vi-agent-v1
+trail-words.down-downhill,Xuống dốc,,,,2,vi-agent-v1
+trail-words.one-way,Một chiều,,,,2,vi-agent-v1
+trail-words.round-trip,Khứ hồi,,,,2,vi-agent-v1
+weather.forecast,Dự báo thời tiết thế nào ạ?,,,,2,vi-agent-v1
+weather.will-it-rain,Hôm nay có mưa không ạ?,,,,2,vi-agent-v1
+weather.is-it-safe-today,Hôm nay có an toàn không ạ?,,,,2,vi-agent-v1
+weather.how-cold-at-night,Ban đêm lạnh bao nhiêu độ ạ?,,,,2,vi-agent-v1
+weather.rain,Mưa,,,,2,vi-agent-v1
+weather.snow,Tuyết,,,,2,vi-agent-v1
+weather.wind,Gió,,,,2,vi-agent-v1
+weather.storm,Bão,,,typhoon / storm,2,vi-agent-v1
+weather.ice,Băng,Đóng băng,,,2,vi-agent-v1
+weather.fog,Sương mù,,,,2,vi-agent-v1
+weather.heat,Nóng,Nắng nóng,,,2,vi-agent-v1
+weather.cold,Lạnh,,,,2,vi-agent-v1
+weather.humid,Ẩm,Ẩm ướt,,,2,vi-agent-v1
+weather.sunrise,Bình minh,Mặt trời mọc,,,2,vi-agent-v1
+weather.flood,Lũ lụt,Ngập lụt,,,2,vi-agent-v1
+weather.avalanche-risk,Nguy cơ lở tuyết,,,,2,vi-agent-v1
+hiking-parks.is-this-the-way-to,Đường này đi {} phải không ạ?,,,,2,vi-agent-v1
+hiking-parks.where-is-the-trailhead,Điểm xuất phát ở đâu ạ?,,,,2,vi-agent-v1
+hiking-parks.how-long-to-the-summit,Lên đỉnh mất bao lâu ạ?,,,,2,vi-agent-v1
+hiking-parks.how-long-to-the-viewpoint,Đến điểm ngắm cảnh mất bao lâu ạ?,,,,2,vi-agent-v1
+hiking-parks.which-route-is-easier,Đường nào dễ đi hơn ạ?,,,,2,vi-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,Đường này hợp với người mới không ạ?,,,,2,vi-agent-v1
+trail-conditions.how-long-is-the-full-route,Cả tuyến dài bao nhiêu ạ?,,,,2,vi-agent-v1
+trail-conditions.can-we-return-the-same-way,Về theo đường cũ được không ạ?,,,,2,vi-agent-v1
+trail-conditions.can-we-return-before-dark,Về kịp trước tối không ạ?,,,,2,vi-agent-v1
+trail-conditions.is-the-trail-open,Đường mòn có mở không ạ?,,,,2,vi-agent-v1
+trail-conditions.is-the-route-steep,Đường có dốc không ạ?,,,,2,vi-agent-v1
+trail-conditions.is-the-path-slippery,Đường có trơn không ạ?,,,,2,vi-agent-v1
+trail-transport.how-long-is-the-queue,Xếp hàng bao lâu ạ?,,,,2,vi-agent-v1
+trail-transport.what-time-is-the-last-shuttle,Chuyến xe cuối lúc mấy giờ ạ?,,,,2,vi-agent-v1
+trail-transport.when-does-the-cableway-stop,Cáp treo dừng lúc mấy giờ ạ?,,,,2,vi-agent-v1
+trail-transport.where-can-we-buy-water,Mua nước ở đâu ạ?,,,,2,vi-agent-v1
+trail-transport.where-can-we-refill-water,Lấy thêm nước ở đâu ạ?,,,,2,vi-agent-v1
+trail-transport.is-there-cell-signal-here,Ở đây có sóng không ạ?,,,,2,vi-agent-v1
+trail-transport.do-you-have-a-map,Có bản đồ không ạ?,,,,2,vi-agent-v1
+trail-transport.how-long-is-the-wait,Phải chờ bao lâu ạ?,,,,2,vi-agent-v1
+trail-warnings.open,Mở cửa,,,,2,vi-agent-v1
+trail-warnings.closed,Đóng cửa,,,,2,vi-agent-v1
+trail-warnings.maintenance,Đang bảo trì,,,,2,vi-agent-v1
+trail-warnings.steep-slope,Dốc đứng,Dốc nguy hiểm,,,2,vi-agent-v1
+trail-warnings.caution-slippery,Cẩn thận trơn trượt,,,,2,vi-agent-v1
+trail-warnings.danger,Nguy hiểm,,,,2,vi-agent-v1
+trail-warnings.beware-falling-rocks,Cẩn thận đá rơi,Đá lở,,,2,vi-agent-v1
+trail-warnings.first-aid-station,Trạm sơ cứu,,,,2,vi-agent-v1
+trail-warnings.service-suspended,Tạm ngừng phục vụ,,,,2,vi-agent-v1
+trail-landmarks.trail-marker,Mốc chỉ đường,,,,2,vi-agent-v1
+trail-landmarks.fork-junction,Ngã ba,,,,2,vi-agent-v1
+trail-landmarks.boardwalk-cliff-path,Đường ván gỗ / vách đá,,,,2,vi-agent-v1
+trail-landmarks.start,Điểm bắt đầu,,,,2,vi-agent-v1
+trail-landmarks.end,Điểm kết thúc,,,,2,vi-agent-v1
+trail-landmarks.elevation,Độ cao,,,,2,vi-agent-v1
+trail-landmarks.sunset,Hoàng hôn,Mặt trời lặn,,,2,vi-agent-v1
+trail-landmarks.water-point,Điểm lấy nước,,,,2,vi-agent-v1

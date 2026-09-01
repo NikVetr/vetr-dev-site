@@ -1,0 +1,66 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+trail-words.trail,o trilho,a trilha · o percurso,,,2,pt-agent-v1
+trail-words.trailhead,o início do trilho,,,,2,pt-agent-v1
+trail-words.summit,o cume,,,,2,pt-agent-v1
+trail-words.viewpoint,o miradouro,o mirante,,,2,pt-agent-v1
+trail-words.cableway,o teleférico,,,,2,pt-agent-v1
+trail-words.shuttle-bus,o autocarro de ligação,o ônibus de ligação,,,2,pt-agent-v1
+trail-words.park-shuttle,o autocarro do parque,o ônibus do parque,,,2,pt-agent-v1
+trail-words.steps,os degraus,,,,2,pt-agent-v1
+trail-words.up-uphill,a subida,para cima,,,2,pt-agent-v1
+trail-words.down-downhill,a descida,para baixo,,,2,pt-agent-v1
+trail-words.one-way,só de ida,sentido único,,,2,pt-agent-v1
+trail-words.round-trip,ida e volta,,,,2,pt-agent-v1
+weather.forecast,Qual é a previsão do tempo?,,,,2,pt-agent-v1
+weather.will-it-rain,Vai chover hoje?,,,,2,pt-agent-v1
+weather.is-it-safe-today,Hoje é seguro?,,,,2,pt-agent-v1
+weather.how-cold-at-night,Que frio faz de noite?,,,,2,pt-agent-v1
+weather.rain,a chuva,,,,2,pt-agent-v1
+weather.snow,a neve,,,,2,pt-agent-v1
+weather.wind,o vento,,,,2,pt-agent-v1
+weather.storm,a tempestade,o temporal,,,2,pt-agent-v1
+weather.ice,o gelo,,,,2,pt-agent-v1
+weather.fog,o nevoeiro,a neblina,,,2,pt-agent-v1
+weather.heat,o calor,,,,2,pt-agent-v1
+weather.cold,o frio,,,,2,pt-agent-v1
+weather.humid,húmido,úmido,,,2,pt-agent-v1
+weather.sunrise,o nascer do sol,,,,2,pt-agent-v1
+weather.flood,a inundação,a cheia,,,2,pt-agent-v1
+weather.avalanche-risk,risco de avalanche,,,,2,pt-agent-v1
+hiking-parks.is-this-the-way-to,É este o caminho para {}?,,,,2,pt-agent-v1
+hiking-parks.where-is-the-trailhead,Onde começa o trilho?,,,,2,pt-agent-v1
+hiking-parks.how-long-to-the-summit,Quanto tempo até ao cume?,até o cume,,,2,pt-agent-v1
+hiking-parks.how-long-to-the-viewpoint,Quanto tempo até ao miradouro?,até o mirante,,,2,pt-agent-v1
+hiking-parks.which-route-is-easier,Qual é o percurso mais fácil?,,,,2,pt-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,Este trilho é para principiantes?,Esta trilha é para iniciantes?,,,2,pt-agent-v1
+trail-conditions.how-long-is-the-full-route,Que distância tem o percurso todo?,,,,2,pt-agent-v1
+trail-conditions.can-we-return-the-same-way,Podemos voltar pelo mesmo caminho?,,,,2,pt-agent-v1
+trail-conditions.can-we-return-before-dark,Podemos voltar antes de escurecer?,,,,2,pt-agent-v1
+trail-conditions.is-the-trail-open,O trilho está aberto?,A trilha está aberta?,,,2,pt-agent-v1
+trail-conditions.is-the-route-steep,O percurso é íngreme?,,,,2,pt-agent-v1
+trail-conditions.is-the-path-slippery,O caminho está escorregadio?,,,,2,pt-agent-v1
+trail-transport.how-long-is-the-queue,Quanto tempo de fila?,,,,2,pt-agent-v1
+trail-transport.what-time-is-the-last-shuttle,A que horas é o último autocarro?,o último ônibus,,,2,pt-agent-v1
+trail-transport.when-does-the-cableway-stop,A que horas fecha o teleférico?,,,,2,pt-agent-v1
+trail-transport.where-can-we-buy-water,Onde podemos comprar água?,,,,2,pt-agent-v1
+trail-transport.where-can-we-refill-water,Onde podemos encher as garrafas?,,,,2,pt-agent-v1
+trail-transport.is-there-cell-signal-here,Há rede aqui?,,,,2,pt-agent-v1
+trail-transport.do-you-have-a-map,Tem um mapa?,,,,2,pt-agent-v1
+trail-transport.how-long-is-the-wait,Quanto tempo se espera?,,,,2,pt-agent-v1
+trail-warnings.open,Aberto,,,,2,pt-agent-v1
+trail-warnings.closed,Encerrado,Fechado,,,2,pt-agent-v1
+trail-warnings.maintenance,Manutenção,Em obras,,,2,pt-agent-v1
+trail-warnings.steep-slope,Encosta íngreme,,,,2,pt-agent-v1
+trail-warnings.caution-slippery,Atenção: piso escorregadio,,,,2,pt-agent-v1
+trail-warnings.danger,Perigo,,,,2,pt-agent-v1
+trail-warnings.beware-falling-rocks,Atenção à queda de pedras,,,,2,pt-agent-v1
+trail-warnings.first-aid-station,Posto de primeiros socorros,,,,2,pt-agent-v1
+trail-warnings.service-suspended,Serviço suspenso,,,,2,pt-agent-v1
+trail-landmarks.trail-marker,a marca do trilho,a marcação,,,2,pt-agent-v1
+trail-landmarks.fork-junction,a bifurcação,o cruzamento,,,2,pt-agent-v1
+trail-landmarks.boardwalk-cliff-path,o passadiço,o caminho na falésia,,,2,pt-agent-v1
+trail-landmarks.start,início,,,,2,pt-agent-v1
+trail-landmarks.end,fim,,,,2,pt-agent-v1
+trail-landmarks.elevation,altitude,,,,2,pt-agent-v1
+trail-landmarks.sunset,o pôr do sol,,,,2,pt-agent-v1
+trail-landmarks.water-point,o ponto de água,,,,2,pt-agent-v1

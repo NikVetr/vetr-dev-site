@@ -1,0 +1,43 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,Saat kaç?,,,,2,tr-agent-v1
+time-scheduling.how-many-minutes,Kaç dakika?,,,,2,tr-agent-v1
+time-scheduling.what-time-should-we-meet,Saat kaçta buluşalım?,,,,2,tr-agent-v1
+time-scheduling.can-we-change-the-time,Saati değiştirebilir miyiz?,,,,2,tr-agent-v1
+time-scheduling.when-is-convenient,Sizin için ne zaman uygun?,,,,2,tr-agent-v1
+time-scheduling.what-is-today-s-date,Bugün ayın kaçı?,,,,2,tr-agent-v1
+time-scheduling.what-day-is-it-today,Bugün günlerden ne?,,,,2,tr-agent-v1
+time-scheduling.what-time-does-it-open,Saat kaçta açılıyor?,,,,2,tr-agent-v1
+time-scheduling.what-time-does-it-close,Saat kaçta kapanıyor?,,,,2,tr-agent-v1
+time-scheduling.how-long-does-it-take,Ne kadar sürer?,,,,2,tr-agent-v1
+time-words.today,bugün,,,,2,tr-agent-v1
+time-words.tomorrow,yarın,,,,2,tr-agent-v1
+time-words.yesterday,dün,,,,2,tr-agent-v1
+time-words.this-week,bu hafta,,,,2,tr-agent-v1
+time-words.next-week,gelecek hafta,haftaya,,,2,tr-agent-v1
+time-words.morning,sabah,,,,2,tr-agent-v1
+time-words.afternoon,öğleden sonra,,,,2,tr-agent-v1
+time-words.evening,akşam,,,,2,tr-agent-v1
+time-words.spring,ilkbahar,bahar,,,2,tr-agent-v1
+time-words.summer,yaz,,,,2,tr-agent-v1
+time-words.fall,sonbahar,güz,,,2,tr-agent-v1
+time-words.winter,kış,,,,2,tr-agent-v1
+time-words.night,gece,,,,2,tr-agent-v1
+days-of-week.monday,Pazartesi,,,,2,tr-agent-v1
+days-of-week.tuesday,Salı,,,,2,tr-agent-v1
+days-of-week.wednesday,Çarşamba,,,,2,tr-agent-v1
+days-of-week.thursday,Perşembe,,,,2,tr-agent-v1
+days-of-week.friday,Cuma,,,,2,tr-agent-v1
+days-of-week.saturday,Cumartesi,,,,2,tr-agent-v1
+days-of-week.sunday,Pazar,,,,2,tr-agent-v1
+months.january,Ocak,,,,2,tr-agent-v1
+months.february,Şubat,,,,2,tr-agent-v1
+months.march,Mart,,,,2,tr-agent-v1
+months.april,Nisan,,,,2,tr-agent-v1
+months.may,Mayıs,,,,2,tr-agent-v1
+months.june,Haziran,,,,2,tr-agent-v1
+months.july,Temmuz,,,,2,tr-agent-v1
+months.august,Ağustos,,,,2,tr-agent-v1
+months.september,Eylül,,,,2,tr-agent-v1
+months.october,Ekim,,,,2,tr-agent-v1
+months.november,Kasım,,,,2,tr-agent-v1
+months.december,Aralık,,,,2,tr-agent-v1

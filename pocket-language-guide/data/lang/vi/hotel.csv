@@ -1,0 +1,53 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+hotel-words.passport,Hộ chiếu,,,,2,vi-agent-v1
+hotel-words.room-key-card,Thẻ phòng,,,,2,vi-agent-v1
+hotel-words.check-in,Nhận phòng,,,,2,vi-agent-v1
+hotel-words.check-out,Trả phòng,,,,2,vi-agent-v1
+hotel-words.luggage-storage,Gửi hành lý,,,,2,vi-agent-v1
+hotel-basics.are-any-rooms-available,Còn phòng trống không ạ?,,,,2,vi-agent-v1
+hotel-basics.there-are-two-of-us,Chúng tôi có hai người,,,,2,vi-agent-v1
+hotel-basics.i-have-a-reservation,Tôi có đặt phòng trước,,,,2,vi-agent-v1
+hotel-basics.can-i-charge-my-phone,Sạc điện thoại được không ạ?,,,,2,vi-agent-v1
+hotel-basics.i-would-like-a-non-smoking-room,Cho tôi phòng không hút thuốc ạ,,,,2,vi-agent-v1
+hotel-basics.i-would-like-a-quiet-room,Cho tôi phòng yên tĩnh ạ,,,,2,vi-agent-v1
+hotel-basics.is-there-a-washing-machine,Có máy giặt không ạ?,,,,2,vi-agent-v1
+hotel-basics.is-wi-fi-free,Wi-Fi có miễn phí không ạ?,,,,2,vi-agent-v1
+hotel-basics.how-much-per-night,Một đêm bao nhiêu tiền ạ?,,,,2,vi-agent-v1
+hotel-basics.is-breakfast-included,Có bao gồm bữa sáng không ạ?,,,,2,vi-agent-v1
+hotel-basics.may-i-see-the-room,Cho tôi xem phòng ạ,,,,2,vi-agent-v1
+hotel-basics.for-nights,Ở {} đêm,,,,2,vi-agent-v1
+hotel-basics.two-beds,Cho tôi phòng hai giường ạ,,,,2,vi-agent-v1
+hotel-basics.is-there-air-conditioning,Có điều hòa không ạ?,Có máy lạnh không ạ?,,,2,vi-agent-v1
+hotel-requests.can-i-check-out-later,Trả phòng muộn được không ạ?,Trả phòng trễ được không ạ?,,,2,vi-agent-v1
+hotel-requests.what-time-does-breakfast-start,Mấy giờ có bữa sáng ạ?,,,,2,vi-agent-v1
+hotel-requests.can-i-store-my-luggage,Gửi hành lý được không ạ?,,,,2,vi-agent-v1
+hotel-requests.no-housekeeping,Không cần dọn phòng,,,,2,vi-agent-v1
+hotel-requests.another-towel-please,Cho tôi thêm khăn tắm ạ,,,,2,vi-agent-v1
+hotel-requests.what-time-is-check-out,Mấy giờ phải trả phòng ạ?,,,,2,vi-agent-v1
+hotel-requests.can-i-check-in-early,Nhận phòng sớm được không ạ?,,,,2,vi-agent-v1
+hotel-requests.another-night,Ở thêm một đêm được không ạ?,,,,2,vi-agent-v1
+hotel-requests.is-there-a-safe,Có két sắt không ạ?,,,,2,vi-agent-v1
+hotel-requests.another-blanket,Cho tôi thêm chăn ạ,Cho tôi thêm mền ạ,,,2,vi-agent-v1
+hotel-requests.wake-up-call,Xin gọi tôi dậy lúc {},,,,2,vi-agent-v1
+room-problems.there-is-a-problem-with-the-room,Phòng có vấn đề ạ,,,,2,vi-agent-v1
+room-problems.the-air-conditioning-is-broken,Điều hòa bị hỏng,Máy lạnh bị hư,,,2,vi-agent-v1
+room-problems.there-is-no-hot-water,Không có nước nóng,,,,2,vi-agent-v1
+room-problems.can-i-change-rooms,Đổi phòng được không ạ?,,,,2,vi-agent-v1
+room-problems.the-room-is-too-noisy,Phòng ồn quá,,,,2,vi-agent-v1
+room-problems.the-key-does-not-work,Thẻ phòng không mở được,,,,2,vi-agent-v1
+room-problems.the-toilet-will-not-flush,Bồn cầu không xả nước được,,,,2,vi-agent-v1
+room-problems.the-light-does-not-work,Đèn không sáng,,,,2,vi-agent-v1
+room-problems.please-send-someone,Xin cho người đến sửa,,,,2,vi-agent-v1
+room-problems.the-heating-does-not-work,Máy sưởi không chạy,,,,2,vi-agent-v1
+laundry.please-wash-these-clothes,Xin giặt giúp đồ này,,,,2,vi-agent-v1
+laundry.where-is-a-laundromat,Tiệm giặt ở đâu ạ?,,,,2,vi-agent-v1
+laundry.when-will-it-be-ready,Khi nào xong ạ?,,,,2,vi-agent-v1
+laundry.how-much-per-kilo,Bao nhiêu một ký ạ?,,,,2,vi-agent-v1
+laundry.can-it-be-ready-today,Hôm nay xong được không ạ?,,,,2,vi-agent-v1
+laundry.please-do-not-use-bleach,Xin đừng dùng thuốc tẩy,,,,2,vi-agent-v1
+laundry.laundromat,Tiệm giặt,Giặt là · giặt ủi,,,2,vi-agent-v1
+laundry.please-iron-this,Xin ủi giúp cái này,Xin là giúp cái này,,,2,vi-agent-v1
+laundry.detergent,Bột giặt,Nước giặt,,,2,vi-agent-v1
+laundry.dry-cleaning,Giặt khô,,,,2,vi-agent-v1
+laundry.dryer,Máy sấy,,,,2,vi-agent-v1
+laundry.coin-operated,Máy dùng xu,Giặt tự động,,,1,vi-agent-v1

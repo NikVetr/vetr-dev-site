@@ -112,3 +112,5 @@ common-signs.temporarily-closed,Fermé temporairement,Fermeture temporaire,,,2,f
 common-signs.open-operating,En service,,,,2,fr-agent-v1
 common-signs.closed,Fermé,,,,2,fr-agent-v1
 common-signs.stopped-stop,Arrêt,,,,2,fr-agent-v1
+transit-rides.do-i-need-to-validate,Je dois valider mon billet ?,Faut-il composter ?,,,2,coordinator-gaps-v2
+rail-station-words.ticket-validator,valideur,composteur,,,2,coordinator-gaps-v2

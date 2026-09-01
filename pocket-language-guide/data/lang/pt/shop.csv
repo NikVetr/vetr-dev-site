@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Pagar com cartão?,,,,2,pt-agent-v1
+payment-receipt.pay-cash,Pagar em dinheiro?,,,,2,pt-agent-v1
+payment-receipt.pay-by-qr-code,Pagar com código QR?,MB Way · Pix,,,2,pt-agent-v1
+payment-receipt.a-receipt-please,"Um recibo, por favor",Uma fatura · O talão,,,2,pt-agent-v1
+payment-receipt.please-write-the-number,"Escreva o número, por favor",,,,2,pt-agent-v1
+payment-receipt.how-much-in-total,Quanto é ao todo?,,,,2,pt-agent-v1
+payment-receipt.can-we-pay-separately,Podemos pagar em separado?,,,,2,pt-agent-v1
+payment-receipt.is-tax-included,O IVA está incluído?,Os impostos estão incluídos?,,,2,pt-agent-v1
+payment-receipt.my-card-was-declined,O meu cartão foi recusado,,,,2,pt-agent-v1
+payment-receipt.the-bill-is-wrong,Acho que a conta está errada,,,,2,pt-agent-v1
+payment-receipt.i-already-paid,Já paguei,,,,2,pt-agent-v1
+shopping.i-am-just-looking,Estou só a ver,Estou só olhando,,,2,pt-agent-v1
+shopping.how-much-is-this,Quanto custa isto?,,,,2,pt-agent-v1
+shopping.that-is-too-expensive,É muito caro,,,,2,pt-agent-v1
+shopping.can-it-be-a-little-cheaper,Pode ser um pouco mais barato?,,,,2,pt-agent-v1
+shopping.is-there-a-discount,Há desconto?,,,,2,pt-agent-v1
+shopping.where-do-i-pay,Onde se paga?,,,,2,pt-agent-v1
+shopping.i-will-take-this,Levo isto,,,,2,pt-agent-v1
+shopping.what-is-this,O que é isto?,,,,2,pt-agent-v1
+shopping.where-can-i-buy,Onde posso comprar {}?,,,,2,pt-agent-v1
+shopping.do-you-have-this-in-stock,Tem isto em stock?,em estoque,,,2,pt-agent-v1
+shopping.two-of-these,"Dois destes, por favor",,,,2,pt-agent-v1
+shopping.what-is-it-made-of,De que é feito?,,,,2,pt-agent-v1
+color-size-returns.do-you-have-another-color,Tem outra cor?,,,,2,pt-agent-v1
+color-size-returns.do-you-have-another-size,Tem outro tamanho?,,,,2,pt-agent-v1
+color-size-returns.may-i-try-it-on,Posso experimentar?,,,,2,pt-agent-v1
+color-size-returns.can-i-return-it,Posso devolver?,,,,2,pt-agent-v1
+color-size-returns.can-i-exchange-it,Posso trocar?,,,,2,pt-agent-v1
+color-size-returns.do-you-have-a-bag,Tem um saco?,uma sacola,,,2,pt-agent-v1
+tax-refund.can-i-get-a-tax-refund,Posso pedir o reembolso do IVA?,,,,2,pt-agent-v1
+tax-refund.is-tax-free-shopping-available,Fazem tax free?,Há isenção de IVA para turistas?,,,2,pt-agent-v1

@@ -1,0 +1,138 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+emergency-medical.help,Socorro!,Ajuda!,,,2,pt-agent-v1
+emergency-medical.please-call-an-ambulance,"Chame uma ambulância, por favor",,,,2,pt-agent-v1
+emergency-medical.i-need-a-doctor,Preciso de um médico,,,,2,pt-agent-v1
+emergency-medical.i-am-sick,Estou doente,,,,2,pt-agent-v1
+emergency-medical.i-am-injured,Estou ferido,Estou ferida,,-a if female,2,pt-agent-v1
+emergency-medical.it-hurts-here,Dói aqui,,,,2,pt-agent-v1
+emergency-medical.where-is-a-pharmacy,Onde fica uma farmácia?,,,,2,pt-agent-v1
+emergency-medical.please-take-me-to-a-hospital,"Leve-me a um hospital, por favor",Me leve a um hospital,,,2,pt-agent-v1
+emergency-medical.i-feel-unwell,Sinto-me mal,Estou me sentindo mal,,,2,pt-agent-v1
+emergency-medical.this-is-an-emergency,É uma emergência,,,,2,pt-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,Estou com anafilaxia: reação alérgica grave,Reação alérgica grave!,,,2,pt-agent-v1
+emergency-medical.i-cannot-breathe,Não consigo respirar,,,,2,pt-agent-v1
+emergency-medical.i-am-bleeding-badly,Estou a sangrar muito,Estou sangrando muito,,,2,pt-agent-v1
+emergency-medical.i-have-chest-pain,Tenho dor no peito,,,,2,pt-agent-v1
+emergency-medical.this-person-is-unconscious,Esta pessoa está inconsciente,,,,2,pt-agent-v1
+emergency-medical.where-is-the-nearest-hospital,Onde fica o hospital mais próximo?,,,,2,pt-agent-v1
+emergency-medical.what-is-the-emergency-number,Qual é o número de emergência?,,,,2,pt-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Há algum médico que fale inglês?,,,,2,pt-agent-v1
+emergency-medical.i-think-a-bone-is-broken,Acho que parti um osso,Acho que quebrei um osso,,,2,pt-agent-v1
+emergency-medical.please-call-my-emergency-contact,Ligue para o meu contacto de emergência,meu contato de emergência,,,2,pt-agent-v1
+emergency-medical.i-have-travel-insurance,Tenho seguro de viagem,,,,2,pt-agent-v1
+medical-conditions.i-am-diabetic,Tenho diabetes,,,,2,pt-agent-v1
+medical-conditions.i-need-insulin,Preciso de insulina,,,,2,pt-agent-v1
+medical-conditions.i-have-asthma,Tenho asma,,,,2,pt-agent-v1
+medical-conditions.i-have-a-heart-condition,Tenho um problema cardíaco,,,,2,pt-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,Sou alérgico à penicilina,Sou alérgica,,-a if female,2,pt-agent-v1
+medical-conditions.i-have-epilepsy,Tenho epilepsia,,,,2,pt-agent-v1
+medical-conditions.my-blood-sugar-is-low,O meu açúcar no sangue está baixo,Estou com hipoglicemia,,,2,pt-agent-v1
+medical-conditions.i-need-my-inhaler,Preciso do meu inalador,da minha bombinha,,,2,pt-agent-v1
+medical-conditions.i-am-pregnant,Estou grávida,,,,2,pt-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,Tenho uma caneta de adrenalina,autoinjetor de adrenalina,,,2,pt-agent-v1
+medical-conditions.i-take-medicine-for,Tomo medicação para {},,,,2,pt-agent-v1
+medical-conditions.i-take-blood-thinners,Tomo anticoagulantes,,,,2,pt-agent-v1
+medical-conditions.medicine-allergy,Alergia a medicamentos: {},,,,2,pt-agent-v1
+medical-conditions.this-card-lists-my-conditions,Este cartão indica as minhas doenças,,,,2,pt-agent-v1
+medical-conditions.this-is-my-medicine,Este é o meu medicamento,o meu remédio,,,2,pt-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,"Dê-me açúcar ou sumo, por favor",Me dê açúcar ou suco,,,2,pt-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,Injete na parte de fora da coxa,,,,2,pt-agent-v1
+medical-conditions.my-blood-type-is,O meu grupo sanguíneo é {},tipo sanguíneo,,,2,pt-agent-v1
+medical-conditions.do-not-give-me,Não me dê {},,,,2,pt-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Sou alérgico à aspirina e ao ibuprofeno,Sou alérgica,,-a if female,2,pt-agent-v1
+medical-conditions.my-injector-is-in-my-bag,A minha caneta de adrenalina está na mala,na bolsa,,,2,pt-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,Sou alérgico a sulfamidas,Sou alérgica · sulfas,,-a if female,2,pt-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,Que farmácia está aberta agora?,,,,2,pt-agent-v1
+pharmacy-symptoms.i-need-medicine-for,Preciso de um medicamento para {},,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-a-fever,Tenho febre,,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-diarrhea,Tenho diarreia,,,,2,pt-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Onde há uma farmácia de serviço?,farmácia 24 horas · de plantão,,night/weekend duty rota,2,pt-agent-v1
+pharmacy-symptoms.painkiller,analgésico,comprimido para as dores,,,2,pt-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,É preciso receita médica?,,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-a-headache,Tenho dor de cabeça,,,,2,pt-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,paracetamol,acetaminofeno,,,2,pt-agent-v1
+pharmacy-symptoms.how-much-should-i-take,Que quantidade devo tomar?,,,,2,pt-agent-v1
+pharmacy-symptoms.i-am-vomiting,Estou a vomitar,Estou vomitando,,,2,pt-agent-v1
+pharmacy-symptoms.rehydration-salts,sais de reidratação oral,soro de reidratação oral,,,2,pt-agent-v1
+pharmacy-symptoms.how-many-times-a-day,Quantas vezes por dia?,,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,Tenho dor de barriga,,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-a-cough,Tenho tosse,,,,2,pt-agent-v1
+pharmacy-symptoms.antihistamine,anti-histamínico,,,,2,pt-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,antidiarreico,loperamida,,,2,pt-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,Posso tomar isto com {}?,,,,2,pt-agent-v1
+pharmacy-symptoms.i-feel-dizzy,Estou com tonturas,,,,2,pt-agent-v1
+pharmacy-symptoms.ibuprofen,ibuprofeno,,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,Tenho dor de garganta,,,,2,pt-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,Posso comprar este medicamento aqui?,,,,2,pt-agent-v1
+pharmacy-symptoms.bandage,ligadura,atadura · penso · curativo,,,2,pt-agent-v1
+pharmacy-symptoms.the-pain-is-severe,A dor é muito forte,,,,2,pt-agent-v1
+pharmacy-symptoms.antiseptic,antisséptico,desinfetante,,,2,pt-agent-v1
+pharmacy-symptoms.i-feel-nauseous,Tenho náuseas,Estou enjoado,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-a-rash,Tenho uma erupção na pele,Estou com manchas na pele,,,2,pt-agent-v1
+pharmacy-symptoms.before-or-after-food,Antes ou depois das refeições?,,,,2,pt-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,Acho que está infetado,infectado,,,2,pt-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,comprimidos para o enjoo,,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-a-cut,Tenho um corte,,,,2,pt-agent-v1
+pharmacy-symptoms.antacid,antiácido,,,,2,pt-agent-v1
+pharmacy-symptoms.i-have-a-burn,Tenho uma queimadura,,,,2,pt-agent-v1
+pharmacy-symptoms.it-started-days-ago,Começou há {} dias,,,,2,pt-agent-v1
+pharmacy-symptoms.cough-medicine,xarope para a tosse,,,,2,pt-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,Posso tomar isto na gravidez?,,,,2,pt-agent-v1
+body-parts.head,a cabeça,,,,2,pt-agent-v1
+body-parts.stomach,a barriga,o estômago,,,2,pt-agent-v1
+body-parts.back,as costas,,,always plural,2,pt-agent-v1
+body-parts.throat,a garganta,,,,2,pt-agent-v1
+body-parts.tooth,o dente,,,,2,pt-agent-v1
+body-parts.chest,o peito,,,,2,pt-agent-v1
+body-parts.eye,o olho,,,,2,pt-agent-v1
+body-parts.ear,o ouvido,a orelha,,inner ear; orelha = outer,2,pt-agent-v1
+body-parts.leg,a perna,,,,2,pt-agent-v1
+body-parts.arm,o braço,,,,2,pt-agent-v1
+body-parts.foot,o pé,,,,2,pt-agent-v1
+body-parts.hand,a mão,,,,2,pt-agent-v1
+body-parts.knee,o joelho,,,,2,pt-agent-v1
+body-parts.ankle,o tornozelo,,,,2,pt-agent-v1
+body-parts.skin,a pele,,,,2,pt-agent-v1
+lost-rescue.i-lost-my-passport,Perdi o meu passaporte,,,,2,pt-agent-v1
+lost-rescue.i-lost-my-phone,Perdi o meu telemóvel,o meu celular,,,2,pt-agent-v1
+lost-rescue.please-call-the-police,"Chame a polícia, por favor",,,,2,pt-agent-v1
+lost-rescue.we-are-here,Estamos aqui,,,,2,pt-agent-v1
+lost-rescue.please-look-at-my-location-pin,Veja o meu ponto no mapa,,,,2,pt-agent-v1
+lost-rescue.i-cannot-walk,Não consigo andar,,,,2,pt-agent-v1
+lost-rescue.i-sprained-my-ankle,Torci o tornozelo,,,,2,pt-agent-v1
+lost-rescue.please-contact-rescue,"Chame o resgate, por favor",Chame os bombeiros,,,2,pt-agent-v1
+lost-rescue.my-companion-is-missing,O meu acompanhante desapareceu,,,,2,pt-agent-v1
+lost-rescue.please-look-at-my-current-location,Veja a minha localização atual,,,,2,pt-agent-v1
+lost-rescue.my-child-is-missing,O meu filho desapareceu,A minha filha desapareceu,,filha if a girl,2,pt-agent-v1
+lost-rescue.i-do-not-know-where-i-am,Não sei onde estou,,,,2,pt-agent-v1
+lost-rescue.my-friend-is-hurt,O meu amigo está ferido,A minha amiga está ferida,,,2,pt-agent-v1
+lost-rescue.i-lost-my-wallet,Perdi a minha carteira,,,,2,pt-agent-v1
+lost-rescue.i-lost-my-bag,Perdi a minha mala,a minha bolsa,,,2,pt-agent-v1
+lost-rescue.where-is-lost-and-found,Onde são os perdidos e achados?,,,,2,pt-agent-v1
+lost-rescue.i-cannot-find-my-hotel,Não consigo encontrar o meu hotel,,,,2,pt-agent-v1
+lost-rescue.i-left-it-on-the-train,Deixei no comboio,Deixei no trem,,,2,pt-agent-v1
+lost-rescue.i-cannot-get-down,Não consigo descer,,,,2,pt-agent-v1
+police-consulate.where-is-the-police-station,Onde fica a esquadra da polícia?,a delegacia de polícia,,,2,pt-agent-v1
+police-consulate.i-want-to-report-a-theft,Quero denunciar um roubo,Quero apresentar queixa,,,2,pt-agent-v1
+police-consulate.my-bag-was-stolen,Roubaram-me a mala,Roubaram a minha bolsa,,,2,pt-agent-v1
+police-consulate.my-passport-was-stolen,Roubaram-me o passaporte,Roubaram o meu passaporte,,,2,pt-agent-v1
+police-consulate.someone-is-following-me,Alguém está a seguir-me,Alguém está me seguindo,,,2,pt-agent-v1
+police-consulate.i-need-a-written-police-report,Preciso da queixa por escrito,boletim de ocorrência,,,2,pt-agent-v1
+police-consulate.i-want-to-contact-my-embassy,Quero contactar a minha embaixada,contatar,,,2,pt-agent-v1
+police-consulate.i-need-it-for-my-insurance,Preciso disto para o seguro,,,,2,pt-agent-v1
+police-consulate.i-need-an-interpreter,Preciso de um intérprete,,,,2,pt-agent-v1
+police-consulate.please-leave-me-alone,Deixe-me em paz,Me deixe em paz,,,2,pt-agent-v1
+police-consulate.i-was-robbed,Fui roubado,Fui roubada,,-a if female,2,pt-agent-v1
+police-consulate.i-want-a-lawyer,Quero um advogado,,,,2,pt-agent-v1
+police-consulate.please-notify-my-consulate,"Avise o meu consulado, por favor",,,,2,pt-agent-v1
+police-consulate.i-am-calling-the-police,Vou chamar a polícia,,,,2,pt-agent-v1
+police-consulate.am-i-under-arrest,Estou detido?,Estou detida?,,-a if female,2,pt-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,"Não, obrigado. Não tenho interesse",obrigada,,-a if female,2,pt-agent-v1
+police-consulate.someone-attacked-me,Fui agredido,Alguém me agrediu,,-a if female,2,pt-agent-v1
+police-consulate.i-did-not-agree-to-this-price,Não concordei com este preço,,,,2,pt-agent-v1
+police-consulate.please-write-the-report-number,Escreva o número da queixa,,,,2,pt-agent-v1
+police-consulate.it-happened-here,Aconteceu aqui,,,,2,pt-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,Posso ter uma cópia da queixa?,,,,2,pt-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,Não assino nada que não consiga ler,,,,2,pt-agent-v1
+police-consulate.am-i-free-to-go,Posso ir embora?,,,,2,pt-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,Não quero ir consigo,Não quero ir com você,,,2,pt-agent-v1

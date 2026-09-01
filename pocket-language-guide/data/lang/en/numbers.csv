@@ -51,3 +51,7 @@ numbers-money.won,won,,,,2,coordinator-gaps-v1
 numbers-money.won-symbol,won (symbol),,,,2,coordinator-gaps-v1
 numbers-money.euro,euro,,,,2,coordinator-gaps-v1
 numbers-money.euro-symbol,euro (symbol),,,,2,coordinator-gaps-v1
+numbers-money.lira,lira,,,,2,coordinator-gaps-v2
+numbers-money.lira-symbol,lira (symbol),,,,2,coordinator-gaps-v2
+numbers-money.dong,dong,,,,2,coordinator-gaps-v2
+numbers-money.dong-symbol,dong (symbol),,,,2,coordinator-gaps-v2

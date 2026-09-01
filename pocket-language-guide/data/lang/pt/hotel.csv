@@ -1,0 +1,53 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+hotel-words.passport,o passaporte,,,,2,pt-agent-v1
+hotel-words.room-key-card,o cartão do quarto,,,,2,pt-agent-v1
+hotel-words.check-in,o check-in,,,,2,pt-agent-v1
+hotel-words.check-out,o check-out,,,,2,pt-agent-v1
+hotel-words.luggage-storage,o depósito de bagagem,o guarda-volumes,,,2,pt-agent-v1
+hotel-basics.are-any-rooms-available,Têm quartos disponíveis?,,,,2,pt-agent-v1
+hotel-basics.there-are-two-of-us,Somos dois,,,,2,pt-agent-v1
+hotel-basics.i-have-a-reservation,Tenho reserva,,,,2,pt-agent-v1
+hotel-basics.can-i-charge-my-phone,Posso carregar o telemóvel?,o celular,,,2,pt-agent-v1
+hotel-basics.i-would-like-a-non-smoking-room,Queria um quarto para não fumadores,para não fumantes,,,2,pt-agent-v1
+hotel-basics.i-would-like-a-quiet-room,Queria um quarto silencioso,,,,2,pt-agent-v1
+hotel-basics.is-there-a-washing-machine,Há máquina de lavar?,,,,2,pt-agent-v1
+hotel-basics.is-wi-fi-free,O Wi-Fi é grátis?,,,,2,pt-agent-v1
+hotel-basics.how-much-per-night,Quanto custa por noite?,,,,2,pt-agent-v1
+hotel-basics.is-breakfast-included,O pequeno-almoço está incluído?,O café da manhã está incluído?,,,2,pt-agent-v1
+hotel-basics.may-i-see-the-room,Posso ver o quarto?,,,,2,pt-agent-v1
+hotel-basics.for-nights,Para {} noites,,,,2,pt-agent-v1
+hotel-basics.two-beds,"Duas camas, por favor",,,,2,pt-agent-v1
+hotel-basics.is-there-air-conditioning,Há ar condicionado?,,,,2,pt-agent-v1
+hotel-requests.can-i-check-out-later,Posso fazer check-out mais tarde?,,,,2,pt-agent-v1
+hotel-requests.what-time-does-breakfast-start,A que horas começa o pequeno-almoço?,o café da manhã,,,2,pt-agent-v1
+hotel-requests.can-i-store-my-luggage,Posso deixar a bagagem?,,,,2,pt-agent-v1
+hotel-requests.no-housekeeping,Não é preciso limpar o quarto,,,,2,pt-agent-v1
+hotel-requests.another-towel-please,"Mais uma toalha, por favor",,,,2,pt-agent-v1
+hotel-requests.what-time-is-check-out,A que horas é o check-out?,,,,2,pt-agent-v1
+hotel-requests.can-i-check-in-early,Posso fazer check-in mais cedo?,,,,2,pt-agent-v1
+hotel-requests.another-night,Posso ficar mais uma noite?,,,,2,pt-agent-v1
+hotel-requests.is-there-a-safe,Há cofre?,,,,2,pt-agent-v1
+hotel-requests.another-blanket,"Mais um cobertor, por favor",,,,2,pt-agent-v1
+hotel-requests.wake-up-call,"Acorde-me às {}, por favor",Me acorde às {},,,2,pt-agent-v1
+room-problems.there-is-a-problem-with-the-room,Há um problema no quarto,,,,2,pt-agent-v1
+room-problems.the-air-conditioning-is-broken,O ar condicionado está avariado,O ar condicionado não funciona,,,2,pt-agent-v1
+room-problems.there-is-no-hot-water,Não há água quente,,,,2,pt-agent-v1
+room-problems.can-i-change-rooms,Posso mudar de quarto?,,,,2,pt-agent-v1
+room-problems.the-room-is-too-noisy,O quarto é muito barulhento,,,,2,pt-agent-v1
+room-problems.the-key-does-not-work,O cartão não abre a porta,A chave não funciona,,,2,pt-agent-v1
+room-problems.the-toilet-will-not-flush,O autoclismo não funciona,A descarga não funciona,,,2,pt-agent-v1
+room-problems.the-light-does-not-work,A luz não funciona,,,,2,pt-agent-v1
+room-problems.please-send-someone,Podem mandar alguém reparar?,,,,2,pt-agent-v1
+room-problems.the-heating-does-not-work,O aquecimento não funciona,,,,2,pt-agent-v1
+laundry.please-wash-these-clothes,"Lave esta roupa, por favor",,,,2,pt-agent-v1
+laundry.where-is-a-laundromat,Onde há uma lavandaria self-service?,uma lavanderia,,,2,pt-agent-v1
+laundry.when-will-it-be-ready,Quando fica pronto?,,,,2,pt-agent-v1
+laundry.how-much-per-kilo,Quanto custa por quilo?,,,,2,pt-agent-v1
+laundry.can-it-be-ready-today,Pode ficar pronto hoje?,,,,2,pt-agent-v1
+laundry.please-do-not-use-bleach,"Não use lixívia, por favor",Não use alvejante,,,2,pt-agent-v1
+laundry.laundromat,a lavandaria self-service,a lavanderia,,,2,pt-agent-v1
+laundry.please-iron-this,"Passe isto a ferro, por favor",,,,2,pt-agent-v1
+laundry.detergent,o detergente,o sabão em pó,,,2,pt-agent-v1
+laundry.dry-cleaning,a limpeza a seco,a lavagem a seco,,,2,pt-agent-v1
+laundry.dryer,a máquina de secar,a secadora,,,2,pt-agent-v1
+laundry.coin-operated,Funciona a moedas,,,,2,pt-agent-v1

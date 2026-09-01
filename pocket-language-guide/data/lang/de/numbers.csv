@@ -47,3 +47,5 @@ numbers-money.2-items,zwei Stück,,,,2,de-agent-v1
 numbers-money.yen,Yen,,,,2,de-agent-v1
 numbers-money.yen-symbol,¥,,,,2,de-agent-v1
 numbers-money.number-and-classifier-notes-2,,,,,2,de-agent-v1
+numbers-money.euro,Euro,,,,2,coordinator-gaps-v2
+numbers-money.euro-symbol,€,Euro,,,2,coordinator-gaps-v2

@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Adım {}.,,,,2,tr-agent-v1
+introductions.nice-to-meet-you,Memnun oldum.,,,,2,tr-agent-v1
+introductions.what-is-your-name,Adınız nedir?,,,,2,tr-agent-v1
+introductions.we-are-traveling-together,Birlikte seyahat ediyoruz.,,,,2,tr-agent-v1
+introductions.this-is-my-friend,Bu arkadaşım.,,,,2,tr-agent-v1
+introductions.i-am-from,Memleketim {}.,Geldiğim yer: {},,,2,tr-agent-v1
+introductions.where-are-you-from,Nerelisiniz?,,,,2,tr-agent-v1
+introductions.how-are-you,Nasılsınız?,,,,2,tr-agent-v1
+introductions.i-am-a-tourist,Turistim.,,,,2,tr-agent-v1
+introductions.this-is-my-husband-wife,Bu eşim.,Bu kocam / karım.,,"eş = spouse, either sex",2,tr-agent-v1
+introductions.this-is-my-daughter-son,Bu kızım / oğlum.,,,,2,tr-agent-v1
+introductions.i-am-traveling-alone,Yalnız seyahat ediyorum.,,,,2,tr-agent-v1

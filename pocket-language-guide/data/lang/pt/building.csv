@@ -1,0 +1,60 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,Qual é o número desta sala?,Que quarto é este?,,,2,pt-agent-v1
+building-help.i-am-lost,Estou perdido,Estou perdida,,-a if female,2,pt-agent-v1
+building-help.where-is-reception,Onde é a receção?,a recepção,,,2,pt-agent-v1
+building-help.where-is-a-power-outlet,Onde há uma tomada?,,,,2,pt-agent-v1
+accessibility.step-free,Há acesso sem degraus?,,,,2,pt-agent-v1
+accessibility.wheelchair-access,É acessível a cadeiras de rodas?,,,,2,pt-agent-v1
+accessibility.elevator,Há elevador?,,,,2,pt-agent-v1
+accessibility.ramp,Há rampa?,,,,2,pt-agent-v1
+accessibility.how-many-steps,Quantos degraus são?,,,,2,pt-agent-v1
+accessibility.cannot-climb-stairs,Não consigo subir escadas,,,,2,pt-agent-v1
+accessibility.need-to-sit-down,Preciso de me sentar,Preciso me sentar,,,2,pt-agent-v1
+accessibility.accessible-restroom,Há casa de banho acessível?,banheiro acessível,,,2,pt-agent-v1
+accessibility.station-assistance,Há assistência na estação?,,,,2,pt-agent-v1
+accessibility.help-me-carry,"Ajude-me a levar isto, por favor",Me ajude a carregar isto,,,2,pt-agent-v1
+accessibility.board-first,Posso embarcar primeiro?,,,,2,pt-agent-v1
+accessibility.door-width,Qual é a largura da porta?,,,,2,pt-agent-v1
+accessibility.wheelchair-width,A minha cadeira de rodas tem {} cm de largura,,,,2,pt-agent-v1
+accessibility.hard-of-hearing,Tenho deficiência auditiva,Ouço mal,,,2,pt-agent-v1
+accessibility.speak-louder,"Fale mais alto, por favor",,,,2,pt-agent-v1
+accessibility.visually-impaired,Tenho deficiência visual,,,,2,pt-agent-v1
+accessibility.take-your-arm,Posso apoiar-me no seu braço?,Posso segurar no seu braço?,,,2,pt-agent-v1
+accessibility.guide-dog,Este é o meu cão-guia,,,,2,pt-agent-v1
+in-a-building.is-this-the-correct-entrance,Esta é a entrada certa?,,,,2,pt-agent-v1
+in-a-building.do-you-have-wi-fi,Tem Wi-Fi?,,,,2,pt-agent-v1
+in-a-building.what-is-the-wi-fi-password,Qual é a palavra-passe do Wi-Fi?,a senha do Wi-Fi,,,2,pt-agent-v1
+in-a-building.which-floor,Que andar?,,,,2,pt-agent-v1
+toilets.where-toilet,Onde é a casa de banho?,Onde fica o banheiro?,,,2,pt-agent-v1
+toilets.where-public-toilet,Onde há uma casa de banho pública?,um banheiro público,,,2,pt-agent-v1
+toilets.may-i-use-the-toilet,Posso usar a casa de banho?,usar o banheiro,,,2,pt-agent-v1
+toilets.is-it-only-for-customers,É só para clientes?,,,,2,pt-agent-v1
+toilets.toilet-wc,WC,Casa de banho · Sanitários · Banheiro,,,2,pt-agent-v1
+toilets.is-it-free,É grátis?,,,,2,pt-agent-v1
+toilets.do-i-need-a-coin,É preciso moeda ou ficha?,,,,2,pt-agent-v1
+toilets.is-the-tap-water-safe-to-drink,A água da torneira é potável?,,,,2,pt-agent-v1
+toilets.it-is-urgent,É urgente,,,,2,pt-agent-v1
+toilets.may-i-have-the-toilet-key,Pode dar-me a chave da casa de banho?,a chave do banheiro,,,2,pt-agent-v1
+toilets.there-is-no-toilet-paper,Não há papel higiénico,papel higiênico,,,2,pt-agent-v1
+toilets.toilet-paper,papel higiénico,papel higiênico,,,2,pt-agent-v1
+toilets.it-is-out-of-order,Está avariado,Está quebrado,,,2,pt-agent-v1
+toilets.out-of-order,Avariado,Fora de serviço,,,2,pt-agent-v1
+toilets.mens-toilet,Homens,Senhores · Masculino,,,2,pt-agent-v1
+toilets.womens-toilet,Senhoras,Mulheres · Feminino,,,2,pt-agent-v1
+toilets.drinking-water,Água potável,,,,2,pt-agent-v1
+toilets.not-for-drinking,Água não potável,,,,2,pt-agent-v1
+toilets.accessible-toilet,Casa de banho acessível,Banheiro acessível · WC adaptado,,,2,pt-agent-v1
+toilets.where-can-i-wash-my-hands,Onde posso lavar as mãos?,,,,2,pt-agent-v1
+toilets.can-i-flush-the-paper,Posso deitar o papel na sanita?,jogar o papel no vaso,,,2,pt-agent-v1
+toilets.is-there-a-toilet-on-board,Há casa de banho a bordo?,banheiro a bordo,,,2,pt-agent-v1
+toilets.the-toilet-will-not-flush,O autoclismo não funciona,A descarga não funciona,,,2,pt-agent-v1
+toilets.baby-change,Fraldário,Muda-fraldas · Trocador,,,2,pt-agent-v1
+toilets.squat-toilet,sanita turca,vaso turco,,,1,pt-agent-v1
+building-words.elevator,o elevador,,,,2,pt-agent-v1
+building-words.stairs,as escadas,,,,2,pt-agent-v1
+building-words.entrance,a entrada,,,,2,pt-agent-v1
+building-words.exit,a saída,,,,2,pt-agent-v1
+building-words.men,homens,,,,2,pt-agent-v1
+building-words.women,mulheres,senhoras,,,2,pt-agent-v1
+building-words.door,a porta,,,,2,pt-agent-v1
+building-words.key,a chave,,,,2,pt-agent-v1

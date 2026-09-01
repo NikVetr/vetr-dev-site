@@ -6,12 +6,12 @@ ja,日本語,Japanese,Jpan,,hepburn;kunrei,あ,ready,JP,話せる言語
 ar,العربية,Arabic,Arab,,ala-lc,ع,ready,SA;EG;AE;MA;JO;IQ,أتحدث
 fr,Français,French,Latn,,,Àç,ready,FR;CA;BE;CH;SN;CI,Je parle
 de,Deutsch,German,Latn,,,Äß,ready,DE;AT;CH,Ich spreche
-pt,Português,Portuguese,Latn,,,Ãç,planned,PT;BR;AO;MZ,Eu falo
+pt,Português,Portuguese,Latn,,,Ãç,ready,PT;BR;AO;MZ,Eu falo
 ko,한국어,Korean,Kore,,rr;mccune,한,ready,KR,사용 언어
 hi,हिन्दी,Hindi,Deva,,iast;hunterian,अ,planned,IN,मैं बोलता हूँ
 th,ไทย,Thai,Thai,,rtgs,ก,planned,TH,ฉันพูด
 ru,Русский,Russian,Cyrl,,bgn,Яж,planned,RU;BY;KZ;KG,Я говорю на
 id,Bahasa Indonesia,Indonesian,Latn,,,Aa,planned,ID,Saya berbicara
 sw,Kiswahili,Swahili,Latn,,,Aa,planned,TZ;KE;UG;CD,Ninasema
-tr,Türkçe,Turkish,Latn,,,Şğ,planned,TR;CY,Konuştuğum dil
-vi,Tiếng Việt,Vietnamese,Latn,,,Ệ,planned,VN,Tôi nói
+tr,Türkçe,Turkish,Latn,,,Şğ,ready,TR;CY,Konuştuğum dil
+vi,Tiếng Việt,Vietnamese,Latn,,,Ệ,ready,VN,Tôi nói

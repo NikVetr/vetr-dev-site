@@ -1,0 +1,99 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+social-basics.hello,Olá,,,,2,pt-agent-v1
+social-basics.hello-polite,Bom dia,Boa tarde,,,2,pt-agent-v1
+social-basics.good-morning,Bom dia,,,,2,pt-agent-v1
+social-basics.good-evening,Boa noite,Boa tarde,,,2,pt-agent-v1
+social-basics.goodbye,Adeus,Até logo,,,2,pt-agent-v1
+social-basics.thank-you,Obrigado,Obrigada,,"-o if male, -a if female",2,pt-agent-v1
+social-basics.you-are-welcome,De nada,,,,2,pt-agent-v1
+social-basics.excuse-me-sorry,Com licença,Desculpe,,,2,pt-agent-v1
+social-basics.sorry,Desculpe,Peço desculpa,,,2,pt-agent-v1
+social-basics.no-problem,Não há problema,Não faz mal,,,2,pt-agent-v1
+social-basics.i-do-not-know,Não sei,,,,2,pt-agent-v1
+social-basics.good-night,Boa noite,Durma bem,,,2,pt-agent-v1
+social-basics.okay-fine-i-am-okay,Estou bem,,,,2,pt-agent-v1
+communication.i-do-not-speak-this-language,Não falo esta língua,,,,2,pt-agent-v1
+communication.i-speak-only-a-little-of-this,Falo só um pouco desta língua,,,,2,pt-agent-v1
+communication.do-you-speak-english,Fala inglês?,,,,2,pt-agent-v1
+communication.please-speak-more-slowly,"Fale mais devagar, por favor",,,,2,pt-agent-v1
+communication.i-do-not-understand-spoken,Não entendo o que diz,Não percebo o que diz,,,2,pt-agent-v1
+communication.i-cannot-read-understand,Não sei ler isto,,,,2,pt-agent-v1
+communication.please-say-it-again,"Repita, por favor",,,,2,pt-agent-v1
+communication.please-write-it-down,"Escreva, por favor",,,,2,pt-agent-v1
+communication.please-wait-a-moment,"Um momento, por favor",,,,2,pt-agent-v1
+communication.can-you-help-me,Pode ajudar-me?,Pode me ajudar?,,,2,pt-agent-v1
+communication.please-show-me-the-text,"Mostre-me o texto, por favor",Me mostre o texto,,,2,pt-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Não consigo perceber o que diz,Não consigo entender,,,2,pt-agent-v1
+communication.i-do-not-understand,Não entendo,Não percebo,,,2,pt-agent-v1
+communication.i-cannot-read-it,Não consigo ler isto,,,,2,pt-agent-v1
+quick-responses.please-go-ahead,Faz favor,Pode passar,,,2,pt-agent-v1
+quick-responses.yes-right,Sim,Certo,,,2,pt-agent-v1
+quick-responses.no-not,Não,,,,2,pt-agent-v1
+quick-responses.okay-can,De acordo,Pode ser,,,2,pt-agent-v1
+quick-responses.cannot-not-allowed,Não pode,,,,2,pt-agent-v1
+quick-responses.works-okay,Funciona,,,,2,pt-agent-v1
+quick-responses.does-not-work-no,Não funciona,,,,2,pt-agent-v1
+quick-responses.can-possible,É possível,,,,2,pt-agent-v1
+quick-responses.cannot-not-possible,Não é possível,,,,2,pt-agent-v1
+quick-responses.okay-fine,Está bem,Tudo bem,,,2,pt-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,Não é permitido,,,,2,pt-agent-v1
+phone-translation.i-am-using-phone-translation,Estou a usar um tradutor automático,Estou usando um tradutor automático,,,2,pt-agent-v1
+phone-translation.please-speak-toward-the-phone,"Fale para o telemóvel, por favor",Fale para o celular,,,2,pt-agent-v1
+phone-translation.please-write-the-place-name,Escreva aqui o nome do lugar,,,,2,pt-agent-v1
+phone-translation.one-sentence-at-a-time-please,"Uma frase de cada vez, por favor",,,,2,pt-agent-v1
+phone-translation.please-type-it-and-show-me,"Escreva e mostre-me, por favor",Digite e me mostre,,,2,pt-agent-v1
+phone-translation.please-look-at-the-screen,"Olhe para o ecrã, por favor",Olhe para a tela,,,2,pt-agent-v1
+phone-text-power.please-type-it-for-me,"Escreva para mim, por favor",Digite para mim,,,2,pt-agent-v1
+phone-text-power.please-use-simple-words,"Use palavras simples, por favor",,,,2,pt-agent-v1
+phone-text-power.my-phone-battery-is-low,Estou quase sem bateria,,,,2,pt-agent-v1
+phone-text-power.do-you-have-a-power-bank,Tem um carregador portátil?,power bank,,,2,pt-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,A tradução pode estar errada,,,,2,pt-agent-v1
+phone-text-power.please-confirm,"Confirme, por favor",,,,2,pt-agent-v1
+phone-text-power.may-i-charge-my-phone-here,Posso carregar o telemóvel aqui?,carregar o celular,,,2,pt-agent-v1
+sim-data.i-would-like-a-tourist-sim,Queria um cartão SIM para turista,,,,2,pt-agent-v1
+sim-data.may-i-use-your-wifi,Posso usar o Wi-Fi?,,,,2,pt-agent-v1
+sim-data.how-much-data-is-included,Quantos dados estão incluídos?,,,,2,pt-agent-v1
+sim-data.do-you-need-my-passport,Precisa do meu passaporte?,,,,2,pt-agent-v1
+sim-data.how-long-is-it-valid,Quanto tempo é válido?,,,,2,pt-agent-v1
+sim-data.please-activate-it,"Pode ativar, por favor?",,,,2,pt-agent-v1
+sim-data.do-you-have-an-esim,Tem eSIM?,,,,2,pt-agent-v1
+sim-data.my-data-is-not-working,Os dados móveis não funcionam,,,,2,pt-agent-v1
+sim-data.does-it-need-registration,É preciso registar?,É preciso registrar?,,,2,pt-agent-v1
+sim-data.i-have-no-signal,Não tenho rede,Estou sem sinal,,,2,pt-agent-v1
+sim-data.please-write-the-wifi-password,Escreva a palavra-passe do Wi-Fi,a senha do Wi-Fi,,,2,pt-agent-v1
+sim-data.sim-card,o cartão SIM,,,,2,pt-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Onde posso comprar um adaptador de tomada?,,,,2,pt-agent-v1
+sim-data.mobile-data,dados móveis,,,,2,pt-agent-v1
+sim-data.can-i-top-up-this-sim,Posso carregar este cartão?,Posso recarregar?,,,2,pt-agent-v1
+sim-data.top-up,o carregamento,a recarga,,,2,pt-agent-v1
+sim-data.is-there-coverage-in,Há rede em {}?,,,,2,pt-agent-v1
+sim-data.signal,a rede,o sinal,,,2,pt-agent-v1
+sim-data.esim,eSIM,,,,2,pt-agent-v1
+sim-data.prepaid,pré-pago,,,,2,pt-agent-v1
+sim-data.roaming,roaming,,,,2,pt-agent-v1
+etiquette.is-this-allowed,Isto é permitido?,,,,2,pt-agent-v1
+etiquette.is-tipping-expected,É costume dar gorjeta?,,,,2,pt-agent-v1
+etiquette.is-service-included,O serviço está incluído?,,,,2,pt-agent-v1
+etiquette.may-i-enter,Posso entrar?,,,,2,pt-agent-v1
+etiquette.remove-shoes,Devo tirar os sapatos?,,,,2,pt-agent-v1
+etiquette.photo-of-you,Posso tirar uma foto sua?,,,,2,pt-agent-v1
+etiquette.may-i-sit-here,Posso sentar-me aqui?,Posso sentar aqui?,,,2,pt-agent-v1
+etiquette.queue-for,Esta é a fila para {}?,,,,2,pt-agent-v1
+etiquette.dressed-appropriately,Estou vestido adequadamente?,Estou vestida,,-a if female,2,pt-agent-v1
+etiquette.did-not-mean-to-offend,"Desculpe, não quis ofender",,,,2,pt-agent-v1
+etiquette.what-is-customary,O que é costume aqui?,,,,2,pt-agent-v1
+etiquette.keep-the-change,Fique com o troco,,,,2,pt-agent-v1
+children.cannot-find-my-child,Não consigo encontrar o meu filho,a minha filha,,filha if a girl,2,pt-agent-v1
+children.make-an-announcement,"Podem fazer um anúncio, por favor?",,,,2,pt-agent-v1
+children.child-age,O meu filho tem {} anos,A minha filha tem {} anos,,,2,pt-agent-v1
+children.high-chair,Tem cadeira alta para crianças?,cadeirão,,,2,pt-agent-v1
+children.baby-changing-room,Onde fica o fraldário?,o muda-fraldas,,,2,pt-agent-v1
+children.childrens-menu,Há menu para crianças?,cardápio infantil,,,2,pt-agent-v1
+children.suitable-for-children,Isto é adequado para crianças?,,,,2,pt-agent-v1
+children.minimum-age,Qual é a idade mínima?,,,,2,pt-agent-v1
+children.do-children-pay,As crianças pagam?,,,,2,pt-agent-v1
+children.crib,Tem berço?,,,,2,pt-agent-v1
+children.warm-this-bottle,Pode aquecer este biberão?,esta mamadeira,,,2,pt-agent-v1
+children.car-seat,Precisamos de uma cadeira auto,cadeirinha para o carro,,,2,pt-agent-v1
+children.stroller,o carrinho de bebé,o carrinho de bebê,,,2,pt-agent-v1
+children.playground,Há um parque infantil?,playground · parquinho,,,2,pt-agent-v1

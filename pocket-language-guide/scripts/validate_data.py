@@ -36,6 +36,12 @@ def load(rel):
     return rows
 
 
+def applies_to(concept, code):
+    """Whether a concept belongs on `code`'s sheet. Mirrors `appliesTo` in core/pack.js."""
+    only = (concept.get("applies_to") or "").strip()
+    return not only or code in only.split(";")
+
+
 def main():
     scripts = {r["iso15924"]: r for r in load("registry/scripts.csv")}
     languages = {r["bcp47"]: r for r in load("registry/languages.csv")}
@@ -167,14 +173,18 @@ def main():
                         errors.append(f"{rel}: {cid} is in safety-critical section "
                                       f"{section!r} with confidence {row['confidence']!r} "
                                       f"(need >= {MIN_SAFE_CONFIDENCE})")
-        missing = set(concepts) - seen
+        # A concept scoped to other languages is not a gap in this one: the won is
+        # only ever on a Korean card, and counting it against Spanish said 755 of
+        # 757 about a pack with nothing missing at all.
+        applicable = {cid for cid, c in concepts.items() if applies_to(c, code)}
+        missing = applicable - seen
         if missing:
             # Not an error, whatever the status. The concept bank is the union of
             # every sheet ported into it, so no single language covers all of it --
             # and which languages are advertised is an editorial call, recorded in
             # status and shown honestly via coverage.json.
-            warnings.append(f"lang/{code}: {len(seen)} of {len(concepts)} concepts "
-                            f"({100 * len(seen) // max(1, len(concepts))}%)")
+            warnings.append(f"lang/{code}: {len(seen & applicable)} of {len(applicable)} "
+                            f"concepts ({100 * len(seen & applicable) // max(1, len(applicable))}%)")
 
     for path in sorted((DATA / "respell/overrides").glob("*.csv")):
         for row in load(path.relative_to(DATA)):

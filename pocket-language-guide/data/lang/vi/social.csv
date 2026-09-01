@@ -1,0 +1,99 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+social-basics.hello,Xin chào,,,,2,vi-agent-v1
+social-basics.hello-polite,Chào anh / chị ạ,,,"anh = m., chị = f.",2,vi-agent-v1
+social-basics.good-morning,Chào buổi sáng,,,,2,vi-agent-v1
+social-basics.good-evening,Chào buổi tối,,,,2,vi-agent-v1
+social-basics.goodbye,Tạm biệt,,,,2,vi-agent-v1
+social-basics.thank-you,Cảm ơn,Xin cảm ơn,,,2,vi-agent-v1
+social-basics.you-are-welcome,Không có gì,Không có chi,,,2,vi-agent-v1
+social-basics.excuse-me-sorry,Xin lỗi,,,,2,vi-agent-v1
+social-basics.sorry,Tôi xin lỗi,,,,2,vi-agent-v1
+social-basics.no-problem,Không sao,,,,2,vi-agent-v1
+social-basics.i-do-not-know,Tôi không biết,,,,2,vi-agent-v1
+social-basics.good-night,Chúc ngủ ngon,,,,2,vi-agent-v1
+social-basics.okay-fine-i-am-okay,Tôi ổn,Được rồi,,,2,vi-agent-v1
+communication.i-do-not-speak-this-language,Tôi không nói được tiếng Việt,,,,2,vi-agent-v1
+communication.i-speak-only-a-little-of-this,Tôi chỉ nói được một chút,,,,2,vi-agent-v1
+communication.do-you-speak-english,Có nói được tiếng Anh không ạ?,,,,2,vi-agent-v1
+communication.please-speak-more-slowly,Xin nói chậm hơn,,,,2,vi-agent-v1
+communication.i-do-not-understand-spoken,Tôi nghe không hiểu,,,,2,vi-agent-v1
+communication.i-cannot-read-understand,Tôi đọc không hiểu,,,,2,vi-agent-v1
+communication.please-say-it-again,Xin nói lại,,,,2,vi-agent-v1
+communication.please-write-it-down,Xin viết ra giấy,,,,2,vi-agent-v1
+communication.please-wait-a-moment,Xin chờ một chút,,,,2,vi-agent-v1
+communication.can-you-help-me,Giúp tôi được không ạ?,,,,2,vi-agent-v1
+communication.please-show-me-the-text,Xin cho tôi xem chữ,,,,2,vi-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Tôi không nghe rõ,,,,2,vi-agent-v1
+communication.i-do-not-understand,Tôi không hiểu,,,,2,vi-agent-v1
+communication.i-cannot-read-it,Tôi không đọc được,,,,2,vi-agent-v1
+quick-responses.please-go-ahead,Xin mời,,,,2,vi-agent-v1
+quick-responses.yes-right,Vâng,Dạ,,,2,vi-agent-v1
+quick-responses.no-not,Không,,,,2,vi-agent-v1
+quick-responses.okay-can,Được,,,,2,vi-agent-v1
+quick-responses.cannot-not-allowed,Không được,,,,2,vi-agent-v1
+quick-responses.works-okay,Ổn,,,,2,vi-agent-v1
+quick-responses.does-not-work-no,Không ổn,,,,2,vi-agent-v1
+quick-responses.can-possible,Có thể,,,,2,vi-agent-v1
+quick-responses.cannot-not-possible,Không thể,,,,2,vi-agent-v1
+quick-responses.okay-fine,Được rồi,,,,2,vi-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,Không được đâu,,,,2,vi-agent-v1
+phone-translation.i-am-using-phone-translation,Tôi đang dùng phần mềm dịch,,,,2,vi-agent-v1
+phone-translation.please-speak-toward-the-phone,Xin nói vào điện thoại,,,,2,vi-agent-v1
+phone-translation.please-write-the-place-name,Xin viết tên địa điểm vào đây,,,,2,vi-agent-v1
+phone-translation.one-sentence-at-a-time-please,Xin nói từng câu một,,,,2,vi-agent-v1
+phone-translation.please-type-it-and-show-me,Xin gõ ra rồi cho tôi xem,,,,2,vi-agent-v1
+phone-translation.please-look-at-the-screen,Xin nhìn màn hình,,,,2,vi-agent-v1
+phone-text-power.please-type-it-for-me,Xin gõ giúp tôi,,,,2,vi-agent-v1
+phone-text-power.please-use-simple-words,Xin dùng từ đơn giản,,,,2,vi-agent-v1
+phone-text-power.my-phone-battery-is-low,Điện thoại tôi sắp hết pin,,,,2,vi-agent-v1
+phone-text-power.do-you-have-a-power-bank,Có sạc dự phòng không ạ?,,,,2,vi-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,Bản dịch có thể không chính xác,,,,2,vi-agent-v1
+phone-text-power.please-confirm,Xin xác nhận giúp,,,,2,vi-agent-v1
+phone-text-power.may-i-charge-my-phone-here,Sạc nhờ ở đây được không ạ?,,,,2,vi-agent-v1
+sim-data.i-would-like-a-tourist-sim,Tôi muốn mua SIM du lịch,,,,2,vi-agent-v1
+sim-data.may-i-use-your-wifi,Cho tôi dùng Wi-Fi ạ,,,,2,vi-agent-v1
+sim-data.how-much-data-is-included,Được bao nhiêu data ạ?,,,,2,vi-agent-v1
+sim-data.do-you-need-my-passport,Có cần hộ chiếu không ạ?,,,,2,vi-agent-v1
+sim-data.how-long-is-it-valid,Dùng được bao lâu ạ?,,,,2,vi-agent-v1
+sim-data.please-activate-it,Xin kích hoạt giúp,,,,2,vi-agent-v1
+sim-data.do-you-have-an-esim,Có eSIM không ạ?,,,,2,vi-agent-v1
+sim-data.my-data-is-not-working,Data không dùng được,,,,2,vi-agent-v1
+sim-data.does-it-need-registration,Có cần đăng ký không ạ?,,,,2,vi-agent-v1
+sim-data.i-have-no-signal,Tôi không có sóng,,,,2,vi-agent-v1
+sim-data.please-write-the-wifi-password,Xin ghi mật khẩu Wi-Fi,,,,2,vi-agent-v1
+sim-data.sim-card,Thẻ SIM,,,,2,vi-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Mua ổ cắm chuyển ở đâu ạ?,,,,2,vi-agent-v1
+sim-data.mobile-data,Dữ liệu di động,Data,,,2,vi-agent-v1
+sim-data.can-i-top-up-this-sim,Nạp tiền SIM này được không ạ?,,,,2,vi-agent-v1
+sim-data.top-up,Nạp tiền,,,,2,vi-agent-v1
+sim-data.is-there-coverage-in,Ở {} có sóng không ạ?,,,,2,vi-agent-v1
+sim-data.signal,Sóng,,,,2,vi-agent-v1
+sim-data.esim,eSIM,,,,2,vi-agent-v1
+sim-data.prepaid,Trả trước,,,,2,vi-agent-v1
+sim-data.roaming,Chuyển vùng,Roaming,,,2,vi-agent-v1
+etiquette.is-this-allowed,Được phép không ạ?,,,,2,vi-agent-v1
+etiquette.is-tipping-expected,Có cần tiền tip không ạ?,Có cần tiền boa không ạ?,,,2,vi-agent-v1
+etiquette.is-service-included,Đã tính phí phục vụ chưa ạ?,,,,2,vi-agent-v1
+etiquette.may-i-enter,Tôi vào được không ạ?,,,,2,vi-agent-v1
+etiquette.remove-shoes,Có phải cởi giày không ạ?,,,,2,vi-agent-v1
+etiquette.photo-of-you,Cho tôi chụp hình anh / chị ạ?,Cho tôi chụp ảnh anh / chị ạ?,,"anh = m., chị = f.",2,vi-agent-v1
+etiquette.may-i-sit-here,Tôi ngồi đây được không ạ?,,,,2,vi-agent-v1
+etiquette.queue-for,Đây là hàng chờ {} phải không ạ?,,,,2,vi-agent-v1
+etiquette.dressed-appropriately,Tôi mặc thế này được không ạ?,,,,2,vi-agent-v1
+etiquette.did-not-mean-to-offend,"Tôi không cố ý, xin thứ lỗi",,,,2,vi-agent-v1
+etiquette.what-is-customary,Ở đây thường làm thế nào ạ?,,,,2,vi-agent-v1
+etiquette.keep-the-change,Không cần trả lại ạ,Khỏi thối lại ạ,,,2,vi-agent-v1
+children.cannot-find-my-child,Tôi không tìm thấy con tôi,,,,2,vi-agent-v1
+children.make-an-announcement,Xin thông báo trên loa,,,,2,vi-agent-v1
+children.child-age,Con tôi {} tuổi,,,,2,vi-agent-v1
+children.high-chair,Có ghế ăn cho bé không ạ?,,,,2,vi-agent-v1
+children.baby-changing-room,Phòng thay tã ở đâu ạ?,,,,2,vi-agent-v1
+children.childrens-menu,Có món cho trẻ em không ạ?,,,,2,vi-agent-v1
+children.suitable-for-children,Cái này hợp với trẻ em không ạ?,,,,2,vi-agent-v1
+children.minimum-age,Bao nhiêu tuổi trở lên ạ?,,,,2,vi-agent-v1
+children.do-children-pay,Trẻ em có phải mua vé không ạ?,,,,2,vi-agent-v1
+children.crib,Có nôi em bé không ạ?,Có cũi em bé không ạ?,,,2,vi-agent-v1
+children.warm-this-bottle,Xin hâm nóng bình sữa này,,,,2,vi-agent-v1
+children.car-seat,Chúng tôi cần ghế ô tô cho bé,,,,2,vi-agent-v1
+children.stroller,Xe đẩy,Xe đẩy em bé,,,2,vi-agent-v1
+children.playground,Có khu vui chơi không ạ?,,,,2,vi-agent-v1
