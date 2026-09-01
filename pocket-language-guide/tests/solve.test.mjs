@@ -15,7 +15,6 @@ const ctx = await createSheetContext({
 });
 const spec = await referenceSpec();
 const box = contentBox(spec.geometry, spec.paper);
-const bins = spec.geometry.faces * spec.geometry.columns;
 
 await loadFontsFor(ctx, spec.target, spec.source);
 const theme = await ctx.theme(spec.themeId);
@@ -23,10 +22,12 @@ const targetRows = await loadLanguage(ctx.loadText, spec.target, ctx.corpus.grou
 const sourceRows = await loadLanguage(ctx.loadText, spec.source, ctx.corpus.groups);
 const respell = await loadRespellOverrides(ctx.loadText, spec.target, spec.source, spec.accent);
 const blocks = buildBlocks({ corpus: ctx.corpus, targetRows, sourceRows, respell, spec });
-const fitted = (await buildSheet(ctx, { ...spec, scale: 0 })).plan.scale;
+// The spec asks for auto faces, so the resolved count comes back on the plan.
+const solved = (await buildSheet(ctx, spec)).plan;
+const bins = solved.geometry.faces * solved.geometry.columns;
 const atoms = buildAtoms({
-  blocks, theme, spec, corpus: ctx.corpus, measurer: ctx.measurer,
-  colWidth: box.colWidth, scale: fitted, withPaint: true,
+  blocks, theme, spec: { ...spec, geometry: solved.geometry }, corpus: ctx.corpus,
+  measurer: ctx.measurer, colWidth: box.colWidth, scale: solved.scale, withPaint: true,
 });
 
 test('content box reproduces the reference geometry', () => {
@@ -106,11 +107,32 @@ test('solving twice gives byte-identical output', async () => {
   assert.equal(JSON.stringify(a.plan), JSON.stringify(b.plan));
 });
 
-test('auto-fit reaches the requested face count', async () => {
-  const { plan } = await buildSheet(ctx, { ...spec, scale: 0 });
-  assert.equal(plan.faces.length, spec.geometry.faces);
+test('auto faces picks the fewest pairs that hold the content legibly', async () => {
+  const { plan } = await buildSheet(ctx, spec);
+  // The reference sheet arrived at four by hand; auto should agree.
+  assert.equal(plan.faces.length, 4);
+  assert.equal(plan.geometry.faces, 4);
+  assert.equal(plan.faces.length % 2, 0, 'a sheet is two faces, so the count must be even');
   assert.ok(plan.scale > 0.9 && plan.scale < 1.3, `scale ${plan.scale}`);
   assert.deepEqual(plan.warnings.filter((w) => w.severity === 'error'), []);
+});
+
+test('bigger type means more faces, not a broken sheet', async () => {
+  const small = await buildSheet(ctx, { ...spec, scale: 0.9 });
+  const large = await buildSheet(ctx, { ...spec, scale: 1.3 });
+  assert.ok(large.plan.faces.length > small.plan.faces.length,
+    `${large.plan.faces.length} should exceed ${small.plan.faces.length}`);
+  for (const plan of [small.plan, large.plan]) {
+    assert.deepEqual(plan.warnings.filter((w) => w.severity === 'error'), []);
+    assert.equal(plan.faces.length % 2, 0);
+  }
+});
+
+test('a fixed face count is honoured rather than overridden', async () => {
+  const { plan } = await buildSheet(ctx, {
+    ...spec, geometry: { ...spec.geometry, faces: 6 }, scale: 0,
+  });
+  assert.equal(plan.faces.length, 6);
 });
 
 test('too little room is reported, not silently truncated', async () => {

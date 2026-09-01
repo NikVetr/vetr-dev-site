@@ -167,6 +167,8 @@
  * @property {Warning[]} warnings
  * @property {number} scale       the scale actually used, after autofit
  * @property {number[]} looseness per-column residual slack, for diagnostics
+ * @property {Geometry} geometry  as resolved: `faces` is a real count even when
+ *   the spec asked for auto
  */
 
 /** @typedef {{conceptId:string, sectionId:string, label:string, reason:string}} DiffEntry */

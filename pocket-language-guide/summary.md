@@ -5,13 +5,20 @@ for a pair of languages, and exports them as vector PDF, high-resolution PNG or
 SVG. Everything runs client-side, so it works with the network off — which is the
 actual use case: someone abroad without a data plan.
 
-Live at `/pocket-language-guide/` on vetr.dev.
+Live at `/pocket-language-guide/` on vetr.dev. Not linked from the site index yet.
 
 ## What it produces
 
-A **sheet** is a set of **faces**. The default geometry is four 7×5in faces, each
-four columns, printed double-sided on two sheets of 5×7 photo paper. Cut each
-sheet down the middle and you have four double-sided 3½×5in cards.
+A **sheet** is a set of **faces**. The default geometry is 7×5in faces of four
+columns, printed double-sided on 5×7 photo paper; cut each sheet down the middle
+and you have double-sided 3½×5in cards.
+
+**How many faces is a consequence, not a setting.** `geometry.faces: 0` means auto:
+the fewest faces that hold the content legibly, stepping in twos because a
+double-sided sheet is two faces and an odd count means running one with a blank
+back. On the shipped corpus that resolves to four at 0.97× — the same answer the
+reference sheet arrived at by hand. Ask for larger type and it grows to six or
+eight rather than failing.
 
 Every column is flush at the top *and* the bottom, an item never splits across a
 column, and a section heading is never stranded at the foot of one.
@@ -101,9 +108,15 @@ comes without a source and a date.
 - **`justify.js`** — clamped water-filling distributes each column's slack across
   its interior gaps in proportion to their stretch weights, with a per-gap
   ceiling so a loose column spreads evenly instead of opening one canyon.
-- **`index.js`** — auto-fit binary-searches the largest type scale that still fits
-  the requested faces, seeded analytically (content height rises roughly with the
-  square of the scale, since column widths are fixed). When nothing fits, it
+- **`index.js`** — resolves the two free variables. With a fixed face count,
+  auto-fit binary-searches the largest type scale that still fits, seeded
+  analytically (content height rises roughly with the square of the scale, since
+  column widths are fixed). With faces on auto, the content height at the smallest
+  legible type gives a hard lower bound on the count — nothing fits in fewer,
+  however the type is set — so the search starts there rather than at two, and the
+  first count that works is the answer. That is usually one auto-fit, not several.
+  The plan reports the geometry it settled on, which is how the panel can say
+  "Auto · 4". When nothing fits, it
   searches for geometries that would -- more faces, then more columns, then
   shedding the least important sections -- **verifies each before offering it**, and
   attaches them to the warning as one-click fixes. It declines to offer what will
@@ -133,7 +146,11 @@ always produces the same sheet, and the committed packs never churn.
 Three separate HTML entry points rather than one SPA, so the gallery loads fast
 and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
 
-- **`index.html`** — gallery. Reader language auto-detected from
+- **`index.html`** — gallery. Cards keep a fixed header: the flags sit in a grid to
+  the right of the name, which is already two lines tall, and are capped at four
+  cells so a language spoken in eight countries does not get a taller card than one
+  spoken in two. The action buttons stay on one row for the same reason. Reader
+  language auto-detected from
   `navigator.languages`, with the picker's label cycling through "I speak" in each
   language we can gloss into so a visitor who reads none of the others still finds
   it. Each card carries a script-glyph badge and the flags of the countries the
@@ -162,8 +179,12 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
     them apart. Only genuinely list-shaped choices (paper, language, romanisation,
     destination country) remain menus.
   - **`ui/handles.js`** — drag bars on the focused face for margins and the column
-    gap. Dragging shows a guide and a readout but does not re-solve, since a solve
-    takes a few hundred milliseconds; geometry is committed on release.
+    gaps. Dragging shows a guide and a readout but does not re-solve, since a solve
+    takes a few hundred milliseconds; geometry is committed on release. There is one
+    bar per gutter rather than one at the first: every column is the same width, so
+    the only thing a gutter can change is the gutter, and widening it narrows every
+    column. The readout gives the resulting column width, because "gap 17pt" does
+    not make it obvious the text is being reflowed.
   - **`ui/add-term.js`** — adding one phrase should not require exporting a CSV and
     importing it back, so this writes the same `edits.extras` entry an import
     would. The two paths are the same path.

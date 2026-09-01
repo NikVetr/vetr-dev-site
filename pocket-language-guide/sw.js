@@ -10,7 +10,7 @@
 
 // Bump on any change to SHELL or to a shell file's contents. There is no build
 // step to do it automatically, so it is a manual step -- see summary.md.
-const VERSION = 'plg-v1';
+const VERSION = 'plg-v2';
 const SHELL_CACHE = `${VERSION}-shell`;
 const PACK_CACHE = `${VERSION}-packs`;
 

@@ -41,8 +41,8 @@ function card(lang, packs, reader, coverage) {
     el('span', { class: 'card-titles' }, [
       el('div', { class: 'card-name', text: lang.exonym_en }),
       el('div', { class: 'small muted', text: lang.endonym, lang: lang.bcp47 }),
-      ...(flags ? [flags] : []),
     ]),
+    ...(flags ? [flags] : []),
   ]);
 
   const thumb = hasPack && have

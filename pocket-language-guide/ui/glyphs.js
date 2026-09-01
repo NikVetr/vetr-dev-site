@@ -57,10 +57,19 @@ export function pageGlyph({ pageW, pageH, columns, box = 30 }) {
   return svg;
 }
 
-/** How many faces, as that many little pages. @param {number} count */
+/** How many faces, as that many little pages. 0 draws the auto case.
+ * @param {number} count */
 export function facesGlyph(count) {
   const box = 30;
   const svg = frame(box, box);
+  if (count <= 0) {
+    svg.append(svgEl('rect', { x: 2, y: 6, width: 11, height: 18, rx: 1, class: 'g-page' }));
+    svg.append(svgEl('rect', { x: 15, y: 6, width: 11, height: 18, rx: 1, class: 'g-page' }));
+    svg.append(svgEl('path', {
+      d: 'M22 13 h7 M25.5 9.5 v7', class: 'g-bracket',
+    }));
+    return svg;
+  }
   const shown = Math.min(count, 6);
   const cols = shown <= 2 ? shown : Math.ceil(shown / 2);
   const rows = shown <= 2 ? 1 : 2;

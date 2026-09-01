@@ -3,7 +3,7 @@
 // same http-server the `serve` script uses.
 import { defineConfig } from '@playwright/test';
 
-const PORT = 8099;
+const PORT = 8097;
 
 export default defineConfig({
   testDir: './tests',

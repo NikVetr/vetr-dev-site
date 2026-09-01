@@ -47,10 +47,22 @@ test.describe('studio', () => {
     await expect(page.locator('#counts')).toContainText('358 of 359');
   });
 
-  test('a geometry that cannot hold the content fails loudly, once', async ({ page }) => {
+  test('a small card just uses more faces instead of failing', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('#status')).toContainText('4 faces');
+    await page.getByRole('radio', { name: 'Credit-card size' }).click();
+    // Auto grows the face count rather than reporting an error.
+    await expect(page.locator('#status')).not.toContainText('4 faces');
+    await expect(page.locator('#warnings li.error')).toHaveCount(0);
+    await expect(page.locator('.face.focused')).toBeVisible();
+  });
+
+  test('a pinned face count that cannot hold the content fails loudly, once', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
     await page.getByRole('radio', { name: 'Credit-card size' }).click();
+    await page.getByRole('radiogroup', { name: 'Faces' })
+      .getByRole('radio', { name: '2', exact: true }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
     // One message in the reader's terms, not that plus the breaker's internals.
     await expect(page.locator('#warnings li.error')).toHaveCount(1);
@@ -61,27 +73,42 @@ test.describe('studio', () => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
     await page.getByRole('radio', { name: 'A6' }).click();
+    await page.getByRole('radiogroup', { name: 'Faces' })
+      .getByRole('radio', { name: '2', exact: true }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
 
     const fix = page.locator('button.fix').first();
-    await expect(fix).toContainText('faces instead of');
+    await expect(fix).toContainText('faces instead of 2');
     await fix.click();
 
     // The remedy was verified before being offered, so it has to clear the error.
     await expect(page.locator('#warnings li.error')).toHaveCount(0);
     await expect(page.locator('.face.focused')).toBeVisible();
-    // And the panel reflects the change it made, rather than still showing 4.
-    await expect(page.getByRole('radiogroup', { name: 'Faces' })
-      .getByRole('radio', { name: '6', exact: true })).toHaveAttribute('aria-checked', 'true');
   });
 
   test('balancing is refused, with a reason, while the sheet does not fit', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
     await page.getByRole('radio', { name: 'Credit-card size' }).click();
+    await page.getByRole('radiogroup', { name: 'Faces' })
+      .getByRole('radio', { name: '2', exact: true }).click();
     await expect(page.locator('#status')).toContainText('nothing to lay out');
     await page.locator('#balance').click();
     await expect(page.locator('#diff p')).toContainText('does not fit yet');
+  });
+
+  test('auto reports the face count it settled on', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('#status')).toContainText('4 faces');
+    const auto = page.getByRole('radiogroup', { name: 'Faces' })
+      .getByRole('radio', { name: /^Auto/ });
+    await expect(auto).toHaveAttribute('aria-checked', 'true');
+    await expect(auto).toContainText('4');
+
+    // Bigger type needs more of them, and auto says so.
+    await page.getByRole('radio', { name: 'X-large' }).click();
+    await expect(auto).not.toContainText('4');
+    await expect(page.locator('#warnings li.error')).toHaveCount(0);
   });
 
   test('balancing proposes reasoned additions and applying them adds items', async ({ page }) => {

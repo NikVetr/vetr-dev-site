@@ -126,7 +126,9 @@ label { display: block; }
   flex-direction: column;
   background: var(--paper);
 }
-.card-head { display: flex; align-items: baseline; gap: var(--space-2); padding: var(--space-2); }
+.card-head {
+  display: flex; align-items: flex-start; gap: var(--space-2); padding: var(--space-2);
+}
 .card-badge {
   font-size: 1.25rem; line-height: 1; min-width: 1.6em; text-align: center; color: var(--accent);
 }
@@ -139,7 +141,17 @@ label { display: block; }
   display: grid; place-items: center; color: var(--muted); font-size: var(--fs--1); text-align: center;
   padding: var(--space-2);
 }
-.card-actions { display: flex; gap: var(--space-1); padding: var(--space-2); flex-wrap: wrap; }
+/* One row, always: three buttons that wrap make the cards different heights. */
+.card-actions {
+  display: flex; gap: 4px; padding: var(--space-2); flex-wrap: nowrap;
+  align-items: stretch;
+}
+.card-actions > * { min-width: 0; }
+.card-actions .btn, .card-actions button {
+  padding: 0.35em 0.5em; font-size: var(--fs--1); white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; justify-content: center; flex: 1 1 auto;
+}
+.card-actions .tag { flex: 0 0 auto; align-self: center; white-space: nowrap; }
 .tag {
   font-size: var(--fs--1); border: 1px solid var(--line); border-radius: 999px;
   padding: 0.05em 0.6em; color: var(--muted);
@@ -293,14 +305,21 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
 
 /* --- flags and the multilingual picker label ------------------------------ */
 
-.card-titles { min-width: 0; }
-.flags { display: flex; gap: 0.2em; margin-top: 0.25em; line-height: 1; flex-wrap: wrap; }
-.flag { font-size: 0.95rem; }
-.flags.as-codes .flag {
-  font-size: var(--fs--1); font-weight: 600; color: var(--muted);
-  border: 1px solid var(--line); border-radius: 3px; padding: 0 0.25em; line-height: 1.35;
+.card-titles { min-width: 0; flex: 1 1 auto; }
+
+/* A grid on the right of the header rather than a row underneath it: the header is
+   already two lines tall for the name and endonym, so the flags cost nothing. */
+.flags {
+  display: grid; grid-template-columns: repeat(2, auto); gap: 1px 3px;
+  justify-content: end; align-content: start; margin-inline-start: auto;
+  flex: 0 0 auto; line-height: 1.05;
 }
-.flag.more { font-size: var(--fs--1); color: var(--muted); align-self: center; }
+.flag { font-size: 0.85rem; }
+.flags.as-codes .flag {
+  font-size: 0.66rem; font-weight: 600; color: var(--muted); text-align: center;
+  border: 1px solid var(--line); border-radius: 3px; padding: 0 0.2em; line-height: 1.3;
+}
+.flag.more { font-size: 0.66rem; color: var(--muted); align-self: center; text-align: center; }
 
 #reader-label {
   display: inline-block; min-width: 6.5ch; text-align: end;

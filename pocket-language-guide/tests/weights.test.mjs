@@ -17,7 +17,14 @@ async function sheetWithGaps(fraction) {
   const all = Object.keys(ctx.corpus.concepts).sort();
   /** @type {Record<string,boolean>} */ const items = {};
   all.forEach((id, i) => { if (i % fraction === 0) items[id] = false; });
-  const withGaps = { ...spec, scale: 1, selection: { sections: {}, items } };
+  // Pin the geometry and the type size so the gaps come from the missing items
+  // rather than from auto quietly choosing a different page count.
+  const withGaps = {
+    ...spec,
+    geometry: { ...spec.geometry, faces: 4 },
+    scale: 1,
+    selection: { sections: {}, items },
+  };
   const built = await buildSheet(ctx, withGaps);
   const box = contentBox(withGaps.geometry, withGaps.paper);
   return {
@@ -40,11 +47,15 @@ async function sheetWithGaps(fraction) {
 }
 
 test('a flush sheet gets no proposals', async () => {
-  const spec = { ...(await referenceSpec()), scale: 0 };
+  const spec = await referenceSpec();
   const built = await buildSheet(ctx, spec);
   const box = contentBox(spec.geometry, spec.paper);
   const diff = proposeBalance({
-    corpus: ctx.corpus, spec, theme: built.theme, measurer: ctx.measurer,
+    corpus: ctx.corpus,
+    // The resolved geometry, since the spec asked for auto faces.
+    spec: { ...spec, geometry: built.plan.geometry },
+    theme: built.theme,
+    measurer: ctx.measurer,
     targetRows: built.targetRows, sourceRows: built.sourceRows, respell: built.respell,
     blocks: built.blocks, plan: built.plan, colWidth: box.colWidth, colHeight: box.height,
   });

@@ -48,8 +48,10 @@ export function flagsSupported() {
 export function regionRow(regions, opts = {}) {
   const codes = regions.split(';').map((c) => c.trim()).filter(Boolean);
   if (!codes.length) return null;
-  const max = opts.max ?? 6;
-  const shown = codes.slice(0, max);
+  // A cap on cells, not on flags: the overflow chip occupies one, so the grid is
+  // never taller than the two lines of title it sits beside.
+  const max = opts.max ?? 4;
+  const shown = codes.length > max ? codes.slice(0, max - 1) : codes;
 
   const row = document.createElement('span');
   row.className = flagsSupported() ? 'flags' : 'flags as-codes';
@@ -69,7 +71,7 @@ export function regionRow(regions, opts = {}) {
     const more = document.createElement('span');
     more.className = 'flag more';
     more.textContent = `+${codes.length - shown.length}`;
-    more.title = codes.slice(max).join(', ');
+    more.title = codes.slice(shown.length).join(', ');
     row.append(more);
   }
   return row;

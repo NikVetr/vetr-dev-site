@@ -14,6 +14,12 @@ const SCALE_MIN = 0.5;
 const SCALE_MAX = 1.8;
 const AUTOFIT_STEPS = 7;
 
+// A sheet is printed double-sided, so faces come in pairs: one sheet is two faces,
+// and an odd count means running a sheet with a blank back. Auto therefore steps in
+// twos.
+const FACE_STEP = 2;
+const MAX_AUTO_FACES = 24;
+
 /** A column left this fraction of itself empty is reported as loose. */
 const LOOSE_FRACTION = 0.06;
 
@@ -107,7 +113,6 @@ function legibilityFloor(input) {
 export function layout(input) {
   const { blocks, theme, spec, corpus, measurer } = input;
   const box = contentBox(spec.geometry, spec.paper);
-  const bins = spec.geometry.faces * spec.geometry.columns;
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
   const targetScript = corpus.scripts[corpus.languages[spec.target].script];
@@ -117,20 +122,35 @@ export function layout(input) {
     blocks, theme, spec, corpus, measurer, colWidth: box.colWidth, scale, withPaint: false,
   });
 
-  let scale = spec.scale;
-  let noFit = false;
-  if (spec.scale <= 0) {
+  const autoFaces = spec.geometry.faces <= 0;
+  const resolved = autoFaces
+    ? solveFaces(measureOnly, box, spec, scaleFloor)
+    : { faces: spec.geometry.faces, scale: null };
+  const faces = resolved.faces;
+  const bins = faces * spec.geometry.columns;
+
+  let scale = resolved.scale ?? spec.scale;
+  let noFit = autoFaces && resolved.scale === null && spec.scale <= 0;
+  if (!autoFaces && spec.scale <= 0) {
     const fitted = autofit(measureOnly, box.height, bins, scaleFloor);
     scale = fitted ?? scaleFloor;
     noFit = fitted === null;
+  }
+  if (autoFaces && resolved.scale === null) {
+    scale = spec.scale > 0 ? spec.scale : scaleFloor;
+    noFit = true;
   }
   if (noFit) {
     warnings.push({
       code: 'no-fit',
       severity: 'error',
-      message: `The content will not fit ${spec.geometry.faces} `
-        + `${spec.geometry.faces === 1 ? 'face' : 'faces'} of ${spec.geometry.columns} `
-        + `${spec.geometry.columns === 1 ? 'column' : 'columns'} at a legible size.`,
+      message: autoFaces
+        ? `Even ${MAX_AUTO_FACES} faces of ${spec.geometry.columns} `
+          + `${spec.geometry.columns === 1 ? 'column' : 'columns'} will not hold this at a `
+          + 'legible size.'
+        : `The content will not fit ${faces} ${faces === 1 ? 'face' : 'faces'} of `
+          + `${spec.geometry.columns} `
+          + `${spec.geometry.columns === 1 ? 'column' : 'columns'} at a legible size.`,
       fixes: findFixes(input, box, scaleFloor),
     });
   }
@@ -203,8 +223,12 @@ export function layout(input) {
     });
   }
 
+  // Downstream -- the renderers, imposition, the balance solver -- works from the
+  // resolved count, so auto is invisible past this point.
+  const geometry = { ...spec.geometry, faces };
   const atoms = buildAtoms({
-    blocks, theme, spec, corpus, measurer, colWidth: box.colWidth, scale, withPaint: true,
+    blocks, theme, spec: { ...spec, geometry }, corpus, measurer,
+    colWidth: box.colWidth, scale, withPaint: true,
   });
   const broken = breakColumns(atoms, box.height, bins);
   if (broken.failure) {
@@ -224,13 +248,13 @@ export function layout(input) {
     }
     return {
       pageW: spec.geometry.pageW, pageH: spec.geometry.pageH,
-      faces: [], warnings, scale, looseness: [],
+      faces: [], warnings, scale, looseness: [], geometry: { ...spec.geometry, faces },
     };
   }
 
-  /** @type {import('../types.js').Face[]} */ const faces = [];
+  /** @type {import('../types.js').Face[]} */ const faceList = [];
   /** @type {number[]} */ const looseness = [];
-  for (let f = 0; f < spec.geometry.faces; f += 1) {
+  for (let f = 0; f < faces; f += 1) {
     /** @type {import('../types.js').Face} */
     const face = { rects: [], runs: [], icons: [], hits: [] };
     for (let c = 0; c < spec.geometry.columns; c += 1) {
@@ -249,7 +273,7 @@ export function layout(input) {
         for (const h of atom.paint.hits) face.hits.push({ ...h, x: h.x + x, y: h.y + dy });
       });
     }
-    faces.push(face);
+    faceList.push(face);
   }
 
   const loose = looseness.filter((r) => r > box.height * LOOSE_FRACTION).length;
@@ -263,8 +287,53 @@ export function layout(input) {
   }
 
   return {
-    pageW: spec.geometry.pageW, pageH: spec.geometry.pageH, faces, warnings, scale, looseness,
+    pageW: geometry.pageW,
+    pageH: geometry.pageH,
+    faces: faceList,
+    warnings,
+    scale,
+    looseness,
+    geometry,
   };
+}
+
+/**
+ * Fewest faces that hold the content legibly, and the type scale to use in them.
+ *
+ * Content height at the smallest legible type gives a hard lower bound on the face
+ * count -- nothing can fit in fewer, however the type is set -- so the search
+ * starts there instead of at two, and the first count that works is the answer.
+ * Usually that is one auto-fit rather than several.
+ *
+ * @param {(scale:number)=>import('./atoms.js').Atom[]} build
+ * @param {ReturnType<typeof contentBox>} box
+ * @param {import('../types.js').SheetSpec} spec
+ * @param {number} scaleFloor
+ * @returns {{faces:number, scale:number|null}}
+ */
+function solveFaces(build, box, spec, scaleFloor) {
+  const perFace = box.height * spec.geometry.columns;
+  if (perFace <= 0) return { faces: FACE_STEP, scale: null };
+
+  const smallest = build(scaleFloor);
+  const natural = smallest.reduce(
+    (sum, atom, i) => sum + atom.height + (i ? atom.gapBefore.natural : 0),
+    0,
+  );
+  const lowerBound = Math.max(FACE_STEP, Math.ceil(natural / perFace));
+  const start = Math.ceil(lowerBound / FACE_STEP) * FACE_STEP;
+
+  for (let n = start; n <= MAX_AUTO_FACES; n += FACE_STEP) {
+    const bins = n * spec.geometry.columns;
+    if (spec.scale > 0) {
+      const atoms = build(spec.scale);
+      if (!breakColumns(atoms, box.height, bins).failure) return { faces: n, scale: spec.scale };
+    } else {
+      const fitted = autofit(build, box.height, bins, scaleFloor);
+      if (fitted !== null) return { faces: n, scale: fitted };
+    }
+  }
+  return { faces: MAX_AUTO_FACES, scale: null };
 }
 
 /** How far to look when searching for a geometry that would fit. */
@@ -298,14 +367,20 @@ function findFixes(input, box, scaleFloor) {
     return !breakColumns(atoms, probeBox.height, bins).failure;
   };
 
-  for (let extra = 1; extra <= MAX_EXTRA_FACES; extra += 1) {
-    const faces = spec.geometry.faces + extra;
-    if (!fitsWith({ ...spec.geometry, faces })) continue;
-    fixes.push({
-      label: `Use ${faces} faces instead of ${spec.geometry.faces}`,
-      patch: { geometry: { ...spec.geometry, faces } },
-    });
-    break;
+  // Auto already searched the face counts, so suggesting more of them would be
+  // repeating a question that has been answered.
+  if (spec.geometry.faces > 0) {
+    for (let extra = 1; extra <= MAX_EXTRA_FACES; extra += 1) {
+      const faces = spec.geometry.faces + extra;
+      if (!fitsWith({ ...spec.geometry, faces })) continue;
+      fixes.push({
+        label: `Use ${faces} faces instead of ${spec.geometry.faces}`,
+        patch: { geometry: { ...spec.geometry, faces } },
+      });
+      break;
+    }
+  } else {
+    fixes.push({ label: 'Let the type size fit the page', patch: { scale: 0 } });
   }
 
   for (let extra = 1; extra <= MAX_EXTRA_COLUMNS; extra += 1) {
@@ -346,13 +421,12 @@ function findFixes(input, box, scaleFloor) {
     break;
   }
 
-  if (spec.scale > 0) {
-    fixes.unshift({
-      label: 'Fit the type to the page automatically',
-      patch: { scale: 0 },
-    });
+  if (spec.scale > 0 && spec.geometry.faces > 0) {
+    fixes.unshift({ label: 'Fit the type to the page automatically', patch: { scale: 0 } });
   }
-  return fixes;
+  // A fix offered twice is a fix that looks broken.
+  const seen = new Set();
+  return fixes.filter((fix) => !seen.has(fix.label) && seen.add(fix.label));
 }
 
 /**

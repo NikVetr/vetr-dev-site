@@ -171,7 +171,7 @@ async function main() {
       });
     }
     addTerm.sync();
-    format.sync(spec);
+    format.sync(spec, plan.geometry.faces);
     renderCanvas();
   }
 

@@ -44,11 +44,53 @@ test.describe('help me decide', () => {
 });
 
 test.describe('drag handles', () => {
+  test('a gutter bar narrows the columns and stays where it was dragged', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+
+    // One bar per gutter, so it reads as the gap rather than as an arbitrary line.
+    const gutters = page.locator('.face.focused .handle[aria-label="Column gap"]');
+    await expect(gutters).toHaveCount(3);
+    const positions = () => gutters.evaluateAll((ns) => ns.map((n) => n.style.left));
+
+    // How wide a row is drawn tells us whether the columns actually changed.
+    const columnWidth = () => page.evaluate(() => {
+      const rects = [...document.querySelectorAll('.face.focused svg rect')];
+      const row = rects.find((r) => {
+        const w = Number(r.getAttribute('width'));
+        return w > 60 && w < 200;
+      });
+      return row ? Number(row.getAttribute('width')) : null;
+    });
+
+    const before = /** @type {number} */ (await columnWidth());
+    expect(before).toBeGreaterThan(0);
+
+    const box = await gutters.first().boundingBox();
+    if (!box) throw new Error('no gutter to drag');
+    await page.mouse.move(box.x + box.width / 2, box.y + 200);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width / 2 + 22, box.y + 200, { steps: 8 });
+    // The readout names the consequence, not just the gap.
+    await expect(page.locator('.handle-readout')).toContainText('columns');
+    const during = await positions();
+    // The bar must not jump to the page edge, which is what it used to do.
+    for (const left of during) {
+      expect(Number.parseFloat(left)).toBeGreaterThan(5);
+    }
+    await page.mouse.up();
+
+    // Widening the gutter narrows every column, so the content reflows.
+    await expect.poll(columnWidth).toBeLessThan(before - 2);
+    await expect(page.locator('.face.focused')).toBeVisible();
+  });
+
   test('dragging the left margin changes the geometry and re-solves', async ({ page }) => {
     await page.goto(STUDIO);
     const face = page.locator('.face.focused');
     await expect(face).toBeVisible();
-    await expect(page.locator('.handle')).toHaveCount(5);
+    // Four margins plus one bar per gutter.
+    await expect(page.locator('.handle')).toHaveCount(7);
 
     const grip = page.locator('.handle[aria-label="Left margin"]');
     const box = await grip.boundingBox();

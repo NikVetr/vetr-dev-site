@@ -15,7 +15,8 @@ import {
 } from './glyphs.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
-const FACE_CHOICES = [1, 2, 4, 6, 8];
+// 0 is auto. Faces come in pairs because a double-sided sheet is two of them.
+const FACE_CHOICES = [0, 2, 4, 6, 8, 10];
 const SCALE_CHOICES = [
   { value: 0, caption: 'Fit' },
   { value: 0.9, caption: 'Small' },
@@ -140,12 +141,17 @@ export function createFormatPanel(input) {
     value: spec.geometry.faces,
     options: FACE_CHOICES.map((n) => ({
       value: n,
-      caption: String(n),
-      title: `${n} ${n === 1 ? 'face' : 'faces'}`,
+      caption: n === 0 ? 'Auto' : String(n),
+      title: n === 0
+        ? 'As many as the content needs, in pairs'
+        : `${n} ${n === 1 ? 'face' : 'faces'}`,
       glyph: facesGlyph(n),
     })),
     onChange: (n) => emit({ geometry: { ...spec.geometry, faces: n } }),
   });
+  const autoFacesCaption = /** @type {HTMLElement|null} */ (
+    faces.group.querySelector('.segment .segment-caption')
+  );
 
   // --- spacing, arrangement, colour ---------------------------------------
 
@@ -324,12 +330,21 @@ export function createFormatPanel(input) {
   );
 
   return {
-    /** @param {import('../core/types.js').SheetSpec} next */
-    sync(next) {
+    /**
+     * @param {import('../core/types.js').SheetSpec} next
+     * @param {number} [resolvedFaces] what auto settled on, for the caption
+     */
+    sync(next, resolvedFaces) {
       spec = next;
       size.select(presetOf());
       columns.select(next.geometry.columns);
       faces.select(next.geometry.faces);
+      // Auto is only useful if it says what it decided.
+      if (autoFacesCaption) {
+        autoFacesCaption.textContent = next.geometry.faces <= 0 && resolvedFaces
+          ? `Auto · ${resolvedFaces}`
+          : 'Auto';
+      }
       typeSize.select(next.scale);
       density.select(next.density);
       arrangement.select(next.arrangement);

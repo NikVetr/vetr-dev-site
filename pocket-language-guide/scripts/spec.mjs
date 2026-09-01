@@ -14,6 +14,7 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     // target language's first listed region.
     region: target === 'zh-Hans' ? 'CN' : '',
     fieldSet: ['script', 'roman', 'gloss', 'respell', 'numeral'],
+    // faces: 0 in the preset means auto, which is what the app defaults to.
     geometry: { ...presets.geometry['card-7x5-4col'] },
     paper: {
       presetId: 'et8550-5x7-photo-bordered',
@@ -27,7 +28,10 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     inkMode: 'full',
     density: 0.7,
     arrangement: 'two-column',
-    scale: 1,
+    // 0 means fit: with faces on auto too, that resolves to the fewest pairs of
+    // faces at the largest legible type -- the same answer the reference sheet
+    // arrived at by hand.
+    scale: 0,
     selection: { sections: {}, items: {} },
     ...overrides,
   };
