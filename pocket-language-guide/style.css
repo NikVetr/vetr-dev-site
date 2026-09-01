@@ -416,3 +416,36 @@ svg.glyph .g-sample { fill: var(--ink); text-anchor: middle; }
   font-size: var(--fs--1); font-weight: 600; color: var(--accent);
   background: rgb(255 255 255 / 75%); padding: 0 0.3em; border-radius: 3px;
 }
+
+/* --- the quick export page ------------------------------------------------ */
+
+.sheet-page { padding-block: var(--space-3) var(--space-4); }
+.sheet-head { margin-bottom: var(--space-3); }
+.sheet-head .lede { margin-bottom: var(--space-1); }
+/* Where the language is spoken, under its name rather than adrift at the far edge. */
+.sheet-where { margin: 0.15rem 0 var(--space-2); }
+.sheet-where .flags { justify-content: start; margin-inline-start: 0; grid-auto-flow: column; grid-template-columns: none; }
+.sheet-where .flag { font-size: 1.05rem; }
+.sheet-body {
+  display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: var(--space-4);
+  align-items: start;
+}
+.sheet-options { position: sticky; top: 4.2rem; }
+.export-block {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  border-top: 1px solid var(--line); padding-top: var(--space-3); margin-top: var(--space-3);
+}
+button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1); }
+.export-block .row > button { flex: 1; justify-content: center; }
+/* Two across, so a four-face sheet reads as the two sheets you will print. */
+.sheet-preview .face-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+@media (max-width: 860px) {
+  .sheet-body { grid-template-columns: 1fr; }
+  .sheet-options { position: static; }
+  .sheet-preview .face-grid { grid-template-columns: 1fr; }
+}
+
+/* A long printer name should wrap in its own menu rather than being cut off. */
+.field select { text-overflow: ellipsis; }
+.sheet-options .field select { font-size: var(--fs--1); }

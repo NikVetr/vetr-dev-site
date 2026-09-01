@@ -18,52 +18,31 @@
   </div>
 </header>
 
-<main class="container">
-  <h1 id="title">Pocket guide</h1>
-  <p class="lede" id="subtitle"></p>
+<main class="container sheet-page">
+  <div class="sheet-head">
+    <h1 id="title">Pocket guide</h1>
+    <div class="sheet-where"><span id="pair-flags"></span></div>
+    <p class="lede" id="subtitle"></p>
+  </div>
 
-  <div class="row" style="align-items: flex-start; gap: 1.8rem;">
-    <form id="options" style="flex: 0 0 260px;">
-      <div class="field">
-        <label for="geometry"><span>Card size and columns</span></label>
-        <select id="geometry"></select>
-      </div>
-      <div class="field">
-        <label for="paper"><span>Paper and printer</span></label>
-        <select id="paper"></select>
-      </div>
-      <div class="field">
-        <label for="ink"><span>Ink</span></label>
-        <select id="ink">
-          <option value="full">Full colour</option>
-          <option value="low-ink">Low ink — coloured rules, no shading</option>
-          <option value="mono">Black and white</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="preset"><span>What to include</span></label>
-        <select id="preset">
-          <option value="">Everything</option>
-          <option value="core">Essentials only</option>
-          <option value="transit">Getting around</option>
-          <option value="food">Eating and shopping</option>
-          <option value="lodging">Hotels and buildings</option>
-          <option value="outdoors">Hiking and outdoors</option>
-          <option value="health">Health and emergencies</option>
-        </select>
-      </div>
+  <div class="sheet-body">
+    <form id="options" class="sheet-options" aria-label="Options">
+      <div id="controls"></div>
 
-      <div class="row" style="margin-top: 1rem;">
-        <button type="button" class="primary" id="pdf">Export PDF</button>
-        <button type="button" id="png">PNG (600 dpi)</button>
-        <button type="button" id="svg">SVG</button>
+      <div class="export-block">
+        <button type="button" class="primary big" id="pdf">Export PDF</button>
+        <div class="row">
+          <button type="button" id="png">PNG</button>
+          <button type="button" id="svg">SVG</button>
+        </div>
+        <div id="dpi-control"></div>
+        <p class="status" id="status"></p>
+        <ul class="warnings" id="warnings"></ul>
       </div>
-      <p class="status" id="status"></p>
-      <ul class="warnings" id="warnings"></ul>
     </form>
 
-    <div style="flex: 1; min-width: 320px;">
-      <div class="face-grid" id="faces"></div>
+    <div class="sheet-preview">
+      <div class="face-grid" id="faces" aria-label="Sheet preview"></div>
     </div>
   </div>
 </main>

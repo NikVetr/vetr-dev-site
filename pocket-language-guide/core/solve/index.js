@@ -22,6 +22,12 @@ const AUTOFIT_STEPS = 7;
 const FACE_STEP = 2;
 const MAX_AUTO_FACES = 24;
 
+// Below this the type is close enough to its floor to read as squeezed, so auto
+// spends another pair of faces instead. Set under the Japanese reference sheet's
+// own 0.478, which is a legitimate, deliberately tight layout that should not be
+// second-guessed.
+const COMFORT = 0.45;
+
 /** A column left this fraction of itself empty is reported as loose. */
 const LOOSE_FRACTION = 0.06;
 
@@ -259,6 +265,16 @@ export function layout(input) {
     faceList.push(face);
   }
 
+  if (autoFaces && !noFit && scale < COMFORT - 1e-6 && faces >= MAX_AUTO_FACES) {
+    warnings.push({
+      code: 'card-too-small',
+      severity: 'warn',
+      message: `Even ${faces} faces of this card leave the type near its smallest `
+        + 'readable size. A larger card, or fewer sections, would read better.',
+      fixes: findFixes(input, box, scaleFloor),
+    });
+  }
+
   const loose = looseness.filter((r) => r > box.height * LOOSE_FRACTION).length;
   if (loose) {
     warnings.push({
@@ -393,6 +409,8 @@ function solveFaces(build, box, spec, scaleFloor) {
   const fitsAt = (faces, scale) => !breakColumns(
     build(scale), box.height, faces * columns,
   ).failure;
+  /** @param {number} faces */
+  const fittedAt = (faces) => autofit(build, box.height, faces * columns, scaleFloor);
 
   const anchor = Math.max(FACE_STEP, spec.geometry.faces || FACE_STEP);
   let faces = anchor;
@@ -401,15 +419,21 @@ function solveFaces(build, box, spec, scaleFloor) {
   while (faces - FACE_STEP >= FACE_STEP && fitsAt(faces - FACE_STEP, 1)) {
     faces -= FACE_STEP;
   }
-  // Take paper only when there is no alternative.
-  const wanted = spec.scale > 0 ? spec.scale : scaleFloor;
-  while (faces <= MAX_AUTO_FACES && !fitsAt(faces, wanted)) {
-    faces += FACE_STEP;
-  }
-  if (faces > MAX_AUTO_FACES) return { faces: MAX_AUTO_FACES, scale: null };
 
-  if (spec.scale > 0) return { faces, scale: spec.scale };
-  return { faces, scale: autofit(build, box.height, faces * columns, scaleFloor) };
+  if (spec.scale > 0) {
+    // An explicit type size is the reader's decision; only add paper if it is
+    // needed to honour it.
+    while (faces < MAX_AUTO_FACES && !fitsAt(faces, spec.scale)) faces += FACE_STEP;
+    return { faces, scale: fitsAt(faces, spec.scale) ? spec.scale : null };
+  }
+
+  // Otherwise take another pair while the type would still be squeezed.
+  let fitted = fittedAt(faces);
+  while (faces < MAX_AUTO_FACES && (fitted === null || fitted < COMFORT)) {
+    faces += FACE_STEP;
+    fitted = fittedAt(faces);
+  }
+  return { faces, scale: fitted };
 }
 
 /**

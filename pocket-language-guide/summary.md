@@ -15,10 +15,19 @@ and you have double-sided 3½×5in cards.
 
 **How many faces is mostly a consequence, not a setting.** `spec.autoFaces` lets the
 solver move the count, in pairs, because a double-sided sheet is two faces. It is
-anchored on the card's natural count rather than minimised: it gives up a pair only
-if the content still fits at full size, so losing paper never costs type size, and
-takes a pair only when the content will not fit at all. Every shipped pair settles
-on four faces — the answer both reference sheets reached by hand.
+anchored on the card's natural count rather than minimised — with each field able to
+shrink toward its own floor, "fewest faces" is always achievable by making
+everything tiny, which nobody wants. So it moves off the anchor only for a reason:
+
+- it gives up a pair only if the content still fits at full size, so losing paper
+  never costs type size;
+- it takes a pair while the type would otherwise sit near its floor.
+
+The comfort threshold is set below the Japanese reference sheet's own 0.478, which
+is a deliberately tight layout that should not be second-guessed. On 7×5in every
+shipped pair settles on four faces — the answer both reference sheets reached by
+hand. A6 takes six, and a credit-card sheet takes sixteen rather than printing at
+minimum size.
 
 Every column is flush at the top *and* the bottom, an item never splits across a
 column, and a section heading is never stranded at the foot of one.
