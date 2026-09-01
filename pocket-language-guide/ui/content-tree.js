@@ -62,6 +62,8 @@ function el(tag, attrs = {}, kids = []) {
  * @property {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>})=>void} onToggle
  * @property {(conceptId:string|null)=>void} onHover
  * @property {any} icons                     data/icons.json
+ * @property {Record<string,string>} [sectionTitles] headings in the source
+ *   language, so the tree and the sheet call a section the same thing
  * @property {import('../core/pack.js').SheetEdits} edits
  */
 
@@ -79,6 +81,7 @@ export function createTree(input) {
   /** @type {Node[]} */ const nodes = [];
 
   for (const section of corpus.sections) {
+    const title = input.sectionTitles?.[section.section_id] || section.title_en;
     const own = (corpus.conceptsByGroup[section.group] ?? [])
       .filter((c) => c.section_id === section.section_id)
       .filter((c) => input.targetRows[c.concept_id] && input.sourceRows[c.concept_id])
@@ -94,7 +97,7 @@ export function createTree(input) {
     // Named with aria-label rather than a <label>: a label around the title would
     // make clicking the title toggle the checkbox instead of opening the section.
     const sectionBox = /** @type {HTMLInputElement} */ (el('input', {
-      type: 'checkbox', 'aria-label': t('tree.include', { section: section.title_en }),
+      type: 'checkbox', 'aria-label': t('tree.include', { section: title }),
     }));
     sectionBox.addEventListener('change', () => {
       input.onToggle({ sections: { [section.section_id]: sectionBox.checked } });
@@ -105,7 +108,7 @@ export function createTree(input) {
     const summary = el('summary', {}, [
       sectionBox,
       icon ?? el('span', { class: 'dot', style: `background:${color}` }),
-      el('span', { text: section.title_en }),
+      el('span', { text: title }),
       count,
     ]);
 

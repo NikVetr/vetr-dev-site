@@ -42,6 +42,8 @@ function makeId(sectionId, gloss, taken) {
  * @property {()=>import('../core/types.js').SheetSpec} spec
  * @property {()=>import('../core/pack.js').SheetEdits} edits
  * @property {(entry:import('../core/pack.js').SheetEdits['extras'][number])=>void} onAdd
+ * @property {Record<string,string>} [sectionTitles] section names in the source
+ *   language, so the picker matches the sheet and the content tree
  */
 
 /** @param {AddTermInput} input */
@@ -51,7 +53,7 @@ export function createAddTerm(input) {
 
   const section = /** @type {HTMLSelectElement} */ (el('select', { id: 'add-section' }));
   for (const s of input.corpus.sections) {
-    section.append(new Option(s.title_en, s.section_id));
+    section.append(new Option(input.sectionTitles?.[s.section_id] || s.title_en, s.section_id));
   }
 
   const spec = input.spec();

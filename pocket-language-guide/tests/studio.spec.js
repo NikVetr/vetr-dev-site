@@ -207,3 +207,25 @@ test('the gloss menu offers only languages with rows on file', async ({ page }) 
   expect(offered).not.toContain('th');
   expect(offered).not.toContain('zh-Hans');   // it is the target
 });
+
+test('the tree, the sheet and the term picker all call a section the same thing', async ({ page }) => {
+  // Section headings follow the source language, and three separate places render
+  // them. The tree and the picker kept using `title_en` after the sheet stopped, so
+  // a German reader saw "Sozial + Basics" typeset beside "Social + basics" listed.
+  await page.goto('/customize.html?target=ja&source=de');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+
+  const inTree = await page.locator('.tree summary span:not(.count)').first().textContent();
+  expect(inTree).toBe('Sozial + Basics');
+
+  await page.locator('details.add-term summary').click();
+  const inPicker = await page.locator('#add-section option').first().textContent();
+  expect(inPicker).toBe(inTree);
+
+  // And the sheet itself is typeset from the same string.
+  const onSheet = await page.locator('.face svg text').evaluateAll(
+    (nodes) => nodes.map((n) => n.textContent).filter(Boolean),
+  );
+  expect(onSheet).toContain('Sozial');
+});
+

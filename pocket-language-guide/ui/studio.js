@@ -162,6 +162,7 @@ async function main() {
       updateTree = createTree({
         root: $('tree'),
         corpus: ctx.corpus,
+        sectionTitles: built.sectionTitles,
         targetRows,
         sourceRows,
         spec,
@@ -188,6 +189,7 @@ async function main() {
       addTerm = createAddTerm({
         root: $('add-term'),
         corpus: ctx.corpus,
+        sectionTitles: built.sectionTitles,
         spec: () => spec,
         edits: () => edits,
         onAdd: (entry) => {

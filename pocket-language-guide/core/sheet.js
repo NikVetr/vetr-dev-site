@@ -108,6 +108,7 @@ export async function buildSheet(ctx, spec, edits) {
   return {
     blocks,
     theme,
+    sectionTitles,
     targetRows,
     sourceRows,
     respell,
