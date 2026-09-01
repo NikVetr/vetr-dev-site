@@ -2168,9 +2168,11 @@
         const y0 = margin.top + yScale(cumulative + item.weight);
         const y1 = margin.top + yScale(cumulative);
         const category = chartCategory(item.row);
+        const fill = colors.get(category);
         const rect = svgElement("rect", {
           x: x0, y: y0, width: Math.max(1, x1 - x0), height: Math.max(2, y1 - y0),
-          fill: colors.get(category), class: `bar-block${state.focusedId === item.row.id ? " is-focused" : ""}`,
+          fill, style: `--bar-hover-fill:${mixHex(fill, "#000000", 0.17)}`,
+          class: `bar-block${state.focusedId === item.row.id ? " is-focused" : ""}`,
           tabindex: "0", role: "button", "aria-label": `${item.row.organization}, ${item.row.title || "reported role"}, ${descriptor.fullFormat(item.value)}`,
         });
         rect.addEventListener("pointerenter", (event) => {

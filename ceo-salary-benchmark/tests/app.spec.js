@@ -338,7 +338,12 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     return children.indexOf(svg.querySelector(".density-line")) > lastBar;
   });
   expect(densityIsOverlay).toBe(true);
-  await page.locator(".bar-block").first().hover();
+  const firstHistogramBlock = page.locator(".bar-block").first();
+  const restingHistogramFill = await firstHistogramBlock.evaluate((element) => getComputedStyle(element).fill);
+  await firstHistogramBlock.hover();
+  await expect(firstHistogramBlock).toHaveCSS("filter", "none");
+  await expect.poll(() => firstHistogramBlock.evaluate((element) => getComputedStyle(element).fill)).not.toBe(restingHistogramFill);
+  await page.locator(".chart-panel").screenshot({ path: "tmp/app-histogram-hover-vector.png" });
   await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(1);
   await expect(page.locator("#chart-tooltip")).toBeVisible();
   await expect(page.locator("#chart-tooltip .chart-tooltip-value strong")).toContainText("$");
@@ -970,6 +975,7 @@ test("table headers stack compact sort and filter controls at desktop and constr
       const sortButton = header.querySelector("button[data-sort]");
       const sort = sortButton.getBoundingClientRect();
       const sortIcon = getComputedStyle(sortButton, "::after");
+      const filterIcon = getComputedStyle(header.querySelector(".header-filter-menu summary"), "::before");
       const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
       const sortIconTop = controls.top + Number.parseFloat(sortIcon.top);
       const sortIconRight = controls.right - Number.parseFloat(sortIcon.right);
@@ -982,6 +988,8 @@ test("table headers stack compact sort and filter controls at desktop and constr
           && filter.left >= controls.left && filter.right <= controls.right,
         sortTargetHeight: sort.height,
         controlHeight: controls.height,
+        sortGlyphShift: new DOMMatrixReadOnly(sortIcon.transform).m42,
+        filterGlyphShift: new DOMMatrixReadOnly(filterIcon.transform).m42,
       };
     }));
     expect(placements.length).toBeGreaterThan(0);
@@ -991,12 +999,16 @@ test("table headers stack compact sort and filter controls at desktop and constr
       && placement.verticalGap >= 1.5 && placement.verticalGap <= 2.5
       && placement.rightOffset <= 0.5 && placement.contained
       && placement.sortTargetHeight >= 48 && placement.controlHeight >= 48
+      && Math.abs(placement.sortGlyphShift - 3) <= 0.1
+      && Math.abs(placement.filterGlyphShift + 3) <= 0.1
     )), JSON.stringify(placements)).toBe(true);
 
     const titleSort = page.locator('thead button[data-sort="title"]');
     await titleSort.focus();
     await page.keyboard.press("Enter");
     await expect(titleSort.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
+    expect(await titleSort.evaluate((element) => getComputedStyle(element, "::after").borderTopWidth)).toBe("0px");
+    expect(await titleSort.evaluate((element) => getComputedStyle(element, "::after").backgroundColor)).toBe("rgba(0, 0, 0, 0)");
 
     const titleFilter = page.locator('[data-filter-menu="title"] summary');
     await titleFilter.focus();
@@ -1007,6 +1019,8 @@ test("table headers stack compact sort and filter controls at desktop and constr
     await firstOption.focus();
     await page.keyboard.press("Space");
     await expect(titleFilter).toHaveAttribute("data-active", "true");
+    await expect(titleFilter).toHaveCSS("border-top-width", "0px");
+    await expect(titleFilter).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
     await page.keyboard.press("Escape");
     await expect(titleFilter.locator("xpath=..")).not.toHaveAttribute("open", "");
     await expect(titleFilter).toBeFocused();
