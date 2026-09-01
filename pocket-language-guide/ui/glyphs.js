@@ -187,22 +187,30 @@ export function itemGlyph(shape) {
   svg.append(svgEl('rect', { x: 1, y: 4, width: 1.6, height: box - 8, class: 'g-accent' }));
 
   const padX = 3.4;
-  const padY = 6.5;
+  // Rows share the full inner height rather than a fixed cell height, so the
+  // one-per-line shape -- four or five rows where the others have one or two --
+  // does not end up as a stack of hairlines too close together to read as separate
+  // lines. Bars thin as the count grows, but the gaps between them stay visible.
+  const inner = box - 11;
+  const cellH = inner / shape.rows;
+  const barH = Math.max(1.4, Math.min(2.8, cellH * 0.55));
+  const padY = 5.5;
   const cellW = (box - 2 - padX * 2) / shape.cols;
-  const cellH = (box - 8 - (padY - 4) * 2) / shape.rows;
   for (const cell of shape.cells) {
+    const thin = cell.minor ? 0.7 : 1;
     const w = cellW * (cell.minor ? 0.62 : 0.86);
     const x = cell.align === 'end'
       ? padX + (cell.col + 1) * cellW - w
       : cell.align === 'center'
         ? padX + cell.col * cellW + (cellW - w) / 2
         : padX + cell.col * cellW;
+    const h = Math.max(1.2, barH * thin);
     svg.append(svgEl('rect', {
       x,
-      y: padY + cell.row * cellH + (cellH - (cell.minor ? 1.8 : 2.6)) / 2,
+      y: padY + cell.row * cellH + (cellH - h) / 2,
       width: Math.max(2, w),
-      height: cell.minor ? 1.8 : 2.6,
-      rx: 0.8,
+      height: h,
+      rx: Math.min(0.8, h / 2),
       class: cell.minor ? 'g-ink faint' : 'g-ink',
     }));
   }
@@ -363,6 +371,130 @@ export function segmented({ label, options, value, onChange }) {
   select(value);
 
   return { group, select };
+}
+
+/** A slider, for the Custom segment: the control it opens, drawn small. */
+export function customGlyph() {
+  const box = 30;
+  const svg = frame(box, box);
+  svg.append(svgEl('path', { d: 'M4 11 h22', class: 'g-bracket' }));
+  svg.append(svgEl('path', { d: 'M4 20 h22', class: 'g-bracket' }));
+  svg.append(svgEl('rect', { x: 9, y: 7.5, width: 3.4, height: 7, rx: 1.2, class: 'g-ink' }));
+  svg.append(svgEl('rect', { x: 18, y: 16.5, width: 3.4, height: 7, rx: 1.2, class: 'g-ink' }));
+  return svg;
+}
+
+/**
+ * A segmented control with a Custom option that opens a numeric entry.
+ *
+ * The presets cover what most people want, but they are a ladder somebody else
+ * chose: four columns and six faces are opinions, not limits. Custom reveals a
+ * slider paired with a number box -- the slider to feel the range, the box to type
+ * or step an exact value -- and the two stay in step with each other.
+ *
+ * Choosing a value that happens to match a preset selects that preset instead, so
+ * the control never shows Custom for something the ladder already names.
+ *
+ * @param {Object} config
+ * @param {string} config.label
+ * @param {{value:number, caption:string, glyph:SVGElement, title?:string}[]} config.options
+ * @param {number} config.value
+ * @param {(value:number)=>void} config.onChange
+ * @param {string} config.customCaption
+ * @param {SVGElement} config.customGlyph
+ * @param {number} config.min
+ * @param {number} config.max
+ * @param {number} config.step
+ * @param {string} [config.unit]        shown after the number box
+ * @param {(value:number)=>number} [config.snap] round a typed value to a legal one
+ */
+export function numericChoice(config) {
+  const {
+    label, options, value, onChange, customCaption, customGlyph,
+    min, max, step, unit, snap = (/** @type {number} */ v) => v,
+  } = config;
+
+  const isPreset = (/** @type {number} */ v) => options.some((o) => o.value === v);
+  const CUSTOM = Symbol('custom');
+
+  const panel = document.createElement('div');
+  panel.className = 'numeric-custom';
+  panel.hidden = isPreset(value);
+
+  const range = document.createElement('input');
+  range.type = 'range';
+  range.min = String(min);
+  range.max = String(max);
+  range.step = String(step);
+  range.setAttribute('aria-label', label);
+
+  const box = document.createElement('input');
+  box.type = 'number';
+  box.min = String(min);
+  box.max = String(max);
+  box.step = String(step);
+  box.className = 'numeric-box';
+  box.setAttribute('aria-label', label);
+
+  panel.append(range, box);
+  if (unit) {
+    const suffix = document.createElement('span');
+    suffix.className = 'numeric-unit';
+    suffix.textContent = unit;
+    panel.append(suffix);
+  }
+
+  /** @type {{ group: HTMLElement, select: (v: number|symbol) => void }} */
+  let control;
+
+  /** @param {number} next @param {boolean} fromBox */
+  function commit(next, fromBox) {
+    const clamped = Math.min(max, Math.max(min, snap(next)));
+    range.value = String(clamped);
+    if (!fromBox) box.value = String(clamped);
+    // A custom value that lands on a preset should light that preset up.
+    control.select(isPreset(clamped) ? clamped : CUSTOM);
+    panel.hidden = isPreset(clamped);
+    onChange(clamped);
+  }
+
+  range.addEventListener('input', () => commit(Number(range.value), false));
+  box.addEventListener('change', () => commit(Number(box.value), false));
+
+  control = segmented({
+    label,
+    value: isPreset(value) ? value : CUSTOM,
+    options: [
+      ...options,
+      { value: CUSTOM, caption: customCaption, glyph: customGlyph, title: customCaption },
+    ],
+    onChange: (chosen) => {
+      if (chosen !== CUSTOM) {
+        panel.hidden = true;
+        onChange(/** @type {number} */ (chosen));
+        return;
+      }
+      // Opening Custom must not change the sheet: it starts from where you are.
+      panel.hidden = false;
+      box.focus();
+    },
+  });
+
+  range.value = String(Math.min(max, Math.max(min, value)));
+  box.value = String(value);
+
+  const wrap = document.createElement('div');
+  wrap.append(control.group, panel);
+  return {
+    group: wrap,
+    /** @param {number} next */
+    select(next) {
+      control.select(isPreset(next) ? next : CUSTOM);
+      panel.hidden = isPreset(next);
+      range.value = String(Math.min(max, Math.max(min, next)));
+      box.value = String(next);
+    },
+  };
 }
 
 /** A labelled block wrapping any control. @param {string} title @param {Node[]} kids */

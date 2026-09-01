@@ -12,6 +12,7 @@ import { ARRANGEMENTS, arrangementShape } from '../core/solve/arrange.js';
 import { flagEmoji, flagsSupported } from './flags.js';
 import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph, paletteGlyph, itemGlyph, cutGlyph,
+  customGlyph, numericChoice,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
@@ -135,9 +136,15 @@ export function createFormatPanel(input) {
 
   // --- columns and faces --------------------------------------------------
 
-  const columns = segmented({
+  const columns = numericChoice({
     label: t('format.columnsPerFace'),
     value: spec.geometry.columns,
+    min: 1,
+    max: 12,
+    step: 1,
+    snap: Math.round,
+    customCaption: t('format.custom'),
+    customGlyph: customGlyph(),
     options: COLUMN_CHOICES.map((n) => ({
       value: n,
       caption: String(n),
@@ -147,9 +154,16 @@ export function createFormatPanel(input) {
     onChange: (n) => emit({ geometry: { ...spec.geometry, columns: n } }),
   });
 
-  const faces = segmented({
+  const faces = numericChoice({
     label: t('format.faces'),
     value: spec.autoFaces ? 0 : spec.geometry.faces,
+    min: 2,
+    max: 24,
+    step: 2,
+    // A sheet is printed on both sides, so an odd face count is not a thing.
+    snap: (v) => Math.max(2, Math.round(v / 2) * 2),
+    customCaption: t('format.custom'),
+    customGlyph: customGlyph(),
     options: FACE_CHOICES.map((n) => ({
       value: n,
       caption: n === 0 ? t('format.faces.auto') : String(n),
@@ -170,9 +184,14 @@ export function createFormatPanel(input) {
 
   // --- spacing, arrangement, colour ---------------------------------------
 
-  const typeSize = segmented({
+  const typeSize = numericChoice({
     label: t('format.typeSize'),
     value: spec.scale,
+    min: 0.4,
+    max: 1.8,
+    step: 0.05,
+    customCaption: t('format.custom'),
+    customGlyph: customGlyph(),
     options: SCALE_CHOICES.map((choice) => ({
       value: choice.value,
       caption: t(choice.captionKey),
@@ -194,9 +213,15 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ typeface: value }),
   });
 
-  const padding = segmented({
+  const padding = numericChoice({
     label: t('format.breathingRoom'),
     value: spec.padding,
+    min: 0,
+    max: 4,
+    step: 0.1,
+    unit: 'pt',
+    customCaption: t('format.custom'),
+    customGlyph: customGlyph(),
     options: PADDING_CHOICES.map((choice, i) => ({
       value: choice.value,
       caption: t(choice.captionKey),
@@ -242,9 +267,16 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ inkMode: value }),
   });
 
-  const dpi = segmented({
+  const dpi = numericChoice({
     label: t('format.pngResolution'),
     value: 600,
+    min: 72,
+    max: 1200,
+    step: 6,
+    unit: 'dpi',
+    snap: Math.round,
+    customCaption: t('format.custom'),
+    customGlyph: customGlyph(),
     options: DPI_CHOICES.map((choice) => ({
       value: choice.value,
       caption: t(choice.captionKey),

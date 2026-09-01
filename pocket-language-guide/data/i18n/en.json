@@ -35,6 +35,7 @@
   "format.columnsPerFace": "Columns per face",
   "format.columnsShown": "Columns shown",
   "format.columnsTitle": "{count} column(s)",
+  "format.custom": "Custom",
   "format.cut.longEdge": "Long edge",
   "format.cut.shortEdge": "Short edge",
   "format.cut.whole": "Whole",
