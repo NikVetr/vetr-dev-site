@@ -573,10 +573,14 @@ Named so nobody has to rediscover the gap:
   Spanish and German prefer genderless constructions where one exists and `/a`
   where it does not. Encoding both would double the corpus for a card that has no
   room for it.
-- **Emergency numbers for most countries.** 14 of 49 regions are marked reviewed;
-  the rest carry plausible numbers at `confidence: 1` so a reviewer has something
-  to check rather than research from scratch, and are withheld from sheets until
-  someone raises them.
+- **Emergency numbers for two countries.** 47 of 49 regions are verified against a
+  named source and print; the citations are in `data/registry/regions-sources.md`.
+  The two left are honest holdouts rather than unfinished work. The Government of
+  Canada states plainly that DR Congo has no centralised emergency number, so that
+  cell is empty. For Iraq the UK FCDO publishes 911, 122 and 115 while Canada says
+  there is no centralised number; two foreign ministries cannot both be right, and
+  a number that does not answer is worse than a blank, so it stays withheld with
+  the FCDO values recorded for a future reviewer.
 - **IPA.** The reference sheet carried no IPA, so the `ipa` column is empty
   throughout. The respelling transducer (`data/respell/<src>/rules.yaml`) that
   would consume it is therefore also unwritten; `zh-Hans → en-US` respellings ship
@@ -584,8 +588,6 @@ Named so nobody has to rediscover the gap:
 - **Dictionary line breaking** for Thai and Khmer. `scripts.csv` marks them
   `word_break: dict`; the measurer falls back to breaking anywhere and the solver
   raises a warning, rather than pretending.
-- **UI translation.** `ui/` strings are English. A free global resource needs its
-  own chrome translated and RTL-mirrored.
 - **Per-row split overrides.** The drag handles cover margins and the column gap;
   dragging an individual row's internal divider would need per-row overrides
   threaded through `atoms.js`.
