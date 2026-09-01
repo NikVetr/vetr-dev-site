@@ -31,6 +31,7 @@ SOURCES = {
     "NotoSerifSC-var.ttf": f"{GFONTS}/notoserifsc/NotoSerifSC%5Bwght%5D.ttf",
     "NotoSansSC-var.ttf": f"{GFONTS}/notosanssc/NotoSansSC%5Bwght%5D.ttf",
     "NotoSansJP-var.ttf": f"{GFONTS}/notosansjp/NotoSansJP%5Bwght%5D.ttf",
+    "NotoSerifJP-var.ttf": f"{GFONTS}/notoserifjp/NotoSerifJP%5Bwght%5D.ttf",
 }
 
 DEST = Path(__file__).resolve().parent.parent / "tmp" / "fonts-src"

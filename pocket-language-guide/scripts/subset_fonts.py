@@ -36,6 +36,9 @@ ARABIC_RANGES = [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
 # `latin-cond` is the equivalent of the reference sheet's \tablelatin: dense
 # reference tables need a narrower Latin face or their four columns cannot hold a
 # gloss and a respelling on one line.
+# Seconds from 1904-01-01 (the OpenType epoch) to 2026-01-01.
+PINNED_DATE = 3850070400
+
 CONDENSED_WDTH = 87.5
 NORMAL_WDTH = 100
 
@@ -66,13 +69,15 @@ FACES = {
     ("latin-cond-serif", 700, True): "NotoSerif-Italic-var.ttf",
     ("cjk-sc-serif", 400, False): "NotoSerifSC-var.ttf",
     ("cjk-sc-serif", 700, False): "NotoSerifSC-var.ttf",
+    ("cjk-jp-serif", 400, False): "NotoSerifJP-var.ttf",
+    ("cjk-jp-serif", 700, False): "NotoSerifJP-var.ttf",
 }
 
 # Which language directories feed each stack's corpus-character union.
 STACK_LANGS = {"latin": ["en", "es"], "latin-cond": ["en", "es"],
                "latin-serif": ["en", "es"], "latin-cond-serif": ["en", "es"],
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
-               "cjk-jp": ["ja"], "arabic": ["ar"]}
+               "cjk-jp": ["ja"], "cjk-jp-serif": ["ja"], "arabic": ["ar"]}
 
 
 def expand(ranges):
@@ -112,7 +117,7 @@ def coverage(stack):
     if stack in ("cjk-sc", "cjk-sc-serif"):
         # GB2312 level 1: the ~3.7k characters of everyday written Chinese.
         chars |= expand(CJK_PUNCT) | legacy_charset("gb2312", range(0xB0, 0xD8), range(0xA1, 0xFF))
-    elif stack == "cjk-jp":
+    elif stack in ("cjk-jp", "cjk-jp-serif"):
         chars |= expand(CJK_PUNCT) | expand(KANA)
         chars |= legacy_charset("euc_jp", range(0xB0, 0xD0), range(0xA1, 0xFF))
     elif stack == "arabic":
@@ -146,6 +151,17 @@ def build_face(stack, weight, italic, source, chars):
     subsetter = subset.Subsetter(options=options)
     subsetter.populate(unicodes=chars & set(font.getBestCmap()))
     subsetter.subset(font)
+
+    # Pin the head table's timestamps. fontTools stamps the current time on save,
+    # which made every one of the ~50 committed faces show as modified on every
+    # run -- about 7MB of churn for no change at all -- and broke the invariant
+    # that identical input produces identical output. 2026-01-01, matching the
+    # pinned date in prerender_packs.mjs; the epoch here is 1904-01-01.
+    # recalcTimestamp has to go too, or save() overwrites what we just set.
+    # `created` is left as upstream set it -- it is already stable, and it is the
+    # only provenance the file itself carries.
+    font.recalcTimestamp = False
+    font["head"].modified = PINNED_DATE
 
     stem = f"{stack}-{weight}{'i' if italic else ''}"
     OUT.mkdir(parents=True, exist_ok=True)

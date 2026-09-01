@@ -1,7 +1,7 @@
 section_id,group,color_role,default_level,icon,title_en,rank,scope,audience_tags,importance
 social-basics,social,comm,1,messages-square,Social + basics,10,universal,core;social,1.00
 communication,social,comm,1,languages,Communication,20,universal,core;social,0.98
-quick-responses,social,comm,2,,Quick responses,30,universal,core;social,0.90
+quick-responses,social,comm,2,check-check,Quick responses,30,universal,core;social,0.90
 phone-translation,social,comm,1,smartphone,Phone translation,40,universal,core;social,0.80
 phone-text-power,social,comm,1,smartphone,"Phone, text + power",50,universal,core;social,0.72
 introductions,intro,stay,1,circle-user,Introductions,60,universal,social;family,0.70
@@ -16,12 +16,12 @@ numbers-money,numbers,money,1,arrow-down-0-1,Numbers + money,140,universal,core;
 dietary-needs,food,money,3,leaf,Dietary needs,150,universal,food;health,0.80
 utility-templates,utility,comm,1,clipboard-list,Utility templates,160,universal,core,0.86
 shopping,shop,money,1,shopping-bag,Shopping,170,universal,shopping,0.74
-color-size-returns,shop,money,2,,"Color, size + returns",180,universal,shopping,0.55
+color-size-returns,shop,money,2,ruler,"Color, size + returns",180,universal,shopping,0.55
 tax-refund,shop,money,3,receipt,Tax refund,190,universal,shopping;business,0.40
 food-ordering,food,money,1,utensils,Food + ordering,200,universal,food,0.90
 attractions-tickets,places,stay,1,ticket,Attractions + tickets,210,universal,outdoors;family,0.70
 directions,travel,move,1,signpost,Directions,220,universal,core;transit,0.94
-quick-directions,travel,move,2,,Quick directions,230,universal,core;transit,0.88
+quick-directions,travel,move,2,navigation,Quick directions,230,universal,core;transit,0.88
 taxi,travel,move,1,car-taxi-front,Taxi,240,universal,transit,0.82
 building-help,building,move,3,building,Building help,250,universal,lodging,0.58
 transit-rides,travel,move,1,train-front,Transit + rides,260,universal,transit,0.88
@@ -37,8 +37,8 @@ pickup-meeting,travel,move,3,map-pin,Pickup + meeting,350,universal,transit,0.60
 rail-station-words,travel,move,1,train-front,Rail + station words,360,universal,transit,0.72
 common-signs,travel,move,3,signpost,Common signs,370,universal,core;transit,0.80
 hiking-parks,hike,move,1,footprints,Hiking + parks,380,universal,outdoors,0.48
-trail-conditions,hike,move,2,,Conditions + route,390,universal,outdoors,0.44
-trail-transport,hike,move,2,,Transport + services,400,universal,outdoors,0.42
+trail-conditions,hike,move,2,cloud-sun,Conditions + route,390,universal,outdoors,0.44
+trail-transport,hike,move,2,bus,Transport + services,400,universal,outdoors,0.42
 trail-warnings,hike,move,3,triangle-alert,Trail warnings,410,universal,outdoors;health,0.46
 trail-landmarks,hike,move,3,map-pin,Trail landmarks + services,420,universal,outdoors,0.40
 emergency-medical,emergency,alert,1,briefcase-medical,Emergency + medical,430,universal,core;health,1.00
