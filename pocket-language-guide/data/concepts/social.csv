@@ -1,4 +1,51 @@
 concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
+sim-data.i-would-like-a-tourist-sim,sim-data,entry,phrase,i-would-like-a-tourist-sim,1,0.760,sim-data.sim,0,0,neutral,
+children.cannot-find-my-child,children,entry,phrase,cannot-find-my-child,1,0.660,children.child-lost,0,0,neutral,"SAFETY-CRITICAL. Means the child is missing right now and help is needed immediately. Must NOT be rendered with any idiom that can mean bereavement (English 'I lost my child' has that reading, which is why this wording was chosen). Requires a fluent-speaker check."
+etiquette.is-this-allowed,etiquette,entry,phrase,is-this-allowed,1,0.620,etiquette.allowed,0,0,neutral,Deliberately general: point at anything and ask.
+sim-data.may-i-use-your-wifi,sim-data,entry,phrase,may-i-use-your-wifi,2,0.740,sim-data.may-i-use-your-wifi,0,0,neutral,"Permission, not existence; 'Do you have Wi-Fi?' already exists in the corpus."
+children.make-an-announcement,children,entry,phrase,make-an-announcement,2,0.640,children.child-lost,1,0,polite,Asks staff to page the child over a public-address system. Pairs with children.cannot-find-my-child.
+etiquette.is-tipping-expected,etiquette,entry,phrase,is-tipping-expected,2,0.600,etiquette.tip,0,0,neutral,"Must stay a neutral yes/no question. Verified that tipping is not customary and can be unwelcome in Japan, China and South Korea, so never render this as 'how much should I tip?'."
+sim-data.how-much-data-is-included,sim-data,entry,phrase,how-much-data-is-included,3,0.720,sim-data.how-much-data-is-included,0,0,neutral,
+children.child-age,children,entry,template,child-age,3,0.620,children.age,0,1,neutral,Slot is a number of years. Doubles as the answer to an age limit and as identifying detail for a missing child.
+etiquette.is-service-included,etiquette,entry,phrase,is-service-included,3,0.580,etiquette.service-charge,0,0,neutral,Asks whether a service charge is already on the bill.
+sim-data.do-you-need-my-passport,sim-data,refphrase,phrase,do-you-need-my-passport,4,0.710,sim-data.registration,0,0,neutral,ID registration is required for local SIMs in well over 100 countries; expect a passport scan.
+children.high-chair,children,entry,phrase,high-chair,4,0.600,children.seating,0,0,neutral,A raised feeding chair for a small child in a restaurant.
+etiquette.may-i-enter,etiquette,entry,phrase,may-i-enter,4,0.560,etiquette.enter,0,0,polite,"Asking permission at a threshold: temple, shrine, shop, home."
+sim-data.how-long-is-it-valid,sim-data,entry,phrase,how-long-is-it-valid,5,0.700,sim-data.how-long-is-it-valid,0,0,neutral,
+children.baby-changing-room,children,entry,phrase,baby-changing-room,5,0.580,children.changing,0,0,neutral,"Chosen over 'Where can I change my baby?', which is ambiguous. Matches international signage (baby changing / nursing room)."
+etiquette.remove-shoes,etiquette,entry,phrase,remove-shoes,5,0.540,etiquette.shoes,0,0,neutral,
+sim-data.please-activate-it,sim-data,refphrase,phrase,please-activate-it,6,0.690,sim-data.please-activate-it,0,0,neutral,Shop staff normally insert and activate the SIM before you leave.
+children.childrens-menu,children,entry,phrase,childrens-menu,6,0.560,children.menu,0,0,neutral,
+etiquette.photo-of-you,etiquette,entry,phrase,photo-of-you,6,0.520,etiquette.photo,0,0,polite,"Asks a person's consent to be photographed. Distinct from attractions-tickets.may-i-take-photos, which is about the place."
+sim-data.do-you-have-an-esim,sim-data,entry,phrase,do-you-have-an-esim,7,0.680,sim-data.sim,1,0,neutral,
+children.suitable-for-children,children,entry,phrase,suitable-for-children,7,0.540,children.suitability,0,0,neutral,
+etiquette.may-i-sit-here,etiquette,entry,phrase,may-i-sit-here,7,0.500,etiquette.sit,0,0,polite,
+sim-data.my-data-is-not-working,sim-data,entry,phrase,my-data-is-not-working,8,0.670,sim-data.my-data-is-not-working,0,0,neutral,
+children.minimum-age,children,entry,phrase,minimum-age,8,0.520,children.age,1,0,neutral,Asks the lowest age allowed to enter or ride.
+etiquette.queue-for,etiquette,entry,template,queue-for,8,0.480,etiquette.queue,0,1,neutral,Slot is a place or service. Gloss uses 'queue' to match trail-transport.how-long-is-the-queue; US English is 'line'.
+sim-data.does-it-need-registration,sim-data,entry,phrase,does-it-need-registration,9,0.660,sim-data.registration,1,0,neutral,
+children.do-children-pay,children,entry,phrase,do-children-pay,9,0.500,children.price,0,0,neutral,"Asks whether children are charged at all, which is the useful question where child fares vary."
+etiquette.dressed-appropriately,etiquette,entry,phrase,dressed-appropriately,9,0.460,etiquette.dress,0,0,neutral,"Asks whether the traveler's clothing is acceptable here, e.g. at a religious site."
+sim-data.i-have-no-signal,sim-data,refphrase,phrase,i-have-no-signal,10,0.650,sim-data.signal,0,0,neutral,
+children.crib,children,entry,phrase,crib,10,0.480,children.crib,0,0,neutral,US 'crib' = UK 'cot'. Means a baby bed provided in a hotel room.
+etiquette.did-not-mean-to-offend,etiquette,entry,phrase,did-not-mean-to-offend,10,0.440,etiquette.apology,0,0,polite,"An apology for an unintended breach of custom. Should read as sincere, not defensive."
+sim-data.please-write-the-wifi-password,sim-data,entry,phrase,please-write-the-wifi-password,11,0.640,sim-data.please-write-the-wifi-password,0,0,neutral,"Written beats spoken: the password is a string, not a word."
+children.warm-this-bottle,children,entry,phrase,warm-this-bottle,11,0.460,children.bottle,0,0,polite,"A baby's feeding bottle. Warm, not boil."
+etiquette.what-is-customary,etiquette,entry,phrase,what-is-customary,11,0.420,etiquette.tip,1,0,neutral,"Open question about the local norm; it presupposes nothing, which is the point. Used after etiquette.is-tipping-expected."
+sim-data.sim-card,sim-data,ref,word,sim-card,12,0.620,sim-data.sim-card,0,0,neutral,
+children.car-seat,children,entry,phrase,car-seat,12,0.440,children.car-seat,0,0,neutral,A child restraint seat for a car; say 'child car seat' so it is not read as an ordinary vehicle seat.
+etiquette.keep-the-change,etiquette,entry,phrase,keep-the-change,12,0.400,etiquette.tip,2,0,polite,Only useful where tipping is customary; kept at low importance for that reason. Do not treat as the default way to pay.
+sim-data.where-can-i-buy-a-plug-adapter,sim-data,entry,phrase,where-can-i-buy-a-plug-adapter,13,0.600,sim-data.where-can-i-buy-a-plug-adapter,0,0,neutral,
+children.stroller,children,ref,word,stroller,13,0.420,children.stroller,0,0,neutral,"US 'stroller' / UK 'pram, pushchair'. Reference word for signage and for pointing."
+sim-data.mobile-data,sim-data,ref,word,mobile-data,14,0.590,sim-data.mobile-data,0,0,neutral,
+children.playground,children,entry,phrase,playground,14,0.400,children.playground,0,0,neutral,
+sim-data.can-i-top-up-this-sim,sim-data,refphrase,phrase,can-i-top-up-this-sim,15,0.580,sim-data.top-up,0,0,neutral,
+sim-data.top-up,sim-data,ref,word,top-up,16,0.570,sim-data.top-up,1,0,neutral,
+sim-data.is-there-coverage-in,sim-data,entry,template,is-there-coverage-in,17,0.560,sim-data.is-there-coverage-in,0,1,neutral,Slot is a place name; asked before heading somewhere remote.
+sim-data.signal,sim-data,ref,word,signal,18,0.550,sim-data.signal,1,0,neutral,
+sim-data.esim,sim-data,ref,word,esim,19,0.540,sim-data.esim,0,0,neutral,Often kept as the Latin abbreviation; give the local form only if one is really used.
+sim-data.prepaid,sim-data,ref,word,prepaid,20,0.520,sim-data.prepaid,0,0,neutral,
+sim-data.roaming,sim-data,ref,word,roaming,21,0.500,sim-data.roaming,0,0,neutral,
 social-basics.hello,social-basics,entry,phrase,hello,1,1.000,social-basics.hello,0,0,neutral,
 social-basics.hello-polite,social-basics,entry,phrase,hello-polite,2,0.975,social-basics.hello,1,0,polite,
 social-basics.good-morning,social-basics,entry,phrase,good-morning,3,0.950,social-basics.good-morning,0,0,neutral,
@@ -10,6 +57,8 @@ social-basics.excuse-me-sorry,social-basics,entry,phrase,excuse-me-sorry,8,0.825
 social-basics.sorry,social-basics,entry,phrase,sorry,9,0.800,social-basics.sorry,0,0,neutral,
 social-basics.no-problem,social-basics,entry,phrase,no-problem,10,0.775,social-basics.no-problem,0,0,neutral,
 social-basics.i-do-not-know,social-basics,entry,phrase,i-do-not-know,11,0.750,social-basics.i-do-not-know,0,0,neutral,
+social-basics.good-night,social-basics,entry,phrase,good-night,1004,0.850,social-basics.good-night,0,0,neutral,
+social-basics.okay-fine-i-am-okay,social-basics,entry,phrase,okay-fine-i-am-okay,1010,0.850,social-basics.okay-fine-i-am-okay,0,0,neutral,
 communication.i-do-not-speak-chinese,communication,entry,phrase,i-do-not-speak-chinese,1,0.980,communication.i-do-not-speak-chinese,0,0,neutral,
 communication.i-speak-only-a-little-chinese,communication,entry,phrase,i-speak-only-a-little-chinese,2,0.956,communication.i-speak-only-a-little-chinese,0,0,neutral,
 communication.do-you-speak-english,communication,entry,phrase,do-you-speak-english,3,0.931,communication.do-you-speak-english,0,0,neutral,
@@ -21,29 +70,6 @@ communication.please-write-it-down,communication,entry,phrase,please-write-it-do
 communication.please-wait-a-moment,communication,entry,phrase,please-wait-a-moment,9,0.784,communication.please-wait-a-moment,0,0,neutral,
 communication.can-you-help-me,communication,entry,phrase,can-you-help-me,10,0.759,communication.can-you-help-me,0,0,neutral,
 communication.please-show-me-the-chinese-text,communication,entry,phrase,please-show-me-the-chinese-text,11,0.735,communication.please-show-me-the-chinese-text,0,0,neutral,
-quick-responses.please-go-ahead,quick-responses,ref,phrase,please-go-ahead,1,0.900,quick-responses.please-go-ahead,0,0,neutral,
-quick-responses.yes-right,quick-responses,ref,word,yes-right,2,0.863,quick-responses.yes-right,0,0,neutral,
-quick-responses.no-not,quick-responses,ref,word,no-not,3,0.825,quick-responses.no-not,0,0,neutral,
-quick-responses.okay-can,quick-responses,ref,word,okay-can,4,0.787,quick-responses.okay-can,0,0,neutral,
-quick-responses.cannot-not-allowed,quick-responses,ref,phrase,cannot-not-allowed,5,0.750,quick-responses.cannot-not-allowed,0,0,neutral,
-quick-responses.works-okay,quick-responses,ref,word,works-okay,6,0.713,quick-responses.works-okay,0,0,neutral,
-quick-responses.does-not-work-no,quick-responses,ref,phrase,does-not-work-no,7,0.675,quick-responses.does-not-work-no,0,0,neutral,
-phone-translation.i-am-using-phone-translation,phone-translation,entry,phrase,i-am-using-phone-translation,1,0.800,phone-translation.i-am-using-phone-translation,0,0,neutral,
-phone-translation.please-speak-toward-the-phone,phone-translation,entry,phrase,please-speak-toward-the-phone,2,0.700,phone-translation.please-speak-toward-the-phone,0,0,neutral,
-phone-translation.one-sentence-at-a-time-please,phone-translation,entry,phrase,one-sentence-at-a-time-please,3,0.600,phone-translation.one-sentence-at-a-time-please,0,0,neutral,
-phone-text-power.please-type-it-for-me,phone-text-power,entry,phrase,please-type-it-for-me,1,0.720,phone-text-power.please-type-it-for-me,0,0,neutral,
-phone-text-power.please-write-the-place-name-in-chinese,phone-text-power,entry,phrase,please-write-the-place-name-in-chinese,2,0.690,phone-text-power.please-write-the-place-name-in-chinese,0,0,neutral,
-phone-text-power.please-use-simple-words,phone-text-power,entry,phrase,please-use-simple-words,3,0.660,phone-text-power.please-use-simple-words,0,0,neutral,
-phone-text-power.my-phone-battery-is-low,phone-text-power,entry,phrase,my-phone-battery-is-low,4,0.630,phone-text-power.my-phone-battery-is-low,0,0,neutral,
-phone-text-power.do-you-have-a-power-bank,phone-text-power,entry,phrase,do-you-have-a-power-bank,5,0.600,phone-text-power.do-you-have-a-power-bank,0,0,neutral,
-phone-text-power.the-translation-may-be-inaccurate,phone-text-power,entry,phrase,the-translation-may-be-inaccurate,6,0.570,phone-text-power.the-translation-may-be-inaccurate,0,0,neutral,
-phone-text-power.please-confirm,phone-text-power,entry,phrase,please-confirm,7,0.540,phone-text-power.please-confirm,0,0,neutral,
-social-basics.good-night,social-basics,entry,phrase,good-night,1004,0.850,social-basics.good-night,0,0,neutral,
-social-basics.okay-fine-i-am-okay,social-basics,entry,phrase,okay-fine-i-am-okay,1010,0.850,social-basics.okay-fine-i-am-okay,0,0,neutral,
-quick-responses.can-possible,quick-responses,ref,word,can-possible,1004,0.765,quick-responses.can-possible,0,0,neutral,
-quick-responses.cannot-not-possible,quick-responses,ref,phrase,cannot-not-possible,1005,0.765,quick-responses.cannot-not-possible,0,0,neutral,
-quick-responses.okay-fine,quick-responses,ref,word,okay-fine,1006,0.765,quick-responses.okay-fine,0,0,neutral,
-quick-responses.no-good-not-allowed-will-not-work,quick-responses,ref,phrase,no-good-not-allowed-will-not-work,1007,0.765,quick-responses.no-good-not-allowed-will-not-work,0,0,neutral,
 communication.i-do-not-speak-japanese,communication,entry,phrase,i-do-not-speak-japanese,1001,0.833,communication.i-do-not-speak-japanese,0,0,neutral,
 communication.i-speak-only-a-little-japanese,communication,entry,phrase,i-speak-only-a-little-japanese,1002,0.833,communication.i-speak-only-a-little-japanese,0,0,neutral,
 communication.i-cannot-make-out-what-you-are-saying,communication,entry,phrase,i-cannot-make-out-what-you-are-saying,1005,0.833,communication.i-cannot-make-out-what-you-are-saying,0,0,neutral,
@@ -51,7 +77,28 @@ communication.i-do-not-understand,communication,entry,phrase,i-do-not-understand
 communication.i-cannot-read-it,communication,entry,phrase,i-cannot-read-it,1007,0.833,communication.i-cannot-read-it,0,0,neutral,
 communication.please-show-me-the-japanese-text,communication,entry,phrase,please-show-me-the-japanese-text,1012,0.833,communication.please-show-me-the-japanese-text,0,0,neutral,
 communication.please-write-it-in-roman-letters,communication,entry,phrase,please-write-it-in-roman-letters,1013,0.833,communication.please-write-it-in-roman-letters,0,0,neutral,
+quick-responses.please-go-ahead,quick-responses,ref,phrase,please-go-ahead,1,0.900,quick-responses.please-go-ahead,0,0,neutral,
+quick-responses.yes-right,quick-responses,ref,word,yes-right,2,0.863,quick-responses.yes-right,0,0,neutral,
+quick-responses.no-not,quick-responses,ref,word,no-not,3,0.825,quick-responses.no-not,0,0,neutral,
+quick-responses.okay-can,quick-responses,ref,word,okay-can,4,0.787,quick-responses.okay-can,0,0,neutral,
+quick-responses.cannot-not-allowed,quick-responses,ref,phrase,cannot-not-allowed,5,0.750,quick-responses.cannot-not-allowed,0,0,neutral,
+quick-responses.works-okay,quick-responses,ref,word,works-okay,6,0.713,quick-responses.works-okay,0,0,neutral,
+quick-responses.does-not-work-no,quick-responses,ref,phrase,does-not-work-no,7,0.675,quick-responses.does-not-work-no,0,0,neutral,
+quick-responses.can-possible,quick-responses,ref,word,can-possible,1004,0.765,quick-responses.can-possible,0,0,neutral,
+quick-responses.cannot-not-possible,quick-responses,ref,phrase,cannot-not-possible,1005,0.765,quick-responses.cannot-not-possible,0,0,neutral,
+quick-responses.okay-fine,quick-responses,ref,word,okay-fine,1006,0.765,quick-responses.okay-fine,0,0,neutral,
+quick-responses.no-good-not-allowed-will-not-work,quick-responses,ref,phrase,no-good-not-allowed-will-not-work,1007,0.765,quick-responses.no-good-not-allowed-will-not-work,0,0,neutral,
+phone-translation.i-am-using-phone-translation,phone-translation,entry,phrase,i-am-using-phone-translation,1,0.800,phone-translation.i-am-using-phone-translation,0,0,neutral,
+phone-translation.please-speak-toward-the-phone,phone-translation,entry,phrase,please-speak-toward-the-phone,2,0.700,phone-translation.please-speak-toward-the-phone,0,0,neutral,
+phone-translation.one-sentence-at-a-time-please,phone-translation,entry,phrase,one-sentence-at-a-time-please,3,0.600,phone-translation.one-sentence-at-a-time-please,0,0,neutral,
 phone-translation.please-type-it-and-show-me,phone-translation,entry,phrase,please-type-it-and-show-me,1004,0.680,phone-translation.please-type-it-and-show-me,0,0,neutral,
 phone-translation.please-write-the-place-name-in-japanese,phone-translation,entry,phrase,please-write-the-place-name-in-japanese,1005,0.680,phone-translation.please-write-the-place-name-in-japanese,0,0,neutral,
 phone-translation.please-look-at-the-screen,phone-translation,entry,phrase,please-look-at-the-screen,1006,0.680,phone-translation.please-look-at-the-screen,0,0,neutral,
+phone-text-power.please-type-it-for-me,phone-text-power,entry,phrase,please-type-it-for-me,1,0.720,phone-text-power.please-type-it-for-me,0,0,neutral,
+phone-text-power.please-write-the-place-name-in-chinese,phone-text-power,entry,phrase,please-write-the-place-name-in-chinese,2,0.690,phone-text-power.please-write-the-place-name-in-chinese,0,0,neutral,
+phone-text-power.please-use-simple-words,phone-text-power,entry,phrase,please-use-simple-words,3,0.660,phone-text-power.please-use-simple-words,0,0,neutral,
+phone-text-power.my-phone-battery-is-low,phone-text-power,entry,phrase,my-phone-battery-is-low,4,0.630,phone-text-power.my-phone-battery-is-low,0,0,neutral,
+phone-text-power.do-you-have-a-power-bank,phone-text-power,entry,phrase,do-you-have-a-power-bank,5,0.600,phone-text-power.do-you-have-a-power-bank,0,0,neutral,
+phone-text-power.the-translation-may-be-inaccurate,phone-text-power,entry,phrase,the-translation-may-be-inaccurate,6,0.570,phone-text-power.the-translation-may-be-inaccurate,0,0,neutral,
+phone-text-power.please-confirm,phone-text-power,entry,phrase,please-confirm,7,0.540,phone-text-power.please-confirm,0,0,neutral,
 phone-text-power.may-i-charge-my-phone-here,phone-text-power,entry,phrase,may-i-charge-my-phone-here,1004,0.612,phone-text-power.may-i-charge-my-phone-here,0,0,neutral,

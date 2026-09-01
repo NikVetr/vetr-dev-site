@@ -1,4 +1,20 @@
 concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
+weather.forecast,weather,entry,phrase,forecast,1,0.560,weather.forecast,0,0,neutral,
+weather.will-it-rain,weather,entry,phrase,will-it-rain,2,0.545,weather.forecast,1,0,neutral,
+weather.is-it-safe-today,weather,entry,phrase,is-it-safe-today,3,0.530,weather.safety,0,0,neutral,"Asks whether conditions today make a trail, road or crossing safe. Pairs with the hike sections."
+weather.how-cold-at-night,weather,entry,phrase,how-cold-at-night,4,0.515,weather.temperature,0,0,neutral,"Asks the overnight low, for deciding on clothing or shelter."
+weather.rain,weather,ref,word,rain,5,0.500,weather.rain,0,0,neutral,
+weather.snow,weather,ref,word,snow,6,0.488,weather.snow,0,0,neutral,
+weather.wind,weather,ref,word,wind,7,0.476,weather.wind,0,0,neutral,
+weather.storm,weather,ref,word,storm,8,0.464,weather.storm,0,0,neutral,"Generic; render with the regional word where one dominates, e.g. typhoon in East Asia."
+weather.ice,weather,ref,word,ice,9,0.452,weather.ice,0,0,neutral,"Ice on ground or road, not ice for a drink."
+weather.fog,weather,ref,word,fog,10,0.440,weather.fog,0,0,neutral,
+weather.heat,weather,ref,word,heat,11,0.428,weather.heat,0,0,neutral,
+weather.cold,weather,ref,word,cold,12,0.416,weather.cold,0,0,neutral,
+weather.humid,weather,ref,word,humid,13,0.404,weather.humid,0,0,neutral,
+weather.sunrise,weather,ref,word,sunrise,14,0.392,weather.sunrise,0,0,neutral,
+weather.flood,weather,ref,word,flood,15,0.368,weather.flood,0,0,neutral,As seen on warnings and closure notices.
+weather.avalanche-risk,weather,ref,word,avalanche-risk,16,0.356,weather.avalanche-risk,0,0,neutral,Mountain warning wording.
 trail-words.trail,trail-words,ref,word,trail,1,0.500,trail-words.trail,0,0,neutral,
 trail-words.trailhead,trail-words,ref,word,trailhead,2,0.489,trail-words.trailhead,0,0,neutral,
 trail-words.summit,trail-words,ref,word,summit,3,0.477,trail-words.summit,0,0,neutral,
@@ -16,6 +32,7 @@ hiking-parks.where-is-the-trailhead,hiking-parks,entry,phrase,where-is-the-trail
 hiking-parks.how-long-to-the-summit,hiking-parks,entry,phrase,how-long-to-the-summit,3,0.420,hiking-parks.how-long-to-the-summit,0,0,neutral,
 hiking-parks.how-long-to-the-viewpoint,hiking-parks,entry,phrase,how-long-to-the-viewpoint,4,0.390,hiking-parks.how-long-to-the-viewpoint,0,0,neutral,
 hiking-parks.which-route-is-easier,hiking-parks,entry,phrase,which-route-is-easier,5,0.360,hiking-parks.which-route-is-easier,0,0,neutral,
+hiking-parks.is-this-trail-suitable-for-beginners,hiking-parks,entry,phrase,is-this-trail-suitable-for-beginners,1006,0.408,hiking-parks.is-this-trail-suitable-for-beginners,0,0,neutral,
 trail-conditions.how-long-is-the-full-route,trail-conditions,refphrase,phrase,how-long-is-the-full-route,1,0.440,trail-conditions.how-long-is-the-full-route,0,0,neutral,
 trail-conditions.can-we-return-the-same-way,trail-conditions,refphrase,phrase,can-we-return-the-same-way,2,0.418,trail-conditions.can-we-return-the-same-way,0,0,neutral,
 trail-conditions.can-we-return-before-dark,trail-conditions,refphrase,phrase,can-we-return-before-dark,3,0.396,trail-conditions.can-we-return-before-dark,0,0,neutral,
@@ -29,6 +46,7 @@ trail-transport.where-can-we-buy-water,trail-transport,refphrase,phrase,where-ca
 trail-transport.where-can-we-refill-water,trail-transport,refphrase,phrase,where-can-we-refill-water,5,0.350,trail-transport.where-can-we-refill-water,0,0,neutral,
 trail-transport.is-there-cell-signal-here,trail-transport,refphrase,phrase,is-there-cell-signal-here,6,0.332,trail-transport.is-there-cell-signal-here,0,0,neutral,
 trail-transport.do-you-have-a-map,trail-transport,refphrase,phrase,do-you-have-a-map,7,0.315,trail-transport.do-you-have-a-map,0,0,neutral,
+trail-transport.how-long-is-the-wait,trail-transport,refphrase,phrase,how-long-is-the-wait,1001,0.357,trail-transport.how-long-is-the-wait,0,0,neutral,
 trail-warnings.open,trail-warnings,ref,word,open,1,0.460,trail-warnings.open,0,0,neutral,
 trail-warnings.closed,trail-warnings,ref,word,closed,2,0.446,trail-warnings.closed,0,0,neutral,
 trail-warnings.maintenance,trail-warnings,ref,word,maintenance,3,0.431,trail-warnings.maintenance,0,0,neutral,
@@ -45,7 +63,4 @@ trail-landmarks.start,trail-landmarks,ref,word,start,4,0.363,trail-landmarks.sta
 trail-landmarks.end,trail-landmarks,ref,word,end,5,0.350,trail-landmarks.end,0,0,neutral,
 trail-landmarks.elevation,trail-landmarks,ref,word,elevation,6,0.338,trail-landmarks.elevation,0,0,neutral,
 trail-landmarks.sunset,trail-landmarks,ref,word,sunset,7,0.325,trail-landmarks.sunset,0,0,neutral,
-trail-landmarks.restroom,trail-landmarks,ref,word,restroom,8,0.312,trail-landmarks.restroom,0,0,neutral,
 trail-landmarks.water-point,trail-landmarks,ref,word,water-point,9,0.300,trail-landmarks.water-point,0,0,neutral,
-hiking-parks.is-this-trail-suitable-for-beginners,hiking-parks,entry,phrase,is-this-trail-suitable-for-beginners,1006,0.408,hiking-parks.is-this-trail-suitable-for-beginners,0,0,neutral,
-trail-transport.how-long-is-the-wait,trail-transport,refphrase,phrase,how-long-is-the-wait,1001,0.357,trail-transport.how-long-is-the-wait,0,0,neutral,

@@ -27,6 +27,8 @@ LATIN_RANGES = [(0x20, 0x24F), (0x250, 0x2AF), (0x2B0, 0x2FF), (0x300, 0x36F),
                 (0x2000, 0x206F), (0x20A0, 0x20BF), (0x2100, 0x214F), (0x2190, 0x21FF)]
 CJK_PUNCT = [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF)]
 KANA = [(0x3040, 0x30FF), (0x31F0, 0x31FF)]
+# Jamo, so a Hangul syllable that is stored decomposed still has parts to shape.
+HANGUL_JAMO = [(0x1100, 0x11FF), (0x3130, 0x318F), (0xA960, 0xA97F), (0xD7B0, 0xD7FF)]
 ARABIC_RANGES = [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
                  (0xFB50, 0xFDFF), (0xFE70, 0xFEFF)]
 
@@ -71,13 +73,20 @@ FACES = {
     ("cjk-sc-serif", 700, False): "NotoSerifSC-var.ttf",
     ("cjk-jp-serif", 400, False): "NotoSerifJP-var.ttf",
     ("cjk-jp-serif", 700, False): "NotoSerifJP-var.ttf",
+    ("cjk-kr", 400, False): "NotoSansKR-var.ttf",
+    ("cjk-kr", 700, False): "NotoSansKR-var.ttf",
+    ("cjk-kr-serif", 400, False): "NotoSerifKR-var.ttf",
+    ("cjk-kr-serif", 700, False): "NotoSerifKR-var.ttf",
 }
 
 # Which language directories feed each stack's corpus-character union.
-STACK_LANGS = {"latin": ["en", "es"], "latin-cond": ["en", "es"],
-               "latin-serif": ["en", "es"], "latin-cond-serif": ["en", "es"],
+ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja"]
+STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
+               "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
-               "cjk-jp": ["ja"], "cjk-jp-serif": ["ja"], "arabic": ["ar"]}
+               "cjk-jp": ["ja"], "cjk-jp-serif": ["ja"],
+               "cjk-kr": ["ko"], "cjk-kr-serif": ["ko"],
+               "arabic": ["ar"]}
 
 
 def expand(ranges):
@@ -117,6 +126,13 @@ def coverage(stack):
     if stack in ("cjk-sc", "cjk-sc-serif"):
         # GB2312 level 1: the ~3.7k characters of everyday written Chinese.
         chars |= expand(CJK_PUNCT) | legacy_charset("gb2312", range(0xB0, 0xD8), range(0xA1, 0xFF))
+    elif stack in ("cjk-kr", "cjk-kr-serif"):
+        # All 11,172 Hangul syllables would be gratuitous; KS X 1001 is the ~2,350
+        # in everyday use, the same trick GB2312 does for Chinese. Hanja comes in
+        # through the same legacy set, which is what a sign might carry.
+        chars |= expand(CJK_PUNCT) | expand(HANGUL_JAMO)
+        chars |= legacy_charset("euc_kr", range(0xB0, 0xC9), range(0xA1, 0xFF))
+        chars |= legacy_charset("euc_kr", range(0xCA, 0xFE), range(0xA1, 0xFF))
     elif stack in ("cjk-jp", "cjk-jp-serif"):
         chars |= expand(CJK_PUNCT) | expand(KANA)
         chars |= legacy_charset("euc_jp", range(0xB0, 0xD0), range(0xA1, 0xFF))

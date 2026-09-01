@@ -5,3 +5,12 @@ utility-templates.may-i,utility-templates,entry,template,may-i,3,0.774,utility-t
 utility-templates.please-do-not-add,utility-templates,entry,template,please-do-not-add,4,0.731,utility-templates.please-do-not-add,0,1,neutral,
 utility-templates.do-you-have,utility-templates,entry,template,do-you-have,5,0.688,utility-templates.do-you-have,0,1,neutral,
 utility-templates.please-write-the-number,utility-templates,entry,phrase,please-write-the-number,6,0.645,utility-templates.please-write-the-number,0,0,neutral,
+utility-templates.i-need,utility-templates,entry,template,i-need,7,0.840,utility-templates.need,0,1,neutral,
+utility-templates.is-there-nearby,utility-templates,entry,template,is-there-nearby,8,0.800,utility-templates.nearby,0,1,neutral,Slot is a place type.
+utility-templates.how-much-is,utility-templates,entry,template,how-much-is,9,0.760,utility-templates.price,0,1,neutral,
+utility-templates.is-this,utility-templates,entry,template,is-this,10,0.750,utility-templates.confirm,0,1,neutral,"Confirmation pattern: is this the right train, is this pork, is this the queue."
+utility-templates.please,utility-templates,entry,template,please,11,0.720,utility-templates.request,0,1,polite,Point at any word plus this row. Renders as the shortest polite request frame in the target language.
+utility-templates.i-am-looking-for,utility-templates,entry,template,i-am-looking-for,12,0.700,utility-templates.need,1,1,neutral,
+utility-templates.do-you-accept,utility-templates,entry,template,do-you-accept,13,0.670,utility-templates.accept,0,1,neutral,Slot is a payment method or a card name.
+utility-templates.i-cannot-find,utility-templates,entry,template,i-cannot-find,14,0.630,utility-templates.missing,0,1,neutral,
+utility-templates.there-is-a-problem-with,utility-templates,entry,template,there-is-a-problem-with,15,0.610,utility-templates.problem,0,1,neutral,General form of room-problems.there-is-a-problem-with-the-room.

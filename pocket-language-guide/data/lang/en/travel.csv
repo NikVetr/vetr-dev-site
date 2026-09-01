@@ -75,3 +75,40 @@ common-signs.open-operating,open / operating,,,,2,japanese-reviewed-v6
 common-signs.closed,closed,,,,2,japanese-reviewed-v6
 common-signs.stopped-stop,stopped / stop,,,,2,japanese-reviewed-v6
 place-words.tourist-spot-sightseeing-area,tourist spot / sightseeing area,,,,2,japanese-reviewed-v6
+border-customs.i-am-a-tourist,I am a tourist,,,,2,expansion-v1
+border-customs.here-is-my-passport,Here is my passport,,,,2,expansion-v1
+border-customs.i-am-staying-for-days,I am staying for {} days,,,,2,expansion-v1
+border-customs.nothing-to-declare,Nothing to declare,,,,2,expansion-v1
+border-customs.i-am-staying-at,I am staying at {},,,,2,expansion-v1
+border-customs.i-am-here-for-business,I am here for business,,,,2,expansion-v1
+border-customs.i-have-a-return-ticket,I have a return ticket,,,,2,expansion-v1
+border-customs.i-am-visiting-family,I am visiting family,,,,2,expansion-v1
+border-customs.this-is-for-personal-use,This is for personal use,,,,2,expansion-v1
+border-customs.i-am-in-transit,I am in transit,,,,2,expansion-v1
+border-customs.i-have-in-cash,I have {} in cash,,,,2,expansion-v1
+border-customs.this-is-a-gift,This is a gift,,,,2,expansion-v1
+border-customs.where-do-i-collect-my-baggage,Where do I collect my baggage?,,,,2,expansion-v1
+border-customs.how-long-may-i-stay,How long may I stay?,,,,2,expansion-v1
+border-customs.i-have-a-connecting-flight,I have a connecting flight,,,,2,expansion-v1
+border-customs.may-i-have-an-entry-stamp,May I have an entry stamp?,,,,2,expansion-v1
+border-customs.visa,visa,,,,2,expansion-v1
+border-customs.i-have-no-food-or-plants,I have no food or plants,,,,2,expansion-v1
+border-customs.passport-control,passport control,,,,2,expansion-v1
+border-customs.customs,customs,,,,2,expansion-v1
+border-customs.baggage-claim,baggage claim,,,,2,expansion-v1
+border-customs.customs-declaration,customs declaration,,,,2,expansion-v1
+border-customs.arrival-card,arrival card,,,,2,expansion-v1
+border-customs.transit,transit,,,,2,expansion-v1
+border-customs.boarding-pass,boarding pass,,,,2,expansion-v1
+directions.please-show-me-on-the-map,Please show me on the map,,,,2,expansion-v1
+directions.where-is-the-nearest,Where is the nearest {}?,,,,2,expansion-v1
+directions.where-am-i,Where am I?,,,,2,expansion-v1
+directions.which-way,Which way?,,,,2,expansion-v1
+directions.can-i-walk-there,Can I walk there?,,,,2,expansion-v1
+directions.how-far-is-it,How far is it?,,,,2,expansion-v1
+directions.which-exit,Which exit?,,,,2,expansion-v1
+directions.can-you-show-me-the-way,Can you show me the way?,,,,2,expansion-v1
+directions.north,north,,,,2,expansion-v1
+directions.south,south,,,,2,expansion-v1
+directions.east,east,,,,2,expansion-v1
+directions.west,west,,,,2,expansion-v1

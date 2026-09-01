@@ -1,10 +1,52 @@
 concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
+toilets.where-toilet,toilets,entry,phrase,where-toilet,1,1.000,toilets.where-toilet,0,0,neutral,"Highest-frequency request on the sheet. Use the everyday word a local would say, not a euphemism."
+accessibility.step-free,accessibility,entry,phrase,step-free,1,0.720,accessibility.step-free,0,0,neutral,"Established international term (UK/TfL, ISO 21902 accessible-tourism usage). Means a route with no steps: level entrance, ramp or elevator. Render with the local standard wording for barrier-free / accessible access."
+toilets.where-public-toilet,toilets,entry,phrase,where-public-toilet,2,0.900,toilets.where-toilet,1,0,neutral,
+accessibility.wheelchair-access,accessibility,entry,phrase,wheelchair-access,2,0.705,accessibility.step-free,1,0,neutral,Use the local standard wording for wheelchair-accessible.
+toilets.may-i-use-the-toilet,toilets,entry,phrase,may-i-use-the-toilet,3,0.880,toilets.use-toilet,0,0,neutral,Asked inside a shop or cafe; keep it polite enough to be granted.
+accessibility.elevator,accessibility,entry,phrase,elevator,3,0.690,accessibility.lift,0,0,neutral,US gloss 'elevator' matches building-words.elevator; UK English is 'lift'. Keep the gloss as 'elevator' for corpus consistency.
+toilets.is-it-only-for-customers,toilets,refphrase,phrase,is-it-only-for-customers,4,0.720,toilets.use-toilet,1,0,neutral,
+accessibility.ramp,accessibility,entry,phrase,ramp,4,0.675,accessibility.ramp,0,0,neutral,
+toilets.toilet-wc,toilets,ref,word,toilet-wc,5,0.860,toilets.toilet-wc,0,0,neutral,"Sign word. Give the form actually printed on doors, including the local WC loanword where that is what appears."
+accessibility.how-many-steps,accessibility,entry,phrase,how-many-steps,5,0.660,accessibility.steps,0,0,neutral,"Asks for a count of stair steps, not for paces or procedure steps."
+toilets.is-it-free,toilets,refphrase,phrase,is-it-free,6,0.840,toilets.cost,0,0,neutral,
+accessibility.cannot-climb-stairs,accessibility,entry,phrase,cannot-climb-stairs,6,0.645,accessibility.steps,1,0,neutral,"Chosen over 'I cannot manage stairs', which translates ambiguously."
+toilets.do-i-need-a-coin,toilets,entry,phrase,do-i-need-a-coin,7,0.740,toilets.cost,1,0,neutral,"Paid toilets: turnstile coin, token, or an attendant."
+accessibility.need-to-sit-down,accessibility,entry,phrase,need-to-sit-down,7,0.630,accessibility.sit,0,0,neutral,Used to ask for a seat or a rest; not a medical emergency phrase.
+toilets.is-the-tap-water-safe-to-drink,toilets,entry,phrase,is-the-tap-water-safe-to-drink,8,0.820,toilets.is-the-tap-water-safe-to-drink,0,0,neutral,Health-adjacent. Translate exactly; do not soften into 'is the water good?'.
+accessibility.accessible-restroom,accessibility,entry,phrase,accessible-restroom,8,0.615,accessibility.restroom,0,0,neutral,Local wording varies: accessible / disabled / barrier-free toilet. Use the term on local signage.
+toilets.it-is-urgent,toilets,refphrase,phrase,it-is-urgent,9,0.800,toilets.it-is-urgent,0,0,neutral,
+accessibility.station-assistance,accessibility,entry,phrase,station-assistance,9,0.600,accessibility.assistance,0,0,neutral,"Means staff help for disabled or reduced-mobility passengers (UK rail 'Passenger Assist', airports 'special assistance')."
+toilets.may-i-have-the-toilet-key,toilets,entry,phrase,may-i-have-the-toilet-key,10,0.780,toilets.may-i-have-the-toilet-key,0,0,neutral,Many shops and cafes keep the toilet locked and hand out a key at the counter.
+accessibility.help-me-carry,accessibility,entry,phrase,help-me-carry,10,0.585,accessibility.assistance,1,0,polite,
+toilets.there-is-no-toilet-paper,toilets,entry,phrase,there-is-no-toilet-paper,11,0.760,toilets.toilet-paper,0,0,neutral,
+accessibility.board-first,accessibility,entry,phrase,board-first,11,0.570,accessibility.boarding,0,0,polite,Asks for priority or pre-boarding.
+toilets.toilet-paper,toilets,ref,word,toilet-paper,12,0.660,toilets.toilet-paper,1,0,neutral,
+accessibility.door-width,accessibility,entry,phrase,door-width,12,0.555,accessibility.width,0,0,neutral,"Asks for a measurement, expecting an answer in centimetres."
+toilets.it-is-out-of-order,toilets,refphrase,phrase,it-is-out-of-order,13,0.700,toilets.out-of-order,0,0,neutral,
+accessibility.wheelchair-width,accessibility,entry,template,wheelchair-width,13,0.540,accessibility.width,1,1,neutral,Slot is a number in centimetres. Keep the unit as cm; the sheet is used outside the US.
+toilets.out-of-order,toilets,ref,word,out-of-order,14,0.640,toilets.out-of-order,1,0,neutral,Sign word; distinct from 'temporarily closed'.
+accessibility.hard-of-hearing,accessibility,entry,phrase,hard-of-hearing,14,0.525,accessibility.hearing,0,0,neutral,"Standard, non-pejorative term for partial hearing loss."
+toilets.mens-toilet,toilets,ref,word,mens-toilet,15,0.720,toilets.mens-toilet,0,0,neutral,"The sign compound, not the bare word for 'man'."
+accessibility.speak-louder,accessibility,entry,phrase,speak-louder,15,0.510,accessibility.hearing,1,0,polite,Distinct from communication.please-speak-more-slowly.
+toilets.womens-toilet,toilets,ref,word,womens-toilet,16,0.710,toilets.womens-toilet,0,0,neutral,"The sign compound, not the bare word for 'woman'."
+accessibility.visually-impaired,accessibility,entry,phrase,visually-impaired,16,0.495,accessibility.vision,0,0,neutral,Render with the local established term for visual impairment / low vision.
+toilets.drinking-water,toilets,ref,word,drinking-water,17,0.700,toilets.water-sign,0,0,neutral,Sign word for a potable tap or fountain.
+accessibility.take-your-arm,accessibility,entry,phrase,take-your-arm,17,0.480,accessibility.vision,1,0,polite,"Standard sighted-guide request: the blind traveler holds the guide's arm, not the reverse."
+toilets.not-for-drinking,toilets,ref,word,not-for-drinking,18,0.690,toilets.water-sign,1,0,neutral,The non-potable sign. Getting this one wrong makes someone ill; verify it.
+accessibility.guide-dog,accessibility,entry,phrase,guide-dog,18,0.465,accessibility.service-animal,0,0,neutral,'Guide dog' is lexicalized in far more languages than 'assistance dog' or 'assistance animal' and is the term most likely to secure access; use the local established word.
+toilets.accessible-toilet,toilets,ref,word,accessible-toilet,19,0.680,toilets.accessible-toilet,0,0,neutral,
+toilets.where-can-i-wash-my-hands,toilets,entry,phrase,where-can-i-wash-my-hands,20,0.660,toilets.where-can-i-wash-my-hands,0,0,neutral,
+toilets.can-i-flush-the-paper,toilets,entry,phrase,can-i-flush-the-paper,21,0.630,toilets.can-i-flush-the-paper,0,0,neutral,"In many countries paper goes in a bin, not the bowl."
+toilets.is-there-a-toilet-on-board,toilets,entry,phrase,is-there-a-toilet-on-board,22,0.620,toilets.is-there-a-toilet-on-board,0,0,neutral,
+toilets.the-toilet-will-not-flush,toilets,entry,phrase,the-toilet-will-not-flush,23,0.600,toilets.the-toilet-will-not-flush,0,0,neutral,
+toilets.baby-change,toilets,ref,word,baby-change,24,0.580,toilets.baby-change,0,0,neutral,
+toilets.squat-toilet,toilets,ref,word,squat-toilet,25,0.540,toilets.squat-toilet,0,0,neutral,
 building-help.what-room-number-is-this,building-help,entry,phrase,what-room-number-is-this,1,0.580,building-help.what-room-number-is-this,0,0,neutral,
 building-help.i-am-lost,building-help,entry,phrase,i-am-lost,2,0.532,building-help.i-am-lost,0,0,neutral,
 building-help.where-is-reception,building-help,entry,phrase,where-is-reception,3,0.483,building-help.where-is-reception,0,0,neutral,
 building-help.where-is-a-power-outlet,building-help,entry,phrase,where-is-a-power-outlet,4,0.435,building-help.where-is-a-power-outlet,0,0,neutral,
 in-a-building.is-this-the-correct-entrance,in-a-building,entry,phrase,is-this-the-correct-entrance,1,0.660,in-a-building.is-this-the-correct-entrance,0,0,neutral,
-in-a-building.where-is-the-restroom,in-a-building,entry,phrase,where-is-the-restroom,2,0.619,in-a-building.where-is-the-restroom,0,0,neutral,
 in-a-building.do-you-have-wi-fi,in-a-building,entry,phrase,do-you-have-wi-fi,3,0.578,in-a-building.do-you-have-wi-fi,0,0,neutral,
 in-a-building.what-is-the-wi-fi-password,in-a-building,entry,phrase,what-is-the-wi-fi-password,4,0.536,in-a-building.what-is-the-wi-fi-password,0,0,neutral,
 in-a-building.which-floor,in-a-building,entry,phrase,which-floor,5,0.495,in-a-building.which-floor,0,0,neutral,

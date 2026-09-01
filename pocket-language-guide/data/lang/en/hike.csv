@@ -45,7 +45,22 @@ trail-landmarks.start,start,,,,2,latex-reference-v2
 trail-landmarks.end,end,,,,2,latex-reference-v2
 trail-landmarks.elevation,elevation,,,,2,latex-reference-v2
 trail-landmarks.sunset,sunset,,,,2,latex-reference-v2
-trail-landmarks.restroom,restroom,,,,2,latex-reference-v2
 trail-landmarks.water-point,water point,,,,2,latex-reference-v2
 hiking-parks.is-this-trail-suitable-for-beginners,Is this trail suitable for beginners?,,,,2,japanese-reviewed-v6
 trail-transport.how-long-is-the-wait,How long is the wait?,,,,2,japanese-reviewed-v6
+weather.forecast,What is the weather forecast?,,,,2,expansion-v1
+weather.will-it-rain,Will it rain today?,,,,2,expansion-v1
+weather.is-it-safe-today,Is it safe today?,,,,2,expansion-v1
+weather.how-cold-at-night,How cold does it get at night?,,,,2,expansion-v1
+weather.rain,rain,,,,2,expansion-v1
+weather.snow,snow,,,,2,expansion-v1
+weather.wind,wind,,,,2,expansion-v1
+weather.storm,storm,,,,2,expansion-v1
+weather.ice,ice,,,,2,expansion-v1
+weather.fog,fog,,,,2,expansion-v1
+weather.heat,heat / hot,,,,2,expansion-v1
+weather.cold,cold,,,,2,expansion-v1
+weather.humid,humid,,,,2,expansion-v1
+weather.sunrise,sunrise,,,,2,expansion-v1
+weather.flood,flood,,,,2,expansion-v1
+weather.avalanche-risk,avalanche risk,,,,2,expansion-v1

@@ -22,3 +22,28 @@ numbers-money.2-items,2 items,,,,2,japanese-reviewed-v6
 numbers-money.yen,yen,,,,2,japanese-reviewed-v6
 numbers-money.yen-symbol,yen (symbol),,,,2,japanese-reviewed-v6
 numbers-money.number-and-classifier-notes-2,Build numbers: 11 十一 shíyī; 20 二十 èrshí; 21 二十一 èrshíyī. Phone numbers: 1 is often 幺 yāo. Common classifiers: 个 ge general; 位 wèi people; 张 zhāng tickets / flat objects; 杯 bēi cups; 瓶 píng bottles. 角 / 毛 jiǎo / máo = 0.1 yuan; 分 fēn = 0.01 yuan.,,,,2,japanese-reviewed-v6
+atm-cash.where-is-an-atm,Where is an ATM?,,,,2,expansion-v1
+atm-cash.does-this-atm-take-foreign-cards,Does this ATM take foreign cards?,,,,2,expansion-v1
+atm-cash.the-atm-kept-my-card,The ATM kept my card,,,,2,expansion-v1
+atm-cash.is-there-a-fee,Is there a fee?,,,,2,expansion-v1
+atm-cash.the-card-was-declined,The card was declined,,,,2,expansion-v1
+atm-cash.what-is-the-exchange-rate,What is the exchange rate?,,,,2,expansion-v1
+atm-cash.no-money-came-out,No money came out,,,,2,expansion-v1
+atm-cash.where-can-i-change-money,Where can I change money?,,,,2,expansion-v1
+atm-cash.the-machine-is-out-of-service,The machine is out of service,,,,2,expansion-v1
+atm-cash.please-give-me-smaller-notes,Please give me smaller notes,,,,2,expansion-v1
+atm-cash.do-you-have-change,Do you have change?,,,,2,expansion-v1
+atm-cash.may-i-pay-in,May I pay in {}?,,,,2,expansion-v1
+atm-cash.please-charge-in-local-currency,Please charge in local currency,,,,2,expansion-v1
+atm-cash.where-can-i-get-coins,Where can I get coins?,,,,2,expansion-v1
+atm-cash.is-there-a-minimum-for-cards,Is there a minimum for cards?,,,,2,expansion-v1
+atm-cash.atm,ATM / cash machine,,,,2,expansion-v1
+atm-cash.banknote,note / bill,,,,2,expansion-v1
+atm-cash.coin,coin,,,,2,expansion-v1
+atm-cash.cash-only,cash only,,,,2,expansion-v1
+atm-cash.fee,fee / commission,,,,2,expansion-v1
+atm-cash.change,change,,,,2,expansion-v1
+atm-cash.exchange-rate,exchange rate,,,,2,expansion-v1
+atm-cash.bank,bank,,,,2,expansion-v1
+atm-cash.money-exchange,money exchange,,,,2,expansion-v1
+atm-cash.pin,PIN,,,,2,expansion-v1

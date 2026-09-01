@@ -18,3 +18,121 @@ lost-rescue.please-contact-rescue,Please contact rescue,,,,2,latex-reference-v2
 lost-rescue.my-companion-is-missing,My companion is missing,,,,2,latex-reference-v2
 lost-rescue.please-look-at-my-current-location,Please look at my current location,,,,2,japanese-reviewed-v6
 emergency-medical.i-feel-unwell,I feel unwell,,,,2,japanese-reviewed-v6
+emergency-medical.this-is-an-emergency,This is an emergency,,,,2,expansion-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,I am having a severe allergic reaction,,,,2,expansion-v1
+emergency-medical.i-cannot-breathe,I cannot breathe,,,,2,expansion-v1
+emergency-medical.i-am-bleeding-badly,I am bleeding badly,,,,2,expansion-v1
+emergency-medical.i-have-chest-pain,I have chest pain,,,,2,expansion-v1
+emergency-medical.this-person-is-unconscious,This person is unconscious,,,,2,expansion-v1
+emergency-medical.where-is-the-nearest-hospital,Where is the nearest hospital?,,,,2,expansion-v1
+emergency-medical.what-is-the-emergency-number,What is the emergency number?,,,,2,expansion-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Is there a doctor who speaks English?,,,,2,expansion-v1
+emergency-medical.i-think-a-bone-is-broken,I think a bone is broken,,,,2,expansion-v1
+emergency-medical.please-call-my-emergency-contact,Please call my emergency contact,,,,2,expansion-v1
+emergency-medical.i-have-travel-insurance,I have travel insurance,,,,2,expansion-v1
+lost-rescue.my-child-is-missing,My child is missing,,,,2,expansion-v1
+lost-rescue.i-do-not-know-where-i-am,I do not know where I am,,,,2,expansion-v1
+lost-rescue.my-friend-is-hurt,My friend is hurt,,,,2,expansion-v1
+lost-rescue.i-lost-my-wallet,I lost my wallet,,,,2,expansion-v1
+lost-rescue.i-lost-my-bag,I lost my bag,,,,2,expansion-v1
+lost-rescue.where-is-lost-and-found,Where is lost and found?,,,,2,expansion-v1
+lost-rescue.i-cannot-find-my-hotel,I cannot find my hotel,,,,2,expansion-v1
+lost-rescue.i-left-it-on-the-train,I left it on the train,,,,2,expansion-v1
+lost-rescue.i-cannot-get-down,I cannot get down,,,,2,expansion-v1
+medical-conditions.i-am-diabetic,I am diabetic,,,,2,expansion-v1
+medical-conditions.i-need-insulin,I need insulin,,,,2,expansion-v1
+medical-conditions.i-have-asthma,I have asthma,,,,2,expansion-v1
+medical-conditions.i-have-a-heart-condition,I have a heart condition,,,,2,expansion-v1
+medical-conditions.i-am-allergic-to-penicillin,I am allergic to penicillin,,,,2,expansion-v1
+medical-conditions.i-have-epilepsy,I have epilepsy,,,,2,expansion-v1
+medical-conditions.my-blood-sugar-is-low,My blood sugar is low,,,,2,expansion-v1
+medical-conditions.i-need-my-inhaler,I need my inhaler,,,,2,expansion-v1
+medical-conditions.i-am-pregnant,I am pregnant,,,,2,expansion-v1
+medical-conditions.i-carry-an-adrenaline-injector,I carry an adrenaline injector,,,,2,expansion-v1
+medical-conditions.i-take-medicine-for,I take medicine for {},,,,2,expansion-v1
+medical-conditions.i-take-blood-thinners,I take blood thinners,,,,2,expansion-v1
+medical-conditions.medicine-allergy,Medicine allergy: {},,,,2,expansion-v1
+medical-conditions.this-card-lists-my-conditions,This card lists my conditions,,,,2,expansion-v1
+medical-conditions.this-is-my-medicine,This is my medicine,,,,2,expansion-v1
+medical-conditions.please-give-me-sugar-or-juice,Please give me sugar or juice,,,,2,expansion-v1
+medical-conditions.inject-it-into-my-outer-thigh,Inject it into my outer thigh,,,,2,expansion-v1
+medical-conditions.my-blood-type-is,My blood type is {},,,,2,expansion-v1
+medical-conditions.do-not-give-me,Do not give me {},,,,2,expansion-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,I am allergic to aspirin and ibuprofen,,,,2,expansion-v1
+medical-conditions.my-injector-is-in-my-bag,My injector is in my bag,,,,2,expansion-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,I am allergic to sulfa drugs,,,,2,expansion-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,Which pharmacy is open now?,,,,2,expansion-v1
+pharmacy-symptoms.i-need-medicine-for,I need medicine for {},,,,2,expansion-v1
+pharmacy-symptoms.i-have-a-fever,I have a fever,,,,2,expansion-v1
+pharmacy-symptoms.i-have-diarrhea,I have diarrhea,,,,2,expansion-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Where is an all-night pharmacy?,,,,2,expansion-v1
+pharmacy-symptoms.painkiller,painkiller,,,,2,expansion-v1
+pharmacy-symptoms.do-i-need-a-prescription,Do I need a prescription?,,,,2,expansion-v1
+pharmacy-symptoms.i-have-a-headache,I have a headache,,,,2,expansion-v1
+pharmacy-symptoms.paracetamol-acetaminophen,paracetamol / acetaminophen,,,,2,expansion-v1
+pharmacy-symptoms.how-much-should-i-take,How much should I take?,,,,2,expansion-v1
+pharmacy-symptoms.i-am-vomiting,I am vomiting,,,,2,expansion-v1
+pharmacy-symptoms.rehydration-salts,rehydration salts,,,,2,expansion-v1
+pharmacy-symptoms.how-many-times-a-day,How many times a day?,,,,2,expansion-v1
+pharmacy-symptoms.i-have-a-stomach-ache,I have a stomach ache,,,,2,expansion-v1
+pharmacy-symptoms.i-have-a-cough,I have a cough,,,,2,expansion-v1
+pharmacy-symptoms.antihistamine,antihistamine,,,,2,expansion-v1
+pharmacy-symptoms.anti-diarrhea-medicine,anti-diarrhea medicine,,,,2,expansion-v1
+pharmacy-symptoms.is-this-safe-to-take-with,Is this safe to take with {}?,,,,2,expansion-v1
+pharmacy-symptoms.i-feel-dizzy,I feel dizzy,,,,2,expansion-v1
+pharmacy-symptoms.ibuprofen,ibuprofen,,,,2,expansion-v1
+pharmacy-symptoms.i-have-a-sore-throat,I have a sore throat,,,,2,expansion-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,Can I get this medicine here?,,,,2,expansion-v1
+pharmacy-symptoms.bandage,bandage,,,,2,expansion-v1
+pharmacy-symptoms.the-pain-is-severe,The pain is severe,,,,2,expansion-v1
+pharmacy-symptoms.antiseptic,antiseptic,,,,2,expansion-v1
+pharmacy-symptoms.i-feel-nauseous,I feel nauseous,,,,2,expansion-v1
+pharmacy-symptoms.i-have-a-rash,I have a rash,,,,2,expansion-v1
+pharmacy-symptoms.before-or-after-food,Before or after food?,,,,2,expansion-v1
+pharmacy-symptoms.i-think-it-is-infected,I think it is infected,,,,2,expansion-v1
+pharmacy-symptoms.motion-sickness-tablets,motion-sickness tablets,,,,2,expansion-v1
+pharmacy-symptoms.i-have-a-cut,I have a cut,,,,2,expansion-v1
+pharmacy-symptoms.antacid,antacid,,,,2,expansion-v1
+pharmacy-symptoms.i-have-a-burn,I have a burn,,,,2,expansion-v1
+pharmacy-symptoms.it-started-days-ago,It started {} days ago,,,,2,expansion-v1
+pharmacy-symptoms.cough-medicine,cough medicine,,,,2,expansion-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,Is this safe during pregnancy?,,,,2,expansion-v1
+police-consulate.where-is-the-police-station,Where is the police station?,,,,2,expansion-v1
+police-consulate.i-want-to-report-a-theft,I want to report a theft,,,,2,expansion-v1
+police-consulate.my-bag-was-stolen,My bag was stolen,,,,2,expansion-v1
+police-consulate.my-passport-was-stolen,My passport was stolen,,,,2,expansion-v1
+police-consulate.someone-is-following-me,Someone is following me,,,,2,expansion-v1
+police-consulate.i-need-a-written-police-report,I need a written police report,,,,2,expansion-v1
+police-consulate.i-want-to-contact-my-embassy,I want to contact my embassy,,,,2,expansion-v1
+police-consulate.i-need-it-for-my-insurance,I need it for my insurance,,,,2,expansion-v1
+police-consulate.i-need-an-interpreter,I need an interpreter,,,,2,expansion-v1
+police-consulate.please-leave-me-alone,Please leave me alone,,,,2,expansion-v1
+police-consulate.i-was-robbed,I was robbed,,,,2,expansion-v1
+police-consulate.i-want-a-lawyer,I want a lawyer,,,,2,expansion-v1
+police-consulate.please-notify-my-consulate,Please notify my consulate,,,,2,expansion-v1
+police-consulate.i-am-calling-the-police,I am calling the police,,,,2,expansion-v1
+police-consulate.am-i-under-arrest,Am I under arrest?,,,,2,expansion-v1
+police-consulate.no-thank-you-i-am-not-interested,"No thank you, I am not interested",,,,2,expansion-v1
+police-consulate.someone-attacked-me,Someone attacked me,,,,2,expansion-v1
+police-consulate.i-did-not-agree-to-this-price,I did not agree to this price,,,,2,expansion-v1
+police-consulate.please-write-the-report-number,Please write the report number,,,,2,expansion-v1
+police-consulate.it-happened-here,It happened here,,,,2,expansion-v1
+police-consulate.may-i-have-a-copy-of-the-report,May I have a copy of the report?,,,,2,expansion-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,I will not sign anything I cannot read,,,,2,expansion-v1
+police-consulate.am-i-free-to-go,Am I free to go?,,,,2,expansion-v1
+police-consulate.i-do-not-want-to-go-with-you,I do not want to go with you,,,,2,expansion-v1
+body-parts.head,head,,,,2,expansion-v1
+body-parts.stomach,stomach,,,,2,expansion-v1
+body-parts.back,back,,,,2,expansion-v1
+body-parts.throat,throat,,,,2,expansion-v1
+body-parts.tooth,tooth,,,,2,expansion-v1
+body-parts.chest,chest,,,,2,expansion-v1
+body-parts.eye,eye,,,,2,expansion-v1
+body-parts.ear,ear,,,,2,expansion-v1
+body-parts.leg,leg,,,,2,expansion-v1
+body-parts.arm,arm,,,,2,expansion-v1
+body-parts.foot,foot,,,,2,expansion-v1
+body-parts.hand,hand,,,,2,expansion-v1
+body-parts.knee,knee,,,,2,expansion-v1
+body-parts.ankle,ankle,,,,2,expansion-v1
+body-parts.skin,skin,,,,2,expansion-v1

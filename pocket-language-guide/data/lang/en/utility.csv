@@ -5,3 +5,12 @@ utility-templates.may-i,May I {} ?,,,,2,latex-reference-v2
 utility-templates.please-do-not-add,Please do not add {},,,,2,latex-reference-v2
 utility-templates.do-you-have,Do you have {} ?,,,,2,latex-reference-v2
 utility-templates.please-write-the-number,Please write the number,,,,2,latex-reference-v2
+utility-templates.i-need,I need {},,,,2,expansion-v1
+utility-templates.is-there-nearby,Is there a {} nearby?,,,,2,expansion-v1
+utility-templates.how-much-is,How much is {}?,,,,2,expansion-v1
+utility-templates.is-this,Is this {}?,,,,2,expansion-v1
+utility-templates.please,"{}, please",,,,2,expansion-v1
+utility-templates.i-am-looking-for,I am looking for {},,,,2,expansion-v1
+utility-templates.do-you-accept,Do you accept {}?,,,,2,expansion-v1
+utility-templates.i-cannot-find,I cannot find {},,,,2,expansion-v1
+utility-templates.there-is-a-problem-with,There is a problem with {},,,,2,expansion-v1

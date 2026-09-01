@@ -22,3 +22,32 @@ room-problems.the-room-is-too-noisy,The room is too noisy,,,,2,latex-reference-v
 hotel-basics.is-wi-fi-free,Is Wi-Fi free?,,,,2,japanese-reviewed-v6
 hotel-words.luggage-storage,luggage storage,,,,2,japanese-reviewed-v6
 hotel-requests.another-towel-please,"Another towel, please",,,,2,japanese-reviewed-v6
+laundry.please-wash-these-clothes,Please wash these clothes,,,,2,expansion-v1
+laundry.where-is-a-laundromat,Where is a laundromat?,,,,2,expansion-v1
+laundry.when-will-it-be-ready,When will it be ready?,,,,2,expansion-v1
+laundry.how-much-per-kilo,How much per kilo?,,,,2,expansion-v1
+laundry.can-it-be-ready-today,Can it be ready today?,,,,2,expansion-v1
+laundry.please-do-not-use-bleach,Please do not use bleach,,,,2,expansion-v1
+laundry.laundromat,laundromat,,,,2,expansion-v1
+laundry.please-iron-this,Please iron this,,,,2,expansion-v1
+laundry.detergent,detergent,,,,2,expansion-v1
+laundry.dry-cleaning,dry cleaning,,,,2,expansion-v1
+laundry.dryer,dryer,,,,2,expansion-v1
+laundry.coin-operated,coin-operated,,,,2,expansion-v1
+hotel-basics.how-much-per-night,How much per night?,,,,2,expansion-v1
+hotel-basics.is-breakfast-included,Is breakfast included?,,,,2,expansion-v1
+hotel-basics.may-i-see-the-room,May I see the room?,,,,2,expansion-v1
+hotel-basics.for-nights,For {} nights,,,,2,expansion-v1
+hotel-basics.two-beds,"Two beds, please",,,,2,expansion-v1
+hotel-basics.is-there-air-conditioning,Is there air conditioning?,,,,2,expansion-v1
+hotel-requests.what-time-is-check-out,What time is check-out?,,,,2,expansion-v1
+hotel-requests.can-i-check-in-early,Can I check in early?,,,,2,expansion-v1
+hotel-requests.another-night,Can I stay another night?,,,,2,expansion-v1
+hotel-requests.is-there-a-safe,Is there a safe?,,,,2,expansion-v1
+hotel-requests.another-blanket,"Another blanket, please",,,,2,expansion-v1
+hotel-requests.wake-up-call,Please wake me at {},,,,2,expansion-v1
+room-problems.the-key-does-not-work,The key does not work,,,,2,expansion-v1
+room-problems.the-toilet-will-not-flush,The toilet will not flush,,,,2,expansion-v1
+room-problems.the-light-does-not-work,The light does not work,,,,2,expansion-v1
+room-problems.please-send-someone,Please send someone to fix it,,,,2,expansion-v1
+room-problems.the-heating-does-not-work,The heating does not work,,,,2,expansion-v1

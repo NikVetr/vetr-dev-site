@@ -4,7 +4,6 @@ building-help.i-am-lost,I am lost,,,,2,latex-reference-v2
 building-help.where-is-reception,Where is reception?,,,,2,latex-reference-v2
 building-help.where-is-a-power-outlet,Where is a power outlet?,,,,2,latex-reference-v2
 in-a-building.is-this-the-correct-entrance,Is this the correct entrance?,,,,2,latex-reference-v2
-in-a-building.where-is-the-restroom,Where is the restroom?,,,,2,latex-reference-v2
 in-a-building.do-you-have-wi-fi,Do you have Wi-Fi?,,,,2,latex-reference-v2
 in-a-building.what-is-the-wi-fi-password,What is the Wi-Fi password?,,,,2,latex-reference-v2
 in-a-building.which-floor,Which floor?,,,,2,latex-reference-v2
@@ -16,3 +15,46 @@ building-words.men,men,,,,2,latex-reference-v2
 building-words.women,women,,,,2,latex-reference-v2
 building-words.door,door,,,,2,latex-reference-v2
 building-words.key,key,,,,2,latex-reference-v2
+toilets.where-toilet,Where is the toilet?,,,,2,expansion-v1
+toilets.where-public-toilet,Where is a public toilet?,,,,2,expansion-v1
+toilets.may-i-use-the-toilet,May I use the toilet?,,,,2,expansion-v1
+toilets.is-it-only-for-customers,Is it only for customers?,,,,2,expansion-v1
+toilets.toilet-wc,toilet / WC,,,,2,expansion-v1
+toilets.is-it-free,Is it free?,,,,2,expansion-v1
+toilets.do-i-need-a-coin,Do I need a coin or token?,,,,2,expansion-v1
+toilets.is-the-tap-water-safe-to-drink,Is the tap water safe to drink?,,,,2,expansion-v1
+toilets.it-is-urgent,It is urgent,,,,2,expansion-v1
+toilets.may-i-have-the-toilet-key,May I have the toilet key?,,,,2,expansion-v1
+toilets.there-is-no-toilet-paper,There is no toilet paper,,,,2,expansion-v1
+toilets.toilet-paper,toilet paper,,,,2,expansion-v1
+toilets.it-is-out-of-order,It is out of order,,,,2,expansion-v1
+toilets.out-of-order,out of order,,,,2,expansion-v1
+toilets.mens-toilet,men's toilet,,,,2,expansion-v1
+toilets.womens-toilet,women's toilet,,,,2,expansion-v1
+toilets.drinking-water,drinking water,,,,2,expansion-v1
+toilets.not-for-drinking,not for drinking,,,,2,expansion-v1
+toilets.accessible-toilet,accessible toilet,,,,2,expansion-v1
+toilets.where-can-i-wash-my-hands,Where can I wash my hands?,,,,2,expansion-v1
+toilets.can-i-flush-the-paper,Can I flush the paper?,,,,2,expansion-v1
+toilets.is-there-a-toilet-on-board,Is there a toilet on board?,,,,2,expansion-v1
+toilets.the-toilet-will-not-flush,The toilet will not flush,,,,2,expansion-v1
+toilets.baby-change,baby change,,,,2,expansion-v1
+toilets.squat-toilet,squat toilet,,,,2,expansion-v1
+accessibility.step-free,Is there step-free access?,,,,2,expansion-v1
+accessibility.wheelchair-access,Is it wheelchair accessible?,,,,2,expansion-v1
+accessibility.elevator,Is there an elevator?,,,,2,expansion-v1
+accessibility.ramp,Is there a ramp?,,,,2,expansion-v1
+accessibility.how-many-steps,How many steps are there?,,,,2,expansion-v1
+accessibility.cannot-climb-stairs,I cannot climb stairs,,,,2,expansion-v1
+accessibility.need-to-sit-down,I need to sit down,,,,2,expansion-v1
+accessibility.accessible-restroom,Is there an accessible restroom?,,,,2,expansion-v1
+accessibility.station-assistance,Is there assistance at the station?,,,,2,expansion-v1
+accessibility.help-me-carry,Please help me carry this,,,,2,expansion-v1
+accessibility.board-first,May I board first?,,,,2,expansion-v1
+accessibility.door-width,How wide is the door?,,,,2,expansion-v1
+accessibility.wheelchair-width,My wheelchair is {} cm wide,,,,2,expansion-v1
+accessibility.hard-of-hearing,I am hard of hearing,,,,2,expansion-v1
+accessibility.speak-louder,Please speak louder,,,,2,expansion-v1
+accessibility.visually-impaired,I am visually impaired,,,,2,expansion-v1
+accessibility.take-your-arm,May I take your arm?,,,,2,expansion-v1
+accessibility.guide-dog,This is my guide dog,,,,2,expansion-v1

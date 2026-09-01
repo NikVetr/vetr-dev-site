@@ -1,4 +1,29 @@
 concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,notes
+atm-cash.where-is-an-atm,atm-cash,entry,phrase,where-is-an-atm,1,0.840,atm-cash.atm,0,0,neutral,
+atm-cash.does-this-atm-take-foreign-cards,atm-cash,entry,phrase,does-this-atm-take-foreign-cards,2,0.780,atm-cash.does-this-atm-take-foreign-cards,0,0,neutral,Many local machines reject foreign-issued cards outright; this is the first thing to ask.
+atm-cash.the-atm-kept-my-card,atm-cash,entry,phrase,the-atm-kept-my-card,3,0.760,atm-cash.the-atm-kept-my-card,0,0,neutral,"Retained card. Said to a bank teller or a guard, usually urgently."
+atm-cash.is-there-a-fee,atm-cash,refphrase,phrase,is-there-a-fee,4,0.750,atm-cash.fee,0,0,neutral,
+atm-cash.the-card-was-declined,atm-cash,entry,phrase,the-card-was-declined,5,0.740,atm-cash.the-card-was-declined,0,0,neutral,
+atm-cash.what-is-the-exchange-rate,atm-cash,entry,phrase,what-is-the-exchange-rate,6,0.730,atm-cash.exchange,0,0,neutral,
+atm-cash.no-money-came-out,atm-cash,refphrase,phrase,no-money-came-out,7,0.720,atm-cash.machine-fault,0,0,neutral,The machine debited but dispensed nothing.
+atm-cash.where-can-i-change-money,atm-cash,entry,phrase,where-can-i-change-money,8,0.710,atm-cash.exchange,1,0,neutral,
+atm-cash.the-machine-is-out-of-service,atm-cash,entry,phrase,the-machine-is-out-of-service,9,0.700,atm-cash.machine-fault,1,0,neutral,
+atm-cash.please-give-me-smaller-notes,atm-cash,entry,phrase,please-give-me-smaller-notes,10,0.690,atm-cash.smaller-money,0,0,neutral,"US English: 'smaller bills'. Ask for lower denominations, not for coins."
+atm-cash.do-you-have-change,atm-cash,refphrase,phrase,do-you-have-change,11,0.670,atm-cash.smaller-money,1,0,neutral,Change as in small money to break a large note.
+atm-cash.may-i-pay-in,atm-cash,entry,template,may-i-pay-in,12,0.660,atm-cash.may-i-pay-in,0,1,neutral,Slot is a currency name. About whether a foreign currency is accepted at all.
+atm-cash.please-charge-in-local-currency,atm-cash,entry,phrase,please-charge-in-local-currency,13,0.640,atm-cash.please-charge-in-local-currency,0,0,neutral,"Declines dynamic currency conversion, which costs the traveler several percent."
+atm-cash.where-can-i-get-coins,atm-cash,entry,phrase,where-can-i-get-coins,14,0.620,atm-cash.where-can-i-get-coins,0,0,neutral,"Coins are needed for paid toilets, lockers and laundry machines."
+atm-cash.is-there-a-minimum-for-cards,atm-cash,refphrase,phrase,is-there-a-minimum-for-cards,15,0.600,atm-cash.is-there-a-minimum-for-cards,0,0,neutral,
+atm-cash.atm,atm-cash,ref,word,atm,16,0.590,atm-cash.atm,1,0,neutral,
+atm-cash.banknote,atm-cash,ref,word,banknote,17,0.580,atm-cash.banknote,0,0,neutral,'Banknote' is the international term; 'bill' is US English. Give the everyday local word.
+atm-cash.coin,atm-cash,ref,word,coin,18,0.570,atm-cash.coin,0,0,neutral,
+atm-cash.cash-only,atm-cash,ref,word,cash-only,19,0.560,atm-cash.cash-only,0,0,neutral,Sign or counter notice.
+atm-cash.fee,atm-cash,ref,word,fee,20,0.550,atm-cash.fee,1,0,neutral,
+atm-cash.change,atm-cash,ref,word,change,21,0.545,atm-cash.change,0,0,neutral,"Money handed back after payment, not the verb 'to change money'."
+atm-cash.exchange-rate,atm-cash,ref,word,exchange-rate,22,0.540,atm-cash.exchange-rate,0,0,neutral,
+atm-cash.bank,atm-cash,ref,word,bank,23,0.530,atm-cash.bank,0,0,neutral,
+atm-cash.money-exchange,atm-cash,ref,word,money-exchange,24,0.520,atm-cash.money-exchange,0,0,neutral,Sign on a bureau de change.
+atm-cash.pin,atm-cash,ref,word,pin,25,0.500,atm-cash.pin,0,0,neutral,Keypad prompt. Most machines abroad accept only four digits.
 numbers-money.l-ng,numbers-money,num,number,item,1,0.960,numbers-money.misc,0,0,neutral,
 numbers-money.y,numbers-money,num,number,item,2,0.947,numbers-money.misc,1,0,neutral,
 numbers-money.r,numbers-money,num,number,item,3,0.933,numbers-money.misc,2,0,neutral,
