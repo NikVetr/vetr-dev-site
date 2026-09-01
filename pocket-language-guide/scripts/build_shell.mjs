@@ -16,8 +16,9 @@
 import { readFile, writeFile, readdir, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const CHECK = process.argv.includes('--check');
 const INDEX_PATH = 'data/respell/overrides/index.json';
 

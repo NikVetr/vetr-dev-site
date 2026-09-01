@@ -51,6 +51,10 @@ h2 { font-size: var(--fs-2); margin: 0 0 var(--space-2); }
 h3 { font-size: var(--fs-1); margin: 0 0 var(--space-1); }
 
 .container { width: min(100% - 2rem, 1180px); margin-inline: auto; }
+/* The studio is full-bleed, so the header above it must be too: capped, the brand
+   sat 250px inboard of the panel title it labels. Matches `.studio > section`
+   padding so the two line up. */
+.container-wide { width: 100%; padding-inline: var(--space-2); }
 .lede { color: var(--muted); max-width: 62ch; margin: 0 0 var(--space-3); }
 .row { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; }
 .spacer { flex: 1; }
@@ -82,8 +86,10 @@ button.primary, .btn.primary {
   background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
 }
 button.primary:hover, .btn.primary:hover { filter: brightness(1.08); }
-button.ghost { border-color: transparent; background: none; }
-button.ghost:hover { background: var(--surface); }
+/* Subdued, but still a button: a transparent border and no fill read as plain
+   text, so "All on / All off / Balance columns" looked like a sentence. */
+button.ghost { border-color: var(--line-soft); background: var(--surface); color: var(--muted); }
+button.ghost:hover { background: var(--surface-2); border-color: var(--line); color: var(--ink); }
 
 select, input[type="text"], input[type="number"] {
   font: inherit; color: var(--ink); background: var(--paper);
@@ -106,15 +112,32 @@ label { display: block; }
   background: var(--paper);
   z-index: 20;
 }
-.site-header .container { display: flex; align-items: center; gap: var(--space-3); }
+/* Wraps rather than pushing the picker -- or, in the studio, the export buttons --
+   off the side of a phone. */
+.site-header .container { display: flex; align-items: center; gap: var(--space-1) var(--space-3); flex-wrap: wrap; }
 .brand { font-weight: 700; text-decoration: none; color: var(--ink); white-space: nowrap; }
-.reader-picker { display: flex; align-items: center; gap: var(--space-1); font-size: var(--fs--1); }
+.reader-picker { display: flex; align-items: center; gap: var(--space-1); font-size: var(--fs--1); min-width: 0; }
+/* A long endonym must not set the header's width. */
+.reader-picker select { min-width: 0; max-width: 100%; text-overflow: ellipsis; }
+
+/* Out of flow and off the top until focused, so it costs no layout and never
+   widens the page; z-index clears the sticky header. */
+.skip-link {
+  position: absolute; top: var(--space-1); left: var(--space-1); z-index: 30;
+  transform: translateY(calc(-100% - var(--space-3)));
+  background: var(--accent); color: #fff; text-decoration: none;
+  padding: 0.35em 0.8em; border-radius: var(--radius-sm); font-size: var(--fs--1);
+}
+.skip-link:focus { transform: none; }
 
 /* --- gallery ------------------------------------------------------------- */
 
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  /* Equal rows: only some cards carry a coverage line, and rows sized to their own
+     content left the first row standing 25px taller than the rest. */
+  grid-auto-rows: 1fr;
   gap: var(--space-3);
   padding-block: var(--space-3) var(--space-4);
 }
@@ -162,14 +185,29 @@ label { display: block; }
 
 /* --- studio -------------------------------------------------------------- */
 
+/* The studio takes whatever the header and banner actually leave. A calc() against
+   a guessed chrome height overflowed by 46px with the banner up and left a 3px gap
+   with it hidden, and the overflow read as 900px of blank page below the fold. The
+   height must be definite, not a minimum: against an indefinite one `.studio`'s
+   `flex-basis: 0%` falls back to its 9,000px content and contains nothing. */
+body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
+
 .studio {
   display: grid;
-  grid-template-columns: 20% 50% 30%;
-  height: calc(100dvh - 3.4rem);
+  /* Ratios, not percentages, so the format column can hold its 250px floor: at
+     1101px a flat 20% gave it 220px and every control wrapped an orphan row. */
+  grid-template-columns: minmax(250px, 1fr) minmax(0, 2.5fr) minmax(0, 1.5fr);
+  /* One row, exactly the studio's height. An auto row grew to the 9,000px content
+     tree, so the panel's own `overflow: auto` never had anything to scroll. */
+  grid-template-rows: minmax(0, 1fr);
+  flex: 1;
   min-height: 0;
 }
+/* Positioned so the panel is the containing block for its own absolutely
+   positioned children: a `.visually-hidden` input 1,900px down the format panel
+   was otherwise measured against the page and added 1,100px of blank scroll. */
 .studio > section {
-  min-height: 0; overflow: auto; padding: var(--space-2);
+  min-height: 0; overflow: auto; padding: var(--space-2); position: relative;
   border-inline-end: 1px solid var(--line);
 }
 .studio > section:last-child { border-inline-end: none; }
@@ -195,13 +233,30 @@ label { display: block; }
 .face.focused { cursor: default; }
 .face-strip { display: flex; gap: var(--space-1); margin-top: auto; }
 .face-strip .face { flex: 1; cursor: pointer; }
-.face-strip .face.current { outline: 2px solid var(--accent); }
+.face.current { outline: 2px solid var(--accent); }
+/* Colour alone should not say "you are here": the tick survives greyscale. */
+.face.current::after {
+  content: '\2713'; position: absolute; inset-block-start: 0; inset-inline-end: 0;
+  font-size: 0.75rem; line-height: 1.1; padding: 0 0.25em;
+  color: var(--paper); background: var(--accent); border-end-start-radius: var(--radius-sm);
+}
+/* Focus must not be mistaken for "current": current hugs the edge and carries the
+   tick, focus stands a thicker ring off the page, and a focused current face shows
+   the ring and the tick together. Ordered after `.current` so focus wins the
+   outline the two rules share. */
+.face:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
 .hit-layer { position: absolute; inset: 0; }
 .hit {
   position: absolute; cursor: pointer; border-radius: 2px;
 }
 .hit:hover { background: rgb(11 103 163 / 12%); box-shadow: inset 0 0 0 1px var(--accent); }
+/* Drawn inside its own box: a row is a few pixels tall and its face clips, so an
+   offset ring would be cut off or land on the neighbouring row. */
+.hit:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: -1px;
+  background: rgb(11 103 163 / 12%);
+}
 
 /* --- content tree -------------------------------------------------------- */
 
@@ -230,9 +285,32 @@ label { display: block; }
 .status { font-size: var(--fs--1); color: var(--muted); }
 .status[data-busy="1"]::after { content: " solving…"; color: var(--accent); }
 
-@media (max-width: 1100px) {
-  .studio { grid-template-columns: 1fr; height: auto; }
+/* Tablet to small laptop: the sheet on top at full width, the two control panels
+   side by side under it. Three 1099px-wide bands left ~850px of dead space beside
+   every control group. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .studio {
+    grid-template-columns: minmax(250px, 22rem) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .studio > .canvas {
+    grid-area: 1 / 1 / 2 / -1;
+    border-inline-end: none; border-bottom: 1px solid var(--line);
+  }
+  .studio > section:first-of-type { grid-area: 2 / 1; }
+  .studio > section:last-of-type { grid-area: 2 / 2; }
+}
+
+/* A phone scrolls the page as one -- three panels locked into one viewport would
+   each be too short to read -- but the sheet comes first, because it is the thing
+   being edited, and the two long panels scroll inside themselves rather than
+   running the page to 11,000px. */
+@media (max-width: 700px) {
+  body:has(> .studio) { display: block; height: auto; }
+  .studio { grid-template-columns: 1fr; grid-template-rows: none; }
   .studio > section { border-inline-end: none; border-bottom: 1px solid var(--line); }
+  .studio > .canvas { order: -1; }
+  .studio > section:first-of-type, .studio > section:last-of-type { max-height: 70vh; }
   .face-grid { grid-template-columns: 1fr; }
 }
 
@@ -316,11 +394,12 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
   flex: 0 0 auto; line-height: 1.05;
 }
 .flag { font-size: 0.85rem; }
+/* 0.66rem was 10.56px; 0.7rem is the 11px floor. */
 .flags.as-codes .flag {
-  font-size: 0.66rem; font-weight: 600; color: var(--muted); text-align: center;
+  font-size: 0.7rem; font-weight: 600; color: var(--muted); text-align: center;
   border: 1px solid var(--line); border-radius: 3px; padding: 0 0.2em; line-height: 1.3;
 }
-.flag.more { font-size: 0.66rem; color: var(--muted); align-self: center; text-align: center; }
+.flag.more { font-size: 0.7rem; color: var(--muted); align-self: center; text-align: center; }
 
 /* A static collage: the reader's own label leads, the rest recede. No motion. */
 #reader-label {
@@ -343,7 +422,9 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
 }
 .panel-note { margin: 0.35em 0 0; }
 
-.segmented { display: flex; flex-wrap: wrap; gap: 4px; }
+/* Segments hang from the top of their row, so a caption that wraps to two lines
+   ("Credit-card size") cannot push its row-mates' glyphs down. */
+.segmented { display: flex; flex-wrap: wrap; align-items: start; gap: 4px; }
 .segment {
   display: flex; flex-direction: column; align-items: center; gap: 2px;
   padding: 4px 5px 3px; min-width: 44px; border: 1px solid var(--line);
@@ -355,7 +436,9 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 .segment-caption {
-  font-size: 0.66rem; line-height: 1.1; color: var(--muted); text-align: center;
+  /* 11px floor; two reserved lines so the segment boxes in a row stay even. */
+  font-size: 0.7rem; line-height: 1.1; min-height: 2.2em;
+  color: var(--muted); text-align: center;
   max-width: 6.5em; overflow-wrap: anywhere;
 }
 .segment.current .segment-caption { color: var(--accent); font-weight: 600; }
@@ -369,7 +452,13 @@ svg.glyph .g-shade { fill: #eef2f5; }
 svg.glyph .g-accent { fill: var(--accent); }
 svg.glyph .g-cut { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 2; fill: none; }
 svg.glyph .g-mark { fill: var(--accent); }
-svg.glyph .g-count { font-size: 8px; fill: var(--muted); text-anchor: end; }
+/* Baseline and anchor are set in ui/glyphs.js at the very corner of the 30-unit
+   box, so the count is lifted clear of the edge and given a paper halo to stay
+   legible over the little pages it sits on. */
+svg.glyph .g-count {
+  font-size: 7px; fill: var(--muted); text-anchor: end; transform: translateY(-1.5px);
+  paint-order: stroke; stroke: var(--paper); stroke-width: 1.6px; stroke-linejoin: round;
+}
 .segment.current svg.glyph .g-col { fill: #a9c6da; }
 
 .field-toggles { display: flex; flex-direction: column; gap: 1px; }
@@ -389,7 +478,7 @@ details.add-term > summary {
 }
 details.add-term .field { margin-bottom: var(--space-1); }
 details.add-term input[type="text"] { width: 100%; }
-.tag.mine { border-color: var(--accent); color: var(--accent); font-size: 0.68rem; }
+.tag.mine { border-color: var(--accent); color: var(--accent); font-size: 0.7rem; }
 svg.glyph .g-sample { fill: var(--ink); text-anchor: middle; }
 
 /* --- duplex check -------------------------------------------------------- */
@@ -431,7 +520,9 @@ svg.glyph .g-sample { fill: var(--ink); text-anchor: middle; }
   display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: var(--space-4);
   align-items: start;
 }
-.sheet-options { position: sticky; top: 4.2rem; }
+/* No `position: sticky` here: the options are taller than the viewport at every
+   width, and `align-items: start` makes their grid area exactly their own height,
+   so the rule had no room to slide in and only looked like it did something. */
 .export-block {
   display: flex; flex-direction: column; gap: var(--space-2);
   border-top: 1px solid var(--line); padding-top: var(--space-3); margin-top: var(--space-3);
@@ -443,7 +534,6 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 
 @media (max-width: 860px) {
   .sheet-body { grid-template-columns: 1fr; }
-  .sheet-options { position: static; }
   .sheet-preview .face-grid { grid-template-columns: 1fr; }
 }
 
