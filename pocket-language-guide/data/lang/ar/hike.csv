@@ -1,0 +1,66 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+weather.forecast,ما توقعات الطقس؟,,mā tawaqquʿāt al-ṭaqs?,,,2,ar-agent-v1
+weather.will-it-rain,هل ستمطر اليوم؟,,hal satumṭir al-yawm?,,,2,ar-agent-v1
+weather.is-it-safe-today,هل الوضع آمن اليوم؟,,hal al-waḍʿ āmin al-yawm?,,,2,ar-agent-v1
+weather.how-cold-at-night,كم تنخفض الحرارة ليلاً؟,,kam tankhafiḍ al-ḥarārah laylan?,,,2,ar-agent-v1
+weather.rain,مطر,,maṭar,,,2,ar-agent-v1
+weather.snow,ثلج,,thalj,,,2,ar-agent-v1
+weather.wind,ريح,,rīḥ,,,2,ar-agent-v1
+weather.storm,عاصفة,عاصفة رملية,ʿāṣifah,,,2,ar-agent-v1
+weather.ice,جليد,,jalīd,,,2,ar-agent-v1
+weather.fog,ضباب,,ḍabāb,,,2,ar-agent-v1
+weather.heat,حرّ,حرارة,ḥarr,,,2,ar-agent-v1
+weather.cold,برد,,bard,,,2,ar-agent-v1
+weather.humid,رطب,رطوبة,raṭib,,,2,ar-agent-v1
+weather.sunrise,شروق الشمس,,shurūq al-shams,,,2,ar-agent-v1
+weather.flood,فيضان,سيول,fayaḍān,,,2,ar-agent-v1
+weather.avalanche-risk,خطر انهيار ثلجي,خطر الانهيارات الثلجية,khaṭar inhiyār thaljī,,,2,ar-agent-v1
+trail-words.trail,مسار,درب,masār,,,2,ar-agent-v1
+trail-words.trailhead,بداية المسار,,bidāyat al-masār,,,2,ar-agent-v1
+trail-words.summit,قمة,,qimmah,,,2,ar-agent-v1
+trail-words.viewpoint,مطلّ,نقطة مشاهدة,maṭall,,,2,ar-agent-v1
+trail-words.cableway,تلفريك,عربة معلّقة,tilfirīk,,,2,ar-agent-v1
+trail-words.shuttle-bus,حافلة مكوكية,باص مكوكي,ḥāfilah makkūkīyah,,,2,ar-agent-v1
+trail-words.park-shuttle,حافلة المتنزه,,ḥāfilat al-mutanazzah,,,1,ar-agent-v1
+trail-words.steps,درجات,سلالم,darajāt,,,2,ar-agent-v1
+trail-words.up-uphill,صعود,للأعلى,ṣuʿūd,,,2,ar-agent-v1
+trail-words.down-downhill,نزول,للأسفل,nuzūl,,,2,ar-agent-v1
+trail-words.one-way,اتجاه واحد,,ittijāh wāḥid,,,2,ar-agent-v1
+trail-words.round-trip,ذهاب وعودة,,dhahāb wa-ʿawdah,,,2,ar-agent-v1
+hiking-parks.is-this-the-way-to,هل هذا الطريق إلى {}؟,,hal hādhā al-ṭarīq ilá {}?,,,2,ar-agent-v1
+hiking-parks.where-is-the-trailhead,أين بداية المسار؟,,ayna bidāyat al-masār?,,,2,ar-agent-v1
+hiking-parks.how-long-to-the-summit,كم يستغرق إلى القمة؟,,kam yastaghriq ilá al-qimmah?,,,2,ar-agent-v1
+hiking-parks.how-long-to-the-viewpoint,كم يستغرق إلى المطلّ؟,,kam yastaghriq ilá al-maṭall?,,,2,ar-agent-v1
+hiking-parks.which-route-is-easier,أيّ طريق أسهل؟,,ayy ṭarīq ashal?,,,2,ar-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,هل هذا المسار مناسب للمبتدئين؟,,hal hādhā al-masār munāsib lil-mubtadiʾīn?,,,2,ar-agent-v1
+trail-conditions.how-long-is-the-full-route,كم طول المسار كاملاً؟,,kam ṭūl al-masār kāmilan?,,,2,ar-agent-v1
+trail-conditions.can-we-return-the-same-way,هل نعود من نفس الطريق؟,,hal naʿūd min nafs al-ṭarīq?,,,2,ar-agent-v1
+trail-conditions.can-we-return-before-dark,هل نعود قبل الغروب؟,,hal naʿūd qabl al-ghurūb?,,before sunset,2,ar-agent-v1
+trail-conditions.is-the-trail-open,هل المسار مفتوح؟,,hal al-masār maftūḥ?,,,2,ar-agent-v1
+trail-conditions.is-the-route-steep,هل الطريق شديد الانحدار؟,,hal al-ṭarīq shadīd al-inḥidār?,,,2,ar-agent-v1
+trail-conditions.is-the-path-slippery,هل الطريق زلق؟,,hal al-ṭarīq zaliq?,,,2,ar-agent-v1
+trail-transport.how-long-is-the-queue,كم طول الصف؟,كم طول الطابور؟,kam ṭūl al-ṣaff?,,,2,ar-agent-v1
+trail-transport.what-time-is-the-last-shuttle,متى آخر حافلة؟,,matá ākhir ḥāfilah?,,,2,ar-agent-v1
+trail-transport.when-does-the-cableway-stop,متى يتوقف التلفريك؟,,matá yatawaqqaf al-tilfirīk?,,,2,ar-agent-v1
+trail-transport.where-can-we-buy-water,أين نشتري الماء؟,,ayna nashtarī al-māʾ?,,,2,ar-agent-v1
+trail-transport.where-can-we-refill-water,أين نملأ الماء؟,,ayna namlaʾ al-māʾ?,,,2,ar-agent-v1
+trail-transport.is-there-cell-signal-here,هل هناك إرسال هنا؟,,hal hunāk irsāl hunā?,,,2,ar-agent-v1
+trail-transport.do-you-have-a-map,هل لديك خريطة؟,,hal ladayk kharīṭah?,,,2,ar-agent-v1
+trail-transport.how-long-is-the-wait,كم مدة الانتظار؟,,kam muddat al-intiẓār?,,,2,ar-agent-v1
+trail-warnings.open,مفتوح,,maftūḥ,,,2,ar-agent-v1
+trail-warnings.closed,مغلق,,mughlaq,,,2,ar-agent-v1
+trail-warnings.maintenance,أعمال صيانة,صيانة,aʿmāl ṣiyānah,,,2,ar-agent-v1
+trail-warnings.steep-slope,منحدر شديد,,munḥadar shadīd,,,2,ar-agent-v1
+trail-warnings.caution-slippery,احترس أرضية زلقة,,iḥtaris arḍīyah zaliqah,,,2,ar-agent-v1
+trail-warnings.danger,خطر,,khaṭar,,,2,ar-agent-v1
+trail-warnings.beware-falling-rocks,خطر سقوط صخور,,khaṭar suqūṭ ṣukhūr,,,2,ar-agent-v1
+trail-warnings.first-aid-station,نقطة إسعاف,الإسعافات الأولية,nuqṭat isʿāf,,,2,ar-agent-v1
+trail-warnings.service-suspended,الخدمة متوقفة,,al-khidmah mutawaqqifah,,,2,ar-agent-v1
+trail-landmarks.trail-marker,علامة المسار,,ʿalāmat al-masār,,,2,ar-agent-v1
+trail-landmarks.fork-junction,مفرق,تفرّع,mafraq,,,2,ar-agent-v1
+trail-landmarks.boardwalk-cliff-path,ممشى خشبي,ممر جبلي,mamshá khashabī,,,1,ar-agent-v1
+trail-landmarks.start,البداية,,al-bidāyah,,,2,ar-agent-v1
+trail-landmarks.end,النهاية,,al-nihāyah,,,2,ar-agent-v1
+trail-landmarks.elevation,الارتفاع,,al-irtifāʿ,,,2,ar-agent-v1
+trail-landmarks.sunset,غروب الشمس,,ghurūb al-shams,,,2,ar-agent-v1
+trail-landmarks.water-point,نقطة مياه,,nuqṭat miyāh,,,2,ar-agent-v1

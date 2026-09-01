@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+introductions.my-name-is,اسمي {},,ismī {},,,2,ar-agent-v1
+introductions.nice-to-meet-you,تشرّفنا,سعيد بمعرفتك,tasharrafnā,,we are honoured,2,ar-agent-v1
+introductions.what-is-your-name,ما اسمك؟,,mā ismak?,,,2,ar-agent-v1
+introductions.we-are-traveling-together,نحن نسافر معاً,,naḥnu nusāfir maʿan,,,2,ar-agent-v1
+introductions.this-is-my-friend,هذا صديقي,هذه صديقتي,hādhā ṣadīqī,,,2,ar-agent-v1
+introductions.i-am-from,أنا من {},,anā min {},,,2,ar-agent-v1
+introductions.where-are-you-from,من أين أنت؟,,min ayna anta?,,,2,ar-agent-v1
+introductions.how-are-you,كيف حالك؟,,kayf ḥālak?,,,2,ar-agent-v1
+introductions.i-am-a-tourist,أنا سائح,,anā sāʾiḥ,,,2,ar-agent-v1
+introductions.this-is-my-husband-wife,هذا زوجي / هذه زوجتي,,hādhā zawjī / hādhihi zawjatī,,,2,ar-agent-v1
+introductions.this-is-my-daughter-son,هذه ابنتي / هذا ابني,,hādhihi ibnatī / hādhā ibnī,,,2,ar-agent-v1
+introductions.i-am-traveling-alone,أسافر وحدي,,usāfir waḥdī,,,2,ar-agent-v1

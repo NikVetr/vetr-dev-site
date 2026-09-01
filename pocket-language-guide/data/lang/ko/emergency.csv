@@ -1,0 +1,138 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+medical-conditions.i-am-diabetic,당뇨병이 있어요,,dangnyobyeongi isseoyo,,,2,ko-agent-v1
+medical-conditions.i-need-insulin,인슐린이 필요해요,,insyullini piryohaeyo,,,2,ko-agent-v1
+medical-conditions.i-have-asthma,천식이 있어요,,cheonsigi isseoyo,,,2,ko-agent-v1
+medical-conditions.i-have-a-heart-condition,심장병이 있어요,,simjangbyeongi isseoyo,,,2,ko-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,페니실린 알레르기가 있어요,,penisillin allereugiga isseoyo,,,2,ko-agent-v1
+medical-conditions.i-have-epilepsy,뇌전증이 있어요,간질,noejeonjeungi isseoyo,,,2,ko-agent-v1
+medical-conditions.my-blood-sugar-is-low,저혈당이에요,,jeohyeoldangieyo,,,2,ko-agent-v1
+medical-conditions.i-need-my-inhaler,흡입기가 필요해요,,heubipgiga piryohaeyo,,,2,ko-agent-v1
+medical-conditions.i-am-pregnant,임신했어요,,imsinhaesseoyo,,,2,ko-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,에피네프린 자가주사기가 있어요,에피펜이 있어요,epinepeurin jagajusagiga isseoyo,,adrenaline auto-injector,2,ko-agent-v1
+medical-conditions.i-take-medicine-for,{} 약을 먹고 있어요,,{} yageul meokgo isseoyo,,,2,ko-agent-v1
+medical-conditions.i-take-blood-thinners,항응고제를 먹어요,,hangeunggojereul meogeoyo,,anticoagulant,2,ko-agent-v1
+medical-conditions.medicine-allergy,약물 알레르기: {},,yangmul allereugi: {},,,2,ko-agent-v1
+medical-conditions.this-card-lists-my-conditions,이 카드에 제 병력이 있어요,,i kadeue je byeongnyeogi isseoyo,,,2,ko-agent-v1
+medical-conditions.this-is-my-medicine,이게 제 약이에요,,ige je yagieyo,,,2,ko-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,설탕이나 주스를 주세요,,seoltangina juseureul juseyo,,,2,ko-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,허벅지 바깥쪽에 놓아 주세요,,heobeokji bakkatjjoge noa juseyo,,,2,ko-agent-v1
+medical-conditions.my-blood-type-is,제 혈액형은 {}예요,,je hyeolaekhyeongeun {}yeyo,,,2,ko-agent-v1
+medical-conditions.do-not-give-me,{} 주지 마세요,,{} juji maseyo,,,2,ko-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,"아스피린, 이부프로펜 알레르기예요",,"aseupirin, ibupeuropen allereugiyeyo",,,2,ko-agent-v1
+medical-conditions.my-injector-is-in-my-bag,주사기는 가방에 있어요,,jusagineun gabange isseoyo,,,2,ko-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,설파제 알레르기가 있어요,,seolpaje allereugiga isseoyo,,,2,ko-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,지금 문 연 약국 어디예요?,,jigeum mun yeon yakguk eodiyeyo?,,,2,ko-agent-v1
+pharmacy-symptoms.i-need-medicine-for,{} 약이 필요해요,,{} yagi piryohaeyo,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-a-fever,열이 나요,,yeori nayo,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-diarrhea,설사를 해요,,seolsareul haeyo,,,2,ko-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,심야약국이 어디예요?,,simyayakgugi eodiyeyo?,,,2,ko-agent-v1
+pharmacy-symptoms.painkiller,진통제,,jintongje,,,2,ko-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,처방전이 필요해요?,,cheobangjeoni piryohaeyo?,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-a-headache,머리가 아파요,,meoriga apayo,,,2,ko-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,아세트아미노펜,타이레놀,aseteuaminopen,,,2,ko-agent-v1
+pharmacy-symptoms.how-much-should-i-take,얼마나 먹어야 해요?,,eolmana meogeoya haeyo?,,,2,ko-agent-v1
+pharmacy-symptoms.i-am-vomiting,토해요,,tohaeyo,,,2,ko-agent-v1
+pharmacy-symptoms.rehydration-salts,경구수액,경구수분보충용액,gyeonggusuaek,,,2,ko-agent-v1
+pharmacy-symptoms.how-many-times-a-day,하루에 몇 번이에요?,,harue myeot beonieyo?,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,배가 아파요,,baega apayo,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-a-cough,기침이 나요,,gichimi nayo,,,2,ko-agent-v1
+pharmacy-symptoms.antihistamine,항히스타민제,,hanghiseutaminje,,,2,ko-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,지사제,설사약,jisaje,,,2,ko-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,{}와 같이 먹어도 돼요?,,{}wa gachi meogeodo dwaeyo?,,,2,ko-agent-v1
+pharmacy-symptoms.i-feel-dizzy,어지러워요,,eojireowoyo,,,2,ko-agent-v1
+pharmacy-symptoms.ibuprofen,이부프로펜,,ibupeuropen,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,목이 아파요,,mogi apayo,,,2,ko-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,이 약 여기서 살 수 있어요?,,i yak yeogiseo sal su isseoyo?,,,2,ko-agent-v1
+pharmacy-symptoms.bandage,붕대,밴드,bungdae,,,2,ko-agent-v1
+pharmacy-symptoms.the-pain-is-severe,많이 아파요,,mani apayo,,,2,ko-agent-v1
+pharmacy-symptoms.antiseptic,소독약,소독제,sodongnyak,,,2,ko-agent-v1
+pharmacy-symptoms.i-feel-nauseous,메스꺼워요,,meseukkeowoyo,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-a-rash,발진이 났어요,,baljini nasseoyo,,,2,ko-agent-v1
+pharmacy-symptoms.before-or-after-food,"식전이에요, 식후예요?",,"sikjeonieyo, sikhuyeyo?",,,2,ko-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,감염된 것 같아요,,gamyeomdoen geot gatayo,,,2,ko-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,멀미약,,meolmiyak,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-a-cut,베였어요,,beyeosseoyo,,,2,ko-agent-v1
+pharmacy-symptoms.antacid,제산제,,jesanje,,,2,ko-agent-v1
+pharmacy-symptoms.i-have-a-burn,화상 입었어요,,hwasang ibeosseoyo,,,2,ko-agent-v1
+pharmacy-symptoms.it-started-days-ago,{}일 전에 시작됐어요,,{}il jeone sijakdwaesseoyo,,,2,ko-agent-v1
+pharmacy-symptoms.cough-medicine,기침약,,gichimnyak,,,2,ko-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,임신 중에 먹어도 돼요?,,imsin junge meogeodo dwaeyo?,,,2,ko-agent-v1
+police-consulate.where-is-the-police-station,경찰서가 어디예요?,,gyeongchalseoga eodiyeyo?,,,2,ko-agent-v1
+police-consulate.i-want-to-report-a-theft,도난 신고하고 싶습니다,,donan singohago sipseumnida,,,2,ko-agent-v1
+police-consulate.my-bag-was-stolen,가방을 도난당했습니다,,gabangeul donandanghaetseumnida,,,2,ko-agent-v1
+police-consulate.my-passport-was-stolen,여권을 도난당했습니다,,yeogwoneul donandanghaetseumnida,,,2,ko-agent-v1
+police-consulate.someone-is-following-me,누가 저를 따라와요,,nuga jeoreul ttarawayo,,,2,ko-agent-v1
+police-consulate.i-need-a-written-police-report,사건사고사실확인원이 필요합니다,,sageonsagosasilhwaginwoni piryohamnida,,police incident certificate,2,ko-agent-v1
+police-consulate.i-want-to-contact-my-embassy,대사관에 연락하고 싶습니다,,daesagwane yeollakago sipseumnida,,,2,ko-agent-v1
+police-consulate.i-need-it-for-my-insurance,보험 때문에 필요합니다,,boheom ttaemune piryohamnida,,,2,ko-agent-v1
+police-consulate.i-need-an-interpreter,통역사가 필요합니다,,tongyeoksaga piryohamnida,,,2,ko-agent-v1
+police-consulate.please-leave-me-alone,저를 내버려 두세요,,jeoreul naebeoryeo duseyo,,,2,ko-agent-v1
+police-consulate.i-was-robbed,강도를 당했습니다,,gangdoreul danghaetseumnida,,,2,ko-agent-v1
+police-consulate.i-want-a-lawyer,변호사가 필요합니다,,byeonhosaga piryohamnida,,,2,ko-agent-v1
+police-consulate.please-notify-my-consulate,영사관에 알려 주세요,,yeongsagwane allyeo juseyo,,,2,ko-agent-v1
+police-consulate.i-am-calling-the-police,경찰을 부르겠습니다,,gyeongchareul bureugetseumnida,,,2,ko-agent-v1
+police-consulate.am-i-under-arrest,제가 체포된 겁니까?,,jega chepodoen geomnikka?,,,2,ko-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,"괜찮아요, 관심 없어요",,"gwaenchanayo, gwansim eopseoyo",,,2,ko-agent-v1
+police-consulate.someone-attacked-me,폭행을 당했습니다,,pokhaengeul danghaetseumnida,,,2,ko-agent-v1
+police-consulate.i-did-not-agree-to-this-price,이 가격에 동의 안 했습니다,,i gagyeoge dongui an haetseumnida,,,2,ko-agent-v1
+police-consulate.please-write-the-report-number,접수번호를 적어 주세요,,jeopsubeonhoreul jeogeo juseyo,,,2,ko-agent-v1
+police-consulate.it-happened-here,여기서 일어났습니다,,yeogiseo ireonatseumnida,,,2,ko-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,신고서 사본을 주세요,,singoseo saboneul juseyo,,,2,ko-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,읽지 못하면 서명 안 합니다,,ikji motamyeon seomyeong an hamnida,,,2,ko-agent-v1
+police-consulate.am-i-free-to-go,가도 됩니까?,,gado doemnikka?,,,2,ko-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,같이 가지 않겠습니다,,gachi gaji anketseumnida,,,2,ko-agent-v1
+body-parts.head,머리,,meori,,,2,ko-agent-v1
+body-parts.stomach,배,,bae,,,2,ko-agent-v1
+body-parts.back,등,,deung,,,2,ko-agent-v1
+body-parts.throat,목,,mok,,,2,ko-agent-v1
+body-parts.tooth,이,치아,i,,,2,ko-agent-v1
+body-parts.chest,가슴,,gaseum,,,2,ko-agent-v1
+body-parts.eye,눈,,nun,,,2,ko-agent-v1
+body-parts.ear,귀,,gwi,,,2,ko-agent-v1
+body-parts.leg,다리,,dari,,,2,ko-agent-v1
+body-parts.arm,팔,,pal,,,2,ko-agent-v1
+body-parts.foot,발,,bal,,,2,ko-agent-v1
+body-parts.hand,손,,son,,,2,ko-agent-v1
+body-parts.knee,무릎,,mureup,,,2,ko-agent-v1
+body-parts.ankle,발목,,balmok,,,2,ko-agent-v1
+body-parts.skin,피부,,pibu,,,2,ko-agent-v1
+emergency-medical.help,도와주세요!,,dowajuseyo!,,,2,ko-agent-v1
+emergency-medical.please-call-an-ambulance,구급차를 불러 주세요,119를 불러 주세요,gugeupchareul bulleo juseyo,,,2,ko-agent-v1
+emergency-medical.i-need-a-doctor,의사가 필요합니다,,uisaga piryohamnida,,,2,ko-agent-v1
+emergency-medical.i-am-sick,몸이 아픕니다,,momi apeumnida,,,2,ko-agent-v1
+emergency-medical.i-am-injured,다쳤습니다,,dachyeotseumnida,,,2,ko-agent-v1
+emergency-medical.it-hurts-here,여기가 아픕니다,,yeogiga apeumnida,,,2,ko-agent-v1
+emergency-medical.where-is-a-pharmacy,약국이 어디예요?,,yakgugi eodiyeyo?,,,2,ko-agent-v1
+emergency-medical.please-take-me-to-a-hospital,병원에 데려가 주세요,,byeongwone deryeoga juseyo,,,2,ko-agent-v1
+emergency-medical.i-feel-unwell,몸이 안 좋습니다,,momi an joseumnida,,,2,ko-agent-v1
+emergency-medical.this-is-an-emergency,응급 상황입니다,,eunggeup sanghwangimnida,,,2,ko-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,아나필락시스입니다,심한 알레르기 반응입니다,anapillaksiseuimnida,,anaphylaxis,2,ko-agent-v1
+emergency-medical.i-cannot-breathe,숨을 못 쉽니다,,sumeul mot swimnida,,,2,ko-agent-v1
+emergency-medical.i-am-bleeding-badly,피가 많이 납니다,,piga mani namnida,,,2,ko-agent-v1
+emergency-medical.i-have-chest-pain,가슴이 아픕니다,,gaseumi apeumnida,,,2,ko-agent-v1
+emergency-medical.this-person-is-unconscious,이 사람 의식이 없습니다,,i saram uisigi eopseumnida,,,2,ko-agent-v1
+emergency-medical.where-is-the-nearest-hospital,가까운 병원이 어디예요?,,gakkaun byeongwoni eodiyeyo?,,,2,ko-agent-v1
+emergency-medical.what-is-the-emergency-number,응급 전화번호가 뭐예요?,,eunggeup jeonhwabeonhoga mwoyeyo?,,,2,ko-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,영어 하는 의사 있어요?,,yeongeo haneun uisa isseoyo?,,,2,ko-agent-v1
+emergency-medical.i-think-a-bone-is-broken,뼈가 부러진 것 같습니다,,ppyeoga bureojin geot gatseumnida,,,2,ko-agent-v1
+emergency-medical.please-call-my-emergency-contact,비상 연락처에 연락해 주세요,,bisang yeollakcheoe yeollakae juseyo,,,2,ko-agent-v1
+emergency-medical.i-have-travel-insurance,여행자 보험이 있습니다,,yeohaengja boheomi itseumnida,,,2,ko-agent-v1
+lost-rescue.i-lost-my-passport,여권을 잃어버렸어요,,yeogwoneul ireobeoryeosseoyo,,,2,ko-agent-v1
+lost-rescue.i-lost-my-phone,휴대폰을 잃어버렸어요,,hyudaeponeul ireobeoryeosseoyo,,,2,ko-agent-v1
+lost-rescue.please-call-the-police,경찰을 불러 주세요,112에 신고해 주세요,gyeongchareul bulleo juseyo,,,2,ko-agent-v1
+lost-rescue.we-are-here,저희는 여기 있어요,,jeohuineun yeogi isseoyo,,,2,ko-agent-v1
+lost-rescue.please-look-at-my-location-pin,제 위치 핀을 봐 주세요,,je wichi pineul bwa juseyo,,,2,ko-agent-v1
+lost-rescue.i-cannot-walk,걸을 수 없어요,,georeul su eopseoyo,,,2,ko-agent-v1
+lost-rescue.i-sprained-my-ankle,발목을 삐었어요,,balmogeul ppieosseoyo,,,2,ko-agent-v1
+lost-rescue.please-contact-rescue,구조대에 연락해 주세요,,gujodaee yeollakae juseyo,,,2,ko-agent-v1
+lost-rescue.my-companion-is-missing,동행이 없어졌어요,,donghaengi eopseojyeosseoyo,,,2,ko-agent-v1
+lost-rescue.please-look-at-my-current-location,제 현재 위치를 봐 주세요,,je hyeonjae wichireul bwa juseyo,,,2,ko-agent-v1
+lost-rescue.my-child-is-missing,아이가 없어졌어요,,aiga eopseojyeosseoyo,,child has disappeared,2,ko-agent-v1
+lost-rescue.i-do-not-know-where-i-am,여기가 어딘지 모르겠어요,,yeogiga eodinji moreugesseoyo,,,2,ko-agent-v1
+lost-rescue.my-friend-is-hurt,친구가 다쳤어요,,chinguga dachyeosseoyo,,,2,ko-agent-v1
+lost-rescue.i-lost-my-wallet,지갑을 잃어버렸어요,,jigabeul ireobeoryeosseoyo,,,2,ko-agent-v1
+lost-rescue.i-lost-my-bag,가방을 잃어버렸어요,,gabangeul ireobeoryeosseoyo,,,2,ko-agent-v1
+lost-rescue.where-is-lost-and-found,유실물센터가 어디예요?,,yusilmulsenteoga eodiyeyo?,,,2,ko-agent-v1
+lost-rescue.i-cannot-find-my-hotel,호텔을 못 찾겠어요,,hotereul mot chatgesseoyo,,,2,ko-agent-v1
+lost-rescue.i-left-it-on-the-train,기차에 두고 내렸어요,,gichae dugo naeryeosseoyo,,,2,ko-agent-v1
+lost-rescue.i-cannot-get-down,내려갈 수 없어요,,naeryeogal su eopseoyo,,,2,ko-agent-v1

@@ -1,21 +1,26 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
 dietary-needs.no-meat,不要肉,,bú yào ròu,,,2,latex-reference-v2
+food-ordering.table-for-two,两位,,liǎng wèi,,,2,latex-reference-v2
 dietary-needs.no-eggs,不要鸡蛋,,bú yào jīdàn,,,2,latex-reference-v2
+food-ordering.is-a-table-available,有位子吗？,,yǒu wèizi ma?,,,2,latex-reference-v2
 dietary-needs.not-spicy,不要辣,,bú yào là,,,2,latex-reference-v2
+food-ordering.menu-please,请给我菜单,,qǐng gěi wǒ càidān,,,2,latex-reference-v2
 dietary-needs.less-spicy,少辣,,shǎo là,,,2,latex-reference-v2
+food-ordering.i-want-this,我要这个,,wǒ yào zhège,,,2,latex-reference-v2
 dietary-needs.no-peanuts,不要花生,,bú yào huāshēng,,,2,latex-reference-v2
+food-ordering.do-you-have-drinking-water,有饮用水吗？,,yǒu yǐnyòngshuǐ ma?,,,2,latex-reference-v2
 dietary-needs.no-nuts,不要坚果,,bú yào jiānguǒ,,,2,latex-reference-v2
+food-ordering.to-go-please,请打包,,qǐng dǎbāo,,,2,latex-reference-v2
 dietary-needs.no-seafood,不要海鲜,,bú yào hǎixiān,,,2,latex-reference-v2
+food-ordering.check-please,请结账,,qǐng jiézhàng,,,2,latex-reference-v2
 dietary-needs.i-am-vegetarian,我吃素,,wǒ chī sù,,,2,latex-reference-v2
+food-ordering.does-it-contain,里面有{}吗？,,lǐmiàn yǒu {} ma?,,,2,latex-reference-v2
 dietary-needs.i-am-vegan,我吃纯素,,wǒ chī chún sù,,,2,latex-reference-v2
+food-ordering.is-this-vegetarian,这个是素的吗？,,zhège shì sù de ma?,,,2,latex-reference-v2
 dietary-needs.i-do-not-eat,我不吃{},,wǒ bù chī {},,,2,latex-reference-v2
 dietary-needs.i-am-allergic-to,我对{}过敏,,wǒ duì {} guòmǐn,,,2,latex-reference-v2
-food-ordering.table-for-two,两位,,liǎng wèi,,,2,latex-reference-v2
-food-ordering.is-a-table-available,有位子吗？,,yǒu wèizi ma?,,,2,latex-reference-v2
-food-ordering.menu-please,请给我菜单,,qǐng gěi wǒ càidān,,,2,latex-reference-v2
-food-ordering.i-want-this,我要这个,,wǒ yào zhège,,,2,latex-reference-v2
-food-ordering.do-you-have-drinking-water,有饮用水吗？,,yǒu yǐnyòngshuǐ ma?,,,2,latex-reference-v2
-food-ordering.to-go-please,请打包,,qǐng dǎbāo,,,2,latex-reference-v2
-food-ordering.check-please,请结账,,qǐng jiézhàng,,,2,latex-reference-v2
-food-ordering.does-it-contain,里面有{}吗？,,lǐmiàn yǒu {} ma?,,,2,latex-reference-v2
-food-ordering.is-this-vegetarian,这个是素的吗？,,zhège shì sù de ma?,,,2,latex-reference-v2
+food-ordering.what-do-you-recommend,有什么推荐？,,yǒu shénme tuījiàn?,,,2,zh-Hans-agent-v1
+food-ordering.water-please,请给我一杯水,,qǐng gěi wǒ yì bēi shuǐ,,,2,zh-Hans-agent-v1
+dietary-needs.does-it-contain-fish-stock,汤底是鱼做的吗？,,tāngdǐ shì yú zuò de ma?,,,2,zh-Hans-agent-v1
+food-ordering.can-a-vegetarian-eat-this,吃素的能吃吗？,,chī sù de néng chī ma?,,,2,zh-Hans-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,我对{}严重过敏,,wǒ duì {} yánzhòng guòmǐn,,,2,zh-Hans-agent-v1

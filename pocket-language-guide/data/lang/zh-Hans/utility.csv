@@ -5,3 +5,12 @@ utility-templates.may-i,我可以{}吗？,,wǒ kěyǐ {} ma?,,,2,latex-reference
 utility-templates.please-do-not-add,请不要放{},,qǐng bú yào fàng {},,,2,latex-reference-v2
 utility-templates.do-you-have,有没有{}？,,yǒu méiyǒu {}?,,,2,latex-reference-v2
 utility-templates.please-write-the-number,请写数字,,qǐng xiě shùzì,,,2,latex-reference-v2
+utility-templates.i-need,我需要{},,wǒ xūyào {},,,2,zh-Hans-agent-v1
+utility-templates.is-there-nearby,附近有{}吗？,,fùjìn yǒu {} ma?,,,2,zh-Hans-agent-v1
+utility-templates.how-much-is,{}多少钱？,,{} duōshao qián?,,,2,zh-Hans-agent-v1
+utility-templates.is-this,这是{}吗？,,zhè shì {} ma?,,,2,zh-Hans-agent-v1
+utility-templates.please,麻烦给我{},,máfan gěi wǒ {},,,2,zh-Hans-agent-v1
+utility-templates.i-am-looking-for,我在找{},,wǒ zài zhǎo {},,,2,zh-Hans-agent-v1
+utility-templates.do-you-accept,收{}吗？,,shōu {} ma?,,,2,zh-Hans-agent-v1
+utility-templates.i-cannot-find,我找不到{},,wǒ zhǎo bu dào {},,,2,zh-Hans-agent-v1
+utility-templates.there-is-a-problem-with,{}有问题,,{} yǒu wèntí,,,2,zh-Hans-agent-v1

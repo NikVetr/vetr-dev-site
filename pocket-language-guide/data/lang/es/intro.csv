@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Me llamo {},,,,2,es-agent-v1
+introductions.nice-to-meet-you,Mucho gusto,Encantado/a,,,2,es-agent-v1
+introductions.what-is-your-name,¿Cómo se llama?,,,,2,es-agent-v1
+introductions.we-are-traveling-together,Viajamos juntos,,,,2,es-agent-v1
+introductions.this-is-my-friend,Es mi amigo,Es mi amiga,,,2,es-agent-v1
+introductions.i-am-from,Soy de {},,,,2,es-agent-v1
+introductions.where-are-you-from,¿De dónde es usted?,,,,2,es-agent-v1
+introductions.how-are-you,¿Cómo está?,,,,2,es-agent-v1
+introductions.i-am-a-tourist,Soy turista,,,,2,es-agent-v1
+introductions.this-is-my-husband-wife,Es mi esposo / esposa,Es mi marido / mujer,,,2,es-agent-v1
+introductions.this-is-my-daughter-son,Es mi hija / hijo,,,,2,es-agent-v1
+introductions.i-am-traveling-alone,Viajo solo/a,,,,2,es-agent-v1

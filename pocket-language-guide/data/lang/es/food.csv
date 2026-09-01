@@ -1,0 +1,26 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Sin carne,,,,2,es-agent-v1
+dietary-needs.no-eggs,Sin huevo,,,,2,es-agent-v1
+dietary-needs.not-spicy,Sin picante,,,,2,es-agent-v1
+dietary-needs.less-spicy,Menos picante,,,,2,es-agent-v1
+dietary-needs.no-peanuts,Sin cacahuete ni maní,Sin cacahuate,,,2,es-agent-v1
+dietary-needs.no-nuts,Sin frutos secos ni nueces,Sin frutos de cáscara,,,2,es-agent-v1
+dietary-needs.no-seafood,Sin mariscos ni pescado,,,,2,es-agent-v1
+dietary-needs.i-am-vegetarian,Soy vegetariano/a,,,,2,es-agent-v1
+dietary-needs.i-am-vegan,Soy vegano/a,,,,2,es-agent-v1
+dietary-needs.i-do-not-eat,No como {},,,,2,es-agent-v1
+dietary-needs.i-am-allergic-to,Soy alérgico/a a {},,,,2,es-agent-v1
+dietary-needs.does-it-contain-fish-stock,¿Lleva caldo de pescado?,,,,2,es-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,Tengo alergia grave a {},,,,2,es-agent-v1
+food-ordering.table-for-two,Mesa para dos,,,,2,es-agent-v1
+food-ordering.is-a-table-available,¿Hay una mesa libre?,,,,2,es-agent-v1
+food-ordering.menu-please,"La carta, por favor","El menú, por favor",,,2,es-agent-v1
+food-ordering.i-want-this,Quiero esto,,,,2,es-agent-v1
+food-ordering.do-you-have-drinking-water,¿Tienen agua potable?,,,,2,es-agent-v1
+food-ordering.to-go-please,"Para llevar, por favor",,,,2,es-agent-v1
+food-ordering.check-please,"La cuenta, por favor",,,,2,es-agent-v1
+food-ordering.does-it-contain,¿Lleva {}?,,,,2,es-agent-v1
+food-ordering.is-this-vegetarian,¿Esto es vegetariano?,,,,2,es-agent-v1
+food-ordering.what-do-you-recommend,¿Qué me recomienda?,,,,2,es-agent-v1
+food-ordering.water-please,"Agua, por favor",,,,2,es-agent-v1
+food-ordering.can-a-vegetarian-eat-this,¿Un vegetariano puede comer esto?,,,,2,es-agent-v1

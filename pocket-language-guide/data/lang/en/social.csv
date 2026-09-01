@@ -10,8 +10,8 @@ social-basics.excuse-me-sorry,Excuse me / sorry,,,,2,latex-reference-v2
 social-basics.sorry,Sorry,,,,2,latex-reference-v2
 social-basics.no-problem,No problem,,,,2,latex-reference-v2
 social-basics.i-do-not-know,I do not know,,,,2,latex-reference-v2
-communication.i-do-not-speak-chinese,I do not speak Chinese,,,,2,latex-reference-v2
-communication.i-speak-only-a-little-chinese,I speak only a little Chinese,,,,2,latex-reference-v2
+communication.i-do-not-speak-this-language,I do not speak this language,,,,2,latex-reference-v2
+communication.i-speak-only-a-little-of-this,I speak only a little of this language,,,,2,latex-reference-v2
 communication.do-you-speak-english,Do you speak English?,,,,2,latex-reference-v2
 communication.please-speak-more-slowly,Please speak more slowly,,,,2,latex-reference-v2
 communication.i-do-not-understand-spoken,I do not understand (spoken),,,,2,latex-reference-v2
@@ -20,7 +20,7 @@ communication.please-say-it-again,Please say it again,,,,2,latex-reference-v2
 communication.please-write-it-down,Please write it down,,,,2,latex-reference-v2
 communication.please-wait-a-moment,Please wait a moment,,,,2,latex-reference-v2
 communication.can-you-help-me,Can you help me?,,,,2,latex-reference-v2
-communication.please-show-me-the-chinese-text,Please show me the Chinese text,,,,2,latex-reference-v2
+communication.please-show-me-the-text,Please show me the text,,,,2,latex-reference-v2
 quick-responses.please-go-ahead,please / go ahead,,,,2,latex-reference-v2
 quick-responses.yes-right,yes / right,,,,2,latex-reference-v2
 quick-responses.no-not,no / not,,,,2,latex-reference-v2
@@ -32,7 +32,7 @@ phone-translation.i-am-using-phone-translation,I am using phone translation,,,,2
 phone-translation.please-speak-toward-the-phone,Please speak toward the phone,,,,2,latex-reference-v2
 phone-translation.one-sentence-at-a-time-please,"One sentence at a time, please",,,,2,latex-reference-v2
 phone-text-power.please-type-it-for-me,Please type it for me,,,,2,latex-reference-v2
-phone-text-power.please-write-the-place-name-in-chinese,Please write the place name in Chinese,,,,2,latex-reference-v2
+phone-translation.please-write-the-place-name,Please write the place name here,,,,2,latex-reference-v2
 phone-text-power.please-use-simple-words,Please use simple words,,,,2,latex-reference-v2
 phone-text-power.my-phone-battery-is-low,My phone battery is low,,,,2,latex-reference-v2
 phone-text-power.do-you-have-a-power-bank,Do you have a power bank?,,,,2,latex-reference-v2
@@ -44,15 +44,11 @@ quick-responses.can-possible,can / possible,,,,2,japanese-reviewed-v6
 quick-responses.cannot-not-possible,cannot / not possible,,,,2,japanese-reviewed-v6
 quick-responses.okay-fine,okay / fine,,,,2,japanese-reviewed-v6
 quick-responses.no-good-not-allowed-will-not-work,no good / not allowed / will not work,,,,2,japanese-reviewed-v6
-communication.i-do-not-speak-japanese,I do not speak Japanese,,,,2,japanese-reviewed-v6
-communication.i-speak-only-a-little-japanese,I speak only a little Japanese,,,,2,japanese-reviewed-v6
 communication.i-cannot-make-out-what-you-are-saying,I cannot make out what you are saying,,,,2,japanese-reviewed-v6
 communication.i-do-not-understand,I do not understand,,,,2,japanese-reviewed-v6
 communication.i-cannot-read-it,I cannot read it,,,,2,japanese-reviewed-v6
-communication.please-show-me-the-japanese-text,Please show me the Japanese text,,,,2,japanese-reviewed-v6
 communication.please-write-it-in-roman-letters,Please write it in Roman letters,,,,2,japanese-reviewed-v6
 phone-translation.please-type-it-and-show-me,Please type it and show me,,,,2,japanese-reviewed-v6
-phone-translation.please-write-the-place-name-in-japanese,Please write the place name in Japanese,,,,2,japanese-reviewed-v6
 phone-translation.please-look-at-the-screen,Please look at the screen,,,,2,japanese-reviewed-v6
 phone-text-power.may-i-charge-my-phone-here,May I charge my phone here?,,,,2,japanese-reviewed-v6
 sim-data.i-would-like-a-tourist-sim,I would like a tourist SIM card,,,,2,expansion-v1

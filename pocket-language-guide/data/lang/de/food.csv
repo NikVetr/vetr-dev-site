@@ -1,0 +1,26 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Kein Fleisch.,,,,2,de-agent-v1
+dietary-needs.no-eggs,Keine Eier.,,,,2,de-agent-v1
+dietary-needs.not-spicy,Nicht scharf.,,,,2,de-agent-v1
+dietary-needs.less-spicy,Weniger scharf.,,,,2,de-agent-v1
+dietary-needs.no-peanuts,Keine Erdnüsse.,,,,2,de-agent-v1
+dietary-needs.no-nuts,Keine Nüsse.,,,,2,de-agent-v1
+dietary-needs.no-seafood,"Kein Fisch, keine Meeresfrüchte.",Keine Meeresfrüchte.,,"no fish, no shellfish",2,de-agent-v1
+dietary-needs.i-am-vegetarian,Ich esse vegetarisch.,Ich bin Vegetarier/-in.,,,2,de-agent-v1
+dietary-needs.i-am-vegan,Ich esse vegan.,Ich bin Veganer/-in.,,,2,de-agent-v1
+dietary-needs.i-do-not-eat,Ich esse kein {}.,,,,2,de-agent-v1
+dietary-needs.i-am-allergic-to,Ich bin allergisch gegen {}.,,,,2,de-agent-v1
+dietary-needs.does-it-contain-fish-stock,Ist Fischbrühe darin?,Enthält es Fischfond?,,,2,de-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,Ich habe eine schwere Allergie gegen {}.,,,,2,de-agent-v1
+food-ordering.table-for-two,Ein Tisch für zwei.,,,,2,de-agent-v1
+food-ordering.is-a-table-available,Haben Sie einen Tisch frei?,,,,2,de-agent-v1
+food-ordering.menu-please,"Die Karte, bitte.","Die Speisekarte, bitte.",,,2,de-agent-v1
+food-ordering.i-want-this,Ich möchte das.,,,,2,de-agent-v1
+food-ordering.do-you-have-drinking-water,Haben Sie Trinkwasser?,Haben Sie Leitungswasser?,,,2,de-agent-v1
+food-ordering.to-go-please,"Zum Mitnehmen, bitte.",,,,2,de-agent-v1
+food-ordering.check-please,"Zahlen, bitte.","Die Rechnung, bitte.",,,2,de-agent-v1
+food-ordering.does-it-contain,Ist {} darin?,Enthält es {}?,,,2,de-agent-v1
+food-ordering.is-this-vegetarian,Ist das vegetarisch?,,,,2,de-agent-v1
+food-ordering.what-do-you-recommend,Was empfehlen Sie?,,,,2,de-agent-v1
+food-ordering.water-please,"Wasser, bitte.",,,,2,de-agent-v1
+food-ordering.can-a-vegetarian-eat-this,Können Vegetarier das essen?,,,,2,de-agent-v1

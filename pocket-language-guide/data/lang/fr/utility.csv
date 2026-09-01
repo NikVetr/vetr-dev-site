@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Je voudrais aller à {},,,,2,fr-agent-v1
+utility-templates.please-give-me,"Donnez-moi {}, s'il vous plaît",,,,2,fr-agent-v1
+utility-templates.may-i,Puis-je {} ?,,,,2,fr-agent-v1
+utility-templates.please-do-not-add,"Sans {}, s'il vous plaît",,,,2,fr-agent-v1
+utility-templates.do-you-have,Avez-vous {} ?,,,,2,fr-agent-v1
+utility-templates.please-write-the-number,"Écrivez le chiffre, s'il vous plaît",,,,2,fr-agent-v1
+utility-templates.i-need,J'ai besoin de {},,,,2,fr-agent-v1
+utility-templates.is-there-nearby,Y a-t-il un {} près d'ici ?,,,,2,fr-agent-v1
+utility-templates.how-much-is,Combien coûte {} ?,,,,2,fr-agent-v1
+utility-templates.is-this,C'est bien {} ?,,,,2,fr-agent-v1
+utility-templates.please,"{}, s'il vous plaît",,,,2,fr-agent-v1
+utility-templates.i-am-looking-for,Je cherche {},,,,2,fr-agent-v1
+utility-templates.do-you-accept,Acceptez-vous {} ?,,,,2,fr-agent-v1
+utility-templates.i-cannot-find,Je ne trouve pas {},,,,2,fr-agent-v1
+utility-templates.there-is-a-problem-with,Il y a un problème avec {},,,,2,fr-agent-v1

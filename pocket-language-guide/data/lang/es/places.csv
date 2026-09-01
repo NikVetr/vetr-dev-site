@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,¿Dónde puedo comprar entradas?,¿Dónde puedo comprar boletos?,,,2,es-agent-v1
+attractions-tickets.do-i-need-a-reservation,¿Necesito reserva?,,,,2,es-agent-v1
+attractions-tickets.what-is-the-latest-entry-time,¿Cuál es la última hora de entrada?,,,,2,es-agent-v1
+attractions-tickets.are-there-lockers,¿Hay casilleros?,¿Hay taquillas?,,,2,es-agent-v1
+attractions-tickets.may-i-take-photos,¿Puedo tomar fotos?,¿Puedo hacer fotos?,,,2,es-agent-v1
+attractions-tickets.please-take-a-photo-of-us,"Tómenos una foto, por favor",,,,2,es-agent-v1
+attractions-tickets.could-you-take-a-photo-for-us,¿Nos puede tomar una foto?,,,,2,es-agent-v1

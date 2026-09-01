@@ -1,17 +1,60 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,这是几号房？,,zhè shì jǐ hào fáng?,,,2,latex-reference-v2
-building-help.i-am-lost,我迷路了,,wǒ mílù le,,,2,latex-reference-v2
-building-help.where-is-reception,前台在哪里？,,qiántái zài nǎlǐ?,,,2,latex-reference-v2
-building-help.where-is-a-power-outlet,插座在哪里？,,chāzuò zài nǎlǐ?,,,2,latex-reference-v2
 in-a-building.is-this-the-correct-entrance,这是正确的入口吗？,,zhè shì zhèngquè de rùkǒu ma?,,,2,latex-reference-v2
-in-a-building.do-you-have-wi-fi,有无线网吗？,,yǒu wúxiànwǎng ma?,,,2,latex-reference-v2
-in-a-building.what-is-the-wi-fi-password,Wi-Fi 密码是什么？,,Wi-Fi mìmǎ shì shénme?,,,2,latex-reference-v2
-in-a-building.which-floor,在几楼？,,zài jǐ lóu?,,,2,latex-reference-v2
 building-words.elevator,电梯,,diàntī,,,2,latex-reference-v2
+toilets.where-toilet,厕所在哪里？,,cèsuǒ zài nǎlǐ?,,,2,zh-Hans-agent-v1
+accessibility.step-free,有无障碍通道吗？,,yǒu wúzhàng'ài tōngdào ma?,,,2,zh-Hans-agent-v1
+building-help.i-am-lost,我迷路了,,wǒ mílù le,,,2,latex-reference-v2
 building-words.stairs,楼梯,,lóutī,,,2,latex-reference-v2
+toilets.where-public-toilet,公共厕所在哪里？,,gōnggòng cèsuǒ zài nǎlǐ?,,,2,zh-Hans-agent-v1
+accessibility.wheelchair-access,轮椅能进吗？,,lúnyǐ néng jìn ma?,,,2,zh-Hans-agent-v1
+building-help.where-is-reception,前台在哪里？,,qiántái zài nǎlǐ?,,,2,latex-reference-v2
+in-a-building.do-you-have-wi-fi,有无线网吗？,,yǒu wúxiànwǎng ma?,,,2,latex-reference-v2
 building-words.entrance,入口,,rùkǒu,,,2,latex-reference-v2
+toilets.may-i-use-the-toilet,可以用一下洗手间吗？,,kěyǐ yòng yíxià xǐshǒujiān ma?,,,2,zh-Hans-agent-v1
+accessibility.elevator,有电梯吗？,,yǒu diàntī ma?,,,2,zh-Hans-agent-v1
+building-help.where-is-a-power-outlet,插座在哪里？,,chāzuò zài nǎlǐ?,,,2,latex-reference-v2
+in-a-building.what-is-the-wi-fi-password,Wi-Fi 密码是什么？,,Wi-Fi mìmǎ shì shénme?,,,2,latex-reference-v2
 building-words.exit,出口,,chūkǒu,,,2,latex-reference-v2
+toilets.is-it-only-for-customers,只给顾客用吗？,,zhǐ gěi gùkè yòng ma?,,,2,zh-Hans-agent-v1
+accessibility.ramp,有坡道吗？,,yǒu pōdào ma?,,,2,zh-Hans-agent-v1
+in-a-building.which-floor,在几楼？,,zài jǐ lóu?,,,2,latex-reference-v2
 building-words.men,男,,nán,,,2,latex-reference-v2
+toilets.toilet-wc,厕所,廁所,cèsuǒ,,,2,zh-Hans-agent-v1
+accessibility.how-many-steps,有几级台阶？,,yǒu jǐ jí táijiē?,,,2,zh-Hans-agent-v1
 building-words.women,女,,nǚ,,,2,latex-reference-v2
+toilets.is-it-free,免费吗？,,miǎnfèi ma?,,,2,zh-Hans-agent-v1
+accessibility.cannot-climb-stairs,我上不了楼梯,,wǒ shàng bu liǎo lóutī,,,2,zh-Hans-agent-v1
 building-words.door,门,,mén,,,2,latex-reference-v2
+toilets.do-i-need-a-coin,需要硬币吗？,,xūyào yìngbì ma?,,,2,zh-Hans-agent-v1
+accessibility.need-to-sit-down,我需要坐下,,wǒ xūyào zuò xià,,,2,zh-Hans-agent-v1
 building-words.key,钥匙,,yàoshi,,,2,latex-reference-v2
+toilets.is-the-tap-water-safe-to-drink,自来水能喝吗？,,zìláishuǐ néng hē ma?,,,2,zh-Hans-agent-v1
+accessibility.accessible-restroom,有无障碍卫生间吗？,,yǒu wúzhàng'ài wèishēngjiān ma?,,,2,zh-Hans-agent-v1
+toilets.it-is-urgent,我很急,,wǒ hěn jí,,,2,zh-Hans-agent-v1
+accessibility.station-assistance,车站有无障碍服务吗？,,chēzhàn yǒu wúzhàng'ài fúwù ma?,,,1,zh-Hans-agent-v1
+toilets.may-i-have-the-toilet-key,可以给我厕所钥匙吗？,,kěyǐ gěi wǒ cèsuǒ yàoshi ma?,,,2,zh-Hans-agent-v1
+accessibility.help-me-carry,请帮我拿一下,,qǐng bāng wǒ ná yíxià,,,2,zh-Hans-agent-v1
+toilets.there-is-no-toilet-paper,没有卫生纸,,méiyǒu wèishēngzhǐ,,,2,zh-Hans-agent-v1
+accessibility.board-first,我可以先上车吗？,,wǒ kěyǐ xiān shàng chē ma?,,,2,zh-Hans-agent-v1
+toilets.toilet-paper,卫生纸,衛生紙,wèishēngzhǐ,,,2,zh-Hans-agent-v1
+accessibility.door-width,门有多宽？,,mén yǒu duō kuān?,,,2,zh-Hans-agent-v1
+toilets.it-is-out-of-order,坏了,,huài le,,,2,zh-Hans-agent-v1
+accessibility.wheelchair-width,我的轮椅宽{}厘米,,wǒ de lúnyǐ kuān {} límǐ,,,2,zh-Hans-agent-v1
+toilets.out-of-order,故障,,gùzhàng,,,2,zh-Hans-agent-v1
+accessibility.hard-of-hearing,我有听力障碍,,wǒ yǒu tīnglì zhàng'ài,,,2,zh-Hans-agent-v1
+toilets.mens-toilet,男厕所,男廁所,nán cèsuǒ,,,2,zh-Hans-agent-v1
+accessibility.speak-louder,请大声一点,,qǐng dàshēng yìdiǎn,,,2,zh-Hans-agent-v1
+toilets.womens-toilet,女厕所,女廁所,nǚ cèsuǒ,,,2,zh-Hans-agent-v1
+accessibility.visually-impaired,我有视力障碍,,wǒ yǒu shìlì zhàng'ài,,,2,zh-Hans-agent-v1
+toilets.drinking-water,饮用水,飲用水,yǐnyòngshuǐ,,,2,zh-Hans-agent-v1
+accessibility.take-your-arm,可以扶您的手臂吗？,,kěyǐ fú nín de shǒubì ma?,,,2,zh-Hans-agent-v1
+toilets.not-for-drinking,非饮用水,非飲用水,fēi yǐnyòngshuǐ,,,2,zh-Hans-agent-v1
+accessibility.guide-dog,这是我的导盲犬,,zhè shì wǒ de dǎomángquǎn,,,2,zh-Hans-agent-v1
+toilets.accessible-toilet,无障碍卫生间,無障礙衛生間,wúzhàng'ài wèishēngjiān,,,2,zh-Hans-agent-v1
+toilets.where-can-i-wash-my-hands,哪里可以洗手？,,nǎlǐ kěyǐ xǐshǒu?,,,2,zh-Hans-agent-v1
+toilets.can-i-flush-the-paper,卫生纸能冲掉吗？,,wèishēngzhǐ néng chōngdiào ma?,,,2,zh-Hans-agent-v1
+toilets.is-there-a-toilet-on-board,车上有厕所吗？,,chē shàng yǒu cèsuǒ ma?,,,2,zh-Hans-agent-v1
+toilets.the-toilet-will-not-flush,马桶冲不下去,,mǎtǒng chōng bu xiàqù,,,2,zh-Hans-agent-v1
+toilets.baby-change,母婴室,母嬰室,mǔyīngshì,,,2,zh-Hans-agent-v1
+toilets.squat-toilet,蹲便器,,dūnbiànqì,,,2,zh-Hans-agent-v1

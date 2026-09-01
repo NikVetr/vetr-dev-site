@@ -1,0 +1,114 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+border-customs.i-am-a-tourist,Vengo de turismo,Soy turista,,,2,es-agent-v1
+border-customs.here-is-my-passport,Aquí está mi pasaporte,,,,2,es-agent-v1
+border-customs.i-am-staying-for-days,Me quedo {} días,,,,2,es-agent-v1
+border-customs.nothing-to-declare,Nada que declarar,Sin nada que declarar,,,2,es-agent-v1
+border-customs.i-am-staying-at,Me alojo en {},,,,2,es-agent-v1
+border-customs.i-am-here-for-business,Vengo por negocios,,,,2,es-agent-v1
+border-customs.i-have-a-return-ticket,Tengo billete de vuelta,Tengo boleto de regreso,,,2,es-agent-v1
+border-customs.i-am-visiting-family,Vengo a ver a mi familia,,,,2,es-agent-v1
+border-customs.this-is-for-personal-use,Es para uso personal,,,,2,es-agent-v1
+border-customs.i-am-in-transit,Estoy en tránsito,,,,2,es-agent-v1
+border-customs.i-have-in-cash,Llevo {} en efectivo,,,,2,es-agent-v1
+border-customs.this-is-a-gift,Es un regalo,,,,2,es-agent-v1
+border-customs.where-do-i-collect-my-baggage,¿Dónde recojo mi equipaje?,,,,2,es-agent-v1
+border-customs.how-long-may-i-stay,¿Cuánto tiempo puedo quedarme?,,,,2,es-agent-v1
+border-customs.i-have-a-connecting-flight,Tengo un vuelo de conexión,,,,2,es-agent-v1
+border-customs.may-i-have-an-entry-stamp,¿Me pone el sello de entrada?,,,,2,es-agent-v1
+border-customs.visa,el visado,la visa,,,2,es-agent-v1
+border-customs.i-have-no-food-or-plants,No llevo alimentos ni plantas,,,,2,es-agent-v1
+border-customs.passport-control,Control de pasaportes,,,,2,es-agent-v1
+border-customs.customs,Aduana,,,,2,es-agent-v1
+border-customs.baggage-claim,Recogida de equipajes,Entrega de equipaje,,,2,es-agent-v1
+border-customs.customs-declaration,Declaración de aduana,,,,2,es-agent-v1
+border-customs.arrival-card,Tarjeta de entrada,Tarjeta migratoria,,,2,es-agent-v1
+border-customs.transit,Tránsito,,,,2,es-agent-v1
+border-customs.boarding-pass,Tarjeta de embarque,Pase de abordar,,,2,es-agent-v1
+directions.where-is,¿Dónde está {}?,,,,2,es-agent-v1
+directions.how-do-i-get-to,¿Cómo llego a {}?,,,,2,es-agent-v1
+directions.is-it-far,¿Está lejos?,,,,2,es-agent-v1
+directions.how-long-on-foot,¿Cuánto se tarda a pie?,,,,2,es-agent-v1
+directions.please-show-me-on-the-map,"Muéstremelo en el mapa, por favor",,,,2,es-agent-v1
+directions.where-is-the-nearest,¿Dónde está el {} más cercano?,,,,2,es-agent-v1
+directions.where-am-i,¿Dónde estoy?,,,,2,es-agent-v1
+directions.which-way,¿Por dónde?,,,,2,es-agent-v1
+directions.can-i-walk-there,¿Puedo ir caminando?,¿Puedo ir andando?,,,2,es-agent-v1
+directions.how-far-is-it,¿A qué distancia está?,,,,2,es-agent-v1
+directions.which-exit,¿Qué salida?,,,,2,es-agent-v1
+directions.can-you-show-me-the-way,¿Me puede indicar el camino?,,,,2,es-agent-v1
+directions.north,norte,,,,2,es-agent-v1
+directions.south,sur,,,,2,es-agent-v1
+directions.east,este,,,,2,es-agent-v1
+directions.west,oeste,,,,2,es-agent-v1
+quick-directions.go-straight,Siga derecho,Siga recto,,,2,es-agent-v1
+quick-directions.turn-left,Gire a la izquierda,,,,2,es-agent-v1
+quick-directions.turn-right,Gire a la derecha,,,,2,es-agent-v1
+quick-directions.this-way,Por aquí,,,,2,es-agent-v1
+quick-directions.that-way,Por allí,,,,2,es-agent-v1
+quick-directions.on-the-left,A la izquierda,,,,2,es-agent-v1
+quick-directions.on-the-right,A la derecha,,,,2,es-agent-v1
+quick-directions.across-from-here,Enfrente,Al frente,,,2,es-agent-v1
+quick-directions.in-front,Delante,,,,2,es-agent-v1
+quick-directions.behind,Detrás,,,,2,es-agent-v1
+taxi.please-take-me-here,"Lléveme aquí, por favor",,,,2,es-agent-v1
+taxi.please-send-me-the-address,"Envíeme la dirección, por favor",,,,2,es-agent-v1
+taxi.we-need-the-east-gate-not-the-south-gate,"Necesitamos la puerta este, no la puerta sur",,,,2,es-agent-v1
+taxi.please-stop-here,"Pare aquí, por favor",,,,2,es-agent-v1
+taxi.can-you-wait-for-me-here,¿Me puede esperar aquí?,,,,2,es-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,Tenemos que tomar el tren de alta velocidad,,,,2,es-agent-v1
+taxi.please-use-the-meter,"Use el taxímetro, por favor",,,,2,es-agent-v1
+taxi.i-will-get-off-here,Me bajo aquí,,,,2,es-agent-v1
+taxi.please-get-me-there-in-time-for-the-shinkansen,Lléveme a tiempo para el tren de alta velocidad,para el AVE,,,2,es-agent-v1
+transit-rides.two-tickets,"Dos boletos, por favor","Dos billetes, por favor",,,2,es-agent-v1
+transit-rides.where-is-the-subway-station,¿Dónde está la estación de metro?,estación de subte,,,2,es-agent-v1
+transit-rides.does-this-bus-train-go-to,¿Este autobús o tren va a {}?,,,,2,es-agent-v1
+transit-rides.what-is-the-next-stop,¿Cuál es la próxima parada?,,,,2,es-agent-v1
+transit-rides.please-tell-me-where-to-get-off,"Dígame dónde bajarme, por favor",,,,2,es-agent-v1
+transit-rides.is-this-direct,¿Es directo?,,,,2,es-agent-v1
+transit-rides.do-i-need-to-transfer,¿Tengo que hacer transbordo?,¿Tengo que cambiar?,,,2,es-agent-v1
+transit-rides.is-it-delayed,¿Va con retraso?,¿Está demorado?,,,2,es-agent-v1
+transit-rides.i-am-in-a-hurry,Tengo prisa,Estoy apurado/a,,,2,es-agent-v1
+transit-rides.which-platform,¿Qué andén?,,,,2,es-agent-v1
+transit-rides.what-time-is-the-next-one,¿A qué hora es el próximo?,,,,2,es-agent-v1
+transit-rides.i-went-past-my-stop,Me pasé de parada,,,,2,es-agent-v1
+transit-rides.can-i-use-this-ticket,¿Puedo usar este boleto?,este billete,,,2,es-agent-v1
+place-words.scenic-area,zona panorámica,paraje natural,,,1,es-agent-v1
+place-words.visitor-center,centro de visitantes,,,,2,es-agent-v1
+place-words.railway-station,estación de tren,,,,2,es-agent-v1
+place-words.airport,aeropuerto,,,,2,es-agent-v1
+place-words.service-desk,mostrador de atención,información,,,2,es-agent-v1
+place-words.bus-stop,parada de autobús,paradero,,,2,es-agent-v1
+place-words.luggage-storage,consigna de equipaje,guardaequipaje,,,2,es-agent-v1
+place-words.tourist-spot-sightseeing-area,zona turística,,,,2,es-agent-v1
+pickup-meeting.where-is-the-pickup-point,¿Dónde está el punto de recogida?,punto de encuentro,,,2,es-agent-v1
+pickup-meeting.please-send-me-the-pickup-point,Envíeme el punto de recogida,,,,2,es-agent-v1
+pickup-meeting.please-pick-us-up-here,"Recójanos aquí, por favor",,,,2,es-agent-v1
+pickup-meeting.meet-us-at,Nos vemos en {},,,,2,es-agent-v1
+pickup-meeting.please-call-me-a-ride,"Pídame un viaje, por favor",Pídame un taxi,,,2,es-agent-v1
+pickup-meeting.please-call-a-taxi,"Llame a un taxi, por favor",,,,2,es-agent-v1
+rail-station-words.high-speed-rail,tren de alta velocidad,AVE,,,2,es-agent-v1
+rail-station-words.maglev,tren de levitación magnética,maglev,,,2,es-agent-v1
+rail-station-words.transfer,transbordo,cambio de línea,,,2,es-agent-v1
+rail-station-words.ticket-gate,torniquete,control de acceso,,,2,es-agent-v1
+rail-station-words.platform,andén,,,,2,es-agent-v1
+rail-station-words.ticket-office,taquilla,boletería,,,2,es-agent-v1
+rail-station-words.waiting-room,sala de espera,,,,2,es-agent-v1
+rail-station-words.train-number,número de tren,,,,2,es-agent-v1
+rail-station-words.carriage,vagón,coche,,,2,es-agent-v1
+rail-station-words.seat,asiento,,,,2,es-agent-v1
+rail-station-words.last-train,último tren,,,,2,es-agent-v1
+rail-station-words.delayed,retrasado,con retraso · demorado,,,2,es-agent-v1
+rail-station-words.final-stop,última parada,terminal,,,2,es-agent-v1
+common-signs.open-on,Abierto,Encendido,,,2,es-agent-v1
+common-signs.closed-off,Cerrado,Apagado,,,2,es-agent-v1
+common-signs.occupied,Ocupado,,,,2,es-agent-v1
+common-signs.vacant,Libre,,,,2,es-agent-v1
+common-signs.caution,Precaución,Cuidado,,,2,es-agent-v1
+common-signs.no-entry,Prohibido el paso,No pasar,,,2,es-agent-v1
+common-signs.no-smoking,Prohibido fumar,No fumar,,,2,es-agent-v1
+common-signs.no-photography,Prohibido hacer fotos,No tomar fotografías,,,2,es-agent-v1
+common-signs.do-not-touch,No tocar,,,,2,es-agent-v1
+common-signs.temporarily-closed,Cerrado temporalmente,,,,2,es-agent-v1
+common-signs.open-operating,En servicio,,,,2,es-agent-v1
+common-signs.closed,Cerrado,,,,2,es-agent-v1
+common-signs.stopped-stop,Detenido,Fuera de servicio,,,2,es-agent-v1

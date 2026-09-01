@@ -1,0 +1,750 @@
+concept_id,respell
+toilets.where-toilet,voh ist dee toy-LET-uh?
+accessibility.step-free,gipt es EYE-nen SHTOO-fen-loh-zen TSOO-gahng?
+building-help.what-room-number-is-this,VEL-khuh TSIM-er-noom-er ist dahs?
+in-a-building.is-this-the-correct-entrance,ist dahs dair RIKH-tee-guh INE-gahng?
+building-words.elevator,OWF-tsook
+pronouns-verbs.i-me,ikh / mikh
+question-words.what,vahs
+medical-conditions.i-am-diabetic,ikh HAH-buh dee-ah-BAY-tes
+pharmacy-symptoms.which-pharmacy-is-open-now,VEL-khuh ah-poh-TAY-kuh haht yetst OF-en?
+police-consulate.where-is-the-police-station,voh ist dee poh-lee-TSY-vah-khuh?
+body-parts.head,kopf
+emergency-medical.help,HIL-fuh!
+lost-rescue.i-lost-my-passport,ikh HAH-buh MY-nen pahss fair-LOH-ren
+dietary-needs.no-meat,kine flysh
+food-ordering.table-for-two,ine tish fewr tsvy
+weather.forecast,vee ist dee VET-er-for-hair-zah-guh?
+trail-words.trail,VAHN-der-vayk
+hiking-parks.is-this-the-way-to,ist dahs dair vayk nahkh {}?
+trail-conditions.how-long-is-the-full-route,vee lahng ist dee GAHN-tsuh SHTREK-uh?
+trail-transport.how-long-is-the-queue,vee lahng ist dee SHLAHNG-uh?
+trail-warnings.open,guh-URF-net
+trail-landmarks.trail-marker,VAYK-mahr-kee-roong
+laundry.please-wash-these-clothes,BIT-tuh DEE-zuh VESH-uh VAH-shen
+hotel-words.passport,pahss
+hotel-basics.are-any-rooms-available,HAH-ben zee ine TSIM-er fry?
+hotel-requests.can-i-check-out-later,kahn ikh SHPAY-ter OWS-chek-en?
+room-problems.there-is-a-problem-with-the-room,es gipt ine proh-BLAYM mit daym TSIM-er
+introductions.my-name-is,ikh HY-suh {}
+atm-cash.where-is-an-atm,voh ist ine GELT-ow-toh-maht?
+numbers-money.l-ng,nool
+attractions-tickets.where-can-i-buy-tickets,voh kahn ikh KAHR-ten KOW-fen?
+payment-receipt.pay-by-card,mit KAHR-tuh TSAH-len?
+shopping.i-am-just-looking,ikh SHOW-uh noor
+color-size-returns.do-you-have-another-color,HAH-ben zee EYE-nuh AHN-duh-ruh FAHR-buh?
+tax-refund.can-i-get-a-tax-refund,buh-KOM-uh ikh dee MAIR-vairt-shtoy-er tsoo-REWK?
+sim-data.i-would-like-a-tourist-sim,ikh MURKH-tuh EYE-nuh PREE-payd-zim-kahr-tuh
+children.cannot-find-my-child,ikh FIN-duh mine kint nikht!
+etiquette.is-this-allowed,ist dahs air-LOWPT?
+social-basics.hello,HAH-loh
+communication.i-do-not-speak-this-language,ikh SHPREKH-uh kine doytsh
+quick-responses.please-go-ahead,BIT-tuh
+phone-translation.i-am-using-phone-translation,ikh EW-ber-zet-suh mit daym HEN-dee
+phone-text-power.please-type-it-for-me,BIT-tuh TIP-en zee es ine
+time-scheduling.what-time-is-it,vee feel oor ist es?
+time-words.today,HOY-tuh
+days-of-week.monday,MOHN-tahk
+months.january,YAH-noo-ahr
+border-customs.i-am-a-tourist,ikh bin too-RIST
+directions.where-is,voh ist {}?
+quick-directions.go-straight,guh-rah-duh-OWS
+taxi.please-take-me-here,BIT-tuh FAH-ren zee mikh HEER-hin
+transit-rides.two-tickets,tsvy FAHR-kahr-ten
+place-words.scenic-area,nah-TOOR-pahrk
+pickup-meeting.where-is-the-pickup-point,voh ist dair TREF-poonkt?
+rail-station-words.high-speed-rail,ee-tsay-AY
+common-signs.open-on,guh-URF-net
+utility-templates.i-want-to-go-to,ikh MURKH-tuh nahkh {}
+toilets.where-public-toilet,voh ist EYE-nuh URF-ent-likh-uh toy-LET-uh?
+accessibility.wheelchair-access,ist es ROL-shtool-guh-rekht?
+building-help.i-am-lost,ikh HAH-buh mikh fair-LOW-fen
+building-words.stairs,TREP-uh
+pronouns-verbs.we-us,veer / oons
+question-words.where,voh
+medical-conditions.i-need-insulin,ikh BROW-khuh IN-zoo-leen
+pharmacy-symptoms.i-need-medicine-for,ikh BROW-khuh ine may-dee-kah-MENT GAY-gen {}
+police-consulate.i-want-to-report-a-theft,ikh MURKH-tuh EYE-nen DEEP-shtahl AHN-tsy-gen
+body-parts.stomach,bowkh
+emergency-medical.please-call-an-ambulance,ROO-fen zee BIT-tuh EYE-nen RET-toongs-vah-gen!
+lost-rescue.i-lost-my-phone,ikh HAH-buh mine HEN-dee fair-LOH-ren
+dietary-needs.no-eggs,KY-nuh EYE-er
+food-ordering.is-a-table-available,HAH-ben zee EYE-nen tish fry?
+weather.will-it-rain,RAYG-net es HOY-tuh?
+trail-words.trailhead,OWS-gahngs-poonkt
+hiking-parks.where-is-the-trailhead,voh ist dair OWS-gahngs-poonkt?
+trail-conditions.can-we-return-the-same-way,KUR-nen veer dayn-ZEL-ben vayk tsoo-REWK?
+trail-transport.what-time-is-the-last-shuttle,vahn fairt dair LETS-tuh SHUT-el?
+trail-warnings.closed,guh-SHPAIRT
+trail-landmarks.fork-junction,AHP-tsvy-goong
+laundry.where-is-a-laundromat,voh ist ine VAHSH-zah-long?
+hotel-words.room-key-card,TSIM-er-kahr-tuh
+hotel-basics.there-are-two-of-us,veer zint tsvy pair-ZOH-nen
+hotel-requests.what-time-does-breakfast-start,vahn buh-GINT dahs FREW-shtewk?
+room-problems.the-air-conditioning-is-broken,dee KLEE-mah-ahn-lah-guh ist kah-POOT
+introductions.nice-to-meet-you,froyt mikh
+atm-cash.does-this-atm-take-foreign-cards,nimt dair ow-toh-MAHT OWS-len-dish-uh KAHR-ten?
+numbers-money.y,ines
+attractions-tickets.do-i-need-a-reservation,BROW-khuh ikh EYE-nuh ray-zair-VEE-roong?
+payment-receipt.pay-cash,bahr TSAH-len?
+shopping.how-much-is-this,vahs KOS-tet dahs?
+color-size-returns.do-you-have-another-size,HAH-ben zee EYE-nuh AHN-duh-ruh GRUR-suh?
+sim-data.may-i-use-your-wifi,dahrf ikh eer VAY-lahn buh-NOOT-sen?
+children.make-an-announcement,BIT-tuh MAH-khen zee EYE-nuh DOORKH-zah-guh
+etiquette.is-tipping-expected,ist TRINK-gelt EWP-likh?
+social-basics.hello-polite,GOO-ten tahk
+communication.i-speak-only-a-little-of-this,ikh SHPREKH-uh noor ine VAY-nikh doytsh
+quick-responses.yes-right,yah / RIKH-tikh
+phone-translation.please-speak-toward-the-phone,BIT-tuh SHPREKH-en zee ins HEN-dee
+phone-translation.please-write-the-place-name,BIT-tuh dayn ORTS-nah-men owf doytsh SHRY-ben
+time-scheduling.how-many-minutes,vee FEE-luh mee-NOO-ten?
+time-words.tomorrow,MOR-gen
+days-of-week.tuesday,DEENS-tahk
+months.february,FAY-broo-ahr
+border-customs.here-is-my-passport,heer ist mine pahss
+directions.how-do-i-get-to,vee KOM-uh ikh nahkh {}?
+quick-directions.turn-left,links AHP-bee-gen
+taxi.please-send-me-the-address,BIT-tuh SHIK-en zee meer dee ah-DRESS-uh
+transit-rides.where-is-the-subway-station,voh ist dee OO-bahn-shtah-tsyohn?
+place-words.visitor-center,buh-ZOO-kher-tsen-troom
+pickup-meeting.please-send-me-the-pickup-point,BIT-tuh SHIK-en zee meer dayn TREF-poonkt
+rail-station-words.maglev,mahg-NAYT-shvay-buh-bahn
+common-signs.closed-off,guh-SHLOSS-en
+utility-templates.please-give-me,BIT-tuh GAY-ben zee meer {}
+toilets.may-i-use-the-toilet,dahrf ikh dee toy-LET-uh buh-NOOT-sen?
+accessibility.elevator,gipt es EYE-nen OWF-tsook?
+building-help.where-is-reception,voh ist dee ray-tsep-TSYOHN?
+in-a-building.do-you-have-wi-fi,HAH-ben zee VAY-lahn?
+building-words.entrance,INE-gahng
+pronouns-verbs.you,doo / dikh
+question-words.who,vair
+medical-conditions.i-have-asthma,ikh HAH-buh AHST-mah
+pharmacy-symptoms.i-have-a-fever,ikh HAH-buh FEE-ber
+police-consulate.my-bag-was-stolen,MY-nuh TAH-shuh VOOR-duh guh-SHTOH-len
+body-parts.back,REW-ken
+emergency-medical.i-need-a-doctor,ikh BROW-khuh EYE-nen ahrtst
+lost-rescue.please-call-the-police,ROO-fen zee BIT-tuh dee poh-lee-TSY!
+dietary-needs.not-spicy,nikht shahrf
+food-ordering.menu-please,"dee KAHR-tuh, BIT-tuh"
+weather.is-it-safe-today,ist es HOY-tuh ZIKH-er?
+trail-words.summit,GIP-fel
+hiking-parks.how-long-to-the-summit,vee LAHNG-uh bis tsoom GIP-fel?
+trail-conditions.can-we-return-before-dark,KOM-en veer for DOONG-kel-hite tsoo-REWK?
+trail-transport.when-does-the-cableway-stop,vahn fairt dee LETS-tuh ZILE-bahn?
+trail-warnings.maintenance,VAHR-toong
+trail-landmarks.boardwalk-cliff-path,BOH-len-vayk / FEL-zen-pfaht
+laundry.when-will-it-be-ready,vahn ist es FAIR-tikh?
+hotel-words.check-in,CHEK-in
+hotel-basics.i-have-a-reservation,ikh HAH-buh EYE-nuh ray-zair-VEE-roong
+hotel-requests.can-i-store-my-luggage,kahn ikh mine guh-PEK heer LAHSS-en?
+room-problems.there-is-no-hot-water,es gipt kine VAHR-mes VAHSS-er
+introductions.what-is-your-name,vee HY-sen zee?
+atm-cash.the-atm-kept-my-card,dair ow-toh-MAHT haht MY-nuh KAHR-tuh buh-HAHL-ten
+numbers-money.r,tsvy
+attractions-tickets.what-is-the-latest-entry-time,vahn ist dair LETS-tuh INE-lahss?
+payment-receipt.pay-by-qr-code,mit koo-air-KOHT TSAH-len?
+shopping.that-is-too-expensive,dahs ist tsoo TOY-er
+color-size-returns.may-i-try-it-on,dahrf ikh dahs AHN-proh-bee-ren?
+sim-data.how-much-data-is-included,vee feel DAH-ten-voh-loo-men ist dah-BY?
+children.child-age,mine kint ist {} YAH-ruh ahlt
+etiquette.is-service-included,ist dee buh-DEE-noong in-kloo-ZEE-vuh?
+social-basics.good-morning,GOO-ten MOR-gen
+communication.do-you-speak-english,SHPREKH-en zee ENG-lish?
+quick-responses.no-not,nine / nikht
+phone-translation.one-sentence-at-a-time-please,BIT-tuh EYE-nen zahts nahkh daym AHN-duh-ren
+phone-text-power.please-use-simple-words,BIT-tuh INE-fah-khuh VUR-ter buh-NOOT-sen
+time-scheduling.what-time-should-we-meet,vahn TREF-en veer oons?
+time-words.yesterday,GES-tern
+days-of-week.wednesday,MIT-vokh
+months.march,mairts
+border-customs.i-am-staying-for-days,ikh BLY-buh {} TAH-guh
+directions.is-it-far,ist es vite?
+quick-directions.turn-right,rekhts AHP-bee-gen
+taxi.we-need-the-east-gate-not-the-south-gate,"veer BROW-khen dahs OST-tor, nikht dahs ZEWT-tor"
+transit-rides.does-this-bus-train-go-to,fairt DEE-zer booss / tsook nahkh {}?
+place-words.railway-station,BAHN-hohf
+pickup-meeting.please-pick-us-up-here,BIT-tuh HOH-len zee oons heer ap
+rail-station-words.transfer,OOM-shty-gen
+common-signs.occupied,buh-ZETST
+utility-templates.may-i,dahrf ikh {}?
+toilets.is-it-only-for-customers,noor fewr KOON-den?
+accessibility.ramp,gipt es EYE-nuh RAHM-puh?
+building-help.where-is-a-power-outlet,voh ist EYE-nuh SHTEK-doh-zuh?
+in-a-building.what-is-the-wi-fi-password,vee LOW-tet dahs VAY-lahn-pahss-vort?
+building-words.exit,OWS-gahng
+pronouns-verbs.you-polite,zee / EE-nen
+question-words.which-one,VEL-kher / VEL-khuh
+medical-conditions.i-have-a-heart-condition,ikh HAH-buh EYE-nuh HAIRTS-air-krahng-koong
+pharmacy-symptoms.i-have-diarrhea,ikh HAH-buh DOORKH-fahl
+police-consulate.my-passport-was-stolen,mine pahss VOOR-duh guh-SHTOH-len
+body-parts.throat,hahls
+emergency-medical.i-am-sick,ikh bin krahnk
+lost-rescue.we-are-here,veer zint heer
+dietary-needs.less-spicy,VAY-nee-ger shahrf
+food-ordering.i-want-this,ikh MURKH-tuh dahs
+weather.how-cold-at-night,vee kahlt virt es nahkhts?
+trail-words.viewpoint,OWS-zikhts-poonkt
+hiking-parks.how-long-to-the-viewpoint,vee LAHNG-uh bis tsoom OWS-zikhts-poonkt?
+trail-conditions.is-the-trail-open,ist dair vayk OF-en?
+trail-transport.where-can-we-buy-water,voh KUR-nen veer VAHSS-er KOW-fen?
+trail-warnings.steep-slope,SHTILE-hahng
+trail-landmarks.start,shtahrt
+laundry.how-much-per-kilo,vee feel proh KEE-loh?
+hotel-words.check-out,CHEK-owt
+hotel-basics.can-i-charge-my-phone,kahn ikh mine HEN-dee LAH-den?
+hotel-requests.no-housekeeping,BIT-tuh nikht RY-nee-gen
+room-problems.can-i-change-rooms,kahn ikh dahs TSIM-er VEK-seln?
+introductions.we-are-traveling-together,veer RY-zen tsoo-ZAHM-en
+atm-cash.is-there-a-fee,gipt es EYE-nuh guh-BEWR?
+numbers-money.li-ng,tsvoh
+attractions-tickets.are-there-lockers,gipt es SHLEESS-fekh-er?
+payment-receipt.a-receipt-please,"EYE-nen bong, BIT-tuh"
+shopping.can-it-be-a-little-cheaper,gayt es ET-vahs GEWNS-tee-ger?
+color-size-returns.can-i-return-it,kahn ikh dahs tsoo-REWK-gay-ben?
+sim-data.do-you-need-my-passport,BROW-khen zee MY-nen pahss?
+children.high-chair,HAH-ben zee EYE-nen HOHKH-shtool?
+etiquette.may-i-enter,dahrf ikh hair-INE-kom-en?
+social-basics.good-evening,GOO-ten AH-bent
+communication.please-speak-more-slowly,SHPREKH-en zee BIT-tuh LAHNG-zah-mer
+quick-responses.okay-can,oh-KAY / gayt
+phone-text-power.my-phone-battery-is-low,mine AH-koo ist fahst layr
+time-scheduling.can-we-change-the-time,KUR-nen veer dee tsite EN-dern?
+time-words.this-week,DEE-zuh VOKH-uh
+days-of-week.thursday,DON-ers-tahk
+months.april,ah-PRIL
+border-customs.nothing-to-declare,nikhts tsoo fair-TSOL-en
+directions.how-long-on-foot,vee LAHNG-uh tsoo fooss?
+quick-directions.this-way,heer ent-LAHNG
+taxi.please-stop-here,HAHL-ten zee BIT-tuh heer
+transit-rides.what-is-the-next-stop,vee hyst dee NEKHS-tuh shtah-TSYOHN?
+place-words.airport,FLOOK-hah-fen
+pickup-meeting.meet-us-at,TREF-en veer oons ahm {}
+rail-station-words.ticket-gate,SHPAIR-uh
+common-signs.vacant,fry
+utility-templates.please-do-not-add,BIT-tuh OH-nuh {}
+toilets.toilet-wc,toy-LET-uh / vay-TSAY
+accessibility.how-many-steps,vee FEE-luh SHTOO-fen zint es?
+in-a-building.which-floor,VEL-khuh ay-TAH-zhuh?
+building-words.men,HAIR-en
+pronouns-verbs.he-him,air / een
+question-words.when,vahn
+medical-conditions.i-am-allergic-to-penicillin,ikh bin ah-LAIR-gish GAY-gen pay-nee-tsee-LEEN
+pharmacy-symptoms.where-is-an-all-night-pharmacy,voh ist dee NOHT-deenst-ah-poh-tay-kuh?
+police-consulate.someone-is-following-me,YAY-mahnt folkt meer
+body-parts.tooth,tsahn
+emergency-medical.i-am-injured,ikh bin fair-LETST
+lost-rescue.please-look-at-my-location-pin,BIT-tuh SHOW-en zee owf DEE-zen SHTAHNT-ort
+dietary-needs.no-peanuts,KY-nuh AIRT-newss-uh
+food-ordering.do-you-have-drinking-water,HAH-ben zee TRINK-vahss-er?
+weather.rain,RAY-gen
+trail-words.cableway,ZILE-bahn
+hiking-parks.which-route-is-easier,VEL-kher vayk ist LYKH-ter?
+trail-conditions.is-the-route-steep,ist dee SHTREK-uh shtile?
+trail-transport.where-can-we-refill-water,voh KUR-nen veer VAHSS-er OWF-fewl-en?
+trail-warnings.caution-slippery,"AHKH-toong, ROOTSH-guh-fahr"
+trail-landmarks.end,EN-duh
+laundry.can-it-be-ready-today,ist es HOY-tuh FAIR-tikh?
+hotel-basics.i-would-like-a-non-smoking-room,ikh MURKH-tuh ine NIKHT-row-kher-tsim-er
+room-problems.the-room-is-too-noisy,dahs TSIM-er ist tsoo lowt
+introductions.this-is-my-friend,dahs ist ine froynt fon meer
+atm-cash.the-card-was-declined,dee KAHR-tuh VOOR-duh AHP-guh-laynt
+numbers-money.s-n,dry
+attractions-tickets.may-i-take-photos,dahrf ikh foh-toh-grah-FEE-ren?
+color-size-returns.can-i-exchange-it,kahn ikh dahs OOM-tow-shen?
+sim-data.how-long-is-it-valid,vee LAHNG-uh ist es GEWL-tikh?
+children.baby-changing-room,voh ist dair VIK-el-rowm?
+etiquette.remove-shoes,zol ikh dee SHOO-uh OWS-tsee-en?
+social-basics.goodbye,owf VEE-der-zay-en
+communication.i-do-not-understand-spoken,fair-SHTAY-uh ikh nikht
+quick-responses.cannot-not-allowed,gayt nikht / fair-BOH-ten
+phone-text-power.do-you-have-a-power-bank,HAH-ben zee EYE-nuh POW-er-bahnk?
+time-scheduling.when-is-convenient,vahn pahst es EE-nen?
+time-words.next-week,NEKHS-tuh VOKH-uh
+days-of-week.friday,FRY-tahk
+months.may,my
+border-customs.i-am-staying-at,ikh VOH-nuh im {}
+directions.please-show-me-on-the-map,BIT-tuh owf dair KAHR-tuh TSY-gen
+quick-directions.that-way,dah ent-LAHNG
+taxi.can-you-wait-for-me-here,KUR-nen zee heer owf mikh VAHR-ten?
+transit-rides.please-tell-me-where-to-get-off,"ZAH-gen zee meer BIT-tuh, voh ikh OWS-shty-gen mooss"
+place-words.service-desk,in-for-mah-TSYOHN
+pickup-meeting.please-call-me-a-ride,BIT-tuh buh-SHTEL-en zee meer EYE-nuh fahrt
+rail-station-words.platform,BAHN-shtike
+common-signs.caution,FOR-zikht
+utility-templates.do-you-have,HAH-ben zee {}?
+toilets.is-it-free,ist es KOS-ten-lohs?
+accessibility.cannot-climb-stairs,ikh kahn KY-nuh TREP-en SHTY-gen
+building-words.women,DAH-men
+pronouns-verbs.she-her,zee / eer
+question-words.how,vee
+medical-conditions.i-have-epilepsy,ikh HAH-buh ay-pee-lep-ZEE
+pharmacy-symptoms.painkiller,SHMAIRTS-mit-tel
+police-consulate.i-need-a-written-police-report,ikh BROW-khuh EYE-nuh SHRIFT-likh-uh AHN-tsy-guh
+body-parts.chest,broost
+emergency-medical.it-hurts-here,heer toot es vay
+lost-rescue.i-cannot-walk,ikh kahn nikht GAY-en
+dietary-needs.no-nuts,KY-nuh NEWSS-uh
+food-ordering.to-go-please,"tsoom MIT-nay-men, BIT-tuh"
+weather.snow,shnay
+trail-words.shuttle-bus,SHUT-el-booss
+trail-conditions.is-the-path-slippery,ist dair vayk ROOT-shikh?
+trail-transport.is-there-cell-signal-here,gipt es heer HEN-dee-em-pfahng?
+trail-warnings.danger,guh-FAHR
+trail-landmarks.elevation,HUR-uh
+laundry.please-do-not-use-bleach,BIT-tuh kine BLYKH-mit-tel
+hotel-basics.i-would-like-a-quiet-room,ikh MURKH-tuh ine ROO-ee-ges TSIM-er
+room-problems.the-key-does-not-work,dair SHLEWSS-el foonk-tsyoh-NEERT nikht
+introductions.i-am-from,ikh KOM-uh ows {}
+atm-cash.what-is-the-exchange-rate,vee ist dair VEK-sel-koors?
+numbers-money.s,feer
+attractions-tickets.please-take-a-photo-of-us,BIT-tuh MAH-khen zee ine FOH-toh fon oons
+color-size-returns.do-you-have-a-bag,HAH-ben zee EYE-nuh TEW-tuh?
+sim-data.please-activate-it,BIT-tuh dee ZIM-kahr-tuh ahk-tee-VEE-ren
+children.childrens-menu,gipt es EYE-nuh KIN-der-kahr-tuh?
+etiquette.photo-of-you,dahrf ikh zee foh-toh-grah-FEE-ren?
+social-basics.thank-you,DAHNG-kuh
+communication.i-cannot-read-understand,ikh kahn dahs nikht LAY-zen
+quick-responses.works-okay,pahst / gayt
+phone-text-power.the-translation-may-be-inaccurate,dee EW-ber-zet-soong kahn fahlsh zine
+time-scheduling.what-is-today-s-date,VEL-khes DAH-toom ist HOY-tuh?
+time-words.morning,FOR-mit-tahk
+days-of-week.saturday,ZAHMS-tahk
+months.june,YOO-nee
+border-customs.i-am-here-for-business,ikh bin guh-SHEFT-likh heer
+directions.where-is-the-nearest,voh ist dair NEKHS-tuh {}?
+quick-directions.on-the-left,owf dair LING-ken ZY-tuh
+taxi.we-need-to-catch-the-high-speed-train,veer MEWSS-en dayn ee-tsay-AY air-RY-khen
+transit-rides.is-this-direct,fairt dair dee-REKT?
+place-words.bus-stop,HAHL-tuh-shtel-uh
+rail-station-words.ticket-office,FAHR-kahr-ten-shahl-ter
+common-signs.no-entry,TSOO-trit fair-BOH-ten
+utility-templates.please-write-the-number,BIT-tuh dee tsahl OWF-shry-ben
+toilets.do-i-need-a-coin,BROW-khuh ikh EYE-nuh MEWN-tsuh OH-der EYE-nen chip?
+accessibility.need-to-sit-down,ikh mooss mikh ZET-sen
+building-words.door,tewr
+pronouns-verbs.they-them,zee / EE-nen
+question-words.how-much-many,vee feel / vee FEE-luh
+medical-conditions.my-blood-sugar-is-low,mine BLOOT-tsoo-ker ist tsoo NEE-drikh
+pharmacy-symptoms.do-i-need-a-prescription,BROW-khuh ikh ine ray-TSEPT?
+police-consulate.i-want-to-contact-my-embassy,ikh MURKH-tuh MY-nuh BOHT-shahft kon-tahk-TEE-ren
+body-parts.eye,OW-guh
+emergency-medical.where-is-a-pharmacy,voh ist EYE-nuh ah-poh-TAY-kuh?
+lost-rescue.i-sprained-my-ankle,ikh HAH-buh meer dayn k-NUR-khel fair-SHTOWKHT
+dietary-needs.no-seafood,"kine fish, KY-nuh MAY-res-frewkh-tuh"
+food-ordering.check-please,"TSAH-len, BIT-tuh"
+weather.wind,vint
+trail-words.park-shuttle,VAHN-der-booss
+trail-transport.do-you-have-a-map,HAH-ben zee EYE-nuh KAHR-tuh?
+trail-warnings.beware-falling-rocks,AHKH-toong SHTINE-shlahk
+trail-landmarks.sunset,ZON-en-oon-ter-gahng
+laundry.laundromat,VAHSH-zah-long
+hotel-basics.is-there-a-washing-machine,gipt es EYE-nuh VAHSH-mah-shee-nuh?
+room-problems.the-toilet-will-not-flush,dee toy-LET-en-shpew-loong gayt nikht
+introductions.where-are-you-from,voh-HAIR KOM-en zee?
+atm-cash.no-money-came-out,es kahm kine gelt hair-OWS
+numbers-money.w,fewnf
+sim-data.do-you-have-an-esim,HAH-ben zee EYE-nuh AY-zim?
+children.suitable-for-children,ist dahs fewr KIN-der guh-EYEG-net?
+etiquette.may-i-sit-here,dahrf ikh heer ZIT-sen?
+social-basics.you-are-welcome,BIT-tuh
+communication.please-say-it-again,BIT-tuh nokh INE-mahl
+quick-responses.does-not-work-no,foonk-tsyoh-NEERT nikht / nine
+phone-text-power.please-confirm,BIT-tuh buh-SHTAY-tee-gen zee
+time-scheduling.what-day-is-it-today,VEL-kher tahk ist HOY-tuh?
+time-words.afternoon,NAHKH-mit-tahk
+days-of-week.sunday,ZON-tahk
+months.july,YOO-lee
+border-customs.i-have-a-return-ticket,ikh HAH-buh ine REWK-flook-tik-et
+directions.where-am-i,voh bin ikh?
+quick-directions.on-the-right,owf dair REKH-ten ZY-tuh
+taxi.please-use-the-meter,BIT-tuh mit tahk-sah-MAY-ter
+transit-rides.do-i-need-to-transfer,mooss ikh OOM-shty-gen?
+place-words.luggage-storage,guh-PEK-owf-buh-vah-roong
+rail-station-words.waiting-room,VAHR-tuh-zahl
+common-signs.no-smoking,ROW-khen fair-BOH-ten
+utility-templates.i-need,ikh BROW-khuh {}
+toilets.is-the-tap-water-safe-to-drink,kahn mahn dahs LY-toongs-vahss-er TRING-ken?
+accessibility.accessible-restroom,gipt es ine bah-ree-AIR-uh-fry-es vay-TSAY?
+building-words.key,SHLEWSS-el
+pronouns-verbs.my-mine,mine / mines
+question-words.how-many,vee FEE-luh
+medical-conditions.i-need-my-inhaler,ikh BROW-khuh mine AHST-mah-shpray
+pharmacy-symptoms.i-have-a-headache,ikh HAH-buh KOPF-shmair-tsen
+police-consulate.i-need-it-for-my-insurance,ikh BROW-khuh es fewr MY-nuh fair-ZIKH-uh-roong
+body-parts.ear,ohr
+emergency-medical.please-take-me-to-a-hospital,BRING-en zee mikh BIT-tuh ins KRAHNG-ken-hows
+lost-rescue.please-contact-rescue,ROO-fen zee BIT-tuh dee BAIRK-ret-toong!
+dietary-needs.i-am-vegetarian,ikh ESS-uh vay-gay-TAH-rish
+food-ordering.does-it-contain,ist {} dah-RIN?
+weather.storm,shtoorm
+trail-words.steps,SHTOO-fen
+trail-warnings.first-aid-station,AIRS-tuh HIL-fuh shtah-TSYOHN
+laundry.please-iron-this,BIT-tuh dahs BEW-geln
+room-problems.the-light-does-not-work,dahs likht gayt nikht
+introductions.how-are-you,vee gayt es EE-nen?
+atm-cash.where-can-i-change-money,voh kahn ikh gelt VEK-seln?
+numbers-money.li,zeks
+sim-data.my-data-is-not-working,MY-nuh moh-BEE-len DAH-ten GAY-en nikht
+children.minimum-age,vee ist dahs MIN-dest-ahl-ter?
+etiquette.queue-for,ist dahs dee SHLAHNG-uh fewr {}?
+social-basics.excuse-me-sorry,ent-SHOOL-dig-oong
+communication.please-write-it-down,BIT-tuh SHRY-ben zee es owf
+time-scheduling.what-time-does-it-open,vahn URF-net es?
+time-words.evening,AH-bent
+months.august,ow-GOOST
+border-customs.i-am-visiting-family,ikh bin tsoo buh-ZOOKH by fah-MEE-lee-uh
+directions.which-way,in VEL-khuh RIKH-toong?
+quick-directions.across-from-here,gay-gen-EW-ber
+transit-rides.is-it-delayed,haht air fair-SHPAY-toong?
+rail-station-words.train-number,TSOOK-noom-er
+common-signs.no-photography,foh-toh-grah-FEE-ren fair-BOH-ten
+utility-templates.is-there-nearby,gipt es {} heer in dair NAY-uh?
+toilets.it-is-urgent,es ist DRING-ent
+accessibility.station-assistance,gipt es heer dayn moh-bee-lee-TAITS-ser-vis?
+pronouns-verbs.your-yours,eer / EE-res
+question-words.why,vah-ROOM
+medical-conditions.i-am-pregnant,ikh bin SHVAHNG-er
+pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-tsay-tah-MOHL
+police-consulate.i-need-an-interpreter,ikh BROW-khuh EYE-nen DOL-met-sher
+body-parts.leg,bine
+lost-rescue.my-companion-is-missing,MY-nuh buh-GLY-toong virt fair-MIST
+dietary-needs.i-am-vegan,ikh ESS-uh vay-GAHN
+food-ordering.is-this-vegetarian,ist dahs vay-gay-TAH-rish?
+weather.ice,GLAHT-ice
+trail-words.up-uphill,hin-OWF / bairk-OWF
+trail-warnings.service-suspended,buh-TREEP INE-guh-shtelt
+trail-landmarks.water-point,TRINK-vahss-er-shtel-uh
+laundry.detergent,VAHSH-mit-tel
+room-problems.please-send-someone,BIT-tuh SHIK-en zee YAY-mahn-den tsoom ray-pah-REE-ren
+introductions.i-am-a-tourist,ikh bin too-RIST
+atm-cash.the-machine-is-out-of-service,dair ow-toh-MAHT ist OW-ser buh-TREEP
+numbers-money.q,ZEE-ben
+sim-data.does-it-need-registration,mooss ikh zee ray-gis-TREE-ren?
+children.do-children-pay,TSAH-len KIN-der owkh?
+etiquette.dressed-appropriately,ist MY-nuh KLY-doong zoh in ORT-noong?
+social-basics.sorry,toot meer lite
+communication.please-wait-a-moment,"EYE-nen moh-MENT, BIT-tuh"
+time-scheduling.what-time-does-it-close,vahn shleest es?
+time-words.spring,FREW-ling
+months.september,zep-TEM-ber
+border-customs.this-is-for-personal-use,dahs ist fewr dayn EYE-gen-buh-dahrf
+directions.can-i-walk-there,kahn ikh tsoo fooss GAY-en?
+quick-directions.in-front,FOR-nuh
+transit-rides.i-am-in-a-hurry,ikh bin in EYE-luh
+rail-station-words.carriage,VAH-gen
+common-signs.do-not-touch,nikht buh-REW-ren
+utility-templates.how-much-is,vahs KOS-tet {}?
+toilets.may-i-have-the-toilet-key,kahn ikh dayn toy-LET-en-shlewss-el HAH-ben?
+accessibility.help-me-carry,HEL-fen zee meer BIT-tuh bime TRAH-gen
+pronouns-verbs.be-called-call,HY-sen / ROO-fen
+question-words.this,DEE-zer / dahs heer
+medical-conditions.i-carry-an-adrenaline-injector,ikh HAH-buh EYE-nen ah-dre-nah-LEEN OW-toh-in-yek-tor
+pharmacy-symptoms.how-much-should-i-take,vee feel zol ikh NAY-men?
+police-consulate.please-leave-me-alone,LAHSS-en zee mikh BIT-tuh in ROO-uh
+body-parts.arm,ahrm
+dietary-needs.i-do-not-eat,ikh ESS-uh kine {}
+weather.fog,NAY-bel
+trail-words.down-downhill,hin-OON-ter / bairk-AHP
+laundry.dry-cleaning,RY-nee-goong
+room-problems.the-heating-does-not-work,dee HY-tsoong foonk-tsyoh-NEERT nikht
+introductions.this-is-my-husband-wife,dahs ist mine mahn / MY-nuh frow
+atm-cash.please-give-me-smaller-notes,BIT-tuh KLY-nuh SHY-nuh
+numbers-money.b,ahkht
+sim-data.i-have-no-signal,ikh HAH-buh KY-nen em-PFAHNG
+children.crib,HAH-ben zee ine KIN-der-bet?
+etiquette.did-not-mean-to-offend,dahs vahr nikht BUR-zuh guh-MINT
+social-basics.no-problem,kine proh-BLAYM
+communication.can-you-help-me,KUR-nen zee meer HEL-fen?
+time-words.summer,ZOM-er
+months.october,ok-TOH-ber
+border-customs.i-am-in-transit,ikh bin owf DOORKH-ry-zuh
+directions.how-far-is-it,vee vite ist es?
+quick-directions.behind,HIN-ten
+transit-rides.which-platform,VEL-khes glice?
+rail-station-words.seat,ZITS-plahts
+common-signs.temporarily-closed,for-EW-ber-gay-ent guh-SHLOSS-en
+utility-templates.is-this,ist dahs {}?
+toilets.there-is-no-toilet-paper,es ist kine toy-LET-en-pah-peer dah
+accessibility.board-first,dahrf ikh tsoo-AIRST INE-shty-gen?
+pronouns-verbs.have,HAH-ben
+question-words.that,dahs dah
+medical-conditions.i-take-medicine-for,ikh NAY-muh may-dee-kah-MEN-tuh GAY-gen {}
+pharmacy-symptoms.i-am-vomiting,ikh air-BREKH-uh mikh
+police-consulate.i-was-robbed,ikh VOOR-duh buh-ROWPT
+body-parts.foot,fooss
+dietary-needs.i-am-allergic-to,ikh bin ah-LAIR-gish GAY-gen {}
+weather.heat,HIT-suh
+trail-words.one-way,INE-fah-khuh SHTREK-uh
+laundry.dryer,TROK-ner
+introductions.this-is-my-daughter-son,dahs ist MY-nuh TOKH-ter / mine zohn
+atm-cash.do-you-have-change,KUR-nen zee VEK-seln?
+numbers-money.ji,noyn
+sim-data.please-write-the-wifi-password,BIT-tuh dahs VAY-lahn-pahss-vort OWF-shry-ben
+children.warm-this-bottle,BIT-tuh dahs FLESH-khen air-VAIR-men
+etiquette.what-is-customary,vahs ist heer EWP-likh?
+social-basics.i-do-not-know,ikh vice nikht
+communication.please-show-me-the-text,TSY-gen zee meer BIT-tuh dayn DOY-chen tekst
+time-words.fall,hairpst
+months.november,noh-VEM-ber
+border-customs.i-have-in-cash,ikh HAH-buh {} in BAHR-gelt
+directions.which-exit,VEL-kher OWS-gahng?
+transit-rides.what-time-is-the-next-one,vahn fairt dair NEKHS-tuh?
+rail-station-words.last-train,LETS-ter tsook
+utility-templates.please,"{}, BIT-tuh"
+toilets.toilet-paper,toy-LET-en-pah-peer
+accessibility.door-width,vee brite ist dee tewr?
+pronouns-verbs.do-not-have,nikht HAH-ben
+question-words.here,heer
+medical-conditions.i-take-blood-thinners,ikh NAY-muh BLOOT-fair-dew-ner
+pharmacy-symptoms.rehydration-salts,ay-lek-troh-LEET-pool-ver
+police-consulate.i-want-a-lawyer,ikh MURKH-tuh EYE-nen AHN-vahlt
+body-parts.hand,hahnt
+weather.cold,KEL-tuh
+trail-words.round-trip,hin oont tsoo-REWK
+laundry.coin-operated,MEWNTS-buh-treep
+introductions.i-am-traveling-alone,ikh RY-zuh ah-LINE
+atm-cash.may-i-pay-in,kahn ikh in {} buh-TSAH-len?
+numbers-money.sh,tsayn
+sim-data.sim-card,ZIM-kahr-tuh
+children.car-seat,veer BROW-khen EYE-nen KIN-der-zits
+etiquette.keep-the-change,shtimt zoh
+time-words.winter,VIN-ter
+months.december,day-TSEM-ber
+border-customs.this-is-a-gift,dahs ist ine guh-SHENK
+directions.can-you-show-me-the-way,KUR-nen zee meer dayn vayk TSY-gen?
+transit-rides.i-went-past-my-stop,ikh bin tsoo vite guh-FAH-ren
+rail-station-words.delayed,fair-SHPAY-tet
+utility-templates.i-am-looking-for,ikh ZOO-khuh {}
+toilets.it-is-out-of-order,es ist OW-ser buh-TREEP
+accessibility.wheelchair-width,mine ROL-shtool ist {} tsen-tee-MAY-ter brite
+pronouns-verbs.go,GAY-en
+question-words.there,dort
+medical-conditions.medicine-allergy,may-dee-kah-MEN-ten-ah-lair-gee: {}
+pharmacy-symptoms.how-many-times-a-day,vee oft ahm tahk?
+police-consulate.please-notify-my-consulate,BIT-tuh in-for-MEE-ren zee mine kon-zoo-LAHT
+body-parts.knee,k-NEE
+weather.humid,foykht
+atm-cash.please-charge-in-local-currency,BIT-tuh in LAHN-des-vair-oong AHP-boo-khen
+numbers-money.y-b-i,HOON-dert
+sim-data.where-can-i-buy-a-plug-adapter,voh gipt es EYE-nen RY-zuh-ah-dahp-ter?
+children.stroller,KIN-der-vah-gen
+border-customs.where-do-i-collect-my-baggage,voh ist dee guh-PEK-ows-gah-buh?
+directions.north,NOR-den
+rail-station-words.final-stop,ENT-shtah-tsyohn
+utility-templates.do-you-accept,NAY-men zee {}?
+toilets.out-of-order,OW-ser buh-TREEP
+accessibility.hard-of-hearing,ikh bin SHVAIR-hur-ikh
+pronouns-verbs.come,KOM-en
+question-words.a-little,ine VAY-nikh
+medical-conditions.this-card-lists-my-conditions,DEE-zuh KAHR-tuh nent MY-nuh KRAHNK-hy-ten
+pharmacy-symptoms.i-have-a-stomach-ache,ikh HAH-buh BOWKH-shmair-tsen
+police-consulate.i-am-calling-the-police,ikh ROO-fuh dee poh-lee-TSY
+body-parts.ankle,k-NUR-khel
+weather.sunrise,ZON-en-owf-gahng
+atm-cash.where-can-i-get-coins,voh buh-KOM-uh ikh MEWN-tsen?
+numbers-money.y-qi-n,TOW-zent
+sim-data.mobile-data,moh-BEE-luh DAH-ten
+children.playground,gipt es EYE-nen SHPEEL-plahts?
+border-customs.how-long-may-i-stay,vee LAHNG-uh dahrf ikh BLY-ben?
+directions.south,ZEW-den
+utility-templates.i-cannot-find,ikh FIN-duh {} nikht
+toilets.mens-toilet,HAIR-en vay-TSAY
+accessibility.speak-louder,SHPREKH-en zee BIT-tuh LOW-ter
+pronouns-verbs.would-like,MURKH-ten
+question-words.some,ET-vahs
+medical-conditions.this-is-my-medicine,dahs ist mine may-dee-kah-MENT
+pharmacy-symptoms.i-have-a-cough,ikh HAH-buh HOOS-ten
+police-consulate.am-i-under-arrest,bin ikh fair-HAHF-tet?
+body-parts.skin,howt
+weather.flood,HOHKH-vahss-er
+atm-cash.is-there-a-minimum-for-cards,gipt es EYE-nen MIN-dest-buh-trahk?
+numbers-money.y-w-n,tsayn-TOW-zent
+sim-data.can-i-top-up-this-sim,kahn ikh dee zim OWF-lah-den?
+border-customs.i-have-a-connecting-flight,ikh HAH-buh EYE-nen AHN-shlooss-flook
+directions.east,OS-ten
+utility-templates.there-is-a-problem-with,es gipt ine proh-BLAYM mit {}
+toilets.womens-toilet,DAH-men vay-TSAY
+accessibility.visually-impaired,ikh bin ZAY-buh-hin-dert
+pronouns-verbs.want,VOL-en
+question-words.very,zair
+medical-conditions.please-give-me-sugar-or-juice,BIT-tuh GAY-ben zee meer TSOO-ker OH-der zahft
+pharmacy-symptoms.antihistamine,ahn-tee-hiss-tah-MEE-nee-koom
+police-consulate.no-thank-you-i-am-not-interested,"nine DAHNG-kuh, kine in-tair-ESS-uh"
+weather.avalanche-risk,lah-VEE-nen-guh-fahr
+atm-cash.atm,GELT-ow-toh-maht
+numbers-money.b-n,hahlp
+sim-data.top-up,OWF-lah-den
+border-customs.may-i-have-an-entry-stamp,buh-KOM-uh ikh EYE-nen INE-ry-zuh-shtem-pel?
+directions.west,VES-ten
+toilets.drinking-water,TRINK-vahss-er
+accessibility.take-your-arm,dahrf ikh mikh ahn EE-rem ahrm FEST-hahl-ten?
+pronouns-verbs.look-for,ZOO-khen
+question-words.too,tsoo
+medical-conditions.inject-it-into-my-outer-thigh,BIT-tuh in dayn OY-suh-ren OH-ber-sheng-kel SHPRIT-sen
+pharmacy-symptoms.anti-diarrhea-medicine,MIT-tel GAY-gen DOORKH-fahl
+police-consulate.someone-attacked-me,ikh VOOR-duh AHN-guh-grif-en
+atm-cash.banknote,shine
+numbers-money.yu-n,yoo-AHN
+sim-data.is-there-coverage-in,gipt es em-PFAHNG in {}?
+border-customs.visa,VEE-zoom
+toilets.not-for-drinking,kine TRINK-vahss-er
+accessibility.guide-dog,dahs ist mine BLIN-den-fewr-hoont
+pronouns-verbs.buy,KOW-fen
+question-words.also,owkh
+medical-conditions.my-blood-type-is,MY-nuh BLOOT-groop-uh ist {}
+pharmacy-symptoms.is-this-safe-to-take-with,kahn ikh dahs tsoo-ZAHM-en mit {} NAY-men?
+police-consulate.i-did-not-agree-to-this-price,DEE-zen price HAH-buh ikh nikht fair-INE-bahrt
+atm-cash.coin,MEWN-tsuh
+numbers-money.ku-i,yoo-AHN
+sim-data.signal,em-PFAHNG
+border-customs.i-have-no-food-or-plants,ikh HAH-buh KY-nuh LAY-bens-mit-tel OH-der PFLAHN-tsen
+toilets.accessible-toilet,bah-ree-AIR-uh-fry-es vay-TSAY
+pronouns-verbs.like,MUR-gen
+question-words.all-both,AH-luh / BY-duh
+medical-conditions.do-not-give-me,BIT-tuh GAY-ben zee meer kine {}
+pharmacy-symptoms.i-feel-dizzy,meer ist SHVIN-duh-likh
+police-consulate.please-write-the-report-number,BIT-tuh noh-TEE-ren zee dahs AHK-ten-tsy-khen
+atm-cash.cash-only,noor BAHR-tsah-loong
+sim-data.esim,AY-zim
+border-customs.passport-control,PAHSS-kon-trol-uh
+toilets.where-can-i-wash-my-hands,voh kahn ikh meer dee HEN-duh VAH-shen?
+pronouns-verbs.need,BROW-khen
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,ikh bin ah-LAIR-gish GAY-gen AHS-pee-reen oont ee-boo-PROH-fen
+pharmacy-symptoms.ibuprofen,ee-boo-PROH-fen
+police-consulate.it-happened-here,es ist heer pah-ZEERT
+atm-cash.fee,guh-BEWR
+sim-data.prepaid,PREE-payd
+border-customs.customs,tsol
+toilets.can-i-flush-the-paper,dahrf dahs pah-PEER in dee toy-LET-uh?
+medical-conditions.my-injector-is-in-my-bag,mine OW-toh-in-yek-tor ist in MY-ner TAH-shuh
+pharmacy-symptoms.i-have-a-sore-throat,ikh HAH-buh HAHLS-shmair-tsen
+police-consulate.may-i-have-a-copy-of-the-report,buh-KOM-uh ikh EYE-nuh koh-PEE dair AHN-tsy-guh?
+atm-cash.change,VEK-sel-gelt
+sim-data.roaming,ROH-ming
+border-customs.baggage-claim,guh-PEK-ows-gah-buh
+toilets.is-there-a-toilet-on-board,gipt es ahn bort EYE-nuh toy-LET-uh?
+medical-conditions.i-am-allergic-to-sulfa-drugs,ikh bin ah-LAIR-gish GAY-gen zool-foh-nah-MEE-duh
+pharmacy-symptoms.can-i-get-this-medicine-here,buh-KOM-uh ikh DEE-zes may-dee-kah-MENT heer?
+police-consulate.i-will-not-sign-anything-i-cannot-read,"ikh oon-ter-SHRY-buh nikhts, vahs ikh nikht LAY-zen kahn"
+atm-cash.exchange-rate,VEK-sel-koors
+border-customs.customs-declaration,TSOL-ahn-mel-doong
+toilets.the-toilet-will-not-flush,dee toy-LET-en-shpew-loong gayt nikht
+pharmacy-symptoms.bandage,fair-BAHNT
+police-consulate.am-i-free-to-go,dahrf ikh GAY-en?
+atm-cash.bank,bahnk
+border-customs.arrival-card,INE-ry-zuh-kahr-tuh
+toilets.baby-change,VIK-el-rowm
+pharmacy-symptoms.the-pain-is-severe,dee SHMAIR-tsen zint shtahrk
+police-consulate.i-do-not-want-to-go-with-you,ikh MURKH-tuh nikht MIT-kom-en
+atm-cash.money-exchange,GELT-vek-sel
+border-customs.transit,TRAHN-zit
+toilets.squat-toilet,HOK-toy-let-uh
+pharmacy-symptoms.antiseptic,VOONT-des-in-fek-tsyohn
+atm-cash.pin,pin
+border-customs.boarding-pass,BORT-kahr-tuh
+pharmacy-symptoms.i-feel-nauseous,meer ist EW-bel
+pharmacy-symptoms.i-have-a-rash,ikh HAH-buh HOWT-ows-shlahk
+pharmacy-symptoms.before-or-after-food,for OH-der nahkh daym ESS-en?
+pharmacy-symptoms.i-think-it-is-infected,"ikh GLOW-buh, es ist in-fee-TSEERT"
+pharmacy-symptoms.motion-sickness-tablets,RY-zuh-tah-blet-ten
+pharmacy-symptoms.i-have-a-cut,ikh HAH-buh EYE-nuh SHNIT-voon-duh
+pharmacy-symptoms.antacid,ahn-tah-TSEE-doom
+pharmacy-symptoms.i-have-a-burn,ikh HAH-buh EYE-nuh fair-BREN-oong
+pharmacy-symptoms.it-started-days-ago,es haht for {} TAH-gen AHN-guh-fahng-en
+pharmacy-symptoms.cough-medicine,HOOS-ten-zahft
+pharmacy-symptoms.is-this-safe-during-pregnancy,ist dahs in dair SHVAHNG-er-shahft ZIKH-er?
+trail-transport.how-long-is-the-wait,vee LAHNG-uh mooss mahn VAHR-ten?
+tax-refund.is-tax-free-shopping-available,ist tahks free MURK-likh?
+place-words.tourist-spot-sightseeing-area,ZAY-ens-vewr-dikh-kite
+common-signs.open-operating,in buh-TREEP
+time-scheduling.how-long-does-it-take,vee LAHNG-uh DOW-ert es?
+transit-rides.can-i-use-this-ticket,gilt DEE-zuh FAHR-kahr-tuh?
+common-signs.closed,guh-SHLOSS-en
+pronouns-verbs.there-is-have,es gipt
+common-signs.stopped-stop,hahlt
+pronouns-verbs.there-is-not-do-not-have,es gipt kine
+emergency-medical.i-feel-unwell,meer ist nikht goot
+food-ordering.what-do-you-recommend,vahs em-PFAY-len zee?
+hotel-basics.is-wi-fi-free,ist dahs VAY-lahn KOS-ten-lohs?
+hotel-requests.another-towel-please,"nokh ine HAHNT-tookh, BIT-tuh"
+numbers-money.2-items,tsvy shtewk
+shopping.is-there-a-discount,gipt es EYE-nen rah-BAHT?
+social-basics.good-night,GOO-tuh nahkht
+quick-responses.can-possible,kahn / MURK-likh
+phone-translation.please-type-it-and-show-me,BIT-tuh TIP-en oont TSY-gen
+phone-text-power.may-i-charge-my-phone-here,dahrf ikh heer mine HEN-dee LAH-den?
+pronouns-verbs.want-to-verb,ikh MURKH-tuh [vairp]
+emergency-medical.this-is-an-emergency,dahs ist ine NOHT-fahl
+lost-rescue.please-look-at-my-current-location,BIT-tuh SHOW-en zee owf MY-nen SHTAHNT-ort
+hotel-words.luggage-storage,guh-PEK-owf-buh-vah-roong
+hotel-basics.how-much-per-night,vee feel proh nahkht?
+hotel-requests.what-time-is-check-out,vahn ist CHEK-owt?
+payment-receipt.please-write-the-number,BIT-tuh dee tsahl OWF-shry-ben
+shopping.where-do-i-pay,voh kahn ikh TSAH-len?
+communication.i-cannot-make-out-what-you-are-saying,ikh fair-SHTAY-uh zee ah-KOOS-tish nikht
+quick-responses.cannot-not-possible,kahn nikht / OON-murk-likh
+taxi.i-will-get-off-here,ikh SHTY-guh heer ows
+pickup-meeting.please-call-a-taxi,BIT-tuh ROO-fen zee ine TAHK-see
+pronouns-verbs.want-thing,ikh MURKH-tuh [ZAH-khuh]
+emergency-medical.i-am-having-a-severe-allergic-reaction,ikh HAH-buh EYE-nen ah-nah-few-LAHK-tish-en shok
+lost-rescue.my-child-is-missing,mine kint virt fair-MIST
+food-ordering.water-please,"VAHSS-er, BIT-tuh"
+hiking-parks.is-this-trail-suitable-for-beginners,ist dair vayk fewr AHN-feng-er guh-EYEG-net?
+hotel-basics.is-breakfast-included,ist FREW-shtewk in-kloo-ZEE-vuh?
+hotel-requests.can-i-check-in-early,kahn ikh FREW-er INE-chek-en?
+attractions-tickets.could-you-take-a-photo-for-us,KURN-ten zee ine FOH-toh fon oons MAH-khen?
+payment-receipt.how-much-in-total,vahs mahkht dahs tsoo-ZAHM-en?
+shopping.i-will-take-this,ikh NAY-muh dahs
+communication.i-do-not-understand,ikh fair-SHTAY-uh nikht
+quick-responses.okay-fine,in ORT-noong
+phone-translation.please-look-at-the-screen,BIT-tuh SHOW-en zee owf dayn BILT-sheerm
+pronouns-verbs.need-thing,ikh BROW-khuh [ZAH-khuh]
+question-words.how-much-what-price,vee feel KOS-tet dahs?
+emergency-medical.i-cannot-breathe,ikh kahn nikht AHT-men
+lost-rescue.i-do-not-know-where-i-am,"ikh vice nikht, voh ikh bin"
+hotel-basics.may-i-see-the-room,dahrf ikh dahs TSIM-er ZAY-en?
+hotel-requests.another-night,kahn ikh nokh EYE-nuh nahkht BLY-ben?
+payment-receipt.can-we-pay-separately,KUR-nen veer guh-TRENT TSAH-len?
+shopping.what-is-this,vahs ist dahs?
+communication.i-cannot-read-it,ikh kahn es nikht LAY-zen
+quick-responses.no-good-not-allowed-will-not-work,nikht goot / nikht air-LOWPT
+taxi.please-get-me-there-in-time-for-the-shinkansen,BIT-tuh REKHT-tsy-tikh tsoom SHIN-kahn-zen
+pronouns-verbs.looking-for-thing,ikh ZOO-khuh [ZAH-khuh]
+emergency-medical.i-am-bleeding-badly,ikh BLOO-tuh shtahrk
+lost-rescue.my-friend-is-hurt,mine froynt ist fair-LETST
+dietary-needs.does-it-contain-fish-stock,ist FISH-brew-uh dah-RIN?
+hotel-basics.for-nights,fewr {} NEKH-tuh
+hotel-requests.is-there-a-safe,gipt es EYE-nen sayf?
+payment-receipt.is-tax-included,ist dee MAIR-vairt-shtoy-er in-kloo-ZEE-vuh?
+shopping.where-can-i-buy,voh kahn ikh {} KOW-fen?
+emergency-medical.i-have-chest-pain,ikh HAH-buh BROOST-shmair-tsen
+lost-rescue.i-lost-my-wallet,ikh HAH-buh MY-nuh GELT-bur-zuh fair-LOH-ren
+hotel-basics.two-beds,"tsvy BET-ten, BIT-tuh"
+hotel-requests.another-blanket,"nokh EYE-nuh DEK-uh, BIT-tuh"
+payment-receipt.my-card-was-declined,MY-nuh KAHR-tuh VOOR-duh AHP-guh-laynt
+shopping.do-you-have-this-in-stock,HAH-ben zee dahs FOR-ret-ikh?
+time-words.night,nahkht
+emergency-medical.this-person-is-unconscious,dee pair-ZOHN ist buh-VOOST-lohs
+lost-rescue.i-lost-my-bag,ikh HAH-buh MY-nuh TAH-shuh fair-LOH-ren
+food-ordering.can-a-vegetarian-eat-this,KUR-nen vay-gay-TAH-ree-er dahs ESS-en?
+hotel-basics.is-there-air-conditioning,gipt es EYE-nuh KLEE-mah-ahn-lah-guh?
+hotel-requests.wake-up-call,BIT-tuh VEK-en zee mikh oom {}
+payment-receipt.the-bill-is-wrong,dee REKH-noong shtimt vohl nikht
+shopping.two-of-these,"tsvy dah-FON, BIT-tuh"
+social-basics.okay-fine-i-am-okay,AH-les goot
+emergency-medical.where-is-the-nearest-hospital,voh ist dahs NEKHS-tuh KRAHNG-ken-hows?
+lost-rescue.where-is-lost-and-found,voh ist dahs FOONT-bew-roh?
+payment-receipt.i-already-paid,ikh HAH-buh shohn buh-TSAHLT
+shopping.what-is-it-made-of,voh-ROWS ist dahs?
+emergency-medical.what-is-the-emergency-number,vee LOW-tet dee NOHT-roof-noom-er?
+lost-rescue.i-cannot-find-my-hotel,ikh FIN-duh mine hoh-TEL nikht
+emergency-medical.is-there-a-doctor-who-speaks-english,"gipt es EYE-nen ahrtst, dair ENG-lish shprikht?"
+lost-rescue.i-left-it-on-the-train,ikh HAH-buh es im tsook LEE-gen LAHSS-en
+dietary-needs.i-have-a-severe-allergy-to,ikh HAH-buh EYE-nuh SHVAY-ruh ah-lair-GEE GAY-gen {}
+communication.please-write-it-in-roman-letters,BIT-tuh in DROOK-bookh-shtah-ben SHRY-ben
+emergency-medical.i-think-a-bone-is-broken,"ikh GLOW-buh, ET-vahs ist guh-BROKH-en"
+lost-rescue.i-cannot-get-down,ikh KOM-uh nikht mair hair-OON-ter
+emergency-medical.please-call-my-emergency-contact,BIT-tuh ROO-fen zee MY-nen NOHT-fahl-kon-tahkt ahn
+emergency-medical.i-have-travel-insurance,ikh HAH-buh EYE-nuh RY-zuh-fair-zikh-uh-roong
+numbers-money.yen,yen
+numbers-money.yen-symbol,yen

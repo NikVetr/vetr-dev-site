@@ -1,41 +1,43 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
 time-scheduling.what-time-is-it,现在几点？,,xiànzài jǐ diǎn?,,,2,latex-reference-v2
-time-scheduling.how-many-minutes,几分钟？,,jǐ fēnzhōng?,,,2,latex-reference-v2
-time-scheduling.what-time-should-we-meet,几点见？,,jǐ diǎn jiàn?,,,2,latex-reference-v2
-time-scheduling.can-we-change-the-time,可以改时间吗？,,kěyǐ gǎi shíjiān ma?,,,2,latex-reference-v2
-time-scheduling.when-is-convenient,什么时候方便？,,shénme shíhou fāngbiàn?,,,2,latex-reference-v2
-time-scheduling.what-is-today-s-date,今天几号？,,jīntiān jǐ hào?,,,2,latex-reference-v2
-time-scheduling.what-day-is-it-today,今天星期几？,,jīntiān xīngqī jǐ?,,,2,latex-reference-v2
-time-scheduling.what-time-does-it-open,几点开门？,,jǐ diǎn kāimén?,,,2,latex-reference-v2
-time-scheduling.what-time-does-it-close,几点关门？,,jǐ diǎn guānmén?,,,2,latex-reference-v2
 time-words.today,今天,,jīntiān,,,2,latex-reference-v2
-time-words.tomorrow,明天,,míngtiān,,,2,latex-reference-v2
-time-words.yesterday,昨天,,zuótiān,,,2,latex-reference-v2
-time-words.this-week,这个星期,,zhège xīngqī,,,2,latex-reference-v2
-time-words.next-week,下个星期,,xiàge xīngqī,,,2,latex-reference-v2
-time-words.morning,早上,,zǎoshang,,,2,latex-reference-v2
-time-words.afternoon,下午,,xiàwǔ,,,2,latex-reference-v2
-time-words.evening,晚上,,wǎnshang,,,2,latex-reference-v2
-time-words.spring,春,,chūn,,,2,latex-reference-v2
-time-words.summer,夏,,xià,,,2,latex-reference-v2
-time-words.fall,秋,,qiū,,,2,latex-reference-v2
-time-words.winter,冬,,dōng,,,2,latex-reference-v2
 days-of-week.monday,星期一,,xīngqī yī,,,2,latex-reference-v2
-days-of-week.tuesday,星期二,,xīngqī èr,,,2,latex-reference-v2
-days-of-week.wednesday,星期三,,xīngqī sān,,,2,latex-reference-v2
-days-of-week.thursday,星期四,,xīngqī sì,,,2,latex-reference-v2
-days-of-week.friday,星期五,,xīngqī wǔ,,,2,latex-reference-v2
-days-of-week.saturday,星期六,,xīngqī liù,,,2,latex-reference-v2
-days-of-week.sunday,星期日,,xīngqī rì,,,2,latex-reference-v2
 months.january,一月,,yīyuè,,,2,latex-reference-v2
+time-scheduling.how-many-minutes,几分钟？,,jǐ fēnzhōng?,,,2,latex-reference-v2
+time-words.tomorrow,明天,,míngtiān,,,2,latex-reference-v2
+days-of-week.tuesday,星期二,,xīngqī èr,,,2,latex-reference-v2
 months.february,二月,,èryuè,,,2,latex-reference-v2
+time-scheduling.what-time-should-we-meet,几点见？,,jǐ diǎn jiàn?,,,2,latex-reference-v2
+time-words.yesterday,昨天,,zuótiān,,,2,latex-reference-v2
+days-of-week.wednesday,星期三,,xīngqī sān,,,2,latex-reference-v2
 months.march,三月,,sānyuè,,,2,latex-reference-v2
+time-scheduling.can-we-change-the-time,可以改时间吗？,,kěyǐ gǎi shíjiān ma?,,,2,latex-reference-v2
+time-words.this-week,这个星期,,zhège xīngqī,,,2,latex-reference-v2
+days-of-week.thursday,星期四,,xīngqī sì,,,2,latex-reference-v2
 months.april,四月,,sìyuè,,,2,latex-reference-v2
+time-scheduling.when-is-convenient,什么时候方便？,,shénme shíhou fāngbiàn?,,,2,latex-reference-v2
+time-words.next-week,下个星期,,xiàge xīngqī,,,2,latex-reference-v2
+days-of-week.friday,星期五,,xīngqī wǔ,,,2,latex-reference-v2
 months.may,五月,,wǔyuè,,,2,latex-reference-v2
+time-scheduling.what-is-today-s-date,今天几号？,,jīntiān jǐ hào?,,,2,latex-reference-v2
+time-words.morning,早上,,zǎoshang,,,2,latex-reference-v2
+days-of-week.saturday,星期六,,xīngqī liù,,,2,latex-reference-v2
 months.june,六月,,liùyuè,,,2,latex-reference-v2
+time-scheduling.what-day-is-it-today,今天星期几？,,jīntiān xīngqī jǐ?,,,2,latex-reference-v2
+time-words.afternoon,下午,,xiàwǔ,,,2,latex-reference-v2
+days-of-week.sunday,星期日,,xīngqī rì,,,2,latex-reference-v2
 months.july,七月,,qīyuè,,,2,latex-reference-v2
+time-scheduling.what-time-does-it-open,几点开门？,,jǐ diǎn kāimén?,,,2,latex-reference-v2
+time-words.evening,晚上,,wǎnshang,,,2,latex-reference-v2
 months.august,八月,,bāyuè,,,2,latex-reference-v2
+time-scheduling.what-time-does-it-close,几点关门？,,jǐ diǎn guānmén?,,,2,latex-reference-v2
+time-words.spring,春,,chūn,,,2,latex-reference-v2
 months.september,九月,,jiǔyuè,,,2,latex-reference-v2
+time-words.summer,夏,,xià,,,2,latex-reference-v2
 months.october,十月,,shíyuè,,,2,latex-reference-v2
+time-words.fall,秋,,qiū,,,2,latex-reference-v2
 months.november,十一月,,shíyīyuè,,,2,latex-reference-v2
+time-words.winter,冬,,dōng,,,2,latex-reference-v2
 months.december,十二月,,shí'èryuè,,,2,latex-reference-v2
+time-scheduling.how-long-does-it-take,要多久？,,yào duōjiǔ?,,,2,zh-Hans-agent-v1
+time-words.night,夜里,,yèlǐ,,,2,zh-Hans-agent-v1

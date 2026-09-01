@@ -1,0 +1,32 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,أدفع بالبطاقة؟,,adfaʿ bi-al-biṭāqah?,,,2,ar-agent-v1
+payment-receipt.pay-cash,أدفع نقداً؟,,adfaʿ naqdan?,,,2,ar-agent-v1
+payment-receipt.pay-by-qr-code,أدفع بالرمز؟,أدفع بكود كيو آر؟,adfaʿ bi-al-ramz?,,pay by the code,2,ar-agent-v1
+payment-receipt.a-receipt-please,إيصال من فضلك,فاتورة من فضلك,īṣāl min faḍlak,,,2,ar-agent-v1
+payment-receipt.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,,,2,ar-agent-v1
+payment-receipt.how-much-in-total,كم المجموع؟,,kam al-majmūʿ?,,,2,ar-agent-v1
+payment-receipt.can-we-pay-separately,هل ندفع بشكل منفصل؟,,hal nadfaʿ bi-shakl munfaṣil?,,,2,ar-agent-v1
+payment-receipt.is-tax-included,هل الضريبة مشمولة؟,,hal al-ḍarībah mashmūlah?,,,2,ar-agent-v1
+payment-receipt.my-card-was-declined,رُفضت بطاقتي,,rufiḍat biṭāqatī,,,2,ar-agent-v1
+payment-receipt.the-bill-is-wrong,أظنّ أنّ في الحساب خطأ,,aẓunn anna fī al-ḥisāb khaṭaʾ,,I think there is an error in the bill,2,ar-agent-v1
+payment-receipt.i-already-paid,لقد دفعت,,laqad dafaʿt,,,2,ar-agent-v1
+shopping.i-am-just-looking,أتفرّج فقط,,atafarraj faqaṭ,,,2,ar-agent-v1
+shopping.how-much-is-this,بكم هذا؟,,bikam hādhā?,,,2,ar-agent-v1
+shopping.that-is-too-expensive,هذا غالي جدّاً,,hādhā ghālī jiddan,,,2,ar-agent-v1
+shopping.can-it-be-a-little-cheaper,هل يمكن أن يكون أرخص؟,أرخص شويّة؟,hal yumkin an yakūn arkhaṣ?,,,2,ar-agent-v1
+shopping.is-there-a-discount,هل هناك خصم؟,,hal hunāk khaṣm?,,,2,ar-agent-v1
+shopping.where-do-i-pay,أين أدفع؟,,ayna adfaʿ?,,,2,ar-agent-v1
+shopping.i-will-take-this,سآخذ هذا,,saʾākhudh hādhā,,,2,ar-agent-v1
+shopping.what-is-this,ما هذا؟,,mā hādhā?,,,2,ar-agent-v1
+shopping.where-can-i-buy,أين أشتري {}؟,,ayna ashtarī {}?,,,2,ar-agent-v1
+shopping.do-you-have-this-in-stock,هل هذا متوفّر؟,,hal hādhā mutawaffir?,,,2,ar-agent-v1
+shopping.two-of-these,اثنين من هذا من فضلك,,ithnayn min hādhā min faḍlak,,,2,ar-agent-v1
+shopping.what-is-it-made-of,من أيّ مادة؟,ما مكوّناته؟,min ayy māddah?,,from which material,2,ar-agent-v1
+color-size-returns.do-you-have-another-color,هل يوجد لون آخر؟,,hal yūjad lawn ākhar?,,,2,ar-agent-v1
+color-size-returns.do-you-have-another-size,هل يوجد مقاس آخر؟,,hal yūjad maqās ākhar?,,,2,ar-agent-v1
+color-size-returns.may-i-try-it-on,هل أقيسه؟,هل يمكنني قياسه؟,hal aqīsuh?,,,2,ar-agent-v1
+color-size-returns.can-i-return-it,هل يمكن إرجاعه؟,,hal yumkin irjāʿuh?,,,2,ar-agent-v1
+color-size-returns.can-i-exchange-it,هل يمكن استبداله؟,,hal yumkin istibdāluh?,,,2,ar-agent-v1
+color-size-returns.do-you-have-a-bag,هل لديك كيس؟,,hal ladayk kīs?,,,2,ar-agent-v1
+tax-refund.can-i-get-a-tax-refund,هل يمكنني استرداد الضريبة؟,,hal yumkinunī istirdād al-ḍarībah?,,,2,ar-agent-v1
+tax-refund.is-tax-free-shopping-available,هل هناك تسوّق معفى من الضريبة؟,,hal hunāk tasawwuq muʿfá min al-ḍarībah?,,,2,ar-agent-v1

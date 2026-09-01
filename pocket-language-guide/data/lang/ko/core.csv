@@ -1,0 +1,47 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,저,나,jeo,,humble,2,ko-agent-v1
+pronouns-verbs.we-us,저희,우리,jeohui,,,2,ko-agent-v1
+pronouns-verbs.you,당신,,dangsin,,usually omitted,2,ko-agent-v1
+pronouns-verbs.you-polite,선생님,,seonsaengnim,,sir / madam,2,ko-agent-v1
+pronouns-verbs.he-him,그,그 사람,geu,,,2,ko-agent-v1
+pronouns-verbs.she-her,그녀,그 사람,geunyeo,,,2,ko-agent-v1
+pronouns-verbs.they-them,그들,그 사람들,geudeul,,,2,ko-agent-v1
+pronouns-verbs.my-mine,제,제 것,je,,,2,ko-agent-v1
+pronouns-verbs.your-yours,당신의,,dangsinui,,usually omitted,2,ko-agent-v1
+pronouns-verbs.be-called-call,~라고 해요,,~rago haeyo,,is called,2,ko-agent-v1
+pronouns-verbs.have,있어요,,isseoyo,,,2,ko-agent-v1
+pronouns-verbs.do-not-have,없어요,,eopseoyo,,,2,ko-agent-v1
+pronouns-verbs.go,가요,,gayo,,,2,ko-agent-v1
+pronouns-verbs.come,와요,,wayo,,,2,ko-agent-v1
+pronouns-verbs.would-like,~고 싶어요,,~go sipeoyo,,want to,2,ko-agent-v1
+pronouns-verbs.want,원해요,,wonhaeyo,,,2,ko-agent-v1
+pronouns-verbs.look-for,찾아요,,chajayo,,,2,ko-agent-v1
+pronouns-verbs.buy,사요,,sayo,,,2,ko-agent-v1
+pronouns-verbs.like,좋아해요,,joahaeyo,,,2,ko-agent-v1
+pronouns-verbs.need,필요해요,,piryohaeyo,,,2,ko-agent-v1
+pronouns-verbs.there-is-have,있어요,,isseoyo,,,2,ko-agent-v1
+pronouns-verbs.there-is-not-do-not-have,없어요,,eopseoyo,,,2,ko-agent-v1
+pronouns-verbs.want-to-verb,~고 싶어요,,~go sipeoyo,,,2,ko-agent-v1
+pronouns-verbs.want-thing,~ 주세요,,~ juseyo,,please give me,2,ko-agent-v1
+pronouns-verbs.need-thing,~이 필요해요,,~i piryohaeyo,,,2,ko-agent-v1
+pronouns-verbs.looking-for-thing,~을 찾고 있어요,,~eul chatgo isseoyo,,,2,ko-agent-v1
+question-words.what,뭐,무엇,mwo,,,2,ko-agent-v1
+question-words.where,어디,,eodi,,,2,ko-agent-v1
+question-words.who,누구,,nugu,,,2,ko-agent-v1
+question-words.which-one,어느 것,,eoneu geot,,,2,ko-agent-v1
+question-words.when,언제,,eonje,,,2,ko-agent-v1
+question-words.how,어떻게,,eotteoke,,,2,ko-agent-v1
+question-words.how-much-many,얼마나,,eolmana,,,2,ko-agent-v1
+question-words.how-many,몇,,myeot,,,2,ko-agent-v1
+question-words.why,왜,,wae,,,2,ko-agent-v1
+question-words.this,이거,이것,igeo,,,2,ko-agent-v1
+question-words.that,그거,저거,geugeo,,,2,ko-agent-v1
+question-words.here,여기,,yeogi,,,2,ko-agent-v1
+question-words.there,거기,저기,geogi,,,2,ko-agent-v1
+question-words.a-little,조금,,jogeum,,,2,ko-agent-v1
+question-words.some,몇 개,,myeot gae,,a few,2,ko-agent-v1
+question-words.very,아주,정말,aju,,,2,ko-agent-v1
+question-words.too,너무,,neomu,,,2,ko-agent-v1
+question-words.also,~도,,~do,,,2,ko-agent-v1
+question-words.all-both,다,모두,da,,,2,ko-agent-v1
+question-words.how-much-what-price,얼마,,eolma,,,2,ko-agent-v1

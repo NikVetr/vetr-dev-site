@@ -1,0 +1,26 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+dietary-needs.no-meat,고기 빼 주세요,,gogi ppae juseyo,,,2,ko-agent-v1
+dietary-needs.no-eggs,계란 빼 주세요,,gyeran ppae juseyo,,,2,ko-agent-v1
+dietary-needs.not-spicy,안 맵게 해 주세요,,an maepge hae juseyo,,,2,ko-agent-v1
+dietary-needs.less-spicy,덜 맵게 해 주세요,,deol maepge hae juseyo,,,2,ko-agent-v1
+dietary-needs.no-peanuts,땅콩 빼 주세요,,ttangkong ppae juseyo,,,2,ko-agent-v1
+dietary-needs.no-nuts,견과류 빼 주세요,,gyeongwaryu ppae juseyo,,,2,ko-agent-v1
+dietary-needs.no-seafood,해산물 빼 주세요,,haesanmul ppae juseyo,,,2,ko-agent-v1
+dietary-needs.i-am-vegetarian,채식주의자예요,,chaesikjuuijayeyo,,,2,ko-agent-v1
+dietary-needs.i-am-vegan,비건이에요,완전 채식이에요,bigeonieyo,,no animal products,2,ko-agent-v1
+dietary-needs.i-do-not-eat,{} 안 먹어요,,{} an meogeoyo,,,2,ko-agent-v1
+dietary-needs.i-am-allergic-to,{} 알레르기가 있어요,,{} allereugiga isseoyo,,,2,ko-agent-v1
+dietary-needs.does-it-contain-fish-stock,생선 육수 들어갔어요?,멸치 육수 들어갔어요?,saengseon yuksu deureogasseoyo?,,,2,ko-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,{} 알레르기가 심해요,,{} allereugiga simhaeyo,,,2,ko-agent-v1
+food-ordering.table-for-two,두 명이요,,du myeongiyo,,,2,ko-agent-v1
+food-ordering.is-a-table-available,자리 있어요?,,jari isseoyo?,,,2,ko-agent-v1
+food-ordering.menu-please,메뉴 주세요,,menyu juseyo,,,2,ko-agent-v1
+food-ordering.i-want-this,이거 주세요,,igeo juseyo,,,2,ko-agent-v1
+food-ordering.do-you-have-drinking-water,마실 물 있어요?,,masil mul isseoyo?,,,2,ko-agent-v1
+food-ordering.to-go-please,포장해 주세요,,pojanghae juseyo,,,2,ko-agent-v1
+food-ordering.check-please,계산해 주세요,,gyesanhae juseyo,,,2,ko-agent-v1
+food-ordering.does-it-contain,{} 들어갔어요?,,{} deureogasseoyo?,,,2,ko-agent-v1
+food-ordering.is-this-vegetarian,이거 채식이에요?,,igeo chaesigieyo?,,,2,ko-agent-v1
+food-ordering.what-do-you-recommend,뭘 추천하세요?,,mwol chucheonhaseyo?,,,2,ko-agent-v1
+food-ordering.water-please,물 주세요,,mul juseyo,,,2,ko-agent-v1
+food-ordering.can-a-vegetarian-eat-this,채식주의자도 먹을 수 있어요?,,chaesikjuuijado meogeul su isseoyo?,,,2,ko-agent-v1

@@ -1,20 +1,49 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
 numbers-money.l-ng,零,,rei,,,2,japanese-reviewed-v6
+atm-cash.where-is-an-atm,ATMはどこですか？,,ētīemu wa doko desu ka?,,,2,ja-agent-v1
 numbers-money.y,一,,ichi,,,2,japanese-reviewed-v6
+atm-cash.does-this-atm-take-foreign-cards,海外発行のカードは使えますか？,,kaigai hakkō no kādo wa tsukaemasu ka?,,,2,ja-agent-v1
 numbers-money.r,二,,ni,,,2,japanese-reviewed-v6
-numbers-money.2-items,二つ,,futatsu,,,2,japanese-reviewed-v6
+atm-cash.the-atm-kept-my-card,ATMがカードを取り込みました,,ētīemu ga kādo o torikomimashita,,,2,ja-agent-v1
+atm-cash.is-there-a-fee,手数料はかかりますか？,,tesūryō wa kakarimasu ka?,,,2,ja-agent-v1
+numbers-money.li-ng,二,,ni,,,2,ja-agent-v1
 numbers-money.s-n,三,,san,,,2,japanese-reviewed-v6
+atm-cash.the-card-was-declined,カードが通りませんでした,,kādo ga tōrimasen deshita,,,2,ja-agent-v1
 numbers-money.s,四,,yon,,,2,japanese-reviewed-v6
+atm-cash.what-is-the-exchange-rate,為替レートはいくらですか？,,kawase rēto wa ikura desu ka?,,,2,ja-agent-v1
 numbers-money.w,五,,go,,,2,japanese-reviewed-v6
+atm-cash.no-money-came-out,お金が出てきません,,okane ga dete kimasen,,,2,ja-agent-v1
 numbers-money.li,六,,roku,,,2,japanese-reviewed-v6
+atm-cash.where-can-i-change-money,両替はどこでできますか？,,ryōgae wa doko de dekimasu ka?,,,2,ja-agent-v1
 numbers-money.q,七,,nana,,,2,japanese-reviewed-v6
+atm-cash.the-machine-is-out-of-service,機械が故障しています,,kikai ga koshō shiteimasu,,,2,ja-agent-v1
 numbers-money.b,八,,hachi,,,2,japanese-reviewed-v6
+atm-cash.please-give-me-smaller-notes,小さいお札にしてください,,chiisai osatsu ni shite kudasai,,,2,ja-agent-v1
 numbers-money.ji,九,,kyū,,,2,japanese-reviewed-v6
+atm-cash.do-you-have-change,細かいお金はありますか？,,komakai okane wa arimasu ka?,,,2,ja-agent-v1
 numbers-money.sh,十,,jū,,,2,japanese-reviewed-v6
+atm-cash.may-i-pay-in,{}で払えますか？,,{} de haraemasu ka?,,,2,ja-agent-v1
 numbers-money.y-b-i,百,,hyaku,,,2,japanese-reviewed-v6
+atm-cash.please-charge-in-local-currency,円で決済してください,,en de kessai shite kudasai,,,2,ja-agent-v1
 numbers-money.y-qi-n,千,,sen,,,2,japanese-reviewed-v6
+atm-cash.where-can-i-get-coins,小銭はどこでもらえますか？,,kozeni wa doko de moraemasu ka?,,,2,ja-agent-v1
 numbers-money.y-w-n,一万,,ichiman,,,2,japanese-reviewed-v6
+atm-cash.is-there-a-minimum-for-cards,カードは最低金額がありますか？,,kādo wa saitei kingaku ga arimasu ka?,,,2,ja-agent-v1
 numbers-money.b-n,半分,,hanbun,,,2,japanese-reviewed-v6
+atm-cash.atm,ATM,,ētīemu,,,2,ja-agent-v1
+atm-cash.banknote,お札,紙幣,osatsu,,,2,ja-agent-v1
+numbers-money.yu-n,元,,gen,,,2,ja-agent-v1
+atm-cash.coin,硬貨,コイン,kōka,,,2,ja-agent-v1
+numbers-money.ku-i,元,,gen,,,2,ja-agent-v1
+atm-cash.cash-only,現金のみ,,genkin nomi,,,2,ja-agent-v1
+numbers-money.number-and-classifier-notes,,,,,,2,ja-agent-v1
+atm-cash.fee,手数料,,tesūryō,,,2,ja-agent-v1
+atm-cash.change,お釣り,,otsuri,,,2,ja-agent-v1
+atm-cash.exchange-rate,為替レート,,kawase rēto,,,2,ja-agent-v1
+atm-cash.bank,銀行,,ginkō,,,2,ja-agent-v1
+atm-cash.money-exchange,外貨両替,,gaika ryōgae,,,2,ja-agent-v1
+atm-cash.pin,暗証番号,,anshō bangō,,,2,ja-agent-v1
+numbers-money.2-items,二つ,,futatsu,,,2,japanese-reviewed-v6
 numbers-money.yen,円,,en,,,2,japanese-reviewed-v6
 numbers-money.yen-symbol,￥,,en,,,2,japanese-reviewed-v6
 numbers-money.number-and-classifier-notes-2,,,,,,2,japanese-reviewed-v6

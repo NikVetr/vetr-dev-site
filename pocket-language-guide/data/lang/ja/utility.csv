@@ -4,3 +4,13 @@ utility-templates.please-give-me,{}をください,,{} o kudasai,,,2,japanese-re
 utility-templates.may-i,{}してもいいですか？,,{} shite mo ii desu ka?,,,2,japanese-reviewed-v6
 utility-templates.please-do-not-add,{}を入れないでください,,{} o irenaide kudasai,,,2,japanese-reviewed-v6
 utility-templates.do-you-have,{}はありますか？,,{} wa arimasu ka?,,,2,japanese-reviewed-v6
+utility-templates.please-write-the-number,数字を書いてください,,sūji o kaite kudasai,,,2,ja-agent-v1
+utility-templates.i-need,{}が必要です,,{} ga hitsuyō desu,,,2,ja-agent-v1
+utility-templates.is-there-nearby,近くに{}はありますか？,,chikaku ni {} wa arimasu ka?,,,2,ja-agent-v1
+utility-templates.how-much-is,{}はいくらですか？,,{} wa ikura desu ka?,,,2,ja-agent-v1
+utility-templates.is-this,これは{}ですか？,,kore wa {} desu ka?,,,2,ja-agent-v1
+utility-templates.please,{}をお願いします,,{} o onegaishimasu,,,2,ja-agent-v1
+utility-templates.i-am-looking-for,{}を探しています,,{} o sagashiteimasu,,,2,ja-agent-v1
+utility-templates.do-you-accept,{}は使えますか？,,{} wa tsukaemasu ka?,,,2,ja-agent-v1
+utility-templates.i-cannot-find,{}が見つかりません,,{} ga mitsukarimasen,,,2,ja-agent-v1
+utility-templates.there-is-a-problem-with,{}に問題があります,,{} ni mondai ga arimasu,,,2,ja-agent-v1

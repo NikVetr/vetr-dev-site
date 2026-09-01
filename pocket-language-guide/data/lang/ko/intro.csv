@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+introductions.my-name-is,저는 {}입니다,,jeoneun {}imnida,,,2,ko-agent-v1
+introductions.nice-to-meet-you,반갑습니다,,bangapseumnida,,,2,ko-agent-v1
+introductions.what-is-your-name,이름이 어떻게 되세요?,,ireumi eotteoke doeseyo?,,,2,ko-agent-v1
+introductions.we-are-traveling-together,같이 여행해요,,gachi yeohaenghaeyo,,,2,ko-agent-v1
+introductions.this-is-my-friend,제 친구예요,,je chinguyeyo,,,2,ko-agent-v1
+introductions.i-am-from,저는 {}에서 왔어요,,jeoneun {}eseo wasseoyo,,,2,ko-agent-v1
+introductions.where-are-you-from,어디서 오셨어요?,,eodiseo osyeosseoyo?,,,2,ko-agent-v1
+introductions.how-are-you,잘 지내세요?,,jal jinaeseyo?,,,2,ko-agent-v1
+introductions.i-am-a-tourist,관광객이에요,,gwangwanggaegieyo,,,2,ko-agent-v1
+introductions.this-is-my-husband-wife,남편이에요 / 아내예요,,nampyeonieyo / anaeyeyo,,husband / wife,2,ko-agent-v1
+introductions.this-is-my-daughter-son,딸이에요 / 아들이에요,,ttarieyo / adeurieyo,,daughter / son,2,ko-agent-v1
+introductions.i-am-traveling-alone,혼자 여행해요,,honja yeohaenghaeyo,,,2,ko-agent-v1

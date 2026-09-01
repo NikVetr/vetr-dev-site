@@ -1,0 +1,41 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+atm-cash.where-is-an-atm,현금인출기 어디예요?,,hyeongeuminchulgi eodiyeyo?,,,2,ko-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,외국 카드 돼요?,,oeguk kadeu dwaeyo?,,,2,ko-agent-v1
+atm-cash.the-atm-kept-my-card,기계가 카드를 먹었어요,,gigyega kadeureul meogeosseoyo,,machine ate my card,2,ko-agent-v1
+atm-cash.is-there-a-fee,수수료 있어요?,,susuryo isseoyo?,,,2,ko-agent-v1
+atm-cash.the-card-was-declined,카드가 안 됐어요,,kadeuga an dwaesseoyo,,,2,ko-agent-v1
+atm-cash.what-is-the-exchange-rate,환율이 얼마예요?,,hwannyuri eolmayeyo?,,,2,ko-agent-v1
+atm-cash.no-money-came-out,돈이 안 나왔어요,,doni an nawasseoyo,,,2,ko-agent-v1
+atm-cash.where-can-i-change-money,환전 어디서 해요?,,hwanjeon eodiseo haeyo?,,,2,ko-agent-v1
+atm-cash.the-machine-is-out-of-service,기계가 고장났어요,,gigyega gojangnasseoyo,,,2,ko-agent-v1
+atm-cash.please-give-me-smaller-notes,작은 지폐로 주세요,,jageun jipyero juseyo,,,2,ko-agent-v1
+atm-cash.do-you-have-change,잔돈 있어요?,,jandon isseoyo?,,,2,ko-agent-v1
+atm-cash.may-i-pay-in,{}로 낼 수 있어요?,,{}ro nael su isseoyo?,,,2,ko-agent-v1
+atm-cash.please-charge-in-local-currency,원화로 결제해 주세요,,wonhwaro gyeoljehae juseyo,,,2,ko-agent-v1
+atm-cash.where-can-i-get-coins,동전 어디서 바꿔요?,,dongjeon eodiseo bakkwoyo?,,,2,ko-agent-v1
+atm-cash.is-there-a-minimum-for-cards,카드 최소 금액 있어요?,,kadeu choeso geumaek isseoyo?,,,2,ko-agent-v1
+atm-cash.atm,현금인출기,ATM,hyeongeuminchulgi,,,2,ko-agent-v1
+atm-cash.banknote,지폐,,jipye,,,2,ko-agent-v1
+atm-cash.coin,동전,,dongjeon,,,2,ko-agent-v1
+atm-cash.cash-only,현금만 가능,현금 전용,hyeongeumman ganeung,,,2,ko-agent-v1
+atm-cash.fee,수수료,,susuryo,,,2,ko-agent-v1
+atm-cash.change,잔돈,거스름돈,jandon,,,2,ko-agent-v1
+atm-cash.exchange-rate,환율,,hwannyul,,,2,ko-agent-v1
+atm-cash.bank,은행,,eunhaeng,,,2,ko-agent-v1
+atm-cash.money-exchange,환전소,,hwanjeonso,,,2,ko-agent-v1
+atm-cash.pin,비밀번호,PIN,bimilbeonho,,,2,ko-agent-v1
+numbers-money.l-ng,영,공,yeong,,or 공 on phones,2,ko-agent-v1
+numbers-money.y,일,하나,il,,Sino / native,2,ko-agent-v1
+numbers-money.r,이,둘,i,,Sino / native,2,ko-agent-v1
+numbers-money.s-n,삼,셋,sam,,Sino / native,2,ko-agent-v1
+numbers-money.s,사,넷,sa,,Sino / native,2,ko-agent-v1
+numbers-money.w,오,다섯,o,,Sino / native,2,ko-agent-v1
+numbers-money.li,육,여섯,yuk,,Sino / native,2,ko-agent-v1
+numbers-money.q,칠,일곱,chil,,Sino / native,2,ko-agent-v1
+numbers-money.b,팔,여덟,pal,,Sino / native,2,ko-agent-v1
+numbers-money.ji,구,아홉,gu,,Sino / native,2,ko-agent-v1
+numbers-money.sh,십,열,sip,,Sino / native,2,ko-agent-v1
+numbers-money.y-b-i,백,,baek,,,2,ko-agent-v1
+numbers-money.y-qi-n,천,,cheon,,,2,ko-agent-v1
+numbers-money.y-w-n,만,,man,,,2,ko-agent-v1
+numbers-money.b-n,반,,ban,,,2,ko-agent-v1

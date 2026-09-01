@@ -1,0 +1,43 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,몇 시예요?,,myeot siyeyo?,,,2,ko-agent-v1
+time-scheduling.how-many-minutes,몇 분이에요?,,myeot bunieyo?,,,2,ko-agent-v1
+time-scheduling.what-time-should-we-meet,몇 시에 만날까요?,,myeot sie mannalkkayo?,,,2,ko-agent-v1
+time-scheduling.can-we-change-the-time,시간 바꿀 수 있어요?,,sigan bakkul su isseoyo?,,,2,ko-agent-v1
+time-scheduling.when-is-convenient,언제가 좋으세요?,,eonjega joeuseyo?,,,2,ko-agent-v1
+time-scheduling.what-is-today-s-date,오늘 며칠이에요?,,oneul myeochirieyo?,,,2,ko-agent-v1
+time-scheduling.what-day-is-it-today,오늘 무슨 요일이에요?,,oneul museun yoirieyo?,,,2,ko-agent-v1
+time-scheduling.what-time-does-it-open,몇 시에 열어요?,,myeot sie yeoreoyo?,,,2,ko-agent-v1
+time-scheduling.what-time-does-it-close,몇 시에 닫아요?,,myeot sie dadayo?,,,2,ko-agent-v1
+time-scheduling.how-long-does-it-take,얼마나 걸려요?,,eolmana geollyeoyo?,,,2,ko-agent-v1
+time-words.today,오늘,,oneul,,,2,ko-agent-v1
+time-words.tomorrow,내일,,naeil,,,2,ko-agent-v1
+time-words.yesterday,어제,,eoje,,,2,ko-agent-v1
+time-words.this-week,이번 주,,ibeon ju,,,2,ko-agent-v1
+time-words.next-week,다음 주,,daeum ju,,,2,ko-agent-v1
+time-words.morning,아침,오전,achim,,,2,ko-agent-v1
+time-words.afternoon,오후,,ohu,,,2,ko-agent-v1
+time-words.evening,저녁,,jeonyeok,,,2,ko-agent-v1
+time-words.spring,봄,,bom,,,2,ko-agent-v1
+time-words.summer,여름,,yeoreum,,,2,ko-agent-v1
+time-words.fall,가을,,gaeul,,,2,ko-agent-v1
+time-words.winter,겨울,,gyeoul,,,2,ko-agent-v1
+time-words.night,밤,,bam,,,2,ko-agent-v1
+days-of-week.monday,월요일,,woryoil,,,2,ko-agent-v1
+days-of-week.tuesday,화요일,,hwayoil,,,2,ko-agent-v1
+days-of-week.wednesday,수요일,,suyoil,,,2,ko-agent-v1
+days-of-week.thursday,목요일,,mogyoil,,,2,ko-agent-v1
+days-of-week.friday,금요일,,geumyoil,,,2,ko-agent-v1
+days-of-week.saturday,토요일,,toyoil,,,2,ko-agent-v1
+days-of-week.sunday,일요일,,iryoil,,,2,ko-agent-v1
+months.january,1월,일월,irwol,,,2,ko-agent-v1
+months.february,2월,이월,iwol,,,2,ko-agent-v1
+months.march,3월,삼월,samwol,,,2,ko-agent-v1
+months.april,4월,사월,sawol,,,2,ko-agent-v1
+months.may,5월,오월,owol,,,2,ko-agent-v1
+months.june,6월,유월,yuwol,,,2,ko-agent-v1
+months.july,7월,칠월,chirwol,,,2,ko-agent-v1
+months.august,8월,팔월,parwol,,,2,ko-agent-v1
+months.september,9월,구월,guwol,,,2,ko-agent-v1
+months.october,10월,시월,siwol,,,2,ko-agent-v1
+months.november,11월,십일월,sibirwol,,,2,ko-agent-v1
+months.december,12월,십이월,sibiwol,,,2,ko-agent-v1

@@ -1,0 +1,750 @@
+concept_id,respell
+toilets.where-toilet,AY-na al-ham-MAAM
+accessibility.step-free,hal YOO-jad MAD-khal KHAA-lin min al-a-WAA-ik
+building-help.what-room-number-is-this,maa RAKM HAA-thi-hi al-GHOOR-fa
+in-a-building.is-this-the-correct-entrance,hal HAA-tha al-MAD-khal as-sa-HEEH
+building-words.elevator,MIS-ad
+pronouns-verbs.i-me,A-na
+question-words.what,MAA-tha
+medical-conditions.i-am-diabetic,A-na moo-SAAB bis-SOOK-ka-ree
+pharmacy-symptoms.which-pharmacy-is-open-now,ay say-da-LEE-ya maf-TOO-ha al-AAN
+police-consulate.where-is-the-police-station,AY-na MAR-kaz ash-SHOOR-ta
+body-parts.head,RAAS
+emergency-medical.help,an-NAJ-da
+lost-rescue.i-lost-my-passport,fa-KADT ja-WAAZ SA-fa-ree
+dietary-needs.no-meat,bi-DOON LAHM ow da-JAAJ ow SA-mak
+food-ordering.table-for-two,TAA-wi-la li-shakh-SAYN
+weather.forecast,maa ta-wak-koo-AAT at-TAKS
+trail-words.trail,ma-SAAR
+hiking-parks.is-this-the-way-to,hal HAA-tha at-ta-REEK i-la
+trail-conditions.how-long-is-the-full-route,kam TOOL al-ma-SAAR KAA-mi-lan
+trail-transport.how-long-is-the-queue,kam TOOL as-SAF
+trail-warnings.open,maf-TOOH
+trail-landmarks.trail-marker,a-LAA-mat al-ma-SAAR
+laundry.please-wash-these-clothes,oo-REED GHASL HAA-thi-hi al-ma-LAA-bis
+hotel-words.passport,ja-WAAZ SA-far
+hotel-basics.are-any-rooms-available,hal TOO-jad GHOO-raf FAA-ri-gha
+hotel-requests.can-i-check-out-later,hal YOOM-kin ta-KHEER al-moo-GHAA-da-ra
+room-problems.there-is-a-problem-with-the-room,hoo-NAAK MOOSH-ki-la fil-GHOOR-fa
+introductions.my-name-is,IS-mee
+atm-cash.where-is-an-atm,AY-na as-sar-RAAF al-AA-lee
+numbers-money.l-ng,SIFR
+attractions-tickets.where-can-i-buy-tickets,AY-na ash-TA-ree at-ta-THAA-kir
+payment-receipt.pay-by-card,AD-fa bil-bi-TAA-ka
+shopping.i-am-just-looking,a-ta-FAR-raj FA-kat
+color-size-returns.do-you-have-another-color,hal YOO-jad LOWN AA-khar
+tax-refund.can-i-get-a-tax-refund,hal yoom-KI-noo-nee is-tir-DAAD ad-da-REE-ba
+sim-data.i-would-like-a-tourist-sim,oo-REED sha-REE-ha lis-soo-YAAH
+children.cannot-find-my-child,laa A-jid TIF-lee
+etiquette.is-this-allowed,hal HAA-tha mas-MOOH
+social-basics.hello,MAR-ha-ban
+communication.i-do-not-speak-this-language,laa a-ta-HAD-dath al-a-ra-BEE-ya
+quick-responses.please-go-ahead,ta-FAD-dal
+phone-translation.i-am-using-phone-translation,as-TAKH-dim TAR-ja-mat al-HAA-tif
+phone-text-power.please-type-it-for-me,OOK-too-boo lee min FAD-lak
+time-scheduling.what-time-is-it,kam as-SAA-a
+time-words.today,al-YOWM
+days-of-week.monday,al-ith-NAYN
+months.january,ya-NAA-yir
+border-customs.i-am-a-tourist,A-na SAA-ih
+directions.where-is,AY-na
+quick-directions.go-straight,IM-shi moo-BAA-sha-ra
+taxi.please-take-me-here,KHOOTH-nee i-la HOO-na min FAD-lak
+transit-rides.two-tickets,tath-ki-ra-TAAN min FAD-lak
+place-words.scenic-area,MIN-ta-ka ta-bee-EE-ya
+pickup-meeting.where-is-the-pickup-point,AY-na NOOK-tat al-il-ti-KAA
+rail-station-words.high-speed-rail,al-ki-TAAR as-sa-REE
+common-signs.open-on,maf-TOOH
+utility-templates.i-want-to-go-to,oo-REED ath-tha-HAAB i-la
+toilets.where-public-toilet,AY-na DOW-rat mi-YAAH AAM-ma
+accessibility.wheelchair-access,hal al-ma-KAAN moo-HAY-ya lil-KOOR-see al-moo-ta-HAR-rik
+building-help.i-am-lost,A-na TAA-ih
+building-words.stairs,sa-LAA-lim
+pronouns-verbs.we-us,NAH-noo
+question-words.where,AY-na
+medical-conditions.i-need-insulin,ah-TAAJ i-la al-an-soo-LEEN
+pharmacy-symptoms.i-need-medicine-for,ah-TAAJ da-WAA li-i-LAAJ
+police-consulate.i-want-to-report-a-theft,oo-REED al-ib-LAAGH an SA-ri-ka
+body-parts.stomach,BATN
+emergency-medical.please-call-an-ambulance,IT-ta-sil bil-is-AAF min FAD-lak
+lost-rescue.i-lost-my-phone,fa-KADT HAA-ti-fee
+dietary-needs.no-eggs,bi-DOON BAYD
+food-ordering.is-a-table-available,hal TOO-jad TAA-wi-la FAA-ri-gha
+weather.will-it-rain,hal sa-TOOM-tir al-YOWM
+trail-words.trailhead,bi-DAA-yat al-ma-SAAR
+hiking-parks.where-is-the-trailhead,AY-na bi-DAA-yat al-ma-SAAR
+trail-conditions.can-we-return-the-same-way,hal na-OOD min NAFS at-ta-REEK
+trail-transport.what-time-is-the-last-shuttle,MA-ta AA-khir HAA-fi-la
+trail-warnings.closed,MOOGH-lak
+trail-landmarks.fork-junction,MAF-rak
+laundry.where-is-a-laundromat,AY-na MAGH-sa-la
+hotel-words.room-key-card,bi-TAA-kat al-GHOOR-fa
+hotel-basics.there-are-two-of-us,NAH-noo ith-NAAN
+hotel-requests.what-time-does-breakfast-start,MA-ta YAB-da al-foo-TOOR
+room-problems.the-air-conditioning-is-broken,at-tak-YEEF moo-AT-tal
+introductions.nice-to-meet-you,ta-SHAR-raf-na
+atm-cash.does-this-atm-take-foreign-cards,hal YAK-bal al-bi-taa-KAAT al-aj-na-BEE-ya
+numbers-money.y,WAA-hid
+attractions-tickets.do-i-need-a-reservation,hal YA-jib al-HAJZ
+payment-receipt.pay-cash,AD-fa NAK-dan
+shopping.how-much-is-this,bi-KAM HAA-tha
+color-size-returns.do-you-have-another-size,hal YOO-jad ma-KAAS AA-khar
+sim-data.may-i-use-your-wifi,hal yoom-KI-noo-nee is-tikh-DAAM al-wai-fai
+children.make-an-announcement,AR-joo al-i-LAAN fee moo-KAB-bir as-SOWT
+etiquette.is-tipping-expected,hal al-bak-SHEESH moo-ta-WAK-ka
+social-basics.hello-polite,as-sa-LAAM a-LAY-koom
+communication.i-speak-only-a-little-of-this,a-ta-HAD-dath al-a-ra-BEE-ya ka-LEE-lan
+quick-responses.yes-right,NA-am
+phone-translation.please-speak-toward-the-phone,ta-HAD-dath NAHW al-HAA-tif min FAD-lak
+phone-translation.please-write-the-place-name,OOK-toob ISM al-ma-KAAN bil-a-ra-BEE-ya
+time-scheduling.how-many-minutes,kam da-KEE-ka
+time-words.tomorrow,GHA-dan
+days-of-week.tuesday,ath-thoo-laa-THAA
+months.february,fib-RAA-yir
+border-customs.here-is-my-passport,HAA-tha ja-WAAZ SA-fa-ree
+directions.how-do-i-get-to,kayf A-sil i-la
+quick-directions.turn-left,LIF ya-SAA-ran
+taxi.please-send-me-the-address,AR-sil lee al-oon-WAAN min FAD-lak
+transit-rides.where-is-the-subway-station,AY-na ma-HAT-tat al-MIT-roo
+place-words.visitor-center,MAR-kaz az-zoo-WAAR
+pickup-meeting.please-send-me-the-pickup-point,AR-sil lee NOOK-tat al-il-ti-KAA
+rail-station-words.maglev,al-ki-TAAR al-magh-naa-TEE-see
+common-signs.closed-off,MOOGH-lak
+utility-templates.please-give-me,A-tee-nee … min FAD-lak
+toilets.may-i-use-the-toilet,hal yoom-KI-noo-nee is-tikh-DAAM al-ham-MAAM
+accessibility.elevator,hal YOO-jad MIS-ad
+building-help.where-is-reception,AY-na al-is-tik-BAAL
+in-a-building.do-you-have-wi-fi,hal YOO-jad wai-fai
+building-words.entrance,MAD-khal
+pronouns-verbs.you,AN-ta
+question-words.who,MAN
+medical-conditions.i-have-asthma,IN-dee RAB-oo
+pharmacy-symptoms.i-have-a-fever,IN-dee HOOM-ma
+police-consulate.my-bag-was-stolen,SOO-ri-kat ha-KEE-ba-tee
+body-parts.back,ZAHR
+emergency-medical.i-need-a-doctor,ah-TAAJ i-la ta-BEEB
+lost-rescue.please-call-the-police,IT-ta-sil bish-SHOOR-ta min FAD-lak
+dietary-needs.not-spicy,GHAYR HAAR
+food-ordering.menu-please,al-KAA-i-ma min FAD-lak
+weather.is-it-safe-today,hal al-WAD AA-min al-YOWM
+trail-words.summit,KIM-ma
+hiking-parks.how-long-to-the-summit,kam yas-TAGH-rik i-la al-KIM-ma
+trail-conditions.can-we-return-before-dark,hal na-OOD KABL al-ghoo-ROOB
+trail-transport.when-does-the-cableway-stop,MA-ta ya-ta-WAK-kaf at-til-fi-REEK
+trail-warnings.maintenance,A-maal si-YAA-na
+trail-landmarks.boardwalk-cliff-path,MAM-sha kha-sha-BEE
+laundry.when-will-it-be-ready,MA-ta ta-KOON JAA-hi-za
+hotel-words.check-in,tas-JEEL al-woo-SOOL
+hotel-basics.i-have-a-reservation,la-DAY-ya HAJZ
+hotel-requests.can-i-store-my-luggage,hal YOOM-kin HIFZ am-TI-a-tee
+room-problems.there-is-no-hot-water,laa YOO-jad MAA SAA-khin
+introductions.what-is-your-name,maa IS-mak
+atm-cash.the-atm-kept-my-card,as-sar-RAAF ib-TA-la bi-TAA-ka-tee
+numbers-money.r,ith-NAAN
+attractions-tickets.what-is-the-latest-entry-time,maa AA-khir MOW-id lid-doo-KHOOL
+payment-receipt.pay-by-qr-code,AD-fa bir-RAMZ
+shopping.that-is-too-expensive,HAA-tha GHAA-lee JID-dan
+color-size-returns.may-i-try-it-on,hal a-KEE-soh
+sim-data.how-much-data-is-included,kam HAJM al-ba-yaa-NAAT
+children.child-age,OOMR TIF-lee … sa-na-WAAT
+etiquette.is-service-included,hal al-KHID-ma mash-MOO-la
+social-basics.good-morning,sa-BAAH al-KHAYR
+communication.do-you-speak-english,hal ta-ta-HAD-dath al-in-ji-lee-ZEE-ya
+quick-responses.no-not,LAA
+phone-translation.one-sentence-at-a-time-please,JOOM-la WAA-hi-da kool MAR-ra min FAD-lak
+phone-text-power.please-use-simple-words,is-TAKH-dim ka-li-MAAT ba-SEE-ta min FAD-lak
+time-scheduling.what-time-should-we-meet,fee ay SAA-a na-ta-KAA-bal
+time-words.yesterday,AMS
+days-of-week.wednesday,al-ar-bi-AA
+months.march,MAA-ris
+border-customs.i-am-staying-for-days,sa-AB-ka … ay-YAAM
+directions.is-it-far,hal HOO-wa ba-EED
+quick-directions.turn-right,LIF ya-MEE-nan
+taxi.we-need-the-east-gate-not-the-south-gate,noo-REED al-baw-WAA-ba ash-shar-KEE-ya laa al-ja-noo-BEE-ya
+transit-rides.does-this-bus-train-go-to,hal YATH-hab HAA-tha i-la
+place-words.railway-station,ma-HAT-tat al-ki-TAAR
+pickup-meeting.please-pick-us-up-here,KHOOTH-na min HOO-na min FAD-lak
+rail-station-words.transfer,tab-DEEL
+common-signs.occupied,mash-GHOOL
+utility-templates.may-i,hal yoom-KI-noo-nee
+toilets.is-it-only-for-customers,hal HOO-wa liz-za-BAA-in FA-kat
+accessibility.ramp,hal YOO-jad MOON-ha-dar
+building-help.where-is-a-power-outlet,AY-na MIK-bas al-kah-ra-BAA
+in-a-building.what-is-the-wi-fi-password,maa KA-li-mat SIR al-wai-fai
+building-words.exit,MAKH-raj
+pronouns-verbs.you-polite,HAD-ra-tak
+question-words.which-one,ay WAA-hid
+medical-conditions.i-have-a-heart-condition,IN-dee MA-rad fil-KALB
+pharmacy-symptoms.i-have-diarrhea,IN-dee is-HAAL
+police-consulate.my-passport-was-stolen,SOO-ri-ka ja-WAAZ SA-fa-ree
+body-parts.throat,HALK
+emergency-medical.i-am-sick,A-na ma-REED
+lost-rescue.we-are-here,NAH-noo HOO-na
+dietary-needs.less-spicy,HAAR ka-LEE-lan
+food-ordering.i-want-this,oo-REED HAA-tha
+weather.how-cold-at-night,kam TAN-kha-fid al-ha-RAA-ra LAY-lan
+trail-words.viewpoint,ma-TAL
+hiking-parks.how-long-to-the-viewpoint,kam yas-TAGH-rik i-la al-ma-TAL
+trail-conditions.is-the-trail-open,hal al-ma-SAAR maf-TOOH
+trail-transport.where-can-we-buy-water,AY-na nash-TA-ree al-MAA
+trail-warnings.steep-slope,MOON-ha-dar sha-DEED
+trail-landmarks.start,al-bi-DAA-ya
+laundry.how-much-per-kilo,bi-KAM al-KEE-loo
+hotel-words.check-out,tas-JEEL al-moo-GHAA-da-ra
+hotel-basics.can-i-charge-my-phone,hal yoom-KI-noo-nee SHAHN HAA-ti-fee
+hotel-requests.no-housekeeping,laa HAA-ja lit-tan-ZEEF
+room-problems.can-i-change-rooms,hal YOOM-kin tagh-YEER al-GHOOR-fa
+introductions.we-are-traveling-together,NAH-noo noo-SAA-fir MA-an
+atm-cash.is-there-a-fee,hal hoo-NAAK oo-MOO-la
+numbers-money.li-ng,ith-NAYN
+attractions-tickets.are-there-lockers,hal TOO-jad kha-ZAA-in
+payment-receipt.a-receipt-please,ee-SAAL min FAD-lak
+shopping.can-it-be-a-little-cheaper,hal YOOM-kin an ya-KOON AR-khas
+color-size-returns.can-i-return-it,hal YOOM-kin ir-JAA-oo
+sim-data.do-you-need-my-passport,hal tah-TAAJ ja-WAAZ SA-fa-ree
+children.high-chair,hal la-DAY-koom KOOR-see at-FAAL
+etiquette.may-i-enter,hal yoom-KI-noo-nee ad-doo-KHOOL
+social-basics.good-evening,ma-SAA al-KHAYR
+communication.please-speak-more-slowly,ta-HAD-dath bi-BOOT min FAD-lak
+quick-responses.okay-can,HA-sa-nan
+phone-text-power.my-phone-battery-is-low,bat-TAA-ri-yat HAA-ti-fee da-EE-fa
+time-scheduling.can-we-change-the-time,hal YOOM-kin tagh-YEER al-MOW-id
+time-words.this-week,HAA-tha al-oos-BOO
+days-of-week.thursday,al-kha-MEES
+months.april,ab-REEL
+border-customs.nothing-to-declare,laa SHAY lit-tas-REEH
+directions.how-long-on-foot,kam yas-TAGH-rik SAY-ran
+quick-directions.this-way,min HOO-na
+taxi.please-stop-here,ta-WAK-kaf HOO-na min FAD-lak
+transit-rides.what-is-the-next-stop,maa al-ma-HAT-ta al-KAA-di-ma
+place-words.airport,ma-TAAR
+pickup-meeting.meet-us-at,KAA-bil-na fee
+rail-station-words.ticket-gate,baw-WAA-bat at-ta-THAA-kir
+common-signs.vacant,FAA-rig
+utility-templates.please-do-not-add,min FAD-lak bi-DOON
+toilets.toilet-wc,DOW-rat mi-YAAH
+accessibility.how-many-steps,kam A-dad ad-da-ra-JAAT
+in-a-building.which-floor,ay TAA-bik
+building-words.men,ri-JAAL
+pronouns-verbs.he-him,HOO-wa
+question-words.when,MA-ta
+medical-conditions.i-am-allergic-to-penicillin,IN-dee ha-saa-SEE-ya min al-bi-ni-si-LEEN
+pharmacy-symptoms.where-is-an-all-night-pharmacy,AY-na say-da-LEE-ya moo-NAA-wa-ba
+police-consulate.someone-is-following-me,hoo-NAAK SHAKHS YAT-ba-oo-nee
+body-parts.tooth,SIN
+emergency-medical.i-am-injured,A-na moo-SAAB
+lost-rescue.please-look-at-my-location-pin,OON-zoor i-la MOW-ki-ee A-la al-kha-REE-ta
+dietary-needs.no-peanuts,bi-DOON FOOL soo-DAA-nee
+food-ordering.do-you-have-drinking-water,hal la-DAY-koom MAA lish-SHOORB
+weather.rain,MA-tar
+trail-words.cableway,til-fi-REEK
+hiking-parks.which-route-is-easier,ay ta-REEK AS-hal
+trail-conditions.is-the-route-steep,hal at-ta-REEK sha-DEED al-in-hi-DAAR
+trail-transport.where-can-we-refill-water,AY-na NAM-la al-MAA
+trail-warnings.caution-slippery,IH-ta-ris ar-DEE-ya ZA-li-ka
+trail-landmarks.end,an-ni-HAA-ya
+laundry.can-it-be-ready-today,hal ta-KOON JAA-hi-za al-YOWM
+hotel-basics.i-would-like-a-non-smoking-room,oo-REED GHOOR-fa bi-DOON tad-KHEEN
+room-problems.the-room-is-too-noisy,al-GHOOR-fa FEE-ha da-JEEJ
+introductions.this-is-my-friend,HAA-tha sa-DEE-kee
+atm-cash.the-card-was-declined,ROO-fi-dat al-bi-TAA-ka
+numbers-money.s-n,tha-LAA-tha
+attractions-tickets.may-i-take-photos,hal at-tas-WEER mas-MOOH
+color-size-returns.can-i-exchange-it,hal YOOM-kin is-tib-DAA-loo
+sim-data.how-long-is-it-valid,kam MOOD-dat as-sa-laa-HEE-ya
+children.baby-changing-room,AY-na GHOOR-fat tagh-YEER al-ha-faa-DAAT
+etiquette.remove-shoes,hal AKH-la hi-THAA-ee
+social-basics.goodbye,ma as-sa-LAA-ma
+communication.i-do-not-understand-spoken,lam AF-ham
+quick-responses.cannot-not-allowed,mam-NOO
+phone-text-power.do-you-have-a-power-bank,hal la-DAYK bat-taa-REE-ya moo-ta-NAK-ki-la
+time-scheduling.when-is-convenient,MA-ta yoo-NAA-si-book
+time-words.next-week,al-oos-BOO al-KAA-dim
+days-of-week.friday,al-JOOM-a
+months.may,MAA-yoo
+border-customs.i-am-staying-at,A-na moo-KEEM fee
+directions.please-show-me-on-the-map,A-ri-nee A-la al-kha-REE-ta min FAD-lak
+quick-directions.that-way,min hoo-NAAK
+taxi.can-you-wait-for-me-here,hal tan-TA-zi-roo-nee HOO-na
+transit-rides.please-tell-me-where-to-get-off,AKH-bir-nee AY-na AN-zil min FAD-lak
+place-words.service-desk,MAK-tab al-is-ti-laa-MAAT
+pickup-meeting.please-call-me-a-ride,OOT-loob lee say-YAA-ra min FAD-lak
+rail-station-words.platform,ra-SEEF
+common-signs.caution,tah-THEER
+utility-templates.do-you-have,hal la-DAYK
+toilets.is-it-free,hal HOO-wa maj-JAA-nee
+accessibility.cannot-climb-stairs,laa as-ta-TEE soo-OOD as-sa-LAA-lim
+building-words.women,say-yi-DAAT
+pronouns-verbs.she-her,HEE-ya
+question-words.how,KAYF
+medical-conditions.i-have-epilepsy,oo-AA-nee min na-wa-BAAT SA-ra
+pharmacy-symptoms.painkiller,moo-SAK-kin
+police-consulate.i-need-a-written-police-report,ah-TAAJ i-la MAH-dar mak-TOOB
+body-parts.chest,SADR
+emergency-medical.it-hurts-here,YOO-li-moo-nee HOO-na
+lost-rescue.i-cannot-walk,laa as-ta-TEE al-MASH-ee
+dietary-needs.no-nuts,bi-DOON moo-kas-sa-RAAT
+food-ordering.to-go-please,sa-FA-ree min FAD-lak
+weather.snow,THALJ
+trail-words.shuttle-bus,HAA-fi-la mak-koo-KEE-ya
+trail-conditions.is-the-path-slippery,hal at-ta-REEK ZA-lik
+trail-transport.is-there-cell-signal-here,hal hoo-NAAK ir-SAAL HOO-na
+trail-warnings.danger,KHA-tar
+trail-landmarks.elevation,al-ir-ti-FAA
+laundry.please-do-not-use-bleach,min FAD-lak bi-DOON KLOOR
+hotel-basics.i-would-like-a-quiet-room,oo-REED GHOOR-fa HAA-di-a
+room-problems.the-key-does-not-work,al-mif-TAAH laa YA-mal
+introductions.i-am-from,A-na min
+atm-cash.what-is-the-exchange-rate,maa SIR as-SARF
+numbers-money.s,AR-ba-a
+attractions-tickets.please-take-a-photo-of-us,SAW-wir-na min FAD-lak
+color-size-returns.do-you-have-a-bag,hal la-DAYK KEES
+sim-data.please-activate-it,FA-il-ha min FAD-lak
+children.childrens-menu,hal YOO-jad KAA-i-mat at-FAAL
+etiquette.photo-of-you,hal yoom-KI-noo-nee tas-WEE-rak
+social-basics.thank-you,SHOOK-ran
+communication.i-cannot-read-understand,laa AK-ra al-a-ra-BEE-ya
+quick-responses.works-okay,YA-mal
+phone-text-power.the-translation-may-be-inaccurate,at-TAR-ja-ma kad ta-KOON GHAYR da-KEE-ka
+time-scheduling.what-is-today-s-date,maa taa-REEKH al-YOWM
+time-words.morning,sa-BAAH
+days-of-week.saturday,as-SABT
+months.june,YOON-yoo
+border-customs.i-am-here-for-business,A-na HOO-na lil-A-mal
+directions.where-is-the-nearest,AY-na AK-rab
+quick-directions.on-the-left,A-la al-ya-SAAR
+taxi.we-need-to-catch-the-high-speed-train,noo-REED al-li-HAAK bil-ki-TAAR as-sa-REE
+transit-rides.is-this-direct,hal HAA-tha moo-BAA-shir
+place-words.bus-stop,MOW-kif al-HAA-fi-la
+rail-station-words.ticket-office,shoob-BAAK at-ta-THAA-kir
+common-signs.no-entry,mam-NOO ad-doo-KHOOL
+utility-templates.please-write-the-number,OOK-toob ar-RAKM min FAD-lak
+toilets.do-i-need-a-coin,hal ah-TAAJ i-la KIT-a nak-DEE-ya
+accessibility.need-to-sit-down,ah-TAAJ i-la al-joo-LOOS
+building-words.door,BAAB
+pronouns-verbs.they-them,HOOM
+question-words.how-much-many,KAM
+medical-conditions.my-blood-sugar-is-low,IN-dee hoo-BOOT fis-SOOK-kar
+pharmacy-symptoms.do-i-need-a-prescription,hal ah-TAAJ i-la WAS-fa tib-BEE-ya
+police-consulate.i-want-to-contact-my-embassy,oo-REED al-it-ti-SAAL bi-si-FAA-ra-tee
+body-parts.eye,AYN
+emergency-medical.where-is-a-pharmacy,AY-na say-da-LEE-ya
+lost-rescue.i-sprained-my-ankle,il-ta-WAYT KAA-hi-lee
+dietary-needs.no-seafood,bi-DOON as-MAAK ow kish-ri-YAAT
+food-ordering.check-please,al-hi-SAAB min FAD-lak
+weather.wind,REEH
+trail-words.park-shuttle,HAA-fi-lat al-moo-ta-NAZ-zah
+trail-transport.do-you-have-a-map,hal la-DAYK kha-REE-ta
+trail-warnings.beware-falling-rocks,KHA-tar soo-KOOT soo-KHOOR
+trail-landmarks.sunset,ghoo-ROOB ash-SHAMS
+laundry.laundromat,MAGH-sa-la
+hotel-basics.is-there-a-washing-machine,hal TOO-jad ghas-SAA-la
+room-problems.the-toilet-will-not-flush,as-see-FOON laa YA-mal
+introductions.where-are-you-from,min AY-na AN-ta
+atm-cash.no-money-came-out,lam TAKH-rooj an-noo-KOOD
+numbers-money.w,KHAM-sa
+sim-data.do-you-have-an-esim,hal la-DAY-koom ee-SIM
+children.suitable-for-children,hal HAA-tha moo-NAA-sib lil-at-FAAL
+etiquette.may-i-sit-here,hal yoom-KI-noo-nee al-joo-LOOS HOO-na
+social-basics.you-are-welcome,AF-wan
+communication.please-say-it-again,KAR-rir min FAD-lak
+quick-responses.does-not-work-no,laa YA-mal
+phone-text-power.please-confirm,AR-joo at-ta-KEED
+time-scheduling.what-day-is-it-today,ay YOWM al-YOWM
+time-words.afternoon,BA-ad az-ZOHR
+days-of-week.sunday,al-A-had
+months.july,YOOL-yoo
+border-customs.i-have-a-return-ticket,la-DAY-ya TATH-ki-rat OW-da
+directions.where-am-i,AY-na A-na
+quick-directions.on-the-right,A-la al-ya-MEEN
+taxi.please-use-the-meter,SHAGH-ghil al-ad-DAAD min FAD-lak
+transit-rides.do-i-need-to-transfer,hal YA-jib an oo-BAD-dil
+place-words.luggage-storage,HIFZ al-AM-ti-a
+rail-station-words.waiting-room,SAA-lat al-in-ti-ZAAR
+common-signs.no-smoking,mam-NOO at-tad-KHEEN
+utility-templates.i-need,ah-TAAJ i-la
+toilets.is-the-tap-water-safe-to-drink,hal mi-YAAH as-san-BOOR SAA-li-ha lish-SHOORB
+accessibility.accessible-restroom,hal YOO-jad DOW-rat mi-YAAH li-tha-WEE al-i-AA-ka
+building-words.key,mif-TAAH
+pronouns-verbs.my-mine,LEE
+question-words.how-many,kam A-dad
+medical-conditions.i-need-my-inhaler,ah-TAAJ i-la bakh-KHAAKH ar-RAB-oo
+pharmacy-symptoms.i-have-a-headache,IN-dee soo-DAA
+police-consulate.i-need-it-for-my-insurance,ah-TAA-joo lit-ta-MEEN
+body-parts.ear,OO-thoon
+emergency-medical.please-take-me-to-a-hospital,KHOOTH-nee i-la al-moos-TASH-fa min FAD-lak
+lost-rescue.please-contact-rescue,IT-ta-sil bi-FI-rak al-in-KAATH min FAD-lak
+dietary-needs.i-am-vegetarian,A-na na-BAA-tee
+food-ordering.does-it-contain,hal yah-TA-wee A-la
+weather.storm,AA-si-fa
+trail-words.steps,da-ra-JAAT
+trail-warnings.first-aid-station,NOOK-tat is-AAF
+laundry.please-iron-this,oo-REED KAY HAA-tha
+room-problems.the-light-does-not-work,ad-DOW laa YA-mal
+introductions.how-are-you,kayf HAA-lak
+atm-cash.where-can-i-change-money,AY-na AS-rif an-noo-KOOD
+numbers-money.li,SIT-ta
+sim-data.my-data-is-not-working,al-ba-yaa-NAAT laa TA-mal
+children.minimum-age,maa al-HAD al-AD-na lil-OOMR
+etiquette.queue-for,hal HAA-tha SAF
+social-basics.excuse-me-sorry,low sa-MAHT
+communication.please-write-it-down,OOK-too-boo min FAD-lak
+time-scheduling.what-time-does-it-open,MA-ta YAF-tah
+time-words.evening,ma-SAA
+months.august,a-GHOOS-toos
+border-customs.i-am-visiting-family,a-ZOOR AA-i-la-tee
+directions.which-way,fee ay it-ti-JAAH
+quick-directions.across-from-here,fil-JI-ha al-moo-KAA-bi-la
+transit-rides.is-it-delayed,hal HOO-wa moo-ta-AKH-khir
+rail-station-words.train-number,RAKM al-ki-TAAR
+common-signs.no-photography,mam-NOO at-tas-WEER
+utility-templates.is-there-nearby,hal YOO-jad … ka-REEB
+toilets.it-is-urgent,al-AMR AA-jil
+accessibility.station-assistance,hal TOO-jad moo-SAA-a-da li-tha-WEE al-i-AA-ka fil-ma-HAT-ta
+pronouns-verbs.your-yours,LAK
+question-words.why,li-MAA-tha
+medical-conditions.i-am-pregnant,A-na HAA-mil
+pharmacy-symptoms.paracetamol-acetaminophen,baa-raa-see-taa-MOOL
+police-consulate.i-need-an-interpreter,ah-TAAJ i-la moo-TAR-jim
+body-parts.leg,SAAK
+lost-rescue.my-companion-is-missing,ra-FEE-kee maf-KOOD
+dietary-needs.i-am-vegan,A-na na-BAA-tee SIRF
+food-ordering.is-this-vegetarian,hal HAA-tha na-BAA-tee
+weather.ice,ja-LEED
+trail-words.up-uphill,soo-OOD
+trail-warnings.service-suspended,al-KHID-ma moo-ta-WAK-ki-fa
+trail-landmarks.water-point,NOOK-tat mi-YAAH
+laundry.detergent,mas-HOOK gha-SEEL
+room-problems.please-send-someone,AR-joo ir-SAAL A-had lil-is-LAAH
+introductions.i-am-a-tourist,A-na SAA-ih
+atm-cash.the-machine-is-out-of-service,al-ji-HAAZ moo-AT-tal
+numbers-money.q,SAB-a
+sim-data.does-it-need-registration,hal yah-TAAJ i-la tas-JEEL
+children.do-children-pay,hal YAD-fa al-at-FAAL
+etiquette.dressed-appropriately,hal li-BAA-see moo-NAA-sib
+social-basics.sorry,AA-sif
+communication.please-wait-a-moment,in-TA-zir LAH-za min FAD-lak
+time-scheduling.what-time-does-it-close,MA-ta YOOGH-lik
+time-words.spring,ra-BEE
+months.september,sib-TAM-bir
+border-customs.this-is-for-personal-use,HAA-tha lil-is-tikh-DAAM ash-shakh-SEE
+directions.can-i-walk-there,hal YOOM-kin al-MASH-ee
+quick-directions.in-front,a-MAAM
+transit-rides.i-am-in-a-hurry,A-na moos-TA-jil
+rail-station-words.carriage,A-ra-ba
+common-signs.do-not-touch,mam-NOO al-LAMS
+utility-templates.how-much-is,bi-KAM
+toilets.may-i-have-the-toilet-key,oo-REED mif-TAAH al-ham-MAAM min FAD-lak
+accessibility.help-me-carry,SAA-id-nee fee HAML HAA-tha min FAD-lak
+pronouns-verbs.be-called-call,ISM
+question-words.this,HAA-tha
+medical-conditions.i-carry-an-adrenaline-injector,AH-mil KA-lam ad-ree-naa-LEEN
+pharmacy-symptoms.how-much-should-i-take,maa al-JOOR-a
+police-consulate.please-leave-me-alone,OOT-rook-nee min FAD-lak
+body-parts.arm,thi-RAA
+dietary-needs.i-do-not-eat,laa AA-kool
+weather.fog,da-BAAB
+trail-words.down-downhill,noo-ZOOL
+laundry.dry-cleaning,tan-ZEEF JAAF
+room-problems.the-heating-does-not-work,at-tad-FI-a laa TA-mal
+introductions.this-is-my-husband-wife,HAA-tha ZOW-jee / HAA-thi-hi ZOW-ja-tee
+atm-cash.please-give-me-smaller-notes,oo-REED fi-AAT AS-ghar min FAD-lak
+numbers-money.b,tha-MAA-ni-ya
+sim-data.i-have-no-signal,laa YOO-jad ir-SAAL
+children.crib,hal la-DAY-koom sa-REER at-FAAL
+etiquette.did-not-mean-to-offend,lam AK-sid al-i-SAA-a
+social-basics.no-problem,laa MOOSH-ki-la
+communication.can-you-help-me,hal too-SAA-i-doo-nee
+time-words.summer,SAYF
+months.october,ook-TOO-bir
+border-customs.i-am-in-transit,A-na moo-SAA-fir AA-bir
+directions.how-far-is-it,kam al-ma-SAA-fa
+quick-directions.behind,KHALF
+transit-rides.which-platform,ay ra-SEEF
+rail-station-words.seat,MAK-ad
+common-signs.temporarily-closed,MOOGH-lak moo-AK-ka-tan
+utility-templates.is-this,hal HAA-tha
+toilets.there-is-no-toilet-paper,laa YOO-jad WA-rak ham-MAAM
+accessibility.board-first,hal yoom-KI-noo-nee as-soo-OOD AW-wa-lan
+pronouns-verbs.have,AN-dee
+question-words.that,THAA-li-ka
+medical-conditions.i-take-medicine-for,a-ta-NAA-wal da-WAA li-i-LAAJ
+pharmacy-symptoms.i-am-vomiting,a-ta-KAY-ya
+police-consulate.i-was-robbed,ta-AR-radt lis-SA-ri-ka
+body-parts.foot,KA-dam
+dietary-needs.i-am-allergic-to,IN-dee ha-saa-SEE-ya min
+weather.heat,HAR
+trail-words.one-way,it-ti-JAAH WAA-hid
+laundry.dryer,moo-JAF-fi-fa
+introductions.this-is-my-daughter-son,HAA-thi-hi IB-na-tee / HAA-tha IB-nee
+atm-cash.do-you-have-change,hal la-DAYK noo-KOOD sa-GHEE-ra
+numbers-money.ji,TIS-a
+sim-data.please-write-the-wifi-password,OOK-toob KA-li-mat SIR al-wai-fai
+children.warm-this-bottle,SAKH-khin HAA-thi-hi az-zoo-JAA-ja min FAD-lak
+etiquette.what-is-customary,maa al-moo-TAAD HOO-na
+social-basics.i-do-not-know,laa A-rif
+communication.please-show-me-the-text,A-ri-nee an-NAS bil-a-ra-BEE-ya
+time-words.fall,kha-REEF
+months.november,noo-FAM-bir
+border-customs.i-have-in-cash,MA-ee … NAK-dan
+directions.which-exit,ay MAKH-raj
+transit-rides.what-time-is-the-next-one,MA-ta al-KAA-dim
+rail-station-words.last-train,AA-khir ki-TAAR
+utility-templates.please,… min FAD-lak
+toilets.toilet-paper,WA-rak ham-MAAM
+accessibility.door-width,kam ARD al-BAAB
+pronouns-verbs.do-not-have,LAY-sa AN-dee
+question-words.here,HOO-na
+medical-conditions.i-take-blood-thinners,a-ta-NAA-wal AD-wi-ya moo-SAY-yi-la lid-DAM
+pharmacy-symptoms.rehydration-salts,mah-LOOL moo-AA-la-jat al-ja-FAAF
+police-consulate.i-want-a-lawyer,oo-REED moo-HAA-mi-yan
+body-parts.hand,YAD
+weather.cold,BARD
+trail-words.round-trip,tha-HAAB wa-OW-da
+laundry.coin-operated,bil-OOM-la al-ma-da-NEE-ya
+introductions.i-am-traveling-alone,oo-SAA-fir WAH-dee
+atm-cash.may-i-pay-in,hal YOOM-kin ad-DAF bi-OOM-lat
+numbers-money.sh,A-sha-ra
+sim-data.sim-card,sha-REE-ha
+children.car-seat,nah-TAAJ KOOR-see say-YAA-ra lil-at-FAAL
+etiquette.keep-the-change,IH-ta-fiz bil-BAA-kee
+time-words.winter,shi-TAA
+months.december,dee-SAM-bir
+border-customs.this-is-a-gift,HAA-thi-hi ha-DEE-ya
+directions.can-you-show-me-the-way,hal ta-DOOL-loo-nee A-la at-ta-REEK
+transit-rides.i-went-past-my-stop,ta-JAA-wazt ma-HAT-ta-tee
+rail-station-words.delayed,moo-ta-AKH-khir
+utility-templates.i-am-looking-for,AB-hath an
+toilets.it-is-out-of-order,IN-noo moo-AT-tal
+accessibility.wheelchair-width,ARD al-KOOR-see al-moo-ta-HAR-rik … SAN-ti-mitr
+pronouns-verbs.go,ATH-hab
+question-words.there,hoo-NAAK
+medical-conditions.medicine-allergy,ha-saa-SEE-ya da-waa-EE-ya
+pharmacy-symptoms.how-many-times-a-day,kam MAR-ra fil-YOWM
+police-consulate.please-notify-my-consulate,AR-joo ib-LAAGH koon-soo-LEE-yat BA-la-dee
+body-parts.knee,ROOK-ba
+weather.humid,RA-tib
+atm-cash.please-charge-in-local-currency,bil-OOM-la al-ma-hal-LEE-ya min FAD-lak
+numbers-money.y-b-i,MI-ya
+sim-data.where-can-i-buy-a-plug-adapter,AY-na ash-TA-ree moo-HAW-wil kah-ra-BAA
+children.stroller,A-ra-bat at-FAAL
+border-customs.where-do-i-collect-my-baggage,AY-na as-TA-lim am-TI-a-tee
+directions.north,sha-MAAL
+rail-station-words.final-stop,al-ma-HAT-ta al-a-KHEE-ra
+utility-templates.do-you-accept,hal tak-ba-LOON
+toilets.out-of-order,moo-AT-tal
+accessibility.hard-of-hearing,A-na min di-AAF as-SAM
+pronouns-verbs.come,AA-tee
+question-words.a-little,ka-LEEL
+medical-conditions.this-card-lists-my-conditions,HAA-thi-hi bi-TAA-ka bi-haa-LAA-tee as-sih-HEE-ya
+pharmacy-symptoms.i-have-a-stomach-ache,IN-dee A-lam fil-MA-i-da
+police-consulate.i-am-calling-the-police,sa-AT-ta-sil bish-SHOOR-ta
+body-parts.ankle,KAA-hil
+weather.sunrise,shoo-ROOK ash-SHAMS
+atm-cash.where-can-i-get-coins,AY-na A-jid oom-LAAT ma-da-NEE-ya
+numbers-money.y-qi-n,ALF
+sim-data.mobile-data,ba-yaa-NAAT al-HAA-tif
+children.playground,hal YOO-jad MAL-ab at-FAAL
+border-customs.how-long-may-i-stay,kam yoom-KI-noo-nee al-ba-KAA
+directions.south,ja-NOOB
+utility-templates.i-cannot-find,laa A-jid
+toilets.mens-toilet,DOW-rat mi-YAAH ri-JAAL
+accessibility.speak-louder,ta-HAD-dath bi-SOWT A-la min FAD-lak
+pronouns-verbs.would-like,a-WAD
+question-words.some,BA-ad
+medical-conditions.this-is-my-medicine,HAA-tha da-WAA-ee
+pharmacy-symptoms.i-have-a-cough,IN-dee soo-AAL
+police-consulate.am-i-under-arrest,hal A-na mow-KOOF
+body-parts.skin,JILD
+weather.flood,fa-ya-DAAN
+atm-cash.is-there-a-minimum-for-cards,hal hoo-NAAK HAD AD-na lil-bi-TAA-ka
+numbers-money.y-w-n,A-sha-rat AA-laaf
+sim-data.can-i-top-up-this-sim,hal YOOM-kin SHAHN HAA-thi-hi ash-sha-REE-ha
+border-customs.i-have-a-connecting-flight,la-DAY-ya RIH-la moot-TA-si-la
+directions.east,SHARK
+utility-templates.there-is-a-problem-with,hoo-NAAK MOOSH-ki-la fee
+toilets.womens-toilet,DOW-rat mi-YAAH say-yi-DAAT
+accessibility.visually-impaired,A-na da-EEF al-BA-sar
+pronouns-verbs.want,oo-REED
+question-words.very,JID-dan
+medical-conditions.please-give-me-sugar-or-juice,A-tee-nee SOOK-ka-ran ow a-SEE-ran
+pharmacy-symptoms.antihistamine,moo-DAAD lil-hees-taa-MEEN
+police-consulate.no-thank-you-i-am-not-interested,"laa SHOOK-ran, LAS-too mooh-TAM-man"
+weather.avalanche-risk,KHA-tar in-hi-YAAR thal-JEE
+atm-cash.atm,as-sar-RAAF al-AA-lee
+numbers-money.b-n,NISF
+sim-data.top-up,SHAHN
+border-customs.may-i-have-an-entry-stamp,oo-REED KHATM ad-doo-KHOOL min FAD-lak
+directions.west,GHARB
+toilets.drinking-water,mi-YAAH SAA-li-ha lish-SHOORB
+accessibility.take-your-arm,hal yoom-KI-noo-nee al-im-SAAK bi-thi-RAA-ak
+pronouns-verbs.look-for,AB-hath an
+question-words.too,AK-thar min al-LAA-zim
+medical-conditions.inject-it-into-my-outer-thigh,IH-kin-hoo fee MOON-ta-saf al-FA-khith al-KHAA-ri-jee
+pharmacy-symptoms.anti-diarrhea-medicine,da-WAA lil-is-HAAL
+police-consulate.someone-attacked-me,SHAKHS HAA-ja-ma-nee
+atm-cash.banknote,WA-ra-ka nak-DEE-ya
+numbers-money.yu-n,yoo-AAN
+sim-data.is-there-coverage-in,hal hoo-NAAK tagh-TI-ya fee
+border-customs.visa,ta-SHEE-ra
+toilets.not-for-drinking,mi-YAAH GHAYR SAA-li-ha lish-SHOORB
+accessibility.guide-dog,HAA-tha KALB ir-SHAAD lil-mak-foo-FEEN
+pronouns-verbs.buy,ash-TA-ree
+question-words.also,AY-dan
+medical-conditions.my-blood-type-is,fa-SEE-lat da-MEE
+pharmacy-symptoms.is-this-safe-to-take-with,hal HAA-tha AA-min ma
+police-consulate.i-did-not-agree-to-this-price,lam oo-WAA-fik A-la HAA-tha as-SIR
+atm-cash.coin,OOM-la ma-da-NEE-ya
+numbers-money.ku-i,yoo-AAN
+sim-data.signal,ir-SAAL
+border-customs.i-have-no-food-or-plants,laa AH-mil ta-AA-man ow na-baa-TAAT
+toilets.accessible-toilet,DOW-rat mi-YAAH li-tha-WEE al-i-AA-ka
+pronouns-verbs.like,oo-HIB
+question-words.all-both,KOOL
+medical-conditions.do-not-give-me,laa TOO-tee-nee
+pharmacy-symptoms.i-feel-dizzy,ASH-oor bi-doo-WAAR
+police-consulate.please-write-the-report-number,OOK-toob RAKM al-MAH-dar min FAD-lak
+atm-cash.cash-only,NAK-dan FA-kat
+sim-data.esim,ee-SIM
+border-customs.passport-control,moo-RAA-ka-bat al-ja-waa-ZAAT
+toilets.where-can-i-wash-my-hands,AY-na AGH-sil ya-DEE
+pronouns-verbs.need,ah-TAAJ
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,IN-dee ha-saa-SEE-ya min al-as-bi-REEN wal-ee-boo-broo-FEEN
+pharmacy-symptoms.ibuprofen,ee-boo-broo-FEEN
+police-consulate.it-happened-here,HA-dath HOO-na
+atm-cash.fee,oo-MOO-la
+sim-data.prepaid,MOOS-bak ad-DAF
+border-customs.customs,al-ja-MAA-rik
+toilets.can-i-flush-the-paper,hal AR-mee al-WA-rak fil-ham-MAAM
+medical-conditions.my-injector-is-in-my-bag,KA-lam al-ad-ree-naa-LEEN fee ha-KEE-ba-tee
+pharmacy-symptoms.i-have-a-sore-throat,IN-dee il-ti-HAAB fil-HALK
+police-consulate.may-i-have-a-copy-of-the-report,oo-REED NOOS-kha min al-MAH-dar
+atm-cash.change,al-BAA-kee
+sim-data.roaming,ta-JAW-wool
+border-customs.baggage-claim,is-ti-LAAM al-AM-ti-a
+toilets.is-there-a-toilet-on-board,hal YOO-jad ham-MAAM A-la MATN al-MAR-ka-ba
+medical-conditions.i-am-allergic-to-sulfa-drugs,IN-dee ha-saa-SEE-ya min AD-wi-yat as-SOOL-fa
+pharmacy-symptoms.can-i-get-this-medicine-here,hal ya-ta-WAF-far HAA-tha ad-da-WAA HOO-na
+police-consulate.i-will-not-sign-anything-i-cannot-read,lan oo-WAK-ki A-la maa laa as-ta-TEE ki-RAA-a-too
+atm-cash.exchange-rate,SIR as-SARF
+border-customs.customs-declaration,al-ik-RAAR al-joom-roo-KEE
+toilets.the-toilet-will-not-flush,as-see-FOON laa YA-mal
+pharmacy-symptoms.bandage,di-MAA-da
+police-consulate.am-i-free-to-go,hal yoom-KI-noo-nee ath-tha-HAAB
+atm-cash.bank,BANK
+border-customs.arrival-card,bi-TAA-kat al-woo-SOOL
+toilets.baby-change,tagh-YEER ha-faa-DAAT
+pharmacy-symptoms.the-pain-is-severe,al-A-lam sha-DEED
+police-consulate.i-do-not-want-to-go-with-you,laa oo-REED ath-tha-HAAB MA-ak
+atm-cash.money-exchange,si-RAA-fa
+border-customs.transit,ta-RAAN-zeet
+toilets.squat-toilet,ham-MAAM BA-la-dee
+pharmacy-symptoms.antiseptic,moo-TAH-hir lil-joo-ROOH
+atm-cash.pin,ar-RAKM as-SIR-ree
+border-customs.boarding-pass,bi-TAA-kat as-soo-OOD
+pharmacy-symptoms.i-feel-nauseous,ASH-oor bil-gha-tha-YAAN
+pharmacy-symptoms.i-have-a-rash,IN-dee TAFH JIL-dee
+pharmacy-symptoms.before-or-after-food,KABL al-AKL am BA-doo
+pharmacy-symptoms.i-think-it-is-infected,a-ZOON an-na al-JOORH MOOL-ta-hib
+pharmacy-symptoms.motion-sickness-tablets,ak-RAAS li-doo-WAAR al-HA-ra-ka
+pharmacy-symptoms.i-have-a-cut,IN-dee JOORH
+pharmacy-symptoms.antacid,moo-DAAD lil-hoo-MOO-da
+pharmacy-symptoms.i-have-a-burn,IN-dee HARK
+pharmacy-symptoms.it-started-days-ago,BA-da KABL … ay-YAAM
+pharmacy-symptoms.cough-medicine,da-WAA lis-soo-AAL
+pharmacy-symptoms.is-this-safe-during-pregnancy,hal HAA-tha AA-min lil-HAA-mil
+trail-transport.how-long-is-the-wait,kam MOOD-dat al-in-ti-ZAAR
+tax-refund.is-tax-free-shopping-available,hal hoo-NAAK ta-SAW-wook MOO-fa min ad-da-REE-ba
+place-words.tourist-spot-sightseeing-area,MA-lam si-yaa-HEE
+common-signs.open-operating,YA-mal
+time-scheduling.how-long-does-it-take,kam yas-TAGH-rik
+transit-rides.can-i-use-this-ticket,hal TAS-looh HAA-thi-hi at-TATH-ki-ra
+common-signs.closed,MOOGH-lak
+pronouns-verbs.there-is-have,YOO-jad
+common-signs.stopped-stop,moo-ta-WAK-kif
+pronouns-verbs.there-is-not-do-not-have,laa YOO-jad
+emergency-medical.i-feel-unwell,LAS-too bi-KHAYR
+food-ordering.what-do-you-recommend,bi-MAA-tha TAN-sah
+hotel-basics.is-wi-fi-free,hal al-wai-fai maj-JAA-nee
+hotel-requests.another-towel-please,MIN-sha-fa OOKH-ra min FAD-lak
+numbers-money.2-items,KIT-a-taan
+shopping.is-there-a-discount,hal hoo-NAAK KHASM
+social-basics.good-night,TOOS-bih A-la KHAYR
+quick-responses.can-possible,MOOM-kin
+phone-translation.please-type-it-and-show-me,OOK-too-boo wa-A-ri-nee min FAD-lak
+phone-text-power.may-i-charge-my-phone-here,hal yoom-KI-noo-nee SHAHN HAA-ti-fee HOO-na
+pronouns-verbs.want-to-verb,oo-REED an…
+emergency-medical.this-is-an-emergency,HAA-thi-hi HAA-la TAA-ri-a
+lost-rescue.please-look-at-my-current-location,OON-zoor i-la MOW-ki-ee al-HAA-lee
+hotel-words.luggage-storage,HIFZ al-AM-ti-a
+hotel-basics.how-much-per-night,bi-KAM al-LAY-la
+hotel-requests.what-time-is-check-out,MA-ta MOW-id al-moo-GHAA-da-ra
+payment-receipt.please-write-the-number,OOK-toob ar-RAKM min FAD-lak
+shopping.where-do-i-pay,AY-na AD-fa
+communication.i-cannot-make-out-what-you-are-saying,laa AF-ham maa ta-KOOL
+quick-responses.cannot-not-possible,GHAYR MOOM-kin
+taxi.i-will-get-off-here,sa-AN-zil HOO-na
+pickup-meeting.please-call-a-taxi,OOT-loob lee TAAK-see min FAD-lak
+pronouns-verbs.want-thing,oo-REED…
+emergency-medical.i-am-having-a-severe-allergic-reaction,IN-dee ha-saa-SEE-ya MOOF-ra-ta
+lost-rescue.my-child-is-missing,TIF-lee maf-KOOD
+food-ordering.water-please,MAA min FAD-lak
+hiking-parks.is-this-trail-suitable-for-beginners,hal HAA-tha al-ma-SAAR moo-NAA-sib lil-moob-ta-di-EEN
+hotel-basics.is-breakfast-included,hal al-foo-TOOR mash-MOOL
+hotel-requests.can-i-check-in-early,hal YOOM-kin tas-JEEL al-woo-SOOL moo-BAK-ki-ran
+attractions-tickets.could-you-take-a-photo-for-us,hal too-SAW-wir-na min FAD-lak
+payment-receipt.how-much-in-total,kam al-maj-MOO
+shopping.i-will-take-this,sa-AA-khooth HAA-tha
+communication.i-do-not-understand,laa AF-ham
+quick-responses.okay-fine,ta-MAAM
+phone-translation.please-look-at-the-screen,OON-zoor i-la ash-SHAA-sha min FAD-lak
+pronouns-verbs.need-thing,ah-TAAJ i-la…
+question-words.how-much-what-price,kam as-SIR
+emergency-medical.i-cannot-breathe,laa as-ta-TEE at-ta-NAF-foos
+lost-rescue.i-do-not-know-where-i-am,laa A-rif AY-na A-na
+hotel-basics.may-i-see-the-room,hal yoom-KI-noo-nee ROO-yat al-GHOOR-fa
+hotel-requests.another-night,oo-REED LAY-la OOKH-ra
+payment-receipt.can-we-pay-separately,hal NAD-fa bi-SHAKL moon-FA-sil
+shopping.what-is-this,maa HAA-tha
+communication.i-cannot-read-it,laa as-ta-TEE ki-RAA-a-too
+quick-responses.no-good-not-allowed-will-not-work,laa YAS-looh
+taxi.please-get-me-there-in-time-for-the-shinkansen,AR-joo al-woo-SOOL KABL MOW-id al-ki-TAAR as-sa-REE
+pronouns-verbs.looking-for-thing,AB-hath an…
+emergency-medical.i-am-bleeding-badly,A-na AN-zif bi-SHID-da
+lost-rescue.my-friend-is-hurt,sa-DEE-kee moo-SAAB
+dietary-needs.does-it-contain-fish-stock,hal yah-TA-wee A-la MA-rak SA-mak
+hotel-basics.for-nights,li-MOOD-dat … la-YAAL
+hotel-requests.is-there-a-safe,hal TOO-jad KHAZ-na
+payment-receipt.is-tax-included,hal ad-da-REE-ba mash-MOO-la
+shopping.where-can-i-buy,AY-na ash-TA-ree
+emergency-medical.i-have-chest-pain,IN-dee A-lam fis-SADR
+lost-rescue.i-lost-my-wallet,fa-KADT mih-FA-za-tee
+hotel-basics.two-beds,oo-REED sa-ree-RAYN moon-fa-si-LAYN
+hotel-requests.another-blanket,bat-taa-NEE-ya OOKH-ra min FAD-lak
+payment-receipt.my-card-was-declined,ROO-fi-dat bi-TAA-ka-tee
+shopping.do-you-have-this-in-stock,hal HAA-tha moo-ta-WAF-fir
+time-words.night,LAYL
+emergency-medical.this-person-is-unconscious,HAA-tha ash-SHAKHS FAA-kid lil-WA-ee
+lost-rescue.i-lost-my-bag,fa-KADT ha-KEE-ba-tee
+food-ordering.can-a-vegetarian-eat-this,hal YAS-looh HAA-tha lin-na-baa-tee-YEEN
+hotel-basics.is-there-air-conditioning,hal YOO-jad tak-YEEF
+hotel-requests.wake-up-call,AR-joo ee-KAA-zee as-SAA-a
+payment-receipt.the-bill-is-wrong,a-ZOON an-na fil-hi-SAAB KHA-ta
+shopping.two-of-these,ith-NAYN min HAA-tha min FAD-lak
+social-basics.okay-fine-i-am-okay,A-na bi-KHAYR
+emergency-medical.where-is-the-nearest-hospital,AY-na AK-rab moos-TASH-fa
+lost-rescue.where-is-lost-and-found,AY-na MAK-tab al-maf-koo-DAAT
+payment-receipt.i-already-paid,LA-kad da-FAT
+shopping.what-is-it-made-of,min ay MAAD-da
+emergency-medical.what-is-the-emergency-number,maa RAKM at-ta-WAA-ri
+lost-rescue.i-cannot-find-my-hotel,laa A-jid FOON-doo-kee
+emergency-medical.is-there-a-doctor-who-speaks-english,hal YOO-jad ta-BEEB ya-ta-HAD-dath al-in-ji-lee-ZEE-ya
+lost-rescue.i-left-it-on-the-train,ta-RAK-too fil-ki-TAAR
+dietary-needs.i-have-a-severe-allergy-to,IN-dee ha-saa-SEE-ya sha-DEE-da min
+communication.please-write-it-in-roman-letters,OOK-too-boo bil-hoo-ROOF al-laa-tee-NEE-ya
+emergency-medical.i-think-a-bone-is-broken,a-ZOON an-na hoo-NAAK KAS-ran
+lost-rescue.i-cannot-get-down,laa as-ta-TEE an-noo-ZOOL
+emergency-medical.please-call-my-emergency-contact,IT-ta-sil bi-JI-hat al-it-ti-SAAL lit-ta-WAA-ri
+emergency-medical.i-have-travel-insurance,la-DAY-ya ta-MEEN SA-far
+numbers-money.yen,YIN
+numbers-money.yen-symbol,YIN

@@ -1,0 +1,60 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+toilets.where-toilet,أين الحمّام؟,وين الحمّام؟,ayna al-ḥammām?,,,2,ar-agent-v1
+accessibility.step-free,هل يوجد مدخل خالٍ من العوائق؟,مدخل سهل الوصول,hal yūjad madkhal khālin min al-ʿawāʾiq?,,free of obstacles,2,ar-agent-v1
+toilets.where-public-toilet,أين دورة مياه عامة؟,أين حمّام عام؟,ayna dawrat miyāh ʿāmmah?,,,2,ar-agent-v1
+accessibility.wheelchair-access,هل المكان مهيأ للكرسي المتحرك؟,مناسب للكراسي المتحركة,hal al-makān muhayyaʾ lil-kursī al-mutaḥarrik?,,,2,ar-agent-v1
+toilets.may-i-use-the-toilet,هل يمكنني استخدام الحمّام؟,,hal yumkinunī istikhdām al-ḥammām?,,,2,ar-agent-v1
+accessibility.elevator,هل يوجد مصعد؟,أسانسير,hal yūjad miṣʿad?,,,2,ar-agent-v1
+toilets.is-it-only-for-customers,هل هو للزبائن فقط؟,,hal huwa lil-zabāʾin faqaṭ?,,,2,ar-agent-v1
+accessibility.ramp,هل يوجد منحدر؟,,hal yūjad munḥadar?,,,2,ar-agent-v1
+toilets.toilet-wc,دورة مياه,WC,dawrat miyāh,,water closet,2,ar-agent-v1
+accessibility.how-many-steps,كم عدد الدرجات؟,,kam ʿadad al-darajāt?,,,2,ar-agent-v1
+toilets.is-it-free,هل هو مجاني؟,,hal huwa majjānī?,,,2,ar-agent-v1
+accessibility.cannot-climb-stairs,لا أستطيع صعود السلالم,,lā astaṭīʿ ṣuʿūd al-salālim,,,2,ar-agent-v1
+toilets.do-i-need-a-coin,هل أحتاج إلى قطعة نقدية؟,,hal aḥtāj ilá qiṭʿah naqdīyah?,,,2,ar-agent-v1
+accessibility.need-to-sit-down,أحتاج إلى الجلوس,,aḥtāj ilá al-julūs,,,2,ar-agent-v1
+toilets.is-the-tap-water-safe-to-drink,هل مياه الصنبور صالحة للشرب؟,هل مياه الحنفية صالحة للشرب؟,hal miyāh al-ṣanbūr ṣāliḥah lil-shurb?,,,2,ar-agent-v1
+accessibility.accessible-restroom,هل يوجد دورة مياه لذوي الإعاقة؟,حمّام مهيأ,hal yūjad dawrat miyāh li-dhawī al-iʿāqah?,,,2,ar-agent-v1
+toilets.it-is-urgent,الأمر عاجل,,al-amr ʿājil,,,2,ar-agent-v1
+accessibility.station-assistance,هل توجد مساعدة لذوي الإعاقة في المحطة؟,خدمات أصحاب الهمم,hal tūjad musāʿadah li-dhawī al-iʿāqah fī al-maḥaṭṭah?,,,2,ar-agent-v1
+toilets.may-i-have-the-toilet-key,أريد مفتاح الحمّام من فضلك,,urīd miftāḥ al-ḥammām min faḍlak,,,2,ar-agent-v1
+accessibility.help-me-carry,ساعدني في حمل هذا من فضلك,,sāʿidnī fī ḥaml hādhā min faḍlak,,,2,ar-agent-v1
+toilets.there-is-no-toilet-paper,لا يوجد ورق حمّام,,lā yūjad waraq ḥammām,,,2,ar-agent-v1
+accessibility.board-first,هل يمكنني الصعود أولاً؟,,hal yumkinunī al-ṣuʿūd awwalan?,,,2,ar-agent-v1
+toilets.toilet-paper,ورق حمّام,ورق تواليت,waraq ḥammām,,,2,ar-agent-v1
+accessibility.door-width,كم عرض الباب؟,,kam ʿarḍ al-bāb?,,,2,ar-agent-v1
+toilets.it-is-out-of-order,إنه معطّل,,innah muʿaṭṭal,,,2,ar-agent-v1
+accessibility.wheelchair-width,عرض الكرسي المتحرك {} سم,,ʿarḍ al-kursī al-mutaḥarrik {} sm,,,2,ar-agent-v1
+toilets.out-of-order,معطّل,خارج الخدمة,muʿaṭṭal,,,2,ar-agent-v1
+accessibility.hard-of-hearing,أنا من ضعاف السمع,,anā min ḍiʿāf al-samʿ,,,2,ar-agent-v1
+toilets.mens-toilet,دورة مياه رجال,رجال,dawrat miyāh rijāl,,,2,ar-agent-v1
+accessibility.speak-louder,تحدث بصوت أعلى من فضلك,,taḥaddath bi-ṣawt aʿlá min faḍlak,,,2,ar-agent-v1
+toilets.womens-toilet,دورة مياه سيدات,نساء,dawrat miyāh sayyidāt,,,2,ar-agent-v1
+accessibility.visually-impaired,أنا ضعيف البصر,أنا كفيف,anā ḍaʿīf al-baṣar,,,2,ar-agent-v1
+toilets.drinking-water,مياه صالحة للشرب,مياه شرب,miyāh ṣāliḥah lil-shurb,,,2,ar-agent-v1
+accessibility.take-your-arm,هل يمكنني الإمساك بذراعك؟,,hal yumkinunī al-imsāk bi-dhirāʿik?,,,2,ar-agent-v1
+toilets.not-for-drinking,مياه غير صالحة للشرب,,miyāh ghayr ṣāliḥah lil-shurb,,,2,ar-agent-v1
+accessibility.guide-dog,هذا كلب إرشاد للمكفوفين,كلب مرافقة للمكفوفين,hādhā kalb irshād lil-makfūfīn,,,2,ar-agent-v1
+toilets.accessible-toilet,دورة مياه لذوي الإعاقة,دورة مياه مهيأة,dawrat miyāh li-dhawī al-iʿāqah,,,2,ar-agent-v1
+toilets.where-can-i-wash-my-hands,أين أغسل يدي؟,,ayna aghsil yadī?,,,2,ar-agent-v1
+toilets.can-i-flush-the-paper,هل أرمي الورق في الحمّام؟,,hal armī al-waraq fī al-ḥammām?,,do I throw the paper in the toilet,2,ar-agent-v1
+toilets.is-there-a-toilet-on-board,هل يوجد حمّام على متن المركبة؟,,hal yūjad ḥammām ʿalá matn al-markabah?,,,2,ar-agent-v1
+toilets.the-toilet-will-not-flush,السيفون لا يعمل,,al-sīfūn lā yaʿmal,,the flush does not work,2,ar-agent-v1
+toilets.baby-change,تغيير حفاضات,منطقة تغيير ملابس الأطفال,taghyīr ḥafāḍāt,,,1,ar-agent-v1
+toilets.squat-toilet,حمّام بلدي,كرسي عربي,ḥammām baladī,,local-style toilet,2,ar-agent-v1
+building-help.what-room-number-is-this,ما رقم هذه الغرفة؟,,mā raqm hādhihi al-ghurfah?,,,2,ar-agent-v1
+building-help.i-am-lost,أنا تائه,ضعت,anā tāʾih,,,2,ar-agent-v1
+building-help.where-is-reception,أين الاستقبال؟,,ayna al-istiqbāl?,,,2,ar-agent-v1
+building-help.where-is-a-power-outlet,أين مقبس الكهرباء؟,بريزة كهرباء,ayna miqbas al-kahrabāʾ?,,,2,ar-agent-v1
+in-a-building.is-this-the-correct-entrance,هل هذا المدخل الصحيح؟,,hal hādhā al-madkhal al-ṣaḥīḥ?,,,2,ar-agent-v1
+in-a-building.do-you-have-wi-fi,هل يوجد واي فاي؟,,hal yūjad wāy fāy?,,,2,ar-agent-v1
+in-a-building.what-is-the-wi-fi-password,ما كلمة سر الواي فاي؟,,mā kalimat sirr al-wāy fāy?,,,2,ar-agent-v1
+in-a-building.which-floor,أيّ طابق؟,أيّ دور؟,ayy ṭābiq?,,,2,ar-agent-v1
+building-words.elevator,مصعد,أسانسير,miṣʿad,,,2,ar-agent-v1
+building-words.stairs,سلالم,درج,salālim,,,2,ar-agent-v1
+building-words.entrance,مدخل,دخول,madkhal,,,2,ar-agent-v1
+building-words.exit,مخرج,خروج,makhraj,,,2,ar-agent-v1
+building-words.men,رجال,,rijāl,,,2,ar-agent-v1
+building-words.women,سيدات,نساء,sayyidāt,,,2,ar-agent-v1
+building-words.door,باب,,bāb,,,2,ar-agent-v1
+building-words.key,مفتاح,,miftāḥ,,,2,ar-agent-v1

@@ -1,0 +1,100 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+sim-data.i-would-like-a-tourist-sim,Ich möchte eine Prepaid-SIM-Karte.,,,,2,de-agent-v1
+children.cannot-find-my-child,Ich finde mein Kind nicht!,,,,2,de-agent-v1
+etiquette.is-this-allowed,Ist das erlaubt?,,,,2,de-agent-v1
+sim-data.may-i-use-your-wifi,Darf ich Ihr WLAN benutzen?,,,,2,de-agent-v1
+children.make-an-announcement,Bitte machen Sie eine Durchsage.,,,,2,de-agent-v1
+etiquette.is-tipping-expected,Ist Trinkgeld üblich?,,,,2,de-agent-v1
+sim-data.how-much-data-is-included,Wie viel Datenvolumen ist dabei?,,,,2,de-agent-v1
+children.child-age,Mein Kind ist {} Jahre alt.,,,,2,de-agent-v1
+etiquette.is-service-included,Ist die Bedienung inklusive?,Ist der Service inklusive?,,,2,de-agent-v1
+sim-data.do-you-need-my-passport,Brauchen Sie meinen Pass?,,,,2,de-agent-v1
+children.high-chair,Haben Sie einen Hochstuhl?,,,,2,de-agent-v1
+etiquette.may-i-enter,Darf ich hereinkommen?,,,,2,de-agent-v1
+sim-data.how-long-is-it-valid,Wie lange ist es gültig?,,,,2,de-agent-v1
+children.baby-changing-room,Wo ist der Wickelraum?,,,,2,de-agent-v1
+etiquette.remove-shoes,Soll ich die Schuhe ausziehen?,,,,2,de-agent-v1
+sim-data.please-activate-it,Bitte die SIM-Karte aktivieren.,,,,2,de-agent-v1
+children.childrens-menu,Gibt es eine Kinderkarte?,,,,2,de-agent-v1
+etiquette.photo-of-you,Darf ich Sie fotografieren?,,,,2,de-agent-v1
+sim-data.do-you-have-an-esim,Haben Sie eine eSIM?,,,,2,de-agent-v1
+children.suitable-for-children,Ist das für Kinder geeignet?,,,,2,de-agent-v1
+etiquette.may-i-sit-here,Darf ich hier sitzen?,Ist hier noch frei?,,,2,de-agent-v1
+sim-data.my-data-is-not-working,Meine mobilen Daten gehen nicht.,,,,2,de-agent-v1
+children.minimum-age,Wie ist das Mindestalter?,,,,2,de-agent-v1
+etiquette.queue-for,Ist das die Schlange für {}?,,,,2,de-agent-v1
+sim-data.does-it-need-registration,Muss ich sie registrieren?,,,,2,de-agent-v1
+children.do-children-pay,Zahlen Kinder auch?,,,,2,de-agent-v1
+etiquette.dressed-appropriately,Ist meine Kleidung so in Ordnung?,,,,2,de-agent-v1
+sim-data.i-have-no-signal,Ich habe keinen Empfang.,,,,2,de-agent-v1
+children.crib,Haben Sie ein Kinderbett?,Haben Sie ein Babybett?,,,2,de-agent-v1
+etiquette.did-not-mean-to-offend,Das war nicht böse gemeint.,,,,2,de-agent-v1
+sim-data.please-write-the-wifi-password,Bitte das WLAN-Passwort aufschreiben.,,,,2,de-agent-v1
+children.warm-this-bottle,Bitte das Fläschchen erwärmen.,,,,2,de-agent-v1
+etiquette.what-is-customary,Was ist hier üblich?,,,,2,de-agent-v1
+sim-data.sim-card,SIM-Karte,,,,2,de-agent-v1
+children.car-seat,Wir brauchen einen Kindersitz.,,,,2,de-agent-v1
+etiquette.keep-the-change,Stimmt so.,Behalten Sie das Wechselgeld.,,that's right as it is,2,de-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Wo gibt es einen Reiseadapter?,Wo gibt es einen Steckeradapter?,,,2,de-agent-v1
+children.stroller,Kinderwagen,Buggy,,,2,de-agent-v1
+sim-data.mobile-data,mobile Daten,Datenvolumen,,,2,de-agent-v1
+children.playground,Gibt es einen Spielplatz?,,,,2,de-agent-v1
+sim-data.can-i-top-up-this-sim,Kann ich die SIM aufladen?,,,,2,de-agent-v1
+sim-data.top-up,aufladen,Guthaben aufladen,,,2,de-agent-v1
+sim-data.is-there-coverage-in,Gibt es Empfang in {}?,,,,2,de-agent-v1
+sim-data.signal,Empfang,Netz,,,2,de-agent-v1
+sim-data.esim,eSIM,,,,2,de-agent-v1
+sim-data.prepaid,Prepaid,,,,2,de-agent-v1
+sim-data.roaming,Roaming,,,,2,de-agent-v1
+social-basics.hello,Hallo,Grüß Gott,,,2,de-agent-v1
+social-basics.hello-polite,Guten Tag,Grüß Gott,,,2,de-agent-v1
+social-basics.good-morning,Guten Morgen,,,,2,de-agent-v1
+social-basics.good-evening,Guten Abend,,,,2,de-agent-v1
+social-basics.goodbye,Auf Wiedersehen,Tschüss,,,2,de-agent-v1
+social-basics.thank-you,Danke,Danke schön,,,2,de-agent-v1
+social-basics.you-are-welcome,Bitte,Gern,,,2,de-agent-v1
+social-basics.excuse-me-sorry,Entschuldigung,,,,2,de-agent-v1
+social-basics.sorry,Tut mir leid,Verzeihung,,,2,de-agent-v1
+social-basics.no-problem,Kein Problem,,,,2,de-agent-v1
+social-basics.i-do-not-know,Ich weiß nicht.,,,,2,de-agent-v1
+social-basics.good-night,Gute Nacht,,,,2,de-agent-v1
+social-basics.okay-fine-i-am-okay,Alles gut.,In Ordnung,,,2,de-agent-v1
+communication.i-do-not-speak-this-language,Ich spreche kein Deutsch.,,,,2,de-agent-v1
+communication.i-speak-only-a-little-of-this,Ich spreche nur ein wenig Deutsch.,,,,2,de-agent-v1
+communication.do-you-speak-english,Sprechen Sie Englisch?,,,,2,de-agent-v1
+communication.please-speak-more-slowly,Sprechen Sie bitte langsamer.,,,,2,de-agent-v1
+communication.i-do-not-understand-spoken,Verstehe ich nicht.,,,,2,de-agent-v1
+communication.i-cannot-read-understand,Ich kann das nicht lesen.,,,,2,de-agent-v1
+communication.please-say-it-again,Bitte noch einmal.,Wie bitte?,,,2,de-agent-v1
+communication.please-write-it-down,Bitte schreiben Sie es auf.,,,,2,de-agent-v1
+communication.please-wait-a-moment,"Einen Moment, bitte.",,,,2,de-agent-v1
+communication.can-you-help-me,Können Sie mir helfen?,,,,2,de-agent-v1
+communication.please-show-me-the-text,Zeigen Sie mir bitte den deutschen Text.,,,,2,de-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Ich verstehe Sie akustisch nicht.,,,,2,de-agent-v1
+communication.i-do-not-understand,Ich verstehe nicht.,,,,2,de-agent-v1
+communication.i-cannot-read-it,Ich kann es nicht lesen.,,,,2,de-agent-v1
+communication.please-write-it-in-roman-letters,Bitte in Druckbuchstaben schreiben.,Bitte in lateinischen Buchstaben schreiben.,,,2,de-agent-v1
+quick-responses.please-go-ahead,bitte,bitte sehr,,,2,de-agent-v1
+quick-responses.yes-right,ja / richtig,,,,2,de-agent-v1
+quick-responses.no-not,nein / nicht,,,,2,de-agent-v1
+quick-responses.okay-can,okay / geht,,,,2,de-agent-v1
+quick-responses.cannot-not-allowed,geht nicht / verboten,,,,2,de-agent-v1
+quick-responses.works-okay,passt / geht,,,,2,de-agent-v1
+quick-responses.does-not-work-no,funktioniert nicht / nein,,,,2,de-agent-v1
+quick-responses.can-possible,kann / möglich,,,,2,de-agent-v1
+quick-responses.cannot-not-possible,kann nicht / unmöglich,,,,2,de-agent-v1
+quick-responses.okay-fine,in Ordnung,,,,2,de-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,nicht gut / nicht erlaubt,,,,2,de-agent-v1
+phone-translation.i-am-using-phone-translation,Ich übersetze mit dem Handy.,,,,2,de-agent-v1
+phone-translation.please-speak-toward-the-phone,Bitte sprechen Sie ins Handy.,,,,2,de-agent-v1
+phone-translation.one-sentence-at-a-time-please,Bitte einen Satz nach dem anderen.,,,,2,de-agent-v1
+phone-translation.please-type-it-and-show-me,Bitte tippen und zeigen.,,,,2,de-agent-v1
+phone-translation.please-look-at-the-screen,Bitte schauen Sie auf den Bildschirm.,Bitte aufs Display schauen.,,,2,de-agent-v1
+phone-text-power.please-type-it-for-me,Bitte tippen Sie es ein.,,,,2,de-agent-v1
+phone-translation.please-write-the-place-name,Bitte den Ortsnamen auf Deutsch schreiben.,,,,2,de-agent-v1
+phone-text-power.please-use-simple-words,Bitte einfache Wörter benutzen.,,,,2,de-agent-v1
+phone-text-power.my-phone-battery-is-low,Mein Akku ist fast leer.,,,,2,de-agent-v1
+phone-text-power.do-you-have-a-power-bank,Haben Sie eine Powerbank?,,,,2,de-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,Die Übersetzung kann falsch sein.,,,,2,de-agent-v1
+phone-text-power.please-confirm,Bitte bestätigen Sie.,,,,2,de-agent-v1
+phone-text-power.may-i-charge-my-phone-here,Darf ich hier mein Handy laden?,,,,2,de-agent-v1

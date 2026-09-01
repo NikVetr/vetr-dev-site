@@ -1,0 +1,66 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+weather.forecast,Wie ist die Wettervorhersage?,,,,2,de-agent-v1
+weather.will-it-rain,Regnet es heute?,Wird es heute regnen?,,,2,de-agent-v1
+weather.is-it-safe-today,Ist es heute sicher?,,,,2,de-agent-v1
+weather.how-cold-at-night,Wie kalt wird es nachts?,,,,2,de-agent-v1
+weather.rain,Regen,,,,2,de-agent-v1
+weather.snow,Schnee,,,,2,de-agent-v1
+weather.wind,Wind,,,,2,de-agent-v1
+weather.storm,Sturm,Gewitter,,,2,de-agent-v1
+weather.ice,Glatteis,Eisglätte,,,2,de-agent-v1
+weather.fog,Nebel,,,,2,de-agent-v1
+weather.heat,Hitze,heiß,,,2,de-agent-v1
+weather.cold,Kälte,kalt,,,2,de-agent-v1
+weather.humid,feucht,schwül,,,2,de-agent-v1
+weather.sunrise,Sonnenaufgang,,,,2,de-agent-v1
+weather.flood,Hochwasser,Überschwemmung,,,2,de-agent-v1
+weather.avalanche-risk,Lawinengefahr,,,,2,de-agent-v1
+trail-words.trail,Wanderweg,Weg,,,2,de-agent-v1
+trail-words.trailhead,Ausgangspunkt,Wanderparkplatz,,,2,de-agent-v1
+trail-words.summit,Gipfel,,,,2,de-agent-v1
+trail-words.viewpoint,Aussichtspunkt,,,,2,de-agent-v1
+trail-words.cableway,Seilbahn,,,,2,de-agent-v1
+trail-words.shuttle-bus,Shuttlebus,Pendelbus,,,2,de-agent-v1
+trail-words.park-shuttle,Wanderbus,Nationalparkbus,,,2,de-agent-v1
+trail-words.steps,Stufen,,,,2,de-agent-v1
+trail-words.up-uphill,hinauf / bergauf,,,,2,de-agent-v1
+trail-words.down-downhill,hinunter / bergab,,,,2,de-agent-v1
+trail-words.one-way,einfache Strecke,eine Richtung,,,2,de-agent-v1
+trail-words.round-trip,hin und zurück,Rundweg,,,2,de-agent-v1
+hiking-parks.is-this-the-way-to,Ist das der Weg nach {}?,,,,2,de-agent-v1
+hiking-parks.where-is-the-trailhead,Wo ist der Ausgangspunkt?,,,,2,de-agent-v1
+hiking-parks.how-long-to-the-summit,Wie lange bis zum Gipfel?,,,,2,de-agent-v1
+hiking-parks.how-long-to-the-viewpoint,Wie lange bis zum Aussichtspunkt?,,,,2,de-agent-v1
+hiking-parks.which-route-is-easier,Welcher Weg ist leichter?,,,,2,de-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,Ist der Weg für Anfänger geeignet?,,,,2,de-agent-v1
+trail-conditions.how-long-is-the-full-route,Wie lang ist die ganze Strecke?,,,,2,de-agent-v1
+trail-conditions.can-we-return-the-same-way,Können wir denselben Weg zurück?,,,,2,de-agent-v1
+trail-conditions.can-we-return-before-dark,Kommen wir vor Dunkelheit zurück?,,,,2,de-agent-v1
+trail-conditions.is-the-trail-open,Ist der Weg offen?,,,,2,de-agent-v1
+trail-conditions.is-the-route-steep,Ist die Strecke steil?,,,,2,de-agent-v1
+trail-conditions.is-the-path-slippery,Ist der Weg rutschig?,,,,2,de-agent-v1
+trail-transport.how-long-is-the-queue,Wie lang ist die Schlange?,,,,2,de-agent-v1
+trail-transport.what-time-is-the-last-shuttle,Wann fährt der letzte Shuttle?,,,,2,de-agent-v1
+trail-transport.when-does-the-cableway-stop,Wann fährt die letzte Seilbahn?,,,,2,de-agent-v1
+trail-transport.where-can-we-buy-water,Wo können wir Wasser kaufen?,,,,2,de-agent-v1
+trail-transport.where-can-we-refill-water,Wo können wir Wasser auffüllen?,,,,2,de-agent-v1
+trail-transport.is-there-cell-signal-here,Gibt es hier Handyempfang?,,,,2,de-agent-v1
+trail-transport.do-you-have-a-map,Haben Sie eine Karte?,,,,2,de-agent-v1
+trail-transport.how-long-is-the-wait,Wie lange muss man warten?,,,,2,de-agent-v1
+trail-warnings.open,geöffnet,,,,2,de-agent-v1
+trail-warnings.closed,gesperrt,geschlossen,,,2,de-agent-v1
+trail-warnings.maintenance,Wartung,Wartungsarbeiten,,,2,de-agent-v1
+trail-warnings.steep-slope,Steilhang,steiler Hang,,,2,de-agent-v1
+trail-warnings.caution-slippery,"Achtung, Rutschgefahr",,,,2,de-agent-v1
+trail-warnings.danger,Gefahr,,,,2,de-agent-v1
+trail-warnings.beware-falling-rocks,Achtung Steinschlag,,,,2,de-agent-v1
+trail-warnings.first-aid-station,Erste-Hilfe-Station,Sanitätsstation,,,2,de-agent-v1
+trail-warnings.service-suspended,Betrieb eingestellt,außer Betrieb,,,2,de-agent-v1
+trail-landmarks.trail-marker,Wegmarkierung,,,,2,de-agent-v1
+trail-landmarks.fork-junction,Abzweigung,Wegkreuzung,,,2,de-agent-v1
+trail-landmarks.boardwalk-cliff-path,Bohlenweg / Felsenpfad,,,,1,de-agent-v1
+trail-landmarks.start,Start,Anfang,,,2,de-agent-v1
+trail-landmarks.end,Ende,Ziel,,,2,de-agent-v1
+trail-landmarks.elevation,Höhe,Höhenmeter,,,2,de-agent-v1
+trail-landmarks.sunset,Sonnenuntergang,,,,2,de-agent-v1
+trail-landmarks.water-point,Trinkwasserstelle,Trinkbrunnen,,,2,de-agent-v1

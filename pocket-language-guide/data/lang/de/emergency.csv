@@ -1,0 +1,138 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+medical-conditions.i-am-diabetic,Ich habe Diabetes.,Ich bin Diabetiker/-in.,,,2,de-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,Welche Apotheke hat jetzt offen?,Welche Apotheke hat Notdienst?,,,2,de-agent-v1
+police-consulate.where-is-the-police-station,Wo ist die Polizeiwache?,Wo ist der Polizeiposten?,,,2,de-agent-v1
+body-parts.head,Kopf,,,,2,de-agent-v1
+medical-conditions.i-need-insulin,Ich brauche Insulin.,,,,2,de-agent-v1
+pharmacy-symptoms.i-need-medicine-for,Ich brauche ein Medikament gegen {}.,,,,2,de-agent-v1
+police-consulate.i-want-to-report-a-theft,Ich möchte einen Diebstahl anzeigen.,,,,2,de-agent-v1
+body-parts.stomach,Bauch,,,,2,de-agent-v1
+medical-conditions.i-have-asthma,Ich habe Asthma.,,,,2,de-agent-v1
+pharmacy-symptoms.i-have-a-fever,Ich habe Fieber.,,,,2,de-agent-v1
+police-consulate.my-bag-was-stolen,Meine Tasche wurde gestohlen.,,,,2,de-agent-v1
+body-parts.back,Rücken,,,,2,de-agent-v1
+medical-conditions.i-have-a-heart-condition,Ich habe eine Herzerkrankung.,Ich bin herzkrank.,,,2,de-agent-v1
+pharmacy-symptoms.i-have-diarrhea,Ich habe Durchfall.,,,,2,de-agent-v1
+police-consulate.my-passport-was-stolen,Mein Pass wurde gestohlen.,,,,2,de-agent-v1
+body-parts.throat,Hals,,,,2,de-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,Ich bin allergisch gegen Penicillin.,,,,2,de-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Wo ist die Notdienstapotheke?,Wo ist die diensthabende Apotheke?,,,2,de-agent-v1
+police-consulate.someone-is-following-me,Jemand folgt mir.,,,,2,de-agent-v1
+body-parts.tooth,Zahn,,,,2,de-agent-v1
+medical-conditions.i-have-epilepsy,Ich habe Epilepsie.,,,,2,de-agent-v1
+pharmacy-symptoms.painkiller,Schmerzmittel,,,,2,de-agent-v1
+police-consulate.i-need-a-written-police-report,Ich brauche eine schriftliche Anzeige.,Ich brauche einen Polizeibericht.,,,2,de-agent-v1
+body-parts.chest,Brust,,,,2,de-agent-v1
+medical-conditions.my-blood-sugar-is-low,Mein Blutzucker ist zu niedrig.,,,,2,de-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,Brauche ich ein Rezept?,,,,2,de-agent-v1
+police-consulate.i-want-to-contact-my-embassy,Ich möchte meine Botschaft kontaktieren.,,,,2,de-agent-v1
+body-parts.eye,Auge,,,,2,de-agent-v1
+medical-conditions.i-need-my-inhaler,Ich brauche mein Asthmaspray.,Ich brauche meinen Inhalator.,,,2,de-agent-v1
+pharmacy-symptoms.i-have-a-headache,Ich habe Kopfschmerzen.,,,,2,de-agent-v1
+police-consulate.i-need-it-for-my-insurance,Ich brauche es für meine Versicherung.,,,,2,de-agent-v1
+body-parts.ear,Ohr,,,,2,de-agent-v1
+medical-conditions.i-am-pregnant,Ich bin schwanger.,,,,2,de-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,Paracetamol,,,,2,de-agent-v1
+police-consulate.i-need-an-interpreter,Ich brauche einen Dolmetscher.,,,,2,de-agent-v1
+body-parts.leg,Bein,,,,2,de-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,Ich habe einen Adrenalin-Autoinjektor.,Ich habe einen Adrenalin-Pen.,,,2,de-agent-v1
+pharmacy-symptoms.how-much-should-i-take,Wie viel soll ich nehmen?,,,,2,de-agent-v1
+police-consulate.please-leave-me-alone,Lassen Sie mich bitte in Ruhe.,,,,2,de-agent-v1
+body-parts.arm,Arm,,,,2,de-agent-v1
+medical-conditions.i-take-medicine-for,Ich nehme Medikamente gegen {}.,,,,2,de-agent-v1
+pharmacy-symptoms.i-am-vomiting,Ich erbreche mich.,Ich muss mich übergeben.,,,2,de-agent-v1
+police-consulate.i-was-robbed,Ich wurde beraubt.,,,,2,de-agent-v1
+body-parts.foot,Fuß,,,,2,de-agent-v1
+medical-conditions.i-take-blood-thinners,Ich nehme Blutverdünner.,Ich nehme Gerinnungshemmer.,,,2,de-agent-v1
+pharmacy-symptoms.rehydration-salts,Elektrolytpulver,Elektrolytlösung,,,2,de-agent-v1
+police-consulate.i-want-a-lawyer,Ich möchte einen Anwalt.,,,,2,de-agent-v1
+body-parts.hand,Hand,,,,2,de-agent-v1
+medical-conditions.medicine-allergy,Medikamentenallergie: {},,,,2,de-agent-v1
+pharmacy-symptoms.how-many-times-a-day,Wie oft am Tag?,,,,2,de-agent-v1
+police-consulate.please-notify-my-consulate,Bitte informieren Sie mein Konsulat.,,,,2,de-agent-v1
+body-parts.knee,Knie,,,,2,de-agent-v1
+medical-conditions.this-card-lists-my-conditions,Diese Karte nennt meine Krankheiten.,,,,2,de-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,Ich habe Bauchschmerzen.,,,,2,de-agent-v1
+police-consulate.i-am-calling-the-police,Ich rufe die Polizei.,,,,2,de-agent-v1
+body-parts.ankle,Knöchel,Fußgelenk,,,2,de-agent-v1
+medical-conditions.this-is-my-medicine,Das ist mein Medikament.,,,,2,de-agent-v1
+pharmacy-symptoms.i-have-a-cough,Ich habe Husten.,,,,2,de-agent-v1
+police-consulate.am-i-under-arrest,Bin ich verhaftet?,Werde ich festgenommen?,,,2,de-agent-v1
+body-parts.skin,Haut,,,,2,de-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,Bitte geben Sie mir Zucker oder Saft.,,,,2,de-agent-v1
+pharmacy-symptoms.antihistamine,Antihistaminikum,Antiallergikum,,,2,de-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,"Nein danke, kein Interesse.",,,,2,de-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,Bitte in den äußeren Oberschenkel spritzen.,,,,2,de-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,Mittel gegen Durchfall,Loperamid,,,2,de-agent-v1
+police-consulate.someone-attacked-me,Ich wurde angegriffen.,,,,2,de-agent-v1
+medical-conditions.my-blood-type-is,Meine Blutgruppe ist {}.,,,,2,de-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,Kann ich das zusammen mit {} nehmen?,,,,2,de-agent-v1
+police-consulate.i-did-not-agree-to-this-price,Diesen Preis habe ich nicht vereinbart.,,,,2,de-agent-v1
+medical-conditions.do-not-give-me,Bitte geben Sie mir kein {}.,,,,2,de-agent-v1
+pharmacy-symptoms.i-feel-dizzy,Mir ist schwindelig.,,,,2,de-agent-v1
+police-consulate.please-write-the-report-number,Bitte notieren Sie das Aktenzeichen.,,,,2,de-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Ich bin allergisch gegen Aspirin und Ibuprofen.,,,,2,de-agent-v1
+pharmacy-symptoms.ibuprofen,Ibuprofen,,,,2,de-agent-v1
+police-consulate.it-happened-here,Es ist hier passiert.,,,,2,de-agent-v1
+medical-conditions.my-injector-is-in-my-bag,Mein Autoinjektor ist in meiner Tasche.,,,,2,de-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,Ich habe Halsschmerzen.,,,,2,de-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,Bekomme ich eine Kopie der Anzeige?,,,,2,de-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,Ich bin allergisch gegen Sulfonamide.,,,,2,de-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,Bekomme ich dieses Medikament hier?,,,,2,de-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,"Ich unterschreibe nichts, was ich nicht lesen kann.",,,,2,de-agent-v1
+pharmacy-symptoms.bandage,Verband,Pflaster,,,2,de-agent-v1
+police-consulate.am-i-free-to-go,Darf ich gehen?,,,,2,de-agent-v1
+pharmacy-symptoms.the-pain-is-severe,Die Schmerzen sind stark.,,,,2,de-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,Ich möchte nicht mitkommen.,,,,2,de-agent-v1
+pharmacy-symptoms.antiseptic,Wunddesinfektion,Antiseptikum,,,2,de-agent-v1
+pharmacy-symptoms.i-feel-nauseous,Mir ist übel.,,,,2,de-agent-v1
+pharmacy-symptoms.i-have-a-rash,Ich habe Hautausschlag.,,,,2,de-agent-v1
+pharmacy-symptoms.before-or-after-food,Vor oder nach dem Essen?,,,,2,de-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,"Ich glaube, es ist infiziert.",Es ist entzündet.,,,2,de-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,Reisetabletten,Mittel gegen Reisekrankheit,,,2,de-agent-v1
+pharmacy-symptoms.i-have-a-cut,Ich habe eine Schnittwunde.,,,,2,de-agent-v1
+pharmacy-symptoms.antacid,Antazidum,Mittel gegen Sodbrennen,,,2,de-agent-v1
+pharmacy-symptoms.i-have-a-burn,Ich habe eine Verbrennung.,,,,2,de-agent-v1
+pharmacy-symptoms.it-started-days-ago,Es hat vor {} Tagen angefangen.,,,,2,de-agent-v1
+pharmacy-symptoms.cough-medicine,Hustensaft,Hustenmittel,,,2,de-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,Ist das in der Schwangerschaft sicher?,,,,2,de-agent-v1
+emergency-medical.help,Hilfe!,,,,2,de-agent-v1
+emergency-medical.please-call-an-ambulance,Rufen Sie bitte einen Rettungswagen!,Rufen Sie bitte den Notarzt!,,,2,de-agent-v1
+emergency-medical.i-need-a-doctor,Ich brauche einen Arzt.,,,,2,de-agent-v1
+emergency-medical.i-am-sick,Ich bin krank.,,,,2,de-agent-v1
+emergency-medical.i-am-injured,Ich bin verletzt.,,,,2,de-agent-v1
+emergency-medical.it-hurts-here,Hier tut es weh.,,,,2,de-agent-v1
+emergency-medical.where-is-a-pharmacy,Wo ist eine Apotheke?,,,,2,de-agent-v1
+emergency-medical.please-take-me-to-a-hospital,Bringen Sie mich bitte ins Krankenhaus.,Bringen Sie mich bitte ins Spital.,,,2,de-agent-v1
+emergency-medical.i-feel-unwell,Mir ist nicht gut.,Ich fühle mich unwohl.,,,2,de-agent-v1
+emergency-medical.this-is-an-emergency,Das ist ein Notfall.,,,,2,de-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,Ich habe einen anaphylaktischen Schock.,Anaphylaxie! Schwere allergische Reaktion.,,,2,de-agent-v1
+emergency-medical.i-cannot-breathe,Ich kann nicht atmen.,,,,2,de-agent-v1
+emergency-medical.i-am-bleeding-badly,Ich blute stark.,,,,2,de-agent-v1
+emergency-medical.i-have-chest-pain,Ich habe Brustschmerzen.,,,,2,de-agent-v1
+emergency-medical.this-person-is-unconscious,Die Person ist bewusstlos.,,,,2,de-agent-v1
+emergency-medical.where-is-the-nearest-hospital,Wo ist das nächste Krankenhaus?,,,,2,de-agent-v1
+emergency-medical.what-is-the-emergency-number,Wie lautet die Notrufnummer?,,,,2,de-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,"Gibt es einen Arzt, der Englisch spricht?",,,,2,de-agent-v1
+emergency-medical.i-think-a-bone-is-broken,"Ich glaube, etwas ist gebrochen.",,,,2,de-agent-v1
+emergency-medical.please-call-my-emergency-contact,Bitte rufen Sie meinen Notfallkontakt an.,,,,2,de-agent-v1
+emergency-medical.i-have-travel-insurance,Ich habe eine Reiseversicherung.,,,,2,de-agent-v1
+lost-rescue.i-lost-my-passport,Ich habe meinen Pass verloren.,,,,2,de-agent-v1
+lost-rescue.i-lost-my-phone,Ich habe mein Handy verloren.,,,,2,de-agent-v1
+lost-rescue.please-call-the-police,Rufen Sie bitte die Polizei!,,,,2,de-agent-v1
+lost-rescue.we-are-here,Wir sind hier.,,,,2,de-agent-v1
+lost-rescue.please-look-at-my-location-pin,Bitte schauen Sie auf diesen Standort.,,,,2,de-agent-v1
+lost-rescue.i-cannot-walk,Ich kann nicht gehen.,,,,2,de-agent-v1
+lost-rescue.i-sprained-my-ankle,Ich habe mir den Knöchel verstaucht.,,,,2,de-agent-v1
+lost-rescue.please-contact-rescue,Rufen Sie bitte die Bergrettung!,Rufen Sie bitte die Bergwacht!,,,2,de-agent-v1
+lost-rescue.my-companion-is-missing,Meine Begleitung wird vermisst.,,,,2,de-agent-v1
+lost-rescue.please-look-at-my-current-location,Bitte schauen Sie auf meinen Standort.,,,,2,de-agent-v1
+lost-rescue.my-child-is-missing,Mein Kind wird vermisst.,,,,2,de-agent-v1
+lost-rescue.i-do-not-know-where-i-am,"Ich weiß nicht, wo ich bin.",,,,2,de-agent-v1
+lost-rescue.my-friend-is-hurt,Mein Freund ist verletzt.,,,,2,de-agent-v1
+lost-rescue.i-lost-my-wallet,Ich habe meine Geldbörse verloren.,Ich habe mein Portemonnaie verloren.,,,2,de-agent-v1
+lost-rescue.i-lost-my-bag,Ich habe meine Tasche verloren.,,,,2,de-agent-v1
+lost-rescue.where-is-lost-and-found,Wo ist das Fundbüro?,,,,2,de-agent-v1
+lost-rescue.i-cannot-find-my-hotel,Ich finde mein Hotel nicht.,,,,2,de-agent-v1
+lost-rescue.i-left-it-on-the-train,Ich habe es im Zug liegen lassen.,,,,2,de-agent-v1
+lost-rescue.i-cannot-get-down,Ich komme nicht mehr herunter.,,,,2,de-agent-v1

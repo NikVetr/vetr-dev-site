@@ -1,0 +1,26 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+dietary-needs.no-meat,بدون لحم أو دجاج أو سمك,,bidūn laḥm aw dajāj aw samak,,no meat or chicken or fish,2,ar-agent-v1
+dietary-needs.no-eggs,بدون بيض,,bidūn bayḍ,,,2,ar-agent-v1
+dietary-needs.not-spicy,غير حار,بدون شطة,ghayr ḥārr,,,2,ar-agent-v1
+dietary-needs.less-spicy,حار قليلاً,شطة قليلة,ḥārr qalīlan,,only slightly spicy,2,ar-agent-v1
+dietary-needs.no-peanuts,بدون فول سوداني,,bidūn fūl sūdānī,,,2,ar-agent-v1
+dietary-needs.no-nuts,بدون مكسرات,,bidūn mukassarāt,,,2,ar-agent-v1
+dietary-needs.no-seafood,بدون أسماك أو قشريات,بدون مأكولات بحرية,bidūn asmāk aw qishrīyāt,,no fish or crustaceans,2,ar-agent-v1
+dietary-needs.i-am-vegetarian,أنا نباتي,بدون لحم أو دجاج أو سمك,anā nabātī,,,2,ar-agent-v1
+dietary-needs.i-am-vegan,أنا نباتي صرف,فيغان,anā nabātī ṣirf,,,2,ar-agent-v1
+dietary-needs.i-do-not-eat,لا آكل {},ممنوع عليّ {},lā ākul {},,,2,ar-agent-v1
+dietary-needs.i-am-allergic-to,عندي حساسية من {},لديّ حساسية من {},ʿindī ḥasāsīyah min {},,,2,ar-agent-v1
+dietary-needs.does-it-contain-fish-stock,هل يحتوي على مرق سمك؟,,hal yaḥtawī ʿalá maraq samak?,,,2,ar-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,عندي حساسية شديدة من {},حساسيتي من {} تهدد حياتي,ʿindī ḥasāsīyah shadīdah min {},,,2,ar-agent-v1
+food-ordering.table-for-two,طاولة لشخصين,,ṭāwilah li-shakhṣayn,,,2,ar-agent-v1
+food-ordering.is-a-table-available,هل توجد طاولة فارغة؟,,hal tūjad ṭāwilah fārighah?,,,2,ar-agent-v1
+food-ordering.menu-please,القائمة من فضلك,المنيو من فضلك,al-qāʾimah min faḍlak,,,2,ar-agent-v1
+food-ordering.i-want-this,أريد هذا,,urīd hādhā,,,2,ar-agent-v1
+food-ordering.do-you-have-drinking-water,هل لديكم ماء للشرب؟,مياه معدنية,hal ladaykum māʾ lil-shurb?,,,2,ar-agent-v1
+food-ordering.to-go-please,سفري من فضلك,تيك أواي,safarī min faḍlak,,takeaway,2,ar-agent-v1
+food-ordering.check-please,الحساب من فضلك,,al-ḥisāb min faḍlak,,,2,ar-agent-v1
+food-ordering.does-it-contain,هل يحتوي على {}؟,,hal yaḥtawī ʿalá {}?,,,2,ar-agent-v1
+food-ordering.is-this-vegetarian,هل هذا نباتي؟,,hal hādhā nabātī?,,,2,ar-agent-v1
+food-ordering.what-do-you-recommend,بماذا تنصح؟,,bi-mādhā tanṣaḥ?,,,2,ar-agent-v1
+food-ordering.water-please,ماء من فضلك,,māʾ min faḍlak,,,2,ar-agent-v1
+food-ordering.can-a-vegetarian-eat-this,هل يصلح هذا للنباتيين؟,,hal yaṣluḥ hādhā lil-nabātīyīn?,,,2,ar-agent-v1

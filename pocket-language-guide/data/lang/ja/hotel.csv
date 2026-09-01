@@ -1,24 +1,53 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
 hotel-basics.are-any-rooms-available,空室はありますか？,,kūshitsu wa arimasu ka?,,,2,japanese-reviewed-v6
-hotel-basics.there-are-two-of-us,二人です,,futari desu,,,2,japanese-reviewed-v6
-hotel-basics.i-have-a-reservation,予約しています,,yoyaku shiteimasu,,,2,japanese-reviewed-v6
-hotel-basics.is-wi-fi-free,Wi-Fiは無料ですか？,,wai-fai wa muryō desu ka?,,,2,japanese-reviewed-v6
 hotel-words.passport,パスポート,,pasupōto,,,2,japanese-reviewed-v6
-hotel-words.room-key-card,ルームキー,,rūmu kī,,,2,japanese-reviewed-v6
-hotel-words.check-in,チェックイン,,chekkuin,,,2,japanese-reviewed-v6
-hotel-words.check-out,チェックアウト,,chekkuauto,,,2,japanese-reviewed-v6
-hotel-words.luggage-storage,荷物預かり,,nimotsu azukari,,,2,japanese-reviewed-v6
 room-problems.there-is-a-problem-with-the-room,部屋に問題があります,,heya ni mondai ga arimasu,,,2,japanese-reviewed-v6
-room-problems.the-air-conditioning-is-broken,エアコンが壊れています,,eakon ga kowareteimasu,,,2,japanese-reviewed-v6
-room-problems.there-is-no-hot-water,お湯が出ません,,oyu ga demasen,,,2,japanese-reviewed-v6
-room-problems.can-i-change-rooms,部屋を変えられますか？,,heya o kaeraremasu ka?,,,2,japanese-reviewed-v6
-room-problems.the-room-is-too-noisy,部屋がうるさすぎます,,heya ga urusasugimasu,,,2,japanese-reviewed-v6
-hotel-basics.can-i-charge-my-phone,スマホを充電できますか？,,sumaho o jūden dekimasu ka?,,,2,japanese-reviewed-v6
-hotel-basics.i-would-like-a-non-smoking-room,禁煙室をお願いします,,kin'enshitsu o onegaishimasu,,,2,japanese-reviewed-v6
-hotel-basics.i-would-like-a-quiet-room,静かな部屋をお願いします,,shizuka na heya o onegaishimasu,,,2,japanese-reviewed-v6
-hotel-requests.another-towel-please,タオルをもう一枚お願いします,,taoru o mō ichimai onegaishimasu,,,2,japanese-reviewed-v6
-hotel-basics.is-there-a-washing-machine,洗濯機はありますか？,,sentakuki wa arimasu ka?,,,2,japanese-reviewed-v6
 hotel-requests.can-i-check-out-later,レイトチェックアウトできますか？,,reito chekkuauto dekimasu ka?,,,2,japanese-reviewed-v6
+laundry.please-wash-these-clothes,この服を洗ってください,,kono fuku o aratte kudasai,,,2,ja-agent-v1
+hotel-basics.there-are-two-of-us,二人です,,futari desu,,,2,japanese-reviewed-v6
+hotel-words.room-key-card,ルームキー,,rūmu kī,,,2,japanese-reviewed-v6
+room-problems.the-air-conditioning-is-broken,エアコンが壊れています,,eakon ga kowareteimasu,,,2,japanese-reviewed-v6
 hotel-requests.what-time-does-breakfast-start,朝食は何時からですか？,,chōshoku wa nanji kara desu ka?,,,2,japanese-reviewed-v6
+laundry.where-is-a-laundromat,コインランドリーはどこですか？,,koin randorī wa doko desu ka?,,,2,ja-agent-v1
+hotel-basics.i-have-a-reservation,予約しています,,yoyaku shiteimasu,,,2,japanese-reviewed-v6
+hotel-words.check-in,チェックイン,,chekkuin,,,2,japanese-reviewed-v6
+room-problems.there-is-no-hot-water,お湯が出ません,,oyu ga demasen,,,2,japanese-reviewed-v6
 hotel-requests.can-i-store-my-luggage,荷物を預けられますか？,,nimotsu o azukeraremasu ka?,,,2,japanese-reviewed-v6
+laundry.when-will-it-be-ready,いつできますか？,,itsu dekimasu ka?,,,2,ja-agent-v1
+hotel-words.check-out,チェックアウト,,chekkuauto,,,2,japanese-reviewed-v6
+room-problems.can-i-change-rooms,部屋を変えられますか？,,heya o kaeraremasu ka?,,,2,japanese-reviewed-v6
+hotel-basics.can-i-charge-my-phone,スマホを充電できますか？,,sumaho o jūden dekimasu ka?,,,2,japanese-reviewed-v6
 hotel-requests.no-housekeeping,掃除は不要です,,sōji wa fuyō desu,,,2,japanese-reviewed-v6
+laundry.how-much-per-kilo,一キロいくらですか？,,ichikiro ikura desu ka?,,,2,ja-agent-v1
+room-problems.the-room-is-too-noisy,部屋がうるさすぎます,,heya ga urusasugimasu,,,2,japanese-reviewed-v6
+hotel-basics.i-would-like-a-non-smoking-room,禁煙室をお願いします,,kin'enshitsu o onegaishimasu,,,2,japanese-reviewed-v6
+laundry.can-it-be-ready-today,今日できますか？,,kyō dekimasu ka?,,,2,ja-agent-v1
+hotel-basics.i-would-like-a-quiet-room,静かな部屋をお願いします,,shizuka na heya o onegaishimasu,,,2,japanese-reviewed-v6
+laundry.please-do-not-use-bleach,漂白剤は使わないでください,,hyōhakuzai wa tsukawanaide kudasai,,,2,ja-agent-v1
+room-problems.the-key-does-not-work,鍵が開きません,,kagi ga akimasen,,,2,ja-agent-v1
+hotel-basics.is-there-a-washing-machine,洗濯機はありますか？,,sentakuki wa arimasu ka?,,,2,japanese-reviewed-v6
+laundry.laundromat,コインランドリー,,koin randorī,,,2,ja-agent-v1
+room-problems.the-toilet-will-not-flush,トイレの水が流れません,,toire no mizu ga nagaremasen,,,2,ja-agent-v1
+laundry.please-iron-this,アイロンをかけてください,,airon o kakete kudasai,,,2,ja-agent-v1
+room-problems.the-light-does-not-work,電気が付きません,,denki ga tsukimasen,,,2,ja-agent-v1
+laundry.detergent,洗剤,,senzai,,,2,ja-agent-v1
+room-problems.please-send-someone,直しに来てもらえますか？,,naoshi ni kite moraemasu ka?,,,2,ja-agent-v1
+laundry.dry-cleaning,ドライクリーニング,,dorai kurīningu,,,2,ja-agent-v1
+room-problems.the-heating-does-not-work,暖房が効きません,,danbō ga kikimasen,,,2,ja-agent-v1
+laundry.dryer,乾燥機,,kansōki,,,2,ja-agent-v1
+laundry.coin-operated,コイン式,,koinshiki,,,2,ja-agent-v1
+hotel-basics.is-wi-fi-free,Wi-Fiは無料ですか？,,wai-fai wa muryō desu ka?,,,2,japanese-reviewed-v6
+hotel-requests.another-towel-please,タオルをもう一枚お願いします,,taoru o mō ichimai onegaishimasu,,,2,japanese-reviewed-v6
+hotel-words.luggage-storage,荷物預かり,,nimotsu azukari,,,2,japanese-reviewed-v6
+hotel-basics.how-much-per-night,一泊いくらですか？,,ippaku ikura desu ka?,,,2,ja-agent-v1
+hotel-requests.what-time-is-check-out,チェックアウトは何時ですか？,,chekkuauto wa nanji desu ka?,,,2,ja-agent-v1
+hotel-basics.is-breakfast-included,朝食は付いていますか？,,chōshoku wa tsuiteimasu ka?,,,2,ja-agent-v1
+hotel-requests.can-i-check-in-early,アーリーチェックインできますか？,,ārī chekkuin dekimasu ka?,,,2,ja-agent-v1
+hotel-basics.may-i-see-the-room,部屋を見せてもらえますか？,,heya o misete moraemasu ka?,,,2,ja-agent-v1
+hotel-requests.another-night,もう一泊できますか？,,mō ippaku dekimasu ka?,,,2,ja-agent-v1
+hotel-basics.for-nights,{}泊お願いします,,{} haku onegaishimasu,,,2,ja-agent-v1
+hotel-requests.is-there-a-safe,金庫はありますか？,,kinko wa arimasu ka?,,,2,ja-agent-v1
+hotel-basics.two-beds,ツインルームをお願いします,,tsuin rūmu o onegaishimasu,,,2,ja-agent-v1
+hotel-requests.another-blanket,毛布をもう一枚お願いします,,mōfu o mō ichimai onegaishimasu,,,2,ja-agent-v1
+hotel-basics.is-there-air-conditioning,エアコンはありますか？,,eakon wa arimasu ka?,,,2,ja-agent-v1
+hotel-requests.wake-up-call,{}に起こしてください,,{} ni okoshite kudasai,,,2,ja-agent-v1

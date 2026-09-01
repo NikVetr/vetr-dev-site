@@ -1,0 +1,100 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+sim-data.i-would-like-a-tourist-sim,أريد شريحة للسياح,,urīd sharīḥah lil-suyyāḥ,,,2,ar-agent-v1
+children.cannot-find-my-child,لا أجد طفلي,ضاع طفلي,lā ajid ṭiflī,,,2,ar-agent-v1
+etiquette.is-this-allowed,هل هذا مسموح؟,,hal hādhā masmūḥ?,,,2,ar-agent-v1
+sim-data.may-i-use-your-wifi,هل يمكنني استخدام الواي فاي؟,,hal yumkinunī istikhdām al-wāy fāy?,,,2,ar-agent-v1
+children.make-an-announcement,أرجو الإعلان في مكبّر الصوت,,arjū al-iʿlān fī mukabbir al-ṣawt,,,2,ar-agent-v1
+etiquette.is-tipping-expected,هل البقشيش متوقع؟,هل الإكرامية معتادة؟,hal al-baqshīsh mutawaqqaʿ?,,,2,ar-agent-v1
+sim-data.how-much-data-is-included,كم حجم البيانات؟,كم جيجا؟,kam ḥajm al-bayānāt?,,,2,ar-agent-v1
+children.child-age,عمر طفلي {} سنوات,,ʿumr ṭiflī {} sanawāt,,,2,ar-agent-v1
+etiquette.is-service-included,هل الخدمة مشمولة؟,,hal al-khidmah mashmūlah?,,,2,ar-agent-v1
+sim-data.do-you-need-my-passport,هل تحتاج جواز سفري؟,,hal taḥtāj jawāz safarī?,,,2,ar-agent-v1
+children.high-chair,هل لديكم كرسي أطفال؟,,hal ladaykum kursī aṭfāl?,,,2,ar-agent-v1
+etiquette.may-i-enter,هل يمكنني الدخول؟,,hal yumkinunī al-dukhūl?,,,2,ar-agent-v1
+sim-data.how-long-is-it-valid,كم مدة الصلاحية؟,,kam muddat al-ṣalāḥīyah?,,,2,ar-agent-v1
+children.baby-changing-room,أين غرفة تغيير الحفاضات؟,غرفة الأمهات,ayna ghurfat taghyīr al-ḥafāḍāt?,,,2,ar-agent-v1
+etiquette.remove-shoes,هل أخلع حذائي؟,,hal akhlaʿ ḥidhāʾī?,,,2,ar-agent-v1
+sim-data.please-activate-it,فعّلها من فضلك,,faʿʿilhā min faḍlak,,,2,ar-agent-v1
+children.childrens-menu,هل يوجد قائمة أطفال؟,منيو أطفال,hal yūjad qāʾimat aṭfāl?,,,2,ar-agent-v1
+etiquette.photo-of-you,هل يمكنني تصويرك؟,,hal yumkinunī taṣwīrak?,,,2,ar-agent-v1
+sim-data.do-you-have-an-esim,هل لديكم إي سيم؟,,hal ladaykum ī sīm?,,,2,ar-agent-v1
+children.suitable-for-children,هل هذا مناسب للأطفال؟,,hal hādhā munāsib lil-aṭfāl?,,,2,ar-agent-v1
+etiquette.may-i-sit-here,هل يمكنني الجلوس هنا؟,,hal yumkinunī al-julūs hunā?,,,2,ar-agent-v1
+sim-data.my-data-is-not-working,البيانات لا تعمل,الإنترنت لا يعمل,al-bayānāt lā taʿmal,,,2,ar-agent-v1
+children.minimum-age,ما الحد الأدنى للعمر؟,,mā al-ḥadd al-adná lil-ʿumr?,,,2,ar-agent-v1
+etiquette.queue-for,هل هذا صف {}؟,,hal hādhā ṣaff {}?,,,2,ar-agent-v1
+sim-data.does-it-need-registration,هل يحتاج إلى تسجيل؟,,hal yaḥtāj ilá tasjīl?,,,2,ar-agent-v1
+children.do-children-pay,هل يدفع الأطفال؟,,hal yadfaʿ al-aṭfāl?,,,2,ar-agent-v1
+etiquette.dressed-appropriately,هل لباسي مناسب؟,,hal libāsī munāsib?,,,2,ar-agent-v1
+sim-data.i-have-no-signal,لا يوجد إرسال,لا توجد شبكة,lā yūjad irsāl,,,2,ar-agent-v1
+children.crib,هل لديكم سرير أطفال؟,,hal ladaykum sarīr aṭfāl?,,,2,ar-agent-v1
+etiquette.did-not-mean-to-offend,لم أقصد الإساءة,أعتذر، لم أقصد,lam aqṣid al-isāʾah,,,2,ar-agent-v1
+sim-data.please-write-the-wifi-password,اكتب كلمة سر الواي فاي,,uktub kalimat sirr al-wāy fāy,,,2,ar-agent-v1
+children.warm-this-bottle,سخّن هذه الزجاجة من فضلك,ببرونة الطفل,sakhkhin hādhihi al-zujājah min faḍlak,,,2,ar-agent-v1
+etiquette.what-is-customary,ما المعتاد هنا؟,,mā al-muʿtād hunā?,,,2,ar-agent-v1
+sim-data.sim-card,شريحة,شريحة اتصال,sharīḥah,,,2,ar-agent-v1
+children.car-seat,نحتاج كرسي سيارة للأطفال,,naḥtāj kursī sayyārah lil-aṭfāl,,,2,ar-agent-v1
+etiquette.keep-the-change,احتفظ بالباقي,,iḥtafiẓ bi-al-bāqī,,,2,ar-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,أين أشتري محوّل كهرباء؟,,ayna ashtarī muḥawwil kahrabāʾ?,,,2,ar-agent-v1
+children.stroller,عربة أطفال,,ʿarabat aṭfāl,,,2,ar-agent-v1
+sim-data.mobile-data,بيانات الهاتف,إنترنت الجوال,bayānāt al-hātif,,,2,ar-agent-v1
+children.playground,هل يوجد ملعب أطفال؟,,hal yūjad malʿab aṭfāl?,,,2,ar-agent-v1
+sim-data.can-i-top-up-this-sim,هل يمكن شحن هذه الشريحة؟,,hal yumkin shaḥn hādhihi al-sharīḥah?,,,2,ar-agent-v1
+sim-data.top-up,شحن,تعبئة رصيد,shaḥn,,,2,ar-agent-v1
+sim-data.is-there-coverage-in,هل هناك تغطية في {}؟,,hal hunāk taghṭiyah fī {}?,,,2,ar-agent-v1
+sim-data.signal,إرسال,شبكة,irsāl,,,2,ar-agent-v1
+sim-data.esim,إي سيم,eSIM,ī sīm,,,2,ar-agent-v1
+sim-data.prepaid,مسبق الدفع,,musbaq al-dafʿ,,,2,ar-agent-v1
+sim-data.roaming,تجوال,,tajawwul,,,2,ar-agent-v1
+social-basics.hello,مرحباً,,marḥaban,,,2,ar-agent-v1
+social-basics.hello-polite,السلام عليكم,,al-salām ʿalaykum,,peace be upon you,2,ar-agent-v1
+social-basics.good-morning,صباح الخير,,ṣabāḥ al-khayr,,,2,ar-agent-v1
+social-basics.good-evening,مساء الخير,,masāʾ al-khayr,,,2,ar-agent-v1
+social-basics.goodbye,مع السلامة,إلى اللقاء,maʿ al-salāmah,,,2,ar-agent-v1
+social-basics.thank-you,شكراً,,shukran,,,2,ar-agent-v1
+social-basics.you-are-welcome,عفواً,العفو,ʿafwan,,,2,ar-agent-v1
+social-basics.excuse-me-sorry,لو سمحت,,law samaḥt,,if you permit,2,ar-agent-v1
+social-basics.sorry,آسف,,āsif,,,2,ar-agent-v1
+social-basics.no-problem,لا مشكلة,ولا يهمك,lā mushkilah,,,2,ar-agent-v1
+social-basics.i-do-not-know,لا أعرف,,lā aʿrif,,,2,ar-agent-v1
+social-basics.good-night,تصبح على خير,,tuṣbiḥ ʿalá khayr,,may you wake to goodness,2,ar-agent-v1
+social-basics.okay-fine-i-am-okay,أنا بخير,تمام,anā bi-khayr,,,2,ar-agent-v1
+communication.i-do-not-speak-this-language,لا أتحدث العربية,,lā ataḥaddath al-ʿarabīyah,,,2,ar-agent-v1
+communication.i-speak-only-a-little-of-this,أتحدث العربية قليلاً,,ataḥaddath al-ʿarabīyah qalīlan,,,2,ar-agent-v1
+communication.do-you-speak-english,هل تتحدث الإنجليزية؟,,hal tataḥaddath al-injilīzīyah?,,,2,ar-agent-v1
+communication.please-speak-more-slowly,تحدث ببطء من فضلك,على مهلك,taḥaddath bi-buṭʾ min faḍlak,,,2,ar-agent-v1
+communication.i-do-not-understand-spoken,لم أفهم,ما فهمت,lam afham,,,2,ar-agent-v1
+communication.i-cannot-read-understand,لا أقرأ العربية,,lā aqraʾ al-ʿarabīyah,,,2,ar-agent-v1
+communication.please-say-it-again,كرّر من فضلك,,karrir min faḍlak,,,2,ar-agent-v1
+communication.please-write-it-down,اكتبه من فضلك,,uktubh min faḍlak,,,2,ar-agent-v1
+communication.please-wait-a-moment,انتظر لحظة من فضلك,,intaẓir laḥẓah min faḍlak,,,2,ar-agent-v1
+communication.can-you-help-me,هل تساعدني؟,,hal tusāʿidunī?,,,2,ar-agent-v1
+communication.please-show-me-the-text,أرني النص بالعربية,,arinī al-naṣṣ bi-al-ʿarabīyah,,,2,ar-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,لا أفهم ما تقول,,lā afham mā taqūl,,,2,ar-agent-v1
+communication.i-do-not-understand,لا أفهم,,lā afham,,,2,ar-agent-v1
+communication.i-cannot-read-it,لا أستطيع قراءته,,lā astaṭīʿ qirāʾatuh,,,2,ar-agent-v1
+communication.please-write-it-in-roman-letters,اكتبه بالحروف اللاتينية,,uktubh bi-al-ḥurūf al-lātīnīyah,,,2,ar-agent-v1
+quick-responses.please-go-ahead,تفضّل,,tafaḍḍal,,,2,ar-agent-v1
+quick-responses.yes-right,نعم,أيوه,naʿam,,,2,ar-agent-v1
+quick-responses.no-not,لا,,lā,,,2,ar-agent-v1
+quick-responses.okay-can,حسناً,ماشي,ḥasanan,,,2,ar-agent-v1
+quick-responses.cannot-not-allowed,ممنوع,,mamnūʿ,,,2,ar-agent-v1
+quick-responses.works-okay,يعمل,,yaʿmal,,,2,ar-agent-v1
+quick-responses.does-not-work-no,لا يعمل,,lā yaʿmal,,,2,ar-agent-v1
+quick-responses.can-possible,ممكن,,mumkin,,,2,ar-agent-v1
+quick-responses.cannot-not-possible,غير ممكن,,ghayr mumkin,,,2,ar-agent-v1
+quick-responses.okay-fine,تمام,,tamām,,,2,ar-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,لا يصلح,ما ينفع,lā yaṣluḥ,,,2,ar-agent-v1
+phone-translation.i-am-using-phone-translation,أستخدم ترجمة الهاتف,,astakhdim tarjamat al-hātif,,,2,ar-agent-v1
+phone-translation.please-speak-toward-the-phone,تحدث نحو الهاتف من فضلك,,taḥaddath naḥw al-hātif min faḍlak,,,2,ar-agent-v1
+phone-translation.one-sentence-at-a-time-please,جملة واحدة كل مرة من فضلك,,jumlah wāḥidah kull marrah min faḍlak,,,2,ar-agent-v1
+phone-translation.please-type-it-and-show-me,اكتبه وأرني من فضلك,,uktubh wa-arinī min faḍlak,,,2,ar-agent-v1
+phone-translation.please-look-at-the-screen,انظر إلى الشاشة من فضلك,,unẓur ilá al-shāshah min faḍlak,,,2,ar-agent-v1
+phone-text-power.please-type-it-for-me,اكتبه لي من فضلك,,uktubh lī min faḍlak,,,2,ar-agent-v1
+phone-translation.please-write-the-place-name,اكتب اسم المكان بالعربية,,uktub ism al-makān bi-al-ʿarabīyah,,,2,ar-agent-v1
+phone-text-power.please-use-simple-words,استخدم كلمات بسيطة من فضلك,,istakhdim kalimāt basīṭah min faḍlak,,,2,ar-agent-v1
+phone-text-power.my-phone-battery-is-low,بطارية هاتفي ضعيفة,,baṭṭārīyat hātifī ḍaʿīfah,,,2,ar-agent-v1
+phone-text-power.do-you-have-a-power-bank,هل لديك بطارية متنقلة؟,باور بانك,hal ladayk baṭṭārīyah mutanaqqilah?,,,2,ar-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,الترجمة قد تكون غير دقيقة,,al-tarjamah qad takūn ghayr daqīqah,,,2,ar-agent-v1
+phone-text-power.please-confirm,أرجو التأكيد,,arjū al-taʾkīd,,,2,ar-agent-v1
+phone-text-power.may-i-charge-my-phone-here,هل يمكنني شحن هاتفي هنا؟,,hal yumkinunī shaḥn hātifī hunā?,,,2,ar-agent-v1

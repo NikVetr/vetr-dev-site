@@ -1,0 +1,138 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+medical-conditions.i-am-diabetic,أنا مصاب بالسكري,أنا مريض سكري,anā muṣāb bi-al-sukkarī,,,2,ar-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,أيّ صيدلية مفتوحة الآن؟,,ayy ṣaydalīyah maftūḥah al-ān?,,,2,ar-agent-v1
+police-consulate.where-is-the-police-station,أين مركز الشرطة؟,أين قسم الشرطة؟,ayna markaz al-shurṭah?,,,2,ar-agent-v1
+body-parts.head,رأس,,raʾs,,,2,ar-agent-v1
+medical-conditions.i-need-insulin,أحتاج إلى الأنسولين,,aḥtāj ilá al-ansūlīn,,,2,ar-agent-v1
+pharmacy-symptoms.i-need-medicine-for,أحتاج دواء لعلاج {},,aḥtāj dawāʾ li-ʿilāj {},,medicine to treat,2,ar-agent-v1
+police-consulate.i-want-to-report-a-theft,أريد الإبلاغ عن سرقة,,urīd al-iblāgh ʿan sariqah,,,2,ar-agent-v1
+body-parts.stomach,بطن,,baṭn,,,2,ar-agent-v1
+medical-conditions.i-have-asthma,عندي ربو,أنا مصاب بالربو,ʿindī rabw,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-a-fever,عندي حمّى,عندي سخونة,ʿindī ḥummá,,,2,ar-agent-v1
+police-consulate.my-bag-was-stolen,سُرقت حقيبتي,,suriqat ḥaqībatī,,,2,ar-agent-v1
+body-parts.back,ظهر,,ẓahr,,,2,ar-agent-v1
+medical-conditions.i-have-a-heart-condition,عندي مرض في القلب,أنا مريض قلب,ʿindī maraḍ fī al-qalb,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-diarrhea,عندي إسهال,,ʿindī ishāl,,,2,ar-agent-v1
+police-consulate.my-passport-was-stolen,سُرق جواز سفري,,suriqa jawāz safarī,,,2,ar-agent-v1
+body-parts.throat,حلق,,ḥalq,,,2,ar-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,عندي حساسية من البنسلين,,ʿindī ḥasāsīyah min al-binisilīn,,,2,ar-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,أين صيدلية مناوبة؟,أين صيدلية حراسة؟,ayna ṣaydalīyah munāwabah?,,on-duty pharmacy,2,ar-agent-v1
+police-consulate.someone-is-following-me,هناك شخص يتبعني,,hunāk shakhṣ yatbaʿunī,,,2,ar-agent-v1
+body-parts.tooth,سنّ,ضرس,sinn,,,2,ar-agent-v1
+medical-conditions.i-have-epilepsy,أعاني من نوبات صرع,عندي صرع,uʿānī min nawabāt ṣaraʿ,,I suffer from epileptic seizures,2,ar-agent-v1
+pharmacy-symptoms.painkiller,مسكّن,مسكّن للألم,musakkin,,,2,ar-agent-v1
+police-consulate.i-need-a-written-police-report,أحتاج إلى محضر مكتوب,,aḥtāj ilá maḥḍar maktūb,,,2,ar-agent-v1
+body-parts.chest,صدر,,ṣadr,,,2,ar-agent-v1
+medical-conditions.my-blood-sugar-is-low,عندي هبوط في السكر,نقص سكر الدم,ʿindī hubūṭ fī al-sukkar,,,2,ar-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,هل أحتاج إلى وصفة طبية؟,هل أحتاج روشتة؟,hal aḥtāj ilá waṣfah ṭibbīyah?,,,2,ar-agent-v1
+police-consulate.i-want-to-contact-my-embassy,أريد الاتصال بسفارتي,,urīd al-ittiṣāl bi-sifāratī,,,2,ar-agent-v1
+body-parts.eye,عين,,ʿayn,,,2,ar-agent-v1
+medical-conditions.i-need-my-inhaler,أحتاج إلى بخاخ الربو,,aḥtāj ilá bakhkhākh al-rabw,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-a-headache,عندي صداع,,ʿindī ṣudāʿ,,,2,ar-agent-v1
+police-consulate.i-need-it-for-my-insurance,أحتاجه للتأمين,,aḥtājuh lil-taʾmīn,,,2,ar-agent-v1
+body-parts.ear,أذن,,udhun,,,2,ar-agent-v1
+medical-conditions.i-am-pregnant,أنا حامل,,anā ḥāmil,,,2,ar-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,باراسيتامول,بنادول,bārāsītāmūl,,,2,ar-agent-v1
+police-consulate.i-need-an-interpreter,أحتاج إلى مترجم,مترجم فوري,aḥtāj ilá mutarjim,,,2,ar-agent-v1
+body-parts.leg,ساق,رجل,sāq,,,2,ar-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,أحمل قلم أدرينالين,حاقن الأدرينالين التلقائي,aḥmil qalam adrīnālīn,,,2,ar-agent-v1
+pharmacy-symptoms.how-much-should-i-take,ما الجرعة؟,,mā al-jurʿah?,,what is the dose,2,ar-agent-v1
+police-consulate.please-leave-me-alone,اتركني من فضلك,خلاص,utruknī min faḍlak,,,2,ar-agent-v1
+body-parts.arm,ذراع,,dhirāʿ,,,2,ar-agent-v1
+medical-conditions.i-take-medicine-for,أتناول دواء لعلاج {},,atanāwal dawāʾ li-ʿilāj {},,medicine to treat,2,ar-agent-v1
+pharmacy-symptoms.i-am-vomiting,أتقيّأ,عندي ترجيع,ataqayyaʾ,,,2,ar-agent-v1
+police-consulate.i-was-robbed,تعرضت للسرقة,,taʿarraḍt lil-sariqah,,,2,ar-agent-v1
+body-parts.foot,قدم,,qadam,,,2,ar-agent-v1
+medical-conditions.i-take-blood-thinners,أتناول أدوية مسيلة للدم,مضادات التخثر,atanāwal adwiyah musayyilah lil-dam,,,2,ar-agent-v1
+pharmacy-symptoms.rehydration-salts,محلول معالجة الجفاف,أو آر إس,maḥlūl muʿālajat al-jafāf,,dehydration-treatment solution,2,ar-agent-v1
+police-consulate.i-want-a-lawyer,أريد محامياً,,urīd muḥāmiyan,,,2,ar-agent-v1
+body-parts.hand,يد,,yad,,,2,ar-agent-v1
+medical-conditions.medicine-allergy,حساسية دوائية: {},,ḥasāsīyah dawāʾīyah: {},,drug allergy,2,ar-agent-v1
+pharmacy-symptoms.how-many-times-a-day,كم مرة في اليوم؟,,kam marrah fī al-yawm?,,,2,ar-agent-v1
+police-consulate.please-notify-my-consulate,أرجو إبلاغ قنصلية بلدي,,arjū iblāgh qunṣulīyat baladī,,,2,ar-agent-v1
+body-parts.knee,رُكبة,,rukbah,,,2,ar-agent-v1
+medical-conditions.this-card-lists-my-conditions,هذه بطاقة بحالاتي الصحية,,hādhihi biṭāqah bi-ḥālātī al-ṣiḥḥīyah,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,عندي ألم في المعدة,عندي مغص,ʿindī alam fī al-maʿidah,,,2,ar-agent-v1
+police-consulate.i-am-calling-the-police,سأتصل بالشرطة,,saʾattaṣil bi-al-shurṭah,,,2,ar-agent-v1
+body-parts.ankle,كاحل,,kāḥil,,,2,ar-agent-v1
+medical-conditions.this-is-my-medicine,هذا دوائي,,hādhā dawāʾī,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-a-cough,عندي سعال,عندي كحّة,ʿindī suʿāl,,,2,ar-agent-v1
+police-consulate.am-i-under-arrest,هل أنا موقوف؟,هل أنا معتقل؟,hal anā mawqūf?,,,2,ar-agent-v1
+body-parts.skin,جلد,,jild,,,2,ar-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,أعطني سكراً أو عصيراً,,aʿṭinī sukkaran aw ʿaṣīran,,,2,ar-agent-v1
+pharmacy-symptoms.antihistamine,مضاد للهيستامين,كلاريتين,muḍādd lil-hīstāmīn,,,2,ar-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,لا شكراً، لست مهتماً,لا شكراً,"lā shukran, lastu muhtamman",,,2,ar-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,احقنه في منتصف الفخذ الخارجي,,iḥqinh fī muntaṣaf al-fakhidh al-khārijī,,,2,ar-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,دواء للإسهال,إيموديوم,dawāʾ lil-ishāl,,,2,ar-agent-v1
+police-consulate.someone-attacked-me,شخص هاجمني,تعرضت للاعتداء,shakhṣ hājamanī,,,2,ar-agent-v1
+medical-conditions.my-blood-type-is,فصيلة دمي {},زمرة دمي {},faṣīlat damī {},,,2,ar-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,هل هذا آمن مع {}؟,,hal hādhā āmin maʿ {}?,,,2,ar-agent-v1
+police-consulate.i-did-not-agree-to-this-price,لم أوافق على هذا السعر,,lam uwāfiq ʿalá hādhā al-siʿr,,,2,ar-agent-v1
+medical-conditions.do-not-give-me,لا تعطني {},ممنوع إعطائي {},lā tuʿṭinī {},,,2,ar-agent-v1
+pharmacy-symptoms.i-feel-dizzy,أشعر بدوار,عندي دوخة,ashʿur bi-duwār,,,2,ar-agent-v1
+police-consulate.please-write-the-report-number,اكتب رقم المحضر من فضلك,,uktub raqm al-maḥḍar min faḍlak,,,2,ar-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,عندي حساسية من الأسبرين والإيبوبروفين,,ʿindī ḥasāsīyah min al-asbirīn wa-al-ībūbrūfīn,,,2,ar-agent-v1
+pharmacy-symptoms.ibuprofen,إيبوبروفين,بروفين,ībūbrūfīn,,,2,ar-agent-v1
+police-consulate.it-happened-here,حدث هنا,,ḥadath hunā,,,2,ar-agent-v1
+medical-conditions.my-injector-is-in-my-bag,قلم الأدرينالين في حقيبتي,,qalam al-adrīnālīn fī ḥaqībatī,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,عندي التهاب في الحلق,,ʿindī iltihāb fī al-ḥalq,,,2,ar-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,أريد نسخة من المحضر,,urīd nuskhah min al-maḥḍar,,,2,ar-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,عندي حساسية من أدوية السلفا,السلفوناميدات,ʿindī ḥasāsīyah min adwiyat al-sulfā,,,2,ar-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,هل يتوفر هذا الدواء هنا؟,,hal yatawaffar hādhā al-dawāʾ hunā?,,,2,ar-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,لن أوقّع على ما لا أستطيع قراءته,,lan uwaqqiʿ ʿalá mā lā astaṭīʿ qirāʾatuh,,,2,ar-agent-v1
+pharmacy-symptoms.bandage,ضمادة,بلاستر,ḍimādah,,,2,ar-agent-v1
+police-consulate.am-i-free-to-go,هل يمكنني الذهاب؟,,hal yumkinunī al-dhahāb?,,,2,ar-agent-v1
+pharmacy-symptoms.the-pain-is-severe,الألم شديد,,al-alam shadīd,,,2,ar-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,لا أريد الذهاب معك,,lā urīd al-dhahāb maʿak,,,2,ar-agent-v1
+pharmacy-symptoms.antiseptic,مطهّر للجروح,بيتادين,muṭahhir lil-jurūḥ,,wound antiseptic,2,ar-agent-v1
+pharmacy-symptoms.i-feel-nauseous,أشعر بالغثيان,,ashʿur bi-al-ghathayān,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-a-rash,عندي طفح جلدي,,ʿindī ṭafḥ jildī,,,2,ar-agent-v1
+pharmacy-symptoms.before-or-after-food,قبل الأكل أم بعده؟,,qabl al-akl am baʿdah?,,,2,ar-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,أظنّ أنّ الجرح ملتهب,,aẓunn anna al-jurḥ multahib,,,2,ar-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,أقراص لدوار الحركة,درامينكس,aqrāṣ li-duwār al-ḥarakah,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-a-cut,عندي جرح,,ʿindī jurḥ,,,2,ar-agent-v1
+pharmacy-symptoms.antacid,مضاد للحموضة,جافيسكون,muḍādd lil-ḥumūḍah,,,2,ar-agent-v1
+pharmacy-symptoms.i-have-a-burn,عندي حرق,,ʿindī ḥarq,,,2,ar-agent-v1
+pharmacy-symptoms.it-started-days-ago,بدأ قبل {} أيام,,badaʾ qabl {} ayyām,,,2,ar-agent-v1
+pharmacy-symptoms.cough-medicine,دواء للسعال,دواء للكحّة,dawāʾ lil-suʿāl,,,2,ar-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,هل هذا آمن للحامل؟,,hal hādhā āmin lil-ḥāmil?,,,2,ar-agent-v1
+emergency-medical.help,النجدة!,ساعدوني!,al-najdah!,,,2,ar-agent-v1
+emergency-medical.please-call-an-ambulance,اتصل بالإسعاف من فضلك,,ittaṣil bi-al-isʿāf min faḍlak,,,2,ar-agent-v1
+emergency-medical.i-need-a-doctor,أحتاج إلى طبيب,,aḥtāj ilá ṭabīb,,,2,ar-agent-v1
+emergency-medical.i-am-sick,أنا مريض,,anā marīḍ,,,2,ar-agent-v1
+emergency-medical.i-am-injured,أنا مصاب,,anā muṣāb,,,2,ar-agent-v1
+emergency-medical.it-hurts-here,يؤلمني هنا,,yuʾlimunī hunā,,,2,ar-agent-v1
+emergency-medical.where-is-a-pharmacy,أين صيدلية؟,,ayna ṣaydalīyah?,,,2,ar-agent-v1
+emergency-medical.please-take-me-to-a-hospital,خذني إلى المستشفى من فضلك,,khudhnī ilá al-mustashfá min faḍlak,,,2,ar-agent-v1
+emergency-medical.i-feel-unwell,لست بخير,,lastu bi-khayr,,,2,ar-agent-v1
+emergency-medical.this-is-an-emergency,هذه حالة طارئة,,hādhihi ḥālah ṭāriʾah,,,2,ar-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,عندي حساسية مفرطة,ردة فعل تحسسية شديدة,ʿindī ḥasāsīyah mufraṭah,,anaphylaxis,2,ar-agent-v1
+emergency-medical.i-cannot-breathe,لا أستطيع التنفس,,lā astaṭīʿ al-tanaffus,,,2,ar-agent-v1
+emergency-medical.i-am-bleeding-badly,أنا أنزف بشدة,,anā anzif bi-shiddah,,,2,ar-agent-v1
+emergency-medical.i-have-chest-pain,عندي ألم في الصدر,,ʿindī alam fī al-ṣadr,,,2,ar-agent-v1
+emergency-medical.this-person-is-unconscious,هذا الشخص فاقد للوعي,,hādhā al-shakhṣ fāqid lil-waʿy,,,2,ar-agent-v1
+emergency-medical.where-is-the-nearest-hospital,أين أقرب مستشفى؟,,ayna aqrab mustashfá?,,,2,ar-agent-v1
+emergency-medical.what-is-the-emergency-number,ما رقم الطوارئ؟,,mā raqm al-ṭawāriʾ?,,,2,ar-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,هل يوجد طبيب يتحدث الإنجليزية؟,,hal yūjad ṭabīb yataḥaddath al-injilīzīyah?,,,2,ar-agent-v1
+emergency-medical.i-think-a-bone-is-broken,أظنّ أنّ هناك كسراً,,aẓunn anna hunāk kasran,,I think there is a fracture,2,ar-agent-v1
+emergency-medical.please-call-my-emergency-contact,اتصل بجهة الاتصال للطوارئ,اتصل بهذا الرقم من فضلك,ittaṣil bi-jihat al-ittiṣāl lil-ṭawāriʾ,,,2,ar-agent-v1
+emergency-medical.i-have-travel-insurance,لديّ تأمين سفر,,ladayya taʾmīn safar,,,2,ar-agent-v1
+lost-rescue.i-lost-my-passport,فقدت جواز سفري,,faqadt jawāz safarī,,,2,ar-agent-v1
+lost-rescue.i-lost-my-phone,فقدت هاتفي,,faqadt hātifī,,,2,ar-agent-v1
+lost-rescue.please-call-the-police,اتصل بالشرطة من فضلك,,ittaṣil bi-al-shurṭah min faḍlak,,,2,ar-agent-v1
+lost-rescue.we-are-here,نحن هنا,,naḥnu hunā,,,2,ar-agent-v1
+lost-rescue.please-look-at-my-location-pin,انظر إلى موقعي على الخريطة,,unẓur ilá mawqiʿī ʿalá al-kharīṭah,,,2,ar-agent-v1
+lost-rescue.i-cannot-walk,لا أستطيع المشي,,lā astaṭīʿ al-mashy,,,2,ar-agent-v1
+lost-rescue.i-sprained-my-ankle,التويت كاحلي,,iltawayt kāḥilī,,,2,ar-agent-v1
+lost-rescue.please-contact-rescue,اتصل بفرق الإنقاذ من فضلك,,ittaṣil bi-firaq al-inqādh min faḍlak,,,2,ar-agent-v1
+lost-rescue.my-companion-is-missing,رفيقي مفقود,,rafīqī mafqūd,,,2,ar-agent-v1
+lost-rescue.please-look-at-my-current-location,انظر إلى موقعي الحالي,,unẓur ilá mawqiʿī al-ḥālī,,,2,ar-agent-v1
+lost-rescue.my-child-is-missing,طفلي مفقود,,ṭiflī mafqūd,,,2,ar-agent-v1
+lost-rescue.i-do-not-know-where-i-am,لا أعرف أين أنا,,lā aʿrif ayna anā,,,2,ar-agent-v1
+lost-rescue.my-friend-is-hurt,صديقي مصاب,,ṣadīqī muṣāb,,,2,ar-agent-v1
+lost-rescue.i-lost-my-wallet,فقدت محفظتي,,faqadt miḥfaẓatī,,,2,ar-agent-v1
+lost-rescue.i-lost-my-bag,فقدت حقيبتي,,faqadt ḥaqībatī,,,2,ar-agent-v1
+lost-rescue.where-is-lost-and-found,أين مكتب المفقودات؟,,ayna maktab al-mafqūdāt?,,,2,ar-agent-v1
+lost-rescue.i-cannot-find-my-hotel,لا أجد فندقي,,lā ajid funduqī,,,2,ar-agent-v1
+lost-rescue.i-left-it-on-the-train,تركته في القطار,,taraktuh fī al-qiṭār,,,2,ar-agent-v1
+lost-rescue.i-cannot-get-down,لا أستطيع النزول,,lā astaṭīʿ al-nuzūl,,,2,ar-agent-v1

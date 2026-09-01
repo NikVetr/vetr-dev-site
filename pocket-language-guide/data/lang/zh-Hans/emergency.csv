@@ -1,18 +1,138 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
 emergency-medical.help,救命！,,jiùmìng!,,,2,latex-reference-v2
-emergency-medical.please-call-an-ambulance,请帮我叫救护车,,qǐng bāng wǒ jiào jiùhùchē,,,2,latex-reference-v2
-emergency-medical.i-need-a-doctor,我需要医生,,wǒ xūyào yīshēng,,,2,latex-reference-v2
-emergency-medical.i-am-sick,我生病了,,wǒ shēngbìng le,,,2,latex-reference-v2
-emergency-medical.i-am-injured,我受伤了,,wǒ shòushāng le,,,2,latex-reference-v2
-emergency-medical.it-hurts-here,这里疼,,zhèlǐ téng,,,2,latex-reference-v2
-emergency-medical.where-is-a-pharmacy,药店在哪里？,,yàodiàn zài nǎlǐ?,,,2,latex-reference-v2
-emergency-medical.please-take-me-to-a-hospital,请带我去医院,,qǐng dài wǒ qù yīyuàn,,,2,latex-reference-v2
 lost-rescue.i-lost-my-passport,我的护照丢了,,wǒ de hùzhào diū le,,,2,latex-reference-v2
+medical-conditions.i-am-diabetic,我有糖尿病,,wǒ yǒu tángniàobìng,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,现在哪家药店开门？,,xiànzài nǎ jiā yàodiàn kāimén?,,,2,zh-Hans-agent-v1
+police-consulate.where-is-the-police-station,派出所在哪里？,,pàichūsuǒ zài nǎlǐ?,,,2,zh-Hans-agent-v1
+body-parts.head,头,,tóu,,,2,zh-Hans-agent-v1
+emergency-medical.please-call-an-ambulance,请帮我叫救护车,,qǐng bāng wǒ jiào jiùhùchē,,,2,latex-reference-v2
 lost-rescue.i-lost-my-phone,我的手机丢了,,wǒ de shǒujī diū le,,,2,latex-reference-v2
+medical-conditions.i-need-insulin,我需要胰岛素,,wǒ xūyào yídǎosù,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-need-medicine-for,我需要治{}的药,,wǒ xūyào zhì {} de yào,,,2,zh-Hans-agent-v1
+police-consulate.i-want-to-report-a-theft,我要报盗窃案,,wǒ yào bào dàoqiè'àn,,,2,zh-Hans-agent-v1
+body-parts.stomach,肚子,,dùzi,,,2,zh-Hans-agent-v1
+emergency-medical.i-need-a-doctor,我需要医生,,wǒ xūyào yīshēng,,,2,latex-reference-v2
 lost-rescue.please-call-the-police,请报警,,qǐng bàojǐng,,,2,latex-reference-v2
+medical-conditions.i-have-asthma,我有哮喘,,wǒ yǒu xiàochuǎn,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-a-fever,我发烧了,,wǒ fāshāo le,,,2,zh-Hans-agent-v1
+police-consulate.my-bag-was-stolen,我的包被偷了,,wǒ de bāo bèi tōu le,,,2,zh-Hans-agent-v1
+body-parts.back,背,,bèi,,,2,zh-Hans-agent-v1
+emergency-medical.i-am-sick,我生病了,,wǒ shēngbìng le,,,2,latex-reference-v2
 lost-rescue.we-are-here,我们在这里,,wǒmen zài zhèlǐ,,,2,latex-reference-v2
+medical-conditions.i-have-a-heart-condition,我有心脏病,,wǒ yǒu xīnzàngbìng,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-diarrhea,我拉肚子了,,wǒ lā dùzi le,,,2,zh-Hans-agent-v1
+police-consulate.my-passport-was-stolen,我的护照被偷了,,wǒ de hùzhào bèi tōu le,,,2,zh-Hans-agent-v1
+body-parts.throat,喉咙,,hóulóng,,,2,zh-Hans-agent-v1
+emergency-medical.i-am-injured,我受伤了,,wǒ shòushāng le,,,2,latex-reference-v2
 lost-rescue.please-look-at-my-location-pin,请看我的定位,,qǐng kàn wǒ de dìngwèi,,,2,latex-reference-v2
+medical-conditions.i-am-allergic-to-penicillin,我对青霉素过敏,,wǒ duì qīngméisù guòmǐn,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,哪里有24小时药店？,,nǎlǐ yǒu èrshísì xiǎoshí yàodiàn?,,,2,zh-Hans-agent-v1
+police-consulate.someone-is-following-me,有人跟着我,,yǒu rén gēnzhe wǒ,,,2,zh-Hans-agent-v1
+body-parts.tooth,牙,,yá,,,2,zh-Hans-agent-v1
+emergency-medical.it-hurts-here,这里疼,,zhèlǐ téng,,,2,latex-reference-v2
 lost-rescue.i-cannot-walk,我走不动了,,wǒ zǒu bu dòng le,,,2,latex-reference-v2
+medical-conditions.i-have-epilepsy,我有癫痫,,wǒ yǒu diānxián,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.painkiller,止痛药,,zhǐtòngyào,,,2,zh-Hans-agent-v1
+police-consulate.i-need-a-written-police-report,我需要报警证明,,wǒ xūyào bàojǐng zhèngmíng,,,2,zh-Hans-agent-v1
+body-parts.chest,胸,,xiōng,,,2,zh-Hans-agent-v1
+emergency-medical.where-is-a-pharmacy,药店在哪里？,,yàodiàn zài nǎlǐ?,,,2,latex-reference-v2
 lost-rescue.i-sprained-my-ankle,我扭伤脚了,,wǒ niǔshāng jiǎo le,,,2,latex-reference-v2
+medical-conditions.my-blood-sugar-is-low,我血糖低了,,wǒ xuètáng dī le,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,需要处方吗？,,xūyào chǔfāng ma?,,,2,zh-Hans-agent-v1
+police-consulate.i-want-to-contact-my-embassy,我要联系大使馆,,wǒ yào liánxì dàshǐguǎn,,,2,zh-Hans-agent-v1
+body-parts.eye,眼睛,,yǎnjing,,,2,zh-Hans-agent-v1
+emergency-medical.please-take-me-to-a-hospital,请带我去医院,,qǐng dài wǒ qù yīyuàn,,,2,latex-reference-v2
 lost-rescue.please-contact-rescue,请联系救援队,,qǐng liánxì jiùyuánduì,,,2,latex-reference-v2
+medical-conditions.i-need-my-inhaler,我需要哮喘喷雾,,wǒ xūyào xiàochuǎn pēnwù,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-a-headache,我头疼,,wǒ tóu téng,,,2,zh-Hans-agent-v1
+police-consulate.i-need-it-for-my-insurance,我的保险需要这个,,wǒ de bǎoxiǎn xūyào zhège,,,2,zh-Hans-agent-v1
+body-parts.ear,耳朵,,ěrduo,,,2,zh-Hans-agent-v1
 lost-rescue.my-companion-is-missing,我的同伴不见了,,wǒ de tóngbàn bú jiàn le,,,2,latex-reference-v2
+medical-conditions.i-am-pregnant,我怀孕了,,wǒ huáiyùn le,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,对乙酰氨基酚,,duì yǐxiān ānjīfēn,,,2,zh-Hans-agent-v1
+police-consulate.i-need-an-interpreter,我需要翻译,,wǒ xūyào fānyì,,,2,zh-Hans-agent-v1
+body-parts.leg,腿,,tuǐ,,,2,zh-Hans-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,我带着肾上腺素笔,,wǒ dàizhe shènshàngxiànsù bǐ,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.how-much-should-i-take,一次吃多少？,,yí cì chī duōshao?,,,2,zh-Hans-agent-v1
+police-consulate.please-leave-me-alone,请别烦我,,qǐng bié fán wǒ,,,2,zh-Hans-agent-v1
+body-parts.arm,手臂,,shǒubì,,,2,zh-Hans-agent-v1
+medical-conditions.i-take-medicine-for,我在吃{}的药,,wǒ zài chī {} de yào,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-am-vomiting,我在吐,,wǒ zài tù,,,2,zh-Hans-agent-v1
+police-consulate.i-was-robbed,我被抢了,,wǒ bèi qiǎng le,,,2,zh-Hans-agent-v1
+body-parts.foot,脚,,jiǎo,,,2,zh-Hans-agent-v1
+medical-conditions.i-take-blood-thinners,我在吃抗凝药,,wǒ zài chī kàngníngyào,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.rehydration-salts,口服补液盐,,kǒufú bǔyèyán,,,2,zh-Hans-agent-v1
+police-consulate.i-want-a-lawyer,我要律师,,wǒ yào lǜshī,,,2,zh-Hans-agent-v1
+body-parts.hand,手,,shǒu,,,2,zh-Hans-agent-v1
+medical-conditions.medicine-allergy,药物过敏：{},,yàowù guòmǐn: {},,,2,zh-Hans-agent-v1
+pharmacy-symptoms.how-many-times-a-day,一天吃几次？,,yì tiān chī jǐ cì?,,,2,zh-Hans-agent-v1
+police-consulate.please-notify-my-consulate,请通知我的领事馆,,qǐng tōngzhī wǒ de lǐngshìguǎn,,,2,zh-Hans-agent-v1
+body-parts.knee,膝盖,,xīgài,,,2,zh-Hans-agent-v1
+medical-conditions.this-card-lists-my-conditions,这张卡上有我的病史,,zhè zhāng kǎ shàng yǒu wǒ de bìngshǐ,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,我肚子疼,,wǒ dùzi téng,,,2,zh-Hans-agent-v1
+police-consulate.i-am-calling-the-police,我要报警了,,wǒ yào bàojǐng le,,,2,zh-Hans-agent-v1
+body-parts.ankle,脚踝,,jiǎohuái,,,2,zh-Hans-agent-v1
+medical-conditions.this-is-my-medicine,这是我的药,,zhè shì wǒ de yào,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-a-cough,我咳嗽,,wǒ késou,,,2,zh-Hans-agent-v1
+police-consulate.am-i-under-arrest,我被逮捕了吗？,,wǒ bèi dàibǔ le ma?,,,2,zh-Hans-agent-v1
+body-parts.skin,皮肤,,pífū,,,2,zh-Hans-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,请给我糖或果汁,,qǐng gěi wǒ táng huò guǒzhī,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.antihistamine,抗过敏药,,kàng guòmǐn yào,,,2,zh-Hans-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,不用，谢谢,,"bú yòng, xièxie",,,2,zh-Hans-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,请注射到大腿外侧,,qǐng zhùshè dào dàtuǐ wàicè,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,止泻药,,zhǐxièyào,,,2,zh-Hans-agent-v1
+police-consulate.someone-attacked-me,有人打了我,,yǒu rén dǎ le wǒ,,,2,zh-Hans-agent-v1
+medical-conditions.my-blood-type-is,我的血型是{},,wǒ de xuèxíng shì {},,,2,zh-Hans-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,这个能和{}一起吃吗？,,zhège néng hé {} yìqǐ chī ma?,,,2,zh-Hans-agent-v1
+police-consulate.i-did-not-agree-to-this-price,我没同意这个价格,,wǒ méi tóngyì zhège jiàgé,,,2,zh-Hans-agent-v1
+medical-conditions.do-not-give-me,请不要给我用{},,qǐng bú yào gěi wǒ yòng {},,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-feel-dizzy,我头晕,,wǒ tóuyūn,,,2,zh-Hans-agent-v1
+police-consulate.please-write-the-report-number,请写下案件编号,,qǐng xiě xià ànjiàn biānhào,,,2,zh-Hans-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,我对阿司匹林和布洛芬过敏,,wǒ duì āsīpǐlín hé bùluòfēn guòmǐn,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.ibuprofen,布洛芬,,bùluòfēn,,,2,zh-Hans-agent-v1
+police-consulate.it-happened-here,就在这里发生的,,jiù zài zhèlǐ fāshēng de,,,2,zh-Hans-agent-v1
+medical-conditions.my-injector-is-in-my-bag,肾上腺素笔在我包里,,shènshàngxiànsù bǐ zài wǒ bāo lǐ,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,我喉咙疼,,wǒ hóulóng téng,,,2,zh-Hans-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,能给我一份复印件吗？,,néng gěi wǒ yí fèn fùyìnjiàn ma?,,,2,zh-Hans-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,我对磺胺类药过敏,,wǒ duì huáng'àn lèi yào guòmǐn,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,这里有这种药吗？,,zhèlǐ yǒu zhè zhǒng yào ma?,,,2,zh-Hans-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,我看不懂的东西不签,,wǒ kàn bu dǒng de dōngxi bù qiān,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.bandage,绷带,,bēngdài,,,2,zh-Hans-agent-v1
+police-consulate.am-i-free-to-go,我可以走了吗？,,wǒ kěyǐ zǒu le ma?,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.the-pain-is-severe,疼得很厉害,,téng de hěn lìhai,,,2,zh-Hans-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,我不想跟你走,,wǒ bù xiǎng gēn nǐ zǒu,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.antiseptic,消毒液,,xiāodúyè,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-feel-nauseous,我想吐,,wǒ xiǎng tù,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-a-rash,我起疹子了,,wǒ qǐ zhěnzi le,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.before-or-after-food,饭前还是饭后？,,fàn qián háishi fàn hòu?,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,好像感染了,,hǎoxiàng gǎnrǎn le,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,晕车药,,yùnchēyào,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-a-cut,我割伤了,,wǒ gēshāng le,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.antacid,抗酸药,,kàngsuānyào,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.i-have-a-burn,我烫伤了,,wǒ tàngshāng le,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.it-started-days-ago,{}天前开始的,,{} tiān qián kāishǐ de,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.cough-medicine,止咳药,,zhǐkéyào,,,2,zh-Hans-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,怀孕能吃吗？,,huáiyùn néng chī ma?,,,2,zh-Hans-agent-v1
+emergency-medical.i-feel-unwell,我不舒服,,wǒ bù shūfu,,,2,zh-Hans-agent-v1
+emergency-medical.this-is-an-emergency,这是紧急情况,,zhè shì jǐnjí qíngkuàng,,,2,zh-Hans-agent-v1
+lost-rescue.please-look-at-my-current-location,请看我现在的位置,,qǐng kàn wǒ xiànzài de wèizhi,,,2,zh-Hans-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,我出现严重过敏反应,,wǒ chūxiàn yánzhòng guòmǐn fǎnyìng,,,2,zh-Hans-agent-v1
+lost-rescue.my-child-is-missing,我的孩子不见了,,wǒ de háizi bú jiàn le,,,2,zh-Hans-agent-v1
+emergency-medical.i-cannot-breathe,我喘不上气,,wǒ chuǎn bu shàng qì,,,2,zh-Hans-agent-v1
+lost-rescue.i-do-not-know-where-i-am,我不知道我在哪里,,wǒ bù zhīdào wǒ zài nǎlǐ,,,2,zh-Hans-agent-v1
+emergency-medical.i-am-bleeding-badly,我流血不止,,wǒ liúxuè bù zhǐ,,,2,zh-Hans-agent-v1
+lost-rescue.my-friend-is-hurt,我朋友受伤了,,wǒ péngyou shòushāng le,,,2,zh-Hans-agent-v1
+emergency-medical.i-have-chest-pain,我胸口疼,,wǒ xiōngkǒu téng,,,2,zh-Hans-agent-v1
+lost-rescue.i-lost-my-wallet,我的钱包丢了,,wǒ de qiánbāo diū le,,,2,zh-Hans-agent-v1
+emergency-medical.this-person-is-unconscious,这个人昏迷了,,zhège rén hūnmí le,,,2,zh-Hans-agent-v1
+lost-rescue.i-lost-my-bag,我的包丢了,,wǒ de bāo diū le,,,2,zh-Hans-agent-v1
+emergency-medical.where-is-the-nearest-hospital,最近的医院在哪里？,,zuìjìn de yīyuàn zài nǎlǐ?,,,2,zh-Hans-agent-v1
+lost-rescue.where-is-lost-and-found,失物招领处在哪里？,,shīwù zhāolǐngchù zài nǎlǐ?,,,2,zh-Hans-agent-v1
+emergency-medical.what-is-the-emergency-number,急救电话是多少？,,jíjiù diànhuà shì duōshao?,,,2,zh-Hans-agent-v1
+lost-rescue.i-cannot-find-my-hotel,我找不到我的酒店,,wǒ zhǎo bu dào wǒ de jiǔdiàn,,,2,zh-Hans-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,有会说英语的医生吗？,,yǒu huì shuō Yīngyǔ de yīshēng ma?,,,2,zh-Hans-agent-v1
+lost-rescue.i-left-it-on-the-train,我忘在火车上了,,wǒ wàng zài huǒchē shàng le,,,2,zh-Hans-agent-v1
+emergency-medical.i-think-a-bone-is-broken,我可能骨折了,,wǒ kěnéng gǔzhé le,,,2,zh-Hans-agent-v1
+lost-rescue.i-cannot-get-down,我下不去了,,wǒ xià bu qù le,,,2,zh-Hans-agent-v1
+emergency-medical.please-call-my-emergency-contact,请打给我的紧急联系人,,qǐng dǎ gěi wǒ de jǐnjí liánxìrén,,,2,zh-Hans-agent-v1
+emergency-medical.i-have-travel-insurance,我有旅行保险,,wǒ yǒu lǚxíng bǎoxiǎn,,,2,zh-Hans-agent-v1

@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,{}에 가고 싶어요,,{}e gago sipeoyo,,,2,ko-agent-v1
+utility-templates.please-give-me,{} 주세요,,{} juseyo,,,2,ko-agent-v1
+utility-templates.may-i,{} 해도 돼요?,,{} haedo dwaeyo?,,,2,ko-agent-v1
+utility-templates.please-do-not-add,{} 넣지 마세요,,{} neochi maseyo,,,2,ko-agent-v1
+utility-templates.do-you-have,{} 있어요?,,{} isseoyo?,,,2,ko-agent-v1
+utility-templates.please-write-the-number,숫자를 적어 주세요,,sutjareul jeogeo juseyo,,,2,ko-agent-v1
+utility-templates.i-need,{} 필요해요,,{} piryohaeyo,,,2,ko-agent-v1
+utility-templates.is-there-nearby,근처에 {} 있어요?,,geuncheoe {} isseoyo?,,,2,ko-agent-v1
+utility-templates.how-much-is,{} 얼마예요?,,{} eolmayeyo?,,,2,ko-agent-v1
+utility-templates.is-this,이거 {} 맞아요?,,igeo {} majayo?,,,2,ko-agent-v1
+utility-templates.please,{} 부탁해요,,{} butakaeyo,,,2,ko-agent-v1
+utility-templates.i-am-looking-for,{} 찾고 있어요,,{} chatgo isseoyo,,,2,ko-agent-v1
+utility-templates.do-you-accept,{} 받아요?,,{} badayo?,,,2,ko-agent-v1
+utility-templates.i-cannot-find,{} 못 찾겠어요,,{} mot chatgesseoyo,,,2,ko-agent-v1
+utility-templates.there-is-a-problem-with,{}에 문제가 있어요,,{}e munjega isseoyo,,,2,ko-agent-v1

@@ -1,0 +1,49 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+atm-cash.where-is-an-atm,أين الصراف الآلي؟,,ayna al-ṣarrāf al-ālī?,,,2,ar-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,هل يقبل البطاقات الأجنبية؟,,hal yaqbal al-biṭāqāt al-ajnabīyah?,,,2,ar-agent-v1
+atm-cash.the-atm-kept-my-card,الصراف ابتلع بطاقتي,,al-ṣarrāf ibtalaʿ biṭāqatī,,the ATM swallowed my card,2,ar-agent-v1
+atm-cash.is-there-a-fee,هل هناك عمولة؟,,hal hunāk ʿumūlah?,,,2,ar-agent-v1
+atm-cash.the-card-was-declined,رُفضت البطاقة,,rufiḍat al-biṭāqah,,,2,ar-agent-v1
+atm-cash.what-is-the-exchange-rate,ما سعر الصرف؟,,mā siʿr al-ṣarf?,,,2,ar-agent-v1
+atm-cash.no-money-came-out,لم تخرج النقود,,lam takhruj al-nuqūd,,,2,ar-agent-v1
+atm-cash.where-can-i-change-money,أين أصرف النقود؟,أين مكتب الصرافة؟,ayna aṣrif al-nuqūd?,,,2,ar-agent-v1
+atm-cash.the-machine-is-out-of-service,الجهاز معطّل,خارج الخدمة,al-jihāz muʿaṭṭal,,,2,ar-agent-v1
+atm-cash.please-give-me-smaller-notes,أريد فئات أصغر من فضلك,,urīd fiʾāt aṣghar min faḍlak,,smaller denominations,2,ar-agent-v1
+atm-cash.do-you-have-change,هل لديك نقود صغيرة؟,عندك فكّة؟,hal ladayk nuqūd ṣaghīrah?,,,2,ar-agent-v1
+atm-cash.may-i-pay-in,هل يمكن الدفع بعملة {}؟,,hal yumkin al-dafʿ bi-ʿumlat {}?,,,2,ar-agent-v1
+atm-cash.please-charge-in-local-currency,بالعملة المحلية من فضلك,,bi-al-ʿumlah al-maḥallīyah min faḍlak,,,2,ar-agent-v1
+atm-cash.where-can-i-get-coins,أين أجد عملات معدنية؟,,ayna ajid ʿumlāt maʿdanīyah?,,,2,ar-agent-v1
+atm-cash.is-there-a-minimum-for-cards,هل هناك حدّ أدنى للبطاقة؟,,hal hunāk ḥadd adná lil-biṭāqah?,,,2,ar-agent-v1
+atm-cash.atm,الصراف الآلي,,al-ṣarrāf al-ālī,,,2,ar-agent-v1
+atm-cash.banknote,ورقة نقدية,عملة ورقية,waraqah naqdīyah,,,2,ar-agent-v1
+atm-cash.coin,عملة معدنية,قطعة معدنية,ʿumlah maʿdanīyah,,,2,ar-agent-v1
+atm-cash.cash-only,نقداً فقط,,naqdan faqaṭ,,,2,ar-agent-v1
+atm-cash.fee,عمولة,رسوم,ʿumūlah,,,2,ar-agent-v1
+atm-cash.change,الباقي,,al-bāqī,,the remainder,2,ar-agent-v1
+atm-cash.exchange-rate,سعر الصرف,,siʿr al-ṣarf,,,2,ar-agent-v1
+atm-cash.bank,بنك,مصرف,bank,,,2,ar-agent-v1
+atm-cash.money-exchange,صرافة,مكتب صرافة,ṣirāfah,,,2,ar-agent-v1
+atm-cash.pin,الرقم السري,,al-raqm al-sirrī,,the secret number,2,ar-agent-v1
+numbers-money.l-ng,٠,صفر,ṣifr,,,2,ar-agent-v1
+numbers-money.y,١,واحد,wāḥid,,,2,ar-agent-v1
+numbers-money.r,٢,اثنان,ithnān,,,2,ar-agent-v1
+numbers-money.li-ng,اثنين,,ithnayn,,counting form of two,2,ar-agent-v1
+numbers-money.s-n,٣,ثلاثة,thalāthah,,,2,ar-agent-v1
+numbers-money.s,٤,أربعة,arbaʿah,,,2,ar-agent-v1
+numbers-money.w,٥,خمسة,khamsah,,,2,ar-agent-v1
+numbers-money.li,٦,ستة,sittah,,,2,ar-agent-v1
+numbers-money.q,٧,سبعة,sabʿah,,,2,ar-agent-v1
+numbers-money.b,٨,ثمانية,thamāniyah,,,2,ar-agent-v1
+numbers-money.ji,٩,تسعة,tisʿah,,,2,ar-agent-v1
+numbers-money.sh,عشرة,١٠,ʿasharah,,,2,ar-agent-v1
+numbers-money.y-b-i,مئة,١٠٠,miʾah,,,2,ar-agent-v1
+numbers-money.y-qi-n,ألف,١٠٠٠,alf,,,2,ar-agent-v1
+numbers-money.y-w-n,عشرة آلاف,١٠٠٠٠,ʿasharat ālāf,,,2,ar-agent-v1
+numbers-money.b-n,نصف,١/٢,niṣf,,,2,ar-agent-v1
+numbers-money.yu-n,يوان,,yūān,,Chinese yuan,2,ar-agent-v1
+numbers-money.ku-i,يوان,,yūān,,no separate spoken form,1,ar-agent-v1
+numbers-money.number-and-classifier-notes,,,,,,2,ar-agent-v1
+numbers-money.2-items,قطعتان,قطعتين,qiṭʿatān,,two pieces,2,ar-agent-v1
+numbers-money.yen,ين,,yin,,Japanese yen,2,ar-agent-v1
+numbers-money.yen-symbol,¥,,yin,,,2,ar-agent-v1
+numbers-money.number-and-classifier-notes-2,,,,,,2,ar-agent-v1

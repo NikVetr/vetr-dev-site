@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,ich / mich,,,,2,de-agent-v1
+pronouns-verbs.we-us,wir / uns,,,,2,de-agent-v1
+pronouns-verbs.you,du / dich,,,,2,de-agent-v1
+pronouns-verbs.you-polite,Sie / Ihnen,,,,2,de-agent-v1
+pronouns-verbs.he-him,er / ihn,,,,2,de-agent-v1
+pronouns-verbs.she-her,sie / ihr,,,,2,de-agent-v1
+pronouns-verbs.they-them,sie / ihnen,,,,2,de-agent-v1
+pronouns-verbs.my-mine,mein / meins,,,,2,de-agent-v1
+pronouns-verbs.your-yours,Ihr / Ihres,dein / deins,,,2,de-agent-v1
+pronouns-verbs.be-called-call,heißen / rufen,,,,2,de-agent-v1
+pronouns-verbs.have,haben,,,,2,de-agent-v1
+pronouns-verbs.do-not-have,nicht haben,kein,,,2,de-agent-v1
+pronouns-verbs.go,gehen,fahren,,,2,de-agent-v1
+pronouns-verbs.come,kommen,,,,2,de-agent-v1
+pronouns-verbs.would-like,möchten,,,,2,de-agent-v1
+pronouns-verbs.want,wollen,,,,2,de-agent-v1
+pronouns-verbs.look-for,suchen,,,,2,de-agent-v1
+pronouns-verbs.buy,kaufen,,,,2,de-agent-v1
+pronouns-verbs.like,mögen,gefallen,,,2,de-agent-v1
+pronouns-verbs.need,brauchen,,,,2,de-agent-v1
+pronouns-verbs.there-is-have,es gibt,,,,2,de-agent-v1
+pronouns-verbs.there-is-not-do-not-have,es gibt kein,,,,2,de-agent-v1
+pronouns-verbs.want-to-verb,ich möchte [Verb],,,,2,de-agent-v1
+pronouns-verbs.want-thing,ich möchte [Sache],,,,2,de-agent-v1
+pronouns-verbs.need-thing,ich brauche [Sache],,,,2,de-agent-v1
+pronouns-verbs.looking-for-thing,ich suche [Sache],,,,2,de-agent-v1
+question-words.what,was,,,,2,de-agent-v1
+question-words.where,wo,,,,2,de-agent-v1
+question-words.who,wer,,,,2,de-agent-v1
+question-words.which-one,welcher / welche,,,,2,de-agent-v1
+question-words.when,wann,,,,2,de-agent-v1
+question-words.how,wie,,,,2,de-agent-v1
+question-words.how-much-many,wie viel / wie viele,,,,2,de-agent-v1
+question-words.how-many,wie viele,,,,2,de-agent-v1
+question-words.why,warum,,,,2,de-agent-v1
+question-words.this,dieser / das hier,,,,2,de-agent-v1
+question-words.that,das da,jenes,,,2,de-agent-v1
+question-words.here,hier,,,,2,de-agent-v1
+question-words.there,dort,da,,,2,de-agent-v1
+question-words.a-little,ein wenig,ein bisschen,,,2,de-agent-v1
+question-words.some,etwas,einige,,,2,de-agent-v1
+question-words.very,sehr,,,,2,de-agent-v1
+question-words.too,zu,allzu,,,2,de-agent-v1
+question-words.also,auch,,,,2,de-agent-v1
+question-words.all-both,alle / beide,,,,2,de-agent-v1
+question-words.how-much-what-price,Wie viel kostet das?,,,,2,de-agent-v1

@@ -1,20 +1,49 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
 numbers-money.l-ng,零,,líng,,,2,latex-reference-v2
+atm-cash.where-is-an-atm,取款机在哪里？,,qǔkuǎnjī zài nǎlǐ?,,,2,zh-Hans-agent-v1
 numbers-money.y,一,,yī,,,2,latex-reference-v2
+atm-cash.does-this-atm-take-foreign-cards,外国的卡能用吗？,,wàiguó de kǎ néng yòng ma?,,,2,zh-Hans-agent-v1
 numbers-money.r,二,,èr,,,2,latex-reference-v2
+atm-cash.the-atm-kept-my-card,我的卡被吞了,,wǒ de kǎ bèi tūn le,,,2,zh-Hans-agent-v1
 numbers-money.li-ng,两,,liǎng,,,2,latex-reference-v2
+atm-cash.is-there-a-fee,有手续费吗？,,yǒu shǒuxùfèi ma?,,,2,zh-Hans-agent-v1
 numbers-money.s-n,三,,sān,,,2,latex-reference-v2
+atm-cash.the-card-was-declined,卡刷不了,,kǎ shuā bu liǎo,,,2,zh-Hans-agent-v1
 numbers-money.s,四,,sì,,,2,latex-reference-v2
+atm-cash.what-is-the-exchange-rate,汇率是多少？,,huìlǜ shì duōshao?,,,2,zh-Hans-agent-v1
 numbers-money.w,五,,wǔ,,,2,latex-reference-v2
+atm-cash.no-money-came-out,钱没出来,,qián méi chūlái,,,2,zh-Hans-agent-v1
 numbers-money.li,六,,liù,,,2,latex-reference-v2
+atm-cash.where-can-i-change-money,哪里可以换钱？,,nǎlǐ kěyǐ huàn qián?,,,2,zh-Hans-agent-v1
 numbers-money.q,七,,qī,,,2,latex-reference-v2
+atm-cash.the-machine-is-out-of-service,机器坏了,,jīqì huài le,,,2,zh-Hans-agent-v1
 numbers-money.b,八,,bā,,,2,latex-reference-v2
+atm-cash.please-give-me-smaller-notes,请给我小面额的钱,,qǐng gěi wǒ xiǎo miàn'é de qián,,,2,zh-Hans-agent-v1
 numbers-money.ji,九,,jiǔ,,,2,latex-reference-v2
+atm-cash.do-you-have-change,有零钱吗？,,yǒu língqián ma?,,,2,zh-Hans-agent-v1
 numbers-money.sh,十,,shí,,,2,latex-reference-v2
+atm-cash.may-i-pay-in,可以用{}付款吗？,,kěyǐ yòng {} fùkuǎn ma?,,,2,zh-Hans-agent-v1
 numbers-money.y-b-i,一百,,yìbǎi,,,2,latex-reference-v2
+atm-cash.please-charge-in-local-currency,请用人民币结算,,qǐng yòng Rénmínbì jiésuàn,,,2,zh-Hans-agent-v1
 numbers-money.y-qi-n,一千,,yìqiān,,,2,latex-reference-v2
+atm-cash.where-can-i-get-coins,哪里可以换硬币？,,nǎlǐ kěyǐ huàn yìngbì?,,,2,zh-Hans-agent-v1
 numbers-money.y-w-n,一万,,yíwàn,,,2,latex-reference-v2
+atm-cash.is-there-a-minimum-for-cards,刷卡有最低金额吗？,,shuākǎ yǒu zuìdī jīn'é ma?,,,2,zh-Hans-agent-v1
 numbers-money.b-n,半,,bàn,,,2,latex-reference-v2
+atm-cash.atm,自动取款机,自動取款機,zìdòng qǔkuǎnjī,,,2,zh-Hans-agent-v1
 numbers-money.yu-n,元,,yuán,,,2,latex-reference-v2
+atm-cash.banknote,钞票,,chāopiào,,,2,zh-Hans-agent-v1
 numbers-money.ku-i,块,,kuài,,,2,latex-reference-v2
+atm-cash.coin,硬币,,yìngbì,,,2,zh-Hans-agent-v1
 numbers-money.number-and-classifier-notes,,,,,,2,latex-reference-v2
+atm-cash.cash-only,只收现金,只收現金,zhǐ shōu xiànjīn,,,2,zh-Hans-agent-v1
+atm-cash.fee,手续费,,shǒuxùfèi,,,2,zh-Hans-agent-v1
+atm-cash.change,找零,,zhǎolíng,,,2,zh-Hans-agent-v1
+atm-cash.exchange-rate,汇率,匯率,huìlǜ,,,2,zh-Hans-agent-v1
+atm-cash.bank,银行,銀行,yínháng,,,2,zh-Hans-agent-v1
+atm-cash.money-exchange,外币兑换,外幣兌換,wàibì duìhuàn,,,2,zh-Hans-agent-v1
+atm-cash.pin,密码,密碼,mìmǎ,,,2,zh-Hans-agent-v1
+numbers-money.2-items,两个,,liǎng gè,,,2,zh-Hans-agent-v1
+numbers-money.yen,日元,,Rìyuán,,,2,zh-Hans-agent-v1
+numbers-money.yen-symbol,￥,,Rìyuán,,,2,zh-Hans-agent-v1
+numbers-money.number-and-classifier-notes-2,,,,,,2,zh-Hans-agent-v1

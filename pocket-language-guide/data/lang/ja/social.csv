@@ -1,44 +1,100 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
 social-basics.hello,こんにちは,,konnichiwa,,,2,japanese-reviewed-v6
-social-basics.good-morning,おはようございます,,ohayō gozaimasu,,,2,japanese-reviewed-v6
-social-basics.good-evening,こんばんは,,konbanwa,,,2,japanese-reviewed-v6
-social-basics.good-night,おやすみなさい,,oyasumi nasai,,,2,japanese-reviewed-v6
-social-basics.goodbye,さようなら,,sayōnara,,,2,japanese-reviewed-v6
-social-basics.thank-you,ありがとうございます,,arigatō gozaimasu,,,2,japanese-reviewed-v6
-social-basics.you-are-welcome,どういたしまして,,dō itashimashite,,,2,japanese-reviewed-v6
-social-basics.excuse-me-sorry,すみません,,sumimasen,,,2,japanese-reviewed-v6
-social-basics.sorry,ごめんなさい,,gomen nasai,,,2,japanese-reviewed-v6
-social-basics.okay-fine-i-am-okay,大丈夫です,,daijōbu desu,,,2,japanese-reviewed-v6
-social-basics.i-do-not-know,知りません,,shirimasen,,,2,japanese-reviewed-v6
 quick-responses.please-go-ahead,どうぞ,,dōzo,,,2,japanese-reviewed-v6
-quick-responses.yes-right,はい,,hai,,,2,japanese-reviewed-v6
-quick-responses.no-not,いいえ,,iie,,,2,japanese-reviewed-v6
-quick-responses.can-possible,できます,,dekimasu,,,2,japanese-reviewed-v6
-quick-responses.cannot-not-possible,できません,,dekimasen,,,2,japanese-reviewed-v6
-quick-responses.okay-fine,大丈夫です,,daijōbu desu,,,2,japanese-reviewed-v6
-quick-responses.no-good-not-allowed-will-not-work,だめです,,dame desu,,,2,japanese-reviewed-v6
-communication.i-do-not-speak-japanese,日本語は話せません,,nihongo wa hanasemasen,,,2,japanese-reviewed-v6
-communication.i-speak-only-a-little-japanese,日本語は少しだけ話せます,,nihongo wa sukoshi dake hanasemasu,,,2,japanese-reviewed-v6
-communication.do-you-speak-english,英語を話せますか？,,eigo o hanasemasu ka?,,,2,japanese-reviewed-v6
-communication.please-speak-more-slowly,もっとゆっくり話してください,,motto yukkuri hanashite kudasai,,,2,japanese-reviewed-v6
-communication.i-cannot-make-out-what-you-are-saying,聞き取れません,,kikitoremasen,,,2,japanese-reviewed-v6
-communication.i-do-not-understand,わかりません,,wakarimasen,,,2,japanese-reviewed-v6
-communication.i-cannot-read-it,読めません,,yomemasen,,,2,japanese-reviewed-v6
-communication.please-say-it-again,もう一度言ってください,,mō ichido itte kudasai,,,2,japanese-reviewed-v6
-communication.please-write-it-down,書いてください,,kaite kudasai,,,2,japanese-reviewed-v6
-communication.please-wait-a-moment,少し待ってください,,sukoshi matte kudasai,,,2,japanese-reviewed-v6
-communication.can-you-help-me,手伝ってもらえますか？,,tetsudatte moraemasu ka?,,,2,japanese-reviewed-v6
-communication.please-show-me-the-japanese-text,日本語の文を見せてください,,nihongo no bun o misete kudasai,,,2,japanese-reviewed-v6
-communication.please-write-it-in-roman-letters,ローマ字で書いてください,,rōmaji de kaite kudasai,,,2,japanese-reviewed-v6
 phone-translation.i-am-using-phone-translation,スマホで翻訳しています,,sumaho de hon'yaku shiteimasu,,,2,japanese-reviewed-v6
+sim-data.i-would-like-a-tourist-sim,旅行者用のSIMカードをお願いします,,ryokōshayō no shimu kādo o onegaishimasu,,,2,ja-agent-v1
+children.cannot-find-my-child,子供が迷子になりました,,kodomo ga maigo ni narimashita,,,2,ja-agent-v1
+etiquette.is-this-allowed,これは大丈夫ですか？,,kore wa daijōbu desu ka?,,,2,ja-agent-v1
+phone-text-power.please-type-it-for-me,入力してください,,nyūryoku shite kudasai,,,2,ja-agent-v1
+quick-responses.yes-right,はい,,hai,,,2,japanese-reviewed-v6
 phone-translation.please-speak-toward-the-phone,スマホに向かって話してください,,sumaho ni mukatte hanashite kudasai,,,2,japanese-reviewed-v6
+sim-data.may-i-use-your-wifi,Wi-Fiを使ってもいいですか？,,wai-fai o tsukatte mo ii desu ka?,,,2,ja-agent-v1
+children.make-an-announcement,館内放送をお願いします,,kannai hōsō o onegaishimasu,,,2,ja-agent-v1
+etiquette.is-tipping-expected,チップは必要ですか？,,chippu wa hitsuyō desu ka?,,,2,ja-agent-v1
+social-basics.hello-polite,失礼します,,shitsurei shimasu,,,1,ja-agent-v1
+social-basics.good-morning,おはようございます,,ohayō gozaimasu,,,2,japanese-reviewed-v6
+quick-responses.no-not,いいえ,,iie,,,2,japanese-reviewed-v6
+communication.do-you-speak-english,英語を話せますか？,,eigo o hanasemasu ka?,,,2,japanese-reviewed-v6
 phone-translation.one-sentence-at-a-time-please,一文ずつ話してください,,ichibun zutsu hanashite kudasai,,,2,japanese-reviewed-v6
-phone-translation.please-type-it-and-show-me,入力して見せてください,,nyūryoku shite misete kudasai,,,2,japanese-reviewed-v6
-phone-translation.please-write-the-place-name-in-japanese,地名を日本語で書いてください,,chimei o nihongo de kaite kudasai,,,2,japanese-reviewed-v6
-phone-translation.please-look-at-the-screen,画面を見てください,,gamen o mite kudasai,,,2,japanese-reviewed-v6
 phone-text-power.please-use-simple-words,簡単な言葉で話してください,,kantan na kotoba de hanashite kudasai,,,2,japanese-reviewed-v6
+sim-data.how-much-data-is-included,データ容量はどのくらいですか？,,dēta yōryō wa dono kurai desu ka?,,,2,ja-agent-v1
+children.child-age,子供は{}歳です,,kodomo wa {} sai desu,,,2,ja-agent-v1
+etiquette.is-service-included,サービス料は含まれていますか？,,sābisuryō wa fukumareteimasu ka?,,,2,ja-agent-v1
+social-basics.good-evening,こんばんは,,konbanwa,,,2,japanese-reviewed-v6
+communication.please-speak-more-slowly,もっとゆっくり話してください,,motto yukkuri hanashite kudasai,,,2,japanese-reviewed-v6
 phone-text-power.my-phone-battery-is-low,スマホの充電がもうすぐ切れます,,sumaho no jūden ga mōsugu kiremasu,,,2,japanese-reviewed-v6
+sim-data.do-you-need-my-passport,パスポートは必要ですか？,,pasupōto wa hitsuyō desu ka?,,,2,ja-agent-v1
+children.high-chair,子供用の椅子はありますか？,,kodomoyō no isu wa arimasu ka?,,,2,ja-agent-v1
+etiquette.may-i-enter,入ってもいいですか？,,haitte mo ii desu ka?,,,2,ja-agent-v1
+quick-responses.okay-can,いいです,,ii desu,,,2,ja-agent-v1
+social-basics.goodbye,さようなら,,sayōnara,,,2,japanese-reviewed-v6
 phone-text-power.do-you-have-a-power-bank,モバイルバッテリーはありますか？,,mobairu batterī wa arimasu ka?,,,2,japanese-reviewed-v6
-phone-text-power.may-i-charge-my-phone-here,ここでスマホを充電してもいいですか？,,koko de sumaho o jūden shite mo ii desu ka?,,,2,japanese-reviewed-v6
+sim-data.how-long-is-it-valid,有効期間はどのくらいですか？,,yūkō kikan wa dono kurai desu ka?,,,2,ja-agent-v1
+children.baby-changing-room,ベビールームはどこですか？,,bebīrūmu wa doko desu ka?,,,2,ja-agent-v1
+etiquette.remove-shoes,靴を脱ぎますか？,,kutsu o nugimasu ka?,,,2,ja-agent-v1
+communication.i-do-not-understand-spoken,聞いてもわかりません,,kiite mo wakarimasen,,,2,ja-agent-v1
+quick-responses.cannot-not-allowed,いけません,,ikemasen,,,2,ja-agent-v1
+social-basics.thank-you,ありがとうございます,,arigatō gozaimasu,,,2,japanese-reviewed-v6
 phone-text-power.the-translation-may-be-inaccurate,翻訳が正確でないかもしれません,,hon'yaku ga seikaku de nai kamo shiremasen,,,2,japanese-reviewed-v6
+sim-data.please-activate-it,開通をお願いします,,kaitsū o onegaishimasu,,,2,ja-agent-v1
+children.childrens-menu,お子様メニューはありますか？,,okosama menyū wa arimasu ka?,,,2,ja-agent-v1
+etiquette.photo-of-you,写真を撮らせていただけますか？,,shashin o torasete itadakemasu ka?,,,2,ja-agent-v1
+communication.i-cannot-read-understand,読んでもわかりません,,yonde mo wakarimasen,,,2,ja-agent-v1
+quick-responses.works-okay,それでいいです,,sore de ii desu,,,2,ja-agent-v1
+social-basics.you-are-welcome,どういたしまして,,dō itashimashite,,,2,japanese-reviewed-v6
+communication.please-say-it-again,もう一度言ってください,,mō ichido itte kudasai,,,2,japanese-reviewed-v6
 phone-text-power.please-confirm,確認してください,,kakunin shite kudasai,,,2,japanese-reviewed-v6
+sim-data.do-you-have-an-esim,eSIMはありますか？,,īshimu wa arimasu ka?,,,2,ja-agent-v1
+children.suitable-for-children,子供向けですか？,,kodomo muke desu ka?,,,2,ja-agent-v1
+etiquette.may-i-sit-here,ここに座ってもいいですか？,,koko ni suwatte mo ii desu ka?,,,2,ja-agent-v1
+quick-responses.does-not-work-no,無理です,,muri desu,,,2,ja-agent-v1
+social-basics.excuse-me-sorry,すみません,,sumimasen,,,2,japanese-reviewed-v6
+communication.please-write-it-down,書いてください,,kaite kudasai,,,2,japanese-reviewed-v6
+sim-data.my-data-is-not-working,データがつながりません,,dēta ga tsunagarimasen,,,2,ja-agent-v1
+children.minimum-age,何歳から入れますか？,,nansai kara hairemasu ka?,,,2,ja-agent-v1
+etiquette.queue-for,これは{}の列ですか？,,kore wa {} no retsu desu ka?,,,2,ja-agent-v1
+social-basics.sorry,ごめんなさい,,gomen nasai,,,2,japanese-reviewed-v6
+communication.please-wait-a-moment,少し待ってください,,sukoshi matte kudasai,,,2,japanese-reviewed-v6
+sim-data.does-it-need-registration,登録が必要ですか？,,tōroku ga hitsuyō desu ka?,,,2,ja-agent-v1
+children.do-children-pay,子供も料金がかかりますか？,,kodomo mo ryōkin ga kakarimasu ka?,,,2,ja-agent-v1
+etiquette.dressed-appropriately,この服で大丈夫ですか？,,kono fuku de daijōbu desu ka?,,,2,ja-agent-v1
+communication.can-you-help-me,手伝ってもらえますか？,,tetsudatte moraemasu ka?,,,2,japanese-reviewed-v6
+sim-data.i-have-no-signal,電波がありません,,denpa ga arimasen,,,2,ja-agent-v1
+children.crib,ベビーベッドはありますか？,,bebī beddo wa arimasu ka?,,,2,ja-agent-v1
+etiquette.did-not-mean-to-offend,知らずに失礼しました,,shirazu ni shitsurei shimashita,,,2,ja-agent-v1
+social-basics.no-problem,問題ありません,,mondai arimasen,,,2,ja-agent-v1
+social-basics.i-do-not-know,知りません,,shirimasen,,,2,japanese-reviewed-v6
+sim-data.please-write-the-wifi-password,Wi-Fiのパスワードを書いてください,,wai-fai no pasuwādo o kaite kudasai,,,2,ja-agent-v1
+children.warm-this-bottle,哺乳瓶を温めてください,,honyūbin o atatamete kudasai,,,2,ja-agent-v1
+etiquette.what-is-customary,ここではどうするのが普通ですか？,,koko de wa dō suru no ga futsū desu ka?,,,2,ja-agent-v1
+sim-data.sim-card,SIMカード,,shimu kādo,,,2,ja-agent-v1
+children.car-seat,チャイルドシートが必要です,,chairudo shīto ga hitsuyō desu,,,2,ja-agent-v1
+etiquette.keep-the-change,お釣りは結構です,,otsuri wa kekkō desu,,,2,ja-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,変換プラグはどこで買えますか？,,henkan puragu wa doko de kaemasu ka?,,,2,ja-agent-v1
+children.stroller,ベビーカー,,bebīkā,,,2,ja-agent-v1
+sim-data.mobile-data,モバイルデータ,,mobairu dēta,,,2,ja-agent-v1
+children.playground,遊び場はありますか？,,asobiba wa arimasu ka?,,,2,ja-agent-v1
+sim-data.can-i-top-up-this-sim,このSIMにチャージできますか？,,kono shimu ni chāji dekimasu ka?,,,2,ja-agent-v1
+sim-data.top-up,チャージ,追加チャージ,chāji,,,2,ja-agent-v1
+sim-data.is-there-coverage-in,{}は電波が入りますか？,,{} wa denpa ga hairimasu ka?,,,2,ja-agent-v1
+sim-data.signal,電波,,denpa,,,2,ja-agent-v1
+sim-data.esim,eSIM,,īshimu,,,2,ja-agent-v1
+sim-data.prepaid,プリペイド,,puripeido,,,2,ja-agent-v1
+sim-data.roaming,ローミング,,rōmingu,,,2,ja-agent-v1
+communication.i-do-not-speak-this-language,日本語は話せません,,nihongo wa hanasemasen,,,2,japanese-reviewed-v6
+communication.i-speak-only-a-little-of-this,日本語は少しだけ話せます,,nihongo wa sukoshi dake hanasemasu,,,2,japanese-reviewed-v6
+social-basics.good-night,おやすみなさい,,oyasumi nasai,,,2,japanese-reviewed-v6
+quick-responses.can-possible,できます,,dekimasu,,,2,japanese-reviewed-v6
+phone-translation.please-type-it-and-show-me,入力して見せてください,,nyūryoku shite misete kudasai,,,2,japanese-reviewed-v6
+phone-text-power.may-i-charge-my-phone-here,ここでスマホを充電してもいいですか？,,koko de sumaho o jūden shite mo ii desu ka?,,,2,japanese-reviewed-v6
+quick-responses.cannot-not-possible,できません,,dekimasen,,,2,japanese-reviewed-v6
+communication.i-cannot-make-out-what-you-are-saying,聞き取れません,,kikitoremasen,,,2,japanese-reviewed-v6
+phone-translation.please-write-the-place-name,地名を日本語で書いてください,,chimei o nihongo de kaite kudasai,,,2,japanese-reviewed-v6
+quick-responses.okay-fine,大丈夫です,,daijōbu desu,,,2,japanese-reviewed-v6
+communication.i-do-not-understand,わかりません,,wakarimasen,,,2,japanese-reviewed-v6
+phone-translation.please-look-at-the-screen,画面を見てください,,gamen o mite kudasai,,,2,japanese-reviewed-v6
+quick-responses.no-good-not-allowed-will-not-work,だめです,,dame desu,,,2,japanese-reviewed-v6
+communication.i-cannot-read-it,読めません,,yomemasen,,,2,japanese-reviewed-v6
+social-basics.okay-fine-i-am-okay,大丈夫です,,daijōbu desu,,,2,japanese-reviewed-v6
+communication.please-show-me-the-text,日本語の文を見せてください,,nihongo no bun o misete kudasai,,,2,japanese-reviewed-v6
+communication.please-write-it-in-roman-letters,ローマ字で書いてください,,rōmaji de kaite kudasai,,,2,japanese-reviewed-v6

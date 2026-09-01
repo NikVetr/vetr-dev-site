@@ -1,0 +1,60 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+toilets.where-toilet,¿Dónde está el baño?,,,,2,es-agent-v1
+accessibility.step-free,¿Hay acceso sin escalones?,,,,2,es-agent-v1
+toilets.where-public-toilet,¿Dónde hay un baño público?,,,,2,es-agent-v1
+accessibility.wheelchair-access,¿Es accesible en silla de ruedas?,,,,2,es-agent-v1
+toilets.may-i-use-the-toilet,"¿Puedo usar el baño, por favor?",,,,2,es-agent-v1
+accessibility.elevator,¿Hay ascensor?,¿Hay elevador?,,,2,es-agent-v1
+toilets.is-it-only-for-customers,¿Es solo para clientes?,,,,2,es-agent-v1
+accessibility.ramp,¿Hay una rampa?,,,,2,es-agent-v1
+toilets.toilet-wc,Baños,Servicios · Aseos · WC · Sanitarios,,,2,es-agent-v1
+accessibility.how-many-steps,¿Cuántos escalones hay?,,,,2,es-agent-v1
+toilets.is-it-free,¿Es gratis?,,,,2,es-agent-v1
+accessibility.cannot-climb-stairs,No puedo subir escaleras,,,,2,es-agent-v1
+toilets.do-i-need-a-coin,¿Necesito una moneda o ficha?,,,,2,es-agent-v1
+accessibility.need-to-sit-down,Necesito sentarme,,,,2,es-agent-v1
+toilets.is-the-tap-water-safe-to-drink,¿El agua del grifo es potable?,¿El agua de la llave es potable?,,,2,es-agent-v1
+accessibility.accessible-restroom,¿Hay un baño accesible?,¿Hay un aseo adaptado?,,,2,es-agent-v1
+toilets.it-is-urgent,Es urgente,,,,2,es-agent-v1
+accessibility.station-assistance,¿Hay asistencia en la estación?,,,,2,es-agent-v1
+toilets.may-i-have-the-toilet-key,¿Me da la llave del baño?,,,,2,es-agent-v1
+accessibility.help-me-carry,"Ayúdeme a llevar esto, por favor",,,,2,es-agent-v1
+toilets.there-is-no-toilet-paper,No hay papel higiénico,,,,2,es-agent-v1
+accessibility.board-first,¿Puedo subir primero?,,,,2,es-agent-v1
+toilets.toilet-paper,papel higiénico,,,,2,es-agent-v1
+accessibility.door-width,¿Cuántos centímetros mide la puerta?,,,,2,es-agent-v1
+toilets.it-is-out-of-order,No funciona,,,,2,es-agent-v1
+accessibility.wheelchair-width,Mi silla de ruedas mide {} cm de ancho,,,,2,es-agent-v1
+toilets.out-of-order,Fuera de servicio,Averiado,,,2,es-agent-v1
+accessibility.hard-of-hearing,Tengo problemas de audición,Tengo hipoacusia,,,2,es-agent-v1
+toilets.mens-toilet,Caballeros,Hombres,,,2,es-agent-v1
+accessibility.speak-louder,"Hable más alto, por favor",,,,2,es-agent-v1
+toilets.womens-toilet,Damas,Señoras · Mujeres,,,2,es-agent-v1
+accessibility.visually-impaired,Tengo discapacidad visual,Soy invidente,,,2,es-agent-v1
+toilets.drinking-water,Agua potable,,,,2,es-agent-v1
+accessibility.take-your-arm,¿Puedo tomarle del brazo?,,,,2,es-agent-v1
+toilets.not-for-drinking,Agua no potable,,,,2,es-agent-v1
+accessibility.guide-dog,Este es mi perro guía,,,,2,es-agent-v1
+toilets.accessible-toilet,Baño accesible,Aseo adaptado,,,2,es-agent-v1
+toilets.where-can-i-wash-my-hands,¿Dónde puedo lavarme las manos?,,,,2,es-agent-v1
+toilets.can-i-flush-the-paper,¿Puedo tirar el papel al inodoro?,,,,2,es-agent-v1
+toilets.is-there-a-toilet-on-board,¿Hay baño a bordo?,,,,2,es-agent-v1
+toilets.the-toilet-will-not-flush,El inodoro no descarga,El baño no descarga,,,2,es-agent-v1
+toilets.baby-change,Cambiador de bebés,,,,2,es-agent-v1
+toilets.squat-toilet,Inodoro a la turca,Váter turco,,,1,es-agent-v1
+building-help.what-room-number-is-this,¿Qué número de habitación es esta?,,,,2,es-agent-v1
+building-help.i-am-lost,Me perdí,Estoy perdido/a,,,2,es-agent-v1
+building-help.where-is-reception,¿Dónde está la recepción?,,,,2,es-agent-v1
+building-help.where-is-a-power-outlet,¿Dónde hay un enchufe?,¿Dónde hay un tomacorriente?,,,2,es-agent-v1
+in-a-building.is-this-the-correct-entrance,¿Es esta la entrada correcta?,,,,2,es-agent-v1
+in-a-building.do-you-have-wi-fi,¿Tiene wifi?,,,,2,es-agent-v1
+in-a-building.what-is-the-wi-fi-password,¿Cuál es la contraseña del wifi?,¿Cuál es la clave del wifi?,,,2,es-agent-v1
+in-a-building.which-floor,¿Qué piso?,¿Qué planta?,,,2,es-agent-v1
+building-words.elevator,ascensor,elevador,,,2,es-agent-v1
+building-words.stairs,escaleras,,,,2,es-agent-v1
+building-words.entrance,entrada,,,,2,es-agent-v1
+building-words.exit,salida,,,,2,es-agent-v1
+building-words.men,Hombres,Caballeros,,,2,es-agent-v1
+building-words.women,Mujeres,Damas,,,2,es-agent-v1
+building-words.door,puerta,,,,2,es-agent-v1
+building-words.key,llave,,,,2,es-agent-v1

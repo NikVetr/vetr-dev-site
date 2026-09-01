@@ -1,0 +1,60 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+toilets.where-toilet,화장실이 어디예요?,,hwajangsiri eodiyeyo?,,,2,ko-agent-v1
+accessibility.step-free,계단 없는 길 있어요?,,gyedan eomneun gil isseoyo?,,,2,ko-agent-v1
+toilets.where-public-toilet,공중화장실이 어디예요?,,gongjunghwajangsiri eodiyeyo?,,,2,ko-agent-v1
+accessibility.wheelchair-access,휠체어 이용 가능해요?,,hwilcheeo iyong ganeunghaeyo?,,,2,ko-agent-v1
+toilets.may-i-use-the-toilet,화장실 써도 될까요?,,hwajangsil sseodo doelkkayo?,,,2,ko-agent-v1
+accessibility.elevator,엘리베이터 있어요?,,ellibeiteo isseoyo?,,,2,ko-agent-v1
+toilets.is-it-only-for-customers,손님만 쓸 수 있어요?,,sonnimman sseul su isseoyo?,,,2,ko-agent-v1
+accessibility.ramp,경사로 있어요?,,gyeongsaro isseoyo?,,,2,ko-agent-v1
+toilets.toilet-wc,화장실,WC,hwajangsil,,,2,ko-agent-v1
+accessibility.how-many-steps,계단이 몇 개예요?,,gyedani myeot gaeyeyo?,,,2,ko-agent-v1
+toilets.is-it-free,무료예요?,,muryoyeyo?,,,2,ko-agent-v1
+accessibility.cannot-climb-stairs,계단을 못 올라가요,,gyedaneul mot ollagayo,,,2,ko-agent-v1
+toilets.do-i-need-a-coin,동전이 필요해요?,,dongjeoni piryohaeyo?,,,2,ko-agent-v1
+accessibility.need-to-sit-down,좀 앉아야 해요,,jom anjaya haeyo,,,2,ko-agent-v1
+toilets.is-the-tap-water-safe-to-drink,수돗물 마셔도 돼요?,,sudonmul masyeodo dwaeyo?,,,2,ko-agent-v1
+accessibility.accessible-restroom,장애인 화장실 있어요?,,jangaein hwajangsil isseoyo?,,,2,ko-agent-v1
+toilets.it-is-urgent,급해요,,geupaeyo,,,2,ko-agent-v1
+accessibility.station-assistance,역에서 도움받을 수 있어요?,,yeogeseo doumbadeul su isseoyo?,,,2,ko-agent-v1
+toilets.may-i-have-the-toilet-key,화장실 열쇠 주세요,,hwajangsil yeolsoe juseyo,,,2,ko-agent-v1
+accessibility.help-me-carry,이것 좀 들어 주세요,,igeot jom deureo juseyo,,,2,ko-agent-v1
+toilets.there-is-no-toilet-paper,휴지가 없어요,,hyujiga eopseoyo,,,2,ko-agent-v1
+accessibility.board-first,먼저 타도 될까요?,,meonjeo tado doelkkayo?,,,2,ko-agent-v1
+toilets.toilet-paper,휴지,화장지,hyuji,,,2,ko-agent-v1
+accessibility.door-width,문 폭이 얼마예요?,,mun pogi eolmayeyo?,,,2,ko-agent-v1
+toilets.it-is-out-of-order,고장났어요,,gojangnasseoyo,,,2,ko-agent-v1
+accessibility.wheelchair-width,휠체어 너비가 {}cm예요,,hwilcheeo neobiga {}cmyeyo,,,2,ko-agent-v1
+toilets.out-of-order,고장,사용 금지,gojang,,,2,ko-agent-v1
+accessibility.hard-of-hearing,귀가 잘 안 들려요,,gwiga jal an deullyeoyo,,,2,ko-agent-v1
+toilets.mens-toilet,남자 화장실,남성용,namja hwajangsil,,,2,ko-agent-v1
+accessibility.speak-louder,크게 말씀해 주세요,,keuge malsseumhae juseyo,,,2,ko-agent-v1
+toilets.womens-toilet,여자 화장실,여성용,yeoja hwajangsil,,,2,ko-agent-v1
+accessibility.visually-impaired,시각장애가 있어요,,sigakjangaega isseoyo,,,2,ko-agent-v1
+toilets.drinking-water,음용수,먹는 물,eumyongsu,,,2,ko-agent-v1
+accessibility.take-your-arm,팔 좀 잡아도 될까요?,,pal jom jabado doelkkayo?,,,2,ko-agent-v1
+toilets.not-for-drinking,음용 불가,마시는 물이 아닙니다,eumyong bulga,,,1,ko-agent-v1
+accessibility.guide-dog,제 안내견이에요,,je annaegyeonieyo,,,2,ko-agent-v1
+toilets.accessible-toilet,장애인 화장실,다목적 화장실,jangaein hwajangsil,,,2,ko-agent-v1
+toilets.where-can-i-wash-my-hands,손 어디서 씻어요?,,son eodiseo ssiseoyo?,,,2,ko-agent-v1
+toilets.can-i-flush-the-paper,휴지 변기에 버려도 돼요?,,hyuji byeongie beoryeodo dwaeyo?,,,2,ko-agent-v1
+toilets.is-there-a-toilet-on-board,차 안에 화장실 있어요?,,cha ane hwajangsil isseoyo?,,,2,ko-agent-v1
+toilets.the-toilet-will-not-flush,물이 안 내려가요,,muri an naeryeogayo,,,2,ko-agent-v1
+toilets.baby-change,기저귀 교환대,,gijeogwi gyohwandae,,,2,ko-agent-v1
+toilets.squat-toilet,화변기,쪼그려 앉는 변기,hwabyeongi,,,2,ko-agent-v1
+building-help.what-room-number-is-this,여기 몇 호실이에요?,,yeogi myeot hosirieyo?,,,2,ko-agent-v1
+building-help.i-am-lost,길을 잃었어요,,gireul ireosseoyo,,,2,ko-agent-v1
+building-help.where-is-reception,안내데스크 어디예요?,,annaedeseukeu eodiyeyo?,,,2,ko-agent-v1
+building-help.where-is-a-power-outlet,콘센트가 어디예요?,,konsenteuga eodiyeyo?,,,2,ko-agent-v1
+in-a-building.is-this-the-correct-entrance,이 입구 맞아요?,,i ipgu majayo?,,,2,ko-agent-v1
+in-a-building.do-you-have-wi-fi,와이파이 있어요?,,waipai isseoyo?,,,2,ko-agent-v1
+in-a-building.what-is-the-wi-fi-password,와이파이 비밀번호 뭐예요?,,waipai bimilbeonho mwoyeyo?,,,2,ko-agent-v1
+in-a-building.which-floor,몇 층이에요?,,myeot cheungieyo?,,,2,ko-agent-v1
+building-words.elevator,엘리베이터,,ellibeiteo,,,2,ko-agent-v1
+building-words.stairs,계단,,gyedan,,,2,ko-agent-v1
+building-words.entrance,입구,,ipgu,,,2,ko-agent-v1
+building-words.exit,출구,,chulgu,,,2,ko-agent-v1
+building-words.men,남자,남성,namja,,,2,ko-agent-v1
+building-words.women,여자,여성,yeoja,,,2,ko-agent-v1
+building-words.door,문,,mun,,,2,ko-agent-v1
+building-words.key,열쇠,,yeolsoe,,,2,ko-agent-v1

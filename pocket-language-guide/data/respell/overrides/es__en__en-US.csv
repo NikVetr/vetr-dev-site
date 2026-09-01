@@ -1,0 +1,750 @@
+concept_id,respell
+toilets.where-toilet,DON-deh es-TA el BAH-nyo
+accessibility.step-free,eye ak-SEH-so seen es-kah-LOH-nes
+building-help.what-room-number-is-this,keh NOO-meh-ro deh ah-bee-tah-see-ON es ES-ta
+in-a-building.is-this-the-correct-entrance,es ES-ta la en-TRAH-da ko-RREK-ta
+building-words.elevator,ah-sen-SOR
+pronouns-verbs.i-me,yo / meh
+question-words.what,keh
+medical-conditions.i-am-diabetic,TEN-go dee-ah-BEH-tes
+pharmacy-symptoms.which-pharmacy-is-open-now,keh far-MAH-see-ah es-TA ah-bee-ER-ta ah-OH-ra
+police-consulate.where-is-the-police-station,DON-deh es-TA la ko-mee-sah-REE-ah
+body-parts.head,la kah-BEH-sa
+emergency-medical.help,owk-SEE-lee-oh
+lost-rescue.i-lost-my-passport,per-DEE mee pah-sah-POR-teh
+dietary-needs.no-meat,seen KAR-neh
+food-ordering.table-for-two,MEH-sa PAH-ra dos
+weather.forecast,kwal es el pro-NOS-tee-ko del tee-EM-po
+trail-words.trail,el sen-DEH-ro
+hiking-parks.is-this-the-way-to,es ES-teh el kah-MEE-no a {}
+trail-conditions.how-long-is-the-full-route,KWAN-toh DOO-ra la ROO-ta kom-PLEH-ta
+trail-transport.how-long-is-the-queue,es LAR-ga la FEE-la
+trail-warnings.open,ah-bee-ER-toh
+trail-landmarks.trail-marker,la seh-NYAL del sen-DEH-ro
+laundry.please-wash-these-clothes,"LAH-veh ES-ta RO-pa, por fah-VOR"
+hotel-words.passport,el pah-sah-POR-teh
+hotel-basics.are-any-rooms-available,tee-EH-nen ah-bee-tah-see-OH-nes LEE-bres
+hotel-requests.can-i-check-out-later,PWEH-doh ah-SER el chek-OWT mas TAR-deh
+room-problems.there-is-a-problem-with-the-room,eye oon pro-BLEH-ma kon la ah-bee-tah-see-ON
+introductions.my-name-is,meh YAH-mo {}
+atm-cash.where-is-an-atm,DON-deh eye oon kah-HEH-ro ow-toh-MAH-tee-ko
+numbers-money.l-ng,SEH-ro
+attractions-tickets.where-can-i-buy-tickets,DON-deh PWEH-doh kom-PRAR en-TRAH-das
+payment-receipt.pay-by-card,PWEH-doh pah-GAR kon tar-HEH-ta
+shopping.i-am-just-looking,SO-lo es-TOY mee-RAN-doh
+color-size-returns.do-you-have-another-color,tee-EH-neh OH-tro ko-LOR
+tax-refund.can-i-get-a-tax-refund,PWEH-doh peh-DEER la deh-vo-loo-see-ON del EE-va
+sim-data.i-would-like-a-tourist-sim,kee-see-EH-ra OO-na tar-HEH-ta seem PAH-ra too-REES-tas
+children.cannot-find-my-child,no en-KWEN-tro a mee EE-ho
+etiquette.is-this-allowed,es-TA per-mee-TEE-doh ES-to
+social-basics.hello,OH-la
+communication.i-do-not-speak-this-language,no AH-blo es-pah-NYOL
+quick-responses.please-go-ahead,ah-deh-LAN-teh
+phone-translation.i-am-using-phone-translation,es-TOY oo-SAN-doh oon tra-dook-TOR en el MO-veel
+phone-text-power.please-type-it-for-me,"es-KREE-bah-lo en el teh-LEH-fo-no, por fah-VOR"
+time-scheduling.what-time-is-it,keh O-ra es
+time-words.today,oy
+days-of-week.monday,LOO-nes
+months.january,eh-NEH-ro
+border-customs.i-am-a-tourist,VEN-go deh too-REES-mo
+directions.where-is,DON-deh es-TA {}
+quick-directions.go-straight,SEE-ga deh-REH-cho
+taxi.please-take-me-here,"YEH-veh-meh ah-KEE, por fah-VOR"
+transit-rides.two-tickets,"dos bo-LEH-tos, por fah-VOR"
+place-words.scenic-area,SO-na pah-no-RAH-mee-ka
+pickup-meeting.where-is-the-pickup-point,DON-deh es-TA el POON-toh deh reh-ko-HEE-da
+rail-station-words.high-speed-rail,tren deh AL-ta veh-lo-see-DAD
+common-signs.open-on,ah-bee-ER-toh
+utility-templates.i-want-to-go-to,kee-EH-ro eer a {}
+toilets.where-public-toilet,DON-deh eye oon BAH-nyo POO-blee-ko
+accessibility.wheelchair-access,es ak-seh-SEE-bleh en SEE-ya deh RWEH-das
+building-help.i-am-lost,meh per-DEE
+building-words.stairs,es-kah-LEH-ras
+pronouns-verbs.we-us,no-SO-tros / nos
+question-words.where,DON-deh
+medical-conditions.i-need-insulin,neh-seh-SEE-toh een-soo-LEE-na
+pharmacy-symptoms.i-need-medicine-for,neh-seh-SEE-toh oon meh-dee-kah-MEN-toh PAH-ra {}
+police-consulate.i-want-to-report-a-theft,kee-EH-ro deh-noon-see-AR oon RO-bo
+body-parts.stomach,el es-TO-mah-go
+emergency-medical.please-call-an-ambulance,"YAH-meh a OO-na am-boo-LAN-see-ah, por fah-VOR"
+lost-rescue.i-lost-my-phone,per-DEE mee teh-LEH-fo-no
+dietary-needs.no-eggs,seen WEH-vo
+food-ordering.is-a-table-available,eye OO-na MEH-sa LEE-breh
+weather.will-it-rain,va a yo-VER oy
+trail-words.trailhead,el ee-NEE-see-oh del sen-DEH-ro
+hiking-parks.where-is-the-trailhead,DON-deh em-pee-EH-sa el sen-DEH-ro
+trail-conditions.can-we-return-the-same-way,po-DEH-mos vol-VER por el MEES-mo kah-MEE-no
+trail-transport.what-time-is-the-last-shuttle,a keh O-ra es el OOL-tee-mo ow-toh-BOOS
+trail-warnings.closed,seh-RRAH-doh
+trail-landmarks.fork-junction,la bee-foor-kah-see-ON
+laundry.where-is-a-laundromat,DON-deh eye OO-na lah-van-deh-REE-ah
+hotel-words.room-key-card,la tar-HEH-ta deh la ah-bee-tah-see-ON
+hotel-basics.there-are-two-of-us,SO-mos dos
+hotel-requests.what-time-does-breakfast-start,a keh O-ra em-pee-EH-sa el deh-sah-YOO-no
+room-problems.the-air-conditioning-is-broken,el AY-reh ah-kon-dee-see-oh-NAH-doh no foon-see-OH-na
+introductions.nice-to-meet-you,MOO-cho GOOS-toh
+atm-cash.does-this-atm-take-foreign-cards,ES-teh kah-HEH-ro ah-SEP-ta tar-HEH-tas eks-tran-HEH-ras
+numbers-money.y,OO-no
+attractions-tickets.do-i-need-a-reservation,neh-seh-SEE-toh reh-SER-va
+payment-receipt.pay-cash,PWEH-doh pah-GAR en eh-fek-TEE-vo
+shopping.how-much-is-this,KWAN-toh KWES-ta ES-to
+color-size-returns.do-you-have-another-size,tee-EH-neh OH-tra TAH-ya
+sim-data.may-i-use-your-wifi,meh per-MEE-teh oo-SAR soo WEE-fee
+children.make-an-announcement,"ah-VEE-seh por el al-tah-VOS, por fah-VOR"
+etiquette.is-tipping-expected,seh ah-kos-TOOM-bra deh-HAR pro-PEE-na
+social-basics.hello-polite,BWEH-nos DEE-as
+communication.i-speak-only-a-little-of-this,AH-blo PO-ko es-pah-NYOL
+quick-responses.yes-right,see
+phone-translation.please-speak-toward-the-phone,AH-bleh AH-see-ah el teh-LEH-fo-no
+phone-translation.please-write-the-place-name,es-KREE-ba el NOM-breh del loo-GAR en es-pah-NYOL
+time-scheduling.how-many-minutes,KWAN-tos mee-NOO-tos
+time-words.tomorrow,mah-NYAH-na
+days-of-week.tuesday,MAR-tes
+months.february,feh-BREH-ro
+border-customs.here-is-my-passport,ah-KEE es-TA mee pah-sah-POR-teh
+directions.how-do-i-get-to,KO-mo YEH-go a {}
+quick-directions.turn-left,HEE-reh a la ees-kee-ER-da
+taxi.please-send-me-the-address,"en-VEE-eh-meh la dee-rek-see-ON, por fah-VOR"
+transit-rides.where-is-the-subway-station,DON-deh es-TA la es-tah-see-ON deh MEH-tro
+place-words.visitor-center,SEN-tro deh vee-see-TAN-tes
+pickup-meeting.please-send-me-the-pickup-point,en-VEE-eh-meh el POON-toh deh reh-ko-HEE-da
+rail-station-words.maglev,tren deh leh-vee-tah-see-ON mag-NEH-tee-ka
+common-signs.closed-off,seh-RRAH-doh
+utility-templates.please-give-me,"DEH-meh {}, por fah-VOR"
+toilets.may-i-use-the-toilet,"PWEH-doh oo-SAR el BAH-nyo, por fah-VOR"
+accessibility.elevator,eye ah-sen-SOR
+building-help.where-is-reception,DON-deh es-TA la reh-sep-see-ON
+in-a-building.do-you-have-wi-fi,tee-EH-neh WEE-fee
+building-words.entrance,en-TRAH-da
+pronouns-verbs.you,too
+question-words.who,kee-EN
+medical-conditions.i-have-asthma,TEN-go AS-ma
+pharmacy-symptoms.i-have-a-fever,TEN-go fee-EH-breh
+police-consulate.my-bag-was-stolen,meh ro-BAH-ron el BOL-so
+body-parts.back,la es-PAL-da
+emergency-medical.i-need-a-doctor,neh-seh-SEE-toh oon MEH-dee-ko
+lost-rescue.please-call-the-police,"YAH-meh a la po-lee-SEE-ah, por fah-VOR"
+dietary-needs.not-spicy,seen pee-KAN-teh
+food-ordering.menu-please,"la KAR-ta, por fah-VOR"
+weather.is-it-safe-today,oy es seh-GOO-ro
+trail-words.summit,la KOOM-breh
+hiking-parks.how-long-to-the-summit,KWAN-toh FAL-ta a la KOOM-breh
+trail-conditions.can-we-return-before-dark,po-DEH-mos vol-VER AN-tes del ah-no-cheh-SER
+trail-transport.when-does-the-cableway-stop,a keh O-ra see-EH-rra el teh-leh-FEH-ree-ko
+trail-warnings.maintenance,man-teh-nee-mee-EN-toh
+trail-landmarks.boardwalk-cliff-path,la pah-sah-REH-la
+laundry.when-will-it-be-ready,KWAN-doh es-tah-RA LEES-ta
+hotel-words.check-in,chek-EEN
+hotel-basics.i-have-a-reservation,TEN-go OO-na reh-SER-va
+hotel-requests.can-i-store-my-luggage,PWEH-doh deh-HAR mee eh-kee-PAH-heh
+room-problems.there-is-no-hot-water,no eye AH-gwa kah-lee-EN-teh
+introductions.what-is-your-name,KO-mo seh YAH-ma
+atm-cash.the-atm-kept-my-card,el kah-HEH-ro seh keh-DOH kon mee tar-HEH-ta
+numbers-money.r,dos
+attractions-tickets.what-is-the-latest-entry-time,kwal es la OOL-tee-ma O-ra deh en-TRAH-da
+payment-receipt.pay-by-qr-code,PWEH-doh pah-GAR kon KO-dee-go koo-EH-reh
+shopping.that-is-too-expensive,es deh-mah-see-AH-doh KAH-ro
+color-size-returns.may-i-try-it-on,meh lo PWEH-doh pro-BAR
+sim-data.how-much-data-is-included,KWAN-tos DAH-tos een-KLOO-yeh
+children.child-age,mee EE-ho tee-EH-neh {} AH-nyos
+etiquette.is-service-included,el ser-VEE-see-oh es-TA een-kloo-EE-doh
+social-basics.good-morning,BWEH-nos DEE-as
+communication.do-you-speak-english,AH-bla een-GLES
+quick-responses.no-not,no
+phone-translation.one-sentence-at-a-time-please,"OO-na FRAH-seh a la ves, por fah-VOR"
+phone-text-power.please-use-simple-words,"OO-seh pah-LAH-bras sen-SEE-yas, por fah-VOR"
+time-scheduling.what-time-should-we-meet,a keh O-ra nos VEH-mos
+time-words.yesterday,ah-YER
+days-of-week.wednesday,mee-ER-ko-les
+months.march,MAR-so
+border-customs.i-am-staying-for-days,meh KEH-doh {} DEE-as
+directions.is-it-far,es-TA LEH-hos
+quick-directions.turn-right,HEE-reh a la deh-REH-cha
+taxi.we-need-the-east-gate-not-the-south-gate,"neh-seh-see-TAH-mos la PWER-ta ES-teh, no la PWER-ta soor"
+transit-rides.does-this-bus-train-go-to,ES-teh ow-toh-BOOS o tren va a {}
+place-words.railway-station,es-tah-see-ON deh tren
+pickup-meeting.please-pick-us-up-here,"reh-KO-hah-nos ah-KEE, por fah-VOR"
+rail-station-words.transfer,trans-BOR-doh
+common-signs.occupied,o-koo-PAH-doh
+utility-templates.may-i,PWEH-doh {}
+toilets.is-it-only-for-customers,es SO-lo PAH-ra klee-EN-tes
+accessibility.ramp,eye OO-na RAHM-pa
+building-help.where-is-a-power-outlet,DON-deh eye oon en-CHOO-feh
+in-a-building.what-is-the-wi-fi-password,kwal es la kon-tra-SEH-nya del WEE-fee
+building-words.exit,sah-LEE-da
+pronouns-verbs.you-polite,oos-TED
+question-words.which-one,kwal
+medical-conditions.i-have-a-heart-condition,TEN-go OO-na en-fer-meh-DAD del ko-rah-SON
+pharmacy-symptoms.i-have-diarrhea,TEN-go dee-ah-RREH-ah
+police-consulate.my-passport-was-stolen,meh ro-BAH-ron el pah-sah-POR-teh
+body-parts.throat,la gar-GAN-ta
+emergency-medical.i-am-sick,es-TOY en-FER-mo
+lost-rescue.we-are-here,es-TAH-mos ah-KEE
+dietary-needs.less-spicy,MEH-nos pee-KAN-teh
+food-ordering.i-want-this,kee-EH-ro ES-to
+weather.how-cold-at-night,KWAN-toh FREE-oh AH-seh deh NO-cheh
+trail-words.viewpoint,el mee-rah-DOR
+hiking-parks.how-long-to-the-viewpoint,KWAN-toh FAL-ta al mee-rah-DOR
+trail-conditions.is-the-trail-open,es-TA ah-bee-ER-toh el sen-DEH-ro
+trail-transport.where-can-we-buy-water,DON-deh po-DEH-mos kom-PRAR AH-gwa
+trail-warnings.steep-slope,pen-dee-EN-teh pro-noon-see-AH-da
+trail-landmarks.start,el ee-NEE-see-oh
+laundry.how-much-per-kilo,KWAN-toh KWES-ta el KEE-lo
+hotel-words.check-out,chek-OWT
+hotel-basics.can-i-charge-my-phone,PWEH-doh kar-GAR mee teh-LEH-fo-no
+hotel-requests.no-housekeeping,"seen ser-VEE-see-oh deh leem-PYEH-sa, por fah-VOR"
+room-problems.can-i-change-rooms,PWEH-doh kam-bee-AR deh ah-bee-tah-see-ON
+introductions.we-are-traveling-together,vee-ah-HAH-mos HOON-tos
+atm-cash.is-there-a-fee,eye ko-mee-see-ON
+numbers-money.li-ng,dos
+attractions-tickets.are-there-lockers,eye kah-see-YEH-ros
+payment-receipt.a-receipt-please,"oon reh-SEE-bo, por fah-VOR"
+shopping.can-it-be-a-little-cheaper,PWEH-deh ser oon PO-ko mas bah-RAH-toh
+color-size-returns.can-i-return-it,PWEH-doh deh-vol-VER-lo
+sim-data.do-you-need-my-passport,neh-seh-SEE-ta mee pah-sah-POR-teh
+children.high-chair,tee-EH-nen SEE-ya AL-ta PAH-ra NEE-nyos
+etiquette.may-i-enter,PWEH-doh en-TRAR
+social-basics.good-evening,BWEH-nas NO-ches
+communication.please-speak-more-slowly,"AH-bleh mas des-PAH-see-oh, por fah-VOR"
+quick-responses.okay-can,deh ah-KWER-doh
+phone-text-power.my-phone-battery-is-low,mee teh-LEH-fo-no tee-EH-neh PO-ka bah-teh-REE-ah
+time-scheduling.can-we-change-the-time,po-DEH-mos kam-bee-AR la O-ra
+time-words.this-week,ES-ta seh-MAH-na
+days-of-week.thursday,HWEH-ves
+months.april,ah-BREEL
+border-customs.nothing-to-declare,NAH-da keh deh-klah-RAR
+directions.how-long-on-foot,KWAN-toh seh TAR-da a pee-EH
+quick-directions.this-way,por ah-KEE
+taxi.please-stop-here,"PAH-reh ah-KEE, por fah-VOR"
+transit-rides.what-is-the-next-stop,kwal es la PROK-see-ma pah-RAH-da
+place-words.airport,ah-eh-ro-PWER-toh
+pickup-meeting.meet-us-at,nos VEH-mos en {}
+rail-station-words.ticket-gate,tor-nee-KEH-teh
+common-signs.vacant,LEE-breh
+utility-templates.please-do-not-add,"seen {}, por fah-VOR"
+toilets.toilet-wc,BAH-nyos
+accessibility.how-many-steps,KWAN-tos es-kah-LOH-nes eye
+in-a-building.which-floor,keh PEE-so
+building-words.men,OM-bres
+pronouns-verbs.he-him,el / lo
+question-words.when,KWAN-doh
+medical-conditions.i-am-allergic-to-penicillin,soy ah-LER-hee-ko a la peh-nee-see-LEE-na
+pharmacy-symptoms.where-is-an-all-night-pharmacy,DON-deh eye OO-na far-MAH-see-ah deh GWAR-dee-ah
+police-consulate.someone-is-following-me,AL-ghee-en meh es-TA see-ghee-EN-doh
+body-parts.tooth,el dee-EN-teh
+emergency-medical.i-am-injured,es-TOY eh-REE-doh
+lost-rescue.please-look-at-my-location-pin,MEE-reh mee oo-bee-kah-see-ON en el MAH-pa
+dietary-needs.no-peanuts,seen kah-kah-WEH-teh nee mah-NEE
+food-ordering.do-you-have-drinking-water,tee-EH-nen AH-gwa po-TAH-bleh
+weather.rain,la YOO-vee-ah
+trail-words.cableway,el teh-leh-FEH-ree-ko
+hiking-parks.which-route-is-easier,keh ROO-ta es mas FAH-seel
+trail-conditions.is-the-route-steep,la ROO-ta es em-pee-NAH-da
+trail-transport.where-can-we-refill-water,DON-deh po-DEH-mos reh-yeh-NAR el AH-gwa
+trail-warnings.caution-slippery,kwee-DAH-doh: PEE-so res-bah-lah-DEE-so
+trail-landmarks.end,el fee-NAL
+laundry.can-it-be-ready-today,PWEH-deh es-TAR LEES-ta oy
+hotel-basics.i-would-like-a-non-smoking-room,kee-see-EH-ra OO-na ah-bee-tah-see-ON deh no foo-mah-DOH-res
+room-problems.the-room-is-too-noisy,la ah-bee-tah-see-ON es mwee rwee-DOH-sa
+introductions.this-is-my-friend,es mee ah-MEE-go
+atm-cash.the-card-was-declined,la tar-HEH-ta fweh reh-chah-SAH-da
+numbers-money.s-n,tres
+attractions-tickets.may-i-take-photos,PWEH-doh to-MAR FOH-tos
+color-size-returns.can-i-exchange-it,PWEH-doh kam-bee-AR-lo
+sim-data.how-long-is-it-valid,KWAN-toh tee-EM-po es VAH-lee-da
+children.baby-changing-room,DON-deh es-TA el kam-bee-ah-DOR deh beh-BES
+etiquette.remove-shoes,meh KEE-toh los sah-PAH-tos
+social-basics.goodbye,ah-dee-OS
+communication.i-do-not-understand-spoken,no en-tee-EN-doh
+quick-responses.cannot-not-allowed,no seh PWEH-deh
+phone-text-power.do-you-have-a-power-bank,tee-EH-neh OO-na bah-teh-REE-ah por-TAH-teel
+time-scheduling.when-is-convenient,KWAN-doh leh kon-vee-EH-neh
+time-words.next-week,la seh-MAH-na keh vee-EH-neh
+days-of-week.friday,vee-ER-nes
+months.may,MAH-yo
+border-customs.i-am-staying-at,meh ah-LO-ho en {}
+directions.please-show-me-on-the-map,"MWES-treh-meh-lo en el MAH-pa, por fah-VOR"
+quick-directions.that-way,por ah-YEE
+taxi.can-you-wait-for-me-here,meh PWEH-deh es-peh-RAR ah-KEE
+transit-rides.please-tell-me-where-to-get-off,"DEE-gah-meh DON-deh bah-HAR-meh, por fah-VOR"
+place-words.service-desk,mos-tra-DOR deh ah-ten-see-ON
+pickup-meeting.please-call-me-a-ride,"PEE-dah-meh oon vee-AH-heh, por fah-VOR"
+rail-station-words.platform,an-DEN
+common-signs.caution,preh-kow-see-ON
+utility-templates.do-you-have,tee-EH-neh {}
+toilets.is-it-free,es GRAH-tees
+accessibility.cannot-climb-stairs,no PWEH-doh soo-BEER es-kah-LEH-ras
+building-words.women,moo-HEH-res
+pronouns-verbs.she-her,EH-ya / la
+question-words.how,KO-mo
+medical-conditions.i-have-epilepsy,TEN-go eh-pee-LEP-see-ah
+pharmacy-symptoms.painkiller,oon ah-nal-HEH-see-ko
+police-consulate.i-need-a-written-police-report,neh-seh-SEE-toh la deh-NOON-see-ah por es-KREE-toh
+body-parts.chest,el PEH-cho
+emergency-medical.it-hurts-here,meh DWEH-leh ah-KEE
+lost-rescue.i-cannot-walk,no PWEH-doh kah-mee-NAR
+dietary-needs.no-nuts,seen FROO-tos SEH-kos nee NWEH-ses
+food-ordering.to-go-please,"PAH-ra yeh-VAR, por fah-VOR"
+weather.snow,la nee-EH-veh
+trail-words.shuttle-bus,el ow-toh-BOOS deh en-LAH-seh
+trail-conditions.is-the-path-slippery,el kah-MEE-no es-TA res-bah-lah-DEE-so
+trail-transport.is-there-cell-signal-here,eye seh-NYAL ah-KEE
+trail-warnings.danger,peh-LEE-gro
+trail-landmarks.elevation,la al-tee-TOOD
+laundry.please-do-not-use-bleach,no OO-seh blan-keh-ah-DOR nee leh-HEE-ah
+hotel-basics.i-would-like-a-quiet-room,kee-see-EH-ra OO-na ah-bee-tah-see-ON tran-KEE-la
+room-problems.the-key-does-not-work,la YAH-veh no foon-see-OH-na
+introductions.i-am-from,soy deh {}
+atm-cash.what-is-the-exchange-rate,kwal es el TEE-po deh KAM-bee-oh
+numbers-money.s,KWAH-tro
+attractions-tickets.please-take-a-photo-of-us,"TOH-meh-nos OO-na FOH-toh, por fah-VOR"
+color-size-returns.do-you-have-a-bag,tee-EH-neh OO-na BOL-sa
+sim-data.please-activate-it,"ak-TEE-veh-la, por fah-VOR"
+children.childrens-menu,eye meh-NOO PAH-ra NEE-nyos
+etiquette.photo-of-you,PWEH-doh to-MAR-leh OO-na FOH-toh
+social-basics.thank-you,GRAH-see-as
+communication.i-cannot-read-understand,no seh leh-ER ES-to
+quick-responses.works-okay,foon-see-OH-na
+phone-text-power.the-translation-may-be-inaccurate,la tra-dook-see-ON PWEH-deh ser ee-nek-SAK-ta
+time-scheduling.what-is-today-s-date,keh FEH-cha es oy
+time-words.morning,la mah-NYAH-na
+days-of-week.saturday,SAH-bah-doh
+months.june,HOO-nee-oh
+border-customs.i-am-here-for-business,VEN-go por neh-GO-see-os
+directions.where-is-the-nearest,DON-deh es-TA el {} mas ser-KAH-no
+quick-directions.on-the-left,a la ees-kee-ER-da
+taxi.we-need-to-catch-the-high-speed-train,teh-NEH-mos keh to-MAR el tren deh AL-ta veh-lo-see-DAD
+transit-rides.is-this-direct,es dee-REK-toh
+place-words.bus-stop,pah-RAH-da deh ow-toh-BOOS
+rail-station-words.ticket-office,tah-KEE-ya
+common-signs.no-entry,pro-ee-BEE-doh el PAH-so
+utility-templates.please-write-the-number,"es-KREE-ba el NOO-meh-ro, por fah-VOR"
+toilets.do-i-need-a-coin,neh-seh-SEE-toh OO-na mo-NEH-da o FEE-cha
+accessibility.need-to-sit-down,neh-seh-SEE-toh sen-TAR-meh
+building-words.door,PWER-ta
+pronouns-verbs.they-them,EH-yos / EH-yas
+question-words.how-much-many,KWAN-toh
+medical-conditions.my-blood-sugar-is-low,TEN-go el ah-SOO-kar BAH-ho
+pharmacy-symptoms.do-i-need-a-prescription,neh-seh-SEE-toh reh-SEH-ta
+police-consulate.i-want-to-contact-my-embassy,kee-EH-ro kon-tak-TAR kon mee em-bah-HAH-da
+body-parts.eye,el O-ho
+emergency-medical.where-is-a-pharmacy,DON-deh eye OO-na far-MAH-see-ah
+lost-rescue.i-sprained-my-ankle,meh tor-SEE el to-BEE-yo
+dietary-needs.no-seafood,seen mah-REES-kos nee pes-KAH-doh
+food-ordering.check-please,"la KWEN-ta, por fah-VOR"
+weather.wind,el vee-EN-toh
+trail-words.park-shuttle,el ow-toh-BOOS del PAR-keh
+trail-transport.do-you-have-a-map,tee-EH-neh oon MAH-pa
+trail-warnings.beware-falling-rocks,peh-LEE-gro: des-pren-dee-mee-EN-tos
+trail-landmarks.sunset,la PWES-ta deh sol
+laundry.laundromat,lah-van-deh-REE-ah ow-toh-ser-VEE-see-oh
+hotel-basics.is-there-a-washing-machine,eye lah-vah-DOH-ra
+room-problems.the-toilet-will-not-flush,el ee-no-DOH-ro no des-KAR-ga
+introductions.where-are-you-from,deh DON-deh es oos-TED
+atm-cash.no-money-came-out,no sah-lee-O el dee-NEH-ro
+numbers-money.w,SEEN-ko
+sim-data.do-you-have-an-esim,tee-EH-nen eh-seem
+children.suitable-for-children,ES-to es ah-pro-pee-AH-doh PAH-ra NEE-nyos
+etiquette.may-i-sit-here,PWEH-doh sen-TAR-meh ah-KEE
+social-basics.you-are-welcome,deh NAH-da
+communication.please-say-it-again,"reh-PEE-tah-lo, por fah-VOR"
+quick-responses.does-not-work-no,no foon-see-OH-na
+phone-text-power.please-confirm,"kon-FEER-meh-lo, por fah-VOR"
+time-scheduling.what-day-is-it-today,keh DEE-ah es oy
+time-words.afternoon,la TAR-deh
+days-of-week.sunday,do-MEEN-go
+months.july,HOO-lee-oh
+border-customs.i-have-a-return-ticket,TEN-go bee-YEH-teh deh VWEL-ta
+directions.where-am-i,DON-deh es-TOY
+quick-directions.on-the-right,a la deh-REH-cha
+taxi.please-use-the-meter,"OO-seh el tak-SEE-meh-tro, por fah-VOR"
+transit-rides.do-i-need-to-transfer,TEN-go keh ah-SER trans-BOR-doh
+place-words.luggage-storage,kon-SEEG-na deh eh-kee-PAH-heh
+rail-station-words.waiting-room,SAH-la deh es-PEH-ra
+common-signs.no-smoking,pro-ee-BEE-doh foo-MAR
+utility-templates.i-need,neh-seh-SEE-toh {}
+toilets.is-the-tap-water-safe-to-drink,el AH-gwa del GREE-fo es po-TAH-bleh
+accessibility.accessible-restroom,eye oon BAH-nyo ak-seh-SEE-bleh
+building-words.key,YAH-veh
+pronouns-verbs.my-mine,mee / MEE-oh
+question-words.how-many,KWAN-tos
+medical-conditions.i-need-my-inhaler,neh-seh-SEE-toh mee een-ah-lah-DOR
+pharmacy-symptoms.i-have-a-headache,meh DWEH-leh la kah-BEH-sa
+police-consulate.i-need-it-for-my-insurance,lo neh-seh-SEE-toh PAH-ra el seh-GOO-ro
+body-parts.ear,el o-EE-doh
+emergency-medical.please-take-me-to-a-hospital,"YEH-veh-meh a oon os-pee-TAL, por fah-VOR"
+lost-rescue.please-contact-rescue,ah-VEE-seh al eh-KEE-po deh res-KAH-teh
+dietary-needs.i-am-vegetarian,soy veh-heh-tah-ree-AH-no
+food-ordering.does-it-contain,YEH-va {}
+weather.storm,la tor-MEN-ta
+trail-words.steps,los es-kah-LOH-nes
+trail-warnings.first-aid-station,pree-MEH-ros owk-SEE-lee-os
+laundry.please-iron-this,"PLAN-cheh ES-to, por fah-VOR"
+room-problems.the-light-does-not-work,la loos no foon-see-OH-na
+introductions.how-are-you,KO-mo es-TA
+atm-cash.where-can-i-change-money,DON-deh PWEH-doh kam-bee-AR dee-NEH-ro
+numbers-money.li,seys
+sim-data.my-data-is-not-working,mees DAH-tos no foon-see-OH-nan
+children.minimum-age,kwal es la eh-DAD MEE-nee-ma
+etiquette.queue-for,ES-ta es la FEE-la PAH-ra {}
+social-basics.excuse-me-sorry,per-DON
+communication.please-write-it-down,"es-KREE-bah-lo, por fah-VOR"
+time-scheduling.what-time-does-it-open,a keh O-ra AH-breh
+time-words.evening,la NO-cheh
+months.august,ah-GOS-toh
+border-customs.i-am-visiting-family,VEN-go a ver a mee fah-MEE-lee-ah
+directions.which-way,por DON-deh
+quick-directions.across-from-here,en-FREN-teh
+transit-rides.is-it-delayed,va kon reh-TRAH-so
+rail-station-words.train-number,NOO-meh-ro deh tren
+common-signs.no-photography,pro-ee-BEE-doh ah-SER FOH-tos
+utility-templates.is-there-nearby,eye oon {} SER-ka
+toilets.it-is-urgent,es oor-HEN-teh
+accessibility.station-assistance,eye ah-sees-TEN-see-ah en la es-tah-see-ON
+pronouns-verbs.your-yours,soo / SOO-yo
+question-words.why,por KEH
+medical-conditions.i-am-pregnant,es-TOY em-bah-rah-SAH-da
+pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-seh-tah-MOL
+police-consulate.i-need-an-interpreter,neh-seh-SEE-toh oon een-TER-preh-teh
+body-parts.leg,la pee-ER-na
+lost-rescue.my-companion-is-missing,no en-KWEN-tro a mee ah-kom-pah-NYAN-teh
+dietary-needs.i-am-vegan,soy veh-GAH-no
+food-ordering.is-this-vegetarian,ES-to es veh-heh-tah-ree-AH-no
+weather.ice,el YEH-lo
+trail-words.up-uphill,soo-BEE-da
+trail-warnings.service-suspended,ser-VEE-see-oh soos-pen-DEE-doh
+trail-landmarks.water-point,POON-toh deh AH-gwa
+laundry.detergent,el deh-ter-HEN-teh
+room-problems.please-send-someone,"en-VEE-eh a AL-ghee-en a ah-rreh-GLAR-lo, por fah-VOR"
+introductions.i-am-a-tourist,soy too-REES-ta
+atm-cash.the-machine-is-out-of-service,el kah-HEH-ro es-TA FWEH-ra deh ser-VEE-see-oh
+numbers-money.q,see-EH-teh
+sim-data.does-it-need-registration,eye keh reh-hees-TRAR-la
+children.do-children-pay,los NEE-nyos PAH-gan
+etiquette.dressed-appropriately,voy ves-TEE-doh ah-pro-pee-ah-dah-MEN-teh
+social-basics.sorry,lo see-EN-toh
+communication.please-wait-a-moment,"es-PEH-reh oon mo-MEN-toh, por fah-VOR"
+time-scheduling.what-time-does-it-close,a keh O-ra see-EH-rra
+time-words.spring,la pree-mah-VEH-ra
+months.september,sep-tee-EM-breh
+border-customs.this-is-for-personal-use,es PAH-ra OO-so per-so-NAL
+directions.can-i-walk-there,PWEH-doh eer kah-mee-NAN-doh
+quick-directions.in-front,deh-LAN-teh
+transit-rides.i-am-in-a-hurry,TEN-go PREE-sa
+rail-station-words.carriage,vah-GON
+common-signs.do-not-touch,no to-KAR
+utility-templates.how-much-is,KWAN-toh KWES-ta {}
+toilets.may-i-have-the-toilet-key,meh da la YAH-veh del BAH-nyo
+accessibility.help-me-carry,"ah-YOO-deh-meh a yeh-VAR ES-to, por fah-VOR"
+pronouns-verbs.be-called-call,yah-MAR-seh / yah-MAR
+question-words.this,ES-to
+medical-conditions.i-carry-an-adrenaline-injector,YEH-vo oon ow-toh-een-yek-TOR deh ah-dreh-nah-LEE-na
+pharmacy-symptoms.how-much-should-i-take,KWAN-toh DEH-bo to-MAR
+police-consulate.please-leave-me-alone,"DEH-heh-meh en pas, por fah-VOR"
+body-parts.arm,el BRAH-so
+dietary-needs.i-do-not-eat,no KO-mo {}
+weather.fog,la nee-EH-bla
+trail-words.down-downhill,bah-HAH-da
+laundry.dry-cleaning,la teen-toh-reh-REE-ah
+room-problems.the-heating-does-not-work,la kah-leh-fak-see-ON no foon-see-OH-na
+introductions.this-is-my-husband-wife,es mee es-PO-so / es-PO-sa
+atm-cash.please-give-me-smaller-notes,"DEH-meh bee-YEH-tes mas peh-KEH-nyos, por fah-VOR"
+numbers-money.b,OH-cho
+sim-data.i-have-no-signal,no TEN-go seh-NYAL
+children.crib,tee-EH-nen KOO-na
+etiquette.did-not-mean-to-offend,no KEE-seh o-fen-DER
+social-basics.no-problem,no eye pro-BLEH-ma
+communication.can-you-help-me,meh PWEH-deh ah-yoo-DAR
+time-words.summer,el veh-RAH-no
+months.october,ok-TOO-breh
+border-customs.i-am-in-transit,es-TOY en TRAN-see-toh
+directions.how-far-is-it,a keh dees-TAN-see-ah es-TA
+quick-directions.behind,deh-TRAS
+transit-rides.which-platform,keh an-DEN
+rail-station-words.seat,ah-see-EN-toh
+common-signs.temporarily-closed,seh-RRAH-doh tem-po-ral-MEN-teh
+utility-templates.is-this,ES-to es {}
+toilets.there-is-no-toilet-paper,no eye pah-PEL ee-hee-EH-nee-ko
+accessibility.board-first,PWEH-doh soo-BEER pree-MEH-ro
+pronouns-verbs.have,teh-NER
+question-words.that,EH-so
+medical-conditions.i-take-medicine-for,TOH-mo meh-dee-kah-MEN-tos PAH-ra {}
+pharmacy-symptoms.i-am-vomiting,es-TOY vo-mee-TAN-doh
+police-consulate.i-was-robbed,meh ro-BAH-ron
+body-parts.foot,el pee-EH
+dietary-needs.i-am-allergic-to,soy ah-LER-hee-ko a {}
+weather.heat,el kah-LOR
+trail-words.one-way,SO-lo EE-da
+laundry.dryer,la seh-kah-DOH-ra
+introductions.this-is-my-daughter-son,es mee EE-ha / EE-ho
+atm-cash.do-you-have-change,tee-EH-neh KAM-bee-oh
+numbers-money.ji,NWEH-veh
+sim-data.please-write-the-wifi-password,es-KREE-ba la kon-tra-SEH-nya del WEE-fee
+children.warm-this-bottle,"kah-lee-EN-teh ES-teh bee-beh-RON, por fah-VOR"
+etiquette.what-is-customary,keh seh ah-kos-TOOM-bra ah-KEE
+social-basics.i-do-not-know,no seh
+communication.please-show-me-the-text,MWES-treh-meh el TEKS-toh en es-pah-NYOL
+time-words.fall,el o-TOH-nyo
+months.november,no-vee-EM-breh
+border-customs.i-have-in-cash,YEH-vo {} en eh-fek-TEE-vo
+directions.which-exit,keh sah-LEE-da
+transit-rides.what-time-is-the-next-one,a keh O-ra es el PROK-see-mo
+rail-station-words.last-train,OOL-tee-mo tren
+utility-templates.please,"{}, por fah-VOR"
+toilets.toilet-paper,pah-PEL ee-hee-EH-nee-ko
+accessibility.door-width,KWAN-tos sen-TEE-meh-tros MEE-deh la PWER-ta
+pronouns-verbs.do-not-have,no teh-NER
+question-words.here,ah-KEE
+medical-conditions.i-take-blood-thinners,TOH-mo an-tee-ko-ah-goo-LAN-tes
+pharmacy-symptoms.rehydration-salts,SAH-les deh reh-ee-drah-tah-see-ON o-RAL
+police-consulate.i-want-a-lawyer,kee-EH-ro oon ah-bo-GAH-doh
+body-parts.hand,la MAH-no
+weather.cold,el FREE-oh
+trail-words.round-trip,EE-da ee VWEL-ta
+laundry.coin-operated,foon-see-OH-na kon mo-NEH-das
+introductions.i-am-traveling-alone,vee-AH-ho SO-lo
+atm-cash.may-i-pay-in,PWEH-doh pah-GAR en {}
+numbers-money.sh,dee-ES
+sim-data.sim-card,la tar-HEH-ta seem
+children.car-seat,neh-seh-see-TAH-mos OO-na SEE-ya deh OW-toh PAH-ra NEE-nyos
+etiquette.keep-the-change,KEH-deh-seh kon el KAM-bee-oh
+time-words.winter,el een-vee-ER-no
+months.december,dee-see-EM-breh
+border-customs.this-is-a-gift,es oon reh-GAH-lo
+directions.can-you-show-me-the-way,meh PWEH-deh een-dee-KAR el kah-MEE-no
+transit-rides.i-went-past-my-stop,meh pah-SEH deh pah-RAH-da
+rail-station-words.delayed,reh-trah-SAH-doh
+utility-templates.i-am-looking-for,BOOS-ko {}
+toilets.it-is-out-of-order,no foon-see-OH-na
+accessibility.wheelchair-width,mee SEE-ya deh RWEH-das MEE-deh {} sen-TEE-meh-tros deh AHN-cho
+pronouns-verbs.go,eer
+question-words.there,ah-YEE
+medical-conditions.medicine-allergy,ah-LER-hee-ah a meh-dee-kah-MEN-tos: {}
+pharmacy-symptoms.how-many-times-a-day,KWAN-tas VEH-ses al DEE-ah
+police-consulate.please-notify-my-consulate,"ah-VEE-seh a mee kon-soo-LAH-doh, por fah-VOR"
+body-parts.knee,la ro-DEE-ya
+weather.humid,OO-meh-doh
+atm-cash.please-charge-in-local-currency,"KO-breh en mo-NEH-da lo-KAL, por fah-VOR"
+numbers-money.y-b-i,see-EN
+sim-data.where-can-i-buy-a-plug-adapter,DON-deh PWEH-doh kom-PRAR oon ah-dap-tah-DOR deh en-CHOO-feh
+children.stroller,el kah-RREE-toh deh beh-BEH
+border-customs.where-do-i-collect-my-baggage,DON-deh reh-KO-ho mee eh-kee-PAH-heh
+directions.north,NOR-teh
+rail-station-words.final-stop,OOL-tee-ma pah-RAH-da
+utility-templates.do-you-accept,ah-SEP-ta {}
+toilets.out-of-order,FWEH-ra deh ser-VEE-see-oh
+accessibility.hard-of-hearing,TEN-go pro-BLEH-mas deh ow-dee-see-ON
+pronouns-verbs.come,veh-NEER
+question-words.a-little,oon PO-ko
+medical-conditions.this-card-lists-my-conditions,ES-ta tar-HEH-ta een-DEE-ka mees en-fer-meh-DAH-des
+pharmacy-symptoms.i-have-a-stomach-ache,meh DWEH-leh el es-TO-mah-go
+police-consulate.i-am-calling-the-police,voy a yah-MAR a la po-lee-SEE-ah
+body-parts.ankle,el to-BEE-yo
+weather.sunrise,el ah-mah-neh-SER
+atm-cash.where-can-i-get-coins,DON-deh PWEH-doh kon-seh-GHEER mo-NEH-das
+numbers-money.y-qi-n,meel
+sim-data.mobile-data,los DAH-tos MO-vee-les
+children.playground,eye oon PAR-keh een-fan-TEEL
+border-customs.how-long-may-i-stay,KWAN-toh tee-EM-po PWEH-doh keh-DAR-meh
+directions.south,soor
+utility-templates.i-cannot-find,no en-KWEN-tro {}
+toilets.mens-toilet,kah-bah-YEH-ros
+accessibility.speak-louder,"AH-bleh mas AL-to, por fah-VOR"
+pronouns-verbs.would-like,kee-see-EH-ra
+question-words.some,al-GOO-nos
+medical-conditions.this-is-my-medicine,ES-teh es mee meh-dee-kah-MEN-toh
+pharmacy-symptoms.i-have-a-cough,TEN-go tos
+police-consulate.am-i-under-arrest,es-TOY deh-teh-NEE-doh
+body-parts.skin,la pee-EL
+weather.flood,la ee-noon-dah-see-ON
+atm-cash.is-there-a-minimum-for-cards,eye oon MEE-nee-mo kon tar-HEH-ta
+numbers-money.y-w-n,dee-ES meel
+sim-data.can-i-top-up-this-sim,PWEH-doh reh-kar-GAR ES-ta seem
+border-customs.i-have-a-connecting-flight,TEN-go oon VWEH-lo deh ko-nek-see-ON
+directions.east,ES-teh
+utility-templates.there-is-a-problem-with,eye oon pro-BLEH-ma kon {}
+toilets.womens-toilet,DAH-mas
+accessibility.visually-impaired,TEN-go dees-kah-pah-see-DAD vee-SWAL
+pronouns-verbs.want,keh-RER
+question-words.very,mwee
+medical-conditions.please-give-me-sugar-or-juice,"DEH-meh ah-SOO-kar o HOO-go, por fah-VOR"
+pharmacy-symptoms.antihistamine,oon an-tee-ees-tah-MEE-nee-ko
+police-consulate.no-thank-you-i-am-not-interested,"no, GRAH-see-as, no meh een-teh-REH-sa"
+weather.avalanche-risk,ree-ES-go deh ah-vah-LAN-cha
+atm-cash.atm,el kah-HEH-ro ow-toh-MAH-tee-ko
+numbers-money.b-n,MEH-dee-oh
+sim-data.top-up,la reh-KAR-ga
+border-customs.may-i-have-an-entry-stamp,meh PO-neh el SEH-yo deh en-TRAH-da
+directions.west,o-ES-teh
+toilets.drinking-water,AH-gwa po-TAH-bleh
+accessibility.take-your-arm,PWEH-doh to-MAR-leh del BRAH-so
+pronouns-verbs.look-for,boos-KAR
+question-words.too,deh-mah-see-AH-doh
+medical-conditions.inject-it-into-my-outer-thigh,een-YEK-teh-meh en la KAH-ra eks-TER-na del MOOS-lo
+pharmacy-symptoms.anti-diarrhea-medicine,oon an-tee-dee-ah-RREH-ee-ko
+police-consulate.someone-attacked-me,AL-ghee-en meh ah-greh-dee-O
+atm-cash.banknote,el bee-YEH-teh
+numbers-money.yu-n,el yoo-AN
+sim-data.is-there-coverage-in,eye ko-ber-TOO-ra en {}
+border-customs.visa,el vee-SAH-doh
+toilets.not-for-drinking,AH-gwa no po-TAH-bleh
+accessibility.guide-dog,ES-teh es mee PEH-rro GHEE-ah
+pronouns-verbs.buy,kom-PRAR
+question-words.also,tam-bee-EN
+medical-conditions.my-blood-type-is,mee GROO-po san-GHEE-neh-oh es {}
+pharmacy-symptoms.is-this-safe-to-take-with,seh PWEH-deh to-MAR kon {}
+police-consulate.i-did-not-agree-to-this-price,no ah-sep-TEH ES-teh PREH-see-oh
+atm-cash.coin,la mo-NEH-da
+numbers-money.ku-i,el yoo-AN
+sim-data.signal,la seh-NYAL
+border-customs.i-have-no-food-or-plants,no YEH-vo ah-lee-MEN-tos nee PLAN-tas
+toilets.accessible-toilet,BAH-nyo ak-seh-SEE-bleh
+pronouns-verbs.like,goos-TAR
+question-words.all-both,TOH-doh / AM-bos
+medical-conditions.do-not-give-me,no meh DEH {}
+pharmacy-symptoms.i-feel-dizzy,TEN-go mah-REH-os
+police-consulate.please-write-the-report-number,"es-KREE-ba el NOO-meh-ro deh deh-NOON-see-ah, por fah-VOR"
+atm-cash.cash-only,SO-lo eh-fek-TEE-vo
+sim-data.esim,la eh-seem
+border-customs.passport-control,kon-TROL deh pah-sah-POR-tes
+toilets.where-can-i-wash-my-hands,DON-deh PWEH-doh lah-VAR-meh las MAH-nos
+pronouns-verbs.need,neh-seh-see-TAR
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,soy ah-LER-hee-ko a la as-pee-REE-na ee al ee-boo-pro-FEH-no
+pharmacy-symptoms.ibuprofen,ee-boo-pro-FEH-no
+police-consulate.it-happened-here,o-koo-rree-O ah-KEE
+atm-cash.fee,la ko-mee-see-ON
+sim-data.prepaid,deh preh-PAH-go
+border-customs.customs,ah-DWAH-na
+toilets.can-i-flush-the-paper,PWEH-doh tee-RAR el pah-PEL al ee-no-DOH-ro
+medical-conditions.my-injector-is-in-my-bag,mee ow-toh-een-yek-TOR es-TA en mee BOL-so
+pharmacy-symptoms.i-have-a-sore-throat,meh DWEH-leh la gar-GAN-ta
+police-consulate.may-i-have-a-copy-of-the-report,meh da OO-na KO-pee-ah deh la deh-NOON-see-ah
+atm-cash.change,el KAM-bee-oh
+sim-data.roaming,el RO-meen
+border-customs.baggage-claim,reh-ko-HEE-da deh eh-kee-PAH-hes
+toilets.is-there-a-toilet-on-board,eye BAH-nyo a BOR-doh
+medical-conditions.i-am-allergic-to-sulfa-drugs,soy ah-LER-hee-ko a las sool-fah-MEE-das
+pharmacy-symptoms.can-i-get-this-medicine-here,tee-EH-nen ES-teh meh-dee-kah-MEN-toh
+police-consulate.i-will-not-sign-anything-i-cannot-read,no feer-mah-REH NAH-da keh no PWEH-da leh-ER
+atm-cash.exchange-rate,el TEE-po deh KAM-bee-oh
+border-customs.customs-declaration,deh-klah-rah-see-ON deh ah-DWAH-na
+toilets.the-toilet-will-not-flush,el ee-no-DOH-ro no des-KAR-ga
+pharmacy-symptoms.bandage,OO-na VEN-da
+police-consulate.am-i-free-to-go,PWEH-doh EER-meh
+atm-cash.bank,el BAN-ko
+border-customs.arrival-card,tar-HEH-ta deh en-TRAH-da
+toilets.baby-change,kam-bee-ah-DOR deh beh-BES
+pharmacy-symptoms.the-pain-is-severe,el do-LOR es mwee FWER-teh
+police-consulate.i-do-not-want-to-go-with-you,no kee-EH-ro eer kon oos-TED
+atm-cash.money-exchange,KAM-bee-oh deh dee-VEE-sas
+border-customs.transit,TRAN-see-toh
+toilets.squat-toilet,ee-no-DOH-ro a la TOOR-ka
+pharmacy-symptoms.antiseptic,oon an-tee-SEP-tee-ko
+atm-cash.pin,el peen
+border-customs.boarding-pass,tar-HEH-ta deh em-BAR-keh
+pharmacy-symptoms.i-feel-nauseous,TEN-go NOW-seh-as
+pharmacy-symptoms.i-have-a-rash,TEN-go oon sar-poo-YEE-doh
+pharmacy-symptoms.before-or-after-food,AN-tes o des-PWES deh ko-MER
+pharmacy-symptoms.i-think-it-is-infected,KREH-oh keh es-TA een-fek-TAH-doh
+pharmacy-symptoms.motion-sickness-tablets,pas-TEE-yas PAH-ra el mah-REH-oh
+pharmacy-symptoms.i-have-a-cut,TEN-go oon KOR-teh
+pharmacy-symptoms.antacid,oon an-tee-AH-see-doh
+pharmacy-symptoms.i-have-a-burn,TEN-go OO-na keh-mah-DOO-ra
+pharmacy-symptoms.it-started-days-ago,em-peh-SO AH-seh {} DEE-as
+pharmacy-symptoms.cough-medicine,hah-RAH-beh PAH-ra la tos
+pharmacy-symptoms.is-this-safe-during-pregnancy,es seh-GOO-ro en el em-bah-RAH-so
+trail-transport.how-long-is-the-wait,KWAN-toh eye keh es-peh-RAR
+tax-refund.is-tax-free-shopping-available,eye KOM-pras LEE-bres deh eem-PWES-tos
+place-words.tourist-spot-sightseeing-area,SO-na too-REES-tee-ka
+common-signs.open-operating,en ser-VEE-see-oh
+time-scheduling.how-long-does-it-take,KWAN-toh tee-EM-po TOH-ma
+transit-rides.can-i-use-this-ticket,PWEH-doh oo-SAR ES-teh bo-LEH-toh
+common-signs.closed,seh-RRAH-doh
+pronouns-verbs.there-is-have,eye
+common-signs.stopped-stop,deh-teh-NEE-doh
+pronouns-verbs.there-is-not-do-not-have,no eye
+emergency-medical.i-feel-unwell,meh see-EN-toh mal
+food-ordering.what-do-you-recommend,keh meh reh-ko-mee-EN-da
+hotel-basics.is-wi-fi-free,el WEE-fee es GRAH-tees
+hotel-requests.another-towel-please,"OH-tra to-AH-ya, por fah-VOR"
+numbers-money.2-items,dos
+shopping.is-there-a-discount,eye des-KWEN-toh
+social-basics.good-night,BWEH-nas NO-ches
+quick-responses.can-possible,seh PWEH-deh
+phone-translation.please-type-it-and-show-me,es-KREE-bah-lo ee MWES-treh-meh-lo
+phone-text-power.may-i-charge-my-phone-here,PWEH-doh kar-GAR el teh-LEH-fo-no ah-KEE
+pronouns-verbs.want-to-verb,kee-EH-ro
+emergency-medical.this-is-an-emergency,es OO-na eh-mer-HEN-see-ah
+lost-rescue.please-look-at-my-current-location,MEE-reh mee oo-bee-kah-see-ON ak-TWAL
+hotel-words.luggage-storage,la kon-SEEG-na deh eh-kee-PAH-heh
+hotel-basics.how-much-per-night,KWAN-toh KWES-ta por NO-cheh
+hotel-requests.what-time-is-check-out,a keh O-ra es la sah-LEE-da
+payment-receipt.please-write-the-number,"es-KREE-ba el NOO-meh-ro, por fah-VOR"
+shopping.where-do-i-pay,DON-deh seh PAH-ga
+communication.i-cannot-make-out-what-you-are-saying,no en-tee-EN-doh lo keh DEE-seh
+quick-responses.cannot-not-possible,no es po-SEE-bleh
+taxi.i-will-get-off-here,meh BAH-ho ah-KEE
+pickup-meeting.please-call-a-taxi,"YAH-meh a oon TAK-see, por fah-VOR"
+pronouns-verbs.want-thing,kee-EH-ro
+emergency-medical.i-am-having-a-severe-allergic-reaction,"TEN-go ah-nah-fee-LAK-see-ah, reh-ak-see-ON ah-LER-hee-ka GRAH-veh"
+lost-rescue.my-child-is-missing,mee EE-ho seh a per-DEE-doh
+food-ordering.water-please,"AH-gwa, por fah-VOR"
+hiking-parks.is-this-trail-suitable-for-beginners,ES-teh sen-DEH-ro es PAH-ra preen-see-pee-AN-tes
+hotel-basics.is-breakfast-included,een-KLOO-yeh el deh-sah-YOO-no
+hotel-requests.can-i-check-in-early,PWEH-doh ah-SER el chek-EEN mas tem-PRAH-no
+attractions-tickets.could-you-take-a-photo-for-us,nos PWEH-deh to-MAR OO-na FOH-toh
+payment-receipt.how-much-in-total,KWAN-toh es en toh-TAL
+shopping.i-will-take-this,meh YEH-vo ES-to
+communication.i-do-not-understand,no en-tee-EN-doh
+quick-responses.okay-fine,es-TA bee-EN
+phone-translation.please-look-at-the-screen,"MEE-reh la pan-TAH-ya, por fah-VOR"
+pronouns-verbs.need-thing,neh-seh-SEE-toh
+question-words.how-much-what-price,KWAN-toh KWES-ta
+emergency-medical.i-cannot-breathe,no PWEH-doh res-pee-RAR
+lost-rescue.i-do-not-know-where-i-am,no seh DON-deh es-TOY
+hotel-basics.may-i-see-the-room,PWEH-doh ver la ah-bee-tah-see-ON
+hotel-requests.another-night,PWEH-doh keh-DAR-meh OH-tra NO-cheh
+payment-receipt.can-we-pay-separately,po-DEH-mos pah-GAR por seh-pah-RAH-doh
+shopping.what-is-this,keh es ES-to
+communication.i-cannot-read-it,no PWEH-doh leh-ER-lo
+quick-responses.no-good-not-allowed-will-not-work,no es-TA per-mee-TEE-doh
+taxi.please-get-me-there-in-time-for-the-shinkansen,YEH-veh-meh a tee-EM-po PAH-ra el tren deh AL-ta veh-lo-see-DAD
+pronouns-verbs.looking-for-thing,BOOS-ko
+emergency-medical.i-am-bleeding-badly,es-TOY san-GRAN-doh MOO-cho
+lost-rescue.my-friend-is-hurt,mee ah-MEE-go es-TA eh-REE-doh
+dietary-needs.does-it-contain-fish-stock,YEH-va KAL-doh deh pes-KAH-doh
+hotel-basics.for-nights,por {} NO-ches
+hotel-requests.is-there-a-safe,eye KAH-ha FWER-teh
+payment-receipt.is-tax-included,el eem-PWES-toh es-TA een-kloo-EE-doh
+shopping.where-can-i-buy,DON-deh PWEH-doh kom-PRAR {}
+emergency-medical.i-have-chest-pain,TEN-go do-LOR en el PEH-cho
+lost-rescue.i-lost-my-wallet,per-DEE mee kar-TEH-ra
+hotel-basics.two-beds,"dos KAH-mas, por fah-VOR"
+hotel-requests.another-blanket,"OH-tra MAN-ta, por fah-VOR"
+payment-receipt.my-card-was-declined,mee tar-HEH-ta fweh reh-chah-SAH-da
+shopping.do-you-have-this-in-stock,tee-EH-nen ES-to dees-po-NEE-bleh
+time-words.night,la NO-cheh
+emergency-medical.this-person-is-unconscious,ES-ta per-SO-na es-TA een-kon-see-EN-teh
+lost-rescue.i-lost-my-bag,per-DEE mee BOL-so
+food-ordering.can-a-vegetarian-eat-this,oon veh-heh-tah-ree-AH-no PWEH-deh ko-MER ES-to
+hotel-basics.is-there-air-conditioning,eye AY-reh ah-kon-dee-see-oh-NAH-doh
+hotel-requests.wake-up-call,"des-pee-ER-teh-meh a las {}, por fah-VOR"
+payment-receipt.the-bill-is-wrong,KREH-oh keh la KWEN-ta es-TA mal
+shopping.two-of-these,"dos deh ES-tos, por fah-VOR"
+social-basics.okay-fine-i-am-okay,es-TOY bee-EN
+emergency-medical.where-is-the-nearest-hospital,DON-deh es-TA el os-pee-TAL mas ser-KAH-no
+lost-rescue.where-is-lost-and-found,DON-deh es-TAN los ob-HEH-tos per-DEE-dos
+payment-receipt.i-already-paid,ya pah-GEH
+shopping.what-is-it-made-of,deh keh es-TA EH-cho
+emergency-medical.what-is-the-emergency-number,kwal es el NOO-meh-ro deh eh-mer-HEN-see-as
+lost-rescue.i-cannot-find-my-hotel,no en-KWEN-tro mee o-TEL
+emergency-medical.is-there-a-doctor-who-speaks-english,eye oon MEH-dee-ko keh AH-bleh een-GLES
+lost-rescue.i-left-it-on-the-train,lo deh-HEH en el tren
+dietary-needs.i-have-a-severe-allergy-to,TEN-go ah-LER-hee-ah GRAH-veh a {}
+communication.please-write-it-in-roman-letters,es-KREE-bah-lo en al-fah-BEH-toh lah-TEE-no
+emergency-medical.i-think-a-bone-is-broken,KREH-oh keh TEN-go oon WEH-so RO-toh
+lost-rescue.i-cannot-get-down,no PWEH-doh bah-HAR
+emergency-medical.please-call-my-emergency-contact,YAH-meh a mee kon-TAK-toh deh eh-mer-HEN-see-ah
+emergency-medical.i-have-travel-insurance,TEN-go seh-GOO-ro deh vee-AH-heh
+numbers-money.yen,el yen
+numbers-money.yen-symbol,yen

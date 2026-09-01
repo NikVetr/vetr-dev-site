@@ -1,0 +1,43 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,Wie viel Uhr ist es?,Wie spät ist es?,,,2,de-agent-v1
+time-scheduling.how-many-minutes,Wie viele Minuten?,,,,2,de-agent-v1
+time-scheduling.what-time-should-we-meet,Wann treffen wir uns?,,,,2,de-agent-v1
+time-scheduling.can-we-change-the-time,Können wir die Zeit ändern?,,,,2,de-agent-v1
+time-scheduling.when-is-convenient,Wann passt es Ihnen?,,,,2,de-agent-v1
+time-scheduling.what-is-today-s-date,Welches Datum ist heute?,,,,2,de-agent-v1
+time-scheduling.what-day-is-it-today,Welcher Tag ist heute?,,,,2,de-agent-v1
+time-scheduling.what-time-does-it-open,Wann öffnet es?,,,,2,de-agent-v1
+time-scheduling.what-time-does-it-close,Wann schließt es?,,,,2,de-agent-v1
+time-scheduling.how-long-does-it-take,Wie lange dauert es?,,,,2,de-agent-v1
+time-words.today,heute,,,,2,de-agent-v1
+time-words.tomorrow,morgen,,,,2,de-agent-v1
+time-words.yesterday,gestern,,,,2,de-agent-v1
+time-words.this-week,diese Woche,,,,2,de-agent-v1
+time-words.next-week,nächste Woche,,,,2,de-agent-v1
+time-words.morning,Vormittag,Morgen,,,2,de-agent-v1
+time-words.afternoon,Nachmittag,,,,2,de-agent-v1
+time-words.evening,Abend,,,,2,de-agent-v1
+time-words.spring,Frühling,,,,2,de-agent-v1
+time-words.summer,Sommer,,,,2,de-agent-v1
+time-words.fall,Herbst,,,,2,de-agent-v1
+time-words.winter,Winter,,,,2,de-agent-v1
+time-words.night,Nacht,,,,2,de-agent-v1
+days-of-week.monday,Montag,,,,2,de-agent-v1
+days-of-week.tuesday,Dienstag,,,,2,de-agent-v1
+days-of-week.wednesday,Mittwoch,,,,2,de-agent-v1
+days-of-week.thursday,Donnerstag,,,,2,de-agent-v1
+days-of-week.friday,Freitag,,,,2,de-agent-v1
+days-of-week.saturday,Samstag,Sonnabend,,,2,de-agent-v1
+days-of-week.sunday,Sonntag,,,,2,de-agent-v1
+months.january,Januar,Jänner,,,2,de-agent-v1
+months.february,Februar,Feber,,,2,de-agent-v1
+months.march,März,,,,2,de-agent-v1
+months.april,April,,,,2,de-agent-v1
+months.may,Mai,,,,2,de-agent-v1
+months.june,Juni,,,,2,de-agent-v1
+months.july,Juli,,,,2,de-agent-v1
+months.august,August,,,,2,de-agent-v1
+months.september,September,,,,2,de-agent-v1
+months.october,Oktober,,,,2,de-agent-v1
+months.november,November,,,,2,de-agent-v1
+months.december,Dezember,,,,2,de-agent-v1

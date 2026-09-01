@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Wo kann ich Karten kaufen?,Wo gibt es Tickets?,,,2,de-agent-v1
+attractions-tickets.do-i-need-a-reservation,Brauche ich eine Reservierung?,,,,2,de-agent-v1
+attractions-tickets.what-is-the-latest-entry-time,Wann ist der letzte Einlass?,,,,2,de-agent-v1
+attractions-tickets.are-there-lockers,Gibt es Schließfächer?,,,,2,de-agent-v1
+attractions-tickets.may-i-take-photos,Darf ich fotografieren?,,,,2,de-agent-v1
+attractions-tickets.please-take-a-photo-of-us,Bitte machen Sie ein Foto von uns.,,,,2,de-agent-v1
+attractions-tickets.could-you-take-a-photo-for-us,Könnten Sie ein Foto von uns machen?,,,,2,de-agent-v1

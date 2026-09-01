@@ -1,0 +1,49 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+atm-cash.where-is-an-atm,Où y a-t-il un distributeur ?,,,,2,fr-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,Ce distributeur prend-il les cartes étrangères ?,,,,2,fr-agent-v1
+atm-cash.the-atm-kept-my-card,Le distributeur a avalé ma carte,,,,2,fr-agent-v1
+atm-cash.is-there-a-fee,Y a-t-il des frais ?,,,,2,fr-agent-v1
+atm-cash.the-card-was-declined,La carte a été refusée,,,,2,fr-agent-v1
+atm-cash.what-is-the-exchange-rate,Quel est le taux de change ?,,,,2,fr-agent-v1
+atm-cash.no-money-came-out,Aucun billet n'est sorti,,,,2,fr-agent-v1
+atm-cash.where-can-i-change-money,Où puis-je changer de l'argent ?,,,,2,fr-agent-v1
+atm-cash.the-machine-is-out-of-service,L'appareil est hors service,,,,2,fr-agent-v1
+atm-cash.please-give-me-smaller-notes,"Des petites coupures, s'il vous plaît",,,,2,fr-agent-v1
+atm-cash.do-you-have-change,Avez-vous de la monnaie ?,,,,2,fr-agent-v1
+atm-cash.may-i-pay-in,Puis-je payer en {} ?,,,,2,fr-agent-v1
+atm-cash.please-charge-in-local-currency,Débitez en monnaie locale,,,,2,fr-agent-v1
+atm-cash.where-can-i-get-coins,Où puis-je avoir des pièces ?,,,,2,fr-agent-v1
+atm-cash.is-there-a-minimum-for-cards,Y a-t-il un minimum par carte ?,,,,2,fr-agent-v1
+atm-cash.atm,distributeur de billets,DAB,,,2,fr-agent-v1
+atm-cash.banknote,billet,,,,2,fr-agent-v1
+atm-cash.coin,pièce,,,,2,fr-agent-v1
+atm-cash.cash-only,Espèces uniquement,,,,2,fr-agent-v1
+atm-cash.fee,frais,commission,,,2,fr-agent-v1
+atm-cash.change,la monnaie,,,,2,fr-agent-v1
+atm-cash.exchange-rate,taux de change,,,,2,fr-agent-v1
+atm-cash.bank,banque,,,,2,fr-agent-v1
+atm-cash.money-exchange,bureau de change,,,,2,fr-agent-v1
+atm-cash.pin,code confidentiel,code PIN,,,2,fr-agent-v1
+numbers-money.l-ng,zéro,,,,2,fr-agent-v1
+numbers-money.y,un,,,,2,fr-agent-v1
+numbers-money.r,deux,,,,2,fr-agent-v1
+numbers-money.li-ng,deux + classificateur,,,,1,fr-agent-v1
+numbers-money.s-n,trois,,,,2,fr-agent-v1
+numbers-money.s,quatre,,,,2,fr-agent-v1
+numbers-money.w,cinq,,,,2,fr-agent-v1
+numbers-money.li,six,,,,2,fr-agent-v1
+numbers-money.q,sept,,,,2,fr-agent-v1
+numbers-money.b,huit,,,,2,fr-agent-v1
+numbers-money.ji,neuf,,,,2,fr-agent-v1
+numbers-money.sh,dix,,,,2,fr-agent-v1
+numbers-money.y-b-i,cent,,,,2,fr-agent-v1
+numbers-money.y-qi-n,mille,,,,2,fr-agent-v1
+numbers-money.y-w-n,dix mille,,,,2,fr-agent-v1
+numbers-money.b-n,un demi,la moitié,,,2,fr-agent-v1
+numbers-money.yu-n,yuan,,,,2,fr-agent-v1
+numbers-money.ku-i,yuan (à l'oral),,,,1,fr-agent-v1
+numbers-money.number-and-classifier-notes,,,,,2,fr-agent-v1
+numbers-money.2-items,deux articles,,,,1,fr-agent-v1
+numbers-money.yen,yen,,,,2,fr-agent-v1
+numbers-money.yen-symbol,¥,,,,2,fr-agent-v1
+numbers-money.number-and-classifier-notes-2,,,,,2,fr-agent-v1

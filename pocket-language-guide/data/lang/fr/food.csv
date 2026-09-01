@@ -1,0 +1,26 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Sans viande,,,,2,fr-agent-v1
+dietary-needs.no-eggs,Sans œufs,,,,2,fr-agent-v1
+dietary-needs.not-spicy,Pas épicé,,,,2,fr-agent-v1
+dietary-needs.less-spicy,Moins épicé,,,,2,fr-agent-v1
+dietary-needs.no-peanuts,Sans cacahuètes,sans arachides,,,2,fr-agent-v1
+dietary-needs.no-nuts,Sans fruits à coque,sans noix,,,2,fr-agent-v1
+dietary-needs.no-seafood,Sans poisson ni fruits de mer,sans fruits de mer,,no fish or shellfish,2,fr-agent-v1
+dietary-needs.i-am-vegetarian,Je suis végétarien,végétarienne,,,2,fr-agent-v1
+dietary-needs.i-am-vegan,Je suis végétalien,végane,,,2,fr-agent-v1
+dietary-needs.i-do-not-eat,Je ne mange pas de {},,,,2,fr-agent-v1
+dietary-needs.i-am-allergic-to,Je suis allergique à {},,,,2,fr-agent-v1
+dietary-needs.does-it-contain-fish-stock,Y a-t-il du bouillon de poisson ?,fumet de poisson,,,2,fr-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,J'ai une allergie grave à {},,,,2,fr-agent-v1
+food-ordering.table-for-two,Une table pour deux,,,,2,fr-agent-v1
+food-ordering.is-a-table-available,Avez-vous une table de libre ?,,,,2,fr-agent-v1
+food-ordering.menu-please,"La carte, s'il vous plaît",le menu,,,2,fr-agent-v1
+food-ordering.i-want-this,Je voudrais ceci,,,,2,fr-agent-v1
+food-ordering.do-you-have-drinking-water,Avez-vous de l'eau potable ?,,,,2,fr-agent-v1
+food-ordering.to-go-please,"À emporter, s'il vous plaît",,,,2,fr-agent-v1
+food-ordering.check-please,"L'addition, s'il vous plaît",,,,2,fr-agent-v1
+food-ordering.does-it-contain,Cela contient-il {} ?,,,,2,fr-agent-v1
+food-ordering.is-this-vegetarian,C'est végétarien ?,,,,2,fr-agent-v1
+food-ordering.what-do-you-recommend,Que recommandez-vous ?,,,,2,fr-agent-v1
+food-ordering.water-please,"De l'eau, s'il vous plaît",,,,2,fr-agent-v1
+food-ordering.can-a-vegetarian-eat-this,Un végétarien peut-il manger ça ?,,,,2,fr-agent-v1

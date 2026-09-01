@@ -1,0 +1,100 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+sim-data.i-would-like-a-tourist-sim,Je voudrais une carte SIM touriste,,,,2,fr-agent-v1
+children.cannot-find-my-child,Je ne trouve pas mon enfant,,,,2,fr-agent-v1
+etiquette.is-this-allowed,C'est autorisé ?,,,,2,fr-agent-v1
+sim-data.may-i-use-your-wifi,Puis-je utiliser votre wifi ?,,,,2,fr-agent-v1
+children.make-an-announcement,Pourriez-vous faire une annonce ?,,,,2,fr-agent-v1
+etiquette.is-tipping-expected,Faut-il laisser un pourboire ?,,,,2,fr-agent-v1
+sim-data.how-much-data-is-included,Combien de données sont incluses ?,,,,2,fr-agent-v1
+children.child-age,Mon enfant a {} ans,,,,2,fr-agent-v1
+etiquette.is-service-included,Le service est-il compris ?,,,,2,fr-agent-v1
+sim-data.do-you-need-my-passport,Avez-vous besoin de mon passeport ?,,,,2,fr-agent-v1
+children.high-chair,Avez-vous une chaise haute ?,,,,2,fr-agent-v1
+etiquette.may-i-enter,Puis-je entrer ?,,,,2,fr-agent-v1
+sim-data.how-long-is-it-valid,Combien de temps est-ce valable ?,,,,2,fr-agent-v1
+children.baby-changing-room,Où est la table à langer ?,l'espace bébé,,,2,fr-agent-v1
+etiquette.remove-shoes,Faut-il enlever ses chaussures ?,,,,2,fr-agent-v1
+sim-data.please-activate-it,"Activez-la, s'il vous plaît",,,,2,fr-agent-v1
+children.childrens-menu,Y a-t-il un menu enfant ?,,,,2,fr-agent-v1
+etiquette.photo-of-you,Puis-je vous prendre en photo ?,,,,2,fr-agent-v1
+sim-data.do-you-have-an-esim,Avez-vous une eSIM ?,,,,2,fr-agent-v1
+children.suitable-for-children,C'est adapté aux enfants ?,,,,2,fr-agent-v1
+etiquette.may-i-sit-here,Puis-je m'asseoir ici ?,,,,2,fr-agent-v1
+sim-data.my-data-is-not-working,Mes données ne fonctionnent pas,,,,2,fr-agent-v1
+children.minimum-age,Quel est l'âge minimum ?,,,,2,fr-agent-v1
+etiquette.queue-for,C'est la file pour {} ?,,,,2,fr-agent-v1
+sim-data.does-it-need-registration,Faut-il l'enregistrer ?,,,,2,fr-agent-v1
+children.do-children-pay,Les enfants paient-ils ?,,,,2,fr-agent-v1
+etiquette.dressed-appropriately,Ma tenue est-elle correcte ?,,,,2,fr-agent-v1
+sim-data.i-have-no-signal,Je n'ai pas de réseau,,,,2,fr-agent-v1
+children.crib,Avez-vous un lit bébé ?,,,,2,fr-agent-v1
+etiquette.did-not-mean-to-offend,Je ne voulais pas vous offenser,,,,2,fr-agent-v1
+sim-data.please-write-the-wifi-password,Écrivez le mot de passe du wifi,,,,2,fr-agent-v1
+children.warm-this-bottle,Pourriez-vous réchauffer ce biberon ?,,,,2,fr-agent-v1
+etiquette.what-is-customary,Quel est l'usage ici ?,,,,2,fr-agent-v1
+sim-data.sim-card,carte SIM,,,,2,fr-agent-v1
+children.car-seat,Nous avons besoin d'un siège auto,,,,2,fr-agent-v1
+etiquette.keep-the-change,Gardez la monnaie,,,,2,fr-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Où acheter un adaptateur de prise ?,,,,2,fr-agent-v1
+children.stroller,poussette,landau,,,2,fr-agent-v1
+sim-data.mobile-data,données mobiles,,,,2,fr-agent-v1
+children.playground,Y a-t-il une aire de jeux ?,,,,2,fr-agent-v1
+sim-data.can-i-top-up-this-sim,Puis-je recharger cette SIM ?,,,,2,fr-agent-v1
+sim-data.top-up,recharge,,,,2,fr-agent-v1
+sim-data.is-there-coverage-in,Y a-t-il du réseau à {} ?,,,,2,fr-agent-v1
+sim-data.signal,réseau,signal,,,2,fr-agent-v1
+sim-data.esim,eSIM,,,,2,fr-agent-v1
+sim-data.prepaid,prépayé,,,,2,fr-agent-v1
+sim-data.roaming,itinérance,roaming,,,2,fr-agent-v1
+social-basics.hello,Bonjour,,,,2,fr-agent-v1
+social-basics.hello-polite,Bonjour madame / monsieur,,,,2,fr-agent-v1
+social-basics.good-morning,Bonjour,,,,2,fr-agent-v1
+social-basics.good-evening,Bonsoir,,,,2,fr-agent-v1
+social-basics.goodbye,Au revoir,,,,2,fr-agent-v1
+social-basics.thank-you,Merci,,,,2,fr-agent-v1
+social-basics.you-are-welcome,Je vous en prie,De rien,,,2,fr-agent-v1
+social-basics.excuse-me-sorry,Excusez-moi,Pardon,,,2,fr-agent-v1
+social-basics.sorry,Pardon,Désolé,,,2,fr-agent-v1
+social-basics.no-problem,Pas de problème,,,,2,fr-agent-v1
+social-basics.i-do-not-know,Je ne sais pas,,,,2,fr-agent-v1
+social-basics.good-night,Bonne nuit,,,,2,fr-agent-v1
+social-basics.okay-fine-i-am-okay,Ça va,,,,2,fr-agent-v1
+communication.i-do-not-speak-this-language,Je ne parle pas français,,,,2,fr-agent-v1
+communication.i-speak-only-a-little-of-this,Je parle très peu français,,,,2,fr-agent-v1
+communication.do-you-speak-english,Parlez-vous anglais ?,,,,2,fr-agent-v1
+communication.please-speak-more-slowly,"Parlez plus lentement, s'il vous plaît",,,,2,fr-agent-v1
+communication.i-do-not-understand-spoken,Je ne comprends pas,,,,2,fr-agent-v1
+communication.i-cannot-read-understand,Je ne sais pas lire ça,,,,2,fr-agent-v1
+communication.please-say-it-again,"Répétez, s'il vous plaît",,,,2,fr-agent-v1
+communication.please-write-it-down,"Écrivez-le, s'il vous plaît",,,,2,fr-agent-v1
+communication.please-wait-a-moment,"Un instant, s'il vous plaît",,,,2,fr-agent-v1
+communication.can-you-help-me,Pouvez-vous m'aider ?,,,,2,fr-agent-v1
+communication.please-show-me-the-text,Montrez-moi le texte en français,,,,2,fr-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Je n'arrive pas à vous comprendre,,,,2,fr-agent-v1
+communication.i-do-not-understand,Je ne comprends pas,,,,2,fr-agent-v1
+communication.i-cannot-read-it,Je ne peux pas le lire,,,,2,fr-agent-v1
+communication.please-write-it-in-roman-letters,Écrivez-le en alphabet latin,,,,2,fr-agent-v1
+quick-responses.please-go-ahead,s'il vous plaît / allez-y,,,,2,fr-agent-v1
+quick-responses.yes-right,oui / c'est ça,,,,2,fr-agent-v1
+quick-responses.no-not,non / pas,,,,2,fr-agent-v1
+quick-responses.okay-can,d'accord / possible,,,,2,fr-agent-v1
+quick-responses.cannot-not-allowed,interdit,,,,2,fr-agent-v1
+quick-responses.works-okay,ça marche,,,,2,fr-agent-v1
+quick-responses.does-not-work-no,ça ne marche pas,,,,2,fr-agent-v1
+quick-responses.can-possible,c'est possible,,,,2,fr-agent-v1
+quick-responses.cannot-not-possible,ce n'est pas possible,,,,2,fr-agent-v1
+quick-responses.okay-fine,d'accord,,,,2,fr-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,ça ne va pas,interdit,,,2,fr-agent-v1
+phone-translation.i-am-using-phone-translation,J'utilise une traduction automatique,,,,2,fr-agent-v1
+phone-translation.please-speak-toward-the-phone,Parlez vers le téléphone,,,,2,fr-agent-v1
+phone-translation.one-sentence-at-a-time-please,"Une phrase à la fois, s'il vous plaît",,,,2,fr-agent-v1
+phone-translation.please-type-it-and-show-me,Tapez-le et montrez-moi,,,,2,fr-agent-v1
+phone-translation.please-look-at-the-screen,Regardez l'écran,,,,2,fr-agent-v1
+phone-text-power.please-type-it-for-me,"Tapez-le pour moi, s'il vous plaît",,,,2,fr-agent-v1
+phone-translation.please-write-the-place-name,Écrivez le nom du lieu en français,,,,2,fr-agent-v1
+phone-text-power.please-use-simple-words,Employez des mots simples,,,,2,fr-agent-v1
+phone-text-power.my-phone-battery-is-low,Ma batterie est presque vide,,,,2,fr-agent-v1
+phone-text-power.do-you-have-a-power-bank,Avez-vous une batterie externe ?,,,,2,fr-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,La traduction peut être inexacte,,,,2,fr-agent-v1
+phone-text-power.please-confirm,"Confirmez, s'il vous plaît",,,,2,fr-agent-v1
+phone-text-power.may-i-charge-my-phone-here,Puis-je recharger mon téléphone ici ?,,,,2,fr-agent-v1

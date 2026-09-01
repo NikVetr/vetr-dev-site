@@ -4,3 +4,10 @@ introductions.nice-to-meet-you,很高兴认识你,,hěn gāoxìng rènshi nǐ,,,
 introductions.what-is-your-name,你叫什么名字？,,nǐ jiào shénme míngzi?,,,2,latex-reference-v2
 introductions.we-are-traveling-together,我们一起旅行,,wǒmen yìqǐ lǚxíng,,,2,latex-reference-v2
 introductions.this-is-my-friend,这是我的朋友,,zhè shì wǒ de péngyou,,,2,latex-reference-v2
+introductions.i-am-from,我来自{},,wǒ láizì {},,,2,zh-Hans-agent-v1
+introductions.where-are-you-from,你是哪里人？,,nǐ shì nǎlǐ rén?,,,2,zh-Hans-agent-v1
+introductions.how-are-you,你好吗？,,nǐ hǎo ma?,,,2,zh-Hans-agent-v1
+introductions.i-am-a-tourist,我是游客,,wǒ shì yóukè,,,2,zh-Hans-agent-v1
+introductions.this-is-my-husband-wife,这是我丈夫/妻子,,zhè shì wǒ zhàngfu / qīzi,,,2,zh-Hans-agent-v1
+introductions.this-is-my-daughter-son,这是我女儿/儿子,,zhè shì wǒ nǚ'ér / érzi,,,2,zh-Hans-agent-v1
+introductions.i-am-traveling-alone,我一个人旅行,,wǒ yí gè rén lǚxíng,,,2,zh-Hans-agent-v1

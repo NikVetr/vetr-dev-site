@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Ich möchte nach {}.,,,,2,de-agent-v1
+utility-templates.please-give-me,Bitte geben Sie mir {}.,,,,2,de-agent-v1
+utility-templates.may-i,Darf ich {}?,,,,2,de-agent-v1
+utility-templates.please-do-not-add,Bitte ohne {}.,,,,2,de-agent-v1
+utility-templates.do-you-have,Haben Sie {}?,,,,2,de-agent-v1
+utility-templates.please-write-the-number,Bitte die Zahl aufschreiben.,,,,2,de-agent-v1
+utility-templates.i-need,Ich brauche {}.,,,,2,de-agent-v1
+utility-templates.is-there-nearby,Gibt es {} hier in der Nähe?,,,,2,de-agent-v1
+utility-templates.how-much-is,Was kostet {}?,,,,2,de-agent-v1
+utility-templates.is-this,Ist das {}?,,,,2,de-agent-v1
+utility-templates.please,"{}, bitte.",,,,2,de-agent-v1
+utility-templates.i-am-looking-for,Ich suche {}.,,,,2,de-agent-v1
+utility-templates.do-you-accept,Nehmen Sie {}?,,,,2,de-agent-v1
+utility-templates.i-cannot-find,Ich finde {} nicht.,,,,2,de-agent-v1
+utility-templates.there-is-a-problem-with,Es gibt ein Problem mit {}.,,,,2,de-agent-v1

@@ -1,0 +1,60 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+toilets.where-toilet,Où sont les toilettes ?,,,,2,fr-agent-v1
+accessibility.step-free,Y a-t-il un accès de plain-pied ?,accès sans marches,,,2,fr-agent-v1
+toilets.where-public-toilet,Où y a-t-il des toilettes publiques ?,,,,2,fr-agent-v1
+accessibility.wheelchair-access,C'est accessible en fauteuil roulant ?,,,,2,fr-agent-v1
+toilets.may-i-use-the-toilet,Puis-je utiliser les toilettes ?,,,,2,fr-agent-v1
+accessibility.elevator,Y a-t-il un ascenseur ?,,,,2,fr-agent-v1
+toilets.is-it-only-for-customers,C'est réservé aux clients ?,,,,2,fr-agent-v1
+accessibility.ramp,Y a-t-il une rampe ?,,,,2,fr-agent-v1
+toilets.toilet-wc,Toilettes / WC,Sanitaires,,,2,fr-agent-v1
+accessibility.how-many-steps,Combien y a-t-il de marches ?,,,,2,fr-agent-v1
+toilets.is-it-free,C'est gratuit ?,,,,2,fr-agent-v1
+accessibility.cannot-climb-stairs,Je ne peux pas monter les escaliers,,,,2,fr-agent-v1
+toilets.do-i-need-a-coin,Faut-il une pièce ou un jeton ?,,,,2,fr-agent-v1
+accessibility.need-to-sit-down,J'ai besoin de m'asseoir,,,,2,fr-agent-v1
+toilets.is-the-tap-water-safe-to-drink,L'eau du robinet est-elle potable ?,,,,2,fr-agent-v1
+accessibility.accessible-restroom,Y a-t-il des toilettes accessibles ?,toilettes PMR,,,2,fr-agent-v1
+toilets.it-is-urgent,C'est urgent,,,,2,fr-agent-v1
+accessibility.station-assistance,Y a-t-il une assistance en gare ?,,,,2,fr-agent-v1
+toilets.may-i-have-the-toilet-key,Puis-je avoir la clé des toilettes ?,,,,2,fr-agent-v1
+accessibility.help-me-carry,Pourriez-vous m'aider à porter ceci ?,,,,2,fr-agent-v1
+toilets.there-is-no-toilet-paper,Il n'y a plus de papier toilette,,,,2,fr-agent-v1
+accessibility.board-first,Puis-je monter en premier ?,,,,2,fr-agent-v1
+toilets.toilet-paper,papier toilette,,,,2,fr-agent-v1
+accessibility.door-width,Quelle est la largeur de la porte ?,,,,2,fr-agent-v1
+toilets.it-is-out-of-order,C'est hors service,,,,2,fr-agent-v1
+accessibility.wheelchair-width,Mon fauteuil roulant fait {} cm de large,,,,2,fr-agent-v1
+toilets.out-of-order,Hors service,En panne,,,2,fr-agent-v1
+accessibility.hard-of-hearing,Je suis malentendant,,,,2,fr-agent-v1
+toilets.mens-toilet,Toilettes hommes,Messieurs,,,2,fr-agent-v1
+accessibility.speak-louder,"Parlez plus fort, s'il vous plaît",,,,2,fr-agent-v1
+toilets.womens-toilet,Toilettes femmes,Dames,,,2,fr-agent-v1
+accessibility.visually-impaired,Je suis malvoyant,,,,2,fr-agent-v1
+toilets.drinking-water,Eau potable,,,,2,fr-agent-v1
+accessibility.take-your-arm,Puis-je prendre votre bras ?,,,,2,fr-agent-v1
+toilets.not-for-drinking,Eau non potable,,,,2,fr-agent-v1
+accessibility.guide-dog,C'est mon chien guide,chien d'assistance,,,2,fr-agent-v1
+toilets.accessible-toilet,Toilettes accessibles,WC PMR,,,2,fr-agent-v1
+toilets.where-can-i-wash-my-hands,Où puis-je me laver les mains ?,,,,2,fr-agent-v1
+toilets.can-i-flush-the-paper,Puis-je jeter le papier dans la cuvette ?,,,,2,fr-agent-v1
+toilets.is-there-a-toilet-on-board,Y a-t-il des toilettes à bord ?,,,,2,fr-agent-v1
+toilets.the-toilet-will-not-flush,La chasse d'eau ne marche pas,,,,2,fr-agent-v1
+toilets.baby-change,Table à langer,,,,2,fr-agent-v1
+toilets.squat-toilet,Toilettes à la turque,,,,2,fr-agent-v1
+building-help.what-room-number-is-this,Quel est le numéro de cette salle ?,,,,2,fr-agent-v1
+building-help.i-am-lost,Je suis perdu,,,,2,fr-agent-v1
+building-help.where-is-reception,Où est la réception ?,,,,2,fr-agent-v1
+building-help.where-is-a-power-outlet,Où y a-t-il une prise électrique ?,,,,2,fr-agent-v1
+in-a-building.is-this-the-correct-entrance,C'est la bonne entrée ?,,,,2,fr-agent-v1
+in-a-building.do-you-have-wi-fi,Avez-vous le wifi ?,,,,2,fr-agent-v1
+in-a-building.what-is-the-wi-fi-password,Quel est le mot de passe du wifi ?,,,,2,fr-agent-v1
+in-a-building.which-floor,Quel étage ?,,,,2,fr-agent-v1
+building-words.elevator,ascenseur,,,,2,fr-agent-v1
+building-words.stairs,escalier,,,,2,fr-agent-v1
+building-words.entrance,entrée,,,,2,fr-agent-v1
+building-words.exit,sortie,,,,2,fr-agent-v1
+building-words.men,hommes,,,,2,fr-agent-v1
+building-words.women,femmes,,,,2,fr-agent-v1
+building-words.door,porte,,,,2,fr-agent-v1
+building-words.key,clé,,,,2,fr-agent-v1

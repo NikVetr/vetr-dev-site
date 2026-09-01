@@ -1,0 +1,53 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+laundry.please-wash-these-clothes,"Lave esta ropa, por favor",,,,2,es-agent-v1
+laundry.where-is-a-laundromat,¿Dónde hay una lavandería?,,,,2,es-agent-v1
+laundry.when-will-it-be-ready,¿Cuándo estará lista?,,,,2,es-agent-v1
+laundry.how-much-per-kilo,¿Cuánto cuesta el kilo?,,,,2,es-agent-v1
+laundry.can-it-be-ready-today,¿Puede estar lista hoy?,,,,2,es-agent-v1
+laundry.please-do-not-use-bleach,No use blanqueador ni lejía,No use cloro ni lavandina,,,2,es-agent-v1
+laundry.laundromat,lavandería autoservicio,,,,2,es-agent-v1
+laundry.please-iron-this,"Planche esto, por favor",,,,2,es-agent-v1
+laundry.detergent,el detergente,el jabón para ropa,,,2,es-agent-v1
+laundry.dry-cleaning,la tintorería,limpieza en seco,,,2,es-agent-v1
+laundry.dryer,la secadora,,,,2,es-agent-v1
+laundry.coin-operated,Funciona con monedas,,,,2,es-agent-v1
+hotel-words.passport,el pasaporte,,,,2,es-agent-v1
+hotel-words.room-key-card,la tarjeta de la habitación,,,,2,es-agent-v1
+hotel-words.check-in,check-in,el registro · la entrada,,,2,es-agent-v1
+hotel-words.check-out,check-out,la salida,,,2,es-agent-v1
+hotel-words.luggage-storage,la consigna de equipaje,el guardaequipaje,,,2,es-agent-v1
+hotel-basics.are-any-rooms-available,¿Tienen habitaciones libres?,,,,2,es-agent-v1
+hotel-basics.there-are-two-of-us,Somos dos,,,,2,es-agent-v1
+hotel-basics.i-have-a-reservation,Tengo una reserva,,,,2,es-agent-v1
+hotel-basics.can-i-charge-my-phone,¿Puedo cargar mi teléfono?,,,,2,es-agent-v1
+hotel-basics.i-would-like-a-non-smoking-room,Quisiera una habitación de no fumadores,,,,2,es-agent-v1
+hotel-basics.i-would-like-a-quiet-room,Quisiera una habitación tranquila,,,,2,es-agent-v1
+hotel-basics.is-there-a-washing-machine,¿Hay lavadora?,¿Hay lavarropas?,,,2,es-agent-v1
+hotel-basics.is-wi-fi-free,¿El wifi es gratis?,,,,2,es-agent-v1
+hotel-basics.how-much-per-night,¿Cuánto cuesta por noche?,,,,2,es-agent-v1
+hotel-basics.is-breakfast-included,¿Incluye el desayuno?,,,,2,es-agent-v1
+hotel-basics.may-i-see-the-room,¿Puedo ver la habitación?,,,,2,es-agent-v1
+hotel-basics.for-nights,Por {} noches,,,,2,es-agent-v1
+hotel-basics.two-beds,"Dos camas, por favor",,,,2,es-agent-v1
+hotel-basics.is-there-air-conditioning,¿Hay aire acondicionado?,,,,2,es-agent-v1
+hotel-requests.can-i-check-out-later,¿Puedo hacer el check-out más tarde?,,,,2,es-agent-v1
+hotel-requests.what-time-does-breakfast-start,¿A qué hora empieza el desayuno?,,,,2,es-agent-v1
+hotel-requests.can-i-store-my-luggage,¿Puedo dejar mi equipaje?,,,,2,es-agent-v1
+hotel-requests.no-housekeeping,"Sin servicio de limpieza, por favor",No molestar,,,2,es-agent-v1
+hotel-requests.another-towel-please,"Otra toalla, por favor",,,,2,es-agent-v1
+hotel-requests.what-time-is-check-out,¿A qué hora es la salida?,¿A qué hora es el check-out?,,,2,es-agent-v1
+hotel-requests.can-i-check-in-early,¿Puedo hacer el check-in más temprano?,,,,2,es-agent-v1
+hotel-requests.another-night,¿Puedo quedarme otra noche?,,,,2,es-agent-v1
+hotel-requests.is-there-a-safe,¿Hay caja fuerte?,,,,2,es-agent-v1
+hotel-requests.another-blanket,"Otra manta, por favor",Otra cobija · frazada,,,2,es-agent-v1
+hotel-requests.wake-up-call,"Despiérteme a las {}, por favor",,,,2,es-agent-v1
+room-problems.there-is-a-problem-with-the-room,Hay un problema con la habitación,,,,2,es-agent-v1
+room-problems.the-air-conditioning-is-broken,El aire acondicionado no funciona,,,,2,es-agent-v1
+room-problems.there-is-no-hot-water,No hay agua caliente,,,,2,es-agent-v1
+room-problems.can-i-change-rooms,¿Puedo cambiar de habitación?,,,,2,es-agent-v1
+room-problems.the-room-is-too-noisy,La habitación es muy ruidosa,,,,2,es-agent-v1
+room-problems.the-key-does-not-work,La llave no funciona,La tarjeta no funciona,,,2,es-agent-v1
+room-problems.the-toilet-will-not-flush,El inodoro no descarga,,,,2,es-agent-v1
+room-problems.the-light-does-not-work,La luz no funciona,,,,2,es-agent-v1
+room-problems.please-send-someone,"Envíe a alguien a arreglarlo, por favor",,,,2,es-agent-v1
+room-problems.the-heating-does-not-work,La calefacción no funciona,,,,2,es-agent-v1

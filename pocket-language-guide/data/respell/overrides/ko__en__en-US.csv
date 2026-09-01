@@ -1,0 +1,741 @@
+concept_id,respell
+toilets.where-toilet,hwah-jahng-shee-ree uh-dee-yeh-yo
+accessibility.step-free,gyeh-dahn uhm-nuhn geel ee-ssuh-yo
+building-help.what-room-number-is-this,yuh-gee myuht hoh-shee-ree-eh-yo
+in-a-building.is-this-the-correct-entrance,ee eep-goo mah-jah-yo
+building-words.elevator,ehl-lee-beh-ee-tuh
+pronouns-verbs.i-me,juh
+question-words.what,mwuh
+medical-conditions.i-am-diabetic,dahng-nyo-byuhng-ee ee-ssuh-yo
+pharmacy-symptoms.which-pharmacy-is-open-now,jee-guhm moon yuhn yahk-gook uh-dee-yeh-yo
+police-consulate.where-is-the-police-station,gyuhng-chahl-suh-gah uh-dee-yeh-yo
+body-parts.head,muh-ree
+emergency-medical.help,doh-wah-joo-seh-yo
+lost-rescue.i-lost-my-passport,yuh-gwuh-nuhl ee-ruh-buh-ryuh-ssuh-yo
+dietary-needs.no-meat,goh-gee ppeh joo-seh-yo
+food-ordering.table-for-two,doo myuhng-ee-yo
+weather.forecast,eel-gee-yeh-boh-gah uh-tteh-yo
+trail-words.trail,duhng-sahn-noh
+hiking-parks.is-this-the-way-to,{} gah-nuhn gee-ree-eh-yo
+trail-conditions.how-long-is-the-full-route,juhn-cheh guh-ree-gah uhl-mah-yeh-yo
+trail-transport.how-long-is-the-queue,joo-ree uhl-mah-nah gee-ruh-yo
+trail-warnings.open,geh-bahng
+trail-landmarks.trail-marker,ee-juhng-pyo
+laundry.please-wash-these-clothes,ee oht seh-tah-keh joo-seh-yo
+hotel-words.passport,yuh-gwuhn
+hotel-basics.are-any-rooms-available,been bahng ee-ssuh-yo
+hotel-requests.can-i-check-out-later,cheh-kuh-ah-oot nuht-geh dweh-yo
+room-problems.there-is-a-problem-with-the-room,bahng-eh moon-jeh-gah ee-ssuh-yo
+introductions.my-name-is,juh-nuhn {}-eem-nee-dah
+atm-cash.where-is-an-atm,hyuhn-guh-meen-chool-gee uh-dee-yeh-yo
+numbers-money.l-ng,yuhng
+attractions-tickets.where-can-i-buy-tickets,pyo uh-dee-suh sah-yo
+payment-receipt.pay-by-card,kah-duh-roh dweh-yo
+shopping.i-am-just-looking,guh-nyahng bohl-geh-yo
+color-size-returns.do-you-have-another-color,dah-ruhn sehk ee-ssuh-yo
+tax-refund.can-i-get-a-tax-refund,tehk-suh-ree-puhn dweh-yo
+sim-data.i-would-like-a-tourist-sim,yuh-hehng-jah-yohng yoo-sheem joo-seh-yo
+children.cannot-find-my-child,ah-ee-ruhl moht chaht-geh-ssuh-yo
+etiquette.is-this-allowed,ee-guh heh-doh dweh-yo
+social-basics.hello,ahn-nyuhng-hah-seh-yo
+communication.i-do-not-speak-this-language,hahn-goo-guh moh-teh-yo
+quick-responses.please-go-ahead,guh-ruh-seh-yo
+phone-translation.i-am-using-phone-translation,buh-nyuhk-gee ssuh-goh ee-ssuh-yo
+phone-text-power.please-type-it-for-me,eem-nyuh-keh joo-seh-yo
+time-scheduling.what-time-is-it,myuht shee-yeh-yo
+time-words.today,oh-nuhl
+days-of-week.monday,wuh-ryo-eel
+months.january,ee-rwuhl
+border-customs.i-am-a-tourist,gwahn-gwahng-uh-roh wah-ssuh-yo
+directions.where-is,{} uh-dee-yeh-yo
+quick-directions.go-straight,jjook gah-seh-yo
+taxi.please-take-me-here,yuh-gee-roh gah joo-seh-yo
+transit-rides.two-tickets,pyo doo jahng-ee-yo
+pickup-meeting.where-is-the-pickup-point,pee-guhp jahng-soh uh-dee-yeh-yo
+rail-station-words.high-speed-rail,goh-sohk-chuhl-doh
+common-signs.open-on,yuhl-leem
+utility-templates.i-want-to-go-to,{}-eh gah-goh shee-puh-yo
+toilets.where-public-toilet,gohng-joong-hwah-jahng-shee-ree uh-dee-yeh-yo
+accessibility.wheelchair-access,hweel-cheh-uh ee-yohng gah-nuhng-heh-yo
+building-help.i-am-lost,gee-ruhl ee-ruh-ssuh-yo
+building-words.stairs,gyeh-dahn
+pronouns-verbs.we-us,juh-hee
+question-words.where,uh-dee
+medical-conditions.i-need-insulin,een-shyool-lee-nee pee-ryo-heh-yo
+pharmacy-symptoms.i-need-medicine-for,{} yah-gee pee-ryo-heh-yo
+police-consulate.i-want-to-report-a-theft,doh-nahn sheen-goh-hah-goh sheep-suhm-nee-dah
+body-parts.stomach,beh
+emergency-medical.please-call-an-ambulance,goo-guhp-chah-ruhl bool-luh joo-seh-yo
+lost-rescue.i-lost-my-phone,hyoo-deh-poh-nuhl ee-ruh-buh-ryuh-ssuh-yo
+dietary-needs.no-eggs,gyeh-rahn ppeh joo-seh-yo
+food-ordering.is-a-table-available,jah-ree ee-ssuh-yo
+weather.will-it-rain,oh-nuhl bee wah-yo
+trail-words.trailhead,duhng-sahn-noh eep-goo
+hiking-parks.where-is-the-trailhead,duhng-sahn-noh eep-goo uh-dee-yeh-yo
+trail-conditions.can-we-return-the-same-way,gah-tuhn geel-loh doh-rah-wah-doh dweh-yo
+trail-transport.what-time-is-the-last-shuttle,mahk-chah shyuh-tuh-ree myuht shee-yeh-yo
+trail-warnings.closed,pyeh-sweh
+trail-landmarks.fork-junction,gahl-leem-geel
+laundry.where-is-a-laundromat,ppahl-leh-bahng-ee uh-dee-yeh-yo
+hotel-words.room-key-card,kah-duh-kee
+hotel-basics.there-are-two-of-us,doo myuhng-ee-eh-yo
+hotel-requests.what-time-does-breakfast-start,joh-sheek myuht shee-boo-tuh-yeh-yo
+room-problems.the-air-conditioning-is-broken,eh-uh-kuh-nee goh-jahng-nah-ssuh-yo
+introductions.nice-to-meet-you,bahn-gahp-suhm-nee-dah
+atm-cash.does-this-atm-take-foreign-cards,weh-gook kah-duh dweh-yo
+numbers-money.y,eel
+attractions-tickets.do-i-need-a-reservation,yeh-yah-keh-yah heh-yo
+payment-receipt.pay-cash,hyuhn-guh-muh-roh dweh-yo
+shopping.how-much-is-this,ee-guh uhl-mah-yeh-yo
+color-size-returns.do-you-have-another-size,dah-ruhn sah-ee-juh ee-ssuh-yo
+sim-data.may-i-use-your-wifi,wah-ee-pah-ee ssuh-doh dweh-yo
+children.make-an-announcement,ahn-neh bahng-sohng heh joo-seh-yo
+etiquette.is-tipping-expected,tee-buhl jwuh-yah heh-yo
+social-basics.hello-polite,ahn-nyuhng-hah-sheem-nee-kkah
+communication.i-speak-only-a-little-of-this,hahn-goo-guh joh-guhm-mahn heh-yo
+quick-responses.yes-right,neh
+phone-translation.please-speak-toward-the-phone,hyoo-deh-poh-neh mahl-ssuhm-heh joo-seh-yo
+phone-translation.please-write-the-place-name,jee-myuhng-uhl hahn-goo-guh-roh ssuh joo-seh-yo
+time-scheduling.how-many-minutes,myuht boo-nee-eh-yo
+time-words.tomorrow,neh-eel
+days-of-week.tuesday,hwah-yo-eel
+months.february,ee-wuhl
+border-customs.here-is-my-passport,yuh-gwuhn yuh-gee ee-ssuh-yo
+directions.how-do-i-get-to,{} uh-ttuh-keh gah-yo
+quick-directions.turn-left,wehn-jjoh-guh-roh gah-seh-yo
+taxi.please-send-me-the-address,joo-soh-ruhl boh-neh joo-seh-yo
+transit-rides.where-is-the-subway-station,jee-hah-chuhl-lyuh-gee uh-dee-yeh-yo
+place-words.visitor-center,ahn-neh-sehn-tuh
+pickup-meeting.please-send-me-the-pickup-point,pee-guhp jahng-soh-ruhl boh-neh joo-seh-yo
+common-signs.closed-off,dah-cheem
+utility-templates.please-give-me,{} joo-seh-yo
+toilets.may-i-use-the-toilet,hwah-jahng-sheel ssuh-doh dwehl-kkah-yo
+accessibility.elevator,ehl-lee-beh-ee-tuh ee-ssuh-yo
+building-help.where-is-reception,ahn-neh-deh-suh-kuh uh-dee-yeh-yo
+in-a-building.do-you-have-wi-fi,wah-ee-pah-ee ee-ssuh-yo
+building-words.entrance,eep-goo
+pronouns-verbs.you,dahng-sheen
+question-words.who,noo-goo
+medical-conditions.i-have-asthma,chuhn-shee-gee ee-ssuh-yo
+pharmacy-symptoms.i-have-a-fever,yuh-ree nah-yo
+police-consulate.my-bag-was-stolen,gah-bahng-uhl doh-nahn-dahng-heht-suhm-nee-dah
+body-parts.back,duhng
+emergency-medical.i-need-a-doctor,ee-sah-gah pee-ryo-hahm-nee-dah
+lost-rescue.please-call-the-police,gyuhng-chah-ruhl bool-luh joo-seh-yo
+dietary-needs.not-spicy,ahn mehp-geh heh joo-seh-yo
+food-ordering.menu-please,meh-nyoo joo-seh-yo
+weather.is-it-safe-today,oh-nuhl ahn-juhn-heh-yo
+trail-words.summit,juhng-sahng
+hiking-parks.how-long-to-the-summit,juhng-sahng-kkah-jee uhl-mah-nah guhl-lyuh-yo
+trail-conditions.can-we-return-before-dark,heh jee-gee juh-neh doh-rah-wah-yo
+trail-transport.when-does-the-cableway-stop,keh-ee-buhl-kah myuht shee-kkah-jee-yeh-yo
+trail-warnings.maintenance,juhng-bee joong
+trail-landmarks.boardwalk-cliff-path,deh-kuh-geel
+laundry.when-will-it-be-ready,uhn-jeh dah dweh-yo
+hotel-words.check-in,cheh-kuh-een
+hotel-basics.i-have-a-reservation,yeh-yah-keh-ssuh-yo
+hotel-requests.can-i-store-my-luggage,jeem maht-geel soo ee-ssuh-yo
+room-problems.there-is-no-hot-water,ohn-soo-gah ahn nah-wah-yo
+introductions.what-is-your-name,ee-ruh-mee uh-ttuh-keh dweh-seh-yo
+atm-cash.the-atm-kept-my-card,gee-gyeh-gah kah-duh-ruhl muh-guh-ssuh-yo
+numbers-money.r,ee
+attractions-tickets.what-is-the-latest-entry-time,eep-jahng mah-gah-mee myuht shee-yeh-yo
+payment-receipt.pay-by-qr-code,kyoo-ahl-koh-duh-roh dweh-yo
+shopping.that-is-too-expensive,nuh-moo bee-ssah-yo
+color-size-returns.may-i-try-it-on,ee-buh bwah-doh dweh-yo
+sim-data.how-much-data-is-included,deh-ee-tuh uhl-mah-nah dweh-yo
+children.child-age,ah-ee-gah {}-sah-ree-eh-yo
+etiquette.is-service-included,bohng-sah-ryo poh-hah-mee-eh-yo
+social-basics.good-morning,ahn-nyuhng-hah-seh-yo
+communication.do-you-speak-english,yuhng-uh hah-seh-yo
+quick-responses.no-not,ah-nee-yo
+phone-translation.one-sentence-at-a-time-please,hahn moon-jahng-ssheek mahl-ssuhm-heh joo-seh-yo
+phone-text-power.please-use-simple-words,swee-oon mahl-loh heh joo-seh-yo
+time-scheduling.what-time-should-we-meet,myuht shee-eh mahn-nahl-kkah-yo
+time-words.yesterday,uh-jeh
+days-of-week.wednesday,soo-yo-eel
+months.march,sah-mwuhl
+border-customs.i-am-staying-for-days,{}-eel ee-ssuhl guh-yeh-yo
+directions.is-it-far,muh-ruh-yo
+quick-directions.turn-right,oh-ruhn-jjoh-guh-roh gah-seh-yo
+taxi.we-need-the-east-gate-not-the-south-gate,nahm-moon ah-nee-goh dohng-moo-nee-eh-yo
+transit-rides.does-this-bus-train-go-to,ee-guh {} gah-yo
+place-words.railway-station,gee-chah-yuhk
+pickup-meeting.please-pick-us-up-here,yuh-gee-roh wah joo-seh-yo
+rail-station-words.transfer,hwahn-suhng
+common-signs.occupied,sah-yohng joong
+utility-templates.may-i,{} heh-doh dweh-yo
+toilets.is-it-only-for-customers,sohn-neem-mahn ssuhl soo ee-ssuh-yo
+accessibility.ramp,gyuhng-sah-roh ee-ssuh-yo
+building-help.where-is-a-power-outlet,kohn-sehn-tuh-gah uh-dee-yeh-yo
+in-a-building.what-is-the-wi-fi-password,wah-ee-pah-ee bee-meel-buhn-hoh mwuh-yeh-yo
+building-words.exit,chool-goo
+pronouns-verbs.you-polite,suhn-sehng-neem
+question-words.which-one,uh-nuh guht
+medical-conditions.i-have-a-heart-condition,sheem-jahng-byuhng-ee ee-ssuh-yo
+pharmacy-symptoms.i-have-diarrhea,suhl-sah-ruhl heh-yo
+police-consulate.my-passport-was-stolen,yuh-gwuh-nuhl doh-nahn-dahng-heht-suhm-nee-dah
+body-parts.throat,mohk
+emergency-medical.i-am-sick,moh-mee ah-puhm-nee-dah
+lost-rescue.we-are-here,juh-hee-nuhn yuh-gee ee-ssuh-yo
+dietary-needs.less-spicy,duhl mehp-geh heh joo-seh-yo
+food-ordering.i-want-this,ee-guh joo-seh-yo
+weather.how-cold-at-night,bah-meh uhl-mah-nah choo-wuh-yo
+trail-words.viewpoint,juhn-mahng-deh
+hiking-parks.how-long-to-the-viewpoint,juhn-mahng-deh-kkah-jee uhl-mah-nah guhl-lyuh-yo
+trail-conditions.is-the-trail-open,duhng-sahn-noh yuhl-lyuh ee-ssuh-yo
+trail-transport.where-can-we-buy-water,mool uh-dee-suh sah-yo
+trail-warnings.steep-slope,guhp-gyuhng-sah
+trail-landmarks.start,shee-jahk
+laundry.how-much-per-kilo,eel-keel-loh-eh uhl-mah-yeh-yo
+hotel-words.check-out,cheh-kuh-ah-oot
+hotel-basics.can-i-charge-my-phone,hyoo-deh-pohn choong-juhn-heh-doh dweh-yo
+hotel-requests.no-housekeeping,chuhng-soh ahn heh joo-seh-yo
+room-problems.can-i-change-rooms,bahng bah-kkool soo ee-ssuh-yo
+introductions.we-are-traveling-together,gah-chee yuh-hehng-heh-yo
+atm-cash.is-there-a-fee,soo-soo-ryo ee-ssuh-yo
+attractions-tickets.are-there-lockers,sah-mool-hahm ee-ssuh-yo
+payment-receipt.a-receipt-please,yuhng-soo-juhng joo-seh-yo
+shopping.can-it-be-a-little-cheaper,johm ssah-geh heh joo-seh-yo
+color-size-returns.can-i-return-it,bahn-poom-hahl soo ee-ssuh-yo
+sim-data.do-you-need-my-passport,yuh-gwuhn pee-ryo-heh-yo
+children.high-chair,ah-gee ee-jah ee-ssuh-yo
+etiquette.may-i-enter,duh-ruh-gah-doh dweh-yo
+social-basics.good-evening,ahn-nyuhng-hah-seh-yo
+communication.please-speak-more-slowly,chuhn-chuhn-hee mahl-ssuhm-heh joo-seh-yo
+quick-responses.okay-can,dweh-yo
+phone-text-power.my-phone-battery-is-low,beh-tuh-ree-gah uhp-suh-yo
+time-scheduling.can-we-change-the-time,shee-gahn bah-kkool soo ee-ssuh-yo
+time-words.this-week,ee-buhn joo
+days-of-week.thursday,moh-gyo-eel
+months.april,sah-wuhl
+border-customs.nothing-to-declare,sheen-goh-hahl guht uhp-suh-yo
+directions.how-long-on-foot,guh-ruh-suh uhl-mah-nah guhl-lyuh-yo
+quick-directions.this-way,ee-jjoh-gee-eh-yo
+taxi.please-stop-here,yuh-gee-suh seh-wuh joo-seh-yo
+transit-rides.what-is-the-next-stop,dah-uhm yuh-gee uh-dee-yeh-yo
+place-words.airport,gohng-hahng
+pickup-meeting.meet-us-at,{}-eh-suh mahn-nah-yo
+rail-station-words.ticket-gate,geh-chahl-goo
+common-signs.vacant,bee-uh ee-ssuhm
+utility-templates.please-do-not-add,{} nuh-chee mah-seh-yo
+toilets.toilet-wc,hwah-jahng-sheel
+accessibility.how-many-steps,gyeh-dah-nee myuht geh-yeh-yo
+in-a-building.which-floor,myuht chuhng-ee-eh-yo
+building-words.men,nahm-jah
+pronouns-verbs.he-him,guh
+question-words.when,uhn-jeh
+medical-conditions.i-am-allergic-to-penicillin,peh-nee-sheel-leen ahl-leh-ruh-gee-gah ee-ssuh-yo
+pharmacy-symptoms.where-is-an-all-night-pharmacy,sheem-yah-yahk-goo-gee uh-dee-yeh-yo
+police-consulate.someone-is-following-me,noo-gah juh-ruhl ttah-rah-wah-yo
+body-parts.tooth,ee
+emergency-medical.i-am-injured,dah-chyuht-suhm-nee-dah
+lost-rescue.please-look-at-my-location-pin,jeh wee-chee pee-nuhl bwah joo-seh-yo
+dietary-needs.no-peanuts,ttahng-kohng ppeh joo-seh-yo
+food-ordering.do-you-have-drinking-water,mah-sheel mool ee-ssuh-yo
+weather.rain,bee
+trail-words.cableway,keh-ee-buhl-kah
+hiking-parks.which-route-is-easier,uh-nuh gee-ree duh swee-wuh-yo
+trail-conditions.is-the-route-steep,gee-ree gah-pahl-lah-yo
+trail-transport.where-can-we-refill-water,mool uh-dee-suh cheh-wuh-yo
+trail-warnings.caution-slippery,mee-kkuh-ruhm joo-ee
+trail-landmarks.end,kkuht
+laundry.can-it-be-ready-today,oh-nuhl dwehl-kkah-yo
+hotel-basics.i-would-like-a-non-smoking-room,guh-myuhn bahng-uh-roh joo-seh-yo
+room-problems.the-room-is-too-noisy,bahng-ee nuh-moo shee-kkuh-ruh-wuh-yo
+introductions.this-is-my-friend,jeh cheen-goo-yeh-yo
+atm-cash.the-card-was-declined,kah-duh-gah ahn dweh-ssuh-yo
+numbers-money.s-n,sahm
+attractions-tickets.may-i-take-photos,sah-jeen jjee-guh-doh dweh-yo
+color-size-returns.can-i-exchange-it,gyo-hwahn-hahl soo ee-ssuh-yo
+sim-data.how-long-is-it-valid,uhl-mah-nah ssuhl soo ee-ssuh-yo
+children.baby-changing-room,soo-yoo-shee-ree uh-dee-yeh-yo
+etiquette.remove-shoes,sheen-bahl buh-suh-yah heh-yo
+social-basics.goodbye,ahn-nyuhng-hee gyeh-seh-yo
+communication.i-do-not-understand-spoken,moht ah-rah-duh-ruh-ssuh-yo
+quick-responses.cannot-not-allowed,hah-myuhn ahn dweh-yo
+phone-text-power.do-you-have-a-power-bank,boh-joh-beh-tuh-ree ee-ssuh-yo
+time-scheduling.when-is-convenient,uhn-jeh-gah joh-uh-seh-yo
+time-words.next-week,dah-uhm joo
+days-of-week.friday,guh-myo-eel
+months.may,oh-wuhl
+border-customs.i-am-staying-at,{}-eh-suh moo-guh-yo
+directions.please-show-me-on-the-map,jee-doh-eh-suh boh-yuh joo-seh-yo
+quick-directions.that-way,juh-jjoh-gee-eh-yo
+taxi.can-you-wait-for-me-here,yuh-gee-suh gee-dah-ryuh jool soo ee-ssuh-yo
+transit-rides.please-tell-me-where-to-get-off,neh-reel tteh ahl-lyuh joo-seh-yo
+place-words.service-desk,ahn-neh-deh-suh-kuh
+pickup-meeting.please-call-me-a-ride,chah johm bool-luh joo-seh-yo
+rail-station-words.platform,suhng-gahng-jahng
+common-signs.caution,joo-ee
+utility-templates.do-you-have,{} ee-ssuh-yo
+toilets.is-it-free,moo-ryo-yeh-yo
+accessibility.cannot-climb-stairs,gyeh-dah-nuhl moht ohl-lah-gah-yo
+building-words.women,yuh-jah
+pronouns-verbs.she-her,guh-nyuh
+question-words.how,uh-ttuh-keh
+medical-conditions.i-have-epilepsy,nweh-juhn-juhng-ee ee-ssuh-yo
+pharmacy-symptoms.painkiller,jeen-tohng-jeh
+police-consulate.i-need-a-written-police-report,sah-guhn-sah-goh-sah-sheel-hwah-gee-nwuh-nee pee-ryo-hahm-nee-dah
+body-parts.chest,gah-suhm
+emergency-medical.it-hurts-here,yuh-gee-gah ah-puhm-nee-dah
+lost-rescue.i-cannot-walk,guh-ruhl soo uhp-suh-yo
+dietary-needs.no-nuts,gyuhn-gwah-ryoo ppeh joo-seh-yo
+food-ordering.to-go-please,poh-jahng-heh joo-seh-yo
+weather.snow,noon
+trail-words.shuttle-bus,shyuh-tuhl-buh-suh
+trail-conditions.is-the-path-slippery,gee-ree mee-kkuh-ruh-wuh-yo
+trail-transport.is-there-cell-signal-here,yuh-gee hyoo-deh-pohn tuh-jyuh-yo
+trail-warnings.danger,wee-huhm
+trail-landmarks.elevation,goh-doh
+laundry.please-do-not-use-bleach,pyo-behk-jeh-nuhn ssuh-jee mah-seh-yo
+hotel-basics.i-would-like-a-quiet-room,joh-yohng-hahn bahng-uh-roh joo-seh-yo
+room-problems.the-key-does-not-work,kah-duh-kee-gah ahn dweh-yo
+introductions.i-am-from,juh-nuhn {}-eh-suh wah-ssuh-yo
+atm-cash.what-is-the-exchange-rate,hwahn-nyoo-ree uhl-mah-yeh-yo
+numbers-money.s,sah
+attractions-tickets.please-take-a-photo-of-us,sah-jeen jjee-guh joo-seh-yo
+color-size-returns.do-you-have-a-bag,bohng-too ee-ssuh-yo
+sim-data.please-activate-it,geh-tohng-heh joo-seh-yo
+children.childrens-menu,uh-ree-nee meh-nyoo ee-ssuh-yo
+etiquette.photo-of-you,sah-jeen jjee-guh-doh dwehl-kkah-yo
+social-basics.thank-you,gahm-sah-hahm-nee-dah
+communication.i-cannot-read-understand,eel-guhl soo uhp-suh-yo
+quick-responses.works-okay,gwehn-chah-nah-yo
+phone-text-power.the-translation-may-be-inaccurate,buh-nyuh-gee tuhl-leel soo ee-ssuh-yo
+time-scheduling.what-is-today-s-date,oh-nuhl myuh-chee-ree-eh-yo
+time-words.morning,ah-cheem
+days-of-week.saturday,toh-yo-eel
+months.june,yoo-wuhl
+border-customs.i-am-here-for-business,chool-jahng-uh-roh wah-ssuh-yo
+directions.where-is-the-nearest,gah-kkah-oon {} uh-dee-yeh-yo
+quick-directions.on-the-left,wehn-jjoh-geh ee-ssuh-yo
+taxi.we-need-to-catch-the-high-speed-train,goh-sohng-nyuhl-chah tah-yah heh-yo
+transit-rides.is-this-direct,bah-roh gah-yo
+place-words.bus-stop,buh-suh-juhng-nyoo-jahng
+rail-station-words.ticket-office,meh-pyo-soh
+common-signs.no-entry,choo-reep guhm-jee
+utility-templates.please-write-the-number,soot-jah-ruhl juh-guh joo-seh-yo
+toilets.do-i-need-a-coin,dohng-juh-nee pee-ryo-heh-yo
+accessibility.need-to-sit-down,johm ahn-jah-yah heh-yo
+building-words.door,moon
+pronouns-verbs.they-them,guh-duhl
+question-words.how-much-many,uhl-mah-nah
+medical-conditions.my-blood-sugar-is-low,juh-hyuhl-dahng-ee-eh-yo
+pharmacy-symptoms.do-i-need-a-prescription,chuh-bahng-juh-nee pee-ryo-heh-yo
+police-consulate.i-want-to-contact-my-embassy,deh-sah-gwah-neh yuhl-lah-kah-goh sheep-suhm-nee-dah
+body-parts.eye,noon
+emergency-medical.where-is-a-pharmacy,yahk-goo-gee uh-dee-yeh-yo
+lost-rescue.i-sprained-my-ankle,bahl-moh-guhl ppee-uh-ssuh-yo
+dietary-needs.no-seafood,heh-sahn-mool ppeh joo-seh-yo
+food-ordering.check-please,gyeh-sahn-heh joo-seh-yo
+weather.wind,bah-rahm
+trail-words.park-shuttle,gohng-wuhn shyuh-tuhl
+trail-transport.do-you-have-a-map,jee-doh ee-ssuh-yo
+trail-warnings.beware-falling-rocks,nahk-suhk joo-ee
+trail-landmarks.sunset,eel-mohl
+laundry.laundromat,ppahl-leh-bahng
+hotel-basics.is-there-a-washing-machine,seh-tahk-gee ee-ssuh-yo
+room-problems.the-toilet-will-not-flush,moo-ree ahn neh-ryuh-gah-yo
+introductions.where-are-you-from,uh-dee-suh oh-shyuh-ssuh-yo
+atm-cash.no-money-came-out,doh-nee ahn nah-wah-ssuh-yo
+numbers-money.w,oh
+sim-data.do-you-have-an-esim,ee-sheem ee-ssuh-yo
+children.suitable-for-children,ah-ee-doh gwehn-chah-nah-yo
+etiquette.may-i-sit-here,yuh-gee ahn-jah-doh dweh-yo
+social-basics.you-are-welcome,ah-nee-eh-yo
+communication.please-say-it-again,dah-shee mahl-ssuhm-heh joo-seh-yo
+quick-responses.does-not-work-no,ahn dweh-yo
+phone-text-power.please-confirm,hwah-geen-heh joo-seh-yo
+time-scheduling.what-day-is-it-today,oh-nuhl moo-suhn yo-ee-ree-eh-yo
+time-words.afternoon,oh-hoo
+days-of-week.sunday,ee-ryo-eel
+months.july,chee-rwuhl
+border-customs.i-have-a-return-ticket,doh-rah-gah-nuhn pyo ee-ssuh-yo
+directions.where-am-i,yuh-gee-gah uh-dee-yeh-yo
+quick-directions.on-the-right,oh-ruhn-jjoh-geh ee-ssuh-yo
+taxi.please-use-the-meter,mee-tuh-gee-roh gah joo-seh-yo
+transit-rides.do-i-need-to-transfer,hwahn-suhng-heh-yah heh-yo
+place-words.luggage-storage,jeem boh-gwahn-soh
+rail-station-words.waiting-room,deh-hahp-sheel
+common-signs.no-smoking,guh-myuhn
+utility-templates.i-need,{} pee-ryo-heh-yo
+toilets.is-the-tap-water-safe-to-drink,soo-dohn-mool mah-shyuh-doh dweh-yo
+accessibility.accessible-restroom,jahng-eh-een hwah-jahng-sheel ee-ssuh-yo
+building-words.key,yuhl-sweh
+pronouns-verbs.my-mine,jeh
+question-words.how-many,myuht
+medical-conditions.i-need-my-inhaler,huh-beep-gee-gah pee-ryo-heh-yo
+pharmacy-symptoms.i-have-a-headache,muh-ree-gah ah-pah-yo
+police-consulate.i-need-it-for-my-insurance,boh-huhm tteh-moo-neh pee-ryo-hahm-nee-dah
+body-parts.ear,gwee
+emergency-medical.please-take-me-to-a-hospital,byuhng-wuh-neh deh-ryuh-gah joo-seh-yo
+lost-rescue.please-contact-rescue,goo-joh-deh-eh yuhl-lah-keh joo-seh-yo
+dietary-needs.i-am-vegetarian,cheh-sheek-joo-ee-jah-yeh-yo
+food-ordering.does-it-contain,{} duh-ruh-gah-ssuh-yo
+weather.storm,teh-poong
+trail-words.steps,gyeh-dahn
+trail-warnings.first-aid-station,uhng-guhp-chuh-chee-soh
+laundry.please-iron-this,ee-guh dah-ryuh joo-seh-yo
+room-problems.the-light-does-not-work,boo-ree ahn kyuh-jyuh-yo
+introductions.how-are-you,jahl jee-neh-seh-yo
+atm-cash.where-can-i-change-money,hwahn-juhn uh-dee-suh heh-yo
+numbers-money.li,yook
+sim-data.my-data-is-not-working,deh-ee-tuh-gah ahn dweh-yo
+children.minimum-age,myuht sahl-boo-tuh dweh-yo
+etiquette.queue-for,ee-geh {} joo-ree-eh-yo
+social-basics.excuse-me-sorry,sheel-lyeh-hahm-nee-dah
+communication.please-write-it-down,juh-guh joo-seh-yo
+time-scheduling.what-time-does-it-open,myuht shee-eh yuh-ruh-yo
+time-words.evening,juh-nyuhk
+months.august,pah-rwuhl
+border-customs.i-am-visiting-family,gah-johk mahn-nah-ruh wah-ssuh-yo
+directions.which-way,uh-nuh jjoh-gee-eh-yo
+quick-directions.across-from-here,guhn-nuh-pyuh-nee-eh-yo
+transit-rides.is-it-delayed,yuhn-chahk-dweh-ssuh-yo
+rail-station-words.train-number,yuhl-chah-buhn-hoh
+common-signs.no-photography,chwah-ryuhng guhm-jee
+utility-templates.is-there-nearby,guhn-chuh-eh {} ee-ssuh-yo
+toilets.it-is-urgent,guh-peh-yo
+accessibility.station-assistance,yuh-geh-suh doh-oom-bah-duhl soo ee-ssuh-yo
+pronouns-verbs.your-yours,dahng-shee-neh
+question-words.why,weh
+medical-conditions.i-am-pregnant,eem-sheen-heh-ssuh-yo
+pharmacy-symptoms.paracetamol-acetaminophen,ah-seh-tuh-ah-mee-noh-pehn
+police-consulate.i-need-an-interpreter,tohng-yuhk-sah-gah pee-ryo-hahm-nee-dah
+body-parts.leg,dah-ree
+lost-rescue.my-companion-is-missing,dohng-hehng-ee uhp-suh-jyuh-ssuh-yo
+dietary-needs.i-am-vegan,bee-guh-nee-eh-yo
+food-ordering.is-this-vegetarian,ee-guh cheh-shee-gee-eh-yo
+weather.ice,beeng-pahn
+trail-words.up-uphill,oh-ruh-mahk
+trail-warnings.service-suspended,oon-hehng joong-dahn
+trail-landmarks.water-point,guhp-soo-deh
+laundry.detergent,seh-jeh
+room-problems.please-send-someone,sah-rahm johm boh-neh joo-seh-yo
+introductions.i-am-a-tourist,gwahn-gwahng-geh-gee-eh-yo
+atm-cash.the-machine-is-out-of-service,gee-gyeh-gah goh-jahng-nah-ssuh-yo
+numbers-money.q,cheel
+sim-data.does-it-need-registration,duhng-noh-keh-yah heh-yo
+children.do-children-pay,ah-ee-doh dohn neh-yo
+etiquette.dressed-appropriately,ee oht gwehn-chah-nah-yo
+social-basics.sorry,jweh-sohng-hahm-nee-dah
+communication.please-wait-a-moment,jahm-shee-mahn gee-dah-ryuh joo-seh-yo
+time-scheduling.what-time-does-it-close,myuht shee-eh dah-dah-yo
+time-words.spring,bohm
+months.september,goo-wuhl
+border-customs.this-is-for-personal-use,geh-ee-nyohng-ee-eh-yo
+directions.can-i-walk-there,guh-ruh-gahl soo ee-ssuh-yo
+quick-directions.in-front,ah-peh ee-ssuh-yo
+transit-rides.i-am-in-a-hurry,guh-peh-yo
+rail-station-words.carriage,gehk-chah
+common-signs.do-not-touch,mahn-jee-jee mah-seh-yo
+utility-templates.how-much-is,{} uhl-mah-yeh-yo
+toilets.may-i-have-the-toilet-key,hwah-jahng-sheel yuhl-sweh joo-seh-yo
+accessibility.help-me-carry,ee-guht johm duh-ruh joo-seh-yo
+pronouns-verbs.be-called-call,~-rah-goh heh-yo
+question-words.this,ee-guh
+medical-conditions.i-carry-an-adrenaline-injector,eh-pee-neh-puh-reen jah-gah-joo-sah-gee-gah ee-ssuh-yo
+pharmacy-symptoms.how-much-should-i-take,uhl-mah-nah muh-guh-yah heh-yo
+police-consulate.please-leave-me-alone,juh-ruhl neh-buh-ryuh doo-seh-yo
+body-parts.arm,pahl
+dietary-needs.i-do-not-eat,{} ahn muh-guh-yo
+weather.fog,ahn-geh
+trail-words.down-downhill,neh-ree-mahk
+laundry.dry-cleaning,duh-rah-ee-kuhl-lee-neeng
+room-problems.the-heating-does-not-work,nahn-bahng-ee ahn dweh-yo
+introductions.this-is-my-husband-wife,nahm-pyuh-nee-eh-yo / ah-neh-yeh-yo
+atm-cash.please-give-me-smaller-notes,jah-guhn jee-pyeh-roh joo-seh-yo
+numbers-money.b,pahl
+sim-data.i-have-no-signal,sheen-hoh-gah ahn jah-pyuh-yo
+children.crib,ah-gee cheem-deh ee-ssuh-yo
+etiquette.did-not-mean-to-offend,sheel-lyeh-heht-dah-myuhn jweh-sohng-hahm-nee-dah
+social-basics.no-problem,gwehn-chah-nah-yo
+communication.can-you-help-me,doh-wah-joo-sheel soo ee-ssuh-yo
+time-words.summer,yuh-ruhm
+months.october,shee-wuhl
+border-customs.i-am-in-transit,hwahn-suhng-ee-eh-yo
+directions.how-far-is-it,uhl-mah-nah muh-ruh-yo
+quick-directions.behind,dwee-eh ee-ssuh-yo
+transit-rides.which-platform,myuht buhn suhng-gahng-jahng-ee-eh-yo
+rail-station-words.seat,jwah-suhk
+common-signs.temporarily-closed,eem-shee hyoo-uhp
+utility-templates.is-this,ee-guh {} mah-jah-yo
+toilets.there-is-no-toilet-paper,hyoo-jee-gah uhp-suh-yo
+accessibility.board-first,muhn-juh tah-doh dwehl-kkah-yo
+pronouns-verbs.have,ee-ssuh-yo
+question-words.that,guh-guh
+medical-conditions.i-take-medicine-for,{} yah-guhl muhk-goh ee-ssuh-yo
+pharmacy-symptoms.i-am-vomiting,toh-heh-yo
+police-consulate.i-was-robbed,gahng-doh-ruhl dahng-heht-suhm-nee-dah
+body-parts.foot,bahl
+dietary-needs.i-am-allergic-to,{} ahl-leh-ruh-gee-gah ee-ssuh-yo
+weather.heat,duh-wee
+trail-words.one-way,pyuhn-doh
+laundry.dryer,guhn-joh-gee
+introductions.this-is-my-daughter-son,ttah-ree-eh-yo / ah-duh-ree-eh-yo
+atm-cash.do-you-have-change,jahn-dohn ee-ssuh-yo
+numbers-money.ji,goo
+sim-data.please-write-the-wifi-password,wah-ee-pah-ee bee-meel-buhn-hoh ssuh joo-seh-yo
+children.warm-this-bottle,ee juht-byuhng deh-wuh joo-seh-yo
+etiquette.what-is-customary,yuh-gee-suh-nuhn uh-ttuh-keh heh-yo
+social-basics.i-do-not-know,mohl-lah-yo
+communication.please-show-me-the-text,hahn-goo-guh-roh boh-yuh joo-seh-yo
+time-words.fall,gah-uhl
+months.november,shee-bee-rwuhl
+border-customs.i-have-in-cash,hyuhn-guhm {} ee-ssuh-yo
+directions.which-exit,myuht buhn chool-goo-yeh-yo
+transit-rides.what-time-is-the-next-one,dah-uhm guhn myuht shee-yeh-yo
+rail-station-words.last-train,mahk-chah
+utility-templates.please,{} boo-tah-keh-yo
+toilets.toilet-paper,hyoo-jee
+accessibility.door-width,moon poh-gee uhl-mah-yeh-yo
+pronouns-verbs.do-not-have,uhp-suh-yo
+question-words.here,yuh-gee
+medical-conditions.i-take-blood-thinners,hahng-uhng-goh-jeh-ruhl muh-guh-yo
+pharmacy-symptoms.rehydration-salts,gyuhng-goo-soo-ehk
+police-consulate.i-want-a-lawyer,byuhn-hoh-sah-gah pee-ryo-hahm-nee-dah
+body-parts.hand,sohn
+weather.cold,choo-wee
+trail-words.round-trip,wahng-bohk
+laundry.coin-operated,dohng-juhn too-eep
+introductions.i-am-traveling-alone,hohn-jah yuh-hehng-heh-yo
+atm-cash.may-i-pay-in,{}-roh nehl soo ee-ssuh-yo
+numbers-money.sh,sheep
+sim-data.sim-card,yoo-sheem
+children.car-seat,kah-shee-tuh-gah pee-ryo-heh-yo
+etiquette.keep-the-change,jahn-doh-nuhn gwehn-chah-nah-yo
+time-words.winter,gyuh-ool
+months.december,shee-bee-wuhl
+border-customs.this-is-a-gift,suhn-moo-ree-eh-yo
+directions.can-you-show-me-the-way,geel johm ahl-lyuh joo-seh-yo
+transit-rides.i-went-past-my-stop,neh-reel goh-suhl jee-nah-ssuh-yo
+rail-station-words.delayed,yuhn-chahk
+utility-templates.i-am-looking-for,{} chaht-goh ee-ssuh-yo
+toilets.it-is-out-of-order,goh-jahng-nah-ssuh-yo
+accessibility.wheelchair-width,hweel-cheh-uh nuh-bee-gah {}cm-yeh-yo
+pronouns-verbs.go,gah-yo
+question-words.there,guh-gee
+medical-conditions.medicine-allergy,yahng-mool ahl-leh-ruh-gee: {}
+pharmacy-symptoms.how-many-times-a-day,hah-roo-eh myuht buh-nee-eh-yo
+police-consulate.please-notify-my-consulate,yuhng-sah-gwah-neh ahl-lyuh joo-seh-yo
+body-parts.knee,moo-ruhp
+weather.humid,suh-peh-yo
+atm-cash.please-charge-in-local-currency,wuhn-hwah-roh gyuhl-jeh-heh joo-seh-yo
+numbers-money.y-b-i,behk
+sim-data.where-can-i-buy-a-plug-adapter,uh-dehp-tuh uh-dee-suh sah-yo
+children.stroller,yoo-moh-chah
+border-customs.where-do-i-collect-my-baggage,soo-hah-mool uh-dee-suh bah-dah-yo
+directions.north,book-jjohk
+rail-station-words.final-stop,johng-juhm
+utility-templates.do-you-accept,{} bah-dah-yo
+toilets.out-of-order,goh-jahng
+accessibility.hard-of-hearing,gwee-gah jahl ahn duhl-lyuh-yo
+pronouns-verbs.come,wah-yo
+question-words.a-little,joh-guhm
+medical-conditions.this-card-lists-my-conditions,ee kah-duh-eh jeh byuhng-nyuh-gee ee-ssuh-yo
+pharmacy-symptoms.i-have-a-stomach-ache,beh-gah ah-pah-yo
+police-consulate.i-am-calling-the-police,gyuhng-chah-ruhl boo-ruh-geht-suhm-nee-dah
+body-parts.ankle,bahl-mohk
+weather.sunrise,eel-chool
+atm-cash.where-can-i-get-coins,dohng-juhn uh-dee-suh bah-kkwuh-yo
+numbers-money.y-qi-n,chuhn
+sim-data.mobile-data,deh-ee-tuh
+children.playground,noh-ree-tuh ee-ssuh-yo
+border-customs.how-long-may-i-stay,uhl-mah-nah muh-mool soo ee-ssuh-yo
+directions.south,nahm-jjohk
+utility-templates.i-cannot-find,{} moht chaht-geh-ssuh-yo
+toilets.mens-toilet,nahm-jah hwah-jahng-sheel
+accessibility.speak-louder,kuh-geh mahl-ssuhm-heh joo-seh-yo
+pronouns-verbs.would-like,~-goh shee-puh-yo
+question-words.some,myuht geh
+medical-conditions.this-is-my-medicine,ee-geh jeh yah-gee-eh-yo
+pharmacy-symptoms.i-have-a-cough,gee-chee-mee nah-yo
+police-consulate.am-i-under-arrest,jeh-gah cheh-poh-dwehn guhm-nee-kkah
+body-parts.skin,pee-boo
+weather.flood,hohng-soo
+atm-cash.is-there-a-minimum-for-cards,kah-duh chweh-soh guh-mehk ee-ssuh-yo
+numbers-money.y-w-n,mahn
+sim-data.can-i-top-up-this-sim,ee yoo-sheem choong-juhn-dweh-yo
+border-customs.i-have-a-connecting-flight,yuhn-gyuhl-pyuh-nee ee-ssuh-yo
+directions.east,dohng-jjohk
+utility-templates.there-is-a-problem-with,{}-eh moon-jeh-gah ee-ssuh-yo
+toilets.womens-toilet,yuh-jah hwah-jahng-sheel
+accessibility.visually-impaired,shee-gahk-jahng-eh-gah ee-ssuh-yo
+pronouns-verbs.want,wuhn-heh-yo
+question-words.very,ah-joo
+medical-conditions.please-give-me-sugar-or-juice,suhl-tahng-ee-nah joo-suh-ruhl joo-seh-yo
+pharmacy-symptoms.antihistamine,hahng-hee-suh-tah-meen-jeh
+police-consulate.no-thank-you-i-am-not-interested,"gwehn-chah-nah-yo, gwahn-sheem uhp-suh-yo"
+weather.avalanche-risk,noon-sah-teh wee-huhm
+atm-cash.atm,hyuhn-guh-meen-chool-gee
+numbers-money.b-n,bahn
+sim-data.top-up,choong-juhn
+border-customs.may-i-have-an-entry-stamp,eep-gook doh-jahng jjee-guh joo-seh-yo
+directions.west,suh-jjohk
+toilets.drinking-water,uh-myohng-soo
+accessibility.take-your-arm,pahl johm jah-bah-doh dwehl-kkah-yo
+pronouns-verbs.look-for,chah-jah-yo
+question-words.too,nuh-moo
+medical-conditions.inject-it-into-my-outer-thigh,huh-buhk-jee bah-kkaht-jjoh-geh noh-ah joo-seh-yo
+pharmacy-symptoms.anti-diarrhea-medicine,jee-sah-jeh
+police-consulate.someone-attacked-me,poh-kehng-uhl dahng-heht-suhm-nee-dah
+atm-cash.banknote,jee-pyeh
+sim-data.is-there-coverage-in,{}-eh-suh sheen-hoh jah-pyuh-yo
+border-customs.visa,bee-jah
+toilets.not-for-drinking,uh-myohng bool-gah
+accessibility.guide-dog,jeh ahn-neh-gyuh-nee-eh-yo
+pronouns-verbs.buy,sah-yo
+question-words.also,~-doh
+medical-conditions.my-blood-type-is,jeh hyuh-reh-kyuhng-uhn {}-yeh-yo
+pharmacy-symptoms.is-this-safe-to-take-with,{}-wah gah-chee muh-guh-doh dweh-yo
+police-consulate.i-did-not-agree-to-this-price,ee gah-gyuh-geh dohng-ee ahn heht-suhm-nee-dah
+atm-cash.coin,dohng-juhn
+sim-data.signal,sheen-hoh
+border-customs.i-have-no-food-or-plants,uhm-shee-gee-nah sheeng-mool uhp-suh-yo
+toilets.accessible-toilet,jahng-eh-een hwah-jahng-sheel
+pronouns-verbs.like,joh-ah-heh-yo
+question-words.all-both,dah
+medical-conditions.do-not-give-me,{} joo-jee mah-seh-yo
+pharmacy-symptoms.i-feel-dizzy,uh-jee-ruh-wuh-yo
+police-consulate.please-write-the-report-number,juhp-soo-buhn-hoh-ruhl juh-guh joo-seh-yo
+atm-cash.cash-only,hyuhn-guhm-mahn gah-nuhng
+sim-data.esim,ee-sheem
+border-customs.passport-control,eep-gook-sheem-sah
+toilets.where-can-i-wash-my-hands,sohn uh-dee-suh sshee-suh-yo
+pronouns-verbs.need,pee-ryo-heh-yo
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,"ah-suh-pee-reen, ee-boo-puh-roh-pehn ahl-leh-ruh-gee-yeh-yo"
+pharmacy-symptoms.ibuprofen,ee-boo-puh-roh-pehn
+police-consulate.it-happened-here,yuh-gee-suh ee-ruh-naht-suhm-nee-dah
+atm-cash.fee,soo-soo-ryo
+sim-data.prepaid,suhn-bool
+border-customs.customs,seh-gwahn
+toilets.can-i-flush-the-paper,hyoo-jee byuhn-gee-eh buh-ryuh-doh dweh-yo
+medical-conditions.my-injector-is-in-my-bag,joo-sah-gee-nuhn gah-bahng-eh ee-ssuh-yo
+pharmacy-symptoms.i-have-a-sore-throat,moh-gee ah-pah-yo
+police-consulate.may-i-have-a-copy-of-the-report,sheen-goh-suh sah-boh-nuhl joo-seh-yo
+atm-cash.change,jahn-dohn
+sim-data.roaming,roh-meeng
+border-customs.baggage-claim,soo-hah-mool soo-chwee
+toilets.is-there-a-toilet-on-board,chah ah-neh hwah-jahng-sheel ee-ssuh-yo
+medical-conditions.i-am-allergic-to-sulfa-drugs,suhl-pah-jeh ahl-leh-ruh-gee-gah ee-ssuh-yo
+pharmacy-symptoms.can-i-get-this-medicine-here,ee yahk yuh-gee-suh sahl soo ee-ssuh-yo
+police-consulate.i-will-not-sign-anything-i-cannot-read,eek-jee moh-tah-myuhn suh-myuhng ahn hahm-nee-dah
+atm-cash.exchange-rate,hwahn-nyool
+border-customs.customs-declaration,seh-gwahn-sheen-goh-suh
+toilets.the-toilet-will-not-flush,moo-ree ahn neh-ryuh-gah-yo
+pharmacy-symptoms.bandage,boong-deh
+police-consulate.am-i-free-to-go,gah-doh dwehm-nee-kkah
+atm-cash.bank,uhn-hehng
+border-customs.arrival-card,eep-gook-sheen-goh-suh
+toilets.baby-change,gee-juh-gwee gyo-hwahn-deh
+pharmacy-symptoms.the-pain-is-severe,mah-nee ah-pah-yo
+police-consulate.i-do-not-want-to-go-with-you,gah-chee gah-jee ahn-keht-suhm-nee-dah
+atm-cash.money-exchange,hwahn-juhn-soh
+border-customs.transit,hwahn-suhng
+toilets.squat-toilet,hwah-byuhn-gee
+pharmacy-symptoms.antiseptic,soh-dohng-nyahk
+atm-cash.pin,bee-meel-buhn-hoh
+border-customs.boarding-pass,tahp-suhng-gwuhn
+pharmacy-symptoms.i-feel-nauseous,meh-suh-kkuh-wuh-yo
+pharmacy-symptoms.i-have-a-rash,bahl-jee-nee nah-ssuh-yo
+pharmacy-symptoms.before-or-after-food,"sheek-juh-nee-eh-yo, shee-koo-yeh-yo"
+pharmacy-symptoms.i-think-it-is-infected,gah-myuhm-dwehn guht gah-tah-yo
+pharmacy-symptoms.motion-sickness-tablets,muhl-mee-yahk
+pharmacy-symptoms.i-have-a-cut,beh-yuh-ssuh-yo
+pharmacy-symptoms.antacid,jeh-sahn-jeh
+pharmacy-symptoms.i-have-a-burn,hwah-sahng ee-buh-ssuh-yo
+pharmacy-symptoms.it-started-days-ago,{}-eel juh-neh shee-jahk-dweh-ssuh-yo
+pharmacy-symptoms.cough-medicine,gee-cheem-nyahk
+pharmacy-symptoms.is-this-safe-during-pregnancy,eem-sheen joong-eh muh-guh-doh dweh-yo
+trail-transport.how-long-is-the-wait,uhl-mah-nah gee-dah-ryuh-yo
+tax-refund.is-tax-free-shopping-available,sah-hoo-myuhn-seh-juh-mee-eh-yo
+place-words.tourist-spot-sightseeing-area,gwahn-gwahng-jee
+common-signs.open-operating,yuhng-uhp joong
+time-scheduling.how-long-does-it-take,uhl-mah-nah guhl-lyuh-yo
+transit-rides.can-i-use-this-ticket,ee pyo ssuhl soo ee-ssuh-yo
+common-signs.closed,yuhng-uhp johng-nyo
+pronouns-verbs.there-is-have,ee-ssuh-yo
+common-signs.stopped-stop,juhng-jee
+pronouns-verbs.there-is-not-do-not-have,uhp-suh-yo
+emergency-medical.i-feel-unwell,moh-mee ahn joh-ssuhm-nee-dah
+food-ordering.what-do-you-recommend,mwuhl choo-chuhn-hah-seh-yo
+hotel-basics.is-wi-fi-free,wah-ee-pah-ee moo-ryo-yeh-yo
+hotel-requests.another-towel-please,soo-guhn hah-nah duh joo-seh-yo
+shopping.is-there-a-discount,hah-reen ee-ssuh-yo
+social-basics.good-night,ahn-nyuhng-hee joo-moo-seh-yo
+quick-responses.can-possible,hahl soo ee-ssuh-yo
+phone-translation.please-type-it-and-show-me,eem-nyuh-keh-suh boh-yuh joo-seh-yo
+phone-text-power.may-i-charge-my-phone-here,yuh-gee-suh choong-juhn-heh-doh dweh-yo
+pronouns-verbs.want-to-verb,~-goh shee-puh-yo
+emergency-medical.this-is-an-emergency,uhng-guhp sahng-hwahng-eem-nee-dah
+lost-rescue.please-look-at-my-current-location,jeh hyuhn-jeh wee-chee-ruhl bwah joo-seh-yo
+hotel-words.luggage-storage,jeem boh-gwahn
+hotel-basics.how-much-per-night,eel-bah-geh uhl-mah-yeh-yo
+hotel-requests.what-time-is-check-out,cheh-kuh-ah-oot myuht shee-yeh-yo
+payment-receipt.please-write-the-number,soot-jah juh-guh joo-seh-yo
+shopping.where-do-i-pay,uh-dee-suh gyeh-sahn-heh-yo
+communication.i-cannot-make-out-what-you-are-saying,moo-suhn mah-reen-jee moh-ruh-geh-ssuh-yo
+quick-responses.cannot-not-possible,hahl soo uhp-suh-yo
+taxi.i-will-get-off-here,yuh-gee-suh neh-reel-geh-yo
+pickup-meeting.please-call-a-taxi,tehk-shee bool-luh joo-seh-yo
+pronouns-verbs.want-thing,~ joo-seh-yo
+emergency-medical.i-am-having-a-severe-allergic-reaction,ah-nah-peel-lahk-shee-suh-eem-nee-dah
+lost-rescue.my-child-is-missing,ah-ee-gah uhp-suh-jyuh-ssuh-yo
+food-ordering.water-please,mool joo-seh-yo
+hiking-parks.is-this-trail-suitable-for-beginners,choh-boh-jah-doh gahl soo ee-ssuh-yo
+hotel-basics.is-breakfast-included,joh-sheek poh-hah-mee-eh-yo
+hotel-requests.can-i-check-in-early,eel-jjeek cheh-kuh-een-heh-doh dweh-yo
+attractions-tickets.could-you-take-a-photo-for-us,sah-jeen johm jjee-guh joo-shee-geh-ssuh-yo
+payment-receipt.how-much-in-total,dah uhl-mah-yeh-yo
+shopping.i-will-take-this,ee-guhl-loh hahl-geh-yo
+communication.i-do-not-understand,ee-heh-gah ahn dweh-yo
+quick-responses.okay-fine,joh-ah-yo
+phone-translation.please-look-at-the-screen,hwah-myuh-nuhl bwah joo-seh-yo
+pronouns-verbs.need-thing,~-ee pee-ryo-heh-yo
+question-words.how-much-what-price,uhl-mah
+emergency-medical.i-cannot-breathe,soo-muhl moht sweem-nee-dah
+lost-rescue.i-do-not-know-where-i-am,yuh-gee-gah uh-deen-jee moh-ruh-geh-ssuh-yo
+hotel-basics.may-i-see-the-room,bahng johm bohl soo ee-ssuh-yo
+hotel-requests.another-night,hah-roo duh moo-guh-doh dweh-yo
+payment-receipt.can-we-pay-separately,ttah-roh gyeh-sahn-dweh-yo
+shopping.what-is-this,ee-geh mwuh-yeh-yo
+communication.i-cannot-read-it,moht eel-guh-yo
+quick-responses.no-good-not-allowed-will-not-work,ahn dwehm-nee-dah
+pronouns-verbs.looking-for-thing,~-uhl chaht-goh ee-ssuh-yo
+emergency-medical.i-am-bleeding-badly,pee-gah mah-nee nahm-nee-dah
+lost-rescue.my-friend-is-hurt,cheen-goo-gah dah-chyuh-ssuh-yo
+dietary-needs.does-it-contain-fish-stock,sehng-suhn yook-soo duh-ruh-gah-ssuh-yo
+hotel-basics.for-nights,{}-bah-gee-yo
+hotel-requests.is-there-a-safe,guhm-goh ee-ssuh-yo
+payment-receipt.is-tax-included,seh-guhm poh-hah-mee-eh-yo
+shopping.where-can-i-buy,{} uh-dee-suh sah-yo
+emergency-medical.i-have-chest-pain,gah-suh-mee ah-puhm-nee-dah
+lost-rescue.i-lost-my-wallet,jee-gah-buhl ee-ruh-buh-ryuh-ssuh-yo
+hotel-basics.two-beds,cheem-deh doo geh-roh joo-seh-yo
+hotel-requests.another-blanket,ee-bool hah-nah duh joo-seh-yo
+payment-receipt.my-card-was-declined,kah-duh-gah ahn dweh-ssuh-yo
+shopping.do-you-have-this-in-stock,ee-guh jeh-goh ee-ssuh-yo
+time-words.night,bahm
+emergency-medical.this-person-is-unconscious,ee sah-rahm ee-shee-gee uhp-suhm-nee-dah
+lost-rescue.i-lost-my-bag,gah-bahng-uhl ee-ruh-buh-ryuh-ssuh-yo
+food-ordering.can-a-vegetarian-eat-this,cheh-sheek-joo-ee-jah-doh muh-guhl soo ee-ssuh-yo
+hotel-basics.is-there-air-conditioning,eh-uh-kuhn ee-ssuh-yo
+hotel-requests.wake-up-call,{}-shee-eh kkeh-wuh joo-seh-yo
+payment-receipt.the-bill-is-wrong,gyeh-sah-nee jahl-moht-dwehn guht gah-tah-yo
+shopping.two-of-these,ee-guh doo geh joo-seh-yo
+social-basics.okay-fine-i-am-okay,gwehn-chah-nah-yo
+emergency-medical.where-is-the-nearest-hospital,gah-kkah-oon byuhng-wuh-nee uh-dee-yeh-yo
+lost-rescue.where-is-lost-and-found,yoo-sheel-mool-sehn-tuh-gah uh-dee-yeh-yo
+payment-receipt.i-already-paid,ee-mee neh-ssuh-yo
+shopping.what-is-it-made-of,mwuh-roh mahn-duh-ruh-ssuh-yo
+emergency-medical.what-is-the-emergency-number,uhng-guhp juhn-hwah-buhn-hoh-gah mwuh-yeh-yo
+lost-rescue.i-cannot-find-my-hotel,hoh-teh-ruhl moht chaht-geh-ssuh-yo
+emergency-medical.is-there-a-doctor-who-speaks-english,yuhng-uh hah-nuhn ee-sah ee-ssuh-yo
+lost-rescue.i-left-it-on-the-train,gee-chah-eh doo-goh neh-ryuh-ssuh-yo
+dietary-needs.i-have-a-severe-allergy-to,{} ahl-leh-ruh-gee-gah sheem-heh-yo
+communication.please-write-it-in-roman-letters,ahl-pah-beh-suh-roh ssuh joo-seh-yo
+emergency-medical.i-think-a-bone-is-broken,ppyuh-gah boo-ruh-jeen guht gaht-suhm-nee-dah
+lost-rescue.i-cannot-get-down,neh-ryuh-gahl soo uhp-suh-yo
+emergency-medical.please-call-my-emergency-contact,bee-sahng yuhl-lahk-chuh-eh yuhl-lah-keh joo-seh-yo
+emergency-medical.i-have-travel-insurance,yuh-hehng-jah boh-huh-mee eet-suhm-nee-dah

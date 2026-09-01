@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,¿Puedo pagar con tarjeta?,,,,2,es-agent-v1
+payment-receipt.pay-cash,¿Puedo pagar en efectivo?,,,,2,es-agent-v1
+payment-receipt.pay-by-qr-code,¿Puedo pagar con código QR?,,,,2,es-agent-v1
+payment-receipt.a-receipt-please,"Un recibo, por favor",Un comprobante · un ticket,,,2,es-agent-v1
+payment-receipt.please-write-the-number,"Escriba el número, por favor",,,,2,es-agent-v1
+payment-receipt.how-much-in-total,¿Cuánto es en total?,,,,2,es-agent-v1
+payment-receipt.can-we-pay-separately,¿Podemos pagar por separado?,,,,2,es-agent-v1
+payment-receipt.is-tax-included,¿El impuesto está incluido?,¿Incluye IVA?,,,2,es-agent-v1
+payment-receipt.my-card-was-declined,Mi tarjeta fue rechazada,,,,2,es-agent-v1
+payment-receipt.the-bill-is-wrong,Creo que la cuenta está mal,,,,2,es-agent-v1
+payment-receipt.i-already-paid,Ya pagué,,,,2,es-agent-v1
+shopping.i-am-just-looking,Solo estoy mirando,,,,2,es-agent-v1
+shopping.how-much-is-this,¿Cuánto cuesta esto?,,,,2,es-agent-v1
+shopping.that-is-too-expensive,Es demasiado caro,,,,2,es-agent-v1
+shopping.can-it-be-a-little-cheaper,¿Puede ser un poco más barato?,,,,2,es-agent-v1
+shopping.is-there-a-discount,¿Hay descuento?,,,,2,es-agent-v1
+shopping.where-do-i-pay,¿Dónde se paga?,,,,2,es-agent-v1
+shopping.i-will-take-this,Me llevo esto,,,,2,es-agent-v1
+shopping.what-is-this,¿Qué es esto?,,,,2,es-agent-v1
+shopping.where-can-i-buy,¿Dónde puedo comprar {}?,,,,2,es-agent-v1
+shopping.do-you-have-this-in-stock,¿Tienen esto disponible?,,,,2,es-agent-v1
+shopping.two-of-these,"Dos de estos, por favor",,,,2,es-agent-v1
+shopping.what-is-it-made-of,¿De qué está hecho?,,,,2,es-agent-v1
+color-size-returns.do-you-have-another-color,¿Tiene otro color?,,,,2,es-agent-v1
+color-size-returns.do-you-have-another-size,¿Tiene otra talla?,¿Tiene otro tamaño?,,,2,es-agent-v1
+color-size-returns.may-i-try-it-on,¿Me lo puedo probar?,,,,2,es-agent-v1
+color-size-returns.can-i-return-it,¿Puedo devolverlo?,,,,2,es-agent-v1
+color-size-returns.can-i-exchange-it,¿Puedo cambiarlo?,,,,2,es-agent-v1
+color-size-returns.do-you-have-a-bag,¿Tiene una bolsa?,,,,2,es-agent-v1
+tax-refund.can-i-get-a-tax-refund,¿Puedo pedir la devolución del IVA?,,,,2,es-agent-v1
+tax-refund.is-tax-free-shopping-available,¿Hay compras libres de impuestos?,,,,2,es-agent-v1

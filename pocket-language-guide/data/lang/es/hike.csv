@@ -1,0 +1,66 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+weather.forecast,¿Cuál es el pronóstico del tiempo?,,,,2,es-agent-v1
+weather.will-it-rain,¿Va a llover hoy?,,,,2,es-agent-v1
+weather.is-it-safe-today,¿Hoy es seguro?,,,,2,es-agent-v1
+weather.how-cold-at-night,¿Cuánto frío hace de noche?,,,,2,es-agent-v1
+weather.rain,la lluvia,,,,2,es-agent-v1
+weather.snow,la nieve,,,,2,es-agent-v1
+weather.wind,el viento,,,,2,es-agent-v1
+weather.storm,la tormenta,el huracán,,,2,es-agent-v1
+weather.ice,el hielo,,,,2,es-agent-v1
+weather.fog,la niebla,,,,2,es-agent-v1
+weather.heat,el calor,,,,2,es-agent-v1
+weather.cold,el frío,,,,2,es-agent-v1
+weather.humid,húmedo,,,,2,es-agent-v1
+weather.sunrise,el amanecer,la salida del sol,,,2,es-agent-v1
+weather.flood,la inundación,,,,2,es-agent-v1
+weather.avalanche-risk,riesgo de avalancha,riesgo de aludes,,,2,es-agent-v1
+trail-words.trail,el sendero,,,,2,es-agent-v1
+trail-words.trailhead,el inicio del sendero,,,,2,es-agent-v1
+trail-words.summit,la cumbre,la cima,,,2,es-agent-v1
+trail-words.viewpoint,el mirador,,,,2,es-agent-v1
+trail-words.cableway,el teleférico,,,,2,es-agent-v1
+trail-words.shuttle-bus,el autobús de enlace,el shuttle,,,2,es-agent-v1
+trail-words.park-shuttle,el autobús del parque,,,,2,es-agent-v1
+trail-words.steps,los escalones,,,,2,es-agent-v1
+trail-words.up-uphill,subida,cuesta arriba,,,2,es-agent-v1
+trail-words.down-downhill,bajada,cuesta abajo,,,2,es-agent-v1
+trail-words.one-way,solo ida,,,,2,es-agent-v1
+trail-words.round-trip,ida y vuelta,ida y regreso,,,2,es-agent-v1
+hiking-parks.is-this-the-way-to,¿Es este el camino a {}?,,,,2,es-agent-v1
+hiking-parks.where-is-the-trailhead,¿Dónde empieza el sendero?,,,,2,es-agent-v1
+hiking-parks.how-long-to-the-summit,¿Cuánto falta a la cumbre?,,,,2,es-agent-v1
+hiking-parks.how-long-to-the-viewpoint,¿Cuánto falta al mirador?,,,,2,es-agent-v1
+hiking-parks.which-route-is-easier,¿Qué ruta es más fácil?,,,,2,es-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,¿Este sendero es para principiantes?,,,,2,es-agent-v1
+trail-conditions.how-long-is-the-full-route,¿Cuánto dura la ruta completa?,,,,2,es-agent-v1
+trail-conditions.can-we-return-the-same-way,¿Podemos volver por el mismo camino?,,,,2,es-agent-v1
+trail-conditions.can-we-return-before-dark,¿Podemos volver antes del anochecer?,,,,2,es-agent-v1
+trail-conditions.is-the-trail-open,¿Está abierto el sendero?,,,,2,es-agent-v1
+trail-conditions.is-the-route-steep,¿La ruta es empinada?,,,,2,es-agent-v1
+trail-conditions.is-the-path-slippery,¿El camino está resbaladizo?,,,,2,es-agent-v1
+trail-transport.how-long-is-the-queue,¿Es larga la fila?,¿Es larga la cola?,,,2,es-agent-v1
+trail-transport.what-time-is-the-last-shuttle,¿A qué hora es el último autobús?,,,,2,es-agent-v1
+trail-transport.when-does-the-cableway-stop,¿A qué hora cierra el teleférico?,,,,2,es-agent-v1
+trail-transport.where-can-we-buy-water,¿Dónde podemos comprar agua?,,,,2,es-agent-v1
+trail-transport.where-can-we-refill-water,¿Dónde podemos rellenar el agua?,,,,2,es-agent-v1
+trail-transport.is-there-cell-signal-here,¿Hay señal aquí?,¿Hay cobertura aquí?,,,2,es-agent-v1
+trail-transport.do-you-have-a-map,¿Tiene un mapa?,,,,2,es-agent-v1
+trail-transport.how-long-is-the-wait,¿Cuánto hay que esperar?,,,,2,es-agent-v1
+trail-warnings.open,Abierto,,,,2,es-agent-v1
+trail-warnings.closed,Cerrado,,,,2,es-agent-v1
+trail-warnings.maintenance,Mantenimiento,En obras,,,2,es-agent-v1
+trail-warnings.steep-slope,Pendiente pronunciada,,,,2,es-agent-v1
+trail-warnings.caution-slippery,Cuidado: piso resbaladizo,Suelo resbaladizo,,,2,es-agent-v1
+trail-warnings.danger,Peligro,,,,2,es-agent-v1
+trail-warnings.beware-falling-rocks,Peligro: desprendimientos,Caída de piedras,,,2,es-agent-v1
+trail-warnings.first-aid-station,Primeros auxilios,,,,2,es-agent-v1
+trail-warnings.service-suspended,Servicio suspendido,,,,2,es-agent-v1
+trail-landmarks.trail-marker,la señal del sendero,el hito,,,2,es-agent-v1
+trail-landmarks.fork-junction,la bifurcación,el cruce,,,2,es-agent-v1
+trail-landmarks.boardwalk-cliff-path,la pasarela,el camino de cornisa,,,2,es-agent-v1
+trail-landmarks.start,el inicio,,,,2,es-agent-v1
+trail-landmarks.end,el final,,,,2,es-agent-v1
+trail-landmarks.elevation,la altitud,,,,2,es-agent-v1
+trail-landmarks.sunset,la puesta de sol,el atardecer,,,2,es-agent-v1
+trail-landmarks.water-point,punto de agua,fuente,,,2,es-agent-v1

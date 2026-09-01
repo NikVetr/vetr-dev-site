@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Payer par carte ?,,,,2,fr-agent-v1
+payment-receipt.pay-cash,Payer en espèces ?,,,,2,fr-agent-v1
+payment-receipt.pay-by-qr-code,Payer par QR code ?,,,,2,fr-agent-v1
+payment-receipt.a-receipt-please,"Un reçu, s'il vous plaît",un ticket de caisse,,,2,fr-agent-v1
+payment-receipt.please-write-the-number,"Écrivez le chiffre, s'il vous plaît",,,,2,fr-agent-v1
+payment-receipt.how-much-in-total,Combien au total ?,,,,2,fr-agent-v1
+payment-receipt.can-we-pay-separately,Peut-on payer séparément ?,,,,2,fr-agent-v1
+payment-receipt.is-tax-included,La TVA est incluse ?,,,,2,fr-agent-v1
+payment-receipt.my-card-was-declined,Ma carte a été refusée,,,,2,fr-agent-v1
+payment-receipt.the-bill-is-wrong,Je crois qu'il y a une erreur,,,,2,fr-agent-v1
+payment-receipt.i-already-paid,J'ai déjà payé,,,,2,fr-agent-v1
+shopping.i-am-just-looking,"Je regarde, merci",Je regarde seulement,,,2,fr-agent-v1
+shopping.how-much-is-this,Combien ça coûte ?,,,,2,fr-agent-v1
+shopping.that-is-too-expensive,C'est trop cher,,,,2,fr-agent-v1
+shopping.can-it-be-a-little-cheaper,Pouvez-vous baisser un peu le prix ?,,,,2,fr-agent-v1
+shopping.is-there-a-discount,Y a-t-il une réduction ?,,,,2,fr-agent-v1
+shopping.where-do-i-pay,Où dois-je payer ?,,,,2,fr-agent-v1
+shopping.i-will-take-this,Je prends ceci,,,,2,fr-agent-v1
+shopping.what-is-this,Qu'est-ce que c'est ?,,,,2,fr-agent-v1
+shopping.where-can-i-buy,Où puis-je acheter {} ?,,,,2,fr-agent-v1
+shopping.do-you-have-this-in-stock,L'avez-vous en stock ?,,,,2,fr-agent-v1
+shopping.two-of-these,"Deux comme ça, s'il vous plaît",,,,2,fr-agent-v1
+shopping.what-is-it-made-of,C'est fait en quoi ?,,,,2,fr-agent-v1
+color-size-returns.do-you-have-another-color,Avez-vous une autre couleur ?,,,,2,fr-agent-v1
+color-size-returns.do-you-have-another-size,Avez-vous une autre taille ?,,,,2,fr-agent-v1
+color-size-returns.may-i-try-it-on,Puis-je l'essayer ?,,,,2,fr-agent-v1
+color-size-returns.can-i-return-it,Puis-je le rendre ?,,,,2,fr-agent-v1
+color-size-returns.can-i-exchange-it,Puis-je l'échanger ?,,,,2,fr-agent-v1
+color-size-returns.do-you-have-a-bag,Avez-vous un sac ?,,,,2,fr-agent-v1
+tax-refund.can-i-get-a-tax-refund,Puis-je avoir la détaxe ?,,,,2,fr-agent-v1
+tax-refund.is-tax-free-shopping-available,Faites-vous la détaxe ?,,,,2,fr-agent-v1

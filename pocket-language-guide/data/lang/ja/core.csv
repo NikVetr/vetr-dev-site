@@ -1,32 +1,47 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
 pronouns-verbs.i-me,私,,watashi,,,2,japanese-reviewed-v6
+question-words.what,何,,nani,,,2,japanese-reviewed-v6
 pronouns-verbs.we-us,私たち,,watashitachi,,,2,japanese-reviewed-v6
+question-words.where,どこ,,doko,,,2,japanese-reviewed-v6
+question-words.who,誰,,dare,,,2,japanese-reviewed-v6
+pronouns-verbs.you,あなた,,anata,,,2,ja-agent-v1
+question-words.which-one,どれ,,dore,,,2,japanese-reviewed-v6
+pronouns-verbs.you-polite,そちら様,,sochira-sama,,,1,ja-agent-v1
+question-words.when,いつ,,itsu,,,2,japanese-reviewed-v6
+pronouns-verbs.he-him,彼,,kare,,,2,ja-agent-v1
+question-words.how,どう,,dō,,,2,japanese-reviewed-v6
+pronouns-verbs.she-her,彼女,,kanojo,,,2,ja-agent-v1
+pronouns-verbs.they-them,彼ら,,karera,,,2,ja-agent-v1
+question-words.how-much-many,どのくらい,,dono kurai,,,2,ja-agent-v1
+question-words.how-many,いくつ,,ikutsu,,,2,japanese-reviewed-v6
+pronouns-verbs.my-mine,私の,,watashi no,,,2,ja-agent-v1
+question-words.why,なぜ,,naze,,,2,japanese-reviewed-v6
+pronouns-verbs.your-yours,あなたの,,anata no,,,2,ja-agent-v1
+question-words.this,これ,,kore,,,2,japanese-reviewed-v6
+pronouns-verbs.be-called-call,〜と言います,,to iimasu,,,2,ja-agent-v1
+question-words.that,それ,,sore,,,2,japanese-reviewed-v6
+pronouns-verbs.have,持っています,,motteimasu,,,2,ja-agent-v1
+question-words.here,ここ,,koko,,,2,japanese-reviewed-v6
+pronouns-verbs.do-not-have,持っていません,,motteimasen,,,2,ja-agent-v1
+pronouns-verbs.go,行きます,,ikimasu,,,2,japanese-reviewed-v6
+question-words.there,そこ,,soko,,,2,japanese-reviewed-v6
+pronouns-verbs.come,来ます,,kimasu,,,2,japanese-reviewed-v6
+question-words.a-little,少し,,sukoshi,,,2,japanese-reviewed-v6
+question-words.some,いくつか,,ikutsuka,,,2,japanese-reviewed-v6
+pronouns-verbs.would-like,〜をお願いします,,o onegaishimasu,,,2,ja-agent-v1
+question-words.very,とても,,totemo,,,2,japanese-reviewed-v6
+pronouns-verbs.want,欲しいです,,hoshii desu,,,2,ja-agent-v1
+question-words.too,〜すぎる,,sugiru,,,2,japanese-reviewed-v6
+pronouns-verbs.look-for,探しています,,sagashiteimasu,,,2,ja-agent-v1
+pronouns-verbs.buy,買います,,kaimasu,,,2,japanese-reviewed-v6
+question-words.also,〜も,,mo,,,2,japanese-reviewed-v6
+pronouns-verbs.like,好きです,,suki desu,,,2,japanese-reviewed-v6
+question-words.all-both,全部／両方,,zenbu / ryōhō,,,2,japanese-reviewed-v6
+pronouns-verbs.need,必要です,,hitsuyō desu,,,2,ja-agent-v1
 pronouns-verbs.there-is-have,あります,,arimasu,,,2,japanese-reviewed-v6
 pronouns-verbs.there-is-not-do-not-have,ありません,,arimasen,,,2,japanese-reviewed-v6
 pronouns-verbs.want-to-verb,〜たいです,,tai desu,,,2,japanese-reviewed-v6
 pronouns-verbs.want-thing,〜が欲しいです,,ga hoshii desu,,,2,japanese-reviewed-v6
 pronouns-verbs.need-thing,〜が必要です,,ga hitsuyō desu,,,2,japanese-reviewed-v6
-pronouns-verbs.looking-for-thing,〜を探しています,,o sagashiteimasu,,,2,japanese-reviewed-v6
-pronouns-verbs.go,行きます,,ikimasu,,,2,japanese-reviewed-v6
-pronouns-verbs.come,来ます,,kimasu,,,2,japanese-reviewed-v6
-pronouns-verbs.buy,買います,,kaimasu,,,2,japanese-reviewed-v6
-pronouns-verbs.like,好きです,,suki desu,,,2,japanese-reviewed-v6
-question-words.what,何,,nani,,,2,japanese-reviewed-v6
-question-words.where,どこ,,doko,,,2,japanese-reviewed-v6
-question-words.who,誰,,dare,,,2,japanese-reviewed-v6
-question-words.which-one,どれ,,dore,,,2,japanese-reviewed-v6
-question-words.when,いつ,,itsu,,,2,japanese-reviewed-v6
-question-words.how,どう,,dō,,,2,japanese-reviewed-v6
 question-words.how-much-what-price,いくら,,ikura,,,2,japanese-reviewed-v6
-question-words.how-many,いくつ,,ikutsu,,,2,japanese-reviewed-v6
-question-words.why,なぜ,,naze,,,2,japanese-reviewed-v6
-question-words.this,これ,,kore,,,2,japanese-reviewed-v6
-question-words.that,それ,,sore,,,2,japanese-reviewed-v6
-question-words.here,ここ,,koko,,,2,japanese-reviewed-v6
-question-words.there,そこ,,soko,,,2,japanese-reviewed-v6
-question-words.a-little,少し,,sukoshi,,,2,japanese-reviewed-v6
-question-words.some,いくつか,,ikutsuka,,,2,japanese-reviewed-v6
-question-words.very,とても,,totemo,,,2,japanese-reviewed-v6
-question-words.too,〜すぎる,,sugiru,,,2,japanese-reviewed-v6
-question-words.also,〜も,,mo,,,2,japanese-reviewed-v6
-question-words.all-both,全部／両方,,zenbu / ryōhō,,,2,japanese-reviewed-v6
+pronouns-verbs.looking-for-thing,〜を探しています,,o sagashiteimasu,,,2,japanese-reviewed-v6

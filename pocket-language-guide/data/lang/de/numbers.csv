@@ -1,0 +1,49 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+atm-cash.where-is-an-atm,Wo ist ein Geldautomat?,Wo ist ein Bankomat?,,,2,de-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,Nimmt der Automat ausländische Karten?,,,,2,de-agent-v1
+atm-cash.the-atm-kept-my-card,Der Automat hat meine Karte behalten.,,,,2,de-agent-v1
+atm-cash.is-there-a-fee,Gibt es eine Gebühr?,,,,2,de-agent-v1
+atm-cash.the-card-was-declined,Die Karte wurde abgelehnt.,,,,2,de-agent-v1
+atm-cash.what-is-the-exchange-rate,Wie ist der Wechselkurs?,,,,2,de-agent-v1
+atm-cash.no-money-came-out,Es kam kein Geld heraus.,,,,2,de-agent-v1
+atm-cash.where-can-i-change-money,Wo kann ich Geld wechseln?,,,,2,de-agent-v1
+atm-cash.the-machine-is-out-of-service,Der Automat ist außer Betrieb.,,,,2,de-agent-v1
+atm-cash.please-give-me-smaller-notes,Bitte kleine Scheine.,,,,2,de-agent-v1
+atm-cash.do-you-have-change,Können Sie wechseln?,Haben Sie Kleingeld?,,,2,de-agent-v1
+atm-cash.may-i-pay-in,Kann ich in {} bezahlen?,,,,2,de-agent-v1
+atm-cash.please-charge-in-local-currency,Bitte in Landeswährung abbuchen.,Bitte in Euro abrechnen.,,,2,de-agent-v1
+atm-cash.where-can-i-get-coins,Wo bekomme ich Münzen?,,,,2,de-agent-v1
+atm-cash.is-there-a-minimum-for-cards,Gibt es einen Mindestbetrag?,Gibt es einen Mindestbetrag für Karten?,,,2,de-agent-v1
+atm-cash.atm,Geldautomat,Bankomat,,,2,de-agent-v1
+atm-cash.banknote,Schein,Geldschein,,,2,de-agent-v1
+atm-cash.coin,Münze,,,,2,de-agent-v1
+atm-cash.cash-only,Nur Barzahlung,,,,2,de-agent-v1
+atm-cash.fee,Gebühr,,,,2,de-agent-v1
+atm-cash.change,Wechselgeld,Rückgeld,,,2,de-agent-v1
+atm-cash.exchange-rate,Wechselkurs,,,,2,de-agent-v1
+atm-cash.bank,Bank,,,,2,de-agent-v1
+atm-cash.money-exchange,Geldwechsel,Wechselstube,,,2,de-agent-v1
+atm-cash.pin,PIN,Geheimzahl,,,2,de-agent-v1
+numbers-money.l-ng,null,,,,2,de-agent-v1
+numbers-money.y,eins,ein,,,2,de-agent-v1
+numbers-money.r,zwei,,,,2,de-agent-v1
+numbers-money.li-ng,zwo,,,clear-speech form of 'zwei',2,de-agent-v1
+numbers-money.s-n,drei,,,,2,de-agent-v1
+numbers-money.s,vier,,,,2,de-agent-v1
+numbers-money.w,fünf,,,,2,de-agent-v1
+numbers-money.li,sechs,,,,2,de-agent-v1
+numbers-money.q,sieben,,,,2,de-agent-v1
+numbers-money.b,acht,,,,2,de-agent-v1
+numbers-money.ji,neun,,,,2,de-agent-v1
+numbers-money.sh,zehn,,,,2,de-agent-v1
+numbers-money.y-b-i,hundert,einhundert,,,2,de-agent-v1
+numbers-money.y-qi-n,tausend,eintausend,,,2,de-agent-v1
+numbers-money.y-w-n,zehntausend,,,,2,de-agent-v1
+numbers-money.b-n,halb,die Hälfte,,,2,de-agent-v1
+numbers-money.yu-n,Yuan,Renminbi,,,2,de-agent-v1
+numbers-money.ku-i,Yuan,Kuai,,,1,de-agent-v1
+numbers-money.number-and-classifier-notes,,,,,2,de-agent-v1
+numbers-money.2-items,zwei Stück,,,,2,de-agent-v1
+numbers-money.yen,Yen,,,,2,de-agent-v1
+numbers-money.yen-symbol,¥,,,,2,de-agent-v1
+numbers-money.number-and-classifier-notes-2,,,,,2,de-agent-v1

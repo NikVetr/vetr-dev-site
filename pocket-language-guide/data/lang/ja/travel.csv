@@ -1,71 +1,114 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
 transit-rides.two-tickets,切符を二枚ください,,kippu o nimai kudasai,,,2,japanese-reviewed-v6
-transit-rides.can-i-use-this-ticket,この切符で乗れますか？,,kono kippu de noremasu ka?,,,2,japanese-reviewed-v6
-transit-rides.where-is-the-subway-station,地下鉄の駅はどこですか？,,chikatetsu no eki wa doko desu ka?,,,2,japanese-reviewed-v6
-transit-rides.does-this-bus-train-go-to,このバス／電車は{}に行きますか？,,kono basu / densha wa {} ni ikimasu ka?,,,2,japanese-reviewed-v6
-transit-rides.what-is-the-next-stop,次の駅はどこですか？,,tsugi no eki wa doko desu ka?,,,2,japanese-reviewed-v6
-transit-rides.please-tell-me-where-to-get-off,どこで降りるか教えてください,,doko de oriru ka oshiete kudasai,,,2,japanese-reviewed-v6
-transit-rides.is-this-direct,これは直通ですか？,,kore wa chokutsū desu ka?,,,2,japanese-reviewed-v6
-transit-rides.do-i-need-to-transfer,乗り換えが必要ですか？,,norikae ga hitsuyō desu ka?,,,2,japanese-reviewed-v6
-transit-rides.is-it-delayed,遅れていますか？,,okureteimasu ka?,,,2,japanese-reviewed-v6
-transit-rides.i-am-in-a-hurry,急いでいます,,isoideimasu,,,2,japanese-reviewed-v6
-transit-rides.which-platform,何番ホームですか？,,nanban hōmu desu ka?,,,2,japanese-reviewed-v6
-transit-rides.what-time-is-the-next-one,次は何時ですか？,,tsugi wa nanji desu ka?,,,2,japanese-reviewed-v6
-transit-rides.i-went-past-my-stop,乗り過ごしました,,norisugoshimashita,,,2,japanese-reviewed-v6
 taxi.please-take-me-here,ここへ行ってください,,koko e itte kudasai,,,2,japanese-reviewed-v6
-taxi.please-send-me-the-address,住所を送ってください,,jūsho o okutte kudasai,,,2,japanese-reviewed-v6
-taxi.we-need-the-east-gate-not-the-south-gate,東口です、南口ではありません,,"higashiguchi desu, minamiguchi dewa arimasen",,,2,japanese-reviewed-v6
-taxi.please-stop-here,ここで止めてください,,koko de tomete kudasai,,,2,japanese-reviewed-v6
-taxi.i-will-get-off-here,ここで降ります,,koko de orimasu,,,2,japanese-reviewed-v6
-taxi.can-you-wait-for-me-here,ここで待ってもらえますか？,,koko de matte moraemasu ka?,,,2,japanese-reviewed-v6
-taxi.please-get-me-there-in-time-for-the-shinkansen,新幹線に間に合うようにお願いします,,shinkansen ni maniau yō ni onegaishimasu,,,2,japanese-reviewed-v6
-taxi.please-use-the-meter,メーターを使ってください,,mētā o tsukatte kudasai,,,2,japanese-reviewed-v6
 directions.where-is,{}はどこですか？,,{} wa doko desu ka?,,,2,japanese-reviewed-v6
-directions.how-do-i-get-to,{}へはどう行けばいいですか？,,{} e wa dō ikeba ii desu ka?,,,2,japanese-reviewed-v6
-directions.is-it-far,遠いですか？,,tōi desu ka?,,,2,japanese-reviewed-v6
-directions.how-long-on-foot,歩いてどのくらいですか？,,aruite dono kurai desu ka?,,,2,japanese-reviewed-v6
 quick-directions.go-straight,まっすぐ行ってください,,massugu itte kudasai,,,2,japanese-reviewed-v6
-quick-directions.turn-left,左に曲がってください,,hidari ni magatte kudasai,,,2,japanese-reviewed-v6
-quick-directions.turn-right,右に曲がってください,,migi ni magatte kudasai,,,2,japanese-reviewed-v6
-quick-directions.this-way,こちらです,,kochira desu,,,2,japanese-reviewed-v6
-quick-directions.that-way,あちらです,,achira desu,,,2,japanese-reviewed-v6
-quick-directions.on-the-left,左側です,,hidarigawa desu,,,2,japanese-reviewed-v6
-quick-directions.on-the-right,右側です,,migigawa desu,,,2,japanese-reviewed-v6
-quick-directions.across-from-here,向かい側です,,mukaigawa desu,,,2,japanese-reviewed-v6
-quick-directions.in-front,前です,,mae desu,,,2,japanese-reviewed-v6
-quick-directions.behind,後ろです,,ushiro desu,,,2,japanese-reviewed-v6
 pickup-meeting.where-is-the-pickup-point,乗車場所はどこですか？,,jōsha basho wa doko desu ka?,,,2,japanese-reviewed-v6
+rail-station-words.high-speed-rail,新幹線,,shinkansen,,,2,japanese-reviewed-v6
+border-customs.i-am-a-tourist,観光です,,kankō desu,,,2,ja-agent-v1
+place-words.scenic-area,景勝地,,keishōchi,,,2,ja-agent-v1
+common-signs.open-on,開,入,kai,,,1,ja-agent-v1
+transit-rides.where-is-the-subway-station,地下鉄の駅はどこですか？,,chikatetsu no eki wa doko desu ka?,,,2,japanese-reviewed-v6
+taxi.please-send-me-the-address,住所を送ってください,,jūsho o okutte kudasai,,,2,japanese-reviewed-v6
+directions.how-do-i-get-to,{}へはどう行けばいいですか？,,{} e wa dō ikeba ii desu ka?,,,2,japanese-reviewed-v6
+quick-directions.turn-left,左に曲がってください,,hidari ni magatte kudasai,,,2,japanese-reviewed-v6
 pickup-meeting.please-send-me-the-pickup-point,乗車場所を送ってください,,jōsha basho o okutte kudasai,,,2,japanese-reviewed-v6
+rail-station-words.maglev,リニア,,rinia,,,2,japanese-reviewed-v6
+place-words.visitor-center,観光案内所,,kankō annaijo,,,2,japanese-reviewed-v6
+border-customs.here-is-my-passport,パスポートです,,pasupōto desu,,,2,ja-agent-v1
+common-signs.closed-off,閉,切,hei,,,1,ja-agent-v1
+transit-rides.does-this-bus-train-go-to,このバス／電車は{}に行きますか？,,kono basu / densha wa {} ni ikimasu ka?,,,2,japanese-reviewed-v6
+taxi.we-need-the-east-gate-not-the-south-gate,東口です、南口ではありません,,"higashiguchi desu, minamiguchi dewa arimasen",,,2,japanese-reviewed-v6
+directions.is-it-far,遠いですか？,,tōi desu ka?,,,2,japanese-reviewed-v6
+quick-directions.turn-right,右に曲がってください,,migi ni magatte kudasai,,,2,japanese-reviewed-v6
 pickup-meeting.please-pick-us-up-here,ここに迎えに来てください,,koko ni mukae ni kite kudasai,,,2,japanese-reviewed-v6
+common-signs.occupied,使用中,,shiyōchū,,,2,japanese-reviewed-v6
+rail-station-words.transfer,乗り換え,,norikae,,,2,japanese-reviewed-v6
+place-words.railway-station,駅,,eki,,,2,japanese-reviewed-v6
+border-customs.i-am-staying-for-days,{}日間滞在します,,{} nichikan taizai shimasu,,,2,ja-agent-v1
+transit-rides.what-is-the-next-stop,次の駅はどこですか？,,tsugi no eki wa doko desu ka?,,,2,japanese-reviewed-v6
+taxi.please-stop-here,ここで止めてください,,koko de tomete kudasai,,,2,japanese-reviewed-v6
+directions.how-long-on-foot,歩いてどのくらいですか？,,aruite dono kurai desu ka?,,,2,japanese-reviewed-v6
+quick-directions.this-way,こちらです,,kochira desu,,,2,japanese-reviewed-v6
 pickup-meeting.meet-us-at,{}で会いましょう,,{} de aimashō,,,2,japanese-reviewed-v6
-pickup-meeting.please-call-a-taxi,タクシーを呼んでください,,takushī o yonde kudasai,,,2,japanese-reviewed-v6
+common-signs.vacant,空き,,aki,,,2,japanese-reviewed-v6
+rail-station-words.ticket-gate,改札口,,kaisatsuguchi,,,2,japanese-reviewed-v6
+place-words.airport,空港,,kūkō,,,2,japanese-reviewed-v6
+border-customs.nothing-to-declare,申告するものはありません,,shinkoku suru mono wa arimasen,,,2,ja-agent-v1
+transit-rides.please-tell-me-where-to-get-off,どこで降りるか教えてください,,doko de oriru ka oshiete kudasai,,,2,japanese-reviewed-v6
+taxi.can-you-wait-for-me-here,ここで待ってもらえますか？,,koko de matte moraemasu ka?,,,2,japanese-reviewed-v6
+quick-directions.that-way,あちらです,,achira desu,,,2,japanese-reviewed-v6
+common-signs.caution,注意,,chūi,,,2,japanese-reviewed-v6
+rail-station-words.platform,ホーム,,hōmu,,,2,japanese-reviewed-v6
+place-words.service-desk,案内所,,annaijo,,,2,japanese-reviewed-v6
+border-customs.i-am-staying-at,{}に泊まります,,{} ni tomarimasu,,,2,ja-agent-v1
+directions.please-show-me-on-the-map,地図で教えてください,,chizu de oshiete kudasai,,,2,ja-agent-v1
+pickup-meeting.please-call-me-a-ride,配車をお願いします,,haisha o onegaishimasu,,,2,ja-agent-v1
+transit-rides.is-this-direct,これは直通ですか？,,kore wa chokutsū desu ka?,,,2,japanese-reviewed-v6
+quick-directions.on-the-left,左側です,,hidarigawa desu,,,2,japanese-reviewed-v6
+common-signs.no-entry,立入禁止,,tachiiri kinshi,,,2,japanese-reviewed-v6
+rail-station-words.ticket-office,切符売り場,,kippu uriba,,,2,japanese-reviewed-v6
+place-words.bus-stop,バス停,,basutei,,,2,japanese-reviewed-v6
+border-customs.i-am-here-for-business,仕事です,,shigoto desu,,,2,ja-agent-v1
+directions.where-is-the-nearest,一番近い{}はどこですか？,,ichiban chikai {} wa doko desu ka?,,,2,ja-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,新幹線に乗らないといけません,,shinkansen ni noranai to ikemasen,,,2,ja-agent-v1
+transit-rides.do-i-need-to-transfer,乗り換えが必要ですか？,,norikae ga hitsuyō desu ka?,,,2,japanese-reviewed-v6
+taxi.please-use-the-meter,メーターを使ってください,,mētā o tsukatte kudasai,,,2,japanese-reviewed-v6
+quick-directions.on-the-right,右側です,,migigawa desu,,,2,japanese-reviewed-v6
+common-signs.no-smoking,禁煙,,kin'en,,,2,japanese-reviewed-v6
+rail-station-words.waiting-room,待合室,,machiaishitsu,,,2,japanese-reviewed-v6
+border-customs.i-have-a-return-ticket,帰りの航空券があります,,kaeri no kōkūken ga arimasu,,,2,ja-agent-v1
+directions.where-am-i,ここはどこですか？,,koko wa doko desu ka?,,,2,ja-agent-v1
+place-words.luggage-storage,荷物預かり所,,nimotsu azukarijo,,,2,ja-agent-v1
+transit-rides.is-it-delayed,遅れていますか？,,okureteimasu ka?,,,2,japanese-reviewed-v6
+quick-directions.across-from-here,向かい側です,,mukaigawa desu,,,2,japanese-reviewed-v6
+common-signs.no-photography,撮影禁止,,satsuei kinshi,,,2,japanese-reviewed-v6
+rail-station-words.train-number,列車番号,,ressha bangō,,,2,japanese-reviewed-v6
+border-customs.i-am-visiting-family,親族訪問です,,shinzoku hōmon desu,,,2,ja-agent-v1
+directions.which-way,どちらですか？,,dochira desu ka?,,,2,ja-agent-v1
+transit-rides.i-am-in-a-hurry,急いでいます,,isoideimasu,,,2,japanese-reviewed-v6
+quick-directions.in-front,前です,,mae desu,,,2,japanese-reviewed-v6
+common-signs.do-not-touch,触らないでください,,sawaranaide kudasai,,,2,japanese-reviewed-v6
+rail-station-words.carriage,号車,,gōsha,,,2,japanese-reviewed-v6
+border-customs.this-is-for-personal-use,個人用です,,kojin'yō desu,,,2,ja-agent-v1
+directions.can-i-walk-there,歩いて行けますか？,,aruite ikemasu ka?,,,2,ja-agent-v1
+transit-rides.which-platform,何番ホームですか？,,nanban hōmu desu ka?,,,2,japanese-reviewed-v6
+quick-directions.behind,後ろです,,ushiro desu,,,2,japanese-reviewed-v6
+common-signs.temporarily-closed,一時閉鎖,,ichiji heisa,,,2,japanese-reviewed-v6
+rail-station-words.seat,座席,,zaseki,,,2,japanese-reviewed-v6
+border-customs.i-am-in-transit,乗り継ぎです,,noritsugi desu,,,2,ja-agent-v1
+directions.how-far-is-it,どのくらいの距離ですか？,,dono kurai no kyori desu ka?,,,2,ja-agent-v1
+transit-rides.what-time-is-the-next-one,次は何時ですか？,,tsugi wa nanji desu ka?,,,2,japanese-reviewed-v6
+rail-station-words.last-train,終電,,shūden,,,2,japanese-reviewed-v6
+border-customs.i-have-in-cash,{}の現金があります,,{} no genkin ga arimasu,,,2,ja-agent-v1
+directions.which-exit,何番出口ですか？,,nanban deguchi desu ka?,,,2,ja-agent-v1
+transit-rides.i-went-past-my-stop,乗り過ごしました,,norisugoshimashita,,,2,japanese-reviewed-v6
+rail-station-words.delayed,遅延,,chien,,,2,japanese-reviewed-v6
+border-customs.this-is-a-gift,贈り物です,,okurimono desu,,,2,ja-agent-v1
+directions.can-you-show-me-the-way,道を教えてもらえますか？,,michi o oshiete moraemasu ka?,,,2,ja-agent-v1
+rail-station-words.final-stop,終点,,shūten,,,2,japanese-reviewed-v6
+border-customs.where-do-i-collect-my-baggage,手荷物受取所はどこですか？,,tenimotsu uketorisho wa doko desu ka?,,,2,ja-agent-v1
+directions.north,北,,kita,,,2,ja-agent-v1
+border-customs.how-long-may-i-stay,どのくらい滞在できますか？,,dono kurai taizai dekimasu ka?,,,2,ja-agent-v1
+directions.south,南,,minami,,,2,ja-agent-v1
+border-customs.i-have-a-connecting-flight,乗り継ぎの便があります,,noritsugi no bin ga arimasu,,,2,ja-agent-v1
+directions.east,東,,higashi,,,2,ja-agent-v1
+border-customs.may-i-have-an-entry-stamp,入国スタンプをお願いします,,nyūkoku sutanpu o onegaishimasu,,,2,ja-agent-v1
+directions.west,西,,nishi,,,2,ja-agent-v1
+border-customs.visa,ビザ,査証,biza,,,2,ja-agent-v1
+border-customs.i-have-no-food-or-plants,食品や植物は持っていません,,shokuhin ya shokubutsu wa motteimasen,,,2,ja-agent-v1
+border-customs.passport-control,入国審査,,nyūkoku shinsa,,,2,ja-agent-v1
+border-customs.customs,税関,,zeikan,,,2,ja-agent-v1
+border-customs.baggage-claim,手荷物受取所,,tenimotsu uketorisho,,,2,ja-agent-v1
+border-customs.customs-declaration,税関申告書,携帯品・別送品申告書,zeikan shinkokusho,,,2,ja-agent-v1
+border-customs.arrival-card,入国カード,外国人入国記録,nyūkoku kādo,,,2,ja-agent-v1
+border-customs.transit,乗り継ぎ,トランジット,noritsugi,,,2,ja-agent-v1
+border-customs.boarding-pass,搭乗券,,tōjōken,,,2,ja-agent-v1
 common-signs.open-operating,営業中,,eigyōchū,,,2,japanese-reviewed-v6
+place-words.tourist-spot-sightseeing-area,観光地,,kankōchi,,,2,japanese-reviewed-v6
+transit-rides.can-i-use-this-ticket,この切符で乗れますか？,,kono kippu de noremasu ka?,,,2,japanese-reviewed-v6
 common-signs.closed,閉店,,heiten,,,2,japanese-reviewed-v6
 common-signs.stopped-stop,停止,,teishi,,,2,japanese-reviewed-v6
-common-signs.occupied,使用中,,shiyōchū,,,2,japanese-reviewed-v6
-common-signs.vacant,空き,,aki,,,2,japanese-reviewed-v6
-common-signs.caution,注意,,chūi,,,2,japanese-reviewed-v6
-common-signs.no-entry,立入禁止,,tachiiri kinshi,,,2,japanese-reviewed-v6
-common-signs.no-smoking,禁煙,,kin'en,,,2,japanese-reviewed-v6
-common-signs.no-photography,撮影禁止,,satsuei kinshi,,,2,japanese-reviewed-v6
-common-signs.do-not-touch,触らないでください,,sawaranaide kudasai,,,2,japanese-reviewed-v6
-common-signs.temporarily-closed,一時閉鎖,,ichiji heisa,,,2,japanese-reviewed-v6
-rail-station-words.high-speed-rail,新幹線,,shinkansen,,,2,japanese-reviewed-v6
-rail-station-words.maglev,リニア,,rinia,,,2,japanese-reviewed-v6
-rail-station-words.transfer,乗り換え,,norikae,,,2,japanese-reviewed-v6
-rail-station-words.ticket-gate,改札口,,kaisatsuguchi,,,2,japanese-reviewed-v6
-rail-station-words.platform,ホーム,,hōmu,,,2,japanese-reviewed-v6
-rail-station-words.ticket-office,切符売り場,,kippu uriba,,,2,japanese-reviewed-v6
-rail-station-words.waiting-room,待合室,,machiaishitsu,,,2,japanese-reviewed-v6
-rail-station-words.train-number,列車番号,,ressha bangō,,,2,japanese-reviewed-v6
-rail-station-words.carriage,号車,,gōsha,,,2,japanese-reviewed-v6
-rail-station-words.seat,座席,,zaseki,,,2,japanese-reviewed-v6
-rail-station-words.last-train,終電,,shūden,,,2,japanese-reviewed-v6
-rail-station-words.delayed,遅延,,chien,,,2,japanese-reviewed-v6
-rail-station-words.final-stop,終点,,shūten,,,2,japanese-reviewed-v6
-place-words.tourist-spot-sightseeing-area,観光地,,kankōchi,,,2,japanese-reviewed-v6
-place-words.visitor-center,観光案内所,,kankō annaijo,,,2,japanese-reviewed-v6
-place-words.railway-station,駅,,eki,,,2,japanese-reviewed-v6
-place-words.airport,空港,,kūkō,,,2,japanese-reviewed-v6
-place-words.service-desk,案内所,,annaijo,,,2,japanese-reviewed-v6
-place-words.bus-stop,バス停,,basutei,,,2,japanese-reviewed-v6
+taxi.i-will-get-off-here,ここで降ります,,koko de orimasu,,,2,japanese-reviewed-v6
+pickup-meeting.please-call-a-taxi,タクシーを呼んでください,,takushī o yonde kudasai,,,2,japanese-reviewed-v6
+taxi.please-get-me-there-in-time-for-the-shinkansen,新幹線に間に合うようにお願いします,,shinkansen ni maniau yō ni onegaishimasu,,,2,japanese-reviewed-v6

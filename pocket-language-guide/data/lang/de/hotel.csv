@@ -1,0 +1,53 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+laundry.please-wash-these-clothes,Bitte diese Wäsche waschen.,,,,2,de-agent-v1
+laundry.where-is-a-laundromat,Wo ist ein Waschsalon?,,,,2,de-agent-v1
+laundry.when-will-it-be-ready,Wann ist es fertig?,,,,2,de-agent-v1
+laundry.how-much-per-kilo,Wie viel pro Kilo?,,,,2,de-agent-v1
+laundry.can-it-be-ready-today,Ist es heute fertig?,,,,2,de-agent-v1
+laundry.please-do-not-use-bleach,Bitte kein Bleichmittel.,,,,2,de-agent-v1
+laundry.laundromat,Waschsalon,,,,2,de-agent-v1
+laundry.please-iron-this,Bitte das bügeln.,,,,2,de-agent-v1
+laundry.detergent,Waschmittel,,,,2,de-agent-v1
+laundry.dry-cleaning,Reinigung,chemische Reinigung,,,2,de-agent-v1
+laundry.dryer,Trockner,,,,2,de-agent-v1
+laundry.coin-operated,Münzbetrieb,Münzeinwurf,,,2,de-agent-v1
+hotel-words.passport,Pass,Reisepass,,,2,de-agent-v1
+hotel-words.room-key-card,Zimmerkarte,Schlüsselkarte,,,2,de-agent-v1
+hotel-words.check-in,Check-in,Anmeldung,,,2,de-agent-v1
+hotel-words.check-out,Check-out,Abreise,,,2,de-agent-v1
+hotel-words.luggage-storage,Gepäckaufbewahrung,Gepäckraum,,,2,de-agent-v1
+hotel-basics.are-any-rooms-available,Haben Sie ein Zimmer frei?,,,,2,de-agent-v1
+hotel-basics.there-are-two-of-us,Wir sind zwei Personen.,,,,2,de-agent-v1
+hotel-basics.i-have-a-reservation,Ich habe eine Reservierung.,,,,2,de-agent-v1
+hotel-basics.can-i-charge-my-phone,Kann ich mein Handy laden?,,,,2,de-agent-v1
+hotel-basics.i-would-like-a-non-smoking-room,Ich möchte ein Nichtraucherzimmer.,,,,2,de-agent-v1
+hotel-basics.i-would-like-a-quiet-room,Ich möchte ein ruhiges Zimmer.,,,,2,de-agent-v1
+hotel-basics.is-there-a-washing-machine,Gibt es eine Waschmaschine?,,,,2,de-agent-v1
+hotel-basics.is-wi-fi-free,Ist das WLAN kostenlos?,,,,2,de-agent-v1
+hotel-basics.how-much-per-night,Wie viel pro Nacht?,,,,2,de-agent-v1
+hotel-basics.is-breakfast-included,Ist Frühstück inklusive?,,,,2,de-agent-v1
+hotel-basics.may-i-see-the-room,Darf ich das Zimmer sehen?,,,,2,de-agent-v1
+hotel-basics.for-nights,Für {} Nächte.,,,,2,de-agent-v1
+hotel-basics.two-beds,"Zwei Betten, bitte.","Zwei getrennte Betten, bitte.",,,2,de-agent-v1
+hotel-basics.is-there-air-conditioning,Gibt es eine Klimaanlage?,,,,2,de-agent-v1
+hotel-requests.can-i-check-out-later,Kann ich später auschecken?,,,,2,de-agent-v1
+hotel-requests.what-time-does-breakfast-start,Wann beginnt das Frühstück?,,,,2,de-agent-v1
+hotel-requests.can-i-store-my-luggage,Kann ich mein Gepäck hier lassen?,,,,2,de-agent-v1
+hotel-requests.no-housekeeping,Bitte nicht reinigen.,Keine Zimmerreinigung.,,,2,de-agent-v1
+hotel-requests.another-towel-please,"Noch ein Handtuch, bitte.",,,,2,de-agent-v1
+hotel-requests.what-time-is-check-out,Wann ist Check-out?,,,,2,de-agent-v1
+hotel-requests.can-i-check-in-early,Kann ich früher einchecken?,,,,2,de-agent-v1
+hotel-requests.another-night,Kann ich noch eine Nacht bleiben?,,,,2,de-agent-v1
+hotel-requests.is-there-a-safe,Gibt es einen Safe?,Gibt es einen Zimmersafe?,,,2,de-agent-v1
+hotel-requests.another-blanket,"Noch eine Decke, bitte.",,,,2,de-agent-v1
+hotel-requests.wake-up-call,Bitte wecken Sie mich um {}.,,,,2,de-agent-v1
+room-problems.there-is-a-problem-with-the-room,Es gibt ein Problem mit dem Zimmer.,,,,2,de-agent-v1
+room-problems.the-air-conditioning-is-broken,Die Klimaanlage ist kaputt.,,,,2,de-agent-v1
+room-problems.there-is-no-hot-water,Es gibt kein warmes Wasser.,,,,2,de-agent-v1
+room-problems.can-i-change-rooms,Kann ich das Zimmer wechseln?,,,,2,de-agent-v1
+room-problems.the-room-is-too-noisy,Das Zimmer ist zu laut.,,,,2,de-agent-v1
+room-problems.the-key-does-not-work,Der Schlüssel funktioniert nicht.,Die Karte funktioniert nicht.,,,2,de-agent-v1
+room-problems.the-toilet-will-not-flush,Die Toilettenspülung geht nicht.,,,,2,de-agent-v1
+room-problems.the-light-does-not-work,Das Licht geht nicht.,,,,2,de-agent-v1
+room-problems.please-send-someone,Bitte schicken Sie jemanden zum Reparieren.,,,,2,de-agent-v1
+room-problems.the-heating-does-not-work,Die Heizung funktioniert nicht.,,,,2,de-agent-v1

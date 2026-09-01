@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,yo / me,,,,2,es-agent-v1
+pronouns-verbs.we-us,nosotros / nos,,,,2,es-agent-v1
+pronouns-verbs.you,tú,,,,2,es-agent-v1
+pronouns-verbs.you-polite,usted,,,,2,es-agent-v1
+pronouns-verbs.he-him,él / lo,,,,2,es-agent-v1
+pronouns-verbs.she-her,ella / la,,,,2,es-agent-v1
+pronouns-verbs.they-them,ellos / ellas,,,,2,es-agent-v1
+pronouns-verbs.my-mine,mi / mío,,,,2,es-agent-v1
+pronouns-verbs.your-yours,su / suyo,,,de usted,2,es-agent-v1
+pronouns-verbs.be-called-call,llamarse / llamar,,,,2,es-agent-v1
+pronouns-verbs.have,tener,,,,2,es-agent-v1
+pronouns-verbs.do-not-have,no tener,,,,2,es-agent-v1
+pronouns-verbs.go,ir,,,,2,es-agent-v1
+pronouns-verbs.come,venir,,,,2,es-agent-v1
+pronouns-verbs.would-like,quisiera,,,,2,es-agent-v1
+pronouns-verbs.want,querer,,,,2,es-agent-v1
+pronouns-verbs.look-for,buscar,,,,2,es-agent-v1
+pronouns-verbs.buy,comprar,,,,2,es-agent-v1
+pronouns-verbs.like,gustar,,,,2,es-agent-v1
+pronouns-verbs.need,necesitar,,,,2,es-agent-v1
+pronouns-verbs.there-is-have,hay,,,,2,es-agent-v1
+pronouns-verbs.there-is-not-do-not-have,no hay,,,,2,es-agent-v1
+pronouns-verbs.want-to-verb,quiero + infinitivo,,,,2,es-agent-v1
+pronouns-verbs.want-thing,quiero + cosa,,,,2,es-agent-v1
+pronouns-verbs.need-thing,necesito + cosa,,,,2,es-agent-v1
+pronouns-verbs.looking-for-thing,busco + cosa,,,,2,es-agent-v1
+question-words.what,qué,,,,2,es-agent-v1
+question-words.where,dónde,,,,2,es-agent-v1
+question-words.who,quién,,,,2,es-agent-v1
+question-words.which-one,cuál,,,,2,es-agent-v1
+question-words.when,cuándo,,,,2,es-agent-v1
+question-words.how,cómo,,,,2,es-agent-v1
+question-words.how-much-many,cuánto,,,,2,es-agent-v1
+question-words.how-many,cuántos,,,,2,es-agent-v1
+question-words.why,por qué,,,,2,es-agent-v1
+question-words.this,esto,,,,2,es-agent-v1
+question-words.that,eso,,,,2,es-agent-v1
+question-words.here,aquí,,,,2,es-agent-v1
+question-words.there,allí,,,,2,es-agent-v1
+question-words.a-little,un poco,,,,2,es-agent-v1
+question-words.some,algunos,,,,2,es-agent-v1
+question-words.very,muy,,,,2,es-agent-v1
+question-words.too,demasiado,,,,2,es-agent-v1
+question-words.also,también,,,,2,es-agent-v1
+question-words.all-both,todo / ambos,,,,2,es-agent-v1
+question-words.how-much-what-price,¿cuánto cuesta?,,,,2,es-agent-v1

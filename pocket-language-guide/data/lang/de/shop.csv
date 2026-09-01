@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Mit Karte zahlen?,,,,2,de-agent-v1
+payment-receipt.pay-cash,Bar zahlen?,,,,2,de-agent-v1
+payment-receipt.pay-by-qr-code,Mit QR-Code zahlen?,,,,2,de-agent-v1
+payment-receipt.a-receipt-please,"Einen Bon, bitte.","Eine Quittung, bitte.",,,2,de-agent-v1
+payment-receipt.please-write-the-number,Bitte die Zahl aufschreiben.,,,,2,de-agent-v1
+payment-receipt.how-much-in-total,Was macht das zusammen?,,,,2,de-agent-v1
+payment-receipt.can-we-pay-separately,Können wir getrennt zahlen?,,,,2,de-agent-v1
+payment-receipt.is-tax-included,Ist die MwSt. inklusive?,Ist die Mehrwertsteuer dabei?,,,2,de-agent-v1
+payment-receipt.my-card-was-declined,Meine Karte wurde abgelehnt.,,,,2,de-agent-v1
+payment-receipt.the-bill-is-wrong,Die Rechnung stimmt wohl nicht.,"Ich glaube, die Rechnung stimmt nicht.",,,2,de-agent-v1
+payment-receipt.i-already-paid,Ich habe schon bezahlt.,,,,2,de-agent-v1
+shopping.i-am-just-looking,Ich schaue nur.,,,,2,de-agent-v1
+shopping.how-much-is-this,Was kostet das?,,,,2,de-agent-v1
+shopping.that-is-too-expensive,Das ist zu teuer.,,,,2,de-agent-v1
+shopping.can-it-be-a-little-cheaper,Geht es etwas günstiger?,,,,2,de-agent-v1
+shopping.is-there-a-discount,Gibt es einen Rabatt?,,,,2,de-agent-v1
+shopping.where-do-i-pay,Wo kann ich zahlen?,Wo ist die Kasse?,,,2,de-agent-v1
+shopping.i-will-take-this,Ich nehme das.,,,,2,de-agent-v1
+shopping.what-is-this,Was ist das?,,,,2,de-agent-v1
+shopping.where-can-i-buy,Wo kann ich {} kaufen?,,,,2,de-agent-v1
+shopping.do-you-have-this-in-stock,Haben Sie das vorrätig?,Haben Sie das auf Lager?,,,2,de-agent-v1
+shopping.two-of-these,"Zwei davon, bitte.",,,,2,de-agent-v1
+shopping.what-is-it-made-of,Woraus ist das?,Aus welchem Material ist das?,,,2,de-agent-v1
+color-size-returns.do-you-have-another-color,Haben Sie eine andere Farbe?,,,,2,de-agent-v1
+color-size-returns.do-you-have-another-size,Haben Sie eine andere Größe?,,,,2,de-agent-v1
+color-size-returns.may-i-try-it-on,Darf ich das anprobieren?,,,,2,de-agent-v1
+color-size-returns.can-i-return-it,Kann ich das zurückgeben?,,,,2,de-agent-v1
+color-size-returns.can-i-exchange-it,Kann ich das umtauschen?,,,,2,de-agent-v1
+color-size-returns.do-you-have-a-bag,Haben Sie eine Tüte?,Haben Sie ein Sackerl?,,,2,de-agent-v1
+tax-refund.can-i-get-a-tax-refund,Bekomme ich die MwSt. zurück?,Bekomme ich die Mehrwertsteuer zurück?,,,2,de-agent-v1
+tax-refund.is-tax-free-shopping-available,Ist Tax Free möglich?,Gibt es eine Ausfuhrbescheinigung?,,,2,de-agent-v1

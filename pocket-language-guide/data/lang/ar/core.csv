@@ -1,0 +1,47 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,أنا,,anā,,,2,ar-agent-v1
+pronouns-verbs.we-us,نحن,إحنا,naḥnu,,,2,ar-agent-v1
+pronouns-verbs.you,أنت,,anta,,to a man,2,ar-agent-v1
+pronouns-verbs.you-polite,حضرتك,,ḥaḍratak,,your presence,2,ar-agent-v1
+pronouns-verbs.he-him,هو,,huwa,,,2,ar-agent-v1
+pronouns-verbs.she-her,هي,,hiya,,,2,ar-agent-v1
+pronouns-verbs.they-them,هم,,hum,,,2,ar-agent-v1
+pronouns-verbs.my-mine,لي,ـي,lī,,,2,ar-agent-v1
+pronouns-verbs.your-yours,لك,ـك,lak,,,2,ar-agent-v1
+pronouns-verbs.be-called-call,اسم,يُسمّى,ism,,name,2,ar-agent-v1
+pronouns-verbs.have,عندي,,ʿindī,,at me,2,ar-agent-v1
+pronouns-verbs.do-not-have,ليس عندي,ما عندي,laysa ʿindī,,,2,ar-agent-v1
+pronouns-verbs.go,أذهب,,adhhab,,,2,ar-agent-v1
+pronouns-verbs.come,آتي,تعال,ātī,,,2,ar-agent-v1
+pronouns-verbs.would-like,أودّ,,awadd,,,2,ar-agent-v1
+pronouns-verbs.want,أريد,,urīd,,,2,ar-agent-v1
+pronouns-verbs.look-for,أبحث عن,,abḥath ʿan,,,2,ar-agent-v1
+pronouns-verbs.buy,أشتري,,ashtarī,,,2,ar-agent-v1
+pronouns-verbs.like,أحبّ,,uḥibb,,,2,ar-agent-v1
+pronouns-verbs.need,أحتاج,,aḥtāj,,,2,ar-agent-v1
+pronouns-verbs.there-is-have,يوجد,فيه,yūjad,,,2,ar-agent-v1
+pronouns-verbs.there-is-not-do-not-have,لا يوجد,ما فيه,lā yūjad,,,2,ar-agent-v1
+pronouns-verbs.want-to-verb,أريد أن…,,urīd an…,,,2,ar-agent-v1
+pronouns-verbs.want-thing,أريد…,,urīd…,,,2,ar-agent-v1
+pronouns-verbs.need-thing,أحتاج إلى…,,aḥtāj ilá…,,,2,ar-agent-v1
+pronouns-verbs.looking-for-thing,أبحث عن…,,abḥath ʿan…,,,2,ar-agent-v1
+question-words.what,ماذا,ما,mādhā,,,2,ar-agent-v1
+question-words.where,أين,وين,ayna,,,2,ar-agent-v1
+question-words.who,مَن,,man,,,2,ar-agent-v1
+question-words.which-one,أيّ واحد,أيّ,ayy wāḥid,,,2,ar-agent-v1
+question-words.when,متى,,matá,,,2,ar-agent-v1
+question-words.how,كيف,,kayf,,,2,ar-agent-v1
+question-words.how-much-many,كم,,kam,,,2,ar-agent-v1
+question-words.how-many,كم عدد,,kam ʿadad,,how much number,2,ar-agent-v1
+question-words.why,لماذا,,limādhā,,,2,ar-agent-v1
+question-words.this,هذا,,hādhā,,,2,ar-agent-v1
+question-words.that,ذلك,,dhālika,,,2,ar-agent-v1
+question-words.here,هنا,,hunā,,,2,ar-agent-v1
+question-words.there,هناك,,hunāk,,,2,ar-agent-v1
+question-words.a-little,قليل,شويّة,qalīl,,,2,ar-agent-v1
+question-words.some,بعض,,baʿḍ,,,2,ar-agent-v1
+question-words.very,جدّاً,,jiddan,,,2,ar-agent-v1
+question-words.too,أكثر من اللازم,,akthar min al-lāzim,,more than needed,2,ar-agent-v1
+question-words.also,أيضاً,كمان,ayḍan,,,2,ar-agent-v1
+question-words.all-both,كلّ,كلاهما,kull,,,2,ar-agent-v1
+question-words.how-much-what-price,كم السعر,,kam al-siʿr,,how much the price,2,ar-agent-v1

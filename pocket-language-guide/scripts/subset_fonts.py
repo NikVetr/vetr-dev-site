@@ -127,12 +127,14 @@ def coverage(stack):
         # GB2312 level 1: the ~3.7k characters of everyday written Chinese.
         chars |= expand(CJK_PUNCT) | legacy_charset("gb2312", range(0xB0, 0xD8), range(0xA1, 0xFF))
     elif stack in ("cjk-kr", "cjk-kr-serif"):
-        # All 11,172 Hangul syllables would be gratuitous; KS X 1001 is the ~2,350
-        # in everyday use, the same trick GB2312 does for Chinese. Hanja comes in
-        # through the same legacy set, which is what a sign might carry.
+        # All 11,172 Hangul syllables would be gratuitous; the KS X 1001 Hangul
+        # rows are the ~2,350 in everyday use, the same trick GB2312 does for
+        # Chinese. The rows above those are Hanja, and they are deliberately left
+        # out: Korean signage and travel language are Hangul, the corpus uses no
+        # Hanja at all, and including them cost 6,000 glyphs and a megabyte of
+        # woff2 per weight -- which a reader pays for when saving the pack offline.
         chars |= expand(CJK_PUNCT) | expand(HANGUL_JAMO)
         chars |= legacy_charset("euc_kr", range(0xB0, 0xC9), range(0xA1, 0xFF))
-        chars |= legacy_charset("euc_kr", range(0xCA, 0xFE), range(0xA1, 0xFF))
     elif stack in ("cjk-jp", "cjk-jp-serif"):
         chars |= expand(CJK_PUNCT) | expand(KANA)
         chars |= legacy_charset("euc_jp", range(0xB0, 0xD0), range(0xA1, 0xFF))

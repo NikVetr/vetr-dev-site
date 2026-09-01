@@ -1,0 +1,49 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+atm-cash.where-is-an-atm,¿Dónde hay un cajero automático?,,,,2,es-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,¿Este cajero acepta tarjetas extranjeras?,,,,2,es-agent-v1
+atm-cash.the-atm-kept-my-card,El cajero se quedó con mi tarjeta,,,,2,es-agent-v1
+atm-cash.is-there-a-fee,¿Hay comisión?,,,,2,es-agent-v1
+atm-cash.the-card-was-declined,La tarjeta fue rechazada,,,,2,es-agent-v1
+atm-cash.what-is-the-exchange-rate,¿Cuál es el tipo de cambio?,,,,2,es-agent-v1
+atm-cash.no-money-came-out,No salió el dinero,,,,2,es-agent-v1
+atm-cash.where-can-i-change-money,¿Dónde puedo cambiar dinero?,,,,2,es-agent-v1
+atm-cash.the-machine-is-out-of-service,El cajero está fuera de servicio,,,,2,es-agent-v1
+atm-cash.please-give-me-smaller-notes,"Deme billetes más pequeños, por favor",,,,2,es-agent-v1
+atm-cash.do-you-have-change,¿Tiene cambio?,¿Tiene sencillo?,,,2,es-agent-v1
+atm-cash.may-i-pay-in,¿Puedo pagar en {}?,,,,2,es-agent-v1
+atm-cash.please-charge-in-local-currency,"Cobre en moneda local, por favor",,,,2,es-agent-v1
+atm-cash.where-can-i-get-coins,¿Dónde puedo conseguir monedas?,,,,2,es-agent-v1
+atm-cash.is-there-a-minimum-for-cards,¿Hay un mínimo con tarjeta?,,,,2,es-agent-v1
+atm-cash.atm,el cajero automático,,,,2,es-agent-v1
+atm-cash.banknote,el billete,,,,2,es-agent-v1
+atm-cash.coin,la moneda,,,,2,es-agent-v1
+atm-cash.cash-only,Solo efectivo,,,,2,es-agent-v1
+atm-cash.fee,la comisión,,,,2,es-agent-v1
+atm-cash.change,el cambio,el vuelto · el sencillo,,,2,es-agent-v1
+atm-cash.exchange-rate,el tipo de cambio,,,,2,es-agent-v1
+atm-cash.bank,el banco,,,,2,es-agent-v1
+atm-cash.money-exchange,Cambio de divisas,Casa de cambio,,,2,es-agent-v1
+atm-cash.pin,el PIN,la clave · el NIP,,,2,es-agent-v1
+numbers-money.l-ng,cero,,,,2,es-agent-v1
+numbers-money.y,uno,un · una,,,2,es-agent-v1
+numbers-money.r,dos,,,,2,es-agent-v1
+numbers-money.li-ng,dos,,,,1,es-agent-v1
+numbers-money.s-n,tres,,,,2,es-agent-v1
+numbers-money.s,cuatro,,,,2,es-agent-v1
+numbers-money.w,cinco,,,,2,es-agent-v1
+numbers-money.li,seis,,,,2,es-agent-v1
+numbers-money.q,siete,,,,2,es-agent-v1
+numbers-money.b,ocho,,,,2,es-agent-v1
+numbers-money.ji,nueve,,,,2,es-agent-v1
+numbers-money.sh,diez,,,,2,es-agent-v1
+numbers-money.y-b-i,cien,ciento,,,2,es-agent-v1
+numbers-money.y-qi-n,mil,,,,2,es-agent-v1
+numbers-money.y-w-n,diez mil,,,,2,es-agent-v1
+numbers-money.b-n,medio,la mitad,,,2,es-agent-v1
+numbers-money.yu-n,el yuan,,,,2,es-agent-v1
+numbers-money.ku-i,el yuan,el renminbi,,,1,es-agent-v1
+numbers-money.number-and-classifier-notes,"Números: 11 once, 12 doce, 13 trece, 14 catorce, 15 quince, 16 dieciséis, 20 veinte, 21 veintiuno, 30 treinta, 31 treinta y uno, 100 cien, 101 ciento uno, 200 doscientos, 500 quinientos, 1000 mil, 1 000 000 un millón. Antes del sustantivo uno se acorta a un / una: un café, una mesa. Los ordinales primero y tercero pierden la -o: primer piso, tercer día.",,,,2,es-agent-v1
+numbers-money.2-items,dos,dos unidades,,,1,es-agent-v1
+numbers-money.yen,el yen,,,,2,es-agent-v1
+numbers-money.yen-symbol,¥,yen,,,2,es-agent-v1
+numbers-money.number-and-classifier-notes-2,"Dinero: el punto separa los miles y la coma los decimales: 1.500,50. Céntimo (España) o centavo (América) = 0,01. «billete» = papel; «moneda» = metal; «cambio» o «vuelto» = lo que le devuelven; «suelto» o «sencillo» = monedas pequeñas. Monedas: euro (España), peso (México, Argentina, Chile, Colombia), sol (Perú).",,,,2,es-agent-v1

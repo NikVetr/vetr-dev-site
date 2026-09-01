@@ -1,16 +1,32 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,可以刷卡吗？,,kěyǐ shuākǎ ma?,,,2,latex-reference-v2
-payment-receipt.pay-cash,可以付现金吗？,,kěyǐ fù xiànjīn ma?,,,2,latex-reference-v2
-payment-receipt.pay-by-qr-code,可以扫码吗？,,kěyǐ sǎomǎ ma?,,,2,latex-reference-v2
-payment-receipt.a-receipt-please,请给我收据,,qǐng gěi wǒ shōujù,,,2,latex-reference-v2
 shopping.i-am-just-looking,我只是看看,,wǒ zhǐshì kànkan,,,2,latex-reference-v2
-shopping.how-much-is-this,这个多少钱？,,zhège duōshao qián?,,,2,latex-reference-v2
-shopping.that-is-too-expensive,太贵了,,tài guì le,,,2,latex-reference-v2
-shopping.can-it-be-a-little-cheaper,可以便宜一点吗？,,kěyǐ piányi yìdiǎn ma?,,,2,latex-reference-v2
 color-size-returns.do-you-have-another-color,有别的颜色吗？,,yǒu bié de yánsè ma?,,,2,latex-reference-v2
+tax-refund.can-i-get-a-tax-refund,可以退税吗？,,kěyǐ tuìshuì ma?,,,2,latex-reference-v2
+payment-receipt.pay-cash,可以付现金吗？,,kěyǐ fù xiànjīn ma?,,,2,latex-reference-v2
+shopping.how-much-is-this,这个多少钱？,,zhège duōshao qián?,,,2,latex-reference-v2
 color-size-returns.do-you-have-another-size,有别的尺码吗？,,yǒu bié de chǐmǎ ma?,,,2,latex-reference-v2
+payment-receipt.pay-by-qr-code,可以扫码吗？,,kěyǐ sǎomǎ ma?,,,2,latex-reference-v2
+shopping.that-is-too-expensive,太贵了,,tài guì le,,,2,latex-reference-v2
 color-size-returns.may-i-try-it-on,我可以试一下吗？,,wǒ kěyǐ shì yíxià ma?,,,2,latex-reference-v2
+payment-receipt.a-receipt-please,请给我收据,,qǐng gěi wǒ shōujù,,,2,latex-reference-v2
+shopping.can-it-be-a-little-cheaper,可以便宜一点吗？,,kěyǐ piányi yìdiǎn ma?,,,2,latex-reference-v2
 color-size-returns.can-i-return-it,可以退吗？,,kěyǐ tuì ma?,,,2,latex-reference-v2
 color-size-returns.can-i-exchange-it,可以换吗？,,kěyǐ huàn ma?,,,2,latex-reference-v2
 color-size-returns.do-you-have-a-bag,有袋子吗？,,yǒu dàizi ma?,,,2,latex-reference-v2
-tax-refund.can-i-get-a-tax-refund,可以退税吗？,,kěyǐ tuìshuì ma?,,,2,latex-reference-v2
+tax-refund.is-tax-free-shopping-available,可以免税购物吗？,,kěyǐ miǎnshuì gòuwù ma?,,,2,zh-Hans-agent-v1
+shopping.is-there-a-discount,能打折吗？,,néng dǎzhé ma?,,,2,zh-Hans-agent-v1
+payment-receipt.please-write-the-number,请写数字,,qǐng xiě shùzì,,,2,zh-Hans-agent-v1
+shopping.where-do-i-pay,在哪里付钱？,,zài nǎlǐ fù qián?,,,2,zh-Hans-agent-v1
+payment-receipt.how-much-in-total,一共多少钱？,,yígòng duōshao qián?,,,2,zh-Hans-agent-v1
+shopping.i-will-take-this,这个我要了,,zhège wǒ yào le,,,2,zh-Hans-agent-v1
+payment-receipt.can-we-pay-separately,可以分开付吗？,,kěyǐ fēnkāi fù ma?,,,2,zh-Hans-agent-v1
+shopping.what-is-this,这是什么？,,zhè shì shénme?,,,2,zh-Hans-agent-v1
+payment-receipt.is-tax-included,含税吗？,,hán shuì ma?,,,2,zh-Hans-agent-v1
+shopping.where-can-i-buy,哪里可以买{}？,,nǎlǐ kěyǐ mǎi {}?,,,2,zh-Hans-agent-v1
+payment-receipt.my-card-was-declined,我的卡刷不了,,wǒ de kǎ shuā bu liǎo,,,2,zh-Hans-agent-v1
+shopping.do-you-have-this-in-stock,有货吗？,,yǒu huò ma?,,,2,zh-Hans-agent-v1
+payment-receipt.the-bill-is-wrong,账单好像不对,,zhàngdān hǎoxiàng bú duì,,,2,zh-Hans-agent-v1
+shopping.two-of-these,这个要两个,,zhège yào liǎng gè,,,2,zh-Hans-agent-v1
+payment-receipt.i-already-paid,我已经付了,,wǒ yǐjīng fù le,,,2,zh-Hans-agent-v1
+shopping.what-is-it-made-of,这是什么做的？,,zhè shì shénme zuò de?,,,2,zh-Hans-agent-v1
