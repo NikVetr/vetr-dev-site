@@ -39,3 +39,5 @@ atm-cash.exchange-rate,एक्सचेंज रेट,,eksceṁj reṭ,,,2,h
 atm-cash.bank,बैंक,,baiṁk,,,2,hi-agent-v1
 atm-cash.money-exchange,मनी एक्सचेंज,विदेशी मुद्रा,manī eksceṁj,,,2,hi-agent-v1
 atm-cash.pin,पिन,पिन नंबर,pin,,,2,hi-agent-v1
+numbers-money.number-and-classifier-notes,"संख्याएँ जोड़कर बनती हैं: 11 = shi yi, 20 = er shi, 21 = er shi yi। फ़ोन पर 1 अक्सर yao बोला जाता है। गिनती सीधे संज्ञा के साथ नहीं आती — बीच में एक मापक शब्द ज़रूरी है, यानी दो टिकट के लिए er zhang piao। ge (आम), wei (लोग), zhang (टिकट और चपटी चीज़ें), bei (प्याले), ping (बोतलें)। बोलचाल में yuan को kuai कहते हैं; jiao / mao = 0.1 yuan, fen = 0.01 yuan।",,,,,2,hi-notes-v1
+numbers-money.number-and-classifier-notes-2,"संख्याएँ जोड़कर बनती हैं: 11 = juuichi, 20 = nijuu, 21 = nijuuichi। गिनने के लिए संख्या के बाद एक प्रत्यय लगता है, जो चीज़ के आकार से तय होता है: -tsu (आम चीज़ें), -mai (चपटी), -hon (लंबी), -nin (लोग), -hai (प्याले)। फ़ोन नंबर बोलते समय: 0 = zero या maru, 4 = yon, 7 = nana, 9 = kyuu; बीच का हाइफ़न no पढ़ा जाता है।",,,,,2,hi-notes-v1

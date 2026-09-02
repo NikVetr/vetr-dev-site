@@ -41,3 +41,5 @@ atm-cash.money-exchange,обмен валюты,,obmen valyuty,,,2,ru-agent-v1
 atm-cash.pin,ПИН-код,,PIN-kod,,,2,ru-agent-v1
 numbers-money.ruble,рубль,,rublʼ,,,2,ru-agent-v1
 numbers-money.ruble-symbol,₽,рубль,rublʼ,,,2,ru-agent-v1
+numbers-money.number-and-classifier-notes,"Числа собираются из частей: 11 = shíyī; 20 = èrshí; 21 = èrshíyī. По телефону 1 обычно читают как yāo. Между числом и существительным обязательно стоит счётное слово, которого в русском нет: gè (общее), wèi (люди), zhāng (билеты, плоское), bēi (чашки), píng (бутылки). Деньги: kuài = юань в речи; jiǎo / máo = 0,1 юаня; fēn = 0,01 юаня.",,,,,2,ru-notes-v1
+numbers-money.number-and-classifier-notes-2,"Числа собираются из частей: 11 = jūichi; 20 = nijū; 21 = nijūichi. Счётные суффиксы идут после числа: -tsu (предметы), -mai (плоское), -hon (длинное), -nin (люди), -hai (чашки). По телефону: 0 = zero или maru, 4 = yon, 7 = nana, 9 = kyū; дефис между блоками читают как no.",,,,,2,ru-notes-v1

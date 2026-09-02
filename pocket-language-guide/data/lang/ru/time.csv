@@ -41,3 +41,4 @@ months.september,сентябрь,,sentyabrʼ,,,2,ru-agent-v1
 months.october,октябрь,,oktyabrʼ,,,2,ru-agent-v1
 months.november,ноябрь,,noyabrʼ,,,2,ru-agent-v1
 months.december,декабрь,,dekabrʼ,,,2,ru-agent-v1
+time-words.clock-offset,"Суахильские часы начинаются с рассвета и показывают на шесть часов меньше наручных: прибавьте шесть к названному числу. saa moja — это 7:00, saa sita — полдень, saa kumi — 16:00. Надёжнее называть время цифрами или спросить saa ngapi za kizungu — время по западным часам.",,,,,2,ru-notes-v1
