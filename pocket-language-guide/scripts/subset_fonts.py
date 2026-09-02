@@ -10,11 +10,13 @@ their own terms offline, and every character the shipped corpus actually uses.
 """
 import csv
 import glob
+import io
 import json
 import sys
 from pathlib import Path
 
 from fontTools import subset
+from fontTools.merge import Merger
 from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
 
@@ -109,6 +111,25 @@ FACES = {
     ("deva-serif", 700, False): "NotoSerifDevanagari-var.ttf",
 }
 
+# Sources that need a Latin face grafted in, and the face to graft.
+#
+# Noto Sans Arabic carries no Latin at all: nineteen codepoints in U+0020..U+024F,
+# no letter of either case and no U+00B7. So `LATIN_RANGES` intersected with its
+# cmap yielded nothing, the request silently succeeded with no glyphs, and every
+# Latin character on an Arabic sheet drew glyph 0 -- which in Noto is a visible box,
+# not a blank. The browser preview substituted a system font and hid it; the PDF
+# embeds only the subset face and printed the boxes, including in the emergency
+# numbers, which `core/pack.js` joins with U+00B7. Arabic is the only stack this
+# happens to -- every other non-Latin family here ships the Noto Sans Latin subset.
+#
+# Merging is safe because these are one family: same units per em, same x-height
+# and cap-height, and the Latin glyphs the two do share have identical outlines at
+# identical widths, so the Latin lands on the Arabic baseline unscaled. The Arabic
+# face is merged first, so its `hhea`/`OS/2` metrics and its `name` table win and
+# the line box is unchanged.
+LATIN_DONOR = {"NotoSansArabic-Regular.ttf": "NotoSans-Regular.ttf",
+               "NotoSansArabic-Bold.ttf": "NotoSans-Bold.ttf"}
+
 # Which language directories feed each stack's corpus-character union.
 ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              "pt", "ru", "tr", "vi", "hi", "id", "sw", "th"]
@@ -138,10 +159,23 @@ def legacy_charset(codec, lead_range, trail_range):
 
 
 def corpus_chars(langs):
-    """Every codepoint the shipped data uses, so nothing in the corpus is tofu."""
+    """Every codepoint the shipped data uses, so nothing in the corpus is tofu.
+
+    The section titles and the emergency-service labels live in subdirectories of
+    `data/registry`, which a flat glob missed entirely. Thirty Korean and Chinese
+    section titles are separated by U+30FB, a codepoint only the Japanese stack
+    happened to carry -- so those headings drew a row of boxes in the PDF, where
+    unlike the browser there is no system font to fall back to.
+    """
     chars = set()
     patterns = [f"data/lang/{code}/*.csv" for code in langs]
-    patterns += ["data/respell/overrides/*.csv", "data/registry/*.csv", "data/concepts/*.csv"]
+    # The per-language registry files are scoped the same way `data/lang` is: a
+    # Korean section title only ever renders in the Korean stack, so unioning all
+    # sixteen into every face would only pay for glyphs no sheet can ask for.
+    patterns += [f"data/registry/section-titles/{code}.csv" for code in langs]
+    patterns += [f"data/registry/emergency-labels/{code}.csv" for code in langs]
+    patterns += ["data/respell/overrides/*.csv", "data/registry/*.csv",
+                 "data/concepts/*.csv"]
     for pattern in patterns:
         for path in glob.glob(str(ROOT / pattern)):
             with open(path, encoding="utf-8") as fh:
@@ -181,7 +215,8 @@ def coverage(stack):
     return chars
 
 
-def build_face(stack, weight, italic, source, chars):
+def subset_source(source, stack, weight, chars):
+    """One source file, instanced to `weight` and cut down to `chars`."""
     font = TTFont(SRC / source, fontNumber=0)
     if "fvar" in font:
         axes = {"wght": weight}
@@ -207,6 +242,39 @@ def build_face(stack, weight, italic, source, chars):
     subsetter = subset.Subsetter(options=options)
     subsetter.populate(unicodes=chars & set(font.getBestCmap()))
     subsetter.subset(font)
+    return font
+
+
+def merge_donor(font, donor):
+    """`font` with `donor`'s glyphs, cmap and layout rules added to it.
+
+    `Merger` reads from files, so both halves go through a buffer rather than the
+    filesystem. It stamps `head.created` with the current time, which would put
+    the churn the pinned timestamps exist to prevent straight back; the primary
+    face's value carries over instead.
+    """
+    created = font["head"].created
+    buffers = []
+    for half in (font, donor):
+        buf = io.BytesIO()
+        half.save(buf)
+        buf.seek(0)
+        buffers.append(buf)
+    merged = Merger().merge(buffers)
+    merged["head"].created = created
+    return merged
+
+
+def build_face(stack, weight, italic, source, chars):
+    font = subset_source(source, stack, weight, chars)
+    donor = LATIN_DONOR.get(source)
+    if donor:
+        # Only the codepoints the primary face is missing. Taking the overlap too
+        # would store nineteen glyphs twice and let the donor's Latin reading of
+        # U+204F and U+2E41 -- reversed semicolon and comma, which Arabic draws the
+        # other way round -- compete in the merged cmap for no gain.
+        font = merge_donor(font, subset_source(
+            donor, stack, weight, chars - set(font.getBestCmap())))
 
     # Pad every glyph out to a four-byte boundary.
     #

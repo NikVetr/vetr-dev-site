@@ -20,7 +20,29 @@ const SLOT_RULE_EMS = 4.6;
  * guarantee was typographic intent and nothing more, and the French translator found
  * it by reading the regex rather than the output.
  */
-const BREAK_AFTER = /(?<=[ \t\n\u3000\u2013\u2014\-/])/;
+// The hyphen is conditional: break after one that joins two words (`no-pork`),
+// never after one that opens a token. Every language's number note lists the
+// Japanese counters as `-tsu`, `-mai`, `-hon`, and an unconditional rule offered a
+// break between the hyphen and its own word, so a bare `-` dangled at the end of
+// a line. Nine languages write those lists.
+const BREAK_AFTER = /(?<=[ \t\n\u3000\u2013\u2014/])|(?<=[^\s-]-)/;
+
+// In a script that breaks anywhere, a Latin word embedded in it is still one
+// atom: `any` means between ideographs, kana and hangul, not inside a
+// romanisation printed among them. Without this, `ichiman` in a Japanese note
+// could break after any of its letters. Han, kana, hangul, Thai and Khmer are
+// excluded because breaking between those characters is the whole point.
+const WORDISH = /[\p{L}\p{N}\p{M}]/u;
+const BREAKS_ANYWHERE = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Thai}\p{Script=Khmer}]/u;
+/** @param {string} ch */
+const wordish = (ch) => ch !== '' && WORDISH.test(ch) && !BREAKS_ANYWHERE.test(ch);
+
+// Punctuation that sits *inside* a word or a number rather than after it, so an
+// any-breaking script does not split it. Found in a Chinese note, where `16:00`
+// wrapped as `16:` and `00`; `0.1 yuan` and `1/2` are the same shape. It only
+// glues when a word character follows, so a colon or comma that really does end a
+// clause still offers the break after it.
+const IN_WORD = '-:./,';
 
 // Minimal kinsoku: never strand closing punctuation at the start of a line, and
 // never leave an opening bracket dangling at the end of one.
@@ -36,8 +58,11 @@ const BREAK_AFTER = /(?<=[ \t\n\u3000\u2013\u2014\-/])/;
 const THAI_MARKS = '\u0E31\u0E33\u0E34\u0E35\u0E36\u0E37\u0E38\u0E39\u0E3A'
   + '\u0E47\u0E48\u0E49\u0E4A\u0E4B\u0E4C\u0E4D\u0E4E\u0E30\u0E32\u0E45\u0E46';
 const THAI_LEAD_VOWELS = '\u0E40\u0E41\u0E42\u0E43\u0E44';
-const NO_LINE_START = `、。，．：；？！）」』》＞…${THAI_MARKS}`;
-const NO_LINE_END = `（「『《＜${THAI_LEAD_VOWELS}`;
+// The ASCII brackets are here for the same reason the full-width ones are: notes
+// gloss a romanisation parenthetically -- `-mai (flat things)` -- and in an
+// any-breaking script a bare `)` would otherwise be free to open a line.
+const NO_LINE_START = `、。，．：；？！）」』》＞…)]}${THAI_MARKS}`;
+const NO_LINE_END = `（「『《＜([{${THAI_LEAD_VOWELS}`;
 
 /**
  * A unit of text that never splits. `w` includes any trailing space; `inkW` is
@@ -108,8 +133,17 @@ export function createMeasurer(registry, opts = {}) {
     /** @type {string[]} */ const out = [];
     for (const ch of segment) {
       const prev = out.length ? out[out.length - 1] : '';
-      const glue = prev !== ''
-        && (NO_LINE_START.includes(ch) || NO_LINE_END.includes(prev[prev.length - 1]));
+      const last = prev.slice(-1);
+      const glue = prev !== '' && (
+        NO_LINE_START.includes(ch)
+        || NO_LINE_END.includes(last)
+        // A hyphen belongs to the word it opens, for the same reason the
+        // space-breaking rule above says so, and a colon or a point inside a
+        // number belongs to the number. Both directions are needed: gluing only
+        // forwards left `16` and `:00` as two atoms with a legal break between.
+        || (wordish(ch) && (wordish(last) || IN_WORD.includes(last)))
+        || (IN_WORD.includes(ch) && wordish(last))
+      );
       if (glue) out[out.length - 1] = prev + ch;
       else out.push(ch);
     }

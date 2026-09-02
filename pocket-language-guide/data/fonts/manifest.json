@@ -47,9 +47,9 @@
       "weight": 400,
       "italic": false,
       "file": "latin-cond-400",
-      "glyphs": 2487,
-      "ttfBytes": 334068,
-      "woff2Bytes": 110644,
+      "glyphs": 2499,
+      "ttfBytes": 338024,
+      "woff2Bytes": 111244,
       "source": "NotoSans-var.ttf"
     },
     {
@@ -57,9 +57,9 @@
       "weight": 700,
       "italic": false,
       "file": "latin-cond-700",
-      "glyphs": 2487,
-      "ttfBytes": 335684,
-      "woff2Bytes": 114792,
+      "glyphs": 2499,
+      "ttfBytes": 340388,
+      "woff2Bytes": 116048,
       "source": "NotoSans-var.ttf"
     },
     {
@@ -67,9 +67,9 @@
       "weight": 400,
       "italic": true,
       "file": "latin-cond-400i",
-      "glyphs": 2498,
-      "ttfBytes": 347964,
-      "woff2Bytes": 115980,
+      "glyphs": 2510,
+      "ttfBytes": 351944,
+      "woff2Bytes": 116696,
       "source": "NotoSans-Italic-var.ttf"
     },
     {
@@ -77,9 +77,9 @@
       "weight": 700,
       "italic": true,
       "file": "latin-cond-700i",
-      "glyphs": 2498,
-      "ttfBytes": 349272,
-      "woff2Bytes": 120320,
+      "glyphs": 2510,
+      "ttfBytes": 353248,
+      "woff2Bytes": 120872,
       "source": "NotoSans-Italic-var.ttf"
     },
     {
@@ -87,9 +87,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-sc-400",
-      "glyphs": 4900,
-      "ttfBytes": 1311644,
-      "woff2Bytes": 600564,
+      "glyphs": 4901,
+      "ttfBytes": 1311848,
+      "woff2Bytes": 600768,
       "source": "NotoSansSC-var.ttf"
     },
     {
@@ -97,9 +97,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-sc-700",
-      "glyphs": 4900,
-      "ttfBytes": 1311444,
-      "woff2Bytes": 615312,
+      "glyphs": 4901,
+      "ttfBytes": 1311648,
+      "woff2Bytes": 614856,
       "source": "NotoSansSC-var.ttf"
     },
     {
@@ -127,9 +127,9 @@
       "weight": 400,
       "italic": false,
       "file": "arabic-400",
-      "glyphs": 1304,
-      "ttfBytes": 113088,
-      "woff2Bytes": 40436,
+      "glyphs": 2727,
+      "ttfBytes": 248860,
+      "woff2Bytes": 94264,
       "source": "NotoSansArabic-Regular.ttf"
     },
     {
@@ -137,9 +137,9 @@
       "weight": 700,
       "italic": false,
       "file": "arabic-700",
-      "glyphs": 1304,
-      "ttfBytes": 112808,
-      "woff2Bytes": 41020,
+      "glyphs": 2727,
+      "ttfBytes": 249276,
+      "woff2Bytes": 97528,
       "source": "NotoSansArabic-Bold.ttf"
     },
     {
@@ -227,9 +227,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-sc-serif-400",
-      "glyphs": 4890,
-      "ttfBytes": 1802012,
-      "woff2Bytes": 783428,
+      "glyphs": 4892,
+      "ttfBytes": 1802564,
+      "woff2Bytes": 783512,
       "source": "NotoSerifSC-var.ttf"
     },
     {
@@ -237,9 +237,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-sc-serif-700",
-      "glyphs": 4890,
-      "ttfBytes": 1801940,
-      "woff2Bytes": 807876,
+      "glyphs": 4892,
+      "ttfBytes": 1802488,
+      "woff2Bytes": 807996,
       "source": "NotoSerifSC-var.ttf"
     },
     {
@@ -268,8 +268,8 @@
       "italic": false,
       "file": "cjk-kr-400",
       "glyphs": 5732,
-      "ttfBytes": 914404,
-      "woff2Bytes": 299356,
+      "ttfBytes": 914412,
+      "woff2Bytes": 299256,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -278,8 +278,8 @@
       "italic": false,
       "file": "cjk-kr-700",
       "glyphs": 5732,
-      "ttfBytes": 914584,
-      "woff2Bytes": 305708,
+      "ttfBytes": 914592,
+      "woff2Bytes": 305892,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -288,8 +288,8 @@
       "italic": false,
       "file": "cjk-kr-serif-400",
       "glyphs": 5733,
-      "ttfBytes": 2540784,
-      "woff2Bytes": 582132,
+      "ttfBytes": 2540792,
+      "woff2Bytes": 582252,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -298,8 +298,8 @@
       "italic": false,
       "file": "cjk-kr-serif-700",
       "glyphs": 5733,
-      "ttfBytes": 2545188,
-      "woff2Bytes": 604900,
+      "ttfBytes": 2545196,
+      "woff2Bytes": 604668,
       "source": "NotoSerifKR-var.ttf"
     },
     {

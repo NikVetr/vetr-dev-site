@@ -71,7 +71,7 @@ export function faceToSvg(face, plan, opts) {
   for (const run of face.runs) {
     const f = opts.faces[run.fontId];
     if (!f) throw new Error(`no CSS face registered for "${run.fontId}"`);
-    const style = f.italic ? ' font-style="italic"' : '';
+    const italic = f.italic ? ' font-style="italic"' : '';
     // Deliberately no `direction="rtl"`. With it, SVG anchors the text at its
     // right edge while pdf-lib anchors at the left, so the same plan drew in two
     // places -- and the two renderers agreeing by construction is the point of
@@ -79,10 +79,17 @@ export function faceToSvg(face, plan, opts) {
     // and the browser still shapes and orders it right-to-left from its own bidi
     // pass; what it must not do is re-anchor the line. It also leaves a numeral
     // piece like "1/2" alone, which `direction="rtl"` would have reversed.
+    // `unicode-bidi: plaintext` resolves each run's direction from its own first
+    // strong character instead of from the document's. Without it a neutral glued
+    // to an Arabic word -- the colon in `الصين:`, every comma and full stop in an
+    // Arabic note -- resolved at the LTR paragraph level and printed on the wrong
+    // side of the word. The PDF path was already right, because fontkit reorders
+    // per script run, so the two renderers disagreed. This changes no ink `x` and
+    // no width, so nothing re-layouts.
     out.push(
       `<text x="${num(run.x)}" y="${num(run.y)}" font-family="${esc(f.family)}" `
-      + `font-size="${num(run.size)}" font-weight="${f.weight}"${style} `
-      + `fill="${run.fill}">${esc(run.text)}</text>`,
+      + `font-size="${num(run.size)}" font-weight="${f.weight}"${italic} `
+      + `fill="${run.fill}" style="unicode-bidi:plaintext">${esc(run.text)}</text>`,
     );
   }
 

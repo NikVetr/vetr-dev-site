@@ -3,13 +3,17 @@
 
 Checks the invariants the app relies on and cannot recover from at runtime:
 registry references resolve, every concept has text in every ready language,
-text is NFC, and safety-critical sections carry reviewed content.
+text is NFC, every printed string is drawable by the faces that will draw it, and
+safety-critical sections carry reviewed content.
 """
 import csv
 import json
 import sys
 import unicodedata
+from collections import defaultdict
 from pathlib import Path
+
+from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -22,62 +26,68 @@ SAFETY_CRITICAL = {"emergency-medical", "lost-rescue", "dietary-needs",
                    "pharmacy-symptoms", "medical-conditions", "police-consulate"}
 MIN_SAFE_CONFIDENCE = 2
 
-# Which codepoints a face built for a given script can be expected to draw, so a
-# `note` -- prose that prints in the reader's own face -- can be checked against the
-# one that will draw it. Every face carries `COMMON`: the gloss column is Latin
-# whatever the target script is, and a note in any language reaches for an em dash
-# sooner or later.
+# What the shipped faces can actually draw, read from their cmaps rather than from
+# a table of Unicode ranges.
 #
-# Deliberately not shared with `subset_fonts.py`, which has the same tables for a
-# different question. It asks what to *ship*, and answers the Han part by
-# enumerating a legacy encoding -- GB2312 level 1, about 3,700 characters -- rather
-# than the whole block, because shipping 20,000 ideographs a reader will never see
-# is what makes a pack too big to save offline. This asks what a face can draw in
-# principle, which for Han is the block.
-COMMON = [
-    (0x20, 0x24F),      # Basic Latin, Latin-1, Latin Extended-A and -B
-    (0x250, 0x2AF),     # IPA extensions
-    (0x2B0, 0x2FF),     # spacing modifiers, including the BGN/PCGN soft sign
-    (0x300, 0x36F),     # combining diacritics
-    (0x2000, 0x206F),   # general punctuation: dashes, quotes, the middle dot
-    (0x20A0, 0x20BF),   # currency symbols
-    (0x2100, 0x214F),   # letterlike symbols
-    (0x2190, 0x21FF),   # arrows
-]
+# The tables this replaced were far more permissive than the fonts. They admitted
+# the whole of U+4E00-9FFF for Japanese, while `cjk-jp` is built from JIS X 0208
+# level 1 and the corpus -- so a level-2 kanji validated and printed as an empty
+# box. They admitted all of Latin Extended-B for every script, while the Thai faces
+# carry 446 glyphs and none of the tone-marked pinyin vowels. They admitted the Han
+# block for Korean, where the faces carry nine ideographs that spilled in from
+# language endonyms. The browser hides that behind a system font; the PDF embeds
+# only these faces and has nothing to fall back to, which is what the shipped
+# Mandarin card's row of boxes was.
+def load_faces():
+    """The cmap of every shipped face, and which faces each base font stack draws in.
 
-# Beyond `COMMON`, per ISO 15924 script code. Blocks have gaps; every consumer
-# intersects with a font's own cmap, so listing a whole block is safe.
-BY_SCRIPT = {
-    "Latn": [(0x1E00, 0x1EFF)],                     # Latin Extended Additional: Vietnamese
-    "Cyrl": [(0x400, 0x4FF)],
-    "Grek": [(0x370, 0x3FF)],
-    "Arab": [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
-             (0xFB50, 0xFDFF), (0xFE70, 0xFEFF)],
-    "Hebr": [(0x590, 0x5FF)],
-    "Deva": [(0x900, 0x97F), (0xA8E0, 0xA8FF)],     # plus Devanagari Extended
-    "Thai": [(0xE00, 0xE7F)],
-    # The Han blocks themselves are enumerated from a legacy encoding rather than a
-    # range -- see `legacy_charset` in subset_fonts.py -- so these are the shared
-    # punctuation and the syllabaries that go with them.
-    "Hans": [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF), (0x4E00, 0x9FFF)],
-    "Hant": [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF), (0x4E00, 0x9FFF)],
-    "Jpan": [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF), (0x4E00, 0x9FFF),
-             (0x3040, 0x30FF), (0x31F0, 0x31FF)],
-    "Kore": [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF), (0x4E00, 0x9FFF),
-             (0x1100, 0x11FF), (0x3130, 0x318F), (0xA960, 0xA97F), (0xD7B0, 0xD7FF),
-             (0xAC00, 0xD7AF)],
-}
+    A base stack's faces are every variant a sheet can pick from it: `latin` also
+    draws in `latin-cond` when a dense reference table asks for the narrow face, and
+    in `-serif` when the reader asks for a serif sheet -- see `stackFor` in
+    core/fonts.js. Text is checked against the *intersection* of all of them,
+    because a glyph only one face carries is unusable in a column set in another.
+    """
+    faces = json.loads((DATA / "fonts/manifest.json").read_text(encoding="utf-8"))["faces"]
+    cmaps = {}
+    for face in faces:
+        font = TTFont(DATA / "fonts" / f"{face['file']}.ttf", lazy=True)
+        cmaps[face["file"]] = set(font.getBestCmap())
+        font.close()
+    stacks = {base: [f["file"] for f in faces
+                     if f["stack"] == base or f["stack"].startswith(base + "-")]
+              for base in {f["stack"] for f in faces}}
+    return cmaps, stacks
 
 
+CMAPS, STACK_FACES = load_faces()
 
-def allowed(iso15924):
-    """Codepoints a face for this script can be expected to draw."""
-    return {cp for lo, hi in COMMON + BY_SCRIPT.get(iso15924, [])
-            for cp in range(lo, hi + 1)}
+# Substituted before anything is drawn -- an open slot becomes a rule or an
+# ellipsis, `{region}` becomes a country name -- so these braces never reach a face.
+PLACEHOLDERS = ("{}", "{region}", "{numbers}")
 
 
 errors = []
 warnings = []
+
+
+def check_drawable(text, stack, where, fatal=False):
+    """Complain about anything in `text` the stack that renders it cannot draw."""
+    for token in PLACEHOLDERS:
+        text = text.replace(token, "")
+    # Grouped by the faces that lack them, so one bad cell is one message.
+    lacking = defaultdict(list)
+    for ch in dict.fromkeys(text):
+        if ch.isspace():
+            continue
+        without = tuple(f for f in STACK_FACES.get(stack, ()) if ord(ch) not in CMAPS[f])
+        if without:
+            lacking[without].append(ch)
+    for faces, chars in lacking.items():
+        found = ", ".join(f"U+{ord(c):04X} {c!r}" for c in chars)
+        (errors if fatal else warnings).append(
+            f"{where} prints in the {stack} stack, and {', '.join(faces)} "
+            f"cannot draw {found}. It prints as an empty box in the PDF, where "
+            "there is no system font to fall back to. Romanise it or drop it.")
 
 
 def load(rel):
@@ -115,6 +125,11 @@ def main():
                               "(want ISO 3166-1 alpha-2, uppercase)")
         if not lang["speak_label"].strip():
             errors.append(f"languages.csv: {code} has no speak_label")
+    for iso, script in scripts.items():
+        if script["font_stack"] not in STACK_FACES:
+            errors.append(f"scripts.csv: {iso} names font stack "
+                          f"{script['font_stack']!r}, which data/fonts/manifest.json "
+                          "does not ship, so nothing in that script can be drawn")
     if not papers:
         errors.append("registry/paper.csv: no presets")
 
@@ -175,12 +190,13 @@ def main():
         # in its text is a bidi hazard.
         lang = languages.get(code, {})
         rtl = scripts.get(lang.get("script", ""), {}).get("direction") == "rtl"
+        stack = scripts.get(lang.get("script", ""), {}).get("font_stack", "")
         seen = set()
         for group in groups:
             rel = f"lang/{code}/{group}.csv"
             if not (DATA / rel).exists():
                 continue
-            for row in load(rel):
+            for line, row in enumerate(load(rel), start=2):
                 cid = row["concept_id"]
                 seen.add(cid)
                 if cid not in concepts:
@@ -196,20 +212,25 @@ def main():
                 if text.strip() and text.count("{}") != slots:
                     errors.append(f"{rel}: {cid} has {text.count('{}')} slots, "
                                   f"concept declares {slots}")
-                # A note prints in the *source* face, because it is prose the
-                # reader reads rather than something they show to anyone. So it may
-                # use the reader's own script freely -- a Japanese reader's note is
-                # Japanese -- and may not quote any other, which is exactly what the
-                # shipped Mandarin card did, with its number note full of empty
-                # boxes. Checked against the same ranges the subsetter built that
-                # face from, so the two cannot drift.
-                if is_note and text.strip():
-                    drawable = allowed(lang["script"])
-                    stray = "".join(sorted({c for c in text if ord(c) not in drawable}))
-                    if stray:
-                        errors.append(f"{rel}: {cid} is a note and prints in the "
-                                      f"{lang['script']} face, which cannot draw "
-                                      f"{stray!r}. Romanise the quoted script.")
+                # A row's own writing prints in its language's stack whichever side
+                # of the pair it lands on: as the target's script, or as the gloss
+                # when this language is the reader's. Romanisation and the respelling
+                # are Latin by definition, whatever the target is.
+                #
+                # A note is the one row that only ever prints source-side, because it
+                # is prose the reader reads rather than something they show to anyone.
+                # So it may use the reader's own script freely -- a Japanese reader's
+                # note is Japanese -- and may not quote any other, which is exactly
+                # what the shipped Mandarin card did, with its number note full of
+                # empty boxes. That stays an error: a quoted script always has a
+                # romanisation to fall back on, and nothing shipped violates it.
+                for col in ("text", "text_alt"):
+                    check_drawable(row.get(col) or "", stack,
+                                   f"{rel}:{line} {cid} {col}", fatal=is_note)
+                for col, value in row.items():
+                    # `col` is None for a row with extra cells, which `load` reports.
+                    if col and (col.startswith("romanization_") or col == "ipa"):
+                        check_drawable(value or "", "latin", f"{rel}:{line} {cid} {col}")
                 # A right-to-left row carrying more than one digit will print with
                 # the digits reversed -- 10 as 01, 1/2 as 2/1. The renderer shapes
                 # a run right-to-left as a whole and nothing here implements the
@@ -299,23 +320,37 @@ def main():
             label = part.strip().split(" ", 1)
             if len(label) == 2 and label[1].strip():
                 wanted_labels.add(label[1].strip())
+    # Both of these, and the section headings beside them, print in the *source's*
+    # face -- they are the reader's own furniture rather than anything shown to a
+    # local -- so a Korean heading is only ever set in the Korean stack. That
+    # asymmetry is why the U+30FB middle dot in thirty Korean and Chinese headings
+    # went unnoticed until it drew a row of boxes: no check ever looked at a
+    # language as a sheet's source.
     for code in sorted(ready):
+        stack = scripts.get(languages[code]["script"], {}).get("font_stack", "")
+        rel = f"registry/section-titles/{code}.csv"
+        if (DATA / rel).exists():
+            for line, row in enumerate(load(rel), start=2):
+                check_drawable(row["title"], stack,
+                               f"{rel}:{line} {row['section_id']} title")
+
         rel = f"registry/emergency-labels/{code}.csv"
-        have = ({r["label"] for r in load(rel)} if (DATA / rel).exists() else set())
-        missing = wanted_labels - have
+        rows = load(rel) if (DATA / rel).exists() else []
+        missing = wanted_labels - {r["label"] for r in rows}
         if missing:
             warnings.append(f"registry/emergency-labels: {code} is missing "
                             f"{len(missing)} of {len(wanted_labels)} labels, so its "
                             "emergency note prints in English")
+        for line, row in enumerate(rows, start=2):
+            check_drawable(row["text"], stack, f"{rel}:{line} {row['label']} text")
         # The frame is the only string here with placeholders, and dropping one is
         # silent: `{numbers}` missing prints the country and no numbers at all,
         # under the Emergency heading, which is the worst possible place for it.
-        if (DATA / rel).exists():
-            frame = next((r["text"] for r in load(rel) if r["label"] == "_frame"), "")
-            for token in ("{region}", "{numbers}"):
-                if frame and token not in frame:
-                    errors.append(f"{rel}: the _frame has no {token}, so the "
-                                  "emergency note would print without it")
+        frame = next((r["text"] for r in rows if r["label"] == "_frame"), "")
+        for token in ("{region}", "{numbers}"):
+            if frame and token not in frame:
+                errors.append(f"{rel}: the _frame has no {token}, so the "
+                              "emergency note would print without it")
 
     reviewed = sum(1 for r in regions.values() if int(r["confidence"] or 0) >= MIN_SAFE_CONFIDENCE)
     if reviewed < len(regions):

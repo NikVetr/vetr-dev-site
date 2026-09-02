@@ -82,3 +82,32 @@ test('baseline sits inside the line box', () => {
   const b = m.baselineOffset(s);
   assert.ok(b > 0 && b < s.leading, `baseline ${b} outside 0..${s.leading}`);
 });
+
+/**
+ * Where a string is allowed to break, as the text either side of each break.
+ * Reading the atoms directly rather than a wrapped result, because a break
+ * *opportunity* is the thing under test and whether a given width happens to use
+ * it is not.
+ * @param {string} text @param {import('../core/measure.js').RunStyle} s
+ */
+const atoms = (text, s) => m.wrap(text, 0.01, s).lines.map((l) => l.map((p) => p.text).join(''));
+
+test('a hyphen that opens a word stays with it', () => {
+  // Every language's number note lists the Japanese counters as `-tsu`, `-mai`,
+  // `-hon`. The rule used to be unconditional, so it offered a break between the
+  // hyphen and its own word and a bare `-` dangled at the end of a line.
+  assert.deepEqual(atoms('-tsu -mai', style()), ['-tsu ', '-mai']);
+  // A hyphen joining two words still offers one, which is what it is for.
+  assert.deepEqual(atoms('no-pork', style()), ['no-', 'pork']);
+});
+
+test('a script that breaks anywhere still keeps a Latin word whole', () => {
+  // `any` means between ideographs, kana and hangul -- not inside a romanisation
+  // printed among them, which is what every reader-side note does.
+  const s = style({ stack: 'cjk-sc', weight: 700, wordBreak: 'any' });
+  assert.deepEqual(atoms('数juuichi', s), ['数', 'juuichi']);
+  // And a digital time or a decimal is one number, not two. A Chinese note wrapped
+  // `16:00` as `16:` and `00` before this.
+  assert.deepEqual(atoms('是16:00了', s), ['是', '16:00', '了']);
+  assert.deepEqual(atoms('是0.1元', s), ['是', '0.1', '元']);
+});

@@ -5,9 +5,23 @@
 import * as fontkit from '../vendor/fontkit.esm.js';
 
 /** Which script a field is written in, given the sheet's language pair. */
+// Which language a field belongs to, and so which font stack draws it. Two of
+// these were wrong, both in the same way -- named for where the column *sits* on
+// the row rather than for the language whose text lands in it, which only matters
+// once the two sides use different scripts:
+//
+//   `numeral` is the label column of a number table and reads from the same cell
+//   as the gloss (see core/pack.js), so it is source-side. Calling it Latin drew
+//   an Arabic, Hindi, Thai or CJK gloss in the condensed Latin face, which has
+//   none of those glyphs and printed a row of boxes in the PDF.
+//
+//   `literal` prints on the reader's side of the row but is read from the
+//   *target* row, and forty-one Korean literals quote Hangul while fifty-six
+//   Arabic ones are in Arabic. Drawn in the source's stack those were boxes for
+//   every reader but their own.
 const FIELD_SIDE = {
   script: 'target', script_alt: 'target', roman: 'latin', ipa: 'latin',
-  gloss: 'source', literal: 'source', respell: 'source', numeral: 'latin',
+  gloss: 'source', literal: 'target', respell: 'source', numeral: 'source',
 };
 
 /**

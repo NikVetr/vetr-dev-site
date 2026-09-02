@@ -41,3 +41,5 @@ atm-cash.money-exchange,รับแลกเงิน,แลกเปลี่�
 atm-cash.pin,รหัส,PIN,rahat,,,2,th-agent-v1
 numbers-money.baht,บาท,,bat,,,2,th-gaps-v1
 numbers-money.baht-symbol,฿,บาท,bat,,,2,th-gaps-v1
+numbers-money.number-and-classifier-notes,"ประกอบตัวเลข: 11 = shi yi, 20 = er shi, 21 = er shi yi บอกเบอร์โทร 1 มักอ่านว่า yao ลักษณนามจีน เรียงต่างจากไทย คือ จำนวน + ลักษณนาม + คำนาม เช่น liang zhang piao = ตั๋ว 2 ใบ ที่ใช้บ่อย: ge (ทั่วไป), wei (คน), zhang (ตั๋วและของแบน), bei (ถ้วย), wan (ชาม), ping (ขวด) เงิน: ภาษาพูดเรียก yuan ว่า kuai, jiao หรือ mao = 0.1 yuan, fen = 0.01 yuan",,,,,2,th-notes-v1
+numbers-money.number-and-classifier-notes-2,"ประกอบตัวเลข: 11 = juuichi, 20 = nijuu, 21 = nijuuichi ลักษณนามญี่ปุ่น เป็นคำต่อท้ายตัวเลข: -tsu (ของทั่วไป), -mai (ของแบน), -hon (ของยาว), -nin (คน), -hai (ถ้วย) บอกเบอร์โทร: 0 = zero หรือ maru, 4 = yon, 7 = nana, 9 = kyuu ขีดคั่นอ่านว่า no",,,,,2,th-notes-v1

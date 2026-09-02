@@ -48,6 +48,25 @@ function draws(font, gid) {
   }
 }
 
+// Every face has to be able to draw Latin, whatever script it is for: the gloss
+// column is the reader's language and the romanisation column is Latin by
+// definition, and `core/pack.js` joins a region's emergency numbers with U+00B7.
+//
+// Noto Sans Arabic carries no Latin at all -- nineteen codepoints in U+0020..U+024F
+// and not one letter. Because `scripts/subset_fonts.py` intersects the coverage it
+// asks for with the source's own cmap, asking that stack for Latin silently yielded
+// nothing, and every Latin character on an Arabic sheet drew glyph 0 -- which in
+// Noto is a visible box, not a blank. The browser preview substituted a system font
+// and hid it; the PDF embeds only the subset face and printed the boxes, in the
+// emergency numbers among other places. The Arabic faces now merge in the Noto Sans
+// Latin subset. This asserts the coverage rather than the merge, so a stack added
+// from a family with the same gap is caught the same way.
+const LATIN_REQUIRED = Array.from({ length: 0x7e - 0x21 + 1 }, (_, i) => String.fromCharCode(0x21 + i))
+  .join('')
+  // Not ASCII, but emitted by the sheet itself: U+00B7 between emergency numbers,
+  // U+2026 as the open-slot marker, and the dashes as break opportunities.
+  + '\u00b7\u2013\u2014\u2026';
+
 // Enough glyphs to reach past the offsets where the short format runs out, spread
 // across the whole face so the sample is not all in the Latin block at the front.
 const SAMPLE = 80;
@@ -67,5 +86,15 @@ for (const face of manifest.faces) {
     const lost = gids.filter((gid, i) => !draws(out, mapped[i]));
     assert.deepEqual(lost, [], `${lost.length} of ${gids.length} glyphs came back blank `
       + 'or unreadable -- the PDF would print them as gaps');
+  });
+
+  test(`${face.file}: draws Latin`, async () => {
+    const font = fontkit.create(await readFile(`data/fonts/${face.file}.ttf`));
+    const missing = [...LATIN_REQUIRED].filter((ch) => {
+      const [glyph] = font.glyphsForString(ch);
+      return !glyph || glyph.id === 0 || !draws(font, glyph.id);
+    });
+    assert.deepEqual(missing, [], `${missing.length} characters have no glyph in this face `
+      + 'and would print as boxes in the PDF');
   });
 }
