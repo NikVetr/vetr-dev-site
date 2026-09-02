@@ -629,6 +629,44 @@ asserts the page recovers once the network does.
 
 For a print artifact, refusing beats printing something subtly wrong.
 
+## Notes, and the reader side of a pair
+
+A sheet has two languages in it, and almost everything in this project is scored
+against the one being *learned*. Three things are read off the other one, and all
+three were wrong in a way nothing checked.
+
+A **`note`** is one paragraph in a bordered box at the head of its section -- Chinese
+classifiers, Japanese counters, and now the Thai politeness particles and the Swahili
+clock -- and it is prose about the target written in the *reader's* language, so it
+renders from the source row. Nine languages had no such row and silently dropped the
+note; five had it blank and drew an empty box, which takes the space and says nothing;
+and Spanish had a paragraph about *Spanish* numerals sitting in a concept scoped to
+Chinese, so a Spanish reader learning Chinese got advice about Spanish.
+
+The **emergency note** was worse, because it is the line that matters most. `In China:
+110 police · 119 fire · 120 ambulance` was assembled from `name_en` and the raw
+service words in `regions.csv`, so 225 of the 240 pairs printed it in English under
+the reader's own Emergency heading. It now takes its frame and its ten service words
+from `data/registry/emergency-labels/<source>.csv` -- registry rather than
+`data/i18n/`, because `core/` renders the sheet and must not reach into the
+interface's catalogues -- and the country name from `Intl.DisplayNames`, checked
+against all 49 regions in all sixteen languages.
+
+**Every language refused the preposition.** `In {region}` was wrong for three of the
+49 English names ("In United States"); Portuguese counted 41 of 49 taking an article
+across `na`/`no`/`nos`; French counted `en` for 29 against `au` for 16, so no single
+preposition beats 29 of 49; German found seven ungrammatical, since ICU returns bare
+nominatives and German wants article-plus-case; Turkish found five surface forms of
+the locative suffix and two names not mechanically decidable at all. Most took
+apposition. Turkish took `{region} için:`, a postposition governing the bare
+nominative -- the same trick its pack used on sixteen slot rows. Hindi took
+`{region} में:`, which works because Hindi does not oblique-mark proper nouns.
+
+Two validator rules keep the source side honest: every `note` needs text in every
+ready language except the ones it is scoped to (a language is never its own sheet's
+source), and every service word in `regions.csv` needs a row in every language's
+label file. Their warning list is the remaining work.
+
 ## Deliberately not built yet
 
 Named so nobody has to rediscover the gap:
@@ -639,7 +677,11 @@ Named so nobody has to rediscover the gap:
   serving a coverage report with one language hollowed out rather than by naming a
   real one. Adding the seventeenth means a registry row, a `scripts.csv` entry if its
   script is new, a font stack if the Latin faces do not cover it, and
-  `python3 scripts/make_todo.py <code>`.
+  `python3 scripts/make_todo.py <code>`, then the two task templates in
+  `content/PROMPTS/`: `translate-section.md` for the rows, and
+  `reader-side-notes.md` for the notes and the emergency labels -- the second of
+  which carries what all sixteen languages learned about the `_frame`, so nobody
+  rediscovers that a preposition cannot work.
 - **Respellings for readers who do not read English.** Every pack ships
   `<target>__en__en-US` and nothing else, so the pronunciation column appears only
   on a sheet glossed into English. A Turkish speaker learning Spanish gets the
@@ -747,6 +789,12 @@ Three failure modes here were silent rather than loud, and the fixes are load-be
   all three now; the reference tables deliberately do not, because they are one line
   of four columns and that is the point of them. `ipa` still draws nothing, for the
   honest reason that the column is empty everywhere.
+- **JavaScript's `\s` matches U+00A0.** The line breaker split on
+  `/(?<=[\s\-–—/])/`, so every no-break space in the corpus -- 228 of them, all
+  French, holding `Thaïlande :` and `7 h` together -- was a legal break point. Nothing
+  had visibly broken, which is why it survived: the guarantee was typographic intent
+  and nothing more. The French translator found it by reading the regex rather than
+  the output, and the break class is spelled out now.
 - **`display` on a class beats the user agent's `[hidden]`.** The Custom row under
   each setting ladder was never actually hidden: `.numeric-custom { display: flex }`
   outranks `[hidden] { display: none }`, so a slider sat under every ladder showing a

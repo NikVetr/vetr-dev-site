@@ -156,12 +156,22 @@ the pork-stock row above, this suggests the real gap is one concept shaped like
 "what is in this that I would not expect", filled per language — which is a design
 question rather than a row.
 
-### A `note` row for a language's one unavoidable warning
+### ~~A `note` row for a language's one unavoidable warning~~ — built
 
-Three packs asked for the same thing in different words, and none of them could have
-it: the bank's only two `note`-template concepts are scoped to Chinese and Japanese,
-so there is nowhere to put a sentence that is about the *language* rather than about
-a phrase.
+Three packs asked for the same thing in different words. Two of them now have it:
+`social-basics.politeness-particles` scoped to `th` and `time-words.clock-offset`
+scoped to `sw`, both `note`-template concepts alongside the Chinese and Japanese
+number notes that were already there.
+
+What building them exposed is worth more than the notes. A `note` is prose about the
+target in the *reader's* language, so it renders from the **source** row — and
+coverage is scored against a language as a sheet's *target*. So nothing was checking
+the source side at all: nine languages had no row for the Chinese classifier note and
+silently dropped it, five had the row blank and drew an empty bordered box, and
+Spanish had a note about *Spanish numerals* in a concept scoped to Chinese. The
+validator has two rules for this now, and its warning list is the remaining work.
+
+The original request, kept for the record:
 
 - **Thai**: "add ครับ (m) / ค่ะ (f) to soften anything." The pack deliberately omits
   the politeness particles from 739 of 741 rows, because printing both correctly
