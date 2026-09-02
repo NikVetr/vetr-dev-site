@@ -52,7 +52,7 @@ test.describe('gallery', () => {
     await expect(german.locator('.lang-picker-aside')).toHaveText('German');
   });
 
-  test('a thumbnail opens a closer look without leaving the page', async ({ page }) => {
+  test('a thumbnail opens every face, one arrow key apart', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('.card').first()).toBeVisible();
     await expect(page.locator('dialog.preview-dialog')).toHaveCount(0);
@@ -60,7 +60,22 @@ test.describe('gallery', () => {
     await page.locator('.card-thumb-button').first().click();
     const dialog = page.locator('dialog.preview-dialog');
     await expect(dialog).toBeVisible();
-    await expect(dialog.locator('img')).toBeVisible();
+    // The pre-rendered thumbnail goes up first so the dialog is never empty, then
+    // the typeset faces replace it -- vector, and every face rather than the first.
+    await expect(dialog.locator('.preview-stage img')).toBeVisible();
+    await expect(dialog.locator('.preview-stage svg')).toBeVisible({ timeout: 180_000 });
+
+    const counter = dialog.locator('.preview-counter');
+    await expect(counter).toHaveText(/\b1\b.*\b(\d+)\b/);
+    const faces = Number(/(\d+)\s*$/.exec((await counter.textContent()) ?? '')?.[1]);
+    expect(faces).toBeGreaterThanOrEqual(4);
+    expect(faces % 2).toBe(0);
+
+    await page.keyboard.press('ArrowRight');
+    await expect(counter).not.toHaveText(/^Face 1 /);
+    await page.keyboard.press('End');
+    await expect(dialog.locator('.preview-step').last()).toBeDisabled();
+
     // The two things you would want next are right there.
     await expect(dialog.getByRole('link', { name: 'Export' })).toBeVisible();
 

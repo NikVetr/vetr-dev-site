@@ -7,12 +7,12 @@
 // Most choices here are about shape, so they are drawn rather than described. Only
 // the genuinely list-shaped ones (paper, language, romanisation) stay as menus.
 
-import { hasContent } from '../core/pack.js';
+import { hasContent, paperSpec } from '../core/pack.js';
 import { ARRANGEMENTS, arrangementShape } from '../core/solve/arrange.js';
 import { flagEmoji, flagsSupported } from './flags.js';
 import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph, paletteGlyph, itemGlyph, cutGlyph,
-  customGlyph, numericChoice,
+  customGlyph, numericChoice, fieldGlyph, toggles,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
@@ -59,6 +59,38 @@ const FIELD_LABEL_KEYS = /** @type {const} */ ({
   respell: 'field.respell',
   literal: 'field.literal',
 });
+
+/**
+ * A number box in inches that reports points, which is what a `Geometry` holds.
+ * @param {string} label
+ */
+function inchBox(label) {
+  const box = /** @type {HTMLInputElement} */ (el('input', { type: 'number', class: 'numeric-box' }));
+  box.min = '1';
+  box.max = '17';
+  box.step = '0.1';
+  box.setAttribute('aria-label', label);
+  return {
+    box,
+    points: () => Math.round(Number(box.value) * 72 * 100) / 100,
+    /** @param {number} points */
+    set(points) { box.value = String(Math.round((points / 72) * 100) / 100); },
+  };
+}
+
+/**
+ * The colours a reader can set. The five section roles first, because those are the
+ * encoding; ink last, because it is the one that makes a sheet unreadable if it is
+ * got wrong, and it should not be the first thing to hand.
+ */
+const COLOUR_KEYS = [
+  { key: 'roles.comm', labelKey: 'colour.comm' },
+  { key: 'roles.money', labelKey: 'colour.money' },
+  { key: 'roles.move', labelKey: 'colour.move' },
+  { key: 'roles.stay', labelKey: 'colour.stay' },
+  { key: 'roles.alert', labelKey: 'colour.alert' },
+  { key: 'ink', labelKey: 'colour.ink' },
+];
 
 const CUT_NOTE_KEYS = {
   '': 'cut.hint.whole',
@@ -116,29 +148,58 @@ export function createFormatPanel(input) {
 
   // --- card size ----------------------------------------------------------
 
+  // Two boxes rather than one slider, because a card is a width *and* a height and
+  // neither is a function of the other. Inches, to match the presets' own labels.
+  const cardW = inchBox(t('format.cardWidth'));
+  const cardH = inchBox(t('format.cardHeight'));
+  const cardCustom = el('div', { class: 'numeric-custom' }, [
+    cardW.box, el('span', { class: 'numeric-unit', text: '×' }), cardH.box,
+    el('span', { class: 'numeric-unit', text: t('format.inches') }),
+  ]);
+  const pushCard = () => emit({
+    geometry: { ...spec.geometry, pageW: cardW.points(), pageH: cardH.points() },
+  });
+  cardW.box.addEventListener('change', pushCard);
+  cardH.box.addEventListener('change', pushCard);
+
   const size = segmented({
     label: t('format.cardSize'),
     value: presetOf(),
-    options: Object.entries(presets.geometry).map(([id, raw]) => {
-      const g = /** @type {any} */ (raw);
-      return {
-        value: id,
-        // The name is a dimension for four of the five presets, which needs no
-        // translating; the wallet card is a description, and stood out as the one
-        // English string in an otherwise translated panel. A preset can therefore
-        // name a caption key, and only that one does.
-        caption: g.captionKey
-          ? t(g.captionKey)
-          : g.name.split('·')[0].trim().replace('landscape', '').replace('portrait', '').trim(),
-        title: g.name,
-        glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
-      };
-    }),
+    options: [
+      ...Object.entries(presets.geometry).map(([id, raw]) => {
+        const g = /** @type {any} */ (raw);
+        return {
+          value: id,
+          // The name is a dimension for four of the five presets, which needs no
+          // translating; the wallet card is a description, and stood out as the one
+          // English string in an otherwise translated panel. A preset can therefore
+          // name a caption key, and only that one does.
+          caption: g.captionKey
+            ? t(g.captionKey)
+            : g.name.split('·')[0].trim().replace('landscape', '').replace('portrait', '').trim(),
+          title: g.name,
+          glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
+        };
+      }),
+      // `presetOf()` already returns '' for a page size that matches no preset, so
+      // the empty string is what "custom" means everywhere in this panel.
+      {
+        value: '',
+        caption: t('format.custom'),
+        title: t('format.cardCustom'),
+        glyph: customGlyph(),
+      },
+    ],
     // A different card is a different sheet: take its margins, gap, columns and
     // natural face count wholesale rather than keeping values tuned for the old
-    // shape.
-    onChange: (id) => emit({ geometry: { ...presets.geometry[id] } }),
+    // shape. Custom keeps the size that is already there and just opens the boxes,
+    // so nothing jumps under the reader.
+    onChange: (id) => {
+      cardCustom.hidden = id !== '';
+      if (id) emit({ geometry: { ...presets.geometry[id] } });
+    },
   });
+  cardCustom.hidden = presetOf() !== '';
 
   // --- columns and faces --------------------------------------------------
 
@@ -249,17 +310,60 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ arrangement: value }),
   });
 
+  // Colour is how a section is coded on the card, so it is the part of a theme
+  // worth handing over -- and the only part that can change without re-measuring
+  // anything. The theme underneath still supplies every size, leading and rule.
+  const swatches = COLOUR_KEYS.map((entry) => {
+    const input = /** @type {HTMLInputElement} */ (el('input', { type: 'color', class: 'swatch' }));
+    input.setAttribute('aria-label', t(entry.labelKey));
+    input.title = t(entry.labelKey);
+    input.addEventListener('input', () => emit({
+      themeColors: { ...currentColours(), [entry.key]: input.value },
+    }));
+    return { ...entry, input };
+  });
+  const themeCustom = el('div', { class: 'numeric-custom swatches' }, swatches.map((s) => s.input));
+  /** Every colour the reader could have changed, defaulted from the base theme. */
+  const currentColours = () => {
+    /** @type {Record<string,string>} */ const out = {};
+    for (const { key, input } of swatches) out[key] = input.value;
+    return out;
+  };
+  const paintSwatches = () => {
+    const base = themes[spec.themeId]?.colors ?? {};
+    for (const { key, input } of swatches) {
+      const fallback = key.startsWith('roles.') ? base.roles?.[key.slice(6)] : base[key];
+      input.value = spec.themeColors?.[key] ?? fallback ?? '#000000';
+    }
+  };
+
   const theme = segmented({
     label: t('format.colours'),
-    value: spec.themeId,
-    options: Object.keys(themes).map((id) => ({
-      value: id,
-      caption: id === 'cvd-safe' ? t('format.theme.accessible') : t('format.theme.reference'),
-      title: themes[id]?.name ?? id,
-      glyph: paletteGlyph(roles(id)),
-    })),
-    onChange: (value) => emit({ themeId: value }),
+    value: spec.themeColors ? 'custom' : spec.themeId,
+    options: [
+      ...Object.keys(themes).map((id) => ({
+        value: id,
+        caption: id === 'cvd-safe' ? t('format.theme.accessible') : t('format.theme.reference'),
+        title: themes[id]?.name ?? id,
+        glyph: paletteGlyph(roles(id)),
+      })),
+      {
+        value: 'custom',
+        caption: t('format.custom'),
+        title: t('format.coloursCustom'),
+        glyph: customGlyph(),
+      },
+    ],
+    onChange: (value) => {
+      themeCustom.hidden = value !== 'custom';
+      // Starting from what is on screen means the first swatch a reader drags moves
+      // one colour rather than resetting the other five.
+      if (value === 'custom') emit({ themeColors: currentColours() });
+      else emit({ themeId: value, themeColors: undefined });
+    },
   });
+  themeCustom.hidden = !spec.themeColors;
+  paintSwatches();
 
   const ink = segmented({
     label: t('format.ink'),
@@ -380,36 +484,35 @@ export function createFormatPanel(input) {
 
   // --- which columns appear ----------------------------------------------
 
-  const fieldRow = el('div', { class: 'field-toggles' });
-  /** @type {Map<string, HTMLInputElement>} */ const fieldBoxes = new Map();
-  for (const [field, labelKey] of Object.entries(FIELD_LABEL_KEYS)) {
-    const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
-    box.dataset.field = field;
-    box.checked = spec.fieldSet.includes(/** @type {any} */ (field));
-    box.addEventListener('change', () => {
-      const next = new Set(spec.fieldSet);
-      if (box.checked) next.add(/** @type {any} */ (field));
-      else next.delete(/** @type {any} */ (field));
-      // `numeral` is the same source-language cell as the gloss, so it rides along.
-      emit({ fieldSet: [.../** @type {any} */ (next), 'numeral'] });
-    });
-    fieldBoxes.set(field, box);
-    fieldRow.append(el('label', { class: 'small' }, [box, document.createTextNode(t(labelKey))]));
-  }
+  // A column of bare checkboxes was the one control here that named a thing instead
+  // of drawing it, which is odd for a setting about where text lands. Each glyph is
+  // the entry itself with that field's line lit.
+  const fieldSet = toggles({
+    label: t('format.columnsShown'),
+    options: Object.entries(FIELD_LABEL_KEYS).map(([field, labelKey]) => ({
+      value: /** @type {import('../core/types.js').FieldId} */ (field),
+      caption: t(labelKey),
+      title: t(labelKey),
+      glyph: fieldGlyph(/** @type {any} */ (field)),
+    })),
+    values: spec.fieldSet.filter((f) => f !== 'numeral'),
+    // `numeral` is the same source-language cell as the gloss, so it rides along.
+    onChange: (next) => emit({ fieldSet: [...next, 'numeral'] }),
+  });
 
   root.replaceChildren(
-    panelField(t('format.card'), [size.group]),
+    panelField(t('format.card'), [size.group, cardCustom]),
     panelField(t('format.columns'), [columns.group]),
     panelField(t('format.faces'), [faces.group]),
     panelField(t('format.typeface'), [typefaceControl.group]),
     panelField(t('format.typeSize'), [typeSize.group]),
     panelField(t('format.entryLayout'), [arrangement.group]),
     panelField(t('format.textPadding'), [padding.group]),
-    panelField(t('format.colours'), [theme.group]),
+    panelField(t('format.colours'), [theme.group, themeCustom]),
     panelField(t('format.ink'), [ink.group]),
     panelField(t('format.cutIntoCards'), [cutControl.group, cutNote]),
     panelField(t('format.pngResolution'), [dpi.group]),
-    panelField(t('format.columnsShown'), [fieldRow]),
+    panelField(t('format.columnsShown'), [fieldSet.group]),
     paper.wrap,
     source.wrap,
     romanization.wrap,
@@ -424,6 +527,9 @@ export function createFormatPanel(input) {
     sync(next, resolvedFaces) {
       spec = next;
       size.select(presetOf());
+      cardCustom.hidden = presetOf() !== '';
+      cardW.set(next.geometry.pageW);
+      cardH.set(next.geometry.pageH);
       columns.select(next.geometry.columns);
       faces.select(next.autoFaces ? 0 : next.geometry.faces);
       // Auto is only useful if it says what it decided.
@@ -436,15 +542,15 @@ export function createFormatPanel(input) {
       typeSize.select(next.scale);
       padding.select(next.padding);
       arrangement.select(next.arrangement);
-      theme.select(next.themeId);
+      theme.select(next.themeColors ? 'custom' : next.themeId);
+      themeCustom.hidden = !next.themeColors;
+      paintSwatches();
       ink.select(next.inkMode);
       paper.select.value = next.paper.presetId;
       if (region) region.select.value = next.region;
       source.select.value = next.source;
       romanization.select.value = next.romanization;
-      for (const [field, box] of fieldBoxes) {
-        box.checked = next.fieldSet.includes(/** @type {any} */ (field));
-      }
+      fieldSet.select(next.fieldSet.filter((f) => f !== 'numeral'));
       // The glyphs for these two depend on other settings, so redraw them.
       redrawGlyphs(columns.group, COLUMN_CHOICES.map(
         (n) => pageGlyph({ pageW: next.geometry.pageW, pageH: next.geometry.pageH, columns: n }),
@@ -452,7 +558,15 @@ export function createFormatPanel(input) {
       redrawGlyphs(arrangement.group, ARRANGEMENTS.map(
         (a) => itemGlyph(arrangementShape(a.id, next.fieldSet)),
       ));
-      redrawGlyphs(ink.group, INK_CHOICES.map((c) => inkGlyph(c.value, roles(next.themeId))));
+      const palette = next.themeColors
+        ? COLOUR_KEYS.filter((c) => c.key.startsWith('roles.'))
+          .map((c) => next.themeColors?.[c.key] ?? '')
+        : roles(next.themeId);
+      redrawGlyphs(ink.group, INK_CHOICES.map((c) => inkGlyph(c.value, palette)));
+      redrawGlyphs(theme.group, [
+        ...Object.keys(themes).map((id) => paletteGlyph(roles(id))),
+        customGlyph(),
+      ]);
     },
     cut: () => cut,
   };
@@ -467,20 +581,3 @@ function redrawGlyphs(group, glyphs) {
   });
 }
 
-/**
- * @param {Awaited<ReturnType<import('../core/sheet.js').createSheetContext>>['corpus']} corpus
- * @param {string} presetId
- * @returns {import('../core/types.js').PaperSpec}
- */
-export function paperSpec(corpus, presetId) {
-  const paper = corpus.paper[presetId];
-  if (!paper) throw new Error(`no paper preset "${presetId}"`);
-  return {
-    presetId,
-    borderless: paper.borderless === '1',
-    oversprayPct: Number(paper.overspray_pct),
-    nonprintablePt: Number(paper.nonprintable_pt),
-    minRulePt: Number(paper.min_rule_pt),
-    minSizeDelta: Number(paper.min_size_delta),
-  };
-}

@@ -30,8 +30,11 @@ test.describe('help me decide', () => {
     await expect(page.locator('.banner')).toBeHidden();
     // Large print asked for bigger type, not the same content shrunk.
     await expect(page.getByRole('radio', { name: 'X-large' })).toHaveAttribute('aria-checked', 'true');
-    await expect(page.locator('.field-toggles input[data-field="respell"]')).not.toBeChecked();
-    await expect(page.locator('.field-toggles input[data-field="roman"]')).toBeChecked();
+    // The shown-fields control is a row of glyph toggles now, not checkboxes.
+    await expect(page.getByRole('checkbox', { name: 'Say-it-like' }))
+      .toHaveAttribute('aria-checked', 'false');
+    await expect(page.getByRole('checkbox', { name: 'Romanisation' }))
+      .toHaveAttribute('aria-checked', 'true');
     await expect(page.locator('.face.focused')).toBeVisible();
   });
 

@@ -1,11 +1,16 @@
 // Gallery: pick a language. Reads only the language registry and the pre-rendered
 // pack index, so it stays fast and works offline without loading the solver, the
 // corpus or a CJK font.
+//
+// The one exception is the lightbox, which typesets the whole sheet -- and only
+// when a reader opens it. See `faceSheet` below for why that beat shipping the
+// faces as assets.
 
 import {
-  browserSheetContext, loadText, loadLanguages, readerLanguage, registerOffline,
-  saveForOffline, setReaderLanguage, showFatal,
+  browserSheetContext, ensureFontCss, loadText, loadLanguages, readerLanguage,
+  registerOffline, saveForOffline, setReaderLanguage, showFatal,
 } from './app.js';
+import { nextIndex } from './keys.js';
 import { regionRow } from './flags.js';
 import { languagePicker } from './language-picker.js';
 import { applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
@@ -23,35 +28,133 @@ function el(tag, attrs = {}, kids = []) {
 }
 
 /**
- * A closer look at a language's default card, without leaving the page. The
- * gallery deliberately does not load the solver, so this shows the pre-rendered
- * first face rather than typesetting anything -- the studio is one click away for
- * the rest.
- * @param {{name:string, key:string, query:string}} card
+ * Every face of a pair's default sheet, as SVG, solved once and kept.
+ *
+ * This runs the real engine rather than reading a pre-rendered asset, which was
+ * the other option and is worth recording. A face is about 120KB of SVG; 132
+ * ordered pairs at six or eight faces each is roughly 90MB in the working tree,
+ * and the plan behind it is no smaller. Shipping that so a lightbox can open
+ * instantly is a poor trade when the sheet solves in about a second, and the SVG
+ * this returns is vector -- sharper at any size than a PNG we could have committed.
+ *
+ * The cost is paid once per pair per visit, and the thumbnail covers the wait.
+ * @type {Map<string, Promise<{svgs:string[], faces:number}>>}
  */
-function openPreview({ name, key, query }) {
+const sheets = new Map();
+
+/** @param {string} target @param {string} source */
+function faceSheet(target, source) {
+  const key = `${target}__${source}`;
+  const held = sheets.get(key);
+  if (held) return held;
+  const job = (async () => {
+    const [{ buildSheet }, { faceSvgs, loadIcons }, { defaultSelection }, { makeSpec }] =
+      await Promise.all([
+        import('../core/sheet.js'),
+        import('./export.js'),
+        import('../core/pack.js'),
+        import('./app.js'),
+      ]);
+    const ctx = await browserSheetContext();
+    const presets = JSON.parse(await loadText('data/presets.json'));
+    const spec = {
+      ...makeSpec(ctx, presets, { target, source }),
+      selection: defaultSelection(ctx.corpus),
+      scale: 0,
+    };
+    await ensureFontCss(ctx, target, source, spec.typeface);
+    const [{ plan }, manifest, icons] = await Promise.all([
+      buildSheet(ctx, spec),
+      loadText('data/fonts/manifest.json').then(JSON.parse),
+      loadIcons(),
+    ]);
+    return { svgs: faceSvgs({ plan, manifest, icons }), faces: plan.faces.length };
+  })();
+  sheets.set(key, job);
+  return job;
+}
+
+/**
+ * A closer look at a language's default card, without leaving the page: every face
+ * of the sheet, at whatever size the window allows, one arrow key apart.
+ *
+ * The pre-rendered thumbnail goes up first so the dialog is never empty, then the
+ * typeset faces replace it. A reader who only wanted a glance has already had it.
+ * @param {{name:string, key:string, query:string, target:string, source:string}} card
+ */
+function openPreview({ name, key, query, target, source }) {
   const dialog = document.createElement('dialog');
   dialog.className = 'preview-dialog';
-  dialog.append(
-    el('h2', { text: t('gallery.previewTitle', { language: name }) }),
+
+  const heading = el('h2', { text: t('gallery.previewTitle', { language: name }) });
+  const stage = el('div', { class: 'preview-stage' }, [
     el('img', { src: `packs/${key}/thumb.png`, alt: t('gallery.thumbAlt', { language: name }) }),
-    el('p', { class: 'small muted', text: t('gallery.previewNote') }),
+  ]);
+  const counter = el('span', { class: 'preview-counter small muted' });
+  const prev = /** @type {HTMLButtonElement} */ (
+    el('button', { type: 'button', class: 'ghost preview-step', text: '\u2039' }));
+  const next = /** @type {HTMLButtonElement} */ (
+    el('button', { type: 'button', class: 'ghost preview-step', text: '\u203a' }));
+  prev.setAttribute('aria-label', t('gallery.previewPrev'));
+  next.setAttribute('aria-label', t('gallery.previewNext'));
+  const note = el('p', { class: 'small muted', text: t('gallery.previewLoading') });
+
+  /** @type {string[]} */ let svgs = [];
+  let at = 0;
+
+  const paint = () => {
+    if (!svgs.length) return;
+    stage.innerHTML = svgs[at];
+    counter.textContent = t('gallery.previewFace', { face: at + 1, faces: svgs.length });
+    prev.disabled = at === 0;
+    next.disabled = at === svgs.length - 1;
+  };
+  /** @param {number} to */
+  const go = (to) => {
+    at = Math.min(Math.max(to, 0), Math.max(0, svgs.length - 1));
+    paint();
+  };
+  prev.addEventListener('click', () => go(at - 1));
+  next.addEventListener('click', () => go(at + 1));
+
+  const close = el('button', { type: 'button', class: 'preview-close', text: '\u00d7' });
+  close.setAttribute('aria-label', t('gallery.previewClose'));
+  close.addEventListener('click', () => dialog.close());
+
+  dialog.append(
+    close,
+    heading,
+    el('div', { class: 'preview-frame' }, [prev, stage, next]),
+    el('div', { class: 'preview-foot' }, [counter, note]),
     el('div', { class: 'row' }, [
       el('a', { class: 'btn primary', href: `sheet.html${query}`, text: t('gallery.export') }),
       el('a', { class: 'btn', href: `customize.html${query}`, text: t('gallery.customise') }),
     ]),
   );
-  const close = el('button', { type: 'button', class: 'preview-close', text: '\u00d7' });
-  close.setAttribute('aria-label', t('gallery.previewClose'));
-  close.addEventListener('click', () => dialog.close());
-  dialog.prepend(close);
-  // Clicking the backdrop closes it, which is what everyone expects of a lightbox.
+
+  // Arrows page through the faces. Escape and the backdrop close, which is what a
+  // lightbox does.
+  dialog.addEventListener('keydown', (event) => {
+    const to = nextIndex(event.key, at, svgs.length);
+    if (to < 0) return;
+    event.preventDefault();
+    go(to);
+  });
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
   });
   dialog.addEventListener('close', () => dialog.remove());
   document.body.append(dialog);
   dialog.showModal();
+
+  faceSheet(target, source).then((sheet) => {
+    if (!dialog.isConnected) return;
+    svgs = sheet.svgs;
+    note.textContent = t('gallery.previewNote');
+    paint();
+  }).catch(() => {
+    note.textContent = t('gallery.previewFailed');
+  });
 }
 
 /**
@@ -135,7 +238,9 @@ function card(lang, packs, reader, coverage) {
   }
 
   if (thumb instanceof HTMLButtonElement) {
-    thumb.addEventListener('click', () => openPreview({ name, key, query }));
+    thumb.addEventListener('click', () => openPreview({
+      name, key, query, target: lang.bcp47, source: reader,
+    }));
   }
   return el('article', { class: 'card' }, [head, thumb, el('div', { class: 'card-actions' }, actions)]);
 }

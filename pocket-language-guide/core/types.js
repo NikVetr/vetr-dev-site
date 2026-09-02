@@ -56,6 +56,10 @@
  * @property {string} conceptId
  * @property {Partial<Record<FieldId,string>>} values
  * @property {number} weight   coverage value, used by the add/subtract solver
+ * @property {string[]} [mergedFrom]  other concepts that came out as the same
+ *   target text and were folded into this row. They are on the sheet, inside this
+ *   row's gloss -- anything asking "is this concept shown?" has to count them, or
+ *   the balance solver offers to add a phrase that is already printed.
  */
 
 /**
@@ -110,6 +114,11 @@
  * @property {Geometry} geometry
  * @property {PaperSpec} paper
  * @property {string} themeId
+ * @property {Record<string,string>} [themeColors]  overrides on the theme's own
+ *   palette, keyed as the theme files are: `ink`, `muted`, `rule`, `shade`,
+ *   `paper`, and `roles.<role>` for a section colour. Set when the reader has
+ *   picked colours of their own; `themeId` still names the theme underneath, so
+ *   everything not overridden -- type sizes, leadings, rules -- comes from it.
  * @property {'sans'|'serif'} typeface  scripts without one fall back to sans
  * @property {'full'|'low-ink'|'mono'} inkMode
  * @property {boolean} autoFaces  let the solver add or drop pairs of faces

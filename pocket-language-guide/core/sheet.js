@@ -81,6 +81,30 @@ export async function loadFontsFor(ctx, target, source, typeface = 'sans') {
 }
 
 /**
+ * A theme with the reader's own colours laid over it.
+ *
+ * Colour is the section-coding mechanism here, so it is the one part of a theme
+ * worth letting someone drive directly -- and it is also the only part that can be
+ * changed without re-measuring anything, since a hue has no width. Everything else
+ * in a theme is typography and stays where the theme put it.
+ *
+ * The cache in `ctx.theme` hands out one object per file, so this copies rather
+ * than assigning into it.
+ * @param {any} theme
+ * @param {Record<string,string>} [colors]
+ */
+function withThemeColors(theme, colors) {
+  if (!colors || !Object.keys(colors).length) return theme;
+  const roles = { ...theme.colors.roles };
+  const flat = { ...theme.colors };
+  for (const [key, value] of Object.entries(colors)) {
+    if (key.startsWith('roles.')) roles[key.slice(6)] = value;
+    else flat[key] = value;
+  }
+  return { ...theme, colors: { ...flat, roles } };
+}
+
+/**
  * Join the corpus for a pair and solve the sheet. Returns the intermediate pieces
  * too, because the studio needs the same rows for its content tree and must not
  * re-derive them -- and because forgetting to load the fonts first is exactly the
@@ -92,7 +116,7 @@ export async function loadFontsFor(ctx, target, source, typeface = 'sans') {
 export async function buildSheet(ctx, spec, edits) {
   const { corpus, measurer, registry, loadText } = ctx;
   await loadFontsFor(ctx, spec.target, spec.source, spec.typeface ?? 'sans');
-  const theme = await ctx.theme(spec.themeId);
+  const theme = withThemeColors(await ctx.theme(spec.themeId), spec.themeColors);
   const targetRows = await loadLanguage(loadText, spec.target, corpus.groups);
   const sourceRows = await loadLanguage(loadText, spec.source, corpus.groups);
   // A pair with no curated respellings is the normal case, not a failure, so do

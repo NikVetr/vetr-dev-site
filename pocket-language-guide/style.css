@@ -420,23 +420,43 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
 .flag.more:hover .flag-rest, .flag.more:focus-visible .flag-rest { display: flex; }
 
 /* A closer look at a card, without leaving the gallery or loading the solver. */
-/* The gallery lightbox. Capped at the thumbnail's own 480px rather than the 46rem
-   it started at: the pre-rendered PNG has no more detail to give, and a card blown
-   up past its pixels looks like a rendering fault rather than a preview. Someone
-   who wants to read the rows goes through to the studio, which solves live. */
+/* The gallery lightbox. It fills the window, because the faces it shows are the
+   real typeset sheet in SVG -- vector, so there is no resolution to run out of, and
+   a 7x5in card at 1200px is the first point where the rows are actually readable. */
 dialog.preview-dialog {
   border: 1px solid var(--line); border-radius: var(--radius); padding: var(--space-3);
-  max-width: 32rem; width: calc(100% - 2rem); font: inherit; color: var(--ink);
-  position: relative;
+  max-inline-size: min(96vw, 1500px); inline-size: min(96vw, 1500px);
+  max-block-size: 94vh; font: inherit; color: var(--ink);
+  position: relative; display: flex; flex-direction: column; gap: var(--space-2);
 }
 dialog.preview-dialog::backdrop { background: rgb(17 24 32 / 55%); }
-dialog.preview-dialog h2 { margin: 0 2rem var(--space-2) 0; font-size: var(--fs-1); }
-dialog.preview-dialog img {
-  display: block; width: 100%; max-width: 480px; height: auto; margin-inline: auto;
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-sm); background: var(--paper);
+dialog.preview-dialog h2 { margin: 0 2rem 0 0; font-size: var(--fs-1); }
+/* The stage keeps the card's own aspect; the arrows sit outside it so they never
+   cover a row. On a narrow screen they drop under the card instead. */
+.preview-frame {
+  display: flex; align-items: center; gap: var(--space-2); min-block-size: 0; flex: 1 1 auto;
 }
-dialog.preview-dialog p { margin: var(--space-2) 0; }
+.preview-stage {
+  flex: 1 1 auto; min-inline-size: 0; display: flex; justify-content: center;
+  border: 1px solid var(--line-soft); border-radius: var(--radius-sm); background: var(--paper);
+  overflow: hidden;
+}
+.preview-stage > img, .preview-stage > svg {
+  display: block; inline-size: 100%; block-size: auto; max-block-size: 78vh;
+  object-fit: contain;
+}
+.preview-step {
+  flex: 0 0 auto; inline-size: 2.4rem; block-size: 3.4rem; font-size: 1.5rem; line-height: 1;
+  padding: 0; border-radius: var(--radius-sm);
+}
+.preview-step:disabled { opacity: 0.35; cursor: default; }
+.preview-foot { display: flex; align-items: baseline; gap: var(--space-2); flex-wrap: wrap; }
+.preview-counter { white-space: nowrap; font-variant-numeric: tabular-nums; }
+dialog.preview-dialog p { margin: 0; }
+@media (max-width: 640px) {
+  .preview-frame { flex-wrap: wrap; }
+  .preview-stage { order: -1; flex-basis: 100%; }
+}
 .preview-close {
   position: absolute; inset-inline-end: var(--space-2); top: var(--space-2);
   border: 1px solid var(--line-soft); background: var(--surface); color: var(--muted);
@@ -464,6 +484,19 @@ dialog.preview-dialog p { margin: var(--space-2) 0; }
 }
 .numeric-box:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .numeric-unit { font-size: var(--fs--1); color: var(--muted); flex: 0 0 auto; }
+
+/* The Custom row for colours: one swatch per section role, plus the ink. Native
+   colour inputs, because every platform already has a picker better than one drawn
+   here and this is the one setting where the reader needs to see the result. */
+.swatches { flex-wrap: wrap; gap: 5px; }
+.swatch {
+  inline-size: 2rem; block-size: 1.7rem; padding: 0; cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius-sm); background: none;
+}
+.swatch::-webkit-color-swatch-wrapper { padding: 2px; }
+.swatch::-webkit-color-swatch { border: none; border-radius: 2px; }
+.swatch::-moz-color-swatch { border: none; border-radius: 2px; }
+.swatch:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
 /* Back to the gallery. Rightmost in the header, but quiet: the export button beside
    it is the loud one. */
@@ -536,7 +569,13 @@ dialog.preview-dialog p { margin: var(--space-2) 0; }
   /* 11px floor; two reserved lines so the segment boxes in a row stay even. */
   font-size: 0.7rem; line-height: 1.1; min-height: 2.2em;
   color: var(--muted); text-align: center;
-  max-width: 6.5em; overflow-wrap: anywhere;
+  /* Wide enough for the longest caption in any catalogue to sit on one line, and
+     the button grows with it -- a row of three becomes a row of two where it has
+     to. The cap used to be 6.5em with `overflow-wrap: anywhere`, which broke
+     "Romanisation" after the "o": a mid-syllable break reads as a rendering fault,
+     and it is worse than one fewer segment per row. `break-word` is the last
+     resort for a word longer than the panel. */
+  max-width: 9em; overflow-wrap: break-word;
 }
 .segment.current .segment-caption { color: var(--accent); font-weight: 600; }
 
@@ -557,8 +596,6 @@ svg.glyph .g-count {
 }
 .segment.current svg.glyph .g-col { fill: #a9c6da; }
 
-.field-toggles { display: flex; flex-direction: column; gap: 1px; }
-.field-toggles label { display: flex; gap: 0.4em; align-items: center; cursor: pointer; }
 svg.glyph .g-letter { fill: #55606b; font-weight: 700; text-anchor: middle; font-family: var(--ui); }
 svg.glyph .g-bracket { stroke: var(--accent); stroke-width: 1; fill: none; }
 

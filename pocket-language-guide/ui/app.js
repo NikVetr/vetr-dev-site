@@ -5,7 +5,7 @@
 // corpus or a CJK font; the studio loads everything.
 
 import { parseTable } from '../core/csv.js';
-import { defaultSelection, hasContent, respellOverrideFile } from '../core/pack.js';
+import { defaultSelection, hasContent, paperSpec, respellOverrideFile } from '../core/pack.js';
 import { messagesReady, t } from './i18n.js';
 import { createSheetContext, stacksFor } from '../core/sheet.js';
 import { familyFor, fontFaceCss } from '../render/fonts.js';
@@ -128,8 +128,6 @@ export function makeSpec(ctx, presets, choice) {
   const geometry = presets.geometry[geometryId];
   if (!geometry) throw new Error(`no geometry preset "${geometryId}"`);
   const paperId = choice.paper ?? 'et8550-5x7-photo-bordered';
-  const paper = ctx.corpus.paper[paperId];
-  if (!paper) throw new Error(`no paper preset "${paperId}"`);
 
   const target = ctx.corpus.languages[choice.target];
   const romanization = (target.romanizations || '').split(';').filter(Boolean)[0] ?? '';
@@ -146,14 +144,7 @@ export function makeSpec(ctx, presets, choice) {
     region,
     fieldSet: ['script', 'roman', 'gloss', 'respell', 'numeral'],
     geometry: { ...geometry },
-    paper: {
-      presetId: paperId,
-      borderless: paper.borderless === '1',
-      oversprayPct: Number(paper.overspray_pct),
-      nonprintablePt: Number(paper.nonprintable_pt),
-      minRulePt: Number(paper.min_rule_pt),
-      minSizeDelta: Number(paper.min_size_delta),
-    },
+    paper: paperSpec(ctx.corpus, paperId),
     themeId: 'latex-reference',
     typeface: 'sans',
     inkMode: 'full',

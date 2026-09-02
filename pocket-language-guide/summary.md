@@ -24,10 +24,10 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 - it takes a pair while the type would otherwise sit near its floor.
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
-is a deliberately tight layout that should not be second-guessed. On 7×5in, 114 of
-the 132 shipped pairs settle on six faces, ten on eight — Arabic mostly, which needs
-the loosest leading here — and eight on four. The reference sheets reached four by
-hand, against a bank of 413 concepts; it is 763 now, so six is the same answer at
+is a deliberately tight layout that should not be second-guessed. On 7×5in, 113 of
+the 132 shipped pairs settle on six faces, fourteen on eight — Arabic mostly, which
+needs the loosest leading here — and five on four. The reference sheets reached four
+by hand, against a bank of 413 concepts; it is 763 now, so six is the same answer at
 the new size. A credit-card sheet takes sixteen rather than printing at minimum
 size.
 
@@ -167,6 +167,14 @@ comes without a source and a date.
   gains little from "Hello (polite)". Results are a reviewable diff with a stated
   reason per item; nothing is applied without a click.
 
+  Most of what it can offer comes from the seven sections `default_on: 0` keeps off
+  the default card, so a proposal is charged for that section's heading as well as
+  the row, and accepting one row opens the section with only that row switched on.
+  Sections the *reader* turned off stay off; that was a decision. It has to apply
+  every filter `buildBlocks` applies, `applies_to` included — without that its
+  candidate set was precisely the concepts that *cannot* render on the pair, so it
+  proposed the Japanese yen on a Spanish sheet and ticking one changed nothing.
+
 Everything is deterministic — stable ordering, no randomness — so the same spec
 always produces the same sheet, and the committed packs never churn.
 
@@ -186,6 +194,12 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   language is spoken in — Windows draws no glyph for regional-indicator pairs, so
   `ui/flags.js` detects support and falls back to country-code chips rather than a
   row of letter boxes. Per-card *Save offline*.
+
+  Clicking a thumbnail opens a lightbox on the whole sheet: every face, one arrow
+  key apart, at whatever size the window allows. This is the one place the gallery
+  loads the engine, and only on the click — the committed thumbnail goes up first so
+  the dialog is never empty, then the typeset faces replace it. They are SVG, so
+  there is no resolution to run out of.
 - **`sheet.html`** — presets and export, for people who do not want the studio.
 - **`customize.html`** — the studio: format (20%) · faces (50%) · content (30%).
   Faces open as a grid, click one to focus it with the rest as a thumbnail strip.
@@ -203,10 +217,18 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
     about shape are drawn rather than described (`ui/glyphs.js`): card sizes at true
     proportions with their columns in them, faces as that many little pages, row
     spacing as bars at that spacing, ink modes showing what each gives up, entry
-    layout as a miniature of the entry. Captions stay — a 3-column A6 and a
+    layout as a miniature of the entry, and each shown field as the entry with that
+    field's own line lit. Captions stay — a 3-column A6 and a
     3-column 6×4 differ only in proportion, and nobody should have to hover to tell
     them apart. Only genuinely list-shaped choices (paper, language, romanisation,
     destination country) remain menus.
+
+    Every ladder is a set of opinions, not a set of limits, so each carries a
+    *Custom* segment: a slider paired with a number box for the single-valued ones,
+    two inch boxes for the card, and six colour swatches — the five section roles
+    plus the ink — for the palette. Custom colours ride in `spec.themeColors` while
+    `themeId` still names the theme underneath, because colour is the only part of a
+    theme that can change without re-measuring anything.
   - **`ui/handles.js`** — drag bars on the focused face for margins and the column
     gaps. Dragging shows a guide and a readout but does not re-solve, since a solve
     takes a few hundred milliseconds; geometry is committed on release. There is one
@@ -436,7 +458,7 @@ npm run vendor      # esbuild → vendor/{fontkit,pdf-lib}.esm.js  (rarely)
 npm run icons       # Lucide SVG → data/icons.json, normalised to path data
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
                     #   thumbnails only, one per pair, then indexed down to a
-                    #   fifth-bit palette: 132 pairs in 5.0MB rather than 16.4MB
+                    #   fifth-bit palette: 132 pairs in 4.9MB rather than 16.1MB
 npm run shell       # data/shell.json + the respell index + sw.js VERSION
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
 ```
@@ -508,6 +530,22 @@ istiyorum` wrong for many fills. Russian could not do the same everywhere and sa
 so: twenty-one slot rows are listed in the pack's own notes as correct for some
 fills and not others, on the grounds that a Russian hearing *«Я из Америка»*
 understands it, whereas a stilted case-proof frame would read as broken.
+
+### One word, two concepts
+
+Concepts are language-independent, so two of them can land on the same word.
+Spanish says `Buenos días` for both "hello (polite)" and "good morning", and
+`Buenas noches` for both "good evening" and "good night"; Korean answers all three
+of hello, good morning and good evening with `안녕하세요`; Chinese `有` covers both
+"have" and "there is". Printing the phrase twice reads as a mistake and costs a row
+that something else could have had.
+
+`mergeIdenticalRows` in `core/pack.js` folds them, within one block so the fold
+never crosses a section or a template — the same word under two headings is two
+different pieces of advice. Merging beats dropping one because the collapse is
+itself the lesson: **"Buenos días — Hello (polite) / Good morning"** tells a reader
+that Spanish does not make the distinction their own language does. Across the
+eleven packs it folds 32 rows, ten of them Chinese and six Korean.
 
 ### Concepts that are not universal
 
@@ -637,6 +675,15 @@ Named so nobody has to rediscover the gap:
 - **Per-row split overrides.** The drag handles cover margins and the column gap;
   dragging an individual row's internal divider would need per-row overrides
   threaded through `atoms.js`.
+- **Pre-rendered faces as shipped assets.** The gallery's lightbox typesets the
+  pair when a reader opens it, rather than reading faces off disk. Committing them
+  was the other option and the numbers ruled it out: a face is ~120KB of SVG or
+  ~1.8MB of `LayoutPlan` JSON, and 132 ordered pairs at six to eight faces each is
+  about 90MB in the working tree either way -- for a preview of a sheet that solves
+  in about a second. What is committed is the 480px first-face thumbnail, which
+  goes up immediately so the dialog is never empty while the rest is typeset. The
+  faces it then shows are vector, so they are sharper than any PNG that could have
+  been shipped.
 - **A reviewer queue.** `content/CONTRIBUTING.md` defines the confidence tiers and
   the validator enforces the safety gate, but there is no review UI.
 
@@ -647,6 +694,16 @@ Three failure modes here were silent rather than loud, and the fixes are load-be
 - **fontkit's subsetter drops glyphs carrying TrueType hinting instructions**, so
   the exported PDF lost most of its Latin while CJK survived. `subset_fonts.py`
   strips hinting, which is irrelevant at print resolution anyway.
+- **`display` on a class beats the user agent's `[hidden]`.** The Custom row under
+  each setting ladder was never actually hidden: `.numeric-custom { display: flex }`
+  outranks `[hidden] { display: none }`, so a slider sat under every ladder showing a
+  value that was not in effect. `.banner[hidden]` and `.diff[hidden]` already carried
+  the rule; that one was missed, which is the shape of this bug -- it is invisible
+  until someone reads the panel expecting the ladder alone.
+- **A glyph drawn flush to its viewBox loses half its stroke.** `pageGlyph` scales
+  the page to fill a 30-unit box, so the 7x5in card's rect sat exactly on the edge
+  and its 0.8pt border was clipped down the left and right. `frame()` now bleeds the
+  viewBox by 0.6 units, which fixes every glyph rather than that one.
 - **fontkit's subsetter also corrupts glyph data from a long-`loca` face.** It
   copies glyph buffers verbatim and then, if the subset it produced is small enough
   for the short `loca` format, halves every offset to store it -- and fontTools

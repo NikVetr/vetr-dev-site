@@ -150,7 +150,12 @@ async function main() {
     $('warnings').replaceChildren(...plan.warnings.map(renderWarning));
 
     const total = Object.keys(ctx.corpus.concepts).length;
-    const shown = blocks.reduce((n, b) => n + (b.rows?.length ?? 0), 0);
+    // Concepts, not rows: two that came out as the same target text share one row,
+    // and both are on the card. Counting rows made the number drop when a pack got
+    // *better* at collapsing a distinction its language does not make.
+    const shown = blocks.reduce((n, b) => n + (b.rows ?? []).reduce(
+      (k, r) => k + 1 + (r.mergedFrom?.length ?? 0), 0,
+    ), 0);
     $('counts').textContent = t('studio.counts', { included: shown, total });
 
     // Rebuilt only when its shape changes -- a term added or removed. Otherwise
@@ -382,13 +387,34 @@ async function main() {
       apply.className = 'primary';
       apply.textContent = t('studio.addTicked');
       apply.addEventListener('click', () => {
+        const taken = new Set(boxes
+          .filter((box) => box.checked && box.dataset.concept)
+          .map((box) => /** @type {string} */ (box.dataset.concept)));
         /** @type {Record<string,boolean>} */ const items = {};
-        for (const box of boxes) {
-          if (box.checked && box.dataset.concept) items[box.dataset.concept] = true;
+        /** @type {Record<string,boolean>} */ const sections = {};
+        for (const add of diff.adds) {
+          if (!taken.has(add.conceptId)) continue;
+          items[add.conceptId] = true;
+          sections[add.sectionId] = true;
+        }
+        // Most proposals come from a section the default card hides, and switching a
+        // section on brings all of its items with it -- so accepting one row from
+        // "With children" would quietly add twelve. Turn the rest of that section
+        // off explicitly, leaving only what was ticked.
+        for (const sectionId of Object.keys(sections)) {
+          if (spec.selection.sections[sectionId] !== false) continue;
+          const section = ctx.corpus.sectionById[sectionId];
+          for (const concept of ctx.corpus.conceptsByGroup[section.group] ?? []) {
+            if (concept.section_id !== sectionId) continue;
+            if (!items[concept.concept_id]) items[concept.concept_id] = false;
+          }
         }
         spec = {
           ...spec,
-          selection: { ...spec.selection, items: { ...spec.selection.items, ...items } },
+          selection: {
+            sections: { ...spec.selection.sections, ...sections },
+            items: { ...spec.selection.items, ...items },
+          },
         };
         panel.hidden = true;
         schedule();

@@ -19,10 +19,18 @@ function svgEl(tag, attrs = {}) {
   return node;
 }
 
+/**
+ * Half the widest stroke any glyph draws, so the viewBox can bleed by that much.
+ * A rect drawn flush to the box edge is centred on the path: without the bleed its
+ * outer half fell outside the viewBox and the 7x5in card lost its right border.
+ */
+const BLEED = 0.6;
+
 /** @param {number} w @param {number} h */
 function frame(w, h) {
   const svg = svgEl('svg', {
-    viewBox: `0 0 ${w} ${h}`, width: w, height: h, 'aria-hidden': 'true', class: 'glyph',
+    viewBox: `${-BLEED} ${-BLEED} ${w + BLEED * 2} ${h + BLEED * 2}`,
+    width: w, height: h, 'aria-hidden': 'true', class: 'glyph',
   });
   return svg;
 }
@@ -304,6 +312,120 @@ export function cutGlyph(flip) {
 }
 
 /**
+ * Which cell of an entry a field occupies, so the "columns shown" checkboxes can
+ * say where each one lands rather than only naming it.
+ *
+ * The two stacks match `core/solve/arrange.js`: the target language's own writing
+ * and its pronunciation run down the left, the reader's language answers down the
+ * right, and the accent rule marks the left edge as it does on the sheet. The
+ * chosen field is drawn in the accent colour; the rest stay faint, so the glyph
+ * doubles as a picture of the whole entry.
+ */
+const FIELD_ROWS = {
+  script: [0, 0], script_alt: [0, 1], roman: [0, 2], ipa: [0, 3],
+  gloss: [1, 0], literal: [1, 1], respell: [1, 2],
+};
+
+/** @param {keyof typeof FIELD_ROWS} field */
+export function fieldGlyph(field) {
+  const box = 30;
+  const svg = frame(box, box);
+  const [side, row] = FIELD_ROWS[field];
+  // The accent rule down the left edge of every entry on the sheet.
+  svg.append(svgEl('rect', { x: 0.8, y: 4, width: 1.5, height: 22, class: 'g-ink faint' }));
+  for (const [name, [s, r]] of Object.entries(FIELD_ROWS)) {
+    const on = name === field;
+    const y = 5.5 + r * 6;
+    // The first line of each stack is the one set in bold on the sheet.
+    const thick = r === 0 ? 3.2 : 2.4;
+    svg.append(svgEl('rect', {
+      x: s === 0 ? 4 : 15.5,
+      y: on ? y : y + (3.2 - thick) / 2,
+      width: 10.5,
+      height: on ? 3.4 : thick,
+      rx: 0.8,
+      class: on ? 'g-accent' : 'g-ink faint',
+    }));
+  }
+  // A tick on the chosen line's own side, so the glyph reads at a glance.
+  svg.append(svgEl('rect', {
+    x: side === 0 ? 4 : 15.5, y: 5.5 + row * 6 - 1.4, width: 10.5, height: 0.7,
+    rx: 0.35, class: 'g-accent',
+  }));
+  return svg;
+}
+
+/**
+ * One glyph button: the icon, the caption underneath, and an optional tooltip.
+ * Shared by the radio group and the multi-select group below, which differ only in
+ * their ARIA role and in whether choosing one clears the others.
+ * @param {{caption:string, glyph:SVGElement, title?:string}} option
+ * @param {string} role
+ */
+function glyphButton(option, role) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'segment';
+  button.setAttribute('role', role);
+  if (option.title) button.title = option.title;
+  button.append(option.glyph);
+  const caption = document.createElement('span');
+  caption.className = 'segment-caption';
+  caption.textContent = option.caption;
+  button.append(caption);
+  return button;
+}
+
+/**
+ * A group of glyph buttons where any number can be on. Used for the fields an
+ * entry shows, which were a column of bare checkboxes -- the one control in the
+ * panel that named a thing instead of drawing it.
+ * @template T
+ * @param {Object} config
+ * @param {string} config.label
+ * @param {{value:T, caption:string, glyph:SVGElement, title?:string}[]} config.options
+ * @param {T[]} config.values
+ * @param {(values:T[])=>void} config.onChange
+ */
+export function toggles({ label, options, values, onChange }) {
+  const group = document.createElement('div');
+  group.className = 'segmented';
+  group.setAttribute('role', 'group');
+  group.setAttribute('aria-label', label);
+
+  /** @type {Set<T>} */ let on = new Set(values);
+  /** @type {{value:T, button:HTMLButtonElement}[]} */ const items = [];
+  for (const option of options) {
+    const button = glyphButton(option, 'checkbox');
+    button.addEventListener('click', () => {
+      if (on.has(option.value)) on.delete(option.value);
+      else on.add(option.value);
+      paint();
+      onChange(options.filter((o) => on.has(o.value)).map((o) => o.value));
+    });
+    items.push({ value: option.value, button });
+    group.append(button);
+  }
+
+  function paint() {
+    for (const { value, button } of items) {
+      button.classList.toggle('current', on.has(value));
+      button.setAttribute('aria-checked', String(on.has(value)));
+    }
+  }
+  paint();
+
+  return {
+    group,
+    /** @param {T[]} next */
+    select(next) {
+      on = new Set(next);
+      paint();
+    },
+  };
+}
+
+/**
  * A radio group of glyph buttons. Returns the group element plus a setter so the
  * caller can reflect state changes made elsewhere.
  * @template T
@@ -321,16 +443,7 @@ export function segmented({ label, options, value, onChange }) {
 
   /** @type {{value:T, button:HTMLButtonElement}[]} */ const items = [];
   for (const option of options) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'segment';
-    button.setAttribute('role', 'radio');
-    if (option.title) button.title = option.title;
-    button.append(option.glyph);
-    const caption = document.createElement('span');
-    caption.className = 'segment-caption';
-    caption.textContent = option.caption;
-    button.append(caption);
+    const button = glyphButton(option, 'radio');
     button.addEventListener('click', () => {
       select(option.value);
       onChange(option.value);

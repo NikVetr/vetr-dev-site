@@ -333,7 +333,16 @@ export function layout(input) {
     });
   }
 
-  const loose = looseness.filter((r) => r > box.height * LOOSE_FRACTION).length;
+  // The last column with anything in it is where the content ran out, and every
+  // column after it is empty. Neither is a layout failure -- a sheet's text does not
+  // conveniently end on a column boundary -- so they are excluded. What remains is
+  // the case worth reporting: a column in the middle that the breaker could not
+  // fill, because the next block would not fit in what was left.
+  const lastUsed = looseness.reduce(
+    (last, _, bin) => ((broken.columns[bin] ?? []).length ? bin : last), -1,
+  );
+  const loose = looseness
+    .filter((r, bin) => bin < lastUsed && r > box.height * LOOSE_FRACTION).length;
   if (loose && atoms.length) {
     warnings.push({
       code: 'loose-columns',

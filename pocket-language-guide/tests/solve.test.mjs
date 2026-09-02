@@ -32,8 +32,24 @@ const atoms = buildAtoms({
 });
 
 test('content box reproduces the reference geometry', () => {
-  assert.ok(Math.abs(box.colWidth - 119.66) < 0.01, `colWidth ${box.colWidth}`);
-  assert.ok(Math.abs(box.height - 347.76) < 0.01, `height ${box.height}`);
+  // The reference sheet was printed borderless, with the margins in its own
+  // preamble and nothing taken off for a printer's dead zone. That is what these
+  // two numbers are: 1.662in columns and the full height between its margins.
+  // Asserted against a zero-inset paper rather than whatever the app defaults to,
+  // because the default is a safety decision -- it currently keeps 8.5pt clear of
+  // the ET-8550's bordered edge -- and this test is about the geometry maths.
+  const bare = { ...spec.paper, borderless: true, oversprayPct: 0, nonprintablePt: 0 };
+  const reference = contentBox(spec.geometry, bare);
+  assert.ok(Math.abs(reference.colWidth - 119.66) < 0.01, `colWidth ${reference.colWidth}`);
+  assert.ok(Math.abs(reference.height - 347.76) < 0.01, `height ${reference.height}`);
+});
+
+test('the shipped default keeps clear of the printer edge', () => {
+  // And the default the app actually renders insets by that dead zone, which is
+  // the difference the gallery thumbnails used to get wrong.
+  assert.equal(spec.paper.presetId, 'et8550-5x7-photo-bordered');
+  assert.ok(spec.paper.nonprintablePt > 0, 'the bordered preset has a dead zone');
+  assert.ok(box.height < 347.76, `height ${box.height} should be inset`);
 });
 
 test('no heading can be stranded: each is fused with the rows it introduces', () => {

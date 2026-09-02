@@ -75,7 +75,12 @@ function deliver(files, name) {
 
 /** @typedef {{name:string, bytes:Uint8Array, type:string}} ZipEntry */
 
-/** SVG strings for each face, ready to draw or save. @param {ExportInput} input */
+/**
+ * SVG strings for each face, ready to draw or save. Typed to the three things it
+ * reads rather than to a whole `ExportInput`, because the gallery's lightbox draws
+ * faces without ever intending to save a file.
+ * @param {{plan:import('../core/types.js').LayoutPlan, manifest:any, icons:any, [k:string]:any}} input
+ */
 export function faceSvgs({ plan, manifest, icons }) {
   return planToSvg(plan, { faces: cssFaces(manifest), icons });
 }

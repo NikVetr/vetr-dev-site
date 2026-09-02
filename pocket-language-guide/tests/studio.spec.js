@@ -199,6 +199,51 @@ test.describe('studio', () => {
 // nothing about why. Which languages those are comes from the registry rather than a
 // list here, because the list was wrong within a day of being written twice over --
 // first Spanish, then Portuguese, each named as untranslated and then translated.
+test('Custom takes a card size and a palette of your own', async ({ page }) => {
+  await page.goto(STUDIO);
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const before = await faceCount(page);
+
+  // Card: the boxes stay shut until Custom is chosen, then they drive the geometry.
+  const cardField = page.locator('.panel-field').filter({ hasText: 'Card' }).first();
+  await expect(cardField.locator('.numeric-custom')).toBeHidden();
+  await cardField.getByRole('radio', { name: 'Custom' }).click();
+  const boxes = cardField.locator('.numeric-box');
+  await expect(cardField.locator('.numeric-custom')).toBeVisible();
+  // Pre-filled from the card that is already there, so nothing jumps.
+  await expect(boxes.first()).toHaveValue('7');
+  await expect(boxes.nth(1)).toHaveValue('5');
+  await boxes.first().fill('4');
+  await boxes.first().dispatchEvent('change');
+  await boxes.nth(1).fill('3');
+  await boxes.nth(1).dispatchEvent('change');
+  // A smaller card needs more faces for the same content, which is the proof the
+  // number reached the solver rather than only the input.
+  await expect.poll(() => faceCount(page), { timeout: 120_000 })
+    .toBeGreaterThan(before);
+
+  // Colours: six swatches, and changing one repaints the sheet without touching
+  // the theme's typography.
+  const colourField = page.locator('.panel-field').filter({ hasText: 'Colours' }).first();
+  await expect(colourField.locator('.swatches')).toBeHidden();
+  await colourField.getByRole('radio', { name: 'Custom' }).click();
+  await expect(colourField.locator('.swatches')).toBeVisible();
+  await expect(colourField.locator('.swatch')).toHaveCount(6);
+  /** How many marks on the focused face are painted in a given colour. */
+  const painted = (/** @type {string} */ hex) => page.evaluate((want) => [
+    ...document.querySelectorAll('.face.focused svg rect'),
+  ].filter((r) => (r.getAttribute('fill') ?? '').toLowerCase() === want).length, hex);
+
+  const communication = await painted('#0b67a3');
+  expect(communication).toBeGreaterThan(0);
+  await colourField.locator('.swatch').first().evaluate((node) => {
+    /** @type {HTMLInputElement} */ (node).value = '#008080';
+    node.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  await expect.poll(() => painted('#008080'), { timeout: 120_000 }).toBe(communication);
+  expect(await painted('#0b67a3')).toBe(0);
+});
+
 test('the gloss menu offers only languages with rows on file', async ({ page }) => {
   await page.goto('/customize.html?target=zh-Hans&source=en');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });

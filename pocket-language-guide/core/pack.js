@@ -98,6 +98,31 @@ export function appliesTo(concept, target) {
 }
 
 /**
+ * The printer-and-paper half of a spec, from the registry row that describes it.
+ *
+ * One function because three places were building this by hand and one of them --
+ * the dev scripts' `referenceSpec` -- had the printable-area inset and the minimum
+ * type bump hardcoded to zero. That made the committed gallery thumbnails a
+ * slightly different sheet from the one the app renders for the same pair, which
+ * showed the moment the lightbox began typesetting the faces for real.
+ * @param {{paper:Record<string,Record<string,string>>}} corpus
+ * @param {string} presetId
+ * @returns {import('./types.js').PaperSpec}
+ */
+export function paperSpec(corpus, presetId) {
+  const paper = corpus.paper[presetId];
+  if (!paper) throw new Error(`no paper preset "${presetId}"`);
+  return {
+    presetId,
+    borderless: paper.borderless === '1',
+    oversprayPct: Number(paper.overspray_pct),
+    nonprintablePt: Number(paper.nonprintable_pt),
+    minRulePt: Number(paper.min_rule_pt),
+    minSizeDelta: Number(paper.min_size_delta),
+  };
+}
+
+/**
  * Whether a language has enough rows to render a sheet from. A handful of stray
  * rows is not a language pack, so this asks for a real fraction of the bank.
  *
@@ -324,7 +349,51 @@ export function buildBlocks({
       ));
     }
   }
+  for (const block of blocks) mergeIdenticalRows(block);
   return blocks;
+}
+
+/**
+ * Fold together rows whose target text came out the same.
+ *
+ * Concepts are language-independent, so two of them can land on one word: Spanish
+ * says `Buenos días` for both "hello (polite)" and "good morning", and `Buenas
+ * noches` for both "good evening" and "good night". Printing the same phrase twice
+ * on a pocket card is worse than useless -- it reads as a mistake, and it costs a
+ * row that something else could have had.
+ *
+ * Merging is better than dropping one, because the collapse is itself the lesson:
+ * "Buenos días — Hello (polite) / Good morning" tells a reader that Spanish does
+ * not make the distinction their own language does. The first row keeps its
+ * pronunciation and its concept id; only the gloss grows.
+ *
+ * Within one block, so the fold never crosses a section or a template: the same
+ * word under two different headings is two different pieces of advice.
+ * @param {import('./types.js').Block} block
+ */
+function mergeIdenticalRows(block) {
+  if (block.kind !== 'items' || !block.rows?.length) return;
+  /** @type {Map<string, import('./types.js').ItemRow>} */ const first = new Map();
+  /** @type {import('./types.js').ItemRow[]} */ const kept = [];
+  for (const row of block.rows) {
+    const key = (row.values.script ?? '').trim();
+    const held = key ? first.get(key) : undefined;
+    if (!held) {
+      if (key) first.set(key, row);
+      kept.push(row);
+      continue;
+    }
+    const glosses = new Set(
+      [held.values.gloss ?? '', row.values.gloss ?? '']
+        .flatMap((g) => g.split(' / ')).map((g) => g.trim()).filter(Boolean),
+    );
+    const mirrored = held.values.numeral === held.values.gloss;
+    held.values.gloss = [...glosses].join(' / ');
+    if (mirrored) held.values.numeral = held.values.gloss;
+    held.weight = Math.max(held.weight, row.weight);
+    held.mergedFrom = [...(held.mergedFrom ?? []), row.conceptId];
+  }
+  block.rows = kept;
 }
 
 /**
