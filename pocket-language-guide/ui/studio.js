@@ -213,7 +213,13 @@ async function main() {
       });
     }
     addTerm.sync();
-    format.sync(spec, plan.geometry.faces);
+    // The pair's own cells go with it, so the column toggles can draw the words
+    // they control rather than a shape standing in for them.
+    format.sync(spec, plan.geometry.faces, {
+      targetRows: built.targetRows,
+      sourceRows: built.sourceRows,
+      respell: built.respell,
+    });
     renderCanvas();
   }
 

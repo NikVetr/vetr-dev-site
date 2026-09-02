@@ -124,9 +124,34 @@ test.describe('gallery', () => {
     await expect(page.locator('#reader .lang-picker-button')).toHaveText(learning ?? '');
   });
 
+  test('the flag grid is two rows whatever the language, and shows all six', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('.card').first()).toBeVisible();
+    // Six is what the widest languages need: French, Spanish and Arabic are each
+    // spoken in exactly six of the registry's countries, and a grid two columns
+    // wide hid three of them behind a `+3`. The column count follows the cell
+    // count so the block stays two rows tall -- which is the constraint that
+    // matters, because a third row would make one card taller than its neighbours.
+    const heights = await page.evaluate(() => [...new Set(
+      [...document.querySelectorAll('.card-head')].map((c) => Math.round(c.getBoundingClientRect().height)),
+    )]);
+    expect(heights).toHaveLength(1);
+
+    const french = page.locator('.card').filter({ hasText: 'Français' }).first();
+    await expect(french.locator('.flags > .flag')).toHaveCount(6);
+    await expect(french.locator('.flag.more')).toHaveCount(0);
+    expect(await french.locator('.flags').evaluate((n) => n.style.getPropertyValue('--flag-cols')))
+      .toBe('3');
+  });
+
   test('the flag overflow shows the flags it stands for', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('.card').first()).toBeVisible();
+    // The grid holds six flags now, so only English overflows -- and English is
+    // the default reader, which is never in its own grid. So the reader moves
+    // first. This is the same trap as the language with no pack: raising the cap
+    // left the overflow state real and untested.
+    await pickReader(page, 'Français');
     const more = page.locator('.flag.more').first();
     const rest = more.locator('.flag-rest');
     await expect(rest).toBeHidden();

@@ -319,41 +319,109 @@ export function cutGlyph(flip) {
  *
  * The two stacks match `core/solve/arrange.js`: the target language's own writing
  * and its pronunciation run down the left, the reader's language answers down the
- * right, and the accent rule marks the left edge as it does on the sheet. The
- * chosen field is drawn in the accent colour; the rest stay faint, so the glyph
- * doubles as a picture of the whole entry.
+ * right, and the accent rule marks the left edge as it does on the sheet.
  */
 const FIELD_ROWS = {
   script: [0, 0], script_alt: [0, 1], roman: [0, 2], ipa: [0, 3],
   gloss: [1, 0], literal: [1, 1], respell: [1, 2],
 };
 
-/** @param {keyof typeof FIELD_ROWS} field */
-export function fieldGlyph(field) {
-  const box = 30;
-  const svg = frame(box, box);
+/**
+ * One real entry from the pair being edited, for the column glyphs to draw.
+ * @typedef {Object} FieldSample
+ * @property {Partial<Record<string,string>>} values  field id -> that row's own cell
+ * @property {string} targetFamily  CSS family for the target's script
+ * @property {string} sourceFamily  CSS family for the reader's script
+ * @property {string} latinFamily   romanisation and IPA are Latin either way
+ */
+
+/**
+ * Which face draws each field, mirroring `FIELD_SIDE` in `core/fonts.js`. It is
+ * not the same as which *stack* of the entry a field sits in: romanisation runs
+ * down the target's side of the row and is set in Latin regardless.
+ */
+const FIELD_FACE = {
+  script: 'target', script_alt: 'target', literal: 'target',
+  roman: 'latin', ipa: 'latin',
+  gloss: 'source', respell: 'source',
+};
+
+const FIELD_W = 86;
+const FIELD_H = 34;
+
+/**
+ * A column toggle, drawn as the entry it controls with that column's own words in
+ * it.
+ *
+ * These were abstract bars, and a picture of where a column lands says less than
+ * the column's own text: someone deciding whether to print romanisation wants to
+ * see the romanisation, in the face it will be set in. So the chosen field is
+ * drawn from a real row of the current pair and the other six stay as faint rules,
+ * which keeps the "where does this land" reading the bars had.
+ *
+ * A field the corpus has nothing for draws an empty dashed rule instead of text.
+ * That is the honest answer and the one nothing else in the interface gave: the
+ * `ipa` column is empty in every language, and its toggle looked exactly as
+ * substantial as the ones that work.
+ *
+ * @param {keyof typeof FIELD_ROWS} field
+ * @param {FieldSample} [sample]
+ */
+export function fieldGlyph(field, sample) {
+  const svg = frame(FIELD_W, FIELD_H);
   const [side, row] = FIELD_ROWS[field];
+  const colW = (FIELD_W - 10) / 2 - 2;
+  const left = side === 0 ? 5 : FIELD_W - 3 - colW;
+  /** @param {number} r */
+  const lineY = (r) => 7 + r * 7;
+
   // The accent rule down the left edge of every entry on the sheet.
-  svg.append(svgEl('rect', { x: 0.8, y: 4, width: 1.5, height: 22, class: 'g-ink faint' }));
+  svg.append(svgEl('rect', { x: 1, y: 3, width: 1.6, height: FIELD_H - 6, class: 'g-ink faint' }));
+
+  // Every other line as a rule, so the glyph still reads as a whole entry.
   for (const [name, [s, r]] of Object.entries(FIELD_ROWS)) {
-    const on = name === field;
-    const y = 5.5 + r * 6;
-    // The first line of each stack is the one set in bold on the sheet.
-    const thick = r === 0 ? 3.2 : 2.4;
+    if (name === field) continue;
+    const w = colW * (r === 0 ? 1 : 0.72);
     svg.append(svgEl('rect', {
-      x: s === 0 ? 4 : 15.5,
-      y: on ? y : y + (3.2 - thick) / 2,
-      width: 10.5,
-      height: on ? 3.4 : thick,
-      rx: 0.8,
-      class: on ? 'g-accent' : 'g-ink faint',
+      x: s === 0 ? 5 : FIELD_W - 3 - w,
+      y: lineY(r), width: w, height: r === 0 ? 2.6 : 1.9,
+      rx: 0.8, class: 'g-ink faint',
     }));
   }
-  // A tick on the chosen line's own side, so the glyph reads at a glance.
-  svg.append(svgEl('rect', {
-    x: side === 0 ? 4 : 15.5, y: 5.5 + row * 6 - 1.4, width: 10.5, height: 0.7,
-    rx: 0.35, class: 'g-accent',
-  }));
+
+  const text = (sample?.values?.[field] ?? '').trim();
+  if (!text) {
+    const w = colW * 0.72;
+    svg.append(svgEl('line', {
+      x1: side === 0 ? 5 : FIELD_W - 3 - w,
+      x2: side === 0 ? 5 + w : FIELD_W - 3,
+      y1: lineY(row) + 1, y2: lineY(row) + 1,
+      class: 'g-accent-line', 'stroke-dasharray': '2.2 1.8',
+    }));
+    return svg;
+  }
+
+  // Clipped to its own column, so a long cell cannot spill into the other stack.
+  const clipId = `fg-${field}`;
+  const clip = svgEl('clipPath', { id: clipId });
+  clip.append(svgEl('rect', { x: left, y: 0, width: colW, height: FIELD_H }));
+  svg.append(clip);
+
+  const node = svgEl('text', {
+    x: side === 0 ? left : left + colW,
+    y: lineY(row) + (row === 0 ? 6.4 : 5.6),
+    'font-size': row === 0 ? 8.2 : 7,
+    'font-family': {
+      target: sample?.targetFamily, latin: sample?.latinFamily, source: sample?.sourceFamily,
+    }[FIELD_FACE[field]] ?? 'inherit',
+    'font-weight': row === 0 ? '700' : '400',
+    'font-style': field === 'roman' || field === 'respell' ? 'italic' : 'normal',
+    'text-anchor': side === 0 ? 'start' : 'end',
+    'clip-path': `url(#${clipId})`,
+    class: 'g-accent-text',
+  });
+  node.textContent = text;
+  svg.append(node);
   return svg;
 }
 

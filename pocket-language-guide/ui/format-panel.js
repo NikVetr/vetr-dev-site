@@ -111,6 +111,71 @@ function el(tag, attrs = {}, kids = []) {
 }
 
 /**
+ * The sample the column toggles draw, values plus the face each side is set in.
+ * @param {Partial<Record<string,string>>} values
+ * @param {import('../core/types.js').SheetSpec} [spec]
+ * @param {PanelInput['corpus']} [corpus]
+ * @returns {import('./glyphs.js').FieldSample}
+ */
+function fieldSample(values, spec, corpus) {
+  const stackOf = (/** @type {string} */ code) => {
+    const lang = corpus && code ? corpus.languages[code] : null;
+    return lang && corpus ? familyFor(corpus.scripts[lang.script].font_stack) : 'inherit';
+  };
+  return {
+    values,
+    targetFamily: stackOf(spec?.target ?? ''),
+    sourceFamily: stackOf(spec?.source ?? ''),
+    latinFamily: familyFor('latin'),
+  };
+}
+
+/**
+ * One real entry from the current pair, for the column toggles to draw.
+ *
+ * Chosen rather than named outright, so a pack that renames a concept cannot
+ * silently lose the sample. The glyph gives each stack about 40pt, so the row that
+ * reads best there is a short one -- but shortness alone picked a *numeral*, which
+ * fills three columns and illustrates none of them. So the score prefers the row
+ * that fills the most columns first and only then the shortest, which lands on a
+ * greeting in every language checked.
+ *
+ * @param {Record<string,Record<string,string>>} targetRows
+ * @param {Record<string,Record<string,string>>} sourceRows
+ * @param {Record<string,string>} respell
+ * @param {import('../core/types.js').SheetSpec} spec
+ * @returns {Partial<Record<string,string>>}
+ */
+function sampleValues(targetRows, sourceRows, respell, spec) {
+  /** @type {Partial<Record<string,string>>} */ let best = {};
+  let bestScore = -Infinity;
+  for (const [id, target] of Object.entries(targetRows).sort(([a], [b]) => (a < b ? -1 : 1))) {
+    const source = sourceRows[id];
+    const text = (target.text ?? '').trim();
+    const gloss = (source?.text ?? '').trim();
+    // A slot is drawn as a rule on the sheet, so a row with one is a poor picture
+    // of a column.
+    if (!text || !gloss || text.includes('{}') || gloss.includes('{}')) continue;
+    const values = {
+      script: text,
+      script_alt: (target.text_alt ?? '').trim(),
+      roman: (target[`romanization_${spec.romanization}`] ?? '').trim(),
+      ipa: (target.ipa ?? '').trim(),
+      gloss,
+      literal: (target.literal ?? '').trim(),
+      respell: (respell[id] ?? '').trim(),
+    };
+    const longest = Math.max(...Object.values(values).map((v) => v.length));
+    if (longest > 18) continue;
+    const score = Object.values(values).filter(Boolean).length * 100 - longest;
+    if (score <= bestScore) continue;
+    bestScore = score;
+    best = values;
+  }
+  return best;
+}
+
+/**
  * @typedef {Object} PanelInput
  * @property {HTMLElement} root
  * @property {import('../core/types.js').SheetSpec} spec
@@ -486,14 +551,21 @@ export function createFormatPanel(input) {
 
   // A column of bare checkboxes was the one control here that named a thing instead
   // of drawing it, which is odd for a setting about where text lands. Each glyph is
-  // the entry itself with that field's line lit.
+  // the entry itself with that field's own text in it, taken from a real row of the
+  // pair being edited -- so choosing whether to print romanisation shows you
+  // `xiexie` in the face it will be set in, and a column the corpus has nothing for
+  // shows an empty rule instead.
+  /** @type {import('./glyphs.js').FieldSample} */
+  let sample = fieldSample({});
+  const fieldGlyphs = () => Object.keys(FIELD_LABEL_KEYS)
+    .map((field) => fieldGlyph(/** @type {any} */ (field), sample));
   const fieldSet = toggles({
     label: t('format.columnsShown'),
-    options: Object.entries(FIELD_LABEL_KEYS).map(([field, labelKey]) => ({
+    options: Object.entries(FIELD_LABEL_KEYS).map(([field, labelKey], i) => ({
       value: /** @type {import('../core/types.js').FieldId} */ (field),
       caption: t(labelKey),
       title: t(labelKey),
-      glyph: fieldGlyph(/** @type {any} */ (field)),
+      glyph: fieldGlyphs()[i],
     })),
     values: spec.fieldSet.filter((f) => f !== 'numeral'),
     // `numeral` is the same source-language cell as the gloss, so it rides along.
@@ -523,9 +595,18 @@ export function createFormatPanel(input) {
     /**
      * @param {import('../core/types.js').SheetSpec} next
      * @param {number} [resolvedFaces] what auto settled on, for the caption
+     * @param {{targetRows:Record<string,Record<string,string>>,
+     *          sourceRows:Record<string,Record<string,string>>,
+     *          respell:Record<string,string>}} [rows] the pair's own cells, so the
+     *   column toggles can draw the words they control rather than a shape
      */
-    sync(next, resolvedFaces) {
+    sync(next, resolvedFaces, rows) {
       spec = next;
+      if (rows) {
+        sample = fieldSample(
+          sampleValues(rows.targetRows, rows.sourceRows, rows.respell, next), next, corpus,
+        );
+      }
       size.select(presetOf());
       cardCustom.hidden = presetOf() !== '';
       cardW.set(next.geometry.pageW);
@@ -558,6 +639,7 @@ export function createFormatPanel(input) {
       redrawGlyphs(arrangement.group, ARRANGEMENTS.map(
         (a) => itemGlyph(arrangementShape(a.id, next.fieldSet)),
       ));
+      redrawGlyphs(fieldSet.group, fieldGlyphs());
       const palette = next.themeColors
         ? COLOUR_KEYS.filter((c) => c.key.startsWith('roles.'))
           .map((c) => next.themeColors?.[c.key] ?? '')

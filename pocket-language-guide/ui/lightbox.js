@@ -313,11 +313,18 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     dialog.remove();
   });
 
+  // The card and the foot share a column so the strip and the two buttons are
+  // exactly as wide as the sheet above them. The card's width is derived from its
+  // own height and aspect, so nothing else can state it: the column has to take
+  // it from the card.
   dialog.append(
     close,
-    el('div', { class: 'lightbox-pair' }, [sourcePicker.element, swap, targetPicker.element]),
-    card,
-    foot,
+    el('div', { class: 'lightbox-pair' }, [
+      el('span', { class: 'pair-side start' }, [sourcePicker.element]),
+      swap,
+      el('span', { class: 'pair-side end' }, [targetPicker.element]),
+    ]),
+    el('div', { class: 'lightbox-stack' }, [card, foot]),
   );
   face.append(thumbImage());
   document.body.append(dialog);

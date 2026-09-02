@@ -50,7 +50,15 @@ export function regionRow(regions, opts = {}) {
   if (!codes.length) return null;
   // A cap on cells, not on flags: the overflow chip occupies one, so the grid is
   // never taller than the two lines of title it sits beside.
-  const max = opts.max ?? 4;
+  //
+  // Six, not four, because six is what the widest languages need: French, Spanish
+  // and Arabic are each spoken in exactly six of the registry's countries, and
+  // showing three of them behind a `+3` hid half the answer to fit a grid two
+  // columns wide. The grid takes its column count from the cell count instead, so
+  // it stays two rows tall whether that is one column or three -- which is the
+  // constraint that actually matters, since the header beside it is two lines of
+  // title. Only English overflows now, at eight.
+  const max = opts.max ?? 6;
   const shown = codes.length > max ? codes.slice(0, max - 1) : codes;
 
   const row = document.createElement('span');
@@ -89,5 +97,8 @@ export function regionRow(regions, opts = {}) {
     more.append(popover);
     row.append(more);
   }
+  // Two rows, always: the column count follows the cells so the block matches the
+  // two lines of title beside it whatever the language.
+  row.style.setProperty('--flag-cols', String(Math.min(3, Math.ceil((shown.length + (rest.length ? 1 : 0)) / 2))));
   return row;
 }
