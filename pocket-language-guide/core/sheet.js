@@ -8,7 +8,8 @@
 import { createFontRegistry } from './fonts.js';
 import { createMeasurer } from './measure.js';
 import {
-  loadCorpus, loadLanguage, loadRespellOverrides, loadSectionTitles, loadEmergencyLabels, buildBlocks,
+  loadCorpus, loadLanguage, loadRespellOverrides, loadSectionTitles, loadEmergencyLabels,
+  loadLanguageNames, fillLanguageSlots, buildBlocks,
 } from './pack.js';
 import { layout } from './solve/index.js';
 
@@ -127,8 +128,20 @@ export async function buildSheet(ctx, spec, edits) {
   const { corpus, measurer, registry, loadText } = ctx;
   await loadFontsFor(ctx, spec.target, spec.source, spec.typeface ?? 'sans');
   const theme = withThemeColors(await ctx.theme(spec.themeId), spec.themeColors);
-  const targetRows = await loadLanguage(loadText, spec.target, corpus.groups);
-  const sourceRows = await loadLanguage(loadText, spec.source, corpus.groups);
+  // Seven concepts name a language, and the name has to come from the pair rather
+  // than from the row. Filled here, once, because five places downstream read these
+  // cells -- and the one that would hurt is `solve/weights.js`, which *measures*
+  // candidate rows to decide what fits, so an unfilled placeholder there makes the
+  // balance solver offer a row of the wrong height.
+  const [targetRows, sourceRows, targetNames, sourceNames] = await Promise.all([
+    loadLanguage(loadText, spec.target, corpus.groups),
+    loadLanguage(loadText, spec.source, corpus.groups),
+    loadLanguageNames(loadText, spec.target),
+    loadLanguageNames(loadText, spec.source),
+  ]);
+  const pair = { target: spec.target, source: spec.source };
+  fillLanguageSlots(targetRows, { ...pair, locale: spec.target, names: targetNames });
+  fillLanguageSlots(sourceRows, { ...pair, locale: spec.source, names: sourceNames });
   // A pair with no curated respellings is the normal case, not a failure, so do
   // not ask the network for a file the index says was never written.
   const respell = ctx.corpus.respellOverrides.has(`${spec.target}__${spec.source}__${spec.accent}`)

@@ -289,6 +289,112 @@ function regionName(code, locale, fallback) {
 }
 
 /**
+ * A language's own name for another language.
+ *
+ * `Intl.DisplayNames` answers this for every pair, so the registry only has to
+ * carry what ICU gets wrong for our purposes -- which is two things. Russian needs
+ * the prepositional case, because no nominal frame takes `английский` and there is
+ * no case-free phrasing: `Я не говорю по-английски` and `на хинди` do not even
+ * share a preposition. And the seven romanised packs need the *romanisation* of
+ * each name, which ICU cannot give at all.
+ *
+ * The subject code is reduced to its base language first, because ICU is right that
+ * `zh-Hans` is "Simplified Chinese" and a card asking `Parlez-vous chinois
+ * simplifié ?` is not what anyone says.
+ *
+ * @param {(rel:string)=>Promise<string>} loadText @param {string} code the language
+ *   whose *own* names these are -- the language of the cell they will be written into
+ * @returns {Promise<Record<string,{name:string, roman:string}>>}
+ */
+export async function loadLanguageNames(loadText, code) {
+  try {
+    const rows = parseTable(
+      await loadText(`data/registry/language-names/${code}.csv`),
+      `data/registry/language-names/${code}.csv`,
+    );
+    return Object.fromEntries(rows.map((r) => [r.bcp47, { name: r.name, roman: r.romanization }]));
+  } catch (err) {
+    if (isMissingFile(err)) return {};
+    throw err;
+  }
+}
+
+/** @param {string} bcp47 */
+const baseLanguage = (bcp47) => bcp47.split('-')[0];
+
+/**
+ * What to write where a cell says `{target}` or `{source}`.
+ * @param {string} subject the language being named
+ * @param {string} locale  the language doing the naming
+ * @param {Record<string,{name:string, roman:string}>} overrides
+ * @param {boolean} romanised  take the romanisation rather than the name
+ */
+function languageName(subject, locale, overrides, romanised) {
+  const own = overrides[subject];
+  if (romanised) return own?.roman || '';
+  if (own?.name) return own.name;
+  try {
+    return new Intl.DisplayNames([locale], { type: 'language' }).of(baseLanguage(subject))
+      || baseLanguage(subject);
+  } catch {
+    return baseLanguage(subject);
+  }
+}
+
+/** Which cells can carry a placeholder. Respellings cannot: they are already
+ * curated per pair, so the local word for the reader's language is written into
+ * them directly -- and it has to be, because French `par-lay voo zahn-GLEH` carries
+ * a liaison that vanishes the moment the language changes. */
+const SLOT_FIELDS = ['text', 'text_alt', 'literal'];
+const LANGUAGE_SLOT = /\{(target|source)\}/g;
+
+/**
+ * Fill `{target}` and `{source}` in one language's rows.
+ *
+ * Seven concepts in the bank name a language, and before this they either named
+ * the wrong one or named none. `communication.do-you-speak-english` hardcoded
+ * English in all sixteen packs, so a Spanish traveller in France held up a card
+ * asking whether the waiter spoke *English*; and the gloss of
+ * `communication.i-do-not-speak-this-language` named the reader's own language, so
+ * on 135 of the 240 pairs it printed something false -- `Je ne parle pas français`
+ * glossed as `Ich spreche kein Deutsch`.
+ *
+ * One rule covers both, and the narrower version of it does not: **a placeholder
+ * names which side of the pair, and is rendered in the language of the cell it sits
+ * in.** So the French cell `Parlez-vous {source} ?` prints `espagnol` when French is
+ * the target and a Spaniard is reading it, and `français` when French is the source
+ * -- because then the source *is* French. One cell, both jobs.
+ *
+ * Two things fall out. A substituted cell can never contain a script its own font
+ * stack cannot draw, since a language only ever names another in its own words. And
+ * a `note` needs no placeholder at all: it prints source-side only, so both would
+ * resolve to constants and prose is clearer.
+ *
+ * @param {Record<string,Record<string,string>>} rows  one language's rows, mutated
+ * @param {Object} args
+ * @param {string} args.locale  the language these rows are written in
+ * @param {string} args.target
+ * @param {string} args.source
+ * @param {Record<string,{name:string, roman:string}>} args.names
+ */
+export function fillLanguageSlots(rows, { locale, target, source, names }) {
+  for (const row of Object.values(rows)) {
+    for (const [field, value] of Object.entries(row)) {
+      if (!value || !value.includes('{')) continue;
+      const romanised = field.startsWith('romanization_');
+      if (!romanised && !SLOT_FIELDS.includes(field)) continue;
+      row[field] = value.replace(
+        LANGUAGE_SLOT,
+        (/** @type {string} */ _, /** @type {string} */ side) => languageName(
+          side === 'target' ? target : source, locale, names, romanised,
+        ),
+      );
+    }
+  }
+  return rows;
+}
+
+/**
  * The service words a region's emergency numbers are labelled with, in the reader's
  * language. Registry rather than `data/i18n/`, for the same reason the section
  * headings are: `core/` renders the sheet and must not reach into the interface's

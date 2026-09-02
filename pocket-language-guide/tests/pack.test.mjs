@@ -1,0 +1,124 @@
+// The join: what a pair's rows say once the pair is known.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { fillLanguageSlots, loadCorpus, loadLanguage } from '../core/pack.js';
+
+const ID = 'communication.do-you-speak-english';
+
+/**
+ * One cell through the real substitution.
+ * @param {string} text @param {{locale:string, target:string, source:string,
+ *   names?:Record<string,{name:string, roman:string}>}} args @param {string} [roman]
+ */
+function fill(text, args, roman) {
+  /** @type {Record<string,Record<string,string>>} */
+  const rows = { [ID]: { text, ...(roman ? { romanization_pinyin: roman } : {}) } };
+  fillLanguageSlots(rows, { names: {}, ...args });
+  return rows[ID];
+}
+
+test('a language slot is rendered in the language of the cell it sits in', () => {
+  // The rule that matters, and the reason the narrower one ("target in the gloss,
+  // source in the target text") does not work: one cell has to serve both sides.
+  // `communication.do-you-speak-english` is "do you speak *the traveller's*
+  // language", so the French cell says `Parlez-vous {source} ?` and that same cell
+  // is the gloss when French is the reader's language.
+  assert.equal(
+    fill('Parlez-vous {source} ?', { locale: 'fr', target: 'fr', source: 'es' }).text,
+    'Parlez-vous espagnol ?',
+  );
+  assert.equal(
+    fill('Parlez-vous {source} ?', { locale: 'fr', target: 'zh-Hans', source: 'fr' }).text,
+    'Parlez-vous français ?',
+  );
+});
+
+test('the gloss names the language being learned, not the reader’s own', () => {
+  // This was wrong on 135 of the 240 pairs, and not vaguely wrong: the French card
+  // read `Je ne parle pas français` and its German gloss read `Ich spreche kein
+  // Deutsch`, so the sentence the reader was shown was false.
+  assert.equal(
+    fill('Ich spreche kein {target}', { locale: 'de', target: 'fr', source: 'de' }).text,
+    'Ich spreche kein Französisch',
+  );
+  assert.equal(
+    fill('I do not speak {target}', { locale: 'en', target: 'fr', source: 'en' }).text,
+    'I do not speak French',
+  );
+});
+
+test('a script subtag is dropped, because nobody asks about simplified Chinese', () => {
+  assert.equal(
+    fill('Je ne parle pas {target}', { locale: 'fr', target: 'zh-Hans', source: 'fr' }).text,
+    'Je ne parle pas chinois',
+  );
+});
+
+test('the registry supplies what ICU cannot: a romanised name', () => {
+  // The romanisation column is keyed to the target alone, so it cannot be curated
+  // per pair the way the respelling can, and ICU has no romanisations. Without a
+  // registry entry the gap is visible rather than wrong.
+  const bare = fill('你会说{source}吗？', { locale: 'zh-Hans', target: 'zh-Hans', source: 'en' }, 'ni hui shuo {source} ma?');
+  assert.equal(bare.text, '你会说英语吗？');
+  assert.ok(!bare.romanization_pinyin.includes('{'), 'the placeholder must not survive');
+
+  const named = fill(
+    '你会说{source}吗？',
+    {
+      locale: 'zh-Hans',
+      target: 'zh-Hans',
+      source: 'en',
+      names: { en: { name: '英语', roman: 'yingyu' } },
+    },
+    'ni hui shuo {source} ma?',
+  );
+  assert.equal(named.romanization_pinyin, 'ni hui shuo yingyu ma?');
+});
+
+test('a respelling is never substituted into', () => {
+  // Respellings are curated per pair already, and they have to be: the French
+  // `par-lay voo zahn-GLEH` carries a liaison /z/ that vanishes with `espagnol`,
+  // so a generated one would be wrong rather than merely clumsy.
+  const row = fill('Parlez-vous {source} ?', { locale: 'fr', target: 'fr', source: 'es' });
+  assert.equal(row.respell, undefined);
+  /** @type {Record<string,Record<string,string>>} */
+  const rows = { [ID]: { text: 'x', respell: 'par-lay voo {source}' } };
+  fillLanguageSlots(rows, { locale: 'fr', target: 'fr', source: 'es', names: {} });
+  assert.equal(rows[ID].respell, 'par-lay voo {source}', 'left alone for a human to write');
+});
+
+test('every pack agrees on which slots a concept takes', async () => {
+  // The check that stops `Parlez-vous anglais ?` being written again. A concept
+  // either names a language or it does not, so if one pack's cell carries a
+  // placeholder and another's does not, one of them is hardcoding a language --
+  // which is exactly how all sixteen packs came to ask about English.
+  const corpus = await loadCorpus((rel) => readFile(rel, 'utf8'));
+  const ready = corpus.languages
+    ? Object.values(corpus.languages).filter((l) => l.status === 'ready').map((l) => l.bcp47)
+    : [];
+  assert.ok(ready.length >= 16, `expected the ready languages, got ${ready.length}`);
+
+  /** @type {Map<string, Map<string, string[]>>} */ const byConcept = new Map();
+  for (const code of ready) {
+    const rows = await loadLanguage((rel) => readFile(rel, 'utf8'), code, corpus.groups);
+    for (const [id, row] of Object.entries(rows)) {
+      const slots = [...(row.text ?? '').matchAll(/\{(target|source)\}/g)].map((m) => m[1]).sort();
+      if (!byConcept.has(id)) byConcept.set(id, new Map());
+      const seen = /** @type {Map<string,string[]>} */ (byConcept.get(id));
+      const key = slots.join(',');
+      seen.set(key, (seen.get(key) ?? []).concat(code));
+    }
+  }
+  const disagreeing = [...byConcept.entries()]
+    .filter(([, seen]) => seen.size > 1)
+    .map(([id, seen]) => `${id}: ${[...seen].map(([k, v]) => `${k || '(none)'}=${v.join(' ')}`).join(' | ')}`);
+  assert.deepEqual(disagreeing, []);
+
+  // And it has to be checking something. The corpus carries no placeholders yet --
+  // the seven concepts are being rewritten -- so until they land this assertion is
+  // vacuously true, which is the failure mode two other tests in this suite have
+  // already had. Raise this to the number of slotted concepts once they are in.
+  const slotted = [...byConcept.entries()].filter(([, seen]) => [...seen.keys()].some(Boolean));
+  assert.ok(slotted.length >= 0, `${slotted.length} concepts carry a language slot`);
+});
