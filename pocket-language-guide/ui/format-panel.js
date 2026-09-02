@@ -11,16 +11,20 @@ import { hasContent, paperSpec } from '../core/pack.js';
 import { ARRANGEMENTS, arrangementShape } from '../core/solve/arrange.js';
 import { flagEmoji, flagsSupported } from './flags.js';
 import {
-  pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph, paletteGlyph, itemGlyph, cutGlyph,
-  customGlyph, numericChoice, fieldGlyph, toggles,
+  pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
+  itemGlyph, cutGlyph, priorityOptions,
+  customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
+  redrawGlyphs,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { t } from './i18n.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
-// 0 selects auto. Faces come in pairs: a double-sided sheet is two of them.
-const FACE_CHOICES = [0, 2, 4, 6, 8, 10];
+// 0 selects auto. Faces come in pairs, because a double-sided sheet is two of them
+// -- except for one, which is a single side: a phone screen, or a card printed on
+// one side and not cut.
+const FACE_CHOICES = [0, 1, 2, 4, 6, 8, 10];
 // These tables are module scope, evaluated before a catalogue exists, so they
 // carry message keys and the words are looked up where each option is built.
 const SCALE_CHOICES = [
@@ -59,38 +63,6 @@ const FIELD_LABEL_KEYS = /** @type {const} */ ({
   respell: 'field.respell',
   literal: 'field.literal',
 });
-
-/**
- * A number box in inches that reports points, which is what a `Geometry` holds.
- * @param {string} label
- */
-function inchBox(label) {
-  const box = /** @type {HTMLInputElement} */ (el('input', { type: 'number', class: 'numeric-box' }));
-  box.min = '1';
-  box.max = '17';
-  box.step = '0.1';
-  box.setAttribute('aria-label', label);
-  return {
-    box,
-    points: () => Math.round(Number(box.value) * 72 * 100) / 100,
-    /** @param {number} points */
-    set(points) { box.value = String(Math.round((points / 72) * 100) / 100); },
-  };
-}
-
-/**
- * The colours a reader can set. The five section roles first, because those are the
- * encoding; ink last, because it is the one that makes a sheet unreadable if it is
- * got wrong, and it should not be the first thing to hand.
- */
-const COLOUR_KEYS = [
-  { key: 'roles.comm', labelKey: 'colour.comm' },
-  { key: 'roles.money', labelKey: 'colour.money' },
-  { key: 'roles.move', labelKey: 'colour.move' },
-  { key: 'roles.stay', labelKey: 'colour.stay' },
-  { key: 'roles.alert', labelKey: 'colour.alert' },
-  { key: 'ink', labelKey: 'colour.ink' },
-];
 
 const CUT_NOTE_KEYS = {
   '': 'cut.hint.whole',
@@ -198,7 +170,6 @@ export function createFormatPanel(input) {
   let spec = input.spec;
   let cut = /** @type {''|'short-edge'|'long-edge'} */ ('');
 
-  const roles = (/** @type {string} */ id) => Object.values(themes[id]?.colors?.roles ?? {});
   /** Which geometry preset the current page size corresponds to, if any. */
   const presetOf = () => Object.entries(presets.geometry).find(
     ([, g]) => /** @type {any} */ (g).pageW === spec.geometry.pageW
@@ -215,56 +186,11 @@ export function createFormatPanel(input) {
 
   // Two boxes rather than one slider, because a card is a width *and* a height and
   // neither is a function of the other. Inches, to match the presets' own labels.
-  const cardW = inchBox(t('format.cardWidth'));
-  const cardH = inchBox(t('format.cardHeight'));
-  const cardCustom = el('div', { class: 'numeric-custom' }, [
-    cardW.box, el('span', { class: 'numeric-unit', text: '×' }), cardH.box,
-    el('span', { class: 'numeric-unit', text: t('format.inches') }),
-  ]);
-  const pushCard = () => emit({
-    geometry: { ...spec.geometry, pageW: cardW.points(), pageH: cardH.points() },
+  const size = cardSizeControl({
+    geometry: presets.geometry,
+    value: spec.geometry,
+    onChange: emit,
   });
-  cardW.box.addEventListener('change', pushCard);
-  cardH.box.addEventListener('change', pushCard);
-
-  const size = segmented({
-    label: t('format.cardSize'),
-    value: presetOf(),
-    options: [
-      ...Object.entries(presets.geometry).map(([id, raw]) => {
-        const g = /** @type {any} */ (raw);
-        return {
-          value: id,
-          // The name is a dimension for four of the five presets, which needs no
-          // translating; the wallet card is a description, and stood out as the one
-          // English string in an otherwise translated panel. A preset can therefore
-          // name a caption key, and only that one does.
-          caption: g.captionKey
-            ? t(g.captionKey)
-            : g.name.split('·')[0].trim().replace('landscape', '').replace('portrait', '').trim(),
-          title: g.name,
-          glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
-        };
-      }),
-      // `presetOf()` already returns '' for a page size that matches no preset, so
-      // the empty string is what "custom" means everywhere in this panel.
-      {
-        value: '',
-        caption: t('format.custom'),
-        title: t('format.cardCustom'),
-        glyph: customGlyph(),
-      },
-    ],
-    // A different card is a different sheet: take its margins, gap, columns and
-    // natural face count wholesale rather than keeping values tuned for the old
-    // shape. Custom keeps the size that is already there and just opens the boxes,
-    // so nothing jumps under the reader.
-    onChange: (id) => {
-      cardCustom.hidden = id !== '';
-      if (id) emit({ geometry: { ...presets.geometry[id] } });
-    },
-  });
-  cardCustom.hidden = presetOf() !== '';
 
   // --- columns and faces --------------------------------------------------
 
@@ -289,11 +215,13 @@ export function createFormatPanel(input) {
   const faces = numericChoice({
     label: t('format.faces'),
     value: spec.autoFaces ? 0 : spec.geometry.faces,
-    min: 2,
+    min: 1,
     max: 24,
     step: 2,
-    // A sheet is printed on both sides, so an odd face count is not a thing.
-    snap: (v) => Math.max(2, Math.round(v / 2) * 2),
+    // A sheet is printed on both sides, so pairs are the step. One is the exception
+    // rather than an odd number: a single face is one side, which is what a phone
+    // screen is and what an uncut card can be.
+    snap: (v) => (v < 2 ? 1 : Math.round(v / 2) * 2),
     customCaption: t('format.custom'),
     customGlyph: customGlyph(),
     options: FACE_CHOICES.map((n) => ({
@@ -313,6 +241,24 @@ export function createFormatPanel(input) {
   const autoFacesCaption = /** @type {HTMLElement|null} */ (
     faces.group.querySelector('.segment .segment-caption')
   );
+
+  // How much of the corpus to keep, by importance. It sits with the card and the
+  // face count because it answers the same question they do -- how much material
+  // there is against how much room -- and it is the only one of the three that can
+  // make a phone screen's single face work: the top step is exactly the set that
+  // fits one.
+  const priority = numericChoice({
+    label: t('format.priority'),
+    value: spec.priority,
+    min: 0,
+    max: 1,
+    step: 0.01,
+    snap: (v) => Math.round(v * 100) / 100,
+    customCaption: t('format.custom'),
+    customGlyph: customGlyph(),
+    options: priorityOptions(corpus.concepts),
+    onChange: (value) => emit({ priority: value }),
+  });
 
   // --- spacing, arrangement, colour ---------------------------------------
 
@@ -375,60 +321,12 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ arrangement: value }),
   });
 
-  // Colour is how a section is coded on the card, so it is the part of a theme
-  // worth handing over -- and the only part that can change without re-measuring
-  // anything. The theme underneath still supplies every size, leading and rule.
-  const swatches = COLOUR_KEYS.map((entry) => {
-    const input = /** @type {HTMLInputElement} */ (el('input', { type: 'color', class: 'swatch' }));
-    input.setAttribute('aria-label', t(entry.labelKey));
-    input.title = t(entry.labelKey);
-    input.addEventListener('input', () => emit({
-      themeColors: { ...currentColours(), [entry.key]: input.value },
-    }));
-    return { ...entry, input };
+  const theme = paletteControl({
+    themes,
+    themeId: spec.themeId,
+    themeColors: spec.themeColors,
+    onChange: emit,
   });
-  const themeCustom = el('div', { class: 'numeric-custom swatches' }, swatches.map((s) => s.input));
-  /** Every colour the reader could have changed, defaulted from the base theme. */
-  const currentColours = () => {
-    /** @type {Record<string,string>} */ const out = {};
-    for (const { key, input } of swatches) out[key] = input.value;
-    return out;
-  };
-  const paintSwatches = () => {
-    const base = themes[spec.themeId]?.colors ?? {};
-    for (const { key, input } of swatches) {
-      const fallback = key.startsWith('roles.') ? base.roles?.[key.slice(6)] : base[key];
-      input.value = spec.themeColors?.[key] ?? fallback ?? '#000000';
-    }
-  };
-
-  const theme = segmented({
-    label: t('format.colours'),
-    value: spec.themeColors ? 'custom' : spec.themeId,
-    options: [
-      ...Object.keys(themes).map((id) => ({
-        value: id,
-        caption: id === 'cvd-safe' ? t('format.theme.accessible') : t('format.theme.reference'),
-        title: themes[id]?.name ?? id,
-        glyph: paletteGlyph(roles(id)),
-      })),
-      {
-        value: 'custom',
-        caption: t('format.custom'),
-        title: t('format.coloursCustom'),
-        glyph: customGlyph(),
-      },
-    ],
-    onChange: (value) => {
-      themeCustom.hidden = value !== 'custom';
-      // Starting from what is on screen means the first swatch a reader drags moves
-      // one colour rather than resetting the other five.
-      if (value === 'custom') emit({ themeColors: currentColours() });
-      else emit({ themeId: value, themeColors: undefined });
-    },
-  });
-  themeCustom.hidden = !spec.themeColors;
-  paintSwatches();
 
   const ink = segmented({
     label: t('format.ink'),
@@ -437,7 +335,7 @@ export function createFormatPanel(input) {
       value: choice.value,
       caption: t(choice.captionKey),
       title: t(choice.captionKey),
-      glyph: inkGlyph(choice.value, roles(spec.themeId)),
+      glyph: inkGlyph(choice.value, theme.colours()),
     })),
     onChange: (value) => emit({ inkMode: value }),
   });
@@ -479,6 +377,26 @@ export function createFormatPanel(input) {
       input.onCutChange(value);
     },
   });
+  const cutField = panelField(t('format.cutIntoCards'), [cutControl.group, cutNote]);
+
+  /**
+   * A cut needs two things the phone card has not got: paper, and a back to print
+   * on. Offering it there would offer an operation with no meaning -- and
+   * `splitCards` would throw on the odd face count besides, which is the same fact
+   * arriving as a crash. So the whole field goes away rather than being greyed, and
+   * any cut already chosen is dropped: `sync` runs before the canvas redraws, so
+   * `cut()` is already empty by the time anything asks.
+   * @param {number} faceCount  as resolved, since auto is what usually decides it
+   */
+  const setCuttable = (faceCount) => {
+    const cuttable = !presets.geometry[presetOf()]?.screen && faceCount % 2 === 0;
+    cutField.hidden = !cuttable;
+    if (cuttable || !cut) return;
+    cut = '';
+    cutControl.select('');
+    cutNote.textContent = t(CUT_NOTE_KEYS['']);
+  };
+  setCuttable(spec.geometry.faces);
 
   // --- the list-shaped choices -------------------------------------------
 
@@ -573,16 +491,17 @@ export function createFormatPanel(input) {
   });
 
   root.replaceChildren(
-    panelField(t('format.card'), [size.group, cardCustom]),
+    panelField(t('format.card'), [size.group, size.custom]),
     panelField(t('format.columns'), [columns.group]),
     panelField(t('format.faces'), [faces.group]),
+    panelField(t('format.priority'), [priority.group]),
     panelField(t('format.typeface'), [typefaceControl.group]),
     panelField(t('format.typeSize'), [typeSize.group]),
     panelField(t('format.entryLayout'), [arrangement.group]),
     panelField(t('format.textPadding'), [padding.group]),
-    panelField(t('format.colours'), [theme.group, themeCustom]),
+    panelField(t('format.colours'), [theme.group, theme.custom]),
     panelField(t('format.ink'), [ink.group]),
-    panelField(t('format.cutIntoCards'), [cutControl.group, cutNote]),
+    cutField,
     panelField(t('format.pngResolution'), [dpi.group]),
     panelField(t('format.columnsShown'), [fieldSet.group]),
     paper.wrap,
@@ -607,12 +526,11 @@ export function createFormatPanel(input) {
           sampleValues(rows.targetRows, rows.sourceRows, rows.respell, next), next, corpus,
         );
       }
-      size.select(presetOf());
-      cardCustom.hidden = presetOf() !== '';
-      cardW.set(next.geometry.pageW);
-      cardH.set(next.geometry.pageH);
+      size.sync(next.geometry);
       columns.select(next.geometry.columns);
       faces.select(next.autoFaces ? 0 : next.geometry.faces);
+      priority.select(next.priority);
+      setCuttable(resolvedFaces ?? next.geometry.faces);
       // Auto is only useful if it says what it decided.
       if (autoFacesCaption) {
         autoFacesCaption.textContent = next.autoFaces && resolvedFaces
@@ -623,9 +541,7 @@ export function createFormatPanel(input) {
       typeSize.select(next.scale);
       padding.select(next.padding);
       arrangement.select(next.arrangement);
-      theme.select(next.themeColors ? 'custom' : next.themeId);
-      themeCustom.hidden = !next.themeColors;
-      paintSwatches();
+      theme.sync(next);
       ink.select(next.inkMode);
       paper.select.value = next.paper.presetId;
       if (region) region.select.value = next.region;
@@ -640,26 +556,9 @@ export function createFormatPanel(input) {
         (a) => itemGlyph(arrangementShape(a.id, next.fieldSet)),
       ));
       redrawGlyphs(fieldSet.group, fieldGlyphs());
-      const palette = next.themeColors
-        ? COLOUR_KEYS.filter((c) => c.key.startsWith('roles.'))
-          .map((c) => next.themeColors?.[c.key] ?? '')
-        : roles(next.themeId);
-      redrawGlyphs(ink.group, INK_CHOICES.map((c) => inkGlyph(c.value, palette)));
-      redrawGlyphs(theme.group, [
-        ...Object.keys(themes).map((id) => paletteGlyph(roles(id))),
-        customGlyph(),
-      ]);
+      redrawGlyphs(ink.group, INK_CHOICES.map((c) => inkGlyph(c.value, theme.colours())));
     },
     cut: () => cut,
   };
-}
-
-/** @param {HTMLElement} group @param {SVGElement[]} glyphs */
-function redrawGlyphs(group, glyphs) {
-  const buttons = [...group.querySelectorAll('.segment')];
-  buttons.forEach((button, i) => {
-    const old = button.querySelector('svg');
-    if (old && glyphs[i]) old.replaceWith(glyphs[i]);
-  });
 }
 

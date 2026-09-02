@@ -37,7 +37,10 @@ const SCALE_STEP = 0.01;
 
 // A sheet is printed double-sided, so faces come in pairs: one sheet is two faces,
 // and an odd count means running a sheet with a blank back. Auto therefore steps in
-// twos.
+// twos -- from the card's own count, which carries the parity rather than imposing
+// it. The phone preset's natural count is one, because a screen has no back, and
+// stepping in twos from there gives 1, 3, 5: still one image per face, none of them
+// half-used.
 const FACE_STEP = 2;
 const MAX_AUTO_FACES = 24;
 
@@ -533,11 +536,13 @@ function solveFaces(build, box, spec, scaleFloor) {
   /** @param {number} faces */
   const fittedAt = (faces) => autofit(build, box.height, faces * columns, scaleFloor);
 
-  const anchor = Math.max(FACE_STEP, spec.geometry.faces || FACE_STEP);
+  const anchor = Math.max(1, spec.geometry.faces || FACE_STEP);
   let faces = anchor;
 
-  // Give up paper only when it is free.
-  while (faces - FACE_STEP >= FACE_STEP && fitsAt(faces - FACE_STEP, 1)) {
+  // Give up paper only when it is free. The floor is one face, not one sheet: for
+  // an even anchor the step lands on two either way, and for the phone's anchor of
+  // one there is nothing to give back.
+  while (faces - FACE_STEP >= 1 && fitsAt(faces - FACE_STEP, 1)) {
     faces -= FACE_STEP;
   }
 

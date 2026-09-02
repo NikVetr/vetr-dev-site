@@ -9,6 +9,8 @@
 // to hover to find out which is which.
 
 import { nextIndex } from './keys.js';
+import { t } from './i18n.js';
+import { PRIORITY_STEPS } from '../core/pack.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 
@@ -65,6 +67,26 @@ export function pageGlyph({ pageW, pageH, columns, box = 30 }) {
     }));
   }
   return svg;
+}
+
+/**
+ * The card-size ladder: one option per geometry preset, at true proportions.
+ *
+ * Shared because both panels that offer it built the list themselves and only one
+ * honoured a preset's `captionKey` -- so the credit-card and phone cards, the two
+ * whose names are descriptions rather than dimensions, read in English on the
+ * export page whatever language the rest of it was in.
+ * @param {Record<string, any>} geometry  `presets.geometry`
+ */
+export function cardOptions(geometry) {
+  return Object.entries(geometry).map(([id, g]) => ({
+    value: id,
+    caption: g.captionKey
+      ? t(g.captionKey)
+      : g.name.split('·')[0].trim().replace(/landscape|portrait/g, '').trim(),
+    title: g.name,
+    glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
+  }));
 }
 
 /** How many faces, as that many little pages. 0 draws the auto case.
@@ -145,6 +167,83 @@ export function paddingGlyph(level) {
     svg.append(svgEl('rect', { x: 4, y, width: 14, height: barH, rx: 0.8, class: 'g-ink' }));
     svg.append(svgEl('rect', { x: 20, y, width: 6, height: barH, rx: 0.8, class: 'g-ink faint' }));
     y += pitch;
+  }
+  return svg;
+}
+
+/**
+ * The priority ladder's words. The thresholds themselves are `PRIORITY_STEPS` in
+ * `core/pack.js`, where the measurement that chose them is written down: each is
+ * the largest cut in the corpus that still fills a real card, and the top one is
+ * the set that fits a single phone face.
+ *
+ * Carries caption *keys*, like PADDING_CHOICES above and for the same reason.
+ */
+const PRIORITY_CHOICES = [
+  { value: PRIORITY_STEPS.all, captionKey: 'format.priority.all' },
+  { value: PRIORITY_STEPS.wide, captionKey: 'format.priority.wide' },
+  { value: PRIORITY_STEPS.core, captionKey: 'format.priority.core' },
+  { value: PRIORITY_STEPS.essential, captionKey: 'format.priority.essential' },
+];
+
+/**
+ * The priority ladder's options: the words, the drawing, and how many phrases each
+ * step keeps. Shared by the two panels that offer it, which need the same four
+ * options and differ only in whether a Custom segment follows them.
+ *
+ * The count goes in the tooltip because `Core` cannot say how much that is and the
+ * number is what a reader wants -- counted off the corpus rather than written into
+ * the catalogue, so it stays true as the bank grows.
+ * @param {Record<string, Record<string,string>>} concepts  `corpus.concepts`
+ */
+export function priorityOptions(concepts) {
+  const all = Object.values(concepts);
+  return PRIORITY_CHOICES.map((step, i) => ({
+    value: step.value,
+    caption: t(step.captionKey),
+    title: t('format.priorityTitle', {
+      count: all.filter((c) => Number(c.importance) >= step.value).length,
+      total: all.length,
+    }),
+    glyph: priorityGlyph(i),
+  }));
+}
+
+/**
+ * A priority step, drawn as the ranked corpus with the kept part inked and a cut
+ * where the rest begins.
+ *
+ * Bars rather than words, and bars rather than *text*: unlike the column toggles --
+ * where the question is what lands in a column and the answer is best given in the
+ * column's own words -- this question is only how far down the list to go, and a
+ * sample phrase would say nothing about depth. Index-matched to PRIORITY_CHOICES,
+ * as `paddingGlyph` is to PADDING_CHOICES, because the steps are qualitative: the
+ * corpus is steep enough that drawing the share it keeps would put three of the
+ * four glyphs within one bar of each other.
+ * @param {number} level
+ */
+function priorityGlyph(level) {
+  const box = 30;
+  const svg = frame(box, box);
+  const bars = 8;
+  const kept = [8, 5, 3, 1][level] ?? bars;
+  svg.append(svgEl('rect', { x: 1, y: 2, width: box - 2, height: box - 4, rx: 1.5, class: 'g-page' }));
+  const pitch = (box - 8) / bars;
+  for (let i = 0; i < bars; i += 1) {
+    // Widths taper down the list, so the glyph reads as a ranking rather than as a
+    // stack of equal rows.
+    svg.append(svgEl('rect', {
+      x: 4,
+      y: 5 + i * pitch,
+      width: 22 - i * 1.9,
+      height: 1.8,
+      rx: 0.7,
+      class: i < kept ? 'g-ink' : 'g-ink faint',
+    }));
+  }
+  if (kept < bars) {
+    const y = 5 + kept * pitch - pitch / 2 + 0.9;
+    svg.append(svgEl('path', { d: `M2 ${y.toFixed(2)} H28`, class: 'g-cut' }));
   }
   return svg;
 }
@@ -689,4 +788,209 @@ export function panelField(title, kids) {
   heading.textContent = title;
   wrap.append(heading, ...kids);
   return wrap;
+}
+
+/**
+ * A number box in inches that reports points, which is what a `Geometry` holds.
+ * @param {string} label
+ */
+function inchBox(label) {
+  const box = /** @type {HTMLInputElement} */ (document.createElement('input'));
+  box.type = 'number';
+  box.className = 'numeric-box';
+  box.min = '1';
+  box.max = '17';
+  box.step = '0.1';
+  box.setAttribute('aria-label', label);
+  return {
+    box,
+    points: () => Math.round(Number(box.value) * 72 * 100) / 100,
+    /** @param {number} points */
+    set(points) { box.value = String(Math.round((points / 72) * 100) / 100); },
+  };
+}
+
+/**
+ * The card-size ladder, with a Custom row of two inch boxes under it.
+ *
+ * Shared by both panels rather than written twice: the export page offered the
+ * presets and no way past them, so a reader who wanted 4x3in had to open the
+ * studio for a number the quick page could perfectly well take.
+ *
+ * @param {Object} config
+ * @param {Record<string, any>} config.geometry  `presets.geometry`
+ * @param {import('../core/types.js').Geometry} config.value
+ * @param {(patch:Partial<import('../core/types.js').SheetSpec>)=>void} config.onChange
+ */
+export function cardSizeControl({ geometry, value, onChange }) {
+  let current = value;
+  const width = inchBox(t('format.cardWidth'));
+  const height = inchBox(t('format.cardHeight'));
+  const custom = document.createElement('div');
+  custom.className = 'numeric-custom';
+  const unit = (/** @type {string} */ text) => {
+    const span = document.createElement('span');
+    span.className = 'numeric-unit';
+    span.textContent = text;
+    return span;
+  };
+  custom.append(width.box, unit('×'), height.box, unit(t('format.inches')));
+
+  /** Which preset the current page size corresponds to, if any. */
+  const presetOf = () => Object.entries(geometry).find(
+    ([, g]) => g.pageW === current.pageW && g.pageH === current.pageH,
+  )?.[0] ?? '';
+
+  const push = () => onChange({
+    geometry: { ...current, pageW: width.points(), pageH: height.points() },
+  });
+  width.box.addEventListener('change', push);
+  height.box.addEventListener('change', push);
+
+  const group = segmented({
+    label: t('format.cardSize'),
+    value: presetOf(),
+    options: [
+      ...cardOptions(geometry),
+      { value: '', caption: t('format.custom'), title: t('format.cardCustom'), glyph: customGlyph() },
+    ],
+    // A different card is a different sheet, so a preset takes its margins, gap,
+    // columns and natural face count wholesale rather than keeping values tuned for
+    // the old shape. Custom keeps the size that is there and just opens the boxes.
+    onChange: (id) => {
+      custom.hidden = id !== '';
+      if (id) onChange({ geometry: { ...geometry[id] } });
+    },
+  });
+  custom.hidden = presetOf() !== '';
+  width.set(current.pageW);
+  height.set(current.pageH);
+
+  return {
+    group: group.group,
+    custom,
+    /** @param {import('../core/types.js').Geometry} next */
+    sync(next) {
+      current = next;
+      group.select(presetOf());
+      custom.hidden = presetOf() !== '';
+      width.set(next.pageW);
+      height.set(next.pageH);
+    },
+  };
+}
+
+/**
+ * The colours a reader can set. The five section roles first, because those are the
+ * encoding; ink last, because it is the one that makes a sheet unreadable if it is
+ * got wrong, and it should not be the first thing to hand.
+ */
+const COLOUR_KEYS = [
+  { key: 'roles.comm', labelKey: 'colour.comm' },
+  { key: 'roles.money', labelKey: 'colour.money' },
+  { key: 'roles.move', labelKey: 'colour.move' },
+  { key: 'roles.stay', labelKey: 'colour.stay' },
+  { key: 'roles.alert', labelKey: 'colour.alert' },
+  { key: 'ink', labelKey: 'colour.ink' },
+];
+
+/**
+ * The palette ladder, with a Custom row of swatches under it.
+ *
+ * Colour is how a section is coded on the card, so it is the part of a theme worth
+ * handing over -- and the only part that can change without re-measuring anything,
+ * which is why `themeColors` rides beside `themeId` rather than replacing it. The
+ * theme underneath still supplies every size, leading and rule.
+ *
+ * @param {Object} config
+ * @param {Record<string, any>} config.themes  id -> theme
+ * @param {string} config.themeId
+ * @param {Record<string,string>|undefined} config.themeColors
+ * @param {(patch:Partial<import('../core/types.js').SheetSpec>)=>void} config.onChange
+ */
+export function paletteControl({ themes, themeId, themeColors, onChange }) {
+  let state = { themeId, themeColors };
+  const roles = (/** @type {string} */ id) => Object.values(themes[id]?.colors?.roles ?? {});
+
+  const swatches = COLOUR_KEYS.map((entry) => {
+    const input = /** @type {HTMLInputElement} */ (document.createElement('input'));
+    input.type = 'color';
+    input.className = 'swatch';
+    input.setAttribute('aria-label', t(entry.labelKey));
+    input.title = t(entry.labelKey);
+    input.addEventListener('input', () => onChange({
+      themeColors: { ...currentColours(), [entry.key]: input.value },
+    }));
+    return { ...entry, input };
+  });
+  const custom = document.createElement('div');
+  custom.className = 'numeric-custom swatches';
+  custom.append(...swatches.map((s) => s.input));
+
+  /** Every colour the reader could have changed, defaulted from the base theme. */
+  const currentColours = () => {
+    /** @type {Record<string,string>} */ const out = {};
+    for (const { key, input } of swatches) out[key] = input.value;
+    return out;
+  };
+  const paint = () => {
+    const base = themes[state.themeId]?.colors ?? {};
+    for (const { key, input } of swatches) {
+      const fallback = key.startsWith('roles.') ? base.roles?.[key.slice(6)] : base[key];
+      input.value = state.themeColors?.[key] ?? fallback ?? '#000000';
+    }
+  };
+
+  const group = segmented({
+    label: t('format.colours'),
+    value: state.themeColors ? 'custom' : state.themeId,
+    options: [
+      ...Object.keys(themes).map((id) => ({
+        value: id,
+        caption: id === 'cvd-safe' ? t('format.theme.accessible') : t('format.theme.reference'),
+        title: themes[id]?.name ?? id,
+        glyph: paletteGlyph(roles(id)),
+      })),
+      { value: 'custom', caption: t('format.custom'), title: t('format.coloursCustom'), glyph: customGlyph() },
+    ],
+    onChange: (value) => {
+      custom.hidden = value !== 'custom';
+      // Starting from what is on screen means the first swatch a reader drags moves
+      // one colour rather than resetting the other five.
+      if (value === 'custom') onChange({ themeColors: currentColours() });
+      else onChange({ themeId: value, themeColors: undefined });
+    },
+  });
+  custom.hidden = !state.themeColors;
+  paint();
+
+  return {
+    group: group.group,
+    custom,
+    /** The five section-role colours in effect, which is what the ink-mode glyph
+     * draws with -- a custom palette has to show up there too. */
+    colours: () => COLOUR_KEYS.filter((c) => c.key.startsWith('roles.'))
+      .map((c) => state.themeColors?.[c.key] ?? roles(state.themeId)[0] ?? '#000000')
+      .map((c, i) => (state.themeColors ? c : roles(state.themeId)[i] ?? c)),
+    /** @param {{themeId:string, themeColors?:Record<string,string>}} next */
+    sync(next) {
+      state = { themeId: next.themeId, themeColors: next.themeColors };
+      group.select(next.themeColors ? 'custom' : next.themeId);
+      custom.hidden = !next.themeColors;
+      paint();
+      redrawGlyphs(group.group, [
+        ...Object.keys(themes).map((id) => paletteGlyph(roles(id))),
+        customGlyph(),
+      ]);
+    },
+  };
+}
+
+/** Swap the icons in a glyph group in place, for the ones that depend on other
+ * settings. @param {HTMLElement} group @param {SVGElement[]} glyphs */
+export function redrawGlyphs(group, glyphs) {
+  [...group.querySelectorAll('.segment')].forEach((button, i) => {
+    const old = button.querySelector('svg');
+    if (old && glyphs[i]) old.replaceWith(glyphs[i]);
+  });
 }

@@ -40,6 +40,10 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     // faces at the largest legible type -- the same answer the reference sheet
     // arrived at by hand.
     scale: 0,
+    // Every concept the sections below allow. Trimming the corpus by importance is
+    // for fitting a card the content will not fit -- one phone face, above all --
+    // and the reference sheet is not that card.
+    priority: 0,
     // Sections marked `default_on: 0` start off, so the default sheet stays the
     // size the reference sheets were rather than growing with the corpus.
     selection: defaultSelection({ sections }),

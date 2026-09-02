@@ -154,6 +154,7 @@ export function makeSpec(ctx, presets, choice) {
     padding: DEFAULT_PADDING,
     arrangement: 'two-column',
     scale: 0,
+    priority: 0,
     selection: defaultSelection(ctx.corpus),
   };
 }

@@ -178,6 +178,34 @@ test.describe('studio', () => {
     expect((await cards).suggestedFilename()).toBe('chinese-simplified-pocket-guide-cards.pdf');
   });
 
+  test('the phone card and the top priority step make one face, with nothing to cut', async ({ page }) => {
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    // Paper has a back, so the cut control is there to begin with.
+    await expect(page.locator('.panel-field').filter({ hasText: 'Cut into cards' })).toBeVisible();
+
+    await page.getByRole('radio', { name: 'Phone screen' }).click();
+    // A screen is not cut and has no back: the whole field goes, rather than
+    // offering an operation with no meaning.
+    await expect(page.locator('.panel-field').filter({ hasText: 'Cut into cards' })).toBeHidden();
+
+    // The whole corpus needs many wallpapers; the top priority step needs one.
+    await expect(page.locator('#status')).toHaveText(/\d+ faces at/, { timeout: 120_000 });
+    const priorityField = page.locator('.panel-field').filter({ hasText: 'Priority' }).first();
+    await priorityField.getByRole('radio', { name: 'Essential' }).click();
+    await expect(page.locator('#status')).toHaveText(/^1 faces at/, { timeout: 120_000 });
+    // One face means one image and no thumbnail strip to choose between them.
+    await expect(page.locator('#face-area .face')).toHaveCount(1);
+    await expect(page.locator('.face-strip')).toHaveCount(0);
+    await expect(page.locator('#warnings li.error')).toHaveCount(0);
+
+    // Trimming took phrases away rather than only rescaling them.
+    const included = await counts(page);
+    await priorityField.getByRole('radio', { name: 'Everything' }).click();
+    const all = await expectIncludedNot(page, included.included);
+    expect(all.included).toBeGreaterThan(included.included);
+  });
+
   test('a CSV round trip merges by concept_id instead of duplicating', async ({ page }) => {
     await page.goto(STUDIO);
     const before = await counts(page);

@@ -1,5 +1,5 @@
 {
-  "note": "Geometry and paper presets. pageW/pageH and all margins are in points. \"faces\" is the card's natural count -- a double-sided sheet is two faces -- and is the anchor auto starts from, not a hard limit.",
+  "note": "Geometry and paper presets. pageW/pageH and all margins are in points. \"faces\" is the card's natural count -- a double-sided sheet is two faces -- and is the anchor auto starts from, not a hard limit. \"screen\" marks a preset that is never printed, so it has no back to duplex and its faces need not come in pairs.",
   "geometry": {
     "card-7x5-4col": {
       "name": "7\u00d75in landscape \u00b7 4 columns",
@@ -62,6 +62,21 @@
       "columnGap": 3,
       "faces": 6,
       "captionKey": "format.card.creditCard"
+    },
+    "phone-1col": {
+      "name": "Phone screen \u00b7 1 column",
+      "pageW": 180,
+      "pageH": 396,
+      "marginTop": 9,
+      "marginBottom": 9,
+      "marginLeft": 9,
+      "marginRight": 9,
+      "columns": 1,
+      "columnGap": 4,
+      "faces": 1,
+      "screen": true,
+      "captionKey": "format.card.phone",
+      "note": "2.5x5.5in, which is the physical size of a 6in phone screen -- so the type sizes and the per-script legibility floors, all in points, are what the reader actually sees. Whole pixels at every dpi the panel offers: 375x825, 750x1650, 1500x3300. One column, because two would be 79pt wide against the 115-138pt every other preset gives a column."
     }
   }
 }

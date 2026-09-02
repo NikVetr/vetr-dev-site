@@ -239,6 +239,12 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   box-shadow: 0 1px 3px rgb(17 24 32 / 8%); position: relative; cursor: zoom-in; overflow: hidden;
 }
 .face svg { display: block; width: 100%; height: auto; }
+/* A portrait card is scaled by its height instead, or it runs off the bottom of the
+   panel: the phone-screen preset is 2.2 times as tall as it is wide, so fitting it
+   to the width made it more than twice the canvas's height. Both dimensions are
+   capped and the card's own aspect decides which one binds. */
+.face.focused { display: flex; justify-content: center; }
+.face.focused svg { width: auto; height: auto; max-inline-size: 100%; max-block-size: 74vh; }
 .face.focused { cursor: default; }
 .face-strip { display: flex; gap: var(--space-1); margin-top: auto; }
 .face-strip .face { flex: 1; cursor: pointer; }

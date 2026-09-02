@@ -91,6 +91,10 @@ export function proposeBalance(input) {
       .filter((c) => c.section_id === s.section_id))
     .filter((c) => !included.has(c.concept_id))
     .filter((c) => appliesTo(c, spec.target))
+    // Same rule as `buildBlocks`: a reader who asked for the top of the corpus
+    // should not be offered the bottom of it, with `importance 0.31` given as the
+    // reason.
+    .filter((c) => Number(c.importance) >= spec.priority)
     .filter((c) => input.targetRows[c.concept_id] && input.sourceRows[c.concept_id])
     .filter((c) => c.default_template !== 'note');
 

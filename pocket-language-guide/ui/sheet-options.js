@@ -11,8 +11,9 @@ import { buildSheet, stacksFor } from '../core/sheet.js';
 import { defaultSelection } from '../core/pack.js';
 import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.js';
 import {
-  pageGlyph, typefaceGlyph, inkGlyph, dpiGlyph, paddingGlyph, PADDING_CHOICES,
-  segmented, panelField,
+  typefaceGlyph, inkGlyph, dpiGlyph, paddingGlyph, PADDING_CHOICES, customGlyph,
+  priorityOptions, segmented, numericChoice, panelField,
+  cardSizeControl, paletteControl,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
@@ -42,8 +43,13 @@ async function main() {
   const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();
-  const themes = { 'latex-reference': await ctx.theme('latex-reference') };
-  const roles = Object.values(themes['latex-reference'].colors.roles);
+  // Both, because the palette ladder offers both -- and the CVD-safe one is the
+  // reason this control belongs on the quick page at all: colour is the section
+  // encoding, so a reader who cannot use the default needs it before they print,
+  // not after they find the studio.
+  const themes = Object.fromEntries(await Promise.all(
+    ['latex-reference', 'cvd-safe'].map(async (id) => [id, await ctx.theme(id)]),
+  ));
 
   const target = ctx.corpus.languages[choice.target];
   const source = ctx.corpus.languages[choice.source];
@@ -81,19 +87,27 @@ async function main() {
 
   // --- controls -----------------------------------------------------------
 
-  const card = segmented({
-    label: t('format.cardSize'),
-    value: choice.geometry ?? 'card-7x5-4col',
-    options: Object.entries(presets.geometry).map(([id, raw]) => {
-      const g = /** @type {any} */ (raw);
-      return {
-        value: id,
-        caption: g.name.split('·')[0].trim().replace(/landscape|portrait/g, '').trim(),
-        title: g.name,
-        glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
-      };
-    }),
-    onChange: (id) => set({ geometry: { ...presets.geometry[id] } }),
+  // The shared controls, so a reader who wants a card size or a palette this page
+  // does not list is not sent to the studio for a number it could perfectly well
+  // take. Everything else here stays a fixed ladder: this page is the offer, and
+  // the studio is where the offer runs out.
+  const card = cardSizeControl({
+    geometry: presets.geometry,
+    value: spec.geometry,
+    onChange: set,
+  });
+
+  // The one control from the studio's "how much fits" group that this page also
+  // needs, and it is here rather than only there because of what it is *for*: the
+  // phone card plus the top step is a lock screen, and asking someone to open the
+  // studio to set a wallpaper would be asking them to open the studio for the one
+  // thing the quick path does best. No Custom segment -- the ladder is the offer
+  // this page makes, and a continuous importance floor is a studio decision.
+  const priority = segmented({
+    label: t('format.priority'),
+    value: spec.priority,
+    options: priorityOptions(ctx.corpus.concepts),
+    onChange: (value) => set({ priority: value }),
   });
 
   /** @type {{value:'sans'|'serif', caption:string, stack:string}[]} */
@@ -113,9 +127,15 @@ async function main() {
     onChange: (value) => set({ typeface: value }),
   });
 
-  const padding = segmented({
+  const padding = numericChoice({
     label: t('format.breathingRoom'),
     value: spec.padding,
+    min: 0,
+    max: 4,
+    step: 0.1,
+    unit: 'pt',
+    customCaption: t('format.custom'),
+    customGlyph: customGlyph(),
     options: PADDING_CHOICES.map((choice, i) => ({
       value: choice.value,
       caption: t(choice.captionKey),
@@ -125,13 +145,23 @@ async function main() {
     onChange: (value) => set({ padding: value }),
   });
 
+  const theme = paletteControl({
+    themes,
+    themeId: spec.themeId,
+    themeColors: spec.themeColors,
+    onChange: set,
+  });
+
   const ink = segmented({
     label: t('format.ink'),
     value: /** @type {'full'|'low-ink'|'mono'} */ ('full'),
     options: /** @type {const} */ ([
       ['full', 'format.ink.full'], ['low-ink', 'format.ink.lowInk'], ['mono', 'format.ink.mono'],
     ]).map(([value, captionKey]) => ({
-      value, caption: t(captionKey), title: t(captionKey), glyph: inkGlyph(value, roles),
+      value,
+      caption: t(captionKey),
+      title: t(captionKey),
+      glyph: inkGlyph(value, theme.colours()),
     })),
     onChange: (value) => set({ inkMode: value }),
   });
@@ -168,9 +198,11 @@ async function main() {
   };
 
   $('controls').replaceChildren(
-    panelField(t('format.cardSize'), [card.group]),
+    panelField(t('format.cardSize'), [card.group, card.custom]),
+    panelField(t('format.priority'), [priority.group]),
     panelField(t('format.typeface'), [typeface.group]),
     panelField(t('format.textPadding'), [padding.group]),
+    panelField(t('format.colours'), [theme.group, theme.custom]),
     panelField(t('format.ink'), [ink.group]),
     menu('paper', t('format.paper'), paper),
     menu('preset', t('format.whatToInclude'), preset),
@@ -227,8 +259,10 @@ async function main() {
         return li;
       }));
     $('status').dataset.busy = '0';
+    // A screen has no sheets, and saying it has half of one is worse than saying
+    // nothing: this line is the only place the page reports what it produced.
     $('status').textContent = plan.faces.length
-      ? t('quick.status', {
+      ? t(spec.geometry.screen ? 'quick.statusScreen' : 'quick.status', {
         faces: plan.faces.length,
         sheets: plan.faces.length / 2,
         scale: plan.scale.toFixed(2),

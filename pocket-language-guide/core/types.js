@@ -89,6 +89,9 @@
  * @property {number} columns
  * @property {number} columnGap
  * @property {number} faces
+ * @property {boolean} [screen]  a preset that is displayed rather than printed --
+ *   the phone card. It has no back, so there is nothing to duplex and no reason for
+ *   its faces to come in pairs.
  */
 
 /**
@@ -127,6 +130,11 @@
  *   It was called `density`, which meant the opposite of its effect.
  * @property {'two-column'|'one-row'|'stacked'} arrangement  item field layout
  * @property {number} scale
+ * @property {number} priority  keep only concepts whose `importance` reaches this,
+ *   0 for all of them. A floor on the corpus rather than a count, so the same
+ *   setting means the same content on every pair: importance is a property of the
+ *   concept, and every language realises the same bank. An item the reader ticked
+ *   by hand outranks it -- see `buildBlocks`.
  * @property {{sections:Record<string,boolean>, items:Record<string,boolean>}} selection
  */
 
