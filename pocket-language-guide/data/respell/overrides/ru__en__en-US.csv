@@ -35,7 +35,7 @@ shopping.i-am-just-looking,yah PROS-ta sma-TRYOO
 color-size-returns.do-you-have-another-color,yest droo-GOY tsvyet
 tax-refund.can-i-get-a-tax-refund,MOZH-na vyir-NOOT na-LOK
 social-basics.hello,ZDRAST-vooy-tye
-communication.i-do-not-speak-this-language,yah nyi ga-va-RYOO na EH-tam yi-zi-KYEH
+communication.i-do-not-speak-this-language,yah nyi ga-va-RYOO na ROO-skam
 quick-responses.please-go-ahead,pa-ZHAL-sta
 phone-translation.i-am-using-phone-translation,yah is-POL-zoo-yoo pyi-ryi-VOH-chik f tyi-lyi-FOH-nye
 phone-text-power.please-type-it-for-me,na-byi-REE-tye pa-ZHAL-sta
@@ -89,10 +89,10 @@ payment-receipt.pay-cash,na-LEECH-ni-mi
 shopping.how-much-is-this,SKOL-ka EH-ta STOH-it
 color-size-returns.do-you-have-another-size,yest droo-GOY raz-MYER
 social-basics.hello-polite,DOH-briy dyen
-communication.i-speak-only-a-little-of-this,yah ga-va-RYOO saf-SYEM nyim-NOH-ga
+communication.i-speak-only-a-little-of-this,yah nyim-NOH-ga ga-va-RYOO na ROO-skam
 quick-responses.yes-right,dah / VYER-na
 phone-translation.please-speak-toward-the-phone,ga-va-REE-tye f tyi-lyi-FON pa-ZHAL-sta
-phone-translation.please-write-the-place-name,na-pi-SHIH-tye zdyes naz-VAH-ni-ye MYES-ta
+phone-translation.please-write-the-place-name,na-pi-SHIH-tye naz-VAH-ni-ye MYES-ta na ROO-skam
 sim-data.may-i-use-your-wifi,MOZH-na vas-POL-za-vat-sa VAH-shim Wi-Fi
 etiquette.is-tipping-expected,zdyes PREE-nya-ta da-VAT cha-yi-VIH-ye
 children.make-an-announcement,ZDYEH-lay-tye a-byi-VLYEH-ni-ye pa-ZHAL-sta
@@ -144,7 +144,7 @@ payment-receipt.pay-by-qr-code,pa QR-KOH-doo
 shopping.that-is-too-expensive,EH-ta SLEESH-kam DOH-ra-ga
 color-size-returns.may-i-try-it-on,MOZH-na pa-MYEH-rit
 social-basics.good-morning,DOH-bra-ye OO-tra
-communication.do-you-speak-english,vih ga-va-REE-tye pa-an-GLEEY-ski
+communication.do-you-speak-english,vih ga-va-REE-tye na an-GLEEY-skam
 quick-responses.no-not,nyet / nyi
 phone-translation.one-sentence-at-a-time-please,pa ad-na-MOO pryid-la-ZHEH-ni-yoo pa-ZHAL-sta
 phone-text-power.please-use-simple-words,ga-va-REE-tye PROS-ti-mi sla-VAH-mi
@@ -477,7 +477,7 @@ introductions.this-is-my-daughter-son,EH-ta ma-YAH doch / moy sihn
 numbers-money.ji,DYEH-vyat
 atm-cash.do-you-have-change,oo vas yest raz-MYEN
 social-basics.i-do-not-know,yah nyi ZNAH-yoo
-communication.please-show-me-the-text,pa-ka-ZHIH-tye mnyeh tyekst
+communication.please-show-me-the-text,pa-ka-ZHIH-tye mnyeh tyekst na ROO-skam
 sim-data.please-write-the-wifi-password,na-pi-SHIH-tye pa-ROL at Wi-Fi
 etiquette.what-is-customary,kak zdyes PREE-nya-ta
 children.warm-this-bottle,pa-da-GRYEY-tye boo-TIH-lach-koo pa-ZHAL-sta
@@ -734,7 +734,7 @@ payment-receipt.i-already-paid,EH-ta oo-ZHEH a-PLAH-che-na
 shopping.what-is-it-made-of,is chi-VOH EH-ta ZDYEH-la-na
 emergency-medical.what-is-the-emergency-number,ka-KOY NOH-myer EKS-trye-nikh slooshp
 lost-rescue.i-cannot-find-my-hotel,yah nyi ma-GOO nay-TEE svoy a-TEL
-emergency-medical.is-there-a-doctor-who-speaks-english,yest an-gla-ga-va-RYAH-shchiy vrach
+emergency-medical.is-there-a-doctor-who-speaks-english,yest vrach ka-TOH-riy ga-va-REET na an-GLEEY-skam
 lost-rescue.i-left-it-on-the-train,EH-ta as-TAH-las f POH-yez-dye
 dietary-needs.i-have-a-severe-allergy-to,oo myi-NYAH tyi-ZHOH-la-ya a-lyir-GEE-ya na {}
 emergency-medical.i-think-a-bone-is-broken,KAH-zhet-sa oo myi-NYAH pyi-ryi-LOM
