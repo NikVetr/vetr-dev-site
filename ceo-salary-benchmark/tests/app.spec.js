@@ -996,6 +996,7 @@ test("table headers stack compact sort and filter controls at desktop and constr
         && sortIconCenter.y >= 0 && sortIconCenter.y < innerHeight;
       return {
         sortKey: sortButton.dataset.sort,
+        headerHeight: bounds.height,
         filterWidth: filter.width,
         filterHeight: filter.height,
         verticalGap: filter.top - sortIconTop - Number.parseFloat(sortIcon.height),
@@ -1019,6 +1020,7 @@ test("table headers stack compact sort and filter controls at desktop and constr
     expect(placements.every((placement) => (
       placement.filterWidth >= 24 && placement.filterWidth <= 24.5
       && placement.filterHeight >= 24 && placement.filterHeight <= 24.5
+      && placement.headerHeight >= 48.5 && placement.headerHeight <= 49.5
       && Math.abs(placement.verticalGap) <= 0.5
       && placement.glyphCenterGap >= 11.5 && placement.glyphCenterGap <= 12.5
       && placement.labelToIconGap >= 10 && placement.labelToIconGap <= 12.5
