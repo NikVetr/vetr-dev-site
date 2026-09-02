@@ -1,0 +1,60 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,Che numero di stanza è questo?,,,,2,it-agent-v1
+building-help.i-am-lost,Mi sono perso/a,,,,2,it-agent-v1
+building-help.where-is-reception,Dov'è la reception?,,,,2,it-agent-v1
+building-help.where-is-a-power-outlet,Dov'è una presa di corrente?,,,,2,it-agent-v1
+in-a-building.is-this-the-correct-entrance,È questa l'entrata giusta?,,,,2,it-agent-v1
+in-a-building.do-you-have-wi-fi,Avete il Wi-Fi?,,,,2,it-agent-v1
+in-a-building.what-is-the-wi-fi-password,Qual è la password del Wi-Fi?,,,,2,it-agent-v1
+in-a-building.which-floor,Quale piano?,,,,2,it-agent-v1
+building-words.elevator,ascensore,,,,2,it-agent-v1
+building-words.stairs,scale,,,,2,it-agent-v1
+building-words.entrance,entrata,ingresso,,,2,it-agent-v1
+building-words.exit,uscita,,,,2,it-agent-v1
+building-words.men,Uomini,Signori,,,2,it-agent-v1
+building-words.women,Donne,Signore,,,2,it-agent-v1
+building-words.door,porta,,,,2,it-agent-v1
+building-words.key,chiave,,,,2,it-agent-v1
+toilets.where-toilet,Dov'è il bagno?,,,,2,it-agent-v1
+toilets.where-public-toilet,Dov'è un bagno pubblico?,,,,2,it-agent-v1
+toilets.may-i-use-the-toilet,"Posso usare il bagno, per favore?",,,,2,it-agent-v1
+toilets.is-it-only-for-customers,È solo per i clienti?,,,,2,it-agent-v1
+toilets.toilet-wc,Bagni / WC,Toilette,,,2,it-agent-v1
+toilets.is-it-free,È gratuito?,,,,2,it-agent-v1
+toilets.do-i-need-a-coin,Serve una moneta o un gettone?,,,,2,it-agent-v1
+toilets.is-the-tap-water-safe-to-drink,L'acqua del rubinetto è potabile?,,,,2,it-agent-v1
+toilets.it-is-urgent,È urgente,,,,2,it-agent-v1
+toilets.may-i-have-the-toilet-key,Mi dà la chiave del bagno?,,,,2,it-agent-v1
+toilets.there-is-no-toilet-paper,Non c'è carta igienica,,,,2,it-agent-v1
+toilets.toilet-paper,carta igienica,,,,2,it-agent-v1
+toilets.it-is-out-of-order,Non funziona,,,,2,it-agent-v1
+toilets.out-of-order,Fuori servizio,Guasto,,,2,it-agent-v1
+toilets.mens-toilet,Signori,Uomini,,,2,it-agent-v1
+toilets.womens-toilet,Signore,Donne,,,2,it-agent-v1
+toilets.drinking-water,Acqua potabile,,,,2,it-agent-v1
+toilets.not-for-drinking,Acqua non potabile,,,,2,it-agent-v1
+toilets.accessible-toilet,Bagno accessibile,Bagno per disabili,,,2,it-agent-v1
+toilets.where-can-i-wash-my-hands,Dove posso lavarmi le mani?,,,,2,it-agent-v1
+toilets.can-i-flush-the-paper,Posso buttare la carta nel water?,,,,2,it-agent-v1
+toilets.is-there-a-toilet-on-board,C'è il bagno a bordo?,,,,2,it-agent-v1
+toilets.the-toilet-will-not-flush,Lo sciacquone non funziona,,,,2,it-agent-v1
+toilets.baby-change,Fasciatoio,,,,2,it-agent-v1
+toilets.squat-toilet,Bagno alla turca,,,,2,it-agent-v1
+accessibility.step-free,C'è un accesso senza scalini?,,,,2,it-agent-v1
+accessibility.wheelchair-access,È accessibile in sedia a rotelle?,,,,2,it-agent-v1
+accessibility.elevator,C'è l'ascensore?,,,,2,it-agent-v1
+accessibility.ramp,C'è una rampa?,,,,2,it-agent-v1
+accessibility.how-many-steps,Quanti scalini ci sono?,,,,2,it-agent-v1
+accessibility.cannot-climb-stairs,Non posso fare le scale,,,,2,it-agent-v1
+accessibility.need-to-sit-down,Ho bisogno di sedermi,,,,2,it-agent-v1
+accessibility.accessible-restroom,C'è un bagno accessibile?,C'è un bagno per disabili?,,,2,it-agent-v1
+accessibility.station-assistance,C'è assistenza in stazione?,,,,2,it-agent-v1
+accessibility.help-me-carry,"Mi aiuti a portare questo, per favore",,,,2,it-agent-v1
+accessibility.board-first,Posso salire per primo?,,,,2,it-agent-v1
+accessibility.door-width,Quanto è larga la porta?,,,,2,it-agent-v1
+accessibility.wheelchair-width,La mia sedia a rotelle è larga {} cm,,,,2,it-agent-v1
+accessibility.hard-of-hearing,Ho problemi di udito,Sono ipoacusico/a,,,2,it-agent-v1
+accessibility.speak-louder,"Parli più forte, per favore",,,,2,it-agent-v1
+accessibility.visually-impaired,Sono ipovedente,Ho problemi di vista,,,2,it-agent-v1
+accessibility.take-your-arm,Posso prenderle il braccio?,,,,2,it-agent-v1
+accessibility.guide-dog,Questo è il mio cane guida,,,,2,it-agent-v1

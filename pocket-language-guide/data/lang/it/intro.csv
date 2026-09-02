@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Mi chiamo {},,,,2,it-agent-v1
+introductions.nice-to-meet-you,Piacere,Molto piacere,,,2,it-agent-v1
+introductions.what-is-your-name,Come si chiama?,,,,2,it-agent-v1
+introductions.we-are-traveling-together,Viaggiamo insieme,,,,2,it-agent-v1
+introductions.this-is-my-friend,Questo è il mio amico,Questa è la mia amica,,,2,it-agent-v1
+introductions.i-am-from,Vengo da {},Sono di {},,,2,it-agent-v1
+introductions.where-are-you-from,Di dov'è?,,,,2,it-agent-v1
+introductions.how-are-you,Come sta?,,,,2,it-agent-v1
+introductions.i-am-a-tourist,Sono un turista,Sono una turista,,,2,it-agent-v1
+introductions.this-is-my-husband-wife,Lui è mio marito / lei è mia moglie,,,,2,it-agent-v1
+introductions.this-is-my-daughter-son,Lei è mia figlia / lui è mio figlio,,,,2,it-agent-v1
+introductions.i-am-traveling-alone,Viaggio da solo/a,,,,2,it-agent-v1

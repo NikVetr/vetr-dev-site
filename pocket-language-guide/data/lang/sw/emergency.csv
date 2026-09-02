@@ -45,6 +45,8 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,Nina mzio wa dawa za sulfa,,,,2,
 pharmacy-symptoms.which-pharmacy-is-open-now,Duka gani la dawa liko wazi sasa?,,,,2,sw-agent-v1
 pharmacy-symptoms.i-need-medicine-for,Nahitaji dawa ya {},,,,2,sw-agent-v1
 pharmacy-symptoms.i-have-a-fever,Nina homa,,,,2,sw-agent-v1
+pharmacy-symptoms.i-think-i-have-malaria,Nadhani nina malaria,,,,2,malaria-v1
+pharmacy-symptoms.i-need-a-malaria-test,Nahitaji kipimo cha malaria,,,,2,malaria-v1
 pharmacy-symptoms.i-have-diarrhea,Nina kuhara,Naharisha,,,2,sw-agent-v1
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Duka la dawa la usiku liko wapi?,,,,2,sw-agent-v1
 pharmacy-symptoms.painkiller,Dawa ya maumivu,,,,2,sw-agent-v1

@@ -11,6 +11,7 @@ dietary-needs.i-am-vegan,Veganım.,,,,2,tr-agent-v1
 dietary-needs.i-do-not-eat,{} yemiyorum.,,,,2,tr-agent-v1
 dietary-needs.i-am-allergic-to,{} alerjim var.,,,,2,tr-agent-v1
 dietary-needs.does-it-contain-fish-stock,İçinde balık suyu var mı?,,,,2,tr-agent-v1
+dietary-needs.does-it-contain-pork-stock,İçinde domuz eti suyu var mı?,Bulyonda domuz var mı?,,,2,tr-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,Ağır {} alerjim var.,,,,2,tr-agent-v1
 food-ordering.table-for-two,İki kişilik masa.,,,,2,tr-agent-v1
 food-ordering.is-a-table-available,Boş masa var mı?,,,,2,tr-agent-v1

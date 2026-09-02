@@ -45,6 +45,8 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,Saya alergi obat sulfa,Saya aler
 pharmacy-symptoms.which-pharmacy-is-open-now,Apotek mana yang buka sekarang?,,,,2,id-agent-v1
 pharmacy-symptoms.i-need-medicine-for,Saya perlu obat untuk {},,,,2,id-agent-v1
 pharmacy-symptoms.i-have-a-fever,Saya demam,,,,2,id-agent-v1
+pharmacy-symptoms.i-think-i-have-malaria,Sepertinya saya kena malaria,,,,2,malaria-v1
+pharmacy-symptoms.i-need-a-malaria-test,Saya perlu tes malaria,pemeriksaan darah malaria,,,2,malaria-v1
 pharmacy-symptoms.i-have-diarrhea,Saya diare,Mencret,,,2,id-agent-v1
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Apotek 24 jam di mana?,,,K-24 and Kimia Farma open 24h,2,id-agent-v1
 pharmacy-symptoms.painkiller,Obat pereda nyeri,,,,2,id-agent-v1

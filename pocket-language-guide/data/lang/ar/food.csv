@@ -11,6 +11,7 @@ dietary-needs.i-am-vegan,أنا نباتي صرف,فيغان,anā nabātī ṣir
 dietary-needs.i-do-not-eat,لا آكل {},ممنوع عليّ {},lā ākul {},,,2,ar-agent-v1
 dietary-needs.i-am-allergic-to,عندي حساسية من {},لديّ حساسية من {},ʿindī ḥasāsīyah min {},,,2,ar-agent-v1
 dietary-needs.does-it-contain-fish-stock,هل يحتوي على مرق سمك؟,,hal yaḥtawī ʿalá maraq samak?,,,2,ar-agent-v1
+dietary-needs.does-it-contain-pork-stock,هل يحتوي على مرق لحم الخنزير؟,هل المرق من لحم الخنزير؟,hal yaḥtawī ʿalá maraq laḥm al-khinzīr?,,,2,ar-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,عندي حساسية شديدة من {},حساسيتي من {} تهدد حياتي,ʿindī ḥasāsīyah shadīdah min {},,,2,ar-agent-v1
 food-ordering.table-for-two,طاولة لشخصين,,ṭāwilah li-shakhṣayn,,,2,ar-agent-v1
 food-ordering.is-a-table-available,هل توجد طاولة فارغة؟,,hal tūjad ṭāwilah fārighah?,,,2,ar-agent-v1

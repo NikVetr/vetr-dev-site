@@ -708,6 +708,7 @@ pronouns-verbs.looking-for-thing,CHAH-ree + BEHN-dah
 emergency-medical.i-am-bleeding-badly,puhr-dah-RAH-hahn SAH-yah HEH-baht
 lost-rescue.my-friend-is-hurt,tuh-MAHN SAH-yah tuhr-LOO-kah
 dietary-needs.does-it-contain-fish-stock,AH-dah tuh-RAH-see AH-tow KAHL-doo EE-kahn?
+dietary-needs.does-it-contain-pork-stock,KOO-ah-nyah PAH-keye KAHL-doo BAH-bee?
 hotel-basics.for-nights,OON-took {} MAH-lahm
 hotel-requests.is-there-a-safe,AH-dah sehf DEH-poh-seet bohks?
 payment-receipt.is-tax-included,SOO-dah tuhr-MAH-sook PAH-jahk?
@@ -744,3 +745,5 @@ numbers-money.rupiah,roo-PEE-ah
 numbers-money.rupiah-symbol,roo-PEE-ah
 dietary-needs.no-pork,TAHN-pah BAH-bee
 dietary-needs.is-this-halal,EE-nee HAH-lahl?
+pharmacy-symptoms.i-think-i-have-malaria,suh-puhr-TEE-nyah SAH-yah KUH-nah mah-LAH-ree-ah
+pharmacy-symptoms.i-need-a-malaria-test,SAH-yah puhr-LOO tehs mah-LAH-ree-ah

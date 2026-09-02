@@ -1,0 +1,66 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+trail-words.trail,il sentiero,,,,2,it-agent-v1
+trail-words.trailhead,l'inizio del sentiero,l'imbocco del sentiero,,,2,it-agent-v1
+trail-words.summit,la cima,la vetta,,,2,it-agent-v1
+trail-words.viewpoint,il punto panoramico,il belvedere,,,2,it-agent-v1
+trail-words.cableway,la funivia,,,,2,it-agent-v1
+trail-words.shuttle-bus,la navetta,,,,2,it-agent-v1
+trail-words.park-shuttle,la navetta del parco,,,,2,it-agent-v1
+trail-words.steps,i gradini,,,,2,it-agent-v1
+trail-words.up-uphill,salita,in salita,,,2,it-agent-v1
+trail-words.down-downhill,discesa,in discesa,,,2,it-agent-v1
+trail-words.one-way,solo andata,,,,2,it-agent-v1
+trail-words.round-trip,andata e ritorno,,,,2,it-agent-v1
+hiking-parks.is-this-the-way-to,È questo il sentiero per {}?,,,,2,it-agent-v1
+hiking-parks.where-is-the-trailhead,Dove inizia il sentiero?,,,,2,it-agent-v1
+hiking-parks.how-long-to-the-summit,Quanto manca alla cima?,,,,2,it-agent-v1
+hiking-parks.how-long-to-the-viewpoint,Quanto manca al punto panoramico?,,,,2,it-agent-v1
+hiking-parks.which-route-is-easier,Quale percorso è più facile?,,,,2,it-agent-v1
+trail-conditions.how-long-is-the-full-route,Quanto è lungo il percorso completo?,,,,2,it-agent-v1
+trail-conditions.can-we-return-the-same-way,Possiamo tornare per la stessa strada?,,,,2,it-agent-v1
+trail-conditions.can-we-return-before-dark,Possiamo tornare prima del buio?,,,,2,it-agent-v1
+trail-conditions.is-the-trail-open,Il sentiero è aperto?,,,,2,it-agent-v1
+trail-conditions.is-the-route-steep,Il percorso è ripido?,,,,2,it-agent-v1
+trail-conditions.is-the-path-slippery,Il sentiero è scivoloso?,,,,2,it-agent-v1
+trail-transport.how-long-is-the-queue,Quanto è lunga la fila?,,,,2,it-agent-v1
+trail-transport.what-time-is-the-last-shuttle,A che ora è l'ultima navetta?,,,,2,it-agent-v1
+trail-transport.when-does-the-cableway-stop,A che ora chiude la funivia?,,,,2,it-agent-v1
+trail-transport.where-can-we-buy-water,Dove possiamo comprare dell'acqua?,,,,2,it-agent-v1
+trail-transport.where-can-we-refill-water,Dove possiamo riempire le borracce?,,,,2,it-agent-v1
+trail-transport.is-there-cell-signal-here,C'è campo qui?,,,,2,it-agent-v1
+trail-transport.do-you-have-a-map,Ha una mappa?,,,,2,it-agent-v1
+trail-warnings.open,Aperto,,,,2,it-agent-v1
+trail-warnings.closed,Chiuso,,,,2,it-agent-v1
+trail-warnings.maintenance,Manutenzione,Lavori in corso,,,2,it-agent-v1
+trail-warnings.steep-slope,Pendenza elevata,Forte pendenza,,,2,it-agent-v1
+trail-warnings.caution-slippery,Attenzione: fondo scivoloso,,,,2,it-agent-v1
+trail-warnings.danger,Pericolo,,,,2,it-agent-v1
+trail-warnings.beware-falling-rocks,Attenzione: caduta sassi,Caduta massi,,,2,it-agent-v1
+trail-warnings.first-aid-station,Posto di primo soccorso,Primo soccorso,,,2,it-agent-v1
+trail-warnings.service-suspended,Servizio sospeso,,,,2,it-agent-v1
+trail-landmarks.trail-marker,il segnavia,la segnaletica,,,2,it-agent-v1
+trail-landmarks.fork-junction,il bivio,l'incrocio,,,2,it-agent-v1
+trail-landmarks.boardwalk-cliff-path,passerella / sentiero esposto,,,,2,it-agent-v1
+trail-landmarks.start,Partenza,,,,2,it-agent-v1
+trail-landmarks.end,Arrivo,,,,2,it-agent-v1
+trail-landmarks.elevation,l'altitudine,la quota,,,2,it-agent-v1
+trail-landmarks.sunset,il tramonto,,,,2,it-agent-v1
+trail-landmarks.water-point,punto acqua,fontana,,,2,it-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,Questo sentiero è adatto ai principianti?,,,,2,it-agent-v1
+trail-transport.how-long-is-the-wait,Quanto si deve aspettare?,,,,2,it-agent-v1
+weather.forecast,Quali sono le previsioni del tempo?,,,,2,it-agent-v1
+weather.will-it-rain,Pioverà oggi?,,,,2,it-agent-v1
+weather.is-it-safe-today,Oggi è sicuro?,,,,2,it-agent-v1
+weather.how-cold-at-night,Che freddo fa di notte?,,,,2,it-agent-v1
+weather.rain,la pioggia,,,,2,it-agent-v1
+weather.snow,la neve,,,,2,it-agent-v1
+weather.wind,il vento,,,,2,it-agent-v1
+weather.storm,il temporale,la tempesta,,,2,it-agent-v1
+weather.ice,il ghiaccio,,,,2,it-agent-v1
+weather.fog,la nebbia,,,,2,it-agent-v1
+weather.heat,il caldo,,,,2,it-agent-v1
+weather.cold,il freddo,,,,2,it-agent-v1
+weather.humid,umido,,,,2,it-agent-v1
+weather.sunrise,l'alba,,,,2,it-agent-v1
+weather.flood,l'alluvione,l'inondazione,,,2,it-agent-v1
+weather.avalanche-risk,rischio valanghe,,,,2,it-agent-v1

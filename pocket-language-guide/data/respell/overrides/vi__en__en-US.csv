@@ -708,6 +708,7 @@ pronouns-verbs.looking-for-thing,dahng teem + doh vuht
 emergency-medical.i-am-bleeding-badly,toy chigh mow nyee-oh
 lost-rescue.my-friend-is-hurt,bahn toy bee tuh-ung
 dietary-needs.does-it-contain-fish-stock,mawn nigh kaw nuh-uk mam khohng ah?
+dietary-needs.does-it-contain-pork-stock,nuh-uk zoong kaw suh-ung luhn khohng ah?
 hotel-basics.for-nights,uh {} daym
 hotel-requests.is-there-a-safe,kaw ket sat khohng ah?
 payment-receipt.is-tax-included,dah gohm tway chuh-uh ah?
@@ -744,3 +745,5 @@ numbers-money.dong,dohng
 numbers-money.dong-symbol,dohng
 dietary-needs.no-pork,khohng teet luhn
 dietary-needs.is-this-halal,digh kaw figh doh hah-lahl khohng ah?
+pharmacy-symptoms.i-think-i-have-malaria,toy ngee toy bee soht ret
+pharmacy-symptoms.i-need-a-malaria-test,toy kuhn set ngee-um soht ret

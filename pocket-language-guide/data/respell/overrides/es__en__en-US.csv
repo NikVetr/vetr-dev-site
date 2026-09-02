@@ -713,6 +713,7 @@ pronouns-verbs.looking-for-thing,BOOS-ko
 emergency-medical.i-am-bleeding-badly,es-TOY san-GRAN-doh MOO-cho
 lost-rescue.my-friend-is-hurt,mee ah-MEE-go es-TA eh-REE-doh
 dietary-needs.does-it-contain-fish-stock,YEH-va KAL-doh deh pes-KAH-doh
+dietary-needs.does-it-contain-pork-stock,YEH-va KAL-doh deh SER-doh
 hotel-basics.for-nights,por {} NO-ches
 hotel-requests.is-there-a-safe,eye KAH-ha FWER-teh
 payment-receipt.is-tax-included,el eem-PWES-toh es-TA een-kloo-EE-doh
@@ -754,3 +755,5 @@ transit-rides.do-i-need-to-validate,TEN-go keh vah-lee-DAR ES-teh bo-LEH-toh
 rail-station-words.ticket-validator,vah-lee-dah-DOH-ra
 dietary-needs.no-pork,seen SER-doh nee hah-MON nee em-boo-TEE-dos
 dietary-needs.is-this-halal,ES-to es ah-LAL
+pharmacy-symptoms.i-think-i-have-malaria,KREH-oh keh TEN-go mah-LAH-ree-ah
+pharmacy-symptoms.i-need-a-malaria-test,neh-seh-SEE-toh OO-na PRWEH-ba deh mah-LAH-ree-ah

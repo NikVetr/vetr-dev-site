@@ -9,6 +9,8 @@ police-consulate.i-want-to-report-a-theft,Quiero denunciar un robo,,,,2,es-agent
 body-parts.stomach,el estómago,la barriga · el vientre,,,2,es-agent-v1
 medical-conditions.i-have-asthma,Tengo asma,,,,2,es-agent-v1
 pharmacy-symptoms.i-have-a-fever,Tengo fiebre,,,,2,es-agent-v1
+pharmacy-symptoms.i-think-i-have-malaria,Creo que tengo malaria,paludismo,,,2,malaria-v1
+pharmacy-symptoms.i-need-a-malaria-test,Necesito una prueba de malaria,,,,2,malaria-v1
 police-consulate.my-bag-was-stolen,Me robaron el bolso,Me robaron la mochila,,,2,es-agent-v1
 body-parts.back,la espalda,,,,2,es-agent-v1
 medical-conditions.i-have-a-heart-condition,Tengo una enfermedad del corazón,Tengo una cardiopatía,,,2,es-agent-v1

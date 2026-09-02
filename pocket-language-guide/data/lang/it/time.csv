@@ -1,0 +1,44 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,Che ore sono?,,,,2,it-agent-v1
+time-scheduling.how-many-minutes,Quanti minuti?,,,,2,it-agent-v1
+time-scheduling.what-time-should-we-meet,A che ora ci vediamo?,,,,2,it-agent-v1
+time-scheduling.can-we-change-the-time,Possiamo cambiare l'ora?,,,,2,it-agent-v1
+time-scheduling.when-is-convenient,Quando Le va bene?,,,,2,it-agent-v1
+time-scheduling.what-is-today-s-date,Che data è oggi?,Quanti ne abbiamo oggi?,,,2,it-agent-v1
+time-scheduling.what-day-is-it-today,Che giorno è oggi?,,,,2,it-agent-v1
+time-scheduling.what-time-does-it-open,A che ora apre?,,,,2,it-agent-v1
+time-scheduling.what-time-does-it-close,A che ora chiude?,,,,2,it-agent-v1
+time-words.today,oggi,,,,2,it-agent-v1
+time-words.tomorrow,domani,,,,2,it-agent-v1
+time-words.yesterday,ieri,,,,2,it-agent-v1
+time-words.this-week,questa settimana,,,,2,it-agent-v1
+time-words.next-week,la settimana prossima,,,,2,it-agent-v1
+time-words.morning,la mattina,,,,2,it-agent-v1
+time-words.afternoon,il pomeriggio,,,,2,it-agent-v1
+time-words.evening,la sera,,,,2,it-agent-v1
+time-words.spring,la primavera,,,,2,it-agent-v1
+time-words.summer,l'estate,,,,2,it-agent-v1
+time-words.fall,l'autunno,,,,2,it-agent-v1
+time-words.winter,l'inverno,,,,2,it-agent-v1
+days-of-week.monday,lunedì,,,,2,it-agent-v1
+days-of-week.tuesday,martedì,,,,2,it-agent-v1
+days-of-week.wednesday,mercoledì,,,,2,it-agent-v1
+days-of-week.thursday,giovedì,,,,2,it-agent-v1
+days-of-week.friday,venerdì,,,,2,it-agent-v1
+days-of-week.saturday,sabato,,,,2,it-agent-v1
+days-of-week.sunday,domenica,,,,2,it-agent-v1
+months.january,gennaio,,,,2,it-agent-v1
+months.february,febbraio,,,,2,it-agent-v1
+months.march,marzo,,,,2,it-agent-v1
+months.april,aprile,,,,2,it-agent-v1
+months.may,maggio,,,,2,it-agent-v1
+months.june,giugno,,,,2,it-agent-v1
+months.july,luglio,,,,2,it-agent-v1
+months.august,agosto,,,,2,it-agent-v1
+months.september,settembre,,,,2,it-agent-v1
+months.october,ottobre,,,,2,it-agent-v1
+months.november,novembre,,,,2,it-agent-v1
+months.december,dicembre,,,,2,it-agent-v1
+time-words.night,la notte,,,,2,it-agent-v1
+time-scheduling.how-long-does-it-take,Quanto tempo ci vuole?,,,,2,it-agent-v1
+time-words.clock-offset,"L'orologio swahili parte dall'alba e conta sei ore in meno del suo: saa moja sono le 7:00, saa sita è mezzogiorno, saa kumi sono le 16:00. Aggiunga sei al numero che sente per avere l'ora del suo orologio. Dica l'ora in cifre, oppure chieda saa ngapi za kizungu per l'ora occidentale.",,,,2,it-agent-v1

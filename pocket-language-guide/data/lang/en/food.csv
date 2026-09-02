@@ -20,6 +20,7 @@ food-ordering.check-please,"Check, please",,,,2,latex-reference-v2
 food-ordering.does-it-contain,Does it contain {} ?,,,,2,latex-reference-v2
 food-ordering.is-this-vegetarian,Is this vegetarian?,,,,2,latex-reference-v2
 dietary-needs.does-it-contain-fish-stock,Does it contain fish stock?,,,,2,japanese-reviewed-v6
+dietary-needs.does-it-contain-pork-stock,Does it contain pork stock?,,,,2,coordinator-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,I have a severe allergy to {},,,,2,japanese-reviewed-v6
 food-ordering.what-do-you-recommend,What do you recommend?,,,,2,japanese-reviewed-v6
 food-ordering.water-please,"Water, please",,,,2,japanese-reviewed-v6

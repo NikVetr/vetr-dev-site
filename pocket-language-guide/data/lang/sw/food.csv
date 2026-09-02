@@ -11,6 +11,7 @@ dietary-needs.i-am-vegan,"Sili nyama, samaki, mayai wala maziwa",,,"no meat, fis
 dietary-needs.i-do-not-eat,Sili {},,,,2,sw-agent-v1
 dietary-needs.i-am-allergic-to,Nina mzio wa {},,,,2,sw-agent-v1
 dietary-needs.does-it-contain-fish-stock,"Je, kuna supu ya samaki ndani?",,,,2,sw-agent-v1
+dietary-needs.does-it-contain-pork-stock,"Je, kuna supu ya nguruwe ndani?",,,,2,sw-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,Nina mzio mkali wa {},,,,2,sw-agent-v1
 food-ordering.table-for-two,Meza ya watu wawili,,,,2,sw-agent-v1
 food-ordering.is-a-table-available,"Je, kuna meza?",,,,2,sw-agent-v1

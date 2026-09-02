@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Posso pagare con la carta?,,,,2,it-agent-v1
+payment-receipt.pay-cash,Posso pagare in contanti?,,,,2,it-agent-v1
+payment-receipt.pay-by-qr-code,Posso pagare con il codice QR?,,,,2,it-agent-v1
+payment-receipt.a-receipt-please,"Uno scontrino, per favore","Una ricevuta, per favore",,,2,it-agent-v1
+shopping.i-am-just-looking,Sto solo dando un'occhiata,,,,2,it-agent-v1
+shopping.how-much-is-this,Quanto costa questo?,,,,2,it-agent-v1
+shopping.that-is-too-expensive,È troppo caro,,,,2,it-agent-v1
+shopping.can-it-be-a-little-cheaper,Può farmi un po' di sconto?,,,,2,it-agent-v1
+color-size-returns.do-you-have-another-color,Avete un altro colore?,,,,2,it-agent-v1
+color-size-returns.do-you-have-another-size,Avete un'altra taglia?,Avete un'altra misura?,,,2,it-agent-v1
+color-size-returns.may-i-try-it-on,Posso provarlo?,,,,2,it-agent-v1
+color-size-returns.can-i-return-it,Posso restituirlo?,,,,2,it-agent-v1
+color-size-returns.can-i-exchange-it,Posso cambiarlo?,,,,2,it-agent-v1
+color-size-returns.do-you-have-a-bag,Avete un sacchetto?,,,,2,it-agent-v1
+tax-refund.can-i-get-a-tax-refund,Posso chiedere il rimborso dell'IVA?,,,,2,it-agent-v1
+tax-refund.is-tax-free-shopping-available,Fate il tax free?,,,,2,it-agent-v1
+shopping.is-there-a-discount,C'è uno sconto?,,,,2,it-agent-v1
+payment-receipt.please-write-the-number,"Scriva la cifra, per favore",,,,2,it-agent-v1
+payment-receipt.how-much-in-total,Quant'è in tutto?,,,,2,it-agent-v1
+payment-receipt.can-we-pay-separately,Possiamo pagare separatamente?,,,,2,it-agent-v1
+payment-receipt.is-tax-included,L'IVA è compresa?,,,,2,it-agent-v1
+payment-receipt.my-card-was-declined,La mia carta è stata rifiutata,,,,2,it-agent-v1
+payment-receipt.the-bill-is-wrong,Credo che ci sia un errore nel conto,,,,2,it-agent-v1
+payment-receipt.i-already-paid,Ho già pagato,,,,2,it-agent-v1
+shopping.where-do-i-pay,Dove si paga?,,,,2,it-agent-v1
+shopping.i-will-take-this,Prendo questo,,,,2,it-agent-v1
+shopping.what-is-this,Che cos'è questo?,,,,2,it-agent-v1
+shopping.where-can-i-buy,Dove posso comprare {}?,,,,2,it-agent-v1
+shopping.do-you-have-this-in-stock,Ce l'avete disponibile?,,,,2,it-agent-v1
+shopping.two-of-these,"Due di questi, per favore",,,,2,it-agent-v1
+shopping.what-is-it-made-of,Di che cosa è fatto?,,,,2,it-agent-v1

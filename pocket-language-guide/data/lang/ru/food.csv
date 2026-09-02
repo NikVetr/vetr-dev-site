@@ -11,6 +11,7 @@ dietary-needs.i-am-vegan,Я веган,Я веганка,Ya vegan,,,2,ru-agent-v
 dietary-needs.i-do-not-eat,Я не ем {}.,,Ya ne yem {}.,,,2,ru-agent-v1
 dietary-needs.i-am-allergic-to,У меня аллергия на {}.,,U menya allergiya na {}.,,,2,ru-agent-v1
 dietary-needs.does-it-contain-fish-stock,Здесь есть рыбный бульон?,,Zdesʼ yestʼ rybnyy bulʼon?,,,2,ru-agent-v1
+dietary-needs.does-it-contain-pork-stock,Здесь есть свиной бульон?,Бульон из свинины?,Zdesʼ yestʼ svinoy bulʼon?,,,2,ru-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,У меня тяжёлая аллергия на {}.,,U menya tyazhëlaya allergiya na {}.,,,2,ru-agent-v1
 food-ordering.table-for-two,Столик на двоих.,,Stolik na dvoikh.,,,2,ru-agent-v1
 food-ordering.is-a-table-available,Есть свободный столик?,,Yestʼ svobodnyy stolik?,,,2,ru-agent-v1

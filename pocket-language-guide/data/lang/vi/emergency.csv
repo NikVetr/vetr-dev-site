@@ -45,6 +45,8 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,Tôi dị ứng thuốc sulfa,Kh
 pharmacy-symptoms.which-pharmacy-is-open-now,Nhà thuốc nào đang mở cửa ạ?,,,,2,vi-agent-v1
 pharmacy-symptoms.i-need-medicine-for,Tôi cần thuốc trị {},,,,2,vi-agent-v1
 pharmacy-symptoms.i-have-a-fever,Tôi bị sốt,,,,2,vi-agent-v1
+pharmacy-symptoms.i-think-i-have-malaria,Tôi nghĩ tôi bị sốt rét,,,,2,malaria-v1
+pharmacy-symptoms.i-need-a-malaria-test,Tôi cần xét nghiệm sốt rét,,,,2,malaria-v1
 pharmacy-symptoms.i-have-diarrhea,Tôi bị tiêu chảy,,,,2,vi-agent-v1
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Nhà thuốc nào mở ban đêm ạ?,Nhà thuốc 24/24 ở đâu ạ?,,,2,vi-agent-v1
 pharmacy-symptoms.painkiller,Thuốc giảm đau,,,,2,vi-agent-v1

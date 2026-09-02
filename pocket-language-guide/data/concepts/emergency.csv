@@ -45,39 +45,41 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,medical-conditions,entry,phrase,
 pharmacy-symptoms.which-pharmacy-is-open-now,pharmacy-symptoms,entry,phrase,which-pharmacy-is-open-now,1,0.900,pharmacy-symptoms.pharmacy,0,0,neutral,,
 pharmacy-symptoms.i-need-medicine-for,pharmacy-symptoms,entry,template,i-need-medicine-for,2,0.880,pharmacy-symptoms.i-need-medicine-for,0,1,neutral,,
 pharmacy-symptoms.i-have-a-fever,pharmacy-symptoms,refphrase,phrase,i-have-a-fever,3,0.880,pharmacy-symptoms.i-have-a-fever,0,0,neutral,,
-pharmacy-symptoms.i-have-diarrhea,pharmacy-symptoms,refphrase,phrase,i-have-diarrhea,4,0.860,pharmacy-symptoms.i-have-diarrhea,0,0,neutral,,
-pharmacy-symptoms.where-is-an-all-night-pharmacy,pharmacy-symptoms,entry,phrase,where-is-an-all-night-pharmacy,5,0.860,pharmacy-symptoms.pharmacy,1,0,neutral,,"Many countries run a night/weekend duty rota rather than 24h shops (pharmacie de garde, farmacia de guardia)."
-pharmacy-symptoms.painkiller,pharmacy-symptoms,ref,word,painkiller,6,0.860,pharmacy-symptoms.analgesic,0,0,neutral,,
-pharmacy-symptoms.do-i-need-a-prescription,pharmacy-symptoms,entry,phrase,do-i-need-a-prescription,7,0.840,pharmacy-symptoms.prescription,0,0,neutral,,
-pharmacy-symptoms.i-have-a-headache,pharmacy-symptoms,refphrase,phrase,i-have-a-headache,8,0.840,pharmacy-symptoms.i-have-a-headache,0,0,neutral,,
-pharmacy-symptoms.paracetamol-acetaminophen,pharmacy-symptoms,refphrase,word,paracetamol-acetaminophen,9,0.840,pharmacy-symptoms.analgesic,1,0,neutral,,"Same drug: paracetamol is the international name, acetaminophen the US name (Tylenol, Panadol)."
-pharmacy-symptoms.how-much-should-i-take,pharmacy-symptoms,entry,phrase,how-much-should-i-take,10,0.820,pharmacy-symptoms.dosage,0,0,neutral,,
-pharmacy-symptoms.i-am-vomiting,pharmacy-symptoms,refphrase,phrase,i-am-vomiting,11,0.820,pharmacy-symptoms.i-am-vomiting,0,0,neutral,,
-pharmacy-symptoms.rehydration-salts,pharmacy-symptoms,refphrase,word,rehydration-salts,12,0.820,pharmacy-symptoms.rehydration-salts,0,0,neutral,,WHO oral rehydration salts (ORS); the first-line treatment for dehydration from diarrhea.
-pharmacy-symptoms.how-many-times-a-day,pharmacy-symptoms,entry,phrase,how-many-times-a-day,13,0.800,pharmacy-symptoms.dosage,1,0,neutral,,
-pharmacy-symptoms.i-have-a-stomach-ache,pharmacy-symptoms,refphrase,phrase,i-have-a-stomach-ache,14,0.800,pharmacy-symptoms.i-have-a-stomach-ache,0,0,neutral,,
-pharmacy-symptoms.i-have-a-cough,pharmacy-symptoms,refphrase,phrase,i-have-a-cough,15,0.800,pharmacy-symptoms.i-have-a-cough,0,0,neutral,,
-pharmacy-symptoms.antihistamine,pharmacy-symptoms,ref,word,antihistamine,16,0.800,pharmacy-symptoms.antihistamine,0,0,neutral,,"For allergy, hives and insect bites."
-pharmacy-symptoms.anti-diarrhea-medicine,pharmacy-symptoms,refphrase,word,anti-diarrhea-medicine,17,0.790,pharmacy-symptoms.anti-diarrhea-medicine,0,0,neutral,,Generic: loperamide.
-pharmacy-symptoms.is-this-safe-to-take-with,pharmacy-symptoms,entry,template,is-this-safe-to-take-with,18,0.780,pharmacy-symptoms.safety,0,1,neutral,,
-pharmacy-symptoms.i-feel-dizzy,pharmacy-symptoms,refphrase,phrase,i-feel-dizzy,19,0.780,pharmacy-symptoms.i-feel-dizzy,0,0,neutral,,
-pharmacy-symptoms.ibuprofen,pharmacy-symptoms,ref,word,ibuprofen,20,0.780,pharmacy-symptoms.analgesic,2,0,neutral,,
-pharmacy-symptoms.i-have-a-sore-throat,pharmacy-symptoms,refphrase,phrase,i-have-a-sore-throat,21,0.760,pharmacy-symptoms.i-have-a-sore-throat,0,0,neutral,,
-pharmacy-symptoms.can-i-get-this-medicine-here,pharmacy-symptoms,entry,phrase,can-i-get-this-medicine-here,22,0.760,pharmacy-symptoms.prescription,1,0,neutral,,Said while showing the box or prescription.
-pharmacy-symptoms.bandage,pharmacy-symptoms,ref,word,bandage,23,0.760,pharmacy-symptoms.bandage,0,0,neutral,,
-pharmacy-symptoms.the-pain-is-severe,pharmacy-symptoms,refphrase,phrase,the-pain-is-severe,24,0.740,pharmacy-symptoms.the-pain-is-severe,0,0,neutral,,
-pharmacy-symptoms.antiseptic,pharmacy-symptoms,ref,word,antiseptic,25,0.740,pharmacy-symptoms.antiseptic,0,0,neutral,,
-pharmacy-symptoms.i-feel-nauseous,pharmacy-symptoms,refphrase,phrase,i-feel-nauseous,26,0.720,pharmacy-symptoms.i-feel-nauseous,0,0,neutral,,
-pharmacy-symptoms.i-have-a-rash,pharmacy-symptoms,refphrase,phrase,i-have-a-rash,27,0.720,pharmacy-symptoms.i-have-a-rash,0,0,neutral,,
-pharmacy-symptoms.before-or-after-food,pharmacy-symptoms,entry,phrase,before-or-after-food,28,0.710,pharmacy-symptoms.dosage,2,0,neutral,,
-pharmacy-symptoms.i-think-it-is-infected,pharmacy-symptoms,refphrase,phrase,i-think-it-is-infected,29,0.700,pharmacy-symptoms.i-think-it-is-infected,0,0,neutral,,
-pharmacy-symptoms.motion-sickness-tablets,pharmacy-symptoms,refphrase,word,motion-sickness-tablets,30,0.700,pharmacy-symptoms.motion-sickness-tablets,0,0,neutral,,
-pharmacy-symptoms.i-have-a-cut,pharmacy-symptoms,refphrase,phrase,i-have-a-cut,31,0.680,pharmacy-symptoms.i-have-a-cut,0,0,neutral,,
-pharmacy-symptoms.antacid,pharmacy-symptoms,ref,word,antacid,32,0.680,pharmacy-symptoms.antacid,0,0,neutral,,For indigestion and heartburn.
-pharmacy-symptoms.i-have-a-burn,pharmacy-symptoms,refphrase,phrase,i-have-a-burn,33,0.660,pharmacy-symptoms.i-have-a-burn,0,0,neutral,,
-pharmacy-symptoms.it-started-days-ago,pharmacy-symptoms,entry,template,it-started-days-ago,34,0.660,pharmacy-symptoms.it-started-days-ago,0,1,neutral,,
-pharmacy-symptoms.cough-medicine,pharmacy-symptoms,refphrase,word,cough-medicine,35,0.650,pharmacy-symptoms.cough-medicine,0,0,neutral,,
-pharmacy-symptoms.is-this-safe-during-pregnancy,pharmacy-symptoms,entry,phrase,is-this-safe-during-pregnancy,36,0.620,pharmacy-symptoms.safety,1,0,neutral,,
+pharmacy-symptoms.i-think-i-have-malaria,pharmacy-symptoms,refphrase,phrase,i-think-i-have-malaria,4,0.870,pharmacy-symptoms.malaria,0,0,neutral,sw;hi;th;id;vi;pt;es,Scoped to the targets where malaria is transmitted. The fever row does not reach it: naming the disease is what gets a test rather than a painkiller.
+pharmacy-symptoms.i-need-a-malaria-test,pharmacy-symptoms,entry,phrase,i-need-a-malaria-test,5,0.865,pharmacy-symptoms.malaria,1,0,neutral,sw;hi;th;id;vi;pt;es,"The rapid diagnostic test answers in 15-20 minutes and is stocked by clinics and many pharmacies, so this is the row that turns a fever into a diagnosis. Prefer the local malaria programme's own term."
+pharmacy-symptoms.i-have-diarrhea,pharmacy-symptoms,refphrase,phrase,i-have-diarrhea,6,0.860,pharmacy-symptoms.i-have-diarrhea,0,0,neutral,,
+pharmacy-symptoms.where-is-an-all-night-pharmacy,pharmacy-symptoms,entry,phrase,where-is-an-all-night-pharmacy,7,0.860,pharmacy-symptoms.pharmacy,1,0,neutral,,"Many countries run a night/weekend duty rota rather than 24h shops (pharmacie de garde, farmacia de guardia)."
+pharmacy-symptoms.painkiller,pharmacy-symptoms,ref,word,painkiller,8,0.860,pharmacy-symptoms.analgesic,0,0,neutral,,
+pharmacy-symptoms.do-i-need-a-prescription,pharmacy-symptoms,entry,phrase,do-i-need-a-prescription,9,0.840,pharmacy-symptoms.prescription,0,0,neutral,,
+pharmacy-symptoms.i-have-a-headache,pharmacy-symptoms,refphrase,phrase,i-have-a-headache,10,0.840,pharmacy-symptoms.i-have-a-headache,0,0,neutral,,
+pharmacy-symptoms.paracetamol-acetaminophen,pharmacy-symptoms,refphrase,word,paracetamol-acetaminophen,11,0.840,pharmacy-symptoms.analgesic,1,0,neutral,,"Same drug: paracetamol is the international name, acetaminophen the US name (Tylenol, Panadol)."
+pharmacy-symptoms.how-much-should-i-take,pharmacy-symptoms,entry,phrase,how-much-should-i-take,12,0.820,pharmacy-symptoms.dosage,0,0,neutral,,
+pharmacy-symptoms.i-am-vomiting,pharmacy-symptoms,refphrase,phrase,i-am-vomiting,13,0.820,pharmacy-symptoms.i-am-vomiting,0,0,neutral,,
+pharmacy-symptoms.rehydration-salts,pharmacy-symptoms,refphrase,word,rehydration-salts,14,0.820,pharmacy-symptoms.rehydration-salts,0,0,neutral,,WHO oral rehydration salts (ORS); the first-line treatment for dehydration from diarrhea.
+pharmacy-symptoms.how-many-times-a-day,pharmacy-symptoms,entry,phrase,how-many-times-a-day,15,0.800,pharmacy-symptoms.dosage,1,0,neutral,,
+pharmacy-symptoms.i-have-a-stomach-ache,pharmacy-symptoms,refphrase,phrase,i-have-a-stomach-ache,16,0.800,pharmacy-symptoms.i-have-a-stomach-ache,0,0,neutral,,
+pharmacy-symptoms.i-have-a-cough,pharmacy-symptoms,refphrase,phrase,i-have-a-cough,17,0.800,pharmacy-symptoms.i-have-a-cough,0,0,neutral,,
+pharmacy-symptoms.antihistamine,pharmacy-symptoms,ref,word,antihistamine,18,0.800,pharmacy-symptoms.antihistamine,0,0,neutral,,"For allergy, hives and insect bites."
+pharmacy-symptoms.anti-diarrhea-medicine,pharmacy-symptoms,refphrase,word,anti-diarrhea-medicine,19,0.790,pharmacy-symptoms.anti-diarrhea-medicine,0,0,neutral,,Generic: loperamide.
+pharmacy-symptoms.is-this-safe-to-take-with,pharmacy-symptoms,entry,template,is-this-safe-to-take-with,20,0.780,pharmacy-symptoms.safety,0,1,neutral,,
+pharmacy-symptoms.i-feel-dizzy,pharmacy-symptoms,refphrase,phrase,i-feel-dizzy,21,0.780,pharmacy-symptoms.i-feel-dizzy,0,0,neutral,,
+pharmacy-symptoms.ibuprofen,pharmacy-symptoms,ref,word,ibuprofen,22,0.780,pharmacy-symptoms.analgesic,2,0,neutral,,
+pharmacy-symptoms.i-have-a-sore-throat,pharmacy-symptoms,refphrase,phrase,i-have-a-sore-throat,23,0.760,pharmacy-symptoms.i-have-a-sore-throat,0,0,neutral,,
+pharmacy-symptoms.can-i-get-this-medicine-here,pharmacy-symptoms,entry,phrase,can-i-get-this-medicine-here,24,0.760,pharmacy-symptoms.prescription,1,0,neutral,,Said while showing the box or prescription.
+pharmacy-symptoms.bandage,pharmacy-symptoms,ref,word,bandage,25,0.760,pharmacy-symptoms.bandage,0,0,neutral,,
+pharmacy-symptoms.the-pain-is-severe,pharmacy-symptoms,refphrase,phrase,the-pain-is-severe,26,0.740,pharmacy-symptoms.the-pain-is-severe,0,0,neutral,,
+pharmacy-symptoms.antiseptic,pharmacy-symptoms,ref,word,antiseptic,27,0.740,pharmacy-symptoms.antiseptic,0,0,neutral,,
+pharmacy-symptoms.i-feel-nauseous,pharmacy-symptoms,refphrase,phrase,i-feel-nauseous,28,0.720,pharmacy-symptoms.i-feel-nauseous,0,0,neutral,,
+pharmacy-symptoms.i-have-a-rash,pharmacy-symptoms,refphrase,phrase,i-have-a-rash,29,0.720,pharmacy-symptoms.i-have-a-rash,0,0,neutral,,
+pharmacy-symptoms.before-or-after-food,pharmacy-symptoms,entry,phrase,before-or-after-food,30,0.710,pharmacy-symptoms.dosage,2,0,neutral,,
+pharmacy-symptoms.i-think-it-is-infected,pharmacy-symptoms,refphrase,phrase,i-think-it-is-infected,31,0.700,pharmacy-symptoms.i-think-it-is-infected,0,0,neutral,,
+pharmacy-symptoms.motion-sickness-tablets,pharmacy-symptoms,refphrase,word,motion-sickness-tablets,32,0.700,pharmacy-symptoms.motion-sickness-tablets,0,0,neutral,,
+pharmacy-symptoms.i-have-a-cut,pharmacy-symptoms,refphrase,phrase,i-have-a-cut,33,0.680,pharmacy-symptoms.i-have-a-cut,0,0,neutral,,
+pharmacy-symptoms.antacid,pharmacy-symptoms,ref,word,antacid,34,0.680,pharmacy-symptoms.antacid,0,0,neutral,,For indigestion and heartburn.
+pharmacy-symptoms.i-have-a-burn,pharmacy-symptoms,refphrase,phrase,i-have-a-burn,35,0.660,pharmacy-symptoms.i-have-a-burn,0,0,neutral,,
+pharmacy-symptoms.it-started-days-ago,pharmacy-symptoms,entry,template,it-started-days-ago,36,0.660,pharmacy-symptoms.it-started-days-ago,0,1,neutral,,
+pharmacy-symptoms.cough-medicine,pharmacy-symptoms,refphrase,word,cough-medicine,37,0.650,pharmacy-symptoms.cough-medicine,0,0,neutral,,
+pharmacy-symptoms.is-this-safe-during-pregnancy,pharmacy-symptoms,entry,phrase,is-this-safe-during-pregnancy,38,0.620,pharmacy-symptoms.safety,1,0,neutral,,
 body-parts.head,body-parts,ref,word,head,1,0.840,body-parts.head,0,0,neutral,,
 body-parts.stomach,body-parts,ref,word,stomach,2,0.820,body-parts.stomach,0,0,neutral,,"Belly / abdomen, not the organ specifically."
 body-parts.back,body-parts,ref,word,back,3,0.810,body-parts.back,0,0,neutral,,"The body part, not the direction."

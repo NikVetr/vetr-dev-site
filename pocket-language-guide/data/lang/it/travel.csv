@@ -1,0 +1,113 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+directions.where-is,Dov'è {}?,,,,2,it-agent-v1
+directions.how-do-i-get-to,Come si arriva a {}?,,,,2,it-agent-v1
+directions.is-it-far,È lontano?,,,,2,it-agent-v1
+directions.how-long-on-foot,Quanto ci vuole a piedi?,,,,2,it-agent-v1
+quick-directions.go-straight,Sempre dritto,Vada dritto,,,2,it-agent-v1
+quick-directions.turn-left,Giri a sinistra,,,,2,it-agent-v1
+quick-directions.turn-right,Giri a destra,,,,2,it-agent-v1
+quick-directions.this-way,Da questa parte,,,,2,it-agent-v1
+quick-directions.that-way,Da quella parte,,,,2,it-agent-v1
+quick-directions.on-the-left,A sinistra,,,,2,it-agent-v1
+quick-directions.on-the-right,A destra,,,,2,it-agent-v1
+quick-directions.across-from-here,Di fronte,,,,2,it-agent-v1
+quick-directions.in-front,Davanti,,,,2,it-agent-v1
+quick-directions.behind,Dietro,,,,2,it-agent-v1
+taxi.please-take-me-here,"Mi porti qui, per favore",,,,2,it-agent-v1
+taxi.please-send-me-the-address,"Mi mandi l'indirizzo, per favore",,,,2,it-agent-v1
+taxi.we-need-the-east-gate-not-the-south-gate,"Ci serve l'ingresso est, non l'ingresso sud",,,,2,it-agent-v1
+taxi.please-stop-here,"Si fermi qui, per favore",,,,2,it-agent-v1
+taxi.can-you-wait-for-me-here,Mi può aspettare qui?,,,,2,it-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,Dobbiamo prendere il treno ad alta velocità,,,,2,it-agent-v1
+taxi.please-use-the-meter,"Accenda il tassametro, per favore",,,,2,it-agent-v1
+transit-rides.two-tickets,"Due biglietti, per favore",,,,2,it-agent-v1
+transit-rides.where-is-the-subway-station,Dov'è la stazione della metro?,,,,2,it-agent-v1
+transit-rides.does-this-bus-train-go-to,Questo autobus o treno va a {}?,,,,2,it-agent-v1
+transit-rides.what-is-the-next-stop,Qual è la prossima fermata?,,,,2,it-agent-v1
+transit-rides.please-tell-me-where-to-get-off,"Mi dica dove devo scendere, per favore",,,,2,it-agent-v1
+transit-rides.is-this-direct,È diretto?,,,,2,it-agent-v1
+transit-rides.do-i-need-to-transfer,Devo cambiare?,,,,2,it-agent-v1
+transit-rides.is-it-delayed,È in ritardo?,,,,2,it-agent-v1
+transit-rides.i-am-in-a-hurry,Ho fretta,,,,2,it-agent-v1
+transit-rides.which-platform,Quale binario?,,,,2,it-agent-v1
+transit-rides.what-time-is-the-next-one,A che ora c'è il prossimo?,,,,2,it-agent-v1
+transit-rides.i-went-past-my-stop,Ho passato la mia fermata,,,,2,it-agent-v1
+place-words.visitor-center,centro visitatori,ufficio informazioni,,,2,it-agent-v1
+place-words.railway-station,stazione ferroviaria,,,,2,it-agent-v1
+place-words.airport,aeroporto,,,,2,it-agent-v1
+place-words.service-desk,banco informazioni,accoglienza,,,2,it-agent-v1
+place-words.bus-stop,fermata dell'autobus,,,,2,it-agent-v1
+place-words.luggage-storage,deposito bagagli,,,,2,it-agent-v1
+pickup-meeting.where-is-the-pickup-point,Dov'è il punto di ritrovo?,,,,2,it-agent-v1
+pickup-meeting.please-send-me-the-pickup-point,Mi mandi il punto di ritrovo,,,,2,it-agent-v1
+pickup-meeting.please-pick-us-up-here,Ci venga a prendere qui,,,,2,it-agent-v1
+pickup-meeting.meet-us-at,Ci vediamo a {},,,,2,it-agent-v1
+pickup-meeting.please-call-me-a-ride,"Mi chiami un NCC, per favore",Mi chiami un'auto con conducente,,,2,it-agent-v1
+rail-station-words.high-speed-rail,alta velocità,Frecciarossa,,,2,it-agent-v1
+rail-station-words.transfer,cambio,coincidenza,,,2,it-agent-v1
+rail-station-words.ticket-gate,tornello,varco,,,2,it-agent-v1
+rail-station-words.platform,binario,,,,2,it-agent-v1
+rail-station-words.ticket-office,biglietteria,,,,2,it-agent-v1
+rail-station-words.waiting-room,sala d'attesa,,,,2,it-agent-v1
+rail-station-words.train-number,numero del treno,,,,2,it-agent-v1
+rail-station-words.carriage,carrozza,vagone,,,2,it-agent-v1
+rail-station-words.seat,posto,,,,2,it-agent-v1
+rail-station-words.last-train,ultimo treno,,,,2,it-agent-v1
+rail-station-words.delayed,In ritardo,,,,2,it-agent-v1
+rail-station-words.final-stop,capolinea,ultima fermata,,,2,it-agent-v1
+common-signs.open-on,Aperto,Acceso,,,2,it-agent-v1
+common-signs.closed-off,Chiuso,Spento,,,2,it-agent-v1
+common-signs.occupied,Occupato,,,,2,it-agent-v1
+common-signs.vacant,Libero,,,,2,it-agent-v1
+common-signs.caution,Attenzione,,,,2,it-agent-v1
+common-signs.no-entry,Vietato l'accesso,Divieto di accesso,,,2,it-agent-v1
+common-signs.no-smoking,Vietato fumare,,,,2,it-agent-v1
+common-signs.no-photography,Vietato fotografare,,,,2,it-agent-v1
+common-signs.do-not-touch,Non toccare,,,,2,it-agent-v1
+common-signs.temporarily-closed,Chiuso temporaneamente,,,,2,it-agent-v1
+transit-rides.can-i-use-this-ticket,Posso usare questo biglietto?,,,,2,it-agent-v1
+taxi.i-will-get-off-here,Scendo qui,,,,2,it-agent-v1
+pickup-meeting.please-call-a-taxi,"Chiami un taxi, per favore",,,,2,it-agent-v1
+common-signs.open-operating,In servizio,,,,2,it-agent-v1
+common-signs.closed,Chiuso,,,,2,it-agent-v1
+common-signs.stopped-stop,Fermo,Fuori servizio,,,2,it-agent-v1
+place-words.tourist-spot-sightseeing-area,zona turistica,,,,2,it-agent-v1
+border-customs.i-am-a-tourist,Vengo per turismo,Sono un turista,,,2,it-agent-v1
+border-customs.here-is-my-passport,Ecco il mio passaporto,,,,2,it-agent-v1
+border-customs.i-am-staying-for-days,Resto {} giorni,,,,2,it-agent-v1
+border-customs.nothing-to-declare,Niente da dichiarare,,,,2,it-agent-v1
+border-customs.i-am-staying-at,Alloggio presso {},,,,2,it-agent-v1
+border-customs.i-am-here-for-business,Vengo per lavoro,,,,2,it-agent-v1
+border-customs.i-have-a-return-ticket,Ho il biglietto di ritorno,,,,2,it-agent-v1
+border-customs.i-am-visiting-family,Vengo a trovare dei parenti,,,,2,it-agent-v1
+border-customs.this-is-for-personal-use,È per uso personale,,,,2,it-agent-v1
+border-customs.i-am-in-transit,Sono in transito,,,,2,it-agent-v1
+border-customs.i-have-in-cash,Ho {} in contanti,,,,2,it-agent-v1
+border-customs.this-is-a-gift,È un regalo,,,,2,it-agent-v1
+border-customs.where-do-i-collect-my-baggage,Dove ritiro i bagagli?,,,,2,it-agent-v1
+border-customs.how-long-may-i-stay,Quanto tempo posso restare?,,,,2,it-agent-v1
+border-customs.i-have-a-connecting-flight,Ho un volo in coincidenza,,,,2,it-agent-v1
+border-customs.may-i-have-an-entry-stamp,Mi mette il timbro d'ingresso?,,,,2,it-agent-v1
+border-customs.visa,il visto,,,,2,it-agent-v1
+border-customs.i-have-no-food-or-plants,Non ho alimenti né piante,,,,2,it-agent-v1
+border-customs.passport-control,Controllo passaporti,,,,2,it-agent-v1
+border-customs.customs,Dogana,,,,2,it-agent-v1
+border-customs.baggage-claim,Ritiro bagagli,,,,2,it-agent-v1
+border-customs.customs-declaration,Dichiarazione doganale,,,,2,it-agent-v1
+border-customs.arrival-card,Carta di sbarco,Modulo d'ingresso,,,2,it-agent-v1
+border-customs.transit,Transito,,,,2,it-agent-v1
+border-customs.boarding-pass,Carta d'imbarco,,,,2,it-agent-v1
+directions.please-show-me-on-the-map,"Me lo mostri sulla mappa, per favore",,,,2,it-agent-v1
+directions.where-is-the-nearest,Dov'è il {} più vicino?,Dov'è la {} più vicina?,,,2,it-agent-v1
+directions.where-am-i,Dove mi trovo?,,,,2,it-agent-v1
+directions.which-way,Da che parte?,,,,2,it-agent-v1
+directions.can-i-walk-there,Ci posso andare a piedi?,,,,2,it-agent-v1
+directions.how-far-is-it,Quanto dista?,,,,2,it-agent-v1
+directions.which-exit,Quale uscita?,,,,2,it-agent-v1
+directions.can-you-show-me-the-way,Mi può indicare la strada?,,,,2,it-agent-v1
+directions.north,nord,,,,2,it-agent-v1
+directions.south,sud,,,,2,it-agent-v1
+directions.east,est,,,,2,it-agent-v1
+directions.west,ovest,,,,2,it-agent-v1
+transit-rides.do-i-need-to-validate,Devo convalidare il biglietto?,Devo obliterare il biglietto?,,,2,it-agent-v1
+rail-station-words.ticket-validator,obliteratrice,validatrice,,,2,it-agent-v1

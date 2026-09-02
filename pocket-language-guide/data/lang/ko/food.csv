@@ -11,6 +11,7 @@ dietary-needs.i-am-vegan,비건이에요,완전 채식이에요,bigeonieyo,,no a
 dietary-needs.i-do-not-eat,{} 안 먹어요,,{} an meogeoyo,,,2,ko-agent-v1
 dietary-needs.i-am-allergic-to,{} 알레르기가 있어요,,{} allereugiga isseoyo,,,2,ko-agent-v1
 dietary-needs.does-it-contain-fish-stock,생선 육수 들어갔어요?,멸치 육수 들어갔어요?,saengseon yuksu deureogasseoyo?,,,2,ko-agent-v1
+dietary-needs.does-it-contain-pork-stock,돼지 육수 들어갔어요?,돼지고기 육수 들어갔어요?,dwaeji yuksu deureogasseoyo?,,,2,ko-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,{} 알레르기가 심해요,,{} allereugiga simhaeyo,,,2,ko-agent-v1
 food-ordering.table-for-two,두 명이요,,du myeongiyo,,,2,ko-agent-v1
 food-ordering.is-a-table-available,자리 있어요?,,jari isseoyo?,,,2,ko-agent-v1

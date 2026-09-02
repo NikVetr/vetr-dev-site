@@ -11,6 +11,7 @@ dietary-needs.i-am-vegan,Tôi ăn thuần chay,"Chay, không trứng sữa",,,2,
 dietary-needs.i-do-not-eat,Tôi không ăn {},,,,2,vi-agent-v1
 dietary-needs.i-am-allergic-to,Tôi bị dị ứng với {},,,,2,vi-agent-v1
 dietary-needs.does-it-contain-fish-stock,Món này có nước mắm không ạ?,Có nước dùng cá không ạ?,,fish sauce,2,vi-agent-v1
+dietary-needs.does-it-contain-pork-stock,Nước dùng có xương lợn không ạ?,Nước dùng có xương heo không ạ?,,,2,vi-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,Tôi bị dị ứng nặng với {},,,,2,vi-agent-v1
 food-ordering.table-for-two,Bàn cho hai người,,,,2,vi-agent-v1
 food-ordering.is-a-table-available,Còn bàn trống không ạ?,,,,2,vi-agent-v1

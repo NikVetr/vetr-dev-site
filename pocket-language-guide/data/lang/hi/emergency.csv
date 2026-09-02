@@ -45,6 +45,8 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,मुझे सल्फ़ा 
 pharmacy-symptoms.which-pharmacy-is-open-now,अभी कौन सी दवा की दुकान खुली है?,,abhī kaun sī davā kī dukān khulī hai?,,,2,hi-agent-v1
 pharmacy-symptoms.i-need-medicine-for,मुझे {} की दवा चाहिए,,mujhe {} kī davā cāhie,,,2,hi-agent-v1
 pharmacy-symptoms.i-have-a-fever,मुझे बुखार है,,mujhe bukhār hai,,,2,hi-agent-v1
+pharmacy-symptoms.i-think-i-have-malaria,लगता है मुझे मलेरिया है,,lagtā hai mujhe maleriyā hai,,,2,malaria-v1
+pharmacy-symptoms.i-need-a-malaria-test,मुझे मलेरिया की जाँच करानी है,,mujhe maleriyā kī jāṁc karānī hai,,,2,malaria-v1
 pharmacy-symptoms.i-have-diarrhea,मुझे दस्त हो रहे हैं,मुझे लूज़ मोशन है,mujhe dast ho rahe haiṁ,,,2,hi-agent-v1
 pharmacy-symptoms.where-is-an-all-night-pharmacy,रात में खुली दवा की दुकान कहाँ है?,,rāt meṁ khulī davā kī dukān kahāṁ hai?,,,2,hi-agent-v1
 pharmacy-symptoms.painkiller,दर्द की दवा,दर्द निवारक,dard kī davā,,,2,hi-agent-v1

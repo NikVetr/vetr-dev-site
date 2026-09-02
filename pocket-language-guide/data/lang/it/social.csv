@@ -1,0 +1,100 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+social-basics.hello,Ciao,,,,2,it-agent-v1
+social-basics.hello-polite,Buongiorno,Salve,,,2,it-agent-v1
+social-basics.good-morning,Buongiorno,,,,2,it-agent-v1
+social-basics.good-evening,Buonasera,,,,2,it-agent-v1
+social-basics.goodbye,Arrivederci,Ciao,,,2,it-agent-v1
+social-basics.thank-you,Grazie,Grazie mille,,,2,it-agent-v1
+social-basics.you-are-welcome,Prego,,,,2,it-agent-v1
+social-basics.excuse-me-sorry,Mi scusi,Scusi,,,2,it-agent-v1
+social-basics.sorry,Mi dispiace,,,,2,it-agent-v1
+social-basics.no-problem,Non c'è problema,,,,2,it-agent-v1
+social-basics.i-do-not-know,Non lo so,,,,2,it-agent-v1
+communication.i-do-not-speak-this-language,Non parlo italiano,,,,2,it-agent-v1
+communication.i-speak-only-a-little-of-this,Parlo poco italiano,,,,2,it-agent-v1
+communication.do-you-speak-english,Parla inglese?,,,,2,it-agent-v1
+communication.please-speak-more-slowly,"Parli più lentamente, per favore",,,,2,it-agent-v1
+communication.i-do-not-understand-spoken,Non capisco,,,,2,it-agent-v1
+communication.i-cannot-read-understand,Non so leggere questo,,,,2,it-agent-v1
+communication.please-say-it-again,"Ripeta, per favore",,,,2,it-agent-v1
+communication.please-write-it-down,"Lo scriva, per favore",,,,2,it-agent-v1
+communication.please-wait-a-moment,"Un momento, per favore",,,,2,it-agent-v1
+communication.can-you-help-me,Mi può aiutare?,,,,2,it-agent-v1
+communication.please-show-me-the-text,Mi mostri il testo in italiano,,,,2,it-agent-v1
+quick-responses.please-go-ahead,prego,si accomodi,,,2,it-agent-v1
+quick-responses.yes-right,sì / esatto,,,,2,it-agent-v1
+quick-responses.no-not,no / non,,,,2,it-agent-v1
+quick-responses.okay-can,d'accordo,,,,2,it-agent-v1
+quick-responses.cannot-not-allowed,non si può,vietato,,,2,it-agent-v1
+quick-responses.works-okay,funziona,,,,2,it-agent-v1
+quick-responses.does-not-work-no,non funziona,,,,2,it-agent-v1
+phone-translation.i-am-using-phone-translation,Sto usando un traduttore sul telefono,,,,2,it-agent-v1
+phone-translation.please-speak-toward-the-phone,Parli verso il telefono,,,,2,it-agent-v1
+phone-translation.one-sentence-at-a-time-please,"Una frase alla volta, per favore",,,,2,it-agent-v1
+phone-text-power.please-type-it-for-me,"Lo scriva sul telefono, per favore",,,,2,it-agent-v1
+phone-translation.please-write-the-place-name,Scriva il nome del posto in italiano,,,,2,it-agent-v1
+phone-text-power.please-use-simple-words,"Usi parole semplici, per favore",,,,2,it-agent-v1
+phone-text-power.my-phone-battery-is-low,Il telefono ha poca batteria,,,,2,it-agent-v1
+phone-text-power.do-you-have-a-power-bank,Ha un power bank?,Ha una batteria portatile?,,,2,it-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,La traduzione può essere imprecisa,,,,2,it-agent-v1
+phone-text-power.please-confirm,"Confermi, per favore",,,,2,it-agent-v1
+social-basics.good-night,Buonanotte,,,,2,it-agent-v1
+social-basics.okay-fine-i-am-okay,Sto bene,Va bene,,,2,it-agent-v1
+quick-responses.can-possible,si può,,,,2,it-agent-v1
+quick-responses.cannot-not-possible,non è possibile,,,,2,it-agent-v1
+quick-responses.okay-fine,va bene,,,,2,it-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,non è permesso,vietato,,,2,it-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Non capisco quello che dice,,,,2,it-agent-v1
+communication.i-do-not-understand,Non capisco,,,,2,it-agent-v1
+communication.i-cannot-read-it,Non riesco a leggerlo,,,,2,it-agent-v1
+phone-translation.please-type-it-and-show-me,Lo scriva sul telefono e me lo mostri,,,,2,it-agent-v1
+phone-translation.please-look-at-the-screen,"Guardi lo schermo, per favore",,,,2,it-agent-v1
+phone-text-power.may-i-charge-my-phone-here,Posso caricare il telefono qui?,,,,2,it-agent-v1
+sim-data.i-would-like-a-tourist-sim,Vorrei una SIM per turisti,,,,2,it-agent-v1
+sim-data.may-i-use-your-wifi,Posso usare il vostro Wi-Fi?,,,,2,it-agent-v1
+sim-data.how-much-data-is-included,Quanti giga sono inclusi?,,,,2,it-agent-v1
+sim-data.do-you-need-my-passport,Le serve il mio passaporto?,,,,2,it-agent-v1
+sim-data.how-long-is-it-valid,Quanto tempo è valida?,,,,2,it-agent-v1
+sim-data.please-activate-it,"La attivi, per favore",,,,2,it-agent-v1
+sim-data.do-you-have-an-esim,Avete una eSIM?,,,,2,it-agent-v1
+sim-data.my-data-is-not-working,I dati non funzionano,,,,2,it-agent-v1
+sim-data.does-it-need-registration,Va registrata?,,,,2,it-agent-v1
+sim-data.i-have-no-signal,Non ho segnale,,,,2,it-agent-v1
+sim-data.please-write-the-wifi-password,Scriva la password del Wi-Fi,,,,2,it-agent-v1
+sim-data.sim-card,la scheda SIM,la SIM,,,2,it-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Dove posso comprare un adattatore per la presa?,,,,2,it-agent-v1
+sim-data.mobile-data,i dati mobili,,,,2,it-agent-v1
+sim-data.can-i-top-up-this-sim,Posso ricaricare questa SIM?,,,,2,it-agent-v1
+sim-data.top-up,la ricarica,,,,2,it-agent-v1
+sim-data.is-there-coverage-in,C'è copertura a {}?,C'è campo a {}?,,,2,it-agent-v1
+sim-data.signal,il segnale,il campo,,,2,it-agent-v1
+sim-data.esim,la eSIM,,,,2,it-agent-v1
+sim-data.prepaid,prepagata,ricaricabile,,,2,it-agent-v1
+sim-data.roaming,il roaming,,,,2,it-agent-v1
+children.cannot-find-my-child,Non trovo mio figlio / mia figlia,Ho perso di vista mio figlio,,,2,it-agent-v1
+children.make-an-announcement,Può fare un annuncio all'altoparlante?,,,,2,it-agent-v1
+children.child-age,Mio figlio ha {} anni,Mia figlia ha {} anni,,,2,it-agent-v1
+children.high-chair,Avete un seggiolone?,,,,2,it-agent-v1
+children.baby-changing-room,Dov'è il fasciatoio?,,,,2,it-agent-v1
+children.childrens-menu,C'è un menù per bambini?,,,,2,it-agent-v1
+children.suitable-for-children,È adatto ai bambini?,,,,2,it-agent-v1
+children.minimum-age,Qual è l'età minima?,,,,2,it-agent-v1
+children.do-children-pay,I bambini pagano?,,,,2,it-agent-v1
+children.crib,Avete una culla?,Avete un lettino?,,,2,it-agent-v1
+children.warm-this-bottle,Può scaldare questo biberon?,,,,2,it-agent-v1
+children.car-seat,Ci serve un seggiolino per auto,,,,2,it-agent-v1
+children.stroller,il passeggino,la carrozzina,,,2,it-agent-v1
+children.playground,C'è un parco giochi?,,,,2,it-agent-v1
+etiquette.is-this-allowed,È permesso?,Si può fare?,,,2,it-agent-v1
+etiquette.is-tipping-expected,Si usa lasciare la mancia?,,,,2,it-agent-v1
+etiquette.is-service-included,Il servizio è incluso?,,,,2,it-agent-v1
+etiquette.may-i-enter,Posso entrare?,,,,2,it-agent-v1
+etiquette.remove-shoes,Devo togliermi le scarpe?,,,,2,it-agent-v1
+etiquette.photo-of-you,Posso farle una foto?,,,,2,it-agent-v1
+etiquette.may-i-sit-here,Posso sedermi qui?,,,,2,it-agent-v1
+etiquette.queue-for,È questa la fila per {}?,,,,2,it-agent-v1
+etiquette.dressed-appropriately,Sono vestito/a in modo adeguato?,,,,2,it-agent-v1
+etiquette.did-not-mean-to-offend,Non volevo offendere,,,,2,it-agent-v1
+etiquette.what-is-customary,Come si usa fare qui?,,,,2,it-agent-v1
+etiquette.keep-the-change,Tenga il resto,,,,2,it-agent-v1
+social-basics.politeness-particles,"Cortesia in thailandese: chiuda quasi ogni frase con khrap se è un uomo, con kha se è una donna. In una domanda la donna dice kha con tono ascendente. Le righe di questa guida non riportano la particella: l'aggiunga Lei.",,,,2,it-agent-v1

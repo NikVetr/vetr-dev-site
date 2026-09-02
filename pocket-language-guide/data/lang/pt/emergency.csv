@@ -45,6 +45,8 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,Sou alérgico a sulfamidas,Sou a
 pharmacy-symptoms.which-pharmacy-is-open-now,Que farmácia está aberta agora?,,,,2,pt-agent-v1
 pharmacy-symptoms.i-need-medicine-for,Preciso de um medicamento para {},,,,2,pt-agent-v1
 pharmacy-symptoms.i-have-a-fever,Tenho febre,,,,2,pt-agent-v1
+pharmacy-symptoms.i-think-i-have-malaria,Acho que tenho malária,paludismo,,,2,malaria-v1
+pharmacy-symptoms.i-need-a-malaria-test,Preciso de um teste de malária,,,,2,malaria-v1
 pharmacy-symptoms.i-have-diarrhea,Tenho diarreia,,,,2,pt-agent-v1
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Onde há uma farmácia de serviço?,farmácia 24 horas · de plantão,,night/weekend duty rota,2,pt-agent-v1
 pharmacy-symptoms.painkiller,analgésico,comprimido para as dores,,,2,pt-agent-v1

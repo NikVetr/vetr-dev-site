@@ -11,6 +11,7 @@ dietary-needs.i-am-vegan,กินเจ,วีแกน,kin che,,"no meat, fish
 dietary-needs.i-do-not-eat,ไม่กิน{},,mai kin {},,,2,th-agent-v1
 dietary-needs.i-am-allergic-to,แพ้{},,phae {},,,2,th-agent-v1
 dietary-needs.does-it-contain-fish-stock,ใส่น้ำปลาไหม,ใส่น้ำปลาหรือกะปิไหม,sai nam pla mai,,,2,th-agent-v1
+dietary-needs.does-it-contain-pork-stock,น้ำซุปทำจากหมูไหม,น้ำซุปต้มกระดูกหมูไหม,nam sup tham chak mu mai,,,2,th-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,แพ้{}รุนแรง อาจถึงตาย,,"phae {} runraeng, at thueng tai",,may be fatal,2,th-agent-v1
 food-ordering.table-for-two,โต๊ะสองคน,,to song khon,,,2,th-agent-v1
 food-ordering.is-a-table-available,มีโต๊ะว่างไหม,,mi to wang mai,,,2,th-agent-v1

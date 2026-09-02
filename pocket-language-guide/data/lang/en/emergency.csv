@@ -64,6 +64,8 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,I am allergic to sulfa drugs,,,,
 pharmacy-symptoms.which-pharmacy-is-open-now,Which pharmacy is open now?,,,,2,expansion-v1
 pharmacy-symptoms.i-need-medicine-for,I need medicine for {},,,,2,expansion-v1
 pharmacy-symptoms.i-have-a-fever,I have a fever,,,,2,expansion-v1
+pharmacy-symptoms.i-think-i-have-malaria,I think I have malaria,,,,2,malaria-v1
+pharmacy-symptoms.i-need-a-malaria-test,I need a malaria test,,,,2,malaria-v1
 pharmacy-symptoms.i-have-diarrhea,I have diarrhea,,,,2,expansion-v1
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Where is an all-night pharmacy?,,,,2,expansion-v1
 pharmacy-symptoms.painkiller,painkiller,,,,2,expansion-v1

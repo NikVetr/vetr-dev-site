@@ -708,6 +708,7 @@ pronouns-verbs.looking-for-thing,hah ...
 emergency-medical.i-am-bleeding-badly,lueat awk MAHK
 lost-rescue.my-friend-is-hurt,PUEAN baht-jep
 dietary-needs.does-it-contain-fish-stock,sai nahm plah mai
+dietary-needs.does-it-contain-pork-stock,nahm sup tam jahk moo mai
 hotel-basics.for-nights,{} kuen
 hotel-requests.is-there-a-safe,mee TOO sayf mai
 payment-receipt.is-tax-included,ruam pah-see laeo mai
@@ -744,3 +745,5 @@ dietary-needs.no-pork,"MAI sai moo, nahm-man moo, nahm sup moo"
 dietary-needs.is-this-halal,an nee hah-lahn mai
 numbers-money.baht,baht
 numbers-money.baht-symbol,baht
+pharmacy-symptoms.i-think-i-have-malaria,song-sai wah pen kai mah-lah-REE-ah
+pharmacy-symptoms.i-need-a-malaria-test,kaw truat mah-lah-REE-ah

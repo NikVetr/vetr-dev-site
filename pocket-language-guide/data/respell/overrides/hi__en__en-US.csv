@@ -708,6 +708,7 @@ pronouns-verbs.looking-for-thing,mu-JHEH (thing) kee ta-LAASH hai
 emergency-medical.i-am-bleeding-badly,ba-HUT khoon bah ra-HAA hai
 lost-rescue.my-friend-is-hurt,MEH-reh dost koh chot la-GEE hai
 dietary-needs.does-it-contain-fish-stock,kyaa is-MEIN mach-LEE kaa SHOR-baa hai
+dietary-needs.does-it-contain-pork-stock,kyaa is-MEIN SOO-ar kaa SHOR-baa hai
 hotel-basics.for-nights,{} raat keh li-YEH
 hotel-requests.is-there-a-safe,kyaa LO-kar hai
 payment-receipt.is-tax-included,kyaa taiks SHAA-mil hai
@@ -742,3 +743,5 @@ emergency-medical.please-call-my-emergency-contact,MEH-reh i-mar-JEN-see NUM-bar
 emergency-medical.i-have-travel-insurance,MEH-raa YAA-traa BEE-maa hai
 dietary-needs.no-pork,SOO-ar kaa maans na-HEEN
 dietary-needs.is-this-halal,kyaa yah ha-LAAL hai
+pharmacy-symptoms.i-think-i-have-malaria,LAG-taa hai mu-JHEH ma-LEH-ri-yaa hai
+pharmacy-symptoms.i-need-a-malaria-test,mu-JHEH ma-LEH-ri-yaa kee JAANCH ka-RAA-nee hai

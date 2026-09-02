@@ -708,6 +708,7 @@ pronouns-verbs.looking-for-thing,proo-KOO-roo + KOY-zah
 emergency-medical.i-am-bleeding-badly,shtoh ah sang-GRAR MWEENG-too
 lost-rescue.my-friend-is-hurt,oo MEH-oo ah-MEE-goo shtah feh-REE-doo
 dietary-needs.does-it-contain-fish-stock,LEH-vah KAL-doo duh PAY-shuh
+dietary-needs.does-it-contain-pork-stock,LEH-vah KAL-doo duh POR-koo
 hotel-basics.for-nights,PAH-rah {} NOY-tish
 hotel-requests.is-there-a-safe,ah KAW-fruh
 payment-receipt.is-tax-included,oo EE-vah shtah eeng-KLWEE-doo
@@ -744,3 +745,5 @@ numbers-money.euro,EW-roo
 numbers-money.euro-symbol,EW-roo
 dietary-needs.no-pork,seng KAR-nuh duh POR-koo
 dietary-needs.is-this-halal,EESH-too EH ah-LAL
+pharmacy-symptoms.i-think-i-have-malaria,AH-shoo kuh TEH-nyoo mah-LAH-ree-ah
+pharmacy-symptoms.i-need-a-malaria-test,pruh-SEE-zoo duh oong TESH-tuh duh mah-LAH-ree-ah

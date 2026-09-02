@@ -45,6 +45,8 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,แพ้ยาซัลฟา,,
 pharmacy-symptoms.which-pharmacy-is-open-now,ร้านขายยาไหนเปิดอยู่,,ran khai ya nai poet yu,,,2,th-agent-v1
 pharmacy-symptoms.i-need-medicine-for,ขอยาแก้{},,kho ya kae {},,,2,th-agent-v1
 pharmacy-symptoms.i-have-a-fever,มีไข้,,mi khai,,,2,th-agent-v1
+pharmacy-symptoms.i-think-i-have-malaria,สงสัยว่าเป็นไข้มาลาเรีย,,songsai wa pen khai malaria,,,2,malaria-v1
+pharmacy-symptoms.i-need-a-malaria-test,ขอตรวจมาลาเรีย,ตรวจหาเชื้อมาลาเรีย,kho truat malaria,,,2,malaria-v1
 pharmacy-symptoms.i-have-diarrhea,ท้องเสีย,,thong sia,,,2,th-agent-v1
 pharmacy-symptoms.where-is-an-all-night-pharmacy,ร้านขายยาเปิดดึก อยู่ไหน,,ran khai ya poet duek yu nai,,,2,th-agent-v1
 pharmacy-symptoms.painkiller,ยาแก้ปวด,,ya kae puat,,,2,th-agent-v1

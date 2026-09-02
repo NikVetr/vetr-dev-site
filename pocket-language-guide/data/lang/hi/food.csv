@@ -11,6 +11,7 @@ dietary-needs.i-am-vegan,मैं वीगन हूँ (दूध-घी भ�
 dietary-needs.i-do-not-eat,मैं {} नहीं खाता,मैं {} नहीं खाती,maiṁ {} nahīṁ khātā,,,2,hi-agent-v1
 dietary-needs.i-am-allergic-to,मुझे {} से एलर्जी है,,mujhe {} se elarjī hai,,,2,hi-agent-v1
 dietary-needs.does-it-contain-fish-stock,क्या इसमें मछली का शोरबा है?,,kyā ismeṁ machlī kā śorbā hai?,,,2,hi-agent-v1
+dietary-needs.does-it-contain-pork-stock,क्या इसमें सूअर का शोरबा है?,क्या इसमें पोर्क का शोरबा है?,kyā ismeṁ sūar kā śorbā hai?,,,2,hi-pork-stock-v1
 dietary-needs.i-have-a-severe-allergy-to,मुझे {} से गंभीर एलर्जी है,,mujhe {} se gaṁbhīr elarjī hai,,,2,hi-agent-v1
 food-ordering.table-for-two,दो लोगों की टेबल,,do logoṁ kī ṭebal,,,2,hi-agent-v1
 food-ordering.is-a-table-available,क्या टेबल खाली है?,,kyā ṭebal khālī hai?,,,2,hi-agent-v1
