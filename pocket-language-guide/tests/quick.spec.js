@@ -50,7 +50,9 @@ test.describe('the quick export page', () => {
     await page.locator('#pdf').click();
     expect((await pdf).suggestedFilename()).toBe('chinese-simplified-pocket-guide.pdf');
 
-    await page.getByRole('radio', { name: 'Screen' }).click();
+    // Scoped to the resolution control: there is a "Phone screen" card size too, and
+    // an unscoped name match found both.
+    await page.locator('#dpi-control').getByRole('radio', { name: 'Screen' }).click();
     const png = page.waitForEvent('download', { timeout: 120_000 });
     await page.locator('#png').click();
     expect((await png).suggestedFilename()).toContain('150dpi');

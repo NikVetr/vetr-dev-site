@@ -9,7 +9,7 @@ import { createFontRegistry } from './fonts.js';
 import { createMeasurer } from './measure.js';
 import {
   loadCorpus, loadLanguage, loadRespellOverrides, loadSectionTitles, loadEmergencyLabels,
-  loadLanguageNames, fillLanguageSlots, buildBlocks,
+  fillLanguageSlots, buildBlocks,
 } from './pack.js';
 import { layout } from './solve/index.js';
 
@@ -133,15 +133,17 @@ export async function buildSheet(ctx, spec, edits) {
   // cells -- and the one that would hurt is `solve/weights.js`, which *measures*
   // candidate rows to decide what fits, so an unfilled placeholder there makes the
   // balance solver offer a row of the wrong height.
-  const [targetRows, sourceRows, targetNames, sourceNames] = await Promise.all([
+  const [targetRows, sourceRows] = await Promise.all([
     loadLanguage(loadText, spec.target, corpus.groups),
     loadLanguage(loadText, spec.source, corpus.groups),
-    loadLanguageNames(loadText, spec.target),
-    loadLanguageNames(loadText, spec.source),
   ]);
   const pair = { target: spec.target, source: spec.source };
-  fillLanguageSlots(targetRows, { ...pair, locale: spec.target, names: targetNames });
-  fillLanguageSlots(sourceRows, { ...pair, locale: spec.source, names: sourceNames });
+  fillLanguageSlots(targetRows, {
+    ...pair, locale: spec.target, names: corpus.languageNames[spec.target],
+  });
+  fillLanguageSlots(sourceRows, {
+    ...pair, locale: spec.source, names: corpus.languageNames[spec.source],
+  });
   // A pair with no curated respellings is the normal case, not a failure, so do
   // not ask the network for a file the index says was never written.
   const respell = ctx.corpus.respellOverrides.has(`${spec.target}__${spec.source}__${spec.accent}`)

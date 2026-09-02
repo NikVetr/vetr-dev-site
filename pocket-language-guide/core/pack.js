@@ -40,6 +40,11 @@ export async function loadCorpus(loadText) {
   const respellOverrides = new Set(
     /** @type {string[]} */ (JSON.parse(await loadText('data/respell/overrides/index.json'))),
   );
+  // What one language calls another, where `Intl.DisplayNames` will not do. One
+  // table rather than a file per language, because it is the only O(N^2) data in
+  // the project and a directory of mostly-absent files would mean either an index
+  // to generate or a 404 on every pair that does not need one.
+  const languageNames = languageNameTable(await read('data/registry/language-names.csv'));
   sectionRows.sort((a, b) => Number(a.rank) - Number(b.rank));
 
   const groups = [...new Set(sectionRows.map((s) => s.group))];
@@ -55,6 +60,7 @@ export async function loadCorpus(loadText) {
     languages,
     coverage,
     respellOverrides,
+    languageNames,
     paper,
     regions,
     sections: sectionRows,
@@ -289,34 +295,25 @@ function regionName(code, locale, fallback) {
 }
 
 /**
- * A language's own name for another language.
+ * What one language calls another, where `Intl.DisplayNames` will not do.
  *
- * `Intl.DisplayNames` answers this for every pair, so the registry only has to
- * carry what ICU gets wrong for our purposes -- which is two things. Russian needs
- * the prepositional case, because no nominal frame takes `английский` and there is
- * no case-free phrasing: `Я не говорю по-английски` and `на хинди` do not even
- * share a preposition. And the seven romanised packs need the *romanisation* of
- * each name, which ICU cannot give at all.
+ * ICU answers this for every pair, so the registry only carries what it gets wrong
+ * for our purposes -- which is two things. Russian needs the prepositional case,
+ * because no nominal frame takes `английский` and there is not even a shared
+ * preposition: `по-английски` against `на хинди`. And the seven romanised packs
+ * need the *romanisation* of each name, which ICU cannot give at all.
  *
- * The subject code is reduced to its base language first, because ICU is right that
- * `zh-Hans` is "Simplified Chinese" and a card asking `Parlez-vous chinois
- * simplifié ?` is not what anyone says.
- *
- * @param {(rel:string)=>Promise<string>} loadText @param {string} code the language
- *   whose *own* names these are -- the language of the cell they will be written into
- * @returns {Promise<Record<string,{name:string, roman:string}>>}
+ * `locale` is the language doing the naming -- the language of the cell the name
+ * will be written into -- and `bcp47` is the language being named.
+ * @param {Record<string,string>[]} rows
+ * @returns {Record<string, Record<string,{name:string, roman:string}>>}
  */
-export async function loadLanguageNames(loadText, code) {
-  try {
-    const rows = parseTable(
-      await loadText(`data/registry/language-names/${code}.csv`),
-      `data/registry/language-names/${code}.csv`,
-    );
-    return Object.fromEntries(rows.map((r) => [r.bcp47, { name: r.name, roman: r.romanization }]));
-  } catch (err) {
-    if (isMissingFile(err)) return {};
-    throw err;
+function languageNameTable(rows) {
+  /** @type {Record<string, Record<string,{name:string, roman:string}>>} */ const out = {};
+  for (const row of rows) {
+    (out[row.locale] ??= {})[row.bcp47] = { name: row.name, roman: row.romanization };
   }
+  return out;
 }
 
 /** @param {string} bcp47 */
@@ -375,9 +372,10 @@ const LANGUAGE_SLOT = /\{(target|source)\}/g;
  * @param {string} args.locale  the language these rows are written in
  * @param {string} args.target
  * @param {string} args.source
- * @param {Record<string,{name:string, roman:string}>} args.names
+ * @param {Record<string,{name:string, roman:string}>} [args.names] the `locale` row
+ *   of the registry table, where it has one
  */
-export function fillLanguageSlots(rows, { locale, target, source, names }) {
+export function fillLanguageSlots(rows, { locale, target, source, names = {} }) {
   for (const row of Object.values(rows)) {
     for (const [field, value] of Object.entries(row)) {
       if (!value || !value.includes('{')) continue;
@@ -449,7 +447,19 @@ export function buildBlocks({
       // Japanese counters and "write it in Roman letters" arrived dressed as
       // universal entries -- and a Spanish sheet was printing all of them.
       .filter((c) => appliesTo(c, spec.target))
+      // `priority` trims the corpus from the bottom by importance. An item ticked
+      // by hand outranks it: the ladder is a bulk default -- "give me the top of
+      // the list" -- and a tick in the content tree is a specific instruction, so
+      // overriding it would make that checkbox a silent no-op. A custom item
+      // carries importance 1, so nothing a reader typed is ever cut.
+      .filter((c) => Number(c.importance) >= spec.priority
+        || selection.items[c.concept_id] === true)
       .filter((c) => c.custom === '1' || (targetRows[c.concept_id] && sourceRows[c.concept_id]));
+    // No rows, no heading. A section is only as wide as the concepts that survive
+    // every filter above, and importance is not spread evenly across them --
+    // `emergency-medical` is dense with high-importance rows where `hike` has
+    // none -- so a priority step empties whole sections. This is the line that
+    // stops their headings printing over nothing.
     if (!concepts.length) continue;
 
     blocks.push({
@@ -616,6 +626,46 @@ function itemRow(concept, target, source, respell, spec, override, custom) {
  * essentially nil, which is right for reproducing it and cramped for reading it.
  */
 export const DEFAULT_PADDING = 1.4;
+
+/**
+ * The `spec.priority` ladder: how far down the corpus, by `importance`, each step
+ * keeps.
+ *
+ * Here rather than in the panel that draws it, for the same reason
+ * `DEFAULT_PADDING` is: these are not opinions about words, they are measurements
+ * of what fits, and `tests/solve.test.mjs` asserts them. The panel supplies the
+ * captions.
+ *
+ * Each is the largest cut in the distribution that still fills a real card,
+ * measured against every language in `data/coverage.json` at the default spacing:
+ *
+ *   - `essential` (11 concepts under 5 headings) fits **one phone face at full
+ *     nominal type** in every language. That is the whole point of the top step:
+ *     one image, set as a lock screen. One phone face holds about 23 concepts with
+ *     every field pushed to its script's floor, 18 at the comfort threshold and
+ *     14-16 at nominal size -- and the next cut down the distribution, 0.90, is 35
+ *     concepts under 12 headings, which overflows one face by 20% even at the
+ *     floor. So this is the only step in the distribution that fits one, and it
+ *     fits with room rather than by a hair.
+ *   - `core` (145) fits one sheet of photo paper: two faces of the 7x5in card.
+ *   - `wide` (304) fits two sheets, four faces -- the count both hand-built
+ *     reference sheets settled on.
+ *   - `all` keeps everything, which is six to eight faces. The default: trimming
+ *     the corpus is for fitting a card the content will not fit, and the reference
+ *     card is not that card.
+ *
+ * A floor on importance rather than a count, so the step means the same thing on
+ * every pair -- importance belongs to the concept, and every language realises the
+ * same bank. Plain `importance` and not the cluster-decayed score in
+ * `solve/weights.js`, which measures marginal value against a sheet already chosen:
+ * that is the right question when filling whitespace and the wrong one here, where
+ * the set has to be stable and nested. It is also unsafe on this corpus --
+ * `numbers-money.misc` holds the number line, 0 through 10, as one cluster, so a
+ * decay would delete counting from the card. Plain importance is monotone in
+ * `cluster_rank` in 110 of the 114 clustered pairs, so a cut takes cluster prefixes
+ * anyway: it never offers `hello (polite)` without `hello`.
+ */
+export const PRIORITY_STEPS = { all: 0, wide: 0.74, core: 0.82, essential: 0.95 };
 
 /**
  * Default selection: every section whose audience tags overlap the reader's
