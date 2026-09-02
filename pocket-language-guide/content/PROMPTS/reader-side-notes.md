@@ -4,10 +4,11 @@ Everything a sheet prints is in one of two languages. The rows are in the one be
 learned; three things are in the reader's own — the section headings, the notes, and
 the emergency line — and this is the template for the last two.
 
-Fill in the placeholders and hand it to a model, one language per task. Nine of the
-sixteen are done and their findings are folded in below, so the remaining ones should
-not have to rediscover any of it. `npm run validate` names exactly which languages
-are still missing what.
+**All sixteen languages are done.** The template is kept because the work recurs —
+a seventeenth language needs exactly this, and so does any new `note` concept — and
+because the findings folded in below cost sixteen translators a great deal of reading
+to arrive at. Fill in the placeholders and hand it to a model, one language per task.
+`npm run validate` names exactly which languages are missing what.
 
 ---
 
@@ -108,6 +109,12 @@ Three things the finished languages learned about the content:
   category cannot infer it from a labelled list. If your language *does* have
   classifiers — Vietnamese, Thai, Indonesian, Japanese, Korean — invert that: the
   reader needs the words, not the concept, so spend the space on the list.
+- **Before a classifier, Chinese 2 is `liǎng`, not `èr`.** English, Hindi, Thai and
+  Indonesian all shipped `er zhang piao` for "two tickets", which is ungrammatical;
+  the corpus even carries the row (`numbers-money.li-ng`, glossed "2 + classifier"),
+  so the note contradicted a card it sits on. Korean turned this into its note's best
+  sentence by observing that it is the same alternation as Korean's own 둘 → 두 --
+  leaning on a change the reader already performs is what makes a rule stick.
 - **State the clock arithmetic twice, in both directions.** "Six hours off" is exactly
   the ambiguity that makes someone six hours late, and words like `adiantado` /
   `atrasado` do not resolve whether the *number* or the *time* is displaced. Portuguese
@@ -119,17 +126,37 @@ Three things the finished languages learned about the content:
 
 ## The one hard constraint
 
-**A note prints in your own face, so it may use your own script and Latin, and
-nothing else.** Quoting Chinese characters, kana or Thai script inside one renders as
-a row of empty boxes — which is exactly what the shipped Mandarin card did before it
-was caught. Romanise everything you quote: pinyin for Chinese, Hepburn for Japanese,
-RTGS-ish for Thai. `npm run validate` checks the text against the codepoints your
-face actually carries and names the offenders.
+**A note prints in your own face, so it may use your own script and whatever else
+that face happens to carry.** Quoting Chinese characters, kana or Thai script inside
+one renders as a row of empty boxes — which is exactly what the shipped Mandarin card
+did before it was caught. Romanise everything you quote: pinyin for Chinese, Hepburn
+for Japanese, RTGS-ish for Thai.
 
-German kept tone-marked pinyin (`gè`, `wèi`, `zhāng`) rather than the bare form the
-English note uses, on the grounds that those words appear nowhere else on a German
-card, so toneless would hand the reader a pronunciation with no tone on it anywhere.
-That is within the allowed set — check the shipped faces if you want to do the same.
+`npm run validate` now checks every string against the **actual cmap** of the faces
+that will draw it, intersected across the variants of a stack, so it names a
+codepoint your face cannot draw. It did not always: it used to compare against
+Unicode range tables far more permissive than what `scripts/subset_fonts.py` builds,
+and three translators independently found text that passed validation and printed a
+box. Trust the validator now — but the habit that caught it is still the right one, so
+load the shipped TTFs with fontTools and check anything unusual yourself.
+
+**Whether to mark tones is a real decision, and it went both ways.** German, Korean,
+Indonesian, Russian, Swahili and Vietnamese kept tone-marked pinyin; English,
+Japanese, Thai and Mandarin did not. The arguments are not about taste:
+
+- *Keep them* if the tones appear nowhere else the reader will look. That was
+  German's case (`gè`, `wèi`, `zhāng` appear nowhere else on a German card, so
+  toneless would hand the reader a pronunciation with no tone on it anywhere).
+  Swahili's version is sharper: `bei` is a live Swahili word meaning "price" and is
+  on the same sheet, so a bare `bei (cups)` reads as "price (cups)".
+- *Keep them* if the pack's own romanisation column is marked, so the note agrees
+  with the rows printed a few millimetres below it. That is why Korean, Indonesian
+  and Vietnamese kept them, and why Korean also took macron Hepburn.
+- *Drop them* if a mark above the line already means something else in your script.
+  A Thai or Chinese reader reads a superscript mark as a tone, so a macron standing
+  for Japanese vowel length is a false cue; both used doubled vowels instead.
+- *Drop them* if your face cannot draw them. The Thai faces carry 446 glyphs and no
+  `ǎ ǐ ǒ ǔ`, so `jiǎo` alone rules the whole set out for Thai.
 
 ## Deliver
 

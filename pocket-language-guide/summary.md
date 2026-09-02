@@ -196,11 +196,33 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   `ui/flags.js` detects support and falls back to country-code chips rather than a
   row of letter boxes. Per-card *Save offline*.
 
-  Clicking a thumbnail opens a lightbox on the whole sheet: every face, one arrow
-  key apart, at whatever size the window allows. This is the one place the gallery
-  loads the engine, and only on the click — the committed thumbnail goes up first so
-  the dialog is never empty, then the typeset faces replace it. They are SVG, so
-  there is no resolution to run out of.
+  Clicking a thumbnail opens the lightbox (`ui/lightbox.js`) on the whole sheet:
+  every face, one arrow key or one thumbnail click apart, at whatever size the
+  window allows. The card is the only opaque thing on screen — no panel, no title,
+  no caption — and everything else floats over the dim: the pair above it, a caret
+  on each of the card's own edges (shown on hover, and dim at the ends of the
+  series because there is nowhere to go), the thumbnails and the two buttons below.
+  Both languages in the pair are controls and so is the mark between them, which
+  grows a second head on hover because reversing the pair is what pressing it does.
+  Changing the reader's language here changes it for the grid behind, so closing the
+  lightbox never lands on a gallery that disagrees with it.
+
+  This is the one place the gallery loads the engine, and only on the click — the
+  committed thumbnail holds the frame so the card is never blank, then the typeset
+  faces replace it. They are SVG, so there is no resolution to run out of.
+
+  Shipping the faces as assets was the obvious alternative and is worth recording
+  as rejected. A face is about 120KB of SVG and a default sheet is eight of them, so
+  240 ordered pairs is roughly 230MB in the working tree — and a compact encoding of
+  the plan is no smaller, because the plan *is* the text, positioned. What is
+  pre-rendered instead is the expensive part: fitting a sheet means searching for
+  the fewest faces and the largest type that hold the content, re-measuring and
+  re-breaking the whole sheet at a dozen candidate scales. `packs/index.json`
+  already records the answer, so the lightbox pins it and lays out exactly once —
+  byte-identical output, measured 10–12× faster, about 150ms rather than 1.8s, and
+  nothing new shipped to buy it. A pinned fit is still a cached answer, so when it
+  does not fit — which any change to the type or the spacing causes until the packs
+  are re-rendered — it falls back to the search rather than drawing an empty card.
 - **`sheet.html`** — presets and export, for people who do not want the studio.
 - **`customize.html`** — the studio: format (20%) · faces (50%) · content (30%).
   Faces open as a grid, click one to focus it with the rest as a thumbnail strip.
@@ -420,10 +442,37 @@ like the reference, and a little more legible than the reference's own 4.44pt.
 
 The reference sheet's item padding is essentially zero: consecutive rows are held
 apart by a 0.22pt rule and nothing else, which reads as cramped at print size.
-`spec.density` adds separation above and below each item, between the two lines of
-a stacked cell, and around headings, scaled with the type so it stays
-proportionate when auto-fit changes the size. The default is 0.7pt — airier than
-the original, at the cost of about 7% of the type scale.
+`spec.padding` adds separation above and below each item, between the two lines of
+a stacked cell, and around headings, scaled with the type — not with the raw scale,
+which is a different curve, see above — so it stays proportionate when auto-fit
+changes the size.
+
+The default is `DEFAULT_PADDING` in `core/pack.js`, currently 1.4pt, shared with
+`scripts/spec.mjs` because the app's default sheet and the committed thumbnails
+have to be the same sheet. It costs a pair of faces on most pairs and buys back
+type: French goes from six faces at a fitted 0.48 to eight at 0.67, so both the
+spacing and the type grow. The ladder in the panel is three steps — the reference
+sheet's own zero, this, and one more — because the two intermediate settings it
+used to offer both sat close enough to zero that nobody would pick them once the
+default moved up, and the Custom slider still reaches any value between.
+
+Two things about how the glue behaves came out of that change, both of which
+printed as whitespace in the wrong place:
+
+- **A heading is bound to its opening rows, not merged with them.** Merging was the
+  first implementation and it froze the gaps inside the merged run at their natural
+  size while every later gap in the same column stretched to flush the bottom — so
+  the first two rows of every section printed measurably tighter than the rest of
+  it, invisibly, because a merge hides those gaps from the atom list entirely.
+  `keepWithNext` is a constraint handed to the breaker instead, which refuses those
+  breakpoints rather than penalising them, so a stranded heading is still
+  impossible and the glue treats every row alike.
+- **The per-gap stretch ceiling follows the type's curve too.** Against the raw
+  scale it shrank faster than the rows it separates, so once more padding meant
+  fewer rows per column there were no longer enough gaps to take the slack and a
+  few points of it landed at the foot of the column. The ceiling still exists, and
+  still binds: an underfull column should look underfull rather than be stretched
+  into a ladder of canyons.
 
 ## Print and paper
 
@@ -665,7 +714,56 @@ nominative -- the same trick its pack used on sixteen slot rows. Hindi took
 Two validator rules keep the source side honest: every `note` needs text in every
 ready language except the ones it is scoped to (a language is never its own sheet's
 source), and every service word in `regions.csv` needs a row in every language's
-label file. Their warning list is the remaining work.
+label file. All sixteen languages now pass both.
+
+### Tofu, and why a range table cannot catch it
+
+Writing those notes turned up one bug five times, and it is worth stating as a class:
+**a codepoint being part of a script does not mean the shipped face can draw it.**
+The validator used to check text against hand-written Unicode range tables, which
+were far more permissive than what `scripts/subset_fonts.py` actually builds — so
+text passed validation and printed an empty box. This is invisible in the browser,
+which falls back to a system font, and fatal in the PDF, which embeds only the subset
+faces and has nothing to fall back to.
+
+Three translators found it independently: `cjk-jp` carries JIS X 0208 level 1 only,
+so a level-2 kanji validates and prints as a box; the Thai faces have 446 glyphs and
+no `ǎ ǐ ǒ ǔ`, so tone-marked pinyin in a Thai note would have; the Korean faces carry
+nine CJK ideographs, all accidental spill from language endonyms. The check now reads
+the cmap of every face in `data/fonts/` with `fontTools` and tests each string
+against the **intersection** of the faces in the stack it renders in — the
+intersection, because a glyph present only in the bold face is unusable in regular
+text. It found ten cells nothing had flagged, all Arabic.
+
+Four fixes came out of it, none of them in the data:
+
+- **`data/registry/` is scanned recursively.** The subsetter's corpus glob was flat,
+  so `section-titles/` and `emergency-labels/` were outside the font union entirely.
+  Thirty Korean and Chinese section titles are separated by U+30FB, which only the
+  Japanese stack happened to carry — a row of boxes in every PDF of a Korean or
+  Chinese reader's card. Those titles now use the dot their own orthography wants:
+  U+3001 for Chinese, where enumerating coordinate items is what the 顿号 is for, and
+  U+00B7 for Korean. U+00B7 was rejected for Chinese on measurement — it advances a
+  full em in `cjk-sc-400` and a third of one in `cjk-sc-serif-400`, so the same
+  heading would set differently on a serif sheet.
+- **The Arabic stack had no Latin at all.** Noto Sans Arabic ships none, and the
+  subsetter intersects its request with the source font's cmap, so asking for Latin
+  silently yielded nothing. Every Latin letter, `/`, `=`, `…` and the U+00B7 that
+  separates the emergency numbers mapped to glyph 0 — a visible rectangle in Noto.
+  The Latin face is merged in now.
+- **Two fields were named for where they sit rather than for what lands in them.**
+  `numeral` is the label column of a number table and reads from the same cell as the
+  gloss, so it is source-side; calling it Latin drew an Arabic or CJK gloss in the
+  condensed Latin face. `literal` prints on the reader's side but is read from the
+  *target* row, and 41 Korean literals quote Hangul while 56 Arabic ones are in
+  Arabic, so drawn in the source's stack they were boxes for every reader but their
+  own.
+- **A note breaks the way its own language does.** `noteAtom` hardcoded
+  `wordBreak: 'space'`, which is silently wrong for every reader whose script has
+  none: a Japanese or Chinese note was one unbreakable run and painted straight past
+  the right edge of its own shaded box. Three translators wrote around it by inserting
+  spaces into their prose by hand before anyone found the cause. Section titles had
+  the same bug for the same reason.
 
 ## Deliberately not built yet
 
@@ -721,15 +819,29 @@ Named so nobody has to rediscover the gap:
   cluster segmenter, and it is the difference between a break in the wrong place and
   a mark orphaned onto a dotted circle. Real word breaking needs a wordlist of a few
   hundred KB and is not here yet.
+
+  Breaking *anywhere* had to learn three exceptions along the way, all of which
+  printed in shipped notes. A Latin word embedded in a CJK run is one atom, because
+  `any` means between ideographs, kana and hangul and not inside a romanisation
+  printed among them — `ichiman` was free to break after any letter. A digital time
+  or a decimal is one number: a Chinese note wrapped `16:00` as `16:` and `00`, and
+  the fix needs the glue to work in both directions, since gluing only forwards
+  still leaves `16` and `:00` as two atoms with a legal break between them. And a
+  hyphen that *opens* a token belongs to it: every language's number note lists the
+  Japanese counters as `-tsu`, `-mai`, `-hon`, and an unconditional break-after-hyphen
+  rule dangled a bare `-` at the end of a line in nine of them.
 - **Per-row split overrides.** The drag handles cover margins and the column gap;
   dragging an individual row's internal divider would need per-row overrides
   threaded through `atoms.js`.
 - **Pre-rendered faces as shipped assets.** The gallery's lightbox typesets the
   pair when a reader opens it, rather than reading faces off disk. Committing them
   was the other option and the numbers ruled it out: a face is ~120KB of SVG or
-  ~1.8MB of `LayoutPlan` JSON, and 240 ordered pairs at six to eight faces each is
-  well over 150MB in the working tree either way -- for a preview of a sheet that
-  solves in about a second. What is committed is the 480px first-face thumbnail, which
+  ~1.8MB of `LayoutPlan` JSON, and 240 ordered pairs at eight faces each is well
+  over 200MB in the working tree either way. What *is* pre-rendered is the expensive
+  half — the face count and type scale the fit settled on, already in
+  `packs/index.json`, which the lightbox pins to lay out once instead of searching:
+  byte-identical output about twelve times faster, for no new bytes. Also committed
+  is the 480px first-face thumbnail, which
   goes up immediately so the dialog is never empty while the rest is typeset. The
   faces it then shows are vector, so they are sharper than any PNG that could have
   been shipped.

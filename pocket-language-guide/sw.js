@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-06cbae288f8d';
+const VERSION = 'plg-322b34f3c2f0';
 const SHELL_CACHE = `${VERSION}-shell`;
 const PACK_CACHE = `${VERSION}-packs`;
 const SHELL_MANIFEST = 'data/shell.json';

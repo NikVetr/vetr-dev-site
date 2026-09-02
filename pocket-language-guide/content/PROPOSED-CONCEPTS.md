@@ -105,6 +105,27 @@ Two warnings that belong with it, because both are easy to get backwards:
 This is a `common-signs` concept, scoped `id`, and probably wants `text_alt` and a
 short ASCII `literal` doing the disambiguation rather than a second row.
 
+### A `note` explaining the romanisation column's own diacritics
+
+Raised by the Vietnamese translator, and it is the one request none of the four
+existing `note` concepts can absorb. Pinyin's caron `ǎ` and Vietnamese's breve `ă`
+are near-identical at 5pt, and pinyin's macron is not a Vietnamese mark at all — so a
+Vietnamese reader is uniquely primed to read the tone marks in the romanisation
+column as vowel-quality marks. They will not misread the words; they will misread
+the *tones*, silently.
+
+The translator declined to smuggle it into the numbers note, correctly: it is a fact
+about the whole card's romanisation column rather than about numbers, classifiers or
+money, and the brief for that note was to spend its space on words. So it wants
+either a fifth `note` concept scoped to `zh-Hans` — where the trap is worst, and
+which is the pattern the Thai particle note already establishes — or a line in the
+romanisation column's own header, which no template has.
+
+Worth noting the same shape recurs across the readerships from the other direction:
+Thai and Chinese readers read any superscript mark as a tone, which is why both
+dropped macron Hepburn in favour of doubled vowels. A legend would let those packs
+keep the standard romanisation instead of routing around the ambiguity.
+
 ## Worth doing, lower urgency
 
 ### `dietary-needs.jain` and `dietary-needs.no-onion-garlic`
