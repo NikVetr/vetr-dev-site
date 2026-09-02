@@ -34,15 +34,25 @@ export async function createSheetContext({ loadText, loadBytes }) {
   const measurer = createMeasurer(registry);
   /** @type {Map<string,any>} */ const themes = new Map();
 
+  // A theme may name a `base` it inherits from, which is how the CVD-safe palette
+  // is only a palette. It used to be a full copy of the reference theme with
+  // different colours -- so every type size existed twice, and the first edit to
+  // one of them left the two sheets set differently.
+  /** @param {string} id @returns {Promise<any>} */
+  const theme = async (id) => {
+    if (!themes.has(id)) {
+      const own = JSON.parse(await loadText(`data/themes/${id}.json`));
+      themes.set(id, own.base ? { ...await theme(own.base), ...own } : own);
+    }
+    return themes.get(id);
+  };
+
   return {
     corpus,
     registry,
     measurer,
     loadText,
-    async theme(id) {
-      if (!themes.has(id)) themes.set(id, JSON.parse(await loadText(`data/themes/${id}.json`)));
-      return themes.get(id);
-    },
+    theme,
   };
 }
 

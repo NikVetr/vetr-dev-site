@@ -140,9 +140,14 @@ test.describe('studio', () => {
     // immediate state assertion is a race against that, and what matters here is
     // that the selection ends up right.
     const full = await counts(page);
+    // Every third item, and the stride keeps having to shrink: it was every ninth,
+    // and each time the sheet learned to absorb more slack -- glue ceilings that
+    // follow the type's own curve, a heading bound to its rows rather than merged
+    // with them -- the old fraction stopped leaving any whitespace to propose into,
+    // and this test started asserting on a panel that had nothing to say.
     const boxes = page.locator('.items input[type=checkbox]');
     const count = await boxes.count();
-    for (let i = 0; i < count; i += 9) await boxes.nth(i).click({ force: true });
+    for (let i = 0; i < count; i += 3) await boxes.nth(i).click({ force: true });
     const { included: before } = await expectIncludedNot(page, full.included);
     await page.locator('#balance').click();
     await expect(page.locator('#diff')).toBeVisible();

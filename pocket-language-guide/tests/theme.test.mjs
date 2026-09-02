@@ -1,13 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
+import { createSheetContext } from '../core/sheet.js';
 
 const files = (await readdir('data/themes')).filter((f) => f.endsWith('.json'));
+// Resolved through the loader rather than read off disk, because a theme may name
+// a `base` it inherits from -- the CVD-safe palette is only a palette -- and what
+// the solver reads is the merge, not the file.
+const ctx = await createSheetContext({
+  loadText: (rel) => readFile(rel, 'utf8'),
+  loadBytes: (rel) => readFile(rel),
+});
 
 test('every theme declares the shape the solver reads', async () => {
   assert.ok(files.length >= 1);
   for (const file of files) {
-    const theme = JSON.parse(await readFile(`data/themes/${file}`, 'utf8'));
+    const theme = await ctx.theme(file.replace(/\.json$/, ''));
     assert.equal(typeof theme.id, 'string', `${file}: id`);
     // `note` is the note-template style; prose lives in `description`. These
     // collided once, and JSON silently kept the last one.

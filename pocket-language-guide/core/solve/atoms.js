@@ -5,8 +5,8 @@
 // measurement and per-row width solving happens here, exactly once, so nothing
 // downstream re-wraps text.
 //
-// A heading is fused with the first rows of the block it introduces, which makes
-// a heading stranded at the foot of a column structurally impossible rather than
+// A heading is bound to the first rows of the block it introduces, which makes a
+// heading stranded at the foot of a column structurally impossible rather than
 // something the breaker has to be penalised out of.
 
 import { resolveField, isTargetSide } from '../fonts.js';
@@ -14,6 +14,8 @@ import { inkWidth } from '../measure.js';
 import { chooseSplit, chooseSharedWidths } from './rowsplit.js';
 import { arrangeTemplate } from './arrange.js';
 
+// How many of a section's opening rows are held in the same column as its
+// heading.
 const KEEP_ROWS = 2;
 
 // Cost of starting a new column at this atom, on the same scale as the breaker's
@@ -25,8 +27,14 @@ const BREAK_SECTION = 0;
 const BREAK_BLOCK = 4;
 const BREAK_IN_GROUP = 12;
 
-// Ceiling on how far one gap may stretch, so a loose column spreads evenly
-// instead of opening one canyon.
+// Ceiling on how far one gap may stretch, so an underfull column stays visibly
+// underfull instead of being stretched into a ladder of canyons.
+//
+// Points at nominal type size, so they scale with `spacingRatio` -- the curve the
+// type actually travels -- and not with the raw scale. Against `scale` the ceiling
+// shrank faster than the rows it separates, so at a fitted 0.7 the row gaps could
+// no longer take the slack they used to and a few points of it landed at the foot
+// of the column instead.
 const MAX_STRETCH_ROW = 3;
 const MAX_STRETCH_SECTION = 7;
 
@@ -44,6 +52,7 @@ const MAX_STRETCH_SECTION = 7;
  * @property {number} height
  * @property {{natural:number, stretch:number, max:number}} gapBefore
  * @property {number} breakCost
+ * @property {boolean} keepWithNext  a column may not end on this atom
  * @property {Paint|null} paint
  */
 
@@ -172,6 +181,8 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
     })(),
     sourceFloor: Number(corpus.scripts[sourceLang.script].min_size_pt)
       + Number(spec.paper.minSizeDelta),
+    sourceBreak: /** @type {'space'|'any'|'dict'} */ (
+      corpus.scripts[sourceLang.script].word_break),
     // Advanced by itemAtoms: the reference alternates row shading per section.
     rowIndex: 0,
   };
@@ -247,7 +258,9 @@ function headingAtom(ctx, block) {
   const style = {
     stack: ctx.sourceStack.stack,
     dir: ctx.sourceStack.dir,
-    wordBreak: /** @type {'space'} */ ('space'),
+    // A section title is read by the source-language reader, so it breaks the
+    // way that language does -- see noteAtom for what hardcoding this cost.
+    wordBreak: ctx.sourceBreak,
     size,
     leading: size * (h.leading / h.size),
     weight: 700,
@@ -278,9 +291,10 @@ function headingAtom(ctx, block) {
     gapBefore: {
       natural: ctx.theme.sectionSep.natural * s,
       stretch: ctx.theme.sectionSep.stretch,
-      max: MAX_STRETCH_SECTION * s,
+      max: MAX_STRETCH_SECTION * ctx.spacingRatio,
     },
     breakCost: BREAK_SECTION,
+    keepWithNext: false,
     paint: {
       rects: [...painted.rects, { x: 0, y: ruleY, w: ctx.colWidth, h: h.rulePt, fill: color }],
       runs: painted.runs,
@@ -418,8 +432,9 @@ function atomShell(ctx, block, height, i, template) {
     kind: 'item',
     sectionId: block.sectionId,
     height,
-    gapBefore: { natural: 0, stretch: template.stretch, max: MAX_STRETCH_ROW * ctx.scale },
+    gapBefore: { natural: 0, stretch: template.stretch, max: MAX_STRETCH_ROW * ctx.spacingRatio },
     breakCost: i === 0 ? BREAK_BLOCK : BREAK_IN_GROUP,
+    keepWithNext: false,
     paint: null,
   };
 }
@@ -438,7 +453,13 @@ function noteAtom(ctx, block, withPaint) {
   const style = {
     stack: ctx.sourceStack.stack,
     dir: ctx.sourceStack.dir,
-    wordBreak: /** @type {'space'} */ ('space'),
+    // A note is prose in the *reader's* language, so it breaks the way that
+    // language does. This was hardcoded to 'space', which is silently wrong for
+    // every reader whose script has none: a Japanese or Chinese note is one
+    // unbreakable run, and it painted straight past the right edge of its own
+    // shaded box rather than wrapping inside it. Three translators hit it and
+    // wrote around it by inserting spaces into their prose by hand.
+    wordBreak: ctx.sourceBreak,
     size,
     leading: size * (n.leading / n.size),
     weight: 400,
@@ -455,8 +476,11 @@ function noteAtom(ctx, block, withPaint) {
     kind: 'note',
     sectionId: block.sectionId,
     height,
-    gapBefore: { natural: n.spaceBefore * s, stretch: n.stretch, max: MAX_STRETCH_ROW * s },
+    gapBefore: {
+      natural: n.spaceBefore * s, stretch: n.stretch, max: MAX_STRETCH_ROW * ctx.spacingRatio,
+    },
     breakCost: BREAK_BLOCK,
+    keepWithNext: false,
     paint: withPaint
       ? {
         rects: [
@@ -469,28 +493,6 @@ function noteAtom(ctx, block, withPaint) {
       }
       : null,
   };
-}
-
-/**
- * Merge `count` atoms after `index` into it, so they can never be separated.
- * @param {Atom[]} atoms @param {number} index @param {number} count
- */
-function fuse(atoms, index, count) {
-  const head = atoms[index];
-  let y = head.height;
-  for (let k = 1; k <= count; k += 1) {
-    const next = atoms[index + k];
-    y += next.gapBefore.natural;
-    if (head.paint && next.paint) {
-      head.paint.rects.push(...next.paint.rects.map((r) => ({ ...r, y: r.y + y })));
-      head.paint.runs.push(...next.paint.runs.map((r) => ({ ...r, y: r.y + y })));
-      head.paint.icons.push(...next.paint.icons.map((r) => ({ ...r, y: r.y + y })));
-      head.paint.hits.push(...next.paint.hits.map((r) => ({ ...r, y: r.y + y })));
-    }
-    y += next.height;
-  }
-  head.height = y;
-  atoms.splice(index + 1, count);
 }
 
 /**
@@ -526,13 +528,19 @@ export function buildAtoms({
     }
   }
 
-  for (let i = atoms.length - 1; i >= 0; i -= 1) {
+  // Bind each heading to its opening rows. This is a constraint handed to the
+  // breaker rather than a merge of the atoms: merging was the first
+  // implementation, and it froze the gaps inside the merged run at their natural
+  // size while every later gap in the same column stretched to flush the bottom
+  // -- so the first two rows of every section printed visibly tighter than the
+  // rest of it. Leaving the atoms separate lets the glue treat all of them alike.
+  for (let i = 0; i < atoms.length; i += 1) {
     if (atoms[i].kind !== 'heading') continue;
-    let count = 0;
-    while (count < KEEP_ROWS && atoms[i + 1 + count] && atoms[i + 1 + count].kind !== 'heading') {
-      count += 1;
+    for (let k = 0; k < KEEP_ROWS; k += 1) {
+      const bound = atoms[i + k + 1];
+      if (!bound || bound.kind === 'heading') break;
+      atoms[i + k].keepWithNext = true;
     }
-    if (count) fuse(atoms, i, count);
   }
   return atoms;
 }

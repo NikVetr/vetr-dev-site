@@ -5,7 +5,9 @@
 // corpus or a CJK font; the studio loads everything.
 
 import { parseTable } from '../core/csv.js';
-import { defaultSelection, hasContent, paperSpec, respellOverrideFile } from '../core/pack.js';
+import {
+  DEFAULT_PADDING, defaultSelection, hasContent, paperSpec, respellOverrideFile,
+} from '../core/pack.js';
 import { messagesReady, t } from './i18n.js';
 import { createSheetContext, stacksFor } from '../core/sheet.js';
 import { familyFor, fontFaceCss } from '../render/fonts.js';
@@ -149,7 +151,7 @@ export function makeSpec(ctx, presets, choice) {
     typeface: 'sans',
     inkMode: 'full',
     autoFaces: true,
-    padding: 0.5,
+    padding: DEFAULT_PADDING,
     arrangement: 'two-column',
     scale: 0,
     selection: defaultSelection(ctx.corpus),

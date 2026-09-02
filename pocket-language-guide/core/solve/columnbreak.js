@@ -5,6 +5,10 @@
 // a column himself. The problem is Knuth-Plass one level up -- choose breakpoints
 // in an ordered sequence to minimise total raggedness -- so it is solved the same
 // way, with an exact dynamic program rather than a greedy fill.
+//
+// The one hard constraint is `keepWithNext`, which binds a heading to the rows it
+// introduces. It is enforced by refusing those breakpoints rather than by
+// penalising them, so a stranded heading cannot be bought at any price.
 
 /** @typedef {import('./atoms.js').Atom} Atom */
 
@@ -72,6 +76,9 @@ export function breakColumns(atoms, height, bins) {
         if (used > height + 0.01) break;
         // A non-final column must leave enough atoms to fill the columns after it.
         if (!last && n - (j + 1) < bins - (k + 1)) break;
+        // A heading is bound to the rows it introduces, so no column may end
+        // here -- but taller runs starting at `i` are still worth trying.
+        if (atoms[j].keepWithNext) continue;
         const slack = height - used;
         const ragged = (slack / height) ** 2 * SLACK_WEIGHT * (last ? LAST_COLUMN_RELIEF : 1);
         const total = base + opening + ragged;

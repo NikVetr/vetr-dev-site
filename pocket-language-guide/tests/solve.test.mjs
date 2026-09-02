@@ -52,12 +52,42 @@ test('the shipped default keeps clear of the printer edge', () => {
   assert.ok(box.height < 347.76, `height ${box.height} should be inset`);
 });
 
-test('no heading can be stranded: each is fused with the rows it introduces', () => {
+test('no heading can be stranded: each is bound to the rows it introduces', () => {
   const headings = atoms.filter((a) => a.kind === 'heading');
   assert.equal(headings.length, blocks.filter((b) => b.kind === 'heading').length);
-  for (const h of headings) {
-    // A fused heading carries its own rule plus the rows' backgrounds and rules.
-    assert.ok((h.paint?.hits.length ?? 0) > 1, `heading ${h.sectionId} absorbed no rows`);
+  atoms.forEach((atom, i) => {
+    if (atom.kind !== 'heading' || !atoms[i + 1] || atoms[i + 1].kind === 'heading') return;
+    assert.ok(atom.keepWithNext, `heading ${atom.sectionId} is not bound to its rows`);
+  });
+  // And the breaker honours the binding, so no column ends on a bound atom.
+  for (const col of breakColumns(atoms, box.height, bins).columns) {
+    const end = col.at(-1);
+    if (end === undefined) continue;
+    assert.ok(!atoms[end].keepWithNext,
+      `column ends at atom ${end} in ${atoms[end].sectionId}, mid keep-with-next`);
+  }
+});
+
+test('the rows opening a section sit at the same pitch as the rest of it', () => {
+  // The binding above used to be a merge: a heading and its first two rows became
+  // one atom, so the gaps between them were frozen at their natural size while
+  // every later gap in the column stretched to flush the bottom. The first two
+  // rows of every section printed measurably tighter than the rest, which is only
+  // visible once the paint is placed -- a merge hides it from the atom list
+  // entirely, which is why this test reads the finished plan.
+  for (const face of solved.faces) {
+    /** @type {Map<string, typeof face.hits>} */ const columns = new Map();
+    for (const hit of face.hits) {
+      if (!hit.conceptId) continue;
+      const key = `${hit.x.toFixed(1)}\u0000${hit.sectionId}`;
+      columns.set(key, (columns.get(key) ?? []).concat(hit));
+    }
+    for (const [key, run] of columns) {
+      if (run.length < 3) continue;
+      const gap = (/** @type {number} */ i) => run[i + 1].y - (run[i].y + run[i].h);
+      assert.ok(Math.abs(gap(0) - gap(1)) < 0.6,
+        `${key}: opening gap ${gap(0).toFixed(2)}pt against ${gap(1).toFixed(2)}pt`);
+    }
   }
 });
 
@@ -98,21 +128,66 @@ test('at the fitted scale, glue absorbs the slack in all but the last pair', asy
 });
 
 test('a column too loose to flush is reported rather than quietly left ragged', async () => {
-  // Deliberately under-fill. A quarter of the sections, not a half: the corpus has
-  // grown enough that half of it still fills every column, which would make this
-  // test pass without ever exercising the thing it is about.
+  // Deliberately under-fill, with an eighth of the sections. It was a quarter, and
+  // before that a half; each time the sheet learned to absorb more slack the old
+  // fraction stopped under-filling and this test started passing without ever
+  // exercising the thing it is about. The guard below is what catches that.
   const sections = Object.fromEntries(
-    ctx.corpus.sections.filter((_, i) => i % 4).map((s) => [s.section_id, false]),
+    ctx.corpus.sections.filter((_, i) => i % 8).map((s) => [s.section_id, false]),
   );
   const { plan } = await buildSheet(ctx, { ...spec, selection: { sections, items: {} } });
   // Judged against the engine's own threshold rather than a number of our own: a
   // point or two of residue is invisible, and the engine only speaks up past
-  // LOOSE_FRACTION of a column.
+  // LOOSE_FRACTION of a column. Excluding the trailing columns for the same
+  // reason it does -- a sheet's content does not end on a column boundary, so the
+  // last column with anything in it is short by nature and not a fault.
   const box = contentBox(plan.geometry, spec.paper);
-  const loose = plan.looseness.filter((r) => r > box.height * LOOSE_FRACTION).length;
+  const lastUsed = plan.looseness.length - 1
+    - [...plan.looseness].reverse().findIndex((r) => r < box.height - 1e-6);
+  const loose = plan.looseness
+    .filter((r, bin) => bin < lastUsed && r > box.height * LOOSE_FRACTION).length;
   assert.ok(loose > 0, 'this selection was supposed to under-fill');
   assert.ok(plan.warnings.some((w) => w.code === 'loose-columns'),
     `${loose} loose column(s) went unreported`);
+});
+
+test('a note in a spaceless script wraps inside its own box', async () => {
+  // A note is prose in the reader's language, and its break class was hardcoded
+  // to 'space'. Japanese and Chinese have none, so the whole paragraph was a
+  // single unbreakable run and painted straight past the right edge of its shaded
+  // box. Nothing downstream re-measures a placed run, so it was invisible except
+  // on the page -- three translators hit it and wrote around it by hand.
+  const conceptId = 'numbers-money.number-and-classifier-notes';
+  const pair = { ...spec, target: 'zh-Hans', source: 'ja' };
+  const { plan } = await buildSheet(ctx, pair, {
+    overrides: {
+      [conceptId]: { values: { gloss: '\u6570\u306e\u4f5c\u308a\u65b9'.repeat(40) }, include: true },
+    },
+    extras: [],
+  });
+  const box = contentBox(plan.geometry, pair.paper);
+  const pitch = box.colWidth + plan.geometry.columnGap;
+  /** @param {import('../core/types.js').TextRun} run */
+  const overshoot = (run) => {
+    const parts = /^(.*)-(\d+)(i?)$/.exec(run.fontId);
+    if (!parts) throw new Error(`unparsable face id ${run.fontId}`);
+    const width = ctx.measurer.width(run.text, {
+      stack: parts[1],
+      weight: Number(parts[2]),
+      italic: parts[3] === 'i',
+      size: run.size,
+      leading: run.size,
+      dir: run.dir,
+      wordBreak: 'space',
+      slotAsRule: false,
+    });
+    const column = Math.round((run.x - box.left) / pitch);
+    return run.x + width - (box.left + column * pitch + box.colWidth);
+  };
+  const runs = plan.faces.flatMap((f) => f.runs);
+  assert.ok(runs.length, 'the sheet rendered nothing to check');
+  const worst = Math.max(...runs.map(overshoot));
+  assert.ok(worst < 0.01, `a run runs ${worst.toFixed(2)}pt past its column`);
 });
 
 test('distribute respects per-gap ceilings and reports what it cannot place', () => {
@@ -182,10 +257,15 @@ test('bigger type means more faces, not a broken sheet', async () => {
 });
 
 test('a fixed face count is honoured rather than overridden', async () => {
+  // `autoFaces: false` is the pin; a number in the geometry alone is only the
+  // anchor auto starts from, and this test used to assert on that instead -- so it
+  // was really asserting where auto happened to land, and broke the moment the
+  // default padding changed.
   const { plan } = await buildSheet(ctx, {
-    ...spec, geometry: { ...spec.geometry, faces: 6 }, scale: 0,
+    ...spec, autoFaces: false, geometry: { ...spec.geometry, faces: 6 }, scale: 0,
   });
   assert.equal(plan.faces.length, 6);
+  assert.deepEqual(plan.warnings.filter((w) => w.severity === 'error'), []);
 });
 
 test('a pinned face count with too little room is reported, not truncated', async () => {

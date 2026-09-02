@@ -1,7 +1,7 @@
 // The reference sheet's SheetSpec, shared by the dev scripts and the tests.
 import { readFile } from 'node:fs/promises';
 import { parseTable } from '../core/csv.js';
-import { defaultSelection, paperSpec } from '../core/pack.js';
+import { DEFAULT_PADDING, defaultSelection, paperSpec } from '../core/pack.js';
 
 /** @returns {Promise<import('../core/types.js').SheetSpec>} */
 export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides = {}) {
@@ -34,7 +34,7 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     typeface: 'sans',
     inkMode: 'full',
     autoFaces: true,
-    padding: 0.5,
+    padding: DEFAULT_PADDING,
     arrangement: 'two-column',
     // 0 means fit: with faces on auto too, that resolves to the fewest pairs of
     // faces at the largest legible type -- the same answer the reference sheet

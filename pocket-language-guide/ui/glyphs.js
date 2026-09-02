@@ -104,14 +104,17 @@ export function facesGlyph(count) {
   return svg;
 }
 
-/** Rows at three spacings, so "roomy" looks roomy. @param {number} level 0..2 */
 /**
  * Points of extra breathing room around every text element, at nominal type size.
  *
  * `Tight` is 0, which reproduces the hand-built LaTeX original exactly -- its
  * padding really is almost nil, with consecutive rows held apart by a 0.22pt rule
- * alone. That is deliberate there and reads as cramped everywhere else, so the
- * default sits one step up.
+ * alone. That reads as cramped anywhere the original's density is not the point,
+ * so the default is the airy setting instead.
+ *
+ * There were five steps here, and the middle two are gone: 0.5 and 0.9 both sat
+ * close enough to `Tight` that no one would choose them once the default moved
+ * up, and the slider under the presets still reaches any value between them.
  *
  * Carries a caption *key* rather than a caption: this is module scope, evaluated
  * before any catalogue is loaded, so the words are looked up where the option is
@@ -119,11 +122,10 @@ export function facesGlyph(count) {
  */
 export const PADDING_CHOICES = [
   { value: 0, captionKey: 'format.padding.tight' },
-  { value: 0.5, captionKey: 'format.padding.normal' },
-  { value: 0.9, captionKey: 'format.padding.roomy' },
-  { value: 1.4, captionKey: 'format.padding.airy' },
+  { value: 1.4, captionKey: 'format.padding.normal' },
   { value: 2.0, captionKey: 'format.padding.extra' },
 ];
+
 
 /**
  * Breathing room, drawn as the gap between rows. Index-matched to
@@ -133,7 +135,7 @@ export const PADDING_CHOICES = [
 export function paddingGlyph(level) {
   const box = 30;
   const svg = frame(box, box);
-  const gap = [0.8, 1.8, 3, 4.4, 6][level];
+  const gap = [0.8, 4.4, 6][level];
   const barH = 2.4;
   const pitch = barH + gap;
   const count = Math.max(2, Math.floor((box - 4) / pitch));

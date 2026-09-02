@@ -501,6 +501,17 @@ function itemRow(concept, target, source, respell, spec, override, custom) {
 }
 
 /**
+ * Extra breathing room the default sheet asks for, in points at nominal type size.
+ *
+ * Shared because both default specs have to agree: the app builds one and
+ * `scripts/spec.mjs` builds the other for the committed thumbnails, and the last
+ * time those two drifted the gallery advertised a sheet nobody could print. It is
+ * the setting the panel calls `Normal` -- the reference sheet's own padding is
+ * essentially nil, which is right for reproducing it and cramped for reading it.
+ */
+export const DEFAULT_PADDING = 1.4;
+
+/**
  * Default selection: every section whose audience tags overlap the reader's
  * interests. With no interests given, everything except the `default_on: 0`
  * sections is on.
