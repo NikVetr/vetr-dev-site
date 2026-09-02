@@ -646,7 +646,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(
     filterPlacements.every(({ width, height, verticalGap, rightOffset, contained, sortTargetHeight, controlHeight }) => (
       width >= 24 && width <= 24.5 && height >= 24 && height <= 24.5
-      && verticalGap >= 1.5 && verticalGap <= 2.5
+      && Math.abs(verticalGap) <= 0.5
       && rightOffset <= 0.5 && contained && sortTargetHeight >= 48 && controlHeight >= 48
     )),
     JSON.stringify(filterPlacements),
@@ -971,42 +971,76 @@ test("table headers stack compact sort and filter controls at desktop and constr
 
     const placements = await page.locator("thead th.filterable-column").evaluateAll((headers) => headers.map((header) => {
       const bounds = header.getBoundingClientRect();
-      const controls = header.querySelector(".header-controls").getBoundingClientRect();
+      const controlsElement = header.querySelector(".header-controls");
+      const controls = controlsElement.getBoundingClientRect();
       const sortButton = header.querySelector("button[data-sort]");
       const sort = sortButton.getBoundingClientRect();
       const sortIcon = getComputedStyle(sortButton, "::after");
-      const filterIcon = getComputedStyle(header.querySelector(".header-filter-menu summary"), "::before");
+      const filterSummary = header.querySelector(".header-filter-menu summary");
+      const filterIcon = getComputedStyle(filterSummary, "::before");
       const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
       const sortIconTop = controls.top + Number.parseFloat(sortIcon.top);
       const sortIconRight = controls.right - Number.parseFloat(sortIcon.right);
+      const sortGlyphShift = new DOMMatrixReadOnly(sortIcon.transform).m42;
+      const filterGlyphShift = new DOMMatrixReadOnly(filterIcon.transform).m42;
+      const sortIconCenter = {
+        x: sortIconRight - Number.parseFloat(sortIcon.width) / 2,
+        y: sortIconTop + Number.parseFloat(sortIcon.height) / 2 + sortGlyphShift,
+      };
+      const filterIconCenter = {
+        x: filter.left + filter.width / 2,
+        y: filter.top + filter.height / 2 + filterGlyphShift,
+      };
+      const hitElement = document.elementFromPoint(sortIconCenter.x, sortIconCenter.y);
+      const sortIconIsVisible = sortIconCenter.x >= 0 && sortIconCenter.x < innerWidth
+        && sortIconCenter.y >= 0 && sortIconCenter.y < innerHeight;
       return {
+        sortKey: sortButton.dataset.sort,
         filterWidth: filter.width,
         filterHeight: filter.height,
         verticalGap: filter.top - sortIconTop - Number.parseFloat(sortIcon.height),
+        glyphCenterGap: filterIconCenter.y - sortIconCenter.y,
+        labelToIconGap: sortIconCenter.x - sort.right,
         rightOffset: Math.abs(filter.right - sortIconRight),
         contained: controls.left >= bounds.left && controls.right <= bounds.right
           && filter.left >= controls.left && filter.right <= controls.right,
         sortTargetHeight: sort.height,
         controlHeight: controls.height,
-        sortGlyphShift: new DOMMatrixReadOnly(sortIcon.transform).m42,
-        filterGlyphShift: new DOMMatrixReadOnly(filterIcon.transform).m42,
+        sortGlyphShift,
+        filterGlyphShift,
+        sortIconCenter,
+        sortIconIsVisible,
+        sortIconHit: hitElement?.closest?.("button[data-sort]") === sortButton,
+        separatorRight: getComputedStyle(header).borderRightColor,
+        separatorBottom: getComputedStyle(header).borderBottomColor,
       };
     }));
     expect(placements.length).toBeGreaterThan(0);
     expect(placements.every((placement) => (
       placement.filterWidth >= 24 && placement.filterWidth <= 24.5
       && placement.filterHeight >= 24 && placement.filterHeight <= 24.5
-      && placement.verticalGap >= 1.5 && placement.verticalGap <= 2.5
+      && Math.abs(placement.verticalGap) <= 0.5
+      && placement.glyphCenterGap >= 11.5 && placement.glyphCenterGap <= 12.5
+      && placement.labelToIconGap >= 10 && placement.labelToIconGap <= 12.5
       && placement.rightOffset <= 0.5 && placement.contained
       && placement.sortTargetHeight >= 48 && placement.controlHeight >= 48
-      && Math.abs(placement.sortGlyphShift - 3) <= 0.1
-      && Math.abs(placement.filterGlyphShift + 3) <= 0.1
+      && Math.abs(placement.sortGlyphShift - 6) <= 0.1
+      && Math.abs(placement.filterGlyphShift + 6) <= 0.1
+      && (!placement.sortIconIsVisible || placement.sortIconHit)
+      && placement.separatorRight === "rgb(117, 204, 236)"
+      && placement.separatorBottom === "rgb(117, 204, 236)"
     )), JSON.stringify(placements)).toBe(true);
 
     const titleSort = page.locator('thead button[data-sort="title"]');
+    const titlePlacement = placements.find((placement) => placement.sortKey === "title");
+    await page.mouse.move(titlePlacement.sortIconCenter.x, titlePlacement.sortIconCenter.y);
+    await expect(titleSort).toHaveCSS("cursor", "pointer");
+    expect(await titleSort.evaluate((element) => getComputedStyle(element, "::after").color)).toBe("rgb(45, 104, 133)");
+    await page.mouse.click(titlePlacement.sortIconCenter.x, titlePlacement.sortIconCenter.y);
+    await expect(titleSort.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
     await titleSort.focus();
     await page.keyboard.press("Enter");
-    await expect(titleSort.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
+    await expect(titleSort.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "descending");
     expect(await titleSort.evaluate((element) => getComputedStyle(element, "::after").borderTopWidth)).toBe("0px");
     expect(await titleSort.evaluate((element) => getComputedStyle(element, "::after").backgroundColor)).toBe("rgba(0, 0, 0, 0)");
 
@@ -1025,6 +1059,7 @@ test("table headers stack compact sort and filter controls at desktop and constr
     await expect(titleFilter.locator("xpath=..")).not.toHaveAttribute("open", "");
     await expect(titleFilter).toBeFocused();
 
+    await page.evaluate(() => document.activeElement?.blur());
     await page.locator(".table-panel").screenshot({ path: screenshot });
   }
   expect(errors).toEqual([]);

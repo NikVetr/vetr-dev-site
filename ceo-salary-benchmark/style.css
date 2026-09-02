@@ -450,7 +450,7 @@ table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 15
 th, td { padding: 7px 7px; border-right: 1px solid #edf3f5; border-bottom: 1px solid #edf3f5; text-align: left; vertical-align: middle; }
 th:last-child, td:last-child { border-right: 0; }
 thead { position: sticky; top: 0; z-index: 3; }
-thead th { background: #f3f8fa; color: var(--ink); font-size: 9px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+thead th { border-right-color: var(--line-dark); border-bottom-color: var(--line-dark); background: #f3f8fa; color: var(--ink); font-size: 9px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
 thead button[data-sort] { display: inline-flex; align-items: center; gap: 3px; border: 0; background: none; padding: 0; cursor: pointer; color: inherit; font: inherit; text-transform: inherit; letter-spacing: inherit; }
 thead button.stacked-sort > span { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.05; }
 thead button.stacked-sort > span > span { white-space: nowrap; }
@@ -460,16 +460,18 @@ thead button[data-active="true"][data-direction="asc"]::after { content: "↑"; 
 .filterable-column { position: relative; padding-right: 5px; }
 .header-controls {
   --header-control-size: 24px;
-  --header-control-gap: 2px;
+  --header-control-gap: 0px;
   position: relative;
-  display: block;
+  display: inline-block;
   box-sizing: border-box;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   min-height: calc(var(--header-control-size) * 2 + var(--header-control-gap));
-  padding-right: calc(var(--header-control-size) + 3px);
+  padding-right: var(--header-control-size);
 }
 .header-controls > button[data-sort] {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   min-width: 0;
   min-height: calc(var(--header-control-size) * 2 + var(--header-control-gap));
   justify-content: flex-start;
@@ -490,8 +492,7 @@ thead button[data-active="true"][data-direction="asc"]::after { content: "↑"; 
   box-sizing: border-box;
   font-size: 8px;
   line-height: 1;
-  pointer-events: none;
-  transform: translateY(3px);
+  transform: translateY(6px);
 }
 .header-controls > button[data-sort]:hover::after,
 .header-controls > button[data-sort]:focus-visible::after { border: 0; background: transparent; color: var(--green); opacity: 1; }
@@ -520,7 +521,7 @@ thead button[data-active="true"][data-direction="asc"]::after { content: "↑"; 
   border-radius: 0;
   background: transparent;
 }
-.header-filter-menu summary::before { width: 8px; height: 8px; background: var(--muted); clip-path: polygon(0 0, 100% 0, 62% 45%, 62% 100%, 38% 100%, 38% 45%); content: ""; transform: translateY(-3px); }
+.header-filter-menu summary::before { width: 8px; height: 8px; background: var(--muted); clip-path: polygon(0 0, 100% 0, 62% 45%, 62% 100%, 38% 100%, 38% 45%); content: ""; transform: translateY(-6px); }
 .header-filter-menu summary::after { display: none; }
 .header-filter-menu summary:hover { border: 0; background: transparent; }
 .header-filter-menu summary:focus-visible { border: 0; background: transparent; outline: 2px solid var(--green); outline-offset: -4px; }
