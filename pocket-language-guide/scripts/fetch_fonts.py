@@ -34,10 +34,21 @@ SOURCES = {
     "NotoSerifJP-var.ttf": f"{GFONTS}/notoserifjp/NotoSerifJP%5Bwght%5D.ttf",
     "NotoSansKR-var.ttf": f"{GFONTS}/notosanskr/NotoSansKR%5Bwght%5D.ttf",
     "NotoSerifKR-var.ttf": f"{GFONTS}/notoserifkr/NotoSerifKR%5Bwght%5D.ttf",
-    # Thai is the one script here that the Latin faces do not cover at all -- Noto
-    # Sans carries none of its 128 codepoints -- so it needs a stack of its own.
+    # Two scripts the Latin faces do not cover, each needing a stack of its own.
+    #
+    # Thai is the obvious one: Noto Sans carries none of its codepoints. Devanagari
+    # is the trap. The *variable* NotoSans has all 128 of it, which is why a check
+    # against `NotoSans-var.ttf` says Devanagari is covered -- but that file feeds
+    # only the condensed stack. The four static faces that feed `latin`, which is
+    # where `scripts.csv` used to route Devanagari, have zero. Hindi would have
+    # printed as tofu, and the Hindi translator caught it by testing the shipped
+    # subsets rather than the sources.
     "NotoSansThai-var.ttf": f"{GFONTS}/notosansthai/NotoSansThai%5Bwdth,wght%5D.ttf",
     "NotoSerifThai-var.ttf": f"{GFONTS}/notoserifthai/NotoSerifThai%5Bwdth,wght%5D.ttf",
+    "NotoSansDevanagari-var.ttf":
+        f"{GFONTS}/notosansdevanagari/NotoSansDevanagari%5Bwdth,wght%5D.ttf",
+    "NotoSerifDevanagari-var.ttf":
+        f"{GFONTS}/notoserifdevanagari/NotoSerifDevanagari%5Bwdth,wght%5D.ttf",
 }
 
 DEST = Path(__file__).resolve().parent.parent / "tmp" / "fonts-src"

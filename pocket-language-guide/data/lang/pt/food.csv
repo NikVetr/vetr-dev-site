@@ -24,3 +24,5 @@ food-ordering.is-this-vegetarian,Isto é vegetariano?,,,,2,pt-agent-v1
 food-ordering.what-do-you-recommend,O que recomenda?,,,,2,pt-agent-v1
 food-ordering.water-please,"Água, por favor",,,,2,pt-agent-v1
 food-ordering.can-a-vegetarian-eat-this,Um vegetariano pode comer isto?,,,,2,pt-agent-v1
+dietary-needs.no-pork,Sem carne de porco,"Sem porco, presunto nem chouriço",,also ham + sausage,2,pt-gaps-v1
+dietary-needs.is-this-halal,Isto é halal?,Tem certificação halal?,,,2,pt-gaps-v1

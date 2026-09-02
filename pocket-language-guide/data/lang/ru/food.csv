@@ -24,3 +24,5 @@ food-ordering.is-this-vegetarian,Это вегетарианское?,,Eto veget
 food-ordering.what-do-you-recommend,Что посоветуете?,,Chto posovetuyete?,,,2,ru-agent-v1
 food-ordering.water-please,"Воду, пожалуйста.",,"Vodu, pozhaluysta.",,,2,ru-agent-v1
 food-ordering.can-a-vegetarian-eat-this,Это можно вегетарианцу?,,Eto mozhno vegetariantsu?,,,2,ru-agent-v1
+dietary-needs.no-pork,Без свинины.,свинина,Bez svininy.,,,2,ru-gaps-v1
+dietary-needs.is-this-halal,Это халяль?,Это халяльное?,Eto khalyalʼ?,,,2,ru-gaps-v1

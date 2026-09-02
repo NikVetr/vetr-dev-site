@@ -688,6 +688,17 @@ Named so nobody has to rediscover the gap:
   been shipped.
 - **A reviewer queue.** `content/CONTRIBUTING.md` defines the confidence tiers and
   the validator enforces the safety gate, but there is no review UI.
+- **Eleven concepts the translators asked for**, staged in
+  `content/PROPOSED-CONCEPTS.md` with the argument and the sources for each rather
+  than added. The strongest are a malaria pair (the Swahili translator's "biggest gap
+  in this pack" — it is the most likely serious illness for a visitor to any of the
+  four countries Swahili serves), a pork-stock question that Japanese, Korean and
+  Mandarin all want separately from `no-pork` because 豚骨 and 猪油 are not 豚肉, and
+  an Indonesian `common-signs` row for the codes that stand in for the word `babi` —
+  a reader can follow `Tanpa babi` perfectly and still walk into a place signed
+  `Lapo B2`. Staged rather than added because a universal concept costs every one of
+  the fourteen packs a row, and the two that *were* added this round took twelve
+  agents to fill.
 
 ## Notes worth keeping
 
@@ -696,6 +707,41 @@ Three failure modes here were silent rather than loud, and the fixes are load-be
 - **fontkit's subsetter drops glyphs carrying TrueType hinting instructions**, so
   the exported PDF lost most of its Latin while CJK survived. `subset_fonts.py`
   strips hinting, which is irrelevant at print resolution anyway.
+- **The vendored fontkit needs a polyfill, and only Devanagari and Thai find out.**
+  `@pdf-lib/fontkit` ships a Babel-transpiled build in which exactly one generator --
+  `StateMachine.prototype.match` -- became a state machine calling a
+  `regeneratorRuntime` the package never bundles and declares no dependency on.
+  Nothing else in fontkit reaches that function: it is the matcher the Indic and
+  Universal shapers use. So Latin, Cyrillic, Greek, Arabic, Han, Kana and Hangul all
+  shaped fine for months, and the first Devanagari string threw
+  `regeneratorRuntime is not defined` at the first glyph. `npm run vendor` now
+  declares the name and imports `regenerator-runtime` for the side effect of filling
+  it in. Worth knowing before adding Khmer, Tamil, Bengali or any other Indic script.
+- **A font that covers a script in one file does not cover it in the others.** The
+  *variable* Noto Sans carries all 128 Devanagari codepoints; the four static faces
+  that fed the `latin` stack carry none. Checking `NotoSans-var.ttf` and concluding
+  "Devanagari is covered" was wrong, and the Hindi translator caught it by testing
+  the shipped subsets rather than the sources -- which is the right instinct and is
+  now what `tests/fonts.test.mjs` does for the subsetter's other failure mode.
+  Devanagari has its own stack, as Thai does.
+- **Only `text` is guaranteed to reach the sheet.** `script_alt` and `literal` are
+  both fields a reader switches on, and the default set is `script`, `roman`,
+  `gloss`, `respell`, `numeral`. So a safety-relevant qualification that lives in
+  `text_alt` or `literal` has no margin on a default card. The Spanish translator
+  found this while being told the opposite by a brief of mine, and the right answer
+  is the one that pack took: pack the coverage into `text` -- `Sin cerdo ni jamón ni
+  embutidos` rather than `Sin cerdo` with the rest hidden -- and leave `literal` for
+  the residue a card cannot carry.
+- **Three of the seven field toggles drew nothing.** "Columns shown" offers the
+  seven fields an item can carry, and `core/solve/arrange.js` orders all seven — but
+  no template in either theme *defined* `script_alt`, `ipa` or `literal`, and
+  `cellGrid` filters the template's own field list. So switching them on was a no-op,
+  in the one panel whose whole subject is where text lands. The Japanese translator
+  found it while arguing about where a safety warning could safely live: the answer
+  was nowhere, which is why it now lives in `literal`. The `entry` template carries
+  all three now; the reference tables deliberately do not, because they are one line
+  of four columns and that is the point of them. `ipa` still draws nothing, for the
+  honest reason that the column is empty everywhere.
 - **`display` on a class beats the user agent's `[hidden]`.** The Custom row under
   each setting ladder was never actually hidden: `.numeric-custom { display: flex }`
   outranks `[hidden] { display: none }`, so a slider sat under every ladder showing a

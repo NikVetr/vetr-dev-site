@@ -1,5 +1,5 @@
 {
-  "_note": "Bản dịch giao diện tiếng Việt. Quy ước đã chọn: (1) Xưng hô — gọi người dùng là “bạn” theo thông lệ phần mềm tiếng Việt; nhãn nút và tiêu đề bảng để ở dạng danh–động từ ngắn, không có tiểu từ lịch sự (Xuất, Ẩn, Đóng, Hủy), còn câu văn giải thích và cảnh báo thì viết thành câu đầy đủ. (2) Thuật ngữ chốt: kiểu chữ (typeface), phiên âm (romanisation), cách đọc (respell/say-it-like), nghĩa đen (literal), mặt (face của tờ giấy), in hai mặt (duplex), cột (column), dàn trang (typeset), nét kẻ (rule/hairline), lề (margin), ép plastic (laminate), kết xuất (render), khổ (size của giấy/thẻ), không chân / có chân (sans / serif — thuật ngữ nhà in, ngắn hơn “không chân chữ”). Giữ nguyên PNG, SVG, CSV, PDF, Wi-Fi, IPA, dpi, pt, in. (3) Dấu câu theo lối Việt: dấu ngoặc kép cong “ ”, không có khoảng trắng trước dấu câu. (4) Chiều dài — các nhãn điều khiển phân đoạn chỉ có khoảng 11 ký tự: “Đen trắng”, “Rất rộng”, “Không chân” và “Màn hình” đã sát mức đó, đừng kéo dài thêm. gallery.offline (“Ngoại tuyến”, 11 ký tự) là nhãn dài nhất trong hàng ba nút của thẻ ngôn ngữ; nếu cần ngắn hơn thì dùng “Tải về”. (5) “Studio” giữ nguyên như tên riêng — tiếng Việt chưa có từ quen thuộc cho khái niệm này và “xưởng” nghe gượng trong phần mềm.",
+  "_note": "Bản dịch giao diện tiếng Việt. Quy ước đã chọn: (1) Xưng hô — gọi người dùng là “bạn” theo thông lệ phần mềm tiếng Việt; nhãn nút và tiêu đề bảng để ở dạng danh–động từ ngắn, không có tiểu từ lịch sự (Xuất, Ẩn, Đóng, Hủy), còn câu văn giải thích và cảnh báo thì viết thành câu đầy đủ. (2) Thuật ngữ chốt: kiểu chữ (typeface), phiên âm (romanisation), cách đọc (respell/say-it-like), nghĩa đen (literal), mặt (face của tờ giấy), in hai mặt (duplex), cột (column), dàn trang (typeset), nét kẻ (rule/hairline), lề (margin), ép plastic (laminate), kết xuất (render), khổ (size của giấy/thẻ), không chân / có chân (sans / serif — thuật ngữ nhà in, ngắn hơn “không chân chữ”). Giữ nguyên PNG, SVG, CSV, PDF, Wi-Fi, IPA, dpi, pt, in. (3) Dấu câu theo lối Việt: dấu ngoặc kép cong “ ”, không có khoảng trắng trước dấu câu. (4) Chiều dài — các nhãn điều khiển phân đoạn chỉ có khoảng 11 ký tự: “Đen trắng”, “Rất rộng”, “Không chân” và “Màn hình” đã sát mức đó, đừng kéo dài thêm. gallery.offline (“Ngoại tuyến”, 11 ký tự) là nhãn dài nhất trong hàng ba nút của thẻ ngôn ngữ; nếu cần ngắn hơn thì dùng “Tải về”. (5) “Studio” giữ nguyên như tên riêng — tiếng Việt chưa có từ quen thuộc cho khái niệm này và “xưởng” nghe gượng trong phần mềm. (6) “Mặt trước”/“mặt sau” chỉ mặt trước và mặt sau của tấm thẻ (preview.cardPair, cut.hint.whole), nên đừng dùng chúng cho nút chuyển mặt — điều hướng theo thứ tự thì dùng “Mặt trước đó”/“Mặt tiếp theo”. Khổ thẻ ID-1 gọi là “Thẻ ATM” (ngắn hơn “Thẻ tín dụng” và đúng cách gọi ở Việt Nam). Đơn vị inch viết là “inch”, không viết tắt “in”, vì “in” trùng với động từ in.",
   "addTerm.add": "Thêm vào trang",
   "addTerm.bothNeeded": "Cần điền cả hai ô ngôn ngữ.",
   "addTerm.inLanguage": "Bằng {language}",
@@ -30,7 +30,7 @@
   "format.breathingRoom": "Khoảng trống quanh chữ",
   "format.card": "Thẻ",
   "format.cardSize": "Khổ thẻ",
-  "format.card.creditCard": "Thẻ",
+  "format.card.creditCard": "Thẻ ATM",
   "format.colours": "Màu sắc",
   "format.columns": "Cột",
   "format.columnsPerFace": "Số cột mỗi mặt",
@@ -108,7 +108,7 @@
   "handles.gapReadout": "Cách {gap}pt · cột rộng {width}pt",
   "handles.marginBottom": "Lề dưới",
   "handles.marginLeft": "Lề trái",
-  "handles.marginReadout": "{name} {inches}in ({points}pt)",
+  "handles.marginReadout": "{name} {inches} inch ({points}pt)",
   "handles.marginRight": "Lề phải",
   "handles.marginTop": "Lề trên",
   "nav.back": "← Tất cả ngôn ngữ",
@@ -224,8 +224,8 @@
   "colour.alert": "Khẩn cấp",
   "colour.ink": "Chữ",
   "gallery.previewFace": "Mặt {face} trên {faces}",
-  "gallery.previewPrev": "Mặt trước",
-  "gallery.previewNext": "Mặt sau",
+  "gallery.previewPrev": "Mặt trước đó",
+  "gallery.previewNext": "Mặt tiếp theo",
   "gallery.previewLoading": "Đang dàn trang các mặt còn lại…",
   "gallery.previewFailed": "Không dàn được các mặt còn lại. Tùy chỉnh sẽ mở toàn bộ tờ."
 }

@@ -24,3 +24,5 @@ food-ordering.is-this-vegetarian,C'est végétarien ?,,,,2,fr-agent-v1
 food-ordering.what-do-you-recommend,Que recommandez-vous ?,,,,2,fr-agent-v1
 food-ordering.water-please,"De l'eau, s'il vous plaît",,,,2,fr-agent-v1
 food-ordering.can-a-vegetarian-eat-this,Un végétarien peut-il manger ça ?,,,,2,fr-agent-v1
+dietary-needs.no-pork,Sans porc ni lardons,sans porc ni charcuterie,,lardons = bacon bits,2,fr-gaps-v1
+dietary-needs.is-this-halal,C'est halal ?,C'est certifié halal ?,,ask who certifies it,2,fr-gaps-v1

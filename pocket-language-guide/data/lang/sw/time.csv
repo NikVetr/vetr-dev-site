@@ -1,0 +1,43 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,Saa ngapi?,Saa ngapi za kizungu?,,kizungu = the Western clock,2,sw-agent-v1
+time-scheduling.how-many-minutes,Dakika ngapi?,,,,2,sw-agent-v1
+time-scheduling.what-time-should-we-meet,Tukutane saa ngapi?,,,,2,sw-agent-v1
+time-scheduling.can-we-change-the-time,Tunaweza kubadilisha muda?,,,,2,sw-agent-v1
+time-scheduling.when-is-convenient,Lini inafaa kwako?,,,,2,sw-agent-v1
+time-scheduling.what-is-today-s-date,Leo ni tarehe ngapi?,,,,2,sw-agent-v1
+time-scheduling.what-day-is-it-today,Leo ni siku gani?,,,,2,sw-agent-v1
+time-scheduling.what-time-does-it-open,Inafunguliwa saa ngapi?,,,,2,sw-agent-v1
+time-scheduling.what-time-does-it-close,Inafungwa saa ngapi?,,,,2,sw-agent-v1
+time-scheduling.how-long-does-it-take,Inachukua muda gani?,,,,2,sw-agent-v1
+time-words.today,Leo,,,,2,sw-agent-v1
+time-words.tomorrow,Kesho,,,,2,sw-agent-v1
+time-words.yesterday,Jana,,,,2,sw-agent-v1
+time-words.this-week,Wiki hii,,,,2,sw-agent-v1
+time-words.next-week,Wiki ijayo,,,,2,sw-agent-v1
+time-words.morning,Asubuhi,,,,2,sw-agent-v1
+time-words.afternoon,Mchana,,,,2,sw-agent-v1
+time-words.evening,Jioni,,,,2,sw-agent-v1
+time-words.spring,Majira ya kuchipua,Masika,,,2,sw-agent-v1
+time-words.summer,Majira ya joto,Kiangazi,,,2,sw-agent-v1
+time-words.fall,Majira ya pukutiko,Vuli,,,2,sw-agent-v1
+time-words.winter,Majira ya baridi,Kipupwe,,,2,sw-agent-v1
+time-words.night,Usiku,,,,2,sw-agent-v1
+days-of-week.monday,Jumatatu,,,,2,sw-agent-v1
+days-of-week.tuesday,Jumanne,,,,2,sw-agent-v1
+days-of-week.wednesday,Jumatano,,,,2,sw-agent-v1
+days-of-week.thursday,Alhamisi,,,,2,sw-agent-v1
+days-of-week.friday,Ijumaa,,,,2,sw-agent-v1
+days-of-week.saturday,Jumamosi,,,,2,sw-agent-v1
+days-of-week.sunday,Jumapili,,,,2,sw-agent-v1
+months.january,Januari,Mwezi wa kwanza,,,2,sw-agent-v1
+months.february,Februari,Mwezi wa pili,,,2,sw-agent-v1
+months.march,Machi,Mwezi wa tatu,,,2,sw-agent-v1
+months.april,Aprili,Mwezi wa nne,,,2,sw-agent-v1
+months.may,Mei,Mwezi wa tano,,,2,sw-agent-v1
+months.june,Juni,Mwezi wa sita,,,2,sw-agent-v1
+months.july,Julai,Mwezi wa saba,,,2,sw-agent-v1
+months.august,Agosti,Mwezi wa nane,,,2,sw-agent-v1
+months.september,Septemba,Mwezi wa tisa,,,2,sw-agent-v1
+months.october,Oktoba,Mwezi wa kumi,,,2,sw-agent-v1
+months.november,Novemba,Mwezi wa kumi na moja,,,2,sw-agent-v1
+months.december,Desemba,Mwezi wa kumi na mbili,,,2,sw-agent-v1

@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Nataka kwenda {},,,,2,sw-agent-v1
+utility-templates.please-give-me,Naomba {},,,I request {},2,sw-agent-v1
+utility-templates.may-i,"Je, naweza {}?",,,fill with ku- + verb,2,sw-agent-v1
+utility-templates.please-do-not-add,Tafadhali usiweke {},,,please do not put in {},2,sw-agent-v1
+utility-templates.do-you-have,"Je, mna {}?",,,,2,sw-agent-v1
+utility-templates.please-write-the-number,Tafadhali andika namba,,,,2,sw-agent-v1
+utility-templates.i-need,Nahitaji {},,,,2,sw-agent-v1
+utility-templates.is-there-nearby,Kuna {} karibu?,,,,2,sw-agent-v1
+utility-templates.how-much-is,{} ni bei gani?,,,,2,sw-agent-v1
+utility-templates.is-this,"Je, ni {}?",,,,2,sw-agent-v1
+utility-templates.please,"{}, tafadhali",,,,2,sw-agent-v1
+utility-templates.i-am-looking-for,Natafuta {},,,,2,sw-agent-v1
+utility-templates.do-you-accept,"Je, mnakubali {}?",,,,2,sw-agent-v1
+utility-templates.i-cannot-find,Nashindwa kupata {},,,I fail to find {},2,sw-agent-v1
+utility-templates.there-is-a-problem-with,Kuna tatizo na {},,,,2,sw-agent-v1

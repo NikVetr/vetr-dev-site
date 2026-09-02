@@ -1,0 +1,28 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+dietary-needs.no-meat,मांस-मुर्गी-मछली नहीं,नॉन-वेज नहीं,māṁs-murgī-machlī nahīṁ,,"no meat, chicken or fish",2,hi-agent-v1
+dietary-needs.no-eggs,अंडा नहीं,,aṁḍā nahīṁ,,,2,hi-agent-v1
+dietary-needs.not-spicy,तीखा नहीं,मिर्च नहीं,tīkhā nahīṁ,,,2,hi-agent-v1
+dietary-needs.less-spicy,कम तीखा,मिर्च कम,kam tīkhā,,,2,hi-agent-v1
+dietary-needs.no-peanuts,मूंगफली नहीं,,mūṁgphalī nahīṁ,,,2,hi-agent-v1
+dietary-needs.no-nuts,काजू-बादाम-मेवे नहीं,,kājū-bādām-meve nahīṁ,,"no cashew, almond or nuts",2,hi-agent-v1
+dietary-needs.no-seafood,मछली-झींगा नहीं,,machlī-jhīṁgā nahīṁ,,no fish or prawn,2,hi-agent-v1
+dietary-needs.i-am-vegetarian,मैं शुद्ध शाकाहारी हूँ,मैं शाकाहारी हूँ,maiṁ śuddh śākāhārī hūṁ,,pure vegetarian - no egg,2,hi-agent-v1
+dietary-needs.i-am-vegan,मैं वीगन हूँ (दूध-घी भी नहीं),,maiṁ vīgan hūṁ (dūdh-ghī bhī nahīṁ),,vegan - no milk or ghee,2,hi-agent-v1
+dietary-needs.i-do-not-eat,मैं {} नहीं खाता,मैं {} नहीं खाती,maiṁ {} nahīṁ khātā,,,2,hi-agent-v1
+dietary-needs.i-am-allergic-to,मुझे {} से एलर्जी है,,mujhe {} se elarjī hai,,,2,hi-agent-v1
+dietary-needs.does-it-contain-fish-stock,क्या इसमें मछली का शोरबा है?,,kyā ismeṁ machlī kā śorbā hai?,,,2,hi-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,मुझे {} से गंभीर एलर्जी है,,mujhe {} se gaṁbhīr elarjī hai,,,2,hi-agent-v1
+food-ordering.table-for-two,दो लोगों की टेबल,,do logoṁ kī ṭebal,,,2,hi-agent-v1
+food-ordering.is-a-table-available,क्या टेबल खाली है?,,kyā ṭebal khālī hai?,,,2,hi-agent-v1
+food-ordering.menu-please,मेन्यू दीजिए,,menyū dījie,,,2,hi-agent-v1
+food-ordering.i-want-this,मुझे यह चाहिए,,mujhe yah cāhie,,,2,hi-agent-v1
+food-ordering.do-you-have-drinking-water,क्या पीने का पानी है?,,kyā pīne kā pānī hai?,,,2,hi-agent-v1
+food-ordering.to-go-please,पैक कर दीजिए,पार्सल कर दीजिए,paik kar dījie,,,2,hi-agent-v1
+food-ordering.check-please,बिल दीजिए,,bil dījie,,,2,hi-agent-v1
+food-ordering.does-it-contain,क्या इसमें {} है?,,kyā ismeṁ {} hai?,,,2,hi-agent-v1
+food-ordering.is-this-vegetarian,क्या यह शाकाहारी है?,,kyā yah śākāhārī hai?,,,2,hi-agent-v1
+food-ordering.what-do-you-recommend,यहाँ क्या अच्छा मिलता है?,,yahāṁ kyā acchā miltā hai?,,,2,hi-agent-v1
+food-ordering.water-please,पानी दीजिए,,pānī dījie,,,2,hi-agent-v1
+food-ordering.can-a-vegetarian-eat-this,क्या शाकाहारी यह खा सकता है?,,kyā śākāhārī yah khā saktā hai?,,,2,hi-agent-v1
+dietary-needs.no-pork,सूअर का मांस नहीं,पोर्क नहीं,sūar kā māṁs nahīṁ,,no pig meat,2,hi-gaps-v1
+dietary-needs.is-this-halal,क्या यह हलाल है?,क्या हलाल सर्टिफ़िकेट है?,kyā yah halāl hai?,,,2,hi-gaps-v1

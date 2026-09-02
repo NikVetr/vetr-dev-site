@@ -1,0 +1,41 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+numbers-money.l-ng,शून्य,,śūnya,,,2,hi-agent-v1
+numbers-money.y,एक,,ek,,,2,hi-agent-v1
+numbers-money.r,दो,,do,,,2,hi-agent-v1
+numbers-money.s-n,तीन,,tīn,,,2,hi-agent-v1
+numbers-money.s,चार,,cār,,,2,hi-agent-v1
+numbers-money.w,पाँच,,pāṁc,,,2,hi-agent-v1
+numbers-money.li,छह,,chah,,,2,hi-agent-v1
+numbers-money.q,सात,,sāt,,,2,hi-agent-v1
+numbers-money.b,आठ,,āṭh,,,2,hi-agent-v1
+numbers-money.ji,नौ,,nau,,,2,hi-agent-v1
+numbers-money.sh,दस,,das,,,2,hi-agent-v1
+numbers-money.y-b-i,सौ,,sau,,,2,hi-agent-v1
+numbers-money.y-qi-n,हज़ार,,hazār,,,2,hi-agent-v1
+numbers-money.y-w-n,दस हज़ार,,das hazār,,,2,hi-agent-v1
+numbers-money.b-n,आधा,,ādhā,,,2,hi-agent-v1
+atm-cash.where-is-an-atm,एटीएम कहाँ है?,,eṭīem kahāṁ hai?,,,2,hi-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,क्या इसमें विदेशी कार्ड चलते हैं?,,kyā ismeṁ videśī kārḍ calte haiṁ?,,,2,hi-agent-v1
+atm-cash.the-atm-kept-my-card,एटीएम ने मेरा कार्ड रख लिया,,eṭīem ne merā kārḍ rakh liyā,,,2,hi-agent-v1
+atm-cash.is-there-a-fee,क्या चार्ज लगेगा?,,kyā cārj lagegā?,,,2,hi-agent-v1
+atm-cash.the-card-was-declined,कार्ड नहीं चला,,kārḍ nahīṁ calā,,,2,hi-agent-v1
+atm-cash.what-is-the-exchange-rate,एक्सचेंज रेट क्या है?,,eksceṁj reṭ kyā hai?,,,2,hi-agent-v1
+atm-cash.no-money-came-out,पैसे नहीं निकले,,paise nahīṁ nikle,,,2,hi-agent-v1
+atm-cash.where-can-i-change-money,पैसे बदलने की जगह कहाँ है?,,paise badalne kī jagah kahāṁ hai?,,,2,hi-agent-v1
+atm-cash.the-machine-is-out-of-service,मशीन खराब है,,maśīn kharāb hai,,,2,hi-agent-v1
+atm-cash.please-give-me-smaller-notes,छोटे नोट दीजिए,,choṭe noṭ dījie,,,2,hi-agent-v1
+atm-cash.do-you-have-change,क्या छुट्टे हैं?,,kyā chuṭṭe haiṁ?,,small change,2,hi-agent-v1
+atm-cash.may-i-pay-in,क्या {} चलेगा?,,kyā {} calegā?,,will {} be accepted,2,hi-agent-v1
+atm-cash.please-charge-in-local-currency,रुपये में चार्ज कीजिए,,rupaye meṁ cārj kījie,,,2,hi-agent-v1
+atm-cash.where-can-i-get-coins,सिक्के कहाँ मिलेंगे?,,sikke kahāṁ mileṁge?,,,2,hi-agent-v1
+atm-cash.is-there-a-minimum-for-cards,कार्ड के लिए कम से कम कितना?,,kārḍ ke lie kam se kam kitnā?,,,2,hi-agent-v1
+atm-cash.atm,एटीएम,,eṭīem,,,2,hi-agent-v1
+atm-cash.banknote,नोट,,noṭ,,,2,hi-agent-v1
+atm-cash.coin,सिक्का,,sikkā,,,2,hi-agent-v1
+atm-cash.cash-only,सिर्फ़ नकद,,sirf nakad,,,2,hi-agent-v1
+atm-cash.fee,फ़ीस,कमीशन,fīs,,,2,hi-agent-v1
+atm-cash.change,बाकी पैसे,छुट्टे,bākī paise,,money returned,2,hi-agent-v1
+atm-cash.exchange-rate,एक्सचेंज रेट,,eksceṁj reṭ,,,2,hi-agent-v1
+atm-cash.bank,बैंक,,baiṁk,,,2,hi-agent-v1
+atm-cash.money-exchange,मनी एक्सचेंज,विदेशी मुद्रा,manī eksceṁj,,,2,hi-agent-v1
+atm-cash.pin,पिन,पिन नंबर,pin,,,2,hi-agent-v1

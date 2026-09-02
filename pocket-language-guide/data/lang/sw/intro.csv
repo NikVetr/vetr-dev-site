@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Jina langu ni {},,,,2,sw-agent-v1
+introductions.nice-to-meet-you,Nimefurahi kukutana nawe,,,,2,sw-agent-v1
+introductions.what-is-your-name,Jina lako ni nani?,,,your name is who?,2,sw-agent-v1
+introductions.we-are-traveling-together,Tunasafiri pamoja,,,,2,sw-agent-v1
+introductions.this-is-my-friend,Huyu ni rafiki yangu,,,,2,sw-agent-v1
+introductions.i-am-from,Natoka {},,,,2,sw-agent-v1
+introductions.where-are-you-from,Unatoka wapi?,,,,2,sw-agent-v1
+introductions.how-are-you,Habari yako?,Hujambo?,,reply: nzuri,2,sw-agent-v1
+introductions.i-am-a-tourist,Mimi ni mtalii,,,,2,sw-agent-v1
+introductions.this-is-my-husband-wife,Huyu ni mume / mke wangu,,,,2,sw-agent-v1
+introductions.this-is-my-daughter-son,Huyu ni mtoto wangu wa kike / kiume,,,my female / male child,2,sw-agent-v1
+introductions.i-am-traveling-alone,Nasafiri peke yangu,,,,2,sw-agent-v1

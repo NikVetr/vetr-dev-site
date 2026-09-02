@@ -1,0 +1,43 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,कितने बजे हैं?,,kitne baje haiṁ?,,,2,hi-agent-v1
+time-scheduling.how-many-minutes,कितने मिनट?,,kitne minaṭ?,,,2,hi-agent-v1
+time-scheduling.what-time-should-we-meet,कितने बजे मिलें?,,kitne baje mileṁ?,,,2,hi-agent-v1
+time-scheduling.can-we-change-the-time,क्या समय बदला जा सकता है?,,kyā samay badlā jā saktā hai?,,,2,hi-agent-v1
+time-scheduling.when-is-convenient,आपको कब ठीक रहेगा?,,āpko kab ṭhīk rahegā?,,,2,hi-agent-v1
+time-scheduling.what-is-today-s-date,आज कौन सी तारीख है?,,āj kaun sī tārīkh hai?,,,2,hi-agent-v1
+time-scheduling.what-day-is-it-today,आज कौन सा दिन है?,,āj kaun sā din hai?,,,2,hi-agent-v1
+time-scheduling.what-time-does-it-open,कितने बजे खुलता है?,,kitne baje khultā hai?,,,2,hi-agent-v1
+time-scheduling.what-time-does-it-close,कितने बजे बंद होता है?,,kitne baje baṁd hotā hai?,,,2,hi-agent-v1
+time-scheduling.how-long-does-it-take,कितना समय लगेगा?,,kitnā samay lagegā?,,,2,hi-agent-v1
+time-words.today,आज,,āj,,,2,hi-agent-v1
+time-words.tomorrow,कल,,kal,,also means yesterday,2,hi-agent-v1
+time-words.yesterday,कल,,kal,,same word as tomorrow,2,hi-agent-v1
+time-words.this-week,इस हफ़्ते,,is hafte,,,2,hi-agent-v1
+time-words.next-week,अगले हफ़्ते,,agle hafte,,,2,hi-agent-v1
+time-words.morning,सुबह,,subah,,,2,hi-agent-v1
+time-words.afternoon,दोपहर,,dopahar,,,2,hi-agent-v1
+time-words.evening,शाम,,śām,,,2,hi-agent-v1
+time-words.spring,वसंत,,vasaṁt,,,2,hi-agent-v1
+time-words.summer,गर्मी,,garmī,,,2,hi-agent-v1
+time-words.fall,पतझड़,,patjhaṛ,,,2,hi-agent-v1
+time-words.winter,सर्दी,,sardī,,,2,hi-agent-v1
+time-words.night,रात,,rāt,,,2,hi-agent-v1
+days-of-week.monday,सोमवार,,somvār,,,2,hi-agent-v1
+days-of-week.tuesday,मंगलवार,,maṁgalvār,,,2,hi-agent-v1
+days-of-week.wednesday,बुधवार,,budhvār,,,2,hi-agent-v1
+days-of-week.thursday,गुरुवार,,guruvār,,,2,hi-agent-v1
+days-of-week.friday,शुक्रवार,,śukravār,,,2,hi-agent-v1
+days-of-week.saturday,शनिवार,,śanivār,,,2,hi-agent-v1
+days-of-week.sunday,रविवार,इतवार,ravivār,,,2,hi-agent-v1
+months.january,जनवरी,,janvarī,,,2,hi-agent-v1
+months.february,फ़रवरी,,farvarī,,,2,hi-agent-v1
+months.march,मार्च,,mārc,,,2,hi-agent-v1
+months.april,अप्रैल,,aprail,,,2,hi-agent-v1
+months.may,मई,,maī,,,2,hi-agent-v1
+months.june,जून,,jūn,,,2,hi-agent-v1
+months.july,जुलाई,,julāī,,,2,hi-agent-v1
+months.august,अगस्त,,agast,,,2,hi-agent-v1
+months.september,सितंबर,,sitaṁbar,,,2,hi-agent-v1
+months.october,अक्टूबर,,akṭūbar,,,2,hi-agent-v1
+months.november,नवंबर,,navaṁbar,,,2,hi-agent-v1
+months.december,दिसंबर,,disaṁbar,,,2,hi-agent-v1

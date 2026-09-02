@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,मुझे {} जाना है,,mujhe {} jānā hai,,,2,hi-agent-v1
+utility-templates.please-give-me,मुझे {} दीजिए,,mujhe {} dījie,,,2,hi-agent-v1
+utility-templates.may-i,क्या मैं {} सकता हूँ?,क्या मैं {} सकती हूँ?,kyā maiṁ {} saktā hūṁ?,,,2,hi-agent-v1
+utility-templates.please-do-not-add,{} न डालिए,,{} na ḍālie,,,2,hi-agent-v1
+utility-templates.do-you-have,क्या {} है?,,kyā {} hai?,,,2,hi-agent-v1
+utility-templates.please-write-the-number,नंबर लिख दीजिए,,naṁbar likh dījie,,,2,hi-agent-v1
+utility-templates.i-need,मुझे {} चाहिए,,mujhe {} cāhie,,,2,hi-agent-v1
+utility-templates.is-there-nearby,क्या यहाँ पास में {} है?,,kyā yahāṁ pās meṁ {} hai?,,,2,hi-agent-v1
+utility-templates.how-much-is,{} कितने का है?,,{} kitne kā hai?,,,2,hi-agent-v1
+utility-templates.is-this,क्या यह {} है?,,kyā yah {} hai?,,,2,hi-agent-v1
+utility-templates.please,{} दीजिए,,{} dījie,,,2,hi-agent-v1
+utility-templates.i-am-looking-for,मुझे {} की तलाश है,,mujhe {} kī talāś hai,,,2,hi-agent-v1
+utility-templates.do-you-accept,क्या {} चलेगा?,,kyā {} calegā?,,,2,hi-agent-v1
+utility-templates.i-cannot-find,मुझे {} नहीं मिल रहा,,mujhe {} nahīṁ mil rahā,,,2,hi-agent-v1
+utility-templates.there-is-a-problem-with,{} में दिक्कत है,,{} meṁ dikkat hai,,,2,hi-agent-v1

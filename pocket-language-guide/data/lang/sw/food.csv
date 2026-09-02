@@ -1,0 +1,28 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Bila nyama,,,without meat,2,sw-agent-v1
+dietary-needs.no-eggs,Bila mayai,,,,2,sw-agent-v1
+dietary-needs.not-spicy,Bila pilipili,,,without chilli,2,sw-agent-v1
+dietary-needs.less-spicy,Pilipili kidogo,,,a little chilli,2,sw-agent-v1
+dietary-needs.no-peanuts,Bila karanga,Bila njugu,,,2,sw-agent-v1
+dietary-needs.no-nuts,Bila korosho wala kokwa,Bila njugu,,no cashews or other nuts,2,sw-agent-v1
+dietary-needs.no-seafood,Bila samaki wala kamba,Bila vyakula vya baharini,,no fish or shellfish,2,sw-agent-v1
+dietary-needs.i-am-vegetarian,Sili nyama wala samaki,,,I eat no meat or fish,2,sw-agent-v1
+dietary-needs.i-am-vegan,"Sili nyama, samaki, mayai wala maziwa",,,"no meat, fish, eggs or milk",2,sw-agent-v1
+dietary-needs.i-do-not-eat,Sili {},,,,2,sw-agent-v1
+dietary-needs.i-am-allergic-to,Nina mzio wa {},,,,2,sw-agent-v1
+dietary-needs.does-it-contain-fish-stock,"Je, kuna supu ya samaki ndani?",,,,2,sw-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,Nina mzio mkali wa {},,,,2,sw-agent-v1
+food-ordering.table-for-two,Meza ya watu wawili,,,,2,sw-agent-v1
+food-ordering.is-a-table-available,"Je, kuna meza?",,,,2,sw-agent-v1
+food-ordering.menu-please,"Menyu, tafadhali",Orodha ya vyakula,,,2,sw-agent-v1
+food-ordering.i-want-this,Nataka hii,,,,2,sw-agent-v1
+food-ordering.do-you-have-drinking-water,"Je, mna maji ya kunywa?",,,,2,sw-agent-v1
+food-ordering.to-go-please,"Ya kuchukua, tafadhali",Take away,,,2,sw-agent-v1
+food-ordering.check-please,"Bili, tafadhali","Hesabu, tafadhali",,,2,sw-agent-v1
+food-ordering.does-it-contain,"Je, kuna {} ndani?",,,,2,sw-agent-v1
+food-ordering.is-this-vegetarian,"Je, hii haina nyama?",,,does this have no meat,2,sw-agent-v1
+food-ordering.what-do-you-recommend,Unapendekeza nini?,,,,2,sw-agent-v1
+food-ordering.water-please,"Maji, tafadhali",,,,2,sw-agent-v1
+food-ordering.can-a-vegetarian-eat-this,"Je, hii ina nyama au samaki?",,,does this have meat or fish,2,sw-agent-v1
+dietary-needs.no-pork,Bila nyama ya nguruwe,,,without pig meat,2,sw-agent-v1
+dietary-needs.is-this-halal,"Je, hii ni halali?",,,,2,sw-agent-v1

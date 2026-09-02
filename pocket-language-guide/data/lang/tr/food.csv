@@ -24,3 +24,5 @@ food-ordering.is-this-vegetarian,Bu vejetaryen mi?,,,,2,tr-agent-v1
 food-ordering.what-do-you-recommend,Ne tavsiye edersiniz?,,,,2,tr-agent-v1
 food-ordering.water-please,"Su, lütfen.",,,,2,tr-agent-v1
 food-ordering.can-a-vegetarian-eat-this,Vejetaryen bunu yiyebilir mi?,,,,2,tr-agent-v1
+dietary-needs.no-pork,Domuz eti olmasın.,Domuz eti yok.,,,2,tr-gaps-v1
+dietary-needs.is-this-halal,Bu helal mi?,Helal sertifikalı mı?,,,2,tr-gaps-v1

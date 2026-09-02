@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,Mimi,,,,2,sw-agent-v1
+pronouns-verbs.we-us,Sisi,,,,2,sw-agent-v1
+pronouns-verbs.you,Wewe,,,,2,sw-agent-v1
+pronouns-verbs.you-polite,Ninyi,Nyinyi,,"plural, used for respect",2,sw-agent-v1
+pronouns-verbs.he-him,Yeye,,,,2,sw-agent-v1
+pronouns-verbs.she-her,Yeye,,,same word for he and she,2,sw-agent-v1
+pronouns-verbs.they-them,Wao,,,,2,sw-agent-v1
+pronouns-verbs.my-mine,yangu / wangu,changu · langu · zangu,,prefix follows the noun,2,sw-agent-v1
+pronouns-verbs.your-yours,yako / wako,chako · lako · zako,,prefix follows the noun,2,sw-agent-v1
+pronouns-verbs.be-called-call,Kuitwa,Kuita,,,2,sw-agent-v1
+pronouns-verbs.have,Nina,Kuwa na,,I have,2,sw-agent-v1
+pronouns-verbs.do-not-have,Sina,,,I do not have,2,sw-agent-v1
+pronouns-verbs.go,Kwenda,Naenda,,,2,sw-agent-v1
+pronouns-verbs.come,Kuja,Ninakuja,,,2,sw-agent-v1
+pronouns-verbs.would-like,Ningependa,,,I would like,2,sw-agent-v1
+pronouns-verbs.want,Kutaka,Nataka,,,2,sw-agent-v1
+pronouns-verbs.look-for,Kutafuta,Natafuta,,,2,sw-agent-v1
+pronouns-verbs.buy,Kununua,Ninanunua,,,2,sw-agent-v1
+pronouns-verbs.like,Kupenda,Napenda,,,2,sw-agent-v1
+pronouns-verbs.need,Kuhitaji,Nahitaji,,,2,sw-agent-v1
+pronouns-verbs.there-is-have,Kuna,,,there is,2,sw-agent-v1
+pronouns-verbs.there-is-not-do-not-have,Hakuna,,,there is not,2,sw-agent-v1
+pronouns-verbs.want-to-verb,Nataka + kitenzi,,,,2,sw-agent-v1
+pronouns-verbs.want-thing,Nataka + kitu,,,,2,sw-agent-v1
+pronouns-verbs.need-thing,Nahitaji + kitu,,,,2,sw-agent-v1
+pronouns-verbs.looking-for-thing,Natafuta + kitu,,,,2,sw-agent-v1
+question-words.what,Nini,,,,2,sw-agent-v1
+question-words.where,Wapi,,,,2,sw-agent-v1
+question-words.who,Nani,,,,2,sw-agent-v1
+question-words.which-one,Gani,Ipi,,gani never changes,2,sw-agent-v1
+question-words.when,Lini,,,,2,sw-agent-v1
+question-words.how,Vipi,Namna gani,,,2,sw-agent-v1
+question-words.how-much-many,Kiasi gani,,,,2,sw-agent-v1
+question-words.how-many,Ngapi,,,,2,sw-agent-v1
+question-words.why,Kwa nini,,,,2,sw-agent-v1
+question-words.this,Hii / hiki / huyu,,,form follows the noun,2,sw-agent-v1
+question-words.that,Hiyo / hicho / huyo,,,form follows the noun,2,sw-agent-v1
+question-words.here,Hapa,,,,2,sw-agent-v1
+question-words.there,Pale,Huko,,,2,sw-agent-v1
+question-words.a-little,Kidogo,,,,2,sw-agent-v1
+question-words.some,Baadhi,Chache,,some of,2,sw-agent-v1
+question-words.very,Sana,,,,2,sw-agent-v1
+question-words.too,Mno,,,"too much, excessively",2,sw-agent-v1
+question-words.also,Pia,,,,2,sw-agent-v1
+question-words.all-both,Yote / zote / wote,,,prefix follows the noun,2,sw-agent-v1
+question-words.how-much-what-price,Bei gani?,,,,2,sw-agent-v1

@@ -1,0 +1,99 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+social-basics.hello,Habari,Hujambo,,reply: nzuri,2,sw-agent-v1
+social-basics.hello-polite,Shikamoo,Marahaba,,to an elder; reply: marahaba,2,sw-agent-v1
+social-basics.good-morning,Habari za asubuhi,,,,2,sw-agent-v1
+social-basics.good-evening,Habari za jioni,,,,2,sw-agent-v1
+social-basics.goodbye,Kwaheri,Kwaherini,,kwaherini to more than one,2,sw-agent-v1
+social-basics.thank-you,Asante,Asante sana,,,2,sw-agent-v1
+social-basics.you-are-welcome,Karibu,,,"also: welcome, come in",2,sw-agent-v1
+social-basics.excuse-me-sorry,Samahani,,,,2,sw-agent-v1
+social-basics.sorry,Nisamehe,,,forgive me,2,sw-agent-v1
+social-basics.no-problem,Hakuna shida,Hamna shida,,,2,sw-agent-v1
+social-basics.i-do-not-know,Sijui,,,,2,sw-agent-v1
+social-basics.good-night,Usiku mwema,Lala salama,,,2,sw-agent-v1
+social-basics.okay-fine-i-am-okay,Niko sawa,Sawa,,,2,sw-agent-v1
+communication.i-do-not-speak-this-language,Sisemi lugha hii,,,,2,sw-agent-v1
+communication.i-speak-only-a-little-of-this,Nasema Kiswahili kidogo tu,,,,2,sw-agent-v1
+communication.do-you-speak-english,Unasema Kiingereza?,,,,2,sw-agent-v1
+communication.please-speak-more-slowly,Tafadhali sema polepole,,,,2,sw-agent-v1
+communication.i-do-not-understand-spoken,Sielewi,,,,2,sw-agent-v1
+communication.i-cannot-read-understand,Siwezi kusoma wala kuelewa,,,,2,sw-agent-v1
+communication.please-say-it-again,Tafadhali sema tena,,,,2,sw-agent-v1
+communication.please-write-it-down,Tafadhali andika,,,,2,sw-agent-v1
+communication.please-wait-a-moment,Tafadhali subiri kidogo,,,,2,sw-agent-v1
+communication.can-you-help-me,Unaweza kunisaidia?,,,,2,sw-agent-v1
+communication.please-show-me-the-text,Tafadhali nionyeshe maandishi,,,,2,sw-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Sipati unachosema,,,I do not catch what you say,2,sw-agent-v1
+communication.i-do-not-understand,Sifahamu,,,,2,sw-agent-v1
+communication.i-cannot-read-it,Siwezi kusoma hii,,,,2,sw-agent-v1
+quick-responses.please-go-ahead,Tafadhali,Endelea,,,2,sw-agent-v1
+quick-responses.yes-right,Ndiyo,,,,2,sw-agent-v1
+quick-responses.no-not,Hapana,La,,,2,sw-agent-v1
+quick-responses.okay-can,Sawa,,,,2,sw-agent-v1
+quick-responses.cannot-not-allowed,Hairuhusiwi,,,not allowed,2,sw-agent-v1
+quick-responses.works-okay,Inafanya kazi,,,it works,2,sw-agent-v1
+quick-responses.does-not-work-no,Haifanyi kazi,,,it does not work,2,sw-agent-v1
+quick-responses.can-possible,Inawezekana,,,it is possible,2,sw-agent-v1
+quick-responses.cannot-not-possible,Haiwezekani,,,it is not possible,2,sw-agent-v1
+quick-responses.okay-fine,Nzuri,,,,2,sw-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,Haifai,,,it will not do,2,sw-agent-v1
+phone-translation.i-am-using-phone-translation,Natumia tafsiri ya simu,,,,2,sw-agent-v1
+phone-translation.please-speak-toward-the-phone,Tafadhali sema kwenye simu,,,,2,sw-agent-v1
+phone-translation.please-write-the-place-name,Tafadhali andika jina la mahali hapa,,,,2,sw-agent-v1
+phone-translation.one-sentence-at-a-time-please,"Sentensi moja kwa wakati, tafadhali",,,,2,sw-agent-v1
+phone-translation.please-type-it-and-show-me,Tafadhali chapa na unionyeshe,,,,2,sw-agent-v1
+phone-translation.please-look-at-the-screen,Tafadhali tazama skrini,,,,2,sw-agent-v1
+phone-text-power.please-type-it-for-me,Tafadhali niandikie,,,,2,sw-agent-v1
+phone-text-power.please-use-simple-words,Tafadhali tumia maneno rahisi,,,,2,sw-agent-v1
+phone-text-power.my-phone-battery-is-low,Betri ya simu yangu inaisha,,,,2,sw-agent-v1
+phone-text-power.do-you-have-a-power-bank,"Je, mna power bank?",Chaja ya mkononi,,,2,sw-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,Tafsiri inaweza kuwa si sahihi,,,,2,sw-agent-v1
+phone-text-power.please-confirm,Tafadhali thibitisha,,,,2,sw-agent-v1
+phone-text-power.may-i-charge-my-phone-here,Naomba kuchaji simu hapa?,,,,2,sw-agent-v1
+sim-data.i-would-like-a-tourist-sim,Naomba simkadi ya watalii,Laini ya mgeni,,,2,sw-agent-v1
+sim-data.may-i-use-your-wifi,Naomba kutumia Wi-Fi yako?,,,,2,sw-agent-v1
+sim-data.how-much-data-is-included,Kuna data kiasi gani?,Bando ni kiasi gani?,,,2,sw-agent-v1
+sim-data.do-you-need-my-passport,"Je, unahitaji pasipoti yangu?",,,,2,sw-agent-v1
+sim-data.how-long-is-it-valid,Inadumu kwa muda gani?,,,,2,sw-agent-v1
+sim-data.please-activate-it,Tafadhali isajili,,,please register it,2,sw-agent-v1
+sim-data.do-you-have-an-esim,"Je, mna eSIM?",,,,2,sw-agent-v1
+sim-data.my-data-is-not-working,Data yangu haifanyi kazi,,,,2,sw-agent-v1
+sim-data.does-it-need-registration,"Je, inahitaji kusajiliwa?",,,,2,sw-agent-v1
+sim-data.i-have-no-signal,Sina mtandao,Sina network,,,2,sw-agent-v1
+sim-data.please-write-the-wifi-password,Tafadhali andika nenosiri la Wi-Fi,,,,2,sw-agent-v1
+sim-data.sim-card,Simkadi,Laini,,,2,sw-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Naweza kununua adapta ya plagi wapi?,,,,2,sw-agent-v1
+sim-data.mobile-data,Data ya simu,Bando,,,2,sw-agent-v1
+sim-data.can-i-top-up-this-sim,Naweza kuongeza salio?,,,,2,sw-agent-v1
+sim-data.top-up,Kuongeza salio,Vocha,,,2,sw-agent-v1
+sim-data.is-there-coverage-in,Kuna mtandao {}?,,,,2,sw-agent-v1
+sim-data.signal,Mtandao,Network,,,2,sw-agent-v1
+sim-data.esim,eSIM,,,,2,sw-agent-v1
+sim-data.prepaid,Malipo ya kabla,Prepaid,,,1,sw-agent-v1
+sim-data.roaming,Mtandao wa nje,Roaming,,a network from outside,1,sw-agent-v1
+etiquette.is-this-allowed,"Je, hii inaruhusiwa?",,,,2,sw-agent-v1
+etiquette.is-tipping-expected,"Je, bakshishi inatarajiwa?",,,,2,sw-agent-v1
+etiquette.is-service-included,"Je, huduma imo?",,,,2,sw-agent-v1
+etiquette.may-i-enter,Hodi?,Naomba niingie?,,said at a door; reply: karibu,2,sw-agent-v1
+etiquette.remove-shoes,Nivue viatu?,,,,2,sw-agent-v1
+etiquette.photo-of-you,Naomba nikupige picha?,,,,2,sw-agent-v1
+etiquette.may-i-sit-here,Naomba nikae hapa?,,,,2,sw-agent-v1
+etiquette.queue-for,Hii ni foleni ya {}?,,,,2,sw-agent-v1
+etiquette.dressed-appropriately,"Je, nimevaa vizuri?",,,am I dressed properly,2,sw-agent-v1
+etiquette.did-not-mean-to-offend,"Samahani, sikukusudia",,,"sorry, I did not intend it",2,sw-agent-v1
+etiquette.what-is-customary,Ni desturi gani hapa?,,,,2,sw-agent-v1
+etiquette.keep-the-change,Chenji ni yako,,,the change is yours,2,sw-agent-v1
+children.cannot-find-my-child,Simuoni mtoto wangu!,,,I do not see my child,2,sw-agent-v1
+children.make-an-announcement,Tafadhali tangaza kwa spika,,,,2,sw-agent-v1
+children.child-age,Mtoto wangu ana miaka {},,,,2,sw-agent-v1
+children.high-chair,"Je, mna kiti cha juu cha mtoto?",,,raised child's chair,2,sw-agent-v1
+children.baby-changing-room,Chumba cha kubadilisha nepi ni wapi?,,,,2,sw-agent-v1
+children.childrens-menu,"Je, kuna menyu ya watoto?",,,,2,sw-agent-v1
+children.suitable-for-children,"Je, hii inafaa kwa watoto?",,,,2,sw-agent-v1
+children.minimum-age,Umri wa chini ni upi?,,,,2,sw-agent-v1
+children.do-children-pay,"Je, watoto wanalipa?",,,,2,sw-agent-v1
+children.crib,"Je, mna kitanda cha mtoto?",,,,2,sw-agent-v1
+children.warm-this-bottle,Tafadhali pasha chupa hii,,,,2,sw-agent-v1
+children.car-seat,Tunahitaji kiti cha mtoto cha gari,,,,2,sw-agent-v1
+children.stroller,Kigari cha mtoto,Stroller,,,1,sw-agent-v1
+children.playground,"Je, kuna sehemu ya kuchezea watoto?",,,,2,sw-agent-v1

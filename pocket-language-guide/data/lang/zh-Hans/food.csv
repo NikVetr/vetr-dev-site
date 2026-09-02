@@ -24,3 +24,5 @@ food-ordering.water-please,请给我一杯水,,qǐng gěi wǒ yì bēi shuǐ,,,2
 dietary-needs.does-it-contain-fish-stock,汤底是鱼做的吗？,,tāngdǐ shì yú zuò de ma?,,,2,zh-Hans-agent-v1
 food-ordering.can-a-vegetarian-eat-this,吃素的能吃吗？,,chī sù de néng chī ma?,,,2,zh-Hans-agent-v1
 dietary-needs.i-have-a-severe-allergy-to,我对{}严重过敏,,wǒ duì {} yánzhòng guòmǐn,,,2,zh-Hans-agent-v1
+dietary-needs.no-pork,不要猪肉,,bú yào zhūròu,,,2,zh-Hans-gaps-v1
+dietary-needs.is-this-halal,这个是清真的吗？,,zhège shì qīngzhēn de ma?,,,2,zh-Hans-gaps-v1

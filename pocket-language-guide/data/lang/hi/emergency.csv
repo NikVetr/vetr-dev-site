@@ -1,0 +1,138 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+emergency-medical.help,बचाओ!,मदद कीजिए!,bacāo!,,,2,hi-agent-v1
+emergency-medical.please-call-an-ambulance,एंबुलेंस बुलाइए,,aṁbuleṁs bulāie,,,2,hi-agent-v1
+emergency-medical.i-need-a-doctor,मुझे डॉक्टर चाहिए,,mujhe ḍokṭar cāhie,,,2,hi-agent-v1
+emergency-medical.i-am-sick,मैं बीमार हूँ,,maiṁ bīmār hūṁ,,,2,hi-agent-v1
+emergency-medical.i-am-injured,मैं घायल हूँ,,maiṁ ghāyal hūṁ,,,2,hi-agent-v1
+emergency-medical.it-hurts-here,यहाँ दर्द है,,yahāṁ dard hai,,,2,hi-agent-v1
+emergency-medical.where-is-a-pharmacy,दवा की दुकान कहाँ है?,मेडिकल स्टोर कहाँ है?,davā kī dukān kahāṁ hai?,,,2,hi-agent-v1
+emergency-medical.please-take-me-to-a-hospital,मुझे अस्पताल ले चलिए,,mujhe aspatāl le calie,,,2,hi-agent-v1
+emergency-medical.i-feel-unwell,मेरी तबीयत ठीक नहीं है,,merī tabīyat ṭhīk nahīṁ hai,,,2,hi-agent-v1
+emergency-medical.this-is-an-emergency,यह इमरजेंसी है,यह आपात स्थिति है,yah imarjeṁsī hai,,,2,hi-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,मुझे गंभीर एलर्जी हो रही है (एनाफ़िलैक्सिस),,mujhe gaṁbhīr elarjī ho rahī hai (enāfilaiksis),,anaphylaxis,2,hi-agent-v1
+emergency-medical.i-cannot-breathe,मुझे साँस नहीं आ रही है,,mujhe sāṁs nahīṁ ā rahī hai,,,2,hi-agent-v1
+emergency-medical.i-am-bleeding-badly,बहुत खून बह रहा है,,bahut khūn bah rahā hai,,,2,hi-agent-v1
+emergency-medical.i-have-chest-pain,मेरे सीने में दर्द है,,mere sīne meṁ dard hai,,,2,hi-agent-v1
+emergency-medical.this-person-is-unconscious,यह व्यक्ति बेहोश है,,yah vyakti behoś hai,,,2,hi-agent-v1
+emergency-medical.where-is-the-nearest-hospital,सबसे नज़दीकी अस्पताल कहाँ है?,,sabse nazdīkī aspatāl kahāṁ hai?,,,2,hi-agent-v1
+emergency-medical.what-is-the-emergency-number,इमरजेंसी नंबर क्या है?,,imarjeṁsī naṁbar kyā hai?,,,2,hi-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,क्या कोई डॉक्टर अंग्रेज़ी बोलता है?,,kyā koī ḍokṭar aṁgrezī boltā hai?,,,2,hi-agent-v1
+emergency-medical.i-think-a-bone-is-broken,लगता है हड्डी टूट गई है,,lagtā hai haḍḍī ṭūṭ gaī hai,,,2,hi-agent-v1
+emergency-medical.please-call-my-emergency-contact,मेरे इमरजेंसी नंबर पर फ़ोन कीजिए,,mere imarjeṁsī naṁbar par fon kījie,,,2,hi-agent-v1
+emergency-medical.i-have-travel-insurance,मेरा यात्रा बीमा है,,merā yātrā bīmā hai,,,2,hi-agent-v1
+medical-conditions.i-am-diabetic,मुझे डायबिटीज़ है,मुझे शुगर है,mujhe ḍāyabīṭīz hai,,,2,hi-agent-v1
+medical-conditions.i-need-insulin,मुझे इंसुलिन चाहिए,,mujhe iṁsulin cāhie,,,2,hi-agent-v1
+medical-conditions.i-have-asthma,मुझे दमा है,मुझे अस्थमा है,mujhe damā hai,,,2,hi-agent-v1
+medical-conditions.i-have-a-heart-condition,मुझे दिल की बीमारी है,,mujhe dil kī bīmārī hai,,,2,hi-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,मुझे पेनिसिलिन से एलर्जी है,,mujhe penisilin se elarjī hai,,,2,hi-agent-v1
+medical-conditions.i-have-epilepsy,मुझे मिर्गी है,मुझे एपिलेप्सी है,mujhe mirgī hai,,,2,hi-agent-v1
+medical-conditions.my-blood-sugar-is-low,मेरा ब्लड शुगर कम है,,merā blaḍ śugar kam hai,,,2,hi-agent-v1
+medical-conditions.i-need-my-inhaler,मुझे मेरा इनहेलर चाहिए,,mujhe merā inhelar cāhie,,,2,hi-agent-v1
+medical-conditions.i-am-pregnant,मैं गर्भवती हूँ,,maiṁ garbhvatī hūṁ,,,2,hi-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,मेरे पास एड्रेनालिन इंजेक्टर है,,mere pās eḍrenālin iṁjekṭar hai,,,2,hi-agent-v1
+medical-conditions.i-take-medicine-for,मुझे {} की दवा लेनी पड़ती है,,mujhe {} kī davā lenī paṛtī hai,,,2,hi-agent-v1
+medical-conditions.i-take-blood-thinners,मेरी खून पतला करने की दवा चल रही है,,merī khūn patlā karne kī davā cal rahī hai,,on blood thinners,2,hi-agent-v1
+medical-conditions.medicine-allergy,दवा से एलर्जी: {},,davā se elarjī: {},,,2,hi-agent-v1
+medical-conditions.this-card-lists-my-conditions,इस कार्ड पर मेरी बीमारियाँ लिखी हैं,,is kārḍ par merī bīmāriyāṁ likhī haiṁ,,,2,hi-agent-v1
+medical-conditions.this-is-my-medicine,यह मेरी दवा है,,yah merī davā hai,,,2,hi-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,मुझे चीनी या जूस दीजिए,,mujhe cīnī yā jūs dījie,,,2,hi-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,यह जाँघ के बाहरी हिस्से में लगाइए,,yah jāṁgh ke bāhrī hisse meṁ lagāie,,,2,hi-agent-v1
+medical-conditions.my-blood-type-is,मेरा ब्लड ग्रुप {} है,,merā blaḍ grup {} hai,,,2,hi-agent-v1
+medical-conditions.do-not-give-me,मुझे {} न दीजिए,,mujhe {} na dījie,,,2,hi-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,मुझे एस्पिरिन और आइबुप्रोफ़ेन से एलर्जी है,,mujhe espirin aur āibuprofen se elarjī hai,,,2,hi-agent-v1
+medical-conditions.my-injector-is-in-my-bag,मेरा इंजेक्टर मेरे बैग में है,,merā iṁjekṭar mere baig meṁ hai,,,2,hi-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,मुझे सल्फ़ा दवाओं से एलर्जी है,,mujhe salfā davāoṁ se elarjī hai,,,2,hi-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,अभी कौन सी दवा की दुकान खुली है?,,abhī kaun sī davā kī dukān khulī hai?,,,2,hi-agent-v1
+pharmacy-symptoms.i-need-medicine-for,मुझे {} की दवा चाहिए,,mujhe {} kī davā cāhie,,,2,hi-agent-v1
+pharmacy-symptoms.i-have-a-fever,मुझे बुखार है,,mujhe bukhār hai,,,2,hi-agent-v1
+pharmacy-symptoms.i-have-diarrhea,मुझे दस्त हो रहे हैं,मुझे लूज़ मोशन है,mujhe dast ho rahe haiṁ,,,2,hi-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,रात में खुली दवा की दुकान कहाँ है?,,rāt meṁ khulī davā kī dukān kahāṁ hai?,,,2,hi-agent-v1
+pharmacy-symptoms.painkiller,दर्द की दवा,दर्द निवारक,dard kī davā,,,2,hi-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,क्या डॉक्टर का पर्चा चाहिए?,,kyā ḍokṭar kā parcā cāhie?,,,2,hi-agent-v1
+pharmacy-symptoms.i-have-a-headache,मेरे सिर में दर्द है,,mere sir meṁ dard hai,,,2,hi-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,पैरासिटामोल,डोलो 650 / क्रोसिन,pairāsiṭāmol,,,2,hi-agent-v1
+pharmacy-symptoms.how-much-should-i-take,कितनी खुराक लेनी है?,,kitnī khurāk lenī hai?,,,2,hi-agent-v1
+pharmacy-symptoms.i-am-vomiting,मुझे उल्टी हो रही है,,mujhe ulṭī ho rahī hai,,,2,hi-agent-v1
+pharmacy-symptoms.rehydration-salts,ओआरएस,इलेक्ट्रल,oāres,,ORS,2,hi-agent-v1
+pharmacy-symptoms.how-many-times-a-day,दिन में कितनी बार?,,din meṁ kitnī bār?,,,2,hi-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,मेरे पेट में दर्द है,,mere peṭ meṁ dard hai,,,2,hi-agent-v1
+pharmacy-symptoms.i-have-a-cough,मुझे खाँसी है,,mujhe khāṁsī hai,,,2,hi-agent-v1
+pharmacy-symptoms.antihistamine,एलर्जी की दवा,सिट्रीज़ीन,elarjī kī davā,,,2,hi-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,दस्त की दवा,लोपेरामाइड,dast kī davā,,,2,hi-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,क्या यह {} के साथ लेना ठीक है?,,kyā yah {} ke sāth lenā ṭhīk hai?,,,2,hi-agent-v1
+pharmacy-symptoms.i-feel-dizzy,मुझे चक्कर आ रहे हैं,,mujhe cakkar ā rahe haiṁ,,,2,hi-agent-v1
+pharmacy-symptoms.ibuprofen,आइबुप्रोफ़ेन,ब्रूफ़ेन,āibuprofen,,,2,hi-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,मेरा गला खराब है,,merā galā kharāb hai,,,2,hi-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,क्या यह दवा यहाँ मिल जाएगी?,,kyā yah davā yahāṁ mil jāegī?,,,2,hi-agent-v1
+pharmacy-symptoms.bandage,पट्टी,बैंड-एड,paṭṭī,,,2,hi-agent-v1
+pharmacy-symptoms.the-pain-is-severe,दर्द बहुत तेज़ है,,dard bahut tez hai,,,2,hi-agent-v1
+pharmacy-symptoms.antiseptic,एंटीसेप्टिक,डेटॉल,eṁṭīsepṭik,,,2,hi-agent-v1
+pharmacy-symptoms.i-feel-nauseous,मेरा जी मिचला रहा है,,merā jī miclā rahā hai,,,2,hi-agent-v1
+pharmacy-symptoms.i-have-a-rash,मुझे रैश हो गया है,मुझे चकत्ते हो गए हैं,mujhe raiś ho gayā hai,,,2,hi-agent-v1
+pharmacy-symptoms.before-or-after-food,खाने से पहले या बाद में?,,khāne se pahle yā bād meṁ?,,,2,hi-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,लगता है इसमें इन्फ़ेक्शन है,,lagtā hai ismeṁ infekśan hai,,,2,hi-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,उल्टी की गोली,एवोमिन,ulṭī kī golī,,for travel sickness,2,hi-agent-v1
+pharmacy-symptoms.i-have-a-cut,मुझे कट लगा है,,mujhe kaṭ lagā hai,,,2,hi-agent-v1
+pharmacy-symptoms.antacid,एसिडिटी की दवा,डाइजीन,esiḍiṭī kī davā,,,2,hi-agent-v1
+pharmacy-symptoms.i-have-a-burn,यहाँ जल गया है,,yahāṁ jal gayā hai,,it is burnt here,2,hi-agent-v1
+pharmacy-symptoms.it-started-days-ago,{} दिन पहले शुरू हुआ,,{} din pahle śurū huā,,,2,hi-agent-v1
+pharmacy-symptoms.cough-medicine,खाँसी की दवा,सिरप,khāṁsī kī davā,,,2,hi-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,क्या यह गर्भावस्था में ठीक है?,,kyā yah garbhāvasthā meṁ ṭhīk hai?,,,2,hi-agent-v1
+body-parts.head,सिर,,sir,,,2,hi-agent-v1
+body-parts.stomach,पेट,,peṭ,,,2,hi-agent-v1
+body-parts.back,पीठ,,pīṭh,,,2,hi-agent-v1
+body-parts.throat,गला,,galā,,,2,hi-agent-v1
+body-parts.tooth,दाँत,,dāṁt,,,2,hi-agent-v1
+body-parts.chest,सीना,,sīnā,,,2,hi-agent-v1
+body-parts.eye,आँख,,āṁkh,,,2,hi-agent-v1
+body-parts.ear,कान,,kān,,,2,hi-agent-v1
+body-parts.leg,टाँग,,ṭāṁg,,,2,hi-agent-v1
+body-parts.arm,बाँह,,bāṁh,,,2,hi-agent-v1
+body-parts.foot,पैर,,pair,,,2,hi-agent-v1
+body-parts.hand,हाथ,,hāth,,,2,hi-agent-v1
+body-parts.knee,घुटना,,ghuṭnā,,,2,hi-agent-v1
+body-parts.ankle,टखना,,ṭakhnā,,,2,hi-agent-v1
+body-parts.skin,त्वचा,चमड़ी,tvacā,,,2,hi-agent-v1
+lost-rescue.i-lost-my-passport,मेरा पासपोर्ट खो गया है,,merā pāsporṭ kho gayā hai,,,2,hi-agent-v1
+lost-rescue.i-lost-my-phone,मेरा फ़ोन खो गया है,,merā fon kho gayā hai,,,2,hi-agent-v1
+lost-rescue.please-call-the-police,पुलिस को बुलाइए,,pulis ko bulāie,,,2,hi-agent-v1
+lost-rescue.we-are-here,हम यहाँ हैं,,ham yahāṁ haiṁ,,,2,hi-agent-v1
+lost-rescue.please-look-at-my-location-pin,मेरा लोकेशन पिन देखिए,,merā lokeśan pin dekhie,,,2,hi-agent-v1
+lost-rescue.i-cannot-walk,मैं चल नहीं सकता,मैं चल नहीं सकती,maiṁ cal nahīṁ saktā,,,2,hi-agent-v1
+lost-rescue.i-sprained-my-ankle,मेरे टखने में मोच आ गई है,,mere ṭakhne meṁ moc ā gaī hai,,,2,hi-agent-v1
+lost-rescue.please-contact-rescue,बचाव दल को खबर कीजिए,,bacāv dal ko khabar kījie,,,2,hi-agent-v1
+lost-rescue.my-companion-is-missing,मेरा साथी गुम हो गया है,,merā sāthī gum ho gayā hai,,,2,hi-agent-v1
+lost-rescue.please-look-at-my-current-location,मेरी मौजूदा जगह देखिए,,merī maujūdā jagah dekhie,,,2,hi-agent-v1
+lost-rescue.my-child-is-missing,मेरा बच्चा गुम हो गया है,,merā baccā gum ho gayā hai,,,2,hi-agent-v1
+lost-rescue.i-do-not-know-where-i-am,मुझे नहीं पता मैं कहाँ हूँ,,mujhe nahīṁ patā maiṁ kahāṁ hūṁ,,,2,hi-agent-v1
+lost-rescue.my-friend-is-hurt,मेरे दोस्त को चोट लगी है,,mere dost ko coṭ lagī hai,,,2,hi-agent-v1
+lost-rescue.i-lost-my-wallet,मेरा बटुआ खो गया है,मेरा पर्स खो गया है,merā baṭuā kho gayā hai,,,2,hi-agent-v1
+lost-rescue.i-lost-my-bag,मेरा बैग खो गया है,,merā baig kho gayā hai,,,2,hi-agent-v1
+lost-rescue.where-is-lost-and-found,खोया-पाया केंद्र कहाँ है?,,khoyā-pāyā keṁdra kahāṁ hai?,,,2,hi-agent-v1
+lost-rescue.i-cannot-find-my-hotel,मुझे अपना होटल नहीं मिल रहा है,,mujhe apnā hoṭal nahīṁ mil rahā hai,,,2,hi-agent-v1
+lost-rescue.i-left-it-on-the-train,यह ट्रेन में छूट गया,,yah ṭren meṁ chūṭ gayā,,,2,hi-agent-v1
+lost-rescue.i-cannot-get-down,मैं नीचे नहीं उतर सकता,मैं नीचे नहीं उतर सकती,maiṁ nīce nahīṁ utar saktā,,,2,hi-agent-v1
+police-consulate.where-is-the-police-station,पुलिस स्टेशन कहाँ है?,थाना कहाँ है?,pulis sṭeśan kahāṁ hai?,,,2,hi-agent-v1
+police-consulate.i-want-to-report-a-theft,मुझे चोरी की रिपोर्ट करानी है,,mujhe corī kī riporṭ karānī hai,,,2,hi-agent-v1
+police-consulate.my-bag-was-stolen,मेरा बैग चोरी हो गया,,merā baig corī ho gayā,,,2,hi-agent-v1
+police-consulate.my-passport-was-stolen,मेरा पासपोर्ट चोरी हो गया,,merā pāsporṭ corī ho gayā,,,2,hi-agent-v1
+police-consulate.someone-is-following-me,कोई मेरा पीछा कर रहा है,,koī merā pīchā kar rahā hai,,,2,hi-agent-v1
+police-consulate.i-need-a-written-police-report,मुझे एफ़आईआर की कॉपी चाहिए,मुझे लिखित पुलिस रिपोर्ट चाहिए,mujhe efāīār kī kopī cāhie,,written police report (FIR),2,hi-agent-v1
+police-consulate.i-want-to-contact-my-embassy,मुझे अपने दूतावास से बात करनी है,,mujhe apne dūtāvās se bāt karnī hai,,,2,hi-agent-v1
+police-consulate.i-need-it-for-my-insurance,यह मुझे बीमे के लिए चाहिए,,yah mujhe bīme ke lie cāhie,,,2,hi-agent-v1
+police-consulate.i-need-an-interpreter,मुझे दुभाषिया चाहिए,,mujhe dubhāṣiyā cāhie,,,2,hi-agent-v1
+police-consulate.please-leave-me-alone,मुझे परेशान न कीजिए,,mujhe pareśān na kījie,,,2,hi-agent-v1
+police-consulate.i-was-robbed,मेरे साथ लूट हुई है,,mere sāth lūṭ huī hai,,,2,hi-agent-v1
+police-consulate.i-want-a-lawyer,मुझे वकील चाहिए,,mujhe vakīl cāhie,,,2,hi-agent-v1
+police-consulate.please-notify-my-consulate,मेरे वाणिज्य दूतावास को खबर कीजिए,,mere vāṇijya dūtāvās ko khabar kījie,,,2,hi-agent-v1
+police-consulate.i-am-calling-the-police,मुझे पुलिस बुलानी पड़ेगी,,mujhe pulis bulānī paṛegī,,I will have to call the police,2,hi-agent-v1
+police-consulate.am-i-under-arrest,क्या मैं गिरफ़्तार हूँ?,,kyā maiṁ giraftār hūṁ?,,,2,hi-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,"नहीं, धन्यवाद, मुझे नहीं चाहिए",,"nahīṁ, dhanyavād, mujhe nahīṁ cāhie",,,2,hi-agent-v1
+police-consulate.someone-attacked-me,किसी ने मुझ पर हमला किया,,kisī ne mujh par hamlā kiyā,,,2,hi-agent-v1
+police-consulate.i-did-not-agree-to-this-price,मैंने यह दाम तय नहीं किया था,,maiṁne yah dām tay nahīṁ kiyā thā,,,2,hi-agent-v1
+police-consulate.please-write-the-report-number,रिपोर्ट नंबर लिख दीजिए,,riporṭ naṁbar likh dījie,,,2,hi-agent-v1
+police-consulate.it-happened-here,यह यहाँ हुआ था,,yah yahāṁ huā thā,,,2,hi-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,क्या रिपोर्ट की कॉपी मिल सकती है?,,kyā riporṭ kī kopī mil saktī hai?,,,2,hi-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,बिना पढ़े दस्तखत नहीं करना है,,binā paṛhe dastkhat nahīṁ karnā hai,,won't sign unread,2,hi-agent-v1
+police-consulate.am-i-free-to-go,क्या मुझे जाने की इजाज़त है?,,kyā mujhe jāne kī ijāzat hai?,,,2,hi-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,मुझे आपके साथ नहीं जाना है,,mujhe āpke sāth nahīṁ jānā hai,,,2,hi-agent-v1

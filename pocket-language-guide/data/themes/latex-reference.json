@@ -129,6 +129,39 @@
           "italic": true,
           "color": "muted",
           "align": "end"
+        },
+        {
+          "field": "script_alt",
+          "row": 0,
+          "col": 0,
+          "size": 5.9,
+          "leading": 6.05,
+          "bold": false,
+          "italic": false,
+          "color": "muted",
+          "align": "start"
+        },
+        {
+          "field": "ipa",
+          "row": 0,
+          "col": 0,
+          "size": 5.22,
+          "leading": 5.37,
+          "bold": false,
+          "italic": false,
+          "color": "muted",
+          "align": "start"
+        },
+        {
+          "field": "literal",
+          "row": 0,
+          "col": 1,
+          "size": 5.22,
+          "leading": 5.37,
+          "bold": false,
+          "italic": false,
+          "color": "muted",
+          "align": "end"
         }
       ],
       "valign": "top"

@@ -42,10 +42,15 @@ KANA = [(0x3040, 0x30FF), (0x31F0, 0x31FF)]
 HANGUL_JAMO = [(0x1100, 0x11FF), (0x3130, 0x318F), (0xA960, 0xA97F), (0xD7B0, 0xD7FF)]
 ARABIC_RANGES = [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
                  (0xFB50, 0xFDFF), (0xFE70, 0xFEFF)]
-# Thai is the one script here the Latin faces cover not at all, so it gets a stack
-# of its own. The block has gaps; only 87 of its 128 slots are assigned, and the
-# subsetter intersects with the font's cmap anyway.
+# Two scripts the Latin faces cover not at all, each with a stack of its own. Both
+# blocks have gaps; the subsetter intersects with the font's cmap anyway.
+#
+# Devanagari is here rather than folded into the Latin union because only the
+# *variable* Noto Sans carries it, and that file feeds the condensed stack alone --
+# the static faces behind `latin` have none of it. Adding `hi` to `ALL_LANGS` would
+# have looked like a fix and produced a subset request the source could not fill.
 THAI_RANGES = [(0x0E00, 0x0E7F)]
+DEVA_RANGES = [(0x0900, 0x097F), (0xA8E0, 0xA8FF)]
 
 # Faces: (stack, weight, italic) -> source file. CJK and Arabic have no italic in
 # these families, and the sheet only ever italicises romanisation, which is Latin.
@@ -98,17 +103,22 @@ FACES = {
     ("thai", 700, False): "NotoSansThai-var.ttf",
     ("thai-serif", 400, False): "NotoSerifThai-var.ttf",
     ("thai-serif", 700, False): "NotoSerifThai-var.ttf",
+    ("deva", 400, False): "NotoSansDevanagari-var.ttf",
+    ("deva", 700, False): "NotoSansDevanagari-var.ttf",
+    ("deva-serif", 400, False): "NotoSerifDevanagari-var.ttf",
+    ("deva-serif", 700, False): "NotoSerifDevanagari-var.ttf",
 }
 
 # Which language directories feed each stack's corpus-character union.
 ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
-             "pt", "ru", "tr", "vi"]
+             "pt", "ru", "tr", "vi", "hi", "id", "sw", "th"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
                "cjk-jp": ["ja"], "cjk-jp-serif": ["ja"],
                "cjk-kr": ["ko"], "cjk-kr-serif": ["ko"],
-               "arabic": ["ar"], "thai": ["th"], "thai-serif": ["th"]}
+               "arabic": ["ar"], "thai": ["th"], "thai-serif": ["th"],
+               "deva": ["hi"], "deva-serif": ["hi"]}
 
 
 def expand(ranges):
@@ -166,6 +176,8 @@ def coverage(stack):
         chars |= expand(ARABIC_RANGES)
     elif stack.startswith("thai"):
         chars |= expand(THAI_RANGES)
+    elif stack.startswith("deva"):
+        chars |= expand(DEVA_RANGES)
     return chars
 
 

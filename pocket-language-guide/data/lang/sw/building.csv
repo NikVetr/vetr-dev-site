@@ -1,0 +1,60 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,Chumba hiki ni namba ngapi?,,,,2,sw-agent-v1
+building-help.i-am-lost,Nimepotea,,,I have got lost,2,sw-agent-v1
+building-help.where-is-reception,Mapokezi ni wapi?,,,,2,sw-agent-v1
+building-help.where-is-a-power-outlet,Soketi ya umeme iko wapi?,Plagi ya umeme,,,2,sw-agent-v1
+accessibility.step-free,"Je, kuna njia isiyo na ngazi?",,,a route with no stairs,2,sw-agent-v1
+accessibility.wheelchair-access,"Je, inapitika kwa kiti cha magurudumu?",,,,2,sw-agent-v1
+accessibility.elevator,"Je, kuna lifti?",,,,2,sw-agent-v1
+accessibility.ramp,"Je, kuna njia ya mteremko?",Rampu,,,2,sw-agent-v1
+accessibility.how-many-steps,Kuna ngazi ngapi?,,,,2,sw-agent-v1
+accessibility.cannot-climb-stairs,Siwezi kupanda ngazi,,,,2,sw-agent-v1
+accessibility.need-to-sit-down,Nahitaji kukaa chini,,,,2,sw-agent-v1
+accessibility.accessible-restroom,"Je, kuna choo cha walemavu?",,,toilet for disabled people,2,sw-agent-v1
+accessibility.station-assistance,"Je, kuna msaada kituoni?",,,,2,sw-agent-v1
+accessibility.help-me-carry,Tafadhali nisaidie kubeba hii,,,,2,sw-agent-v1
+accessibility.board-first,Naomba niingie kwanza,,,,2,sw-agent-v1
+accessibility.door-width,Mlango una upana gani?,,,,2,sw-agent-v1
+accessibility.wheelchair-width,Kiti cha magurudumu: upana sentimita {},,,,2,sw-agent-v1
+accessibility.hard-of-hearing,Nasikia kwa shida,,,I hear with difficulty,2,sw-agent-v1
+accessibility.speak-louder,Tafadhali sema kwa sauti kubwa,,,,2,sw-agent-v1
+accessibility.visually-impaired,Nina uoni hafifu,,,I have low vision,2,sw-agent-v1
+accessibility.take-your-arm,Naomba nishike mkono wako,,,,2,sw-agent-v1
+accessibility.guide-dog,Huyu ni mbwa wangu kiongozi,,,,2,sw-agent-v1
+in-a-building.is-this-the-correct-entrance,Huu ni mlango sahihi?,,,,2,sw-agent-v1
+in-a-building.do-you-have-wi-fi,"Je, mna Wi-Fi?",,,,2,sw-agent-v1
+in-a-building.what-is-the-wi-fi-password,Nenosiri la Wi-Fi ni nini?,Password ya Wi-Fi,,,2,sw-agent-v1
+in-a-building.which-floor,Ghorofa ya ngapi?,,,,2,sw-agent-v1
+toilets.where-toilet,Choo kiko wapi?,,,,2,sw-agent-v1
+toilets.where-public-toilet,Choo cha umma kiko wapi?,,,,2,sw-agent-v1
+toilets.may-i-use-the-toilet,Naomba nitumie choo,,,,2,sw-agent-v1
+toilets.is-it-only-for-customers,Ni kwa wateja tu?,,,,2,sw-agent-v1
+toilets.toilet-wc,Choo,Msalani,,,2,sw-agent-v1
+toilets.is-it-free,Ni bure?,,,,2,sw-agent-v1
+toilets.do-i-need-a-coin,Nahitaji sarafu au tokeni?,,,,1,sw-agent-v1
+toilets.is-the-tap-water-safe-to-drink,Maji ya bomba ni salama kunywa?,,,,2,sw-agent-v1
+toilets.it-is-urgent,Ni haraka sana,,,,2,sw-agent-v1
+toilets.may-i-have-the-toilet-key,Naomba ufunguo wa choo,,,,2,sw-agent-v1
+toilets.there-is-no-toilet-paper,Hakuna karatasi ya choo,,,,2,sw-agent-v1
+toilets.toilet-paper,Karatasi ya choo,,,,2,sw-agent-v1
+toilets.it-is-out-of-order,Haifanyi kazi,,,it does not work,2,sw-agent-v1
+toilets.out-of-order,Imeharibika,Haitumiki,,broken,2,sw-agent-v1
+toilets.mens-toilet,Choo cha wanaume,Wanaume,,,2,sw-agent-v1
+toilets.womens-toilet,Choo cha wanawake,Wanawake,,,2,sw-agent-v1
+toilets.drinking-water,Maji ya kunywa,,,,2,sw-agent-v1
+toilets.not-for-drinking,Si maji ya kunywa,Maji haya hayafai kunywa,,not drinking water,2,sw-agent-v1
+toilets.accessible-toilet,Choo cha walemavu,,,,2,sw-agent-v1
+toilets.where-can-i-wash-my-hands,Naweza kunawa mikono wapi?,,,,2,sw-agent-v1
+toilets.can-i-flush-the-paper,Naweza kutupa karatasi chooni?,,,may I throw the paper in the toilet,2,sw-agent-v1
+toilets.is-there-a-toilet-on-board,"Je, kuna choo ndani?",,,,2,sw-agent-v1
+toilets.the-toilet-will-not-flush,Choo hakivuti maji,Choo hakiflashi,,the toilet does not pull water,1,sw-agent-v1
+toilets.baby-change,Kubadilisha nepi,,,nappy changing,1,sw-agent-v1
+toilets.squat-toilet,Choo cha shimo,Choo cha kuchutama,,,1,sw-agent-v1
+building-words.elevator,Lifti,,,,2,sw-agent-v1
+building-words.stairs,Ngazi,,,,2,sw-agent-v1
+building-words.entrance,Kuingia,Mlango wa kuingia,,,2,sw-agent-v1
+building-words.exit,Kutoka,Njia ya kutoka,,,2,sw-agent-v1
+building-words.men,Wanaume,,,,2,sw-agent-v1
+building-words.women,Wanawake,,,,2,sw-agent-v1
+building-words.door,Mlango,,,,2,sw-agent-v1
+building-words.key,Ufunguo,,,,2,sw-agent-v1

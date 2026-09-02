@@ -1,0 +1,60 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,इस कमरे का नंबर क्या है?,,is kamre kā naṁbar kyā hai?,,,2,hi-agent-v1
+building-help.i-am-lost,मैं रास्ता भटक गया हूँ,मैं रास्ता भटक गई हूँ,maiṁ rāstā bhaṭak gayā hūṁ,,,2,hi-agent-v1
+building-help.where-is-reception,रिसेप्शन कहाँ है?,,risepśan kahāṁ hai?,,,2,hi-agent-v1
+building-help.where-is-a-power-outlet,बिजली का सॉकेट कहाँ है?,,bijlī kā sokeṭ kahāṁ hai?,,,2,hi-agent-v1
+accessibility.step-free,क्या बिना सीढ़ी का रास्ता है?,,kyā binā sīṛhī kā rāstā hai?,,,2,hi-agent-v1
+accessibility.wheelchair-access,क्या व्हीलचेयर जा सकती है?,,kyā vhīlceyar jā saktī hai?,,,2,hi-agent-v1
+accessibility.elevator,क्या लिफ़्ट है?,,kyā lifṭ hai?,,,2,hi-agent-v1
+accessibility.ramp,क्या रैंप है?,,kyā raiṁp hai?,,,2,hi-agent-v1
+accessibility.how-many-steps,कितनी सीढ़ियाँ हैं?,,kitnī sīṛhiyāṁ haiṁ?,,,2,hi-agent-v1
+accessibility.cannot-climb-stairs,मैं सीढ़ियाँ नहीं चढ़ सकता,मैं सीढ़ियाँ नहीं चढ़ सकती,maiṁ sīṛhiyāṁ nahīṁ caṛh saktā,,,2,hi-agent-v1
+accessibility.need-to-sit-down,मुझे बैठना है,,mujhe baiṭhnā hai,,,2,hi-agent-v1
+accessibility.accessible-restroom,क्या दिव्यांग शौचालय है?,,kyā divyāṁg śaucālay hai?,,,2,hi-agent-v1
+accessibility.station-assistance,क्या स्टेशन पर मदद मिलेगी?,,kyā sṭeśan par madad milegī?,,,2,hi-agent-v1
+accessibility.help-me-carry,यह उठाने में मदद कीजिए,,yah uṭhāne meṁ madad kījie,,,2,hi-agent-v1
+accessibility.board-first,क्या मैं पहले चढ़ जाऊँ?,,kyā maiṁ pahle caṛh jāūṁ?,,,2,hi-agent-v1
+accessibility.door-width,दरवाज़ा कितना चौड़ा है?,,darvāzā kitnā cauṛā hai?,,,2,hi-agent-v1
+accessibility.wheelchair-width,मेरी व्हीलचेयर {} सेमी चौड़ी है,,merī vhīlceyar {} semī cauṛī hai,,,2,hi-agent-v1
+accessibility.hard-of-hearing,मुझे कम सुनाई देता है,,mujhe kam sunāī detā hai,,,2,hi-agent-v1
+accessibility.speak-louder,ज़रा ज़ोर से बोलिए,,zarā zor se bolie,,,2,hi-agent-v1
+accessibility.visually-impaired,मुझे बहुत कम दिखाई देता है,मैं दृष्टिबाधित हूँ,mujhe bahut kam dikhāī detā hai,,,2,hi-agent-v1
+accessibility.take-your-arm,क्या मैं आपकी बाँह पकड़ लूँ?,,kyā maiṁ āpkī bāṁh pakaṛ lūṁ?,,,2,hi-agent-v1
+accessibility.guide-dog,यह मेरा गाइड डॉग है,,yah merā gāiḍ ḍog hai,,,2,hi-agent-v1
+in-a-building.is-this-the-correct-entrance,क्या यही सही गेट है?,,kyā yahī sahī geṭ hai?,,,2,hi-agent-v1
+in-a-building.do-you-have-wi-fi,क्या यहाँ वाई-फ़ाई है?,,kyā yahāṁ vāī-fāī hai?,,,2,hi-agent-v1
+in-a-building.what-is-the-wi-fi-password,वाई-फ़ाई का पासवर्ड क्या है?,,vāī-fāī kā pāsvarḍ kyā hai?,,,2,hi-agent-v1
+in-a-building.which-floor,कौन सी मंज़िल?,,kaun sī maṁzil?,,,2,hi-agent-v1
+toilets.where-toilet,बाथरूम कहाँ है?,शौचालय कहाँ है?,bāthrūm kahāṁ hai?,,,2,hi-agent-v1
+toilets.where-public-toilet,सार्वजनिक शौचालय कहाँ है?,,sārvajanik śaucālay kahāṁ hai?,,,2,hi-agent-v1
+toilets.may-i-use-the-toilet,क्या बाथरूम इस्तेमाल कर लूँ?,,kyā bāthrūm istemāl kar lūṁ?,,,2,hi-agent-v1
+toilets.is-it-only-for-customers,क्या सिर्फ़ ग्राहकों के लिए है?,,kyā sirf grāhakoṁ ke lie hai?,,,2,hi-agent-v1
+toilets.toilet-wc,शौचालय,टॉयलेट,śaucālay,,,2,hi-agent-v1
+toilets.is-it-free,क्या मुफ़्त है?,,kyā muft hai?,,,2,hi-agent-v1
+toilets.do-i-need-a-coin,क्या सिक्का या टोकन लगेगा?,,kyā sikkā yā ṭokan lagegā?,,,2,hi-agent-v1
+toilets.is-the-tap-water-safe-to-drink,क्या नल का पानी पीने लायक है?,,kyā nal kā pānī pīne lāyak hai?,,,2,hi-agent-v1
+toilets.it-is-urgent,बहुत ज़रूरी है,,bahut zarūrī hai,,,2,hi-agent-v1
+toilets.may-i-have-the-toilet-key,क्या बाथरूम की चाबी मिल सकती है?,,kyā bāthrūm kī cābī mil saktī hai?,,,2,hi-agent-v1
+toilets.there-is-no-toilet-paper,टॉयलेट पेपर नहीं है,,ṭoyleṭ pepar nahīṁ hai,,,2,hi-agent-v1
+toilets.toilet-paper,टॉयलेट पेपर,,ṭoyleṭ pepar,,,2,hi-agent-v1
+toilets.it-is-out-of-order,यह खराब है,,yah kharāb hai,,,2,hi-agent-v1
+toilets.out-of-order,खराब,काम नहीं कर रहा,kharāb,,,2,hi-agent-v1
+toilets.mens-toilet,पुरुष शौचालय,,puruṣ śaucālay,,,2,hi-agent-v1
+toilets.womens-toilet,महिला शौचालय,,mahilā śaucālay,,,2,hi-agent-v1
+toilets.drinking-water,पीने का पानी,,pīne kā pānī,,,2,hi-agent-v1
+toilets.not-for-drinking,पीने योग्य नहीं,यह पानी पीने के लिए नहीं है,pīne yogya nahīṁ,,,2,hi-agent-v1
+toilets.accessible-toilet,दिव्यांग शौचालय,,divyāṁg śaucālay,,,2,hi-agent-v1
+toilets.where-can-i-wash-my-hands,हाथ धोने की जगह कहाँ है?,,hāth dhone kī jagah kahāṁ hai?,,,2,hi-agent-v1
+toilets.can-i-flush-the-paper,क्या कागज़ को फ़्लश करना ठीक है?,,kyā kāgaz ko flaś karnā ṭhīk hai?,,,2,hi-agent-v1
+toilets.is-there-a-toilet-on-board,क्या इसमें शौचालय है?,,kyā ismeṁ śaucālay hai?,,,2,hi-agent-v1
+toilets.the-toilet-will-not-flush,फ़्लश काम नहीं कर रहा,,flaś kām nahīṁ kar rahā,,,2,hi-agent-v1
+toilets.baby-change,शिशु देखभाल कक्ष,बेबी चेंजिंग रूम,śiśu dekhbhāl kakṣ,,,1,hi-agent-v1
+toilets.squat-toilet,भारतीय शौचालय,इंडियन टॉयलेट,bhāratīya śaucālay,,,2,hi-agent-v1
+building-words.elevator,लिफ़्ट,,lifṭ,,,2,hi-agent-v1
+building-words.stairs,सीढ़ियाँ,,sīṛhiyāṁ,,,2,hi-agent-v1
+building-words.entrance,प्रवेश,,praveś,,,2,hi-agent-v1
+building-words.exit,निकास,,nikās,,,2,hi-agent-v1
+building-words.men,पुरुष,,puruṣ,,,2,hi-agent-v1
+building-words.women,महिला,,mahilā,,,2,hi-agent-v1
+building-words.door,दरवाज़ा,,darvāzā,,,2,hi-agent-v1
+building-words.key,चाबी,,cābī,,,2,hi-agent-v1

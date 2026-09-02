@@ -12,6 +12,15 @@
 // pdf-lib's font embedder calls, so embedding a subset fails against it. The two
 // agree exactly on advances and glyph counts for Latin, Arabic and CJK (see
 // tests/measure.test.mjs), so this costs nothing and keeps one shaper.
+//
+// It does cost one polyfill. That build is Babel-transpiled, and Babel turned
+// exactly one generator -- `StateMachine.prototype.match` -- into a state machine
+// calling a `regeneratorRuntime` the package never bundles and declares no
+// dependency on. Nothing else in fontkit reaches that function: it is the matcher
+// the Indic and Universal shapers use, so Latin, Cyrillic, Greek, Arabic, Han, Kana
+// and Hangul all shape without it, and Devanagari and Thai throw
+// `regeneratorRuntime is not defined` at the first glyph. So the bundle declares the
+// name and imports `regenerator-runtime` for the side effect of filling it in.
 import { build } from 'esbuild';
 import { readFileSync, writeFileSync } from 'node:fs';
 
@@ -20,7 +29,9 @@ const targets = [
     out: 'vendor/fontkit.esm.js',
     // CJS default export; re-exported as named bindings so callers can use a
     // plain namespace import.
-    contents: `import fk from '@pdf-lib/fontkit';
+    banner: 'var regeneratorRuntime;',
+    contents: `import 'regenerator-runtime';
+      import fk from '@pdf-lib/fontkit';
       const m = fk.default ?? fk;
       export const create = m.create;
       export const registerFormat = m.registerFormat;
@@ -29,7 +40,7 @@ const targets = [
   { out: 'vendor/pdf-lib.esm.js', contents: "export * from 'pdf-lib';" },
 ];
 
-for (const { contents, out } of targets) {
+for (const { contents, out, banner } of targets) {
   await build({
     stdin: { contents, resolveDir: '.', loader: 'js' },
     outfile: out,
@@ -40,6 +51,10 @@ for (const { contents, out } of targets) {
     minify: true,
     legalComments: 'none',
     define: { 'process.env.NODE_ENV': '"production"', global: 'globalThis' },
+    // A plain `var` rather than esbuild's `inject`, because `regenerator-runtime`
+    // assigns to the name itself and esbuild refuses an assignment to an injected
+    // import.
+    ...(banner ? { banner: { js: banner } } : {}),
   });
   console.log(`${out}  ${(readFileSync(out).length / 1024).toFixed(0)} KB`);
 }

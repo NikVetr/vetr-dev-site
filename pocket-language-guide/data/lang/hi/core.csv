@@ -1,0 +1,47 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,मैं / मुझे,,maiṁ / mujhe,,,2,hi-agent-v1
+pronouns-verbs.we-us,हम / हमें,,ham / hameṁ,,,2,hi-agent-v1
+pronouns-verbs.you,तुम,,tum,,familiar,2,hi-agent-v1
+pronouns-verbs.you-polite,आप,,āp,,use this always,2,hi-agent-v1
+pronouns-verbs.he-him,वह / उसे,,vah / use,,,2,hi-agent-v1
+pronouns-verbs.she-her,वह / उसे,,vah / use,,same as 'he',2,hi-agent-v1
+pronouns-verbs.they-them,वे / उन्हें,,ve / unheṁ,,,2,hi-agent-v1
+pronouns-verbs.my-mine,मेरा / मेरी,,merā / merī,,m / f,2,hi-agent-v1
+pronouns-verbs.your-yours,आपका / आपकी,,āpkā / āpkī,,m / f,2,hi-agent-v1
+pronouns-verbs.be-called-call,नाम / बुलाना,,nām / bulānā,,,2,hi-agent-v1
+pronouns-verbs.have,के पास है,,ke pās hai,,near [someone] is,2,hi-agent-v1
+pronouns-verbs.do-not-have,के पास नहीं है,,ke pās nahīṁ hai,,,2,hi-agent-v1
+pronouns-verbs.go,जाना,,jānā,,,2,hi-agent-v1
+pronouns-verbs.come,आना,,ānā,,,2,hi-agent-v1
+pronouns-verbs.would-like,चाहिए,,cāhie,,is wanted,2,hi-agent-v1
+pronouns-verbs.want,चाहना,,cāhnā,,,2,hi-agent-v1
+pronouns-verbs.look-for,ढूँढना,,ḍhūṁḍhnā,,,2,hi-agent-v1
+pronouns-verbs.buy,खरीदना,,kharīdnā,,,2,hi-agent-v1
+pronouns-verbs.like,पसंद होना,,pasand honā,,to be pleasing,2,hi-agent-v1
+pronouns-verbs.need,ज़रूरत है,,zarūrat hai,,need is,2,hi-agent-v1
+pronouns-verbs.there-is-have,है,,hai,,,2,hi-agent-v1
+pronouns-verbs.there-is-not-do-not-have,नहीं है,,nahīṁ hai,,,2,hi-agent-v1
+pronouns-verbs.want-to-verb,मुझे …ना है,,mujhe …nā hai,,verb + -naa,2,hi-agent-v1
+pronouns-verbs.want-thing,मुझे … चाहिए,,mujhe … cāhie,,,2,hi-agent-v1
+pronouns-verbs.need-thing,मुझे … की ज़रूरत है,,mujhe … kī zarūrat hai,,,2,hi-agent-v1
+pronouns-verbs.looking-for-thing,मुझे … की तलाश है,,mujhe … kī talāś hai,,search is to me,2,hi-agent-v1
+question-words.what,क्या,,kyā,,,2,hi-agent-v1
+question-words.where,कहाँ,,kahāṁ,,,2,hi-agent-v1
+question-words.who,कौन,,kaun,,,2,hi-agent-v1
+question-words.which-one,कौन सा,,kaun sā,,,2,hi-agent-v1
+question-words.when,कब,,kab,,,2,hi-agent-v1
+question-words.how,कैसे,,kaise,,,2,hi-agent-v1
+question-words.how-much-many,कितना,,kitnā,,,2,hi-agent-v1
+question-words.how-many,कितने,,kitne,,plural,2,hi-agent-v1
+question-words.why,क्यों,,kyoṁ,,,2,hi-agent-v1
+question-words.this,यह,,yah,,,2,hi-agent-v1
+question-words.that,वह,,vah,,,2,hi-agent-v1
+question-words.here,यहाँ,,yahāṁ,,,2,hi-agent-v1
+question-words.there,वहाँ,,vahāṁ,,,2,hi-agent-v1
+question-words.a-little,थोड़ा,,thoṛā,,,2,hi-agent-v1
+question-words.some,कुछ,,kuch,,,2,hi-agent-v1
+question-words.very,बहुत,,bahut,,,2,hi-agent-v1
+question-words.too,बहुत ज़्यादा,,bahut zyādā,,too much,2,hi-agent-v1
+question-words.also,भी,,bhī,,,2,hi-agent-v1
+question-words.all-both,सब / दोनों,,sab / donoṁ,,,2,hi-agent-v1
+question-words.how-much-what-price,कितने का है,,kitne kā hai,,of how much is it,2,hi-agent-v1

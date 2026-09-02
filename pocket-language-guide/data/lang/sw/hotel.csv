@@ -1,0 +1,53 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+hotel-words.passport,Pasipoti,,,,2,sw-agent-v1
+hotel-words.room-key-card,Kadi ya chumba,Ufunguo wa chumba,,,2,sw-agent-v1
+hotel-words.check-in,Kuingia,Check-in,,checking in,2,sw-agent-v1
+hotel-words.check-out,Kuondoka,Check-out,,checking out,2,sw-agent-v1
+hotel-words.luggage-storage,Sehemu ya kuweka mizigo,,,,2,sw-agent-v1
+hotel-basics.are-any-rooms-available,"Je, kuna chumba?",,,,2,sw-agent-v1
+hotel-basics.there-are-two-of-us,Tuko wawili,,,,2,sw-agent-v1
+hotel-basics.i-have-a-reservation,Nimeweka nafasi,Nina booking,,,2,sw-agent-v1
+hotel-basics.can-i-charge-my-phone,Naweza kuchaji simu yangu?,,,,2,sw-agent-v1
+hotel-basics.i-would-like-a-non-smoking-room,Naomba chumba bila sigara,,,,2,sw-agent-v1
+hotel-basics.i-would-like-a-quiet-room,Naomba chumba cha utulivu,,,,2,sw-agent-v1
+hotel-basics.is-there-a-washing-machine,"Je, kuna mashine ya kufua?",,,,2,sw-agent-v1
+hotel-basics.is-wi-fi-free,"Je, Wi-Fi ni bure?",,,,2,sw-agent-v1
+hotel-basics.how-much-per-night,Ni bei gani kwa usiku?,,,,2,sw-agent-v1
+hotel-basics.is-breakfast-included,"Je, kifungua kinywa kimejumuishwa?",,,,2,sw-agent-v1
+hotel-basics.may-i-see-the-room,Naomba nione chumba,,,,2,sw-agent-v1
+hotel-basics.for-nights,Kwa usiku {},Kwa siku {},,,2,sw-agent-v1
+hotel-basics.two-beds,"Vitanda viwili, tafadhali",,,,2,sw-agent-v1
+hotel-basics.is-there-air-conditioning,"Je, kuna kiyoyozi?",AC,,,2,sw-agent-v1
+hotel-requests.can-i-check-out-later,Naweza kuondoka baadaye?,,,,2,sw-agent-v1
+hotel-requests.what-time-does-breakfast-start,Kifungua kinywa huanza saa ngapi?,,,,2,sw-agent-v1
+hotel-requests.can-i-store-my-luggage,Naweza kuweka mizigo yangu?,,,,2,sw-agent-v1
+hotel-requests.no-housekeeping,Msisafishe chumba,,,do not clean the room,2,sw-agent-v1
+hotel-requests.another-towel-please,"Taulo nyingine, tafadhali",,,,2,sw-agent-v1
+hotel-requests.what-time-is-check-out,Kuondoka ni saa ngapi?,,,,2,sw-agent-v1
+hotel-requests.can-i-check-in-early,Naweza kuingia mapema?,,,,2,sw-agent-v1
+hotel-requests.another-night,Naweza kulala usiku mmoja zaidi?,,,,2,sw-agent-v1
+hotel-requests.is-there-a-safe,"Je, kuna sefu?",Kasha la kuhifadhi,,,2,sw-agent-v1
+hotel-requests.another-blanket,"Blanketi nyingine, tafadhali",,,,2,sw-agent-v1
+hotel-requests.wake-up-call,Tafadhali niamshe {},,,,2,sw-agent-v1
+room-problems.there-is-a-problem-with-the-room,Kuna tatizo na chumba,,,,2,sw-agent-v1
+room-problems.the-air-conditioning-is-broken,Kiyoyozi kimeharibika,,,,2,sw-agent-v1
+room-problems.there-is-no-hot-water,Hakuna maji ya moto,,,,2,sw-agent-v1
+room-problems.can-i-change-rooms,Naweza kubadilisha chumba?,,,,2,sw-agent-v1
+room-problems.the-room-is-too-noisy,Chumba kina kelele nyingi,,,,2,sw-agent-v1
+room-problems.the-key-does-not-work,Ufunguo haufanyi kazi,,,,2,sw-agent-v1
+room-problems.the-toilet-will-not-flush,Choo hakivuti maji,Choo hakiflashi,,the toilet does not pull water,1,sw-agent-v1
+room-problems.the-light-does-not-work,Taa haifanyi kazi,,,,2,sw-agent-v1
+room-problems.please-send-someone,Tafadhali tuma mtu kurekebisha,,,,2,sw-agent-v1
+room-problems.the-heating-does-not-work,Hita haifanyi kazi,Kipasha joto hakifanyi kazi,,,1,sw-agent-v1
+laundry.please-wash-these-clothes,Tafadhali fua nguo hizi,,,,2,sw-agent-v1
+laundry.where-is-a-laundromat,Dobi iko wapi?,Sehemu ya kufulia,,,2,sw-agent-v1
+laundry.when-will-it-be-ready,Itakuwa tayari lini?,,,,2,sw-agent-v1
+laundry.how-much-per-kilo,Ni bei gani kwa kilo?,,,,2,sw-agent-v1
+laundry.can-it-be-ready-today,Inaweza kuwa tayari leo?,,,,2,sw-agent-v1
+laundry.please-do-not-use-bleach,Tafadhali usitumie jiki,Tafadhali usitumie bleach,,no bleach,1,sw-agent-v1
+laundry.laundromat,Dobi,Sehemu ya kufulia,,,2,sw-agent-v1
+laundry.please-iron-this,Tafadhali piga pasi hii,,,,2,sw-agent-v1
+laundry.detergent,Sabuni ya kufua,Sabuni ya unga,,,2,sw-agent-v1
+laundry.dry-cleaning,Kusafisha kwa kavu,Dry cleaning,,,1,sw-agent-v1
+laundry.dryer,Mashine ya kukausha,,,,2,sw-agent-v1
+laundry.coin-operated,Inatumia sarafu,,,,1,sw-agent-v1

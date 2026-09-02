@@ -1,0 +1,66 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+trail-words.trail,पगडंडी,ट्रेक,pagḍaṁḍī,,,2,hi-agent-v1
+trail-words.trailhead,ट्रेक की शुरुआत,,ṭrek kī śuruāt,,,2,hi-agent-v1
+trail-words.summit,चोटी,,coṭī,,,2,hi-agent-v1
+trail-words.viewpoint,व्यू पॉइंट,दृश्य स्थल,vyū poinṭ,,,2,hi-agent-v1
+trail-words.cableway,रोपवे,केबल कार,ropve,,,2,hi-agent-v1
+trail-words.shuttle-bus,शटल बस,,śaṭal bas,,,2,hi-agent-v1
+trail-words.park-shuttle,पार्क की बस,,pārk kī bas,,,2,hi-agent-v1
+trail-words.steps,सीढ़ियाँ,,sīṛhiyāṁ,,,2,hi-agent-v1
+trail-words.up-uphill,चढ़ाई,,caṛhāī,,,2,hi-agent-v1
+trail-words.down-downhill,उतराई,ढलान,utrāī,,,2,hi-agent-v1
+trail-words.one-way,एक तरफ़ा,वन-वे,ek tarafā,,,2,hi-agent-v1
+trail-words.round-trip,आना-जाना,वापसी सहित,ānā-jānā,,,2,hi-agent-v1
+weather.forecast,मौसम का हाल क्या है?,,mausam kā hāl kyā hai?,,,2,hi-agent-v1
+weather.will-it-rain,क्या आज बारिश होगी?,,kyā āj bāriś hogī?,,,2,hi-agent-v1
+weather.is-it-safe-today,क्या आज जाना सुरक्षित है?,,kyā āj jānā surakṣit hai?,,,2,hi-agent-v1
+weather.how-cold-at-night,रात में कितनी ठंड होती है?,,rāt meṁ kitnī ṭhaṁḍ hotī hai?,,,2,hi-agent-v1
+weather.rain,बारिश,,bāriś,,,2,hi-agent-v1
+weather.snow,बर्फ़,,barf,,,2,hi-agent-v1
+weather.wind,हवा,,havā,,,2,hi-agent-v1
+weather.storm,तूफ़ान,,tūfān,,,2,hi-agent-v1
+weather.ice,जमी बर्फ़,पाला,jamī barf,,ice on the ground,2,hi-agent-v1
+weather.fog,कोहरा,,kohrā,,,2,hi-agent-v1
+weather.heat,गर्मी,,garmī,,,2,hi-agent-v1
+weather.cold,ठंड,,ṭhaṁḍ,,,2,hi-agent-v1
+weather.humid,उमस,,umas,,,2,hi-agent-v1
+weather.sunrise,सूर्योदय,,sūryoday,,,2,hi-agent-v1
+weather.flood,बाढ़,,bāṛh,,,2,hi-agent-v1
+weather.avalanche-risk,हिमस्खलन का खतरा,,himskhalan kā khatrā,,,2,hi-agent-v1
+hiking-parks.is-this-the-way-to,क्या {} का रास्ता यही है?,,kyā {} kā rāstā yahī hai?,,,2,hi-agent-v1
+hiking-parks.where-is-the-trailhead,ट्रेक कहाँ से शुरू होता है?,,ṭrek kahāṁ se śurū hotā hai?,,,2,hi-agent-v1
+hiking-parks.how-long-to-the-summit,चोटी तक कितनी देर लगेगी?,,coṭī tak kitnī der lagegī?,,,2,hi-agent-v1
+hiking-parks.how-long-to-the-viewpoint,व्यू पॉइंट तक कितनी देर?,,vyū poinṭ tak kitnī der?,,,2,hi-agent-v1
+hiking-parks.which-route-is-easier,कौन सा रास्ता आसान है?,,kaun sā rāstā āsān hai?,,,2,hi-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,क्या नए लोगों के लिए यह ठीक है?,,kyā nae logoṁ ke lie yah ṭhīk hai?,,,2,hi-agent-v1
+trail-conditions.how-long-is-the-full-route,पूरा रास्ता कितना लंबा है?,,pūrā rāstā kitnā laṁbā hai?,,,2,hi-agent-v1
+trail-conditions.can-we-return-the-same-way,क्या इसी रास्ते से वापसी हो सकती है?,,kyā isī rāste se vāpasī ho saktī hai?,,,2,hi-agent-v1
+trail-conditions.can-we-return-before-dark,क्या अंधेरे से पहले वापसी हो जाएगी?,,kyā aṁdhere se pahle vāpasī ho jāegī?,,,2,hi-agent-v1
+trail-conditions.is-the-trail-open,क्या रास्ता खुला है?,,kyā rāstā khulā hai?,,,2,hi-agent-v1
+trail-conditions.is-the-route-steep,क्या चढ़ाई तेज़ है?,,kyā caṛhāī tez hai?,,,2,hi-agent-v1
+trail-conditions.is-the-path-slippery,क्या रास्ता फिसलन भरा है?,,kyā rāstā phislan bharā hai?,,,2,hi-agent-v1
+trail-transport.how-long-is-the-queue,लाइन कितनी लंबी है?,,lāin kitnī laṁbī hai?,,,2,hi-agent-v1
+trail-transport.what-time-is-the-last-shuttle,आखिरी शटल कब है?,,ākhirī śaṭal kab hai?,,,2,hi-agent-v1
+trail-transport.when-does-the-cableway-stop,रोपवे कब बंद होता है?,,ropve kab baṁd hotā hai?,,,2,hi-agent-v1
+trail-transport.where-can-we-buy-water,पानी कहाँ मिलेगा?,,pānī kahāṁ milegā?,,,2,hi-agent-v1
+trail-transport.where-can-we-refill-water,पानी भरने की जगह कहाँ है?,,pānī bharne kī jagah kahāṁ hai?,,,2,hi-agent-v1
+trail-transport.is-there-cell-signal-here,क्या यहाँ सिग्नल आता है?,,kyā yahāṁ signal ātā hai?,,,2,hi-agent-v1
+trail-transport.do-you-have-a-map,क्या नक्शा है?,,kyā nakśā hai?,,,2,hi-agent-v1
+trail-transport.how-long-is-the-wait,कितनी देर लगेगी?,,kitnī der lagegī?,,,2,hi-agent-v1
+trail-warnings.open,खुला,,khulā,,,2,hi-agent-v1
+trail-warnings.closed,बंद,,baṁd,,,2,hi-agent-v1
+trail-warnings.maintenance,मरम्मत,,marammat,,,2,hi-agent-v1
+trail-warnings.steep-slope,तेज़ ढलान,,tez ḍhalān,,,2,hi-agent-v1
+trail-warnings.caution-slippery,सावधान: फिसलन,,sāvdhān: phislan,,,2,hi-agent-v1
+trail-warnings.danger,खतरा,,khatrā,,,2,hi-agent-v1
+trail-warnings.beware-falling-rocks,पत्थर गिरने का खतरा,,patthar girne kā khatrā,,,2,hi-agent-v1
+trail-warnings.first-aid-station,प्राथमिक चिकित्सा केंद्र,,prāthmik cikitsā keṁdra,,,2,hi-agent-v1
+trail-warnings.service-suspended,सेवा बंद,,sevā baṁd,,,2,hi-agent-v1
+trail-landmarks.trail-marker,रास्ते का निशान,,rāste kā niśān,,,2,hi-agent-v1
+trail-landmarks.fork-junction,तिराहा,चौराहा,tirāhā,,fork / crossroads,2,hi-agent-v1
+trail-landmarks.boardwalk-cliff-path,चट्टानी रास्ता,लकड़ी का रास्ता,caṭṭānī rāstā,,cliff path / boardwalk,1,hi-agent-v1
+trail-landmarks.start,शुरुआत,,śuruāt,,,2,hi-agent-v1
+trail-landmarks.end,अंत,,aṁt,,,2,hi-agent-v1
+trail-landmarks.elevation,ऊँचाई,,ūṁcāī,,,2,hi-agent-v1
+trail-landmarks.sunset,सूर्यास्त,,sūryāst,,,2,hi-agent-v1
+trail-landmarks.water-point,पेयजल,पानी की जगह,peyjal,,,2,hi-agent-v1

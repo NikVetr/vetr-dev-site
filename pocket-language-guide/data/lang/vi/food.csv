@@ -24,3 +24,5 @@ food-ordering.is-this-vegetarian,Món này là món chay ạ?,,,,2,vi-agent-v1
 food-ordering.what-do-you-recommend,Nên gọi món gì ạ?,,,,2,vi-agent-v1
 food-ordering.water-please,Cho tôi nước ạ,,,,2,vi-agent-v1
 food-ordering.can-a-vegetarian-eat-this,Người ăn chay ăn được không ạ?,,,,2,vi-agent-v1
+dietary-needs.no-pork,Không thịt lợn,Không thịt heo,,,2,vi-gaps-v1
+dietary-needs.is-this-halal,Đây có phải đồ Halal không ạ?,Món này có phải Halal không ạ?,,,2,vi-gaps-v1

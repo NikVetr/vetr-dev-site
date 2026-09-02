@@ -1,0 +1,66 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+trail-words.trail,Njia,Njia ya mlima,,,2,sw-agent-v1
+trail-words.trailhead,Mwanzo wa njia,,,,2,sw-agent-v1
+trail-words.summit,Kilele,,,,2,sw-agent-v1
+trail-words.viewpoint,Mahali pa kutazama,,,place to look out from,2,sw-agent-v1
+trail-words.cableway,Gari la kebo,,,,1,sw-agent-v1
+trail-words.shuttle-bus,Basi la huduma,Shuttle,,,1,sw-agent-v1
+trail-words.park-shuttle,Basi la hifadhi,,,park bus,1,sw-agent-v1
+trail-words.steps,Ngazi,,,,2,sw-agent-v1
+trail-words.up-uphill,Kupanda,,,,2,sw-agent-v1
+trail-words.down-downhill,Kushuka,,,,2,sw-agent-v1
+trail-words.one-way,Njia ya kwenda tu,,,one direction only,1,sw-agent-v1
+trail-words.round-trip,Kwenda na kurudi,,,,2,sw-agent-v1
+weather.forecast,Hali ya hewa itakuwaje?,,,,2,sw-agent-v1
+weather.will-it-rain,"Je, mvua itanyesha leo?",,,,2,sw-agent-v1
+weather.is-it-safe-today,"Je, ni salama leo?",,,,2,sw-agent-v1
+weather.how-cold-at-night,Usiku ni baridi kiasi gani?,,,,2,sw-agent-v1
+weather.rain,Mvua,,,,2,sw-agent-v1
+weather.snow,Theluji,,,,2,sw-agent-v1
+weather.wind,Upepo,,,,2,sw-agent-v1
+weather.storm,Dhoruba,Kimbunga,,,2,sw-agent-v1
+weather.ice,Barafu,,,,2,sw-agent-v1
+weather.fog,Ukungu,,,,2,sw-agent-v1
+weather.heat,Joto,,,,2,sw-agent-v1
+weather.cold,Baridi,,,,2,sw-agent-v1
+weather.humid,Unyevu,,,,2,sw-agent-v1
+weather.sunrise,Macheo,Kuchomoza kwa jua,,,2,sw-agent-v1
+weather.flood,Mafuriko,,,,2,sw-agent-v1
+weather.avalanche-risk,Hatari ya maporomoko ya theluji,,,,2,sw-agent-v1
+hiking-parks.is-this-the-way-to,Hii ni njia ya kwenda {}?,,,,2,sw-agent-v1
+hiking-parks.where-is-the-trailhead,Mwanzo wa njia ni wapi?,,,,2,sw-agent-v1
+hiking-parks.how-long-to-the-summit,Ni muda gani hadi kileleni?,,,,2,sw-agent-v1
+hiking-parks.how-long-to-the-viewpoint,Ni muda gani hadi mahali pa kutazama?,,,,2,sw-agent-v1
+hiking-parks.which-route-is-easier,Njia ipi ni rahisi?,,,,2,sw-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,"Je, njia hii inafaa kwa wanaoanza?",,,,2,sw-agent-v1
+trail-conditions.how-long-is-the-full-route,Njia yote ni urefu gani?,,,,2,sw-agent-v1
+trail-conditions.can-we-return-the-same-way,Tunaweza kurudi njia hii?,,,,2,sw-agent-v1
+trail-conditions.can-we-return-before-dark,Tunaweza kurudi kabla ya giza?,,,,2,sw-agent-v1
+trail-conditions.is-the-trail-open,"Je, njia iko wazi?",,,,2,sw-agent-v1
+trail-conditions.is-the-route-steep,"Je, njia inapanda sana?",,,does the path climb a lot,2,sw-agent-v1
+trail-conditions.is-the-path-slippery,"Je, njia inateleza?",,,,2,sw-agent-v1
+trail-transport.how-long-is-the-queue,Foleni ni ndefu kiasi gani?,,,,2,sw-agent-v1
+trail-transport.what-time-is-the-last-shuttle,Basi la mwisho ni saa ngapi?,,,,2,sw-agent-v1
+trail-transport.when-does-the-cableway-stop,Gari la kebo linasimama saa ngapi?,,,,1,sw-agent-v1
+trail-transport.where-can-we-buy-water,Tunaweza kununua maji wapi?,,,,2,sw-agent-v1
+trail-transport.where-can-we-refill-water,Tunaweza kujaza maji wapi?,,,,2,sw-agent-v1
+trail-transport.is-there-cell-signal-here,"Je, kuna mtandao hapa?",Kuna signal hapa?,,,2,sw-agent-v1
+trail-transport.do-you-have-a-map,"Je, mna ramani?",,,,2,sw-agent-v1
+trail-transport.how-long-is-the-wait,Kusubiri ni muda gani?,,,,2,sw-agent-v1
+trail-warnings.open,Wazi,,,,2,sw-agent-v1
+trail-warnings.closed,Imefungwa,,,,2,sw-agent-v1
+trail-warnings.maintenance,Marekebisho,,,,2,sw-agent-v1
+trail-warnings.steep-slope,Mteremko mkali,,,,2,sw-agent-v1
+trail-warnings.caution-slippery,Tahadhari: inateleza,,,,2,sw-agent-v1
+trail-warnings.danger,Hatari,,,,2,sw-agent-v1
+trail-warnings.beware-falling-rocks,Tahadhari: mawe yanaanguka,,,,2,sw-agent-v1
+trail-warnings.first-aid-station,Kituo cha huduma ya kwanza,,,,2,sw-agent-v1
+trail-warnings.service-suspended,Huduma imesitishwa,,,,2,sw-agent-v1
+trail-landmarks.trail-marker,Alama ya njia,,,,2,sw-agent-v1
+trail-landmarks.fork-junction,Njia panda,,,,2,sw-agent-v1
+trail-landmarks.boardwalk-cliff-path,Njia ya mbao,Njia ya jabali,,plank path,1,sw-agent-v1
+trail-landmarks.start,Mwanzo,,,,2,sw-agent-v1
+trail-landmarks.end,Mwisho,,,,2,sw-agent-v1
+trail-landmarks.elevation,Mwinuko,,,,2,sw-agent-v1
+trail-landmarks.sunset,Machweo,,,,2,sw-agent-v1
+trail-landmarks.water-point,Mahali pa maji,Chemchemi,,,2,sw-agent-v1

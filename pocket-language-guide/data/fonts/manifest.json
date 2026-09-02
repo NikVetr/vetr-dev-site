@@ -47,9 +47,9 @@
       "weight": 400,
       "italic": false,
       "file": "latin-cond-400",
-      "glyphs": 2111,
-      "ttfBytes": 226476,
-      "woff2Bytes": 87732,
+      "glyphs": 2487,
+      "ttfBytes": 334068,
+      "woff2Bytes": 110644,
       "source": "NotoSans-var.ttf"
     },
     {
@@ -57,9 +57,9 @@
       "weight": 700,
       "italic": false,
       "file": "latin-cond-700",
-      "glyphs": 2111,
-      "ttfBytes": 227868,
-      "woff2Bytes": 91172,
+      "glyphs": 2487,
+      "ttfBytes": 335684,
+      "woff2Bytes": 114792,
       "source": "NotoSans-var.ttf"
     },
     {
@@ -67,9 +67,9 @@
       "weight": 400,
       "italic": true,
       "file": "latin-cond-400i",
-      "glyphs": 2122,
-      "ttfBytes": 238740,
-      "woff2Bytes": 92508,
+      "glyphs": 2498,
+      "ttfBytes": 347964,
+      "woff2Bytes": 115980,
       "source": "NotoSans-Italic-var.ttf"
     },
     {
@@ -77,9 +77,9 @@
       "weight": 700,
       "italic": true,
       "file": "latin-cond-700i",
-      "glyphs": 2122,
-      "ttfBytes": 239876,
-      "woff2Bytes": 95812,
+      "glyphs": 2498,
+      "ttfBytes": 349272,
+      "woff2Bytes": 120320,
       "source": "NotoSans-Italic-var.ttf"
     },
     {
@@ -341,6 +341,46 @@
       "ttfBytes": 57092,
       "woff2Bytes": 23744,
       "source": "NotoSerifThai-var.ttf"
+    },
+    {
+      "stack": "deva",
+      "weight": 400,
+      "italic": false,
+      "file": "deva-400",
+      "glyphs": 986,
+      "ttfBytes": 191372,
+      "woff2Bytes": 54740,
+      "source": "NotoSansDevanagari-var.ttf"
+    },
+    {
+      "stack": "deva",
+      "weight": 700,
+      "italic": false,
+      "file": "deva-700",
+      "glyphs": 986,
+      "ttfBytes": 191916,
+      "woff2Bytes": 57972,
+      "source": "NotoSansDevanagari-var.ttf"
+    },
+    {
+      "stack": "deva-serif",
+      "weight": 400,
+      "italic": false,
+      "file": "deva-serif-400",
+      "glyphs": 967,
+      "ttfBytes": 204668,
+      "woff2Bytes": 57924,
+      "source": "NotoSerifDevanagari-var.ttf"
+    },
+    {
+      "stack": "deva-serif",
+      "weight": 700,
+      "italic": false,
+      "file": "deva-serif-700",
+      "glyphs": 967,
+      "ttfBytes": 205092,
+      "woff2Bytes": 62748,
+      "source": "NotoSerifDevanagari-var.ttf"
     }
   ]
 }

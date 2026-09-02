@@ -1,0 +1,113 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+directions.where-is,{} कहाँ है?,,{} kahāṁ hai?,,,2,hi-agent-v1
+directions.how-do-i-get-to,{} कैसे जाऊँ?,,{} kaise jāūṁ?,,,2,hi-agent-v1
+directions.is-it-far,क्या दूर है?,,kyā dūr hai?,,,2,hi-agent-v1
+directions.how-long-on-foot,पैदल कितनी देर?,,paidal kitnī der?,,,2,hi-agent-v1
+directions.please-show-me-on-the-map,नक्शे पर दिखाइए,,nakśe par dikhāie,,,2,hi-agent-v1
+directions.where-is-the-nearest,सबसे नज़दीकी {} कहाँ है?,,sabse nazdīkī {} kahāṁ hai?,,,2,hi-agent-v1
+directions.where-am-i,मैं कहाँ हूँ?,,maiṁ kahāṁ hūṁ?,,,2,hi-agent-v1
+directions.which-way,किधर?,,kidhar?,,,2,hi-agent-v1
+directions.can-i-walk-there,क्या पैदल जाने लायक है?,,kyā paidal jāne lāyak hai?,,is it walkable,2,hi-agent-v1
+directions.how-far-is-it,कितनी दूर है?,,kitnī dūr hai?,,,2,hi-agent-v1
+directions.which-exit,कौन सा गेट?,कौन सा निकास?,kaun sā geṭ?,,,2,hi-agent-v1
+directions.can-you-show-me-the-way,रास्ता दिखा दीजिए,,rāstā dikhā dījie,,,2,hi-agent-v1
+directions.north,उत्तर,,uttar,,,2,hi-agent-v1
+directions.south,दक्षिण,,dakṣiṇ,,,2,hi-agent-v1
+directions.east,पूर्व,,pūrv,,,2,hi-agent-v1
+directions.west,पश्चिम,,paścim,,,2,hi-agent-v1
+quick-directions.go-straight,सीधे चलिए,,sīdhe calie,,,2,hi-agent-v1
+quick-directions.turn-left,बाएँ मुड़िए,,bāeṁ muṛie,,,2,hi-agent-v1
+quick-directions.turn-right,दाएँ मुड़िए,,dāeṁ muṛie,,,2,hi-agent-v1
+quick-directions.this-way,इस तरफ़,,is taraf,,,2,hi-agent-v1
+quick-directions.that-way,उस तरफ़,,us taraf,,,2,hi-agent-v1
+quick-directions.on-the-left,बाईं तरफ़,,bāīṁ taraf,,,2,hi-agent-v1
+quick-directions.on-the-right,दाईं तरफ़,,dāīṁ taraf,,,2,hi-agent-v1
+quick-directions.across-from-here,सड़क के उस पार,,saṛak ke us pār,,across the road,2,hi-agent-v1
+quick-directions.in-front,सामने,,sāmne,,,2,hi-agent-v1
+quick-directions.behind,पीछे,,pīche,,,2,hi-agent-v1
+taxi.please-take-me-here,मुझे यहाँ ले चलिए,,mujhe yahāṁ le calie,,,2,hi-agent-v1
+taxi.please-send-me-the-address,पता भेज दीजिए,,patā bhej dījie,,,2,hi-agent-v1
+taxi.we-need-the-east-gate-not-the-south-gate,"हमें पूर्वी गेट चाहिए, दक्षिणी नहीं",,"hameṁ pūrvī geṭ cāhie, dakṣiṇī nahīṁ",,,2,hi-agent-v1
+taxi.please-stop-here,यहाँ रोक दीजिए,,yahāṁ rok dījie,,,2,hi-agent-v1
+taxi.can-you-wait-for-me-here,ज़रा यहाँ रुक जाइए,,zarā yahāṁ ruk jāie,,,2,hi-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,हमें तेज़ ट्रेन पकड़नी है,,hameṁ tez ṭren pakaṛnī hai,,,2,hi-agent-v1
+taxi.please-use-the-meter,मीटर से चलिए,,mīṭar se calie,,go by the meter,2,hi-agent-v1
+taxi.i-will-get-off-here,मुझे यहाँ उतरना है,,mujhe yahāṁ utarnā hai,,,2,hi-agent-v1
+transit-rides.two-tickets,दो टिकट दीजिए,,do ṭikaṭ dījie,,,2,hi-agent-v1
+transit-rides.where-is-the-subway-station,मेट्रो स्टेशन कहाँ है?,,meṭro sṭeśan kahāṁ hai?,,,2,hi-agent-v1
+transit-rides.does-this-bus-train-go-to,क्या यह {} जाती है?,,kyā yah {} jātī hai?,,,2,hi-agent-v1
+transit-rides.what-is-the-next-stop,अगला स्टॉप कौन सा है?,,aglā sṭop kaun sā hai?,,,2,hi-agent-v1
+transit-rides.please-tell-me-where-to-get-off,"कहाँ उतरना है, बता दीजिए",,"kahāṁ utarnā hai, batā dījie",,,2,hi-agent-v1
+transit-rides.is-this-direct,क्या सीधी जाती है?,,kyā sīdhī jātī hai?,,,2,hi-agent-v1
+transit-rides.do-i-need-to-transfer,क्या गाड़ी बदलनी पड़ेगी?,,kyā gāṛī badalnī paṛegī?,,,2,hi-agent-v1
+transit-rides.is-it-delayed,क्या देर से है?,,kyā der se hai?,,,2,hi-agent-v1
+transit-rides.i-am-in-a-hurry,मुझे जल्दी है,,mujhe jaldī hai,,,2,hi-agent-v1
+transit-rides.which-platform,कौन सा प्लेटफ़ॉर्म?,,kaun sā pleṭform?,,,2,hi-agent-v1
+transit-rides.what-time-is-the-next-one,अगली कितने बजे है?,,aglī kitne baje hai?,,,2,hi-agent-v1
+transit-rides.i-went-past-my-stop,मेरा स्टॉप निकल गया,,merā sṭop nikal gayā,,,2,hi-agent-v1
+transit-rides.can-i-use-this-ticket,क्या यह टिकट चलेगा?,,kyā yah ṭikaṭ calegā?,,,2,hi-agent-v1
+place-words.visitor-center,पर्यटक सूचना केंद्र,,paryaṭak sūcnā keṁdra,,,2,hi-agent-v1
+place-words.railway-station,रेलवे स्टेशन,,relve sṭeśan,,,2,hi-agent-v1
+place-words.airport,हवाई अड्डा,एयरपोर्ट,havāī aḍḍā,,,2,hi-agent-v1
+place-words.service-desk,पूछताछ,सूचना केंद्र,pūchtāch,,enquiry counter,2,hi-agent-v1
+place-words.bus-stop,बस स्टॉप,बस अड्डा,bas sṭop,,,2,hi-agent-v1
+place-words.luggage-storage,क्लॉक रूम,अमानती सामान घर,klok rūm,,,2,hi-agent-v1
+place-words.tourist-spot-sightseeing-area,पर्यटन स्थल,,paryaṭan sthal,,,2,hi-agent-v1
+border-customs.i-am-a-tourist,मैं पर्यटक हूँ,,maiṁ paryaṭak hūṁ,,,2,hi-agent-v1
+border-customs.here-is-my-passport,यह मेरा पासपोर्ट है,,yah merā pāsporṭ hai,,,2,hi-agent-v1
+border-customs.i-am-staying-for-days,मुझे {} दिन रुकना है,,mujhe {} din ruknā hai,,,2,hi-agent-v1
+border-customs.nothing-to-declare,कुछ घोषित करने को नहीं,,kuch ghoṣit karne ko nahīṁ,,,2,hi-agent-v1
+border-customs.i-am-staying-at,मुझे {} में रुकना है,,mujhe {} meṁ ruknā hai,,,2,hi-agent-v1
+border-customs.i-am-here-for-business,मैं काम से आया हूँ,मैं काम से आई हूँ,maiṁ kām se āyā hūṁ,,,2,hi-agent-v1
+border-customs.i-have-a-return-ticket,मेरे पास वापसी का टिकट है,,mere pās vāpasī kā ṭikaṭ hai,,,2,hi-agent-v1
+border-customs.i-am-visiting-family,मैं परिवार से मिलने आया हूँ,मैं परिवार से मिलने आई हूँ,maiṁ parivār se milne āyā hūṁ,,,2,hi-agent-v1
+border-customs.this-is-for-personal-use,यह मेरे इस्तेमाल के लिए है,,yah mere istemāl ke lie hai,,,2,hi-agent-v1
+border-customs.i-am-in-transit,मैं ट्रांज़िट में हूँ,,maiṁ ṭrāṁzit meṁ hūṁ,,,2,hi-agent-v1
+border-customs.i-have-in-cash,मेरे पास {} नकद हैं,,mere pās {} nakad haiṁ,,,2,hi-agent-v1
+border-customs.this-is-a-gift,यह उपहार है,यह गिफ़्ट है,yah uphār hai,,,2,hi-agent-v1
+border-customs.where-do-i-collect-my-baggage,सामान कहाँ मिलेगा?,,sāmān kahāṁ milegā?,,,2,hi-agent-v1
+border-customs.how-long-may-i-stay,कितने दिन रुकने की इजाज़त है?,,kitne din rukne kī ijāzat hai?,,,2,hi-agent-v1
+border-customs.i-have-a-connecting-flight,मेरी आगे की फ़्लाइट है,कनेक्टिंग फ़्लाइट,merī āge kī flāiṭ hai,,,2,hi-agent-v1
+border-customs.may-i-have-an-entry-stamp,क्या प्रवेश की मुहर मिल सकती है?,,kyā praveś kī muhar mil saktī hai?,,,2,hi-agent-v1
+border-customs.visa,वीज़ा,,vīzā,,,2,hi-agent-v1
+border-customs.i-have-no-food-or-plants,मेरे पास खाना या पौधे नहीं हैं,,mere pās khānā yā paudhe nahīṁ haiṁ,,,2,hi-agent-v1
+border-customs.passport-control,पासपोर्ट जाँच,आप्रवासन,pāsporṭ jāṁc,,,2,hi-agent-v1
+border-customs.customs,सीमा शुल्क,,sīmā śulk,,,2,hi-agent-v1
+border-customs.baggage-claim,सामान प्राप्ति,बैगेज क्लेम,sāmān prāpti,,,2,hi-agent-v1
+border-customs.customs-declaration,सीमा शुल्क घोषणा,,sīmā śulk ghoṣṇā,,,2,hi-agent-v1
+border-customs.arrival-card,आगमन पत्र,,āgman patra,,,1,hi-agent-v1
+border-customs.transit,ट्रांज़िट,,ṭrāṁzit,,,2,hi-agent-v1
+border-customs.boarding-pass,बोर्डिंग पास,,borḍiṁg pās,,,2,hi-agent-v1
+pickup-meeting.where-is-the-pickup-point,पिकअप पॉइंट कहाँ है?,,pikap poinṭ kahāṁ hai?,,,2,hi-agent-v1
+pickup-meeting.please-send-me-the-pickup-point,पिकअप पॉइंट भेज दीजिए,,pikap poinṭ bhej dījie,,,2,hi-agent-v1
+pickup-meeting.please-pick-us-up-here,हमें यहाँ से ले लीजिए,,hameṁ yahāṁ se le lījie,,,2,hi-agent-v1
+pickup-meeting.meet-us-at,हमें {} पर मिलिए,,hameṁ {} par milie,,,2,hi-agent-v1
+pickup-meeting.please-call-me-a-ride,मेरे लिए कैब बुला दीजिए,ओला या उबर बुला दीजिए,mere lie kaib bulā dījie,,,2,hi-agent-v1
+pickup-meeting.please-call-a-taxi,टैक्सी बुला दीजिए,ऑटो बुला दीजिए,ṭaiksī bulā dījie,,,2,hi-agent-v1
+rail-station-words.high-speed-rail,तेज़ ट्रेन,वंदे भारत,tez ṭren,,fast train,2,hi-agent-v1
+rail-station-words.transfer,गाड़ी बदलना,,gāṛī badalnā,,change trains,2,hi-agent-v1
+rail-station-words.ticket-gate,टिकट गेट,प्रवेश द्वार,ṭikaṭ geṭ,,,2,hi-agent-v1
+rail-station-words.platform,प्लेटफ़ॉर्म,,pleṭform,,,2,hi-agent-v1
+rail-station-words.ticket-office,टिकट घर,आरक्षण केंद्र,ṭikaṭ ghar,,reservation office,2,hi-agent-v1
+rail-station-words.waiting-room,प्रतीक्षालय,,pratīkṣālay,,,2,hi-agent-v1
+rail-station-words.train-number,गाड़ी संख्या,,gāṛī saṁkhyā,,,2,hi-agent-v1
+rail-station-words.carriage,डिब्बा,सामान्य डिब्बा,ḍibbā,,coach; general coach,2,hi-agent-v1
+rail-station-words.seat,सीट,बर्थ,sīṭ,,,2,hi-agent-v1
+rail-station-words.last-train,आखिरी ट्रेन,,ākhirī ṭren,,,2,hi-agent-v1
+rail-station-words.delayed,देरी से,लेट,derī se,,,2,hi-agent-v1
+rail-station-words.final-stop,आखिरी स्टेशन,,ākhirī sṭeśan,,,2,hi-agent-v1
+common-signs.open-on,चालू,,cālū,,on / running,2,hi-agent-v1
+common-signs.closed-off,बंद,,baṁd,,,2,hi-agent-v1
+common-signs.occupied,भरा है,व्यस्त,bharā hai,,,1,hi-agent-v1
+common-signs.vacant,खाली,,khālī,,,2,hi-agent-v1
+common-signs.caution,सावधान,,sāvdhān,,,2,hi-agent-v1
+common-signs.no-entry,प्रवेश निषेध,,praveś niṣedh,,,2,hi-agent-v1
+common-signs.no-smoking,धूम्रपान निषेध,,dhūmrapān niṣedh,,,2,hi-agent-v1
+common-signs.no-photography,फ़ोटो लेना मना है,फ़ोटोग्राफ़ी निषेध,foṭo lenā manā hai,,,2,hi-agent-v1
+common-signs.do-not-touch,छूना मना है,कृपया स्पर्श न करें,chūnā manā hai,,,2,hi-agent-v1
+common-signs.temporarily-closed,फ़िलहाल बंद,अस्थायी रूप से बंद,filhāl baṁd,,closed for now,2,hi-agent-v1
+common-signs.open-operating,खुला है,,khulā hai,,,2,hi-agent-v1
+common-signs.closed,बंद है,,baṁd hai,,,2,hi-agent-v1
+common-signs.stopped-stop,रुकिए,रुका हुआ,rukie,,stop / stopped,2,hi-agent-v1
+transit-rides.do-i-need-to-validate,क्या टिकट पंच कराना पड़ेगा?,,kyā ṭikaṭ paṁc karānā paṛegā?,,must it be punched,1,hi-agent-v1
+rail-station-words.ticket-validator,टिकट पंच मशीन,,ṭikaṭ paṁc maśīn,,punching machine,1,hi-agent-v1

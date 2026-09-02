@@ -8,5 +8,5 @@ Cyrl,Cyrillic,ltr,0,1.02,4.4,space,latin
 Grek,Greek,ltr,0,1.02,4.4,space,latin
 Arab,Arabic,rtl,1,1.30,5.4,space,arabic
 Hebr,Hebrew,rtl,1,1.20,5.0,space,arabic
-Deva,Devanagari,ltr,1,1.35,5.4,space,latin
+Deva,Devanagari,ltr,1,1.35,5.4,space,deva
 Thai,Thai,ltr,1,1.40,5.4,dict,thai

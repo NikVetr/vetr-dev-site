@@ -19,8 +19,10 @@ food-ordering.i-want-this,Saya mau ini,,,,2,id-agent-v1
 food-ordering.do-you-have-drinking-water,Ada air putih?,,,air putih = plain drinking water,2,id-agent-v1
 food-ordering.to-go-please,"Dibungkus, ya",,,,2,id-agent-v1
 food-ordering.check-please,Minta bonnya,Minta struknya,,,2,id-agent-v1
-food-ordering.does-it-contain,Ini pakai {}?,Ini mengandung {}?,,,2,id-agent-v1
+food-ordering.does-it-contain,Ini pakai {}?,Ini mengandung {}?,,"try: babi, angciu, terasi",2,id-agent-v1
 food-ordering.is-this-vegetarian,Ini vegetarian?,,,,2,id-agent-v1
 food-ordering.what-do-you-recommend,Apa yang enak di sini?,,,,2,id-agent-v1
 food-ordering.water-please,Minta air putih,,,,2,id-agent-v1
 food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau terasi?",,,,2,id-agent-v1
+dietary-needs.no-pork,Tanpa babi,Tanpa babi dan lemak babi,,lemak babi = lard,2,id-gaps-v1
+dietary-needs.is-this-halal,Ini halal?,Ada sertifikat halal?,,logo: BPJPH (was MUI),2,id-gaps-v1

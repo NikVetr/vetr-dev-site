@@ -24,3 +24,5 @@ food-ordering.water-please,お水をお願いします,,omizu o onegaishimasu,,,
 dietary-needs.does-it-contain-fish-stock,魚のだしは入っていますか？,,sakana no dashi wa haitteimasu ka?,,,2,japanese-reviewed-v6
 food-ordering.can-a-vegetarian-eat-this,これはベジタリアンでも食べられますか？,,kore wa bejitarian demo taberaremasu ka?,,,2,japanese-reviewed-v6
 dietary-needs.i-have-a-severe-allergy-to,{}に重いアレルギーがあります,,{} ni omoi arerugī ga arimasu,,,2,japanese-reviewed-v6
+dietary-needs.no-pork,豚肉なしでお願いします,豚由来のものはすべてなしでお願いします,butaniku nashi de onegaishimasu,,,2,ja-gaps-v1
+dietary-needs.is-this-halal,これはハラールですか？,ハラール認証はありますか？,kore wa harāru desu ka?,,,2,ja-gaps-v1

@@ -1,0 +1,32 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,कार्ड चलेगा?,,kārḍ calegā?,,,2,hi-agent-v1
+payment-receipt.pay-cash,नकद ठीक है?,,nakad ṭhīk hai?,,,2,hi-agent-v1
+payment-receipt.pay-by-qr-code,क्यूआर कोड चलेगा?,यूपीआई चलेगा?,kyūār koḍ calegā?,,,2,hi-agent-v1
+payment-receipt.a-receipt-please,रसीद दीजिए,,rasīd dījie,,,2,hi-agent-v1
+payment-receipt.please-write-the-number,नंबर लिख दीजिए,,naṁbar likh dījie,,,2,hi-agent-v1
+payment-receipt.how-much-in-total,कुल कितना हुआ?,,kul kitnā huā?,,,2,hi-agent-v1
+payment-receipt.can-we-pay-separately,क्या अलग-अलग बिल हो सकता है?,,kyā alag-alag bil ho saktā hai?,,,2,hi-agent-v1
+payment-receipt.is-tax-included,क्या टैक्स शामिल है?,,kyā ṭaiks śāmil hai?,,,2,hi-agent-v1
+payment-receipt.my-card-was-declined,मेरा कार्ड नहीं चला,,merā kārḍ nahīṁ calā,,,2,hi-agent-v1
+payment-receipt.the-bill-is-wrong,लगता है बिल में गलती है,,lagtā hai bil meṁ galtī hai,,,2,hi-agent-v1
+payment-receipt.i-already-paid,मैंने पैसे दे दिए हैं,,maiṁne paise de die haiṁ,,,2,hi-agent-v1
+shopping.i-am-just-looking,बस देखना है,,bas dekhnā hai,,,2,hi-agent-v1
+shopping.how-much-is-this,यह कितने का है?,,yah kitne kā hai?,,,2,hi-agent-v1
+shopping.that-is-too-expensive,यह बहुत महंगा है,,yah bahut mahaṁgā hai,,,2,hi-agent-v1
+shopping.can-it-be-a-little-cheaper,थोड़ा कम हो जाएगा?,,thoṛā kam ho jāegā?,,,2,hi-agent-v1
+shopping.is-there-a-discount,कोई छूट है?,,koī chūṭ hai?,,,2,hi-agent-v1
+shopping.where-do-i-pay,पैसे कहाँ देने हैं?,,paise kahāṁ dene haiṁ?,,,2,hi-agent-v1
+shopping.i-will-take-this,मुझे यही लेना है,,mujhe yahī lenā hai,,,2,hi-agent-v1
+shopping.what-is-this,यह क्या है?,,yah kyā hai?,,,2,hi-agent-v1
+shopping.where-can-i-buy,{} कहाँ मिलेगा?,,{} kahāṁ milegā?,,,2,hi-agent-v1
+shopping.do-you-have-this-in-stock,क्या यह स्टॉक में है?,,kyā yah sṭok meṁ hai?,,,2,hi-agent-v1
+shopping.two-of-these,ये दो दीजिए,,ye do dījie,,,2,hi-agent-v1
+shopping.what-is-it-made-of,यह किस चीज़ का बना है?,,yah kis cīz kā banā hai?,,,2,hi-agent-v1
+color-size-returns.do-you-have-another-color,क्या दूसरा रंग है?,,kyā dūsrā raṁg hai?,,,2,hi-agent-v1
+color-size-returns.do-you-have-another-size,क्या दूसरा साइज़ है?,,kyā dūsrā sāiz hai?,,,2,hi-agent-v1
+color-size-returns.may-i-try-it-on,क्या इसे पहन कर देख लूँ?,,kyā ise pahan kar dekh lūṁ?,,,2,hi-agent-v1
+color-size-returns.can-i-return-it,क्या यह वापस हो सकता है?,,kyā yah vāpas ho saktā hai?,,,2,hi-agent-v1
+color-size-returns.can-i-exchange-it,क्या यह बदला जा सकता है?,,kyā yah badlā jā saktā hai?,,,2,hi-agent-v1
+color-size-returns.do-you-have-a-bag,क्या थैली मिलेगी?,क्या बैग है?,kyā thailī milegī?,,,2,hi-agent-v1
+tax-refund.can-i-get-a-tax-refund,क्या टैक्स वापस मिलेगा?,,kyā ṭaiks vāpas milegā?,,,2,hi-agent-v1
+tax-refund.is-tax-free-shopping-available,क्या टैक्स-फ़्री खरीदारी होती है?,,kyā ṭaiks-frī kharīdārī hotī hai?,,,2,hi-agent-v1

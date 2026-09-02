@@ -1,0 +1,746 @@
+concept_id,respell
+building-help.what-room-number-is-this,CHOOM-bah HEE-kee nee NAHM-bah ng-GAH-pee?
+accessibility.step-free,jeh KOO-nah n-JEE-ah ee-SEE-yoh nah ng-GAH-zee?
+in-a-building.is-this-the-correct-entrance,hoo nee m-LAHN-goh sah-HEE-hee?
+toilets.where-toilet,choh KEE-koh WAH-pee?
+building-words.elevator,LEEF-tee
+pronouns-verbs.i-me,MEE-mee
+question-words.what,NEE-nee
+emergency-medical.help,m-sah-AH-dah!
+medical-conditions.i-am-diabetic,NEE-nah kee-soo-KAH-ree
+pharmacy-symptoms.which-pharmacy-is-open-now,DOO-kah GAH-nee lah DAH-wah LEE-koh WAH-zee SAH-sah?
+body-parts.head,KEECH-wah
+lost-rescue.i-lost-my-passport,nee-meh-poh-TEH-zah pah-see-POH-tee YAHN-goo
+police-consulate.where-is-the-police-station,kee-TOO-oh chah poh-LEE-see KEE-koh WAH-pee?
+dietary-needs.no-meat,BEE-lah NYAH-mah
+food-ordering.table-for-two,MEH-zah yah WAH-too wah-WEE-lee
+trail-words.trail,n-JEE-ah
+weather.forecast,HAH-lee yah HEH-wah ee-tah-koo-WAH-jeh?
+hiking-parks.is-this-the-way-to,hee nee n-JEE-ah yah KWEHN-dah {}?
+trail-conditions.how-long-is-the-full-route,n-JEE-ah YOH-teh nee oo-REH-foo GAH-nee?
+trail-transport.how-long-is-the-queue,foh-LEH-nee nee n-DEH-foo kee-AH-see GAH-nee?
+trail-warnings.open,WAH-zee
+trail-landmarks.trail-marker,ah-LAH-mah yah n-JEE-ah
+hotel-words.passport,pah-see-POH-tee
+hotel-basics.are-any-rooms-available,jeh KOO-nah CHOOM-bah?
+hotel-requests.can-i-check-out-later,nah-WEH-zah koo-ohn-DOH-kah bah-ah-DAH-yeh?
+room-problems.there-is-a-problem-with-the-room,KOO-nah tah-TEE-zoh nah CHOOM-bah
+laundry.please-wash-these-clothes,tah-fah-THAH-lee FOO-ah ng-GOO-oh HEE-zee
+introductions.my-name-is,JEE-nah LAHN-goo nee {}
+numbers-money.l-ng,SEE-foo-ree
+atm-cash.where-is-an-atm,ay-tee-EHM EE-koh WAH-pee?
+attractions-tickets.where-can-i-buy-tickets,nah-WEH-zah koo-noo-NOO-ah tee-KEH-tee WAH-pee?
+payment-receipt.pay-by-card,koo-LEE-pah kwah KAH-dee?
+shopping.i-am-just-looking,nah-ahn-gah-LEE-ah too
+color-size-returns.do-you-have-another-color,jeh m-NAH RAHN-ghee nyeen-GHEE-neh?
+tax-refund.can-i-get-a-tax-refund,nah-WEH-zah koo-roo-dee-SHEE-wah KOH-dee?
+social-basics.hello,hah-BAH-ree
+communication.i-do-not-speak-this-language,see-SEH-mee LOO-gah hee
+quick-responses.please-go-ahead,tah-fah-THAH-lee
+phone-translation.i-am-using-phone-translation,nah-too-MEE-ah tahf-SEE-ree yah SEE-moo
+phone-text-power.please-type-it-for-me,tah-fah-THAH-lee nee-ahn-dee-KEE-eh
+sim-data.i-would-like-a-tourist-sim,nah-OHM-bah seem-KAH-dee yah wah-tah-LEE-ee
+etiquette.is-this-allowed,jeh hee ee-nah-roo-hoo-SEE-wah?
+children.cannot-find-my-child,see-moo-OH-nee m-TOH-toh WAHN-goo!
+time-scheduling.what-time-is-it,sah ng-GAH-pee?
+time-words.today,LEH-oh
+days-of-week.monday,joo-mah-TAH-too
+months.january,jah-noo-AH-ree
+directions.where-is,{} nee WAH-pee?
+quick-directions.go-straight,NEHN-dah MOH-jah kwah MOH-jah
+taxi.please-take-me-here,tah-fah-THAH-lee nee-peh-LEH-keh HAH-pah
+transit-rides.two-tickets,tee-KEH-tee m-BEE-lee
+border-customs.i-am-a-tourist,MEE-mee nee m-tah-LEE-ee
+pickup-meeting.where-is-the-pickup-point,seh-HEH-moo yah koo-choo-koo-LEE-wah nee WAH-pee?
+rail-station-words.high-speed-rail,TREH-nee yah ehs-jee-AHR
+common-signs.open-on,WAH-zee
+utility-templates.i-want-to-go-to,nah-TAH-kah KWEHN-dah {}
+building-help.i-am-lost,nee-meh-poh-TEH-ah
+accessibility.wheelchair-access,jeh ee-nah-pee-TEE-kah kwah KEE-tee chah mah-goo-roo-DOO-moo?
+toilets.where-public-toilet,choh chah OOM-mah KEE-koh WAH-pee?
+building-words.stairs,ng-GAH-zee
+pronouns-verbs.we-us,SEE-see
+question-words.where,WAH-pee
+emergency-medical.please-call-an-ambulance,tah-fah-THAH-lee PEE-gah SEE-moo ahm-boo-LEHN-see
+medical-conditions.i-need-insulin,nah-hee-TAH-jee een-soo-LEE-nee
+pharmacy-symptoms.i-need-medicine-for,nah-hee-TAH-jee DAH-wah yah {}
+body-parts.stomach,TOOM-boh
+lost-rescue.i-lost-my-phone,nee-meh-poh-TEH-zah SEE-moo YAHN-goo
+police-consulate.i-want-to-report-a-theft,nah-TAH-kah koo-TOH-ah tah-ah-REE-fah yah WEE-zee
+dietary-needs.no-eggs,BEE-lah mah-YAH-ee
+food-ordering.is-a-table-available,jeh KOO-nah MEH-zah?
+trail-words.trailhead,mwahn-ZOH wah n-JEE-ah
+weather.will-it-rain,jeh m-VOO-ah ee-tah-NYEH-shah LEH-oh?
+hiking-parks.where-is-the-trailhead,mwahn-ZOH wah n-JEE-ah nee WAH-pee?
+trail-conditions.can-we-return-the-same-way,too-nah-WEH-zah koo-ROO-dee n-JEE-ah hee?
+trail-transport.what-time-is-the-last-shuttle,BAH-see lah MWEE-shoh nee sah ng-GAH-pee?
+trail-warnings.closed,ee-meh-FOON-gwah
+trail-landmarks.fork-junction,n-JEE-ah PAHN-dah
+hotel-words.room-key-card,KAH-dee yah CHOOM-bah
+hotel-basics.there-are-two-of-us,TOO-koh wah-WEE-lee
+hotel-requests.what-time-does-breakfast-start,kee-foon-GOO-ah KEE-nywah hoo-AHN-zah sah ng-GAH-pee?
+room-problems.the-air-conditioning-is-broken,kee-yoh-YOH-zee kee-meh-hah-ree-BEE-kah
+laundry.where-is-a-laundromat,DOH-bee EE-koh WAH-pee?
+introductions.nice-to-meet-you,nee-meh-foo-RAH-hee koo-koo-TAH-nah NAH-weh
+numbers-money.y,MOH-jah
+atm-cash.does-this-atm-take-foreign-cards,jeh ay-tee-EHM hee ee-nah-koo-BAH-lee KAH-dee zah n-JEH?
+attractions-tickets.do-i-need-a-reservation,nah-hee-TAH-jee koo-WEH-kah nah-FAH-see?
+payment-receipt.pay-cash,koo-LEE-pah kwah FEH-thah tahs-LEE-moo?
+shopping.how-much-is-this,hee nee BEH-ee GAH-nee?
+color-size-returns.do-you-have-another-size,jeh m-NAH sah-EE-zee nyeen-GHEE-neh?
+social-basics.hello-polite,shee-kah-MOH
+communication.i-speak-only-a-little-of-this,nah-SEH-mah kee-swah-HEE-lee kee-DOH-goh too
+quick-responses.yes-right,n-DEE-yoh
+phone-translation.please-speak-toward-the-phone,tah-fah-THAH-lee SEH-mah KWEH-nyeh SEE-moo
+phone-translation.please-write-the-place-name,tah-fah-THAH-lee ahn-DEE-kah JEE-nah lah mah-HAH-lee HAH-pah
+sim-data.may-i-use-your-wifi,nah-OHM-bah koo-too-MEE-ah wai-fai YAH-koh?
+etiquette.is-tipping-expected,jeh bahk-SHEE-shee ee-nah-tah-rah-JEE-wah?
+children.make-an-announcement,tah-fah-THAH-lee tahn-GAH-zah kwah SPEE-kah
+time-scheduling.how-many-minutes,dah-KEE-kah ng-GAH-pee?
+time-words.tomorrow,KEH-shoh
+days-of-week.tuesday,joo-MAHN-neh
+months.february,feh-broo-AH-ree
+directions.how-do-i-get-to,nee-fee-KAH-jeh {}?
+quick-directions.turn-left,gheh-OO-kah koo-SHOH-toh
+taxi.please-send-me-the-address,tah-fah-THAH-lee nee-too-MEE-eh ahn-WAH-nee
+transit-rides.where-is-the-subway-station,kee-TOO-oh chah TREH-nee nee WAH-pee?
+place-words.visitor-center,kee-TOO-oh chah wah-GHEH-nee
+border-customs.here-is-my-passport,hee nee pah-see-POH-tee YAHN-goo
+pickup-meeting.please-send-me-the-pickup-point,tah-fah-THAH-lee nee-too-MEE-eh seh-HEH-moo yah koo-choo-koo-LEE-wah
+common-signs.closed-off,ee-meh-FOON-gwah
+utility-templates.please-give-me,nah-OHM-bah {}
+building-help.where-is-reception,mah-poh-KEH-zee nee WAH-pee?
+accessibility.elevator,jeh KOO-nah LEEF-tee?
+in-a-building.do-you-have-wi-fi,jeh m-NAH wai-fai?
+toilets.may-i-use-the-toilet,nah-OHM-bah nee-too-MEE-eh choh
+building-words.entrance,koo-een-GHEE-ah
+pronouns-verbs.you,WEH-weh
+question-words.who,NAH-nee
+emergency-medical.i-need-a-doctor,nah-hee-TAH-jee dahk-TAH-ree
+medical-conditions.i-have-asthma,NEE-nah POO-moo
+pharmacy-symptoms.i-have-a-fever,NEE-nah HOH-mah
+body-parts.back,m-GOHN-goh
+lost-rescue.please-call-the-police,tah-fah-THAH-lee PEE-gah SEE-moo poh-LEE-see
+police-consulate.my-bag-was-stolen,m-KOH-bah WAHN-goo oo-meh-ee-BEE-wah
+dietary-needs.not-spicy,BEE-lah pee-lee-PEE-lee
+food-ordering.menu-please,"MEH-nyoo, tah-fah-THAH-lee"
+trail-words.summit,kee-LEH-leh
+weather.is-it-safe-today,jeh nee sah-LAH-mah LEH-oh?
+hiking-parks.how-long-to-the-summit,nee MOO-dah GAH-nee HAH-dee kee-leh-LEH-nee?
+trail-conditions.can-we-return-before-dark,too-nah-WEH-zah koo-ROO-dee KAHB-lah yah GHEE-zah?
+trail-transport.when-does-the-cableway-stop,GAH-ree lah KEH-boh lee-nah-see-MAH-mah sah ng-GAH-pee?
+trail-warnings.maintenance,mah-reh-keh-BEE-shoh
+trail-landmarks.boardwalk-cliff-path,n-JEE-ah yah m-BAH-oh
+hotel-words.check-in,koo-een-GHEE-ah
+hotel-basics.i-have-a-reservation,nee-meh-WEH-kah nah-FAH-see
+hotel-requests.can-i-store-my-luggage,nah-WEH-zah koo-WEH-kah mee-ZEE-goh YAHN-goo?
+room-problems.there-is-no-hot-water,hah-KOO-nah MAH-jee yah MOH-toh
+laundry.when-will-it-be-ready,ee-tah-KOO-wah tah-YAH-ree LEE-nee?
+introductions.what-is-your-name,JEE-nah LAH-koh nee NAH-nee?
+numbers-money.r,m-BEE-lee
+atm-cash.the-atm-kept-my-card,ay-tee-EHM ee-meh-MEH-zah KAH-dee YAHN-goo
+attractions-tickets.what-is-the-latest-entry-time,koo-een-GHEE-ah kwah MWEE-shoh nee sah ng-GAH-pee?
+payment-receipt.pay-by-qr-code,koo-LEE-pah kwah kyoo-AHR?
+shopping.that-is-too-expensive,nee GAH-lee m-NOH
+color-size-returns.may-i-try-it-on,nah-OHM-bah nee-jah-REE-boo?
+social-basics.good-morning,hah-BAH-ree zah ah-soo-BOO-hee
+communication.do-you-speak-english,oo-nah-SEH-mah kee-een-gheh-REH-zah?
+quick-responses.no-not,hah-PAH-nah
+phone-translation.one-sentence-at-a-time-please,"sehn-TEHN-see MOH-jah kwah wah-KAH-tee, tah-fah-THAH-lee"
+phone-text-power.please-use-simple-words,tah-fah-THAH-lee too-MEE-ah mah-NEH-noh rah-HEE-see
+sim-data.how-much-data-is-included,KOO-nah DAH-tah kee-AH-see GAH-nee?
+etiquette.is-service-included,jeh hoo-DOO-mah EE-moh?
+children.child-age,m-TOH-toh WAHN-goo AH-nah mee-AH-kah {}
+time-scheduling.what-time-should-we-meet,too-koo-TAH-neh sah ng-GAH-pee?
+time-words.yesterday,JAH-nah
+days-of-week.wednesday,joo-mah-TAH-noh
+months.march,MAH-chee
+directions.is-it-far,nee m-BAH-lee?
+quick-directions.turn-right,gheh-OO-kah koo-LEE-ah
+taxi.we-need-the-east-gate-not-the-south-gate,"too-nah-hee-TAH-jee LAHN-goh lah mah-shah-REE-kee, SEE-oh lah koo-SEE-nee"
+transit-rides.does-this-bus-train-go-to,jeh hee ee-nah-KWEHN-dah {}?
+place-words.railway-station,steh-SHEH-nee yah TREH-nee
+border-customs.i-am-staying-for-days,nah-KAH SEE-koo {}
+pickup-meeting.please-pick-us-up-here,tah-fah-THAH-lee too-choo-KOO-eh HAH-pah
+rail-station-words.transfer,koo-bah-dee-LEE-shah GAH-ree
+common-signs.occupied,ee-nah-too-MEE-kah
+utility-templates.may-i,jeh nah-WEH-zah {}?
+building-help.where-is-a-power-outlet,soh-KEH-tee yah oo-MEH-meh EE-koh WAH-pee?
+accessibility.ramp,jeh KOO-nah n-JEE-ah yah m-teh-REHM-koh?
+in-a-building.what-is-the-wi-fi-password,neh-noh-SEE-ree lah wai-fai nee NEE-nee?
+toilets.is-it-only-for-customers,nee kwah wah-TEH-jah too?
+building-words.exit,koo-TOH-kah
+pronouns-verbs.you-polite,NEE-nyee
+question-words.which-one,GAH-nee
+emergency-medical.i-am-sick,MEE-mee nee m-GOHN-jwah
+medical-conditions.i-have-a-heart-condition,NEE-nah oo-GOHN-jwah wah MOH-yoh
+pharmacy-symptoms.i-have-diarrhea,NEE-nah koo-HAH-rah
+body-parts.throat,koh
+lost-rescue.we-are-here,TOO-koh HAH-pah
+police-consulate.my-passport-was-stolen,pah-see-POH-tee YAHN-goo ee-meh-ee-BEE-wah
+dietary-needs.less-spicy,pee-lee-PEE-lee kee-DOH-goh
+food-ordering.i-want-this,nah-TAH-kah hee
+trail-words.viewpoint,mah-HAH-lee pah koo-tah-ZAH-mah
+weather.how-cold-at-night,oo-SEE-koo nee BAH-ree-dee kee-AH-see GAH-nee?
+hiking-parks.how-long-to-the-viewpoint,nee MOO-dah GAH-nee HAH-dee mah-HAH-lee pah koo-tah-ZAH-mah?
+trail-conditions.is-the-trail-open,jeh n-JEE-ah EE-koh WAH-zee?
+trail-transport.where-can-we-buy-water,too-nah-WEH-zah koo-noo-NOO-ah MAH-jee WAH-pee?
+trail-warnings.steep-slope,m-teh-REHM-koh m-KAH-lee
+trail-landmarks.start,mwahn-ZOH
+hotel-words.check-out,koo-ohn-DOH-kah
+hotel-basics.can-i-charge-my-phone,nah-WEH-zah koo-CHAH-jee SEE-moo YAHN-goo?
+hotel-requests.no-housekeeping,m-see-sah-FEE-sheh CHOOM-bah
+room-problems.can-i-change-rooms,nah-WEH-zah koo-bah-dee-LEE-shah CHOOM-bah?
+laundry.how-much-per-kilo,nee BEH-ee GAH-nee kwah KEE-loh?
+introductions.we-are-traveling-together,too-nah-sah-FEE-ree pah-MOH-jah
+atm-cash.is-there-a-fee,jeh KOO-nah gah-RAH-mah?
+attractions-tickets.are-there-lockers,jeh KOO-nah mah-kah-BAH-tee yah mee-ZEE-goh?
+payment-receipt.a-receipt-please,"ree-SEE-tee, tah-fah-THAH-lee"
+shopping.can-it-be-a-little-cheaper,poon-GOO-zah kee-DOH-goh?
+color-size-returns.can-i-return-it,nah-WEH-zah koo-roo-DEE-shah?
+social-basics.good-evening,hah-BAH-ree zah jee-OH-nee
+communication.please-speak-more-slowly,tah-fah-THAH-lee SEH-mah poh-leh-POH-leh
+quick-responses.okay-can,SAH-wah
+phone-text-power.my-phone-battery-is-low,BEH-tree yah SEE-moo YAHN-goo ee-nah-EE-shah
+sim-data.do-you-need-my-passport,jeh oo-nah-hee-TAH-jee pah-see-POH-tee YAHN-goo?
+etiquette.may-i-enter,HOH-dee?
+children.high-chair,jeh m-NAH KEE-tee chah JOO chah m-TOH-toh?
+time-scheduling.can-we-change-the-time,too-nah-WEH-zah koo-bah-dee-LEE-shah MOO-dah?
+time-words.this-week,WEE-kee hee
+days-of-week.thursday,ahl-hah-MEE-see
+months.april,ah-PREE-lee
+directions.how-long-on-foot,nee MOO-dah GAH-nee kwah mee-GOO?
+quick-directions.this-way,n-JEE-ah hee
+taxi.please-stop-here,tah-fah-THAH-lee see-MAH-mah HAH-pah
+transit-rides.what-is-the-next-stop,kee-TOO-oh kee-JAH-choh nee KEE-pee?
+place-words.airport,oo-WAHN-jah wah n-DEH-gheh
+border-customs.nothing-to-declare,SEE-nah KEE-too chah koo-tahn-GAH-zah
+pickup-meeting.meet-us-at,too-koo-TAH-neh {}
+rail-station-words.ticket-gate,LAHN-goh lah tee-KEH-tee
+common-signs.vacant,EE-koh WAH-zee
+utility-templates.please-do-not-add,tah-fah-THAH-lee oo-see-WEH-keh {}
+accessibility.how-many-steps,KOO-nah ng-GAH-zee ng-GAH-pee?
+in-a-building.which-floor,goh-ROH-fah yah ng-GAH-pee?
+toilets.toilet-wc,choh
+building-words.men,wah-nah-OO-meh
+pronouns-verbs.he-him,YEH-yeh
+question-words.when,LEE-nee
+emergency-medical.i-am-injured,nee-meh-jeh-roo-HEE-wah
+medical-conditions.i-am-allergic-to-penicillin,NEE-nah m-ZEE-oh wah peh-nee-see-LEE-nee
+pharmacy-symptoms.where-is-an-all-night-pharmacy,DOO-kah lah DAH-wah lah oo-SEE-koo LEE-koh WAH-pee?
+body-parts.tooth,JEE-noh
+lost-rescue.please-look-at-my-location-pin,tah-fah-THAH-lee tah-ZAH-mah ah-LAH-mah yah eh-NEH-oh LAHN-goo
+police-consulate.someone-is-following-me,m-TOO ah-nah-nee-foo-AH-tah
+dietary-needs.no-peanuts,BEE-lah kah-RAHN-gah
+food-ordering.do-you-have-drinking-water,jeh m-NAH MAH-jee yah KOO-nywah?
+trail-words.cableway,GAH-ree lah KEH-boh
+weather.rain,m-VOO-ah
+hiking-parks.which-route-is-easier,n-JEE-ah EE-pee nee rah-HEE-see?
+trail-conditions.is-the-route-steep,jeh n-JEE-ah ee-nah-PAHN-dah SAH-nah?
+trail-transport.where-can-we-refill-water,too-nah-WEH-zah koo-JAH-zah MAH-jee WAH-pee?
+trail-warnings.caution-slippery,tah-hah-THAH-ree: ee-nah-teh-LEH-zah
+trail-landmarks.end,MWEE-shoh
+hotel-basics.i-would-like-a-non-smoking-room,nah-OHM-bah CHOOM-bah BEE-lah see-GAH-rah
+room-problems.the-room-is-too-noisy,CHOOM-bah KEE-nah keh-LEH-leh NYEEN-ghee
+laundry.can-it-be-ready-today,ee-nah-WEH-zah KOO-wah tah-YAH-ree LEH-oh?
+introductions.this-is-my-friend,HOO-yoo nee rah-FEE-kee YAHN-goo
+numbers-money.s-n,TAH-too
+atm-cash.the-card-was-declined,KAH-dee ee-meh-kah-tah-LEE-wah
+attractions-tickets.may-i-take-photos,nah-OHM-bah nee-PEE-gheh PEE-chah?
+color-size-returns.can-i-exchange-it,nah-WEH-zah koo-bah-dee-LEE-shah?
+social-basics.goodbye,kwah-HEH-ree
+communication.i-do-not-understand-spoken,see-eh-LEH-wee
+quick-responses.cannot-not-allowed,hah-ee-roo-hoo-SEE-wee
+phone-text-power.do-you-have-a-power-bank,jeh m-NAH POW-er bahnk?
+sim-data.how-long-is-it-valid,ee-nah-DOO-moo kwah MOO-dah GAH-nee?
+etiquette.remove-shoes,nee-VOO-eh vee-AH-too?
+children.baby-changing-room,CHOOM-bah chah koo-bah-dee-LEE-shah NEH-pee nee WAH-pee?
+time-scheduling.when-is-convenient,LEE-nee ee-nah-FAH-ah KWAH-koh?
+time-words.next-week,WEE-kee ee-JAH-yoh
+days-of-week.friday,ee-joo-MAH
+months.may,MEH-ee
+directions.please-show-me-on-the-map,tah-fah-THAH-lee nee-oh-NYEH-sheh KWEH-nyeh rah-MAH-nee
+quick-directions.that-way,n-JEE-ah EE-leh
+taxi.can-you-wait-for-me-here,oo-nah-WEH-zah koo-nee-soo-BEE-ree HAH-pah?
+transit-rides.please-tell-me-where-to-get-off,tah-fah-THAH-lee nee-ahm-BEE-eh nee-SHOO-keh WAH-pee
+place-words.service-desk,dah-WAH-tee lah hoo-DOO-mah
+border-customs.i-am-staying-at,nah-KAH {}
+pickup-meeting.please-call-me-a-ride,tah-fah-THAH-lee nee-EE-tee-eh GAH-ree
+rail-station-words.platform,joo-KWAH
+common-signs.caution,tah-hah-THAH-ree
+utility-templates.do-you-have,jeh m-NAH {}?
+accessibility.cannot-climb-stairs,see-WEH-zee koo-PAHN-dah ng-GAH-zee
+toilets.is-it-free,nee BOO-reh?
+building-words.women,wah-nah-WAH-keh
+pronouns-verbs.she-her,YEH-yeh
+question-words.how,VEE-pee
+emergency-medical.it-hurts-here,ee-nah-OO-mah HAH-pah
+medical-conditions.i-have-epilepsy,NEE-nah kee-FAH-fah
+pharmacy-symptoms.painkiller,DAH-wah yah mah-oo-MEE-voo
+body-parts.chest,kee-FOO-ah
+lost-rescue.i-cannot-walk,see-WEH-zee koo-tehm-BEH-ah
+police-consulate.i-need-a-written-police-report,nah-hee-TAH-jee ree-POH-tee yah poh-LEE-see kwah mah-ahn-DEE-shee
+dietary-needs.no-nuts,BEE-lah koh-ROH-shoh WAH-lah KOHK-wah
+food-ordering.to-go-please,"yah koo-choo-KOO-ah, tah-fah-THAH-lee"
+trail-words.shuttle-bus,BAH-see lah hoo-DOO-mah
+weather.snow,theh-LOO-jee
+trail-conditions.is-the-path-slippery,jeh n-JEE-ah ee-nah-teh-LEH-zah?
+trail-transport.is-there-cell-signal-here,jeh KOO-nah m-tahn-DAH-oh HAH-pah?
+trail-warnings.danger,hah-TAH-ree
+trail-landmarks.elevation,mwee-NOO-koh
+hotel-basics.i-would-like-a-quiet-room,nah-OHM-bah CHOOM-bah chah oo-too-LEE-voo
+room-problems.the-key-does-not-work,oo-foon-GOO-oh hah-oo-FAH-nyee KAH-zee
+laundry.please-do-not-use-bleach,tah-fah-THAH-lee oo-see-too-MEE-eh JEE-kee
+introductions.i-am-from,nah-TOH-kah {}
+numbers-money.s,n-NEH
+atm-cash.what-is-the-exchange-rate,kee-WAHN-goh chah koo-bah-dee-LEE-shah nee KEE-pee?
+attractions-tickets.please-take-a-photo-of-us,tah-fah-THAH-lee too-PEE-gheh PEE-chah
+color-size-returns.do-you-have-a-bag,jeh m-NAH m-FOO-koh?
+social-basics.thank-you,ah-SAHN-teh
+communication.i-cannot-read-understand,see-WEH-zee koo-SOH-mah WAH-lah koo-eh-LEH-wah
+quick-responses.works-okay,ee-nah-FAH-nyah KAH-zee
+phone-text-power.the-translation-may-be-inaccurate,tahf-SEE-ree ee-nah-WEH-zah KOO-wah see sah-HEE-hee
+sim-data.please-activate-it,tah-fah-THAH-lee ee-sah-JEE-lee
+etiquette.photo-of-you,nah-OHM-bah nee-koo-PEE-gheh PEE-chah?
+children.childrens-menu,jeh KOO-nah MEH-nyoo yah wah-TOH-toh?
+time-scheduling.what-is-today-s-date,LEH-oh nee tah-REH-heh ng-GAH-pee?
+time-words.morning,ah-soo-BOO-hee
+days-of-week.saturday,joo-mah-MOH-see
+months.june,JOO-nee
+directions.where-is-the-nearest,{} nee WAH-pee kah-REE-boo nah HAH-pah?
+quick-directions.on-the-left,koo-SHOH-toh
+taxi.we-need-to-catch-the-high-speed-train,too-nah-hee-TAH-jee koo-PAH-tah TREH-nee yah ehs-jee-AHR
+transit-rides.is-this-direct,jeh ee-nah-KWEHN-dah MOH-jah kwah MOH-jah?
+place-words.bus-stop,kee-TOO-oh chah BAH-see
+border-customs.i-am-here-for-business,nee-meh-KOO-jah kwah bee-ah-SHAH-rah
+rail-station-words.ticket-office,oh-FEE-see yah tee-KEH-tee
+common-signs.no-entry,oo-see-EEN-ghee-eh
+utility-templates.please-write-the-number,tah-fah-THAH-lee ahn-DEE-kah NAHM-bah
+accessibility.need-to-sit-down,nah-hee-TAH-jee koo-KAH CHEE-nee
+toilets.do-i-need-a-coin,nah-hee-TAH-jee sah-RAH-foo AH-oo toh-KEH-nee?
+building-words.door,m-LAHN-goh
+pronouns-verbs.they-them,WAH-oh
+question-words.how-much-many,kee-AH-see GAH-nee
+emergency-medical.where-is-a-pharmacy,DOO-kah lah DAH-wah LEE-koh WAH-pee?
+medical-conditions.my-blood-sugar-is-low,soo-KAH-ree YAHN-goo yah DAH-moo ee-meh-SHOO-kah
+pharmacy-symptoms.do-i-need-a-prescription,nah-hee-TAH-jee ah-GHEE-zoh lah dahk-TAH-ree?
+body-parts.eye,JEE-choh
+lost-rescue.i-sprained-my-ankle,kee-FOON-doh chah m-GOO kee-meh-teh-GOO-kah
+police-consulate.i-want-to-contact-my-embassy,nah-TAH-kah koo-wah-see-lee-AH-nah nah oo-bah-LOH-zee WAHN-goo
+dietary-needs.no-seafood,BEE-lah sah-MAH-kee WAH-lah KAHM-bah
+food-ordering.check-please,"BEE-lee, tah-fah-THAH-lee"
+trail-words.park-shuttle,BAH-see lah hee-FAH-thee
+weather.wind,oo-PEH-poh
+trail-transport.do-you-have-a-map,jeh m-NAH rah-MAH-nee?
+trail-warnings.beware-falling-rocks,tah-hah-THAH-ree: MAH-weh yah-nah-ahn-GOO-kah
+trail-landmarks.sunset,mah-CHWEH-oh
+hotel-basics.is-there-a-washing-machine,jeh KOO-nah mah-SHEE-neh yah koo-FOO-ah?
+room-problems.the-toilet-will-not-flush,choh hah-kee-VOO-tee MAH-jee
+laundry.laundromat,DOH-bee
+introductions.where-are-you-from,oo-nah-TOH-kah WAH-pee?
+numbers-money.w,TAH-noh
+atm-cash.no-money-came-out,PEH-sah hah-zee-koo-TOH-kah
+social-basics.you-are-welcome,kah-REE-boo
+communication.please-say-it-again,tah-fah-THAH-lee SEH-mah TEH-nah
+quick-responses.does-not-work-no,hah-ee-FAH-nyee KAH-zee
+phone-text-power.please-confirm,tah-fah-THAH-lee thee-bee-TEE-shah
+sim-data.do-you-have-an-esim,jeh m-NAH ee-seem?
+etiquette.may-i-sit-here,nah-OHM-bah nee-KAH-eh HAH-pah?
+children.suitable-for-children,jeh hee ee-nah-FAH-ah kwah wah-TOH-toh?
+time-scheduling.what-day-is-it-today,LEH-oh nee SEE-koo GAH-nee?
+time-words.afternoon,m-CHAH-nah
+days-of-week.sunday,joo-mah-PEE-lee
+months.july,joo-LAH-ee
+directions.where-am-i,NEE-koh WAH-pee?
+quick-directions.on-the-right,koo-LEE-ah
+taxi.please-use-the-meter,tah-fah-THAH-lee too-MEE-ah MEE-tah
+transit-rides.do-i-need-to-transfer,nah-hee-TAH-jee koo-bah-dee-LEE-shah GAH-ree?
+place-words.luggage-storage,seh-HEH-moo yah koo-WEH-kah mee-ZEE-goh
+border-customs.i-have-a-return-ticket,NEE-nah tee-KEH-tee yah koo-ROO-dee
+rail-station-words.waiting-room,CHOOM-bah chah koo-soo-BEE-ree
+common-signs.no-smoking,oo-see-VOO-teh see-GAH-rah
+utility-templates.i-need,nah-hee-TAH-jee {}
+accessibility.accessible-restroom,jeh KOO-nah choh chah wah-leh-MAH-voo?
+toilets.is-the-tap-water-safe-to-drink,MAH-jee yah BOHM-bah nee sah-LAH-mah KOO-nywah?
+building-words.key,oo-foon-GOO-oh
+pronouns-verbs.my-mine,YAHN-goo / WAHN-goo
+question-words.how-many,ng-GAH-pee
+emergency-medical.please-take-me-to-a-hospital,tah-fah-THAH-lee nee-peh-LEH-keh hoh-spee-TAH-lee
+medical-conditions.i-need-my-inhaler,nah-hee-TAH-jee DAH-wah YAHN-goo yah POO-moo
+pharmacy-symptoms.i-have-a-headache,NEE-nah mah-oo-MEE-voo yah KEECH-wah
+body-parts.ear,see-KEE-oh
+lost-rescue.please-contact-rescue,tah-fah-THAH-lee wah-see-lee-AH-nah nah oo-oh-koh-AH-jee
+police-consulate.i-need-it-for-my-insurance,nah-hee-TAH-jee kwah BEE-mah YAHN-goo
+dietary-needs.i-am-vegetarian,SEE-lee NYAH-mah WAH-lah sah-MAH-kee
+food-ordering.does-it-contain,jeh KOO-nah {} n-DAH-nee?
+trail-words.steps,ng-GAH-zee
+weather.storm,thoh-ROO-bah
+trail-warnings.first-aid-station,kee-TOO-oh chah hoo-DOO-mah yah KWAHN-zah
+room-problems.the-light-does-not-work,tah hah-ee-FAH-nyee KAH-zee
+laundry.please-iron-this,tah-fah-THAH-lee PEE-gah PAH-see hee
+introductions.how-are-you,hah-BAH-ree YAH-koh?
+numbers-money.li,SEE-tah
+atm-cash.where-can-i-change-money,nah-WEH-zah koo-bah-dee-LEE-shah PEH-sah WAH-pee?
+social-basics.excuse-me-sorry,sah-mah-HAH-nee
+communication.please-write-it-down,tah-fah-THAH-lee ahn-DEE-kah
+sim-data.my-data-is-not-working,DAH-tah YAHN-goo hah-ee-FAH-nyee KAH-zee
+etiquette.queue-for,hee nee foh-LEH-nee yah {}?
+children.minimum-age,OOM-ree wah CHEE-nee nee OO-pee?
+time-scheduling.what-time-does-it-open,ee-nah-foon-goo-LEE-wah sah ng-GAH-pee?
+time-words.evening,jee-OH-nee
+months.august,ah-GOHS-tee
+directions.which-way,n-JEE-ah EE-pee?
+quick-directions.across-from-here,NGAHM-boh
+transit-rides.is-it-delayed,jeh ee-meh-cheh-LEH-wah?
+border-customs.i-am-visiting-family,nah-tehm-beh-LEH-ah fah-MEE-lee-ah
+rail-station-words.train-number,NAHM-bah yah TREH-nee
+common-signs.no-photography,oo-see-PEE-gheh PEE-chah
+utility-templates.is-there-nearby,KOO-nah {} kah-REE-boo?
+accessibility.station-assistance,jeh KOO-nah m-sah-AH-dah kee-too-OH-nee?
+toilets.it-is-urgent,nee hah-RAH-kah SAH-nah
+pronouns-verbs.your-yours,YAH-koh / WAH-koh
+question-words.why,kwah NEE-nee
+medical-conditions.i-am-pregnant,NEE-nah MEEM-bah
+pharmacy-symptoms.paracetamol-acetaminophen,pah-rah-seh-tah-MOH-lee
+body-parts.leg,m-GOO
+lost-rescue.my-companion-is-missing,mwehn-ZAHN-goo ah-meh-poh-TEH-ah
+police-consulate.i-need-an-interpreter,nah-hee-TAH-jee m-kah-lee-MAH-nee
+dietary-needs.i-am-vegan,"SEE-lee NYAH-mah, sah-MAH-kee, mah-YAH-ee WAH-lah mah-ZEE-wah"
+food-ordering.is-this-vegetarian,jeh hee hah-EE-nah NYAH-mah?
+trail-words.up-uphill,koo-PAHN-dah
+weather.ice,bah-RAH-foo
+trail-warnings.service-suspended,hoo-DOO-mah ee-meh-see-TEESH-wah
+trail-landmarks.water-point,mah-HAH-lee pah MAH-jee
+room-problems.please-send-someone,tah-fah-THAH-lee TOO-mah m-TOO koo-reh-keh-BEE-shah
+laundry.detergent,sah-BOO-nee yah koo-FOO-ah
+introductions.i-am-a-tourist,MEE-mee nee m-tah-LEE-ee
+numbers-money.q,SAH-bah
+atm-cash.the-machine-is-out-of-service,mah-SHEE-neh hah-ee-FAH-nyee KAH-zee
+social-basics.sorry,nee-sah-MEH-heh
+communication.please-wait-a-moment,tah-fah-THAH-lee soo-BEE-ree kee-DOH-goh
+sim-data.does-it-need-registration,jeh ee-nah-hee-TAH-jee koo-sah-jee-LEE-wah?
+etiquette.dressed-appropriately,jeh nee-meh-VAH vee-ZOO-ree?
+children.do-children-pay,jeh wah-TOH-toh wah-nah-LEE-pah?
+time-scheduling.what-time-does-it-close,ee-nah-FOON-gwah sah ng-GAH-pee?
+time-words.spring,mah-JEE-rah yah koo-chee-POO-ah
+months.september,sehp-TEHM-bah
+directions.can-i-walk-there,nah-WEH-zah KWEHN-dah kwah mee-GOO?
+quick-directions.in-front,m-BEH-leh
+transit-rides.i-am-in-a-hurry,NEE-nah hah-RAH-kah
+border-customs.this-is-for-personal-use,hee nee kwah mah-too-MEE-zee YAHN-goo
+rail-station-words.carriage,beh-HEH-wah
+common-signs.do-not-touch,oo-see-GOO-seh
+utility-templates.how-much-is,{} nee BEH-ee GAH-nee?
+accessibility.help-me-carry,tah-fah-THAH-lee nee-sah-ee-DEE-eh koo-BEH-bah hee
+toilets.may-i-have-the-toilet-key,nah-OHM-bah oo-foon-GOO-oh wah choh
+pronouns-verbs.be-called-call,koo-EE-twah
+question-words.this,hee / HEE-kee / HOO-yoo
+medical-conditions.i-carry-an-adrenaline-injector,NEE-nah seen-DAH-noh yah ah-dreh-nah-LEE-nee
+pharmacy-symptoms.how-much-should-i-take,nee-too-MEE-eh kee-AH-see GAH-nee?
+body-parts.arm,m-KOH-noh
+police-consulate.please-leave-me-alone,tah-fah-THAH-lee nee-AH-cheh
+dietary-needs.i-do-not-eat,SEE-lee {}
+trail-words.down-downhill,koo-SHOO-kah
+weather.fog,oo-KOON-goo
+room-problems.the-heating-does-not-work,HEE-tah hah-ee-FAH-nyee KAH-zee
+laundry.dry-cleaning,koo-sah-FEE-shah kwah KAH-voo
+introductions.this-is-my-husband-wife,HOO-yoo nee MOO-meh / m-KEH WAHN-goo
+numbers-money.b,NAH-neh
+atm-cash.please-give-me-smaller-notes,tah-fah-THAH-lee NEE-peh NOH-tee n-DOH-goh
+social-basics.no-problem,hah-KOO-nah SHEE-dah
+communication.can-you-help-me,oo-nah-WEH-zah koo-nee-sah-ee-DEE-ah?
+sim-data.i-have-no-signal,SEE-nah m-tahn-DAH-oh
+etiquette.did-not-mean-to-offend,"sah-mah-HAH-nee, see-koo-koo-soo-DEE-ah"
+children.crib,jeh m-NAH kee-TAHN-dah chah m-TOH-toh?
+time-words.summer,mah-JEE-rah yah JOH-toh
+months.october,ohk-TOH-bah
+directions.how-far-is-it,nee oom-BAH-lee GAH-nee?
+quick-directions.behind,NYOO-mah
+transit-rides.which-platform,joo-KWAH LEE-pee?
+border-customs.i-am-in-transit,nah-PEE-tah too
+rail-station-words.seat,KEE-tee
+common-signs.temporarily-closed,ee-meh-FOON-gwah kwah MOO-dah
+utility-templates.is-this,jeh nee {}?
+accessibility.board-first,nah-OHM-bah nee-een-GHEE-eh KWAHN-zah
+toilets.there-is-no-toilet-paper,hah-KOO-nah kah-rah-TAH-see yah choh
+pronouns-verbs.have,NEE-nah
+question-words.that,HEE-yoh / HEE-choh / HOO-yoh
+medical-conditions.i-take-medicine-for,nah-too-MEE-ah DAH-wah yah {}
+pharmacy-symptoms.i-am-vomiting,nah-tah-PEE-kah
+body-parts.foot,m-GOO / oo-NYAH-yoh
+police-consulate.i-was-robbed,nee-meh-POHR-wah
+dietary-needs.i-am-allergic-to,NEE-nah m-ZEE-oh wah {}
+trail-words.one-way,n-JEE-ah yah KWEHN-dah too
+weather.heat,JOH-toh
+laundry.dryer,mah-SHEE-neh yah koo-kah-OO-shah
+introductions.this-is-my-daughter-son,HOO-yoo nee m-TOH-toh WAHN-goo wah KEE-keh / kee-OO-meh
+numbers-money.ji,TEE-sah
+atm-cash.do-you-have-change,jeh m-NAH CHEHN-jee?
+social-basics.i-do-not-know,see-JOO-ee
+communication.please-show-me-the-text,tah-fah-THAH-lee nee-oh-NYEH-sheh mah-ahn-DEE-shee
+sim-data.please-write-the-wifi-password,tah-fah-THAH-lee ahn-DEE-kah neh-noh-SEE-ree lah wai-fai
+etiquette.what-is-customary,nee dehs-TOO-ree GAH-nee HAH-pah?
+children.warm-this-bottle,tah-fah-THAH-lee PAH-shah CHOO-pah hee
+time-words.fall,mah-JEE-rah yah poo-koo-TEE-koh
+months.november,noh-VEHM-bah
+directions.which-exit,m-LAHN-goh OO-pee wah koo-TOH-kah?
+transit-rides.what-time-is-the-next-one,ee-JAH-yoh nee sah ng-GAH-pee?
+border-customs.i-have-in-cash,NEE-nah {} tahs-LEE-moo
+rail-station-words.last-train,TREH-nee yah MWEE-shoh
+utility-templates.please,"{}, tah-fah-THAH-lee"
+accessibility.door-width,m-LAHN-goh OO-nah oo-PAH-nah GAH-nee?
+toilets.toilet-paper,kah-rah-TAH-see yah choh
+pronouns-verbs.do-not-have,SEE-nah
+question-words.here,HAH-pah
+medical-conditions.i-take-blood-thinners,nah-too-MEE-ah DAH-wah yah koo-zoo-EE-ah DAH-moo koo-GAHN-dah
+pharmacy-symptoms.rehydration-salts,oh-ehr-EHS
+body-parts.hand,m-KOH-noh / kee-GAHN-jah
+police-consulate.i-want-a-lawyer,nah-TAH-kah wah-KEE-lee
+trail-words.round-trip,KWEHN-dah nah koo-ROO-dee
+weather.cold,BAH-ree-dee
+laundry.coin-operated,ee-nah-too-MEE-ah sah-RAH-foo
+introductions.i-am-traveling-alone,nah-sah-FEE-ree PEH-keh YAHN-goo
+numbers-money.sh,KOO-mee
+atm-cash.may-i-pay-in,nah-WEH-zah koo-LEE-pah kwah {}?
+sim-data.sim-card,seem-KAH-dee
+etiquette.keep-the-change,CHEHN-jee nee YAH-koh
+children.car-seat,too-nah-hee-TAH-jee KEE-tee chah m-TOH-toh chah GAH-ree
+time-words.winter,mah-JEE-rah yah BAH-ree-dee
+months.december,deh-SEHM-bah
+directions.can-you-show-me-the-way,oo-nah-WEH-zah koo-nee-oh-NYEH-shah n-JEE-ah?
+transit-rides.i-went-past-my-stop,nee-meh-PEE-tah kee-TOO-oh CHAHN-goo
+border-customs.this-is-a-gift,hee nee zah-WAH-dee
+rail-station-words.delayed,ee-meh-cheh-LEH-wah
+utility-templates.i-am-looking-for,nah-tah-FOO-tah {}
+accessibility.wheelchair-width,KEE-tee chah mah-goo-roo-DOO-moo: oo-PAH-nah sehn-tee-MEE-tah {}
+toilets.it-is-out-of-order,hah-ee-FAH-nyee KAH-zee
+pronouns-verbs.go,KWEHN-dah
+question-words.there,PAH-leh
+medical-conditions.medicine-allergy,m-ZEE-oh wah DAH-wah: {}
+pharmacy-symptoms.how-many-times-a-day,MAH-rah ng-GAH-pee kwah SEE-koo?
+body-parts.knee,GOH-tee
+police-consulate.please-notify-my-consulate,tah-fah-THAH-lee ah-REE-foo oo-bah-LOH-zee WAHN-goo
+weather.humid,oo-NYEH-voo
+numbers-money.y-b-i,MEE-ah MOH-jah
+atm-cash.please-charge-in-local-currency,tah-fah-THAH-lee toh-ZEH-nee kwah FEH-thah yah HAH-pah
+sim-data.where-can-i-buy-a-plug-adapter,nah-WEH-zah koo-noo-NOO-ah ah-DAHP-tah yah PLAH-ghee WAH-pee?
+children.stroller,kee-GAH-ree chah m-TOH-toh
+directions.north,kahs-kah-ZEE-nee
+border-customs.where-do-i-collect-my-baggage,nah-choo-KOO-ah mee-ZEE-goh YAHN-goo WAH-pee?
+rail-station-words.final-stop,kee-TOO-oh chah MWEE-shoh
+utility-templates.do-you-accept,jeh m-nah-koo-BAH-lee {}?
+accessibility.hard-of-hearing,nah-see-KEE-ah kwah SHEE-dah
+toilets.out-of-order,ee-meh-hah-ree-BEE-kah
+pronouns-verbs.come,KOO-jah
+question-words.a-little,kee-DOH-goh
+medical-conditions.this-card-lists-my-conditions,KAH-dee hee EE-nah mah-GOHN-jwah YAHN-goo
+pharmacy-symptoms.i-have-a-stomach-ache,NEE-nah mah-oo-MEE-voo yah TOOM-boh
+body-parts.ankle,kee-FOON-doh chah m-GOO
+police-consulate.i-am-calling-the-police,nah-PEE-gah SEE-moo poh-LEE-see
+weather.sunrise,mah-CHEH-oh
+numbers-money.y-qi-n,EHL-foo MOH-jah
+atm-cash.where-can-i-get-coins,nah-WEH-zah koo-PAH-tah sah-RAH-foo WAH-pee?
+sim-data.mobile-data,DAH-tah yah SEE-moo
+children.playground,jeh KOO-nah seh-HEH-moo yah koo-cheh-ZEH-ah wah-TOH-toh?
+directions.south,koo-SEE-nee
+border-customs.how-long-may-i-stay,nah-WEH-zah koo-KAH SEE-koo ng-GAH-pee?
+rail-station-words.ticket-validator,mah-SHEE-neh yah tee-KEH-tee
+utility-templates.i-cannot-find,nah-SHEEND-wah koo-PAH-tah {}
+accessibility.speak-louder,tah-fah-THAH-lee SEH-mah kwah sah-OO-tee KOOB-wah
+toilets.mens-toilet,choh chah wah-nah-OO-meh
+pronouns-verbs.would-like,neen-gheh-PEHN-dah
+question-words.some,bah-AH-thee
+medical-conditions.this-is-my-medicine,hee nee DAH-wah YAHN-goo
+pharmacy-symptoms.i-have-a-cough,NEE-nah kee-koh-HOH-zee
+body-parts.skin,ng-GOH-zee
+police-consulate.am-i-under-arrest,jeh nee-meh-kah-MAH-twah?
+weather.flood,mah-foo-REE-koh
+numbers-money.y-w-n,EHL-foo KOO-mee
+atm-cash.is-there-a-minimum-for-cards,jeh KOO-nah kee-WAHN-goh chah CHEE-nee chah KAH-dee?
+sim-data.can-i-top-up-this-sim,nah-WEH-zah koo-ohn-GHEH-zah sah-LEE-oh?
+directions.east,mah-shah-REE-kee
+border-customs.i-have-a-connecting-flight,NEE-nah n-DEH-gheh yah koo-oon-gah-NEE-shah
+utility-templates.there-is-a-problem-with,KOO-nah tah-TEE-zoh nah {}
+accessibility.visually-impaired,NEE-nah oo-OH-nee hah-FEE-foo
+toilets.womens-toilet,choh chah wah-nah-WAH-keh
+pronouns-verbs.want,koo-TAH-kah
+question-words.very,SAH-nah
+medical-conditions.please-give-me-sugar-or-juice,tah-fah-THAH-lee NEE-peh soo-KAH-ree AH-oo JOO-ee-see
+pharmacy-symptoms.antihistamine,DAH-wah yah m-ZEE-oh
+police-consulate.no-thank-you-i-am-not-interested,hah-PAH-nah ah-SAHN-teh. see-hee-TAH-jee
+weather.avalanche-risk,hah-TAH-ree yah mah-poh-roh-MOH-koh yah theh-LOO-jee
+numbers-money.b-n,NOO-soo
+atm-cash.atm,ay-tee-EHM
+sim-data.top-up,koo-ohn-GHEH-zah sah-LEE-oh
+directions.west,mah-gah-REE-bee
+border-customs.may-i-have-an-entry-stamp,nah-OHM-bah m-HOO-ree wah koo-een-GHEE-ah
+accessibility.take-your-arm,nah-OHM-bah nee-SHEE-keh m-KOH-noh WAH-koh
+toilets.drinking-water,MAH-jee yah KOO-nywah
+pronouns-verbs.look-for,koo-tah-FOO-tah
+question-words.too,m-NOH
+medical-conditions.inject-it-into-my-outer-thigh,CHOH-mah seen-DAH-noh kah-tee-KAH-tee yah PAH-jah LAHN-goo lah n-JEH
+pharmacy-symptoms.anti-diarrhea-medicine,DAH-wah yah koo-HAH-rah
+police-consulate.someone-attacked-me,m-TOO ah-meh-nee-shahm-boo-LEE-ah
+atm-cash.banknote,NOH-tee
+sim-data.is-there-coverage-in,KOO-nah m-tahn-DAH-oh {}?
+border-customs.visa,VEE-zah
+accessibility.guide-dog,HOO-yoo nee m-BWAH WAHN-goo kee-ohn-GOH-zee
+toilets.not-for-drinking,see MAH-jee yah KOO-nywah
+pronouns-verbs.buy,koo-noo-NOO-ah
+question-words.also,PEE-ah
+medical-conditions.my-blood-type-is,ah-EE-nah yah DAH-moo YAHN-goo nee {}
+pharmacy-symptoms.is-this-safe-to-take-with,jeh nee sah-LAH-mah koo-too-MEE-ah nah {}?
+police-consulate.i-did-not-agree-to-this-price,see-koo-koo-BAH-lee BEH-ee hee
+atm-cash.coin,sah-RAH-foo
+sim-data.signal,m-tahn-DAH-oh
+border-customs.i-have-no-food-or-plants,SEE-nah chah-KOO-lah WAH-lah mee-MEH-ah
+toilets.accessible-toilet,choh chah wah-leh-MAH-voo
+pronouns-verbs.like,koo-PEHN-dah
+question-words.all-both,YOH-teh / ZOH-teh / WOH-teh
+medical-conditions.do-not-give-me,tah-fah-THAH-lee m-see-NEE-peh {}
+pharmacy-symptoms.i-feel-dizzy,NEE-nah kee-zoon-goo-ZOON-goo
+police-consulate.please-write-the-report-number,tah-fah-THAH-lee ahn-DEE-kah NAHM-bah yah ree-POH-tee
+atm-cash.cash-only,FEH-thah tahs-LEE-moo too
+sim-data.esim,ee-seem
+border-customs.passport-control,oo-hah-mee-AH-jee
+toilets.where-can-i-wash-my-hands,nah-WEH-zah koo-NAH-wah mee-KOH-noh WAH-pee?
+pronouns-verbs.need,koo-hee-TAH-jee
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,NEE-nah m-ZEE-oh wah ahs-pee-REE-nee nah ee-boo-proh-FEH-nee
+pharmacy-symptoms.ibuprofen,ee-boo-proh-FEH-nee
+police-consulate.it-happened-here,ee-lee-toh-KEH-ah HAH-pah
+atm-cash.fee,gah-RAH-mah
+sim-data.prepaid,mah-LEE-poh yah KAHB-lah
+border-customs.customs,foh-ROH-thah
+toilets.can-i-flush-the-paper,nah-WEH-zah koo-TOO-pah kah-rah-TAH-see CHOH-nee?
+medical-conditions.my-injector-is-in-my-bag,seen-DAH-noh YAHN-goo EE-koh m-koh-BAH-nee
+pharmacy-symptoms.i-have-a-sore-throat,koh lee-nah-OO-mah
+police-consulate.may-i-have-a-copy-of-the-report,nah-OHM-bah nah-KAH-lah yah ree-POH-tee
+atm-cash.change,CHEHN-jee
+sim-data.roaming,m-tahn-DAH-oh wah n-JEH
+border-customs.baggage-claim,koo-choo-KOO-ah mee-ZEE-goh
+toilets.is-there-a-toilet-on-board,jeh KOO-nah choh n-DAH-nee?
+medical-conditions.i-am-allergic-to-sulfa-drugs,NEE-nah m-ZEE-oh wah DAH-wah zah SOOL-fah
+pharmacy-symptoms.can-i-get-this-medicine-here,nah-WEH-zah koo-PAH-tah DAH-wah hee HAH-pah?
+police-consulate.i-will-not-sign-anything-i-cannot-read,see-tah-sah-EE-nee KEE-too nee-see-choh-WEH-zah koo-SOH-mah
+atm-cash.exchange-rate,kee-WAHN-goh chah koo-bah-dee-LEE-shah
+border-customs.customs-declaration,TAHM-koh lah foh-ROH-thah
+toilets.the-toilet-will-not-flush,choh hah-kee-VOO-tee MAH-jee
+pharmacy-symptoms.bandage,behn-DEH-jee
+police-consulate.am-i-free-to-go,jeh nah-WEH-zah KWEHN-dah?
+atm-cash.bank,BEHN-kee
+border-customs.arrival-card,KAH-dee yah koo-wah-SEE-lee
+toilets.baby-change,koo-bah-dee-LEE-shah NEH-pee
+pharmacy-symptoms.the-pain-is-severe,mah-oo-MEE-voo nee mah-KAH-lee
+police-consulate.i-do-not-want-to-go-with-you,see-TAH-kee KWEHN-dah NAH-nyee
+atm-cash.money-exchange,koo-bah-dee-LEE-shah FEH-thah
+border-customs.transit,koo-pee-TEE-ah
+toilets.squat-toilet,choh chah SHEE-moh
+pharmacy-symptoms.antiseptic,DAH-wah yah koo-OO-ah vee-jee-DOO-doo
+atm-cash.pin,NAHM-bah yah SEE-ree
+border-customs.boarding-pass,KAH-dee yah koo-PAHN-dah n-DEH-gheh
+pharmacy-symptoms.i-feel-nauseous,NEE-nah kee-cheh-foo-CHEH-foo
+pharmacy-symptoms.i-have-a-rash,NEE-nah vee-PEH-leh
+pharmacy-symptoms.before-or-after-food,KAHB-lah AH-oo bah-AH-dah yah chah-KOO-lah?
+pharmacy-symptoms.i-think-it-is-infected,nah-THAH-nee ee-meh-ahm-boo-KEEZ-wah
+pharmacy-symptoms.motion-sickness-tablets,DAH-wah yah kee-cheh-foo-CHEH-foo chah sah-FAH-ree
+pharmacy-symptoms.i-have-a-cut,nee-meh-jee-KAH-tah
+pharmacy-symptoms.antacid,DAH-wah yah kee-oon-goo-LEE-ah
+pharmacy-symptoms.i-have-a-burn,nee-meh-oon-GOO-ah
+pharmacy-symptoms.it-started-days-ago,ee-lee-AHN-zah SEE-koo {} zee-lee-zoh-PEE-tah
+pharmacy-symptoms.cough-medicine,DAH-wah yah kee-koh-HOH-zee
+pharmacy-symptoms.is-this-safe-during-pregnancy,jeh nee sah-LAH-mah kwah m-jahm-ZEE-toh?
+trail-transport.how-long-is-the-wait,koo-soo-BEE-ree nee MOO-dah GAH-nee?
+tax-refund.is-tax-free-shopping-available,jeh KOO-nah oo-noo-NOO-zee BEE-lah KOH-dee?
+place-words.tourist-spot-sightseeing-area,seh-HEH-moo yah koo-tehm-beh-LEH-ah
+common-signs.open-operating,ee-nah-FAH-nyah KAH-zee
+time-scheduling.how-long-does-it-take,ee-nah-choo-KOO-ah MOO-dah GAH-nee?
+transit-rides.can-i-use-this-ticket,nah-WEH-zah koo-too-MEE-ah tee-KEH-tee hee?
+common-signs.closed,too-meh-FOON-gah
+pronouns-verbs.there-is-have,KOO-nah
+common-signs.stopped-stop,see-MAH-mah
+transit-rides.do-i-need-to-validate,nah-hee-TAH-jee koo-GOHN-gah tee-KEH-tee KWEH-nyeh mah-SHEE-neh?
+pronouns-verbs.there-is-not-do-not-have,hah-KOO-nah
+emergency-medical.i-feel-unwell,see-jee-see-KEE-ee vee-ZOO-ree
+food-ordering.what-do-you-recommend,oo-nah-pehn-deh-KEH-zah NEE-nee?
+hotel-basics.is-wi-fi-free,jeh wai-fai nee BOO-reh?
+hotel-requests.another-towel-please,"TAH-oo-loh nyeen-GHEE-neh, tah-fah-THAH-lee"
+shopping.is-there-a-discount,jeh KOO-nah poon-GOO-zoh?
+social-basics.good-night,oo-SEE-koo MWEH-mah
+quick-responses.can-possible,ee-nah-weh-zeh-KAH-nah
+phone-translation.please-type-it-and-show-me,tah-fah-THAH-lee CHAH-pah nah oo-nee-oh-NYEH-sheh
+phone-text-power.may-i-charge-my-phone-here,nah-OHM-bah koo-CHAH-jee SEE-moo HAH-pah?
+pronouns-verbs.want-to-verb,nah-TAH-kah + kee-TEHN-zee
+emergency-medical.this-is-an-emergency,hee nee thah-ROO-rah
+lost-rescue.please-look-at-my-current-location,tah-fah-THAH-lee tah-ZAH-mah nee-LEE-poh SAH-sah
+hotel-words.luggage-storage,seh-HEH-moo yah koo-WEH-kah mee-ZEE-goh
+hotel-basics.how-much-per-night,nee BEH-ee GAH-nee kwah oo-SEE-koo?
+hotel-requests.what-time-is-check-out,koo-ohn-DOH-kah nee sah ng-GAH-pee?
+payment-receipt.please-write-the-number,tah-fah-THAH-lee ahn-DEE-kah NAHM-bah
+shopping.where-do-i-pay,nah-LEE-pah WAH-pee?
+communication.i-cannot-make-out-what-you-are-saying,see-PAH-tee oo-nah-choh-SEH-mah
+quick-responses.cannot-not-possible,hah-ee-weh-zeh-KAH-nee
+taxi.i-will-get-off-here,nah-SHOO-kah HAH-pah
+pickup-meeting.please-call-a-taxi,tah-fah-THAH-lee EE-tah TEHK-see
+pronouns-verbs.want-thing,nah-TAH-kah + KEE-too
+emergency-medical.i-am-having-a-severe-allergic-reaction,NEE-nah m-meh-NYOO-koh m-KAH-lee wah m-ZEE-oh
+lost-rescue.my-child-is-missing,m-TOH-toh WAHN-goo ah-meh-poh-TEH-ah
+food-ordering.water-please,"MAH-jee, tah-fah-THAH-lee"
+hiking-parks.is-this-trail-suitable-for-beginners,jeh n-JEE-ah hee ee-nah-FAH-ah kwah wah-nah-oh-AHN-zah?
+hotel-basics.is-breakfast-included,jeh kee-foon-GOO-ah KEE-nywah kee-meh-joo-moo-EESH-wah?
+hotel-requests.can-i-check-in-early,nah-WEH-zah koo-een-GHEE-ah mah-PEH-mah?
+attractions-tickets.could-you-take-a-photo-for-us,oo-nah-WEH-zah koo-too-PEE-gah PEE-chah?
+payment-receipt.how-much-in-total,JOOM-lah nee kee-AH-see GAH-nee?
+shopping.i-will-take-this,nah-choo-KOO-ah hee
+communication.i-do-not-understand,see-fah-HAH-moo
+quick-responses.okay-fine,n-ZOO-ree
+phone-translation.please-look-at-the-screen,tah-fah-THAH-lee tah-ZAH-mah SKREE-nee
+pronouns-verbs.need-thing,nah-hee-TAH-jee + KEE-too
+question-words.how-much-what-price,BEH-ee GAH-nee?
+emergency-medical.i-cannot-breathe,see-WEH-zee koo-poo-MOO-ah
+lost-rescue.i-do-not-know-where-i-am,see-JOO-ee NEE-koh WAH-pee
+hotel-basics.may-i-see-the-room,nah-OHM-bah nee-OH-neh CHOOM-bah
+hotel-requests.another-night,nah-WEH-zah koo-LAH-lah oo-SEE-koo m-MOH-jah zah-EE-dee?
+payment-receipt.can-we-pay-separately,too-nah-WEH-zah koo-LEE-pah KEE-lah m-MOH-jah?
+shopping.what-is-this,hee nee NEE-nee?
+communication.i-cannot-read-it,see-WEH-zee koo-SOH-mah hee
+quick-responses.no-good-not-allowed-will-not-work,hah-ee-FAH-ee
+pronouns-verbs.looking-for-thing,nah-tah-FOO-tah + KEE-too
+emergency-medical.i-am-bleeding-badly,nah-TOHK-wah nah DAH-moo SAH-nah
+lost-rescue.my-friend-is-hurt,rah-FEE-kee YAHN-goo ah-meh-jeh-roo-HEE-wah
+dietary-needs.does-it-contain-fish-stock,jeh KOO-nah SOO-poo yah sah-MAH-kee n-DAH-nee?
+hotel-basics.for-nights,kwah oo-SEE-koo {}
+hotel-requests.is-there-a-safe,jeh KOO-nah SEH-foo?
+payment-receipt.is-tax-included,jeh KOH-dee EE-moh?
+shopping.where-can-i-buy,nah-WEH-zah koo-noo-NOO-ah {} WAH-pee?
+emergency-medical.i-have-chest-pain,NEE-nah mah-oo-MEE-voo yah kee-FOO-ah
+lost-rescue.i-lost-my-wallet,nee-meh-poh-TEH-zah POH-chee YAHN-goo
+hotel-basics.two-beds,"vee-TAHN-dah vee-WEE-lee, tah-fah-THAH-lee"
+hotel-requests.another-blanket,"blahn-KEH-tee nyeen-GHEE-neh, tah-fah-THAH-lee"
+payment-receipt.my-card-was-declined,KAH-dee YAHN-goo ee-meh-kah-tah-LEE-wah
+shopping.do-you-have-this-in-stock,jeh m-NAH hee doo-KAH-nee?
+time-words.night,oo-SEE-koo
+emergency-medical.this-person-is-unconscious,m-TOO HOO-yoo ah-meh-poh-TEH-zah fah-HAH-moo
+lost-rescue.i-lost-my-bag,nee-meh-poh-TEH-zah m-KOH-bah WAHN-goo
+food-ordering.can-a-vegetarian-eat-this,jeh hee EE-nah NYAH-mah AH-oo sah-MAH-kee?
+hotel-basics.is-there-air-conditioning,jeh KOO-nah kee-yoh-YOH-zee?
+hotel-requests.wake-up-call,tah-fah-THAH-lee nee-AHM-sheh {}
+payment-receipt.the-bill-is-wrong,nah-THAH-nee BEE-lee EE-nah mah-KOH-sah
+shopping.two-of-these,"HEE-zee m-BEE-lee, tah-fah-THAH-lee"
+social-basics.okay-fine-i-am-okay,NEE-koh SAH-wah
+emergency-medical.where-is-the-nearest-hospital,hoh-spee-TAH-lee yah kah-REE-boo EE-koh WAH-pee?
+lost-rescue.where-is-lost-and-found,oh-FEE-see yah VEE-too vee-lee-vyoh-poh-TEH-ah nee WAH-pee?
+payment-receipt.i-already-paid,nee-meh-LEE-pah tah-YAH-ree
+shopping.what-is-it-made-of,ee-meh-tehn-gheh-NEHZ-wah nah NEE-nee?
+emergency-medical.what-is-the-emergency-number,NAHM-bah yah thah-ROO-rah nee ng-GAH-pee?
+lost-rescue.i-cannot-find-my-hotel,nah-SHEEND-wah koo-PAH-tah hoh-TEH-lee YAHN-goo
+emergency-medical.is-there-a-doctor-who-speaks-english,KOO-nah dahk-TAH-ree ah-nah-yeh-SEH-mah kee-een-gheh-REH-zah?
+lost-rescue.i-left-it-on-the-train,nee-lee-ee-AH-chah KWEH-nyeh TREH-nee
+dietary-needs.i-have-a-severe-allergy-to,NEE-nah m-ZEE-oh m-KAH-lee wah {}
+emergency-medical.i-think-a-bone-is-broken,nah-THAH-nee m-FOO-pah oo-meh-voon-JEE-kah
+lost-rescue.i-cannot-get-down,see-WEH-zee koo-SHOO-kah
+emergency-medical.please-call-my-emergency-contact,tah-fah-THAH-lee PEE-gah NAHM-bah YAHN-goo yah thah-ROO-rah
+emergency-medical.i-have-travel-insurance,NEE-nah BEE-mah yah sah-FAH-ree
+dietary-needs.no-pork,BEE-lah NYAH-mah yah ng-goo-ROO-weh
+dietary-needs.is-this-halal,jeh hee nee hah-LAH-lee?
+numbers-money.shilling,shee-LEEN-ghee
+numbers-money.shilling-symbol,shee-LEEN-ghee

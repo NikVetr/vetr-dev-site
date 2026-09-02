@@ -24,3 +24,5 @@ food-ordering.is-this-vegetarian,이거 채식이에요?,,igeo chaesigieyo?,,,2,
 food-ordering.what-do-you-recommend,뭘 추천하세요?,,mwol chucheonhaseyo?,,,2,ko-agent-v1
 food-ordering.water-please,물 주세요,,mul juseyo,,,2,ko-agent-v1
 food-ordering.can-a-vegetarian-eat-this,채식주의자도 먹을 수 있어요?,,chaesikjuuijado meogeul su isseoyo?,,,2,ko-agent-v1
+dietary-needs.no-pork,돼지고기 빼 주세요,돼지고기 들어간 건 다 빼 주세요,dwaejigogi ppae juseyo,,,2,ko-gaps-v1
+dietary-needs.is-this-halal,이거 할랄이에요?,할랄 인증 받았어요?,igeo hallarieyo?,,,2,ko-gaps-v1

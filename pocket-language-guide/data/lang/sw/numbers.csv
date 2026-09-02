@@ -1,0 +1,43 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,Sifuri,,,,2,sw-agent-v1
+numbers-money.y,Moja,mmoja · kimoja,,prefix with a noun,2,sw-agent-v1
+numbers-money.r,Mbili,wawili · viwili,,prefix with a noun,2,sw-agent-v1
+numbers-money.s-n,Tatu,watatu · vitatu,,prefix with a noun,2,sw-agent-v1
+numbers-money.s,Nne,wanne · vinne,,prefix with a noun,2,sw-agent-v1
+numbers-money.w,Tano,watano · vitano,,prefix with a noun,2,sw-agent-v1
+numbers-money.li,Sita,,,,2,sw-agent-v1
+numbers-money.q,Saba,,,,2,sw-agent-v1
+numbers-money.b,Nane,wanane · vinane,,prefix with a noun,2,sw-agent-v1
+numbers-money.ji,Tisa,,,,2,sw-agent-v1
+numbers-money.sh,Kumi,,,,2,sw-agent-v1
+numbers-money.y-b-i,Mia moja,,,,2,sw-agent-v1
+numbers-money.y-qi-n,Elfu moja,,,,2,sw-agent-v1
+numbers-money.y-w-n,Elfu kumi,,,,2,sw-agent-v1
+numbers-money.b-n,Nusu,,,,2,sw-agent-v1
+atm-cash.where-is-an-atm,ATM iko wapi?,,,,2,sw-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,"Je, ATM hii inakubali kadi za nje?",,,,2,sw-agent-v1
+atm-cash.the-atm-kept-my-card,ATM imemeza kadi yangu,,,the ATM swallowed my card,2,sw-agent-v1
+atm-cash.is-there-a-fee,"Je, kuna gharama?",,,,2,sw-agent-v1
+atm-cash.the-card-was-declined,Kadi imekataliwa,,,,2,sw-agent-v1
+atm-cash.what-is-the-exchange-rate,Kiwango cha kubadilisha ni kipi?,,,,2,sw-agent-v1
+atm-cash.no-money-came-out,Pesa hazikutoka,,,,2,sw-agent-v1
+atm-cash.where-can-i-change-money,Naweza kubadilisha pesa wapi?,,,,2,sw-agent-v1
+atm-cash.the-machine-is-out-of-service,Mashine haifanyi kazi,,,,2,sw-agent-v1
+atm-cash.please-give-me-smaller-notes,Tafadhali nipe noti ndogo,,,,2,sw-agent-v1
+atm-cash.do-you-have-change,"Je, mna chenji?",,,,2,sw-agent-v1
+atm-cash.may-i-pay-in,Naweza kulipa kwa {}?,,,,2,sw-agent-v1
+atm-cash.please-charge-in-local-currency,Tafadhali tozeni kwa fedha ya hapa,,,charge in the money of here,2,sw-agent-v1
+atm-cash.where-can-i-get-coins,Naweza kupata sarafu wapi?,,,,2,sw-agent-v1
+atm-cash.is-there-a-minimum-for-cards,"Je, kuna kiwango cha chini cha kadi?",,,,2,sw-agent-v1
+atm-cash.atm,ATM,Mashine ya pesa,,,2,sw-agent-v1
+atm-cash.banknote,Noti,Hela ya karatasi,,,2,sw-agent-v1
+atm-cash.coin,Sarafu,,,,2,sw-agent-v1
+atm-cash.cash-only,Fedha taslimu tu,Cash only,,,2,sw-agent-v1
+atm-cash.fee,Gharama,Ada,,,2,sw-agent-v1
+atm-cash.change,Chenji,Salio,,,2,sw-agent-v1
+atm-cash.exchange-rate,Kiwango cha kubadilisha,,,,2,sw-agent-v1
+atm-cash.bank,Benki,,,,2,sw-agent-v1
+atm-cash.money-exchange,Kubadilisha fedha,Forex bureau,,,2,sw-agent-v1
+atm-cash.pin,Namba ya siri,PIN,,,2,sw-agent-v1
+numbers-money.shilling,Shilingi,,,,2,sw-gaps-v1
+numbers-money.shilling-symbol,TSh · KSh · USh,/=,,TZ · KE · UG,2,sw-gaps-v1

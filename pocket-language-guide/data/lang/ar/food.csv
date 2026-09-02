@@ -24,3 +24,5 @@ food-ordering.is-this-vegetarian,هل هذا نباتي؟,,hal hādhā nabātī?
 food-ordering.what-do-you-recommend,بماذا تنصح؟,,bi-mādhā tanṣaḥ?,,,2,ar-agent-v1
 food-ordering.water-please,ماء من فضلك,,māʾ min faḍlak,,,2,ar-agent-v1
 food-ordering.can-a-vegetarian-eat-this,هل يصلح هذا للنباتيين؟,,hal yaṣluḥ hādhā lil-nabātīyīn?,,,2,ar-agent-v1
+dietary-needs.no-pork,بدون لحم خنزير,بدون خنزير ومشتقاته,bidūn laḥm khinzīr,,,2,ar-gaps-v1
+dietary-needs.is-this-halal,هل هذا حلال؟,هل يحتوي على خنزير أو كحول؟,hal hādhā ḥalāl?,,,2,ar-gaps-v1

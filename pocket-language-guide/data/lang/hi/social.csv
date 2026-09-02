@@ -1,0 +1,99 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+social-basics.hello,नमस्ते,,namaste,,,2,hi-agent-v1
+social-basics.hello-polite,नमस्कार,,namaskār,,,2,hi-agent-v1
+social-basics.good-morning,सुप्रभात,नमस्ते,suprabhāt,,namaste serves too,2,hi-agent-v1
+social-basics.good-evening,शुभ संध्या,नमस्ते,śubh saṁdhyā,,formal; namaste is usual,2,hi-agent-v1
+social-basics.goodbye,फिर मिलेंगे,नमस्ते,phir mileṁge,,see you again,2,hi-agent-v1
+social-basics.thank-you,धन्यवाद,शुक्रिया,dhanyavād,,,2,hi-agent-v1
+social-basics.you-are-welcome,कोई बात नहीं,,koī bāt nahīṁ,,it is nothing,2,hi-agent-v1
+social-basics.excuse-me-sorry,सुनिए,माफ़ कीजिए,sunie,,to get attention,2,hi-agent-v1
+social-basics.sorry,माफ़ कीजिए,सॉरी,māf kījie,,,2,hi-agent-v1
+social-basics.no-problem,कोई दिक्कत नहीं,,koī dikkat nahīṁ,,,2,hi-agent-v1
+social-basics.i-do-not-know,मुझे नहीं पता,,mujhe nahīṁ patā,,,2,hi-agent-v1
+social-basics.good-night,शुभ रात्रि,गुड नाइट,śubh rātri,,,2,hi-agent-v1
+social-basics.okay-fine-i-am-okay,ठीक है,,ṭhīk hai,,,2,hi-agent-v1
+communication.i-do-not-speak-this-language,मुझे यह भाषा नहीं आती,,mujhe yah bhāṣā nahīṁ ātī,,,2,hi-agent-v1
+communication.i-speak-only-a-little-of-this,मुझे यह भाषा थोड़ी-सी आती है,,mujhe yah bhāṣā thoṛī-sī ātī hai,,,2,hi-agent-v1
+communication.do-you-speak-english,क्या आपको अंग्रेज़ी आती है?,,kyā āpko aṁgrezī ātī hai?,,,2,hi-agent-v1
+communication.please-speak-more-slowly,ज़रा धीरे बोलिए,,zarā dhīre bolie,,,2,hi-agent-v1
+communication.i-do-not-understand-spoken,मुझे समझ नहीं आ रहा,,mujhe samajh nahīṁ ā rahā,,,2,hi-agent-v1
+communication.i-cannot-read-understand,मुझे पढ़ना-समझना नहीं आता,,mujhe paṛhnā-samajhnā nahīṁ ātā,,,2,hi-agent-v1
+communication.please-say-it-again,फिर से कहिए,,phir se kahie,,,2,hi-agent-v1
+communication.please-write-it-down,लिख दीजिए,,likh dījie,,,2,hi-agent-v1
+communication.please-wait-a-moment,ज़रा रुकिए,,zarā rukie,,,2,hi-agent-v1
+communication.can-you-help-me,मेरी मदद कीजिए,,merī madad kījie,,,2,hi-agent-v1
+communication.please-show-me-the-text,वह लिखा हुआ दिखाइए,,vah likhā huā dikhāie,,,2,hi-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,आपकी बात समझ नहीं आ रही,,āpkī bāt samajh nahīṁ ā rahī,,,2,hi-agent-v1
+communication.i-do-not-understand,मुझे समझ नहीं आया,,mujhe samajh nahīṁ āyā,,,2,hi-agent-v1
+communication.i-cannot-read-it,मुझे यह पढ़ना नहीं आता,,mujhe yah paṛhnā nahīṁ ātā,,,2,hi-agent-v1
+quick-responses.please-go-ahead,कहिए,जी,kahie,,go ahead / please,2,hi-agent-v1
+quick-responses.yes-right,हाँ / जी हाँ,,hāṁ / jī hāṁ,,,2,hi-agent-v1
+quick-responses.no-not,नहीं,,nahīṁ,,,2,hi-agent-v1
+quick-responses.okay-can,ठीक है,,ṭhīk hai,,,2,hi-agent-v1
+quick-responses.cannot-not-allowed,मना है,,manā hai,,it is forbidden,2,hi-agent-v1
+quick-responses.works-okay,चलेगा,,calegā,,it will do,2,hi-agent-v1
+quick-responses.does-not-work-no,नहीं चलेगा,,nahīṁ calegā,,,2,hi-agent-v1
+quick-responses.can-possible,हो सकता है,,ho saktā hai,,,2,hi-agent-v1
+quick-responses.cannot-not-possible,नहीं हो सकता,,nahīṁ ho saktā,,,2,hi-agent-v1
+quick-responses.okay-fine,बिल्कुल,,bilkul,,absolutely,2,hi-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,नहीं होगा,,nahīṁ hogā,,,2,hi-agent-v1
+phone-translation.i-am-using-phone-translation,फ़ोन से अनुवाद हो रहा है,,fon se anuvād ho rahā hai,,translating by phone,2,hi-agent-v1
+phone-translation.please-speak-toward-the-phone,फ़ोन की तरफ़ बोलिए,,fon kī taraf bolie,,,2,hi-agent-v1
+phone-translation.please-write-the-place-name,जगह का नाम यहाँ लिख दीजिए,,jagah kā nām yahāṁ likh dījie,,,2,hi-agent-v1
+phone-translation.one-sentence-at-a-time-please,एक-एक वाक्य बोलिए,,ek-ek vākya bolie,,,2,hi-agent-v1
+phone-translation.please-type-it-and-show-me,टाइप करके दिखाइए,,ṭāip karke dikhāie,,,2,hi-agent-v1
+phone-translation.please-look-at-the-screen,स्क्रीन देखिए,,skrīn dekhie,,,2,hi-agent-v1
+phone-text-power.please-type-it-for-me,मेरे लिए टाइप कर दीजिए,,mere lie ṭāip kar dījie,,,2,hi-agent-v1
+phone-text-power.please-use-simple-words,आसान शब्दों में बोलिए,,āsān śabdoṁ meṁ bolie,,,2,hi-agent-v1
+phone-text-power.my-phone-battery-is-low,मेरे फ़ोन की बैटरी कम है,,mere fon kī baiṭrī kam hai,,,2,hi-agent-v1
+phone-text-power.do-you-have-a-power-bank,क्या पावर बैंक है?,,kyā pāvar baiṁk hai?,,,2,hi-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,अनुवाद में गलती हो सकती है,,anuvād meṁ galtī ho saktī hai,,,2,hi-agent-v1
+phone-text-power.please-confirm,ज़रा पक्का कर लीजिए,,zarā pakkā kar lījie,,,2,hi-agent-v1
+phone-text-power.may-i-charge-my-phone-here,क्या यहाँ फ़ोन चार्ज कर लूँ?,,kyā yahāṁ fon cārj kar lūṁ?,,,2,hi-agent-v1
+sim-data.i-would-like-a-tourist-sim,मुझे टूरिस्ट सिम चाहिए,,mujhe ṭūrisṭ sim cāhie,,,2,hi-agent-v1
+sim-data.may-i-use-your-wifi,क्या आपका वाई-फ़ाई इस्तेमाल कर लूँ?,,kyā āpkā vāī-fāī istemāl kar lūṁ?,,,2,hi-agent-v1
+sim-data.how-much-data-is-included,कितना डेटा मिलेगा?,,kitnā ḍeṭā milegā?,,,2,hi-agent-v1
+sim-data.do-you-need-my-passport,क्या पासपोर्ट चाहिए?,,kyā pāsporṭ cāhie?,,,2,hi-agent-v1
+sim-data.how-long-is-it-valid,कितने दिन चलेगा?,,kitne din calegā?,,,2,hi-agent-v1
+sim-data.please-activate-it,इसे चालू कर दीजिए,,ise cālū kar dījie,,,2,hi-agent-v1
+sim-data.do-you-have-an-esim,क्या ई-सिम है?,,kyā ī-sim hai?,,,2,hi-agent-v1
+sim-data.my-data-is-not-working,मेरा डेटा नहीं चल रहा,,merā ḍeṭā nahīṁ cal rahā,,,2,hi-agent-v1
+sim-data.does-it-need-registration,क्या रजिस्ट्रेशन ज़रूरी है?,,kyā rajisṭreśan zarūrī hai?,,,2,hi-agent-v1
+sim-data.i-have-no-signal,सिग्नल नहीं आ रहा,,signal nahīṁ ā rahā,,,2,hi-agent-v1
+sim-data.please-write-the-wifi-password,वाई-फ़ाई का पासवर्ड लिख दीजिए,,vāī-fāī kā pāsvarḍ likh dījie,,,2,hi-agent-v1
+sim-data.sim-card,सिम कार्ड,,sim kārḍ,,,2,hi-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,प्लग अडैप्टर कहाँ मिलेगा?,,plag aḍaipṭar kahāṁ milegā?,,,2,hi-agent-v1
+sim-data.mobile-data,मोबाइल डेटा,,mobāil ḍeṭā,,,2,hi-agent-v1
+sim-data.can-i-top-up-this-sim,क्या इसमें रिचार्ज हो सकता है?,,kyā ismeṁ ricārj ho saktā hai?,,,2,hi-agent-v1
+sim-data.top-up,रिचार्ज,,ricārj,,,2,hi-agent-v1
+sim-data.is-there-coverage-in,क्या {} में नेटवर्क आता है?,,kyā {} meṁ neṭvark ātā hai?,,,2,hi-agent-v1
+sim-data.signal,सिग्नल,नेटवर्क,signal,,,2,hi-agent-v1
+sim-data.esim,ई-सिम,,ī-sim,,,2,hi-agent-v1
+sim-data.prepaid,प्रीपेड,,prīpeḍ,,,2,hi-agent-v1
+sim-data.roaming,रोमिंग,,romiṁg,,,2,hi-agent-v1
+etiquette.is-this-allowed,क्या इसकी इजाज़त है?,,kyā iskī ijāzat hai?,,,2,hi-agent-v1
+etiquette.is-tipping-expected,क्या टिप देनी होती है?,,kyā ṭip denī hotī hai?,,,2,hi-agent-v1
+etiquette.is-service-included,क्या सर्विस चार्ज शामिल है?,,kyā sarvis cārj śāmil hai?,,,2,hi-agent-v1
+etiquette.may-i-enter,क्या अंदर आ जाऊँ?,,kyā aṁdar ā jāūṁ?,,,2,hi-agent-v1
+etiquette.remove-shoes,क्या जूते उतारने हैं?,,kyā jūte utārne haiṁ?,,,2,hi-agent-v1
+etiquette.photo-of-you,क्या आपकी फ़ोटो ले लूँ?,,kyā āpkī foṭo le lūṁ?,,,2,hi-agent-v1
+etiquette.may-i-sit-here,क्या यहाँ बैठ जाऊँ?,,kyā yahāṁ baiṭh jāūṁ?,,,2,hi-agent-v1
+etiquette.queue-for,क्या यह {} की लाइन है?,,kyā yah {} kī lāin hai?,,,2,hi-agent-v1
+etiquette.dressed-appropriately,क्या मेरे कपड़े ठीक हैं?,,kyā mere kapṛe ṭhīk haiṁ?,,,2,hi-agent-v1
+etiquette.did-not-mean-to-offend,"अनजाने में हुआ, माफ़ कीजिए",,"anjāne meṁ huā, māf kījie",,it happened unknowingly,2,hi-agent-v1
+etiquette.what-is-customary,यहाँ का रिवाज़ क्या है?,,yahāṁ kā rivāz kyā hai?,,,2,hi-agent-v1
+etiquette.keep-the-change,बाकी रख लीजिए,,bākī rakh lījie,,,2,hi-agent-v1
+children.cannot-find-my-child,मेरा बच्चा नहीं मिल रहा है,,merā baccā nahīṁ mil rahā hai,,,2,hi-agent-v1
+children.make-an-announcement,अनाउंसमेंट करा दीजिए,उद्घोषणा कीजिए,anāuṁsmeṁṭ karā dījie,,,2,hi-agent-v1
+children.child-age,मेरा बच्चा {} साल का है,,merā baccā {} sāl kā hai,,,2,hi-agent-v1
+children.high-chair,क्या बच्चों की ऊँची कुर्सी है?,,kyā baccoṁ kī ūṁcī kursī hai?,,,2,hi-agent-v1
+children.baby-changing-room,शिशु देखभाल कक्ष कहाँ है?,,śiśu dekhbhāl kakṣ kahāṁ hai?,,,2,hi-agent-v1
+children.childrens-menu,क्या बच्चों का मेन्यू है?,,kyā baccoṁ kā menyū hai?,,,2,hi-agent-v1
+children.suitable-for-children,क्या यह बच्चों के लिए ठीक है?,,kyā yah baccoṁ ke lie ṭhīk hai?,,,2,hi-agent-v1
+children.minimum-age,कम से कम कितनी उम्र?,,kam se kam kitnī umra?,,,2,hi-agent-v1
+children.do-children-pay,क्या बच्चों का टिकट लगता है?,,kyā baccoṁ kā ṭikaṭ lagtā hai?,,,2,hi-agent-v1
+children.crib,क्या बच्चे का पालना है?,,kyā bacce kā pālnā hai?,,,2,hi-agent-v1
+children.warm-this-bottle,यह बोतल गरम कर दीजिए,,yah botal garam kar dījie,,,2,hi-agent-v1
+children.car-seat,हमें बच्चे की कार सीट चाहिए,,hameṁ bacce kī kār sīṭ cāhie,,,2,hi-agent-v1
+children.stroller,प्रैम,बच्चा गाड़ी,praim,,,2,hi-agent-v1
+children.playground,क्या खेल का मैदान है?,,kyā khel kā maidān hai?,,,2,hi-agent-v1
