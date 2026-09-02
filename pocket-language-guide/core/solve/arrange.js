@@ -35,6 +35,12 @@ export const ARRANGEMENTS = [
 
 /**
  * Rewrite a template's field grid for the chosen arrangement.
+ *
+ * For a per-row template this *owns* the positions: the `row`/`col` in the theme
+ * file are only reached when fewer than two of its fields are shown, which is why
+ * `entry` can list `script`, `script_alt` and `ipa` in the same cell without them
+ * ever overprinting -- three fields on the target side become three rows here, and
+ * `cellGrid` drops the ones the sheet is not showing before anything is painted.
  * @param {any} template
  * @param {Arrangement} arrangement
  * @param {Set<string>} shown  the field ids the sheet is displaying

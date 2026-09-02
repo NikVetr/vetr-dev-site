@@ -102,6 +102,50 @@ function paperTooCoarse(input) {
 }
 
 /**
+ * Columns the reader switched on that will print nothing on this sheet.
+ *
+ * A field draws only where two things meet: a template with a cell for it, and rows
+ * with something in that cell. Both halves have failed silently. `script_alt`, `ipa`
+ * and `literal` were in no template at all for a while, so three of the seven
+ * toggles were no-ops; `ipa` now has its cell in `entry` and is still empty in every
+ * language in the corpus, so it is a no-op again for an entirely different reason.
+ * The symptom is identical either way -- a checkbox that does nothing, in the panel
+ * whose whole subject is where text lands -- so this answers the reader's question
+ * rather than either cause, and it stops answering it the moment the column is
+ * filled.
+ * @param {SolveInput} input
+ * @returns {import('../types.js').FieldId[]}
+ */
+function emptyColumns({ blocks, theme, spec, corpus }) {
+  /** @type {Set<string>} */ const drawn = new Set();
+  let anyRows = false;
+  for (const block of blocks) {
+    const rows = block.rows;
+    if (block.kind !== 'items' || !rows?.length) continue;
+    anyRows = true;
+    const template = theme.templates[block.templateId ?? 'entry'];
+    for (const f of /** @type {import('../types.js').FieldStyle[]} */ (template.fields)) {
+      if (!drawn.has(f.field) && rows.some((r) => (r.values[f.field] ?? '').trim())) {
+        drawn.add(f.field);
+      }
+    }
+  }
+  // A blank sheet has nothing to say about any column; `nothing-selected` says the
+  // useful thing instead.
+  if (!anyRows) return [];
+  // Two columns are empty without anything being missing. `numeral` is not a column
+  // a reader turns on -- it is the gloss cell under another name, which the panel
+  // keeps in the set regardless. And a Latin-script language declares no
+  // romanisation system, so `roman` is inapplicable rather than unfilled, which is
+  // why the panel disables the romanisation menu instead of offering one; reporting
+  // it would be true and useless on nine of the sixteen languages.
+  const noRomanisation = !corpus.languages[spec.target].romanizations;
+  return spec.fieldSet.filter((f) => (
+    f !== 'numeral' && !drawn.has(f) && !(f === 'roman' && noRomanisation)
+  ));
+}
+
+/**
  * @typedef {Object} SolveInput
  * @property {import('../types.js').Block[]} blocks
  * @property {any} theme
@@ -190,6 +234,15 @@ export function layout(input) {
       message: `This paper needs ${coarse.script} text at ${coarse.floor.toFixed(2)}pt, but the `
         + `theme sets its ${coarse.field} column at ${coarse.size.toFixed(2)}pt. That column is `
         + 'enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type.',
+    });
+  }
+  for (const field of emptyColumns(input)) {
+    warnings.push({
+      code: 'empty-column',
+      severity: 'warn',
+      params: { field },
+      message: `The ${field} column is switched on, but nothing on this sheet has one, `
+        + 'so it prints nothing. Fill it in with the CSV import, or switch the column off.',
     });
   }
   if (targetScript.word_break === 'dict') {

@@ -125,12 +125,15 @@ export function warningText(warning) {
   const key = `warn.${warning.code}`;
   const template = overlay[key] ?? english[key];
   if (template === undefined) return warning.message;
-  // A `region` param is an ISO 3166 code, because the solver has no business
-  // knowing what language the interface is in -- the same split as `warn.<code>`
-  // itself. This is where a code becomes a name the reader recognises.
-  const params = warning.params?.region
-    ? { ...warning.params, region: regionName(String(warning.params.region)) }
-    : warning.params;
+  // A `region` param is an ISO 3166 code and a `field` param is a `FieldId`,
+  // because the solver has no business knowing what language the interface is in --
+  // the same split as `warn.<code>` itself. This is where a code becomes a name the
+  // reader recognises: the field label is the one the "Columns shown" toggle uses,
+  // so a warning about a column names it the way the control that switched it on
+  // does.
+  let params = warning.params;
+  if (params?.region) params = { ...params, region: regionName(String(params.region)) };
+  if (params?.field) params = { ...params, field: t(`field.${params.field}`) };
   return t(key, params);
 }
 
