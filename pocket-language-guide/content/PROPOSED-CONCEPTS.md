@@ -240,3 +240,102 @@ Recorded because they came out of the same work and would otherwise be lost.
   standardises `MENGANDUNG BABI` in red with a pig icon on packaged goods, with a
   compliance deadline of July 2027. It does not apply to restaurant service, which
   is where a phrase card is used.
+
+## From the Italian pack
+
+### `food-ordering.is-it-cheaper-at-the-counter` and a `common-signs` pair for it
+
+The single most common concrete surprise for a visitor to Italy, and the bank has
+nothing that reaches it. An espresso taken standing `al banco` is priced by the
+`tariffa al banco` posted at the till; the same espresso carried to a table is
+`servizio al tavolo` and legally may cost several times as much. Nothing on the
+sheet warns a reader that choosing a seat changes the price, and no existing row
+gets there: `shopping.how-much-is-this` asks about the object, not about where you
+consume it, and `etiquette.is-service-included` asks about the bill after the fact.
+
+Two shapes, and the second is the cheaper one. As a phrase,
+`food-ordering.is-it-cheaper-at-the-counter` — `Costa meno al banco?` — is one row
+that works anywhere the two-tier price exists. As reference words, a
+`common-signs.at-the-counter` / `.table-service` pair puts `al banco` and
+`al tavolo` on the card so a reader can match them against the two price lists
+actually posted on the wall, which is what they will be looking at.
+
+Not Italy-only, which is the argument for a universal concept rather than a scoped
+one: Portugal and Spain price a coffee the same way at the counter versus the
+terrace, and France's `au comptoir` / `en terrasse` is the same distinction with a
+statutory price list behind it.
+
+### `payment-receipt.what-is-the-cover-charge`
+
+Italy's `coperto` is a fixed per-person charge that appears on a restaurant bill and
+is neither a service charge nor a tip. `etiquette.is-service-included` does not find
+it — the honest answer to that question in Italy is usually "no", and the bill still
+carries a line the traveller did not order. `Quant’è il coperto?` is the question,
+and it is asked before sitting down rather than after eating.
+
+The same concept serves Portugal's `couvert`, Greece's and Turkey's bread-and-cover
+lines, and the `pane e coperto` of a menu written before 2000. It belongs beside
+`is-service-included` rather than replacing it, because they are different money.
+
+### `time-scheduling.what-time-do-you-reopen`
+
+`common-signs` carries open, closed and temporarily-closed, and `time-scheduling`
+carries opening and closing time — but a shop that is shut at two in the afternoon
+in Italy is neither closed nor temporarily closed, it is on `riposo` and will reopen
+at four. The useful question is the reopening time, and there is no row for it.
+`A che ora riapre?` is the Italian; the concept applies wherever a midday break is
+normal, which is Italy, Spain, Greece, much of Latin America and most of the Gulf.
+
+`common-signs.orario-continuato` — the sign a shop puts up to say it does *not*
+close at midday — is the sign-side half of the same fact, and is the weaker half:
+it is the absence of the problem rather than the problem.
+
+### Weaker: a restricted-traffic-zone sign
+
+Driving into an Italian historic centre through a `ZTL` (zona a traffico limitato)
+is an automatic fine issued by camera, and the sign is a bare white circle with a
+red border plus three letters. It is a real and expensive harm to visitors, and the
+Italian pack cannot carry it: the bank has no driving content at all, so a single
+`common-signs` row would be orphaned among words about trains and trails. Recorded
+so the next person who proposes a driving section has the strongest argument for one
+already written down.
+
+## Notes that are facts about a country, not concepts (Italian pack)
+
+- **Italy's `112` answers everywhere, but the unified response does not.** The NUE
+  112 model routes 112, 113, 115 and 118 into one `Centrale unica di risposta`, and
+  the Ministero dell'Interno's own prefecture pages count the CUR as operational in
+  sixteen regions and two autonomous provinces — about 82% of the population — with
+  calls elsewhere answered by Carabinieri operations rooms. Veneto and Campania,
+  which hold Venice and Naples, are among those without one. So unlike Indonesia,
+  `112 all services` is not an overclaim: the number always reaches a human. But
+  `113 police`, `115 fire` and `118 medical` are kept on the card behind it, because
+  outside a CUR region they are what reaches the right corps directly, and because
+  they are what every Italian sign and every Italian still uses.
+- **`118` is a medical dispatch service, not an ambulance number.** It is staffed
+  the way France's `15` is, which is why the Italian labels use `soccorso sanitario`
+  rather than `ambulanza` — the same word the prefecture pages use when they list
+  who answers a CUR call.
+- **San Marino runs one interforce centre for 112, 113 and 115**, at the Gendarmeria
+  command, and a separate `118` under the ISS for medical calls. `113` and `115`
+  reach exactly the same room as `112`, so the card prints `112` and `118` only:
+  listing all four would spend two entries of a 1.66in column to say the same thing
+  twice, which is the Kenya problem without Kenya's excuse.
+- **Vatican City is deliberately not in the registry.** Italian is one of its
+  working languages, but the Gendarmerie publishes a full landline rather than a
+  short code and Italian `112`/`118` serve the territory in practice, so a `VA` row
+  would add a flag to the Italian header collage and no number to any card.
+- **In Italy the invisible pork is cured, not stock.** The new
+  `dietary-needs.does-it-contain-pork-stock` row is filled (`Contiene brodo di
+  maiale?`) but Italian broth is beef or chicken; what defeats `no-pork` here is
+  `guanciale` in carbonara, amatriciana and gricia, `pancetta` in half the sauces,
+  and `strutto` in bread and pastry. The Italian `no-pork` row names them inside
+  `text` — `Senza maiale, salumi, pancetta o guanciale` — under the same rule the
+  Spanish pack established, and it is further evidence for the staged
+  `does-it-contain-pork-fat`.
+- **Tipping in Italy is a fourth country where "how much should I tip?" is wrong.**
+  `etiquette.is-tipping-expected` is already worded as a neutral yes/no for Japan,
+  China and South Korea; Italy belongs on that list for a different reason. The
+  `coperto` and, where charged, the `servizio` are already on the bill, so a tip is
+  optional and often just the coins left behind. `Si usa lasciare la mancia?` is
+  answerable with "no" without anyone being offended.

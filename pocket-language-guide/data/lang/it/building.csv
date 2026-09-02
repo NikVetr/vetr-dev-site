@@ -50,7 +50,7 @@ accessibility.need-to-sit-down,Ho bisogno di sedermi,,,,2,it-agent-v1
 accessibility.accessible-restroom,C'è un bagno accessibile?,C'è un bagno per disabili?,,,2,it-agent-v1
 accessibility.station-assistance,C'è assistenza in stazione?,,,,2,it-agent-v1
 accessibility.help-me-carry,"Mi aiuti a portare questo, per favore",,,,2,it-agent-v1
-accessibility.board-first,Posso salire per primo?,,,,2,it-agent-v1
+accessibility.board-first,Posso salire prima degli altri?,,,,2,it-agent-v1
 accessibility.door-width,Quanto è larga la porta?,,,,2,it-agent-v1
 accessibility.wheelchair-width,La mia sedia a rotelle è larga {} cm,,,,2,it-agent-v1
 accessibility.hard-of-hearing,Ho problemi di udito,Sono ipoacusico/a,,,2,it-agent-v1

@@ -101,6 +101,16 @@ test('a hyphen that opens a word stays with it', () => {
   assert.deepEqual(atoms('no-pork', style()), ['no-', 'pork']);
 });
 
+test('a slash does not orphan a single letter', () => {
+  // Gendered forms are written `solo/a`, `alérgico/a`, `vegetariano/a` in Italian,
+  // Spanish and Portuguese. Breaking after the slash puts one letter on the next
+  // line, which reads as a typo rather than as a wrap.
+  assert.deepEqual(atoms('solo/a', style()), ['solo/a']);
+  assert.deepEqual(atoms('alérgico/a a X', style()), ['alérgico/a ', 'a ', 'X']);
+  // A slash between two real words still offers one, which is what it is for.
+  assert.deepEqual(atoms('and/or', style()), ['and/', 'or']);
+});
+
 test('a script that breaks anywhere still keeps a Latin word whole', () => {
   // `any` means between ideographs, kana and hangul -- not inside a romanisation
   // printed among them, which is what every reader-side note does.

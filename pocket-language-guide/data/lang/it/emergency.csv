@@ -13,17 +13,17 @@ lost-rescue.please-call-the-police,"Chiami la polizia, per favore",,,,2,it-agent
 lost-rescue.we-are-here,Siamo qui,,,,2,it-agent-v1
 lost-rescue.please-look-at-my-location-pin,Guardi la mia posizione sulla mappa,,,,2,it-agent-v1
 lost-rescue.i-cannot-walk,Non riesco a camminare,,,,2,it-agent-v1
-lost-rescue.i-sprained-my-ankle,Mi sono slogato/a la caviglia,,,,2,it-agent-v1
+lost-rescue.i-sprained-my-ankle,Ho la caviglia slogata,Mi sono slogato/a la caviglia,,,2,it-agent-v1
 lost-rescue.please-contact-rescue,Chiami i soccorsi,Chiami il soccorso alpino,,,2,it-agent-v1
 lost-rescue.my-companion-is-missing,Non trovo il mio compagno di viaggio,Non trovo la mia compagna di viaggio,,,2,it-agent-v1
 lost-rescue.please-look-at-my-current-location,Guardi la mia posizione attuale,,,,2,it-agent-v1
 emergency-medical.i-feel-unwell,Non mi sento bene,,,,2,it-agent-v1
 emergency-medical.this-is-an-emergency,È un'emergenza,,,,2,it-agent-v1
-emergency-medical.i-am-having-a-severe-allergic-reaction,Sto avendo uno shock anafilattico,Reazione allergica grave,,,2,it-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,Ho uno shock anafilattico,Reazione allergica grave,,,2,it-agent-v1
 emergency-medical.i-cannot-breathe,Non riesco a respirare,,,,2,it-agent-v1
 emergency-medical.i-am-bleeding-badly,Sto perdendo molto sangue,,,,2,it-agent-v1
 emergency-medical.i-have-chest-pain,Ho dolore al petto,Dolore toracico,,,2,it-agent-v1
-emergency-medical.this-person-is-unconscious,Questa persona è incosciente,Questa persona ha perso conoscenza,,,2,it-agent-v1
+emergency-medical.this-person-is-unconscious,Questa persona ha perso conoscenza,Questa persona è priva di sensi,,,2,it-agent-v1
 emergency-medical.where-is-the-nearest-hospital,Dov'è l'ospedale più vicino?,,,,2,it-agent-v1
 emergency-medical.what-is-the-emergency-number,Qual è il numero di emergenza?,,,,2,it-agent-v1
 emergency-medical.is-there-a-doctor-who-speaks-english,C'è un medico che parla inglese?,,,,2,it-agent-v1
@@ -39,11 +39,11 @@ lost-rescue.where-is-lost-and-found,Dov'è l'ufficio oggetti smarriti?,,,,2,it-a
 lost-rescue.i-cannot-find-my-hotel,Non trovo il mio albergo,,,,2,it-agent-v1
 lost-rescue.i-left-it-on-the-train,L'ho lasciato sul treno,,,,2,it-agent-v1
 lost-rescue.i-cannot-get-down,Non riesco a scendere,,,,2,it-agent-v1
-medical-conditions.i-am-diabetic,Sono diabetico/a,,,,2,it-agent-v1
+medical-conditions.i-am-diabetic,Ho il diabete,Sono diabetico/a,,,2,it-agent-v1
 medical-conditions.i-need-insulin,Mi serve l'insulina,,,,2,it-agent-v1
 medical-conditions.i-have-asthma,Ho l'asma,,,,2,it-agent-v1
 medical-conditions.i-have-a-heart-condition,Ho una malattia cardiaca,Ho una cardiopatia,,,2,it-agent-v1
-medical-conditions.i-am-allergic-to-penicillin,Sono allergico/a alla penicillina,,,,2,it-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,Ho un'allergia alla penicillina,,,,2,it-agent-v1
 medical-conditions.i-have-epilepsy,Ho l'epilessia,Sono epilettico/a,,,2,it-agent-v1
 medical-conditions.my-blood-sugar-is-low,Ho la glicemia bassa,Ho un'ipoglicemia,,,2,it-agent-v1
 medical-conditions.i-need-my-inhaler,Mi serve il mio inalatore,Mi serve lo spray per l'asma,,,2,it-agent-v1
@@ -58,9 +58,9 @@ medical-conditions.please-give-me-sugar-or-juice,Mi dia dello zucchero o un succ
 medical-conditions.inject-it-into-my-outer-thigh,Lo inietti nella parte esterna della coscia,,,,2,it-agent-v1
 medical-conditions.my-blood-type-is,Il mio gruppo sanguigno è {},,,,2,it-agent-v1
 medical-conditions.do-not-give-me,Non mi dia {},,,,2,it-agent-v1
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Sono allergico/a all'aspirina e all'ibuprofene,,,,2,it-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Ho un'allergia all'aspirina e all'ibuprofene,,,,2,it-agent-v1
 medical-conditions.my-injector-is-in-my-bag,Il mio autoiniettore è nella borsa,,,,2,it-agent-v1
-medical-conditions.i-am-allergic-to-sulfa-drugs,Sono allergico/a ai sulfamidici,,,,2,it-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,Ho un'allergia ai sulfamidici,,,,2,it-agent-v1
 pharmacy-symptoms.which-pharmacy-is-open-now,Quale farmacia è aperta adesso?,,,,2,it-agent-v1
 pharmacy-symptoms.i-need-medicine-for,Mi serve un farmaco per {},,,,2,it-agent-v1
 pharmacy-symptoms.i-have-a-fever,Ho la febbre,,,,2,it-agent-v1
@@ -118,7 +118,7 @@ police-consulate.i-did-not-agree-to-this-price,Non ho accettato questo prezzo,,,
 police-consulate.please-write-the-report-number,Scriva il numero della denuncia,,,,2,it-agent-v1
 police-consulate.it-happened-here,È successo qui,,,,2,it-agent-v1
 police-consulate.may-i-have-a-copy-of-the-report,Posso avere una copia della denuncia?,,,,2,it-agent-v1
-police-consulate.i-will-not-sign-anything-i-cannot-read,Non firmo nulla che non posso leggere,,,,2,it-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,Non firmo nulla che non possa leggere,,,,2,it-agent-v1
 police-consulate.am-i-free-to-go,Posso andarmene?,,,,2,it-agent-v1
 police-consulate.i-do-not-want-to-go-with-you,Non voglio venire con Lei,,,,2,it-agent-v1
 body-parts.head,la testa,,,,2,it-agent-v1

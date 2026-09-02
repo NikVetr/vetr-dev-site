@@ -20,12 +20,18 @@ const SLOT_RULE_EMS = 4.6;
  * guarantee was typographic intent and nothing more, and the French translator found
  * it by reading the regex rather than the output.
  */
-// The hyphen is conditional: break after one that joins two words (`no-pork`),
-// never after one that opens a token. Every language's number note lists the
-// Japanese counters as `-tsu`, `-mai`, `-hon`, and an unconditional rule offered a
-// break between the hyphen and its own word, so a bare `-` dangled at the end of
-// a line. Nine languages write those lists.
-const BREAK_AFTER = /(?<=[ \t\n\u3000\u2013\u2014/])|(?<=[^\s-]-)/;
+// Two of these are conditional, and both conditions come from real rows.
+//
+// Break after a hyphen that joins two words (`no-pork`), never after one that
+// opens a token: every language's number note lists the Japanese counters as
+// `-tsu`, `-mai`, `-hon`, and an unconditional rule offered a break between the
+// hyphen and its own word, so a bare `-` dangled at the end of a line.
+//
+// Break after a slash only when at least two characters follow it. Gendered forms
+// are written `solo/a`, `alérgico/a`, `vegetariano/a` in Italian, Spanish and
+// Portuguese, and breaking there orphans a single letter onto the next line --
+// which reads as a typo rather than as a wrap.
+const BREAK_AFTER = /(?<=[ \t\n\u3000\u2013\u2014])|(?<=[^\s-]-)|(?<=\/)(?=\S{2})/;
 
 // In a script that breaks anywhere, a Latin word embedded in it is still one
 // atom: `any` means between ideographs, kana and hangul, not inside a

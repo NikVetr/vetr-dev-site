@@ -9,7 +9,7 @@ dietary-needs.no-seafood,Senza pesce né frutti di mare,,,,2,it-agent-v1
 dietary-needs.i-am-vegetarian,Sono vegetariano/a,,,,2,it-agent-v1
 dietary-needs.i-am-vegan,Sono vegano/a,,,,2,it-agent-v1
 dietary-needs.i-do-not-eat,Non mangio {},,,,2,it-agent-v1
-dietary-needs.i-am-allergic-to,Sono allergico/a a {},,,,2,it-agent-v1
+dietary-needs.i-am-allergic-to,Ho un'allergia a {},,,,2,it-agent-v1
 food-ordering.table-for-two,Un tavolo per due,,,,2,it-agent-v1
 food-ordering.is-a-table-available,C'è un tavolo libero?,,,,2,it-agent-v1
 food-ordering.menu-please,"Il menù, per favore",,,,2,it-agent-v1
@@ -20,6 +20,7 @@ food-ordering.check-please,"Il conto, per favore",,,,2,it-agent-v1
 food-ordering.does-it-contain,Contiene {}?,,,,2,it-agent-v1
 food-ordering.is-this-vegetarian,Questo è vegetariano?,,,,2,it-agent-v1
 dietary-needs.does-it-contain-fish-stock,Contiene brodo di pesce?,,,,2,it-agent-v1
+dietary-needs.does-it-contain-pork-stock,Contiene brodo di maiale?,Contiene brodo di ossa di maiale?,,,2,it-agent-v1
 dietary-needs.i-have-a-severe-allergy-to,Ho una grave allergia a {},,,,2,it-agent-v1
 food-ordering.what-do-you-recommend,Che cosa mi consiglia?,,,,2,it-agent-v1
 food-ordering.water-please,"Acqua, per favore",,,,2,it-agent-v1
