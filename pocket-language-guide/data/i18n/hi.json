@@ -235,5 +235,14 @@
   "gallery.previewSwap": "दोनों भाषाएँ आपस में बदलें",
   "gallery.previewReading": "आपके पढ़ने की भाषा",
   "gallery.previewLearning": "आपके सीखने की भाषा",
-  "gallery.previewStrip": "इस शीट के पृष्ठ"
+  "gallery.previewStrip": "इस शीट के पृष्ठ",
+  "format.reserve": "घड़ी के लिए जगह खाली रखें",
+  "format.reserve.none": "पूरी स्क्रीन",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "घड़ी + विजेट",
+  "format.reserveTitle": "ऊपर {top}% खाली, नीचे {bottom}%",
+  "format.reserveTop": "ऊपर खाली जगह, प्रतिशत में",
+  "format.reserveBottom": "नीचे खाली जगह, प्रतिशत में",
+  "format.percent": "%"
 }

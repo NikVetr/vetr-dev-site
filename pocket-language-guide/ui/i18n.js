@@ -92,6 +92,16 @@ export function uiLanguage() {
 }
 
 /** @returns {'ltr'|'rtl'} */
+/**
+ * Locales that write the percent sign before the number: `%50`, not `50 %`.
+ *
+ * A locale fact rather than a translation, so it lives here rather than as a
+ * pseudo-key in the catalogues. Turkish is the case in this set; the Turkish
+ * translator caught it, because the sign was rendering after the box the way the
+ * other sixteen want it.
+ */
+export const PERCENT_FIRST = new Set(['tr']);
+
 export function uiDirection() {
   return direction;
 }

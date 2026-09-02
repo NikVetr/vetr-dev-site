@@ -235,5 +235,14 @@
   "gallery.previewSwap": "言語の入れ替え",
   "gallery.previewReading": "読む言語",
   "gallery.previewLearning": "学ぶ言語",
-  "gallery.previewStrip": "このシートの各面"
+  "gallery.previewStrip": "このシートの各面",
+  "format.reserve": "時計のために空ける",
+  "format.reserve.none": "画面全体",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "ウィジェット",
+  "format.reserveTitle": "上{top}%、下{bottom}%を空ける",
+  "format.reserveTop": "上に空ける割合（パーセント）",
+  "format.reserveBottom": "下に空ける割合（パーセント）",
+  "format.percent": "%"
 }

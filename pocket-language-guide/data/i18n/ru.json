@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Поменять языки местами",
   "gallery.previewReading": "Язык, который вы читаете",
   "gallery.previewLearning": "Язык, который вы изучаете",
-  "gallery.previewStrip": "Стороны этого листа"
+  "gallery.previewStrip": "Стороны этого листа",
+  "format.reserve": "Оставить место для часов",
+  "format.reserve.none": "Весь экран",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Часы + виджеты",
+  "format.reserveTitle": "{top} % свободно сверху, {bottom} % снизу",
+  "format.reserveTop": "Свободно сверху, в процентах",
+  "format.reserveBottom": "Свободно снизу, в процентах",
+  "format.percent": "%"
 }

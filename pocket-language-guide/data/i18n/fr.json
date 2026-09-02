@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Échanger les deux langues",
   "gallery.previewReading": "Langue que vous lisez",
   "gallery.previewLearning": "Langue que vous apprenez",
-  "gallery.previewStrip": "Faces de cette feuille"
+  "gallery.previewStrip": "Faces de cette feuille",
+  "format.reserve": "Espace libre pour l’horloge",
+  "format.reserve.none": "Plein écran",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Horloge + widgets",
+  "format.reserveTitle": "{top} % libre en haut, {bottom} % en bas",
+  "format.reserveTop": "Espace libre en haut, en pourcentage",
+  "format.reserveBottom": "Espace libre en bas, en pourcentage",
+  "format.percent": "%"
 }

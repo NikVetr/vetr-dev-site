@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Scambia le due lingue",
   "gallery.previewReading": "Lingua che legge",
   "gallery.previewLearning": "Lingua che sta imparando",
-  "gallery.previewStrip": "Facciate di questo foglio"
+  "gallery.previewStrip": "Facciate di questo foglio",
+  "format.reserve": "Spazio libero per l’orologio",
+  "format.reserve.none": "Schermo intero",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Orologio + widget",
+  "format.reserveTitle": "{top}% libero in alto, {bottom}% in basso",
+  "format.reserveTop": "Spazio libero in alto, in percentuale",
+  "format.reserveBottom": "Spazio libero in basso, in percentuale",
+  "format.percent": "%"
 }

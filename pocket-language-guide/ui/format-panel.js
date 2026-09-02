@@ -14,7 +14,7 @@ import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
   itemGlyph, cutGlyph, priorityOptions,
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
-  redrawGlyphs,
+  redrawGlyphs, reserveControl,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
@@ -379,6 +379,14 @@ export function createFormatPanel(input) {
   });
   const cutField = panelField(t('format.cutIntoCards'), [cutControl.group, cutNote]);
 
+  // The mirror image of the cut control: meaningless off a screen, where the cut is
+  // meaningless on one. A phone's operating system draws its clock over the top of
+  // the wallpaper and its shortcuts over the bottom, so a sheet meant to be a lock
+  // screen has to keep those bands clear -- and there is no point offering that for
+  // a card that will be printed.
+  const reserve = reserveControl({ value: spec.geometry, onChange: emit });
+  const reserveField = panelField(t('format.reserve'), [reserve.group, reserve.custom]);
+
   /**
    * A cut needs two things the phone card has not got: paper, and a back to print
    * on. Offering it there would offer an operation with no meaning -- and
@@ -389,8 +397,10 @@ export function createFormatPanel(input) {
    * @param {number} faceCount  as resolved, since auto is what usually decides it
    */
   const setCuttable = (faceCount) => {
-    const cuttable = !presets.geometry[presetOf()]?.screen && faceCount % 2 === 0;
+    const screen = Boolean(presets.geometry[presetOf()]?.screen);
+    const cuttable = !screen && faceCount % 2 === 0;
     cutField.hidden = !cuttable;
+    reserveField.hidden = !screen;
     if (cuttable || !cut) return;
     cut = '';
     cutControl.select('');
@@ -502,6 +512,7 @@ export function createFormatPanel(input) {
     panelField(t('format.colours'), [theme.group, theme.custom]),
     panelField(t('format.ink'), [ink.group]),
     cutField,
+    reserveField,
     panelField(t('format.pngResolution'), [dpi.group]),
     panelField(t('format.columnsShown'), [fieldSet.group]),
     paper.wrap,
@@ -527,6 +538,7 @@ export function createFormatPanel(input) {
         );
       }
       size.sync(next.geometry);
+      reserve.sync(next.geometry);
       columns.select(next.geometry.columns);
       faces.select(next.autoFaces ? 0 : next.geometry.faces);
       priority.select(next.priority);

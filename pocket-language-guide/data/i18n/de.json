@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Die beiden Sprachen tauschen",
   "gallery.previewReading": "Sprache, die Sie lesen",
   "gallery.previewLearning": "Sprache, die Sie lernen",
-  "gallery.previewStrip": "Seiten dieses Blatts"
+  "gallery.previewStrip": "Seiten dieses Blatts",
+  "format.reserve": "Für die Uhr freihalten",
+  "format.reserve.none": "Vollbild",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Uhr + Widgets",
+  "format.reserveTitle": "Oben {top} % frei, unten {bottom} % frei",
+  "format.reserveTop": "Oben frei, in Prozent",
+  "format.reserveBottom": "Unten frei, in Prozent",
+  "format.percent": "%"
 }

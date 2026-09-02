@@ -192,6 +192,44 @@ test('a note in a spaceless script wraps inside its own box', async () => {
   assert.ok(worst < 0.01, `a run runs ${worst.toFixed(2)}pt past its column`);
 });
 
+test('a screen keeps its reserved bands clear of any ink', async () => {
+  // A lock screen's operating system draws its clock over the top of the wallpaper
+  // and its shortcuts over the bottom, so a sheet meant to be one has to keep those
+  // bands empty. They go through the same `max()` as a printer's dead zone, because
+  // they are the same thing -- area the sheet may not use -- which is what keeps the
+  // breaker, the auto-fit and all three renderers ignorant of them.
+  const phone = JSON.parse(await readFile('data/presets.json', 'utf8')).geometry['phone-1col'];
+  assert.ok(phone?.screen, 'expected a screen preset to test');
+  const reserve = { top: 0.3, bottom: 0.12 };
+  const geometry = { ...phone, reserve };
+
+  const box = contentBox(geometry, spec.paper);
+  assert.ok(box.top >= geometry.pageH * reserve.top - 0.01, `top ${box.top}`);
+  assert.ok(
+    geometry.pageH - (box.top + box.height) >= geometry.pageH * reserve.bottom - 0.01,
+    `bottom ${geometry.pageH - (box.top + box.height)}`,
+  );
+
+  // And it holds through a real solve, which is the claim that matters: no run, no
+  // rule and no shaded row may enter either band.
+  const { plan } = await buildSheet(ctx, {
+    ...spec, geometry, autoFaces: true, scale: 0, priority: 0.95,
+  });
+  assert.ok(plan.faces.length, 'the top priority step must still fit');
+  const limitTop = geometry.pageH * reserve.top;
+  const limitBottom = geometry.pageH * (1 - reserve.bottom);
+  for (const face of plan.faces) {
+    for (const r of face.rects) {
+      assert.ok(r.y >= limitTop - 0.01, `a rule starts at ${r.y}, inside the top band`);
+      assert.ok(r.y + r.h <= limitBottom + 0.01, `a rule ends at ${r.y + r.h}, inside the bottom band`);
+    }
+    for (const run of face.runs) {
+      assert.ok(run.y > limitTop, `a baseline at ${run.y} is inside the top band`);
+      assert.ok(run.y <= limitBottom + 0.01, `a baseline at ${run.y} is inside the bottom band`);
+    }
+  }
+});
+
 test('distribute respects per-gap ceilings and reports what it cannot place', () => {
   const gaps = [
     { natural: 0, stretch: 1, max: 3 },

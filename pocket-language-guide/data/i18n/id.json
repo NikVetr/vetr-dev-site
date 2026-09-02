@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Tukar kedua bahasa",
   "gallery.previewReading": "Bahasa yang Anda baca",
   "gallery.previewLearning": "Bahasa yang Anda pelajari",
-  "gallery.previewStrip": "Sisi lembar ini"
+  "gallery.previewStrip": "Sisi lembar ini",
+  "format.reserve": "Kosongkan untuk jam",
+  "format.reserve.none": "Layar penuh",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Jam + widget",
+  "format.reserveTitle": "Kosong {top}% di atas, {bottom}% di bawah",
+  "format.reserveTop": "Kosong di atas, dalam persen",
+  "format.reserveBottom": "Kosong di bawah, dalam persen",
+  "format.percent": "%"
 }

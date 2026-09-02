@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Badilisha nafasi za lugha mbili",
   "gallery.previewReading": "Lugha unayoisoma",
   "gallery.previewLearning": "Lugha unayoijifunza",
-  "gallery.previewStrip": "Nyuso za karatasi hii"
+  "gallery.previewStrip": "Nyuso za karatasi hii",
+  "format.reserve": "Acha nafasi kwa saa",
+  "format.reserve.none": "Skrini nzima",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Saa + wijeti",
+  "format.reserveTitle": "Wazi {top}% juu, {bottom}% chini",
+  "format.reserveTop": "Nafasi wazi juu, kwa asilimia",
+  "format.reserveBottom": "Nafasi wazi chini, kwa asilimia",
+  "format.percent": "%"
 }

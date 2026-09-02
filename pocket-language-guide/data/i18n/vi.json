@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Đổi chỗ hai ngôn ngữ",
   "gallery.previewReading": "Ngôn ngữ bạn đọc",
   "gallery.previewLearning": "Ngôn ngữ bạn đang học",
-  "gallery.previewStrip": "Các mặt của tờ giấy này"
+  "gallery.previewStrip": "Các mặt của tờ giấy này",
+  "format.reserve": "Để trống cho đồng hồ",
+  "format.reserve.none": "Toàn màn hình",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Đồng hồ + tiện ích",
+  "format.reserveTitle": "Trống {top}% ở trên, {bottom}% ở dưới",
+  "format.reserveTop": "Để trống ở trên, theo phần trăm",
+  "format.reserveBottom": "Để trống ở dưới, theo phần trăm",
+  "format.percent": "%"
 }

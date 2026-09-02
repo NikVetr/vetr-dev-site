@@ -63,10 +63,16 @@ export const LOOSE_FRACTION = 0.06;
 export function contentBox(g, paper) {
   const insetX = paper.borderless ? (g.pageW * paper.oversprayPct) / 200 : paper.nonprintablePt;
   const insetY = paper.borderless ? (g.pageH * paper.oversprayPct) / 200 : paper.nonprintablePt;
+  // A lock screen's reserved bands are the same shape as a printer's dead zone:
+  // area the sheet may not use because something else will be there. So they go
+  // through the same max(), and every downstream consumer -- the breaker, the
+  // auto-fit, all three renderers -- needs no knowledge of them.
+  const reserveTop = g.pageH * (g.reserve?.top ?? 0);
+  const reserveBottom = g.pageH * (g.reserve?.bottom ?? 0);
   const left = Math.max(g.marginLeft, insetX);
   const right = Math.max(g.marginRight, insetX);
-  const top = Math.max(g.marginTop, insetY);
-  const bottom = Math.max(g.marginBottom, insetY);
+  const top = Math.max(g.marginTop, insetY, reserveTop);
+  const bottom = Math.max(g.marginBottom, insetY, reserveBottom);
   const width = g.pageW - left - right;
   const height = g.pageH - top - bottom;
   return {

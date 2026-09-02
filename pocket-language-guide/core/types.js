@@ -92,6 +92,11 @@
  * @property {boolean} [screen]  a preset that is displayed rather than printed --
  *   the phone card. It has no back, so there is nothing to duplex and no reason for
  *   its faces to come in pairs.
+ * @property {{top:number, bottom:number}} [reserve]  fractions of the page height
+ *   kept clear at each end, for the parts of a lock screen the operating system
+ *   draws over. Only meaningful on a `screen` preset. Fractions rather than points
+ *   because it is a fraction of a screen that gets covered whatever the screen's
+ *   size, and because neither OS publishes a figure -- see `RESERVE_CHOICES`.
  */
 
 /**

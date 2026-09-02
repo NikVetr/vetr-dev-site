@@ -235,5 +235,14 @@
   "gallery.previewSwap": "تبديل اللغتين",
   "gallery.previewReading": "اللغة التي تقرأها",
   "gallery.previewLearning": "اللغة التي تتعلّمها",
-  "gallery.previewStrip": "وجوه هذه الورقة"
+  "gallery.previewStrip": "وجوه هذه الورقة",
+  "format.reserve": "ترك مساحة للساعة",
+  "format.reserve.none": "ملء الشاشة",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "الساعة والأدوات",
+  "format.reserveTitle": "فراغ {top}% من الأعلى و{bottom}% من الأسفل",
+  "format.reserveTop": "الفراغ العلوي بالنسبة المئوية",
+  "format.reserveBottom": "الفراغ السفلي بالنسبة المئوية",
+  "format.percent": "%"
 }

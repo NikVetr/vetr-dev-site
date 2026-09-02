@@ -235,5 +235,14 @@
   "gallery.previewSwap": "交换两种语言",
   "gallery.previewReading": "您阅读的语言",
   "gallery.previewLearning": "您正在学习的语言",
-  "gallery.previewStrip": "这张纸的各面"
+  "gallery.previewStrip": "这张纸的各面",
+  "format.reserve": "为时钟留空",
+  "format.reserve.none": "全屏",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "时钟+小组件",
+  "format.reserveTitle": "顶部留空 {top}%，底部 {bottom}%",
+  "format.reserveTop": "顶部留空百分比",
+  "format.reserveBottom": "底部留空百分比",
+  "format.percent": "%"
 }

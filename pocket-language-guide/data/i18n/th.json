@@ -235,5 +235,14 @@
   "gallery.previewSwap": "สลับภาษาทั้งสอง",
   "gallery.previewReading": "ภาษาที่คุณอ่าน",
   "gallery.previewLearning": "ภาษาที่คุณกำลังเรียน",
-  "gallery.previewStrip": "หน้าของแผ่นนี้"
+  "gallery.previewStrip": "หน้าของแผ่นนี้",
+  "format.reserve": "เว้นที่ให้นาฬิกา",
+  "format.reserve.none": "เต็มหน้าจอ",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "นาฬิกา + วิดเจ็ต",
+  "format.reserveTitle": "เว้นด้านบน {top}% ด้านล่าง {bottom}%",
+  "format.reserveTop": "เว้นด้านบน หน่วยเปอร์เซ็นต์",
+  "format.reserveBottom": "เว้นด้านล่าง หน่วยเปอร์เซ็นต์",
+  "format.percent": "%"
 }

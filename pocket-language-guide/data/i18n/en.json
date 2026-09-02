@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Swap the two languages",
   "gallery.previewReading": "Language you read",
   "gallery.previewLearning": "Language you are learning",
-  "gallery.previewStrip": "Faces of this sheet"
+  "gallery.previewStrip": "Faces of this sheet",
+  "format.reserve": "Keep clear for the clock",
+  "format.reserve.none": "Full screen",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Clock + widgets",
+  "format.reserveTitle": "{top}% clear at the top, {bottom}% at the bottom",
+  "format.reserveTop": "Clear at the top, in percent",
+  "format.reserveBottom": "Clear at the bottom, in percent",
+  "format.percent": "%"
 }

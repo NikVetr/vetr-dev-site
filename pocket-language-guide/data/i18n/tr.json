@@ -235,5 +235,14 @@
   "gallery.previewSwap": "İki dilin yerini değiştir",
   "gallery.previewReading": "Okuduğunuz dil",
   "gallery.previewLearning": "Öğrendiğiniz dil",
-  "gallery.previewStrip": "Bu kâğıdın yüzleri"
+  "gallery.previewStrip": "Bu kâğıdın yüzleri",
+  "format.reserve": "Saat için yer bırak",
+  "format.reserve.none": "Tam ekran",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Saat + widget",
+  "format.reserveTitle": "Üstte %{top}, altta %{bottom} boş",
+  "format.reserveTop": "Üstte boş bırakılacak yüzde",
+  "format.reserveBottom": "Altta boş bırakılacak yüzde",
+  "format.percent": "%"
 }

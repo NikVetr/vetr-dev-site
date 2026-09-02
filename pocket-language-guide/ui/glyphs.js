@@ -9,7 +9,7 @@
 // to hover to find out which is which.
 
 import { nextIndex } from './keys.js';
-import { t } from './i18n.js';
+import { PERCENT_FIRST, t, uiLanguage } from './i18n.js';
 import { PRIORITY_STEPS } from '../core/pack.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -993,4 +993,164 @@ export function redrawGlyphs(group, glyphs) {
     const old = button.querySelector('svg');
     if (old && glyphs[i]) old.replaceWith(glyphs[i]);
   });
+}
+
+/**
+ * How much of a lock screen the operating system draws over, as fractions of the
+ * screen's height kept clear at each end.
+ *
+ * **These numbers are observational, and deliberately coarse.** Neither iOS nor
+ * Android publishes a safe area for wallpaper: there is no API, the layouts change
+ * between releases, and Android's clock is *dynamic* -- large when there are no
+ * notifications, shrinking to a corner when one arrives. Apple's own guidance to
+ * wallpaper designers is the vaguest form of it, that detail in roughly the top
+ * third is obscured. So the ladder is a starting point rather than a
+ * specification, and the thing to trust is the band drawn on the canvas, which is
+ * why it is drawn: a reader can hold the phone up against it. Custom takes exact
+ * fractions for anyone who has measured their own screen.
+ *
+ * Both ends, because both systems put controls at the bottom -- the flashlight and
+ * camera on one, two shortcut buttons on the other -- and a phrase under those is
+ * a phrase you cannot read.
+ */
+export const RESERVE_CHOICES = [
+  { value: { top: 0, bottom: 0 }, captionKey: 'format.reserve.none' },
+  { value: { top: 0.30, bottom: 0.12 }, captionKey: 'format.reserve.ios' },
+  { value: { top: 0.26, bottom: 0.12 }, captionKey: 'format.reserve.android' },
+  { value: { top: 0.42, bottom: 0.12 }, captionKey: 'format.reserve.widgets' },
+];
+
+/**
+ * A phone with the reserved bands shaded and the rows that survive drawn between
+ * them, so the choice is a picture of the screen rather than two percentages.
+ * @param {{top:number, bottom:number}} reserve
+ */
+export function reserveGlyph(reserve) {
+  const box = 30;
+  const svg = frame(box, box);
+  const w = 15;
+  const x = (box - w) / 2;
+  const y = 2;
+  const h = box - 4;
+  svg.append(svgEl('rect', { x, y, width: w, height: h, rx: 2, class: 'g-page' }));
+
+  const top = h * reserve.top;
+  const bottom = h * reserve.bottom;
+  if (top > 0.5) {
+    svg.append(svgEl('rect', { x: x + 1, y: y + 1, width: w - 2, height: top - 1, class: 'g-shade' }));
+    // The clock, so the shaded band reads as "something is here" rather than as a
+    // crop mark.
+    svg.append(svgEl('rect', {
+      x: x + 3, y: y + top / 2 - 1.4, width: w - 6, height: 2.8, rx: 0.6, class: 'g-ink faint',
+    }));
+  }
+  if (bottom > 0.5) {
+    svg.append(svgEl('rect', {
+      x: x + 1, y: y + h - bottom, width: w - 2, height: bottom - 1, class: 'g-shade',
+    }));
+  }
+  // The rows that are left, at the pitch the card actually sets them.
+  for (let ry = y + top + 2; ry < y + h - bottom - 1.4; ry += 2.6) {
+    svg.append(svgEl('rect', { x: x + 2.5, y: ry, width: w - 5, height: 1.2, rx: 0.4, class: 'g-ink' }));
+  }
+  return svg;
+}
+
+/**
+ * The lock-screen reserve ladder, with a Custom row of two percent boxes.
+ *
+ * Shared by both panels, and shown only on a `screen` preset: reserving a third of
+ * a 7x5in card for a clock that is not there would be nonsense, and offering the
+ * control anyway is the kind of thing that teaches a reader to ignore a panel.
+ *
+ * @param {Object} config
+ * @param {import('../core/types.js').Geometry} config.value
+ * @param {(patch:Partial<import('../core/types.js').SheetSpec>)=>void} config.onChange
+ */
+export function reserveControl({ value, onChange }) {
+  let current = value;
+  const pct = (/** @type {string} */ label) => {
+    const box = /** @type {HTMLInputElement} */ (document.createElement('input'));
+    box.type = 'number';
+    box.className = 'numeric-box';
+    box.min = '0';
+    box.max = '60';
+    box.step = '1';
+    box.setAttribute('aria-label', label);
+    return box;
+  };
+  const top = pct(t('format.reserveTop'));
+  const bottom = pct(t('format.reserveBottom'));
+  const custom = document.createElement('div');
+  custom.className = 'numeric-custom';
+  const unit = () => {
+    const span = document.createElement('span');
+    span.className = 'numeric-unit';
+    span.textContent = t('format.percent');
+    return span;
+  };
+  // Turkish writes `%50`, not `50 %`.
+  custom.append(...(PERCENT_FIRST.has(uiLanguage())
+    ? [unit(), top, unit(), bottom]
+    : [top, unit(), bottom, unit()]));
+
+  const reserveOf = () => current.reserve ?? { top: 0, bottom: 0 };
+  const asKey = (/** @type {{top:number, bottom:number}} */ r) => `${r.top.toFixed(3)}|${r.bottom.toFixed(3)}`;
+  const presetOf = () => (RESERVE_CHOICES.find((c) => asKey(c.value) === asKey(reserveOf()))
+    ? asKey(reserveOf()) : '');
+
+  const push = () => onChange({
+    geometry: {
+      ...current,
+      reserve: { top: Number(top.value) / 100, bottom: Number(bottom.value) / 100 },
+    },
+  });
+  top.addEventListener('change', push);
+  bottom.addEventListener('change', push);
+
+  const paint = () => {
+    const r = reserveOf();
+    top.value = String(Math.round(r.top * 100));
+    bottom.value = String(Math.round(r.bottom * 100));
+    custom.hidden = presetOf() !== '';
+  };
+
+  const group = segmented({
+    label: t('format.reserve'),
+    value: presetOf(),
+    options: [
+      ...RESERVE_CHOICES.map((choice) => ({
+        value: asKey(choice.value),
+        caption: t(choice.captionKey),
+        title: t('format.reserveTitle', {
+          top: Math.round(choice.value.top * 100),
+          bottom: Math.round(choice.value.bottom * 100),
+        }),
+        glyph: reserveGlyph(choice.value),
+      })),
+      {
+        value: '',
+        caption: t('format.custom'),
+        title: t('format.reserve'),
+        glyph: reserveGlyph({ top: 0.18, bottom: 0.3 }),
+      },
+    ],
+    onChange: (key) => {
+      const choice = RESERVE_CHOICES.find((c) => asKey(c.value) === key);
+      if (choice) onChange({ geometry: { ...current, reserve: { ...choice.value } } });
+      else custom.hidden = false;
+    },
+  });
+  paint();
+
+  return {
+    group: group.group,
+    custom,
+    /** @param {import('../core/types.js').Geometry} next */
+    sync(next) {
+      current = next;
+      group.select(presetOf());
+      paint();
+    },
+  };
 }

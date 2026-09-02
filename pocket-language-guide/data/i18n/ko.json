@@ -235,5 +235,14 @@
   "gallery.previewSwap": "두 언어 바꾸기",
   "gallery.previewReading": "읽는 언어",
   "gallery.previewLearning": "배우는 언어",
-  "gallery.previewStrip": "이 시트의 각 면"
+  "gallery.previewStrip": "이 시트의 각 면",
+  "format.reserve": "시계 자리 비우기",
+  "format.reserve.none": "전체 화면",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "시계+위젯",
+  "format.reserveTitle": "위쪽 {top}%, 아래쪽 {bottom}% 비움",
+  "format.reserveTop": "위쪽 비울 비율(퍼센트)",
+  "format.reserveBottom": "아래쪽 비울 비율(퍼센트)",
+  "format.percent": "%"
 }

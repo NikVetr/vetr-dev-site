@@ -235,5 +235,14 @@
   "gallery.previewSwap": "Trocar as duas línguas",
   "gallery.previewReading": "Língua que lê",
   "gallery.previewLearning": "Língua que está a aprender",
-  "gallery.previewStrip": "Faces desta folha"
+  "gallery.previewStrip": "Faces desta folha",
+  "format.reserve": "Espaço livre para o relógio",
+  "format.reserve.none": "Ecrã inteiro",
+  "format.reserve.ios": "iPhone",
+  "format.reserve.android": "Android",
+  "format.reserve.widgets": "Relógio + widgets",
+  "format.reserveTitle": "{top} % livre em cima, {bottom} % em baixo",
+  "format.reserveTop": "Espaço livre em cima, em percentagem",
+  "format.reserveBottom": "Espaço livre em baixo, em percentagem",
+  "format.percent": "%"
 }

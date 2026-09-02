@@ -13,7 +13,7 @@ import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.j
 import {
   typefaceGlyph, inkGlyph, dpiGlyph, paddingGlyph, PADDING_CHOICES, customGlyph,
   priorityOptions, segmented, numericChoice, panelField,
-  cardSizeControl, paletteControl,
+  cardSizeControl, paletteControl, reserveControl,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
@@ -145,6 +145,14 @@ async function main() {
     onChange: (value) => set({ padding: value }),
   });
 
+  // Only on a screen preset. The phone card plus the top priority step is the
+  // wallpaper recipe, so this page is where someone setting a lock screen already
+  // is -- and a clock drawn over the top two rows is the first thing they would
+  // hit.
+  const reserve = reserveControl({ value: spec.geometry, onChange: set });
+  const reserveField = panelField(t('format.reserve'), [reserve.group, reserve.custom]);
+  reserveField.hidden = !spec.geometry.screen;
+
   const theme = paletteControl({
     themes,
     themeId: spec.themeId,
@@ -199,6 +207,7 @@ async function main() {
 
   $('controls').replaceChildren(
     panelField(t('format.cardSize'), [card.group, card.custom]),
+    reserveField,
     panelField(t('format.priority'), [priority.group]),
     panelField(t('format.typeface'), [typeface.group]),
     panelField(t('format.textPadding'), [padding.group]),
@@ -228,6 +237,9 @@ async function main() {
 
   async function refresh() {
     $('status').dataset.busy = '1';
+    // Both of these follow the card, and the card is a control on this page.
+    reserveField.hidden = !spec.geometry.screen;
+    reserve.sync(spec.geometry);
     await afterPaint();
     manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface);
     const built = await buildSheet(ctx, spec);
