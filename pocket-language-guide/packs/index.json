@@ -256,7 +256,7 @@
     {
       "target": "en",
       "source": "id",
-      "scale": 0.99,
+      "scale": 1,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -729,7 +729,7 @@
     {
       "target": "zh-Hans",
       "source": "ar",
-      "scale": 0.73,
+      "scale": 0.74,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -760,7 +760,7 @@
     {
       "target": "zh-Hans",
       "source": "fr",
-      "scale": 0.8,
+      "scale": 0.79,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -800,7 +800,7 @@
     {
       "target": "zh-Hans",
       "source": "pt",
-      "scale": 0.84,
+      "scale": 0.81,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -902,7 +902,7 @@
     {
       "target": "zh-Hans",
       "source": "ru",
-      "scale": 0.81,
+      "scale": 0.8,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -982,7 +982,7 @@
     {
       "target": "zh-Hans",
       "source": "vi",
-      "scale": 0.93,
+      "scale": 0.92,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -1942,7 +1942,7 @@
     {
       "target": "fr",
       "source": "id",
-      "scale": 0.94,
+      "scale": 0.93,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -2102,7 +2102,7 @@
     {
       "target": "de",
       "source": "ar",
-      "scale": 0.79,
+      "scale": 0.82,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -2859,7 +2859,7 @@
     {
       "target": "ko",
       "source": "hi",
-      "scale": 0.57,
+      "scale": 0.58,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -3828,9 +3828,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 1
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -4551,7 +4551,7 @@
     {
       "target": "sw",
       "source": "es",
-      "scale": 0.92,
+      "scale": 0.9,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -4642,7 +4642,7 @@
     {
       "target": "sw",
       "source": "fr",
-      "scale": 0.9,
+      "scale": 0.86,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -4682,7 +4682,7 @@
     {
       "target": "sw",
       "source": "pt",
-      "scale": 0.93,
+      "scale": 0.9,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -4722,7 +4722,7 @@
     {
       "target": "sw",
       "source": "hi",
-      "scale": 0.8,
+      "scale": 0.78,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -4784,7 +4784,7 @@
     {
       "target": "sw",
       "source": "ru",
-      "scale": 0.93,
+      "scale": 0.9,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -4824,7 +4824,7 @@
     {
       "target": "sw",
       "source": "tr",
-      "scale": 0.99,
+      "scale": 0.97,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -5237,7 +5237,7 @@
     {
       "target": "vi",
       "source": "zh-Hans",
-      "scale": 0.51,
+      "scale": 0.52,
       "faces": 4,
       "pageW": 504,
       "pageH": 360,
