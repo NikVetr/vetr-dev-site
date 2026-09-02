@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { counts, expectIncluded, expectIncludedNot, faceCount } from './counts.js';
-import { translated, untranslated } from './registry.js';
+import { translated, withoutPack } from './registry.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
 
@@ -245,17 +245,25 @@ test('Custom takes a card size and a palette of your own', async ({ page }) => {
 });
 
 test('the gloss menu offers only languages with rows on file', async ({ page }) => {
+  // Every registered language has a pack now, so the negative half of this is
+  // served rather than found: one language is hollowed out in the coverage report
+  // the page reads. Looping over a list that is empty in practice asserts nothing,
+  // and this is the check that stopped the studio offering Spanish glosses, 404ing
+  // on fifteen files and rendering a blank sheet in silence.
+  const { code, coverage } = withoutPack('ko');
+  await page.route('**/data/coverage.json', (route) => route.fulfill({
+    contentType: 'application/json', body: JSON.stringify(coverage),
+  }));
+
   await page.goto('/customize.html?target=zh-Hans&source=en');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
 
   const offered = await page.locator('#source option').evaluateAll((os) => os.map((o) => o.value));
   for (const lang of translated) {
-    if (lang.bcp47 === 'zh-Hans') continue;   // it is the target
+    if (lang.bcp47 === 'zh-Hans' || lang.bcp47 === code) continue;   // target, and the hollowed one
     expect(offered, `${lang.bcp47} has rows`).toContain(lang.bcp47);
   }
-  for (const lang of untranslated) {
-    expect(offered, `${lang.bcp47} has no rows`).not.toContain(lang.bcp47);
-  }
+  expect(offered, `${code} was emptied`).not.toContain(code);
   expect(offered).not.toContain('zh-Hans');   // never a gloss into the target
 });
 

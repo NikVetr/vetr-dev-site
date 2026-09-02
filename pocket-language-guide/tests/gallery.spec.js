@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { pickReader } from './controls.js';
-import { untranslatedEndonym } from './registry.js';
+import { translatedEndonym, withoutPack } from './registry.js';
 
 test.describe('gallery', () => {
   test('lists languages, honest about what is translated', async ({ page }) => {
@@ -8,23 +8,31 @@ test.describe('gallery', () => {
     page.on('pageerror', (e) => failures.push(e.message));
     page.on('response', (r) => { if (r.status() >= 400) failures.push(`${r.status()} ${r.url()}`); });
 
+    // The "help translate" state is what this test is about, and every registered
+    // language now has a pack -- so it is served rather than hunted for. Reading it
+    // off the registry meant the assertion evaporated into a skip the moment the
+    // last language landed, which is the worst outcome: the state still exists in
+    // the code and nothing checks it.
+    const { code, endonym, coverage } = withoutPack('ja');
+    await page.route('**/data/coverage.json', (route) => route.fulfill({
+      contentType: 'application/json', body: JSON.stringify(coverage),
+    }));
+
     await page.goto('/');
     await expect(page.locator('.card').first()).toBeVisible();
 
     // Chinese has a corpus, so it gets a real thumbnail and working buttons.
-    const chinese = page.locator('.card', { hasText: '简体中文' });
+    const chinese = page.locator('.card', { hasText: translatedEndonym('zh-Hans') });
     await expect(chinese.locator('img.card-thumb')).toBeVisible();
     await expect(chinese.getByRole('link', { name: 'Export' })).toBeVisible();
 
-    // A language with no corpus must not offer a button that yields an empty sheet.
-    // Which language that is comes from the registry, because naming one meant
-    // rewriting this assertion every time a pack landed.
-    const waiting = untranslatedEndonym();
-    test.skip(!waiting, 'every registered language has a pack');
-    const untranslatedCard = page.locator('.card', { hasText: waiting });
-    await expect(untranslatedCard.getByText('Not translated yet')).toBeVisible();
-    await expect(untranslatedCard.getByRole('link', { name: 'Export' })).toHaveCount(0);
-    await expect(untranslatedCard.getByText('help translate')).toBeVisible();
+    // And a language with no corpus must not offer a button that yields an empty
+    // sheet, whatever its declared status says.
+    const waiting = page.locator('.card', { hasText: endonym });
+    await expect(waiting, `${code} should read as untranslated`).toBeVisible();
+    await expect(waiting.getByText('Not translated yet')).toBeVisible();
+    await expect(waiting.getByRole('link', { name: 'Export' })).toHaveCount(0);
+    await expect(waiting.getByText('help translate')).toBeVisible();
 
     expect(failures).toEqual([]);
   });
