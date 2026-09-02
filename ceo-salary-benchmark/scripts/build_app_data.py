@@ -26,6 +26,7 @@ INCUMBENT_COMPENSATION_UPDATES = ENRICHMENT / "incumbent_compensation_updates.cs
 FORM990_POSITION_OBSERVATIONS = ENRICHMENT / "form990_position_observations.csv"
 FORM990_POSITION_SUPPORTING_SOURCES = ENRICHMENT / "form990_position_supporting_sources.csv"
 FORM990_BENCHMARK_POSITION_CATALOG = ENRICHMENT / "form990_benchmark_position_catalog.csv"
+GOODSTRUCTURES_POSITION_JOB_AD_REVIEW = ENRICHMENT / "goodstructures_position_job_ad_review.csv"
 LINGERING_ORG_RECOVERED_POSITIONS = ENRICHMENT / "lingering_org_recovered_us_positions.csv"
 LINGERING_ORG_PEER_REVIEW = ENRICHMENT / "lingering_org_peer_eligibility_review.csv"
 LINGERING_ORG_APP_ADDITIONS = ENRICHMENT / "lingering_org_app_position_additions.csv"
@@ -291,6 +292,15 @@ def cpi_factor(year: int) -> float:
     else:
         raise ValueError(f"Incomplete CPI series for {year} annual-average adjustment")
     return float(target[0]) / float(denominator)
+
+
+def monthly_cpi_factor(period: str) -> float:
+    cpi_rows = rows(BENCHMARK / "data" / "cpi_u.csv")
+    target = [number(row["index_value"]) for row in cpi_rows if text(row["period"]) == "2026-07"]
+    source = [number(row["index_value"]) for row in cpi_rows if text(row["period"]) == period]
+    if len(target) != 1 or len(source) != 1 or target[0] is None or source[0] is None:
+        raise ValueError(f"Incomplete monthly CPI series for {period}")
+    return float(target[0]) / float(source[0])
 
 
 def build_rp_reference() -> dict:
@@ -1769,6 +1779,234 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
     return output
 
 
+def build_position_job_ads(
+    position_catalog: list[dict],
+    incumbents: list[dict],
+) -> dict[str, list[dict]]:
+    position_keys = {position["key"] for position in position_catalog if position["key"] != "ceo"}
+    output: dict[str, list[dict]] = {key: [] for key in position_keys}
+    profiles: dict[str, dict] = {}
+    for incumbent in incumbents:
+        profiles.setdefault(incumbent["organization"], incumbent)
+    seen_ids: set[str] = set()
+    for reviewed in rows(GOODSTRUCTURES_POSITION_JOB_AD_REVIEW):
+        source_id = text(reviewed["source_id"])
+        if not source_id or source_id in seen_ids:
+            raise ValueError(f"Missing or duplicate reviewed position-posting ID: {source_id!r}")
+        seen_ids.add(source_id)
+        position_key = text(reviewed["position_key"])
+        if position_key not in position_keys:
+            raise ValueError(f"Unknown reviewed position-posting key: {position_key}")
+        source_path = BENCHMARK / text(reviewed["local_path"])
+        if not source_path.is_file():
+            raise FileNotFoundError(f"Missing reviewed position posting: {source_path}")
+        source_bytes = source_path.read_bytes()
+        observed_hash = hashlib.sha256(source_bytes).hexdigest()
+        if observed_hash != text(reviewed["sha256"]):
+            raise ValueError(f"Reviewed position-posting hash mismatch: {source_id}")
+        source_text = source_bytes.decode("utf-8", errors="ignore").casefold()
+        missing_markers = [
+            marker for marker in text(reviewed["required_text"]).split("|")
+            if marker and marker.casefold() not in source_text
+        ]
+        if missing_markers:
+            raise ValueError(f"Reviewed position posting is missing source markers {missing_markers}: {source_id}")
+        cached = cache_source(source_id, text(reviewed["local_path"]))
+        included = boolean(reviewed["included_in_app"])
+        low = number(reviewed["salary_min_usd"])
+        high = number(reviewed["salary_max_usd"])
+        if not included:
+            if low is not None or high is not None:
+                raise ValueError(f"Rejected position posting retained an analytical USD range: {source_id}")
+            continue
+        if low is None or high is None or low <= 0 or high < low:
+            raise ValueError(f"Invalid reviewed position-posting range: {source_id}")
+        organization = text(reviewed["organization"])
+        profile = profiles.get(organization)
+        if profile is None:
+            raise ValueError(f"Reviewed position posting has no existing organization profile: {organization}")
+        date = text(reviewed["posting_date"])
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+            raise ValueError(f"Invalid position-posting date: {source_id}")
+        period = date[:7]
+        factor = monthly_cpi_factor(period)
+        midpoint = (low + high) / 2
+        adjusted_low = round(low * factor, 2)
+        adjusted_high = round(high * factor, 2)
+        adjusted_midpoint = round(midpoint * factor, 2)
+        role_title = text(reviewed["role_title"])
+        position_label = next(
+            position["label"] for position in position_catalog if position["key"] == position_key
+        )
+        provenance = copy.deepcopy(profile["categoryProvenance"])
+        provenance["title"] = {
+            "raw": role_title,
+            "effective": role_title,
+            "analysisGroup": position_label,
+            "rationale": (
+                f"The preserved employer posting uses an exact {position_label} title or a reviewed direct alias. "
+                f"{text(reviewed['review_reason'])}"
+            ),
+            "citation": (
+                "benchmark/enrichment/goodstructures_position_job_ad_review.csv | "
+                f"benchmark/{text(reviewed['local_path'])}#{text(reviewed['evidence_locator'])}"
+            ),
+        }
+        provenance["classificationTiming"] = "post_freeze_goodstructures_position_enrichment"
+        provenance["provenanceType"] = "source_native_job_posting + reviewed_position_mapping + preserved_nonpay_organization_metadata"
+        evidence = (
+            f"Employer recruitment posting for {role_title}. Source-year USD range: "
+            f"{money(low)}–{money(high)}; midpoint: {money(midpoint)}. "
+            f"Location: {text(reviewed['location'])}; work arrangement: {text(reviewed['remote_status'])}."
+        )
+        output[position_key].append({
+            "id": source_id,
+            "sourceId": source_id,
+            "organization": organization,
+            "executive": "",
+            "rawExecutive": "",
+            "title": role_title,
+            "titleGroup": position_label,
+            "rawTitle": role_title,
+            "positionFamily": position_label,
+            "positionKey": position_key,
+            "secondaryRoleTags": [],
+            "seniorityGroup": "Executive" if position_key in {"coo", "chief_of_staff"} else "Director / senior specialist",
+            "roleScope": "functional",
+            "incumbencyStatus": "recruitment posting",
+            "compensationYearRoleStatus": "prospective_full_time",
+            "compensationYearRoleRule": "The employer posting explicitly describes a full-time role.",
+            "averageHoursPerWeek": None,
+            "averageHoursRelatedOrgs": None,
+            "totalReportedHours": None,
+            "defaultHoursEligible": True,
+            "sensitivityOnlyReason": "",
+            "tier": profile["tier"],
+            "topic": profile["topic"],
+            "eaAffinity": profile["eaAffinity"],
+            "location": text(reviewed["location"]),
+            "remoteStatus": text(reviewed["remote_status"]),
+            "structure": profile["structure"],
+            "revenue": None,
+            "expenses": None,
+            "staff": None,
+            "comparabilityScore": profile["comparabilityScore"],
+            "compensationYear": int(date[:4]),
+            "salary": {"base": adjusted_midpoint, "cash": adjusted_midpoint, "total": adjusted_midpoint},
+            "range": {"low": adjusted_low, "high": adjusted_high},
+            "nominalSalary": {"base": midpoint, "cash": midpoint, "total": midpoint},
+            "nominalRange": {"low": low, "high": high},
+            "reportedRange": {
+                "low": number(reviewed["reported_salary_min"]),
+                "high": number(reviewed["reported_salary_max"]),
+            },
+            "reportedCurrency": text(reviewed["reported_currency"]),
+            "reportedPayPeriod": "year",
+            "reportedSalaryText": f"{money(low)}–{money(high)} per year",
+            "cpiFactor": factor,
+            "cpiPeriod": period,
+            "defaultIncluded": True,
+            "structurallyClean": True,
+            "founder": False,
+            "analysisStatus": "primary",
+            "auditStatus": "source-validated employer job posting",
+            "selectionNote": text(reviewed["review_reason"]),
+            "evidenceText": evidence,
+            "sourceUrl": text(reviewed["original_url"]),
+            "canonicalUrl": text(reviewed["archive_url"]),
+            "cachedSource": cached,
+            "localPath": text(reviewed["local_path"]),
+            "sourceType": "Job posting",
+            "evidenceStream": "jobAds",
+            "homepageUrl": text(reviewed["homepage_url"]) or profile.get("homepageUrl", ""),
+            "categoryProvenance": provenance,
+            "positionTaxonomy": {
+                "taxonomyId": f"JOB-AD-{position_key.upper().replace('_', '-')}",
+                "classificationRule": "Exact source-native position title or reviewed direct alias.",
+                "effectiveTitleSource": "source_native_job_posting",
+                "effectiveTitleRule": "Preserve the employer's title.",
+                "standardizedPositionRule": f"Reviewed mapping to {position_label}.",
+                "standardizedPositionAliasQuality": "exact",
+                "confidence": "high",
+                "roleScope": "functional",
+                "incumbencyStatus": "recruitment posting",
+                "compensationYearRoleStatus": "prospective_full_time",
+                "compensationYearRoleRule": "The employer posting explicitly describes a full-time role.",
+                "sensitivityOnlyReason": "",
+                "partViiLocator": "",
+                "scheduleJLocator": "",
+                "methodologyPath": "benchmark/enrichment/goodstructures_position_job_ad_integration.md",
+                "classificationSource": None,
+            },
+            "goodStructuresReview": {
+                "reviewPath": "benchmark/enrichment/goodstructures_position_job_ad_review.csv",
+                "methodologyPath": "benchmark/enrichment/goodstructures_position_job_ad_integration.md",
+                "archiveSha256": observed_hash,
+                "evidenceLocator": text(reviewed["evidence_locator"]),
+            },
+        })
+    return output
+
+
+def second_highest_disclosed_pay_by_source() -> dict[str, dict[str, dict]]:
+    measures = {
+        "base": ("schedule_j_base_total_nominal", "schedule_j_base_total_july_2026"),
+        "cash": ("part_vii_cash_nominal", "part_vii_cash_july_2026"),
+        "total": ("part_vii_total_nominal", "part_vii_total_july_2026"),
+    }
+    source_rows: dict[str, list[dict[str, str]]] = {}
+    for row in rows(FORM990_POSITION_OBSERVATIONS):
+        if not (
+            boolean(row["default_hours_eligible"])
+            and text(row["role_scope"]) in {"functional", "organization_wide"}
+            and text(row["compensation_year_role_status"]) in {"no_transition_indicated", "verified_full_year"}
+            and not boolean(row["former_officer_director_trustee"])
+        ):
+            continue
+        source_rows.setdefault(text(row["source_id"]), []).append(row)
+
+    output: dict[str, dict[str, dict]] = {}
+    for source_id, candidates in source_rows.items():
+        source_result: dict[str, dict] = {}
+        for measure, (nominal_field, adjusted_field) in measures.items():
+            by_person: dict[str, dict] = {}
+            for candidate in candidates:
+                nominal = number(candidate[nominal_field])
+                adjusted = number(candidate[adjusted_field])
+                if nominal is None or adjusted is None or nominal <= 0 or adjusted <= 0:
+                    continue
+                person_key = text(candidate["person_key"]) or text(candidate["person_name"]).casefold()
+                existing = by_person.get(person_key)
+                if existing is None or nominal > existing["nominal"]:
+                    by_person[person_key] = {
+                        "person": text(candidate["effective_person_name"]) or text(candidate["person_name"]),
+                        "title": text(candidate["effective_title"]) or text(candidate["native_title"]),
+                        "nominal": nominal,
+                        "adjusted": adjusted,
+                    }
+            ranked = sorted(by_person.values(), key=lambda item: (-item["nominal"], item["person"].casefold()))
+            if len(ranked) >= 2:
+                source_result[measure] = {
+                    **ranked[1],
+                    "rank": 2,
+                    "eligibleDisclosures": len(ranked),
+                }
+        if source_result:
+            output[source_id] = source_result
+    return output
+
+
+def attach_second_highest_disclosed_pay(app_rows: list[dict]) -> int:
+    by_source = second_highest_disclosed_pay_by_source()
+    attached = 0
+    for row in app_rows:
+        result = by_source.get(text(row.get("sourceId")))
+        if result:
+            row["secondHighestDisclosedPay"] = copy.deepcopy(result)
+            attached += 1
+    return attached
+
+
 def apply_living_peer_review(incumbents: list[dict], jobs: list[dict]) -> dict[str, int]:
     """Apply a dated, pay-blind admission review without rewriting frozen inputs."""
     review_rows = rows(LIVING_PEER_REVIEW)
@@ -1902,6 +2140,7 @@ def main() -> None:
     position_catalog, position_observations, rp_references_by_position = build_position_data(
         rationales_by_source, reference_rationales
     )
+    position_job_ads = build_position_job_ads(position_catalog, incumbents)
     for position_key, additions in lingering_position_rows.items():
         if position_key not in position_observations:
             raise ValueError(f"Unknown lingering-organization position key: {position_key}")
@@ -1917,6 +2156,43 @@ def main() -> None:
         )
         catalog_entry["counts"]["catalog"] += len(additions)
         catalog_entry["counts"]["roleEligible"] += len(additions)
+    for position_key, additions in position_job_ads.items():
+        if not additions:
+            continue
+        catalog_entry = next(
+            position for position in position_catalog if position["key"] == position_key
+        )
+        catalog_entry["counts"]["catalog"] += len(additions)
+        catalog_entry["counts"]["roleEligible"] += len(additions)
+        catalog_entry["counts"]["defaultIncluded"] += sum(
+            row["defaultIncluded"] for row in additions
+        )
+        catalog_entry["description"] += (
+            f" Includes {len(additions)} source-validated recruitment "
+            f"posting{'s' if len(additions) != 1 else ''}."
+        )
+    for catalog_entry in position_catalog:
+        position_key = catalog_entry["key"]
+        if position_key == "ceo":
+            continue
+        default_rows = [
+            row for row in position_observations[position_key] + position_job_ads[position_key]
+            if row["defaultIncluded"]
+            and row["salary"][
+                "base" if row["evidenceStream"] == "jobAds" else "cash"
+            ] is not None
+        ]
+        catalog_entry["counts"]["defaultAvailable"] = len(default_rows)
+        catalog_entry["counts"]["organizations"] = len({row["organization"] for row in default_rows})
+        catalog_entry["description"] = re.sub(
+            r"\d+ usable pay records from \d+ selected peer organizations\.",
+            (
+                f"{len(default_rows)} usable pay records from "
+                f"{catalog_entry['counts']['organizations']} selected peer organizations."
+            ),
+            catalog_entry["description"],
+            count=1,
+        )
     ceo_catalog = next(position for position in position_catalog if position["key"] == "ceo")
     ceo_rows = incumbents + jobs
     ceo_catalog["counts"] = {
@@ -1931,15 +2207,16 @@ def main() -> None:
             if row["defaultIncluded"] and row["salary"]["base"] is not None
         }),
     }
-    for position in position_catalog:
-        if position["key"] != "ceo":
-            position["counts"]["defaultAvailable"] = position["counts"]["defaultIncluded"]
     # Preserve the operating-headcount page used by the UI's editable staff-similarity
     # target. The comparable RP table field remains filing-derived in build_rp_reference().
     cache_source(RP_FUNDING_SOURCE_ID, RP_FUNDING_LOCAL_PATH)
     position_app_rows = [row for family_rows in position_observations.values() for row in family_rows]
+    position_job_rows = [row for family_rows in position_job_ads.values() for row in family_rows]
     position_rp_rows = [row for family_rows in rp_references_by_position.values() for row in family_rows]
-    app_rows = incumbents + jobs + position_app_rows
+    second_highest_attachments = attach_second_highest_disclosed_pay(
+        incumbents + position_app_rows + position_rp_rows + [rp_reference]
+    )
+    app_rows = incumbents + jobs + position_app_rows + position_job_rows
     wikipedia_profiles = load_wikipedia_profiles({row["organization"] for row in app_rows})
     for row in app_rows:
         profile = wikipedia_profiles[row["organization"]]
@@ -1964,6 +2241,7 @@ def main() -> None:
         "rpReference": rp_reference,
         "positionCatalog": position_catalog,
         "positionObservations": position_observations,
+        "positionJobAds": position_job_ads,
         "rpReferencesByPosition": rp_references_by_position,
         "categoryExplainers": {
             "definitions": definitions,
@@ -1978,6 +2256,8 @@ def main() -> None:
             "jobAdEnrichmentMethodologyPath": "benchmark/enrichment/job_ad_category_methodology.md",
             "jobAdEvidenceUpdatesPath": "benchmark/enrichment/job_ad_evidence_updates.csv",
             "goodStructuresJobAdIntegrationPath": "benchmark/enrichment/goodstructures_job_ad_integration.md",
+            "goodStructuresPositionJobAdReviewPath": "benchmark/enrichment/goodstructures_position_job_ad_review.csv",
+            "goodStructuresPositionJobAdIntegrationPath": "benchmark/enrichment/goodstructures_position_job_ad_integration.md",
             "eaRosterAuditPath": "benchmark/enrichment/ea_roster_bundle_audit.md",
             "eaRosterReviewedCompensationPath": "benchmark/enrichment/ea_roster_validated_compensation.csv",
             "lingeringOrgRecoveredPositionsPath": "benchmark/enrichment/lingering_org_recovered_us_positions.csv",
@@ -2018,8 +2298,12 @@ def main() -> None:
             "livingPeerPromotedObservations": living_review_summary["promotedObservations"],
             "positionCatalogSize": len(position_catalog),
             "positionCatalogObservations": len(position_app_rows),
-            "positionDefaultIncluded": sum(row["defaultIncluded"] for row in position_app_rows),
+            "positionJobAdObservations": len(position_job_rows),
+            "positionDefaultIncluded": sum(
+                row["defaultIncluded"] for row in position_app_rows + position_job_rows
+            ),
             "positionRpReferences": len(position_rp_rows),
+            "secondHighestPayAttachments": second_highest_attachments,
         },
     }
     OUTPUT.write_text(

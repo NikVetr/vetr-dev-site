@@ -1642,6 +1642,58 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   expect(errors).toEqual([]);
 });
 
+test("second-highest disclosed pay ratios and reviewed position postings are usable", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+
+  const expectedPairs = await page.evaluate(() => window.CEO_BENCHMARK_DATA.incumbents.filter((row) => (
+    row.defaultIncluded && row.salary?.base > 0 && row.secondHighestDisclosedPay?.base?.adjusted > 0
+  )).length);
+  expect(expectedPairs).toBeGreaterThan(90);
+  const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
+  await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
+  await horizontalAxis().click();
+  await expect(page.locator('#axis-denominator option[value="secondHighestDisclosedPay"]'))
+    .toHaveText(/Second-highest eligible employee pay in the same filing/);
+  await page.locator("#axis-denominator").selectOption("secondHighestDisclosedPay");
+  await expect(page.locator("#stat-n")).toHaveText(String(expectedPairs));
+  await expect(horizontalAxis()).toContainText("Salary / 2nd-highest employee pay");
+  await page.locator(".bar-block").first().hover();
+  await expect(page.locator("#chart-tooltip")).toContainText("Second-highest disclosed employee");
+  await expect(page.locator("#chart-tooltip")).toContainText(/#2 of \d+/);
+  const sharedUrl = page.url();
+  await page.reload();
+  expect(page.url()).toBe(sharedUrl);
+  await expect(horizontalAxis()).toContainText("Salary / 2nd-highest employee pay");
+
+  await page.goto("/coo-salary-benchmark/");
+  await expect(page.locator("#stream-select")).toHaveValue("combined");
+  await expect(page.locator("#stream-select")).toBeEnabled();
+  const cooPosting = page.locator('tbody tr[data-id="SRC-AD-LAWAI-COO-2026"]');
+  await expect(cooPosting).toBeVisible();
+  await expect(cooPosting).toContainText("Director of Operations / Chief Operating Officer");
+  await page.locator("#stream-select").selectOption("jobAds");
+  await expect(page.locator("#stat-n")).toHaveText("1");
+  await cooPosting.getByRole("button", { name: "View" }).click();
+  await expect(page.locator("#dialog-evidence")).toContainText("$150,000");
+  await expect(page.locator("#dialog-evidence")).toContainText("$280,000");
+  await expect(page.locator("#dialog-cached")).toHaveAttribute(
+    "href", "evidence/original/src-ad-lawai-coo-2026.html",
+  );
+  await page.locator(".dialog-close").click();
+
+  await page.locator("#position-select").selectOption("chief_of_staff");
+  await page.locator("#stream-select").selectOption("jobAds");
+  await expect(page.locator("#stat-n")).toHaveText("3");
+  await expect(page.locator('tbody tr[data-id="SRC-AD-LEEP-COS-2025"]')).toHaveCount(0);
+  const postingIds = await page.locator("tbody tr[data-id]").evaluateAll((rows) => rows.map((row) => row.dataset.id).sort());
+  expect(postingIds).toEqual([
+    "SRC-AD-CAIS-COS-2026", "SRC-AD-LAWAI-COS-2026", "SRC-AD-NEWROOTS-COS-2026",
+  ]);
+  expect(errors).toEqual([]);
+});
+
 test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -2026,9 +2078,14 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     const expected = await page.evaluate((positionKey) => {
       const data = window.CEO_BENCHMARK_DATA;
       const observations = data.positionObservations[positionKey];
+      const jobAds = data.positionJobAds?.[positionKey] || [];
       return {
-        observedCash: observations.filter((row) => row.salary.cash > 0).length,
-        defaultCash: observations.filter((row) => row.defaultIncluded && row.salary.cash != null).length,
+        hasJobAds: jobAds.length > 0,
+        jobAds: jobAds.length,
+        observedCash: observations.filter((row) => row.salary.cash > 0).length
+          + jobAds.filter((row) => row.salary.base > 0).length,
+        defaultCash: observations.filter((row) => row.defaultIncluded && row.salary.cash != null).length
+          + jobAds.filter((row) => row.defaultIncluded && row.salary.base != null).length,
         defaultBase: observations.filter((row) => row.defaultIncluded && row.salary.base != null).length,
         rpReferences: (data.rpReferencesByPosition[positionKey] || []).length,
       };
@@ -2043,11 +2100,18 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     await expect(page.locator("#evidence-table-panel")).toHaveAttribute(
       "aria-label", `${position.pageLabel} pay table`,
     );
-    await expect(page.locator("#stream-select")).toHaveValue("incumbents");
-    await expect(page.locator("#stream-select")).toBeDisabled();
-    await expect(page.locator('#stream-select option[value="combined"]')).toHaveAttribute("disabled", "");
-    await expect(page.locator('#stream-select option[value="jobAds"]')).toHaveAttribute("disabled", "");
-    await expect(page.locator("#stream-description")).toContainText("CEO job postings are not mixed");
+    await expect(page.locator("#stream-select")).toHaveValue(expected.hasJobAds ? "combined" : "incumbents");
+    if (expected.hasJobAds) {
+      await expect(page.locator("#stream-select")).toBeEnabled();
+      await expect(page.locator('#stream-select option[value="combined"]')).toBeEnabled();
+      await expect(page.locator('#stream-select option[value="jobAds"]')).toBeEnabled();
+      await expect(page.locator("#stream-description")).toHaveText("");
+    } else {
+      await expect(page.locator("#stream-select")).toBeDisabled();
+      await expect(page.locator('#stream-select option[value="combined"]')).toHaveAttribute("disabled", "");
+      await expect(page.locator('#stream-select option[value="jobAds"]')).toHaveAttribute("disabled", "");
+      await expect(page.locator("#stream-description")).toContainText("only pay reported in Form 990 filings");
+    }
     await expect(page.locator("#measure-select")).toHaveValue(position.defaultMeasure);
     await expect(page.locator("#adjusted-compensation-term")).toHaveText("Reported pay");
     await expect(page.locator("#reported-compensation-term")).toHaveText("Reported pay");
@@ -2060,10 +2124,13 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     await expect(page.locator('.auto-weight-rule input[value="comparability"]')).toBeDisabled();
     await expect(page.locator("#auto-weight-note")).toContainText("Automatic CEO weighting only");
     const sourceTypeWeight = page.locator("#weighting-components input[value='sourceType']");
-    await expect(sourceTypeWeight).toBeDisabled();
-    await expect(sourceTypeWeight.locator("xpath=..")).toHaveAttribute(
-      "title", /only Form 990 records/,
-    );
+    if (expected.hasJobAds) await expect(sourceTypeWeight).toBeEnabled();
+    else {
+      await expect(sourceTypeWeight).toBeDisabled();
+      await expect(sourceTypeWeight.locator("xpath=..")).toHaveAttribute(
+        "title", /only Form 990 records/,
+      );
+    }
     await expect(page.locator('.stream-balance-rule input[value="streamBalanced"]')).toBeDisabled();
     await expect(page.locator("#weighting-description")).toContainText("equal total influence");
     await expect(page.locator("#weighting-description")).toContainText("Automatic CEO weighting has not yet been extended");
@@ -2072,6 +2139,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
       const data = window.CEO_BENCHMARK_DATA;
       return data.positionObservations[positionKey].every((row) => row.sourceType !== "Job posting");
     }, key)).toBe(true);
+    await expect(page.locator('tbody tr[data-id^="SRC-AD-"]')).toHaveCount(expected.jobAds);
     if (expected.rpReferences) {
       await expect(page.locator(".rp-chart-marker")).toHaveCount(expected.rpReferences);
       await expect(page.locator("tbody .rp-reference-row input")).toHaveCount(0);
@@ -2134,12 +2202,18 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
       expect(Math.max(...comparisonTotals) - Math.min(...comparisonTotals)).toBeLessThanOrEqual(0.04);
     }
 
+    if (expected.hasJobAds) await page.locator("#stream-select").selectOption("incumbents");
     await page.locator("#measure-select").selectOption("base");
     await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultBase));
     await expect(page.locator("#adjusted-compensation-term")).toHaveText("Base pay");
     await expect(page.locator("#reported-compensation-term")).toHaveText("Base pay");
     await page.locator("#measure-select").selectOption(position.defaultMeasure);
-    await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultCash));
+    const incumbentDefaultCash = expected.defaultCash - expected.jobAds;
+    await expect(page.locator("#stat-n")).toHaveText(String(incumbentDefaultCash));
+    if (expected.hasJobAds) {
+      await page.locator("#stream-select").selectOption("combined");
+      await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultCash));
+    }
 
     await expect.poll(() => new URL(page.url()).pathname).toBe(`/${key.replaceAll("_", "-")}-salary-benchmark/`);
     expect(new URL(page.url()).searchParams.has("position")).toBe(false);
@@ -2917,7 +2991,7 @@ test("benchmark changes can be undone and redone without replacing native field 
 test("non-CEO robustness omits unsupported source and automatic-weight alternatives", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/coo-salary-benchmark/");
+  await page.goto("/finance-director-salary-benchmark/");
   await page.getByRole("tab", { name: "Robustness" }).click();
   await expect(page.locator('#robustness-weighting-option input')).toBeDisabled();
   await expect(page.locator('#robustness-source-option input')).toBeDisabled();

@@ -247,6 +247,46 @@ for _, r in j.iterrows():
         **archived_state,
     })
 
+# Preserve the source-native non-CEO recruitment pages discovered through the
+# authorized GoodStructures dataset. The reviewed table includes one rejected
+# currency-mismatch record so that the negative decision remains auditable.
+position_jobs = pd.read_csv(ROOT / "enrichment" / "goodstructures_position_job_ad_review.csv")
+for _, r in position_jobs.iterrows():
+    sid = clean(r.get("source_id"))
+    local_path = clean(r.get("local_path"))
+    local = ROOT / local_path
+    if not local.is_file():
+        raise FileNotFoundError(local)
+    b = local.read_bytes()
+    observed_hash = hashlib.sha256(b).hexdigest()
+    if observed_hash != clean(r.get("sha256")):
+        raise ValueError(f"Reviewed position-posting hash mismatch: {sid}")
+    rows.append({
+        "source_id": sid,
+        "organization": clean(r.get("organization")),
+        "evidence_stream": "position_job_ad",
+        "required_for_source_complete_release": "yes",
+        "canonical_url": clean(r.get("original_url")),
+        "fallback_url_1": clean(r.get("archive_url")),
+        "fallback_url_2": "https://salaries.goodstructures.co/",
+        "preferred_provenance": "preserved employer posting; GoodStructures used for discovery and deduplication",
+        "expected_local_path": local_path,
+        "expected_mime_family": "html",
+        "minimum_bytes": 500,
+        "ein": "",
+        "irs_object_id": "",
+        "tax_period_begin": "",
+        "tax_period_end": "",
+        "analysis_use": "included position benchmark" if clean(r.get("included_in_app")).lower() == "yes" else "rejected currency-mismatch audit record",
+        "validation_rule": "source-native employer page; title, annual range, currency, work status, and duplicate identity checked against the reviewed table",
+        "current_status": "present_verified_source_native",
+        "current_local_path": local_path,
+        "current_sha256": observed_hash,
+        "current_byte_length": len(b),
+        "last_attempt_timestamp": "2026-09-02T00:00:00Z",
+        "last_attempt_result": "recovered from the Internet Archive and checked against the employer-authored posting",
+    })
+
 # Add all other external sources from the original manifest.  Frozen/local analysis
 # inputs are already source-complete as local files and are recorded as such.
 m = pd.read_csv(D / "source_manifest.csv")

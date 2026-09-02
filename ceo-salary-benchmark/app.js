@@ -98,7 +98,12 @@
   }
 
   function positionJobAds(key = state.position) {
-    return key === "ceo" ? DATA.jobAds : [];
+    if (key === "ceo") return DATA.jobAds;
+    return Array.isArray(DATA.positionJobAds?.[key]) ? DATA.positionJobAds[key] : [];
+  }
+
+  function defaultPositionStream(key = state.position) {
+    return key === "ceo" || positionJobAds(key).length ? "combined" : "incumbents";
   }
 
   function activeRpReferences(key = state.position) {
@@ -109,9 +114,12 @@
   const allPositionIncumbents = Object.entries(DATA.positionObservations || {})
     .filter(([key]) => key !== "ceo" && POSITION_BY_KEY.has(key))
     .flatMap(([, positionRows]) => Array.isArray(positionRows) ? positionRows : []);
+  const allPositionJobAds = Object.entries(DATA.positionJobAds || {})
+    .filter(([key]) => key !== "ceo" && POSITION_BY_KEY.has(key))
+    .flatMap(([, positionRows]) => Array.isArray(positionRows) ? positionRows : []);
   const allRowsByStream = {
     incumbents: [...DATA.incumbents, ...allPositionIncumbents],
-    jobAds: [...DATA.jobAds],
+    jobAds: [...DATA.jobAds, ...allPositionJobAds],
   };
   Object.entries(allRowsByStream).forEach(([stream, streamRows]) => {
     const ids = new Set();
@@ -464,7 +472,9 @@
     stopResultsPanelSizeAnimation({ freeze: true });
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       refs.analysisColumn.classList.add("is-animating-results-size");
-      resultsPanelAnimationTimer = window.setTimeout(stopResultsPanelSizeAnimation, 440);
+      // Keep the state class briefly after the 400 ms transition so delayed rendering
+      // cannot remove it before observers can identify the animated state.
+      resultsPanelAnimationTimer = window.setTimeout(stopResultsPanelSizeAnimation, 600);
     }
     refs.analysisColumn.style.setProperty("--results-size", resultsHeight + "px");
     refs.analysisColumn.classList.add("has-custom-results-size");
@@ -583,11 +593,6 @@
         resizePanelAt(type, x, y);
         saveLayoutPreferences();
       });
-    });
-    refs.analysisColumn.addEventListener("transitionend", (event) => {
-      if (event.target === refs.analysisColumn && event.propertyName === "grid-template-rows") {
-        stopResultsPanelSizeAnimation();
-      }
     });
     refs.analysisColumn.addEventListener("transitioncancel", (event) => {
       if (event.target === refs.analysisColumn && event.propertyName === "grid-template-rows") {
@@ -908,8 +913,7 @@
 
   function salaryForBasis(row, inflationAdjusted) {
     const values = inflationAdjusted ? row.salary : row.nominalSalary;
-    const value = rowStream(row) === "jobAds" || state.stream === "combined"
-      ? values?.base : values?.[state.measure];
+    const value = rowStream(row) === "jobAds" ? values?.base : values?.[state.measure];
     return Number.isFinite(value) && value > 0 ? value : null;
   }
 
@@ -987,6 +991,20 @@
       shortLabel: "Pay year", label: () => "Pay year",
       value: (row) => row.compensationYear, format: (value) => value == null ? "—" : `${Math.round(value)}`,
       fullFormat: (value) => value == null ? "—" : `${Math.round(value)}`, logarithmic: false,
+    },
+    secondHighestDisclosedPay: {
+      shortLabel: "2nd-highest employee pay",
+      label: () => `Second-highest eligible employee pay in the same filing (${priceBasisLabel()})`,
+      value: (row) => {
+        const measure = rowStream(row) === "jobAds" ? "base" : state.measure;
+        const observation = row.secondHighestDisclosedPay?.[measure];
+        const value = state.inflationAdjusted ? observation?.adjusted : observation?.nominal;
+        return Number.isFinite(value) && value > 0 ? value : null;
+      },
+      format: compactMoney,
+      fullFormat: money,
+      logarithmic: false,
+      secondHighestDisclosedPay: true,
     },
   };
 
@@ -1102,6 +1120,13 @@
         return { eligible: false, value: null, reason: `More than one ${label} compensation row appears in the same filing, so no unique match can be used.` };
       }
       return { eligible: false, value: null, reason: `No unique positive ${label} compensation row is available from the same filing.` };
+    }
+    if (variableKey === "secondHighestDisclosedPay") {
+      return {
+        eligible: false,
+        value: null,
+        reason: "Fewer than two eligible positive employee-pay disclosures are available in the same Form 990 filing.",
+      };
     }
     const reasons = {
       salary: `No usable ${measureLabel(row)} record is available.`,
@@ -2614,9 +2639,21 @@
       topic: "Area", eaAffinity: "Effective Altruism", sourceType: "Pay source",
       titleGroup: "Title group", structure: "Organization type",
     }[state.chartColor];
+    const plottedAxisKeys = state.view === "scatter" ? ["scatterX", "scatterY"] : ["histogram"];
+    const usesSecondHighest = plottedAxisKeys.some((axisKey) => {
+      const expression = axisExpression(axisKey);
+      return expression.numerator === "secondHighestDisclosedPay"
+        || (axisMode(axisKey) === "ratio" && expression.denominator === "secondHighestDisclosedPay");
+    });
+    const secondHighestMeasure = rowStream(row) === "jobAds" ? "base" : state.measure;
+    const secondHighest = usesSecondHighest ? row.secondHighestDisclosedPay?.[secondHighestMeasure] : null;
     const details = [
       context.chartDetail,
       ...(context.rankDetails || []),
+      secondHighest ? [
+        "Second-highest disclosed employee",
+        `${secondHighest.person} · ${secondHighest.title} · #2 of ${secondHighest.eligibleDisclosures}`,
+      ] : null,
       range ? ["Advertised range", range] : null,
       context.reference ? ["How this record is used", "RP reference only · shown for context, not included in results"] : ["Peer group", tier.label],
       !context.reference && detailedPeerGroup !== tier.label ? ["Detailed peer group", detailedPeerGroup] : null,
@@ -3294,6 +3331,10 @@
     if (row.categoryProvenance?.sourceWave === "authorized_job_board_addition") provenanceLinks.push(
       ["GoodStructures posting integration", DATA.categoryExplainers.goodStructuresJobAdIntegrationPath],
     );
+    if (row.goodStructuresReview) provenanceLinks.push(
+      ["Reviewed position posting", DATA.categoryExplainers.goodStructuresPositionJobAdReviewPath],
+      ["Position-posting method", DATA.categoryExplainers.goodStructuresPositionJobAdIntegrationPath],
+    );
     if (row.positionTaxonomy) provenanceLinks.push(
       ["Standardized position list", DATA.categoryExplainers.positionCatalogPath],
       ["How positions were grouped", DATA.categoryExplainers.positionMethodologyPath],
@@ -3334,7 +3375,7 @@
     const basis = state.inflationAdjusted ? "July 2026 USD" : "original reported USD";
     if (row && rowStream(row) === "jobAds") return `Job-posting midpoint, ${basis}`;
     if (row) {
-      const rowMeasure = state.stream === "incumbents" ? state.measure : "base";
+      const rowMeasure = rowStream(row) === "jobAds" ? "base" : state.measure;
       return {
         base: `Base pay (Schedule J), ${basis}`,
         cash: `Reported cash pay (Part VII), ${basis}`,
@@ -3352,13 +3393,13 @@
 
   function renderWeightControls() {
     if (!isCeoPosition()) state.weightings.delete("comparability");
-    if (!isCeoPosition()) {
+    if (!isCeoPosition() && !positionJobAds().length) {
       state.weightings.delete("sourceType");
     }
     refs.weightingComponents.forEach((input) => {
       input.checked = state.weightings.has(input.value);
       if (input.value === "comparability") input.disabled = !isCeoPosition();
-      else if (input.value === "sourceType") input.disabled = !isCeoPosition();
+      else if (input.value === "sourceType") input.disabled = !isCeoPosition() && !positionJobAds().length;
       else if (input.value === "streamBalanced") input.disabled = state.stream !== "combined" || !isCeoPosition();
       else input.disabled = false;
       const label = input.closest("label");
@@ -3366,7 +3407,7 @@
         label.title = input.disabled
           ? (input.value === "comparability"
             ? "Unavailable: automatic weighting currently covers the CEO benchmark only."
-            : "Unavailable: non-CEO positions currently contain only Form 990 records.")
+            : "Unavailable when this position has only Form 990 records.")
           : "";
       }
     });
@@ -3598,6 +3639,7 @@
   function updatePositionControls() {
     const position = positionDefinition();
     const ceo = isCeoPosition();
+    const hasJobAds = positionJobAds().length > 0;
     refs.position.value = position.key;
     refs.positionSelectedLabel.textContent = position.pageLabel;
     const description = position.description || (ceo
@@ -3622,12 +3664,12 @@
       "aria-label", `Sort by source-reported ${compensationMeasureLabel().toLowerCase()}`,
     );
     [...refs.stream.options].forEach((option) => {
-      option.disabled = !ceo && option.value !== "incumbents";
+      option.disabled = !ceo && !hasJobAds && option.value !== "incumbents";
     });
-    refs.stream.disabled = !ceo;
-    refs.streamDescription.textContent = ceo
+    refs.stream.disabled = !ceo && !hasJobAds;
+    refs.streamDescription.textContent = ceo || hasJobAds
       ? ""
-      : "This position currently uses pay reported in Form 990 filings. CEO job postings are not mixed into it.";
+      : "This position currently has only pay reported in Form 990 filings.";
     refs.autoWeightNote.textContent = ceo
       ? "Form 990s: similarity to RP's size · postings: non-pay similarity"
       : "Automatic CEO weighting only";
@@ -3686,7 +3728,10 @@
   const URL_SAMPLE_CODES = Object.freeze({ primary: "p", sensitivity: "s", clean: "c", tierA: "a", observed: "o" });
   const URL_FIT_CODES = Object.freeze({ empirical: "e", lognormal: "l", gamma: "g" });
   const URL_QUANTILE_CODES = Object.freeze({ quintiles: "q", deciles: "d", percentiles: "p", custom: "c" });
-  const URL_VARIABLE_CODES = Object.freeze({ salary: "s", expenses: "e", revenue: "r", staff: "f", comparabilityScore: "m", compensationYear: "y" });
+  const URL_VARIABLE_CODES = Object.freeze({
+    salary: "s", expenses: "e", revenue: "r", staff: "f", comparabilityScore: "m",
+    compensationYear: "y", secondHighestDisclosedPay: "d",
+  });
   const reverseCodes = (codes) => Object.fromEntries(Object.entries(codes).map(([key, value]) => [value, key]));
   const URL_WEIGHT_KEYS = reverseCodes(URL_WEIGHT_CODES);
   const URL_FILTER_KEYS = reverseCodes(URL_FILTER_CODES);
@@ -3795,7 +3840,7 @@
     if (state.ranges.expenses.low !== state.ranges.expenses.min || state.ranges.expenses.high !== state.ranges.expenses.max) ranges.e = [state.ranges.expenses.low, state.ranges.expenses.high];
     if (state.ranges.matchScore.low !== state.ranges.matchScore.min || state.ranges.matchScore.high !== state.ranges.matchScore.max) ranges.m = [state.ranges.matchScore.low, state.ranges.matchScore.high];
     const payload = { v: URL_STATE_VERSION };
-    const defaultStream = isCeoPosition() ? "combined" : "incumbents";
+    const defaultStream = defaultPositionStream();
     if (state.stream !== defaultStream) payload.e = URL_STREAM_CODES[state.stream];
     if (state.measure !== positionDefinition().defaultMeasure && state.stream === "incumbents") payload.m = URL_MEASURE_CODES[state.measure];
     if (!state.inflationAdjusted) payload.n = 1;
@@ -4557,7 +4602,7 @@
       return Number.isFinite(value) && value > 0 ? value : null;
     }
     const values = spec.inflationAdjusted ? row.salary : row.nominalSalary;
-    const measure = rowStream(row) === "jobAds" || spec.stream === "combined" ? "base" : spec.measure;
+    const measure = rowStream(row) === "jobAds" ? "base" : spec.measure;
     const value = values?.[measure];
     return Number.isFinite(value) && value > 0 ? value : null;
   }
@@ -5558,9 +5603,13 @@
     weightingInput.disabled = !ceo;
     refs.robustnessWeightingOption.title = ceo ? "" : "Automatic weights are available only for the CEO benchmark.";
     sourceInput.disabled = !ceo;
-    refs.robustnessSourceOption.title = ceo ? "" : "Other supported positions use Form 990 evidence only.";
+    refs.robustnessSourceOption.title = ceo ? "" : positionJobAds().length
+      ? "This position has too few job-posting organizations for a stable pay-source comparison."
+      : "This position currently has only Form 990 records.";
     postingInput.disabled = !ceo;
-    refs.robustnessPostingOption.title = ceo ? "" : "Job-posting range checks are available only for the CEO benchmark.";
+    refs.robustnessPostingOption.title = ceo ? "" : positionJobAds().length
+      ? "This position has too few job-posting organizations for a stable lower/midpoint/upper comparison."
+      : "No source-validated job-posting ranges are available for this position.";
     if (robustnessReport && robustnessReport.positionKey !== state.position) {
       robustnessReport = null;
       robustnessResultWidth = 0;
@@ -5716,10 +5765,10 @@
     const enumValue = (value, allowed, fallback) => allowed.includes(value) ? value : fallback;
     state.position = enumValue(analysis.pos, [...POSITION_BY_KEY.keys()], "ceo");
     state.stream = enumValue(analysis.s, ["incumbents", "jobAds", "combined"], sourceVersion === 1 ? "incumbents" : state.stream);
-    if (!isCeoPosition()) state.stream = "incumbents";
+    if (!isCeoPosition() && !positionJobAds().length) state.stream = "incumbents";
     state.measure = enumValue(analysis.m, ["base", "cash", "total"], positionDefinition().defaultMeasure);
     state.inflationAdjusted = analysis.ia !== false;
-    if (state.stream === "combined") state.measure = "base";
+    if (state.stream === "combined") state.measure = positionDefinition().defaultMeasure;
     state.sample = enumValue(analysis.p, ["primary", "sensitivity", "clean", "tierA", "observed"], state.sample);
     state.fit = enumValue(analysis.d, ["empirical", "lognormal", "gamma"], state.fit);
     const validWeights = [...DISCRETE_WEIGHT_KEYS, "comparability", "size", "staff", "recency", "streamBalanced"];
@@ -5882,7 +5931,7 @@
   function activatePosition(key) {
     if (!POSITION_BY_KEY.has(key)) return;
     state.position = key;
-    state.stream = isCeoPosition() ? "combined" : "incumbents";
+    state.stream = defaultPositionStream(key);
     state.measure = positionDefinition().defaultMeasure;
     state.sample = "primary";
     state.focusedId = "";
@@ -5959,7 +6008,10 @@
   refs.position.addEventListener("change", () => activatePosition(refs.position.value));
   refs.stream.addEventListener("change", () => {
     state.stream = refs.stream.value; state.focusedId = ""; state.autoBins = true;
-    if (state.stream === "combined") { state.measure = "base"; refs.measure.value = "base"; }
+    if (state.stream === "combined") {
+      state.measure = positionDefinition().defaultMeasure;
+      refs.measure.value = state.measure;
+    }
     clearAnalyticalFilters();
     applyPreset(); configureRanges(); buildFilterMenus(); renderWeightControls(); renderAll();
   });
