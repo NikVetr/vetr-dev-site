@@ -1948,7 +1948,11 @@ def build_position_job_ads(
     return output
 
 
-def second_highest_disclosed_pay_by_source() -> dict[str, dict[str, dict]]:
+def normalized_person_key(value: object) -> str:
+    return re.sub(r"[^a-z0-9]+", "", text(value).casefold())
+
+
+def eligible_disclosed_pay_by_source() -> dict[str, dict[str, list[dict]]]:
     measures = {
         "base": ("schedule_j_base_total_nominal", "schedule_j_base_total_july_2026"),
         "cash": ("part_vii_cash_nominal", "part_vii_cash_july_2026"),
@@ -1965,9 +1969,9 @@ def second_highest_disclosed_pay_by_source() -> dict[str, dict[str, dict]]:
             continue
         source_rows.setdefault(text(row["source_id"]), []).append(row)
 
-    output: dict[str, dict[str, dict]] = {}
+    output: dict[str, dict[str, list[dict]]] = {}
     for source_id, candidates in source_rows.items():
-        source_result: dict[str, dict] = {}
+        source_result: dict[str, list[dict]] = {}
         for measure, (nominal_field, adjusted_field) in measures.items():
             by_person: dict[str, dict] = {}
             for candidate in candidates:
@@ -1979,30 +1983,61 @@ def second_highest_disclosed_pay_by_source() -> dict[str, dict[str, dict]]:
                 existing = by_person.get(person_key)
                 if existing is None or nominal > existing["nominal"]:
                     by_person[person_key] = {
+                        "personKey": person_key,
                         "person": text(candidate["effective_person_name"]) or text(candidate["person_name"]),
                         "title": text(candidate["effective_title"]) or text(candidate["native_title"]),
+                        "benchmarkPosition": text(candidate["benchmark_position"]),
+                        "roleScope": text(candidate["role_scope"]),
                         "nominal": nominal,
                         "adjusted": adjusted,
                     }
             ranked = sorted(by_person.values(), key=lambda item: (-item["nominal"], item["person"].casefold()))
-            if len(ranked) >= 2:
-                source_result[measure] = {
-                    **ranked[1],
-                    "rank": 2,
-                    "eligibleDisclosures": len(ranked),
-                }
+            source_result[measure] = [
+                {**candidate, "sourceRank": rank, "eligibleDisclosures": len(ranked)}
+                for rank, candidate in enumerate(ranked, start=1)
+            ]
         if source_result:
             output[source_id] = source_result
     return output
 
 
-def attach_second_highest_disclosed_pay(app_rows: list[dict]) -> int:
-    by_source = second_highest_disclosed_pay_by_source()
+def attach_highest_paid_other_employee(app_rows: list[dict]) -> int:
+    by_source = eligible_disclosed_pay_by_source()
     attached = 0
     for row in app_rows:
-        result = by_source.get(text(row.get("sourceId")))
+        source_result = by_source.get(text(row.get("sourceId")))
+        if not source_result:
+            continue
+        row_person_keys = {
+            normalized_person_key(row.get("executive")),
+            normalized_person_key(row.get("rawExecutive")),
+            normalized_person_key(text(row.get("id")).rsplit("::", 1)[-1]),
+        } - {""}
+        selected_position = text(row.get("positionKey")) or "ceo"
+        result: dict[str, dict] = {}
+        for measure, candidates in source_result.items():
+            matched_keys = {
+                candidate["personKey"] for candidate in candidates
+                if candidate["personKey"] in row_person_keys
+                or normalized_person_key(candidate["person"]) in row_person_keys
+            }
+            if not matched_keys:
+                continue
+            def is_selected_position(candidate: dict) -> bool:
+                if candidate["personKey"] in matched_keys:
+                    return True
+                if selected_position == "ceo":
+                    return candidate["roleScope"] == "organization_wide"
+                return candidate["benchmarkPosition"] == selected_position
+
+            other = next(
+                (candidate for candidate in candidates if not is_selected_position(candidate)),
+                None,
+            )
+            if other:
+                result[measure] = copy.deepcopy(other)
         if result:
-            row["secondHighestDisclosedPay"] = copy.deepcopy(result)
+            row["highestPaidOtherEmployee"] = result
             attached += 1
     return attached
 
@@ -2213,7 +2248,7 @@ def main() -> None:
     position_app_rows = [row for family_rows in position_observations.values() for row in family_rows]
     position_job_rows = [row for family_rows in position_job_ads.values() for row in family_rows]
     position_rp_rows = [row for family_rows in rp_references_by_position.values() for row in family_rows]
-    second_highest_attachments = attach_second_highest_disclosed_pay(
+    highest_paid_other_attachments = attach_highest_paid_other_employee(
         incumbents + position_app_rows + position_rp_rows + [rp_reference]
     )
     app_rows = incumbents + jobs + position_app_rows + position_job_rows
@@ -2303,7 +2338,7 @@ def main() -> None:
                 row["defaultIncluded"] for row in position_app_rows + position_job_rows
             ),
             "positionRpReferences": len(position_rp_rows),
-            "secondHighestPayAttachments": second_highest_attachments,
+            "highestPaidOtherEmployeeAttachments": highest_paid_other_attachments,
         },
     }
     OUTPUT.write_text(

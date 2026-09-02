@@ -189,14 +189,14 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     await page.locator(`input[name="distribution"][value="${distribution}"]`).check();
     await page.locator(".rp-chart-marker").hover();
     rpPercentilesByDistribution[distribution] = await page
-      .locator('#chart-tooltip dl div:has(dt:text-is("Salary percentile")) dd')
+      .locator('#chart-tooltip dl div:has(dt:text-is("CEO Salary percentile")) dd')
       .textContent();
     expect(rpPercentilesByDistribution[distribution]).toMatch(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ \d+\)$/);
   }
   expect(new Set(Object.values(rpPercentilesByDistribution)).size).toBeGreaterThan(1);
   await page.locator('input[name="distribution"][value="lognormal"]').check();
   await expect(page.locator("#salary-chart")).toContainText("Weighted records per bar");
-  await expect(page.locator("#quantile-basis")).toHaveText("Estimated from the fitted lognormal curve for Salary");
+  await expect(page.locator("#quantile-basis")).toHaveText("Estimated from the fitted lognormal curve for CEO Salary");
   await expect(page.getByRole("heading", { name: /^Quantiles/ })).toBeVisible();
   await page.getByRole("button", { name: "About quantiles" }).hover();
   await expect(page.locator("#help-tooltip")).toContainText("50th percentile is the median");
@@ -347,8 +347,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator(".rug-line.is-highlighted")).toHaveCount(1);
   await expect(page.locator("#chart-tooltip")).toBeVisible();
   await expect(page.locator("#chart-tooltip .chart-tooltip-value strong")).toContainText("$");
-  await expect(page.locator("#chart-tooltip dt")).toContainText(["Histogram bar", "Salary percentile", "Peer group", "Pay source", "Similarity score", "Weight in results"]);
-  const salaryPercentileDetail = page.locator('#chart-tooltip dl div:has(dt:text-is("Salary percentile")) dd');
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["Histogram bar", "CEO Salary percentile", "Peer group", "Pay source", "Similarity score", "Weight in results"]);
+  const salaryPercentileDetail = page.locator('#chart-tooltip dl div:has(dt:text-is("CEO Salary percentile")) dd');
   await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 131\)$/);
   const lognormalPercentile = await salaryPercentileDetail.textContent();
   await page.locator('input[name="distribution"][value="empirical"]').check();
@@ -362,7 +362,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator(".rp-chart-marker").hover();
   await expect(page.locator("#chart-tooltip")).toContainText("Rethink Priorities");
   await expect(page.locator("#chart-tooltip")).toContainText("$155,230");
-  await expect(page.locator("#chart-tooltip dt")).toContainText(["Salary percentile", "How this record is used", "Pay source"]);
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["CEO Salary percentile", "How this record is used", "Pay source"]);
   await expect(salaryPercentileDetail).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ 131\)$/);
   await expect(page.locator("#chart-tooltip")).toContainText("shown for context, not included in results");
   await expect(page.locator("#chart-tooltip")).not.toContainText("Weight in results");
@@ -383,7 +383,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
 
   await page.locator('input[name="distribution"][value="gamma"]').check();
   await expect(page.locator("#chart-legend")).toContainText("Gamma density");
-  await expect(page.locator("#quantile-basis")).toHaveText("Estimated from the fitted gamma curve for Salary");
+  await expect(page.locator("#quantile-basis")).toHaveText("Estimated from the fitted gamma curve for CEO Salary");
   await page.locator('input[name="distribution"][value="empirical"]').check();
   await expect(page.locator(".density-line-outline")).toHaveCount(0);
   await expect(page.locator(".density-line")).toHaveCount(0);
@@ -417,7 +417,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     const overlap = guide.getBoundingClientRect().top - amount.bottom;
     return overlap >= -6 && overlap <= 0;
   }))).toBe(true);
-  await expect(page.locator("#quantile-basis")).toHaveText("Based on weighted percentiles of the selected records for Salary");
+  await expect(page.locator("#quantile-basis")).toHaveText("Based on weighted percentiles of the selected records for CEO Salary");
   await page.locator('input[name="distribution"][value="lognormal"]').check();
 
   await page.getByLabel("Include American Immigration Council").uncheck();
@@ -447,7 +447,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await page.locator(".dialog-close").click();
   await page.locator('input[name="dollar-basis"][value="nominal"]').check();
   await expect(page.locator("#price-basis-status")).toHaveText("Source-year USD");
-  await expect(page.locator("#salary-chart")).toContainText("Annual pay (Source-year USD)");
+  await expect(page.locator("#salary-chart")).toContainText("CEO Salary (Source-year USD)");
   await expect(rpReferenceRow).toContainText("$146K");
   await expect(page.locator(".rp-chart-marker")).toHaveAttribute("aria-label", /\$145,826/);
   await expect(caisInflationRow.locator(".adjusted-salary-cell")).toHaveText("$335K");
@@ -931,11 +931,11 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(maximumPointAreaMultiple).toBeLessThanOrEqual(10.001);
   await expect(page.locator(".covariance-contour")).toHaveCount(3);
   await page.locator(".scatter-point").first().hover();
-  await expect(page.locator("#chart-tooltip dt")).toContainText(["Salary percentile", "Expenses percentile"]);
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["CEO Salary percentile", "Expenses percentile"]);
   await page.locator(".rp-chart-marker").hover();
   await expect(page.locator("#chart-tooltip")).toContainText("Rethink Priorities");
-  await expect(page.locator("#chart-tooltip dt")).toContainText(["Annual expenses", "Salary percentile", "Expenses percentile", "How this record is used"]);
-  await expect(page.locator('#chart-tooltip dl div:has(dt:text-is("Salary percentile")) dd')).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ \d+\)$/);
+  await expect(page.locator("#chart-tooltip dt")).toContainText(["Annual expenses", "CEO Salary percentile", "Expenses percentile", "How this record is used"]);
+  await expect(page.locator('#chart-tooltip dl div:has(dt:text-is("CEO Salary percentile")) dd')).toHaveText(/^\d+(?:\.\d)? \(#\d+(?:\.5)? \/ \d+\)$/);
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-rp-scatter-reference.png" });
   await page.locator("#chart-color").selectOption("sourceType");
   await expect(page.locator("#chart-legend")).toContainText("Form 990");
@@ -961,6 +961,7 @@ test("GoodStructures discoveries retain native pay and conservative sample dispo
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
+  await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary");
 
   const integration = await page.evaluate(() => {
     const ids = [
@@ -1573,7 +1574,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator('input[name="scatter-y-axis-scale"][value="linear"]')).toBeChecked();
   await expect(horizontalAxis()).toContainText("Annual expenses");
   await expect(horizontalAxis()).not.toContainText("log scale");
-  await expect(verticalAxis()).toContainText("Annual pay");
+  await expect(verticalAxis()).toContainText("CEO Salary");
   await expect(verticalAxis()).not.toContainText("log scale");
   await expect(page.locator(".covariance-contour")).toHaveCount(3);
   await expect(page.locator("#scatter-correlations")).toHaveText(/Weighted r = -?\d\.\d{3}, ρ = -?\d\.\d{3}/);
@@ -1623,7 +1624,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator('input[name="scatter-x-axis-scale"][value="log"]')).toBeChecked();
   await expect(page.locator('input[name="scatter-y-axis-scale"][value="linear"]')).toBeChecked();
   await expect(horizontalAxis()).toContainText("Annual expenses");
-  await expect(verticalAxis()).toContainText("Annual pay");
+  await expect(verticalAxis()).toContainText("CEO Salary");
 
   await page.locator('input[name="scatter-y-axis-mode"][value="ratio"]').check();
   await verticalAxis().click();
@@ -1642,32 +1643,51 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   expect(errors).toEqual([]);
 });
 
-test("second-highest disclosed pay ratios and reviewed position postings are usable", async ({ page }) => {
+test("highest-paid other employee ratios and reviewed position postings are usable", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
+  await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary");
 
   const expectedPairs = await page.evaluate(() => window.CEO_BENCHMARK_DATA.incumbents.filter((row) => (
-    row.defaultIncluded && row.salary?.base > 0 && row.secondHighestDisclosedPay?.base?.adjusted > 0
+    row.defaultIncluded && row.salary?.base > 0 && row.highestPaidOtherEmployee?.base?.adjusted > 0
   )).length);
   expect(expectedPairs).toBeGreaterThan(90);
+  const organizationsWhereOtherEarnsMore = await page.evaluate(() => window.CEO_BENCHMARK_DATA.incumbents
+    .filter((row) => row.defaultIncluded
+      && row.salary?.base > 0
+      && row.highestPaidOtherEmployee?.base?.adjusted > row.salary.base)
+    .map((row) => row.organization));
+  expect(organizationsWhereOtherEarnsMore).toContain("Project Healthy Children");
+  const samePositionComparisons = await page.evaluate(() => {
+    const data = window.CEO_BENCHMARK_DATA;
+    const ceoMatches = data.incumbents.flatMap((row) => Object.values(row.highestPaidOtherEmployee || {}))
+      .filter((observation) => observation.roleScope === "organization_wide");
+    const otherMatches = Object.entries(data.positionObservations).flatMap(([position, rows]) => rows
+      .flatMap((row) => Object.values(row.highestPaidOtherEmployee || {}))
+      .filter((observation) => observation.benchmarkPosition === position));
+    return ceoMatches.length + otherMatches.length;
+  });
+  expect(samePositionComparisons).toBe(0);
   const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await horizontalAxis().click();
-  await expect(page.locator('#axis-denominator option[value="secondHighestDisclosedPay"]'))
-    .toHaveText(/Second-highest eligible employee pay in the same filing/);
-  await page.locator("#axis-denominator").selectOption("secondHighestDisclosedPay");
+  await expect(page.locator('#axis-denominator option[value="highestPaidOtherEmployee"]'))
+    .toHaveText(/Non-CEO highest-paid eligible employee in the same filing/);
+  await page.locator("#axis-denominator").selectOption("highestPaidOtherEmployee");
   await expect(page.locator("#stat-n")).toHaveText(String(expectedPairs));
-  await expect(horizontalAxis()).toContainText("Salary / 2nd-highest employee pay");
+  await expect(horizontalAxis()).toContainText("Salary / Non-CEO highest-paid employee");
+  await expect(page.locator("#chart-title")).toHaveText("Distribution of Salary / Non-CEO highest-paid employee");
   await page.locator(".bar-block").first().hover();
-  await expect(page.locator("#chart-tooltip")).toContainText("Second-highest disclosed employee");
-  await expect(page.locator("#chart-tooltip")).toContainText(/#2 of \d+/);
+  await expect(page.locator("#chart-tooltip")).toContainText("Highest-paid disclosed employee outside the CEO position");
+  await expect(page.locator("#chart-tooltip")).toContainText(/#\d+ of \d+ eligible disclosures/);
   const sharedUrl = page.url();
   await page.reload();
   expect(page.url()).toBe(sharedUrl);
-  await expect(horizontalAxis()).toContainText("Salary / 2nd-highest employee pay");
+  await expect(horizontalAxis()).toContainText("Salary / Non-CEO highest-paid employee");
 
   await page.goto("/coo-salary-benchmark/");
+  await expect(page.locator("#chart-title")).toHaveText("Distribution of COO Salary");
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#stream-select")).toBeEnabled();
   const cooPosting = page.locator('tbody tr[data-id="SRC-AD-LAWAI-COO-2026"]');
@@ -2115,7 +2135,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     await expect(page.locator("#measure-select")).toHaveValue(position.defaultMeasure);
     await expect(page.locator("#adjusted-compensation-term")).toHaveText("Reported pay");
     await expect(page.locator("#reported-compensation-term")).toHaveText("Reported pay");
-    await expect(page.locator("#chart-title")).toContainText("Reported pay");
+    await expect(page.locator("#chart-title")).toContainText(`${position.pageLabel} Salary`);
     await expect(page.locator("#stat-n-unit")).toHaveText("records");
     await expect(page.locator("#stat-n")).toHaveText(String(expected.defaultCash));
     await expect(page.locator("tbody tr[data-id]")).toHaveCount(expected.observedCash);
@@ -2763,7 +2783,7 @@ test("robustness points explain and apply their salary specifications", async ({
   await expect(page.locator('input[name="distribution"][value="gamma"]')).toBeChecked();
   await expect(page.locator('.weighting-field input[value="comparability"]')).toBeChecked();
   await expect(page.locator('input[name="histogram-axis-mode"][value="value"]')).toBeChecked();
-  await expect(page.locator("#chart-title")).toContainText("Distribution of Salary");
+  await expect(page.locator("#chart-title")).toContainText("Distribution of CEO Salary");
   await expect(page.locator("#stat-center")).toHaveText(expectedMedian || "");
   await expect(page.locator("#robustness-status")).toContainText("Applied Similar organization types");
 

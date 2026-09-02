@@ -954,6 +954,10 @@
       : state.measure === "total" ? "Total pay" : "Reported pay";
   }
 
+  function positionSalaryLabel() {
+    return `${positionDefinition().pageLabel} Salary`;
+  }
+
   function compactNumber(value) {
     if (value == null || !Number.isFinite(value)) return "—";
     const absolute = Math.abs(value);
@@ -966,7 +970,7 @@
 
   const numericVariables = {
     salary: {
-      get shortLabel() { return compensationMeasureLabel(); }, label: () => `Annual pay (${priceBasisLabel()})`,
+      get shortLabel() { return positionSalaryLabel(); }, label: () => `${positionSalaryLabel()} (${priceBasisLabel()})`,
       value: salary, format: compactMoney, fullFormat: money, logarithmic: false,
     },
     expenses: {
@@ -992,19 +996,19 @@
       value: (row) => row.compensationYear, format: (value) => value == null ? "—" : `${Math.round(value)}`,
       fullFormat: (value) => value == null ? "—" : `${Math.round(value)}`, logarithmic: false,
     },
-    secondHighestDisclosedPay: {
-      shortLabel: "2nd-highest employee pay",
-      label: () => `Second-highest eligible employee pay in the same filing (${priceBasisLabel()})`,
+    highestPaidOtherEmployee: {
+      get shortLabel() { return `Non-${positionDefinition().pageLabel} highest-paid employee`; },
+      label: () => `Non-${positionDefinition().pageLabel} highest-paid eligible employee in the same filing (${priceBasisLabel()})`,
       value: (row) => {
         const measure = rowStream(row) === "jobAds" ? "base" : state.measure;
-        const observation = row.secondHighestDisclosedPay?.[measure];
+        const observation = row.highestPaidOtherEmployee?.[measure];
         const value = state.inflationAdjusted ? observation?.adjusted : observation?.nominal;
         return Number.isFinite(value) && value > 0 ? value : null;
       },
       format: compactMoney,
       fullFormat: money,
       logarithmic: false,
-      secondHighestDisclosedPay: true,
+      highestPaidOtherEmployee: true,
     },
   };
 
@@ -1081,14 +1085,17 @@
         value: (row) => numerator.value(row),
       };
     }
+    const ratioLabel = (variableKey, variable) => variableKey === "salary" ? "Salary" : variable.shortLabel;
+    const numeratorLabel = ratioLabel(expression.numerator, numerator);
+    const denominatorLabel = ratioLabel(expression.denominator, denominator);
     return {
       axisKey,
-      label: `${numerator.shortLabel} / ${denominator.shortLabel}`,
-      shortLabel: `${numerator.shortLabel} / ${denominator.shortLabel}`,
+      label: `${numeratorLabel} / ${denominatorLabel}`,
+      shortLabel: `${numeratorLabel} / ${denominatorLabel}`,
       format: compactNumber,
       fullFormat: (value) => value == null || !Number.isFinite(value) ? "—" : value.toLocaleString("en-US", { maximumSignificantDigits: 5 }),
       mode, scaleSetting, logarithmic,
-      primaryLabel: () => `${numerator.shortLabel} / ${denominator.shortLabel}`,
+      primaryLabel: () => `${numeratorLabel} / ${denominatorLabel}`,
       value: (row) => {
         const top = numerator.value(row);
         const bottom = denominator.value(row);
@@ -1121,11 +1128,11 @@
       }
       return { eligible: false, value: null, reason: `No unique positive ${label} compensation row is available from the same filing.` };
     }
-    if (variableKey === "secondHighestDisclosedPay") {
+    if (variableKey === "highestPaidOtherEmployee") {
       return {
         eligible: false,
         value: null,
-        reason: "Fewer than two eligible positive employee-pay disclosures are available in the same Form 990 filing.",
+        reason: `No eligible positive employee-pay disclosure other than the selected ${positionDefinition().pageLabel} is available in the same Form 990 filing.`,
       };
     }
     const reasons = {
@@ -1882,7 +1889,7 @@
     // Rotated labels need a little more breathing room than the horizontal
     // empirical labels because their white outlines otherwise clip each other.
     const lineSeparationPx = metrics.renderedLineHeight * 0.25;
-    const lineInsetPx = Math.max(metrics.lineInsetPx - lineSeparationPx, 0);
+    const lineInsetPx = Math.max(metrics.lineInsetPx - lineSeparationPx, 0.5);
     const lineInset = lineInsetPx / metrics.screenScaleY;
     const amountY = metrics.percentileBox.y + metrics.percentileBox.height
       - lineInset - metrics.amountBox.y;
@@ -2640,19 +2647,19 @@
       titleGroup: "Title group", structure: "Organization type",
     }[state.chartColor];
     const plottedAxisKeys = state.view === "scatter" ? ["scatterX", "scatterY"] : ["histogram"];
-    const usesSecondHighest = plottedAxisKeys.some((axisKey) => {
+    const usesHighestPaidOther = plottedAxisKeys.some((axisKey) => {
       const expression = axisExpression(axisKey);
-      return expression.numerator === "secondHighestDisclosedPay"
-        || (axisMode(axisKey) === "ratio" && expression.denominator === "secondHighestDisclosedPay");
+      return expression.numerator === "highestPaidOtherEmployee"
+        || (axisMode(axisKey) === "ratio" && expression.denominator === "highestPaidOtherEmployee");
     });
-    const secondHighestMeasure = rowStream(row) === "jobAds" ? "base" : state.measure;
-    const secondHighest = usesSecondHighest ? row.secondHighestDisclosedPay?.[secondHighestMeasure] : null;
+    const highestPaidOtherMeasure = rowStream(row) === "jobAds" ? "base" : state.measure;
+    const highestPaidOther = usesHighestPaidOther ? row.highestPaidOtherEmployee?.[highestPaidOtherMeasure] : null;
     const details = [
       context.chartDetail,
       ...(context.rankDetails || []),
-      secondHighest ? [
-        "Second-highest disclosed employee",
-        `${secondHighest.person} · ${secondHighest.title} · #2 of ${secondHighest.eligibleDisclosures}`,
+      highestPaidOther ? [
+        `Highest-paid disclosed employee outside the ${positionDefinition().pageLabel} position`,
+        `${highestPaidOther.person} · ${highestPaidOther.title} · #${highestPaidOther.sourceRank} of ${highestPaidOther.eligibleDisclosures} eligible disclosures`,
       ] : null,
       range ? ["Advertised range", range] : null,
       context.reference ? ["How this record is used", "RP reference only · shown for context, not included in results"] : ["Peer group", tier.label],
@@ -3681,10 +3688,9 @@
     const isCombined = state.stream === "combined";
     refs.measureField.hidden = isJobs || isCombined;
     const plotted = axisDescriptor(analysisAxisKey());
-    const positionPrefix = isCeoPosition() ? "" : `${positionDefinition().pageLabel} · `;
     refs.chartTitle.textContent = state.view === "scatter"
-      ? `${positionPrefix}${plotted.shortLabel} by ${axisDescriptor("scatterX").shortLabel}`
-      : `${positionPrefix}Distribution of ${plotted.shortLabel}`;
+      ? `${plotted.shortLabel} by ${axisDescriptor("scatterX").shortLabel}`
+      : `Distribution of ${plotted.shortLabel}`;
     refs.statNUnit.textContent = isCombined || !isCeoPosition() ? "records" : "organizations";
     refs.priceBasisStatus.textContent = priceBasisLabel();
     refs.scatterControls.hidden = state.view !== "scatter";
@@ -3730,7 +3736,7 @@
   const URL_QUANTILE_CODES = Object.freeze({ quintiles: "q", deciles: "d", percentiles: "p", custom: "c" });
   const URL_VARIABLE_CODES = Object.freeze({
     salary: "s", expenses: "e", revenue: "r", staff: "f", comparabilityScore: "m",
-    compensationYear: "y", secondHighestDisclosedPay: "d",
+    compensationYear: "y", highestPaidOtherEmployee: "d",
   });
   const reverseCodes = (codes) => Object.fromEntries(Object.entries(codes).map(([key, value]) => [value, key]));
   const URL_WEIGHT_KEYS = reverseCodes(URL_WEIGHT_CODES);
