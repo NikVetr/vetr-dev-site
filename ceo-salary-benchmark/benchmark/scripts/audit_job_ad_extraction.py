@@ -47,6 +47,11 @@ def annual_amounts(text: str) -> set[int]:
         amounts.add(int(match.group(1).replace(",", "")))
     for match in re.finditer(r"(?<!\d)(\d{2,3})\s*k\b", lowered):
         amounts.add(int(match.group(1)) * 1000)
+    for match in re.finditer(
+        r"(?<!\d)(\d{1,3})(?:\s*[-–—]\s*|\s+to\s+)(\d{1,3})\s*(?:/\s*h(?:ou)?r|per\s+hour)",
+        lowered,
+    ):
+        amounts.update({int(match.group(1)), int(match.group(2))})
     return amounts
 
 
@@ -85,8 +90,8 @@ def main() -> None:
         source = manifest_columns.get(source_id, {})
         local_path = source.get("current_local_path", "")
         path = ROOT / local_path if local_path else None
-        expected_min = expected_integer(expected.salary_min)
-        expected_max = expected_integer(expected.salary_max)
+        expected_min = expected_integer(expected.get("reported_salary_min")) or expected_integer(expected.salary_min)
+        expected_max = expected_integer(expected.get("reported_salary_max")) or expected_integer(expected.salary_max)
         base = {
             "source_id": source_id,
             "organization": expected.organization,

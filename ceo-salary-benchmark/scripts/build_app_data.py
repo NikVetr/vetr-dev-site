@@ -61,6 +61,13 @@ JOB_AD_SECONDARY_SOURCES = {
         "label": "official About page",
         "cached_label": "cached About page",
     },
+    "SRC-AD-TAIMAKA-2025": {
+        "source_id": "SRC-AD-TAIMAKA-2025-ORIGINAL",
+        "local_path": "sources/native/job_ads/src-ad-taimaka-2025.pdf",
+        "source_url": "https://docs.google.com/document/d/1SWKm4NioKb4PGCpmHmKiqe0Aa8USbiVNESE6uybm9BM/edit",
+        "label": "original role document",
+        "cached_label": "saved original role document",
+    },
 }
 EVIDENCE_DIR = ROOT / "evidence" / "original"
 OUTPUT = ROOT / "app-data.js"
@@ -590,6 +597,52 @@ def enriched_job_provenance(
     provenance["confidence"] = text(enrichment["confidence"])
     provenance["caveats"] = text(enrichment["caveats"])
     return provenance
+
+
+def added_job_provenance(job: dict[str, str], enrichment: dict[str, str]) -> dict:
+    """Build an explicit non-pay provenance record for post-freeze job additions."""
+    citation = text(enrichment["source_citation"])
+    raw_title = text(job["role_title"])
+    tier_value = text(job["tier"])
+    return {
+        "recordId": f"job_ad::{text(job['source_id'])}",
+        "stableIdType": "source_id",
+        "sourceWave": "authorized_job_board_addition",
+        "tier": {
+            "value": tier_value,
+            "label": tier_value,
+            "rationale": text(job["inclusion_reason"]) or text(job["exclusion_reason"]),
+            "citation": citation,
+        },
+        "ea": {
+            "value": text(enrichment["ea_relationship"]),
+            "sourceValue": "",
+            "rationale": text(enrichment["ea_rationale"]),
+            "citation": citation,
+        },
+        "structure": {
+            "expected": text(enrichment["expected_structure"]),
+            "observationFlag": tier_value,
+            "rationale": text(enrichment["structure_rationale"]),
+            "citation": citation,
+        },
+        "topic": {
+            "value": text(enrichment["topic_cluster"]),
+            "sourceDescription": text(job["mission_operating_model"]),
+            "rationale": text(enrichment["topic_rationale"]),
+            "citation": citation,
+        },
+        "title": {
+            "raw": raw_title,
+            "analysisGroup": title_group(raw_title),
+            "rationale": f'The source-native title "{raw_title}" is grouped without changing its displayed wording.',
+            "citation": citation,
+        },
+        "classificationTiming": "post-freeze source review; compensation was not used to assign categories",
+        "provenanceType": "authorized_scrape_discovery + preserved_original_source_review",
+        "confidence": text(enrichment["confidence"]),
+        "caveats": text(enrichment["caveats"]),
+    }
 
 
 def category_rationale(
@@ -1624,16 +1677,30 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
         nominal_high = number(job["salary_max"])
         nominal_midpoint = (nominal_low + nominal_high) / 2 if nominal_low is not None and nominal_high is not None else None
         included = text(job["included_in_quantitative_analysis"])
+        reported_low = number(job.get("reported_salary_min"))
+        reported_high = number(job.get("reported_salary_max"))
+        has_source_native_range = reported_low is not None or reported_high is not None
+        reported_pay = ((text(job.get("salary_text")) if has_source_native_range else "") or (
+            f"{money(number(job['salary_min']))}–{money(number(job['salary_max']))}"
+        )).rstrip(".")
+        adjusted_note = (
+            f" July 2026-adjusted USD midpoint: {money(midpoint)}."
+            if midpoint is not None else " No annual USD point estimate is used."
+        )
         evidence = (
             f"Recruitment posting for {text(job['role_title'])}. "
-            f"Stated annual salary range: {money(number(job['salary_min']))}–{money(number(job['salary_max']))}; "
-            f"July 2026-adjusted midpoint: {money(midpoint)}. "
+            f"Reported pay: {reported_pay}.{adjusted_note} "
             f"Location: {text(job['location'])}; work arrangement: {text(job['remote_status']) or 'not reported'}."
         )
         source_url = text(job["resolved_url"]) or text(job["fallback_url_1"]) or text(job["canonical_url"])
         raw_title = text(job["role_title"])
-        historical_provenance = category_rationale(by_source, {}, "job_ad", source_id, text(job["organization"]))
         enrichment = enrichment_by_source[source_id]
+        historical_provenance = by_source.get(("job_ad", source_id))
+        base_provenance = historical_provenance or added_job_provenance(job, enrichment)
+        if reported_low is None:
+            reported_low = nominal_low
+        if reported_high is None:
+            reported_high = nominal_high
         output.append({
             "id": source_id,
             "sourceId": source_id,
@@ -1659,6 +1726,10 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
             "range": {"low": low, "high": high},
             "nominalSalary": {"base": nominal_midpoint, "cash": nominal_midpoint, "total": nominal_midpoint},
             "nominalRange": {"low": nominal_low, "high": nominal_high},
+            "reportedRange": {"low": reported_low, "high": reported_high},
+            "reportedCurrency": text(job.get("reported_currency")) or text(job.get("currency")) or "USD",
+            "reportedPayPeriod": text(job.get("reported_pay_period")) or "year",
+            "reportedSalaryText": text(job.get("salary_text")),
             "cpiFactor": number(job["cpi_factor"]) or 1.0,
             "cpiPeriod": text(job["cpi_period"]),
             "defaultIncluded": included == "yes",
@@ -1678,9 +1749,9 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
             "localPath": local_path,
             "sourceType": "Job posting",
             "evidenceStream": "jobAds",
-            "homepageUrl": "",
+            "homepageUrl": text(job.get("homepage_url")),
             "categoryProvenance": enriched_job_provenance(
-                historical_provenance, enrichment, job, evidence_update
+                base_provenance, enrichment, job, evidence_update
             ),
             "historicalCategoryProvenance": historical_provenance,
             "categoryEnrichment": {
@@ -1906,6 +1977,7 @@ def main() -> None:
             "jobAdEnrichmentDictionaryPath": "benchmark/enrichment/job_ad_category_dictionary.csv",
             "jobAdEnrichmentMethodologyPath": "benchmark/enrichment/job_ad_category_methodology.md",
             "jobAdEvidenceUpdatesPath": "benchmark/enrichment/job_ad_evidence_updates.csv",
+            "goodStructuresJobAdIntegrationPath": "benchmark/enrichment/goodstructures_job_ad_integration.md",
             "eaRosterAuditPath": "benchmark/enrichment/ea_roster_bundle_audit.md",
             "eaRosterReviewedCompensationPath": "benchmark/enrichment/ea_roster_validated_compensation.csv",
             "lingeringOrgRecoveredPositionsPath": "benchmark/enrichment/lingering_org_recovered_us_positions.csv",

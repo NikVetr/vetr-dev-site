@@ -151,9 +151,9 @@ def main() -> None:
     expected_checks = {
         "default incumbent cash rows": 122,
         "default incumbent base rows": 114,
-        "default job-ad rows": 15,
-        "default combined base rows": 129,
-        "default combined base organizations": 126,
+        "default job-ad rows": 17,
+        "default combined base rows": 131,
+        "default combined base organizations": 128,
     }
     if checks != expected_checks:
         raise ValueError(f"Living peer-universe count reconciliation changed: {checks}")
@@ -166,7 +166,7 @@ def main() -> None:
     print(
         "Validated the 16-row living peer-universe amendment: six pay-blind promotions, "
         "122 default incumbent cash rows, 114 default incumbent base rows, and "
-        "129 default all-evidence base observations across 126 organizations."
+        "131 default all-evidence base observations across 128 organizations."
     )
 
 

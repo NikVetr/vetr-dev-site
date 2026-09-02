@@ -10,7 +10,7 @@
   "structurally_clean_incumbent_n": 79,
   "all_collected_form990_n": 135,
   "numeric_primary_plus_structural_n": 126,
-  "job_ads_current_quantitative_n": 15,
+  "job_ads_current_quantitative_n": 17,
   "schedule_j_exact_base_n": 0,
   "selected_tier_counts": {
     "A": 79,
@@ -50,14 +50,14 @@
       "has_exact_overlap": false
     },
     "expanded_current": {
-      "n": 15,
-      "observed_min": 110000.0,
+      "n": 17,
+      "observed_min": 69595.31751978268,
       "observed_max": 299969.4566883864,
-      "median_midpoint": 215579.7549696715,
-      "q1_midpoint": 153996.59341064777,
-      "q3_midpoint": 241384.65883491116,
+      "median_midpoint": 212478.3651542737,
+      "q1_midpoint": 143730.1538499379,
+      "q3_midpoint": 234976.07440590265,
       "overlap_low": 259973.52912993485,
-      "overlap_high": 120000.0,
+      "overlap_high": 86994.14689972834,
       "has_exact_overlap": false
     },
     "original_six": {

@@ -23,6 +23,13 @@
     : value >= 1_000_000
       ? `$${(value / 1_000_000).toFixed(value >= 10_000_000 ? 0 : 1)}M`
       : `$${Math.round(value / 1_000)}K`;
+  const compactCurrency = (value, currency = "USD") => {
+    if (value == null || !Number.isFinite(value)) return "—";
+    const symbol = { USD: "$", GBP: "£", EUR: "€" }[currency] || `${currency} `;
+    if (Math.abs(value) >= 1_000_000) return `${symbol}${(value / 1_000_000).toFixed(Math.abs(value) >= 10_000_000 ? 0 : 1)}M`;
+    if (Math.abs(value) >= 1_000) return `${symbol}${Math.round(value / 1_000)}K`;
+    return `${symbol}${Number.isInteger(value) ? value : value.toFixed(2)}`;
+  };
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
   const RP_WEIGHT_TARGET = Object.freeze({ expenses: 7_500_000, staff: 57 });
   const RP_FORM990_PROFILE = Object.freeze({
@@ -914,11 +921,17 @@
   }
 
   function reportedSalaryDisplay(row) {
-    if (rowStream(row) !== "jobAds" || row.nominalRange?.low == null || row.nominalRange?.high == null) {
+    if (rowStream(row) !== "jobAds") {
       return compactMoney(salaryForBasis(row, false));
     }
-    if (row.nominalRange.low === row.nominalRange.high) return compactMoney(row.nominalRange.low);
-    return `${compactMoney(row.nominalRange.low)}–${compactMoney(row.nominalRange.high).replace(/^\$/, "")}`;
+    const range = row.reportedRange || row.nominalRange;
+    if (range?.low == null || range?.high == null) return "—";
+    const currency = row.reportedCurrency || "USD";
+    const suffix = row.reportedPayPeriod && row.reportedPayPeriod !== "year" ? `/${row.reportedPayPeriod}` : "";
+    if (range.low === range.high) return `${compactCurrency(range.low, currency)}${suffix}`;
+    const high = compactCurrency(range.high, currency);
+    const symbol = { USD: "$", GBP: "£", EUR: "€" }[currency] || `${currency} `;
+    return `${compactCurrency(range.low, currency)}–${high.startsWith(symbol) ? high.slice(symbol.length) : high}${suffix}`;
   }
 
   function priceBasisLabel() {
@@ -2961,7 +2974,7 @@
       reportedSalaryCell.className = "money-cell reported-salary-cell";
       reportedSalaryCell.textContent = reportedSalaryDisplay(row);
       reportedSalaryCell.title = rowStream(row) === "jobAds"
-        ? `${money(row.nominalRange?.low)}–${money(row.nominalRange?.high)} advertised in the source`
+        ? (row.reportedSalaryText || `${reportedSalaryDisplay(row)} advertised in the source`)
         : `${money(salaryForBasis(row, false))} reported in the source-year filing`;
 
       const weightCell = document.createElement("td");
@@ -3277,6 +3290,9 @@
     );
     if (row.evidenceUpdate) provenanceLinks.push(
       ["Job-posting source update", DATA.categoryExplainers.jobAdEvidenceUpdatesPath],
+    );
+    if (row.categoryProvenance?.sourceWave === "authorized_job_board_addition") provenanceLinks.push(
+      ["GoodStructures posting integration", DATA.categoryExplainers.goodStructuresJobAdIntegrationPath],
     );
     if (row.positionTaxonomy) provenanceLinks.push(
       ["Standardized position list", DATA.categoryExplainers.positionCatalogPath],

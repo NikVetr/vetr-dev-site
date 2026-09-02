@@ -2875,6 +2875,19 @@ SRC-AD-ALLCHICAGO,All Chicago Making Homelessness History,job_ad,sources/native/
 SRC-AD-ALLCHICAGO,All Chicago Making Homelessness History,job_ad,sources/native/job_ads/src-ad-allchicago.html,extractable_text,True,>=100 characters,14745
 SRC-AD-ALLCHICAGO,All Chicago Making Homelessness History,job_ad,sources/native/job_ads/src-ad-allchicago.html,organization_text,True,distinctive organization words,4/4
 SRC-AD-ALLCHICAGO,All Chicago Making Homelessness History,job_ad,sources/native/job_ads/src-ad-allchicago.html,role_title_text,True,Chief Executive Officer,3/3 role words
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,file_present,True,sources/native/job_ads/src-ad-allfed-2026.html,present
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,minimum_bytes,True,500,39872
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,sha256_recorded_matches,True,c5534b8bc3c7a3e18342683b3549ea4a5db06e7e5f7289651c1e4a4df22e328f,c5534b8bc3c7a3e18342683b3549ea4a5db06e7e5f7289651c1e4a4df22e328f
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,retrieval_metadata_present,True,sources/native/job_ads/src-ad-allfed-2026.html.metadata.json,present
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,metadata_source_id,True,SRC-AD-ALLFED-2026,SRC-AD-ALLFED-2026
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,metadata_local_path,True,sources/native/job_ads/src-ad-allfed-2026.html,sources/native/job_ads/src-ad-allfed-2026.html
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,metadata_byte_length,True,39872,39872
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,metadata_sha256,True,c5534b8bc3c7a3e18342683b3549ea4a5db06e7e5f7289651c1e4a4df22e328f,c5534b8bc3c7a3e18342683b3549ea4a5db06e7e5f7289651c1e4a4df22e328f
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,metadata_resolved_url,True,nonblank resolved URL,https://web.archive.org/web/20260128120703id_/https://allfed.info/join-us?view=article%26id=450:chief-executive-officer-ceo%26catid=39
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,metadata_retrieval_timestamp,True,nonblank UTC retrieval timestamp,2026-09-02T17:55:47+00:00
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,extractable_text,True,>=100 characters,8679
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,organization_text,True,distinctive organization words,4/4
+SRC-AD-ALLFED-2026,Alliance to Feed the Earth in Disasters,job_ad,sources/native/job_ads/src-ad-allfed-2026.html,role_title_text,True,Chief Executive Officer,3/3 role words
 SRC-AD-ANDYHILL-2026,Andy Hill Cancer Research Endowment (CARE) Fund,job_ad,sources/native/job_ads/src-ad-andyhill-2026.pdf,file_present,True,sources/native/job_ads/src-ad-andyhill-2026.pdf,present
 SRC-AD-ANDYHILL-2026,Andy Hill Cancer Research Endowment (CARE) Fund,job_ad,sources/native/job_ads/src-ad-andyhill-2026.pdf,minimum_bytes,True,500,1311559
 SRC-AD-ANDYHILL-2026,Andy Hill Cancer Research Endowment (CARE) Fund,job_ad,sources/native/job_ads/src-ad-andyhill-2026.pdf,sha256_recorded_matches,True,ab4a4843adbc21ef60749822ac26e4e2dceac683d118f48f0426b59dba2ee97b,ab4a4843adbc21ef60749822ac26e4e2dceac683d118f48f0426b59dba2ee97b
@@ -2905,6 +2918,19 @@ SRC-AD-APPLESEED-2026,Appleseed Foundation,job_ad,sources/native/job_ads/src-ad-
 SRC-AD-APPLESEED-2026,Appleseed Foundation,job_ad,sources/native/job_ads/src-ad-appleseed-2026.html,role_title_text,True,Executive Director,2/2 role words
 SRC-AD-APPLESEED-2026,Appleseed Foundation,job_ad,sources/native/job_ads/src-ad-appleseed-2026.html,salary_min,True,"['120,000', '120000', '120k']",found
 SRC-AD-APPLESEED-2026,Appleseed Foundation,job_ad,sources/native/job_ads/src-ad-appleseed-2026.html,salary_max,True,"['155,000', '155000', '155k']",found
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,file_present,True,sources/native/job_ads/src-ad-aapo-2026.pdf,present
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,minimum_bytes,True,500,82031
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,sha256_recorded_matches,True,404c56d96d2d5afa544d07d12246f24561468da5d2f5a5fcf32073cc74ccb48b,404c56d96d2d5afa544d07d12246f24561468da5d2f5a5fcf32073cc74ccb48b
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,retrieval_metadata_present,True,sources/native/job_ads/src-ad-aapo-2026.pdf.metadata.json,present
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,metadata_source_id,True,SRC-AD-AAPO-2026,SRC-AD-AAPO-2026
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,metadata_local_path,True,sources/native/job_ads/src-ad-aapo-2026.pdf,sources/native/job_ads/src-ad-aapo-2026.pdf
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,metadata_byte_length,True,82031,82031
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,metadata_sha256,True,404c56d96d2d5afa544d07d12246f24561468da5d2f5a5fcf32073cc74ccb48b,404c56d96d2d5afa544d07d12246f24561468da5d2f5a5fcf32073cc74ccb48b
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,metadata_resolved_url,True,nonblank resolved URL,https://docs.google.com/document/d/1CjW7mFt9FyA6qDbYV4pYLWyW5KqaAA5QsHRf3hRaPSk/export?format=pdf
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,metadata_retrieval_timestamp,True,nonblank UTC retrieval timestamp,2026-09-02T17:55:47+00:00
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,extractable_text,True,>=100 characters,6813
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,organization_text,True,distinctive organization words,3/3
+SRC-AD-AAPO-2026,Aquatic Animal Policy Organization,job_ad,sources/native/job_ads/src-ad-aapo-2026.pdf,role_title_text,True,Co-Executive Director,2/2 role words
 SRC-AD-CSCCE,Center for Scientific Collaboration and Community Engagement,job_ad,sources/native/job_ads/src-ad-cscce.html,file_present,True,sources/native/job_ads/src-ad-cscce.html,present
 SRC-AD-CSCCE,Center for Scientific Collaboration and Community Engagement,job_ad,sources/native/job_ads/src-ad-cscce.html,minimum_bytes,True,500,110208
 SRC-AD-CSCCE,Center for Scientific Collaboration and Community Engagement,job_ad,sources/native/job_ads/src-ad-cscce.html,sha256_recorded_matches,True,1e41eb60e51d29ac684814a2dca01bdaed2e4548f7851ec59af9d1fc7a69c7ce,1e41eb60e51d29ac684814a2dca01bdaed2e4548f7851ec59af9d1fc7a69c7ce
@@ -2959,6 +2985,21 @@ SRC-AD-CFL-2026,Community Foundation of Louisville,job_ad,sources/native/job_ads
 SRC-AD-CFL-2026,Community Foundation of Louisville,job_ad,sources/native/job_ads/src-ad-cfl-2026.html,extractable_text,True,>=100 characters,11172
 SRC-AD-CFL-2026,Community Foundation of Louisville,job_ad,sources/native/job_ads/src-ad-cfl-2026.html,organization_text,True,distinctive organization words,2/2
 SRC-AD-CFL-2026,Community Foundation of Louisville,job_ad,sources/native/job_ads/src-ad-cfl-2026.html,role_title_text,True,Chief Executive Officer,3/3 role words
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,file_present,True,sources/native/job_ads/src-ad-caif-2026.html,present
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,minimum_bytes,True,500,23210
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,sha256_recorded_matches,True,dd559cef943b0c1fa3efe19432e4a0a8bcd2ea351967742a8be00a5e6708edd9,dd559cef943b0c1fa3efe19432e4a0a8bcd2ea351967742a8be00a5e6708edd9
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,retrieval_metadata_present,True,sources/native/job_ads/src-ad-caif-2026.html.metadata.json,present
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,metadata_source_id,True,SRC-AD-CAIF-2026,SRC-AD-CAIF-2026
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,metadata_local_path,True,sources/native/job_ads/src-ad-caif-2026.html,sources/native/job_ads/src-ad-caif-2026.html
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,metadata_byte_length,True,23210,23210
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,metadata_sha256,True,dd559cef943b0c1fa3efe19432e4a0a8bcd2ea351967742a8be00a5e6708edd9,dd559cef943b0c1fa3efe19432e4a0a8bcd2ea351967742a8be00a5e6708edd9
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,metadata_resolved_url,True,nonblank resolved URL,https://web.archive.org/web/20260421130503id_/https://www.cooperativeai.com/job-listing/chief-executive-officer
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,metadata_retrieval_timestamp,True,nonblank UTC retrieval timestamp,2026-09-02T17:55:47+00:00
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,extractable_text,True,>=100 characters,8215
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,organization_text,True,distinctive organization words,1/1
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,role_title_text,True,Chief Executive Officer,3/3 role words
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,salary_min,True,"['90,000', '90000', '90k']",found
+SRC-AD-CAIF-2026,Cooperative AI Foundation,job_ad,sources/native/job_ads/src-ad-caif-2026.html,salary_max,True,"['140,000', '140000', '140k']",found
 SRC-AD-DRW,Disability Rights Washington,job_ad,sources/native/job_ads/src-ad-drw.html,file_present,True,sources/native/job_ads/src-ad-drw.html,present
 SRC-AD-DRW,Disability Rights Washington,job_ad,sources/native/job_ads/src-ad-drw.html,minimum_bytes,True,500,82311
 SRC-AD-DRW,Disability Rights Washington,job_ad,sources/native/job_ads/src-ad-drw.html,sha256_recorded_matches,True,183e10e8b4aa6925813df1c9e1194da5fc032f5400cf02569a9abc3803b89a35,183e10e8b4aa6925813df1c9e1194da5fc032f5400cf02569a9abc3803b89a35
@@ -2987,6 +3028,21 @@ SRC-AD-DREAM-2026,Dream.Org,job_ad,sources/native/job_ads/src-ad-dream-2026.html
 SRC-AD-DREAM-2026,Dream.Org,job_ad,sources/native/job_ads/src-ad-dream-2026.html,role_title_text,True,Chief Executive Officer,3/3 role words
 SRC-AD-DREAM-2026,Dream.Org,job_ad,sources/native/job_ads/src-ad-dream-2026.html,salary_min,True,"['260,000', '260000', '260k']",found
 SRC-AD-DREAM-2026,Dream.Org,job_ad,sources/native/job_ads/src-ad-dream-2026.html,salary_max,True,"['290,000', '290000', '290k']",found
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,file_present,True,sources/native/job_ads/src-ad-ead-2026.html,present
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,minimum_bytes,True,500,101256
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,sha256_recorded_matches,True,6e1c4f38e0f15db7f7012c2aaa8c9327d82ab053686cb337a43a0a9c9d778b7c,6e1c4f38e0f15db7f7012c2aaa8c9327d82ab053686cb337a43a0a9c9d778b7c
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,retrieval_metadata_present,True,sources/native/job_ads/src-ad-ead-2026.html.metadata.json,present
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,metadata_source_id,True,SRC-AD-EAD-2026,SRC-AD-EAD-2026
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,metadata_local_path,True,sources/native/job_ads/src-ad-ead-2026.html,sources/native/job_ads/src-ad-ead-2026.html
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,metadata_byte_length,True,101256,101256
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,metadata_sha256,True,6e1c4f38e0f15db7f7012c2aaa8c9327d82ab053686cb337a43a0a9c9d778b7c,6e1c4f38e0f15db7f7012c2aaa8c9327d82ab053686cb337a43a0a9c9d778b7c
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,metadata_resolved_url,True,nonblank resolved URL,https://remoteimpact.org/jobs/director-effective-altruism-germany/
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,metadata_retrieval_timestamp,True,nonblank UTC retrieval timestamp,2026-09-02T17:55:47+00:00
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,extractable_text,True,>=100 characters,13129
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,organization_text,True,distinctive organization words,3/3
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,role_title_text,True,Director,1/1 role words
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,salary_min,True,"['60,000', '60000', '60k']",found
+SRC-AD-EAD-2026,Effective Altruism Germany,job_ad,sources/native/job_ads/src-ad-ead-2026.html,salary_max,True,"['75,000', '75000', '75k']",found
 SRC-AD-ELP-2026,Environmental Leadership Program,job_ad,sources/native/job_ads/src-ad-elp-2026.pdf,file_present,True,sources/native/job_ads/src-ad-elp-2026.pdf,present
 SRC-AD-ELP-2026,Environmental Leadership Program,job_ad,sources/native/job_ads/src-ad-elp-2026.pdf,minimum_bytes,True,500,190097
 SRC-AD-ELP-2026,Environmental Leadership Program,job_ad,sources/native/job_ads/src-ad-elp-2026.pdf,sha256_recorded_matches,True,9af98447d43173cc04d981a81e034718abf9d63ece16a1a9795697394b118788,9af98447d43173cc04d981a81e034718abf9d63ece16a1a9795697394b118788
@@ -3017,6 +3073,19 @@ SRC-AD-FFIS-2026,Federal Funds Information for States,job_ad,sources/native/job_
 SRC-AD-FFIS-2026,Federal Funds Information for States,job_ad,sources/native/job_ads/src-ad-ffis-2026.html,role_title_text,True,Executive Director and Executive Editor,5/5 role words
 SRC-AD-FFIS-2026,Federal Funds Information for States,job_ad,sources/native/job_ads/src-ad-ffis-2026.html,salary_min,True,"['220,000', '220000', '220k']",found
 SRC-AD-FFIS-2026,Federal Funds Information for States,job_ad,sources/native/job_ads/src-ad-ffis-2026.html,salary_max,True,"['220,000', '220000', '220k']",found
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,file_present,True,sources/native/job_ads/src-ad-first-embrace-2026.pdf,present
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,minimum_bytes,True,500,376319
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,sha256_recorded_matches,True,1e51eac003ca5046c54da6c6d95a556f78dfe28d67a8985a54b64cfcb4e71b71,1e51eac003ca5046c54da6c6d95a556f78dfe28d67a8985a54b64cfcb4e71b71
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,retrieval_metadata_present,True,sources/native/job_ads/src-ad-first-embrace-2026.pdf.metadata.json,present
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,metadata_source_id,True,SRC-AD-FIRST-EMBRACE-2026,SRC-AD-FIRST-EMBRACE-2026
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,metadata_local_path,True,sources/native/job_ads/src-ad-first-embrace-2026.pdf,sources/native/job_ads/src-ad-first-embrace-2026.pdf
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,metadata_byte_length,True,376319,376319
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,metadata_sha256,True,1e51eac003ca5046c54da6c6d95a556f78dfe28d67a8985a54b64cfcb4e71b71,1e51eac003ca5046c54da6c6d95a556f78dfe28d67a8985a54b64cfcb4e71b71
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,metadata_resolved_url,True,nonblank resolved URL,https://docs.google.com/document/d/15ngrwjrFXk1rDVV6JelJHiEvcPQxfKOhXUpCDk7HpXQ/export?format=pdf
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,metadata_retrieval_timestamp,True,nonblank UTC retrieval timestamp,2026-09-02T17:55:47+00:00
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,extractable_text,True,>=100 characters,9782
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,organization_text,True,distinctive organization words,2/2
+SRC-AD-FIRST-EMBRACE-2026,First Embrace,job_ad,sources/native/job_ads/src-ad-first-embrace-2026.pdf,role_title_text,True,Founding Director / Director of Operations,4/4 role words
 SRC-AD-GBWN-2026,Great Basin Water Network,job_ad,sources/native/job_ads/src-ad-gbwn-2026.html,file_present,True,sources/native/job_ads/src-ad-gbwn-2026.html,present
 SRC-AD-GBWN-2026,Great Basin Water Network,job_ad,sources/native/job_ads/src-ad-gbwn-2026.html,minimum_bytes,True,500,53321
 SRC-AD-GBWN-2026,Great Basin Water Network,job_ad,sources/native/job_ads/src-ad-gbwn-2026.html,sha256_recorded_matches,True,302cfa6fd71ffff3b039b5d7be89a2f458bcb88b79b659cfbae3be047571c4df,302cfa6fd71ffff3b039b5d7be89a2f458bcb88b79b659cfbae3be047571c4df
@@ -3202,6 +3271,21 @@ SRC-AD-SFEI-2026,San Francisco Estuary Institute,job_ad,sources/native/job_ads/s
 SRC-AD-SFEI-2026,San Francisco Estuary Institute,job_ad,sources/native/job_ads/src-ad-sfei-2026.html,role_title_text,True,Executive Director,2/2 role words
 SRC-AD-SFEI-2026,San Francisco Estuary Institute,job_ad,sources/native/job_ads/src-ad-sfei-2026.html,salary_min,True,"['200,000', '200000', '200k']",found
 SRC-AD-SFEI-2026,San Francisco Estuary Institute,job_ad,sources/native/job_ads/src-ad-sfei-2026.html,salary_max,True,"['240,000', '240000', '240k']",found
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,file_present,True,sources/native/job_ads/src-ad-screwworm-2025.pdf,present
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,minimum_bytes,True,500,97639
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,sha256_recorded_matches,True,9cf7017a0ece0a00055de2904c9f9d669aaa872b70e42be8dcbe414394c44b8e,9cf7017a0ece0a00055de2904c9f9d669aaa872b70e42be8dcbe414394c44b8e
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,retrieval_metadata_present,True,sources/native/job_ads/src-ad-screwworm-2025.pdf.metadata.json,present
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,metadata_source_id,True,SRC-AD-SCREWWORM-2025,SRC-AD-SCREWWORM-2025
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,metadata_local_path,True,sources/native/job_ads/src-ad-screwworm-2025.pdf,sources/native/job_ads/src-ad-screwworm-2025.pdf
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,metadata_byte_length,True,97639,97639
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,metadata_sha256,True,9cf7017a0ece0a00055de2904c9f9d669aaa872b70e42be8dcbe414394c44b8e,9cf7017a0ece0a00055de2904c9f9d669aaa872b70e42be8dcbe414394c44b8e
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,metadata_resolved_url,True,nonblank resolved URL,https://docs.google.com/document/d/1Id7314af6CQ7YSFd-GcRZma0GFBxThbEu8Qn72esaUI/export?format=pdf
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,metadata_retrieval_timestamp,True,nonblank UTC retrieval timestamp,2026-09-02T17:55:47+00:00
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,extractable_text,True,>=100 characters,11142
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,organization_text,True,distinctive organization words,3/3
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,role_title_text,True,Director,1/1 role words
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,salary_min,True,"['60,000', '60000', '60k']",found
+SRC-AD-SCREWWORM-2025,Screwworm Free Future,job_ad,sources/native/job_ads/src-ad-screwworm-2025.pdf,salary_max,True,"['60,000', '60000', '60k']",found
 SRC-AD-SEATTLEBG,Seattle Botanic Gardens,job_ad,sources/native/job_ads/src-ad-seattlebg.html,file_present,True,sources/native/job_ads/src-ad-seattlebg.html,present
 SRC-AD-SEATTLEBG,Seattle Botanic Gardens,job_ad,sources/native/job_ads/src-ad-seattlebg.html,minimum_bytes,True,500,205058
 SRC-AD-SEATTLEBG,Seattle Botanic Gardens,job_ad,sources/native/job_ads/src-ad-seattlebg.html,sha256_recorded_matches,True,fa604b0259a52e8f3ccfd1c2f44df064acd267305078f5a11f22b8de5834abec,fa604b0259a52e8f3ccfd1c2f44df064acd267305078f5a11f22b8de5834abec
@@ -3228,6 +3312,21 @@ SRC-AD-SNAP,Snap Foundation,job_ad,sources/native/job_ads/src-ad-snap.html,metad
 SRC-AD-SNAP,Snap Foundation,job_ad,sources/native/job_ads/src-ad-snap.html,extractable_text,True,>=100 characters,2157
 SRC-AD-SNAP,Snap Foundation,job_ad,sources/native/job_ads/src-ad-snap.html,organization_text,True,distinctive organization words,1/1
 SRC-AD-SNAP,Snap Foundation,job_ad,sources/native/job_ads/src-ad-snap.html,role_title_text,False,Chief Executive Officer,0/3 role words
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,file_present,True,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,present
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,minimum_bytes,True,500,505580
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,sha256_recorded_matches,True,e99d73f3a13932d984d520eb4b06197e3921c8f95a643656eaddd471bbc17c5b,e99d73f3a13932d984d520eb4b06197e3921c8f95a643656eaddd471bbc17c5b
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,retrieval_metadata_present,True,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js.metadata.json,present
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,metadata_source_id,True,SRC-AD-TAIMAKA-2025,SRC-AD-TAIMAKA-2025
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,metadata_local_path,True,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,metadata_byte_length,True,505580,505580
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,metadata_sha256,True,e99d73f3a13932d984d520eb4b06197e3921c8f95a643656eaddd471bbc17c5b,e99d73f3a13932d984d520eb4b06197e3921c8f95a643656eaddd471bbc17c5b
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,metadata_resolved_url,True,nonblank resolved URL,https://salaries.goodstructures.co/data.js
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,metadata_retrieval_timestamp,True,nonblank UTC retrieval timestamp,2026-09-02T17:55:47+00:00
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,extractable_text,True,>=100 characters,505514
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,organization_text,True,distinctive organization words,1/1
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,role_title_text,True,Executive Director,2/2 role words
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,salary_min,True,"['60,000', '60000', '60k']",found
+SRC-AD-TAIMAKA-2025,Taimaka,job_ad,sources/native/job_ads/src-ad-taimaka-goodstructures-2025.js,salary_max,True,"['120,000', '120000', '120k']",found
 SRC-AD-TAC-2026,Technical Assistance Collaborative,job_ad,sources/native/job_ads/src-ad-tac-2026.html,file_present,True,sources/native/job_ads/src-ad-tac-2026.html,present
 SRC-AD-TAC-2026,Technical Assistance Collaborative,job_ad,sources/native/job_ads/src-ad-tac-2026.html,minimum_bytes,True,500,56364
 SRC-AD-TAC-2026,Technical Assistance Collaborative,job_ad,sources/native/job_ads/src-ad-tac-2026.html,sha256_recorded_matches,True,4efb85d27ec2674cfd9ac1c7e000b78256d89096379fd33b862a439a8780f647,4efb85d27ec2674cfd9ac1c7e000b78256d89096379fd33b862a439a8780f647

@@ -339,8 +339,12 @@ def validate_job_ad(path: Path, expected: pd.Series) -> list[dict]:
     if str(expected.included_in_quantitative_analysis).strip().lower() in {"yes", "sensitivity_only"}:
         observed_amounts = salary_amounts(path, text)
         for label in ["salary_min", "salary_max"]:
-            tokens = amount_tokens(expected[label])
-            expected_amount = to_int(expected[label])
+            reported_label = f"reported_{label}"
+            value = expected.get(reported_label) if reported_label in expected.index else expected[label]
+            if to_int(value) is None:
+                value = expected[label]
+            tokens = amount_tokens(value)
+            expected_amount = to_int(value)
             passed = expected_amount in observed_amounts
             checks.append({
                 "check": label,

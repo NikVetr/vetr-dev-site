@@ -205,6 +205,15 @@ pd.DataFrame(logs).to_csv(DELIV/'peer_inclusion_exclusion_log.csv',index=False)
 
 # ---------- job ads normalization ----------
 jobs=pd.read_csv(DATA/'job_ad_evidence_expanded.csv')
+job_additions=ROOT/'enrichment'/'goodstructures_job_ad_additions.csv'
+if job_additions.exists():
+    additions=pd.read_csv(job_additions)
+    missing=set(jobs.columns)-set(additions.columns)
+    if missing:
+        raise ValueError(f'GoodStructures job-ad additions lack canonical fields: {sorted(missing)}')
+    jobs=pd.concat([jobs,additions],ignore_index=True,sort=False)
+if jobs.source_id.duplicated().any():
+    raise ValueError(f'Duplicate job-ad source IDs: {jobs.loc[jobs.source_id.duplicated(keep=False), "source_id"].tolist()}')
 for col in ['salary_min','salary_max','annual_budget_or_expense','staff_count']:
     jobs[col]=pd.to_numeric(jobs[col],errors='coerce')
 def period_index(p):

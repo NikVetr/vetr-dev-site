@@ -1,7 +1,7 @@
 RP CEO SOURCE-COMPLETENESS VALIDATION
 =====================================
-Required source records: 351
-Verified source-native or frozen-local records: 228
+Required source records: 358
+Verified source-native or frozen-local records: 235
 Incomplete records: 123
 Failed validation checks: 144
 
@@ -13,7 +13,7 @@ documented_search_record  present_verified_local              1
 form990                   present_verified_source_native     15
                           validation_failed                 121
 frozen_local_input        present_verified_local              7
-job_ad                    present_verified_source_native     30
+job_ad                    present_verified_source_native     37
                           validation_failed                   2
 supporting_web_source     present_verified_source_native    175
 

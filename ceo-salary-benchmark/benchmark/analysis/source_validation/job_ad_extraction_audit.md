@@ -4,17 +4,17 @@ This audit checks each locally preserved posting independently of the analytical
 
 ## Results
 
-- Job-ad rows audited: **33**.
-- Rows with a local source: **33**.
-- Rows whose organization, role, and salary values verify: **23**.
-- Primary quantitative rows verified: **15 of 15**.
-- Sensitivity-only rows verified: **3 of 3**.
+- Job-ad rows audited: **40**.
+- Rows with a local source: **40**.
+- Rows whose organization, role, and salary values verify: **30**.
+- Primary quantitative rows verified: **17 of 17**.
+- Sensitivity-only rows verified: **5 of 5**.
 
 ## Audit status counts
 
 | Status | Rows |
 |---|---:|
-| verified | 23 |
+| verified | 30 |
 | salary_discrepancy_or_unverifiable | 8 |
 | wrong_or_incomplete_source | 2 |
 

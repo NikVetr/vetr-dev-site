@@ -204,6 +204,28 @@ for _, r in j.iterrows():
         })
         continue
     ext = url_ext(url, ".html")
+    expected_local_path = archive_path or f"sources/native/job_ads/{slug(sid)}{ext}"
+    archived_path = ROOT / expected_local_path
+    archived_metadata_path = Path(f"{archived_path}.metadata.json")
+    archived_state = {
+        "current_status": "missing_source_native",
+        "current_local_path": "",
+        "current_sha256": "",
+        "current_byte_length": "",
+        "last_attempt_timestamp": "",
+        "last_attempt_result": "",
+    }
+    if archived_path.is_file() and archived_metadata_path.is_file():
+        archived_bytes = archived_path.read_bytes()
+        archived_metadata = json.loads(archived_metadata_path.read_text(encoding="utf-8"))
+        archived_state = {
+            "current_status": "present_verified_source_native",
+            "current_local_path": expected_local_path,
+            "current_sha256": hashlib.sha256(archived_bytes).hexdigest(),
+            "current_byte_length": len(archived_bytes),
+            "last_attempt_timestamp": clean(archived_metadata.get("retrieval_timestamp_utc")),
+            "last_attempt_result": "preserved source artifact with retrieval metadata",
+        }
     rows.append({
         "source_id": sid,
         "organization": clean(r.get("organization")),
@@ -213,7 +235,7 @@ for _, r in j.iterrows():
         "fallback_url_1": resolved if resolved and resolved != url else "",
         "fallback_url_2": "",
         "preferred_provenance": clean(r.get("upstream_provenance")) or "employer/recruiter/job-board source",
-        "expected_local_path": f"sources/native/job_ads/{slug(sid)}{ext}",
+        "expected_local_path": expected_local_path,
         "expected_mime_family": "pdf_or_html_or_text",
         "minimum_bytes": 500,
         "ein": "",
@@ -222,12 +244,7 @@ for _, r in j.iterrows():
         "tax_period_end": "",
         "analysis_use": clean(r.get("included_in_quantitative_analysis")) or clean(r.get("tier")),
         "validation_rule": "source-native artifact; title, organization, salary text, location, and posting date checked where reported",
-        "current_status": "missing_source_native",
-        "current_local_path": "",
-        "current_sha256": "",
-        "current_byte_length": "",
-        "last_attempt_timestamp": "",
-        "last_attempt_result": "",
+        **archived_state,
     })
 
 # Add all other external sources from the original manifest.  Frozen/local analysis
