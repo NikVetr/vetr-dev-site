@@ -59,9 +59,9 @@ social-basics.no-problem,괜찮아요,,gwaenchanayo,,,2,ko-agent-v1
 social-basics.i-do-not-know,몰라요,,mollayo,,,2,ko-agent-v1
 social-basics.good-night,안녕히 주무세요,,annyeonghi jumuseyo,,,2,ko-agent-v1
 social-basics.okay-fine-i-am-okay,괜찮아요,,gwaenchanayo,,,2,ko-agent-v1
-communication.i-do-not-speak-this-language,한국어 못해요,,hangugeo motaeyo,,,2,ko-agent-v1
-communication.i-speak-only-a-little-of-this,한국어 조금만 해요,,hangugeo jogeumman haeyo,,,2,ko-agent-v1
-communication.do-you-speak-english,영어 하세요?,,yeongeo haseyo?,,,2,ko-agent-v1
+communication.i-do-not-speak-this-language,{target} 못해요,,{target} motaeyo,,,2,language-slots-v1
+communication.i-speak-only-a-little-of-this,{target} 조금만 해요,,{target} jogeumman haeyo,,,2,language-slots-v1
+communication.do-you-speak-english,{source} 하세요?,,{source} haseyo?,,,2,language-slots-v1
 communication.please-speak-more-slowly,천천히 말씀해 주세요,,cheoncheonhi malsseumhae juseyo,,,2,ko-agent-v1
 communication.i-do-not-understand-spoken,못 알아들었어요,,mot aradeureosseoyo,,,2,ko-agent-v1
 communication.i-cannot-read-understand,읽을 수 없어요,,ilgeul su eopseoyo,,,2,ko-agent-v1
@@ -69,7 +69,7 @@ communication.please-say-it-again,다시 말씀해 주세요,,dasi malsseumhae j
 communication.please-write-it-down,적어 주세요,,jeogeo juseyo,,,2,ko-agent-v1
 communication.please-wait-a-moment,잠시만 기다려 주세요,잠시만요,jamsiman gidaryeo juseyo,,,2,ko-agent-v1
 communication.can-you-help-me,도와주실 수 있어요?,,dowajusil su isseoyo?,,,2,ko-agent-v1
-communication.please-show-me-the-text,한국어로 보여 주세요,,hangugeoro boyeo juseyo,,,2,ko-agent-v1
+communication.please-show-me-the-text,{target}로 보여 주세요,,{target}ro boyeo juseyo,,,2,language-slots-v1
 communication.i-cannot-make-out-what-you-are-saying,무슨 말인지 모르겠어요,,museun marinji moreugesseoyo,,,2,ko-agent-v1
 communication.i-do-not-understand,이해가 안 돼요,,ihaega an dwaeyo,,,2,ko-agent-v1
 communication.i-cannot-read-it,못 읽어요,,mot ilgeoyo,,,2,ko-agent-v1
@@ -91,7 +91,7 @@ phone-translation.one-sentence-at-a-time-please,한 문장씩 말씀해 주세�
 phone-translation.please-type-it-and-show-me,입력해서 보여 주세요,,imnyeokaeseo boyeo juseyo,,,2,ko-agent-v1
 phone-translation.please-look-at-the-screen,화면을 봐 주세요,,hwamyeoneul bwa juseyo,,,2,ko-agent-v1
 phone-text-power.please-type-it-for-me,입력해 주세요,,imnyeokae juseyo,,,2,ko-agent-v1
-phone-translation.please-write-the-place-name,지명을 한국어로 써 주세요,,jimyeongeul hangugeoro sseo juseyo,,,2,ko-agent-v1
+phone-translation.please-write-the-place-name,지명을 {target}로 써 주세요,,jimyeongeul {target}ro sseo juseyo,,,2,language-slots-v1
 phone-text-power.please-use-simple-words,쉬운 말로 해 주세요,,swiun mallo hae juseyo,,,2,ko-agent-v1
 phone-text-power.my-phone-battery-is-low,배터리가 없어요,,baeteoriga eopseoyo,,,2,ko-agent-v1
 phone-text-power.do-you-have-a-power-bank,보조배터리 있어요?,,bojobaeteori isseoyo?,,,2,ko-agent-v1

@@ -113,7 +113,7 @@ emergency-medical.i-have-chest-pain,가슴이 아픕니다,,gaseumi apeumnida,,,
 emergency-medical.this-person-is-unconscious,이 사람 의식이 없습니다,,i saram uisigi eopseumnida,,,2,ko-agent-v1
 emergency-medical.where-is-the-nearest-hospital,가까운 병원이 어디예요?,,gakkaun byeongwoni eodiyeyo?,,,2,ko-agent-v1
 emergency-medical.what-is-the-emergency-number,응급 전화번호가 뭐예요?,,eunggeup jeonhwabeonhoga mwoyeyo?,,,2,ko-agent-v1
-emergency-medical.is-there-a-doctor-who-speaks-english,영어 하는 의사 있어요?,,yeongeo haneun uisa isseoyo?,,,2,ko-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,{source} 하는 의사 있어요?,,{source} haneun uisa isseoyo?,,,2,language-slots-v1
 emergency-medical.i-think-a-bone-is-broken,뼈가 부러진 것 같습니다,,ppyeoga bureojin geot gatseumnida,,,2,ko-agent-v1
 emergency-medical.please-call-my-emergency-contact,비상 연락처에 연락해 주세요,,bisang yeollakcheoe yeollakae juseyo,,,2,ko-agent-v1
 emergency-medical.i-have-travel-insurance,여행자 보험이 있습니다,,yeohaengja boheomi itseumnida,,,2,ko-agent-v1

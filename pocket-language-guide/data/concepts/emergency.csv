@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,emergency-medical,entry,phrase,i-have-chest-
 emergency-medical.this-person-is-unconscious,emergency-medical,entry,phrase,this-person-is-unconscious,1010,0.890,emergency-medical.this-person-is-unconscious,0,0,neutral,,"Said about someone else, not the speaker."
 emergency-medical.where-is-the-nearest-hospital,emergency-medical,entry,phrase,where-is-the-nearest-hospital,1011,0.880,emergency-medical.where-is-the-nearest-hospital,0,0,neutral,,
 emergency-medical.what-is-the-emergency-number,emergency-medical,entry,phrase,what-is-the-emergency-number,1012,0.860,emergency-medical.what-is-the-emergency-number,0,0,neutral,,
-emergency-medical.is-there-a-doctor-who-speaks-english,emergency-medical,entry,phrase,is-there-a-doctor-who-speaks-english,1013,0.840,emergency-medical.is-there-a-doctor-who-speaks-english,0,0,neutral,,Substitute the traveler's own language where the sheet is built for a non-English source.
+emergency-medical.is-there-a-doctor-who-speaks-english,emergency-medical,entry,phrase,is-there-a-doctor-who-speaks-english,1013,0.840,emergency-medical.is-there-a-doctor-who-speaks-english,0,0,neutral,,Names the traveller's own language. The cell carries {source} and is filled from the pair.
 emergency-medical.i-think-a-bone-is-broken,emergency-medical,entry,phrase,i-think-a-bone-is-broken,1014,0.820,emergency-medical.i-think-a-bone-is-broken,0,0,neutral,,
 emergency-medical.please-call-my-emergency-contact,emergency-medical,entry,phrase,please-call-my-emergency-contact,1015,0.800,emergency-medical.please-call-my-emergency-contact,0,0,neutral,,
 emergency-medical.i-have-travel-insurance,emergency-medical,entry,phrase,i-have-travel-insurance,1016,0.760,emergency-medical.i-have-travel-insurance,0,0,neutral,,

@@ -10,9 +10,9 @@ social-basics.excuse-me-sorry,Excuse me / sorry,,,,2,latex-reference-v2
 social-basics.sorry,Sorry,,,,2,latex-reference-v2
 social-basics.no-problem,No problem,,,,2,latex-reference-v2
 social-basics.i-do-not-know,I do not know,,,,2,latex-reference-v2
-communication.i-do-not-speak-this-language,I do not speak this language,,,,2,latex-reference-v2
-communication.i-speak-only-a-little-of-this,I speak only a little of this language,,,,2,latex-reference-v2
-communication.do-you-speak-english,Do you speak English?,,,,2,latex-reference-v2
+communication.i-do-not-speak-this-language,I do not speak {target},,,,2,language-slots-v1
+communication.i-speak-only-a-little-of-this,I speak only a little {target},,,,2,language-slots-v1
+communication.do-you-speak-english,Do you speak {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,Please speak more slowly,,,,2,latex-reference-v2
 communication.i-do-not-understand-spoken,I do not understand (spoken),,,,2,latex-reference-v2
 communication.i-cannot-read-understand,I cannot read / understand,,,,2,latex-reference-v2
@@ -20,7 +20,7 @@ communication.please-say-it-again,Please say it again,,,,2,latex-reference-v2
 communication.please-write-it-down,Please write it down,,,,2,latex-reference-v2
 communication.please-wait-a-moment,Please wait a moment,,,,2,latex-reference-v2
 communication.can-you-help-me,Can you help me?,,,,2,latex-reference-v2
-communication.please-show-me-the-text,Please show me the text,,,,2,latex-reference-v2
+communication.please-show-me-the-text,Please show me the text in {target},,,,2,language-slots-v1
 quick-responses.please-go-ahead,please / go ahead,,,,2,latex-reference-v2
 quick-responses.yes-right,yes / right,,,,2,latex-reference-v2
 quick-responses.no-not,no / not,,,,2,latex-reference-v2
@@ -32,7 +32,7 @@ phone-translation.i-am-using-phone-translation,I am using phone translation,,,,2
 phone-translation.please-speak-toward-the-phone,Please speak toward the phone,,,,2,latex-reference-v2
 phone-translation.one-sentence-at-a-time-please,"One sentence at a time, please",,,,2,latex-reference-v2
 phone-text-power.please-type-it-for-me,Please type it for me,,,,2,latex-reference-v2
-phone-translation.please-write-the-place-name,Please write the place name here,,,,2,latex-reference-v2
+phone-translation.please-write-the-place-name,Please write the place name in {target},,,,2,language-slots-v1
 phone-text-power.please-use-simple-words,Please use simple words,,,,2,latex-reference-v2
 phone-text-power.my-phone-battery-is-low,My phone battery is low,,,,2,latex-reference-v2
 phone-text-power.do-you-have-a-power-bank,Do you have a power bank?,,,,2,latex-reference-v2

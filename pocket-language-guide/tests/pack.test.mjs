@@ -115,10 +115,11 @@ test('every pack agrees on which slots a concept takes', async () => {
     .map(([id, seen]) => `${id}: ${[...seen].map(([k, v]) => `${k || '(none)'}=${v.join(' ')}`).join(' | ')}`);
   assert.deepEqual(disagreeing, []);
 
-  // And it has to be checking something. The corpus carries no placeholders yet --
-  // the seven concepts are being rewritten -- so until they land this assertion is
-  // vacuously true, which is the failure mode two other tests in this suite have
-  // already had. Raise this to the number of slotted concepts once they are in.
+  // And it has to be checking something: a corpus whose placeholders were reverted
+  // would satisfy the agreement check above vacuously, which is the failure mode two
+  // other tests in this suite have already had. Six concepts carry a slot -- two
+  // `{source}`, "does anyone here speak *my* language", and four `{target}`, "I do
+  // not speak / please write *the local* language".
   const slotted = [...byConcept.entries()].filter(([, seen]) => [...seen.keys()].some(Boolean));
-  assert.ok(slotted.length >= 0, `${slotted.length} concepts carry a language slot`);
+  assert.ok(slotted.length >= 6, `${slotted.length} concepts carry a language slot`);
 });

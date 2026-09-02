@@ -113,7 +113,7 @@ emergency-medical.i-have-chest-pain,عندي ألم في الصدر,,ʿindī ala
 emergency-medical.this-person-is-unconscious,هذا الشخص فاقد للوعي,,hādhā al-shakhṣ fāqid lil-waʿy,,,2,ar-agent-v1
 emergency-medical.where-is-the-nearest-hospital,أين أقرب مستشفى؟,,ayna aqrab mustashfá?,,,2,ar-agent-v1
 emergency-medical.what-is-the-emergency-number,ما رقم الطوارئ؟,,mā raqm al-ṭawāriʾ?,,,2,ar-agent-v1
-emergency-medical.is-there-a-doctor-who-speaks-english,هل يوجد طبيب يتحدث الإنجليزية؟,,hal yūjad ṭabīb yataḥaddath al-injilīzīyah?,,,2,ar-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,هل يوجد طبيب يتحدث {source}؟,,hal yūjad ṭabīb yataḥaddath {source}?,,,2,language-slots-v1
 emergency-medical.i-think-a-bone-is-broken,أظنّ أنّ هناك كسراً,,aẓunn anna hunāk kasran,,I think there is a fracture,2,ar-agent-v1
 emergency-medical.please-call-my-emergency-contact,اتصل بجهة الاتصال للطوارئ,اتصل بهذا الرقم من فضلك,ittaṣil bi-jihat al-ittiṣāl lil-ṭawāriʾ,,,2,ar-agent-v1
 emergency-medical.i-have-travel-insurance,لديّ تأمين سفر,,ladayya taʾmīn safar,,,2,ar-agent-v1

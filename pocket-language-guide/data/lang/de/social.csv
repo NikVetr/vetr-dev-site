@@ -59,9 +59,9 @@ social-basics.no-problem,Kein Problem,,,,2,de-agent-v1
 social-basics.i-do-not-know,Ich weiß nicht.,,,,2,de-agent-v1
 social-basics.good-night,Gute Nacht,,,,2,de-agent-v1
 social-basics.okay-fine-i-am-okay,Alles gut.,In Ordnung,,,2,de-agent-v1
-communication.i-do-not-speak-this-language,Ich spreche kein Deutsch.,,,,2,de-agent-v1
-communication.i-speak-only-a-little-of-this,Ich spreche nur ein wenig Deutsch.,,,,2,de-agent-v1
-communication.do-you-speak-english,Sprechen Sie Englisch?,,,,2,de-agent-v1
+communication.i-do-not-speak-this-language,Ich spreche kein {target}.,,,,2,language-slots-v1
+communication.i-speak-only-a-little-of-this,Ich spreche nur ein wenig {target}.,,,,2,language-slots-v1
+communication.do-you-speak-english,Sprechen Sie {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,Sprechen Sie bitte langsamer.,,,,2,de-agent-v1
 communication.i-do-not-understand-spoken,Verstehe ich nicht.,,,,2,de-agent-v1
 communication.i-cannot-read-understand,Ich kann das nicht lesen.,,,,2,de-agent-v1
@@ -69,7 +69,7 @@ communication.please-say-it-again,Bitte noch einmal.,Wie bitte?,,,2,de-agent-v1
 communication.please-write-it-down,Bitte schreiben Sie es auf.,,,,2,de-agent-v1
 communication.please-wait-a-moment,"Einen Moment, bitte.",,,,2,de-agent-v1
 communication.can-you-help-me,Können Sie mir helfen?,,,,2,de-agent-v1
-communication.please-show-me-the-text,Zeigen Sie mir bitte den deutschen Text.,,,,2,de-agent-v1
+communication.please-show-me-the-text,Zeigen Sie mir bitte den Text auf {target}.,,,,2,language-slots-v1
 communication.i-cannot-make-out-what-you-are-saying,Ich verstehe Sie akustisch nicht.,,,,2,de-agent-v1
 communication.i-do-not-understand,Ich verstehe nicht.,,,,2,de-agent-v1
 communication.i-cannot-read-it,Ich kann es nicht lesen.,,,,2,de-agent-v1
@@ -91,7 +91,7 @@ phone-translation.one-sentence-at-a-time-please,Bitte einen Satz nach dem andere
 phone-translation.please-type-it-and-show-me,Bitte tippen und zeigen.,,,,2,de-agent-v1
 phone-translation.please-look-at-the-screen,Bitte schauen Sie auf den Bildschirm.,Bitte aufs Display schauen.,,,2,de-agent-v1
 phone-text-power.please-type-it-for-me,Bitte tippen Sie es ein.,,,,2,de-agent-v1
-phone-translation.please-write-the-place-name,Bitte den Ortsnamen auf Deutsch schreiben.,,,,2,de-agent-v1
+phone-translation.please-write-the-place-name,Bitte den Ortsnamen auf {target} schreiben.,,,,2,language-slots-v1
 phone-text-power.please-use-simple-words,Bitte einfache Wörter benutzen.,,,,2,de-agent-v1
 phone-text-power.my-phone-battery-is-low,Mein Akku ist fast leer.,,,,2,de-agent-v1
 phone-text-power.do-you-have-a-power-bank,Haben Sie eine Powerbank?,,,,2,de-agent-v1

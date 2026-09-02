@@ -113,7 +113,7 @@ emergency-medical.i-have-chest-pain,J'ai une douleur à la poitrine,douleur thor
 emergency-medical.this-person-is-unconscious,Cette personne est inconsciente,,,,2,fr-agent-v1
 emergency-medical.where-is-the-nearest-hospital,Où est l'hôpital le plus proche ?,,,,2,fr-agent-v1
 emergency-medical.what-is-the-emergency-number,Quel est le numéro d'urgence ?,,,,2,fr-agent-v1
-emergency-medical.is-there-a-doctor-who-speaks-english,Y a-t-il un médecin qui parle anglais ?,,,,2,fr-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Y a-t-il un médecin qui parle {source} ?,,,,2,language-slots-v1
 emergency-medical.i-think-a-bone-is-broken,Je crois avoir une fracture,,,,2,fr-agent-v1
 emergency-medical.please-call-my-emergency-contact,Appelez mon contact d'urgence,,,,2,fr-agent-v1
 emergency-medical.i-have-travel-insurance,J'ai une assurance voyage,,,,2,fr-agent-v1

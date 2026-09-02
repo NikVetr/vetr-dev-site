@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,Tôi bị đau ngực,,,,2,vi-agent-v1
 emergency-medical.this-person-is-unconscious,Người này bất tỉnh,,,,2,vi-agent-v1
 emergency-medical.where-is-the-nearest-hospital,Bệnh viện gần nhất ở đâu ạ?,,,,2,vi-agent-v1
 emergency-medical.what-is-the-emergency-number,Số khẩn cấp là số mấy ạ?,,,,2,vi-agent-v1
-emergency-medical.is-there-a-doctor-who-speaks-english,Có bác sĩ nói tiếng Anh không ạ?,,,,2,vi-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Có bác sĩ nói tiếng {source} không ạ?,,,,2,language-slots-v1
 emergency-medical.i-think-a-bone-is-broken,Tôi nghĩ bị gãy xương,,,,2,vi-agent-v1
 emergency-medical.please-call-my-emergency-contact,Xin gọi người liên hệ khẩn cấp của tôi,,,,2,vi-agent-v1
 emergency-medical.i-have-travel-insurance,Tôi có bảo hiểm du lịch,,,,2,vi-agent-v1

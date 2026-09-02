@@ -59,9 +59,9 @@ social-basics.no-problem,Pas de problème,,,,2,fr-agent-v1
 social-basics.i-do-not-know,Je ne sais pas,,,,2,fr-agent-v1
 social-basics.good-night,Bonne nuit,,,,2,fr-agent-v1
 social-basics.okay-fine-i-am-okay,Ça va,,,,2,fr-agent-v1
-communication.i-do-not-speak-this-language,Je ne parle pas français,,,,2,fr-agent-v1
-communication.i-speak-only-a-little-of-this,Je parle très peu français,,,,2,fr-agent-v1
-communication.do-you-speak-english,Parlez-vous anglais ?,,,,2,fr-agent-v1
+communication.i-do-not-speak-this-language,Je ne parle pas {target},,,,2,language-slots-v1
+communication.i-speak-only-a-little-of-this,Je parle très peu {target},,,,2,language-slots-v1
+communication.do-you-speak-english,Parlez-vous {source} ?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,"Parlez plus lentement, s'il vous plaît",,,,2,fr-agent-v1
 communication.i-do-not-understand-spoken,Je ne comprends pas,,,,2,fr-agent-v1
 communication.i-cannot-read-understand,Je ne sais pas lire ça,,,,2,fr-agent-v1
@@ -69,7 +69,7 @@ communication.please-say-it-again,"Répétez, s'il vous plaît",,,,2,fr-agent-v1
 communication.please-write-it-down,"Écrivez-le, s'il vous plaît",,,,2,fr-agent-v1
 communication.please-wait-a-moment,"Un instant, s'il vous plaît",,,,2,fr-agent-v1
 communication.can-you-help-me,Pouvez-vous m'aider ?,,,,2,fr-agent-v1
-communication.please-show-me-the-text,Montrez-moi le texte en français,,,,2,fr-agent-v1
+communication.please-show-me-the-text,Montrez-moi le texte en {target},,,,2,language-slots-v1
 communication.i-cannot-make-out-what-you-are-saying,Je n'arrive pas à vous comprendre,,,,2,fr-agent-v1
 communication.i-do-not-understand,Je ne comprends pas,,,,2,fr-agent-v1
 communication.i-cannot-read-it,Je ne peux pas le lire,,,,2,fr-agent-v1
@@ -91,7 +91,7 @@ phone-translation.one-sentence-at-a-time-please,"Une phrase à la fois, s'il vou
 phone-translation.please-type-it-and-show-me,Tapez-le et montrez-moi,,,,2,fr-agent-v1
 phone-translation.please-look-at-the-screen,Regardez l'écran,,,,2,fr-agent-v1
 phone-text-power.please-type-it-for-me,"Tapez-le pour moi, s'il vous plaît",,,,2,fr-agent-v1
-phone-translation.please-write-the-place-name,Écrivez le nom du lieu en français,,,,2,fr-agent-v1
+phone-translation.please-write-the-place-name,Écrivez le nom du lieu en {target},,,,2,language-slots-v1
 phone-text-power.please-use-simple-words,Employez des mots simples,,,,2,fr-agent-v1
 phone-text-power.my-phone-battery-is-low,Ma batterie est presque vide,,,,2,fr-agent-v1
 phone-text-power.do-you-have-a-power-bank,Avez-vous une batterie externe ?,,,,2,fr-agent-v1

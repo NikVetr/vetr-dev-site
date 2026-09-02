@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,Tenho dor no peito,,,,2,pt-agent-v1
 emergency-medical.this-person-is-unconscious,Esta pessoa está inconsciente,,,,2,pt-agent-v1
 emergency-medical.where-is-the-nearest-hospital,Onde fica o hospital mais próximo?,,,,2,pt-agent-v1
 emergency-medical.what-is-the-emergency-number,Qual é o número de emergência?,,,,2,pt-agent-v1
-emergency-medical.is-there-a-doctor-who-speaks-english,Há algum médico que fale inglês?,,,,2,pt-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Há algum médico que fale {source}?,,,,2,language-slots-v1
 emergency-medical.i-think-a-bone-is-broken,Acho que parti um osso,Acho que quebrei um osso,,,2,pt-agent-v1
 emergency-medical.please-call-my-emergency-contact,Ligue para o meu contacto de emergência,meu contato de emergência,,,2,pt-agent-v1
 emergency-medical.i-have-travel-insurance,Tenho seguro de viagem,,,,2,pt-agent-v1

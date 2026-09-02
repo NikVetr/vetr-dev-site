@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,Dada saya nyeri,Nyeri dada,,,2,id-agent-v1
 emergency-medical.this-person-is-unconscious,Orang ini tidak sadar,Orang ini pingsan,,,2,id-agent-v1
 emergency-medical.where-is-the-nearest-hospital,Rumah sakit terdekat di mana?,,,,2,id-agent-v1
 emergency-medical.what-is-the-emergency-number,Nomor daruratnya berapa?,,,,2,id-agent-v1
-emergency-medical.is-there-a-doctor-who-speaks-english,Ada dokter yang bisa bahasa Inggris?,,,,2,id-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Ada dokter yang bisa bahasa {source}?,,,,2,language-slots-v1
 emergency-medical.i-think-a-bone-is-broken,Sepertinya saya patah tulang,,,,2,id-agent-v1
 emergency-medical.please-call-my-emergency-contact,Tolong hubungi kontak darurat saya,,,,2,id-agent-v1
 emergency-medical.i-have-travel-insurance,Saya punya asuransi perjalanan,,,,2,id-agent-v1

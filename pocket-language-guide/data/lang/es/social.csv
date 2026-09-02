@@ -59,9 +59,9 @@ social-basics.no-problem,No hay problema,,,,2,es-agent-v1
 social-basics.i-do-not-know,No sé,,,,2,es-agent-v1
 social-basics.good-night,Buenas noches,Que descanse,,,2,es-agent-v1
 social-basics.okay-fine-i-am-okay,Estoy bien,,,,2,es-agent-v1
-communication.i-do-not-speak-this-language,No hablo español,,,,2,es-agent-v1
-communication.i-speak-only-a-little-of-this,Hablo poco español,,,,2,es-agent-v1
-communication.do-you-speak-english,¿Habla inglés?,,,,2,es-agent-v1
+communication.i-do-not-speak-this-language,No hablo {target},,,,2,language-slots-v1
+communication.i-speak-only-a-little-of-this,Hablo poco {target},,,,2,language-slots-v1
+communication.do-you-speak-english,¿Habla {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,"Hable más despacio, por favor",,,,2,es-agent-v1
 communication.i-do-not-understand-spoken,No entiendo,,,,2,es-agent-v1
 communication.i-cannot-read-understand,No sé leer esto,,,,2,es-agent-v1
@@ -69,7 +69,7 @@ communication.please-say-it-again,"Repítalo, por favor",,,,2,es-agent-v1
 communication.please-write-it-down,"Escríbalo, por favor",,,,2,es-agent-v1
 communication.please-wait-a-moment,"Espere un momento, por favor",,,,2,es-agent-v1
 communication.can-you-help-me,¿Me puede ayudar?,,,,2,es-agent-v1
-communication.please-show-me-the-text,Muéstreme el texto en español,,,,2,es-agent-v1
+communication.please-show-me-the-text,Muéstreme el texto en {target},,,,2,language-slots-v1
 communication.i-cannot-make-out-what-you-are-saying,No entiendo lo que dice,,,,2,es-agent-v1
 communication.i-do-not-understand,No entiendo,,,,2,es-agent-v1
 communication.i-cannot-read-it,No puedo leerlo,,,,2,es-agent-v1
@@ -91,7 +91,7 @@ phone-translation.one-sentence-at-a-time-please,"Una frase a la vez, por favor",
 phone-translation.please-type-it-and-show-me,Escríbalo y muéstremelo,,,,2,es-agent-v1
 phone-translation.please-look-at-the-screen,"Mire la pantalla, por favor",,,,2,es-agent-v1
 phone-text-power.please-type-it-for-me,"Escríbalo en el teléfono, por favor",,,,2,es-agent-v1
-phone-translation.please-write-the-place-name,Escriba el nombre del lugar en español,,,,2,es-agent-v1
+phone-translation.please-write-the-place-name,Escriba el nombre del lugar en {target},,,,2,language-slots-v1
 phone-text-power.please-use-simple-words,"Use palabras sencillas, por favor",,,,2,es-agent-v1
 phone-text-power.my-phone-battery-is-low,Mi teléfono tiene poca batería,,,,2,es-agent-v1
 phone-text-power.do-you-have-a-power-bank,¿Tiene una batería portátil?,¿Tiene un power bank?,,,2,es-agent-v1

@@ -10,9 +10,9 @@ social-basics.excuse-me-sorry,Mi scusi,Scusi,,,2,it-agent-v1
 social-basics.sorry,Mi dispiace,,,,2,it-agent-v1
 social-basics.no-problem,Non c'è problema,,,,2,it-agent-v1
 social-basics.i-do-not-know,Non lo so,,,,2,it-agent-v1
-communication.i-do-not-speak-this-language,Non parlo italiano,,,,2,it-agent-v1
-communication.i-speak-only-a-little-of-this,Parlo poco italiano,,,,2,it-agent-v1
-communication.do-you-speak-english,Parla inglese?,,,,2,it-agent-v1
+communication.i-do-not-speak-this-language,Non parlo {target},,,,2,language-slots-v1
+communication.i-speak-only-a-little-of-this,Parlo poco {target},,,,2,language-slots-v1
+communication.do-you-speak-english,Parla {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,"Parli più lentamente, per favore",,,,2,it-agent-v1
 communication.i-do-not-understand-spoken,Non capisco,,,,2,it-agent-v1
 communication.i-cannot-read-understand,Non so leggere questo,,,,2,it-agent-v1
@@ -20,7 +20,7 @@ communication.please-say-it-again,"Ripeta, per favore",,,,2,it-agent-v1
 communication.please-write-it-down,"Lo scriva, per favore",,,,2,it-agent-v1
 communication.please-wait-a-moment,"Un momento, per favore",,,,2,it-agent-v1
 communication.can-you-help-me,Mi può aiutare?,,,,2,it-agent-v1
-communication.please-show-me-the-text,Mi mostri il testo in italiano,,,,2,it-agent-v1
+communication.please-show-me-the-text,Mi mostri il testo in {target},,,,2,language-slots-v1
 quick-responses.please-go-ahead,prego,si accomodi,,,2,it-agent-v1
 quick-responses.yes-right,sì / esatto,,,,2,it-agent-v1
 quick-responses.no-not,no / non,,,,2,it-agent-v1
@@ -32,7 +32,7 @@ phone-translation.i-am-using-phone-translation,Sto usando un traduttore sul tele
 phone-translation.please-speak-toward-the-phone,Parli verso il telefono,,,,2,it-agent-v1
 phone-translation.one-sentence-at-a-time-please,"Una frase alla volta, per favore",,,,2,it-agent-v1
 phone-text-power.please-type-it-for-me,"Lo scriva sul telefono, per favore",,,,2,it-agent-v1
-phone-translation.please-write-the-place-name,Scriva il nome del posto in italiano,,,,2,it-agent-v1
+phone-translation.please-write-the-place-name,Scriva il nome del posto in {target},,,,2,language-slots-v1
 phone-text-power.please-use-simple-words,"Usi parole semplici, per favore",,,,2,it-agent-v1
 phone-text-power.my-phone-battery-is-low,Il telefono ha poca batteria,,,,2,it-agent-v1
 phone-text-power.do-you-have-a-power-bank,Ha un power bank?,Ha una batteria portatile?,,,2,it-agent-v1

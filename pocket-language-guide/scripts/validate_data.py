@@ -8,6 +8,7 @@ safety-critical sections carry reviewed content.
 """
 import csv
 import json
+import re
 import sys
 import unicodedata
 from collections import defaultdict
@@ -68,6 +69,16 @@ PLACEHOLDERS = ("{}", "{region}", "{numbers}")
 
 errors = []
 warnings = []
+
+
+# `{target}` and `{source}` are filled from the pair by `core/pack.js`; see
+# `content/LANGUAGE-SLOTS.md`. Distinct from the `{}` blank slot, which is a rule
+# drawn on the card rather than a substitution.
+LANGUAGE_SLOT = re.compile(r"\{(?:target|source)\}")
+
+# Languages whose CLDR names are lowercase, so a placeholder must not open a
+# sentence in them. Italian joined this set with the seventeenth pack.
+LOWERCASE_LANGUAGE_NAMES = {"fr", "es", "pt", "ru", "it"}
 
 
 def check_drawable(text, stack, where, fatal=False):
@@ -212,6 +223,22 @@ def main():
                 if text.strip() and text.count("{}") != slots:
                     errors.append(f"{rel}: {cid} has {text.count('{}')} slots, "
                                   f"concept declares {slots}")
+                # Seven concepts name a language, and `{target}` / `{source}` fill
+                # from the pair. Two rules the mechanism cannot enforce itself, both
+                # from `content/LANGUAGE-SLOTS.md`.
+                if is_note and LANGUAGE_SLOT.search(text):
+                    # A note prints source-side only, so both placeholders would
+                    # resolve to constants inside one -- and hardcoded prose is
+                    # clearer than a substitution that can never vary.
+                    errors.append(f"{rel}: {cid} is a note and carries a language "
+                                  "placeholder, which can only ever resolve one way")
+                if code in LOWERCASE_LANGUAGE_NAMES and LANGUAGE_SLOT.match(text.strip()):
+                    # These languages write language names lowercase, and ICU gives
+                    # them that way, so a placeholder at the start of a sentence
+                    # prints a lowercase initial. Reword rather than adding a
+                    # capitalising token: no frame in the corpus needs one.
+                    errors.append(f"{rel}: {cid} starts with a language placeholder, "
+                                  f"and {code} writes language names lowercase")
                 # A row's own writing prints in its language's stack whichever side
                 # of the pair it lands on: as the target's script, or as the gloss
                 # when this language is the reader's. Romanisation and the respelling

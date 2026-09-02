@@ -26,7 +26,7 @@ emergency-medical.i-have-chest-pain,Ho dolore al petto,Dolore toracico,,,2,it-ag
 emergency-medical.this-person-is-unconscious,Questa persona ha perso conoscenza,Questa persona è priva di sensi,,,2,it-agent-v1
 emergency-medical.where-is-the-nearest-hospital,Dov'è l'ospedale più vicino?,,,,2,it-agent-v1
 emergency-medical.what-is-the-emergency-number,Qual è il numero di emergenza?,,,,2,it-agent-v1
-emergency-medical.is-there-a-doctor-who-speaks-english,C'è un medico che parla inglese?,,,,2,it-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,C'è un medico che parla {source}?,,,,2,language-slots-v1
 emergency-medical.i-think-a-bone-is-broken,Credo di avere una frattura,,,,2,it-agent-v1
 emergency-medical.please-call-my-emergency-contact,Chiami il mio contatto di emergenza,,,,2,it-agent-v1
 emergency-medical.i-have-travel-insurance,Ho un'assicurazione di viaggio,,,,2,it-agent-v1

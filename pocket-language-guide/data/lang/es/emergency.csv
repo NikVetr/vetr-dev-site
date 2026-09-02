@@ -115,7 +115,7 @@ emergency-medical.i-have-chest-pain,Tengo dolor en el pecho,,,,2,es-agent-v1
 emergency-medical.this-person-is-unconscious,Esta persona está inconsciente,,,,2,es-agent-v1
 emergency-medical.where-is-the-nearest-hospital,¿Dónde está el hospital más cercano?,,,,2,es-agent-v1
 emergency-medical.what-is-the-emergency-number,¿Cuál es el número de emergencias?,,,,2,es-agent-v1
-emergency-medical.is-there-a-doctor-who-speaks-english,¿Hay un médico que hable inglés?,,,,2,es-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,¿Hay un médico que hable {source}?,,,,2,language-slots-v1
 emergency-medical.i-think-a-bone-is-broken,Creo que tengo un hueso roto,,,,2,es-agent-v1
 emergency-medical.please-call-my-emergency-contact,Llame a mi contacto de emergencia,,,,2,es-agent-v1
 emergency-medical.i-have-travel-insurance,Tengo seguro de viaje,,,,2,es-agent-v1
