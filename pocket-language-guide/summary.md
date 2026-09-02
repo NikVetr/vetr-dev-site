@@ -635,10 +635,7 @@ Named so nobody has to rediscover the gap:
   Swahili are registered with no rows. Nothing offers them: `hasContent` reads
   `data/coverage.json` rather than the declared status, so a language with no data
   cannot be picked as a target or a gloss, and the gallery shows it as "help
-  translate". Hindi needs no font work -- the shipped Noto Sans covers all 128
-  Devanagari codepoints and carries the `dev2`/`deva` GSUB features -- but **Thai
-  needs a new stack**, because that face has none of its 128 glyphs, and dictionary
-  line breaking besides.
+  translate".
 - **Respellings for readers who do not read English.** Every pack ships
   `<target>__en__en-US` and nothing else, so the pronunciation column appears only
   on a sheet glossed into English. A Turkish speaker learning Spanish gets the
@@ -671,7 +668,12 @@ Named so nobody has to rediscover the gap:
   ship as the hand-curated override layer the Mandarin one already was.
 - **Dictionary line breaking** for Thai and Khmer. `scripts.csv` marks them
   `word_break: dict`; the measurer falls back to breaking anywhere and the solver
-  raises a warning, rather than pretending.
+  raises a warning, rather than pretending. It does hold each *character cluster*
+  together — a Thai tone mark or spacing vowel is glued to its consonant and a
+  leading vowel to what follows it — which is the cheap core of a Thai character
+  cluster segmenter, and it is the difference between a break in the wrong place and
+  a mark orphaned onto a dotted circle. Real word breaking needs a wordlist of a few
+  hundred KB and is not here yet.
 - **Per-row split overrides.** The drag handles cover margins and the column gap;
   dragging an individual row's internal divider would need per-row overrides
   threaded through `atoms.js`.

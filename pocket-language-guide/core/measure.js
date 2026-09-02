@@ -11,8 +11,20 @@ const SLOT_RULE_EMS = 4.6;
 
 // Minimal kinsoku: never strand closing punctuation at the start of a line, and
 // never leave an opening bracket dangling at the end of one.
-const NO_LINE_START = '、。，．：；？！）」』》＞…';
-const NO_LINE_END = '（「『《＜';
+//
+// The Thai and Lao entries are doing something different from the CJK ones. Those
+// two scripts want dictionary line breaking, which is not implemented, so a line
+// may break between any two characters -- but breaking *inside* a character cluster
+// is not merely a poor word division, it is broken text: a tone mark or a vowel
+// orphaned at the start of a line renders over a dotted circle, and a leading vowel
+// left at the end of one is separated from the consonant it is pronounced after.
+// Gluing the combining marks and the spacing vowels to the consonant they belong to
+// is the cheap core of a Thai character cluster segmenter, and it costs one string.
+const THAI_MARKS = '\u0E31\u0E33\u0E34\u0E35\u0E36\u0E37\u0E38\u0E39\u0E3A'
+  + '\u0E47\u0E48\u0E49\u0E4A\u0E4B\u0E4C\u0E4D\u0E4E\u0E30\u0E32\u0E45\u0E46';
+const THAI_LEAD_VOWELS = '\u0E40\u0E41\u0E42\u0E43\u0E44';
+const NO_LINE_START = `、。，．：；？！）」』》＞…${THAI_MARKS}`;
+const NO_LINE_END = `（「『《＜${THAI_LEAD_VOWELS}`;
 
 /**
  * A unit of text that never splits. `w` includes any trailing space; `inkW` is
@@ -77,7 +89,9 @@ export function createMeasurer(registry, opts = {}) {
       return segment.split(/(?<=[\s\-\u2013\u2014/])/).filter((s) => s !== '');
     }
     // 'dict' needs a Thai/Khmer dictionary; until one ships it breaks as 'any',
-    // and solve/index.js raises a warning for those scripts.
+    // and solve/index.js raises a warning for those scripts. The glue below still
+    // holds each character cluster together, so the breaks are in the wrong places
+    // rather than inside a syllable.
     /** @type {string[]} */ const out = [];
     for (const ch of segment) {
       const prev = out.length ? out[out.length - 1] : '';

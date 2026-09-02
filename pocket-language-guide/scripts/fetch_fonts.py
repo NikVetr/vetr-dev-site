@@ -34,6 +34,10 @@ SOURCES = {
     "NotoSerifJP-var.ttf": f"{GFONTS}/notoserifjp/NotoSerifJP%5Bwght%5D.ttf",
     "NotoSansKR-var.ttf": f"{GFONTS}/notosanskr/NotoSansKR%5Bwght%5D.ttf",
     "NotoSerifKR-var.ttf": f"{GFONTS}/notoserifkr/NotoSerifKR%5Bwght%5D.ttf",
+    # Thai is the one script here that the Latin faces do not cover at all -- Noto
+    # Sans carries none of its 128 codepoints -- so it needs a stack of its own.
+    "NotoSansThai-var.ttf": f"{GFONTS}/notosansthai/NotoSansThai%5Bwdth,wght%5D.ttf",
+    "NotoSerifThai-var.ttf": f"{GFONTS}/notoserifthai/NotoSerifThai%5Bwdth,wght%5D.ttf",
 }
 
 DEST = Path(__file__).resolve().parent.parent / "tmp" / "fonts-src"

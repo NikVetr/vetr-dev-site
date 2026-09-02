@@ -42,6 +42,10 @@ KANA = [(0x3040, 0x30FF), (0x31F0, 0x31FF)]
 HANGUL_JAMO = [(0x1100, 0x11FF), (0x3130, 0x318F), (0xA960, 0xA97F), (0xD7B0, 0xD7FF)]
 ARABIC_RANGES = [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
                  (0xFB50, 0xFDFF), (0xFE70, 0xFEFF)]
+# Thai is the one script here the Latin faces cover not at all, so it gets a stack
+# of its own. The block has gaps; only 87 of its 128 slots are assigned, and the
+# subsetter intersects with the font's cmap anyway.
+THAI_RANGES = [(0x0E00, 0x0E7F)]
 
 # Faces: (stack, weight, italic) -> source file. CJK and Arabic have no italic in
 # these families, and the sheet only ever italicises romanisation, which is Latin.
@@ -88,6 +92,12 @@ FACES = {
     ("cjk-kr", 700, False): "NotoSansKR-var.ttf",
     ("cjk-kr-serif", 400, False): "NotoSerifKR-var.ttf",
     ("cjk-kr-serif", 700, False): "NotoSerifKR-var.ttf",
+    # No italic, as with CJK and Arabic: the sheet only italicises romanisation and
+    # the respelling, both of which are Latin.
+    ("thai", 400, False): "NotoSansThai-var.ttf",
+    ("thai", 700, False): "NotoSansThai-var.ttf",
+    ("thai-serif", 400, False): "NotoSerifThai-var.ttf",
+    ("thai-serif", 700, False): "NotoSerifThai-var.ttf",
 }
 
 # Which language directories feed each stack's corpus-character union.
@@ -98,7 +108,7 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
                "cjk-jp": ["ja"], "cjk-jp-serif": ["ja"],
                "cjk-kr": ["ko"], "cjk-kr-serif": ["ko"],
-               "arabic": ["ar"]}
+               "arabic": ["ar"], "thai": ["th"], "thai-serif": ["th"]}
 
 
 def expand(ranges):
@@ -154,6 +164,8 @@ def coverage(stack):
         chars |= legacy_charset("euc_jp", range(0xB0, 0xD0), range(0xA1, 0xFF))
     elif stack == "arabic":
         chars |= expand(ARABIC_RANGES)
+    elif stack.startswith("thai"):
+        chars |= expand(THAI_RANGES)
     return chars
 
 

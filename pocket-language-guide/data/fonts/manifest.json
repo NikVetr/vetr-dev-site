@@ -301,6 +301,46 @@
       "ttfBytes": 2545188,
       "woff2Bytes": 604900,
       "source": "NotoSerifKR-var.ttf"
+    },
+    {
+      "stack": "thai",
+      "weight": 400,
+      "italic": false,
+      "file": "thai-400",
+      "glyphs": 446,
+      "ttfBytes": 43084,
+      "woff2Bytes": 19624,
+      "source": "NotoSansThai-var.ttf"
+    },
+    {
+      "stack": "thai",
+      "weight": 700,
+      "italic": false,
+      "file": "thai-700",
+      "glyphs": 446,
+      "ttfBytes": 43100,
+      "woff2Bytes": 19620,
+      "source": "NotoSansThai-var.ttf"
+    },
+    {
+      "stack": "thai-serif",
+      "weight": 400,
+      "italic": false,
+      "file": "thai-serif-400",
+      "glyphs": 446,
+      "ttfBytes": 57008,
+      "woff2Bytes": 22792,
+      "source": "NotoSerifThai-var.ttf"
+    },
+    {
+      "stack": "thai-serif",
+      "weight": 700,
+      "italic": false,
+      "file": "thai-serif-700",
+      "glyphs": 446,
+      "ttfBytes": 57092,
+      "woff2Bytes": 23744,
+      "source": "NotoSerifThai-var.ttf"
     }
   ]
 }
