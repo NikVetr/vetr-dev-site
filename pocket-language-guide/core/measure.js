@@ -9,6 +9,19 @@ const SLOT_ELLIPSIS = '…';
 // The reference sheet drew an open slot as a 0.47in rule under 7.30pt text.
 const SLOT_RULE_EMS = 4.6;
 
+/**
+ * Where a space-delimited line may break: after a space, a tab, a newline, an
+ * ideographic space, a hyphen, an en or em dash, or a slash.
+ *
+ * Spelled out rather than written `\s`, because JavaScript's `\s` matches U+00A0 and
+ * U+202F -- and a no-break space is a request *not* to break. The French pack has
+ * 228 of them, holding `Thaïlande :` and `7 h` together, and every one of them was
+ * silently a legal break point. Nothing visibly broke, which is the problem: the
+ * guarantee was typographic intent and nothing more, and the French translator found
+ * it by reading the regex rather than the output.
+ */
+const BREAK_AFTER = /(?<=[ \t\n\u3000\u2013\u2014\-/])/;
+
 // Minimal kinsoku: never strand closing punctuation at the start of a line, and
 // never leave an opening bracket dangling at the end of one.
 //
@@ -86,7 +99,7 @@ export function createMeasurer(registry, opts = {}) {
    */
   function atoms(segment, wordBreak) {
     if (wordBreak === 'space') {
-      return segment.split(/(?<=[\s\-\u2013\u2014/])/).filter((s) => s !== '');
+      return segment.split(BREAK_AFTER).filter((s) => s !== '');
     }
     // 'dict' needs a Thai/Khmer dictionary; until one ships it breaks as 'any',
     // and solve/index.js raises a warning for those scripts. The glue below still

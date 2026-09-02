@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,единый номер
+police,полиция
+ambulance,скорая
+fire,пожарные
+also works,тоже работает
+fire and ambulance,пожарные и скорая
+medical,медпомощь
+tourist police,туристическая полиция
+police and ambulance,полиция и скорая
+gendarmerie,жандармерия
