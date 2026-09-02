@@ -36,7 +36,7 @@ numbers-money.yu-n,元,,gen,,,2,ja-agent-v1
 atm-cash.coin,硬貨,コイン,kōka,,,2,ja-agent-v1
 numbers-money.ku-i,元,,gen,,,2,ja-agent-v1
 atm-cash.cash-only,現金のみ,,genkin nomi,,,2,ja-agent-v1
-numbers-money.number-and-classifier-notes,,,,,,2,ja-agent-v1
+numbers-money.number-and-classifier-notes,数の作り方は 11 = shi yi、20 = er shi、21 = er shi yi。 電話番号の 1 は yao、量詞の前の 2 は liang。 量詞は ge が個、wei が名、zhang が枚、bei が杯、ping が本。 お金は話し言葉で kuai が元、jiao / mao = 0.1 元、fen = 0.01 元。,,,,,2,ja-notes-v1
 atm-cash.fee,手数料,,tesūryō,,,2,ja-agent-v1
 atm-cash.change,お釣り,,otsuri,,,2,ja-agent-v1
 atm-cash.exchange-rate,為替レート,,kawase rēto,,,2,ja-agent-v1

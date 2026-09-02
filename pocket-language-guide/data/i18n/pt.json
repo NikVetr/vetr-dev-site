@@ -57,10 +57,8 @@
   "format.ink.full": "Cor",
   "format.ink.lowInk": "Pouca tinta",
   "format.ink.mono": "Monocromo",
-  "format.padding.airy": "Muito amplo",
   "format.padding.extra": "Extra",
   "format.padding.normal": "Normal",
-  "format.padding.roomy": "Amplo",
   "format.padding.tight": "Compacto",
   "format.paddingTitle": "Espaçamento: {padding}",
   "format.paper": "Papel e impressora",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "Guardado em parte",
   "gallery.pickerOption": "{endonym} ({exonym})",
   "gallery.previewClose": "Fechar",
-  "gallery.previewNote": "Exportar dá-lhe todas as faces num só ficheiro, pronto a imprimir frente e verso e a cortar.",
   "gallery.previewOpen": "Ver de perto o cartão de {language}",
-  "gallery.previewTitle": "{language} — o cartão predefinido",
   "gallery.saveFailed": "Não foi possível guardar",
   "gallery.saved": "Guardado",
   "gallery.saving": "A guardar…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "Face {face} de {faces}",
   "gallery.previewPrev": "Face anterior",
   "gallery.previewNext": "Face seguinte",
-  "gallery.previewLoading": "A compor as restantes faces…",
-  "gallery.previewFailed": "Não foi possível compor as outras faces. Personalizar abre a folha completa."
+  "gallery.previewFailed": "Não foi possível compor as outras faces. Personalizar abre a folha completa.",
+  "gallery.previewSwap": "Trocar as duas línguas",
+  "gallery.previewReading": "Língua que lê",
+  "gallery.previewLearning": "Língua que está a aprender",
+  "gallery.previewStrip": "Faces desta folha"
 }

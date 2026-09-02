@@ -1,0 +1,12 @@
+label,text
+_frame,{region}：{numbers}
+all services,緊急全般
+police,警察
+ambulance,救急
+fire,消防
+also works,も可
+fire and ambulance,消防と救急
+medical,救急医療
+tourist police,観光警察
+police and ambulance,警察と救急
+gendarmerie,地方警察

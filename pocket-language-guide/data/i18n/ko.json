@@ -57,10 +57,8 @@
   "format.ink.full": "컬러",
   "format.ink.lowInk": "잉크 절약",
   "format.ink.mono": "흑백",
-  "format.padding.airy": "여유롭게",
   "format.padding.extra": "아주 넓게",
   "format.padding.normal": "보통",
-  "format.padding.roomy": "넓게",
   "format.padding.tight": "좁게",
   "format.paddingTitle": "여백: {padding}",
   "format.paper": "용지와 프린터",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "일부만 저장됨",
   "gallery.pickerOption": "{endonym}({exonym})",
   "gallery.previewClose": "닫기",
-  "gallery.previewNote": "내보내면 모든 면이 한 파일로 저장되어 양면 인쇄 후 자르면 됩니다.",
   "gallery.previewOpen": "{language} 카드 자세히 보기",
-  "gallery.previewTitle": "{language} — 기본 카드",
   "gallery.saveFailed": "저장 실패",
   "gallery.saved": "저장됨",
   "gallery.saving": "저장 중…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "{faces}면 중 {face}면",
   "gallery.previewPrev": "이전 면",
   "gallery.previewNext": "다음 면",
-  "gallery.previewLoading": "나머지 면을 조판하는 중…",
-  "gallery.previewFailed": "다른 면을 조판할 수 없습니다. 맞춤 설정에서 전체 시트를 열 수 있습니다."
+  "gallery.previewFailed": "다른 면을 조판할 수 없습니다. 맞춤 설정에서 전체 시트를 열 수 있습니다.",
+  "gallery.previewSwap": "두 언어 바꾸기",
+  "gallery.previewReading": "읽는 언어",
+  "gallery.previewLearning": "배우는 언어",
+  "gallery.previewStrip": "이 시트의 각 면"
 }

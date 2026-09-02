@@ -57,10 +57,8 @@
   "format.ink.full": "Rangi",
   "format.ink.lowInk": "Wino kidogo",
   "format.ink.mono": "Rangi moja",
-  "format.padding.airy": "Wazi",
   "format.padding.extra": "Zaidi",
   "format.padding.normal": "Kawaida",
-  "format.padding.roomy": "Nafasi",
   "format.padding.tight": "Finyu",
   "format.paddingTitle": "Nafasi {padding}",
   "format.paper": "Karatasi na printa",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "Imehifadhiwa kwa kiasi",
   "gallery.pickerOption": "{endonym} ({exonym})",
   "gallery.previewClose": "Funga",
-  "gallery.previewNote": "Kuhamisha hukupa nyuso zote katika faili moja, tayari kuchapa pande mbili na kukata.",
   "gallery.previewOpen": "Tazama kadi ya {language} kwa karibu",
-  "gallery.previewTitle": "{language} — kadi ya kawaida",
   "gallery.saveFailed": "Haikuhifadhiwa",
   "gallery.saved": "Imehifadhiwa",
   "gallery.saving": "Inahifadhi…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "Uso {face} kati ya {faces}",
   "gallery.previewPrev": "Uso wa nyuma",
   "gallery.previewNext": "Uso unaofuata",
-  "gallery.previewLoading": "Inapanga nyuso zilizosalia…",
-  "gallery.previewFailed": "Haikuweza kupanga nyuso nyingine. “Badilisha” hufungua karatasi yote."
+  "gallery.previewFailed": "Haikuweza kupanga nyuso nyingine. “Badilisha” hufungua karatasi yote.",
+  "gallery.previewSwap": "Badilisha nafasi za lugha mbili",
+  "gallery.previewReading": "Lugha unayoisoma",
+  "gallery.previewLearning": "Lugha unayoijifunza",
+  "gallery.previewStrip": "Nyuso za karatasi hii"
 }

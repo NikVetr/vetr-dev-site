@@ -57,10 +57,8 @@
   "format.ink.full": "カラー",
   "format.ink.lowInk": "節約",
   "format.ink.mono": "モノクロ",
-  "format.padding.airy": "ゆとり",
   "format.padding.extra": "最大",
   "format.padding.normal": "標準",
-  "format.padding.roomy": "広め",
   "format.padding.tight": "詰め",
   "format.paddingTitle": "余白：{padding}",
   "format.paper": "用紙とプリンター",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "一部保存",
   "gallery.pickerOption": "{endonym}（{exonym}）",
   "gallery.previewClose": "閉じる",
-  "gallery.previewNote": "エクスポートすると全ての面が1つのファイルになり、両面印刷して切るだけです。",
   "gallery.previewOpen": "{language}のカードを拡大して見る",
-  "gallery.previewTitle": "{language} — 標準のカード",
   "gallery.saveFailed": "保存失敗",
   "gallery.saved": "保存済み",
   "gallery.saving": "保存中…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "{faces}面中の{face}面目",
   "gallery.previewPrev": "前の面",
   "gallery.previewNext": "次の面",
-  "gallery.previewLoading": "残りの面を組んでいます…",
-  "gallery.previewFailed": "他の面を組めませんでした。カスタマイズで全体を開けます。"
+  "gallery.previewFailed": "他の面を組めませんでした。カスタマイズで全体を開けます。",
+  "gallery.previewSwap": "言語の入れ替え",
+  "gallery.previewReading": "読む言語",
+  "gallery.previewLearning": "学ぶ言語",
+  "gallery.previewStrip": "このシートの各面"
 }

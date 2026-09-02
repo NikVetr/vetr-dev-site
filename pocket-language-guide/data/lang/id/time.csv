@@ -41,3 +41,4 @@ months.september,September,,,,2,id-agent-v1
 months.october,Oktober,,,,2,id-agent-v1
 months.november,November,,,,2,id-agent-v1
 months.december,Desember,,,,2,id-agent-v1
+time-words.clock-offset,"Jam Swahili dihitung dari matahari terbit dan bergeser enam jam dari jam di ponsel Anda: angka yang Anda dengar selalu enam lebih kecil, jadi tambahkan enam untuk mendapat jam Anda. saa moja = pukul 07.00, saa sita = 12.00 tengah hari, saa kumi = 16.00. Agar tidak keliru, sebutkan waktu dengan angka, atau tanyakan saa ngapi za kizungu untuk jam Barat.",,,,2,id-notes-v1

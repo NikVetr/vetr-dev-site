@@ -57,10 +57,8 @@
   "format.ink.full": "Màu",
   "format.ink.lowInk": "Ít mực",
   "format.ink.mono": "Đen trắng",
-  "format.padding.airy": "Thoáng",
   "format.padding.extra": "Rất rộng",
   "format.padding.normal": "Vừa",
-  "format.padding.roomy": "Rộng",
   "format.padding.tight": "Chật",
   "format.paddingTitle": "Đệm {padding}",
   "format.paper": "Giấy và máy in",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "Lưu một phần",
   "gallery.pickerOption": "{endonym} ({exonym})",
   "gallery.previewClose": "Đóng",
-  "gallery.previewNote": "Xuất ra sẽ gộp mọi mặt vào một tệp, sẵn sàng in hai mặt rồi cắt.",
   "gallery.previewOpen": "Xem kỹ hơn tấm thẻ {language}",
-  "gallery.previewTitle": "{language} — tấm thẻ mặc định",
   "gallery.saveFailed": "Không lưu được",
   "gallery.saved": "Đã lưu",
   "gallery.saving": "Đang lưu…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "Mặt {face} trên {faces}",
   "gallery.previewPrev": "Mặt trước đó",
   "gallery.previewNext": "Mặt tiếp theo",
-  "gallery.previewLoading": "Đang dàn trang các mặt còn lại…",
-  "gallery.previewFailed": "Không dàn được các mặt còn lại. Tùy chỉnh sẽ mở toàn bộ tờ."
+  "gallery.previewFailed": "Không dàn được các mặt còn lại. Tùy chỉnh sẽ mở toàn bộ tờ.",
+  "gallery.previewSwap": "Đổi chỗ hai ngôn ngữ",
+  "gallery.previewReading": "Ngôn ngữ bạn đọc",
+  "gallery.previewLearning": "Ngôn ngữ bạn đang học",
+  "gallery.previewStrip": "Các mặt của tờ giấy này"
 }

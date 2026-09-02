@@ -57,10 +57,8 @@
   "format.ink.full": "สี",
   "format.ink.lowInk": "ประหยัดหมึก",
   "format.ink.mono": "ขาวดำ",
-  "format.padding.airy": "โปร่ง",
   "format.padding.extra": "มากพิเศษ",
   "format.padding.normal": "ปกติ",
-  "format.padding.roomy": "กว้าง",
   "format.padding.tight": "แน่น",
   "format.paddingTitle": "ระยะห่าง{padding}",
   "format.paper": "กระดาษและเครื่องพิมพ์",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "บันทึกบางส่วน",
   "gallery.pickerOption": "{endonym} ({exonym})",
   "gallery.previewClose": "ปิด",
-  "gallery.previewNote": "การส่งออกจะได้ทุกหน้าเป็นไฟล์เดียว พร้อมพิมพ์สองหน้าแล้วตัด",
   "gallery.previewOpen": "ดูการ์ด{language}ให้ละเอียดขึ้น",
-  "gallery.previewTitle": "{language} — การ์ดตั้งต้น",
   "gallery.saveFailed": "บันทึกไม่สำเร็จ",
   "gallery.saved": "บันทึกแล้ว",
   "gallery.saving": "กำลังบันทึก…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "หน้า {face} จาก {faces}",
   "gallery.previewPrev": "หน้าก่อนหน้า",
   "gallery.previewNext": "หน้าถัดไป",
-  "gallery.previewLoading": "กำลังจัดหน้าที่เหลือ…",
-  "gallery.previewFailed": "จัดหน้าอื่นไม่สำเร็จ กด “ปรับแต่ง” เพื่อเปิดแผ่นการ์ดทั้งหมด"
+  "gallery.previewFailed": "จัดหน้าอื่นไม่สำเร็จ กด “ปรับแต่ง” เพื่อเปิดแผ่นการ์ดทั้งหมด",
+  "gallery.previewSwap": "สลับภาษาทั้งสอง",
+  "gallery.previewReading": "ภาษาที่คุณอ่าน",
+  "gallery.previewLearning": "ภาษาที่คุณกำลังเรียน",
+  "gallery.previewStrip": "หน้าของแผ่นนี้"
 }

@@ -14,6 +14,8 @@ numbers-money.y-b-i,Mia moja,,,,2,sw-agent-v1
 numbers-money.y-qi-n,Elfu moja,,,,2,sw-agent-v1
 numbers-money.y-w-n,Elfu kumi,,,,2,sw-agent-v1
 numbers-money.b-n,Nusu,,,,2,sw-agent-v1
+numbers-money.number-and-classifier-notes,"Kuunda namba: 11 = shíyī; 20 = èrshí; 21 = èrshíyī. Kwenye simu, 1 husomwa yāo. Kati ya namba na nomino huingia neno la kipimo, na ni lazima — Kiswahili hakina neno la aina hii: liǎng zhāng piào = tiketi mbili. gè (kwa ujumla), wèi (watu), zhāng (tiketi, vitu bapa), bēi (vikombe), píng (chupa). Pesa: yuan husemwa kuài; jiǎo au máo = 0.1 yuan; fēn = 0.01 yuan.",,,,2,sw-notes-v1
+numbers-money.number-and-classifier-notes-2,"Kuunda namba: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Namba haisimami peke yake mbele ya nomino — kiambishi cha kuhesabu hufuata namba, na huchaguliwa kwa umbo la kitu: -tsu (vitu vya kawaida), -mai (vitu bapa), -hon (vitu virefu), -nin (watu), -hai (vikombe). Kwenye simu: 0 = zero au maru, 4 = yon, 7 = nana, 9 = kyuu; kistari kati ya vipande husomwa no.",,,,2,sw-notes-v1
 atm-cash.where-is-an-atm,ATM iko wapi?,,,,2,sw-agent-v1
 atm-cash.does-this-atm-take-foreign-cards,"Je, ATM hii inakubali kadi za nje?",,,,2,sw-agent-v1
 atm-cash.the-atm-kept-my-card,ATM imemeza kadi yangu,,,the ATM swallowed my card,2,sw-agent-v1

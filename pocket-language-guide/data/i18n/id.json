@@ -1,5 +1,5 @@
 {
-  "_note": "Register: standard Indonesian for software, polite but not officialese; Anda in prose, bare verb stems on buttons (Ekspor, Simpan, Batal, Tutup) as Android and Microsoft Indonesian do. Terms of art: a printed face is sisi and a sheet is lembar, so \"4 faces / 2 sheets\" is \"4 sisi / 2 lembar\"; duplex is bolak-balik; typeface is jenis huruf; romanisation is romanisasi; the respelling field is Cara baca and the literal gloss Arti harfiah; \"glossed into\" is Arti dalam. format.scale.xlarge (Ekstra besar) and format.padding.roomy/airy are the only captions that run past the English length.",
+  "_note": "Register: standard Indonesian for software, polite but not officialese; Anda in prose, bare verb stems on buttons (Ekspor, Simpan, Batal, Tutup) as Android and Microsoft Indonesian do. Terms of art: a printed face is sisi and a sheet is lembar, so \"4 faces / 2 sheets\" is \"4 sisi / 2 lembar\"; duplex is bolak-balik; typeface is jenis huruf; romanisation is romanisasi; the respelling field is Cara baca and the literal gloss Arti harfiah; \"glossed into\" is Arti dalam. format.scale.xlarge (Ekstra besar) is the only caption that runs past the English length.",
   "addTerm.add": "Tambahkan ke lembar",
   "addTerm.bothNeeded": "Kedua kolom bahasa harus diisi.",
   "addTerm.inLanguage": "Dalam {language}",
@@ -57,10 +57,8 @@
   "format.ink.full": "Warna",
   "format.ink.lowInk": "Hemat tinta",
   "format.ink.mono": "Mono",
-  "format.padding.airy": "Lapang",
   "format.padding.extra": "Ekstra",
   "format.padding.normal": "Normal",
-  "format.padding.roomy": "Longgar",
   "format.padding.tight": "Rapat",
   "format.paddingTitle": "Jarak {padding}",
   "format.paper": "Kertas dan printer",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "Sebagian tersimpan",
   "gallery.pickerOption": "{endonym} ({exonym})",
   "gallery.previewClose": "Tutup",
-  "gallery.previewNote": "Ekspor memberi Anda seluruh sisi dalam satu berkas, siap dicetak bolak-balik lalu dipotong.",
   "gallery.previewOpen": "Lihat kartu {language} lebih dekat",
-  "gallery.previewTitle": "{language} — kartu bawaan",
   "gallery.saveFailed": "Gagal menyimpan",
   "gallery.saved": "Tersimpan",
   "gallery.saving": "Menyimpan…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "Sisi {face} dari {faces}",
   "gallery.previewPrev": "Sisi sebelumnya",
   "gallery.previewNext": "Sisi berikutnya",
-  "gallery.previewLoading": "Menata sisi-sisi yang lain…",
-  "gallery.previewFailed": "Sisi yang lain gagal ditata. Buka Sesuaikan untuk melihat lembar utuhnya."
+  "gallery.previewFailed": "Sisi yang lain gagal ditata. Buka Sesuaikan untuk melihat lembar utuhnya.",
+  "gallery.previewSwap": "Tukar kedua bahasa",
+  "gallery.previewReading": "Bahasa yang Anda baca",
+  "gallery.previewLearning": "Bahasa yang Anda pelajari",
+  "gallery.previewStrip": "Sisi lembar ini"
 }

@@ -1,0 +1,12 @@
+label,text
+_frame,{region}에서: {numbers}
+all services,통합번호
+police,경찰
+ambulance,구급
+fire,소방
+also works,대체번호
+fire and ambulance,소방과 구급
+medical,응급의료
+tourist police,관광경찰
+police and ambulance,경찰과 구급
+gendarmerie,시외경찰

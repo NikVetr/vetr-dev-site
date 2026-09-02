@@ -41,3 +41,4 @@ months.december,12月,,jūnigatsu,,,2,japanese-reviewed-v6
 time-words.winter,冬,,fuyu,,,2,japanese-reviewed-v6
 time-scheduling.how-long-does-it-take,何分かかりますか？,,nanpun kakarimasu ka?,,,2,japanese-reviewed-v6
 time-words.night,夜,,yoru,,,2,japanese-reviewed-v6
+time-words.clock-offset,スワヒリ語の時刻は夜明けが起点。 数字は時計より 6 小さく、聞いた数に 6 を足せば時計の時刻です。 saa moja が 7:00、saa sita が正午、saa kumi が 16:00。 時刻は数字で伝えるか、西洋式なら saa ngapi za kizungu と聞きます。,,,,,2,ja-notes-v1

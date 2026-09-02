@@ -41,3 +41,4 @@ time-words.winter,冬,,dōng,,,2,latex-reference-v2
 months.december,十二月,,shí'èryuè,,,2,latex-reference-v2
 time-scheduling.how-long-does-it-take,要多久？,,yào duōjiǔ?,,,2,zh-Hans-agent-v1
 time-words.night,夜里,,yèlǐ,,,2,zh-Hans-agent-v1
+time-words.clock-offset,斯瓦希里语的时刻从天亮算起，不从午夜算起，数字比手机上的钟点小六：听到的数字加六，才是手机上的时间；要说给别人听，就把手机上的时间减六。saa moja 是早上 7 点，saa sita 是正午，saa kumi 是 16 点。怕弄错就直接说数字，或者问 saa ngapi za kizungu，要西式时间。,,,,,2,zh-Hans-notes-v1

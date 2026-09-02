@@ -1,0 +1,12 @@
+label,text
+_frame,{region}：{numbers}
+all services,通用号码
+police,警察
+ambulance,急救
+fire,消防
+also works,也可用
+fire and ambulance,消防和急救
+medical,医疗急救
+tourist police,旅游警察
+police and ambulance,警察和急救
+gendarmerie,乡村警察

@@ -57,10 +57,8 @@
   "format.ink.full": "Farbe",
   "format.ink.lowInk": "Sparmodus",
   "format.ink.mono": "Schwarzweiß",
-  "format.padding.airy": "Luftig",
   "format.padding.extra": "Extra",
   "format.padding.normal": "Normal",
-  "format.padding.roomy": "Locker",
   "format.padding.tight": "Eng",
   "format.paddingTitle": "Abstand: {padding}",
   "format.paper": "Papier und Drucker",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "Teilweise gespeichert",
   "gallery.pickerOption": "{endonym} ({exonym})",
   "gallery.previewClose": "Schließen",
-  "gallery.previewNote": "Der Export liefert alle Seiten in einer Datei, fertig zum doppelseitigen Drucken und Schneiden.",
   "gallery.previewOpen": "Die Karte für {language} genauer ansehen",
-  "gallery.previewTitle": "{language} – die Standardkarte",
   "gallery.saveFailed": "Nicht gespeichert",
   "gallery.saved": "Gespeichert",
   "gallery.saving": "Wird gespeichert…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "Seite {face} von {faces}",
   "gallery.previewPrev": "Vorige Seite",
   "gallery.previewNext": "Nächste Seite",
-  "gallery.previewLoading": "Die übrigen Seiten werden gesetzt…",
-  "gallery.previewFailed": "Die übrigen Seiten konnten nicht gesetzt werden. Anpassen öffnet den ganzen Bogen."
+  "gallery.previewFailed": "Die übrigen Seiten konnten nicht gesetzt werden. Anpassen öffnet den ganzen Bogen.",
+  "gallery.previewSwap": "Die beiden Sprachen tauschen",
+  "gallery.previewReading": "Sprache, die Sie lesen",
+  "gallery.previewLearning": "Sprache, die Sie lernen",
+  "gallery.previewStrip": "Seiten dieses Blatts"
 }

@@ -41,3 +41,5 @@ numbers-money.y-w-n,만,,man,,,2,ko-agent-v1
 numbers-money.b-n,반,,ban,,,2,ko-agent-v1
 numbers-money.won,원,,won,,,2,ko-agent-v1
 numbers-money.won-symbol,₩,,won,,,2,ko-agent-v1
+numbers-money.number-and-classifier-notes,"수는 십일, 이십처럼 쌓아요: 11 = shíyī, 20 = èrshí. 단 백, 천, 만 앞에는 yī가 붙고(yìbǎi, yíwàn), 중간이 비면 líng을 넣어요(101 = yìbǎi líng yī). 단위명사 앞의 2는 èr이 아니라 liǎng이에요, 둘이 두가 되는 것과 같아요. gè = 개, zhāng = 장, píng = 병은 그대로지만, 사람은 명이 아니라 gè, 높이면 wèi, 잔은 bēi예요. 전화에서 1은 yāo. 말할 때 yuán은 kuài, jiǎo / máo = 0.1위안, fēn = 0.01위안.",,,,,2,ko-notes-v1
+numbers-money.number-and-classifier-notes-2,"수는 십일, 이십처럼 쌓아요: 11 = jūichi, 20 = nijū. 단 만은 ichi를 붙여 ichiman이에요. 세는 말: -tsu(물건), -mai(납작한 것), -hon(긴 것), -nin(사람), -hai(잔). 고유수사가 붙는 자리가 우리와 달라서 -tsu는 hitotsu, futatsu처럼 아홉까지고, 사람은 hitori, futari 다음이 sannin이에요. 전화는 0 = zero/maru, 4 = yon, 7 = nana, 9 = kyū.",,,,,2,ko-notes-v1

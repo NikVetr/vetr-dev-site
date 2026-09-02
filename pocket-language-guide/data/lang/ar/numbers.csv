@@ -42,8 +42,8 @@ numbers-money.y-w-n,عشرة آلاف,١٠٠٠٠,ʿasharat ālāf,,,2,ar-agent-v
 numbers-money.b-n,نصف,١/٢,niṣf,,,2,ar-agent-v1
 numbers-money.yu-n,يوان,,yūān,,Chinese yuan,2,ar-agent-v1
 numbers-money.ku-i,يوان,,yūān,,no separate spoken form,1,ar-agent-v1
-numbers-money.number-and-classifier-notes,,,,,,2,ar-agent-v1
+numbers-money.number-and-classifier-notes,"الأعداد مركّبة: شي عشرة وإي واحد وإر اثنان، فأحد عشر شي إي، وعشرون إر شي، وواحد وعشرون إر شي إي. وفي الهاتف يُقرأ الواحد ياو. ولا يلتقي العدد بالاسم مباشرة، بل تتوسطهما كلمة تصنيف إلزامية: للأشياء عمومًا قه، وللأشخاص وي، وللتذاكر والمسطحات تشانغ، وللأكواب بي، وللقناني بينغ. وكواي هي اليوان في الكلام، وعُشره جياو أو ماو، وجزء من مئة منه فن. ونغماتها في عمود الرومنة.",,,,,2,ar-notes-v1
 numbers-money.2-items,قطعتان,قطعتين,qiṭʿatān,,two pieces,2,ar-agent-v1
 numbers-money.yen,ين,,yin,,Japanese yen,2,ar-agent-v1
 numbers-money.yen-symbol,¥,,yin,,,2,ar-agent-v1
-numbers-money.number-and-classifier-notes-2,,,,,,2,ar-agent-v1
+numbers-money.number-and-classifier-notes-2,"الأعداد مركّبة: جو عشرة وإيتشي واحد وني اثنان، فأحد عشر جو إيتشي، وعشرون ني جو، وواحد وعشرون ني جو إيتشي. وعند العد تلحق العدد لاحقة تختلف بحسب شكل المعدود ولا تُحذف: للأشياء عمومًا تسو، وللمسطحات ماي، وللطويل هون، وللأشخاص نين، وللأكواب هاي. وفي الهاتف يقال للصفر زيرو أو مارو، وللأربعة يون، وللسبعة نانا، وللتسعة كيو، وتُقرأ الشرطة نو.",,,,,2,ar-notes-v1

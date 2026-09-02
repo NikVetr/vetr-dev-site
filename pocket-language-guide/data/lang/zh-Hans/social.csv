@@ -98,3 +98,4 @@ communication.i-cannot-read-it,我看不懂这个,,wǒ kàn bu dǒng zhège,,,2,
 quick-responses.no-good-not-allowed-will-not-work,不行,,bù xíng,,,2,zh-Hans-agent-v1
 social-basics.okay-fine-i-am-okay,我没事,,wǒ méi shì,,,2,zh-Hans-agent-v1
 communication.please-write-it-in-roman-letters,请写拼音,,qǐng xiě pīnyīn,,,2,zh-Hans-agent-v1
+social-basics.politeness-particles,泰语的礼貌不在动词上，而在句尾的一个语气词：男性说话几乎句句以 khrap 收尾，女性用 kha，女性提问时还要把 kha 读成升调。一句话印哪一个都会对一半读者是错的，所以本表的句子一律不带，请按自己的性别补上。,,,,,2,zh-Hans-notes-v1

@@ -41,3 +41,4 @@ months.september,9월,구월,guwol,,,2,ko-agent-v1
 months.october,10월,시월,siwol,,,2,ko-agent-v1
 months.november,11월,십일월,sibirwol,,,2,ko-agent-v1
 months.december,12월,십이월,sibiwol,,,2,ko-agent-v1
+time-words.clock-offset,"스와힐리어 시계는 해 뜰 때부터 세기 때문에 휴대폰 시계와 여섯 시간 어긋나요. 들은 숫자에 여섯을 더하면 시계의 시각이고, 시계의 시각에서 여섯을 빼면 말할 숫자예요. saa moja = 7:00, saa sita = 낮 12:00, saa kumi = 16:00. 헷갈리면 숫자로 말하거나, 서양식 시각은 saa ngapi za kizungu라고 물어보세요.",,,,,2,ko-notes-v1

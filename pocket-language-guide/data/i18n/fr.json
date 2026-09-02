@@ -1,5 +1,5 @@
 {
-  "_note": "Français de France, vouvoiement partout, comme dans le corpus de phrases. Libellés de boutons à l’infinitif (Exporter, Masquer, Personnaliser, Équilibrer), convention logicielle française. Vocabulaire d’imprimerie et de typographie retenu : corps (type size), police (typeface), composition / composer (typesetting), feuille (sheet) et face (l’un des deux côtés d’une feuille), gouttière (column gap), filet (rule), blanc (whitespace), trame (row shading), césure (line breaking), repérage recto verso (front-to-back alignment), retournement petit côté / grand côté (short-edge / long-edge flip), découpe (cut), rubrique (section), fiche de conversation (phrase card). « Sans serif » et « Serif » plutôt que « linéale » et « à empattements » : les termes de la classification typographique sont justes mais opaques, et c’est la paire sans serif / serif qu’affichent les logiciels grand public. « Planche » a été écarté pour sheet : InDesign s’en sert déjà pour spread, et « planche à découper » guette juste à côté de « Découpe en cartes ». IPA devient API (alphabet phonétique international) ; respell devient « prononciation figurée », le terme consacré, distinct de l’API. Les pouces sont abrégés « po », comme en PAO francophone (Adobe) ; c’est aussi l’usage courant au Québec, où « in » ne se lit pas. Autres écarts Québec : « courriel » n’apparaît pas ici, et « billet » est employé partout où le Québec dirait aussi « billet », donc rien à signaler ailleurs. Pocket Language Guide reste en anglais : c’est le nom du produit. Espace insécable U+00A0 avant ? ! : ; à l’intérieur des guillemets, et entre un nombre et son unité (pt, po). Apostrophe typographique U+2019, comme dans en.json — les CSV du corpus, eux, gardent l’apostrophe droite, c’est la convention locale de ces fichiers. Légendes plus longues que les onze caractères disponibles sous une icône, signalées au coordinateur : format.ink.lowInk « Peu d’encre » (11), format.dpi.print « Impression » (10), format.scale.xlarge « Très grand » (10), format.cut.shortEdge « Petit côté » (10), format.cut.longEdge « Grand côté » (10), format.typeface.sans « Sans serif » (10), format.padding.airy « Très aéré » (9). Hors segments : studio.balance « Équilibrer les colonnes » (23 contre 15 en anglais, cité tel quel dans warn.loose-columns, donc non abrégé), gallery.saving « Enregistrement… » (15 contre 7) et gallery.saveFailed « Échec de l’enregistrement » (24).",
+  "_note": "Français de France, vouvoiement partout, comme dans le corpus de phrases. Libellés de boutons à l’infinitif (Exporter, Masquer, Personnaliser, Équilibrer), convention logicielle française. Vocabulaire d’imprimerie et de typographie retenu : corps (type size), police (typeface), composition / composer (typesetting), feuille (sheet) et face (l’un des deux côtés d’une feuille), gouttière (column gap), filet (rule), blanc (whitespace), trame (row shading), césure (line breaking), repérage recto verso (front-to-back alignment), retournement petit côté / grand côté (short-edge / long-edge flip), découpe (cut), rubrique (section), fiche de conversation (phrase card). « Sans serif » et « Serif » plutôt que « linéale » et « à empattements » : les termes de la classification typographique sont justes mais opaques, et c’est la paire sans serif / serif qu’affichent les logiciels grand public. « Planche » a été écarté pour sheet : InDesign s’en sert déjà pour spread, et « planche à découper » guette juste à côté de « Découpe en cartes ». IPA devient API (alphabet phonétique international) ; respell devient « prononciation figurée », le terme consacré, distinct de l’API. Les pouces sont abrégés « po », comme en PAO francophone (Adobe) ; c’est aussi l’usage courant au Québec, où « in » ne se lit pas. Autres écarts Québec : « courriel » n’apparaît pas ici, et « billet » est employé partout où le Québec dirait aussi « billet », donc rien à signaler ailleurs. Pocket Language Guide reste en anglais : c’est le nom du produit. Espace insécable U+00A0 avant ? ! : ; à l’intérieur des guillemets, et entre un nombre et son unité (pt, po). Apostrophe typographique U+2019, comme dans en.json — les CSV du corpus, eux, gardent l’apostrophe droite, c’est la convention locale de ces fichiers. Légendes plus longues que les onze caractères disponibles sous une icône, signalées au coordinateur : format.ink.lowInk « Peu d’encre » (11), format.dpi.print « Impression » (10), format.scale.xlarge « Très grand » (10), format.cut.shortEdge « Petit côté » (10), format.cut.longEdge « Grand côté » (10), format.typeface.sans « Sans serif » (10). Hors segments : studio.balance « Équilibrer les colonnes » (23 contre 15 en anglais, cité tel quel dans warn.loose-columns, donc non abrégé), gallery.saving « Enregistrement… » (15 contre 7) et gallery.saveFailed « Échec de l’enregistrement » (24).",
   "addTerm.add": "Ajouter à la feuille",
   "addTerm.bothNeeded": "Les deux champs de langue sont obligatoires.",
   "addTerm.inLanguage": "En {language}",
@@ -57,10 +57,8 @@
   "format.ink.full": "Couleur",
   "format.ink.lowInk": "Peu d’encre",
   "format.ink.mono": "Mono",
-  "format.padding.airy": "Très aéré",
   "format.padding.extra": "Maximal",
   "format.padding.normal": "Normal",
-  "format.padding.roomy": "Aéré",
   "format.padding.tight": "Serré",
   "format.paddingTitle": "Espacement : {padding}",
   "format.paper": "Papier et imprimante",
@@ -96,9 +94,7 @@
   "gallery.partlySaved": "Enregistré en partie",
   "gallery.pickerOption": "{endonym} ({exonym})",
   "gallery.previewClose": "Fermer",
-  "gallery.previewNote": "L’export vous donne toutes les faces dans un seul fichier, prêt à imprimer en recto verso et à découper.",
   "gallery.previewOpen": "Regarder de plus près la carte en {language}",
-  "gallery.previewTitle": "{language} — la carte par défaut",
   "gallery.saveFailed": "Échec de l’enregistrement",
   "gallery.saved": "Enregistré",
   "gallery.saving": "Enregistrement…",
@@ -226,6 +222,9 @@
   "gallery.previewFace": "Face {face} sur {faces}",
   "gallery.previewPrev": "Face précédente",
   "gallery.previewNext": "Face suivante",
-  "gallery.previewLoading": "Composition des autres faces…",
-  "gallery.previewFailed": "Impossible de composer les autres faces. Personnaliser ouvre la feuille complète."
+  "gallery.previewFailed": "Impossible de composer les autres faces. Personnaliser ouvre la feuille complète.",
+  "gallery.previewSwap": "Échanger les deux langues",
+  "gallery.previewReading": "Langue que vous lisez",
+  "gallery.previewLearning": "Langue que vous apprenez",
+  "gallery.previewStrip": "Faces de cette feuille"
 }

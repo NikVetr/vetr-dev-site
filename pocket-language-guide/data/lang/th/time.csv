@@ -41,3 +41,4 @@ months.september,กันยายน,ก.ย.,kanyayon,,,2,th-agent-v1
 months.october,ตุลาคม,ต.ค.,tulakhom,,,2,th-agent-v1
 months.november,พฤศจิกายน,พ.ย.,phruetsachikayon,,,2,th-agent-v1
 months.december,ธันวาคม,ธ.ค.,thanwakhom,,,2,th-agent-v1
+time-words.clock-offset,"นาฬิกาสวาฮีลี เริ่มนับชั่วโมงตอนฟ้าสาง ไม่ใช่เที่ยงคืน เลขที่ได้ยิน จึงน้อยกว่าเวลาบนมือถือ 6 ชั่วโมง ให้บวก 6 เข้าไป saa moja = 7:00, saa sita = เที่ยงวัน, saa kumi = 16:00 ควรบอกเวลาเป็นตัวเลข หรือถาม saa ngapi za kizungu เพื่อขอเวลาแบบตะวันตก",,,,,2,th-notes-v1
