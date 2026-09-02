@@ -261,12 +261,17 @@ async function main() {
     $('status').dataset.busy = '0';
     // A screen has no sheets, and saying it has half of one is worse than saying
     // nothing: this line is the only place the page reports what it produced.
+    //
+    // Both keys are spelled out rather than picked inside the call, because
+    // `npm run i18n` finds strings by scanning for literal calls to `t` and read a
+    // computed key as two catalogue entries nobody uses.
+    const counts = {
+      faces: plan.faces.length,
+      sheets: plan.faces.length / 2,
+      scale: plan.scale.toFixed(2),
+    };
     $('status').textContent = plan.faces.length
-      ? t(spec.geometry.screen ? 'quick.statusScreen' : 'quick.status', {
-        faces: plan.faces.length,
-        sheets: plan.faces.length / 2,
-        scale: plan.scale.toFixed(2),
-      })
+      ? (spec.geometry.screen ? t('quick.statusScreen', counts) : t('quick.status', counts))
       : t('quick.nothing');
   }
 
