@@ -1085,7 +1085,7 @@
         value: (row) => numerator.value(row),
       };
     }
-    const ratioLabel = (variableKey, variable) => variableKey === "salary" ? "Salary" : variable.shortLabel;
+    const ratioLabel = (variableKey, variable) => variableKey === "salary" ? positionSalaryLabel() : variable.shortLabel;
     const numeratorLabel = ratioLabel(expression.numerator, numerator);
     const denominatorLabel = ratioLabel(expression.denominator, denominator);
     return {
@@ -2037,10 +2037,10 @@
   function populateAxisSelector(axisKey) {
     const expression = axisExpression(axisKey);
     const buildGroups = () => {
-      const measures = document.createElement("optgroup");
-      measures.label = "This organization or role";
-      const positions = document.createElement("optgroup");
-      positions.label = "One matching role in the same filing";
+      const pay = document.createElement("optgroup");
+      pay.label = "Pay";
+      const organizationStats = document.createElement("optgroup");
+      organizationStats.label = "Organization statistics";
       Object.entries(numericVariables).forEach(([value, definition]) => {
         const option = document.createElement("option");
         option.value = value;
@@ -2050,13 +2050,14 @@
           )).length;
           option.textContent = `${POSITION_BY_KEY.get(definition.positionKey).label} pay · matching records: ${pairCount}`;
           option.disabled = pairCount === 0 && value !== expression.numerator && value !== expression.denominator;
-          positions.append(option);
+          pay.append(option);
         } else {
           option.textContent = definition.label();
-          measures.append(option);
+          const isPay = value === "salary" || value === "highestPaidOtherEmployee";
+          (isPay ? pay : organizationStats).append(option);
         }
       });
-      return [measures, positions];
+      return [pay, organizationStats];
     };
     refs.axisNumerator.replaceChildren(...buildGroups());
     refs.axisDenominator.replaceChildren(...buildGroups());

@@ -1452,12 +1452,12 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator("#axis-numerator-label")).toHaveText("Measure");
   await expect(page.locator("#axis-denominator-field")).toBeHidden();
   const positionOptionCount = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog.length);
-  const currentMeasureOptions = page.locator('#axis-numerator optgroup[label="This organization or role"] option');
-  const sameFilingPositionOptions = page.locator('#axis-numerator optgroup[label="One matching role in the same filing"] option');
-  const currentMeasureOptionCount = await currentMeasureOptions.count();
-  expect(currentMeasureOptionCount).toBeGreaterThan(0);
-  await expect(sameFilingPositionOptions).toHaveCount(positionOptionCount);
-  await expect(page.locator("#axis-numerator option")).toHaveCount(currentMeasureOptionCount + positionOptionCount);
+  const payOptions = page.locator('#axis-numerator optgroup[label="Pay"] option');
+  const organizationStatOptions = page.locator('#axis-numerator optgroup[label="Organization statistics"] option');
+  await expect(payOptions).toHaveCount(positionOptionCount + 2);
+  await expect(organizationStatOptions).toHaveCount(5);
+  await expect(page.locator('#axis-numerator optgroup[label="Pay"] option[value="highestPaidOtherEmployee"]')).toHaveCount(1);
+  await expect(page.locator("#axis-numerator option")).toHaveCount(positionOptionCount + 7);
   const expectedCeoCooBasePairs = await page.evaluate(() => {
     const data = window.CEO_BENCHMARK_DATA;
     const filingSourceId = (row) => row.sourceId || String(row.id || "").split("::", 1)[0];
@@ -1483,7 +1483,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await horizontalAxis().click();
   await page.locator("#axis-denominator").selectOption("position:coo");
   await expect(page.locator("#stat-n")).toHaveText(String(expectedCeoCooBasePairs));
-  await expect(page.locator("#salary-chart")).toContainText("Salary / COO salary");
+  await expect(page.locator("#salary-chart")).toContainText("CEO Salary / COO salary");
   const checkedCeoCooEligible = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked');
   await expect(checkedCeoCooEligible).toHaveCount(expectedCeoCooBasePairs);
   const checkedCeoCooIneligible = page.locator('tbody tr[data-id][data-plot-eligible="false"] .row-toggle:checked');
@@ -1543,10 +1543,10 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator("#axis-numerator-label")).toHaveText("Numerator");
   await expect(page.locator("#axis-denominator-field")).toBeVisible();
   await page.locator("#axis-numerator").selectOption("salary");
-  await expect(page.locator("#salary-chart")).toContainText("Salary / Expenses");
+  await expect(page.locator("#salary-chart")).toContainText("CEO Salary / Expenses");
   await expect(horizontalAxis()).not.toContainText("log scale");
   await expect(page.locator('input[name="histogram-axis-scale"][value="log"]')).toBeChecked();
-  await expect(page.locator("#quantile-basis")).toContainText("for Salary / Expenses");
+  await expect(page.locator("#quantile-basis")).toContainText("for CEO Salary / Expenses");
   await expect(page.locator(".density-line")).toHaveCount(1);
   await expect(page.locator(".quantile-cell strong").first()).not.toContainText("$");
   await expect(page.locator(".curve-quantile-tick")).toHaveCount(4);
@@ -1592,7 +1592,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator("#axis-denominator-field")).toBeVisible();
   await expect(page.locator("#axis-denominator")).toHaveValue("expenses");
   await page.locator("#axis-denominator").selectOption("revenue");
-  await expect(verticalAxis()).toContainText("Salary / Revenue");
+  await expect(verticalAxis()).toContainText("CEO Salary / Revenue");
   await expect(verticalAxis()).not.toContainText("log scale");
   await expect(page.locator('input[name="scatter-y-axis-scale"][value="log"]')).toBeChecked();
   await page.locator('input[name="scatter-y-axis-scale"][value="linear"]').check();
@@ -1608,7 +1608,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.locator('input[name="chart-view"][value="histogram"]').check();
   await horizontalAxis().click();
   await page.locator("#axis-denominator").selectOption("staff");
-  await expect(horizontalAxis()).toContainText("Salary / Staff");
+  await expect(horizontalAxis()).toContainText("CEO Salary / Staff");
 
   await expect.poll(() => page.url()).toContain("?s=");
   const sharedUrl = page.url();
@@ -1616,7 +1616,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.reload();
   await expect(page.locator('input[name="histogram-axis-mode"][value="ratio"]')).toBeChecked();
   await expect(page.locator('input[name="histogram-axis-scale"][value="log"]')).toBeChecked();
-  await expect(horizontalAxis()).toContainText("Salary / Staff");
+  await expect(horizontalAxis()).toContainText("CEO Salary / Staff");
   await expect(horizontalAxis()).not.toContainText("log scale");
   await page.locator('input[name="chart-view"][value="scatter"]').check();
   await expect(page.locator('input[name="scatter-x-axis-mode"][value="value"]')).toBeChecked();
@@ -1637,7 +1637,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
   await expect(page.locator('input[name="scatter-y-axis-mode"][value="ratio"]')).toBeChecked();
   await expect(page.locator('input[name="scatter-y-axis-scale"][value="log"]')).toBeChecked();
-  await expect(verticalAxis()).toContainText("Salary / Revenue");
+  await expect(verticalAxis()).toContainText("CEO Salary / Revenue");
   await expect(verticalAxis()).not.toContainText("log scale");
   await expect(page.locator('input[name="scatter-x-axis-mode"][value="value"]')).toBeChecked();
   expect(errors).toEqual([]);
@@ -1676,18 +1676,23 @@ test("highest-paid other employee ratios and reviewed position postings are usab
     .toHaveText(/Non-CEO highest-paid eligible employee in the same filing/);
   await page.locator("#axis-denominator").selectOption("highestPaidOtherEmployee");
   await expect(page.locator("#stat-n")).toHaveText(String(expectedPairs));
-  await expect(horizontalAxis()).toContainText("Salary / Non-CEO highest-paid employee");
-  await expect(page.locator("#chart-title")).toHaveText("Distribution of Salary / Non-CEO highest-paid employee");
+  await expect(horizontalAxis()).toContainText("CEO Salary / Non-CEO highest-paid employee");
+  await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary / Non-CEO highest-paid employee");
   await page.locator(".bar-block").first().hover();
   await expect(page.locator("#chart-tooltip")).toContainText("Highest-paid disclosed employee outside the CEO position");
   await expect(page.locator("#chart-tooltip")).toContainText(/#\d+ of \d+ eligible disclosures/);
   const sharedUrl = page.url();
   await page.reload();
   expect(page.url()).toBe(sharedUrl);
-  await expect(horizontalAxis()).toContainText("Salary / Non-CEO highest-paid employee");
+  await expect(horizontalAxis()).toContainText("CEO Salary / Non-CEO highest-paid employee");
 
   await page.goto("/coo-salary-benchmark/");
   await expect(page.locator("#chart-title")).toHaveText("Distribution of COO Salary");
+  await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
+  await horizontalAxis().click();
+  await page.locator("#axis-denominator").selectOption("highestPaidOtherEmployee");
+  await expect(page.locator("#chart-title")).toHaveText("Distribution of COO Salary / Non-COO highest-paid employee");
+  await page.locator('input[name="histogram-axis-mode"][value="value"]').check();
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#stream-select")).toBeEnabled();
   const cooPosting = page.locator('tbody tr[data-id="SRC-AD-LAWAI-COO-2026"]');
@@ -2658,7 +2663,7 @@ test("robustness points explain and apply their salary specifications", async ({
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
-  await expect(page.locator("#chart-title")).toContainText("Salary / Expenses");
+  await expect(page.locator("#chart-title")).toContainText("CEO Salary / Expenses");
 
   await page.getByRole("tab", { name: "Robustness" }).click();
   await page.getByRole("button", { name: "Run check" }).click();
