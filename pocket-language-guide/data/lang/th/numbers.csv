@@ -1,0 +1,43 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+numbers-money.l-ng,ศูนย์,๐,sun,,,2,th-agent-v1
+numbers-money.y,หนึ่ง,๑,nueng,,,2,th-agent-v1
+numbers-money.r,สอง,๒,song,,,2,th-agent-v1
+numbers-money.s-n,สาม,๓,sam,,,2,th-agent-v1
+numbers-money.s,สี่,๔,si,,,2,th-agent-v1
+numbers-money.w,ห้า,๕,ha,,,2,th-agent-v1
+numbers-money.li,หก,๖,hok,,,2,th-agent-v1
+numbers-money.q,เจ็ด,๗,chet,,,2,th-agent-v1
+numbers-money.b,แปด,๘,paet,,,2,th-agent-v1
+numbers-money.ji,เก้า,๙,kao,,,2,th-agent-v1
+numbers-money.sh,สิบ,๑๐,sip,,,2,th-agent-v1
+numbers-money.y-b-i,ร้อย,๑๐๐,roi,,,2,th-agent-v1
+numbers-money.y-qi-n,พัน,๑๐๐๐,phan,,,2,th-agent-v1
+numbers-money.y-w-n,หมื่น,๑๐๐๐๐,muen,,,2,th-agent-v1
+numbers-money.b-n,ครึ่ง,,khrueng,,,2,th-agent-v1
+atm-cash.where-is-an-atm,ตู้เอทีเอ็มอยู่ไหน,ตู้ ATM อยู่ไหน,tu ethiem yu nai,,,2,th-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,ใช้บัตรต่างประเทศ ได้ไหม,,chai bat tang prathet dai mai,,,2,th-agent-v1
+atm-cash.the-atm-kept-my-card,ตู้กินบัตร,ตู้ยึดบัตร,tu kin bat,,the machine ate my card,2,th-agent-v1
+atm-cash.is-there-a-fee,มีค่าธรรมเนียมไหม,,mi kha thamniam mai,,,2,th-agent-v1
+atm-cash.the-card-was-declined,บัตรใช้ไม่ได้,,bat chai mai dai,,,2,th-agent-v1
+atm-cash.what-is-the-exchange-rate,อัตราแลกเปลี่ยน เท่าไร,เรทเท่าไร,attra laekplian thaorai,,,2,th-agent-v1
+atm-cash.no-money-came-out,เงินไม่ออก,,ngoen mai ok,,,2,th-agent-v1
+atm-cash.where-can-i-change-money,แลกเงินได้ที่ไหน,,laek ngoen dai thi nai,,,2,th-agent-v1
+atm-cash.the-machine-is-out-of-service,ตู้เสีย,,tu sia,,,2,th-agent-v1
+atm-cash.please-give-me-smaller-notes,ขอแบงก์ย่อย,,kho bang yoi,,,2,th-agent-v1
+atm-cash.do-you-have-change,มีเงินทอนไหม,,mi ngoen thon mai,,,2,th-agent-v1
+atm-cash.may-i-pay-in,จ่ายเป็น {} ได้ไหม,,chai pen {} dai mai,,,2,th-agent-v1
+atm-cash.please-charge-in-local-currency,คิดเป็นเงินบาท,,khit pen ngoen bat,,,2,th-agent-v1
+atm-cash.where-can-i-get-coins,แลกเหรียญได้ที่ไหน,,laek rian dai thi nai,,,2,th-agent-v1
+atm-cash.is-there-a-minimum-for-cards,บัตรมีขั้นต่ำไหม,,bat mi khan tam mai,,,2,th-agent-v1
+atm-cash.atm,ตู้เอทีเอ็ม,ATM,tu ethiem,,,2,th-agent-v1
+atm-cash.banknote,แบงก์,ธนบัตร,bang,,,2,th-agent-v1
+atm-cash.coin,เหรียญ,,rian,,,2,th-agent-v1
+atm-cash.cash-only,รับเงินสดเท่านั้น,,rap ngoen sot thaonan,,,2,th-agent-v1
+atm-cash.fee,ค่าธรรมเนียม,,kha thamniam,,,2,th-agent-v1
+atm-cash.change,เงินทอน,,ngoen thon,,,2,th-agent-v1
+atm-cash.exchange-rate,อัตราแลกเปลี่ยน,เรท,attra laekplian,,,2,th-agent-v1
+atm-cash.bank,ธนาคาร,,thanakhan,,,2,th-agent-v1
+atm-cash.money-exchange,รับแลกเงิน,แลกเปลี่ยนเงินตรา,rap laek ngoen,,,2,th-agent-v1
+atm-cash.pin,รหัส,PIN,rahat,,,2,th-agent-v1
+numbers-money.baht,บาท,,bat,,,2,th-gaps-v1
+numbers-money.baht-symbol,฿,บาท,bat,,,2,th-gaps-v1

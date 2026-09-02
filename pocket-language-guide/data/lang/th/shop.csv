@@ -1,0 +1,32 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,จ่ายบัตรได้ไหม,,chai bat dai mai,,,2,th-agent-v1
+payment-receipt.pay-cash,จ่ายเงินสดได้ไหม,,chai ngoen sot dai mai,,,2,th-agent-v1
+payment-receipt.pay-by-qr-code,สแกนจ่ายได้ไหม,พร้อมเพย์,sakaen chai dai mai,,,2,th-agent-v1
+payment-receipt.a-receipt-please,ขอใบเสร็จ,,kho bai set,,,2,th-agent-v1
+payment-receipt.please-write-the-number,ช่วยเขียนตัวเลข,,chuai khian tualek,,,2,th-agent-v1
+payment-receipt.how-much-in-total,ทั้งหมดเท่าไร,,thangmot thaorai,,,2,th-agent-v1
+payment-receipt.can-we-pay-separately,จ่ายแยกกันได้ไหม,,chai yaek kan dai mai,,,2,th-agent-v1
+payment-receipt.is-tax-included,รวมภาษีแล้วไหม,,ruam phasi laeo mai,,,2,th-agent-v1
+payment-receipt.my-card-was-declined,บัตรใช้ไม่ได้,,bat chai mai dai,,,2,th-agent-v1
+payment-receipt.the-bill-is-wrong,บิลน่าจะผิด,,bin na cha phit,,,2,th-agent-v1
+payment-receipt.i-already-paid,จ่ายแล้ว,,chai laeo,,,2,th-agent-v1
+shopping.i-am-just-looking,ดูก่อน,,du kon,,,2,th-agent-v1
+shopping.how-much-is-this,อันนี้เท่าไร,,an ni thaorai,,,2,th-agent-v1
+shopping.that-is-too-expensive,แพงเกินไป,,phaeng koen pai,,,2,th-agent-v1
+shopping.can-it-be-a-little-cheaper,ลดหน่อยได้ไหม,,lot noi dai mai,,,2,th-agent-v1
+shopping.is-there-a-discount,มีส่วนลดไหม,,mi suanlot mai,,,2,th-agent-v1
+shopping.where-do-i-pay,จ่ายเงินที่ไหน,,chai ngoen thi nai,,,2,th-agent-v1
+shopping.i-will-take-this,เอาอันนี้,,ao an ni,,,2,th-agent-v1
+shopping.what-is-this,นี่อะไร,,ni arai,,,2,th-agent-v1
+shopping.where-can-i-buy,ซื้อ{}ได้ที่ไหน,,sue {} dai thi nai,,,2,th-agent-v1
+shopping.do-you-have-this-in-stock,มีของไหม,,mi khong mai,,,2,th-agent-v1
+shopping.two-of-these,ขออันนี้สองอัน,,kho an ni song an,,,2,th-agent-v1
+shopping.what-is-it-made-of,ทำจากอะไร,,tham chak arai,,,2,th-agent-v1
+color-size-returns.do-you-have-another-color,มีสีอื่นไหม,,mi si uen mai,,,2,th-agent-v1
+color-size-returns.do-you-have-another-size,มีไซส์อื่นไหม,,mi sai uen mai,,,2,th-agent-v1
+color-size-returns.may-i-try-it-on,ลองได้ไหม,,long dai mai,,,2,th-agent-v1
+color-size-returns.can-i-return-it,คืนของได้ไหม,,khuen khong dai mai,,,2,th-agent-v1
+color-size-returns.can-i-exchange-it,เปลี่ยนของได้ไหม,,plian khong dai mai,,,2,th-agent-v1
+color-size-returns.do-you-have-a-bag,มีถุงไหม,,mi thung mai,,,2,th-agent-v1
+tax-refund.can-i-get-a-tax-refund,ขอคืนภาษีได้ไหม,,kho khuen phasi dai mai,,,2,th-agent-v1
+tax-refund.is-tax-free-shopping-available,มีบริการคืนภาษีไหม,,mi borikan khuen phasi mai,,,2,th-agent-v1

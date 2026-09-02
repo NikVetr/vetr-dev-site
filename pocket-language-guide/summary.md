@@ -24,12 +24,13 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 - it takes a pair while the type would otherwise sit near its floor.
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
-is a deliberately tight layout that should not be second-guessed. On 7×5in, 113 of
-the 132 shipped pairs settle on six faces, fourteen on eight — Arabic mostly, which
-needs the loosest leading here — and five on four. The reference sheets reached four
-by hand, against a bank of 413 concepts; it is 763 now, so six is the same answer at
-the new size. A credit-card sheet takes sixteen rather than printing at minimum
-size.
+is a deliberately tight layout that should not be second-guessed. On 7×5in, 182 of
+the 240 shipped pairs settle on six faces, fifty on eight and eight on four. The
+eights are the scripts that need the most vertical room: Devanagari and Thai at a
+1.35 and 1.40 leading factor take fourteen pairs each, Arabic thirteen. The reference
+sheets reached four by hand against a bank of 413 concepts; it is 771 now, so six is
+the same answer at the new size. A credit-card sheet takes sixteen rather than
+printing at minimum size.
 
 Every column is flush at the top *and* the bottom, an item never splits across a
 column, and a section heading is never stranded at the foot of one.
@@ -332,7 +333,7 @@ English, and it is cheaper than the alternative.
 
 **Language names come from the platform.** `Intl.DisplayNames` already knows every
 language's name in every locale, which is a better answer than carrying sixteen
-names across twelve catalogues and keeping them in step.
+names across sixteen catalogues and keeping them in step.
 
 The solver cannot translate -- it has no business knowing what language the
 interface is in -- so a `Warning` carries a stable `code`, the English `message`
@@ -458,7 +459,7 @@ npm run vendor      # esbuild → vendor/{fontkit,pdf-lib}.esm.js  (rarely)
 npm run icons       # Lucide SVG → data/icons.json, normalised to path data
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
                     #   thumbnails only, one per pair, then indexed down to a
-                    #   fifth-bit palette: 132 pairs in 4.9MB rather than 16.1MB
+                    #   fifth-bit palette: 240 pairs in 8.6MB rather than 27MB
 npm run shell       # data/shell.json + the respell index + sw.js VERSION
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
 ```
@@ -482,10 +483,10 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **763 concepts across 57 sections in twelve languages**, which is
-**132 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **771 concepts across 57 sections in sixteen languages**, which is
+**240 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
-storing pairs: the twelfth language added 743 rows and 22 new pairs.
+storing pairs: the sixteenth language added 745 rows and 30 new pairs.
 
 Every pack covers 100% of the concepts that apply to it. The qualifier is doing
 work: a concept can name the languages it belongs to, so the Korean won and the
@@ -545,7 +546,8 @@ never crosses a section or a template — the same word under two headings is tw
 different pieces of advice. Merging beats dropping one because the collapse is
 itself the lesson: **"Buenos días — Hello (polite) / Good morning"** tells a reader
 that Spanish does not make the distinction their own language does. Across the
-eleven packs it folds 32 rows, ten of them Chinese and six Korean.
+fifteen packs it folds 44 rows, ten of them Chinese and six each in Korean and
+Indonesian.
 
 ### Concepts that are not universal
 
@@ -560,8 +562,8 @@ Four translation agents flagged it independently before it was fixed.
 Four concepts went further and hardcoded a language *name*: "I do not speak
 Chinese" and "I do not speak Japanese" were separate entries. Invisible with two
 languages, since each sheet carried only its own; with eight, the Spanish sheet
-printed both -- two concepts per language, which at twelve would have been
-twenty-four entries saying the same thing. They are now one concept each, glossed
+printed both -- two concepts per language, which at sixteen would have been
+thirty-two entries saying the same thing. They are now one concept each, glossed
 "I do not speak this language", and every pack renders it self-referentially.
 Before the merge the Korean sheet had no way to say "I do not speak Korean" at all.
 
@@ -631,17 +633,20 @@ For a print artifact, refusing beats printing something subtly wrong.
 
 Named so nobody has to rediscover the gap:
 
-- **Corpus beyond the twelve shipped languages.** Hindi, Thai, Indonesian and
-  Swahili are registered with no rows. Nothing offers them: `hasContent` reads
-  `data/coverage.json` rather than the declared status, so a language with no data
-  cannot be picked as a target or a gloss, and the gallery shows it as "help
-  translate".
+- **Corpus beyond the sixteen shipped languages.** Every language in the registry
+  now has a pack, so there is nothing in the "help translate" state -- which the
+  gallery and the studio still have to handle, and which their specs now reach by
+  serving a coverage report with one language hollowed out rather than by naming a
+  real one. Adding the seventeenth means a registry row, a `scripts.csv` entry if its
+  script is new, a font stack if the Latin faces do not cover it, and
+  `python3 scripts/make_todo.py <code>`.
 - **Respellings for readers who do not read English.** Every pack ships
   `<target>__en__en-US` and nothing else, so the pronunciation column appears only
   on a sheet glossed into English. A Turkish speaker learning Spanish gets the
-  Spanish and the Turkish gloss but no say-it-like column. Filling that in means
-  either a transducer per source language or a curated layer per pair, and the
-  transducer wants the `ipa` column that is also still empty.
+  Spanish and the Turkish gloss but no say-it-like column. That is 15 of the 240
+  pairs served and 225 not, and it is the largest single gap left in the project.
+  Filling it means either a transducer per source language or a curated layer per
+  pair, and the transducer wants the `ipa` column that is also still empty.
 - **Digits inside right-to-left text.** The renderer shapes a run right-to-left as
   a whole and nothing here implements the bidi algorithm's rule that digits stay
   left-to-right inside it, so Arabic-Indic `١٠` printed as `٠١` and `١/٢` as `٢/١`.
@@ -680,9 +685,9 @@ Named so nobody has to rediscover the gap:
 - **Pre-rendered faces as shipped assets.** The gallery's lightbox typesets the
   pair when a reader opens it, rather than reading faces off disk. Committing them
   was the other option and the numbers ruled it out: a face is ~120KB of SVG or
-  ~1.8MB of `LayoutPlan` JSON, and 132 ordered pairs at six to eight faces each is
-  about 90MB in the working tree either way -- for a preview of a sheet that solves
-  in about a second. What is committed is the 480px first-face thumbnail, which
+  ~1.8MB of `LayoutPlan` JSON, and 240 ordered pairs at six to eight faces each is
+  well over 150MB in the working tree either way -- for a preview of a sheet that
+  solves in about a second. What is committed is the 480px first-face thumbnail, which
   goes up immediately so the dialog is never empty while the rest is typeset. The
   faces it then shows are vector, so they are sharper than any PNG that could have
   been shipped.
@@ -697,7 +702,7 @@ Named so nobody has to rediscover the gap:
   an Indonesian `common-signs` row for the codes that stand in for the word `babi` —
   a reader can follow `Tanpa babi` perfectly and still walk into a place signed
   `Lapo B2`. Staged rather than added because a universal concept costs every one of
-  the fourteen packs a row, and the two that *were* added this round took twelve
+  the fifteen packs a row, and the two that *were* added this round took thirteen
   agents to fill.
 
 ## Notes worth keeping

@@ -1,22 +1,50 @@
 # Concepts the translators asked for
 
 Every pack in this project is written by someone reading the bank against a real
-country, and the most valuable thing they produce is not always a translation. Six
+country, and the most valuable thing they produce is not always a translation. Eight
 of them flagged a concept that does not exist, with a reason and usually a source.
 This file is where those go, so the finding is not lost between the report and the
 next batch.
 
-Adding a concept is not free: a universal one costs every one of the fourteen packs
-a row, and until they have it the validator names them in its coverage warning. So
+Adding a concept is not free: a universal one costs every one of the fifteen packs a
+row, and until they have it the validator names them in its coverage warning. So
 these are staged rather than added, and the note beside each is the argument for
 where it belongs.
 
-Two are already in the bank: `dietary-needs.no-pork` and
-`dietary-needs.is-this-halal`, both raised by the Indonesian translator, both
-universal, both now filled in every pack. They are the precedent for the shape of
-an entry here.
+Four are already in the bank rather than staged here. `dietary-needs.no-pork` and
+`dietary-needs.is-this-halal` were raised by the Indonesian translator, are universal
+and are filled in every pack. `numbers-money.shilling` and its symbol came from the
+Swahili translator, who pointed out that no currency concept applied to Swahili at
+all while every other pack had its pair; that one is scoped `sw` and prints
+`TSh · KSh · USh`, because the concept serves three countries and a Kenyan card
+saying `TSh` is simply wrong. Those are the precedent for the shape of an entry
+here.
 
 ## Strong cases
+
+### The pork rows are three concepts wearing one hat
+
+Worth stating together, because five translators arrived at it independently and the
+shape is now clear. `dietary-needs.no-pork` names the *meat*, and three different
+invisible vectors defeat it in three different regions:
+
+- **Broth**, in east and southeast Asia. Japanese 豚骨, Korean 돼지 육수, Thai
+  น้ำซุปหมู. The Thai translator's point is the sharpest: nearly all Thai
+  `ก๋วยเตี๋ยว` and the free soup beside a rice dish are pork-bone stock, so a bowl of
+  *chicken* noodles is routinely served in pork broth.
+- **Fat**, in Europe and southern China. `manteca`, `lardons`, `Schmalz`, 猪油,
+  น้ำมันหมู. The Thai pack also supplies the evidence that these are separately
+  claimed in practice: `ไม่มีหมู ไม่มีน้ำมันหมู` — "no pork no lard", NPNL — is an
+  established southeast Asian food-court category *because* the first phrase does not
+  imply the second.
+- **Cured pork as seasoning**, in Europe. Chorizo, lardons, Speck, presunto — the
+  case the Spanish, French, German and Portuguese packs solved by naming the offenders
+  inside `text`.
+
+Three packs shipped the coverage in `text` and paid a wrapped line for it; the rest
+kept the short form. A `does-it-contain-pork-stock` concept and a
+`does-it-contain-pork-fat` concept would let every pack carry the local words in
+printed `text` instead of choosing between length and safety on one row.
 
 ### `pharmacy-symptoms.i-think-i-have-malaria` and `.i-need-a-malaria-test`
 
@@ -79,13 +107,6 @@ short ASCII `literal` doing the disambiguation rather than a second row.
 
 ## Worth doing, lower urgency
 
-### `numbers-money.shilling`
-
-Raised by the Swahili translator: **no currency concept applies to Swahili at all**,
-so the sheet has no money word, while every other pack has its pair. One concept
-scoped `sw` serves TZ, KE and UG together — three of the four countries — and
-`Shilingi` is the most-used noun at any counter.
-
 ### `dietary-needs.jain` and `dietary-needs.no-onion-garlic`
 
 Raised by the Hindi translator. Indian kitchens are set up to answer exactly these
@@ -134,6 +155,27 @@ Along with the unasked 반찬 that arrives anyway. Together with `no-dried-fish`
 the pork-stock row above, this suggests the real gap is one concept shaped like
 "what is in this that I would not expect", filled per language — which is a design
 question rather than a row.
+
+### A `note` row for a language's one unavoidable warning
+
+Three packs asked for the same thing in different words, and none of them could have
+it: the bank's only two `note`-template concepts are scoped to Chinese and Japanese,
+so there is nowhere to put a sentence that is about the *language* rather than about
+a phrase.
+
+- **Thai**: "add ครับ (m) / ค่ะ (f) to soften anything." The pack deliberately omits
+  the politeness particles from 739 of 741 rows, because printing both correctly
+  needs two different pairs (`ค่ะ` on statements, `คะ` on questions) and picking one
+  is wrong for half its readers. One legend line recovers all of it.
+- **Swahili**: the clock is offset six hours — `saa moja` is seven o'clock. The pack
+  routes around it by keeping `saa` out of the wake-up-call frame, which works and is
+  invisible.
+- **Hindi**: `तुम` is on the card as the reference word for familiar "you" with
+  `literal: familiar`, which is as much warning as a cell allows.
+
+A `scope: language` note concept per pack, or a `notes` column on `languages.csv`
+rendered at the head of `social`, would serve all three. Thai's is the one that
+changes what a reader can say.
 
 ## One design question, not a concept
 

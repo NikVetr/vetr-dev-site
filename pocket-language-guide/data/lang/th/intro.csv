@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+introductions.my-name-is,ฉันชื่อ {},,chan chue {},,,2,th-agent-v1
+introductions.nice-to-meet-you,ยินดีที่ได้รู้จัก,,yindi thi dai ruchak,,,2,th-agent-v1
+introductions.what-is-your-name,คุณชื่ออะไร,,khun chue arai,,,2,th-agent-v1
+introductions.we-are-traveling-together,เราเที่ยวด้วยกัน,,rao thiao duai kan,,,2,th-agent-v1
+introductions.this-is-my-friend,นี่เพื่อนฉัน,,ni phuean chan,,,2,th-agent-v1
+introductions.i-am-from,มาจาก {},,ma chak {},,,2,th-agent-v1
+introductions.where-are-you-from,คุณมาจากไหน,,khun ma chak nai,,,2,th-agent-v1
+introductions.how-are-you,สบายดีไหม,,sabai di mai,,,2,th-agent-v1
+introductions.i-am-a-tourist,เป็นนักท่องเที่ยว,,pen nak thongthiao,,,2,th-agent-v1
+introductions.this-is-my-husband-wife,นี่สามี/ภรรยา,,ni sami / phanraya,,husband / wife,2,th-agent-v1
+introductions.this-is-my-daughter-son,นี่ลูกสาว/ลูกชาย,,ni luk sao / luk chai,,daughter / son,2,th-agent-v1
+introductions.i-am-traveling-alone,มาคนเดียว,,ma khon diao,,,2,th-agent-v1

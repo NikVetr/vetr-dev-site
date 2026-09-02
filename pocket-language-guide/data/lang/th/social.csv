@@ -1,0 +1,99 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+social-basics.hello,สวัสดี,สวัสดีครับ/ค่ะ,sawatdi,,,2,th-agent-v1
+social-basics.hello-polite,สวัสดีครับ/ค่ะ,,sawatdi khrap / kha,,"-krap if male, -kha if female",2,th-agent-v1
+social-basics.good-morning,สวัสดีตอนเช้า,อรุณสวัสดิ์,sawatdi ton chao,,,2,th-agent-v1
+social-basics.good-evening,สวัสดีตอนเย็น,สายัณห์สวัสดิ์,sawatdi ton yen,,,2,th-agent-v1
+social-basics.goodbye,ลาก่อน,บาย,la kon,,,2,th-agent-v1
+social-basics.thank-you,ขอบคุณ,ขอบคุณครับ/ค่ะ,khopkhun,,,2,th-agent-v1
+social-basics.you-are-welcome,ไม่เป็นไร,,mai penrai,,,2,th-agent-v1
+social-basics.excuse-me-sorry,ขอโทษ,,kho thot,,,2,th-agent-v1
+social-basics.sorry,ขอโทษด้วย,,kho thot duai,,,2,th-agent-v1
+social-basics.no-problem,ไม่มีปัญหา,,mai mi panha,,,2,th-agent-v1
+social-basics.i-do-not-know,ไม่รู้,,mai ru,,,2,th-agent-v1
+social-basics.good-night,ราตรีสวัสดิ์,ฝันดี,ratri sawat,,,2,th-agent-v1
+social-basics.okay-fine-i-am-okay,สบายดี,โอเค,sabai di,,,2,th-agent-v1
+communication.i-do-not-speak-this-language,พูดภาษาไทยไม่ได้,,phut phasa thai mai dai,,,2,th-agent-v1
+communication.i-speak-only-a-little-of-this,พูดไทยได้นิดเดียว,,phut thai dai nit diao,,,2,th-agent-v1
+communication.do-you-speak-english,พูดอังกฤษได้ไหม,,phut angkrit dai mai,,,2,th-agent-v1
+communication.please-speak-more-slowly,พูดช้าๆหน่อย,,phut cha cha noi,,,2,th-agent-v1
+communication.i-do-not-understand-spoken,ฟังไม่เข้าใจ,,fang mai khaochai,,,2,th-agent-v1
+communication.i-cannot-read-understand,อ่านไม่เข้าใจ,,an mai khaochai,,,2,th-agent-v1
+communication.please-say-it-again,พูดอีกครั้ง,,phut ik khrang,,,2,th-agent-v1
+communication.please-write-it-down,ช่วยเขียนให้,,chuai khian hai,,,2,th-agent-v1
+communication.please-wait-a-moment,รอสักครู่,,ro sak khru,,,2,th-agent-v1
+communication.can-you-help-me,ช่วยหน่อยได้ไหม,,chuai noi dai mai,,,2,th-agent-v1
+communication.please-show-me-the-text,ขอดูข้อความ,,kho du khokhwam,,,2,th-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,ฟังไม่ทัน,,fang mai than,,,2,th-agent-v1
+communication.i-do-not-understand,ไม่เข้าใจ,,mai khaochai,,,2,th-agent-v1
+communication.i-cannot-read-it,อ่านไม่ออก,,an mai ok,,,2,th-agent-v1
+quick-responses.please-go-ahead,เชิญ,,choen,,,2,th-agent-v1
+quick-responses.yes-right,ใช่,,chai,,,2,th-agent-v1
+quick-responses.no-not,ไม่,,mai,,,2,th-agent-v1
+quick-responses.okay-can,ได้,,dai,,,2,th-agent-v1
+quick-responses.cannot-not-allowed,ไม่ได้,,mai dai,,,2,th-agent-v1
+quick-responses.works-okay,ใช้ได้,,chai dai,,,2,th-agent-v1
+quick-responses.does-not-work-no,ใช้ไม่ได้,,chai mai dai,,,2,th-agent-v1
+quick-responses.can-possible,เป็นไปได้,,pen pai dai,,,2,th-agent-v1
+quick-responses.cannot-not-possible,เป็นไปไม่ได้,,pen pai mai dai,,,2,th-agent-v1
+quick-responses.okay-fine,โอเค,ตกลง,oke,,,2,th-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,ห้าม,ไม่ดี,ham,,,2,th-agent-v1
+phone-translation.i-am-using-phone-translation,ใช้แอปแปลภาษา,,chai aep plae phasa,,,2,th-agent-v1
+phone-translation.please-speak-toward-the-phone,พูดใส่มือถือหน่อย,,phut sai muethue noi,,,2,th-agent-v1
+phone-translation.please-write-the-place-name,ช่วยเขียนชื่อสถานที่,,chuai khian chue sathanthi,,,2,th-agent-v1
+phone-translation.one-sentence-at-a-time-please,พูดทีละประโยค,,phut thi la prayok,,,2,th-agent-v1
+phone-translation.please-type-it-and-show-me,พิมพ์ให้ดูหน่อย,,phim hai du noi,,,2,th-agent-v1
+phone-translation.please-look-at-the-screen,ดูหน้าจอหน่อย,,du nacho noi,,,2,th-agent-v1
+phone-text-power.please-type-it-for-me,ช่วยพิมพ์ให้หน่อย,,chuai phim hai noi,,,2,th-agent-v1
+phone-text-power.please-use-simple-words,ใช้คำง่ายๆหน่อย,,chai kham ngai ngai noi,,,2,th-agent-v1
+phone-text-power.my-phone-battery-is-low,แบตจะหมด,,baet cha mot,,,2,th-agent-v1
+phone-text-power.do-you-have-a-power-bank,มีพาวเวอร์แบงก์ไหม,แบตสำรอง,mi phawoe bang mai,,,2,th-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,คำแปลอาจไม่ตรง,,kham plae at mai trong,,,2,th-agent-v1
+phone-text-power.please-confirm,ช่วยยืนยัน,,chuai yuenyan,,,2,th-agent-v1
+phone-text-power.may-i-charge-my-phone-here,ชาร์จที่นี่ได้ไหม,,chat thi ni dai mai,,,2,th-agent-v1
+sim-data.i-would-like-a-tourist-sim,ขอซิมนักท่องเที่ยว,,kho sim nak thongthiao,,,2,th-agent-v1
+sim-data.may-i-use-your-wifi,ขอใช้ไวไฟได้ไหม,,kho chai waifai dai mai,,,2,th-agent-v1
+sim-data.how-much-data-is-included,ได้เน็ตเท่าไร,,dai net thaorai,,,2,th-agent-v1
+sim-data.do-you-need-my-passport,ต้องใช้พาสปอร์ตไหม,,tong chai phatpot mai,,,2,th-agent-v1
+sim-data.how-long-is-it-valid,ใช้ได้กี่วัน,,chai dai ki wan,,,2,th-agent-v1
+sim-data.please-activate-it,ช่วยเปิดใช้งานให้,,chuai poet chai ngan hai,,,2,th-agent-v1
+sim-data.do-you-have-an-esim,มี eSIM ไหม,มีอีซิมไหม,mi esim mai,,,2,th-agent-v1
+sim-data.my-data-is-not-working,เน็ตใช้ไม่ได้,,net chai mai dai,,,2,th-agent-v1
+sim-data.does-it-need-registration,ต้องลงทะเบียนไหม,,tong long thabian mai,,,2,th-agent-v1
+sim-data.i-have-no-signal,ไม่มีสัญญาณ,,mai mi sanyan,,,2,th-agent-v1
+sim-data.please-write-the-wifi-password,ช่วยเขียนรหัสไวไฟ,,chuai khian rahat waifai,,,2,th-agent-v1
+sim-data.sim-card,ซิมการ์ด,,sim kat,,,2,th-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,ซื้อปลั๊กแปลงที่ไหน,,sue plak plaeng thi nai,,,2,th-agent-v1
+sim-data.mobile-data,เน็ตมือถือ,,net muethue,,,2,th-agent-v1
+sim-data.can-i-top-up-this-sim,เติมเงินซิมนี้ได้ไหม,,toem ngoen sim ni dai mai,,,2,th-agent-v1
+sim-data.top-up,เติมเงิน,,toem ngoen,,,2,th-agent-v1
+sim-data.is-there-coverage-in,ที่{}มีสัญญาณไหม,,thi {} mi sanyan mai,,,2,th-agent-v1
+sim-data.signal,สัญญาณ,,sanyan,,,2,th-agent-v1
+sim-data.esim,eSIM,อีซิม,esim,,,2,th-agent-v1
+sim-data.prepaid,ระบบเติมเงิน,,rabop toem ngoen,,,2,th-agent-v1
+sim-data.roaming,โรมมิ่ง,ข้ามแดน,romming,,,2,th-agent-v1
+etiquette.is-this-allowed,อันนี้ทำได้ไหม,,an ni tham dai mai,,,2,th-agent-v1
+etiquette.is-tipping-expected,ต้องให้ทิปไหม,,tong hai thip mai,,,2,th-agent-v1
+etiquette.is-service-included,รวมค่าบริการไหม,,ruam kha borikan mai,,,2,th-agent-v1
+etiquette.may-i-enter,ขอเข้าได้ไหม,,kho khao dai mai,,,2,th-agent-v1
+etiquette.remove-shoes,ต้องถอดรองเท้าไหม,,tong thot rongthao mai,,,2,th-agent-v1
+etiquette.photo-of-you,ขอถ่ายรูปคุณได้ไหม,,kho thai rup khun dai mai,,,2,th-agent-v1
+etiquette.may-i-sit-here,นั่งที่นี่ได้ไหม,,nang thi ni dai mai,,,2,th-agent-v1
+etiquette.queue-for,นี่คิว{}ใช่ไหม,,ni khiu {} chai mai,,,2,th-agent-v1
+etiquette.dressed-appropriately,แต่งตัวแบบนี้ได้ไหม,,taeng tua baep ni dai mai,,,2,th-agent-v1
+etiquette.did-not-mean-to-offend,ไม่ได้ตั้งใจ ขอโทษ,,"mai dai tangchai, kho thot",,,2,th-agent-v1
+etiquette.what-is-customary,ที่นี่ทำกันอย่างไร,,thi ni tham kan yangrai,,,2,th-agent-v1
+etiquette.keep-the-change,ไม่ต้องทอน,,mai tong thon,,,2,th-agent-v1
+children.cannot-find-my-child,หาลูกไม่เจอ,,ha luk mai choe,,,2,th-agent-v1
+children.make-an-announcement,ช่วยประกาศหาให้,,chuai prakat ha hai,,,2,th-agent-v1
+children.child-age,ลูกอายุ {} ปี,,luk ayu {} pi,,,2,th-agent-v1
+children.high-chair,มีเก้าอี้เด็กไหม,,mi kaoi dek mai,,,2,th-agent-v1
+children.baby-changing-room,ที่เปลี่ยนผ้าอ้อม อยู่ไหน,,thi plian pha om yu nai,,,2,th-agent-v1
+children.childrens-menu,มีเมนูเด็กไหม,,mi menu dek mai,,,2,th-agent-v1
+children.suitable-for-children,เหมาะกับเด็กไหม,,mo kap dek mai,,,2,th-agent-v1
+children.minimum-age,อายุขั้นต่ำเท่าไร,,ayu khan tam thaorai,,,2,th-agent-v1
+children.do-children-pay,เด็กต้องจ่ายไหม,,dek tong chai mai,,,2,th-agent-v1
+children.crib,มีเตียงเด็กไหม,,mi tiang dek mai,,,2,th-agent-v1
+children.warm-this-bottle,ช่วยอุ่นนมให้หน่อย,,chuai un nom hai noi,,,2,th-agent-v1
+children.car-seat,ต้องการคาร์ซีท,,tongkan kha sit,,,2,th-agent-v1
+children.stroller,รถเข็นเด็ก,สตรอลเลอร์,rot khen dek,,,2,th-agent-v1
+children.playground,มีสนามเด็กเล่นไหม,,mi sanam dek len mai,,,2,th-agent-v1

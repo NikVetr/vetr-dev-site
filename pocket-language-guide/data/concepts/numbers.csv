@@ -61,3 +61,5 @@ numbers-money.rupiah,numbers-money,ref,word,rupiah,1030,0.800,numbers-money.curr
 numbers-money.rupiah-symbol,numbers-money,ref,word,rupiah-symbol,1031,0.740,numbers-money.currency,1,0,neutral,id,The symbol as printed on a price.
 numbers-money.shilling,numbers-money,ref,word,shilling,1032,0.800,numbers-money.currency,0,0,neutral,sw,"East African currency. One concept serves Tanzania, Kenya and Uganda; the abbreviation differs by country, which is what text_alt is for."
 numbers-money.shilling-symbol,numbers-money,ref,word,shilling-symbol,1033,0.740,numbers-money.currency,1,0,neutral,sw,The abbreviation as printed on a price.
+numbers-money.baht,numbers-money,ref,word,baht,1034,0.800,numbers-money.currency,0,0,neutral,th,Thai currency.
+numbers-money.baht-symbol,numbers-money,ref,word,baht-symbol,1035,0.740,numbers-money.currency,1,0,neutral,th,The symbol as printed on a price.

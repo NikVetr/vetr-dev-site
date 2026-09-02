@@ -1,0 +1,113 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+directions.where-is,{}อยู่ไหน,,{} yu nai,,,2,th-agent-v1
+directions.how-do-i-get-to,ไป{}ยังไง,,pai {} yangngai,,,2,th-agent-v1
+directions.is-it-far,ไกลไหม,,klai mai,,,2,th-agent-v1
+directions.how-long-on-foot,เดินกี่นาที,,doen ki nathi,,,2,th-agent-v1
+directions.please-show-me-on-the-map,ชี้ในแผนที่ให้หน่อย,,chi nai phaenthi hai noi,,,2,th-agent-v1
+directions.where-is-the-nearest,{}ใกล้สุดอยู่ไหน,,{} klai sut yu nai,,,2,th-agent-v1
+directions.where-am-i,ตรงนี้ที่ไหน,,trong ni thi nai,,,2,th-agent-v1
+directions.which-way,ทางไหน,,thang nai,,,2,th-agent-v1
+directions.can-i-walk-there,เดินไปได้ไหม,,doen pai dai mai,,,2,th-agent-v1
+directions.how-far-is-it,ไกลเท่าไร,,klai thaorai,,,2,th-agent-v1
+directions.which-exit,ทางออกไหน,,thang ok nai,,,2,th-agent-v1
+directions.can-you-show-me-the-way,ชี้ทางให้หน่อย,,chi thang hai noi,,,2,th-agent-v1
+directions.north,ทิศเหนือ,เหนือ,thit nuea,,,2,th-agent-v1
+directions.south,ทิศใต้,ใต้,thit tai,,,2,th-agent-v1
+directions.east,ทิศตะวันออก,ตะวันออก,thit tawan ok,,,2,th-agent-v1
+directions.west,ทิศตะวันตก,ตะวันตก,thit tawantok,,,2,th-agent-v1
+quick-directions.go-straight,ตรงไป,,trong pai,,,2,th-agent-v1
+quick-directions.turn-left,เลี้ยวซ้าย,,liao sai,,,2,th-agent-v1
+quick-directions.turn-right,เลี้ยวขวา,,liao khwa,,,2,th-agent-v1
+quick-directions.this-way,ทางนี้,,thang ni,,,2,th-agent-v1
+quick-directions.that-way,ทางนั้น,,thang nan,,,2,th-agent-v1
+quick-directions.on-the-left,อยู่ซ้ายมือ,,yu sai mue,,,2,th-agent-v1
+quick-directions.on-the-right,อยู่ขวามือ,,yu khwa mue,,,2,th-agent-v1
+quick-directions.across-from-here,ตรงข้าม,,trong kham,,,2,th-agent-v1
+quick-directions.in-front,ข้างหน้า,,khang na,,,2,th-agent-v1
+quick-directions.behind,ข้างหลัง,,khang lang,,,2,th-agent-v1
+taxi.please-take-me-here,ไปที่นี่,,pai thi ni,,,2,th-agent-v1
+taxi.please-send-me-the-address,ส่งที่อยู่มาให้,,song thiyu ma hai,,,2,th-agent-v1
+taxi.we-need-the-east-gate-not-the-south-gate,ประตูตะวันออก ไม่ใช่ประตูใต้,,"pratu tawan ok, mai chai pratu tai",,,2,th-agent-v1
+taxi.please-stop-here,จอดที่นี่,,chot thi ni,,,2,th-agent-v1
+taxi.can-you-wait-for-me-here,รอที่นี่ได้ไหม,,ro thi ni dai mai,,,2,th-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,ต้องขึ้นรถไฟ ความเร็วสูง,,tong khuen rotfai khwam reo sung,,,2,th-agent-v1
+taxi.please-use-the-meter,เปิดมิเตอร์ด้วย,กดมิเตอร์,poet mitoe duai,,,2,th-agent-v1
+taxi.i-will-get-off-here,ลงที่นี่,,long thi ni,,,2,th-agent-v1
+transit-rides.two-tickets,ขอตั๋วสองใบ,,kho tua song bai,,,2,th-agent-v1
+transit-rides.where-is-the-subway-station,สถานีรถไฟฟ้าอยู่ไหน,MRT อยู่ไหน,sathani rotfaifa yu nai,,,2,th-agent-v1
+transit-rides.does-this-bus-train-go-to,คันนี้ไป{}ไหม,,khan ni pai {} mai,,,2,th-agent-v1
+transit-rides.what-is-the-next-stop,ต่อไปสถานีอะไร,,to pai sathani arai,,,2,th-agent-v1
+transit-rides.please-tell-me-where-to-get-off,บอกด้วยว่าลงที่ไหน,,bok duai wa long thi nai,,,2,th-agent-v1
+transit-rides.is-this-direct,ไปถึงเลยไหม,,pai thueng loei mai,,,2,th-agent-v1
+transit-rides.do-i-need-to-transfer,ต้องต่อรถไหม,,tong to rot mai,,,2,th-agent-v1
+transit-rides.is-it-delayed,ล่าช้าไหม,,lacha mai,,,2,th-agent-v1
+transit-rides.i-am-in-a-hurry,รีบมาก,,rip mak,,,2,th-agent-v1
+transit-rides.which-platform,ชานชาลาไหน,,chanchala nai,,,2,th-agent-v1
+transit-rides.what-time-is-the-next-one,คันต่อไปกี่โมง,,khan to pai ki mong,,,2,th-agent-v1
+transit-rides.i-went-past-my-stop,เลยป้ายมาแล้ว,,loei pai ma laeo,,,2,th-agent-v1
+transit-rides.can-i-use-this-ticket,ใช้ตั๋วนี้ได้ไหม,,chai tua ni dai mai,,,2,th-agent-v1
+place-words.visitor-center,ศูนย์นักท่องเที่ยว,ศูนย์บริการนักท่องเที่ยว,sun nak thongthiao,,,2,th-agent-v1
+place-words.railway-station,สถานีรถไฟ,,sathani rotfai,,,2,th-agent-v1
+place-words.airport,สนามบิน,,sanambin,,,2,th-agent-v1
+place-words.service-desk,จุดบริการ,เคาน์เตอร์บริการ,chut borikan,,,2,th-agent-v1
+place-words.bus-stop,ป้ายรถเมล์,ป้ายรถประจำทาง,pai rotme,,,2,th-agent-v1
+place-words.luggage-storage,ที่ฝากกระเป๋า,,thi fak krapao,,,2,th-agent-v1
+place-words.tourist-spot-sightseeing-area,สถานที่ท่องเที่ยว,,sathanthi thongthiao,,,2,th-agent-v1
+border-customs.i-am-a-tourist,มาเที่ยว,,ma thiao,,,2,th-agent-v1
+border-customs.here-is-my-passport,นี่พาสปอร์ต,,ni phatpot,,,2,th-agent-v1
+border-customs.i-am-staying-for-days,อยู่ {} วัน,,yu {} wan,,,2,th-agent-v1
+border-customs.nothing-to-declare,ไม่มีของต้องสำแดง,,mai mi khong tong samdaeng,,,2,th-agent-v1
+border-customs.i-am-staying-at,พักที่ {},,phak thi {},,,2,th-agent-v1
+border-customs.i-am-here-for-business,มาทำธุรกิจ,,ma tham thurakit,,,2,th-agent-v1
+border-customs.i-have-a-return-ticket,มีตั๋วกลับ,,mi tua klap,,,2,th-agent-v1
+border-customs.i-am-visiting-family,มาหาครอบครัว,,ma ha khropkhrua,,,2,th-agent-v1
+border-customs.this-is-for-personal-use,ใช้ส่วนตัว,,chai suantua,,,2,th-agent-v1
+border-customs.i-am-in-transit,ต่อเครื่อง,,to khrueang,,,2,th-agent-v1
+border-customs.i-have-in-cash,มีเงินสด {},,mi ngoen sot {},,,2,th-agent-v1
+border-customs.this-is-a-gift,เป็นของขวัญ,,pen khongkhwan,,,2,th-agent-v1
+border-customs.where-do-i-collect-my-baggage,รับกระเป๋าที่ไหน,,rap krapao thi nai,,,2,th-agent-v1
+border-customs.how-long-may-i-stay,อยู่ได้กี่วัน,,yu dai ki wan,,,2,th-agent-v1
+border-customs.i-have-a-connecting-flight,มีเที่ยวบินต่อ,,mi thiaobin to,,,2,th-agent-v1
+border-customs.may-i-have-an-entry-stamp,ขอตราประทับ เข้าเมือง,,kho tra prathap khao mueang,,,2,th-agent-v1
+border-customs.visa,วีซ่า,,wisa,,,2,th-agent-v1
+border-customs.i-have-no-food-or-plants,ไม่มีอาหารหรือพืช,,mai mi ahan rue phuet,,,2,th-agent-v1
+border-customs.passport-control,ตรวจหนังสือเดินทาง,ตรวจคนเข้าเมือง,truat nangsue doen thang,,,2,th-agent-v1
+border-customs.customs,ศุลกากร,,sunlakakon,,,2,th-agent-v1
+border-customs.baggage-claim,รับกระเป๋า,สายพานรับกระเป๋า,rap krapao,,,2,th-agent-v1
+border-customs.customs-declaration,ของต้องสำแดง,,khong tong samdaeng,,goods to declare,1,th-agent-v1
+border-customs.arrival-card,บัตรขาเข้า,ตม.6,bat khakhao,,,2,th-agent-v1
+border-customs.transit,เปลี่ยนเครื่อง,ต่อเครื่อง,plian khrueang,,,2,th-agent-v1
+border-customs.boarding-pass,บัตรขึ้นเครื่อง,,bat khuen khrueang,,,2,th-agent-v1
+pickup-meeting.where-is-the-pickup-point,จุดรับอยู่ไหน,,chut rap yu nai,,,2,th-agent-v1
+pickup-meeting.please-send-me-the-pickup-point,ส่งจุดรับมาให้,,song chut rap ma hai,,,2,th-agent-v1
+pickup-meeting.please-pick-us-up-here,มารับที่นี่,,ma rap thi ni,,,2,th-agent-v1
+pickup-meeting.meet-us-at,เจอกันที่ {},,choe kan thi {},,,2,th-agent-v1
+pickup-meeting.please-call-me-a-ride,ช่วยเรียกรถให้,,chuai riak rot hai,,,2,th-agent-v1
+pickup-meeting.please-call-a-taxi,ช่วยเรียกแท็กซี่,,chuai riak thaeksi,,,2,th-agent-v1
+rail-station-words.high-speed-rail,รถไฟความเร็วสูง,,rotfai khwam reo sung,,,2,th-agent-v1
+rail-station-words.transfer,เปลี่ยนสาย,ต่อรถ,plian sai,,,2,th-agent-v1
+rail-station-words.ticket-gate,ประตูตรวจตั๋ว,,pratu truat tua,,,2,th-agent-v1
+rail-station-words.platform,ชานชาลา,,chanchala,,,2,th-agent-v1
+rail-station-words.ticket-office,ห้องขายตั๋ว,จำหน่ายตั๋ว,hong khai tua,,,2,th-agent-v1
+rail-station-words.waiting-room,ห้องพักคอย,,hong phak khoi,,,2,th-agent-v1
+rail-station-words.train-number,ขบวนที่,เลขขบวน,khabuan thi,,,2,th-agent-v1
+rail-station-words.carriage,ตู้,โบกี้,tu,,,2,th-agent-v1
+rail-station-words.seat,ที่นั่ง,,thinang,,,2,th-agent-v1
+rail-station-words.last-train,รถไฟเที่ยวสุดท้าย,,rotfai thiao sutthai,,,2,th-agent-v1
+rail-station-words.delayed,ล่าช้า,ดีเลย์,lacha,,,2,th-agent-v1
+rail-station-words.final-stop,สถานีปลายทาง,,sathani plai thang,,,2,th-agent-v1
+common-signs.open-on,เปิด,,poet,,,2,th-agent-v1
+common-signs.closed-off,ปิด,,pit,,,2,th-agent-v1
+common-signs.occupied,ไม่ว่าง,,mai wang,,,2,th-agent-v1
+common-signs.vacant,ว่าง,,wang,,,2,th-agent-v1
+common-signs.caution,ระวัง,,rawang,,,2,th-agent-v1
+common-signs.no-entry,ห้ามเข้า,,ham khao,,,2,th-agent-v1
+common-signs.no-smoking,ห้ามสูบบุหรี่,,ham sup buri,,,2,th-agent-v1
+common-signs.no-photography,ห้ามถ่ายรูป,,ham thai rup,,,2,th-agent-v1
+common-signs.do-not-touch,ห้ามจับ,,ham chap,,,2,th-agent-v1
+common-signs.temporarily-closed,ปิดชั่วคราว,ปิดปรับปรุง,pit chuakhrao,,,2,th-agent-v1
+common-signs.open-operating,เปิดให้บริการ,,poet hai borikan,,,2,th-agent-v1
+common-signs.closed,ปิดให้บริการ,,pit hai borikan,,,2,th-agent-v1
+common-signs.stopped-stop,หยุด,,yut,,,2,th-agent-v1
+transit-rides.do-i-need-to-validate,ต้องแตะบัตรก่อนไหม,,tong tae bat kon mai,,tap the card first?,2,th-agent-v1
+rail-station-words.ticket-validator,เครื่องตรวจตั๋ว,เครื่องอ่านบัตร,khrueang truat tua,,,1,th-agent-v1

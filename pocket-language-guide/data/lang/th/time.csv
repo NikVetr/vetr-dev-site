@@ -1,0 +1,43 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,กี่โมงแล้ว,,ki mong laeo,,,2,th-agent-v1
+time-scheduling.how-many-minutes,กี่นาที,,ki nathi,,,2,th-agent-v1
+time-scheduling.what-time-should-we-meet,เจอกันกี่โมง,,choe kan ki mong,,,2,th-agent-v1
+time-scheduling.can-we-change-the-time,เลื่อนเวลาได้ไหม,,luen wela dai mai,,,2,th-agent-v1
+time-scheduling.when-is-convenient,สะดวกเมื่อไร,,saduak muearai,,,2,th-agent-v1
+time-scheduling.what-is-today-s-date,วันนี้วันที่เท่าไร,,wanni wanthi thaorai,,,2,th-agent-v1
+time-scheduling.what-day-is-it-today,วันนี้วันอะไร,,wanni wan arai,,,2,th-agent-v1
+time-scheduling.what-time-does-it-open,เปิดกี่โมง,,poet ki mong,,,2,th-agent-v1
+time-scheduling.what-time-does-it-close,ปิดกี่โมง,,pit ki mong,,,2,th-agent-v1
+time-scheduling.how-long-does-it-take,ใช้เวลานานเท่าไร,,chai wela nan thaorai,,,2,th-agent-v1
+time-words.today,วันนี้,,wanni,,,2,th-agent-v1
+time-words.tomorrow,พรุ่งนี้,,phrungni,,,2,th-agent-v1
+time-words.yesterday,เมื่อวาน,,mueawan,,,2,th-agent-v1
+time-words.this-week,อาทิตย์นี้,,athit ni,,,2,th-agent-v1
+time-words.next-week,อาทิตย์หน้า,,athit na,,,2,th-agent-v1
+time-words.morning,เช้า,,chao,,,2,th-agent-v1
+time-words.afternoon,บ่าย,,bai,,,2,th-agent-v1
+time-words.evening,เย็น,,yen,,,2,th-agent-v1
+time-words.spring,ฤดูใบไม้ผลิ,,ruedu baimaiphli,,,2,th-agent-v1
+time-words.summer,ฤดูร้อน,,ruedu ron,,,2,th-agent-v1
+time-words.fall,ฤดูใบไม้ร่วง,,ruedu baimairuang,,,2,th-agent-v1
+time-words.winter,ฤดูหนาว,,ruedu nao,,,2,th-agent-v1
+time-words.night,กลางคืน,,klangkhuen,,,2,th-agent-v1
+days-of-week.monday,วันจันทร์,,wan chan,,,2,th-agent-v1
+days-of-week.tuesday,วันอังคาร,,wan angkhan,,,2,th-agent-v1
+days-of-week.wednesday,วันพุธ,,wan phut,,,2,th-agent-v1
+days-of-week.thursday,วันพฤหัส,วันพฤหัสบดี,wan pharuehat,,,2,th-agent-v1
+days-of-week.friday,วันศุกร์,,wan suk,,,2,th-agent-v1
+days-of-week.saturday,วันเสาร์,,wan sao,,,2,th-agent-v1
+days-of-week.sunday,วันอาทิตย์,,wan athit,,,2,th-agent-v1
+months.january,มกราคม,ม.ค.,makarakhom,,,2,th-agent-v1
+months.february,กุมภาพันธ์,ก.พ.,kumphaphan,,,2,th-agent-v1
+months.march,มีนาคม,มี.ค.,minakhom,,,2,th-agent-v1
+months.april,เมษายน,เม.ย.,mesayon,,,2,th-agent-v1
+months.may,พฤษภาคม,พ.ค.,phruetsaphakhom,,,2,th-agent-v1
+months.june,มิถุนายน,มิ.ย.,mithunayon,,,2,th-agent-v1
+months.july,กรกฎาคม,ก.ค.,karakadakhom,,,2,th-agent-v1
+months.august,สิงหาคม,ส.ค.,singhakhom,,,2,th-agent-v1
+months.september,กันยายน,ก.ย.,kanyayon,,,2,th-agent-v1
+months.october,ตุลาคม,ต.ค.,tulakhom,,,2,th-agent-v1
+months.november,พฤศจิกายน,พ.ย.,phruetsachikayon,,,2,th-agent-v1
+months.december,ธันวาคม,ธ.ค.,thanwakhom,,,2,th-agent-v1

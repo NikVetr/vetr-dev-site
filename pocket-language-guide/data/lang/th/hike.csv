@@ -1,0 +1,66 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+trail-words.trail,เส้นทางเดินป่า,เส้นทาง,sen thang doen pa,,,2,th-agent-v1
+trail-words.trailhead,จุดเริ่มเส้นทาง,,chut roem sen thang,,,2,th-agent-v1
+trail-words.summit,ยอดเขา,,yot khao,,,2,th-agent-v1
+trail-words.viewpoint,จุดชมวิว,,chut chom wiu,,,2,th-agent-v1
+trail-words.cableway,กระเช้าไฟฟ้า,,krachao faifa,,,2,th-agent-v1
+trail-words.shuttle-bus,รถรับส่ง,,rot rap song,,,2,th-agent-v1
+trail-words.park-shuttle,รถรับส่งในอุทยาน,,rot rap song nai utthayan,,,2,th-agent-v1
+trail-words.steps,ขั้นบันได,,khan bandai,,,2,th-agent-v1
+trail-words.up-uphill,ขึ้นเขา,,khuen khao,,,2,th-agent-v1
+trail-words.down-downhill,ลงเขา,,long khao,,,2,th-agent-v1
+trail-words.one-way,ทางเดียว,,thang diao,,,2,th-agent-v1
+trail-words.round-trip,ไปกลับ,,pai klap,,,2,th-agent-v1
+weather.forecast,พยากรณ์อากาศ ว่าอย่างไร,,phayakon akat wa yangrai,,,2,th-agent-v1
+weather.will-it-rain,วันนี้ฝนจะตกไหม,,wanni fon cha tok mai,,,2,th-agent-v1
+weather.is-it-safe-today,วันนี้ปลอดภัยไหม,,wanni plotphai mai,,,2,th-agent-v1
+weather.how-cold-at-night,กลางคืนหนาวแค่ไหน,,klangkhuen nao khaenai,,,2,th-agent-v1
+weather.rain,ฝน,,fon,,,2,th-agent-v1
+weather.snow,หิมะ,,hima,,,2,th-agent-v1
+weather.wind,ลม,,lom,,,2,th-agent-v1
+weather.storm,พายุ,,phayu,,,2,th-agent-v1
+weather.ice,น้ำแข็ง,,nam khaeng,,ice on the ground,2,th-agent-v1
+weather.fog,หมอก,,mok,,,2,th-agent-v1
+weather.heat,ร้อน,,ron,,,2,th-agent-v1
+weather.cold,หนาว,,nao,,,2,th-agent-v1
+weather.humid,ชื้น,,chuen,,,2,th-agent-v1
+weather.sunrise,พระอาทิตย์ขึ้น,,phra athit khuen,,,2,th-agent-v1
+weather.flood,น้ำท่วม,,nam thuam,,,2,th-agent-v1
+weather.avalanche-risk,เสี่ยงหิมะถล่ม,เสี่ยงดินถล่ม,siang hima thalom,,,1,th-agent-v1
+hiking-parks.is-this-the-way-to,ทางนี้ไป{}ใช่ไหม,,thang ni pai {} chai mai,,,2,th-agent-v1
+hiking-parks.where-is-the-trailhead,จุดเริ่มเส้นทาง อยู่ไหน,,chut roem sen thang yu nai,,,2,th-agent-v1
+hiking-parks.how-long-to-the-summit,ขึ้นยอดเขานานเท่าไร,,khuen yot khao nan thaorai,,,2,th-agent-v1
+hiking-parks.how-long-to-the-viewpoint,ไปจุดชมวิวนานเท่าไร,,pai chut chom wiu nan thaorai,,,2,th-agent-v1
+hiking-parks.which-route-is-easier,ทางไหนง่ายกว่า,,thang nai ngai kwa,,,2,th-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,มือใหม่เดินได้ไหม,,mue mai doen dai mai,,,2,th-agent-v1
+trail-conditions.how-long-is-the-full-route,ทางทั้งหมดไกลเท่าไร,,thang thangmot klai thaorai,,,2,th-agent-v1
+trail-conditions.can-we-return-the-same-way,กลับทางเดิมได้ไหม,,klap thang doem dai mai,,,2,th-agent-v1
+trail-conditions.can-we-return-before-dark,กลับก่อนมืดได้ไหม,,klap kon muet dai mai,,,2,th-agent-v1
+trail-conditions.is-the-trail-open,เส้นทางเปิดไหม,,sen thang poet mai,,,2,th-agent-v1
+trail-conditions.is-the-route-steep,ทางชันไหม,,thang chan mai,,,2,th-agent-v1
+trail-conditions.is-the-path-slippery,ทางลื่นไหม,,thang luen mai,,,2,th-agent-v1
+trail-transport.how-long-is-the-queue,ต่อคิวนานไหม,,to khiu nan mai,,,2,th-agent-v1
+trail-transport.what-time-is-the-last-shuttle,รถรับส่งคันสุดท้าย กี่โมง,,rot rap song khan sutthai ki mong,,,2,th-agent-v1
+trail-transport.when-does-the-cableway-stop,กระเช้าปิดกี่โมง,,krachao pit ki mong,,,2,th-agent-v1
+trail-transport.where-can-we-buy-water,ซื้อน้ำได้ที่ไหน,,sue nam dai thi nai,,,2,th-agent-v1
+trail-transport.where-can-we-refill-water,เติมน้ำได้ที่ไหน,,toem nam dai thi nai,,,2,th-agent-v1
+trail-transport.is-there-cell-signal-here,ที่นี่มีสัญญาณไหม,,thi ni mi sanyan mai,,,2,th-agent-v1
+trail-transport.do-you-have-a-map,มีแผนที่ไหม,,mi phaenthi mai,,,2,th-agent-v1
+trail-transport.how-long-is-the-wait,รอนานเท่าไร,,ro nan thaorai,,,2,th-agent-v1
+trail-warnings.open,เปิด,,poet,,,2,th-agent-v1
+trail-warnings.closed,ปิด,,pit,,,2,th-agent-v1
+trail-warnings.maintenance,ซ่อมบำรุง,ปรับปรุง,som bamrung,,,2,th-agent-v1
+trail-warnings.steep-slope,ทางลาดชัน,,thang lat chan,,,2,th-agent-v1
+trail-warnings.caution-slippery,ระวังพื้นลื่น,,rawang phuen luen,,,2,th-agent-v1
+trail-warnings.danger,อันตราย,,antarai,,,2,th-agent-v1
+trail-warnings.beware-falling-rocks,ระวังหินร่วง,,rawang hin ruang,,,2,th-agent-v1
+trail-warnings.first-aid-station,จุดปฐมพยาบาล,,chut pathom phayaban,,,2,th-agent-v1
+trail-warnings.service-suspended,งดให้บริการ,หยุดให้บริการ,ngot hai borikan,,,2,th-agent-v1
+trail-landmarks.trail-marker,ป้ายบอกทาง,,pai bok thang,,,2,th-agent-v1
+trail-landmarks.fork-junction,ทางแยก,,thang yaek,,,2,th-agent-v1
+trail-landmarks.boardwalk-cliff-path,ทางเดินไม้,ทางเลียบหน้าผา,thang doen mai,,,2,th-agent-v1
+trail-landmarks.start,จุดเริ่มต้น,,chut roemton,,,2,th-agent-v1
+trail-landmarks.end,จุดสิ้นสุด,,chut sinsut,,,2,th-agent-v1
+trail-landmarks.elevation,ความสูง,ระดับน้ำทะเล,khwam sung,,,2,th-agent-v1
+trail-landmarks.sunset,พระอาทิตย์ตก,,phra athit tok,,,2,th-agent-v1
+trail-landmarks.water-point,จุดเติมน้ำ,,chut toem nam,,,2,th-agent-v1

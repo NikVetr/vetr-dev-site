@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,อยากไป{},,yak pai {},,,2,th-agent-v1
+utility-templates.please-give-me,ขอ{}หน่อย,,kho {} noi,,,2,th-agent-v1
+utility-templates.may-i,ขอ{}ได้ไหม,,kho {} dai mai,,,2,th-agent-v1
+utility-templates.please-do-not-add,ไม่ใส่{},,mai sai {},,,2,th-agent-v1
+utility-templates.do-you-have,มี{}ไหม,,mi {} mai,,,2,th-agent-v1
+utility-templates.please-write-the-number,ช่วยเขียนตัวเลข,,chuai khian tualek,,,2,th-agent-v1
+utility-templates.i-need,ต้องการ{},,tongkan {},,,2,th-agent-v1
+utility-templates.is-there-nearby,แถวนี้มี{}ไหม,,thaeo ni mi {} mai,,,2,th-agent-v1
+utility-templates.how-much-is,{}เท่าไร,,{} thaorai,,,2,th-agent-v1
+utility-templates.is-this,นี่{}ใช่ไหม,,ni {} chai mai,,,2,th-agent-v1
+utility-templates.please,ขอ{},,kho {},,,2,th-agent-v1
+utility-templates.i-am-looking-for,หา{},,ha {},,,2,th-agent-v1
+utility-templates.do-you-accept,รับ{}ไหม,,rap {} mai,,,2,th-agent-v1
+utility-templates.i-cannot-find,หา{}ไม่เจอ,,ha {} mai choe,,,2,th-agent-v1
+utility-templates.there-is-a-problem-with,{}มีปัญหา,,{} mi panha,,,2,th-agent-v1

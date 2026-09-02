@@ -1,0 +1,138 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+emergency-medical.help,ช่วยด้วย,,chuai duai,,,2,th-agent-v1
+emergency-medical.please-call-an-ambulance,ช่วยเรียกรถพยาบาล,,chuai riak rot phayaban,,,2,th-agent-v1
+emergency-medical.i-need-a-doctor,ต้องการหมอ,,tongkan mo,,,2,th-agent-v1
+emergency-medical.i-am-sick,ฉันป่วย,,chan puai,,,2,th-agent-v1
+emergency-medical.i-am-injured,ฉันบาดเจ็บ,,chan batchep,,,2,th-agent-v1
+emergency-medical.it-hurts-here,เจ็บตรงนี้,,chep trong ni,,,2,th-agent-v1
+emergency-medical.where-is-a-pharmacy,ร้านขายยาอยู่ไหน,,ran khai ya yu nai,,,2,th-agent-v1
+emergency-medical.please-take-me-to-a-hospital,ช่วยพาไปโรงพยาบาล,,chuai pha pai rong phayaban,,,2,th-agent-v1
+emergency-medical.i-feel-unwell,ไม่สบาย,,mai sabai,,,2,th-agent-v1
+emergency-medical.this-is-an-emergency,ฉุกเฉิน,,chukchoen,,,2,th-agent-v1
+emergency-medical.i-am-having-a-severe-allergic-reaction,มีอาการแพ้รุนแรง,anaphylaxis,mi akan phae runraeng,,,2,th-agent-v1
+emergency-medical.i-cannot-breathe,หายใจไม่ออก,,haichai mai ok,,,2,th-agent-v1
+emergency-medical.i-am-bleeding-badly,เลือดออกมาก,,lueat ok mak,,,2,th-agent-v1
+emergency-medical.i-have-chest-pain,เจ็บหน้าอก,,chep na ok,,,2,th-agent-v1
+emergency-medical.this-person-is-unconscious,คนนี้หมดสติ,,khon ni mot sati,,,2,th-agent-v1
+emergency-medical.where-is-the-nearest-hospital,โรงพยาบาลใกล้สุด อยู่ไหน,,rong phayaban klai sut yu nai,,,2,th-agent-v1
+emergency-medical.what-is-the-emergency-number,เบอร์ฉุกเฉินอะไร,,boe chukchoen arai,,,2,th-agent-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,มีหมอพูดอังกฤษได้ไหม,,mi mo phut angkrit dai mai,,,2,th-agent-v1
+emergency-medical.i-think-a-bone-is-broken,กระดูกน่าจะหัก,,kraduk na cha hak,,,2,th-agent-v1
+emergency-medical.please-call-my-emergency-contact,ช่วยโทรหา คนติดต่อฉุกเฉิน,,chuai tho ha khon tit to chukchoen,,,2,th-agent-v1
+emergency-medical.i-have-travel-insurance,มีประกันเดินทาง,,mi prakan doen thang,,,2,th-agent-v1
+medical-conditions.i-am-diabetic,เป็นเบาหวาน,,pen baowan,,,2,th-agent-v1
+medical-conditions.i-need-insulin,ต้องการอินซูลิน,,tongkan insulin,,,2,th-agent-v1
+medical-conditions.i-have-asthma,เป็นโรคหอบหืด,,pen rok hop huet,,,2,th-agent-v1
+medical-conditions.i-have-a-heart-condition,เป็นโรคหัวใจ,,pen rok huachai,,,2,th-agent-v1
+medical-conditions.i-am-allergic-to-penicillin,แพ้ยาเพนิซิลลิน,,phae ya phenisillin,,,2,th-agent-v1
+medical-conditions.i-have-epilepsy,เป็นโรคลมชัก,,pen rok lomchak,,,2,th-agent-v1
+medical-conditions.my-blood-sugar-is-low,น้ำตาลในเลือดต่ำ,,namtan nai lueat tam,,,2,th-agent-v1
+medical-conditions.i-need-my-inhaler,ต้องการยาพ่น,,tongkan ya phon,,,2,th-agent-v1
+medical-conditions.i-am-pregnant,ตั้งครรภ์,ท้อง,tangkhan,,,2,th-agent-v1
+medical-conditions.i-carry-an-adrenaline-injector,มีปากกาฉีดอะดรีนาลีน,adrenaline auto-injector,mi pakka chit adrinalin,,,2,th-agent-v1
+medical-conditions.i-take-medicine-for,กินยารักษา{},,kin ya raksa {},,,2,th-agent-v1
+medical-conditions.i-take-blood-thinners,กินยาละลายลิ่มเลือด,ยาต้านการแข็งตัวของเลือด,kin ya lalai lim lueat,,,2,th-agent-v1
+medical-conditions.medicine-allergy,แพ้ยา: {},,phae ya: {},,,2,th-agent-v1
+medical-conditions.this-card-lists-my-conditions,บัตรนี้บอกโรคของฉัน,,bat ni bok rok khong chan,,,2,th-agent-v1
+medical-conditions.this-is-my-medicine,นี่ยาของฉัน,,ni ya khong chan,,,2,th-agent-v1
+medical-conditions.please-give-me-sugar-or-juice,ขอน้ำตาลหรือน้ำผลไม้,,kho namtan rue nam phonlamai,,,2,th-agent-v1
+medical-conditions.inject-it-into-my-outer-thigh,ฉีดที่ต้นขาด้านนอก,,chit thi tonkha dan nok,,,2,th-agent-v1
+medical-conditions.my-blood-type-is,กลุ่มเลือด {},,klum lueat {},,,2,th-agent-v1
+medical-conditions.do-not-give-me,ห้ามให้ {},,ham hai {},,,2,th-agent-v1
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,แพ้แอสไพริน และไอบูโพรเฟน,,phae aetphairin lae aibuphrofen,,,2,th-agent-v1
+medical-conditions.my-injector-is-in-my-bag,ยาฉีดอยู่ในกระเป๋า,,ya chit yu nai krapao,,,2,th-agent-v1
+medical-conditions.i-am-allergic-to-sulfa-drugs,แพ้ยาซัลฟา,,phae ya sanfa,,,2,th-agent-v1
+pharmacy-symptoms.which-pharmacy-is-open-now,ร้านขายยาไหนเปิดอยู่,,ran khai ya nai poet yu,,,2,th-agent-v1
+pharmacy-symptoms.i-need-medicine-for,ขอยาแก้{},,kho ya kae {},,,2,th-agent-v1
+pharmacy-symptoms.i-have-a-fever,มีไข้,,mi khai,,,2,th-agent-v1
+pharmacy-symptoms.i-have-diarrhea,ท้องเสีย,,thong sia,,,2,th-agent-v1
+pharmacy-symptoms.where-is-an-all-night-pharmacy,ร้านขายยาเปิดดึก อยู่ไหน,,ran khai ya poet duek yu nai,,,2,th-agent-v1
+pharmacy-symptoms.painkiller,ยาแก้ปวด,,ya kae puat,,,2,th-agent-v1
+pharmacy-symptoms.do-i-need-a-prescription,ต้องมีใบสั่งยาไหม,,tong mi bai sang ya mai,,,2,th-agent-v1
+pharmacy-symptoms.i-have-a-headache,ปวดหัว,,puat hua,,,2,th-agent-v1
+pharmacy-symptoms.paracetamol-acetaminophen,พาราเซตามอล,พารา,pharasetamon,,,2,th-agent-v1
+pharmacy-symptoms.how-much-should-i-take,กินครั้งละเท่าไร,,kin khrang la thaorai,,,2,th-agent-v1
+pharmacy-symptoms.i-am-vomiting,อาเจียน,,achian,,,2,th-agent-v1
+pharmacy-symptoms.rehydration-salts,ผงเกลือแร่,ORS,phong kluea rae,,,2,th-agent-v1
+pharmacy-symptoms.how-many-times-a-day,วันละกี่ครั้ง,,wan la ki khrang,,,2,th-agent-v1
+pharmacy-symptoms.i-have-a-stomach-ache,ปวดท้อง,,puat thong,,,2,th-agent-v1
+pharmacy-symptoms.i-have-a-cough,ไอ,,ai,,,2,th-agent-v1
+pharmacy-symptoms.antihistamine,ยาแก้แพ้,,ya kae phae,,,2,th-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,ยาแก้ท้องเสีย,อิมโมเดียม,ya kae thong sia,,,2,th-agent-v1
+pharmacy-symptoms.is-this-safe-to-take-with,กินกับ {} ได้ไหม,,kin kap {} dai mai,,,2,th-agent-v1
+pharmacy-symptoms.i-feel-dizzy,เวียนหัว,,wian hua,,,2,th-agent-v1
+pharmacy-symptoms.ibuprofen,ไอบูโพรเฟน,,aibuphrofen,,,2,th-agent-v1
+pharmacy-symptoms.i-have-a-sore-throat,เจ็บคอ,,chep kho,,,2,th-agent-v1
+pharmacy-symptoms.can-i-get-this-medicine-here,มียานี้ไหม,,mi ya ni mai,,,2,th-agent-v1
+pharmacy-symptoms.bandage,ผ้าพันแผล,พลาสเตอร์,pha phan phlae,,,2,th-agent-v1
+pharmacy-symptoms.the-pain-is-severe,ปวดมาก,,puat mak,,,2,th-agent-v1
+pharmacy-symptoms.antiseptic,ยาใส่แผล,เบตาดีน,ya sai phlae,,,2,th-agent-v1
+pharmacy-symptoms.i-feel-nauseous,คลื่นไส้,,khluen sai,,,2,th-agent-v1
+pharmacy-symptoms.i-have-a-rash,มีผื่น,,mi phuen,,,2,th-agent-v1
+pharmacy-symptoms.before-or-after-food,ก่อนหรือหลังอาหาร,,kon rue lang ahan,,,2,th-agent-v1
+pharmacy-symptoms.i-think-it-is-infected,น่าจะติดเชื้อ,,na cha tit chuea,,,2,th-agent-v1
+pharmacy-symptoms.motion-sickness-tablets,ยาแก้เมารถ,ดรามามีน,ya kae mao rot,,,2,th-agent-v1
+pharmacy-symptoms.i-have-a-cut,มีบาดแผล,,mi batphlae,,,2,th-agent-v1
+pharmacy-symptoms.antacid,ยาลดกรด,อีโน,ya lot krot,,,2,th-agent-v1
+pharmacy-symptoms.i-have-a-burn,มีแผลไหม้,,mi phlae mai,,,2,th-agent-v1
+pharmacy-symptoms.it-started-days-ago,เริ่มมา {} วัน,,roem ma {} wan,,,2,th-agent-v1
+pharmacy-symptoms.cough-medicine,ยาแก้ไอ,,ya kae ai,,,2,th-agent-v1
+pharmacy-symptoms.is-this-safe-during-pregnancy,คนท้องกินได้ไหม,,khon thong kin dai mai,,,2,th-agent-v1
+body-parts.head,หัว,,hua,,,2,th-agent-v1
+body-parts.stomach,ท้อง,,thong,,,2,th-agent-v1
+body-parts.back,หลัง,,lang,,,2,th-agent-v1
+body-parts.throat,คอ,,kho,,,2,th-agent-v1
+body-parts.tooth,ฟัน,,fan,,,2,th-agent-v1
+body-parts.chest,หน้าอก,,na ok,,,2,th-agent-v1
+body-parts.eye,ตา,,ta,,,2,th-agent-v1
+body-parts.ear,หู,,hu,,,2,th-agent-v1
+body-parts.leg,ขา,,kha,,,2,th-agent-v1
+body-parts.arm,แขน,,khaen,,,2,th-agent-v1
+body-parts.foot,เท้า,,thao,,,2,th-agent-v1
+body-parts.hand,มือ,,mue,,,2,th-agent-v1
+body-parts.knee,เข่า,,khao,,,2,th-agent-v1
+body-parts.ankle,ข้อเท้า,,kho thao,,,2,th-agent-v1
+body-parts.skin,ผิวหนัง,,phiu nang,,,2,th-agent-v1
+lost-rescue.i-lost-my-passport,พาสปอร์ตหาย,หนังสือเดินทางหาย,phatpot hai,,,2,th-agent-v1
+lost-rescue.i-lost-my-phone,มือถือหาย,,muethue hai,,,2,th-agent-v1
+lost-rescue.please-call-the-police,ช่วยเรียกตำรวจ,,chuai riak tamruat,,,2,th-agent-v1
+lost-rescue.we-are-here,เราอยู่ที่นี่,,rao yu thi ni,,,2,th-agent-v1
+lost-rescue.please-look-at-my-location-pin,ดูหมุดตำแหน่งนี้,,du mut tamnaeng ni,,,2,th-agent-v1
+lost-rescue.i-cannot-walk,เดินไม่ได้,,doen mai dai,,,2,th-agent-v1
+lost-rescue.i-sprained-my-ankle,ข้อเท้าพลิก,,kho thao phlik,,,2,th-agent-v1
+lost-rescue.please-contact-rescue,ช่วยแจ้งกู้ภัย,,chuai chaeng kuphai,,,2,th-agent-v1
+lost-rescue.my-companion-is-missing,เพื่อนหาย,,phuean hai,,,2,th-agent-v1
+lost-rescue.please-look-at-my-current-location,ดูตำแหน่งปัจจุบันนี้,,du tamnaeng patchuban ni,,,2,th-agent-v1
+lost-rescue.my-child-is-missing,ลูกหาย,,luk hai,,,2,th-agent-v1
+lost-rescue.i-do-not-know-where-i-am,ไม่รู้ว่าอยู่ที่ไหน,,mai ru wa yu thi nai,,,2,th-agent-v1
+lost-rescue.my-friend-is-hurt,เพื่อนบาดเจ็บ,,phuean batchep,,,2,th-agent-v1
+lost-rescue.i-lost-my-wallet,กระเป๋าเงินหาย,,krapao ngoen hai,,,2,th-agent-v1
+lost-rescue.i-lost-my-bag,กระเป๋าหาย,,krapao hai,,,2,th-agent-v1
+lost-rescue.where-is-lost-and-found,ศูนย์ของหายอยู่ไหน,,sun khong hai yu nai,,,2,th-agent-v1
+lost-rescue.i-cannot-find-my-hotel,หาโรงแรมไม่เจอ,,ha rongraem mai choe,,,2,th-agent-v1
+lost-rescue.i-left-it-on-the-train,ลืมไว้บนรถไฟ,,luem wai bon rotfai,,,2,th-agent-v1
+lost-rescue.i-cannot-get-down,ลงไม่ได้,,long mai dai,,,2,th-agent-v1
+police-consulate.where-is-the-police-station,สถานีตำรวจอยู่ไหน,สถานีตำรวจท่องเที่ยวอยู่ไหน,sathani tamruat yu nai,,,2,th-agent-v1
+police-consulate.i-want-to-report-a-theft,ขอแจ้งความ,,kho chaeng khwam,,,2,th-agent-v1
+police-consulate.my-bag-was-stolen,กระเป๋าถูกขโมย,,krapao thuk khamoi,,,2,th-agent-v1
+police-consulate.my-passport-was-stolen,พาสปอร์ตถูกขโมย,,phatpot thuk khamoi,,,2,th-agent-v1
+police-consulate.someone-is-following-me,มีคนตามฉัน,,mi khon tam chan,,,2,th-agent-v1
+police-consulate.i-need-a-written-police-report,ขอใบแจ้งความ,,kho bai chaeng khwam,,,2,th-agent-v1
+police-consulate.i-want-to-contact-my-embassy,ขอติดต่อสถานทูต,,kho tit to sathan thut,,,2,th-agent-v1
+police-consulate.i-need-it-for-my-insurance,ต้องใช้เคลมประกัน,,tong chai khlem prakan,,,2,th-agent-v1
+police-consulate.i-need-an-interpreter,ขอล่าม,,kho lam,,,2,th-agent-v1
+police-consulate.please-leave-me-alone,อย่ามายุ่งกับฉัน,,ya ma yung kap chan,,,2,th-agent-v1
+police-consulate.i-was-robbed,ถูกปล้น,,thuk plon,,,2,th-agent-v1
+police-consulate.i-want-a-lawyer,ขอทนาย,,kho thanai,,,2,th-agent-v1
+police-consulate.please-notify-my-consulate,ช่วยแจ้งสถานกงสุล,,chuai chaeng sathan kongsun,,,2,th-agent-v1
+police-consulate.i-am-calling-the-police,จะโทรเรียกตำรวจ,,cha tho riak tamruat,,,2,th-agent-v1
+police-consulate.am-i-under-arrest,ฉันถูกจับไหม,,chan thuk chap mai,,,2,th-agent-v1
+police-consulate.no-thank-you-i-am-not-interested,ไม่สนใจ ขอบคุณ,,mai sonchai khopkhun,,,2,th-agent-v1
+police-consulate.someone-attacked-me,มีคนทำร้ายฉัน,,mi khon thamrai chan,,,2,th-agent-v1
+police-consulate.i-did-not-agree-to-this-price,ไม่ได้ตกลงราคานี้,,mai dai toklong rakha ni,,,2,th-agent-v1
+police-consulate.please-write-the-report-number,ช่วยเขียน เลขที่แจ้งความ,,chuai khian lekthi chaeng khwam,,,2,th-agent-v1
+police-consulate.it-happened-here,เกิดที่นี่,,koet thi ni,,,2,th-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,ขอสำเนาใบแจ้งความ,,kho samnao bai chaeng khwam,,,2,th-agent-v1
+police-consulate.i-will-not-sign-anything-i-cannot-read,อ่านไม่ออก จะไม่เซ็น,,"an mai ok, cha mai sen",,,2,th-agent-v1
+police-consulate.am-i-free-to-go,ไปได้ไหม,,pai dai mai,,,2,th-agent-v1
+police-consulate.i-do-not-want-to-go-with-you,ไม่ไปกับคุณ,,mai pai kap khun,,,2,th-agent-v1

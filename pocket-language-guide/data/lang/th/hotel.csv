@@ -1,0 +1,53 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+hotel-words.passport,พาสปอร์ต,หนังสือเดินทาง,phatpot,,,2,th-agent-v1
+hotel-words.room-key-card,คีย์การ์ดห้อง,บัตรห้อง,khi kat hong,,,2,th-agent-v1
+hotel-words.check-in,เช็คอิน,,chek in,,,2,th-agent-v1
+hotel-words.check-out,เช็คเอาท์,,chek out,,,2,th-agent-v1
+hotel-words.luggage-storage,ที่ฝากกระเป๋า,,thi fak krapao,,,2,th-agent-v1
+hotel-basics.are-any-rooms-available,มีห้องว่างไหม,,mi hong wang mai,,,2,th-agent-v1
+hotel-basics.there-are-two-of-us,มาสองคน,,ma song khon,,,2,th-agent-v1
+hotel-basics.i-have-a-reservation,จองไว้แล้ว,,chong wai laeo,,,2,th-agent-v1
+hotel-basics.can-i-charge-my-phone,ชาร์จมือถือได้ไหม,,chat muethue dai mai,,,2,th-agent-v1
+hotel-basics.i-would-like-a-non-smoking-room,ขอห้องปลอดบุหรี่,,kho hong plot buri,,,2,th-agent-v1
+hotel-basics.i-would-like-a-quiet-room,ขอห้องเงียบๆ,,kho hong ngiap ngiap,,,2,th-agent-v1
+hotel-basics.is-there-a-washing-machine,มีเครื่องซักผ้าไหม,,mi khrueang sakpha mai,,,2,th-agent-v1
+hotel-basics.is-wi-fi-free,ไวไฟฟรีไหม,,waifai fri mai,,,2,th-agent-v1
+hotel-basics.how-much-per-night,คืนละเท่าไร,,khuen la thaorai,,,2,th-agent-v1
+hotel-basics.is-breakfast-included,รวมอาหารเช้าไหม,,ruam ahan chao mai,,,2,th-agent-v1
+hotel-basics.may-i-see-the-room,ขอดูห้องก่อน,,kho du hong kon,,,2,th-agent-v1
+hotel-basics.for-nights,{} คืน,,{} khuen,,,2,th-agent-v1
+hotel-basics.two-beds,ขอเตียงแยก,,kho tiang yaek,,,2,th-agent-v1
+hotel-basics.is-there-air-conditioning,มีแอร์ไหม,,mi ae mai,,,2,th-agent-v1
+hotel-requests.can-i-check-out-later,เช็คเอาท์สายได้ไหม,,chek out sai dai mai,,,2,th-agent-v1
+hotel-requests.what-time-does-breakfast-start,อาหารเช้าเริ่มกี่โมง,,ahan chao roem ki mong,,,2,th-agent-v1
+hotel-requests.can-i-store-my-luggage,ฝากกระเป๋าได้ไหม,,fak krapao dai mai,,,2,th-agent-v1
+hotel-requests.no-housekeeping,ไม่ต้องทำความสะอาด,,mai tong tham khwam sa-at,,,2,th-agent-v1
+hotel-requests.another-towel-please,ขอผ้าเช็ดตัวเพิ่ม,,kho pha chet tua phoem,,,2,th-agent-v1
+hotel-requests.what-time-is-check-out,เช็คเอาท์กี่โมง,,chek out ki mong,,,2,th-agent-v1
+hotel-requests.can-i-check-in-early,เช็คอินก่อนได้ไหม,,chek in kon dai mai,,,2,th-agent-v1
+hotel-requests.another-night,ขออยู่อีกคืน,,kho yu ik khuen,,,2,th-agent-v1
+hotel-requests.is-there-a-safe,มีตู้เซฟไหม,,mi tu sef mai,,,2,th-agent-v1
+hotel-requests.another-blanket,ขอผ้าห่มเพิ่ม,,kho pha hom phoem,,,2,th-agent-v1
+hotel-requests.wake-up-call,ช่วยปลุกตอน {},,chuai pluk ton {},,,2,th-agent-v1
+room-problems.there-is-a-problem-with-the-room,ห้องมีปัญหา,,hong mi panha,,,2,th-agent-v1
+room-problems.the-air-conditioning-is-broken,แอร์เสีย,,ae sia,,,2,th-agent-v1
+room-problems.there-is-no-hot-water,ไม่มีน้ำร้อน,,mai mi nam ron,,,2,th-agent-v1
+room-problems.can-i-change-rooms,ขอเปลี่ยนห้องได้ไหม,,kho plian hong dai mai,,,2,th-agent-v1
+room-problems.the-room-is-too-noisy,ห้องเสียงดังมาก,,hong siang dang mak,,,2,th-agent-v1
+room-problems.the-key-does-not-work,คีย์การ์ดใช้ไม่ได้,,khi kat chai mai dai,,,2,th-agent-v1
+room-problems.the-toilet-will-not-flush,ชักโครกกดไม่ลง,,chakkhrok kot mai long,,,2,th-agent-v1
+room-problems.the-light-does-not-work,ไฟไม่ติด,,fai mai tit,,,2,th-agent-v1
+room-problems.please-send-someone,ช่วยส่งคนมาซ่อม,,chuai song khon ma som,,,2,th-agent-v1
+room-problems.the-heating-does-not-work,เครื่องทำความร้อน เสีย,,khrueang tham khwam ron sia,,,2,th-agent-v1
+laundry.please-wash-these-clothes,ซักผ้าให้หน่อย,,sak pha hai noi,,,2,th-agent-v1
+laundry.where-is-a-laundromat,ร้านสะดวกซักอยู่ไหน,ร้านซักรีดอยู่ไหน,ran saduak sak yu nai,,,2,th-agent-v1
+laundry.when-will-it-be-ready,เสร็จเมื่อไร,,set muearai,,,2,th-agent-v1
+laundry.how-much-per-kilo,กิโลละเท่าไร,,kilo la thaorai,,,2,th-agent-v1
+laundry.can-it-be-ready-today,เสร็จวันนี้ได้ไหม,,set wanni dai mai,,,2,th-agent-v1
+laundry.please-do-not-use-bleach,ไม่ใส่น้ำยาฟอกขาว,,mai sai namya fok khao,,,2,th-agent-v1
+laundry.laundromat,ร้านสะดวกซัก,ร้านซักรีด,ran saduak sak,,,2,th-agent-v1
+laundry.please-iron-this,รีดให้หน่อย,,rit hai noi,,,2,th-agent-v1
+laundry.detergent,ผงซักฟอก,,phong sakfok,,,2,th-agent-v1
+laundry.dry-cleaning,ซักแห้ง,,sak haeng,,,2,th-agent-v1
+laundry.dryer,เครื่องอบผ้า,,khrueang op pha,,,2,th-agent-v1
+laundry.coin-operated,หยอดเหรียญ,,yot rian,,,2,th-agent-v1

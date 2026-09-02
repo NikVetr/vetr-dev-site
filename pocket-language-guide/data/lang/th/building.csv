@@ -1,0 +1,60 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,ห้องนี้เบอร์อะไร,,hong ni boe arai,,,2,th-agent-v1
+building-help.i-am-lost,หลงทาง,,long thang,,,2,th-agent-v1
+building-help.where-is-reception,แผนกต้อนรับอยู่ไหน,,phanaek tonrap yu nai,,,2,th-agent-v1
+building-help.where-is-a-power-outlet,ปลั๊กไฟอยู่ไหน,,plak fai yu nai,,,2,th-agent-v1
+accessibility.step-free,มีทางไม่มีบันไดไหม,,mi thang mai mi bandai mai,,,2,th-agent-v1
+accessibility.wheelchair-access,รถเข็นเข้าได้ไหม,,rot khen khao dai mai,,,2,th-agent-v1
+accessibility.elevator,มีลิฟต์ไหม,,mi lip mai,,,2,th-agent-v1
+accessibility.ramp,มีทางลาดไหม,,mi thang lat mai,,,2,th-agent-v1
+accessibility.how-many-steps,บันไดกี่ขั้น,,bandai ki khan,,,2,th-agent-v1
+accessibility.cannot-climb-stairs,ขึ้นบันไดไม่ได้,,khuen bandai mai dai,,,2,th-agent-v1
+accessibility.need-to-sit-down,ขอนั่งหน่อย,,kho nang noi,,,2,th-agent-v1
+accessibility.accessible-restroom,มีห้องน้ำผู้พิการไหม,,mi hong nam phu phikan mai,,,2,th-agent-v1
+accessibility.station-assistance,สถานีมีคนช่วยไหม,,sathani mi khon chuai mai,,,2,th-agent-v1
+accessibility.help-me-carry,ช่วยยกให้หน่อย,,chuai yok hai noi,,,2,th-agent-v1
+accessibility.board-first,ขอขึ้นก่อนได้ไหม,,kho khuen kon dai mai,,,2,th-agent-v1
+accessibility.door-width,ประตูกว้างเท่าไร,,pratu kwang thaorai,,,2,th-agent-v1
+accessibility.wheelchair-width,รถเข็นกว้าง {} ซม.,,rot khen kwang {} sentimet,,,2,th-agent-v1
+accessibility.hard-of-hearing,หูไม่ค่อยได้ยิน,,hu mai khoi dai yin,,,2,th-agent-v1
+accessibility.speak-louder,ช่วยพูดดังๆหน่อย,,chuai phut dang dang noi,,,2,th-agent-v1
+accessibility.visually-impaired,ฉันพิการทางสายตา,,chan phikan thang saita,,,2,th-agent-v1
+accessibility.take-your-arm,ขอจับแขนได้ไหม,,kho chap khaen dai mai,,,2,th-agent-v1
+accessibility.guide-dog,นี่สุนัขนำทาง,,ni sunak nam thang,,,2,th-agent-v1
+in-a-building.is-this-the-correct-entrance,เข้าทางนี้ใช่ไหม,,khao thang ni chai mai,,,2,th-agent-v1
+in-a-building.do-you-have-wi-fi,มีไวไฟไหม,,mi waifai mai,,,2,th-agent-v1
+in-a-building.what-is-the-wi-fi-password,รหัสไวไฟอะไร,,rahat waifai arai,,,2,th-agent-v1
+in-a-building.which-floor,ชั้นไหน,,chan nai,,,2,th-agent-v1
+toilets.where-toilet,ห้องน้ำอยู่ไหน,,hong nam yu nai,,,2,th-agent-v1
+toilets.where-public-toilet,ห้องน้ำสาธารณะ อยู่ไหน,,hong nam satharana yu nai,,,2,th-agent-v1
+toilets.may-i-use-the-toilet,ขอใช้ห้องน้ำได้ไหม,,kho chai hong nam dai mai,,,2,th-agent-v1
+toilets.is-it-only-for-customers,เฉพาะลูกค้าไหม,,chapho lukkha mai,,,2,th-agent-v1
+toilets.toilet-wc,ห้องน้ำ,สุขา,hong nam,,,2,th-agent-v1
+toilets.is-it-free,ฟรีไหม,,fri mai,,,2,th-agent-v1
+toilets.do-i-need-a-coin,ต้องใช้เหรียญไหม,,tong chai rian mai,,,2,th-agent-v1
+toilets.is-the-tap-water-safe-to-drink,น้ำประปาดื่มได้ไหม,,nam prapa duem dai mai,,,2,th-agent-v1
+toilets.it-is-urgent,ด่วนมาก,,duan mak,,,2,th-agent-v1
+toilets.may-i-have-the-toilet-key,ขอกุญแจห้องน้ำ,,kho kunchae hong nam,,,2,th-agent-v1
+toilets.there-is-no-toilet-paper,ไม่มีกระดาษชำระ,,mai mi kradat chamra,,,2,th-agent-v1
+toilets.toilet-paper,กระดาษชำระ,ทิชชู่,kradat chamra,,,2,th-agent-v1
+toilets.it-is-out-of-order,ใช้ไม่ได้,,chai mai dai,,,2,th-agent-v1
+toilets.out-of-order,ชำรุด,เสีย,chamrut,,,2,th-agent-v1
+toilets.mens-toilet,ห้องน้ำชาย,,hong nam chai,,,2,th-agent-v1
+toilets.womens-toilet,ห้องน้ำหญิง,,hong nam ying,,,2,th-agent-v1
+toilets.drinking-water,น้ำดื่ม,,nam duem,,,2,th-agent-v1
+toilets.not-for-drinking,ห้ามดื่ม,น้ำไม่ใช่น้ำดื่ม,ham duem,,,2,th-agent-v1
+toilets.accessible-toilet,ห้องน้ำผู้พิการ,,hong nam phu phikan,,,2,th-agent-v1
+toilets.where-can-i-wash-my-hands,ล้างมือที่ไหน,,lang mue thi nai,,,2,th-agent-v1
+toilets.can-i-flush-the-paper,ทิ้งกระดาษในโถ ได้ไหม,,thing kradat nai tho dai mai,,,2,th-agent-v1
+toilets.is-there-a-toilet-on-board,บนรถมีห้องน้ำไหม,,bon rot mi hong nam mai,,,2,th-agent-v1
+toilets.the-toilet-will-not-flush,ชักโครกกดไม่ลง,,chakkhrok kot mai long,,,2,th-agent-v1
+toilets.baby-change,ที่เปลี่ยนผ้าอ้อม,,thi plian pha om,,,2,th-agent-v1
+toilets.squat-toilet,ส้วมนั่งยอง,,suam nang yong,,,2,th-agent-v1
+building-words.elevator,ลิฟต์,,lip,,,2,th-agent-v1
+building-words.stairs,บันได,,bandai,,,2,th-agent-v1
+building-words.entrance,ทางเข้า,,thang khao,,,2,th-agent-v1
+building-words.exit,ทางออก,,thang ok,,,2,th-agent-v1
+building-words.men,ชาย,,chai,,,2,th-agent-v1
+building-words.women,หญิง,,ying,,,2,th-agent-v1
+building-words.door,ประตู,,pratu,,,2,th-agent-v1
+building-words.key,กุญแจ,,kunchae,,,2,th-agent-v1
