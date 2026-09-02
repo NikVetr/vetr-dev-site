@@ -1,0 +1,43 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,nol,0,,,2,id-agent-v1
+numbers-money.y,satu,1,,,2,id-agent-v1
+numbers-money.r,dua,2,,,2,id-agent-v1
+numbers-money.s-n,tiga,3,,,2,id-agent-v1
+numbers-money.s,empat,4,,,2,id-agent-v1
+numbers-money.w,lima,5,,,2,id-agent-v1
+numbers-money.li,enam,6,,,2,id-agent-v1
+numbers-money.q,tujuh,7,,,2,id-agent-v1
+numbers-money.b,delapan,8,,,2,id-agent-v1
+numbers-money.ji,sembilan,9,,,2,id-agent-v1
+numbers-money.sh,sepuluh,10,,,2,id-agent-v1
+numbers-money.y-b-i,seratus,100,,,2,id-agent-v1
+numbers-money.y-qi-n,seribu,1.000,,Indonesian uses . for thousands,2,id-agent-v1
+numbers-money.y-w-n,sepuluh ribu,10.000,,,2,id-agent-v1
+numbers-money.b-n,setengah,1/2,,,2,id-agent-v1
+atm-cash.where-is-an-atm,ATM di mana?,,,,2,id-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,ATM ini terima kartu luar negeri?,,,,2,id-agent-v1
+atm-cash.the-atm-kept-my-card,Kartu saya tertelan ATM,,,tertelan = swallowed,2,id-agent-v1
+atm-cash.is-there-a-fee,Ada biaya?,,,,2,id-agent-v1
+atm-cash.the-card-was-declined,Kartunya ditolak,,,,2,id-agent-v1
+atm-cash.what-is-the-exchange-rate,Kursnya berapa?,,,,2,id-agent-v1
+atm-cash.no-money-came-out,Uangnya tidak keluar,,,,2,id-agent-v1
+atm-cash.where-can-i-change-money,Di mana bisa tukar uang?,,,,2,id-agent-v1
+atm-cash.the-machine-is-out-of-service,Mesinnya tidak berfungsi,Mesinnya rusak,,,2,id-agent-v1
+atm-cash.please-give-me-smaller-notes,Minta pecahan yang lebih kecil,,,,2,id-agent-v1
+atm-cash.do-you-have-change,Ada uang kecil?,,,,2,id-agent-v1
+atm-cash.may-i-pay-in,Boleh bayar pakai {}?,,,,2,id-agent-v1
+atm-cash.please-charge-in-local-currency,Tolong tagih dalam rupiah,,,,2,id-agent-v1
+atm-cash.where-can-i-get-coins,Di mana bisa dapat koin?,,,,2,id-agent-v1
+atm-cash.is-there-a-minimum-for-cards,Ada minimum untuk kartu?,,,,2,id-agent-v1
+atm-cash.atm,ATM,Mesin ATM,,,2,id-agent-v1
+atm-cash.banknote,Uang kertas,,,,2,id-agent-v1
+atm-cash.coin,Koin,Uang logam,,,2,id-agent-v1
+atm-cash.cash-only,Tunai saja,Hanya tunai,,,2,id-agent-v1
+atm-cash.fee,Biaya,Komisi,,,2,id-agent-v1
+atm-cash.change,Kembalian,,,,2,id-agent-v1
+atm-cash.exchange-rate,Kurs,,,,2,id-agent-v1
+atm-cash.bank,Bank,,,,2,id-agent-v1
+atm-cash.money-exchange,Money changer,Penukaran uang,,what the sign actually says,2,id-agent-v1
+atm-cash.pin,PIN,,,,2,id-agent-v1
+numbers-money.rupiah,rupiah,,,,2,coordinator-gaps-v2
+numbers-money.rupiah-symbol,Rp,rupiah,,,2,coordinator-gaps-v2

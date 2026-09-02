@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Bayar pakai kartu?,,,,2,id-agent-v1
+payment-receipt.pay-cash,Bayar tunai?,,,,2,id-agent-v1
+payment-receipt.pay-by-qr-code,Bayar pakai QRIS?,,,QRIS = the national QR standard,2,id-agent-v1
+payment-receipt.a-receipt-please,Minta struk,Kuitansi,,,2,id-agent-v1
+payment-receipt.please-write-the-number,Tolong tulis angkanya,,,,2,id-agent-v1
+payment-receipt.how-much-in-total,Totalnya berapa?,,,,2,id-agent-v1
+payment-receipt.can-we-pay-separately,Boleh bayar terpisah?,,,,2,id-agent-v1
+payment-receipt.is-tax-included,Sudah termasuk pajak?,,,,2,id-agent-v1
+payment-receipt.my-card-was-declined,Kartu saya ditolak,,,,2,id-agent-v1
+payment-receipt.the-bill-is-wrong,Sepertinya tagihannya keliru,,,,2,id-agent-v1
+payment-receipt.i-already-paid,Saya sudah bayar,,,,2,id-agent-v1
+shopping.i-am-just-looking,Saya lihat-lihat dulu,,,,2,id-agent-v1
+shopping.how-much-is-this,Ini berapa?,,,,2,id-agent-v1
+shopping.that-is-too-expensive,Terlalu mahal,,,,2,id-agent-v1
+shopping.can-it-be-a-little-cheaper,Boleh kurang sedikit?,,,,2,id-agent-v1
+shopping.is-there-a-discount,Ada diskon?,,,,2,id-agent-v1
+shopping.where-do-i-pay,Bayar di mana?,,,,2,id-agent-v1
+shopping.i-will-take-this,Saya ambil ini,,,,2,id-agent-v1
+shopping.what-is-this,Ini apa?,,,,2,id-agent-v1
+shopping.where-can-i-buy,Di mana bisa beli {}?,,,,2,id-agent-v1
+shopping.do-you-have-this-in-stock,Ada stoknya?,,,,2,id-agent-v1
+shopping.two-of-these,"Yang ini dua, ya",,,,2,id-agent-v1
+shopping.what-is-it-made-of,Ini bahannya apa?,,,bahan = material and ingredient,2,id-agent-v1
+color-size-returns.do-you-have-another-color,Ada warna lain?,,,,2,id-agent-v1
+color-size-returns.do-you-have-another-size,Ada ukuran lain?,,,,2,id-agent-v1
+color-size-returns.may-i-try-it-on,Boleh dicoba?,,,,2,id-agent-v1
+color-size-returns.can-i-return-it,Boleh dikembalikan?,,,,2,id-agent-v1
+color-size-returns.can-i-exchange-it,Boleh ditukar?,,,,2,id-agent-v1
+color-size-returns.do-you-have-a-bag,Ada kantong?,Kresek,,,2,id-agent-v1
+tax-refund.can-i-get-a-tax-refund,Bisa minta pengembalian PPN?,,,PPN = VAT,2,id-agent-v1
+tax-refund.is-tax-free-shopping-available,Ada layanan VAT refund?,Bebas pajak,,,2,id-agent-v1

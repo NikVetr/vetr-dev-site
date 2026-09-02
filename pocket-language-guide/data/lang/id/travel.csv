@@ -1,0 +1,113 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+directions.where-is,{} di mana?,,,,2,id-agent-v1
+directions.how-do-i-get-to,Bagaimana caranya ke {}?,,,,2,id-agent-v1
+directions.is-it-far,Jauh?,Apakah jauh?,,,2,id-agent-v1
+directions.how-long-on-foot,Jalan kaki berapa lama?,,,,2,id-agent-v1
+directions.please-show-me-on-the-map,Tolong tunjukkan di peta,,,,2,id-agent-v1
+directions.where-is-the-nearest,{} terdekat di mana?,,,,2,id-agent-v1
+directions.where-am-i,Saya di mana?,,,,2,id-agent-v1
+directions.which-way,Ke arah mana?,,,,2,id-agent-v1
+directions.can-i-walk-there,Bisa jalan kaki ke sana?,,,,2,id-agent-v1
+directions.how-far-is-it,Berapa jauh?,,,,2,id-agent-v1
+directions.which-exit,Pintu keluar mana?,,,,2,id-agent-v1
+directions.can-you-show-me-the-way,Bisa tunjukkan jalannya?,,,,2,id-agent-v1
+directions.north,utara,,,,2,id-agent-v1
+directions.south,selatan,,,,2,id-agent-v1
+directions.east,timur,,,,2,id-agent-v1
+directions.west,barat,,,,2,id-agent-v1
+quick-directions.go-straight,Lurus,,,,2,id-agent-v1
+quick-directions.turn-left,Belok kiri,,,,2,id-agent-v1
+quick-directions.turn-right,Belok kanan,,,,2,id-agent-v1
+quick-directions.this-way,Ke sini,,,,2,id-agent-v1
+quick-directions.that-way,Ke sana,,,,2,id-agent-v1
+quick-directions.on-the-left,Di kiri,,,,2,id-agent-v1
+quick-directions.on-the-right,Di kanan,,,,2,id-agent-v1
+quick-directions.across-from-here,Di seberang,,,,2,id-agent-v1
+quick-directions.in-front,Di depan,,,,2,id-agent-v1
+quick-directions.behind,Di belakang,,,,2,id-agent-v1
+taxi.please-take-me-here,Tolong antar ke sini,,,,2,id-agent-v1
+taxi.please-send-me-the-address,Tolong kirim alamatnya,,,,2,id-agent-v1
+taxi.we-need-the-east-gate-not-the-south-gate,"Gerbang Timur, bukan Gerbang Selatan",,,,2,id-agent-v1
+taxi.please-stop-here,Tolong berhenti di sini,,,,2,id-agent-v1
+taxi.can-you-wait-for-me-here,Bisa tunggu saya di sini?,,,,2,id-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,Kami harus naik kereta cepat,,,,2,id-agent-v1
+taxi.please-use-the-meter,Tolong pakai argo,,,argo = the taxi meter,2,id-agent-v1
+taxi.i-will-get-off-here,Saya turun di sini,,,,2,id-agent-v1
+transit-rides.two-tickets,Dua tiket,,,,2,id-agent-v1
+transit-rides.where-is-the-subway-station,Stasiun MRT di mana?,,,,2,id-agent-v1
+transit-rides.does-this-bus-train-go-to,Bus / kereta ini ke {}?,,,,2,id-agent-v1
+transit-rides.what-is-the-next-stop,Pemberhentian berikutnya apa?,,,,2,id-agent-v1
+transit-rides.please-tell-me-where-to-get-off,Tolong beri tahu saya turun di mana,,,,2,id-agent-v1
+transit-rides.is-this-direct,Ini langsung?,,,,2,id-agent-v1
+transit-rides.do-i-need-to-transfer,Perlu transit?,,,,2,id-agent-v1
+transit-rides.is-it-delayed,Terlambat?,,,,2,id-agent-v1
+transit-rides.i-am-in-a-hurry,Saya sedang buru-buru,,,,2,id-agent-v1
+transit-rides.which-platform,Peron mana?,,,,2,id-agent-v1
+transit-rides.what-time-is-the-next-one,Berikutnya jam berapa?,,,,2,id-agent-v1
+transit-rides.i-went-past-my-stop,Saya kelewatan,Saya terlewat,,,2,id-agent-v1
+transit-rides.can-i-use-this-ticket,Tiket ini bisa dipakai?,,,,2,id-agent-v1
+place-words.visitor-center,Pusat informasi,,,,2,id-agent-v1
+place-words.railway-station,Stasiun kereta,,,,2,id-agent-v1
+place-words.airport,Bandara,,,,2,id-agent-v1
+place-words.service-desk,Customer service,Layanan pelanggan,,,2,id-agent-v1
+place-words.bus-stop,Halte bus,,,,2,id-agent-v1
+place-words.luggage-storage,Penitipan barang,,,,2,id-agent-v1
+place-words.tourist-spot-sightseeing-area,Tempat wisata,,,,2,id-agent-v1
+border-customs.i-am-a-tourist,Saya turis,,,,2,id-agent-v1
+border-customs.here-is-my-passport,Ini paspor saya,,,,2,id-agent-v1
+border-customs.i-am-staying-for-days,Saya tinggal {} hari,,,,2,id-agent-v1
+border-customs.nothing-to-declare,Tidak ada yang dilaporkan,Nothing to declare,,,2,id-agent-v1
+border-customs.i-am-staying-at,Saya menginap di {},,,,2,id-agent-v1
+border-customs.i-am-here-for-business,Saya di sini untuk bisnis,,,,2,id-agent-v1
+border-customs.i-have-a-return-ticket,Saya punya tiket pulang,,,,2,id-agent-v1
+border-customs.i-am-visiting-family,Saya mengunjungi keluarga,,,,2,id-agent-v1
+border-customs.this-is-for-personal-use,Ini untuk pemakaian pribadi,,,,2,id-agent-v1
+border-customs.i-am-in-transit,Saya transit,,,,2,id-agent-v1
+border-customs.i-have-in-cash,Saya membawa uang tunai {},,,,2,id-agent-v1
+border-customs.this-is-a-gift,Ini hadiah,,,,2,id-agent-v1
+border-customs.where-do-i-collect-my-baggage,Ambil bagasi di mana?,,,,2,id-agent-v1
+border-customs.how-long-may-i-stay,Boleh tinggal berapa lama?,,,,2,id-agent-v1
+border-customs.i-have-a-connecting-flight,Saya ada penerbangan lanjutan,,,,2,id-agent-v1
+border-customs.may-i-have-an-entry-stamp,Boleh minta cap masuk?,,,,2,id-agent-v1
+border-customs.visa,Visa,,,,2,id-agent-v1
+border-customs.i-have-no-food-or-plants,Saya tidak bawa makanan atau tanaman,,,,2,id-agent-v1
+border-customs.passport-control,Imigrasi,,,what the airport sign says,2,id-agent-v1
+border-customs.customs,Bea Cukai,,,,2,id-agent-v1
+border-customs.baggage-claim,Pengambilan bagasi,Baggage claim,,,2,id-agent-v1
+border-customs.customs-declaration,Pemberitahuan pabean,Deklarasi bea cukai,,,2,id-agent-v1
+border-customs.arrival-card,Kartu kedatangan,e-Arrival Card,,,2,id-agent-v1
+border-customs.transit,Transit,,,,2,id-agent-v1
+border-customs.boarding-pass,Boarding pass,,,,2,id-agent-v1
+pickup-meeting.where-is-the-pickup-point,Titik penjemputan di mana?,,,,2,id-agent-v1
+pickup-meeting.please-send-me-the-pickup-point,Tolong kirim titik penjemputan,,,,2,id-agent-v1
+pickup-meeting.please-pick-us-up-here,Tolong jemput kami di sini,,,,2,id-agent-v1
+pickup-meeting.meet-us-at,Temui kami di {},,,,2,id-agent-v1
+pickup-meeting.please-call-me-a-ride,Tolong pesankan ojek online,Ojol · Gojek · Grab,,ojol = app motorbike taxi,2,id-agent-v1
+pickup-meeting.please-call-a-taxi,Tolong panggil taksi,,,,2,id-agent-v1
+rail-station-words.high-speed-rail,Kereta cepat,Whoosh,,,2,id-agent-v1
+rail-station-words.transfer,Transit,Ganti kereta,,,2,id-agent-v1
+rail-station-words.ticket-gate,Gate,Palang masuk,,"English word, used as-is",2,id-agent-v1
+rail-station-words.platform,Peron,,,,2,id-agent-v1
+rail-station-words.ticket-office,Loket tiket,,,,2,id-agent-v1
+rail-station-words.waiting-room,Ruang tunggu,,,,2,id-agent-v1
+rail-station-words.train-number,Nomor kereta,No. KA,,,2,id-agent-v1
+rail-station-words.carriage,Gerbong,Kereta,,,2,id-agent-v1
+rail-station-words.seat,Kursi,,,,2,id-agent-v1
+rail-station-words.last-train,Kereta terakhir,,,,2,id-agent-v1
+rail-station-words.delayed,Terlambat,Delay,,,2,id-agent-v1
+rail-station-words.final-stop,Stasiun terakhir,Tujuan akhir,,,2,id-agent-v1
+common-signs.open-on,Buka,Hidup · nyala,,,2,id-agent-v1
+common-signs.closed-off,Tutup,Mati,,,2,id-agent-v1
+common-signs.occupied,Terisi,Isi,,,2,id-agent-v1
+common-signs.vacant,Kosong,,,,2,id-agent-v1
+common-signs.caution,Hati-hati,Awas,,,2,id-agent-v1
+common-signs.no-entry,Dilarang masuk,,,,2,id-agent-v1
+common-signs.no-smoking,Dilarang merokok,,,,2,id-agent-v1
+common-signs.no-photography,Dilarang memotret,Dilarang mengambil gambar,,,2,id-agent-v1
+common-signs.do-not-touch,Dilarang menyentuh,Jangan disentuh,,,2,id-agent-v1
+common-signs.temporarily-closed,Tutup sementara,,,,2,id-agent-v1
+common-signs.open-operating,Beroperasi,Sedang buka,,,2,id-agent-v1
+common-signs.closed,Tutup,Libur,,,2,id-agent-v1
+common-signs.stopped-stop,Berhenti,Stop,,,2,id-agent-v1
+transit-rides.do-i-need-to-validate,Ini perlu tap in dulu?,,,"tap in / tap out, not a stamp",2,id-agent-v1
+rail-station-words.ticket-validator,Mesin validasi,Gate,,bus: mesin validasi; rail: gate,2,id-agent-v1

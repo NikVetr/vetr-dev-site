@@ -1,0 +1,43 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,Jam berapa sekarang?,,,,2,id-agent-v1
+time-scheduling.how-many-minutes,Berapa menit?,,,,2,id-agent-v1
+time-scheduling.what-time-should-we-meet,Kita bertemu jam berapa?,,,,2,id-agent-v1
+time-scheduling.can-we-change-the-time,Bisa ganti jamnya?,,,,2,id-agent-v1
+time-scheduling.when-is-convenient,Kapan waktunya cocok?,,,,2,id-agent-v1
+time-scheduling.what-is-today-s-date,Hari ini tanggal berapa?,,,,2,id-agent-v1
+time-scheduling.what-day-is-it-today,Hari ini hari apa?,,,,2,id-agent-v1
+time-scheduling.what-time-does-it-open,Buka jam berapa?,,,,2,id-agent-v1
+time-scheduling.what-time-does-it-close,Tutup jam berapa?,,,,2,id-agent-v1
+time-scheduling.how-long-does-it-take,Berapa lama?,,,,2,id-agent-v1
+time-words.today,hari ini,,,,2,id-agent-v1
+time-words.tomorrow,besok,,,,2,id-agent-v1
+time-words.yesterday,kemarin,,,,2,id-agent-v1
+time-words.this-week,minggu ini,,,,2,id-agent-v1
+time-words.next-week,minggu depan,,,,2,id-agent-v1
+time-words.morning,pagi,,,to about 11,2,id-agent-v1
+time-words.afternoon,siang,sore,,"siang to 3, sore to dusk",2,id-agent-v1
+time-words.evening,sore,malam,,,2,id-agent-v1
+time-words.fall,musim gugur,,,Indonesia has only wet and dry,2,id-agent-v1
+time-words.spring,musim semi,,,,2,id-agent-v1
+time-words.summer,musim panas,musim kemarau,,,2,id-agent-v1
+time-words.winter,musim dingin,musim hujan,,,2,id-agent-v1
+time-words.night,malam,,,,2,id-agent-v1
+days-of-week.monday,Senin,,,,2,id-agent-v1
+days-of-week.tuesday,Selasa,,,,2,id-agent-v1
+days-of-week.wednesday,Rabu,,,,2,id-agent-v1
+days-of-week.thursday,Kamis,,,,2,id-agent-v1
+days-of-week.friday,Jumat,,,,2,id-agent-v1
+days-of-week.saturday,Sabtu,,,,2,id-agent-v1
+days-of-week.sunday,Minggu,hari Minggu,,Minggu also means week,2,id-agent-v1
+months.january,Januari,,,,2,id-agent-v1
+months.february,Februari,,,,2,id-agent-v1
+months.march,Maret,,,,2,id-agent-v1
+months.april,April,,,,2,id-agent-v1
+months.may,Mei,,,,2,id-agent-v1
+months.june,Juni,,,,2,id-agent-v1
+months.july,Juli,,,,2,id-agent-v1
+months.august,Agustus,,,,2,id-agent-v1
+months.september,September,,,,2,id-agent-v1
+months.october,Oktober,,,,2,id-agent-v1
+months.november,November,,,,2,id-agent-v1
+months.december,Desember,,,,2,id-agent-v1

@@ -1,0 +1,99 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+social-basics.hello,Halo,,,,2,id-agent-v1
+social-basics.hello-polite,Selamat siang,Selamat pagi · Selamat sore,,"pagi to 11, siang to 3, sore to dusk",2,id-agent-v1
+social-basics.good-morning,Selamat pagi,,,,2,id-agent-v1
+social-basics.good-evening,Selamat malam,,,,2,id-agent-v1
+social-basics.goodbye,Sampai jumpa,Selamat tinggal,,,2,id-agent-v1
+social-basics.thank-you,Terima kasih,,,,2,id-agent-v1
+social-basics.you-are-welcome,Sama-sama,,,,2,id-agent-v1
+social-basics.excuse-me-sorry,Permisi,Maaf,,permisi to pass or get attention,2,id-agent-v1
+social-basics.sorry,Maaf,,,,2,id-agent-v1
+social-basics.no-problem,Tidak apa-apa,Nggak apa-apa,,,2,id-agent-v1
+social-basics.i-do-not-know,Saya tidak tahu,,,,2,id-agent-v1
+social-basics.good-night,Selamat tidur,Selamat malam,,,2,id-agent-v1
+social-basics.okay-fine-i-am-okay,Saya baik-baik saja,Oke,,,2,id-agent-v1
+communication.i-do-not-speak-this-language,Saya tidak bisa bahasa ini,,,,2,id-agent-v1
+communication.i-speak-only-a-little-of-this,Saya bisa sedikit bahasa ini,,,,2,id-agent-v1
+communication.do-you-speak-english,Bisa bahasa Inggris?,,,,2,id-agent-v1
+communication.please-speak-more-slowly,Tolong bicara lebih lambat,,,,2,id-agent-v1
+communication.i-do-not-understand-spoken,Saya tidak paham,Saya nggak paham,,,2,id-agent-v1
+communication.i-cannot-read-understand,Saya tidak bisa baca ini,,,,2,id-agent-v1
+communication.please-say-it-again,Tolong ulangi,,,,2,id-agent-v1
+communication.please-write-it-down,Tolong tuliskan,,,,2,id-agent-v1
+communication.please-wait-a-moment,"Tunggu sebentar, ya",Mohon tunggu sebentar,,,2,id-agent-v1
+communication.can-you-help-me,Bisa bantu saya?,,,,2,id-agent-v1
+communication.please-show-me-the-text,Tolong tunjukkan tulisannya,,,,2,id-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Saya tidak menangkap ucapannya,,,,2,id-agent-v1
+communication.i-do-not-understand,Saya tidak mengerti,,,,2,id-agent-v1
+communication.i-cannot-read-it,Saya tidak bisa membacanya,,,,2,id-agent-v1
+quick-responses.please-go-ahead,Silakan,,,"an offer, not a request",2,id-agent-v1
+quick-responses.yes-right,Ya,Benar,,,2,id-agent-v1
+quick-responses.no-not,Tidak,Bukan,,bukan negates a noun,2,id-agent-v1
+quick-responses.okay-can,Boleh,Oke,,,2,id-agent-v1
+quick-responses.cannot-not-allowed,Tidak boleh,,,,2,id-agent-v1
+quick-responses.works-okay,Berfungsi,Jalan,,,2,id-agent-v1
+quick-responses.does-not-work-no,Rusak,Tidak jalan,,,2,id-agent-v1
+quick-responses.can-possible,Bisa,,,,2,id-agent-v1
+quick-responses.cannot-not-possible,Tidak bisa,,,,2,id-agent-v1
+quick-responses.okay-fine,Baik,Oke,,,2,id-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,Tidak boleh,Jangan,,,2,id-agent-v1
+phone-translation.i-am-using-phone-translation,Saya pakai penerjemah di HP,,,,2,id-agent-v1
+phone-translation.please-speak-toward-the-phone,Tolong bicara ke arah HP,,,,2,id-agent-v1
+phone-translation.please-write-the-place-name,Tolong tulis nama tempatnya di sini,,,,2,id-agent-v1
+phone-translation.one-sentence-at-a-time-please,Tolong satu kalimat dulu,,,,2,id-agent-v1
+phone-translation.please-type-it-and-show-me,Tolong ketik dan tunjukkan,,,,2,id-agent-v1
+phone-translation.please-look-at-the-screen,Tolong lihat layarnya,,,,2,id-agent-v1
+phone-text-power.please-type-it-for-me,Tolong ketik untuk saya,,,,2,id-agent-v1
+phone-text-power.please-use-simple-words,Tolong pakai kata sederhana,,,,2,id-agent-v1
+phone-text-power.my-phone-battery-is-low,Baterai HP saya hampir habis,,,,2,id-agent-v1
+phone-text-power.do-you-have-a-power-bank,Ada power bank?,,,,2,id-agent-v1
+phone-text-power.the-translation-may-be-inaccurate,Terjemahannya mungkin tidak tepat,,,,2,id-agent-v1
+phone-text-power.please-confirm,Tolong konfirmasi,,,,2,id-agent-v1
+phone-text-power.may-i-charge-my-phone-here,Boleh cas HP di sini?,,,,2,id-agent-v1
+sim-data.i-would-like-a-tourist-sim,Minta kartu perdana turis,,,kartu perdana = new prepaid SIM,2,id-agent-v1
+sim-data.may-i-use-your-wifi,Boleh pakai Wi-Fi-nya?,,,,2,id-agent-v1
+sim-data.how-much-data-is-included,Dapat kuota berapa?,,,kuota = data allowance,2,id-agent-v1
+sim-data.do-you-need-my-passport,Perlu paspor saya?,,,,2,id-agent-v1
+sim-data.how-long-is-it-valid,Berlaku berapa lama?,,,,2,id-agent-v1
+sim-data.please-activate-it,Tolong aktifkan,,,,2,id-agent-v1
+sim-data.do-you-have-an-esim,Ada eSIM?,,,,2,id-agent-v1
+sim-data.my-data-is-not-working,Data saya tidak jalan,,,,2,id-agent-v1
+sim-data.does-it-need-registration,Perlu registrasi?,,,,2,id-agent-v1
+sim-data.i-have-no-signal,Tidak ada sinyal,,,,2,id-agent-v1
+sim-data.please-write-the-wifi-password,Tolong tulis password Wi-Fi,,,,2,id-agent-v1
+sim-data.sim-card,Kartu SIM,Kartu perdana,,SIM alone means driving licence,2,id-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Di mana bisa beli adaptor colokan?,,,,2,id-agent-v1
+sim-data.mobile-data,Kuota internet,Data seluler,,,2,id-agent-v1
+sim-data.can-i-top-up-this-sim,Bisa isi pulsa?,,,pulsa = prepaid credit,2,id-agent-v1
+sim-data.top-up,Isi pulsa,Top up,,,2,id-agent-v1
+sim-data.is-there-coverage-in,Ada sinyal di {}?,,,,2,id-agent-v1
+sim-data.signal,Sinyal,,,,2,id-agent-v1
+sim-data.esim,eSIM,,,,2,id-agent-v1
+sim-data.prepaid,Prabayar,Prepaid,,,2,id-agent-v1
+sim-data.roaming,Roaming,,,,2,id-agent-v1
+etiquette.is-this-allowed,Ini boleh?,,,,2,id-agent-v1
+etiquette.is-tipping-expected,Perlu memberi tip?,,,,2,id-agent-v1
+etiquette.is-service-included,Sudah termasuk servis?,Sudah termasuk service charge?,,,2,id-agent-v1
+etiquette.may-i-enter,Boleh masuk?,,,,2,id-agent-v1
+etiquette.remove-shoes,Perlu lepas sepatu?,,,,2,id-agent-v1
+etiquette.photo-of-you,Boleh saya foto Anda?,Boleh saya foto Bapak / Ibu?,,,2,id-agent-v1
+etiquette.may-i-sit-here,Boleh saya duduk di sini?,,,,2,id-agent-v1
+etiquette.queue-for,Ini antrean untuk {}?,,,,2,id-agent-v1
+etiquette.dressed-appropriately,Pakaian saya sudah pantas?,,,,2,id-agent-v1
+etiquette.did-not-mean-to-offend,"Maaf, bukan maksud saya menyinggung",,,,2,id-agent-v1
+etiquette.what-is-customary,Kebiasaan di sini bagaimana?,,,,2,id-agent-v1
+etiquette.keep-the-change,Tidak perlu kembalian,Ambil saja kembaliannya,,,2,id-agent-v1
+children.cannot-find-my-child,Saya tidak menemukan anak saya,,,,2,id-agent-v1
+children.make-an-announcement,Tolong buat pengumuman,,,,2,id-agent-v1
+children.child-age,Anak saya {} tahun,,,,2,id-agent-v1
+children.high-chair,Ada kursi makan bayi?,,,,2,id-agent-v1
+children.baby-changing-room,Ruang ganti bayi di mana?,,,,2,id-agent-v1
+children.childrens-menu,Ada menu anak?,,,,2,id-agent-v1
+children.suitable-for-children,Ini cocok untuk anak?,,,,2,id-agent-v1
+children.minimum-age,Usia minimalnya berapa?,,,,2,id-agent-v1
+children.do-children-pay,Anak bayar juga?,,,,2,id-agent-v1
+children.crib,Ada tempat tidur bayi?,Ada baby cot?,,,2,id-agent-v1
+children.warm-this-bottle,Tolong hangatkan botol susu ini,,,,2,id-agent-v1
+children.car-seat,Kami perlu car seat anak,Kami perlu kursi mobil anak,,,2,id-agent-v1
+children.stroller,Stroller,Kereta bayi,,,2,id-agent-v1
+children.playground,Ada taman bermain?,,,,2,id-agent-v1

@@ -57,3 +57,5 @@ numbers-money.dong,numbers-money,ref,word,dong,1026,0.800,numbers-money.currency
 numbers-money.dong-symbol,numbers-money,ref,word,dong-symbol,1027,0.740,numbers-money.currency,1,0,neutral,vi,The symbol as printed on a price.
 numbers-money.ruble,numbers-money,ref,word,ruble,1028,0.800,numbers-money.currency,0,0,neutral,ru,Russian currency.
 numbers-money.ruble-symbol,numbers-money,ref,word,ruble-symbol,1029,0.740,numbers-money.currency,1,0,neutral,ru,The symbol as printed on a price.
+numbers-money.rupiah,numbers-money,ref,word,rupiah,1030,0.800,numbers-money.currency,0,0,neutral,id,Indonesian currency.
+numbers-money.rupiah-symbol,numbers-money,ref,word,rupiah-symbol,1031,0.740,numbers-money.currency,1,0,neutral,id,The symbol as printed on a price.

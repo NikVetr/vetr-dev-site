@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Beli tiket di mana?,,,,2,id-agent-v1
+attractions-tickets.do-i-need-a-reservation,Perlu reservasi?,Perlu booking?,,,2,id-agent-v1
+attractions-tickets.what-is-the-latest-entry-time,Masuk terakhir jam berapa?,,,,2,id-agent-v1
+attractions-tickets.are-there-lockers,Ada loker?,,,,2,id-agent-v1
+attractions-tickets.may-i-take-photos,Boleh foto?,,,,2,id-agent-v1
+attractions-tickets.please-take-a-photo-of-us,Tolong foto kami,,,,2,id-agent-v1
+attractions-tickets.could-you-take-a-photo-for-us,Bisa fotokan kami?,,,,2,id-agent-v1

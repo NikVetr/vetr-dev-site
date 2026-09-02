@@ -1,0 +1,26 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Tanpa daging,,,,2,id-agent-v1
+dietary-needs.no-eggs,Tanpa telur,,,,2,id-agent-v1
+dietary-needs.not-spicy,Tidak pedas,Jangan pakai sambal,,,2,id-agent-v1
+dietary-needs.less-spicy,Jangan terlalu pedas,,,,2,id-agent-v1
+dietary-needs.no-peanuts,Tanpa kacang tanah,,,kacang alone = any bean or nut,2,id-agent-v1
+dietary-needs.no-nuts,Tanpa kacang-kacangan,Tanpa kacang pohon,,,2,id-agent-v1
+dietary-needs.no-seafood,Tanpa makanan laut,Tanpa udang dan kerang,,,2,id-agent-v1
+dietary-needs.i-am-vegetarian,Saya vegetarian murni,"Tanpa daging, ayam, ikan",,"murni signals strict, not ""less meat""",2,id-agent-v1
+dietary-needs.i-am-vegan,Saya vegan,"Tanpa daging, telur, susu",,,2,id-agent-v1
+dietary-needs.i-do-not-eat,Saya tidak makan {},,,,2,id-agent-v1
+dietary-needs.i-am-allergic-to,Saya alergi {},,,,2,id-agent-v1
+dietary-needs.does-it-contain-fish-stock,Ada terasi atau kaldu ikan?,,,terasi = fermented shrimp paste,2,id-agent-v1
+dietary-needs.i-have-a-severe-allergy-to,Saya alergi berat {},Saya alergi parah terhadap {},,,2,id-agent-v1
+food-ordering.table-for-two,Meja untuk dua orang,,,,2,id-agent-v1
+food-ordering.is-a-table-available,Ada meja kosong?,,,,2,id-agent-v1
+food-ordering.menu-please,Minta menunya,,,,2,id-agent-v1
+food-ordering.i-want-this,Saya mau ini,,,,2,id-agent-v1
+food-ordering.do-you-have-drinking-water,Ada air putih?,,,air putih = plain drinking water,2,id-agent-v1
+food-ordering.to-go-please,"Dibungkus, ya",,,,2,id-agent-v1
+food-ordering.check-please,Minta bonnya,Minta struknya,,,2,id-agent-v1
+food-ordering.does-it-contain,Ini pakai {}?,Ini mengandung {}?,,,2,id-agent-v1
+food-ordering.is-this-vegetarian,Ini vegetarian?,,,,2,id-agent-v1
+food-ordering.what-do-you-recommend,Apa yang enak di sini?,,,,2,id-agent-v1
+food-ordering.water-please,Minta air putih,,,,2,id-agent-v1
+food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau terasi?",,,,2,id-agent-v1

@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Nama saya {},,,,2,id-agent-v1
+introductions.nice-to-meet-you,Senang berkenalan,,,,2,id-agent-v1
+introductions.what-is-your-name,Namanya siapa?,Nama Anda siapa?,,"-nya = polite ""your""",2,id-agent-v1
+introductions.we-are-traveling-together,Kami bepergian bersama,,,,2,id-agent-v1
+introductions.this-is-my-friend,Ini teman saya,,,,2,id-agent-v1
+introductions.i-am-from,Saya dari {},,,,2,id-agent-v1
+introductions.where-are-you-from,Asalnya dari mana?,Dari mana asalnya?,,,2,id-agent-v1
+introductions.how-are-you,Apa kabar?,,,,2,id-agent-v1
+introductions.i-am-a-tourist,Saya turis,Saya wisatawan,,,2,id-agent-v1
+introductions.this-is-my-husband-wife,Ini suami / istri saya,,,,2,id-agent-v1
+introductions.this-is-my-daughter-son,Ini anak saya,Ini anak perempuan / laki-laki saya,,,2,id-agent-v1
+introductions.i-am-traveling-alone,Saya bepergian sendiri,,,,2,id-agent-v1

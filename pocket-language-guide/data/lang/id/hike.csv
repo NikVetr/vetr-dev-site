@@ -1,0 +1,66 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+trail-words.trail,Jalur,Jalur pendakian,,,2,id-agent-v1
+trail-words.trailhead,Awal jalur,Basecamp,,,2,id-agent-v1
+trail-words.summit,Puncak,,,,2,id-agent-v1
+trail-words.viewpoint,Titik pandang,Spot pemandangan,,,2,id-agent-v1
+trail-words.cableway,Kereta gantung,Gondola,,,2,id-agent-v1
+trail-words.shuttle-bus,Bus antar-jemput,Shuttle,,,2,id-agent-v1
+trail-words.park-shuttle,Shuttle taman,Bus wisata,,,2,id-agent-v1
+trail-words.steps,Tangga,Anak tangga,,,2,id-agent-v1
+trail-words.up-uphill,Naik,Tanjakan,,,2,id-agent-v1
+trail-words.down-downhill,Turun,Turunan,,,2,id-agent-v1
+trail-words.one-way,Sekali jalan,,,satu arah means a one-way street,2,id-agent-v1
+trail-words.round-trip,Pulang-pergi,PP,,,2,id-agent-v1
+weather.forecast,Prakiraan cuacanya bagaimana?,,,,2,id-agent-v1
+weather.will-it-rain,Hari ini akan hujan?,,,,2,id-agent-v1
+weather.is-it-safe-today,Hari ini aman?,,,,2,id-agent-v1
+weather.how-cold-at-night,Seberapa dingin malam nanti?,,,,2,id-agent-v1
+weather.rain,Hujan,,,,2,id-agent-v1
+weather.snow,Salju,,,,2,id-agent-v1
+weather.wind,Angin,,,,2,id-agent-v1
+weather.storm,Badai,,,,2,id-agent-v1
+weather.ice,Lapisan es,,,"ice on the ground, not in a drink",2,id-agent-v1
+weather.fog,Kabut,,,,2,id-agent-v1
+weather.heat,Panas,,,,2,id-agent-v1
+weather.cold,Dingin,,,,2,id-agent-v1
+weather.humid,Lembap,Lembab,,,2,id-agent-v1
+weather.sunrise,Matahari terbit,,,,2,id-agent-v1
+weather.flood,Banjir,,,,2,id-agent-v1
+weather.avalanche-risk,Rawan longsoran salju,,,no Indonesian signage uses this,1,id-agent-v1
+hiking-parks.is-this-the-way-to,Ini jalan ke {}?,,,,2,id-agent-v1
+hiking-parks.where-is-the-trailhead,Awal jalurnya di mana?,,,,2,id-agent-v1
+hiking-parks.how-long-to-the-summit,Berapa lama ke puncak?,,,,2,id-agent-v1
+hiking-parks.how-long-to-the-viewpoint,Berapa lama ke titik pandang?,,,,2,id-agent-v1
+hiking-parks.which-route-is-easier,Jalur mana yang lebih mudah?,,,,2,id-agent-v1
+hiking-parks.is-this-trail-suitable-for-beginners,Jalur ini cocok untuk pemula?,,,,2,id-agent-v1
+trail-conditions.how-long-is-the-full-route,Total jalurnya berapa jauh?,,,,2,id-agent-v1
+trail-conditions.can-we-return-the-same-way,Bisa kembali lewat jalur yang sama?,,,,2,id-agent-v1
+trail-conditions.can-we-return-before-dark,Bisa kembali sebelum gelap?,,,,2,id-agent-v1
+trail-conditions.is-the-trail-open,Jalurnya buka?,,,,2,id-agent-v1
+trail-conditions.is-the-route-steep,Jalurnya terjal?,,,,2,id-agent-v1
+trail-conditions.is-the-path-slippery,Jalannya licin?,,,,2,id-agent-v1
+trail-transport.how-long-is-the-queue,Antreannya berapa panjang?,,,,2,id-agent-v1
+trail-transport.what-time-is-the-last-shuttle,Shuttle terakhir jam berapa?,,,,2,id-agent-v1
+trail-transport.when-does-the-cableway-stop,Kereta gantung tutup jam berapa?,,,,2,id-agent-v1
+trail-transport.where-can-we-buy-water,Di mana bisa beli air?,,,,2,id-agent-v1
+trail-transport.where-can-we-refill-water,Di mana bisa isi ulang air?,,,,2,id-agent-v1
+trail-transport.is-there-cell-signal-here,Ada sinyal di sini?,,,,2,id-agent-v1
+trail-transport.do-you-have-a-map,Ada peta?,,,,2,id-agent-v1
+trail-transport.how-long-is-the-wait,Berapa lama menunggu?,,,,2,id-agent-v1
+trail-warnings.open,Buka,,,,2,id-agent-v1
+trail-warnings.closed,Tutup,,,,2,id-agent-v1
+trail-warnings.maintenance,Perbaikan,Sedang dalam perbaikan,,,2,id-agent-v1
+trail-warnings.steep-slope,Tanjakan terjal,Turunan curam,,,2,id-agent-v1
+trail-warnings.caution-slippery,Awas licin,Hati-hati licin,,,2,id-agent-v1
+trail-warnings.danger,Bahaya,,,,2,id-agent-v1
+trail-warnings.beware-falling-rocks,Awas batu jatuh,Rawan longsor,,,2,id-agent-v1
+trail-warnings.first-aid-station,Pos P3K,,,P3K = first aid,2,id-agent-v1
+trail-warnings.service-suspended,Tidak beroperasi,Layanan dihentikan,,,2,id-agent-v1
+trail-landmarks.trail-marker,Penanda jalur,,,,2,id-agent-v1
+trail-landmarks.fork-junction,Percabangan,Persimpangan,,,2,id-agent-v1
+trail-landmarks.boardwalk-cliff-path,Jalan papan,Jalur tebing,,,2,id-agent-v1
+trail-landmarks.start,Awal,Mulai,,,2,id-agent-v1
+trail-landmarks.end,Akhir,Selesai,,,2,id-agent-v1
+trail-landmarks.elevation,Ketinggian,,,,2,id-agent-v1
+trail-landmarks.sunset,Matahari terbenam,,,,2,id-agent-v1
+trail-landmarks.water-point,Titik air,Sumber air,,,2,id-agent-v1

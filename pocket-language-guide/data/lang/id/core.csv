@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,saya,aku,,,2,id-agent-v1
+pronouns-verbs.we-us,kami,kita,,"kami excludes you, kita includes you",2,id-agent-v1
+pronouns-verbs.you,kamu,Anda,,,2,id-agent-v1
+pronouns-verbs.you-polite,Anda,Bapak · Ibu,,Pak / Bu to a stranger,2,id-agent-v1
+pronouns-verbs.he-him,dia,ia,,,2,id-agent-v1
+pronouns-verbs.she-her,dia,,,one word for he and she,2,id-agent-v1
+pronouns-verbs.they-them,mereka,,,,2,id-agent-v1
+pronouns-verbs.my-mine,saya,milik saya,,goes after the noun: tas saya,2,id-agent-v1
+pronouns-verbs.your-yours,Anda,milik Anda,,goes after the noun,2,id-agent-v1
+pronouns-verbs.be-called-call,bernama,memanggil,,,2,id-agent-v1
+pronouns-verbs.have,punya,ada,,,2,id-agent-v1
+pronouns-verbs.do-not-have,tidak punya,tidak ada,,,2,id-agent-v1
+pronouns-verbs.go,pergi,,,,2,id-agent-v1
+pronouns-verbs.come,datang,,,,2,id-agent-v1
+pronouns-verbs.would-like,ingin,,,,2,id-agent-v1
+pronouns-verbs.want,mau,,,,2,id-agent-v1
+pronouns-verbs.look-for,mencari,cari,,,2,id-agent-v1
+pronouns-verbs.buy,membeli,beli,,,2,id-agent-v1
+pronouns-verbs.like,suka,,,,2,id-agent-v1
+pronouns-verbs.need,perlu,butuh,,,2,id-agent-v1
+pronouns-verbs.there-is-have,ada,,,,2,id-agent-v1
+pronouns-verbs.there-is-not-do-not-have,tidak ada,,,,2,id-agent-v1
+pronouns-verbs.want-to-verb,mau + kata kerja,,,,2,id-agent-v1
+pronouns-verbs.want-thing,mau + benda,,,,2,id-agent-v1
+pronouns-verbs.need-thing,perlu + benda,,,,2,id-agent-v1
+pronouns-verbs.looking-for-thing,cari + benda,,,,2,id-agent-v1
+question-words.what,apa,,,,2,id-agent-v1
+question-words.where,di mana,,,,2,id-agent-v1
+question-words.who,siapa,,,,2,id-agent-v1
+question-words.which-one,yang mana,,,,2,id-agent-v1
+question-words.when,kapan,,,,2,id-agent-v1
+question-words.how,bagaimana,gimana,,,2,id-agent-v1
+question-words.how-much-many,berapa,,,,2,id-agent-v1
+question-words.how-many,berapa banyak,,,,2,id-agent-v1
+question-words.why,kenapa,mengapa,,,2,id-agent-v1
+question-words.this,ini,,,,2,id-agent-v1
+question-words.that,itu,,,,2,id-agent-v1
+question-words.here,di sini,,,,2,id-agent-v1
+question-words.there,di sana,,,,2,id-agent-v1
+question-words.a-little,sedikit,,,,2,id-agent-v1
+question-words.some,beberapa,,,,2,id-agent-v1
+question-words.very,sangat,sekali,,sekali goes after the word,2,id-agent-v1
+question-words.too,terlalu,,,,2,id-agent-v1
+question-words.also,juga,,,,2,id-agent-v1
+question-words.all-both,semua,keduanya,,,2,id-agent-v1
+question-words.how-much-what-price,berapa harganya,,,,2,id-agent-v1
