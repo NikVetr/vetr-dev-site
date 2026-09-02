@@ -1,8 +1,8 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,Où puis-je acheter des billets ?,,,,2,fr-agent-v1
-attractions-tickets.do-i-need-a-reservation,Faut-il réserver ?,,,,2,fr-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,Quelle est la dernière entrée ?,,,,2,fr-agent-v1
-attractions-tickets.are-there-lockers,Y a-t-il des casiers ?,consigne,,,2,fr-agent-v1
-attractions-tickets.may-i-take-photos,Puis-je prendre des photos ?,,,,2,fr-agent-v1
-attractions-tickets.please-take-a-photo-of-us,"Prenez-nous en photo, s'il vous plaît",,,,2,fr-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,Pourriez-vous nous prendre en photo ?,,,,2,fr-agent-v1
+attractions-tickets.where-can-i-buy-tickets,Où puis-je acheter des billets ?,,u pyiʒ aʃte de bijˈɛ,,2,fr-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Faut-il réserver ?,,fotil ʁezɛʁvˈe,,2,fr-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Quelle est la dernière entrée ?,,kɛl ɛ la dɛʁnjɛʁ ɑ̃tʁˈe,,2,fr-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Y a-t-il des casiers ?,consigne,i atil de kazjˈe,,2,fr-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Puis-je prendre des photos ?,,pyiʒ pʁɑ̃dʁ de fotˈo,,2,fr-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Prenez-nous en photo, s'il vous plaît",,"pʁənenuz ɑ̃ fotˈo, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Pourriez-vous nous prendre en photo ?,,puʁjevu nu pʁɑ̃dʁ ɑ̃ fotˈo,,2,fr-agent-v1;ipa=espeak

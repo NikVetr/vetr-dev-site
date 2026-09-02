@@ -1,44 +1,44 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,Che ore sono?,,,,2,it-agent-v1
-time-scheduling.how-many-minutes,Quanti minuti?,,,,2,it-agent-v1
-time-scheduling.what-time-should-we-meet,A che ora ci vediamo?,,,,2,it-agent-v1
-time-scheduling.can-we-change-the-time,Possiamo cambiare l'ora?,,,,2,it-agent-v1
-time-scheduling.when-is-convenient,Quando Le va bene?,,,,2,it-agent-v1
-time-scheduling.what-is-today-s-date,Che data è oggi?,Quanti ne abbiamo oggi?,,,2,it-agent-v1
-time-scheduling.what-day-is-it-today,Che giorno è oggi?,,,,2,it-agent-v1
-time-scheduling.what-time-does-it-open,A che ora apre?,,,,2,it-agent-v1
-time-scheduling.what-time-does-it-close,A che ora chiude?,,,,2,it-agent-v1
-time-words.today,oggi,,,,2,it-agent-v1
-time-words.tomorrow,domani,,,,2,it-agent-v1
-time-words.yesterday,ieri,,,,2,it-agent-v1
-time-words.this-week,questa settimana,,,,2,it-agent-v1
-time-words.next-week,la settimana prossima,,,,2,it-agent-v1
-time-words.morning,la mattina,,,,2,it-agent-v1
-time-words.afternoon,il pomeriggio,,,,2,it-agent-v1
-time-words.evening,la sera,,,,2,it-agent-v1
-time-words.spring,la primavera,,,,2,it-agent-v1
-time-words.summer,l'estate,,,,2,it-agent-v1
-time-words.fall,l'autunno,,,,2,it-agent-v1
-time-words.winter,l'inverno,,,,2,it-agent-v1
-days-of-week.monday,lunedì,,,,2,it-agent-v1
-days-of-week.tuesday,martedì,,,,2,it-agent-v1
-days-of-week.wednesday,mercoledì,,,,2,it-agent-v1
-days-of-week.thursday,giovedì,,,,2,it-agent-v1
-days-of-week.friday,venerdì,,,,2,it-agent-v1
-days-of-week.saturday,sabato,,,,2,it-agent-v1
-days-of-week.sunday,domenica,,,,2,it-agent-v1
-months.january,gennaio,,,,2,it-agent-v1
-months.february,febbraio,,,,2,it-agent-v1
-months.march,marzo,,,,2,it-agent-v1
-months.april,aprile,,,,2,it-agent-v1
-months.may,maggio,,,,2,it-agent-v1
-months.june,giugno,,,,2,it-agent-v1
-months.july,luglio,,,,2,it-agent-v1
-months.august,agosto,,,,2,it-agent-v1
-months.september,settembre,,,,2,it-agent-v1
-months.october,ottobre,,,,2,it-agent-v1
-months.november,novembre,,,,2,it-agent-v1
-months.december,dicembre,,,,2,it-agent-v1
-time-words.night,la notte,,,,2,it-agent-v1
-time-scheduling.how-long-does-it-take,Quanto tempo ci vuole?,,,,2,it-agent-v1
+time-scheduling.what-time-is-it,Che ore sono?,,ke ˈore sˈono,,2,it-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,Quanti minuti?,,kwˈantɪ minˈutɪ,,2,it-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,A che ora ci vediamo?,,a ke ˈora tʃɪ vedjˈamo,,2,it-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,Possiamo cambiare l'ora?,,possjˈamo kambjˈare lˈora,,2,it-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,Quando Le va bene?,,kwˈando le vˈa bˈɛne,,2,it-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,Che data è oggi?,Quanti ne abbiamo oggi?,ke dˈata e ˈɔdʒːɪ,,2,it-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,Che giorno è oggi?,,ke dʒˈorno e ˈɔdʒːɪ,,2,it-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,A che ora apre?,,a ke ˈora ˈapre,,2,it-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,A che ora chiude?,,a ke ˈora kjˈude,,2,it-agent-v1;ipa=espeak
+time-words.today,oggi,,ˈɔdʒːɪ,,2,it-agent-v1;ipa=espeak
+time-words.tomorrow,domani,,domˈanɪ,,2,it-agent-v1;ipa=espeak
+time-words.yesterday,ieri,,jˈɛrɪ,,2,it-agent-v1;ipa=espeak
+time-words.this-week,questa settimana,,kwˌɛsta setːimˈana,,2,it-agent-v1;ipa=espeak
+time-words.next-week,la settimana prossima,,la setːimˈana prˈɔssima,,2,it-agent-v1;ipa=espeak
+time-words.morning,la mattina,,la matːˈina,,2,it-agent-v1;ipa=espeak
+time-words.afternoon,il pomeriggio,,il pomerˈidʒːo,,2,it-agent-v1;ipa=espeak
+time-words.evening,la sera,,la sˈera,,2,it-agent-v1;ipa=espeak
+time-words.spring,la primavera,,la primavˈɛra,,2,it-agent-v1;ipa=espeak
+time-words.summer,l'estate,,lestˈate,,2,it-agent-v1;ipa=espeak
+time-words.fall,l'autunno,,laʊtˈunno,,2,it-agent-v1;ipa=espeak
+time-words.winter,l'inverno,,linvˈɛrno,,2,it-agent-v1;ipa=espeak
+days-of-week.monday,lunedì,,lʊnedˈi,,2,it-agent-v1;ipa=espeak
+days-of-week.tuesday,martedì,,martedˈi,,2,it-agent-v1;ipa=espeak
+days-of-week.wednesday,mercoledì,,merkoledˈi,,2,it-agent-v1;ipa=espeak
+days-of-week.thursday,giovedì,,dʒovedˈi,,2,it-agent-v1;ipa=espeak
+days-of-week.friday,venerdì,,venerdˈi,,2,it-agent-v1;ipa=espeak
+days-of-week.saturday,sabato,,sˈabato,,2,it-agent-v1;ipa=espeak
+days-of-week.sunday,domenica,,domˈenika,,2,it-agent-v1;ipa=espeak
+months.january,gennaio,,dʒennˈaio,,2,it-agent-v1;ipa=espeak
+months.february,febbraio,,febːrˈaio,,2,it-agent-v1;ipa=espeak
+months.march,marzo,,mˈartso,,2,it-agent-v1;ipa=espeak
+months.april,aprile,,aprˈile,,2,it-agent-v1;ipa=espeak
+months.may,maggio,,mˈadʒːo,,2,it-agent-v1;ipa=espeak
+months.june,giugno,,dʒˈuɲɲo,,2,it-agent-v1;ipa=espeak
+months.july,luglio,,lˈuʎo,,2,it-agent-v1;ipa=espeak
+months.august,agosto,,aɡˈosto,,2,it-agent-v1;ipa=espeak
+months.september,settembre,,setːˈɛmbre,,2,it-agent-v1;ipa=espeak
+months.october,ottobre,,ˌɔtːˈobre,,2,it-agent-v1;ipa=espeak
+months.november,novembre,,novˈɛmbre,,2,it-agent-v1;ipa=espeak
+months.december,dicembre,,ditʃˈɛmbre,,2,it-agent-v1;ipa=espeak
+time-words.night,la notte,,la nˈɔtːe,,2,it-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,Quanto tempo ci vuole?,,kwˈanto tˈɛmpo tʃɪ vʊˈɔle,,2,it-agent-v1;ipa=espeak
 time-words.clock-offset,"L'orologio swahili parte dall'alba e conta sei ore in meno del suo: saa moja sono le 7:00, saa sita è mezzogiorno, saa kumi sono le 16:00. Aggiunga sei al numero che sente per avere l'ora del suo orologio. Dica l'ora in cifre, oppure chieda saa ngapi za kizungu per l'ora occidentale.",,,,2,it-agent-v1

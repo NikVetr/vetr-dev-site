@@ -1,32 +1,32 @@
 concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,카드로 돼요?,,kadeuro dwaeyo?,,,2,ko-agent-v1
+payment-receipt.pay-by-card,카드로 돼요?,,kadeuro dwaeyo?,kʰadɯɾo twɛjo,,2,ko-agent-v1;ipa=rr
 payment-receipt.pay-cash,현금으로 돼요?,,hyeongeumeuro dwaeyo?,,,2,ko-agent-v1
-payment-receipt.pay-by-qr-code,큐알코드로 돼요?,,kyualkodeuro dwaeyo?,,,2,ko-agent-v1
-payment-receipt.a-receipt-please,영수증 주세요,,yeongsujeung juseyo,,,2,ko-agent-v1
-payment-receipt.please-write-the-number,숫자 적어 주세요,,sutja jeogeo juseyo,,,2,ko-agent-v1
-payment-receipt.how-much-in-total,다 얼마예요?,,da eolmayeyo?,,,2,ko-agent-v1
-payment-receipt.can-we-pay-separately,따로 계산돼요?,,ttaro gyesandwaeyo?,,,2,ko-agent-v1
-payment-receipt.is-tax-included,세금 포함이에요?,,segeum pohamieyo?,,,2,ko-agent-v1
-payment-receipt.my-card-was-declined,카드가 안 됐어요,,kadeuga an dwaesseoyo,,,2,ko-agent-v1
-payment-receipt.the-bill-is-wrong,계산이 잘못된 것 같아요,,gyesani jalmotdoen geot gatayo,,,2,ko-agent-v1
-payment-receipt.i-already-paid,이미 냈어요,,imi naesseoyo,,,2,ko-agent-v1
-shopping.i-am-just-looking,그냥 볼게요,,geunyang bolgeyo,,,2,ko-agent-v1
-shopping.how-much-is-this,이거 얼마예요?,,igeo eolmayeyo?,,,2,ko-agent-v1
-shopping.that-is-too-expensive,너무 비싸요,,neomu bissayo,,,2,ko-agent-v1
-shopping.can-it-be-a-little-cheaper,좀 싸게 해 주세요,,jom ssage hae juseyo,,,2,ko-agent-v1
-shopping.is-there-a-discount,할인 있어요?,,harin isseoyo?,,,2,ko-agent-v1
-shopping.where-do-i-pay,어디서 계산해요?,,eodiseo gyesanhaeyo?,,,2,ko-agent-v1
-shopping.i-will-take-this,이걸로 할게요,,igeollo halgeyo,,,2,ko-agent-v1
-shopping.what-is-this,이게 뭐예요?,,ige mwoyeyo?,,,2,ko-agent-v1
-shopping.where-can-i-buy,{} 어디서 사요?,,{} eodiseo sayo?,,,2,ko-agent-v1
-shopping.do-you-have-this-in-stock,이거 재고 있어요?,,igeo jaego isseoyo?,,,2,ko-agent-v1
-shopping.two-of-these,이거 두 개 주세요,,igeo du gae juseyo,,,2,ko-agent-v1
-shopping.what-is-it-made-of,뭐로 만들었어요?,,mworo mandeureosseoyo?,,,2,ko-agent-v1
-color-size-returns.do-you-have-another-color,다른 색 있어요?,,dareun saek isseoyo?,,,2,ko-agent-v1
-color-size-returns.do-you-have-another-size,다른 사이즈 있어요?,,dareun saijeu isseoyo?,,,2,ko-agent-v1
-color-size-returns.may-i-try-it-on,입어 봐도 돼요?,,ibeo bwado dwaeyo?,,,2,ko-agent-v1
-color-size-returns.can-i-return-it,반품할 수 있어요?,,banpumhal su isseoyo?,,,2,ko-agent-v1
-color-size-returns.can-i-exchange-it,교환할 수 있어요?,,gyohwanhal su isseoyo?,,,2,ko-agent-v1
-color-size-returns.do-you-have-a-bag,봉투 있어요?,,bongtu isseoyo?,,,2,ko-agent-v1
-tax-refund.can-i-get-a-tax-refund,택스리펀 돼요?,부가세 환급 돼요?,taekseuripeon dwaeyo?,,,2,ko-agent-v1
-tax-refund.is-tax-free-shopping-available,사후면세점이에요?,,sahumyeonsejeomieyo?,,tax-refund shop,2,ko-agent-v1
+payment-receipt.pay-by-qr-code,큐알코드로 돼요?,,kyualkodeuro dwaeyo?,kʰjualkʰodɯɾo twɛjo,,2,ko-agent-v1;ipa=rr
+payment-receipt.a-receipt-please,영수증 주세요,,yeongsujeung juseyo,jʌŋsudʑɯŋ tɕusejo,,2,ko-agent-v1;ipa=rr
+payment-receipt.please-write-the-number,숫자 적어 주세요,,sutja jeogeo juseyo,suttɕa tɕʌɡʌ tɕusejo,,2,ko-agent-v1;ipa=rr
+payment-receipt.how-much-in-total,다 얼마예요?,,da eolmayeyo?,ta ʌlmajejo,,2,ko-agent-v1;ipa=rr
+payment-receipt.can-we-pay-separately,따로 계산돼요?,,ttaro gyesandwaeyo?,t͈aɾo kjesandwɛjo,,2,ko-agent-v1;ipa=rr
+payment-receipt.is-tax-included,세금 포함이에요?,,segeum pohamieyo?,seɡɯm pʰohamiejo,,2,ko-agent-v1;ipa=rr
+payment-receipt.my-card-was-declined,카드가 안 됐어요,,kadeuga an dwaesseoyo,kʰadɯɡa an twɛs͈ʌjo,,2,ko-agent-v1;ipa=rr
+payment-receipt.the-bill-is-wrong,계산이 잘못된 것 같아요,,gyesani jalmotdoen geot gatayo,kjesani tɕalmottwen kʌt katʰajo,,2,ko-agent-v1;ipa=rr
+payment-receipt.i-already-paid,이미 냈어요,,imi naesseoyo,imi nɛs͈ʌjo,,2,ko-agent-v1;ipa=rr
+shopping.i-am-just-looking,그냥 볼게요,,geunyang bolgeyo,kɯnjaŋ polɡejo,,2,ko-agent-v1;ipa=rr
+shopping.how-much-is-this,이거 얼마예요?,,igeo eolmayeyo?,iɡʌ ʌlmajejo,,2,ko-agent-v1;ipa=rr
+shopping.that-is-too-expensive,너무 비싸요,,neomu bissayo,nʌmu pis͈ajo,,2,ko-agent-v1;ipa=rr
+shopping.can-it-be-a-little-cheaper,좀 싸게 해 주세요,,jom ssage hae juseyo,tɕom s͈aɡe hɛ tɕusejo,,2,ko-agent-v1;ipa=rr
+shopping.is-there-a-discount,할인 있어요?,,harin isseoyo?,haɾin is͈ʌjo,,2,ko-agent-v1;ipa=rr
+shopping.where-do-i-pay,어디서 계산해요?,,eodiseo gyesanhaeyo?,ʌdisʌ kjesanhɛjo,,2,ko-agent-v1;ipa=rr
+shopping.i-will-take-this,이걸로 할게요,,igeollo halgeyo,iɡʌllo halɡejo,,2,ko-agent-v1;ipa=rr
+shopping.what-is-this,이게 뭐예요?,,ige mwoyeyo?,iɡe mwʌjejo,,2,ko-agent-v1;ipa=rr
+shopping.where-can-i-buy,{} 어디서 사요?,,{} eodiseo sayo?,{} ʌdisʌ sajo,,2,ko-agent-v1;ipa=rr
+shopping.do-you-have-this-in-stock,이거 재고 있어요?,,igeo jaego isseoyo?,iɡʌ tɕɛɡo is͈ʌjo,,2,ko-agent-v1;ipa=rr
+shopping.two-of-these,이거 두 개 주세요,,igeo du gae juseyo,iɡʌ tu kɛ tɕusejo,,2,ko-agent-v1;ipa=rr
+shopping.what-is-it-made-of,뭐로 만들었어요?,,mworo mandeureosseoyo?,mwʌɾo mandɯɾʌs͈ʌjo,,2,ko-agent-v1;ipa=rr
+color-size-returns.do-you-have-another-color,다른 색 있어요?,,dareun saek isseoyo?,taɾɯn sɛk is͈ʌjo,,2,ko-agent-v1;ipa=rr
+color-size-returns.do-you-have-another-size,다른 사이즈 있어요?,,dareun saijeu isseoyo?,taɾɯn saidʑɯ is͈ʌjo,,2,ko-agent-v1;ipa=rr
+color-size-returns.may-i-try-it-on,입어 봐도 돼요?,,ibeo bwado dwaeyo?,ibʌ pwado twɛjo,,2,ko-agent-v1;ipa=rr
+color-size-returns.can-i-return-it,반품할 수 있어요?,,banpumhal su isseoyo?,panpʰumhal su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+color-size-returns.can-i-exchange-it,교환할 수 있어요?,,gyohwanhal su isseoyo?,kjohwanhal su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+color-size-returns.do-you-have-a-bag,봉투 있어요?,,bongtu isseoyo?,poŋtʰu is͈ʌjo,,2,ko-agent-v1;ipa=rr
+tax-refund.can-i-get-a-tax-refund,택스리펀 돼요?,부가세 환급 돼요?,taekseuripeon dwaeyo?,tʰɛksɯɾipʰʌn twɛjo,,2,ko-agent-v1;ipa=rr
+tax-refund.is-tax-free-shopping-available,사후면세점이에요?,,sahumyeonsejeomieyo?,sahumjʌnsedʑʌmiejo,tax-refund shop,2,ko-agent-v1;ipa=rr

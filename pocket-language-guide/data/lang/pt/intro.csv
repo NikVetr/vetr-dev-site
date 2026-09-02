@@ -1,13 +1,13 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Chamo-me {},Meu nome é {},,,2,pt-agent-v1
-introductions.nice-to-meet-you,Muito prazer,,,,2,pt-agent-v1
-introductions.what-is-your-name,Como se chama?,,,,2,pt-agent-v1
-introductions.we-are-traveling-together,Viajamos juntos,,,,2,pt-agent-v1
-introductions.this-is-my-friend,Este é o meu amigo,Esta é a minha amiga,,,2,pt-agent-v1
-introductions.i-am-from,Sou de {},,,,2,pt-agent-v1
-introductions.where-are-you-from,De onde é?,,,,2,pt-agent-v1
-introductions.how-are-you,Como está?,Tudo bem?,,,2,pt-agent-v1
-introductions.i-am-a-tourist,Sou turista,,,,2,pt-agent-v1
-introductions.this-is-my-husband-wife,O meu marido / A minha mulher,o meu esposo / a minha esposa,,,2,pt-agent-v1
-introductions.this-is-my-daughter-son,A minha filha / O meu filho,,,,2,pt-agent-v1
-introductions.i-am-traveling-alone,Viajo sozinho,Viajo sozinha,,-a if female,2,pt-agent-v1
+introductions.my-name-is,Chamo-me {},Meu nome é {},ʃˈɐ̃mʊmy {},,2,pt-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Muito prazer,,mwˈiŋtʊ prazˈer,,2,pt-agent-v1;ipa=espeak
+introductions.what-is-your-name,Como se chama?,,kˌomʊ sy ʃˈɐ̃mæ,,2,pt-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Viajamos juntos,,vˌiaʒˈɐ̃mʊz ʒˈũŋtʊs,,2,pt-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Este é o meu amigo,Esta é a minha amiga,ˌestʃy ɛ ʊ meʊ ˌæmˈiɡʊ,,2,pt-agent-v1;ipa=espeak
+introductions.i-am-from,Sou de {},,sow dʒy {},,2,pt-agent-v1;ipa=espeak
+introductions.where-are-you-from,De onde é?,,dʒj ˌoŋdʒj ɛ,,2,pt-agent-v1;ipa=espeak
+introductions.how-are-you,Como está?,Tudo bem?,kˌomʊ estˌa,,2,pt-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Sou turista,,sow tˌuɾˈistæ,,2,pt-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,O meu marido / A minha mulher,o meu esposo / a minha esposa,ʊ meʊ mˌaɾˈidʊ / a mˌiɲæ muljˈɛr,,2,pt-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,A minha filha / O meu filho,,a mˌiɲæ fˈiljæ / ʊ meʊ fˈiljʊ,,2,pt-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Viajo sozinho,Viajo sozinha,vˌiˈaʒʊ sˌozˈiɲʊ,-a if female,2,pt-agent-v1;ipa=espeak

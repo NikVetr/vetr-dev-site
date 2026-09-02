@@ -1,13 +1,13 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
-introductions.my-name-is,मेरा नाम {} है,,merā nām {} hai,,,2,hi-agent-v1
-introductions.nice-to-meet-you,आपसे मिलकर खुशी हुई,,āpse milkar khuśī huī,,,2,hi-agent-v1
-introductions.what-is-your-name,आपका नाम क्या है?,,āpkā nām kyā hai?,,,2,hi-agent-v1
-introductions.we-are-traveling-together,हम साथ यात्रा कर रहे हैं,हम साथ यात्रा कर रही हैं,ham sāth yātrā kar rahe haiṁ,,,2,hi-agent-v1
-introductions.this-is-my-friend,ये मेरे दोस्त हैं,,ye mere dost haiṁ,,,2,hi-agent-v1
-introductions.i-am-from,मैं {} से हूँ,,maiṁ {} se hūṁ,,,2,hi-agent-v1
-introductions.where-are-you-from,आप कहाँ से हैं?,,āp kahāṁ se haiṁ?,,,2,hi-agent-v1
-introductions.how-are-you,आप कैसे हैं?,आप कैसी हैं?,āp kaise haiṁ?,,to a woman: kaisee,2,hi-agent-v1
-introductions.i-am-a-tourist,मैं पर्यटक हूँ,मैं टूरिस्ट हूँ,maiṁ paryaṭak hūṁ,,,2,hi-agent-v1
-introductions.this-is-my-husband-wife,मेरे पति / मेरी पत्नी,,mere pati / merī patnī,,my husband / my wife,2,hi-agent-v1
-introductions.this-is-my-daughter-son,मेरी बेटी / मेरा बेटा,,merī beṭī / merā beṭā,,my daughter / my son,2,hi-agent-v1
-introductions.i-am-traveling-alone,मैं अकेले यात्रा पर हूँ,,maiṁ akele yātrā par hūṁ,,,2,hi-agent-v1
+introductions.my-name-is,मेरा नाम {} है,,merā nām {} hai,mˌeːɾaː nˈaːm {} hɛː,,2,hi-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,आपसे मिलकर खुशी हुई,,āpse milkar khuśī huī,ˈaːpsˌeː mˈɪləkˌəɾ kʰˈʊʃi hˈʊi,,2,hi-agent-v1;ipa=espeak
+introductions.what-is-your-name,आपका नाम क्या है?,,āpkā nām kyā hai?,ˌaːpkˌaː nˈaːm kːjaː hɛː,,2,hi-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,हम साथ यात्रा कर रहे हैं,हम साथ यात्रा कर रही हैं,ham sāth yātrā kar rahe haiṁ,hˌəm sˈaːtʰ jˈaːtɾaː kˈʌɾ ɾˌəheː hɛ̃,,2,hi-agent-v1;ipa=espeak
+introductions.this-is-my-friend,ये मेरे दोस्त हैं,,ye mere dost haiṁ,jeː mˌeːɾeː dˈoːst hɛ̃,,2,hi-agent-v1;ipa=espeak
+introductions.i-am-from,मैं {} से हूँ,,maiṁ {} se hūṁ,mɛ̃ {} seː hũ,,2,hi-agent-v1;ipa=espeak
+introductions.where-are-you-from,आप कहाँ से हैं?,,āp kahāṁ se haiṁ?,ˌaːp kˈʌhã seː hɛ̃,,2,hi-agent-v1;ipa=espeak
+introductions.how-are-you,आप कैसे हैं?,आप कैसी हैं?,āp kaise haiṁ?,ˌaːp kˈɛːseː hɛ̃,to a woman: kaisee,2,hi-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,मैं पर्यटक हूँ,मैं टूरिस्ट हूँ,maiṁ paryaṭak hūṁ,mɛ̃ pˈʌrjəʈˌək hũ,,2,hi-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,मेरे पति / मेरी पत्नी,,mere pati / merī patnī,mˌeːɾeː pˈʌtɪ / mˌeːɾi pˈʌtni,my husband / my wife,2,hi-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,मेरी बेटी / मेरा बेटा,,merī beṭī / merā beṭā,mˌeːɾi bˈeːʈi / mˌeːɾaː bˈeːʈaː,my daughter / my son,2,hi-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,मैं अकेले यात्रा पर हूँ,,maiṁ akele yātrā par hūṁ,mɛ̃ ʌkˈeːleː jˈaːtɾaː pˈʌɾ hũ,,2,hi-agent-v1;ipa=espeak

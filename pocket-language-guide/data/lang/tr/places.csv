@@ -1,8 +1,8 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,Bilet nereden alınır?,,,,2,tr-agent-v1
-attractions-tickets.do-i-need-a-reservation,Rezervasyon gerekiyor mu?,,,,2,tr-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,Son giriş saati kaç?,,,,2,tr-agent-v1
-attractions-tickets.are-there-lockers,Emanet dolabı var mı?,,,,2,tr-agent-v1
-attractions-tickets.may-i-take-photos,Fotoğraf çekebilir miyim?,,,,2,tr-agent-v1
-attractions-tickets.please-take-a-photo-of-us,"Bize bir fotoğraf çekin, lütfen.",,,,2,tr-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,Fotoğrafımızı çeker misiniz?,,,,2,tr-agent-v1
+attractions-tickets.where-can-i-buy-tickets,Bilet nereden alınır?,,bilˈɛt nˈeɾedæn aɫɯnˈɯr,,2,tr-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Rezervasyon gerekiyor mu?,,rezɛrvasjˈɔn ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Son giriş saati kaç?,,sˈɔn ɟiɾˈɪʃ saatˈɪ kˈatʃ,,2,tr-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Emanet dolabı var mı?,,emanˈɛt doɫabˈɯ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Fotoğraf çekebilir miyim?,,fotoːɾˈaf tʃekebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Bize bir fotoğraf çekin, lütfen.",,"bizˈɛ bɪr fotoːɾˈaf tʃekˈɪn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Fotoğrafımızı çeker misiniz?,,fotoːɾafˈɯmɯzɯ tʃekˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak

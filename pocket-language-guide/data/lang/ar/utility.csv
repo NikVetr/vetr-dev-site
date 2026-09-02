@@ -1,16 +1,16 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,أريد الذهاب إلى {},,urīd al-dhahāb ilá {},,,2,ar-agent-v1
-utility-templates.please-give-me,أعطني {} من فضلك,,aʿṭinī {} min faḍlak,,,2,ar-agent-v1
-utility-templates.may-i,هل يمكنني {}؟,,hal yumkinunī {}?,,,2,ar-agent-v1
-utility-templates.please-do-not-add,من فضلك بدون {},,min faḍlak bidūn {},,please without,2,ar-agent-v1
-utility-templates.do-you-have,هل لديك {}؟,,hal ladayk {}?,,,2,ar-agent-v1
-utility-templates.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,,,2,ar-agent-v1
-utility-templates.i-need,أحتاج إلى {},,aḥtāj ilá {},,,2,ar-agent-v1
-utility-templates.is-there-nearby,هل يوجد {} قريب؟,,hal yūjad {} qarīb?,,,2,ar-agent-v1
-utility-templates.how-much-is,بكم {}؟,,bikam {}?,,,2,ar-agent-v1
-utility-templates.is-this,هل هذا {}؟,,hal hādhā {}?,,,2,ar-agent-v1
-utility-templates.please,{} من فضلك,,{} min faḍlak,,,2,ar-agent-v1
-utility-templates.i-am-looking-for,أبحث عن {},,abḥath ʿan {},,,2,ar-agent-v1
-utility-templates.do-you-accept,هل تقبلون {}؟,,hal taqbalūn {}?,,,2,ar-agent-v1
-utility-templates.i-cannot-find,لا أجد {},,lā ajid {},,,2,ar-agent-v1
-utility-templates.there-is-a-problem-with,هناك مشكلة في {},,hunāk mushkilah fī {},,,2,ar-agent-v1
+utility-templates.i-want-to-go-to,أريد الذهاب إلى {},,urīd al-dhahāb ilá {},ʔɹˈiːd ʔaððˈahaːb ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
+utility-templates.please-give-me,أعطني {} من فضلك,,aʿṭinī {} min faḍlak,ʔʕt̪nˈiː {} mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+utility-templates.may-i,هل يمكنني {}؟,,hal yumkinunī {}?,hˈal jmknnˈiː {},,2,ar-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,من فضلك بدون {},,min faḍlak bidūn {},mˈin fˈadˤlka budːˈuːna {},please without,2,ar-agent-v1;ipa=espeak
+utility-templates.do-you-have,هل لديك {}؟,,hal ladayk {}?,hˈal ldiːkˌa {},,2,ar-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,ˈaktb ʔarɹˈaqm mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+utility-templates.i-need,أحتاج إلى {},,aḥtāj ilá {},ʔħtˈaːdʒ ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,هل يوجد {} قريب؟,,hal yūjad {} qarīb?,hˈal jwdʒd {} qˈaɹiːb,,2,ar-agent-v1;ipa=espeak
+utility-templates.how-much-is,بكم {}؟,,bikam {}?,bˈakam {},,2,ar-agent-v1;ipa=espeak
+utility-templates.is-this,هل هذا {}؟,,hal hādhā {}?,hˈal haˈaðaˌa {},,2,ar-agent-v1;ipa=espeak
+utility-templates.please,{} من فضلك,,{} min faḍlak,{} mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,أبحث عن {},,abḥath ʿan {},ʔbħθ ʕˈan {},,2,ar-agent-v1;ipa=espeak
+utility-templates.do-you-accept,هل تقبلون {}؟,,hal taqbalūn {}?,hˈal tˌaqabːalˈuːna {},,2,ar-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,لا أجد {},,lā ajid {},lˈaː ʔˈadʒadː {},,2,ar-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,هناك مشكلة في {},,hunāk mushkilah fī {},hˈunaːkˌa mˈuʃkilˌa fˈiː {},,2,ar-agent-v1;ipa=espeak

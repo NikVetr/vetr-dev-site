@@ -1,29 +1,29 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-dietary-needs.no-meat,肉なしでお願いします,,niku nashi de onegaishimasu,,,2,japanese-reviewed-v6
-food-ordering.table-for-two,二人です,,futari desu,,,2,japanese-reviewed-v6
-dietary-needs.no-eggs,卵なしでお願いします,,tamago nashi de onegaishimasu,,,2,japanese-reviewed-v6
-food-ordering.is-a-table-available,席はありますか？,,seki wa arimasu ka?,,,2,japanese-reviewed-v6
-dietary-needs.not-spicy,辛くしないでください,,karaku shinaide kudasai,,,2,japanese-reviewed-v6
-food-ordering.menu-please,メニューをお願いします,,menyū o onegaishimasu,,,2,japanese-reviewed-v6
-dietary-needs.less-spicy,辛さ控えめでお願いします,,karasa hikaeme de onegaishimasu,,,2,japanese-reviewed-v6
-food-ordering.i-want-this,これをお願いします,,kore o onegaishimasu,,,2,japanese-reviewed-v6
-dietary-needs.no-peanuts,ピーナッツなしでお願いします,,pīnattsu nashi de onegaishimasu,,,2,japanese-reviewed-v6
-food-ordering.do-you-have-drinking-water,飲み水はありますか？,,nomimizu wa arimasu ka?,,,2,ja-agent-v1
-dietary-needs.no-nuts,ナッツなしでお願いします,,nattsu nashi de onegaishimasu,,,2,japanese-reviewed-v6
-food-ordering.to-go-please,持ち帰りでお願いします,,mochikaeri de onegaishimasu,,,2,japanese-reviewed-v6
-dietary-needs.no-seafood,海鮮なしでお願いします,,kaisen nashi de onegaishimasu,,,2,japanese-reviewed-v6
-food-ordering.check-please,お会計をお願いします,,okaikei o onegaishimasu,,,2,japanese-reviewed-v6
-dietary-needs.i-am-vegetarian,私はベジタリアンです,,watashi wa bejitarian desu,,,2,japanese-reviewed-v6
-food-ordering.does-it-contain,{}が入っていますか？,,{} ga haitteimasu ka?,,,2,japanese-reviewed-v6
-dietary-needs.i-am-vegan,私はヴィーガンです,,watashi wa vīgan desu,,,2,japanese-reviewed-v6
-food-ordering.is-this-vegetarian,これはベジタリアン向けですか？,,kore wa bejitarian muke desu ka?,,,2,ja-agent-v1
-dietary-needs.i-do-not-eat,{}は食べません,,{} wa tabemasen,,,2,japanese-reviewed-v6
-dietary-needs.i-am-allergic-to,{}にアレルギーがあります,,{} ni arerugī ga arimasu,,,2,japanese-reviewed-v6
-food-ordering.what-do-you-recommend,おすすめは何ですか？,,osusume wa nan desu ka?,,,2,japanese-reviewed-v6
-food-ordering.water-please,お水をお願いします,,omizu o onegaishimasu,,,2,japanese-reviewed-v6
-dietary-needs.does-it-contain-fish-stock,魚のだしは入っていますか？,,sakana no dashi wa haitteimasu ka?,,,2,japanese-reviewed-v6
-dietary-needs.does-it-contain-pork-stock,豚のだしは入っていますか？,豚骨スープは入っていますか？,buta no dashi wa haitteimasu ka?,,,2,ja-pork-stock-v1
-food-ordering.can-a-vegetarian-eat-this,これはベジタリアンでも食べられますか？,,kore wa bejitarian demo taberaremasu ka?,,,2,japanese-reviewed-v6
-dietary-needs.i-have-a-severe-allergy-to,{}に重いアレルギーがあります,,{} ni omoi arerugī ga arimasu,,,2,japanese-reviewed-v6
-dietary-needs.no-pork,豚肉なしでお願いします,豚由来のものはすべてなしでお願いします,butaniku nashi de onegaishimasu,,,2,ja-gaps-v1
-dietary-needs.is-this-halal,これはハラールですか？,ハラール認証はありますか？,kore wa harāru desu ka?,,,2,ja-gaps-v1
+dietary-needs.no-meat,肉なしでお願いします,,niku nashi de onegaishimasu,ɲikɯ naɕi de oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.table-for-two,二人です,,futari desu,ɸɯtaɾi desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.no-eggs,卵なしでお願いします,,tamago nashi de onegaishimasu,tamaɡo naɕi de oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.is-a-table-available,席はありますか？,,seki wa arimasu ka?,seki wa aɾimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.not-spicy,辛くしないでください,,karaku shinaide kudasai,kaɾakɯ ɕinaide kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.menu-please,メニューをお願いします,,menyū o onegaishimasu,meɲɯː o oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.less-spicy,辛さ控えめでお願いします,,karasa hikaeme de onegaishimasu,kaɾasa çikaeme de oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.i-want-this,これをお願いします,,kore o onegaishimasu,koɾe o oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.no-peanuts,ピーナッツなしでお願いします,,pīnattsu nashi de onegaishimasu,piːnattsɯ naɕi de oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.do-you-have-drinking-water,飲み水はありますか？,,nomimizu wa arimasu ka?,nomimizɯ wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+dietary-needs.no-nuts,ナッツなしでお願いします,,nattsu nashi de onegaishimasu,nattsɯ naɕi de oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.to-go-please,持ち帰りでお願いします,,mochikaeri de onegaishimasu,motɕikaeɾi de oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.no-seafood,海鮮なしでお願いします,,kaisen nashi de onegaishimasu,kaiseɴ naɕi de oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.check-please,お会計をお願いします,,okaikei o onegaishimasu,okaikei o oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.i-am-vegetarian,私はベジタリアンです,,watashi wa bejitarian desu,wataɕi wa bedʑitaɾiaɴ desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.does-it-contain,{}が入っていますか？,,{} ga haitteimasu ka?,{} ɡa haitteimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.i-am-vegan,私はヴィーガンです,,watashi wa vīgan desu,wataɕi wa viːɡaɴ desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.is-this-vegetarian,これはベジタリアン向けですか？,,kore wa bejitarian muke desu ka?,koɾe wa bedʑitaɾiaɴ mɯke desɯ ka,,2,ja-agent-v1;ipa=hepburn
+dietary-needs.i-do-not-eat,{}は食べません,,{} wa tabemasen,{} wa tabemaseɴ,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.i-am-allergic-to,{}にアレルギーがあります,,{} ni arerugī ga arimasu,{} ɲi aɾeɾɯɡiː ɡa aɾimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.what-do-you-recommend,おすすめは何ですか？,,osusume wa nan desu ka?,osɯsɯme wa naɴ desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+food-ordering.water-please,お水をお願いします,,omizu o onegaishimasu,omizɯ o oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.does-it-contain-fish-stock,魚のだしは入っていますか？,,sakana no dashi wa haitteimasu ka?,sakana no daɕi wa haitteimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.does-it-contain-pork-stock,豚のだしは入っていますか？,豚骨スープは入っていますか？,buta no dashi wa haitteimasu ka?,bɯta no daɕi wa haitteimasɯ ka,,2,ja-pork-stock-v1;ipa=hepburn
+food-ordering.can-a-vegetarian-eat-this,これはベジタリアンでも食べられますか？,,kore wa bejitarian demo taberaremasu ka?,koɾe wa bedʑitaɾiaɴ demo tabeɾaɾemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.i-have-a-severe-allergy-to,{}に重いアレルギーがあります,,{} ni omoi arerugī ga arimasu,{} ɲi omoi aɾeɾɯɡiː ɡa aɾimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+dietary-needs.no-pork,豚肉なしでお願いします,豚由来のものはすべてなしでお願いします,butaniku nashi de onegaishimasu,bɯtaɲikɯ naɕi de oneɡaiɕimasɯ,,2,ja-gaps-v1;ipa=hepburn
+dietary-needs.is-this-halal,これはハラールですか？,ハラール認証はありますか？,kore wa harāru desu ka?,koɾe wa haɾaːɾɯ desɯ ka,,2,ja-gaps-v1;ipa=hepburn

@@ -1,16 +1,16 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,I want to go to {},,,,2,latex-reference-v2
-utility-templates.please-give-me,Please give me {},,,,2,latex-reference-v2
-utility-templates.may-i,May I {} ?,,,,2,latex-reference-v2
-utility-templates.please-do-not-add,Please do not add {},,,,2,latex-reference-v2
-utility-templates.do-you-have,Do you have {} ?,,,,2,latex-reference-v2
-utility-templates.please-write-the-number,Please write the number,,,,2,latex-reference-v2
-utility-templates.i-need,I need {},,,,2,expansion-v1
-utility-templates.is-there-nearby,Is there a {} nearby?,,,,2,expansion-v1
-utility-templates.how-much-is,How much is {}?,,,,2,expansion-v1
-utility-templates.is-this,Is this {}?,,,,2,expansion-v1
-utility-templates.please,"{}, please",,,,2,expansion-v1
-utility-templates.i-am-looking-for,I am looking for {},,,,2,expansion-v1
-utility-templates.do-you-accept,Do you accept {}?,,,,2,expansion-v1
-utility-templates.i-cannot-find,I cannot find {},,,,2,expansion-v1
-utility-templates.there-is-a-problem-with,There is a problem with {},,,,2,expansion-v1
+utility-templates.i-want-to-go-to,I want to go to {},,aɪ wˈɔnt tə ɡˈoʊ tuː {},,2,latex-reference-v2;ipa=espeak
+utility-templates.please-give-me,Please give me {},,plˈiːz ɡˈɪv mˌiː {},,2,latex-reference-v2;ipa=espeak
+utility-templates.may-i,May I {} ?,,mˈeɪ ˈaɪ {},,2,latex-reference-v2;ipa=espeak
+utility-templates.please-do-not-add,Please do not add {},,plˈiːz duːnˌɑːt ˈæd {},,2,latex-reference-v2;ipa=espeak
+utility-templates.do-you-have,Do you have {} ?,,dˈuː juː hˈæv {},,2,latex-reference-v2;ipa=espeak
+utility-templates.please-write-the-number,Please write the number,,plˈiːz ɹˈaɪt ðə nˈʌmbɚ,,2,latex-reference-v2;ipa=espeak
+utility-templates.i-need,I need {},,aɪ nˈiːd {},,2,expansion-v1;ipa=espeak
+utility-templates.is-there-nearby,Is there a {} nearby?,,ɪz ðɛɹ ˈeɪ {} nɪɹbˈaɪ,,2,expansion-v1;ipa=espeak
+utility-templates.how-much-is,How much is {}?,,hˌaʊ mˈʌtʃ ɪz {},,2,expansion-v1;ipa=espeak
+utility-templates.is-this,Is this {}?,,ɪz ðˈɪs {},,2,expansion-v1;ipa=espeak
+utility-templates.please,"{}, please",,"{}, plˈiːz",,2,expansion-v1;ipa=espeak
+utility-templates.i-am-looking-for,I am looking for {},,aɪɐm lˈʊkɪŋ fɔːɹ {},,2,expansion-v1;ipa=espeak
+utility-templates.do-you-accept,Do you accept {}?,,dˈuː juː ɐksˈɛpt {},,2,expansion-v1;ipa=espeak
+utility-templates.i-cannot-find,I cannot find {},,aɪ kænˈɑːt fˈaɪnd {},,2,expansion-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,There is a problem with {},,ðɛɹ ɪz ɐ pɹˈɑːbləm wɪð {},,2,expansion-v1;ipa=espeak

@@ -1,45 +1,45 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-numbers-money.l-ng,ศูนย์,๐,sun,,,2,th-agent-v1
-numbers-money.y,หนึ่ง,๑,nueng,,,2,th-agent-v1
-numbers-money.r,สอง,๒,song,,,2,th-agent-v1
-numbers-money.s-n,สาม,๓,sam,,,2,th-agent-v1
-numbers-money.s,สี่,๔,si,,,2,th-agent-v1
-numbers-money.w,ห้า,๕,ha,,,2,th-agent-v1
-numbers-money.li,หก,๖,hok,,,2,th-agent-v1
-numbers-money.q,เจ็ด,๗,chet,,,2,th-agent-v1
-numbers-money.b,แปด,๘,paet,,,2,th-agent-v1
-numbers-money.ji,เก้า,๙,kao,,,2,th-agent-v1
-numbers-money.sh,สิบ,๑๐,sip,,,2,th-agent-v1
-numbers-money.y-b-i,ร้อย,๑๐๐,roi,,,2,th-agent-v1
-numbers-money.y-qi-n,พัน,๑๐๐๐,phan,,,2,th-agent-v1
-numbers-money.y-w-n,หมื่น,๑๐๐๐๐,muen,,,2,th-agent-v1
-numbers-money.b-n,ครึ่ง,,khrueng,,,2,th-agent-v1
-atm-cash.where-is-an-atm,ตู้เอทีเอ็มอยู่ไหน,ตู้ ATM อยู่ไหน,tu ethiem yu nai,,,2,th-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,ใช้บัตรต่างประเทศ ได้ไหม,,chai bat tang prathet dai mai,,,2,th-agent-v1
-atm-cash.the-atm-kept-my-card,ตู้กินบัตร,ตู้ยึดบัตร,tu kin bat,,the machine ate my card,2,th-agent-v1
+numbers-money.l-ng,ศูนย์,๐,sun,suːn˩˩˦,,2,th-agent-v1;ipa=thaig2p
+numbers-money.y,หนึ่ง,๑,nueng,nɯŋ˨˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.r,สอง,๒,song,sɔːŋ˩˩˦,,2,th-agent-v1;ipa=thaig2p
+numbers-money.s-n,สาม,๓,sam,saːm˩˩˦,,2,th-agent-v1;ipa=thaig2p
+numbers-money.s,สี่,๔,si,siː˨˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.w,ห้า,๕,ha,haː˥˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.li,หก,๖,hok,hok˨˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.q,เจ็ด,๗,chet,tɕet˨˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.b,แปด,๘,paet,pɛːt˨˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.ji,เก้า,๙,kao,kaːw˥˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.sh,สิบ,๑๐,sip,sip˨˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.y-b-i,ร้อย,๑๐๐,roi,rɔːj˦˥,,2,th-agent-v1;ipa=thaig2p
+numbers-money.y-qi-n,พัน,๑๐๐๐,phan,pʰan˧,,2,th-agent-v1;ipa=thaig2p
+numbers-money.y-w-n,หมื่น,๑๐๐๐๐,muen,mɯːn˨˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.b-n,ครึ่ง,,khrueng,kʰrɯŋ˥˩,,2,th-agent-v1;ipa=thaig2p
+atm-cash.where-is-an-atm,ตู้เอทีเอ็มอยู่ไหน,ตู้ ATM อยู่ไหน,tu ethiem yu nai,tuː˥˩ʔeː˧tʰiː˧ʔem˧ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.does-this-atm-take-foreign-cards,ใช้บัตรต่างประเทศ ได้ไหม,,chai bat tang prathet dai mai,tɕʰaj˦˥ bat˨˩ taːŋ˨˩pra˨˩raʔ˨˩tʰeːt˥˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.the-atm-kept-my-card,ตู้กินบัตร,ตู้ยึดบัตร,tu kin bat,tuː˥˩ kin˧ bat˨˩,the machine ate my card,2,th-agent-v1;ipa=thaig2p
 atm-cash.is-there-a-fee,มีค่าธรรมเนียมไหม,,mi kha thamniam mai,,,2,th-agent-v1
-atm-cash.the-card-was-declined,บัตรใช้ไม่ได้,,bat chai mai dai,,,2,th-agent-v1
-atm-cash.what-is-the-exchange-rate,อัตราแลกเปลี่ยน เท่าไร,เรทเท่าไร,attra laekplian thaorai,,,2,th-agent-v1
-atm-cash.no-money-came-out,เงินไม่ออก,,ngoen mai ok,,,2,th-agent-v1
-atm-cash.where-can-i-change-money,แลกเงินได้ที่ไหน,,laek ngoen dai thi nai,,,2,th-agent-v1
-atm-cash.the-machine-is-out-of-service,ตู้เสีย,,tu sia,,,2,th-agent-v1
-atm-cash.please-give-me-smaller-notes,ขอแบงก์ย่อย,,kho bang yoi,,,2,th-agent-v1
-atm-cash.do-you-have-change,มีเงินทอนไหม,,mi ngoen thon mai,,,2,th-agent-v1
-atm-cash.may-i-pay-in,จ่ายเป็น {} ได้ไหม,,chai pen {} dai mai,,,2,th-agent-v1
-atm-cash.please-charge-in-local-currency,คิดเป็นเงินบาท,,khit pen ngoen bat,,,2,th-agent-v1
-atm-cash.where-can-i-get-coins,แลกเหรียญได้ที่ไหน,,laek rian dai thi nai,,,2,th-agent-v1
-atm-cash.is-there-a-minimum-for-cards,บัตรมีขั้นต่ำไหม,,bat mi khan tam mai,,,2,th-agent-v1
-atm-cash.atm,ตู้เอทีเอ็ม,ATM,tu ethiem,,,2,th-agent-v1
-atm-cash.banknote,แบงก์,ธนบัตร,bang,,,2,th-agent-v1
-atm-cash.coin,เหรียญ,,rian,,,2,th-agent-v1
-atm-cash.cash-only,รับเงินสดเท่านั้น,,rap ngoen sot thaonan,,,2,th-agent-v1
+atm-cash.the-card-was-declined,บัตรใช้ไม่ได้,,bat chai mai dai,bat˨˩ tɕʰaj˦˥maj˥˩daːj˥˩,,2,th-agent-v1;ipa=thaig2p
+atm-cash.what-is-the-exchange-rate,อัตราแลกเปลี่ยน เท่าไร,เรทเท่าไร,attra laekplian thaorai,ʔat˨˩ta˨˩raː˧lɛːk˥˩plia̯n˨˩ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+atm-cash.no-money-came-out,เงินไม่ออก,,ngoen mai ok,ŋɤn˧ maj˥˩ ʔɔːk˨˩,,2,th-agent-v1;ipa=thaig2p
+atm-cash.where-can-i-change-money,แลกเงินได้ที่ไหน,,laek ngoen dai thi nai,lɛːk˥˩ ŋɤn˧daːj˥˩ tʰiː˥˩naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.the-machine-is-out-of-service,ตู้เสีย,,tu sia,tuː˥˩ sia̯˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.please-give-me-smaller-notes,ขอแบงก์ย่อย,,kho bang yoi,kʰɔː˩˩˦ bɛŋ˦ jɔj˥˩,,2,th-agent-v1;ipa=thaig2p
+atm-cash.do-you-have-change,มีเงินทอนไหม,,mi ngoen thon mai,miː˧ ŋɤn˧tʰɔːn˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.may-i-pay-in,จ่ายเป็น {} ได้ไหม,,chai pen {} dai mai,tɕaːj˨˩ pen˧ {} daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.please-charge-in-local-currency,คิดเป็นเงินบาท,,khit pen ngoen bat,kʰit˦˥ pen˧ ŋɤn˧baːt˨˩,,2,th-agent-v1;ipa=thaig2p
+atm-cash.where-can-i-get-coins,แลกเหรียญได้ที่ไหน,,laek rian dai thi nai,lɛːk˥˩ ria̯n˩˩˦ daːj˥˩ tʰiː˥˩naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.is-there-a-minimum-for-cards,บัตรมีขั้นต่ำไหม,,bat mi khan tam mai,bat˨˩ miː˧ kʰan˥˩tam˨˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.atm,ตู้เอทีเอ็ม,ATM,tu ethiem,tuː˥˩ʔeː˧tʰiː˧ʔem˧,,2,th-agent-v1;ipa=thaig2p
+atm-cash.banknote,แบงก์,ธนบัตร,bang,bɛŋ˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.coin,เหรียญ,,rian,ria̯n˩˩˦,,2,th-agent-v1;ipa=thaig2p
+atm-cash.cash-only,รับเงินสดเท่านั้น,,rap ngoen sot thaonan,rap˦˥ ŋɤn˧sot˨˩ tʰaw˥˩nan˦˥,,2,th-agent-v1;ipa=thaig2p
 atm-cash.fee,ค่าธรรมเนียม,,kha thamniam,,,2,th-agent-v1
-atm-cash.change,เงินทอน,,ngoen thon,,,2,th-agent-v1
-atm-cash.exchange-rate,อัตราแลกเปลี่ยน,เรท,attra laekplian,,,2,th-agent-v1
-atm-cash.bank,ธนาคาร,,thanakhan,,,2,th-agent-v1
-atm-cash.money-exchange,รับแลกเงิน,แลกเปลี่ยนเงินตรา,rap laek ngoen,,,2,th-agent-v1
-atm-cash.pin,รหัส,PIN,rahat,,,2,th-agent-v1
-numbers-money.baht,บาท,,bat,,,2,th-gaps-v1
+atm-cash.change,เงินทอน,,ngoen thon,ŋɤn˧tʰɔːn˧,,2,th-agent-v1;ipa=thaig2p
+atm-cash.exchange-rate,อัตราแลกเปลี่ยน,เรท,attra laekplian,ʔat˨˩ta˨˩raː˧lɛːk˥˩plia̯n˨˩,,2,th-agent-v1;ipa=thaig2p
+atm-cash.bank,ธนาคาร,,thanakhan,tʰa˦˥naː˧kʰaː˧ra˦˥,,2,th-agent-v1;ipa=thaig2p
+atm-cash.money-exchange,รับแลกเงิน,แลกเปลี่ยนเงินตรา,rap laek ngoen,rap˦˥ lɛːk˥˩ŋɤn˧,,2,th-agent-v1;ipa=thaig2p
+atm-cash.pin,รหัส,PIN,rahat,ra˦˥hat˨˩,,2,th-agent-v1;ipa=thaig2p
+numbers-money.baht,บาท,,bat,baːt˨˩,,2,th-gaps-v1;ipa=thaig2p
 numbers-money.baht-symbol,฿,บาท,bat,,,2,th-gaps-v1
 numbers-money.number-and-classifier-notes,"ประกอบตัวเลข: 11 = shi yi, 20 = er shi, 21 = er shi yi บอกเบอร์โทร 1 มักอ่านว่า yao ลักษณนามจีน เรียงต่างจากไทย คือ จำนวน + ลักษณนาม + คำนาม เช่น liang zhang piao = ตั๋ว 2 ใบ ที่ใช้บ่อย: ge (ทั่วไป), wei (คน), zhang (ตั๋วและของแบน), bei (ถ้วย), wan (ชาม), ping (ขวด) เงิน: ภาษาพูดเรียก yuan ว่า kuai, jiao หรือ mao = 0.1 yuan, fen = 0.01 yuan",,,,,2,th-notes-v1
 numbers-money.number-and-classifier-notes-2,"ประกอบตัวเลข: 11 = juuichi, 20 = nijuu, 21 = nijuuichi ลักษณนามญี่ปุ่น เป็นคำต่อท้ายตัวเลข: -tsu (ของทั่วไป), -mai (ของแบน), -hon (ของยาว), -nin (คน), -hai (ถ้วย) บอกเบอร์โทร: 0 = zero หรือ maru, 4 = yon, 7 = nana, 9 = kyuu ขีดคั่นอ่านว่า no",,,,,2,th-notes-v1

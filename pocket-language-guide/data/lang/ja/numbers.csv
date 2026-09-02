@@ -1,49 +1,49 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-numbers-money.l-ng,零,,rei,,,2,japanese-reviewed-v6
+numbers-money.l-ng,零,,rei,ɾei,,2,japanese-reviewed-v6;ipa=hepburn
 atm-cash.where-is-an-atm,ATMはどこですか？,,ētīemu wa doko desu ka?,,,2,ja-agent-v1
-numbers-money.y,一,,ichi,,,2,japanese-reviewed-v6
-atm-cash.does-this-atm-take-foreign-cards,海外発行のカードは使えますか？,,kaigai hakkō no kādo wa tsukaemasu ka?,,,2,ja-agent-v1
-numbers-money.r,二,,ni,,,2,japanese-reviewed-v6
+numbers-money.y,一,,ichi,itɕi,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.does-this-atm-take-foreign-cards,海外発行のカードは使えますか？,,kaigai hakkō no kādo wa tsukaemasu ka?,kaiɡai hakkoː no kaːdo wa tsɯkaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.r,二,,ni,ɲi,,2,japanese-reviewed-v6;ipa=hepburn
 atm-cash.the-atm-kept-my-card,ATMがカードを取り込みました,,ētīemu ga kādo o torikomimashita,,,2,ja-agent-v1
-atm-cash.is-there-a-fee,手数料はかかりますか？,,tesūryō wa kakarimasu ka?,,,2,ja-agent-v1
-numbers-money.li-ng,二,,ni,,,2,ja-agent-v1
-numbers-money.s-n,三,,san,,,2,japanese-reviewed-v6
-atm-cash.the-card-was-declined,カードが通りませんでした,,kādo ga tōrimasen deshita,,,2,ja-agent-v1
-numbers-money.s,四,,yon,,,2,japanese-reviewed-v6
-atm-cash.what-is-the-exchange-rate,為替レートはいくらですか？,,kawase rēto wa ikura desu ka?,,,2,ja-agent-v1
-numbers-money.w,五,,go,,,2,japanese-reviewed-v6
-atm-cash.no-money-came-out,お金が出てきません,,okane ga dete kimasen,,,2,ja-agent-v1
-numbers-money.li,六,,roku,,,2,japanese-reviewed-v6
-atm-cash.where-can-i-change-money,両替はどこでできますか？,,ryōgae wa doko de dekimasu ka?,,,2,ja-agent-v1
-numbers-money.q,七,,nana,,,2,japanese-reviewed-v6
-atm-cash.the-machine-is-out-of-service,機械が故障しています,,kikai ga koshō shiteimasu,,,2,ja-agent-v1
-numbers-money.b,八,,hachi,,,2,japanese-reviewed-v6
-atm-cash.please-give-me-smaller-notes,小さいお札にしてください,,chiisai osatsu ni shite kudasai,,,2,ja-agent-v1
-numbers-money.ji,九,,kyū,,,2,japanese-reviewed-v6
-atm-cash.do-you-have-change,細かいお金はありますか？,,komakai okane wa arimasu ka?,,,2,ja-agent-v1
-numbers-money.sh,十,,jū,,,2,japanese-reviewed-v6
-atm-cash.may-i-pay-in,{}で払えますか？,,{} de haraemasu ka?,,,2,ja-agent-v1
-numbers-money.y-b-i,百,,hyaku,,,2,japanese-reviewed-v6
-atm-cash.please-charge-in-local-currency,円で決済してください,,en de kessai shite kudasai,,,2,ja-agent-v1
-numbers-money.y-qi-n,千,,sen,,,2,japanese-reviewed-v6
-atm-cash.where-can-i-get-coins,小銭はどこでもらえますか？,,kozeni wa doko de moraemasu ka?,,,2,ja-agent-v1
-numbers-money.y-w-n,一万,,ichiman,,,2,japanese-reviewed-v6
-atm-cash.is-there-a-minimum-for-cards,カードは最低金額がありますか？,,kādo wa saitei kingaku ga arimasu ka?,,,2,ja-agent-v1
-numbers-money.b-n,半分,,hanbun,,,2,japanese-reviewed-v6
+atm-cash.is-there-a-fee,手数料はかかりますか？,,tesūryō wa kakarimasu ka?,tesɯːɾjoː wa kakaɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.li-ng,二,,ni,ɲi,,2,ja-agent-v1;ipa=hepburn
+numbers-money.s-n,三,,san,saɴ,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.the-card-was-declined,カードが通りませんでした,,kādo ga tōrimasen deshita,kaːdo ɡa toːɾimaseɴ deɕita,,2,ja-agent-v1;ipa=hepburn
+numbers-money.s,四,,yon,joɴ,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.what-is-the-exchange-rate,為替レートはいくらですか？,,kawase rēto wa ikura desu ka?,kawase ɾeːto wa ikɯɾa desɯ ka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.w,五,,go,ɡo,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.no-money-came-out,お金が出てきません,,okane ga dete kimasen,okane ɡa dete kimaseɴ,,2,ja-agent-v1;ipa=hepburn
+numbers-money.li,六,,roku,ɾokɯ,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.where-can-i-change-money,両替はどこでできますか？,,ryōgae wa doko de dekimasu ka?,ɾjoːɡae wa doko de dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.q,七,,nana,nana,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.the-machine-is-out-of-service,機械が故障しています,,kikai ga koshō shiteimasu,kikai ɡa koɕoː ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+numbers-money.b,八,,hachi,hatɕi,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.please-give-me-smaller-notes,小さいお札にしてください,,chiisai osatsu ni shite kudasai,tɕiisai osatsɯ ɲi ɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+numbers-money.ji,九,,kyū,kjɯː,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.do-you-have-change,細かいお金はありますか？,,komakai okane wa arimasu ka?,komakai okane wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.sh,十,,jū,dʑɯː,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.may-i-pay-in,{}で払えますか？,,{} de haraemasu ka?,{} de haɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.y-b-i,百,,hyaku,çakɯ,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.please-charge-in-local-currency,円で決済してください,,en de kessai shite kudasai,eɴ de kessai ɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+numbers-money.y-qi-n,千,,sen,seɴ,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.where-can-i-get-coins,小銭はどこでもらえますか？,,kozeni wa doko de moraemasu ka?,kozeɲi wa doko de moɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.y-w-n,一万,,ichiman,itɕimaɴ,,2,japanese-reviewed-v6;ipa=hepburn
+atm-cash.is-there-a-minimum-for-cards,カードは最低金額がありますか？,,kādo wa saitei kingaku ga arimasu ka?,kaːdo wa saitei kiɴɡakɯ ɡa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.b-n,半分,,hanbun,haɴbɯɴ,,2,japanese-reviewed-v6;ipa=hepburn
 atm-cash.atm,ATM,,ētīemu,,,2,ja-agent-v1
-atm-cash.banknote,お札,紙幣,osatsu,,,2,ja-agent-v1
-numbers-money.yu-n,元,,gen,,,2,ja-agent-v1
-atm-cash.coin,硬貨,コイン,kōka,,,2,ja-agent-v1
-numbers-money.ku-i,元,,gen,,,2,ja-agent-v1
-atm-cash.cash-only,現金のみ,,genkin nomi,,,2,ja-agent-v1
+atm-cash.banknote,お札,紙幣,osatsu,osatsɯ,,2,ja-agent-v1;ipa=hepburn
+numbers-money.yu-n,元,,gen,ɡeɴ,,2,ja-agent-v1;ipa=hepburn
+atm-cash.coin,硬貨,コイン,kōka,koːka,,2,ja-agent-v1;ipa=hepburn
+numbers-money.ku-i,元,,gen,ɡeɴ,,2,ja-agent-v1;ipa=hepburn
+atm-cash.cash-only,現金のみ,,genkin nomi,ɡeɴkiɴ nomi,,2,ja-agent-v1;ipa=hepburn
 numbers-money.number-and-classifier-notes,数の作り方は 11 = shi yi、20 = er shi、21 = er shi yi。 電話番号の 1 は yao、量詞の前の 2 は liang。 量詞は ge が個、wei が名、zhang が枚、bei が杯、ping が本。 お金は話し言葉で kuai が元、jiao / mao = 0.1 元、fen = 0.01 元。,,,,,2,ja-notes-v1
-atm-cash.fee,手数料,,tesūryō,,,2,ja-agent-v1
-atm-cash.change,お釣り,,otsuri,,,2,ja-agent-v1
-atm-cash.exchange-rate,為替レート,,kawase rēto,,,2,ja-agent-v1
-atm-cash.bank,銀行,,ginkō,,,2,ja-agent-v1
-atm-cash.money-exchange,外貨両替,,gaika ryōgae,,,2,ja-agent-v1
-atm-cash.pin,暗証番号,,anshō bangō,,,2,ja-agent-v1
-numbers-money.2-items,二つ,,futatsu,,,2,japanese-reviewed-v6
-numbers-money.yen,円,,en,,,2,japanese-reviewed-v6
-numbers-money.yen-symbol,￥,,en,,,2,japanese-reviewed-v6
+atm-cash.fee,手数料,,tesūryō,tesɯːɾjoː,,2,ja-agent-v1;ipa=hepburn
+atm-cash.change,お釣り,,otsuri,otsɯɾi,,2,ja-agent-v1;ipa=hepburn
+atm-cash.exchange-rate,為替レート,,kawase rēto,kawase ɾeːto,,2,ja-agent-v1;ipa=hepburn
+atm-cash.bank,銀行,,ginkō,ɡiɴkoː,,2,ja-agent-v1;ipa=hepburn
+atm-cash.money-exchange,外貨両替,,gaika ryōgae,ɡaika ɾjoːɡae,,2,ja-agent-v1;ipa=hepburn
+atm-cash.pin,暗証番号,,anshō bangō,aɴɕoː baɴɡoː,,2,ja-agent-v1;ipa=hepburn
+numbers-money.2-items,二つ,,futatsu,ɸɯtatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+numbers-money.yen,円,,en,eɴ,,2,japanese-reviewed-v6;ipa=hepburn
+numbers-money.yen-symbol,￥,,en,eɴ,,2,japanese-reviewed-v6;ipa=hepburn
 numbers-money.number-and-classifier-notes-2,,,,,,2,japanese-reviewed-v6

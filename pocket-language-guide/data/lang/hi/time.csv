@@ -1,44 +1,44 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,कितने बजे हैं?,,kitne baje haiṁ?,,,2,hi-agent-v1
-time-scheduling.how-many-minutes,कितने मिनट?,,kitne minaṭ?,,,2,hi-agent-v1
-time-scheduling.what-time-should-we-meet,कितने बजे मिलें?,,kitne baje mileṁ?,,,2,hi-agent-v1
-time-scheduling.can-we-change-the-time,क्या समय बदला जा सकता है?,,kyā samay badlā jā saktā hai?,,,2,hi-agent-v1
-time-scheduling.when-is-convenient,आपको कब ठीक रहेगा?,,āpko kab ṭhīk rahegā?,,,2,hi-agent-v1
-time-scheduling.what-is-today-s-date,आज कौन सी तारीख है?,,āj kaun sī tārīkh hai?,,,2,hi-agent-v1
-time-scheduling.what-day-is-it-today,आज कौन सा दिन है?,,āj kaun sā din hai?,,,2,hi-agent-v1
-time-scheduling.what-time-does-it-open,कितने बजे खुलता है?,,kitne baje khultā hai?,,,2,hi-agent-v1
-time-scheduling.what-time-does-it-close,कितने बजे बंद होता है?,,kitne baje baṁd hotā hai?,,,2,hi-agent-v1
-time-scheduling.how-long-does-it-take,कितना समय लगेगा?,,kitnā samay lagegā?,,,2,hi-agent-v1
-time-words.today,आज,,āj,,,2,hi-agent-v1
-time-words.tomorrow,कल,,kal,,also means yesterday,2,hi-agent-v1
-time-words.yesterday,कल,,kal,,same word as tomorrow,2,hi-agent-v1
-time-words.this-week,इस हफ़्ते,,is hafte,,,2,hi-agent-v1
-time-words.next-week,अगले हफ़्ते,,agle hafte,,,2,hi-agent-v1
-time-words.morning,सुबह,,subah,,,2,hi-agent-v1
-time-words.afternoon,दोपहर,,dopahar,,,2,hi-agent-v1
-time-words.evening,शाम,,śām,,,2,hi-agent-v1
-time-words.spring,वसंत,,vasaṁt,,,2,hi-agent-v1
-time-words.summer,गर्मी,,garmī,,,2,hi-agent-v1
-time-words.fall,पतझड़,,patjhaṛ,,,2,hi-agent-v1
-time-words.winter,सर्दी,,sardī,,,2,hi-agent-v1
-time-words.night,रात,,rāt,,,2,hi-agent-v1
-days-of-week.monday,सोमवार,,somvār,,,2,hi-agent-v1
-days-of-week.tuesday,मंगलवार,,maṁgalvār,,,2,hi-agent-v1
-days-of-week.wednesday,बुधवार,,budhvār,,,2,hi-agent-v1
-days-of-week.thursday,गुरुवार,,guruvār,,,2,hi-agent-v1
-days-of-week.friday,शुक्रवार,,śukravār,,,2,hi-agent-v1
-days-of-week.saturday,शनिवार,,śanivār,,,2,hi-agent-v1
-days-of-week.sunday,रविवार,इतवार,ravivār,,,2,hi-agent-v1
-months.january,जनवरी,,janvarī,,,2,hi-agent-v1
-months.february,फ़रवरी,,farvarī,,,2,hi-agent-v1
-months.march,मार्च,,mārc,,,2,hi-agent-v1
-months.april,अप्रैल,,aprail,,,2,hi-agent-v1
-months.may,मई,,maī,,,2,hi-agent-v1
-months.june,जून,,jūn,,,2,hi-agent-v1
-months.july,जुलाई,,julāī,,,2,hi-agent-v1
-months.august,अगस्त,,agast,,,2,hi-agent-v1
-months.september,सितंबर,,sitaṁbar,,,2,hi-agent-v1
-months.october,अक्टूबर,,akṭūbar,,,2,hi-agent-v1
-months.november,नवंबर,,navaṁbar,,,2,hi-agent-v1
-months.december,दिसंबर,,disaṁbar,,,2,hi-agent-v1
+time-scheduling.what-time-is-it,कितने बजे हैं?,,kitne baje haiṁ?,kˈɪtnˌeː bˈʌɟeː hɛ̃,,2,hi-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,कितने मिनट?,,kitne minaṭ?,kˈɪtnˌeː mˈɪnəʈ,,2,hi-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,कितने बजे मिलें?,,kitne baje mileṁ?,kˈɪtnˌeː bˈʌɟeː mˈɪlẽː,,2,hi-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,क्या समय बदला जा सकता है?,,kyā samay badlā jā saktā hai?,kːjaː sˈʌmˌɛj bˈʌdlˌaː ɟˈaː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,आपको कब ठीक रहेगा?,,āpko kab ṭhīk rahegā?,ˌaːpkˌoː kˈʌb ʈʰˈiːk ɾəhˈeːɡaː,,2,hi-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,आज कौन सी तारीख है?,,āj kaun sī tārīkh hai?,ˈaːɟ kˈɔːn sˈi taːɾˈiːkʰ hɛː,,2,hi-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,आज कौन सा दिन है?,,āj kaun sā din hai?,ˈaːɟ kˈɔːn sˈaː dˈɪn hɛː,,2,hi-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,कितने बजे खुलता है?,,kitne baje khultā hai?,kˈɪtnˌeː bˈʌɟeː kʰˈʊltˌaː hɛː,,2,hi-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,कितने बजे बंद होता है?,,kitne baje baṁd hotā hai?,kˈɪtnˌeː bˈʌɟeː bˈʌnd hˈoːtaː hɛː,,2,hi-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,कितना समय लगेगा?,,kitnā samay lagegā?,kˈɪtnˌaː sˈʌmˌɛj ləɡˈeːɡaː,,2,hi-agent-v1;ipa=espeak
+time-words.today,आज,,āj,ˈaːɟ,,2,hi-agent-v1;ipa=espeak
+time-words.tomorrow,कल,,kal,kˈʌl,also means yesterday,2,hi-agent-v1;ipa=espeak
+time-words.yesterday,कल,,kal,kˈʌl,same word as tomorrow,2,hi-agent-v1;ipa=espeak
+time-words.this-week,इस हफ़्ते,,is hafte,ˈɪs hˈʌfteː,,2,hi-agent-v1;ipa=espeak
+time-words.next-week,अगले हफ़्ते,,agle hafte,ˈʌɡlˌeː hˈʌfteː,,2,hi-agent-v1;ipa=espeak
+time-words.morning,सुबह,,subah,sˈʊbəh,,2,hi-agent-v1;ipa=espeak
+time-words.afternoon,दोपहर,,dopahar,dˈoːpəhˌəɾ,,2,hi-agent-v1;ipa=espeak
+time-words.evening,शाम,,śām,ʃˈaːm,,2,hi-agent-v1;ipa=espeak
+time-words.spring,वसंत,,vasaṁt,ʋəsˈʌnt,,2,hi-agent-v1;ipa=espeak
+time-words.summer,गर्मी,,garmī,ɡˈʌrmi,,2,hi-agent-v1;ipa=espeak
+time-words.fall,पतझड़,,patjhaṛ,pˈʌtəɟʰˌəɽ,,2,hi-agent-v1;ipa=espeak
+time-words.winter,सर्दी,,sardī,sˈʌɾdi,,2,hi-agent-v1;ipa=espeak
+time-words.night,रात,,rāt,ɾˈaːt,,2,hi-agent-v1;ipa=espeak
+days-of-week.monday,सोमवार,,somvār,sˌoːmʋˈaːɾ,,2,hi-agent-v1;ipa=espeak
+days-of-week.tuesday,मंगलवार,,maṁgalvār,mˌəŋɡəlʋˈaːɾ,,2,hi-agent-v1;ipa=espeak
+days-of-week.wednesday,बुधवार,,budhvār,bˌʊdʰʋˈaːɾ,,2,hi-agent-v1;ipa=espeak
+days-of-week.thursday,गुरुवार,,guruvār,ɡˌʊɾʊʋˈaːɾ,,2,hi-agent-v1;ipa=espeak
+days-of-week.friday,शुक्रवार,,śukravār,ʃˌʊkɾəʋˈaːɾ,,2,hi-agent-v1;ipa=espeak
+days-of-week.saturday,शनिवार,,śanivār,ʃˌənɪʋˈaːɾ,,2,hi-agent-v1;ipa=espeak
+days-of-week.sunday,रविवार,इतवार,ravivār,ɾˌəʋɪʋˈaːɾ,,2,hi-agent-v1;ipa=espeak
+months.january,जनवरी,,janvarī,ɟˈʌnəʋɾi,,2,hi-agent-v1;ipa=espeak
+months.february,फ़रवरी,,farvarī,fˈʌɾəʋɾi,,2,hi-agent-v1;ipa=espeak
+months.march,मार्च,,mārc,mˈaːɾc,,2,hi-agent-v1;ipa=espeak
+months.april,अप्रैल,,aprail,ʌpɾˈɛːl,,2,hi-agent-v1;ipa=espeak
+months.may,मई,,maī,mˈʌi,,2,hi-agent-v1;ipa=espeak
+months.june,जून,,jūn,ɟˈuːn,,2,hi-agent-v1;ipa=espeak
+months.july,जुलाई,,julāī,ɟʊlˈaːi,,2,hi-agent-v1;ipa=espeak
+months.august,अगस्त,,agast,ʌɡˈʌst,,2,hi-agent-v1;ipa=espeak
+months.september,सितंबर,,sitaṁbar,sɪtˈʌmbəɾ,,2,hi-agent-v1;ipa=espeak
+months.october,अक्टूबर,,akṭūbar,ʌkʈˈuːbəɾ,,2,hi-agent-v1;ipa=espeak
+months.november,नवंबर,,navaṁbar,nəʋˈʌmbəɾ,,2,hi-agent-v1;ipa=espeak
+months.december,दिसंबर,,disaṁbar,dɪsˈʌmbəɾ,,2,hi-agent-v1;ipa=espeak
 time-words.clock-offset,"स्वाहिली घड़ी सूरज निकलने से शुरू होती है और आपकी घड़ी से छह घंटे हटकर चलती है: जो संख्या सुनें उसमें छह जोड़ दीजिए, वही आपकी घड़ी का समय है। saa moja = 7:00, saa sita = दोपहर 12:00, saa kumi = 16:00। उलझन से बचने के लिए समय अंकों में बताइए, या पश्चिमी समय के लिए saa ngapi za kizungu पूछिए।",,,,,2,hi-notes-v1

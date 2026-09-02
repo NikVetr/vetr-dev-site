@@ -1,44 +1,44 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,Jam berapa sekarang?,,,,2,id-agent-v1
-time-scheduling.how-many-minutes,Berapa menit?,,,,2,id-agent-v1
-time-scheduling.what-time-should-we-meet,Kita bertemu jam berapa?,,,,2,id-agent-v1
-time-scheduling.can-we-change-the-time,Bisa ganti jamnya?,,,,2,id-agent-v1
-time-scheduling.when-is-convenient,Kapan waktunya cocok?,,,,2,id-agent-v1
-time-scheduling.what-is-today-s-date,Hari ini tanggal berapa?,,,,2,id-agent-v1
-time-scheduling.what-day-is-it-today,Hari ini hari apa?,,,,2,id-agent-v1
-time-scheduling.what-time-does-it-open,Buka jam berapa?,,,,2,id-agent-v1
-time-scheduling.what-time-does-it-close,Tutup jam berapa?,,,,2,id-agent-v1
-time-scheduling.how-long-does-it-take,Berapa lama?,,,,2,id-agent-v1
-time-words.today,hari ini,,,,2,id-agent-v1
-time-words.tomorrow,besok,,,,2,id-agent-v1
-time-words.yesterday,kemarin,,,,2,id-agent-v1
-time-words.this-week,minggu ini,,,,2,id-agent-v1
-time-words.next-week,minggu depan,,,,2,id-agent-v1
-time-words.morning,pagi,,,to about 11,2,id-agent-v1
-time-words.afternoon,siang,sore,,"siang to 3, sore to dusk",2,id-agent-v1
-time-words.evening,sore,malam,,,2,id-agent-v1
-time-words.fall,musim gugur,,,Indonesia has only wet and dry,2,id-agent-v1
-time-words.spring,musim semi,,,,2,id-agent-v1
-time-words.summer,musim panas,musim kemarau,,,2,id-agent-v1
-time-words.winter,musim dingin,musim hujan,,,2,id-agent-v1
-time-words.night,malam,,,,2,id-agent-v1
-days-of-week.monday,Senin,,,,2,id-agent-v1
-days-of-week.tuesday,Selasa,,,,2,id-agent-v1
-days-of-week.wednesday,Rabu,,,,2,id-agent-v1
-days-of-week.thursday,Kamis,,,,2,id-agent-v1
-days-of-week.friday,Jumat,,,,2,id-agent-v1
-days-of-week.saturday,Sabtu,,,,2,id-agent-v1
-days-of-week.sunday,Minggu,hari Minggu,,Minggu also means week,2,id-agent-v1
-months.january,Januari,,,,2,id-agent-v1
-months.february,Februari,,,,2,id-agent-v1
-months.march,Maret,,,,2,id-agent-v1
-months.april,April,,,,2,id-agent-v1
-months.may,Mei,,,,2,id-agent-v1
-months.june,Juni,,,,2,id-agent-v1
-months.july,Juli,,,,2,id-agent-v1
-months.august,Agustus,,,,2,id-agent-v1
-months.september,September,,,,2,id-agent-v1
-months.october,Oktober,,,,2,id-agent-v1
-months.november,November,,,,2,id-agent-v1
-months.december,Desember,,,,2,id-agent-v1
+time-scheduling.what-time-is-it,Jam berapa sekarang?,,dʒˈam bərˈapa səkˈaraŋ,,2,id-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,Berapa menit?,,bərˈapa mˈɛnit,,2,id-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,Kita bertemu jam berapa?,,kˈita bərtˈɛmu dʒˈam bərˈapa,,2,id-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,Bisa ganti jamnya?,,bˈisa ɡˈanti dʒˈamɲa,,2,id-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,Kapan waktunya cocok?,,kˈapan waktˈuɲa tʃˈotʃok,,2,id-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,Hari ini tanggal berapa?,,hˈari ˈini tˈaŋɡal bərˈapa,,2,id-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,Hari ini hari apa?,,hˈari ˈini hˈari ˈapa,,2,id-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,Buka jam berapa?,,bˈuka dʒˈam bərˈapa,,2,id-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,Tutup jam berapa?,,tˈutup dʒˈam bərˈapa,,2,id-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,Berapa lama?,,bərˈapa lˈama,,2,id-agent-v1;ipa=espeak
+time-words.today,hari ini,,hˈari ˈini,,2,id-agent-v1;ipa=espeak
+time-words.tomorrow,besok,,bˈɛsok,,2,id-agent-v1;ipa=espeak
+time-words.yesterday,kemarin,,kəmˈarin,,2,id-agent-v1;ipa=espeak
+time-words.this-week,minggu ini,,mˈiŋɡu ˈini,,2,id-agent-v1;ipa=espeak
+time-words.next-week,minggu depan,,mˈiŋɡu dˈɛpan,,2,id-agent-v1;ipa=espeak
+time-words.morning,pagi,,pˈaɡi,to about 11,2,id-agent-v1;ipa=espeak
+time-words.afternoon,siang,sore,sˈiaŋ,"siang to 3, sore to dusk",2,id-agent-v1;ipa=espeak
+time-words.evening,sore,malam,sˈɔrə,,2,id-agent-v1;ipa=espeak
+time-words.fall,musim gugur,,mˈusim ɡˈuɡur,Indonesia has only wet and dry,2,id-agent-v1;ipa=espeak
+time-words.spring,musim semi,,mˈusim sˈɛmi,,2,id-agent-v1;ipa=espeak
+time-words.summer,musim panas,musim kemarau,mˈusim pˈanas,,2,id-agent-v1;ipa=espeak
+time-words.winter,musim dingin,musim hujan,mˈusim dˈiŋin,,2,id-agent-v1;ipa=espeak
+time-words.night,malam,,mˈalam,,2,id-agent-v1;ipa=espeak
+days-of-week.monday,Senin,,sˈɛnin,,2,id-agent-v1;ipa=espeak
+days-of-week.tuesday,Selasa,,səlˈasa,,2,id-agent-v1;ipa=espeak
+days-of-week.wednesday,Rabu,,rˈabu,,2,id-agent-v1;ipa=espeak
+days-of-week.thursday,Kamis,,kˈamis,,2,id-agent-v1;ipa=espeak
+days-of-week.friday,Jumat,,dʒˈumat,,2,id-agent-v1;ipa=espeak
+days-of-week.saturday,Sabtu,,sˈabtu,,2,id-agent-v1;ipa=espeak
+days-of-week.sunday,Minggu,hari Minggu,mˈiŋɡu,Minggu also means week,2,id-agent-v1;ipa=espeak
+months.january,Januari,,dʒˌanuˈari,,2,id-agent-v1;ipa=espeak
+months.february,Februari,,fˌɛbruˈari,,2,id-agent-v1;ipa=espeak
+months.march,Maret,,mˈarət,,2,id-agent-v1;ipa=espeak
+months.april,April,,ˈapril,,2,id-agent-v1;ipa=espeak
+months.may,Mei,,mˈɛi,,2,id-agent-v1;ipa=espeak
+months.june,Juni,,dʒˈuni,,2,id-agent-v1;ipa=espeak
+months.july,Juli,,dʒˈuli,,2,id-agent-v1;ipa=espeak
+months.august,Agustus,,aɡˈustus,,2,id-agent-v1;ipa=espeak
+months.september,September,,səptˈɛmbər,,2,id-agent-v1;ipa=espeak
+months.october,Oktober,,oktˈobər,,2,id-agent-v1;ipa=espeak
+months.november,November,,novˈɛmbər,,2,id-agent-v1;ipa=espeak
+months.december,Desember,,dəsˈɛmbər,,2,id-agent-v1;ipa=espeak
 time-words.clock-offset,"Jam Swahili dihitung dari matahari terbit dan bergeser enam jam dari jam di ponsel Anda: angka yang Anda dengar selalu enam lebih kecil, jadi tambahkan enam untuk mendapat jam Anda. saa moja = pukul 07.00, saa sita = 12.00 tengah hari, saa kumi = 16.00. Agar tidak keliru, sebutkan waktu dengan angka, atau tanyakan saa ngapi za kizungu untuk jam Barat.",,,,2,id-notes-v1

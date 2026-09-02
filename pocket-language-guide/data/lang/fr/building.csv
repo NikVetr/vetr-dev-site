@@ -1,60 +1,60 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-toilets.where-toilet,Où sont les toilettes ?,,,,2,fr-agent-v1
-accessibility.step-free,Y a-t-il un accès de plain-pied ?,accès sans marches,,,2,fr-agent-v1
-toilets.where-public-toilet,Où y a-t-il des toilettes publiques ?,,,,2,fr-agent-v1
-accessibility.wheelchair-access,C'est accessible en fauteuil roulant ?,,,,2,fr-agent-v1
-toilets.may-i-use-the-toilet,Puis-je utiliser les toilettes ?,,,,2,fr-agent-v1
-accessibility.elevator,Y a-t-il un ascenseur ?,,,,2,fr-agent-v1
-toilets.is-it-only-for-customers,C'est réservé aux clients ?,,,,2,fr-agent-v1
-accessibility.ramp,Y a-t-il une rampe ?,,,,2,fr-agent-v1
-toilets.toilet-wc,Toilettes / WC,Sanitaires,,,2,fr-agent-v1
-accessibility.how-many-steps,Combien y a-t-il de marches ?,,,,2,fr-agent-v1
-toilets.is-it-free,C'est gratuit ?,,,,2,fr-agent-v1
-accessibility.cannot-climb-stairs,Je ne peux pas monter les escaliers,,,,2,fr-agent-v1
-toilets.do-i-need-a-coin,Faut-il une pièce ou un jeton ?,,,,2,fr-agent-v1
-accessibility.need-to-sit-down,J'ai besoin de m'asseoir,,,,2,fr-agent-v1
-toilets.is-the-tap-water-safe-to-drink,L'eau du robinet est-elle potable ?,,,,2,fr-agent-v1
-accessibility.accessible-restroom,Y a-t-il des toilettes accessibles ?,toilettes PMR,,,2,fr-agent-v1
-toilets.it-is-urgent,C'est urgent,,,,2,fr-agent-v1
-accessibility.station-assistance,Y a-t-il une assistance en gare ?,,,,2,fr-agent-v1
-toilets.may-i-have-the-toilet-key,Puis-je avoir la clé des toilettes ?,,,,2,fr-agent-v1
-accessibility.help-me-carry,Pourriez-vous m'aider à porter ceci ?,,,,2,fr-agent-v1
-toilets.there-is-no-toilet-paper,Il n'y a plus de papier toilette,,,,2,fr-agent-v1
-accessibility.board-first,Puis-je monter en premier ?,,,,2,fr-agent-v1
-toilets.toilet-paper,papier toilette,,,,2,fr-agent-v1
-accessibility.door-width,Quelle est la largeur de la porte ?,,,,2,fr-agent-v1
-toilets.it-is-out-of-order,C'est hors service,,,,2,fr-agent-v1
-accessibility.wheelchair-width,Mon fauteuil roulant fait {} cm de large,,,,2,fr-agent-v1
-toilets.out-of-order,Hors service,En panne,,,2,fr-agent-v1
-accessibility.hard-of-hearing,Je suis malentendant,,,,2,fr-agent-v1
-toilets.mens-toilet,Toilettes hommes,Messieurs,,,2,fr-agent-v1
-accessibility.speak-louder,"Parlez plus fort, s'il vous plaît",,,,2,fr-agent-v1
-toilets.womens-toilet,Toilettes femmes,Dames,,,2,fr-agent-v1
-accessibility.visually-impaired,Je suis malvoyant,,,,2,fr-agent-v1
-toilets.drinking-water,Eau potable,,,,2,fr-agent-v1
-accessibility.take-your-arm,Puis-je prendre votre bras ?,,,,2,fr-agent-v1
-toilets.not-for-drinking,Eau non potable,,,,2,fr-agent-v1
-accessibility.guide-dog,C'est mon chien guide,chien d'assistance,,,2,fr-agent-v1
-toilets.accessible-toilet,Toilettes accessibles,WC PMR,,,2,fr-agent-v1
-toilets.where-can-i-wash-my-hands,Où puis-je me laver les mains ?,,,,2,fr-agent-v1
-toilets.can-i-flush-the-paper,Puis-je jeter le papier dans la cuvette ?,,,,2,fr-agent-v1
-toilets.is-there-a-toilet-on-board,Y a-t-il des toilettes à bord ?,,,,2,fr-agent-v1
-toilets.the-toilet-will-not-flush,La chasse d'eau ne marche pas,,,,2,fr-agent-v1
-toilets.baby-change,Table à langer,,,,2,fr-agent-v1
-toilets.squat-toilet,Toilettes à la turque,,,,2,fr-agent-v1
-building-help.what-room-number-is-this,Quel est le numéro de cette salle ?,,,,2,fr-agent-v1
-building-help.i-am-lost,Je suis perdu,,,,2,fr-agent-v1
-building-help.where-is-reception,Où est la réception ?,,,,2,fr-agent-v1
-building-help.where-is-a-power-outlet,Où y a-t-il une prise électrique ?,,,,2,fr-agent-v1
-in-a-building.is-this-the-correct-entrance,C'est la bonne entrée ?,,,,2,fr-agent-v1
-in-a-building.do-you-have-wi-fi,Avez-vous le wifi ?,,,,2,fr-agent-v1
-in-a-building.what-is-the-wi-fi-password,Quel est le mot de passe du wifi ?,,,,2,fr-agent-v1
-in-a-building.which-floor,Quel étage ?,,,,2,fr-agent-v1
-building-words.elevator,ascenseur,,,,2,fr-agent-v1
-building-words.stairs,escalier,,,,2,fr-agent-v1
-building-words.entrance,entrée,,,,2,fr-agent-v1
-building-words.exit,sortie,,,,2,fr-agent-v1
-building-words.men,hommes,,,,2,fr-agent-v1
-building-words.women,femmes,,,,2,fr-agent-v1
-building-words.door,porte,,,,2,fr-agent-v1
-building-words.key,clé,,,,2,fr-agent-v1
+toilets.where-toilet,Où sont les toilettes ?,,u sɔ̃ le twalˈɛt,,2,fr-agent-v1;ipa=espeak
+accessibility.step-free,Y a-t-il un accès de plain-pied ?,accès sans marches,i atil œ̃n aksɛ də plˈɛ̃pjˈe,,2,fr-agent-v1;ipa=espeak
+toilets.where-public-toilet,Où y a-t-il des toilettes publiques ?,,u i atil de twalɛt pyblˈik,,2,fr-agent-v1;ipa=espeak
+accessibility.wheelchair-access,C'est accessible en fauteuil roulant ?,,sɛt aksɛsibl ɑ̃ fotœj ʁulˈɑ̃,,2,fr-agent-v1;ipa=espeak
+toilets.may-i-use-the-toilet,Puis-je utiliser les toilettes ?,,pyiʒ ytilize le twalˈɛt,,2,fr-agent-v1;ipa=espeak
+accessibility.elevator,Y a-t-il un ascenseur ?,,i atil œ̃n asɑ̃sˈœʁ,,2,fr-agent-v1;ipa=espeak
+toilets.is-it-only-for-customers,C'est réservé aux clients ?,,sɛ ʁezɛʁve o kliˈɑ̃,,2,fr-agent-v1;ipa=espeak
+accessibility.ramp,Y a-t-il une rampe ?,,i atil yn ʁˈɑ̃p,,2,fr-agent-v1;ipa=espeak
+toilets.toilet-wc,Toilettes / WC,Sanitaires,twalˈɛt / dubləvˌesˈe,,2,fr-agent-v1;ipa=espeak
+accessibility.how-many-steps,Combien y a-t-il de marches ?,,kɔ̃bjɛ̃ i atil də mˈaʁʃ,,2,fr-agent-v1;ipa=espeak
+toilets.is-it-free,C'est gratuit ?,,sɛ ɡʁatyˈi,,2,fr-agent-v1;ipa=espeak
+accessibility.cannot-climb-stairs,Je ne peux pas monter les escaliers,,ʒə nə pø pa mɔ̃te lez ɛskaljˈe,,2,fr-agent-v1;ipa=espeak
+toilets.do-i-need-a-coin,Faut-il une pièce ou un jeton ?,,fotil yn pjɛs u œ̃ ʒətˈɔ̃,,2,fr-agent-v1;ipa=espeak
+accessibility.need-to-sit-down,J'ai besoin de m'asseoir,,ʒe bəzwɛ̃ də maswˈaʁ,,2,fr-agent-v1;ipa=espeak
+toilets.is-the-tap-water-safe-to-drink,L'eau du robinet est-elle potable ?,,lo dy ʁobinɛ ɛtɛl potˈabl,,2,fr-agent-v1;ipa=espeak
+accessibility.accessible-restroom,Y a-t-il des toilettes accessibles ?,toilettes PMR,i atil de twalɛtz aksɛsˈibl,,2,fr-agent-v1;ipa=espeak
+toilets.it-is-urgent,C'est urgent,,sɛt yʁʒˈɑ̃,,2,fr-agent-v1;ipa=espeak
+accessibility.station-assistance,Y a-t-il une assistance en gare ?,,i atil yn asistɑ̃s ɑ̃ ɡˈaʁ,,2,fr-agent-v1;ipa=espeak
+toilets.may-i-have-the-toilet-key,Puis-je avoir la clé des toilettes ?,,pyiʒ avwaʁ la kle de twalˈɛt,,2,fr-agent-v1;ipa=espeak
+accessibility.help-me-carry,Pourriez-vous m'aider à porter ceci ?,,puʁjevu mɛde a pɔʁte səsˈi,,2,fr-agent-v1;ipa=espeak
+toilets.there-is-no-toilet-paper,Il n'y a plus de papier toilette,,il ni a ply də papje twalˈɛt,,2,fr-agent-v1;ipa=espeak
+accessibility.board-first,Puis-je monter en premier ?,,pyiʒ mɔ̃te ɑ̃ pʁəmjˈe,,2,fr-agent-v1;ipa=espeak
+toilets.toilet-paper,papier toilette,,papje twalˈɛt,,2,fr-agent-v1;ipa=espeak
+accessibility.door-width,Quelle est la largeur de la porte ?,,kɛl ɛ la laʁʒœʁ də la pˈɔʁt,,2,fr-agent-v1;ipa=espeak
+toilets.it-is-out-of-order,C'est hors service,,sɛ ɔʁ sɛʁvˈis,,2,fr-agent-v1;ipa=espeak
+accessibility.wheelchair-width,Mon fauteuil roulant fait {} cm de large,,mɔ̃ fotœj ʁulɑ̃ fˈɛ {} sɑ̃timɛtʁ də lˈaʁʒ,,2,fr-agent-v1;ipa=espeak
+toilets.out-of-order,Hors service,En panne,ɔʁ sɛʁvˈis,,2,fr-agent-v1;ipa=espeak
+accessibility.hard-of-hearing,Je suis malentendant,,ʒə syi malɑ̃tɑ̃dˈɑ̃,,2,fr-agent-v1;ipa=espeak
+toilets.mens-toilet,Toilettes hommes,Messieurs,twalɛtz ˈɔm,,2,fr-agent-v1;ipa=espeak
+accessibility.speak-louder,"Parlez plus fort, s'il vous plaît",,"paʁle ply fˈɔʁ, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+toilets.womens-toilet,Toilettes femmes,Dames,twalɛt fˈam,,2,fr-agent-v1;ipa=espeak
+accessibility.visually-impaired,Je suis malvoyant,,ʒə syi malvwajˈɑ̃,,2,fr-agent-v1;ipa=espeak
+toilets.drinking-water,Eau potable,,o potˈabl,,2,fr-agent-v1;ipa=espeak
+accessibility.take-your-arm,Puis-je prendre votre bras ?,,pyiʒ pʁɑ̃dʁ votʁ bʁˈa,,2,fr-agent-v1;ipa=espeak
+toilets.not-for-drinking,Eau non potable,,o nɔ̃ potˈabl,,2,fr-agent-v1;ipa=espeak
+accessibility.guide-dog,C'est mon chien guide,chien d'assistance,sɛ mɔ̃ ʃjɛ̃ ɡˈid,,2,fr-agent-v1;ipa=espeak
+toilets.accessible-toilet,Toilettes accessibles,WC PMR,twalɛtz aksɛsˈibl,,2,fr-agent-v1;ipa=espeak
+toilets.where-can-i-wash-my-hands,Où puis-je me laver les mains ?,,u pyiʒ mə lave le mˈɛ̃,,2,fr-agent-v1;ipa=espeak
+toilets.can-i-flush-the-paper,Puis-je jeter le papier dans la cuvette ?,,pyiʒ ʒəte lə papje dɑ̃ la kyvˈɛt,,2,fr-agent-v1;ipa=espeak
+toilets.is-there-a-toilet-on-board,Y a-t-il des toilettes à bord ?,,i atil de twalɛtz a bˈɔʁ,,2,fr-agent-v1;ipa=espeak
+toilets.the-toilet-will-not-flush,La chasse d'eau ne marche pas,,la ʃas do nə maʁʃ pˈa,,2,fr-agent-v1;ipa=espeak
+toilets.baby-change,Table à langer,,tabl a lɑ̃ʒˈe,,2,fr-agent-v1;ipa=espeak
+toilets.squat-toilet,Toilettes à la turque,,twalɛtz a la tˈyʁk,,2,fr-agent-v1;ipa=espeak
+building-help.what-room-number-is-this,Quel est le numéro de cette salle ?,,kɛl ɛ lə nymeʁo də sɛt sˈal,,2,fr-agent-v1;ipa=espeak
+building-help.i-am-lost,Je suis perdu,,ʒə syi pɛʁdˈy,,2,fr-agent-v1;ipa=espeak
+building-help.where-is-reception,Où est la réception ?,,u ɛ la ʁesɛpsjˈɔ̃,,2,fr-agent-v1;ipa=espeak
+building-help.where-is-a-power-outlet,Où y a-t-il une prise électrique ?,,u i atil yn pʁiz elɛktʁˈik,,2,fr-agent-v1;ipa=espeak
+in-a-building.is-this-the-correct-entrance,C'est la bonne entrée ?,,sɛ la bɔn ɑ̃tʁˈe,,2,fr-agent-v1;ipa=espeak
+in-a-building.do-you-have-wi-fi,Avez-vous le wifi ?,,avevu lə wˈaɪfaɪ,,2,fr-agent-v1;ipa=espeak
+in-a-building.what-is-the-wi-fi-password,Quel est le mot de passe du wifi ?,,kɛl ɛ lə mo də pas dy wˈaɪfaɪ,,2,fr-agent-v1;ipa=espeak
+in-a-building.which-floor,Quel étage ?,,kɛl etˈaʒ,,2,fr-agent-v1;ipa=espeak
+building-words.elevator,ascenseur,,asɑ̃sˈœʁ,,2,fr-agent-v1;ipa=espeak
+building-words.stairs,escalier,,ɛskaljˈe,,2,fr-agent-v1;ipa=espeak
+building-words.entrance,entrée,,ɑ̃tʁˈe,,2,fr-agent-v1;ipa=espeak
+building-words.exit,sortie,,sɔʁtˈi,,2,fr-agent-v1;ipa=espeak
+building-words.men,hommes,,ˈɔm,,2,fr-agent-v1;ipa=espeak
+building-words.women,femmes,,fˈam,,2,fr-agent-v1;ipa=espeak
+building-words.door,porte,,pˈɔʁt,,2,fr-agent-v1;ipa=espeak
+building-words.key,clé,,klˈe,,2,fr-agent-v1;ipa=espeak

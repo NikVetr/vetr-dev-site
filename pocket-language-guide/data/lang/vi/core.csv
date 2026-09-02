@@ -1,47 +1,47 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,tôi,,,,2,vi-agent-v1
-pronouns-verbs.we-us,chúng tôi,,,,2,vi-agent-v1
-pronouns-verbs.you,bạn,,,"neutral, any stranger",2,vi-agent-v1
+pronouns-verbs.i-me,tôi,,t̪oj˧,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.we-us,chúng tôi,,tʃuŋ˧˥ t̪oj˧,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.you,bạn,,baːn˨˩ˀ,"neutral, any stranger",2,vi-agent-v1;ipa=espeak
 pronouns-verbs.you-polite,anh / chị,ông / bà,,"anh = m., chị = f.",2,vi-agent-v1
 pronouns-verbs.he-him,anh ấy,ông ấy,,,2,vi-agent-v1
-pronouns-verbs.she-her,cô ấy,chị ấy,,,2,vi-agent-v1
-pronouns-verbs.they-them,họ,,,,2,vi-agent-v1
-pronouns-verbs.my-mine,của tôi,,,,2,vi-agent-v1
-pronouns-verbs.your-yours,của bạn,,,,2,vi-agent-v1
-pronouns-verbs.be-called-call,tên là / gọi,,,,2,vi-agent-v1
-pronouns-verbs.have,có,,,,2,vi-agent-v1
-pronouns-verbs.do-not-have,không có,,,,2,vi-agent-v1
-pronouns-verbs.go,đi,,,,2,vi-agent-v1
-pronouns-verbs.come,đến,,,,2,vi-agent-v1
-pronouns-verbs.would-like,cho tôi,,,polite want-frame,2,vi-agent-v1
-pronouns-verbs.want,muốn,,,,2,vi-agent-v1
-pronouns-verbs.look-for,tìm,,,,2,vi-agent-v1
-pronouns-verbs.buy,mua,,,,2,vi-agent-v1
-pronouns-verbs.like,thích,,,,2,vi-agent-v1
-pronouns-verbs.need,cần,,,,2,vi-agent-v1
-pronouns-verbs.there-is-have,có,,,there is,2,vi-agent-v1
-pronouns-verbs.there-is-not-do-not-have,không có,,,there is none,2,vi-agent-v1
-pronouns-verbs.want-to-verb,muốn + động từ,,,,2,vi-agent-v1
-pronouns-verbs.want-thing,muốn + đồ vật,,,,2,vi-agent-v1
-pronouns-verbs.need-thing,cần + đồ vật,,,,2,vi-agent-v1
-pronouns-verbs.looking-for-thing,đang tìm + đồ vật,,,,2,vi-agent-v1
-question-words.what,gì,,,,2,vi-agent-v1
+pronouns-verbs.she-her,cô ấy,chị ấy,ko˧ əɪ˧˥,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.they-them,họ,,hɔ˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.my-mine,của tôi,,kuə˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,của bạn,,kuə˧˩˧ baːn˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.be-called-call,tên là / gọi,,t̪en˧ laː˨˩ / ɣɔj˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.have,có,,kɔ˧˥,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.do-not-have,không có,,xoŋ˧ kɔ˧˥,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.go,đi,,ɗi˧,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.come,đến,,ɗen˧˥,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.would-like,cho tôi,,tʃɔ˧ t̪oj˧,polite want-frame,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.want,muốn,,muən˧˥,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.look-for,tìm,,t̪im˨˩,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.buy,mua,,muə˧,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.like,thích,,tic˧˥,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.need,cần,,kən˨˩,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.there-is-have,có,,kɔ˧˥,there is,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,không có,,xoŋ˧ kɔ˧˥,there is none,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,muốn + động từ,,muən˧˥ ɗoŋ˨˩ˀ t̪y˨˩,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,muốn + đồ vật,,muən˧˥ ɗo˨˩ vət̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,cần + đồ vật,,kən˨˩ ɗo˨˩ vət̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,đang tìm + đồ vật,,ɗaːŋ˧ t̪im˨˩ ɗo˨˩ vət̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+question-words.what,gì,,zi˨˩,,2,vi-agent-v1;ipa=espeak
 question-words.where,ở đâu,,,,2,vi-agent-v1
-question-words.who,ai,,,,2,vi-agent-v1
-question-words.which-one,cái nào,,,,2,vi-agent-v1
-question-words.when,khi nào,,,,2,vi-agent-v1
-question-words.how,thế nào,làm sao,,,2,vi-agent-v1
-question-words.how-much-many,bao nhiêu,,,,2,vi-agent-v1
-question-words.how-many,mấy,,,,2,vi-agent-v1
-question-words.why,tại sao,,,,2,vi-agent-v1
-question-words.this,cái này,,,,2,vi-agent-v1
-question-words.that,cái kia,,,,2,vi-agent-v1
-question-words.here,ở đây,,,,2,vi-agent-v1
-question-words.there,ở đó,,,,2,vi-agent-v1
-question-words.a-little,một chút,,,,2,vi-agent-v1
-question-words.some,một vài,,,,2,vi-agent-v1
-question-words.very,rất,,,,2,vi-agent-v1
-question-words.too,quá,,,,2,vi-agent-v1
-question-words.also,cũng,,,,2,vi-agent-v1
-question-words.all-both,tất cả,cả hai,,,2,vi-agent-v1
-question-words.how-much-what-price,bao nhiêu tiền,,,,2,vi-agent-v1
+question-words.who,ai,,aːj˧,,2,vi-agent-v1;ipa=espeak
+question-words.which-one,cái nào,,kaːj˧˥ naːw˨˩,,2,vi-agent-v1;ipa=espeak
+question-words.when,khi nào,,xi˧ naːw˨˩,,2,vi-agent-v1;ipa=espeak
+question-words.how,thế nào,làm sao,te˧˥ naːw˨˩,,2,vi-agent-v1;ipa=espeak
+question-words.how-much-many,bao nhiêu,,baːw˧ ɲiɛw˧,,2,vi-agent-v1;ipa=espeak
+question-words.how-many,mấy,,məɪ˧˥,,2,vi-agent-v1;ipa=espeak
+question-words.why,tại sao,,t̪aːj˨˩ˀ saːw˧,,2,vi-agent-v1;ipa=espeak
+question-words.this,cái này,,kaːj˧˥ naj˨˩,,2,vi-agent-v1;ipa=espeak
+question-words.that,cái kia,,kaːj˧˥ kiə˧,,2,vi-agent-v1;ipa=espeak
+question-words.here,ở đây,,əː˧˩˧ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
+question-words.there,ở đó,,əː˧˩˧ ɗɔ˧˥,,2,vi-agent-v1;ipa=espeak
+question-words.a-little,một chút,,mot̪˨˩ˀ tʃut̪˧˥,,2,vi-agent-v1;ipa=espeak
+question-words.some,một vài,,mot̪˨˩ˀ vaːj˨˩,,2,vi-agent-v1;ipa=espeak
+question-words.very,rất,,zət̪˧˥,,2,vi-agent-v1;ipa=espeak
+question-words.too,quá,,kwaː˧˥,,2,vi-agent-v1;ipa=espeak
+question-words.also,cũng,,kuŋ˧ˀ˥,,2,vi-agent-v1;ipa=espeak
+question-words.all-both,tất cả,cả hai,t̪ət̪˧˥ kaː˧˩˧,,2,vi-agent-v1;ipa=espeak
+question-words.how-much-what-price,bao nhiêu tiền,,baːw˧ ɲiɛw˧ t̪iɛn˨˩,,2,vi-agent-v1;ipa=espeak

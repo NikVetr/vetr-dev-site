@@ -1,66 +1,66 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-trail-words.trail,тропа,,tropa,,,2,ru-agent-v1
-trail-words.trailhead,начало тропы,,nachalo tropy,,,2,ru-agent-v1
-trail-words.summit,вершина,,vershina,,,2,ru-agent-v1
-trail-words.viewpoint,смотровая площадка,,smotrovaya ploshchadka,,,2,ru-agent-v1
-trail-words.cableway,канатная дорога,канатка,kanatnaya doroga,,,2,ru-agent-v1
-trail-words.shuttle-bus,шаттл,маршрутный автобус,shattl,,,2,ru-agent-v1
-trail-words.park-shuttle,автобус по парку,,avtobus po parku,,,2,ru-agent-v1
-trail-words.steps,ступени,,stupeni,,,2,ru-agent-v1
-trail-words.up-uphill,вверх / в гору,,vverkh / v goru,,,2,ru-agent-v1
-trail-words.down-downhill,вниз / под гору,,vniz / pod goru,,,2,ru-agent-v1
-trail-words.one-way,в одну сторону,,v odnu storonu,,,2,ru-agent-v1
-trail-words.round-trip,туда и обратно,,tuda i obratno,,,2,ru-agent-v1
-weather.forecast,Какой прогноз погоды?,,Kakoy prognoz pogody?,,,2,ru-agent-v1
-weather.will-it-rain,Сегодня будет дождь?,,Segodnya budet dozhdʼ?,,,2,ru-agent-v1
-weather.is-it-safe-today,Сегодня безопасно?,,Segodnya bezopasno?,,,2,ru-agent-v1
-weather.how-cold-at-night,Сколько градусов ночью?,,Skolʼko gradusov nochʼyu?,,,2,ru-agent-v1
-weather.rain,дождь,,dozhdʼ,,,2,ru-agent-v1
-weather.snow,снег,,sneg,,,2,ru-agent-v1
-weather.wind,ветер,,veter,,,2,ru-agent-v1
-weather.storm,шторм,буря,shtorm,,,2,ru-agent-v1
-weather.ice,гололёд,лёд,gololëd,,,2,ru-agent-v1
-weather.fog,туман,,tuman,,,2,ru-agent-v1
-weather.heat,жара,,zhara,,,2,ru-agent-v1
-weather.cold,холод,,kholod,,,2,ru-agent-v1
-weather.humid,влажно,,vlazhno,,,2,ru-agent-v1
-weather.sunrise,восход,,voskhod,,,2,ru-agent-v1
-weather.flood,наводнение,,navodneniye,,,2,ru-agent-v1
-weather.avalanche-risk,лавинная опасность,,lavinnaya opasnostʼ,,,2,ru-agent-v1
-hiking-parks.is-this-the-way-to,{} — в эту сторону?,,{} — v etu storonu?,,,2,ru-agent-v1
-hiking-parks.where-is-the-trailhead,Где начало тропы?,,Gde nachalo tropy?,,,2,ru-agent-v1
-hiking-parks.how-long-to-the-summit,Сколько идти до вершины?,,Skolʼko idti do vershiny?,,,2,ru-agent-v1
-hiking-parks.how-long-to-the-viewpoint,Сколько идти до смотровой площадки?,,Skolʼko idti do smotrovoy ploshchadki?,,,2,ru-agent-v1
-hiking-parks.which-route-is-easier,Какой маршрут легче?,,Kakoy marshrut legche?,,,2,ru-agent-v1
-hiking-parks.is-this-trail-suitable-for-beginners,Эта тропа подходит новичкам?,,Eta tropa podkhodit novichkam?,,,2,ru-agent-v1
-trail-conditions.how-long-is-the-full-route,Какая длина всего маршрута?,,Kakaya dlina vsego marshruta?,,,2,ru-agent-v1
-trail-conditions.can-we-return-the-same-way,Можно вернуться тем же путём?,,Mozhno vernutʼsya tem zhe putëm?,,,2,ru-agent-v1
-trail-conditions.can-we-return-before-dark,Успеем вернуться до темноты?,,Uspeyem vernutʼsya do temnoty?,,,2,ru-agent-v1
-trail-conditions.is-the-trail-open,Тропа открыта?,,Tropa otkryta?,,,2,ru-agent-v1
-trail-conditions.is-the-route-steep,Маршрут крутой?,,Marshrut krutoy?,,,2,ru-agent-v1
-trail-conditions.is-the-path-slippery,Тропа скользкая?,,Tropa skolʼzkaya?,,,2,ru-agent-v1
-trail-transport.how-long-is-the-queue,Какая очередь?,,Kakaya ocheredʼ?,,,2,ru-agent-v1
-trail-transport.what-time-is-the-last-shuttle,Когда последний шаттл?,,Kogda posledniy shattl?,,,2,ru-agent-v1
-trail-transport.when-does-the-cableway-stop,До скольки работает канатка?,,Do skolʼki rabotayet kanatka?,,,2,ru-agent-v1
-trail-transport.where-can-we-buy-water,Где можно купить воду?,,Gde mozhno kupitʼ vodu?,,,2,ru-agent-v1
-trail-transport.where-can-we-refill-water,Где можно набрать воды?,,Gde mozhno nabratʼ vody?,,,2,ru-agent-v1
-trail-transport.is-there-cell-signal-here,Здесь есть связь?,,Zdesʼ yestʼ svyazʼ?,,,2,ru-agent-v1
-trail-transport.do-you-have-a-map,У вас есть карта?,,U vas yestʼ karta?,,,2,ru-agent-v1
-trail-transport.how-long-is-the-wait,Сколько ждать?,,Skolʼko zhdatʼ?,,,2,ru-agent-v1
-trail-warnings.open,открыто,,otkryto,,,2,ru-agent-v1
-trail-warnings.closed,закрыто,,zakryto,,,2,ru-agent-v1
-trail-warnings.maintenance,технические работы,,tekhnicheskiye raboty,,,2,ru-agent-v1
-trail-warnings.steep-slope,крутой склон,,krutoy sklon,,,2,ru-agent-v1
-trail-warnings.caution-slippery,"Осторожно, скользко",,"Ostorozhno, skolʼzko",,,2,ru-agent-v1
-trail-warnings.danger,опасно,,opasno,,,2,ru-agent-v1
-trail-warnings.beware-falling-rocks,"Осторожно, камнепад",,"Ostorozhno, kamnepad",,,2,ru-agent-v1
-trail-warnings.first-aid-station,медпункт,,medpunkt,,,2,ru-agent-v1
-trail-warnings.service-suspended,движение приостановлено,,dvizheniye priostanovleno,,,2,ru-agent-v1
-trail-landmarks.trail-marker,маркировка тропы,,markirovka tropy,,,2,ru-agent-v1
-trail-landmarks.fork-junction,развилка,,razvilka,,,2,ru-agent-v1
-trail-landmarks.boardwalk-cliff-path,настил / тропа вдоль обрыва,,nastil / tropa vdolʼ obryva,,,1,ru-agent-v1
-trail-landmarks.start,начало,,nachalo,,,2,ru-agent-v1
-trail-landmarks.end,конец,,konets,,,2,ru-agent-v1
-trail-landmarks.elevation,высота,,vysota,,,2,ru-agent-v1
-trail-landmarks.sunset,закат,,zakat,,,2,ru-agent-v1
-trail-landmarks.water-point,источник воды,,istochnik vody,,,2,ru-agent-v1
+trail-words.trail,тропа,,tropa,trʌpˈɑ,,2,ru-agent-v1;ipa=espeak
+trail-words.trailhead,начало тропы,,nachalo tropy,natʃʲˈɑɭʌ trˈopɨ,,2,ru-agent-v1;ipa=espeak
+trail-words.summit,вершина,,vershina,vʲirʃˈɨna,,2,ru-agent-v1;ipa=espeak
+trail-words.viewpoint,смотровая площадка,,smotrovaya ploshchadka,smʌtrʌvˈɑja pɭʌɕˈɑdka,,2,ru-agent-v1;ipa=espeak
+trail-words.cableway,канатная дорога,канатка,kanatnaya doroga,kanˈɑtnʌja dʌrˈoɡa,,2,ru-agent-v1;ipa=espeak
+trail-words.shuttle-bus,шаттл,маршрутный автобус,shattl,ʃˈɑttɭ,,2,ru-agent-v1;ipa=espeak
+trail-words.park-shuttle,автобус по парку,,avtobus po parku,aftˈobus pˈo pˈɑrku,,2,ru-agent-v1;ipa=espeak
+trail-words.steps,ступени,,stupeni,stupʲˈenʲɪ,,2,ru-agent-v1;ipa=espeak
+trail-words.up-uphill,вверх / в гору,,vverkh / v goru,vvʲˈerx / v ɡˈoru,,2,ru-agent-v1;ipa=espeak
+trail-words.down-downhill,вниз / под гору,,vniz / pod goru,vnʲˈis / pˈot ɡˈoru,,2,ru-agent-v1;ipa=espeak
+trail-words.one-way,в одну сторону,,v odnu storonu,v ʌdnˈu stˈorʌnu,,2,ru-agent-v1;ipa=espeak
+trail-words.round-trip,туда и обратно,,tuda i obratno,tudˈɑ ˈi ʌbrˈɑtnʌ,,2,ru-agent-v1;ipa=espeak
+weather.forecast,Какой прогноз погоды?,,Kakoy prognoz pogody?,kakˈoj prʌɡnˈos pʌɡˈodɨ,,2,ru-agent-v1;ipa=espeak
+weather.will-it-rain,Сегодня будет дождь?,,Segodnya budet dozhdʼ?,sʲivˈodnʲʌ bˌudʲit dˈoʃtʲ,,2,ru-agent-v1;ipa=espeak
+weather.is-it-safe-today,Сегодня безопасно?,,Segodnya bezopasno?,sʲivˈodnʲʌ bʲizʌpˈɑsnʌ,,2,ru-agent-v1;ipa=espeak
+weather.how-cold-at-night,Сколько градусов ночью?,,Skolʼko gradusov nochʼyu?,skˈoɭkʌ ɡrˈɑdusʌf nˈotʃʲjju,,2,ru-agent-v1;ipa=espeak
+weather.rain,дождь,,dozhdʼ,dˈoʃtʲ,,2,ru-agent-v1;ipa=espeak
+weather.snow,снег,,sneg,sʲnʲˈek,,2,ru-agent-v1;ipa=espeak
+weather.wind,ветер,,veter,vʲˈetʲir,,2,ru-agent-v1;ipa=espeak
+weather.storm,шторм,буря,shtorm,ʃtˈorm,,2,ru-agent-v1;ipa=espeak
+weather.ice,гололёд,лёд,gololëd,ɡʌɭʌɭʲˈɵt,,2,ru-agent-v1;ipa=espeak
+weather.fog,туман,,tuman,tumˈɑn,,2,ru-agent-v1;ipa=espeak
+weather.heat,жара,,zhara,ʒˈɑra,,2,ru-agent-v1;ipa=espeak
+weather.cold,холод,,kholod,xˈoɭʌt,,2,ru-agent-v1;ipa=espeak
+weather.humid,влажно,,vlazhno,vɭˈɑʒnʌ,,2,ru-agent-v1;ipa=espeak
+weather.sunrise,восход,,voskhod,vʌsxˈot,,2,ru-agent-v1;ipa=espeak
+weather.flood,наводнение,,navodneniye,nʌvʌdnʲˈenʲijɪ,,2,ru-agent-v1;ipa=espeak
+weather.avalanche-risk,лавинная опасность,,lavinnaya opasnostʼ,ɭavʲˈinnʌja ʌpˈɑsnʌstʲ,,2,ru-agent-v1;ipa=espeak
+hiking-parks.is-this-the-way-to,{} — в эту сторону?,,{} — v etu storonu?,{} v ˈɛtu stˈorʌnu,,2,ru-agent-v1;ipa=espeak
+hiking-parks.where-is-the-trailhead,Где начало тропы?,,Gde nachalo tropy?,ɡdʲˈe natʃʲˈɑɭʌ trˈopɨ,,2,ru-agent-v1;ipa=espeak
+hiking-parks.how-long-to-the-summit,Сколько идти до вершины?,,Skolʼko idti do vershiny?,skˈoɭkʌ ɪtʲtʲˈi dˈo vʲirʃˈɨnɨ,,2,ru-agent-v1;ipa=espeak
+hiking-parks.how-long-to-the-viewpoint,Сколько идти до смотровой площадки?,,Skolʼko idti do smotrovoy ploshchadki?,skˈoɭkʌ ɪtʲtʲˈi dˈo smʌtrʌvˈoj pɭʌɕˈɑtkʲɪ,,2,ru-agent-v1;ipa=espeak
+hiking-parks.which-route-is-easier,Какой маршрут легче?,,Kakoy marshrut legche?,kakˈoj marʃrˈut ɭʲˈektʃʲi,,2,ru-agent-v1;ipa=espeak
+hiking-parks.is-this-trail-suitable-for-beginners,Эта тропа подходит новичкам?,,Eta tropa podkhodit novichkam?,ˈɛta trʌpˈɑ pʌdxˈodʲit nʌvʲitʃʲkˈɑm,,2,ru-agent-v1;ipa=espeak
+trail-conditions.how-long-is-the-full-route,Какая длина всего маршрута?,,Kakaya dlina vsego marshruta?,kakˈɑja dɭʲinˈɑ fsʲivˈo marʃrˈuta,,2,ru-agent-v1;ipa=espeak
+trail-conditions.can-we-return-the-same-way,Можно вернуться тем же путём?,,Mozhno vernutʼsya tem zhe putëm?,mˈoʒnʌ vʲirnˈutʲsʲʌ tʲˈem ʒˈɛ putʲˈɵm,,2,ru-agent-v1;ipa=espeak
+trail-conditions.can-we-return-before-dark,Успеем вернуться до темноты?,,Uspeyem vernutʼsya do temnoty?,uspʲˈejim vʲirnˈutʲsʲʌ dˈo tʲimnʌtˈɨ,,2,ru-agent-v1;ipa=espeak
+trail-conditions.is-the-trail-open,Тропа открыта?,,Tropa otkryta?,trʌpˈɑ ʌtkrˈɨta,,2,ru-agent-v1;ipa=espeak
+trail-conditions.is-the-route-steep,Маршрут крутой?,,Marshrut krutoy?,marʃrˈut krutˈoj,,2,ru-agent-v1;ipa=espeak
+trail-conditions.is-the-path-slippery,Тропа скользкая?,,Tropa skolʼzkaya?,trʌpˈɑ skˈoɭskʌja,,2,ru-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-queue,Какая очередь?,,Kakaya ocheredʼ?,kakˈɑja ˈotʃʲirʲitʲ,,2,ru-agent-v1;ipa=espeak
+trail-transport.what-time-is-the-last-shuttle,Когда последний шаттл?,,Kogda posledniy shattl?,kʌɡdˈɑ pʌsɭʲˈednʲij ʃˈɑttɭ,,2,ru-agent-v1;ipa=espeak
+trail-transport.when-does-the-cableway-stop,До скольки работает канатка?,,Do skolʼki rabotayet kanatka?,dˈo skˈoɭkʲɪ rabˈotʌjit kanˈɑtka,,2,ru-agent-v1;ipa=espeak
+trail-transport.where-can-we-buy-water,Где можно купить воду?,,Gde mozhno kupitʼ vodu?,ɡdʲˈe mˈoʒnʌ kupʲˈitʲ vˈodu,,2,ru-agent-v1;ipa=espeak
+trail-transport.where-can-we-refill-water,Где можно набрать воды?,,Gde mozhno nabratʼ vody?,ɡdʲˈe mˈoʒnʌ nabrˈɑtʲ vˈodɨ,,2,ru-agent-v1;ipa=espeak
+trail-transport.is-there-cell-signal-here,Здесь есть связь?,,Zdesʼ yestʼ svyazʼ?,ʑdʲˈesʲ jestʲ svʲˈɑʑ,,2,ru-agent-v1;ipa=espeak
+trail-transport.do-you-have-a-map,У вас есть карта?,,U vas yestʼ karta?,ˈu vˈɑs jestʲ kˈɑrta,,2,ru-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-wait,Сколько ждать?,,Skolʼko zhdatʼ?,skˈoɭkʌ ʒdˈɑtʲ,,2,ru-agent-v1;ipa=espeak
+trail-warnings.open,открыто,,otkryto,ʌtkrˈɨtʌ,,2,ru-agent-v1;ipa=espeak
+trail-warnings.closed,закрыто,,zakryto,zakrˈɨtʌ,,2,ru-agent-v1;ipa=espeak
+trail-warnings.maintenance,технические работы,,tekhnicheskiye raboty,tʲixnʲˈitʃʲiskʲijɪ rabˈotɨ,,2,ru-agent-v1;ipa=espeak
+trail-warnings.steep-slope,крутой склон,,krutoy sklon,krutˈoj skɭˈon,,2,ru-agent-v1;ipa=espeak
+trail-warnings.caution-slippery,"Осторожно, скользко",,"Ostorozhno, skolʼzko","ʌstʌrˈoʒnʌ, skˈoɭskʌ",,2,ru-agent-v1;ipa=espeak
+trail-warnings.danger,опасно,,opasno,ʌpˈɑsnʌ,,2,ru-agent-v1;ipa=espeak
+trail-warnings.beware-falling-rocks,"Осторожно, камнепад",,"Ostorozhno, kamnepad","ʌstʌrˈoʒnʌ, kʌmnʲipˈɑt",,2,ru-agent-v1;ipa=espeak
+trail-warnings.first-aid-station,медпункт,,medpunkt,mʲidpˈunkt,,2,ru-agent-v1;ipa=espeak
+trail-warnings.service-suspended,движение приостановлено,,dvizheniye priostanovleno,dvʲiʒˈɛnʲijɪ prʲiʌstanˈovɭʲinʌ,,2,ru-agent-v1;ipa=espeak
+trail-landmarks.trail-marker,маркировка тропы,,markirovka tropy,mʌrkʲirˈofka trˈopɨ,,2,ru-agent-v1;ipa=espeak
+trail-landmarks.fork-junction,развилка,,razvilka,razvʲˈiɭka,,2,ru-agent-v1;ipa=espeak
+trail-landmarks.boardwalk-cliff-path,настил / тропа вдоль обрыва,,nastil / tropa vdolʼ obryva,nasʲtʲˈiɭ / trʌpˈɑ vdˈoɭʲ ʌbrˈɨva,,1,ru-agent-v1;ipa=espeak
+trail-landmarks.start,начало,,nachalo,natʃʲˈɑɭʌ,,2,ru-agent-v1;ipa=espeak
+trail-landmarks.end,конец,,konets,kʌnʲˈets,,2,ru-agent-v1;ipa=espeak
+trail-landmarks.elevation,высота,,vysota,vɨsʌtˈɑ,,2,ru-agent-v1;ipa=espeak
+trail-landmarks.sunset,закат,,zakat,zakˈɑt,,2,ru-agent-v1;ipa=espeak
+trail-landmarks.water-point,источник воды,,istochnik vody,ɪstˈotʃʲnʲik vˈodɨ,,2,ru-agent-v1;ipa=espeak

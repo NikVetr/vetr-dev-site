@@ -1,140 +1,140 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-emergency-medical.help,ช่วยด้วย,,chuai duai,,,2,th-agent-v1
-emergency-medical.please-call-an-ambulance,ช่วยเรียกรถพยาบาล,,chuai riak rot phayaban,,,2,th-agent-v1
-emergency-medical.i-need-a-doctor,ต้องการหมอ,,tongkan mo,,,2,th-agent-v1
-emergency-medical.i-am-sick,ฉันป่วย,,chan puai,,,2,th-agent-v1
-emergency-medical.i-am-injured,ฉันบาดเจ็บ,,chan batchep,,,2,th-agent-v1
-emergency-medical.it-hurts-here,เจ็บตรงนี้,,chep trong ni,,,2,th-agent-v1
-emergency-medical.where-is-a-pharmacy,ร้านขายยาอยู่ไหน,,ran khai ya yu nai,,,2,th-agent-v1
-emergency-medical.please-take-me-to-a-hospital,ช่วยพาไปโรงพยาบาล,,chuai pha pai rong phayaban,,,2,th-agent-v1
-emergency-medical.i-feel-unwell,ไม่สบาย,,mai sabai,,,2,th-agent-v1
-emergency-medical.this-is-an-emergency,ฉุกเฉิน,,chukchoen,,,2,th-agent-v1
-emergency-medical.i-am-having-a-severe-allergic-reaction,มีอาการแพ้รุนแรง,anaphylaxis,mi akan phae runraeng,,,2,th-agent-v1
-emergency-medical.i-cannot-breathe,หายใจไม่ออก,,haichai mai ok,,,2,th-agent-v1
-emergency-medical.i-am-bleeding-badly,เลือดออกมาก,,lueat ok mak,,,2,th-agent-v1
-emergency-medical.i-have-chest-pain,เจ็บหน้าอก,,chep na ok,,,2,th-agent-v1
-emergency-medical.this-person-is-unconscious,คนนี้หมดสติ,,khon ni mot sati,,,2,th-agent-v1
-emergency-medical.where-is-the-nearest-hospital,โรงพยาบาลใกล้สุด อยู่ไหน,,rong phayaban klai sut yu nai,,,2,th-agent-v1
-emergency-medical.what-is-the-emergency-number,เบอร์ฉุกเฉินอะไร,,boe chukchoen arai,,,2,th-agent-v1
+emergency-medical.help,ช่วยด้วย,,chuai duai,tɕʰua̯j˥˩dua̯j˥˩,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.please-call-an-ambulance,ช่วยเรียกรถพยาบาล,,chuai riak rot phayaban,tɕʰua̯j˥˩ ria̯k˥˩ rot˦˥pʰa˦˥jaː˧baːn˧,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-need-a-doctor,ต้องการหมอ,,tongkan mo,tɔŋ˥˩kaːn˧ mɔː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-am-sick,ฉันป่วย,,chan puai,tɕʰan˩˩˦ pua̯j˨˩,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-am-injured,ฉันบาดเจ็บ,,chan batchep,tɕʰan˩˩˦ baːt˨˩tɕep˨˩,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.it-hurts-here,เจ็บตรงนี้,,chep trong ni,tɕep˨˩ troŋ˧niː˦˥,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.where-is-a-pharmacy,ร้านขายยาอยู่ไหน,,ran khai ya yu nai,raːn˦˥kʰaːj˩˩˦jaː˧ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.please-take-me-to-a-hospital,ช่วยพาไปโรงพยาบาล,,chuai pha pai rong phayaban,tɕʰua̯j˥˩ pʰaː˧ paj˧ roːŋ˧pʰa˦˥jaː˧baːn˧,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-feel-unwell,ไม่สบาย,,mai sabai,maj˥˩ sa˧baːj˧,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.this-is-an-emergency,ฉุกเฉิน,,chukchoen,tɕʰuk˨˩tɕʰɤːn˩˩˦,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-am-having-a-severe-allergic-reaction,มีอาการแพ้รุนแรง,anaphylaxis,mi akan phae runraeng,miː˧ ʔaː˧kaːn˧ pʰɛː˦˥ run˧rɛːŋ˧,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-cannot-breathe,หายใจไม่ออก,,haichai mai ok,haːj˩˩˦tɕaj˧maj˥˩ʔɔːk˨˩,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-am-bleeding-badly,เลือดออกมาก,,lueat ok mak,lɯa̯t˥˩ ʔɔːk˨˩ maːk˥˩,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-have-chest-pain,เจ็บหน้าอก,,chep na ok,tɕep˨˩ naː˥˩ʔok˨˩,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.this-person-is-unconscious,คนนี้หมดสติ,,khon ni mot sati,kʰon˧ niː˦˥ mot˨˩sa˨˩tiʔ˨˩,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.where-is-the-nearest-hospital,โรงพยาบาลใกล้สุด อยู่ไหน,,rong phayaban klai sut yu nai,roːŋ˧pʰa˦˥jaː˧baːn˧ klaj˥˩ sut˨˩ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.what-is-the-emergency-number,เบอร์ฉุกเฉินอะไร,,boe chukchoen arai,bɤː˧ tɕʰuk˨˩tɕʰɤːn˩˩˦ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
 emergency-medical.is-there-a-doctor-who-speaks-english,มีหมอพูด{source}ได้ไหม,,mi mo phut {source} dai mai,,,2,language-slots-v1
-emergency-medical.i-think-a-bone-is-broken,กระดูกน่าจะหัก,,kraduk na cha hak,,,2,th-agent-v1
-emergency-medical.please-call-my-emergency-contact,ช่วยโทรหา คนติดต่อฉุกเฉิน,,chuai tho ha khon tit to chukchoen,,,2,th-agent-v1
-emergency-medical.i-have-travel-insurance,มีประกันเดินทาง,,mi prakan doen thang,,,2,th-agent-v1
-medical-conditions.i-am-diabetic,เป็นเบาหวาน,,pen baowan,,,2,th-agent-v1
-medical-conditions.i-need-insulin,ต้องการอินซูลิน,,tongkan insulin,,,2,th-agent-v1
-medical-conditions.i-have-asthma,เป็นโรคหอบหืด,,pen rok hop huet,,,2,th-agent-v1
-medical-conditions.i-have-a-heart-condition,เป็นโรคหัวใจ,,pen rok huachai,,,2,th-agent-v1
-medical-conditions.i-am-allergic-to-penicillin,แพ้ยาเพนิซิลลิน,,phae ya phenisillin,,,2,th-agent-v1
-medical-conditions.i-have-epilepsy,เป็นโรคลมชัก,,pen rok lomchak,,,2,th-agent-v1
-medical-conditions.my-blood-sugar-is-low,น้ำตาลในเลือดต่ำ,,namtan nai lueat tam,,,2,th-agent-v1
-medical-conditions.i-need-my-inhaler,ต้องการยาพ่น,,tongkan ya phon,,,2,th-agent-v1
-medical-conditions.i-am-pregnant,ตั้งครรภ์,ท้อง,tangkhan,,,2,th-agent-v1
-medical-conditions.i-carry-an-adrenaline-injector,มีปากกาฉีดอะดรีนาลีน,adrenaline auto-injector,mi pakka chit adrinalin,,,2,th-agent-v1
-medical-conditions.i-take-medicine-for,กินยารักษา{},,kin ya raksa {},,,2,th-agent-v1
-medical-conditions.i-take-blood-thinners,กินยาละลายลิ่มเลือด,ยาต้านการแข็งตัวของเลือด,kin ya lalai lim lueat,,,2,th-agent-v1
-medical-conditions.medicine-allergy,แพ้ยา: {},,phae ya: {},,,2,th-agent-v1
-medical-conditions.this-card-lists-my-conditions,บัตรนี้บอกโรคของฉัน,,bat ni bok rok khong chan,,,2,th-agent-v1
-medical-conditions.this-is-my-medicine,นี่ยาของฉัน,,ni ya khong chan,,,2,th-agent-v1
-medical-conditions.please-give-me-sugar-or-juice,ขอน้ำตาลหรือน้ำผลไม้,,kho namtan rue nam phonlamai,,,2,th-agent-v1
-medical-conditions.inject-it-into-my-outer-thigh,ฉีดที่ต้นขาด้านนอก,,chit thi tonkha dan nok,,,2,th-agent-v1
-medical-conditions.my-blood-type-is,กลุ่มเลือด {},,klum lueat {},,,2,th-agent-v1
-medical-conditions.do-not-give-me,ห้ามให้ {},,ham hai {},,,2,th-agent-v1
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,แพ้แอสไพริน และไอบูโพรเฟน,,phae aetphairin lae aibuphrofen,,,2,th-agent-v1
-medical-conditions.my-injector-is-in-my-bag,ยาฉีดอยู่ในกระเป๋า,,ya chit yu nai krapao,,,2,th-agent-v1
-medical-conditions.i-am-allergic-to-sulfa-drugs,แพ้ยาซัลฟา,,phae ya sanfa,,,2,th-agent-v1
-pharmacy-symptoms.which-pharmacy-is-open-now,ร้านขายยาไหนเปิดอยู่,,ran khai ya nai poet yu,,,2,th-agent-v1
-pharmacy-symptoms.i-need-medicine-for,ขอยาแก้{},,kho ya kae {},,,2,th-agent-v1
-pharmacy-symptoms.i-have-a-fever,มีไข้,,mi khai,,,2,th-agent-v1
-pharmacy-symptoms.i-think-i-have-malaria,สงสัยว่าเป็นไข้มาลาเรีย,,songsai wa pen khai malaria,,,2,malaria-v1
-pharmacy-symptoms.i-need-a-malaria-test,ขอตรวจมาลาเรีย,ตรวจหาเชื้อมาลาเรีย,kho truat malaria,,,2,malaria-v1
-pharmacy-symptoms.i-have-diarrhea,ท้องเสีย,,thong sia,,,2,th-agent-v1
-pharmacy-symptoms.where-is-an-all-night-pharmacy,ร้านขายยาเปิดดึก อยู่ไหน,,ran khai ya poet duek yu nai,,,2,th-agent-v1
-pharmacy-symptoms.painkiller,ยาแก้ปวด,,ya kae puat,,,2,th-agent-v1
-pharmacy-symptoms.do-i-need-a-prescription,ต้องมีใบสั่งยาไหม,,tong mi bai sang ya mai,,,2,th-agent-v1
-pharmacy-symptoms.i-have-a-headache,ปวดหัว,,puat hua,,,2,th-agent-v1
-pharmacy-symptoms.paracetamol-acetaminophen,พาราเซตามอล,พารา,pharasetamon,,,2,th-agent-v1
-pharmacy-symptoms.how-much-should-i-take,กินครั้งละเท่าไร,,kin khrang la thaorai,,,2,th-agent-v1
-pharmacy-symptoms.i-am-vomiting,อาเจียน,,achian,,,2,th-agent-v1
-pharmacy-symptoms.rehydration-salts,ผงเกลือแร่,ORS,phong kluea rae,,,2,th-agent-v1
-pharmacy-symptoms.how-many-times-a-day,วันละกี่ครั้ง,,wan la ki khrang,,,2,th-agent-v1
-pharmacy-symptoms.i-have-a-stomach-ache,ปวดท้อง,,puat thong,,,2,th-agent-v1
-pharmacy-symptoms.i-have-a-cough,ไอ,,ai,,,2,th-agent-v1
-pharmacy-symptoms.antihistamine,ยาแก้แพ้,,ya kae phae,,,2,th-agent-v1
-pharmacy-symptoms.anti-diarrhea-medicine,ยาแก้ท้องเสีย,อิมโมเดียม,ya kae thong sia,,,2,th-agent-v1
-pharmacy-symptoms.is-this-safe-to-take-with,กินกับ {} ได้ไหม,,kin kap {} dai mai,,,2,th-agent-v1
-pharmacy-symptoms.i-feel-dizzy,เวียนหัว,,wian hua,,,2,th-agent-v1
-pharmacy-symptoms.ibuprofen,ไอบูโพรเฟน,,aibuphrofen,,,2,th-agent-v1
-pharmacy-symptoms.i-have-a-sore-throat,เจ็บคอ,,chep kho,,,2,th-agent-v1
-pharmacy-symptoms.can-i-get-this-medicine-here,มียานี้ไหม,,mi ya ni mai,,,2,th-agent-v1
-pharmacy-symptoms.bandage,ผ้าพันแผล,พลาสเตอร์,pha phan phlae,,,2,th-agent-v1
-pharmacy-symptoms.the-pain-is-severe,ปวดมาก,,puat mak,,,2,th-agent-v1
-pharmacy-symptoms.antiseptic,ยาใส่แผล,เบตาดีน,ya sai phlae,,,2,th-agent-v1
-pharmacy-symptoms.i-feel-nauseous,คลื่นไส้,,khluen sai,,,2,th-agent-v1
-pharmacy-symptoms.i-have-a-rash,มีผื่น,,mi phuen,,,2,th-agent-v1
-pharmacy-symptoms.before-or-after-food,ก่อนหรือหลังอาหาร,,kon rue lang ahan,,,2,th-agent-v1
-pharmacy-symptoms.i-think-it-is-infected,น่าจะติดเชื้อ,,na cha tit chuea,,,2,th-agent-v1
-pharmacy-symptoms.motion-sickness-tablets,ยาแก้เมารถ,ดรามามีน,ya kae mao rot,,,2,th-agent-v1
-pharmacy-symptoms.i-have-a-cut,มีบาดแผล,,mi batphlae,,,2,th-agent-v1
-pharmacy-symptoms.antacid,ยาลดกรด,อีโน,ya lot krot,,,2,th-agent-v1
-pharmacy-symptoms.i-have-a-burn,มีแผลไหม้,,mi phlae mai,,,2,th-agent-v1
-pharmacy-symptoms.it-started-days-ago,เริ่มมา {} วัน,,roem ma {} wan,,,2,th-agent-v1
-pharmacy-symptoms.cough-medicine,ยาแก้ไอ,,ya kae ai,,,2,th-agent-v1
-pharmacy-symptoms.is-this-safe-during-pregnancy,คนท้องกินได้ไหม,,khon thong kin dai mai,,,2,th-agent-v1
-body-parts.head,หัว,,hua,,,2,th-agent-v1
-body-parts.stomach,ท้อง,,thong,,,2,th-agent-v1
-body-parts.back,หลัง,,lang,,,2,th-agent-v1
-body-parts.throat,คอ,,kho,,,2,th-agent-v1
-body-parts.tooth,ฟัน,,fan,,,2,th-agent-v1
-body-parts.chest,หน้าอก,,na ok,,,2,th-agent-v1
-body-parts.eye,ตา,,ta,,,2,th-agent-v1
-body-parts.ear,หู,,hu,,,2,th-agent-v1
-body-parts.leg,ขา,,kha,,,2,th-agent-v1
-body-parts.arm,แขน,,khaen,,,2,th-agent-v1
-body-parts.foot,เท้า,,thao,,,2,th-agent-v1
-body-parts.hand,มือ,,mue,,,2,th-agent-v1
-body-parts.knee,เข่า,,khao,,,2,th-agent-v1
-body-parts.ankle,ข้อเท้า,,kho thao,,,2,th-agent-v1
-body-parts.skin,ผิวหนัง,,phiu nang,,,2,th-agent-v1
-lost-rescue.i-lost-my-passport,พาสปอร์ตหาย,หนังสือเดินทางหาย,phatpot hai,,,2,th-agent-v1
-lost-rescue.i-lost-my-phone,มือถือหาย,,muethue hai,,,2,th-agent-v1
-lost-rescue.please-call-the-police,ช่วยเรียกตำรวจ,,chuai riak tamruat,,,2,th-agent-v1
-lost-rescue.we-are-here,เราอยู่ที่นี่,,rao yu thi ni,,,2,th-agent-v1
-lost-rescue.please-look-at-my-location-pin,ดูหมุดตำแหน่งนี้,,du mut tamnaeng ni,,,2,th-agent-v1
-lost-rescue.i-cannot-walk,เดินไม่ได้,,doen mai dai,,,2,th-agent-v1
-lost-rescue.i-sprained-my-ankle,ข้อเท้าพลิก,,kho thao phlik,,,2,th-agent-v1
-lost-rescue.please-contact-rescue,ช่วยแจ้งกู้ภัย,,chuai chaeng kuphai,,,2,th-agent-v1
-lost-rescue.my-companion-is-missing,เพื่อนหาย,,phuean hai,,,2,th-agent-v1
-lost-rescue.please-look-at-my-current-location,ดูตำแหน่งปัจจุบันนี้,,du tamnaeng patchuban ni,,,2,th-agent-v1
-lost-rescue.my-child-is-missing,ลูกหาย,,luk hai,,,2,th-agent-v1
-lost-rescue.i-do-not-know-where-i-am,ไม่รู้ว่าอยู่ที่ไหน,,mai ru wa yu thi nai,,,2,th-agent-v1
-lost-rescue.my-friend-is-hurt,เพื่อนบาดเจ็บ,,phuean batchep,,,2,th-agent-v1
-lost-rescue.i-lost-my-wallet,กระเป๋าเงินหาย,,krapao ngoen hai,,,2,th-agent-v1
-lost-rescue.i-lost-my-bag,กระเป๋าหาย,,krapao hai,,,2,th-agent-v1
-lost-rescue.where-is-lost-and-found,ศูนย์ของหายอยู่ไหน,,sun khong hai yu nai,,,2,th-agent-v1
-lost-rescue.i-cannot-find-my-hotel,หาโรงแรมไม่เจอ,,ha rongraem mai choe,,,2,th-agent-v1
-lost-rescue.i-left-it-on-the-train,ลืมไว้บนรถไฟ,,luem wai bon rotfai,,,2,th-agent-v1
-lost-rescue.i-cannot-get-down,ลงไม่ได้,,long mai dai,,,2,th-agent-v1
-police-consulate.where-is-the-police-station,สถานีตำรวจอยู่ไหน,สถานีตำรวจท่องเที่ยวอยู่ไหน,sathani tamruat yu nai,,,2,th-agent-v1
-police-consulate.i-want-to-report-a-theft,ขอแจ้งความ,,kho chaeng khwam,,,2,th-agent-v1
-police-consulate.my-bag-was-stolen,กระเป๋าถูกขโมย,,krapao thuk khamoi,,,2,th-agent-v1
-police-consulate.my-passport-was-stolen,พาสปอร์ตถูกขโมย,,phatpot thuk khamoi,,,2,th-agent-v1
-police-consulate.someone-is-following-me,มีคนตามฉัน,,mi khon tam chan,,,2,th-agent-v1
-police-consulate.i-need-a-written-police-report,ขอใบแจ้งความ,,kho bai chaeng khwam,,,2,th-agent-v1
-police-consulate.i-want-to-contact-my-embassy,ขอติดต่อสถานทูต,,kho tit to sathan thut,,,2,th-agent-v1
-police-consulate.i-need-it-for-my-insurance,ต้องใช้เคลมประกัน,,tong chai khlem prakan,,,2,th-agent-v1
-police-consulate.i-need-an-interpreter,ขอล่าม,,kho lam,,,2,th-agent-v1
-police-consulate.please-leave-me-alone,อย่ามายุ่งกับฉัน,,ya ma yung kap chan,,,2,th-agent-v1
-police-consulate.i-was-robbed,ถูกปล้น,,thuk plon,,,2,th-agent-v1
-police-consulate.i-want-a-lawyer,ขอทนาย,,kho thanai,,,2,th-agent-v1
-police-consulate.please-notify-my-consulate,ช่วยแจ้งสถานกงสุล,,chuai chaeng sathan kongsun,,,2,th-agent-v1
-police-consulate.i-am-calling-the-police,จะโทรเรียกตำรวจ,,cha tho riak tamruat,,,2,th-agent-v1
-police-consulate.am-i-under-arrest,ฉันถูกจับไหม,,chan thuk chap mai,,,2,th-agent-v1
-police-consulate.no-thank-you-i-am-not-interested,ไม่สนใจ ขอบคุณ,,mai sonchai khopkhun,,,2,th-agent-v1
-police-consulate.someone-attacked-me,มีคนทำร้ายฉัน,,mi khon thamrai chan,,,2,th-agent-v1
-police-consulate.i-did-not-agree-to-this-price,ไม่ได้ตกลงราคานี้,,mai dai toklong rakha ni,,,2,th-agent-v1
-police-consulate.please-write-the-report-number,ช่วยเขียน เลขที่แจ้งความ,,chuai khian lekthi chaeng khwam,,,2,th-agent-v1
-police-consulate.it-happened-here,เกิดที่นี่,,koet thi ni,,,2,th-agent-v1
-police-consulate.may-i-have-a-copy-of-the-report,ขอสำเนาใบแจ้งความ,,kho samnao bai chaeng khwam,,,2,th-agent-v1
-police-consulate.i-will-not-sign-anything-i-cannot-read,อ่านไม่ออก จะไม่เซ็น,,"an mai ok, cha mai sen",,,2,th-agent-v1
-police-consulate.am-i-free-to-go,ไปได้ไหม,,pai dai mai,,,2,th-agent-v1
-police-consulate.i-do-not-want-to-go-with-you,ไม่ไปกับคุณ,,mai pai kap khun,,,2,th-agent-v1
+emergency-medical.i-think-a-bone-is-broken,กระดูกน่าจะหัก,,kraduk na cha hak,kra˨˩raʔ˨˩duːk˨˩ naː˥˩tɕaʔ˨˩ hak˨˩,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.please-call-my-emergency-contact,ช่วยโทรหา คนติดต่อฉุกเฉิน,,chuai tho ha khon tit to chukchoen,tɕʰua̯j˥˩ tʰoː˧ haː˩˩˦ kʰon˧ tit˨˩tɔː˨˩ tɕʰuk˨˩tɕʰɤːn˩˩˦,,2,th-agent-v1;ipa=thaig2p
+emergency-medical.i-have-travel-insurance,มีประกันเดินทาง,,mi prakan doen thang,miː˧ pra˨˩raʔ˨˩kan˧ dɤːn˧tʰaːŋ˧,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-am-diabetic,เป็นเบาหวาน,,pen baowan,pen˧ baw˧waːn˩˩˦,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-need-insulin,ต้องการอินซูลิน,,tongkan insulin,tɔŋ˥˩kaːn˧ ʔin˧suː˧lin˧,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-have-asthma,เป็นโรคหอบหืด,,pen rok hop huet,pen˧roːk˥˩ hɔːp˨˩hɯːt˨˩,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-have-a-heart-condition,เป็นโรคหัวใจ,,pen rok huachai,pen˧ roːk˥˩hua̯˩˩˦tɕaj˧,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-am-allergic-to-penicillin,แพ้ยาเพนิซิลลิน,,phae ya phenisillin,pʰɛː˦˥jaː˧ pʰeː˧ niʔ˦˥ siʔ˦˥ lɔː˧ liʔ˦˥ nɔː˧,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-have-epilepsy,เป็นโรคลมชัก,,pen rok lomchak,pen˧roːk˥˩ lom˧ tɕʰak˦˥,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.my-blood-sugar-is-low,น้ำตาลในเลือดต่ำ,,namtan nai lueat tam,naːm˦˥taː˧la˦˥ naj˧ lɯa̯t˥˩ tam˨˩,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-need-my-inhaler,ต้องการยาพ่น,,tongkan ya phon,tɔŋ˥˩kaːn˧ jaː˧ pʰon˥˩,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-am-pregnant,ตั้งครรภ์,ท้อง,tangkhan,taŋ˥˩kʰan˧,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-carry-an-adrenaline-injector,มีปากกาฉีดอะดรีนาลีน,adrenaline auto-injector,mi pakka chit adrinalin,miː˧ paːk˨˩kaː˧ tɕʰiːt˨˩ ʔaʔ˨˩driː˧naː˧liːn˧,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-take-medicine-for,กินยารักษา{},,kin ya raksa {},kin˧ jaː˧ rak˦˥saː˩˩˦ {},,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-take-blood-thinners,กินยาละลายลิ่มเลือด,ยาต้านการแข็งตัวของเลือด,kin ya lalai lim lueat,kin˧ jaː˧ laʔ˦˥laːj˧ lim˥˩lɯa̯t˥˩,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.medicine-allergy,แพ้ยา: {},,phae ya: {},pʰɛː˦˥jaː˧ {},,2,th-agent-v1;ipa=thaig2p
+medical-conditions.this-card-lists-my-conditions,บัตรนี้บอกโรคของฉัน,,bat ni bok rok khong chan,bat˨˩ niː˦˥ bɔːk˨˩ roːk˥˩ kʰɔːŋ˩˩˦ tɕʰan˩˩˦,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.this-is-my-medicine,นี่ยาของฉัน,,ni ya khong chan,niː˥˩ jaː˧ kʰɔːŋ˩˩˦ tɕʰan˩˩˦,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.please-give-me-sugar-or-juice,ขอน้ำตาลหรือน้ำผลไม้,,kho namtan rue nam phonlamai,kʰɔː˩˩˦ naːm˦˥taː˧la˦˥ rɯː˩˩˦ naːm˦˥pʰon˩˩˦maːj˦˥,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.inject-it-into-my-outer-thigh,ฉีดที่ต้นขาด้านนอก,,chit thi tonkha dan nok,tɕʰiːt˨˩ tʰiː˥˩ ton˥˩kʰaː˩˩˦ daːn˥˩nɔːk˥˩,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.my-blood-type-is,กลุ่มเลือด {},,klum lueat {},klum˨˩lɯa̯t˥˩ {},,2,th-agent-v1;ipa=thaig2p
+medical-conditions.do-not-give-me,ห้ามให้ {},,ham hai {},haːm˥˩ haj˥˩ {},,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,แพ้แอสไพริน และไอบูโพรเฟน,,phae aetphairin lae aibuphrofen,pʰɛː˦˥ ʔɛːs˦˥pʰaj˧rin˧ lɛʔ˦˥ ʔaj˧buː˧pʰroː˧feːn˧,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.my-injector-is-in-my-bag,ยาฉีดอยู่ในกระเป๋า,,ya chit yu nai krapao,jaː˧tɕʰiːt˨˩ juː˨˩ naj˧ kra˨˩raʔ˨˩paw˩˩˦,,2,th-agent-v1;ipa=thaig2p
+medical-conditions.i-am-allergic-to-sulfa-drugs,แพ้ยาซัลฟา,,phae ya sanfa,pʰɛː˦˥jaː˧ san˧faː˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.which-pharmacy-is-open-now,ร้านขายยาไหนเปิดอยู่,,ran khai ya nai poet yu,raːn˦˥kʰaːj˩˩˦jaː˧ naj˩˩˦ pɤːt˨˩ juː˨˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-need-medicine-for,ขอยาแก้{},,kho ya kae {},kʰɔː˩˩˦ jaː˧ kɛː˥˩ {},,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-a-fever,มีไข้,,mi khai,miː˧kʰaj˥˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-think-i-have-malaria,สงสัยว่าเป็นไข้มาลาเรีย,,songsai wa pen khai malaria,soŋ˩˩˦saj˩˩˦ waː˥˩ pen˧ kʰaj˥˩maː˧laː˧ria̯˧,,2,malaria-v1;ipa=thaig2p
+pharmacy-symptoms.i-need-a-malaria-test,ขอตรวจมาลาเรีย,ตรวจหาเชื้อมาลาเรีย,kho truat malaria,kʰɔː˩˩˦ trua̯t˨˩ maː˧laː˧ria̯˧,,2,malaria-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-diarrhea,ท้องเสีย,,thong sia,tʰɔːŋ˦˥sia̯˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.where-is-an-all-night-pharmacy,ร้านขายยาเปิดดึก อยู่ไหน,,ran khai ya poet duek yu nai,raːn˦˥kʰaːj˩˩˦jaː˧ pɤːt˨˩ dɯk˨˩ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.painkiller,ยาแก้ปวด,,ya kae puat,jaː˧kɛː˥˩pua̯t˨˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.do-i-need-a-prescription,ต้องมีใบสั่งยาไหม,,tong mi bai sang ya mai,tɔŋ˥˩ miː˧ baj˧saŋ˨˩jaː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-a-headache,ปวดหัว,,puat hua,pua̯t˨˩hua̯˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.paracetamol-acetaminophen,พาราเซตามอล,พารา,pharasetamon,pʰaː˧raː˧seː˧taː˧mɔn˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.how-much-should-i-take,กินครั้งละเท่าไร,,kin khrang la thaorai,kin˧ kʰraŋ˦˥ laʔ˦˥ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-am-vomiting,อาเจียน,,achian,ʔaː˧tɕia̯n˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.rehydration-salts,ผงเกลือแร่,ORS,phong kluea rae,pʰoŋ˩˩˦ klɯa̯˧rɛː˥˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.how-many-times-a-day,วันละกี่ครั้ง,,wan la ki khrang,wan˧ laʔ˦˥ kiː˨˩ kʰraŋ˦˥,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-a-stomach-ache,ปวดท้อง,,puat thong,pua̯t˨˩tʰɔːŋ˦˥,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-a-cough,ไอ,,ai,ʔaj˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.antihistamine,ยาแก้แพ้,,ya kae phae,jaː˧ kɛː˥˩ pʰɛː˦˥,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.anti-diarrhea-medicine,ยาแก้ท้องเสีย,อิมโมเดียม,ya kae thong sia,jaː˧ kɛː˥˩ tʰɔːŋ˦˥sia̯˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.is-this-safe-to-take-with,กินกับ {} ได้ไหม,,kin kap {} dai mai,kin˧ kap˨˩ {} daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-feel-dizzy,เวียนหัว,,wian hua,wia̯n˧hua̯˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.ibuprofen,ไอบูโพรเฟน,,aibuphrofen,ʔaj˧buː˧pʰroː˧feːn˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-a-sore-throat,เจ็บคอ,,chep kho,tɕep˨˩ kʰɔː˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.can-i-get-this-medicine-here,มียานี้ไหม,,mi ya ni mai,miː˧ jaː˧ niː˦˥ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.bandage,ผ้าพันแผล,พลาสเตอร์,pha phan phlae,pʰaː˥˩pʰan˧pʰlɛː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.the-pain-is-severe,ปวดมาก,,puat mak,pua̯t˨˩ maːk˥˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.antiseptic,ยาใส่แผล,เบตาดีน,ya sai phlae,jaː˧ saj˨˩ pʰlɛː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-feel-nauseous,คลื่นไส้,,khluen sai,kʰlɯːn˥˩saj˥˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-a-rash,มีผื่น,,mi phuen,miː˧ pʰɯːn˨˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.before-or-after-food,ก่อนหรือหลังอาหาร,,kon rue lang ahan,kɔːn˨˩ rɯː˩˩˦ laŋ˩˩˦ʔaː˧haːn˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-think-it-is-infected,น่าจะติดเชื้อ,,na cha tit chuea,naː˥˩tɕaʔ˨˩ tit˨˩tɕʰɯa̯˦˥,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.motion-sickness-tablets,ยาแก้เมารถ,ดรามามีน,ya kae mao rot,jaː˧ kɛː˥˩ maw˧rot˦˥,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-a-cut,มีบาดแผล,,mi batphlae,miː˧ baːt˨˩pʰlɛː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.antacid,ยาลดกรด,อีโน,ya lot krot,jaː˧ lot˦˥ krot˨˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.i-have-a-burn,มีแผลไหม้,,mi phlae mai,miː˧ pʰlɛː˩˩˦ maj˥˩,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.it-started-days-ago,เริ่มมา {} วัน,,roem ma {} wan,rɤːm˥˩ maː˧ {} wan˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.cough-medicine,ยาแก้ไอ,,ya kae ai,jaː˧kɛː˥˩ʔaj˧,,2,th-agent-v1;ipa=thaig2p
+pharmacy-symptoms.is-this-safe-during-pregnancy,คนท้องกินได้ไหม,,khon thong kin dai mai,kʰon˧ tʰɔːŋ˦˥ kin˧ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+body-parts.head,หัว,,hua,hua̯˩˩˦,,2,th-agent-v1;ipa=thaig2p
+body-parts.stomach,ท้อง,,thong,tʰɔːŋ˦˥,,2,th-agent-v1;ipa=thaig2p
+body-parts.back,หลัง,,lang,laŋ˩˩˦,,2,th-agent-v1;ipa=thaig2p
+body-parts.throat,คอ,,kho,kʰɔː˧,,2,th-agent-v1;ipa=thaig2p
+body-parts.tooth,ฟัน,,fan,fan˧,,2,th-agent-v1;ipa=thaig2p
+body-parts.chest,หน้าอก,,na ok,naː˥˩ʔok˨˩,,2,th-agent-v1;ipa=thaig2p
+body-parts.eye,ตา,,ta,taː˧,,2,th-agent-v1;ipa=thaig2p
+body-parts.ear,หู,,hu,huː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+body-parts.leg,ขา,,kha,kʰaː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+body-parts.arm,แขน,,khaen,kʰɛːn˩˩˦,,2,th-agent-v1;ipa=thaig2p
+body-parts.foot,เท้า,,thao,tʰaːw˦˥,,2,th-agent-v1;ipa=thaig2p
+body-parts.hand,มือ,,mue,mɯː˧,,2,th-agent-v1;ipa=thaig2p
+body-parts.knee,เข่า,,khao,kʰaw˨˩,,2,th-agent-v1;ipa=thaig2p
+body-parts.ankle,ข้อเท้า,,kho thao,kʰɔː˥˩tʰaːw˦˥,,2,th-agent-v1;ipa=thaig2p
+body-parts.skin,ผิวหนัง,,phiu nang,pʰiw˩˩˦naŋ˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-lost-my-passport,พาสปอร์ตหาย,หนังสือเดินทางหาย,phatpot hai,pʰaː˧sa˨˩pɔːt˨˩ haːj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-lost-my-phone,มือถือหาย,,muethue hai,mɯː˧tʰɯː˩˩˦ haːj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.please-call-the-police,ช่วยเรียกตำรวจ,,chuai riak tamruat,tɕʰua̯j˥˩ ria̯k˥˩ tam˧rua̯t˥˩,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.we-are-here,เราอยู่ที่นี่,,rao yu thi ni,raw˧ juː˨˩ tʰiː˥˩niː˥˩,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.please-look-at-my-location-pin,ดูหมุดตำแหน่งนี้,,du mut tamnaeng ni,duː˧ mut˨˩ tam˧nɛŋ˨˩ niː˦˥,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-cannot-walk,เดินไม่ได้,,doen mai dai,dɤːn˧ maj˥˩ daːj˥˩,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-sprained-my-ankle,ข้อเท้าพลิก,,kho thao phlik,kʰɔː˥˩tʰaːw˦˥ pʰlik˦˥,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.please-contact-rescue,ช่วยแจ้งกู้ภัย,,chuai chaeng kuphai,tɕʰua̯j˥˩ tɕɛːŋ˥˩ kuː˥˩pʰaj˧,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.my-companion-is-missing,เพื่อนหาย,,phuean hai,pʰɯa̯n˥˩ haːj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.please-look-at-my-current-location,ดูตำแหน่งปัจจุบันนี้,,du tamnaeng patchuban ni,duː˧ tam˧nɛŋ˨˩ pat˨˩tɕuʔ˨˩ban˧niː˦˥,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.my-child-is-missing,ลูกหาย,,luk hai,luːk˥˩ haːj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-do-not-know-where-i-am,ไม่รู้ว่าอยู่ที่ไหน,,mai ru wa yu thi nai,maj˥˩ ruː˦˥ waː˥˩ juː˨˩ tʰiː˥˩naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.my-friend-is-hurt,เพื่อนบาดเจ็บ,,phuean batchep,pʰɯa̯n˥˩ baːt˨˩tɕep˨˩,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-lost-my-wallet,กระเป๋าเงินหาย,,krapao ngoen hai,kra˨˩raʔ˨˩paw˩˩˦ ŋɤn˧ haːj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-lost-my-bag,กระเป๋าหาย,,krapao hai,kra˨˩raʔ˨˩paw˩˩˦ haːj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.where-is-lost-and-found,ศูนย์ของหายอยู่ไหน,,sun khong hai yu nai,suːn˩˩˦ kʰɔːŋ˩˩˦ haːj˩˩˦ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-cannot-find-my-hotel,หาโรงแรมไม่เจอ,,ha rongraem mai choe,haː˩˩˦ roːŋ˧rɛːm˧ maj˥˩ tɕɤː˧,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-left-it-on-the-train,ลืมไว้บนรถไฟ,,luem wai bon rotfai,lɯːm˧ waj˦˥ bon˧ rot˦˥faj˧,,2,th-agent-v1;ipa=thaig2p
+lost-rescue.i-cannot-get-down,ลงไม่ได้,,long mai dai,loŋ˧ maj˥˩ daːj˥˩,,2,th-agent-v1;ipa=thaig2p
+police-consulate.where-is-the-police-station,สถานีตำรวจอยู่ไหน,สถานีตำรวจท่องเที่ยวอยู่ไหน,sathani tamruat yu nai,sa˨˩tʰaː˩˩˦niː˧tam˧rua̯t˥˩ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-want-to-report-a-theft,ขอแจ้งความ,,kho chaeng khwam,kʰɔː˩˩˦ tɕɛːŋ˥˩kʰwaːm˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.my-bag-was-stolen,กระเป๋าถูกขโมย,,krapao thuk khamoi,kra˨˩raʔ˨˩paw˩˩˦ tʰuːk˨˩ kʰa˨˩moːj˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.my-passport-was-stolen,พาสปอร์ตถูกขโมย,,phatpot thuk khamoi,pʰaː˧sa˨˩pɔːt˨˩ tʰuːk˨˩ kʰa˨˩moːj˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.someone-is-following-me,มีคนตามฉัน,,mi khon tam chan,miː˧ kʰon˧ taːm˧ tɕʰan˩˩˦,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-need-a-written-police-report,ขอใบแจ้งความ,,kho bai chaeng khwam,kʰɔː˩˩˦ baj˧tɕɛːŋ˥˩kʰwaːm˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-want-to-contact-my-embassy,ขอติดต่อสถานทูต,,kho tit to sathan thut,kʰɔː˩˩˦ tit˨˩tɔː˨˩ sa˨˩tʰaː˩˩˦tʰuːt˥˩,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-need-it-for-my-insurance,ต้องใช้เคลมประกัน,,tong chai khlem prakan,tɔŋ˥˩ tɕʰaj˦˥ kʰeː˧lom˧ pra˨˩raʔ˨˩kan˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-need-an-interpreter,ขอล่าม,,kho lam,kʰɔː˩˩˦ laːm˥˩,,2,th-agent-v1;ipa=thaig2p
+police-consulate.please-leave-me-alone,อย่ามายุ่งกับฉัน,,ya ma yung kap chan,jaː˨˩ maː˧ juŋ˥˩ kap˨˩ tɕʰan˩˩˦,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-was-robbed,ถูกปล้น,,thuk plon,tʰuːk˨˩ plon˥˩,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-want-a-lawyer,ขอทนาย,,kho thanai,kʰɔː˩˩˦ tʰa˦˥naːj˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.please-notify-my-consulate,ช่วยแจ้งสถานกงสุล,,chuai chaeng sathan kongsun,tɕʰua̯j˥˩ tɕɛːŋ˥˩ sa˨˩tʰaː˩˩˦koŋ˧sun˩˩˦˥,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-am-calling-the-police,จะโทรเรียกตำรวจ,,cha tho riak tamruat,tɕaʔ˨˩ tʰoː˧ ria̯k˥˩ tam˧rua̯t˥˩,,2,th-agent-v1;ipa=thaig2p
+police-consulate.am-i-under-arrest,ฉันถูกจับไหม,,chan thuk chap mai,tɕʰan˩˩˦ tʰuːk˨˩tɕap˨˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+police-consulate.no-thank-you-i-am-not-interested,ไม่สนใจ ขอบคุณ,,mai sonchai khopkhun,maj˥˩ son˩˩˦tɕaj˧ kʰɔːp˨˩kʰun˧na˦˥,,2,th-agent-v1;ipa=thaig2p
+police-consulate.someone-attacked-me,มีคนทำร้ายฉัน,,mi khon thamrai chan,miː˧ kʰon˧ tʰam˧raːj˦˥ tɕʰan˩˩˦,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-did-not-agree-to-this-price,ไม่ได้ตกลงราคานี้,,mai dai toklong rakha ni,maj˥˩ daːj˥˩ tok˨˩loŋ˧ raː˧kʰaː˧ niː˦˥,,2,th-agent-v1;ipa=thaig2p
+police-consulate.please-write-the-report-number,ช่วยเขียน เลขที่แจ้งความ,,chuai khian lekthi chaeng khwam,tɕʰua̯j˥˩ kʰia̯n˩˩˦ leːk˥˩tʰiː˥˩ tɕɛːŋ˥˩kʰwaːm˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.it-happened-here,เกิดที่นี่,,koet thi ni,kɤːt˨˩ tʰiː˥˩niː˥˩,,2,th-agent-v1;ipa=thaig2p
+police-consulate.may-i-have-a-copy-of-the-report,ขอสำเนาใบแจ้งความ,,kho samnao bai chaeng khwam,kʰɔː˩˩˦ sam˩˩˦naw˧ baj˧tɕɛːŋ˥˩kʰwaːm˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-will-not-sign-anything-i-cannot-read,อ่านไม่ออก จะไม่เซ็น,,"an mai ok, cha mai sen",ʔaːn˨˩maj˥˩ʔɔːk˨˩ tɕaʔ˨˩ maj˥˩ sen˧,,2,th-agent-v1;ipa=thaig2p
+police-consulate.am-i-free-to-go,ไปได้ไหม,,pai dai mai,paj˧ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+police-consulate.i-do-not-want-to-go-with-you,ไม่ไปกับคุณ,,mai pai kap khun,maj˥˩ paj˧ kap˨˩ kʰun˧na˦˥,,2,th-agent-v1;ipa=thaig2p

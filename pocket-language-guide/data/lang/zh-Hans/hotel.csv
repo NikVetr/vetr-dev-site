@@ -1,53 +1,53 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
-hotel-words.passport,护照,,hùzhào,,,2,latex-reference-v2
-hotel-basics.are-any-rooms-available,有空房吗？,,yǒu kòngfáng ma?,,,2,latex-reference-v2
-hotel-requests.can-i-check-out-later,可以晚点退房吗？,,kěyǐ wǎndiǎn tuìfáng ma?,,,2,latex-reference-v2
-room-problems.there-is-a-problem-with-the-room,房间有问题,,fángjiān yǒu wèntí,,,2,latex-reference-v2
-laundry.please-wash-these-clothes,请洗这些衣服,,qǐng xǐ zhèxiē yīfu,,,2,zh-Hans-agent-v1
-hotel-words.room-key-card,房卡,,fángkǎ,,,2,latex-reference-v2
-hotel-basics.there-are-two-of-us,我们两个人,,wǒmen liǎng gè rén,,,2,latex-reference-v2
-hotel-requests.what-time-does-breakfast-start,早餐几点开始？,,zǎocān jǐ diǎn kāishǐ?,,,2,latex-reference-v2
-room-problems.the-air-conditioning-is-broken,空调坏了,,kòngtiáo huài le,,,2,latex-reference-v2
-laundry.where-is-a-laundromat,自助洗衣店在哪里？,,zìzhù xǐyīdiàn zài nǎlǐ?,,,2,zh-Hans-agent-v1
-hotel-words.check-in,入住,,rùzhù,,,2,latex-reference-v2
-hotel-basics.i-have-a-reservation,我有预订,,wǒ yǒu yùdìng,,,2,latex-reference-v2
-hotel-requests.can-i-store-my-luggage,可以寄存行李吗？,,kěyǐ jìcún xíngli ma?,,,2,latex-reference-v2
-room-problems.there-is-no-hot-water,没有热水,,méiyǒu rèshuǐ,,,2,latex-reference-v2
-laundry.when-will-it-be-ready,什么时候能好？,,shénme shíhou néng hǎo?,,,2,zh-Hans-agent-v1
-hotel-words.check-out,退房,,tuìfáng,,,2,latex-reference-v2
-hotel-basics.can-i-charge-my-phone,可以给手机充电吗？,,kěyǐ gěi shǒujī chōngdiàn ma?,,,2,latex-reference-v2
-hotel-requests.no-housekeeping,不用打扫,,bú yòng dǎsǎo,,,2,latex-reference-v2
-room-problems.can-i-change-rooms,可以换房吗？,,kěyǐ huàn fáng ma?,,,2,latex-reference-v2
-laundry.how-much-per-kilo,一公斤多少钱？,,yì gōngjīn duōshao qián?,,,2,zh-Hans-agent-v1
-hotel-basics.i-would-like-a-non-smoking-room,我要无烟房,,wǒ yào wúyān fáng,,,2,latex-reference-v2
-room-problems.the-room-is-too-noisy,房间太吵了,,fángjiān tài chǎo le,,,2,latex-reference-v2
-laundry.can-it-be-ready-today,今天能好吗？,,jīntiān néng hǎo ma?,,,2,zh-Hans-agent-v1
-hotel-basics.i-would-like-a-quiet-room,我要安静的房间,,wǒ yào ānjìng de fángjiān,,,2,latex-reference-v2
-laundry.please-do-not-use-bleach,请不要用漂白剂,,qǐng bú yào yòng piǎobáijì,,,2,zh-Hans-agent-v1
-room-problems.the-key-does-not-work,房卡打不开门,,fángkǎ dǎ bu kāi mén,,,2,zh-Hans-agent-v1
-hotel-basics.is-there-a-washing-machine,有洗衣机吗？,,yǒu xǐyījī ma?,,,2,latex-reference-v2
-laundry.laundromat,自助洗衣店,,zìzhù xǐyīdiàn,,,2,zh-Hans-agent-v1
-room-problems.the-toilet-will-not-flush,马桶冲不下去,,mǎtǒng chōng bu xiàqù,,,2,zh-Hans-agent-v1
-laundry.please-iron-this,请熨一下这个,,qǐng yùn yíxià zhège,,,2,zh-Hans-agent-v1
-room-problems.the-light-does-not-work,灯不亮了,,dēng bú liàng le,,,2,zh-Hans-agent-v1
-laundry.detergent,洗衣液,,xǐyīyè,,,2,zh-Hans-agent-v1
-room-problems.please-send-someone,请派人来修,,qǐng pài rén lái xiū,,,2,zh-Hans-agent-v1
-laundry.dry-cleaning,干洗,乾洗,gānxǐ,,,2,zh-Hans-agent-v1
-room-problems.the-heating-does-not-work,暖气坏了,,nuǎnqì huài le,,,2,zh-Hans-agent-v1
-laundry.dryer,烘干机,烘乾機,hōnggānjī,,,2,zh-Hans-agent-v1
-laundry.coin-operated,投币,投幣,tóubì,,,2,zh-Hans-agent-v1
+hotel-words.passport,护照,,hùzhào,xu˥˩ʈʂɑʊ˥˩,,2,latex-reference-v2;ipa=pinyin
+hotel-basics.are-any-rooms-available,有空房吗？,,yǒu kòngfáng ma?,joʊ˧˩˧ kʰʊŋ˥˩fɑŋ˧˥ ma,,2,latex-reference-v2;ipa=pinyin
+hotel-requests.can-i-check-out-later,可以晚点退房吗？,,kěyǐ wǎndiǎn tuìfáng ma?,kʰɤ˧˩˧i˧˩˧ wan˧˩˧tjɛn˧˩˧ tʰweɪ˥˩fɑŋ˧˥ ma,,2,latex-reference-v2;ipa=pinyin
+room-problems.there-is-a-problem-with-the-room,房间有问题,,fángjiān yǒu wèntí,fɑŋ˧˥tɕjɛn˥ joʊ˧˩˧ wən˥˩tʰi˧˥,,2,latex-reference-v2;ipa=pinyin
+laundry.please-wash-these-clothes,请洗这些衣服,,qǐng xǐ zhèxiē yīfu,tɕʰiŋ˧˩˧ ɕi˧˩˧ ʈʂɤ˥˩ɕjɛ˥ i˥fu,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-words.room-key-card,房卡,,fángkǎ,fɑŋ˧˥kʰa˧˩˧,,2,latex-reference-v2;ipa=pinyin
+hotel-basics.there-are-two-of-us,我们两个人,,wǒmen liǎng gè rén,wɔ˧˩˧mən ljɑŋ˧˩˧ kɤ˥˩ ʐən˧˥,,2,latex-reference-v2;ipa=pinyin
+hotel-requests.what-time-does-breakfast-start,早餐几点开始？,,zǎocān jǐ diǎn kāishǐ?,tsɑʊ˧˩˧tsʰan˥ tɕi˧˩˧ tjɛn˧˩˧ kʰaɪ˥ʂɨ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+room-problems.the-air-conditioning-is-broken,空调坏了,,kòngtiáo huài le,kʰʊŋ˥˩tʰjɑʊ˧˥ xwaɪ˥˩ lɤ,,2,latex-reference-v2;ipa=pinyin
+laundry.where-is-a-laundromat,自助洗衣店在哪里？,,zìzhù xǐyīdiàn zài nǎlǐ?,tsɯ˥˩ʈʂu˥˩ ɕi˧˩˧i˥tjɛn˥˩ tsaɪ˥˩ na˧˩˧li˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-words.check-in,入住,,rùzhù,ʐu˥˩ʈʂu˥˩,,2,latex-reference-v2;ipa=pinyin
+hotel-basics.i-have-a-reservation,我有预订,,wǒ yǒu yùdìng,wɔ˧˩˧ joʊ˧˩˧ y˥˩tiŋ˥˩,,2,latex-reference-v2;ipa=pinyin
+hotel-requests.can-i-store-my-luggage,可以寄存行李吗？,,kěyǐ jìcún xíngli ma?,kʰɤ˧˩˧i˧˩˧ tɕi˥˩tsʰwən˧˥ ɕiŋ˧˥li ma,,2,latex-reference-v2;ipa=pinyin
+room-problems.there-is-no-hot-water,没有热水,,méiyǒu rèshuǐ,meɪ˧˥joʊ˧˩˧ ʐɤ˥˩ʂweɪ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+laundry.when-will-it-be-ready,什么时候能好？,,shénme shíhou néng hǎo?,ʂən˧˥mɤ ʂɨ˧˥xoʊ nɤŋ˧˥ xɑʊ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-words.check-out,退房,,tuìfáng,tʰweɪ˥˩fɑŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+hotel-basics.can-i-charge-my-phone,可以给手机充电吗？,,kěyǐ gěi shǒujī chōngdiàn ma?,kʰɤ˧˩˧i˧˩˧ keɪ˧˩˧ ʂoʊ˧˩˧tɕi˥ ʈʂʰʊŋ˥tjɛn˥˩ ma,,2,latex-reference-v2;ipa=pinyin
+hotel-requests.no-housekeeping,不用打扫,,bú yòng dǎsǎo,pu˧˥ jʊŋ˥˩ ta˧˩˧sɑʊ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+room-problems.can-i-change-rooms,可以换房吗？,,kěyǐ huàn fáng ma?,kʰɤ˧˩˧i˧˩˧ xwan˥˩ fɑŋ˧˥ ma,,2,latex-reference-v2;ipa=pinyin
+laundry.how-much-per-kilo,一公斤多少钱？,,yì gōngjīn duōshao qián?,i˥˩ kʊŋ˥tɕin˥ twɔ˥ʂɑʊ tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.i-would-like-a-non-smoking-room,我要无烟房,,wǒ yào wúyān fáng,wɔ˧˩˧ jɑʊ˥˩ u˧˥jɛn˥ fɑŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+room-problems.the-room-is-too-noisy,房间太吵了,,fángjiān tài chǎo le,fɑŋ˧˥tɕjɛn˥ tʰaɪ˥˩ ʈʂʰɑʊ˧˩˧ lɤ,,2,latex-reference-v2;ipa=pinyin
+laundry.can-it-be-ready-today,今天能好吗？,,jīntiān néng hǎo ma?,tɕin˥tʰjɛn˥ nɤŋ˧˥ xɑʊ˧˩˧ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.i-would-like-a-quiet-room,我要安静的房间,,wǒ yào ānjìng de fángjiān,wɔ˧˩˧ jɑʊ˥˩ an˥tɕiŋ˥˩ tɤ fɑŋ˧˥tɕjɛn˥,,2,latex-reference-v2;ipa=pinyin
+laundry.please-do-not-use-bleach,请不要用漂白剂,,qǐng bú yào yòng piǎobáijì,tɕʰiŋ˧˩˧ pu˧˥ jɑʊ˥˩ jʊŋ˥˩ pʰjɑʊ˧˩˧paɪ˧˥tɕi˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+room-problems.the-key-does-not-work,房卡打不开门,,fángkǎ dǎ bu kāi mén,fɑŋ˧˥kʰa˧˩˧ ta˧˩˧ pu kʰaɪ˥ mən˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.is-there-a-washing-machine,有洗衣机吗？,,yǒu xǐyījī ma?,joʊ˧˩˧ ɕi˧˩˧i˥tɕi˥ ma,,2,latex-reference-v2;ipa=pinyin
+laundry.laundromat,自助洗衣店,,zìzhù xǐyīdiàn,tsɯ˥˩ʈʂu˥˩ ɕi˧˩˧i˥tjɛn˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+room-problems.the-toilet-will-not-flush,马桶冲不下去,,mǎtǒng chōng bu xiàqù,ma˧˩˧tʰʊŋ˧˩˧ ʈʂʰʊŋ˥ pu ɕja˥˩tɕʰy˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+laundry.please-iron-this,请熨一下这个,,qǐng yùn yíxià zhège,tɕʰiŋ˧˩˧ yn˥˩ i˧˥ɕja˥˩ ʈʂɤ˥˩kɤ,,2,zh-Hans-agent-v1;ipa=pinyin
+room-problems.the-light-does-not-work,灯不亮了,,dēng bú liàng le,tɤŋ˥ pu˧˥ ljɑŋ˥˩ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
+laundry.detergent,洗衣液,,xǐyīyè,ɕi˧˩˧i˥jɛ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+room-problems.please-send-someone,请派人来修,,qǐng pài rén lái xiū,tɕʰiŋ˧˩˧ pʰaɪ˥˩ ʐən˧˥ laɪ˧˥ ɕjoʊ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+laundry.dry-cleaning,干洗,乾洗,gānxǐ,kan˥ɕi˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+room-problems.the-heating-does-not-work,暖气坏了,,nuǎnqì huài le,nwan˧˩˧tɕʰi˥˩ xwaɪ˥˩ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
+laundry.dryer,烘干机,烘乾機,hōnggānjī,xʊŋ˥kan˥tɕi˥,,2,zh-Hans-agent-v1;ipa=pinyin
+laundry.coin-operated,投币,投幣,tóubì,tʰoʊ˧˥pi˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
 hotel-basics.is-wi-fi-free,Wi-Fi 免费吗？,,Wi-Fi miǎnfèi ma?,,,2,zh-Hans-agent-v1
-hotel-requests.another-towel-please,请再给一条毛巾,,qǐng zài gěi yì tiáo máojīn,,,2,zh-Hans-agent-v1
-hotel-words.luggage-storage,行李寄存,,xíngli jìcún,,,2,zh-Hans-agent-v1
-hotel-basics.how-much-per-night,一晚多少钱？,,yì wǎn duōshao qián?,,,2,zh-Hans-agent-v1
-hotel-requests.what-time-is-check-out,几点退房？,,jǐ diǎn tuìfáng?,,,2,zh-Hans-agent-v1
-hotel-basics.is-breakfast-included,含早餐吗？,,hán zǎocān ma?,,,2,zh-Hans-agent-v1
-hotel-requests.can-i-check-in-early,可以早点入住吗？,,kěyǐ zǎodiǎn rùzhù ma?,,,2,zh-Hans-agent-v1
-hotel-basics.may-i-see-the-room,可以看看房间吗？,,kěyǐ kànkan fángjiān ma?,,,2,zh-Hans-agent-v1
-hotel-requests.another-night,可以再住一晚吗？,,kěyǐ zài zhù yì wǎn ma?,,,2,zh-Hans-agent-v1
-hotel-basics.for-nights,住{}晚,,zhù {} wǎn,,,2,zh-Hans-agent-v1
-hotel-requests.is-there-a-safe,有保险箱吗？,,yǒu bǎoxiǎnxiāng ma?,,,2,zh-Hans-agent-v1
-hotel-basics.two-beds,要两张床,,yào liǎng zhāng chuáng,,,2,zh-Hans-agent-v1
-hotel-requests.another-blanket,请再给一条毯子,,qǐng zài gěi yì tiáo tǎnzi,,,2,zh-Hans-agent-v1
-hotel-basics.is-there-air-conditioning,有空调吗？,,yǒu kōngtiáo ma?,,,2,zh-Hans-agent-v1
-hotel-requests.wake-up-call,请{}叫我起床,,qǐng {} jiào wǒ qǐchuáng,,,2,zh-Hans-agent-v1
+hotel-requests.another-towel-please,请再给一条毛巾,,qǐng zài gěi yì tiáo máojīn,tɕʰiŋ˧˩˧ tsaɪ˥˩ keɪ˧˩˧ i˥˩ tʰjɑʊ˧˥ mɑʊ˧˥tɕin˥,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-words.luggage-storage,行李寄存,,xíngli jìcún,ɕiŋ˧˥li tɕi˥˩tsʰwən˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.how-much-per-night,一晚多少钱？,,yì wǎn duōshao qián?,i˥˩ wan˧˩˧ twɔ˥ʂɑʊ tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-requests.what-time-is-check-out,几点退房？,,jǐ diǎn tuìfáng?,tɕi˧˩˧ tjɛn˧˩˧ tʰweɪ˥˩fɑŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.is-breakfast-included,含早餐吗？,,hán zǎocān ma?,xan˧˥ tsɑʊ˧˩˧tsʰan˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-requests.can-i-check-in-early,可以早点入住吗？,,kěyǐ zǎodiǎn rùzhù ma?,kʰɤ˧˩˧i˧˩˧ tsɑʊ˧˩˧tjɛn˧˩˧ ʐu˥˩ʈʂu˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.may-i-see-the-room,可以看看房间吗？,,kěyǐ kànkan fángjiān ma?,kʰɤ˧˩˧i˧˩˧ kʰan˥˩kʰan fɑŋ˧˥tɕjɛn˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-requests.another-night,可以再住一晚吗？,,kěyǐ zài zhù yì wǎn ma?,kʰɤ˧˩˧i˧˩˧ tsaɪ˥˩ ʈʂu˥˩ i˥˩ wan˧˩˧ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.for-nights,住{}晚,,zhù {} wǎn,ʈʂu˥˩ {} wan˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-requests.is-there-a-safe,有保险箱吗？,,yǒu bǎoxiǎnxiāng ma?,joʊ˧˩˧ pɑʊ˧˩˧ɕjɛn˧˩˧ɕjɑŋ˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.two-beds,要两张床,,yào liǎng zhāng chuáng,jɑʊ˥˩ ljɑŋ˧˩˧ ʈʂɑŋ˥ ʈʂʰwɑŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-requests.another-blanket,请再给一条毯子,,qǐng zài gěi yì tiáo tǎnzi,tɕʰiŋ˧˩˧ tsaɪ˥˩ keɪ˧˩˧ i˥˩ tʰjɑʊ˧˥ tʰan˧˩˧tsɯ,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-basics.is-there-air-conditioning,有空调吗？,,yǒu kōngtiáo ma?,joʊ˧˩˧ kʰʊŋ˥tʰjɑʊ˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hotel-requests.wake-up-call,请{}叫我起床,,qǐng {} jiào wǒ qǐchuáng,tɕʰiŋ˧˩˧ {} tɕjɑʊ˥˩ wɔ˧˩˧ tɕʰi˧˩˧ʈʂʰwɑŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin

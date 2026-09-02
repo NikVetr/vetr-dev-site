@@ -1,13 +1,13 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Jina langu ni {},,,,2,sw-agent-v1
-introductions.nice-to-meet-you,Nimefurahi kukutana nawe,,,,2,sw-agent-v1
-introductions.what-is-your-name,Jina lako ni nani?,,,your name is who?,2,sw-agent-v1
-introductions.we-are-traveling-together,Tunasafiri pamoja,,,,2,sw-agent-v1
-introductions.this-is-my-friend,Huyu ni rafiki yangu,,,,2,sw-agent-v1
-introductions.i-am-from,Natoka {},,,,2,sw-agent-v1
-introductions.where-are-you-from,Unatoka wapi?,,,,2,sw-agent-v1
-introductions.how-are-you,Habari yako?,Hujambo?,,reply: nzuri,2,sw-agent-v1
-introductions.i-am-a-tourist,Mimi ni mtalii,,,,2,sw-agent-v1
-introductions.this-is-my-husband-wife,Huyu ni mume / mke wangu,,,,2,sw-agent-v1
-introductions.this-is-my-daughter-son,Huyu ni mtoto wangu wa kike / kiume,,,my female / male child,2,sw-agent-v1
-introductions.i-am-traveling-alone,Nasafiri peke yangu,,,,2,sw-agent-v1
+introductions.my-name-is,Jina langu ni {},,ɟˈina lˈaŋɡu nˈi {},,2,sw-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Nimefurahi kukutana nawe,,nˌimefurˈahi kˌukutˈana nˈawe,,2,sw-agent-v1;ipa=espeak
+introductions.what-is-your-name,Jina lako ni nani?,,ɟˈina lˈako ni nˈani,your name is who?,2,sw-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Tunasafiri pamoja,,tˌunasafˈiri pamˈoɟa,,2,sw-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Huyu ni rafiki yangu,,hˈuju ni rafˈiki jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+introductions.i-am-from,Natoka {},,natˈoka {},,2,sw-agent-v1;ipa=espeak
+introductions.where-are-you-from,Unatoka wapi?,,ˌunatˈoka wˈapi,,2,sw-agent-v1;ipa=espeak
+introductions.how-are-you,Habari yako?,Hujambo?,habˈari jˈako,reply: nzuri,2,sw-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Mimi ni mtalii,,mˌimi ni mtalˈii,,2,sw-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Huyu ni mume / mke wangu,,hˈuju ni mˈume / ˈm̩ke wˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Huyu ni mtoto wangu wa kike / kiume,,hˈuju ni mtˈoto wˈaŋɡu wa kˈike / kiˈume,my female / male child,2,sw-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Nasafiri peke yangu,,nˌasafˈiri pˈeke jˈaŋɡu,,2,sw-agent-v1;ipa=espeak

@@ -1,44 +1,44 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,كم الساعة؟,,kam al-sāʿah?,,,2,ar-agent-v1
-time-scheduling.how-many-minutes,كم دقيقة؟,,kam daqīqah?,,,2,ar-agent-v1
-time-scheduling.what-time-should-we-meet,في أيّ ساعة نتقابل؟,,fī ayy sāʿah nataqābal?,,,2,ar-agent-v1
-time-scheduling.can-we-change-the-time,هل يمكن تغيير الموعد؟,,hal yumkin taghyīr al-mawʿid?,,,2,ar-agent-v1
-time-scheduling.when-is-convenient,متى يناسبك؟,,matá yunāsibuk?,,,2,ar-agent-v1
-time-scheduling.what-is-today-s-date,ما تاريخ اليوم؟,,mā tārīkh al-yawm?,,,2,ar-agent-v1
-time-scheduling.what-day-is-it-today,أيّ يوم اليوم؟,,ayy yawm al-yawm?,,,2,ar-agent-v1
-time-scheduling.what-time-does-it-open,متى يفتح؟,,matá yaftaḥ?,,,2,ar-agent-v1
-time-scheduling.what-time-does-it-close,متى يغلق؟,,matá yughliq?,,,2,ar-agent-v1
-time-scheduling.how-long-does-it-take,كم يستغرق؟,,kam yastaghriq?,,,2,ar-agent-v1
-time-words.today,اليوم,,al-yawm,,,2,ar-agent-v1
-time-words.tomorrow,غداً,بكرة,ghadan,,,2,ar-agent-v1
-time-words.yesterday,أمس,امبارح,ams,,,2,ar-agent-v1
-time-words.this-week,هذا الأسبوع,,hādhā al-usbūʿ,,,2,ar-agent-v1
-time-words.next-week,الأسبوع القادم,,al-usbūʿ al-qādim,,,2,ar-agent-v1
-time-words.morning,صباح,,ṣabāḥ,,,2,ar-agent-v1
-time-words.afternoon,بعد الظهر,,baʿd al-ẓuhr,,after noon,2,ar-agent-v1
-time-words.evening,مساء,,masāʾ,,,2,ar-agent-v1
-time-words.spring,ربيع,,rabīʿ,,,2,ar-agent-v1
-time-words.summer,صيف,,ṣayf,,,2,ar-agent-v1
-time-words.fall,خريف,,kharīf,,,2,ar-agent-v1
-time-words.winter,شتاء,,shitāʾ,,,2,ar-agent-v1
-time-words.night,ليل,,layl,,,2,ar-agent-v1
-days-of-week.monday,الاثنين,,al-ithnayn,,,2,ar-agent-v1
-days-of-week.tuesday,الثلاثاء,,al-thulāthāʾ,,,2,ar-agent-v1
-days-of-week.wednesday,الأربعاء,,al-arbiʿāʾ,,,2,ar-agent-v1
-days-of-week.thursday,الخميس,,al-khamīs,,,2,ar-agent-v1
-days-of-week.friday,الجمعة,,al-jumʿah,,,2,ar-agent-v1
-days-of-week.saturday,السبت,,al-sabt,,,2,ar-agent-v1
-days-of-week.sunday,الأحد,,al-aḥad,,,2,ar-agent-v1
-months.january,يناير,كانون الثاني,yanāyir,,,2,ar-agent-v1
-months.february,فبراير,شباط,fibrāyir,,,2,ar-agent-v1
-months.march,مارس,آذار,māris,,,2,ar-agent-v1
-months.april,أبريل,نيسان,abrīl,,,2,ar-agent-v1
-months.may,مايو,أيار,māyū,,,2,ar-agent-v1
-months.june,يونيو,حزيران,yūnyū,,,2,ar-agent-v1
-months.july,يوليو,تموز,yūlyū,,,2,ar-agent-v1
-months.august,أغسطس,آب,aghusṭus,,,2,ar-agent-v1
-months.september,سبتمبر,أيلول,sibtambir,,,2,ar-agent-v1
-months.october,أكتوبر,تشرين الأول,uktūbir,,,2,ar-agent-v1
-months.november,نوفمبر,تشرين الثاني,nūfambir,,,2,ar-agent-v1
-months.december,ديسمبر,كانون الأول,dīsambir,,,2,ar-agent-v1
+time-scheduling.what-time-is-it,كم الساعة؟,,kam al-sāʿah?,kˌiiluˈu mitˌar ʔassˈaːʕa,,2,ar-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,كم دقيقة؟,,kam daqīqah?,kˌiiluˈu mitˌar dˈaqiːqˌa,,2,ar-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,في أيّ ساعة نتقابل؟,,fī ayy sāʿah nataqābal?,fˈiː ʔˈiː sˈaːʕa ntqˈaːbl,,2,ar-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,هل يمكن تغيير الموعد؟,,hal yumkin taghyīr al-mawʿid?,hˈal jmkˈunna tˈaɣjiːr ʔalmˈawʕid,,2,ar-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,متى يناسبك؟,,matá yunāsibuk?,mˈataː jnˈaːsbka,,2,ar-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,ما تاريخ اليوم؟,,mā tārīkh al-yawm?,mˈaː tˈaːɹiːx ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,أيّ يوم اليوم؟,,ayy yawm al-yawm?,ʔˈiː jˈawm ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,متى يفتح؟,,matá yaftaḥ?,mˈataː jftħ,,2,ar-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,متى يغلق؟,,matá yughliq?,mˈataː jɣlq,,2,ar-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,كم يستغرق؟,,kam yastaghriq?,kˌiiluˈu mitˌar jstɣrq,,2,ar-agent-v1;ipa=espeak
+time-words.today,اليوم,,al-yawm,ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
+time-words.tomorrow,غداً,بكرة,ghadan,ɣdˈaː,,2,ar-agent-v1;ipa=espeak
+time-words.yesterday,أمس,امبارح,ams,ʔˈams,,2,ar-agent-v1;ipa=espeak
+time-words.this-week,هذا الأسبوع,,hādhā al-usbūʿ,haˈaðaˌa ʔalʔˈusbuːʕ,,2,ar-agent-v1;ipa=espeak
+time-words.next-week,الأسبوع القادم,,al-usbūʿ al-qādim,ʔalʔˈusbuːʕ ʔalqˈaːdim,,2,ar-agent-v1;ipa=espeak
+time-words.morning,صباح,,ṣabāḥ,s̪ˈabaːħ,,2,ar-agent-v1;ipa=espeak
+time-words.afternoon,بعد الظهر,,baʿd al-ẓuhr,bˈaʕd ʔaððˈuhr,after noon,2,ar-agent-v1;ipa=espeak
+time-words.evening,مساء,,masāʾ,mˈasaːʔ,,2,ar-agent-v1;ipa=espeak
+time-words.spring,ربيع,,rabīʿ,ɹˈabiːʕ,,2,ar-agent-v1;ipa=espeak
+time-words.summer,صيف,,ṣayf,s̪ˈajf,,2,ar-agent-v1;ipa=espeak
+time-words.fall,خريف,,kharīf,xˈaɹiːf,,2,ar-agent-v1;ipa=espeak
+time-words.winter,شتاء,,shitāʾ,ʃˈitaːʔ,,2,ar-agent-v1;ipa=espeak
+time-words.night,ليل,,layl,lˈajl,,2,ar-agent-v1;ipa=espeak
+days-of-week.monday,الاثنين,,al-ithnayn,alˈiθnajnˌi,,2,ar-agent-v1;ipa=espeak
+days-of-week.tuesday,الثلاثاء,,al-thulāthāʾ,ʔaθθˈulaːθˌaːʔ,,2,ar-agent-v1;ipa=espeak
+days-of-week.wednesday,الأربعاء,,al-arbiʿāʾ,ʔalʔˈarbiʕˌaːʔ,,2,ar-agent-v1;ipa=espeak
+days-of-week.thursday,الخميس,,al-khamīs,ʔalxˈamiːs,,2,ar-agent-v1;ipa=espeak
+days-of-week.friday,الجمعة,,al-jumʿah,ʔaldʒˈumʕa,,2,ar-agent-v1;ipa=espeak
+days-of-week.saturday,السبت,,al-sabt,ʔassˈabt,,2,ar-agent-v1;ipa=espeak
+days-of-week.sunday,الأحد,,al-aḥad,ʔalʔˈaħad,,2,ar-agent-v1;ipa=espeak
+months.january,يناير,كانون الثاني,yanāyir,jˈanaːjˌir,,2,ar-agent-v1;ipa=espeak
+months.february,فبراير,شباط,fibrāyir,fˈibɹaːjˌir,,2,ar-agent-v1;ipa=espeak
+months.march,مارس,آذار,māris,mˈaːɹis,,2,ar-agent-v1;ipa=espeak
+months.april,أبريل,نيسان,abrīl,ʔˈabɹiːl,,2,ar-agent-v1;ipa=espeak
+months.may,مايو,أيار,māyū,mˈaːjuː,,2,ar-agent-v1;ipa=espeak
+months.june,يونيو,حزيران,yūnyū,jˈuːniːˌuː,,2,ar-agent-v1;ipa=espeak
+months.july,يوليو,تموز,yūlyū,jˈuːliːˌuː,,2,ar-agent-v1;ipa=espeak
+months.august,أغسطس,آب,aghusṭus,ʔˈaɣust̪ˌus,,2,ar-agent-v1;ipa=espeak
+months.september,سبتمبر,أيلول,sibtambir,sˈibtambˌar,,2,ar-agent-v1;ipa=espeak
+months.october,أكتوبر,تشرين الأول,uktūbir,ʔˈuktuːbˌar,,2,ar-agent-v1;ipa=espeak
+months.november,نوفمبر,تشرين الثاني,nūfambir,nˈuːfimbˌir,,2,ar-agent-v1;ipa=espeak
+months.december,ديسمبر,كانون الأول,dīsambir,dˈiːsambˌir,,2,ar-agent-v1;ipa=espeak
 time-words.clock-offset,"الساعة السواحيلية تبدأ من الفجر لا من منتصف الليل: العدد الذي تسمعه أقل بست ساعات مما على ساعتك، فأضف ستًا إلى ما تسمعه، واطرح ستًا مما على ساعتك لتقوله بالسواحيلية. سا موجا هي السابعة صباحًا، وسا سيتا الظهر، وسا كومي الرابعة عصرًا. والأسلم أن تقول الوقت بالأرقام، أو تسأل عن التوقيت الغربي بعبارة سا نغابي زا كيزونغو.",,,,,2,ar-notes-v1

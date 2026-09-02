@@ -1,116 +1,116 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-border-customs.i-am-a-tourist,Je suis touriste,,,,2,fr-agent-v1
-border-customs.here-is-my-passport,Voici mon passeport,,,,2,fr-agent-v1
-border-customs.i-am-staying-for-days,Je reste {} jours,,,,2,fr-agent-v1
-border-customs.nothing-to-declare,Rien à déclarer,,,,2,fr-agent-v1
-border-customs.i-am-staying-at,Je loge à {},,,,2,fr-agent-v1
-border-customs.i-am-here-for-business,Je viens pour affaires,,,,2,fr-agent-v1
-border-customs.i-have-a-return-ticket,J'ai un billet de retour,,,,2,fr-agent-v1
-border-customs.i-am-visiting-family,Je viens voir ma famille,,,,2,fr-agent-v1
-border-customs.this-is-for-personal-use,C'est pour usage personnel,,,,2,fr-agent-v1
-border-customs.i-am-in-transit,Je suis en transit,,,,2,fr-agent-v1
-border-customs.i-have-in-cash,J'ai {} en espèces,,,,2,fr-agent-v1
-border-customs.this-is-a-gift,C'est un cadeau,,,,2,fr-agent-v1
-border-customs.where-do-i-collect-my-baggage,Où récupérer mes bagages ?,,,,2,fr-agent-v1
-border-customs.how-long-may-i-stay,Combien de temps puis-je rester ?,,,,2,fr-agent-v1
-border-customs.i-have-a-connecting-flight,J'ai un vol en correspondance,,,,2,fr-agent-v1
-border-customs.may-i-have-an-entry-stamp,Puis-je avoir un tampon d'entrée ?,,,,2,fr-agent-v1
-border-customs.visa,visa,,,,2,fr-agent-v1
-border-customs.i-have-no-food-or-plants,Je n'ai ni nourriture ni plantes,,,,2,fr-agent-v1
-border-customs.passport-control,Contrôle des passeports,,,,2,fr-agent-v1
-border-customs.customs,Douane,,,,2,fr-agent-v1
-border-customs.baggage-claim,Livraison des bagages,Retrait des bagages,,,2,fr-agent-v1
-border-customs.customs-declaration,Déclaration en douane,,,,2,fr-agent-v1
-border-customs.arrival-card,fiche de débarquement,,,,2,fr-agent-v1
-border-customs.transit,Transit,,,,2,fr-agent-v1
-border-customs.boarding-pass,carte d'embarquement,,,,2,fr-agent-v1
-directions.where-is,Où est {} ?,,,,2,fr-agent-v1
-directions.how-do-i-get-to,Comment aller à {} ?,,,,2,fr-agent-v1
-directions.is-it-far,C'est loin ?,,,,2,fr-agent-v1
-directions.how-long-on-foot,Combien de temps à pied ?,,,,2,fr-agent-v1
-directions.please-show-me-on-the-map,"Montrez-moi sur la carte, s'il vous plaît",,,,2,fr-agent-v1
-directions.where-is-the-nearest,Où est le {} le plus proche ?,,,,2,fr-agent-v1
-directions.where-am-i,Où suis-je ?,,,,2,fr-agent-v1
-directions.which-way,Par où ?,,,,2,fr-agent-v1
-directions.can-i-walk-there,Peut-on y aller à pied ?,,,,2,fr-agent-v1
-directions.how-far-is-it,C'est à quelle distance ?,,,,2,fr-agent-v1
-directions.which-exit,Quelle sortie ?,,,,2,fr-agent-v1
-directions.can-you-show-me-the-way,Pouvez-vous m'indiquer le chemin ?,,,,2,fr-agent-v1
-directions.north,nord,,,,2,fr-agent-v1
-directions.south,sud,,,,2,fr-agent-v1
-directions.east,est,,,,2,fr-agent-v1
-directions.west,ouest,,,,2,fr-agent-v1
-quick-directions.go-straight,Tout droit,,,,2,fr-agent-v1
-quick-directions.turn-left,Tournez à gauche,,,,2,fr-agent-v1
-quick-directions.turn-right,Tournez à droite,,,,2,fr-agent-v1
-quick-directions.this-way,Par ici,,,,2,fr-agent-v1
-quick-directions.that-way,Par là,,,,2,fr-agent-v1
-quick-directions.on-the-left,À gauche,,,,2,fr-agent-v1
-quick-directions.on-the-right,À droite,,,,2,fr-agent-v1
-quick-directions.across-from-here,En face,,,,2,fr-agent-v1
-quick-directions.in-front,Devant,,,,2,fr-agent-v1
-quick-directions.behind,Derrière,,,,2,fr-agent-v1
-taxi.please-take-me-here,"Emmenez-moi ici, s'il vous plaît",,,,2,fr-agent-v1
-taxi.please-send-me-the-address,Envoyez-moi l'adresse,,,,2,fr-agent-v1
-taxi.we-need-the-east-gate-not-the-south-gate,"Nous voulons la porte est, pas la porte sud",,,,2,fr-agent-v1
-taxi.please-stop-here,"Arrêtez-vous ici, s'il vous plaît",,,,2,fr-agent-v1
-taxi.can-you-wait-for-me-here,Pouvez-vous m'attendre ici ?,,,,2,fr-agent-v1
-taxi.we-need-to-catch-the-high-speed-train,Nous devons attraper le TGV,le train à grande vitesse,,,2,fr-agent-v1
-taxi.please-use-the-meter,"Mettez le compteur, s'il vous plaît",,,,2,fr-agent-v1
-taxi.i-will-get-off-here,Je descends ici,,,,2,fr-agent-v1
-taxi.please-get-me-there-in-time-for-the-shinkansen,Déposez-moi à temps pour le Shinkansen,,,,2,fr-agent-v1
-transit-rides.two-tickets,Deux billets,,,,2,fr-agent-v1
-transit-rides.where-is-the-subway-station,Où est la station de métro ?,,,,2,fr-agent-v1
-transit-rides.does-this-bus-train-go-to,Ce bus / train va-t-il à {} ?,,,,2,fr-agent-v1
-transit-rides.what-is-the-next-stop,Quel est le prochain arrêt ?,,,,2,fr-agent-v1
-transit-rides.please-tell-me-where-to-get-off,"Dites-moi où descendre, s'il vous plaît",,,,2,fr-agent-v1
-transit-rides.is-this-direct,C'est direct ?,,,,2,fr-agent-v1
-transit-rides.do-i-need-to-transfer,Faut-il changer ?,,,,2,fr-agent-v1
-transit-rides.is-it-delayed,Y a-t-il du retard ?,,,,2,fr-agent-v1
-transit-rides.i-am-in-a-hurry,Je suis pressé,,,,2,fr-agent-v1
-transit-rides.which-platform,Quel quai ?,,,,2,fr-agent-v1
-transit-rides.what-time-is-the-next-one,À quelle heure est le prochain ?,,,,2,fr-agent-v1
-transit-rides.i-went-past-my-stop,J'ai dépassé mon arrêt,,,,2,fr-agent-v1
-transit-rides.can-i-use-this-ticket,Puis-je utiliser ce billet ?,,,,2,fr-agent-v1
-place-words.scenic-area,site naturel,espace naturel,,,1,fr-agent-v1
-place-words.visitor-center,centre d'accueil,point d'information,,,2,fr-agent-v1
-place-words.railway-station,gare,,,,2,fr-agent-v1
-place-words.airport,aéroport,,,,2,fr-agent-v1
-place-words.service-desk,accueil,,,,2,fr-agent-v1
-place-words.bus-stop,arrêt de bus,,,,2,fr-agent-v1
-place-words.luggage-storage,consigne,,,,2,fr-agent-v1
-place-words.tourist-spot-sightseeing-area,site touristique,,,,2,fr-agent-v1
-pickup-meeting.where-is-the-pickup-point,Où est le point de rendez-vous ?,,,,2,fr-agent-v1
-pickup-meeting.please-send-me-the-pickup-point,Envoyez-moi le point de rendez-vous,,,,2,fr-agent-v1
-pickup-meeting.please-pick-us-up-here,Venez nous chercher ici,,,,2,fr-agent-v1
-pickup-meeting.meet-us-at,Rejoignez-nous à {},,,,2,fr-agent-v1
-pickup-meeting.please-call-me-a-ride,"Commandez-moi un VTC, s'il vous plaît",une voiture,,,2,fr-agent-v1
-pickup-meeting.please-call-a-taxi,"Appelez un taxi, s'il vous plaît",,,,2,fr-agent-v1
-rail-station-words.high-speed-rail,TGV,train à grande vitesse,,,2,fr-agent-v1
-rail-station-words.maglev,Maglev,train à sustentation magnétique,,,1,fr-agent-v1
-rail-station-words.transfer,correspondance,changement,,,2,fr-agent-v1
-rail-station-words.ticket-gate,portillon,tourniquet,,,2,fr-agent-v1
-rail-station-words.platform,quai,,,,2,fr-agent-v1
-rail-station-words.ticket-office,guichet,billetterie,,,2,fr-agent-v1
-rail-station-words.waiting-room,salle d'attente,,,,2,fr-agent-v1
-rail-station-words.train-number,numéro de train,,,,2,fr-agent-v1
-rail-station-words.carriage,voiture,wagon,,,2,fr-agent-v1
-rail-station-words.seat,place,siège,,,2,fr-agent-v1
-rail-station-words.last-train,dernier train,,,,2,fr-agent-v1
-rail-station-words.delayed,Retardé,Retard,,,2,fr-agent-v1
-rail-station-words.final-stop,terminus,,,,2,fr-agent-v1
-common-signs.open-on,Ouvert / Marche,,,,2,fr-agent-v1
-common-signs.closed-off,Fermé / Arrêt,,,,2,fr-agent-v1
-common-signs.occupied,Occupé,,,,2,fr-agent-v1
-common-signs.vacant,Libre,,,,2,fr-agent-v1
-common-signs.caution,Attention,,,,2,fr-agent-v1
-common-signs.no-entry,Entrée interdite,,,,2,fr-agent-v1
-common-signs.no-smoking,Interdiction de fumer,Défense de fumer,,,2,fr-agent-v1
-common-signs.no-photography,Photos interdites,,,,2,fr-agent-v1
-common-signs.do-not-touch,Ne pas toucher,,,,2,fr-agent-v1
-common-signs.temporarily-closed,Fermé temporairement,Fermeture temporaire,,,2,fr-agent-v1
-common-signs.open-operating,En service,,,,2,fr-agent-v1
-common-signs.closed,Fermé,,,,2,fr-agent-v1
-common-signs.stopped-stop,Arrêt,,,,2,fr-agent-v1
-transit-rides.do-i-need-to-validate,Je dois valider mon billet ?,Faut-il composter ?,,,2,coordinator-gaps-v2
-rail-station-words.ticket-validator,valideur,composteur,,,2,coordinator-gaps-v2
+border-customs.i-am-a-tourist,Je suis touriste,,ʒə syi tuʁˈist,,2,fr-agent-v1;ipa=espeak
+border-customs.here-is-my-passport,Voici mon passeport,,vwasi mɔ̃ paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Je reste {} jours,,ʒə ʁˈɛst {} ʒˈuʁ,,2,fr-agent-v1;ipa=espeak
+border-customs.nothing-to-declare,Rien à déclarer,,ʁiɛ̃n a deklaʁˈe,,2,fr-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,Je loge à {},,ʒə lɔʒ ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+border-customs.i-am-here-for-business,Je viens pour affaires,,ʒə vjɛ̃ puʁ afˈɛʁ,,2,fr-agent-v1;ipa=espeak
+border-customs.i-have-a-return-ticket,J'ai un billet de retour,,ʒe œ̃ bijɛ də ʁətˈuʁ,,2,fr-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,Je viens voir ma famille,,ʒə vjɛ̃ vwaʁ ma famˈij,,2,fr-agent-v1;ipa=espeak
+border-customs.this-is-for-personal-use,C'est pour usage personnel,,sɛ puʁ yzaʒ pɛʁsɔnˈɛl,,2,fr-agent-v1;ipa=espeak
+border-customs.i-am-in-transit,Je suis en transit,,ʒə syiz ɑ̃ tʁɑ̃zˈit,,2,fr-agent-v1;ipa=espeak
+border-customs.i-have-in-cash,J'ai {} en espèces,,ʒˈe {} ɑ̃n ɛspˈɛs,,2,fr-agent-v1;ipa=espeak
+border-customs.this-is-a-gift,C'est un cadeau,,sɛt œ̃ kadˈo,,2,fr-agent-v1;ipa=espeak
+border-customs.where-do-i-collect-my-baggage,Où récupérer mes bagages ?,,u ʁekypeʁe me baɡˈaʒ,,2,fr-agent-v1;ipa=espeak
+border-customs.how-long-may-i-stay,Combien de temps puis-je rester ?,,kɔ̃bjɛ̃ də tɑ̃ pyiʒ ʁɛstˈe,,2,fr-agent-v1;ipa=espeak
+border-customs.i-have-a-connecting-flight,J'ai un vol en correspondance,,ʒe œ̃ vɔl ɑ̃ koʁɛspɔ̃dˈɑ̃s,,2,fr-agent-v1;ipa=espeak
+border-customs.may-i-have-an-entry-stamp,Puis-je avoir un tampon d'entrée ?,,pyiʒ avwaʁ œ̃ tɑ̃pɔ̃ dɑ̃tʁˈe,,2,fr-agent-v1;ipa=espeak
+border-customs.visa,visa,,vizˈa,,2,fr-agent-v1;ipa=espeak
+border-customs.i-have-no-food-or-plants,Je n'ai ni nourriture ni plantes,,ʒə ne ni nuʁityʁ ni plˈɑ̃t,,2,fr-agent-v1;ipa=espeak
+border-customs.passport-control,Contrôle des passeports,,kɔ̃tʁoːl de paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
+border-customs.customs,Douane,,dwˈan,,2,fr-agent-v1;ipa=espeak
+border-customs.baggage-claim,Livraison des bagages,Retrait des bagages,livʁɛzɔ̃ de baɡˈaʒ,,2,fr-agent-v1;ipa=espeak
+border-customs.customs-declaration,Déclaration en douane,,deklaʁasjɔ̃ ɑ̃ dwˈan,,2,fr-agent-v1;ipa=espeak
+border-customs.arrival-card,fiche de débarquement,,fiʃ də debaʁkəmˈɑ̃,,2,fr-agent-v1;ipa=espeak
+border-customs.transit,Transit,,tʁɑ̃zˈit,,2,fr-agent-v1;ipa=espeak
+border-customs.boarding-pass,carte d'embarquement,,kaʁt dɑ̃baʁkəmˈɑ̃,,2,fr-agent-v1;ipa=espeak
+directions.where-is,Où est {} ?,,u ˈɛ {},,2,fr-agent-v1;ipa=espeak
+directions.how-do-i-get-to,Comment aller à {} ?,,kɔmɑ̃ ale ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+directions.is-it-far,C'est loin ?,,sɛ lwˈɛ̃,,2,fr-agent-v1;ipa=espeak
+directions.how-long-on-foot,Combien de temps à pied ?,,kɔ̃bjɛ̃ də tɑ̃ a pjˈe,,2,fr-agent-v1;ipa=espeak
+directions.please-show-me-on-the-map,"Montrez-moi sur la carte, s'il vous plaît",,"mɔ̃tʁemwa syʁ la kˈaʁt, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+directions.where-is-the-nearest,Où est le {} le plus proche ?,,u ɛ lˈə {} lə ply pʁˈɔʃ,,2,fr-agent-v1;ipa=espeak
+directions.where-am-i,Où suis-je ?,,u syˈiʒ,,2,fr-agent-v1;ipa=espeak
+directions.which-way,Par où ?,,paʁ ˈu,,2,fr-agent-v1;ipa=espeak
+directions.can-i-walk-there,Peut-on y aller à pied ?,,pøtɔ̃n i ale a pjˈe,,2,fr-agent-v1;ipa=espeak
+directions.how-far-is-it,C'est à quelle distance ?,,sɛt a kɛl distˈɑ̃s,,2,fr-agent-v1;ipa=espeak
+directions.which-exit,Quelle sortie ?,,kɛl sɔʁtˈi,,2,fr-agent-v1;ipa=espeak
+directions.can-you-show-me-the-way,Pouvez-vous m'indiquer le chemin ?,,puvevu mɛ̃dike lə ʃəmˈɛ̃,,2,fr-agent-v1;ipa=espeak
+directions.north,nord,,nˈɔʁ,,2,fr-agent-v1;ipa=espeak
+directions.south,sud,,sˈyd,,2,fr-agent-v1;ipa=espeak
+directions.east,est,,ˈɛ,,2,fr-agent-v1;ipa=espeak
+directions.west,ouest,,wˈɛst,,2,fr-agent-v1;ipa=espeak
+quick-directions.go-straight,Tout droit,,tu dʁwˈa,,2,fr-agent-v1;ipa=espeak
+quick-directions.turn-left,Tournez à gauche,,tuʁnez a ɡˈoʃ,,2,fr-agent-v1;ipa=espeak
+quick-directions.turn-right,Tournez à droite,,tuʁnez a dʁwˈat,,2,fr-agent-v1;ipa=espeak
+quick-directions.this-way,Par ici,,paʁ isˈi,,2,fr-agent-v1;ipa=espeak
+quick-directions.that-way,Par là,,paʁ lˈa,,2,fr-agent-v1;ipa=espeak
+quick-directions.on-the-left,À gauche,,a ɡˈoʃ,,2,fr-agent-v1;ipa=espeak
+quick-directions.on-the-right,À droite,,a dʁwˈat,,2,fr-agent-v1;ipa=espeak
+quick-directions.across-from-here,En face,,ɑ̃ fˈas,,2,fr-agent-v1;ipa=espeak
+quick-directions.in-front,Devant,,dəvˈɑ̃,,2,fr-agent-v1;ipa=espeak
+quick-directions.behind,Derrière,,dɛʁjˈɛʁ,,2,fr-agent-v1;ipa=espeak
+taxi.please-take-me-here,"Emmenez-moi ici, s'il vous plaît",,"ɑ̃mnemwa isˈi, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+taxi.please-send-me-the-address,Envoyez-moi l'adresse,,ɑ̃vwajemwa ladʁˈɛs,,2,fr-agent-v1;ipa=espeak
+taxi.we-need-the-east-gate-not-the-south-gate,"Nous voulons la porte est, pas la porte sud",,"nu vulɔ̃ la pɔʁt ˈɛ, pa la pɔʁt sˈyd",,2,fr-agent-v1;ipa=espeak
+taxi.please-stop-here,"Arrêtez-vous ici, s'il vous plaît",,"aʁɛtevuz isˈi, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+taxi.can-you-wait-for-me-here,Pouvez-vous m'attendre ici ?,,puvevu matɑ̃dʁ isˈi,,2,fr-agent-v1;ipa=espeak
+taxi.we-need-to-catch-the-high-speed-train,Nous devons attraper le TGV,le train à grande vitesse,nu dəvɔ̃z atʁape lə tˌeʒˌevˈe,,2,fr-agent-v1;ipa=espeak
+taxi.please-use-the-meter,"Mettez le compteur, s'il vous plaît",,"mɛte lə kɔ̃tˈœʁ, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+taxi.i-will-get-off-here,Je descends ici,,ʒə dɛsɑ̃z isˈi,,2,fr-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,Déposez-moi à temps pour le Shinkansen,,depozemwa a tɑ̃ puʁ lə ʃɛ̃kɑ̃sˈɛn,,2,fr-agent-v1;ipa=espeak
+transit-rides.two-tickets,Deux billets,,dø bijˈɛ,,2,fr-agent-v1;ipa=espeak
+transit-rides.where-is-the-subway-station,Où est la station de métro ?,,u ɛ la stasjɔ̃ də metʁˈo,,2,fr-agent-v1;ipa=espeak
+transit-rides.does-this-bus-train-go-to,Ce bus / train va-t-il à {} ?,,sə bˈys / tʁɛ̃ vatil ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+transit-rides.what-is-the-next-stop,Quel est le prochain arrêt ?,,kɛl ɛ lə pʁoʃɛ̃n aʁˈɛ,,2,fr-agent-v1;ipa=espeak
+transit-rides.please-tell-me-where-to-get-off,"Dites-moi où descendre, s'il vous plaît",,"ditmwa u dɛsˈɑ̃dʁ, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+transit-rides.is-this-direct,C'est direct ?,,sɛ diʁˈɛkt,,2,fr-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-transfer,Faut-il changer ?,,fotil ʃɑ̃ʒˈe,,2,fr-agent-v1;ipa=espeak
+transit-rides.is-it-delayed,Y a-t-il du retard ?,,i atil dy ʁətˈaʁ,,2,fr-agent-v1;ipa=espeak
+transit-rides.i-am-in-a-hurry,Je suis pressé,,ʒə syi pʁɛsˈe,,2,fr-agent-v1;ipa=espeak
+transit-rides.which-platform,Quel quai ?,,kɛl kˈe,,2,fr-agent-v1;ipa=espeak
+transit-rides.what-time-is-the-next-one,À quelle heure est le prochain ?,,a kɛl œʁ ɛ lə pʁoʃˈɛ̃,,2,fr-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,J'ai dépassé mon arrêt,,ʒe depase mɔ̃n aʁˈɛ,,2,fr-agent-v1;ipa=espeak
+transit-rides.can-i-use-this-ticket,Puis-je utiliser ce billet ?,,pyiʒ ytilize sə bijˈɛ,,2,fr-agent-v1;ipa=espeak
+place-words.scenic-area,site naturel,espace naturel,sit natyʁˈɛl,,1,fr-agent-v1;ipa=espeak
+place-words.visitor-center,centre d'accueil,point d'information,sɑ̃tʁ dakˈœj,,2,fr-agent-v1;ipa=espeak
+place-words.railway-station,gare,,ɡˈaʁ,,2,fr-agent-v1;ipa=espeak
+place-words.airport,aéroport,,aeʁopˈɔʁ,,2,fr-agent-v1;ipa=espeak
+place-words.service-desk,accueil,,akˈœj,,2,fr-agent-v1;ipa=espeak
+place-words.bus-stop,arrêt de bus,,aʁɛ də bˈys,,2,fr-agent-v1;ipa=espeak
+place-words.luggage-storage,consigne,,kɔ̃sˈiɲ,,2,fr-agent-v1;ipa=espeak
+place-words.tourist-spot-sightseeing-area,site touristique,,sit tuʁistˈik,,2,fr-agent-v1;ipa=espeak
+pickup-meeting.where-is-the-pickup-point,Où est le point de rendez-vous ?,,u ɛ lə pwɛ̃ də ʁɑ̃dˈevˈu,,2,fr-agent-v1;ipa=espeak
+pickup-meeting.please-send-me-the-pickup-point,Envoyez-moi le point de rendez-vous,,ɑ̃vwajemwa lə pwɛ̃ də ʁɑ̃dˈevˈu,,2,fr-agent-v1;ipa=espeak
+pickup-meeting.please-pick-us-up-here,Venez nous chercher ici,,vəne nu ʃɛʁʃe isˈi,,2,fr-agent-v1;ipa=espeak
+pickup-meeting.meet-us-at,Rejoignez-nous à {},,ʁəʒwanjenuz ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+pickup-meeting.please-call-me-a-ride,"Commandez-moi un VTC, s'il vous plaît",une voiture,"kɔmɑ̃demwa œ̃ vˌetˌesˈe, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+pickup-meeting.please-call-a-taxi,"Appelez un taxi, s'il vous plaît",,"aplez œ̃ taksˈi, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+rail-station-words.high-speed-rail,TGV,train à grande vitesse,tˌeʒˌevˈe,,2,fr-agent-v1;ipa=espeak
+rail-station-words.maglev,Maglev,train à sustentation magnétique,maɡlˈɛv,,1,fr-agent-v1;ipa=espeak
+rail-station-words.transfer,correspondance,changement,koʁɛspɔ̃dˈɑ̃s,,2,fr-agent-v1;ipa=espeak
+rail-station-words.ticket-gate,portillon,tourniquet,pɔʁtijˈɔ̃,,2,fr-agent-v1;ipa=espeak
+rail-station-words.platform,quai,,kˈe,,2,fr-agent-v1;ipa=espeak
+rail-station-words.ticket-office,guichet,billetterie,ɡiʃˈɛ,,2,fr-agent-v1;ipa=espeak
+rail-station-words.waiting-room,salle d'attente,,sal datˈɑ̃t,,2,fr-agent-v1;ipa=espeak
+rail-station-words.train-number,numéro de train,,nymeʁo də tʁˈɛ̃,,2,fr-agent-v1;ipa=espeak
+rail-station-words.carriage,voiture,wagon,vwatˈyʁ,,2,fr-agent-v1;ipa=espeak
+rail-station-words.seat,place,siège,plˈas,,2,fr-agent-v1;ipa=espeak
+rail-station-words.last-train,dernier train,,dɛʁnje tʁˈɛ̃,,2,fr-agent-v1;ipa=espeak
+rail-station-words.delayed,Retardé,Retard,ʁətaʁdˈe,,2,fr-agent-v1;ipa=espeak
+rail-station-words.final-stop,terminus,,tɛʁminˈys,,2,fr-agent-v1;ipa=espeak
+common-signs.open-on,Ouvert / Marche,,uvˈɛʁ / mˈaʁʃ,,2,fr-agent-v1;ipa=espeak
+common-signs.closed-off,Fermé / Arrêt,,fɛʁmˈe / aʁˈɛ,,2,fr-agent-v1;ipa=espeak
+common-signs.occupied,Occupé,,ɔkypˈe,,2,fr-agent-v1;ipa=espeak
+common-signs.vacant,Libre,,lˈibʁ,,2,fr-agent-v1;ipa=espeak
+common-signs.caution,Attention,,atɑ̃sjˈɔ̃,,2,fr-agent-v1;ipa=espeak
+common-signs.no-entry,Entrée interdite,,ɑ̃tʁe ɛ̃tɛʁdˈit,,2,fr-agent-v1;ipa=espeak
+common-signs.no-smoking,Interdiction de fumer,Défense de fumer,ɛ̃tɛʁdiksjɔ̃ də fymˈe,,2,fr-agent-v1;ipa=espeak
+common-signs.no-photography,Photos interdites,,fotoz ɛ̃tɛʁdˈit,,2,fr-agent-v1;ipa=espeak
+common-signs.do-not-touch,Ne pas toucher,,nə pa tuʃˈe,,2,fr-agent-v1;ipa=espeak
+common-signs.temporarily-closed,Fermé temporairement,Fermeture temporaire,fɛʁme tɑ̃poʁɛʁmˈɑ̃,,2,fr-agent-v1;ipa=espeak
+common-signs.open-operating,En service,,ɑ̃ sɛʁvˈis,,2,fr-agent-v1;ipa=espeak
+common-signs.closed,Fermé,,fɛʁmˈe,,2,fr-agent-v1;ipa=espeak
+common-signs.stopped-stop,Arrêt,,aʁˈɛ,,2,fr-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,Je dois valider mon billet ?,Faut-il composter ?,ʒə dwa valide mɔ̃ bijˈɛ,,2,coordinator-gaps-v2;ipa=espeak
+rail-station-words.ticket-validator,valideur,composteur,validˈœʁ,,2,coordinator-gaps-v2;ipa=espeak

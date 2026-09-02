@@ -1,8 +1,8 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,Where can I buy tickets?,,,,2,latex-reference-v2
-attractions-tickets.do-i-need-a-reservation,Do I need a reservation?,,,,2,latex-reference-v2
-attractions-tickets.what-is-the-latest-entry-time,What is the latest entry time?,,,,2,latex-reference-v2
-attractions-tickets.are-there-lockers,Are there lockers?,,,,2,latex-reference-v2
-attractions-tickets.may-i-take-photos,May I take photos?,,,,2,latex-reference-v2
-attractions-tickets.please-take-a-photo-of-us,Please take a photo of us,,,,2,latex-reference-v2
-attractions-tickets.could-you-take-a-photo-for-us,Could you take a photo for us?,,,,2,japanese-reviewed-v6
+attractions-tickets.where-can-i-buy-tickets,Where can I buy tickets?,,wˌɛɹ kæn aɪ bˈaɪ tˈɪkɪts,,2,latex-reference-v2;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Do I need a reservation?,,dˈuː aɪ nˈiːd ɐ ɹˌɛzɚvˈeɪʃən,,2,latex-reference-v2;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,What is the latest entry time?,,wˌʌt ɪz ðə lˈeɪɾɪst ˈɛntɹi tˈaɪm,,2,latex-reference-v2;ipa=espeak
+attractions-tickets.are-there-lockers,Are there lockers?,,ɑːɹ ðɛɹ lˈɑːkɚz,,2,latex-reference-v2;ipa=espeak
+attractions-tickets.may-i-take-photos,May I take photos?,,mˈeɪ aɪ tˈeɪk fˈoʊɾoʊz,,2,latex-reference-v2;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,Please take a photo of us,,plˈiːz tˈeɪk ɐ fˈoʊɾoʊ ʌv ˌʌs,,2,latex-reference-v2;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Could you take a photo for us?,,kʊd juː tˈeɪk ɐ fˈoʊɾoʊ fɔːɹ ˌʌs,,2,japanese-reviewed-v6;ipa=espeak

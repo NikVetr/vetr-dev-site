@@ -1,53 +1,53 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-hotel-words.passport,Paspor,,,,2,id-agent-v1
-hotel-words.room-key-card,Kartu kamar,,,,2,id-agent-v1
-hotel-words.check-in,Check-in,,,,2,id-agent-v1
-hotel-words.check-out,Check-out,,,,2,id-agent-v1
-hotel-words.luggage-storage,Penitipan barang,,,,2,id-agent-v1
-hotel-basics.are-any-rooms-available,Ada kamar kosong?,,,,2,id-agent-v1
-hotel-basics.there-are-two-of-us,Kami dua orang,,,,2,id-agent-v1
-hotel-basics.i-have-a-reservation,Saya sudah booking,Saya punya reservasi,,,2,id-agent-v1
-hotel-basics.can-i-charge-my-phone,Boleh saya cas HP?,Boleh saya isi baterai HP?,,HP = mobile phone,2,id-agent-v1
-hotel-basics.i-would-like-a-non-smoking-room,Minta kamar bebas rokok,Minta kamar non-smoking,,,2,id-agent-v1
-hotel-basics.i-would-like-a-quiet-room,Minta kamar yang tenang,,,,2,id-agent-v1
-hotel-basics.is-there-a-washing-machine,Ada mesin cuci?,,,,2,id-agent-v1
-hotel-basics.is-wi-fi-free,Wi-Fi-nya gratis?,,,,2,id-agent-v1
-hotel-basics.how-much-per-night,Berapa per malam?,,,,2,id-agent-v1
-hotel-basics.is-breakfast-included,Termasuk sarapan?,,,,2,id-agent-v1
-hotel-basics.may-i-see-the-room,Boleh lihat kamarnya?,,,,2,id-agent-v1
-hotel-basics.for-nights,Untuk {} malam,,,,2,id-agent-v1
-hotel-basics.two-beds,Minta dua tempat tidur,Minta twin bed,,,2,id-agent-v1
-hotel-basics.is-there-air-conditioning,Ada AC?,,,,2,id-agent-v1
-hotel-requests.can-i-check-out-later,Boleh late check-out?,Boleh check-out lebih siang?,,,2,id-agent-v1
-hotel-requests.what-time-does-breakfast-start,Sarapan mulai jam berapa?,,,,2,id-agent-v1
-hotel-requests.can-i-store-my-luggage,Boleh titip koper?,,,titip = leave in your care,2,id-agent-v1
-hotel-requests.no-housekeeping,Tidak perlu dibersihkan,,,,2,id-agent-v1
-hotel-requests.another-towel-please,Minta handuk lagi,,,,2,id-agent-v1
-hotel-requests.what-time-is-check-out,Check-out jam berapa?,,,,2,id-agent-v1
-hotel-requests.can-i-check-in-early,Boleh early check-in?,Boleh check-in lebih awal?,,,2,id-agent-v1
-hotel-requests.another-night,Boleh tambah satu malam?,,,,2,id-agent-v1
-hotel-requests.is-there-a-safe,Ada safe deposit box?,Ada lemari besi?,,,2,id-agent-v1
-hotel-requests.another-blanket,Minta selimut lagi,,,,2,id-agent-v1
-hotel-requests.wake-up-call,Tolong bangunkan saya jam {},,,,2,id-agent-v1
-room-problems.there-is-a-problem-with-the-room,Ada masalah dengan kamarnya,,,,2,id-agent-v1
-room-problems.the-air-conditioning-is-broken,AC-nya rusak,,,,2,id-agent-v1
-room-problems.there-is-no-hot-water,Tidak ada air panas,,,,2,id-agent-v1
-room-problems.can-i-change-rooms,Boleh pindah kamar?,,,,2,id-agent-v1
-room-problems.the-room-is-too-noisy,Kamarnya terlalu berisik,,,,2,id-agent-v1
-room-problems.the-key-does-not-work,Kuncinya tidak berfungsi,,,,2,id-agent-v1
-room-problems.the-toilet-will-not-flush,Toiletnya tidak bisa disiram,,,,2,id-agent-v1
-room-problems.the-light-does-not-work,Lampunya tidak menyala,,,,2,id-agent-v1
-room-problems.please-send-someone,Tolong kirim petugas perbaikan,,,,2,id-agent-v1
-room-problems.the-heating-does-not-work,Pemanasnya tidak berfungsi,,,,2,id-agent-v1
-laundry.please-wash-these-clothes,Tolong cuci baju ini,,,,2,id-agent-v1
-laundry.where-is-a-laundromat,Laundry di mana?,,,,2,id-agent-v1
-laundry.when-will-it-be-ready,Kapan selesai?,,,,2,id-agent-v1
-laundry.how-much-per-kilo,Berapa per kilo?,,,laundry kiloan = priced by weight,2,id-agent-v1
-laundry.can-it-be-ready-today,Bisa selesai hari ini?,,,,2,id-agent-v1
-laundry.please-do-not-use-bleach,Tolong jangan pakai pemutih,,,,2,id-agent-v1
-laundry.laundromat,Laundry,Binatu,,,2,id-agent-v1
-laundry.please-iron-this,Tolong setrika ini,,,,2,id-agent-v1
-laundry.detergent,Deterjen,Sabun cuci,,,2,id-agent-v1
-laundry.dry-cleaning,Dry cleaning,,,cuci kering here means wash-and-dry,2,id-agent-v1
-laundry.dryer,Mesin pengering,,,,2,id-agent-v1
-laundry.coin-operated,Pakai koin,Self-service,,,2,id-agent-v1
+hotel-words.passport,Paspor,,pˈaspɔr,,2,id-agent-v1;ipa=espeak
+hotel-words.room-key-card,Kartu kamar,,kˈartu kˈamar,,2,id-agent-v1;ipa=espeak
+hotel-words.check-in,Check-in,,xˈɛtʃkin,,2,id-agent-v1;ipa=espeak
+hotel-words.check-out,Check-out,,xˈɛtʃkout,,2,id-agent-v1;ipa=espeak
+hotel-words.luggage-storage,Penitipan barang,,pənitˈipan bˈaraŋ,,2,id-agent-v1;ipa=espeak
+hotel-basics.are-any-rooms-available,Ada kamar kosong?,,ˈada kˈamar kˈosoŋ,,2,id-agent-v1;ipa=espeak
+hotel-basics.there-are-two-of-us,Kami dua orang,,kˈami dˈua ˈoraŋ,,2,id-agent-v1;ipa=espeak
+hotel-basics.i-have-a-reservation,Saya sudah booking,Saya punya reservasi,sˈaja sˈudah boˈokiŋ,,2,id-agent-v1;ipa=espeak
+hotel-basics.can-i-charge-my-phone,Boleh saya cas HP?,Boleh saya isi baterai HP?,bˈoləh sˈaja tʃˈas hˌapˈe,HP = mobile phone,2,id-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,Minta kamar bebas rokok,Minta kamar non-smoking,mˈinta kˈamar bˈɛbas rˈokok,,2,id-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,Minta kamar yang tenang,,mˈinta kˈamar jaŋ tˈɛnaŋ,,2,id-agent-v1;ipa=espeak
+hotel-basics.is-there-a-washing-machine,Ada mesin cuci?,,ˈada mˈɛsin tʃˈutʃi,,2,id-agent-v1;ipa=espeak
+hotel-basics.is-wi-fi-free,Wi-Fi-nya gratis?,,wˈifiɲa ɡrˈatis,,2,id-agent-v1;ipa=espeak
+hotel-basics.how-much-per-night,Berapa per malam?,,bərˈapa pər mˈalam,,2,id-agent-v1;ipa=espeak
+hotel-basics.is-breakfast-included,Termasuk sarapan?,,tərmˈasuk sarˈapan,,2,id-agent-v1;ipa=espeak
+hotel-basics.may-i-see-the-room,Boleh lihat kamarnya?,,bˈoləh lˈihat kamˈarɲa,,2,id-agent-v1;ipa=espeak
+hotel-basics.for-nights,Untuk {} malam,,ˌuntuk {} mˈalam,,2,id-agent-v1;ipa=espeak
+hotel-basics.two-beds,Minta dua tempat tidur,Minta twin bed,mˈinta dˈua tˈɛmpat tˈidur,,2,id-agent-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,Ada AC?,,ˈada ˈatʃ,,2,id-agent-v1;ipa=espeak
+hotel-requests.can-i-check-out-later,Boleh late check-out?,Boleh check-out lebih siang?,bˈoləh lˈatə xˈɛtʃkout,,2,id-agent-v1;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,Sarapan mulai jam berapa?,,sarˈapan mˈulaɪ dʒˈam bərˈapa,,2,id-agent-v1;ipa=espeak
+hotel-requests.can-i-store-my-luggage,Boleh titip koper?,,bˈoləh tˈitip kˈopər,titip = leave in your care,2,id-agent-v1;ipa=espeak
+hotel-requests.no-housekeeping,Tidak perlu dibersihkan,,tˈidak pˈɛrlu dˌibərsˈihkan,,2,id-agent-v1;ipa=espeak
+hotel-requests.another-towel-please,Minta handuk lagi,,mˈinta hˈanduk lˈaɡi,,2,id-agent-v1;ipa=espeak
+hotel-requests.what-time-is-check-out,Check-out jam berapa?,,xˈɛtʃkout dʒˈam bərˈapa,,2,id-agent-v1;ipa=espeak
+hotel-requests.can-i-check-in-early,Boleh early check-in?,Boleh check-in lebih awal?,bˈoləh ˈɛarlj xˈɛtʃkin,,2,id-agent-v1;ipa=espeak
+hotel-requests.another-night,Boleh tambah satu malam?,,bˈoləh tˈambah sˈatu mˈalam,,2,id-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,Ada safe deposit box?,Ada lemari besi?,ˈada sˈafə dəpˈosit bˈoks,,2,id-agent-v1;ipa=espeak
+hotel-requests.another-blanket,Minta selimut lagi,,mˈinta səlˈimut lˈaɡi,,2,id-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,Tolong bangunkan saya jam {},,tˈoloŋ baŋˈunkan sˈaja dʒˈam {},,2,id-agent-v1;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,Ada masalah dengan kamarnya,,ˈada masˈalah dˈɛŋan kamˈarɲa,,2,id-agent-v1;ipa=espeak
+room-problems.the-air-conditioning-is-broken,AC-nya rusak,,ˌatʃˈeɲa rˈusak,,2,id-agent-v1;ipa=espeak
+room-problems.there-is-no-hot-water,Tidak ada air panas,,tˈidak ˈada ˈair pˈanas,,2,id-agent-v1;ipa=espeak
+room-problems.can-i-change-rooms,Boleh pindah kamar?,,bˈoləh pˈindah kˈamar,,2,id-agent-v1;ipa=espeak
+room-problems.the-room-is-too-noisy,Kamarnya terlalu berisik,,kamˈarɲa tərlˈalu bərˈisik,,2,id-agent-v1;ipa=espeak
+room-problems.the-key-does-not-work,Kuncinya tidak berfungsi,,kuntʃˈiɲa tˈidak bərfˈuŋsi,,2,id-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,Toiletnya tidak bisa disiram,,tˌoilˈɛtɲa tˈidak bˈisa disˈiram,,2,id-agent-v1;ipa=espeak
+room-problems.the-light-does-not-work,Lampunya tidak menyala,,lampˈuɲa tˈidak məɲˈala,,2,id-agent-v1;ipa=espeak
+room-problems.please-send-someone,Tolong kirim petugas perbaikan,,tˈoloŋ kˈirim pətˈuɡas pərbˈaɪkan,,2,id-agent-v1;ipa=espeak
+room-problems.the-heating-does-not-work,Pemanasnya tidak berfungsi,,pəmanˈasɲa tˈidak bərfˈuŋsi,,2,id-agent-v1;ipa=espeak
+laundry.please-wash-these-clothes,Tolong cuci baju ini,,tˈoloŋ tʃˈutʃi bˈadʒu ˈini,,2,id-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,Laundry di mana?,,lˈaʊndrj di mˈana,,2,id-agent-v1;ipa=espeak
+laundry.when-will-it-be-ready,Kapan selesai?,,kˈapan səlˈɛsaɪ,,2,id-agent-v1;ipa=espeak
+laundry.how-much-per-kilo,Berapa per kilo?,,bərˈapa pər kˈilo,laundry kiloan = priced by weight,2,id-agent-v1;ipa=espeak
+laundry.can-it-be-ready-today,Bisa selesai hari ini?,,bˈisa səlˈɛsaɪ hˈari ˈini,,2,id-agent-v1;ipa=espeak
+laundry.please-do-not-use-bleach,Tolong jangan pakai pemutih,,tˈoloŋ dʒˈaŋan pˈakaɪ pəmˈutih,,2,id-agent-v1;ipa=espeak
+laundry.laundromat,Laundry,Binatu,lˈaʊndrj,,2,id-agent-v1;ipa=espeak
+laundry.please-iron-this,Tolong setrika ini,,tˈoloŋ sətrˈika ˈini,,2,id-agent-v1;ipa=espeak
+laundry.detergent,Deterjen,Sabun cuci,dətˈɛrdʒən,,2,id-agent-v1;ipa=espeak
+laundry.dry-cleaning,Dry cleaning,,drj tʃləˈaniŋ,cuci kering here means wash-and-dry,2,id-agent-v1;ipa=espeak
+laundry.dryer,Mesin pengering,,mˈɛsin pəŋˈɛriŋ,,2,id-agent-v1;ipa=espeak
+laundry.coin-operated,Pakai koin,Self-service,pˈakaɪ kˈoin,,2,id-agent-v1;ipa=espeak

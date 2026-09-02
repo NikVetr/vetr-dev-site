@@ -1,29 +1,29 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Et olmasın.,,,,2,tr-agent-v1
-dietary-needs.no-eggs,Yumurta olmasın.,,,,2,tr-agent-v1
-dietary-needs.not-spicy,Acı olmasın.,,,,2,tr-agent-v1
-dietary-needs.less-spicy,Az acı olsun.,,,,2,tr-agent-v1
-dietary-needs.no-peanuts,Yer fıstığı olmasın.,,,,2,tr-agent-v1
-dietary-needs.no-nuts,Sert kabuklu yemiş olmasın.,Kuruyemiş olmasın.,,,2,tr-agent-v1
-dietary-needs.no-seafood,Deniz ürünü olmasın.,,,,2,tr-agent-v1
-dietary-needs.i-am-vegetarian,Vejetaryenim.,,,,2,tr-agent-v1
-dietary-needs.i-am-vegan,Veganım.,,,,2,tr-agent-v1
-dietary-needs.i-do-not-eat,{} yemiyorum.,,,,2,tr-agent-v1
-dietary-needs.i-am-allergic-to,{} alerjim var.,,,,2,tr-agent-v1
-dietary-needs.does-it-contain-fish-stock,İçinde balık suyu var mı?,,,,2,tr-agent-v1
-dietary-needs.does-it-contain-pork-stock,İçinde domuz eti suyu var mı?,Bulyonda domuz var mı?,,,2,tr-pork-stock-v1
-dietary-needs.i-have-a-severe-allergy-to,Ağır {} alerjim var.,,,,2,tr-agent-v1
-food-ordering.table-for-two,İki kişilik masa.,,,,2,tr-agent-v1
-food-ordering.is-a-table-available,Boş masa var mı?,,,,2,tr-agent-v1
-food-ordering.menu-please,"Menü, lütfen.",,,,2,tr-agent-v1
-food-ordering.i-want-this,Bunu istiyorum.,,,,2,tr-agent-v1
-food-ordering.do-you-have-drinking-water,İçme suyu var mı?,,,,2,tr-agent-v1
-food-ordering.to-go-please,"Paket olsun, lütfen.",,,,2,tr-agent-v1
-food-ordering.check-please,"Hesap, lütfen.",,,,2,tr-agent-v1
-food-ordering.does-it-contain,İçinde {} var mı?,,,,2,tr-agent-v1
-food-ordering.is-this-vegetarian,Bu vejetaryen mi?,,,,2,tr-agent-v1
-food-ordering.what-do-you-recommend,Ne tavsiye edersiniz?,,,,2,tr-agent-v1
-food-ordering.water-please,"Su, lütfen.",,,,2,tr-agent-v1
-food-ordering.can-a-vegetarian-eat-this,Vejetaryen bunu yiyebilir mi?,,,,2,tr-agent-v1
-dietary-needs.no-pork,Domuz eti olmasın.,Domuz eti yok.,,,2,tr-gaps-v1
-dietary-needs.is-this-halal,Bu helal mi?,Helal sertifikalı mı?,,,2,tr-gaps-v1
+dietary-needs.no-meat,Et olmasın.,,ˈɛt ɔɫmasˈɯn,,2,tr-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Yumurta olmasın.,,jumʊrtˈa ɔɫmasˈɯn,,2,tr-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Acı olmasın.,,adʒˈɯ ɔɫmasˈɯn,,2,tr-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Az acı olsun.,,ˈaz adʒˈɯ ɔɫsˈʊn,,2,tr-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Yer fıstığı olmasın.,,jˈɛr fɯstɯɯˈɯ ɔɫmasˈɯn,,2,tr-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Sert kabuklu yemiş olmasın.,Kuruyemiş olmasın.,sˈɛrt kabʊkɫˈʊ jemˈɪʃ ɔɫmasˈɯn,,2,tr-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Deniz ürünü olmasın.,,dˈenɪz yɾynˈø ɔɫmasˈɯn,,2,tr-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Vejetaryenim.,,veʒetarjˈenɪm,,2,tr-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Veganım.,,veɡˈanɯm,,2,tr-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,{} yemiyorum.,,{} jemˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,{} alerjim var.,,{} alˈɛrʒɪm vˈar,,2,tr-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,İçinde balık suyu var mı?,,itʃɪndˈɛ baɫˈɯk sujˈʊ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,İçinde domuz eti suyu var mı?,Bulyonda domuz var mı?,itʃɪndˈɛ dˈomʊz etˈɪ sujˈʊ vˈar mɯ,,2,tr-pork-stock-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Ağır {} alerjim var.,,aːˈɯr {} alˈɛrʒɪm vˈar,,2,tr-agent-v1;ipa=espeak
+food-ordering.table-for-two,İki kişilik masa.,,ikˈɪ kiʃilˈɪk mˈasa,,2,tr-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Boş masa var mı?,,bˈɔʃ mˈasa vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+food-ordering.menu-please,"Menü, lütfen.",,"menˈø, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+food-ordering.i-want-this,Bunu istiyorum.,,bunˈʊ ɪstˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,İçme suyu var mı?,,ˈɪtʃmɛ sujˈʊ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+food-ordering.to-go-please,"Paket olsun, lütfen.",,"pakˈɛt ɔɫsˈʊn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+food-ordering.check-please,"Hesap, lütfen.",,"hesˈap, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+food-ordering.does-it-contain,İçinde {} var mı?,,itʃɪndˈɛ {} vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Bu vejetaryen mi?,,bʊ veʒetarjˈæn mɪ,,2,tr-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Ne tavsiye edersiniz?,,nˈɛ tavsijˈɛ edˈɛrsinɪz,,2,tr-agent-v1;ipa=espeak
+food-ordering.water-please,"Su, lütfen.",,"sˈʊ, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,Vejetaryen bunu yiyebilir mi?,,veʒetarjˈæn bunˈʊ jijebilˈɪr mɪ,,2,tr-agent-v1;ipa=espeak
+dietary-needs.no-pork,Domuz eti olmasın.,Domuz eti yok.,dˈomʊz etˈɪ ɔɫmasˈɯn,,2,tr-gaps-v1;ipa=espeak
+dietary-needs.is-this-halal,Bu helal mi?,Helal sertifikalı mı?,bʊ heɫˈaɫ mɪ,,2,tr-gaps-v1;ipa=espeak

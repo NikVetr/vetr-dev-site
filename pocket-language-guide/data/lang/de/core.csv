@@ -1,47 +1,47 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,ich / mich,,,,2,de-agent-v1
-pronouns-verbs.we-us,wir / uns,,,,2,de-agent-v1
-pronouns-verbs.you,du / dich,,,,2,de-agent-v1
-pronouns-verbs.you-polite,Sie / Ihnen,,,,2,de-agent-v1
-pronouns-verbs.he-him,er / ihn,,,,2,de-agent-v1
-pronouns-verbs.she-her,sie / ihr,,,,2,de-agent-v1
-pronouns-verbs.they-them,sie / ihnen,,,,2,de-agent-v1
-pronouns-verbs.my-mine,mein / meins,,,,2,de-agent-v1
-pronouns-verbs.your-yours,Ihr / Ihres,dein / deins,,,2,de-agent-v1
-pronouns-verbs.be-called-call,heißen / rufen,,,,2,de-agent-v1
-pronouns-verbs.have,haben,,,,2,de-agent-v1
-pronouns-verbs.do-not-have,nicht haben,kein,,,2,de-agent-v1
-pronouns-verbs.go,gehen,fahren,,,2,de-agent-v1
-pronouns-verbs.come,kommen,,,,2,de-agent-v1
-pronouns-verbs.would-like,möchten,,,,2,de-agent-v1
-pronouns-verbs.want,wollen,,,,2,de-agent-v1
-pronouns-verbs.look-for,suchen,,,,2,de-agent-v1
-pronouns-verbs.buy,kaufen,,,,2,de-agent-v1
-pronouns-verbs.like,mögen,gefallen,,,2,de-agent-v1
-pronouns-verbs.need,brauchen,,,,2,de-agent-v1
-pronouns-verbs.there-is-have,es gibt,,,,2,de-agent-v1
-pronouns-verbs.there-is-not-do-not-have,es gibt kein,,,,2,de-agent-v1
-pronouns-verbs.want-to-verb,ich möchte [Verb],,,,2,de-agent-v1
-pronouns-verbs.want-thing,ich möchte [Sache],,,,2,de-agent-v1
-pronouns-verbs.need-thing,ich brauche [Sache],,,,2,de-agent-v1
-pronouns-verbs.looking-for-thing,ich suche [Sache],,,,2,de-agent-v1
-question-words.what,was,,,,2,de-agent-v1
-question-words.where,wo,,,,2,de-agent-v1
-question-words.who,wer,,,,2,de-agent-v1
-question-words.which-one,welcher / welche,,,,2,de-agent-v1
-question-words.when,wann,,,,2,de-agent-v1
-question-words.how,wie,,,,2,de-agent-v1
-question-words.how-much-many,wie viel / wie viele,,,,2,de-agent-v1
-question-words.how-many,wie viele,,,,2,de-agent-v1
-question-words.why,warum,,,,2,de-agent-v1
-question-words.this,dieser / das hier,,,,2,de-agent-v1
-question-words.that,das da,jenes,,,2,de-agent-v1
-question-words.here,hier,,,,2,de-agent-v1
-question-words.there,dort,da,,,2,de-agent-v1
-question-words.a-little,ein wenig,ein bisschen,,,2,de-agent-v1
-question-words.some,etwas,einige,,,2,de-agent-v1
-question-words.very,sehr,,,,2,de-agent-v1
-question-words.too,zu,allzu,,,2,de-agent-v1
-question-words.also,auch,,,,2,de-agent-v1
-question-words.all-both,alle / beide,,,,2,de-agent-v1
-question-words.how-much-what-price,Wie viel kostet das?,,,,2,de-agent-v1
+pronouns-verbs.i-me,ich / mich,,ɪç / mɪç,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.we-us,wir / uns,,viːɾ / ˈʊns,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.you,du / dich,,duː / dˈɪç,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.you-polite,Sie / Ihnen,,ziː / ˈiːnən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.he-him,er / ihn,,ɛɾ / ˈiːn,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.she-her,sie / ihr,,ziː / iːɾ,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.they-them,sie / ihnen,,ziː / ˈiːnən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.my-mine,mein / meins,,mˈaɪn / mˈaɪns,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,Ihr / Ihres,dein / deins,iːɾ / ˌiːrəs,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.be-called-call,heißen / rufen,,hˈaɪsən / rˈuːfən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.have,haben,,hˈɑːbən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.do-not-have,nicht haben,kein,nˈɪçt hˈɑːbən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.go,gehen,fahren,ɡˈeːən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.come,kommen,,kˈɔmən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.would-like,möchten,,mˈœçtən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.want,wollen,,vɔlən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.look-for,suchen,,zˈuːxən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.buy,kaufen,,kˈaʊfən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.like,mögen,gefallen,mˈøːɡən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.need,brauchen,,bɾˈaʊxən,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.there-is-have,es gibt,,ɛs ɡˈiːpt,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,es gibt kein,,ɛs ɡˈiːpt kˈaɪn,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,ich möchte [Verb],,ɪç mˈœçtə fˈɛɾp,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,ich möchte [Sache],,ɪç mˈœçtə zˈaxə,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,ich brauche [Sache],,ɪç bɾˈaʊxə zˈaxə,,2,de-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,ich suche [Sache],,ɪç zˈuːxə zˈaxə,,2,de-agent-v1;ipa=espeak
+question-words.what,was,,vˈas,,2,de-agent-v1;ipa=espeak
+question-words.where,wo,,vˌoː,,2,de-agent-v1;ipa=espeak
+question-words.who,wer,,vˈeːɾ,,2,de-agent-v1;ipa=espeak
+question-words.which-one,welcher / welche,,vˈɛlçɜ / vˈɛlçə,,2,de-agent-v1;ipa=espeak
+question-words.when,wann,,vˈan,,2,de-agent-v1;ipa=espeak
+question-words.how,wie,,viː,,2,de-agent-v1;ipa=espeak
+question-words.how-much-many,wie viel / wie viele,,viː fˈiːl / viː fˈiːlə,,2,de-agent-v1;ipa=espeak
+question-words.how-many,wie viele,,viː fˈiːlə,,2,de-agent-v1;ipa=espeak
+question-words.why,warum,,vɑːrˈʊm,,2,de-agent-v1;ipa=espeak
+question-words.this,dieser / das hier,,dˌiːzɜ / das hˈiːɾ,,2,de-agent-v1;ipa=espeak
+question-words.that,das da,jenes,das dˈɑː,,2,de-agent-v1;ipa=espeak
+question-words.here,hier,,hˈiːɾ,,2,de-agent-v1;ipa=espeak
+question-words.there,dort,da,dˈɔɾt,,2,de-agent-v1;ipa=espeak
+question-words.a-little,ein wenig,ein bisschen,aɪn vˈeːnɪç,,2,de-agent-v1;ipa=espeak
+question-words.some,etwas,einige,ˈɛtvɑːs,,2,de-agent-v1;ipa=espeak
+question-words.very,sehr,,zˈeːɾ,,2,de-agent-v1;ipa=espeak
+question-words.too,zu,allzu,tsˈuː,,2,de-agent-v1;ipa=espeak
+question-words.also,auch,,ˌaʊx,,2,de-agent-v1;ipa=espeak
+question-words.all-both,alle / beide,,ˈalə / bˈaɪdə,,2,de-agent-v1;ipa=espeak
+question-words.how-much-what-price,Wie viel kostet das?,,viː fˈiːl kˈɔstət das,,2,de-agent-v1;ipa=espeak

@@ -1,13 +1,13 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-introductions.my-name-is,ฉันชื่อ {},,chan chue {},,,2,th-agent-v1
-introductions.nice-to-meet-you,ยินดีที่ได้รู้จัก,,yindi thi dai ruchak,,,2,th-agent-v1
-introductions.what-is-your-name,คุณชื่ออะไร,,khun chue arai,,,2,th-agent-v1
-introductions.we-are-traveling-together,เราเที่ยวด้วยกัน,,rao thiao duai kan,,,2,th-agent-v1
-introductions.this-is-my-friend,นี่เพื่อนฉัน,,ni phuean chan,,,2,th-agent-v1
-introductions.i-am-from,มาจาก {},,ma chak {},,,2,th-agent-v1
-introductions.where-are-you-from,คุณมาจากไหน,,khun ma chak nai,,,2,th-agent-v1
-introductions.how-are-you,สบายดีไหม,,sabai di mai,,,2,th-agent-v1
-introductions.i-am-a-tourist,เป็นนักท่องเที่ยว,,pen nak thongthiao,,,2,th-agent-v1
-introductions.this-is-my-husband-wife,นี่สามี/ภรรยา,,ni sami / phanraya,,husband / wife,2,th-agent-v1
-introductions.this-is-my-daughter-son,นี่ลูกสาว/ลูกชาย,,ni luk sao / luk chai,,daughter / son,2,th-agent-v1
-introductions.i-am-traveling-alone,มาคนเดียว,,ma khon diao,,,2,th-agent-v1
+introductions.my-name-is,ฉันชื่อ {},,chan chue {},tɕʰan˩˩˦ tɕʰɯː˥˩ {},,2,th-agent-v1;ipa=thaig2p
+introductions.nice-to-meet-you,ยินดีที่ได้รู้จัก,,yindi thi dai ruchak,jin˧diː˧ tʰiː˥˩ daːj˥˩ ruː˦˥tɕak˨˩,,2,th-agent-v1;ipa=thaig2p
+introductions.what-is-your-name,คุณชื่ออะไร,,khun chue arai,kʰun˧na˦˥ tɕʰɯː˥˩ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
+introductions.we-are-traveling-together,เราเที่ยวด้วยกัน,,rao thiao duai kan,raw˧ tʰia̯w˥˩ dua̯j˥˩kan˧,,2,th-agent-v1;ipa=thaig2p
+introductions.this-is-my-friend,นี่เพื่อนฉัน,,ni phuean chan,niː˥˩ pʰɯa̯n˥˩ tɕʰan˩˩˦,,2,th-agent-v1;ipa=thaig2p
+introductions.i-am-from,มาจาก {},,ma chak {},maː˧tɕaːk˨˩ {},,2,th-agent-v1;ipa=thaig2p
+introductions.where-are-you-from,คุณมาจากไหน,,khun ma chak nai,kʰun˧na˦˥ maː˧tɕaːk˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+introductions.how-are-you,สบายดีไหม,,sabai di mai,sa˧baːj˧diː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+introductions.i-am-a-tourist,เป็นนักท่องเที่ยว,,pen nak thongthiao,pen˧ nak˦˥tʰɔŋ˥˩tʰia̯w˥˩,,2,th-agent-v1;ipa=thaig2p
+introductions.this-is-my-husband-wife,นี่สามี/ภรรยา,,ni sami / phanraya,niː˥˩ saː˩˩˦miː˧ / pʰan˧jaː˧,husband / wife,2,th-agent-v1;ipa=thaig2p
+introductions.this-is-my-daughter-son,นี่ลูกสาว/ลูกชาย,,ni luk sao / luk chai,niː˥˩ luːk˥˩saːw˩˩˦ / luːk˥˩tɕʰaːj˧,daughter / son,2,th-agent-v1;ipa=thaig2p
+introductions.i-am-traveling-alone,มาคนเดียว,,ma khon diao,maː˧ kʰon˧dia̯w˧,,2,th-agent-v1;ipa=thaig2p

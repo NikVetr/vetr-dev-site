@@ -1,45 +1,45 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-numbers-money.l-ng,sıfır,,,,2,tr-agent-v1
-numbers-money.y,bir,,,,2,tr-agent-v1
-numbers-money.r,iki,,,,2,tr-agent-v1
-numbers-money.s-n,üç,,,,2,tr-agent-v1
-numbers-money.s,dört,,,,2,tr-agent-v1
-numbers-money.w,beş,,,,2,tr-agent-v1
-numbers-money.li,altı,,,,2,tr-agent-v1
-numbers-money.q,yedi,,,,2,tr-agent-v1
-numbers-money.b,sekiz,,,,2,tr-agent-v1
-numbers-money.ji,dokuz,,,,2,tr-agent-v1
-numbers-money.sh,on,,,,2,tr-agent-v1
-numbers-money.y-b-i,yüz,,,,2,tr-agent-v1
-numbers-money.y-qi-n,bin,,,,2,tr-agent-v1
-numbers-money.y-w-n,on bin,,,,2,tr-agent-v1
-numbers-money.b-n,yarım,buçuk,,buçuk follows a number: iki buçuk,2,tr-agent-v1
-atm-cash.where-is-an-atm,ATM nerede?,Bankamatik nerede?,,,2,tr-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,Bu ATM yabancı kart kabul ediyor mu?,,,,2,tr-agent-v1
-atm-cash.the-atm-kept-my-card,ATM kartımı yuttu.,,,,2,tr-agent-v1
-atm-cash.is-there-a-fee,Komisyon var mı?,,,,2,tr-agent-v1
-atm-cash.the-card-was-declined,Kart reddedildi.,,,,2,tr-agent-v1
-atm-cash.what-is-the-exchange-rate,Kur ne kadar?,,,,2,tr-agent-v1
-atm-cash.no-money-came-out,Para çıkmadı.,,,,2,tr-agent-v1
-atm-cash.where-can-i-change-money,Nerede döviz bozdurabilirim?,,,,2,tr-agent-v1
-atm-cash.the-machine-is-out-of-service,Makine arızalı.,,,,2,tr-agent-v1
-atm-cash.please-give-me-smaller-notes,"Küçük banknot verin, lütfen.",,,,2,tr-agent-v1
-atm-cash.do-you-have-change,Bozuk paranız var mı?,,,,2,tr-agent-v1
-atm-cash.may-i-pay-in,{} ile ödeyebilir miyim?,,,,2,tr-agent-v1
-atm-cash.please-charge-in-local-currency,Türk lirası olarak çekin.,Yerel para biriminden çekin.,,,2,tr-agent-v1
-atm-cash.where-can-i-get-coins,Nereden bozuk para bulabilirim?,,,,2,tr-agent-v1
-atm-cash.is-there-a-minimum-for-cards,Kartta alt limit var mı?,,,,2,tr-agent-v1
-atm-cash.atm,ATM,bankamatik,,,2,tr-agent-v1
-atm-cash.banknote,banknot,kâğıt para,,,2,tr-agent-v1
-atm-cash.coin,bozuk para,madeni para,,,2,tr-agent-v1
-atm-cash.cash-only,sadece nakit,,,,2,tr-agent-v1
-atm-cash.fee,komisyon,ücret,,,2,tr-agent-v1
-atm-cash.change,para üstü,,,,2,tr-agent-v1
-atm-cash.exchange-rate,döviz kuru,,,,2,tr-agent-v1
-atm-cash.bank,banka,,,,2,tr-agent-v1
-atm-cash.money-exchange,döviz bürosu,DÖVİZ,,,2,tr-agent-v1
-atm-cash.pin,şifre,PIN,,,2,tr-agent-v1
-numbers-money.lira,lira,Türk lirası,,,2,coordinator-gaps-v2
+numbers-money.l-ng,sıfır,,sɯfˈɯr,,2,tr-agent-v1;ipa=espeak
+numbers-money.y,bir,,bˈɪr,,2,tr-agent-v1;ipa=espeak
+numbers-money.r,iki,,ikˈɪ,,2,tr-agent-v1;ipa=espeak
+numbers-money.s-n,üç,,ˈøtʃ,,2,tr-agent-v1;ipa=espeak
+numbers-money.s,dört,,dˈœrt,,2,tr-agent-v1;ipa=espeak
+numbers-money.w,beş,,bˈɛʃ,,2,tr-agent-v1;ipa=espeak
+numbers-money.li,altı,,aɫtˈɯ,,2,tr-agent-v1;ipa=espeak
+numbers-money.q,yedi,,jedˈɪ,,2,tr-agent-v1;ipa=espeak
+numbers-money.b,sekiz,,sˈekɪz,,2,tr-agent-v1;ipa=espeak
+numbers-money.ji,dokuz,,dˈokʊz,,2,tr-agent-v1;ipa=espeak
+numbers-money.sh,on,,ˈɔn,,2,tr-agent-v1;ipa=espeak
+numbers-money.y-b-i,yüz,,jˈøz,,2,tr-agent-v1;ipa=espeak
+numbers-money.y-qi-n,bin,,bˈɪn,,2,tr-agent-v1;ipa=espeak
+numbers-money.y-w-n,on bin,,ˈɔn bˈɪn,,2,tr-agent-v1;ipa=espeak
+numbers-money.b-n,yarım,buçuk,jˈaɾɯm,buçuk follows a number: iki buçuk,2,tr-agent-v1;ipa=espeak
+atm-cash.where-is-an-atm,ATM nerede?,Bankamatik nerede?,ˌatˌɛmˈɛ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,Bu ATM yabancı kart kabul ediyor mu?,,bʊ ˌatˌɛmˈɛ jabandʒˈɯ kˈart kabˈʊɫ edˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,ATM kartımı yuttu.,,ˌatˌɛmˈɛ kˈartɯmɯ jutːˈʊ,,2,tr-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,Komisyon var mı?,,komɪsjˈɔn vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,Kart reddedildi.,,kˈart redːedɪldˈɪ,,2,tr-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,Kur ne kadar?,,kˈʊr nˈɛ kadˈar,,2,tr-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,Para çıkmadı.,,paɾˈa tʃˈɯkmadɯ,,2,tr-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,Nerede döviz bozdurabilirim?,,nˈeɾedɛ dˈœvɪz bɔzduɾabilˈiɾɪm,,2,tr-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,Makine arızalı.,,makinˈɛ aɾɯzaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,"Küçük banknot verin, lütfen.",,"kytʃˈøk banknˈɔt veɾˈɪn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,Bozuk paranız var mı?,,bozˈʊk paɾˈanɯz vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,{} ile ödeyebilir miyim?,,{} ˌilɛ œdejebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,Türk lirası olarak çekin.,Yerel para biriminden çekin.,tˈørk liɾasˈɯ oɫaɾˈak tʃekˈɪn,,2,tr-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,Nereden bozuk para bulabilirim?,,nˈeɾedæn bozˈʊk paɾˈa buɫabilˈiɾɪm,,2,tr-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,Kartta alt limit var mı?,,kartːˈa ˈaɫt limˈɪt vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+atm-cash.atm,ATM,bankamatik,ˌatˌɛmˈɛ,,2,tr-agent-v1;ipa=espeak
+atm-cash.banknote,banknot,kâğıt para,banknˈɔt,,2,tr-agent-v1;ipa=espeak
+atm-cash.coin,bozuk para,madeni para,bozˈʊk paɾˈa,,2,tr-agent-v1;ipa=espeak
+atm-cash.cash-only,sadece nakit,,sadˈedʒɛ nakˈɪt,,2,tr-agent-v1;ipa=espeak
+atm-cash.fee,komisyon,ücret,komɪsjˈɔn,,2,tr-agent-v1;ipa=espeak
+atm-cash.change,para üstü,,paɾˈa østˈø,,2,tr-agent-v1;ipa=espeak
+atm-cash.exchange-rate,döviz kuru,,dˈœvɪz kuɾˈʊ,,2,tr-agent-v1;ipa=espeak
+atm-cash.bank,banka,,bˈanka,,2,tr-agent-v1;ipa=espeak
+atm-cash.money-exchange,döviz bürosu,DÖVİZ,dˈœvɪz byɾosˈʊ,,2,tr-agent-v1;ipa=espeak
+atm-cash.pin,şifre,PIN,ʃɪfrˈɛ,,2,tr-agent-v1;ipa=espeak
+numbers-money.lira,lira,Türk lirası,liɾˈa,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.lira-symbol,₺,TL,,,2,coordinator-gaps-v2
 numbers-money.number-and-classifier-notes,"Sayı kurma: 11 = shi yi; 20 = er shi; 21 = er shi yi. Telefonda 1 çoğu zaman yao okunur. Ölçü sözcükleri: ge (genel), wei (kişi), zhang (bilet, yassı şeyler), bei (bardak), ping (şişe). Para: jiao / mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,tr-notes-v1
 numbers-money.number-and-classifier-notes-2,"Sayı kurma: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Sayma ekleri: -tsu (nesne), -mai (yassı), -hon (uzun), -nin (kişi), -hai (bardak). Telefonda: 0 = zero ya da maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,tr-notes-v1

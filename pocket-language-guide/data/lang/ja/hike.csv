@@ -1,66 +1,66 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-hiking-parks.is-this-the-way-to,これは{}への道ですか？,,kore wa {} e no michi desu ka?,,,2,japanese-reviewed-v6
-trail-words.trail,登山道,,tozandō,,,2,japanese-reviewed-v6
-trail-warnings.open,通行可,,tsūkōka,,,2,japanese-reviewed-v6
-trail-conditions.how-long-is-the-full-route,全行程はどのくらいですか？,,zen kōtei wa dono kurai desu ka?,,,2,japanese-reviewed-v6
-trail-landmarks.trail-marker,道標,,michishirube,,,2,japanese-reviewed-v6
-weather.forecast,天気予報はどうですか？,,tenki yohō wa dō desu ka?,,,2,ja-agent-v1
-trail-transport.how-long-is-the-queue,行列はどのくらいですか？,,gyōretsu wa dono kurai desu ka?,,,2,ja-agent-v1
-hiking-parks.where-is-the-trailhead,登山口はどこですか？,,tozanguchi wa doko desu ka?,,,2,japanese-reviewed-v6
-trail-words.trailhead,登山口,,tozanguchi,,,2,japanese-reviewed-v6
-trail-transport.what-time-is-the-last-shuttle,最終シャトルは何時ですか？,,saishū shatoru wa nanji desu ka?,,,2,japanese-reviewed-v6
-trail-warnings.closed,通行止め,,tsūkōdome,,,2,japanese-reviewed-v6
-trail-conditions.can-we-return-the-same-way,同じ道で戻れますか？,,onaji michi de modoremasu ka?,,,2,japanese-reviewed-v6
-trail-landmarks.fork-junction,分岐,,bunki,,,2,japanese-reviewed-v6
-weather.will-it-rain,今日は雨が降りますか？,,kyō wa ame ga furimasu ka?,,,2,ja-agent-v1
-hiking-parks.how-long-to-the-summit,山頂までどのくらいですか？,,sanchō made dono kurai desu ka?,,,2,japanese-reviewed-v6
-trail-words.summit,山頂,,sanchō,,,2,japanese-reviewed-v6
-trail-transport.when-does-the-cableway-stop,ロープウェイは何時までですか？,,rōpuwei wa nanji made desu ka?,,,2,japanese-reviewed-v6
-trail-warnings.maintenance,整備中,,seibichū,,,2,japanese-reviewed-v6
-trail-conditions.can-we-return-before-dark,暗くなる前に戻れますか？,,kuraku naru mae ni modoremasu ka?,,,2,japanese-reviewed-v6
-trail-landmarks.boardwalk-cliff-path,木道／桟道,,mokudō / sandō,,,2,japanese-reviewed-v6
-weather.is-it-safe-today,今日は安全ですか？,,kyō wa anzen desu ka?,,,2,ja-agent-v1
-hiking-parks.how-long-to-the-viewpoint,展望台までどのくらいですか？,,tenbōdai made dono kurai desu ka?,,,2,japanese-reviewed-v6
-trail-words.viewpoint,展望台,,tenbōdai,,,2,japanese-reviewed-v6
-trail-transport.where-can-we-buy-water,水はどこで買えますか？,,mizu wa doko de kaemasu ka?,,,2,japanese-reviewed-v6
-trail-warnings.steep-slope,急坂,,kyūzaka,,,2,japanese-reviewed-v6
-trail-conditions.is-the-trail-open,この登山道は開いていますか？,,kono tozandō wa aiteimasu ka?,,,2,japanese-reviewed-v6
-trail-landmarks.start,起点,,kiten,,,2,japanese-reviewed-v6
-weather.how-cold-at-night,夜はどのくらい寒くなりますか？,,yoru wa dono kurai samuku narimasu ka?,,,2,ja-agent-v1
-hiking-parks.which-route-is-easier,どのルートが楽ですか？,,dono rūto ga raku desu ka?,,,2,japanese-reviewed-v6
-trail-words.cableway,ロープウェイ,,rōpuwei,,,2,japanese-reviewed-v6
-trail-transport.where-can-we-refill-water,給水所はどこですか？,,kyūsuijo wa doko desu ka?,,,2,japanese-reviewed-v6
-trail-warnings.caution-slippery,滑りやすい,,suberiyasui,,,2,japanese-reviewed-v6
-trail-conditions.is-the-route-steep,この道は急ですか？,,kono michi wa kyū desu ka?,,,2,japanese-reviewed-v6
-trail-landmarks.end,終点,,shūten,,,2,japanese-reviewed-v6
-weather.rain,雨,,ame,,,2,ja-agent-v1
-trail-words.shuttle-bus,シャトルバス,,shatoru basu,,,2,japanese-reviewed-v6
-trail-transport.is-there-cell-signal-here,ここは電波が入りますか？,,koko wa denpa ga hairimasu ka?,,,2,japanese-reviewed-v6
-trail-warnings.danger,危険,,kiken,,,2,japanese-reviewed-v6
-trail-conditions.is-the-path-slippery,道は滑りやすいですか？,,michi wa suberiyasui desu ka?,,,2,japanese-reviewed-v6
-trail-landmarks.elevation,標高,,hyōkō,,,2,japanese-reviewed-v6
-weather.snow,雪,,yuki,,,2,ja-agent-v1
-trail-words.park-shuttle,園内バス,,ennai basu,,,2,japanese-reviewed-v6
-trail-transport.do-you-have-a-map,地図はありますか？,,chizu wa arimasu ka?,,,2,japanese-reviewed-v6
-trail-warnings.beware-falling-rocks,落石注意,,rakuseki chūi,,,2,japanese-reviewed-v6
-trail-landmarks.sunset,日没,,nichibotsu,,,2,japanese-reviewed-v6
-weather.wind,風,,kaze,,,2,ja-agent-v1
-trail-words.steps,階段,,kaidan,,,2,japanese-reviewed-v6
-trail-warnings.first-aid-station,救護所,,kyūgosho,,,2,japanese-reviewed-v6
-weather.storm,台風,嵐,taifū,,,2,ja-agent-v1
-trail-words.up-uphill,上り,,nobori,,,2,japanese-reviewed-v6
-trail-warnings.service-suspended,運休,,unkyū,,,2,japanese-reviewed-v6
-trail-landmarks.water-point,給水所,,kyūsuijo,,,2,japanese-reviewed-v6
-weather.ice,凍結,氷,tōketsu,,,2,ja-agent-v1
-trail-words.down-downhill,下り,,kudari,,,2,japanese-reviewed-v6
-weather.fog,霧,,kiri,,,2,ja-agent-v1
-trail-words.one-way,片道,,katamichi,,,2,japanese-reviewed-v6
-weather.heat,暑さ,,atsusa,,,2,ja-agent-v1
-trail-words.round-trip,往復,,ōfuku,,,2,japanese-reviewed-v6
-weather.cold,寒さ,,samusa,,,2,ja-agent-v1
-weather.humid,蒸し暑い,湿気,mushiatsui,,,2,ja-agent-v1
-weather.sunrise,日の出,,hinode,,,2,ja-agent-v1
-weather.flood,洪水,,kōzui,,,2,ja-agent-v1
-weather.avalanche-risk,雪崩注意,,nadare chūi,,,2,ja-agent-v1
-trail-transport.how-long-is-the-wait,待ち時間はどのくらいですか？,,machijikan wa dono kurai desu ka?,,,2,japanese-reviewed-v6
-hiking-parks.is-this-trail-suitable-for-beginners,この登山道は初心者向けですか？,,kono tozandō wa shoshinsha muke desu ka?,,,2,japanese-reviewed-v6
+hiking-parks.is-this-the-way-to,これは{}への道ですか？,,kore wa {} e no michi desu ka?,koɾe wa {} e no mitɕi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-words.trail,登山道,,tozandō,tozaɴdoː,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.open,通行可,,tsūkōka,tsɯːkoːka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-conditions.how-long-is-the-full-route,全行程はどのくらいですか？,,zen kōtei wa dono kurai desu ka?,zeɴ koːtei wa dono kɯɾai desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-landmarks.trail-marker,道標,,michishirube,mitɕiɕiɾɯbe,,2,japanese-reviewed-v6;ipa=hepburn
+weather.forecast,天気予報はどうですか？,,tenki yohō wa dō desu ka?,teɴki johoː wa doː desɯ ka,,2,ja-agent-v1;ipa=hepburn
+trail-transport.how-long-is-the-queue,行列はどのくらいですか？,,gyōretsu wa dono kurai desu ka?,ɡjoːɾetsɯ wa dono kɯɾai desɯ ka,,2,ja-agent-v1;ipa=hepburn
+hiking-parks.where-is-the-trailhead,登山口はどこですか？,,tozanguchi wa doko desu ka?,tozaɴɡɯtɕi wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-words.trailhead,登山口,,tozanguchi,tozaɴɡɯtɕi,,2,japanese-reviewed-v6;ipa=hepburn
+trail-transport.what-time-is-the-last-shuttle,最終シャトルは何時ですか？,,saishū shatoru wa nanji desu ka?,saiɕɯː ɕatoɾɯ wa naɴdʑi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.closed,通行止め,,tsūkōdome,tsɯːkoːdome,,2,japanese-reviewed-v6;ipa=hepburn
+trail-conditions.can-we-return-the-same-way,同じ道で戻れますか？,,onaji michi de modoremasu ka?,onadʑi mitɕi de modoɾemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-landmarks.fork-junction,分岐,,bunki,bɯɴki,,2,japanese-reviewed-v6;ipa=hepburn
+weather.will-it-rain,今日は雨が降りますか？,,kyō wa ame ga furimasu ka?,kjoː wa ame ɡa ɸɯɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+hiking-parks.how-long-to-the-summit,山頂までどのくらいですか？,,sanchō made dono kurai desu ka?,saɴtɕoː made dono kɯɾai desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-words.summit,山頂,,sanchō,saɴtɕoː,,2,japanese-reviewed-v6;ipa=hepburn
+trail-transport.when-does-the-cableway-stop,ロープウェイは何時までですか？,,rōpuwei wa nanji made desu ka?,ɾoːpɯwei wa naɴdʑi made desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.maintenance,整備中,,seibichū,seibitɕɯː,,2,japanese-reviewed-v6;ipa=hepburn
+trail-conditions.can-we-return-before-dark,暗くなる前に戻れますか？,,kuraku naru mae ni modoremasu ka?,kɯɾakɯ naɾɯ mae ɲi modoɾemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-landmarks.boardwalk-cliff-path,木道／桟道,,mokudō / sandō,mokɯdoː / saɴdoː,,2,japanese-reviewed-v6;ipa=hepburn
+weather.is-it-safe-today,今日は安全ですか？,,kyō wa anzen desu ka?,kjoː wa aɴzeɴ desɯ ka,,2,ja-agent-v1;ipa=hepburn
+hiking-parks.how-long-to-the-viewpoint,展望台までどのくらいですか？,,tenbōdai made dono kurai desu ka?,teɴboːdai made dono kɯɾai desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-words.viewpoint,展望台,,tenbōdai,teɴboːdai,,2,japanese-reviewed-v6;ipa=hepburn
+trail-transport.where-can-we-buy-water,水はどこで買えますか？,,mizu wa doko de kaemasu ka?,mizɯ wa doko de kaemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.steep-slope,急坂,,kyūzaka,kjɯːzaka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-conditions.is-the-trail-open,この登山道は開いていますか？,,kono tozandō wa aiteimasu ka?,kono tozaɴdoː wa aiteimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-landmarks.start,起点,,kiten,kiteɴ,,2,japanese-reviewed-v6;ipa=hepburn
+weather.how-cold-at-night,夜はどのくらい寒くなりますか？,,yoru wa dono kurai samuku narimasu ka?,joɾɯ wa dono kɯɾai samɯkɯ naɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+hiking-parks.which-route-is-easier,どのルートが楽ですか？,,dono rūto ga raku desu ka?,dono ɾɯːto ɡa ɾakɯ desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-words.cableway,ロープウェイ,,rōpuwei,ɾoːpɯwei,,2,japanese-reviewed-v6;ipa=hepburn
+trail-transport.where-can-we-refill-water,給水所はどこですか？,,kyūsuijo wa doko desu ka?,kjɯːsɯidʑo wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.caution-slippery,滑りやすい,,suberiyasui,sɯbeɾijasɯi,,2,japanese-reviewed-v6;ipa=hepburn
+trail-conditions.is-the-route-steep,この道は急ですか？,,kono michi wa kyū desu ka?,kono mitɕi wa kjɯː desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-landmarks.end,終点,,shūten,ɕɯːteɴ,,2,japanese-reviewed-v6;ipa=hepburn
+weather.rain,雨,,ame,ame,,2,ja-agent-v1;ipa=hepburn
+trail-words.shuttle-bus,シャトルバス,,shatoru basu,ɕatoɾɯ basɯ,,2,japanese-reviewed-v6;ipa=hepburn
+trail-transport.is-there-cell-signal-here,ここは電波が入りますか？,,koko wa denpa ga hairimasu ka?,koko wa deɴpa ɡa haiɾimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.danger,危険,,kiken,kikeɴ,,2,japanese-reviewed-v6;ipa=hepburn
+trail-conditions.is-the-path-slippery,道は滑りやすいですか？,,michi wa suberiyasui desu ka?,mitɕi wa sɯbeɾijasɯi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-landmarks.elevation,標高,,hyōkō,çoːkoː,,2,japanese-reviewed-v6;ipa=hepburn
+weather.snow,雪,,yuki,jɯki,,2,ja-agent-v1;ipa=hepburn
+trail-words.park-shuttle,園内バス,,ennai basu,eɴnai basɯ,,2,japanese-reviewed-v6;ipa=hepburn
+trail-transport.do-you-have-a-map,地図はありますか？,,chizu wa arimasu ka?,tɕizɯ wa aɾimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.beware-falling-rocks,落石注意,,rakuseki chūi,ɾakɯseki tɕɯːi,,2,japanese-reviewed-v6;ipa=hepburn
+trail-landmarks.sunset,日没,,nichibotsu,ɲitɕibotsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+weather.wind,風,,kaze,kaze,,2,ja-agent-v1;ipa=hepburn
+trail-words.steps,階段,,kaidan,kaidaɴ,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.first-aid-station,救護所,,kyūgosho,kjɯːɡoɕo,,2,japanese-reviewed-v6;ipa=hepburn
+weather.storm,台風,嵐,taifū,taiɸɯː,,2,ja-agent-v1;ipa=hepburn
+trail-words.up-uphill,上り,,nobori,noboɾi,,2,japanese-reviewed-v6;ipa=hepburn
+trail-warnings.service-suspended,運休,,unkyū,ɯɴkjɯː,,2,japanese-reviewed-v6;ipa=hepburn
+trail-landmarks.water-point,給水所,,kyūsuijo,kjɯːsɯidʑo,,2,japanese-reviewed-v6;ipa=hepburn
+weather.ice,凍結,氷,tōketsu,toːketsɯ,,2,ja-agent-v1;ipa=hepburn
+trail-words.down-downhill,下り,,kudari,kɯdaɾi,,2,japanese-reviewed-v6;ipa=hepburn
+weather.fog,霧,,kiri,kiɾi,,2,ja-agent-v1;ipa=hepburn
+trail-words.one-way,片道,,katamichi,katamitɕi,,2,japanese-reviewed-v6;ipa=hepburn
+weather.heat,暑さ,,atsusa,atsɯsa,,2,ja-agent-v1;ipa=hepburn
+trail-words.round-trip,往復,,ōfuku,oːɸɯkɯ,,2,japanese-reviewed-v6;ipa=hepburn
+weather.cold,寒さ,,samusa,samɯsa,,2,ja-agent-v1;ipa=hepburn
+weather.humid,蒸し暑い,湿気,mushiatsui,mɯɕiatsɯi,,2,ja-agent-v1;ipa=hepburn
+weather.sunrise,日の出,,hinode,çinode,,2,ja-agent-v1;ipa=hepburn
+weather.flood,洪水,,kōzui,koːzɯi,,2,ja-agent-v1;ipa=hepburn
+weather.avalanche-risk,雪崩注意,,nadare chūi,nadaɾe tɕɯːi,,2,ja-agent-v1;ipa=hepburn
+trail-transport.how-long-is-the-wait,待ち時間はどのくらいですか？,,machijikan wa dono kurai desu ka?,matɕidʑikaɴ wa dono kɯɾai desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+hiking-parks.is-this-trail-suitable-for-beginners,この登山道は初心者向けですか？,,kono tozandō wa shoshinsha muke desu ka?,kono tozaɴdoː wa ɕoɕiɴɕa mɯke desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn

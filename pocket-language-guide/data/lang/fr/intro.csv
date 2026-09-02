@@ -1,13 +1,13 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Je m'appelle {},,,,2,fr-agent-v1
-introductions.nice-to-meet-you,Enchanté,Enchantée,,,2,fr-agent-v1
-introductions.what-is-your-name,Comment vous appelez-vous ?,,,,2,fr-agent-v1
-introductions.we-are-traveling-together,Nous voyageons ensemble,,,,2,fr-agent-v1
-introductions.this-is-my-friend,Voici mon ami,mon amie,,,2,fr-agent-v1
-introductions.i-am-from,Je viens de {},,,,2,fr-agent-v1
-introductions.where-are-you-from,D'où venez-vous ?,,,,2,fr-agent-v1
-introductions.how-are-you,Comment allez-vous ?,,,,2,fr-agent-v1
-introductions.i-am-a-tourist,Je suis touriste,,,,2,fr-agent-v1
-introductions.this-is-my-husband-wife,Voici mon mari / ma femme,,,,2,fr-agent-v1
-introductions.this-is-my-daughter-son,Voici ma fille / mon fils,,,,2,fr-agent-v1
-introductions.i-am-traveling-alone,Je voyage seul,seule,,,2,fr-agent-v1
+introductions.my-name-is,Je m'appelle {},,ʒə mapˈɛl {},,2,fr-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Enchanté,Enchantée,ɑ̃ʃɑ̃tˈe,,2,fr-agent-v1;ipa=espeak
+introductions.what-is-your-name,Comment vous appelez-vous ?,,kɔmɑ̃ vuz aplˈevˈu,,2,fr-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Nous voyageons ensemble,,nu vwajaʒɔ̃z ɑ̃sˈɑ̃bl,,2,fr-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Voici mon ami,mon amie,vwasi mɔ̃n amˈi,,2,fr-agent-v1;ipa=espeak
+introductions.i-am-from,Je viens de {},,ʒə vjɛ̃ də {},,2,fr-agent-v1;ipa=espeak
+introductions.where-are-you-from,D'où venez-vous ?,,du vənˈevˈu,,2,fr-agent-v1;ipa=espeak
+introductions.how-are-you,Comment allez-vous ?,,kɔmɑ̃ alˈevˈu,,2,fr-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Je suis touriste,,ʒə syi tuʁˈist,,2,fr-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Voici mon mari / ma femme,,vwasi mɔ̃ maʁˈi / ma fˈam,,2,fr-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Voici ma fille / mon fils,,vwasi ma fˈij / mɔ̃ fˈis,,2,fr-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Je voyage seul,seule,ʒə vwajaʒ sˈœl,,2,fr-agent-v1;ipa=espeak

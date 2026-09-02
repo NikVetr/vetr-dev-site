@@ -1,44 +1,44 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,กี่โมงแล้ว,,ki mong laeo,,,2,th-agent-v1
-time-scheduling.how-many-minutes,กี่นาที,,ki nathi,,,2,th-agent-v1
-time-scheduling.what-time-should-we-meet,เจอกันกี่โมง,,choe kan ki mong,,,2,th-agent-v1
-time-scheduling.can-we-change-the-time,เลื่อนเวลาได้ไหม,,luen wela dai mai,,,2,th-agent-v1
-time-scheduling.when-is-convenient,สะดวกเมื่อไร,,saduak muearai,,,2,th-agent-v1
-time-scheduling.what-is-today-s-date,วันนี้วันที่เท่าไร,,wanni wanthi thaorai,,,2,th-agent-v1
-time-scheduling.what-day-is-it-today,วันนี้วันอะไร,,wanni wan arai,,,2,th-agent-v1
-time-scheduling.what-time-does-it-open,เปิดกี่โมง,,poet ki mong,,,2,th-agent-v1
-time-scheduling.what-time-does-it-close,ปิดกี่โมง,,pit ki mong,,,2,th-agent-v1
-time-scheduling.how-long-does-it-take,ใช้เวลานานเท่าไร,,chai wela nan thaorai,,,2,th-agent-v1
-time-words.today,วันนี้,,wanni,,,2,th-agent-v1
-time-words.tomorrow,พรุ่งนี้,,phrungni,,,2,th-agent-v1
-time-words.yesterday,เมื่อวาน,,mueawan,,,2,th-agent-v1
-time-words.this-week,อาทิตย์นี้,,athit ni,,,2,th-agent-v1
-time-words.next-week,อาทิตย์หน้า,,athit na,,,2,th-agent-v1
-time-words.morning,เช้า,,chao,,,2,th-agent-v1
-time-words.afternoon,บ่าย,,bai,,,2,th-agent-v1
-time-words.evening,เย็น,,yen,,,2,th-agent-v1
-time-words.spring,ฤดูใบไม้ผลิ,,ruedu baimaiphli,,,2,th-agent-v1
-time-words.summer,ฤดูร้อน,,ruedu ron,,,2,th-agent-v1
-time-words.fall,ฤดูใบไม้ร่วง,,ruedu baimairuang,,,2,th-agent-v1
-time-words.winter,ฤดูหนาว,,ruedu nao,,,2,th-agent-v1
-time-words.night,กลางคืน,,klangkhuen,,,2,th-agent-v1
-days-of-week.monday,วันจันทร์,,wan chan,,,2,th-agent-v1
-days-of-week.tuesday,วันอังคาร,,wan angkhan,,,2,th-agent-v1
-days-of-week.wednesday,วันพุธ,,wan phut,,,2,th-agent-v1
-days-of-week.thursday,วันพฤหัส,วันพฤหัสบดี,wan pharuehat,,,2,th-agent-v1
-days-of-week.friday,วันศุกร์,,wan suk,,,2,th-agent-v1
-days-of-week.saturday,วันเสาร์,,wan sao,,,2,th-agent-v1
-days-of-week.sunday,วันอาทิตย์,,wan athit,,,2,th-agent-v1
-months.january,มกราคม,ม.ค.,makarakhom,,,2,th-agent-v1
-months.february,กุมภาพันธ์,ก.พ.,kumphaphan,,,2,th-agent-v1
-months.march,มีนาคม,มี.ค.,minakhom,,,2,th-agent-v1
-months.april,เมษายน,เม.ย.,mesayon,,,2,th-agent-v1
-months.may,พฤษภาคม,พ.ค.,phruetsaphakhom,,,2,th-agent-v1
-months.june,มิถุนายน,มิ.ย.,mithunayon,,,2,th-agent-v1
-months.july,กรกฎาคม,ก.ค.,karakadakhom,,,2,th-agent-v1
-months.august,สิงหาคม,ส.ค.,singhakhom,,,2,th-agent-v1
-months.september,กันยายน,ก.ย.,kanyayon,,,2,th-agent-v1
-months.october,ตุลาคม,ต.ค.,tulakhom,,,2,th-agent-v1
-months.november,พฤศจิกายน,พ.ย.,phruetsachikayon,,,2,th-agent-v1
-months.december,ธันวาคม,ธ.ค.,thanwakhom,,,2,th-agent-v1
+time-scheduling.what-time-is-it,กี่โมงแล้ว,,ki mong laeo,kiː˨˩ moːŋ˧ lɛːw˦˥,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.how-many-minutes,กี่นาที,,ki nathi,kiː˨˩ naː˧tʰiː˧,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.what-time-should-we-meet,เจอกันกี่โมง,,choe kan ki mong,tɕɤː˧kan˧ kiː˨˩ moːŋ˧,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.can-we-change-the-time,เลื่อนเวลาได้ไหม,,luen wela dai mai,lɯa̯n˥˩weː˧laː˧ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.when-is-convenient,สะดวกเมื่อไร,,saduak muearai,saʔ˨˩dua̯k˨˩ mɯa̯˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.what-is-today-s-date,วันนี้วันที่เท่าไร,,wanni wanthi thaorai,wan˧niː˦˥ wan˧tʰiː˥˩ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.what-day-is-it-today,วันนี้วันอะไร,,wanni wan arai,wan˧niː˦˥ wan˧ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.what-time-does-it-open,เปิดกี่โมง,,poet ki mong,pɤːt˨˩ kiː˨˩ moːŋ˧,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.what-time-does-it-close,ปิดกี่โมง,,pit ki mong,pit˨˩ kiː˨˩ moːŋ˧,,2,th-agent-v1;ipa=thaig2p
+time-scheduling.how-long-does-it-take,ใช้เวลานานเท่าไร,,chai wela nan thaorai,tɕʰaj˦˥weː˧laː˧naːn˧ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+time-words.today,วันนี้,,wanni,wan˧niː˦˥,,2,th-agent-v1;ipa=thaig2p
+time-words.tomorrow,พรุ่งนี้,,phrungni,pʰruŋ˥˩niː˦˥,,2,th-agent-v1;ipa=thaig2p
+time-words.yesterday,เมื่อวาน,,mueawan,mɯa̯˥˩waːn˧,,2,th-agent-v1;ipa=thaig2p
+time-words.this-week,อาทิตย์นี้,,athit ni,ʔaː˧tʰit˦˥ niː˦˥,,2,th-agent-v1;ipa=thaig2p
+time-words.next-week,อาทิตย์หน้า,,athit na,ʔaː˧tʰit˦˥ naː˥˩,,2,th-agent-v1;ipa=thaig2p
+time-words.morning,เช้า,,chao,tɕʰaw˦˥,,2,th-agent-v1;ipa=thaig2p
+time-words.afternoon,บ่าย,,bai,baːj˨˩,,2,th-agent-v1;ipa=thaig2p
+time-words.evening,เย็น,,yen,jen˧,,2,th-agent-v1;ipa=thaig2p
+time-words.spring,ฤดูใบไม้ผลิ,,ruedu baimaiphli,rɯ˦˥duː˧baj˧maːj˦˥pʰliʔ˨˩,,2,th-agent-v1;ipa=thaig2p
+time-words.summer,ฤดูร้อน,,ruedu ron,rɯ˦˥duː˧rɔːn˦˥,,2,th-agent-v1;ipa=thaig2p
+time-words.fall,ฤดูใบไม้ร่วง,,ruedu baimairuang,rɯ˦˥duː˧baj˧maːj˦˥rua̯ŋ˥˩,,2,th-agent-v1;ipa=thaig2p
+time-words.winter,ฤดูหนาว,,ruedu nao,rɯ˦˥duː˧naːw˩˩˦,,2,th-agent-v1;ipa=thaig2p
+time-words.night,กลางคืน,,klangkhuen,klaːŋ˧kʰɯːn˧,,2,th-agent-v1;ipa=thaig2p
+days-of-week.monday,วันจันทร์,,wan chan,wan˧ tɕan˧,,2,th-agent-v1;ipa=thaig2p
+days-of-week.tuesday,วันอังคาร,,wan angkhan,wan˧ ʔaŋ˧kʰaː˧ra˦˥,,2,th-agent-v1;ipa=thaig2p
+days-of-week.wednesday,วันพุธ,,wan phut,wan˧ pʰut˦˥,,2,th-agent-v1;ipa=thaig2p
+days-of-week.thursday,วันพฤหัส,วันพฤหัสบดี,wan pharuehat,wan˧ pʰa˦˥hat˨˩,,2,th-agent-v1;ipa=thaig2p
+days-of-week.friday,วันศุกร์,,wan suk,wan˧ suk˨˩,,2,th-agent-v1;ipa=thaig2p
+days-of-week.saturday,วันเสาร์,,wan sao,wan˧ saw˩˩˦,,2,th-agent-v1;ipa=thaig2p
+days-of-week.sunday,วันอาทิตย์,,wan athit,wan˧ʔaː˧tʰit˦˥,,2,th-agent-v1;ipa=thaig2p
+months.january,มกราคม,ม.ค.,makarakhom,mok˦˥raː˧kʰom˧,,2,th-agent-v1;ipa=thaig2p
+months.february,กุมภาพันธ์,ก.พ.,kumphaphan,kum˧pʰaː˧pʰan˧,,2,th-agent-v1;ipa=thaig2p
+months.march,มีนาคม,มี.ค.,minakhom,miː˧naː˧kʰom˧,,2,th-agent-v1;ipa=thaig2p
+months.april,เมษายน,เม.ย.,mesayon,meː˧saː˩˩˦jon˧,,2,th-agent-v1;ipa=thaig2p
+months.may,พฤษภาคม,พ.ค.,phruetsaphakhom,pʰrɯt˦˥pʰaː˧kʰom˧,,2,th-agent-v1;ipa=thaig2p
+months.june,มิถุนายน,มิ.ย.,mithunayon,miʔ˦˥tʰuʔ˨˩naː˧jon˧,,2,th-agent-v1;ipa=thaig2p
+months.july,กรกฎาคม,ก.ค.,karakadakhom,krok˨˩daː˧kʰom˧,,2,th-agent-v1;ipa=thaig2p
+months.august,สิงหาคม,ส.ค.,singhakhom,siŋ˩˩˦haː˩˩˦kʰom˧,,2,th-agent-v1;ipa=thaig2p
+months.september,กันยายน,ก.ย.,kanyayon,kan˧jaː˧jon˧,,2,th-agent-v1;ipa=thaig2p
+months.october,ตุลาคม,ต.ค.,tulakhom,tuʔ˨˩laː˧kʰom˧,,2,th-agent-v1;ipa=thaig2p
+months.november,พฤศจิกายน,พ.ย.,phruetsachikayon,pʰrɯt˦˥tɕiʔ˨˩kaː˧jon˧,,2,th-agent-v1;ipa=thaig2p
+months.december,ธันวาคม,ธ.ค.,thanwakhom,tʰan˧waː˧kʰom˧,,2,th-agent-v1;ipa=thaig2p
 time-words.clock-offset,"นาฬิกาสวาฮีลี เริ่มนับชั่วโมงตอนฟ้าสาง ไม่ใช่เที่ยงคืน เลขที่ได้ยิน จึงน้อยกว่าเวลาบนมือถือ 6 ชั่วโมง ให้บวก 6 เข้าไป saa moja = 7:00, saa sita = เที่ยงวัน, saa kumi = 16:00 ควรบอกเวลาเป็นตัวเลข หรือถาม saa ngapi za kizungu เพื่อขอเวลาแบบตะวันตก",,,,,2,th-notes-v1

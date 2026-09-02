@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,टिकट कहाँ मिलेगा?,,ṭikaṭ kahāṁ milegā?,,,2,hi-agent-v1
-attractions-tickets.do-i-need-a-reservation,क्या बुकिंग करानी पड़ेगी?,,kyā bukiṁg karānī paṛegī?,,,2,hi-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,अंदर जाने का आखिरी समय क्या है?,,aṁdar jāne kā ākhirī samay kyā hai?,,,2,hi-agent-v1
-attractions-tickets.are-there-lockers,क्या लॉकर हैं?,,kyā lokar haiṁ?,,,2,hi-agent-v1
-attractions-tickets.may-i-take-photos,क्या यहाँ फ़ोटो लेने की इजाज़त है?,,kyā yahāṁ foṭo lene kī ijāzat hai?,,,2,hi-agent-v1
-attractions-tickets.please-take-a-photo-of-us,हमारी फ़ोटो ले दीजिए,,hamārī foṭo le dījie,,,2,hi-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,ज़रा हमारी फ़ोटो ले दीजिए,,zarā hamārī foṭo le dījie,,,2,hi-agent-v1
+attractions-tickets.where-can-i-buy-tickets,टिकट कहाँ मिलेगा?,,ṭikaṭ kahāṁ milegā?,ʈˈɪkəʈ kˈʌhã mɪlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,क्या बुकिंग करानी पड़ेगी?,,kyā bukiṁg karānī paṛegī?,kːjaː bʊkˈĩɡ kəɾˈaːni pəɽˈeːɡi,,2,hi-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,अंदर जाने का आखिरी समय क्या है?,,aṁdar jāne kā ākhirī samay kyā hai?,ˈʌndəɾ ɟˈaːneː kaː ˈaːkʰɪɾˌi sˈʌmˌɛj kːjaː hɛː,,2,hi-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,क्या लॉकर हैं?,,kyā lokar haiṁ?,kːjaː lˈɔkəɾ hɛ̃,,2,hi-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,क्या यहाँ फ़ोटो लेने की इजाज़त है?,,kyā yahāṁ foṭo lene kī ijāzat hai?,kːjaː jˈʌhã fˈoːʈoː lˈeːneː ki ɪɟˈaːzət hɛː,,2,hi-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,हमारी फ़ोटो ले दीजिए,,hamārī foṭo le dījie,həmˌaːɾi fˈoːʈoː lˈeː dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,ज़रा हमारी फ़ोटो ले दीजिए,,zarā hamārī foṭo le dījie,zˈʌɾaː həmˌaːɾi fˈoːʈoː lˈeː dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak

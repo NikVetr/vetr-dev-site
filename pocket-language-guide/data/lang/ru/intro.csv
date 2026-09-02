@@ -1,13 +1,13 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-introductions.my-name-is,Меня зовут {}.,,Menya zovut {}.,,,2,ru-agent-v1
-introductions.nice-to-meet-you,Очень приятно.,,Ochenʼ priyatno.,,,2,ru-agent-v1
-introductions.what-is-your-name,Как вас зовут?,,Kak vas zovut?,,,2,ru-agent-v1
-introductions.we-are-traveling-together,Мы путешествуем вместе.,,My puteshestvuyem vmeste.,,,2,ru-agent-v1
-introductions.this-is-my-friend,Это мой друг.,Это моя подруга.,Eto moy drug.,,,2,ru-agent-v1
-introductions.i-am-from,Я из {}.,,Ya iz {}.,,,2,ru-agent-v1
-introductions.where-are-you-from,Откуда вы?,,Otkuda vy?,,,2,ru-agent-v1
-introductions.how-are-you,Как дела?,,Kak dela?,,,2,ru-agent-v1
-introductions.i-am-a-tourist,Я турист.,Я туристка.,Ya turist.,,,2,ru-agent-v1
-introductions.this-is-my-husband-wife,Это мой муж / моя жена.,,Eto moy muzh / moya zhena.,,,2,ru-agent-v1
-introductions.this-is-my-daughter-son,Это моя дочь / мой сын.,,Eto moya dochʼ / moy syn.,,,2,ru-agent-v1
-introductions.i-am-traveling-alone,Я путешествую один.,Я путешествую одна.,Ya puteshestvuyu odin.,,,2,ru-agent-v1
+introductions.my-name-is,Меня зовут {}.,,Menya zovut {}.,mʲinʲˈɑ zʌvˈut {},,2,ru-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Очень приятно.,,Ochenʼ priyatno.,ˈotʃʲin prʲiˈjatnʌ,,2,ru-agent-v1;ipa=espeak
+introductions.what-is-your-name,Как вас зовут?,,Kak vas zovut?,kˈɑk vˈɑs zʌvˈut,,2,ru-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Мы путешествуем вместе.,,My puteshestvuyem vmeste.,mˈɨ putʲiʃˈɛstvujim vmʲˈesʲtʲi,,2,ru-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Это мой друг.,Это моя подруга.,Eto moy drug.,ˈɛtʌ mˈoj drˈuk,,2,ru-agent-v1;ipa=espeak
+introductions.i-am-from,Я из {}.,,Ya iz {}.,ˈja ˈis {},,2,ru-agent-v1;ipa=espeak
+introductions.where-are-you-from,Откуда вы?,,Otkuda vy?,ʌtkˈuda vˈɨ,,2,ru-agent-v1;ipa=espeak
+introductions.how-are-you,Как дела?,,Kak dela?,kˈɑk dʲˈeɭa,,2,ru-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Я турист.,Я туристка.,Ya turist.,ˈja turʲˈist,,2,ru-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Это мой муж / моя жена.,,Eto moy muzh / moya zhena.,ˈɛtʌ mˈoj mˈuʃ / mˈoja ʒɨnˈɑ,,2,ru-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Это моя дочь / мой сын.,,Eto moya dochʼ / moy syn.,ˈɛtʌ mˈoja dˈotʃʲ / mˈoj sˈɨn,,2,ru-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Я путешествую один.,Я путешествую одна.,Ya puteshestvuyu odin.,ˈja putʲiʃˈɛstvuju ʌdʲˈin,,2,ru-agent-v1;ipa=espeak

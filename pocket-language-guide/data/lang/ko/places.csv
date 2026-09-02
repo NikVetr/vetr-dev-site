@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,표 어디서 사요?,,pyo eodiseo sayo?,,,2,ko-agent-v1
-attractions-tickets.do-i-need-a-reservation,예약해야 해요?,,yeyakaeya haeyo?,,,2,ko-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,입장 마감이 몇 시예요?,,ipjang magami myeot siyeyo?,,,2,ko-agent-v1
-attractions-tickets.are-there-lockers,사물함 있어요?,,samulham isseoyo?,,,2,ko-agent-v1
-attractions-tickets.may-i-take-photos,사진 찍어도 돼요?,,sajin jjigeodo dwaeyo?,,,2,ko-agent-v1
-attractions-tickets.please-take-a-photo-of-us,사진 찍어 주세요,,sajin jjigeo juseyo,,,2,ko-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,사진 좀 찍어 주시겠어요?,,sajin jom jjigeo jusigesseoyo?,,,2,ko-agent-v1
+attractions-tickets.where-can-i-buy-tickets,표 어디서 사요?,,pyo eodiseo sayo?,pʰjo ʌdisʌ sajo,,2,ko-agent-v1;ipa=rr
+attractions-tickets.do-i-need-a-reservation,예약해야 해요?,,yeyakaeya haeyo?,jejakʰɛja hɛjo,,2,ko-agent-v1;ipa=rr
+attractions-tickets.what-is-the-latest-entry-time,입장 마감이 몇 시예요?,,ipjang magami myeot siyeyo?,iptɕaŋ maɡami mjʌt sijejo,,2,ko-agent-v1;ipa=rr
+attractions-tickets.are-there-lockers,사물함 있어요?,,samulham isseoyo?,samulham is͈ʌjo,,2,ko-agent-v1;ipa=rr
+attractions-tickets.may-i-take-photos,사진 찍어도 돼요?,,sajin jjigeodo dwaeyo?,sadʑin tɕ͈iɡʌdo twɛjo,,2,ko-agent-v1;ipa=rr
+attractions-tickets.please-take-a-photo-of-us,사진 찍어 주세요,,sajin jjigeo juseyo,sadʑin tɕ͈iɡʌ tɕusejo,,2,ko-agent-v1;ipa=rr
+attractions-tickets.could-you-take-a-photo-for-us,사진 좀 찍어 주시겠어요?,,sajin jom jjigeo jusigesseoyo?,sadʑin tɕom tɕ͈iɡʌ tɕusiɡes͈ʌjo,,2,ko-agent-v1;ipa=rr

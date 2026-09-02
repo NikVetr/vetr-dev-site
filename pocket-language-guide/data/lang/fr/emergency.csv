@@ -1,138 +1,138 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-medical-conditions.i-am-diabetic,Je suis diabétique,,,,2,fr-agent-v1
-pharmacy-symptoms.which-pharmacy-is-open-now,Quelle pharmacie est de garde ?,,,,2,fr-agent-v1
-police-consulate.where-is-the-police-station,Où est le commissariat ?,la gendarmerie,,,2,fr-agent-v1
-body-parts.head,la tête,,,,2,fr-agent-v1
-medical-conditions.i-need-insulin,J'ai besoin d'insuline,,,,2,fr-agent-v1
-pharmacy-symptoms.i-need-medicine-for,J'ai besoin d'un médicament pour {},,,,2,fr-agent-v1
-police-consulate.i-want-to-report-a-theft,Je veux porter plainte pour vol,,,,2,fr-agent-v1
-body-parts.stomach,le ventre,,,,2,fr-agent-v1
-medical-conditions.i-have-asthma,Je suis asthmatique,,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-a-fever,J'ai de la fièvre,,,,2,fr-agent-v1
-police-consulate.my-bag-was-stolen,On m'a volé mon sac,,,,2,fr-agent-v1
-body-parts.back,le dos,,,,2,fr-agent-v1
-medical-conditions.i-have-a-heart-condition,J'ai une maladie cardiaque,,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-diarrhea,J'ai la diarrhée,,,,2,fr-agent-v1
-police-consulate.my-passport-was-stolen,On m'a volé mon passeport,,,,2,fr-agent-v1
-body-parts.throat,la gorge,,,,2,fr-agent-v1
-medical-conditions.i-am-allergic-to-penicillin,Je suis allergique à la pénicilline,,,,2,fr-agent-v1
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Où est la pharmacie de garde de nuit ?,,,,2,fr-agent-v1
-police-consulate.someone-is-following-me,Quelqu'un me suit,,,,2,fr-agent-v1
-body-parts.tooth,la dent,,,,2,fr-agent-v1
-medical-conditions.i-have-epilepsy,Je suis épileptique,,,,2,fr-agent-v1
-pharmacy-symptoms.painkiller,antidouleur,antalgique,,,2,fr-agent-v1
-police-consulate.i-need-a-written-police-report,J'ai besoin d'un récépissé de dépôt de plainte,,,,2,fr-agent-v1
-body-parts.chest,la poitrine,,,,2,fr-agent-v1
-medical-conditions.my-blood-sugar-is-low,J'ai une hypoglycémie,Mon taux de sucre est bas,,,2,fr-agent-v1
-pharmacy-symptoms.do-i-need-a-prescription,Faut-il une ordonnance ?,,,,2,fr-agent-v1
-police-consulate.i-want-to-contact-my-embassy,Je veux contacter mon ambassade,,,,2,fr-agent-v1
-body-parts.eye,l'œil,,,,2,fr-agent-v1
-medical-conditions.i-need-my-inhaler,J'ai besoin de mon inhalateur,ma Ventoline,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-a-headache,J'ai mal à la tête,,,,2,fr-agent-v1
-police-consulate.i-need-it-for-my-insurance,J'en ai besoin pour mon assurance,,,,2,fr-agent-v1
-body-parts.ear,l'oreille,,,,2,fr-agent-v1
-medical-conditions.i-am-pregnant,Je suis enceinte,,,,2,fr-agent-v1
-pharmacy-symptoms.paracetamol-acetaminophen,paracétamol (Doliprane),acétaminophène,,,2,fr-agent-v1
-police-consulate.i-need-an-interpreter,J'ai besoin d'un interprète,,,,2,fr-agent-v1
-body-parts.leg,la jambe,,,,2,fr-agent-v1
-medical-conditions.i-carry-an-adrenaline-injector,J'ai un auto-injecteur d'adrénaline,stylo d'adrénaline,,,2,fr-agent-v1
-pharmacy-symptoms.how-much-should-i-take,Quelle dose dois-je prendre ?,,,,2,fr-agent-v1
-police-consulate.please-leave-me-alone,Laissez-moi tranquille,,,,2,fr-agent-v1
-body-parts.arm,le bras,,,,2,fr-agent-v1
-medical-conditions.i-take-medicine-for,Je prends un médicament pour {},,,,2,fr-agent-v1
-pharmacy-symptoms.i-am-vomiting,Je vomis,,,,2,fr-agent-v1
-police-consulate.i-was-robbed,J'ai été volé,,,,2,fr-agent-v1
-body-parts.foot,le pied,,,,2,fr-agent-v1
-medical-conditions.i-take-blood-thinners,Je prends des anticoagulants,,,,2,fr-agent-v1
-pharmacy-symptoms.rehydration-salts,soluté de réhydratation orale,SRO,,,2,fr-agent-v1
-police-consulate.i-want-a-lawyer,Je veux un avocat,,,,2,fr-agent-v1
-body-parts.hand,la main,,,,2,fr-agent-v1
-medical-conditions.medicine-allergy,Allergie médicamenteuse : {},,,,2,fr-agent-v1
-pharmacy-symptoms.how-many-times-a-day,Combien de fois par jour ?,,,,2,fr-agent-v1
-police-consulate.please-notify-my-consulate,"Prévenez mon consulat, s'il vous plaît",,,,2,fr-agent-v1
-body-parts.knee,le genou,,,,2,fr-agent-v1
-medical-conditions.this-card-lists-my-conditions,Cette carte indique mes problèmes de santé,,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-a-stomach-ache,J'ai mal au ventre,,,,2,fr-agent-v1
-police-consulate.i-am-calling-the-police,J'appelle la police,,,,2,fr-agent-v1
-body-parts.ankle,la cheville,,,,2,fr-agent-v1
-medical-conditions.this-is-my-medicine,C'est mon médicament,,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-a-cough,Je tousse,,,,2,fr-agent-v1
-police-consulate.am-i-under-arrest,Suis-je en garde à vue ?,Suis-je en état d'arrestation ?,,,2,fr-agent-v1
-body-parts.skin,la peau,,,,2,fr-agent-v1
-medical-conditions.please-give-me-sugar-or-juice,Donnez-moi du sucre ou du jus,,,,2,fr-agent-v1
-pharmacy-symptoms.antihistamine,antihistaminique,,,,2,fr-agent-v1
-police-consulate.no-thank-you-i-am-not-interested,"Non merci, ça ne m'intéresse pas",,,,2,fr-agent-v1
-medical-conditions.inject-it-into-my-outer-thigh,Injectez-le dans la face externe de la cuisse,,,,2,fr-agent-v1
-pharmacy-symptoms.anti-diarrhea-medicine,antidiarrhéique (lopéramide),Imodium,,,2,fr-agent-v1
-police-consulate.someone-attacked-me,On m'a agressé,,,,2,fr-agent-v1
-medical-conditions.my-blood-type-is,Mon groupe sanguin est {},,,,2,fr-agent-v1
-pharmacy-symptoms.is-this-safe-to-take-with,Puis-je le prendre avec {} ?,,,,2,fr-agent-v1
-police-consulate.i-did-not-agree-to-this-price,Je n'ai pas accepté ce prix,,,,2,fr-agent-v1
-medical-conditions.do-not-give-me,Ne me donnez pas de {},,,,2,fr-agent-v1
-pharmacy-symptoms.i-feel-dizzy,J'ai des vertiges,,,,2,fr-agent-v1
-police-consulate.please-write-the-report-number,Écrivez le numéro de la plainte,,,,2,fr-agent-v1
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Je suis allergique à l'aspirine et à l'ibuprofène,,,,2,fr-agent-v1
-pharmacy-symptoms.ibuprofen,ibuprofène,Advil / Nurofen,,,2,fr-agent-v1
-police-consulate.it-happened-here,C'est arrivé ici,,,,2,fr-agent-v1
-medical-conditions.my-injector-is-in-my-bag,Mon injecteur est dans mon sac,,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-a-sore-throat,J'ai mal à la gorge,,,,2,fr-agent-v1
-police-consulate.may-i-have-a-copy-of-the-report,Puis-je avoir une copie de la plainte ?,,,,2,fr-agent-v1
-medical-conditions.i-am-allergic-to-sulfa-drugs,Je suis allergique aux sulfamides,,,,2,fr-agent-v1
-pharmacy-symptoms.can-i-get-this-medicine-here,Puis-je obtenir ce médicament ici ?,,,,2,fr-agent-v1
-police-consulate.i-will-not-sign-anything-i-cannot-read,Je ne signe rien que je ne peux pas lire,,,,2,fr-agent-v1
-pharmacy-symptoms.bandage,pansement,bande,,,2,fr-agent-v1
-police-consulate.am-i-free-to-go,Suis-je libre de partir ?,,,,2,fr-agent-v1
-pharmacy-symptoms.the-pain-is-severe,La douleur est très forte,,,,2,fr-agent-v1
-police-consulate.i-do-not-want-to-go-with-you,Je ne veux pas vous suivre,,,,2,fr-agent-v1
-pharmacy-symptoms.antiseptic,antiseptique,Bétadine,,,2,fr-agent-v1
-pharmacy-symptoms.i-feel-nauseous,J'ai la nausée,,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-a-rash,J'ai une éruption cutanée,des plaques rouges,,,2,fr-agent-v1
-pharmacy-symptoms.before-or-after-food,Avant ou après les repas ?,,,,2,fr-agent-v1
-pharmacy-symptoms.i-think-it-is-infected,Je pense que c'est infecté,,,,2,fr-agent-v1
-pharmacy-symptoms.motion-sickness-tablets,comprimés contre le mal des transports,Nautamine,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-a-cut,J'ai une coupure,,,,2,fr-agent-v1
-pharmacy-symptoms.antacid,antiacide,Gaviscon,,,2,fr-agent-v1
-pharmacy-symptoms.i-have-a-burn,J'ai une brûlure,,,,2,fr-agent-v1
-pharmacy-symptoms.it-started-days-ago,Ça a commencé il y a {} jours,,,,2,fr-agent-v1
-pharmacy-symptoms.cough-medicine,sirop contre la toux,,,,2,fr-agent-v1
-pharmacy-symptoms.is-this-safe-during-pregnancy,Est-ce sans danger pendant la grossesse ?,,,,2,fr-agent-v1
-emergency-medical.help,Au secours !,,,,2,fr-agent-v1
-emergency-medical.please-call-an-ambulance,"Appelez une ambulance, s'il vous plaît",Appelez le SAMU,,,2,fr-agent-v1
-emergency-medical.i-need-a-doctor,J'ai besoin d'un médecin,,,,2,fr-agent-v1
-emergency-medical.i-am-sick,Je suis malade,,,,2,fr-agent-v1
-emergency-medical.i-am-injured,Je suis blessé,,,,2,fr-agent-v1
-emergency-medical.it-hurts-here,J'ai mal ici,,,,2,fr-agent-v1
-emergency-medical.where-is-a-pharmacy,Où est une pharmacie ?,,,,2,fr-agent-v1
-emergency-medical.please-take-me-to-a-hospital,"Emmenez-moi à l'hôpital, s'il vous plaît",,,,2,fr-agent-v1
-emergency-medical.i-feel-unwell,Je ne me sens pas bien,,,,2,fr-agent-v1
-emergency-medical.this-is-an-emergency,C'est une urgence,,,,2,fr-agent-v1
-emergency-medical.i-am-having-a-severe-allergic-reaction,Je fais un choc anaphylactique,réaction allergique grave,,,2,fr-agent-v1
-emergency-medical.i-cannot-breathe,Je ne peux plus respirer,,,,2,fr-agent-v1
-emergency-medical.i-am-bleeding-badly,Je saigne beaucoup,,,,2,fr-agent-v1
-emergency-medical.i-have-chest-pain,J'ai une douleur à la poitrine,douleur thoracique,,,2,fr-agent-v1
-emergency-medical.this-person-is-unconscious,Cette personne est inconsciente,,,,2,fr-agent-v1
-emergency-medical.where-is-the-nearest-hospital,Où est l'hôpital le plus proche ?,,,,2,fr-agent-v1
-emergency-medical.what-is-the-emergency-number,Quel est le numéro d'urgence ?,,,,2,fr-agent-v1
+medical-conditions.i-am-diabetic,Je suis diabétique,,ʒə syi djabetˈik,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.which-pharmacy-is-open-now,Quelle pharmacie est de garde ?,,kɛl faʁmasi ɛ də ɡˈaʁd,,2,fr-agent-v1;ipa=espeak
+police-consulate.where-is-the-police-station,Où est le commissariat ?,la gendarmerie,u ɛ lə kɔmisaʁjˈa,,2,fr-agent-v1;ipa=espeak
+body-parts.head,la tête,,la tˈɛt,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-need-insulin,J'ai besoin d'insuline,,ʒe bəzwɛ̃ dɛ̃sylˈin,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-need-medicine-for,J'ai besoin d'un médicament pour {},,ʒe bəzwɛ̃ dœ̃ medikamɑ̃ pˈuʁ {},,2,fr-agent-v1;ipa=espeak
+police-consulate.i-want-to-report-a-theft,Je veux porter plainte pour vol,,ʒə vø pɔʁte plɛ̃t puʁ vˈɔl,,2,fr-agent-v1;ipa=espeak
+body-parts.stomach,le ventre,,lə vˈɑ̃tʁ,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-have-asthma,Je suis asthmatique,,ʒə syiz asmatˈik,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-fever,J'ai de la fièvre,,ʒe də la fjˈɛvʁ,,2,fr-agent-v1;ipa=espeak
+police-consulate.my-bag-was-stolen,On m'a volé mon sac,,ɔ̃ ma vole mɔ̃ sˈak,,2,fr-agent-v1;ipa=espeak
+body-parts.back,le dos,,lə dˈɒs,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-have-a-heart-condition,J'ai une maladie cardiaque,,ʒe yn maladi kaʁdjˈak,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-diarrhea,J'ai la diarrhée,,ʒe la djaʁˈe,,2,fr-agent-v1;ipa=espeak
+police-consulate.my-passport-was-stolen,On m'a volé mon passeport,,ɔ̃ ma vole mɔ̃ paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
+body-parts.throat,la gorge,,la ɡˈɔʁʒ,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-penicillin,Je suis allergique à la pénicilline,,ʒə syiz alɛʁʒik a la penisilˈin,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Où est la pharmacie de garde de nuit ?,,u ɛ la faʁmasi də ɡaʁd də nyˈi,,2,fr-agent-v1;ipa=espeak
+police-consulate.someone-is-following-me,Quelqu'un me suit,,kɛlkœ̃ mə syˈi,,2,fr-agent-v1;ipa=espeak
+body-parts.tooth,la dent,,la dˈɑ̃,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,Je suis épileptique,,ʒə syiz epilɛptˈik,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.painkiller,antidouleur,antalgique,ɑ̃tidulˈœʁ,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-need-a-written-police-report,J'ai besoin d'un récépissé de dépôt de plainte,,ʒe bəzwɛ̃ dœ̃ ʁesepise də depɔ̃ də plˈɛ̃t,,2,fr-agent-v1;ipa=espeak
+body-parts.chest,la poitrine,,la pwatʁˈin,,2,fr-agent-v1;ipa=espeak
+medical-conditions.my-blood-sugar-is-low,J'ai une hypoglycémie,Mon taux de sucre est bas,ʒe yn ipɔɡlisemˈi,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.do-i-need-a-prescription,Faut-il une ordonnance ?,,fotil yn ɔʁdɔnˈɑ̃s,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-want-to-contact-my-embassy,Je veux contacter mon ambassade,,ʒə vø kɔ̃takte mɔ̃n ɑ̃basˈad,,2,fr-agent-v1;ipa=espeak
+body-parts.eye,l'œil,,lˈœj,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-need-my-inhaler,J'ai besoin de mon inhalateur,ma Ventoline,ʒe bəzwɛ̃ də mɔ̃n inalatˈœʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-headache,J'ai mal à la tête,,ʒe mal a la tˈɛt,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-need-it-for-my-insurance,J'en ai besoin pour mon assurance,,ʒɑ̃n e bəzwɛ̃ puʁ mɔ̃n asyʁˈɑ̃s,,2,fr-agent-v1;ipa=espeak
+body-parts.ear,l'oreille,,loʁˈɛj,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-am-pregnant,Je suis enceinte,,ʒə syiz ɑ̃sˈɛ̃t,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,paracétamol (Doliprane),acétaminophène,paʁasetamɔl dolipʁˈan,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-need-an-interpreter,J'ai besoin d'un interprète,,ʒe bəzwɛ̃ dœ̃n ɛ̃tɛʁpʁˈɛt,,2,fr-agent-v1;ipa=espeak
+body-parts.leg,la jambe,,la ʒˈɑ̃b,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,J'ai un auto-injecteur d'adrénaline,stylo d'adrénaline,ʒe œ̃n otoɛ̃ʒɛktœʁ dadʁenalˈin,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.how-much-should-i-take,Quelle dose dois-je prendre ?,,kɛl dɔz dwaʒ pʁˈɑ̃dʁ,,2,fr-agent-v1;ipa=espeak
+police-consulate.please-leave-me-alone,Laissez-moi tranquille,,lɛsemwa tʁɑ̃kˈil,,2,fr-agent-v1;ipa=espeak
+body-parts.arm,le bras,,lə bʁˈa,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-take-medicine-for,Je prends un médicament pour {},,ʒə pʁɑ̃z œ̃ medikamɑ̃ pˈuʁ {},,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-am-vomiting,Je vomis,,ʒə vomˈi,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-was-robbed,J'ai été volé,,ʒe ete volˈe,,2,fr-agent-v1;ipa=espeak
+body-parts.foot,le pied,,lə pjˈe,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-take-blood-thinners,Je prends des anticoagulants,,ʒə pʁɑ̃ dez ɑ̃tikɔaɡylˈɑ̃,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.rehydration-salts,soluté de réhydratation orale,SRO,solyte də ʁeidʁatasjɔ̃ oʁˈal,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-want-a-lawyer,Je veux un avocat,,ʒə vøz œ̃n avokˈa,,2,fr-agent-v1;ipa=espeak
+body-parts.hand,la main,,la mˈɛ̃,,2,fr-agent-v1;ipa=espeak
+medical-conditions.medicine-allergy,Allergie médicamenteuse : {},,alɛʁʒi medikamɑ̃tˈøz {},,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.how-many-times-a-day,Combien de fois par jour ?,,kɔ̃bjɛ̃ də fwa paʁ ʒˈuʁ,,2,fr-agent-v1;ipa=espeak
+police-consulate.please-notify-my-consulate,"Prévenez mon consulat, s'il vous plaît",,"pʁevne mɔ̃ kɔ̃sylˈa, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+body-parts.knee,le genou,,lə ʒənˈu,,2,fr-agent-v1;ipa=espeak
+medical-conditions.this-card-lists-my-conditions,Cette carte indique mes problèmes de santé,,sɛt kaʁt ɛ̃dik me pʁɔblɛm də sɑ̃tˈe,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-stomach-ache,J'ai mal au ventre,,ʒe mal o vˈɑ̃tʁ,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-am-calling-the-police,J'appelle la police,,ʒapɛl la polˈis,,2,fr-agent-v1;ipa=espeak
+body-parts.ankle,la cheville,,la ʃəvˈil,,2,fr-agent-v1;ipa=espeak
+medical-conditions.this-is-my-medicine,C'est mon médicament,,sɛ mɔ̃ medikamˈɑ̃,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cough,Je tousse,,ʒə tˈus,,2,fr-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,Suis-je en garde à vue ?,Suis-je en état d'arrestation ?,syiʒ ɑ̃ ɡaʁd a vˈy,,2,fr-agent-v1;ipa=espeak
+body-parts.skin,la peau,,la pˈo,,2,fr-agent-v1;ipa=espeak
+medical-conditions.please-give-me-sugar-or-juice,Donnez-moi du sucre ou du jus,,dɔnemwa dy sykʁ u dy ʒˈy,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.antihistamine,antihistaminique,,ɑ̃tjistaminˈik,,2,fr-agent-v1;ipa=espeak
+police-consulate.no-thank-you-i-am-not-interested,"Non merci, ça ne m'intéresse pas",,"nɔ̃ mɛʁsˈi, sa nə mɛ̃teʁɛs pˈa",,2,fr-agent-v1;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,Injectez-le dans la face externe de la cuisse,,ɛ̃ʒɛktelə dɑ̃ la fas ɛkstɛʁn də la kyˈis,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.anti-diarrhea-medicine,antidiarrhéique (lopéramide),Imodium,ɑ̃tidjaʁeik lopeʁamˈid,,2,fr-agent-v1;ipa=espeak
+police-consulate.someone-attacked-me,On m'a agressé,,ɔ̃ ma aɡʁɛsˈe,,2,fr-agent-v1;ipa=espeak
+medical-conditions.my-blood-type-is,Mon groupe sanguin est {},,mɔ̃ ɡʁup sɑ̃ɡɛ̃ ˈɛ {},,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-to-take-with,Puis-je le prendre avec {} ?,,pyiʒ lə pʁɑ̃dʁ avˈɛk {},,2,fr-agent-v1;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,Je n'ai pas accepté ce prix,,ʒə ne paz aksɛpte sə pʁˈi,,2,fr-agent-v1;ipa=espeak
+medical-conditions.do-not-give-me,Ne me donnez pas de {},,nə mə dɔne pa də {},,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-feel-dizzy,J'ai des vertiges,,ʒe de vɛʁtˈiʒ,,2,fr-agent-v1;ipa=espeak
+police-consulate.please-write-the-report-number,Écrivez le numéro de la plainte,,ekʁive lə nymeʁo də la plˈɛ̃t,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Je suis allergique à l'aspirine et à l'ibuprofène,,ʒə syiz alɛʁʒik a laspiʁin e a libypʁofˈɛn,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.ibuprofen,ibuprofène,Advil / Nurofen,ibypʁofˈɛn,,2,fr-agent-v1;ipa=espeak
+police-consulate.it-happened-here,C'est arrivé ici,,sɛt aʁive isˈi,,2,fr-agent-v1;ipa=espeak
+medical-conditions.my-injector-is-in-my-bag,Mon injecteur est dans mon sac,,mɔ̃n ɛ̃ʒɛktœʁ ɛ dɑ̃ mɔ̃ sˈak,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-sore-throat,J'ai mal à la gorge,,ʒe mal a la ɡˈɔʁʒ,,2,fr-agent-v1;ipa=espeak
+police-consulate.may-i-have-a-copy-of-the-report,Puis-je avoir une copie de la plainte ?,,pyiʒ avwaʁ yn kopi də la plˈɛ̃t,,2,fr-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-sulfa-drugs,Je suis allergique aux sulfamides,,ʒə syiz alɛʁʒik o sylfamˈid,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.can-i-get-this-medicine-here,Puis-je obtenir ce médicament ici ?,,pyiʒ ɔbtniʁ sə medikamɑ̃ isˈi,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,Je ne signe rien que je ne peux pas lire,,ʒə nə siɲ ʁiɛ̃ kə ʒə nə pø pa lˈiʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.bandage,pansement,bande,pɑ̃smˈɑ̃,,2,fr-agent-v1;ipa=espeak
+police-consulate.am-i-free-to-go,Suis-je libre de partir ?,,syiʒ libʁ də paʁtˈiʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.the-pain-is-severe,La douleur est très forte,,la dulœʁ ɛ tʁɛ fˈɔʁt,,2,fr-agent-v1;ipa=espeak
+police-consulate.i-do-not-want-to-go-with-you,Je ne veux pas vous suivre,,ʒə nə vø pa vu syˈivʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.antiseptic,antiseptique,Bétadine,ɑ̃tisɛptˈik,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-feel-nauseous,J'ai la nausée,,ʒe la nozˈe,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-rash,J'ai une éruption cutanée,des plaques rouges,ʒe yn eʁypsjɔ̃ kytanˈe,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.before-or-after-food,Avant ou après les repas ?,,avɑ̃ u apʁɛ le ʁəpˈa,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-it-is-infected,Je pense que c'est infecté,,ʒə pɑ̃s kə sɛt ɛ̃fɛktˈe,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.motion-sickness-tablets,comprimés contre le mal des transports,Nautamine,kɔ̃pʁime kɔ̃tʁ lə mal de tʁɑ̃spˈɔʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cut,J'ai une coupure,,ʒe yn kupˈyʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.antacid,antiacide,Gaviscon,ɑ̃tjasˈid,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-burn,J'ai une brûlure,,ʒe yn bʁylˈyʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Ça a commencé il y a {} jours,,sa a kɔmɑ̃se il i ˈa {} ʒˈuʁ,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.cough-medicine,sirop contre la toux,,siʁo kɔ̃tʁ la tˈu,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-during-pregnancy,Est-ce sans danger pendant la grossesse ?,,ɛs sɑ̃ dɑ̃ʒe pɑ̃dɑ̃ la ɡʁosˈɛs,,2,fr-agent-v1;ipa=espeak
+emergency-medical.help,Au secours !,,o səkˈuʁ,,2,fr-agent-v1;ipa=espeak
+emergency-medical.please-call-an-ambulance,"Appelez une ambulance, s'il vous plaît",Appelez le SAMU,"aplez yn ɑ̃bylˈɑ̃s, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-need-a-doctor,J'ai besoin d'un médecin,,ʒe bəzwɛ̃ dœ̃ medəsˈɛ̃,,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Je suis malade,,ʒə syi malˈad,,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-am-injured,Je suis blessé,,ʒə syi blɛsˈe,,2,fr-agent-v1;ipa=espeak
+emergency-medical.it-hurts-here,J'ai mal ici,,ʒe mal isˈi,,2,fr-agent-v1;ipa=espeak
+emergency-medical.where-is-a-pharmacy,Où est une pharmacie ?,,u ɛt yn faʁmasˈi,,2,fr-agent-v1;ipa=espeak
+emergency-medical.please-take-me-to-a-hospital,"Emmenez-moi à l'hôpital, s'il vous plaît",,"ɑ̃mnemwa a lopitˈal, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-feel-unwell,Je ne me sens pas bien,,ʒə nə mə sɑ̃ pa bjˈɛ̃,,2,fr-agent-v1;ipa=espeak
+emergency-medical.this-is-an-emergency,C'est une urgence,,sɛt yn yʁʒˈɑ̃s,,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,Je fais un choc anaphylactique,réaction allergique grave,ʒə fɛz œ̃ ʃɔk anafilaktˈik,,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-cannot-breathe,Je ne peux plus respirer,,ʒə nə pø ply ʁɛspiʁˈe,,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-am-bleeding-badly,Je saigne beaucoup,,ʒə sɛɲ bokˈu,,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-have-chest-pain,J'ai une douleur à la poitrine,douleur thoracique,ʒe yn dulœʁ a la pwatʁˈin,,2,fr-agent-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,Cette personne est inconsciente,,sɛt pɛʁsɔn ɛt ɛ̃kɔ̃sjˈɑ̃t,,2,fr-agent-v1;ipa=espeak
+emergency-medical.where-is-the-nearest-hospital,Où est l'hôpital le plus proche ?,,u ɛ lopital lə ply pʁˈɔʃ,,2,fr-agent-v1;ipa=espeak
+emergency-medical.what-is-the-emergency-number,Quel est le numéro d'urgence ?,,kɛl ɛ lə nymeʁo dyʁʒˈɑ̃s,,2,fr-agent-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,Y a-t-il un médecin qui parle {source} ?,,,,2,language-slots-v1
-emergency-medical.i-think-a-bone-is-broken,Je crois avoir une fracture,,,,2,fr-agent-v1
-emergency-medical.please-call-my-emergency-contact,Appelez mon contact d'urgence,,,,2,fr-agent-v1
-emergency-medical.i-have-travel-insurance,J'ai une assurance voyage,,,,2,fr-agent-v1
-lost-rescue.i-lost-my-passport,J'ai perdu mon passeport,,,,2,fr-agent-v1
-lost-rescue.i-lost-my-phone,J'ai perdu mon téléphone,,,,2,fr-agent-v1
-lost-rescue.please-call-the-police,"Appelez la police, s'il vous plaît",,,,2,fr-agent-v1
-lost-rescue.we-are-here,Nous sommes ici,,,,2,fr-agent-v1
-lost-rescue.please-look-at-my-location-pin,Regardez mon point sur la carte,,,,2,fr-agent-v1
-lost-rescue.i-cannot-walk,Je ne peux pas marcher,,,,2,fr-agent-v1
-lost-rescue.i-sprained-my-ankle,Je me suis foulé la cheville,,,,2,fr-agent-v1
-lost-rescue.please-contact-rescue,Contactez les secours,,,,2,fr-agent-v1
-lost-rescue.my-companion-is-missing,Mon compagnon a disparu,Ma compagne a disparu,,,2,fr-agent-v1
-lost-rescue.please-look-at-my-current-location,Regardez ma position actuelle,,,,2,fr-agent-v1
-lost-rescue.my-child-is-missing,Mon enfant a disparu,,,,2,fr-agent-v1
-lost-rescue.i-do-not-know-where-i-am,Je ne sais pas où je suis,,,,2,fr-agent-v1
-lost-rescue.my-friend-is-hurt,Mon ami est blessé,,,,2,fr-agent-v1
-lost-rescue.i-lost-my-wallet,J'ai perdu mon portefeuille,,,,2,fr-agent-v1
-lost-rescue.i-lost-my-bag,J'ai perdu mon sac,,,,2,fr-agent-v1
-lost-rescue.where-is-lost-and-found,Où sont les objets trouvés ?,,,,2,fr-agent-v1
-lost-rescue.i-cannot-find-my-hotel,Je ne trouve pas mon hôtel,,,,2,fr-agent-v1
-lost-rescue.i-left-it-on-the-train,Je l'ai laissé dans le train,,,,2,fr-agent-v1
-lost-rescue.i-cannot-get-down,Je ne peux pas descendre,,,,2,fr-agent-v1
+emergency-medical.i-think-a-bone-is-broken,Je crois avoir une fracture,,ʒə kʁwaz avwaʁ yn fʁaktˈyʁ,,2,fr-agent-v1;ipa=espeak
+emergency-medical.please-call-my-emergency-contact,Appelez mon contact d'urgence,,aple mɔ̃ kɔ̃takt dyʁʒˈɑ̃s,,2,fr-agent-v1;ipa=espeak
+emergency-medical.i-have-travel-insurance,J'ai une assurance voyage,,ʒe yn asyʁɑ̃s vwajˈaʒ,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-passport,J'ai perdu mon passeport,,ʒe pɛʁdy mɔ̃ paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-phone,J'ai perdu mon téléphone,,ʒe pɛʁdy mɔ̃ telefˈɔn,,2,fr-agent-v1;ipa=espeak
+lost-rescue.please-call-the-police,"Appelez la police, s'il vous plaît",,"aple la polˈis, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+lost-rescue.we-are-here,Nous sommes ici,,nu sɔmz isˈi,,2,fr-agent-v1;ipa=espeak
+lost-rescue.please-look-at-my-location-pin,Regardez mon point sur la carte,,ʁəɡaʁde mɔ̃ pwɛ̃ syʁ la kˈaʁt,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-cannot-walk,Je ne peux pas marcher,,ʒə nə pø pa maʁʃˈe,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-sprained-my-ankle,Je me suis foulé la cheville,,ʒə mə syi fule la ʃəvˈil,,2,fr-agent-v1;ipa=espeak
+lost-rescue.please-contact-rescue,Contactez les secours,,kɔ̃takte le səkˈuʁ,,2,fr-agent-v1;ipa=espeak
+lost-rescue.my-companion-is-missing,Mon compagnon a disparu,Ma compagne a disparu,mɔ̃ kɔ̃panjɔ̃ a dispaʁˈy,,2,fr-agent-v1;ipa=espeak
+lost-rescue.please-look-at-my-current-location,Regardez ma position actuelle,,ʁəɡaʁde ma pozisjɔ̃ aktyˈɛl,,2,fr-agent-v1;ipa=espeak
+lost-rescue.my-child-is-missing,Mon enfant a disparu,,mɔ̃n ɑ̃fɑ̃ a dispaʁˈy,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-do-not-know-where-i-am,Je ne sais pas où je suis,,ʒə nə sɛ paz u ʒə syˈi,,2,fr-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Mon ami est blessé,,mɔ̃n ami ɛ blɛsˈe,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-wallet,J'ai perdu mon portefeuille,,ʒe pɛʁdy mɔ̃ pɔʁtəfˈœj,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-bag,J'ai perdu mon sac,,ʒe pɛʁdy mɔ̃ sˈak,,2,fr-agent-v1;ipa=espeak
+lost-rescue.where-is-lost-and-found,Où sont les objets trouvés ?,,u sɔ̃ lez ɔbʒɛ tʁuvˈe,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-cannot-find-my-hotel,Je ne trouve pas mon hôtel,,ʒə nə tʁuv pa mɔ̃n otˈɛl,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-left-it-on-the-train,Je l'ai laissé dans le train,,ʒə le lɛse dɑ̃ lə tʁˈɛ̃,,2,fr-agent-v1;ipa=espeak
+lost-rescue.i-cannot-get-down,Je ne peux pas descendre,,ʒə nə pø pa dɛsˈɑ̃dʁ,,2,fr-agent-v1;ipa=espeak

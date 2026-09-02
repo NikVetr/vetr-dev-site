@@ -1,13 +1,13 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Ich heiße {}.,,,,2,de-agent-v1
-introductions.nice-to-meet-you,Freut mich.,Sehr erfreut.,,,2,de-agent-v1
-introductions.what-is-your-name,Wie heißen Sie?,,,,2,de-agent-v1
-introductions.we-are-traveling-together,Wir reisen zusammen.,,,,2,de-agent-v1
-introductions.this-is-my-friend,Das ist ein Freund von mir.,Das ist eine Freundin von mir.,,,2,de-agent-v1
-introductions.i-am-from,Ich komme aus {}.,,,,2,de-agent-v1
-introductions.where-are-you-from,Woher kommen Sie?,,,,2,de-agent-v1
-introductions.how-are-you,Wie geht es Ihnen?,,,,2,de-agent-v1
-introductions.i-am-a-tourist,Ich bin Tourist.,Ich bin Touristin.,,,2,de-agent-v1
-introductions.this-is-my-husband-wife,Das ist mein Mann / meine Frau.,,,,2,de-agent-v1
-introductions.this-is-my-daughter-son,Das ist meine Tochter / mein Sohn.,,,,2,de-agent-v1
-introductions.i-am-traveling-alone,Ich reise allein.,,,,2,de-agent-v1
+introductions.my-name-is,Ich heiße {}.,,ɪç hˈaɪsə {},,2,de-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Freut mich.,Sehr erfreut.,frˈɔøt mɪç,,2,de-agent-v1;ipa=espeak
+introductions.what-is-your-name,Wie heißen Sie?,,viː hˈaɪsən ziː,,2,de-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Wir reisen zusammen.,,viːɾ rˈaɪzən tsuːzˈamən,,2,de-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Das ist ein Freund von mir.,Das ist eine Freundin von mir.,das ɪst aɪn frˈɔønt fɔn mˈiːɾ,,2,de-agent-v1;ipa=espeak
+introductions.i-am-from,Ich komme aus {}.,,ɪç kˈɔmə ˈaʊs {},,2,de-agent-v1;ipa=espeak
+introductions.where-are-you-from,Woher kommen Sie?,,voːhˈeːɾ kˈɔmən ziː,,2,de-agent-v1;ipa=espeak
+introductions.how-are-you,Wie geht es Ihnen?,,viː ɡˈeːt ɛs ˈiːnən,,2,de-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Ich bin Tourist.,Ich bin Touristin.,ɪç bɪn tuːrˈɪst,,2,de-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Das ist mein Mann / meine Frau.,,das ɪst maɪn mˈan / mˌaɪnə frˈaʊ,,2,de-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Das ist meine Tochter / mein Sohn.,,das ɪst mˌaɪnə tˈɔxtɜ / maɪn zˈoːn,,2,de-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Ich reise allein.,,ɪç rˈaɪzə alˈaɪn,,2,de-agent-v1;ipa=espeak

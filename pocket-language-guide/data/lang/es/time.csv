@@ -1,44 +1,44 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,¿Qué hora es?,,,,2,es-agent-v1
-time-scheduling.how-many-minutes,¿Cuántos minutos?,,,,2,es-agent-v1
-time-scheduling.what-time-should-we-meet,¿A qué hora nos vemos?,,,,2,es-agent-v1
-time-scheduling.can-we-change-the-time,¿Podemos cambiar la hora?,,,,2,es-agent-v1
-time-scheduling.when-is-convenient,¿Cuándo le conviene?,,,,2,es-agent-v1
-time-scheduling.what-is-today-s-date,¿Qué fecha es hoy?,,,,2,es-agent-v1
-time-scheduling.what-day-is-it-today,¿Qué día es hoy?,,,,2,es-agent-v1
-time-scheduling.what-time-does-it-open,¿A qué hora abre?,,,,2,es-agent-v1
-time-scheduling.what-time-does-it-close,¿A qué hora cierra?,,,,2,es-agent-v1
-time-scheduling.how-long-does-it-take,¿Cuánto tiempo toma?,¿Cuánto tarda?,,,2,es-agent-v1
-time-words.today,hoy,,,,2,es-agent-v1
-time-words.tomorrow,mañana,,,,2,es-agent-v1
-time-words.yesterday,ayer,,,,2,es-agent-v1
-time-words.this-week,esta semana,,,,2,es-agent-v1
-time-words.next-week,la semana que viene,la próxima semana,,,2,es-agent-v1
-time-words.morning,la mañana,,,,2,es-agent-v1
-time-words.afternoon,la tarde,,,,2,es-agent-v1
-time-words.evening,la noche,la tarde-noche,,,2,es-agent-v1
-time-words.spring,la primavera,,,,2,es-agent-v1
-time-words.summer,el verano,,,,2,es-agent-v1
-time-words.fall,el otoño,,,,2,es-agent-v1
-time-words.winter,el invierno,,,,2,es-agent-v1
-time-words.night,la noche,,,,2,es-agent-v1
-days-of-week.monday,lunes,,,,2,es-agent-v1
-days-of-week.tuesday,martes,,,,2,es-agent-v1
-days-of-week.wednesday,miércoles,,,,2,es-agent-v1
-days-of-week.thursday,jueves,,,,2,es-agent-v1
-days-of-week.friday,viernes,,,,2,es-agent-v1
-days-of-week.saturday,sábado,,,,2,es-agent-v1
-days-of-week.sunday,domingo,,,,2,es-agent-v1
-months.january,enero,,,,2,es-agent-v1
-months.february,febrero,,,,2,es-agent-v1
-months.march,marzo,,,,2,es-agent-v1
-months.april,abril,,,,2,es-agent-v1
-months.may,mayo,,,,2,es-agent-v1
-months.june,junio,,,,2,es-agent-v1
-months.july,julio,,,,2,es-agent-v1
-months.august,agosto,,,,2,es-agent-v1
-months.september,septiembre,setiembre,,,2,es-agent-v1
-months.october,octubre,,,,2,es-agent-v1
-months.november,noviembre,,,,2,es-agent-v1
-months.december,diciembre,,,,2,es-agent-v1
+time-scheduling.what-time-is-it,¿Qué hora es?,,kˈe ˈoɾa ˈes,,2,es-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,¿Cuántos minutos?,,kwˈantos minˈutos,,2,es-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,¿A qué hora nos vemos?,,a kˈe ˈoɾa nos bˈemos,,2,es-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,¿Podemos cambiar la hora?,,podˈemos kambjˈaɾ la ˈoɾa,,2,es-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,¿Cuándo le conviene?,,kwˈando le kombjˈene,,2,es-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,¿Qué fecha es hoy?,,kˈe fˈetʃa ˈes ˈoɪ,,2,es-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,¿Qué día es hoy?,,kˈe dˈia ˈes ˈoɪ,,2,es-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,¿A qué hora abre?,,a kˈe ˈoɾa ˈabɾe,,2,es-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,¿A qué hora cierra?,,a kˈe ˈoɾa sjˈera,,2,es-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,¿Cuánto tiempo toma?,¿Cuánto tarda?,kwˈanto tjˈempo tˈoma,,2,es-agent-v1;ipa=espeak
+time-words.today,hoy,,ˈoɪ,,2,es-agent-v1;ipa=espeak
+time-words.tomorrow,mañana,,maɲˈana,,2,es-agent-v1;ipa=espeak
+time-words.yesterday,ayer,,aʝˈeɾ,,2,es-agent-v1;ipa=espeak
+time-words.this-week,esta semana,,ˈesta semˈana,,2,es-agent-v1;ipa=espeak
+time-words.next-week,la semana que viene,la próxima semana,la semˈana ke bjˈene,,2,es-agent-v1;ipa=espeak
+time-words.morning,la mañana,,la maɲˈana,,2,es-agent-v1;ipa=espeak
+time-words.afternoon,la tarde,,la tˈaɾde,,2,es-agent-v1;ipa=espeak
+time-words.evening,la noche,la tarde-noche,la nˈotʃe,,2,es-agent-v1;ipa=espeak
+time-words.spring,la primavera,,la pɾˌimabˈeɾa,,2,es-agent-v1;ipa=espeak
+time-words.summer,el verano,,el beɾˈano,,2,es-agent-v1;ipa=espeak
+time-words.fall,el otoño,,el otˈoɲo,,2,es-agent-v1;ipa=espeak
+time-words.winter,el invierno,,el imbjˈeɾno,,2,es-agent-v1;ipa=espeak
+time-words.night,la noche,,la nˈotʃe,,2,es-agent-v1;ipa=espeak
+days-of-week.monday,lunes,,lˈunes,,2,es-agent-v1;ipa=espeak
+days-of-week.tuesday,martes,,mˈaɾtes,,2,es-agent-v1;ipa=espeak
+days-of-week.wednesday,miércoles,,mjˈeɾkoles,,2,es-agent-v1;ipa=espeak
+days-of-week.thursday,jueves,,xwˈebes,,2,es-agent-v1;ipa=espeak
+days-of-week.friday,viernes,,bjˈeɾnes,,2,es-agent-v1;ipa=espeak
+days-of-week.saturday,sábado,,sˈabado,,2,es-agent-v1;ipa=espeak
+days-of-week.sunday,domingo,,domˈiŋɡo,,2,es-agent-v1;ipa=espeak
+months.january,enero,,enˈeɾo,,2,es-agent-v1;ipa=espeak
+months.february,febrero,,febɾˈeɾo,,2,es-agent-v1;ipa=espeak
+months.march,marzo,,mˈaɾso,,2,es-agent-v1;ipa=espeak
+months.april,abril,,abɾˈil,,2,es-agent-v1;ipa=espeak
+months.may,mayo,,mˈaʝo,,2,es-agent-v1;ipa=espeak
+months.june,junio,,xˈunjo,,2,es-agent-v1;ipa=espeak
+months.july,julio,,xˈuljo,,2,es-agent-v1;ipa=espeak
+months.august,agosto,,aɡˈosto,,2,es-agent-v1;ipa=espeak
+months.september,septiembre,setiembre,sepːtjˈembɾe,,2,es-agent-v1;ipa=espeak
+months.october,octubre,,oktˈubɾe,,2,es-agent-v1;ipa=espeak
+months.november,noviembre,,nobjˈembɾe,,2,es-agent-v1;ipa=espeak
+months.december,diciembre,,disjˈembɾe,,2,es-agent-v1;ipa=espeak
 time-words.clock-offset,"El reloj suajili empieza al amanecer, seis horas por detrás del de pulsera: sume seis al número suajili para saber la hora del reloj. saa moja = 7:00, saa sita = mediodía, saa kumi = 16:00. Diga la cifra, o pregunte saa ngapi za kizungu para la hora occidental.",,,,2,es-notes-v1

@@ -1,65 +1,65 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-numbers-money.l-ng,0,,,,2,latex-reference-v2
-numbers-money.y,1,,,,2,latex-reference-v2
-numbers-money.r,2,,,,2,latex-reference-v2
-numbers-money.li-ng,2 + classifier,,,,2,latex-reference-v2
-numbers-money.s-n,3,,,,2,latex-reference-v2
-numbers-money.s,4,,,,2,latex-reference-v2
-numbers-money.w,5,,,,2,latex-reference-v2
-numbers-money.li,6,,,,2,latex-reference-v2
-numbers-money.q,7,,,,2,latex-reference-v2
-numbers-money.b,8,,,,2,latex-reference-v2
-numbers-money.ji,9,,,,2,latex-reference-v2
-numbers-money.sh,10,,,,2,latex-reference-v2
-numbers-money.y-b-i,100,,,,2,latex-reference-v2
-numbers-money.y-qi-n,"1,000",,,,2,latex-reference-v2
-numbers-money.y-w-n,"10,000",,,,2,latex-reference-v2
-numbers-money.b-n,1/2,,,,2,latex-reference-v2
-numbers-money.yu-n,yuan,,,,2,latex-reference-v2
-numbers-money.ku-i,yuan (spoken),,,,2,latex-reference-v2
+numbers-money.l-ng,0,,zˈiəɹoʊ,,2,latex-reference-v2;ipa=espeak
+numbers-money.y,1,,wˈʌn,,2,latex-reference-v2;ipa=espeak
+numbers-money.r,2,,tˈuː,,2,latex-reference-v2;ipa=espeak
+numbers-money.li-ng,2 + classifier,,tˈuː klˈæsɪfˌaɪɚ,,2,latex-reference-v2;ipa=espeak
+numbers-money.s-n,3,,θɹˈiː,,2,latex-reference-v2;ipa=espeak
+numbers-money.s,4,,fˈoːɹ,,2,latex-reference-v2;ipa=espeak
+numbers-money.w,5,,fˈaɪv,,2,latex-reference-v2;ipa=espeak
+numbers-money.li,6,,sˈɪks,,2,latex-reference-v2;ipa=espeak
+numbers-money.q,7,,sˈɛvən,,2,latex-reference-v2;ipa=espeak
+numbers-money.b,8,,ˈeɪt,,2,latex-reference-v2;ipa=espeak
+numbers-money.ji,9,,nˈaɪn,,2,latex-reference-v2;ipa=espeak
+numbers-money.sh,10,,tˈɛn,,2,latex-reference-v2;ipa=espeak
+numbers-money.y-b-i,100,,wˈʌnhʌndɹɪd,,2,latex-reference-v2;ipa=espeak
+numbers-money.y-qi-n,"1,000",,"wˈʌn, zˈiəɹoʊziəɹoʊ zˈiəɹoʊ",,2,latex-reference-v2;ipa=espeak
+numbers-money.y-w-n,"10,000",,"tˈɛn, zˈiəɹoʊziəɹoʊ zˈiəɹoʊ",,2,latex-reference-v2;ipa=espeak
+numbers-money.b-n,1/2,,wˈʌn / tˈuː,,2,latex-reference-v2;ipa=espeak
+numbers-money.yu-n,yuan,,jˈuːən,,2,latex-reference-v2;ipa=espeak
+numbers-money.ku-i,yuan (spoken),,jˈuːən spˈoʊkən,,2,latex-reference-v2;ipa=espeak
 numbers-money.number-and-classifier-notes,"Build numbers: 11 = shi yi; 20 = er shi; 21 = er shi yi. Phone numbers: 1 is often yao. Classifiers: ge (general), wei (people), zhang (tickets / flat), bei (cups), ping (bottles). jiao / mao = 0.1 yuan; fen = 0.01 yuan.",,,,2,latex-reference-v2
-numbers-money.2-items,2 items,,,,2,japanese-reviewed-v6
-numbers-money.yen,yen,,,,2,japanese-reviewed-v6
-numbers-money.yen-symbol,yen (symbol),,,,2,japanese-reviewed-v6
+numbers-money.2-items,2 items,,tˈuː ˈaɪɾəmz,,2,japanese-reviewed-v6;ipa=espeak
+numbers-money.yen,yen,,jˈɛn,,2,japanese-reviewed-v6;ipa=espeak
+numbers-money.yen-symbol,yen (symbol),,jˈɛn sˈɪmbəl,,2,japanese-reviewed-v6;ipa=espeak
 numbers-money.number-and-classifier-notes-2,"Build numbers: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Counters: -tsu (things), -mai (flat), -hon (long), -nin (people), -hai (cups). Phone: 0 = zero or maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,japanese-reviewed-v6
-atm-cash.where-is-an-atm,Where is an ATM?,,,,2,expansion-v1
-atm-cash.does-this-atm-take-foreign-cards,Does this ATM take foreign cards?,,,,2,expansion-v1
-atm-cash.the-atm-kept-my-card,The ATM kept my card,,,,2,expansion-v1
-atm-cash.is-there-a-fee,Is there a fee?,,,,2,expansion-v1
-atm-cash.the-card-was-declined,The card was declined,,,,2,expansion-v1
-atm-cash.what-is-the-exchange-rate,What is the exchange rate?,,,,2,expansion-v1
-atm-cash.no-money-came-out,No money came out,,,,2,expansion-v1
-atm-cash.where-can-i-change-money,Where can I change money?,,,,2,expansion-v1
-atm-cash.the-machine-is-out-of-service,The machine is out of service,,,,2,expansion-v1
-atm-cash.please-give-me-smaller-notes,Please give me smaller notes,,,,2,expansion-v1
-atm-cash.do-you-have-change,Do you have change?,,,,2,expansion-v1
-atm-cash.may-i-pay-in,May I pay in {}?,,,,2,expansion-v1
-atm-cash.please-charge-in-local-currency,Please charge in local currency,,,,2,expansion-v1
-atm-cash.where-can-i-get-coins,Where can I get coins?,,,,2,expansion-v1
-atm-cash.is-there-a-minimum-for-cards,Is there a minimum for cards?,,,,2,expansion-v1
-atm-cash.atm,ATM / cash machine,,,,2,expansion-v1
-atm-cash.banknote,note / bill,,,,2,expansion-v1
-atm-cash.coin,coin,,,,2,expansion-v1
-atm-cash.cash-only,cash only,,,,2,expansion-v1
-atm-cash.fee,fee / commission,,,,2,expansion-v1
-atm-cash.change,change,,,,2,expansion-v1
-atm-cash.exchange-rate,exchange rate,,,,2,expansion-v1
-atm-cash.bank,bank,,,,2,expansion-v1
-atm-cash.money-exchange,money exchange,,,,2,expansion-v1
-atm-cash.pin,PIN,,,,2,expansion-v1
-numbers-money.won,won,,,,2,coordinator-gaps-v1
-numbers-money.won-symbol,won (symbol),,,,2,coordinator-gaps-v1
-numbers-money.euro,euro,,,,2,coordinator-gaps-v1
-numbers-money.euro-symbol,euro (symbol),,,,2,coordinator-gaps-v1
-numbers-money.lira,lira,,,,2,coordinator-gaps-v2
-numbers-money.lira-symbol,lira (symbol),,,,2,coordinator-gaps-v2
-numbers-money.dong,dong,,,,2,coordinator-gaps-v2
-numbers-money.dong-symbol,dong (symbol),,,,2,coordinator-gaps-v2
-numbers-money.ruble,ruble,,,,2,coordinator-gaps-v2
-numbers-money.ruble-symbol,ruble (symbol),,,,2,coordinator-gaps-v2
-numbers-money.rupiah,rupiah,,,,2,coordinator-gaps-v2
-numbers-money.rupiah-symbol,rupiah (symbol),,,,2,coordinator-gaps-v2
-numbers-money.shilling,shilling,,,,2,coordinator-gaps-v2
-numbers-money.shilling-symbol,shilling (symbol),,,,2,coordinator-gaps-v2
-numbers-money.baht,baht,,,,2,coordinator-gaps-v2
-numbers-money.baht-symbol,baht (symbol),,,,2,coordinator-gaps-v2
+atm-cash.where-is-an-atm,Where is an ATM?,,wˌɛɹ ɪz ɐn ˌeɪtˌiːˈɛm,,2,expansion-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,Does this ATM take foreign cards?,,dˈʌz ðɪs ˌeɪtˌiːˈɛm tˈeɪk fˈɔːɹən kˈɑːɹdz,,2,expansion-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,The ATM kept my card,,ðɪ ˌeɪtˌiːˈɛm kˈɛpt maɪ kˈɑːɹd,,2,expansion-v1;ipa=espeak
+atm-cash.is-there-a-fee,Is there a fee?,,ɪz ðɛɹ ɐ fˈiː,,2,expansion-v1;ipa=espeak
+atm-cash.the-card-was-declined,The card was declined,,ðə kˈɑːɹd wʌz dɪklˈaɪnd,,2,expansion-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,What is the exchange rate?,,wˌʌt ɪz ðɪ ɛkstʃˈeɪndʒ ɹˈeɪt,,2,expansion-v1;ipa=espeak
+atm-cash.no-money-came-out,No money came out,,nˈoʊ mˈʌni kˈeɪm ˈaʊt,,2,expansion-v1;ipa=espeak
+atm-cash.where-can-i-change-money,Where can I change money?,,wˌɛɹ kæn aɪ tʃˈeɪndʒ mˈʌni,,2,expansion-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,The machine is out of service,,ðə məʃˈiːn ɪz ˌaʊɾəv sˈɜːvɪs,,2,expansion-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,Please give me smaller notes,,plˈiːz ɡˈɪv mˌiː smˈɔːlɚ nˈoʊts,,2,expansion-v1;ipa=espeak
+atm-cash.do-you-have-change,Do you have change?,,dˈuː juː hæv tʃˈeɪndʒ,,2,expansion-v1;ipa=espeak
+atm-cash.may-i-pay-in,May I pay in {}?,,mˈeɪ aɪ pˈeɪ ˈɪn {},,2,expansion-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,Please charge in local currency,,plˈiːz tʃˈɑːɹdʒ ɪn lˈoʊkəl kˈɜːɹənsi,,2,expansion-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,Where can I get coins?,,wˌɛɹ kæn aɪ ɡɛt kˈɔɪnz,,2,expansion-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,Is there a minimum for cards?,,ɪz ðɛɹ ɐ mˈɪnɪməm fɔːɹ kˈɑːɹdz,,2,expansion-v1;ipa=espeak
+atm-cash.atm,ATM / cash machine,,ˌeɪtˌiːˈɛm / kˈæʃ məʃˈiːn,,2,expansion-v1;ipa=espeak
+atm-cash.banknote,note / bill,,nˈoʊt / bˈɪl,,2,expansion-v1;ipa=espeak
+atm-cash.coin,coin,,kˈɔɪn,,2,expansion-v1;ipa=espeak
+atm-cash.cash-only,cash only,,kˈæʃ ˈoʊnli,,2,expansion-v1;ipa=espeak
+atm-cash.fee,fee / commission,,fˈiː / kəmˈɪʃən,,2,expansion-v1;ipa=espeak
+atm-cash.change,change,,tʃˈeɪndʒ,,2,expansion-v1;ipa=espeak
+atm-cash.exchange-rate,exchange rate,,ɛkstʃˈeɪndʒ ɹˈeɪt,,2,expansion-v1;ipa=espeak
+atm-cash.bank,bank,,bˈæŋk,,2,expansion-v1;ipa=espeak
+atm-cash.money-exchange,money exchange,,mˈʌni ɛkstʃˈeɪndʒ,,2,expansion-v1;ipa=espeak
+atm-cash.pin,PIN,,pˈɪn,,2,expansion-v1;ipa=espeak
+numbers-money.won,won,,wˈʌn,,2,coordinator-gaps-v1;ipa=espeak
+numbers-money.won-symbol,won (symbol),,wˈʌn sˈɪmbəl,,2,coordinator-gaps-v1;ipa=espeak
+numbers-money.euro,euro,,jˈʊɹɹoʊ,,2,coordinator-gaps-v1;ipa=espeak
+numbers-money.euro-symbol,euro (symbol),,jˈʊɹɹoʊ sˈɪmbəl,,2,coordinator-gaps-v1;ipa=espeak
+numbers-money.lira,lira,,lˈiəɹə,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.lira-symbol,lira (symbol),,lˈiəɹə sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.dong,dong,,dˈɑːŋ,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.dong-symbol,dong (symbol),,dˈɑːŋ sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.ruble,ruble,,ɹˈuːbəl,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.ruble-symbol,ruble (symbol),,ɹˈuːbəl sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.rupiah,rupiah,,ɹˈuːpaɪə,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.rupiah-symbol,rupiah (symbol),,ɹˈuːpaɪə sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.shilling,shilling,,ʃˈɪlɪŋ,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.shilling-symbol,shilling (symbol),,ʃˈɪlɪŋ sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.baht,baht,,bˈɑːt,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.baht-symbol,baht (symbol),,bˈɑːt sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak

@@ -1,140 +1,140 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-emergency-medical.help,Tolong!,,,,2,id-agent-v1
-emergency-medical.please-call-an-ambulance,Tolong panggil ambulans,,,,2,id-agent-v1
-emergency-medical.i-need-a-doctor,Saya perlu dokter,,,,2,id-agent-v1
-emergency-medical.i-am-sick,Saya sakit,,,,2,id-agent-v1
-emergency-medical.i-am-injured,Saya terluka,,,,2,id-agent-v1
-emergency-medical.it-hurts-here,Sakitnya di sini,,,,2,id-agent-v1
-emergency-medical.where-is-a-pharmacy,Apotek di mana?,,,also spelt apotik,2,id-agent-v1
-emergency-medical.please-take-me-to-a-hospital,Tolong antar saya ke rumah sakit,,,,2,id-agent-v1
-emergency-medical.i-feel-unwell,Saya tidak enak badan,,,,2,id-agent-v1
-emergency-medical.this-is-an-emergency,Ini darurat!,,,,2,id-agent-v1
-emergency-medical.i-am-having-a-severe-allergic-reaction,Saya mengalami anafilaksis,Reaksi alergi berat,,,2,id-agent-v1
-emergency-medical.i-cannot-breathe,Saya tidak bisa bernapas,Saya sesak napas,,,2,id-agent-v1
-emergency-medical.i-am-bleeding-badly,Perdarahan saya hebat,Saya berdarah banyak,,,2,id-agent-v1
-emergency-medical.i-have-chest-pain,Dada saya nyeri,Nyeri dada,,,2,id-agent-v1
-emergency-medical.this-person-is-unconscious,Orang ini tidak sadar,Orang ini pingsan,,,2,id-agent-v1
-emergency-medical.where-is-the-nearest-hospital,Rumah sakit terdekat di mana?,,,,2,id-agent-v1
-emergency-medical.what-is-the-emergency-number,Nomor daruratnya berapa?,,,,2,id-agent-v1
+emergency-medical.help,Tolong!,,tˈoloŋ,,2,id-agent-v1;ipa=espeak
+emergency-medical.please-call-an-ambulance,Tolong panggil ambulans,,tˈoloŋ pˈaŋɡil ambˈulans,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-need-a-doctor,Saya perlu dokter,,sˈaja pˈɛrlu dˈoktər,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Saya sakit,,sˈaja sˈakit,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-am-injured,Saya terluka,,sˈaja tərlˈuka,,2,id-agent-v1;ipa=espeak
+emergency-medical.it-hurts-here,Sakitnya di sini,,sakˈitɲa di sˈini,,2,id-agent-v1;ipa=espeak
+emergency-medical.where-is-a-pharmacy,Apotek di mana?,,apˈotək di mˈana,also spelt apotik,2,id-agent-v1;ipa=espeak
+emergency-medical.please-take-me-to-a-hospital,Tolong antar saya ke rumah sakit,,tˈoloŋ ˈantar sˈaja kə rˈumah sˈakit,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-feel-unwell,Saya tidak enak badan,,sˈaja tˈidak ˈɛnak bˈadan,,2,id-agent-v1;ipa=espeak
+emergency-medical.this-is-an-emergency,Ini darurat!,,ˈini darˈurat,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,Saya mengalami anafilaksis,Reaksi alergi berat,sˈaja məŋalˈami ˌanafilˈaksis,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-cannot-breathe,Saya tidak bisa bernapas,Saya sesak napas,sˈaja tˈidak bˈisa bərnˈapas,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-am-bleeding-badly,Perdarahan saya hebat,Saya berdarah banyak,pərdarˈahan sˈaja hˈɛbat,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-have-chest-pain,Dada saya nyeri,Nyeri dada,dˈada sˈaja ɲˈɛri,,2,id-agent-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,Orang ini tidak sadar,Orang ini pingsan,ˈɔraŋ ˈini tˈidak sˈadar,,2,id-agent-v1;ipa=espeak
+emergency-medical.where-is-the-nearest-hospital,Rumah sakit terdekat di mana?,,rˈumah sˈakit tərdˈɛkat di mˈana,,2,id-agent-v1;ipa=espeak
+emergency-medical.what-is-the-emergency-number,Nomor daruratnya berapa?,,nˈomɔr dˌarurˈatɲa bərˈapa,,2,id-agent-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,Ada dokter yang bisa bahasa {source}?,,,,2,language-slots-v1
-emergency-medical.i-think-a-bone-is-broken,Sepertinya saya patah tulang,,,,2,id-agent-v1
-emergency-medical.please-call-my-emergency-contact,Tolong hubungi kontak darurat saya,,,,2,id-agent-v1
-emergency-medical.i-have-travel-insurance,Saya punya asuransi perjalanan,,,,2,id-agent-v1
-medical-conditions.i-am-diabetic,Saya punya diabetes,Saya kencing manis,,older lay word for diabetes,2,id-agent-v1
-medical-conditions.i-need-insulin,Saya perlu insulin,,,,2,id-agent-v1
-medical-conditions.i-have-asthma,Saya punya asma,,,,2,id-agent-v1
-medical-conditions.i-have-a-heart-condition,Saya punya penyakit jantung,,,,2,id-agent-v1
-medical-conditions.i-am-allergic-to-penicillin,Saya alergi penisilin,,,,2,id-agent-v1
-medical-conditions.i-have-epilepsy,Saya punya epilepsi,Saya bisa kejang,,,2,id-agent-v1
-medical-conditions.my-blood-sugar-is-low,Gula darah saya rendah,,,,2,id-agent-v1
-medical-conditions.i-need-my-inhaler,Saya perlu inhaler saya,Saya perlu obat asma saya,,,2,id-agent-v1
-medical-conditions.i-am-pregnant,Saya hamil,,,,2,id-agent-v1
-medical-conditions.i-carry-an-adrenaline-injector,Saya bawa suntikan adrenalin,Saya bawa suntikan epinefrin,,EpiPen is unknown here; adrenalin is the word,2,id-agent-v1
-medical-conditions.i-take-medicine-for,Saya minum obat untuk {},,,,2,id-agent-v1
-medical-conditions.i-take-blood-thinners,Saya minum obat pengencer darah,Saya minum antikoagulan,,,2,id-agent-v1
-medical-conditions.medicine-allergy,Alergi obat: {},,,,2,id-agent-v1
-medical-conditions.this-card-lists-my-conditions,Ini daftar kondisi medis saya,,,,2,id-agent-v1
-medical-conditions.this-is-my-medicine,Ini obat saya,,,,2,id-agent-v1
-medical-conditions.please-give-me-sugar-or-juice,Tolong beri saya gula atau jus,,,,2,id-agent-v1
-medical-conditions.inject-it-into-my-outer-thigh,Suntikkan ke otot paha luar saya,,,,2,id-agent-v1
-medical-conditions.my-blood-type-is,Golongan darah saya {},,,,2,id-agent-v1
-medical-conditions.do-not-give-me,Jangan beri saya {},,,,2,id-agent-v1
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Saya alergi aspirin dan ibuprofen,,,,2,id-agent-v1
-medical-conditions.my-injector-is-in-my-bag,Suntikan saya ada di tas,,,,2,id-agent-v1
-medical-conditions.i-am-allergic-to-sulfa-drugs,Saya alergi obat sulfa,Saya alergi sulfonamida,,,2,id-agent-v1
-pharmacy-symptoms.which-pharmacy-is-open-now,Apotek mana yang buka sekarang?,,,,2,id-agent-v1
-pharmacy-symptoms.i-need-medicine-for,Saya perlu obat untuk {},,,,2,id-agent-v1
-pharmacy-symptoms.i-have-a-fever,Saya demam,,,,2,id-agent-v1
-pharmacy-symptoms.i-think-i-have-malaria,Sepertinya saya kena malaria,,,,2,malaria-v1
-pharmacy-symptoms.i-need-a-malaria-test,Saya perlu tes malaria,pemeriksaan darah malaria,,,2,malaria-v1
-pharmacy-symptoms.i-have-diarrhea,Saya diare,Mencret,,,2,id-agent-v1
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Apotek 24 jam di mana?,,,K-24 and Kimia Farma open 24h,2,id-agent-v1
-pharmacy-symptoms.painkiller,Obat pereda nyeri,,,,2,id-agent-v1
-pharmacy-symptoms.do-i-need-a-prescription,Perlu resep dokter?,,,,2,id-agent-v1
-pharmacy-symptoms.i-have-a-headache,Kepala saya sakit,Sakit kepala,,,2,id-agent-v1
-pharmacy-symptoms.paracetamol-acetaminophen,Parasetamol,Panadol · Bodrex,,,2,id-agent-v1
-pharmacy-symptoms.how-much-should-i-take,Dosisnya berapa?,,,,2,id-agent-v1
-pharmacy-symptoms.i-am-vomiting,Saya muntah,,,,2,id-agent-v1
-pharmacy-symptoms.rehydration-salts,Oralit,,,"the generic name here, not a brand",2,id-agent-v1
-pharmacy-symptoms.how-many-times-a-day,Berapa kali sehari?,,,,2,id-agent-v1
-pharmacy-symptoms.i-have-a-stomach-ache,Perut saya sakit,Sakit perut,,,2,id-agent-v1
-pharmacy-symptoms.i-have-a-cough,Saya batuk,,,,2,id-agent-v1
-pharmacy-symptoms.antihistamine,Antihistamin,CTM · cetirizine,,CTM never needs a prescription,2,id-agent-v1
-pharmacy-symptoms.anti-diarrhea-medicine,Obat diare,Entrostop · Norit,,,2,id-agent-v1
-pharmacy-symptoms.is-this-safe-to-take-with,Ini aman diminum bersama {}?,,,,2,id-agent-v1
-pharmacy-symptoms.i-feel-dizzy,Saya pusing,Kepala saya berputar,,"pusing = lightheaded, not headache",2,id-agent-v1
-pharmacy-symptoms.ibuprofen,Ibuprofen,Proris,,,2,id-agent-v1
-pharmacy-symptoms.i-have-a-sore-throat,Tenggorokan saya sakit,Radang tenggorokan,,,2,id-agent-v1
-pharmacy-symptoms.can-i-get-this-medicine-here,Obat ini ada di sini?,,,,2,id-agent-v1
-pharmacy-symptoms.bandage,Plester,Kain kasa,,"not pembalut, which is a sanitary pad",2,id-agent-v1
-pharmacy-symptoms.the-pain-is-severe,Sakitnya parah,,,,2,id-agent-v1
-pharmacy-symptoms.antiseptic,Antiseptik,Betadine,,,2,id-agent-v1
-pharmacy-symptoms.i-feel-nauseous,Saya mual,,,,2,id-agent-v1
-pharmacy-symptoms.i-have-a-rash,Kulit saya ruam,Biduran · gatal-gatal,,,2,id-agent-v1
-pharmacy-symptoms.before-or-after-food,Sebelum atau sesudah makan?,,,,2,id-agent-v1
-pharmacy-symptoms.i-think-it-is-infected,Sepertinya infeksi,,,,2,id-agent-v1
-pharmacy-symptoms.motion-sickness-tablets,Obat mabuk perjalanan,Antimo,,,2,id-agent-v1
-pharmacy-symptoms.i-have-a-cut,Saya ada luka sayat,,,,2,id-agent-v1
-pharmacy-symptoms.antacid,Antasida,Promag · obat maag,,maag = stomach acid trouble,2,id-agent-v1
-pharmacy-symptoms.i-have-a-burn,Saya luka bakar,,,,2,id-agent-v1
-pharmacy-symptoms.it-started-days-ago,Mulai {} hari lalu,,,,2,id-agent-v1
-pharmacy-symptoms.cough-medicine,Obat batuk,,,,2,id-agent-v1
-pharmacy-symptoms.is-this-safe-during-pregnancy,Ini aman untuk ibu hamil?,,,,2,id-agent-v1
-body-parts.head,Kepala,,,,2,id-agent-v1
-body-parts.stomach,Perut,,,,2,id-agent-v1
-body-parts.back,Punggung,,,,2,id-agent-v1
-body-parts.throat,Tenggorokan,,,,2,id-agent-v1
-body-parts.tooth,Gigi,,,,2,id-agent-v1
-body-parts.chest,Dada,,,,2,id-agent-v1
-body-parts.eye,Mata,,,,2,id-agent-v1
-body-parts.ear,Telinga,,,,2,id-agent-v1
-body-parts.leg,Kaki,Tungkai,,kaki covers leg and foot,2,id-agent-v1
-body-parts.arm,Lengan,,,tangan can mean the whole arm,2,id-agent-v1
-body-parts.foot,Kaki,Telapak kaki,,,2,id-agent-v1
-body-parts.hand,Tangan,,,,2,id-agent-v1
-body-parts.knee,Lutut,,,,2,id-agent-v1
-body-parts.ankle,Pergelangan kaki,,,,2,id-agent-v1
-body-parts.skin,Kulit,,,,2,id-agent-v1
-lost-rescue.i-lost-my-passport,Paspor saya hilang,,,,2,id-agent-v1
-lost-rescue.i-lost-my-phone,HP saya hilang,Ponsel saya hilang,,HP = mobile phone,2,id-agent-v1
-lost-rescue.please-call-the-police,Tolong panggil polisi,,,,2,id-agent-v1
-lost-rescue.we-are-here,Kami di sini,,,,2,id-agent-v1
-lost-rescue.please-look-at-my-location-pin,Tolong lihat titik lokasi saya,,,,2,id-agent-v1
-lost-rescue.i-cannot-walk,Saya tidak bisa jalan,,,,2,id-agent-v1
-lost-rescue.i-sprained-my-ankle,Pergelangan kaki saya keseleo,Pergelangan kaki saya terkilir,,,2,id-agent-v1
-lost-rescue.please-contact-rescue,Tolong hubungi Basarnas,Tolong hubungi tim SAR,,Basarnas = national rescue agency,2,id-agent-v1
-lost-rescue.my-companion-is-missing,Teman saya hilang,,,,2,id-agent-v1
-lost-rescue.please-look-at-my-current-location,Tolong lihat lokasi saya sekarang,,,,2,id-agent-v1
-lost-rescue.my-child-is-missing,Anak saya hilang,,,,2,id-agent-v1
-lost-rescue.i-do-not-know-where-i-am,Saya tidak tahu saya di mana,,,,2,id-agent-v1
-lost-rescue.my-friend-is-hurt,Teman saya terluka,,,,2,id-agent-v1
-lost-rescue.i-lost-my-wallet,Dompet saya hilang,,,,2,id-agent-v1
-lost-rescue.i-lost-my-bag,Tas saya hilang,,,,2,id-agent-v1
-lost-rescue.where-is-lost-and-found,Bagian barang hilang di mana?,Lost and found di mana?,,,2,id-agent-v1
-lost-rescue.i-cannot-find-my-hotel,Saya tidak menemukan hotel saya,,,,2,id-agent-v1
-lost-rescue.i-left-it-on-the-train,Barangnya tertinggal di kereta,,,,2,id-agent-v1
-lost-rescue.i-cannot-get-down,Saya tidak bisa turun,,,,2,id-agent-v1
-police-consulate.where-is-the-police-station,Kantor polisi di mana?,Polsek di mana?,,,2,id-agent-v1
-police-consulate.i-want-to-report-a-theft,Saya mau melaporkan pencurian,,,,2,id-agent-v1
-police-consulate.my-bag-was-stolen,Tas saya dicuri,,,,2,id-agent-v1
-police-consulate.my-passport-was-stolen,Paspor saya dicuri,,,,2,id-agent-v1
-police-consulate.someone-is-following-me,Ada orang mengikuti saya,,,,2,id-agent-v1
-police-consulate.i-need-a-written-police-report,Saya perlu surat laporan polisi,Saya perlu surat keterangan kehilangan,,,2,id-agent-v1
-police-consulate.i-want-to-contact-my-embassy,Saya mau menghubungi kedutaan saya,,,,2,id-agent-v1
-police-consulate.i-need-it-for-my-insurance,Saya perlu ini untuk asuransi,,,,2,id-agent-v1
-police-consulate.i-need-an-interpreter,Saya perlu penerjemah,Saya perlu juru bahasa,,,2,id-agent-v1
-police-consulate.please-leave-me-alone,Tolong jangan ganggu saya,,,,2,id-agent-v1
-police-consulate.i-was-robbed,Saya dirampok,,,,2,id-agent-v1
-police-consulate.i-want-a-lawyer,Saya mau pengacara,,,,2,id-agent-v1
-police-consulate.please-notify-my-consulate,Tolong beri tahu konsulat saya,,,,2,id-agent-v1
-police-consulate.i-am-calling-the-police,Saya akan telepon polisi,,,,2,id-agent-v1
-police-consulate.am-i-under-arrest,Saya ditangkap?,Saya ditahan?,,,2,id-agent-v1
-police-consulate.no-thank-you-i-am-not-interested,"Terima kasih, saya tidak tertarik",,,,2,id-agent-v1
-police-consulate.someone-attacked-me,Saya diserang orang,,,,2,id-agent-v1
-police-consulate.i-did-not-agree-to-this-price,Saya tidak setuju harga ini,,,,2,id-agent-v1
-police-consulate.please-write-the-report-number,Tolong tulis nomor laporannya,,,,2,id-agent-v1
-police-consulate.it-happened-here,Kejadiannya di sini,,,,2,id-agent-v1
-police-consulate.may-i-have-a-copy-of-the-report,Boleh minta salinan laporannya?,,,,2,id-agent-v1
-police-consulate.i-will-not-sign-anything-i-cannot-read,Saya tidak tanda tangan yang tidak bisa saya baca,,,,2,id-agent-v1
-police-consulate.am-i-free-to-go,Saya boleh pergi?,,,,2,id-agent-v1
-police-consulate.i-do-not-want-to-go-with-you,Saya tidak mau ikut,Saya tidak mau ikut dengan Anda,,,2,id-agent-v1
+emergency-medical.i-think-a-bone-is-broken,Sepertinya saya patah tulang,,səpərtˈiɲa sˈaja pˈatah tˈulaŋ,,2,id-agent-v1;ipa=espeak
+emergency-medical.please-call-my-emergency-contact,Tolong hubungi kontak darurat saya,,tˈoloŋ hubˈuŋi kˈontak darˈurat sˈaja,,2,id-agent-v1;ipa=espeak
+emergency-medical.i-have-travel-insurance,Saya punya asuransi perjalanan,,sˈaja pˈuɲa ˌasurˈansi pərdʒalˈanan,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-am-diabetic,Saya punya diabetes,Saya kencing manis,sˈaja pˈuɲa dˌiabˈɛtəs,older lay word for diabetes,2,id-agent-v1;ipa=espeak
+medical-conditions.i-need-insulin,Saya perlu insulin,,sˈaja pˈɛrlu insˈulin,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-have-asthma,Saya punya asma,,sˈaja pˈuɲa ˈasma,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-have-a-heart-condition,Saya punya penyakit jantung,,sˈaja pˈuɲa pəɲˈakit dʒˈantuŋ,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-penicillin,Saya alergi penisilin,,sˈaja alˈɛrɡi pənisˈilin,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,Saya punya epilepsi,Saya bisa kejang,sˈaja pˈuɲa ˌɛpilˈɛpsi,,2,id-agent-v1;ipa=espeak
+medical-conditions.my-blood-sugar-is-low,Gula darah saya rendah,,ɡˈula dˈarah sˈaja rˈɛndah,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-need-my-inhaler,Saya perlu inhaler saya,Saya perlu obat asma saya,sˈaja pˈɛrlu inhˈalər sˈaja,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-am-pregnant,Saya hamil,,sˈaja hˈamil,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,Saya bawa suntikan adrenalin,Saya bawa suntikan epinefrin,sˈaja bˈawa suntˈikan ˌadrənˈalin,EpiPen is unknown here; adrenalin is the word,2,id-agent-v1;ipa=espeak
+medical-conditions.i-take-medicine-for,Saya minum obat untuk {},,sˈaja mˈinum ˈobat ˌuntuk {},,2,id-agent-v1;ipa=espeak
+medical-conditions.i-take-blood-thinners,Saya minum obat pengencer darah,Saya minum antikoagulan,sˈaja mˈinum ˈobat pəŋˈɛntʃər dˈarah,,2,id-agent-v1;ipa=espeak
+medical-conditions.medicine-allergy,Alergi obat: {},,alˈɛrɡi ˈobat {},,2,id-agent-v1;ipa=espeak
+medical-conditions.this-card-lists-my-conditions,Ini daftar kondisi medis saya,,ˈini dˈaftar kondˈisi mˈɛdis sˈaja,,2,id-agent-v1;ipa=espeak
+medical-conditions.this-is-my-medicine,Ini obat saya,,ˈini ˈobat sˈaja,,2,id-agent-v1;ipa=espeak
+medical-conditions.please-give-me-sugar-or-juice,Tolong beri saya gula atau jus,,tˈoloŋ bˈɛri sˈaja ɡˈula ˌataʊ dʒˈus,,2,id-agent-v1;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,Suntikkan ke otot paha luar saya,,suntˈikkan kə ˈotot pˈaha lˈuar sˈaja,,2,id-agent-v1;ipa=espeak
+medical-conditions.my-blood-type-is,Golongan darah saya {},,ɡolˈoŋan dˈarah sˈaja {},,2,id-agent-v1;ipa=espeak
+medical-conditions.do-not-give-me,Jangan beri saya {},,dʒˈaŋan bˈɛri sˈaja {},,2,id-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Saya alergi aspirin dan ibuprofen,,sˈaja alˈɛrɡi aspˈirin dan ˌibuprˈofən,,2,id-agent-v1;ipa=espeak
+medical-conditions.my-injector-is-in-my-bag,Suntikan saya ada di tas,,suntˈikan sˈaja ˈada di tˈas,,2,id-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-sulfa-drugs,Saya alergi obat sulfa,Saya alergi sulfonamida,sˈaja alˈɛrɡi ˈobat sˈulfa,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.which-pharmacy-is-open-now,Apotek mana yang buka sekarang?,,apˈotək mˈana jaŋ bˈuka səkˈaraŋ,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-need-medicine-for,Saya perlu obat untuk {},,sˈaja pˈɛrlu ˈobat ˌuntuk {},,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-fever,Saya demam,,sˈaja dˈɛmam,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,Sepertinya saya kena malaria,,səpərtˈiɲa sˈaja kənˈa mˌalarˈia,,2,malaria-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Saya perlu tes malaria,pemeriksaan darah malaria,sˈaja pˈɛrlu tˈɛs mˌalarˈia,,2,malaria-v1;ipa=espeak
+pharmacy-symptoms.i-have-diarrhea,Saya diare,Mencret,sˈaja diˈarə,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Apotek 24 jam di mana?,,apˈotək dˈuapˌuluhəmpat dʒˈam di mˈana,K-24 and Kimia Farma open 24h,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.painkiller,Obat pereda nyeri,,ˈobat pərˈɛda ɲˈɛri,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.do-i-need-a-prescription,Perlu resep dokter?,,pˈɛrlu rˈɛsəp dˈoktər,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-headache,Kepala saya sakit,Sakit kepala,kəpˈala sˈaja sˈakit,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,Parasetamol,Panadol · Bodrex,pˌarasətˈamol,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.how-much-should-i-take,Dosisnya berapa?,,dosˈisɲa bərˈapa,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-am-vomiting,Saya muntah,,sˈaja mˈuntah,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.rehydration-salts,Oralit,,ɔrˈalit,"the generic name here, not a brand",2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.how-many-times-a-day,Berapa kali sehari?,,bərˈapa kˈali səhˈari,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-stomach-ache,Perut saya sakit,Sakit perut,pˈɛrut sˈaja sˈakit,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cough,Saya batuk,,sˈaja bˈatuk,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.antihistamine,Antihistamin,CTM · cetirizine,ˌantihistˈamin,CTM never needs a prescription,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.anti-diarrhea-medicine,Obat diare,Entrostop · Norit,ˈobat diˈarə,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-to-take-with,Ini aman diminum bersama {}?,,ˈini ˈaman dimˈinum bərsˈama {},,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-feel-dizzy,Saya pusing,Kepala saya berputar,sˈaja pˈusiŋ,"pusing = lightheaded, not headache",2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.ibuprofen,Ibuprofen,Proris,ˌibuprˈofən,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-sore-throat,Tenggorokan saya sakit,Radang tenggorokan,tˌɛŋɡɔrˈokan sˈaja sˈakit,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.can-i-get-this-medicine-here,Obat ini ada di sini?,,ˈobat ˈini ˈada di sˈini,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.bandage,Plester,Kain kasa,plˈɛstər,"not pembalut, which is a sanitary pad",2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.the-pain-is-severe,Sakitnya parah,,sakˈitɲa pˈarah,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.antiseptic,Antiseptik,Betadine,ˌantisˈɛptik,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-feel-nauseous,Saya mual,,sˈaja mˈual,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-rash,Kulit saya ruam,Biduran · gatal-gatal,kˈulit sˈaja rˈuam,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.before-or-after-food,Sebelum atau sesudah makan?,,səbˈɛlum ˌataʊ səsˈudah mˈakan,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-it-is-infected,Sepertinya infeksi,,səpərtˈiɲa infˈɛksi,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.motion-sickness-tablets,Obat mabuk perjalanan,Antimo,ˈobat mˈabuk pərdʒalˈanan,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cut,Saya ada luka sayat,,sˈaja ˈada lˈuka sˈajat,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.antacid,Antasida,Promag · obat maag,ˌantasˈida,maag = stomach acid trouble,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-burn,Saya luka bakar,,sˈaja lˈuka bˈakar,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Mulai {} hari lalu,,mˈulaɪ {} hˈari lˈalu,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.cough-medicine,Obat batuk,,ˈobat bˈatuk,,2,id-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-during-pregnancy,Ini aman untuk ibu hamil?,,ˈini ˈaman ˌuntuk ˈibu hˈamil,,2,id-agent-v1;ipa=espeak
+body-parts.head,Kepala,,kəpˈala,,2,id-agent-v1;ipa=espeak
+body-parts.stomach,Perut,,pˈɛrut,,2,id-agent-v1;ipa=espeak
+body-parts.back,Punggung,,pˈuŋɡuŋ,,2,id-agent-v1;ipa=espeak
+body-parts.throat,Tenggorokan,,tˌɛŋɡɔrˈokan,,2,id-agent-v1;ipa=espeak
+body-parts.tooth,Gigi,,ɡˈiɡi,,2,id-agent-v1;ipa=espeak
+body-parts.chest,Dada,,dˈada,,2,id-agent-v1;ipa=espeak
+body-parts.eye,Mata,,mˈata,,2,id-agent-v1;ipa=espeak
+body-parts.ear,Telinga,,təlˈiŋa,,2,id-agent-v1;ipa=espeak
+body-parts.leg,Kaki,Tungkai,kˈaki,kaki covers leg and foot,2,id-agent-v1;ipa=espeak
+body-parts.arm,Lengan,,lˈɛŋan,tangan can mean the whole arm,2,id-agent-v1;ipa=espeak
+body-parts.foot,Kaki,Telapak kaki,kˈaki,,2,id-agent-v1;ipa=espeak
+body-parts.hand,Tangan,,tˈaŋan,,2,id-agent-v1;ipa=espeak
+body-parts.knee,Lutut,,lˈutut,,2,id-agent-v1;ipa=espeak
+body-parts.ankle,Pergelangan kaki,,pərɡəlˈaŋan kˈaki,,2,id-agent-v1;ipa=espeak
+body-parts.skin,Kulit,,kˈulit,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-passport,Paspor saya hilang,,pˈaspɔr sˈaja hˈilaŋ,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-phone,HP saya hilang,Ponsel saya hilang,hˌapˈe sˈaja hˈilaŋ,HP = mobile phone,2,id-agent-v1;ipa=espeak
+lost-rescue.please-call-the-police,Tolong panggil polisi,,tˈoloŋ pˈaŋɡil polˈisi,,2,id-agent-v1;ipa=espeak
+lost-rescue.we-are-here,Kami di sini,,kˈami di sˈini,,2,id-agent-v1;ipa=espeak
+lost-rescue.please-look-at-my-location-pin,Tolong lihat titik lokasi saya,,tˈoloŋ lˈihat tˈitik lokˈasi sˈaja,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-cannot-walk,Saya tidak bisa jalan,,sˈaja tˈidak bˈisa dʒˈalan,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-sprained-my-ankle,Pergelangan kaki saya keseleo,Pergelangan kaki saya terkilir,pərɡəlˈaŋan kˈaki sˈaja kəsəlˈɛo,,2,id-agent-v1;ipa=espeak
+lost-rescue.please-contact-rescue,Tolong hubungi Basarnas,Tolong hubungi tim SAR,tˈoloŋ hubˈuŋi basˈarnas,Basarnas = national rescue agency,2,id-agent-v1;ipa=espeak
+lost-rescue.my-companion-is-missing,Teman saya hilang,,tˈɛman sˈaja hˈilaŋ,,2,id-agent-v1;ipa=espeak
+lost-rescue.please-look-at-my-current-location,Tolong lihat lokasi saya sekarang,,tˈoloŋ lˈihat lokˈasi sˈaja səkˈaraŋ,,2,id-agent-v1;ipa=espeak
+lost-rescue.my-child-is-missing,Anak saya hilang,,ˈanak sˈaja hˈilaŋ,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-do-not-know-where-i-am,Saya tidak tahu saya di mana,,sˈaja tˈidak tˈahu sˈaja di mˈana,,2,id-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Teman saya terluka,,tˈɛman sˈaja tərlˈuka,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-wallet,Dompet saya hilang,,dˈompət sˈaja hˈilaŋ,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-bag,Tas saya hilang,,tˈas sˈaja hˈilaŋ,,2,id-agent-v1;ipa=espeak
+lost-rescue.where-is-lost-and-found,Bagian barang hilang di mana?,Lost and found di mana?,baɡˈian bˈaraŋ hˈilaŋ di mˈana,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-cannot-find-my-hotel,Saya tidak menemukan hotel saya,,sˈaja tˈidak mənəmˈukan hˈotəl sˈaja,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-left-it-on-the-train,Barangnya tertinggal di kereta,,barˈaŋɲa tərtˈiŋɡal di kərˈɛta,,2,id-agent-v1;ipa=espeak
+lost-rescue.i-cannot-get-down,Saya tidak bisa turun,,sˈaja tˈidak bˈisa tˈurun,,2,id-agent-v1;ipa=espeak
+police-consulate.where-is-the-police-station,Kantor polisi di mana?,Polsek di mana?,kˈantɔr polˈisi di mˈana,,2,id-agent-v1;ipa=espeak
+police-consulate.i-want-to-report-a-theft,Saya mau melaporkan pencurian,,sˈaja mˈaʊ məlapˈɔrkan pəntʃurˈian,,2,id-agent-v1;ipa=espeak
+police-consulate.my-bag-was-stolen,Tas saya dicuri,,tˈas sˈaja ditʃˈuri,,2,id-agent-v1;ipa=espeak
+police-consulate.my-passport-was-stolen,Paspor saya dicuri,,pˈaspɔr sˈaja ditʃˈuri,,2,id-agent-v1;ipa=espeak
+police-consulate.someone-is-following-me,Ada orang mengikuti saya,,ˈada ˈoraŋ məŋikˈuti sˈaja,,2,id-agent-v1;ipa=espeak
+police-consulate.i-need-a-written-police-report,Saya perlu surat laporan polisi,Saya perlu surat keterangan kehilangan,sˈaja pˈɛrlu sˈurat lapˈɔran polˈisi,,2,id-agent-v1;ipa=espeak
+police-consulate.i-want-to-contact-my-embassy,Saya mau menghubungi kedutaan saya,,sˈaja mˈaʊ məŋhubˈuŋi kədutˈaan sˈaja,,2,id-agent-v1;ipa=espeak
+police-consulate.i-need-it-for-my-insurance,Saya perlu ini untuk asuransi,,sˈaja pˈɛrlu ˈini ˌuntuk ˌasurˈansi,,2,id-agent-v1;ipa=espeak
+police-consulate.i-need-an-interpreter,Saya perlu penerjemah,Saya perlu juru bahasa,sˈaja pˈɛrlu pənərdʒˈɛmah,,2,id-agent-v1;ipa=espeak
+police-consulate.please-leave-me-alone,Tolong jangan ganggu saya,,tˈoloŋ dʒˈaŋan ɡˈaŋɡu sˈaja,,2,id-agent-v1;ipa=espeak
+police-consulate.i-was-robbed,Saya dirampok,,sˈaja dirˈampok,,2,id-agent-v1;ipa=espeak
+police-consulate.i-want-a-lawyer,Saya mau pengacara,,sˈaja mˈaʊ pəŋatʃˈara,,2,id-agent-v1;ipa=espeak
+police-consulate.please-notify-my-consulate,Tolong beri tahu konsulat saya,,tˈoloŋ bˈɛri tˈahu konsˈulat sˈaja,,2,id-agent-v1;ipa=espeak
+police-consulate.i-am-calling-the-police,Saya akan telepon polisi,,sˈaja ˈakan təlˈɛpon polˈisi,,2,id-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,Saya ditangkap?,Saya ditahan?,sˈaja ditˈaŋkap,,2,id-agent-v1;ipa=espeak
+police-consulate.no-thank-you-i-am-not-interested,"Terima kasih, saya tidak tertarik",,"tərˈima kˈasih, sˈaja tˈidak tərtˈarik",,2,id-agent-v1;ipa=espeak
+police-consulate.someone-attacked-me,Saya diserang orang,,sˈaja disˈɛraŋ ˈɔraŋ,,2,id-agent-v1;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,Saya tidak setuju harga ini,,sˈaja tˈidak sətˈudʒu hˈarɡa ˈini,,2,id-agent-v1;ipa=espeak
+police-consulate.please-write-the-report-number,Tolong tulis nomor laporannya,,tˈoloŋ tˈulis nˈomɔr lˌapɔrˈanɲa,,2,id-agent-v1;ipa=espeak
+police-consulate.it-happened-here,Kejadiannya di sini,,kədʒˌadiˈanɲa di sˈini,,2,id-agent-v1;ipa=espeak
+police-consulate.may-i-have-a-copy-of-the-report,Boleh minta salinan laporannya?,,bˈoləh mˈinta salˈinan lˌapɔrˈanɲa,,2,id-agent-v1;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,Saya tidak tanda tangan yang tidak bisa saya baca,,sˈaja tˈidak tˈanda tˈaŋan jaŋ tˈidak bˈisa sˈaja bˈatʃa,,2,id-agent-v1;ipa=espeak
+police-consulate.am-i-free-to-go,Saya boleh pergi?,,sˈaja bˈoləh pˈɛrɡi,,2,id-agent-v1;ipa=espeak
+police-consulate.i-do-not-want-to-go-with-you,Saya tidak mau ikut,Saya tidak mau ikut dengan Anda,sˈaja tˈidak mˈaʊ ˈikut,,2,id-agent-v1;ipa=espeak

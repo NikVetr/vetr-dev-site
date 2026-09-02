@@ -1,44 +1,44 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,现在几点？,,xiànzài jǐ diǎn?,,,2,latex-reference-v2
-time-words.today,今天,,jīntiān,,,2,latex-reference-v2
-days-of-week.monday,星期一,,xīngqī yī,,,2,latex-reference-v2
-months.january,一月,,yīyuè,,,2,latex-reference-v2
-time-scheduling.how-many-minutes,几分钟？,,jǐ fēnzhōng?,,,2,latex-reference-v2
-time-words.tomorrow,明天,,míngtiān,,,2,latex-reference-v2
-days-of-week.tuesday,星期二,,xīngqī èr,,,2,latex-reference-v2
-months.february,二月,,èryuè,,,2,latex-reference-v2
-time-scheduling.what-time-should-we-meet,几点见？,,jǐ diǎn jiàn?,,,2,latex-reference-v2
-time-words.yesterday,昨天,,zuótiān,,,2,latex-reference-v2
-days-of-week.wednesday,星期三,,xīngqī sān,,,2,latex-reference-v2
-months.march,三月,,sānyuè,,,2,latex-reference-v2
-time-scheduling.can-we-change-the-time,可以改时间吗？,,kěyǐ gǎi shíjiān ma?,,,2,latex-reference-v2
-time-words.this-week,这个星期,,zhège xīngqī,,,2,latex-reference-v2
-days-of-week.thursday,星期四,,xīngqī sì,,,2,latex-reference-v2
-months.april,四月,,sìyuè,,,2,latex-reference-v2
-time-scheduling.when-is-convenient,什么时候方便？,,shénme shíhou fāngbiàn?,,,2,latex-reference-v2
-time-words.next-week,下个星期,,xiàge xīngqī,,,2,latex-reference-v2
-days-of-week.friday,星期五,,xīngqī wǔ,,,2,latex-reference-v2
-months.may,五月,,wǔyuè,,,2,latex-reference-v2
-time-scheduling.what-is-today-s-date,今天几号？,,jīntiān jǐ hào?,,,2,latex-reference-v2
-time-words.morning,早上,,zǎoshang,,,2,latex-reference-v2
-days-of-week.saturday,星期六,,xīngqī liù,,,2,latex-reference-v2
-months.june,六月,,liùyuè,,,2,latex-reference-v2
-time-scheduling.what-day-is-it-today,今天星期几？,,jīntiān xīngqī jǐ?,,,2,latex-reference-v2
-time-words.afternoon,下午,,xiàwǔ,,,2,latex-reference-v2
-days-of-week.sunday,星期日,,xīngqī rì,,,2,latex-reference-v2
-months.july,七月,,qīyuè,,,2,latex-reference-v2
-time-scheduling.what-time-does-it-open,几点开门？,,jǐ diǎn kāimén?,,,2,latex-reference-v2
-time-words.evening,晚上,,wǎnshang,,,2,latex-reference-v2
-months.august,八月,,bāyuè,,,2,latex-reference-v2
-time-scheduling.what-time-does-it-close,几点关门？,,jǐ diǎn guānmén?,,,2,latex-reference-v2
-time-words.spring,春,,chūn,,,2,latex-reference-v2
-months.september,九月,,jiǔyuè,,,2,latex-reference-v2
-time-words.summer,夏,,xià,,,2,latex-reference-v2
-months.october,十月,,shíyuè,,,2,latex-reference-v2
-time-words.fall,秋,,qiū,,,2,latex-reference-v2
-months.november,十一月,,shíyīyuè,,,2,latex-reference-v2
-time-words.winter,冬,,dōng,,,2,latex-reference-v2
-months.december,十二月,,shí'èryuè,,,2,latex-reference-v2
-time-scheduling.how-long-does-it-take,要多久？,,yào duōjiǔ?,,,2,zh-Hans-agent-v1
-time-words.night,夜里,,yèlǐ,,,2,zh-Hans-agent-v1
+time-scheduling.what-time-is-it,现在几点？,,xiànzài jǐ diǎn?,ɕjɛn˥˩tsaɪ˥˩ tɕi˧˩˧ tjɛn˧˩˧,,2,latex-reference-v2;ipa=pinyin
+time-words.today,今天,,jīntiān,tɕin˥tʰjɛn˥,,2,latex-reference-v2;ipa=pinyin
+days-of-week.monday,星期一,,xīngqī yī,ɕiŋ˥tɕʰi˥ i˥,,2,latex-reference-v2;ipa=pinyin
+months.january,一月,,yīyuè,i˥ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.how-many-minutes,几分钟？,,jǐ fēnzhōng?,tɕi˧˩˧ fən˥ʈʂʊŋ˥,,2,latex-reference-v2;ipa=pinyin
+time-words.tomorrow,明天,,míngtiān,miŋ˧˥tʰjɛn˥,,2,latex-reference-v2;ipa=pinyin
+days-of-week.tuesday,星期二,,xīngqī èr,ɕiŋ˥tɕʰi˥ ɑɻ˥˩,,2,latex-reference-v2;ipa=pinyin
+months.february,二月,,èryuè,ɑɻ˥˩ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.what-time-should-we-meet,几点见？,,jǐ diǎn jiàn?,tɕi˧˩˧ tjɛn˧˩˧ tɕjɛn˥˩,,2,latex-reference-v2;ipa=pinyin
+time-words.yesterday,昨天,,zuótiān,tswɔ˧˥tʰjɛn˥,,2,latex-reference-v2;ipa=pinyin
+days-of-week.wednesday,星期三,,xīngqī sān,ɕiŋ˥tɕʰi˥ san˥,,2,latex-reference-v2;ipa=pinyin
+months.march,三月,,sānyuè,san˥ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.can-we-change-the-time,可以改时间吗？,,kěyǐ gǎi shíjiān ma?,kʰɤ˧˩˧i˧˩˧ kaɪ˧˩˧ ʂɨ˧˥tɕjɛn˥ ma,,2,latex-reference-v2;ipa=pinyin
+time-words.this-week,这个星期,,zhège xīngqī,ʈʂɤ˥˩kɤ ɕiŋ˥tɕʰi˥,,2,latex-reference-v2;ipa=pinyin
+days-of-week.thursday,星期四,,xīngqī sì,ɕiŋ˥tɕʰi˥ sɯ˥˩,,2,latex-reference-v2;ipa=pinyin
+months.april,四月,,sìyuè,sɯ˥˩ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.when-is-convenient,什么时候方便？,,shénme shíhou fāngbiàn?,ʂən˧˥mɤ ʂɨ˧˥xoʊ fɑŋ˥pjɛn˥˩,,2,latex-reference-v2;ipa=pinyin
+time-words.next-week,下个星期,,xiàge xīngqī,ɕja˥˩kɤ ɕiŋ˥tɕʰi˥,,2,latex-reference-v2;ipa=pinyin
+days-of-week.friday,星期五,,xīngqī wǔ,ɕiŋ˥tɕʰi˥ u˧˩˧,,2,latex-reference-v2;ipa=pinyin
+months.may,五月,,wǔyuè,u˧˩˧ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.what-is-today-s-date,今天几号？,,jīntiān jǐ hào?,tɕin˥tʰjɛn˥ tɕi˧˩˧ xɑʊ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-words.morning,早上,,zǎoshang,tsɑʊ˧˩˧ʂɑŋ,,2,latex-reference-v2;ipa=pinyin
+days-of-week.saturday,星期六,,xīngqī liù,ɕiŋ˥tɕʰi˥ ljoʊ˥˩,,2,latex-reference-v2;ipa=pinyin
+months.june,六月,,liùyuè,ljoʊ˥˩ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.what-day-is-it-today,今天星期几？,,jīntiān xīngqī jǐ?,tɕin˥tʰjɛn˥ ɕiŋ˥tɕʰi˥ tɕi˧˩˧,,2,latex-reference-v2;ipa=pinyin
+time-words.afternoon,下午,,xiàwǔ,ɕja˥˩u˧˩˧,,2,latex-reference-v2;ipa=pinyin
+days-of-week.sunday,星期日,,xīngqī rì,ɕiŋ˥tɕʰi˥ ʐɨ˥˩,,2,latex-reference-v2;ipa=pinyin
+months.july,七月,,qīyuè,tɕʰi˥ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.what-time-does-it-open,几点开门？,,jǐ diǎn kāimén?,tɕi˧˩˧ tjɛn˧˩˧ kʰaɪ˥mən˧˥,,2,latex-reference-v2;ipa=pinyin
+time-words.evening,晚上,,wǎnshang,wan˧˩˧ʂɑŋ,,2,latex-reference-v2;ipa=pinyin
+months.august,八月,,bāyuè,pa˥ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.what-time-does-it-close,几点关门？,,jǐ diǎn guānmén?,tɕi˧˩˧ tjɛn˧˩˧ kwan˥mən˧˥,,2,latex-reference-v2;ipa=pinyin
+time-words.spring,春,,chūn,ʈʂʰwən˥,,2,latex-reference-v2;ipa=pinyin
+months.september,九月,,jiǔyuè,tɕjoʊ˧˩˧ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-words.summer,夏,,xià,ɕja˥˩,,2,latex-reference-v2;ipa=pinyin
+months.october,十月,,shíyuè,ʂɨ˧˥ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-words.fall,秋,,qiū,tɕʰjoʊ˥,,2,latex-reference-v2;ipa=pinyin
+months.november,十一月,,shíyīyuè,ʂɨ˧˥i˥ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-words.winter,冬,,dōng,tʊŋ˥,,2,latex-reference-v2;ipa=pinyin
+months.december,十二月,,shí'èryuè,ʂɨ˧˥ɑɻ˥˩ɥœ˥˩,,2,latex-reference-v2;ipa=pinyin
+time-scheduling.how-long-does-it-take,要多久？,,yào duōjiǔ?,jɑʊ˥˩ twɔ˥tɕjoʊ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+time-words.night,夜里,,yèlǐ,jɛ˥˩li˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
 time-words.clock-offset,斯瓦希里语的时刻从天亮算起，不从午夜算起，数字比手机上的钟点小六：听到的数字加六，才是手机上的时间；要说给别人听，就把手机上的时间减六。saa moja 是早上 7 点，saa sita 是正午，saa kumi 是 16 点。怕弄错就直接说数字，或者问 saa ngapi za kizungu，要西式时间。,,,,,2,zh-Hans-notes-v1

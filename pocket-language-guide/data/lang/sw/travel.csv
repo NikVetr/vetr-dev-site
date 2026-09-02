@@ -1,113 +1,113 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-directions.where-is,{} ni wapi?,,,,2,sw-agent-v1
-directions.how-do-i-get-to,Nifikaje {}?,,,how do I reach {},2,sw-agent-v1
-directions.is-it-far,Ni mbali?,,,,2,sw-agent-v1
-directions.how-long-on-foot,Ni muda gani kwa miguu?,,,,2,sw-agent-v1
-directions.please-show-me-on-the-map,Tafadhali nionyeshe kwenye ramani,,,,2,sw-agent-v1
-directions.where-is-the-nearest,{} ni wapi karibu na hapa?,,,where is {} near here,2,sw-agent-v1
-directions.where-am-i,Niko wapi?,,,,2,sw-agent-v1
-directions.which-way,Njia ipi?,,,,2,sw-agent-v1
-directions.can-i-walk-there,Naweza kwenda kwa miguu?,,,,2,sw-agent-v1
-directions.how-far-is-it,Ni umbali gani?,,,,2,sw-agent-v1
-directions.which-exit,Mlango upi wa kutoka?,,,,2,sw-agent-v1
-directions.can-you-show-me-the-way,Unaweza kunionyesha njia?,,,,2,sw-agent-v1
-directions.north,Kaskazini,,,,2,sw-agent-v1
-directions.south,Kusini,,,,2,sw-agent-v1
-directions.east,Mashariki,,,,2,sw-agent-v1
-directions.west,Magharibi,,,,2,sw-agent-v1
-quick-directions.go-straight,Nenda moja kwa moja,,,,2,sw-agent-v1
-quick-directions.turn-left,Geuka kushoto,,,,2,sw-agent-v1
-quick-directions.turn-right,Geuka kulia,,,,2,sw-agent-v1
-quick-directions.this-way,Njia hii,,,,2,sw-agent-v1
-quick-directions.that-way,Njia ile,,,,2,sw-agent-v1
-quick-directions.on-the-left,Kushoto,,,,2,sw-agent-v1
-quick-directions.on-the-right,Kulia,,,,2,sw-agent-v1
-quick-directions.across-from-here,Ng'ambo,Upande wa pili,,on the other side,2,sw-agent-v1
-quick-directions.in-front,Mbele,,,,2,sw-agent-v1
-quick-directions.behind,Nyuma,,,,2,sw-agent-v1
-taxi.please-take-me-here,Tafadhali nipeleke hapa,,,,2,sw-agent-v1
-taxi.please-send-me-the-address,Tafadhali nitumie anwani,,,,2,sw-agent-v1
-taxi.we-need-the-east-gate-not-the-south-gate,"Tunahitaji lango la mashariki, sio la kusini",,,,2,sw-agent-v1
-taxi.please-stop-here,Tafadhali simama hapa,,,,2,sw-agent-v1
-taxi.can-you-wait-for-me-here,Unaweza kunisubiri hapa?,,,,2,sw-agent-v1
-taxi.we-need-to-catch-the-high-speed-train,Tunahitaji kupata treni ya SGR,Treni ya mwendo kasi,,,2,sw-agent-v1
-taxi.please-use-the-meter,Tafadhali tumia mita,,,,2,sw-agent-v1
-taxi.i-will-get-off-here,Nashuka hapa,,,,2,sw-agent-v1
-transit-rides.two-tickets,Tiketi mbili,,,,2,sw-agent-v1
-transit-rides.where-is-the-subway-station,Kituo cha treni ni wapi?,Kituo cha mwendokasi ni wapi?,,mwendokasi = Dar BRT,2,sw-agent-v1
-transit-rides.does-this-bus-train-go-to,"Je, hii inakwenda {}?",Basi hili linakwenda {}?,,does this one go to {},2,sw-agent-v1
-transit-rides.what-is-the-next-stop,Kituo kijacho ni kipi?,,,,2,sw-agent-v1
-transit-rides.please-tell-me-where-to-get-off,Tafadhali niambie nishuke wapi,,,,2,sw-agent-v1
-transit-rides.is-this-direct,"Je, inakwenda moja kwa moja?",,,,2,sw-agent-v1
-transit-rides.do-i-need-to-transfer,Nahitaji kubadilisha gari?,,,,2,sw-agent-v1
-transit-rides.is-it-delayed,"Je, imechelewa?",,,,2,sw-agent-v1
-transit-rides.i-am-in-a-hurry,Nina haraka,,,,2,sw-agent-v1
-transit-rides.which-platform,Jukwaa lipi?,,,,2,sw-agent-v1
-transit-rides.what-time-is-the-next-one,Ijayo ni saa ngapi?,,,,2,sw-agent-v1
-transit-rides.i-went-past-my-stop,Nimepita kituo changu,,,,2,sw-agent-v1
-transit-rides.can-i-use-this-ticket,Naweza kutumia tiketi hii?,,,,2,sw-agent-v1
-place-words.visitor-center,Kituo cha wageni,,,,2,sw-agent-v1
-place-words.railway-station,Stesheni ya treni,Kituo cha treni,,,2,sw-agent-v1
-place-words.airport,Uwanja wa ndege,,,,2,sw-agent-v1
-place-words.service-desk,Dawati la huduma,,,,2,sw-agent-v1
-place-words.bus-stop,Kituo cha basi,Stendi,,,2,sw-agent-v1
-place-words.luggage-storage,Sehemu ya kuweka mizigo,,,,2,sw-agent-v1
-place-words.tourist-spot-sightseeing-area,Sehemu ya kutembelea,Kivutio cha watalii,,,2,sw-agent-v1
-border-customs.i-am-a-tourist,Mimi ni mtalii,,,,2,sw-agent-v1
-border-customs.here-is-my-passport,Hii ni pasipoti yangu,,,,2,sw-agent-v1
-border-customs.i-am-staying-for-days,Nakaa siku {},,,,2,sw-agent-v1
-border-customs.nothing-to-declare,Sina kitu cha kutangaza,Hakuna cha kutangaza,,,2,sw-agent-v1
-border-customs.i-am-staying-at,Nakaa {},,,,2,sw-agent-v1
-border-customs.i-am-here-for-business,Nimekuja kwa biashara,,,,2,sw-agent-v1
-border-customs.i-have-a-return-ticket,Nina tiketi ya kurudi,,,,2,sw-agent-v1
-border-customs.i-am-visiting-family,Natembelea familia,,,,2,sw-agent-v1
-border-customs.this-is-for-personal-use,Hii ni kwa matumizi yangu,,,,2,sw-agent-v1
-border-customs.i-am-in-transit,Napita tu,Niko transit,,I am just passing through,2,sw-agent-v1
-border-customs.i-have-in-cash,Nina {} taslimu,,,,2,sw-agent-v1
-border-customs.this-is-a-gift,Hii ni zawadi,,,,2,sw-agent-v1
-border-customs.where-do-i-collect-my-baggage,Nachukua mizigo yangu wapi?,,,,2,sw-agent-v1
-border-customs.how-long-may-i-stay,Naweza kukaa siku ngapi?,,,,2,sw-agent-v1
-border-customs.i-have-a-connecting-flight,Nina ndege ya kuunganisha,,,,2,sw-agent-v1
-border-customs.may-i-have-an-entry-stamp,Naomba mhuri wa kuingia,,,,2,sw-agent-v1
-border-customs.visa,Viza,,,,2,sw-agent-v1
-border-customs.i-have-no-food-or-plants,Sina chakula wala mimea,,,,2,sw-agent-v1
-border-customs.passport-control,Uhamiaji,Udhibiti wa pasipoti,,immigration,2,sw-agent-v1
-border-customs.customs,Forodha,Ushuru,,,2,sw-agent-v1
-border-customs.baggage-claim,Kuchukua mizigo,,,,2,sw-agent-v1
-border-customs.customs-declaration,Tamko la forodha,,,,2,sw-agent-v1
-border-customs.arrival-card,Kadi ya kuwasili,,,,2,sw-agent-v1
-border-customs.transit,Kupitia,Transit,,,2,sw-agent-v1
-border-customs.boarding-pass,Kadi ya kupanda ndege,Boarding pass,,,2,sw-agent-v1
-pickup-meeting.where-is-the-pickup-point,Sehemu ya kuchukuliwa ni wapi?,,,,2,sw-agent-v1
-pickup-meeting.please-send-me-the-pickup-point,Tafadhali nitumie sehemu ya kuchukuliwa,,,,2,sw-agent-v1
-pickup-meeting.please-pick-us-up-here,Tafadhali tuchukue hapa,,,,2,sw-agent-v1
-pickup-meeting.meet-us-at,Tukutane {},,,,2,sw-agent-v1
-pickup-meeting.please-call-me-a-ride,Tafadhali niitie gari,,,,2,sw-agent-v1
-pickup-meeting.please-call-a-taxi,Tafadhali ita teksi,,,,2,sw-agent-v1
-rail-station-words.high-speed-rail,Treni ya SGR,Treni ya mwendo kasi,,,2,sw-agent-v1
-rail-station-words.transfer,Kubadilisha gari,,,,2,sw-agent-v1
-rail-station-words.ticket-gate,Lango la tiketi,,,,2,sw-agent-v1
-rail-station-words.platform,Jukwaa,,,,2,sw-agent-v1
-rail-station-words.ticket-office,Ofisi ya tiketi,,,,2,sw-agent-v1
-rail-station-words.waiting-room,Chumba cha kusubiri,,,,2,sw-agent-v1
-rail-station-words.train-number,Namba ya treni,,,,2,sw-agent-v1
-rail-station-words.carriage,Behewa,,,,2,sw-agent-v1
-rail-station-words.seat,Kiti,,,,2,sw-agent-v1
-rail-station-words.last-train,Treni ya mwisho,,,,2,sw-agent-v1
-rail-station-words.delayed,Imechelewa,,,,2,sw-agent-v1
-rail-station-words.final-stop,Kituo cha mwisho,,,,2,sw-agent-v1
-common-signs.open-on,Wazi,Washa,,open; switch on,2,sw-agent-v1
-common-signs.closed-off,Imefungwa,Zima,,closed; switch off,2,sw-agent-v1
-common-signs.occupied,Inatumika,,,in use,2,sw-agent-v1
-common-signs.vacant,Iko wazi,,,free,2,sw-agent-v1
-common-signs.caution,Tahadhari,,,,2,sw-agent-v1
-common-signs.no-entry,Usiingie,Hairuhusiwi kuingia,,,2,sw-agent-v1
-common-signs.no-smoking,Usivute sigara,,,,2,sw-agent-v1
-common-signs.no-photography,Usipige picha,Hairuhusiwi kupiga picha,,,2,sw-agent-v1
-common-signs.do-not-touch,Usiguse,,,,2,sw-agent-v1
-common-signs.temporarily-closed,Imefungwa kwa muda,,,,2,sw-agent-v1
-common-signs.open-operating,Inafanya kazi,,,,2,sw-agent-v1
-common-signs.closed,Tumefunga,,,we are closed,2,sw-agent-v1
-common-signs.stopped-stop,Simama,Imesimama,,stop; stopped,2,sw-agent-v1
-transit-rides.do-i-need-to-validate,Nahitaji kugonga tiketi kwenye mashine?,,,tap the ticket on the machine,1,sw-agent-v1
-rail-station-words.ticket-validator,Mashine ya tiketi,Validator,,,1,sw-agent-v1
+directions.where-is,{} ni wapi?,,{} ni wˈapi,,2,sw-agent-v1;ipa=espeak
+directions.how-do-i-get-to,Nifikaje {}?,,nˌifikˈaɟe {},how do I reach {},2,sw-agent-v1;ipa=espeak
+directions.is-it-far,Ni mbali?,,ni mbˈali,,2,sw-agent-v1;ipa=espeak
+directions.how-long-on-foot,Ni muda gani kwa miguu?,,ni mˈuda ɡˈani kwa miɡˈuu,,2,sw-agent-v1;ipa=espeak
+directions.please-show-me-on-the-map,Tafadhali nionyeshe kwenye ramani,,tˌafaðˈali nˌioɲˈeʃe kwˈeɲe ramˈani,,2,sw-agent-v1;ipa=espeak
+directions.where-is-the-nearest,{} ni wapi karibu na hapa?,,{} ni wˈapi karˈibu na hˈapa,where is {} near here,2,sw-agent-v1;ipa=espeak
+directions.where-am-i,Niko wapi?,,nˈiko wˈapi,,2,sw-agent-v1;ipa=espeak
+directions.which-way,Njia ipi?,,ɲɟˈia ˈipi,,2,sw-agent-v1;ipa=espeak
+directions.can-i-walk-there,Naweza kwenda kwa miguu?,,nawˈeza kwˈenda kwa miɡˈuu,,2,sw-agent-v1;ipa=espeak
+directions.how-far-is-it,Ni umbali gani?,,ni umbˈali ɡˈani,,2,sw-agent-v1;ipa=espeak
+directions.which-exit,Mlango upi wa kutoka?,,mlˈaŋɡo ˈupi wa kutˈoka,,2,sw-agent-v1;ipa=espeak
+directions.can-you-show-me-the-way,Unaweza kunionyesha njia?,,ˌunawˈeza kˌunioɲˈeʃa ɲɟˈia,,2,sw-agent-v1;ipa=espeak
+directions.north,Kaskazini,,kˌaskazˈini,,2,sw-agent-v1;ipa=espeak
+directions.south,Kusini,,kusˈini,,2,sw-agent-v1;ipa=espeak
+directions.east,Mashariki,,mˌaʃarˈiki,,2,sw-agent-v1;ipa=espeak
+directions.west,Magharibi,,mˌaɣarˈibi,,2,sw-agent-v1;ipa=espeak
+quick-directions.go-straight,Nenda moja kwa moja,,nˈenda mˈoɟa kwa mˈoɟa,,2,sw-agent-v1;ipa=espeak
+quick-directions.turn-left,Geuka kushoto,,ɡeˈuka kuʃˈoto,,2,sw-agent-v1;ipa=espeak
+quick-directions.turn-right,Geuka kulia,,ɡeˈuka kulˈia,,2,sw-agent-v1;ipa=espeak
+quick-directions.this-way,Njia hii,,ɲɟˈia hˌii,,2,sw-agent-v1;ipa=espeak
+quick-directions.that-way,Njia ile,,ɲɟˈia ˈile,,2,sw-agent-v1;ipa=espeak
+quick-directions.on-the-left,Kushoto,,kuʃˈoto,,2,sw-agent-v1;ipa=espeak
+quick-directions.on-the-right,Kulia,,kulˈia,,2,sw-agent-v1;ipa=espeak
+quick-directions.across-from-here,Ng'ambo,Upande wa pili,ˌenɟˈiambo,on the other side,2,sw-agent-v1;ipa=espeak
+quick-directions.in-front,Mbele,,mbˈele,,2,sw-agent-v1;ipa=espeak
+quick-directions.behind,Nyuma,,ɲˈuma,,2,sw-agent-v1;ipa=espeak
+taxi.please-take-me-here,Tafadhali nipeleke hapa,,tˌafaðˈali nˌipelˈeke hˈapa,,2,sw-agent-v1;ipa=espeak
+taxi.please-send-me-the-address,Tafadhali nitumie anwani,,tˌafaðˈali nˌitumˈie anwˈani,,2,sw-agent-v1;ipa=espeak
+taxi.we-need-the-east-gate-not-the-south-gate,"Tunahitaji lango la mashariki, sio la kusini",,"tˌunahitˈaɟi lˈaŋɡo la mˌaʃarˈiki, sˈio la kusˈini",,2,sw-agent-v1;ipa=espeak
+taxi.please-stop-here,Tafadhali simama hapa,,tˌafaðˈali simˈama hˈapa,,2,sw-agent-v1;ipa=espeak
+taxi.can-you-wait-for-me-here,Unaweza kunisubiri hapa?,,ˌunawˈeza kˌunisubˈiri hˈapa,,2,sw-agent-v1;ipa=espeak
+taxi.we-need-to-catch-the-high-speed-train,Tunahitaji kupata treni ya SGR,Treni ya mwendo kasi,tˌunahitˈaɟi kupˈata trˈeni ja ˌesɟˌiˈar,,2,sw-agent-v1;ipa=espeak
+taxi.please-use-the-meter,Tafadhali tumia mita,,tˌafaðˈali tumˈia mˈita,,2,sw-agent-v1;ipa=espeak
+taxi.i-will-get-off-here,Nashuka hapa,,naʃˈuka hˈapa,,2,sw-agent-v1;ipa=espeak
+transit-rides.two-tickets,Tiketi mbili,,tikˈeti mbˈili,,2,sw-agent-v1;ipa=espeak
+transit-rides.where-is-the-subway-station,Kituo cha treni ni wapi?,Kituo cha mwendokasi ni wapi?,kitˈuo tʃa trˈeni ni wˈapi,mwendokasi = Dar BRT,2,sw-agent-v1;ipa=espeak
+transit-rides.does-this-bus-train-go-to,"Je, hii inakwenda {}?",Basi hili linakwenda {}?,"ɟˈe, hˌii ˌinakwˈenda {}",does this one go to {},2,sw-agent-v1;ipa=espeak
+transit-rides.what-is-the-next-stop,Kituo kijacho ni kipi?,,kitˈuo kiɟˈatʃo ni kˈipi,,2,sw-agent-v1;ipa=espeak
+transit-rides.please-tell-me-where-to-get-off,Tafadhali niambie nishuke wapi,,tˌafaðˈali nˌiambˈie niʃˈuke wˈapi,,2,sw-agent-v1;ipa=espeak
+transit-rides.is-this-direct,"Je, inakwenda moja kwa moja?",,"ɟˈe, ˌinakwˈenda mˈoɟa kwa mˈoɟa",,2,sw-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-transfer,Nahitaji kubadilisha gari?,,nˌahitˈaɟi kˌubadilˈiʃa ɡˈari,,2,sw-agent-v1;ipa=espeak
+transit-rides.is-it-delayed,"Je, imechelewa?",,"ɟˈe, ˌimetʃelˈewa",,2,sw-agent-v1;ipa=espeak
+transit-rides.i-am-in-a-hurry,Nina haraka,,nˈina harˈaka,,2,sw-agent-v1;ipa=espeak
+transit-rides.which-platform,Jukwaa lipi?,,ɟukwˈaa lˈipi,,2,sw-agent-v1;ipa=espeak
+transit-rides.what-time-is-the-next-one,Ijayo ni saa ngapi?,,iɟˈajo ni sˈaa ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Nimepita kituo changu,,nˌimepˈita kitˈuo tʃˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+transit-rides.can-i-use-this-ticket,Naweza kutumia tiketi hii?,,nawˈeza kˌutumˈia tikˈeti hˌii,,2,sw-agent-v1;ipa=espeak
+place-words.visitor-center,Kituo cha wageni,,kitˈuo tʃa waɡˈeni,,2,sw-agent-v1;ipa=espeak
+place-words.railway-station,Stesheni ya treni,Kituo cha treni,steʃˈeni ja trˈeni,,2,sw-agent-v1;ipa=espeak
+place-words.airport,Uwanja wa ndege,,uwˈaɲɟa wa ndˈeɡe,,2,sw-agent-v1;ipa=espeak
+place-words.service-desk,Dawati la huduma,,dawˈati la hudˈuma,,2,sw-agent-v1;ipa=espeak
+place-words.bus-stop,Kituo cha basi,Stendi,kitˈuo tʃa bˈasi,,2,sw-agent-v1;ipa=espeak
+place-words.luggage-storage,Sehemu ya kuweka mizigo,,sehˈemu ja kuwˈeka mizˈiɡo,,2,sw-agent-v1;ipa=espeak
+place-words.tourist-spot-sightseeing-area,Sehemu ya kutembelea,Kivutio cha watalii,sehˈemu ja kˌutembelˈea,,2,sw-agent-v1;ipa=espeak
+border-customs.i-am-a-tourist,Mimi ni mtalii,,mˌimi ni mtalˈii,,2,sw-agent-v1;ipa=espeak
+border-customs.here-is-my-passport,Hii ni pasipoti yangu,,hˌii ni pˌasipˈoti jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,Nakaa siku {},,nakˈaa sˈiku {},,2,sw-agent-v1;ipa=espeak
+border-customs.nothing-to-declare,Sina kitu cha kutangaza,Hakuna cha kutangaza,sˈina kˈitu tʃa kˌutaŋɡˈaza,,2,sw-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,Nakaa {},,nakˈaa {},,2,sw-agent-v1;ipa=espeak
+border-customs.i-am-here-for-business,Nimekuja kwa biashara,,nˌimekˈuɟa kwa bˌiaʃˈara,,2,sw-agent-v1;ipa=espeak
+border-customs.i-have-a-return-ticket,Nina tiketi ya kurudi,,nˈina tikˈeti ja kurˈudi,,2,sw-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,Natembelea familia,,nˌatembelˈea fˌamilˈia,,2,sw-agent-v1;ipa=espeak
+border-customs.this-is-for-personal-use,Hii ni kwa matumizi yangu,,hˌii ni kwa mˌatumˈizi jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+border-customs.i-am-in-transit,Napita tu,Niko transit,napˈita tˈu,I am just passing through,2,sw-agent-v1;ipa=espeak
+border-customs.i-have-in-cash,Nina {} taslimu,,nˈina {} taslˈimu,,2,sw-agent-v1;ipa=espeak
+border-customs.this-is-a-gift,Hii ni zawadi,,hˌii ni zawˈadi,,2,sw-agent-v1;ipa=espeak
+border-customs.where-do-i-collect-my-baggage,Nachukua mizigo yangu wapi?,,nˌatʃukˈua mizˈiɡo jˈaŋɡu wˈapi,,2,sw-agent-v1;ipa=espeak
+border-customs.how-long-may-i-stay,Naweza kukaa siku ngapi?,,nawˈeza kukˈaa sˈiku ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+border-customs.i-have-a-connecting-flight,Nina ndege ya kuunganisha,,nˈina ndˈeɡe ja kˌuuŋɡanˈiʃa,,2,sw-agent-v1;ipa=espeak
+border-customs.may-i-have-an-entry-stamp,Naomba mhuri wa kuingia,,naˈomba mhˈuri wa kˌuiŋɡˈia,,2,sw-agent-v1;ipa=espeak
+border-customs.visa,Viza,,vˈiza,,2,sw-agent-v1;ipa=espeak
+border-customs.i-have-no-food-or-plants,Sina chakula wala mimea,,sˈina tʃakˈula wˈala mimˈea,,2,sw-agent-v1;ipa=espeak
+border-customs.passport-control,Uhamiaji,Udhibiti wa pasipoti,ˌuhamiˈaɟi,immigration,2,sw-agent-v1;ipa=espeak
+border-customs.customs,Forodha,Ushuru,forˈoða,,2,sw-agent-v1;ipa=espeak
+border-customs.baggage-claim,Kuchukua mizigo,,kˌutʃukˈua mizˈiɡo,,2,sw-agent-v1;ipa=espeak
+border-customs.customs-declaration,Tamko la forodha,,tˈamko la forˈoða,,2,sw-agent-v1;ipa=espeak
+border-customs.arrival-card,Kadi ya kuwasili,,kˈadi ja kˌuwasˈili,,2,sw-agent-v1;ipa=espeak
+border-customs.transit,Kupitia,Transit,kˌupitˈia,,2,sw-agent-v1;ipa=espeak
+border-customs.boarding-pass,Kadi ya kupanda ndege,Boarding pass,kˈadi ja kupˈanda ndˈeɡe,,2,sw-agent-v1;ipa=espeak
+pickup-meeting.where-is-the-pickup-point,Sehemu ya kuchukuliwa ni wapi?,,sehˈemu ja kˌutʃukulˈiwa ni wˈapi,,2,sw-agent-v1;ipa=espeak
+pickup-meeting.please-send-me-the-pickup-point,Tafadhali nitumie sehemu ya kuchukuliwa,,tˌafaðˈali nˌitumˈie sehˈemu ja kˌutʃukulˈiwa,,2,sw-agent-v1;ipa=espeak
+pickup-meeting.please-pick-us-up-here,Tafadhali tuchukue hapa,,tˌafaðˈali tˌutʃukˈue hˈapa,,2,sw-agent-v1;ipa=espeak
+pickup-meeting.meet-us-at,Tukutane {},,tˌukutˈane {},,2,sw-agent-v1;ipa=espeak
+pickup-meeting.please-call-me-a-ride,Tafadhali niitie gari,,tˌafaðˈali nˌiitˈie ɡˈari,,2,sw-agent-v1;ipa=espeak
+pickup-meeting.please-call-a-taxi,Tafadhali ita teksi,,tˌafaðˈali ˈita tˈeksi,,2,sw-agent-v1;ipa=espeak
+rail-station-words.high-speed-rail,Treni ya SGR,Treni ya mwendo kasi,trˈeni ja ˌesɟˌiˈar,,2,sw-agent-v1;ipa=espeak
+rail-station-words.transfer,Kubadilisha gari,,kˌubadilˈiʃa ɡˈari,,2,sw-agent-v1;ipa=espeak
+rail-station-words.ticket-gate,Lango la tiketi,,lˈaŋɡo la tikˈeti,,2,sw-agent-v1;ipa=espeak
+rail-station-words.platform,Jukwaa,,ɟukwˈaa,,2,sw-agent-v1;ipa=espeak
+rail-station-words.ticket-office,Ofisi ya tiketi,,ofˈisi ja tikˈeti,,2,sw-agent-v1;ipa=espeak
+rail-station-words.waiting-room,Chumba cha kusubiri,,tʃˈumba tʃa kˌusubˈiri,,2,sw-agent-v1;ipa=espeak
+rail-station-words.train-number,Namba ya treni,,nˈamba ja trˈeni,,2,sw-agent-v1;ipa=espeak
+rail-station-words.carriage,Behewa,,behˈewa,,2,sw-agent-v1;ipa=espeak
+rail-station-words.seat,Kiti,,kˈiti,,2,sw-agent-v1;ipa=espeak
+rail-station-words.last-train,Treni ya mwisho,,trˈeni ja mwˈiʃo,,2,sw-agent-v1;ipa=espeak
+rail-station-words.delayed,Imechelewa,,ˌimetʃelˈewa,,2,sw-agent-v1;ipa=espeak
+rail-station-words.final-stop,Kituo cha mwisho,,kitˈuo tʃa mwˈiʃo,,2,sw-agent-v1;ipa=espeak
+common-signs.open-on,Wazi,Washa,wˈazi,open; switch on,2,sw-agent-v1;ipa=espeak
+common-signs.closed-off,Imefungwa,Zima,ˌimefˈuŋɡwa,closed; switch off,2,sw-agent-v1;ipa=espeak
+common-signs.occupied,Inatumika,,ˌinatumˈika,in use,2,sw-agent-v1;ipa=espeak
+common-signs.vacant,Iko wazi,,ˈiko wˈazi,free,2,sw-agent-v1;ipa=espeak
+common-signs.caution,Tahadhari,,tˌahaðˈari,,2,sw-agent-v1;ipa=espeak
+common-signs.no-entry,Usiingie,Hairuhusiwi kuingia,ˌusiiŋɡˈie,,2,sw-agent-v1;ipa=espeak
+common-signs.no-smoking,Usivute sigara,,ˌusivˈute siɡˈara,,2,sw-agent-v1;ipa=espeak
+common-signs.no-photography,Usipige picha,Hairuhusiwi kupiga picha,ˌusipˈiɡe pˈitʃa,,2,sw-agent-v1;ipa=espeak
+common-signs.do-not-touch,Usiguse,,ˌusiɡˈuse,,2,sw-agent-v1;ipa=espeak
+common-signs.temporarily-closed,Imefungwa kwa muda,,ˌimefˈuŋɡwa kwa mˈuda,,2,sw-agent-v1;ipa=espeak
+common-signs.open-operating,Inafanya kazi,,ˌinafˈaɲa kˈazi,,2,sw-agent-v1;ipa=espeak
+common-signs.closed,Tumefunga,,tˌumefˈuŋɡa,we are closed,2,sw-agent-v1;ipa=espeak
+common-signs.stopped-stop,Simama,Imesimama,simˈama,stop; stopped,2,sw-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,Nahitaji kugonga tiketi kwenye mashine?,,nˌahitˈaɟi kuɡˈoŋɡa tikˈeti kwˈeɲe maʃˈine,tap the ticket on the machine,1,sw-agent-v1;ipa=espeak
+rail-station-words.ticket-validator,Mashine ya tiketi,Validator,maʃˈine ja tikˈeti,,1,sw-agent-v1;ipa=espeak

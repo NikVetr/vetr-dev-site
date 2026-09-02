@@ -1,47 +1,47 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,io / mi,,,,2,it-agent-v1
-pronouns-verbs.we-us,noi / ci,,,,2,it-agent-v1
-pronouns-verbs.you,tu,,,,2,it-agent-v1
-pronouns-verbs.you-polite,Lei,,,,2,it-agent-v1
-pronouns-verbs.he-him,lui / lo,,,,2,it-agent-v1
-pronouns-verbs.she-her,lei / la,,,,2,it-agent-v1
-pronouns-verbs.they-them,loro,,,,2,it-agent-v1
-pronouns-verbs.my-mine,mio / mia,,,,2,it-agent-v1
-pronouns-verbs.your-yours,Suo / Sua,,,di Lei,2,it-agent-v1
-pronouns-verbs.be-called-call,chiamarsi / chiamare,,,,2,it-agent-v1
-pronouns-verbs.have,avere,,,,2,it-agent-v1
-pronouns-verbs.do-not-have,non avere,non ho,,,2,it-agent-v1
-pronouns-verbs.go,andare,,,,2,it-agent-v1
-pronouns-verbs.come,venire,,,,2,it-agent-v1
-pronouns-verbs.would-like,vorrei,,,,2,it-agent-v1
-pronouns-verbs.want,volere,,,,2,it-agent-v1
-pronouns-verbs.look-for,cercare,,,,2,it-agent-v1
-pronouns-verbs.buy,comprare,,,,2,it-agent-v1
-pronouns-verbs.like,piacere,,,,2,it-agent-v1
-pronouns-verbs.need,avere bisogno di,,,,2,it-agent-v1
-question-words.what,che cosa,cosa,,,2,it-agent-v1
-question-words.where,dove,,,,2,it-agent-v1
-question-words.who,chi,,,,2,it-agent-v1
-question-words.which-one,quale,,,,2,it-agent-v1
-question-words.when,quando,,,,2,it-agent-v1
-question-words.how,come,,,,2,it-agent-v1
-question-words.how-much-many,quanto,,,,2,it-agent-v1
-question-words.how-many,quanti,,,,2,it-agent-v1
-question-words.why,perché,,,,2,it-agent-v1
-question-words.this,questo,,,,2,it-agent-v1
-question-words.that,quello,,,,2,it-agent-v1
-question-words.here,qui,,,,2,it-agent-v1
-question-words.there,là,,,,2,it-agent-v1
-question-words.a-little,un po',,,,2,it-agent-v1
-question-words.some,alcuni,qualche,,,2,it-agent-v1
-question-words.very,molto,,,,2,it-agent-v1
-question-words.too,troppo,,,,2,it-agent-v1
-question-words.also,anche,,,,2,it-agent-v1
-question-words.all-both,tutto / entrambi,,,,2,it-agent-v1
-pronouns-verbs.there-is-have,c'è / ci sono,,,,2,it-agent-v1
-pronouns-verbs.there-is-not-do-not-have,non c'è / non ci sono,,,,2,it-agent-v1
-pronouns-verbs.want-to-verb,voglio + infinito,vorrei + infinito,,,2,it-agent-v1
-pronouns-verbs.want-thing,voglio + cosa,vorrei + cosa,,,2,it-agent-v1
-pronouns-verbs.need-thing,ho bisogno di + cosa,mi serve + cosa,,,2,it-agent-v1
-pronouns-verbs.looking-for-thing,cerco + cosa,,,,2,it-agent-v1
-question-words.how-much-what-price,quanto costa?,,,,2,it-agent-v1
+pronouns-verbs.i-me,io / mi,,ˈio / mˈi,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.we-us,noi / ci,,nˈoi / tʃˈi,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.you,tu,,tˈu,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.you-polite,Lei,,lˈɛi,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.he-him,lui / lo,,lˈui / lˈo,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.she-her,lei / la,,lˈɛi / lˈa,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.they-them,loro,,lˈɔro,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.my-mine,mio / mia,,mˈio / mˈia,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,Suo / Sua,,sˈuo / sˈua,di Lei,2,it-agent-v1;ipa=espeak
+pronouns-verbs.be-called-call,chiamarsi / chiamare,,kjamˈarsɪ / kjamˈare,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.have,avere,,avˈere,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.do-not-have,non avere,non ho,non avˈere,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.go,andare,,andˈare,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.come,venire,,venˈire,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.would-like,vorrei,,vorɾˈɛi,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.want,volere,,volˈere,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.look-for,cercare,,tʃerkˈare,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.buy,comprare,,komprˈare,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.like,piacere,,pjatʃˈere,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.need,avere bisogno di,,avˈere bizˈoɲɲo dˈi,,2,it-agent-v1;ipa=espeak
+question-words.what,che cosa,cosa,ke kˈɔza,,2,it-agent-v1;ipa=espeak
+question-words.where,dove,,dˈove,,2,it-agent-v1;ipa=espeak
+question-words.who,chi,,kˈi,,2,it-agent-v1;ipa=espeak
+question-words.which-one,quale,,kwˈale,,2,it-agent-v1;ipa=espeak
+question-words.when,quando,,kwˈando,,2,it-agent-v1;ipa=espeak
+question-words.how,come,,kˈome,,2,it-agent-v1;ipa=espeak
+question-words.how-much-many,quanto,,kwˈanto,,2,it-agent-v1;ipa=espeak
+question-words.how-many,quanti,,kwˈantɪ,,2,it-agent-v1;ipa=espeak
+question-words.why,perché,,perkˈe,,2,it-agent-v1;ipa=espeak
+question-words.this,questo,,kwˈesto,,2,it-agent-v1;ipa=espeak
+question-words.that,quello,,kwˈɛllo,,2,it-agent-v1;ipa=espeak
+question-words.here,qui,,kwˈi,,2,it-agent-v1;ipa=espeak
+question-words.there,là,,lˈa,,2,it-agent-v1;ipa=espeak
+question-words.a-little,un po',,ʊn pˈo,,2,it-agent-v1;ipa=espeak
+question-words.some,alcuni,qualche,alkˈunɪ,,2,it-agent-v1;ipa=espeak
+question-words.very,molto,,mˈolto,,2,it-agent-v1;ipa=espeak
+question-words.too,troppo,,trˈɔpːo,,2,it-agent-v1;ipa=espeak
+question-words.also,anche,,ˈanke,,2,it-agent-v1;ipa=espeak
+question-words.all-both,tutto / entrambi,,tˈutːo / entrˈambɪ,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.there-is-have,c'è / ci sono,,tʃˈɛː / tʃɪ sˈono,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,non c'è / non ci sono,,non tʃˈɛː / non tʃɪ sˈono,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,voglio + infinito,vorrei + infinito,vˈoʎo infinˈito,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,voglio + cosa,vorrei + cosa,vˈoʎo kˈɔza,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,ho bisogno di + cosa,mi serve + cosa,o bizˈoɲɲo dɪ kˈɔza,,2,it-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,cerco + cosa,,tʃˈerko kˈɔza,,2,it-agent-v1;ipa=espeak
+question-words.how-much-what-price,quanto costa?,,kwˈanto kˈɔsta,,2,it-agent-v1;ipa=espeak

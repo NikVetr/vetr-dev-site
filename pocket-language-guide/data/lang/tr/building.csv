@@ -1,60 +1,60 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-building-help.what-room-number-is-this,Bu odanın numarası kaç?,,,,2,tr-agent-v1
-building-help.i-am-lost,Kayboldum.,,,,2,tr-agent-v1
-building-help.where-is-reception,Resepsiyon nerede?,,,,2,tr-agent-v1
-building-help.where-is-a-power-outlet,Priz nerede?,,,,2,tr-agent-v1
-accessibility.step-free,Basamaksız giriş var mı?,Engelsiz giriş var mı?,,,2,tr-agent-v1
-accessibility.wheelchair-access,Tekerlekli sandalyeye uygun mu?,,,,2,tr-agent-v1
-accessibility.elevator,Asansör var mı?,,,,2,tr-agent-v1
-accessibility.ramp,Rampa var mı?,,,,2,tr-agent-v1
-accessibility.how-many-steps,Kaç basamak var?,,,,2,tr-agent-v1
-accessibility.cannot-climb-stairs,Merdiven çıkamıyorum.,,,,2,tr-agent-v1
-accessibility.need-to-sit-down,Oturmam gerekiyor.,,,,2,tr-agent-v1
-accessibility.accessible-restroom,Engelli tuvaleti var mı?,,,,2,tr-agent-v1
-accessibility.station-assistance,İstasyonda yardım var mı?,,,,2,tr-agent-v1
-accessibility.help-me-carry,Taşımama yardım eder misiniz?,,,,2,tr-agent-v1
-accessibility.board-first,Önce ben binebilir miyim?,,,,2,tr-agent-v1
-accessibility.door-width,Kapı genişliği kaç cm?,,,,2,tr-agent-v1
-accessibility.wheelchair-width,Tekerlekli sandalyemin eni {} cm.,,,,2,tr-agent-v1
-accessibility.hard-of-hearing,İşitme engelliyim.,Az duyuyorum.,,,2,tr-agent-v1
-accessibility.speak-louder,Daha yüksek sesle konuşur musunuz?,,,,2,tr-agent-v1
-accessibility.visually-impaired,Görme engelliyim.,,,,2,tr-agent-v1
-accessibility.take-your-arm,Kolunuza girebilir miyim?,,,,2,tr-agent-v1
-accessibility.guide-dog,Bu benim rehber köpeğim.,,,,2,tr-agent-v1
-in-a-building.is-this-the-correct-entrance,Giriş burası mı?,,,,2,tr-agent-v1
-in-a-building.do-you-have-wi-fi,Wi-Fi var mı?,,,,2,tr-agent-v1
-in-a-building.what-is-the-wi-fi-password,Wi-Fi şifresi nedir?,,,,2,tr-agent-v1
-in-a-building.which-floor,Hangi kat?,,,,2,tr-agent-v1
-toilets.where-toilet,Tuvalet nerede?,,,,2,tr-agent-v1
-toilets.where-public-toilet,Umumi tuvalet nerede?,,,,2,tr-agent-v1
-toilets.may-i-use-the-toilet,Tuvaleti kullanabilir miyim?,,,,2,tr-agent-v1
-toilets.is-it-only-for-customers,Sadece müşterilere mi?,,,,2,tr-agent-v1
-toilets.toilet-wc,Tuvalet / WC,Lavabo,,,2,tr-agent-v1
-toilets.is-it-free,Ücretsiz mi?,,,,2,tr-agent-v1
-toilets.do-i-need-a-coin,Bozuk para veya jeton gerekir mi?,,,,2,tr-agent-v1
-toilets.is-the-tap-water-safe-to-drink,Musluk suyu içilir mi?,,,,2,tr-agent-v1
-toilets.it-is-urgent,Çok acil.,,,,2,tr-agent-v1
-toilets.may-i-have-the-toilet-key,Tuvalet anahtarını alabilir miyim?,,,,2,tr-agent-v1
-toilets.there-is-no-toilet-paper,Tuvalet kâğıdı yok.,,,,2,tr-agent-v1
-toilets.toilet-paper,tuvalet kâğıdı,,,,2,tr-agent-v1
-toilets.it-is-out-of-order,Arızalı.,Bozuk.,,,2,tr-agent-v1
-toilets.out-of-order,Arızalı,Hizmet dışı,,,2,tr-agent-v1
-toilets.mens-toilet,Erkek tuvaleti,Bay,,,2,tr-agent-v1
-toilets.womens-toilet,Kadın tuvaleti,Bayan,,,2,tr-agent-v1
-toilets.drinking-water,İçme suyu,,,,2,tr-agent-v1
-toilets.not-for-drinking,İçilmez,İçme suyu değildir,,,2,tr-agent-v1
-toilets.accessible-toilet,Engelli tuvaleti,,,,2,tr-agent-v1
-toilets.where-can-i-wash-my-hands,Nerede el yıkayabilirim?,,,,2,tr-agent-v1
-toilets.can-i-flush-the-paper,Kâğıdı klozete atabilir miyim?,,,,2,tr-agent-v1
-toilets.is-there-a-toilet-on-board,Araçta tuvalet var mı?,,,,2,tr-agent-v1
-toilets.the-toilet-will-not-flush,Sifon çalışmıyor.,,,,2,tr-agent-v1
-toilets.baby-change,Bebek bakım odası,,,,2,tr-agent-v1
-toilets.squat-toilet,alaturka tuvalet,,,,2,tr-agent-v1
-building-words.elevator,asansör,,,,2,tr-agent-v1
-building-words.stairs,merdiven,,,,2,tr-agent-v1
-building-words.entrance,giriş,,,,2,tr-agent-v1
-building-words.exit,çıkış,,,,2,tr-agent-v1
-building-words.men,erkek,bay,,,2,tr-agent-v1
-building-words.women,kadın,bayan,,,2,tr-agent-v1
-building-words.door,kapı,,,,2,tr-agent-v1
-building-words.key,anahtar,,,,2,tr-agent-v1
+building-help.what-room-number-is-this,Bu odanın numarası kaç?,,bʊ odanˈɯn numaɾasˈɯ kˈatʃ,,2,tr-agent-v1;ipa=espeak
+building-help.i-am-lost,Kayboldum.,,kajbɔɫdˈʊm,,2,tr-agent-v1;ipa=espeak
+building-help.where-is-reception,Resepsiyon nerede?,,resɛpsijˈɔn nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+building-help.where-is-a-power-outlet,Priz nerede?,,prˈɪz nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+accessibility.step-free,Basamaksız giriş var mı?,Engelsiz giriş var mı?,basamˈaksɯz ɟiɾˈɪʃ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+accessibility.wheelchair-access,Tekerlekli sandalyeye uygun mu?,,tekɛrlɛklˈɪ sandaɫjejˈɛ ʊjɡˈʊn mʊ,,2,tr-agent-v1;ipa=espeak
+accessibility.elevator,Asansör var mı?,,asansˈœr vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+accessibility.ramp,Rampa var mı?,,rampˈa vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+accessibility.how-many-steps,Kaç basamak var?,,kˈatʃ basamˈak vˈar,,2,tr-agent-v1;ipa=espeak
+accessibility.cannot-climb-stairs,Merdiven çıkamıyorum.,,mɛrdivˈæn tʃɯkamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+accessibility.need-to-sit-down,Oturmam gerekiyor.,,otʊrmˈam ɟeɾekˈijɔr,,2,tr-agent-v1;ipa=espeak
+accessibility.accessible-restroom,Engelli tuvaleti var mı?,,ænɟællˈɪ tuvaletˈɪ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+accessibility.station-assistance,İstasyonda yardım var mı?,,ɪstasjɔndˈa jardˈɯm vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+accessibility.help-me-carry,Taşımama yardım eder misiniz?,,taʃˈɯmama jardˈɯm edˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
+accessibility.board-first,Önce ben binebilir miyim?,,ˈœndʒɛ bæn binebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+accessibility.door-width,Kapı genişliği kaç cm?,,kapˈɯ ɟenɪʃlijˈɪ kˈatʃ dʒˌɛmˈɛ,,2,tr-agent-v1;ipa=espeak
+accessibility.wheelchair-width,Tekerlekli sandalyemin eni {} cm.,,tekɛrlɛklˈɪ sandaɫjemˈɪn enˈɪ {} dʒˌɛmˈɛ,,2,tr-agent-v1;ipa=espeak
+accessibility.hard-of-hearing,İşitme engelliyim.,Az duyuyorum.,iʃˈɪtmɛ ænɟællˈijɪm,,2,tr-agent-v1;ipa=espeak
+accessibility.speak-louder,Daha yüksek sesle konuşur musunuz?,,dahˈa jˈøksɛk sˈɛslɛ konuʃˈʊr mˈusunʊz,,2,tr-agent-v1;ipa=espeak
+accessibility.visually-impaired,Görme engelliyim.,,ɟˈœrmɛ ænɟællˈijɪm,,2,tr-agent-v1;ipa=espeak
+accessibility.take-your-arm,Kolunuza girebilir miyim?,,kˈoɫunuza ɟiɾebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+accessibility.guide-dog,Bu benim rehber köpeğim.,,bʊ bˈenɪm rɛhbˈɛr kœpˈejɪm,,2,tr-agent-v1;ipa=espeak
+in-a-building.is-this-the-correct-entrance,Giriş burası mı?,,ɟiɾˈɪʃ buɾasˈɯ mɯ,,2,tr-agent-v1;ipa=espeak
+in-a-building.do-you-have-wi-fi,Wi-Fi var mı?,,wˈifɪ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+in-a-building.what-is-the-wi-fi-password,Wi-Fi şifresi nedir?,,wˈifɪ ʃɪfresˈɪ nˈedɪr,,2,tr-agent-v1;ipa=espeak
+in-a-building.which-floor,Hangi kat?,,hanɡˈɪ kˈat,,2,tr-agent-v1;ipa=espeak
+toilets.where-toilet,Tuvalet nerede?,,tuvalˈɛt nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+toilets.where-public-toilet,Umumi tuvalet nerede?,,ˈumumɪ tuvalˈɛt nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+toilets.may-i-use-the-toilet,Tuvaleti kullanabilir miyim?,,tuvaletˈɪ kʊɫɫanabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+toilets.is-it-only-for-customers,Sadece müşterilere mi?,,sadˈedʒɛ møʃteɾileɾˈɛ mɪ,,2,tr-agent-v1;ipa=espeak
+toilets.toilet-wc,Tuvalet / WC,Lavabo,tuvalˈɛt / dˌabɯɫjʊdʒˈɛ,,2,tr-agent-v1;ipa=espeak
+toilets.is-it-free,Ücretsiz mi?,,ødʒrˈɛtsɪz mɪ,,2,tr-agent-v1;ipa=espeak
+toilets.do-i-need-a-coin,Bozuk para veya jeton gerekir mi?,,bozˈʊk paɾˈa vejˌa ʒetˈɔn ɟeɾekˈɪr mɪ,,2,tr-agent-v1;ipa=espeak
+toilets.is-the-tap-water-safe-to-drink,Musluk suyu içilir mi?,,mʊsɫˈʊk sujˈʊ itʃilˈɪr mɪ,,2,tr-agent-v1;ipa=espeak
+toilets.it-is-urgent,Çok acil.,,tʃˈɔk adʒˈɪl,,2,tr-agent-v1;ipa=espeak
+toilets.may-i-have-the-toilet-key,Tuvalet anahtarını alabilir miyim?,,tuvalˈɛt anahtaɾɯnˈɯ aɫabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+toilets.there-is-no-toilet-paper,Tuvalet kâğıdı yok.,,tuvalˈɛt kaːɯdˈɯ jˈɔk,,2,tr-agent-v1;ipa=espeak
+toilets.toilet-paper,tuvalet kâğıdı,,tuvalˈɛt kaːɯdˈɯ,,2,tr-agent-v1;ipa=espeak
+toilets.it-is-out-of-order,Arızalı.,Bozuk.,aɾɯzaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+toilets.out-of-order,Arızalı,Hizmet dışı,aɾɯzaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+toilets.mens-toilet,Erkek tuvaleti,Bay,ɛrkˈɛk tuvaletˈɪ,,2,tr-agent-v1;ipa=espeak
+toilets.womens-toilet,Kadın tuvaleti,Bayan,kadˈɯn tuvaletˈɪ,,2,tr-agent-v1;ipa=espeak
+toilets.drinking-water,İçme suyu,,ˈɪtʃmɛ sujˈʊ,,2,tr-agent-v1;ipa=espeak
+toilets.not-for-drinking,İçilmez,İçme suyu değildir,itʃɪlmˈɛz,,2,tr-agent-v1;ipa=espeak
+toilets.accessible-toilet,Engelli tuvaleti,,ænɟællˈɪ tuvaletˈɪ,,2,tr-agent-v1;ipa=espeak
+toilets.where-can-i-wash-my-hands,Nerede el yıkayabilirim?,,nˈeɾedɛ ˈæl jɯkajabilˈiɾɪm,,2,tr-agent-v1;ipa=espeak
+toilets.can-i-flush-the-paper,Kâğıdı klozete atabilir miyim?,,kaːɯdˈɯ kɫozetˈɛ atabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+toilets.is-there-a-toilet-on-board,Araçta tuvalet var mı?,,aɾatʃtˈa tuvalˈɛt vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+toilets.the-toilet-will-not-flush,Sifon çalışmıyor.,,sifˈɔn tʃaɫɯʃmˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+toilets.baby-change,Bebek bakım odası,,bebˈɛk bˈakɯm odasˈɯ,,2,tr-agent-v1;ipa=espeak
+toilets.squat-toilet,alaturka tuvalet,,aɫatʊrkˈa tuvalˈɛt,,2,tr-agent-v1;ipa=espeak
+building-words.elevator,asansör,,asansˈœr,,2,tr-agent-v1;ipa=espeak
+building-words.stairs,merdiven,,mɛrdivˈæn,,2,tr-agent-v1;ipa=espeak
+building-words.entrance,giriş,,ɟiɾˈɪʃ,,2,tr-agent-v1;ipa=espeak
+building-words.exit,çıkış,,tʃɯkˈɯʃ,,2,tr-agent-v1;ipa=espeak
+building-words.men,erkek,bay,ɛrkˈɛk,,2,tr-agent-v1;ipa=espeak
+building-words.women,kadın,bayan,kadˈɯn,,2,tr-agent-v1;ipa=espeak
+building-words.door,kapı,,kapˈɯ,,2,tr-agent-v1;ipa=espeak
+building-words.key,anahtar,,anahtˈar,,2,tr-agent-v1;ipa=espeak

@@ -1,13 +1,13 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,Tôi tên là {},,,,2,vi-agent-v1
-introductions.nice-to-meet-you,Rất vui được gặp,Hân hạnh được gặp,,,2,vi-agent-v1
-introductions.what-is-your-name,Xin cho hỏi tên gì ạ?,,,,2,vi-agent-v1
-introductions.we-are-traveling-together,Chúng tôi đi cùng nhau,,,,2,vi-agent-v1
-introductions.this-is-my-friend,Đây là bạn tôi,,,,2,vi-agent-v1
-introductions.i-am-from,Tôi đến từ {},,,,2,vi-agent-v1
+introductions.my-name-is,Tôi tên là {},,t̪oj˧ t̪en˧ laː˨˩ {},,2,vi-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Rất vui được gặp,Hân hạnh được gặp,zət̪˧˥ vuj˧ ɗyəc˨˩ˀ ɣap˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+introductions.what-is-your-name,Xin cho hỏi tên gì ạ?,,sin˧ tʃɔ˧ hɔj˧˩˧ t̪en˧ zi˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Chúng tôi đi cùng nhau,,tʃuŋ˧˥ t̪oj˧ ɗi˧ kuŋ˨˩ ɲaw˧,,2,vi-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Đây là bạn tôi,,ɗəɪ˧ laː˨˩ baːn˨˩ˀ t̪oj˧,,2,vi-agent-v1;ipa=espeak
+introductions.i-am-from,Tôi đến từ {},,t̪oj˧ ɗen˧˥ t̪y˨˩ {},,2,vi-agent-v1;ipa=espeak
 introductions.where-are-you-from,Quê ở đâu ạ?,Từ đâu đến ạ?,,,2,vi-agent-v1
-introductions.how-are-you,Có khỏe không ạ?,,,,2,vi-agent-v1
+introductions.how-are-you,Có khỏe không ạ?,,kɔ˧˥ xwɛ˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 introductions.i-am-a-tourist,Tôi là khách du lịch,,,,2,vi-agent-v1
-introductions.this-is-my-husband-wife,Đây là chồng / vợ tôi,,,"chồng = h., vợ = w.",2,vi-agent-v1
-introductions.this-is-my-daughter-son,Đây là con gái / con trai tôi,,,,2,vi-agent-v1
-introductions.i-am-traveling-alone,Tôi đi du lịch một mình,,,,2,vi-agent-v1
+introductions.this-is-my-husband-wife,Đây là chồng / vợ tôi,,ɗəɪ˧ laː˨˩ tʃoŋ˨˩ / vəː˨˩ˀ t̪oj˧,"chồng = h., vợ = w.",2,vi-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Đây là con gái / con trai tôi,,ɗəɪ˧ laː˨˩ kɔn˧ ɣaːj˧˥ / kɔn˧ tʃaːj˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Tôi đi du lịch một mình,,t̪oj˧ ɗi˧ zu˧ lic˨˩ˀ mot̪˨˩ˀ miɲ˨˩,,2,vi-agent-v1;ipa=espeak

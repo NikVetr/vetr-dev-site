@@ -1,32 +1,32 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,Картой?,,Kartoy?,,,2,ru-agent-v1
-payment-receipt.pay-cash,Наличными?,,Nalichnymi?,,,2,ru-agent-v1
+payment-receipt.pay-by-card,Картой?,,Kartoy?,kˈɑrtʌj,,2,ru-agent-v1;ipa=espeak
+payment-receipt.pay-cash,Наличными?,,Nalichnymi?,naɭʲˈitʃʲnɨmʲɪ,,2,ru-agent-v1;ipa=espeak
 payment-receipt.pay-by-qr-code,По QR-коду?,,Po QR-kodu?,,,2,ru-agent-v1
-payment-receipt.a-receipt-please,"Чек, пожалуйста.",,"Chek, pozhaluysta.",,,2,ru-agent-v1
-payment-receipt.please-write-the-number,Напишите сумму.,,Napishite summu.,,,2,ru-agent-v1
-payment-receipt.how-much-in-total,Сколько всего?,,Skolʼko vsego?,,,2,ru-agent-v1
-payment-receipt.can-we-pay-separately,Можно заплатить отдельно?,,Mozhno zaplatitʼ otdelʼno?,,,2,ru-agent-v1
-payment-receipt.is-tax-included,Налог включён?,НДС включён?,Nalog vklyuchën?,,,2,ru-agent-v1
-payment-receipt.my-card-was-declined,Мою карту не приняли.,,Moyu kartu ne prinyali.,,,2,ru-agent-v1
-payment-receipt.the-bill-is-wrong,"Кажется, в счёте ошибка.",,"Kazhetsya, v schëte oshibka.",,,2,ru-agent-v1
-payment-receipt.i-already-paid,Это уже оплачено.,Я уже заплатил.,Eto uzhe oplacheno.,,,2,ru-agent-v1
-shopping.i-am-just-looking,Я просто смотрю.,,Ya prosto smotryu.,,,2,ru-agent-v1
-shopping.how-much-is-this,Сколько это стоит?,,Skolʼko eto stoit?,,,2,ru-agent-v1
-shopping.that-is-too-expensive,Это слишком дорого.,,Eto slishkom dorogo.,,,2,ru-agent-v1
-shopping.can-it-be-a-little-cheaper,Можно чуть дешевле?,,Mozhno chutʼ deshevle?,,,2,ru-agent-v1
-shopping.is-there-a-discount,Есть скидка?,,Yestʼ skidka?,,,2,ru-agent-v1
-shopping.where-do-i-pay,Где платить?,,Gde platitʼ?,,,2,ru-agent-v1
-shopping.i-will-take-this,Я возьму это.,,Ya vozʼmu eto.,,,2,ru-agent-v1
-shopping.what-is-this,Что это?,,Chto eto?,,,2,ru-agent-v1
-shopping.where-can-i-buy,Где можно купить {}?,,Gde mozhno kupitʼ {}?,,,2,ru-agent-v1
-shopping.do-you-have-this-in-stock,Это есть в наличии?,,Eto yestʼ v nalichii?,,,2,ru-agent-v1
-shopping.two-of-these,"Два таких, пожалуйста.",,"Dva takikh, pozhaluysta.",,,2,ru-agent-v1
-shopping.what-is-it-made-of,Из чего это сделано?,,Iz chego eto sdelano?,,,2,ru-agent-v1
-color-size-returns.do-you-have-another-color,Есть другой цвет?,,Yestʼ drugoy tsvet?,,,2,ru-agent-v1
-color-size-returns.do-you-have-another-size,Есть другой размер?,,Yestʼ drugoy razmer?,,,2,ru-agent-v1
-color-size-returns.may-i-try-it-on,Можно померить?,,Mozhno pomeritʼ?,,,2,ru-agent-v1
-color-size-returns.can-i-return-it,Можно вернуть?,,Mozhno vernutʼ?,,,2,ru-agent-v1
-color-size-returns.can-i-exchange-it,Можно обменять?,,Mozhno obmenyatʼ?,,,2,ru-agent-v1
-color-size-returns.do-you-have-a-bag,Пакет есть?,,Paket yestʼ?,,,2,ru-agent-v1
-tax-refund.can-i-get-a-tax-refund,Можно вернуть налог?,,Mozhno vernutʼ nalog?,,,2,ru-agent-v1
-tax-refund.is-tax-free-shopping-available,У вас есть такс-фри?,,U vas yestʼ taks-fri?,,,2,ru-agent-v1
+payment-receipt.a-receipt-please,"Чек, пожалуйста.",,"Chek, pozhaluysta.","tʃʲˈek, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
+payment-receipt.please-write-the-number,Напишите сумму.,,Napishite summu.,nʌpʲiʃˈɨtʲi sˈummu,,2,ru-agent-v1;ipa=espeak
+payment-receipt.how-much-in-total,Сколько всего?,,Skolʼko vsego?,skˈoɭkʌ fsʲivˈo,,2,ru-agent-v1;ipa=espeak
+payment-receipt.can-we-pay-separately,Можно заплатить отдельно?,,Mozhno zaplatitʼ otdelʼno?,mˈoʒnʌ zʌpɭatʲˈitʲ ʌdʲdʲˈeɭnʌ,,2,ru-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,Налог включён?,НДС включён?,Nalog vklyuchën?,naɭˈok fkɭʲʉtʃʲˈɵn,,2,ru-agent-v1;ipa=espeak
+payment-receipt.my-card-was-declined,Мою карту не приняли.,,Moyu kartu ne prinyali.,mˈoju kˈɑrtu nʲe prʲˈinʲʌɭʲɪ,,2,ru-agent-v1;ipa=espeak
+payment-receipt.the-bill-is-wrong,"Кажется, в счёте ошибка.",,"Kazhetsya, v schëte oshibka.","kˈɑʒɨtsʌ, f ɕˈɵtʲi ʌʃˈɨpka",,2,ru-agent-v1;ipa=espeak
+payment-receipt.i-already-paid,Это уже оплачено.,Я уже заплатил.,Eto uzhe oplacheno.,ˈɛtʌ ˈuʒɨ ʌpɭˈɑtʃʲinʌ,,2,ru-agent-v1;ipa=espeak
+shopping.i-am-just-looking,Я просто смотрю.,,Ya prosto smotryu.,ˈja prˈostʌ smʌtrʲˈʉ,,2,ru-agent-v1;ipa=espeak
+shopping.how-much-is-this,Сколько это стоит?,,Skolʼko eto stoit?,skˈoɭkʌ ˈɛtʌ stʌˈit,,2,ru-agent-v1;ipa=espeak
+shopping.that-is-too-expensive,Это слишком дорого.,,Eto slishkom dorogo.,ˈɛtʌ sɭʲˈiʃkʌm dˈorʌvʌ,,2,ru-agent-v1;ipa=espeak
+shopping.can-it-be-a-little-cheaper,Можно чуть дешевле?,,Mozhno chutʼ deshevle?,mˈoʒnʌ tʃʲˈutʲ dʲiʃˈɛvɭʲi,,2,ru-agent-v1;ipa=espeak
+shopping.is-there-a-discount,Есть скидка?,,Yestʼ skidka?,jestʲ skʲˈidka,,2,ru-agent-v1;ipa=espeak
+shopping.where-do-i-pay,Где платить?,,Gde platitʼ?,ɡdʲˈe pɭatʲˈitʲ,,2,ru-agent-v1;ipa=espeak
+shopping.i-will-take-this,Я возьму это.,,Ya vozʼmu eto.,ˈja vʌʑmˈu ˈɛtʌ,,2,ru-agent-v1;ipa=espeak
+shopping.what-is-this,Что это?,,Chto eto?,ʃto ˈɛtʌ,,2,ru-agent-v1;ipa=espeak
+shopping.where-can-i-buy,Где можно купить {}?,,Gde mozhno kupitʼ {}?,ɡdʲˈe mˈoʒnʌ kupʲˈitʲ {},,2,ru-agent-v1;ipa=espeak
+shopping.do-you-have-this-in-stock,Это есть в наличии?,,Eto yestʼ v nalichii?,ˈɛtʌ jestʲ v naɭʲˈitʃʲiɪ,,2,ru-agent-v1;ipa=espeak
+shopping.two-of-these,"Два таких, пожалуйста.",,"Dva takikh, pozhaluysta.","dvˈɑ takʲˈix, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
+shopping.what-is-it-made-of,Из чего это сделано?,,Iz chego eto sdelano?,ˈis tʃʲivˈo ˈɛtʌ ʑdʲˈeɭʌnʌ,,2,ru-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-color,Есть другой цвет?,,Yestʼ drugoy tsvet?,jestʲ druɡˈoj tsvʲˈet,,2,ru-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-size,Есть другой размер?,,Yestʼ drugoy razmer?,jestʲ druɡˈoj razmʲˈer,,2,ru-agent-v1;ipa=espeak
+color-size-returns.may-i-try-it-on,Можно померить?,,Mozhno pomeritʼ?,mˈoʒnʌ pʌmʲirʲˈitʲ,,2,ru-agent-v1;ipa=espeak
+color-size-returns.can-i-return-it,Можно вернуть?,,Mozhno vernutʼ?,mˈoʒnʌ vʲirnˈutʲ,,2,ru-agent-v1;ipa=espeak
+color-size-returns.can-i-exchange-it,Можно обменять?,,Mozhno obmenyatʼ?,mˈoʒnʌ ʌbmʲinʲˈɑtʲ,,2,ru-agent-v1;ipa=espeak
+color-size-returns.do-you-have-a-bag,Пакет есть?,,Paket yestʼ?,pakʲˈet jestʲ,,2,ru-agent-v1;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,Можно вернуть налог?,,Mozhno vernutʼ nalog?,mˈoʒnʌ vʲirnˈutʲ naɭˈok,,2,ru-agent-v1;ipa=espeak
+tax-refund.is-tax-free-shopping-available,У вас есть такс-фри?,,U vas yestʼ taks-fri?,ˈu vˈɑs jestʲ tˈaksfrʲi,,2,ru-agent-v1;ipa=espeak

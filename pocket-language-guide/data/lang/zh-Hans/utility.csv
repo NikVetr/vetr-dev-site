@@ -1,16 +1,16 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,我想去{},,wǒ xiǎng qù {},,,2,latex-reference-v2
-utility-templates.please-give-me,请给我{},,qǐng gěi wǒ {},,,2,latex-reference-v2
-utility-templates.may-i,我可以{}吗？,,wǒ kěyǐ {} ma?,,,2,latex-reference-v2
-utility-templates.please-do-not-add,请不要放{},,qǐng bú yào fàng {},,,2,latex-reference-v2
-utility-templates.do-you-have,有没有{}？,,yǒu méiyǒu {}?,,,2,latex-reference-v2
-utility-templates.please-write-the-number,请写数字,,qǐng xiě shùzì,,,2,latex-reference-v2
-utility-templates.i-need,我需要{},,wǒ xūyào {},,,2,zh-Hans-agent-v1
-utility-templates.is-there-nearby,附近有{}吗？,,fùjìn yǒu {} ma?,,,2,zh-Hans-agent-v1
-utility-templates.how-much-is,{}多少钱？,,{} duōshao qián?,,,2,zh-Hans-agent-v1
-utility-templates.is-this,这是{}吗？,,zhè shì {} ma?,,,2,zh-Hans-agent-v1
-utility-templates.please,麻烦给我{},,máfan gěi wǒ {},,,2,zh-Hans-agent-v1
-utility-templates.i-am-looking-for,我在找{},,wǒ zài zhǎo {},,,2,zh-Hans-agent-v1
-utility-templates.do-you-accept,收{}吗？,,shōu {} ma?,,,2,zh-Hans-agent-v1
-utility-templates.i-cannot-find,我找不到{},,wǒ zhǎo bu dào {},,,2,zh-Hans-agent-v1
-utility-templates.there-is-a-problem-with,{}有问题,,{} yǒu wèntí,,,2,zh-Hans-agent-v1
+utility-templates.i-want-to-go-to,我想去{},,wǒ xiǎng qù {},wɔ˧˩˧ ɕjɑŋ˧˩˧ tɕʰy˥˩ {},,2,latex-reference-v2;ipa=pinyin
+utility-templates.please-give-me,请给我{},,qǐng gěi wǒ {},tɕʰiŋ˧˩˧ keɪ˧˩˧ wɔ˧˩˧ {},,2,latex-reference-v2;ipa=pinyin
+utility-templates.may-i,我可以{}吗？,,wǒ kěyǐ {} ma?,wɔ˧˩˧ kʰɤ˧˩˧i˧˩˧ {} ma,,2,latex-reference-v2;ipa=pinyin
+utility-templates.please-do-not-add,请不要放{},,qǐng bú yào fàng {},tɕʰiŋ˧˩˧ pu˧˥ jɑʊ˥˩ fɑŋ˥˩ {},,2,latex-reference-v2;ipa=pinyin
+utility-templates.do-you-have,有没有{}？,,yǒu méiyǒu {}?,joʊ˧˩˧ meɪ˧˥joʊ˧˩˧ {},,2,latex-reference-v2;ipa=pinyin
+utility-templates.please-write-the-number,请写数字,,qǐng xiě shùzì,tɕʰiŋ˧˩˧ ɕjɛ˧˩˧ ʂu˥˩tsɯ˥˩,,2,latex-reference-v2;ipa=pinyin
+utility-templates.i-need,我需要{},,wǒ xūyào {},wɔ˧˩˧ ɕy˥jɑʊ˥˩ {},,2,zh-Hans-agent-v1;ipa=pinyin
+utility-templates.is-there-nearby,附近有{}吗？,,fùjìn yǒu {} ma?,fu˥˩tɕin˥˩ joʊ˧˩˧ {} ma,,2,zh-Hans-agent-v1;ipa=pinyin
+utility-templates.how-much-is,{}多少钱？,,{} duōshao qián?,{} twɔ˥ʂɑʊ tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+utility-templates.is-this,这是{}吗？,,zhè shì {} ma?,ʈʂɤ˥˩ ʂɨ˥˩ {} ma,,2,zh-Hans-agent-v1;ipa=pinyin
+utility-templates.please,麻烦给我{},,máfan gěi wǒ {},ma˧˥fan keɪ˧˩˧ wɔ˧˩˧ {},,2,zh-Hans-agent-v1;ipa=pinyin
+utility-templates.i-am-looking-for,我在找{},,wǒ zài zhǎo {},wɔ˧˩˧ tsaɪ˥˩ ʈʂɑʊ˧˩˧ {},,2,zh-Hans-agent-v1;ipa=pinyin
+utility-templates.do-you-accept,收{}吗？,,shōu {} ma?,ʂoʊ˥ {} ma,,2,zh-Hans-agent-v1;ipa=pinyin
+utility-templates.i-cannot-find,我找不到{},,wǒ zhǎo bu dào {},wɔ˧˩˧ ʈʂɑʊ˧˩˧ pu tɑʊ˥˩ {},,2,zh-Hans-agent-v1;ipa=pinyin
+utility-templates.there-is-a-problem-with,{}有问题,,{} yǒu wèntí,{} joʊ˧˩˧ wən˥˩tʰi˧˥,,2,zh-Hans-agent-v1;ipa=pinyin

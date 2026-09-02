@@ -1,53 +1,53 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-laundry.please-wash-these-clothes,"Lavez ces vêtements, s'il vous plaît",,,,2,fr-agent-v1
-laundry.where-is-a-laundromat,Où est une laverie automatique ?,,,,2,fr-agent-v1
-laundry.when-will-it-be-ready,Quand est-ce que ce sera prêt ?,,,,2,fr-agent-v1
-laundry.how-much-per-kilo,Combien le kilo ?,,,,2,fr-agent-v1
-laundry.can-it-be-ready-today,Ce sera prêt aujourd'hui ?,,,,2,fr-agent-v1
-laundry.please-do-not-use-bleach,"Pas de javel, s'il vous plaît",,,,2,fr-agent-v1
-laundry.laundromat,laverie automatique,,,,2,fr-agent-v1
-laundry.please-iron-this,"Repassez ceci, s'il vous plaît",,,,2,fr-agent-v1
-laundry.detergent,lessive,,,,2,fr-agent-v1
-laundry.dry-cleaning,nettoyage à sec,pressing,,,2,fr-agent-v1
-laundry.dryer,sèche-linge,,,,2,fr-agent-v1
-laundry.coin-operated,à pièces,monnayeur,,,1,fr-agent-v1
-hotel-words.passport,passeport,,,,2,fr-agent-v1
-hotel-words.room-key-card,carte de chambre,,,,2,fr-agent-v1
-hotel-words.check-in,arrivée,check-in,,,2,fr-agent-v1
-hotel-words.check-out,départ,check-out,,,2,fr-agent-v1
-hotel-words.luggage-storage,consigne à bagages,,,,2,fr-agent-v1
-hotel-basics.are-any-rooms-available,Avez-vous une chambre libre ?,,,,2,fr-agent-v1
-hotel-basics.there-are-two-of-us,Nous sommes deux,,,,2,fr-agent-v1
-hotel-basics.i-have-a-reservation,J'ai une réservation,,,,2,fr-agent-v1
-hotel-basics.can-i-charge-my-phone,Puis-je recharger mon téléphone ?,,,,2,fr-agent-v1
-hotel-basics.i-would-like-a-non-smoking-room,Je voudrais une chambre non-fumeur,,,,2,fr-agent-v1
-hotel-basics.i-would-like-a-quiet-room,Je voudrais une chambre calme,,,,2,fr-agent-v1
-hotel-basics.is-there-a-washing-machine,Y a-t-il une machine à laver ?,,,,2,fr-agent-v1
-hotel-basics.is-wi-fi-free,Le wifi est-il gratuit ?,,,,2,fr-agent-v1
-hotel-basics.how-much-per-night,Combien par nuit ?,,,,2,fr-agent-v1
-hotel-basics.is-breakfast-included,Le petit-déjeuner est-il inclus ?,,,,2,fr-agent-v1
-hotel-basics.may-i-see-the-room,Puis-je voir la chambre ?,,,,2,fr-agent-v1
-hotel-basics.for-nights,Pour {} nuits,,,,2,fr-agent-v1
-hotel-basics.two-beds,"Deux lits séparés, s'il vous plaît",,,,2,fr-agent-v1
-hotel-basics.is-there-air-conditioning,Y a-t-il la climatisation ?,la clim,,,2,fr-agent-v1
-hotel-requests.can-i-check-out-later,Puis-je partir plus tard ?,,,,2,fr-agent-v1
-hotel-requests.what-time-does-breakfast-start,À quelle heure commence le petit-déjeuner ?,,,,2,fr-agent-v1
-hotel-requests.can-i-store-my-luggage,Puis-je laisser mes bagages ?,,,,2,fr-agent-v1
-hotel-requests.no-housekeeping,"Pas de ménage, merci",,,,2,fr-agent-v1
-hotel-requests.another-towel-please,"Une autre serviette, s'il vous plaît",,,,2,fr-agent-v1
-hotel-requests.what-time-is-check-out,À quelle heure est le départ ?,,,,2,fr-agent-v1
-hotel-requests.can-i-check-in-early,Puis-je arriver plus tôt ?,,,,2,fr-agent-v1
-hotel-requests.another-night,Puis-je rester une nuit de plus ?,,,,2,fr-agent-v1
-hotel-requests.is-there-a-safe,Y a-t-il un coffre-fort ?,,,,2,fr-agent-v1
-hotel-requests.another-blanket,"Une autre couverture, s'il vous plaît",,,,2,fr-agent-v1
-hotel-requests.wake-up-call,"Réveillez-moi à {}, s'il vous plaît",,,,2,fr-agent-v1
-room-problems.there-is-a-problem-with-the-room,Il y a un problème dans la chambre,,,,2,fr-agent-v1
-room-problems.the-air-conditioning-is-broken,La climatisation ne marche pas,,,,2,fr-agent-v1
-room-problems.there-is-no-hot-water,Il n'y a pas d'eau chaude,,,,2,fr-agent-v1
-room-problems.can-i-change-rooms,Puis-je changer de chambre ?,,,,2,fr-agent-v1
-room-problems.the-room-is-too-noisy,La chambre est trop bruyante,,,,2,fr-agent-v1
-room-problems.the-key-does-not-work,La clé ne fonctionne pas,,,,2,fr-agent-v1
-room-problems.the-toilet-will-not-flush,La chasse d'eau ne marche pas,,,,2,fr-agent-v1
-room-problems.the-light-does-not-work,La lumière ne marche pas,,,,2,fr-agent-v1
-room-problems.please-send-someone,Envoyez quelqu'un pour réparer,,,,2,fr-agent-v1
-room-problems.the-heating-does-not-work,Le chauffage ne marche pas,,,,2,fr-agent-v1
+laundry.please-wash-these-clothes,"Lavez ces vêtements, s'il vous plaît",,"lave se vɛtmˈɑ̃, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,Où est une laverie automatique ?,,u ɛt yn lavʁi otomatˈik,,2,fr-agent-v1;ipa=espeak
+laundry.when-will-it-be-ready,Quand est-ce que ce sera prêt ?,,kɑ̃t ɛs kə sə səʁa pʁˈɛ,,2,fr-agent-v1;ipa=espeak
+laundry.how-much-per-kilo,Combien le kilo ?,,kɔ̃bjɛ̃ lə kilˈo,,2,fr-agent-v1;ipa=espeak
+laundry.can-it-be-ready-today,Ce sera prêt aujourd'hui ?,,sə səʁa pʁɛ oʒuʁdyˈi,,2,fr-agent-v1;ipa=espeak
+laundry.please-do-not-use-bleach,"Pas de javel, s'il vous plaît",,"pa də ʒavˈɛl, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+laundry.laundromat,laverie automatique,,lavʁi otomatˈik,,2,fr-agent-v1;ipa=espeak
+laundry.please-iron-this,"Repassez ceci, s'il vous plaît",,"ʁəpase səsˈi, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+laundry.detergent,lessive,,lɛsˈiv,,2,fr-agent-v1;ipa=espeak
+laundry.dry-cleaning,nettoyage à sec,pressing,nɛtwajaʒ a sˈɛk,,2,fr-agent-v1;ipa=espeak
+laundry.dryer,sèche-linge,,sˈɛʃlˈɛ̃ʒ,,2,fr-agent-v1;ipa=espeak
+laundry.coin-operated,à pièces,monnayeur,a pjˈɛs,,1,fr-agent-v1;ipa=espeak
+hotel-words.passport,passeport,,paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
+hotel-words.room-key-card,carte de chambre,,kaʁt də ʃˈɑ̃bʁ,,2,fr-agent-v1;ipa=espeak
+hotel-words.check-in,arrivée,check-in,aʁivˈe,,2,fr-agent-v1;ipa=espeak
+hotel-words.check-out,départ,check-out,depˈaʁ,,2,fr-agent-v1;ipa=espeak
+hotel-words.luggage-storage,consigne à bagages,,kɔ̃siɲ a baɡˈaʒ,,2,fr-agent-v1;ipa=espeak
+hotel-basics.are-any-rooms-available,Avez-vous une chambre libre ?,,avevuz yn ʃɑ̃bʁ lˈibʁ,,2,fr-agent-v1;ipa=espeak
+hotel-basics.there-are-two-of-us,Nous sommes deux,,nu sɔm dˈø,,2,fr-agent-v1;ipa=espeak
+hotel-basics.i-have-a-reservation,J'ai une réservation,,ʒe yn ʁezɛʁvasjˈɔ̃,,2,fr-agent-v1;ipa=espeak
+hotel-basics.can-i-charge-my-phone,Puis-je recharger mon téléphone ?,,pyiʒ ʁəʃaʁʒe mɔ̃ telefˈɔn,,2,fr-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,Je voudrais une chambre non-fumeur,,ʒə vudʁɛz yn ʃɑ̃bʁ nɔ̃fymˈœʁ,,2,fr-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,Je voudrais une chambre calme,,ʒə vudʁɛz yn ʃɑ̃bʁ kˈalm,,2,fr-agent-v1;ipa=espeak
+hotel-basics.is-there-a-washing-machine,Y a-t-il une machine à laver ?,,i atil yn maʃin a lavˈe,,2,fr-agent-v1;ipa=espeak
+hotel-basics.is-wi-fi-free,Le wifi est-il gratuit ?,,lə waɪfaɪ ɛtil ɡʁatyˈi,,2,fr-agent-v1;ipa=espeak
+hotel-basics.how-much-per-night,Combien par nuit ?,,kɔ̃bjɛ̃ paʁ nyˈi,,2,fr-agent-v1;ipa=espeak
+hotel-basics.is-breakfast-included,Le petit-déjeuner est-il inclus ?,,lə pətideʒøne ɛtil ɛ̃klˈy,,2,fr-agent-v1;ipa=espeak
+hotel-basics.may-i-see-the-room,Puis-je voir la chambre ?,,pyiʒ vwaʁ la ʃˈɑ̃bʁ,,2,fr-agent-v1;ipa=espeak
+hotel-basics.for-nights,Pour {} nuits,,pˈuʁ {} nyˈi,,2,fr-agent-v1;ipa=espeak
+hotel-basics.two-beds,"Deux lits séparés, s'il vous plaît",,"dø li sepaʁˈe, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,Y a-t-il la climatisation ?,la clim,i atil la klimatizatjˈɔ̃,,2,fr-agent-v1;ipa=espeak
+hotel-requests.can-i-check-out-later,Puis-je partir plus tard ?,,pyiʒ paʁtiʁ ply tˈaʁ,,2,fr-agent-v1;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,À quelle heure commence le petit-déjeuner ?,,a kɛl œʁ kɔmɑ̃s lə pətˈideʒønˈe,,2,fr-agent-v1;ipa=espeak
+hotel-requests.can-i-store-my-luggage,Puis-je laisser mes bagages ?,,pyiʒ lɛse me baɡˈaʒ,,2,fr-agent-v1;ipa=espeak
+hotel-requests.no-housekeeping,"Pas de ménage, merci",,"pa də menˈaʒ, mɛʁsˈi",,2,fr-agent-v1;ipa=espeak
+hotel-requests.another-towel-please,"Une autre serviette, s'il vous plaît",,"yn otʁ sɛʁvjˈɛt, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+hotel-requests.what-time-is-check-out,À quelle heure est le départ ?,,a kɛl œʁ ɛ lə depˈaʁ,,2,fr-agent-v1;ipa=espeak
+hotel-requests.can-i-check-in-early,Puis-je arriver plus tôt ?,,pyiʒ aʁive ply tˈɔ̃,,2,fr-agent-v1;ipa=espeak
+hotel-requests.another-night,Puis-je rester une nuit de plus ?,,pyiʒ ʁɛste yn nyi də plˈy,,2,fr-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,Y a-t-il un coffre-fort ?,,i atil œ̃ kˈɔfʁfˈɔʁ,,2,fr-agent-v1;ipa=espeak
+hotel-requests.another-blanket,"Une autre couverture, s'il vous plaît",,"yn otʁ kuvɛʁtˈyʁ, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,"Réveillez-moi à {}, s'il vous plaît",,"ʁevɛjemwa ˌaaksɑ̃ɡʁˈav {}, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,Il y a un problème dans la chambre,,il i a œ̃ pʁɔblɛm dɑ̃ la ʃˈɑ̃bʁ,,2,fr-agent-v1;ipa=espeak
+room-problems.the-air-conditioning-is-broken,La climatisation ne marche pas,,la klimatizasjɔ̃ nə maʁʃ pˈa,,2,fr-agent-v1;ipa=espeak
+room-problems.there-is-no-hot-water,Il n'y a pas d'eau chaude,,il ni a pa do ʃˈod,,2,fr-agent-v1;ipa=espeak
+room-problems.can-i-change-rooms,Puis-je changer de chambre ?,,pyiʒ ʃɑ̃ʒe də ʃˈɑ̃bʁ,,2,fr-agent-v1;ipa=espeak
+room-problems.the-room-is-too-noisy,La chambre est trop bruyante,,la ʃɑ̃bʁ ɛ tʁo bʁyijˈɑ̃t,,2,fr-agent-v1;ipa=espeak
+room-problems.the-key-does-not-work,La clé ne fonctionne pas,,la kle nə fɔ̃ksjɔn pˈa,,2,fr-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,La chasse d'eau ne marche pas,,la ʃas do nə maʁʃ pˈa,,2,fr-agent-v1;ipa=espeak
+room-problems.the-light-does-not-work,La lumière ne marche pas,,la lymjɛʁ nə maʁʃ pˈa,,2,fr-agent-v1;ipa=espeak
+room-problems.please-send-someone,Envoyez quelqu'un pour réparer,,ɑ̃vwaje kɛlkœ̃ puʁ ʁepaʁˈe,,2,fr-agent-v1;ipa=espeak
+room-problems.the-heating-does-not-work,Le chauffage ne marche pas,,lə ʃofaʒ nə maʁʃ pˈa,,2,fr-agent-v1;ipa=espeak

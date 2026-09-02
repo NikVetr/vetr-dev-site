@@ -1,113 +1,113 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-directions.where-is,{} nerede?,,,,2,tr-agent-v1
-directions.how-do-i-get-to,{} yolunu tarif eder misiniz?,,,,2,tr-agent-v1
-directions.is-it-far,Uzak mı?,,,,2,tr-agent-v1
-directions.how-long-on-foot,Yürüyerek ne kadar?,,,,2,tr-agent-v1
-directions.please-show-me-on-the-map,"Haritada gösterin, lütfen.",,,,2,tr-agent-v1
-directions.where-is-the-nearest,En yakın {} nerede?,,,,2,tr-agent-v1
-directions.where-am-i,Neredeyim?,,,,2,tr-agent-v1
-directions.which-way,Ne tarafa?,,,,2,tr-agent-v1
-directions.can-i-walk-there,Yürüyerek gidebilir miyim?,,,,2,tr-agent-v1
-directions.how-far-is-it,Ne kadar uzakta?,,,,2,tr-agent-v1
-directions.which-exit,Hangi çıkış?,,,,2,tr-agent-v1
-directions.can-you-show-me-the-way,Yolu gösterir misiniz?,,,,2,tr-agent-v1
-directions.north,kuzey,,,,2,tr-agent-v1
-directions.south,güney,,,,2,tr-agent-v1
-directions.east,doğu,,,,2,tr-agent-v1
-directions.west,batı,,,,2,tr-agent-v1
-quick-directions.go-straight,Düz gidin.,,,,2,tr-agent-v1
-quick-directions.turn-left,Sola dönün.,,,,2,tr-agent-v1
-quick-directions.turn-right,Sağa dönün.,,,,2,tr-agent-v1
-quick-directions.this-way,Bu taraftan.,,,,2,tr-agent-v1
-quick-directions.that-way,Şu taraftan.,,,,2,tr-agent-v1
-quick-directions.on-the-left,Solda.,,,,2,tr-agent-v1
-quick-directions.on-the-right,Sağda.,,,,2,tr-agent-v1
-quick-directions.across-from-here,Tam karşıda.,,,,2,tr-agent-v1
-quick-directions.in-front,Önde.,,,,2,tr-agent-v1
-quick-directions.behind,Arkada.,,,,2,tr-agent-v1
-taxi.please-take-me-here,Beni buraya götürün.,,,,2,tr-agent-v1
-taxi.please-send-me-the-address,Adresi bana gönderin.,,,,2,tr-agent-v1
-taxi.we-need-the-east-gate-not-the-south-gate,"Doğu kapısına, güney kapısına değil.",,,,2,tr-agent-v1
-taxi.please-stop-here,"Burada durun, lütfen.",,,,2,tr-agent-v1
-taxi.can-you-wait-for-me-here,Burada bekler misiniz?,,,,2,tr-agent-v1
-taxi.we-need-to-catch-the-high-speed-train,Hızlı trene yetişmemiz gerek.,,,,2,tr-agent-v1
-taxi.please-use-the-meter,"Taksimetreyi açın, lütfen.",,,,2,tr-agent-v1
-taxi.i-will-get-off-here,Burada ineceğim.,,,,2,tr-agent-v1
-transit-rides.two-tickets,İki bilet.,,,,2,tr-agent-v1
-transit-rides.where-is-the-subway-station,Metro istasyonu nerede?,,,,2,tr-agent-v1
-transit-rides.does-this-bus-train-go-to,{} otobüsü / treni bu mu?,,,,2,tr-agent-v1
-transit-rides.what-is-the-next-stop,Sonraki durak ne?,,,,2,tr-agent-v1
-transit-rides.please-tell-me-where-to-get-off,Nerede ineceğimi söyler misiniz?,,,,2,tr-agent-v1
-transit-rides.is-this-direct,Aktarmasız mı?,Direkt mi?,,,2,tr-agent-v1
-transit-rides.do-i-need-to-transfer,Aktarma yapmam gerekiyor mu?,,,,2,tr-agent-v1
-transit-rides.is-it-delayed,Gecikme var mı?,,,,2,tr-agent-v1
-transit-rides.i-am-in-a-hurry,Acelem var.,,,,2,tr-agent-v1
-transit-rides.which-platform,Hangi peron?,,,,2,tr-agent-v1
-transit-rides.what-time-is-the-next-one,Sonraki kaçta?,,,,2,tr-agent-v1
-transit-rides.i-went-past-my-stop,Durağımı geçtim.,,,,2,tr-agent-v1
-transit-rides.can-i-use-this-ticket,Bu bilet geçerli mi?,,,,2,tr-agent-v1
-place-words.visitor-center,ziyaretçi merkezi,,,,2,tr-agent-v1
-place-words.railway-station,tren garı,istasyon,,,2,tr-agent-v1
-place-words.airport,havalimanı,,,,2,tr-agent-v1
-place-words.service-desk,danışma,,,,2,tr-agent-v1
-place-words.bus-stop,otobüs durağı,,,,2,tr-agent-v1
-place-words.luggage-storage,emanet,,,,2,tr-agent-v1
-place-words.tourist-spot-sightseeing-area,turistik yer,gezi alanı,,,2,tr-agent-v1
-border-customs.i-am-a-tourist,Turistim.,,,,2,tr-agent-v1
-border-customs.here-is-my-passport,Pasaportum burada.,,,,2,tr-agent-v1
-border-customs.i-am-staying-for-days,{} gün kalacağım.,,,,2,tr-agent-v1
-border-customs.nothing-to-declare,Beyan edecek bir şeyim yok.,Beyana tabi eşyam yok.,,,2,tr-agent-v1
-border-customs.i-am-staying-at,Kalacağım yer: {},,,,2,tr-agent-v1
-border-customs.i-am-here-for-business,İş için geldim.,,,,2,tr-agent-v1
-border-customs.i-have-a-return-ticket,Dönüş biletim var.,,,,2,tr-agent-v1
-border-customs.i-am-visiting-family,Aile ziyaretine geldim.,,,,2,tr-agent-v1
-border-customs.this-is-for-personal-use,Bu kişisel kullanım için.,,,,2,tr-agent-v1
-border-customs.i-am-in-transit,Transit yolcuyum.,,,,2,tr-agent-v1
-border-customs.i-have-in-cash,Yanımda {} nakit var.,,,,2,tr-agent-v1
-border-customs.this-is-a-gift,Bu hediye.,,,,2,tr-agent-v1
-border-customs.where-do-i-collect-my-baggage,Bagajımı nereden alacağım?,,,,2,tr-agent-v1
-border-customs.how-long-may-i-stay,Ne kadar kalabilirim?,,,,2,tr-agent-v1
-border-customs.i-have-a-connecting-flight,Aktarmalı uçuşum var.,Bağlantılı uçuşum var.,,,2,tr-agent-v1
-border-customs.may-i-have-an-entry-stamp,Giriş damgası alabilir miyim?,,,,2,tr-agent-v1
-border-customs.visa,vize,,,,2,tr-agent-v1
-border-customs.i-have-no-food-or-plants,Yanımda gıda veya bitki yok.,,,,2,tr-agent-v1
-border-customs.passport-control,pasaport kontrolü,,,,2,tr-agent-v1
-border-customs.customs,gümrük,,,,2,tr-agent-v1
-border-customs.baggage-claim,bagaj teslim,bagaj alım,,,2,tr-agent-v1
-border-customs.customs-declaration,gümrük beyanı,,,,2,tr-agent-v1
-border-customs.arrival-card,giriş formu,giriş kartı,,,1,tr-agent-v1
-border-customs.transit,transit,,,,2,tr-agent-v1
-border-customs.boarding-pass,biniş kartı,,,,2,tr-agent-v1
-pickup-meeting.where-is-the-pickup-point,Buluşma noktası nerede?,,,,2,tr-agent-v1
-pickup-meeting.please-send-me-the-pickup-point,Buluşma noktasını gönderin.,,,,2,tr-agent-v1
-pickup-meeting.please-pick-us-up-here,Bizi buradan alın.,,,,2,tr-agent-v1
-pickup-meeting.meet-us-at,Buluşma yeri: {},,,,2,tr-agent-v1
-pickup-meeting.please-call-me-a-ride,"Bana araç çağırın, lütfen.",,,,2,tr-agent-v1
-pickup-meeting.please-call-a-taxi,"Taksi çağırın, lütfen.",,,,2,tr-agent-v1
-rail-station-words.high-speed-rail,hızlı tren,YHT,,,2,tr-agent-v1
-rail-station-words.transfer,aktarma,,,,2,tr-agent-v1
-rail-station-words.ticket-gate,turnike,,,,2,tr-agent-v1
-rail-station-words.platform,peron,,,,2,tr-agent-v1
-rail-station-words.ticket-office,bilet gişesi,,,,2,tr-agent-v1
-rail-station-words.waiting-room,bekleme salonu,,,,2,tr-agent-v1
-rail-station-words.train-number,tren numarası,,,,2,tr-agent-v1
-rail-station-words.carriage,vagon,,,,2,tr-agent-v1
-rail-station-words.seat,koltuk,yer,,,2,tr-agent-v1
-rail-station-words.last-train,son tren,,,,2,tr-agent-v1
-rail-station-words.delayed,rötarlı,gecikmeli,,,2,tr-agent-v1
-rail-station-words.final-stop,son durak,,,,2,tr-agent-v1
-common-signs.open-on,açık,,,,2,tr-agent-v1
-common-signs.closed-off,kapalı,,,,2,tr-agent-v1
-common-signs.occupied,dolu,,,,2,tr-agent-v1
-common-signs.vacant,boş,,,,2,tr-agent-v1
-common-signs.caution,dikkat,,,,2,tr-agent-v1
-common-signs.no-entry,girilmez,,,,2,tr-agent-v1
-common-signs.no-smoking,sigara içilmez,,,,2,tr-agent-v1
-common-signs.no-photography,fotoğraf çekmek yasaktır,,,,2,tr-agent-v1
-common-signs.do-not-touch,dokunmayınız,,,,2,tr-agent-v1
-common-signs.temporarily-closed,geçici olarak kapalı,,,,2,tr-agent-v1
-common-signs.open-operating,hizmette,çalışıyor,,,1,tr-agent-v1
-common-signs.closed,kapalı,hizmet dışı,,,2,tr-agent-v1
-common-signs.stopped-stop,dur,durdu,,,2,tr-agent-v1
-transit-rides.do-i-need-to-validate,Bileti okutmam gerekiyor mu?,Kartı okutmam gerekiyor mu?,,,2,tr-agent-v1
-rail-station-words.ticket-validator,validatör,turnike,,,2,tr-agent-v1
+directions.where-is,{} nerede?,,{} nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+directions.how-do-i-get-to,{} yolunu tarif eder misiniz?,,{} joɫunˈʊ taɾˈɪf edˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
+directions.is-it-far,Uzak mı?,,uzˈak mɯ,,2,tr-agent-v1;ipa=espeak
+directions.how-long-on-foot,Yürüyerek ne kadar?,,jyɾyjeɾˈɛk nˈɛ kadˈar,,2,tr-agent-v1;ipa=espeak
+directions.please-show-me-on-the-map,"Haritada gösterin, lütfen.",,"haɾitadˈa ɟœsteɾˈɪn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+directions.where-is-the-nearest,En yakın {} nerede?,,ˈæn jakˈɯn {} nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+directions.where-am-i,Neredeyim?,,neɾedejˈɪm,,2,tr-agent-v1;ipa=espeak
+directions.which-way,Ne tarafa?,,nˈɛ taɾafˈa,,2,tr-agent-v1;ipa=espeak
+directions.can-i-walk-there,Yürüyerek gidebilir miyim?,,jyɾyjeɾˈɛk ɟidebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+directions.how-far-is-it,Ne kadar uzakta?,,nˈɛ kadˈar uzaktˈa,,2,tr-agent-v1;ipa=espeak
+directions.which-exit,Hangi çıkış?,,hanɡˈɪ tʃɯkˈɯʃ,,2,tr-agent-v1;ipa=espeak
+directions.can-you-show-me-the-way,Yolu gösterir misiniz?,,joɫˈʊ ɟœsteɾˈɪr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
+directions.north,kuzey,,kuzˈɛj,,2,tr-agent-v1;ipa=espeak
+directions.south,güney,,ɟynˈɛj,,2,tr-agent-v1;ipa=espeak
+directions.east,doğu,,doːˈʊ,,2,tr-agent-v1;ipa=espeak
+directions.west,batı,,batˈɯ,,2,tr-agent-v1;ipa=espeak
+quick-directions.go-straight,Düz gidin.,,dˈøz ɟidˈɪn,,2,tr-agent-v1;ipa=espeak
+quick-directions.turn-left,Sola dönün.,,sˈoɫa dœnˈøn,,2,tr-agent-v1;ipa=espeak
+quick-directions.turn-right,Sağa dönün.,,sˈaː dœnˈøn,,2,tr-agent-v1;ipa=espeak
+quick-directions.this-way,Bu taraftan.,,bʊ taɾaftˈan,,2,tr-agent-v1;ipa=espeak
+quick-directions.that-way,Şu taraftan.,,ʃʊ taɾaftˈan,,2,tr-agent-v1;ipa=espeak
+quick-directions.on-the-left,Solda.,,sɔɫdˈa,,2,tr-agent-v1;ipa=espeak
+quick-directions.on-the-right,Sağda.,,saːdˈa,,2,tr-agent-v1;ipa=espeak
+quick-directions.across-from-here,Tam karşıda.,,tˈam karʃɯdˈa,,2,tr-agent-v1;ipa=espeak
+quick-directions.in-front,Önde.,,œndˈɛ,,2,tr-agent-v1;ipa=espeak
+quick-directions.behind,Arkada.,,arkadˈa,,2,tr-agent-v1;ipa=espeak
+taxi.please-take-me-here,Beni buraya götürün.,,benˈɪ bˈuɾaja ɟœtyɾˈøn,,2,tr-agent-v1;ipa=espeak
+taxi.please-send-me-the-address,Adresi bana gönderin.,,adresˈɪ banˈa ɟœndeɾˈɪn,,2,tr-agent-v1;ipa=espeak
+taxi.we-need-the-east-gate-not-the-south-gate,"Doğu kapısına, güney kapısına değil.",,"doːˈʊ kapɯsɯnˈa, ɟynˈɛj kapɯsɯnˈa dˈejɪl",,2,tr-agent-v1;ipa=espeak
+taxi.please-stop-here,"Burada durun, lütfen.",,"bˈuɾada duɾˈʊn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+taxi.can-you-wait-for-me-here,Burada bekler misiniz?,,bˈuɾada bɛklˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
+taxi.we-need-to-catch-the-high-speed-train,Hızlı trene yetişmemiz gerek.,,hɯzɫˈɯ trenˈɛ jetɪʃmˈemɪz ɟeɾˈɛk,,2,tr-agent-v1;ipa=espeak
+taxi.please-use-the-meter,"Taksimetreyi açın, lütfen.",,"taksimˈɛtrejɪ atʃˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+taxi.i-will-get-off-here,Burada ineceğim.,,bˈuɾada inedʒˈejɪm,,2,tr-agent-v1;ipa=espeak
+transit-rides.two-tickets,İki bilet.,,ikˈɪ bilˈɛt,,2,tr-agent-v1;ipa=espeak
+transit-rides.where-is-the-subway-station,Metro istasyonu nerede?,,mɛtrˈɔ ɪstasjonˈʊ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+transit-rides.does-this-bus-train-go-to,{} otobüsü / treni bu mu?,,{} otobysˈø / trenˈɪ bʊ mʊ,,2,tr-agent-v1;ipa=espeak
+transit-rides.what-is-the-next-stop,Sonraki durak ne?,,sɔnrakˈɪ duɾˈak nˈɛ,,2,tr-agent-v1;ipa=espeak
+transit-rides.please-tell-me-where-to-get-off,Nerede ineceğimi söyler misiniz?,,nˈeɾedɛ inedʒˈejimɪ sœjlˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
+transit-rides.is-this-direct,Aktarmasız mı?,Direkt mi?,aktarmˈasɯz mɯ,,2,tr-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-transfer,Aktarma yapmam gerekiyor mu?,,aktˈarma japmˈam ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+transit-rides.is-it-delayed,Gecikme var mı?,,ɟedʒˈɪkmɛ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+transit-rides.i-am-in-a-hurry,Acelem var.,,adʒelˈæm vˈar,,2,tr-agent-v1;ipa=espeak
+transit-rides.which-platform,Hangi peron?,,hanɡˈɪ peɾˈɔn,,2,tr-agent-v1;ipa=espeak
+transit-rides.what-time-is-the-next-one,Sonraki kaçta?,,sɔnrakˈɪ katʃtˈa,,2,tr-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Durağımı geçtim.,,duɾˈaːɯmɯ ɟˈɛtʃtɪm,,2,tr-agent-v1;ipa=espeak
+transit-rides.can-i-use-this-ticket,Bu bilet geçerli mi?,,bʊ bilˈɛt ɟetʃɛrlˈɪ mɪ,,2,tr-agent-v1;ipa=espeak
+place-words.visitor-center,ziyaretçi merkezi,,zijaɾɛttʃˈɪ mɛrkezˈɪ,,2,tr-agent-v1;ipa=espeak
+place-words.railway-station,tren garı,istasyon,trˈæn ɡaɾˈɯ,,2,tr-agent-v1;ipa=espeak
+place-words.airport,havalimanı,,havalimanˈɯ,,2,tr-agent-v1;ipa=espeak
+place-words.service-desk,danışma,,danˈɯʃma,,2,tr-agent-v1;ipa=espeak
+place-words.bus-stop,otobüs durağı,,otobˈøs duɾaːˈɯ,,2,tr-agent-v1;ipa=espeak
+place-words.luggage-storage,emanet,,emanˈɛt,,2,tr-agent-v1;ipa=espeak
+place-words.tourist-spot-sightseeing-area,turistik yer,gezi alanı,tuɾɪstˈɪk jˈɛr,,2,tr-agent-v1;ipa=espeak
+border-customs.i-am-a-tourist,Turistim.,,tuɾˈɪstɪm,,2,tr-agent-v1;ipa=espeak
+border-customs.here-is-my-passport,Pasaportum burada.,,pasapˈɔrtʊm bˈuɾada,,2,tr-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,{} gün kalacağım.,,{} ɟˈøn kaɫadʒˈaːɯm,,2,tr-agent-v1;ipa=espeak
+border-customs.nothing-to-declare,Beyan edecek bir şeyim yok.,Beyana tabi eşyam yok.,bejˈan ededʒˈɛk bɪr ʃˈejɪm jˈɔk,,2,tr-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,Kalacağım yer: {},,kaɫadʒˈaːɯm jˈɛr {},,2,tr-agent-v1;ipa=espeak
+border-customs.i-am-here-for-business,İş için geldim.,,ˈɪʃ itʃˈɪn ɟældˈɪm,,2,tr-agent-v1;ipa=espeak
+border-customs.i-have-a-return-ticket,Dönüş biletim var.,,dœnˈøʃ bilˈetɪm vˈar,,2,tr-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,Aile ziyaretine geldim.,,aˈilɛ zijaɾetinˈɛ ɟældˈɪm,,2,tr-agent-v1;ipa=espeak
+border-customs.this-is-for-personal-use,Bu kişisel kullanım için.,,bʊ kiʃisˈæl kʊɫɫˈanɯm itʃˈɪn,,2,tr-agent-v1;ipa=espeak
+border-customs.i-am-in-transit,Transit yolcuyum.,,transˈɪt jɔɫdʒˈujʊm,,2,tr-agent-v1;ipa=espeak
+border-customs.i-have-in-cash,Yanımda {} nakit var.,,jˈanɯmda {} nakˈɪt vˈar,,2,tr-agent-v1;ipa=espeak
+border-customs.this-is-a-gift,Bu hediye.,,bʊ hedijˈɛ,,2,tr-agent-v1;ipa=espeak
+border-customs.where-do-i-collect-my-baggage,Bagajımı nereden alacağım?,,baɡˈaʒɯmɯ nˈeɾedæn aɫadʒˈaːɯm,,2,tr-agent-v1;ipa=espeak
+border-customs.how-long-may-i-stay,Ne kadar kalabilirim?,,nˈɛ kadˈar kaɫabilˈiɾɪm,,2,tr-agent-v1;ipa=espeak
+border-customs.i-have-a-connecting-flight,Aktarmalı uçuşum var.,Bağlantılı uçuşum var.,aktˈarmaɫɯ utʃˈuʃʊm vˈar,,2,tr-agent-v1;ipa=espeak
+border-customs.may-i-have-an-entry-stamp,Giriş damgası alabilir miyim?,,ɟiɾˈɪʃ damɡasˈɯ aɫabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+border-customs.visa,vize,,vizˈɛ,,2,tr-agent-v1;ipa=espeak
+border-customs.i-have-no-food-or-plants,Yanımda gıda veya bitki yok.,,jˈanɯmda ɡɯdˈa vejˌa bɪtkˈɪ jˈɔk,,2,tr-agent-v1;ipa=espeak
+border-customs.passport-control,pasaport kontrolü,,pasapˈɔrt kɔntrolˈø,,2,tr-agent-v1;ipa=espeak
+border-customs.customs,gümrük,,ɟømrˈøk,,2,tr-agent-v1;ipa=espeak
+border-customs.baggage-claim,bagaj teslim,bagaj alım,baɡˈaʒ tˈɛslɪm,,2,tr-agent-v1;ipa=espeak
+border-customs.customs-declaration,gümrük beyanı,,ɟømrˈøk bejanˈɯ,,2,tr-agent-v1;ipa=espeak
+border-customs.arrival-card,giriş formu,giriş kartı,ɟiɾˈɪʃ fɔrmˈʊ,,1,tr-agent-v1;ipa=espeak
+border-customs.transit,transit,,transˈɪt,,2,tr-agent-v1;ipa=espeak
+border-customs.boarding-pass,biniş kartı,,binˈɪʃ kartˈɯ,,2,tr-agent-v1;ipa=espeak
+pickup-meeting.where-is-the-pickup-point,Buluşma noktası nerede?,,buɫˈʊʃma nɔktasˈɯ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+pickup-meeting.please-send-me-the-pickup-point,Buluşma noktasını gönderin.,,buɫˈʊʃma nɔktasɯnˈɯ ɟœndeɾˈɪn,,2,tr-agent-v1;ipa=espeak
+pickup-meeting.please-pick-us-up-here,Bizi buradan alın.,,bizˈɪ bˈuɾadan aɫˈɯn,,2,tr-agent-v1;ipa=espeak
+pickup-meeting.meet-us-at,Buluşma yeri: {},,buɫˈʊʃma jeɾˈɪ {},,2,tr-agent-v1;ipa=espeak
+pickup-meeting.please-call-me-a-ride,"Bana araç çağırın, lütfen.",,"banˈa aɾˈatʃ tʃaːɯɾˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+pickup-meeting.please-call-a-taxi,"Taksi çağırın, lütfen.",,"taksˈɪ tʃaːɯɾˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+rail-station-words.high-speed-rail,hızlı tren,YHT,hɯzɫˈɯ trˈæn,,2,tr-agent-v1;ipa=espeak
+rail-station-words.transfer,aktarma,,aktˈarma,,2,tr-agent-v1;ipa=espeak
+rail-station-words.ticket-gate,turnike,,tʊrnikˈɛ,,2,tr-agent-v1;ipa=espeak
+rail-station-words.platform,peron,,peɾˈɔn,,2,tr-agent-v1;ipa=espeak
+rail-station-words.ticket-office,bilet gişesi,,bilˈɛt ɟiʃesˈɪ,,2,tr-agent-v1;ipa=espeak
+rail-station-words.waiting-room,bekleme salonu,,bˈɛklemɛ saɫonˈʊ,,2,tr-agent-v1;ipa=espeak
+rail-station-words.train-number,tren numarası,,trˈæn numaɾasˈɯ,,2,tr-agent-v1;ipa=espeak
+rail-station-words.carriage,vagon,,vaɡˈɔn,,2,tr-agent-v1;ipa=espeak
+rail-station-words.seat,koltuk,yer,kɔɫtˈʊk,,2,tr-agent-v1;ipa=espeak
+rail-station-words.last-train,son tren,,sˈɔn trˈæn,,2,tr-agent-v1;ipa=espeak
+rail-station-words.delayed,rötarlı,gecikmeli,rœtarɫˈɯ,,2,tr-agent-v1;ipa=espeak
+rail-station-words.final-stop,son durak,,sˈɔn duɾˈak,,2,tr-agent-v1;ipa=espeak
+common-signs.open-on,açık,,atʃˈɯk,,2,tr-agent-v1;ipa=espeak
+common-signs.closed-off,kapalı,,kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+common-signs.occupied,dolu,,doɫˈʊ,,2,tr-agent-v1;ipa=espeak
+common-signs.vacant,boş,,bˈɔʃ,,2,tr-agent-v1;ipa=espeak
+common-signs.caution,dikkat,,dikːˈat,,2,tr-agent-v1;ipa=espeak
+common-signs.no-entry,girilmez,,ɟiɾɪlmˈɛz,,2,tr-agent-v1;ipa=espeak
+common-signs.no-smoking,sigara içilmez,,siɡaɾˈa itʃɪlmˈɛz,,2,tr-agent-v1;ipa=espeak
+common-signs.no-photography,fotoğraf çekmek yasaktır,,fotoːɾˈaf tʃɛkmˈɛk jˈasaktɯr,,2,tr-agent-v1;ipa=espeak
+common-signs.do-not-touch,dokunmayınız,,dokˈʊnmajɯnɯz,,2,tr-agent-v1;ipa=espeak
+common-signs.temporarily-closed,geçici olarak kapalı,,ɟetʃidʒˈɪ oɫaɾˈak kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+common-signs.open-operating,hizmette,çalışıyor,hɪzmetːˈɛ,,1,tr-agent-v1;ipa=espeak
+common-signs.closed,kapalı,hizmet dışı,kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+common-signs.stopped-stop,dur,durdu,dˈʊr,,2,tr-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,Bileti okutmam gerekiyor mu?,Kartı okutmam gerekiyor mu?,biletˈɪ okʊtmˈam ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+rail-station-words.ticket-validator,validatör,turnike,validatˈœr,,2,tr-agent-v1;ipa=espeak

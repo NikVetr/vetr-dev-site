@@ -1,43 +1,43 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-numbers-money.l-ng,zero,,,,2,it-agent-v1
-numbers-money.y,uno,un / una,,,2,it-agent-v1
-numbers-money.r,due,,,,2,it-agent-v1
-numbers-money.s-n,tre,,,,2,it-agent-v1
-numbers-money.s,quattro,,,,2,it-agent-v1
-numbers-money.w,cinque,,,,2,it-agent-v1
-numbers-money.li,sei,,,,2,it-agent-v1
-numbers-money.q,sette,,,,2,it-agent-v1
-numbers-money.b,otto,,,,2,it-agent-v1
-numbers-money.ji,nove,,,,2,it-agent-v1
-numbers-money.sh,dieci,,,,2,it-agent-v1
-numbers-money.y-b-i,cento,,,,2,it-agent-v1
-numbers-money.y-qi-n,mille,,,,2,it-agent-v1
-numbers-money.y-w-n,diecimila,,,,2,it-agent-v1
-numbers-money.b-n,mezzo,la metà,,,2,it-agent-v1
+numbers-money.l-ng,zero,,dzˈɛro,,2,it-agent-v1;ipa=espeak
+numbers-money.y,uno,un / una,ˈuno,,2,it-agent-v1;ipa=espeak
+numbers-money.r,due,,dˈue,,2,it-agent-v1;ipa=espeak
+numbers-money.s-n,tre,,trˈe,,2,it-agent-v1;ipa=espeak
+numbers-money.s,quattro,,kwˈatːro,,2,it-agent-v1;ipa=espeak
+numbers-money.w,cinque,,tʃˈinkwe,,2,it-agent-v1;ipa=espeak
+numbers-money.li,sei,,sˈɛi,,2,it-agent-v1;ipa=espeak
+numbers-money.q,sette,,sˈɛtːe,,2,it-agent-v1;ipa=espeak
+numbers-money.b,otto,,ˈɔtːo,,2,it-agent-v1;ipa=espeak
+numbers-money.ji,nove,,nˈɔve,,2,it-agent-v1;ipa=espeak
+numbers-money.sh,dieci,,djˈɛtʃɪ,,2,it-agent-v1;ipa=espeak
+numbers-money.y-b-i,cento,,tʃˈɛnto,,2,it-agent-v1;ipa=espeak
+numbers-money.y-qi-n,mille,,mˈille,,2,it-agent-v1;ipa=espeak
+numbers-money.y-w-n,diecimila,,djetʃimˈila,,2,it-agent-v1;ipa=espeak
+numbers-money.b-n,mezzo,la metà,mˈɛdzːo,,2,it-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"Per formare i numeri: 11 = shí yī; 20 = èr shí; 21 = èr shí yī. Al telefono 1 si legge spesso yāo. Tra il numero e il nome il classificatore è obbligatorio: gè (generico), wèi (persone), zhāng (biglietti, cose piatte), bēi (tazze), píng (bottiglie). Davanti al classificatore 2 diventa liǎng, non èr: liǎng zhāng piào, due biglietti. jiǎo / máo = 0,1 yuan; fēn = 0,01 yuan.",,,,2,it-agent-v1
 numbers-money.number-and-classifier-notes-2,"Per formare i numeri: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. I contatori seguono il numero: -tsu (oggetti), -mai (cose piatte), -hon (cose lunghe), -nin (persone), -hai (tazze). Al telefono: 0 = zero o maru, 4 = yon, 7 = nana, 9 = kyuu. La vocale doppia è una vocale lunga.",,,,2,it-agent-v1
-atm-cash.where-is-an-atm,Dov'è un bancomat?,,,,2,it-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,Questo bancomat accetta carte straniere?,,,,2,it-agent-v1
-atm-cash.the-atm-kept-my-card,Il bancomat ha trattenuto la mia carta,,,,2,it-agent-v1
-atm-cash.is-there-a-fee,C'è una commissione?,,,,2,it-agent-v1
-atm-cash.the-card-was-declined,La carta è stata rifiutata,,,,2,it-agent-v1
-atm-cash.what-is-the-exchange-rate,Qual è il tasso di cambio?,,,,2,it-agent-v1
-atm-cash.no-money-came-out,Non sono usciti i soldi,,,,2,it-agent-v1
-atm-cash.where-can-i-change-money,Dove posso cambiare valuta?,Dove posso cambiare i soldi?,,,2,it-agent-v1
-atm-cash.the-machine-is-out-of-service,Il bancomat è fuori servizio,,,,2,it-agent-v1
-atm-cash.please-give-me-smaller-notes,"Mi dia banconote più piccole, per favore",,,,2,it-agent-v1
-atm-cash.do-you-have-change,Ha da cambiare?,Ha spiccioli?,,,2,it-agent-v1
-atm-cash.may-i-pay-in,Posso pagare in {}?,,,,2,it-agent-v1
-atm-cash.please-charge-in-local-currency,"Addebiti in valuta locale, per favore",,,,2,it-agent-v1
-atm-cash.where-can-i-get-coins,Dove posso trovare delle monete?,,,,2,it-agent-v1
-atm-cash.is-there-a-minimum-for-cards,C'è un minimo con la carta?,,,,2,it-agent-v1
-atm-cash.atm,il bancomat,lo sportello automatico,,,2,it-agent-v1
-atm-cash.banknote,la banconota,,,,2,it-agent-v1
-atm-cash.coin,la moneta,,,,2,it-agent-v1
-atm-cash.cash-only,Solo contanti,,,,2,it-agent-v1
-atm-cash.fee,la commissione,,,,2,it-agent-v1
-atm-cash.change,il resto,gli spiccioli,,,2,it-agent-v1
-atm-cash.exchange-rate,il tasso di cambio,il cambio,,,2,it-agent-v1
-atm-cash.bank,la banca,,,,2,it-agent-v1
-atm-cash.money-exchange,Cambio valuta,,,,2,it-agent-v1
-atm-cash.pin,il PIN,il codice PIN,,,2,it-agent-v1
+atm-cash.where-is-an-atm,Dov'è un bancomat?,,dovˈɛ ʊn bˈankomat,,2,it-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,Questo bancomat accetta carte straniere?,,kwˌɛsto bˈankomat atʃːˈetːa kˈarte straniˈɛre,,2,it-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,Il bancomat ha trattenuto la mia carta,,il bˈankomat a tratːenˈuto la mˌia kˈarta,,2,it-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,C'è una commissione?,,tʃe ˌʊna kommissjˈone,,2,it-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,La carta è stata rifiutata,,la kˈarta e stˈata rifjʊtˈata,,2,it-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,Qual è il tasso di cambio?,,kwˈal e il tˈasso dɪ kˈambio,,2,it-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,Non sono usciti i soldi,,non sˌono ʊʃˈitɪ i sˈɔldɪ,,2,it-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,Dove posso cambiare valuta?,Dove posso cambiare i soldi?,dˈove pˈɔsso kambjˈare vˈalʊta,,2,it-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,Il bancomat è fuori servizio,,il bˈankomat e fʊˈorɪ servˈitsio,,2,it-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,"Mi dia banconote più piccole, per favore",,"mɪ dˈia bankonˈɔte pjʊ pˈikːole, per favˈore",,2,it-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,Ha da cambiare?,Ha spiccioli?,a da kambjˈare,,2,it-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,Posso pagare in {}?,,pˈɔsso paɡˈare ˈiːn {},,2,it-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,"Addebiti in valuta locale, per favore",,"adːˈebitɪ in vˈalʊta lokˈale, per favˈore",,2,it-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,Dove posso trovare delle monete?,,dˈove pˈɔsso trovˈare dˌelle monˈete,,2,it-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,C'è un minimo con la carta?,,tʃe ʊn mˈinimo kon la kˈarta,,2,it-agent-v1;ipa=espeak
+atm-cash.atm,il bancomat,lo sportello automatico,il bˈankomat,,2,it-agent-v1;ipa=espeak
+atm-cash.banknote,la banconota,,la bankonˈɔta,,2,it-agent-v1;ipa=espeak
+atm-cash.coin,la moneta,,la monˈeta,,2,it-agent-v1;ipa=espeak
+atm-cash.cash-only,Solo contanti,,sˈolo kontˈantɪ,,2,it-agent-v1;ipa=espeak
+atm-cash.fee,la commissione,,la kommissjˈone,,2,it-agent-v1;ipa=espeak
+atm-cash.change,il resto,gli spiccioli,il rˈɛsto,,2,it-agent-v1;ipa=espeak
+atm-cash.exchange-rate,il tasso di cambio,il cambio,il tˈasso dɪ kˈambio,,2,it-agent-v1;ipa=espeak
+atm-cash.bank,la banca,,la bˈanka,,2,it-agent-v1;ipa=espeak
+atm-cash.money-exchange,Cambio valuta,,kˈambio vˈalʊta,,2,it-agent-v1;ipa=espeak
+atm-cash.pin,il PIN,il codice PIN,il pˈin,,2,it-agent-v1;ipa=espeak

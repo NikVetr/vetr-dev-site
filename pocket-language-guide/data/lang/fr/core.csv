@@ -1,47 +1,47 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,je / moi,,,,2,fr-agent-v1
-pronouns-verbs.we-us,nous,,,,2,fr-agent-v1
-pronouns-verbs.you,tu / toi,,,,2,fr-agent-v1
-pronouns-verbs.you-polite,vous,,,,2,fr-agent-v1
-pronouns-verbs.he-him,il / lui,,,,2,fr-agent-v1
-pronouns-verbs.she-her,elle,,,,2,fr-agent-v1
-pronouns-verbs.they-them,ils / elles,,,,2,fr-agent-v1
-pronouns-verbs.my-mine,mon / ma,,,,2,fr-agent-v1
-pronouns-verbs.your-yours,votre / le vôtre,,,,2,fr-agent-v1
-pronouns-verbs.be-called-call,s'appeler / appeler,,,,2,fr-agent-v1
-pronouns-verbs.have,avoir,,,,2,fr-agent-v1
-pronouns-verbs.do-not-have,ne pas avoir,je n'ai pas de,,,2,fr-agent-v1
-pronouns-verbs.go,aller,,,,2,fr-agent-v1
-pronouns-verbs.come,venir,,,,2,fr-agent-v1
-pronouns-verbs.would-like,je voudrais,,,,2,fr-agent-v1
-pronouns-verbs.want,vouloir,,,,2,fr-agent-v1
-pronouns-verbs.look-for,chercher,,,,2,fr-agent-v1
-pronouns-verbs.buy,acheter,,,,2,fr-agent-v1
-pronouns-verbs.like,aimer,,,,2,fr-agent-v1
-pronouns-verbs.need,avoir besoin de,,,,2,fr-agent-v1
-pronouns-verbs.there-is-have,il y a,,,,2,fr-agent-v1
-pronouns-verbs.there-is-not-do-not-have,il n'y a pas de,,,,2,fr-agent-v1
-pronouns-verbs.want-to-verb,je voudrais + infinitif,,,,1,fr-agent-v1
-pronouns-verbs.want-thing,je voudrais + nom,,,,1,fr-agent-v1
-pronouns-verbs.need-thing,j'ai besoin de + nom,,,,1,fr-agent-v1
-pronouns-verbs.looking-for-thing,je cherche + nom,,,,1,fr-agent-v1
-question-words.what,quoi / que,,,,2,fr-agent-v1
-question-words.where,où,,,,2,fr-agent-v1
-question-words.who,qui,,,,2,fr-agent-v1
-question-words.which-one,lequel / laquelle,,,,2,fr-agent-v1
-question-words.when,quand,,,,2,fr-agent-v1
-question-words.how,comment,,,,2,fr-agent-v1
-question-words.how-much-many,combien,,,,2,fr-agent-v1
-question-words.how-many,combien de,,,,2,fr-agent-v1
-question-words.why,pourquoi,,,,2,fr-agent-v1
-question-words.this,ceci / ce,,,,2,fr-agent-v1
-question-words.that,cela / ça,,,,2,fr-agent-v1
-question-words.here,ici,,,,2,fr-agent-v1
-question-words.there,là / là-bas,,,,2,fr-agent-v1
-question-words.a-little,un peu,,,,2,fr-agent-v1
-question-words.some,quelques / du,,,,2,fr-agent-v1
-question-words.very,très,,,,2,fr-agent-v1
-question-words.too,trop,,,,2,fr-agent-v1
-question-words.also,aussi,,,,2,fr-agent-v1
-question-words.all-both,tout / tous les deux,,,,2,fr-agent-v1
-question-words.how-much-what-price,combien ça coûte,,,,2,fr-agent-v1
+pronouns-verbs.i-me,je / moi,,ʒə / mwˈa,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.we-us,nous,,nˈu,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.you,tu / toi,,tˈy / twˈa,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.you-polite,vous,,vˈu,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.he-him,il / lui,,ˈil / lyˈi,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.she-her,elle,,ˈɛl,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.they-them,ils / elles,,ˈil / ˈɛl,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.my-mine,mon / ma,,mɔ̃ / ma,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,votre / le vôtre,,votʁ / lə vˈoːtʁ,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.be-called-call,s'appeler / appeler,,saplˈe / aplˈe,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.have,avoir,,avwˈaʁ,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.do-not-have,ne pas avoir,je n'ai pas de,nə paz avwˈaʁ,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.go,aller,,alˈe,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.come,venir,,vənˈiʁ,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.would-like,je voudrais,,ʒə vudʁˈɛ,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.want,vouloir,,vulwˈaʁ,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.look-for,chercher,,ʃɛʁʃˈe,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.buy,acheter,,aʃtˈe,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.like,aimer,,ɛmˈe,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.need,avoir besoin de,,avwaʁ bəzwɛ̃ də,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.there-is-have,il y a,,il i ˈa,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,il n'y a pas de,,il ni a pa də,,2,fr-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,je voudrais + infinitif,,ʒə vudʁɛz ɛ̃finitˈif,,1,fr-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,je voudrais + nom,,ʒə vudʁɛ nˈɔ̃,,1,fr-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,j'ai besoin de + nom,,ʒe bəzwɛ̃ də nˈɔ̃,,1,fr-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,je cherche + nom,,ʒə ʃɛʁʃ nˈɔ̃,,1,fr-agent-v1;ipa=espeak
+question-words.what,quoi / que,,kwˈa / kˈə,,2,fr-agent-v1;ipa=espeak
+question-words.where,où,,ˈu,,2,fr-agent-v1;ipa=espeak
+question-words.who,qui,,kˈi,,2,fr-agent-v1;ipa=espeak
+question-words.which-one,lequel / laquelle,,ləkˈɛl / lakˈɛl,,2,fr-agent-v1;ipa=espeak
+question-words.when,quand,,kˈɑ̃,,2,fr-agent-v1;ipa=espeak
+question-words.how,comment,,kɔmˈɑ̃,,2,fr-agent-v1;ipa=espeak
+question-words.how-much-many,combien,,kɔ̃bjˈɛ̃,,2,fr-agent-v1;ipa=espeak
+question-words.how-many,combien de,,kɔ̃bjɛ̃ də,,2,fr-agent-v1;ipa=espeak
+question-words.why,pourquoi,,puʁkwˈa,,2,fr-agent-v1;ipa=espeak
+question-words.this,ceci / ce,,səsˈi / sˈə,,2,fr-agent-v1;ipa=espeak
+question-words.that,cela / ça,,səlˈa / sˈa,,2,fr-agent-v1;ipa=espeak
+question-words.here,ici,,isˈi,,2,fr-agent-v1;ipa=espeak
+question-words.there,là / là-bas,,lˈa / lˈabˈa,,2,fr-agent-v1;ipa=espeak
+question-words.a-little,un peu,,œ̃ pˈø,,2,fr-agent-v1;ipa=espeak
+question-words.some,quelques / du,,kˈɛlkə / dy,,2,fr-agent-v1;ipa=espeak
+question-words.very,très,,tʁˈɛ,,2,fr-agent-v1;ipa=espeak
+question-words.too,trop,,tʁˈo,,2,fr-agent-v1;ipa=espeak
+question-words.also,aussi,,osˈi,,2,fr-agent-v1;ipa=espeak
+question-words.all-both,tout / tous les deux,,tˈu / tu le dˈø,,2,fr-agent-v1;ipa=espeak
+question-words.how-much-what-price,combien ça coûte,,kɔ̃bjɛ̃ sa kˈut,,2,fr-agent-v1;ipa=espeak

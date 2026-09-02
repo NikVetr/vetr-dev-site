@@ -1,32 +1,32 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,Posso pagare con la carta?,,,,2,it-agent-v1
-payment-receipt.pay-cash,Posso pagare in contanti?,,,,2,it-agent-v1
-payment-receipt.pay-by-qr-code,Posso pagare con il codice QR?,,,,2,it-agent-v1
-payment-receipt.a-receipt-please,"Uno scontrino, per favore","Una ricevuta, per favore",,,2,it-agent-v1
-shopping.i-am-just-looking,Sto solo dando un'occhiata,,,,2,it-agent-v1
-shopping.how-much-is-this,Quanto costa questo?,,,,2,it-agent-v1
-shopping.that-is-too-expensive,È troppo caro,,,,2,it-agent-v1
-shopping.can-it-be-a-little-cheaper,Può farmi un po' di sconto?,,,,2,it-agent-v1
-color-size-returns.do-you-have-another-color,Avete un altro colore?,,,,2,it-agent-v1
-color-size-returns.do-you-have-another-size,Avete un'altra taglia?,Avete un'altra misura?,,,2,it-agent-v1
-color-size-returns.may-i-try-it-on,Posso provarlo?,,,,2,it-agent-v1
-color-size-returns.can-i-return-it,Posso restituirlo?,,,,2,it-agent-v1
-color-size-returns.can-i-exchange-it,Posso cambiarlo?,,,,2,it-agent-v1
-color-size-returns.do-you-have-a-bag,Avete un sacchetto?,,,,2,it-agent-v1
-tax-refund.can-i-get-a-tax-refund,Posso chiedere il rimborso dell'IVA?,,,,2,it-agent-v1
-tax-refund.is-tax-free-shopping-available,Fate il tax free?,,,,2,it-agent-v1
-shopping.is-there-a-discount,C'è uno sconto?,,,,2,it-agent-v1
-payment-receipt.please-write-the-number,"Scriva la cifra, per favore",,,,2,it-agent-v1
-payment-receipt.how-much-in-total,Quant'è in tutto?,,,,2,it-agent-v1
-payment-receipt.can-we-pay-separately,Possiamo pagare separatamente?,,,,2,it-agent-v1
-payment-receipt.is-tax-included,L'IVA è compresa?,,,,2,it-agent-v1
-payment-receipt.my-card-was-declined,La mia carta è stata rifiutata,,,,2,it-agent-v1
-payment-receipt.the-bill-is-wrong,Credo che ci sia un errore nel conto,,,,2,it-agent-v1
-payment-receipt.i-already-paid,Ho già pagato,,,,2,it-agent-v1
-shopping.where-do-i-pay,Dove si paga?,,,,2,it-agent-v1
-shopping.i-will-take-this,Prendo questo,,,,2,it-agent-v1
-shopping.what-is-this,Che cos'è questo?,,,,2,it-agent-v1
-shopping.where-can-i-buy,Dove posso comprare {}?,,,,2,it-agent-v1
-shopping.do-you-have-this-in-stock,Ce l'avete disponibile?,,,,2,it-agent-v1
-shopping.two-of-these,"Due di questi, per favore",,,,2,it-agent-v1
-shopping.what-is-it-made-of,Di che cosa è fatto?,,,,2,it-agent-v1
+payment-receipt.pay-by-card,Posso pagare con la carta?,,pˈɔsso paɡˈare kon la kˈarta,,2,it-agent-v1;ipa=espeak
+payment-receipt.pay-cash,Posso pagare in contanti?,,pˈɔsso paɡˈare in kontˈantɪ,,2,it-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,Posso pagare con il codice QR?,,pˈɔsso paɡˈare kon il kˈɔditʃe kˌʊˈɛrɾe,,2,it-agent-v1;ipa=espeak
+payment-receipt.a-receipt-please,"Uno scontrino, per favore","Una ricevuta, per favore","ˈuno skontrˈino, per favˈore",,2,it-agent-v1;ipa=espeak
+shopping.i-am-just-looking,Sto solo dando un'occhiata,,stˈɔ sˈolo dˈando ʊnokːjˈata,,2,it-agent-v1;ipa=espeak
+shopping.how-much-is-this,Quanto costa questo?,,kwˈanto kˈɔsta kwˈesto,,2,it-agent-v1;ipa=espeak
+shopping.that-is-too-expensive,È troppo caro,,e trˈɔpːo kˈaro,,2,it-agent-v1;ipa=espeak
+shopping.can-it-be-a-little-cheaper,Può farmi un po' di sconto?,,pʊˈɔ fˈarmɪ ʊn pˈo dɪ skˈonto,,2,it-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-color,Avete un altro colore?,,avˌete ʊn ˈaltro kolˈore,,2,it-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-size,Avete un'altra taglia?,Avete un'altra misura?,avˌete ʊnˈaltra tˈaʎa,,2,it-agent-v1;ipa=espeak
+color-size-returns.may-i-try-it-on,Posso provarlo?,,pˈɔsso provˈarlo,,2,it-agent-v1;ipa=espeak
+color-size-returns.can-i-return-it,Posso restituirlo?,,pˈɔsso restitʊˈirlo,,2,it-agent-v1;ipa=espeak
+color-size-returns.can-i-exchange-it,Posso cambiarlo?,,pˈɔsso kambjˈarlo,,2,it-agent-v1;ipa=espeak
+color-size-returns.do-you-have-a-bag,Avete un sacchetto?,,avˌete ʊn sakːˈetːo,,2,it-agent-v1;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,Posso chiedere il rimborso dell'IVA?,,pˈɔsso kjˈɛdere il rimbˈorso dellˈiva,,2,it-agent-v1;ipa=espeak
+tax-refund.is-tax-free-shopping-available,Fate il tax free?,,fˈate il tˈaks fɹˈiː,,2,it-agent-v1;ipa=espeak
+shopping.is-there-a-discount,C'è uno sconto?,,tʃe ˈuno skˈonto,,2,it-agent-v1;ipa=espeak
+payment-receipt.please-write-the-number,"Scriva la cifra, per favore",,"skrˈiva la tʃˈifra, per favˈore",,2,it-agent-v1;ipa=espeak
+payment-receipt.how-much-in-total,Quant'è in tutto?,,kwante in tˈutːo,,2,it-agent-v1;ipa=espeak
+payment-receipt.can-we-pay-separately,Possiamo pagare separatamente?,,possjˈamo paɡˈare sepaɾatamˈente,,2,it-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,L'IVA è compresa?,,lˈiva e komprˈeza,,2,it-agent-v1;ipa=espeak
+payment-receipt.my-card-was-declined,La mia carta è stata rifiutata,,la mˌia kˈarta e stˈata rifjʊtˈata,,2,it-agent-v1;ipa=espeak
+payment-receipt.the-bill-is-wrong,Credo che ci sia un errore nel conto,,krˈɛdo ke tʃɪ sˌia ʊn erɾˈore nel kˈonto,,2,it-agent-v1;ipa=espeak
+payment-receipt.i-already-paid,Ho già pagato,,o dʒˈa paɡˈato,,2,it-agent-v1;ipa=espeak
+shopping.where-do-i-pay,Dove si paga?,,dˈove sɪ pˈaɡa,,2,it-agent-v1;ipa=espeak
+shopping.i-will-take-this,Prendo questo,,prˈɛndo kwˈesto,,2,it-agent-v1;ipa=espeak
+shopping.what-is-this,Che cos'è questo?,,ke kozˈɛ kwˈesto,,2,it-agent-v1;ipa=espeak
+shopping.where-can-i-buy,Dove posso comprare {}?,,dˈove pˈɔsso komprˈare {},,2,it-agent-v1;ipa=espeak
+shopping.do-you-have-this-in-stock,Ce l'avete disponibile?,,tʃe lavˌete disponˈibile,,2,it-agent-v1;ipa=espeak
+shopping.two-of-these,"Due di questi, per favore",,"dˈue dɪ kwˈestɪ, per favˈore",,2,it-agent-v1;ipa=espeak
+shopping.what-is-it-made-of,Di che cosa è fatto?,,dɪ ke kˈɔza e fˈatːo,,2,it-agent-v1;ipa=espeak

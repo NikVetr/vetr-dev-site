@@ -1,44 +1,44 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,Сколько времени?,,Skolʼko vremeni?,,,2,ru-agent-v1
-time-scheduling.how-many-minutes,Сколько минут?,,Skolʼko minut?,,,2,ru-agent-v1
-time-scheduling.what-time-should-we-meet,Во сколько встретимся?,,Vo skolʼko vstretimsya?,,,2,ru-agent-v1
-time-scheduling.can-we-change-the-time,Можно перенести время?,,Mozhno perenesti vremya?,,,2,ru-agent-v1
-time-scheduling.when-is-convenient,Когда вам удобно?,,Kogda vam udobno?,,,2,ru-agent-v1
-time-scheduling.what-is-today-s-date,Какое сегодня число?,,Kakoye segodnya chislo?,,,2,ru-agent-v1
-time-scheduling.what-day-is-it-today,Какой сегодня день?,,Kakoy segodnya denʼ?,,,2,ru-agent-v1
-time-scheduling.what-time-does-it-open,Во сколько открывается?,,Vo skolʼko otkryvayetsya?,,,2,ru-agent-v1
-time-scheduling.what-time-does-it-close,Во сколько закрывается?,,Vo skolʼko zakryvayetsya?,,,2,ru-agent-v1
-time-scheduling.how-long-does-it-take,Сколько это займёт?,,Skolʼko eto zaymët?,,,2,ru-agent-v1
-time-words.today,сегодня,,segodnya,,,2,ru-agent-v1
-time-words.tomorrow,завтра,,zavtra,,,2,ru-agent-v1
-time-words.yesterday,вчера,,vchera,,,2,ru-agent-v1
-time-words.this-week,на этой неделе,,na etoy nedele,,,2,ru-agent-v1
-time-words.next-week,на следующей неделе,,na sleduyushchey nedele,,,2,ru-agent-v1
-time-words.morning,утро,,utro,,,2,ru-agent-v1
-time-words.afternoon,день,,denʼ,,,2,ru-agent-v1
-time-words.evening,вечер,,vecher,,,2,ru-agent-v1
-time-words.spring,весна,,vesna,,,2,ru-agent-v1
-time-words.summer,лето,,leto,,,2,ru-agent-v1
-time-words.fall,осень,,osenʼ,,,2,ru-agent-v1
-time-words.winter,зима,,zima,,,2,ru-agent-v1
-time-words.night,ночь,,nochʼ,,,2,ru-agent-v1
-days-of-week.monday,понедельник,,ponedelʼnik,,,2,ru-agent-v1
-days-of-week.tuesday,вторник,,vtornik,,,2,ru-agent-v1
-days-of-week.wednesday,среда,,sreda,,,2,ru-agent-v1
-days-of-week.thursday,четверг,,chetverg,,,2,ru-agent-v1
-days-of-week.friday,пятница,,pyatnitsa,,,2,ru-agent-v1
-days-of-week.saturday,суббота,,subbota,,,2,ru-agent-v1
-days-of-week.sunday,воскресенье,,voskresenʼye,,,2,ru-agent-v1
-months.january,январь,,yanvarʼ,,,2,ru-agent-v1
-months.february,февраль,,fevralʼ,,,2,ru-agent-v1
-months.march,март,,mart,,,2,ru-agent-v1
-months.april,апрель,,aprelʼ,,,2,ru-agent-v1
-months.may,май,,may,,,2,ru-agent-v1
-months.june,июнь,,iyunʼ,,,2,ru-agent-v1
-months.july,июль,,iyulʼ,,,2,ru-agent-v1
-months.august,август,,avgust,,,2,ru-agent-v1
-months.september,сентябрь,,sentyabrʼ,,,2,ru-agent-v1
-months.october,октябрь,,oktyabrʼ,,,2,ru-agent-v1
-months.november,ноябрь,,noyabrʼ,,,2,ru-agent-v1
-months.december,декабрь,,dekabrʼ,,,2,ru-agent-v1
+time-scheduling.what-time-is-it,Сколько времени?,,Skolʼko vremeni?,skˈoɭkʌ vrʲˈemʲinʲɪ,,2,ru-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,Сколько минут?,,Skolʼko minut?,skˈoɭkʌ mʲinˈut,,2,ru-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,Во сколько встретимся?,,Vo skolʼko vstretimsya?,vˈo skˈoɭkʌ fstrʲˈetʲimsʲʌ,,2,ru-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,Можно перенести время?,,Mozhno perenesti vremya?,mˈoʒnʌ pʲirʲinʲisʲtʲˈi vrʲˈemʲʌ,,2,ru-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,Когда вам удобно?,,Kogda vam udobno?,kʌɡdˈɑ vˈɑm udˈobnʌ,,2,ru-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,Какое сегодня число?,,Kakoye segodnya chislo?,kakˈojɪ sʲivˈodnʲʌ tʃʲisɭˈo,,2,ru-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,Какой сегодня день?,,Kakoy segodnya denʼ?,kakˈoj sʲivˈodnʲʌ dʲˈen,,2,ru-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,Во сколько открывается?,,Vo skolʼko otkryvayetsya?,vˈo skˈoɭkʌ ʌtkrɨvˈɑjitsʌ,,2,ru-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,Во сколько закрывается?,,Vo skolʼko zakryvayetsya?,vˈo skˈoɭkʌ zʌkrɨvˈɑjitsʌ,,2,ru-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,Сколько это займёт?,,Skolʼko eto zaymët?,skˈoɭkʌ ˈɛtʌ zajmʲˈɵt,,2,ru-agent-v1;ipa=espeak
+time-words.today,сегодня,,segodnya,sʲivˈodnʲʌ,,2,ru-agent-v1;ipa=espeak
+time-words.tomorrow,завтра,,zavtra,zˈɑftra,,2,ru-agent-v1;ipa=espeak
+time-words.yesterday,вчера,,vchera,ftʃʲirˈɑ,,2,ru-agent-v1;ipa=espeak
+time-words.this-week,на этой неделе,,na etoy nedele,nə ˈɛtʌj nʲidʲˈeɭʲi,,2,ru-agent-v1;ipa=espeak
+time-words.next-week,на следующей неделе,,na sleduyushchey nedele,nə sɭʲˈedujuɕij nʲidʲˈeɭʲi,,2,ru-agent-v1;ipa=espeak
+time-words.morning,утро,,utro,ˈutrʌ,,2,ru-agent-v1;ipa=espeak
+time-words.afternoon,день,,denʼ,dʲˈen,,2,ru-agent-v1;ipa=espeak
+time-words.evening,вечер,,vecher,vʲˈetʃʲir,,2,ru-agent-v1;ipa=espeak
+time-words.spring,весна,,vesna,vʲisnˈɑ,,2,ru-agent-v1;ipa=espeak
+time-words.summer,лето,,leto,ɭʲˈetʌ,,2,ru-agent-v1;ipa=espeak
+time-words.fall,осень,,osenʼ,ˈosʲin,,2,ru-agent-v1;ipa=espeak
+time-words.winter,зима,,zima,ʑimˈɑ,,2,ru-agent-v1;ipa=espeak
+time-words.night,ночь,,nochʼ,nˈotʃʲ,,2,ru-agent-v1;ipa=espeak
+days-of-week.monday,понедельник,,ponedelʼnik,pʌnʲidʲˈeɭnʲik,,2,ru-agent-v1;ipa=espeak
+days-of-week.tuesday,вторник,,vtornik,ftˈornʲik,,2,ru-agent-v1;ipa=espeak
+days-of-week.wednesday,среда,,sreda,srʲidˈɑ,,2,ru-agent-v1;ipa=espeak
+days-of-week.thursday,четверг,,chetverg,tʃʲitvʲˈerk,,2,ru-agent-v1;ipa=espeak
+days-of-week.friday,пятница,,pyatnitsa,pʲˈɑtʲnʲitsa,,2,ru-agent-v1;ipa=espeak
+days-of-week.saturday,суббота,,subbota,subbˈota,,2,ru-agent-v1;ipa=espeak
+days-of-week.sunday,воскресенье,,voskresenʼye,vʌskrʲisʲˈenjjɪ,,2,ru-agent-v1;ipa=espeak
+months.january,январь,,yanvarʼ,janvˈɑrʲ,,2,ru-agent-v1;ipa=espeak
+months.february,февраль,,fevralʼ,fʲivrˈɑɭ,,2,ru-agent-v1;ipa=espeak
+months.march,март,,mart,mˈɑrt,,2,ru-agent-v1;ipa=espeak
+months.april,апрель,,aprelʼ,aprʲˈeɭ,,2,ru-agent-v1;ipa=espeak
+months.may,май,,may,mˈɑj,,2,ru-agent-v1;ipa=espeak
+months.june,июнь,,iyunʼ,ɪˈjun,,2,ru-agent-v1;ipa=espeak
+months.july,июль,,iyulʼ,ɪˈjuɭ,,2,ru-agent-v1;ipa=espeak
+months.august,август,,avgust,ˈɑvɡust,,2,ru-agent-v1;ipa=espeak
+months.september,сентябрь,,sentyabrʼ,sʲintʲˈɑbrʲ,,2,ru-agent-v1;ipa=espeak
+months.october,октябрь,,oktyabrʼ,ʌktʲˈɑbrʲ,,2,ru-agent-v1;ipa=espeak
+months.november,ноябрь,,noyabrʼ,nʌˈjabrʲ,,2,ru-agent-v1;ipa=espeak
+months.december,декабрь,,dekabrʼ,dʲikˈɑbrʲ,,2,ru-agent-v1;ipa=espeak
 time-words.clock-offset,"Суахильские часы начинаются с рассвета и показывают на шесть часов меньше наручных: прибавьте шесть к названному числу. saa moja — это 7:00, saa sita — полдень, saa kumi — 16:00. Надёжнее называть время цифрами или спросить saa ngapi za kizungu — время по западным часам.",,,,,2,ru-notes-v1

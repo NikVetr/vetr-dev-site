@@ -1,44 +1,44 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,Saa ngapi?,Saa ngapi za kizungu?,,kizungu = the Western clock,2,sw-agent-v1
-time-scheduling.how-many-minutes,Dakika ngapi?,,,,2,sw-agent-v1
-time-scheduling.what-time-should-we-meet,Tukutane saa ngapi?,,,,2,sw-agent-v1
-time-scheduling.can-we-change-the-time,Tunaweza kubadilisha muda?,,,,2,sw-agent-v1
-time-scheduling.when-is-convenient,Lini inafaa kwako?,,,,2,sw-agent-v1
-time-scheduling.what-is-today-s-date,Leo ni tarehe ngapi?,,,,2,sw-agent-v1
-time-scheduling.what-day-is-it-today,Leo ni siku gani?,,,,2,sw-agent-v1
-time-scheduling.what-time-does-it-open,Inafunguliwa saa ngapi?,,,,2,sw-agent-v1
-time-scheduling.what-time-does-it-close,Inafungwa saa ngapi?,,,,2,sw-agent-v1
-time-scheduling.how-long-does-it-take,Inachukua muda gani?,,,,2,sw-agent-v1
-time-words.today,Leo,,,,2,sw-agent-v1
-time-words.tomorrow,Kesho,,,,2,sw-agent-v1
-time-words.yesterday,Jana,,,,2,sw-agent-v1
-time-words.this-week,Wiki hii,,,,2,sw-agent-v1
-time-words.next-week,Wiki ijayo,,,,2,sw-agent-v1
-time-words.morning,Asubuhi,,,,2,sw-agent-v1
-time-words.afternoon,Mchana,,,,2,sw-agent-v1
-time-words.evening,Jioni,,,,2,sw-agent-v1
-time-words.spring,Majira ya kuchipua,Masika,,,2,sw-agent-v1
-time-words.summer,Majira ya joto,Kiangazi,,,2,sw-agent-v1
-time-words.fall,Majira ya pukutiko,Vuli,,,2,sw-agent-v1
-time-words.winter,Majira ya baridi,Kipupwe,,,2,sw-agent-v1
-time-words.night,Usiku,,,,2,sw-agent-v1
-days-of-week.monday,Jumatatu,,,,2,sw-agent-v1
-days-of-week.tuesday,Jumanne,,,,2,sw-agent-v1
-days-of-week.wednesday,Jumatano,,,,2,sw-agent-v1
-days-of-week.thursday,Alhamisi,,,,2,sw-agent-v1
-days-of-week.friday,Ijumaa,,,,2,sw-agent-v1
-days-of-week.saturday,Jumamosi,,,,2,sw-agent-v1
-days-of-week.sunday,Jumapili,,,,2,sw-agent-v1
-months.january,Januari,Mwezi wa kwanza,,,2,sw-agent-v1
-months.february,Februari,Mwezi wa pili,,,2,sw-agent-v1
-months.march,Machi,Mwezi wa tatu,,,2,sw-agent-v1
-months.april,Aprili,Mwezi wa nne,,,2,sw-agent-v1
-months.may,Mei,Mwezi wa tano,,,2,sw-agent-v1
-months.june,Juni,Mwezi wa sita,,,2,sw-agent-v1
-months.july,Julai,Mwezi wa saba,,,2,sw-agent-v1
-months.august,Agosti,Mwezi wa nane,,,2,sw-agent-v1
-months.september,Septemba,Mwezi wa tisa,,,2,sw-agent-v1
-months.october,Oktoba,Mwezi wa kumi,,,2,sw-agent-v1
-months.november,Novemba,Mwezi wa kumi na moja,,,2,sw-agent-v1
-months.december,Desemba,Mwezi wa kumi na mbili,,,2,sw-agent-v1
+time-scheduling.what-time-is-it,Saa ngapi?,Saa ngapi za kizungu?,sˈaa ŋɡˈapi,kizungu = the Western clock,2,sw-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,Dakika ngapi?,,dakˈika ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,Tukutane saa ngapi?,,tˌukutˈane sˈaa ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,Tunaweza kubadilisha muda?,,tˌunawˈeza kˌubadilˈiʃa mˈuda,,2,sw-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,Lini inafaa kwako?,,lˈini ˌinafˈaa kwˈako,,2,sw-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,Leo ni tarehe ngapi?,,lˈeo ni tarˈehe ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,Leo ni siku gani?,,lˈeo ni sˈiku ɡˈani,,2,sw-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,Inafunguliwa saa ngapi?,,ˌinafˌuŋɡulˈiwa sˈaa ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,Inafungwa saa ngapi?,,ˌinafˈuŋɡwa sˈaa ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,Inachukua muda gani?,,ˌinatʃukˈua mˈuda ɡˈani,,2,sw-agent-v1;ipa=espeak
+time-words.today,Leo,,lˈeo,,2,sw-agent-v1;ipa=espeak
+time-words.tomorrow,Kesho,,kˈeʃo,,2,sw-agent-v1;ipa=espeak
+time-words.yesterday,Jana,,ɟˈana,,2,sw-agent-v1;ipa=espeak
+time-words.this-week,Wiki hii,,wˈiki hˌii,,2,sw-agent-v1;ipa=espeak
+time-words.next-week,Wiki ijayo,,wˈiki iɟˈajo,,2,sw-agent-v1;ipa=espeak
+time-words.morning,Asubuhi,,ˌasubˈuhi,,2,sw-agent-v1;ipa=espeak
+time-words.afternoon,Mchana,,mtʃˈana,,2,sw-agent-v1;ipa=espeak
+time-words.evening,Jioni,,ɟiˈoni,,2,sw-agent-v1;ipa=espeak
+time-words.spring,Majira ya kuchipua,Masika,maɟˈira ja kˌutʃipˈua,,2,sw-agent-v1;ipa=espeak
+time-words.summer,Majira ya joto,Kiangazi,maɟˈira ja ɟˈoto,,2,sw-agent-v1;ipa=espeak
+time-words.fall,Majira ya pukutiko,Vuli,maɟˈira ja pˌukutˈiko,,2,sw-agent-v1;ipa=espeak
+time-words.winter,Majira ya baridi,Kipupwe,maɟˈira ja barˈidi,,2,sw-agent-v1;ipa=espeak
+time-words.night,Usiku,,usˈiku,,2,sw-agent-v1;ipa=espeak
+days-of-week.monday,Jumatatu,,ɟˌumatˈatu,,2,sw-agent-v1;ipa=espeak
+days-of-week.tuesday,Jumanne,,ɟumˈanne,,2,sw-agent-v1;ipa=espeak
+days-of-week.wednesday,Jumatano,,ɟˌumatˈano,,2,sw-agent-v1;ipa=espeak
+days-of-week.thursday,Alhamisi,,ˌalhamˈisi,,2,sw-agent-v1;ipa=espeak
+days-of-week.friday,Ijumaa,,ˌiɟumˈaa,,2,sw-agent-v1;ipa=espeak
+days-of-week.saturday,Jumamosi,,ɟˌumamˈosi,,2,sw-agent-v1;ipa=espeak
+days-of-week.sunday,Jumapili,,ɟˌumapˈili,,2,sw-agent-v1;ipa=espeak
+months.january,Januari,Mwezi wa kwanza,ɟˌanuˈari,,2,sw-agent-v1;ipa=espeak
+months.february,Februari,Mwezi wa pili,fˌebruˈari,,2,sw-agent-v1;ipa=espeak
+months.march,Machi,Mwezi wa tatu,mˈatʃi,,2,sw-agent-v1;ipa=espeak
+months.april,Aprili,Mwezi wa nne,aprˈili,,2,sw-agent-v1;ipa=espeak
+months.may,Mei,Mwezi wa tano,mˈei,,2,sw-agent-v1;ipa=espeak
+months.june,Juni,Mwezi wa sita,ɟˈuni,,2,sw-agent-v1;ipa=espeak
+months.july,Julai,Mwezi wa saba,ɟulˈai,,2,sw-agent-v1;ipa=espeak
+months.august,Agosti,Mwezi wa nane,aɡˈosti,,2,sw-agent-v1;ipa=espeak
+months.september,Septemba,Mwezi wa tisa,septˈemba,,2,sw-agent-v1;ipa=espeak
+months.october,Oktoba,Mwezi wa kumi,oktˈoba,,2,sw-agent-v1;ipa=espeak
+months.november,Novemba,Mwezi wa kumi na moja,novˈemba,,2,sw-agent-v1;ipa=espeak
+months.december,Desemba,Mwezi wa kumi na mbili,desˈemba,,2,sw-agent-v1;ipa=espeak
 time-words.clock-offset,,,,,2,coordinator-gaps-v2

@@ -1,29 +1,29 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Không thịt,,,,2,vi-agent-v1
-dietary-needs.no-eggs,Không trứng,,,,2,vi-agent-v1
-dietary-needs.not-spicy,Không cay,,,,2,vi-agent-v1
-dietary-needs.less-spicy,Ít cay thôi,,,,2,vi-agent-v1
-dietary-needs.no-peanuts,Không đậu phộng,Không lạc,,,2,vi-agent-v1
-dietary-needs.no-nuts,Không các loại hạt,,,,2,vi-agent-v1
-dietary-needs.no-seafood,Không hải sản,Không tôm cua sò ốc,,,2,vi-agent-v1
-dietary-needs.i-am-vegetarian,Tôi ăn chay,,,"no meat, fish or fish sauce",2,vi-agent-v1
-dietary-needs.i-am-vegan,Tôi ăn thuần chay,"Chay, không trứng sữa",,,2,vi-agent-v1
-dietary-needs.i-do-not-eat,Tôi không ăn {},,,,2,vi-agent-v1
-dietary-needs.i-am-allergic-to,Tôi bị dị ứng với {},,,,2,vi-agent-v1
-dietary-needs.does-it-contain-fish-stock,Món này có nước mắm không ạ?,Có nước dùng cá không ạ?,,fish sauce,2,vi-agent-v1
-dietary-needs.does-it-contain-pork-stock,Nước dùng có xương lợn không ạ?,Nước dùng có xương heo không ạ?,,,2,vi-pork-stock-v1
-dietary-needs.i-have-a-severe-allergy-to,Tôi bị dị ứng nặng với {},,,,2,vi-agent-v1
-food-ordering.table-for-two,Bàn cho hai người,,,,2,vi-agent-v1
-food-ordering.is-a-table-available,Còn bàn trống không ạ?,,,,2,vi-agent-v1
-food-ordering.menu-please,Cho tôi thực đơn ạ,Cho tôi cái menu ạ,,,2,vi-agent-v1
-food-ordering.i-want-this,Tôi muốn món này,,,,2,vi-agent-v1
-food-ordering.do-you-have-drinking-water,Có nước uống không ạ?,,,,2,vi-agent-v1
-food-ordering.to-go-please,Cho tôi mang về ạ,Cho tôi mang đi ạ,,,2,vi-agent-v1
-food-ordering.check-please,Tính tiền ạ,Cho tôi tính tiền ạ,,,2,vi-agent-v1
-food-ordering.does-it-contain,Món này có {} không ạ?,,,,2,vi-agent-v1
-food-ordering.is-this-vegetarian,Món này là món chay ạ?,,,,2,vi-agent-v1
-food-ordering.what-do-you-recommend,Nên gọi món gì ạ?,,,,2,vi-agent-v1
-food-ordering.water-please,Cho tôi nước ạ,,,,2,vi-agent-v1
-food-ordering.can-a-vegetarian-eat-this,Người ăn chay ăn được không ạ?,,,,2,vi-agent-v1
-dietary-needs.no-pork,Không thịt lợn,Không thịt heo,,,2,vi-gaps-v1
-dietary-needs.is-this-halal,Đây có phải đồ Halal không ạ?,Món này có phải Halal không ạ?,,,2,vi-gaps-v1
+dietary-needs.no-meat,Không thịt,,xoŋ˧ tit̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Không trứng,,xoŋ˧ tʃyŋ˧˥,,2,vi-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Không cay,,xoŋ˧ kaj˧,,2,vi-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Ít cay thôi,,it̪˧˥ kaj˧ toj˧,,2,vi-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Không đậu phộng,Không lạc,xoŋ˧ ɗəw˨˩ˀ foŋ˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Không các loại hạt,,xoŋ˧ kaːc˧˥ lwaːj˨˩ˀ haːt̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Không hải sản,Không tôm cua sò ốc,xoŋ˧ haːj˧˩˧ saːn˧˩˧,,2,vi-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Tôi ăn chay,,t̪oj˧ an˧ tʃaj˧,"no meat, fish or fish sauce",2,vi-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Tôi ăn thuần chay,"Chay, không trứng sữa",t̪oj˧ an˧ twən˨˩ tʃaj˧,,2,vi-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Tôi không ăn {},,t̪oj˧ xoŋ˧ an˧ {},,2,vi-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Tôi bị dị ứng với {},,t̪oj˧ bi˨˩ˀ zi˨˩ˀ yŋ˧˥ vəːj˧˥ {},,2,vi-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Món này có nước mắm không ạ?,Có nước dùng cá không ạ?,mɔn˧˥ naj˨˩ kɔ˧˥ nyəc˧˥ mam˧˥ xoŋ˧ aː˨˩ˀ,fish sauce,2,vi-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Nước dùng có xương lợn không ạ?,Nước dùng có xương heo không ạ?,nyəc˧˥ zuŋ˨˩ kɔ˧˥ syəŋ˧ ləːn˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-pork-stock-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Tôi bị dị ứng nặng với {},,t̪oj˧ bi˨˩ˀ zi˨˩ˀ yŋ˧˥ naŋ˨˩ˀ vəːj˧˥ {},,2,vi-agent-v1;ipa=espeak
+food-ordering.table-for-two,Bàn cho hai người,,baːn˨˩ tʃɔ˧ haːj˧ ŋyəj˨˩,,2,vi-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Còn bàn trống không ạ?,,kɔn˨˩ baːn˨˩ tʃoŋ˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.menu-please,Cho tôi thực đơn ạ,Cho tôi cái menu ạ,tʃɔ˧ t̪oj˧ tyc˨˩ˀ ɗəːn˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.i-want-this,Tôi muốn món này,,t̪oj˧ muən˧˥ mɔn˧˥ naj˨˩,,2,vi-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Có nước uống không ạ?,,kɔ˧˥ nyəc˧˥ uəŋ˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.to-go-please,Cho tôi mang về ạ,Cho tôi mang đi ạ,tʃɔ˧ t̪oj˧ maːŋ˧ ve˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.check-please,Tính tiền ạ,Cho tôi tính tiền ạ,t̪iɲ˧˥ t̪iɛn˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Món này có {} không ạ?,,mɔn˧˥ naj˨˩ kɔ˧˥ {} xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Món này là món chay ạ?,,mɔn˧˥ naj˨˩ laː˨˩ mɔn˧˥ tʃaj˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Nên gọi món gì ạ?,,nen˧ ɣɔj˨˩ˀ mɔn˧˥ zi˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.water-please,Cho tôi nước ạ,,tʃɔ˧ t̪oj˧ nyəc˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,Người ăn chay ăn được không ạ?,,ŋyəj˨˩ an˧ tʃaj˧ an˧ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+dietary-needs.no-pork,Không thịt lợn,Không thịt heo,xoŋ˧ tit̪˨˩ˀ ləːn˨˩ˀ,,2,vi-gaps-v1;ipa=espeak
+dietary-needs.is-this-halal,Đây có phải đồ Halal không ạ?,Món này có phải Halal không ạ?,ɗəɪ˧ kɔ˧˥ faːj˧˩˧ ɗo˨˩ haləl˧ xoŋ˧ aː˨˩ˀ,,2,vi-gaps-v1;ipa=espeak

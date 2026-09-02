@@ -1,116 +1,116 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-transit-rides.two-tickets,切符を二枚ください,,kippu o nimai kudasai,,,2,japanese-reviewed-v6
-taxi.please-take-me-here,ここへ行ってください,,koko e itte kudasai,,,2,japanese-reviewed-v6
-directions.where-is,{}はどこですか？,,{} wa doko desu ka?,,,2,japanese-reviewed-v6
-quick-directions.go-straight,まっすぐ行ってください,,massugu itte kudasai,,,2,japanese-reviewed-v6
-pickup-meeting.where-is-the-pickup-point,乗車場所はどこですか？,,jōsha basho wa doko desu ka?,,,2,japanese-reviewed-v6
-rail-station-words.high-speed-rail,新幹線,,shinkansen,,,2,japanese-reviewed-v6
-border-customs.i-am-a-tourist,観光です,,kankō desu,,,2,ja-agent-v1
-place-words.scenic-area,景勝地,,keishōchi,,,2,ja-agent-v1
-common-signs.open-on,開,入,kai,,,1,ja-agent-v1
-transit-rides.where-is-the-subway-station,地下鉄の駅はどこですか？,,chikatetsu no eki wa doko desu ka?,,,2,japanese-reviewed-v6
-taxi.please-send-me-the-address,住所を送ってください,,jūsho o okutte kudasai,,,2,japanese-reviewed-v6
-directions.how-do-i-get-to,{}へはどう行けばいいですか？,,{} e wa dō ikeba ii desu ka?,,,2,japanese-reviewed-v6
-quick-directions.turn-left,左に曲がってください,,hidari ni magatte kudasai,,,2,japanese-reviewed-v6
-pickup-meeting.please-send-me-the-pickup-point,乗車場所を送ってください,,jōsha basho o okutte kudasai,,,2,japanese-reviewed-v6
-rail-station-words.maglev,リニア,,rinia,,,2,japanese-reviewed-v6
-place-words.visitor-center,観光案内所,,kankō annaijo,,,2,japanese-reviewed-v6
-border-customs.here-is-my-passport,パスポートです,,pasupōto desu,,,2,ja-agent-v1
-common-signs.closed-off,閉,切,hei,,,1,ja-agent-v1
-transit-rides.does-this-bus-train-go-to,このバス／電車は{}に行きますか？,,kono basu / densha wa {} ni ikimasu ka?,,,2,japanese-reviewed-v6
-taxi.we-need-the-east-gate-not-the-south-gate,東口です、南口ではありません,,"higashiguchi desu, minamiguchi dewa arimasen",,,2,japanese-reviewed-v6
-directions.is-it-far,遠いですか？,,tōi desu ka?,,,2,japanese-reviewed-v6
-quick-directions.turn-right,右に曲がってください,,migi ni magatte kudasai,,,2,japanese-reviewed-v6
-pickup-meeting.please-pick-us-up-here,ここに迎えに来てください,,koko ni mukae ni kite kudasai,,,2,japanese-reviewed-v6
-common-signs.occupied,使用中,,shiyōchū,,,2,japanese-reviewed-v6
-rail-station-words.transfer,乗り換え,,norikae,,,2,japanese-reviewed-v6
-place-words.railway-station,駅,,eki,,,2,japanese-reviewed-v6
-border-customs.i-am-staying-for-days,{}日間滞在します,,{} nichikan taizai shimasu,,,2,ja-agent-v1
-transit-rides.what-is-the-next-stop,次の駅はどこですか？,,tsugi no eki wa doko desu ka?,,,2,japanese-reviewed-v6
-taxi.please-stop-here,ここで止めてください,,koko de tomete kudasai,,,2,japanese-reviewed-v6
-directions.how-long-on-foot,歩いてどのくらいですか？,,aruite dono kurai desu ka?,,,2,japanese-reviewed-v6
-quick-directions.this-way,こちらです,,kochira desu,,,2,japanese-reviewed-v6
-pickup-meeting.meet-us-at,{}で会いましょう,,{} de aimashō,,,2,japanese-reviewed-v6
-common-signs.vacant,空き,,aki,,,2,japanese-reviewed-v6
-rail-station-words.ticket-gate,改札口,,kaisatsuguchi,,,2,japanese-reviewed-v6
-place-words.airport,空港,,kūkō,,,2,japanese-reviewed-v6
-border-customs.nothing-to-declare,申告するものはありません,,shinkoku suru mono wa arimasen,,,2,ja-agent-v1
-transit-rides.please-tell-me-where-to-get-off,どこで降りるか教えてください,,doko de oriru ka oshiete kudasai,,,2,japanese-reviewed-v6
-taxi.can-you-wait-for-me-here,ここで待ってもらえますか？,,koko de matte moraemasu ka?,,,2,japanese-reviewed-v6
-quick-directions.that-way,あちらです,,achira desu,,,2,japanese-reviewed-v6
-common-signs.caution,注意,,chūi,,,2,japanese-reviewed-v6
-rail-station-words.platform,ホーム,,hōmu,,,2,japanese-reviewed-v6
-place-words.service-desk,案内所,,annaijo,,,2,japanese-reviewed-v6
-border-customs.i-am-staying-at,{}に泊まります,,{} ni tomarimasu,,,2,ja-agent-v1
-directions.please-show-me-on-the-map,地図で教えてください,,chizu de oshiete kudasai,,,2,ja-agent-v1
-pickup-meeting.please-call-me-a-ride,配車をお願いします,,haisha o onegaishimasu,,,2,ja-agent-v1
-transit-rides.is-this-direct,これは直通ですか？,,kore wa chokutsū desu ka?,,,2,japanese-reviewed-v6
-quick-directions.on-the-left,左側です,,hidarigawa desu,,,2,japanese-reviewed-v6
-common-signs.no-entry,立入禁止,,tachiiri kinshi,,,2,japanese-reviewed-v6
-rail-station-words.ticket-office,切符売り場,,kippu uriba,,,2,japanese-reviewed-v6
-place-words.bus-stop,バス停,,basutei,,,2,japanese-reviewed-v6
-border-customs.i-am-here-for-business,仕事です,,shigoto desu,,,2,ja-agent-v1
-directions.where-is-the-nearest,一番近い{}はどこですか？,,ichiban chikai {} wa doko desu ka?,,,2,ja-agent-v1
-taxi.we-need-to-catch-the-high-speed-train,新幹線に乗らないといけません,,shinkansen ni noranai to ikemasen,,,2,ja-agent-v1
-transit-rides.do-i-need-to-transfer,乗り換えが必要ですか？,,norikae ga hitsuyō desu ka?,,,2,japanese-reviewed-v6
-taxi.please-use-the-meter,メーターを使ってください,,mētā o tsukatte kudasai,,,2,japanese-reviewed-v6
-quick-directions.on-the-right,右側です,,migigawa desu,,,2,japanese-reviewed-v6
-common-signs.no-smoking,禁煙,,kin'en,,,2,japanese-reviewed-v6
-rail-station-words.waiting-room,待合室,,machiaishitsu,,,2,japanese-reviewed-v6
-border-customs.i-have-a-return-ticket,帰りの航空券があります,,kaeri no kōkūken ga arimasu,,,2,ja-agent-v1
-directions.where-am-i,ここはどこですか？,,koko wa doko desu ka?,,,2,ja-agent-v1
-place-words.luggage-storage,荷物預かり所,,nimotsu azukarijo,,,2,ja-agent-v1
-transit-rides.is-it-delayed,遅れていますか？,,okureteimasu ka?,,,2,japanese-reviewed-v6
-quick-directions.across-from-here,向かい側です,,mukaigawa desu,,,2,japanese-reviewed-v6
-common-signs.no-photography,撮影禁止,,satsuei kinshi,,,2,japanese-reviewed-v6
-rail-station-words.train-number,列車番号,,ressha bangō,,,2,japanese-reviewed-v6
-border-customs.i-am-visiting-family,親族訪問です,,shinzoku hōmon desu,,,2,ja-agent-v1
-directions.which-way,どちらですか？,,dochira desu ka?,,,2,ja-agent-v1
-transit-rides.i-am-in-a-hurry,急いでいます,,isoideimasu,,,2,japanese-reviewed-v6
-quick-directions.in-front,前です,,mae desu,,,2,japanese-reviewed-v6
-common-signs.do-not-touch,触らないでください,,sawaranaide kudasai,,,2,japanese-reviewed-v6
-rail-station-words.carriage,号車,,gōsha,,,2,japanese-reviewed-v6
-border-customs.this-is-for-personal-use,個人用です,,kojin'yō desu,,,2,ja-agent-v1
-directions.can-i-walk-there,歩いて行けますか？,,aruite ikemasu ka?,,,2,ja-agent-v1
-transit-rides.which-platform,何番ホームですか？,,nanban hōmu desu ka?,,,2,japanese-reviewed-v6
-quick-directions.behind,後ろです,,ushiro desu,,,2,japanese-reviewed-v6
-common-signs.temporarily-closed,一時閉鎖,,ichiji heisa,,,2,japanese-reviewed-v6
-rail-station-words.seat,座席,,zaseki,,,2,japanese-reviewed-v6
-border-customs.i-am-in-transit,乗り継ぎです,,noritsugi desu,,,2,ja-agent-v1
-directions.how-far-is-it,どのくらいの距離ですか？,,dono kurai no kyori desu ka?,,,2,ja-agent-v1
-transit-rides.what-time-is-the-next-one,次は何時ですか？,,tsugi wa nanji desu ka?,,,2,japanese-reviewed-v6
-rail-station-words.last-train,終電,,shūden,,,2,japanese-reviewed-v6
-border-customs.i-have-in-cash,{}の現金があります,,{} no genkin ga arimasu,,,2,ja-agent-v1
-directions.which-exit,何番出口ですか？,,nanban deguchi desu ka?,,,2,ja-agent-v1
-transit-rides.i-went-past-my-stop,乗り過ごしました,,norisugoshimashita,,,2,japanese-reviewed-v6
-rail-station-words.delayed,遅延,,chien,,,2,japanese-reviewed-v6
-border-customs.this-is-a-gift,贈り物です,,okurimono desu,,,2,ja-agent-v1
-directions.can-you-show-me-the-way,道を教えてもらえますか？,,michi o oshiete moraemasu ka?,,,2,ja-agent-v1
-rail-station-words.final-stop,終点,,shūten,,,2,japanese-reviewed-v6
-border-customs.where-do-i-collect-my-baggage,手荷物受取所はどこですか？,,tenimotsu uketorisho wa doko desu ka?,,,2,ja-agent-v1
-directions.north,北,,kita,,,2,ja-agent-v1
-border-customs.how-long-may-i-stay,どのくらい滞在できますか？,,dono kurai taizai dekimasu ka?,,,2,ja-agent-v1
-directions.south,南,,minami,,,2,ja-agent-v1
-border-customs.i-have-a-connecting-flight,乗り継ぎの便があります,,noritsugi no bin ga arimasu,,,2,ja-agent-v1
-directions.east,東,,higashi,,,2,ja-agent-v1
-border-customs.may-i-have-an-entry-stamp,入国スタンプをお願いします,,nyūkoku sutanpu o onegaishimasu,,,2,ja-agent-v1
-directions.west,西,,nishi,,,2,ja-agent-v1
-border-customs.visa,ビザ,査証,biza,,,2,ja-agent-v1
-border-customs.i-have-no-food-or-plants,食品や植物は持っていません,,shokuhin ya shokubutsu wa motteimasen,,,2,ja-agent-v1
-border-customs.passport-control,入国審査,,nyūkoku shinsa,,,2,ja-agent-v1
-border-customs.customs,税関,,zeikan,,,2,ja-agent-v1
-border-customs.baggage-claim,手荷物受取所,,tenimotsu uketorisho,,,2,ja-agent-v1
-border-customs.customs-declaration,税関申告書,携帯品・別送品申告書,zeikan shinkokusho,,,2,ja-agent-v1
-border-customs.arrival-card,入国カード,外国人入国記録,nyūkoku kādo,,,2,ja-agent-v1
-border-customs.transit,乗り継ぎ,トランジット,noritsugi,,,2,ja-agent-v1
-border-customs.boarding-pass,搭乗券,,tōjōken,,,2,ja-agent-v1
-common-signs.open-operating,営業中,,eigyōchū,,,2,japanese-reviewed-v6
-place-words.tourist-spot-sightseeing-area,観光地,,kankōchi,,,2,japanese-reviewed-v6
-transit-rides.can-i-use-this-ticket,この切符で乗れますか？,,kono kippu de noremasu ka?,,,2,japanese-reviewed-v6
-common-signs.closed,閉店,,heiten,,,2,japanese-reviewed-v6
-common-signs.stopped-stop,停止,,teishi,,,2,japanese-reviewed-v6
-taxi.i-will-get-off-here,ここで降ります,,koko de orimasu,,,2,japanese-reviewed-v6
-pickup-meeting.please-call-a-taxi,タクシーを呼んでください,,takushī o yonde kudasai,,,2,japanese-reviewed-v6
-taxi.please-get-me-there-in-time-for-the-shinkansen,新幹線に間に合うようにお願いします,,shinkansen ni maniau yō ni onegaishimasu,,,2,japanese-reviewed-v6
-transit-rides.do-i-need-to-validate,この切符は自動改札を通れますか？,ICカードはどこにタッチしますか？,kono kippu wa jidō kaisatsu o tōremasu ka?,,,1,ja-gaps-v1
-rail-station-words.ticket-validator,自動改札機,改札機,jidō kaisatsuki,,,2,ja-gaps-v1
+transit-rides.two-tickets,切符を二枚ください,,kippu o nimai kudasai,kippɯ o ɲimai kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+taxi.please-take-me-here,ここへ行ってください,,koko e itte kudasai,koko e itte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+directions.where-is,{}はどこですか？,,{} wa doko desu ka?,{} wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.go-straight,まっすぐ行ってください,,massugu itte kudasai,massɯɡɯ itte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+pickup-meeting.where-is-the-pickup-point,乗車場所はどこですか？,,jōsha basho wa doko desu ka?,dʑoːɕa baɕo wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.high-speed-rail,新幹線,,shinkansen,ɕiɴkaɴseɴ,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.i-am-a-tourist,観光です,,kankō desu,kaɴkoː desɯ,,2,ja-agent-v1;ipa=hepburn
+place-words.scenic-area,景勝地,,keishōchi,keiɕoːtɕi,,2,ja-agent-v1;ipa=hepburn
+common-signs.open-on,開,入,kai,kai,,1,ja-agent-v1;ipa=hepburn
+transit-rides.where-is-the-subway-station,地下鉄の駅はどこですか？,,chikatetsu no eki wa doko desu ka?,tɕikatetsɯ no eki wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+taxi.please-send-me-the-address,住所を送ってください,,jūsho o okutte kudasai,dʑɯːɕo o okɯtte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+directions.how-do-i-get-to,{}へはどう行けばいいですか？,,{} e wa dō ikeba ii desu ka?,{} e wa doː ikeba iː desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.turn-left,左に曲がってください,,hidari ni magatte kudasai,çidaɾi ɲi maɡatte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+pickup-meeting.please-send-me-the-pickup-point,乗車場所を送ってください,,jōsha basho o okutte kudasai,dʑoːɕa baɕo o okɯtte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.maglev,リニア,,rinia,ɾiɲia,,2,japanese-reviewed-v6;ipa=hepburn
+place-words.visitor-center,観光案内所,,kankō annaijo,kaɴkoː aɴnaidʑo,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.here-is-my-passport,パスポートです,,pasupōto desu,pasɯpoːto desɯ,,2,ja-agent-v1;ipa=hepburn
+common-signs.closed-off,閉,切,hei,hei,,1,ja-agent-v1;ipa=hepburn
+transit-rides.does-this-bus-train-go-to,このバス／電車は{}に行きますか？,,kono basu / densha wa {} ni ikimasu ka?,kono basɯ / deɴɕa wa {} ɲi ikimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+taxi.we-need-the-east-gate-not-the-south-gate,東口です、南口ではありません,,"higashiguchi desu, minamiguchi dewa arimasen","çiɡaɕiɡɯtɕi desɯ, minamiɡɯtɕi dewa aɾimaseɴ",,2,japanese-reviewed-v6;ipa=hepburn
+directions.is-it-far,遠いですか？,,tōi desu ka?,toːi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.turn-right,右に曲がってください,,migi ni magatte kudasai,miɡi ɲi maɡatte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+pickup-meeting.please-pick-us-up-here,ここに迎えに来てください,,koko ni mukae ni kite kudasai,koko ɲi mɯkae ɲi kite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.occupied,使用中,,shiyōchū,ɕijoːtɕɯː,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.transfer,乗り換え,,norikae,noɾikae,,2,japanese-reviewed-v6;ipa=hepburn
+place-words.railway-station,駅,,eki,eki,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.i-am-staying-for-days,{}日間滞在します,,{} nichikan taizai shimasu,{} ɲitɕikaɴ taizai ɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+transit-rides.what-is-the-next-stop,次の駅はどこですか？,,tsugi no eki wa doko desu ka?,tsɯɡi no eki wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+taxi.please-stop-here,ここで止めてください,,koko de tomete kudasai,koko de tomete kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+directions.how-long-on-foot,歩いてどのくらいですか？,,aruite dono kurai desu ka?,aɾɯite dono kɯɾai desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.this-way,こちらです,,kochira desu,kotɕiɾa desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+pickup-meeting.meet-us-at,{}で会いましょう,,{} de aimashō,{} de aimaɕoː,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.vacant,空き,,aki,aki,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.ticket-gate,改札口,,kaisatsuguchi,kaisatsɯɡɯtɕi,,2,japanese-reviewed-v6;ipa=hepburn
+place-words.airport,空港,,kūkō,kɯːkoː,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.nothing-to-declare,申告するものはありません,,shinkoku suru mono wa arimasen,ɕiɴkokɯ sɯɾɯ mono wa aɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
+transit-rides.please-tell-me-where-to-get-off,どこで降りるか教えてください,,doko de oriru ka oshiete kudasai,doko de oɾiɾɯ ka oɕiete kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+taxi.can-you-wait-for-me-here,ここで待ってもらえますか？,,koko de matte moraemasu ka?,koko de matte moɾaemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.that-way,あちらです,,achira desu,atɕiɾa desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.caution,注意,,chūi,tɕɯːi,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.platform,ホーム,,hōmu,hoːmɯ,,2,japanese-reviewed-v6;ipa=hepburn
+place-words.service-desk,案内所,,annaijo,aɴnaidʑo,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.i-am-staying-at,{}に泊まります,,{} ni tomarimasu,{} ɲi tomaɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+directions.please-show-me-on-the-map,地図で教えてください,,chizu de oshiete kudasai,tɕizɯ de oɕiete kɯdasai,,2,ja-agent-v1;ipa=hepburn
+pickup-meeting.please-call-me-a-ride,配車をお願いします,,haisha o onegaishimasu,haiɕa o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+transit-rides.is-this-direct,これは直通ですか？,,kore wa chokutsū desu ka?,koɾe wa tɕokɯtsɯː desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.on-the-left,左側です,,hidarigawa desu,çidaɾiɡawa desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.no-entry,立入禁止,,tachiiri kinshi,tatɕiiɾi kiɴɕi,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.ticket-office,切符売り場,,kippu uriba,kippɯ ɯɾiba,,2,japanese-reviewed-v6;ipa=hepburn
+place-words.bus-stop,バス停,,basutei,basɯtei,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.i-am-here-for-business,仕事です,,shigoto desu,ɕiɡoto desɯ,,2,ja-agent-v1;ipa=hepburn
+directions.where-is-the-nearest,一番近い{}はどこですか？,,ichiban chikai {} wa doko desu ka?,itɕibaɴ tɕikai {} wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+taxi.we-need-to-catch-the-high-speed-train,新幹線に乗らないといけません,,shinkansen ni noranai to ikemasen,ɕiɴkaɴseɴ ɲi noɾanai to ikemaseɴ,,2,ja-agent-v1;ipa=hepburn
+transit-rides.do-i-need-to-transfer,乗り換えが必要ですか？,,norikae ga hitsuyō desu ka?,noɾikae ɡa çitsɯjoː desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+taxi.please-use-the-meter,メーターを使ってください,,mētā o tsukatte kudasai,meːtaː o tsɯkatte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.on-the-right,右側です,,migigawa desu,miɡiɡawa desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.no-smoking,禁煙,,kin'en,kiɴeɴ,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.waiting-room,待合室,,machiaishitsu,matɕiaiɕitsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.i-have-a-return-ticket,帰りの航空券があります,,kaeri no kōkūken ga arimasu,kaeɾi no koːkɯːkeɴ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+directions.where-am-i,ここはどこですか？,,koko wa doko desu ka?,koko wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+place-words.luggage-storage,荷物預かり所,,nimotsu azukarijo,ɲimotsɯ azɯkaɾidʑo,,2,ja-agent-v1;ipa=hepburn
+transit-rides.is-it-delayed,遅れていますか？,,okureteimasu ka?,okɯɾeteimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.across-from-here,向かい側です,,mukaigawa desu,mɯkaiɡawa desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.no-photography,撮影禁止,,satsuei kinshi,satsɯei kiɴɕi,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.train-number,列車番号,,ressha bangō,ɾeɕɕa baɴɡoː,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.i-am-visiting-family,親族訪問です,,shinzoku hōmon desu,ɕiɴzokɯ hoːmoɴ desɯ,,2,ja-agent-v1;ipa=hepburn
+directions.which-way,どちらですか？,,dochira desu ka?,dotɕiɾa desɯ ka,,2,ja-agent-v1;ipa=hepburn
+transit-rides.i-am-in-a-hurry,急いでいます,,isoideimasu,isoideimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.in-front,前です,,mae desu,mae desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.do-not-touch,触らないでください,,sawaranaide kudasai,sawaɾanaide kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.carriage,号車,,gōsha,ɡoːɕa,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.this-is-for-personal-use,個人用です,,kojin'yō desu,kodʑiɴjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+directions.can-i-walk-there,歩いて行けますか？,,aruite ikemasu ka?,aɾɯite ikemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+transit-rides.which-platform,何番ホームですか？,,nanban hōmu desu ka?,naɴbaɴ hoːmɯ desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+quick-directions.behind,後ろです,,ushiro desu,ɯɕiɾo desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.temporarily-closed,一時閉鎖,,ichiji heisa,itɕidʑi heisa,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.seat,座席,,zaseki,zaseki,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.i-am-in-transit,乗り継ぎです,,noritsugi desu,noɾitsɯɡi desɯ,,2,ja-agent-v1;ipa=hepburn
+directions.how-far-is-it,どのくらいの距離ですか？,,dono kurai no kyori desu ka?,dono kɯɾai no kjoɾi desɯ ka,,2,ja-agent-v1;ipa=hepburn
+transit-rides.what-time-is-the-next-one,次は何時ですか？,,tsugi wa nanji desu ka?,tsɯɡi wa naɴdʑi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.last-train,終電,,shūden,ɕɯːdeɴ,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.i-have-in-cash,{}の現金があります,,{} no genkin ga arimasu,{} no ɡeɴkiɴ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+directions.which-exit,何番出口ですか？,,nanban deguchi desu ka?,naɴbaɴ deɡɯtɕi desɯ ka,,2,ja-agent-v1;ipa=hepburn
+transit-rides.i-went-past-my-stop,乗り過ごしました,,norisugoshimashita,noɾisɯɡoɕimaɕita,,2,japanese-reviewed-v6;ipa=hepburn
+rail-station-words.delayed,遅延,,chien,tɕieɴ,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.this-is-a-gift,贈り物です,,okurimono desu,okɯɾimono desɯ,,2,ja-agent-v1;ipa=hepburn
+directions.can-you-show-me-the-way,道を教えてもらえますか？,,michi o oshiete moraemasu ka?,mitɕi o oɕiete moɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+rail-station-words.final-stop,終点,,shūten,ɕɯːteɴ,,2,japanese-reviewed-v6;ipa=hepburn
+border-customs.where-do-i-collect-my-baggage,手荷物受取所はどこですか？,,tenimotsu uketorisho wa doko desu ka?,teɲimotsɯ ɯketoɾiɕo wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+directions.north,北,,kita,kita,,2,ja-agent-v1;ipa=hepburn
+border-customs.how-long-may-i-stay,どのくらい滞在できますか？,,dono kurai taizai dekimasu ka?,dono kɯɾai taizai dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+directions.south,南,,minami,minami,,2,ja-agent-v1;ipa=hepburn
+border-customs.i-have-a-connecting-flight,乗り継ぎの便があります,,noritsugi no bin ga arimasu,noɾitsɯɡi no biɴ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+directions.east,東,,higashi,çiɡaɕi,,2,ja-agent-v1;ipa=hepburn
+border-customs.may-i-have-an-entry-stamp,入国スタンプをお願いします,,nyūkoku sutanpu o onegaishimasu,ɲɯːkokɯ sɯtaɴpɯ o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+directions.west,西,,nishi,ɲiɕi,,2,ja-agent-v1;ipa=hepburn
+border-customs.visa,ビザ,査証,biza,biza,,2,ja-agent-v1;ipa=hepburn
+border-customs.i-have-no-food-or-plants,食品や植物は持っていません,,shokuhin ya shokubutsu wa motteimasen,ɕokɯçiɴ ja ɕokɯbɯtsɯ wa motteimaseɴ,,2,ja-agent-v1;ipa=hepburn
+border-customs.passport-control,入国審査,,nyūkoku shinsa,ɲɯːkokɯ ɕiɴsa,,2,ja-agent-v1;ipa=hepburn
+border-customs.customs,税関,,zeikan,zeikaɴ,,2,ja-agent-v1;ipa=hepburn
+border-customs.baggage-claim,手荷物受取所,,tenimotsu uketorisho,teɲimotsɯ ɯketoɾiɕo,,2,ja-agent-v1;ipa=hepburn
+border-customs.customs-declaration,税関申告書,携帯品・別送品申告書,zeikan shinkokusho,zeikaɴ ɕiɴkokɯɕo,,2,ja-agent-v1;ipa=hepburn
+border-customs.arrival-card,入国カード,外国人入国記録,nyūkoku kādo,ɲɯːkokɯ kaːdo,,2,ja-agent-v1;ipa=hepburn
+border-customs.transit,乗り継ぎ,トランジット,noritsugi,noɾitsɯɡi,,2,ja-agent-v1;ipa=hepburn
+border-customs.boarding-pass,搭乗券,,tōjōken,toːdʑoːkeɴ,,2,ja-agent-v1;ipa=hepburn
+common-signs.open-operating,営業中,,eigyōchū,eiɡjoːtɕɯː,,2,japanese-reviewed-v6;ipa=hepburn
+place-words.tourist-spot-sightseeing-area,観光地,,kankōchi,kaɴkoːtɕi,,2,japanese-reviewed-v6;ipa=hepburn
+transit-rides.can-i-use-this-ticket,この切符で乗れますか？,,kono kippu de noremasu ka?,kono kippɯ de noɾemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.closed,閉店,,heiten,heiteɴ,,2,japanese-reviewed-v6;ipa=hepburn
+common-signs.stopped-stop,停止,,teishi,teiɕi,,2,japanese-reviewed-v6;ipa=hepburn
+taxi.i-will-get-off-here,ここで降ります,,koko de orimasu,koko de oɾimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+pickup-meeting.please-call-a-taxi,タクシーを呼んでください,,takushī o yonde kudasai,takɯɕiː o joɴde kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+taxi.please-get-me-there-in-time-for-the-shinkansen,新幹線に間に合うようにお願いします,,shinkansen ni maniau yō ni onegaishimasu,ɕiɴkaɴseɴ ɲi maɲiaɯ joː ɲi oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+transit-rides.do-i-need-to-validate,この切符は自動改札を通れますか？,ICカードはどこにタッチしますか？,kono kippu wa jidō kaisatsu o tōremasu ka?,kono kippɯ wa dʑidoː kaisatsɯ o toːɾemasɯ ka,,1,ja-gaps-v1;ipa=hepburn
+rail-station-words.ticket-validator,自動改札機,改札機,jidō kaisatsuki,dʑidoː kaisatsɯki,,2,ja-gaps-v1;ipa=hepburn

@@ -1,29 +1,29 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Tanpa daging,,,,2,id-agent-v1
-dietary-needs.no-eggs,Tanpa telur,,,,2,id-agent-v1
-dietary-needs.not-spicy,Tidak pedas,Jangan pakai sambal,,,2,id-agent-v1
-dietary-needs.less-spicy,Jangan terlalu pedas,,,,2,id-agent-v1
-dietary-needs.no-peanuts,Tanpa kacang tanah,,,kacang alone = any bean or nut,2,id-agent-v1
-dietary-needs.no-nuts,Tanpa kacang-kacangan,Tanpa kacang pohon,,,2,id-agent-v1
-dietary-needs.no-seafood,Tanpa makanan laut,Tanpa udang dan kerang,,,2,id-agent-v1
-dietary-needs.i-am-vegetarian,Saya vegetarian murni,"Tanpa daging, ayam, ikan",,"murni signals strict, not ""less meat""",2,id-agent-v1
-dietary-needs.i-am-vegan,Saya vegan,"Tanpa daging, telur, susu",,,2,id-agent-v1
-dietary-needs.i-do-not-eat,Saya tidak makan {},,,,2,id-agent-v1
-dietary-needs.i-am-allergic-to,Saya alergi {},,,,2,id-agent-v1
-dietary-needs.does-it-contain-fish-stock,Ada terasi atau kaldu ikan?,,,terasi = fermented shrimp paste,2,id-agent-v1
-dietary-needs.does-it-contain-pork-stock,Kuahnya pakai kaldu babi?,Ada kaldu atau tulang babi?,,,2,id-pork-stock-v1
-dietary-needs.i-have-a-severe-allergy-to,Saya alergi berat {},Saya alergi parah terhadap {},,,2,id-agent-v1
-food-ordering.table-for-two,Meja untuk dua orang,,,,2,id-agent-v1
-food-ordering.is-a-table-available,Ada meja kosong?,,,,2,id-agent-v1
-food-ordering.menu-please,Minta menunya,,,,2,id-agent-v1
-food-ordering.i-want-this,Saya mau ini,,,,2,id-agent-v1
-food-ordering.do-you-have-drinking-water,Ada air putih?,,,air putih = plain drinking water,2,id-agent-v1
-food-ordering.to-go-please,"Dibungkus, ya",,,,2,id-agent-v1
-food-ordering.check-please,Minta bonnya,Minta struknya,,,2,id-agent-v1
-food-ordering.does-it-contain,Ini pakai {}?,Ini mengandung {}?,,"try: babi, angciu, terasi",2,id-agent-v1
-food-ordering.is-this-vegetarian,Ini vegetarian?,,,,2,id-agent-v1
-food-ordering.what-do-you-recommend,Apa yang enak di sini?,,,,2,id-agent-v1
-food-ordering.water-please,Minta air putih,,,,2,id-agent-v1
-food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau terasi?",,,,2,id-agent-v1
-dietary-needs.no-pork,Tanpa babi,Tanpa babi dan lemak babi,,lemak babi = lard,2,id-gaps-v1
-dietary-needs.is-this-halal,Ini halal?,Ada sertifikat halal?,,logo: BPJPH (was MUI),2,id-gaps-v1
+dietary-needs.no-meat,Tanpa daging,,tˈanpa dˈaɡiŋ,,2,id-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Tanpa telur,,tˈanpa təlˈur,,2,id-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Tidak pedas,Jangan pakai sambal,tˈidak pˈɛdas,,2,id-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Jangan terlalu pedas,,dʒˈaŋan tərlˈalu pˈɛdas,,2,id-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Tanpa kacang tanah,,tˈanpa kˈatʃaŋ tˈanah,kacang alone = any bean or nut,2,id-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Tanpa kacang-kacangan,Tanpa kacang pohon,tˈanpa kˈatʃaŋkatʃaŋan,,2,id-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Tanpa makanan laut,Tanpa udang dan kerang,tˈanpa makˈanan lˈaʊt,,2,id-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Saya vegetarian murni,"Tanpa daging, ayam, ikan",sˈaja vˌɛɡətarˈian mˈurni,"murni signals strict, not ""less meat""",2,id-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Saya vegan,"Tanpa daging, telur, susu",sˈaja vˈɛɡan,,2,id-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Saya tidak makan {},,sˈaja tˈidak mˈakan {},,2,id-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Saya alergi {},,sˈaja alˈɛrɡi {},,2,id-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Ada terasi atau kaldu ikan?,,ˈada tərˈasi ˌataʊ kˈaldu ˈikan,terasi = fermented shrimp paste,2,id-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Kuahnya pakai kaldu babi?,Ada kaldu atau tulang babi?,kuˈahɲa pˈakaɪ kˈaldu bˈabi,,2,id-pork-stock-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Saya alergi berat {},Saya alergi parah terhadap {},sˈaja alˈɛrɡi bˈɛrat {},,2,id-agent-v1;ipa=espeak
+food-ordering.table-for-two,Meja untuk dua orang,,mˈɛdʒa ˌuntuk dˈua ˈoraŋ,,2,id-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Ada meja kosong?,,ˈada mˈɛdʒa kˈosoŋ,,2,id-agent-v1;ipa=espeak
+food-ordering.menu-please,Minta menunya,,mˈinta mənˈuɲa,,2,id-agent-v1;ipa=espeak
+food-ordering.i-want-this,Saya mau ini,,sˈaja mˈaʊ ˈini,,2,id-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Ada air putih?,,ˈada ˈair pˈutih,air putih = plain drinking water,2,id-agent-v1;ipa=espeak
+food-ordering.to-go-please,"Dibungkus, ya",,"dibˈuŋkus, jˈa",,2,id-agent-v1;ipa=espeak
+food-ordering.check-please,Minta bonnya,Minta struknya,mˈinta bˈonɲa,,2,id-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Ini pakai {}?,Ini mengandung {}?,ˈini pˈakaɪ {},"try: babi, angciu, terasi",2,id-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Ini vegetarian?,,ˈini vˌɛɡətarˈian,,2,id-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Apa yang enak di sini?,,ˈapa jaŋ ˈɛnak di sˈini,,2,id-agent-v1;ipa=espeak
+food-ordering.water-please,Minta air putih,,mˈinta ˈair pˈutih,,2,id-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau terasi?",,"ˈini pˈakaɪ dˈaɡiŋ, ˈikan, ˌataʊ tərˈasi",,2,id-agent-v1;ipa=espeak
+dietary-needs.no-pork,Tanpa babi,Tanpa babi dan lemak babi,tˈanpa bˈabi,lemak babi = lard,2,id-gaps-v1;ipa=espeak
+dietary-needs.is-this-halal,Ini halal?,Ada sertifikat halal?,ˈini hˈalal,logo: BPJPH (was MUI),2,id-gaps-v1;ipa=espeak

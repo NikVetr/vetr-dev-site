@@ -1,32 +1,32 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,จ่ายบัตรได้ไหม,,chai bat dai mai,,,2,th-agent-v1
-payment-receipt.pay-cash,จ่ายเงินสดได้ไหม,,chai ngoen sot dai mai,,,2,th-agent-v1
-payment-receipt.pay-by-qr-code,สแกนจ่ายได้ไหม,พร้อมเพย์,sakaen chai dai mai,,,2,th-agent-v1
-payment-receipt.a-receipt-please,ขอใบเสร็จ,,kho bai set,,,2,th-agent-v1
-payment-receipt.please-write-the-number,ช่วยเขียนตัวเลข,,chuai khian tualek,,,2,th-agent-v1
-payment-receipt.how-much-in-total,ทั้งหมดเท่าไร,,thangmot thaorai,,,2,th-agent-v1
-payment-receipt.can-we-pay-separately,จ่ายแยกกันได้ไหม,,chai yaek kan dai mai,,,2,th-agent-v1
-payment-receipt.is-tax-included,รวมภาษีแล้วไหม,,ruam phasi laeo mai,,,2,th-agent-v1
-payment-receipt.my-card-was-declined,บัตรใช้ไม่ได้,,bat chai mai dai,,,2,th-agent-v1
-payment-receipt.the-bill-is-wrong,บิลน่าจะผิด,,bin na cha phit,,,2,th-agent-v1
-payment-receipt.i-already-paid,จ่ายแล้ว,,chai laeo,,,2,th-agent-v1
-shopping.i-am-just-looking,ดูก่อน,,du kon,,,2,th-agent-v1
-shopping.how-much-is-this,อันนี้เท่าไร,,an ni thaorai,,,2,th-agent-v1
-shopping.that-is-too-expensive,แพงเกินไป,,phaeng koen pai,,,2,th-agent-v1
-shopping.can-it-be-a-little-cheaper,ลดหน่อยได้ไหม,,lot noi dai mai,,,2,th-agent-v1
-shopping.is-there-a-discount,มีส่วนลดไหม,,mi suanlot mai,,,2,th-agent-v1
-shopping.where-do-i-pay,จ่ายเงินที่ไหน,,chai ngoen thi nai,,,2,th-agent-v1
-shopping.i-will-take-this,เอาอันนี้,,ao an ni,,,2,th-agent-v1
-shopping.what-is-this,นี่อะไร,,ni arai,,,2,th-agent-v1
-shopping.where-can-i-buy,ซื้อ{}ได้ที่ไหน,,sue {} dai thi nai,,,2,th-agent-v1
-shopping.do-you-have-this-in-stock,มีของไหม,,mi khong mai,,,2,th-agent-v1
-shopping.two-of-these,ขออันนี้สองอัน,,kho an ni song an,,,2,th-agent-v1
-shopping.what-is-it-made-of,ทำจากอะไร,,tham chak arai,,,2,th-agent-v1
-color-size-returns.do-you-have-another-color,มีสีอื่นไหม,,mi si uen mai,,,2,th-agent-v1
-color-size-returns.do-you-have-another-size,มีไซส์อื่นไหม,,mi sai uen mai,,,2,th-agent-v1
-color-size-returns.may-i-try-it-on,ลองได้ไหม,,long dai mai,,,2,th-agent-v1
-color-size-returns.can-i-return-it,คืนของได้ไหม,,khuen khong dai mai,,,2,th-agent-v1
-color-size-returns.can-i-exchange-it,เปลี่ยนของได้ไหม,,plian khong dai mai,,,2,th-agent-v1
-color-size-returns.do-you-have-a-bag,มีถุงไหม,,mi thung mai,,,2,th-agent-v1
-tax-refund.can-i-get-a-tax-refund,ขอคืนภาษีได้ไหม,,kho khuen phasi dai mai,,,2,th-agent-v1
-tax-refund.is-tax-free-shopping-available,มีบริการคืนภาษีไหม,,mi borikan khuen phasi mai,,,2,th-agent-v1
+payment-receipt.pay-by-card,จ่ายบัตรได้ไหม,,chai bat dai mai,tɕaːj˨˩ bat˨˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.pay-cash,จ่ายเงินสดได้ไหม,,chai ngoen sot dai mai,tɕaːj˨˩ ŋɤn˧sot˨˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.pay-by-qr-code,สแกนจ่ายได้ไหม,พร้อมเพย์,sakaen chai dai mai,sa˨˩kɛːn˧ tɕaːj˨˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.a-receipt-please,ขอใบเสร็จ,,kho bai set,kʰɔː˩˩˦ baj˧set˨˩,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.please-write-the-number,ช่วยเขียนตัวเลข,,chuai khian tualek,tɕʰua̯j˥˩ kʰia̯n˩˩˦ tua̯˧leːk˥˩,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.how-much-in-total,ทั้งหมดเท่าไร,,thangmot thaorai,tʰaŋ˦˥mot˨˩ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.can-we-pay-separately,จ่ายแยกกันได้ไหม,,chai yaek kan dai mai,tɕaːj˨˩ jɛːk˥˩kan˧ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.is-tax-included,รวมภาษีแล้วไหม,,ruam phasi laeo mai,rua̯m˧ pʰaː˧siː˩˩˦ lɛːw˦˥ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.my-card-was-declined,บัตรใช้ไม่ได้,,bat chai mai dai,bat˨˩ tɕʰaj˦˥maj˥˩daːj˥˩,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.the-bill-is-wrong,บิลน่าจะผิด,,bin na cha phit,bin˧ naː˥˩tɕaʔ˨˩ pʰit˨˩,,2,th-agent-v1;ipa=thaig2p
+payment-receipt.i-already-paid,จ่ายแล้ว,,chai laeo,tɕaːj˨˩ lɛːw˦˥,,2,th-agent-v1;ipa=thaig2p
+shopping.i-am-just-looking,ดูก่อน,,du kon,duː˧kɔːn˨˩,,2,th-agent-v1;ipa=thaig2p
+shopping.how-much-is-this,อันนี้เท่าไร,,an ni thaorai,ʔan˧niː˦˥ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+shopping.that-is-too-expensive,แพงเกินไป,,phaeng koen pai,pʰɛːŋ˧ kɤːn˧paj˧,,2,th-agent-v1;ipa=thaig2p
+shopping.can-it-be-a-little-cheaper,ลดหน่อยได้ไหม,,lot noi dai mai,lot˦˥ nɔj˨˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+shopping.is-there-a-discount,มีส่วนลดไหม,,mi suanlot mai,miː˧ sua̯n˨˩lot˦˥ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+shopping.where-do-i-pay,จ่ายเงินที่ไหน,,chai ngoen thi nai,tɕaːj˨˩ ŋɤn˧ tʰiː˥˩naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+shopping.i-will-take-this,เอาอันนี้,,ao an ni,ʔaw˧ ʔan˧niː˦˥,,2,th-agent-v1;ipa=thaig2p
+shopping.what-is-this,นี่อะไร,,ni arai,niː˥˩ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
+shopping.where-can-i-buy,ซื้อ{}ได้ที่ไหน,,sue {} dai thi nai,sɯː˦˥ {} daːj˥˩ tʰiː˥˩naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+shopping.do-you-have-this-in-stock,มีของไหม,,mi khong mai,miː˧ kʰɔːŋ˩˩˦ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+shopping.two-of-these,ขออันนี้สองอัน,,kho an ni song an,kʰɔː˩˩˦ ʔan˧niː˦˥ sɔːŋ˩˩˦ ʔan˧,,2,th-agent-v1;ipa=thaig2p
+shopping.what-is-it-made-of,ทำจากอะไร,,tham chak arai,tʰam˧ tɕaːk˨˩ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
+color-size-returns.do-you-have-another-color,มีสีอื่นไหม,,mi si uen mai,miː˧ siː˩˩˦ ʔɯːn˨˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+color-size-returns.do-you-have-another-size,มีไซส์อื่นไหม,,mi sai uen mai,miː˧ saj˧ ʔɯːn˨˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+color-size-returns.may-i-try-it-on,ลองได้ไหม,,long dai mai,lɔːŋ˧ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+color-size-returns.can-i-return-it,คืนของได้ไหม,,khuen khong dai mai,kʰɯːn˧ kʰɔːŋ˩˩˦ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+color-size-returns.can-i-exchange-it,เปลี่ยนของได้ไหม,,plian khong dai mai,plia̯n˨˩ kʰɔːŋ˩˩˦ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+color-size-returns.do-you-have-a-bag,มีถุงไหม,,mi thung mai,miː˧ tʰuŋ˩˩˦ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+tax-refund.can-i-get-a-tax-refund,ขอคืนภาษีได้ไหม,,kho khuen phasi dai mai,kʰɔː˩˩˦ kʰɯːn˧ pʰaː˧siː˩˩˦ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+tax-refund.is-tax-free-shopping-available,มีบริการคืนภาษีไหม,,mi borikan khuen phasi mai,miː˧ bɔː˨˩kaːn˧ kʰɯːn˧ pʰaː˧siː˩˩˦ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p

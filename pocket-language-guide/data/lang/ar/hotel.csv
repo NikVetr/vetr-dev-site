@@ -1,53 +1,53 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-laundry.please-wash-these-clothes,أريد غسل هذه الملابس,,urīd ghasl hādhihi al-malābis,,,2,ar-agent-v1
-laundry.where-is-a-laundromat,أين مغسلة؟,محل غسيل,ayna maghsalah?,,,2,ar-agent-v1
-laundry.when-will-it-be-ready,متى تكون جاهزة؟,,matá takūn jāhizah?,,,2,ar-agent-v1
-laundry.how-much-per-kilo,بكم الكيلو؟,,bikam al-kīlū?,,,2,ar-agent-v1
-laundry.can-it-be-ready-today,هل تكون جاهزة اليوم؟,,hal takūn jāhizah al-yawm?,,,2,ar-agent-v1
-laundry.please-do-not-use-bleach,من فضلك بدون كلور,بدون مبيّض,min faḍlak bidūn klūr,,,2,ar-agent-v1
-laundry.laundromat,مغسلة,,maghsalah,,,2,ar-agent-v1
-laundry.please-iron-this,أريد كيّ هذا,,urīd kayy hādhā,,,2,ar-agent-v1
-laundry.detergent,مسحوق غسيل,صابون غسيل,masḥūq ghasīl,,,2,ar-agent-v1
-laundry.dry-cleaning,تنظيف جاف,دراي كلين,tanẓīf jāff,,,2,ar-agent-v1
-laundry.dryer,مجفّفة,نشّافة,mujaffifah,,,2,ar-agent-v1
-laundry.coin-operated,بالعملة المعدنية,,bi-al-ʿumlah al-maʿdanīyah,,by coin,1,ar-agent-v1
-hotel-words.passport,جواز سفر,,jawāz safar,,,2,ar-agent-v1
-hotel-words.room-key-card,بطاقة الغرفة,مفتاح الغرفة,biṭāqat al-ghurfah,,,2,ar-agent-v1
-hotel-words.check-in,تسجيل الوصول,,tasjīl al-wuṣūl,,,2,ar-agent-v1
-hotel-words.check-out,تسجيل المغادرة,المغادرة,tasjīl al-mughādarah,,,2,ar-agent-v1
-hotel-words.luggage-storage,حفظ الأمتعة,مكتب الأمانات,ḥifẓ al-amtiʿah,,,2,ar-agent-v1
-hotel-basics.are-any-rooms-available,هل توجد غرف فارغة؟,,hal tūjad ghuraf fārighah?,,,2,ar-agent-v1
-hotel-basics.there-are-two-of-us,نحن اثنان,,naḥnu ithnān,,,2,ar-agent-v1
-hotel-basics.i-have-a-reservation,لديّ حجز,عندي حجز,ladayya ḥajz,,,2,ar-agent-v1
-hotel-basics.can-i-charge-my-phone,هل يمكنني شحن هاتفي؟,,hal yumkinunī shaḥn hātifī?,,,2,ar-agent-v1
-hotel-basics.i-would-like-a-non-smoking-room,أريد غرفة بدون تدخين,غرفة لغير المدخنين,urīd ghurfah bidūn tadkhīn,,,2,ar-agent-v1
-hotel-basics.i-would-like-a-quiet-room,أريد غرفة هادئة,,urīd ghurfah hādiʾah,,,2,ar-agent-v1
-hotel-basics.is-there-a-washing-machine,هل توجد غسّالة؟,,hal tūjad ghassālah?,,,2,ar-agent-v1
-hotel-basics.is-wi-fi-free,هل الواي فاي مجاني؟,,hal al-wāy fāy majjānī?,,,2,ar-agent-v1
-hotel-basics.how-much-per-night,بكم الليلة؟,,bikam al-laylah?,,,2,ar-agent-v1
-hotel-basics.is-breakfast-included,هل الفطور مشمول؟,هل الإفطار مشمول؟,hal al-fuṭūr mashmūl?,,,2,ar-agent-v1
-hotel-basics.may-i-see-the-room,هل يمكنني رؤية الغرفة؟,,hal yumkinunī ruʾyat al-ghurfah?,,,2,ar-agent-v1
-hotel-basics.for-nights,لمدة {} ليال,,li-muddat {} layāl,,for a period of {} nights,2,ar-agent-v1
-hotel-basics.two-beds,أريد سريرين منفصلين,,urīd sarīrayn munfaṣilayn,,two separate beds,2,ar-agent-v1
-hotel-basics.is-there-air-conditioning,هل يوجد تكييف؟,,hal yūjad takyīf?,,,2,ar-agent-v1
-hotel-requests.can-i-check-out-later,هل يمكن تأخير المغادرة؟,,hal yumkin taʾkhīr al-mughādarah?,,,2,ar-agent-v1
-hotel-requests.what-time-does-breakfast-start,متى يبدأ الفطور؟,,matá yabdaʾ al-fuṭūr?,,,2,ar-agent-v1
-hotel-requests.can-i-store-my-luggage,هل يمكن حفظ أمتعتي؟,,hal yumkin ḥifẓ amtiʿatī?,,,2,ar-agent-v1
-hotel-requests.no-housekeeping,لا حاجة للتنظيف,الرجاء عدم الإزعاج,lā ḥājah lil-tanẓīf,,,2,ar-agent-v1
-hotel-requests.another-towel-please,منشفة أخرى من فضلك,فوطة أخرى,minshafah ukhrá min faḍlak,,,2,ar-agent-v1
-hotel-requests.what-time-is-check-out,متى موعد المغادرة؟,,matá mawʿid al-mughādarah?,,,2,ar-agent-v1
-hotel-requests.can-i-check-in-early,هل يمكن تسجيل الوصول مبكراً؟,,hal yumkin tasjīl al-wuṣūl mubakkiran?,,,2,ar-agent-v1
-hotel-requests.another-night,أريد ليلة أخرى,,urīd laylah ukhrá,,,2,ar-agent-v1
-hotel-requests.is-there-a-safe,هل توجد خزنة؟,خزينة,hal tūjad khaznah?,,,2,ar-agent-v1
-hotel-requests.another-blanket,بطانية أخرى من فضلك,,baṭṭānīyah ukhrá min faḍlak,,,2,ar-agent-v1
-hotel-requests.wake-up-call,أرجو إيقاظي الساعة {},,arjū īqāẓī al-sāʿah {},,,2,ar-agent-v1
-room-problems.there-is-a-problem-with-the-room,هناك مشكلة في الغرفة,,hunāk mushkilah fī al-ghurfah,,,2,ar-agent-v1
-room-problems.the-air-conditioning-is-broken,التكييف معطّل,,al-takyīf muʿaṭṭal,,,2,ar-agent-v1
-room-problems.there-is-no-hot-water,لا يوجد ماء ساخن,,lā yūjad māʾ sākhin,,,2,ar-agent-v1
-room-problems.can-i-change-rooms,هل يمكن تغيير الغرفة؟,,hal yumkin taghyīr al-ghurfah?,,,2,ar-agent-v1
-room-problems.the-room-is-too-noisy,الغرفة فيها ضجيج,,al-ghurfah fīhā ḍajīj,,the room has noise,2,ar-agent-v1
-room-problems.the-key-does-not-work,المفتاح لا يعمل,البطاقة لا تعمل,al-miftāḥ lā yaʿmal,,,2,ar-agent-v1
-room-problems.the-toilet-will-not-flush,السيفون لا يعمل,,al-sīfūn lā yaʿmal,,the flush does not work,2,ar-agent-v1
-room-problems.the-light-does-not-work,الضوء لا يعمل,النور لا يعمل,al-ḍawʾ lā yaʿmal,,,2,ar-agent-v1
-room-problems.please-send-someone,أرجو إرسال أحد للإصلاح,,arjū irsāl aḥad lil-iṣlāḥ,,,2,ar-agent-v1
-room-problems.the-heating-does-not-work,التدفئة لا تعمل,,al-tadfiʾah lā taʿmal,,,2,ar-agent-v1
+laundry.please-wash-these-clothes,أريد غسل هذه الملابس,,urīd ghasl hādhihi al-malābis,ʔɹˈiːd ɣˈusl haˈaðihˌi ʔalmlˈaːbs,,2,ar-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,أين مغسلة؟,محل غسيل,ayna maghsalah?,ʔˈajna mˈaɣsalˌa,,2,ar-agent-v1;ipa=espeak
+laundry.when-will-it-be-ready,متى تكون جاهزة؟,,matá takūn jāhizah?,mˈataː tˈakawwˌan dʒˈaːhzt,,2,ar-agent-v1;ipa=espeak
+laundry.how-much-per-kilo,بكم الكيلو؟,,bikam al-kīlū?,bˈakam ʔalkˈiːluː,,2,ar-agent-v1;ipa=espeak
+laundry.can-it-be-ready-today,هل تكون جاهزة اليوم؟,,hal takūn jāhizah al-yawm?,hˈal tˈakawwˌan dʒˈaːhzt ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
+laundry.please-do-not-use-bleach,من فضلك بدون كلور,بدون مبيّض,min faḍlak bidūn klūr,mˈin fˈadˤlka budːˈuːna kˈalwar,,2,ar-agent-v1;ipa=espeak
+laundry.laundromat,مغسلة,,maghsalah,mˈaɣsalˌa,,2,ar-agent-v1;ipa=espeak
+laundry.please-iron-this,أريد كيّ هذا,,urīd kayy hādhā,ʔɹˈiːd kiː haˈaðaˌa,,2,ar-agent-v1;ipa=espeak
+laundry.detergent,مسحوق غسيل,صابون غسيل,masḥūq ghasīl,mˈasħuːq ɣˈasiːl,,2,ar-agent-v1;ipa=espeak
+laundry.dry-cleaning,تنظيف جاف,دراي كلين,tanẓīf jāff,tˈanðiːf dʒˈaːff,,2,ar-agent-v1;ipa=espeak
+laundry.dryer,مجفّفة,نشّافة,mujaffifah,mdʒffft,,2,ar-agent-v1;ipa=espeak
+laundry.coin-operated,بالعملة المعدنية,,bi-al-ʿumlah al-maʿdanīyah,bilʕˈumla ʔalmˌaʕdinˈijjah,by coin,1,ar-agent-v1;ipa=espeak
+hotel-words.passport,جواز سفر,,jawāz safar,dʒˈawaːz sˈafar,,2,ar-agent-v1;ipa=espeak
+hotel-words.room-key-card,بطاقة الغرفة,مفتاح الغرفة,biṭāqat al-ghurfah,bˈit̪aːqˌa ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
+hotel-words.check-in,تسجيل الوصول,,tasjīl al-wuṣūl,tˈasdʒiːl ʔalwˈus̪uːl,,2,ar-agent-v1;ipa=espeak
+hotel-words.check-out,تسجيل المغادرة,المغادرة,tasjīl al-mughādarah,tˈasdʒiːl ʔalmuɣˈaːdaɹˌa,,2,ar-agent-v1;ipa=espeak
+hotel-words.luggage-storage,حفظ الأمتعة,مكتب الأمانات,ḥifẓ al-amtiʿah,ħˈifð ʔalʔmtʕt,,2,ar-agent-v1;ipa=espeak
+hotel-basics.are-any-rooms-available,هل توجد غرف فارغة؟,,hal tūjad ghuraf fārighah?,hˈal tˈuːdʒd ɣˈaɹaf faːrɣt,,2,ar-agent-v1;ipa=espeak
+hotel-basics.there-are-two-of-us,نحن اثنان,,naḥnu ithnān,nˈaħnu ˈaθnaːn,,2,ar-agent-v1;ipa=espeak
+hotel-basics.i-have-a-reservation,لديّ حجز,عندي حجز,ladayya ḥajz,ldiː ħˈadʒz,,2,ar-agent-v1;ipa=espeak
+hotel-basics.can-i-charge-my-phone,هل يمكنني شحن هاتفي؟,,hal yumkinunī shaḥn hātifī?,hˈal jmknnˈiː ʃˈaħn hˈaːtifˌiːj,,2,ar-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,أريد غرفة بدون تدخين,غرفة لغير المدخنين,urīd ghurfah bidūn tadkhīn,ʔɹˈiːd ɣˈurfa budːˈuːna tˈadxiːn,,2,ar-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,أريد غرفة هادئة,,urīd ghurfah hādiʾah,ʔɹˈiːd ɣˈurfa hˈaːdʔt,,2,ar-agent-v1;ipa=espeak
+hotel-basics.is-there-a-washing-machine,هل توجد غسّالة؟,,hal tūjad ghassālah?,hˈal tˈuːdʒd ɣssˈaːlt,,2,ar-agent-v1;ipa=espeak
+hotel-basics.is-wi-fi-free,هل الواي فاي مجاني؟,,hal al-wāy fāy majjānī?,hˈal ʔalˈuːi faːˌi mˈadʒdʒaːnˌiːj,,2,ar-agent-v1;ipa=espeak
+hotel-basics.how-much-per-night,بكم الليلة؟,,bikam al-laylah?,bˈakam ʔallˈajla,,2,ar-agent-v1;ipa=espeak
+hotel-basics.is-breakfast-included,هل الفطور مشمول؟,هل الإفطار مشمول؟,hal al-fuṭūr mashmūl?,hˈal ʔalfˈat̪uːr mˈaʃmuːl,,2,ar-agent-v1;ipa=espeak
+hotel-basics.may-i-see-the-room,هل يمكنني رؤية الغرفة؟,,hal yumkinunī ruʾyat al-ghurfah?,hˈal jmknnˈiː ɹˈuʔja ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
+hotel-basics.for-nights,لمدة {} ليال,,li-muddat {} layāl,lmdt {} liːˌaːl,for a period of {} nights,2,ar-agent-v1;ipa=espeak
+hotel-basics.two-beds,أريد سريرين منفصلين,,urīd sarīrayn munfaṣilayn,ʔɹˈiːd sˌaɹiːɹˈiːna mˌunfas̪ilˈiːna,two separate beds,2,ar-agent-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,هل يوجد تكييف؟,,hal yūjad takyīf?,hˈal jwdʒd tˈakjiːf,,2,ar-agent-v1;ipa=espeak
+hotel-requests.can-i-check-out-later,هل يمكن تأخير المغادرة؟,,hal yumkin taʾkhīr al-mughādarah?,hˈal jmkˈunna tˈaʔxiːr ʔalmuɣˈaːdaɹˌa,,2,ar-agent-v1;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,متى يبدأ الفطور؟,,matá yabdaʾ al-fuṭūr?,mˈataː jbdʔ ʔalfˈat̪uːr,,2,ar-agent-v1;ipa=espeak
+hotel-requests.can-i-store-my-luggage,هل يمكن حفظ أمتعتي؟,,hal yumkin ḥifẓ amtiʿatī?,hˈal jmkˈunna ħˈifð ʔmtʕtˈiː,,2,ar-agent-v1;ipa=espeak
+hotel-requests.no-housekeeping,لا حاجة للتنظيف,الرجاء عدم الإزعاج,lā ḥājah lil-tanẓīf,lˈaː ħˈaːdʒa lltnðiːf,,2,ar-agent-v1;ipa=espeak
+hotel-requests.another-towel-please,منشفة أخرى من فضلك,فوطة أخرى,minshafah ukhrá min faḍlak,mˈinʃafˌa ʔˈuxɹaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+hotel-requests.what-time-is-check-out,متى موعد المغادرة؟,,matá mawʿid al-mughādarah?,mˈataː mˈawʕid ʔalmuɣˈaːdaɹˌa,,2,ar-agent-v1;ipa=espeak
+hotel-requests.can-i-check-in-early,هل يمكن تسجيل الوصول مبكراً؟,,hal yumkin tasjīl al-wuṣūl mubakkiran?,hˈal jmkˈunna tˈasdʒiːl ʔalwˈus̪uːl mbkɹˈaː,,2,ar-agent-v1;ipa=espeak
+hotel-requests.another-night,أريد ليلة أخرى,,urīd laylah ukhrá,ʔɹˈiːd lˈajla ʔˈuxɹaː,,2,ar-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,هل توجد خزنة؟,خزينة,hal tūjad khaznah?,hˈal tˈuːdʒd xˈazna,,2,ar-agent-v1;ipa=espeak
+hotel-requests.another-blanket,بطانية أخرى من فضلك,,baṭṭānīyah ukhrá min faḍlak,bat̪t̪ˈaːniːjˌa ʔˈuxɹaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,أرجو إيقاظي الساعة {},,arjū īqāẓī al-sāʿah {},ʔrdʒˈuː ʔˈiːqaːðˌi ʔassˈaːʕa {},,2,ar-agent-v1;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,هناك مشكلة في الغرفة,,hunāk mushkilah fī al-ghurfah,hˈunaːkˌa mˈuʃkilˌa fˈiː ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
+room-problems.the-air-conditioning-is-broken,التكييف معطّل,,al-takyīf muʿaṭṭal,ʔattˈakjiːf mʕt̪ːl,,2,ar-agent-v1;ipa=espeak
+room-problems.there-is-no-hot-water,لا يوجد ماء ساخن,,lā yūjad māʾ sākhin,lˈaː jwdʒd mˈaːʔ sˈaːxin,,2,ar-agent-v1;ipa=espeak
+room-problems.can-i-change-rooms,هل يمكن تغيير الغرفة؟,,hal yumkin taghyīr al-ghurfah?,hˈal jmkˈunna tˈaɣjiːr ʔalɣˈurfa,,2,ar-agent-v1;ipa=espeak
+room-problems.the-room-is-too-noisy,الغرفة فيها ضجيج,,al-ghurfah fīhā ḍajīj,ʔalɣˈurfa fˈiːhaː dˤˈadʒiːdʒ,the room has noise,2,ar-agent-v1;ipa=espeak
+room-problems.the-key-does-not-work,المفتاح لا يعمل,البطاقة لا تعمل,al-miftāḥ lā yaʿmal,ʔalmˈiftaːħ lˈaː jʕml,,2,ar-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,السيفون لا يعمل,,al-sīfūn lā yaʿmal,ʔassˈiːfuːn lˈaː jʕml,the flush does not work,2,ar-agent-v1;ipa=espeak
+room-problems.the-light-does-not-work,الضوء لا يعمل,النور لا يعمل,al-ḍawʾ lā yaʿmal,ʔadˤdˤˈawʔ lˈaː jʕml,,2,ar-agent-v1;ipa=espeak
+room-problems.please-send-someone,أرجو إرسال أحد للإصلاح,,arjū irsāl aḥad lil-iṣlāḥ,ʔrdʒˈuː ʔˈirsaːl ʔˈaħad llʔs̪laːħ,,2,ar-agent-v1;ipa=espeak
+room-problems.the-heating-does-not-work,التدفئة لا تعمل,,al-tadfiʾah lā taʿmal,ʔattˈadfiʔˌa lˈaː tˈaʕammˌul,,2,ar-agent-v1;ipa=espeak

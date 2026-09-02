@@ -1,16 +1,16 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,Saya mau ke {},,,,2,id-agent-v1
-utility-templates.please-give-me,Tolong beri saya {},,,,2,id-agent-v1
-utility-templates.may-i,Boleh saya {}?,,,,2,id-agent-v1
-utility-templates.please-do-not-add,Tolong jangan pakai {},,,,2,id-agent-v1
-utility-templates.do-you-have,Ada {}?,,,,2,id-agent-v1
-utility-templates.please-write-the-number,Tolong tulis angkanya,,,,2,id-agent-v1
-utility-templates.i-need,Saya perlu {},,,,2,id-agent-v1
-utility-templates.is-there-nearby,Ada {} di dekat sini?,,,,2,id-agent-v1
-utility-templates.how-much-is,{} berapa?,,,,2,id-agent-v1
-utility-templates.is-this,Ini {}?,,,works for: Ini halal? Ini babi?,2,id-agent-v1
-utility-templates.please,Minta {},,,,2,id-agent-v1
-utility-templates.i-am-looking-for,Saya cari {},,,,2,id-agent-v1
-utility-templates.do-you-accept,Terima {}?,,,,2,id-agent-v1
-utility-templates.i-cannot-find,Saya tidak menemukan {},,,,2,id-agent-v1
-utility-templates.there-is-a-problem-with,Ada masalah dengan {},,,,2,id-agent-v1
+utility-templates.i-want-to-go-to,Saya mau ke {},,sˈaja mˈaʊ kə {},,2,id-agent-v1;ipa=espeak
+utility-templates.please-give-me,Tolong beri saya {},,tˈoloŋ bˈɛri sˈaja {},,2,id-agent-v1;ipa=espeak
+utility-templates.may-i,Boleh saya {}?,,bˈoləh sˈaja {},,2,id-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,Tolong jangan pakai {},,tˈoloŋ dʒˈaŋan pˈakaɪ {},,2,id-agent-v1;ipa=espeak
+utility-templates.do-you-have,Ada {}?,,ˈada {},,2,id-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,Tolong tulis angkanya,,tˈoloŋ tˈulis aŋkˈaɲa,,2,id-agent-v1;ipa=espeak
+utility-templates.i-need,Saya perlu {},,sˈaja pˈɛrlu {},,2,id-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Ada {} di dekat sini?,,ˈada {} di dˈɛkat sˈini,,2,id-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} berapa?,,{} bərˈapa,,2,id-agent-v1;ipa=espeak
+utility-templates.is-this,Ini {}?,,ˈini {},works for: Ini halal? Ini babi?,2,id-agent-v1;ipa=espeak
+utility-templates.please,Minta {},,mˈinta {},,2,id-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Saya cari {},,sˈaja tʃˈari {},,2,id-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Terima {}?,,tərˈima {},,2,id-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Saya tidak menemukan {},,sˈaja tˈidak mənəmˈukan {},,2,id-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Ada masalah dengan {},,ˈada masˈalah dˈɛŋan {},,2,id-agent-v1;ipa=espeak

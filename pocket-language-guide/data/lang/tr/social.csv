@@ -1,100 +1,100 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-social-basics.hello,Merhaba,,,,2,tr-agent-v1
-social-basics.hello-polite,İyi günler,,,,2,tr-agent-v1
-social-basics.good-morning,Günaydın,,,,2,tr-agent-v1
-social-basics.good-evening,İyi akşamlar,,,,2,tr-agent-v1
-social-basics.goodbye,Hoşça kalın,Güle güle,,Hoşça kalın: said by the one leaving; Güle güle: by the one staying,2,tr-agent-v1
-social-basics.thank-you,Teşekkürler,Teşekkür ederim,,,2,tr-agent-v1
-social-basics.you-are-welcome,Rica ederim,,,,2,tr-agent-v1
-social-basics.excuse-me-sorry,Affedersiniz,,,,2,tr-agent-v1
-social-basics.sorry,Özür dilerim,,,,2,tr-agent-v1
-social-basics.no-problem,Sorun değil,,,,2,tr-agent-v1
-social-basics.i-do-not-know,Bilmiyorum,,,,2,tr-agent-v1
-social-basics.good-night,İyi geceler,,,,2,tr-agent-v1
-social-basics.okay-fine-i-am-okay,İyiyim,Tamam,,,2,tr-agent-v1
+social-basics.hello,Merhaba,,mˈɛrhaba,,2,tr-agent-v1;ipa=espeak
+social-basics.hello-polite,İyi günler,,ijˈi ɟønlˈɛr,,2,tr-agent-v1;ipa=espeak
+social-basics.good-morning,Günaydın,,ɟynajdˈɯn,,2,tr-agent-v1;ipa=espeak
+social-basics.good-evening,İyi akşamlar,,ijˈi akʃamɫˈar,,2,tr-agent-v1;ipa=espeak
+social-basics.goodbye,Hoşça kalın,Güle güle,hɔʃtʃˈa kaɫˈɯn,Hoşça kalın: said by the one leaving; Güle güle: by the one staying,2,tr-agent-v1;ipa=espeak
+social-basics.thank-you,Teşekkürler,Teşekkür ederim,teʃekːørlˈɛr,,2,tr-agent-v1;ipa=espeak
+social-basics.you-are-welcome,Rica ederim,,ridʒˈa edˈeɾɪm,,2,tr-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,Affedersiniz,,affedˈɛrsinɪz,,2,tr-agent-v1;ipa=espeak
+social-basics.sorry,Özür dilerim,,œzˈør dilˈeɾɪm,,2,tr-agent-v1;ipa=espeak
+social-basics.no-problem,Sorun değil,,soɾˈʊn dˈejɪl,,2,tr-agent-v1;ipa=espeak
+social-basics.i-do-not-know,Bilmiyorum,,bɪlmˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+social-basics.good-night,İyi geceler,,ijˈi ɟˈedʒɛlɛr,,2,tr-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,İyiyim,Tamam,ijˈijɪm,,2,tr-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,{target} bilmiyorum.,,,,2,language-slots-v1
 communication.i-speak-only-a-little-of-this,{target} biraz biliyorum.,,,,2,language-slots-v1
 communication.do-you-speak-english,{source} biliyor musunuz?,,,,2,language-slots-v1
-communication.please-speak-more-slowly,"Daha yavaş konuşun, lütfen.",,,,2,tr-agent-v1
-communication.i-do-not-understand-spoken,Anlamıyorum.,,,,2,tr-agent-v1
-communication.i-cannot-read-understand,Okuyamıyorum.,,,,2,tr-agent-v1
-communication.please-say-it-again,Tekrar eder misiniz?,,,,2,tr-agent-v1
-communication.please-write-it-down,Yazar mısınız?,,,,2,tr-agent-v1
-communication.please-wait-a-moment,"Bir dakika, lütfen.",,,,2,tr-agent-v1
-communication.can-you-help-me,Yardım eder misiniz?,,,,2,tr-agent-v1
+communication.please-speak-more-slowly,"Daha yavaş konuşun, lütfen.",,"dahˈa javˈaʃ konuʃˈʊn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,Anlamıyorum.,,anɫamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+communication.i-cannot-read-understand,Okuyamıyorum.,,okujamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+communication.please-say-it-again,Tekrar eder misiniz?,,tɛkrˈar edˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
+communication.please-write-it-down,Yazar mısınız?,,jazˈar mˈɯsɯnɯz,,2,tr-agent-v1;ipa=espeak
+communication.please-wait-a-moment,"Bir dakika, lütfen.",,"bɪr dakikˈa, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+communication.can-you-help-me,Yardım eder misiniz?,,jardˈɯm edˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
 communication.please-show-me-the-text,"{target} yazıyı gösterin, lütfen.",,,,2,language-slots-v1
-communication.i-cannot-make-out-what-you-are-saying,Ne dediğinizi anlayamıyorum.,,,,2,tr-agent-v1
-communication.i-do-not-understand,Anlamadım.,,,,2,tr-agent-v1
-communication.i-cannot-read-it,Bunu okuyamıyorum.,,,,2,tr-agent-v1
-quick-responses.please-go-ahead,Buyurun,,,,2,tr-agent-v1
-quick-responses.yes-right,evet / doğru,,,,2,tr-agent-v1
-quick-responses.no-not,hayır / değil,,,,2,tr-agent-v1
-quick-responses.okay-can,tamam / olur,,,,2,tr-agent-v1
-quick-responses.cannot-not-allowed,olmaz / yasak,,,,2,tr-agent-v1
-quick-responses.works-okay,çalışıyor / tamam,,,,2,tr-agent-v1
-quick-responses.does-not-work-no,çalışmıyor / hayır,,,,2,tr-agent-v1
-quick-responses.can-possible,olur / mümkün,,,,2,tr-agent-v1
-quick-responses.cannot-not-possible,olmaz / mümkün değil,,,,2,tr-agent-v1
-quick-responses.okay-fine,tamam,peki,,,2,tr-agent-v1
-quick-responses.no-good-not-allowed-will-not-work,olmaz / yasak / uygun değil,,,,2,tr-agent-v1
-phone-translation.i-am-using-phone-translation,Telefonla çeviri kullanıyorum.,,,,2,tr-agent-v1
-phone-translation.please-speak-toward-the-phone,Telefona doğru konuşun.,,,,2,tr-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Ne dediğinizi anlayamıyorum.,,nˈɛ dedˈijinizɪ anɫajamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+communication.i-do-not-understand,Anlamadım.,,anɫˈamadɯm,,2,tr-agent-v1;ipa=espeak
+communication.i-cannot-read-it,Bunu okuyamıyorum.,,bunˈʊ okujamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,Buyurun,,bujuɾˈʊn,,2,tr-agent-v1;ipa=espeak
+quick-responses.yes-right,evet / doğru,,evˈɛt / doːɾˈʊ,,2,tr-agent-v1;ipa=espeak
+quick-responses.no-not,hayır / değil,,hajˈɯr / dˈejɪl,,2,tr-agent-v1;ipa=espeak
+quick-responses.okay-can,tamam / olur,,tamˈam / oɫˈʊr,,2,tr-agent-v1;ipa=espeak
+quick-responses.cannot-not-allowed,olmaz / yasak,,ɔɫmˈaz / jˈasak,,2,tr-agent-v1;ipa=espeak
+quick-responses.works-okay,çalışıyor / tamam,,tʃaɫɯʃˈɯjɔr / tamˈam,,2,tr-agent-v1;ipa=espeak
+quick-responses.does-not-work-no,çalışmıyor / hayır,,tʃaɫɯʃmˈɯjɔr / hajˈɯr,,2,tr-agent-v1;ipa=espeak
+quick-responses.can-possible,olur / mümkün,,oɫˈʊr / mømkˈøn,,2,tr-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,olmaz / mümkün değil,,ɔɫmˈaz / mømkˈøn dˈejɪl,,2,tr-agent-v1;ipa=espeak
+quick-responses.okay-fine,tamam,peki,tamˈam,,2,tr-agent-v1;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,olmaz / yasak / uygun değil,,ɔɫmˈaz / jˈasak / ʊjɡˈʊn dˈejɪl,,2,tr-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,Telefonla çeviri kullanıyorum.,,telefˈɔnɫa tʃeviɾˈɪ kʊɫɫanˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+phone-translation.please-speak-toward-the-phone,Telefona doğru konuşun.,,telefonˈa doːɾˈʊ konuʃˈʊn,,2,tr-agent-v1;ipa=espeak
 phone-translation.please-write-the-place-name,Yer adını {target} yazın.,,,,2,language-slots-v1
-phone-translation.one-sentence-at-a-time-please,"Tek cümle söyleyin, lütfen.",,,,2,tr-agent-v1
-phone-translation.please-type-it-and-show-me,Yazıp bana gösterin.,,,,2,tr-agent-v1
-phone-translation.please-look-at-the-screen,"Ekrana bakın, lütfen.",,,,2,tr-agent-v1
-phone-text-power.please-type-it-for-me,Benim için yazar mısınız?,,,,2,tr-agent-v1
-phone-text-power.please-use-simple-words,Basit kelimeler kullanın.,,,,2,tr-agent-v1
-phone-text-power.my-phone-battery-is-low,Telefonumun şarjı az.,,,,2,tr-agent-v1
-phone-text-power.do-you-have-a-power-bank,Powerbank var mı?,Taşınabilir şarj aleti var mı?,,,2,tr-agent-v1
-phone-text-power.the-translation-may-be-inaccurate,Çeviri hatalı olabilir.,,,,2,tr-agent-v1
-phone-text-power.please-confirm,Onaylar mısınız?,,,,2,tr-agent-v1
-phone-text-power.may-i-charge-my-phone-here,Telefonumu burada şarj edebilir miyim?,,,,2,tr-agent-v1
-sim-data.i-would-like-a-tourist-sim,Turist SIM kartı istiyorum.,,,,2,tr-agent-v1
-sim-data.may-i-use-your-wifi,Wi-Fi'nizi kullanabilir miyim?,,,,2,tr-agent-v1
-sim-data.how-much-data-is-included,Ne kadar internet var?,,,,2,tr-agent-v1
-sim-data.do-you-need-my-passport,Pasaportum gerekiyor mu?,,,,2,tr-agent-v1
-sim-data.how-long-is-it-valid,Ne kadar geçerli?,,,,2,tr-agent-v1
-sim-data.please-activate-it,Aktive eder misiniz?,,,,2,tr-agent-v1
-sim-data.do-you-have-an-esim,eSIM var mı?,,,,2,tr-agent-v1
-sim-data.my-data-is-not-working,İnternetim çalışmıyor.,,,,2,tr-agent-v1
-sim-data.does-it-need-registration,Kayıt gerekiyor mu?,,,,2,tr-agent-v1
-sim-data.i-have-no-signal,Çekmiyor.,Sinyal yok.,,"""çekmiyor"" = no signal (idiom)",2,tr-agent-v1
-sim-data.please-write-the-wifi-password,"Wi-Fi şifresini yazın, lütfen.",,,,2,tr-agent-v1
-sim-data.sim-card,SIM kart,,,,2,tr-agent-v1
-sim-data.where-can-i-buy-a-plug-adapter,Priz adaptörü nereden alınır?,,,,2,tr-agent-v1
-sim-data.mobile-data,mobil internet,mobil veri,,,2,tr-agent-v1
-sim-data.can-i-top-up-this-sim,Bu karta yükleme yapılır mı?,,,,2,tr-agent-v1
-sim-data.top-up,yükleme,kontör,,,2,tr-agent-v1
-sim-data.is-there-coverage-in,{} bölgesinde çekiyor mu?,,,,2,tr-agent-v1
-sim-data.signal,sinyal,çekim,,,2,tr-agent-v1
-sim-data.esim,eSIM,,,,2,tr-agent-v1
-sim-data.prepaid,faturasız,ön ödemeli,,,2,tr-agent-v1
-sim-data.roaming,dolaşım,roaming,,,2,tr-agent-v1
-etiquette.is-this-allowed,Bu serbest mi?,,,,2,tr-agent-v1
-etiquette.is-tipping-expected,Bahşiş veriliyor mu?,,,,2,tr-agent-v1
-etiquette.is-service-included,Servis dahil mi?,,,,2,tr-agent-v1
-etiquette.may-i-enter,Girebilir miyim?,,,,2,tr-agent-v1
-etiquette.remove-shoes,Ayakkabı çıkarılıyor mu?,,,,2,tr-agent-v1
-etiquette.photo-of-you,Fotoğrafınızı çekebilir miyim?,,,,2,tr-agent-v1
-etiquette.may-i-sit-here,Buraya oturabilir miyim?,,,,2,tr-agent-v1
-etiquette.queue-for,{} kuyruğu bu mu?,,,,2,tr-agent-v1
-etiquette.dressed-appropriately,Kıyafetim uygun mu?,,,,2,tr-agent-v1
-etiquette.did-not-mean-to-offend,Kırmak istemedim.,,,,2,tr-agent-v1
-etiquette.what-is-customary,Burada nasıl yapılır?,Burada âdet nedir?,,,2,tr-agent-v1
-etiquette.keep-the-change,Üstü kalsın.,,,,2,tr-agent-v1
-children.cannot-find-my-child,Çocuğumu bulamıyorum!,,,,2,tr-agent-v1
-children.make-an-announcement,Anons yapar mısınız?,,,,2,tr-agent-v1
-children.child-age,Çocuğum {} yaşında.,,,,2,tr-agent-v1
-children.high-chair,Mama sandalyesi var mı?,,,,2,tr-agent-v1
-children.baby-changing-room,Bebek bakım odası nerede?,,,,2,tr-agent-v1
-children.childrens-menu,Çocuk menüsü var mı?,,,,2,tr-agent-v1
-children.suitable-for-children,Bu çocuklara uygun mu?,,,,2,tr-agent-v1
-children.minimum-age,Yaş sınırı kaç?,,,,2,tr-agent-v1
-children.do-children-pay,Çocuklar ücret ödüyor mu?,,,,2,tr-agent-v1
-children.crib,Bebek yatağı var mı?,,,,2,tr-agent-v1
-children.warm-this-bottle,Bu biberonu ısıtır mısınız?,,,,2,tr-agent-v1
-children.car-seat,Çocuk oto koltuğu gerekiyor.,,,,2,tr-agent-v1
-children.stroller,bebek arabası,,,,2,tr-agent-v1
-children.playground,Oyun alanı var mı?,,,,2,tr-agent-v1
+phone-translation.one-sentence-at-a-time-please,"Tek cümle söyleyin, lütfen.",,"tˈɛk dʒˈømlɛ sœjlejˈɪn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+phone-translation.please-type-it-and-show-me,Yazıp bana gösterin.,,jazˈɯp banˈa ɟœsteɾˈɪn,,2,tr-agent-v1;ipa=espeak
+phone-translation.please-look-at-the-screen,"Ekrana bakın, lütfen.",,"ɛkranˈa bakˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+phone-text-power.please-type-it-for-me,Benim için yazar mısınız?,,bˈenɪm itʃˈɪn jazˈar mˈɯsɯnɯz,,2,tr-agent-v1;ipa=espeak
+phone-text-power.please-use-simple-words,Basit kelimeler kullanın.,,basˈɪt kelˈimelɛr kˈʊɫɫanɯn,,2,tr-agent-v1;ipa=espeak
+phone-text-power.my-phone-battery-is-low,Telefonumun şarjı az.,,telefˈonumʊn ʃarʒˈɯ ˈaz,,2,tr-agent-v1;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,Powerbank var mı?,Taşınabilir şarj aleti var mı?,powɛrbˈank vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,Çeviri hatalı olabilir.,,tʃeviɾˈɪ hataɫˈɯ oɫabilˈɪr,,2,tr-agent-v1;ipa=espeak
+phone-text-power.please-confirm,Onaylar mısınız?,,onajɫˈar mˈɯsɯnɯz,,2,tr-agent-v1;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,Telefonumu burada şarj edebilir miyim?,,telefˈonumʊ bˈuɾada ʃˈarʒ edebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,Turist SIM kartı istiyorum.,,tuɾˈɪst sˌɛˌɯmˈɛ kartˈɯ ɪstˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+sim-data.may-i-use-your-wifi,Wi-Fi'nizi kullanabilir miyim?,,wˈifinizɪ kʊɫɫanabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+sim-data.how-much-data-is-included,Ne kadar internet var?,,nˈɛ kadˈar ɪntɛrnˈɛt vˈar,,2,tr-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,Pasaportum gerekiyor mu?,,pasapˈɔrtʊm ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,Ne kadar geçerli?,,nˈɛ kadˈar ɟetʃɛrlˈɪ,,2,tr-agent-v1;ipa=espeak
+sim-data.please-activate-it,Aktive eder misiniz?,,aktivˈɛ edˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
+sim-data.do-you-have-an-esim,eSIM var mı?,,ˈɛ sˌɛˌɯmˈɛ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+sim-data.my-data-is-not-working,İnternetim çalışmıyor.,,ɪntɛrnˈetɪm tʃaɫɯʃmˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+sim-data.does-it-need-registration,Kayıt gerekiyor mu?,,kajˈɯt ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,Çekmiyor.,Sinyal yok.,tʃɛkmˈijɔr,"""çekmiyor"" = no signal (idiom)",2,tr-agent-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,"Wi-Fi şifresini yazın, lütfen.",,"wˈifɪ ʃɪfresinˈɪ jazˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+sim-data.sim-card,SIM kart,,sˌɛˌɯmˈɛ kˈart,,2,tr-agent-v1;ipa=espeak
+sim-data.where-can-i-buy-a-plug-adapter,Priz adaptörü nereden alınır?,,prˈɪz adaptœɾˈø nˈeɾedæn aɫɯnˈɯr,,2,tr-agent-v1;ipa=espeak
+sim-data.mobile-data,mobil internet,mobil veri,mobˈɪl ɪntɛrnˈɛt,,2,tr-agent-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,Bu karta yükleme yapılır mı?,,bʊ kartˈa jˈøklemɛ japɯɫˈɯr mɯ,,2,tr-agent-v1;ipa=espeak
+sim-data.top-up,yükleme,kontör,jˈøklemɛ,,2,tr-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,{} bölgesinde çekiyor mu?,,{} bœlɟesɪndˈɛ tʃekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+sim-data.signal,sinyal,çekim,sɪnjˈaɫ,,2,tr-agent-v1;ipa=espeak
+sim-data.esim,eSIM,,ˈɛ sˈɯm,,2,tr-agent-v1;ipa=espeak
+sim-data.prepaid,faturasız,ön ödemeli,fatuɾˈasɯz,,2,tr-agent-v1;ipa=espeak
+sim-data.roaming,dolaşım,roaming,doɫˈaʃɯm,,2,tr-agent-v1;ipa=espeak
+etiquette.is-this-allowed,Bu serbest mi?,,bʊ sɛrbˈɛst mɪ,,2,tr-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,Bahşiş veriliyor mu?,,bahʃˈɪʃ veɾilˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+etiquette.is-service-included,Servis dahil mi?,,sɛrvˈɪs dahˈɪl mɪ,,2,tr-agent-v1;ipa=espeak
+etiquette.may-i-enter,Girebilir miyim?,,ɟiɾebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+etiquette.remove-shoes,Ayakkabı çıkarılıyor mu?,,ajakːabˈɯ tʃɯkaɾɯɫˈɯjɔr mʊ,,2,tr-agent-v1;ipa=espeak
+etiquette.photo-of-you,Fotoğrafınızı çekebilir miyim?,,fotoːɾˈafɯnɯzɯ tʃekebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+etiquette.may-i-sit-here,Buraya oturabilir miyim?,,bˈuɾaja otuɾabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+etiquette.queue-for,{} kuyruğu bu mu?,,{} kʊjrˈʊː bʊ mʊ,,2,tr-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,Kıyafetim uygun mu?,,kɯjafˈetɪm ʊjɡˈʊn mʊ,,2,tr-agent-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,Kırmak istemedim.,,kɯrmˈak ɪstˈemedɪm,,2,tr-agent-v1;ipa=espeak
+etiquette.what-is-customary,Burada nasıl yapılır?,Burada âdet nedir?,bˈuɾada nasˈɯɫ japɯɫˈɯr,,2,tr-agent-v1;ipa=espeak
+etiquette.keep-the-change,Üstü kalsın.,,østˈø kaɫsˈɯn,,2,tr-agent-v1;ipa=espeak
+children.cannot-find-my-child,Çocuğumu bulamıyorum!,,tʃodʒuːmˈʊ buɫamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+children.make-an-announcement,Anons yapar mısınız?,,anˈɔns japˈar mˈɯsɯnɯz,,2,tr-agent-v1;ipa=espeak
+children.child-age,Çocuğum {} yaşında.,,tʃodʒˈʊːm {} jaʃɯndˈa,,2,tr-agent-v1;ipa=espeak
+children.high-chair,Mama sandalyesi var mı?,,mˈama sandaɫjesˈɪ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+children.baby-changing-room,Bebek bakım odası nerede?,,bebˈɛk bˈakɯm odasˈɯ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+children.childrens-menu,Çocuk menüsü var mı?,,tʃodʒˈʊk menysˈø vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+children.suitable-for-children,Bu çocuklara uygun mu?,,bʊ tʃodʒʊkɫaɾˈa ʊjɡˈʊn mʊ,,2,tr-agent-v1;ipa=espeak
+children.minimum-age,Yaş sınırı kaç?,,jˈaʃ sɯnɯɾˈɯ kˈatʃ,,2,tr-agent-v1;ipa=espeak
+children.do-children-pay,Çocuklar ücret ödüyor mu?,,tʃodʒʊkɫˈar ødʒrˈɛt œdˈyjɔr mʊ,,2,tr-agent-v1;ipa=espeak
+children.crib,Bebek yatağı var mı?,,bebˈɛk jataːˈɯ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+children.warm-this-bottle,Bu biberonu ısıtır mısınız?,,bʊ bibeɾonˈʊ ɯsɯtˈɯr mˈɯsɯnɯz,,2,tr-agent-v1;ipa=espeak
+children.car-seat,Çocuk oto koltuğu gerekiyor.,,tʃodʒˈʊk otˈɔ kɔɫtˈʊː ɟeɾekˈijɔr,,2,tr-agent-v1;ipa=espeak
+children.stroller,bebek arabası,,bebˈɛk aɾabasˈɯ,,2,tr-agent-v1;ipa=espeak
+children.playground,Oyun alanı var mı?,,ojˈʊn aɫanˈɯ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Tay dilinde nezaket: cümlenin sonuna erkekseniz khrap, kadınsanız kha ekleyin. Kadın soru sorarken kha sözcüğünü yükselen tonla söyler. Buradaki satırlarda bu sözcük yok, kendiniz ekleyin.",,,,2,tr-notes-v1

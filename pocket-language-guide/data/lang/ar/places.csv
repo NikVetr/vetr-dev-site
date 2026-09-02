@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,أين أشتري التذاكر؟,,ayna ashtarī al-tadhākir?,,,2,ar-agent-v1
-attractions-tickets.do-i-need-a-reservation,هل يجب الحجز؟,,hal yajib al-ḥajz?,,is booking required,2,ar-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,ما آخر موعد للدخول؟,,mā ākhir mawʿid lil-dukhūl?,,,2,ar-agent-v1
-attractions-tickets.are-there-lockers,هل توجد خزائن؟,,hal tūjad khazāʾin?,,,2,ar-agent-v1
-attractions-tickets.may-i-take-photos,هل التصوير مسموح؟,,hal al-taṣwīr masmūḥ?,,is photography allowed,2,ar-agent-v1
-attractions-tickets.please-take-a-photo-of-us,صوّرنا من فضلك,,ṣawwirnā min faḍlak,,,2,ar-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,هل تصوّرنا من فضلك؟,,hal tuṣawwirnā min faḍlak?,,,2,ar-agent-v1
+attractions-tickets.where-can-i-buy-tickets,أين أشتري التذاكر؟,,ayna ashtarī al-tadhākir?,ʔˈajna ʔʃtɹˈiː ʔattˈaðaːkˌar,,2,ar-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,هل يجب الحجز؟,,hal yajib al-ḥajz?,hˈal jdʒb ʔalħˈadʒz,is booking required,2,ar-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,ما آخر موعد للدخول؟,,mā ākhir mawʿid lil-dukhūl?,mˈaː ʔˈaːxar mˈawʕid lldxuːl,,2,ar-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,هل توجد خزائن؟,,hal tūjad khazāʾin?,hˈal tˈuːdʒd xzˈaːʔn,,2,ar-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,هل التصوير مسموح؟,,hal al-taṣwīr masmūḥ?,hˈal ʔattˈas̪wiːr mˈasmuːħ,is photography allowed,2,ar-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,صوّرنا من فضلك,,ṣawwirnā min faḍlak,s̪wwrnˈaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,هل تصوّرنا من فضلك؟,,hal tuṣawwirnā min faḍlak?,hˈal ts̪wwrnˈaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak

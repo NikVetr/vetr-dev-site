@@ -1,16 +1,16 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,{}に行きたいです,,{} ni ikitai desu,,,2,japanese-reviewed-v6
-utility-templates.please-give-me,{}をください,,{} o kudasai,,,2,japanese-reviewed-v6
-utility-templates.may-i,{}してもいいですか？,,{} shite mo ii desu ka?,,,2,japanese-reviewed-v6
-utility-templates.please-do-not-add,{}を入れないでください,,{} o irenaide kudasai,,,2,japanese-reviewed-v6
-utility-templates.do-you-have,{}はありますか？,,{} wa arimasu ka?,,,2,japanese-reviewed-v6
-utility-templates.please-write-the-number,数字を書いてください,,sūji o kaite kudasai,,,2,ja-agent-v1
-utility-templates.i-need,{}が必要です,,{} ga hitsuyō desu,,,2,ja-agent-v1
-utility-templates.is-there-nearby,近くに{}はありますか？,,chikaku ni {} wa arimasu ka?,,,2,ja-agent-v1
-utility-templates.how-much-is,{}はいくらですか？,,{} wa ikura desu ka?,,,2,ja-agent-v1
-utility-templates.is-this,これは{}ですか？,,kore wa {} desu ka?,,,2,ja-agent-v1
-utility-templates.please,{}をお願いします,,{} o onegaishimasu,,,2,ja-agent-v1
-utility-templates.i-am-looking-for,{}を探しています,,{} o sagashiteimasu,,,2,ja-agent-v1
-utility-templates.do-you-accept,{}は使えますか？,,{} wa tsukaemasu ka?,,,2,ja-agent-v1
-utility-templates.i-cannot-find,{}が見つかりません,,{} ga mitsukarimasen,,,2,ja-agent-v1
-utility-templates.there-is-a-problem-with,{}に問題があります,,{} ni mondai ga arimasu,,,2,ja-agent-v1
+utility-templates.i-want-to-go-to,{}に行きたいです,,{} ni ikitai desu,{} ɲi ikitai desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+utility-templates.please-give-me,{}をください,,{} o kudasai,{} o kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+utility-templates.may-i,{}してもいいですか？,,{} shite mo ii desu ka?,{} ɕite mo iː desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+utility-templates.please-do-not-add,{}を入れないでください,,{} o irenaide kudasai,{} o iɾenaide kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+utility-templates.do-you-have,{}はありますか？,,{} wa arimasu ka?,{} wa aɾimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+utility-templates.please-write-the-number,数字を書いてください,,sūji o kaite kudasai,sɯːdʑi o kaite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+utility-templates.i-need,{}が必要です,,{} ga hitsuyō desu,{} ɡa çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+utility-templates.is-there-nearby,近くに{}はありますか？,,chikaku ni {} wa arimasu ka?,tɕikakɯ ɲi {} wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+utility-templates.how-much-is,{}はいくらですか？,,{} wa ikura desu ka?,{} wa ikɯɾa desɯ ka,,2,ja-agent-v1;ipa=hepburn
+utility-templates.is-this,これは{}ですか？,,kore wa {} desu ka?,koɾe wa {} desɯ ka,,2,ja-agent-v1;ipa=hepburn
+utility-templates.please,{}をお願いします,,{} o onegaishimasu,{} o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+utility-templates.i-am-looking-for,{}を探しています,,{} o sagashiteimasu,{} o saɡaɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+utility-templates.do-you-accept,{}は使えますか？,,{} wa tsukaemasu ka?,{} wa tsɯkaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+utility-templates.i-cannot-find,{}が見つかりません,,{} ga mitsukarimasen,{} ɡa mitsɯkaɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
+utility-templates.there-is-a-problem-with,{}に問題があります,,{} ni mondai ga arimasu,{} ɲi moɴdai ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn

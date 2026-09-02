@@ -1,138 +1,138 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-lost-rescue.i-lost-my-passport,パスポートをなくしました,,pasupōto o nakushimashita,,,2,japanese-reviewed-v6
-emergency-medical.help,助けて！,,tasukete!,,,2,japanese-reviewed-v6
-medical-conditions.i-am-diabetic,糖尿病です,,tōnyōbyō desu,,,2,ja-agent-v1
-pharmacy-symptoms.which-pharmacy-is-open-now,今開いている薬局はどこですか？,,ima aiteiru yakkyoku wa doko desu ka?,,,2,ja-agent-v1
-police-consulate.where-is-the-police-station,警察署はどこですか？,,keisatsusho wa doko desu ka?,,,2,ja-agent-v1
-body-parts.head,頭,,atama,,,2,ja-agent-v1
-lost-rescue.i-lost-my-phone,スマホをなくしました,,sumaho o nakushimashita,,,2,japanese-reviewed-v6
-emergency-medical.please-call-an-ambulance,救急車を呼んでください,,kyūkyūsha o yonde kudasai,,,2,japanese-reviewed-v6
-medical-conditions.i-need-insulin,インスリンが必要です,,insurin ga hitsuyō desu,,,2,ja-agent-v1
-pharmacy-symptoms.i-need-medicine-for,{}の薬が必要です,,{} no kusuri ga hitsuyō desu,,,2,ja-agent-v1
-police-consulate.i-want-to-report-a-theft,盗難届を出したいです,,tōnan todoke o dashitai desu,,,2,ja-agent-v1
-body-parts.stomach,お腹,,onaka,,,2,ja-agent-v1
-lost-rescue.please-call-the-police,警察を呼んでください,,keisatsu o yonde kudasai,,,2,japanese-reviewed-v6
-emergency-medical.i-need-a-doctor,医者が必要です,,isha ga hitsuyō desu,,,2,japanese-reviewed-v6
-medical-conditions.i-have-asthma,喘息があります,,zensoku ga arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-a-fever,熱があります,,netsu ga arimasu,,,2,ja-agent-v1
-police-consulate.my-bag-was-stolen,かばんを盗まれました,,kaban o nusumaremashita,,,2,ja-agent-v1
-body-parts.back,背中,,senaka,,,2,ja-agent-v1
-lost-rescue.we-are-here,私たちはここにいます,,watashitachi wa koko ni imasu,,,2,japanese-reviewed-v6
-emergency-medical.i-am-sick,病気です,,byōki desu,,,2,japanese-reviewed-v6
-medical-conditions.i-have-a-heart-condition,心臓病があります,,shinzōbyō ga arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-diarrhea,下痢をしています,,geri o shiteimasu,,,2,ja-agent-v1
-police-consulate.my-passport-was-stolen,パスポートを盗まれました,,pasupōto o nusumaremashita,,,2,ja-agent-v1
-body-parts.throat,喉,,nodo,,,2,ja-agent-v1
-emergency-medical.i-am-injured,けがをしました,,kega o shimashita,,,2,japanese-reviewed-v6
-medical-conditions.i-am-allergic-to-penicillin,ペニシリンにアレルギーがあります,,penishirin ni arerugī ga arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.where-is-an-all-night-pharmacy,夜間営業の薬局はどこですか？,,yakan eigyō no yakkyoku wa doko desu ka?,,,2,ja-agent-v1
-police-consulate.someone-is-following-me,誰かにつけられています,,dareka ni tsukerareteimasu,,,2,ja-agent-v1
-body-parts.tooth,歯,,ha,,,2,ja-agent-v1
-lost-rescue.please-look-at-my-location-pin,地図のピンを見てください,,chizu no pin o mite kudasai,,,2,ja-agent-v1
-lost-rescue.i-cannot-walk,歩けません,,arukemasen,,,2,japanese-reviewed-v6
-emergency-medical.it-hurts-here,ここが痛いです,,koko ga itai desu,,,2,japanese-reviewed-v6
-medical-conditions.i-have-epilepsy,てんかんがあります,,tenkan ga arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.painkiller,痛み止め,,itamidome,,,2,ja-agent-v1
-police-consulate.i-need-a-written-police-report,被害届の受理証明書が必要です,,higai todoke no juri shōmeisho ga hitsuyō desu,,,2,ja-agent-v1
-body-parts.chest,胸,,mune,,,2,ja-agent-v1
-lost-rescue.i-sprained-my-ankle,足首をひねりました,,ashikubi o hinerimashita,,,2,japanese-reviewed-v6
-emergency-medical.where-is-a-pharmacy,薬局はどこですか？,,yakkyoku wa doko desu ka?,,,2,japanese-reviewed-v6
-medical-conditions.my-blood-sugar-is-low,血糖値が低いです,,kettōchi ga hikui desu,,,2,ja-agent-v1
-pharmacy-symptoms.do-i-need-a-prescription,処方箋は必要ですか？,,shohōsen wa hitsuyō desu ka?,,,2,ja-agent-v1
-police-consulate.i-want-to-contact-my-embassy,大使館に連絡したいです,,taishikan ni renraku shitai desu,,,2,ja-agent-v1
-body-parts.eye,目,,me,,,2,ja-agent-v1
-lost-rescue.please-contact-rescue,救助隊に連絡してください,,kyūjotai ni renraku shite kudasai,,,2,japanese-reviewed-v6
-emergency-medical.please-take-me-to-a-hospital,病院に連れて行ってください,,byōin ni tsurete itte kudasai,,,2,japanese-reviewed-v6
-medical-conditions.i-need-my-inhaler,吸入器が必要です,,kyūnyūki ga hitsuyō desu,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-a-headache,頭が痛いです,,atama ga itai desu,,,2,ja-agent-v1
-police-consulate.i-need-it-for-my-insurance,保険の手続きに必要です,,hoken no tetsuzuki ni hitsuyō desu,,,2,ja-agent-v1
-body-parts.ear,耳,,mimi,,,2,ja-agent-v1
-lost-rescue.my-companion-is-missing,仲間が見つかりません,,nakama ga mitsukarimasen,,,2,japanese-reviewed-v6
-medical-conditions.i-am-pregnant,妊娠しています,,ninshin shiteimasu,,,2,ja-agent-v1
-pharmacy-symptoms.paracetamol-acetaminophen,アセトアミノフェン,,asetoaminofen,,,2,ja-agent-v1
-police-consulate.i-need-an-interpreter,通訳が必要です,,tsūyaku ga hitsuyō desu,,,2,ja-agent-v1
-body-parts.leg,脚,足,ashi,,,2,ja-agent-v1
-medical-conditions.i-carry-an-adrenaline-injector,アドレナリン自己注射薬があります,,adorenarin jiko chūshayaku ga arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.how-much-should-i-take,どのくらい飲めばいいですか？,,dono kurai nomeba ii desu ka?,,,2,ja-agent-v1
-police-consulate.please-leave-me-alone,放っておいてください,,hōtte oite kudasai,,,2,ja-agent-v1
-body-parts.arm,腕,,ude,,,2,ja-agent-v1
-medical-conditions.i-take-medicine-for,{}の薬を飲んでいます,,{} no kusuri o nondeimasu,,,2,ja-agent-v1
-pharmacy-symptoms.i-am-vomiting,吐いています,,haiteimasu,,,2,ja-agent-v1
-police-consulate.i-was-robbed,強盗にあいました,,gōtō ni aimashita,,,2,ja-agent-v1
-body-parts.foot,足,,ashi,,,2,ja-agent-v1
-medical-conditions.i-take-blood-thinners,抗凝固薬を飲んでいます,,kōgyōkoyaku o nondeimasu,,,2,ja-agent-v1
-pharmacy-symptoms.rehydration-salts,経口補水液,,keikō hosuieki,,,2,ja-agent-v1
-police-consulate.i-want-a-lawyer,弁護士を呼んでください,,bengoshi o yonde kudasai,,,2,ja-agent-v1
-body-parts.hand,手,,te,,,2,ja-agent-v1
-medical-conditions.medicine-allergy,薬のアレルギー：{},,kusuri no arerugī: {},,,2,ja-agent-v1
-pharmacy-symptoms.how-many-times-a-day,一日何回飲みますか？,,ichinichi nankai nomimasu ka?,,,2,ja-agent-v1
-police-consulate.please-notify-my-consulate,領事館に連絡してください,,ryōjikan ni renraku shite kudasai,,,2,ja-agent-v1
-body-parts.knee,膝,,hiza,,,2,ja-agent-v1
-medical-conditions.this-card-lists-my-conditions,このカードに病名が書いてあります,,kono kādo ni byōmei ga kaite arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-a-stomach-ache,お腹が痛いです,,onaka ga itai desu,,,2,ja-agent-v1
-police-consulate.i-am-calling-the-police,警察を呼びます,,keisatsu o yobimasu,,,2,ja-agent-v1
-body-parts.ankle,足首,,ashikubi,,,2,ja-agent-v1
-medical-conditions.this-is-my-medicine,これが私の薬です,,kore ga watashi no kusuri desu,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-a-cough,咳が出ます,,seki ga demasu,,,2,ja-agent-v1
-police-consulate.am-i-under-arrest,逮捕されているのですか？,,taiho sareteiru no desu ka?,,,2,ja-agent-v1
-body-parts.skin,皮膚,肌,hifu,,,2,ja-agent-v1
-medical-conditions.please-give-me-sugar-or-juice,砂糖かジュースをください,,satō ka jūsu o kudasai,,,2,ja-agent-v1
-pharmacy-symptoms.antihistamine,抗ヒスタミン薬,,kō hisutamin yaku,,,2,ja-agent-v1
-police-consulate.no-thank-you-i-am-not-interested,いいえ、結構です,,"iie, kekkō desu",,,2,ja-agent-v1
-medical-conditions.inject-it-into-my-outer-thigh,太ももの外側に注射してください,,futomomo no sotogawa ni chūsha shite kudasai,,,2,ja-agent-v1
-pharmacy-symptoms.anti-diarrhea-medicine,下痢止め,,geridome,,,2,ja-agent-v1
-police-consulate.someone-attacked-me,誰かに襲われました,,dareka ni osowaremashita,,,2,ja-agent-v1
-medical-conditions.my-blood-type-is,血液型は{}です,,ketsuekigata wa {} desu,,,2,ja-agent-v1
-pharmacy-symptoms.is-this-safe-to-take-with,{}と一緒に飲んでも大丈夫ですか？,,{} to issho ni nonde mo daijōbu desu ka?,,,2,ja-agent-v1
-police-consulate.i-did-not-agree-to-this-price,この値段には同意していません,,kono nedan ni wa dōi shiteimasen,,,2,ja-agent-v1
-medical-conditions.do-not-give-me,{}は使わないでください,,{} wa tsukawanaide kudasai,,,2,ja-agent-v1
-pharmacy-symptoms.i-feel-dizzy,めまいがします,,memai ga shimasu,,,2,ja-agent-v1
-police-consulate.please-write-the-report-number,受理番号を書いてください,,juri bangō o kaite kudasai,,,2,ja-agent-v1
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,アスピリンとイブプロフェンにアレルギーがあります,,asupirin to ibupurofen ni arerugī ga arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.ibuprofen,イブプロフェン,,ibupurofen,,,2,ja-agent-v1
-police-consulate.it-happened-here,ここで起きました,,koko de okimashita,,,2,ja-agent-v1
-medical-conditions.my-injector-is-in-my-bag,自己注射薬はかばんの中にあります,,jiko chūshayaku wa kaban no naka ni arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-a-sore-throat,喉が痛いです,,nodo ga itai desu,,,2,ja-agent-v1
-police-consulate.may-i-have-a-copy-of-the-report,被害届のコピーをもらえますか？,,higai todoke no kopī o moraemasu ka?,,,2,ja-agent-v1
-medical-conditions.i-am-allergic-to-sulfa-drugs,サルファ剤にアレルギーがあります,,sarufazai ni arerugī ga arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.can-i-get-this-medicine-here,この薬はここで買えますか？,,kono kusuri wa koko de kaemasu ka?,,,2,ja-agent-v1
-police-consulate.i-will-not-sign-anything-i-cannot-read,読めない書類にはサインしません,,yomenai shorui ni wa sain shimasen,,,2,ja-agent-v1
-pharmacy-symptoms.bandage,包帯,,hōtai,,,2,ja-agent-v1
-police-consulate.am-i-free-to-go,もう帰ってもいいですか？,,mō kaette mo ii desu ka?,,,2,ja-agent-v1
-pharmacy-symptoms.the-pain-is-severe,痛みが強いです,,itami ga tsuyoi desu,,,2,ja-agent-v1
-police-consulate.i-do-not-want-to-go-with-you,一緒に行きたくありません,,issho ni ikitaku arimasen,,,2,ja-agent-v1
-pharmacy-symptoms.antiseptic,消毒薬,消毒液,shōdokuyaku,,,2,ja-agent-v1
-pharmacy-symptoms.i-feel-nauseous,吐き気がします,,hakike ga shimasu,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-a-rash,発疹が出ています,,hasshin ga deteimasu,,,2,ja-agent-v1
-pharmacy-symptoms.before-or-after-food,食前ですか、食後ですか？,,"shokuzen desu ka, shokugo desu ka?",,,2,ja-agent-v1
-pharmacy-symptoms.i-think-it-is-infected,感染しているかもしれません,,kansen shiteiru kamo shiremasen,,,2,ja-agent-v1
-pharmacy-symptoms.motion-sickness-tablets,酔い止め,,yoidome,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-a-cut,切り傷があります,,kirikizu ga arimasu,,,2,ja-agent-v1
-pharmacy-symptoms.antacid,胃薬,制酸薬,igusuri,,,2,ja-agent-v1
-pharmacy-symptoms.i-have-a-burn,やけどをしました,,yakedo o shimashita,,,2,ja-agent-v1
-pharmacy-symptoms.it-started-days-ago,{}日前からです,,{} nichi mae kara desu,,,2,ja-agent-v1
-pharmacy-symptoms.cough-medicine,咳止め,,sekidome,,,2,ja-agent-v1
-pharmacy-symptoms.is-this-safe-during-pregnancy,妊娠中でも飲めますか？,,ninshinchū demo nomemasu ka?,,,2,ja-agent-v1
-emergency-medical.i-feel-unwell,具合が悪いです,,guai ga warui desu,,,2,japanese-reviewed-v6
-lost-rescue.please-look-at-my-current-location,現在地を見てください,,genzaichi o mite kudasai,,,2,japanese-reviewed-v6
-emergency-medical.this-is-an-emergency,緊急です,,kinkyū desu,,,2,ja-agent-v1
-emergency-medical.i-am-having-a-severe-allergic-reaction,アナフィラキシーです,重いアレルギー反応です,anafirakishī desu,,,2,ja-agent-v1
-lost-rescue.my-child-is-missing,子供が見つかりません,,kodomo ga mitsukarimasen,,,2,ja-agent-v1
-emergency-medical.i-cannot-breathe,息ができません,,iki ga dekimasen,,,2,ja-agent-v1
-lost-rescue.i-do-not-know-where-i-am,ここがどこかわかりません,,koko ga doko ka wakarimasen,,,2,ja-agent-v1
-emergency-medical.i-am-bleeding-badly,ひどく出血しています,,hidoku shukketsu shiteimasu,,,2,ja-agent-v1
-lost-rescue.my-friend-is-hurt,友達がけがをしました,,tomodachi ga kega o shimashita,,,2,ja-agent-v1
-emergency-medical.i-have-chest-pain,胸が痛いです,,mune ga itai desu,,,2,ja-agent-v1
-lost-rescue.i-lost-my-wallet,財布をなくしました,,saifu o nakushimashita,,,2,ja-agent-v1
-emergency-medical.this-person-is-unconscious,この人は意識がありません,,kono hito wa ishiki ga arimasen,,,2,ja-agent-v1
-lost-rescue.i-lost-my-bag,かばんをなくしました,,kaban o nakushimashita,,,2,ja-agent-v1
-emergency-medical.where-is-the-nearest-hospital,一番近い病院はどこですか？,,ichiban chikai byōin wa doko desu ka?,,,2,ja-agent-v1
-lost-rescue.where-is-lost-and-found,忘れ物センターはどこですか？,,wasuremono sentā wa doko desu ka?,,,2,ja-agent-v1
-emergency-medical.what-is-the-emergency-number,救急の電話番号は何番ですか？,,kyūkyū no denwa bangō wa nanban desu ka?,,,2,ja-agent-v1
-lost-rescue.i-cannot-find-my-hotel,ホテルが見つかりません,,hoteru ga mitsukarimasen,,,2,ja-agent-v1
+lost-rescue.i-lost-my-passport,パスポートをなくしました,,pasupōto o nakushimashita,pasɯpoːto o nakɯɕimaɕita,,2,japanese-reviewed-v6;ipa=hepburn
+emergency-medical.help,助けて！,,tasukete!,tasɯkete,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.i-am-diabetic,糖尿病です,,tōnyōbyō desu,toːɲoːbjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.which-pharmacy-is-open-now,今開いている薬局はどこですか？,,ima aiteiru yakkyoku wa doko desu ka?,ima aiteiɾɯ jakkjokɯ wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+police-consulate.where-is-the-police-station,警察署はどこですか？,,keisatsusho wa doko desu ka?,keisatsɯɕo wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+body-parts.head,頭,,atama,atama,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.i-lost-my-phone,スマホをなくしました,,sumaho o nakushimashita,sɯmaho o nakɯɕimaɕita,,2,japanese-reviewed-v6;ipa=hepburn
+emergency-medical.please-call-an-ambulance,救急車を呼んでください,,kyūkyūsha o yonde kudasai,kjɯːkjɯːɕa o joɴde kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.i-need-insulin,インスリンが必要です,,insurin ga hitsuyō desu,iɴsɯɾiɴ ɡa çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-need-medicine-for,{}の薬が必要です,,{} no kusuri ga hitsuyō desu,{} no kɯsɯɾi ɡa çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-want-to-report-a-theft,盗難届を出したいです,,tōnan todoke o dashitai desu,toːnaɴ todoke o daɕitai desɯ,,2,ja-agent-v1;ipa=hepburn
+body-parts.stomach,お腹,,onaka,onaka,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.please-call-the-police,警察を呼んでください,,keisatsu o yonde kudasai,keisatsɯ o joɴde kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+emergency-medical.i-need-a-doctor,医者が必要です,,isha ga hitsuyō desu,iɕa ɡa çitsɯjoː desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.i-have-asthma,喘息があります,,zensoku ga arimasu,zeɴsokɯ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-a-fever,熱があります,,netsu ga arimasu,netsɯ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.my-bag-was-stolen,かばんを盗まれました,,kaban o nusumaremashita,kabaɴ o nɯsɯmaɾemaɕita,,2,ja-agent-v1;ipa=hepburn
+body-parts.back,背中,,senaka,senaka,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.we-are-here,私たちはここにいます,,watashitachi wa koko ni imasu,wataɕitatɕi wa koko ɲi imasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+emergency-medical.i-am-sick,病気です,,byōki desu,bjoːki desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.i-have-a-heart-condition,心臓病があります,,shinzōbyō ga arimasu,ɕiɴzoːbjoː ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-diarrhea,下痢をしています,,geri o shiteimasu,ɡeɾi o ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.my-passport-was-stolen,パスポートを盗まれました,,pasupōto o nusumaremashita,pasɯpoːto o nɯsɯmaɾemaɕita,,2,ja-agent-v1;ipa=hepburn
+body-parts.throat,喉,,nodo,nodo,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-am-injured,けがをしました,,kega o shimashita,keɡa o ɕimaɕita,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.i-am-allergic-to-penicillin,ペニシリンにアレルギーがあります,,penishirin ni arerugī ga arimasu,peɲiɕiɾiɴ ɲi aɾeɾɯɡiː ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.where-is-an-all-night-pharmacy,夜間営業の薬局はどこですか？,,yakan eigyō no yakkyoku wa doko desu ka?,jakaɴ eiɡjoː no jakkjokɯ wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+police-consulate.someone-is-following-me,誰かにつけられています,,dareka ni tsukerareteimasu,daɾeka ɲi tsɯkeɾaɾeteimasɯ,,2,ja-agent-v1;ipa=hepburn
+body-parts.tooth,歯,,ha,ha,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.please-look-at-my-location-pin,地図のピンを見てください,,chizu no pin o mite kudasai,tɕizɯ no piɴ o mite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.i-cannot-walk,歩けません,,arukemasen,aɾɯkemaseɴ,,2,japanese-reviewed-v6;ipa=hepburn
+emergency-medical.it-hurts-here,ここが痛いです,,koko ga itai desu,koko ɡa itai desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.i-have-epilepsy,てんかんがあります,,tenkan ga arimasu,teɴkaɴ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.painkiller,痛み止め,,itamidome,itamidome,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-need-a-written-police-report,被害届の受理証明書が必要です,,higai todoke no juri shōmeisho ga hitsuyō desu,çiɡai todoke no dʑɯɾi ɕoːmeiɕo ɡa çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+body-parts.chest,胸,,mune,mɯne,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.i-sprained-my-ankle,足首をひねりました,,ashikubi o hinerimashita,aɕikɯbi o çineɾimaɕita,,2,japanese-reviewed-v6;ipa=hepburn
+emergency-medical.where-is-a-pharmacy,薬局はどこですか？,,yakkyoku wa doko desu ka?,jakkjokɯ wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.my-blood-sugar-is-low,血糖値が低いです,,kettōchi ga hikui desu,kettoːtɕi ɡa çikɯi desɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.do-i-need-a-prescription,処方箋は必要ですか？,,shohōsen wa hitsuyō desu ka?,ɕohoːseɴ wa çitsɯjoː desɯ ka,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-want-to-contact-my-embassy,大使館に連絡したいです,,taishikan ni renraku shitai desu,taiɕikaɴ ɲi ɾeɴɾakɯ ɕitai desɯ,,2,ja-agent-v1;ipa=hepburn
+body-parts.eye,目,,me,me,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.please-contact-rescue,救助隊に連絡してください,,kyūjotai ni renraku shite kudasai,kjɯːdʑotai ɲi ɾeɴɾakɯ ɕite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+emergency-medical.please-take-me-to-a-hospital,病院に連れて行ってください,,byōin ni tsurete itte kudasai,bjoːiɴ ɲi tsɯɾete itte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.i-need-my-inhaler,吸入器が必要です,,kyūnyūki ga hitsuyō desu,kjɯːɲɯːki ɡa çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-a-headache,頭が痛いです,,atama ga itai desu,atama ɡa itai desɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-need-it-for-my-insurance,保険の手続きに必要です,,hoken no tetsuzuki ni hitsuyō desu,hokeɴ no tetsɯzɯki ɲi çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+body-parts.ear,耳,,mimi,mimi,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.my-companion-is-missing,仲間が見つかりません,,nakama ga mitsukarimasen,nakama ɡa mitsɯkaɾimaseɴ,,2,japanese-reviewed-v6;ipa=hepburn
+medical-conditions.i-am-pregnant,妊娠しています,,ninshin shiteimasu,ɲiɴɕiɴ ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.paracetamol-acetaminophen,アセトアミノフェン,,asetoaminofen,asetoaminofen,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-need-an-interpreter,通訳が必要です,,tsūyaku ga hitsuyō desu,tsɯːjakɯ ɡa çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+body-parts.leg,脚,足,ashi,aɕi,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.i-carry-an-adrenaline-injector,アドレナリン自己注射薬があります,,adorenarin jiko chūshayaku ga arimasu,adoɾenaɾiɴ dʑiko tɕɯːɕajakɯ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.how-much-should-i-take,どのくらい飲めばいいですか？,,dono kurai nomeba ii desu ka?,dono kɯɾai nomeba iː desɯ ka,,2,ja-agent-v1;ipa=hepburn
+police-consulate.please-leave-me-alone,放っておいてください,,hōtte oite kudasai,hoːtte oite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+body-parts.arm,腕,,ude,ɯde,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.i-take-medicine-for,{}の薬を飲んでいます,,{} no kusuri o nondeimasu,{} no kɯsɯɾi o noɴdeimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-am-vomiting,吐いています,,haiteimasu,haiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-was-robbed,強盗にあいました,,gōtō ni aimashita,ɡoːtoː ɲi aimaɕita,,2,ja-agent-v1;ipa=hepburn
+body-parts.foot,足,,ashi,aɕi,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.i-take-blood-thinners,抗凝固薬を飲んでいます,,kōgyōkoyaku o nondeimasu,koːɡjoːkojakɯ o noɴdeimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.rehydration-salts,経口補水液,,keikō hosuieki,keikoː hosɯieki,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-want-a-lawyer,弁護士を呼んでください,,bengoshi o yonde kudasai,beɴɡoɕi o joɴde kɯdasai,,2,ja-agent-v1;ipa=hepburn
+body-parts.hand,手,,te,te,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.medicine-allergy,薬のアレルギー：{},,kusuri no arerugī: {},kɯsɯɾi no aɾeɾɯɡiː {},,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.how-many-times-a-day,一日何回飲みますか？,,ichinichi nankai nomimasu ka?,itɕiɲitɕi naɴkai nomimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+police-consulate.please-notify-my-consulate,領事館に連絡してください,,ryōjikan ni renraku shite kudasai,ɾjoːdʑikaɴ ɲi ɾeɴɾakɯ ɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+body-parts.knee,膝,,hiza,çiza,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.this-card-lists-my-conditions,このカードに病名が書いてあります,,kono kādo ni byōmei ga kaite arimasu,kono kaːdo ɲi bjoːmei ɡa kaite aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-a-stomach-ache,お腹が痛いです,,onaka ga itai desu,onaka ɡa itai desɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-am-calling-the-police,警察を呼びます,,keisatsu o yobimasu,keisatsɯ o jobimasɯ,,2,ja-agent-v1;ipa=hepburn
+body-parts.ankle,足首,,ashikubi,aɕikɯbi,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.this-is-my-medicine,これが私の薬です,,kore ga watashi no kusuri desu,koɾe ɡa wataɕi no kɯsɯɾi desɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-a-cough,咳が出ます,,seki ga demasu,seki ɡa demasɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.am-i-under-arrest,逮捕されているのですか？,,taiho sareteiru no desu ka?,taiho saɾeteiɾɯ no desɯ ka,,2,ja-agent-v1;ipa=hepburn
+body-parts.skin,皮膚,肌,hifu,çiɸɯ,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.please-give-me-sugar-or-juice,砂糖かジュースをください,,satō ka jūsu o kudasai,satoː ka dʑɯːsɯ o kɯdasai,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.antihistamine,抗ヒスタミン薬,,kō hisutamin yaku,koː çisɯtamiɴ jakɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.no-thank-you-i-am-not-interested,いいえ、結構です,,"iie, kekkō desu","iːe, kekkoː desɯ",,2,ja-agent-v1;ipa=hepburn
+medical-conditions.inject-it-into-my-outer-thigh,太ももの外側に注射してください,,futomomo no sotogawa ni chūsha shite kudasai,ɸɯtomomo no sotoɡawa ɲi tɕɯːɕa ɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.anti-diarrhea-medicine,下痢止め,,geridome,ɡeɾidome,,2,ja-agent-v1;ipa=hepburn
+police-consulate.someone-attacked-me,誰かに襲われました,,dareka ni osowaremashita,daɾeka ɲi osowaɾemaɕita,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.my-blood-type-is,血液型は{}です,,ketsuekigata wa {} desu,ketsɯekiɡata wa {} desɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.is-this-safe-to-take-with,{}と一緒に飲んでも大丈夫ですか？,,{} to issho ni nonde mo daijōbu desu ka?,{} to iɕɕo ɲi noɴde mo daidʑoːbɯ desɯ ka,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-did-not-agree-to-this-price,この値段には同意していません,,kono nedan ni wa dōi shiteimasen,kono nedaɴ ɲi wa doːi ɕiteimaseɴ,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.do-not-give-me,{}は使わないでください,,{} wa tsukawanaide kudasai,{} wa tsɯkawanaide kɯdasai,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-feel-dizzy,めまいがします,,memai ga shimasu,memai ɡa ɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.please-write-the-report-number,受理番号を書いてください,,juri bangō o kaite kudasai,dʑɯɾi baɴɡoː o kaite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,アスピリンとイブプロフェンにアレルギーがあります,,asupirin to ibupurofen ni arerugī ga arimasu,asɯpiɾiɴ to ibɯpɯɾofen ɲi aɾeɾɯɡiː ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.ibuprofen,イブプロフェン,,ibupurofen,ibɯpɯɾofen,,2,ja-agent-v1;ipa=hepburn
+police-consulate.it-happened-here,ここで起きました,,koko de okimashita,koko de okimaɕita,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.my-injector-is-in-my-bag,自己注射薬はかばんの中にあります,,jiko chūshayaku wa kaban no naka ni arimasu,dʑiko tɕɯːɕajakɯ wa kabaɴ no naka ɲi aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-a-sore-throat,喉が痛いです,,nodo ga itai desu,nodo ɡa itai desɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.may-i-have-a-copy-of-the-report,被害届のコピーをもらえますか？,,higai todoke no kopī o moraemasu ka?,çiɡai todoke no kopiː o moɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.i-am-allergic-to-sulfa-drugs,サルファ剤にアレルギーがあります,,sarufazai ni arerugī ga arimasu,saɾɯfazai ɲi aɾeɾɯɡiː ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.can-i-get-this-medicine-here,この薬はここで買えますか？,,kono kusuri wa koko de kaemasu ka?,kono kɯsɯɾi wa koko de kaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-will-not-sign-anything-i-cannot-read,読めない書類にはサインしません,,yomenai shorui ni wa sain shimasen,jomenai ɕoɾɯi ɲi wa saiɴ ɕimaseɴ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.bandage,包帯,,hōtai,hoːtai,,2,ja-agent-v1;ipa=hepburn
+police-consulate.am-i-free-to-go,もう帰ってもいいですか？,,mō kaette mo ii desu ka?,moː kaette mo iː desɯ ka,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.the-pain-is-severe,痛みが強いです,,itami ga tsuyoi desu,itami ɡa tsɯjoi desɯ,,2,ja-agent-v1;ipa=hepburn
+police-consulate.i-do-not-want-to-go-with-you,一緒に行きたくありません,,issho ni ikitaku arimasen,iɕɕo ɲi ikitakɯ aɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.antiseptic,消毒薬,消毒液,shōdokuyaku,ɕoːdokɯjakɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-feel-nauseous,吐き気がします,,hakike ga shimasu,hakike ɡa ɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-a-rash,発疹が出ています,,hasshin ga deteimasu,haɕɕiɴ ɡa deteimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.before-or-after-food,食前ですか、食後ですか？,,"shokuzen desu ka, shokugo desu ka?","ɕokɯzeɴ desɯ ka, ɕokɯɡo desɯ ka",,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-think-it-is-infected,感染しているかもしれません,,kansen shiteiru kamo shiremasen,kaɴseɴ ɕiteiɾɯ kamo ɕiɾemaseɴ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.motion-sickness-tablets,酔い止め,,yoidome,joidome,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-a-cut,切り傷があります,,kirikizu ga arimasu,kiɾikizɯ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.antacid,胃薬,制酸薬,igusuri,iɡɯsɯɾi,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-have-a-burn,やけどをしました,,yakedo o shimashita,jakedo o ɕimaɕita,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.it-started-days-ago,{}日前からです,,{} nichi mae kara desu,{} ɲitɕi mae kaɾa desɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.cough-medicine,咳止め,,sekidome,sekidome,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.is-this-safe-during-pregnancy,妊娠中でも飲めますか？,,ninshinchū demo nomemasu ka?,ɲiɴɕiɴtɕɯː demo nomemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-feel-unwell,具合が悪いです,,guai ga warui desu,ɡɯai ɡa waɾɯi desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+lost-rescue.please-look-at-my-current-location,現在地を見てください,,genzaichi o mite kudasai,ɡeɴzaitɕi o mite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
+emergency-medical.this-is-an-emergency,緊急です,,kinkyū desu,kiɴkjɯː desɯ,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-am-having-a-severe-allergic-reaction,アナフィラキシーです,重いアレルギー反応です,anafirakishī desu,anafirakishī desɯ,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.my-child-is-missing,子供が見つかりません,,kodomo ga mitsukarimasen,kodomo ɡa mitsɯkaɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-cannot-breathe,息ができません,,iki ga dekimasen,iki ɡa dekimaseɴ,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.i-do-not-know-where-i-am,ここがどこかわかりません,,koko ga doko ka wakarimasen,koko ɡa doko ka wakaɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-am-bleeding-badly,ひどく出血しています,,hidoku shukketsu shiteimasu,çidokɯ ɕɯkketsɯ ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.my-friend-is-hurt,友達がけがをしました,,tomodachi ga kega o shimashita,tomodatɕi ɡa keɡa o ɕimaɕita,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-have-chest-pain,胸が痛いです,,mune ga itai desu,mɯne ɡa itai desɯ,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.i-lost-my-wallet,財布をなくしました,,saifu o nakushimashita,saiɸɯ o nakɯɕimaɕita,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.this-person-is-unconscious,この人は意識がありません,,kono hito wa ishiki ga arimasen,kono çito wa iɕiki ɡa aɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.i-lost-my-bag,かばんをなくしました,,kaban o nakushimashita,kabaɴ o nakɯɕimaɕita,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.where-is-the-nearest-hospital,一番近い病院はどこですか？,,ichiban chikai byōin wa doko desu ka?,itɕibaɴ tɕikai bjoːiɴ wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.where-is-lost-and-found,忘れ物センターはどこですか？,,wasuremono sentā wa doko desu ka?,wasɯɾemono seɴtaː wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.what-is-the-emergency-number,救急の電話番号は何番ですか？,,kyūkyū no denwa bangō wa nanban desu ka?,kjɯːkjɯː no deɴwa baɴɡoː wa naɴbaɴ desɯ ka,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.i-cannot-find-my-hotel,ホテルが見つかりません,,hoteru ga mitsukarimasen,hoteɾɯ ɡa mitsɯkaɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
 emergency-medical.is-there-a-doctor-who-speaks-english,{source}を話せる医師はいますか？,,{source} o hanaseru ishi wa imasu ka?,,,2,language-slots-v1
-lost-rescue.i-left-it-on-the-train,電車に忘れました,,densha ni wasuremashita,,,2,ja-agent-v1
-emergency-medical.i-think-a-bone-is-broken,骨が折れたかもしれません,,hone ga oreta kamo shiremasen,,,2,ja-agent-v1
-lost-rescue.i-cannot-get-down,下りられません,,oriraremasen,,,2,ja-agent-v1
-emergency-medical.please-call-my-emergency-contact,緊急連絡先に電話してください,,kinkyū renrakusaki ni denwa shite kudasai,,,2,ja-agent-v1
-emergency-medical.i-have-travel-insurance,旅行保険に入っています,,ryokō hoken ni haitteimasu,,,2,ja-agent-v1
+lost-rescue.i-left-it-on-the-train,電車に忘れました,,densha ni wasuremashita,deɴɕa ɲi wasɯɾemaɕita,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-think-a-bone-is-broken,骨が折れたかもしれません,,hone ga oreta kamo shiremasen,hone ɡa oɾeta kamo ɕiɾemaseɴ,,2,ja-agent-v1;ipa=hepburn
+lost-rescue.i-cannot-get-down,下りられません,,oriraremasen,oɾiɾaɾemaseɴ,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.please-call-my-emergency-contact,緊急連絡先に電話してください,,kinkyū renrakusaki ni denwa shite kudasai,kiɴkjɯː ɾeɴɾakɯsaki ɲi deɴwa ɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-have-travel-insurance,旅行保険に入っています,,ryokō hoken ni haitteimasu,ɾjokoː hokeɴ ɲi haitteimasɯ,,2,ja-agent-v1;ipa=hepburn

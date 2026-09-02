@@ -1,66 +1,66 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-trail-words.trail,trail,,,,2,latex-reference-v2
-trail-words.trailhead,trailhead,,,,2,latex-reference-v2
-trail-words.summit,summit,,,,2,latex-reference-v2
-trail-words.viewpoint,viewpoint,,,,2,latex-reference-v2
-trail-words.cableway,cableway,,,,2,latex-reference-v2
-trail-words.shuttle-bus,shuttle bus,,,,2,latex-reference-v2
-trail-words.park-shuttle,park shuttle,,,,2,latex-reference-v2
-trail-words.steps,steps,,,,2,latex-reference-v2
-trail-words.up-uphill,up / uphill,,,,2,latex-reference-v2
-trail-words.down-downhill,down / downhill,,,,2,latex-reference-v2
-trail-words.one-way,one-way,,,,2,latex-reference-v2
-trail-words.round-trip,round trip,,,,2,latex-reference-v2
-hiking-parks.is-this-the-way-to,Is this the way to {} ?,,,,2,latex-reference-v2
-hiking-parks.where-is-the-trailhead,Where is the trailhead?,,,,2,latex-reference-v2
-hiking-parks.how-long-to-the-summit,How long to the summit?,,,,2,latex-reference-v2
-hiking-parks.how-long-to-the-viewpoint,How long to the viewpoint?,,,,2,latex-reference-v2
-hiking-parks.which-route-is-easier,Which route is easier?,,,,2,latex-reference-v2
-trail-conditions.how-long-is-the-full-route,How long is the full route?,,,,2,latex-reference-v2
-trail-conditions.can-we-return-the-same-way,Can we return the same way?,,,,2,latex-reference-v2
-trail-conditions.can-we-return-before-dark,Can we return before dark?,,,,2,latex-reference-v2
-trail-conditions.is-the-trail-open,Is the trail open?,,,,2,latex-reference-v2
-trail-conditions.is-the-route-steep,Is the route steep?,,,,2,latex-reference-v2
-trail-conditions.is-the-path-slippery,Is the path slippery?,,,,2,latex-reference-v2
-trail-transport.how-long-is-the-queue,How long is the queue?,,,,2,latex-reference-v2
-trail-transport.what-time-is-the-last-shuttle,What time is the last shuttle?,,,,2,latex-reference-v2
-trail-transport.when-does-the-cableway-stop,When does the cableway stop?,,,,2,latex-reference-v2
-trail-transport.where-can-we-buy-water,Where can we buy water?,,,,2,latex-reference-v2
-trail-transport.where-can-we-refill-water,Where can we refill water?,,,,2,latex-reference-v2
-trail-transport.is-there-cell-signal-here,Is there cell signal here?,,,,2,latex-reference-v2
-trail-transport.do-you-have-a-map,Do you have a map?,,,,2,latex-reference-v2
-trail-warnings.open,open,,,,2,latex-reference-v2
-trail-warnings.closed,closed,,,,2,latex-reference-v2
-trail-warnings.maintenance,maintenance,,,,2,latex-reference-v2
-trail-warnings.steep-slope,steep slope,,,,2,latex-reference-v2
-trail-warnings.caution-slippery,caution: slippery,,,,2,latex-reference-v2
-trail-warnings.danger,danger,,,,2,latex-reference-v2
-trail-warnings.beware-falling-rocks,beware falling rocks,,,,2,latex-reference-v2
-trail-warnings.first-aid-station,first-aid station,,,,2,latex-reference-v2
-trail-warnings.service-suspended,service suspended,,,,2,latex-reference-v2
-trail-landmarks.trail-marker,trail marker,,,,2,latex-reference-v2
-trail-landmarks.fork-junction,fork / junction,,,,2,latex-reference-v2
-trail-landmarks.boardwalk-cliff-path,boardwalk / cliff path,,,,2,latex-reference-v2
-trail-landmarks.start,start,,,,2,latex-reference-v2
-trail-landmarks.end,end,,,,2,latex-reference-v2
-trail-landmarks.elevation,elevation,,,,2,latex-reference-v2
-trail-landmarks.sunset,sunset,,,,2,latex-reference-v2
-trail-landmarks.water-point,water point,,,,2,latex-reference-v2
-hiking-parks.is-this-trail-suitable-for-beginners,Is this trail suitable for beginners?,,,,2,japanese-reviewed-v6
-trail-transport.how-long-is-the-wait,How long is the wait?,,,,2,japanese-reviewed-v6
-weather.forecast,What is the weather forecast?,,,,2,expansion-v1
-weather.will-it-rain,Will it rain today?,,,,2,expansion-v1
-weather.is-it-safe-today,Is it safe today?,,,,2,expansion-v1
-weather.how-cold-at-night,How cold does it get at night?,,,,2,expansion-v1
-weather.rain,rain,,,,2,expansion-v1
-weather.snow,snow,,,,2,expansion-v1
-weather.wind,wind,,,,2,expansion-v1
-weather.storm,storm,,,,2,expansion-v1
-weather.ice,ice,,,,2,expansion-v1
-weather.fog,fog,,,,2,expansion-v1
-weather.heat,heat / hot,,,,2,expansion-v1
-weather.cold,cold,,,,2,expansion-v1
-weather.humid,humid,,,,2,expansion-v1
-weather.sunrise,sunrise,,,,2,expansion-v1
-weather.flood,flood,,,,2,expansion-v1
-weather.avalanche-risk,avalanche risk,,,,2,expansion-v1
+trail-words.trail,trail,,tɹˈeɪl,,2,latex-reference-v2;ipa=espeak
+trail-words.trailhead,trailhead,,tɹˈeɪlhɛd,,2,latex-reference-v2;ipa=espeak
+trail-words.summit,summit,,sˈʌmɪt,,2,latex-reference-v2;ipa=espeak
+trail-words.viewpoint,viewpoint,,vjˈuːpɔɪnt,,2,latex-reference-v2;ipa=espeak
+trail-words.cableway,cableway,,kˈeɪbəlwˌeɪ,,2,latex-reference-v2;ipa=espeak
+trail-words.shuttle-bus,shuttle bus,,ʃˈʌɾəl bˈʌs,,2,latex-reference-v2;ipa=espeak
+trail-words.park-shuttle,park shuttle,,pˈɑːɹk ʃˈʌɾəl,,2,latex-reference-v2;ipa=espeak
+trail-words.steps,steps,,stˈɛps,,2,latex-reference-v2;ipa=espeak
+trail-words.up-uphill,up / uphill,,ˈʌp / ʌphˈɪl,,2,latex-reference-v2;ipa=espeak
+trail-words.down-downhill,down / downhill,,dˈaʊn / dˈaʊnhɪl,,2,latex-reference-v2;ipa=espeak
+trail-words.one-way,one-way,,wˈʌnweɪ,,2,latex-reference-v2;ipa=espeak
+trail-words.round-trip,round trip,,ɹˈaʊnd tɹˈɪp,,2,latex-reference-v2;ipa=espeak
+hiking-parks.is-this-the-way-to,Is this the way to {} ?,,ɪz ðɪs ðə wˈeɪ tuː {},,2,latex-reference-v2;ipa=espeak
+hiking-parks.where-is-the-trailhead,Where is the trailhead?,,wˌɛɹ ɪz ðə tɹˈeɪlhɛd,,2,latex-reference-v2;ipa=espeak
+hiking-parks.how-long-to-the-summit,How long to the summit?,,hˌaʊ lˈɔŋ tə ðə sˈʌmɪt,,2,latex-reference-v2;ipa=espeak
+hiking-parks.how-long-to-the-viewpoint,How long to the viewpoint?,,hˌaʊ lˈɔŋ tə ðə vjˈuːpɔɪnt,,2,latex-reference-v2;ipa=espeak
+hiking-parks.which-route-is-easier,Which route is easier?,,wˌɪtʃ ɹˈaʊt ɪz ˈiːziɚ,,2,latex-reference-v2;ipa=espeak
+trail-conditions.how-long-is-the-full-route,How long is the full route?,,hˌaʊ lˈɔŋ ɪz ðə fˈʊl ɹˈaʊt,,2,latex-reference-v2;ipa=espeak
+trail-conditions.can-we-return-the-same-way,Can we return the same way?,,kæn wiː ɹɪtˈɜːn ðə sˈeɪm wˈeɪ,,2,latex-reference-v2;ipa=espeak
+trail-conditions.can-we-return-before-dark,Can we return before dark?,,kæn wiː ɹɪtˈɜːn bɪfˌoːɹ dˈɑːɹk,,2,latex-reference-v2;ipa=espeak
+trail-conditions.is-the-trail-open,Is the trail open?,,ɪz ðə tɹˈeɪl ˈoʊpən,,2,latex-reference-v2;ipa=espeak
+trail-conditions.is-the-route-steep,Is the route steep?,,ɪz ðə ɹˈaʊt stˈiːp,,2,latex-reference-v2;ipa=espeak
+trail-conditions.is-the-path-slippery,Is the path slippery?,,ɪz ðə pˈæθ slˈɪpɚɹi,,2,latex-reference-v2;ipa=espeak
+trail-transport.how-long-is-the-queue,How long is the queue?,,hˌaʊ lˈɔŋ ɪz ðə kjˈuː,,2,latex-reference-v2;ipa=espeak
+trail-transport.what-time-is-the-last-shuttle,What time is the last shuttle?,,wˌʌt tˈaɪm ɪz ðə lˈæst ʃˈʌɾəl,,2,latex-reference-v2;ipa=espeak
+trail-transport.when-does-the-cableway-stop,When does the cableway stop?,,wˌɛn dˈʌz ðə kˈeɪbəlwˌeɪ stˈɑːp,,2,latex-reference-v2;ipa=espeak
+trail-transport.where-can-we-buy-water,Where can we buy water?,,wˌɛɹ kæn wiː bˈaɪ wˈɔːɾɚ,,2,latex-reference-v2;ipa=espeak
+trail-transport.where-can-we-refill-water,Where can we refill water?,,wˌɛɹ kæn wiː ɹɪfˈɪl wˈɔːɾɚ,,2,latex-reference-v2;ipa=espeak
+trail-transport.is-there-cell-signal-here,Is there cell signal here?,,ɪz ðɛɹ sˈɛl sˈɪɡnəl hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+trail-transport.do-you-have-a-map,Do you have a map?,,dˈuː juː hæv ɐ mˈæp,,2,latex-reference-v2;ipa=espeak
+trail-warnings.open,open,,ˈoʊpən,,2,latex-reference-v2;ipa=espeak
+trail-warnings.closed,closed,,klˈoʊzd,,2,latex-reference-v2;ipa=espeak
+trail-warnings.maintenance,maintenance,,mˈeɪntənəns,,2,latex-reference-v2;ipa=espeak
+trail-warnings.steep-slope,steep slope,,stˈiːp slˈoʊp,,2,latex-reference-v2;ipa=espeak
+trail-warnings.caution-slippery,caution: slippery,,kˈɔːʃən slˈɪpɚɹi,,2,latex-reference-v2;ipa=espeak
+trail-warnings.danger,danger,,dˈeɪndʒɚ,,2,latex-reference-v2;ipa=espeak
+trail-warnings.beware-falling-rocks,beware falling rocks,,bɪwˈɛɹ fˈɔːlɪŋ ɹˈɑːks,,2,latex-reference-v2;ipa=espeak
+trail-warnings.first-aid-station,first-aid station,,fˈɜːsteɪd stˈeɪʃən,,2,latex-reference-v2;ipa=espeak
+trail-warnings.service-suspended,service suspended,,sˈɜːvɪs səspˈɛndɪd,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.trail-marker,trail marker,,tɹˈeɪl mˈɑːɹkɚ,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.fork-junction,fork / junction,,fˈɔːɹk / dʒˈʌŋkʃən,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.boardwalk-cliff-path,boardwalk / cliff path,,bˈoːɹdwɔːk / klˈɪf pˈæθ,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.start,start,,stˈɑːɹt,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.end,end,,ˈɛnd,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.elevation,elevation,,ˌɛlɪvˈeɪʃən,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.sunset,sunset,,sˈʌnsɛt,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.water-point,water point,,wˈɔːɾɚ pˈɔɪnt,,2,latex-reference-v2;ipa=espeak
+hiking-parks.is-this-trail-suitable-for-beginners,Is this trail suitable for beginners?,,ɪz ðɪs tɹˈeɪl sˈuːɾəbəl fɔːɹ bɪɡˈɪnɚz,,2,japanese-reviewed-v6;ipa=espeak
+trail-transport.how-long-is-the-wait,How long is the wait?,,hˌaʊ lˈɔŋ ɪz ðə wˈeɪt,,2,japanese-reviewed-v6;ipa=espeak
+weather.forecast,What is the weather forecast?,,wˌʌt ɪz ðə wˈɛðɚ fˈɔːɹkæst,,2,expansion-v1;ipa=espeak
+weather.will-it-rain,Will it rain today?,,wɪl ɪt ɹˈeɪn tədˈeɪ,,2,expansion-v1;ipa=espeak
+weather.is-it-safe-today,Is it safe today?,,ɪz ɪt sˈeɪf tədˈeɪ,,2,expansion-v1;ipa=espeak
+weather.how-cold-at-night,How cold does it get at night?,,hˌaʊ kˈoʊld dˈʌz ɪt ɡɛt æt nˈaɪt,,2,expansion-v1;ipa=espeak
+weather.rain,rain,,ɹˈeɪn,,2,expansion-v1;ipa=espeak
+weather.snow,snow,,snˈoʊ,,2,expansion-v1;ipa=espeak
+weather.wind,wind,,wˈɪnd,,2,expansion-v1;ipa=espeak
+weather.storm,storm,,stˈoːɹm,,2,expansion-v1;ipa=espeak
+weather.ice,ice,,ˈaɪs,,2,expansion-v1;ipa=espeak
+weather.fog,fog,,fˈɑːɡ,,2,expansion-v1;ipa=espeak
+weather.heat,heat / hot,,hˈiːt / hˈɑːt,,2,expansion-v1;ipa=espeak
+weather.cold,cold,,kˈoʊld,,2,expansion-v1;ipa=espeak
+weather.humid,humid,,hjˈuːmɪd,,2,expansion-v1;ipa=espeak
+weather.sunrise,sunrise,,sˈʌnɹaɪz,,2,expansion-v1;ipa=espeak
+weather.flood,flood,,flˈʌd,,2,expansion-v1;ipa=espeak
+weather.avalanche-risk,avalanche risk,,ˈævəlˌænʃ ɹˈɪsk,,2,expansion-v1;ipa=espeak

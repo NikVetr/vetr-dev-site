@@ -1,66 +1,66 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-trail-words.trail,patika,yürüyüş yolu,,,2,tr-agent-v1
-trail-words.trailhead,yol başlangıcı,patika girişi,,,2,tr-agent-v1
-trail-words.summit,zirve,,,,2,tr-agent-v1
-trail-words.viewpoint,seyir terası,manzara noktası,,,2,tr-agent-v1
-trail-words.cableway,teleferik,,,,2,tr-agent-v1
-trail-words.shuttle-bus,servis otobüsü,ring,,,2,tr-agent-v1
-trail-words.park-shuttle,park servisi,ring aracı,,,1,tr-agent-v1
-trail-words.steps,basamaklar,merdiven,,,2,tr-agent-v1
-trail-words.up-uphill,yukarı / yokuş yukarı,,,,2,tr-agent-v1
-trail-words.down-downhill,aşağı / yokuş aşağı,,,,2,tr-agent-v1
-trail-words.one-way,tek yön,,,,2,tr-agent-v1
-trail-words.round-trip,gidiş-dönüş,,,,2,tr-agent-v1
-weather.forecast,Hava durumu nasıl?,,,,2,tr-agent-v1
-weather.will-it-rain,Bugün yağmur var mı?,,,,2,tr-agent-v1
-weather.is-it-safe-today,Bugün güvenli mi?,,,,2,tr-agent-v1
-weather.how-cold-at-night,Geceleri kaç dereceye düşüyor?,,,,2,tr-agent-v1
-weather.rain,yağmur,,,,2,tr-agent-v1
-weather.snow,kar,,,,2,tr-agent-v1
-weather.wind,rüzgâr,,,,2,tr-agent-v1
-weather.storm,fırtına,,,,2,tr-agent-v1
-weather.ice,buzlanma,buz,,,2,tr-agent-v1
-weather.fog,sis,,,,2,tr-agent-v1
-weather.heat,sıcak,aşırı sıcak,,,2,tr-agent-v1
-weather.cold,soğuk,,,,2,tr-agent-v1
-weather.humid,nemli,,,,2,tr-agent-v1
-weather.sunrise,gün doğumu,,,,2,tr-agent-v1
-weather.flood,sel,,,,2,tr-agent-v1
-weather.avalanche-risk,çığ riski,,,,2,tr-agent-v1
-hiking-parks.is-this-the-way-to,{} yolu bu mu?,,,,2,tr-agent-v1
-hiking-parks.where-is-the-trailhead,Yol başlangıcı nerede?,,,,2,tr-agent-v1
-hiking-parks.how-long-to-the-summit,Zirveye ne kadar var?,,,,2,tr-agent-v1
-hiking-parks.how-long-to-the-viewpoint,Seyir terasına ne kadar var?,,,,2,tr-agent-v1
-hiking-parks.which-route-is-easier,Hangi yol daha kolay?,,,,2,tr-agent-v1
-hiking-parks.is-this-trail-suitable-for-beginners,Bu yol yeni başlayanlara uygun mu?,,,,2,tr-agent-v1
-trail-conditions.how-long-is-the-full-route,Tüm yol ne kadar sürer?,,,,2,tr-agent-v1
-trail-conditions.can-we-return-the-same-way,Aynı yoldan dönebilir miyiz?,,,,2,tr-agent-v1
-trail-conditions.can-we-return-before-dark,Karanlıktan önce döner miyiz?,,,,2,tr-agent-v1
-trail-conditions.is-the-trail-open,Yol açık mı?,,,,2,tr-agent-v1
-trail-conditions.is-the-route-steep,Yol dik mi?,,,,2,tr-agent-v1
-trail-conditions.is-the-path-slippery,Yol kaygan mı?,,,,2,tr-agent-v1
-trail-transport.how-long-is-the-queue,Kuyruk ne kadar?,,,,2,tr-agent-v1
-trail-transport.what-time-is-the-last-shuttle,Son servis saat kaçta?,,,,2,tr-agent-v1
-trail-transport.when-does-the-cableway-stop,Teleferik kaçta kapanıyor?,,,,2,tr-agent-v1
-trail-transport.where-can-we-buy-water,Nereden su alabiliriz?,,,,2,tr-agent-v1
-trail-transport.where-can-we-refill-water,Nerede su doldurabiliriz?,,,,2,tr-agent-v1
-trail-transport.is-there-cell-signal-here,Burada telefon çekiyor mu?,,,,2,tr-agent-v1
-trail-transport.do-you-have-a-map,Haritanız var mı?,,,,2,tr-agent-v1
-trail-transport.how-long-is-the-wait,Ne kadar beklenir?,,,,2,tr-agent-v1
-trail-warnings.open,açık,,,,2,tr-agent-v1
-trail-warnings.closed,kapalı,,,,2,tr-agent-v1
-trail-warnings.maintenance,bakım çalışması,bakımda,,,2,tr-agent-v1
-trail-warnings.steep-slope,dik yokuş,,,,2,tr-agent-v1
-trail-warnings.caution-slippery,dikkat: kaygan zemin,,,,2,tr-agent-v1
-trail-warnings.danger,tehlike,,,,2,tr-agent-v1
-trail-warnings.beware-falling-rocks,dikkat: taş düşebilir,,,,2,tr-agent-v1
-trail-warnings.first-aid-station,ilk yardım noktası,,,,2,tr-agent-v1
-trail-warnings.service-suspended,seferler iptal,hizmet dışı,,,2,tr-agent-v1
-trail-landmarks.trail-marker,yol işareti,,,,2,tr-agent-v1
-trail-landmarks.fork-junction,yol ayrımı,kavşak,,,2,tr-agent-v1
-trail-landmarks.boardwalk-cliff-path,ahşap yol / uçurum patikası,,,,1,tr-agent-v1
-trail-landmarks.start,başlangıç,,,,2,tr-agent-v1
-trail-landmarks.end,bitiş,,,,2,tr-agent-v1
-trail-landmarks.elevation,rakım,yükseklik,,,2,tr-agent-v1
-trail-landmarks.sunset,gün batımı,,,,2,tr-agent-v1
-trail-landmarks.water-point,su noktası,çeşme,,,2,tr-agent-v1
+trail-words.trail,patika,yürüyüş yolu,patikˈa,,2,tr-agent-v1;ipa=espeak
+trail-words.trailhead,yol başlangıcı,patika girişi,jˈɔɫ baʃɫanɡɯdʒˈɯ,,2,tr-agent-v1;ipa=espeak
+trail-words.summit,zirve,,zɪrvˈɛ,,2,tr-agent-v1;ipa=espeak
+trail-words.viewpoint,seyir terası,manzara noktası,sejˈɪr teɾasˈɯ,,2,tr-agent-v1;ipa=espeak
+trail-words.cableway,teleferik,,telefeɾˈɪk,,2,tr-agent-v1;ipa=espeak
+trail-words.shuttle-bus,servis otobüsü,ring,sɛrvˈɪs otobysˈø,,2,tr-agent-v1;ipa=espeak
+trail-words.park-shuttle,park servisi,ring aracı,pˈark sɛrvisˈɪ,,1,tr-agent-v1;ipa=espeak
+trail-words.steps,basamaklar,merdiven,basamakɫˈar,,2,tr-agent-v1;ipa=espeak
+trail-words.up-uphill,yukarı / yokuş yukarı,,jukaɾˈɯ / jokˈʊʃ jukaɾˈɯ,,2,tr-agent-v1;ipa=espeak
+trail-words.down-downhill,aşağı / yokuş aşağı,,aʃaːˈɯ / jokˈʊʃ aʃaːˈɯ,,2,tr-agent-v1;ipa=espeak
+trail-words.one-way,tek yön,,tˈɛk jˈœn,,2,tr-agent-v1;ipa=espeak
+trail-words.round-trip,gidiş-dönüş,,ɟidˈɪʃdœnøʃ,,2,tr-agent-v1;ipa=espeak
+weather.forecast,Hava durumu nasıl?,,havˈa dˈuɾumʊ nasˈɯɫ,,2,tr-agent-v1;ipa=espeak
+weather.will-it-rain,Bugün yağmur var mı?,,buɡˈøn jaːmˈʊr vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+weather.is-it-safe-today,Bugün güvenli mi?,,buɡˈøn ɟyvænlˈɪ mɪ,,2,tr-agent-v1;ipa=espeak
+weather.how-cold-at-night,Geceleri kaç dereceye düşüyor?,,ɟedʒeleɾˈɪ kˈatʃ deɾˈedʒɛjɛ dyʃˈyjɔr,,2,tr-agent-v1;ipa=espeak
+weather.rain,yağmur,,jaːmˈʊr,,2,tr-agent-v1;ipa=espeak
+weather.snow,kar,,kˈar,,2,tr-agent-v1;ipa=espeak
+weather.wind,rüzgâr,,røzɟˈar,,2,tr-agent-v1;ipa=espeak
+weather.storm,fırtına,,fɯrtɯnˈa,,2,tr-agent-v1;ipa=espeak
+weather.ice,buzlanma,buz,bʊzɫˈanma,,2,tr-agent-v1;ipa=espeak
+weather.fog,sis,,sˈɪs,,2,tr-agent-v1;ipa=espeak
+weather.heat,sıcak,aşırı sıcak,sɯdʒˈak,,2,tr-agent-v1;ipa=espeak
+weather.cold,soğuk,,soːˈʊk,,2,tr-agent-v1;ipa=espeak
+weather.humid,nemli,,næmlˈɪ,,2,tr-agent-v1;ipa=espeak
+weather.sunrise,gün doğumu,,ɟˈøn dˈoːumʊ,,2,tr-agent-v1;ipa=espeak
+weather.flood,sel,,sˈæl,,2,tr-agent-v1;ipa=espeak
+weather.avalanche-risk,çığ riski,,tʃˈɯɯ rɪskˈɪ,,2,tr-agent-v1;ipa=espeak
+hiking-parks.is-this-the-way-to,{} yolu bu mu?,,{} joɫˈʊ bʊ mʊ,,2,tr-agent-v1;ipa=espeak
+hiking-parks.where-is-the-trailhead,Yol başlangıcı nerede?,,jˈɔɫ baʃɫanɡɯdʒˈɯ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+hiking-parks.how-long-to-the-summit,Zirveye ne kadar var?,,zɪrvejˈɛ nˈɛ kadˈar vˈar,,2,tr-agent-v1;ipa=espeak
+hiking-parks.how-long-to-the-viewpoint,Seyir terasına ne kadar var?,,sejˈɪr teɾasɯnˈa nˈɛ kadˈar vˈar,,2,tr-agent-v1;ipa=espeak
+hiking-parks.which-route-is-easier,Hangi yol daha kolay?,,hanɡˈɪ jˈɔɫ dahˈa koɫˈaj,,2,tr-agent-v1;ipa=espeak
+hiking-parks.is-this-trail-suitable-for-beginners,Bu yol yeni başlayanlara uygun mu?,,bʊ jˈɔɫ jenˈɪ baʃɫajanɫaɾˈa ʊjɡˈʊn mʊ,,2,tr-agent-v1;ipa=espeak
+trail-conditions.how-long-is-the-full-route,Tüm yol ne kadar sürer?,,tˈøm jˈɔɫ nˈɛ kadˈar syɾˈɛr,,2,tr-agent-v1;ipa=espeak
+trail-conditions.can-we-return-the-same-way,Aynı yoldan dönebilir miyiz?,,ajnˈɯ jɔɫdˈan dœnebilˈɪr mˈijɪz,,2,tr-agent-v1;ipa=espeak
+trail-conditions.can-we-return-before-dark,Karanlıktan önce döner miyiz?,,kaɾanɫɯktˈan ˈœndʒɛ dœnˈɛr mˈijɪz,,2,tr-agent-v1;ipa=espeak
+trail-conditions.is-the-trail-open,Yol açık mı?,,jˈɔɫ atʃˈɯk mɯ,,2,tr-agent-v1;ipa=espeak
+trail-conditions.is-the-route-steep,Yol dik mi?,,jˈɔɫ dˈɪk mɪ,,2,tr-agent-v1;ipa=espeak
+trail-conditions.is-the-path-slippery,Yol kaygan mı?,,jˈɔɫ kajɡˈan mɯ,,2,tr-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-queue,Kuyruk ne kadar?,,kʊjrˈʊk nˈɛ kadˈar,,2,tr-agent-v1;ipa=espeak
+trail-transport.what-time-is-the-last-shuttle,Son servis saat kaçta?,,sˈɔn sɛrvˈɪs saˈat katʃtˈa,,2,tr-agent-v1;ipa=espeak
+trail-transport.when-does-the-cableway-stop,Teleferik kaçta kapanıyor?,,telefeɾˈɪk katʃtˈa kapanˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+trail-transport.where-can-we-buy-water,Nereden su alabiliriz?,,nˈeɾedæn sˈʊ aɫabilˈiɾɪz,,2,tr-agent-v1;ipa=espeak
+trail-transport.where-can-we-refill-water,Nerede su doldurabiliriz?,,nˈeɾedɛ sˈʊ dɔɫduɾabilˈiɾɪz,,2,tr-agent-v1;ipa=espeak
+trail-transport.is-there-cell-signal-here,Burada telefon çekiyor mu?,,bˈuɾada telefˈɔn tʃekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+trail-transport.do-you-have-a-map,Haritanız var mı?,,haɾitˈanɯz vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-wait,Ne kadar beklenir?,,nˈɛ kadˈar bɛklenˈɪr,,2,tr-agent-v1;ipa=espeak
+trail-warnings.open,açık,,atʃˈɯk,,2,tr-agent-v1;ipa=espeak
+trail-warnings.closed,kapalı,,kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+trail-warnings.maintenance,bakım çalışması,bakımda,bˈakɯm tʃaɫɯʃmasˈɯ,,2,tr-agent-v1;ipa=espeak
+trail-warnings.steep-slope,dik yokuş,,dˈɪk jokˈʊʃ,,2,tr-agent-v1;ipa=espeak
+trail-warnings.caution-slippery,dikkat: kaygan zemin,,dikːˈat kajɡˈan zemˈɪn,,2,tr-agent-v1;ipa=espeak
+trail-warnings.danger,tehlike,,tɛhlikˈɛ,,2,tr-agent-v1;ipa=espeak
+trail-warnings.beware-falling-rocks,dikkat: taş düşebilir,,dikːˈat tˈaʃ dyʃebilˈɪr,,2,tr-agent-v1;ipa=espeak
+trail-warnings.first-aid-station,ilk yardım noktası,,ˈɪlk jardˈɯm nɔktasˈɯ,,2,tr-agent-v1;ipa=espeak
+trail-warnings.service-suspended,seferler iptal,hizmet dışı,sefɛrlˈɛr ɪptˈaɫ,,2,tr-agent-v1;ipa=espeak
+trail-landmarks.trail-marker,yol işareti,,jˈɔɫ iʃaɾetˈɪ,,2,tr-agent-v1;ipa=espeak
+trail-landmarks.fork-junction,yol ayrımı,kavşak,jˈɔɫ ˈajrɯmɯ,,2,tr-agent-v1;ipa=espeak
+trail-landmarks.boardwalk-cliff-path,ahşap yol / uçurum patikası,,ahʃˈap jˈɔɫ / utʃˈuɾʊm patikasˈɯ,,1,tr-agent-v1;ipa=espeak
+trail-landmarks.start,başlangıç,,baʃɫanɡˈɯtʃ,,2,tr-agent-v1;ipa=espeak
+trail-landmarks.end,bitiş,,bitˈɪʃ,,2,tr-agent-v1;ipa=espeak
+trail-landmarks.elevation,rakım,yükseklik,rˈakɯm,,2,tr-agent-v1;ipa=espeak
+trail-landmarks.sunset,gün batımı,,ɟˈøn bˈatɯmɯ,,2,tr-agent-v1;ipa=espeak
+trail-landmarks.water-point,su noktası,çeşme,sˈʊ nɔktasˈɯ,,2,tr-agent-v1;ipa=espeak

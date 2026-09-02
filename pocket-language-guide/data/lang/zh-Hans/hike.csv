@@ -1,66 +1,66 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
-trail-words.trail,步道,,bùdào,,,2,latex-reference-v2
-hiking-parks.is-this-the-way-to,这是去{}的路吗？,,zhè shì qù {} de lù ma?,,,2,latex-reference-v2
-trail-conditions.how-long-is-the-full-route,全程多长？,,quánchéng duō cháng?,,,2,latex-reference-v2
-trail-transport.how-long-is-the-queue,排队要多久？,,páiduì yào duōjiǔ?,,,2,latex-reference-v2
-trail-warnings.open,开放,,kāifàng,,,2,latex-reference-v2
-trail-landmarks.trail-marker,路标,,lùbiāo,,,2,latex-reference-v2
-weather.forecast,天气预报怎么说？,,tiānqì yùbào zěnme shuō?,,,2,zh-Hans-agent-v1
-trail-words.trailhead,登山口,,dēngshānkǒu,,,2,latex-reference-v2
-hiking-parks.where-is-the-trailhead,登山口在哪里？,,dēngshānkǒu zài nǎlǐ?,,,2,latex-reference-v2
-trail-conditions.can-we-return-the-same-way,能原路返回吗？,,néng yuánlù fǎnhuí ma?,,,2,latex-reference-v2
-trail-transport.what-time-is-the-last-shuttle,接驳车最晚几点？,,jiēbóchē zuìwǎn jǐ diǎn?,,,2,latex-reference-v2
-trail-warnings.closed,封闭,,fēngbì,,,2,latex-reference-v2
-trail-landmarks.fork-junction,岔路,,chàlù,,,2,latex-reference-v2
-weather.will-it-rain,今天会下雨吗？,,jīntiān huì xià yǔ ma?,,,2,zh-Hans-agent-v1
-trail-words.summit,山顶,,shāndǐng,,,2,latex-reference-v2
-hiking-parks.how-long-to-the-summit,到山顶要多久？,,dào shāndǐng yào duōjiǔ?,,,2,latex-reference-v2
-trail-conditions.can-we-return-before-dark,天黑前能回来吗？,,tiānhēi qián néng huílái ma?,,,2,latex-reference-v2
-trail-transport.when-does-the-cableway-stop,索道几点停运？,,suǒdào jǐ diǎn tíngyùn?,,,2,latex-reference-v2
-trail-warnings.maintenance,维修,,wéixiū,,,2,latex-reference-v2
-trail-landmarks.boardwalk-cliff-path,栈道,,zhàndào,,,2,latex-reference-v2
-weather.is-it-safe-today,今天安全吗？,,jīntiān ānquán ma?,,,2,zh-Hans-agent-v1
-trail-words.viewpoint,观景台,,guānjǐngtái,,,2,latex-reference-v2
-hiking-parks.how-long-to-the-viewpoint,到观景台要多久？,,dào guānjǐngtái yào duōjiǔ?,,,2,latex-reference-v2
-trail-conditions.is-the-trail-open,这条步道开放吗？,,zhè tiáo bùdào kāifàng ma?,,,2,latex-reference-v2
-trail-transport.where-can-we-buy-water,哪里可以买水？,,nǎlǐ kěyǐ mǎi shuǐ?,,,2,latex-reference-v2
-trail-warnings.steep-slope,陡坡,,dǒupō,,,2,latex-reference-v2
-trail-landmarks.start,起点,,qǐdiǎn,,,2,latex-reference-v2
-weather.how-cold-at-night,晚上有多冷？,,wǎnshang yǒu duō lěng?,,,2,zh-Hans-agent-v1
-trail-words.cableway,索道,,suǒdào,,,2,latex-reference-v2
-hiking-parks.which-route-is-easier,哪条路线比较容易？,,nǎ tiáo lùxiàn bǐjiào róngyì?,,,2,latex-reference-v2
-trail-conditions.is-the-route-steep,这条路陡吗？,,zhè tiáo lù dǒu ma?,,,2,latex-reference-v2
-trail-transport.where-can-we-refill-water,哪里可以接水？,,nǎlǐ kěyǐ jiē shuǐ?,,,2,latex-reference-v2
-trail-warnings.caution-slippery,小心路滑,,xiǎoxīn lùhuá,,,2,latex-reference-v2
-trail-landmarks.end,终点,,zhōngdiǎn,,,2,latex-reference-v2
-weather.rain,雨,,yǔ,,,2,zh-Hans-agent-v1
-trail-words.shuttle-bus,接驳车,,jiēbóchē,,,2,latex-reference-v2
-trail-conditions.is-the-path-slippery,路滑吗？,,lù huá ma?,,,2,latex-reference-v2
-trail-transport.is-there-cell-signal-here,这里有手机信号吗？,,zhèlǐ yǒu shǒujī xìnhào ma?,,,2,latex-reference-v2
-trail-warnings.danger,危险,,wēixiǎn,,,2,latex-reference-v2
-trail-landmarks.elevation,海拔,,hǎibá,,,2,latex-reference-v2
-weather.snow,雪,,xuě,,,2,zh-Hans-agent-v1
-trail-words.park-shuttle,环保车,,huánbǎochē,,,2,latex-reference-v2
-trail-transport.do-you-have-a-map,有地图吗？,,yǒu dìtú ma?,,,2,latex-reference-v2
-trail-warnings.beware-falling-rocks,注意落石,,zhùyì luòshí,,,2,latex-reference-v2
-trail-landmarks.sunset,日落,,rìluò,,,2,latex-reference-v2
-weather.wind,风,風,fēng,,,2,zh-Hans-agent-v1
-trail-words.steps,台阶,,táijiē,,,2,latex-reference-v2
-trail-warnings.first-aid-station,急救站,,jíjiùzhàn,,,2,latex-reference-v2
-weather.storm,台风,颱風,táifēng,,,2,zh-Hans-agent-v1
-trail-words.up-uphill,上行,,shàngxíng,,,2,latex-reference-v2
-trail-warnings.service-suspended,暂停运营,,zàntíng yùnyíng,,,2,latex-reference-v2
-trail-landmarks.water-point,饮水点,,yǐnshuǐdiǎn,,,2,latex-reference-v2
-weather.ice,结冰,結冰,jiébīng,,,2,zh-Hans-agent-v1
-trail-words.down-downhill,下行,,xiàxíng,,,2,latex-reference-v2
-weather.fog,雾,霧,wù,,,2,zh-Hans-agent-v1
-trail-words.one-way,单程,,dānchéng,,,2,latex-reference-v2
-weather.heat,高温,高溫,gāowēn,,,2,zh-Hans-agent-v1
-trail-words.round-trip,往返,,wǎngfǎn,,,2,latex-reference-v2
-weather.cold,寒冷,,hánlěng,,,2,zh-Hans-agent-v1
-weather.humid,潮湿,潮濕,cháoshī,,,2,zh-Hans-agent-v1
-weather.sunrise,日出,,rìchū,,,2,zh-Hans-agent-v1
-weather.flood,洪水,,hóngshuǐ,,,2,zh-Hans-agent-v1
-weather.avalanche-risk,雪崩危险,雪崩危險,xuěbēng wēixiǎn,,,2,zh-Hans-agent-v1
-trail-transport.how-long-is-the-wait,要等多久？,,yào děng duōjiǔ?,,,2,zh-Hans-agent-v1
-hiking-parks.is-this-trail-suitable-for-beginners,这条路适合新手吗？,,zhè tiáo lù shìhé xīnshǒu ma?,,,2,zh-Hans-agent-v1
+trail-words.trail,步道,,bùdào,pu˥˩tɑʊ˥˩,,2,latex-reference-v2;ipa=pinyin
+hiking-parks.is-this-the-way-to,这是去{}的路吗？,,zhè shì qù {} de lù ma?,ʈʂɤ˥˩ ʂɨ˥˩ tɕʰy˥˩ {} tɤ lu˥˩ ma,,2,latex-reference-v2;ipa=pinyin
+trail-conditions.how-long-is-the-full-route,全程多长？,,quánchéng duō cháng?,tɕʰɥœn˧˥ʈʂʰɤŋ˧˥ twɔ˥ ʈʂʰɑŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+trail-transport.how-long-is-the-queue,排队要多久？,,páiduì yào duōjiǔ?,pʰaɪ˧˥tweɪ˥˩ jɑʊ˥˩ twɔ˥tɕjoʊ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.open,开放,,kāifàng,kʰaɪ˥fɑŋ˥˩,,2,latex-reference-v2;ipa=pinyin
+trail-landmarks.trail-marker,路标,,lùbiāo,lu˥˩pjɑʊ˥,,2,latex-reference-v2;ipa=pinyin
+weather.forecast,天气预报怎么说？,,tiānqì yùbào zěnme shuō?,tʰjɛn˥tɕʰi˥˩ y˥˩pɑʊ˥˩ tsən˧˩˧mɤ ʂwɔ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.trailhead,登山口,,dēngshānkǒu,tɤŋ˥ʂan˥kʰoʊ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+hiking-parks.where-is-the-trailhead,登山口在哪里？,,dēngshānkǒu zài nǎlǐ?,tɤŋ˥ʂan˥kʰoʊ˧˩˧ tsaɪ˥˩ na˧˩˧li˧˩˧,,2,latex-reference-v2;ipa=pinyin
+trail-conditions.can-we-return-the-same-way,能原路返回吗？,,néng yuánlù fǎnhuí ma?,nɤŋ˧˥ ɥœn˧˥lu˥˩ fan˧˩˧xweɪ˧˥ ma,,2,latex-reference-v2;ipa=pinyin
+trail-transport.what-time-is-the-last-shuttle,接驳车最晚几点？,,jiēbóchē zuìwǎn jǐ diǎn?,tɕjɛ˥pwɔ˧˥ʈʂʰɤ˥ tsweɪ˥˩wan˧˩˧ tɕi˧˩˧ tjɛn˧˩˧,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.closed,封闭,,fēngbì,fɤŋ˥pi˥˩,,2,latex-reference-v2;ipa=pinyin
+trail-landmarks.fork-junction,岔路,,chàlù,ʈʂʰa˥˩lu˥˩,,2,latex-reference-v2;ipa=pinyin
+weather.will-it-rain,今天会下雨吗？,,jīntiān huì xià yǔ ma?,tɕin˥tʰjɛn˥ xweɪ˥˩ ɕja˥˩ y˧˩˧ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.summit,山顶,,shāndǐng,ʂan˥tiŋ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+hiking-parks.how-long-to-the-summit,到山顶要多久？,,dào shāndǐng yào duōjiǔ?,tɑʊ˥˩ ʂan˥tiŋ˧˩˧ jɑʊ˥˩ twɔ˥tɕjoʊ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+trail-conditions.can-we-return-before-dark,天黑前能回来吗？,,tiānhēi qián néng huílái ma?,tʰjɛn˥xeɪ˥ tɕʰjɛn˧˥ nɤŋ˧˥ xweɪ˧˥laɪ˧˥ ma,,2,latex-reference-v2;ipa=pinyin
+trail-transport.when-does-the-cableway-stop,索道几点停运？,,suǒdào jǐ diǎn tíngyùn?,swɔ˧˩˧tɑʊ˥˩ tɕi˧˩˧ tjɛn˧˩˧ tʰiŋ˧˥yn˥˩,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.maintenance,维修,,wéixiū,weɪ˧˥ɕjoʊ˥,,2,latex-reference-v2;ipa=pinyin
+trail-landmarks.boardwalk-cliff-path,栈道,,zhàndào,ʈʂan˥˩tɑʊ˥˩,,2,latex-reference-v2;ipa=pinyin
+weather.is-it-safe-today,今天安全吗？,,jīntiān ānquán ma?,tɕin˥tʰjɛn˥ an˥tɕʰɥœn˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.viewpoint,观景台,,guānjǐngtái,kwan˥tɕiŋ˧˩˧tʰaɪ˧˥,,2,latex-reference-v2;ipa=pinyin
+hiking-parks.how-long-to-the-viewpoint,到观景台要多久？,,dào guānjǐngtái yào duōjiǔ?,tɑʊ˥˩ kwan˥tɕiŋ˧˩˧tʰaɪ˧˥ jɑʊ˥˩ twɔ˥tɕjoʊ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+trail-conditions.is-the-trail-open,这条步道开放吗？,,zhè tiáo bùdào kāifàng ma?,ʈʂɤ˥˩ tʰjɑʊ˧˥ pu˥˩tɑʊ˥˩ kʰaɪ˥fɑŋ˥˩ ma,,2,latex-reference-v2;ipa=pinyin
+trail-transport.where-can-we-buy-water,哪里可以买水？,,nǎlǐ kěyǐ mǎi shuǐ?,na˧˩˧li˧˩˧ kʰɤ˧˩˧i˧˩˧ maɪ˧˩˧ ʂweɪ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.steep-slope,陡坡,,dǒupō,toʊ˧˩˧pʰwɔ˥,,2,latex-reference-v2;ipa=pinyin
+trail-landmarks.start,起点,,qǐdiǎn,tɕʰi˧˩˧tjɛn˧˩˧,,2,latex-reference-v2;ipa=pinyin
+weather.how-cold-at-night,晚上有多冷？,,wǎnshang yǒu duō lěng?,wan˧˩˧ʂɑŋ joʊ˧˩˧ twɔ˥ lɤŋ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.cableway,索道,,suǒdào,swɔ˧˩˧tɑʊ˥˩,,2,latex-reference-v2;ipa=pinyin
+hiking-parks.which-route-is-easier,哪条路线比较容易？,,nǎ tiáo lùxiàn bǐjiào róngyì?,na˧˩˧ tʰjɑʊ˧˥ lu˥˩ɕjɛn˥˩ pi˧˩˧tɕjɑʊ˥˩ ʐʊŋ˧˥i˥˩,,2,latex-reference-v2;ipa=pinyin
+trail-conditions.is-the-route-steep,这条路陡吗？,,zhè tiáo lù dǒu ma?,ʈʂɤ˥˩ tʰjɑʊ˧˥ lu˥˩ toʊ˧˩˧ ma,,2,latex-reference-v2;ipa=pinyin
+trail-transport.where-can-we-refill-water,哪里可以接水？,,nǎlǐ kěyǐ jiē shuǐ?,na˧˩˧li˧˩˧ kʰɤ˧˩˧i˧˩˧ tɕjɛ˥ ʂweɪ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.caution-slippery,小心路滑,,xiǎoxīn lùhuá,ɕjɑʊ˧˩˧ɕin˥ lu˥˩xwa˧˥,,2,latex-reference-v2;ipa=pinyin
+trail-landmarks.end,终点,,zhōngdiǎn,ʈʂʊŋ˥tjɛn˧˩˧,,2,latex-reference-v2;ipa=pinyin
+weather.rain,雨,,yǔ,y˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.shuttle-bus,接驳车,,jiēbóchē,tɕjɛ˥pwɔ˧˥ʈʂʰɤ˥,,2,latex-reference-v2;ipa=pinyin
+trail-conditions.is-the-path-slippery,路滑吗？,,lù huá ma?,lu˥˩ xwa˧˥ ma,,2,latex-reference-v2;ipa=pinyin
+trail-transport.is-there-cell-signal-here,这里有手机信号吗？,,zhèlǐ yǒu shǒujī xìnhào ma?,ʈʂɤ˥˩li˧˩˧ joʊ˧˩˧ ʂoʊ˧˩˧tɕi˥ ɕin˥˩xɑʊ˥˩ ma,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.danger,危险,,wēixiǎn,weɪ˥ɕjɛn˧˩˧,,2,latex-reference-v2;ipa=pinyin
+trail-landmarks.elevation,海拔,,hǎibá,xaɪ˧˩˧pa˧˥,,2,latex-reference-v2;ipa=pinyin
+weather.snow,雪,,xuě,ɕɥœ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.park-shuttle,环保车,,huánbǎochē,xwan˧˥pɑʊ˧˩˧ʈʂʰɤ˥,,2,latex-reference-v2;ipa=pinyin
+trail-transport.do-you-have-a-map,有地图吗？,,yǒu dìtú ma?,joʊ˧˩˧ ti˥˩tʰu˧˥ ma,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.beware-falling-rocks,注意落石,,zhùyì luòshí,ʈʂu˥˩i˥˩ lwɔ˥˩ʂɨ˧˥,,2,latex-reference-v2;ipa=pinyin
+trail-landmarks.sunset,日落,,rìluò,ʐɨ˥˩lwɔ˥˩,,2,latex-reference-v2;ipa=pinyin
+weather.wind,风,風,fēng,fɤŋ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.steps,台阶,,táijiē,tʰaɪ˧˥tɕjɛ˥,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.first-aid-station,急救站,,jíjiùzhàn,tɕi˧˥tɕjoʊ˥˩ʈʂan˥˩,,2,latex-reference-v2;ipa=pinyin
+weather.storm,台风,颱風,táifēng,tʰaɪ˧˥fɤŋ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.up-uphill,上行,,shàngxíng,ʂɑŋ˥˩ɕiŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+trail-warnings.service-suspended,暂停运营,,zàntíng yùnyíng,tsan˥˩tʰiŋ˧˥ yn˥˩iŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+trail-landmarks.water-point,饮水点,,yǐnshuǐdiǎn,in˧˩˧ʂweɪ˧˩˧tjɛn˧˩˧,,2,latex-reference-v2;ipa=pinyin
+weather.ice,结冰,結冰,jiébīng,tɕjɛ˧˥piŋ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.down-downhill,下行,,xiàxíng,ɕja˥˩ɕiŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+weather.fog,雾,霧,wù,u˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.one-way,单程,,dānchéng,tan˥ʈʂʰɤŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+weather.heat,高温,高溫,gāowēn,kɑʊ˥wən˥,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-words.round-trip,往返,,wǎngfǎn,wɑŋ˧˩˧fan˧˩˧,,2,latex-reference-v2;ipa=pinyin
+weather.cold,寒冷,,hánlěng,xan˧˥lɤŋ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+weather.humid,潮湿,潮濕,cháoshī,ʈʂʰɑʊ˧˥ʂɨ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+weather.sunrise,日出,,rìchū,ʐɨ˥˩ʈʂʰu˥,,2,zh-Hans-agent-v1;ipa=pinyin
+weather.flood,洪水,,hóngshuǐ,xʊŋ˧˥ʂweɪ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+weather.avalanche-risk,雪崩危险,雪崩危險,xuěbēng wēixiǎn,ɕɥœ˧˩˧pɤŋ˥ weɪ˥ɕjɛn˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+trail-transport.how-long-is-the-wait,要等多久？,,yào děng duōjiǔ?,jɑʊ˥˩ tɤŋ˧˩˧ twɔ˥tɕjoʊ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+hiking-parks.is-this-trail-suitable-for-beginners,这条路适合新手吗？,,zhè tiáo lù shìhé xīnshǒu ma?,ʈʂɤ˥˩ tʰjɑʊ˧˥ lu˥˩ ʂɨ˥˩xɤ˧˥ ɕin˥ʂoʊ˧˩˧ ma,,2,zh-Hans-agent-v1;ipa=pinyin

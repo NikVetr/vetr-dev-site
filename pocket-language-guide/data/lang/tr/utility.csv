@@ -1,16 +1,16 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,Buraya gitmek istiyorum: {},,,,2,tr-agent-v1
-utility-templates.please-give-me,{} verir misiniz?,,,,2,tr-agent-v1
-utility-templates.may-i,{} mümkün mü?,,,,2,tr-agent-v1
-utility-templates.please-do-not-add,Lütfen {} koymayın.,,,,2,tr-agent-v1
-utility-templates.do-you-have,{} var mı?,,,,2,tr-agent-v1
-utility-templates.please-write-the-number,"Rakamı yazın, lütfen.",,,,2,tr-agent-v1
-utility-templates.i-need,Bana {} lazım.,,,,2,tr-agent-v1
-utility-templates.is-there-nearby,Yakında {} var mı?,,,,2,tr-agent-v1
-utility-templates.how-much-is,{} ne kadar?,,,,2,tr-agent-v1
-utility-templates.is-this,{} bu mu?,,,,2,tr-agent-v1
-utility-templates.please,"{}, lütfen.",,,,2,tr-agent-v1
-utility-templates.i-am-looking-for,{} arıyorum.,,,,2,tr-agent-v1
-utility-templates.do-you-accept,{} kabul ediyor musunuz?,,,,2,tr-agent-v1
-utility-templates.i-cannot-find,{} bulamıyorum.,,,,2,tr-agent-v1
-utility-templates.there-is-a-problem-with,{} ile ilgili sorun var.,,,,2,tr-agent-v1
+utility-templates.i-want-to-go-to,Buraya gitmek istiyorum: {},,bˈuɾaja ɟɪtmˈɛk ɪstˈijoɾʊm {},,2,tr-agent-v1;ipa=espeak
+utility-templates.please-give-me,{} verir misiniz?,,{} veɾˈɪr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
+utility-templates.may-i,{} mümkün mü?,,{} mømkˈøn mø,,2,tr-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,Lütfen {} koymayın.,,løtfˈæn {} kɔjmajˈɯn,,2,tr-agent-v1;ipa=espeak
+utility-templates.do-you-have,{} var mı?,,{} vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Rakamı yazın, lütfen.",,"rakamˈɯ jazˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+utility-templates.i-need,Bana {} lazım.,,banˈa {} ɫˈazɯm,,2,tr-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Yakında {} var mı?,,jakɯndˈa {} vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} ne kadar?,,{} nˈɛ kadˈar,,2,tr-agent-v1;ipa=espeak
+utility-templates.is-this,{} bu mu?,,{} bʊ mʊ,,2,tr-agent-v1;ipa=espeak
+utility-templates.please,"{}, lütfen.",,"{}, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,{} arıyorum.,,{} aɾˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+utility-templates.do-you-accept,{} kabul ediyor musunuz?,,{} kabˈʊɫ edˈijɔr mˈusunʊz,,2,tr-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,{} bulamıyorum.,,{} buɫamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} ile ilgili sorun var.,,{} ˌilɛ ɪlɟilˈɪ soɾˈʊn vˈar,,2,tr-agent-v1;ipa=espeak

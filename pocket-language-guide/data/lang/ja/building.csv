@@ -1,60 +1,60 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-building-words.elevator,エレベーター,,erebētā,,,2,japanese-reviewed-v6
-building-help.what-room-number-is-this,これは何号室ですか？,,kore wa nangōshitsu desu ka?,,,2,japanese-reviewed-v6
-in-a-building.is-this-the-correct-entrance,ここが正しい入口ですか？,,koko ga tadashii iriguchi desu ka?,,,2,japanese-reviewed-v6
-toilets.where-toilet,トイレはどこですか？,,toire wa doko desu ka?,,,2,ja-agent-v1
-accessibility.step-free,段差なしで行けますか？,,dansa nashi de ikemasu ka?,,,2,ja-agent-v1
-building-help.i-am-lost,道に迷いました,,michi ni mayoimashita,,,2,japanese-reviewed-v6
-building-words.stairs,階段,,kaidan,,,2,japanese-reviewed-v6
-toilets.where-public-toilet,公衆トイレはどこですか？,,kōshū toire wa doko desu ka?,,,2,ja-agent-v1
-accessibility.wheelchair-access,車椅子で入れますか？,,kurumaisu de hairemasu ka?,,,2,ja-agent-v1
-building-help.where-is-reception,受付はどこですか？,,uketsuke wa doko desu ka?,,,2,japanese-reviewed-v6
-building-words.entrance,入口,,iriguchi,,,2,japanese-reviewed-v6
+building-words.elevator,エレベーター,,erebētā,eɾebeːtaː,,2,japanese-reviewed-v6;ipa=hepburn
+building-help.what-room-number-is-this,これは何号室ですか？,,kore wa nangōshitsu desu ka?,koɾe wa naɴɡoːɕitsɯ desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+in-a-building.is-this-the-correct-entrance,ここが正しい入口ですか？,,koko ga tadashii iriguchi desu ka?,koko ɡa tadaɕii iɾiɡɯtɕi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+toilets.where-toilet,トイレはどこですか？,,toire wa doko desu ka?,toiɾe wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+accessibility.step-free,段差なしで行けますか？,,dansa nashi de ikemasu ka?,daɴsa naɕi de ikemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+building-help.i-am-lost,道に迷いました,,michi ni mayoimashita,mitɕi ɲi majoimaɕita,,2,japanese-reviewed-v6;ipa=hepburn
+building-words.stairs,階段,,kaidan,kaidaɴ,,2,japanese-reviewed-v6;ipa=hepburn
+toilets.where-public-toilet,公衆トイレはどこですか？,,kōshū toire wa doko desu ka?,koːɕɯː toiɾe wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+accessibility.wheelchair-access,車椅子で入れますか？,,kurumaisu de hairemasu ka?,kɯɾɯmaisɯ de haiɾemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+building-help.where-is-reception,受付はどこですか？,,uketsuke wa doko desu ka?,ɯketsɯke wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+building-words.entrance,入口,,iriguchi,iɾiɡɯtɕi,,2,japanese-reviewed-v6;ipa=hepburn
 in-a-building.do-you-have-wi-fi,Wi-Fiはありますか？,,wai-fai wa arimasu ka?,,,2,japanese-reviewed-v6
-toilets.may-i-use-the-toilet,トイレをお借りできますか？,,toire o okari dekimasu ka?,,,2,ja-agent-v1
-accessibility.elevator,エレベーターはありますか？,,erebētā wa arimasu ka?,,,2,ja-agent-v1
-building-help.where-is-a-power-outlet,コンセントはどこですか？,,konsento wa doko desu ka?,,,2,japanese-reviewed-v6
-building-words.exit,出口,,deguchi,,,2,japanese-reviewed-v6
+toilets.may-i-use-the-toilet,トイレをお借りできますか？,,toire o okari dekimasu ka?,toiɾe o okaɾi dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+accessibility.elevator,エレベーターはありますか？,,erebētā wa arimasu ka?,eɾebeːtaː wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+building-help.where-is-a-power-outlet,コンセントはどこですか？,,konsento wa doko desu ka?,koɴseɴto wa doko desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+building-words.exit,出口,,deguchi,deɡɯtɕi,,2,japanese-reviewed-v6;ipa=hepburn
 in-a-building.what-is-the-wi-fi-password,Wi-Fiのパスワードは何ですか？,,wai-fai no pasuwādo wa nan desu ka?,,,2,japanese-reviewed-v6
-toilets.is-it-only-for-customers,お客様専用ですか？,,okyakusama sen'yō desu ka?,,,2,ja-agent-v1
-accessibility.ramp,スロープはありますか？,,surōpu wa arimasu ka?,,,2,ja-agent-v1
-building-words.men,男性,,dansei,,,2,japanese-reviewed-v6
-in-a-building.which-floor,何階ですか？,,nankai desu ka?,,,2,japanese-reviewed-v6
-toilets.toilet-wc,トイレ,お手洗い,toire,,,2,ja-agent-v1
-accessibility.how-many-steps,階段は何段ありますか？,,kaidan wa nandan arimasu ka?,,,2,ja-agent-v1
-building-words.women,女性,,josei,,,2,japanese-reviewed-v6
-toilets.is-it-free,無料ですか？,,muryō desu ka?,,,2,ja-agent-v1
-accessibility.cannot-climb-stairs,階段は上れません,,kaidan wa noboremasen,,,2,ja-agent-v1
-building-words.door,ドア,,doa,,,2,japanese-reviewed-v6
-toilets.do-i-need-a-coin,硬貨が必要ですか？,,kōka ga hitsuyō desu ka?,,,2,ja-agent-v1
-accessibility.need-to-sit-down,座らせてください,,suwarasete kudasai,,,2,ja-agent-v1
-building-words.key,鍵,,kagi,,,2,japanese-reviewed-v6
-toilets.is-the-tap-water-safe-to-drink,水道水は飲めますか？,,suidōsui wa nomemasu ka?,,,2,ja-agent-v1
-accessibility.accessible-restroom,多目的トイレはありますか？,,tamokuteki toire wa arimasu ka?,,,2,ja-agent-v1
-toilets.it-is-urgent,とても急いでいます,,totemo isoideimasu,,,2,ja-agent-v1
-accessibility.station-assistance,駅員の介助はありますか？,,ekiin no kaijo wa arimasu ka?,,,2,ja-agent-v1
-toilets.may-i-have-the-toilet-key,トイレの鍵をお借りできますか？,,toire no kagi o okari dekimasu ka?,,,2,ja-agent-v1
-accessibility.help-me-carry,運ぶのを手伝ってください,,hakobu no o tetsudatte kudasai,,,2,ja-agent-v1
-toilets.there-is-no-toilet-paper,トイレットペーパーがありません,,toiretto pēpā ga arimasen,,,2,ja-agent-v1
-accessibility.board-first,先に乗ってもいいですか？,,saki ni notte mo ii desu ka?,,,2,ja-agent-v1
-toilets.toilet-paper,トイレットペーパー,,toiretto pēpā,,,2,ja-agent-v1
-accessibility.door-width,ドアの幅は何センチですか？,,doa no haba wa nan senchi desu ka?,,,2,ja-agent-v1
-toilets.it-is-out-of-order,故障しています,,koshō shiteimasu,,,2,ja-agent-v1
-accessibility.wheelchair-width,車椅子の幅は{}センチです,,kurumaisu no haba wa {} senchi desu,,,2,ja-agent-v1
-toilets.out-of-order,故障中,,koshōchū,,,2,ja-agent-v1
-accessibility.hard-of-hearing,耳が聞こえにくいです,難聴です,mimi ga kikoenikui desu,,,2,ja-agent-v1
-toilets.mens-toilet,男性トイレ,男子トイレ,dansei toire,,,2,ja-agent-v1
-accessibility.speak-louder,もっと大きい声で話してください,,motto ōkii koe de hanashite kudasai,,,2,ja-agent-v1
-toilets.womens-toilet,女性トイレ,女子トイレ,josei toire,,,2,ja-agent-v1
-accessibility.visually-impaired,視覚障害があります,目が見えにくいです,shikaku shōgai ga arimasu,,,2,ja-agent-v1
-toilets.drinking-water,飲料水,,inryōsui,,,2,ja-agent-v1
-accessibility.take-your-arm,腕を持たせてもらえますか？,,ude o motasete moraemasu ka?,,,2,ja-agent-v1
-toilets.not-for-drinking,飲めません,飲料水ではありません,nomemasen,,,2,ja-agent-v1
-accessibility.guide-dog,私の盲導犬です,,watashi no mōdōken desu,,,2,ja-agent-v1
-toilets.accessible-toilet,多目的トイレ,バリアフリートイレ,tamokuteki toire,,,2,ja-agent-v1
-toilets.where-can-i-wash-my-hands,手を洗う場所はどこですか？,,te o arau basho wa doko desu ka?,,,2,ja-agent-v1
-toilets.can-i-flush-the-paper,紙は流せますか？,,kami wa nagasemasu ka?,,,2,ja-agent-v1
-toilets.is-there-a-toilet-on-board,車内にトイレはありますか？,,shanai ni toire wa arimasu ka?,,,2,ja-agent-v1
-toilets.the-toilet-will-not-flush,トイレの水が流れません,,toire no mizu ga nagaremasen,,,2,ja-agent-v1
-toilets.baby-change,おむつ交換台,,omutsu kōkandai,,,2,ja-agent-v1
-toilets.squat-toilet,和式トイレ,,washiki toire,,,2,ja-agent-v1
+toilets.is-it-only-for-customers,お客様専用ですか？,,okyakusama sen'yō desu ka?,okjakɯsama seɴjoː desɯ ka,,2,ja-agent-v1;ipa=hepburn
+accessibility.ramp,スロープはありますか？,,surōpu wa arimasu ka?,sɯɾoːpɯ wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+building-words.men,男性,,dansei,daɴsei,,2,japanese-reviewed-v6;ipa=hepburn
+in-a-building.which-floor,何階ですか？,,nankai desu ka?,naɴkai desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+toilets.toilet-wc,トイレ,お手洗い,toire,toiɾe,,2,ja-agent-v1;ipa=hepburn
+accessibility.how-many-steps,階段は何段ありますか？,,kaidan wa nandan arimasu ka?,kaidaɴ wa naɴdaɴ aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+building-words.women,女性,,josei,dʑosei,,2,japanese-reviewed-v6;ipa=hepburn
+toilets.is-it-free,無料ですか？,,muryō desu ka?,mɯɾjoː desɯ ka,,2,ja-agent-v1;ipa=hepburn
+accessibility.cannot-climb-stairs,階段は上れません,,kaidan wa noboremasen,kaidaɴ wa noboɾemaseɴ,,2,ja-agent-v1;ipa=hepburn
+building-words.door,ドア,,doa,doa,,2,japanese-reviewed-v6;ipa=hepburn
+toilets.do-i-need-a-coin,硬貨が必要ですか？,,kōka ga hitsuyō desu ka?,koːka ɡa çitsɯjoː desɯ ka,,2,ja-agent-v1;ipa=hepburn
+accessibility.need-to-sit-down,座らせてください,,suwarasete kudasai,sɯwaɾasete kɯdasai,,2,ja-agent-v1;ipa=hepburn
+building-words.key,鍵,,kagi,kaɡi,,2,japanese-reviewed-v6;ipa=hepburn
+toilets.is-the-tap-water-safe-to-drink,水道水は飲めますか？,,suidōsui wa nomemasu ka?,sɯidoːsɯi wa nomemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+accessibility.accessible-restroom,多目的トイレはありますか？,,tamokuteki toire wa arimasu ka?,tamokɯteki toiɾe wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+toilets.it-is-urgent,とても急いでいます,,totemo isoideimasu,totemo isoideimasɯ,,2,ja-agent-v1;ipa=hepburn
+accessibility.station-assistance,駅員の介助はありますか？,,ekiin no kaijo wa arimasu ka?,ekiiɴ no kaidʑo wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+toilets.may-i-have-the-toilet-key,トイレの鍵をお借りできますか？,,toire no kagi o okari dekimasu ka?,toiɾe no kaɡi o okaɾi dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+accessibility.help-me-carry,運ぶのを手伝ってください,,hakobu no o tetsudatte kudasai,hakobɯ no o tetsɯdatte kɯdasai,,2,ja-agent-v1;ipa=hepburn
+toilets.there-is-no-toilet-paper,トイレットペーパーがありません,,toiretto pēpā ga arimasen,toiɾetto peːpaː ɡa aɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
+accessibility.board-first,先に乗ってもいいですか？,,saki ni notte mo ii desu ka?,saki ɲi notte mo iː desɯ ka,,2,ja-agent-v1;ipa=hepburn
+toilets.toilet-paper,トイレットペーパー,,toiretto pēpā,toiɾetto peːpaː,,2,ja-agent-v1;ipa=hepburn
+accessibility.door-width,ドアの幅は何センチですか？,,doa no haba wa nan senchi desu ka?,doa no haba wa naɴ seɴtɕi desɯ ka,,2,ja-agent-v1;ipa=hepburn
+toilets.it-is-out-of-order,故障しています,,koshō shiteimasu,koɕoː ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+accessibility.wheelchair-width,車椅子の幅は{}センチです,,kurumaisu no haba wa {} senchi desu,kɯɾɯmaisɯ no haba wa {} seɴtɕi desɯ,,2,ja-agent-v1;ipa=hepburn
+toilets.out-of-order,故障中,,koshōchū,koɕoːtɕɯː,,2,ja-agent-v1;ipa=hepburn
+accessibility.hard-of-hearing,耳が聞こえにくいです,難聴です,mimi ga kikoenikui desu,mimi ɡa kikoeɲikɯi desɯ,,2,ja-agent-v1;ipa=hepburn
+toilets.mens-toilet,男性トイレ,男子トイレ,dansei toire,daɴsei toiɾe,,2,ja-agent-v1;ipa=hepburn
+accessibility.speak-louder,もっと大きい声で話してください,,motto ōkii koe de hanashite kudasai,motto oːkii koe de hanaɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
+toilets.womens-toilet,女性トイレ,女子トイレ,josei toire,dʑosei toiɾe,,2,ja-agent-v1;ipa=hepburn
+accessibility.visually-impaired,視覚障害があります,目が見えにくいです,shikaku shōgai ga arimasu,ɕikakɯ ɕoːɡai ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+toilets.drinking-water,飲料水,,inryōsui,iɴɾjoːsɯi,,2,ja-agent-v1;ipa=hepburn
+accessibility.take-your-arm,腕を持たせてもらえますか？,,ude o motasete moraemasu ka?,ɯde o motasete moɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+toilets.not-for-drinking,飲めません,飲料水ではありません,nomemasen,nomemaseɴ,,2,ja-agent-v1;ipa=hepburn
+accessibility.guide-dog,私の盲導犬です,,watashi no mōdōken desu,wataɕi no moːdoːkeɴ desɯ,,2,ja-agent-v1;ipa=hepburn
+toilets.accessible-toilet,多目的トイレ,バリアフリートイレ,tamokuteki toire,tamokɯteki toiɾe,,2,ja-agent-v1;ipa=hepburn
+toilets.where-can-i-wash-my-hands,手を洗う場所はどこですか？,,te o arau basho wa doko desu ka?,te o aɾaɯ baɕo wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
+toilets.can-i-flush-the-paper,紙は流せますか？,,kami wa nagasemasu ka?,kami wa naɡasemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+toilets.is-there-a-toilet-on-board,車内にトイレはありますか？,,shanai ni toire wa arimasu ka?,ɕanai ɲi toiɾe wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+toilets.the-toilet-will-not-flush,トイレの水が流れません,,toire no mizu ga nagaremasen,toiɾe no mizɯ ɡa naɡaɾemaseɴ,,2,ja-agent-v1;ipa=hepburn
+toilets.baby-change,おむつ交換台,,omutsu kōkandai,omɯtsɯ koːkaɴdai,,2,ja-agent-v1;ipa=hepburn
+toilets.squat-toilet,和式トイレ,,washiki toire,waɕiki toiɾe,,2,ja-agent-v1;ipa=hepburn

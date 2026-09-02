@@ -1,49 +1,49 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
-numbers-money.l-ng,零,,líng,,,2,latex-reference-v2
-atm-cash.where-is-an-atm,取款机在哪里？,,qǔkuǎnjī zài nǎlǐ?,,,2,zh-Hans-agent-v1
-numbers-money.y,一,,yī,,,2,latex-reference-v2
-atm-cash.does-this-atm-take-foreign-cards,外国的卡能用吗？,,wàiguó de kǎ néng yòng ma?,,,2,zh-Hans-agent-v1
-numbers-money.r,二,,èr,,,2,latex-reference-v2
-atm-cash.the-atm-kept-my-card,我的卡被吞了,,wǒ de kǎ bèi tūn le,,,2,zh-Hans-agent-v1
-numbers-money.li-ng,两,,liǎng,,,2,latex-reference-v2
-atm-cash.is-there-a-fee,有手续费吗？,,yǒu shǒuxùfèi ma?,,,2,zh-Hans-agent-v1
-numbers-money.s-n,三,,sān,,,2,latex-reference-v2
-atm-cash.the-card-was-declined,卡刷不了,,kǎ shuā bu liǎo,,,2,zh-Hans-agent-v1
-numbers-money.s,四,,sì,,,2,latex-reference-v2
-atm-cash.what-is-the-exchange-rate,汇率是多少？,,huìlǜ shì duōshao?,,,2,zh-Hans-agent-v1
-numbers-money.w,五,,wǔ,,,2,latex-reference-v2
-atm-cash.no-money-came-out,钱没出来,,qián méi chūlái,,,2,zh-Hans-agent-v1
-numbers-money.li,六,,liù,,,2,latex-reference-v2
-atm-cash.where-can-i-change-money,哪里可以换钱？,,nǎlǐ kěyǐ huàn qián?,,,2,zh-Hans-agent-v1
-numbers-money.q,七,,qī,,,2,latex-reference-v2
-atm-cash.the-machine-is-out-of-service,机器坏了,,jīqì huài le,,,2,zh-Hans-agent-v1
-numbers-money.b,八,,bā,,,2,latex-reference-v2
-atm-cash.please-give-me-smaller-notes,请给我小面额的钱,,qǐng gěi wǒ xiǎo miàn'é de qián,,,2,zh-Hans-agent-v1
-numbers-money.ji,九,,jiǔ,,,2,latex-reference-v2
-atm-cash.do-you-have-change,有零钱吗？,,yǒu língqián ma?,,,2,zh-Hans-agent-v1
-numbers-money.sh,十,,shí,,,2,latex-reference-v2
-atm-cash.may-i-pay-in,可以用{}付款吗？,,kěyǐ yòng {} fùkuǎn ma?,,,2,zh-Hans-agent-v1
-numbers-money.y-b-i,一百,,yìbǎi,,,2,latex-reference-v2
-atm-cash.please-charge-in-local-currency,请用人民币结算,,qǐng yòng Rénmínbì jiésuàn,,,2,zh-Hans-agent-v1
-numbers-money.y-qi-n,一千,,yìqiān,,,2,latex-reference-v2
-atm-cash.where-can-i-get-coins,哪里可以换硬币？,,nǎlǐ kěyǐ huàn yìngbì?,,,2,zh-Hans-agent-v1
-numbers-money.y-w-n,一万,,yíwàn,,,2,latex-reference-v2
-atm-cash.is-there-a-minimum-for-cards,刷卡有最低金额吗？,,shuākǎ yǒu zuìdī jīn'é ma?,,,2,zh-Hans-agent-v1
-numbers-money.b-n,半,,bàn,,,2,latex-reference-v2
-atm-cash.atm,自动取款机,自動取款機,zìdòng qǔkuǎnjī,,,2,zh-Hans-agent-v1
-numbers-money.yu-n,元,,yuán,,,2,latex-reference-v2
-atm-cash.banknote,钞票,,chāopiào,,,2,zh-Hans-agent-v1
-numbers-money.ku-i,块,,kuài,,,2,latex-reference-v2
-atm-cash.coin,硬币,,yìngbì,,,2,zh-Hans-agent-v1
+numbers-money.l-ng,零,,líng,liŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+atm-cash.where-is-an-atm,取款机在哪里？,,qǔkuǎnjī zài nǎlǐ?,tɕʰy˧˩˧kʰwan˧˩˧tɕi˥ tsaɪ˥˩ na˧˩˧li˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.y,一,,yī,i˥,,2,latex-reference-v2;ipa=pinyin
+atm-cash.does-this-atm-take-foreign-cards,外国的卡能用吗？,,wàiguó de kǎ néng yòng ma?,waɪ˥˩kwɔ˧˥ tɤ kʰa˧˩˧ nɤŋ˧˥ jʊŋ˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.r,二,,èr,ɑɻ˥˩,,2,latex-reference-v2;ipa=pinyin
+atm-cash.the-atm-kept-my-card,我的卡被吞了,,wǒ de kǎ bèi tūn le,wɔ˧˩˧ tɤ kʰa˧˩˧ peɪ˥˩ tʰwən˥ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.li-ng,两,,liǎng,ljɑŋ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+atm-cash.is-there-a-fee,有手续费吗？,,yǒu shǒuxùfèi ma?,joʊ˧˩˧ ʂoʊ˧˩˧ɕy˥˩feɪ˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.s-n,三,,sān,san˥,,2,latex-reference-v2;ipa=pinyin
+atm-cash.the-card-was-declined,卡刷不了,,kǎ shuā bu liǎo,kʰa˧˩˧ ʂwa˥ pu ljɑʊ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.s,四,,sì,sɯ˥˩,,2,latex-reference-v2;ipa=pinyin
+atm-cash.what-is-the-exchange-rate,汇率是多少？,,huìlǜ shì duōshao?,xweɪ˥˩ly˥˩ ʂɨ˥˩ twɔ˥ʂɑʊ,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.w,五,,wǔ,u˧˩˧,,2,latex-reference-v2;ipa=pinyin
+atm-cash.no-money-came-out,钱没出来,,qián méi chūlái,tɕʰjɛn˧˥ meɪ˧˥ ʈʂʰu˥laɪ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.li,六,,liù,ljoʊ˥˩,,2,latex-reference-v2;ipa=pinyin
+atm-cash.where-can-i-change-money,哪里可以换钱？,,nǎlǐ kěyǐ huàn qián?,na˧˩˧li˧˩˧ kʰɤ˧˩˧i˧˩˧ xwan˥˩ tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.q,七,,qī,tɕʰi˥,,2,latex-reference-v2;ipa=pinyin
+atm-cash.the-machine-is-out-of-service,机器坏了,,jīqì huài le,tɕi˥tɕʰi˥˩ xwaɪ˥˩ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.b,八,,bā,pa˥,,2,latex-reference-v2;ipa=pinyin
+atm-cash.please-give-me-smaller-notes,请给我小面额的钱,,qǐng gěi wǒ xiǎo miàn'é de qián,tɕʰiŋ˧˩˧ keɪ˧˩˧ wɔ˧˩˧ ɕjɑʊ˧˩˧ mjɛn˥˩ɤ˧˥ tɤ tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.ji,九,,jiǔ,tɕjoʊ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+atm-cash.do-you-have-change,有零钱吗？,,yǒu língqián ma?,joʊ˧˩˧ liŋ˧˥tɕʰjɛn˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.sh,十,,shí,ʂɨ˧˥,,2,latex-reference-v2;ipa=pinyin
+atm-cash.may-i-pay-in,可以用{}付款吗？,,kěyǐ yòng {} fùkuǎn ma?,kʰɤ˧˩˧i˧˩˧ jʊŋ˥˩ {} fu˥˩kʰwan˧˩˧ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.y-b-i,一百,,yìbǎi,i˥˩paɪ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+atm-cash.please-charge-in-local-currency,请用人民币结算,,qǐng yòng Rénmínbì jiésuàn,tɕʰiŋ˧˩˧ jʊŋ˥˩ ʐən˧˥min˧˥pi˥˩ tɕjɛ˧˥swan˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.y-qi-n,一千,,yìqiān,i˥˩tɕʰjɛn˥,,2,latex-reference-v2;ipa=pinyin
+atm-cash.where-can-i-get-coins,哪里可以换硬币？,,nǎlǐ kěyǐ huàn yìngbì?,na˧˩˧li˧˩˧ kʰɤ˧˩˧i˧˩˧ xwan˥˩ iŋ˥˩pi˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.y-w-n,一万,,yíwàn,i˧˥wan˥˩,,2,latex-reference-v2;ipa=pinyin
+atm-cash.is-there-a-minimum-for-cards,刷卡有最低金额吗？,,shuākǎ yǒu zuìdī jīn'é ma?,ʂwa˥kʰa˧˩˧ joʊ˧˩˧ tsweɪ˥˩ti˥ tɕin˥ɤ˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.b-n,半,,bàn,pan˥˩,,2,latex-reference-v2;ipa=pinyin
+atm-cash.atm,自动取款机,自動取款機,zìdòng qǔkuǎnjī,tsɯ˥˩tʊŋ˥˩ tɕʰy˧˩˧kʰwan˧˩˧tɕi˥,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.yu-n,元,,yuán,ɥœn˧˥,,2,latex-reference-v2;ipa=pinyin
+atm-cash.banknote,钞票,,chāopiào,ʈʂʰɑʊ˥pʰjɑʊ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.ku-i,块,,kuài,kʰwaɪ˥˩,,2,latex-reference-v2;ipa=pinyin
+atm-cash.coin,硬币,,yìngbì,iŋ˥˩pi˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
 numbers-money.number-and-classifier-notes,,,,,,2,latex-reference-v2
-atm-cash.cash-only,只收现金,只收現金,zhǐ shōu xiànjīn,,,2,zh-Hans-agent-v1
-atm-cash.fee,手续费,,shǒuxùfèi,,,2,zh-Hans-agent-v1
-atm-cash.change,找零,,zhǎolíng,,,2,zh-Hans-agent-v1
-atm-cash.exchange-rate,汇率,匯率,huìlǜ,,,2,zh-Hans-agent-v1
-atm-cash.bank,银行,銀行,yínháng,,,2,zh-Hans-agent-v1
-atm-cash.money-exchange,外币兑换,外幣兌換,wàibì duìhuàn,,,2,zh-Hans-agent-v1
-atm-cash.pin,密码,密碼,mìmǎ,,,2,zh-Hans-agent-v1
-numbers-money.2-items,两个,,liǎng gè,,,2,zh-Hans-agent-v1
-numbers-money.yen,日元,,Rìyuán,,,2,zh-Hans-agent-v1
-numbers-money.yen-symbol,￥,,Rìyuán,,,2,zh-Hans-agent-v1
+atm-cash.cash-only,只收现金,只收現金,zhǐ shōu xiànjīn,ʈʂɨ˧˩˧ ʂoʊ˥ ɕjɛn˥˩tɕin˥,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.fee,手续费,,shǒuxùfèi,ʂoʊ˧˩˧ɕy˥˩feɪ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.change,找零,,zhǎolíng,ʈʂɑʊ˧˩˧liŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.exchange-rate,汇率,匯率,huìlǜ,xweɪ˥˩ly˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.bank,银行,銀行,yínháng,in˧˥xɑŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.money-exchange,外币兑换,外幣兌換,wàibì duìhuàn,waɪ˥˩pi˥˩ tweɪ˥˩xwan˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+atm-cash.pin,密码,密碼,mìmǎ,mi˥˩ma˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.2-items,两个,,liǎng gè,ljɑŋ˧˩˧ kɤ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.yen,日元,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+numbers-money.yen-symbol,￥,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
 numbers-money.number-and-classifier-notes-2,日语数字的构成和汉语一样：11 = juuichi，20 = nijuu。只是 100 说 hyaku、1000 说 sen，前面不加 ichi，10000 却要 ichiman。量词紧跟数字，多半能对上汉语的量词：-mai 张，-hon 根或瓶，-nin 人，-hai 杯。-tsu 相当于个，只用到九：hitotsu、futatsu；人也特殊：hitori、futari，三人起才是 sannin。念号码：0 = zero 或 maru，4 = yon，7 = nana，9 = kyuu，横线读 no。,,,,,2,zh-Hans-notes-v1

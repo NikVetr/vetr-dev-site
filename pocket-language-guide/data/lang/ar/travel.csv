@@ -1,116 +1,116 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-border-customs.i-am-a-tourist,أنا سائح,,anā sāʾiḥ,,,2,ar-agent-v1
-border-customs.here-is-my-passport,هذا جواز سفري,,hādhā jawāz safarī,,,2,ar-agent-v1
-border-customs.i-am-staying-for-days,سأبقى {} أيام,,saʾabqá {} ayyām,,,2,ar-agent-v1
-border-customs.nothing-to-declare,لا شيء للتصريح,لا شيء للإفصاح عنه,lā shayʾ lil-taṣrīḥ,,,1,ar-agent-v1
-border-customs.i-am-staying-at,أنا مقيم في {},,anā muqīm fī {},,,2,ar-agent-v1
-border-customs.i-am-here-for-business,أنا هنا للعمل,,anā hunā lil-ʿamal,,,2,ar-agent-v1
-border-customs.i-have-a-return-ticket,لديّ تذكرة عودة,,ladayya tadhkirat ʿawdah,,,2,ar-agent-v1
-border-customs.i-am-visiting-family,أزور عائلتي,,azūr ʿāʾilatī,,,2,ar-agent-v1
-border-customs.this-is-for-personal-use,هذا للاستخدام الشخصي,,hādhā lil-istikhdām al-shakhṣī,,,2,ar-agent-v1
-border-customs.i-am-in-transit,أنا مسافر عابر,ترانزيت,anā musāfir ʿābir,,,2,ar-agent-v1
-border-customs.i-have-in-cash,معي {} نقداً,,maʿī {} naqdan,,,2,ar-agent-v1
-border-customs.this-is-a-gift,هذه هدية,,hādhihi hadīyah,,,2,ar-agent-v1
-border-customs.where-do-i-collect-my-baggage,أين أستلم أمتعتي؟,,ayna astalim amtiʿatī?,,,2,ar-agent-v1
-border-customs.how-long-may-i-stay,كم يمكنني البقاء؟,,kam yumkinunī al-baqāʾ?,,,2,ar-agent-v1
-border-customs.i-have-a-connecting-flight,لديّ رحلة متّصلة,رحلة ترانزيت,ladayya riḥlah muttaṣilah,,,2,ar-agent-v1
-border-customs.may-i-have-an-entry-stamp,أريد ختم الدخول من فضلك,,urīd khatm al-dukhūl min faḍlak,,,2,ar-agent-v1
-border-customs.visa,تأشيرة,فيزا,taʾshīrah,,,2,ar-agent-v1
-border-customs.i-have-no-food-or-plants,لا أحمل طعاماً أو نباتات,,lā aḥmil ṭaʿāman aw nabātāt,,,2,ar-agent-v1
-border-customs.passport-control,مراقبة الجوازات,الجوازات,murāqabat al-jawāzāt,,,2,ar-agent-v1
-border-customs.customs,الجمارك,,al-jamārik,,,2,ar-agent-v1
-border-customs.baggage-claim,استلام الأمتعة,,istilām al-amtiʿah,,,2,ar-agent-v1
-border-customs.customs-declaration,الإقرار الجمركي,التصريح الجمركي,al-iqrār al-jumrukī,,,1,ar-agent-v1
-border-customs.arrival-card,بطاقة الوصول,,biṭāqat al-wuṣūl,,,2,ar-agent-v1
-border-customs.transit,ترانزيت,عبور,tarānzīt,,,2,ar-agent-v1
-border-customs.boarding-pass,بطاقة الصعود,,biṭāqat al-ṣuʿūd,,,2,ar-agent-v1
-directions.where-is,أين {}؟,,ayna {}?,,,2,ar-agent-v1
-directions.how-do-i-get-to,كيف أصل إلى {}؟,,kayf aṣil ilá {}?,,,2,ar-agent-v1
-directions.is-it-far,هل هو بعيد؟,,hal huwa baʿīd?,,,2,ar-agent-v1
-directions.how-long-on-foot,كم يستغرق سيراً؟,,kam yastaghriq sayran?,,how long on foot,2,ar-agent-v1
-directions.please-show-me-on-the-map,أرني على الخريطة من فضلك,,arinī ʿalá al-kharīṭah min faḍlak,,,2,ar-agent-v1
-directions.where-is-the-nearest,أين أقرب {}؟,,ayna aqrab {}?,,,2,ar-agent-v1
-directions.where-am-i,أين أنا؟,,ayna anā?,,,2,ar-agent-v1
-directions.which-way,في أيّ اتجاه؟,,fī ayy ittijāh?,,,2,ar-agent-v1
-directions.can-i-walk-there,هل يمكن المشي؟,,hal yumkin al-mashy?,,,2,ar-agent-v1
-directions.how-far-is-it,كم المسافة؟,,kam al-masāfah?,,,2,ar-agent-v1
-directions.which-exit,أيّ مخرج؟,,ayy makhraj?,,,2,ar-agent-v1
-directions.can-you-show-me-the-way,هل تدلّني على الطريق؟,,hal tadullunī ʿalá al-ṭarīq?,,,2,ar-agent-v1
-directions.north,شمال,,shamāl,,,2,ar-agent-v1
-directions.south,جنوب,,janūb,,,2,ar-agent-v1
-directions.east,شرق,,sharq,,,2,ar-agent-v1
-directions.west,غرب,,gharb,,,2,ar-agent-v1
-quick-directions.go-straight,امشِ مباشرة,إلى الأمام,imshi mubāsharatan,,,2,ar-agent-v1
-quick-directions.turn-left,لف يساراً,,liff yasāran,,,2,ar-agent-v1
-quick-directions.turn-right,لف يميناً,,liff yamīnan,,,2,ar-agent-v1
-quick-directions.this-way,من هنا,,min hunā,,,2,ar-agent-v1
-quick-directions.that-way,من هناك,,min hunāk,,,2,ar-agent-v1
-quick-directions.on-the-left,على اليسار,,ʿalá al-yasār,,,2,ar-agent-v1
-quick-directions.on-the-right,على اليمين,,ʿalá al-yamīn,,,2,ar-agent-v1
-quick-directions.across-from-here,في الجهة المقابلة,مقابل,fī al-jihah al-muqābilah,,on the opposite side,2,ar-agent-v1
-quick-directions.in-front,أمام,,amām,,,2,ar-agent-v1
-quick-directions.behind,خلف,وراء,khalf,,,2,ar-agent-v1
-taxi.please-take-me-here,خذني إلى هنا من فضلك,,khudhnī ilá hunā min faḍlak,,,2,ar-agent-v1
-taxi.please-send-me-the-address,أرسل لي العنوان من فضلك,,arsil lī al-ʿunwān min faḍlak,,,2,ar-agent-v1
-taxi.we-need-the-east-gate-not-the-south-gate,نريد البوابة الشرقية لا الجنوبية,,nurīd al-bawwābah al-sharqīyah lā al-janūbīyah,,,2,ar-agent-v1
-taxi.please-stop-here,توقّف هنا من فضلك,,tawaqqaf hunā min faḍlak,,,2,ar-agent-v1
-taxi.can-you-wait-for-me-here,هل تنتظرني هنا؟,,hal tantaẓirunī hunā?,,,2,ar-agent-v1
-taxi.we-need-to-catch-the-high-speed-train,نريد اللحاق بالقطار السريع,,nurīd al-liḥāq bi-al-qiṭār al-sarīʿ,,,2,ar-agent-v1
-taxi.please-use-the-meter,شغّل العدّاد من فضلك,,shaghghil al-ʿaddād min faḍlak,,,2,ar-agent-v1
-taxi.i-will-get-off-here,سأنزل هنا,,saʾanzil hunā,,,2,ar-agent-v1
-taxi.please-get-me-there-in-time-for-the-shinkansen,أرجو الوصول قبل موعد القطار السريع,,arjū al-wuṣūl qabl mawʿid al-qiṭār al-sarīʿ,,,2,ar-agent-v1
-transit-rides.two-tickets,تذكرتان من فضلك,تذكرتين,tadhkiratān min faḍlak,,,2,ar-agent-v1
-transit-rides.where-is-the-subway-station,أين محطة المترو؟,,ayna maḥaṭṭat al-mitrū?,,,2,ar-agent-v1
-transit-rides.does-this-bus-train-go-to,هل يذهب هذا إلى {}؟,,hal yadhhab hādhā ilá {}?,,,2,ar-agent-v1
-transit-rides.what-is-the-next-stop,ما المحطة القادمة؟,,mā al-maḥaṭṭah al-qādimah?,,,2,ar-agent-v1
-transit-rides.please-tell-me-where-to-get-off,أخبرني أين أنزل من فضلك,,akhbirnī ayna anzil min faḍlak,,,2,ar-agent-v1
-transit-rides.is-this-direct,هل هذا مباشر؟,,hal hādhā mubāshir?,,,2,ar-agent-v1
-transit-rides.do-i-need-to-transfer,هل يجب أن أبدّل؟,هل هناك تبديل؟,hal yajib an ubaddil?,,,2,ar-agent-v1
-transit-rides.is-it-delayed,هل هو متأخّر؟,,hal huwa mutaʾakhkhir?,,,2,ar-agent-v1
-transit-rides.i-am-in-a-hurry,أنا مستعجل,,anā mustaʿjil,,,2,ar-agent-v1
-transit-rides.which-platform,أيّ رصيف؟,,ayy raṣīf?,,,2,ar-agent-v1
-transit-rides.what-time-is-the-next-one,متى القادم؟,,matá al-qādim?,,,2,ar-agent-v1
-transit-rides.i-went-past-my-stop,تجاوزت محطتي,,tajāwazt maḥaṭṭatī,,,2,ar-agent-v1
-transit-rides.can-i-use-this-ticket,هل تصلح هذه التذكرة؟,,hal taṣluḥ hādhihi al-tadhkirah?,,,2,ar-agent-v1
-place-words.scenic-area,منطقة طبيعية,,minṭaqah ṭabīʿīyah,,,2,ar-agent-v1
-place-words.visitor-center,مركز الزوار,,markaz al-zuwwār,,,2,ar-agent-v1
-place-words.railway-station,محطة القطار,,maḥaṭṭat al-qiṭār,,,2,ar-agent-v1
-place-words.airport,مطار,,maṭār,,,2,ar-agent-v1
-place-words.service-desk,مكتب الاستعلامات,استعلامات,maktab al-istiʿlāmāt,,,2,ar-agent-v1
-place-words.bus-stop,موقف الحافلة,موقف الباص,mawqif al-ḥāfilah,,,2,ar-agent-v1
-place-words.luggage-storage,حفظ الأمتعة,مكتب الأمانات,ḥifẓ al-amtiʿah,,,2,ar-agent-v1
-place-words.tourist-spot-sightseeing-area,معلم سياحي,,maʿlam siyāḥī,,,2,ar-agent-v1
-pickup-meeting.where-is-the-pickup-point,أين نقطة الالتقاء؟,,ayna nuqṭat al-iltiqāʾ?,,,2,ar-agent-v1
-pickup-meeting.please-send-me-the-pickup-point,أرسل لي نقطة الالتقاء,,arsil lī nuqṭat al-iltiqāʾ,,,2,ar-agent-v1
-pickup-meeting.please-pick-us-up-here,خذنا من هنا من فضلك,,khudhnā min hunā min faḍlak,,,2,ar-agent-v1
-pickup-meeting.meet-us-at,قابلنا في {},,qābilnā fī {},,,2,ar-agent-v1
-pickup-meeting.please-call-me-a-ride,اطلب لي سيارة من فضلك,,uṭlub lī sayyārah min faḍlak,,,2,ar-agent-v1
-pickup-meeting.please-call-a-taxi,اطلب لي تاكسي من فضلك,سيارة أجرة,uṭlub lī tāksī min faḍlak,,,2,ar-agent-v1
-rail-station-words.high-speed-rail,القطار السريع,,al-qiṭār al-sarīʿ,,,2,ar-agent-v1
-rail-station-words.maglev,القطار المغناطيسي,,al-qiṭār al-maghnāṭīsī,,,2,ar-agent-v1
-rail-station-words.transfer,تبديل,,tabdīl,,,2,ar-agent-v1
-rail-station-words.ticket-gate,بوابة التذاكر,,bawwābat al-tadhākir,,,2,ar-agent-v1
-rail-station-words.platform,رصيف,,raṣīf,,,2,ar-agent-v1
-rail-station-words.ticket-office,شبّاك التذاكر,مكتب التذاكر,shubbāk al-tadhākir,,,2,ar-agent-v1
-rail-station-words.waiting-room,صالة الانتظار,,ṣālat al-intiẓār,,,2,ar-agent-v1
-rail-station-words.train-number,رقم القطار,,raqm al-qiṭār,,,2,ar-agent-v1
-rail-station-words.carriage,عربة,,ʿarabah,,,2,ar-agent-v1
-rail-station-words.seat,مقعد,,maqʿad,,,2,ar-agent-v1
-rail-station-words.last-train,آخر قطار,,ākhir qiṭār,,,2,ar-agent-v1
-rail-station-words.delayed,متأخّر,تأخير,mutaʾakhkhir,,,2,ar-agent-v1
-rail-station-words.final-stop,المحطة الأخيرة,,al-maḥaṭṭah al-akhīrah,,,2,ar-agent-v1
-common-signs.open-on,مفتوح,تشغيل,maftūḥ,,,2,ar-agent-v1
-common-signs.closed-off,مغلق,إيقاف,mughlaq,,,2,ar-agent-v1
-common-signs.occupied,مشغول,,mashghūl,,,2,ar-agent-v1
-common-signs.vacant,فارغ,شاغر,fārigh,,,1,ar-agent-v1
-common-signs.caution,تحذير,احترس,taḥdhīr,,,2,ar-agent-v1
-common-signs.no-entry,ممنوع الدخول,,mamnūʿ al-dukhūl,,,2,ar-agent-v1
-common-signs.no-smoking,ممنوع التدخين,,mamnūʿ al-tadkhīn,,,2,ar-agent-v1
-common-signs.no-photography,ممنوع التصوير,,mamnūʿ al-taṣwīr,,,2,ar-agent-v1
-common-signs.do-not-touch,ممنوع اللمس,لا تلمس,mamnūʿ al-lams,,,2,ar-agent-v1
-common-signs.temporarily-closed,مغلق مؤقتاً,,mughlaq muʾaqqatan,,,2,ar-agent-v1
-common-signs.open-operating,يعمل,قيد التشغيل,yaʿmal,,,2,ar-agent-v1
-common-signs.closed,مغلق,,mughlaq,,,2,ar-agent-v1
-common-signs.stopped-stop,متوقّف,توقّف,mutawaqqif,,,2,ar-agent-v1
-transit-rides.do-i-need-to-validate,هل يجب تمرير التذكرة قبل الصعود؟,هل يجب تأشير التذكرة؟,hal yajib tamrīr al-tadhkirah qabl al-ṣuʿūd?,,must the ticket be swiped before boarding,1,ar-gaps-v1
-rail-station-words.ticket-validator,قارئ البطاقات,جهاز التأشير,qāriʾ al-biṭāqāt,,card reader,1,ar-gaps-v1
+border-customs.i-am-a-tourist,أنا سائح,,anā sāʾiḥ,ˈana sˈaːʔiħ,,2,ar-agent-v1;ipa=espeak
+border-customs.here-is-my-passport,هذا جواز سفري,,hādhā jawāz safarī,haˈaðaˌa dʒˈawaːz sˈafaɹˌiːj,,2,ar-agent-v1;ipa=espeak
+border-customs.i-am-staying-for-days,سأبقى {} أيام,,saʾabqá {} ayyām,sʔbqa {} ʔˈiːaːm,,2,ar-agent-v1;ipa=espeak
+border-customs.nothing-to-declare,لا شيء للتصريح,لا شيء للإفصاح عنه,lā shayʾ lil-taṣrīḥ,lˈaː ʃˈajʔ llts̪ɹiːħ,,1,ar-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,أنا مقيم في {},,anā muqīm fī {},ˈana mˈuqiːm fˈiː {},,2,ar-agent-v1;ipa=espeak
+border-customs.i-am-here-for-business,أنا هنا للعمل,,anā hunā lil-ʿamal,ˈana hˈunaː llʕml,,2,ar-agent-v1;ipa=espeak
+border-customs.i-have-a-return-ticket,لديّ تذكرة عودة,,ladayya tadhkirat ʿawdah,ldiː tˈaðkaɹˌa ʕˈawda,,2,ar-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,أزور عائلتي,,azūr ʿāʾilatī,ʔˈazwar ʕˈaːʔltiː,,2,ar-agent-v1;ipa=espeak
+border-customs.this-is-for-personal-use,هذا للاستخدام الشخصي,,hādhā lil-istikhdām al-shakhṣī,haˈaðaˌa llaːstxdˌaːm ʔaʃʃˈaxs̪iːj,,2,ar-agent-v1;ipa=espeak
+border-customs.i-am-in-transit,أنا مسافر عابر,ترانزيت,anā musāfir ʿābir,ˈana mˈusaːfˌir ʕˈaːbir,,2,ar-agent-v1;ipa=espeak
+border-customs.i-have-in-cash,معي {} نقداً,,maʿī {} naqdan,mˈaʕj {} nqdˈaː,,2,ar-agent-v1;ipa=espeak
+border-customs.this-is-a-gift,هذه هدية,,hādhihi hadīyah,haˈaðihˌi hˈadiːjˌa,,2,ar-agent-v1;ipa=espeak
+border-customs.where-do-i-collect-my-baggage,أين أستلم أمتعتي؟,,ayna astalim amtiʿatī?,ʔˈajna ʔstlm ʔmtʕtˈiː,,2,ar-agent-v1;ipa=espeak
+border-customs.how-long-may-i-stay,كم يمكنني البقاء؟,,kam yumkinunī al-baqāʾ?,kˌiiluˈu mitˌar jmknnˈiː ʔalbˈaqaːʔ,,2,ar-agent-v1;ipa=espeak
+border-customs.i-have-a-connecting-flight,لديّ رحلة متّصلة,رحلة ترانزيت,ladayya riḥlah muttaṣilah,ldiː ɹˈiħla mtːs̪lt,,2,ar-agent-v1;ipa=espeak
+border-customs.may-i-have-an-entry-stamp,أريد ختم الدخول من فضلك,,urīd khatm al-dukhūl min faḍlak,ʔɹˈiːd xˈatam ʔaddˈuxuːl mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+border-customs.visa,تأشيرة,فيزا,taʾshīrah,tʔʃˈiːrt,,2,ar-agent-v1;ipa=espeak
+border-customs.i-have-no-food-or-plants,لا أحمل طعاماً أو نباتات,,lā aḥmil ṭaʿāman aw nabātāt,lˈaː ʔˈaħmal t̪ʕˈaːmaː ʔˈaw mbˈaːtaːt,,2,ar-agent-v1;ipa=espeak
+border-customs.passport-control,مراقبة الجوازات,الجوازات,murāqabat al-jawāzāt,muɹˈaːqabˌa ʔaldʒˈuːaːzˌaːt,,2,ar-agent-v1;ipa=espeak
+border-customs.customs,الجمارك,,al-jamārik,ʔaldʒˈummaːrkˌa,,2,ar-agent-v1;ipa=espeak
+border-customs.baggage-claim,استلام الأمتعة,,istilām al-amtiʿah,ˈistilˌaːm ʔalʔmtʕt,,2,ar-agent-v1;ipa=espeak
+border-customs.customs-declaration,الإقرار الجمركي,التصريح الجمركي,al-iqrār al-jumrukī,ʔalʔˈiqɹaːr ʔaldʒˈumɹukˌiːj,,1,ar-agent-v1;ipa=espeak
+border-customs.arrival-card,بطاقة الوصول,,biṭāqat al-wuṣūl,bˈit̪aːqˌa ʔalwˈus̪uːl,,2,ar-agent-v1;ipa=espeak
+border-customs.transit,ترانزيت,عبور,tarānzīt,tɹˈaːnziːt,,2,ar-agent-v1;ipa=espeak
+border-customs.boarding-pass,بطاقة الصعود,,biṭāqat al-ṣuʿūd,bˈit̪aːqˌa ʔas̪s̪ˈuʕuːd,,2,ar-agent-v1;ipa=espeak
+directions.where-is,أين {}؟,,ayna {}?,ʔˈajna {},,2,ar-agent-v1;ipa=espeak
+directions.how-do-i-get-to,كيف أصل إلى {}؟,,kayf aṣil ilá {}?,kˈajfa ʔˈas̪l ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
+directions.is-it-far,هل هو بعيد؟,,hal huwa baʿīd?,hˈal hˈuːa bˈaʕiːd,,2,ar-agent-v1;ipa=espeak
+directions.how-long-on-foot,كم يستغرق سيراً؟,,kam yastaghriq sayran?,kˌiiluˈu mitˌar jstɣrq siːɹˌaː,how long on foot,2,ar-agent-v1;ipa=espeak
+directions.please-show-me-on-the-map,أرني على الخريطة من فضلك,,arinī ʿalá al-kharīṭah min faḍlak,ʔrnˈiː ʕˈalaː ʔalxˈaɹiːt̪ˌa mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+directions.where-is-the-nearest,أين أقرب {}؟,,ayna aqrab {}?,ʔˈajna ʔˈaqɹab {},,2,ar-agent-v1;ipa=espeak
+directions.where-am-i,أين أنا؟,,ayna anā?,ʔˈajna ˈana,,2,ar-agent-v1;ipa=espeak
+directions.which-way,في أيّ اتجاه؟,,fī ayy ittijāh?,fˈiː ʔˈiː ˈitːidʒˌaːh,,2,ar-agent-v1;ipa=espeak
+directions.can-i-walk-there,هل يمكن المشي؟,,hal yumkin al-mashy?,hˈal jmkˈunna ʔalmˈaʃj,,2,ar-agent-v1;ipa=espeak
+directions.how-far-is-it,كم المسافة؟,,kam al-masāfah?,kˌiiluˈu mitˌar ʔalmˈasaːfˌa,,2,ar-agent-v1;ipa=espeak
+directions.which-exit,أيّ مخرج؟,,ayy makhraj?,ʔˈiː mˈuxɹidʒ,,2,ar-agent-v1;ipa=espeak
+directions.can-you-show-me-the-way,هل تدلّني على الطريق؟,,hal tadullunī ʿalá al-ṭarīq?,hˈal tdllnˈiː ʕˈalaː ʔat̪ˈaɹiːq,,2,ar-agent-v1;ipa=espeak
+directions.north,شمال,,shamāl,ʃˈamaːl,,2,ar-agent-v1;ipa=espeak
+directions.south,جنوب,,janūb,dʒˈanuːb,,2,ar-agent-v1;ipa=espeak
+directions.east,شرق,,sharq,ʃˈarq,,2,ar-agent-v1;ipa=espeak
+directions.west,غرب,,gharb,ɣˈarb,,2,ar-agent-v1;ipa=espeak
+quick-directions.go-straight,امشِ مباشرة,إلى الأمام,imshi mubāsharatan,ˈamʃi mubˈaːʃaɹˌa,,2,ar-agent-v1;ipa=espeak
+quick-directions.turn-left,لف يساراً,,liff yasāran,lˈaff jsˈaːɹaː,,2,ar-agent-v1;ipa=espeak
+quick-directions.turn-right,لف يميناً,,liff yamīnan,lˈaff jmˈiːnaː,,2,ar-agent-v1;ipa=espeak
+quick-directions.this-way,من هنا,,min hunā,mˈin hˈunaː,,2,ar-agent-v1;ipa=espeak
+quick-directions.that-way,من هناك,,min hunāk,mˈin hˈunaːkˌa,,2,ar-agent-v1;ipa=espeak
+quick-directions.on-the-left,على اليسار,,ʿalá al-yasār,ʕˈalaː ʔaljˈasaːr,,2,ar-agent-v1;ipa=espeak
+quick-directions.on-the-right,على اليمين,,ʿalá al-yamīn,ʕˈalaː ʔaljˈamiːn,,2,ar-agent-v1;ipa=espeak
+quick-directions.across-from-here,في الجهة المقابلة,مقابل,fī al-jihah al-muqābilah,fˈiː ʔaldʒˈiha ʔalmuqˈaːbalˌa,on the opposite side,2,ar-agent-v1;ipa=espeak
+quick-directions.in-front,أمام,,amām,ʔˈamaːm,,2,ar-agent-v1;ipa=espeak
+quick-directions.behind,خلف,وراء,khalf,xˈalf,,2,ar-agent-v1;ipa=espeak
+taxi.please-take-me-here,خذني إلى هنا من فضلك,,khudhnī ilá hunā min faḍlak,xðnˈiː ʔˈilaː hˈunaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+taxi.please-send-me-the-address,أرسل لي العنوان من فضلك,,arsil lī al-ʿunwān min faḍlak,ʔˈarsal lˈajj ʔalʕˈunwaːn mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+taxi.we-need-the-east-gate-not-the-south-gate,نريد البوابة الشرقية لا الجنوبية,,nurīd al-bawwābah al-sharqīyah lā al-janūbīyah,nɹˈiːd ʔalbˈawwaːbˌa ʔaʃʃarqˈijjah lˈaː ʔaldʒˌanuːbˈijjah,,2,ar-agent-v1;ipa=espeak
+taxi.please-stop-here,توقّف هنا من فضلك,,tawaqqaf hunā min faḍlak,tˈuːqːf hˈunaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+taxi.can-you-wait-for-me-here,هل تنتظرني هنا؟,,hal tantaẓirunī hunā?,hˈal tntðrnˈiː hˈunaː,,2,ar-agent-v1;ipa=espeak
+taxi.we-need-to-catch-the-high-speed-train,نريد اللحاق بالقطار السريع,,nurīd al-liḥāq bi-al-qiṭār al-sarīʿ,nɹˈiːd ʔallˈiħaːq bilqˈit̪aːr ʔassˈaɹiːʕ,,2,ar-agent-v1;ipa=espeak
+taxi.please-use-the-meter,شغّل العدّاد من فضلك,,shaghghil al-ʿaddād min faḍlak,ʃɣɣl ʔalʕdːˈaːd mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+taxi.i-will-get-off-here,سأنزل هنا,,saʾanzil hunā,sʔnzl hˈunaː,,2,ar-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,أرجو الوصول قبل موعد القطار السريع,,arjū al-wuṣūl qabl mawʿid al-qiṭār al-sarīʿ,ʔrdʒˈuː ʔalwˈus̪uːl qˈabl mˈawʕid ʔalqˈit̪aːr ʔassˈaɹiːʕ,,2,ar-agent-v1;ipa=espeak
+transit-rides.two-tickets,تذكرتان من فضلك,تذكرتين,tadhkiratān min faḍlak,tðkrtˈaːn mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+transit-rides.where-is-the-subway-station,أين محطة المترو؟,,ayna maḥaṭṭat al-mitrū?,ʔˈajna mˈaħat̪t̪ˌa ʔalmˈitɹuː,,2,ar-agent-v1;ipa=espeak
+transit-rides.does-this-bus-train-go-to,هل يذهب هذا إلى {}؟,,hal yadhhab hādhā ilá {}?,hˈal jðhb haˈaðaˌa ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
+transit-rides.what-is-the-next-stop,ما المحطة القادمة؟,,mā al-maḥaṭṭah al-qādimah?,mˈaː ʔalmˈaħat̪t̪ˌa ʔalqˈaːdimˌa,,2,ar-agent-v1;ipa=espeak
+transit-rides.please-tell-me-where-to-get-off,أخبرني أين أنزل من فضلك,,akhbirnī ayna anzil min faḍlak,ʔxbrnˈiː ʔˈajna ʔˈanzal mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+transit-rides.is-this-direct,هل هذا مباشر؟,,hal hādhā mubāshir?,hˈal haˈaðaˌa mˈubaːʃˌir,,2,ar-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-transfer,هل يجب أن أبدّل؟,هل هناك تبديل؟,hal yajib an ubaddil?,hˈal jdʒb ʔn ʔbdːl,,2,ar-agent-v1;ipa=espeak
+transit-rides.is-it-delayed,هل هو متأخّر؟,,hal huwa mutaʾakhkhir?,hˈal hˈuːa mtʔxxr,,2,ar-agent-v1;ipa=espeak
+transit-rides.i-am-in-a-hurry,أنا مستعجل,,anā mustaʿjil,ˈana mˈustaʕdʒˌal,,2,ar-agent-v1;ipa=espeak
+transit-rides.which-platform,أيّ رصيف؟,,ayy raṣīf?,ʔˈiː ɹˈas̪iːf,,2,ar-agent-v1;ipa=espeak
+transit-rides.what-time-is-the-next-one,متى القادم؟,,matá al-qādim?,mˈataː ʔalqˈaːdim,,2,ar-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,تجاوزت محطتي,,tajāwazt maḥaṭṭatī,tdʒˈaːwzt mħt̪tˈiː,,2,ar-agent-v1;ipa=espeak
+transit-rides.can-i-use-this-ticket,هل تصلح هذه التذكرة؟,,hal taṣluḥ hādhihi al-tadhkirah?,hˈal ts̪lħ haˈaðihˌi ʔattˈaðkaɹˌa,,2,ar-agent-v1;ipa=espeak
+place-words.scenic-area,منطقة طبيعية,,minṭaqah ṭabīʿīyah,mˈint̪aqˌa t̪abˈiːʕiːjˌa,,2,ar-agent-v1;ipa=espeak
+place-words.visitor-center,مركز الزوار,,markaz al-zuwwār,mˈarkaz ʔazzˈuːaːr,,2,ar-agent-v1;ipa=espeak
+place-words.railway-station,محطة القطار,,maḥaṭṭat al-qiṭār,mˈaħat̪t̪ˌa ʔalqˈit̪aːr,,2,ar-agent-v1;ipa=espeak
+place-words.airport,مطار,,maṭār,mˈat̪aːr,,2,ar-agent-v1;ipa=espeak
+place-words.service-desk,مكتب الاستعلامات,استعلامات,maktab al-istiʿlāmāt,mˈaktab alˈastʕlaːmˌaːt,,2,ar-agent-v1;ipa=espeak
+place-words.bus-stop,موقف الحافلة,موقف الباص,mawqif al-ḥāfilah,mˈawqif ʔalħˈaːfilˌa,,2,ar-agent-v1;ipa=espeak
+place-words.luggage-storage,حفظ الأمتعة,مكتب الأمانات,ḥifẓ al-amtiʿah,ħˈifð ʔalʔmtʕt,,2,ar-agent-v1;ipa=espeak
+place-words.tourist-spot-sightseeing-area,معلم سياحي,,maʿlam siyāḥī,mˈuʕallˌim sˈiːaːħˌiːj,,2,ar-agent-v1;ipa=espeak
+pickup-meeting.where-is-the-pickup-point,أين نقطة الالتقاء؟,,ayna nuqṭat al-iltiqāʾ?,ʔˈajna nˈuqt̪a alˈiltiqˌaːʔ,,2,ar-agent-v1;ipa=espeak
+pickup-meeting.please-send-me-the-pickup-point,أرسل لي نقطة الالتقاء,,arsil lī nuqṭat al-iltiqāʾ,ʔˈarsal lˈajj nˈuqt̪a alˈiltiqˌaːʔ,,2,ar-agent-v1;ipa=espeak
+pickup-meeting.please-pick-us-up-here,خذنا من هنا من فضلك,,khudhnā min hunā min faḍlak,xðnˈaː mˈin hˈunaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+pickup-meeting.meet-us-at,قابلنا في {},,qābilnā fī {},qˈaːblnaː fˈiː {},,2,ar-agent-v1;ipa=espeak
+pickup-meeting.please-call-me-a-ride,اطلب لي سيارة من فضلك,,uṭlub lī sayyārah min faḍlak,ˈat̪lb lˈajj sˈajjaːɹˌa mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+pickup-meeting.please-call-a-taxi,اطلب لي تاكسي من فضلك,سيارة أجرة,uṭlub lī tāksī min faḍlak,ˈat̪lb lˈajj tˈaːksiːj mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+rail-station-words.high-speed-rail,القطار السريع,,al-qiṭār al-sarīʿ,ʔalqˈit̪aːr ʔassˈaɹiːʕ,,2,ar-agent-v1;ipa=espeak
+rail-station-words.maglev,القطار المغناطيسي,,al-qiṭār al-maghnāṭīsī,ʔalqˈit̪aːr ʔalmɣnˈaːt̪iːsˌiː,,2,ar-agent-v1;ipa=espeak
+rail-station-words.transfer,تبديل,,tabdīl,tˈabdiːl,,2,ar-agent-v1;ipa=espeak
+rail-station-words.ticket-gate,بوابة التذاكر,,bawwābat al-tadhākir,bˈawwaːbˌa ʔattˈaðaːkˌar,,2,ar-agent-v1;ipa=espeak
+rail-station-words.platform,رصيف,,raṣīf,ɹˈas̪iːf,,2,ar-agent-v1;ipa=espeak
+rail-station-words.ticket-office,شبّاك التذاكر,مكتب التذاكر,shubbāk al-tadhākir,ʃbːˈaːka ʔattˈaðaːkˌar,,2,ar-agent-v1;ipa=espeak
+rail-station-words.waiting-room,صالة الانتظار,,ṣālat al-intiẓār,s̪ˈaːla alˈintiðˌaːr,,2,ar-agent-v1;ipa=espeak
+rail-station-words.train-number,رقم القطار,,raqm al-qiṭār,ɹˈaqm ʔalqˈit̪aːr,,2,ar-agent-v1;ipa=espeak
+rail-station-words.carriage,عربة,,ʿarabah,ʕˈaɹabˌa,,2,ar-agent-v1;ipa=espeak
+rail-station-words.seat,مقعد,,maqʿad,mˈaqʕad,,2,ar-agent-v1;ipa=espeak
+rail-station-words.last-train,آخر قطار,,ākhir qiṭār,ʔˈaːxar qˈit̪aːr,,2,ar-agent-v1;ipa=espeak
+rail-station-words.delayed,متأخّر,تأخير,mutaʾakhkhir,mtʔxxr,,2,ar-agent-v1;ipa=espeak
+rail-station-words.final-stop,المحطة الأخيرة,,al-maḥaṭṭah al-akhīrah,ʔalmˈaħat̪t̪ˌa ʔalʔxˈiːrt,,2,ar-agent-v1;ipa=espeak
+common-signs.open-on,مفتوح,تشغيل,maftūḥ,mˈaftuːħ,,2,ar-agent-v1;ipa=espeak
+common-signs.closed-off,مغلق,إيقاف,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=espeak
+common-signs.occupied,مشغول,,mashghūl,mˈaʃɣuːl,,2,ar-agent-v1;ipa=espeak
+common-signs.vacant,فارغ,شاغر,fārigh,fˈaːɹiɣ,,1,ar-agent-v1;ipa=espeak
+common-signs.caution,تحذير,احترس,taḥdhīr,tˈaħðiːr,,2,ar-agent-v1;ipa=espeak
+common-signs.no-entry,ممنوع الدخول,,mamnūʿ al-dukhūl,mˈamnuːʕ ʔaddˈuxuːl,,2,ar-agent-v1;ipa=espeak
+common-signs.no-smoking,ممنوع التدخين,,mamnūʿ al-tadkhīn,mˈamnuːʕ ʔattˈadxiːn,,2,ar-agent-v1;ipa=espeak
+common-signs.no-photography,ممنوع التصوير,,mamnūʿ al-taṣwīr,mˈamnuːʕ ʔattˈas̪wiːr,,2,ar-agent-v1;ipa=espeak
+common-signs.do-not-touch,ممنوع اللمس,لا تلمس,mamnūʿ al-lams,mˈamnuːʕ ʔallˈamas,,2,ar-agent-v1;ipa=espeak
+common-signs.temporarily-closed,مغلق مؤقتاً,,mughlaq muʾaqqatan,mˈuɣlaq mʔqtˈaː,,2,ar-agent-v1;ipa=espeak
+common-signs.open-operating,يعمل,قيد التشغيل,yaʿmal,jʕml,,2,ar-agent-v1;ipa=espeak
+common-signs.closed,مغلق,,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=espeak
+common-signs.stopped-stop,متوقّف,توقّف,mutawaqqif,mtˈuːqːf,,2,ar-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,هل يجب تمرير التذكرة قبل الصعود؟,هل يجب تأشير التذكرة؟,hal yajib tamrīr al-tadhkirah qabl al-ṣuʿūd?,hˈal jdʒb tˈamɹiːr ʔattˈaðkaɹˌa qˈabl ʔas̪s̪ˈuʕuːd,must the ticket be swiped before boarding,1,ar-gaps-v1;ipa=espeak
+rail-station-words.ticket-validator,قارئ البطاقات,جهاز التأشير,qāriʾ al-biṭāqāt,qˈaːɹiʔ ʔalbt̪aːqˌaːt,card reader,1,ar-gaps-v1;ipa=espeak

@@ -1,47 +1,47 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,saya,aku,,,2,id-agent-v1
-pronouns-verbs.we-us,kami,kita,,"kami excludes you, kita includes you",2,id-agent-v1
-pronouns-verbs.you,kamu,Anda,,,2,id-agent-v1
-pronouns-verbs.you-polite,Anda,Bapak · Ibu,,Pak / Bu to a stranger,2,id-agent-v1
-pronouns-verbs.he-him,dia,ia,,,2,id-agent-v1
-pronouns-verbs.she-her,dia,,,one word for he and she,2,id-agent-v1
-pronouns-verbs.they-them,mereka,,,,2,id-agent-v1
-pronouns-verbs.my-mine,saya,milik saya,,goes after the noun: tas saya,2,id-agent-v1
-pronouns-verbs.your-yours,Anda,milik Anda,,goes after the noun,2,id-agent-v1
-pronouns-verbs.be-called-call,bernama,memanggil,,,2,id-agent-v1
-pronouns-verbs.have,punya,ada,,,2,id-agent-v1
-pronouns-verbs.do-not-have,tidak punya,tidak ada,,,2,id-agent-v1
-pronouns-verbs.go,pergi,,,,2,id-agent-v1
-pronouns-verbs.come,datang,,,,2,id-agent-v1
-pronouns-verbs.would-like,ingin,,,,2,id-agent-v1
-pronouns-verbs.want,mau,,,,2,id-agent-v1
-pronouns-verbs.look-for,mencari,cari,,,2,id-agent-v1
-pronouns-verbs.buy,membeli,beli,,,2,id-agent-v1
-pronouns-verbs.like,suka,,,,2,id-agent-v1
-pronouns-verbs.need,perlu,butuh,,,2,id-agent-v1
-pronouns-verbs.there-is-have,ada,,,,2,id-agent-v1
-pronouns-verbs.there-is-not-do-not-have,tidak ada,,,,2,id-agent-v1
-pronouns-verbs.want-to-verb,mau + kata kerja,,,,2,id-agent-v1
-pronouns-verbs.want-thing,mau + benda,,,,2,id-agent-v1
-pronouns-verbs.need-thing,perlu + benda,,,,2,id-agent-v1
-pronouns-verbs.looking-for-thing,cari + benda,,,,2,id-agent-v1
-question-words.what,apa,,,,2,id-agent-v1
-question-words.where,di mana,,,,2,id-agent-v1
-question-words.who,siapa,,,,2,id-agent-v1
-question-words.which-one,yang mana,,,,2,id-agent-v1
-question-words.when,kapan,,,,2,id-agent-v1
-question-words.how,bagaimana,gimana,,,2,id-agent-v1
-question-words.how-much-many,berapa,,,,2,id-agent-v1
-question-words.how-many,berapa banyak,,,,2,id-agent-v1
-question-words.why,kenapa,mengapa,,,2,id-agent-v1
-question-words.this,ini,,,,2,id-agent-v1
-question-words.that,itu,,,,2,id-agent-v1
-question-words.here,di sini,,,,2,id-agent-v1
-question-words.there,di sana,,,,2,id-agent-v1
-question-words.a-little,sedikit,,,,2,id-agent-v1
-question-words.some,beberapa,,,,2,id-agent-v1
-question-words.very,sangat,sekali,,sekali goes after the word,2,id-agent-v1
-question-words.too,terlalu,,,,2,id-agent-v1
-question-words.also,juga,,,,2,id-agent-v1
-question-words.all-both,semua,keduanya,,,2,id-agent-v1
-question-words.how-much-what-price,berapa harganya,,,,2,id-agent-v1
+pronouns-verbs.i-me,saya,aku,sˈaja,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.we-us,kami,kita,kˈami,"kami excludes you, kita includes you",2,id-agent-v1;ipa=espeak
+pronouns-verbs.you,kamu,Anda,kˈamu,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.you-polite,Anda,Bapak · Ibu,ˈanda,Pak / Bu to a stranger,2,id-agent-v1;ipa=espeak
+pronouns-verbs.he-him,dia,ia,dˈia,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.she-her,dia,,dˈia,one word for he and she,2,id-agent-v1;ipa=espeak
+pronouns-verbs.they-them,mereka,,mərˈɛka,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.my-mine,saya,milik saya,sˈaja,goes after the noun: tas saya,2,id-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,Anda,milik Anda,ˈanda,goes after the noun,2,id-agent-v1;ipa=espeak
+pronouns-verbs.be-called-call,bernama,memanggil,bərnˈama,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.have,punya,ada,pˈuɲa,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.do-not-have,tidak punya,tidak ada,tˈidak pˈuɲa,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.go,pergi,,pˈɛrɡi,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.come,datang,,dˈataŋ,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.would-like,ingin,,ˈiŋin,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.want,mau,,mˈaʊ,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.look-for,mencari,cari,məntʃˈari,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.buy,membeli,beli,məmbˈɛli,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.like,suka,,sˈuka,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.need,perlu,butuh,pˈɛrlu,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.there-is-have,ada,,ˈada,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,tidak ada,,tˈidak ˈada,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,mau + kata kerja,,mˈaʊ kˈata kˈɛrdʒa,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,mau + benda,,mˈaʊ bəndˈa,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,perlu + benda,,pˈɛrlu bəndˈa,,2,id-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,cari + benda,,tʃˈari bəndˈa,,2,id-agent-v1;ipa=espeak
+question-words.what,apa,,ˈapa,,2,id-agent-v1;ipa=espeak
+question-words.where,di mana,,di mˈana,,2,id-agent-v1;ipa=espeak
+question-words.who,siapa,,siˈapa,,2,id-agent-v1;ipa=espeak
+question-words.which-one,yang mana,,jaŋ mˈana,,2,id-agent-v1;ipa=espeak
+question-words.when,kapan,,kˈapan,,2,id-agent-v1;ipa=espeak
+question-words.how,bagaimana,gimana,bˌaɡaɪmˈana,,2,id-agent-v1;ipa=espeak
+question-words.how-much-many,berapa,,bərˈapa,,2,id-agent-v1;ipa=espeak
+question-words.how-many,berapa banyak,,bərˈapa bˈaɲak,,2,id-agent-v1;ipa=espeak
+question-words.why,kenapa,mengapa,kənˈapa,,2,id-agent-v1;ipa=espeak
+question-words.this,ini,,ˈini,,2,id-agent-v1;ipa=espeak
+question-words.that,itu,,ˈitu,,2,id-agent-v1;ipa=espeak
+question-words.here,di sini,,di sˈini,,2,id-agent-v1;ipa=espeak
+question-words.there,di sana,,di sˈana,,2,id-agent-v1;ipa=espeak
+question-words.a-little,sedikit,,sədˈikit,,2,id-agent-v1;ipa=espeak
+question-words.some,beberapa,,bəbərˈapa,,2,id-agent-v1;ipa=espeak
+question-words.very,sangat,sekali,sˈaŋat,sekali goes after the word,2,id-agent-v1;ipa=espeak
+question-words.too,terlalu,,tərlˈalu,,2,id-agent-v1;ipa=espeak
+question-words.also,juga,,dʒˈuɡa,,2,id-agent-v1;ipa=espeak
+question-words.all-both,semua,keduanya,səmˈua,,2,id-agent-v1;ipa=espeak
+question-words.how-much-what-price,berapa harganya,,bərˈapa harɡˈaɲa,,2,id-agent-v1;ipa=espeak

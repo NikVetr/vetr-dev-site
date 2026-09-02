@@ -1,49 +1,49 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-atm-cash.where-is-an-atm,أين الصراف الآلي؟,,ayna al-ṣarrāf al-ālī?,,,2,ar-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,هل يقبل البطاقات الأجنبية؟,,hal yaqbal al-biṭāqāt al-ajnabīyah?,,,2,ar-agent-v1
-atm-cash.the-atm-kept-my-card,الصراف ابتلع بطاقتي,,al-ṣarrāf ibtalaʿ biṭāqatī,,the ATM swallowed my card,2,ar-agent-v1
-atm-cash.is-there-a-fee,هل هناك عمولة؟,,hal hunāk ʿumūlah?,,,2,ar-agent-v1
-atm-cash.the-card-was-declined,رُفضت البطاقة,,rufiḍat al-biṭāqah,,,2,ar-agent-v1
-atm-cash.what-is-the-exchange-rate,ما سعر الصرف؟,,mā siʿr al-ṣarf?,,,2,ar-agent-v1
-atm-cash.no-money-came-out,لم تخرج النقود,,lam takhruj al-nuqūd,,,2,ar-agent-v1
-atm-cash.where-can-i-change-money,أين أصرف النقود؟,أين مكتب الصرافة؟,ayna aṣrif al-nuqūd?,,,2,ar-agent-v1
-atm-cash.the-machine-is-out-of-service,الجهاز معطّل,خارج الخدمة,al-jihāz muʿaṭṭal,,,2,ar-agent-v1
-atm-cash.please-give-me-smaller-notes,أريد فئات أصغر من فضلك,,urīd fiʾāt aṣghar min faḍlak,,smaller denominations,2,ar-agent-v1
-atm-cash.do-you-have-change,هل لديك نقود صغيرة؟,عندك فكّة؟,hal ladayk nuqūd ṣaghīrah?,,,2,ar-agent-v1
-atm-cash.may-i-pay-in,هل يمكن الدفع بعملة {}؟,,hal yumkin al-dafʿ bi-ʿumlat {}?,,,2,ar-agent-v1
-atm-cash.please-charge-in-local-currency,بالعملة المحلية من فضلك,,bi-al-ʿumlah al-maḥallīyah min faḍlak,,,2,ar-agent-v1
-atm-cash.where-can-i-get-coins,أين أجد عملات معدنية؟,,ayna ajid ʿumlāt maʿdanīyah?,,,2,ar-agent-v1
-atm-cash.is-there-a-minimum-for-cards,هل هناك حدّ أدنى للبطاقة؟,,hal hunāk ḥadd adná lil-biṭāqah?,,,2,ar-agent-v1
-atm-cash.atm,الصراف الآلي,,al-ṣarrāf al-ālī,,,2,ar-agent-v1
-atm-cash.banknote,ورقة نقدية,عملة ورقية,waraqah naqdīyah,,,2,ar-agent-v1
-atm-cash.coin,عملة معدنية,قطعة معدنية,ʿumlah maʿdanīyah,,,2,ar-agent-v1
-atm-cash.cash-only,نقداً فقط,,naqdan faqaṭ,,,2,ar-agent-v1
-atm-cash.fee,عمولة,رسوم,ʿumūlah,,,2,ar-agent-v1
-atm-cash.change,الباقي,,al-bāqī,,the remainder,2,ar-agent-v1
-atm-cash.exchange-rate,سعر الصرف,,siʿr al-ṣarf,,,2,ar-agent-v1
-atm-cash.bank,بنك,مصرف,bank,,,2,ar-agent-v1
-atm-cash.money-exchange,صرافة,مكتب صرافة,ṣirāfah,,,2,ar-agent-v1
-atm-cash.pin,الرقم السري,,al-raqm al-sirrī,,the secret number,2,ar-agent-v1
-numbers-money.l-ng,٠,صفر,ṣifr,,,2,ar-agent-v1
-numbers-money.y,١,واحد,wāḥid,,,2,ar-agent-v1
-numbers-money.r,٢,اثنان,ithnān,,,2,ar-agent-v1
-numbers-money.li-ng,اثنين,,ithnayn,,counting form of two,2,ar-agent-v1
-numbers-money.s-n,٣,ثلاثة,thalāthah,,,2,ar-agent-v1
-numbers-money.s,٤,أربعة,arbaʿah,,,2,ar-agent-v1
-numbers-money.w,٥,خمسة,khamsah,,,2,ar-agent-v1
-numbers-money.li,٦,ستة,sittah,,,2,ar-agent-v1
-numbers-money.q,٧,سبعة,sabʿah,,,2,ar-agent-v1
-numbers-money.b,٨,ثمانية,thamāniyah,,,2,ar-agent-v1
-numbers-money.ji,٩,تسعة,tisʿah,,,2,ar-agent-v1
-numbers-money.sh,عشرة,١٠,ʿasharah,,,2,ar-agent-v1
-numbers-money.y-b-i,مئة,١٠٠,miʾah,,,2,ar-agent-v1
-numbers-money.y-qi-n,ألف,١٠٠٠,alf,,,2,ar-agent-v1
-numbers-money.y-w-n,عشرة آلاف,١٠٠٠٠,ʿasharat ālāf,,,2,ar-agent-v1
-numbers-money.b-n,نصف,١/٢,niṣf,,,2,ar-agent-v1
-numbers-money.yu-n,يوان,,yūān,,Chinese yuan,2,ar-agent-v1
-numbers-money.ku-i,يوان,,yūān,,no separate spoken form,1,ar-agent-v1
+atm-cash.where-is-an-atm,أين الصراف الآلي؟,,ayna al-ṣarrāf al-ālī?,ʔˈajna ʔas̪s̪ˈarɹaːf alʔˈaːliːj,,2,ar-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,هل يقبل البطاقات الأجنبية؟,,hal yaqbal al-biṭāqāt al-ajnabīyah?,hˈal jqbl ʔalbt̪aːqˌaːt ʔalʔdʒmbˈijjah,,2,ar-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,الصراف ابتلع بطاقتي,,al-ṣarrāf ibtalaʿ biṭāqatī,ʔas̪s̪ˈarɹaːf ˈibtalˌaʕ bt̪aːqtˌiː,the ATM swallowed my card,2,ar-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,هل هناك عمولة؟,,hal hunāk ʿumūlah?,hˈal hˈunaːkˌa ʕˈumuːlˌa,,2,ar-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,رُفضت البطاقة,,rufiḍat al-biṭāqah,ɹˈufdˤt ʔalbˈit̪aːqˌa,,2,ar-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,ما سعر الصرف؟,,mā siʿr al-ṣarf?,mˈaː sˈiʕr ʔas̪s̪ˈarf,,2,ar-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,لم تخرج النقود,,lam takhruj al-nuqūd,lˈam tˈaxarɹˌudʒ ʔannqwd,,2,ar-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,أين أصرف النقود؟,أين مكتب الصرافة؟,ayna aṣrif al-nuqūd?,ʔˈajna ʔs̪rf ʔannqwd,,2,ar-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,الجهاز معطّل,خارج الخدمة,al-jihāz muʿaṭṭal,ʔaldʒˈihaːz mʕt̪ːl,,2,ar-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,أريد فئات أصغر من فضلك,,urīd fiʾāt aṣghar min faḍlak,ʔɹˈiːd fʔaːt ʔˈas̪ɣar mˈin fˈadˤlka,smaller denominations,2,ar-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,هل لديك نقود صغيرة؟,عندك فكّة؟,hal ladayk nuqūd ṣaghīrah?,hˈal ldiːkˌa nqwd s̪ˈaɣiːɹˌa,,2,ar-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,هل يمكن الدفع بعملة {}؟,,hal yumkin al-dafʿ bi-ʿumlat {}?,hˈal jmkˈunna ʔaddˈafaʕ bʕmlt {},,2,ar-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,بالعملة المحلية من فضلك,,bi-al-ʿumlah al-maḥallīyah min faḍlak,bilʕˈumla ʔalmˌaħallˈijjah mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,أين أجد عملات معدنية؟,,ayna ajid ʿumlāt maʿdanīyah?,ʔˈajna ʔˈadʒadː ʕmlˈaːt mˌaʕdinˈijjah,,2,ar-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,هل هناك حدّ أدنى للبطاقة؟,,hal hunāk ḥadd adná lil-biṭāqah?,hˈal hˈunaːkˌa ħdː ʔˈadnaː llbt̪aːqt,,2,ar-agent-v1;ipa=espeak
+atm-cash.atm,الصراف الآلي,,al-ṣarrāf al-ālī,ʔas̪s̪ˈarɹaːf alʔˈaːliːj,,2,ar-agent-v1;ipa=espeak
+atm-cash.banknote,ورقة نقدية,عملة ورقية,waraqah naqdīyah,wrqt nˈaqdiːjˌa,,2,ar-agent-v1;ipa=espeak
+atm-cash.coin,عملة معدنية,قطعة معدنية,ʿumlah maʿdanīyah,ʕˈumla mˌaʕdinˈijjah,,2,ar-agent-v1;ipa=espeak
+atm-cash.cash-only,نقداً فقط,,naqdan faqaṭ,nqdˈaː fˈaqat̪,,2,ar-agent-v1;ipa=espeak
+atm-cash.fee,عمولة,رسوم,ʿumūlah,ʕˈumuːlˌa,,2,ar-agent-v1;ipa=espeak
+atm-cash.change,الباقي,,al-bāqī,ʔalbˈaːqiː,the remainder,2,ar-agent-v1;ipa=espeak
+atm-cash.exchange-rate,سعر الصرف,,siʿr al-ṣarf,sˈiʕr ʔas̪s̪ˈarf,,2,ar-agent-v1;ipa=espeak
+atm-cash.bank,بنك,مصرف,bank,bˈank,,2,ar-agent-v1;ipa=espeak
+atm-cash.money-exchange,صرافة,مكتب صرافة,ṣirāfah,s̪ɹˈaːft,,2,ar-agent-v1;ipa=espeak
+atm-cash.pin,الرقم السري,,al-raqm al-sirrī,ʔarɹˈaqm ʔassˈirɹiːj,the secret number,2,ar-agent-v1;ipa=espeak
+numbers-money.l-ng,٠,صفر,ṣifr,s̪ˈifr,,2,ar-agent-v1;ipa=espeak
+numbers-money.y,١,واحد,wāḥid,wˈaaħˌid,,2,ar-agent-v1;ipa=espeak
+numbers-money.r,٢,اثنان,ithnān,ʔˈiθnaˌan,,2,ar-agent-v1;ipa=espeak
+numbers-money.li-ng,اثنين,,ithnayn,ˈiθnajnˌi,counting form of two,2,ar-agent-v1;ipa=espeak
+numbers-money.s-n,٣,ثلاثة,thalāthah,θalˈaaθˌah,,2,ar-agent-v1;ipa=espeak
+numbers-money.s,٤,أربعة,arbaʿah,ʔˈarbaʕˌah,,2,ar-agent-v1;ipa=espeak
+numbers-money.w,٥,خمسة,khamsah,xˈamsah,,2,ar-agent-v1;ipa=espeak
+numbers-money.li,٦,ستة,sittah,sˈittah,,2,ar-agent-v1;ipa=espeak
+numbers-money.q,٧,سبعة,sabʿah,sˈabʕah,,2,ar-agent-v1;ipa=espeak
+numbers-money.b,٨,ثمانية,thamāniyah,θamˈanijˌah,,2,ar-agent-v1;ipa=espeak
+numbers-money.ji,٩,تسعة,tisʿah,tˈisʕah,,2,ar-agent-v1;ipa=espeak
+numbers-money.sh,عشرة,١٠,ʿasharah,ʕˈiʃɹa,,2,ar-agent-v1;ipa=espeak
+numbers-money.y-b-i,مئة,١٠٠,miʾah,mʔt,,2,ar-agent-v1;ipa=espeak
+numbers-money.y-qi-n,ألف,١٠٠٠,alf,ʔˈallaf,,2,ar-agent-v1;ipa=espeak
+numbers-money.y-w-n,عشرة آلاف,١٠٠٠٠,ʿasharat ālāf,ʕˈiʃɹa ʔˈaːlaːf,,2,ar-agent-v1;ipa=espeak
+numbers-money.b-n,نصف,١/٢,niṣf,nˈis̪f,,2,ar-agent-v1;ipa=espeak
+numbers-money.yu-n,يوان,,yūān,jˈuːaːn,Chinese yuan,2,ar-agent-v1;ipa=espeak
+numbers-money.ku-i,يوان,,yūān,jˈuːaːn,no separate spoken form,1,ar-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"الأعداد مركّبة: شي عشرة وإي واحد وإر اثنان، فأحد عشر شي إي، وعشرون إر شي، وواحد وعشرون إر شي إي. وفي الهاتف يُقرأ الواحد ياو. ولا يلتقي العدد بالاسم مباشرة، بل تتوسطهما كلمة تصنيف إلزامية: للأشياء عمومًا قه، وللأشخاص وي، وللتذاكر والمسطحات تشانغ، وللأكواب بي، وللقناني بينغ. وكواي هي اليوان في الكلام، وعُشره جياو أو ماو، وجزء من مئة منه فن. ونغماتها في عمود الرومنة.",,,,,2,ar-notes-v1
-numbers-money.2-items,قطعتان,قطعتين,qiṭʿatān,,two pieces,2,ar-agent-v1
-numbers-money.yen,ين,,yin,,Japanese yen,2,ar-agent-v1
+numbers-money.2-items,قطعتان,قطعتين,qiṭʿatān,qt̪ʕtˈaːn,two pieces,2,ar-agent-v1;ipa=espeak
+numbers-money.yen,ين,,yin,jˈin,Japanese yen,2,ar-agent-v1;ipa=espeak
 numbers-money.yen-symbol,¥,,yin,,,2,ar-agent-v1
 numbers-money.number-and-classifier-notes-2,"الأعداد مركّبة: جو عشرة وإيتشي واحد وني اثنان، فأحد عشر جو إيتشي، وعشرون ني جو، وواحد وعشرون ني جو إيتشي. وعند العد تلحق العدد لاحقة تختلف بحسب شكل المعدود ولا تُحذف: للأشياء عمومًا تسو، وللمسطحات ماي، وللطويل هون، وللأشخاص نين، وللأكواب هاي. وفي الهاتف يقال للصفر زيرو أو مارو، وللأربعة يون، وللسبعة نانا، وللتسعة كيو، وتُقرأ الشرطة نو.",,,,,2,ar-notes-v1

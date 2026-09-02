@@ -1,29 +1,29 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-dietary-needs.no-meat,ไม่ใส่เนื้อสัตว์,,mai sai nuea sat,,,2,th-agent-v1
-dietary-needs.no-eggs,ไม่ใส่ไข่,,mai sai khai,,,2,th-agent-v1
-dietary-needs.not-spicy,ไม่เผ็ดเลย,ไม่ใส่พริก,mai phet loei,,not spicy at all,2,th-agent-v1
-dietary-needs.less-spicy,เผ็ดน้อย,,phet noi,,,2,th-agent-v1
-dietary-needs.no-peanuts,ไม่ใส่ถั่วลิสง,,mai sai thua lisong,,,2,th-agent-v1
-dietary-needs.no-nuts,ไม่ใส่ถั่วทุกชนิด,,mai sai thua thuk chanit,,beans and nuts alike,2,th-agent-v1
-dietary-needs.no-seafood,ไม่ใส่อาหารทะเล น้ำปลา กะปิ,,"mai sai ahan thale, nam pla, kapi",,no fish sauce or shrimp paste,2,th-agent-v1
-dietary-needs.i-am-vegetarian,กินมังสวิรัติ,กินเจ,kin mangsawirat,,,2,th-agent-v1
-dietary-needs.i-am-vegan,กินเจ,วีแกน,kin che,,"no meat, fish sauce, egg",2,th-agent-v1
-dietary-needs.i-do-not-eat,ไม่กิน{},,mai kin {},,,2,th-agent-v1
-dietary-needs.i-am-allergic-to,แพ้{},,phae {},,,2,th-agent-v1
-dietary-needs.does-it-contain-fish-stock,ใส่น้ำปลาไหม,ใส่น้ำปลาหรือกะปิไหม,sai nam pla mai,,,2,th-agent-v1
-dietary-needs.does-it-contain-pork-stock,น้ำซุปทำจากหมูไหม,น้ำซุปต้มกระดูกหมูไหม,nam sup tham chak mu mai,,,2,th-pork-stock-v1
-dietary-needs.i-have-a-severe-allergy-to,แพ้{}รุนแรง อาจถึงตาย,,"phae {} runraeng, at thueng tai",,may be fatal,2,th-agent-v1
-food-ordering.table-for-two,โต๊ะสองคน,,to song khon,,,2,th-agent-v1
-food-ordering.is-a-table-available,มีโต๊ะว่างไหม,,mi to wang mai,,,2,th-agent-v1
-food-ordering.menu-please,ขอเมนู,,kho menu,,,2,th-agent-v1
-food-ordering.i-want-this,เอาอันนี้,,ao an ni,,,2,th-agent-v1
-food-ordering.do-you-have-drinking-water,มีน้ำเปล่าไหม,,mi nam plao mai,,,2,th-agent-v1
-food-ordering.to-go-please,ห่อกลับบ้าน,ใส่ถุง,ho klap ban,,,2,th-agent-v1
-food-ordering.check-please,เก็บเงิน,เช็คบิล,kep ngoen,,,2,th-agent-v1
-food-ordering.does-it-contain,ใส่{}ไหม,,sai {} mai,,,2,th-agent-v1
-food-ordering.is-this-vegetarian,อันนี้มังสวิรัติไหม,อันนี้เจไหม,an ni mangsawirat mai,,,2,th-agent-v1
-food-ordering.what-do-you-recommend,แนะนำอะไรดี,,naenam arai di,,,2,th-agent-v1
-food-ordering.water-please,ขอน้ำเปล่า,,kho nam plao,,,2,th-agent-v1
-food-ordering.can-a-vegetarian-eat-this,คนมังสวิรัติกินได้ไหม,คนกินเจกินได้ไหม,khon mangsawirat kin dai mai,,,2,th-agent-v1
-dietary-needs.no-pork,ไม่ใส่หมู น้ำมันหมู น้ำซุปหมู,,"mai sai mu, namman mu, nam sup mu",,,2,th-gaps-v1
-dietary-needs.is-this-halal,อันนี้ฮาลาลไหม,มีตราฮาลาลไหม,an ni halan mai,,look for the diamond mark,2,th-gaps-v1
+dietary-needs.no-meat,ไม่ใส่เนื้อสัตว์,,mai sai nuea sat,maj˥˩ saj˨˩ nɯa̯˦˥sat˨˩,,2,th-agent-v1;ipa=thaig2p
+dietary-needs.no-eggs,ไม่ใส่ไข่,,mai sai khai,maj˥˩ saj˨˩kʰaj˨˩,,2,th-agent-v1;ipa=thaig2p
+dietary-needs.not-spicy,ไม่เผ็ดเลย,ไม่ใส่พริก,mai phet loei,maj˥˩ pʰet˨˩ lɤːj˧,not spicy at all,2,th-agent-v1;ipa=thaig2p
+dietary-needs.less-spicy,เผ็ดน้อย,,phet noi,pʰet˨˩ nɔːj˦˥,,2,th-agent-v1;ipa=thaig2p
+dietary-needs.no-peanuts,ไม่ใส่ถั่วลิสง,,mai sai thua lisong,maj˥˩ saj˨˩ tʰua̯˨˩liʔ˦˥soŋ˩˩˦,,2,th-agent-v1;ipa=thaig2p
+dietary-needs.no-nuts,ไม่ใส่ถั่วทุกชนิด,,mai sai thua thuk chanit,maj˥˩ saj˨˩ tʰua̯˨˩ tʰuk˦˥tɕʰa˦˥nit˦˥,beans and nuts alike,2,th-agent-v1;ipa=thaig2p
+dietary-needs.no-seafood,ไม่ใส่อาหารทะเล น้ำปลา กะปิ,,"mai sai ahan thale, nam pla, kapi",maj˥˩ saj˨˩ ʔaː˧haːn˩˩˦tʰaʔ˦˥leː˧ naːm˦˥plaː˧ kaʔ˨˩piʔ˨˩,no fish sauce or shrimp paste,2,th-agent-v1;ipa=thaig2p
+dietary-needs.i-am-vegetarian,กินมังสวิรัติ,กินเจ,kin mangsawirat,kin˧ maŋ˧sa˨˩wiʔ˦˥rat˦˥,,2,th-agent-v1;ipa=thaig2p
+dietary-needs.i-am-vegan,กินเจ,วีแกน,kin che,kin˧tɕeː˧,"no meat, fish sauce, egg",2,th-agent-v1;ipa=thaig2p
+dietary-needs.i-do-not-eat,ไม่กิน{},,mai kin {},maj˥˩ kin˧ {},,2,th-agent-v1;ipa=thaig2p
+dietary-needs.i-am-allergic-to,แพ้{},,phae {},pʰɛː˦˥ {},,2,th-agent-v1;ipa=thaig2p
+dietary-needs.does-it-contain-fish-stock,ใส่น้ำปลาไหม,ใส่น้ำปลาหรือกะปิไหม,sai nam pla mai,saj˨˩ naːm˦˥plaː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+dietary-needs.does-it-contain-pork-stock,น้ำซุปทำจากหมูไหม,น้ำซุปต้มกระดูกหมูไหม,nam sup tham chak mu mai,naːm˦˥ sup˦˥ tʰam˧ tɕaːk˨˩ muː˩˩˦ maj˩˩˦,,2,th-pork-stock-v1;ipa=thaig2p
+dietary-needs.i-have-a-severe-allergy-to,แพ้{}รุนแรง อาจถึงตาย,,"phae {} runraeng, at thueng tai",pʰɛː˦˥ {} run˧rɛːŋ˧ ʔaːt˨˩ tʰɯŋ˩˩˦taːj˧,may be fatal,2,th-agent-v1;ipa=thaig2p
+food-ordering.table-for-two,โต๊ะสองคน,,to song khon,toʔ˦˥ sɔːŋ˩˩˦ kʰon˧,,2,th-agent-v1;ipa=thaig2p
+food-ordering.is-a-table-available,มีโต๊ะว่างไหม,,mi to wang mai,miː˧ toʔ˦˥ waːŋ˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+food-ordering.menu-please,ขอเมนู,,kho menu,kʰɔː˩˩˦ meː˧nuː˧,,2,th-agent-v1;ipa=thaig2p
+food-ordering.i-want-this,เอาอันนี้,,ao an ni,ʔaw˧ ʔan˧niː˦˥,,2,th-agent-v1;ipa=thaig2p
+food-ordering.do-you-have-drinking-water,มีน้ำเปล่าไหม,,mi nam plao mai,miː˧ naːm˦˥plaːw˨˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+food-ordering.to-go-please,ห่อกลับบ้าน,ใส่ถุง,ho klap ban,hɔː˨˩ klap˨˩baːn˥˩,,2,th-agent-v1;ipa=thaig2p
+food-ordering.check-please,เก็บเงิน,เช็คบิล,kep ngoen,kep˨˩ ŋɤn˧,,2,th-agent-v1;ipa=thaig2p
+food-ordering.does-it-contain,ใส่{}ไหม,,sai {} mai,saj˨˩ {} maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+food-ordering.is-this-vegetarian,อันนี้มังสวิรัติไหม,อันนี้เจไหม,an ni mangsawirat mai,ʔan˧niː˦˥ maŋ˧sa˨˩wiʔ˦˥rat˦˥ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+food-ordering.what-do-you-recommend,แนะนำอะไรดี,,naenam arai di,nɛʔ˦˥nam˧ ʔaʔ˨˩raj˧ diː˧,,2,th-agent-v1;ipa=thaig2p
+food-ordering.water-please,ขอน้ำเปล่า,,kho nam plao,kʰɔː˩˩˦ naːm˦˥plaːw˨˩,,2,th-agent-v1;ipa=thaig2p
+food-ordering.can-a-vegetarian-eat-this,คนมังสวิรัติกินได้ไหม,คนกินเจกินได้ไหม,khon mangsawirat kin dai mai,kʰon˧ maŋ˧sa˨˩wiʔ˦˥rat˦˥ kin˧ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+dietary-needs.no-pork,ไม่ใส่หมู น้ำมันหมู น้ำซุปหมู,,"mai sai mu, namman mu, nam sup mu",maj˥˩ saj˨˩ muː˩˩˦ naːm˦˥man˧muː˩˩˦ naːm˦˥ sup˦˥ muː˩˩˦,,2,th-gaps-v1;ipa=thaig2p
+dietary-needs.is-this-halal,อันนี้ฮาลาลไหม,มีตราฮาลาลไหม,an ni halan mai,ʔan˧niː˦˥ haː˧laː˧lɔː˧ maj˩˩˦,look for the diamond mark,2,th-gaps-v1;ipa=thaig2p

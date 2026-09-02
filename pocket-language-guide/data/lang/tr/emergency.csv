@@ -1,138 +1,138 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-emergency-medical.help,İmdat!,Yardım edin!,,,2,tr-agent-v1
-emergency-medical.please-call-an-ambulance,Lütfen ambulans çağırın.,,,,2,tr-agent-v1
-emergency-medical.i-need-a-doctor,Doktora ihtiyacım var.,,,,2,tr-agent-v1
-emergency-medical.i-am-sick,Hastayım.,,,,2,tr-agent-v1
-emergency-medical.i-am-injured,Yaralandım.,,,,2,tr-agent-v1
-emergency-medical.it-hurts-here,Burası ağrıyor.,,,,2,tr-agent-v1
-emergency-medical.where-is-a-pharmacy,Eczane nerede?,,,,2,tr-agent-v1
-emergency-medical.please-take-me-to-a-hospital,Beni hastaneye götürün.,,,,2,tr-agent-v1
-emergency-medical.i-feel-unwell,Kendimi iyi hissetmiyorum.,,,,2,tr-agent-v1
-emergency-medical.this-is-an-emergency,Bu acil bir durum.,,,,2,tr-agent-v1
-emergency-medical.i-am-having-a-severe-allergic-reaction,Anafilaksi geçiriyorum!,Ağır alerjik reaksiyon geçiriyorum!,,,2,tr-agent-v1
-emergency-medical.i-cannot-breathe,Nefes alamıyorum!,,,,2,tr-agent-v1
-emergency-medical.i-am-bleeding-badly,Şiddetli kanamam var!,,,,2,tr-agent-v1
-emergency-medical.i-have-chest-pain,Göğsümde ağrı var.,,,,2,tr-agent-v1
-emergency-medical.this-person-is-unconscious,Bu kişinin bilinci kapalı.,,,,2,tr-agent-v1
-emergency-medical.where-is-the-nearest-hospital,En yakın hastane nerede?,,,,2,tr-agent-v1
-emergency-medical.what-is-the-emergency-number,Acil numarası kaç?,,,,2,tr-agent-v1
+emergency-medical.help,İmdat!,Yardım edin!,ɪmdˈat,,2,tr-agent-v1;ipa=espeak
+emergency-medical.please-call-an-ambulance,Lütfen ambulans çağırın.,,løtfˈæn ambuɫˈans tʃaːɯɾˈɯn,,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-need-a-doctor,Doktora ihtiyacım var.,,dɔktoɾˈa ɪhtijˈadʒɯm vˈar,,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Hastayım.,,hastajˈɯm,,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-am-injured,Yaralandım.,,jaɾaɫandˈɯm,,2,tr-agent-v1;ipa=espeak
+emergency-medical.it-hurts-here,Burası ağrıyor.,,buɾasˈɯ aːɾˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+emergency-medical.where-is-a-pharmacy,Eczane nerede?,,ɛdʒzanˈɛ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+emergency-medical.please-take-me-to-a-hospital,Beni hastaneye götürün.,,benˈɪ hastanejˈɛ ɟœtyɾˈøn,,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-feel-unwell,Kendimi iyi hissetmiyorum.,,kændimˈɪ ijˈi hɪssɛtmˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+emergency-medical.this-is-an-emergency,Bu acil bir durum.,,bʊ adʒˈɪl bɪr dˈuɾʊm,,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,Anafilaksi geçiriyorum!,Ağır alerjik reaksiyon geçiriyorum!,anafiɫaksˈɪ ɟetʃiɾˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-cannot-breathe,Nefes alamıyorum!,,nefˈɛs aɫamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-am-bleeding-badly,Şiddetli kanamam var!,,ʃidːɛtlˈɪ kanamˈam vˈar,,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-have-chest-pain,Göğsümde ağrı var.,,ɟˈœːsømdɛ ˈaːɾɯ vˈar,,2,tr-agent-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,Bu kişinin bilinci kapalı.,,bʊ kiʃinˈɪn bilɪndʒˈɪ kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+emergency-medical.where-is-the-nearest-hospital,En yakın hastane nerede?,,ˈæn jakˈɯn hastanˈɛ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+emergency-medical.what-is-the-emergency-number,Acil numarası kaç?,,adʒˈɪl numaɾasˈɯ kˈatʃ,,2,tr-agent-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,{source} bilen doktor var mı?,,,,2,language-slots-v1
-emergency-medical.i-think-a-bone-is-broken,Sanırım kemiğim kırıldı.,,,,2,tr-agent-v1
-emergency-medical.please-call-my-emergency-contact,"Yakınımı arayın, lütfen.",Acil durumda aranacak kişiyi arayın.,,,2,tr-agent-v1
-emergency-medical.i-have-travel-insurance,Seyahat sigortam var.,,,,2,tr-agent-v1
-medical-conditions.i-am-diabetic,Şeker hastasıyım.,Diyabet hastasıyım.,,,2,tr-agent-v1
-medical-conditions.i-need-insulin,İnsüline ihtiyacım var.,,,,2,tr-agent-v1
-medical-conditions.i-have-asthma,Astımım var.,,,,2,tr-agent-v1
-medical-conditions.i-have-a-heart-condition,Kalp hastalığım var.,,,,2,tr-agent-v1
-medical-conditions.i-am-allergic-to-penicillin,Penisilin alerjim var.,,,,2,tr-agent-v1
-medical-conditions.i-have-epilepsy,Epilepsi hastasıyım.,Sara hastasıyım.,,,2,tr-agent-v1
-medical-conditions.my-blood-sugar-is-low,Kan şekerim düştü.,,,,2,tr-agent-v1
-medical-conditions.i-need-my-inhaler,Astım spreyim lazım.,İnhalerim lazım.,,,2,tr-agent-v1
-medical-conditions.i-am-pregnant,Hamileyim.,,,,2,tr-agent-v1
-medical-conditions.i-carry-an-adrenaline-injector,Adrenalin otoenjektörüm var.,Adrenalin kalemim var.,,,2,tr-agent-v1
-medical-conditions.i-take-medicine-for,{} için ilaç alıyorum.,,,,2,tr-agent-v1
-medical-conditions.i-take-blood-thinners,Kan sulandırıcı ilaç alıyorum.,,,,2,tr-agent-v1
-medical-conditions.medicine-allergy,İlaç alerjisi: {},,,,2,tr-agent-v1
-medical-conditions.this-card-lists-my-conditions,Hastalıklarım bu kartta yazılı.,,,,2,tr-agent-v1
-medical-conditions.this-is-my-medicine,Bu benim ilacım.,,,,2,tr-agent-v1
-medical-conditions.please-give-me-sugar-or-juice,Bana şeker veya meyve suyu verin.,,,,2,tr-agent-v1
-medical-conditions.inject-it-into-my-outer-thigh,Uyluğumun dış yanına enjekte edin.,,,,2,tr-agent-v1
-medical-conditions.my-blood-type-is,Kan grubum {}.,,,,2,tr-agent-v1
-medical-conditions.do-not-give-me,Bana {} vermeyin.,,,,2,tr-agent-v1
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Aspirin ve ibuprofen alerjim var.,,,,2,tr-agent-v1
-medical-conditions.my-injector-is-in-my-bag,Enjektörüm çantamda.,,,,2,tr-agent-v1
-medical-conditions.i-am-allergic-to-sulfa-drugs,Sülfonamid alerjim var.,Sülfa ilaçları alerjim var.,,,2,tr-agent-v1
-pharmacy-symptoms.which-pharmacy-is-open-now,Nöbetçi eczane hangisi?,Şimdi hangi eczane açık?,,,2,tr-agent-v1
-pharmacy-symptoms.i-need-medicine-for,{} için ilaç lazım.,,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-a-fever,Ateşim var.,,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-diarrhea,İshalim var.,,,,2,tr-agent-v1
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Nöbetçi eczane nerede?,,,,2,tr-agent-v1
-pharmacy-symptoms.painkiller,ağrı kesici,,,,2,tr-agent-v1
-pharmacy-symptoms.do-i-need-a-prescription,Reçete gerekiyor mu?,,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-a-headache,Başım ağrıyor.,,,,2,tr-agent-v1
-pharmacy-symptoms.paracetamol-acetaminophen,parasetamol,Parol,,,2,tr-agent-v1
-pharmacy-symptoms.how-much-should-i-take,Ne kadar almalıyım?,,,,2,tr-agent-v1
-pharmacy-symptoms.i-am-vomiting,Kusuyorum.,,,,2,tr-agent-v1
-pharmacy-symptoms.rehydration-salts,oral rehidrasyon tuzu,ORS,,,2,tr-agent-v1
-pharmacy-symptoms.how-many-times-a-day,Günde kaç kez?,,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-a-stomach-ache,Karnım ağrıyor.,,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-a-cough,Öksürüğüm var.,,,,2,tr-agent-v1
-pharmacy-symptoms.antihistamine,antihistaminik,alerji ilacı,,,2,tr-agent-v1
-pharmacy-symptoms.anti-diarrhea-medicine,ishal kesici,loperamid,,,2,tr-agent-v1
-pharmacy-symptoms.is-this-safe-to-take-with,{} ile birlikte alınır mı?,,,,2,tr-agent-v1
-pharmacy-symptoms.i-feel-dizzy,Başım dönüyor.,,,,2,tr-agent-v1
-pharmacy-symptoms.ibuprofen,ibuprofen,Brufen,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-a-sore-throat,Boğazım ağrıyor.,,,,2,tr-agent-v1
-pharmacy-symptoms.can-i-get-this-medicine-here,Bu ilacı burada alabilir miyim?,,,,2,tr-agent-v1
-pharmacy-symptoms.bandage,sargı bezi,bandaj,,,2,tr-agent-v1
-pharmacy-symptoms.the-pain-is-severe,Ağrı çok şiddetli.,,,,2,tr-agent-v1
-pharmacy-symptoms.antiseptic,antiseptik,Batticon,,,2,tr-agent-v1
-pharmacy-symptoms.i-feel-nauseous,Midem bulanıyor.,,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-a-rash,Döküntüm var.,Ciltte kızarıklık var.,,,2,tr-agent-v1
-pharmacy-symptoms.before-or-after-food,"Yemekten önce mi, sonra mı?",,,,2,tr-agent-v1
-pharmacy-symptoms.i-think-it-is-infected,Sanırım enfeksiyon var.,,,,2,tr-agent-v1
-pharmacy-symptoms.motion-sickness-tablets,araç tutması ilacı,Dramamine,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-a-cut,Kesiğim var.,,,,2,tr-agent-v1
-pharmacy-symptoms.antacid,mide ilacı,antasit,,,2,tr-agent-v1
-pharmacy-symptoms.i-have-a-burn,Yanığım var.,,,,2,tr-agent-v1
-pharmacy-symptoms.it-started-days-ago,{} gün önce başladı.,,,,2,tr-agent-v1
-pharmacy-symptoms.cough-medicine,öksürük şurubu,,,,2,tr-agent-v1
-pharmacy-symptoms.is-this-safe-during-pregnancy,Hamilelikte güvenli mi?,,,,2,tr-agent-v1
-body-parts.head,baş,kafa,,,2,tr-agent-v1
-body-parts.stomach,karın,mide,,,2,tr-agent-v1
-body-parts.back,sırt,,,,2,tr-agent-v1
-body-parts.throat,boğaz,,,,2,tr-agent-v1
-body-parts.tooth,diş,,,,2,tr-agent-v1
-body-parts.chest,göğüs,,,,2,tr-agent-v1
-body-parts.eye,göz,,,,2,tr-agent-v1
-body-parts.ear,kulak,,,,2,tr-agent-v1
-body-parts.leg,bacak,,,,2,tr-agent-v1
-body-parts.arm,kol,,,,2,tr-agent-v1
-body-parts.foot,ayak,,,,2,tr-agent-v1
-body-parts.hand,el,,,,2,tr-agent-v1
-body-parts.knee,diz,,,,2,tr-agent-v1
-body-parts.ankle,ayak bileği,,,,2,tr-agent-v1
-body-parts.skin,cilt,deri,,,2,tr-agent-v1
-lost-rescue.i-lost-my-passport,Pasaportumu kaybettim.,,,,2,tr-agent-v1
-lost-rescue.i-lost-my-phone,Telefonumu kaybettim.,,,,2,tr-agent-v1
-lost-rescue.please-call-the-police,"Polis çağırın, lütfen.",,,,2,tr-agent-v1
-lost-rescue.we-are-here,Buradayız.,,,,2,tr-agent-v1
-lost-rescue.please-look-at-my-location-pin,Konum işaretime bakın.,,,,2,tr-agent-v1
-lost-rescue.i-cannot-walk,Yürüyemiyorum.,,,,2,tr-agent-v1
-lost-rescue.i-sprained-my-ankle,Ayak bileğimi burktum.,,,,2,tr-agent-v1
-lost-rescue.please-contact-rescue,Kurtarma ekibine haber verin.,,,,2,tr-agent-v1
-lost-rescue.my-companion-is-missing,Arkadaşım kayboldu.,,,,2,tr-agent-v1
-lost-rescue.please-look-at-my-current-location,Şu anki konumuma bakın.,,,,2,tr-agent-v1
-lost-rescue.my-child-is-missing,Çocuğum kayboldu.,,,,2,tr-agent-v1
-lost-rescue.i-do-not-know-where-i-am,Nerede olduğumu bilmiyorum.,,,,2,tr-agent-v1
-lost-rescue.my-friend-is-hurt,Arkadaşım yaralandı.,,,,2,tr-agent-v1
-lost-rescue.i-lost-my-wallet,Cüzdanımı kaybettim.,,,,2,tr-agent-v1
-lost-rescue.i-lost-my-bag,Çantamı kaybettim.,,,,2,tr-agent-v1
-lost-rescue.where-is-lost-and-found,Kayıp eşya bürosu nerede?,,,,2,tr-agent-v1
-lost-rescue.i-cannot-find-my-hotel,Otelimi bulamıyorum.,,,,2,tr-agent-v1
-lost-rescue.i-left-it-on-the-train,Trende bıraktım.,,,,2,tr-agent-v1
-lost-rescue.i-cannot-get-down,Aşağı inemiyorum.,,,,2,tr-agent-v1
-police-consulate.where-is-the-police-station,Karakol nerede?,,,,2,tr-agent-v1
-police-consulate.i-want-to-report-a-theft,Hırsızlığı bildirmek istiyorum.,,,,2,tr-agent-v1
-police-consulate.my-bag-was-stolen,Çantam çalındı.,,,,2,tr-agent-v1
-police-consulate.my-passport-was-stolen,Pasaportum çalındı.,,,,2,tr-agent-v1
-police-consulate.someone-is-following-me,Biri beni takip ediyor.,,,,2,tr-agent-v1
-police-consulate.i-need-a-written-police-report,Yazılı tutanak istiyorum.,Polis raporu istiyorum.,,,2,tr-agent-v1
-police-consulate.i-want-to-contact-my-embassy,Büyükelçiliğimi aramak istiyorum.,,,,2,tr-agent-v1
-police-consulate.i-need-it-for-my-insurance,Sigortam için gerekiyor.,,,,2,tr-agent-v1
-police-consulate.i-need-an-interpreter,Tercüman istiyorum.,,,,2,tr-agent-v1
-police-consulate.please-leave-me-alone,Beni rahat bırakın.,,,,2,tr-agent-v1
-police-consulate.i-was-robbed,Soyuldum.,,,,2,tr-agent-v1
-police-consulate.i-want-a-lawyer,Avukat istiyorum.,,,,2,tr-agent-v1
-police-consulate.please-notify-my-consulate,Konsolosluğuma haber verin.,,,,2,tr-agent-v1
-police-consulate.i-am-calling-the-police,Polisi arıyorum.,,,,2,tr-agent-v1
-police-consulate.am-i-under-arrest,Gözaltına mı alındım?,,,,2,tr-agent-v1
-police-consulate.no-thank-you-i-am-not-interested,"Hayır, teşekkürler, ilgilenmiyorum.",,,,2,tr-agent-v1
-police-consulate.someone-attacked-me,Bana saldırdılar.,,,,2,tr-agent-v1
-police-consulate.i-did-not-agree-to-this-price,Bu fiyatı kabul etmedim.,,,,2,tr-agent-v1
-police-consulate.please-write-the-report-number,Tutanak numarasını yazın.,,,,2,tr-agent-v1
-police-consulate.it-happened-here,Burada oldu.,,,,2,tr-agent-v1
-police-consulate.may-i-have-a-copy-of-the-report,Tutanağın kopyasını alabilir miyim?,,,,2,tr-agent-v1
-police-consulate.i-will-not-sign-anything-i-cannot-read,Okuyamadığım hiçbir şeyi imzalamam.,,,,2,tr-agent-v1
-police-consulate.am-i-free-to-go,Gidebilir miyim?,,,,2,tr-agent-v1
-police-consulate.i-do-not-want-to-go-with-you,Sizinle gelmek istemiyorum.,,,,2,tr-agent-v1
+emergency-medical.i-think-a-bone-is-broken,Sanırım kemiğim kırıldı.,,sanˈɯɾɯm kemˈijɪm kɯɾɯɫdˈɯ,,2,tr-agent-v1;ipa=espeak
+emergency-medical.please-call-my-emergency-contact,"Yakınımı arayın, lütfen.",Acil durumda aranacak kişiyi arayın.,"jakˈɯnɯmɯ aɾajˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+emergency-medical.i-have-travel-insurance,Seyahat sigortam var.,,sejahˈat siɡɔrtˈam vˈar,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-am-diabetic,Şeker hastasıyım.,Diyabet hastasıyım.,ʃekˈɛr hastasˈɯjɯm,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-need-insulin,İnsüline ihtiyacım var.,,ɪnsylinˈɛ ɪhtijˈadʒɯm vˈar,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-have-asthma,Astımım var.,,ˈastɯmɯm vˈar,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-have-a-heart-condition,Kalp hastalığım var.,,kˈaɫp hastaɫˈɯɯɯm vˈar,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-penicillin,Penisilin alerjim var.,,penisilˈɪn alˈɛrʒɪm vˈar,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,Epilepsi hastasıyım.,Sara hastasıyım.,epilɛpsˈɪ hastasˈɯjɯm,,2,tr-agent-v1;ipa=espeak
+medical-conditions.my-blood-sugar-is-low,Kan şekerim düştü.,,kˈan ʃekˈeɾɪm døʃtˈø,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-need-my-inhaler,Astım spreyim lazım.,İnhalerim lazım.,ˈastɯm sprˈejɪm ɫˈazɯm,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-am-pregnant,Hamileyim.,,hamilejˈɪm,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,Adrenalin otoenjektörüm var.,Adrenalin kalemim var.,adrenaɫˈɪn otoænʒɛktˈœɾøm vˈar,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-take-medicine-for,{} için ilaç alıyorum.,,{} itʃˈɪn iɫˈatʃ aɫˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-take-blood-thinners,Kan sulandırıcı ilaç alıyorum.,,kˈan suɫandɯɾɯdʒˈɯ iɫˈatʃ aɫˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+medical-conditions.medicine-allergy,İlaç alerjisi: {},,iɫˈatʃ alɛrʒisˈɪ {},,2,tr-agent-v1;ipa=espeak
+medical-conditions.this-card-lists-my-conditions,Hastalıklarım bu kartta yazılı.,,hastaɫɯkɫˈaɾɯm bʊ kartːˈa jazɯɫˈɯ,,2,tr-agent-v1;ipa=espeak
+medical-conditions.this-is-my-medicine,Bu benim ilacım.,,bʊ bˈenɪm iɫˈadʒɯm,,2,tr-agent-v1;ipa=espeak
+medical-conditions.please-give-me-sugar-or-juice,Bana şeker veya meyve suyu verin.,,banˈa ʃekˈɛr vejˌa mɛjvˈɛ sujˈʊ veɾˈɪn,,2,tr-agent-v1;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,Uyluğumun dış yanına enjekte edin.,,ʊjɫuːmˈʊn dˈɯʃ janɯnˈa ænʒɛktˈɛ ɛdˈin,,2,tr-agent-v1;ipa=espeak
+medical-conditions.my-blood-type-is,Kan grubum {}.,,kˈan ɡrˈubʊm {},,2,tr-agent-v1;ipa=espeak
+medical-conditions.do-not-give-me,Bana {} vermeyin.,,banˈa {} vɛrmejˈɪn,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Aspirin ve ibuprofen alerjim var.,,aspiɾˈɪn vɛ ibʊprofˈæn alˈɛrʒɪm vˈar,,2,tr-agent-v1;ipa=espeak
+medical-conditions.my-injector-is-in-my-bag,Enjektörüm çantamda.,,ænʒɛktˈœɾøm tʃantamdˈa,,2,tr-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-sulfa-drugs,Sülfonamid alerjim var.,Sülfa ilaçları alerjim var.,sølfonamˈɪd alˈɛrʒɪm vˈar,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.which-pharmacy-is-open-now,Nöbetçi eczane hangisi?,Şimdi hangi eczane açık?,nœbɛttʃˈɪ ɛdʒzanˈɛ hanɟisˈɪ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-need-medicine-for,{} için ilaç lazım.,,{} itʃˈɪn iɫˈatʃ ɫˈazɯm,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-fever,Ateşim var.,,atˈeʃɪm vˈar,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-diarrhea,İshalim var.,,ɪshˈaɫɪm vˈar,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Nöbetçi eczane nerede?,,nœbɛttʃˈɪ ɛdʒzanˈɛ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.painkiller,ağrı kesici,,ˈaːɾɯ kesidʒˈɪ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.do-i-need-a-prescription,Reçete gerekiyor mu?,,rˈetʃɛtɛ ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-headache,Başım ağrıyor.,,bˈaʃɯm aːɾˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,parasetamol,Parol,paɾasetamˈɔɫ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.how-much-should-i-take,Ne kadar almalıyım?,,nˈɛ kadˈar aɫmaɫˈɯjɯm,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-am-vomiting,Kusuyorum.,,kusˈujoɾʊm,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.rehydration-salts,oral rehidrasyon tuzu,ORS,oɾˈaɫ rehɪdrasjˈɔn tuzˈʊ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.how-many-times-a-day,Günde kaç kez?,,ɟøndˈɛ kˈatʃ kˈɛz,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-stomach-ache,Karnım ağrıyor.,,kˈarnɯm aːɾˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cough,Öksürüğüm var.,,œksyɾˈøːm vˈar,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.antihistamine,antihistaminik,alerji ilacı,antihɪstaminˈɪk,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.anti-diarrhea-medicine,ishal kesici,loperamid,ɪshˈaɫ kesidʒˈɪ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-to-take-with,{} ile birlikte alınır mı?,,{} ˌilɛ bɪrlɪktˈɛ aɫɯnˈɯr mɯ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-feel-dizzy,Başım dönüyor.,,bˈaʃɯm dœnˈyjɔr,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.ibuprofen,ibuprofen,Brufen,ibʊprofˈæn,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-sore-throat,Boğazım ağrıyor.,,boːˈazɯm aːɾˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.can-i-get-this-medicine-here,Bu ilacı burada alabilir miyim?,,bʊ iɫadʒˈɯ bˈuɾada aɫabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.bandage,sargı bezi,bandaj,sarɡˈɯ bezˈɪ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.the-pain-is-severe,Ağrı çok şiddetli.,,ˈaːɾɯ tʃˈɔk ʃidːɛtlˈɪ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.antiseptic,antiseptik,Batticon,antisɛptˈɪk,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-feel-nauseous,Midem bulanıyor.,,midˈæm buɫanˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-rash,Döküntüm var.,Ciltte kızarıklık var.,dœkˈøntøm vˈar,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.before-or-after-food,"Yemekten önce mi, sonra mı?",,"jemɛktˈæn ˈœndʒɛ mɪ, sɔnrˈa mɯ",,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-it-is-infected,Sanırım enfeksiyon var.,,sanˈɯɾɯm ænfɛksijˈɔn vˈar,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.motion-sickness-tablets,araç tutması ilacı,Dramamine,aɾˈatʃ tʊtmasˈɯ iɫadʒˈɯ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cut,Kesiğim var.,,kesˈijɪm vˈar,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.antacid,mide ilacı,antasit,midˈɛ iɫadʒˈɯ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-burn,Yanığım var.,,janˈɯɯɯm vˈar,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,{} gün önce başladı.,,{} ɟˈøn ˈœndʒɛ bˈaʃɫadɯ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.cough-medicine,öksürük şurubu,,œksyɾˈøk ʃuɾubˈʊ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-during-pregnancy,Hamilelikte güvenli mi?,,hamilelɪktˈɛ ɟyvænlˈɪ mɪ,,2,tr-agent-v1;ipa=espeak
+body-parts.head,baş,kafa,bˈaʃ,,2,tr-agent-v1;ipa=espeak
+body-parts.stomach,karın,mide,kaɾˈɯn,,2,tr-agent-v1;ipa=espeak
+body-parts.back,sırt,,sˈɯrt,,2,tr-agent-v1;ipa=espeak
+body-parts.throat,boğaz,,boːˈaz,,2,tr-agent-v1;ipa=espeak
+body-parts.tooth,diş,,dˈɪʃ,,2,tr-agent-v1;ipa=espeak
+body-parts.chest,göğüs,,ɟœːˈøs,,2,tr-agent-v1;ipa=espeak
+body-parts.eye,göz,,ɟˈœz,,2,tr-agent-v1;ipa=espeak
+body-parts.ear,kulak,,kuɫˈak,,2,tr-agent-v1;ipa=espeak
+body-parts.leg,bacak,,badʒˈak,,2,tr-agent-v1;ipa=espeak
+body-parts.arm,kol,,kˈɔɫ,,2,tr-agent-v1;ipa=espeak
+body-parts.foot,ayak,,ajˈak,,2,tr-agent-v1;ipa=espeak
+body-parts.hand,el,,ˈæl,,2,tr-agent-v1;ipa=espeak
+body-parts.knee,diz,,dˈɪz,,2,tr-agent-v1;ipa=espeak
+body-parts.ankle,ayak bileği,,ajˈak bilejˈɪ,,2,tr-agent-v1;ipa=espeak
+body-parts.skin,cilt,deri,dʒˈɪlt,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-passport,Pasaportumu kaybettim.,,pasapˈɔrtumʊ kajbˈetːɪm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-phone,Telefonumu kaybettim.,,telefˈonumʊ kajbˈetːɪm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.please-call-the-police,"Polis çağırın, lütfen.",,"polˈɪs tʃaːɯɾˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+lost-rescue.we-are-here,Buradayız.,,buɾadˈajɯz,,2,tr-agent-v1;ipa=espeak
+lost-rescue.please-look-at-my-location-pin,Konum işaretime bakın.,,kˈonʊm iʃaɾetˈimɛ bakˈɯn,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-cannot-walk,Yürüyemiyorum.,,jyɾyjemˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-sprained-my-ankle,Ayak bileğimi burktum.,,ajˈak bilˈejimɪ bˈʊrktʊm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.please-contact-rescue,Kurtarma ekibine haber verin.,,kʊrtˈarma ekibinˈɛ habˈɛr veɾˈɪn,,2,tr-agent-v1;ipa=espeak
+lost-rescue.my-companion-is-missing,Arkadaşım kayboldu.,,arkadˈaʃɯm kajbɔɫdˈʊ,,2,tr-agent-v1;ipa=espeak
+lost-rescue.please-look-at-my-current-location,Şu anki konumuma bakın.,,ʃʊ ankˈɪ konumˈuma bakˈɯn,,2,tr-agent-v1;ipa=espeak
+lost-rescue.my-child-is-missing,Çocuğum kayboldu.,,tʃodʒˈʊːm kajbɔɫdˈʊ,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-do-not-know-where-i-am,Nerede olduğumu bilmiyorum.,,nˈeɾedɛ ɔɫduːmˈʊ bɪlmˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Arkadaşım yaralandı.,,arkadˈaʃɯm jaɾaɫandˈɯ,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-wallet,Cüzdanımı kaybettim.,,dʒøzdˈanɯmɯ kajbˈetːɪm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-bag,Çantamı kaybettim.,,tʃantamˈɯ kajbˈetːɪm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.where-is-lost-and-found,Kayıp eşya bürosu nerede?,,kajˈɯp ɛʃjˈa byɾosˈʊ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-cannot-find-my-hotel,Otelimi bulamıyorum.,,otelimˈɪ buɫamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-left-it-on-the-train,Trende bıraktım.,,trændˈɛ bɯɾˈaktɯm,,2,tr-agent-v1;ipa=espeak
+lost-rescue.i-cannot-get-down,Aşağı inemiyorum.,,aʃaːˈɯ inemˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+police-consulate.where-is-the-police-station,Karakol nerede?,,kaɾakˈɔɫ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-want-to-report-a-theft,Hırsızlığı bildirmek istiyorum.,,hɯrsɯzɫɯɯˈɯ bɪldɪrmˈɛk ɪstˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+police-consulate.my-bag-was-stolen,Çantam çalındı.,,tʃantˈam tʃaɫɯndˈɯ,,2,tr-agent-v1;ipa=espeak
+police-consulate.my-passport-was-stolen,Pasaportum çalındı.,,pasapˈɔrtʊm tʃaɫɯndˈɯ,,2,tr-agent-v1;ipa=espeak
+police-consulate.someone-is-following-me,Biri beni takip ediyor.,,biɾˈɪ benˈɪ takˈɪp edˈijɔr,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-need-a-written-police-report,Yazılı tutanak istiyorum.,Polis raporu istiyorum.,jazɯɫˈɯ tutanˈak ɪstˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-want-to-contact-my-embassy,Büyükelçiliğimi aramak istiyorum.,,byjykæltʃilˈijimɪ aɾamˈak ɪstˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-need-it-for-my-insurance,Sigortam için gerekiyor.,,siɡɔrtˈam itʃˈɪn ɟeɾekˈijɔr,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-need-an-interpreter,Tercüman istiyorum.,,tɛrdʒymˈan ɪstˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+police-consulate.please-leave-me-alone,Beni rahat bırakın.,,benˈɪ rahˈat bɯɾakˈɯn,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-was-robbed,Soyuldum.,,sojʊɫdˈʊm,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-want-a-lawyer,Avukat istiyorum.,,avukˈat ɪstˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+police-consulate.please-notify-my-consulate,Konsolosluğuma haber verin.,,kɔnsoɫɔsɫˈuːma habˈɛr veɾˈɪn,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-am-calling-the-police,Polisi arıyorum.,,polisˈɪ aɾˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,Gözaltına mı alındım?,,ɟœzaɫtɯnˈa mɯ aɫɯndˈɯm,,2,tr-agent-v1;ipa=espeak
+police-consulate.no-thank-you-i-am-not-interested,"Hayır, teşekkürler, ilgilenmiyorum.",,"hajˈɯr, teʃekːørlˈɛr, ɪlɟilænmˈijoɾʊm",,2,tr-agent-v1;ipa=espeak
+police-consulate.someone-attacked-me,Bana saldırdılar.,,banˈa sˈaɫdɯrdɯɫar,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,Bu fiyatı kabul etmedim.,,bʊ fijatˈɯ kabˈʊɫ ˈɛtmedɪm,,2,tr-agent-v1;ipa=espeak
+police-consulate.please-write-the-report-number,Tutanak numarasını yazın.,,tutanˈak numaɾasɯnˈɯ jazˈɯn,,2,tr-agent-v1;ipa=espeak
+police-consulate.it-happened-here,Burada oldu.,,bˈuɾada ɔɫdˈʊ,,2,tr-agent-v1;ipa=espeak
+police-consulate.may-i-have-a-copy-of-the-report,Tutanağın kopyasını alabilir miyim?,,tutanaːˈɯn kɔpjasɯnˈɯ aɫabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,Okuyamadığım hiçbir şeyi imzalamam.,,okujamadˈɯɯɯm hɪtʃbˈɪr ʃejˈɪ ɪmzaɫamˈam,,2,tr-agent-v1;ipa=espeak
+police-consulate.am-i-free-to-go,Gidebilir miyim?,,ɟidebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+police-consulate.i-do-not-want-to-go-with-you,Sizinle gelmek istemiyorum.,,sizˈɪnlɛ ɟælmˈɛk ɪstemˈijoɾʊm,,2,tr-agent-v1;ipa=espeak

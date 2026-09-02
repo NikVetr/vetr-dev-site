@@ -1,101 +1,101 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-social-basics.hello,Hello,,,,2,latex-reference-v2
-social-basics.hello-polite,Hello (polite),,,,2,latex-reference-v2
-social-basics.good-morning,Good morning,,,,2,latex-reference-v2
-social-basics.good-evening,Good evening,,,,2,latex-reference-v2
-social-basics.goodbye,Goodbye,,,,2,latex-reference-v2
-social-basics.thank-you,Thank you,,,,2,latex-reference-v2
-social-basics.you-are-welcome,You are welcome,,,,2,latex-reference-v2
-social-basics.excuse-me-sorry,Excuse me / sorry,,,,2,latex-reference-v2
-social-basics.sorry,Sorry,,,,2,latex-reference-v2
-social-basics.no-problem,No problem,,,,2,latex-reference-v2
-social-basics.i-do-not-know,I do not know,,,,2,latex-reference-v2
+social-basics.hello,Hello,,həlˈoʊ,,2,latex-reference-v2;ipa=espeak
+social-basics.hello-polite,Hello (polite),,həlˈoʊ pəlˈaɪt,,2,latex-reference-v2;ipa=espeak
+social-basics.good-morning,Good morning,,ɡˈʊd mˈɔːɹnɪŋ,,2,latex-reference-v2;ipa=espeak
+social-basics.good-evening,Good evening,,ɡˈʊd ˈiːvnɪŋ,,2,latex-reference-v2;ipa=espeak
+social-basics.goodbye,Goodbye,,ɡʊdbˈaɪ,,2,latex-reference-v2;ipa=espeak
+social-basics.thank-you,Thank you,,θˈæŋk juː,,2,latex-reference-v2;ipa=espeak
+social-basics.you-are-welcome,You are welcome,,juː ɑːɹ wˈɛlkʌm,,2,latex-reference-v2;ipa=espeak
+social-basics.excuse-me-sorry,Excuse me / sorry,,ɛkskjˈuːs mˌiː / sˈɑːɹi,,2,latex-reference-v2;ipa=espeak
+social-basics.sorry,Sorry,,sˈɑːɹi,,2,latex-reference-v2;ipa=espeak
+social-basics.no-problem,No problem,,nˈoʊ pɹˈɑːbləm,,2,latex-reference-v2;ipa=espeak
+social-basics.i-do-not-know,I do not know,,aɪ duːnˌɑːt nˈoʊ,,2,latex-reference-v2;ipa=espeak
 communication.i-do-not-speak-this-language,I do not speak {target},,,,2,language-slots-v1
 communication.i-speak-only-a-little-of-this,I speak only a little {target},,,,2,language-slots-v1
 communication.do-you-speak-english,Do you speak {source}?,,,,2,language-slots-v1
-communication.please-speak-more-slowly,Please speak more slowly,,,,2,latex-reference-v2
-communication.i-do-not-understand-spoken,I do not understand (spoken),,,,2,latex-reference-v2
-communication.i-cannot-read-understand,I cannot read / understand,,,,2,latex-reference-v2
-communication.please-say-it-again,Please say it again,,,,2,latex-reference-v2
-communication.please-write-it-down,Please write it down,,,,2,latex-reference-v2
-communication.please-wait-a-moment,Please wait a moment,,,,2,latex-reference-v2
-communication.can-you-help-me,Can you help me?,,,,2,latex-reference-v2
+communication.please-speak-more-slowly,Please speak more slowly,,plˈiːz spˈiːk mˈoːɹ slˈoʊli,,2,latex-reference-v2;ipa=espeak
+communication.i-do-not-understand-spoken,I do not understand (spoken),,aɪ duːnˌɑːt ˌʌndɚstˈænd spˈoʊkən,,2,latex-reference-v2;ipa=espeak
+communication.i-cannot-read-understand,I cannot read / understand,,aɪ kænˈɑːt ɹˈiːd / ˌʌndɚstˈænd,,2,latex-reference-v2;ipa=espeak
+communication.please-say-it-again,Please say it again,,plˈiːz sˈeɪ ɪɾ ɐɡˈɛn,,2,latex-reference-v2;ipa=espeak
+communication.please-write-it-down,Please write it down,,plˈiːz ɹˈaɪt ɪt dˈaʊn,,2,latex-reference-v2;ipa=espeak
+communication.please-wait-a-moment,Please wait a moment,,plˈiːz wˈeɪt ɐ mˈoʊmənt,,2,latex-reference-v2;ipa=espeak
+communication.can-you-help-me,Can you help me?,,kæn juː hˈɛlp mˌiː,,2,latex-reference-v2;ipa=espeak
 communication.please-show-me-the-text,Please show me the text in {target},,,,2,language-slots-v1
-quick-responses.please-go-ahead,please / go ahead,,,,2,latex-reference-v2
-quick-responses.yes-right,yes / right,,,,2,latex-reference-v2
-quick-responses.no-not,no / not,,,,2,latex-reference-v2
-quick-responses.okay-can,okay / can,,,,2,latex-reference-v2
-quick-responses.cannot-not-allowed,cannot / not allowed,,,,2,latex-reference-v2
-quick-responses.works-okay,works / okay,,,,2,latex-reference-v2
-quick-responses.does-not-work-no,does not work / no,,,,2,latex-reference-v2
-phone-translation.i-am-using-phone-translation,I am using phone translation,,,,2,latex-reference-v2
-phone-translation.please-speak-toward-the-phone,Please speak toward the phone,,,,2,latex-reference-v2
-phone-translation.one-sentence-at-a-time-please,"One sentence at a time, please",,,,2,latex-reference-v2
-phone-text-power.please-type-it-for-me,Please type it for me,,,,2,latex-reference-v2
+quick-responses.please-go-ahead,please / go ahead,,plˈiːz / ɡˌoʊ ɐhˈɛd,,2,latex-reference-v2;ipa=espeak
+quick-responses.yes-right,yes / right,,jˈɛs / ɹˈaɪt,,2,latex-reference-v2;ipa=espeak
+quick-responses.no-not,no / not,,nˈoʊ / nˈɑːt,,2,latex-reference-v2;ipa=espeak
+quick-responses.okay-can,okay / can,,oʊkˈeɪ / kˈæn,,2,latex-reference-v2;ipa=espeak
+quick-responses.cannot-not-allowed,cannot / not allowed,,kænˈɑːt / nˌɑːt ɐlˈaʊd,,2,latex-reference-v2;ipa=espeak
+quick-responses.works-okay,works / okay,,wˈɜːks / oʊkˈeɪ,,2,latex-reference-v2;ipa=espeak
+quick-responses.does-not-work-no,does not work / no,,dʌznˌɑːt wˈɜːk / nˈoʊ,,2,latex-reference-v2;ipa=espeak
+phone-translation.i-am-using-phone-translation,I am using phone translation,,aɪɐm jˈuːzɪŋ fˈoʊn tɹænslˈeɪʃən,,2,latex-reference-v2;ipa=espeak
+phone-translation.please-speak-toward-the-phone,Please speak toward the phone,,plˈiːz spˈiːk təwˈɔːɹd ðə fˈoʊn,,2,latex-reference-v2;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,"One sentence at a time, please",,"wˈʌn sˈɛntəns æɾə tˈaɪm, plˈiːz",,2,latex-reference-v2;ipa=espeak
+phone-text-power.please-type-it-for-me,Please type it for me,,plˈiːz tˈaɪp ɪt fɔːɹ mˌiː,,2,latex-reference-v2;ipa=espeak
 phone-translation.please-write-the-place-name,Please write the place name in {target},,,,2,language-slots-v1
-phone-text-power.please-use-simple-words,Please use simple words,,,,2,latex-reference-v2
-phone-text-power.my-phone-battery-is-low,My phone battery is low,,,,2,latex-reference-v2
-phone-text-power.do-you-have-a-power-bank,Do you have a power bank?,,,,2,latex-reference-v2
-phone-text-power.the-translation-may-be-inaccurate,The translation may be inaccurate,,,,2,latex-reference-v2
-phone-text-power.please-confirm,Please confirm,,,,2,latex-reference-v2
-social-basics.good-night,Good night,,,,2,japanese-reviewed-v6
-social-basics.okay-fine-i-am-okay,Okay / fine / I am okay,,,,2,japanese-reviewed-v6
-quick-responses.can-possible,can / possible,,,,2,japanese-reviewed-v6
-quick-responses.cannot-not-possible,cannot / not possible,,,,2,japanese-reviewed-v6
-quick-responses.okay-fine,okay / fine,,,,2,japanese-reviewed-v6
-quick-responses.no-good-not-allowed-will-not-work,no good / not allowed / will not work,,,,2,japanese-reviewed-v6
-communication.i-cannot-make-out-what-you-are-saying,I cannot make out what you are saying,,,,2,japanese-reviewed-v6
-communication.i-do-not-understand,I do not understand,,,,2,japanese-reviewed-v6
-communication.i-cannot-read-it,I cannot read it,,,,2,japanese-reviewed-v6
-communication.please-write-it-in-roman-letters,Please write it in Roman letters,,,,2,japanese-reviewed-v6
-phone-translation.please-type-it-and-show-me,Please type it and show me,,,,2,japanese-reviewed-v6
-phone-translation.please-look-at-the-screen,Please look at the screen,,,,2,japanese-reviewed-v6
-phone-text-power.may-i-charge-my-phone-here,May I charge my phone here?,,,,2,japanese-reviewed-v6
-sim-data.i-would-like-a-tourist-sim,I would like a tourist SIM card,,,,2,expansion-v1
-sim-data.may-i-use-your-wifi,May I use your Wi-Fi?,,,,2,expansion-v1
-sim-data.how-much-data-is-included,How much data is included?,,,,2,expansion-v1
-sim-data.do-you-need-my-passport,Do you need my passport?,,,,2,expansion-v1
-sim-data.how-long-is-it-valid,How long is it valid?,,,,2,expansion-v1
-sim-data.please-activate-it,Please activate it,,,,2,expansion-v1
-sim-data.do-you-have-an-esim,Do you have an eSIM?,,,,2,expansion-v1
-sim-data.my-data-is-not-working,My data is not working,,,,2,expansion-v1
-sim-data.does-it-need-registration,Does it need registration?,,,,2,expansion-v1
-sim-data.i-have-no-signal,I have no signal,,,,2,expansion-v1
-sim-data.please-write-the-wifi-password,Please write the Wi-Fi password,,,,2,expansion-v1
-sim-data.sim-card,SIM card,,,,2,expansion-v1
-sim-data.where-can-i-buy-a-plug-adapter,Where can I buy a plug adapter?,,,,2,expansion-v1
-sim-data.mobile-data,mobile data,,,,2,expansion-v1
-sim-data.can-i-top-up-this-sim,Can I top up this SIM?,,,,2,expansion-v1
-sim-data.top-up,top-up / recharge,,,,2,expansion-v1
-sim-data.is-there-coverage-in,Is there coverage in {}?,,,,2,expansion-v1
-sim-data.signal,signal / reception,,,,2,expansion-v1
-sim-data.esim,eSIM,,,,2,expansion-v1
-sim-data.prepaid,prepaid,,,,2,expansion-v1
-sim-data.roaming,roaming,,,,2,expansion-v1
-children.cannot-find-my-child,I cannot find my child,,,,2,expansion-v1
-children.make-an-announcement,Please make an announcement,,,,2,expansion-v1
-children.child-age,My child is {} years old,,,,2,expansion-v1
-children.high-chair,Do you have a high chair?,,,,2,expansion-v1
-children.baby-changing-room,Where is the baby changing room?,,,,2,expansion-v1
-children.childrens-menu,Is there a children's menu?,,,,2,expansion-v1
-children.suitable-for-children,Is this suitable for children?,,,,2,expansion-v1
-children.minimum-age,What is the minimum age?,,,,2,expansion-v1
-children.do-children-pay,Do children pay?,,,,2,expansion-v1
-children.crib,Do you have a crib?,,,,2,expansion-v1
-children.warm-this-bottle,Please warm this bottle,,,,2,expansion-v1
-children.car-seat,We need a child car seat,,,,2,expansion-v1
-children.stroller,stroller / pram,,,,2,expansion-v1
-children.playground,Is there a playground?,,,,2,expansion-v1
-etiquette.is-this-allowed,Is this allowed?,,,,2,expansion-v1
-etiquette.is-tipping-expected,Is tipping expected?,,,,2,expansion-v1
-etiquette.is-service-included,Is service included?,,,,2,expansion-v1
-etiquette.may-i-enter,May I enter?,,,,2,expansion-v1
-etiquette.remove-shoes,Should I remove my shoes?,,,,2,expansion-v1
-etiquette.photo-of-you,May I take a photo of you?,,,,2,expansion-v1
-etiquette.may-i-sit-here,May I sit here?,,,,2,expansion-v1
-etiquette.queue-for,Is this the queue for {}?,,,,2,expansion-v1
-etiquette.dressed-appropriately,Am I dressed appropriately?,,,,2,expansion-v1
-etiquette.did-not-mean-to-offend,I did not mean to offend,,,,2,expansion-v1
-etiquette.what-is-customary,What is customary here?,,,,2,expansion-v1
-etiquette.keep-the-change,Please keep the change,,,,2,expansion-v1
+phone-text-power.please-use-simple-words,Please use simple words,,plˈiːz jˈuːs sˈɪmpəl wˈɜːdz,,2,latex-reference-v2;ipa=espeak
+phone-text-power.my-phone-battery-is-low,My phone battery is low,,maɪ fˈoʊn bˈæɾɚɹi ɪz lˈoʊ,,2,latex-reference-v2;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,Do you have a power bank?,,dˈuː juː hæv ɐ pˈaʊɚ bˈæŋk,,2,latex-reference-v2;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,The translation may be inaccurate,,ðə tɹænslˈeɪʃən mˈeɪ biː ɪnˈækjʊɹət,,2,latex-reference-v2;ipa=espeak
+phone-text-power.please-confirm,Please confirm,,plˈiːz kənfˈɜːm,,2,latex-reference-v2;ipa=espeak
+social-basics.good-night,Good night,,ɡˈʊd nˈaɪt,,2,japanese-reviewed-v6;ipa=espeak
+social-basics.okay-fine-i-am-okay,Okay / fine / I am okay,,oʊkˈeɪ / fˈaɪn / aɪɐm oʊkˈeɪ,,2,japanese-reviewed-v6;ipa=espeak
+quick-responses.can-possible,can / possible,,kˈæn / pˈɑːsɪbəl,,2,japanese-reviewed-v6;ipa=espeak
+quick-responses.cannot-not-possible,cannot / not possible,,kænˈɑːt / nˌɑːt pˈɑːsɪbəl,,2,japanese-reviewed-v6;ipa=espeak
+quick-responses.okay-fine,okay / fine,,oʊkˈeɪ / fˈaɪn,,2,japanese-reviewed-v6;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,no good / not allowed / will not work,,nˈoʊ ɡˈʊd / nˌɑːt ɐlˈaʊd / wɪl nˌɑːt wˈɜːk,,2,japanese-reviewed-v6;ipa=espeak
+communication.i-cannot-make-out-what-you-are-saying,I cannot make out what you are saying,,aɪ kænˈɑːt mˌeɪk ˈaʊt wʌt juː ɑːɹ sˈeɪɪŋ,,2,japanese-reviewed-v6;ipa=espeak
+communication.i-do-not-understand,I do not understand,,aɪ duːnˌɑːt ˌʌndɚstˈænd,,2,japanese-reviewed-v6;ipa=espeak
+communication.i-cannot-read-it,I cannot read it,,aɪ kænˈɑːt ɹˈiːd ɪt,,2,japanese-reviewed-v6;ipa=espeak
+communication.please-write-it-in-roman-letters,Please write it in Roman letters,,plˈiːz ɹˈaɪt ɪɾ ɪn ɹˈoʊmən lˈɛɾɚz,,2,japanese-reviewed-v6;ipa=espeak
+phone-translation.please-type-it-and-show-me,Please type it and show me,,plˈiːz tˈaɪp ɪt ænd ʃˈoʊ mˌiː,,2,japanese-reviewed-v6;ipa=espeak
+phone-translation.please-look-at-the-screen,Please look at the screen,,plˈiːz lˈʊk æt ðə skɹˈiːn,,2,japanese-reviewed-v6;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,May I charge my phone here?,,mˈeɪ aɪ tʃˈɑːɹdʒ maɪ fˈoʊn hˈɪɹ,,2,japanese-reviewed-v6;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,I would like a tourist SIM card,,aɪ wʊd lˈaɪk ɐ tˈʊɹɹɪst ˌɛsˌaɪˈɛm kˈɑːɹd,,2,expansion-v1;ipa=espeak
+sim-data.may-i-use-your-wifi,May I use your Wi-Fi?,,mˈeɪ aɪ jˈuːz jʊɹ wˈaɪfˌaɪ,,2,expansion-v1;ipa=espeak
+sim-data.how-much-data-is-included,How much data is included?,,hˌaʊ mˈʌtʃ dˈeɪɾə ɪz ɪŋklˈuːdɪd,,2,expansion-v1;ipa=espeak
+sim-data.do-you-need-my-passport,Do you need my passport?,,dˈuː juː nˈiːd maɪ pˈæspoːɹt,,2,expansion-v1;ipa=espeak
+sim-data.how-long-is-it-valid,How long is it valid?,,hˌaʊ lˈɔŋ ɪz ɪt vˈælɪd,,2,expansion-v1;ipa=espeak
+sim-data.please-activate-it,Please activate it,,plˈiːz ˈæktɪvˌeɪt ɪt,,2,expansion-v1;ipa=espeak
+sim-data.do-you-have-an-esim,Do you have an eSIM?,,dˈuː juː hæv ɐn ˈiː ˌɛsˌaɪˈɛm,,2,expansion-v1;ipa=espeak
+sim-data.my-data-is-not-working,My data is not working,,maɪ dˈeɪɾə ɪz nˌɑːt wˈɜːkɪŋ,,2,expansion-v1;ipa=espeak
+sim-data.does-it-need-registration,Does it need registration?,,dˈʌz ɪt nˈiːd ɹˌɛdʒɪstɹˈeɪʃən,,2,expansion-v1;ipa=espeak
+sim-data.i-have-no-signal,I have no signal,,aɪ hæv nˈoʊ sˈɪɡnəl,,2,expansion-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,Please write the Wi-Fi password,,plˈiːz ɹˈaɪt ðə wˈaɪfˌaɪ pˈæswɜːd,,2,expansion-v1;ipa=espeak
+sim-data.sim-card,SIM card,,ˌɛsˌaɪˈɛm kˈɑːɹd,,2,expansion-v1;ipa=espeak
+sim-data.where-can-i-buy-a-plug-adapter,Where can I buy a plug adapter?,,wˌɛɹ kæn aɪ bˈaɪ ɐ plˈʌɡ ɐdˈæptɚ,,2,expansion-v1;ipa=espeak
+sim-data.mobile-data,mobile data,,mˈoʊbəl dˈeɪɾə,,2,expansion-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,Can I top up this SIM?,,kæn aɪ tˈɑːp ˌʌp ðɪs ˌɛsˌaɪˈɛm,,2,expansion-v1;ipa=espeak
+sim-data.top-up,top-up / recharge,,tˈɑːpʌp / ɹɪtʃˈɑːɹdʒ,,2,expansion-v1;ipa=espeak
+sim-data.is-there-coverage-in,Is there coverage in {}?,,ɪz ðɛɹ kˈʌvɚɹɪdʒ ˈɪn {},,2,expansion-v1;ipa=espeak
+sim-data.signal,signal / reception,,sˈɪɡnəl / ɹɪsˈɛpʃən,,2,expansion-v1;ipa=espeak
+sim-data.esim,eSIM,,ˈiː sˈɪm,,2,expansion-v1;ipa=espeak
+sim-data.prepaid,prepaid,,pɹɪpˈeɪd,,2,expansion-v1;ipa=espeak
+sim-data.roaming,roaming,,ɹˈoʊmɪŋ,,2,expansion-v1;ipa=espeak
+children.cannot-find-my-child,I cannot find my child,,aɪ kænˈɑːt fˈaɪnd maɪ tʃˈaɪld,,2,expansion-v1;ipa=espeak
+children.make-an-announcement,Please make an announcement,,plˈiːz mˌeɪk ɐn ɐnˈaʊnsmənt,,2,expansion-v1;ipa=espeak
+children.child-age,My child is {} years old,,maɪ tʃˈaɪld ɪz {} jˈɪɹz ˈoʊld,,2,expansion-v1;ipa=espeak
+children.high-chair,Do you have a high chair?,,dˈuː juː hæv ɐ hˈaɪ tʃˈɛɹ,,2,expansion-v1;ipa=espeak
+children.baby-changing-room,Where is the baby changing room?,,wˌɛɹ ɪz ðə bˈeɪbi tʃˈeɪndʒɪŋ ɹˈuːm,,2,expansion-v1;ipa=espeak
+children.childrens-menu,Is there a children's menu?,,ɪz ðɛɹ ɐ tʃˈɪldɹənz mˈɛnjuː,,2,expansion-v1;ipa=espeak
+children.suitable-for-children,Is this suitable for children?,,ɪz ðɪs sˈuːɾəbəl fɔːɹ tʃˈɪldɹən,,2,expansion-v1;ipa=espeak
+children.minimum-age,What is the minimum age?,,wˌʌt ɪz ðə mˈɪnɪməm ˈeɪdʒ,,2,expansion-v1;ipa=espeak
+children.do-children-pay,Do children pay?,,dˈuː tʃˈɪldɹən pˈeɪ,,2,expansion-v1;ipa=espeak
+children.crib,Do you have a crib?,,dˈuː juː hæv ɐ kɹˈɪb,,2,expansion-v1;ipa=espeak
+children.warm-this-bottle,Please warm this bottle,,plˈiːz wˈɔːɹm ðɪs bˈɑːɾəl,,2,expansion-v1;ipa=espeak
+children.car-seat,We need a child car seat,,wiː nˈiːd ɐ tʃˈaɪld kˈɑːɹ sˈiːt,,2,expansion-v1;ipa=espeak
+children.stroller,stroller / pram,,stɹˈoʊlɚ / pɹˈæm,,2,expansion-v1;ipa=espeak
+children.playground,Is there a playground?,,ɪz ðɛɹ ɐ plˈeɪɡɹaʊnd,,2,expansion-v1;ipa=espeak
+etiquette.is-this-allowed,Is this allowed?,,ɪz ðɪs ɐlˈaʊd,,2,expansion-v1;ipa=espeak
+etiquette.is-tipping-expected,Is tipping expected?,,ɪz tˈɪpɪŋ ɛkspˈɛktɪd,,2,expansion-v1;ipa=espeak
+etiquette.is-service-included,Is service included?,,ɪz sˈɜːvɪs ɪŋklˈuːdɪd,,2,expansion-v1;ipa=espeak
+etiquette.may-i-enter,May I enter?,,mˈeɪ aɪ ˈɛntɚ,,2,expansion-v1;ipa=espeak
+etiquette.remove-shoes,Should I remove my shoes?,,ʃˌʊd aɪ ɹɪmˈuːv maɪ ʃˈuːz,,2,expansion-v1;ipa=espeak
+etiquette.photo-of-you,May I take a photo of you?,,mˈeɪ aɪ tˈeɪk ɐ fˈoʊɾoʊ ʌv juː,,2,expansion-v1;ipa=espeak
+etiquette.may-i-sit-here,May I sit here?,,mˈeɪ aɪ sˈɪt hˈɪɹ,,2,expansion-v1;ipa=espeak
+etiquette.queue-for,Is this the queue for {}?,,ɪz ðɪs ðə kjˈuː fɔːɹ {},,2,expansion-v1;ipa=espeak
+etiquette.dressed-appropriately,Am I dressed appropriately?,,æm aɪ dɹˈɛst ɐpɹˈoʊpɹɪətli,,2,expansion-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,I did not mean to offend,,aɪ dɪdnˌɑːt mˈiːn tʊ əfˈɛnd,,2,expansion-v1;ipa=espeak
+etiquette.what-is-customary,What is customary here?,,wˌʌt ɪz kˈʌstəmˌɛɹi hˈɪɹ,,2,expansion-v1;ipa=espeak
+etiquette.keep-the-change,Please keep the change,,plˈiːz kˈiːp ðə tʃˈeɪndʒ,,2,expansion-v1;ipa=espeak
 social-basics.politeness-particles,"Thai politeness: end almost anything with khrap if you are male, kha if female. A woman asking a question says kha on a rising tone instead. The rows here leave the particle off, so add your own.",,,,2,coordinator-gaps-v2

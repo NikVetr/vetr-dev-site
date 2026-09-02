@@ -1,13 +1,13 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
-introductions.my-name-is,我叫{},,wǒ jiào {},,,2,latex-reference-v2
-introductions.nice-to-meet-you,很高兴认识你,,hěn gāoxìng rènshi nǐ,,,2,latex-reference-v2
-introductions.what-is-your-name,你叫什么名字？,,nǐ jiào shénme míngzi?,,,2,latex-reference-v2
-introductions.we-are-traveling-together,我们一起旅行,,wǒmen yìqǐ lǚxíng,,,2,latex-reference-v2
-introductions.this-is-my-friend,这是我的朋友,,zhè shì wǒ de péngyou,,,2,latex-reference-v2
-introductions.i-am-from,我来自{},,wǒ láizì {},,,2,zh-Hans-agent-v1
-introductions.where-are-you-from,你是哪里人？,,nǐ shì nǎlǐ rén?,,,2,zh-Hans-agent-v1
-introductions.how-are-you,你好吗？,,nǐ hǎo ma?,,,2,zh-Hans-agent-v1
-introductions.i-am-a-tourist,我是游客,,wǒ shì yóukè,,,2,zh-Hans-agent-v1
-introductions.this-is-my-husband-wife,这是我丈夫/妻子,,zhè shì wǒ zhàngfu / qīzi,,,2,zh-Hans-agent-v1
-introductions.this-is-my-daughter-son,这是我女儿/儿子,,zhè shì wǒ nǚ'ér / érzi,,,2,zh-Hans-agent-v1
-introductions.i-am-traveling-alone,我一个人旅行,,wǒ yí gè rén lǚxíng,,,2,zh-Hans-agent-v1
+introductions.my-name-is,我叫{},,wǒ jiào {},wɔ˧˩˧ tɕjɑʊ˥˩ {},,2,latex-reference-v2;ipa=pinyin
+introductions.nice-to-meet-you,很高兴认识你,,hěn gāoxìng rènshi nǐ,xən˧˩˧ kɑʊ˥ɕiŋ˥˩ ʐən˥˩ʂɨ ni˧˩˧,,2,latex-reference-v2;ipa=pinyin
+introductions.what-is-your-name,你叫什么名字？,,nǐ jiào shénme míngzi?,ni˧˩˧ tɕjɑʊ˥˩ ʂən˧˥mɤ miŋ˧˥tsɯ,,2,latex-reference-v2;ipa=pinyin
+introductions.we-are-traveling-together,我们一起旅行,,wǒmen yìqǐ lǚxíng,wɔ˧˩˧mən i˥˩tɕʰi˧˩˧ ly˧˩˧ɕiŋ˧˥,,2,latex-reference-v2;ipa=pinyin
+introductions.this-is-my-friend,这是我的朋友,,zhè shì wǒ de péngyou,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ tɤ pʰɤŋ˧˥joʊ,,2,latex-reference-v2;ipa=pinyin
+introductions.i-am-from,我来自{},,wǒ láizì {},wɔ˧˩˧ laɪ˧˥tsɯ˥˩ {},,2,zh-Hans-agent-v1;ipa=pinyin
+introductions.where-are-you-from,你是哪里人？,,nǐ shì nǎlǐ rén?,ni˧˩˧ ʂɨ˥˩ na˧˩˧li˧˩˧ ʐən˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+introductions.how-are-you,你好吗？,,nǐ hǎo ma?,ni˧˩˧ xɑʊ˧˩˧ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+introductions.i-am-a-tourist,我是游客,,wǒ shì yóukè,wɔ˧˩˧ ʂɨ˥˩ joʊ˧˥kʰɤ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+introductions.this-is-my-husband-wife,这是我丈夫/妻子,,zhè shì wǒ zhàngfu / qīzi,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ʈʂɑŋ˥˩fu / tɕʰi˥tsɯ,,2,zh-Hans-agent-v1;ipa=pinyin
+introductions.this-is-my-daughter-son,这是我女儿/儿子,,zhè shì wǒ nǚ'ér / érzi,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ny˧˩˧ɑɻ˧˥ / ɑɻ˧˥tsɯ,,2,zh-Hans-agent-v1;ipa=pinyin
+introductions.i-am-traveling-alone,我一个人旅行,,wǒ yí gè rén lǚxíng,wɔ˧˩˧ i˧˥ kɤ˥˩ ʐən˧˥ ly˧˩˧ɕiŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin

@@ -452,9 +452,12 @@ test('a column with nothing to print says so, and stops once it is filled', asyn
   // The default columns all have content, and `numeral` -- which is the gloss cell
   // under another name and rides in the set unconditionally -- is never reported.
   assert.deepEqual(dead(off), []);
-  assert.deepEqual(dead(on), ['ipa']);
-  // And the report is true: asking for the column really does change nothing.
-  assert.equal(runs(on), runs(off));
+  // And `ipa` is not reported either, any more. This test asserted the opposite
+  // until `scripts/build_ipa.py` filled the column, and its own comment predicted
+  // that: the honest report is about the data, so it has to clear itself when the
+  // data arrives. Switching the column on now adds runs rather than nothing.
+  assert.deepEqual(dead(on), []);
+  assert.ok(runs(on) > runs(off), `${runs(on)} runs with ipa against ${runs(off)} without`);
 
   // One value, in the shape `ui/io.js` imports one, and the column is alive.
   const ipa = 'koɲ.ɲi.tɕi.wa';

@@ -1,47 +1,47 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,Mimi,,,,2,sw-agent-v1
-pronouns-verbs.we-us,Sisi,,,,2,sw-agent-v1
-pronouns-verbs.you,Wewe,,,,2,sw-agent-v1
-pronouns-verbs.you-polite,Ninyi,Nyinyi,,"plural, used for respect",2,sw-agent-v1
-pronouns-verbs.he-him,Yeye,,,,2,sw-agent-v1
-pronouns-verbs.she-her,Yeye,,,same word for he and she,2,sw-agent-v1
-pronouns-verbs.they-them,Wao,,,,2,sw-agent-v1
-pronouns-verbs.my-mine,yangu / wangu,changu · langu · zangu,,prefix follows the noun,2,sw-agent-v1
-pronouns-verbs.your-yours,yako / wako,chako · lako · zako,,prefix follows the noun,2,sw-agent-v1
-pronouns-verbs.be-called-call,Kuitwa,Kuita,,,2,sw-agent-v1
-pronouns-verbs.have,Nina,Kuwa na,,I have,2,sw-agent-v1
-pronouns-verbs.do-not-have,Sina,,,I do not have,2,sw-agent-v1
-pronouns-verbs.go,Kwenda,Naenda,,,2,sw-agent-v1
-pronouns-verbs.come,Kuja,Ninakuja,,,2,sw-agent-v1
-pronouns-verbs.would-like,Ningependa,,,I would like,2,sw-agent-v1
-pronouns-verbs.want,Kutaka,Nataka,,,2,sw-agent-v1
-pronouns-verbs.look-for,Kutafuta,Natafuta,,,2,sw-agent-v1
-pronouns-verbs.buy,Kununua,Ninanunua,,,2,sw-agent-v1
-pronouns-verbs.like,Kupenda,Napenda,,,2,sw-agent-v1
-pronouns-verbs.need,Kuhitaji,Nahitaji,,,2,sw-agent-v1
-pronouns-verbs.there-is-have,Kuna,,,there is,2,sw-agent-v1
-pronouns-verbs.there-is-not-do-not-have,Hakuna,,,there is not,2,sw-agent-v1
-pronouns-verbs.want-to-verb,Nataka + kitenzi,,,,2,sw-agent-v1
-pronouns-verbs.want-thing,Nataka + kitu,,,,2,sw-agent-v1
-pronouns-verbs.need-thing,Nahitaji + kitu,,,,2,sw-agent-v1
-pronouns-verbs.looking-for-thing,Natafuta + kitu,,,,2,sw-agent-v1
-question-words.what,Nini,,,,2,sw-agent-v1
-question-words.where,Wapi,,,,2,sw-agent-v1
-question-words.who,Nani,,,,2,sw-agent-v1
-question-words.which-one,Gani,Ipi,,gani never changes,2,sw-agent-v1
-question-words.when,Lini,,,,2,sw-agent-v1
-question-words.how,Vipi,Namna gani,,,2,sw-agent-v1
-question-words.how-much-many,Kiasi gani,,,,2,sw-agent-v1
-question-words.how-many,Ngapi,,,,2,sw-agent-v1
-question-words.why,Kwa nini,,,,2,sw-agent-v1
-question-words.this,Hii / hiki / huyu,,,form follows the noun,2,sw-agent-v1
-question-words.that,Hiyo / hicho / huyo,,,form follows the noun,2,sw-agent-v1
-question-words.here,Hapa,,,,2,sw-agent-v1
-question-words.there,Pale,Huko,,,2,sw-agent-v1
-question-words.a-little,Kidogo,,,,2,sw-agent-v1
-question-words.some,Baadhi,Chache,,some of,2,sw-agent-v1
-question-words.very,Sana,,,,2,sw-agent-v1
-question-words.too,Mno,,,"too much, excessively",2,sw-agent-v1
-question-words.also,Pia,,,,2,sw-agent-v1
-question-words.all-both,Yote / zote / wote,,,prefix follows the noun,2,sw-agent-v1
-question-words.how-much-what-price,Bei gani?,,,,2,sw-agent-v1
+pronouns-verbs.i-me,Mimi,,mˈimi,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.we-us,Sisi,,sˈisi,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.you,Wewe,,wˈewe,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.you-polite,Ninyi,Nyinyi,nˈiɲi,"plural, used for respect",2,sw-agent-v1;ipa=espeak
+pronouns-verbs.he-him,Yeye,,jˈeje,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.she-her,Yeye,,jˈeje,same word for he and she,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.they-them,Wao,,wˈao,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.my-mine,yangu / wangu,changu · langu · zangu,jˈaŋɡu / wˈaŋɡu,prefix follows the noun,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,yako / wako,chako · lako · zako,jˈako / wˈako,prefix follows the noun,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.be-called-call,Kuitwa,Kuita,kuˈitwa,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.have,Nina,Kuwa na,nˈina,I have,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.do-not-have,Sina,,sˈina,I do not have,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.go,Kwenda,Naenda,kwˈenda,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.come,Kuja,Ninakuja,kˈuɟa,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.would-like,Ningependa,,nˌiŋɡepˈenda,I would like,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.want,Kutaka,Nataka,kutˈaka,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.look-for,Kutafuta,Natafuta,kˌutafˈuta,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.buy,Kununua,Ninanunua,kˌununˈua,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.like,Kupenda,Napenda,kupˈenda,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.need,Kuhitaji,Nahitaji,kˌuhitˈaɟi,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.there-is-have,Kuna,,kˈuna,there is,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,Hakuna,,hakˈuna,there is not,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,Nataka + kitenzi,,natˈaka kitˈenzi,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,Nataka + kitu,,natˈaka kˈitu,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,Nahitaji + kitu,,nˌahitˈaɟi kˈitu,,2,sw-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,Natafuta + kitu,,nˌatafˈuta kˈitu,,2,sw-agent-v1;ipa=espeak
+question-words.what,Nini,,nˈini,,2,sw-agent-v1;ipa=espeak
+question-words.where,Wapi,,wˈapi,,2,sw-agent-v1;ipa=espeak
+question-words.who,Nani,,nˈani,,2,sw-agent-v1;ipa=espeak
+question-words.which-one,Gani,Ipi,ɡˈani,gani never changes,2,sw-agent-v1;ipa=espeak
+question-words.when,Lini,,lˈini,,2,sw-agent-v1;ipa=espeak
+question-words.how,Vipi,Namna gani,vˈipi,,2,sw-agent-v1;ipa=espeak
+question-words.how-much-many,Kiasi gani,,kiˈasi ɡˈani,,2,sw-agent-v1;ipa=espeak
+question-words.how-many,Ngapi,,ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+question-words.why,Kwa nini,,kwa nˈini,,2,sw-agent-v1;ipa=espeak
+question-words.this,Hii / hiki / huyu,,hˌii / hˈiki / hˈuju,form follows the noun,2,sw-agent-v1;ipa=espeak
+question-words.that,Hiyo / hicho / huyo,,hˈijo / hˈitʃo / hˈujo,form follows the noun,2,sw-agent-v1;ipa=espeak
+question-words.here,Hapa,,hˈapa,,2,sw-agent-v1;ipa=espeak
+question-words.there,Pale,Huko,pˈale,,2,sw-agent-v1;ipa=espeak
+question-words.a-little,Kidogo,,kidˈoɡo,,2,sw-agent-v1;ipa=espeak
+question-words.some,Baadhi,Chache,baˈaði,some of,2,sw-agent-v1;ipa=espeak
+question-words.very,Sana,,sˈana,,2,sw-agent-v1;ipa=espeak
+question-words.too,Mno,,ˈm̩no,"too much, excessively",2,sw-agent-v1;ipa=espeak
+question-words.also,Pia,,pˈia,,2,sw-agent-v1;ipa=espeak
+question-words.all-both,Yote / zote / wote,,jˈote / zˈote / wˈote,prefix follows the noun,2,sw-agent-v1;ipa=espeak
+question-words.how-much-what-price,Bei gani?,,bˈei ɡˈani,,2,sw-agent-v1;ipa=espeak

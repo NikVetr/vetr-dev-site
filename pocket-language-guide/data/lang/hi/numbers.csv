@@ -1,43 +1,43 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
-numbers-money.l-ng,शून्य,,śūnya,,,2,hi-agent-v1
-numbers-money.y,एक,,ek,,,2,hi-agent-v1
-numbers-money.r,दो,,do,,,2,hi-agent-v1
-numbers-money.s-n,तीन,,tīn,,,2,hi-agent-v1
-numbers-money.s,चार,,cār,,,2,hi-agent-v1
-numbers-money.w,पाँच,,pāṁc,,,2,hi-agent-v1
-numbers-money.li,छह,,chah,,,2,hi-agent-v1
-numbers-money.q,सात,,sāt,,,2,hi-agent-v1
-numbers-money.b,आठ,,āṭh,,,2,hi-agent-v1
-numbers-money.ji,नौ,,nau,,,2,hi-agent-v1
-numbers-money.sh,दस,,das,,,2,hi-agent-v1
-numbers-money.y-b-i,सौ,,sau,,,2,hi-agent-v1
-numbers-money.y-qi-n,हज़ार,,hazār,,,2,hi-agent-v1
-numbers-money.y-w-n,दस हज़ार,,das hazār,,,2,hi-agent-v1
-numbers-money.b-n,आधा,,ādhā,,,2,hi-agent-v1
-atm-cash.where-is-an-atm,एटीएम कहाँ है?,,eṭīem kahāṁ hai?,,,2,hi-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,क्या इसमें विदेशी कार्ड चलते हैं?,,kyā ismeṁ videśī kārḍ calte haiṁ?,,,2,hi-agent-v1
-atm-cash.the-atm-kept-my-card,एटीएम ने मेरा कार्ड रख लिया,,eṭīem ne merā kārḍ rakh liyā,,,2,hi-agent-v1
-atm-cash.is-there-a-fee,क्या चार्ज लगेगा?,,kyā cārj lagegā?,,,2,hi-agent-v1
-atm-cash.the-card-was-declined,कार्ड नहीं चला,,kārḍ nahīṁ calā,,,2,hi-agent-v1
-atm-cash.what-is-the-exchange-rate,एक्सचेंज रेट क्या है?,,eksceṁj reṭ kyā hai?,,,2,hi-agent-v1
-atm-cash.no-money-came-out,पैसे नहीं निकले,,paise nahīṁ nikle,,,2,hi-agent-v1
-atm-cash.where-can-i-change-money,पैसे बदलने की जगह कहाँ है?,,paise badalne kī jagah kahāṁ hai?,,,2,hi-agent-v1
-atm-cash.the-machine-is-out-of-service,मशीन खराब है,,maśīn kharāb hai,,,2,hi-agent-v1
-atm-cash.please-give-me-smaller-notes,छोटे नोट दीजिए,,choṭe noṭ dījie,,,2,hi-agent-v1
-atm-cash.do-you-have-change,क्या छुट्टे हैं?,,kyā chuṭṭe haiṁ?,,small change,2,hi-agent-v1
-atm-cash.may-i-pay-in,क्या {} चलेगा?,,kyā {} calegā?,,will {} be accepted,2,hi-agent-v1
-atm-cash.please-charge-in-local-currency,रुपये में चार्ज कीजिए,,rupaye meṁ cārj kījie,,,2,hi-agent-v1
-atm-cash.where-can-i-get-coins,सिक्के कहाँ मिलेंगे?,,sikke kahāṁ mileṁge?,,,2,hi-agent-v1
-atm-cash.is-there-a-minimum-for-cards,कार्ड के लिए कम से कम कितना?,,kārḍ ke lie kam se kam kitnā?,,,2,hi-agent-v1
-atm-cash.atm,एटीएम,,eṭīem,,,2,hi-agent-v1
-atm-cash.banknote,नोट,,noṭ,,,2,hi-agent-v1
-atm-cash.coin,सिक्का,,sikkā,,,2,hi-agent-v1
-atm-cash.cash-only,सिर्फ़ नकद,,sirf nakad,,,2,hi-agent-v1
-atm-cash.fee,फ़ीस,कमीशन,fīs,,,2,hi-agent-v1
-atm-cash.change,बाकी पैसे,छुट्टे,bākī paise,,money returned,2,hi-agent-v1
-atm-cash.exchange-rate,एक्सचेंज रेट,,eksceṁj reṭ,,,2,hi-agent-v1
-atm-cash.bank,बैंक,,baiṁk,,,2,hi-agent-v1
-atm-cash.money-exchange,मनी एक्सचेंज,विदेशी मुद्रा,manī eksceṁj,,,2,hi-agent-v1
-atm-cash.pin,पिन,पिन नंबर,pin,,,2,hi-agent-v1
+numbers-money.l-ng,शून्य,,śūnya,ʃˈuːnjə,,2,hi-agent-v1;ipa=espeak
+numbers-money.y,एक,,ek,ˈeːk,,2,hi-agent-v1;ipa=espeak
+numbers-money.r,दो,,do,dˈoː,,2,hi-agent-v1;ipa=espeak
+numbers-money.s-n,तीन,,tīn,tˈiːn,,2,hi-agent-v1;ipa=espeak
+numbers-money.s,चार,,cār,cˈaːɾ,,2,hi-agent-v1;ipa=espeak
+numbers-money.w,पाँच,,pāṁc,pˈãnc,,2,hi-agent-v1;ipa=espeak
+numbers-money.li,छह,,chah,cʰˈʌh,,2,hi-agent-v1;ipa=espeak
+numbers-money.q,सात,,sāt,sˈaːt,,2,hi-agent-v1;ipa=espeak
+numbers-money.b,आठ,,āṭh,ˈaːʈʰ,,2,hi-agent-v1;ipa=espeak
+numbers-money.ji,नौ,,nau,nˈɔː,,2,hi-agent-v1;ipa=espeak
+numbers-money.sh,दस,,das,dˈʌs,,2,hi-agent-v1;ipa=espeak
+numbers-money.y-b-i,सौ,,sau,sˈɔː,,2,hi-agent-v1;ipa=espeak
+numbers-money.y-qi-n,हज़ार,,hazār,həzˈaːɾ,,2,hi-agent-v1;ipa=espeak
+numbers-money.y-w-n,दस हज़ार,,das hazār,dˈʌs həzˈaːɾ,,2,hi-agent-v1;ipa=espeak
+numbers-money.b-n,आधा,,ādhā,ˈaːdʰaː,,2,hi-agent-v1;ipa=espeak
+atm-cash.where-is-an-atm,एटीएम कहाँ है?,,eṭīem kahāṁ hai?,ˌeːʈiˈeːm kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,क्या इसमें विदेशी कार्ड चलते हैं?,,kyā ismeṁ videśī kārḍ calte haiṁ?,kːjaː ˈɪsmˌẽː ʋɪdˈeːʃi kˈaːɾɖ cˈʌltˌeː hɛ̃,,2,hi-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,एटीएम ने मेरा कार्ड रख लिया,,eṭīem ne merā kārḍ rakh liyā,ˌeːʈiˈeːm nˈeː mˌeːɾaː kˈaːɾɖ ɾˈʌkʰ lˈɪjaː,,2,hi-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,क्या चार्ज लगेगा?,,kyā cārj lagegā?,kːjaː cˈaːɾɟ ləɡˈeːɡaː,,2,hi-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,कार्ड नहीं चला,,kārḍ nahīṁ calā,kˈaːɾɖ nˈʌhĩ cˈʌlaː,,2,hi-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,एक्सचेंज रेट क्या है?,,eksceṁj reṭ kyā hai?,ˈeːksəcˌẽːɟ ɾˈeːʈ kːjaː hɛː,,2,hi-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,पैसे नहीं निकले,,paise nahīṁ nikle,pˈɛːseː nˈʌhĩ nˈɪklˌeː,,2,hi-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,पैसे बदलने की जगह कहाँ है?,,paise badalne kī jagah kahāṁ hai?,pˈɛːseː bˈʌdəlneː ki ɟˈʌɡəh kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,मशीन खराब है,,maśīn kharāb hai,məʃˈiːn kʰəɾˈaːb hɛː,,2,hi-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,छोटे नोट दीजिए,,choṭe noṭ dījie,cʰˈoːʈeː nˈoːʈ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,क्या छुट्टे हैं?,,kyā chuṭṭe haiṁ?,kːjaː cʰˈʊʈʈeː hɛ̃,small change,2,hi-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,क्या {} चलेगा?,,kyā {} calegā?,kːjaː {} cəlˈeːɡaː,will {} be accepted,2,hi-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,रुपये में चार्ज कीजिए,,rupaye meṁ cārj kījie,ɾˈʊpjˌeː mẽː cˈaːɾɟ kˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,सिक्के कहाँ मिलेंगे?,,sikke kahāṁ mileṁge?,sˈɪkːeː kˈʌhã mɪlˈẽːɡeː,,2,hi-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,कार्ड के लिए कम से कम कितना?,,kārḍ ke lie kam se kam kitnā?,kˈaːɾɖ keː lˈɪeː kˈʌm seː kˈʌm kˈɪtnˌaː,,2,hi-agent-v1;ipa=espeak
+atm-cash.atm,एटीएम,,eṭīem,ˌeːʈiˈeːm,,2,hi-agent-v1;ipa=espeak
+atm-cash.banknote,नोट,,noṭ,nˈoːʈ,,2,hi-agent-v1;ipa=espeak
+atm-cash.coin,सिक्का,,sikkā,sˈɪkːaː,,2,hi-agent-v1;ipa=espeak
+atm-cash.cash-only,सिर्फ़ नकद,,sirf nakad,sˈɪrf nˈʌkəd,,2,hi-agent-v1;ipa=espeak
+atm-cash.fee,फ़ीस,कमीशन,fīs,fˈiːs,,2,hi-agent-v1;ipa=espeak
+atm-cash.change,बाकी पैसे,छुट्टे,bākī paise,bˈaːki pˈɛːseː,money returned,2,hi-agent-v1;ipa=espeak
+atm-cash.exchange-rate,एक्सचेंज रेट,,eksceṁj reṭ,ˈeːksəcˌẽːɟ ɾˈeːʈ,,2,hi-agent-v1;ipa=espeak
+atm-cash.bank,बैंक,,baiṁk,bˈɛ̃k,,2,hi-agent-v1;ipa=espeak
+atm-cash.money-exchange,मनी एक्सचेंज,विदेशी मुद्रा,manī eksceṁj,mˈʌni ˈeːksəcˌẽːɟ,,2,hi-agent-v1;ipa=espeak
+atm-cash.pin,पिन,पिन नंबर,pin,pˈɪn,,2,hi-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"संख्याएँ जोड़कर बनती हैं: 11 = shi yi, 20 = er shi, 21 = er shi yi। फ़ोन पर 1 अक्सर yao बोला जाता है। गिनती सीधे संज्ञा के साथ नहीं आती — बीच में एक मापक शब्द ज़रूरी है, यानी दो टिकट के लिए liang zhang piao। ge (आम), wei (लोग), zhang (टिकट और चपटी चीज़ें), bei (प्याले), ping (बोतलें)। बोलचाल में yuan को kuai कहते हैं; jiao / mao = 0.1 yuan, fen = 0.01 yuan।",,,,,2,hi-notes-v1
 numbers-money.number-and-classifier-notes-2,"संख्याएँ जोड़कर बनती हैं: 11 = juuichi, 20 = nijuu, 21 = nijuuichi। गिनने के लिए संख्या के बाद एक प्रत्यय लगता है, जो चीज़ के आकार से तय होता है: -tsu (आम चीज़ें), -mai (चपटी), -hon (लंबी), -nin (लोग), -hai (प्याले)। फ़ोन नंबर बोलते समय: 0 = zero या maru, 4 = yon, 7 = nana, 9 = kyuu; बीच का हाइफ़न no पढ़ा जाता है।",,,,,2,hi-notes-v1

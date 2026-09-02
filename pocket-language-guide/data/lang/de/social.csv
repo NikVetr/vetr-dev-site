@@ -1,101 +1,101 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-sim-data.i-would-like-a-tourist-sim,Ich möchte eine Prepaid-SIM-Karte.,,,,2,de-agent-v1
-children.cannot-find-my-child,Ich finde mein Kind nicht!,,,,2,de-agent-v1
-etiquette.is-this-allowed,Ist das erlaubt?,,,,2,de-agent-v1
-sim-data.may-i-use-your-wifi,Darf ich Ihr WLAN benutzen?,,,,2,de-agent-v1
+sim-data.i-would-like-a-tourist-sim,Ich möchte eine Prepaid-SIM-Karte.,,ɪç mˈœçtə ˌaɪnə pɾˈeːpaɪtˌɛsˌiːɛmkaɾtə,,2,de-agent-v1;ipa=espeak
+children.cannot-find-my-child,Ich finde mein Kind nicht!,,ɪç fˈɪndə maɪn kˈɪnt nˈɪçt,,2,de-agent-v1;ipa=espeak
+etiquette.is-this-allowed,Ist das erlaubt?,,ɪst das ɛɾlˈaʊpt,,2,de-agent-v1;ipa=espeak
+sim-data.may-i-use-your-wifi,Darf ich Ihr WLAN benutzen?,,dˈaɾf ɪç iːɾ vˈeːlɑːn bənˈʊtsən,,2,de-agent-v1;ipa=espeak
 children.make-an-announcement,Bitte machen Sie eine Durchsage.,,,,2,de-agent-v1
-etiquette.is-tipping-expected,Ist Trinkgeld üblich?,,,,2,de-agent-v1
-sim-data.how-much-data-is-included,Wie viel Datenvolumen ist dabei?,,,,2,de-agent-v1
-children.child-age,Mein Kind ist {} Jahre alt.,,,,2,de-agent-v1
-etiquette.is-service-included,Ist die Bedienung inklusive?,Ist der Service inklusive?,,,2,de-agent-v1
-sim-data.do-you-need-my-passport,Brauchen Sie meinen Pass?,,,,2,de-agent-v1
-children.high-chair,Haben Sie einen Hochstuhl?,,,,2,de-agent-v1
-etiquette.may-i-enter,Darf ich hereinkommen?,,,,2,de-agent-v1
-sim-data.how-long-is-it-valid,Wie lange ist es gültig?,,,,2,de-agent-v1
-children.baby-changing-room,Wo ist der Wickelraum?,,,,2,de-agent-v1
-etiquette.remove-shoes,Soll ich die Schuhe ausziehen?,,,,2,de-agent-v1
-sim-data.please-activate-it,Bitte die SIM-Karte aktivieren.,,,,2,de-agent-v1
-children.childrens-menu,Gibt es eine Kinderkarte?,,,,2,de-agent-v1
-etiquette.photo-of-you,Darf ich Sie fotografieren?,,,,2,de-agent-v1
-sim-data.do-you-have-an-esim,Haben Sie eine eSIM?,,,,2,de-agent-v1
-children.suitable-for-children,Ist das für Kinder geeignet?,,,,2,de-agent-v1
-etiquette.may-i-sit-here,Darf ich hier sitzen?,Ist hier noch frei?,,,2,de-agent-v1
-sim-data.my-data-is-not-working,Meine mobilen Daten gehen nicht.,,,,2,de-agent-v1
-children.minimum-age,Wie ist das Mindestalter?,,,,2,de-agent-v1
-etiquette.queue-for,Ist das die Schlange für {}?,,,,2,de-agent-v1
-sim-data.does-it-need-registration,Muss ich sie registrieren?,,,,2,de-agent-v1
-children.do-children-pay,Zahlen Kinder auch?,,,,2,de-agent-v1
-etiquette.dressed-appropriately,Ist meine Kleidung so in Ordnung?,,,,2,de-agent-v1
-sim-data.i-have-no-signal,Ich habe keinen Empfang.,,,,2,de-agent-v1
-children.crib,Haben Sie ein Kinderbett?,Haben Sie ein Babybett?,,,2,de-agent-v1
-etiquette.did-not-mean-to-offend,Das war nicht böse gemeint.,,,,2,de-agent-v1
-sim-data.please-write-the-wifi-password,Bitte das WLAN-Passwort aufschreiben.,,,,2,de-agent-v1
-children.warm-this-bottle,Bitte das Fläschchen erwärmen.,,,,2,de-agent-v1
-etiquette.what-is-customary,Was ist hier üblich?,,,,2,de-agent-v1
-sim-data.sim-card,SIM-Karte,,,,2,de-agent-v1
-children.car-seat,Wir brauchen einen Kindersitz.,,,,2,de-agent-v1
-etiquette.keep-the-change,Stimmt so.,Behalten Sie das Wechselgeld.,,that's right as it is,2,de-agent-v1
-sim-data.where-can-i-buy-a-plug-adapter,Wo gibt es einen Reiseadapter?,Wo gibt es einen Steckeradapter?,,,2,de-agent-v1
-children.stroller,Kinderwagen,Buggy,,,2,de-agent-v1
-sim-data.mobile-data,mobile Daten,Datenvolumen,,,2,de-agent-v1
-children.playground,Gibt es einen Spielplatz?,,,,2,de-agent-v1
-sim-data.can-i-top-up-this-sim,Kann ich die SIM aufladen?,,,,2,de-agent-v1
-sim-data.top-up,aufladen,Guthaben aufladen,,,2,de-agent-v1
-sim-data.is-there-coverage-in,Gibt es Empfang in {}?,,,,2,de-agent-v1
-sim-data.signal,Empfang,Netz,,,2,de-agent-v1
-sim-data.esim,eSIM,,,,2,de-agent-v1
-sim-data.prepaid,Prepaid,,,,2,de-agent-v1
-sim-data.roaming,Roaming,,,,2,de-agent-v1
-social-basics.hello,Hallo,Grüß Gott,,,2,de-agent-v1
-social-basics.hello-polite,Guten Tag,Grüß Gott,,,2,de-agent-v1
-social-basics.good-morning,Guten Morgen,,,,2,de-agent-v1
-social-basics.good-evening,Guten Abend,,,,2,de-agent-v1
-social-basics.goodbye,Auf Wiedersehen,Tschüss,,,2,de-agent-v1
-social-basics.thank-you,Danke,Danke schön,,,2,de-agent-v1
-social-basics.you-are-welcome,Bitte,Gern,,,2,de-agent-v1
-social-basics.excuse-me-sorry,Entschuldigung,,,,2,de-agent-v1
-social-basics.sorry,Tut mir leid,Verzeihung,,,2,de-agent-v1
-social-basics.no-problem,Kein Problem,,,,2,de-agent-v1
-social-basics.i-do-not-know,Ich weiß nicht.,,,,2,de-agent-v1
-social-basics.good-night,Gute Nacht,,,,2,de-agent-v1
-social-basics.okay-fine-i-am-okay,Alles gut.,In Ordnung,,,2,de-agent-v1
+etiquette.is-tipping-expected,Ist Trinkgeld üblich?,,ɪst tɾˈɪŋkɡɛlt ˈyːplɪç,,2,de-agent-v1;ipa=espeak
+sim-data.how-much-data-is-included,Wie viel Datenvolumen ist dabei?,,viː fˈiːl dˈɑːtənvˌoːlʊmən ɪst dɑːbˈaɪ,,2,de-agent-v1;ipa=espeak
+children.child-age,Mein Kind ist {} Jahre alt.,,maɪn kˈɪnt ɪst {} jˈɑːrə ˈalt,,2,de-agent-v1;ipa=espeak
+etiquette.is-service-included,Ist die Bedienung inklusive?,Ist der Service inklusive?,ɪst diː bədˈiːnʊŋ ɪnkluːzˈiːvə,,2,de-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,Brauchen Sie meinen Pass?,,bɾˈaʊxən ziː mˌaɪnən pˈas,,2,de-agent-v1;ipa=espeak
+children.high-chair,Haben Sie einen Hochstuhl?,,hˌɑːbən ziː ˌaɪnən hˈoːxʃtˌuːl,,2,de-agent-v1;ipa=espeak
+etiquette.may-i-enter,Darf ich hereinkommen?,,dˈaɾf ɪç hɛrˈaɪnkˌɔmən,,2,de-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,Wie lange ist es gültig?,,viː lˈaŋə ɪst ɛs ɡˈyltɪç,,2,de-agent-v1;ipa=espeak
+children.baby-changing-room,Wo ist der Wickelraum?,,vˌoː ɪst dɛɾ vˈɪkəlrˌaʊm,,2,de-agent-v1;ipa=espeak
+etiquette.remove-shoes,Soll ich die Schuhe ausziehen?,,zˌɔl ɪç diː ʃˈuːə ˈaʊstsˌiːən,,2,de-agent-v1;ipa=espeak
+sim-data.please-activate-it,Bitte die SIM-Karte aktivieren.,,bˈɪtə diː ˌɛsˌiːˈɛmkaɾtə ˌaktiːvˈiːrən,,2,de-agent-v1;ipa=espeak
+children.childrens-menu,Gibt es eine Kinderkarte?,,ɡˈiːpt ɛs ˌaɪnə kˈɪndɜkˌaɾtə,,2,de-agent-v1;ipa=espeak
+etiquette.photo-of-you,Darf ich Sie fotografieren?,,dˈaɾf ɪç ziː fˌoːtoːɡɾafˈiːrən,,2,de-agent-v1;ipa=espeak
+sim-data.do-you-have-an-esim,Haben Sie eine eSIM?,,hˌɑːbən ziː ˌaɪnə ˈeː ˌɛsˌiːˈɛm,,2,de-agent-v1;ipa=espeak
+children.suitable-for-children,Ist das für Kinder geeignet?,,ɪst das fyːɾ kˈɪndɜ ɡəˈaɪɡnət,,2,de-agent-v1;ipa=espeak
+etiquette.may-i-sit-here,Darf ich hier sitzen?,Ist hier noch frei?,dˈaɾf ɪç hˈiːɾ zˈɪtsən,,2,de-agent-v1;ipa=espeak
+sim-data.my-data-is-not-working,Meine mobilen Daten gehen nicht.,,mˌaɪnə moːbˈiːlən dˈɑːtən ɡˈeːən nˈɪçt,,2,de-agent-v1;ipa=espeak
+children.minimum-age,Wie ist das Mindestalter?,,viː ɪst das mˈɪndɛstˌaltɜ,,2,de-agent-v1;ipa=espeak
+etiquette.queue-for,Ist das die Schlange für {}?,,ɪst das diː ʃlˈaŋə fˈyːɾ {},,2,de-agent-v1;ipa=espeak
+sim-data.does-it-need-registration,Muss ich sie registrieren?,,mˈʊs ɪç ziː rˌeːɡɪstɾˈiːrən,,2,de-agent-v1;ipa=espeak
+children.do-children-pay,Zahlen Kinder auch?,,tsˈɑːlən kˈɪndɜ ˌaʊx,,2,de-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,Ist meine Kleidung so in Ordnung?,,ɪst mˌaɪnə klˈaɪdʊŋ zoː ɪn ˈɔɾdnʊŋ,,2,de-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,Ich habe keinen Empfang.,,ɪç hɑːbə kˈaɪnən ɛmpfˈaŋ,,2,de-agent-v1;ipa=espeak
+children.crib,Haben Sie ein Kinderbett?,Haben Sie ein Babybett?,hˌɑːbən ziː aɪn kˌɪndɜbˈɛt,,2,de-agent-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,Das war nicht böse gemeint.,,das vɑːɾ nˈɪçt bˈøːzə ɡəmˈaɪnt,,2,de-agent-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,Bitte das WLAN-Passwort aufschreiben.,,bˈɪtə das vˈeːlɑːnpasvɔɾt ˈaʊfʃrˌaɪbən,,2,de-agent-v1;ipa=espeak
+children.warm-this-bottle,Bitte das Fläschchen erwärmen.,,bˈɪtə das flˈɛʃçən ɛɾvˈɛɾmən,,2,de-agent-v1;ipa=espeak
+etiquette.what-is-customary,Was ist hier üblich?,,vˈas ɪst hˈiːɾ ˈyːplɪç,,2,de-agent-v1;ipa=espeak
+sim-data.sim-card,SIM-Karte,,ˌɛsˌiːˈɛmkaɾtə,,2,de-agent-v1;ipa=espeak
+children.car-seat,Wir brauchen einen Kindersitz.,,viːɾ bɾˈaʊxən ˌaɪnən kˈɪndɜzˌɪts,,2,de-agent-v1;ipa=espeak
+etiquette.keep-the-change,Stimmt so.,Behalten Sie das Wechselgeld.,ʃtˈɪmt zˈoː,that's right as it is,2,de-agent-v1;ipa=espeak
+sim-data.where-can-i-buy-a-plug-adapter,Wo gibt es einen Reiseadapter?,Wo gibt es einen Steckeradapter?,vˌoː ɡˈiːpt ɛs ˌaɪnən rˈaɪzeːˌɑdaptɜ,,2,de-agent-v1;ipa=espeak
+children.stroller,Kinderwagen,Buggy,kˈɪndɜvˌɑːɡən,,2,de-agent-v1;ipa=espeak
+sim-data.mobile-data,mobile Daten,Datenvolumen,moːbˈiːlə dˈɑːtən,,2,de-agent-v1;ipa=espeak
+children.playground,Gibt es einen Spielplatz?,,ɡˈiːpt ɛs ˌaɪnən ʃpˈiːlplats,,2,de-agent-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,Kann ich die SIM aufladen?,,kˌan ɪç diː ˌɛsˌiːˈɛm ˈaʊflˌɑːdən,,2,de-agent-v1;ipa=espeak
+sim-data.top-up,aufladen,Guthaben aufladen,ˈaʊflˌɑːdən,,2,de-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,Gibt es Empfang in {}?,,ɡˈiːpt ɛs ɛmpfˈaŋ ˈɪn {},,2,de-agent-v1;ipa=espeak
+sim-data.signal,Empfang,Netz,ɛmpfˈaŋ,,2,de-agent-v1;ipa=espeak
+sim-data.esim,eSIM,,ˈeː zˈiːm,,2,de-agent-v1;ipa=espeak
+sim-data.prepaid,Prepaid,,pɾˈeːpaɪt,,2,de-agent-v1;ipa=espeak
+sim-data.roaming,Roaming,,rˈoːamˌɪŋ,,2,de-agent-v1;ipa=espeak
+social-basics.hello,Hallo,Grüß Gott,hˈaloː,,2,de-agent-v1;ipa=espeak
+social-basics.hello-polite,Guten Tag,Grüß Gott,ɡˈuːtən tˈɑːk,,2,de-agent-v1;ipa=espeak
+social-basics.good-morning,Guten Morgen,,ɡˈuːtən mˈɔɾɡən,,2,de-agent-v1;ipa=espeak
+social-basics.good-evening,Guten Abend,,ɡˈuːtən ˈɑːbənt,,2,de-agent-v1;ipa=espeak
+social-basics.goodbye,Auf Wiedersehen,Tschüss,aʊf viːdɜzˈeːən,,2,de-agent-v1;ipa=espeak
+social-basics.thank-you,Danke,Danke schön,dˈaŋkə,,2,de-agent-v1;ipa=espeak
+social-basics.you-are-welcome,Bitte,Gern,bˈɪtə,,2,de-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,Entschuldigung,,ɛntʃˈʊldɪɡˌʊŋ,,2,de-agent-v1;ipa=espeak
+social-basics.sorry,Tut mir leid,Verzeihung,tˈuːt miːɾ lˈaɪt,,2,de-agent-v1;ipa=espeak
+social-basics.no-problem,Kein Problem,,kˈaɪn pɾoːblˈeːm,,2,de-agent-v1;ipa=espeak
+social-basics.i-do-not-know,Ich weiß nicht.,,ɪç vˈaɪs nˈɪçt,,2,de-agent-v1;ipa=espeak
+social-basics.good-night,Gute Nacht,,ɡˈuːtə nˈaxt,,2,de-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,Alles gut.,In Ordnung,ˈaləs ɡˈuːt,,2,de-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,Ich spreche kein {target}.,,,,2,language-slots-v1
 communication.i-speak-only-a-little-of-this,Ich spreche nur ein wenig {target}.,,,,2,language-slots-v1
 communication.do-you-speak-english,Sprechen Sie {source}?,,,,2,language-slots-v1
-communication.please-speak-more-slowly,Sprechen Sie bitte langsamer.,,,,2,de-agent-v1
-communication.i-do-not-understand-spoken,Verstehe ich nicht.,,,,2,de-agent-v1
-communication.i-cannot-read-understand,Ich kann das nicht lesen.,,,,2,de-agent-v1
-communication.please-say-it-again,Bitte noch einmal.,Wie bitte?,,,2,de-agent-v1
-communication.please-write-it-down,Bitte schreiben Sie es auf.,,,,2,de-agent-v1
-communication.please-wait-a-moment,"Einen Moment, bitte.",,,,2,de-agent-v1
-communication.can-you-help-me,Können Sie mir helfen?,,,,2,de-agent-v1
+communication.please-speak-more-slowly,Sprechen Sie bitte langsamer.,,ʃpɾˈɛçən ziː bˈɪtə lˈaŋzɑːmɜ,,2,de-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,Verstehe ich nicht.,,fɛɾʃtˈeːə ɪç nˈɪçt,,2,de-agent-v1;ipa=espeak
+communication.i-cannot-read-understand,Ich kann das nicht lesen.,,ɪç kˌan das nˈɪçt lˈeːzən,,2,de-agent-v1;ipa=espeak
+communication.please-say-it-again,Bitte noch einmal.,Wie bitte?,bˈɪtə nɔx ˈaɪnmˌɑːl,,2,de-agent-v1;ipa=espeak
+communication.please-write-it-down,Bitte schreiben Sie es auf.,,bˈɪtə ʃrˈaɪbən ziː ɛs ˈaʊf,,2,de-agent-v1;ipa=espeak
+communication.please-wait-a-moment,"Einen Moment, bitte.",,"ˌaɪnən moːmˈɛnt, bˈɪtə",,2,de-agent-v1;ipa=espeak
+communication.can-you-help-me,Können Sie mir helfen?,,kˌœnən ziː miːɾ hˈɛlfən,,2,de-agent-v1;ipa=espeak
 communication.please-show-me-the-text,Zeigen Sie mir bitte den Text auf {target}.,,,,2,language-slots-v1
-communication.i-cannot-make-out-what-you-are-saying,Ich verstehe Sie akustisch nicht.,,,,2,de-agent-v1
-communication.i-do-not-understand,Ich verstehe nicht.,,,,2,de-agent-v1
-communication.i-cannot-read-it,Ich kann es nicht lesen.,,,,2,de-agent-v1
-communication.please-write-it-in-roman-letters,Bitte in Druckbuchstaben schreiben.,Bitte in lateinischen Buchstaben schreiben.,,,2,de-agent-v1
-quick-responses.please-go-ahead,bitte,bitte sehr,,,2,de-agent-v1
-quick-responses.yes-right,ja / richtig,,,,2,de-agent-v1
-quick-responses.no-not,nein / nicht,,,,2,de-agent-v1
-quick-responses.okay-can,okay / geht,,,,2,de-agent-v1
-quick-responses.cannot-not-allowed,geht nicht / verboten,,,,2,de-agent-v1
-quick-responses.works-okay,passt / geht,,,,2,de-agent-v1
-quick-responses.does-not-work-no,funktioniert nicht / nein,,,,2,de-agent-v1
-quick-responses.can-possible,kann / möglich,,,,2,de-agent-v1
-quick-responses.cannot-not-possible,kann nicht / unmöglich,,,,2,de-agent-v1
-quick-responses.okay-fine,in Ordnung,,,,2,de-agent-v1
-quick-responses.no-good-not-allowed-will-not-work,nicht gut / nicht erlaubt,,,,2,de-agent-v1
-phone-translation.i-am-using-phone-translation,Ich übersetze mit dem Handy.,,,,2,de-agent-v1
-phone-translation.please-speak-toward-the-phone,Bitte sprechen Sie ins Handy.,,,,2,de-agent-v1
-phone-translation.one-sentence-at-a-time-please,Bitte einen Satz nach dem anderen.,,,,2,de-agent-v1
-phone-translation.please-type-it-and-show-me,Bitte tippen und zeigen.,,,,2,de-agent-v1
-phone-translation.please-look-at-the-screen,Bitte schauen Sie auf den Bildschirm.,Bitte aufs Display schauen.,,,2,de-agent-v1
-phone-text-power.please-type-it-for-me,Bitte tippen Sie es ein.,,,,2,de-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,Ich verstehe Sie akustisch nicht.,,ɪç fɛɾʃtˈeːə ziː akˈʊstɪʃ nˈɪçt,,2,de-agent-v1;ipa=espeak
+communication.i-do-not-understand,Ich verstehe nicht.,,ɪç fɛɾʃtˈeːə nˈɪçt,,2,de-agent-v1;ipa=espeak
+communication.i-cannot-read-it,Ich kann es nicht lesen.,,ɪç kˌan ɛs nˈɪçt lˈeːzən,,2,de-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,Bitte in Druckbuchstaben schreiben.,Bitte in lateinischen Buchstaben schreiben.,bˈɪtə ɪn dɾˈʊkbuːxʃtˌɑːbən ʃrˈaɪbən,,2,de-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,bitte,bitte sehr,bˈɪtə,,2,de-agent-v1;ipa=espeak
+quick-responses.yes-right,ja / richtig,,jˈɑː / rˈɪçtɪç,,2,de-agent-v1;ipa=espeak
+quick-responses.no-not,nein / nicht,,nˈaɪn / nˈɪçt,,2,de-agent-v1;ipa=espeak
+quick-responses.okay-can,okay / geht,,ˈoːkɛɪ / ɡˈeːt,,2,de-agent-v1;ipa=espeak
+quick-responses.cannot-not-allowed,geht nicht / verboten,,ɡˈeːt nˈɪçt / fɛɾbˈoːtən,,2,de-agent-v1;ipa=espeak
+quick-responses.works-okay,passt / geht,,pˈast / ɡˈeːt,,2,de-agent-v1;ipa=espeak
+quick-responses.does-not-work-no,funktioniert nicht / nein,,fʊŋktsjˌoːnˈiːɾt nˈɪçt / nˈaɪn,,2,de-agent-v1;ipa=espeak
+quick-responses.can-possible,kann / möglich,,kˌan / mˈøːklɪç,,2,de-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,kann nicht / unmöglich,,kˌan nˈɪçt / ˈʊnmˌøːklɪç,,2,de-agent-v1;ipa=espeak
+quick-responses.okay-fine,in Ordnung,,ɪn ˈɔɾdnʊŋ,,2,de-agent-v1;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,nicht gut / nicht erlaubt,,nˈɪçt ɡˈuːt / nˈɪçt ɛɾlˈaʊpt,,2,de-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,Ich übersetze mit dem Handy.,,ɪç ˌyːbɜzˈɛtsə mɪt deːm hˈɛndiː,,2,de-agent-v1;ipa=espeak
+phone-translation.please-speak-toward-the-phone,Bitte sprechen Sie ins Handy.,,bˈɪtə ʃpɾˈɛçən ziː ɪns hˈɛndiː,,2,de-agent-v1;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,Bitte einen Satz nach dem anderen.,,bˈɪtə ˌaɪnən zˈats nɑːx deːm ˈandərən,,2,de-agent-v1;ipa=espeak
+phone-translation.please-type-it-and-show-me,Bitte tippen und zeigen.,,bˈɪtə tˈɪpən ʊnt tsˈaɪɡən,,2,de-agent-v1;ipa=espeak
+phone-translation.please-look-at-the-screen,Bitte schauen Sie auf den Bildschirm.,Bitte aufs Display schauen.,bˈɪtə ʃˈaʊən ziː aʊf deːn bˈɪltʃɪɾm,,2,de-agent-v1;ipa=espeak
+phone-text-power.please-type-it-for-me,Bitte tippen Sie es ein.,,bˈɪtə tˈɪpən ziː ɛs ˈaɪn,,2,de-agent-v1;ipa=espeak
 phone-translation.please-write-the-place-name,Bitte den Ortsnamen auf {target} schreiben.,,,,2,language-slots-v1
-phone-text-power.please-use-simple-words,Bitte einfache Wörter benutzen.,,,,2,de-agent-v1
-phone-text-power.my-phone-battery-is-low,Mein Akku ist fast leer.,,,,2,de-agent-v1
-phone-text-power.do-you-have-a-power-bank,Haben Sie eine Powerbank?,,,,2,de-agent-v1
-phone-text-power.the-translation-may-be-inaccurate,Die Übersetzung kann falsch sein.,,,,2,de-agent-v1
-phone-text-power.please-confirm,Bitte bestätigen Sie.,,,,2,de-agent-v1
-phone-text-power.may-i-charge-my-phone-here,Darf ich hier mein Handy laden?,,,,2,de-agent-v1
+phone-text-power.please-use-simple-words,Bitte einfache Wörter benutzen.,,bˈɪtə ˈaɪnfˌaxə vˈœɾtɜ bənˈʊtsən,,2,de-agent-v1;ipa=espeak
+phone-text-power.my-phone-battery-is-low,Mein Akku ist fast leer.,,maɪn ˈakuː ɪst fˈast lˈeːɾ,,2,de-agent-v1;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,Haben Sie eine Powerbank?,,hˌɑːbən ziː ˌaɪnə pˈaʊɜbˌaŋk,,2,de-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,Die Übersetzung kann falsch sein.,,diː ˌyːbɜzˈɛtsʊŋ kˌan fˈalʃ zaɪn,,2,de-agent-v1;ipa=espeak
+phone-text-power.please-confirm,Bitte bestätigen Sie.,,bˈɪtə bəʃtˈɛːtɪɡən ziː,,2,de-agent-v1;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,Darf ich hier mein Handy laden?,,dˈaɾf ɪç hˈiːɾ maɪn hˈɛndiː lˈɑːdən,,2,de-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Höflichkeit im Thai: Hängen Sie khrap (als Mann) oder kha (als Frau) an fast jeden Satz an. Stellt eine Frau eine Frage, sagt sie stattdessen kha mit steigendem Ton. Die Zeilen hier lassen die Partikel weg; ergänzen Sie sie selbst.",,,,2,de-notes-v1

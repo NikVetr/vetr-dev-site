@@ -203,6 +203,7 @@ def main():
         rtl = scripts.get(lang.get("script", ""), {}).get("direction") == "rtl"
         stack = scripts.get(lang.get("script", ""), {}).get("font_stack", "")
         seen = set()
+        unread = defaultdict(int)
         for group in groups:
             rel = f"lang/{code}/{group}.csv"
             if not (DATA / rel).exists():
@@ -258,6 +259,27 @@ def main():
                     # `col` is None for a row with extra cells, which `load` reports.
                     if col and (col.startswith("romanization_") or col == "ipa"):
                         check_drawable(value or "", "latin", f"{rel}:{line} {cid} {col}")
+                # `ipa` is the one column in the corpus that no human wrote, so a
+                # cell has to say which route produced it -- `provenance` carries an
+                # `ipa=<method>` element, and `ipa=reviewed` is the only value that
+                # means a person has read it. `scripts/build_ipa.py` has the grammar
+                # and is the only thing that writes the machine values; it refuses to
+                # touch a cell marked `reviewed`, so the tag is what protects a
+                # reviewer's work from the next regeneration.
+                #
+                # `confidence` deliberately says nothing about this: it is a claim
+                # about who checked the *translation*, and moving it to admit that
+                # the transcription is machine output would both misreport `text` and
+                # trip the safety-critical gate above on every allergy row.
+                if (row.get("ipa") or "").strip():
+                    method = next((p[len("ipa="):] for p in row["provenance"].split(";")
+                                   if p.startswith("ipa=")), "")
+                    if not method:
+                        errors.append(f"{rel}: {cid} has an ipa but its provenance "
+                                      f"({row['provenance']!r}) does not say where it "
+                                      "came from -- want an `ipa=<method>` element")
+                    elif method != "reviewed":
+                        unread[method] += 1
                 # A right-to-left row carrying more than one digit will print with
                 # the digits reversed -- 10 as 01, 1/2 as 2/1. The renderer shapes
                 # a run right-to-left as a whole and nothing here implements the
@@ -281,6 +303,13 @@ def main():
         # A concept scoped to other languages is not a gap in this one: the won is
         # only ever on a Korean card, and counting it against Spanish said 755 of
         # 757 about a pack with nothing missing at all.
+        # The reviewer queue, and the only place it is visible: every one of these
+        # cells is a machine transcription nobody has read, and a wrong one is a
+        # wrong pronunciation said out loud. Not an error -- the alternative is the
+        # empty column this replaced -- but it should not go quiet either.
+        for method, n in sorted(unread.items()):
+            warnings.append(f"lang/{code}: {n} ipa cells from {method!r} that no "
+                            "fluent speaker has read")
         applicable = {cid for cid, c in concepts.items() if applies_to(c, code)}
         missing = applicable - seen
         if missing:

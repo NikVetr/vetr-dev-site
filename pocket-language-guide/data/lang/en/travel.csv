@@ -1,116 +1,116 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-directions.where-is,Where is {} ?,,,,2,latex-reference-v2
-directions.how-do-i-get-to,How do I get to {} ?,,,,2,latex-reference-v2
-directions.is-it-far,Is it far?,,,,2,latex-reference-v2
-directions.how-long-on-foot,How long on foot?,,,,2,latex-reference-v2
-quick-directions.go-straight,Go straight,,,,2,latex-reference-v2
-quick-directions.turn-left,Turn left,,,,2,latex-reference-v2
-quick-directions.turn-right,Turn right,,,,2,latex-reference-v2
-quick-directions.this-way,This way,,,,2,latex-reference-v2
-quick-directions.that-way,That way,,,,2,latex-reference-v2
-quick-directions.on-the-left,On the left,,,,2,latex-reference-v2
-quick-directions.on-the-right,On the right,,,,2,latex-reference-v2
-quick-directions.across-from-here,Across from here,,,,2,latex-reference-v2
-quick-directions.in-front,In front,,,,2,latex-reference-v2
-quick-directions.behind,Behind,,,,2,latex-reference-v2
-taxi.please-take-me-here,Please take me here,,,,2,latex-reference-v2
-taxi.please-send-me-the-address,Please send me the address,,,,2,latex-reference-v2
-taxi.we-need-the-east-gate-not-the-south-gate,"We need the East Gate, not the South Gate",,,,2,latex-reference-v2
-taxi.please-stop-here,Please stop here,,,,2,latex-reference-v2
-taxi.can-you-wait-for-me-here,Can you wait for me here?,,,,2,latex-reference-v2
-taxi.we-need-to-catch-the-high-speed-train,We need to catch the high-speed train,,,,2,latex-reference-v2
-taxi.please-use-the-meter,Please use the meter,,,,2,latex-reference-v2
-transit-rides.two-tickets,Two tickets,,,,2,latex-reference-v2
-transit-rides.where-is-the-subway-station,Where is the subway station?,,,,2,latex-reference-v2
-transit-rides.does-this-bus-train-go-to,Does this bus / train go to {} ?,,,,2,latex-reference-v2
-transit-rides.what-is-the-next-stop,What is the next stop?,,,,2,latex-reference-v2
-transit-rides.please-tell-me-where-to-get-off,Please tell me where to get off,,,,2,latex-reference-v2
-transit-rides.is-this-direct,Is this direct?,,,,2,latex-reference-v2
-transit-rides.do-i-need-to-transfer,Do I need to transfer?,,,,2,latex-reference-v2
-transit-rides.is-it-delayed,Is it delayed?,,,,2,latex-reference-v2
-transit-rides.i-am-in-a-hurry,I am in a hurry,,,,2,latex-reference-v2
-transit-rides.which-platform,Which platform?,,,,2,latex-reference-v2
-transit-rides.what-time-is-the-next-one,What time is the next one?,,,,2,latex-reference-v2
-transit-rides.i-went-past-my-stop,I went past my stop,,,,2,latex-reference-v2
-place-words.scenic-area,scenic area,,,,2,latex-reference-v2
-place-words.visitor-center,visitor center,,,,2,latex-reference-v2
-place-words.railway-station,railway station,,,,2,latex-reference-v2
-place-words.airport,airport,,,,2,latex-reference-v2
-place-words.service-desk,service desk,,,,2,latex-reference-v2
-place-words.bus-stop,bus stop,,,,2,latex-reference-v2
-place-words.luggage-storage,luggage storage,,,,2,latex-reference-v2
-pickup-meeting.where-is-the-pickup-point,Where is the pickup point?,,,,2,latex-reference-v2
-pickup-meeting.please-send-me-the-pickup-point,Please send me the pickup point,,,,2,latex-reference-v2
-pickup-meeting.please-pick-us-up-here,Please pick us up here,,,,2,latex-reference-v2
-pickup-meeting.meet-us-at,Meet us at {},,,,2,latex-reference-v2
-pickup-meeting.please-call-me-a-ride,Please call me a ride,,,,2,latex-reference-v2
-rail-station-words.high-speed-rail,high-speed rail,,,,2,latex-reference-v2
-rail-station-words.maglev,maglev,,,,2,latex-reference-v2
-rail-station-words.transfer,transfer,,,,2,latex-reference-v2
-rail-station-words.ticket-gate,ticket gate,,,,2,latex-reference-v2
-rail-station-words.platform,platform,,,,2,latex-reference-v2
-rail-station-words.ticket-office,ticket office,,,,2,latex-reference-v2
-rail-station-words.waiting-room,waiting room,,,,2,latex-reference-v2
-rail-station-words.train-number,train number,,,,2,latex-reference-v2
-rail-station-words.carriage,carriage,,,,2,latex-reference-v2
-rail-station-words.seat,seat,,,,2,latex-reference-v2
-rail-station-words.last-train,last train,,,,2,latex-reference-v2
-rail-station-words.delayed,delayed,,,,2,latex-reference-v2
-rail-station-words.final-stop,final stop,,,,2,latex-reference-v2
-common-signs.open-on,open / on,,,,2,latex-reference-v2
-common-signs.closed-off,closed / off,,,,2,latex-reference-v2
-common-signs.occupied,occupied,,,,2,latex-reference-v2
-common-signs.vacant,vacant,,,,2,latex-reference-v2
-common-signs.caution,caution,,,,2,latex-reference-v2
-common-signs.no-entry,no entry,,,,2,latex-reference-v2
-common-signs.no-smoking,no smoking,,,,2,latex-reference-v2
-common-signs.no-photography,no photography,,,,2,latex-reference-v2
-common-signs.do-not-touch,do not touch,,,,2,latex-reference-v2
-common-signs.temporarily-closed,temporarily closed,,,,2,latex-reference-v2
-transit-rides.can-i-use-this-ticket,Can I use this ticket?,,,,2,japanese-reviewed-v6
-taxi.i-will-get-off-here,I will get off here,,,,2,japanese-reviewed-v6
-taxi.please-get-me-there-in-time-for-the-shinkansen,Please get me there in time for the Shinkansen,,,,2,japanese-reviewed-v6
-pickup-meeting.please-call-a-taxi,Please call a taxi,,,,2,japanese-reviewed-v6
-common-signs.open-operating,open / operating,,,,2,japanese-reviewed-v6
-common-signs.closed,closed,,,,2,japanese-reviewed-v6
-common-signs.stopped-stop,stopped / stop,,,,2,japanese-reviewed-v6
-place-words.tourist-spot-sightseeing-area,tourist spot / sightseeing area,,,,2,japanese-reviewed-v6
-border-customs.i-am-a-tourist,I am a tourist,,,,2,expansion-v1
-border-customs.here-is-my-passport,Here is my passport,,,,2,expansion-v1
-border-customs.i-am-staying-for-days,I am staying for {} days,,,,2,expansion-v1
-border-customs.nothing-to-declare,Nothing to declare,,,,2,expansion-v1
-border-customs.i-am-staying-at,I am staying at {},,,,2,expansion-v1
-border-customs.i-am-here-for-business,I am here for business,,,,2,expansion-v1
-border-customs.i-have-a-return-ticket,I have a return ticket,,,,2,expansion-v1
-border-customs.i-am-visiting-family,I am visiting family,,,,2,expansion-v1
-border-customs.this-is-for-personal-use,This is for personal use,,,,2,expansion-v1
-border-customs.i-am-in-transit,I am in transit,,,,2,expansion-v1
-border-customs.i-have-in-cash,I have {} in cash,,,,2,expansion-v1
-border-customs.this-is-a-gift,This is a gift,,,,2,expansion-v1
-border-customs.where-do-i-collect-my-baggage,Where do I collect my baggage?,,,,2,expansion-v1
-border-customs.how-long-may-i-stay,How long may I stay?,,,,2,expansion-v1
-border-customs.i-have-a-connecting-flight,I have a connecting flight,,,,2,expansion-v1
-border-customs.may-i-have-an-entry-stamp,May I have an entry stamp?,,,,2,expansion-v1
-border-customs.visa,visa,,,,2,expansion-v1
-border-customs.i-have-no-food-or-plants,I have no food or plants,,,,2,expansion-v1
-border-customs.passport-control,passport control,,,,2,expansion-v1
-border-customs.customs,customs,,,,2,expansion-v1
-border-customs.baggage-claim,baggage claim,,,,2,expansion-v1
-border-customs.customs-declaration,customs declaration,,,,2,expansion-v1
-border-customs.arrival-card,arrival card,,,,2,expansion-v1
-border-customs.transit,transit,,,,2,expansion-v1
-border-customs.boarding-pass,boarding pass,,,,2,expansion-v1
-directions.please-show-me-on-the-map,Please show me on the map,,,,2,expansion-v1
-directions.where-is-the-nearest,Where is the nearest {}?,,,,2,expansion-v1
-directions.where-am-i,Where am I?,,,,2,expansion-v1
-directions.which-way,Which way?,,,,2,expansion-v1
-directions.can-i-walk-there,Can I walk there?,,,,2,expansion-v1
-directions.how-far-is-it,How far is it?,,,,2,expansion-v1
-directions.which-exit,Which exit?,,,,2,expansion-v1
-directions.can-you-show-me-the-way,Can you show me the way?,,,,2,expansion-v1
-directions.north,north,,,,2,expansion-v1
-directions.south,south,,,,2,expansion-v1
-directions.east,east,,,,2,expansion-v1
-directions.west,west,,,,2,expansion-v1
-transit-rides.do-i-need-to-validate,Do I need to validate this ticket?,,,,2,coordinator-gaps-v1
-rail-station-words.ticket-validator,ticket validator,,,,2,coordinator-gaps-v1
+directions.where-is,Where is {} ?,,wˈɛɹ ɪz {},,2,latex-reference-v2;ipa=espeak
+directions.how-do-i-get-to,How do I get to {} ?,,hˌaʊ dˈuː aɪ ɡˈɛt tuː {},,2,latex-reference-v2;ipa=espeak
+directions.is-it-far,Is it far?,,ɪz ɪt fˈɑːɹ,,2,latex-reference-v2;ipa=espeak
+directions.how-long-on-foot,How long on foot?,,hˌaʊ lˈɔŋ ˌɔn fˈʊt,,2,latex-reference-v2;ipa=espeak
+quick-directions.go-straight,Go straight,,ɡˌoʊ stɹˈeɪt,,2,latex-reference-v2;ipa=espeak
+quick-directions.turn-left,Turn left,,tˈɜːn lˈɛft,,2,latex-reference-v2;ipa=espeak
+quick-directions.turn-right,Turn right,,tˈɜːn ɹˈaɪt,,2,latex-reference-v2;ipa=espeak
+quick-directions.this-way,This way,,ðɪs wˈeɪ,,2,latex-reference-v2;ipa=espeak
+quick-directions.that-way,That way,,ðæt wˈeɪ,,2,latex-reference-v2;ipa=espeak
+quick-directions.on-the-left,On the left,,ɔnðə lˈɛft,,2,latex-reference-v2;ipa=espeak
+quick-directions.on-the-right,On the right,,ɔnðə ɹˈaɪt,,2,latex-reference-v2;ipa=espeak
+quick-directions.across-from-here,Across from here,,əkɹˌɑːs fɹʌm hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+quick-directions.in-front,In front,,ɪn fɹˈʌnt,,2,latex-reference-v2;ipa=espeak
+quick-directions.behind,Behind,,bɪhˈaɪnd,,2,latex-reference-v2;ipa=espeak
+taxi.please-take-me-here,Please take me here,,plˈiːz tˈeɪk mˌiː hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+taxi.please-send-me-the-address,Please send me the address,,plˈiːz sˈɛnd mˌiː ðɪ ɐdɹˈɛs,,2,latex-reference-v2;ipa=espeak
+taxi.we-need-the-east-gate-not-the-south-gate,"We need the East Gate, not the South Gate",,"wiː nˈiːd ðɪ ˈiːst ɡˈeɪt, nˌɑːt ðə sˈaʊθ ɡˈeɪt",,2,latex-reference-v2;ipa=espeak
+taxi.please-stop-here,Please stop here,,plˈiːz stˈɑːp hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+taxi.can-you-wait-for-me-here,Can you wait for me here?,,kæn juː wˈeɪt fɔːɹ mˌiː hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+taxi.we-need-to-catch-the-high-speed-train,We need to catch the high-speed train,,wiː nˈiːd tə kˈætʃ ðə hˈaɪspiːd tɹˈeɪn,,2,latex-reference-v2;ipa=espeak
+taxi.please-use-the-meter,Please use the meter,,plˈiːz jˈuːs ðə mˈiːɾɚ,,2,latex-reference-v2;ipa=espeak
+transit-rides.two-tickets,Two tickets,,tˈuː tˈɪkɪts,,2,latex-reference-v2;ipa=espeak
+transit-rides.where-is-the-subway-station,Where is the subway station?,,wˌɛɹ ɪz ðə sˈʌbweɪ stˈeɪʃən,,2,latex-reference-v2;ipa=espeak
+transit-rides.does-this-bus-train-go-to,Does this bus / train go to {} ?,,dˈʌz ðɪs bˈʌs / tɹˈeɪn ɡˈoʊ tuː {},,2,latex-reference-v2;ipa=espeak
+transit-rides.what-is-the-next-stop,What is the next stop?,,wˌʌt ɪz ðə nˈɛkst stˈɑːp,,2,latex-reference-v2;ipa=espeak
+transit-rides.please-tell-me-where-to-get-off,Please tell me where to get off,,plˈiːz tˈɛl mˌiː wˌɛɹ tə ɡɛt ˈɔf,,2,latex-reference-v2;ipa=espeak
+transit-rides.is-this-direct,Is this direct?,,ɪz ðɪs dɪɹˈɛkt,,2,latex-reference-v2;ipa=espeak
+transit-rides.do-i-need-to-transfer,Do I need to transfer?,,dˈuː aɪ nˈiːd tə tɹænsfˈɜː,,2,latex-reference-v2;ipa=espeak
+transit-rides.is-it-delayed,Is it delayed?,,ɪz ɪt dɪlˈeɪd,,2,latex-reference-v2;ipa=espeak
+transit-rides.i-am-in-a-hurry,I am in a hurry,,aɪɐm ɪn ɐ hˈɜːɹi,,2,latex-reference-v2;ipa=espeak
+transit-rides.which-platform,Which platform?,,wˌɪtʃ plˈætfɔːɹm,,2,latex-reference-v2;ipa=espeak
+transit-rides.what-time-is-the-next-one,What time is the next one?,,wˌʌt tˈaɪm ɪz ðə nˈɛkst wˌʌn,,2,latex-reference-v2;ipa=espeak
+transit-rides.i-went-past-my-stop,I went past my stop,,aɪ wɛnt pˈæst maɪ stˈɑːp,,2,latex-reference-v2;ipa=espeak
+place-words.scenic-area,scenic area,,sˈiːnɪk ˈɛɹiə,,2,latex-reference-v2;ipa=espeak
+place-words.visitor-center,visitor center,,vˈɪzɪɾɚ sˈɛntɚ,,2,latex-reference-v2;ipa=espeak
+place-words.railway-station,railway station,,ɹˈeɪlweɪ stˈeɪʃən,,2,latex-reference-v2;ipa=espeak
+place-words.airport,airport,,ˈɛɹpoːɹt,,2,latex-reference-v2;ipa=espeak
+place-words.service-desk,service desk,,sˈɜːvɪs dˈɛsk,,2,latex-reference-v2;ipa=espeak
+place-words.bus-stop,bus stop,,bˈʌs stˈɑːp,,2,latex-reference-v2;ipa=espeak
+place-words.luggage-storage,luggage storage,,lˈʌɡɪdʒ stˈoːɹɪdʒ,,2,latex-reference-v2;ipa=espeak
+pickup-meeting.where-is-the-pickup-point,Where is the pickup point?,,wˌɛɹ ɪz ðə pˈɪkʌp pˈɔɪnt,,2,latex-reference-v2;ipa=espeak
+pickup-meeting.please-send-me-the-pickup-point,Please send me the pickup point,,plˈiːz sˈɛnd mˌiː ðə pˈɪkʌp pˈɔɪnt,,2,latex-reference-v2;ipa=espeak
+pickup-meeting.please-pick-us-up-here,Please pick us up here,,plˈiːz pˈɪk ˌʌs ˌʌp hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+pickup-meeting.meet-us-at,Meet us at {},,mˈiːt ˌʌs æt {},,2,latex-reference-v2;ipa=espeak
+pickup-meeting.please-call-me-a-ride,Please call me a ride,,plˈiːz kˈɔːl mˌiː ɐ ɹˈaɪd,,2,latex-reference-v2;ipa=espeak
+rail-station-words.high-speed-rail,high-speed rail,,hˈaɪspiːd ɹˈeɪl,,2,latex-reference-v2;ipa=espeak
+rail-station-words.maglev,maglev,,mˈæɡlɛv,,2,latex-reference-v2;ipa=espeak
+rail-station-words.transfer,transfer,,tɹˈænsfɜː,,2,latex-reference-v2;ipa=espeak
+rail-station-words.ticket-gate,ticket gate,,tˈɪkɪt ɡˈeɪt,,2,latex-reference-v2;ipa=espeak
+rail-station-words.platform,platform,,plˈætfɔːɹm,,2,latex-reference-v2;ipa=espeak
+rail-station-words.ticket-office,ticket office,,tˈɪkɪt ˈɑːfɪs,,2,latex-reference-v2;ipa=espeak
+rail-station-words.waiting-room,waiting room,,wˈeɪɾɪŋ ɹˈuːm,,2,latex-reference-v2;ipa=espeak
+rail-station-words.train-number,train number,,tɹˈeɪn nˈʌmbɚ,,2,latex-reference-v2;ipa=espeak
+rail-station-words.carriage,carriage,,kˈæɹɪdʒ,,2,latex-reference-v2;ipa=espeak
+rail-station-words.seat,seat,,sˈiːt,,2,latex-reference-v2;ipa=espeak
+rail-station-words.last-train,last train,,lˈæst tɹˈeɪn,,2,latex-reference-v2;ipa=espeak
+rail-station-words.delayed,delayed,,dɪlˈeɪd,,2,latex-reference-v2;ipa=espeak
+rail-station-words.final-stop,final stop,,fˈaɪnəl stˈɑːp,,2,latex-reference-v2;ipa=espeak
+common-signs.open-on,open / on,,ˈoʊpən / ˈɔn,,2,latex-reference-v2;ipa=espeak
+common-signs.closed-off,closed / off,,klˈoʊzd / ˈɔf,,2,latex-reference-v2;ipa=espeak
+common-signs.occupied,occupied,,ˈɑːkjʊpˌaɪd,,2,latex-reference-v2;ipa=espeak
+common-signs.vacant,vacant,,vˈeɪkənt,,2,latex-reference-v2;ipa=espeak
+common-signs.caution,caution,,kˈɔːʃən,,2,latex-reference-v2;ipa=espeak
+common-signs.no-entry,no entry,,nˈoʊ ˈɛntɹi,,2,latex-reference-v2;ipa=espeak
+common-signs.no-smoking,no smoking,,nˈoʊ smˈoʊkɪŋ,,2,latex-reference-v2;ipa=espeak
+common-signs.no-photography,no photography,,nˈoʊ fətˈɑːɡɹəfi,,2,latex-reference-v2;ipa=espeak
+common-signs.do-not-touch,do not touch,,duːnˌɑːt tˈʌtʃ,,2,latex-reference-v2;ipa=espeak
+common-signs.temporarily-closed,temporarily closed,,tˌɛmpɚɹˈɛɹɪli klˈoʊzd,,2,latex-reference-v2;ipa=espeak
+transit-rides.can-i-use-this-ticket,Can I use this ticket?,,kæn aɪ jˈuːz ðɪs tˈɪkɪt,,2,japanese-reviewed-v6;ipa=espeak
+taxi.i-will-get-off-here,I will get off here,,aɪ wɪl ɡɛt ˈɔf hˈɪɹ,,2,japanese-reviewed-v6;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,Please get me there in time for the Shinkansen,,plˈiːz ɡɛt mˌiː ðɛɹ ɪn tˈaɪm fɚðə ʃˈɪŋkænsən,,2,japanese-reviewed-v6;ipa=espeak
+pickup-meeting.please-call-a-taxi,Please call a taxi,,plˈiːz kˈɔːl ɐ tˈæksi,,2,japanese-reviewed-v6;ipa=espeak
+common-signs.open-operating,open / operating,,ˈoʊpən / ˈɑːpɚɹˌeɪɾɪŋ,,2,japanese-reviewed-v6;ipa=espeak
+common-signs.closed,closed,,klˈoʊzd,,2,japanese-reviewed-v6;ipa=espeak
+common-signs.stopped-stop,stopped / stop,,stˈɑːpt / stˈɑːp,,2,japanese-reviewed-v6;ipa=espeak
+place-words.tourist-spot-sightseeing-area,tourist spot / sightseeing area,,tˈʊɹɹɪst spˈɑːt / sˈaɪtsiːɪŋ ˈɛɹiə,,2,japanese-reviewed-v6;ipa=espeak
+border-customs.i-am-a-tourist,I am a tourist,,aɪɐm ɐ tˈʊɹɹɪst,,2,expansion-v1;ipa=espeak
+border-customs.here-is-my-passport,Here is my passport,,hˈɪɹ ɪz maɪ pˈæspoːɹt,,2,expansion-v1;ipa=espeak
+border-customs.i-am-staying-for-days,I am staying for {} days,,aɪɐm stˈeɪɪŋ fɔːɹ {} dˈeɪz,,2,expansion-v1;ipa=espeak
+border-customs.nothing-to-declare,Nothing to declare,,nˈʌθɪŋ tə dɪklˈɛɹ,,2,expansion-v1;ipa=espeak
+border-customs.i-am-staying-at,I am staying at {},,aɪɐm stˈeɪɪŋ æt {},,2,expansion-v1;ipa=espeak
+border-customs.i-am-here-for-business,I am here for business,,aɪɐm hˈɪɹ fɔːɹ bˈɪznəs,,2,expansion-v1;ipa=espeak
+border-customs.i-have-a-return-ticket,I have a return ticket,,aɪ hæv ɐ ɹɪtˈɜːn tˈɪkɪt,,2,expansion-v1;ipa=espeak
+border-customs.i-am-visiting-family,I am visiting family,,aɪɐm vˈɪzɪɾɪŋ fˈæmɪli,,2,expansion-v1;ipa=espeak
+border-customs.this-is-for-personal-use,This is for personal use,,ðɪs ɪz fɔːɹ pˈɜːsənəl jˈuːs,,2,expansion-v1;ipa=espeak
+border-customs.i-am-in-transit,I am in transit,,aɪɐm ɪn tɹˈænsɪt,,2,expansion-v1;ipa=espeak
+border-customs.i-have-in-cash,I have {} in cash,,aɪ hˈæv {} ɪn kˈæʃ,,2,expansion-v1;ipa=espeak
+border-customs.this-is-a-gift,This is a gift,,ðɪs ɪz ɐ ɡˈɪft,,2,expansion-v1;ipa=espeak
+border-customs.where-do-i-collect-my-baggage,Where do I collect my baggage?,,wˌɛɹ dˈuː aɪ kəlˈɛkt maɪ bˈæɡɪdʒ,,2,expansion-v1;ipa=espeak
+border-customs.how-long-may-i-stay,How long may I stay?,,hˌaʊ lˈɔŋ mˈeɪ aɪ stˈeɪ,,2,expansion-v1;ipa=espeak
+border-customs.i-have-a-connecting-flight,I have a connecting flight,,aɪ hæv ɐ kənˈɛktɪŋ flˈaɪt,,2,expansion-v1;ipa=espeak
+border-customs.may-i-have-an-entry-stamp,May I have an entry stamp?,,mˈeɪ aɪ hæv ɐn ˈɛntɹi stˈæmp,,2,expansion-v1;ipa=espeak
+border-customs.visa,visa,,vˈiːzə,,2,expansion-v1;ipa=espeak
+border-customs.i-have-no-food-or-plants,I have no food or plants,,aɪ hæv nˈoʊ fˈuːd ɔːɹ plˈænts,,2,expansion-v1;ipa=espeak
+border-customs.passport-control,passport control,,pˈæspoːɹt kəntɹˈoʊl,,2,expansion-v1;ipa=espeak
+border-customs.customs,customs,,kˈʌstəmz,,2,expansion-v1;ipa=espeak
+border-customs.baggage-claim,baggage claim,,bˈæɡɪdʒ klˈeɪm,,2,expansion-v1;ipa=espeak
+border-customs.customs-declaration,customs declaration,,kˈʌstəmz dˌɛklɚɹˈeɪʃən,,2,expansion-v1;ipa=espeak
+border-customs.arrival-card,arrival card,,ɚɹˈaɪvəl kˈɑːɹd,,2,expansion-v1;ipa=espeak
+border-customs.transit,transit,,tɹˈænsɪt,,2,expansion-v1;ipa=espeak
+border-customs.boarding-pass,boarding pass,,bˈoːɹdɪŋ pˈæs,,2,expansion-v1;ipa=espeak
+directions.please-show-me-on-the-map,Please show me on the map,,plˈiːz ʃˈoʊ mˌiː ɔnðə mˈæp,,2,expansion-v1;ipa=espeak
+directions.where-is-the-nearest,Where is the nearest {}?,,wˌɛɹ ɪz ðə nˈɪɹɪst {},,2,expansion-v1;ipa=espeak
+directions.where-am-i,Where am I?,,wˌɛɹ æm ˈaɪ,,2,expansion-v1;ipa=espeak
+directions.which-way,Which way?,,wˌɪtʃ wˈeɪ,,2,expansion-v1;ipa=espeak
+directions.can-i-walk-there,Can I walk there?,,kæn aɪ wˈɔːk ðˈɛɹ,,2,expansion-v1;ipa=espeak
+directions.how-far-is-it,How far is it?,,hˌaʊ fˈɑːɹ ɪz ɪt,,2,expansion-v1;ipa=espeak
+directions.which-exit,Which exit?,,wˌɪtʃ ˈɛɡzɪt,,2,expansion-v1;ipa=espeak
+directions.can-you-show-me-the-way,Can you show me the way?,,kæn juː ʃˈoʊ mˌiː ðə wˈeɪ,,2,expansion-v1;ipa=espeak
+directions.north,north,,nˈɔːɹθ,,2,expansion-v1;ipa=espeak
+directions.south,south,,sˈaʊθ,,2,expansion-v1;ipa=espeak
+directions.east,east,,ˈiːst,,2,expansion-v1;ipa=espeak
+directions.west,west,,wˈɛst,,2,expansion-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,Do I need to validate this ticket?,,dˈuː aɪ nˈiːd tə vˈælɪdˌeɪt ðɪs tˈɪkɪt,,2,coordinator-gaps-v1;ipa=espeak
+rail-station-words.ticket-validator,ticket validator,,tˈɪkɪt vˈælɪdˌeɪɾɚ,,2,coordinator-gaps-v1;ipa=espeak

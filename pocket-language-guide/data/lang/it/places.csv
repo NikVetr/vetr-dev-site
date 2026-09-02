@@ -1,8 +1,8 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,Dove posso comprare i biglietti?,,,,2,it-agent-v1
-attractions-tickets.do-i-need-a-reservation,Serve la prenotazione?,,,,2,it-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,Qual è l'ultimo ingresso?,,,,2,it-agent-v1
-attractions-tickets.are-there-lockers,Ci sono degli armadietti?,,,,2,it-agent-v1
-attractions-tickets.may-i-take-photos,Posso fare foto?,,,,2,it-agent-v1
-attractions-tickets.please-take-a-photo-of-us,"Ci faccia una foto, per favore",,,,2,it-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,Può farci una foto?,,,,2,it-agent-v1
+attractions-tickets.where-can-i-buy-tickets,Dove posso comprare i biglietti?,,dˈove pˈɔsso komprˈare i biʎˈetːɪ,,2,it-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Serve la prenotazione?,,sˈɛrve la prenotatsiˈone,,2,it-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Qual è l'ultimo ingresso?,,kwˈal e lˈultimo iŋɡrˈɛsso,,2,it-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Ci sono degli armadietti?,,tʃɪ sˌono dˌeʎɪ armadjˈetːɪ,,2,it-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Posso fare foto?,,pˈɔsso fˈare fˈɔto,,2,it-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Ci faccia una foto, per favore",,"tʃɪ fˈatʃːa ˌʊna fˈɔto, per favˈore",,2,it-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Può farci una foto?,,pʊˈɔ fˈartʃɪ ˌʊna fˈɔto,,2,it-agent-v1;ipa=espeak

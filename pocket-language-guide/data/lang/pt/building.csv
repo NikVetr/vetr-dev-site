@@ -1,60 +1,60 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-building-help.what-room-number-is-this,Qual é o número desta sala?,Que quarto é este?,,,2,pt-agent-v1
-building-help.i-am-lost,Estou perdido,Estou perdida,,-a if female,2,pt-agent-v1
-building-help.where-is-reception,Onde é a receção?,a recepção,,,2,pt-agent-v1
-building-help.where-is-a-power-outlet,Onde há uma tomada?,,,,2,pt-agent-v1
-accessibility.step-free,Há acesso sem degraus?,,,,2,pt-agent-v1
-accessibility.wheelchair-access,É acessível a cadeiras de rodas?,,,,2,pt-agent-v1
-accessibility.elevator,Há elevador?,,,,2,pt-agent-v1
-accessibility.ramp,Há rampa?,,,,2,pt-agent-v1
-accessibility.how-many-steps,Quantos degraus são?,,,,2,pt-agent-v1
-accessibility.cannot-climb-stairs,Não consigo subir escadas,,,,2,pt-agent-v1
-accessibility.need-to-sit-down,Preciso de me sentar,Preciso me sentar,,,2,pt-agent-v1
-accessibility.accessible-restroom,Há casa de banho acessível?,banheiro acessível,,,2,pt-agent-v1
-accessibility.station-assistance,Há assistência na estação?,,,,2,pt-agent-v1
-accessibility.help-me-carry,"Ajude-me a levar isto, por favor",Me ajude a carregar isto,,,2,pt-agent-v1
-accessibility.board-first,Posso embarcar primeiro?,,,,2,pt-agent-v1
-accessibility.door-width,Qual é a largura da porta?,,,,2,pt-agent-v1
-accessibility.wheelchair-width,A minha cadeira de rodas tem {} cm de largura,,,,2,pt-agent-v1
-accessibility.hard-of-hearing,Tenho deficiência auditiva,Ouço mal,,,2,pt-agent-v1
-accessibility.speak-louder,"Fale mais alto, por favor",,,,2,pt-agent-v1
-accessibility.visually-impaired,Tenho deficiência visual,,,,2,pt-agent-v1
-accessibility.take-your-arm,Posso apoiar-me no seu braço?,Posso segurar no seu braço?,,,2,pt-agent-v1
-accessibility.guide-dog,Este é o meu cão-guia,,,,2,pt-agent-v1
-in-a-building.is-this-the-correct-entrance,Esta é a entrada certa?,,,,2,pt-agent-v1
-in-a-building.do-you-have-wi-fi,Tem Wi-Fi?,,,,2,pt-agent-v1
-in-a-building.what-is-the-wi-fi-password,Qual é a palavra-passe do Wi-Fi?,a senha do Wi-Fi,,,2,pt-agent-v1
-in-a-building.which-floor,Que andar?,,,,2,pt-agent-v1
-toilets.where-toilet,Onde é a casa de banho?,Onde fica o banheiro?,,,2,pt-agent-v1
-toilets.where-public-toilet,Onde há uma casa de banho pública?,um banheiro público,,,2,pt-agent-v1
-toilets.may-i-use-the-toilet,Posso usar a casa de banho?,usar o banheiro,,,2,pt-agent-v1
-toilets.is-it-only-for-customers,É só para clientes?,,,,2,pt-agent-v1
-toilets.toilet-wc,WC,Casa de banho · Sanitários · Banheiro,,,2,pt-agent-v1
-toilets.is-it-free,É grátis?,,,,2,pt-agent-v1
-toilets.do-i-need-a-coin,É preciso moeda ou ficha?,,,,2,pt-agent-v1
-toilets.is-the-tap-water-safe-to-drink,A água da torneira é potável?,,,,2,pt-agent-v1
-toilets.it-is-urgent,É urgente,,,,2,pt-agent-v1
-toilets.may-i-have-the-toilet-key,Pode dar-me a chave da casa de banho?,a chave do banheiro,,,2,pt-agent-v1
-toilets.there-is-no-toilet-paper,Não há papel higiénico,papel higiênico,,,2,pt-agent-v1
-toilets.toilet-paper,papel higiénico,papel higiênico,,,2,pt-agent-v1
-toilets.it-is-out-of-order,Está avariado,Está quebrado,,,2,pt-agent-v1
-toilets.out-of-order,Avariado,Fora de serviço,,,2,pt-agent-v1
-toilets.mens-toilet,Homens,Senhores · Masculino,,,2,pt-agent-v1
-toilets.womens-toilet,Senhoras,Mulheres · Feminino,,,2,pt-agent-v1
-toilets.drinking-water,Água potável,,,,2,pt-agent-v1
-toilets.not-for-drinking,Água não potável,,,,2,pt-agent-v1
-toilets.accessible-toilet,Casa de banho acessível,Banheiro acessível · WC adaptado,,,2,pt-agent-v1
-toilets.where-can-i-wash-my-hands,Onde posso lavar as mãos?,,,,2,pt-agent-v1
-toilets.can-i-flush-the-paper,Posso deitar o papel na sanita?,jogar o papel no vaso,,,2,pt-agent-v1
-toilets.is-there-a-toilet-on-board,Há casa de banho a bordo?,banheiro a bordo,,,2,pt-agent-v1
-toilets.the-toilet-will-not-flush,O autoclismo não funciona,A descarga não funciona,,,2,pt-agent-v1
-toilets.baby-change,Fraldário,Muda-fraldas · Trocador,,,2,pt-agent-v1
-toilets.squat-toilet,sanita turca,vaso turco,,,1,pt-agent-v1
-building-words.elevator,o elevador,,,,2,pt-agent-v1
-building-words.stairs,as escadas,,,,2,pt-agent-v1
-building-words.entrance,a entrada,,,,2,pt-agent-v1
-building-words.exit,a saída,,,,2,pt-agent-v1
-building-words.men,homens,,,,2,pt-agent-v1
-building-words.women,mulheres,senhoras,,,2,pt-agent-v1
-building-words.door,a porta,,,,2,pt-agent-v1
-building-words.key,a chave,,,,2,pt-agent-v1
+building-help.what-room-number-is-this,Qual é o número desta sala?,Que quarto é este?,kwˈaʊ ɛ ʊ nˈũmeɾʊ dˈɛstæ sˈalæ,,2,pt-agent-v1;ipa=espeak
+building-help.i-am-lost,Estou perdido,Estou perdida,estˌow pˌeɾədʒˈidʊ,-a if female,2,pt-agent-v1;ipa=espeak
+building-help.where-is-reception,Onde é a receção?,a recepção,ˌoŋdʒj ɛ a xˌesesˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
+building-help.where-is-a-power-outlet,Onde há uma tomada?,,ˌoŋdʒy a ˌumæ tˌomˈadæ,,2,pt-agent-v1;ipa=espeak
+accessibility.step-free,Há acesso sem degraus?,,a ˌasˈɛsʊ sˈeɪŋ deɡrˈaʊs,,2,pt-agent-v1;ipa=espeak
+accessibility.wheelchair-access,É acessível a cadeiras de rodas?,,ɛ ˌasesˈiveʊ a kˌadˈeɪɾæz dʒy xˈɔdæs,,2,pt-agent-v1;ipa=espeak
+accessibility.elevator,Há elevador?,,a ˌelevadˈor,,2,pt-agent-v1;ipa=espeak
+accessibility.ramp,Há rampa?,,a xˈɐ̃mpæ,,2,pt-agent-v1;ipa=espeak
+accessibility.how-many-steps,Quantos degraus são?,,kwˈɐ̃ŋtʊz deɡrˈaʊs sɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
+accessibility.cannot-climb-stairs,Não consigo subir escadas,,nˌɐ̃ʊ̃ kˌoŋsˈiɡʊ subˈiɾ ˌeskˈadæs,,2,pt-agent-v1;ipa=espeak
+accessibility.need-to-sit-down,Preciso de me sentar,Preciso me sentar,prˌesˈizʊ dʒy my seɪŋtˈar,,2,pt-agent-v1;ipa=espeak
+accessibility.accessible-restroom,Há casa de banho acessível?,banheiro acessível,a kˈazæ dʒy bˈɐ̃ɲw ˌasesˈiveʊ,,2,pt-agent-v1;ipa=espeak
+accessibility.station-assistance,Há assistência na estação?,,a ˌasistˈeɪŋsjæ na ˌestasˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
+accessibility.help-me-carry,"Ajude-me a levar isto, por favor",Me ajude a carregar isto,"ˌaʒˈudʒymj a levˈaɾ ˈistʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
+accessibility.board-first,Posso embarcar primeiro?,,pˌɔsʊ ˌeɪmbaɾəkˈar prˌimˈeɪɾʊ,,2,pt-agent-v1;ipa=espeak
+accessibility.door-width,Qual é a largura da porta?,,kwˈaʊ ɛ a lˌaɾəɡˈuɾæ da pˈɔɾətæ,,2,pt-agent-v1;ipa=espeak
+accessibility.wheelchair-width,A minha cadeira de rodas tem {} cm de largura,,a mˌiɲæ kˌadˈeɪɾæ dʒy xˈɔdæs teɪŋ {} sˌeˈeme dʒy lˌaɾəɡˈuɾæ,,2,pt-agent-v1;ipa=espeak
+accessibility.hard-of-hearing,Tenho deficiência auditiva,Ouço mal,tˌeɲʊ dˌefisjˈeɪŋsjæ ˌaʊdʒitʃˈivæ,,2,pt-agent-v1;ipa=espeak
+accessibility.speak-louder,"Fale mais alto, por favor",,"fˈaly mˈaɪz ˈaʊtʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
+accessibility.visually-impaired,Tenho deficiência visual,,tˌeɲʊ dˌefisjˈeɪŋsjæ vˌizuˈaʊ,,2,pt-agent-v1;ipa=espeak
+accessibility.take-your-arm,Posso apoiar-me no seu braço?,Posso segurar no seu braço?,pˌɔsʊ ˌapoɪˈarmy nʊ seʊ brˈasʊ,,2,pt-agent-v1;ipa=espeak
+accessibility.guide-dog,Este é o meu cão-guia,,ˌestʃy ɛ ʊ meʊ kˈɐ̃ʊ̃ɡiæ,,2,pt-agent-v1;ipa=espeak
+in-a-building.is-this-the-correct-entrance,Esta é a entrada certa?,,ˌɛstæ ɛ a ˌeɪŋtrˈadæ sˈɛɾətæ,,2,pt-agent-v1;ipa=espeak
+in-a-building.do-you-have-wi-fi,Tem Wi-Fi?,,teɪŋ wˈifi,,2,pt-agent-v1;ipa=espeak
+in-a-building.what-is-the-wi-fi-password,Qual é a palavra-passe do Wi-Fi?,a senha do Wi-Fi,kwˈaʊ ɛ a pˌalˈavræpasy dʊ wˈifi,,2,pt-agent-v1;ipa=espeak
+in-a-building.which-floor,Que andar?,,ky ɐ̃ŋdˈar,,2,pt-agent-v1;ipa=espeak
+toilets.where-toilet,Onde é a casa de banho?,Onde fica o banheiro?,ˌoŋdʒj ɛ a kˈazæ dʒy bˈɐ̃ɲʊ,,2,pt-agent-v1;ipa=espeak
+toilets.where-public-toilet,Onde há uma casa de banho pública?,um banheiro público,ˌoŋdʒy a ˌumæ kˈazæ dʒy bˈɐ̃ɲʊ pˈublikæ,,2,pt-agent-v1;ipa=espeak
+toilets.may-i-use-the-toilet,Posso usar a casa de banho?,usar o banheiro,pˌɔsʊ uzˈaɾ a kˈazæ dʒy bˈɐ̃ɲʊ,,2,pt-agent-v1;ipa=espeak
+toilets.is-it-only-for-customers,É só para clientes?,,ɛ sˈɔ pˌaɾæ klˌiˈeɪŋtʃys,,2,pt-agent-v1;ipa=espeak
+toilets.toilet-wc,WC,Casa de banho · Sanitários · Banheiro,dˌabljusˈe,,2,pt-agent-v1;ipa=espeak
+toilets.is-it-free,É grátis?,,ɛ ɡrˈatʃis,,2,pt-agent-v1;ipa=espeak
+toilets.do-i-need-a-coin,É preciso moeda ou ficha?,,ɛ prˌesˈizʊ mˌoˈɛdæ ow fˈiʃæ,,2,pt-agent-v1;ipa=espeak
+toilets.is-the-tap-water-safe-to-drink,A água da torneira é potável?,,a ˈaɡwæ da tˌoɾənˈeɪɾæ ɛ pˌotˈaveʊ,,2,pt-agent-v1;ipa=espeak
+toilets.it-is-urgent,É urgente,,ɛ ˌuɾəʒˈeɪŋtʃy,,2,pt-agent-v1;ipa=espeak
+toilets.may-i-have-the-toilet-key,Pode dar-me a chave da casa de banho?,a chave do banheiro,pˌɔdʒy dˈarmj a ʃˈavy da kˈazæ dʒy bˈɐ̃ɲʊ,,2,pt-agent-v1;ipa=espeak
+toilets.there-is-no-toilet-paper,Não há papel higiénico,papel higiênico,nˌɐ̃ʊ̃ a papˈɛʊ ˌiʒjˈɛnikʊ,,2,pt-agent-v1;ipa=espeak
+toilets.toilet-paper,papel higiénico,papel higiênico,papˈɛʊ ˌiʒjˈɛnikʊ,,2,pt-agent-v1;ipa=espeak
+toilets.it-is-out-of-order,Está avariado,Está quebrado,estˌa ˌavaɾiˈadʊ,,2,pt-agent-v1;ipa=espeak
+toilets.out-of-order,Avariado,Fora de serviço,ˌavaɾiˈadʊ,,2,pt-agent-v1;ipa=espeak
+toilets.mens-toilet,Homens,Senhores · Masculino,ˈomeɪŋs,,2,pt-agent-v1;ipa=espeak
+toilets.womens-toilet,Senhoras,Mulheres · Feminino,sˌeɲˈɔɾæs,,2,pt-agent-v1;ipa=espeak
+toilets.drinking-water,Água potável,,ˈaɡwæ pˌotˈaveʊ,,2,pt-agent-v1;ipa=espeak
+toilets.not-for-drinking,Água não potável,,ˈaɡwæ nˌɐ̃ʊ̃ pˌotˈaveʊ,,2,pt-agent-v1;ipa=espeak
+toilets.accessible-toilet,Casa de banho acessível,Banheiro acessível · WC adaptado,kˈazæ dʒy bˈɐ̃ɲw ˌasesˈiveʊ,,2,pt-agent-v1;ipa=espeak
+toilets.where-can-i-wash-my-hands,Onde posso lavar as mãos?,,ˌoŋdʒy pˌɔsʊ lavˈaɾ az mˈɐ̃ʊ̃s,,2,pt-agent-v1;ipa=espeak
+toilets.can-i-flush-the-paper,Posso deitar o papel na sanita?,jogar o papel no vaso,pˌɔsʊ deɪtˈaɾ ʊ papˈɛʊ na sˌænˈitæ,,2,pt-agent-v1;ipa=espeak
+toilets.is-there-a-toilet-on-board,Há casa de banho a bordo?,banheiro a bordo,a kˈazæ dʒy bˈɐ̃ɲw a bˈɔɾədʊ,,2,pt-agent-v1;ipa=espeak
+toilets.the-toilet-will-not-flush,O autoclismo não funciona,A descarga não funciona,u ˌaʊtoklˈizmʊ nˌɐ̃ʊ̃ fˌũŋsiˈonæ,,2,pt-agent-v1;ipa=espeak
+toilets.baby-change,Fraldário,Muda-fraldas · Trocador,frˌaʊdˈaɾjʊ,,2,pt-agent-v1;ipa=espeak
+toilets.squat-toilet,sanita turca,vaso turco,sˌænˈitæ tˈuɾəkæ,,1,pt-agent-v1;ipa=espeak
+building-words.elevator,o elevador,,u ˌelevadˈor,,2,pt-agent-v1;ipa=espeak
+building-words.stairs,as escadas,,az ˌeskˈadæs,,2,pt-agent-v1;ipa=espeak
+building-words.entrance,a entrada,,a ˌeɪŋtrˈadæ,,2,pt-agent-v1;ipa=espeak
+building-words.exit,a saída,,a sˌaˈidæ,,2,pt-agent-v1;ipa=espeak
+building-words.men,homens,,ˈomeɪŋs,,2,pt-agent-v1;ipa=espeak
+building-words.women,mulheres,senhoras,mˌuljˈɛɾys,,2,pt-agent-v1;ipa=espeak
+building-words.door,a porta,,a pˈɔɾətæ,,2,pt-agent-v1;ipa=espeak
+building-words.key,a chave,,a ʃˈavy,,2,pt-agent-v1;ipa=espeak

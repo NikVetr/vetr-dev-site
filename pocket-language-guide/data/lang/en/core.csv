@@ -1,47 +1,47 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,I / me,,,,2,latex-reference-v2
-pronouns-verbs.we-us,we / us,,,,2,latex-reference-v2
-pronouns-verbs.you,you,,,,2,latex-reference-v2
-pronouns-verbs.you-polite,you (polite),,,,2,latex-reference-v2
-pronouns-verbs.he-him,he / him,,,,2,latex-reference-v2
-pronouns-verbs.she-her,she / her,,,,2,latex-reference-v2
-pronouns-verbs.they-them,they / them,,,,2,latex-reference-v2
-pronouns-verbs.my-mine,my / mine,,,,2,latex-reference-v2
-pronouns-verbs.your-yours,your / yours,,,,2,latex-reference-v2
-pronouns-verbs.be-called-call,be called / call,,,,2,latex-reference-v2
-pronouns-verbs.have,have,,,,2,latex-reference-v2
-pronouns-verbs.do-not-have,do not have,,,,2,latex-reference-v2
-pronouns-verbs.go,go,,,,2,latex-reference-v2
-pronouns-verbs.come,come,,,,2,latex-reference-v2
-pronouns-verbs.would-like,would like,,,,2,latex-reference-v2
-pronouns-verbs.want,want,,,,2,latex-reference-v2
-pronouns-verbs.look-for,look for,,,,2,latex-reference-v2
-pronouns-verbs.buy,buy,,,,2,latex-reference-v2
-pronouns-verbs.like,like,,,,2,latex-reference-v2
-pronouns-verbs.need,need,,,,2,latex-reference-v2
-question-words.what,what,,,,2,latex-reference-v2
-question-words.where,where,,,,2,latex-reference-v2
-question-words.who,who,,,,2,latex-reference-v2
-question-words.which-one,which one,,,,2,latex-reference-v2
-question-words.when,when,,,,2,latex-reference-v2
-question-words.how,how,,,,2,latex-reference-v2
-question-words.how-much-many,how much / many,,,,2,latex-reference-v2
-question-words.how-many,how many,,,,2,latex-reference-v2
-question-words.why,why,,,,2,latex-reference-v2
-question-words.this,this,,,,2,latex-reference-v2
-question-words.that,that,,,,2,latex-reference-v2
-question-words.here,here,,,,2,latex-reference-v2
-question-words.there,there,,,,2,latex-reference-v2
-question-words.a-little,a little,,,,2,latex-reference-v2
-question-words.some,some,,,,2,latex-reference-v2
-question-words.very,very,,,,2,latex-reference-v2
-question-words.too,too,,,,2,latex-reference-v2
-question-words.also,also,,,,2,latex-reference-v2
-question-words.all-both,all / both,,,,2,latex-reference-v2
-pronouns-verbs.there-is-have,there is / have,,,,2,japanese-reviewed-v6
-pronouns-verbs.there-is-not-do-not-have,there is not / do not have,,,,2,japanese-reviewed-v6
-pronouns-verbs.want-to-verb,want to [verb],,,,2,japanese-reviewed-v6
-pronouns-verbs.want-thing,want [thing],,,,2,japanese-reviewed-v6
-pronouns-verbs.need-thing,need [thing],,,,2,japanese-reviewed-v6
-pronouns-verbs.looking-for-thing,looking for [thing],,,,2,japanese-reviewed-v6
-question-words.how-much-what-price,how much / what price,,,,2,japanese-reviewed-v6
+pronouns-verbs.i-me,I / me,,ˈaɪ / mˈiː,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.we-us,we / us,,wiː / ˌʌs,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.you,you,,juː,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.you-polite,you (polite),,juː pəlˈaɪt,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.he-him,he / him,,hiː / hˌɪm,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.she-her,she / her,,ʃiː / hɜː,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.they-them,they / them,,ðeɪ / ðˌɛm,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.my-mine,my / mine,,mˈaɪ / mˈaɪn,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.your-yours,your / yours,,jʊɹ / jˈoːɹz,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.be-called-call,be called / call,,biː kˈɔːld / kˈɔːl,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.have,have,,hˈæv,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.do-not-have,do not have,,duːnˌɑːt hˈæv,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.go,go,,ɡˈoʊ,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.come,come,,kˈʌm,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.would-like,would like,,wʊd lˈaɪk,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.want,want,,wˈɔnt,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.look-for,look for,,lˈʊk fɔːɹ,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.buy,buy,,bˈaɪ,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.like,like,,lˈaɪk,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.need,need,,nˈiːd,,2,latex-reference-v2;ipa=espeak
+question-words.what,what,,wˌʌt,,2,latex-reference-v2;ipa=espeak
+question-words.where,where,,wˈɛɹ,,2,latex-reference-v2;ipa=espeak
+question-words.who,who,,hˈuː,,2,latex-reference-v2;ipa=espeak
+question-words.which-one,which one,,wˌɪtʃ wˈʌn,,2,latex-reference-v2;ipa=espeak
+question-words.when,when,,wˌɛn,,2,latex-reference-v2;ipa=espeak
+question-words.how,how,,hˈaʊ,,2,latex-reference-v2;ipa=espeak
+question-words.how-much-many,how much / many,,hˌaʊ mˈʌtʃ / mˈɛni,,2,latex-reference-v2;ipa=espeak
+question-words.how-many,how many,,hˌaʊ mˈɛni,,2,latex-reference-v2;ipa=espeak
+question-words.why,why,,wˈaɪ,,2,latex-reference-v2;ipa=espeak
+question-words.this,this,,ðˈɪs,,2,latex-reference-v2;ipa=espeak
+question-words.that,that,,ðˈæt,,2,latex-reference-v2;ipa=espeak
+question-words.here,here,,hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+question-words.there,there,,ðˈɛɹ,,2,latex-reference-v2;ipa=espeak
+question-words.a-little,a little,,ɐ lˈɪɾəl,,2,latex-reference-v2;ipa=espeak
+question-words.some,some,,sˌʌm,,2,latex-reference-v2;ipa=espeak
+question-words.very,very,,vˈɛɹi,,2,latex-reference-v2;ipa=espeak
+question-words.too,too,,tˈuː,,2,latex-reference-v2;ipa=espeak
+question-words.also,also,,ˈɔːlsoʊ,,2,latex-reference-v2;ipa=espeak
+question-words.all-both,all / both,,ˈɔːl / bˈoʊθ,,2,latex-reference-v2;ipa=espeak
+pronouns-verbs.there-is-have,there is / have,,ðɛɹˈɪz / hˈæv,,2,japanese-reviewed-v6;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,there is not / do not have,,ðɛɹ ɪz nˈɑːt / duːnˌɑːt hˈæv,,2,japanese-reviewed-v6;ipa=espeak
+pronouns-verbs.want-to-verb,want to [verb],,wˈɔnt tə vˈɜːb,,2,japanese-reviewed-v6;ipa=espeak
+pronouns-verbs.want-thing,want [thing],,wˈɔnt θˈɪŋ,,2,japanese-reviewed-v6;ipa=espeak
+pronouns-verbs.need-thing,need [thing],,nˈiːd θˈɪŋ,,2,japanese-reviewed-v6;ipa=espeak
+pronouns-verbs.looking-for-thing,looking for [thing],,lˈʊkɪŋ fɔːɹ θˈɪŋ,,2,japanese-reviewed-v6;ipa=espeak
+question-words.how-much-what-price,how much / what price,,hˌaʊ mˈʌtʃ / wˌʌt pɹˈaɪs,,2,japanese-reviewed-v6;ipa=espeak

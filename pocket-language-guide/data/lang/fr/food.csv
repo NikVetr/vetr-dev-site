@@ -1,29 +1,29 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Sans viande,,,,2,fr-agent-v1
-dietary-needs.no-eggs,Sans œufs,,,,2,fr-agent-v1
-dietary-needs.not-spicy,Pas épicé,,,,2,fr-agent-v1
-dietary-needs.less-spicy,Moins épicé,,,,2,fr-agent-v1
-dietary-needs.no-peanuts,Sans cacahuètes,sans arachides,,,2,fr-agent-v1
-dietary-needs.no-nuts,Sans fruits à coque,sans noix,,,2,fr-agent-v1
-dietary-needs.no-seafood,Sans poisson ni fruits de mer,sans fruits de mer,,no fish or shellfish,2,fr-agent-v1
-dietary-needs.i-am-vegetarian,Je suis végétarien,végétarienne,,,2,fr-agent-v1
-dietary-needs.i-am-vegan,Je suis végétalien,végane,,,2,fr-agent-v1
-dietary-needs.i-do-not-eat,Je ne mange pas de {},,,,2,fr-agent-v1
-dietary-needs.i-am-allergic-to,Je suis allergique à {},,,,2,fr-agent-v1
-dietary-needs.does-it-contain-fish-stock,Y a-t-il du bouillon de poisson ?,fumet de poisson,,,2,fr-agent-v1
-dietary-needs.does-it-contain-pork-stock,Y a-t-il du bouillon de porc ?,fond de porc,,,2,fr-pork-stock-v1
-dietary-needs.i-have-a-severe-allergy-to,J'ai une allergie grave à {},,,,2,fr-agent-v1
-food-ordering.table-for-two,Une table pour deux,,,,2,fr-agent-v1
-food-ordering.is-a-table-available,Avez-vous une table de libre ?,,,,2,fr-agent-v1
-food-ordering.menu-please,"La carte, s'il vous plaît",le menu,,,2,fr-agent-v1
-food-ordering.i-want-this,Je voudrais ceci,,,,2,fr-agent-v1
-food-ordering.do-you-have-drinking-water,Avez-vous de l'eau potable ?,,,,2,fr-agent-v1
-food-ordering.to-go-please,"À emporter, s'il vous plaît",,,,2,fr-agent-v1
-food-ordering.check-please,"L'addition, s'il vous plaît",,,,2,fr-agent-v1
-food-ordering.does-it-contain,Cela contient-il {} ?,,,,2,fr-agent-v1
-food-ordering.is-this-vegetarian,C'est végétarien ?,,,,2,fr-agent-v1
-food-ordering.what-do-you-recommend,Que recommandez-vous ?,,,,2,fr-agent-v1
-food-ordering.water-please,"De l'eau, s'il vous plaît",,,,2,fr-agent-v1
-food-ordering.can-a-vegetarian-eat-this,Un végétarien peut-il manger ça ?,,,,2,fr-agent-v1
-dietary-needs.no-pork,Sans porc ni lardons,sans porc ni charcuterie,,lardons = bacon bits,2,fr-gaps-v1
-dietary-needs.is-this-halal,C'est halal ?,C'est certifié halal ?,,ask who certifies it,2,fr-gaps-v1
+dietary-needs.no-meat,Sans viande,,sɑ̃ vjˈɑ̃d,,2,fr-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Sans œufs,,sɑ̃z ˈø,,2,fr-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Pas épicé,,paz episˈe,,2,fr-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Moins épicé,,mwɛ̃z episˈe,,2,fr-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Sans cacahuètes,sans arachides,sɑ̃ kakayˈɛt,,2,fr-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Sans fruits à coque,sans noix,sɑ̃ fʁyiz a kˈok,,2,fr-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Sans poisson ni fruits de mer,sans fruits de mer,sɑ̃ pwasɔ̃ ni fʁyi də mˈɛʁ,no fish or shellfish,2,fr-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Je suis végétarien,végétarienne,ʒə syi veʒetaʁjˈɛ̃,,2,fr-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Je suis végétalien,végane,ʒə syi veʒetaljˈɛ̃,,2,fr-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Je ne mange pas de {},,ʒə nə mɑ̃ʒ pa də {},,2,fr-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Je suis allergique à {},,ʒə syiz alɛʁʒik ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Y a-t-il du bouillon de poisson ?,fumet de poisson,i atil dy bujɔ̃ də pwasˈɔ̃,,2,fr-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Y a-t-il du bouillon de porc ?,fond de porc,i atil dy bujɔ̃ də pˈɔʁk,,2,fr-pork-stock-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,J'ai une allergie grave à {},,ʒe yn alɛʁʒi ɡʁav ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+food-ordering.table-for-two,Une table pour deux,,yn tabl puʁ dˈø,,2,fr-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Avez-vous une table de libre ?,,avevuz yn tabl də lˈibʁ,,2,fr-agent-v1;ipa=espeak
+food-ordering.menu-please,"La carte, s'il vous plaît",le menu,"la kˈaʁt, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+food-ordering.i-want-this,Je voudrais ceci,,ʒə vudʁɛ səsˈi,,2,fr-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Avez-vous de l'eau potable ?,,avevu də lo potˈabl,,2,fr-agent-v1;ipa=espeak
+food-ordering.to-go-please,"À emporter, s'il vous plaît",,"a ɑ̃pɔʁtˈe, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+food-ordering.check-please,"L'addition, s'il vous plaît",,"ladisjˈɔ̃, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Cela contient-il {} ?,,səla kɔ̃tjˈɛ̃tˈil {},,2,fr-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,C'est végétarien ?,,sɛ veʒetaʁjˈɛ̃,,2,fr-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Que recommandez-vous ?,,kə ʁəkɔmɑ̃dˈevˈu,,2,fr-agent-v1;ipa=espeak
+food-ordering.water-please,"De l'eau, s'il vous plaît",,"də lˈo, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,Un végétarien peut-il manger ça ?,,œ̃ veʒetaʁjɛ̃ pøtil mɑ̃ʒe sˈa,,2,fr-agent-v1;ipa=espeak
+dietary-needs.no-pork,Sans porc ni lardons,sans porc ni charcuterie,sɑ̃ pɔʁk ni laʁdˈɔ̃,lardons = bacon bits,2,fr-gaps-v1;ipa=espeak
+dietary-needs.is-this-halal,C'est halal ?,C'est certifié halal ?,sɛ alˈal,ask who certifies it,2,fr-gaps-v1;ipa=espeak

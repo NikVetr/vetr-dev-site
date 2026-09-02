@@ -1,29 +1,29 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Kein Fleisch.,,,,2,de-agent-v1
-dietary-needs.no-eggs,Keine Eier.,,,,2,de-agent-v1
-dietary-needs.not-spicy,Nicht scharf.,,,,2,de-agent-v1
-dietary-needs.less-spicy,Weniger scharf.,,,,2,de-agent-v1
-dietary-needs.no-peanuts,Keine Erdnüsse.,,,,2,de-agent-v1
-dietary-needs.no-nuts,Keine Nüsse.,,,,2,de-agent-v1
-dietary-needs.no-seafood,"Kein Fisch, keine Meeresfrüchte.",Keine Meeresfrüchte.,,"no fish, no shellfish",2,de-agent-v1
-dietary-needs.i-am-vegetarian,Ich esse vegetarisch.,Ich bin Vegetarier/-in.,,,2,de-agent-v1
-dietary-needs.i-am-vegan,Ich esse vegan.,Ich bin Veganer/-in.,,,2,de-agent-v1
-dietary-needs.i-do-not-eat,Ich esse kein {}.,,,,2,de-agent-v1
-dietary-needs.i-am-allergic-to,Ich bin allergisch gegen {}.,,,,2,de-agent-v1
-dietary-needs.does-it-contain-fish-stock,Ist Fischbrühe darin?,Enthält es Fischfond?,,,2,de-agent-v1
-dietary-needs.does-it-contain-pork-stock,Ist Schweinebrühe darin?,Ist Schweinefleisch in der Brühe?,,,2,de-pork-stock-v1
-dietary-needs.i-have-a-severe-allergy-to,Ich habe eine schwere Allergie gegen {}.,,,,2,de-agent-v1
-food-ordering.table-for-two,Ein Tisch für zwei.,,,,2,de-agent-v1
-food-ordering.is-a-table-available,Haben Sie einen Tisch frei?,,,,2,de-agent-v1
-food-ordering.menu-please,"Die Karte, bitte.","Die Speisekarte, bitte.",,,2,de-agent-v1
-food-ordering.i-want-this,Ich möchte das.,,,,2,de-agent-v1
-food-ordering.do-you-have-drinking-water,Haben Sie Trinkwasser?,Haben Sie Leitungswasser?,,,2,de-agent-v1
-food-ordering.to-go-please,"Zum Mitnehmen, bitte.",,,,2,de-agent-v1
-food-ordering.check-please,"Zahlen, bitte.","Die Rechnung, bitte.",,,2,de-agent-v1
-food-ordering.does-it-contain,Ist {} darin?,Enthält es {}?,,,2,de-agent-v1
-food-ordering.is-this-vegetarian,Ist das vegetarisch?,,,,2,de-agent-v1
-food-ordering.what-do-you-recommend,Was empfehlen Sie?,,,,2,de-agent-v1
-food-ordering.water-please,"Wasser, bitte.",,,,2,de-agent-v1
-food-ordering.can-a-vegetarian-eat-this,Können Vegetarier das essen?,,,,2,de-agent-v1
-dietary-needs.no-pork,"Kein Schweinefleisch, kein Speck.","Kein Schweinefleisch, kein Speck, kein Schmalz, keine Gelatine.",,"no pork, no bacon",2,de-gaps-v1
-dietary-needs.is-this-halal,Ist das halal?,Haben Sie ein Halal-Zertifikat?,,shop signs: HELAL (Turkish),2,de-gaps-v1
+dietary-needs.no-meat,Kein Fleisch.,,kˈaɪn flˈaɪʃ,,2,de-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Keine Eier.,,kˈaɪnə ˈaɪɜ,,2,de-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Nicht scharf.,,nˈɪçt ʃˈaɾf,,2,de-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Weniger scharf.,,vˈeːnɪɡɜ ʃˈaɾf,,2,de-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Keine Erdnüsse.,,kˈaɪnə ɛɾdnˈysə,,2,de-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Keine Nüsse.,,kˈaɪnə nˈysə,,2,de-agent-v1;ipa=espeak
+dietary-needs.no-seafood,"Kein Fisch, keine Meeresfrüchte.",Keine Meeresfrüchte.,"kˈaɪn fˈɪʃ, kˈaɪnə mˈeːrɛsfrˌyçtə","no fish, no shellfish",2,de-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Ich esse vegetarisch.,Ich bin Vegetarier/-in.,ɪç ˈɛsə vˌeːɡeːtˈɑrɪʃ,,2,de-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Ich esse vegan.,Ich bin Veganer/-in.,ɪç ˈɛsə veːɡˈɑːn,,2,de-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Ich esse kein {}.,,ɪç ˈɛsə kˈaɪn {},,2,de-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Ich bin allergisch gegen {}.,,ɪç bɪn ˈalɜɡˌɪʃ ɡˈeːɡən {},,2,de-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Ist Fischbrühe darin?,Enthält es Fischfond?,ɪst fˈɪʃbɾyːə dɑːrˈɪn,,2,de-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Ist Schweinebrühe darin?,Ist Schweinefleisch in der Brühe?,ɪst ʃvˈaɪnɛbɾˌyːə dɑːrˈɪn,,2,de-pork-stock-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Ich habe eine schwere Allergie gegen {}.,,ɪç hɑːbə ˌaɪnə ʃvˈeːrə ˈalɜɡˌiː ɡˈeːɡən {},,2,de-agent-v1;ipa=espeak
+food-ordering.table-for-two,Ein Tisch für zwei.,,aɪn tˈɪʃ fyːɾ tsvˈaɪ,,2,de-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Haben Sie einen Tisch frei?,,hˌɑːbən ziː ˌaɪnən tˈɪʃ frˈaɪ,,2,de-agent-v1;ipa=espeak
+food-ordering.menu-please,"Die Karte, bitte.","Die Speisekarte, bitte.","diː kˈaɾtə, bˈɪtə",,2,de-agent-v1;ipa=espeak
+food-ordering.i-want-this,Ich möchte das.,,ɪç mˈœçtə das,,2,de-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Haben Sie Trinkwasser?,Haben Sie Leitungswasser?,hˌɑːbən ziː tɾˈɪŋkvasɜ,,2,de-agent-v1;ipa=espeak
+food-ordering.to-go-please,"Zum Mitnehmen, bitte.",,"tsʊm mˈɪtnˌeːmən, bˈɪtə",,2,de-agent-v1;ipa=espeak
+food-ordering.check-please,"Zahlen, bitte.","Die Rechnung, bitte.","tsˈɑːlən, bˈɪtə",,2,de-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Ist {} darin?,Enthält es {}?,ɪst {} dɑːrˈɪn,,2,de-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Ist das vegetarisch?,,ɪst das vˌeːɡeːtˈɑrɪʃ,,2,de-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Was empfehlen Sie?,,vˈas ɛmpfˈeːlən ziː,,2,de-agent-v1;ipa=espeak
+food-ordering.water-please,"Wasser, bitte.",,"vˈasɜ, bˈɪtə",,2,de-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,Können Vegetarier das essen?,,kˌœnən vˌeːɡeːtˈɑːriːɜ das ˈɛsən,,2,de-agent-v1;ipa=espeak
+dietary-needs.no-pork,"Kein Schweinefleisch, kein Speck.","Kein Schweinefleisch, kein Speck, kein Schmalz, keine Gelatine.","kˈaɪn ʃvˈaɪnɛflˌaɪʃ, kˈaɪn ʃpˈɛk","no pork, no bacon",2,de-gaps-v1;ipa=espeak
+dietary-needs.is-this-halal,Ist das halal?,Haben Sie ein Halal-Zertifikat?,ɪst das hˈɑlɑːl,shop signs: HELAL (Turkish),2,de-gaps-v1;ipa=espeak

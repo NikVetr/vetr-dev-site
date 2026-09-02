@@ -1,44 +1,44 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,Mấy giờ rồi ạ?,,,,2,vi-agent-v1
-time-scheduling.how-many-minutes,Bao nhiêu phút ạ?,,,,2,vi-agent-v1
-time-scheduling.what-time-should-we-meet,Mấy giờ gặp nhau ạ?,,,,2,vi-agent-v1
-time-scheduling.can-we-change-the-time,Đổi giờ được không ạ?,,,,2,vi-agent-v1
-time-scheduling.when-is-convenient,Khi nào tiện ạ?,,,,2,vi-agent-v1
-time-scheduling.what-is-today-s-date,Hôm nay ngày mấy ạ?,,,,2,vi-agent-v1
-time-scheduling.what-day-is-it-today,Hôm nay thứ mấy ạ?,,,,2,vi-agent-v1
-time-scheduling.what-time-does-it-open,Mấy giờ mở cửa ạ?,,,,2,vi-agent-v1
-time-scheduling.what-time-does-it-close,Mấy giờ đóng cửa ạ?,,,,2,vi-agent-v1
+time-scheduling.what-time-is-it,Mấy giờ rồi ạ?,,məɪ˧˥ zəː˨˩ zoj˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,Bao nhiêu phút ạ?,,baːw˧ ɲiɛw˧ fut̪˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,Mấy giờ gặp nhau ạ?,,məɪ˧˥ zəː˨˩ ɣap˨˩ˀ ɲaw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,Đổi giờ được không ạ?,,ɗoj˧˩˧ zəː˨˩ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,Khi nào tiện ạ?,,xi˧ naːw˨˩ t̪iɛn˨˩ˀ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,Hôm nay ngày mấy ạ?,,hom˧ naj˧ ŋaj˨˩ məɪ˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,Hôm nay thứ mấy ạ?,,hom˧ naj˧ ty˧˥ məɪ˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,Mấy giờ mở cửa ạ?,,məɪ˧˥ zəː˨˩ məː˧˩˧ kyə˧˩˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,Mấy giờ đóng cửa ạ?,,məɪ˧˥ zəː˨˩ ɗɔŋ˧˥ kyə˧˩˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 time-scheduling.how-long-does-it-take,Mất bao lâu ạ?,,,,2,vi-agent-v1
-time-words.today,Hôm nay,,,,2,vi-agent-v1
-time-words.tomorrow,Ngày mai,,,,2,vi-agent-v1
-time-words.yesterday,Hôm qua,,,,2,vi-agent-v1
-time-words.this-week,Tuần này,,,,2,vi-agent-v1
-time-words.next-week,Tuần sau,,,,2,vi-agent-v1
-time-words.morning,Buổi sáng,,,,2,vi-agent-v1
-time-words.afternoon,Buổi chiều,,,,2,vi-agent-v1
-time-words.evening,Buổi tối,,,,2,vi-agent-v1
-time-words.spring,Mùa xuân,,,,2,vi-agent-v1
-time-words.summer,Mùa hè,Mùa hạ,,,2,vi-agent-v1
-time-words.fall,Mùa thu,,,,2,vi-agent-v1
-time-words.winter,Mùa đông,,,,2,vi-agent-v1
-time-words.night,Ban đêm,Đêm,,,2,vi-agent-v1
-days-of-week.monday,Thứ hai,Thứ 2,,,2,vi-agent-v1
-days-of-week.tuesday,Thứ ba,Thứ 3,,,2,vi-agent-v1
-days-of-week.wednesday,Thứ tư,Thứ 4,,,2,vi-agent-v1
-days-of-week.thursday,Thứ năm,Thứ 5,,,2,vi-agent-v1
-days-of-week.friday,Thứ sáu,Thứ 6,,,2,vi-agent-v1
-days-of-week.saturday,Thứ bảy,Thứ 7,,,2,vi-agent-v1
-days-of-week.sunday,Chủ nhật,CN,,,2,vi-agent-v1
-months.january,Tháng một,Tháng 1,,,2,vi-agent-v1
-months.february,Tháng hai,Tháng 2,,,2,vi-agent-v1
-months.march,Tháng ba,Tháng 3,,,2,vi-agent-v1
-months.april,Tháng tư,Tháng 4,,,2,vi-agent-v1
-months.may,Tháng năm,Tháng 5,,,2,vi-agent-v1
-months.june,Tháng sáu,Tháng 6,,,2,vi-agent-v1
-months.july,Tháng bảy,Tháng 7,,,2,vi-agent-v1
-months.august,Tháng tám,Tháng 8,,,2,vi-agent-v1
-months.september,Tháng chín,Tháng 9,,,2,vi-agent-v1
-months.october,Tháng mười,Tháng 10,,,2,vi-agent-v1
-months.november,Tháng mười một,Tháng 11,,,2,vi-agent-v1
-months.december,Tháng mười hai,Tháng 12,,,2,vi-agent-v1
+time-words.today,Hôm nay,,hom˧ naj˧,,2,vi-agent-v1;ipa=espeak
+time-words.tomorrow,Ngày mai,,ŋaj˨˩ maːj˧,,2,vi-agent-v1;ipa=espeak
+time-words.yesterday,Hôm qua,,hom˧ kwaː˧,,2,vi-agent-v1;ipa=espeak
+time-words.this-week,Tuần này,,t̪wən˨˩ naj˨˩,,2,vi-agent-v1;ipa=espeak
+time-words.next-week,Tuần sau,,t̪wən˨˩ saw˧,,2,vi-agent-v1;ipa=espeak
+time-words.morning,Buổi sáng,,buəj˧˩˧ saːŋ˧˥,,2,vi-agent-v1;ipa=espeak
+time-words.afternoon,Buổi chiều,,buəj˧˩˧ tʃiɛw˨˩,,2,vi-agent-v1;ipa=espeak
+time-words.evening,Buổi tối,,buəj˧˩˧ t̪oj˧˥,,2,vi-agent-v1;ipa=espeak
+time-words.spring,Mùa xuân,,muə˨˩ swən˧,,2,vi-agent-v1;ipa=espeak
+time-words.summer,Mùa hè,Mùa hạ,muə˨˩ hɛ˨˩,,2,vi-agent-v1;ipa=espeak
+time-words.fall,Mùa thu,,muə˨˩ tu˧,,2,vi-agent-v1;ipa=espeak
+time-words.winter,Mùa đông,,muə˨˩ ɗoŋ˧,,2,vi-agent-v1;ipa=espeak
+time-words.night,Ban đêm,Đêm,baːn˧ ɗem˧,,2,vi-agent-v1;ipa=espeak
+days-of-week.monday,Thứ hai,Thứ 2,ty˧˥ haːj˧,,2,vi-agent-v1;ipa=espeak
+days-of-week.tuesday,Thứ ba,Thứ 3,ty˧˥ baː˧,,2,vi-agent-v1;ipa=espeak
+days-of-week.wednesday,Thứ tư,Thứ 4,ty˧˥ t̪y˧,,2,vi-agent-v1;ipa=espeak
+days-of-week.thursday,Thứ năm,Thứ 5,ty˧˥ nam˧,,2,vi-agent-v1;ipa=espeak
+days-of-week.friday,Thứ sáu,Thứ 6,ty˧˥ saw˧˥,,2,vi-agent-v1;ipa=espeak
+days-of-week.saturday,Thứ bảy,Thứ 7,ty˧˥ baj˧˩˧,,2,vi-agent-v1;ipa=espeak
+days-of-week.sunday,Chủ nhật,CN,tʃu˧˩˧ ɲət̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+months.january,Tháng một,Tháng 1,taːŋ˧˥ mot̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+months.february,Tháng hai,Tháng 2,taːŋ˧˥ haːj˧,,2,vi-agent-v1;ipa=espeak
+months.march,Tháng ba,Tháng 3,taːŋ˧˥ baː˧,,2,vi-agent-v1;ipa=espeak
+months.april,Tháng tư,Tháng 4,taːŋ˧˥ t̪y˧,,2,vi-agent-v1;ipa=espeak
+months.may,Tháng năm,Tháng 5,taːŋ˧˥ nam˧,,2,vi-agent-v1;ipa=espeak
+months.june,Tháng sáu,Tháng 6,taːŋ˧˥ saw˧˥,,2,vi-agent-v1;ipa=espeak
+months.july,Tháng bảy,Tháng 7,taːŋ˧˥ baj˧˩˧,,2,vi-agent-v1;ipa=espeak
+months.august,Tháng tám,Tháng 8,taːŋ˧˥ t̪aːm˧˥,,2,vi-agent-v1;ipa=espeak
+months.september,Tháng chín,Tháng 9,taːŋ˧˥ tʃin˧˥,,2,vi-agent-v1;ipa=espeak
+months.october,Tháng mười,Tháng 10,taːŋ˧˥ myəj˨˩,,2,vi-agent-v1;ipa=espeak
+months.november,Tháng mười một,Tháng 11,taːŋ˧˥ myəj˨˩ mot̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+months.december,Tháng mười hai,Tháng 12,taːŋ˧˥ myəj˨˩ haːj˧,,2,vi-agent-v1;ipa=espeak
 time-words.clock-offset,"Giờ Swahili tính từ lúc mặt trời mọc nên lệch sáu tiếng với đồng hồ của bạn: số nghe được luôn nhỏ hơn sáu, cộng sáu vào thì ra giờ trên đồng hồ; muốn nói giờ của mình thì trừ sáu. saa moja = 7:00, saa sita = 12 giờ trưa, saa kumi = 16:00. Cho chắc, hãy nói giờ bằng số, hoặc hỏi saa ngapi za kizungu để lấy giờ kiểu phương Tây.",,,,2,vi-notes-v1

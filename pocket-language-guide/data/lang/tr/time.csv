@@ -1,44 +1,44 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,Saat kaç?,,,,2,tr-agent-v1
-time-scheduling.how-many-minutes,Kaç dakika?,,,,2,tr-agent-v1
-time-scheduling.what-time-should-we-meet,Saat kaçta buluşalım?,,,,2,tr-agent-v1
-time-scheduling.can-we-change-the-time,Saati değiştirebilir miyiz?,,,,2,tr-agent-v1
-time-scheduling.when-is-convenient,Sizin için ne zaman uygun?,,,,2,tr-agent-v1
-time-scheduling.what-is-today-s-date,Bugün ayın kaçı?,,,,2,tr-agent-v1
-time-scheduling.what-day-is-it-today,Bugün günlerden ne?,,,,2,tr-agent-v1
-time-scheduling.what-time-does-it-open,Saat kaçta açılıyor?,,,,2,tr-agent-v1
-time-scheduling.what-time-does-it-close,Saat kaçta kapanıyor?,,,,2,tr-agent-v1
-time-scheduling.how-long-does-it-take,Ne kadar sürer?,,,,2,tr-agent-v1
-time-words.today,bugün,,,,2,tr-agent-v1
-time-words.tomorrow,yarın,,,,2,tr-agent-v1
-time-words.yesterday,dün,,,,2,tr-agent-v1
-time-words.this-week,bu hafta,,,,2,tr-agent-v1
-time-words.next-week,gelecek hafta,haftaya,,,2,tr-agent-v1
-time-words.morning,sabah,,,,2,tr-agent-v1
-time-words.afternoon,öğleden sonra,,,,2,tr-agent-v1
-time-words.evening,akşam,,,,2,tr-agent-v1
-time-words.spring,ilkbahar,bahar,,,2,tr-agent-v1
-time-words.summer,yaz,,,,2,tr-agent-v1
-time-words.fall,sonbahar,güz,,,2,tr-agent-v1
-time-words.winter,kış,,,,2,tr-agent-v1
-time-words.night,gece,,,,2,tr-agent-v1
-days-of-week.monday,Pazartesi,,,,2,tr-agent-v1
-days-of-week.tuesday,Salı,,,,2,tr-agent-v1
-days-of-week.wednesday,Çarşamba,,,,2,tr-agent-v1
-days-of-week.thursday,Perşembe,,,,2,tr-agent-v1
-days-of-week.friday,Cuma,,,,2,tr-agent-v1
-days-of-week.saturday,Cumartesi,,,,2,tr-agent-v1
-days-of-week.sunday,Pazar,,,,2,tr-agent-v1
-months.january,Ocak,,,,2,tr-agent-v1
-months.february,Şubat,,,,2,tr-agent-v1
-months.march,Mart,,,,2,tr-agent-v1
-months.april,Nisan,,,,2,tr-agent-v1
-months.may,Mayıs,,,,2,tr-agent-v1
-months.june,Haziran,,,,2,tr-agent-v1
-months.july,Temmuz,,,,2,tr-agent-v1
-months.august,Ağustos,,,,2,tr-agent-v1
-months.september,Eylül,,,,2,tr-agent-v1
-months.october,Ekim,,,,2,tr-agent-v1
-months.november,Kasım,,,,2,tr-agent-v1
-months.december,Aralık,,,,2,tr-agent-v1
+time-scheduling.what-time-is-it,Saat kaç?,,saˈat kˈatʃ,,2,tr-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,Kaç dakika?,,kˈatʃ dakikˈa,,2,tr-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,Saat kaçta buluşalım?,,saˈat katʃtˈa buɫuʃaɫˈɯm,,2,tr-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,Saati değiştirebilir miyiz?,,saatˈɪ dejɪʃtiɾebilˈɪr mˈijɪz,,2,tr-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,Sizin için ne zaman uygun?,,sizˈɪn itʃˈɪn nˈɛ zamˈan ʊjɡˈʊn,,2,tr-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,Bugün ayın kaçı?,,buɡˈøn ajˈɯn katʃˈɯ,,2,tr-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,Bugün günlerden ne?,,buɡˈøn ɟønlɛrdˈæn nˈɛ,,2,tr-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,Saat kaçta açılıyor?,,saˈat katʃtˈa atʃɯɫˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,Saat kaçta kapanıyor?,,saˈat katʃtˈa kapanˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,Ne kadar sürer?,,nˈɛ kadˈar syɾˈɛr,,2,tr-agent-v1;ipa=espeak
+time-words.today,bugün,,buɡˈøn,,2,tr-agent-v1;ipa=espeak
+time-words.tomorrow,yarın,,jaɾˈɯn,,2,tr-agent-v1;ipa=espeak
+time-words.yesterday,dün,,dˈøn,,2,tr-agent-v1;ipa=espeak
+time-words.this-week,bu hafta,,bʊ haftˈa,,2,tr-agent-v1;ipa=espeak
+time-words.next-week,gelecek hafta,haftaya,ɟeledʒˈɛk haftˈa,,2,tr-agent-v1;ipa=espeak
+time-words.morning,sabah,,sabˈah,,2,tr-agent-v1;ipa=espeak
+time-words.afternoon,öğleden sonra,,ˈœːledæn sɔnrˈa,,2,tr-agent-v1;ipa=espeak
+time-words.evening,akşam,,akʃˈam,,2,tr-agent-v1;ipa=espeak
+time-words.spring,ilkbahar,bahar,ɪlkbahˈar,,2,tr-agent-v1;ipa=espeak
+time-words.summer,yaz,,jˈaz,,2,tr-agent-v1;ipa=espeak
+time-words.fall,sonbahar,güz,sɔnbahˈar,,2,tr-agent-v1;ipa=espeak
+time-words.winter,kış,,kˈɯʃ,,2,tr-agent-v1;ipa=espeak
+time-words.night,gece,,ɟˈedʒɛ,,2,tr-agent-v1;ipa=espeak
+days-of-week.monday,Pazartesi,,pazartesˈɪ,,2,tr-agent-v1;ipa=espeak
+days-of-week.tuesday,Salı,,saɫˈɯ,,2,tr-agent-v1;ipa=espeak
+days-of-week.wednesday,Çarşamba,,tʃarʃambˈa,,2,tr-agent-v1;ipa=espeak
+days-of-week.thursday,Perşembe,,pɛrʃæmbˈɛ,,2,tr-agent-v1;ipa=espeak
+days-of-week.friday,Cuma,,dʒˈuma,,2,tr-agent-v1;ipa=espeak
+days-of-week.saturday,Cumartesi,,dʒumartesˈɪ,,2,tr-agent-v1;ipa=espeak
+days-of-week.sunday,Pazar,,pazˈar,,2,tr-agent-v1;ipa=espeak
+months.january,Ocak,,odʒˈak,,2,tr-agent-v1;ipa=espeak
+months.february,Şubat,,ʃubˈat,,2,tr-agent-v1;ipa=espeak
+months.march,Mart,,mˈart,,2,tr-agent-v1;ipa=espeak
+months.april,Nisan,,nˈisan,,2,tr-agent-v1;ipa=espeak
+months.may,Mayıs,,majˈɯs,,2,tr-agent-v1;ipa=espeak
+months.june,Haziran,,haziɾˈan,,2,tr-agent-v1;ipa=espeak
+months.july,Temmuz,,tˈæmmʊz,,2,tr-agent-v1;ipa=espeak
+months.august,Ağustos,,aːʊstˈɔs,,2,tr-agent-v1;ipa=espeak
+months.september,Eylül,,ɛjlˈøl,,2,tr-agent-v1;ipa=espeak
+months.october,Ekim,,ˈekɪm,,2,tr-agent-v1;ipa=espeak
+months.november,Kasım,,kˈasɯm,,2,tr-agent-v1;ipa=espeak
+months.december,Aralık,,ˈaɾaɫɯk,,2,tr-agent-v1;ipa=espeak
 time-words.clock-offset,"Svahili saati şafakta başlar, telefonunuzdaki saatten altı saat kaymıştır: saa moja 7:00, saa sita 12:00, saa kumi 16:00 demektir. Karışıklığı önlemek için saati rakamla söyleyin ya da Batı saati için saa ngapi za kizungu diye sorun.",,,,2,tr-notes-v1

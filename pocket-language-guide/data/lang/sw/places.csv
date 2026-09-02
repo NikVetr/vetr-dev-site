@@ -1,8 +1,8 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,Naweza kununua tiketi wapi?,,,,2,sw-agent-v1
-attractions-tickets.do-i-need-a-reservation,Nahitaji kuweka nafasi?,,,,2,sw-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,Kuingia kwa mwisho ni saa ngapi?,,,,2,sw-agent-v1
-attractions-tickets.are-there-lockers,"Je, kuna makabati ya mizigo?",,,,2,sw-agent-v1
-attractions-tickets.may-i-take-photos,Naomba nipige picha?,,,,2,sw-agent-v1
-attractions-tickets.please-take-a-photo-of-us,Tafadhali tupige picha,,,,2,sw-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,Unaweza kutupiga picha?,,,,2,sw-agent-v1
+attractions-tickets.where-can-i-buy-tickets,Naweza kununua tiketi wapi?,,nawˈeza kˌununˈua tikˈeti wˈapi,,2,sw-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Nahitaji kuweka nafasi?,,nˌahitˈaɟi kuwˈeka nafˈasi,,2,sw-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Kuingia kwa mwisho ni saa ngapi?,,kˌuiŋɡˈia kwa mwˈiʃo ni sˈaa ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,"Je, kuna makabati ya mizigo?",,"ɟˈe, kˈuna mˌakabˈati ja mizˈiɡo",,2,sw-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Naomba nipige picha?,,naˈomba nipˈiɡe pˈitʃa,,2,sw-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,Tafadhali tupige picha,,tˌafaðˈali tupˈiɡe pˈitʃa,,2,sw-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Unaweza kutupiga picha?,,ˌunawˈeza kˌutupˈiɡa pˈitʃa,,2,sw-agent-v1;ipa=espeak

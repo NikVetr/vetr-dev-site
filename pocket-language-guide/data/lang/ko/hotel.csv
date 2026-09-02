@@ -1,53 +1,53 @@
 concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
-laundry.please-wash-these-clothes,이 옷 세탁해 주세요,,i ot setakae juseyo,,,2,ko-agent-v1
-laundry.where-is-a-laundromat,빨래방이 어디예요?,,ppallaebangi eodiyeyo?,,,2,ko-agent-v1
-laundry.when-will-it-be-ready,언제 다 돼요?,,eonje da dwaeyo?,,,2,ko-agent-v1
-laundry.how-much-per-kilo,1킬로에 얼마예요?,,ilkilloe eolmayeyo?,,,2,ko-agent-v1
-laundry.can-it-be-ready-today,오늘 될까요?,,oneul doelkkayo?,,,2,ko-agent-v1
-laundry.please-do-not-use-bleach,표백제는 쓰지 마세요,,pyobaekjeneun sseuji maseyo,,,2,ko-agent-v1
-laundry.laundromat,빨래방,코인세탁방,ppallaebang,,,2,ko-agent-v1
-laundry.please-iron-this,이거 다려 주세요,,igeo daryeo juseyo,,,2,ko-agent-v1
-laundry.detergent,세제,,seje,,,2,ko-agent-v1
-laundry.dry-cleaning,드라이클리닝,,deuraikeullining,,,2,ko-agent-v1
-laundry.dryer,건조기,,geonjogi,,,2,ko-agent-v1
+laundry.please-wash-these-clothes,이 옷 세탁해 주세요,,i ot setakae juseyo,i ot setʰakʰɛ tɕusejo,,2,ko-agent-v1;ipa=rr
+laundry.where-is-a-laundromat,빨래방이 어디예요?,,ppallaebangi eodiyeyo?,p͈allɛbaŋi ʌdijejo,,2,ko-agent-v1;ipa=rr
+laundry.when-will-it-be-ready,언제 다 돼요?,,eonje da dwaeyo?,ʌndʑe ta twɛjo,,2,ko-agent-v1;ipa=rr
+laundry.how-much-per-kilo,1킬로에 얼마예요?,,ilkilloe eolmayeyo?,ilkʰillwe ʌlmajejo,,2,ko-agent-v1;ipa=rr
+laundry.can-it-be-ready-today,오늘 될까요?,,oneul doelkkayo?,onɯl twelk͈ajo,,2,ko-agent-v1;ipa=rr
+laundry.please-do-not-use-bleach,표백제는 쓰지 마세요,,pyobaekjeneun sseuji maseyo,pʰjobɛktɕenɯn s͈ɯdʑi masejo,,2,ko-agent-v1;ipa=rr
+laundry.laundromat,빨래방,코인세탁방,ppallaebang,p͈allɛbaŋ,,2,ko-agent-v1;ipa=rr
+laundry.please-iron-this,이거 다려 주세요,,igeo daryeo juseyo,iɡʌ taɾjʌ tɕusejo,,2,ko-agent-v1;ipa=rr
+laundry.detergent,세제,,seje,sedʑe,,2,ko-agent-v1;ipa=rr
+laundry.dry-cleaning,드라이클리닝,,deuraikeullining,tɯɾaikʰɯlliniŋ,,2,ko-agent-v1;ipa=rr
+laundry.dryer,건조기,,geonjogi,kʌndʑoɡi,,2,ko-agent-v1;ipa=rr
 laundry.coin-operated,동전 투입,코인 세탁,dongjeon tuip,,,2,ko-agent-v1
-hotel-words.passport,여권,,yeogwon,,,2,ko-agent-v1
-hotel-words.room-key-card,카드키,객실 카드,kadeuki,,,2,ko-agent-v1
-hotel-words.check-in,체크인,,chekeuin,,,2,ko-agent-v1
-hotel-words.check-out,체크아웃,,chekeuaut,,,2,ko-agent-v1
-hotel-words.luggage-storage,짐 보관,,jim bogwan,,,2,ko-agent-v1
-hotel-basics.are-any-rooms-available,빈 방 있어요?,,bin bang isseoyo?,,,2,ko-agent-v1
-hotel-basics.there-are-two-of-us,두 명이에요,,du myeongieyo,,,2,ko-agent-v1
-hotel-basics.i-have-a-reservation,예약했어요,,yeyakaesseoyo,,,2,ko-agent-v1
-hotel-basics.can-i-charge-my-phone,휴대폰 충전해도 돼요?,,hyudaepon chungjeonhaedo dwaeyo?,,,2,ko-agent-v1
-hotel-basics.i-would-like-a-non-smoking-room,금연 방으로 주세요,,geumyeon bangeuro juseyo,,,2,ko-agent-v1
-hotel-basics.i-would-like-a-quiet-room,조용한 방으로 주세요,,joyonghan bangeuro juseyo,,,2,ko-agent-v1
-hotel-basics.is-there-a-washing-machine,세탁기 있어요?,,setakgi isseoyo?,,,2,ko-agent-v1
-hotel-basics.is-wi-fi-free,와이파이 무료예요?,,waipai muryoyeyo?,,,2,ko-agent-v1
-hotel-basics.how-much-per-night,1박에 얼마예요?,,ilbage eolmayeyo?,,,2,ko-agent-v1
-hotel-basics.is-breakfast-included,조식 포함이에요?,,josik pohamieyo?,,,2,ko-agent-v1
-hotel-basics.may-i-see-the-room,방 좀 볼 수 있어요?,,bang jom bol su isseoyo?,,,2,ko-agent-v1
-hotel-basics.for-nights,{}박이요,,{}bagiyo,,,2,ko-agent-v1
-hotel-basics.two-beds,침대 두 개로 주세요,,chimdae du gaero juseyo,,,2,ko-agent-v1
-hotel-basics.is-there-air-conditioning,에어컨 있어요?,,eeokeon isseoyo?,,,2,ko-agent-v1
-hotel-requests.can-i-check-out-later,체크아웃 늦게 돼요?,,chekeuaut neutge dwaeyo?,,,2,ko-agent-v1
-hotel-requests.what-time-does-breakfast-start,조식 몇 시부터예요?,,josik myeot sibuteoyeyo?,,,2,ko-agent-v1
-hotel-requests.can-i-store-my-luggage,짐 맡길 수 있어요?,,jim matgil su isseoyo?,,,2,ko-agent-v1
-hotel-requests.no-housekeeping,청소 안 해 주세요,,cheongso an hae juseyo,,,2,ko-agent-v1
-hotel-requests.another-towel-please,수건 하나 더 주세요,,sugeon hana deo juseyo,,,2,ko-agent-v1
-hotel-requests.what-time-is-check-out,체크아웃 몇 시예요?,,chekeuaut myeot siyeyo?,,,2,ko-agent-v1
-hotel-requests.can-i-check-in-early,일찍 체크인해도 돼요?,,iljjik chekeuinhaedo dwaeyo?,,,2,ko-agent-v1
-hotel-requests.another-night,하루 더 묵어도 돼요?,,haru deo mugeodo dwaeyo?,,,2,ko-agent-v1
-hotel-requests.is-there-a-safe,금고 있어요?,,geumgo isseoyo?,,,2,ko-agent-v1
-hotel-requests.another-blanket,이불 하나 더 주세요,,ibul hana deo juseyo,,,2,ko-agent-v1
-hotel-requests.wake-up-call,{}시에 깨워 주세요,,{}sie kkaewo juseyo,,,2,ko-agent-v1
-room-problems.there-is-a-problem-with-the-room,방에 문제가 있어요,,bange munjega isseoyo,,,2,ko-agent-v1
-room-problems.the-air-conditioning-is-broken,에어컨이 고장났어요,,eeokeoni gojangnasseoyo,,,2,ko-agent-v1
-room-problems.there-is-no-hot-water,온수가 안 나와요,,onsuga an nawayo,,,2,ko-agent-v1
-room-problems.can-i-change-rooms,방 바꿀 수 있어요?,,bang bakkul su isseoyo?,,,2,ko-agent-v1
-room-problems.the-room-is-too-noisy,방이 너무 시끄러워요,,bangi neomu sikkeureowoyo,,,2,ko-agent-v1
-room-problems.the-key-does-not-work,카드키가 안 돼요,,kadeukiga an dwaeyo,,,2,ko-agent-v1
-room-problems.the-toilet-will-not-flush,물이 안 내려가요,,muri an naeryeogayo,,,2,ko-agent-v1
-room-problems.the-light-does-not-work,불이 안 켜져요,,buri an kyeojyeoyo,,,2,ko-agent-v1
-room-problems.please-send-someone,사람 좀 보내 주세요,,saram jom bonae juseyo,,,2,ko-agent-v1
-room-problems.the-heating-does-not-work,난방이 안 돼요,,nanbangi an dwaeyo,,,2,ko-agent-v1
+hotel-words.passport,여권,,yeogwon,jʌɡwʌn,,2,ko-agent-v1;ipa=rr
+hotel-words.room-key-card,카드키,객실 카드,kadeuki,kʰadɯkʰi,,2,ko-agent-v1;ipa=rr
+hotel-words.check-in,체크인,,chekeuin,tɕʰekʰɯin,,2,ko-agent-v1;ipa=rr
+hotel-words.check-out,체크아웃,,chekeuaut,tɕʰekʰɯaut,,2,ko-agent-v1;ipa=rr
+hotel-words.luggage-storage,짐 보관,,jim bogwan,tɕim poɡwan,,2,ko-agent-v1;ipa=rr
+hotel-basics.are-any-rooms-available,빈 방 있어요?,,bin bang isseoyo?,pin paŋ is͈ʌjo,,2,ko-agent-v1;ipa=rr
+hotel-basics.there-are-two-of-us,두 명이에요,,du myeongieyo,tu mjʌŋiejo,,2,ko-agent-v1;ipa=rr
+hotel-basics.i-have-a-reservation,예약했어요,,yeyakaesseoyo,jejakʰɛs͈ʌjo,,2,ko-agent-v1;ipa=rr
+hotel-basics.can-i-charge-my-phone,휴대폰 충전해도 돼요?,,hyudaepon chungjeonhaedo dwaeyo?,hjudɛpʰon tɕʰuŋdʑʌnhɛdo twɛjo,,2,ko-agent-v1;ipa=rr
+hotel-basics.i-would-like-a-non-smoking-room,금연 방으로 주세요,,geumyeon bangeuro juseyo,kɯmjʌn paŋɯɾo tɕusejo,,2,ko-agent-v1;ipa=rr
+hotel-basics.i-would-like-a-quiet-room,조용한 방으로 주세요,,joyonghan bangeuro juseyo,tɕojoŋhan paŋɯɾo tɕusejo,,2,ko-agent-v1;ipa=rr
+hotel-basics.is-there-a-washing-machine,세탁기 있어요?,,setakgi isseoyo?,setʰakki is͈ʌjo,,2,ko-agent-v1;ipa=rr
+hotel-basics.is-wi-fi-free,와이파이 무료예요?,,waipai muryoyeyo?,waipʰai muɾjojejo,,2,ko-agent-v1;ipa=rr
+hotel-basics.how-much-per-night,1박에 얼마예요?,,ilbage eolmayeyo?,ilbaɡe ʌlmajejo,,2,ko-agent-v1;ipa=rr
+hotel-basics.is-breakfast-included,조식 포함이에요?,,josik pohamieyo?,tɕosik pʰohamiejo,,2,ko-agent-v1;ipa=rr
+hotel-basics.may-i-see-the-room,방 좀 볼 수 있어요?,,bang jom bol su isseoyo?,paŋ tɕom pol su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+hotel-basics.for-nights,{}박이요,,{}bagiyo,{} paɡijo,,2,ko-agent-v1;ipa=rr
+hotel-basics.two-beds,침대 두 개로 주세요,,chimdae du gaero juseyo,tɕʰimdɛ tu kɛɾo tɕusejo,,2,ko-agent-v1;ipa=rr
+hotel-basics.is-there-air-conditioning,에어컨 있어요?,,eeokeon isseoyo?,eʌkʰʌn is͈ʌjo,,2,ko-agent-v1;ipa=rr
+hotel-requests.can-i-check-out-later,체크아웃 늦게 돼요?,,chekeuaut neutge dwaeyo?,tɕʰekʰɯaut nɯtke twɛjo,,2,ko-agent-v1;ipa=rr
+hotel-requests.what-time-does-breakfast-start,조식 몇 시부터예요?,,josik myeot sibuteoyeyo?,tɕosik mjʌt sibutʰʌjejo,,2,ko-agent-v1;ipa=rr
+hotel-requests.can-i-store-my-luggage,짐 맡길 수 있어요?,,jim matgil su isseoyo?,tɕim matkil su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+hotel-requests.no-housekeeping,청소 안 해 주세요,,cheongso an hae juseyo,tɕʰʌŋso an hɛ tɕusejo,,2,ko-agent-v1;ipa=rr
+hotel-requests.another-towel-please,수건 하나 더 주세요,,sugeon hana deo juseyo,suɡʌn hana tʌ tɕusejo,,2,ko-agent-v1;ipa=rr
+hotel-requests.what-time-is-check-out,체크아웃 몇 시예요?,,chekeuaut myeot siyeyo?,tɕʰekʰɯaut mjʌt sijejo,,2,ko-agent-v1;ipa=rr
+hotel-requests.can-i-check-in-early,일찍 체크인해도 돼요?,,iljjik chekeuinhaedo dwaeyo?,iltɕ͈ik tɕʰekʰɯinhɛdo twɛjo,,2,ko-agent-v1;ipa=rr
+hotel-requests.another-night,하루 더 묵어도 돼요?,,haru deo mugeodo dwaeyo?,haɾu tʌ muɡʌdo twɛjo,,2,ko-agent-v1;ipa=rr
+hotel-requests.is-there-a-safe,금고 있어요?,,geumgo isseoyo?,kɯmɡo is͈ʌjo,,2,ko-agent-v1;ipa=rr
+hotel-requests.another-blanket,이불 하나 더 주세요,,ibul hana deo juseyo,ibul hana tʌ tɕusejo,,2,ko-agent-v1;ipa=rr
+hotel-requests.wake-up-call,{}시에 깨워 주세요,,{}sie kkaewo juseyo,{} sie k͈ɛwʌ tɕusejo,,2,ko-agent-v1;ipa=rr
+room-problems.there-is-a-problem-with-the-room,방에 문제가 있어요,,bange munjega isseoyo,paŋe mundʑeɡa is͈ʌjo,,2,ko-agent-v1;ipa=rr
+room-problems.the-air-conditioning-is-broken,에어컨이 고장났어요,,eeokeoni gojangnasseoyo,eʌkʰʌni kodʑaŋnas͈ʌjo,,2,ko-agent-v1;ipa=rr
+room-problems.there-is-no-hot-water,온수가 안 나와요,,onsuga an nawayo,onsuɡa an nawajo,,2,ko-agent-v1;ipa=rr
+room-problems.can-i-change-rooms,방 바꿀 수 있어요?,,bang bakkul su isseoyo?,paŋ pak͈ul su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+room-problems.the-room-is-too-noisy,방이 너무 시끄러워요,,bangi neomu sikkeureowoyo,paŋi nʌmu sik͈ɯɾʌwʌjo,,2,ko-agent-v1;ipa=rr
+room-problems.the-key-does-not-work,카드키가 안 돼요,,kadeukiga an dwaeyo,kʰadɯkʰiɡa an twɛjo,,2,ko-agent-v1;ipa=rr
+room-problems.the-toilet-will-not-flush,물이 안 내려가요,,muri an naeryeogayo,muɾi an nɛɾjʌɡajo,,2,ko-agent-v1;ipa=rr
+room-problems.the-light-does-not-work,불이 안 켜져요,,buri an kyeojyeoyo,puɾi an kʰjʌdʑjʌjo,,2,ko-agent-v1;ipa=rr
+room-problems.please-send-someone,사람 좀 보내 주세요,,saram jom bonae juseyo,saɾam tɕom ponɛ tɕusejo,,2,ko-agent-v1;ipa=rr
+room-problems.the-heating-does-not-work,난방이 안 돼요,,nanbangi an dwaeyo,nanbaŋi an twɛjo,,2,ko-agent-v1;ipa=rr

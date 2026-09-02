@@ -1,29 +1,29 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Sem carne,,,,2,pt-agent-v1
-dietary-needs.no-eggs,Sem ovos,,,,2,pt-agent-v1
-dietary-needs.not-spicy,Sem picante,,,,2,pt-agent-v1
-dietary-needs.less-spicy,Menos picante,,,,2,pt-agent-v1
-dietary-needs.no-peanuts,Sem amendoim,,,,2,pt-agent-v1
-dietary-needs.no-nuts,Sem frutos de casca rija,"Sem castanhas, nozes nem amêndoas",,tree nuts; peanut is separate,2,pt-agent-v1
-dietary-needs.no-seafood,Sem marisco nem peixe,Sem frutos do mar nem peixe,,no shellfish or fish,2,pt-agent-v1
-dietary-needs.i-am-vegetarian,Sou vegetariano/a,,,,2,pt-agent-v1
-dietary-needs.i-am-vegan,Sou vegano/a,,,,2,pt-agent-v1
-dietary-needs.i-do-not-eat,Não como {},,,,2,pt-agent-v1
-dietary-needs.i-am-allergic-to,Sou alérgico/a a {},,,,2,pt-agent-v1
-dietary-needs.does-it-contain-fish-stock,Leva caldo de peixe?,,,,2,pt-agent-v1
-dietary-needs.does-it-contain-pork-stock,Leva caldo de porco?,O caldo é de porco?,,,2,pt-pork-stock-v1
-dietary-needs.i-have-a-severe-allergy-to,Tenho alergia grave a {},,,,2,pt-agent-v1
-food-ordering.table-for-two,Mesa para dois,,,,2,pt-agent-v1
-food-ordering.is-a-table-available,Há mesa livre?,,,,2,pt-agent-v1
-food-ordering.menu-please,"A ementa, por favor","O cardápio, por favor",,,2,pt-agent-v1
-food-ordering.i-want-this,Quero isto,,,,2,pt-agent-v1
-food-ordering.do-you-have-drinking-water,Tem água potável?,,,,2,pt-agent-v1
-food-ordering.to-go-please,"Para levar, por favor","Para viagem, por favor",,,2,pt-agent-v1
-food-ordering.check-please,"A conta, por favor",,,,2,pt-agent-v1
-food-ordering.does-it-contain,Leva {}?,,,,2,pt-agent-v1
-food-ordering.is-this-vegetarian,Isto é vegetariano?,,,,2,pt-agent-v1
-food-ordering.what-do-you-recommend,O que recomenda?,,,,2,pt-agent-v1
-food-ordering.water-please,"Água, por favor",,,,2,pt-agent-v1
-food-ordering.can-a-vegetarian-eat-this,Um vegetariano pode comer isto?,,,,2,pt-agent-v1
-dietary-needs.no-pork,Sem carne de porco,"Sem porco, presunto nem chouriço",,also ham + sausage,2,pt-gaps-v1
-dietary-needs.is-this-halal,Isto é halal?,Tem certificação halal?,,,2,pt-gaps-v1
+dietary-needs.no-meat,Sem carne,,sˈeɪŋ kˈaɾəny,,2,pt-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Sem ovos,,sˈeɪŋ ˈɔvʊs,,2,pt-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Sem picante,,sˈeɪŋ pˌikˈɐ̃ŋtʃy,,2,pt-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Menos picante,,mˈenʊs pˌikˈɐ̃ŋtʃy,,2,pt-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Sem amendoim,,sˈeɪŋ ˌæmeɪŋdoˈiŋ,,2,pt-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Sem frutos de casca rija,"Sem castanhas, nozes nem amêndoas",sˈeɪŋ frˈutʊz dʒy kˈaskæ xˈiʒæ,tree nuts; peanut is separate,2,pt-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Sem marisco nem peixe,Sem frutos do mar nem peixe,sˈeɪŋ mˌaɾˈiskʊ nˈeɪŋ pˈeɪʃy,no shellfish or fish,2,pt-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Sou vegetariano/a,,sow vˌeʒetˌaɾiˈɐ̃nʊ / ˈa,,2,pt-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Sou vegano/a,,sow vˌeɡˈɐ̃nʊ / ˈa,,2,pt-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Não como {},,nˌɐ̃ʊ̃ kˌomʊ {},,2,pt-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Sou alérgico/a a {},,sow ˌalˈɛɾəʒikʊ / a ˈa {},,2,pt-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Leva caldo de peixe?,,lˈɛvæ kˈaʊdʊ dʒy pˈeɪʃy,,2,pt-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Leva caldo de porco?,O caldo é de porco?,lˈɛvæ kˈaʊdʊ dʒy pˈoɾəkʊ,,2,pt-pork-stock-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Tenho alergia grave a {},,tˌeɲʊ ˌaleɾəʒˈiæ ɡrˈavj ˈa {},,2,pt-agent-v1;ipa=espeak
+food-ordering.table-for-two,Mesa para dois,,mˈezæ pˌaɾæ dˈoɪs,,2,pt-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Há mesa livre?,,a mˈezæ lˈivry,,2,pt-agent-v1;ipa=espeak
+food-ordering.menu-please,"A ementa, por favor","O cardápio, por favor","a ˌemˈeɪŋtæ, por favˈor",,2,pt-agent-v1;ipa=espeak
+food-ordering.i-want-this,Quero isto,,kˈɛɾw ˈistʊ,,2,pt-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Tem água potável?,,teɪŋ ˈaɡwæ pˌotˈaveʊ,,2,pt-agent-v1;ipa=espeak
+food-ordering.to-go-please,"Para levar, por favor","Para viagem, por favor","pˌaɾæ levˈar, por favˈor",,2,pt-agent-v1;ipa=espeak
+food-ordering.check-please,"A conta, por favor",,"a kˈoŋtæ, por favˈor",,2,pt-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Leva {}?,,lˈɛvæ {},,2,pt-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Isto é vegetariano?,,ˈistw ɛ vˌeʒetˌaɾiˈɐ̃nʊ,,2,pt-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,O que recomenda?,,ʊ ky xˌekomˈeɪŋdæ,,2,pt-agent-v1;ipa=espeak
+food-ordering.water-please,"Água, por favor",,"ˈaɡwæ, por favˈor",,2,pt-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,Um vegetariano pode comer isto?,,ũŋ vˌeʒetˌaɾiˈɐ̃nʊ pˌɔdʒy komˈeɾ ˈistʊ,,2,pt-agent-v1;ipa=espeak
+dietary-needs.no-pork,Sem carne de porco,"Sem porco, presunto nem chouriço",sˈeɪŋ kˈaɾəny dʒy pˈoɾəkʊ,also ham + sausage,2,pt-gaps-v1;ipa=espeak
+dietary-needs.is-this-halal,Isto é halal?,Tem certificação halal?,ˈistw ɛ alˈaʊ,,2,pt-gaps-v1;ipa=espeak

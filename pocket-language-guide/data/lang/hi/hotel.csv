@@ -1,53 +1,53 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
-hotel-words.passport,पासपोर्ट,,pāsporṭ,,,2,hi-agent-v1
-hotel-words.room-key-card,कमरे का कार्ड,चाबी का कार्ड,kamre kā kārḍ,,,2,hi-agent-v1
-hotel-words.check-in,चेक-इन,,cek-in,,,2,hi-agent-v1
-hotel-words.check-out,चेक-आउट,,cek-āuṭ,,,2,hi-agent-v1
-hotel-words.luggage-storage,सामान घर,क्लॉक रूम,sāmān ghar,,,2,hi-agent-v1
-hotel-basics.are-any-rooms-available,क्या कमरा खाली है?,,kyā kamrā khālī hai?,,,2,hi-agent-v1
-hotel-basics.there-are-two-of-us,हम दो लोग हैं,,ham do log haiṁ,,,2,hi-agent-v1
-hotel-basics.i-have-a-reservation,मेरी बुकिंग है,,merī bukiṁg hai,,,2,hi-agent-v1
-hotel-basics.can-i-charge-my-phone,क्या फ़ोन चार्ज कर लूँ?,,kyā fon cārj kar lūṁ?,,,2,hi-agent-v1
-hotel-basics.i-would-like-a-non-smoking-room,मुझे नो-स्मोकिंग कमरा चाहिए,धूम्रपान रहित कमरा,mujhe no-smokiṁg kamrā cāhie,,,2,hi-agent-v1
-hotel-basics.i-would-like-a-quiet-room,मुझे शांत कमरा चाहिए,,mujhe śāṁt kamrā cāhie,,,2,hi-agent-v1
-hotel-basics.is-there-a-washing-machine,क्या वॉशिंग मशीन है?,,kyā vośiṁg maśīn hai?,,,2,hi-agent-v1
-hotel-basics.is-wi-fi-free,क्या वाई-फ़ाई मुफ़्त है?,,kyā vāī-fāī muft hai?,,,2,hi-agent-v1
-hotel-basics.how-much-per-night,एक रात का कितना?,,ek rāt kā kitnā?,,,2,hi-agent-v1
-hotel-basics.is-breakfast-included,क्या नाश्ता शामिल है?,,kyā nāśtā śāmil hai?,,,2,hi-agent-v1
-hotel-basics.may-i-see-the-room,क्या कमरा देख लूँ?,,kyā kamrā dekh lūṁ?,,,2,hi-agent-v1
-hotel-basics.for-nights,{} रात के लिए,,{} rāt ke lie,,,2,hi-agent-v1
-hotel-basics.two-beds,दो अलग बेड चाहिए,,do alag beḍ cāhie,,,2,hi-agent-v1
-hotel-basics.is-there-air-conditioning,क्या एसी है?,क्या एयर कंडीशनर है?,kyā esī hai?,,,2,hi-agent-v1
-hotel-requests.can-i-check-out-later,क्या देर से चेक-आउट हो सकता है?,,kyā der se cek-āuṭ ho saktā hai?,,,2,hi-agent-v1
-hotel-requests.what-time-does-breakfast-start,नाश्ता कितने बजे से है?,,nāśtā kitne baje se hai?,,,2,hi-agent-v1
-hotel-requests.can-i-store-my-luggage,क्या सामान यहाँ रखा जा सकता है?,,kyā sāmān yahāṁ rakhā jā saktā hai?,,,2,hi-agent-v1
-hotel-requests.no-housekeeping,कमरे की सफ़ाई नहीं चाहिए,,kamre kī safāī nahīṁ cāhie,,,2,hi-agent-v1
-hotel-requests.another-towel-please,एक और तौलिया दीजिए,,ek aur tauliyā dījie,,,2,hi-agent-v1
-hotel-requests.what-time-is-check-out,चेक-आउट कितने बजे है?,,cek-āuṭ kitne baje hai?,,,2,hi-agent-v1
-hotel-requests.can-i-check-in-early,क्या जल्दी चेक-इन हो सकता है?,,kyā jaldī cek-in ho saktā hai?,,,2,hi-agent-v1
-hotel-requests.another-night,क्या एक रात और मिल सकती है?,,kyā ek rāt aur mil saktī hai?,,,2,hi-agent-v1
-hotel-requests.is-there-a-safe,क्या लॉकर है?,क्या सेफ़ है?,kyā lokar hai?,,,2,hi-agent-v1
-hotel-requests.another-blanket,एक और कंबल दीजिए,,ek aur kaṁbal dījie,,,2,hi-agent-v1
-hotel-requests.wake-up-call,मुझे {} बजे जगा दीजिए,,mujhe {} baje jagā dījie,,,2,hi-agent-v1
-room-problems.there-is-a-problem-with-the-room,कमरे में एक दिक्कत है,,kamre meṁ ek dikkat hai,,,2,hi-agent-v1
-room-problems.the-air-conditioning-is-broken,एसी काम नहीं कर रहा,,esī kām nahīṁ kar rahā,,,2,hi-agent-v1
-room-problems.there-is-no-hot-water,गरम पानी नहीं आ रहा,,garam pānī nahīṁ ā rahā,,,2,hi-agent-v1
-room-problems.can-i-change-rooms,क्या कमरा बदला जा सकता है?,,kyā kamrā badlā jā saktā hai?,,,2,hi-agent-v1
-room-problems.the-room-is-too-noisy,कमरे में बहुत शोर है,,kamre meṁ bahut śor hai,,,2,hi-agent-v1
-room-problems.the-key-does-not-work,चाबी काम नहीं कर रही,,cābī kām nahīṁ kar rahī,,,2,hi-agent-v1
-room-problems.the-toilet-will-not-flush,फ़्लश काम नहीं कर रहा,,flaś kām nahīṁ kar rahā,,,2,hi-agent-v1
-room-problems.the-light-does-not-work,बत्ती नहीं जल रही,,battī nahīṁ jal rahī,,,2,hi-agent-v1
-room-problems.please-send-someone,किसी को ठीक करने भेजिए,,kisī ko ṭhīk karne bhejie,,,2,hi-agent-v1
-room-problems.the-heating-does-not-work,हीटर काम नहीं कर रहा,,hīṭar kām nahīṁ kar rahā,,,2,hi-agent-v1
-laundry.please-wash-these-clothes,ये कपड़े धुलवा दीजिए,,ye kapṛe dhulvā dījie,,,2,hi-agent-v1
-laundry.where-is-a-laundromat,लॉन्ड्री कहाँ है?,धोबी कहाँ मिलेगा?,lonḍrī kahāṁ hai?,,,2,hi-agent-v1
-laundry.when-will-it-be-ready,कब तैयार होगा?,,kab taiyār hogā?,,,2,hi-agent-v1
-laundry.how-much-per-kilo,एक किलो का कितना?,,ek kilo kā kitnā?,,,2,hi-agent-v1
-laundry.can-it-be-ready-today,क्या आज तैयार हो जाएगा?,,kyā āj taiyār ho jāegā?,,,2,hi-agent-v1
-laundry.please-do-not-use-bleach,ब्लीच न लगाइए,,blīc na lagāie,,,2,hi-agent-v1
-laundry.laundromat,लॉन्ड्री,धोबी,lonḍrī,,,2,hi-agent-v1
-laundry.please-iron-this,इसे प्रेस कर दीजिए,इसे इस्तरी कर दीजिए,ise pres kar dījie,,,2,hi-agent-v1
-laundry.detergent,डिटर्जेंट,सर्फ़,ḍiṭarjeṁṭ,,,2,hi-agent-v1
-laundry.dry-cleaning,ड्राई क्लीनिंग,,ḍrāī klīniṁg,,,2,hi-agent-v1
-laundry.dryer,ड्रायर,,ḍrāyar,,,2,hi-agent-v1
-laundry.coin-operated,सिक्का डालकर,,sikkā ḍālkar,,insert coin,1,hi-agent-v1
+hotel-words.passport,पासपोर्ट,,pāsporṭ,pˌaːspˈoːɾʈ,,2,hi-agent-v1;ipa=espeak
+hotel-words.room-key-card,कमरे का कार्ड,चाबी का कार्ड,kamre kā kārḍ,kˈʌmɾˌeː kaː kˈaːɾɖ,,2,hi-agent-v1;ipa=espeak
+hotel-words.check-in,चेक-इन,,cek-in,cˈeːkɪn,,2,hi-agent-v1;ipa=espeak
+hotel-words.check-out,चेक-आउट,,cek-āuṭ,cˈeːkaːʊʈ,,2,hi-agent-v1;ipa=espeak
+hotel-words.luggage-storage,सामान घर,क्लॉक रूम,sāmān ghar,saːmˈaːn ɡʰˈʌɾ,,2,hi-agent-v1;ipa=espeak
+hotel-basics.are-any-rooms-available,क्या कमरा खाली है?,,kyā kamrā khālī hai?,kːjaː kˈʌmɾˌaː kʰˈaːli hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.there-are-two-of-us,हम दो लोग हैं,,ham do log haiṁ,hˌəm dˈoː lˈoːɡ hɛ̃,,2,hi-agent-v1;ipa=espeak
+hotel-basics.i-have-a-reservation,मेरी बुकिंग है,,merī bukiṁg hai,mˌeːɾi bʊkˈĩɡ hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.can-i-charge-my-phone,क्या फ़ोन चार्ज कर लूँ?,,kyā fon cārj kar lūṁ?,kːjaː fˈoːn cˈaːɾɟ kˈʌɾ lˈũ,,2,hi-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,मुझे नो-स्मोकिंग कमरा चाहिए,धूम्रपान रहित कमरा,mujhe no-smokiṁg kamrā cāhie,mˌʊɟʰeː nˈoːsmoːkĩɡ kˈʌmɾˌaː cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,मुझे शांत कमरा चाहिए,,mujhe śāṁt kamrā cāhie,mˌʊɟʰeː ʃˈãt kˈʌmɾˌaː cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.is-there-a-washing-machine,क्या वॉशिंग मशीन है?,,kyā vośiṁg maśīn hai?,kːjaː ʋɔʃˈĩɡ məʃˈiːn hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.is-wi-fi-free,क्या वाई-फ़ाई मुफ़्त है?,,kyā vāī-fāī muft hai?,kːjaː ʋˈaːifaːi mˈʊft hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.how-much-per-night,एक रात का कितना?,,ek rāt kā kitnā?,ˈeːk ɾˈaːt kaː kˈɪtnˌaː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.is-breakfast-included,क्या नाश्ता शामिल है?,,kyā nāśtā śāmil hai?,kːjaː nˈaːʃtaː ʃˈaːmɪl hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.may-i-see-the-room,क्या कमरा देख लूँ?,,kyā kamrā dekh lūṁ?,kːjaː kˈʌmɾˌaː dˈeːkʰ lˈũ,,2,hi-agent-v1;ipa=espeak
+hotel-basics.for-nights,{} रात के लिए,,{} rāt ke lie,{} ɾˈaːt keː lˈɪeː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.two-beds,दो अलग बेड चाहिए,,do alag beḍ cāhie,dˈoː ˈʌləɡ bˈeːɖ cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,क्या एसी है?,क्या एयर कंडीशनर है?,kyā esī hai?,kːjaː ˈeːsi hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.can-i-check-out-later,क्या देर से चेक-आउट हो सकता है?,,kyā der se cek-āuṭ ho saktā hai?,kːjaː dˈeːɾ seː cˈeːkaːʊʈ hoː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,नाश्ता कितने बजे से है?,,nāśtā kitne baje se hai?,nˈaːʃtaː kˈɪtnˌeː bˈʌɟeː seː hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.can-i-store-my-luggage,क्या सामान यहाँ रखा जा सकता है?,,kyā sāmān yahāṁ rakhā jā saktā hai?,kːjaː saːmˈaːn jˈʌhã ɾˈʌkʰaː ɟˈaː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.no-housekeeping,कमरे की सफ़ाई नहीं चाहिए,,kamre kī safāī nahīṁ cāhie,kˈʌmɾˌeː ki səfˈaːi nˈʌhĩ cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.another-towel-please,एक और तौलिया दीजिए,,ek aur tauliyā dījie,ˈeːk ɔːɾ tˈɔːlɪjˌaː dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.what-time-is-check-out,चेक-आउट कितने बजे है?,,cek-āuṭ kitne baje hai?,cˈeːkaːʊʈ kˈɪtnˌeː bˈʌɟeː hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.can-i-check-in-early,क्या जल्दी चेक-इन हो सकता है?,,kyā jaldī cek-in ho saktā hai?,kːjaː ɟˈʌldi cˈeːkɪn hoː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.another-night,क्या एक रात और मिल सकती है?,,kyā ek rāt aur mil saktī hai?,kːjaː ˈeːk ɾˈaːt ɔːɾ mˈɪl sˈʌktˌi hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.is-there-a-safe,क्या लॉकर है?,क्या सेफ़ है?,kyā lokar hai?,kːjaː lˈɔkəɾ hɛː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.another-blanket,एक और कंबल दीजिए,,ek aur kaṁbal dījie,ˈeːk ɔːɾ kˈʌmbəl dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+hotel-requests.wake-up-call,मुझे {} बजे जगा दीजिए,,mujhe {} baje jagā dījie,mˌʊɟʰeː {} bˈʌɟeː ɟˈʌɡaː dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,कमरे में एक दिक्कत है,,kamre meṁ ek dikkat hai,kˈʌmɾˌeː mẽː ˈeːk dˈɪkːət hɛː,,2,hi-agent-v1;ipa=espeak
+room-problems.the-air-conditioning-is-broken,एसी काम नहीं कर रहा,,esī kām nahīṁ kar rahā,ˈeːsi kˈaːm nˈʌhĩ kˈʌɾ ɾˌəhaː,,2,hi-agent-v1;ipa=espeak
+room-problems.there-is-no-hot-water,गरम पानी नहीं आ रहा,,garam pānī nahīṁ ā rahā,ɡˈʌɾəm pˈaːni nˈʌhĩ ˈaː ɾˌəhaː,,2,hi-agent-v1;ipa=espeak
+room-problems.can-i-change-rooms,क्या कमरा बदला जा सकता है?,,kyā kamrā badlā jā saktā hai?,kːjaː kˈʌmɾˌaː bˈʌdlˌaː ɟˈaː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
+room-problems.the-room-is-too-noisy,कमरे में बहुत शोर है,,kamre meṁ bahut śor hai,kˈʌmɾˌeː mẽː bˈʌhʊt ʃˈoːɾ hɛː,,2,hi-agent-v1;ipa=espeak
+room-problems.the-key-does-not-work,चाबी काम नहीं कर रही,,cābī kām nahīṁ kar rahī,cˈaːbi kˈaːm nˈʌhĩ kˈʌɾ ɾˌəhi,,2,hi-agent-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,फ़्लश काम नहीं कर रहा,,flaś kām nahīṁ kar rahā,flˈʌʃ kˈaːm nˈʌhĩ kˈʌɾ ɾˌəhaː,,2,hi-agent-v1;ipa=espeak
+room-problems.the-light-does-not-work,बत्ती नहीं जल रही,,battī nahīṁ jal rahī,bˈʌtːi nˈʌhĩ ɟˈʌl ɾˌəhi,,2,hi-agent-v1;ipa=espeak
+room-problems.please-send-someone,किसी को ठीक करने भेजिए,,kisī ko ṭhīk karne bhejie,kˈɪsi koː ʈʰˈiːk kˈʌɾnˌeː bʰˈeːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+room-problems.the-heating-does-not-work,हीटर काम नहीं कर रहा,,hīṭar kām nahīṁ kar rahā,hˈiːʈəɾ kˈaːm nˈʌhĩ kˈʌɾ ɾˌəhaː,,2,hi-agent-v1;ipa=espeak
+laundry.please-wash-these-clothes,ये कपड़े धुलवा दीजिए,,ye kapṛe dhulvā dījie,jeː kˈʌpɽˌeː dʰˈʊlʋˌaː dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+laundry.where-is-a-laundromat,लॉन्ड्री कहाँ है?,धोबी कहाँ मिलेगा?,lonḍrī kahāṁ hai?,lˈɔnɖɾi kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
+laundry.when-will-it-be-ready,कब तैयार होगा?,,kab taiyār hogā?,kˈʌb tɛːjˈaːɾ hˈoːɡaː,,2,hi-agent-v1;ipa=espeak
+laundry.how-much-per-kilo,एक किलो का कितना?,,ek kilo kā kitnā?,ˈeːk kˈɪloː kaː kˈɪtnˌaː,,2,hi-agent-v1;ipa=espeak
+laundry.can-it-be-ready-today,क्या आज तैयार हो जाएगा?,,kyā āj taiyār ho jāegā?,kːjaː ˈaːɟ tɛːjˈaːɾ hoː ɟaːˈeːɡaː,,2,hi-agent-v1;ipa=espeak
+laundry.please-do-not-use-bleach,ब्लीच न लगाइए,,blīc na lagāie,blˈiːc nˈə ləɡˈaːɪˌeː,,2,hi-agent-v1;ipa=espeak
+laundry.laundromat,लॉन्ड्री,धोबी,lonḍrī,lˈɔnɖɾi,,2,hi-agent-v1;ipa=espeak
+laundry.please-iron-this,इसे प्रेस कर दीजिए,इसे इस्तरी कर दीजिए,ise pres kar dījie,ˈɪseː pɾˈeːs kˈʌɾ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
+laundry.detergent,डिटर्जेंट,सर्फ़,ḍiṭarjeṁṭ,ɖˌɪʈrɟˈẽːʈ,,2,hi-agent-v1;ipa=espeak
+laundry.dry-cleaning,ड्राई क्लीनिंग,,ḍrāī klīniṁg,ɖɾˈaːi klinˈĩɡ,,2,hi-agent-v1;ipa=espeak
+laundry.dryer,ड्रायर,,ḍrāyar,ɖɾˈaːjəɾ,,2,hi-agent-v1;ipa=espeak
+laundry.coin-operated,सिक्का डालकर,,sikkā ḍālkar,sˈɪkːaː ɖˈaːləkˌəɾ,insert coin,1,hi-agent-v1;ipa=espeak

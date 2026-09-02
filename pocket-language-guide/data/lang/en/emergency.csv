@@ -1,140 +1,140 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-emergency-medical.help,Help!,,,,2,latex-reference-v2
-emergency-medical.please-call-an-ambulance,Please call an ambulance,,,,2,latex-reference-v2
-emergency-medical.i-need-a-doctor,I need a doctor,,,,2,latex-reference-v2
-emergency-medical.i-am-sick,I am sick,,,,2,latex-reference-v2
-emergency-medical.i-am-injured,I am injured,,,,2,latex-reference-v2
-emergency-medical.it-hurts-here,It hurts here,,,,2,latex-reference-v2
-emergency-medical.where-is-a-pharmacy,Where is a pharmacy?,,,,2,latex-reference-v2
-emergency-medical.please-take-me-to-a-hospital,Please take me to a hospital,,,,2,latex-reference-v2
-lost-rescue.i-lost-my-passport,I lost my passport,,,,2,latex-reference-v2
-lost-rescue.i-lost-my-phone,I lost my phone,,,,2,latex-reference-v2
-lost-rescue.please-call-the-police,Please call the police,,,,2,latex-reference-v2
-lost-rescue.we-are-here,We are here,,,,2,latex-reference-v2
-lost-rescue.please-look-at-my-location-pin,Please look at my location pin,,,,2,latex-reference-v2
-lost-rescue.i-cannot-walk,I cannot walk,,,,2,latex-reference-v2
-lost-rescue.i-sprained-my-ankle,I sprained my ankle,,,,2,latex-reference-v2
-lost-rescue.please-contact-rescue,Please contact rescue,,,,2,latex-reference-v2
-lost-rescue.my-companion-is-missing,My companion is missing,,,,2,latex-reference-v2
-lost-rescue.please-look-at-my-current-location,Please look at my current location,,,,2,japanese-reviewed-v6
-emergency-medical.i-feel-unwell,I feel unwell,,,,2,japanese-reviewed-v6
-emergency-medical.this-is-an-emergency,This is an emergency,,,,2,expansion-v1
-emergency-medical.i-am-having-a-severe-allergic-reaction,I am having a severe allergic reaction,,,,2,expansion-v1
-emergency-medical.i-cannot-breathe,I cannot breathe,,,,2,expansion-v1
-emergency-medical.i-am-bleeding-badly,I am bleeding badly,,,,2,expansion-v1
-emergency-medical.i-have-chest-pain,I have chest pain,,,,2,expansion-v1
-emergency-medical.this-person-is-unconscious,This person is unconscious,,,,2,expansion-v1
-emergency-medical.where-is-the-nearest-hospital,Where is the nearest hospital?,,,,2,expansion-v1
-emergency-medical.what-is-the-emergency-number,What is the emergency number?,,,,2,expansion-v1
+emergency-medical.help,Help!,,hˈɛlp,,2,latex-reference-v2;ipa=espeak
+emergency-medical.please-call-an-ambulance,Please call an ambulance,,plˈiːz kˈɔːl ɐn ˈæmbjʊləns,,2,latex-reference-v2;ipa=espeak
+emergency-medical.i-need-a-doctor,I need a doctor,,aɪ nˈiːd ɐ dˈɑːktɚ,,2,latex-reference-v2;ipa=espeak
+emergency-medical.i-am-sick,I am sick,,aɪɐm sˈɪk,,2,latex-reference-v2;ipa=espeak
+emergency-medical.i-am-injured,I am injured,,aɪɐm ˈɪndʒɚd,,2,latex-reference-v2;ipa=espeak
+emergency-medical.it-hurts-here,It hurts here,,ɪt hˈɜːts hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+emergency-medical.where-is-a-pharmacy,Where is a pharmacy?,,wˌɛɹ ɪz ɐ fˈɑːɹməsi,,2,latex-reference-v2;ipa=espeak
+emergency-medical.please-take-me-to-a-hospital,Please take me to a hospital,,plˈiːz tˈeɪk mˌiː tʊ ɐ hˈɑːspɪɾəl,,2,latex-reference-v2;ipa=espeak
+lost-rescue.i-lost-my-passport,I lost my passport,,aɪ lˈɔst maɪ pˈæspoːɹt,,2,latex-reference-v2;ipa=espeak
+lost-rescue.i-lost-my-phone,I lost my phone,,aɪ lˈɔst maɪ fˈoʊn,,2,latex-reference-v2;ipa=espeak
+lost-rescue.please-call-the-police,Please call the police,,plˈiːz kˈɔːl ðə pəlˈiːs,,2,latex-reference-v2;ipa=espeak
+lost-rescue.we-are-here,We are here,,wiː ɑːɹ hˈɪɹ,,2,latex-reference-v2;ipa=espeak
+lost-rescue.please-look-at-my-location-pin,Please look at my location pin,,plˈiːz lˈʊk æt maɪ loʊkˈeɪʃən pˈɪn,,2,latex-reference-v2;ipa=espeak
+lost-rescue.i-cannot-walk,I cannot walk,,aɪ kænˈɑːt wˈɔːk,,2,latex-reference-v2;ipa=espeak
+lost-rescue.i-sprained-my-ankle,I sprained my ankle,,aɪ spɹˈeɪnd maɪ ˈæŋkəl,,2,latex-reference-v2;ipa=espeak
+lost-rescue.please-contact-rescue,Please contact rescue,,plˈiːz kˈɑːntækt ɹˈɛskjuː,,2,latex-reference-v2;ipa=espeak
+lost-rescue.my-companion-is-missing,My companion is missing,,maɪ kəmpˈæniən ɪz mˈɪsɪŋ,,2,latex-reference-v2;ipa=espeak
+lost-rescue.please-look-at-my-current-location,Please look at my current location,,plˈiːz lˈʊk æt maɪ kˈɜːɹənt loʊkˈeɪʃən,,2,japanese-reviewed-v6;ipa=espeak
+emergency-medical.i-feel-unwell,I feel unwell,,aɪ fˈiːl ʌnwˈɛl,,2,japanese-reviewed-v6;ipa=espeak
+emergency-medical.this-is-an-emergency,This is an emergency,,ðɪs ɪz ɐn ɪmˈɜːdʒənsi,,2,expansion-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,I am having a severe allergic reaction,,aɪɐm hˌævɪŋ ɐ sɪvˈɪɹ ɐlˈɜːdʒɪk ɹɪˈækʃən,,2,expansion-v1;ipa=espeak
+emergency-medical.i-cannot-breathe,I cannot breathe,,aɪ kænˈɑːt bɹˈiːð,,2,expansion-v1;ipa=espeak
+emergency-medical.i-am-bleeding-badly,I am bleeding badly,,aɪɐm blˈiːdɪŋ bˈædli,,2,expansion-v1;ipa=espeak
+emergency-medical.i-have-chest-pain,I have chest pain,,aɪ hæv tʃˈɛst pˈeɪn,,2,expansion-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,This person is unconscious,,ðɪs pˈɜːsən ɪz ʌŋkˈɑːnʃəs,,2,expansion-v1;ipa=espeak
+emergency-medical.where-is-the-nearest-hospital,Where is the nearest hospital?,,wˌɛɹ ɪz ðə nˌɪɹɪst hˈɑːspɪɾəl,,2,expansion-v1;ipa=espeak
+emergency-medical.what-is-the-emergency-number,What is the emergency number?,,wˌʌt ɪz ðɪ ɪmˈɜːdʒənsi nˈʌmbɚ,,2,expansion-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,Is there a doctor who speaks {source}?,,,,2,language-slots-v1
-emergency-medical.i-think-a-bone-is-broken,I think a bone is broken,,,,2,expansion-v1
-emergency-medical.please-call-my-emergency-contact,Please call my emergency contact,,,,2,expansion-v1
-emergency-medical.i-have-travel-insurance,I have travel insurance,,,,2,expansion-v1
-lost-rescue.my-child-is-missing,My child is missing,,,,2,expansion-v1
-lost-rescue.i-do-not-know-where-i-am,I do not know where I am,,,,2,expansion-v1
-lost-rescue.my-friend-is-hurt,My friend is hurt,,,,2,expansion-v1
-lost-rescue.i-lost-my-wallet,I lost my wallet,,,,2,expansion-v1
-lost-rescue.i-lost-my-bag,I lost my bag,,,,2,expansion-v1
-lost-rescue.where-is-lost-and-found,Where is lost and found?,,,,2,expansion-v1
-lost-rescue.i-cannot-find-my-hotel,I cannot find my hotel,,,,2,expansion-v1
-lost-rescue.i-left-it-on-the-train,I left it on the train,,,,2,expansion-v1
-lost-rescue.i-cannot-get-down,I cannot get down,,,,2,expansion-v1
-medical-conditions.i-am-diabetic,I am diabetic,,,,2,expansion-v1
-medical-conditions.i-need-insulin,I need insulin,,,,2,expansion-v1
-medical-conditions.i-have-asthma,I have asthma,,,,2,expansion-v1
-medical-conditions.i-have-a-heart-condition,I have a heart condition,,,,2,expansion-v1
-medical-conditions.i-am-allergic-to-penicillin,I am allergic to penicillin,,,,2,expansion-v1
-medical-conditions.i-have-epilepsy,I have epilepsy,,,,2,expansion-v1
-medical-conditions.my-blood-sugar-is-low,My blood sugar is low,,,,2,expansion-v1
-medical-conditions.i-need-my-inhaler,I need my inhaler,,,,2,expansion-v1
-medical-conditions.i-am-pregnant,I am pregnant,,,,2,expansion-v1
-medical-conditions.i-carry-an-adrenaline-injector,I carry an adrenaline injector,,,,2,expansion-v1
-medical-conditions.i-take-medicine-for,I take medicine for {},,,,2,expansion-v1
-medical-conditions.i-take-blood-thinners,I take blood thinners,,,,2,expansion-v1
-medical-conditions.medicine-allergy,Medicine allergy: {},,,,2,expansion-v1
-medical-conditions.this-card-lists-my-conditions,This card lists my conditions,,,,2,expansion-v1
-medical-conditions.this-is-my-medicine,This is my medicine,,,,2,expansion-v1
-medical-conditions.please-give-me-sugar-or-juice,Please give me sugar or juice,,,,2,expansion-v1
-medical-conditions.inject-it-into-my-outer-thigh,Inject it into my outer thigh,,,,2,expansion-v1
-medical-conditions.my-blood-type-is,My blood type is {},,,,2,expansion-v1
-medical-conditions.do-not-give-me,Do not give me {},,,,2,expansion-v1
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,I am allergic to aspirin and ibuprofen,,,,2,expansion-v1
-medical-conditions.my-injector-is-in-my-bag,My injector is in my bag,,,,2,expansion-v1
-medical-conditions.i-am-allergic-to-sulfa-drugs,I am allergic to sulfa drugs,,,,2,expansion-v1
-pharmacy-symptoms.which-pharmacy-is-open-now,Which pharmacy is open now?,,,,2,expansion-v1
-pharmacy-symptoms.i-need-medicine-for,I need medicine for {},,,,2,expansion-v1
-pharmacy-symptoms.i-have-a-fever,I have a fever,,,,2,expansion-v1
-pharmacy-symptoms.i-think-i-have-malaria,I think I have malaria,,,,2,malaria-v1
-pharmacy-symptoms.i-need-a-malaria-test,I need a malaria test,,,,2,malaria-v1
-pharmacy-symptoms.i-have-diarrhea,I have diarrhea,,,,2,expansion-v1
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Where is an all-night pharmacy?,,,,2,expansion-v1
-pharmacy-symptoms.painkiller,painkiller,,,,2,expansion-v1
-pharmacy-symptoms.do-i-need-a-prescription,Do I need a prescription?,,,,2,expansion-v1
-pharmacy-symptoms.i-have-a-headache,I have a headache,,,,2,expansion-v1
-pharmacy-symptoms.paracetamol-acetaminophen,paracetamol / acetaminophen,,,,2,expansion-v1
-pharmacy-symptoms.how-much-should-i-take,How much should I take?,,,,2,expansion-v1
-pharmacy-symptoms.i-am-vomiting,I am vomiting,,,,2,expansion-v1
-pharmacy-symptoms.rehydration-salts,rehydration salts,,,,2,expansion-v1
-pharmacy-symptoms.how-many-times-a-day,How many times a day?,,,,2,expansion-v1
-pharmacy-symptoms.i-have-a-stomach-ache,I have a stomach ache,,,,2,expansion-v1
-pharmacy-symptoms.i-have-a-cough,I have a cough,,,,2,expansion-v1
-pharmacy-symptoms.antihistamine,antihistamine,,,,2,expansion-v1
-pharmacy-symptoms.anti-diarrhea-medicine,anti-diarrhea medicine,,,,2,expansion-v1
-pharmacy-symptoms.is-this-safe-to-take-with,Is this safe to take with {}?,,,,2,expansion-v1
-pharmacy-symptoms.i-feel-dizzy,I feel dizzy,,,,2,expansion-v1
-pharmacy-symptoms.ibuprofen,ibuprofen,,,,2,expansion-v1
-pharmacy-symptoms.i-have-a-sore-throat,I have a sore throat,,,,2,expansion-v1
-pharmacy-symptoms.can-i-get-this-medicine-here,Can I get this medicine here?,,,,2,expansion-v1
-pharmacy-symptoms.bandage,bandage,,,,2,expansion-v1
-pharmacy-symptoms.the-pain-is-severe,The pain is severe,,,,2,expansion-v1
-pharmacy-symptoms.antiseptic,antiseptic,,,,2,expansion-v1
-pharmacy-symptoms.i-feel-nauseous,I feel nauseous,,,,2,expansion-v1
-pharmacy-symptoms.i-have-a-rash,I have a rash,,,,2,expansion-v1
-pharmacy-symptoms.before-or-after-food,Before or after food?,,,,2,expansion-v1
-pharmacy-symptoms.i-think-it-is-infected,I think it is infected,,,,2,expansion-v1
-pharmacy-symptoms.motion-sickness-tablets,motion-sickness tablets,,,,2,expansion-v1
-pharmacy-symptoms.i-have-a-cut,I have a cut,,,,2,expansion-v1
-pharmacy-symptoms.antacid,antacid,,,,2,expansion-v1
-pharmacy-symptoms.i-have-a-burn,I have a burn,,,,2,expansion-v1
-pharmacy-symptoms.it-started-days-ago,It started {} days ago,,,,2,expansion-v1
-pharmacy-symptoms.cough-medicine,cough medicine,,,,2,expansion-v1
-pharmacy-symptoms.is-this-safe-during-pregnancy,Is this safe during pregnancy?,,,,2,expansion-v1
-police-consulate.where-is-the-police-station,Where is the police station?,,,,2,expansion-v1
-police-consulate.i-want-to-report-a-theft,I want to report a theft,,,,2,expansion-v1
-police-consulate.my-bag-was-stolen,My bag was stolen,,,,2,expansion-v1
-police-consulate.my-passport-was-stolen,My passport was stolen,,,,2,expansion-v1
-police-consulate.someone-is-following-me,Someone is following me,,,,2,expansion-v1
-police-consulate.i-need-a-written-police-report,I need a written police report,,,,2,expansion-v1
-police-consulate.i-want-to-contact-my-embassy,I want to contact my embassy,,,,2,expansion-v1
-police-consulate.i-need-it-for-my-insurance,I need it for my insurance,,,,2,expansion-v1
-police-consulate.i-need-an-interpreter,I need an interpreter,,,,2,expansion-v1
-police-consulate.please-leave-me-alone,Please leave me alone,,,,2,expansion-v1
-police-consulate.i-was-robbed,I was robbed,,,,2,expansion-v1
-police-consulate.i-want-a-lawyer,I want a lawyer,,,,2,expansion-v1
-police-consulate.please-notify-my-consulate,Please notify my consulate,,,,2,expansion-v1
-police-consulate.i-am-calling-the-police,I am calling the police,,,,2,expansion-v1
-police-consulate.am-i-under-arrest,Am I under arrest?,,,,2,expansion-v1
-police-consulate.no-thank-you-i-am-not-interested,"No thank you, I am not interested",,,,2,expansion-v1
-police-consulate.someone-attacked-me,Someone attacked me,,,,2,expansion-v1
-police-consulate.i-did-not-agree-to-this-price,I did not agree to this price,,,,2,expansion-v1
-police-consulate.please-write-the-report-number,Please write the report number,,,,2,expansion-v1
-police-consulate.it-happened-here,It happened here,,,,2,expansion-v1
-police-consulate.may-i-have-a-copy-of-the-report,May I have a copy of the report?,,,,2,expansion-v1
-police-consulate.i-will-not-sign-anything-i-cannot-read,I will not sign anything I cannot read,,,,2,expansion-v1
-police-consulate.am-i-free-to-go,Am I free to go?,,,,2,expansion-v1
-police-consulate.i-do-not-want-to-go-with-you,I do not want to go with you,,,,2,expansion-v1
-body-parts.head,head,,,,2,expansion-v1
-body-parts.stomach,stomach,,,,2,expansion-v1
-body-parts.back,back,,,,2,expansion-v1
-body-parts.throat,throat,,,,2,expansion-v1
-body-parts.tooth,tooth,,,,2,expansion-v1
-body-parts.chest,chest,,,,2,expansion-v1
-body-parts.eye,eye,,,,2,expansion-v1
-body-parts.ear,ear,,,,2,expansion-v1
-body-parts.leg,leg,,,,2,expansion-v1
-body-parts.arm,arm,,,,2,expansion-v1
-body-parts.foot,foot,,,,2,expansion-v1
-body-parts.hand,hand,,,,2,expansion-v1
-body-parts.knee,knee,,,,2,expansion-v1
-body-parts.ankle,ankle,,,,2,expansion-v1
-body-parts.skin,skin,,,,2,expansion-v1
+emergency-medical.i-think-a-bone-is-broken,I think a bone is broken,,aɪ θˈɪŋk ɐ bˈoʊn ɪz bɹˈoʊkən,,2,expansion-v1;ipa=espeak
+emergency-medical.please-call-my-emergency-contact,Please call my emergency contact,,plˈiːz kˈɔːl maɪ ɪmˈɜːdʒənsi kˈɑːntækt,,2,expansion-v1;ipa=espeak
+emergency-medical.i-have-travel-insurance,I have travel insurance,,aɪ hæv tɹˈævəl ɪnʃˈʊɹɹəns,,2,expansion-v1;ipa=espeak
+lost-rescue.my-child-is-missing,My child is missing,,maɪ tʃˈaɪld ɪz mˈɪsɪŋ,,2,expansion-v1;ipa=espeak
+lost-rescue.i-do-not-know-where-i-am,I do not know where I am,,aɪ duːnˌɑːt nˈoʊ wˌɛɹ aɪˈæm,,2,expansion-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,My friend is hurt,,maɪ fɹˈɛnd ɪz hˈɜːt,,2,expansion-v1;ipa=espeak
+lost-rescue.i-lost-my-wallet,I lost my wallet,,aɪ lˈɔst maɪ wˈɔlɪt,,2,expansion-v1;ipa=espeak
+lost-rescue.i-lost-my-bag,I lost my bag,,aɪ lˈɔst maɪ bˈæɡ,,2,expansion-v1;ipa=espeak
+lost-rescue.where-is-lost-and-found,Where is lost and found?,,wˌɛɹ ɪz lˈɔst ænd fˈaʊnd,,2,expansion-v1;ipa=espeak
+lost-rescue.i-cannot-find-my-hotel,I cannot find my hotel,,aɪ kænˈɑːt fˈaɪnd maɪ hoʊtˈɛl,,2,expansion-v1;ipa=espeak
+lost-rescue.i-left-it-on-the-train,I left it on the train,,aɪ lˈɛft ɪɾ ɔnðə tɹˈeɪn,,2,expansion-v1;ipa=espeak
+lost-rescue.i-cannot-get-down,I cannot get down,,aɪ kænˈɑːt ɡɛt dˈaʊn,,2,expansion-v1;ipa=espeak
+medical-conditions.i-am-diabetic,I am diabetic,,aɪɐm dˌaɪəbˈɛɾɪk,,2,expansion-v1;ipa=espeak
+medical-conditions.i-need-insulin,I need insulin,,aɪ nˈiːd ˈɪnsəlˌɪn,,2,expansion-v1;ipa=espeak
+medical-conditions.i-have-asthma,I have asthma,,aɪ hæv ˈæzmə,,2,expansion-v1;ipa=espeak
+medical-conditions.i-have-a-heart-condition,I have a heart condition,,aɪ hæv ɐ hˈɑːɹt kəndˈɪʃən,,2,expansion-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-penicillin,I am allergic to penicillin,,aɪɐm ɐlˈɜːdʒɪk tə pˌɛnɪsˈɪlɪn,,2,expansion-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,I have epilepsy,,aɪ hæv ˈɛpɪlˌɛpsi,,2,expansion-v1;ipa=espeak
+medical-conditions.my-blood-sugar-is-low,My blood sugar is low,,maɪ blˈʌd ʃˈʊɡɚɹ ɪz lˈoʊ,,2,expansion-v1;ipa=espeak
+medical-conditions.i-need-my-inhaler,I need my inhaler,,aɪ nˈiːd maɪ ɪnhˈeɪlɚ,,2,expansion-v1;ipa=espeak
+medical-conditions.i-am-pregnant,I am pregnant,,aɪɐm pɹˈɛɡnənt,,2,expansion-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,I carry an adrenaline injector,,aɪ kˈæɹi ɐn ɐdɹˈɛnəlˌɪn ɪndʒˈɛktɚ,,2,expansion-v1;ipa=espeak
+medical-conditions.i-take-medicine-for,I take medicine for {},,aɪ tˈeɪk mˈɛdəsən fɔːɹ {},,2,expansion-v1;ipa=espeak
+medical-conditions.i-take-blood-thinners,I take blood thinners,,aɪ tˈeɪk blˈʌd θˈɪnɚz,,2,expansion-v1;ipa=espeak
+medical-conditions.medicine-allergy,Medicine allergy: {},,mˈɛdəsən ˈælɚdʒi {},,2,expansion-v1;ipa=espeak
+medical-conditions.this-card-lists-my-conditions,This card lists my conditions,,ðɪs kˈɑːɹd lˈɪsts maɪ kəndˈɪʃənz,,2,expansion-v1;ipa=espeak
+medical-conditions.this-is-my-medicine,This is my medicine,,ðɪs ɪz maɪ mˈɛdəsən,,2,expansion-v1;ipa=espeak
+medical-conditions.please-give-me-sugar-or-juice,Please give me sugar or juice,,plˈiːz ɡˈɪv mˌiː ʃˈʊɡɚ ɔːɹ dʒˈuːs,,2,expansion-v1;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,Inject it into my outer thigh,,ɪndʒˈɛkt ɪɾ ˌɪntʊ maɪ ˈaʊɾɚ θˈaɪ,,2,expansion-v1;ipa=espeak
+medical-conditions.my-blood-type-is,My blood type is {},,maɪ blˈʌd tˈaɪp ɪz {},,2,expansion-v1;ipa=espeak
+medical-conditions.do-not-give-me,Do not give me {},,duːnˌɑːt ɡˈɪv mˌiː {},,2,expansion-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,I am allergic to aspirin and ibuprofen,,aɪɐm ɐlˈɜːdʒɪk tʊ ˈæspɹɪn ænd ˌaɪbjuːpɹˈoʊfən,,2,expansion-v1;ipa=espeak
+medical-conditions.my-injector-is-in-my-bag,My injector is in my bag,,maɪ ɪndʒˈɛktɚɹ ɪz ɪn maɪ bˈæɡ,,2,expansion-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-sulfa-drugs,I am allergic to sulfa drugs,,aɪɐm ɐlˈɜːdʒɪk tə sˈʌlfə dɹˈʌɡz,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.which-pharmacy-is-open-now,Which pharmacy is open now?,,wˌɪtʃ fˈɑːɹməsi ɪz ˈoʊpən nˈaʊ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-need-medicine-for,I need medicine for {},,aɪ nˈiːd mˈɛdəsən fɔːɹ {},,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-fever,I have a fever,,aɪ hæv ɐ fˈiːvɚ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,I think I have malaria,,aɪ θˈɪŋk aɪ hæv mælˈɛɹiə,,2,malaria-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,I need a malaria test,,aɪ nˈiːd ɐ mælˈɛɹiə tˈɛst,,2,malaria-v1;ipa=espeak
+pharmacy-symptoms.i-have-diarrhea,I have diarrhea,,aɪ hæv dˌaɪɚɹˈiə,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Where is an all-night pharmacy?,,wˌɛɹ ɪz ɐn ˈɔːlnaɪt fˈɑːɹməsi,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.painkiller,painkiller,,pˈeɪŋkɪlɚ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.do-i-need-a-prescription,Do I need a prescription?,,dˈuː aɪ nˈiːd ɐ pɹɪskɹˈɪpʃən,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-headache,I have a headache,,aɪ hæv ɐ hˈɛdeɪk,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,paracetamol / acetaminophen,,pˈæɹəsˌɛɾɐmˌɑːl / ˈæsɪtˌæmɪnˌɑːfən,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.how-much-should-i-take,How much should I take?,,hˌaʊ mˈʌtʃ ʃˌʊd aɪ tˈeɪk,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-am-vomiting,I am vomiting,,aɪɐm vˈɑːmɪɾɪŋ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.rehydration-salts,rehydration salts,,ɹɪhaɪdɹˈeɪʃən sˈɔlts,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.how-many-times-a-day,How many times a day?,,hˌaʊ mˈɛni tˈaɪmz ɐ dˈeɪ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-stomach-ache,I have a stomach ache,,aɪ hæv ɐ stˈʌmək ˈeɪk,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cough,I have a cough,,aɪ hæv ɐ kˈɔf,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.antihistamine,antihistamine,,ˌæntɪhˈɪstɐmˌiːn,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.anti-diarrhea-medicine,anti-diarrhea medicine,,ˈæntaɪdˌaɪɚɹiə mˈɛdəsən,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-to-take-with,Is this safe to take with {}?,,ɪz ðɪs sˈeɪf tə tˈeɪk wɪð {},,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-feel-dizzy,I feel dizzy,,aɪ fˈiːl dˈɪzi,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.ibuprofen,ibuprofen,,ˌaɪbjuːpɹˈoʊfən,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-sore-throat,I have a sore throat,,aɪ hæv ɐ sˈoːɹ θɹˈoʊt,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.can-i-get-this-medicine-here,Can I get this medicine here?,,kæn aɪ ɡɛt ðɪs mˈɛdəsən hˈɪɹ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.bandage,bandage,,bˈændɪdʒ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.the-pain-is-severe,The pain is severe,,ðə pˈeɪn ɪz sɪvˈɪɹ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.antiseptic,antiseptic,,ˌæntɪsˈɛptɪk,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-feel-nauseous,I feel nauseous,,aɪ fˈiːl nˈɔːsɪəs,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-rash,I have a rash,,aɪ hæv ɐ ɹˈæʃ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.before-or-after-food,Before or after food?,,bɪfˌoːɹ ɔːɹ ˈæftɚ fˈuːd,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-think-it-is-infected,I think it is infected,,aɪ θˈɪŋk ɪɾ ɪz ɪnfˈɛktɪd,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.motion-sickness-tablets,motion-sickness tablets,,mˈoʊʃənsɪknəs tˈæbləts,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cut,I have a cut,,aɪ hæv ɐ kˈʌt,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.antacid,antacid,,æntˈæsɪd,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-burn,I have a burn,,aɪ hæv ɐ bˈɜːn,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,It started {} days ago,,ɪt stˈɑːɹɾɪd {} dˈeɪz ɐɡˈoʊ,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.cough-medicine,cough medicine,,kˈɔf mˈɛdəsən,,2,expansion-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-during-pregnancy,Is this safe during pregnancy?,,ɪz ðɪs sˈeɪf dˈʊɹɹɪŋ pɹˈɛɡnənsi,,2,expansion-v1;ipa=espeak
+police-consulate.where-is-the-police-station,Where is the police station?,,wˌɛɹ ɪz ðə pəlˈiːs stˈeɪʃən,,2,expansion-v1;ipa=espeak
+police-consulate.i-want-to-report-a-theft,I want to report a theft,,aɪ wˈɔnt tə ɹɪpˈoːɹt ɐ θˈɛft,,2,expansion-v1;ipa=espeak
+police-consulate.my-bag-was-stolen,My bag was stolen,,maɪ bˈæɡ wʌz stˈoʊlən,,2,expansion-v1;ipa=espeak
+police-consulate.my-passport-was-stolen,My passport was stolen,,maɪ pˈæspoːɹt wʌz stˈoʊlən,,2,expansion-v1;ipa=espeak
+police-consulate.someone-is-following-me,Someone is following me,,sˈʌmwʌn ɪz fˈɑːloʊɪŋ mˌiː,,2,expansion-v1;ipa=espeak
+police-consulate.i-need-a-written-police-report,I need a written police report,,aɪ nˈiːd ɐ ɹˈɪʔn̩ pəlˈiːs ɹɪpˈoːɹt,,2,expansion-v1;ipa=espeak
+police-consulate.i-want-to-contact-my-embassy,I want to contact my embassy,,aɪ wˈɔnt tə kˈɑːntækt maɪ ˈɛmbəsi,,2,expansion-v1;ipa=espeak
+police-consulate.i-need-it-for-my-insurance,I need it for my insurance,,aɪ nˈiːd ɪt fɔːɹ maɪ ɪnʃˈʊɹɹəns,,2,expansion-v1;ipa=espeak
+police-consulate.i-need-an-interpreter,I need an interpreter,,aɪ nˈiːd ɐn ɪntˈɜːpɹɪɾɚ,,2,expansion-v1;ipa=espeak
+police-consulate.please-leave-me-alone,Please leave me alone,,plˈiːz lˈiːv mˌiː ɐlˈoʊn,,2,expansion-v1;ipa=espeak
+police-consulate.i-was-robbed,I was robbed,,aɪ wʌz ɹˈɑːbd,,2,expansion-v1;ipa=espeak
+police-consulate.i-want-a-lawyer,I want a lawyer,,aɪ wˈɔnt ɐ lˈɔɪɚ,,2,expansion-v1;ipa=espeak
+police-consulate.please-notify-my-consulate,Please notify my consulate,,plˈiːz nˈoʊɾɪfˌaɪ maɪ kˈɑːnsjʊlət,,2,expansion-v1;ipa=espeak
+police-consulate.i-am-calling-the-police,I am calling the police,,aɪɐm kˈɔːlɪŋ ðə pəlˈiːs,,2,expansion-v1;ipa=espeak
+police-consulate.am-i-under-arrest,Am I under arrest?,,æm aɪ ˌʌndɚɹ ɚɹˈɛst,,2,expansion-v1;ipa=espeak
+police-consulate.no-thank-you-i-am-not-interested,"No thank you, I am not interested",,"nˈoʊ θˈæŋk juː, aɪɐm nˌɑːt ˈɪntɹɛstɪd",,2,expansion-v1;ipa=espeak
+police-consulate.someone-attacked-me,Someone attacked me,,sˈʌmwʌn ɐtˈækt mˌiː,,2,expansion-v1;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,I did not agree to this price,,aɪ dɪdnˌɑːt ɐɡɹˈiː tə ðɪs pɹˈaɪs,,2,expansion-v1;ipa=espeak
+police-consulate.please-write-the-report-number,Please write the report number,,plˈiːz ɹˈaɪt ðə ɹɪpˈoːɹt nˈʌmbɚ,,2,expansion-v1;ipa=espeak
+police-consulate.it-happened-here,It happened here,,ɪt hˈæpənd hˈɪɹ,,2,expansion-v1;ipa=espeak
+police-consulate.may-i-have-a-copy-of-the-report,May I have a copy of the report?,,mˈeɪ aɪ hæv ɐ kˈɑːpi ʌvðə ɹɪpˈoːɹt,,2,expansion-v1;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,I will not sign anything I cannot read,,aɪ wɪl nˌɑːt sˈaɪn ˈɛnɪθˌɪŋ aɪ kænˈɑːt ɹˈiːd,,2,expansion-v1;ipa=espeak
+police-consulate.am-i-free-to-go,Am I free to go?,,æm aɪ fɹˈiː tə ɡˈoʊ,,2,expansion-v1;ipa=espeak
+police-consulate.i-do-not-want-to-go-with-you,I do not want to go with you,,aɪ duːnˌɑːt wˈɔnt tə ɡˈoʊ wɪð juː,,2,expansion-v1;ipa=espeak
+body-parts.head,head,,hˈɛd,,2,expansion-v1;ipa=espeak
+body-parts.stomach,stomach,,stˈʌmək,,2,expansion-v1;ipa=espeak
+body-parts.back,back,,bˈæk,,2,expansion-v1;ipa=espeak
+body-parts.throat,throat,,θɹˈoʊt,,2,expansion-v1;ipa=espeak
+body-parts.tooth,tooth,,tˈuːθ,,2,expansion-v1;ipa=espeak
+body-parts.chest,chest,,tʃˈɛst,,2,expansion-v1;ipa=espeak
+body-parts.eye,eye,,ˈaɪ,,2,expansion-v1;ipa=espeak
+body-parts.ear,ear,,ˈɪɹ,,2,expansion-v1;ipa=espeak
+body-parts.leg,leg,,lˈɛɡ,,2,expansion-v1;ipa=espeak
+body-parts.arm,arm,,ˈɑːɹm,,2,expansion-v1;ipa=espeak
+body-parts.foot,foot,,fˈʊt,,2,expansion-v1;ipa=espeak
+body-parts.hand,hand,,hˈænd,,2,expansion-v1;ipa=espeak
+body-parts.knee,knee,,nˈiː,,2,expansion-v1;ipa=espeak
+body-parts.ankle,ankle,,ˈæŋkəl,,2,expansion-v1;ipa=espeak
+body-parts.skin,skin,,skˈɪn,,2,expansion-v1;ipa=espeak

@@ -1,45 +1,45 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-numbers-money.l-ng,không,0,,,2,vi-agent-v1
-numbers-money.y,một,1,,,2,vi-agent-v1
-numbers-money.r,hai,2,,,2,vi-agent-v1
-numbers-money.s-n,ba,3,,,2,vi-agent-v1
-numbers-money.s,bốn,4,,,2,vi-agent-v1
-numbers-money.w,năm,5,,,2,vi-agent-v1
-numbers-money.li,sáu,6,,,2,vi-agent-v1
-numbers-money.q,bảy,7,,,2,vi-agent-v1
-numbers-money.b,tám,8,,,2,vi-agent-v1
-numbers-money.ji,chín,9,,,2,vi-agent-v1
-numbers-money.sh,mười,10,,,2,vi-agent-v1
-numbers-money.y-b-i,một trăm,100,,,2,vi-agent-v1
-numbers-money.y-qi-n,một nghìn,một ngàn,,,2,vi-agent-v1
-numbers-money.y-w-n,mười nghìn,mười ngàn,,,2,vi-agent-v1
-numbers-money.b-n,một nửa,rưỡi,,,2,vi-agent-v1
+numbers-money.l-ng,không,0,xoŋ˧,,2,vi-agent-v1;ipa=espeak
+numbers-money.y,một,1,mot̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+numbers-money.r,hai,2,haːj˧,,2,vi-agent-v1;ipa=espeak
+numbers-money.s-n,ba,3,baː˧,,2,vi-agent-v1;ipa=espeak
+numbers-money.s,bốn,4,bon˧˥,,2,vi-agent-v1;ipa=espeak
+numbers-money.w,năm,5,nam˧,,2,vi-agent-v1;ipa=espeak
+numbers-money.li,sáu,6,saw˧˥,,2,vi-agent-v1;ipa=espeak
+numbers-money.q,bảy,7,baj˧˩˧,,2,vi-agent-v1;ipa=espeak
+numbers-money.b,tám,8,t̪aːm˧˥,,2,vi-agent-v1;ipa=espeak
+numbers-money.ji,chín,9,tʃin˧˥,,2,vi-agent-v1;ipa=espeak
+numbers-money.sh,mười,10,myəj˨˩,,2,vi-agent-v1;ipa=espeak
+numbers-money.y-b-i,một trăm,100,mot̪˨˩ˀ tʃam˧,,2,vi-agent-v1;ipa=espeak
+numbers-money.y-qi-n,một nghìn,một ngàn,mot̪˨˩ˀ ŋin˨˩,,2,vi-agent-v1;ipa=espeak
+numbers-money.y-w-n,mười nghìn,mười ngàn,myəj˨˩ ŋin˨˩,,2,vi-agent-v1;ipa=espeak
+numbers-money.b-n,một nửa,rưỡi,mot̪˨˩ˀ nyə˧˩˧,,2,vi-agent-v1;ipa=espeak
 atm-cash.where-is-an-atm,Máy ATM ở đâu ạ?,Cây ATM ở đâu ạ?,,,2,vi-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,Máy này nhận thẻ nước ngoài không ạ?,,,,2,vi-agent-v1
-atm-cash.the-atm-kept-my-card,Máy nuốt thẻ của tôi,,,,2,vi-agent-v1
-atm-cash.is-there-a-fee,Có mất phí không ạ?,,,,2,vi-agent-v1
-atm-cash.the-card-was-declined,Thẻ bị từ chối,,,,2,vi-agent-v1
-atm-cash.what-is-the-exchange-rate,Tỷ giá bao nhiêu ạ?,,,,2,vi-agent-v1
-atm-cash.no-money-came-out,Máy không nhả tiền,,,,2,vi-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,Máy này nhận thẻ nước ngoài không ạ?,,maj˧˥ naj˨˩ ɲən˨˩ˀ tɛ˧˩˧ nyəc˧˥ ŋwaːj˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,Máy nuốt thẻ của tôi,,maj˧˥ nuət̪˧˥ tɛ˧˩˧ kuə˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,Có mất phí không ạ?,,kɔ˧˥ mət̪˧˥ fi˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,Thẻ bị từ chối,,tɛ˧˩˧ bi˨˩ˀ t̪y˨˩ tʃoj˧˥,,2,vi-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,Tỷ giá bao nhiêu ạ?,,t̪i˧˩˧ zaː˧˥ baːw˧ ɲiɛw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,Máy không nhả tiền,,maj˧˥ xoŋ˧ ɲaː˧˩˧ t̪iɛn˨˩,,2,vi-agent-v1;ipa=espeak
 atm-cash.where-can-i-change-money,Đổi tiền ở đâu ạ?,,,,2,vi-agent-v1
-atm-cash.the-machine-is-out-of-service,Máy không hoạt động,,,,2,vi-agent-v1
-atm-cash.please-give-me-smaller-notes,Xin cho tôi tờ nhỏ hơn,,,,2,vi-agent-v1
-atm-cash.do-you-have-change,Có tiền lẻ không ạ?,,,,2,vi-agent-v1
-atm-cash.may-i-pay-in,Trả bằng {} được không ạ?,,,,2,vi-agent-v1
-atm-cash.please-charge-in-local-currency,Xin tính bằng tiền Việt,Xin tính bằng nội tệ,,,2,vi-agent-v1
+atm-cash.the-machine-is-out-of-service,Máy không hoạt động,,maj˧˥ xoŋ˧ hwaːt̪˨˩ˀ ɗoŋ˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,Xin cho tôi tờ nhỏ hơn,,sin˧ tʃɔ˧ t̪oj˧ t̪əː˨˩ ɲɔ˧˩˧ həːn˧,,2,vi-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,Có tiền lẻ không ạ?,,kɔ˧˥ t̪iɛn˨˩ lɛ˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,Trả bằng {} được không ạ?,,tʃaː˧˩˧ baŋ˨˩ {} ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,Xin tính bằng tiền Việt,Xin tính bằng nội tệ,sin˧ t̪iɲ˧˥ baŋ˨˩ t̪iɛn˨˩ viɛt̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.where-can-i-get-coins,Đổi tiền xu ở đâu ạ?,,,,2,vi-agent-v1
-atm-cash.is-there-a-minimum-for-cards,Thẻ có mức tối thiểu không ạ?,,,,2,vi-agent-v1
-atm-cash.atm,Máy ATM,Cây ATM,,,2,vi-agent-v1
-atm-cash.banknote,Tờ tiền,,,,2,vi-agent-v1
-atm-cash.coin,Tiền xu,,,,2,vi-agent-v1
-atm-cash.cash-only,Chỉ nhận tiền mặt,,,,2,vi-agent-v1
-atm-cash.fee,Phí,Lệ phí,,,2,vi-agent-v1
-atm-cash.change,Tiền thừa,Tiền thối,,,2,vi-agent-v1
-atm-cash.exchange-rate,Tỷ giá,,,,2,vi-agent-v1
-atm-cash.bank,Ngân hàng,,,,2,vi-agent-v1
-atm-cash.money-exchange,Đổi ngoại tệ,Thu đổi ngoại tệ,,,2,vi-agent-v1
-atm-cash.pin,Mã PIN,,,,2,vi-agent-v1
-numbers-money.dong,đồng,VNĐ,,,2,coordinator-gaps-v2
+atm-cash.is-there-a-minimum-for-cards,Thẻ có mức tối thiểu không ạ?,,tɛ˧˩˧ kɔ˧˥ myc˧˥ t̪oj˧˥ tiɛw˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.atm,Máy ATM,Cây ATM,maj˧˥ eɪtiːɛm˧,,2,vi-agent-v1;ipa=espeak
+atm-cash.banknote,Tờ tiền,,t̪əː˨˩ t̪iɛn˨˩,,2,vi-agent-v1;ipa=espeak
+atm-cash.coin,Tiền xu,,t̪iɛn˨˩ su˧,,2,vi-agent-v1;ipa=espeak
+atm-cash.cash-only,Chỉ nhận tiền mặt,,tʃi˧˩˧ ɲən˨˩ˀ t̪iɛn˨˩ mat̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.fee,Phí,Lệ phí,fi˧˥,,2,vi-agent-v1;ipa=espeak
+atm-cash.change,Tiền thừa,Tiền thối,t̪iɛn˨˩ tyə˨˩,,2,vi-agent-v1;ipa=espeak
+atm-cash.exchange-rate,Tỷ giá,,t̪i˧˩˧ zaː˧˥,,2,vi-agent-v1;ipa=espeak
+atm-cash.bank,Ngân hàng,,ŋən˧ haːŋ˨˩,,2,vi-agent-v1;ipa=espeak
+atm-cash.money-exchange,Đổi ngoại tệ,Thu đổi ngoại tệ,ɗoj˧˩˧ ŋwaːj˨˩ˀ t̪e˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+atm-cash.pin,Mã PIN,,maː˧ˀ˥ pin˧,,2,vi-agent-v1;ipa=espeak
+numbers-money.dong,đồng,VNĐ,ɗoŋ˨˩,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.dong-symbol,₫,VNĐ,,,2,coordinator-gaps-v2
 numbers-money.number-and-classifier-notes,"Số ghép như tiếng Việt: 11 = shíyī, 20 = èrshí, 21 = èrshíyī; 101 = yìbǎi líng yī (líng = linh). Điện thoại: 1 đọc là yāo. Trước loại từ, 2 là liǎng chứ không phải èr: liǎng zhāng piào = hai vé. gè (cái, cả cho người), wèi (vị, lịch sự), zhāng (tờ, tấm), bēi (ly), wǎn (bát), píng (chai), běn (quyển). Tiền: nói yuán là kuài; jiǎo / máo = 0,1 yuán; fēn = 0,01 yuán.",,,,2,vi-notes-v1
 numbers-money.number-and-classifier-notes-2,"Số ghép: 11 = jūichi, 20 = nijū, 21 = nijūichi; đếm theo vạn: 10.000 = ichiman. Loại từ đi sau số: -tsu (đồ vật), -mai (tờ, tấm), -hon (vật dài), -nin (người), -hai (ly), -satsu (quyển), -dai (xe, máy). Dạng ghép hay biến đổi: -tsu là hitotsu, futatsu… kokonotsu; -nin là hitori, futari, sannin; -hon là ippon, nihon, sanbon. Điện thoại: 0 = zero / maru, 4 = yon, 7 = nana, 9 = kyū; dấu gạch đọc là no.",,,,2,vi-notes-v1

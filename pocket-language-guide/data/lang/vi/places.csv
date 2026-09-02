@@ -1,8 +1,8 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 attractions-tickets.where-can-i-buy-tickets,Mua vé ở đâu ạ?,,,,2,vi-agent-v1
-attractions-tickets.do-i-need-a-reservation,Có cần đặt trước không ạ?,,,,2,vi-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,Vào cửa muộn nhất lúc mấy giờ ạ?,,,,2,vi-agent-v1
-attractions-tickets.are-there-lockers,Có tủ gửi đồ không ạ?,,,,2,vi-agent-v1
+attractions-tickets.do-i-need-a-reservation,Có cần đặt trước không ạ?,,kɔ˧˥ kən˨˩ ɗat̪˨˩ˀ tʃyəc˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Vào cửa muộn nhất lúc mấy giờ ạ?,,vaːw˨˩ kyə˧˩˧ muən˨˩ˀ ɲət̪˧˥ luc˧˥ məɪ˧˥ zəː˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Có tủ gửi đồ không ạ?,,kɔ˧˥ t̪u˧˩˧ ɣyj˧˩˧ ɗo˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 attractions-tickets.may-i-take-photos,Chụp ảnh được không ạ?,Chụp hình được không ạ?,,,2,vi-agent-v1
-attractions-tickets.please-take-a-photo-of-us,Chụp giúp chúng tôi một tấm ạ,,,,2,vi-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,Chụp giúp một tấm được không ạ?,,,,2,vi-agent-v1
+attractions-tickets.please-take-a-photo-of-us,Chụp giúp chúng tôi một tấm ạ,,tʃup˨˩ˀ zup˧˥ tʃuŋ˧˥ t̪oj˧ mot̪˨˩ˀ t̪əm˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Chụp giúp một tấm được không ạ?,,tʃup˨˩ˀ zup˧˥ mot̪˨˩ˀ t̪əm˧˥ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak

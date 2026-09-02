@@ -1,29 +1,29 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-dietary-needs.no-meat,Senza carne,,,,2,it-agent-v1
-dietary-needs.no-eggs,Senza uova,,,,2,it-agent-v1
-dietary-needs.not-spicy,Non piccante,,,,2,it-agent-v1
-dietary-needs.less-spicy,Meno piccante,,,,2,it-agent-v1
-dietary-needs.no-peanuts,Senza arachidi,Senza noccioline,,,2,it-agent-v1
-dietary-needs.no-nuts,Senza frutta a guscio né noci,"Senza noci, mandorle o nocciole",,,2,it-agent-v1
-dietary-needs.no-seafood,Senza pesce né frutti di mare,,,,2,it-agent-v1
-dietary-needs.i-am-vegetarian,Sono vegetariano/a,,,,2,it-agent-v1
-dietary-needs.i-am-vegan,Sono vegano/a,,,,2,it-agent-v1
-dietary-needs.i-do-not-eat,Non mangio {},,,,2,it-agent-v1
-dietary-needs.i-am-allergic-to,Ho un'allergia a {},,,,2,it-agent-v1
-food-ordering.table-for-two,Un tavolo per due,,,,2,it-agent-v1
-food-ordering.is-a-table-available,C'è un tavolo libero?,,,,2,it-agent-v1
-food-ordering.menu-please,"Il menù, per favore",,,,2,it-agent-v1
-food-ordering.i-want-this,Vorrei questo,,,,2,it-agent-v1
-food-ordering.do-you-have-drinking-water,Avete acqua potabile?,,,,2,it-agent-v1
-food-ordering.to-go-please,"Da portare via, per favore",,,,2,it-agent-v1
-food-ordering.check-please,"Il conto, per favore",,,,2,it-agent-v1
-food-ordering.does-it-contain,Contiene {}?,,,,2,it-agent-v1
-food-ordering.is-this-vegetarian,Questo è vegetariano?,,,,2,it-agent-v1
-dietary-needs.does-it-contain-fish-stock,Contiene brodo di pesce?,,,,2,it-agent-v1
-dietary-needs.does-it-contain-pork-stock,Contiene brodo di maiale?,Contiene brodo di ossa di maiale?,,,2,it-agent-v1
-dietary-needs.i-have-a-severe-allergy-to,Ho una grave allergia a {},,,,2,it-agent-v1
-food-ordering.what-do-you-recommend,Che cosa mi consiglia?,,,,2,it-agent-v1
-food-ordering.water-please,"Acqua, per favore",,,,2,it-agent-v1
-food-ordering.can-a-vegetarian-eat-this,Un vegetariano può mangiare questo?,,,,2,it-agent-v1
-dietary-needs.no-pork,"Senza maiale, salumi, pancetta o guanciale",Senza carne di maiale né strutto,,,2,it-agent-v1
-dietary-needs.is-this-halal,È halal?,Ha la certificazione halal?,,,2,it-agent-v1
+dietary-needs.no-meat,Senza carne,,sˌɛntsa kˈarne,,2,it-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Senza uova,,sˌɛntsa wˈɔva,,2,it-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Non piccante,,non pikːˈante,,2,it-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Meno piccante,,mˈeno pikːˈante,,2,it-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Senza arachidi,Senza noccioline,sˌɛntsa aɾˈakidɪ,,2,it-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Senza frutta a guscio né noci,"Senza noci, mandorle o nocciole",sˌɛntsa frˈutːa a ɡˈuʃo nˈe nˈotʃɪ,,2,it-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Senza pesce né frutti di mare,,sˌɛntsa pˈeʃe nˈe frˈutːɪ dɪ mˈare,,2,it-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Sono vegetariano/a,,sˌono vedʒetariˈano / ˈaː,,2,it-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Sono vegano/a,,sˌono veɡˈano / ˈaː,,2,it-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Non mangio {},,non mˈandʒo {},,2,it-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Ho un'allergia a {},,o ʊnallerdʒˈia ˈaː {},,2,it-agent-v1;ipa=espeak
+food-ordering.table-for-two,Un tavolo per due,,ʊn tˈavolo per dˈue,,2,it-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,C'è un tavolo libero?,,tʃe ʊn tˈavolo lˈibero,,2,it-agent-v1;ipa=espeak
+food-ordering.menu-please,"Il menù, per favore",,"il menˈu, per favˈore",,2,it-agent-v1;ipa=espeak
+food-ordering.i-want-this,Vorrei questo,,vorɾˈɛi kwˈesto,,2,it-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Avete acqua potabile?,,avˌete ˈakːwa potˈabile,,2,it-agent-v1;ipa=espeak
+food-ordering.to-go-please,"Da portare via, per favore",,"da portˈare vˈia, per favˈore",,2,it-agent-v1;ipa=espeak
+food-ordering.check-please,"Il conto, per favore",,"il kˈonto, per favˈore",,2,it-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Contiene {}?,,kontjˈɛne {},,2,it-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Questo è vegetariano?,,kwˈesto ˌɛ vedʒetariˈano,,2,it-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Contiene brodo di pesce?,,kontjˈɛne brˈɔdo dɪ pˈeʃe,,2,it-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Contiene brodo di maiale?,Contiene brodo di ossa di maiale?,kontjˈɛne brˈɔdo dɪ majˈale,,2,it-agent-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Ho una grave allergia a {},,o ˌʊna ɡrˈave allerdʒˈia ˈaː {},,2,it-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Che cosa mi consiglia?,,ke kˈɔza mɪ konsˈiʎa,,2,it-agent-v1;ipa=espeak
+food-ordering.water-please,"Acqua, per favore",,"ˈakːwa, per favˈore",,2,it-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,Un vegetariano può mangiare questo?,,ʊn vedʒetariˈano pʊˈɔ mandʒˈare kwˈesto,,2,it-agent-v1;ipa=espeak
+dietary-needs.no-pork,"Senza maiale, salumi, pancetta o guanciale",Senza carne di maiale né strutto,"sˌɛntsa majˈale, salˈumɪ, pantʃˈetːa o ɡwantʃˈale",,2,it-agent-v1;ipa=espeak
+dietary-needs.is-this-halal,È halal?,Ha la certificazione halal?,e hˈalal,,2,it-agent-v1;ipa=espeak

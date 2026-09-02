@@ -1,47 +1,47 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,eu / me,,,,2,pt-agent-v1
-pronouns-verbs.we-us,nós / nos,,,,2,pt-agent-v1
-pronouns-verbs.you,você,tu,,,2,pt-agent-v1
-pronouns-verbs.you-polite,o senhor / a senhora,,,,2,pt-agent-v1
-pronouns-verbs.he-him,ele,,,,2,pt-agent-v1
-pronouns-verbs.she-her,ela,,,,2,pt-agent-v1
-pronouns-verbs.they-them,eles / elas,,,,2,pt-agent-v1
-pronouns-verbs.my-mine,o meu / a minha,,,,2,pt-agent-v1
-pronouns-verbs.your-yours,o seu / a sua,,,,2,pt-agent-v1
-pronouns-verbs.be-called-call,chamar-se,se chamar,,,2,pt-agent-v1
-pronouns-verbs.have,ter,,,,2,pt-agent-v1
-pronouns-verbs.do-not-have,não ter,,,,2,pt-agent-v1
-pronouns-verbs.go,ir,,,,2,pt-agent-v1
-pronouns-verbs.come,vir,,,,2,pt-agent-v1
-pronouns-verbs.would-like,queria,gostaria de,,,2,pt-agent-v1
-pronouns-verbs.want,querer,,,,2,pt-agent-v1
-pronouns-verbs.look-for,procurar,,,,2,pt-agent-v1
-pronouns-verbs.buy,comprar,,,,2,pt-agent-v1
-pronouns-verbs.like,gostar de,,,,2,pt-agent-v1
-pronouns-verbs.need,precisar de,,,,2,pt-agent-v1
-pronouns-verbs.there-is-have,há,tem,,,2,pt-agent-v1
-pronouns-verbs.there-is-not-do-not-have,não há,não tem,,,2,pt-agent-v1
-pronouns-verbs.want-to-verb,quero + infinitivo,,,,2,pt-agent-v1
-pronouns-verbs.want-thing,quero + coisa,,,,2,pt-agent-v1
-pronouns-verbs.need-thing,preciso de + coisa,,,,2,pt-agent-v1
-pronouns-verbs.looking-for-thing,procuro + coisa,,,,2,pt-agent-v1
-question-words.what,o quê,que,,,2,pt-agent-v1
-question-words.where,onde,,,,2,pt-agent-v1
-question-words.who,quem,,,,2,pt-agent-v1
-question-words.which-one,qual,,,,2,pt-agent-v1
-question-words.when,quando,,,,2,pt-agent-v1
-question-words.how,como,,,,2,pt-agent-v1
-question-words.how-much-many,quanto,,,,2,pt-agent-v1
-question-words.how-many,quantos,,,,2,pt-agent-v1
-question-words.why,porquê,por quê,,,2,pt-agent-v1
-question-words.this,isto,,,,2,pt-agent-v1
-question-words.that,isso,aquilo,,,2,pt-agent-v1
-question-words.here,aqui,,,,2,pt-agent-v1
-question-words.there,ali,lá,,,2,pt-agent-v1
-question-words.a-little,um pouco,,,,2,pt-agent-v1
-question-words.some,algum,alguns,,,2,pt-agent-v1
-question-words.very,muito,,,,2,pt-agent-v1
-question-words.too,demasiado,demais,,,2,pt-agent-v1
-question-words.also,também,,,,2,pt-agent-v1
-question-words.all-both,todos,ambos,,,2,pt-agent-v1
-question-words.how-much-what-price,quanto custa,,,,2,pt-agent-v1
+pronouns-verbs.i-me,eu / me,,ˈeʊ / my,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.we-us,nós / nos,,nˈɔs / nʊs,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.you,você,tu,vosˈe,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.you-polite,o senhor / a senhora,,ʊ seɲˈor / a sˌeɲˈɔɾæ,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.he-him,ele,,ˈely,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.she-her,ela,,ˈɛlæ,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.they-them,eles / elas,,ˈelys / ˈɛlæs,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.my-mine,o meu / a minha,,ʊ mˈeʊ / a mˈiɲæ,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.your-yours,o seu / a sua,,ʊ sˈeʊ / a sˈuæ,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.be-called-call,chamar-se,se chamar,ʃæmˈarsy,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.have,ter,,ter,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.do-not-have,não ter,,nˌɐ̃ʊ̃ ter,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.go,ir,,ˈir,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.come,vir,,vˈir,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.would-like,queria,gostaria de,kˌeɾˈiæ,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.want,querer,,keɾˈer,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.look-for,procurar,,prˌokuɾˈar,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.buy,comprar,,komprˈar,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.like,gostar de,,ɡostˈar dʒy,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.need,precisar de,,prˌesizˈar dʒy,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.there-is-have,há,tem,ˈa,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,não há,não tem,nˌɐ̃ʊ̃ ˈa,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,quero + infinitivo,,kˈɛɾw ˌiŋfinitʃˈivʊ,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,quero + coisa,,kˈɛɾʊ kˈoɪzæ,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,preciso de + coisa,,prˌesˈizʊ dʒy kˈoɪzæ,,2,pt-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,procuro + coisa,,prˌokˈuɾʊ kˈoɪzæ,,2,pt-agent-v1;ipa=espeak
+question-words.what,o quê,que,ʊ kˈe,,2,pt-agent-v1;ipa=espeak
+question-words.where,onde,,ˌoŋdʒy,,2,pt-agent-v1;ipa=espeak
+question-words.who,quem,,kˈeɪŋ,,2,pt-agent-v1;ipa=espeak
+question-words.which-one,qual,,kwˈaʊ,,2,pt-agent-v1;ipa=espeak
+question-words.when,quando,,kwˈɐ̃ŋdʊ,,2,pt-agent-v1;ipa=espeak
+question-words.how,como,,kˌomʊ,,2,pt-agent-v1;ipa=espeak
+question-words.how-much-many,quanto,,kwˈɐ̃ŋtʊ,,2,pt-agent-v1;ipa=espeak
+question-words.how-many,quantos,,kwˈɐ̃ŋtʊs,,2,pt-agent-v1;ipa=espeak
+question-words.why,porquê,por quê,poɾəkˈe,,2,pt-agent-v1;ipa=espeak
+question-words.this,isto,,ˈistʊ,,2,pt-agent-v1;ipa=espeak
+question-words.that,isso,aquilo,ˈisʊ,,2,pt-agent-v1;ipa=espeak
+question-words.here,aqui,,akˈi,,2,pt-agent-v1;ipa=espeak
+question-words.there,ali,lá,alˈi,,2,pt-agent-v1;ipa=espeak
+question-words.a-little,um pouco,,ũŋ pˈowkʊ,,2,pt-agent-v1;ipa=espeak
+question-words.some,algum,alguns,aʊɡˈũŋ,,2,pt-agent-v1;ipa=espeak
+question-words.very,muito,,mwˈiŋtʊ,,2,pt-agent-v1;ipa=espeak
+question-words.too,demasiado,demais,dˌemaziˈadʊ,,2,pt-agent-v1;ipa=espeak
+question-words.also,também,,tɐ̃mbˈeɪŋ,,2,pt-agent-v1;ipa=espeak
+question-words.all-both,todos,ambos,tˈodʊs,,2,pt-agent-v1;ipa=espeak
+question-words.how-much-what-price,quanto custa,,kwˈɐ̃ŋtʊ kˈustæ,,2,pt-agent-v1;ipa=espeak

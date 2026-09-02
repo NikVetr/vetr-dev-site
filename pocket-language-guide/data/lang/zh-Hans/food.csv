@@ -1,29 +1,29 @@
 concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
-dietary-needs.no-meat,不要肉,,bú yào ròu,,,2,latex-reference-v2
-food-ordering.table-for-two,两位,,liǎng wèi,,,2,latex-reference-v2
-dietary-needs.no-eggs,不要鸡蛋,,bú yào jīdàn,,,2,latex-reference-v2
-food-ordering.is-a-table-available,有位子吗？,,yǒu wèizi ma?,,,2,latex-reference-v2
-dietary-needs.not-spicy,不要辣,,bú yào là,,,2,latex-reference-v2
-food-ordering.menu-please,请给我菜单,,qǐng gěi wǒ càidān,,,2,latex-reference-v2
-dietary-needs.less-spicy,少辣,,shǎo là,,,2,latex-reference-v2
-food-ordering.i-want-this,我要这个,,wǒ yào zhège,,,2,latex-reference-v2
-dietary-needs.no-peanuts,不要花生,,bú yào huāshēng,,,2,latex-reference-v2
-food-ordering.do-you-have-drinking-water,有饮用水吗？,,yǒu yǐnyòngshuǐ ma?,,,2,latex-reference-v2
-dietary-needs.no-nuts,不要坚果,,bú yào jiānguǒ,,,2,latex-reference-v2
-food-ordering.to-go-please,请打包,,qǐng dǎbāo,,,2,latex-reference-v2
-dietary-needs.no-seafood,不要海鲜,,bú yào hǎixiān,,,2,latex-reference-v2
-food-ordering.check-please,请结账,,qǐng jiézhàng,,,2,latex-reference-v2
-dietary-needs.i-am-vegetarian,我吃素,,wǒ chī sù,,,2,latex-reference-v2
-food-ordering.does-it-contain,里面有{}吗？,,lǐmiàn yǒu {} ma?,,,2,latex-reference-v2
-dietary-needs.i-am-vegan,我吃纯素,,wǒ chī chún sù,,,2,latex-reference-v2
-food-ordering.is-this-vegetarian,这个是素的吗？,,zhège shì sù de ma?,,,2,latex-reference-v2
-dietary-needs.i-do-not-eat,我不吃{},,wǒ bù chī {},,,2,latex-reference-v2
-dietary-needs.i-am-allergic-to,我对{}过敏,,wǒ duì {} guòmǐn,,,2,latex-reference-v2
-food-ordering.what-do-you-recommend,有什么推荐？,,yǒu shénme tuījiàn?,,,2,zh-Hans-agent-v1
-food-ordering.water-please,请给我一杯水,,qǐng gěi wǒ yì bēi shuǐ,,,2,zh-Hans-agent-v1
-dietary-needs.does-it-contain-fish-stock,汤底是鱼做的吗？,,tāngdǐ shì yú zuò de ma?,,,2,zh-Hans-agent-v1
-dietary-needs.does-it-contain-pork-stock,汤底是猪肉或猪骨熬的吗？,高汤里有猪肉吗？,tāngdǐ shì zhūròu huò zhūgǔ áo de ma?,,,2,zh-Hans-pork-stock-v1
-food-ordering.can-a-vegetarian-eat-this,吃素的能吃吗？,,chī sù de néng chī ma?,,,2,zh-Hans-agent-v1
-dietary-needs.i-have-a-severe-allergy-to,我对{}严重过敏,,wǒ duì {} yánzhòng guòmǐn,,,2,zh-Hans-agent-v1
-dietary-needs.no-pork,不要猪肉,,bú yào zhūròu,,,2,zh-Hans-gaps-v1
-dietary-needs.is-this-halal,这个是清真的吗？,,zhège shì qīngzhēn de ma?,,,2,zh-Hans-gaps-v1
+dietary-needs.no-meat,不要肉,,bú yào ròu,pu˧˥ jɑʊ˥˩ ʐoʊ˥˩,,2,latex-reference-v2;ipa=pinyin
+food-ordering.table-for-two,两位,,liǎng wèi,ljɑŋ˧˩˧ weɪ˥˩,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.no-eggs,不要鸡蛋,,bú yào jīdàn,pu˧˥ jɑʊ˥˩ tɕi˥tan˥˩,,2,latex-reference-v2;ipa=pinyin
+food-ordering.is-a-table-available,有位子吗？,,yǒu wèizi ma?,joʊ˧˩˧ weɪ˥˩tsɯ ma,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.not-spicy,不要辣,,bú yào là,pu˧˥ jɑʊ˥˩ la˥˩,,2,latex-reference-v2;ipa=pinyin
+food-ordering.menu-please,请给我菜单,,qǐng gěi wǒ càidān,tɕʰiŋ˧˩˧ keɪ˧˩˧ wɔ˧˩˧ tsʰaɪ˥˩tan˥,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.less-spicy,少辣,,shǎo là,ʂɑʊ˧˩˧ la˥˩,,2,latex-reference-v2;ipa=pinyin
+food-ordering.i-want-this,我要这个,,wǒ yào zhège,wɔ˧˩˧ jɑʊ˥˩ ʈʂɤ˥˩kɤ,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.no-peanuts,不要花生,,bú yào huāshēng,pu˧˥ jɑʊ˥˩ xwa˥ʂɤŋ˥,,2,latex-reference-v2;ipa=pinyin
+food-ordering.do-you-have-drinking-water,有饮用水吗？,,yǒu yǐnyòngshuǐ ma?,joʊ˧˩˧ in˧˩˧jʊŋ˥˩ʂweɪ˧˩˧ ma,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.no-nuts,不要坚果,,bú yào jiānguǒ,pu˧˥ jɑʊ˥˩ tɕjɛn˥kwɔ˧˩˧,,2,latex-reference-v2;ipa=pinyin
+food-ordering.to-go-please,请打包,,qǐng dǎbāo,tɕʰiŋ˧˩˧ ta˧˩˧pɑʊ˥,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.no-seafood,不要海鲜,,bú yào hǎixiān,pu˧˥ jɑʊ˥˩ xaɪ˧˩˧ɕjɛn˥,,2,latex-reference-v2;ipa=pinyin
+food-ordering.check-please,请结账,,qǐng jiézhàng,tɕʰiŋ˧˩˧ tɕjɛ˧˥ʈʂɑŋ˥˩,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.i-am-vegetarian,我吃素,,wǒ chī sù,wɔ˧˩˧ ʈʂʰɨ˥ su˥˩,,2,latex-reference-v2;ipa=pinyin
+food-ordering.does-it-contain,里面有{}吗？,,lǐmiàn yǒu {} ma?,li˧˩˧mjɛn˥˩ joʊ˧˩˧ {} ma,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.i-am-vegan,我吃纯素,,wǒ chī chún sù,wɔ˧˩˧ ʈʂʰɨ˥ ʈʂʰwən˧˥ su˥˩,,2,latex-reference-v2;ipa=pinyin
+food-ordering.is-this-vegetarian,这个是素的吗？,,zhège shì sù de ma?,ʈʂɤ˥˩kɤ ʂɨ˥˩ su˥˩ tɤ ma,,2,latex-reference-v2;ipa=pinyin
+dietary-needs.i-do-not-eat,我不吃{},,wǒ bù chī {},wɔ˧˩˧ pu˥˩ ʈʂʰɨ˥ {},,2,latex-reference-v2;ipa=pinyin
+dietary-needs.i-am-allergic-to,我对{}过敏,,wǒ duì {} guòmǐn,wɔ˧˩˧ tweɪ˥˩ {} kwɔ˥˩min˧˩˧,,2,latex-reference-v2;ipa=pinyin
+food-ordering.what-do-you-recommend,有什么推荐？,,yǒu shénme tuījiàn?,joʊ˧˩˧ ʂən˧˥mɤ tʰweɪ˥tɕjɛn˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+food-ordering.water-please,请给我一杯水,,qǐng gěi wǒ yì bēi shuǐ,tɕʰiŋ˧˩˧ keɪ˧˩˧ wɔ˧˩˧ i˥˩ peɪ˥ ʂweɪ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+dietary-needs.does-it-contain-fish-stock,汤底是鱼做的吗？,,tāngdǐ shì yú zuò de ma?,tʰɑŋ˥ti˧˩˧ ʂɨ˥˩ y˧˥ tswɔ˥˩ tɤ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+dietary-needs.does-it-contain-pork-stock,汤底是猪肉或猪骨熬的吗？,高汤里有猪肉吗？,tāngdǐ shì zhūròu huò zhūgǔ áo de ma?,tʰɑŋ˥ti˧˩˧ ʂɨ˥˩ ʈʂu˥ʐoʊ˥˩ xwɔ˥˩ ʈʂu˥ku˧˩˧ ɑʊ˧˥ tɤ ma,,2,zh-Hans-pork-stock-v1;ipa=pinyin
+food-ordering.can-a-vegetarian-eat-this,吃素的能吃吗？,,chī sù de néng chī ma?,ʈʂʰɨ˥ su˥˩ tɤ nɤŋ˧˥ ʈʂʰɨ˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+dietary-needs.i-have-a-severe-allergy-to,我对{}严重过敏,,wǒ duì {} yánzhòng guòmǐn,wɔ˧˩˧ tweɪ˥˩ {} jɛn˧˥ʈʂʊŋ˥˩ kwɔ˥˩min˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+dietary-needs.no-pork,不要猪肉,,bú yào zhūròu,pu˧˥ jɑʊ˥˩ ʈʂu˥ʐoʊ˥˩,,2,zh-Hans-gaps-v1;ipa=pinyin
+dietary-needs.is-this-halal,这个是清真的吗？,,zhège shì qīngzhēn de ma?,ʈʂɤ˥˩kɤ ʂɨ˥˩ tɕʰiŋ˥ʈʂən˥ tɤ ma,,2,zh-Hans-gaps-v1;ipa=pinyin

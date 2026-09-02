@@ -1,53 +1,53 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-hotel-words.passport,passport,,,,2,latex-reference-v2
-hotel-words.room-key-card,room key card,,,,2,latex-reference-v2
-hotel-words.check-in,check-in,,,,2,latex-reference-v2
-hotel-words.check-out,check-out,,,,2,latex-reference-v2
-hotel-basics.are-any-rooms-available,Are any rooms available?,,,,2,latex-reference-v2
-hotel-basics.there-are-two-of-us,There are two of us,,,,2,latex-reference-v2
-hotel-basics.i-have-a-reservation,I have a reservation,,,,2,latex-reference-v2
-hotel-basics.can-i-charge-my-phone,Can I charge my phone?,,,,2,latex-reference-v2
-hotel-basics.i-would-like-a-non-smoking-room,I would like a non-smoking room,,,,2,latex-reference-v2
-hotel-basics.i-would-like-a-quiet-room,I would like a quiet room,,,,2,latex-reference-v2
-hotel-basics.is-there-a-washing-machine,Is there a washing machine?,,,,2,latex-reference-v2
-hotel-requests.can-i-check-out-later,Can I check out later?,,,,2,latex-reference-v2
-hotel-requests.what-time-does-breakfast-start,What time does breakfast start?,,,,2,latex-reference-v2
-hotel-requests.can-i-store-my-luggage,Can I store my luggage?,,,,2,latex-reference-v2
-hotel-requests.no-housekeeping,No housekeeping,,,,2,latex-reference-v2
-room-problems.there-is-a-problem-with-the-room,There is a problem with the room,,,,2,latex-reference-v2
-room-problems.the-air-conditioning-is-broken,The air conditioning is broken,,,,2,latex-reference-v2
-room-problems.there-is-no-hot-water,There is no hot water,,,,2,latex-reference-v2
-room-problems.can-i-change-rooms,Can I change rooms?,,,,2,latex-reference-v2
-room-problems.the-room-is-too-noisy,The room is too noisy,,,,2,latex-reference-v2
-hotel-basics.is-wi-fi-free,Is Wi-Fi free?,,,,2,japanese-reviewed-v6
-hotel-words.luggage-storage,luggage storage,,,,2,japanese-reviewed-v6
-hotel-requests.another-towel-please,"Another towel, please",,,,2,japanese-reviewed-v6
-laundry.please-wash-these-clothes,Please wash these clothes,,,,2,expansion-v1
-laundry.where-is-a-laundromat,Where is a laundromat?,,,,2,expansion-v1
-laundry.when-will-it-be-ready,When will it be ready?,,,,2,expansion-v1
-laundry.how-much-per-kilo,How much per kilo?,,,,2,expansion-v1
-laundry.can-it-be-ready-today,Can it be ready today?,,,,2,expansion-v1
-laundry.please-do-not-use-bleach,Please do not use bleach,,,,2,expansion-v1
-laundry.laundromat,laundromat,,,,2,expansion-v1
-laundry.please-iron-this,Please iron this,,,,2,expansion-v1
-laundry.detergent,detergent,,,,2,expansion-v1
-laundry.dry-cleaning,dry cleaning,,,,2,expansion-v1
-laundry.dryer,dryer,,,,2,expansion-v1
-laundry.coin-operated,coin-operated,,,,2,expansion-v1
-hotel-basics.how-much-per-night,How much per night?,,,,2,expansion-v1
-hotel-basics.is-breakfast-included,Is breakfast included?,,,,2,expansion-v1
-hotel-basics.may-i-see-the-room,May I see the room?,,,,2,expansion-v1
-hotel-basics.for-nights,For {} nights,,,,2,expansion-v1
-hotel-basics.two-beds,"Two beds, please",,,,2,expansion-v1
-hotel-basics.is-there-air-conditioning,Is there air conditioning?,,,,2,expansion-v1
-hotel-requests.what-time-is-check-out,What time is check-out?,,,,2,expansion-v1
-hotel-requests.can-i-check-in-early,Can I check in early?,,,,2,expansion-v1
-hotel-requests.another-night,Can I stay another night?,,,,2,expansion-v1
-hotel-requests.is-there-a-safe,Is there a safe?,,,,2,expansion-v1
-hotel-requests.another-blanket,"Another blanket, please",,,,2,expansion-v1
-hotel-requests.wake-up-call,Please wake me at {},,,,2,expansion-v1
-room-problems.the-key-does-not-work,The key does not work,,,,2,expansion-v1
-room-problems.the-toilet-will-not-flush,The toilet will not flush,,,,2,expansion-v1
-room-problems.the-light-does-not-work,The light does not work,,,,2,expansion-v1
-room-problems.please-send-someone,Please send someone to fix it,,,,2,expansion-v1
-room-problems.the-heating-does-not-work,The heating does not work,,,,2,expansion-v1
+hotel-words.passport,passport,,pˈæspoːɹt,,2,latex-reference-v2;ipa=espeak
+hotel-words.room-key-card,room key card,,ɹˈuːm kˈiː kˈɑːɹd,,2,latex-reference-v2;ipa=espeak
+hotel-words.check-in,check-in,,tʃˈɛkɪn,,2,latex-reference-v2;ipa=espeak
+hotel-words.check-out,check-out,,tʃˈɛkaʊt,,2,latex-reference-v2;ipa=espeak
+hotel-basics.are-any-rooms-available,Are any rooms available?,,ɑːɹ ˌɛni ɹˈuːmz ɐvˈeɪləbəl,,2,latex-reference-v2;ipa=espeak
+hotel-basics.there-are-two-of-us,There are two of us,,ðɛɹˌɑːɹ tˈuː ʌv ˌʌs,,2,latex-reference-v2;ipa=espeak
+hotel-basics.i-have-a-reservation,I have a reservation,,aɪ hæv ɐ ɹˌɛzɚvˈeɪʃən,,2,latex-reference-v2;ipa=espeak
+hotel-basics.can-i-charge-my-phone,Can I charge my phone?,,kæn aɪ tʃˈɑːɹdʒ maɪ fˈoʊn,,2,latex-reference-v2;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,I would like a non-smoking room,,aɪ wʊd lˈaɪk ɐ nˈɑːnsmoʊkɪŋ ɹˈuːm,,2,latex-reference-v2;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,I would like a quiet room,,aɪ wʊd lˈaɪk ɐ kwˈaɪət ɹˈuːm,,2,latex-reference-v2;ipa=espeak
+hotel-basics.is-there-a-washing-machine,Is there a washing machine?,,ɪz ðɛɹ ɐ wˈɑːʃɪŋ məʃˈiːn,,2,latex-reference-v2;ipa=espeak
+hotel-requests.can-i-check-out-later,Can I check out later?,,kæn aɪ tʃˈɛk ˈaʊt lˈeɪɾɚ,,2,latex-reference-v2;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,What time does breakfast start?,,wˌʌt tˈaɪm dˈʌz bɹˈɛkfəst stˈɑːɹt,,2,latex-reference-v2;ipa=espeak
+hotel-requests.can-i-store-my-luggage,Can I store my luggage?,,kæn aɪ stˈoːɹ maɪ lˈʌɡɪdʒ,,2,latex-reference-v2;ipa=espeak
+hotel-requests.no-housekeeping,No housekeeping,,nˈoʊ hˈaʊskiːpɪŋ,,2,latex-reference-v2;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,There is a problem with the room,,ðɛɹ ɪz ɐ pɹˈɑːbləm wɪððə ɹˈuːm,,2,latex-reference-v2;ipa=espeak
+room-problems.the-air-conditioning-is-broken,The air conditioning is broken,,ðɪ ˈɛɹ kəndˈɪʃənɪŋ ɪz bɹˈoʊkən,,2,latex-reference-v2;ipa=espeak
+room-problems.there-is-no-hot-water,There is no hot water,,ðɛɹ ɪz nˈoʊ hˈɑːt wˈɔːɾɚ,,2,latex-reference-v2;ipa=espeak
+room-problems.can-i-change-rooms,Can I change rooms?,,kæn aɪ tʃˈeɪndʒ ɹˈuːmz,,2,latex-reference-v2;ipa=espeak
+room-problems.the-room-is-too-noisy,The room is too noisy,,ðə ɹˈuːm ɪz tˈuː nˈɔɪzi,,2,latex-reference-v2;ipa=espeak
+hotel-basics.is-wi-fi-free,Is Wi-Fi free?,,ɪz wˈaɪfˌaɪ fɹˈiː,,2,japanese-reviewed-v6;ipa=espeak
+hotel-words.luggage-storage,luggage storage,,lˈʌɡɪdʒ stˈoːɹɪdʒ,,2,japanese-reviewed-v6;ipa=espeak
+hotel-requests.another-towel-please,"Another towel, please",,"ɐnˈʌðɚ tˈaʊəl, plˈiːz",,2,japanese-reviewed-v6;ipa=espeak
+laundry.please-wash-these-clothes,Please wash these clothes,,plˈiːz wˈɑːʃ ðiːz klˈoʊðz,,2,expansion-v1;ipa=espeak
+laundry.where-is-a-laundromat,Where is a laundromat?,,wˌɛɹ ɪz ɐ lˈɔːndɹəmˌæt,,2,expansion-v1;ipa=espeak
+laundry.when-will-it-be-ready,When will it be ready?,,wˌɛn wɪl ɪt biː ɹˈɛdi,,2,expansion-v1;ipa=espeak
+laundry.how-much-per-kilo,How much per kilo?,,hˌaʊ mˈʌtʃ pɜː kˈiːloʊ,,2,expansion-v1;ipa=espeak
+laundry.can-it-be-ready-today,Can it be ready today?,,kæn ɪt biː ɹˈɛdi tədˈeɪ,,2,expansion-v1;ipa=espeak
+laundry.please-do-not-use-bleach,Please do not use bleach,,plˈiːz duːnˌɑːt jˈuːz blˈiːtʃ,,2,expansion-v1;ipa=espeak
+laundry.laundromat,laundromat,,lˈɔːndɹəmˌæt,,2,expansion-v1;ipa=espeak
+laundry.please-iron-this,Please iron this,,plˈiːz ˈaɪɚn ðˈɪs,,2,expansion-v1;ipa=espeak
+laundry.detergent,detergent,,dɪtˈɜːdʒənt,,2,expansion-v1;ipa=espeak
+laundry.dry-cleaning,dry cleaning,,dɹˈaɪ klˈiːnɪŋ,,2,expansion-v1;ipa=espeak
+laundry.dryer,dryer,,dɹˈaɪɚ,,2,expansion-v1;ipa=espeak
+laundry.coin-operated,coin-operated,,kˈɔɪnɑːpɚɹˌeɪɾɪd,,2,expansion-v1;ipa=espeak
+hotel-basics.how-much-per-night,How much per night?,,hˌaʊ mˈʌtʃ pɜː nˈaɪt,,2,expansion-v1;ipa=espeak
+hotel-basics.is-breakfast-included,Is breakfast included?,,ɪz bɹˈɛkfəst ɪŋklˈuːdɪd,,2,expansion-v1;ipa=espeak
+hotel-basics.may-i-see-the-room,May I see the room?,,mˈeɪ aɪ sˈiː ðə ɹˈuːm,,2,expansion-v1;ipa=espeak
+hotel-basics.for-nights,For {} nights,,fɔːɹ {} nˈaɪts,,2,expansion-v1;ipa=espeak
+hotel-basics.two-beds,"Two beds, please",,"tˈuː bˈɛdz, plˈiːz",,2,expansion-v1;ipa=espeak
+hotel-basics.is-there-air-conditioning,Is there air conditioning?,,ɪz ðɛɹ ˈɛɹ kəndˈɪʃənɪŋ,,2,expansion-v1;ipa=espeak
+hotel-requests.what-time-is-check-out,What time is check-out?,,wˌʌt tˈaɪm ɪz tʃˈɛkaʊt,,2,expansion-v1;ipa=espeak
+hotel-requests.can-i-check-in-early,Can I check in early?,,kæn aɪ tʃˈɛk ɪn ˈɜːli,,2,expansion-v1;ipa=espeak
+hotel-requests.another-night,Can I stay another night?,,kæn aɪ stˈeɪ ɐnˈʌðɚ nˈaɪt,,2,expansion-v1;ipa=espeak
+hotel-requests.is-there-a-safe,Is there a safe?,,ɪz ðɛɹ ɐ sˈeɪf,,2,expansion-v1;ipa=espeak
+hotel-requests.another-blanket,"Another blanket, please",,"ɐnˈʌðɚ blˈæŋkɪt, plˈiːz",,2,expansion-v1;ipa=espeak
+hotel-requests.wake-up-call,Please wake me at {},,plˈiːz wˈeɪk mˌiː æt {},,2,expansion-v1;ipa=espeak
+room-problems.the-key-does-not-work,The key does not work,,ðə kˈiː dʌznˌɑːt wˈɜːk,,2,expansion-v1;ipa=espeak
+room-problems.the-toilet-will-not-flush,The toilet will not flush,,ðə tˈɔɪlɪt wɪl nˌɑːt flˈʌʃ,,2,expansion-v1;ipa=espeak
+room-problems.the-light-does-not-work,The light does not work,,ðə lˈaɪt dʌznˌɑːt wˈɜːk,,2,expansion-v1;ipa=espeak
+room-problems.please-send-someone,Please send someone to fix it,,plˈiːz sˈɛnd sˈʌmwʌn tə fˈɪks ɪt,,2,expansion-v1;ipa=espeak
+room-problems.the-heating-does-not-work,The heating does not work,,ðə hˈiːɾɪŋ dʌznˌɑːt wˈɜːk,,2,expansion-v1;ipa=espeak

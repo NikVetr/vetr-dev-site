@@ -8,10 +8,19 @@
 import { createFontRegistry } from './fonts.js';
 import { createMeasurer } from './measure.js';
 import {
-  loadCorpus, loadLanguage, loadRespellOverrides, loadSectionTitles, loadEmergencyLabels,
-  fillLanguageSlots, buildBlocks,
+  loadCorpus, loadLanguage, loadRespellOverrides, loadRespellRules, loadSectionTitles,
+  loadEmergencyLabels, fillLanguageSlots, buildBlocks,
 } from './pack.js';
+import { createRespeller } from './respell.js';
 import { layout } from './solve/index.js';
+
+/**
+ * Generated respellings, keyed `target__source__accent`. Module scope rather than
+ * per-context: it is a pure function of committed data, so two contexts cannot
+ * disagree about it.
+ * @type {Map<string, Record<string,string>>}
+ */
+const generated = new Map();
 
 /**
  * @typedef {Object} SheetContext
@@ -73,6 +82,42 @@ export function stacksFor(corpus, target, source, typeface = 'sans') {
   const base = [...new Set(['latin', 'latin-cond', of(target), of(source)])];
   if (typeface === 'sans') return base;
   return [...new Set([...base, ...base.map((stack) => `${stack}-${typeface}`)])];
+}
+
+/**
+ * Respellings generated from the target's IPA and the reader's rule table.
+ *
+ * Cached on the triple because building a respeller reads the target's whole `ipa`
+ * column to derive its phoneme inventory and its syllable-opening clusters, and
+ * the studio re-solves on every change. Nothing here depends on the selection, so
+ * one pass per pair is enough.
+ * @param {SheetContext} ctx
+ * @param {import('./types.js').SheetSpec} spec
+ * @param {Record<string,Record<string,string>>} targetRows
+ * @returns {Promise<Record<string,string>>}
+ */
+async function generatedRespellings(ctx, spec, targetRows) {
+  const key = `${spec.target}__${spec.source}__${spec.accent}`;
+  const held = generated.get(key);
+  if (held) return held;
+  // A reader whose language has no rule table gets nothing, which is the state of
+  // sixteen of the seventeen today and is not a failure.
+  if (!ctx.corpus.respellRules.has(`${spec.source}__${spec.accent}`)) return {};
+
+  const rules = await loadRespellRules(ctx.loadText, spec.source, spec.accent);
+  const ipaByConcept = Object.entries(targetRows)
+    .map(([id, row]) => /** @type {[string, string]} */ ([id, (row.ipa ?? '').trim()]))
+    .filter(([, ipa]) => ipa);
+  const respeller = createRespeller({
+    rules, target: spec.target, targetIpa: ipaByConcept.map(([, ipa]) => ipa),
+  });
+  /** @type {Record<string,string>} */ const out = {};
+  for (const [id, ipa] of ipaByConcept) {
+    const said = respeller.respell(ipa);
+    if (said) out[id] = said;
+  }
+  generated.set(key, out);
+  return out;
 }
 
 /**
@@ -146,9 +191,16 @@ export async function buildSheet(ctx, spec, edits) {
   });
   // A pair with no curated respellings is the normal case, not a failure, so do
   // not ask the network for a file the index says was never written.
-  const respell = ctx.corpus.respellOverrides.has(`${spec.target}__${spec.source}__${spec.accent}`)
+  const curated = ctx.corpus.respellOverrides.has(`${spec.target}__${spec.source}__${spec.accent}`)
     ? await loadRespellOverrides(loadText, spec.target, spec.source, spec.accent)
     : {};
+  // Generated respellings fill in under the curated ones, never over them. Only 16
+  // of the 272 pairs have a curated sheet, and the other 256 printed an empty
+  // column; a rule table for the *reader* plus the target's own `ipa` column
+  // covers the rest. The curated layer stays authoritative because the sixteen
+  // sheets are not mutually consistent, so no deterministic function can match all
+  // of them -- see `core/respell.js`.
+  const respell = { ...await generatedRespellings(ctx, spec, targetRows), ...curated };
   // Headings are read by the source-language reader, so they follow the gloss. So
   // does the emergency note's frame and its service words -- "110 police" was
   // printing in English on every one of the 225 pairs not glossed into it.

@@ -1,13 +1,13 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-introductions.my-name-is,名前は{}です,,namae wa {} desu,,,2,japanese-reviewed-v6
-introductions.nice-to-meet-you,はじめまして,,hajimemashite,,,2,japanese-reviewed-v6
-introductions.what-is-your-name,お名前は何ですか？,,onamae wa nan desu ka?,,,2,japanese-reviewed-v6
-introductions.we-are-traveling-together,一緒に旅行しています,,issho ni ryokō shiteimasu,,,2,japanese-reviewed-v6
-introductions.this-is-my-friend,こちらは私の友達です,,kochira wa watashi no tomodachi desu,,,2,japanese-reviewed-v6
-introductions.i-am-from,{}から来ました,,{} kara kimashita,,,2,ja-agent-v1
-introductions.where-are-you-from,どこから来ましたか？,,doko kara kimashita ka?,,,2,ja-agent-v1
-introductions.how-are-you,お元気ですか？,,ogenki desu ka?,,,2,ja-agent-v1
-introductions.i-am-a-tourist,観光客です,,kankōkyaku desu,,,2,ja-agent-v1
-introductions.this-is-my-husband-wife,こちらは夫／妻です,,kochira wa otto / tsuma desu,,,2,ja-agent-v1
-introductions.this-is-my-daughter-son,こちらは娘／息子です,,kochira wa musume / musuko desu,,,2,ja-agent-v1
-introductions.i-am-traveling-alone,一人で旅行しています,,hitori de ryokō shiteimasu,,,2,ja-agent-v1
+introductions.my-name-is,名前は{}です,,namae wa {} desu,namae wa {} desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+introductions.nice-to-meet-you,はじめまして,,hajimemashite,hadʑimemaɕite,,2,japanese-reviewed-v6;ipa=hepburn
+introductions.what-is-your-name,お名前は何ですか？,,onamae wa nan desu ka?,onamae wa naɴ desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+introductions.we-are-traveling-together,一緒に旅行しています,,issho ni ryokō shiteimasu,iɕɕo ɲi ɾjokoː ɕiteimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+introductions.this-is-my-friend,こちらは私の友達です,,kochira wa watashi no tomodachi desu,kotɕiɾa wa wataɕi no tomodatɕi desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+introductions.i-am-from,{}から来ました,,{} kara kimashita,{} kaɾa kimaɕita,,2,ja-agent-v1;ipa=hepburn
+introductions.where-are-you-from,どこから来ましたか？,,doko kara kimashita ka?,doko kaɾa kimaɕita ka,,2,ja-agent-v1;ipa=hepburn
+introductions.how-are-you,お元気ですか？,,ogenki desu ka?,oɡeɴki desɯ ka,,2,ja-agent-v1;ipa=hepburn
+introductions.i-am-a-tourist,観光客です,,kankōkyaku desu,kaɴkoːkjakɯ desɯ,,2,ja-agent-v1;ipa=hepburn
+introductions.this-is-my-husband-wife,こちらは夫／妻です,,kochira wa otto / tsuma desu,kotɕiɾa wa otto / tsɯma desɯ,,2,ja-agent-v1;ipa=hepburn
+introductions.this-is-my-daughter-son,こちらは娘／息子です,,kochira wa musume / musuko desu,kotɕiɾa wa mɯsɯme / mɯsɯko desɯ,,2,ja-agent-v1;ipa=hepburn
+introductions.i-am-traveling-alone,一人で旅行しています,,hitori de ryokō shiteimasu,çitoɾi de ɾjokoː ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn

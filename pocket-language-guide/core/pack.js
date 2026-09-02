@@ -45,6 +45,12 @@ export async function loadCorpus(loadText) {
   // the project and a directory of mostly-absent files would mean either an index
   // to generate or a 404 on every pair that does not need one.
   const languageNames = languageNameTable(await read('data/registry/language-names.csv'));
+  // Which reading languages have a respelling rule table. Most do not yet, so a
+  // pair whose reader has none gets no generated respelling -- which is the same
+  // shape as the override index above, and for the same reason.
+  const respellRules = new Set(
+    /** @type {string[]} */ (JSON.parse(await loadText('data/respell/rules/index.json'))),
+  );
   sectionRows.sort((a, b) => Number(a.rank) - Number(b.rank));
 
   const groups = [...new Set(sectionRows.map((s) => s.group))];
@@ -60,6 +66,7 @@ export async function loadCorpus(loadText) {
     languages,
     coverage,
     respellOverrides,
+    respellRules,
     languageNames,
     paper,
     regions,
@@ -292,6 +299,19 @@ function regionName(code, locale, fallback) {
   } catch {
     return fallback;
   }
+}
+
+/**
+ * One reading language's respelling rule table.
+ *
+ * Keyed on the reader and their accent rather than on the pair, which is the whole
+ * point: the table says how *an English speaker* spells a sound, and the sound
+ * comes from the target's `ipa` column. That is what makes the respelling column
+ * O(N) rather than O(N^2). See `core/respell.js`.
+ * @param {LoadText} loadText @param {string} source @param {string} accent
+ */
+export async function loadRespellRules(loadText, source, accent) {
+  return JSON.parse(await loadText(`data/respell/rules/${source}__${accent}.json`));
 }
 
 /**

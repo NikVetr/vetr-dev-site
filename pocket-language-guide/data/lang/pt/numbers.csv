@@ -1,45 +1,45 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-numbers-money.l-ng,zero,,,,2,pt-agent-v1
-numbers-money.y,um,uma,,,2,pt-agent-v1
-numbers-money.r,dois,duas,,,2,pt-agent-v1
-numbers-money.s-n,três,,,,2,pt-agent-v1
-numbers-money.s,quatro,,,,2,pt-agent-v1
-numbers-money.w,cinco,,,,2,pt-agent-v1
-numbers-money.li,seis,,,,2,pt-agent-v1
-numbers-money.q,sete,,,,2,pt-agent-v1
-numbers-money.b,oito,,,,2,pt-agent-v1
-numbers-money.ji,nove,,,,2,pt-agent-v1
-numbers-money.sh,dez,,,,2,pt-agent-v1
-numbers-money.y-b-i,cem,cento,,,2,pt-agent-v1
-numbers-money.y-qi-n,mil,,,,2,pt-agent-v1
-numbers-money.y-w-n,dez mil,,,,2,pt-agent-v1
-numbers-money.b-n,meio,metade,,,2,pt-agent-v1
-atm-cash.where-is-an-atm,Onde há um multibanco?,um caixa eletrônico,,,2,pt-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,Esta máquina aceita cartões estrangeiros?,,,,2,pt-agent-v1
-atm-cash.the-atm-kept-my-card,A máquina ficou com o meu cartão,,,,2,pt-agent-v1
-atm-cash.is-there-a-fee,Há comissão?,Há taxa?,,,2,pt-agent-v1
-atm-cash.the-card-was-declined,O cartão foi recusado,,,,2,pt-agent-v1
-atm-cash.what-is-the-exchange-rate,Qual é a taxa de câmbio?,,,,2,pt-agent-v1
-atm-cash.no-money-came-out,Não saiu dinheiro,,,,2,pt-agent-v1
-atm-cash.where-can-i-change-money,Onde posso trocar dinheiro?,,,,2,pt-agent-v1
-atm-cash.the-machine-is-out-of-service,A máquina está fora de serviço,,,,2,pt-agent-v1
-atm-cash.please-give-me-smaller-notes,"Notas mais pequenas, por favor","Notas menores, por favor",,,2,pt-agent-v1
-atm-cash.do-you-have-change,Tem troco?,,,,2,pt-agent-v1
-atm-cash.may-i-pay-in,Posso pagar em {}?,,,,2,pt-agent-v1
-atm-cash.please-charge-in-local-currency,"Cobre em moeda local, por favor",,,,2,pt-agent-v1
-atm-cash.where-can-i-get-coins,Onde consigo moedas?,,,,2,pt-agent-v1
-atm-cash.is-there-a-minimum-for-cards,Há mínimo para cartão?,,,,2,pt-agent-v1
-atm-cash.atm,o multibanco,o caixa automático · o caixa eletrônico,,,2,pt-agent-v1
-atm-cash.banknote,a nota,,,,2,pt-agent-v1
-atm-cash.coin,a moeda,,,,2,pt-agent-v1
-atm-cash.cash-only,Só dinheiro,Apenas numerário,,,2,pt-agent-v1
-atm-cash.fee,a comissão,a taxa,,,2,pt-agent-v1
-atm-cash.change,o troco,,,,2,pt-agent-v1
-atm-cash.exchange-rate,a taxa de câmbio,,,,2,pt-agent-v1
-atm-cash.bank,o banco,,,,2,pt-agent-v1
-atm-cash.money-exchange,Câmbio,Casa de câmbio,,,2,pt-agent-v1
-atm-cash.pin,o PIN,o código PIN,,,2,pt-agent-v1
-numbers-money.euro,euro,,,,2,coordinator-gaps-v2
+numbers-money.l-ng,zero,,zˈɛɾʊ,,2,pt-agent-v1;ipa=espeak
+numbers-money.y,um,uma,ũŋ,,2,pt-agent-v1;ipa=espeak
+numbers-money.r,dois,duas,dˈoɪs,,2,pt-agent-v1;ipa=espeak
+numbers-money.s-n,três,,trˈes,,2,pt-agent-v1;ipa=espeak
+numbers-money.s,quatro,,kwˈatrʊ,,2,pt-agent-v1;ipa=espeak
+numbers-money.w,cinco,,sˈiŋkʊ,,2,pt-agent-v1;ipa=espeak
+numbers-money.li,seis,,sˈeɪs,,2,pt-agent-v1;ipa=espeak
+numbers-money.q,sete,,sˈɛtʃy,,2,pt-agent-v1;ipa=espeak
+numbers-money.b,oito,,ˈoɪtʊ,,2,pt-agent-v1;ipa=espeak
+numbers-money.ji,nove,,nˈɔvy,,2,pt-agent-v1;ipa=espeak
+numbers-money.sh,dez,,dˈɛs,,2,pt-agent-v1;ipa=espeak
+numbers-money.y-b-i,cem,cento,sˈeɪŋ,,2,pt-agent-v1;ipa=espeak
+numbers-money.y-qi-n,mil,,mˈiʊ,,2,pt-agent-v1;ipa=espeak
+numbers-money.y-w-n,dez mil,,dˈɛz mˈiʊ,,2,pt-agent-v1;ipa=espeak
+numbers-money.b-n,meio,metade,mˈeɪʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.where-is-an-atm,Onde há um multibanco?,um caixa eletrônico,ˌoŋdʒy a ũŋ mˌuwtʃibˈɐ̃ŋkʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,Esta máquina aceita cartões estrangeiros?,,ˌɛstæ mˈakinæ ˌasˈeɪtæ kaɾətˈõjz ˌestrɐ̃ŋʒˈeɪɾʊs,,2,pt-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,A máquina ficou com o meu cartão,,a mˈakinæ fikˈow koŋ ʊ meʊ kaɾətˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,Há comissão?,Há taxa?,a kˌomisˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,O cartão foi recusado,,ʊ kaɾətˈɐ̃ʊ̃ foɪ xˌekuzˈadʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,Qual é a taxa de câmbio?,,kwˈaʊ ɛ a tˈaʃæ dʒy kˈɐ̃mbjʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,Não saiu dinheiro,,nˌɐ̃ʊ̃ saˈiʊ dʒˌiɲˈeɪɾʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,Onde posso trocar dinheiro?,,ˌoŋdʒy pˌɔsʊ trokˈar dʒˌiɲˈeɪɾʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,A máquina está fora de serviço,,a mˈakinæ estˌa fˈɔɾæ dʒy sˌeɾəvˈisʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,"Notas mais pequenas, por favor","Notas menores, por favor","nˈɔtæz mˈaɪs pˌekˈenæs, por favˈor",,2,pt-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,Tem troco?,,teɪŋ trˈɔkʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,Posso pagar em {}?,,pˌɔsʊ paɡˈaɾ ˈeɪŋ {},,2,pt-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,"Cobre em moeda local, por favor",,"kˈɔbri ˈeɪŋ mˌoˈɛdæ lokˈaʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,Onde consigo moedas?,,ˌoŋdʒy kˌoŋsˈiɡʊ mˌoˈɛdæs,,2,pt-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,Há mínimo para cartão?,,a mˈinimʊ pˌaɾæ kaɾətˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
+atm-cash.atm,o multibanco,o caixa automático · o caixa eletrônico,ʊ mˌuwtʃibˈɐ̃ŋkʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.banknote,a nota,,a nˈɔtæ,,2,pt-agent-v1;ipa=espeak
+atm-cash.coin,a moeda,,a mˌoˈɛdæ,,2,pt-agent-v1;ipa=espeak
+atm-cash.cash-only,Só dinheiro,Apenas numerário,sˈɔ dʒˌiɲˈeɪɾʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.fee,a comissão,a taxa,a kˌomisˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
+atm-cash.change,o troco,,ʊ trˈokʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.exchange-rate,a taxa de câmbio,,a tˈaʃæ dʒy kˈɐ̃mbjʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.bank,o banco,,ʊ bˈɐ̃ŋkʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.money-exchange,Câmbio,Casa de câmbio,kˈɐ̃mbjʊ,,2,pt-agent-v1;ipa=espeak
+atm-cash.pin,o PIN,o código PIN,ʊ pˈin,,2,pt-agent-v1;ipa=espeak
+numbers-money.euro,euro,,ˈeʊɾʊ,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.euro-symbol,€,euro,,,2,coordinator-gaps-v2
 numbers-money.number-and-classifier-notes,"Formar números: 11 = shi yi; 20 = er shi; 21 = er shi yi. Ao telefone, o 1 lê-se muitas vezes yao. Entre o número e o nome entra sempre um classificador: ge (geral), wei (pessoas), zhang (bilhetes e coisas planas), bei (copos), ping (garrafas). Dinheiro: kuai = yuan na fala; jiao ou mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,pt-notes-v1
 numbers-money.number-and-classifier-notes-2,"Formar números: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Contadores, que seguem o número: -tsu (coisas), -mai (planas), -hon (compridas), -nin (pessoas), -hai (copos). Ao telefone: 0 = zero ou maru, 4 = yon, 7 = nana, 9 = kyuu; o hífen entre blocos lê-se no.",,,,2,pt-notes-v1

@@ -1,32 +1,32 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,Kulipa kwa kadi?,,,,2,sw-agent-v1
-payment-receipt.pay-cash,Kulipa kwa fedha taslimu?,,,,2,sw-agent-v1
-payment-receipt.pay-by-qr-code,Kulipa kwa QR?,Kulipa kwa M-Pesa?,,,2,sw-agent-v1
-payment-receipt.a-receipt-please,"Risiti, tafadhali",,,,2,sw-agent-v1
-payment-receipt.please-write-the-number,Tafadhali andika namba,,,,2,sw-agent-v1
-payment-receipt.how-much-in-total,Jumla ni kiasi gani?,,,,2,sw-agent-v1
-payment-receipt.can-we-pay-separately,Tunaweza kulipa kila mmoja?,,,can we each pay,2,sw-agent-v1
-payment-receipt.is-tax-included,"Je, kodi imo?","Je, VAT imo?",,,2,sw-agent-v1
-payment-receipt.my-card-was-declined,Kadi yangu imekataliwa,,,,2,sw-agent-v1
-payment-receipt.the-bill-is-wrong,Nadhani bili ina makosa,,,,2,sw-agent-v1
-payment-receipt.i-already-paid,Nimelipa tayari,,,,2,sw-agent-v1
-shopping.i-am-just-looking,Naangalia tu,,,,2,sw-agent-v1
-shopping.how-much-is-this,Hii ni bei gani?,,,,2,sw-agent-v1
-shopping.that-is-too-expensive,Ni ghali mno,,,,2,sw-agent-v1
-shopping.can-it-be-a-little-cheaper,Punguza kidogo?,Bei ya mwisho?,,,2,sw-agent-v1
-shopping.is-there-a-discount,"Je, kuna punguzo?",,,,2,sw-agent-v1
-shopping.where-do-i-pay,Nalipa wapi?,,,,2,sw-agent-v1
-shopping.i-will-take-this,Nachukua hii,,,,2,sw-agent-v1
-shopping.what-is-this,Hii ni nini?,,,,2,sw-agent-v1
-shopping.where-can-i-buy,Naweza kununua {} wapi?,,,,2,sw-agent-v1
-shopping.do-you-have-this-in-stock,"Je, mna hii dukani?",,,,2,sw-agent-v1
-shopping.two-of-these,"Hizi mbili, tafadhali",,,,2,sw-agent-v1
-shopping.what-is-it-made-of,Imetengenezwa na nini?,,,,2,sw-agent-v1
-color-size-returns.do-you-have-another-color,"Je, mna rangi nyingine?",,,,2,sw-agent-v1
-color-size-returns.do-you-have-another-size,"Je, mna saizi nyingine?",,,,2,sw-agent-v1
-color-size-returns.may-i-try-it-on,Naomba nijaribu?,,,,2,sw-agent-v1
-color-size-returns.can-i-return-it,Naweza kurudisha?,,,,2,sw-agent-v1
-color-size-returns.can-i-exchange-it,Naweza kubadilisha?,,,,2,sw-agent-v1
-color-size-returns.do-you-have-a-bag,"Je, mna mfuko?",,,,2,sw-agent-v1
-tax-refund.can-i-get-a-tax-refund,Naweza kurudishiwa kodi?,,,,2,sw-agent-v1
-tax-refund.is-tax-free-shopping-available,"Je, kuna ununuzi bila kodi?",,,,2,sw-agent-v1
+payment-receipt.pay-by-card,Kulipa kwa kadi?,,kulˈipa kwa kˈadi,,2,sw-agent-v1;ipa=espeak
+payment-receipt.pay-cash,Kulipa kwa fedha taslimu?,,kulˈipa kwa fˈeða taslˈimu,,2,sw-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,Kulipa kwa QR?,Kulipa kwa M-Pesa?,kulˈipa kwa kjˌuˈar,,2,sw-agent-v1;ipa=espeak
+payment-receipt.a-receipt-please,"Risiti, tafadhali",,"risˈiti, tˌafaðˈali",,2,sw-agent-v1;ipa=espeak
+payment-receipt.please-write-the-number,Tafadhali andika namba,,tˌafaðˈali andˈika nˈamba,,2,sw-agent-v1;ipa=espeak
+payment-receipt.how-much-in-total,Jumla ni kiasi gani?,,ɟˈumla ni kiˈasi ɡˈani,,2,sw-agent-v1;ipa=espeak
+payment-receipt.can-we-pay-separately,Tunaweza kulipa kila mmoja?,,tˌunawˈeza kulˈipa kˈila mmˈoɟa,can we each pay,2,sw-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,"Je, kodi imo?","Je, VAT imo?","ɟˈe, kˈodi ˈimo",,2,sw-agent-v1;ipa=espeak
+payment-receipt.my-card-was-declined,Kadi yangu imekataliwa,,kˈadi jˈaŋɡu ˌimekˌatalˈiwa,,2,sw-agent-v1;ipa=espeak
+payment-receipt.the-bill-is-wrong,Nadhani bili ina makosa,,naðˈani bˈili ˈina makˈosa,,2,sw-agent-v1;ipa=espeak
+payment-receipt.i-already-paid,Nimelipa tayari,,nˌimelˈipa tajˈari,,2,sw-agent-v1;ipa=espeak
+shopping.i-am-just-looking,Naangalia tu,,nˌaaŋɡalˈia tˈu,,2,sw-agent-v1;ipa=espeak
+shopping.how-much-is-this,Hii ni bei gani?,,hˌii ni bˈei ɡˈani,,2,sw-agent-v1;ipa=espeak
+shopping.that-is-too-expensive,Ni ghali mno,,ni ɣˈali ˈm̩no,,2,sw-agent-v1;ipa=espeak
+shopping.can-it-be-a-little-cheaper,Punguza kidogo?,Bei ya mwisho?,puŋɡˈuza kidˈoɡo,,2,sw-agent-v1;ipa=espeak
+shopping.is-there-a-discount,"Je, kuna punguzo?",,"ɟˈe, kˈuna puŋɡˈuzo",,2,sw-agent-v1;ipa=espeak
+shopping.where-do-i-pay,Nalipa wapi?,,nalˈipa wˈapi,,2,sw-agent-v1;ipa=espeak
+shopping.i-will-take-this,Nachukua hii,,nˌatʃukˈua hˌii,,2,sw-agent-v1;ipa=espeak
+shopping.what-is-this,Hii ni nini?,,hˌii ni nˈini,,2,sw-agent-v1;ipa=espeak
+shopping.where-can-i-buy,Naweza kununua {} wapi?,,nawˈeza kˌununˈua {} wˈapi,,2,sw-agent-v1;ipa=espeak
+shopping.do-you-have-this-in-stock,"Je, mna hii dukani?",,"ɟˈe, ˈm̩na hˌii dukˈani",,2,sw-agent-v1;ipa=espeak
+shopping.two-of-these,"Hizi mbili, tafadhali",,"hˈizi mbˈili, tˌafaðˈali",,2,sw-agent-v1;ipa=espeak
+shopping.what-is-it-made-of,Imetengenezwa na nini?,,ˌimetˌeŋɡenˈezwa na nˈini,,2,sw-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-color,"Je, mna rangi nyingine?",,"ɟˈe, ˈm̩na rˈaŋɡi ɲiŋɡˈine",,2,sw-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-size,"Je, mna saizi nyingine?",,"ɟˈe, ˈm̩na saˈizi ɲiŋɡˈine",,2,sw-agent-v1;ipa=espeak
+color-size-returns.may-i-try-it-on,Naomba nijaribu?,,naˈomba nˌiɟarˈibu,,2,sw-agent-v1;ipa=espeak
+color-size-returns.can-i-return-it,Naweza kurudisha?,,nawˈeza kˌurudˈiʃa,,2,sw-agent-v1;ipa=espeak
+color-size-returns.can-i-exchange-it,Naweza kubadilisha?,,nawˈeza kˌubadilˈiʃa,,2,sw-agent-v1;ipa=espeak
+color-size-returns.do-you-have-a-bag,"Je, mna mfuko?",,"ɟˈe, ˈm̩na mfˈuko",,2,sw-agent-v1;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,Naweza kurudishiwa kodi?,,nawˈeza kˌurudiʃˈiwa kˈodi,,2,sw-agent-v1;ipa=espeak
+tax-refund.is-tax-free-shopping-available,"Je, kuna ununuzi bila kodi?",,"ɟˈe, kˈuna ˌununˈuzi bˌila kˈodi",,2,sw-agent-v1;ipa=espeak

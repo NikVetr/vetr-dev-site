@@ -1,101 +1,101 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-sim-data.i-would-like-a-tourist-sim,Quisiera una tarjeta SIM para turistas,,,,2,es-agent-v1
-children.cannot-find-my-child,No encuentro a mi hijo/a,,,,2,es-agent-v1
-etiquette.is-this-allowed,¿Está permitido esto?,,,,2,es-agent-v1
-sim-data.may-i-use-your-wifi,¿Me permite usar su wifi?,,,,2,es-agent-v1
-children.make-an-announcement,"Avise por el altavoz, por favor",por megafonía · por altoparlante,,,2,es-agent-v1
-etiquette.is-tipping-expected,¿Se acostumbra dejar propina?,,,,2,es-agent-v1
-sim-data.how-much-data-is-included,¿Cuántos datos incluye?,,,,2,es-agent-v1
-children.child-age,Mi hijo/a tiene {} años,,,,2,es-agent-v1
-etiquette.is-service-included,¿El servicio está incluido?,,,,2,es-agent-v1
-sim-data.do-you-need-my-passport,¿Necesita mi pasaporte?,,,,2,es-agent-v1
-children.high-chair,¿Tienen silla alta para niños?,trona · periquera,,,2,es-agent-v1
-etiquette.may-i-enter,¿Puedo entrar?,,,,2,es-agent-v1
-sim-data.how-long-is-it-valid,¿Cuánto tiempo es válida?,,,,2,es-agent-v1
-children.baby-changing-room,¿Dónde está el cambiador de bebés?,,,,2,es-agent-v1
-etiquette.remove-shoes,¿Me quito los zapatos?,,,,2,es-agent-v1
-sim-data.please-activate-it,"Actívela, por favor",,,,2,es-agent-v1
-children.childrens-menu,¿Hay menú para niños?,,,,2,es-agent-v1
-etiquette.photo-of-you,¿Puedo tomarle una foto?,,,,2,es-agent-v1
-sim-data.do-you-have-an-esim,¿Tienen eSIM?,,,,2,es-agent-v1
-children.suitable-for-children,¿Esto es apropiado para niños?,,,,2,es-agent-v1
-etiquette.may-i-sit-here,¿Puedo sentarme aquí?,,,,2,es-agent-v1
-sim-data.my-data-is-not-working,Mis datos no funcionan,,,,2,es-agent-v1
-children.minimum-age,¿Cuál es la edad mínima?,,,,2,es-agent-v1
-etiquette.queue-for,¿Esta es la fila para {}?,¿Esta es la cola para {}?,,,2,es-agent-v1
-sim-data.does-it-need-registration,¿Hay que registrarla?,,,,2,es-agent-v1
-children.do-children-pay,¿Los niños pagan?,,,,2,es-agent-v1
-etiquette.dressed-appropriately,¿Voy vestido/a apropiadamente?,,,,2,es-agent-v1
-sim-data.i-have-no-signal,No tengo señal,,,,2,es-agent-v1
-children.crib,¿Tienen cuna?,,,,2,es-agent-v1
-etiquette.did-not-mean-to-offend,No quise ofender,,,,2,es-agent-v1
-sim-data.please-write-the-wifi-password,Escriba la contraseña del wifi,,,,2,es-agent-v1
-children.warm-this-bottle,"Caliente este biberón, por favor",mamila · tetero · mamadera,,,2,es-agent-v1
-etiquette.what-is-customary,¿Qué se acostumbra aquí?,,,,2,es-agent-v1
-sim-data.sim-card,la tarjeta SIM,,,,2,es-agent-v1
-children.car-seat,Necesitamos una silla de auto para niños,silla para el coche · silla para el carro,,,2,es-agent-v1
-etiquette.keep-the-change,Quédese con el cambio,,,,2,es-agent-v1
-sim-data.where-can-i-buy-a-plug-adapter,¿Dónde puedo comprar un adaptador de enchufe?,,,,2,es-agent-v1
-children.stroller,el carrito de bebé,el cochecito · la carriola,,,2,es-agent-v1
-sim-data.mobile-data,los datos móviles,,,,2,es-agent-v1
-children.playground,¿Hay un parque infantil?,¿Hay juegos para niños?,,,2,es-agent-v1
-sim-data.can-i-top-up-this-sim,¿Puedo recargar esta SIM?,,,,2,es-agent-v1
-sim-data.top-up,la recarga,,,,2,es-agent-v1
-sim-data.is-there-coverage-in,¿Hay cobertura en {}?,,,,2,es-agent-v1
-sim-data.signal,la señal,la cobertura,,,2,es-agent-v1
-sim-data.esim,la eSIM,,,,2,es-agent-v1
-sim-data.prepaid,de prepago,,,,2,es-agent-v1
-sim-data.roaming,el roaming,la itinerancia,,,2,es-agent-v1
-social-basics.hello,Hola,,,,2,es-agent-v1
-social-basics.hello-polite,Buenos días,Buenas tardes,,,2,es-agent-v1
-social-basics.good-morning,Buenos días,,,,2,es-agent-v1
-social-basics.good-evening,Buenas noches,Buenas tardes,,,2,es-agent-v1
-social-basics.goodbye,Adiós,Hasta luego,,,2,es-agent-v1
-social-basics.thank-you,Gracias,Muchas gracias,,,2,es-agent-v1
-social-basics.you-are-welcome,De nada,,,,2,es-agent-v1
-social-basics.excuse-me-sorry,Perdón,Disculpe,,,2,es-agent-v1
-social-basics.sorry,Lo siento,,,,2,es-agent-v1
-social-basics.no-problem,No hay problema,,,,2,es-agent-v1
-social-basics.i-do-not-know,No sé,,,,2,es-agent-v1
-social-basics.good-night,Buenas noches,Que descanse,,,2,es-agent-v1
-social-basics.okay-fine-i-am-okay,Estoy bien,,,,2,es-agent-v1
+sim-data.i-would-like-a-tourist-sim,Quisiera una tarjeta SIM para turistas,,kisjˈeɾa ˈuna taɾxˈeta ˌeseˌiˈeme pˌaɾa tuɾˈistas,,2,es-agent-v1;ipa=espeak
+children.cannot-find-my-child,No encuentro a mi hijo/a,,nˈo enkwˈentɾo a mi ˈixo / ˈa,,2,es-agent-v1;ipa=espeak
+etiquette.is-this-allowed,¿Está permitido esto?,,estˈa pˌeɾmitˈido ˈesto,,2,es-agent-v1;ipa=espeak
+sim-data.may-i-use-your-wifi,¿Me permite usar su wifi?,,me peɾmˈite usˈaɾ su wˈifi,,2,es-agent-v1;ipa=espeak
+children.make-an-announcement,"Avise por el altavoz, por favor",por megafonía · por altoparlante,"abˈise poɾ el ˌaltabˈos, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+etiquette.is-tipping-expected,¿Se acostumbra dejar propina?,,se ˌakostˈumbɾa dexˈaɾ pɾopˈina,,2,es-agent-v1;ipa=espeak
+sim-data.how-much-data-is-included,¿Cuántos datos incluye?,,kwˈantos dˈatos inklˈuʝe,,2,es-agent-v1;ipa=espeak
+children.child-age,Mi hijo/a tiene {} años,,mi ˈixo / a tjˈene {} ˈaɲos,,2,es-agent-v1;ipa=espeak
+etiquette.is-service-included,¿El servicio está incluido?,,el seɾbˈisjo estˈa ˌinkluˈido,,2,es-agent-v1;ipa=espeak
+sim-data.do-you-need-my-passport,¿Necesita mi pasaporte?,,nˌesesˈita mi pˌasapˈoɾte,,2,es-agent-v1;ipa=espeak
+children.high-chair,¿Tienen silla alta para niños?,trona · periquera,tjˈenen sˈiʝa ˈalta pˌaɾa nˈiɲos,,2,es-agent-v1;ipa=espeak
+etiquette.may-i-enter,¿Puedo entrar?,,pwˈedo entɾˈaɾ,,2,es-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,¿Cuánto tiempo es válida?,,kwˈanto tjˈempo ˈes bˈalida,,2,es-agent-v1;ipa=espeak
+children.baby-changing-room,¿Dónde está el cambiador de bebés?,,dˈonde estˈa el kˌambjadˈoɾ de bebˈes,,2,es-agent-v1;ipa=espeak
+etiquette.remove-shoes,¿Me quito los zapatos?,,me kˈito los sapˈatos,,2,es-agent-v1;ipa=espeak
+sim-data.please-activate-it,"Actívela, por favor",,"aktˈibela, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+children.childrens-menu,¿Hay menú para niños?,,ˈaɪ menˈu pˌaɾa nˈiɲos,,2,es-agent-v1;ipa=espeak
+etiquette.photo-of-you,¿Puedo tomarle una foto?,,pwˈedo tomˈaɾle ˈuna fˈoto,,2,es-agent-v1;ipa=espeak
+sim-data.do-you-have-an-esim,¿Tienen eSIM?,,tjˈenen e ˌeseˌiˈeme,,2,es-agent-v1;ipa=espeak
+children.suitable-for-children,¿Esto es apropiado para niños?,,ˈesto ˈes ˌapɾopjˈado pˌaɾa nˈiɲos,,2,es-agent-v1;ipa=espeak
+etiquette.may-i-sit-here,¿Puedo sentarme aquí?,,pwˈedo sentˈaɾme akˈi,,2,es-agent-v1;ipa=espeak
+sim-data.my-data-is-not-working,Mis datos no funcionan,,mis dˈatos nˈo funsjˈonan,,2,es-agent-v1;ipa=espeak
+children.minimum-age,¿Cuál es la edad mínima?,,kwˈal ˈes la edˈad mˈinima,,2,es-agent-v1;ipa=espeak
+etiquette.queue-for,¿Esta es la fila para {}?,¿Esta es la cola para {}?,ˈesta ˈes la fˈila pˈaɾa {},,2,es-agent-v1;ipa=espeak
+sim-data.does-it-need-registration,¿Hay que registrarla?,,ˈaɪ ke rˌexistɾˈaɾla,,2,es-agent-v1;ipa=espeak
+children.do-children-pay,¿Los niños pagan?,,los nˈiɲos pˈaɡan,,2,es-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,¿Voy vestido/a apropiadamente?,,bˈoɪ bestˈido / a ˌapɾopjˈadamente,,2,es-agent-v1;ipa=espeak
+sim-data.i-have-no-signal,No tengo señal,,nˈo tˈeŋɡo seɲˈal,,2,es-agent-v1;ipa=espeak
+children.crib,¿Tienen cuna?,,tjˈenen kˈuna,,2,es-agent-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,No quise ofender,,nˈo kˈise ˌofendˈeɾ,,2,es-agent-v1;ipa=espeak
+sim-data.please-write-the-wifi-password,Escriba la contraseña del wifi,,eskɾˈiba la kˌontɾasˈeɲa del wˈifi,,2,es-agent-v1;ipa=espeak
+children.warm-this-bottle,"Caliente este biberón, por favor",mamila · tetero · mamadera,"kaljˈente ˈeste bˌibeɾˈon, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+etiquette.what-is-customary,¿Qué se acostumbra aquí?,,kˈe se ˌakostˈumbɾa akˈi,,2,es-agent-v1;ipa=espeak
+sim-data.sim-card,la tarjeta SIM,,la taɾxˈeta ˌeseˌiˈeme,,2,es-agent-v1;ipa=espeak
+children.car-seat,Necesitamos una silla de auto para niños,silla para el coche · silla para el carro,nˌesesitˈamos ˈuna sˈiʝa de ˈaʊto pˌaɾa nˈiɲos,,2,es-agent-v1;ipa=espeak
+etiquette.keep-the-change,Quédese con el cambio,,kˈedese kon el kˈambjo,,2,es-agent-v1;ipa=espeak
+sim-data.where-can-i-buy-a-plug-adapter,¿Dónde puedo comprar un adaptador de enchufe?,,dˈonde pwˈedo kompɾˈaɾ ˈun ˌadapːtadˈoɾ de entʃˈufe,,2,es-agent-v1;ipa=espeak
+children.stroller,el carrito de bebé,el cochecito · la carriola,el karˈito de bebˈe,,2,es-agent-v1;ipa=espeak
+sim-data.mobile-data,los datos móviles,,los dˈatos mˈobiles,,2,es-agent-v1;ipa=espeak
+children.playground,¿Hay un parque infantil?,¿Hay juegos para niños?,ˈaɪ ˈum pˈaɾke ˌimfantˈil,,2,es-agent-v1;ipa=espeak
+sim-data.can-i-top-up-this-sim,¿Puedo recargar esta SIM?,,pwˈedo rˌekaɾɡˈaɾ ˈesta ˌeseˌiˈeme,,2,es-agent-v1;ipa=espeak
+sim-data.top-up,la recarga,,la rekˈaɾɡa,,2,es-agent-v1;ipa=espeak
+sim-data.is-there-coverage-in,¿Hay cobertura en {}?,,ˈaɪ kˌobeɾtˈuɾa ˈen {},,2,es-agent-v1;ipa=espeak
+sim-data.signal,la señal,la cobertura,la seɲˈal,,2,es-agent-v1;ipa=espeak
+sim-data.esim,la eSIM,,la e sˈim,,2,es-agent-v1;ipa=espeak
+sim-data.prepaid,de prepago,,de pɾepˈaɡo,,2,es-agent-v1;ipa=espeak
+sim-data.roaming,el roaming,la itinerancia,el roˈamiŋ,,2,es-agent-v1;ipa=espeak
+social-basics.hello,Hola,,ˈola,,2,es-agent-v1;ipa=espeak
+social-basics.hello-polite,Buenos días,Buenas tardes,bwˈenos dˈias,,2,es-agent-v1;ipa=espeak
+social-basics.good-morning,Buenos días,,bwˈenos dˈias,,2,es-agent-v1;ipa=espeak
+social-basics.good-evening,Buenas noches,Buenas tardes,bwˈenas nˈotʃes,,2,es-agent-v1;ipa=espeak
+social-basics.goodbye,Adiós,Hasta luego,adjˈos,,2,es-agent-v1;ipa=espeak
+social-basics.thank-you,Gracias,Muchas gracias,ɡɾˈasjas,,2,es-agent-v1;ipa=espeak
+social-basics.you-are-welcome,De nada,,de nˈada,,2,es-agent-v1;ipa=espeak
+social-basics.excuse-me-sorry,Perdón,Disculpe,peɾdˈon,,2,es-agent-v1;ipa=espeak
+social-basics.sorry,Lo siento,,lo sjˈento,,2,es-agent-v1;ipa=espeak
+social-basics.no-problem,No hay problema,,nˈo ˈaɪ pɾoblˈema,,2,es-agent-v1;ipa=espeak
+social-basics.i-do-not-know,No sé,,nˈo sˈe,,2,es-agent-v1;ipa=espeak
+social-basics.good-night,Buenas noches,Que descanse,bwˈenas nˈotʃes,,2,es-agent-v1;ipa=espeak
+social-basics.okay-fine-i-am-okay,Estoy bien,,estˈoɪ bjˈen,,2,es-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,No hablo {target},,,,2,language-slots-v1
 communication.i-speak-only-a-little-of-this,Hablo poco {target},,,,2,language-slots-v1
 communication.do-you-speak-english,¿Habla {source}?,,,,2,language-slots-v1
-communication.please-speak-more-slowly,"Hable más despacio, por favor",,,,2,es-agent-v1
-communication.i-do-not-understand-spoken,No entiendo,,,,2,es-agent-v1
-communication.i-cannot-read-understand,No sé leer esto,,,,2,es-agent-v1
-communication.please-say-it-again,"Repítalo, por favor",,,,2,es-agent-v1
-communication.please-write-it-down,"Escríbalo, por favor",,,,2,es-agent-v1
-communication.please-wait-a-moment,"Espere un momento, por favor",,,,2,es-agent-v1
-communication.can-you-help-me,¿Me puede ayudar?,,,,2,es-agent-v1
+communication.please-speak-more-slowly,"Hable más despacio, por favor",,"ˈable mˈas despˈasjo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,No entiendo,,nˈo entjˈendo,,2,es-agent-v1;ipa=espeak
+communication.i-cannot-read-understand,No sé leer esto,,nˈo sˈe leˈeɾ ˈesto,,2,es-agent-v1;ipa=espeak
+communication.please-say-it-again,"Repítalo, por favor",,"repˈitalo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+communication.please-write-it-down,"Escríbalo, por favor",,"eskɾˈibalo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+communication.please-wait-a-moment,"Espere un momento, por favor",,"espˈeɾe ˈun momˈento, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+communication.can-you-help-me,¿Me puede ayudar?,,me pwˈede ˌaʝudˈaɾ,,2,es-agent-v1;ipa=espeak
 communication.please-show-me-the-text,Muéstreme el texto en {target},,,,2,language-slots-v1
-communication.i-cannot-make-out-what-you-are-saying,No entiendo lo que dice,,,,2,es-agent-v1
-communication.i-do-not-understand,No entiendo,,,,2,es-agent-v1
-communication.i-cannot-read-it,No puedo leerlo,,,,2,es-agent-v1
-communication.please-write-it-in-roman-letters,Escríbalo en alfabeto latino,Escríbalo con letra clara,,,1,es-agent-v1
-quick-responses.please-go-ahead,Adelante,Pase,,,2,es-agent-v1
-quick-responses.yes-right,Sí,,,,2,es-agent-v1
-quick-responses.no-not,No,,,,2,es-agent-v1
-quick-responses.okay-can,De acuerdo,,,,2,es-agent-v1
-quick-responses.cannot-not-allowed,No se puede,,,,2,es-agent-v1
-quick-responses.works-okay,Funciona,,,,2,es-agent-v1
-quick-responses.does-not-work-no,No funciona,,,,2,es-agent-v1
-quick-responses.can-possible,Se puede,,,,2,es-agent-v1
-quick-responses.cannot-not-possible,No es posible,,,,2,es-agent-v1
-quick-responses.okay-fine,Está bien,,,,2,es-agent-v1
-quick-responses.no-good-not-allowed-will-not-work,No está permitido,,,,2,es-agent-v1
-phone-translation.i-am-using-phone-translation,Estoy usando un traductor en el móvil,en el celular,,,2,es-agent-v1
-phone-translation.please-speak-toward-the-phone,Hable hacia el teléfono,,,,2,es-agent-v1
-phone-translation.one-sentence-at-a-time-please,"Una frase a la vez, por favor",,,,2,es-agent-v1
-phone-translation.please-type-it-and-show-me,Escríbalo y muéstremelo,,,,2,es-agent-v1
-phone-translation.please-look-at-the-screen,"Mire la pantalla, por favor",,,,2,es-agent-v1
-phone-text-power.please-type-it-for-me,"Escríbalo en el teléfono, por favor",,,,2,es-agent-v1
+communication.i-cannot-make-out-what-you-are-saying,No entiendo lo que dice,,nˈo entjˈendo lo ke dˈise,,2,es-agent-v1;ipa=espeak
+communication.i-do-not-understand,No entiendo,,nˈo entjˈendo,,2,es-agent-v1;ipa=espeak
+communication.i-cannot-read-it,No puedo leerlo,,nˈo pwˈedo leˈeɾlo,,2,es-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,Escríbalo en alfabeto latino,Escríbalo con letra clara,eskɾˈibalo en ˌalfabˈeto latˈino,,1,es-agent-v1;ipa=espeak
+quick-responses.please-go-ahead,Adelante,Pase,ˌadelˈante,,2,es-agent-v1;ipa=espeak
+quick-responses.yes-right,Sí,,sˈi,,2,es-agent-v1;ipa=espeak
+quick-responses.no-not,No,,nˈo,,2,es-agent-v1;ipa=espeak
+quick-responses.okay-can,De acuerdo,,de akwˈeɾdo,,2,es-agent-v1;ipa=espeak
+quick-responses.cannot-not-allowed,No se puede,,nˈo se pwˈede,,2,es-agent-v1;ipa=espeak
+quick-responses.works-okay,Funciona,,funsjˈona,,2,es-agent-v1;ipa=espeak
+quick-responses.does-not-work-no,No funciona,,nˈo funsjˈona,,2,es-agent-v1;ipa=espeak
+quick-responses.can-possible,Se puede,,se pwˈede,,2,es-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,No es posible,,nˈo ˈes posˈible,,2,es-agent-v1;ipa=espeak
+quick-responses.okay-fine,Está bien,,estˈa bjˈen,,2,es-agent-v1;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,No está permitido,,nˈo estˈa pˌeɾmitˈido,,2,es-agent-v1;ipa=espeak
+phone-translation.i-am-using-phone-translation,Estoy usando un traductor en el móvil,en el celular,estˈoɪ usˈando ˈun tɾˌaduktˈoɾ en el mˈobil,,2,es-agent-v1;ipa=espeak
+phone-translation.please-speak-toward-the-phone,Hable hacia el teléfono,,ˈable ˌasja el telˈefono,,2,es-agent-v1;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,"Una frase a la vez, por favor",,"ˈuna fɾˈase a la bˈes, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+phone-translation.please-type-it-and-show-me,Escríbalo y muéstremelo,,eskɾˈibalo i mwˈestɾemˌelo,,2,es-agent-v1;ipa=espeak
+phone-translation.please-look-at-the-screen,"Mire la pantalla, por favor",,"mˈiɾe la pantˈaʝa, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+phone-text-power.please-type-it-for-me,"Escríbalo en el teléfono, por favor",,"eskɾˈibalo en el telˈefono, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 phone-translation.please-write-the-place-name,Escriba el nombre del lugar en {target},,,,2,language-slots-v1
-phone-text-power.please-use-simple-words,"Use palabras sencillas, por favor",,,,2,es-agent-v1
-phone-text-power.my-phone-battery-is-low,Mi teléfono tiene poca batería,,,,2,es-agent-v1
-phone-text-power.do-you-have-a-power-bank,¿Tiene una batería portátil?,¿Tiene un power bank?,,,2,es-agent-v1
-phone-text-power.the-translation-may-be-inaccurate,La traducción puede ser inexacta,,,,2,es-agent-v1
-phone-text-power.please-confirm,"Confírmelo, por favor",,,,2,es-agent-v1
-phone-text-power.may-i-charge-my-phone-here,¿Puedo cargar el teléfono aquí?,,,,2,es-agent-v1
+phone-text-power.please-use-simple-words,"Use palabras sencillas, por favor",,"ˈuse palˈabɾas sensˈiʝas, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+phone-text-power.my-phone-battery-is-low,Mi teléfono tiene poca batería,,mi telˈefono tjˈene pˈoka bˌateɾˈia,,2,es-agent-v1;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,¿Tiene una batería portátil?,¿Tiene un power bank?,tjˈene ˈuna bˌateɾˈia poɾtˈatil,,2,es-agent-v1;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,La traducción puede ser inexacta,,la tɾˌaduksjˈom pwˈede sˈer ˌineksˈakta,,2,es-agent-v1;ipa=espeak
+phone-text-power.please-confirm,"Confírmelo, por favor",,"komfˈiɾmelo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,¿Puedo cargar el teléfono aquí?,,pwˈedo kaɾɡˈaɾ el telˈefono akˈi,,2,es-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Cortesía en tailandés: termine casi cualquier frase con khrap si es hombre, con kha si es mujer. Si una mujer pregunta, kha se dice con tono ascendente. Las filas de esta guía omiten la partícula; añádala usted.",,,,2,es-notes-v1

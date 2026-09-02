@@ -21,6 +21,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const CHECK = process.argv.includes('--check');
 const INDEX_PATH = 'data/respell/overrides/index.json';
+const RULES_INDEX_PATH = 'data/respell/rules/index.json';
 
 /** Directories whose contents belong in the shell, searched recursively. */
 const CODE_DIRS = ['core', 'render', 'ui'];
@@ -40,7 +41,8 @@ const ENTRY_FILES = [
 // data/i18n is in here because the interface has to keep working offline in the
 // reader's own language, not fall back to English the moment the network goes.
 const DATA_DIRS = ['data/registry', 'data/registry/section-titles',
-  'data/registry/emergency-labels', 'data/themes', 'data/respell/overrides', 'data/i18n'];
+  'data/registry/emergency-labels', 'data/themes', 'data/respell/overrides',
+  'data/respell/rules', 'data/i18n'];
 
 /** @param {string} dir @returns {Promise<string[]>} */
 async function walk(dir) {
@@ -72,8 +74,20 @@ const overrides = files
   .map((f) => f.slice('data/respell/overrides/'.length, -'.csv'.length));
 const overrideIndex = `${JSON.stringify(overrides, null, 2)}\n`;
 
+// And which reading languages have a respelling rule table. Most do not yet, and a
+// pair whose reader has none simply gets no generated respelling -- so this list is
+// what stops the app asking for sixteen files that were never written.
+const ruleTables = files
+  .filter((f) => f.startsWith('data/respell/rules/') && f.endsWith('.json')
+    && !f.endsWith('/index.json'))
+  .map((f) => f.slice('data/respell/rules/'.length, -'.json'.length));
+const rulesIndex = `${JSON.stringify(ruleTables, null, 2)}\n`;
+
 // This script's own output, so write it before checking that the list is real.
-if (!CHECK) await writeFile(join(ROOT, INDEX_PATH), overrideIndex);
+if (!CHECK) {
+  await writeFile(join(ROOT, INDEX_PATH), overrideIndex);
+  await writeFile(join(ROOT, RULES_INDEX_PATH), rulesIndex);
+}
 
 // Fail loudly rather than shipping a worker that precaches a 404.
 const missing = [];
@@ -113,7 +127,9 @@ if (nextSw === sw && !sw.includes(`plg-${version}`)) {
 if (CHECK) {
   const onDisk = await readFile(join(ROOT, 'data/shell.json'), 'utf8').catch(() => '');
   const indexOnDisk = await readFile(join(ROOT, INDEX_PATH), 'utf8').catch(() => '');
-  if (onDisk !== manifest || nextSw !== sw || indexOnDisk !== overrideIndex) {
+  const rulesOnDisk = await readFile(join(ROOT, RULES_INDEX_PATH), 'utf8').catch(() => '');
+  if (onDisk !== manifest || nextSw !== sw || indexOnDisk !== overrideIndex
+    || rulesOnDisk !== rulesIndex) {
     throw new Error('data/shell.json is stale -- run `npm run shell` and commit the result');
   }
   console.log(`shell manifest current  ${files.length} files, version plg-${version}`);

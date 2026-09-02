@@ -1,8 +1,8 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,ซื้อตั๋วได้ที่ไหน,,sue tua dai thi nai,,,2,th-agent-v1
-attractions-tickets.do-i-need-a-reservation,ต้องจองไหม,,tong chong mai,,,2,th-agent-v1
-attractions-tickets.what-is-the-latest-entry-time,เข้าได้ถึงกี่โมง,,khao dai thueng ki mong,,,2,th-agent-v1
-attractions-tickets.are-there-lockers,มีล็อกเกอร์ไหม,,mi lokkoe mai,,,2,th-agent-v1
-attractions-tickets.may-i-take-photos,ถ่ายรูปได้ไหม,,thai rup dai mai,,,2,th-agent-v1
-attractions-tickets.please-take-a-photo-of-us,ช่วยถ่ายรูปให้หน่อย,,chuai thai rup hai noi,,,2,th-agent-v1
-attractions-tickets.could-you-take-a-photo-for-us,ถ่ายรูปให้ได้ไหม,,thai rup hai dai mai,,,2,th-agent-v1
+attractions-tickets.where-can-i-buy-tickets,ซื้อตั๋วได้ที่ไหน,,sue tua dai thi nai,sɯː˦˥ tua̯˩˩˦ daːj˥˩ tʰiː˥˩naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.do-i-need-a-reservation,ต้องจองไหม,,tong chong mai,tɔŋ˥˩ tɕɔːŋ˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.what-is-the-latest-entry-time,เข้าได้ถึงกี่โมง,,khao dai thueng ki mong,kʰaw˥˩ daːj˥˩ tʰɯŋ˩˩˦ kiː˨˩ moːŋ˧,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.are-there-lockers,มีล็อกเกอร์ไหม,,mi lokkoe mai,miː˧ lɔk˦˥kɤː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.may-i-take-photos,ถ่ายรูปได้ไหม,,thai rup dai mai,tʰaːj˨˩ruːp˥˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.please-take-a-photo-of-us,ช่วยถ่ายรูปให้หน่อย,,chuai thai rup hai noi,tɕʰua̯j˥˩ tʰaːj˨˩ruːp˥˩ haj˥˩ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
+attractions-tickets.could-you-take-a-photo-for-us,ถ่ายรูปให้ได้ไหม,,thai rup hai dai mai,tʰaːj˨˩ruːp˥˩ haj˥˩daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p

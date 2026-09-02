@@ -1,47 +1,47 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,私,,watashi,,,2,japanese-reviewed-v6
-question-words.what,何,,nani,,,2,japanese-reviewed-v6
-pronouns-verbs.we-us,私たち,,watashitachi,,,2,japanese-reviewed-v6
-question-words.where,どこ,,doko,,,2,japanese-reviewed-v6
-question-words.who,誰,,dare,,,2,japanese-reviewed-v6
-pronouns-verbs.you,あなた,,anata,,,2,ja-agent-v1
-question-words.which-one,どれ,,dore,,,2,japanese-reviewed-v6
-pronouns-verbs.you-polite,そちら様,,sochira-sama,,,1,ja-agent-v1
-question-words.when,いつ,,itsu,,,2,japanese-reviewed-v6
-pronouns-verbs.he-him,彼,,kare,,,2,ja-agent-v1
-question-words.how,どう,,dō,,,2,japanese-reviewed-v6
-pronouns-verbs.she-her,彼女,,kanojo,,,2,ja-agent-v1
-pronouns-verbs.they-them,彼ら,,karera,,,2,ja-agent-v1
-question-words.how-much-many,どのくらい,,dono kurai,,,2,ja-agent-v1
-question-words.how-many,いくつ,,ikutsu,,,2,japanese-reviewed-v6
-pronouns-verbs.my-mine,私の,,watashi no,,,2,ja-agent-v1
-question-words.why,なぜ,,naze,,,2,japanese-reviewed-v6
-pronouns-verbs.your-yours,あなたの,,anata no,,,2,ja-agent-v1
-question-words.this,これ,,kore,,,2,japanese-reviewed-v6
-pronouns-verbs.be-called-call,〜と言います,,to iimasu,,,2,ja-agent-v1
-question-words.that,それ,,sore,,,2,japanese-reviewed-v6
-pronouns-verbs.have,持っています,,motteimasu,,,2,ja-agent-v1
-question-words.here,ここ,,koko,,,2,japanese-reviewed-v6
-pronouns-verbs.do-not-have,持っていません,,motteimasen,,,2,ja-agent-v1
-pronouns-verbs.go,行きます,,ikimasu,,,2,japanese-reviewed-v6
-question-words.there,そこ,,soko,,,2,japanese-reviewed-v6
-pronouns-verbs.come,来ます,,kimasu,,,2,japanese-reviewed-v6
-question-words.a-little,少し,,sukoshi,,,2,japanese-reviewed-v6
-question-words.some,いくつか,,ikutsuka,,,2,japanese-reviewed-v6
-pronouns-verbs.would-like,〜をお願いします,,o onegaishimasu,,,2,ja-agent-v1
-question-words.very,とても,,totemo,,,2,japanese-reviewed-v6
-pronouns-verbs.want,欲しいです,,hoshii desu,,,2,ja-agent-v1
-question-words.too,〜すぎる,,sugiru,,,2,japanese-reviewed-v6
-pronouns-verbs.look-for,探しています,,sagashiteimasu,,,2,ja-agent-v1
-pronouns-verbs.buy,買います,,kaimasu,,,2,japanese-reviewed-v6
-question-words.also,〜も,,mo,,,2,japanese-reviewed-v6
-pronouns-verbs.like,好きです,,suki desu,,,2,japanese-reviewed-v6
-question-words.all-both,全部／両方,,zenbu / ryōhō,,,2,japanese-reviewed-v6
-pronouns-verbs.need,必要です,,hitsuyō desu,,,2,ja-agent-v1
-pronouns-verbs.there-is-have,あります,,arimasu,,,2,japanese-reviewed-v6
-pronouns-verbs.there-is-not-do-not-have,ありません,,arimasen,,,2,japanese-reviewed-v6
-pronouns-verbs.want-to-verb,〜たいです,,tai desu,,,2,japanese-reviewed-v6
-pronouns-verbs.want-thing,〜が欲しいです,,ga hoshii desu,,,2,japanese-reviewed-v6
-pronouns-verbs.need-thing,〜が必要です,,ga hitsuyō desu,,,2,japanese-reviewed-v6
-question-words.how-much-what-price,いくら,,ikura,,,2,japanese-reviewed-v6
-pronouns-verbs.looking-for-thing,〜を探しています,,o sagashiteimasu,,,2,japanese-reviewed-v6
+pronouns-verbs.i-me,私,,watashi,wataɕi,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.what,何,,nani,naɲi,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.we-us,私たち,,watashitachi,wataɕitatɕi,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.where,どこ,,doko,doko,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.who,誰,,dare,daɾe,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.you,あなた,,anata,anata,,2,ja-agent-v1;ipa=hepburn
+question-words.which-one,どれ,,dore,doɾe,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.you-polite,そちら様,,sochira-sama,sotɕiɾasama,,1,ja-agent-v1;ipa=hepburn
+question-words.when,いつ,,itsu,itsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.he-him,彼,,kare,kaɾe,,2,ja-agent-v1;ipa=hepburn
+question-words.how,どう,,dō,doː,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.she-her,彼女,,kanojo,kanodʑo,,2,ja-agent-v1;ipa=hepburn
+pronouns-verbs.they-them,彼ら,,karera,kaɾeɾa,,2,ja-agent-v1;ipa=hepburn
+question-words.how-much-many,どのくらい,,dono kurai,dono kɯɾai,,2,ja-agent-v1;ipa=hepburn
+question-words.how-many,いくつ,,ikutsu,ikɯtsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.my-mine,私の,,watashi no,wataɕi no,,2,ja-agent-v1;ipa=hepburn
+question-words.why,なぜ,,naze,naze,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.your-yours,あなたの,,anata no,anata no,,2,ja-agent-v1;ipa=hepburn
+question-words.this,これ,,kore,koɾe,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.be-called-call,〜と言います,,to iimasu,to iːmasɯ,,2,ja-agent-v1;ipa=hepburn
+question-words.that,それ,,sore,soɾe,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.have,持っています,,motteimasu,motteimasɯ,,2,ja-agent-v1;ipa=hepburn
+question-words.here,ここ,,koko,koko,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.do-not-have,持っていません,,motteimasen,motteimaseɴ,,2,ja-agent-v1;ipa=hepburn
+pronouns-verbs.go,行きます,,ikimasu,ikimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.there,そこ,,soko,soko,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.come,来ます,,kimasu,kimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.a-little,少し,,sukoshi,sɯkoɕi,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.some,いくつか,,ikutsuka,ikɯtsɯka,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.would-like,〜をお願いします,,o onegaishimasu,o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+question-words.very,とても,,totemo,totemo,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.want,欲しいです,,hoshii desu,hoɕii desɯ,,2,ja-agent-v1;ipa=hepburn
+question-words.too,〜すぎる,,sugiru,sɯɡiɾɯ,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.look-for,探しています,,sagashiteimasu,saɡaɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+pronouns-verbs.buy,買います,,kaimasu,kaimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.also,〜も,,mo,mo,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.like,好きです,,suki desu,sɯki desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.all-both,全部／両方,,zenbu / ryōhō,zeɴbɯ / ɾjoːhoː,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.need,必要です,,hitsuyō desu,çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
+pronouns-verbs.there-is-have,あります,,arimasu,aɾimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.there-is-not-do-not-have,ありません,,arimasen,aɾimaseɴ,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.want-to-verb,〜たいです,,tai desu,tai desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.want-thing,〜が欲しいです,,ga hoshii desu,ɡa hoɕii desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.need-thing,〜が必要です,,ga hitsuyō desu,ɡa çitsɯjoː desɯ,,2,japanese-reviewed-v6;ipa=hepburn
+question-words.how-much-what-price,いくら,,ikura,ikɯɾa,,2,japanese-reviewed-v6;ipa=hepburn
+pronouns-verbs.looking-for-thing,〜を探しています,,o sagashiteimasu,o saɡaɕiteimasɯ,,2,japanese-reviewed-v6;ipa=hepburn

@@ -1,44 +1,44 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
-days-of-week.monday,月曜日,,getsuyōbi,,,2,japanese-reviewed-v6
-months.january,1月,,ichigatsu,,,2,japanese-reviewed-v6
-time-words.today,今日,,kyō,,,2,japanese-reviewed-v6
-time-scheduling.what-time-is-it,今何時ですか？,,ima nanji desu ka?,,,2,japanese-reviewed-v6
-days-of-week.tuesday,火曜日,,kayōbi,,,2,japanese-reviewed-v6
-months.february,2月,,nigatsu,,,2,japanese-reviewed-v6
-time-words.tomorrow,明日,,ashita,,,2,japanese-reviewed-v6
-time-scheduling.how-many-minutes,何分ですか？,,nanpun desu ka?,,,2,ja-agent-v1
-days-of-week.wednesday,水曜日,,suiyōbi,,,2,japanese-reviewed-v6
-months.march,3月,,sangatsu,,,2,japanese-reviewed-v6
-time-words.yesterday,昨日,,kinō,,,2,japanese-reviewed-v6
-time-scheduling.what-time-should-we-meet,何時に会いましょうか？,,nanji ni aimashō ka?,,,2,japanese-reviewed-v6
-days-of-week.thursday,木曜日,,mokuyōbi,,,2,japanese-reviewed-v6
-months.april,4月,,shigatsu,,,2,japanese-reviewed-v6
-time-words.this-week,今週,,konshū,,,2,japanese-reviewed-v6
-time-scheduling.can-we-change-the-time,時間を変えられますか？,,jikan o kaeraremasu ka?,,,2,japanese-reviewed-v6
-days-of-week.friday,金曜日,,kin'yōbi,,,2,japanese-reviewed-v6
-months.may,5月,,gogatsu,,,2,japanese-reviewed-v6
-time-words.next-week,来週,,raishū,,,2,japanese-reviewed-v6
-time-scheduling.when-is-convenient,いつが都合いいですか？,,itsu ga tsugō ii desu ka?,,,2,japanese-reviewed-v6
-days-of-week.saturday,土曜日,,doyōbi,,,2,japanese-reviewed-v6
-months.june,6月,,rokugatsu,,,2,japanese-reviewed-v6
-time-words.morning,朝,,asa,,,2,japanese-reviewed-v6
-time-scheduling.what-is-today-s-date,今日は何日ですか？,,kyō wa nannichi desu ka?,,,2,japanese-reviewed-v6
-days-of-week.sunday,日曜日,,nichiyōbi,,,2,japanese-reviewed-v6
-months.july,7月,,shichigatsu,,,2,japanese-reviewed-v6
-time-words.afternoon,午後,,gogo,,,2,japanese-reviewed-v6
-time-scheduling.what-day-is-it-today,今日は何曜日ですか？,,kyō wa nan'yōbi desu ka?,,,2,japanese-reviewed-v6
-months.august,8月,,hachigatsu,,,2,japanese-reviewed-v6
-time-words.evening,夕方,,yūgata,,,2,japanese-reviewed-v6
-time-scheduling.what-time-does-it-open,何時に開きますか？,,nanji ni akimasu ka?,,,2,japanese-reviewed-v6
-months.september,9月,,kugatsu,,,2,japanese-reviewed-v6
-time-words.spring,春,,haru,,,2,japanese-reviewed-v6
-time-scheduling.what-time-does-it-close,何時に閉まりますか？,,nanji ni shimarimasu ka?,,,2,japanese-reviewed-v6
-months.october,10月,,jūgatsu,,,2,japanese-reviewed-v6
-time-words.summer,夏,,natsu,,,2,japanese-reviewed-v6
-months.november,11月,,jūichigatsu,,,2,japanese-reviewed-v6
-time-words.fall,秋,,aki,,,2,japanese-reviewed-v6
-months.december,12月,,jūnigatsu,,,2,japanese-reviewed-v6
-time-words.winter,冬,,fuyu,,,2,japanese-reviewed-v6
-time-scheduling.how-long-does-it-take,何分かかりますか？,,nanpun kakarimasu ka?,,,2,japanese-reviewed-v6
-time-words.night,夜,,yoru,,,2,japanese-reviewed-v6
+days-of-week.monday,月曜日,,getsuyōbi,ɡetsɯjoːbi,,2,japanese-reviewed-v6;ipa=hepburn
+months.january,1月,,ichigatsu,itɕiɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.today,今日,,kyō,kjoː,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.what-time-is-it,今何時ですか？,,ima nanji desu ka?,ima naɴdʑi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+days-of-week.tuesday,火曜日,,kayōbi,kajoːbi,,2,japanese-reviewed-v6;ipa=hepburn
+months.february,2月,,nigatsu,ɲiɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.tomorrow,明日,,ashita,aɕita,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.how-many-minutes,何分ですか？,,nanpun desu ka?,naɴpɯɴ desɯ ka,,2,ja-agent-v1;ipa=hepburn
+days-of-week.wednesday,水曜日,,suiyōbi,sɯijoːbi,,2,japanese-reviewed-v6;ipa=hepburn
+months.march,3月,,sangatsu,saɴɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.yesterday,昨日,,kinō,kinoː,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.what-time-should-we-meet,何時に会いましょうか？,,nanji ni aimashō ka?,naɴdʑi ɲi aimaɕoː ka,,2,japanese-reviewed-v6;ipa=hepburn
+days-of-week.thursday,木曜日,,mokuyōbi,mokɯjoːbi,,2,japanese-reviewed-v6;ipa=hepburn
+months.april,4月,,shigatsu,ɕiɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.this-week,今週,,konshū,koɴɕɯː,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.can-we-change-the-time,時間を変えられますか？,,jikan o kaeraremasu ka?,dʑikaɴ o kaeɾaɾemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+days-of-week.friday,金曜日,,kin'yōbi,kiɴjoːbi,,2,japanese-reviewed-v6;ipa=hepburn
+months.may,5月,,gogatsu,ɡoɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.next-week,来週,,raishū,ɾaiɕɯː,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.when-is-convenient,いつが都合いいですか？,,itsu ga tsugō ii desu ka?,itsɯ ɡa tsɯɡoː iː desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+days-of-week.saturday,土曜日,,doyōbi,dojoːbi,,2,japanese-reviewed-v6;ipa=hepburn
+months.june,6月,,rokugatsu,ɾokɯɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.morning,朝,,asa,asa,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.what-is-today-s-date,今日は何日ですか？,,kyō wa nannichi desu ka?,kjoː wa naɴɲitɕi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+days-of-week.sunday,日曜日,,nichiyōbi,ɲitɕijoːbi,,2,japanese-reviewed-v6;ipa=hepburn
+months.july,7月,,shichigatsu,ɕitɕiɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.afternoon,午後,,gogo,ɡoɡo,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.what-day-is-it-today,今日は何曜日ですか？,,kyō wa nan'yōbi desu ka?,kjoː wa naɴjoːbi desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+months.august,8月,,hachigatsu,hatɕiɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.evening,夕方,,yūgata,jɯːɡata,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.what-time-does-it-open,何時に開きますか？,,nanji ni akimasu ka?,naɴdʑi ɲi akimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+months.september,9月,,kugatsu,kɯɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.spring,春,,haru,haɾɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.what-time-does-it-close,何時に閉まりますか？,,nanji ni shimarimasu ka?,naɴdʑi ɲi ɕimaɾimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+months.october,10月,,jūgatsu,dʑɯːɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.summer,夏,,natsu,natsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+months.november,11月,,jūichigatsu,dʑɯːitɕiɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.fall,秋,,aki,aki,,2,japanese-reviewed-v6;ipa=hepburn
+months.december,12月,,jūnigatsu,dʑɯːɲiɡatsɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.winter,冬,,fuyu,ɸɯjɯ,,2,japanese-reviewed-v6;ipa=hepburn
+time-scheduling.how-long-does-it-take,何分かかりますか？,,nanpun kakarimasu ka?,naɴpɯɴ kakaɾimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+time-words.night,夜,,yoru,joɾɯ,,2,japanese-reviewed-v6;ipa=hepburn
 time-words.clock-offset,スワヒリ語の時刻は夜明けが起点。 数字は時計より 6 小さく、聞いた数に 6 を足せば時計の時刻です。 saa moja が 7:00、saa sita が正午、saa kumi が 16:00。 時刻は数字で伝えるか、西洋式なら saa ngapi za kizungu と聞きます。,,,,,2,ja-notes-v1

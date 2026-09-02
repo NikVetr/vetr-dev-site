@@ -24,11 +24,31 @@
 // generator's job (`scripts/build_ipa.py`), not this module's: an engine that
 // second-guesses its input cannot be reasoned about.
 
-/** Vowels, as the syllabifier needs to recognise them. */
-const VOWELS = new Set('iyɨʉɯuɪʏʊeøɘɵɤoəɛœɜɞʌɔæɐaɶɑɒ');
+/**
+ * Vowels, as the syllabifier needs to recognise them.
+ *
+ * The second row is the nasal vowels that arrive *precomposed*. The corpus is NFC
+ * by invariant, and NFC composes a vowel plus U+0303 into a single codepoint --
+ * so espeak's `u` + combining tilde is one character here, not two, and without
+ * these five Portuguese, French and Hindi mis-syllabify every nasal vowel. `ɐ̃`
+ * and `ɛ̃` have no precomposed form and stay decomposed, which the VOWEL_TAIL
+ * rule below already handles.
+ */
+const VOWELS = new Set([
+  ...'iyɨʉɯuɪʏʊeøɘɵɤoəɛœɜɞʌɔæɐaɶɑɒ',
+  ...'ãẽĩõũ',
+]);
 const GLIDES = new Set('jwɥ');
 /** Length, nasalisation and the non-syllabic mark all belong to their vowel. */
 const VOWEL_TAIL = new Set(['ː', 'ˑ', '̃', '̯']);
+/**
+ * Chao tone letters. Tone is lexical in Mandarin, Thai and Vietnamese, so the
+ * `ipa` column carries it -- but whether a *reader* is shown it is the reading
+ * language's decision, which is why it is a `policy` switch rather than absent
+ * from the data. All four curated tonal sheets drop it: an English reader given
+ * `nee˧˩˧ how˧˩˧` reads neither the word nor the tone.
+ */
+const TONE = /[\u02E5-\u02E9]/g;
 /** @type {Record<string,number>} */
 const STRESS = { 'ˈ': 1, 'ˌ': 2 };
 
@@ -262,8 +282,9 @@ function applySplits(syllables, splits) {
  * @param {any} config.rules  a `data/respell/rules/<source>__<accent>.json`
  * @param {string[]} config.targetIpa  every IPA string the target language has, so
  *   its inventory and phonotactics can be read off it
+ * @param {string} [config.target]  the target's code, for the `targets` block
  */
-export function createRespeller({ rules, targetIpa }) {
+export function createRespeller({ rules, targetIpa, target = '' }) {
   const clusters = onsetClusters(targetIpa.flatMap((s) => s.split(/\s+/)).filter(Boolean));
   const words = targetIpa
     .flatMap((s) => s.split(/\s+/))
@@ -271,15 +292,24 @@ export function createRespeller({ rules, targetIpa }) {
     .map((w) => syllabify(w, clusters));
   const inventory = phonemeInventory(words);
 
+  // A handful of rules cannot be expressed against the target's inventory and have
+  // to name it: Mandarin needs `ah` for /a/ where every other language wants the
+  // conditional `a`/`ah` split. Target rules go *first*, so they win.
+  const only = (rules.targets ?? {})[target] ?? {};
+
   // A rule whose inventory condition fails can never fire, so drop it once here
-  // rather than testing it per syllable.
-  const phonemes = (rules.phonemes ?? []).filter((/** @type {any} */ r) => inventoryHolds(r, inventory));
-  const fixups = (rules.syllable_fixups ?? [])
+  // rather than testing it per syllable. Then sort by IPA length, because
+  // "longest match wins" is a property of the table and not of the order someone
+  // happened to write it in -- an unsorted list silently spells /tɕʰ/ as /t/.
+  const phonemes = [...(only.phonemes ?? []), ...(rules.phonemes ?? [])]
+    .filter((/** @type {any} */ r) => inventoryHolds(r, inventory))
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.ipa.length - a.ipa.length);
+  const fixups = [...(only.syllable_fixups ?? []), ...(rules.syllable_fixups ?? [])]
     .filter((/** @type {any} */ f) => inventoryHolds(f, inventory))
     .map((/** @type {any} */ f) => ({ ...f, re: new RegExp(f.match) }));
-  const splits = rules.splits ?? [];
-  const policy = { stress: 'none', stress_min_syllables: 2, length: 'none',
-    syllable_separator: '-', word_separator: ' ', ...(rules.policy ?? {}) };
+  const splits = only.splits ?? rules.splits ?? [];
+  const policy = { stress: 'none', stress_min_syllables: 2, length: 'none', tone: 'keep',
+    syllable_separator: '-', word_separator: ' ', ...(rules.policy ?? {}), ...(only.policy ?? {}) };
 
   /** @param {Syllable[]} syllables */
   const word = (syllables) => {
@@ -327,7 +357,8 @@ export function createRespeller({ rules, targetIpa }) {
      * @param {string} ipa
      */
     respell(ipa) {
-      const trimmed = (ipa ?? '').trim();
+      const raw = (ipa ?? '').trim();
+      const trimmed = policy.tone === 'drop' ? raw.replace(TONE, '') : raw;
       if (!trimmed) return '';
       return trimmed
         .split(/\s+/)

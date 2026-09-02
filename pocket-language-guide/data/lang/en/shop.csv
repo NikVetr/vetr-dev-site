@@ -1,32 +1,32 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,Pay by card?,,,,2,latex-reference-v2
-payment-receipt.pay-cash,Pay cash?,,,,2,latex-reference-v2
-payment-receipt.pay-by-qr-code,Pay by QR code?,,,,2,latex-reference-v2
-payment-receipt.a-receipt-please,"A receipt, please",,,,2,latex-reference-v2
-shopping.i-am-just-looking,I am just looking,,,,2,latex-reference-v2
-shopping.how-much-is-this,How much is this?,,,,2,latex-reference-v2
-shopping.that-is-too-expensive,That is too expensive,,,,2,latex-reference-v2
-shopping.can-it-be-a-little-cheaper,Can it be a little cheaper?,,,,2,latex-reference-v2
-color-size-returns.do-you-have-another-color,Do you have another color?,,,,2,latex-reference-v2
-color-size-returns.do-you-have-another-size,Do you have another size?,,,,2,latex-reference-v2
-color-size-returns.may-i-try-it-on,May I try it on?,,,,2,latex-reference-v2
-color-size-returns.can-i-return-it,Can I return it?,,,,2,latex-reference-v2
-color-size-returns.can-i-exchange-it,Can I exchange it?,,,,2,latex-reference-v2
-color-size-returns.do-you-have-a-bag,Do you have a bag?,,,,2,latex-reference-v2
-tax-refund.can-i-get-a-tax-refund,Can I get a tax refund?,,,,2,latex-reference-v2
-tax-refund.is-tax-free-shopping-available,Is tax-free shopping available?,,,,2,japanese-reviewed-v6
-shopping.is-there-a-discount,Is there a discount?,,,,2,japanese-reviewed-v6
-payment-receipt.please-write-the-number,Please write the number,,,,2,japanese-reviewed-v6
-payment-receipt.how-much-in-total,How much in total?,,,,2,expansion-v1
-payment-receipt.can-we-pay-separately,Can we pay separately?,,,,2,expansion-v1
-payment-receipt.is-tax-included,Is tax included?,,,,2,expansion-v1
-payment-receipt.my-card-was-declined,My card was declined,,,,2,expansion-v1
-payment-receipt.the-bill-is-wrong,I think the bill is wrong,,,,2,expansion-v1
-payment-receipt.i-already-paid,I already paid,,,,2,expansion-v1
-shopping.where-do-i-pay,Where do I pay?,,,,2,expansion-v1
-shopping.i-will-take-this,I will take this,,,,2,expansion-v1
-shopping.what-is-this,What is this?,,,,2,expansion-v1
-shopping.where-can-i-buy,Where can I buy {}?,,,,2,expansion-v1
-shopping.do-you-have-this-in-stock,Do you have this in stock?,,,,2,expansion-v1
-shopping.two-of-these,"Two of these, please",,,,2,expansion-v1
-shopping.what-is-it-made-of,What is it made of?,,,,2,expansion-v1
+payment-receipt.pay-by-card,Pay by card?,,pˈeɪ baɪ kˈɑːɹd,,2,latex-reference-v2;ipa=espeak
+payment-receipt.pay-cash,Pay cash?,,pˈeɪ kˈæʃ,,2,latex-reference-v2;ipa=espeak
+payment-receipt.pay-by-qr-code,Pay by QR code?,,pˈeɪ baɪ kjˌuːˈɑːɹ kˈoʊd,,2,latex-reference-v2;ipa=espeak
+payment-receipt.a-receipt-please,"A receipt, please",,"ɐ ɹɪsˈiːt, plˈiːz",,2,latex-reference-v2;ipa=espeak
+shopping.i-am-just-looking,I am just looking,,aɪɐm dʒˈʌst lˈʊkɪŋ,,2,latex-reference-v2;ipa=espeak
+shopping.how-much-is-this,How much is this?,,hˌaʊ mˈʌtʃ ɪz ðˈɪs,,2,latex-reference-v2;ipa=espeak
+shopping.that-is-too-expensive,That is too expensive,,ðæt ɪz tˈuː ɛkspˈɛnsɪv,,2,latex-reference-v2;ipa=espeak
+shopping.can-it-be-a-little-cheaper,Can it be a little cheaper?,,kæn ɪt biː ɐ lˈɪɾəl tʃˈiːpɚ,,2,latex-reference-v2;ipa=espeak
+color-size-returns.do-you-have-another-color,Do you have another color?,,dˈuː juː hæv ɐnˈʌðɚ kˈʌlɚ,,2,latex-reference-v2;ipa=espeak
+color-size-returns.do-you-have-another-size,Do you have another size?,,dˈuː juː hæv ɐnˈʌðɚ sˈaɪz,,2,latex-reference-v2;ipa=espeak
+color-size-returns.may-i-try-it-on,May I try it on?,,mˈeɪ aɪ tɹˈaɪ ɪɾ ˈɔn,,2,latex-reference-v2;ipa=espeak
+color-size-returns.can-i-return-it,Can I return it?,,kæn aɪ ɹɪtˈɜːn ɪt,,2,latex-reference-v2;ipa=espeak
+color-size-returns.can-i-exchange-it,Can I exchange it?,,kæn aɪ ɛkstʃˈeɪndʒ ɪt,,2,latex-reference-v2;ipa=espeak
+color-size-returns.do-you-have-a-bag,Do you have a bag?,,dˈuː juː hæv ɐ bˈæɡ,,2,latex-reference-v2;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,Can I get a tax refund?,,kæn aɪ ɡɛt ɐ tˈæks ɹɪfˈʌnd,,2,latex-reference-v2;ipa=espeak
+tax-refund.is-tax-free-shopping-available,Is tax-free shopping available?,,ɪz tˈæksfɹiː ʃˈɑːpɪŋ ɐvˈeɪləbəl,,2,japanese-reviewed-v6;ipa=espeak
+shopping.is-there-a-discount,Is there a discount?,,ɪz ðɛɹ ɐ dˈɪskaʊnt,,2,japanese-reviewed-v6;ipa=espeak
+payment-receipt.please-write-the-number,Please write the number,,plˈiːz ɹˈaɪt ðə nˈʌmbɚ,,2,japanese-reviewed-v6;ipa=espeak
+payment-receipt.how-much-in-total,How much in total?,,hˌaʊ mˈʌtʃ ɪn tˈoʊɾəl,,2,expansion-v1;ipa=espeak
+payment-receipt.can-we-pay-separately,Can we pay separately?,,kæn wiː pˈeɪ sˈɛpɹətli,,2,expansion-v1;ipa=espeak
+payment-receipt.is-tax-included,Is tax included?,,ɪz tˈæks ɪŋklˈuːdɪd,,2,expansion-v1;ipa=espeak
+payment-receipt.my-card-was-declined,My card was declined,,maɪ kˈɑːɹd wʌz dɪklˈaɪnd,,2,expansion-v1;ipa=espeak
+payment-receipt.the-bill-is-wrong,I think the bill is wrong,,aɪ θˈɪŋk ðə bˈɪl ɪz ɹˈɔŋ,,2,expansion-v1;ipa=espeak
+payment-receipt.i-already-paid,I already paid,,aɪ ɔːlɹˌɛdi pˈeɪd,,2,expansion-v1;ipa=espeak
+shopping.where-do-i-pay,Where do I pay?,,wˌɛɹ dˈuː aɪ pˈeɪ,,2,expansion-v1;ipa=espeak
+shopping.i-will-take-this,I will take this,,aɪ wɪl tˈeɪk ðˈɪs,,2,expansion-v1;ipa=espeak
+shopping.what-is-this,What is this?,,wˌʌt ɪz ðˈɪs,,2,expansion-v1;ipa=espeak
+shopping.where-can-i-buy,Where can I buy {}?,,wˌɛɹ kæn aɪ bˈaɪ {},,2,expansion-v1;ipa=espeak
+shopping.do-you-have-this-in-stock,Do you have this in stock?,,dˈuː juː hæv ðɪs ɪn stˈɑːk,,2,expansion-v1;ipa=espeak
+shopping.two-of-these,"Two of these, please",,"tˈuː ʌv ðˈiːz, plˈiːz",,2,expansion-v1;ipa=espeak
+shopping.what-is-it-made-of,What is it made of?,,wˌʌt ɪz ɪt mˈeɪd ʌv,,2,expansion-v1;ipa=espeak

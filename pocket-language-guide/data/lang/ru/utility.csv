@@ -1,16 +1,16 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,Мне нужно в {}.,,Mne nuzhno v {}.,,,2,ru-agent-v1
-utility-templates.please-give-me,"Дайте, пожалуйста, {}.",,"Dayte, pozhaluysta, {}.",,,2,ru-agent-v1
-utility-templates.may-i,Можно {} ?,,Mozhno {} ?,,,2,ru-agent-v1
-utility-templates.please-do-not-add,"Без {}, пожалуйста.",,"Bez {}, pozhaluysta.",,,2,ru-agent-v1
-utility-templates.do-you-have,У вас есть {} ?,,U vas yestʼ {} ?,,,2,ru-agent-v1
-utility-templates.please-write-the-number,"Напишите число, пожалуйста.",,"Napishite chislo, pozhaluysta.",,,2,ru-agent-v1
-utility-templates.i-need,Мне нужен {}.,,Mne nuzhen {}.,,,2,ru-agent-v1
-utility-templates.is-there-nearby,Здесь рядом есть {}?,,Zdesʼ ryadom yestʼ {}?,,,2,ru-agent-v1
-utility-templates.how-much-is,Сколько стоит {}?,,Skolʼko stoit {}?,,,2,ru-agent-v1
-utility-templates.is-this,Это {}?,,Eto {}?,,,2,ru-agent-v1
-utility-templates.please,"{}, пожалуйста.",,"{}, pozhaluysta.",,,2,ru-agent-v1
-utility-templates.i-am-looking-for,Я ищу {}.,,Ya ishchu {}.,,,2,ru-agent-v1
-utility-templates.do-you-accept,Вы принимаете {}?,,Vy prinimayete {}?,,,2,ru-agent-v1
-utility-templates.i-cannot-find,Я не могу найти {}.,,Ya ne mogu nayti {}.,,,2,ru-agent-v1
-utility-templates.there-is-a-problem-with,Проблема: {},,Problema: {},,,2,ru-agent-v1
+utility-templates.i-want-to-go-to,Мне нужно в {}.,,Mne nuzhno v {}.,mnʲˈe nˈuʒnʌ vˈɛ {},,2,ru-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Дайте, пожалуйста, {}.",,"Dayte, pozhaluysta, {}.","dˈɑjtʲi, pʌʒˈɑɭujsta, {}",,2,ru-agent-v1;ipa=espeak
+utility-templates.may-i,Можно {} ?,,Mozhno {} ?,mˈoʒnʌ {},,2,ru-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Без {}, пожалуйста.",,"Bez {}, pozhaluysta.","bʲˈes {}, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
+utility-templates.do-you-have,У вас есть {} ?,,U vas yestʼ {} ?,ˈu vˈɑs jestʲ {},,2,ru-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Напишите число, пожалуйста.",,"Napishite chislo, pozhaluysta.","nʌpʲiʃˈɨtʲi tʃʲisɭˈo, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
+utility-templates.i-need,Мне нужен {}.,,Mne nuzhen {}.,mnʲˈe nˈuʒɨn {},,2,ru-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Здесь рядом есть {}?,,Zdesʼ ryadom yestʼ {}?,ʑdʲˈesʲ rʲˈɑdʌm jestʲ {},,2,ru-agent-v1;ipa=espeak
+utility-templates.how-much-is,Сколько стоит {}?,,Skolʼko stoit {}?,skˈoɭkʌ stʌˈit {},,2,ru-agent-v1;ipa=espeak
+utility-templates.is-this,Это {}?,,Eto {}?,ˈɛtʌ {},,2,ru-agent-v1;ipa=espeak
+utility-templates.please,"{}, пожалуйста.",,"{}, pozhaluysta.","{}, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Я ищу {}.,,Ya ishchu {}.,ˈja ɪɕˈu {},,2,ru-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Вы принимаете {}?,,Vy prinimayete {}?,vˈɨ prʲinʲimˈɑjitʲi {},,2,ru-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Я не могу найти {}.,,Ya ne mogu nayti {}.,ˈja nʲe mʌɡˌu najtʲˈi {},,2,ru-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Проблема: {},,Problema: {},prʌbɭʲˈema {},,2,ru-agent-v1;ipa=espeak

@@ -1,32 +1,32 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,Bayar pakai kartu?,,,,2,id-agent-v1
-payment-receipt.pay-cash,Bayar tunai?,,,,2,id-agent-v1
-payment-receipt.pay-by-qr-code,Bayar pakai QRIS?,,,QRIS = the national QR standard,2,id-agent-v1
-payment-receipt.a-receipt-please,Minta struk,Kuitansi,,,2,id-agent-v1
-payment-receipt.please-write-the-number,Tolong tulis angkanya,,,,2,id-agent-v1
-payment-receipt.how-much-in-total,Totalnya berapa?,,,,2,id-agent-v1
-payment-receipt.can-we-pay-separately,Boleh bayar terpisah?,,,,2,id-agent-v1
-payment-receipt.is-tax-included,Sudah termasuk pajak?,,,,2,id-agent-v1
-payment-receipt.my-card-was-declined,Kartu saya ditolak,,,,2,id-agent-v1
-payment-receipt.the-bill-is-wrong,Sepertinya tagihannya keliru,,,,2,id-agent-v1
-payment-receipt.i-already-paid,Saya sudah bayar,,,,2,id-agent-v1
-shopping.i-am-just-looking,Saya lihat-lihat dulu,,,,2,id-agent-v1
-shopping.how-much-is-this,Ini berapa?,,,,2,id-agent-v1
-shopping.that-is-too-expensive,Terlalu mahal,,,,2,id-agent-v1
-shopping.can-it-be-a-little-cheaper,Boleh kurang sedikit?,,,,2,id-agent-v1
-shopping.is-there-a-discount,Ada diskon?,,,,2,id-agent-v1
-shopping.where-do-i-pay,Bayar di mana?,,,,2,id-agent-v1
-shopping.i-will-take-this,Saya ambil ini,,,,2,id-agent-v1
-shopping.what-is-this,Ini apa?,,,,2,id-agent-v1
-shopping.where-can-i-buy,Di mana bisa beli {}?,,,,2,id-agent-v1
-shopping.do-you-have-this-in-stock,Ada stoknya?,,,,2,id-agent-v1
-shopping.two-of-these,"Yang ini dua, ya",,,,2,id-agent-v1
-shopping.what-is-it-made-of,Ini bahannya apa?,,,bahan = material and ingredient,2,id-agent-v1
-color-size-returns.do-you-have-another-color,Ada warna lain?,,,,2,id-agent-v1
-color-size-returns.do-you-have-another-size,Ada ukuran lain?,,,,2,id-agent-v1
-color-size-returns.may-i-try-it-on,Boleh dicoba?,,,,2,id-agent-v1
-color-size-returns.can-i-return-it,Boleh dikembalikan?,,,,2,id-agent-v1
-color-size-returns.can-i-exchange-it,Boleh ditukar?,,,,2,id-agent-v1
-color-size-returns.do-you-have-a-bag,Ada kantong?,Kresek,,,2,id-agent-v1
-tax-refund.can-i-get-a-tax-refund,Bisa minta pengembalian PPN?,,,PPN = VAT,2,id-agent-v1
-tax-refund.is-tax-free-shopping-available,Ada layanan VAT refund?,Bebas pajak,,,2,id-agent-v1
+payment-receipt.pay-by-card,Bayar pakai kartu?,,bˈajar pˈakaɪ kˈartu,,2,id-agent-v1;ipa=espeak
+payment-receipt.pay-cash,Bayar tunai?,,bˈajar tˈunaɪ,,2,id-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,Bayar pakai QRIS?,,bˈajar pˈakaɪ krˈis,QRIS = the national QR standard,2,id-agent-v1;ipa=espeak
+payment-receipt.a-receipt-please,Minta struk,Kuitansi,mˈinta strˈuk,,2,id-agent-v1;ipa=espeak
+payment-receipt.please-write-the-number,Tolong tulis angkanya,,tˈoloŋ tˈulis aŋkˈaɲa,,2,id-agent-v1;ipa=espeak
+payment-receipt.how-much-in-total,Totalnya berapa?,,totˈalɲa bərˈapa,,2,id-agent-v1;ipa=espeak
+payment-receipt.can-we-pay-separately,Boleh bayar terpisah?,,bˈoləh bˈajar tərpˈisah,,2,id-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,Sudah termasuk pajak?,,sˈudah tərmˈasuk pˈadʒak,,2,id-agent-v1;ipa=espeak
+payment-receipt.my-card-was-declined,Kartu saya ditolak,,kˈartu sˈaja ditˈolak,,2,id-agent-v1;ipa=espeak
+payment-receipt.the-bill-is-wrong,Sepertinya tagihannya keliru,,səpərtˈiɲa tˌaɡihˈanɲa kəlˈiru,,2,id-agent-v1;ipa=espeak
+payment-receipt.i-already-paid,Saya sudah bayar,,sˈaja sˈudah bˈajar,,2,id-agent-v1;ipa=espeak
+shopping.i-am-just-looking,Saya lihat-lihat dulu,,sˈaja lˈihatlihat dˈulu,,2,id-agent-v1;ipa=espeak
+shopping.how-much-is-this,Ini berapa?,,ˈini bərˈapa,,2,id-agent-v1;ipa=espeak
+shopping.that-is-too-expensive,Terlalu mahal,,tərlˈalu mˈahal,,2,id-agent-v1;ipa=espeak
+shopping.can-it-be-a-little-cheaper,Boleh kurang sedikit?,,bˈoləh kˈuraŋ sədˈikit,,2,id-agent-v1;ipa=espeak
+shopping.is-there-a-discount,Ada diskon?,,ˈada dˈiskon,,2,id-agent-v1;ipa=espeak
+shopping.where-do-i-pay,Bayar di mana?,,bˈajar di mˈana,,2,id-agent-v1;ipa=espeak
+shopping.i-will-take-this,Saya ambil ini,,sˈaja ˈambil ˈini,,2,id-agent-v1;ipa=espeak
+shopping.what-is-this,Ini apa?,,ˈini ˈapa,,2,id-agent-v1;ipa=espeak
+shopping.where-can-i-buy,Di mana bisa beli {}?,,di mˈana bˈisa bˈɛli {},,2,id-agent-v1;ipa=espeak
+shopping.do-you-have-this-in-stock,Ada stoknya?,,ˈada stˈokɲa,,2,id-agent-v1;ipa=espeak
+shopping.two-of-these,"Yang ini dua, ya",,"jaŋ ˈini dˈua, jˈa",,2,id-agent-v1;ipa=espeak
+shopping.what-is-it-made-of,Ini bahannya apa?,,ˈini bahˈanɲa ˈapa,bahan = material and ingredient,2,id-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-color,Ada warna lain?,,ˈada wˈarna lˈaɪn,,2,id-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-size,Ada ukuran lain?,,ˈada ukˈuran lˈaɪn,,2,id-agent-v1;ipa=espeak
+color-size-returns.may-i-try-it-on,Boleh dicoba?,,bˈoləh ditʃˈoba,,2,id-agent-v1;ipa=espeak
+color-size-returns.can-i-return-it,Boleh dikembalikan?,,bˈoləh dˌikəmbalˈikan,,2,id-agent-v1;ipa=espeak
+color-size-returns.can-i-exchange-it,Boleh ditukar?,,bˈoləh ditˈukar,,2,id-agent-v1;ipa=espeak
+color-size-returns.do-you-have-a-bag,Ada kantong?,Kresek,ˈada kˈantoŋ,,2,id-agent-v1;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,Bisa minta pengembalian PPN?,,bˈisa mˈinta pəŋˌɛmbalˈian pˌepˌeən,PPN = VAT,2,id-agent-v1;ipa=espeak
+tax-refund.is-tax-free-shopping-available,Ada layanan VAT refund?,Bebas pajak,ˈada lajˈanan fˌeˌatˈe rˈɛfund,,2,id-agent-v1;ipa=espeak

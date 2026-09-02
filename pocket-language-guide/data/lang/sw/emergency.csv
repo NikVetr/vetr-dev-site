@@ -1,140 +1,140 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-emergency-medical.help,Msaada!,Nisaidieni!,,,2,sw-agent-v1
-emergency-medical.please-call-an-ambulance,Tafadhali piga simu ambulensi,,,,2,sw-agent-v1
-emergency-medical.i-need-a-doctor,Nahitaji daktari,,,,2,sw-agent-v1
-emergency-medical.i-am-sick,Mimi ni mgonjwa,Naumwa,,,2,sw-agent-v1
-emergency-medical.i-am-injured,Nimejeruhiwa,,,,2,sw-agent-v1
-emergency-medical.it-hurts-here,Inauma hapa,,,,2,sw-agent-v1
-emergency-medical.where-is-a-pharmacy,Duka la dawa liko wapi?,Famasi iko wapi?,,,2,sw-agent-v1
-emergency-medical.please-take-me-to-a-hospital,Tafadhali nipeleke hospitali,,,,2,sw-agent-v1
-emergency-medical.i-feel-unwell,Sijisikii vizuri,,,,2,sw-agent-v1
-emergency-medical.this-is-an-emergency,Hii ni dharura,,,,2,sw-agent-v1
-emergency-medical.i-am-having-a-severe-allergic-reaction,Nina mmenyuko mkali wa mzio,anaphylaxis,,severe allergic reaction,2,sw-agent-v1
-emergency-medical.i-cannot-breathe,Siwezi kupumua,,,,2,sw-agent-v1
-emergency-medical.i-am-bleeding-badly,Natokwa na damu sana,,,,2,sw-agent-v1
-emergency-medical.i-have-chest-pain,Nina maumivu ya kifua,,,,2,sw-agent-v1
-emergency-medical.this-person-is-unconscious,Mtu huyu amepoteza fahamu,,,,2,sw-agent-v1
-emergency-medical.where-is-the-nearest-hospital,Hospitali ya karibu iko wapi?,,,,2,sw-agent-v1
-emergency-medical.what-is-the-emergency-number,Namba ya dharura ni ngapi?,,,,2,sw-agent-v1
+emergency-medical.help,Msaada!,Nisaidieni!,msaˈada,,2,sw-agent-v1;ipa=espeak
+emergency-medical.please-call-an-ambulance,Tafadhali piga simu ambulensi,,tˌafaðˈali pˈiɡa sˈimu ˌambulˈensi,,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-need-a-doctor,Nahitaji daktari,,nˌahitˈaɟi daktˈari,,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Mimi ni mgonjwa,Naumwa,mˌimi ni mɡˈoɲɟua,,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-am-injured,Nimejeruhiwa,,nˌimeɟˌeruhˈiwa,,2,sw-agent-v1;ipa=espeak
+emergency-medical.it-hurts-here,Inauma hapa,,ˌinaˈuma hˈapa,,2,sw-agent-v1;ipa=espeak
+emergency-medical.where-is-a-pharmacy,Duka la dawa liko wapi?,Famasi iko wapi?,dˈuka la dˈawa lˈiko wˈapi,,2,sw-agent-v1;ipa=espeak
+emergency-medical.please-take-me-to-a-hospital,Tafadhali nipeleke hospitali,,tˌafaðˈali nˌipelˈeke hˌospitˈali,,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-feel-unwell,Sijisikii vizuri,,sˌiɟisikˈii vizˈuri,,2,sw-agent-v1;ipa=espeak
+emergency-medical.this-is-an-emergency,Hii ni dharura,,hˌii ni ðarˈura,,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,Nina mmenyuko mkali wa mzio,anaphylaxis,nˈina mmeɲˈuko mkˈali wa m̩zˈio,severe allergic reaction,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-cannot-breathe,Siwezi kupumua,,siwˈezi kˌupumˈua,,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-am-bleeding-badly,Natokwa na damu sana,,natˈokwa na dˈamu sˈana,,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-have-chest-pain,Nina maumivu ya kifua,,nˈina mˌaumˈivu ja kifˈua,,2,sw-agent-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,Mtu huyu amepoteza fahamu,,ˈm̩tu hˈuju ˌamepotˈeza fahˈamu,,2,sw-agent-v1;ipa=espeak
+emergency-medical.where-is-the-nearest-hospital,Hospitali ya karibu iko wapi?,,hˌospitˈali ja karˈibu ˈiko wˈapi,,2,sw-agent-v1;ipa=espeak
+emergency-medical.what-is-the-emergency-number,Namba ya dharura ni ngapi?,,nˈamba ja ðarˈura ni ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,Kuna daktari anayesema {source}?,,,,2,language-slots-v1
-emergency-medical.i-think-a-bone-is-broken,Nadhani mfupa umevunjika,,,,2,sw-agent-v1
-emergency-medical.please-call-my-emergency-contact,Tafadhali piga namba yangu ya dharura,,,,2,sw-agent-v1
-emergency-medical.i-have-travel-insurance,Nina bima ya safari,,,,2,sw-agent-v1
-medical-conditions.i-am-diabetic,Nina kisukari,,,,2,sw-agent-v1
-medical-conditions.i-need-insulin,Nahitaji insulini,,,,2,sw-agent-v1
-medical-conditions.i-have-asthma,Nina pumu,,,,2,sw-agent-v1
-medical-conditions.i-have-a-heart-condition,Nina ugonjwa wa moyo,,,,2,sw-agent-v1
-medical-conditions.i-am-allergic-to-penicillin,Nina mzio wa penisilini,,,,2,sw-agent-v1
-medical-conditions.i-have-epilepsy,Nina kifafa,,,,2,sw-agent-v1
-medical-conditions.my-blood-sugar-is-low,Sukari yangu ya damu imeshuka,,,,2,sw-agent-v1
-medical-conditions.i-need-my-inhaler,Nahitaji dawa yangu ya pumu,Kipulizio changu,,my asthma medicine,2,sw-agent-v1
-medical-conditions.i-am-pregnant,Nina mimba,Ni mjamzito,,,2,sw-agent-v1
-medical-conditions.i-carry-an-adrenaline-injector,Nina sindano ya adrenalini,,,,2,sw-agent-v1
-medical-conditions.i-take-medicine-for,Natumia dawa ya {},,,,2,sw-agent-v1
-medical-conditions.i-take-blood-thinners,Natumia dawa ya kuzuia damu kuganda,,,medicine to stop blood clotting,2,sw-agent-v1
-medical-conditions.medicine-allergy,Mzio wa dawa: {},,,,2,sw-agent-v1
-medical-conditions.this-card-lists-my-conditions,Kadi hii ina magonjwa yangu,,,,2,sw-agent-v1
-medical-conditions.this-is-my-medicine,Hii ni dawa yangu,,,,2,sw-agent-v1
-medical-conditions.please-give-me-sugar-or-juice,Tafadhali nipe sukari au juisi,,,,2,sw-agent-v1
-medical-conditions.inject-it-into-my-outer-thigh,Choma sindano katikati ya paja langu la nje,,,,2,sw-agent-v1
-medical-conditions.my-blood-type-is,Aina ya damu yangu ni {},,,,2,sw-agent-v1
-medical-conditions.do-not-give-me,Tafadhali msinipe {},,,,2,sw-agent-v1
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Nina mzio wa aspirini na ibuprofeni,,,,2,sw-agent-v1
-medical-conditions.my-injector-is-in-my-bag,Sindano yangu iko mkobani,,,,2,sw-agent-v1
-medical-conditions.i-am-allergic-to-sulfa-drugs,Nina mzio wa dawa za sulfa,,,,2,sw-agent-v1
-pharmacy-symptoms.which-pharmacy-is-open-now,Duka gani la dawa liko wazi sasa?,,,,2,sw-agent-v1
-pharmacy-symptoms.i-need-medicine-for,Nahitaji dawa ya {},,,,2,sw-agent-v1
-pharmacy-symptoms.i-have-a-fever,Nina homa,,,,2,sw-agent-v1
-pharmacy-symptoms.i-think-i-have-malaria,Nadhani nina malaria,,,,2,malaria-v1
-pharmacy-symptoms.i-need-a-malaria-test,Nahitaji kipimo cha malaria,,,,2,malaria-v1
-pharmacy-symptoms.i-have-diarrhea,Nina kuhara,Naharisha,,,2,sw-agent-v1
-pharmacy-symptoms.where-is-an-all-night-pharmacy,Duka la dawa la usiku liko wapi?,,,,2,sw-agent-v1
-pharmacy-symptoms.painkiller,Dawa ya maumivu,,,,2,sw-agent-v1
-pharmacy-symptoms.do-i-need-a-prescription,Nahitaji agizo la daktari?,,,,2,sw-agent-v1
-pharmacy-symptoms.i-have-a-headache,Nina maumivu ya kichwa,,,,2,sw-agent-v1
-pharmacy-symptoms.paracetamol-acetaminophen,Parasetamoli,Panadol,,,2,sw-agent-v1
-pharmacy-symptoms.how-much-should-i-take,Nitumie kiasi gani?,,,,2,sw-agent-v1
-pharmacy-symptoms.i-am-vomiting,Natapika,,,,2,sw-agent-v1
-pharmacy-symptoms.rehydration-salts,ORS,Chumvi za kurejesha maji mwilini,,salts to put water back in the body,2,sw-agent-v1
-pharmacy-symptoms.how-many-times-a-day,Mara ngapi kwa siku?,,,,2,sw-agent-v1
-pharmacy-symptoms.i-have-a-stomach-ache,Nina maumivu ya tumbo,,,,2,sw-agent-v1
-pharmacy-symptoms.i-have-a-cough,Nina kikohozi,,,,2,sw-agent-v1
-pharmacy-symptoms.antihistamine,Dawa ya mzio,Antihistamine,,allergy medicine,2,sw-agent-v1
-pharmacy-symptoms.anti-diarrhea-medicine,Dawa ya kuhara,Loperamide,,,2,sw-agent-v1
-pharmacy-symptoms.is-this-safe-to-take-with,"Je, ni salama kutumia na {}?",,,,2,sw-agent-v1
-pharmacy-symptoms.i-feel-dizzy,Nina kizunguzungu,,,,2,sw-agent-v1
-pharmacy-symptoms.ibuprofen,Ibuprofeni,Brufen,,,2,sw-agent-v1
-pharmacy-symptoms.i-have-a-sore-throat,Koo linauma,,,,2,sw-agent-v1
-pharmacy-symptoms.can-i-get-this-medicine-here,Naweza kupata dawa hii hapa?,,,,2,sw-agent-v1
-pharmacy-symptoms.bandage,Bendeji,Kitambaa cha jeraha,,,2,sw-agent-v1
-pharmacy-symptoms.the-pain-is-severe,Maumivu ni makali,,,,2,sw-agent-v1
-pharmacy-symptoms.antiseptic,Dawa ya kuua vijidudu,Antiseptiki,,germ-killing medicine,2,sw-agent-v1
-pharmacy-symptoms.i-feel-nauseous,Nina kichefuchefu,,,,2,sw-agent-v1
-pharmacy-symptoms.i-have-a-rash,Nina vipele,Nina upele,,,2,sw-agent-v1
-pharmacy-symptoms.before-or-after-food,Kabla au baada ya chakula?,,,,2,sw-agent-v1
-pharmacy-symptoms.i-think-it-is-infected,Nadhani imeambukizwa,,,,2,sw-agent-v1
-pharmacy-symptoms.motion-sickness-tablets,Dawa ya kichefuchefu cha safari,,,,2,sw-agent-v1
-pharmacy-symptoms.i-have-a-cut,Nimejikata,,,,2,sw-agent-v1
-pharmacy-symptoms.antacid,Dawa ya kiungulia,,,heartburn medicine,2,sw-agent-v1
-pharmacy-symptoms.i-have-a-burn,Nimeungua,,,,2,sw-agent-v1
-pharmacy-symptoms.it-started-days-ago,Ilianza siku {} zilizopita,,,,2,sw-agent-v1
-pharmacy-symptoms.cough-medicine,Dawa ya kikohozi,,,,2,sw-agent-v1
-pharmacy-symptoms.is-this-safe-during-pregnancy,"Je, ni salama kwa mjamzito?",,,,2,sw-agent-v1
-body-parts.head,Kichwa,,,,2,sw-agent-v1
-body-parts.stomach,Tumbo,,,belly,2,sw-agent-v1
-body-parts.back,Mgongo,,,,2,sw-agent-v1
-body-parts.throat,Koo,,,,2,sw-agent-v1
-body-parts.tooth,Jino,,,,2,sw-agent-v1
-body-parts.chest,Kifua,,,,2,sw-agent-v1
-body-parts.eye,Jicho,,,,2,sw-agent-v1
-body-parts.ear,Sikio,,,,2,sw-agent-v1
-body-parts.leg,Mguu,,,leg or foot,2,sw-agent-v1
-body-parts.arm,Mkono,,,arm or hand,2,sw-agent-v1
-body-parts.foot,Mguu / unyayo,,,unyayo = the sole,2,sw-agent-v1
-body-parts.hand,Mkono / kiganja,,,kiganja = the palm,2,sw-agent-v1
-body-parts.knee,Goti,,,,2,sw-agent-v1
-body-parts.ankle,Kifundo cha mguu,,,,2,sw-agent-v1
-body-parts.skin,Ngozi,,,,2,sw-agent-v1
-lost-rescue.i-lost-my-passport,Nimepoteza pasipoti yangu,,,,2,sw-agent-v1
-lost-rescue.i-lost-my-phone,Nimepoteza simu yangu,,,,2,sw-agent-v1
-lost-rescue.please-call-the-police,Tafadhali piga simu polisi,,,,2,sw-agent-v1
-lost-rescue.we-are-here,Tuko hapa,,,,2,sw-agent-v1
-lost-rescue.please-look-at-my-location-pin,Tafadhali tazama alama ya eneo langu,,,,2,sw-agent-v1
-lost-rescue.i-cannot-walk,Siwezi kutembea,,,,2,sw-agent-v1
-lost-rescue.i-sprained-my-ankle,Kifundo cha mguu kimeteguka,,,my ankle is sprained,2,sw-agent-v1
-lost-rescue.please-contact-rescue,Tafadhali wasiliana na uokoaji,,,,2,sw-agent-v1
-lost-rescue.my-companion-is-missing,Mwenzangu amepotea,,,,2,sw-agent-v1
-lost-rescue.please-look-at-my-current-location,Tafadhali tazama nilipo sasa,,,look at where I am now,2,sw-agent-v1
-lost-rescue.my-child-is-missing,Mtoto wangu amepotea,,,,2,sw-agent-v1
-lost-rescue.i-do-not-know-where-i-am,Sijui niko wapi,,,,2,sw-agent-v1
-lost-rescue.my-friend-is-hurt,Rafiki yangu amejeruhiwa,,,,2,sw-agent-v1
-lost-rescue.i-lost-my-wallet,Nimepoteza pochi yangu,,,,2,sw-agent-v1
-lost-rescue.i-lost-my-bag,Nimepoteza mkoba wangu,Begi langu,,,2,sw-agent-v1
-lost-rescue.where-is-lost-and-found,Ofisi ya vitu vilivyopotea ni wapi?,,,,2,sw-agent-v1
-lost-rescue.i-cannot-find-my-hotel,Nashindwa kupata hoteli yangu,Nashindwa kupata gesti yangu,,,2,sw-agent-v1
-lost-rescue.i-left-it-on-the-train,Niliiacha kwenye treni,,,,2,sw-agent-v1
-lost-rescue.i-cannot-get-down,Siwezi kushuka,,,,2,sw-agent-v1
-police-consulate.where-is-the-police-station,Kituo cha polisi kiko wapi?,,,,2,sw-agent-v1
-police-consulate.i-want-to-report-a-theft,Nataka kutoa taarifa ya wizi,,,,2,sw-agent-v1
-police-consulate.my-bag-was-stolen,Mkoba wangu umeibiwa,,,,2,sw-agent-v1
-police-consulate.my-passport-was-stolen,Pasipoti yangu imeibiwa,,,,2,sw-agent-v1
-police-consulate.someone-is-following-me,Mtu ananifuata,,,,2,sw-agent-v1
-police-consulate.i-need-a-written-police-report,Nahitaji ripoti ya polisi kwa maandishi,,,,2,sw-agent-v1
-police-consulate.i-want-to-contact-my-embassy,Nataka kuwasiliana na ubalozi wangu,,,,2,sw-agent-v1
-police-consulate.i-need-it-for-my-insurance,Nahitaji kwa bima yangu,,,,2,sw-agent-v1
-police-consulate.i-need-an-interpreter,Nahitaji mkalimani,,,,2,sw-agent-v1
-police-consulate.please-leave-me-alone,Tafadhali niache,,,,2,sw-agent-v1
-police-consulate.i-was-robbed,Nimeporwa,Nimeibiwa,,,2,sw-agent-v1
-police-consulate.i-want-a-lawyer,Nataka wakili,,,,2,sw-agent-v1
-police-consulate.please-notify-my-consulate,Tafadhali arifu ubalozi wangu,,,notify my embassy / consulate,2,sw-agent-v1
-police-consulate.i-am-calling-the-police,Napiga simu polisi,,,,2,sw-agent-v1
-police-consulate.am-i-under-arrest,"Je, nimekamatwa?",,,,2,sw-agent-v1
-police-consulate.no-thank-you-i-am-not-interested,"Hapana, asante. Sihitaji",,,,2,sw-agent-v1
-police-consulate.someone-attacked-me,Mtu amenishambulia,,,,2,sw-agent-v1
-police-consulate.i-did-not-agree-to-this-price,Sikukubali bei hii,,,,2,sw-agent-v1
-police-consulate.please-write-the-report-number,Tafadhali andika namba ya ripoti,,,,2,sw-agent-v1
-police-consulate.it-happened-here,Ilitokea hapa,,,,2,sw-agent-v1
-police-consulate.may-i-have-a-copy-of-the-report,Naomba nakala ya ripoti,,,,2,sw-agent-v1
-police-consulate.i-will-not-sign-anything-i-cannot-read,Sitasaini kitu nisichoweza kusoma,,,,2,sw-agent-v1
-police-consulate.am-i-free-to-go,"Je, naweza kwenda?",,,,2,sw-agent-v1
-police-consulate.i-do-not-want-to-go-with-you,Sitaki kwenda nanyi,Sitaki kwenda nawe,,,2,sw-agent-v1
+emergency-medical.i-think-a-bone-is-broken,Nadhani mfupa umevunjika,,naðˈani mfˈupa ˌumevuɲɟˈika,,2,sw-agent-v1;ipa=espeak
+emergency-medical.please-call-my-emergency-contact,Tafadhali piga namba yangu ya dharura,,tˌafaðˈali pˈiɡa nˈamba jˈaŋɡu ja ðarˈura,,2,sw-agent-v1;ipa=espeak
+emergency-medical.i-have-travel-insurance,Nina bima ya safari,,nˈina bˈima ja safˈari,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-am-diabetic,Nina kisukari,,nˈina kˌisukˈari,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-need-insulin,Nahitaji insulini,,nˌahitˈaɟi ˌinsulˈini,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-have-asthma,Nina pumu,,nˈina pˈumu,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-have-a-heart-condition,Nina ugonjwa wa moyo,,nˈina uɡˈoɲɟua wa mˈojo,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-penicillin,Nina mzio wa penisilini,,nˈina m̩zˈio wa pˌenisilˈini,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-have-epilepsy,Nina kifafa,,nˈina kifˈafa,,2,sw-agent-v1;ipa=espeak
+medical-conditions.my-blood-sugar-is-low,Sukari yangu ya damu imeshuka,,sukˈari jˈaŋɡu ja dˈamu ˌimeʃˈuka,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-need-my-inhaler,Nahitaji dawa yangu ya pumu,Kipulizio changu,nˌahitˈaɟi dˈawa jˈaŋɡu ja pˈumu,my asthma medicine,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-am-pregnant,Nina mimba,Ni mjamzito,nˈina mˈimba,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,Nina sindano ya adrenalini,,nˈina sindˈano ja ˌadrenalˈini,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-take-medicine-for,Natumia dawa ya {},,nˌatumˈia dˈawa ja {},,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-take-blood-thinners,Natumia dawa ya kuzuia damu kuganda,,nˌatumˈia dˈawa ja kˌuzuˈia dˈamu kuɡˈanda,medicine to stop blood clotting,2,sw-agent-v1;ipa=espeak
+medical-conditions.medicine-allergy,Mzio wa dawa: {},,m̩zˈio wa dˈawa {},,2,sw-agent-v1;ipa=espeak
+medical-conditions.this-card-lists-my-conditions,Kadi hii ina magonjwa yangu,,kˈadi hˌii ˈina maɡˈoɲɟua jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+medical-conditions.this-is-my-medicine,Hii ni dawa yangu,,hˌii ni dˈawa jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+medical-conditions.please-give-me-sugar-or-juice,Tafadhali nipe sukari au juisi,,tˌafaðˈali nˈipe sukˈari ˌau ɟuˈisi,,2,sw-agent-v1;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,Choma sindano katikati ya paja langu la nje,,tʃˈoma sindˈano kˌatikˈati ja pˈaɟa lˈaŋɡu la ɲɟˈe,,2,sw-agent-v1;ipa=espeak
+medical-conditions.my-blood-type-is,Aina ya damu yangu ni {},,aˈina ja dˈamu jˈaŋɡu nˈi {},,2,sw-agent-v1;ipa=espeak
+medical-conditions.do-not-give-me,Tafadhali msinipe {},,tˌafaðˈali msinˈipe {},,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Nina mzio wa aspirini na ibuprofeni,,nˈina m̩zˈio wa ˌaspirˈini na ˌibuprofˈeni,,2,sw-agent-v1;ipa=espeak
+medical-conditions.my-injector-is-in-my-bag,Sindano yangu iko mkobani,,sindˈano jˈaŋɡu ˈiko mkobˈani,,2,sw-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-sulfa-drugs,Nina mzio wa dawa za sulfa,,nˈina m̩zˈio wa dˈawa za sˈulfa,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.which-pharmacy-is-open-now,Duka gani la dawa liko wazi sasa?,,dˈuka ɡˈani la dˈawa lˈiko wˈazi sˈasa,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-need-medicine-for,Nahitaji dawa ya {},,nˌahitˈaɟi dˈawa ja {},,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-fever,Nina homa,,nˈina hˈoma,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,Nadhani nina malaria,,naðˈani nˈina mˌalarˈia,,2,malaria-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Nahitaji kipimo cha malaria,,nˌahitˈaɟi kipˈimo tʃa mˌalarˈia,,2,malaria-v1;ipa=espeak
+pharmacy-symptoms.i-have-diarrhea,Nina kuhara,Naharisha,nˈina kuhˈara,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Duka la dawa la usiku liko wapi?,,dˈuka la dˈawa la usˈiku lˈiko wˈapi,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.painkiller,Dawa ya maumivu,,dˈawa ja mˌaumˈivu,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.do-i-need-a-prescription,Nahitaji agizo la daktari?,,nˌahitˈaɟi aɡˈizo la daktˈari,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-headache,Nina maumivu ya kichwa,,nˈina mˌaumˈivu ja kˈitʃwa,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,Parasetamoli,Panadol,pˌarasˌetamˈoli,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.how-much-should-i-take,Nitumie kiasi gani?,,nˌitumˈie kiˈasi ɡˈani,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-am-vomiting,Natapika,,nˌatapˈika,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.rehydration-salts,ORS,Chumvi za kurejesha maji mwilini,ˈors,salts to put water back in the body,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.how-many-times-a-day,Mara ngapi kwa siku?,,mˈara ŋɡˈapi kwa sˈiku,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-stomach-ache,Nina maumivu ya tumbo,,nˈina mˌaumˈivu ja tˈumbo,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cough,Nina kikohozi,,nˈina kˌikohˈozi,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.antihistamine,Dawa ya mzio,Antihistamine,dˈawa ja m̩zˈio,allergy medicine,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.anti-diarrhea-medicine,Dawa ya kuhara,Loperamide,dˈawa ja kuhˈara,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-to-take-with,"Je, ni salama kutumia na {}?",,"ɟˈe, ni salˈama kˌutumˈia na {}",,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-feel-dizzy,Nina kizunguzungu,,nˈina kˌizuŋɡuzˈuŋɡu,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.ibuprofen,Ibuprofeni,Brufen,ˌibuprofˈeni,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-sore-throat,Koo linauma,,kˈoo lˌinaˈuma,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.can-i-get-this-medicine-here,Naweza kupata dawa hii hapa?,,nawˈeza kupˈata dˈawa hˌii hˈapa,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.bandage,Bendeji,Kitambaa cha jeraha,bendˈeɟi,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.the-pain-is-severe,Maumivu ni makali,,mˌaumˈivu ni makˈali,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.antiseptic,Dawa ya kuua vijidudu,Antiseptiki,dˈawa ja kuˈua vˌiɟidˈudu,germ-killing medicine,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-feel-nauseous,Nina kichefuchefu,,nˈina kˌitʃefutʃˈefu,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-rash,Nina vipele,Nina upele,nˈina vipˈele,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.before-or-after-food,Kabla au baada ya chakula?,,kˈabla ˌau baˌada ja tʃakˈula,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-it-is-infected,Nadhani imeambukizwa,,naðˈani ˌimeˌambukˈizwa,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.motion-sickness-tablets,Dawa ya kichefuchefu cha safari,,dˈawa ja kˌitʃefutʃˈefu tʃa safˈari,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-cut,Nimejikata,,nˌimeɟikˈata,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.antacid,Dawa ya kiungulia,,dˈawa ja kˌiuŋɡulˈia,heartburn medicine,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-burn,Nimeungua,,nˌimeuŋɡˈua,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Ilianza siku {} zilizopita,,ˌiliˈanza sˈiku {} zˌilizopˈita,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.cough-medicine,Dawa ya kikohozi,,dˈawa ja kˌikohˈozi,,2,sw-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-during-pregnancy,"Je, ni salama kwa mjamzito?",,"ɟˈe, ni salˈama kwa mɟamzˈito",,2,sw-agent-v1;ipa=espeak
+body-parts.head,Kichwa,,kˈitʃwa,,2,sw-agent-v1;ipa=espeak
+body-parts.stomach,Tumbo,,tˈumbo,belly,2,sw-agent-v1;ipa=espeak
+body-parts.back,Mgongo,,mɡˈoŋɡo,,2,sw-agent-v1;ipa=espeak
+body-parts.throat,Koo,,kˈoo,,2,sw-agent-v1;ipa=espeak
+body-parts.tooth,Jino,,ɟˈino,,2,sw-agent-v1;ipa=espeak
+body-parts.chest,Kifua,,kifˈua,,2,sw-agent-v1;ipa=espeak
+body-parts.eye,Jicho,,ɟˈitʃo,,2,sw-agent-v1;ipa=espeak
+body-parts.ear,Sikio,,sikˈio,,2,sw-agent-v1;ipa=espeak
+body-parts.leg,Mguu,,m̩ɡˈuu,leg or foot,2,sw-agent-v1;ipa=espeak
+body-parts.arm,Mkono,,mkˈono,arm or hand,2,sw-agent-v1;ipa=espeak
+body-parts.foot,Mguu / unyayo,,m̩ɡˈuu / uɲˈajo,unyayo = the sole,2,sw-agent-v1;ipa=espeak
+body-parts.hand,Mkono / kiganja,,mkˈono / kiɡˈaɲɟa,kiganja = the palm,2,sw-agent-v1;ipa=espeak
+body-parts.knee,Goti,,ɡˈoti,,2,sw-agent-v1;ipa=espeak
+body-parts.ankle,Kifundo cha mguu,,kifˈundo tʃa m̩ɡˈuu,,2,sw-agent-v1;ipa=espeak
+body-parts.skin,Ngozi,,ŋɡˈozi,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-passport,Nimepoteza pasipoti yangu,,nˌimepotˈeza pˌasipˈoti jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-phone,Nimepoteza simu yangu,,nˌimepotˈeza sˈimu jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+lost-rescue.please-call-the-police,Tafadhali piga simu polisi,,tˌafaðˈali pˈiɡa sˈimu polˈisi,,2,sw-agent-v1;ipa=espeak
+lost-rescue.we-are-here,Tuko hapa,,tˈuko hˈapa,,2,sw-agent-v1;ipa=espeak
+lost-rescue.please-look-at-my-location-pin,Tafadhali tazama alama ya eneo langu,,tˌafaðˈali tazˈama alˈama ja enˈeo lˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-cannot-walk,Siwezi kutembea,,siwˈezi kˌutembˈea,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-sprained-my-ankle,Kifundo cha mguu kimeteguka,,kifˈundo tʃa m̩ɡˈuu kˌimeteɡˈuka,my ankle is sprained,2,sw-agent-v1;ipa=espeak
+lost-rescue.please-contact-rescue,Tafadhali wasiliana na uokoaji,,tˌafaðˈali wˌasiliˈana na ˌuokoˈaɟi,,2,sw-agent-v1;ipa=espeak
+lost-rescue.my-companion-is-missing,Mwenzangu amepotea,,mwenzˈaŋɡu ˌamepotˈea,,2,sw-agent-v1;ipa=espeak
+lost-rescue.please-look-at-my-current-location,Tafadhali tazama nilipo sasa,,tˌafaðˈali tazˈama nilˈipo sˈasa,look at where I am now,2,sw-agent-v1;ipa=espeak
+lost-rescue.my-child-is-missing,Mtoto wangu amepotea,,mtˈoto wˈaŋɡu ˌamepotˈea,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-do-not-know-where-i-am,Sijui niko wapi,,siɟˈui nˈiko wˈapi,,2,sw-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Rafiki yangu amejeruhiwa,,rafˈiki jˈaŋɡu ˌameɟˌeruhˈiwa,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-wallet,Nimepoteza pochi yangu,,nˌimepotˈeza pˈotʃi jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-bag,Nimepoteza mkoba wangu,Begi langu,nˌimepotˈeza mkˈoba wˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+lost-rescue.where-is-lost-and-found,Ofisi ya vitu vilivyopotea ni wapi?,,ofˈisi ja vˈitu vˌilivjˌopotˈea ni wˈapi,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-cannot-find-my-hotel,Nashindwa kupata hoteli yangu,Nashindwa kupata gesti yangu,naʃˈindwa kupˈata hotˈeli jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-left-it-on-the-train,Niliiacha kwenye treni,,nˌiliiˈatʃa kwˈeɲe trˈeni,,2,sw-agent-v1;ipa=espeak
+lost-rescue.i-cannot-get-down,Siwezi kushuka,,siwˈezi kuʃˈuka,,2,sw-agent-v1;ipa=espeak
+police-consulate.where-is-the-police-station,Kituo cha polisi kiko wapi?,,kitˈuo tʃa polˈisi kˈiko wˈapi,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-want-to-report-a-theft,Nataka kutoa taarifa ya wizi,,natˈaka kutˈoa tˌaarˈifa ja wˈizi,,2,sw-agent-v1;ipa=espeak
+police-consulate.my-bag-was-stolen,Mkoba wangu umeibiwa,,mkˈoba wˈaŋɡu ˌumeibˈiwa,,2,sw-agent-v1;ipa=espeak
+police-consulate.my-passport-was-stolen,Pasipoti yangu imeibiwa,,pˌasipˈoti jˈaŋɡu ˌimeibˈiwa,,2,sw-agent-v1;ipa=espeak
+police-consulate.someone-is-following-me,Mtu ananifuata,,ˈm̩tu ˌananˌifuˈata,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-need-a-written-police-report,Nahitaji ripoti ya polisi kwa maandishi,,nˌahitˈaɟi ripˈoti ja polˈisi kwa mˌaandˈiʃi,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-want-to-contact-my-embassy,Nataka kuwasiliana na ubalozi wangu,,natˈaka kˌuwasˌiliˈana na ˌubalˈozi wˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-need-it-for-my-insurance,Nahitaji kwa bima yangu,,nˌahitˈaɟi kwa bˈima jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-need-an-interpreter,Nahitaji mkalimani,,nˌahitˈaɟi mkˌalimˈani,,2,sw-agent-v1;ipa=espeak
+police-consulate.please-leave-me-alone,Tafadhali niache,,tˌafaðˈali niˈatʃe,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-was-robbed,Nimeporwa,Nimeibiwa,nˌimepˈorwa,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-want-a-lawyer,Nataka wakili,,natˈaka wakˈili,,2,sw-agent-v1;ipa=espeak
+police-consulate.please-notify-my-consulate,Tafadhali arifu ubalozi wangu,,tˌafaðˈali arˈifu ˌubalˈozi wˈaŋɡu,notify my embassy / consulate,2,sw-agent-v1;ipa=espeak
+police-consulate.i-am-calling-the-police,Napiga simu polisi,,napˈiɡa sˈimu polˈisi,,2,sw-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,"Je, nimekamatwa?",,"ɟˈe, nˌimekamˈatwa",,2,sw-agent-v1;ipa=espeak
+police-consulate.no-thank-you-i-am-not-interested,"Hapana, asante. Sihitaji",,"hapˈana, asˈante sˌihitˈaɟi",,2,sw-agent-v1;ipa=espeak
+police-consulate.someone-attacked-me,Mtu amenishambulia,,ˈm̩tu ˌamenˌiʃambulˈia,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,Sikukubali bei hii,,sˌikukubˈali bˈei hˌii,,2,sw-agent-v1;ipa=espeak
+police-consulate.please-write-the-report-number,Tafadhali andika namba ya ripoti,,tˌafaðˈali andˈika nˈamba ja ripˈoti,,2,sw-agent-v1;ipa=espeak
+police-consulate.it-happened-here,Ilitokea hapa,,ˌilitokˈea hˈapa,,2,sw-agent-v1;ipa=espeak
+police-consulate.may-i-have-a-copy-of-the-report,Naomba nakala ya ripoti,,naˈomba nakˈala ja ripˈoti,,2,sw-agent-v1;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,Sitasaini kitu nisichoweza kusoma,,sˌitasaˈini kˈitu nˌisitʃowˈeza kusˈoma,,2,sw-agent-v1;ipa=espeak
+police-consulate.am-i-free-to-go,"Je, naweza kwenda?",,"ɟˈe, nawˈeza kwˈenda",,2,sw-agent-v1;ipa=espeak
+police-consulate.i-do-not-want-to-go-with-you,Sitaki kwenda nanyi,Sitaki kwenda nawe,sitˈaki kwˈenda nˈaɲi,,2,sw-agent-v1;ipa=espeak

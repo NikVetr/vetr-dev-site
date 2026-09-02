@@ -1,60 +1,60 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-toilets.where-toilet,Wo ist die Toilette?,,,,2,de-agent-v1
-accessibility.step-free,Gibt es einen stufenlosen Zugang?,Gibt es einen stufenfreien Zugang?,,,2,de-agent-v1
-toilets.where-public-toilet,Wo ist eine öffentliche Toilette?,,,,2,de-agent-v1
-accessibility.wheelchair-access,Ist es rollstuhlgerecht?,Ist es barrierefrei?,,,2,de-agent-v1
-toilets.may-i-use-the-toilet,Darf ich die Toilette benutzen?,,,,2,de-agent-v1
-accessibility.elevator,Gibt es einen Aufzug?,Gibt es einen Lift?,,,2,de-agent-v1
-toilets.is-it-only-for-customers,Nur für Kunden?,,,,2,de-agent-v1
-accessibility.ramp,Gibt es eine Rampe?,,,,2,de-agent-v1
-toilets.toilet-wc,Toilette / WC,Klo,,,2,de-agent-v1
-accessibility.how-many-steps,Wie viele Stufen sind es?,,,,2,de-agent-v1
-toilets.is-it-free,Ist es kostenlos?,,,,2,de-agent-v1
-accessibility.cannot-climb-stairs,Ich kann keine Treppen steigen.,,,,2,de-agent-v1
-toilets.do-i-need-a-coin,Brauche ich eine Münze oder einen Chip?,,,,2,de-agent-v1
-accessibility.need-to-sit-down,Ich muss mich setzen.,,,,2,de-agent-v1
-toilets.is-the-tap-water-safe-to-drink,Kann man das Leitungswasser trinken?,,,,2,de-agent-v1
-accessibility.accessible-restroom,Gibt es ein barrierefreies WC?,Gibt es ein Behinderten-WC?,,,2,de-agent-v1
-toilets.it-is-urgent,Es ist dringend.,,,,2,de-agent-v1
-accessibility.station-assistance,Gibt es hier den Mobilitätsservice?,Gibt es Einstiegshilfe am Bahnhof?,,,2,de-agent-v1
-toilets.may-i-have-the-toilet-key,Kann ich den Toilettenschlüssel haben?,,,,2,de-agent-v1
-accessibility.help-me-carry,Helfen Sie mir bitte beim Tragen.,,,,2,de-agent-v1
-toilets.there-is-no-toilet-paper,Es ist kein Toilettenpapier da.,,,,2,de-agent-v1
-accessibility.board-first,Darf ich zuerst einsteigen?,,,,2,de-agent-v1
-toilets.toilet-paper,Toilettenpapier,Klopapier,,,2,de-agent-v1
-accessibility.door-width,Wie breit ist die Tür?,,,,2,de-agent-v1
-toilets.it-is-out-of-order,Es ist außer Betrieb.,,,,2,de-agent-v1
-accessibility.wheelchair-width,Mein Rollstuhl ist {} cm breit.,,,,2,de-agent-v1
-toilets.out-of-order,Außer Betrieb,Defekt,,,2,de-agent-v1
-accessibility.hard-of-hearing,Ich bin schwerhörig.,,,,2,de-agent-v1
-toilets.mens-toilet,Herren-WC,Herren,,,2,de-agent-v1
-accessibility.speak-louder,Sprechen Sie bitte lauter.,,,,2,de-agent-v1
-toilets.womens-toilet,Damen-WC,Damen,,,2,de-agent-v1
-accessibility.visually-impaired,Ich bin sehbehindert.,,,,2,de-agent-v1
-toilets.drinking-water,Trinkwasser,,,,2,de-agent-v1
-accessibility.take-your-arm,Darf ich mich an Ihrem Arm festhalten?,,,,2,de-agent-v1
-toilets.not-for-drinking,Kein Trinkwasser,,,,2,de-agent-v1
-accessibility.guide-dog,Das ist mein Blindenführhund.,,,,2,de-agent-v1
-toilets.accessible-toilet,Barrierefreies WC,Behinderten-WC,,,2,de-agent-v1
-toilets.where-can-i-wash-my-hands,Wo kann ich mir die Hände waschen?,,,,2,de-agent-v1
-toilets.can-i-flush-the-paper,Darf das Papier in die Toilette?,,,,2,de-agent-v1
-toilets.is-there-a-toilet-on-board,Gibt es an Bord eine Toilette?,,,,2,de-agent-v1
-toilets.the-toilet-will-not-flush,Die Toilettenspülung geht nicht.,,,,2,de-agent-v1
-toilets.baby-change,Wickelraum,Wickeltisch,,,2,de-agent-v1
-toilets.squat-toilet,Hocktoilette,Stehklosett,,,2,de-agent-v1
-building-help.what-room-number-is-this,Welche Zimmernummer ist das?,,,,2,de-agent-v1
-building-help.i-am-lost,Ich habe mich verlaufen.,,,,2,de-agent-v1
-building-help.where-is-reception,Wo ist die Rezeption?,Wo ist der Empfang?,,,2,de-agent-v1
-building-help.where-is-a-power-outlet,Wo ist eine Steckdose?,,,,2,de-agent-v1
-in-a-building.is-this-the-correct-entrance,Ist das der richtige Eingang?,,,,2,de-agent-v1
-in-a-building.do-you-have-wi-fi,Haben Sie WLAN?,,,,2,de-agent-v1
-in-a-building.what-is-the-wi-fi-password,Wie lautet das WLAN-Passwort?,,,,2,de-agent-v1
-in-a-building.which-floor,Welche Etage?,Welcher Stock?,,,2,de-agent-v1
-building-words.elevator,Aufzug,Lift,,,2,de-agent-v1
-building-words.stairs,Treppe,,,,2,de-agent-v1
-building-words.entrance,Eingang,,,,2,de-agent-v1
-building-words.exit,Ausgang,,,,2,de-agent-v1
-building-words.men,Herren,,,,2,de-agent-v1
-building-words.women,Damen,,,,2,de-agent-v1
-building-words.door,Tür,,,,2,de-agent-v1
-building-words.key,Schlüssel,,,,2,de-agent-v1
+toilets.where-toilet,Wo ist die Toilette?,,vˌoː ɪst diː tˈoːiːlˌɛtə,,2,de-agent-v1;ipa=espeak
+accessibility.step-free,Gibt es einen stufenlosen Zugang?,Gibt es einen stufenfreien Zugang?,ɡˈiːpt ɛs ˌaɪnən ʃtˈuːfənlˌoːzən tsˈuːɡaŋ,,2,de-agent-v1;ipa=espeak
+toilets.where-public-toilet,Wo ist eine öffentliche Toilette?,,vˌoː ɪst ˌaɪnə ˈœfəntlɪçə tˈoːiːlˌɛtə,,2,de-agent-v1;ipa=espeak
+accessibility.wheelchair-access,Ist es rollstuhlgerecht?,Ist es barrierefrei?,ɪst ɛs rˈɔlʃtuːlɡˌeːrɛçt,,2,de-agent-v1;ipa=espeak
+toilets.may-i-use-the-toilet,Darf ich die Toilette benutzen?,,dˈaɾf ɪç diː tˈoːiːlˌɛtə bənˈʊtsən,,2,de-agent-v1;ipa=espeak
+accessibility.elevator,Gibt es einen Aufzug?,Gibt es einen Lift?,ɡˈiːpt ɛs ˌaɪnən ˈaʊftsˌuːk,,2,de-agent-v1;ipa=espeak
+toilets.is-it-only-for-customers,Nur für Kunden?,,nˈuːɾ fyːɾ kˈʊndən,,2,de-agent-v1;ipa=espeak
+accessibility.ramp,Gibt es eine Rampe?,,ɡˈiːpt ɛs ˌaɪnə rˈampə,,2,de-agent-v1;ipa=espeak
+toilets.toilet-wc,Toilette / WC,Klo,tˈoːiːlˌɛtə / vˌeːtsˈeː,,2,de-agent-v1;ipa=espeak
+accessibility.how-many-steps,Wie viele Stufen sind es?,,viː fˈiːlə ʃtˈuːfən zɪnt ɛs,,2,de-agent-v1;ipa=espeak
+toilets.is-it-free,Ist es kostenlos?,,ɪst ɛs kˈɔstənlˌoːs,,2,de-agent-v1;ipa=espeak
+accessibility.cannot-climb-stairs,Ich kann keine Treppen steigen.,,ɪç kˌan kˈaɪnə tɾˈɛpən ʃtˈaɪɡən,,2,de-agent-v1;ipa=espeak
+toilets.do-i-need-a-coin,Brauche ich eine Münze oder einen Chip?,,bɾˈaʊxə ɪç ˌaɪnə mˈyntsə ˌoːdɜ ˌaɪnən tʃˈɪp,,2,de-agent-v1;ipa=espeak
+accessibility.need-to-sit-down,Ich muss mich setzen.,,ɪç mˈʊs mɪç zˈɛtsən,,2,de-agent-v1;ipa=espeak
+toilets.is-the-tap-water-safe-to-drink,Kann man das Leitungswasser trinken?,,kˌan man das lˈaɪtʊŋsvˌasɜ tɾˈɪŋkən,,2,de-agent-v1;ipa=espeak
+accessibility.accessible-restroom,Gibt es ein barrierefreies WC?,Gibt es ein Behinderten-WC?,ɡˈiːpt ɛs aɪn bˌarɪˈeːrɛfrˌaɪəs vˌeːtsˈeː,,2,de-agent-v1;ipa=espeak
+toilets.it-is-urgent,Es ist dringend.,,ɛsɪst dɾˈɪŋənt,,2,de-agent-v1;ipa=espeak
+accessibility.station-assistance,Gibt es hier den Mobilitätsservice?,Gibt es Einstiegshilfe am Bahnhof?,ɡˈiːpt ɛs hˈiːɾ deːn mˈoːbiːlˌiːtɛtsˌɛɾviːkə,,2,de-agent-v1;ipa=espeak
+toilets.may-i-have-the-toilet-key,Kann ich den Toilettenschlüssel haben?,,kˌan ɪç deːn tˈoːiːlˌɛtənʃlˌysəl hˈɑːbən,,2,de-agent-v1;ipa=espeak
+accessibility.help-me-carry,Helfen Sie mir bitte beim Tragen.,,hˈɛlfən ziː miːɾ bˈɪtə baɪm tɾˈɑːɡən,,2,de-agent-v1;ipa=espeak
+toilets.there-is-no-toilet-paper,Es ist kein Toilettenpapier da.,,ɛsɪst kˈaɪn tˌoːiːlˌɛtənpapˈiːɾ dˈɑː,,2,de-agent-v1;ipa=espeak
+accessibility.board-first,Darf ich zuerst einsteigen?,,dˈaɾf ɪç tsuːˈeːɾst ˈaɪnʃtˌaɪɡən,,2,de-agent-v1;ipa=espeak
+toilets.toilet-paper,Toilettenpapier,Klopapier,tˌoːiːlˌɛtənpapˈiːɾ,,2,de-agent-v1;ipa=espeak
+accessibility.door-width,Wie breit ist die Tür?,,viː bɾˈaɪt ɪst diː tˈyːɾ,,2,de-agent-v1;ipa=espeak
+toilets.it-is-out-of-order,Es ist außer Betrieb.,,ɛsɪst ˈaʊsɜ bətɾˈiːp,,2,de-agent-v1;ipa=espeak
+accessibility.wheelchair-width,Mein Rollstuhl ist {} cm breit.,,maɪn rˈɔlʃtuːl ɪst {} tsˌeːˈɛm bɾˈaɪt,,2,de-agent-v1;ipa=espeak
+toilets.out-of-order,Außer Betrieb,Defekt,ˈaʊsɜ bətɾˈiːp,,2,de-agent-v1;ipa=espeak
+accessibility.hard-of-hearing,Ich bin schwerhörig.,,ɪç bɪn ʃvˈeːɾhøːrˌɪç,,2,de-agent-v1;ipa=espeak
+toilets.mens-toilet,Herren-WC,Herren,hˈɛrənvˌeːtseː,,2,de-agent-v1;ipa=espeak
+accessibility.speak-louder,Sprechen Sie bitte lauter.,,ʃpɾˈɛçən ziː bˈɪtə lˈaʊtɜ,,2,de-agent-v1;ipa=espeak
+toilets.womens-toilet,Damen-WC,Damen,dˈɑːmənvˌeːtseː,,2,de-agent-v1;ipa=espeak
+accessibility.visually-impaired,Ich bin sehbehindert.,,ɪç bɪn zˈeːbeːˌɪndɜt,,2,de-agent-v1;ipa=espeak
+toilets.drinking-water,Trinkwasser,,tɾˈɪŋkvasɜ,,2,de-agent-v1;ipa=espeak
+accessibility.take-your-arm,Darf ich mich an Ihrem Arm festhalten?,,dˈaɾf ɪç mɪç an ˌiːrəm ˈaɾm fˈɛsthˌaltən,,2,de-agent-v1;ipa=espeak
+toilets.not-for-drinking,Kein Trinkwasser,,kˈaɪn tɾˈɪŋkvasɜ,,2,de-agent-v1;ipa=espeak
+accessibility.guide-dog,Das ist mein Blindenführhund.,,das ɪst maɪn blˈɪndənfˌyːɾhʊnt,,2,de-agent-v1;ipa=espeak
+toilets.accessible-toilet,Barrierefreies WC,Behinderten-WC,bˌarɪˈeːrɛfrˌaɪəs vˌeːtsˈeː,,2,de-agent-v1;ipa=espeak
+toilets.where-can-i-wash-my-hands,Wo kann ich mir die Hände waschen?,,vˌoː kˌan ɪç miːɾ diː hˈɛndə vˈaʃən,,2,de-agent-v1;ipa=espeak
+toilets.can-i-flush-the-paper,Darf das Papier in die Toilette?,,dˈaɾf das papˈiːɾ ɪn diː tˈoːiːlˌɛtə,,2,de-agent-v1;ipa=espeak
+toilets.is-there-a-toilet-on-board,Gibt es an Bord eine Toilette?,,ɡˈiːpt ɛs an bˈɔɾt ˌaɪnə tˈoːiːlˌɛtə,,2,de-agent-v1;ipa=espeak
+toilets.the-toilet-will-not-flush,Die Toilettenspülung geht nicht.,,diː tˈoːiːlˌɛtənspˌyːlʊŋ ɡˈeːt nˈɪçt,,2,de-agent-v1;ipa=espeak
+toilets.baby-change,Wickelraum,Wickeltisch,vˈɪkəlrˌaʊm,,2,de-agent-v1;ipa=espeak
+toilets.squat-toilet,Hocktoilette,Stehklosett,hˈɔktoːˌiːlɛtə,,2,de-agent-v1;ipa=espeak
+building-help.what-room-number-is-this,Welche Zimmernummer ist das?,,vˈɛlçə tsˈɪmɜnˌʊmɜ ɪst das,,2,de-agent-v1;ipa=espeak
+building-help.i-am-lost,Ich habe mich verlaufen.,,ɪç hɑːbə mɪç fɛɾlˈaʊfən,,2,de-agent-v1;ipa=espeak
+building-help.where-is-reception,Wo ist die Rezeption?,Wo ist der Empfang?,vˌoː ɪst diː rˌeːtsɛptsjˈoːn,,2,de-agent-v1;ipa=espeak
+building-help.where-is-a-power-outlet,Wo ist eine Steckdose?,,vˌoː ɪst ˌaɪnə ʃtˈɛkdoːzə,,2,de-agent-v1;ipa=espeak
+in-a-building.is-this-the-correct-entrance,Ist das der richtige Eingang?,,ɪst das dɛɾ rˈɪçtɪɡə ˈaɪnɡˌaŋ,,2,de-agent-v1;ipa=espeak
+in-a-building.do-you-have-wi-fi,Haben Sie WLAN?,,hˌɑːbən ziː vˈeːlɑːn,,2,de-agent-v1;ipa=espeak
+in-a-building.what-is-the-wi-fi-password,Wie lautet das WLAN-Passwort?,,viː lˈaʊtət das vˈeːlɑːnpasvɔɾt,,2,de-agent-v1;ipa=espeak
+in-a-building.which-floor,Welche Etage?,Welcher Stock?,vˈɛlçə ˈeːtɑːɡə,,2,de-agent-v1;ipa=espeak
+building-words.elevator,Aufzug,Lift,ˈaʊftsˌuːk,,2,de-agent-v1;ipa=espeak
+building-words.stairs,Treppe,,tɾˈɛpə,,2,de-agent-v1;ipa=espeak
+building-words.entrance,Eingang,,ˈaɪnɡˌaŋ,,2,de-agent-v1;ipa=espeak
+building-words.exit,Ausgang,,ˈaʊsɡˌaŋ,,2,de-agent-v1;ipa=espeak
+building-words.men,Herren,,hˈɛrən,,2,de-agent-v1;ipa=espeak
+building-words.women,Damen,,dˈɑːmən,,2,de-agent-v1;ipa=espeak
+building-words.door,Tür,,tˈyːɾ,,2,de-agent-v1;ipa=espeak
+building-words.key,Schlüssel,,ʃlˈysəl,,2,de-agent-v1;ipa=espeak

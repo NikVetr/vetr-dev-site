@@ -1,66 +1,66 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-weather.forecast,Quelles sont les prévisions météo ?,,,,2,fr-agent-v1
-weather.will-it-rain,Va-t-il pleuvoir aujourd'hui ?,,,,2,fr-agent-v1
-weather.is-it-safe-today,Est-ce sans danger aujourd'hui ?,,,,2,fr-agent-v1
-weather.how-cold-at-night,Quelle température fait-il la nuit ?,,,,2,fr-agent-v1
-weather.rain,la pluie,,,,2,fr-agent-v1
-weather.snow,la neige,,,,2,fr-agent-v1
-weather.wind,le vent,,,,2,fr-agent-v1
-weather.storm,l'orage,la tempête,,,2,fr-agent-v1
-weather.ice,le verglas,,,,2,fr-agent-v1
-weather.fog,le brouillard,,,,2,fr-agent-v1
-weather.heat,la chaleur,,,,2,fr-agent-v1
-weather.cold,le froid,,,,2,fr-agent-v1
-weather.humid,humide,,,,2,fr-agent-v1
-weather.sunrise,le lever du soleil,,,,2,fr-agent-v1
-weather.flood,inondation,crue,,,2,fr-agent-v1
-weather.avalanche-risk,risque d'avalanche,,,,2,fr-agent-v1
-trail-words.trail,le sentier,,,,2,fr-agent-v1
-trail-words.trailhead,le départ du sentier,,,,2,fr-agent-v1
-trail-words.summit,le sommet,,,,2,fr-agent-v1
-trail-words.viewpoint,le point de vue,,,,2,fr-agent-v1
-trail-words.cableway,le téléphérique,,,,2,fr-agent-v1
-trail-words.shuttle-bus,la navette,,,,2,fr-agent-v1
-trail-words.park-shuttle,la navette du parc,,,,2,fr-agent-v1
-trail-words.steps,les marches,,,,2,fr-agent-v1
-trail-words.up-uphill,la montée,,,,2,fr-agent-v1
-trail-words.down-downhill,la descente,,,,2,fr-agent-v1
-trail-words.one-way,aller simple,,,,2,fr-agent-v1
-trail-words.round-trip,aller-retour,,,,2,fr-agent-v1
-hiking-parks.is-this-the-way-to,C'est bien le chemin pour {} ?,,,,2,fr-agent-v1
-hiking-parks.where-is-the-trailhead,Où est le départ du sentier ?,,,,2,fr-agent-v1
-hiking-parks.how-long-to-the-summit,Combien de temps jusqu'au sommet ?,,,,2,fr-agent-v1
-hiking-parks.how-long-to-the-viewpoint,Combien de temps jusqu'au point de vue ?,,,,2,fr-agent-v1
-hiking-parks.which-route-is-easier,Quel itinéraire est le plus facile ?,,,,2,fr-agent-v1
-hiking-parks.is-this-trail-suitable-for-beginners,Ce sentier est-il pour débutants ?,,,,2,fr-agent-v1
-trail-conditions.how-long-is-the-full-route,Quelle est la longueur totale ?,,,,2,fr-agent-v1
-trail-conditions.can-we-return-the-same-way,Peut-on revenir par le même chemin ?,,,,2,fr-agent-v1
-trail-conditions.can-we-return-before-dark,Peut-on revenir avant la nuit ?,,,,2,fr-agent-v1
-trail-conditions.is-the-trail-open,Le sentier est-il ouvert ?,,,,2,fr-agent-v1
-trail-conditions.is-the-route-steep,L'itinéraire est-il raide ?,,,,2,fr-agent-v1
-trail-conditions.is-the-path-slippery,Le chemin est-il glissant ?,,,,2,fr-agent-v1
-trail-transport.how-long-is-the-queue,La file est-elle longue ?,,,,2,fr-agent-v1
-trail-transport.what-time-is-the-last-shuttle,À quelle heure part la dernière navette ?,,,,2,fr-agent-v1
-trail-transport.when-does-the-cableway-stop,À quelle heure s'arrête le téléphérique ?,,,,2,fr-agent-v1
-trail-transport.where-can-we-buy-water,Où peut-on acheter de l'eau ?,,,,2,fr-agent-v1
-trail-transport.where-can-we-refill-water,Où peut-on remplir nos gourdes ?,,,,2,fr-agent-v1
-trail-transport.is-there-cell-signal-here,Y a-t-il du réseau ici ?,,,,2,fr-agent-v1
-trail-transport.do-you-have-a-map,Avez-vous une carte ?,,,,2,fr-agent-v1
-trail-transport.how-long-is-the-wait,Combien de temps d'attente ?,,,,2,fr-agent-v1
-trail-warnings.open,Ouvert,,,,2,fr-agent-v1
-trail-warnings.closed,Fermé,,,,2,fr-agent-v1
-trail-warnings.maintenance,Travaux,entretien,,,2,fr-agent-v1
-trail-warnings.steep-slope,Forte pente,,,,2,fr-agent-v1
-trail-warnings.caution-slippery,Attention : sol glissant,,,,2,fr-agent-v1
-trail-warnings.danger,Danger,,,,2,fr-agent-v1
-trail-warnings.beware-falling-rocks,Attention : chutes de pierres,,,,2,fr-agent-v1
-trail-warnings.first-aid-station,Poste de secours,,,,2,fr-agent-v1
-trail-warnings.service-suspended,Service interrompu,Service suspendu,,,2,fr-agent-v1
-trail-landmarks.trail-marker,la balise,le balisage,,,2,fr-agent-v1
-trail-landmarks.fork-junction,la bifurcation,le croisement,,,2,fr-agent-v1
-trail-landmarks.boardwalk-cliff-path,passerelle / corniche,,,,1,fr-agent-v1
-trail-landmarks.start,Départ,,,,2,fr-agent-v1
-trail-landmarks.end,Arrivée,,,,2,fr-agent-v1
-trail-landmarks.elevation,altitude,,,,2,fr-agent-v1
-trail-landmarks.sunset,le coucher du soleil,,,,2,fr-agent-v1
-trail-landmarks.water-point,point d'eau,,,,2,fr-agent-v1
+weather.forecast,Quelles sont les prévisions météo ?,,kɛl sɔ̃ le pʁevizjɔ̃ meteˈo,,2,fr-agent-v1;ipa=espeak
+weather.will-it-rain,Va-t-il pleuvoir aujourd'hui ?,,vatil pløvwaʁ oʒuʁdyˈi,,2,fr-agent-v1;ipa=espeak
+weather.is-it-safe-today,Est-ce sans danger aujourd'hui ?,,ɛs sɑ̃ dɑ̃ʒe oʒuʁdyˈi,,2,fr-agent-v1;ipa=espeak
+weather.how-cold-at-night,Quelle température fait-il la nuit ?,,kɛl tɑ̃peʁatyʁ fɛtil la nyˈi,,2,fr-agent-v1;ipa=espeak
+weather.rain,la pluie,,la plyˈi,,2,fr-agent-v1;ipa=espeak
+weather.snow,la neige,,la nˈɛʒ,,2,fr-agent-v1;ipa=espeak
+weather.wind,le vent,,lə vˈɑ̃,,2,fr-agent-v1;ipa=espeak
+weather.storm,l'orage,la tempête,loʁˈaʒ,,2,fr-agent-v1;ipa=espeak
+weather.ice,le verglas,,lə vɛʁɡlˈa,,2,fr-agent-v1;ipa=espeak
+weather.fog,le brouillard,,lə bʁujˈaʁ,,2,fr-agent-v1;ipa=espeak
+weather.heat,la chaleur,,la ʃalˈœʁ,,2,fr-agent-v1;ipa=espeak
+weather.cold,le froid,,lə fʁwˈa,,2,fr-agent-v1;ipa=espeak
+weather.humid,humide,,ymˈid,,2,fr-agent-v1;ipa=espeak
+weather.sunrise,le lever du soleil,,lə ləve dy solˈɛj,,2,fr-agent-v1;ipa=espeak
+weather.flood,inondation,crue,inɔ̃dasjˈɔ̃,,2,fr-agent-v1;ipa=espeak
+weather.avalanche-risk,risque d'avalanche,,ʁisk davalˈɑ̃ʃ,,2,fr-agent-v1;ipa=espeak
+trail-words.trail,le sentier,,lə sɑ̃tjˈe,,2,fr-agent-v1;ipa=espeak
+trail-words.trailhead,le départ du sentier,,lə depaʁ dy sɑ̃tjˈe,,2,fr-agent-v1;ipa=espeak
+trail-words.summit,le sommet,,lə sɔmˈɛ,,2,fr-agent-v1;ipa=espeak
+trail-words.viewpoint,le point de vue,,lə pwɛ̃ də vˈy,,2,fr-agent-v1;ipa=espeak
+trail-words.cableway,le téléphérique,,lə telefeʁˈik,,2,fr-agent-v1;ipa=espeak
+trail-words.shuttle-bus,la navette,,la navˈɛt,,2,fr-agent-v1;ipa=espeak
+trail-words.park-shuttle,la navette du parc,,la navɛt dy pˈaʁk,,2,fr-agent-v1;ipa=espeak
+trail-words.steps,les marches,,le mˈaʁʃ,,2,fr-agent-v1;ipa=espeak
+trail-words.up-uphill,la montée,,la mɔ̃tˈe,,2,fr-agent-v1;ipa=espeak
+trail-words.down-downhill,la descente,,la dɛsˈɑ̃t,,2,fr-agent-v1;ipa=espeak
+trail-words.one-way,aller simple,,ale sˈɛ̃pl,,2,fr-agent-v1;ipa=espeak
+trail-words.round-trip,aller-retour,,alˈeʁətˈuʁ,,2,fr-agent-v1;ipa=espeak
+hiking-parks.is-this-the-way-to,C'est bien le chemin pour {} ?,,sɛ bjɛ̃ lə ʃəmɛ̃ pˈuʁ {},,2,fr-agent-v1;ipa=espeak
+hiking-parks.where-is-the-trailhead,Où est le départ du sentier ?,,u ɛ lə depaʁ dy sɑ̃tjˈe,,2,fr-agent-v1;ipa=espeak
+hiking-parks.how-long-to-the-summit,Combien de temps jusqu'au sommet ?,,kɔ̃bjɛ̃ də tɑ̃ ʒysko sɔmˈɛ,,2,fr-agent-v1;ipa=espeak
+hiking-parks.how-long-to-the-viewpoint,Combien de temps jusqu'au point de vue ?,,kɔ̃bjɛ̃ də tɑ̃ ʒysko pwɛ̃ də vˈy,,2,fr-agent-v1;ipa=espeak
+hiking-parks.which-route-is-easier,Quel itinéraire est le plus facile ?,,kɛl itineʁɛʁ ɛ lə ply fasˈil,,2,fr-agent-v1;ipa=espeak
+hiking-parks.is-this-trail-suitable-for-beginners,Ce sentier est-il pour débutants ?,,sə sɑ̃tje ɛtil puʁ debytˈɑ̃,,2,fr-agent-v1;ipa=espeak
+trail-conditions.how-long-is-the-full-route,Quelle est la longueur totale ?,,kɛl ɛ la lɔ̃ɡœʁ totˈal,,2,fr-agent-v1;ipa=espeak
+trail-conditions.can-we-return-the-same-way,Peut-on revenir par le même chemin ?,,pøtɔ̃ ʁəvniʁ paʁ lə mɛm ʃəmˈɛ̃,,2,fr-agent-v1;ipa=espeak
+trail-conditions.can-we-return-before-dark,Peut-on revenir avant la nuit ?,,pøtɔ̃ ʁəvniʁ avɑ̃ la nyˈi,,2,fr-agent-v1;ipa=espeak
+trail-conditions.is-the-trail-open,Le sentier est-il ouvert ?,,lə sɑ̃tje ɛtil uvˈɛʁ,,2,fr-agent-v1;ipa=espeak
+trail-conditions.is-the-route-steep,L'itinéraire est-il raide ?,,litineʁɛʁ ɛtil ʁˈɛd,,2,fr-agent-v1;ipa=espeak
+trail-conditions.is-the-path-slippery,Le chemin est-il glissant ?,,lə ʃəmɛ̃ ɛtil ɡlisˈɑ̃,,2,fr-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-queue,La file est-elle longue ?,,la fil ɛtɛl lˈɔ̃ɡ,,2,fr-agent-v1;ipa=espeak
+trail-transport.what-time-is-the-last-shuttle,À quelle heure part la dernière navette ?,,a kɛl œʁ paʁ la dɛʁnjɛʁ navˈɛt,,2,fr-agent-v1;ipa=espeak
+trail-transport.when-does-the-cableway-stop,À quelle heure s'arrête le téléphérique ?,,a kɛl œʁ saʁɛt lə telefeʁˈik,,2,fr-agent-v1;ipa=espeak
+trail-transport.where-can-we-buy-water,Où peut-on acheter de l'eau ?,,u pøtɔ̃n aʃte də lˈo,,2,fr-agent-v1;ipa=espeak
+trail-transport.where-can-we-refill-water,Où peut-on remplir nos gourdes ?,,u pøtɔ̃ ʁɑ̃pliʁ no ɡˈuʁd,,2,fr-agent-v1;ipa=espeak
+trail-transport.is-there-cell-signal-here,Y a-t-il du réseau ici ?,,i atil dy ʁezo isˈi,,2,fr-agent-v1;ipa=espeak
+trail-transport.do-you-have-a-map,Avez-vous une carte ?,,avevuz yn kˈaʁt,,2,fr-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-wait,Combien de temps d'attente ?,,kɔ̃bjɛ̃ də tɑ̃ datˈɑ̃t,,2,fr-agent-v1;ipa=espeak
+trail-warnings.open,Ouvert,,uvˈɛʁ,,2,fr-agent-v1;ipa=espeak
+trail-warnings.closed,Fermé,,fɛʁmˈe,,2,fr-agent-v1;ipa=espeak
+trail-warnings.maintenance,Travaux,entretien,tʁavˈo,,2,fr-agent-v1;ipa=espeak
+trail-warnings.steep-slope,Forte pente,,fɔʁt pˈɑ̃t,,2,fr-agent-v1;ipa=espeak
+trail-warnings.caution-slippery,Attention : sol glissant,,atɑ̃sjɔ̃ sɔl ɡlisˈɑ̃,,2,fr-agent-v1;ipa=espeak
+trail-warnings.danger,Danger,,dɑ̃ʒˈe,,2,fr-agent-v1;ipa=espeak
+trail-warnings.beware-falling-rocks,Attention : chutes de pierres,,atɑ̃sjɔ̃ ʃyt də pjˈɛʁ,,2,fr-agent-v1;ipa=espeak
+trail-warnings.first-aid-station,Poste de secours,,pɔst də səkˈuʁ,,2,fr-agent-v1;ipa=espeak
+trail-warnings.service-suspended,Service interrompu,Service suspendu,sɛʁvis ɛ̃tɛʁɔ̃pˈy,,2,fr-agent-v1;ipa=espeak
+trail-landmarks.trail-marker,la balise,le balisage,la balˈiz,,2,fr-agent-v1;ipa=espeak
+trail-landmarks.fork-junction,la bifurcation,le croisement,la bifyʁkasjˈɔ̃,,2,fr-agent-v1;ipa=espeak
+trail-landmarks.boardwalk-cliff-path,passerelle / corniche,,pasʁˈɛl / kɔʁnˈiʃ,,1,fr-agent-v1;ipa=espeak
+trail-landmarks.start,Départ,,depˈaʁ,,2,fr-agent-v1;ipa=espeak
+trail-landmarks.end,Arrivée,,aʁivˈe,,2,fr-agent-v1;ipa=espeak
+trail-landmarks.elevation,altitude,,altitˈyd,,2,fr-agent-v1;ipa=espeak
+trail-landmarks.sunset,le coucher du soleil,,lə kuʃe dy solˈɛj,,2,fr-agent-v1;ipa=espeak
+trail-landmarks.water-point,point d'eau,,pwɛ̃ dˈo,,2,fr-agent-v1;ipa=espeak

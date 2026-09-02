@@ -1,47 +1,47 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,ผม/ดิฉัน,ฉัน,phom / dichan,,male / female,2,th-agent-v1
-pronouns-verbs.we-us,เรา,,rao,,,2,th-agent-v1
-pronouns-verbs.you,คุณ,,khun,,,2,th-agent-v1
-pronouns-verbs.you-polite,ท่าน,,than,,,2,th-agent-v1
-pronouns-verbs.he-him,เขา,,khao,,,2,th-agent-v1
-pronouns-verbs.she-her,เขา,,khao,,same as 'he',2,th-agent-v1
-pronouns-verbs.they-them,พวกเขา,,phuak khao,,,2,th-agent-v1
-pronouns-verbs.my-mine,ของผม,ของฉัน,khong phom,,,2,th-agent-v1
-pronouns-verbs.your-yours,ของคุณ,,khong khun,,,2,th-agent-v1
-pronouns-verbs.be-called-call,ชื่อ,,chue,,,2,th-agent-v1
-pronouns-verbs.have,มี,,mi,,,2,th-agent-v1
-pronouns-verbs.do-not-have,ไม่มี,,mai mi,,,2,th-agent-v1
-pronouns-verbs.go,ไป,,pai,,,2,th-agent-v1
-pronouns-verbs.come,มา,,ma,,,2,th-agent-v1
-pronouns-verbs.would-like,อยากได้,,yak dai,,,2,th-agent-v1
-pronouns-verbs.want,อยาก,,yak,,,2,th-agent-v1
-pronouns-verbs.look-for,หา,,ha,,,2,th-agent-v1
-pronouns-verbs.buy,ซื้อ,,sue,,,2,th-agent-v1
-pronouns-verbs.like,ชอบ,,chop,,,2,th-agent-v1
-pronouns-verbs.need,ต้องการ,,tongkan,,,2,th-agent-v1
-pronouns-verbs.there-is-have,มี,,mi,,there is,2,th-agent-v1
-pronouns-verbs.there-is-not-do-not-have,ไม่มี,,mai mi,,there is none,2,th-agent-v1
-pronouns-verbs.want-to-verb,อยาก…,,yak ...,,,2,th-agent-v1
-pronouns-verbs.want-thing,เอา…,,ao ...,,,2,th-agent-v1
-pronouns-verbs.need-thing,ต้องการ…,,tongkan ...,,,2,th-agent-v1
-pronouns-verbs.looking-for-thing,หา…,,ha ...,,,2,th-agent-v1
-question-words.what,อะไร,,arai,,,2,th-agent-v1
-question-words.where,ไหน,,nai,,,2,th-agent-v1
-question-words.who,ใคร,,khrai,,,2,th-agent-v1
-question-words.which-one,อันไหน,,an nai,,,2,th-agent-v1
-question-words.when,เมื่อไร,,muearai,,,2,th-agent-v1
-question-words.how,อย่างไร,ยังไง,yangrai,,,2,th-agent-v1
-question-words.how-much-many,เท่าไร,,thaorai,,,2,th-agent-v1
-question-words.how-many,กี่,,ki,,,2,th-agent-v1
-question-words.why,ทำไม,,thammai,,,2,th-agent-v1
-question-words.this,นี่,,ni,,,2,th-agent-v1
-question-words.that,นั่น,,nan,,,2,th-agent-v1
-question-words.here,ที่นี่,,thi ni,,,2,th-agent-v1
-question-words.there,ที่นั่น,,thi nan,,,2,th-agent-v1
-question-words.a-little,นิดหน่อย,,nit noi,,,2,th-agent-v1
-question-words.some,บ้าง,,bang,,,2,th-agent-v1
-question-words.very,มาก,,mak,,,2,th-agent-v1
-question-words.too,เกินไป,,koen pai,,,2,th-agent-v1
-question-words.also,ด้วย,,duai,,,2,th-agent-v1
-question-words.all-both,ทั้งหมด,ทั้งสอง,thangmot,,,2,th-agent-v1
-question-words.how-much-what-price,ราคาเท่าไร,,rakha thaorai,,,2,th-agent-v1
+pronouns-verbs.i-me,ผม/ดิฉัน,ฉัน,phom / dichan,pʰom˩˩˦ / diʔ˨˩tɕʰan˩˩˦,male / female,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.we-us,เรา,,rao,raw˧,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.you,คุณ,,khun,kʰun˧na˦˥,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.you-polite,ท่าน,,than,tʰaːn˥˩,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.he-him,เขา,,khao,kʰaw˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.she-her,เขา,,khao,kʰaw˩˩˦,same as 'he',2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.they-them,พวกเขา,,phuak khao,pʰua̯k˥˩kʰaw˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.my-mine,ของผม,ของฉัน,khong phom,kʰɔːŋ˩˩˦ pʰom˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.your-yours,ของคุณ,,khong khun,kʰɔːŋ˩˩˦ kʰun˧na˦˥,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.be-called-call,ชื่อ,,chue,tɕʰɯː˥˩,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.have,มี,,mi,miː˧,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.do-not-have,ไม่มี,,mai mi,maj˥˩ miː˧,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.go,ไป,,pai,paj˧,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.come,มา,,ma,maː˧,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.would-like,อยากได้,,yak dai,jaːk˨˩daːj˥˩,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.want,อยาก,,yak,jaːk˨˩,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.look-for,หา,,ha,haː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.buy,ซื้อ,,sue,sɯː˦˥,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.like,ชอบ,,chop,tɕʰɔːp˥˩,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.need,ต้องการ,,tongkan,tɔŋ˥˩kaːn˧,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.there-is-have,มี,,mi,miː˧,there is,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.there-is-not-do-not-have,ไม่มี,,mai mi,maj˥˩ miː˧,there is none,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.want-to-verb,อยาก…,,yak ...,jaːk˨˩,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.want-thing,เอา…,,ao ...,ʔaw˧,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.need-thing,ต้องการ…,,tongkan ...,tɔŋ˥˩kaːn˧,,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.looking-for-thing,หา…,,ha ...,haː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+question-words.what,อะไร,,arai,ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
+question-words.where,ไหน,,nai,naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+question-words.who,ใคร,,khrai,kʰraj˧,,2,th-agent-v1;ipa=thaig2p
+question-words.which-one,อันไหน,,an nai,ʔan˧ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+question-words.when,เมื่อไร,,muearai,mɯa̯˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+question-words.how,อย่างไร,ยังไง,yangrai,jaːŋ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
+question-words.how-much-many,เท่าไร,,thaorai,tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+question-words.how-many,กี่,,ki,kiː˨˩,,2,th-agent-v1;ipa=thaig2p
+question-words.why,ทำไม,,thammai,tʰam˧maj˧,,2,th-agent-v1;ipa=thaig2p
+question-words.this,นี่,,ni,niː˥˩,,2,th-agent-v1;ipa=thaig2p
+question-words.that,นั่น,,nan,nan˥˩,,2,th-agent-v1;ipa=thaig2p
+question-words.here,ที่นี่,,thi ni,tʰiː˥˩niː˥˩,,2,th-agent-v1;ipa=thaig2p
+question-words.there,ที่นั่น,,thi nan,tʰiː˥˩nan˥˩,,2,th-agent-v1;ipa=thaig2p
+question-words.a-little,นิดหน่อย,,nit noi,nit˦˥nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
+question-words.some,บ้าง,,bang,baŋ˥˩,,2,th-agent-v1;ipa=thaig2p
+question-words.very,มาก,,mak,maːk˥˩,,2,th-agent-v1;ipa=thaig2p
+question-words.too,เกินไป,,koen pai,kɤːn˧paj˧,,2,th-agent-v1;ipa=thaig2p
+question-words.also,ด้วย,,duai,dua̯j˥˩,,2,th-agent-v1;ipa=thaig2p
+question-words.all-both,ทั้งหมด,ทั้งสอง,thangmot,tʰaŋ˦˥mot˨˩,,2,th-agent-v1;ipa=thaig2p
+question-words.how-much-what-price,ราคาเท่าไร,,rakha thaorai,raː˧kʰaː˧ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p

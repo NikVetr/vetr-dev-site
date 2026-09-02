@@ -1,66 +1,66 @@
 concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
-weather.forecast,일기예보가 어때요?,,ilgiyeboga eottaeyo?,,,2,ko-agent-v1
-weather.will-it-rain,오늘 비 와요?,,oneul bi wayo?,,,2,ko-agent-v1
-weather.is-it-safe-today,오늘 안전해요?,,oneul anjeonhaeyo?,,,2,ko-agent-v1
-weather.how-cold-at-night,밤에 얼마나 추워요?,,bame eolmana chuwoyo?,,,2,ko-agent-v1
-weather.rain,비,,bi,,,2,ko-agent-v1
-weather.snow,눈,,nun,,,2,ko-agent-v1
-weather.wind,바람,,baram,,,2,ko-agent-v1
-weather.storm,태풍,폭풍,taepung,,typhoon,2,ko-agent-v1
-weather.ice,빙판,얼음,bingpan,,icy surface,2,ko-agent-v1
+weather.forecast,일기예보가 어때요?,,ilgiyeboga eottaeyo?,ilɡijeboɡa ʌt͈ɛjo,,2,ko-agent-v1;ipa=rr
+weather.will-it-rain,오늘 비 와요?,,oneul bi wayo?,onɯl pi wajo,,2,ko-agent-v1;ipa=rr
+weather.is-it-safe-today,오늘 안전해요?,,oneul anjeonhaeyo?,onɯl andʑʌnhɛjo,,2,ko-agent-v1;ipa=rr
+weather.how-cold-at-night,밤에 얼마나 추워요?,,bame eolmana chuwoyo?,pame ʌlmana tɕʰuwʌjo,,2,ko-agent-v1;ipa=rr
+weather.rain,비,,bi,pi,,2,ko-agent-v1;ipa=rr
+weather.snow,눈,,nun,nun,,2,ko-agent-v1;ipa=rr
+weather.wind,바람,,baram,paɾam,,2,ko-agent-v1;ipa=rr
+weather.storm,태풍,폭풍,taepung,tʰɛpʰuŋ,typhoon,2,ko-agent-v1;ipa=rr
+weather.ice,빙판,얼음,bingpan,piŋpʰan,icy surface,2,ko-agent-v1;ipa=rr
 weather.fog,안개,,angae,,,2,ko-agent-v1
-weather.heat,더위,,deowi,,,2,ko-agent-v1
-weather.cold,추위,,chuwi,,,2,ko-agent-v1
-weather.humid,습해요,,seupaeyo,,,2,ko-agent-v1
-weather.sunrise,일출,해돋이,ilchul,,,2,ko-agent-v1
-weather.flood,홍수,,hongsu,,,2,ko-agent-v1
-weather.avalanche-risk,눈사태 위험,,nunsatae wiheom,,,2,ko-agent-v1
-trail-words.trail,등산로,,deungsanno,,,2,ko-agent-v1
-trail-words.trailhead,등산로 입구,들머리,deungsanno ipgu,,,2,ko-agent-v1
-trail-words.summit,정상,,jeongsang,,,2,ko-agent-v1
-trail-words.viewpoint,전망대,,jeonmangdae,,,2,ko-agent-v1
-trail-words.cableway,케이블카,,keibeulka,,,2,ko-agent-v1
-trail-words.shuttle-bus,셔틀버스,,syeoteulbeoseu,,,2,ko-agent-v1
-trail-words.park-shuttle,공원 셔틀,,gongwon syeoteul,,,2,ko-agent-v1
-trail-words.steps,계단,,gyedan,,,2,ko-agent-v1
-trail-words.up-uphill,오르막,,oreumak,,,2,ko-agent-v1
-trail-words.down-downhill,내리막,,naerimak,,,2,ko-agent-v1
-trail-words.one-way,편도,,pyeondo,,,2,ko-agent-v1
-trail-words.round-trip,왕복,,wangbok,,,2,ko-agent-v1
-hiking-parks.is-this-the-way-to,{} 가는 길이에요?,,{} ganeun girieyo?,,,2,ko-agent-v1
-hiking-parks.where-is-the-trailhead,등산로 입구 어디예요?,,deungsanno ipgu eodiyeyo?,,,2,ko-agent-v1
-hiking-parks.how-long-to-the-summit,정상까지 얼마나 걸려요?,,jeongsangkkaji eolmana geollyeoyo?,,,2,ko-agent-v1
-hiking-parks.how-long-to-the-viewpoint,전망대까지 얼마나 걸려요?,,jeonmangdaekkaji eolmana geollyeoyo?,,,2,ko-agent-v1
-hiking-parks.which-route-is-easier,어느 길이 더 쉬워요?,,eoneu giri deo swiwoyo?,,,2,ko-agent-v1
-hiking-parks.is-this-trail-suitable-for-beginners,초보자도 갈 수 있어요?,,chobojado gal su isseoyo?,,,2,ko-agent-v1
-trail-conditions.how-long-is-the-full-route,전체 거리가 얼마예요?,,jeonche georiga eolmayeyo?,,,2,ko-agent-v1
-trail-conditions.can-we-return-the-same-way,같은 길로 돌아와도 돼요?,,gateun gillo dorawado dwaeyo?,,,2,ko-agent-v1
-trail-conditions.can-we-return-before-dark,해 지기 전에 돌아와요?,,hae jigi jeone dorawayo?,,,2,ko-agent-v1
-trail-conditions.is-the-trail-open,등산로 열려 있어요?,,deungsanno yeollyeo isseoyo?,,,2,ko-agent-v1
-trail-conditions.is-the-route-steep,길이 가팔라요?,,giri gapallayo?,,,2,ko-agent-v1
-trail-conditions.is-the-path-slippery,길이 미끄러워요?,,giri mikkeureowoyo?,,,2,ko-agent-v1
-trail-transport.how-long-is-the-queue,줄이 얼마나 길어요?,,juri eolmana gireoyo?,,,2,ko-agent-v1
-trail-transport.what-time-is-the-last-shuttle,막차 셔틀이 몇 시예요?,,makcha syeoteuri myeot siyeyo?,,,2,ko-agent-v1
-trail-transport.when-does-the-cableway-stop,케이블카 몇 시까지예요?,,keibeulka myeot sikkajiyeyo?,,,2,ko-agent-v1
-trail-transport.where-can-we-buy-water,물 어디서 사요?,,mul eodiseo sayo?,,,2,ko-agent-v1
-trail-transport.where-can-we-refill-water,물 어디서 채워요?,,mul eodiseo chaewoyo?,,,2,ko-agent-v1
-trail-transport.is-there-cell-signal-here,여기 휴대폰 터져요?,,yeogi hyudaepon teojyeoyo?,,,2,ko-agent-v1
-trail-transport.do-you-have-a-map,지도 있어요?,,jido isseoyo?,,,2,ko-agent-v1
-trail-transport.how-long-is-the-wait,얼마나 기다려요?,,eolmana gidaryeoyo?,,,2,ko-agent-v1
-trail-warnings.open,개방,,gaebang,,,2,ko-agent-v1
-trail-warnings.closed,폐쇄,출입 통제,pyeswae,,,2,ko-agent-v1
-trail-warnings.maintenance,정비 중,공사 중,jeongbi jung,,,2,ko-agent-v1
-trail-warnings.steep-slope,급경사,,geupgyeongsa,,,2,ko-agent-v1
-trail-warnings.caution-slippery,미끄럼 주의,,mikkeureom juui,,,2,ko-agent-v1
-trail-warnings.danger,위험,,wiheom,,,2,ko-agent-v1
-trail-warnings.beware-falling-rocks,낙석 주의,,nakseok juui,,,2,ko-agent-v1
-trail-warnings.first-aid-station,응급처치소,구급함,eunggeupcheochiso,,,1,ko-agent-v1
-trail-warnings.service-suspended,운행 중단,운행 중지,unhaeng jungdan,,,2,ko-agent-v1
-trail-landmarks.trail-marker,이정표,등산로 표지,ijeongpyo,,,2,ko-agent-v1
-trail-landmarks.fork-junction,갈림길,,gallimgil,,,2,ko-agent-v1
-trail-landmarks.boardwalk-cliff-path,데크길,절벽길,dekeugil,,,1,ko-agent-v1
-trail-landmarks.start,시작,출발점,sijak,,,2,ko-agent-v1
-trail-landmarks.end,끝,도착점,kkeut,,,2,ko-agent-v1
-trail-landmarks.elevation,고도,해발,godo,,,2,ko-agent-v1
-trail-landmarks.sunset,일몰,해넘이,ilmol,,,2,ko-agent-v1
-trail-landmarks.water-point,급수대,샘터,geupsudae,,,2,ko-agent-v1
+weather.heat,더위,,deowi,tʌwi,,2,ko-agent-v1;ipa=rr
+weather.cold,추위,,chuwi,tɕʰuwi,,2,ko-agent-v1;ipa=rr
+weather.humid,습해요,,seupaeyo,sɯpʰɛjo,,2,ko-agent-v1;ipa=rr
+weather.sunrise,일출,해돋이,ilchul,iltɕʰul,,2,ko-agent-v1;ipa=rr
+weather.flood,홍수,,hongsu,hoŋsu,,2,ko-agent-v1;ipa=rr
+weather.avalanche-risk,눈사태 위험,,nunsatae wiheom,nunsatʰɛ wihʌm,,2,ko-agent-v1;ipa=rr
+trail-words.trail,등산로,,deungsanno,tɯŋsanno,,2,ko-agent-v1;ipa=rr
+trail-words.trailhead,등산로 입구,들머리,deungsanno ipgu,tɯŋsanno ipku,,2,ko-agent-v1;ipa=rr
+trail-words.summit,정상,,jeongsang,tɕʌŋsaŋ,,2,ko-agent-v1;ipa=rr
+trail-words.viewpoint,전망대,,jeonmangdae,tɕʌnmaŋdɛ,,2,ko-agent-v1;ipa=rr
+trail-words.cableway,케이블카,,keibeulka,kʰeibɯlkʰa,,2,ko-agent-v1;ipa=rr
+trail-words.shuttle-bus,셔틀버스,,syeoteulbeoseu,sjʌtʰɯlbʌsɯ,,2,ko-agent-v1;ipa=rr
+trail-words.park-shuttle,공원 셔틀,,gongwon syeoteul,koŋwʌn sjʌtʰɯl,,2,ko-agent-v1;ipa=rr
+trail-words.steps,계단,,gyedan,kjedan,,2,ko-agent-v1;ipa=rr
+trail-words.up-uphill,오르막,,oreumak,oɾɯmak,,2,ko-agent-v1;ipa=rr
+trail-words.down-downhill,내리막,,naerimak,nɛɾimak,,2,ko-agent-v1;ipa=rr
+trail-words.one-way,편도,,pyeondo,pʰjʌndo,,2,ko-agent-v1;ipa=rr
+trail-words.round-trip,왕복,,wangbok,waŋbok,,2,ko-agent-v1;ipa=rr
+hiking-parks.is-this-the-way-to,{} 가는 길이에요?,,{} ganeun girieyo?,{} kanɯn kiɾiejo,,2,ko-agent-v1;ipa=rr
+hiking-parks.where-is-the-trailhead,등산로 입구 어디예요?,,deungsanno ipgu eodiyeyo?,tɯŋsanno ipku ʌdijejo,,2,ko-agent-v1;ipa=rr
+hiking-parks.how-long-to-the-summit,정상까지 얼마나 걸려요?,,jeongsangkkaji eolmana geollyeoyo?,tɕʌŋsaŋk͈adʑi ʌlmana kʌlljʌjo,,2,ko-agent-v1;ipa=rr
+hiking-parks.how-long-to-the-viewpoint,전망대까지 얼마나 걸려요?,,jeonmangdaekkaji eolmana geollyeoyo?,tɕʌnmaŋdɛk͈adʑi ʌlmana kʌlljʌjo,,2,ko-agent-v1;ipa=rr
+hiking-parks.which-route-is-easier,어느 길이 더 쉬워요?,,eoneu giri deo swiwoyo?,ʌnɯ kiɾi tʌ swiwʌjo,,2,ko-agent-v1;ipa=rr
+hiking-parks.is-this-trail-suitable-for-beginners,초보자도 갈 수 있어요?,,chobojado gal su isseoyo?,tɕʰobodʑado kal su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+trail-conditions.how-long-is-the-full-route,전체 거리가 얼마예요?,,jeonche georiga eolmayeyo?,tɕʌntɕʰe kʌɾiɡa ʌlmajejo,,2,ko-agent-v1;ipa=rr
+trail-conditions.can-we-return-the-same-way,같은 길로 돌아와도 돼요?,,gateun gillo dorawado dwaeyo?,katʰɯn killo toɾawado twɛjo,,2,ko-agent-v1;ipa=rr
+trail-conditions.can-we-return-before-dark,해 지기 전에 돌아와요?,,hae jigi jeone dorawayo?,hɛ tɕiɡi tɕʌne toɾawajo,,2,ko-agent-v1;ipa=rr
+trail-conditions.is-the-trail-open,등산로 열려 있어요?,,deungsanno yeollyeo isseoyo?,tɯŋsanno jʌlljʌ is͈ʌjo,,2,ko-agent-v1;ipa=rr
+trail-conditions.is-the-route-steep,길이 가팔라요?,,giri gapallayo?,kiɾi kapʰallajo,,2,ko-agent-v1;ipa=rr
+trail-conditions.is-the-path-slippery,길이 미끄러워요?,,giri mikkeureowoyo?,kiɾi mik͈ɯɾʌwʌjo,,2,ko-agent-v1;ipa=rr
+trail-transport.how-long-is-the-queue,줄이 얼마나 길어요?,,juri eolmana gireoyo?,tɕuɾi ʌlmana kiɾʌjo,,2,ko-agent-v1;ipa=rr
+trail-transport.what-time-is-the-last-shuttle,막차 셔틀이 몇 시예요?,,makcha syeoteuri myeot siyeyo?,maktɕʰa sjʌtʰɯɾi mjʌt sijejo,,2,ko-agent-v1;ipa=rr
+trail-transport.when-does-the-cableway-stop,케이블카 몇 시까지예요?,,keibeulka myeot sikkajiyeyo?,kʰeibɯlkʰa mjʌt sik͈adʑijejo,,2,ko-agent-v1;ipa=rr
+trail-transport.where-can-we-buy-water,물 어디서 사요?,,mul eodiseo sayo?,mul ʌdisʌ sajo,,2,ko-agent-v1;ipa=rr
+trail-transport.where-can-we-refill-water,물 어디서 채워요?,,mul eodiseo chaewoyo?,mul ʌdisʌ tɕʰɛwʌjo,,2,ko-agent-v1;ipa=rr
+trail-transport.is-there-cell-signal-here,여기 휴대폰 터져요?,,yeogi hyudaepon teojyeoyo?,jʌɡi hjudɛpʰon tʰʌdʑjʌjo,,2,ko-agent-v1;ipa=rr
+trail-transport.do-you-have-a-map,지도 있어요?,,jido isseoyo?,tɕido is͈ʌjo,,2,ko-agent-v1;ipa=rr
+trail-transport.how-long-is-the-wait,얼마나 기다려요?,,eolmana gidaryeoyo?,ʌlmana kidaɾjʌjo,,2,ko-agent-v1;ipa=rr
+trail-warnings.open,개방,,gaebang,kɛbaŋ,,2,ko-agent-v1;ipa=rr
+trail-warnings.closed,폐쇄,출입 통제,pyeswae,pʰjeswɛ,,2,ko-agent-v1;ipa=rr
+trail-warnings.maintenance,정비 중,공사 중,jeongbi jung,tɕʌŋbi tɕuŋ,,2,ko-agent-v1;ipa=rr
+trail-warnings.steep-slope,급경사,,geupgyeongsa,kɯpkjʌŋsa,,2,ko-agent-v1;ipa=rr
+trail-warnings.caution-slippery,미끄럼 주의,,mikkeureom juui,mik͈ɯɾʌm tɕuɰi,,2,ko-agent-v1;ipa=rr
+trail-warnings.danger,위험,,wiheom,wihʌm,,2,ko-agent-v1;ipa=rr
+trail-warnings.beware-falling-rocks,낙석 주의,,nakseok juui,naksʌk tɕuɰi,,2,ko-agent-v1;ipa=rr
+trail-warnings.first-aid-station,응급처치소,구급함,eunggeupcheochiso,ɯŋɡɯptɕʰʌtɕʰiso,,1,ko-agent-v1;ipa=rr
+trail-warnings.service-suspended,운행 중단,운행 중지,unhaeng jungdan,unhɛŋ tɕuŋdan,,2,ko-agent-v1;ipa=rr
+trail-landmarks.trail-marker,이정표,등산로 표지,ijeongpyo,idʑʌŋpʰjo,,2,ko-agent-v1;ipa=rr
+trail-landmarks.fork-junction,갈림길,,gallimgil,kallimɡil,,2,ko-agent-v1;ipa=rr
+trail-landmarks.boardwalk-cliff-path,데크길,절벽길,dekeugil,tekʰɯɡil,,1,ko-agent-v1;ipa=rr
+trail-landmarks.start,시작,출발점,sijak,sidʑak,,2,ko-agent-v1;ipa=rr
+trail-landmarks.end,끝,도착점,kkeut,k͈ɯt,,2,ko-agent-v1;ipa=rr
+trail-landmarks.elevation,고도,해발,godo,kodo,,2,ko-agent-v1;ipa=rr
+trail-landmarks.sunset,일몰,해넘이,ilmol,ilmol,,2,ko-agent-v1;ipa=rr
+trail-landmarks.water-point,급수대,샘터,geupsudae,kɯpsudɛ,,2,ko-agent-v1;ipa=rr

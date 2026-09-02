@@ -1,51 +1,51 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-atm-cash.where-is-an-atm,¿Dónde hay un cajero automático?,,,,2,es-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,¿Este cajero acepta tarjetas extranjeras?,,,,2,es-agent-v1
-atm-cash.the-atm-kept-my-card,El cajero se quedó con mi tarjeta,,,,2,es-agent-v1
-atm-cash.is-there-a-fee,¿Hay comisión?,,,,2,es-agent-v1
-atm-cash.the-card-was-declined,La tarjeta fue rechazada,,,,2,es-agent-v1
-atm-cash.what-is-the-exchange-rate,¿Cuál es el tipo de cambio?,,,,2,es-agent-v1
-atm-cash.no-money-came-out,No salió el dinero,,,,2,es-agent-v1
-atm-cash.where-can-i-change-money,¿Dónde puedo cambiar dinero?,,,,2,es-agent-v1
-atm-cash.the-machine-is-out-of-service,El cajero está fuera de servicio,,,,2,es-agent-v1
-atm-cash.please-give-me-smaller-notes,"Deme billetes más pequeños, por favor",,,,2,es-agent-v1
-atm-cash.do-you-have-change,¿Tiene cambio?,¿Tiene sencillo?,,,2,es-agent-v1
-atm-cash.may-i-pay-in,¿Puedo pagar en {}?,,,,2,es-agent-v1
-atm-cash.please-charge-in-local-currency,"Cobre en moneda local, por favor",,,,2,es-agent-v1
-atm-cash.where-can-i-get-coins,¿Dónde puedo conseguir monedas?,,,,2,es-agent-v1
-atm-cash.is-there-a-minimum-for-cards,¿Hay un mínimo con tarjeta?,,,,2,es-agent-v1
-atm-cash.atm,el cajero automático,,,,2,es-agent-v1
-atm-cash.banknote,el billete,,,,2,es-agent-v1
-atm-cash.coin,la moneda,,,,2,es-agent-v1
-atm-cash.cash-only,Solo efectivo,,,,2,es-agent-v1
-atm-cash.fee,la comisión,,,,2,es-agent-v1
-atm-cash.change,el cambio,el vuelto · el sencillo,,,2,es-agent-v1
-atm-cash.exchange-rate,el tipo de cambio,,,,2,es-agent-v1
-atm-cash.bank,el banco,,,,2,es-agent-v1
-atm-cash.money-exchange,Cambio de divisas,Casa de cambio,,,2,es-agent-v1
-atm-cash.pin,el PIN,la clave · el NIP,,,2,es-agent-v1
-numbers-money.l-ng,cero,,,,2,es-agent-v1
-numbers-money.y,uno,un · una,,,2,es-agent-v1
-numbers-money.r,dos,,,,2,es-agent-v1
-numbers-money.li-ng,dos,,,,1,es-agent-v1
-numbers-money.s-n,tres,,,,2,es-agent-v1
-numbers-money.s,cuatro,,,,2,es-agent-v1
-numbers-money.w,cinco,,,,2,es-agent-v1
-numbers-money.li,seis,,,,2,es-agent-v1
-numbers-money.q,siete,,,,2,es-agent-v1
-numbers-money.b,ocho,,,,2,es-agent-v1
-numbers-money.ji,nueve,,,,2,es-agent-v1
-numbers-money.sh,diez,,,,2,es-agent-v1
-numbers-money.y-b-i,cien,ciento,,,2,es-agent-v1
-numbers-money.y-qi-n,mil,,,,2,es-agent-v1
-numbers-money.y-w-n,diez mil,,,,2,es-agent-v1
-numbers-money.b-n,medio,la mitad,,,2,es-agent-v1
-numbers-money.yu-n,el yuan,,,,2,es-agent-v1
-numbers-money.ku-i,el yuan,el renminbi,,,1,es-agent-v1
+atm-cash.where-is-an-atm,¿Dónde hay un cajero automático?,,dˈonde ˈaɪ ˈun kaxˈeɾo ˌaʊtomˈatiko,,2,es-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,¿Este cajero acepta tarjetas extranjeras?,,ˈeste kaxˈeɾo asˈepːta taɾxˈetas ˌekstɾaŋxˈeɾas,,2,es-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,El cajero se quedó con mi tarjeta,,el kaxˈeɾo se kedˈo kon mi taɾxˈeta,,2,es-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,¿Hay comisión?,,ˈaɪ kˌomisjˈon,,2,es-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,La tarjeta fue rechazada,,la taɾxˈeta fwˈe rˌetʃasˈada,,2,es-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,¿Cuál es el tipo de cambio?,,kwˈal ˈes el tˈipo de kˈambjo,,2,es-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,No salió el dinero,,nˈo saljˈo el dinˈeɾo,,2,es-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,¿Dónde puedo cambiar dinero?,,dˈonde pwˈedo kambjˈaɾ dinˈeɾo,,2,es-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,El cajero está fuera de servicio,,el kaxˈeɾo estˈa fwˈeɾa de seɾbˈisjo,,2,es-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,"Deme billetes más pequeños, por favor",,"dˈeme biʝˈetes mˈas pekˈeɲos, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,¿Tiene cambio?,¿Tiene sencillo?,tjˈene kˈambjo,,2,es-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,¿Puedo pagar en {}?,,pwˈedo paɡˈaɾ ˈen {},,2,es-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,"Cobre en moneda local, por favor",,"kˈobɾe en monˈeda lokˈal, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,¿Dónde puedo conseguir monedas?,,dˈonde pwˈedo kˌonseɡˈiɾ monˈedas,,2,es-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,¿Hay un mínimo con tarjeta?,,ˈaɪ ˈun mˈinimo kon taɾxˈeta,,2,es-agent-v1;ipa=espeak
+atm-cash.atm,el cajero automático,,el kaxˈeɾo ˌaʊtomˈatiko,,2,es-agent-v1;ipa=espeak
+atm-cash.banknote,el billete,,el biʝˈete,,2,es-agent-v1;ipa=espeak
+atm-cash.coin,la moneda,,la monˈeda,,2,es-agent-v1;ipa=espeak
+atm-cash.cash-only,Solo efectivo,,sˈolo ˌefektˈibo,,2,es-agent-v1;ipa=espeak
+atm-cash.fee,la comisión,,la kˌomisjˈon,,2,es-agent-v1;ipa=espeak
+atm-cash.change,el cambio,el vuelto · el sencillo,el kˈambjo,,2,es-agent-v1;ipa=espeak
+atm-cash.exchange-rate,el tipo de cambio,,el tˈipo de kˈambjo,,2,es-agent-v1;ipa=espeak
+atm-cash.bank,el banco,,el bˈanko,,2,es-agent-v1;ipa=espeak
+atm-cash.money-exchange,Cambio de divisas,Casa de cambio,kˈambjo de dibˈisas,,2,es-agent-v1;ipa=espeak
+atm-cash.pin,el PIN,la clave · el NIP,el pˈin,,2,es-agent-v1;ipa=espeak
+numbers-money.l-ng,cero,,sˈeɾo,,2,es-agent-v1;ipa=espeak
+numbers-money.y,uno,un · una,ˈuno,,2,es-agent-v1;ipa=espeak
+numbers-money.r,dos,,dˈos,,2,es-agent-v1;ipa=espeak
+numbers-money.li-ng,dos,,dˈos,,1,es-agent-v1;ipa=espeak
+numbers-money.s-n,tres,,tɾˈes,,2,es-agent-v1;ipa=espeak
+numbers-money.s,cuatro,,kwˈatɾo,,2,es-agent-v1;ipa=espeak
+numbers-money.w,cinco,,sˈinko,,2,es-agent-v1;ipa=espeak
+numbers-money.li,seis,,sˈeɪs,,2,es-agent-v1;ipa=espeak
+numbers-money.q,siete,,sjˈete,,2,es-agent-v1;ipa=espeak
+numbers-money.b,ocho,,ˈotʃo,,2,es-agent-v1;ipa=espeak
+numbers-money.ji,nueve,,nwˈebe,,2,es-agent-v1;ipa=espeak
+numbers-money.sh,diez,,djˈes,,2,es-agent-v1;ipa=espeak
+numbers-money.y-b-i,cien,ciento,sjˈen,,2,es-agent-v1;ipa=espeak
+numbers-money.y-qi-n,mil,,mˈil,,2,es-agent-v1;ipa=espeak
+numbers-money.y-w-n,diez mil,,djˈes mˈil,,2,es-agent-v1;ipa=espeak
+numbers-money.b-n,medio,la mitad,mˈedjo,,2,es-agent-v1;ipa=espeak
+numbers-money.yu-n,el yuan,,el ʝwˈan,,2,es-agent-v1;ipa=espeak
+numbers-money.ku-i,el yuan,el renminbi,el ʝwˈan,,1,es-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"Para formar números: 11 = shi yi; 20 = er shi; 21 = er shi yi. En un número de teléfono, 1 suele ser yao. Entre el número y el sustantivo va un clasificador: ge (general), wei (personas), zhang (entradas, cosas planas), bei (tazas), ping (botellas). jiao / mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,es-notes-v1
-numbers-money.2-items,dos,dos unidades,,,1,es-agent-v1
-numbers-money.yen,el yen,,,,2,es-agent-v1
+numbers-money.2-items,dos,dos unidades,dˈos,,1,es-agent-v1;ipa=espeak
+numbers-money.yen,el yen,,el ʝˈen,,2,es-agent-v1;ipa=espeak
 numbers-money.yen-symbol,¥,yen,,,2,es-agent-v1
 numbers-money.number-and-classifier-notes-2,"Para formar números: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Contadores: -tsu (objetos), -mai (cosas planas), -hon (cosas largas), -nin (personas), -hai (tazas). Al leer un teléfono: 0 = zero o maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,es-notes-v1
-numbers-money.euro,el euro,,,,2,es-agent-v1
+numbers-money.euro,el euro,,el ˈeʊɾo,,2,es-agent-v1;ipa=espeak
 numbers-money.euro-symbol,€,euro,,,2,es-agent-v1

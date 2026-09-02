@@ -1,16 +1,16 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,Quero ir para {},,,,2,pt-agent-v1
-utility-templates.please-give-me,"Dê-me {}, por favor","Me dê {}, por favor",,,2,pt-agent-v1
-utility-templates.may-i,Posso {}?,,,,2,pt-agent-v1
-utility-templates.please-do-not-add,"Sem {}, por favor",,,"without {}, please",2,pt-agent-v1
-utility-templates.do-you-have,Tem {}?,,,,2,pt-agent-v1
-utility-templates.please-write-the-number,"Escreva o número, por favor",,,,2,pt-agent-v1
-utility-templates.i-need,Preciso de {},,,,2,pt-agent-v1
-utility-templates.is-there-nearby,Há {} aqui perto?,,,,2,pt-agent-v1
-utility-templates.how-much-is,Quanto custa {}?,,,,2,pt-agent-v1
-utility-templates.is-this,Isto é {}?,,,,2,pt-agent-v1
-utility-templates.please,"{}, por favor",,,,2,pt-agent-v1
-utility-templates.i-am-looking-for,Procuro {},,,,2,pt-agent-v1
-utility-templates.do-you-accept,Aceitam {}?,,,,2,pt-agent-v1
-utility-templates.i-cannot-find,Não consigo encontrar {},,,,2,pt-agent-v1
-utility-templates.there-is-a-problem-with,Há um problema com {},,,,2,pt-agent-v1
+utility-templates.i-want-to-go-to,Quero ir para {},,kˈɛɾw ˈir pˌaɾæ {},,2,pt-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Dê-me {}, por favor","Me dê {}, por favor","dˈemy {}, por favˈor",,2,pt-agent-v1;ipa=espeak
+utility-templates.may-i,Posso {}?,,pˈɔsʊ {},,2,pt-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Sem {}, por favor",,"sˈeɪŋ {}, por favˈor","without {}, please",2,pt-agent-v1;ipa=espeak
+utility-templates.do-you-have,Tem {}?,,teɪŋ {},,2,pt-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Escreva o número, por favor",,"ˌeskrˈevæ ʊ nˈũmeɾʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
+utility-templates.i-need,Preciso de {},,prˌesˈizʊ dʒy {},,2,pt-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Há {} aqui perto?,,ˈa {} akˈi pˈɛɾətʊ,,2,pt-agent-v1;ipa=espeak
+utility-templates.how-much-is,Quanto custa {}?,,kwˈɐ̃ŋtʊ kˈustæ {},,2,pt-agent-v1;ipa=espeak
+utility-templates.is-this,Isto é {}?,,ˈistw ɛ {},,2,pt-agent-v1;ipa=espeak
+utility-templates.please,"{}, por favor",,"{}, por favˈor",,2,pt-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Procuro {},,prˌokˈuɾʊ {},,2,pt-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Aceitam {}?,,ˌasˈeɪtɐ̃ʊ̃ {},,2,pt-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Não consigo encontrar {},,nˌɐ̃ʊ̃ kˌoŋsˈiɡw ˌeɪŋkoŋtrˈar {},,2,pt-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Há um problema com {},,a ũŋ prˌoblˈemæ koŋ {},,2,pt-agent-v1;ipa=espeak

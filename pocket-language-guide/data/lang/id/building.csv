@@ -1,60 +1,60 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-building-help.what-room-number-is-this,Ini ruangan nomor berapa?,,,,2,id-agent-v1
-building-help.i-am-lost,Saya tersesat,,,,2,id-agent-v1
-building-help.where-is-reception,Resepsionis di mana?,,,,2,id-agent-v1
-building-help.where-is-a-power-outlet,Colokan listrik di mana?,,,,2,id-agent-v1
-accessibility.step-free,Ada akses tanpa tangga?,Ada akses bebas hambatan?,,,2,id-agent-v1
-accessibility.wheelchair-access,Ada akses kursi roda?,,,,2,id-agent-v1
-accessibility.elevator,Ada lift?,,,,2,id-agent-v1
-accessibility.ramp,Ada ramp?,Ada jalur landai?,,,2,id-agent-v1
-accessibility.how-many-steps,Ada berapa anak tangga?,,,anak tangga = single step,2,id-agent-v1
-accessibility.cannot-climb-stairs,Saya tidak bisa naik tangga,,,,2,id-agent-v1
-accessibility.need-to-sit-down,Saya perlu duduk,,,,2,id-agent-v1
-accessibility.accessible-restroom,Ada toilet disabilitas?,Ada toilet difabel?,,,2,id-agent-v1
-accessibility.station-assistance,Ada bantuan di stasiun?,,,,2,id-agent-v1
-accessibility.help-me-carry,Tolong bantu bawa ini,,,,2,id-agent-v1
-accessibility.board-first,Boleh saya masuk dulu?,,,,2,id-agent-v1
-accessibility.door-width,Lebar pintunya berapa?,,,,2,id-agent-v1
-accessibility.wheelchair-width,Kursi roda saya lebar {} cm,,,,2,id-agent-v1
-accessibility.hard-of-hearing,Pendengaran saya kurang,Saya sulit mendengar,,,2,id-agent-v1
-accessibility.speak-louder,Tolong bicara lebih keras,,,,2,id-agent-v1
-accessibility.visually-impaired,Saya tunanetra,Penglihatan saya terbatas,,,2,id-agent-v1
-accessibility.take-your-arm,Boleh saya pegang lengannya?,,,"-nya = polite ""your""",2,id-agent-v1
-accessibility.guide-dog,Ini anjing pemandu saya,,,,2,id-agent-v1
-in-a-building.is-this-the-correct-entrance,Ini pintu masuk yang benar?,,,,2,id-agent-v1
-in-a-building.do-you-have-wi-fi,Ada Wi-Fi?,,,,2,id-agent-v1
-in-a-building.what-is-the-wi-fi-password,Password Wi-Fi-nya apa?,,,,2,id-agent-v1
-in-a-building.which-floor,Lantai berapa?,,,,2,id-agent-v1
-toilets.where-toilet,Toilet di mana?,,,not kamar mandi = bathing room,2,id-agent-v1
-toilets.where-public-toilet,Toilet umum di mana?,,,,2,id-agent-v1
-toilets.may-i-use-the-toilet,Boleh pakai toiletnya?,,,,2,id-agent-v1
-toilets.is-it-only-for-customers,Hanya untuk pembeli?,,,,2,id-agent-v1
-toilets.toilet-wc,Toilet,WC,,,2,id-agent-v1
-toilets.is-it-free,Gratis?,,,,2,id-agent-v1
-toilets.do-i-need-a-coin,Perlu koin atau token?,,,,2,id-agent-v1
-toilets.is-the-tap-water-safe-to-drink,Air keran aman diminum?,,,,2,id-agent-v1
-toilets.it-is-urgent,Ini mendesak,,,,2,id-agent-v1
-toilets.may-i-have-the-toilet-key,Boleh minta kunci toilet?,,,,2,id-agent-v1
-toilets.there-is-no-toilet-paper,Tidak ada tisu toilet,,,,2,id-agent-v1
-toilets.toilet-paper,Tisu toilet,Tisu,,,2,id-agent-v1
-toilets.it-is-out-of-order,Ini rusak,,,,2,id-agent-v1
-toilets.out-of-order,Rusak,Sedang dalam perbaikan,,,2,id-agent-v1
-toilets.mens-toilet,Toilet pria,Laki-laki,,,2,id-agent-v1
-toilets.womens-toilet,Toilet wanita,Perempuan,,,2,id-agent-v1
-toilets.drinking-water,Air siap minum,Air minum,,,2,id-agent-v1
-toilets.not-for-drinking,Air tidak layak minum,Dilarang minum air,,usually only a crossed-tap sign,1,id-agent-v1
-toilets.accessible-toilet,Toilet disabilitas,Toilet difabel,,,2,id-agent-v1
-toilets.where-can-i-wash-my-hands,Di mana bisa cuci tangan?,,,,2,id-agent-v1
-toilets.can-i-flush-the-paper,Tisunya boleh dibuang ke kloset?,,,,2,id-agent-v1
-toilets.is-there-a-toilet-on-board,Ada toilet di dalam?,,,,2,id-agent-v1
-toilets.the-toilet-will-not-flush,Toiletnya tidak bisa disiram,,,,2,id-agent-v1
-toilets.baby-change,Ruang ganti bayi,Nursery,,,2,id-agent-v1
-toilets.squat-toilet,Kloset jongkok,WC jongkok,,,2,id-agent-v1
-building-words.elevator,Lift,,,,2,id-agent-v1
-building-words.stairs,Tangga,,,,2,id-agent-v1
-building-words.entrance,Masuk,Pintu masuk,,,2,id-agent-v1
-building-words.exit,Keluar,Pintu keluar,,,2,id-agent-v1
-building-words.men,Pria,Laki-laki,,,2,id-agent-v1
-building-words.women,Wanita,Perempuan,,,2,id-agent-v1
-building-words.door,Pintu,,,,2,id-agent-v1
-building-words.key,Kunci,,,,2,id-agent-v1
+building-help.what-room-number-is-this,Ini ruangan nomor berapa?,,ˈini ruˈaŋan nˈomɔr bərˈapa,,2,id-agent-v1;ipa=espeak
+building-help.i-am-lost,Saya tersesat,,sˈaja tərsˈɛsat,,2,id-agent-v1;ipa=espeak
+building-help.where-is-reception,Resepsionis di mana?,,rˌɛsəpsiˈonis di mˈana,,2,id-agent-v1;ipa=espeak
+building-help.where-is-a-power-outlet,Colokan listrik di mana?,,tʃolˈokan lˈistrik di mˈana,,2,id-agent-v1;ipa=espeak
+accessibility.step-free,Ada akses tanpa tangga?,Ada akses bebas hambatan?,ˈada ˈaksəs tˈanpa tˈaŋɡa,,2,id-agent-v1;ipa=espeak
+accessibility.wheelchair-access,Ada akses kursi roda?,,ˈada ˈaksəs kˈursi rˈoda,,2,id-agent-v1;ipa=espeak
+accessibility.elevator,Ada lift?,,ˈada lˈift,,2,id-agent-v1;ipa=espeak
+accessibility.ramp,Ada ramp?,Ada jalur landai?,ˈada rˈamp,,2,id-agent-v1;ipa=espeak
+accessibility.how-many-steps,Ada berapa anak tangga?,,ˈada bərˈapa ˈanak tˈaŋɡa,anak tangga = single step,2,id-agent-v1;ipa=espeak
+accessibility.cannot-climb-stairs,Saya tidak bisa naik tangga,,sˈaja tˈidak bˈisa nˈaɪk tˈaŋɡa,,2,id-agent-v1;ipa=espeak
+accessibility.need-to-sit-down,Saya perlu duduk,,sˈaja pˈɛrlu dˈuduk,,2,id-agent-v1;ipa=espeak
+accessibility.accessible-restroom,Ada toilet disabilitas?,Ada toilet difabel?,ˈada toˈilət dˌisabilˈitas,,2,id-agent-v1;ipa=espeak
+accessibility.station-assistance,Ada bantuan di stasiun?,,ˈada bantˈuan di stasˈiun,,2,id-agent-v1;ipa=espeak
+accessibility.help-me-carry,Tolong bantu bawa ini,,tˈoloŋ bˈantu bˈawa ˈini,,2,id-agent-v1;ipa=espeak
+accessibility.board-first,Boleh saya masuk dulu?,,bˈoləh sˈaja mˈasuk dˈulu,,2,id-agent-v1;ipa=espeak
+accessibility.door-width,Lebar pintunya berapa?,,lˈɛbar pintˈuɲa bərˈapa,,2,id-agent-v1;ipa=espeak
+accessibility.wheelchair-width,Kursi roda saya lebar {} cm,,kˈursi rˈoda sˈaja lˈɛbar {} tʃˌeəm,,2,id-agent-v1;ipa=espeak
+accessibility.hard-of-hearing,Pendengaran saya kurang,Saya sulit mendengar,pəndəŋˈaran sˈaja kˈuraŋ,,2,id-agent-v1;ipa=espeak
+accessibility.speak-louder,Tolong bicara lebih keras,,tˈoloŋ bitʃˈara lˈɛbih kˈɛras,,2,id-agent-v1;ipa=espeak
+accessibility.visually-impaired,Saya tunanetra,Penglihatan saya terbatas,sˈaja tˌunanˈɛtra,,2,id-agent-v1;ipa=espeak
+accessibility.take-your-arm,Boleh saya pegang lengannya?,,bˈoləh sˈaja pˈɛɡaŋ ləŋˈanɲa,"-nya = polite ""your""",2,id-agent-v1;ipa=espeak
+accessibility.guide-dog,Ini anjing pemandu saya,,ˈini ˈandʒiŋ pəmˈandu sˈaja,,2,id-agent-v1;ipa=espeak
+in-a-building.is-this-the-correct-entrance,Ini pintu masuk yang benar?,,ˈini pˈintu mˈasuk jaŋ bənˈar,,2,id-agent-v1;ipa=espeak
+in-a-building.do-you-have-wi-fi,Ada Wi-Fi?,,ˈada wˈifi,,2,id-agent-v1;ipa=espeak
+in-a-building.what-is-the-wi-fi-password,Password Wi-Fi-nya apa?,,pˈaswɔrd wˈifiɲa ˈapa,,2,id-agent-v1;ipa=espeak
+in-a-building.which-floor,Lantai berapa?,,lˈantaɪ bərˈapa,,2,id-agent-v1;ipa=espeak
+toilets.where-toilet,Toilet di mana?,,toˈilət di mˈana,not kamar mandi = bathing room,2,id-agent-v1;ipa=espeak
+toilets.where-public-toilet,Toilet umum di mana?,,toˈilət ˈumum di mˈana,,2,id-agent-v1;ipa=espeak
+toilets.may-i-use-the-toilet,Boleh pakai toiletnya?,,bˈoləh pˈakaɪ tˌoilˈɛtɲa,,2,id-agent-v1;ipa=espeak
+toilets.is-it-only-for-customers,Hanya untuk pembeli?,,hˈaɲa ˌuntuk pəmbˈɛli,,2,id-agent-v1;ipa=espeak
+toilets.toilet-wc,Toilet,WC,toˈilət,,2,id-agent-v1;ipa=espeak
+toilets.is-it-free,Gratis?,,ɡrˈatis,,2,id-agent-v1;ipa=espeak
+toilets.do-i-need-a-coin,Perlu koin atau token?,,pˈɛrlu kˈoin ˌataʊ tˈokən,,2,id-agent-v1;ipa=espeak
+toilets.is-the-tap-water-safe-to-drink,Air keran aman diminum?,,ˈaɪr kˈɛran ˈaman dimˈinum,,2,id-agent-v1;ipa=espeak
+toilets.it-is-urgent,Ini mendesak,,ˈini məndˈɛsak,,2,id-agent-v1;ipa=espeak
+toilets.may-i-have-the-toilet-key,Boleh minta kunci toilet?,,bˈoləh mˈinta kˈuntʃi toˈilət,,2,id-agent-v1;ipa=espeak
+toilets.there-is-no-toilet-paper,Tidak ada tisu toilet,,tˈidak ˈada tˈisu toˈilət,,2,id-agent-v1;ipa=espeak
+toilets.toilet-paper,Tisu toilet,Tisu,tˈisu toˈilət,,2,id-agent-v1;ipa=espeak
+toilets.it-is-out-of-order,Ini rusak,,ˈini rˈusak,,2,id-agent-v1;ipa=espeak
+toilets.out-of-order,Rusak,Sedang dalam perbaikan,rˈusak,,2,id-agent-v1;ipa=espeak
+toilets.mens-toilet,Toilet pria,Laki-laki,toˈilət prˈia,,2,id-agent-v1;ipa=espeak
+toilets.womens-toilet,Toilet wanita,Perempuan,toˈilət wanˈita,,2,id-agent-v1;ipa=espeak
+toilets.drinking-water,Air siap minum,Air minum,ˈaɪr sˈiap mˈinum,,2,id-agent-v1;ipa=espeak
+toilets.not-for-drinking,Air tidak layak minum,Dilarang minum air,ˈaɪr tˈidak lˈajak mˈinum,usually only a crossed-tap sign,1,id-agent-v1;ipa=espeak
+toilets.accessible-toilet,Toilet disabilitas,Toilet difabel,toˈilət dˌisabilˈitas,,2,id-agent-v1;ipa=espeak
+toilets.where-can-i-wash-my-hands,Di mana bisa cuci tangan?,,di mˈana bˈisa tʃˈutʃi tˈaŋan,,2,id-agent-v1;ipa=espeak
+toilets.can-i-flush-the-paper,Tisunya boleh dibuang ke kloset?,,tisˈuɲa bˈoləh dibˈuaŋ kə klˈosət,,2,id-agent-v1;ipa=espeak
+toilets.is-there-a-toilet-on-board,Ada toilet di dalam?,,ˈada toˈilət di dˈalam,,2,id-agent-v1;ipa=espeak
+toilets.the-toilet-will-not-flush,Toiletnya tidak bisa disiram,,tˌoilˈɛtɲa tˈidak bˈisa disˈiram,,2,id-agent-v1;ipa=espeak
+toilets.baby-change,Ruang ganti bayi,Nursery,rˈuaŋ ɡˈanti bˈaji,,2,id-agent-v1;ipa=espeak
+toilets.squat-toilet,Kloset jongkok,WC jongkok,klˈosət dʒˈoŋkok,,2,id-agent-v1;ipa=espeak
+building-words.elevator,Lift,,lˈift,,2,id-agent-v1;ipa=espeak
+building-words.stairs,Tangga,,tˈaŋɡa,,2,id-agent-v1;ipa=espeak
+building-words.entrance,Masuk,Pintu masuk,mˈasuk,,2,id-agent-v1;ipa=espeak
+building-words.exit,Keluar,Pintu keluar,kəlˈuar,,2,id-agent-v1;ipa=espeak
+building-words.men,Pria,Laki-laki,prˈia,,2,id-agent-v1;ipa=espeak
+building-words.women,Wanita,Perempuan,wanˈita,,2,id-agent-v1;ipa=espeak
+building-words.door,Pintu,,pˈintu,,2,id-agent-v1;ipa=espeak
+building-words.key,Kunci,,kˈuntʃi,,2,id-agent-v1;ipa=espeak

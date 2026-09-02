@@ -1,66 +1,66 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-trail-words.trail,Jalur,Jalur pendakian,,,2,id-agent-v1
-trail-words.trailhead,Awal jalur,Basecamp,,,2,id-agent-v1
-trail-words.summit,Puncak,,,,2,id-agent-v1
-trail-words.viewpoint,Titik pandang,Spot pemandangan,,,2,id-agent-v1
-trail-words.cableway,Kereta gantung,Gondola,,,2,id-agent-v1
-trail-words.shuttle-bus,Bus antar-jemput,Shuttle,,,2,id-agent-v1
-trail-words.park-shuttle,Shuttle taman,Bus wisata,,,2,id-agent-v1
-trail-words.steps,Tangga,Anak tangga,,,2,id-agent-v1
-trail-words.up-uphill,Naik,Tanjakan,,,2,id-agent-v1
-trail-words.down-downhill,Turun,Turunan,,,2,id-agent-v1
-trail-words.one-way,Sekali jalan,,,satu arah means a one-way street,2,id-agent-v1
-trail-words.round-trip,Pulang-pergi,PP,,,2,id-agent-v1
-weather.forecast,Prakiraan cuacanya bagaimana?,,,,2,id-agent-v1
-weather.will-it-rain,Hari ini akan hujan?,,,,2,id-agent-v1
-weather.is-it-safe-today,Hari ini aman?,,,,2,id-agent-v1
-weather.how-cold-at-night,Seberapa dingin malam nanti?,,,,2,id-agent-v1
-weather.rain,Hujan,,,,2,id-agent-v1
-weather.snow,Salju,,,,2,id-agent-v1
-weather.wind,Angin,,,,2,id-agent-v1
-weather.storm,Badai,,,,2,id-agent-v1
-weather.ice,Lapisan es,,,"ice on the ground, not in a drink",2,id-agent-v1
-weather.fog,Kabut,,,,2,id-agent-v1
-weather.heat,Panas,,,,2,id-agent-v1
-weather.cold,Dingin,,,,2,id-agent-v1
-weather.humid,Lembap,Lembab,,,2,id-agent-v1
-weather.sunrise,Matahari terbit,,,,2,id-agent-v1
-weather.flood,Banjir,,,,2,id-agent-v1
-weather.avalanche-risk,Rawan longsoran salju,,,no Indonesian signage uses this,1,id-agent-v1
-hiking-parks.is-this-the-way-to,Ini jalan ke {}?,,,,2,id-agent-v1
-hiking-parks.where-is-the-trailhead,Awal jalurnya di mana?,,,,2,id-agent-v1
-hiking-parks.how-long-to-the-summit,Berapa lama ke puncak?,,,,2,id-agent-v1
-hiking-parks.how-long-to-the-viewpoint,Berapa lama ke titik pandang?,,,,2,id-agent-v1
-hiking-parks.which-route-is-easier,Jalur mana yang lebih mudah?,,,,2,id-agent-v1
-hiking-parks.is-this-trail-suitable-for-beginners,Jalur ini cocok untuk pemula?,,,,2,id-agent-v1
-trail-conditions.how-long-is-the-full-route,Total jalurnya berapa jauh?,,,,2,id-agent-v1
-trail-conditions.can-we-return-the-same-way,Bisa kembali lewat jalur yang sama?,,,,2,id-agent-v1
-trail-conditions.can-we-return-before-dark,Bisa kembali sebelum gelap?,,,,2,id-agent-v1
-trail-conditions.is-the-trail-open,Jalurnya buka?,,,,2,id-agent-v1
-trail-conditions.is-the-route-steep,Jalurnya terjal?,,,,2,id-agent-v1
-trail-conditions.is-the-path-slippery,Jalannya licin?,,,,2,id-agent-v1
-trail-transport.how-long-is-the-queue,Antreannya berapa panjang?,,,,2,id-agent-v1
-trail-transport.what-time-is-the-last-shuttle,Shuttle terakhir jam berapa?,,,,2,id-agent-v1
-trail-transport.when-does-the-cableway-stop,Kereta gantung tutup jam berapa?,,,,2,id-agent-v1
-trail-transport.where-can-we-buy-water,Di mana bisa beli air?,,,,2,id-agent-v1
-trail-transport.where-can-we-refill-water,Di mana bisa isi ulang air?,,,,2,id-agent-v1
-trail-transport.is-there-cell-signal-here,Ada sinyal di sini?,,,,2,id-agent-v1
-trail-transport.do-you-have-a-map,Ada peta?,,,,2,id-agent-v1
-trail-transport.how-long-is-the-wait,Berapa lama menunggu?,,,,2,id-agent-v1
-trail-warnings.open,Buka,,,,2,id-agent-v1
-trail-warnings.closed,Tutup,,,,2,id-agent-v1
-trail-warnings.maintenance,Perbaikan,Sedang dalam perbaikan,,,2,id-agent-v1
-trail-warnings.steep-slope,Tanjakan terjal,Turunan curam,,,2,id-agent-v1
-trail-warnings.caution-slippery,Awas licin,Hati-hati licin,,,2,id-agent-v1
-trail-warnings.danger,Bahaya,,,,2,id-agent-v1
-trail-warnings.beware-falling-rocks,Awas batu jatuh,Rawan longsor,,,2,id-agent-v1
-trail-warnings.first-aid-station,Pos P3K,,,P3K = first aid,2,id-agent-v1
-trail-warnings.service-suspended,Tidak beroperasi,Layanan dihentikan,,,2,id-agent-v1
-trail-landmarks.trail-marker,Penanda jalur,,,,2,id-agent-v1
-trail-landmarks.fork-junction,Percabangan,Persimpangan,,,2,id-agent-v1
-trail-landmarks.boardwalk-cliff-path,Jalan papan,Jalur tebing,,,2,id-agent-v1
-trail-landmarks.start,Awal,Mulai,,,2,id-agent-v1
-trail-landmarks.end,Akhir,Selesai,,,2,id-agent-v1
-trail-landmarks.elevation,Ketinggian,,,,2,id-agent-v1
-trail-landmarks.sunset,Matahari terbenam,,,,2,id-agent-v1
-trail-landmarks.water-point,Titik air,Sumber air,,,2,id-agent-v1
+trail-words.trail,Jalur,Jalur pendakian,dʒˈalur,,2,id-agent-v1;ipa=espeak
+trail-words.trailhead,Awal jalur,Basecamp,ˈawal dʒˈalur,,2,id-agent-v1;ipa=espeak
+trail-words.summit,Puncak,,pˈuntʃak,,2,id-agent-v1;ipa=espeak
+trail-words.viewpoint,Titik pandang,Spot pemandangan,tˈitik pˈandaŋ,,2,id-agent-v1;ipa=espeak
+trail-words.cableway,Kereta gantung,Gondola,kərˈɛta ɡˈantuŋ,,2,id-agent-v1;ipa=espeak
+trail-words.shuttle-bus,Bus antar-jemput,Shuttle,bˈus ˈantardʒɛmput,,2,id-agent-v1;ipa=espeak
+trail-words.park-shuttle,Shuttle taman,Bus wisata,shˈuttlə tˈaman,,2,id-agent-v1;ipa=espeak
+trail-words.steps,Tangga,Anak tangga,tˈaŋɡa,,2,id-agent-v1;ipa=espeak
+trail-words.up-uphill,Naik,Tanjakan,nˈaɪk,,2,id-agent-v1;ipa=espeak
+trail-words.down-downhill,Turun,Turunan,tˈurun,,2,id-agent-v1;ipa=espeak
+trail-words.one-way,Sekali jalan,,səkˈali dʒˈalan,satu arah means a one-way street,2,id-agent-v1;ipa=espeak
+trail-words.round-trip,Pulang-pergi,PP,pˈulaŋpɛrɡi,,2,id-agent-v1;ipa=espeak
+weather.forecast,Prakiraan cuacanya bagaimana?,,prˌakirˈaan tʃˌuatʃˈaɲa bˌaɡaɪmˈana,,2,id-agent-v1;ipa=espeak
+weather.will-it-rain,Hari ini akan hujan?,,hˈari ˈini ˈakan hˈudʒan,,2,id-agent-v1;ipa=espeak
+weather.is-it-safe-today,Hari ini aman?,,hˈari ˈini ˈaman,,2,id-agent-v1;ipa=espeak
+weather.how-cold-at-night,Seberapa dingin malam nanti?,,səbərˈapa dˈiŋin mˈalam nˈanti,,2,id-agent-v1;ipa=espeak
+weather.rain,Hujan,,hˈudʒan,,2,id-agent-v1;ipa=espeak
+weather.snow,Salju,,sˈaldʒu,,2,id-agent-v1;ipa=espeak
+weather.wind,Angin,,ˈaŋin,,2,id-agent-v1;ipa=espeak
+weather.storm,Badai,,bˈadaɪ,,2,id-agent-v1;ipa=espeak
+weather.ice,Lapisan es,,lapˈisan ˈes,"ice on the ground, not in a drink",2,id-agent-v1;ipa=espeak
+weather.fog,Kabut,,kˈabut,,2,id-agent-v1;ipa=espeak
+weather.heat,Panas,,pˈanas,,2,id-agent-v1;ipa=espeak
+weather.cold,Dingin,,dˈiŋin,,2,id-agent-v1;ipa=espeak
+weather.humid,Lembap,Lembab,lˈɛmbap,,2,id-agent-v1;ipa=espeak
+weather.sunrise,Matahari terbit,,mˌatahˈari tˈɛrbit,,2,id-agent-v1;ipa=espeak
+weather.flood,Banjir,,bˈandʒir,,2,id-agent-v1;ipa=espeak
+weather.avalanche-risk,Rawan longsoran salju,,rˈawan loŋsˈɔran sˈaldʒu,no Indonesian signage uses this,1,id-agent-v1;ipa=espeak
+hiking-parks.is-this-the-way-to,Ini jalan ke {}?,,ˈini dʒˈalan kə {},,2,id-agent-v1;ipa=espeak
+hiking-parks.where-is-the-trailhead,Awal jalurnya di mana?,,ˈawal dʒalˈurɲa di mˈana,,2,id-agent-v1;ipa=espeak
+hiking-parks.how-long-to-the-summit,Berapa lama ke puncak?,,bərˈapa lˈama kə pˈuntʃak,,2,id-agent-v1;ipa=espeak
+hiking-parks.how-long-to-the-viewpoint,Berapa lama ke titik pandang?,,bərˈapa lˈama kə tˈitik pˈandaŋ,,2,id-agent-v1;ipa=espeak
+hiking-parks.which-route-is-easier,Jalur mana yang lebih mudah?,,dʒˈalur mˈana jaŋ lˈɛbih mˈudah,,2,id-agent-v1;ipa=espeak
+hiking-parks.is-this-trail-suitable-for-beginners,Jalur ini cocok untuk pemula?,,dʒˈalur ˈini tʃˈotʃok ˌuntuk pəmˈula,,2,id-agent-v1;ipa=espeak
+trail-conditions.how-long-is-the-full-route,Total jalurnya berapa jauh?,,tˈotal dʒalˈurɲa bərˈapa dʒˈaʊh,,2,id-agent-v1;ipa=espeak
+trail-conditions.can-we-return-the-same-way,Bisa kembali lewat jalur yang sama?,,bˈisa kəmbˈali lˈɛwat dʒˈalur jaŋ sˈama,,2,id-agent-v1;ipa=espeak
+trail-conditions.can-we-return-before-dark,Bisa kembali sebelum gelap?,,bˈisa kəmbˈali səbˈɛlum ɡˈɛlap,,2,id-agent-v1;ipa=espeak
+trail-conditions.is-the-trail-open,Jalurnya buka?,,dʒalˈurɲa bˈuka,,2,id-agent-v1;ipa=espeak
+trail-conditions.is-the-route-steep,Jalurnya terjal?,,dʒalˈurɲa tˈɛrdʒal,,2,id-agent-v1;ipa=espeak
+trail-conditions.is-the-path-slippery,Jalannya licin?,,dʒalˈanɲa lˈitʃin,,2,id-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-queue,Antreannya berapa panjang?,,ˌantrəˈanɲa bərˈapa pˈandʒaŋ,,2,id-agent-v1;ipa=espeak
+trail-transport.what-time-is-the-last-shuttle,Shuttle terakhir jam berapa?,,shˈuttlə tərˈaxir dʒˈam bərˈapa,,2,id-agent-v1;ipa=espeak
+trail-transport.when-does-the-cableway-stop,Kereta gantung tutup jam berapa?,,kərˈɛta ɡˈantuŋ tˈutup dʒˈam bərˈapa,,2,id-agent-v1;ipa=espeak
+trail-transport.where-can-we-buy-water,Di mana bisa beli air?,,di mˈana bˈisa bˈɛli ˈair,,2,id-agent-v1;ipa=espeak
+trail-transport.where-can-we-refill-water,Di mana bisa isi ulang air?,,di mˈana bˈisa ˈisi ˈulaŋ ˈaɪr,,2,id-agent-v1;ipa=espeak
+trail-transport.is-there-cell-signal-here,Ada sinyal di sini?,,ˈada sˈiɲal di sˈini,,2,id-agent-v1;ipa=espeak
+trail-transport.do-you-have-a-map,Ada peta?,,ˈada pˈɛta,,2,id-agent-v1;ipa=espeak
+trail-transport.how-long-is-the-wait,Berapa lama menunggu?,,bərˈapa lˈama mənˈuŋɡu,,2,id-agent-v1;ipa=espeak
+trail-warnings.open,Buka,,bˈuka,,2,id-agent-v1;ipa=espeak
+trail-warnings.closed,Tutup,,tˈutup,,2,id-agent-v1;ipa=espeak
+trail-warnings.maintenance,Perbaikan,Sedang dalam perbaikan,pərbˈaɪkan,,2,id-agent-v1;ipa=espeak
+trail-warnings.steep-slope,Tanjakan terjal,Turunan curam,tandʒˈakan tˈɛrdʒal,,2,id-agent-v1;ipa=espeak
+trail-warnings.caution-slippery,Awas licin,Hati-hati licin,ˈawas lˈitʃin,,2,id-agent-v1;ipa=espeak
+trail-warnings.danger,Bahaya,,bahˈaja,,2,id-agent-v1;ipa=espeak
+trail-warnings.beware-falling-rocks,Awas batu jatuh,Rawan longsor,ˈawas bˈatu dʒˈatuh,,2,id-agent-v1;ipa=espeak
+trail-warnings.first-aid-station,Pos P3K,,pˈos pˈe tˈiɡa kˈa,P3K = first aid,2,id-agent-v1;ipa=espeak
+trail-warnings.service-suspended,Tidak beroperasi,Layanan dihentikan,tˈidak bərˌopərˈasi,,2,id-agent-v1;ipa=espeak
+trail-landmarks.trail-marker,Penanda jalur,,pənˈanda dʒˈalur,,2,id-agent-v1;ipa=espeak
+trail-landmarks.fork-junction,Percabangan,Persimpangan,pərtʃabˈaŋan,,2,id-agent-v1;ipa=espeak
+trail-landmarks.boardwalk-cliff-path,Jalan papan,Jalur tebing,dʒˈalan pˈapan,,2,id-agent-v1;ipa=espeak
+trail-landmarks.start,Awal,Mulai,ˈawal,,2,id-agent-v1;ipa=espeak
+trail-landmarks.end,Akhir,Selesai,ˈaxir,,2,id-agent-v1;ipa=espeak
+trail-landmarks.elevation,Ketinggian,,kətiŋɡˈian,,2,id-agent-v1;ipa=espeak
+trail-landmarks.sunset,Matahari terbenam,,mˌatahˈari tərbənam,,2,id-agent-v1;ipa=espeak
+trail-landmarks.water-point,Titik air,Sumber air,tˈitik ˈaɪr,,2,id-agent-v1;ipa=espeak

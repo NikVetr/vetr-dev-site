@@ -1,45 +1,45 @@
 concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
 atm-cash.where-is-an-atm,현금인출기 어디예요?,,hyeongeuminchulgi eodiyeyo?,,,2,ko-agent-v1
-atm-cash.does-this-atm-take-foreign-cards,외국 카드 돼요?,,oeguk kadeu dwaeyo?,,,2,ko-agent-v1
-atm-cash.the-atm-kept-my-card,기계가 카드를 먹었어요,,gigyega kadeureul meogeosseoyo,,machine ate my card,2,ko-agent-v1
-atm-cash.is-there-a-fee,수수료 있어요?,,susuryo isseoyo?,,,2,ko-agent-v1
-atm-cash.the-card-was-declined,카드가 안 됐어요,,kadeuga an dwaesseoyo,,,2,ko-agent-v1
-atm-cash.what-is-the-exchange-rate,환율이 얼마예요?,,hwannyuri eolmayeyo?,,,2,ko-agent-v1
-atm-cash.no-money-came-out,돈이 안 나왔어요,,doni an nawasseoyo,,,2,ko-agent-v1
-atm-cash.where-can-i-change-money,환전 어디서 해요?,,hwanjeon eodiseo haeyo?,,,2,ko-agent-v1
-atm-cash.the-machine-is-out-of-service,기계가 고장났어요,,gigyega gojangnasseoyo,,,2,ko-agent-v1
-atm-cash.please-give-me-smaller-notes,작은 지폐로 주세요,,jageun jipyero juseyo,,,2,ko-agent-v1
-atm-cash.do-you-have-change,잔돈 있어요?,,jandon isseoyo?,,,2,ko-agent-v1
-atm-cash.may-i-pay-in,{}로 낼 수 있어요?,,{}ro nael su isseoyo?,,,2,ko-agent-v1
-atm-cash.please-charge-in-local-currency,원화로 결제해 주세요,,wonhwaro gyeoljehae juseyo,,,2,ko-agent-v1
-atm-cash.where-can-i-get-coins,동전 어디서 바꿔요?,,dongjeon eodiseo bakkwoyo?,,,2,ko-agent-v1
-atm-cash.is-there-a-minimum-for-cards,카드 최소 금액 있어요?,,kadeu choeso geumaek isseoyo?,,,2,ko-agent-v1
+atm-cash.does-this-atm-take-foreign-cards,외국 카드 돼요?,,oeguk kadeu dwaeyo?,weɡuk kʰadɯ twɛjo,,2,ko-agent-v1;ipa=rr
+atm-cash.the-atm-kept-my-card,기계가 카드를 먹었어요,,gigyega kadeureul meogeosseoyo,kiɡjeɡa kʰadɯɾɯl mʌɡʌs͈ʌjo,machine ate my card,2,ko-agent-v1;ipa=rr
+atm-cash.is-there-a-fee,수수료 있어요?,,susuryo isseoyo?,susuɾjo is͈ʌjo,,2,ko-agent-v1;ipa=rr
+atm-cash.the-card-was-declined,카드가 안 됐어요,,kadeuga an dwaesseoyo,kʰadɯɡa an twɛs͈ʌjo,,2,ko-agent-v1;ipa=rr
+atm-cash.what-is-the-exchange-rate,환율이 얼마예요?,,hwannyuri eolmayeyo?,hwannjuɾi ʌlmajejo,,2,ko-agent-v1;ipa=rr
+atm-cash.no-money-came-out,돈이 안 나왔어요,,doni an nawasseoyo,toni an nawas͈ʌjo,,2,ko-agent-v1;ipa=rr
+atm-cash.where-can-i-change-money,환전 어디서 해요?,,hwanjeon eodiseo haeyo?,hwandʑʌn ʌdisʌ hɛjo,,2,ko-agent-v1;ipa=rr
+atm-cash.the-machine-is-out-of-service,기계가 고장났어요,,gigyega gojangnasseoyo,kiɡjeɡa kodʑaŋnas͈ʌjo,,2,ko-agent-v1;ipa=rr
+atm-cash.please-give-me-smaller-notes,작은 지폐로 주세요,,jageun jipyero juseyo,tɕaɡɯn tɕipʰjeɾo tɕusejo,,2,ko-agent-v1;ipa=rr
+atm-cash.do-you-have-change,잔돈 있어요?,,jandon isseoyo?,tɕandon is͈ʌjo,,2,ko-agent-v1;ipa=rr
+atm-cash.may-i-pay-in,{}로 낼 수 있어요?,,{}ro nael su isseoyo?,{} ɾo nɛl su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+atm-cash.please-charge-in-local-currency,원화로 결제해 주세요,,wonhwaro gyeoljehae juseyo,wʌnhwaɾo kjʌldʑehɛ tɕusejo,,2,ko-agent-v1;ipa=rr
+atm-cash.where-can-i-get-coins,동전 어디서 바꿔요?,,dongjeon eodiseo bakkwoyo?,toŋdʑʌn ʌdisʌ pak͈wʌjo,,2,ko-agent-v1;ipa=rr
+atm-cash.is-there-a-minimum-for-cards,카드 최소 금액 있어요?,,kadeu choeso geumaek isseoyo?,kʰadɯ tɕʰweso kɯmɛk is͈ʌjo,,2,ko-agent-v1;ipa=rr
 atm-cash.atm,현금인출기,ATM,hyeongeuminchulgi,,,2,ko-agent-v1
-atm-cash.banknote,지폐,,jipye,,,2,ko-agent-v1
-atm-cash.coin,동전,,dongjeon,,,2,ko-agent-v1
+atm-cash.banknote,지폐,,jipye,tɕipʰje,,2,ko-agent-v1;ipa=rr
+atm-cash.coin,동전,,dongjeon,toŋdʑʌn,,2,ko-agent-v1;ipa=rr
 atm-cash.cash-only,현금만 가능,현금 전용,hyeongeumman ganeung,,,2,ko-agent-v1
-atm-cash.fee,수수료,,susuryo,,,2,ko-agent-v1
-atm-cash.change,잔돈,거스름돈,jandon,,,2,ko-agent-v1
-atm-cash.exchange-rate,환율,,hwannyul,,,2,ko-agent-v1
-atm-cash.bank,은행,,eunhaeng,,,2,ko-agent-v1
-atm-cash.money-exchange,환전소,,hwanjeonso,,,2,ko-agent-v1
-atm-cash.pin,비밀번호,PIN,bimilbeonho,,,2,ko-agent-v1
-numbers-money.l-ng,영,공,yeong,,or 공 on phones,2,ko-agent-v1
-numbers-money.y,일,하나,il,,Sino / native,2,ko-agent-v1
-numbers-money.r,이,둘,i,,Sino / native,2,ko-agent-v1
-numbers-money.s-n,삼,셋,sam,,Sino / native,2,ko-agent-v1
-numbers-money.s,사,넷,sa,,Sino / native,2,ko-agent-v1
-numbers-money.w,오,다섯,o,,Sino / native,2,ko-agent-v1
-numbers-money.li,육,여섯,yuk,,Sino / native,2,ko-agent-v1
-numbers-money.q,칠,일곱,chil,,Sino / native,2,ko-agent-v1
-numbers-money.b,팔,여덟,pal,,Sino / native,2,ko-agent-v1
-numbers-money.ji,구,아홉,gu,,Sino / native,2,ko-agent-v1
-numbers-money.sh,십,열,sip,,Sino / native,2,ko-agent-v1
-numbers-money.y-b-i,백,,baek,,,2,ko-agent-v1
-numbers-money.y-qi-n,천,,cheon,,,2,ko-agent-v1
-numbers-money.y-w-n,만,,man,,,2,ko-agent-v1
-numbers-money.b-n,반,,ban,,,2,ko-agent-v1
-numbers-money.won,원,,won,,,2,ko-agent-v1
-numbers-money.won-symbol,₩,,won,,,2,ko-agent-v1
+atm-cash.fee,수수료,,susuryo,susuɾjo,,2,ko-agent-v1;ipa=rr
+atm-cash.change,잔돈,거스름돈,jandon,tɕandon,,2,ko-agent-v1;ipa=rr
+atm-cash.exchange-rate,환율,,hwannyul,hwannjul,,2,ko-agent-v1;ipa=rr
+atm-cash.bank,은행,,eunhaeng,ɯnhɛŋ,,2,ko-agent-v1;ipa=rr
+atm-cash.money-exchange,환전소,,hwanjeonso,hwandʑʌnso,,2,ko-agent-v1;ipa=rr
+atm-cash.pin,비밀번호,PIN,bimilbeonho,pimilbʌnho,,2,ko-agent-v1;ipa=rr
+numbers-money.l-ng,영,공,yeong,jʌŋ,or 공 on phones,2,ko-agent-v1;ipa=rr
+numbers-money.y,일,하나,il,il,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.r,이,둘,i,i,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.s-n,삼,셋,sam,sam,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.s,사,넷,sa,sa,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.w,오,다섯,o,o,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.li,육,여섯,yuk,juk,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.q,칠,일곱,chil,tɕʰil,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.b,팔,여덟,pal,pʰal,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.ji,구,아홉,gu,ku,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.sh,십,열,sip,sip,Sino / native,2,ko-agent-v1;ipa=rr
+numbers-money.y-b-i,백,,baek,pɛk,,2,ko-agent-v1;ipa=rr
+numbers-money.y-qi-n,천,,cheon,tɕʰʌn,,2,ko-agent-v1;ipa=rr
+numbers-money.y-w-n,만,,man,man,,2,ko-agent-v1;ipa=rr
+numbers-money.b-n,반,,ban,pan,,2,ko-agent-v1;ipa=rr
+numbers-money.won,원,,won,wʌn,,2,ko-agent-v1;ipa=rr
+numbers-money.won-symbol,₩,,won,wʌn,,2,ko-agent-v1;ipa=rr
 numbers-money.number-and-classifier-notes,"수는 십일, 이십처럼 쌓아요: 11 = shíyī, 20 = èrshí. 단 백, 천, 만 앞에는 yī가 붙고(yìbǎi, yíwàn), 중간이 비면 líng을 넣어요(101 = yìbǎi líng yī). 단위명사 앞의 2는 èr이 아니라 liǎng이에요, 둘이 두가 되는 것과 같아요. gè = 개, zhāng = 장, píng = 병은 그대로지만, 사람은 명이 아니라 gè, 높이면 wèi, 잔은 bēi예요. 전화에서 1은 yāo. 말할 때 yuán은 kuài, jiǎo / máo = 0.1위안, fēn = 0.01위안.",,,,,2,ko-notes-v1
 numbers-money.number-and-classifier-notes-2,"수는 십일, 이십처럼 쌓아요: 11 = jūichi, 20 = nijū. 단 만은 ichi를 붙여 ichiman이에요. 세는 말: -tsu(물건), -mai(납작한 것), -hon(긴 것), -nin(사람), -hai(잔). 고유수사가 붙는 자리가 우리와 달라서 -tsu는 hitotsu, futatsu처럼 아홉까지고, 사람은 hitori, futari 다음이 sannin이에요. 전화는 0 = zero/maru, 4 = yon, 7 = nana, 9 = kyū.",,,,,2,ko-notes-v1

@@ -1,60 +1,60 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-building-help.what-room-number-is-this,What room number is this?,,,,2,latex-reference-v2
-building-help.i-am-lost,I am lost,,,,2,latex-reference-v2
-building-help.where-is-reception,Where is reception?,,,,2,latex-reference-v2
-building-help.where-is-a-power-outlet,Where is a power outlet?,,,,2,latex-reference-v2
-in-a-building.is-this-the-correct-entrance,Is this the correct entrance?,,,,2,latex-reference-v2
-in-a-building.do-you-have-wi-fi,Do you have Wi-Fi?,,,,2,latex-reference-v2
-in-a-building.what-is-the-wi-fi-password,What is the Wi-Fi password?,,,,2,latex-reference-v2
-in-a-building.which-floor,Which floor?,,,,2,latex-reference-v2
-building-words.elevator,elevator,,,,2,latex-reference-v2
-building-words.stairs,stairs,,,,2,latex-reference-v2
-building-words.entrance,entrance,,,,2,latex-reference-v2
-building-words.exit,exit,,,,2,latex-reference-v2
-building-words.men,men,,,,2,latex-reference-v2
-building-words.women,women,,,,2,latex-reference-v2
-building-words.door,door,,,,2,latex-reference-v2
-building-words.key,key,,,,2,latex-reference-v2
-toilets.where-toilet,Where is the toilet?,,,,2,expansion-v1
-toilets.where-public-toilet,Where is a public toilet?,,,,2,expansion-v1
-toilets.may-i-use-the-toilet,May I use the toilet?,,,,2,expansion-v1
-toilets.is-it-only-for-customers,Is it only for customers?,,,,2,expansion-v1
-toilets.toilet-wc,toilet / WC,,,,2,expansion-v1
-toilets.is-it-free,Is it free?,,,,2,expansion-v1
-toilets.do-i-need-a-coin,Do I need a coin or token?,,,,2,expansion-v1
-toilets.is-the-tap-water-safe-to-drink,Is the tap water safe to drink?,,,,2,expansion-v1
-toilets.it-is-urgent,It is urgent,,,,2,expansion-v1
-toilets.may-i-have-the-toilet-key,May I have the toilet key?,,,,2,expansion-v1
-toilets.there-is-no-toilet-paper,There is no toilet paper,,,,2,expansion-v1
-toilets.toilet-paper,toilet paper,,,,2,expansion-v1
-toilets.it-is-out-of-order,It is out of order,,,,2,expansion-v1
-toilets.out-of-order,out of order,,,,2,expansion-v1
-toilets.mens-toilet,men's toilet,,,,2,expansion-v1
-toilets.womens-toilet,women's toilet,,,,2,expansion-v1
-toilets.drinking-water,drinking water,,,,2,expansion-v1
-toilets.not-for-drinking,not for drinking,,,,2,expansion-v1
-toilets.accessible-toilet,accessible toilet,,,,2,expansion-v1
-toilets.where-can-i-wash-my-hands,Where can I wash my hands?,,,,2,expansion-v1
-toilets.can-i-flush-the-paper,Can I flush the paper?,,,,2,expansion-v1
-toilets.is-there-a-toilet-on-board,Is there a toilet on board?,,,,2,expansion-v1
-toilets.the-toilet-will-not-flush,The toilet will not flush,,,,2,expansion-v1
-toilets.baby-change,baby change,,,,2,expansion-v1
-toilets.squat-toilet,squat toilet,,,,2,expansion-v1
-accessibility.step-free,Is there step-free access?,,,,2,expansion-v1
-accessibility.wheelchair-access,Is it wheelchair accessible?,,,,2,expansion-v1
-accessibility.elevator,Is there an elevator?,,,,2,expansion-v1
-accessibility.ramp,Is there a ramp?,,,,2,expansion-v1
-accessibility.how-many-steps,How many steps are there?,,,,2,expansion-v1
-accessibility.cannot-climb-stairs,I cannot climb stairs,,,,2,expansion-v1
-accessibility.need-to-sit-down,I need to sit down,,,,2,expansion-v1
-accessibility.accessible-restroom,Is there an accessible restroom?,,,,2,expansion-v1
-accessibility.station-assistance,Is there assistance at the station?,,,,2,expansion-v1
-accessibility.help-me-carry,Please help me carry this,,,,2,expansion-v1
-accessibility.board-first,May I board first?,,,,2,expansion-v1
-accessibility.door-width,How wide is the door?,,,,2,expansion-v1
-accessibility.wheelchair-width,My wheelchair is {} cm wide,,,,2,expansion-v1
-accessibility.hard-of-hearing,I am hard of hearing,,,,2,expansion-v1
-accessibility.speak-louder,Please speak louder,,,,2,expansion-v1
-accessibility.visually-impaired,I am visually impaired,,,,2,expansion-v1
-accessibility.take-your-arm,May I take your arm?,,,,2,expansion-v1
-accessibility.guide-dog,This is my guide dog,,,,2,expansion-v1
+building-help.what-room-number-is-this,What room number is this?,,wˌʌt ɹˈuːm nˈʌmbɚɹ ɪz ðˈɪs,,2,latex-reference-v2;ipa=espeak
+building-help.i-am-lost,I am lost,,aɪɐm lˈɔst,,2,latex-reference-v2;ipa=espeak
+building-help.where-is-reception,Where is reception?,,wˌɛɹ ɪz ɹɪsˈɛpʃən,,2,latex-reference-v2;ipa=espeak
+building-help.where-is-a-power-outlet,Where is a power outlet?,,wˌɛɹ ɪz ɐ pˈaʊɚɹ ˈaʊtlɛt,,2,latex-reference-v2;ipa=espeak
+in-a-building.is-this-the-correct-entrance,Is this the correct entrance?,,ɪz ðɪs ðə kɚɹˈɛkt ˈɛntɹəns,,2,latex-reference-v2;ipa=espeak
+in-a-building.do-you-have-wi-fi,Do you have Wi-Fi?,,dˈuː juː hæv wˈaɪfˌaɪ,,2,latex-reference-v2;ipa=espeak
+in-a-building.what-is-the-wi-fi-password,What is the Wi-Fi password?,,wˌʌt ɪz ðə wˈaɪfˌaɪ pˈæswɜːd,,2,latex-reference-v2;ipa=espeak
+in-a-building.which-floor,Which floor?,,wˌɪtʃ flˈoːɹ,,2,latex-reference-v2;ipa=espeak
+building-words.elevator,elevator,,ˈɛlɪvˌeɪɾɚ,,2,latex-reference-v2;ipa=espeak
+building-words.stairs,stairs,,stˈɛɹz,,2,latex-reference-v2;ipa=espeak
+building-words.entrance,entrance,,ˈɛntɹəns,,2,latex-reference-v2;ipa=espeak
+building-words.exit,exit,,ˈɛɡzɪt,,2,latex-reference-v2;ipa=espeak
+building-words.men,men,,mˈɛn,,2,latex-reference-v2;ipa=espeak
+building-words.women,women,,wˈɪmɪn,,2,latex-reference-v2;ipa=espeak
+building-words.door,door,,dˈoːɹ,,2,latex-reference-v2;ipa=espeak
+building-words.key,key,,kˈiː,,2,latex-reference-v2;ipa=espeak
+toilets.where-toilet,Where is the toilet?,,wˌɛɹ ɪz ðə tˈɔɪlɪt,,2,expansion-v1;ipa=espeak
+toilets.where-public-toilet,Where is a public toilet?,,wˌɛɹ ɪz ɐ pˈʌblɪk tˈɔɪlɪt,,2,expansion-v1;ipa=espeak
+toilets.may-i-use-the-toilet,May I use the toilet?,,mˈeɪ aɪ jˈuːz ðə tˈɔɪlɪt,,2,expansion-v1;ipa=espeak
+toilets.is-it-only-for-customers,Is it only for customers?,,ɪz ɪɾ ˈoʊnli fɔːɹ kˈʌstəmɚz,,2,expansion-v1;ipa=espeak
+toilets.toilet-wc,toilet / WC,,tˈɔɪlɪt / dˌʌbəljˌuːsˈiː,,2,expansion-v1;ipa=espeak
+toilets.is-it-free,Is it free?,,ɪz ɪt fɹˈiː,,2,expansion-v1;ipa=espeak
+toilets.do-i-need-a-coin,Do I need a coin or token?,,dˈuː aɪ nˈiːd ɐ kˈɔɪn ɔːɹ tˈoʊkən,,2,expansion-v1;ipa=espeak
+toilets.is-the-tap-water-safe-to-drink,Is the tap water safe to drink?,,ɪz ðə tˈæp wˈɔːɾɚ sˈeɪf tə dɹˈɪŋk,,2,expansion-v1;ipa=espeak
+toilets.it-is-urgent,It is urgent,,ɪɾ ɪz ˈɜːdʒənt,,2,expansion-v1;ipa=espeak
+toilets.may-i-have-the-toilet-key,May I have the toilet key?,,mˈeɪ aɪ hæv ðə tˈɔɪlɪt kˈiː,,2,expansion-v1;ipa=espeak
+toilets.there-is-no-toilet-paper,There is no toilet paper,,ðɛɹ ɪz nˈoʊ tˈɔɪlɪt pˈeɪpɚ,,2,expansion-v1;ipa=espeak
+toilets.toilet-paper,toilet paper,,tˈɔɪlɪt pˈeɪpɚ,,2,expansion-v1;ipa=espeak
+toilets.it-is-out-of-order,It is out of order,,ɪɾ ɪz ˌaʊɾəv ˈɔːɹdɚ,,2,expansion-v1;ipa=espeak
+toilets.out-of-order,out of order,,ˌaʊɾəv ˈɔːɹdɚ,,2,expansion-v1;ipa=espeak
+toilets.mens-toilet,men's toilet,,mˈɛnz tˈɔɪlɪt,,2,expansion-v1;ipa=espeak
+toilets.womens-toilet,women's toilet,,wˈɪmɪnz tˈɔɪlɪt,,2,expansion-v1;ipa=espeak
+toilets.drinking-water,drinking water,,dɹˈɪŋkɪŋ wˈɔːɾɚ,,2,expansion-v1;ipa=espeak
+toilets.not-for-drinking,not for drinking,,nˌɑːt fɔːɹ dɹˈɪŋkɪŋ,,2,expansion-v1;ipa=espeak
+toilets.accessible-toilet,accessible toilet,,æksˈɛsəbəl tˈɔɪlɪt,,2,expansion-v1;ipa=espeak
+toilets.where-can-i-wash-my-hands,Where can I wash my hands?,,wˌɛɹ kæn aɪ wˈɑːʃ maɪ hˈændz,,2,expansion-v1;ipa=espeak
+toilets.can-i-flush-the-paper,Can I flush the paper?,,kæn aɪ flˈʌʃ ðə pˈeɪpɚ,,2,expansion-v1;ipa=espeak
+toilets.is-there-a-toilet-on-board,Is there a toilet on board?,,ɪz ðɛɹ ɐ tˈɔɪlɪt ˌɔn bˈoːɹd,,2,expansion-v1;ipa=espeak
+toilets.the-toilet-will-not-flush,The toilet will not flush,,ðə tˈɔɪlɪt wɪl nˌɑːt flˈʌʃ,,2,expansion-v1;ipa=espeak
+toilets.baby-change,baby change,,bˈeɪbi tʃˈeɪndʒ,,2,expansion-v1;ipa=espeak
+toilets.squat-toilet,squat toilet,,skwˈɑːt tˈɔɪlɪt,,2,expansion-v1;ipa=espeak
+accessibility.step-free,Is there step-free access?,,ɪz ðɛɹ stˈɛpfɹiː ˈæksɛs,,2,expansion-v1;ipa=espeak
+accessibility.wheelchair-access,Is it wheelchair accessible?,,ɪz ɪt wˈiːltʃɛɹ æksˈɛsəbəl,,2,expansion-v1;ipa=espeak
+accessibility.elevator,Is there an elevator?,,ɪz ðɛɹ ɐn ˈɛlɪvˌeɪɾɚ,,2,expansion-v1;ipa=espeak
+accessibility.ramp,Is there a ramp?,,ɪz ðɛɹ ɐ ɹˈæmp,,2,expansion-v1;ipa=espeak
+accessibility.how-many-steps,How many steps are there?,,hˌaʊ mˈɛni stˈɛps ɑːɹ ðˈɛɹ,,2,expansion-v1;ipa=espeak
+accessibility.cannot-climb-stairs,I cannot climb stairs,,aɪ kænˈɑːt klˈaɪm stˈɛɹz,,2,expansion-v1;ipa=espeak
+accessibility.need-to-sit-down,I need to sit down,,aɪ nˈiːd tə sˈɪt dˈaʊn,,2,expansion-v1;ipa=espeak
+accessibility.accessible-restroom,Is there an accessible restroom?,,ɪz ðɛɹ ɐn æksˈɛsəbəl ɹˈɛstɹuːm,,2,expansion-v1;ipa=espeak
+accessibility.station-assistance,Is there assistance at the station?,,ɪz ðɛɹ ɐsˈɪstəns æt ðə stˈeɪʃən,,2,expansion-v1;ipa=espeak
+accessibility.help-me-carry,Please help me carry this,,plˈiːz hˈɛlp mˌiː kˈæɹi ðˈɪs,,2,expansion-v1;ipa=espeak
+accessibility.board-first,May I board first?,,mˈeɪ aɪ bˈoːɹd fˈɜːst,,2,expansion-v1;ipa=espeak
+accessibility.door-width,How wide is the door?,,hˌaʊ wˈaɪd ɪz ðə dˈoːɹ,,2,expansion-v1;ipa=espeak
+accessibility.wheelchair-width,My wheelchair is {} cm wide,,maɪ wˈiːltʃɛɹ ɪz {} sˌiːˈɛm wˈaɪd,,2,expansion-v1;ipa=espeak
+accessibility.hard-of-hearing,I am hard of hearing,,aɪɐm hˈɑːɹd ʌv hˈɪɹɪŋ,,2,expansion-v1;ipa=espeak
+accessibility.speak-louder,Please speak louder,,plˈiːz spˈiːk lˈaʊdɚ,,2,expansion-v1;ipa=espeak
+accessibility.visually-impaired,I am visually impaired,,aɪɐm vˈɪʒuːəli ɪmpˈɛɹd,,2,expansion-v1;ipa=espeak
+accessibility.take-your-arm,May I take your arm?,,mˈeɪ aɪ tˈeɪk jʊɹ ˈɑːɹm,,2,expansion-v1;ipa=espeak
+accessibility.guide-dog,This is my guide dog,,ðɪs ɪz maɪ ɡˈaɪd dˈɑːɡ,,2,expansion-v1;ipa=espeak
