@@ -125,7 +125,25 @@ export function warningText(warning) {
   const key = `warn.${warning.code}`;
   const template = overlay[key] ?? english[key];
   if (template === undefined) return warning.message;
-  return t(key, warning.params);
+  // A `region` param is an ISO 3166 code, because the solver has no business
+  // knowing what language the interface is in -- the same split as `warn.<code>`
+  // itself. This is where a code becomes a name the reader recognises.
+  const params = warning.params?.region
+    ? { ...warning.params, region: regionName(String(warning.params.region)) }
+    : warning.params;
+  return t(key, params);
+}
+
+/**
+ * A country's name in the interface language, or its code if we cannot.
+ * @param {string} code ISO 3166-1 alpha-2
+ */
+function regionName(code) {
+  try {
+    return new Intl.DisplayNames([active], { type: 'region' }).of(code) || code;
+  } catch {
+    return code;
+  }
 }
 
 /**

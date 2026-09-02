@@ -241,7 +241,7 @@ export function layout(input) {
     warnings.push({
       code: 'emergency-unreviewed',
       severity: 'warn',
-      params: { region: emergency.region.name_en },
+      params: { region: emergency.region.iso3166 },
       message: `The emergency numbers on file for ${emergency.region.name_en} have not `
         + 'been checked by a fluent speaker, so they are left off the sheet. Verify them '
         + 'and raise their confidence, or add your own with the CSV import.',
