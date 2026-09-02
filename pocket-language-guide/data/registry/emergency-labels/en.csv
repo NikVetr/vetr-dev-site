@@ -1,5 +1,5 @@
 label,text
-_frame,In {region}: {numbers}
+_frame,{region}: {numbers}
 all services,all services
 police,police
 ambulance,ambulance

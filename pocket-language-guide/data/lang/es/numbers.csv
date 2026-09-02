@@ -42,10 +42,10 @@ numbers-money.y-w-n,diez mil,,,,2,es-agent-v1
 numbers-money.b-n,medio,la mitad,,,2,es-agent-v1
 numbers-money.yu-n,el yuan,,,,2,es-agent-v1
 numbers-money.ku-i,el yuan,el renminbi,,,1,es-agent-v1
-numbers-money.number-and-classifier-notes,"Números: 11 once, 12 doce, 13 trece, 14 catorce, 15 quince, 16 dieciséis, 20 veinte, 21 veintiuno, 30 treinta, 31 treinta y uno, 100 cien, 101 ciento uno, 200 doscientos, 500 quinientos, 1000 mil, 1 000 000 un millón. Antes del sustantivo uno se acorta a un / una: un café, una mesa. Los ordinales primero y tercero pierden la -o: primer piso, tercer día.",,,,2,es-agent-v1
+numbers-money.number-and-classifier-notes,"Para formar números: 11 = shi yi; 20 = er shi; 21 = er shi yi. En un número de teléfono, 1 suele ser yao. Entre el número y el sustantivo va un clasificador: ge (general), wei (personas), zhang (entradas, cosas planas), bei (tazas), ping (botellas). jiao / mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,es-notes-v1
 numbers-money.2-items,dos,dos unidades,,,1,es-agent-v1
 numbers-money.yen,el yen,,,,2,es-agent-v1
 numbers-money.yen-symbol,¥,yen,,,2,es-agent-v1
-numbers-money.number-and-classifier-notes-2,"Dinero: el punto separa los miles y la coma los decimales: 1.500,50. Céntimo (España) o centavo (América) = 0,01. «billete» = papel; «moneda» = metal; «cambio» o «vuelto» = lo que le devuelven; «suelto» o «sencillo» = monedas pequeñas. Monedas: euro (España), peso (México, Argentina, Chile, Colombia), sol (Perú).",,,,2,es-agent-v1
+numbers-money.number-and-classifier-notes-2,"Para formar números: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Contadores: -tsu (objetos), -mai (cosas planas), -hon (cosas largas), -nin (personas), -hai (tazas). Al leer un teléfono: 0 = zero o maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,es-notes-v1
 numbers-money.euro,el euro,,,,2,es-agent-v1
 numbers-money.euro-symbol,€,euro,,,2,es-agent-v1

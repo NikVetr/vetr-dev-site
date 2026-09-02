@@ -42,10 +42,10 @@ numbers-money.y-w-n,zehntausend,,,,2,de-agent-v1
 numbers-money.b-n,halb,die Hälfte,,,2,de-agent-v1
 numbers-money.yu-n,Yuan,Renminbi,,,2,de-agent-v1
 numbers-money.ku-i,Yuan,Kuai,,,1,de-agent-v1
-numbers-money.number-and-classifier-notes,,,,,2,de-agent-v1
+numbers-money.number-and-classifier-notes,"Zahlen bauen: 11 = shíyī, 20 = èrshí, 21 = èrshíyī. Am Telefon: 1 meist yāo. Zählwörter: gè (allgemein), wèi (Personen), zhāng (Tickets, Flaches), bēi (Tassen), píng (Flaschen). jiǎo / máo = 0,1 Yuan, fēn = 0,01 Yuan.",,,,2,de-notes-v1
 numbers-money.2-items,zwei Stück,,,,2,de-agent-v1
 numbers-money.yen,Yen,,,,2,de-agent-v1
 numbers-money.yen-symbol,¥,,,,2,de-agent-v1
-numbers-money.number-and-classifier-notes-2,,,,,2,de-agent-v1
+numbers-money.number-and-classifier-notes-2,"Zahlen bauen: 11 = jūichi, 20 = nijū, 21 = nijūichi. Zählsuffixe: -tsu (Dinge), -mai (Flaches), -hon (Langes), -nin (Personen), -hai (Tassen). Am Telefon: 0 = zero oder maru, 4 = yon, 7 = nana, 9 = kyū.",,,,2,de-notes-v1
 numbers-money.euro,Euro,,,,2,coordinator-gaps-v2
 numbers-money.euro-symbol,€,Euro,,,2,coordinator-gaps-v2

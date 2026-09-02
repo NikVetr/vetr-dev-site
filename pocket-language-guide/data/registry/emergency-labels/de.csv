@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,Notruf
+police,Polizei
+ambulance,Rettung
+fire,Feuerwehr
+also works,geht auch
+fire and ambulance,Feuerwehr + Rettung
+medical,Notarzt
+tourist police,Touristenpolizei
+police and ambulance,Polizei + Rettung
+gendarmerie,Gendarmerie

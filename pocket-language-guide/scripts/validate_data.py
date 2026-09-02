@@ -307,6 +307,15 @@ def main():
             warnings.append(f"registry/emergency-labels: {code} is missing "
                             f"{len(missing)} of {len(wanted_labels)} labels, so its "
                             "emergency note prints in English")
+        # The frame is the only string here with placeholders, and dropping one is
+        # silent: `{numbers}` missing prints the country and no numbers at all,
+        # under the Emergency heading, which is the worst possible place for it.
+        if (DATA / rel).exists():
+            frame = next((r["text"] for r in load(rel) if r["label"] == "_frame"), "")
+            for token in ("{region}", "{numbers}"):
+                if frame and token not in frame:
+                    errors.append(f"{rel}: the _frame has no {token}, so the "
+                                  "emergency note would print without it")
 
     reviewed = sum(1 for r in regions.values() if int(r["confidence"] or 0) >= MIN_SAFE_CONFIDENCE)
     if reviewed < len(regions):

@@ -41,3 +41,4 @@ months.september,septiembre,setiembre,,,2,es-agent-v1
 months.october,octubre,,,,2,es-agent-v1
 months.november,noviembre,,,,2,es-agent-v1
 months.december,diciembre,,,,2,es-agent-v1
+time-words.clock-offset,"El reloj suajili empieza al amanecer, seis horas por detrás del de pulsera: sume seis al número suajili para saber la hora del reloj. saa moja = 7:00, saa sita = mediodía, saa kumi = 16:00. Diga la cifra, o pregunte saa ngapi za kizungu para la hora occidental.",,,,2,es-notes-v1

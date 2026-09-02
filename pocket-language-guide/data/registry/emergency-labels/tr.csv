@@ -1,0 +1,12 @@
+label,text
+_frame,{region} için: {numbers}
+all services,tüm acil durumlar
+police,polis
+ambulance,ambulans
+fire,itfaiye
+also works,bu da geçerli
+fire and ambulance,itfaiye ve ambulans
+medical,acil sağlık
+tourist police,turizm polisi
+police and ambulance,polis ve ambulans
+gendarmerie,jandarma

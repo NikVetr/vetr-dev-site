@@ -250,6 +250,13 @@ export function emergencyNote(corpus, regionCode, source = 'en', labels = {}) {
     // holds the English service word, which doubles as the lookup key: there are ten
     // of them across all 49 regions, and using the English as the key means the
     // registry stays readable and needs no migration when a label is added.
+    //
+    // The frame carries no preposition, in English or in the three other languages
+    // written so far. "In {region}" wanted an article for three of the 49 names --
+    // "In United States" -- and in Portuguese a contraction and in Turkish a
+    // locative suffix, none of which a frame that never sees the name can supply.
+    // A bare `{region}:` under a heading that already says Emergency is right for
+    // every country and two characters shorter.
     .map((entry) => {
       const [, digits, label] = /^([\d/]+)\s*(.*)$/.exec(entry) ?? [];
       if (!digits) return entry;
@@ -257,7 +264,7 @@ export function emergencyNote(corpus, regionCode, source = 'en', labels = {}) {
       return service ? `${digits} ${service}` : digits;
     });
   return {
-    text: (labels._frame ?? 'In {region}: {numbers}')
+    text: (labels._frame ?? '{region}: {numbers}')
       .replace('{region}', regionName(regionCode, source, region.name_en))
       .replace('{numbers}', numbers.join(' \u00b7 ')),
     region,

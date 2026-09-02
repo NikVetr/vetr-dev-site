@@ -41,3 +41,5 @@ atm-cash.money-exchange,döviz bürosu,DÖVİZ,,,2,tr-agent-v1
 atm-cash.pin,şifre,PIN,,,2,tr-agent-v1
 numbers-money.lira,lira,Türk lirası,,,2,coordinator-gaps-v2
 numbers-money.lira-symbol,₺,TL,,,2,coordinator-gaps-v2
+numbers-money.number-and-classifier-notes,"Sayı kurma: 11 = shi yi; 20 = er shi; 21 = er shi yi. Telefonda 1 çoğu zaman yao okunur. Ölçü sözcükleri: ge (genel), wei (kişi), zhang (bilet, yassı şeyler), bei (bardak), ping (şişe). Para: jiao / mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,tr-notes-v1
+numbers-money.number-and-classifier-notes-2,"Sayı kurma: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Sayma ekleri: -tsu (nesne), -mai (yassı), -hon (uzun), -nin (kişi), -hai (bardak). Telefonda: 0 = zero ya da maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,tr-notes-v1

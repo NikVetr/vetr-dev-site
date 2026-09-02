@@ -97,3 +97,4 @@ children.warm-this-bottle,Bu biberonu ısıtır mısınız?,,,,2,tr-agent-v1
 children.car-seat,Çocuk oto koltuğu gerekiyor.,,,,2,tr-agent-v1
 children.stroller,bebek arabası,,,,2,tr-agent-v1
 children.playground,Oyun alanı var mı?,,,,2,tr-agent-v1
+social-basics.politeness-particles,"Tay dilinde nezaket: cümlenin sonuna erkekseniz khrap, kadınsanız kha ekleyin. Kadın soru sorarken kha sözcüğünü yükselen tonla söyler. Buradaki satırlarda bu sözcük yok, kendiniz ekleyin.",,,,2,tr-notes-v1
