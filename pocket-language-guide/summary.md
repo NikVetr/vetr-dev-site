@@ -298,7 +298,16 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   nothing new shipped to buy it. A pinned fit is still a cached answer, so when it
   does not fit — which any change to the type or the spacing causes until the packs
   are re-rendered — it falls back to the search rather than drawing an empty card.
-- **`sheet.html`** — presets and export, for people who do not want the studio.
+- **`sheet.html`** — presets and export, for people who do not want the studio. A
+  deliberate subset, sharing the studio's controls so the two pages read as one app:
+  card size, priority, typeface, breathing room, palette, ink and resolution. Card
+  size and palette carry the same `Custom` rows the studio does, because a reader who
+  wants 4×3in or their own section colours should not have to open the studio for a
+  number this page can perfectly well take — and the CVD-safe palette in particular
+  is needed *before* printing, since colour is the section encoding. The priority
+  ladder is here for a positive reason rather than for completeness: the phone card
+  plus its top step is a lock screen, and that is the one thing the quick path does
+  better than the studio.
 - **`customize.html`** — the studio: format (20%) · faces (50%) · content (30%).
   Faces open as a grid, click one to focus it with the rest as a thumbnail strip.
   Clicking a row on a face reveals it in the content tree and vice versa. The
@@ -557,6 +566,62 @@ printed as whitespace in the wrong place:
   few points of it landed at the foot of the column. The ceiling still exists, and
   still binds: an underfull column should look underfull rather than be stretched
   into a ladder of canyons.
+
+## A card for a screen, and how much of the corpus goes on it
+
+The sheet was only ever paper, and one request changed that: the highest-priority
+phrases on a single face, set as a phone lock screen while travelling. Two settings,
+and they are only useful together.
+
+**`phone-1col` is 180 × 396pt — exactly 2.5 × 5.5in**, one column, one face. The
+page size is the *physical* size of a phone screen rather than a round number of
+points, and that is load-bearing rather than cosmetic: the legibility floors in
+`data/registry/scripts.csv` are in points, so at this page size they **are** the
+apparent sizes on the glass, and the whole type-fitting apparatus is correct with no
+reinterpretation. A larger page in points would fit more rows while silently
+rendering them below their floor once scaled to the screen. It also lands on whole
+pixels at every offered resolution — 375×825, 750×1650, 1500×3300 — because the PNG
+path multiplies by `dpi/72` and a fractional product resamples.
+
+One column, not two. The usable 162pt is *wider* than any column the app otherwise
+produces (7×5/4col is 120pt, A6/2col 138pt, the wallet card 115pt), and two columns
+would be 79pt — narrower than anything the solver has ever laid out. A lock screen
+you glance at in an emergency is the wrong place for the app's narrowest column.
+
+A preset marked `screen` hides the cut control rather than greying it, and clears any
+cut already chosen: there is nothing to cut and no back. And auto faces can settle on
+**one**, with parity carried by the card rather than imposed, so paper still comes in
+pairs while a screen does not.
+
+**`priority` is an importance floor** with four steps, each chosen as the largest cut
+in the distribution that still fills a real card:
+
+| step | floor | phrases | fits |
+|---|---|---|---|
+| Everything | 0 | 776 | 6–8 faces of 7×5 |
+| Broad | 0.74 | 306 | four faces — what both hand-built originals settled on |
+| Core | 0.82 | 147 | one sheet |
+| Essential | 0.95 | 11 | **one phone face at full nominal type, in all seventeen languages** |
+
+There is a cliff above the top step, which is why it is where it is: the next rung
+down is 35 phrases under *twelve* headings, and it overflows one phone face even at
+the legibility floor, because seven of those sections contribute one or two rows and
+the headings become a quarter of the height.
+
+It uses plain `importance` rather than `solve/weights.js`'s scoring, for three
+reasons. `numbers-money.misc` is not a cluster of near-duplicates but the number line
+0–10, so cluster decay would delete counting from the card. The decay is
+state-dependent on the sheet already chosen, and a ladder has to be stable and nested
+or the steps stop meaning anything. And `proposeBalance` is a reviewable diff with a
+per-item reason, which is a different contract from a filter. The feared failure does
+not occur: importance is monotone in `cluster_rank` in 110 of 114 clustered pairs, so
+a cut takes cluster *prefixes* — it never gives you `hello (polite)` without `hello`.
+
+Two details that would otherwise be bugs. An item ticked by hand outranks the floor,
+or the content tree's checkbox becomes a silent no-op on a trimmed sheet; custom terms
+carry importance 1, so nothing a reader typed is ever cut. And `buildBlocks` already
+declined to push a heading with no rows under it, which is what stops a cut section
+leaving its heading behind — that line is load-bearing and now says so.
 
 ## Print and paper
 
