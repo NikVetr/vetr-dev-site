@@ -120,6 +120,62 @@ here are worse than none, so unreviewed ones are withheld and the studio says so
 rather than quietly leaving a gap. The validator refuses a confidence claim that
 comes without a source and a date.
 
+### A cell that names a language
+
+Seven concepts in the bank name a language, and the O(N) shape is exactly why they
+were wrong. A row belongs to one language, so a row cannot know the pair — and the
+seven cells that need to name one had it hardcoded. Two shapes, both worse than they
+look:
+
+- **`communication.do-you-speak-english` hardcoded English in all sixteen packs.**
+  The phrase means "do you speak *the traveller's* language", so a Spanish traveller
+  in France was holding up a card asking whether the waiter spoke English.
+- **The gloss named the reader's own language.** `Je ne parle pas français` glossed
+  as `Ich spreche kein Deutsch` — false, on 135 of the 240 pairs, rather than merely
+  vague.
+
+`{target}` and `{source}` fill from the pair, under one rule, and the narrower
+version of it is where an implementation goes wrong:
+
+> A placeholder names *which side* of the pair; the language it is **rendered in** is
+> always the language of the cell it sits in.
+
+So the French cell `Parlez-vous {source} ?` prints `espagnol` when French is the
+target and a Spaniard is reading, and `français` when French is the source — because
+then the source *is* French. One cell, both jobs. The alternative rule ("`{target}`
+in the gloss, `{source}` in the target text") cannot express that, because it assumes
+a cell only ever plays one of the two roles.
+
+Two properties fall out and are worth keeping. A substituted cell can never contain a
+script its own font stack cannot draw, since a language only ever names another in
+its own words — so this cannot reproduce the row of empty boxes the Mandarin note
+printed. And a `note` needs neither placeholder: it prints source-side only, so both
+would resolve to constants and prose is clearer.
+
+Filled in `buildSheet`, immediately after the two `loadLanguage` calls. Five places
+downstream read these cells, and the one that would hurt is `solve/weights.js` — it
+*measures* candidate rows to decide what fits, so an unfilled placeholder there makes
+the balance solver offer a row of the wrong height.
+
+`Intl.DisplayNames` answers most of it, with the script subtag dropped so nobody asks
+about "simplified Chinese". `data/registry/language-names/<code>.csv` carries only
+what ICU cannot: the Russian prepositional case, where no nominal frame takes
+`английский` and there is not even a shared preposition (`по-английски` against
+`на хинди`), and the romanisation of each name for the seven romanised packs. That
+last table is the project's only O(N²) data, and it is affordable because it is a
+table of *names* rather than of phrases — written once, independent of how many
+concepts use it.
+
+Respellings need no placeholder. They are already curated per pair, and they have to
+be: the French `par-lay voo zahn-GLEH` carries a liaison /z/ that vanishes the moment
+the language becomes `espagnol`, and the Arabic respelling has fused its preposition.
+That is also the argument against ever *generating* a respelling from the target's
+IPA.
+
+`content/LANGUAGE-SLOTS.md` is the survey the fix was implemented from: all 112 cells
+with their current text and a proposed frame, and the eleven that need a translator
+rather than a noun swap.
+
 ## The solver
 
 `core/solve/` in dependency order:
@@ -194,7 +250,14 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   it. Each card carries a script-glyph badge and the flags of the countries the
   language is spoken in — Windows draws no glyph for regional-indicator pairs, so
   `ui/flags.js` detects support and falls back to country-code chips rather than a
-  row of letter boxes. Per-card *Save offline*.
+  row of letter boxes. The grid holds six, because French, Spanish and Arabic are
+  each spoken in exactly six of the registry's countries and a grid two columns wide
+  showed three and hid the rest behind a `+3`. The column count follows the cell
+  count, so the block is two rows tall whether that is one column or three — which is
+  the constraint that matters, since the title beside it is two lines and a third row
+  would make one card taller than its neighbours. Only English overflows now, at
+  eight, and it is the default reader so it is never in its own grid. Per-card
+  *Save offline*.
 
   Clicking a thumbnail opens the lightbox (`ui/lightbox.js`) on the whole sheet:
   every face, one arrow key or one thumbnail click apart, at whatever size the
@@ -206,6 +269,18 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   grows a second head on hover because reversing the pair is what pressing it does.
   Changing the reader's language here changes it for the grid behind, so closing the
   lightbox never lands on a gallery that disagrees with it.
+
+  Nothing that floats is drawn in a box, and that is a constraint rather than a
+  preference: a panel over the card is a panel over the words, and the caret panels
+  were sitting on two rows of the sheet. The carets are bare glyphs, ink rather than
+  paper because they sit over white paper, with a halo of paper on hover so they
+  separate from the type under them without covering any. The card and the strip
+  share one grid column so their left and right edges are the same edges — only the
+  card can state that width, since it is derived from its own height and the sheet's
+  aspect, so the column takes it from the card. The two buttons divide the strip's
+  height instead of setting their own. And the mark between the languages sits in its
+  own grid track, because the two names are different lengths and centring the group
+  put the mark off centre.
 
   This is the one place the gallery loads the engine, and only on the click — the
   committed thumbnail holds the frame so the card is never blank, then the typeset
@@ -240,8 +315,17 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
     about shape are drawn rather than described (`ui/glyphs.js`): card sizes at true
     proportions with their columns in them, faces as that many little pages, row
     spacing as bars at that spacing, ink modes showing what each gives up, entry
-    layout as a miniature of the entry, and each shown field as the entry with that
-    field's own line lit. Captions stay — a 3-column A6 and a
+    layout as a miniature of the entry, and each shown column as the entry with that
+    column's own words in it, taken from a real row of the pair being edited — so
+    choosing whether to print romanisation shows you `wù` in the face it will be set
+    in. The row is chosen rather than named (most columns filled first, then
+    shortest), because naming a concept would be one more thing to keep in step with
+    the corpus and because shortness alone picked a *numeral*, which fills three
+    columns and illustrates none of them. Each field draws in the face that will
+    actually set it, which is not the stack it sits in: romanisation runs down the
+    target's side and is Latin regardless. A column the corpus has nothing for draws
+    an empty dashed rule, which is how the interface finally admitted that `ipa` is
+    empty in every language. Captions stay — a 3-column A6 and a
     3-column 6×4 differ only in proportion, and nobody should have to hover to tell
     them apart. Only genuinely list-shaped choices (paper, language, romanisation,
     destination country) remain menus.
@@ -808,9 +892,30 @@ Named so nobody has to rediscover the gap:
   a number that does not answer is worse than a blank, so it stays withheld with
   the FCDO values recorded for a future reviewer.
 - **IPA.** The reference sheet carried no IPA, so the `ipa` column is empty
-  throughout. The respelling transducer (`data/respell/<src>/rules.yaml`) that
-  would consume it is therefore also unwritten; all eleven `→ en-US` respellings
-  ship as the hand-curated override layer the Mandarin one already was.
+  throughout — 0 non-empty cells in 12,061 rows, across all seventeen languages.
+  The plumbing is not the problem: the `entry` template has the cell,
+  `core/fonts.js` routes the field to the Latin stack, every `latin*.ttf` already
+  ships the full IPA repertoire including the Chao tone letters, and a value
+  injected through the CSV-import path renders. The toggle simply offered a column
+  that could never have content, which is what the `empty-column` warning now says
+  out loud. Note also that IPA can only ever draw on `entry` rows — 398 of the 776
+  concepts — because the three table templates have no cell for it.
+
+  Whether to fill it is a real decision, and the argument is narrower than it
+  looks. Romanisation is not pronunciation: RTGS drops Thai tone and length
+  entirely, and Pinyin's `q x zh c` actively mislead an English reader. Respelling
+  *is* pronunciation but only for one reader, which is why 15 of 240 pairs have
+  one. IPA's single advantage is that it is reader-independent — one string per row
+  serves all sixteen source languages, which is exactly the pivot
+  `data/respell/<src>/rules.yaml` needs: 17 IPA columns plus 16 rule sets generate
+  all 272 pairs, against curating each pair by hand. **That is the entire argument
+  for filling it, and it is only worth it if the transducer gets built.** As a
+  printed column it is a third 5.22pt muted line whose distinguishing marks are the
+  first thing to go in bad light, for an audience that overwhelmingly does not read
+  it. Cost is uneven rather than uniform: machine G2P covers the shallow half
+  (es, id, tr, sw, ru, mostly de) cheaply, while th, ja, zh, ko, hi, en and fr have
+  systematic phrase-level errors and each need a reviewer pass comparable to the
+  translation pass that produced the pack.
 - **Dictionary line breaking** for Thai and Khmer. `scripts.csv` marks them
   `word_break: dict`; the measurer falls back to breaking anywhere and the solver
   raises a warning, rather than pretending. It does hold each *character cluster*
