@@ -22,6 +22,60 @@ SAFETY_CRITICAL = {"emergency-medical", "lost-rescue", "dietary-needs",
                    "pharmacy-symptoms", "medical-conditions", "police-consulate"}
 MIN_SAFE_CONFIDENCE = 2
 
+# Which codepoints a face built for a given script can be expected to draw, so a
+# `note` -- prose that prints in the reader's own face -- can be checked against the
+# one that will draw it. Every face carries `COMMON`: the gloss column is Latin
+# whatever the target script is, and a note in any language reaches for an em dash
+# sooner or later.
+#
+# Deliberately not shared with `subset_fonts.py`, which has the same tables for a
+# different question. It asks what to *ship*, and answers the Han part by
+# enumerating a legacy encoding -- GB2312 level 1, about 3,700 characters -- rather
+# than the whole block, because shipping 20,000 ideographs a reader will never see
+# is what makes a pack too big to save offline. This asks what a face can draw in
+# principle, which for Han is the block.
+COMMON = [
+    (0x20, 0x24F),      # Basic Latin, Latin-1, Latin Extended-A and -B
+    (0x250, 0x2AF),     # IPA extensions
+    (0x2B0, 0x2FF),     # spacing modifiers, including the BGN/PCGN soft sign
+    (0x300, 0x36F),     # combining diacritics
+    (0x2000, 0x206F),   # general punctuation: dashes, quotes, the middle dot
+    (0x20A0, 0x20BF),   # currency symbols
+    (0x2100, 0x214F),   # letterlike symbols
+    (0x2190, 0x21FF),   # arrows
+]
+
+# Beyond `COMMON`, per ISO 15924 script code. Blocks have gaps; every consumer
+# intersects with a font's own cmap, so listing a whole block is safe.
+BY_SCRIPT = {
+    "Latn": [(0x1E00, 0x1EFF)],                     # Latin Extended Additional: Vietnamese
+    "Cyrl": [(0x400, 0x4FF)],
+    "Grek": [(0x370, 0x3FF)],
+    "Arab": [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
+             (0xFB50, 0xFDFF), (0xFE70, 0xFEFF)],
+    "Hebr": [(0x590, 0x5FF)],
+    "Deva": [(0x900, 0x97F), (0xA8E0, 0xA8FF)],     # plus Devanagari Extended
+    "Thai": [(0xE00, 0xE7F)],
+    # The Han blocks themselves are enumerated from a legacy encoding rather than a
+    # range -- see `legacy_charset` in subset_fonts.py -- so these are the shared
+    # punctuation and the syllabaries that go with them.
+    "Hans": [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF), (0x4E00, 0x9FFF)],
+    "Hant": [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF), (0x4E00, 0x9FFF)],
+    "Jpan": [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF), (0x4E00, 0x9FFF),
+             (0x3040, 0x30FF), (0x31F0, 0x31FF)],
+    "Kore": [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF), (0x4E00, 0x9FFF),
+             (0x1100, 0x11FF), (0x3130, 0x318F), (0xA960, 0xA97F), (0xD7B0, 0xD7FF),
+             (0xAC00, 0xD7AF)],
+}
+
+
+
+def allowed(iso15924):
+    """Codepoints a face for this script can be expected to draw."""
+    return {cp for lo, hi in COMMON + BY_SCRIPT.get(iso15924, [])
+            for cp in range(lo, hi + 1)}
+
+
 errors = []
 warnings = []
 
@@ -143,16 +197,19 @@ def main():
                     errors.append(f"{rel}: {cid} has {text.count('{}')} slots, "
                                   f"concept declares {slots}")
                 # A note prints in the *source* face, because it is prose the
-                # reader reads rather than something they show to anyone. Quoting
-                # the target script inside one therefore renders as tofu -- which
-                # is exactly what the shipped Mandarin card did, with its number
-                # note full of empty boxes. Romanised advice is what the reader can
-                # act on anyway.
-                if is_note and any(ord(c) > 0x2FF for c in text):
-                    quoted = "".join(sorted({c for c in text if ord(c) > 0x2FF}))
-                    errors.append(f"{rel}: {cid} is a note and prints in the source "
-                                  f"face, but quotes non-Latin text ({quoted}), which "
-                                  f"will render as tofu. Romanise it.")
+                # reader reads rather than something they show to anyone. So it may
+                # use the reader's own script freely -- a Japanese reader's note is
+                # Japanese -- and may not quote any other, which is exactly what the
+                # shipped Mandarin card did, with its number note full of empty
+                # boxes. Checked against the same ranges the subsetter built that
+                # face from, so the two cannot drift.
+                if is_note and text.strip():
+                    drawable = allowed(lang["script"])
+                    stray = "".join(sorted({c for c in text if ord(c) not in drawable}))
+                    if stray:
+                        errors.append(f"{rel}: {cid} is a note and prints in the "
+                                      f"{lang['script']} face, which cannot draw "
+                                      f"{stray!r}. Romanise the quoted script.")
                 # A right-to-left row carrying more than one digit will print with
                 # the digits reversed -- 10 as 01, 1/2 as 2/1. The renderer shapes
                 # a run right-to-left as a whole and nothing here implements the
@@ -203,6 +260,54 @@ def main():
                             concepts.get(r["concept_id"], {}).get("default_template") == "note")
         coverage["languages"][code] = have
     (DATA / "coverage.json").write_text(json.dumps(coverage, indent=2) + "\n", encoding="utf-8")
+    # Two things a reader sees only if their *own* language supplies them, and that
+    # nothing else checks -- because coverage is scored against a language as a
+    # sheet's target, and both of these are read off it as a sheet's source.
+    #
+    # A `note` is prose about the target written for the reader: Chinese
+    # classifiers, Japanese counters. It renders from the source row, so a language
+    # missing that row loses the note entirely and a language with a blank row used
+    # to draw an empty box. Spanish had one worse than either -- a note about
+    # Spanish numerals sitting in a concept scoped to Chinese, so a Spanish reader
+    # learning Chinese got a paragraph about Spanish.
+    note_ids = [cid for cid, c in concepts.items() if c["default_template"] == "note"]
+    for cid in note_ids:
+        blank = []
+        # A language is never its own sheet's source, so a note scoped to one needs
+        # no text in it: the Thai politeness note is read by everyone learning Thai,
+        # which is everyone except Thai speakers.
+        scope = {c.strip() for c in (concepts[cid].get("applies_to") or "").split(";") if c.strip()}
+        for code in sorted(set(ready) - scope):
+            group = sections[concepts[cid]["section_id"]]["group"]
+            rel = f"lang/{code}/{group}.csv"
+            if not (DATA / rel).exists():
+                blank.append(code)
+                continue
+            row = next((r for r in load(rel) if r["concept_id"] == cid), None)
+            if not row or not row["text"].strip():
+                blank.append(code)
+        if blank:
+            warnings.append(f"concepts: the note {cid!r} has no text for "
+                            f"{', '.join(blank)}, so those readers do not get it")
+
+    # The emergency note's service words and its frame come from the registry in the
+    # reader's language. Absent, they fall back to English, which is what every
+    # sheet not glossed into English was printing.
+    wanted_labels = {"_frame"}
+    for r in regions.values():
+        for part in r["emergency_numbers"].split(";"):
+            label = part.strip().split(" ", 1)
+            if len(label) == 2 and label[1].strip():
+                wanted_labels.add(label[1].strip())
+    for code in sorted(ready):
+        rel = f"registry/emergency-labels/{code}.csv"
+        have = ({r["label"] for r in load(rel)} if (DATA / rel).exists() else set())
+        missing = wanted_labels - have
+        if missing:
+            warnings.append(f"registry/emergency-labels: {code} is missing "
+                            f"{len(missing)} of {len(wanted_labels)} labels, so its "
+                            "emergency note prints in English")
+
     reviewed = sum(1 for r in regions.values() if int(r["confidence"] or 0) >= MIN_SAFE_CONFIDENCE)
     if reviewed < len(regions):
         warnings.append(f"registry/regions.csv: {len(regions) - reviewed} of {len(regions)} "

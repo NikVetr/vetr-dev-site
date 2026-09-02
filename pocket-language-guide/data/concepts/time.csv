@@ -41,3 +41,4 @@ months.september,months,ref,word,september,9,0.409,months.september,0,0,neutral,
 months.october,months,ref,word,october,10,0.398,months.october,0,0,neutral,,
 months.november,months,ref,word,november,11,0.386,months.november,0,0,neutral,,
 months.december,months,ref,word,december,12,0.375,months.december,0,0,neutral,,
+time-words.clock-offset,time-words,note,note,clock-offset,1050,0.700,time-words.clock-offset,0,0,neutral,sw,"One line of prose in the reader's own language about a property of Swahili that no phrase row can carry: the clock is offset six hours, so saa moja is seven o'clock and saa sita is noon. Getting it backwards makes someone six hours late. The pack routes around it -- the wake-up call row omits saa so a digital time reads correctly -- but nothing on the card says why."

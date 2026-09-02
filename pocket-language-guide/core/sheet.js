@@ -8,7 +8,7 @@
 import { createFontRegistry } from './fonts.js';
 import { createMeasurer } from './measure.js';
 import {
-  loadCorpus, loadLanguage, loadRespellOverrides, loadSectionTitles, buildBlocks,
+  loadCorpus, loadLanguage, loadRespellOverrides, loadSectionTitles, loadEmergencyLabels, buildBlocks,
 } from './pack.js';
 import { layout } from './solve/index.js';
 
@@ -124,10 +124,15 @@ export async function buildSheet(ctx, spec, edits) {
   const respell = ctx.corpus.respellOverrides.has(`${spec.target}__${spec.source}__${spec.accent}`)
     ? await loadRespellOverrides(loadText, spec.target, spec.source, spec.accent)
     : {};
-  // Headings are read by the source-language reader, so they follow the gloss.
-  const sectionTitles = await loadSectionTitles(loadText, spec.source);
+  // Headings are read by the source-language reader, so they follow the gloss. So
+  // does the emergency note's frame and its service words -- "110 police" was
+  // printing in English on every one of the 225 pairs not glossed into it.
+  const [sectionTitles, emergencyLabels] = await Promise.all([
+    loadSectionTitles(loadText, spec.source),
+    loadEmergencyLabels(loadText, spec.source),
+  ]);
   const blocks = buildBlocks({
-    corpus, targetRows, sourceRows, respell, spec, edits, sectionTitles,
+    corpus, targetRows, sourceRows, respell, spec, edits, sectionTitles, emergencyLabels,
   });
   return {
     blocks,

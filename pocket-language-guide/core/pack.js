@@ -220,6 +220,8 @@ export async function loadRespellOverrides(loadText, target, source, accent) {
  * @property {SheetEdits} [edits]
  * @property {Record<string,string>} [sectionTitles] headings in the source language;
  *   absent or incomplete falls back to `title_en`
+ * @property {Record<string,string>} [emergencyLabels] the service words the region's
+ *   numbers are labelled with, in the source language; absent falls back to English
  */
 
 /**
@@ -234,15 +236,66 @@ const MIN_EMERGENCY_CONFIDENCE = 2;
  * willing to print. Returned rather than pushed so the caller can also warn.
  * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus
  * @param {string} regionCode
+ * @param {string} [source] the reader's language, for the country name and the frame
+ * @param {Record<string,string>} [labels] service words, keyed by their English
  */
-export function emergencyNote(corpus, regionCode) {
+export function emergencyNote(corpus, regionCode, source = 'en', labels = {}) {
   const region = corpus.regions[regionCode];
   if (!region || !region.emergency_numbers.trim()) return null;
   if (Number(region.confidence) < MIN_EMERGENCY_CONFIDENCE) {
     return { text: null, region, reason: 'unreviewed' };
   }
-  const numbers = region.emergency_numbers.split(';').map((n) => n.trim()).filter(Boolean);
-  return { text: `In ${region.name_en}: ${numbers.join(' · ')}`, region, reason: null };
+  const numbers = region.emergency_numbers.split(';').map((n) => n.trim()).filter(Boolean)
+    // `119 fire` -> the number, then the service in the reader's language. The CSV
+    // holds the English service word, which doubles as the lookup key: there are ten
+    // of them across all 49 regions, and using the English as the key means the
+    // registry stays readable and needs no migration when a label is added.
+    .map((entry) => {
+      const [, digits, label] = /^([\d/]+)\s*(.*)$/.exec(entry) ?? [];
+      if (!digits) return entry;
+      const service = labels[label] ?? label;
+      return service ? `${digits} ${service}` : digits;
+    });
+  return {
+    text: (labels._frame ?? 'In {region}: {numbers}')
+      .replace('{region}', regionName(regionCode, source, region.name_en))
+      .replace('{numbers}', numbers.join(' \u00b7 ')),
+    region,
+    reason: null,
+  };
+}
+
+/**
+ * A country's name in the reader's language. The platform already knows every one
+ * of them in every language here -- checked against all 49 regions and all sixteen
+ * reader languages -- which is a better answer than 784 cells in a registry file
+ * that would go stale. Same argument as `Intl.DisplayNames` for language names.
+ * @param {string} code ISO 3166-1 alpha-2
+ * @param {string} locale @param {string} fallback
+ */
+function regionName(code, locale, fallback) {
+  try {
+    return new Intl.DisplayNames([locale], { type: 'region' }).of(code) || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+/**
+ * The service words a region's emergency numbers are labelled with, in the reader's
+ * language. Registry rather than `data/i18n/`, for the same reason the section
+ * headings are: `core/` renders the sheet and must not reach into the interface's
+ * catalogues. Missing file or missing row falls back to the English in the CSV.
+ * @param {(rel:string)=>Promise<string>} loadText @param {string} code
+ */
+export async function loadEmergencyLabels(loadText, code) {
+  try {
+    const rows = parseTable(await loadText(`data/registry/emergency-labels/${code}.csv`), code);
+    return Object.fromEntries(rows.map((r) => [r.label, r.text]));
+  } catch (err) {
+    if (isMissingFile(err)) return {};
+    throw err;
+  }
 }
 
 /**
@@ -253,7 +306,7 @@ export function emergencyNote(corpus, regionCode) {
  * @returns {import('./types.js').Block[]}
  */
 export function buildBlocks({
-  corpus, targetRows, sourceRows, respell, spec, edits, sectionTitles,
+  corpus, targetRows, sourceRows, respell, spec, edits, sectionTitles, emergencyLabels,
 }) {
   const { selection } = spec;
   const overrides = edits?.overrides ?? {};
@@ -300,7 +353,7 @@ export function buildBlocks({
     // heading. Those are facts about the country, not the language, so they come
     // from the region registry and lead the section here too.
     if (section.section_id === EMERGENCY_SECTION) {
-      const note = emergencyNote(corpus, spec.region);
+      const note = emergencyNote(corpus, spec.region, spec.source, emergencyLabels);
       if (note?.text) {
         blocks.push({
           kind: 'note',
@@ -317,14 +370,22 @@ export function buildBlocks({
       const template = concept.default_template;
       if (template === 'note') {
         run = null;
-        blocks.push({
-          kind: 'note',
-          sectionId: section.section_id,
-          colorRole: section.color_role,
-          stretch: 0,
-          text: overrides[concept.concept_id]?.values.gloss
-            ?? sourceRows[concept.concept_id].text,
-        });
+        // A note is prose in the *reader's* language about the target -- Chinese
+        // classifiers, Japanese counters -- so its text comes from the source row.
+        // A language that has the row but left it blank was drawing an empty
+        // bordered box on the card, which is worse than the note being absent: it
+        // takes the space and says nothing.
+        const text = overrides[concept.concept_id]?.values.gloss
+          ?? sourceRows[concept.concept_id].text;
+        if (text.trim()) {
+          blocks.push({
+            kind: 'note',
+            sectionId: section.section_id,
+            colorRole: section.color_role,
+            stretch: 0,
+            text,
+          });
+        }
         continue;
       }
       if (!run || run.templateId !== template) {

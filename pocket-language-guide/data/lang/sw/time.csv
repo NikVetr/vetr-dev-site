@@ -41,3 +41,4 @@ months.september,Septemba,Mwezi wa tisa,,,2,sw-agent-v1
 months.october,Oktoba,Mwezi wa kumi,,,2,sw-agent-v1
 months.november,Novemba,Mwezi wa kumi na moja,,,2,sw-agent-v1
 months.december,Desemba,Mwezi wa kumi na mbili,,,2,sw-agent-v1
+time-words.clock-offset,,,,,2,coordinator-gaps-v2
