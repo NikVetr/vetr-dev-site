@@ -13,6 +13,10 @@
   --surface-2: #eaeff3;
   --accent: #0b67a3;
   --accent-soft: #e6f0f7;
+  /* The same accent lifted for use on a dimmed overlay -- the gallery lightbox
+     puts controls over an 82%-black backdrop, where #0b67a3 is barely there.
+     Holds 7.4:1 against that backdrop. */
+  --accent-lift: #79c2ef;
   --alert: #b3261e;
   --ok: #237547;
 
@@ -419,51 +423,148 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
 }
 .flag.more:hover .flag-rest, .flag.more:focus-visible .flag-rest { display: flex; }
 
-/* A closer look at a card, without leaving the gallery or loading the solver. */
-/* The gallery lightbox. It fills the window, because the faces it shows are the
-   real typeset sheet in SVG -- vector, so there is no resolution to run out of, and
-   a 7x5in card at 1200px is the first point where the rows are actually readable. */
-dialog.preview-dialog {
-  border: 1px solid var(--line); border-radius: var(--radius); padding: var(--space-3);
-  max-inline-size: min(96vw, 1500px); inline-size: min(96vw, 1500px);
-  max-block-size: 94vh; font: inherit; color: var(--ink);
-  position: relative; display: flex; flex-direction: column; gap: var(--space-2);
+/* The gallery lightbox.
+   The card is the only opaque thing on screen: the dialog itself has no surface,
+   no border and no title, so what floats on the dimmed page is the sheet. Every
+   control sits over that dim -- the pair above, the paging carets on the card's
+   own edges, the thumbnails and the two buttons below. */
+dialog.lightbox {
+  border: 0; padding: 0; background: none; max-inline-size: none; max-block-size: none;
+  inline-size: 100vw; block-size: 100vh; font: inherit; color: var(--paper);
+  display: grid; grid-template-rows: auto 1fr auto; justify-items: center;
+  align-content: center; gap: var(--space-2); padding-block: var(--space-3);
 }
-dialog.preview-dialog::backdrop { background: rgb(17 24 32 / 55%); }
-dialog.preview-dialog h2 { margin: 0 2rem 0 0; font-size: var(--fs-1); }
-/* The stage keeps the card's own aspect; the arrows sit outside it so they never
-   cover a row. On a narrow screen they drop under the card instead. */
-.preview-frame {
-  display: flex; align-items: center; gap: var(--space-2); min-block-size: 0; flex: 1 1 auto;
+dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
+
+/* The card, sized to whatever the window leaves once the pair and the strip have
+   their rows. `aspect-ratio` is the sheet's own, so the carets sit on the paper's
+   edge and not on the box around it. */
+.lightbox-card {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  min-block-size: 0; max-inline-size: min(94vw, 1600px); block-size: 100%;
 }
-.preview-stage {
-  flex: 1 1 auto; min-inline-size: 0; display: flex; justify-content: center;
-  border: 1px solid var(--line-soft); border-radius: var(--radius-sm); background: var(--paper);
+.lightbox-face {
+  /* The sheet's own proportion, 504 x 360pt. Both dimensions are capped, and the
+     height is written as the smaller of the row and what the width allows: with
+     `aspect-ratio` alone an explicit height wins, so on a narrow window the box
+     stayed tall, the SVG letterboxed inside it, and the carets sat on the box's
+     edge rather than on the paper's. */
+  --card-aspect: 1.4;
+  position: relative;
+  inline-size: auto;
+  block-size: min(100%, calc(min(94vw, 1600px) / var(--card-aspect)));
+  aspect-ratio: var(--card-aspect);
+  background: var(--paper); border-radius: var(--radius-sm);
+  box-shadow: 0 1.4rem 3.5rem rgb(0 0 0 / 45%);
   overflow: hidden;
 }
-.preview-stage > img, .preview-stage > svg {
-  display: block; inline-size: 100%; block-size: auto; max-block-size: 78vh;
-  object-fit: contain;
+.lightbox-face > svg, .lightbox-face > img {
+  display: block; inline-size: 100%; block-size: 100%;
 }
-.preview-step {
-  flex: 0 0 auto; inline-size: 2.4rem; block-size: 3.4rem; font-size: 1.5rem; line-height: 1;
-  padding: 0; border-radius: var(--radius-sm);
+/* The thumbnail holding the frame while a pair typesets. It is a raster of the
+   first face at gallery size, so it is blurred at card size -- which is the honest
+   signal that the real thing has not arrived yet. */
+.lightbox-holding { object-fit: cover; opacity: 0.55; }
+.lightbox-failed {
+  position: absolute; inset-block-end: 0; inset-inline: 0; margin: 0;
+  padding: var(--space-2); background: var(--surface); color: var(--ink);
+  font-size: var(--fs--1);
 }
-.preview-step:disabled { opacity: 0.35; cursor: default; }
-.preview-foot { display: flex; align-items: baseline; gap: var(--space-2); flex-wrap: wrap; }
-.preview-counter { white-space: nowrap; font-variant-numeric: tabular-nums; }
-dialog.preview-dialog p { margin: 0; }
+
+/* Carets on the card's edges, shown once the pointer is on the card -- or once
+   anything in it has the keyboard, so they are never unreachable. */
+.lightbox-step {
+  position: absolute; z-index: 1; top: 50%; translate: 0 -50%;
+  inline-size: 2.6rem; block-size: 4.6rem; padding: 0;
+  display: none; align-items: center; justify-content: center;
+  font-size: 2rem; line-height: 1; cursor: pointer;
+  border: 1px solid rgb(255 255 255 / 22%); border-radius: var(--radius-sm);
+  background: rgb(17 24 32 / 42%); color: rgb(255 255 255 / 72%);
+  backdrop-filter: blur(2px);
+}
+.lightbox-step.prev { inset-inline-start: 0.5rem; }
+.lightbox-step.next { inset-inline-end: 0.5rem; }
+.lightbox-card:hover .lightbox-step, .lightbox-card:focus-within .lightbox-step {
+  display: flex;
+}
+/* Brighter and outlined on hover -- but only where there is a card to go to, so
+   the ends of the series say so by staying dim. */
+.lightbox-step:not(:disabled):hover, .lightbox-step:not(:disabled):focus-visible {
+  background: rgb(17 24 32 / 72%); color: var(--paper);
+  border-color: rgb(255 255 255 / 85%); outline: none;
+}
+.lightbox-step:disabled { opacity: 0.28; cursor: default; }
+
+/* The strip, and the two things to do with the card, on one row. */
+.lightbox-foot {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: var(--space-3); max-inline-size: min(94vw, 1600px);
+}
+.lightbox-strip {
+  display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; min-inline-size: 0;
+}
+.lightbox-thumb {
+  padding: 0; border: 1px solid rgb(255 255 255 / 25%); border-radius: 3px;
+  background: var(--paper); cursor: pointer; overflow: hidden;
+  inline-size: 5.6rem; aspect-ratio: 504 / 360; flex: 0 0 auto;
+}
+.lightbox-thumb > svg { display: block; inline-size: 100%; block-size: 100%; }
+.lightbox-thumb:hover { border-color: rgb(255 255 255 / 70%); }
+/* The one you are looking at, said twice: a ring the width of the gap so the row
+   does not shift, and `aria-selected` for anyone not seeing the ring. */
+.lightbox-thumb[aria-selected='true'] {
+  border-color: var(--paper); outline: 2px solid var(--accent-lift); outline-offset: 1px;
+}
+.lightbox-do { display: flex; flex-direction: column; gap: 0.4rem; flex: 0 0 auto; }
+.lightbox-do .btn { justify-content: center; text-align: center; }
+
+/* The pair. Both languages are controls, and look it on hover; the mark between
+   them is a third. */
+.lightbox-pair {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--fs-1);
+}
+.lightbox-pair .lang-picker-button {
+  background: none; border: 1px solid transparent; color: var(--paper);
+  font-size: inherit; font-weight: 600; cursor: pointer; padding: 0.15em 0.5em;
+  border-radius: var(--radius-sm);
+}
+.lightbox-pair .lang-picker-button:hover,
+.lightbox-pair .lang-picker-button:focus-visible {
+  color: var(--accent-lift); border-color: rgb(255 255 255 / 45%); outline: none;
+}
+.lightbox-swap {
+  display: grid; place-items: center; cursor: pointer; padding: 0.25rem 0.4rem;
+  background: none; border: 1px solid transparent; border-radius: var(--radius-sm);
+  color: rgb(255 255 255 / 65%);
+}
+.lightbox-swap svg { inline-size: 1.7rem; block-size: 1.05rem; }
+.lightbox-swap path { fill: none; stroke: currentColor; stroke-width: 1.6; }
+.lightbox-swap .swap-two { display: none; }
+/* One head normally, because that is what the pair means; two on hover, because
+   that is what pressing it does. */
+.lightbox-swap:hover, .lightbox-swap:focus-visible {
+  color: var(--paper); border-color: rgb(255 255 255 / 45%); outline: none;
+}
+.lightbox-swap:hover .swap-one, .lightbox-swap:focus-visible .swap-one { display: none; }
+.lightbox-swap:hover .swap-two, .lightbox-swap:focus-visible .swap-two { display: block; }
+
+.lightbox-close {
+  position: fixed; inset-inline-end: var(--space-3); top: var(--space-3);
+  border: 1px solid rgb(255 255 255 / 25%); background: rgb(17 24 32 / 45%);
+  color: rgb(255 255 255 / 75%); border-radius: var(--radius-sm);
+  inline-size: 2.1rem; block-size: 2.1rem; font-size: 1.2rem; line-height: 1;
+  cursor: pointer;
+}
+.lightbox-close:hover { background: rgb(17 24 32 / 80%); color: var(--paper); }
+
+/* Narrow: the strip wraps under the buttons, and the carets stay on the card
+   rather than moving out of it -- there is no room beside it to move to. */
 @media (max-width: 640px) {
-  .preview-frame { flex-wrap: wrap; }
-  .preview-stage { order: -1; flex-basis: 100%; }
+  .lightbox-foot { flex-direction: column; align-items: center; }
+  .lightbox-do { flex-direction: row; }
+  .lightbox-thumb { inline-size: 3.6rem; }
 }
-.preview-close {
-  position: absolute; inset-inline-end: var(--space-2); top: var(--space-2);
-  border: 1px solid var(--line-soft); background: var(--surface); color: var(--muted);
-  border-radius: var(--radius-sm); width: 1.9rem; height: 1.9rem; font-size: 1.1rem;
-  line-height: 1; cursor: pointer;
-}
-.preview-close:hover { background: var(--surface-2); color: var(--ink); }
 
 /* The Custom row a numeric setting opens: a slider to feel the range, a box to type
    or step an exact value. Hidden until Custom is chosen, so the ladder stays the

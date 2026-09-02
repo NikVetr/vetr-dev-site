@@ -26,6 +26,7 @@ import { nextIndex } from './keys.js';
  * @param {string} config.value
  * @param {string} config.label         accessible name for the control
  * @param {(value:string)=>void} config.onChange
+ * @returns {{element:HTMLElement, select:(value:string)=>void, destroy:()=>void}}
  */
 export function languagePicker({ mount, options, value, label, onChange }) {
   const wrap = document.createElement('div');
@@ -122,13 +123,33 @@ export function languagePicker({ mount, options, value, label, onChange }) {
     items[to].focus();
   });
 
-  // Anywhere else on the page dismisses it, which is what a dropdown does.
+  // Anywhere else on the page dismisses it, which is what a dropdown does. The
+  // listener is on the document, so it outlives the control unless something takes
+  // it down -- which matters because the gallery lightbox builds two of these
+  // every time it opens.
+  const dismiss = new AbortController();
   document.addEventListener('pointerdown', (event) => {
     if (!wrap.contains(/** @type {Node} */ (event.target))) close(false);
-  });
+  }, { signal: dismiss.signal });
 
   paint();
   wrap.append(button, list);
+  // The control stands in for the mount, so it takes the mount's id with it --
+  // otherwise replacing the node quietly removes the handle everything else uses
+  // to find this control on the page.
+  if (mount.id) wrap.id = mount.id;
   mount.replaceWith(wrap);
-  return { element: wrap };
+  return {
+    element: wrap,
+    /** Show a different option as chosen, without announcing a change. */
+    select(/** @type {string} */ next) {
+      current = next;
+      paint();
+    },
+    /** Give up the document listener. */
+    destroy() {
+      dismiss.abort();
+      wrap.remove();
+    },
+  };
 }
