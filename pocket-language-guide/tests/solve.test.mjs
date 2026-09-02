@@ -230,6 +230,46 @@ test('a screen keeps its reserved bands clear of any ink', async () => {
   }
 });
 
+test('no field prints below its own script’s legibility floor', async () => {
+  // `scripts.csv` sets 4.4pt for Latin and 5.4pt for Arabic, Devanagari and Thai.
+  // The respelling column's theme size is 5.22pt, under three of those -- so the
+  // interpolation toward the floor had nothing to travel toward and the floor was
+  // silently not one. It only mattered once a respelling could reach a non-Latin
+  // *reader*, which the generated column now makes possible.
+  //
+  // The respelling is injected rather than read, because no non-English reader has
+  // one on disk yet: without that this test passes by having nothing to check,
+  // which is the failure mode three other tests in this file have already had.
+  const byStack = Object.fromEntries(Object.values(ctx.corpus.scripts)
+    .map((r) => [r.font_stack, Number(r.min_size_pt)]));
+  const shown = /** @type {any} */ (['script', 'roman', 'gloss', 'respell', 'numeral']);
+  /** @type {Record<string, number>} */ const checked = {};
+
+  for (const [source, sample] of [['ar', 'كيتاب'], ['hi', 'किताब'], ['th', 'หนังสือ']]) {
+    const { plan } = await buildSheet(
+      ctx,
+      { ...spec, source, fieldSet: shown, scale: 0 },
+      {
+        overrides: Object.fromEntries(Object.keys(ctx.corpus.concepts)
+          .map((id) => [id, { values: { respell: sample }, include: true }])),
+        extras: [],
+      },
+    );
+    for (const run of plan.faces.flatMap((f) => f.runs)) {
+      const stack = Object.keys(byStack).find((s) => run.fontId.startsWith(`${s}-`));
+      if (!stack) continue;
+      checked[stack] = Math.min(checked[stack] ?? Infinity, run.size);
+      assert.ok(run.size >= byStack[stack] - 0.01,
+        `a ${stack} run at ${run.size}pt is under its ${byStack[stack]}pt floor`);
+    }
+  }
+  // And it really did see the three scripts whose floor is above the respelling's
+  // nominal size, which is the whole point.
+  for (const stack of ['arabic', 'deva', 'thai']) {
+    assert.ok(stack in checked, `no ${stack} run was checked, so this proves nothing`);
+  }
+});
+
 test('distribute respects per-gap ceilings and reports what it cannot place', () => {
   const gaps = [
     { natural: 0, stretch: 1, max: 3 },

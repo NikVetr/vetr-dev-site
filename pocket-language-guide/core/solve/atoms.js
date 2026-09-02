@@ -98,8 +98,17 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
    * @param {number} nominal @param {number} floor
    */
   const sizeAt = (nominal, floor) => {
+    // `min` so that a field is never *inflated* above the theme's size at scale 0:
+    // the scale interpolates toward the floor, and a nominal already below it has
+    // nowhere to travel. But then a floor above the nominal was silently not a
+    // floor at all -- and one is. The respelling column is 5.22pt against a 5.4pt
+    // minimum for Arabic, Devanagari and Thai, so the moment a respelling reaches
+    // one of those readers it prints below the size that script is legible at, at
+    // every scale, with nothing to say so. Clamping the result keeps both
+    // properties: no inflation, and no field under its script's floor.
     const limit = Math.min(floor, nominal);
-    return scale > 1 ? nominal * scale : limit + (nominal - limit) * scale;
+    const size = scale > 1 ? nominal * scale : limit + (nominal - limit) * scale;
+    return Math.max(size, floor);
   };
   const targetLang = corpus.languages[spec.target];
   const sourceLang = corpus.languages[spec.source];

@@ -1,0 +1,193 @@
+# PROTOTYPE rule table for the respelling feasibility pilot.
+# Shape deliberately mirrors the planned data/respell/<src>/rules.yaml: one file
+# per (source language, accent), keyed on IPA, target-language-agnostic.
+# Every entry below was read off tmp/respell-pilot/*-evidence.tsv, i.e. derived
+# from what the 12,001 curated en-US respellings actually do, not from a
+# published pronunciation key.
+source: en
+accent: en-US
+version: pilot-1
+
+policy:
+  syllable_separator: '-'
+  word_separator: ' '
+  # Stress is taken from the IPA. A target whose IPA carries no stress mark
+  # (Mandarin, Japanese, Korean, Vietnamese) therefore gets no capitals, which
+  # is what those four curated sheets already do.
+  stress: caps
+  stress_min_syllables: 2
+  # Chao tone letters in the IPA. The curated zh/vi sheets drop tone entirely.
+  tone: drop
+  # Vowel length. `none` is the plain form; `double` repeats the vowel letter.
+  length: none
+
+# An English reader cannot read a rising diphthong inside an onset, so the
+# curated sheets break it out into its own syllable (sja -> see-ah, tje ->
+# tee-EH). Derived from 199 of the 247 Spanish syllable-count disagreements.
+splits:
+  - glide: j
+    out: ee
+    after_consonant: true
+    except_after: 'tɕ tɕʰ ɕ ʈʂ ʈʂʰ ʂ ʐ'   # Mandarin palatals keep the medial
+  - glide: w
+    out: oo
+    after_consonant: true
+    only_after: 'ʝ'
+
+# Ordered; longest IPA match wins within a slot. `slot` is onset / nucleus /
+# coda / any. `when` is a conjunction over: word_initial, word_final, open,
+# closed, stressed, unstressed.
+phonemes:
+  # --- consonants, shared across targets -----------------------------------
+  - {slot: any, ipa: 'ʈʂʰ', out: 'ch'}
+  - {slot: any, ipa: 'tɕʰ', out: 'ch'}
+  - {slot: any, ipa: 'tsʰ', out: 'ts'}
+  - {slot: any, ipa: 'ʈʂ',  out: 'j'}
+  - {slot: any, ipa: 'tɕ',  out: 'j'}
+  - {slot: any, ipa: 'tʃ',  out: 'ch'}
+  - {slot: any, ipa: 'dʒ',  out: 'j'}
+  - {slot: any, ipa: 'ʧ',   out: 'ch'}
+  - {slot: any, ipa: 'ts',  out: 'dz', if_inventory: 'tsʰ'}
+  - {slot: any, ipa: 'ts',  out: 'ts'}
+  - {slot: any, ipa: 'pʰ',  out: 'p'}
+  - {slot: any, ipa: 'tʰ',  out: 't'}
+  - {slot: any, ipa: 'kʰ',  out: 'k'}
+  # A language that contrasts /p/ with /pʰ/ has no voiced stop for <b> to be
+  # confused with, and its own romanisation already writes /p/ as <b>. A
+  # language that contrasts /p/ with /b/ must keep <p>. The condition is read
+  # off the target's own IPA column, so no per-language flag is curated.
+  - {slot: any, ipa: 'p',   out: 'b', if_inventory: 'pʰ'}
+  - {slot: any, ipa: 't',   out: 'd', if_inventory: 'tʰ'}
+  - {slot: any, ipa: 'k',   out: 'g', if_inventory: 'kʰ'}
+  - {slot: any, ipa: 'p',   out: 'p'}
+  - {slot: any, ipa: 't',   out: 't'}
+  - {slot: any, ipa: 'k',   out: 'k'}
+  - {slot: any, ipa: 'b',   out: 'b'}
+  - {slot: any, ipa: 'β',   out: 'b'}
+  - {slot: any, ipa: 'd',   out: 'd'}
+  - {slot: any, ipa: 'ð',   out: 'd'}
+  - {slot: any, ipa: 'ɡ',   out: 'g'}
+  - {slot: any, ipa: 'ɣ',   out: 'g'}
+  - {slot: any, ipa: 'f',   out: 'f'}
+  - {slot: any, ipa: 'v',   out: 'v'}
+  - {slot: any, ipa: 'θ',   out: 'th'}
+  - {slot: any, ipa: 's',   out: 's'}
+  - {slot: any, ipa: 'z',   out: 'z'}
+  - {slot: any, ipa: 'ʂ',   out: 'sh'}
+  - {slot: any, ipa: 'ʃ',   out: 'sh'}
+  - {slot: any, ipa: 'ʒ',   out: 'zh'}
+  - {slot: any, ipa: 'ɕj',  out: 'shy'}    # <shyen>, not <syyen>
+  - {slot: any, ipa: 'ɕ',   out: 'sy'}
+  - {slot: any, ipa: 'x',   out: 'h'}
+  - {slot: any, ipa: 'h',   out: 'h'}
+  - {slot: any, ipa: 'ʐ',   out: 'r'}
+  - {slot: any, ipa: 'ɻ',   out: 'r'}
+  - {slot: any, ipa: 'm',   out: 'm'}
+  - {slot: any, ipa: 'ɲ',   out: 'ny'}
+  # A nasal before a velar stop is an allophone of /n/ in a language whose /ŋ/
+  # cannot end a word: <TEN-go>, not <TENG-go>. Mandarin's /ŋ/ does end words,
+  # so <fahng-kah> keeps the <ng>. The test is on the target's own IPA.
+  - {slot: any, ipa: 'ŋ',   out: 'n',  before_onset: 'ɡ k ɣ', unless_inventory: 'ŋ#'}
+  - {slot: any, ipa: 'ŋ',   out: 'ng'}
+  - {slot: any, ipa: 'n',   out: 'n'}
+  - {slot: any, ipa: 'ʎ',   out: 'y'}
+  - {slot: any, ipa: 'ʝ',   out: 'y'}
+  - {slot: any, ipa: 'l',   out: 'l'}
+  # The trill is written double only word-internally (<ko-RREK-ta>); word
+  # initially the curated sheet writes a single <r> (<reh-trah-SAH-doh>).
+  - {slot: any, ipa: 'r',   out: 'r',  when: [word_initial]}
+  - {slot: any, ipa: 'r',   out: 'rr'}
+  - {slot: any, ipa: 'ɾ',   out: 'r'}
+  - {slot: any, ipa: 'j',   out: 'y'}
+  - {slot: any, ipa: 'w',   out: 'w'}
+  - {slot: any, ipa: 'ɥ',   out: 'yw'}
+  # espeak marks phonetic length that none of these targets contrasts; the
+  # `length: double` policy is what puts it back (see the length notes).
+  - {slot: any, ipa: 'ː',   out: ''}
+
+  # --- nuclei: Spanish-shaped (5-vowel, position sensitive) -----------------
+  # /ai/ spells itself <eye> when nothing precedes it and <ye> after an onset,
+  # which is what both the Spanish (37 tokens) and Mandarin (144) sheets do.
+  - {slot: nucleus, ipa: 'aɪ',  out: 'ye',  when: [has_onset]}
+  - {slot: nucleus, ipa: 'aɪ',  out: 'ay',  when: [not_word_final]}
+  - {slot: nucleus, ipa: 'aɪ',  out: 'eye'}
+  - {slot: nucleus, ipa: 'ɑɪ',  out: 'ye',  when: [has_onset]}
+  - {slot: nucleus, ipa: 'ɑɪ',  out: 'eye'}
+  - {slot: nucleus, ipa: 'ɑɻ',  out: 'are'}
+  - {slot: nucleus, ipa: 'aʊ',  out: 'ow'}
+  - {slot: nucleus, ipa: 'oɪ',  out: 'oy'}
+  - {slot: nucleus, ipa: 'eɪ',  out: 'ay'}
+  - {slot: nucleus, ipa: 'uj',  out: 'wee'}
+  # /a/ takes the <ah> digraph only where a bare <a> would end up unstressed
+  # and reduced: open, word-internal. 97% of 1108 curated tokens.
+  - {slot: nucleus, ipa: 'a',   out: 'ah',  when: [open, not_word_final]}
+  - {slot: nucleus, ipa: 'a',   out: 'a'}
+  - {slot: nucleus, ipa: 'e',   out: 'eh',  when: [open]}
+  - {slot: nucleus, ipa: 'e',   out: 'e'}
+  - {slot: nucleus, ipa: 'i',   out: 'ee'}
+  # <do> and <to> are English words read /uː/, so an open /o/ after a coronal
+  # stop needs the digraph; <no go so lo ro ko mo po> do not.
+  # <do> and <to> are English words read /uː/, and a bare initial <o-> is read
+  # as a schwa, so those three positions take the digraph. 601/651 curated
+  # tokens; every other onset takes a bare <o>.
+  - {slot: nucleus, ipa: 'o',   out: 'oh',  when: [open], after_out: 'd t'}
+  - {slot: nucleus, ipa: 'o',   out: 'oh',  when: [open, no_onset]}
+  - {slot: nucleus, ipa: 'o',   out: 'o'}
+  - {slot: nucleus, ipa: 'u',   out: 'oo'}
+
+  # --- nuclei: Mandarin rimes (closed set, read off the rime evidence) ------
+  - {slot: nucleus, ipa: 'ɥœ',  out: 'ywe',  when: [no_onset, closed]}
+  - {slot: nucleus, ipa: 'ɥœ',  out: 'yweh', when: [no_onset]}
+  - {slot: nucleus, ipa: 'ɥœ',  out: 'we',   when: [closed]}
+  - {slot: nucleus, ipa: 'ɥœ',  out: 'weh'}
+  - {slot: nucleus, ipa: 'ɑʊ',  out: 'ow'}
+  - {slot: nucleus, ipa: 'oʊ',  out: 'oh'}
+  - {slot: nucleus, ipa: 'ɑ',   out: 'ah'}
+  - {slot: nucleus, ipa: 'ɔ',   out: 'aw'}
+  - {slot: nucleus, ipa: 'ɤ',   out: 'u',   when: [closed]}
+  - {slot: nucleus, ipa: 'ɤ',   out: 'uh'}
+  - {slot: nucleus, ipa: 'ɯ',   out: 'uh'}
+  - {slot: nucleus, ipa: 'ɨ',   out: 'ir'}
+  - {slot: nucleus, ipa: 'ə',   out: 'e',   when: [closed], after_out: 'm'}
+  - {slot: nucleus, ipa: 'ə',   out: 'u',   when: [closed]}
+  - {slot: nucleus, ipa: 'ə',   out: 'uh'}
+  - {slot: nucleus, ipa: 'ɛ',   out: 'e',   when: [closed]}
+  - {slot: nucleus, ipa: 'ɛ',   out: 'eh'}
+  - {slot: nucleus, ipa: 'y',   out: 'oo',  after_out: 'y'}
+  - {slot: nucleus, ipa: 'y',   out: 'yoo'}
+  - {slot: nucleus, ipa: 'œ',   out: 'eh'}
+  - {slot: nucleus, ipa: 'ɪ',   out: 'i'}
+  - {slot: nucleus, ipa: 'ʊ',   out: 'o',   when: [closed]}
+  - {slot: nucleus, ipa: 'ʊ',   out: 'oo'}
+
+# Repairs on the assembled syllable. Each one exists because the letters that
+# come out of the phoneme table would be read as a different English word.
+syllable_fixups:
+  # _ow read as /oʊ/ rather than /aʊ/: bow, low, mow, sow, show, glow.
+  - {match: '^(b|l|m|s|sh|g|p|ch|bl|gl|sl)ow$',   out: '\1aow'}
+  - {match: '^(.+y)ow$',                           out: '\1aow'}
+  # English <ge gi> are read /dʒ/, so a hard /ɡ/ before a front vowel needs the
+  # silent <h> the curated sheet supplies: <AL-ghee-en>, not <AL-gee-en>.
+  - {match: '^(.*)g(ee|e)$', out: '\1gh\2'}
+  # sh + /oʊ/ is the one place where the English word says the right thing.
+  - {match: '^shoh$',    out: 'show'}
+
+
+# Per-target overrides. These are O(N) -- one small block per target language in
+# the source's own rule file, not a block per pair -- and the pilot measures how
+# many entries each target actually needs.
+targets:
+  zh-Hans:
+    # Mandarin keeps its medial glide inside the syllable (<dyen>, not
+    # <dee-EN>); the Spanish sheet breaks the same IPA shape into hiatus.
+    splits: []
+    phonemes:
+      - {slot: nucleus, ipa: 'a', out: 'ah'}      # Mandarin sheet writes <ahn>, Spanish <an>
+      - {slot: nucleus, ipa: 'ɛ', out: 'e', when: [closed]}
+    syllable_fixups:
+      # Zero-onset syllables: the curated sheet supplies the glide that Pinyin
+      # writes as <y->/<w->, and drops it word-initially where nothing collides.
+      - {match: '^oo$',      out: 'woo', when: [no_onset], if_nucleus: 'u'}
+      - {match: '^ee$',      out: 'yee', when: [not_word_initial, no_onset]}
+      - {match: '^ahr$',     out: 'are'}
+      - {match: '^mah$',     out: 'ma'}

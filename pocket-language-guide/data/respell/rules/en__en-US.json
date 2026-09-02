@@ -1,0 +1,634 @@
+{
+  "source": "en",
+  "accent": "en-US",
+  "version": "pilot-1",
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "tone": "drop",
+    "length": "none"
+  },
+  "splits": [
+    {
+      "glide": "j",
+      "out": "ee",
+      "after_consonant": true,
+      "except_after": "tɕ tɕʰ ɕ ʈʂ ʈʂʰ ʂ ʐ"
+    },
+    {
+      "glide": "w",
+      "out": "oo",
+      "after_consonant": true,
+      "only_after": "ʝ"
+    }
+  ],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʧ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "dz",
+      "if_inventory": "tsʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "b",
+      "if_inventory": "pʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "d",
+      "if_inventory": "tʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "g",
+      "if_inventory": "kʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "β",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "th"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "zh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕj",
+      "out": "shy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "sy"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "ɡ k ɣ",
+      "unless_inventory": "ŋ#"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "rr"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "yw"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪ",
+      "out": "ye",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪ",
+      "out": "ay",
+      "when": [
+        "not_word_final"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪ",
+      "out": "eye"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑɪ",
+      "out": "ye",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑɪ",
+      "out": "eye"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑɻ",
+      "out": "are"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aʊ",
+      "out": "ow"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oɪ",
+      "out": "oy"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eɪ",
+      "out": "ay"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uj",
+      "out": "wee"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "ah",
+      "when": [
+        "open",
+        "not_word_final"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "eh",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ee"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "oh",
+      "when": [
+        "open"
+      ],
+      "after_out": "d t"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "oh",
+      "when": [
+        "open",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "oo"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥœ",
+      "out": "ywe",
+      "when": [
+        "no_onset",
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥœ",
+      "out": "yweh",
+      "when": [
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥœ",
+      "out": "we",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥœ",
+      "out": "weh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑʊ",
+      "out": "ow"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oʊ",
+      "out": "oh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "ah"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "aw"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "u",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "uh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "uh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "ir"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "e",
+      "when": [
+        "closed"
+      ],
+      "after_out": "m"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "u",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "uh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "e",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "eh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "oo",
+      "after_out": "y"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "yoo"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "eh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "o",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "oo"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "^(b|l|m|s|sh|g|p|ch|bl|gl|sl)ow$",
+      "out": "\\1aow"
+    },
+    {
+      "match": "^(.+y)ow$",
+      "out": "\\1aow"
+    },
+    {
+      "match": "^(.*)g(ee|e)$",
+      "out": "\\1gh\\2"
+    },
+    {
+      "match": "^shoh$",
+      "out": "show"
+    }
+  ],
+  "targets": {
+    "zh-Hans": {
+      "splits": [],
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "a",
+          "out": "ah"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ɛ",
+          "out": "e",
+          "when": [
+            "closed"
+          ]
+        }
+      ],
+      "syllable_fixups": [
+        {
+          "match": "^oo$",
+          "out": "woo",
+          "when": [
+            "no_onset"
+          ],
+          "if_nucleus": "u"
+        },
+        {
+          "match": "^ee$",
+          "out": "yee",
+          "when": [
+            "not_word_initial",
+            "no_onset"
+          ]
+        },
+        {
+          "match": "^ahr$",
+          "out": "are"
+        },
+        {
+          "match": "^mah$",
+          "out": "ma"
+        }
+      ]
+    }
+  },
+  "note": "Read off the 12,001 curated respellings in data/respell/overrides, not from a published pronunciation key. See content/RESPELL-PILOT.md."
+}

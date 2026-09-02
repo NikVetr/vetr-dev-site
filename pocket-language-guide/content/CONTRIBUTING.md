@@ -44,8 +44,17 @@ record variants with `register_variant` rather than picking one silently.
 `data/respell/overrides/<target>__<source>__<accent>.csv` holds pronunciations
 spelled the way a reader of the *source* language would say them. These are keyed
 on the source language and accent, not on the pair, so `en-US` respellings of
-Mandarin serve every English reader. Hyphens between syllables are both
-conventional and useful: the engine treats them as line-break opportunities.
+Mandarin serve every English reader.
+
+**The syllable separator is per reading language, not a hyphen everywhere.** For an
+English reader a hyphen is both conventional and useful, since the engine treats it
+as a line-break opportunity. But Arabic does not hyphenate at all and a hyphen
+breaks the cursive join; Indonesian's hyphen means *spell this out letter by
+letter*, so `n-i-h-a-o` reads as an instruction rather than a word, and KBBI uses a
+dot instead; and a Swahili respelling may hyphenate but never lead with one. So the
+separator is a `policy` field of the reading language's rule table
+(`data/respell/rules/<source>__<accent>.json`), and a curated sheet should use
+whatever that language's own table declares.
 
 ## Reviewing
 
