@@ -139,3 +139,105 @@ test('the same input always gives the same output', () => {
   const b = createRespeller({ rules, targetIpa: Object.keys(SPANISH) });
   for (const ipa of Object.keys(SPANISH)) assert.equal(a.respell(ipa), b.respell(ipa));
 });
+
+// --- the devices a reader's own orthography already has --------------------
+//
+// Capitals are the fallback for a Latin script with no native stress mark, and
+// eleven of the curated sheets use them. They are not available to a caseless
+// script and not idiomatic where an accent exists, so the device is a policy
+// switch. `content/RESPELL-SYSTEMS.md` derives the two-argument decision: which
+// device is a fact about the *reader*, whether to mark at all is a fact about the
+// target.
+const withPolicy = (/** @type {Record<string,any>} */ patch) => ({
+  ...rules, policy: { ...rules.policy, ...patch },
+});
+
+test('the stress device is the reader own, not capitals everywhere', () => {
+  const say = (/** @type {Record<string,any>} */ patch) => createRespeller({
+    rules: withPolicy(patch), targetIpa: Object.keys(SPANISH),
+  }).respell('esˈta');
+  assert.equal(say({ stress: 'caps' }), 'es-TA');
+  // The acute lands on the vowel, and the syllable stays lower case -- which is
+  // what a Spanish, Italian, Portuguese or Russian reader expects.
+  assert.equal(say({ stress: 'acute' }), 'es-tá');
+  // Devanagari is caseless and takes no accent, so Bhargava's prime marks the
+  // syllable instead.
+  assert.equal(say({ stress: 'prime' }), 'es-taʹ');
+  assert.equal(say({ stress: 'none' }), 'es-ta');
+});
+
+test('the acute goes on the last vowel letter of the nucleus, not the first', () => {
+  // `bién`, not `bíen`: a nucleus can be more than one letter, so "the vowel" has
+  // to mean the last one. Here the diphthong is split out first and this table
+  // spells the /i/ `ee`, so the mark lands on the `e` of the second syllable.
+  const es = createRespeller({
+    rules: withPolicy({ stress: 'acute' }), targetIpa: ['bjˈen', 'ˈbjen'],
+  });
+  assert.equal(es.respell('bjˈen'), 'bee-én');
+  // Two letters in one nucleus, marked once and at the end.
+  const oo = createRespeller({ rules: withPolicy({ stress: 'acute' }), targetIpa: ['ˈkwanto'] });
+  assert.equal(oo.respell('ˈkwanto'), 'kwán-toh');
+});
+
+test('an accented letter does not take a second accent', () => {
+  // A phoneme rule may already have written an accent -- Portuguese and French
+  // both need to -- and stacking the stress mark on top of it produces a character
+  // no orthography has. So the device leaves an accented vowel alone.
+  const table = {
+    ...withPolicy({ stress: 'acute' }),
+    phonemes: [{ slot: 'nucleus', ipa: 'e', out: 'é' }, ...rules.phonemes],
+  };
+  const out = createRespeller({ rules: table, targetIpa: ['esˈte'] }).respell('esˈte');
+  // Both `e`s are the table's own; neither has gained a second mark.
+  assert.equal(out, 'és-té');
+  const marks = [...out.normalize('NFD')].filter((c) => c === '\u0301');
+  assert.equal(marks.length, 2, `one acute per vowel, got ${marks.length} in ${out}`);
+});
+
+test('vowel length is written the way the reader writes it', () => {
+  const say = (/** @type {string} */ length) => createRespeller({
+    rules: withPolicy({ length }), targetIpa: ['doːzo'],
+  }).respell('doːzo');
+  // Turkish reads a doubled vowel as two syllables, so it takes a colon instead.
+  assert.notEqual(say('colon'), say('double'));
+  assert.match(say('colon'), /:/);
+  assert.equal(say('none'), createRespeller({ rules, targetIpa: ['doːzo'] }).respell('doːzo'));
+});
+
+test('onset maximisation is the reader decision, not the target', () => {
+  // The TDK prescribes `prog-ram` over `pro-gram` for exactly the Western
+  // vocabulary this corpus is full of, so a Turkish reader shown `pro-gram` is
+  // being shown a syllabification their own orthography rejects. Nothing about
+  // the *target* changes between these two calls.
+  // The sample has to contain a /gr/-initial word for /gr/ to be a cluster at all,
+  // which is the point of `onsetClusters` -- `ˈgɾande` supplies it.
+  const ipa = [...Object.keys(SPANISH), 'proˈgɾama'];
+  const wide = createRespeller({ rules: withPolicy({ stress: 'none' }), targetIpa: ipa });
+  const narrow = createRespeller({
+    rules: withPolicy({ stress: 'none', max_onset: 1 }), targetIpa: ipa,
+  });
+  assert.equal(wide.respell('proˈgɾama'), 'pro-grah-ma');
+  assert.equal(narrow.respell('proˈgɾama'), 'prog-rah-ma');
+});
+
+test('a fixup backreference reaches the page as text, not as a backslash', () => {
+  // `syllable_fixups` writes captures as `\1`, which is the documented format and
+  // what Python's `re.sub` takes. JS spells them `$1` and silently emits the
+  // literal characters for `\1`, so the table's own `g(ee|e) -> \1gh\2` rule put
+  // `\1gh\2` on the card for every Hindi and Korean velar.
+  const out = createRespeller({ rules, targetIpa: ['ɡiː'] }).respell('ɡiː');
+  assert.equal(out, 'ghee', `expected the capture to be substituted, got ${out}`);
+  assert.ok(!out.includes('\\'), 'and no backslash to survive to the page');
+});
+
+test('a rising diphthong is split whether or not stress is marked', () => {
+  // These are two independent decisions -- an English reader cannot read /sja/
+  // inside an onset regardless of whether the syllable is capitalised -- and
+  // gating one on the other dropped the split for every reader whose policy marks
+  // no stress at all.
+  const ipa = ['bjˈen', 'ˈbjen'];
+  const marked = createRespeller({ rules: withPolicy({ stress: 'caps' }), targetIpa: ipa });
+  const plain = createRespeller({ rules: withPolicy({ stress: 'none' }), targetIpa: ipa });
+  assert.equal(marked.respell('bjˈen'), 'bee-EN');
+  assert.equal(plain.respell('bjˈen'), 'bee-en');
+});

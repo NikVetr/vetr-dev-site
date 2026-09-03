@@ -325,6 +325,60 @@ def main():
             if row["concept_id"] not in concepts:
                 errors.append(f"{path.name}: unknown concept_id {row['concept_id']!r}")
 
+    # A respelling rule table is a borrowed pronunciation key plus named
+    # departures from it, and both halves are load-bearing. Every standard worth
+    # borrowing has to be overruled somewhere, always for the same reason -- the
+    # standard produces a permanent spelling and we produce a disposable hint -- so
+    # a table with a `derives_from` and no `deviations` is either unfinished or
+    # claiming a fidelity it does not have. That is also the answer to "why does
+    # our Korean not match the official transcription", which is a question a
+    # reader will eventually ask.
+    SLOTS = {"onset", "nucleus", "coda", "any"}
+    POLICY_VALUES = {"stress": {"caps", "acute", "prime", "none"},
+                     "length": {"none", "double", "colon"},
+                     "tone": {"keep", "drop"}}
+    listed = set(json.loads((DATA / "respell/rules/index.json").read_text(encoding="utf-8")))
+    for path in sorted((DATA / "respell/rules").glob("*.json")):
+        if path.name == "index.json":
+            continue
+        table = json.loads(path.read_text(encoding="utf-8"))
+        where = path.stem
+        if where not in listed:
+            errors.append(f"respell/rules/{where}: not in index.json, so nothing loads it")
+        if where != f"{table.get('source')}__{table.get('accent')}":
+            errors.append(f"respell/rules/{where}: source/accent disagree with the filename")
+        if not table.get("derives_from"):
+            errors.append(f"respell/rules/{where}: no derives_from -- name the key it "
+                          f"borrows, or say it was read off the corpus")
+        elif not table.get("deviations"):
+            errors.append(f"respell/rules/{where}: derives_from with no deviations")
+        for field, allowed in POLICY_VALUES.items():
+            value = (table.get("policy") or {}).get(field)
+            if value is not None and value not in allowed:
+                errors.append(f"respell/rules/{where}: policy.{field}={value!r}, "
+                              f"not one of {sorted(allowed)}")
+        for rule in table.get("phonemes", []):
+            if rule.get("slot") not in SLOTS:
+                errors.append(f"respell/rules/{where}: phoneme {rule.get('ipa')!r} has "
+                              f"slot {rule.get('slot')!r}")
+            if not rule.get("ipa"):
+                errors.append(f"respell/rules/{where}: a phoneme rule with no ipa")
+        # A fixup that does not compile is silent: `createRespeller` builds the
+        # RegExp at load time and the whole pair loses its respelling column.
+        for fixup in table.get("syllable_fixups", []):
+            try:
+                re.compile(fixup["match"])
+            except re.error as exc:
+                errors.append(f"respell/rules/{where}: fixup {fixup['match']!r} "
+                              f"does not compile ({exc})")
+        for target in table.get("targets", {}):
+            if target not in languages:
+                errors.append(f"respell/rules/{where}: targets block for unknown "
+                              f"language {target!r}")
+    for key in sorted(listed):
+        if not (DATA / f"respell/rules/{key}.json").exists():
+            errors.append(f"respell/rules/index.json lists {key}, which does not exist")
+
     # Coverage drives the gallery. Declared status is intent; this is fact, and a
     # language with no rows must not offer a button that produces an empty sheet.
     coverage = {"total": len(concepts), "languages": {}}

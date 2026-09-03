@@ -630,5 +630,20 @@
       ]
     }
   },
-  "note": "Read off the 12,001 curated respellings in data/respell/overrides, not from a published pronunciation key. See content/RESPELL-PILOT.md."
+  "note": "Read off the 12,001 curated respellings in data/respell/overrides, not from a published pronunciation key. See content/RESPELL-PILOT.md.",
+  "derives_from": "Wikipedia's pronunciation respelling key (Help:Pronunciation respelling key, Template:Respell, Module:Respell), CC BY-SA 4.0 -- an IPA-keyed table that hyphenates syllables and capitalises primary stress. Two ideas are taken from the BBC Pronunciation Unit's text spelling rather than its table, which is under OUP's scheme.",
+  "deviations": [
+    {
+      "rule": "Wikipedia distinguishes `ə` for /ə/ from `u` for /ʌ/",
+      "why": "Written `uh` for both. The distinction is native to English and absent from almost every target, so it carries no information here, and `ə` is a non-ASCII glyph whose bowl closes at the 5.2pt italic this column is set in. The 12,001 curated cells already do this, and `uh` is the BBC Unit's form."
+    },
+    {
+      "rule": "Wikipedia separates `oo` for /uː/ from `uu` for /ʊ/",
+      "why": "Merged to `oo`. FOOT-GOOSE is rare in the targets and `uu` is the least guessable symbol in the BBC set; the corpus writes `oo` throughout."
+    },
+    {
+      "rule": "the whole table was read off the corpus, not transcribed from the key",
+      "why": "The 12,001 hand-curated respellings in `data/respell/overrides` record what a human actually chose for each sound *in context*, which a published table cannot. Where the two disagree the corpus wins, and the disagreements are measurable: `scripts/respell_check.mjs en --score`."
+    }
+  ]
 }
