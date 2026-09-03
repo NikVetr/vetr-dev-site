@@ -506,6 +506,11 @@ button.fix:hover { background: rgb(255 255 255 / 70%); }
    own edges, the thumbnails and the two buttons below. Nothing that floats is
    drawn in a box: a panel over the card is a panel over the words. */
 dialog.lightbox {
+  /* The sheet's own proportion, 504 x 360pt, and how much room a caret takes.
+     Both live here so the paper, the thumbnails and the width arithmetic all read
+     the same numbers. */
+  --card-aspect: 1.4;
+  --caret: 4rem;
   border: 0; padding: 0; background: none; max-inline-size: none; max-block-size: none;
   inline-size: 100vw; block-size: 100vh; font: inherit; color: var(--paper);
   display: grid; grid-template-rows: auto minmax(0, 1fr); justify-items: center;
@@ -526,26 +531,31 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   display: grid; grid-template-rows: minmax(0, 1fr) auto;
   gap: var(--space-2); min-block-size: 0; block-size: 100%;
   justify-items: stretch;
-  inline-size: var(--card-w, min(94vw, 1600px));
+  inline-size: min(94vw, 1600px);
 }
 
 /* The card, sized to whatever the window leaves once the pair and the strip have
    their rows. `aspect-ratio` is the sheet's own, so the carets sit on the paper's
    edge and not on the box around it. */
 .lightbox-card {
-  position: relative; display: flex; align-items: center; justify-content: center;
-  min-block-size: 0;
+  position: relative; min-block-size: 0;
+  /* Three shrink-wrapped columns, centred as a group -- so each caret sits against
+     the paper's edge rather than against the window's. With `minmax(0, 1fr)` in the
+     middle the paper was centred inside a track far wider than itself, which left
+     the carets a hundred pixels out at the margins. */
+  display: grid; grid-template-columns: auto auto auto;
+  align-items: center; justify-content: center; column-gap: 0.4rem;
 }
+.lightbox-face { grid-column: 2; grid-row: 1; }
 .lightbox-face {
   /* The sheet's own proportion, 504 x 360pt. Both dimensions are capped, and the
      height is written as the smaller of the row and what the width allows: with
      `aspect-ratio` alone an explicit height wins, so on a narrow window the box
      stayed tall, the SVG letterboxed inside it, and the carets sat on the box's
      edge rather than on the paper's. */
-  --card-aspect: 1.4;
   position: relative;
   inline-size: auto;
-  block-size: min(100%, calc(min(94vw, 1600px) / var(--card-aspect)));
+  block-size: min(100%, calc((min(94vw, 1600px) - 2 * var(--caret)) / var(--card-aspect)));
   aspect-ratio: var(--card-aspect);
   background: var(--paper); border-radius: var(--radius-sm);
   box-shadow: 0 1.4rem 3.5rem rgb(0 0 0 / 45%);
@@ -577,50 +587,60 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
    painted `--surface` into a 5px-radius box. `prev` is disabled on the first face,
    which is where the lightbox opens -- so the box looked like a property of the
    left caret when it was a property of being at the end of the series. */
+/* Beside the card rather than on top of it, and twice the size.
+   On the paper they had to carry a halo of `--paper` to stay legible over the type;
+   outside it they sit on the backdrop, so the halo goes and the colour flips to
+   paper-on-dark. `.lightbox-card` is a three-column grid, so the card keeps its own
+   width and the carets take the gutters -- which is why the caret column is part of
+   `--card-w`'s siblings rather than something the card has to make room for. */
 .lightbox-step {
-  position: absolute; z-index: 1; top: 50%; translate: 0 -50%;
-  padding: 0 0.4rem; border: 0; border-radius: 0; background: none;
-  backdrop-filter: none;
+  grid-row: 1; align-self: center; justify-self: center;
+  padding: 0; border: 0; border-radius: 0; background: none; backdrop-filter: none;
   display: flex; align-items: center; justify-content: center;
-  font-size: 5rem; line-height: 0.7; cursor: pointer;
-  color: rgb(17 24 32 / 34%);
-  text-shadow: 0 0 5px var(--paper), 0 0 12px var(--paper);
+  font-size: 10rem; line-height: 0.6; cursor: pointer;
+  color: rgb(255 255 255 / 38%);
 }
-.lightbox-step.prev { inset-inline-start: 0.15rem; }
-.lightbox-step.next { inset-inline-end: 0.15rem; }
+.lightbox-step.prev { grid-column: 1; }
+.lightbox-step.next { grid-column: 3; }
 .lightbox-step:hover, .lightbox-step:focus-visible {
-  color: rgb(17 24 32 / 60%); outline: none; background: none;
+  color: rgb(255 255 255 / 70%); outline: none; background: none;
 }
 /* Brighter on hover, and outlined -- but the outline is on the glyph, drawn as a
    halo of paper, so it separates the caret from the type under it without covering
    any. Only where there is a card to go to: the ends of the series stay faint. */
 .lightbox-step:not(:disabled):hover, .lightbox-step:not(:disabled):focus-visible {
-  color: var(--ink); outline: none; background: none;
-  text-shadow: 0 0 4px var(--paper), 0 0 9px var(--paper), 0 0 14px var(--paper);
+  color: var(--paper); outline: none; background: none;
 }
 .lightbox-step:disabled { opacity: 0.34; cursor: default; }
 
 /* The strip, and the two things to do with the card, on one row exactly as tall as
    a thumbnail: the buttons divide that height rather than setting their own. */
 .lightbox-foot {
-  /* `min-inline-size: 0`, or the grid refuses to take it below its own min-content
-     -- which is the strip's eight un-shrinkable thumbnails plus the button column,
-     and on a short window that is wider than the card it sits under. */
+  /* Aligned to the *paper*, not to the stack -- the stack is wider because it holds
+     a caret on each side. `--card-w` is the paper's measured width, published by
+     `ui/lightbox.js` because it is the card's rendered height times the sheet's
+     aspect and CSS cannot state it. */
+  inline-size: var(--card-w, 100%); margin-inline: auto;
   min-inline-size: 0;
   display: flex; align-items: stretch; justify-content: space-between;
   gap: var(--space-3);
 }
-/* `flex: 1 1 0` and a scroll, because a thumb is a fixed 6.4rem and never shrinks:
-   as `0 1 auto` their max-content decided the foot's width, and with eight faces
-   that was wider than the card they sit under. */
+/* Every thumbnail fits, rather than eight of them scrolling.
+   A grid of equal fractions, so the row is exactly as wide as the space the buttons
+   leave and each thumb takes 1/n of it -- ten faces give narrower thumbs, not a
+   scrollbar. `minmax(0, 1fr)` is what lets a track go below its content's width.
+   The thumbs keep the sheet's aspect, so their height follows and the foot's own
+   height follows that. */
 .lightbox-strip {
-  display: flex; gap: 0.4rem; min-inline-size: 0; flex: 1 1 0;
-  overflow-x: auto; scrollbar-width: thin; padding-block-end: 0.15rem;
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
+  gap: 0.4rem; min-inline-size: 0; flex: 1 1 0;
 }
 .lightbox-thumb {
   padding: 0; border: 1px solid rgb(255 255 255 / 25%); border-radius: 3px;
   background: var(--paper); cursor: pointer; overflow: hidden;
-  inline-size: 6.4rem; aspect-ratio: 504 / 360; flex: 0 0 auto;
+  /* No width of its own: the grid track decides, capped so two faces do not become
+     two enormous thumbnails. */
+  inline-size: 100%; max-inline-size: 8rem; aspect-ratio: var(--card-aspect, 1.4);
 }
 .lightbox-thumb > svg { display: block; inline-size: 100%; block-size: 100%; }
 .lightbox-thumb:hover { border-color: rgb(255 255 255 / 70%); }
@@ -629,7 +649,13 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 .lightbox-thumb[aria-selected='true'] {
   border-color: var(--paper); outline: 2px solid var(--accent-lift); outline-offset: 1px;
 }
-.lightbox-do { display: flex; flex-direction: column; gap: 0.4rem; flex: 0 0 auto; }
+/* Sized to the strip beside it: `flex: 0 1 auto` so a narrow window shrinks the
+   button column too rather than squeezing the thumbnails alone, with a floor so the
+   labels stay readable. */
+.lightbox-do {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  flex: 0 1 auto; min-inline-size: 5.5rem;
+}
 .lightbox-do .btn {
   flex: 1 1 0; min-block-size: 0; padding-block: 0;
   display: flex; align-items: center; justify-content: center; text-align: center;
@@ -642,6 +668,7 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   gap: var(--space-2); font-size: var(--fs-1);
   inline-size: var(--card-w, min(94vw, 1600px));
+  margin-inline: auto;
 }
 .pair-side { display: flex; min-inline-size: 0; }
 .pair-side.start { justify-content: flex-end; }
@@ -703,8 +730,9 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   .lightbox-foot { flex-direction: column; align-items: center; }
   .lightbox-do { flex-direction: row; }
   .lightbox-do .btn { padding-block: 0.35rem; }
-  .lightbox-thumb { inline-size: 3.6rem; }
-  .lightbox-step { font-size: 2.6rem; }
+  .lightbox-thumb { max-inline-size: 4.4rem; }
+  .lightbox-step { font-size: 5rem; }
+  dialog.lightbox { --caret: 2rem; }
 }
 
 /* The Custom row a numeric setting opens: a slider to feel the range, a box to type

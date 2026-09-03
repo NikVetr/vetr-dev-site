@@ -210,6 +210,29 @@ test('the card, the pair and the strip share one width', async ({ page }) => {
       expect(Math.abs(got - card), `${sel} against the card at ${size.height}px tall`)
         .toBeLessThan(3);
     }
+
+    // The carets sit beside the paper, not on it and not out at the window's edge.
+    const edges = await page.evaluate(() => {
+      const r = (/** @type {string} */ sel) => {
+        const b = document.querySelector(sel).getBoundingClientRect();
+        return { left: b.left, right: b.right };
+      };
+      const strip = document.querySelector('.lightbox-strip');
+      return {
+        face: r('.lightbox-face'), prev: r('.lightbox-step.prev'), next: r('.lightbox-step.next'),
+        overflow: strip.scrollWidth - strip.clientWidth,
+      };
+    });
+    expect(edges.prev.right).toBeLessThanOrEqual(edges.face.left + 1);
+    expect(edges.next.left).toBeGreaterThanOrEqual(edges.face.right - 1);
+    expect(edges.face.left - edges.prev.right, 'the left caret hugs the paper')
+      .toBeLessThan(24);
+    expect(edges.next.left - edges.face.right, 'and so does the right one')
+      .toBeLessThan(24);
+
+    // Every thumbnail fits: the strip is a grid of equal fractions, so ten faces
+    // give narrower thumbs rather than a scrollbar.
+    expect(edges.overflow, 'the thumbnail strip should never scroll').toBe(0);
     await page.keyboard.press('Escape');
   }
 });
@@ -231,4 +254,33 @@ test('both carets are visible before hover and neither has a box', async ({ page
     });
     expect(paint.bg, `${dir} caret background on hover`).toMatch(/rgba\(0, 0, 0, 0\)|transparent/);
   }
+});
+
+test('a sheet the reader has looked at is kept across visits', async ({ page }) => {
+  // The in-memory map only helped within one page. Pre-rendering all 272 pairs is
+  // the obvious alternative and is a quarter of a gigabyte of vector SVG; keeping
+  // what a reader has actually opened costs nothing until they open it.
+  await page.goto('/');
+  await page.locator('.card-thumb-button').first().click();
+  await expect(page.locator('.lightbox-face svg')).toBeVisible({ timeout: 90_000 });
+  await expect.poll(() => page.evaluate(async () => {
+    const c = await caches.open('plg-sheets');
+    return (await c.keys()).length;
+  }), { timeout: 30_000 }).toBeGreaterThan(0);
+
+  // A fresh page finds it, and finds it fast.
+  await page.reload();
+  await expect(page.locator('.card').first()).toBeVisible();
+  const t0 = Date.now();
+  await page.locator('.card-thumb-button').first().click();
+  await expect(page.locator('.lightbox-face svg')).toBeVisible({ timeout: 90_000 });
+  const took = Date.now() - t0;
+  expect(took, `a kept sheet should open without solving, took ${took}ms`).toBeLessThan(700);
+
+  // And the key carries the shell's content hash, so an engine change invalidates.
+  const keys = await page.evaluate(async () => {
+    const c = await caches.open('plg-sheets');
+    return (await c.keys()).map((r) => r.url);
+  });
+  expect(keys[0]).toMatch(/__sheet\/.+__.+\?v=[0-9a-f]{6,}/);
 });

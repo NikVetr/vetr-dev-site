@@ -3,7 +3,7 @@
     {
       "target": "en",
       "source": "es",
-      "scale": 0.79,
+      "scale": 0.67,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -23,7 +23,7 @@
     {
       "target": "en",
       "source": "zh-Hans",
-      "scale": 0.82,
+      "scale": 0.79,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -51,6 +51,85 @@
     {
       "target": "en",
       "source": "ja",
+      "scale": 0.46,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "en",
+      "source": "ar",
+      "scale": 0.97,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "en",
+      "source": "fr",
+      "scale": 0.57,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "en",
+      "source": "de",
       "scale": 0.63,
       "faces": 8,
       "pageW": 504,
@@ -70,9 +149,49 @@
     },
     {
       "target": "en",
-      "source": "ar",
-      "scale": 0.49,
-      "faces": 6,
+      "source": "pt",
+      "scale": 0.67,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "en",
+      "source": "ko",
+      "scale": 0.71,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "en",
+      "source": "hi",
+      "scale": 0.92,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
@@ -81,12 +200,12 @@
           "code": "paper-too-coarse",
           "severity": "warn",
           "params": {
-            "script": "Arabic",
+            "script": "Devanagari",
             "floor": "5.40",
             "field": "respell",
             "size": "5.20"
           },
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
         },
         {
           "code": "empty-column",
@@ -109,8 +228,47 @@
     },
     {
       "target": "en",
-      "source": "fr",
-      "scale": 0.7,
+      "source": "th",
+      "scale": 0.46,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Thai",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "en",
+      "source": "ru",
+      "scale": 0.62,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -129,7 +287,47 @@
     },
     {
       "target": "en",
-      "source": "de",
+      "source": "id",
+      "scale": 0.72,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "en",
+      "source": "sw",
+      "scale": 0.63,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "en",
+      "source": "tr",
       "scale": 0.73,
       "faces": 8,
       "pageW": 504,
@@ -149,206 +347,8 @@
     },
     {
       "target": "en",
-      "source": "pt",
-      "scale": 0.79,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "en",
-      "source": "ko",
-      "scale": 0.93,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "en",
-      "source": "hi",
-      "scale": 0.45,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Devanagari",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "en",
-      "source": "th",
-      "scale": 0.55,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Thai",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "en",
-      "source": "ru",
-      "scale": 0.76,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "en",
-      "source": "id",
-      "scale": 0.84,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "en",
-      "source": "sw",
-      "scale": 0.76,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "en",
-      "source": "tr",
-      "scale": 0.86,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "en",
       "source": "vi",
-      "scale": 0.83,
+      "scale": 0.72,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -368,7 +368,7 @@
     {
       "target": "en",
       "source": "it",
-      "scale": 0.76,
+      "scale": 0.63,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -388,7 +388,7 @@
     {
       "target": "es",
       "source": "en",
-      "scale": 0.65,
+      "scale": 0.5,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -408,7 +408,7 @@
     {
       "target": "es",
       "source": "zh-Hans",
-      "scale": 0.79,
+      "scale": 0.77,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -436,8 +436,8 @@
     {
       "target": "es",
       "source": "ja",
-      "scale": 0.6,
-      "faces": 8,
+      "scale": 0.79,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
@@ -456,8 +456,8 @@
     {
       "target": "es",
       "source": "ar",
-      "scale": 0.48,
-      "faces": 6,
+      "scale": 0.93,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
@@ -495,7 +495,7 @@
     {
       "target": "es",
       "source": "fr",
-      "scale": 0.65,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -515,7 +515,7 @@
     {
       "target": "es",
       "source": "de",
-      "scale": 0.64,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -535,7 +535,7 @@
     {
       "target": "es",
       "source": "pt",
-      "scale": 0.7,
+      "scale": 0.57,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -555,7 +555,7 @@
     {
       "target": "es",
       "source": "ko",
-      "scale": 0.88,
+      "scale": 0.67,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -575,7 +575,7 @@
     {
       "target": "es",
       "source": "hi",
-      "scale": 0.94,
+      "scale": 0.86,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -614,7 +614,7 @@
     {
       "target": "es",
       "source": "th",
-      "scale": 0.5,
+      "scale": 0.47,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -653,7 +653,7 @@
     {
       "target": "es",
       "source": "ru",
-      "scale": 0.67,
+      "scale": 0.5,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -673,7 +673,7 @@
     {
       "target": "es",
       "source": "id",
-      "scale": 0.77,
+      "scale": 0.57,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -693,7 +693,7 @@
     {
       "target": "es",
       "source": "sw",
-      "scale": 0.71,
+      "scale": 0.54,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -713,7 +713,7 @@
     {
       "target": "es",
       "source": "tr",
-      "scale": 0.77,
+      "scale": 0.61,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -733,7 +733,7 @@
     {
       "target": "es",
       "source": "vi",
-      "scale": 0.76,
+      "scale": 0.61,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -753,7 +753,7 @@
     {
       "target": "es",
       "source": "it",
-      "scale": 0.7,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -773,7 +773,7 @@
     {
       "target": "zh-Hans",
       "source": "en",
-      "scale": 0.7,
+      "scale": 0.65,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -793,7 +793,7 @@
     {
       "target": "zh-Hans",
       "source": "es",
-      "scale": 0.75,
+      "scale": 0.67,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -813,7 +813,7 @@
     {
       "target": "zh-Hans",
       "source": "ja",
-      "scale": 0.64,
+      "scale": 0.6,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -833,7 +833,7 @@
     {
       "target": "zh-Hans",
       "source": "ar",
-      "scale": 0.98,
+      "scale": 0.76,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -872,7 +872,7 @@
     {
       "target": "zh-Hans",
       "source": "fr",
-      "scale": 0.64,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -892,7 +892,7 @@
     {
       "target": "zh-Hans",
       "source": "de",
-      "scale": 0.62,
+      "scale": 0.59,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -912,7 +912,7 @@
     {
       "target": "zh-Hans",
       "source": "pt",
-      "scale": 0.75,
+      "scale": 0.69,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -932,7 +932,7 @@
     {
       "target": "zh-Hans",
       "source": "ko",
-      "scale": 1,
+      "scale": 0.92,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -952,7 +952,7 @@
     {
       "target": "zh-Hans",
       "source": "hi",
-      "scale": 0.92,
+      "scale": 0.74,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -991,7 +991,7 @@
     {
       "target": "zh-Hans",
       "source": "th",
-      "scale": 1,
+      "scale": 0.96,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1030,7 +1030,7 @@
     {
       "target": "zh-Hans",
       "source": "ru",
-      "scale": 0.71,
+      "scale": 0.64,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1050,7 +1050,7 @@
     {
       "target": "zh-Hans",
       "source": "id",
-      "scale": 0.8,
+      "scale": 0.72,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1070,7 +1070,7 @@
     {
       "target": "zh-Hans",
       "source": "sw",
-      "scale": 0.71,
+      "scale": 0.68,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1090,7 +1090,7 @@
     {
       "target": "zh-Hans",
       "source": "tr",
-      "scale": 0.84,
+      "scale": 0.77,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1110,7 +1110,7 @@
     {
       "target": "zh-Hans",
       "source": "vi",
-      "scale": 0.78,
+      "scale": 0.73,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1130,7 +1130,7 @@
     {
       "target": "zh-Hans",
       "source": "it",
-      "scale": 0.74,
+      "scale": 0.65,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1150,7 +1150,7 @@
     {
       "target": "ja",
       "source": "en",
-      "scale": 0.74,
+      "scale": 0.69,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1170,7 +1170,7 @@
     {
       "target": "ja",
       "source": "es",
-      "scale": 0.79,
+      "scale": 0.72,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1190,7 +1190,7 @@
     {
       "target": "ja",
       "source": "zh-Hans",
-      "scale": 0.86,
+      "scale": 0.79,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1218,8 +1218,8 @@
     {
       "target": "ja",
       "source": "ar",
-      "scale": 0.62,
-      "faces": 8,
+      "scale": 0.89,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 622,
@@ -1257,26 +1257,6 @@
     {
       "target": "ja",
       "source": "fr",
-      "scale": 0.74,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 622,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "ja",
-      "source": "de",
       "scale": 0.68,
       "faces": 10,
       "pageW": 504,
@@ -1296,8 +1276,28 @@
     },
     {
       "target": "ja",
+      "source": "de",
+      "scale": 0.64,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "ja",
       "source": "pt",
-      "scale": 0.82,
+      "scale": 0.75,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1317,8 +1317,8 @@
     {
       "target": "ja",
       "source": "ko",
-      "scale": 0.52,
-      "faces": 8,
+      "scale": 0.92,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 617,
@@ -1337,8 +1337,8 @@
     {
       "target": "ja",
       "source": "hi",
-      "scale": 0.59,
-      "faces": 8,
+      "scale": 0.84,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
@@ -1376,7 +1376,7 @@
     {
       "target": "ja",
       "source": "th",
-      "scale": 0.72,
+      "scale": 0.54,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1415,7 +1415,7 @@
     {
       "target": "ja",
       "source": "ru",
-      "scale": 0.75,
+      "scale": 0.69,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1435,7 +1435,7 @@
     {
       "target": "ja",
       "source": "id",
-      "scale": 0.72,
+      "scale": 0.7,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1455,7 +1455,7 @@
     {
       "target": "ja",
       "source": "sw",
-      "scale": 0.81,
+      "scale": 0.76,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1475,8 +1475,8 @@
     {
       "target": "ja",
       "source": "tr",
-      "scale": 0.46,
-      "faces": 8,
+      "scale": 0.8,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
@@ -1495,7 +1495,7 @@
     {
       "target": "ja",
       "source": "vi",
-      "scale": 0.86,
+      "scale": 0.8,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1515,7 +1515,7 @@
     {
       "target": "ja",
       "source": "it",
-      "scale": 0.77,
+      "scale": 0.72,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1535,7 +1535,7 @@
     {
       "target": "ar",
       "source": "en",
-      "scale": 0.81,
+      "scale": 0.73,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1555,7 +1555,7 @@
     {
       "target": "ar",
       "source": "es",
-      "scale": 0.82,
+      "scale": 0.76,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1575,7 +1575,7 @@
     {
       "target": "ar",
       "source": "zh-Hans",
-      "scale": 0.85,
+      "scale": 0.72,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1603,7 +1603,7 @@
     {
       "target": "ar",
       "source": "ja",
-      "scale": 0.65,
+      "scale": 0.59,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1623,7 +1623,7 @@
     {
       "target": "ar",
       "source": "fr",
-      "scale": 0.75,
+      "scale": 0.68,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1643,7 +1643,7 @@
     {
       "target": "ar",
       "source": "de",
-      "scale": 0.72,
+      "scale": 0.64,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1663,7 +1663,7 @@
     {
       "target": "ar",
       "source": "pt",
-      "scale": 0.85,
+      "scale": 0.77,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1683,7 +1683,7 @@
     {
       "target": "ar",
       "source": "ko",
-      "scale": 1,
+      "scale": 0.88,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1703,8 +1703,8 @@
     {
       "target": "ar",
       "source": "hi",
-      "scale": 0.59,
-      "faces": 8,
+      "scale": 0.95,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
@@ -1742,7 +1742,7 @@
     {
       "target": "ar",
       "source": "th",
-      "scale": 0.65,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1781,7 +1781,7 @@
     {
       "target": "ar",
       "source": "ru",
-      "scale": 0.76,
+      "scale": 0.67,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1801,7 +1801,7 @@
     {
       "target": "ar",
       "source": "id",
-      "scale": 0.86,
+      "scale": 0.76,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1821,7 +1821,7 @@
     {
       "target": "ar",
       "source": "sw",
-      "scale": 0.8,
+      "scale": 0.73,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1841,7 +1841,7 @@
     {
       "target": "ar",
       "source": "tr",
-      "scale": 0.88,
+      "scale": 0.79,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1861,7 +1861,7 @@
     {
       "target": "ar",
       "source": "vi",
-      "scale": 0.87,
+      "scale": 0.8,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1881,7 +1881,7 @@
     {
       "target": "ar",
       "source": "it",
-      "scale": 0.8,
+      "scale": 0.74,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -1901,7 +1901,7 @@
     {
       "target": "fr",
       "source": "en",
-      "scale": 0.67,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1921,7 +1921,7 @@
     {
       "target": "fr",
       "source": "es",
-      "scale": 0.73,
+      "scale": 0.6,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1941,7 +1941,7 @@
     {
       "target": "fr",
       "source": "zh-Hans",
-      "scale": 0.74,
+      "scale": 0.72,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -1969,8 +1969,8 @@
     {
       "target": "fr",
       "source": "ja",
-      "scale": 0.61,
-      "faces": 8,
+      "scale": 0.83,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
@@ -1989,6 +1989,144 @@
     {
       "target": "fr",
       "source": "ar",
+      "scale": 0.92,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fr",
+      "source": "de",
+      "scale": 0.55,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fr",
+      "source": "pt",
+      "scale": 0.62,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fr",
+      "source": "ko",
+      "scale": 0.69,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fr",
+      "source": "hi",
+      "scale": 0.85,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fr",
+      "source": "th",
       "scale": 0.96,
       "faces": 8,
       "pageW": 504,
@@ -1999,144 +2137,6 @@
           "code": "paper-too-coarse",
           "severity": "warn",
           "params": {
-            "script": "Arabic",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "fr",
-      "source": "de",
-      "scale": 0.67,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "fr",
-      "source": "pt",
-      "scale": 0.74,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "fr",
-      "source": "ko",
-      "scale": 0.89,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "fr",
-      "source": "hi",
-      "scale": 0.91,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Devanagari",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "fr",
-      "source": "th",
-      "scale": 0.46,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
             "script": "Thai",
             "floor": "5.40",
             "field": "respell",
@@ -2166,7 +2166,7 @@
     {
       "target": "fr",
       "source": "ru",
-      "scale": 0.68,
+      "scale": 0.57,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2186,7 +2186,7 @@
     {
       "target": "fr",
       "source": "id",
-      "scale": 0.78,
+      "scale": 0.65,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2206,7 +2206,7 @@
     {
       "target": "fr",
       "source": "sw",
-      "scale": 0.74,
+      "scale": 0.6,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2226,7 +2226,7 @@
     {
       "target": "fr",
       "source": "tr",
-      "scale": 0.79,
+      "scale": 0.66,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2246,7 +2246,7 @@
     {
       "target": "fr",
       "source": "vi",
-      "scale": 0.76,
+      "scale": 0.62,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2266,7 +2266,7 @@
     {
       "target": "fr",
       "source": "it",
-      "scale": 0.74,
+      "scale": 0.6,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2286,7 +2286,7 @@
     {
       "target": "de",
       "source": "en",
-      "scale": 0.62,
+      "scale": 0.47,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2306,7 +2306,7 @@
     {
       "target": "de",
       "source": "es",
-      "scale": 0.68,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2326,7 +2326,7 @@
     {
       "target": "de",
       "source": "zh-Hans",
-      "scale": 0.74,
+      "scale": 0.72,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -2354,225 +2354,8 @@
     {
       "target": "de",
       "source": "ja",
-      "scale": 0.49,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "de",
-      "source": "ar",
-      "scale": 0.93,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Arabic",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "de",
-      "source": "fr",
-      "scale": 0.58,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "de",
-      "source": "pt",
-      "scale": 0.64,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 617,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "de",
-      "source": "ko",
-      "scale": 0.82,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "de",
-      "source": "hi",
-      "scale": 0.92,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Devanagari",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "de",
-      "source": "th",
-      "scale": 0.45,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Thai",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "de",
-      "source": "ru",
-      "scale": 0.64,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "de",
-      "source": "id",
-      "scale": 0.72,
-      "faces": 8,
+      "scale": 0.66,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
@@ -2598,8 +2381,225 @@
     },
     {
       "target": "de",
+      "source": "ar",
+      "scale": 0.85,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "fr",
+      "scale": 0.76,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "pt",
+      "scale": 0.51,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "ko",
+      "scale": 0.62,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "hi",
+      "scale": 0.82,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "th",
+      "scale": 0.92,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Thai",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "ru",
+      "scale": 0.48,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "id",
+      "scale": 0.56,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
       "source": "sw",
-      "scale": 0.65,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2619,7 +2619,7 @@
     {
       "target": "de",
       "source": "tr",
-      "scale": 0.71,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2639,7 +2639,7 @@
     {
       "target": "de",
       "source": "vi",
-      "scale": 0.72,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2659,7 +2659,7 @@
     {
       "target": "de",
       "source": "it",
-      "scale": 0.64,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2679,7 +2679,7 @@
     {
       "target": "pt",
       "source": "en",
-      "scale": 0.63,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2699,7 +2699,7 @@
     {
       "target": "pt",
       "source": "es",
-      "scale": 0.7,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2719,7 +2719,7 @@
     {
       "target": "pt",
       "source": "zh-Hans",
-      "scale": 0.79,
+      "scale": 0.75,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -2747,8 +2747,8 @@
     {
       "target": "pt",
       "source": "ja",
-      "scale": 0.57,
-      "faces": 8,
+      "scale": 0.76,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 613,
@@ -2767,8 +2767,8 @@
     {
       "target": "pt",
       "source": "ar",
-      "scale": 0.46,
-      "faces": 6,
+      "scale": 0.93,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 613,
@@ -2806,7 +2806,7 @@
     {
       "target": "pt",
       "source": "fr",
-      "scale": 0.63,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2826,7 +2826,7 @@
     {
       "target": "pt",
       "source": "de",
-      "scale": 0.6,
+      "scale": 0.47,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2846,104 +2846,6 @@
     {
       "target": "pt",
       "source": "ko",
-      "scale": 0.87,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 613,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "pt",
-      "source": "hi",
-      "scale": 0.97,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Devanagari",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "pt",
-      "source": "th",
-      "scale": 0.48,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Thai",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "pt",
-      "source": "ru",
       "scale": 0.66,
       "faces": 8,
       "pageW": 504,
@@ -2963,8 +2865,106 @@
     },
     {
       "target": "pt",
+      "source": "hi",
+      "scale": 0.88,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "pt",
+      "source": "th",
+      "scale": 1,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Thai",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "pt",
+      "source": "ru",
+      "scale": 0.51,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "pt",
       "source": "id",
-      "scale": 0.74,
+      "scale": 0.57,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -2984,7 +2984,7 @@
     {
       "target": "pt",
       "source": "sw",
-      "scale": 0.72,
+      "scale": 0.57,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3004,7 +3004,7 @@
     {
       "target": "pt",
       "source": "tr",
-      "scale": 0.75,
+      "scale": 0.61,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3024,7 +3024,7 @@
     {
       "target": "pt",
       "source": "vi",
-      "scale": 0.75,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3044,7 +3044,7 @@
     {
       "target": "pt",
       "source": "it",
-      "scale": 0.72,
+      "scale": 0.56,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3064,7 +3064,7 @@
     {
       "target": "ko",
       "source": "en",
-      "scale": 0.51,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3084,7 +3084,7 @@
     {
       "target": "ko",
       "source": "es",
-      "scale": 0.59,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3104,8 +3104,8 @@
     {
       "target": "ko",
       "source": "zh-Hans",
-      "scale": 0.51,
-      "faces": 6,
+      "scale": 1,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
@@ -3132,8 +3132,8 @@
     {
       "target": "ko",
       "source": "ja",
-      "scale": 0.45,
-      "faces": 8,
+      "scale": 0.83,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
@@ -3152,7 +3152,7 @@
     {
       "target": "ko",
       "source": "ar",
-      "scale": 0.85,
+      "scale": 0.66,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3191,8 +3191,8 @@
     {
       "target": "ko",
       "source": "fr",
-      "scale": 0.51,
-      "faces": 8,
+      "scale": 0.84,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
@@ -3211,7 +3211,7 @@
     {
       "target": "ko",
       "source": "de",
-      "scale": 0.52,
+      "scale": 0.45,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3231,7 +3231,7 @@
     {
       "target": "ko",
       "source": "pt",
-      "scale": 0.62,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3251,7 +3251,7 @@
     {
       "target": "ko",
       "source": "hi",
-      "scale": 0.8,
+      "scale": 0.59,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3290,7 +3290,7 @@
     {
       "target": "ko",
       "source": "th",
-      "scale": 0.96,
+      "scale": 0.79,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3329,7 +3329,7 @@
     {
       "target": "ko",
       "source": "ru",
-      "scale": 0.56,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3349,7 +3349,7 @@
     {
       "target": "ko",
       "source": "id",
-      "scale": 0.58,
+      "scale": 0.54,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3369,7 +3369,7 @@
     {
       "target": "ko",
       "source": "sw",
-      "scale": 0.61,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3389,7 +3389,7 @@
     {
       "target": "ko",
       "source": "tr",
-      "scale": 0.67,
+      "scale": 0.6,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3409,7 +3409,7 @@
     {
       "target": "ko",
       "source": "vi",
-      "scale": 0.65,
+      "scale": 0.57,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3429,7 +3429,7 @@
     {
       "target": "ko",
       "source": "it",
-      "scale": 0.6,
+      "scale": 0.52,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3449,7 +3449,7 @@
     {
       "target": "hi",
       "source": "en",
-      "scale": 0.74,
+      "scale": 0.66,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3469,7 +3469,7 @@
     {
       "target": "hi",
       "source": "es",
-      "scale": 0.77,
+      "scale": 0.71,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3489,7 +3489,7 @@
     {
       "target": "hi",
       "source": "zh-Hans",
-      "scale": 0.75,
+      "scale": 0.67,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3517,7 +3517,7 @@
     {
       "target": "hi",
       "source": "ja",
-      "scale": 0.62,
+      "scale": 0.53,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3537,8 +3537,8 @@
     {
       "target": "hi",
       "source": "ar",
-      "scale": 0.59,
-      "faces": 8,
+      "scale": 0.95,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
@@ -3576,26 +3576,6 @@
     {
       "target": "hi",
       "source": "fr",
-      "scale": 0.74,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "hi",
-      "source": "de",
       "scale": 0.67,
       "faces": 10,
       "pageW": 504,
@@ -3615,8 +3595,28 @@
     },
     {
       "target": "hi",
+      "source": "de",
+      "scale": 0.59,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hi",
       "source": "pt",
-      "scale": 0.78,
+      "scale": 0.69,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3636,8 +3636,8 @@
     {
       "target": "hi",
       "source": "ko",
-      "scale": 0.46,
-      "faces": 8,
+      "scale": 0.91,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
@@ -3656,7 +3656,7 @@
     {
       "target": "hi",
       "source": "th",
-      "scale": 0.65,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3695,7 +3695,7 @@
     {
       "target": "hi",
       "source": "ru",
-      "scale": 0.74,
+      "scale": 0.66,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3715,7 +3715,7 @@
     {
       "target": "hi",
       "source": "id",
-      "scale": 0.81,
+      "scale": 0.72,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3735,7 +3735,7 @@
     {
       "target": "hi",
       "source": "sw",
-      "scale": 0.73,
+      "scale": 0.66,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3749,13 +3749,21 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "hi",
       "source": "tr",
-      "scale": 0.79,
+      "scale": 0.73,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3775,7 +3783,7 @@
     {
       "target": "hi",
       "source": "vi",
-      "scale": 0.83,
+      "scale": 0.76,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3795,7 +3803,7 @@
     {
       "target": "hi",
       "source": "it",
-      "scale": 0.73,
+      "scale": 0.64,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -3815,7 +3823,7 @@
     {
       "target": "th",
       "source": "en",
-      "scale": 0.51,
+      "scale": 0.45,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3843,8 +3851,8 @@
     {
       "target": "th",
       "source": "es",
-      "scale": 0.5,
-      "faces": 8,
+      "scale": 0.88,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
@@ -3871,7 +3879,7 @@
     {
       "target": "th",
       "source": "zh-Hans",
-      "scale": 0.88,
+      "scale": 0.82,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -3907,109 +3915,6 @@
     {
       "target": "th",
       "source": "ja",
-      "scale": 0.94,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 613,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ar",
-      "scale": 0.69,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 613,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Arabic",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "fr",
-      "scale": 0.47,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 613,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "de",
       "scale": 0.83,
       "faces": 10,
       "pageW": 504,
@@ -4037,8 +3942,111 @@
     },
     {
       "target": "th",
+      "source": "ar",
+      "scale": 0.56,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "fr",
+      "scale": 0.84,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "de",
+      "scale": 0.76,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
       "source": "pt",
-      "scale": 0.51,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4066,7 +4074,7 @@
     {
       "target": "th",
       "source": "ko",
-      "scale": 0.67,
+      "scale": 0.61,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4094,7 +4102,7 @@
     {
       "target": "th",
       "source": "hi",
-      "scale": 0.69,
+      "scale": 0.54,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4141,8 +4149,8 @@
     {
       "target": "th",
       "source": "ru",
-      "scale": 0.47,
-      "faces": 8,
+      "scale": 0.8,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 613,
@@ -4163,13 +4171,21 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "th",
       "source": "id",
-      "scale": 0.49,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4197,8 +4213,8 @@
     {
       "target": "th",
       "source": "sw",
-      "scale": 0.48,
-      "faces": 8,
+      "scale": 0.88,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
@@ -4225,62 +4241,6 @@
     {
       "target": "th",
       "source": "tr",
-      "scale": 0.53,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 613,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "vi",
-      "scale": 0.54,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 615,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "it",
       "scale": 0.5,
       "faces": 8,
       "pageW": 504,
@@ -4307,9 +4267,65 @@
       ]
     },
     {
+      "target": "th",
+      "source": "vi",
+      "scale": 0.5,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "it",
+      "scale": 0.86,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "ru",
       "source": "en",
-      "scale": 0.77,
+      "scale": 0.69,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -4329,8 +4345,8 @@
     {
       "target": "ru",
       "source": "es",
-      "scale": 0.47,
-      "faces": 8,
+      "scale": 0.72,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
@@ -4349,7 +4365,7 @@
     {
       "target": "ru",
       "source": "zh-Hans",
-      "scale": 0.84,
+      "scale": 0.81,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4377,7 +4393,7 @@
     {
       "target": "ru",
       "source": "ja",
-      "scale": 0.6,
+      "scale": 0.52,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -4397,7 +4413,7 @@
     {
       "target": "ru",
       "source": "ar",
-      "scale": 0.62,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4436,7 +4452,7 @@
     {
       "target": "ru",
       "source": "fr",
-      "scale": 0.75,
+      "scale": 0.69,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -4456,7 +4472,7 @@
     {
       "target": "ru",
       "source": "de",
-      "scale": 0.72,
+      "scale": 0.67,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -4476,8 +4492,8 @@
     {
       "target": "ru",
       "source": "pt",
-      "scale": 0.45,
-      "faces": 8,
+      "scale": 0.71,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
@@ -4496,7 +4512,7 @@
     {
       "target": "ru",
       "source": "ko",
-      "scale": 0.55,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4516,8 +4532,8 @@
     {
       "target": "ru",
       "source": "hi",
-      "scale": 0.59,
-      "faces": 8,
+      "scale": 0.87,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
@@ -4555,7 +4571,7 @@
     {
       "target": "ru",
       "source": "th",
-      "scale": 0.63,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4594,7 +4610,7 @@
     {
       "target": "ru",
       "source": "id",
-      "scale": 0.55,
+      "scale": 0.5,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4614,6 +4630,26 @@
     {
       "target": "ru",
       "source": "sw",
+      "scale": 0.7,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "ru",
+      "source": "tr",
       "scale": 0.47,
       "faces": 8,
       "pageW": 504,
@@ -4633,28 +4669,8 @@
     },
     {
       "target": "ru",
-      "source": "tr",
-      "scale": 0.51,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "ru",
       "source": "vi",
-      "scale": 0.52,
+      "scale": 0.47,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4674,8 +4690,8 @@
     {
       "target": "ru",
       "source": "it",
-      "scale": 0.45,
-      "faces": 8,
+      "scale": 0.73,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
@@ -4694,7 +4710,7 @@
     {
       "target": "id",
       "source": "en",
-      "scale": 0.69,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4714,7 +4730,7 @@
     {
       "target": "id",
       "source": "es",
-      "scale": 0.77,
+      "scale": 0.62,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4734,7 +4750,7 @@
     {
       "target": "id",
       "source": "zh-Hans",
-      "scale": 0.87,
+      "scale": 0.82,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -4762,7 +4778,7 @@
     {
       "target": "id",
       "source": "ja",
-      "scale": 0.69,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4782,7 +4798,7 @@
     {
       "target": "id",
       "source": "ar",
-      "scale": 0.51,
+      "scale": 0.45,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -4821,7 +4837,7 @@
     {
       "target": "id",
       "source": "fr",
-      "scale": 0.71,
+      "scale": 0.52,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4841,7 +4857,7 @@
     {
       "target": "id",
       "source": "de",
-      "scale": 0.69,
+      "scale": 0.59,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4861,7 +4877,7 @@
     {
       "target": "id",
       "source": "pt",
-      "scale": 0.78,
+      "scale": 0.65,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4881,7 +4897,7 @@
     {
       "target": "id",
       "source": "ko",
-      "scale": 0.98,
+      "scale": 0.75,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4901,8 +4917,8 @@
     {
       "target": "id",
       "source": "hi",
-      "scale": 0.46,
-      "faces": 6,
+      "scale": 0.94,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 612,
@@ -4940,7 +4956,7 @@
     {
       "target": "id",
       "source": "th",
-      "scale": 0.54,
+      "scale": 0.5,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -4979,7 +4995,7 @@
     {
       "target": "id",
       "source": "ru",
-      "scale": 0.73,
+      "scale": 0.59,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4999,7 +5015,7 @@
     {
       "target": "id",
       "source": "sw",
-      "scale": 0.77,
+      "scale": 0.62,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5019,7 +5035,7 @@
     {
       "target": "id",
       "source": "tr",
-      "scale": 0.82,
+      "scale": 0.68,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5039,7 +5055,7 @@
     {
       "target": "id",
       "source": "vi",
-      "scale": 0.82,
+      "scale": 0.66,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5059,7 +5075,7 @@
     {
       "target": "id",
       "source": "it",
-      "scale": 0.76,
+      "scale": 0.62,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5079,7 +5095,7 @@
     {
       "target": "sw",
       "source": "en",
-      "scale": 0.61,
+      "scale": 0.46,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5099,7 +5115,7 @@
     {
       "target": "sw",
       "source": "es",
-      "scale": 0.72,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5119,7 +5135,7 @@
     {
       "target": "sw",
       "source": "zh-Hans",
-      "scale": 0.81,
+      "scale": 0.76,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -5147,8 +5163,8 @@
     {
       "target": "sw",
       "source": "ja",
-      "scale": 0.6,
-      "faces": 8,
+      "scale": 0.78,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
@@ -5167,8 +5183,8 @@
     {
       "target": "sw",
       "source": "ar",
-      "scale": 0.45,
-      "faces": 6,
+      "scale": 0.94,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
@@ -5206,7 +5222,7 @@
     {
       "target": "sw",
       "source": "fr",
-      "scale": 0.63,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5226,7 +5242,7 @@
     {
       "target": "sw",
       "source": "de",
-      "scale": 0.63,
+      "scale": 0.48,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5246,7 +5262,7 @@
     {
       "target": "sw",
       "source": "pt",
-      "scale": 0.73,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5266,7 +5282,7 @@
     {
       "target": "sw",
       "source": "ko",
-      "scale": 0.87,
+      "scale": 0.7,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5286,7 +5302,7 @@
     {
       "target": "sw",
       "source": "hi",
-      "scale": 0.94,
+      "scale": 0.88,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5325,7 +5341,7 @@
     {
       "target": "sw",
       "source": "th",
-      "scale": 0.51,
+      "scale": 0.45,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -5364,7 +5380,7 @@
     {
       "target": "sw",
       "source": "ru",
-      "scale": 0.68,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5384,7 +5400,7 @@
     {
       "target": "sw",
       "source": "id",
-      "scale": 0.74,
+      "scale": 0.6,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5404,7 +5420,7 @@
     {
       "target": "sw",
       "source": "tr",
-      "scale": 0.78,
+      "scale": 0.61,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5424,7 +5440,7 @@
     {
       "target": "sw",
       "source": "vi",
-      "scale": 0.72,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5444,7 +5460,7 @@
     {
       "target": "sw",
       "source": "it",
-      "scale": 0.7,
+      "scale": 0.56,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5464,7 +5480,7 @@
     {
       "target": "tr",
       "source": "en",
-      "scale": 0.67,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5484,7 +5500,7 @@
     {
       "target": "tr",
       "source": "es",
-      "scale": 0.78,
+      "scale": 0.64,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5504,7 +5520,7 @@
     {
       "target": "tr",
       "source": "zh-Hans",
-      "scale": 0.87,
+      "scale": 0.84,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -5532,6 +5548,105 @@
     {
       "target": "tr",
       "source": "ja",
+      "scale": 0.48,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "tr",
+      "source": "ar",
+      "scale": 0.46,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "tr",
+      "source": "fr",
+      "scale": 0.52,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "tr",
+      "source": "de",
+      "scale": 0.59,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "tr",
+      "source": "pt",
       "scale": 0.65,
       "faces": 8,
       "pageW": 504,
@@ -5551,107 +5666,8 @@
     },
     {
       "target": "tr",
-      "source": "ar",
-      "scale": 0.5,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Arabic",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "tr",
-      "source": "fr",
-      "scale": 0.67,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "tr",
-      "source": "de",
-      "scale": 0.68,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "tr",
-      "source": "pt",
-      "scale": 0.77,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "tr",
       "source": "ko",
-      "scale": 0.96,
+      "scale": 0.75,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5671,8 +5687,8 @@
     {
       "target": "tr",
       "source": "hi",
-      "scale": 0.45,
-      "faces": 6,
+      "scale": 0.93,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
@@ -5710,7 +5726,7 @@
     {
       "target": "tr",
       "source": "th",
-      "scale": 0.57,
+      "scale": 0.52,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -5749,7 +5765,7 @@
     {
       "target": "tr",
       "source": "ru",
-      "scale": 0.74,
+      "scale": 0.59,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5769,7 +5785,7 @@
     {
       "target": "tr",
       "source": "id",
-      "scale": 0.82,
+      "scale": 0.66,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5789,7 +5805,7 @@
     {
       "target": "tr",
       "source": "sw",
-      "scale": 0.76,
+      "scale": 0.62,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5809,7 +5825,7 @@
     {
       "target": "tr",
       "source": "vi",
-      "scale": 0.8,
+      "scale": 0.66,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5829,7 +5845,7 @@
     {
       "target": "tr",
       "source": "it",
-      "scale": 0.78,
+      "scale": 0.61,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5849,7 +5865,7 @@
     {
       "target": "vi",
       "source": "en",
-      "scale": 0.74,
+      "scale": 0.59,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5869,7 +5885,7 @@
     {
       "target": "vi",
       "source": "es",
-      "scale": 0.85,
+      "scale": 0.71,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5889,7 +5905,7 @@
     {
       "target": "vi",
       "source": "zh-Hans",
-      "scale": 0.86,
+      "scale": 0.83,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -5917,7 +5933,7 @@
     {
       "target": "vi",
       "source": "ja",
-      "scale": 0.79,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5937,8 +5953,8 @@
     {
       "target": "vi",
       "source": "ar",
-      "scale": 0.48,
-      "faces": 6,
+      "scale": 1,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
@@ -5976,7 +5992,7 @@
     {
       "target": "vi",
       "source": "fr",
-      "scale": 0.76,
+      "scale": 0.63,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5996,7 +6012,7 @@
     {
       "target": "vi",
       "source": "de",
-      "scale": 0.78,
+      "scale": 0.67,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6016,7 +6032,7 @@
     {
       "target": "vi",
       "source": "pt",
-      "scale": 0.86,
+      "scale": 0.73,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6036,104 +6052,6 @@
     {
       "target": "vi",
       "source": "ko",
-      "scale": 0.5,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "vi",
-      "source": "hi",
-      "scale": 0.99,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Devanagari",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "vi",
-      "source": "th",
-      "scale": 0.51,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Thai",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "vi",
-      "source": "ru",
       "scale": 0.82,
       "faces": 8,
       "pageW": 504,
@@ -6153,8 +6071,106 @@
     },
     {
       "target": "vi",
+      "source": "hi",
+      "scale": 0.93,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "vi",
+      "source": "th",
+      "scale": 0.48,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Thai",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "empty-column",
+          "severity": "warn",
+          "params": {
+            "field": "respell"
+          },
+          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "vi",
+      "source": "ru",
+      "scale": 0.7,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "vi",
       "source": "id",
-      "scale": 0.88,
+      "scale": 0.74,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6174,7 +6190,7 @@
     {
       "target": "vi",
       "source": "sw",
-      "scale": 0.81,
+      "scale": 0.66,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6194,8 +6210,8 @@
     {
       "target": "vi",
       "source": "tr",
-      "scale": 0.48,
-      "faces": 6,
+      "scale": 0.77,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
@@ -6214,7 +6230,7 @@
     {
       "target": "vi",
       "source": "it",
-      "scale": 0.84,
+      "scale": 0.71,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6234,7 +6250,7 @@
     {
       "target": "it",
       "source": "en",
-      "scale": 0.63,
+      "scale": 0.48,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6254,7 +6270,7 @@
     {
       "target": "it",
       "source": "es",
-      "scale": 0.7,
+      "scale": 0.55,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6274,7 +6290,7 @@
     {
       "target": "it",
       "source": "zh-Hans",
-      "scale": 0.8,
+      "scale": 0.75,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -6302,8 +6318,8 @@
     {
       "target": "it",
       "source": "ja",
-      "scale": 0.55,
-      "faces": 8,
+      "scale": 0.77,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 613,
@@ -6322,7 +6338,7 @@
     {
       "target": "it",
       "source": "ar",
-      "scale": 1,
+      "scale": 0.91,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6361,7 +6377,7 @@
     {
       "target": "it",
       "source": "fr",
-      "scale": 0.66,
+      "scale": 0.5,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6381,7 +6397,7 @@
     {
       "target": "it",
       "source": "de",
-      "scale": 0.63,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6401,7 +6417,7 @@
     {
       "target": "it",
       "source": "pt",
-      "scale": 0.72,
+      "scale": 0.54,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6421,7 +6437,7 @@
     {
       "target": "it",
       "source": "ko",
-      "scale": 0.87,
+      "scale": 0.65,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6441,7 +6457,7 @@
     {
       "target": "it",
       "source": "hi",
-      "scale": 0.95,
+      "scale": 0.86,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6480,7 +6496,7 @@
     {
       "target": "it",
       "source": "th",
-      "scale": 0.5,
+      "scale": 0.46,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
@@ -6519,7 +6535,7 @@
     {
       "target": "it",
       "source": "ru",
-      "scale": 0.64,
+      "scale": 0.49,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6539,7 +6555,7 @@
     {
       "target": "it",
       "source": "id",
-      "scale": 0.76,
+      "scale": 0.59,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6559,7 +6575,7 @@
     {
       "target": "it",
       "source": "sw",
-      "scale": 0.73,
+      "scale": 0.56,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6579,7 +6595,7 @@
     {
       "target": "it",
       "source": "tr",
-      "scale": 0.74,
+      "scale": 0.58,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6599,7 +6615,7 @@
     {
       "target": "it",
       "source": "vi",
-      "scale": 0.75,
+      "scale": 0.59,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,

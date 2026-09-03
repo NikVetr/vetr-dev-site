@@ -153,7 +153,9 @@
  *   It was called `density`, which meant the opposite of its effect.
  * @property {'mixed'|'two-column'|'one-row'|'stacked'} arrangement  item field layout
  * @property {'consistent'|'adaptive'} [split]  whether the divider between an
- *   item's two halves is solved once per section or once per row
+ *   item's two halves is solved once per section or once per row. Defaults to
+ *   `consistent`; per row is worth 5-23% of type size and is what the hand-built
+ *   reference sheets do
  * @property {Record<string,string>} [sectionColors]  section id -> colour role,
  *   overriding the registry's own. Colour is how the sheet codes its sections, so
  *   which section takes which is an editorial choice rather than a fact.

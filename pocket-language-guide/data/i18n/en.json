@@ -136,7 +136,7 @@
   "format.split.adaptive": "Per row",
   "format.split.consistent": "Even",
   "format.splitLong": "Where the divider between an entry’s two halves sits",
-  "format.splitTitle.adaptive": "Each row sets its own, which fits more words but moves the divider",
+  "format.splitTitle.adaptive": "Each row sets its own — fits more words, worth 5–23% larger type, and moves the divider from row to row",
   "format.splitTitle.consistent": "One divider for a whole section, so its rows line up",
   "format.textPadding": "Text padding",
   "format.theme.accessible": "Accessible",

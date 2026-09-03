@@ -50,6 +50,65 @@ const sheets = new Map();
 /** @type {Promise<any>|null} */ let presetsOnce = null;
 
 /**
+ * The same faces, kept across visits.
+ *
+ * The in-memory map above only helps within one page: close the tab and every pair
+ * is solved again from scratch. Pre-rendering all 272 pairs to disk is the obvious
+ * alternative and it is not affordable -- eight faces of vector SVG is about a
+ * megabyte, so the set is a quarter of a gigabyte, which is the same arithmetic
+ * that stopped `prerender_packs.mjs` committing PDFs. Keeping what a reader has
+ * actually looked at costs nothing until they look.
+ *
+ * Cache Storage rather than IndexedDB because the service worker already owns a
+ * cache per concern and this is one more; and keyed on `data/shell.json`'s version,
+ * which is a content hash of every module and theme, so a change to the engine or
+ * the type sizes invalidates a stale sheet rather than serving it.
+ */
+const SHEET_CACHE = 'plg-sheets';
+/** @type {Promise<string>|null} */ let stamp = null;
+
+function version() {
+  stamp ??= loadText('data/shell.json')
+    .then((text) => JSON.parse(text).version)
+    // No manifest is not a reason to fail; it is a reason not to cache.
+    .catch(() => '');
+  return stamp;
+}
+
+/** @param {string} key @returns {Promise<string[]|null>} */
+async function cached(key) {
+  try {
+    const v = await version();
+    if (!v) return null;
+    const hit = await (await caches.open(SHEET_CACHE)).match(`/__sheet/${key}?v=${v}`);
+    return hit ? await hit.json() : null;
+  } catch {
+    // A quota error or a private-mode restriction is not worth failing the open for.
+    return null;
+  }
+}
+
+/** @param {string} key @param {string[]} svgs */
+async function keep(key, svgs) {
+  try {
+    const v = await version();
+    if (!v) return;
+    const cache = await caches.open(SHEET_CACHE);
+    // One version at a time: the key carries the hash, so a stale entry would
+    // otherwise sit there forever taking up the reader's quota.
+    for (const req of await cache.keys()) {
+      if (!req.url.includes(`?v=${v}`)) await cache.delete(req);
+    }
+    await cache.put(
+      `/__sheet/${key}?v=${v}`,
+      new Response(JSON.stringify(svgs), { headers: { 'content-type': 'application/json' } }),
+    );
+  } catch {
+    // As above: caching is an optimisation, not a requirement.
+  }
+}
+
+/**
  * @param {string} target @param {string} source
  * @param {{faces:number, scale:number}|undefined} solved  from the pack index
  */
@@ -58,6 +117,8 @@ function faceSheet(target, source, solved) {
   const held = sheets.get(key);
   if (held) return held;
   const job = (async () => {
+    const kept = await cached(key);
+    if (kept?.length) return kept;
     const [{ buildSheet }, { faceSvgs, loadIcons }, { defaultSelection }, { makeSpec }] =
       await Promise.all([
         import('../core/sheet.js'),
@@ -96,7 +157,9 @@ function faceSheet(target, source, solved) {
     const plan = built.plan.faces.length || !solved
       ? built.plan
       : (await buildSheet(ctx, { ...base, selection: spec.selection, scale: 0 })).plan;
-    return faceSvgs({ plan, manifest, icons });
+    const svgs = faceSvgs({ plan, manifest, icons });
+    await keep(key, svgs);
+    return svgs;
   })();
   sheets.set(key, job);
   return job;
@@ -328,6 +391,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
   // sheet's aspect, and on a short window the height is what binds -- so the pair
   // was hard-coded to the width a *tall* window gives and the foot was sized by its
   // own thumbnails, and both ended up outboard of the paper's edges.
+  dialog.style.setProperty('--card-aspect', String(504 / 360));
   const bounds = new ResizeObserver(([entry]) => {
     dialog.style.setProperty('--card-w', `${Math.round(entry.contentRect.width)}px`);
   });

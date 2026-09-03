@@ -386,15 +386,15 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ arrangement: value }),
   });
 
-  // Where the divider between an entry's two halves sits. `Per row` is the
-  // default and is the reference sheet's own behaviour: it lets a long phrase
-  // borrow width from a short gloss, which is worth 5-23% of type size at the same
-  // face count and is why the hand-built Japanese sheet fits on four faces rather
-  // than six. `Even` solves it once for a whole section so the rows line up, and
-  // pays for that in paper.
+  // Where the divider between an entry's two halves sits. `Even` is the default and
+  // solves it once for a whole section, so the rows line up. `Per row` is the
+  // reference sheet's own behaviour and lets a long phrase borrow width from a short
+  // gloss, which is worth 5-23% of type size at the same face count -- and is why
+  // the hand-built Japanese sheet fits on four faces rather than six. The tooltip
+  // says as much, because the trade is not guessable from the label.
   const split = segmented({
     label: t('format.splitLong'),
-    value: spec.split ?? 'adaptive',
+    value: spec.split ?? 'consistent',
     options: /** @type {const} */ (['consistent', 'adaptive']).map((id) => ({
       value: id,
       caption: t(`format.split.${id}`),
@@ -703,7 +703,7 @@ export function createFormatPanel(input) {
       typeSize.select(next.scale);
       padding.select(next.padding);
       arrangement.select(next.arrangement);
-      split.select(next.split ?? 'adaptive');
+      split.select(next.split ?? 'consistent');
       headAt.select(next.head?.at ?? 'none');
       headLeft.select.value = next.head?.left ?? 'none';
       headRight.select.value = next.head?.right ?? 'none';

@@ -367,19 +367,23 @@ function itemAtoms(ctx, block, rows, withPaint) {
   // Shared-width templates solve their columns once for the whole group; phrase
   // rows solve per row, which is what lets a long phrase borrow width from a
   // short gloss.
-  // Shared-width templates solve their columns once for the whole group. Phrase
-  // rows solve per row by default, which is what lets a long phrase borrow width
-  // from a short gloss.
+  // Shared-width templates solve their columns once for the whole group, and so do
+  // phrase rows by default: every row's divider in a section lines up, which is what
+  // a reader looking at a section notices.
   //
-  // **That default is measured, not inherited.** Solving once per section instead
-  // makes every row's divider line up, which is what a reader looking at a section
-  // notices -- but it costs 5-23% of type size at the same face count, and it
-  // takes the hand-built Japanese sheet from four faces to six. Four faces at
-  // `padding: 0` is the acceptance criterion for this engine, and the reference's
-  // own per-row split search is why it is reachable. So `split: 'consistent'` is a
-  // setting rather than the default, and it is worth knowing it buys tidiness with
-  // paper.
-  const shared = template.widthMode === 'shared' || ctx.spec.split === 'consistent'
+  // **The cost is measured and it is not small.** Solving per row instead lets a
+  // long phrase borrow width from a short gloss, and that is worth 5-23% of type
+  // size at the same face count -- it is also what makes the hand-built Japanese
+  // sheet fit on four faces rather than six, which is this engine's acceptance
+  // criterion. So `tests/solve.test.mjs` pins the reference behaviour by asking for
+  // `split: 'adaptive'` explicitly, and the app defaults to the tidier option
+  // because that is what was asked for with the number in hand.
+  //
+  // There is no middle. "Share the section's divider except where a row would gain
+  // a line from its own" was implemented and measured, and it recovers essentially
+  // nothing -- 0.50 against 0.50 on the Spanish sheet -- because the compromise
+  // width is itself the cost, not the handful of rows that deviate from it.
+  const shared = template.widthMode === 'shared' || (ctx.spec.split ?? 'consistent') !== 'adaptive'
     ? chooseSharedWidths(grids, avail, template, ctx.measurer)
     : null;
 

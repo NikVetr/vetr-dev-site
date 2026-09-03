@@ -115,7 +115,10 @@ test('no column overflows its height', () => {
 });
 
 test('at the fitted scale, glue absorbs the slack in all but the last pair', async () => {
-  const { plan } = await buildSheet(ctx, { ...spec, scale: 0 });
+  // `split: 'adaptive'` because this is a claim about the *reference* sheet, whose
+  // per-row divider search is what leaves the columns flush. The app defaults to a
+  // shared divider, which is tidier and packs less densely.
+  const { plan } = await buildSheet(ctx, { ...spec, scale: 0, split: 'adaptive' });
   const columns = plan.geometry.columns;
   // Faces come in pairs and the content does not divide evenly into them, so the
   // final pair carries whatever is left over. Every column before it must flush.
@@ -376,7 +379,13 @@ test('auto reproduces the hand-built originals at their own spacing', async () =
   // would only be measuring the corpus size. The reviewed rows are identifiable by
   // provenance, so the selection is narrowed to exactly the hand-built sheet.
   for (const [target, source] of [['zh-Hans', 'en'], ['ja', 'en'], ['en', 'ja']]) {
-    const spec0 = { ...(await referenceSpec(target, source)), scale: 0, padding: 0 };
+    // `split: 'adaptive'` is part of what is being reproduced: the reference's own
+    // 27-candidate per-row split search is why four faces are reachable at all, and
+    // the app's shared-divider default needs six. That is measured in the divider
+    // test below; here the point is that the engine can still hit the original.
+    const spec0 = /** @type {import('../core/types.js').SheetSpec} */ ({
+      ...(await referenceSpec(target, source)), scale: 0, padding: 0, split: 'adaptive',
+    });
     const rows = await loadLanguage(ctx.loadText, target, ctx.corpus.groups);
     /** @type {Record<string, boolean>} */ const items = {};
     let original = 0;
@@ -662,12 +671,15 @@ test('the divider is solved once per section unless asked for per row', async ()
   // from row to row inside one section, which is what a reader looking at a
   // section notices -- so the tidier behaviour is a setting.
   //
-  // It is not the *default*, and that is measured rather than assumed: it takes
-  // the hand-built Japanese sheet from four faces to six, and four faces at
-  // `padding: 0` is this engine's acceptance criterion.
+  // The tidier behaviour *is* the default, and the cost is known rather than
+  // hidden: it takes the hand-built Japanese sheet from four faces to six, so the
+  // acceptance test above asks for `adaptive` explicitly to keep pinning the
+  // original. There is no middle -- sharing the divider except where a row would
+  // gain a line recovers 0.50 against 0.50, because the compromise width is itself
+  // the cost.
   const base = await referenceSpec('es', 'en');
-  const even = await buildSheet(ctx, { ...base, split: 'consistent' });
-  const perRow = await buildSheet(ctx, base);
+  const even = await buildSheet(ctx, base);
+  const perRow = await buildSheet(ctx, { ...base, split: 'adaptive' });
   assert.equal(even.plan.faces.length, perRow.plan.faces.length,
     'the trade is type size at a fixed face count, not more faces');
   assert.ok(perRow.plan.scale > even.plan.scale + 0.05,
