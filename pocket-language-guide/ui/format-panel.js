@@ -424,7 +424,12 @@ export function createFormatPanel(input) {
    * @param {number} faceCount  as resolved, since auto is what usually decides it
    */
   const setCuttable = (faceCount) => {
-    const screen = Boolean(presets.geometry[presetOf()]?.screen);
+    // From the geometry itself, not from which preset it still matches, which is
+    // how `ui/sheet-options.js` has always read it. `cardSizeControl` carries
+    // `screen` through a custom size, so adjusting the phone card's dimensions by
+    // a few points kept the flag and lost the control that depends on it -- the
+    // clock band vanished from the one aspect ratio it exists for.
+    const screen = Boolean(spec.geometry.screen);
     const cuttable = !screen && faceCount % 2 === 0;
     cutField.hidden = !cuttable;
     reserveField.hidden = !screen;

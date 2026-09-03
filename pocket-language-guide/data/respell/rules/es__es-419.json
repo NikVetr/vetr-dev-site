@@ -22,7 +22,7 @@
     },
     {
       "rule": "Unaspirated stops written with Spanish voiced letters (Mandarin only)",
-      "why": "Spanish p t k are already unaspirated, so for most targets they are the exact match for the plain series and both series collapse on p t k -- the opposite of the English table, whose p t k are aspirated. Where the target has no voiced stop for those letters to collide with (Mandarin alone in this corpus) the unaspirated series takes b d g y instead, which keeps the contrast and reproduces pinyin, the spelling a Spanish reader has already met in Beijing and Guangzhou. Guarded by unless_inventory, not by target."
+      "why": "Spanish p t k are already unaspirated, so for most targets they are the exact match for the plain series and both series collapse on p t k -- the opposite of the English table, whose p t k are aspirated. Where the target has no voiced obstruent for those letters to collide with, the unaspirated series takes b d g y instead, which keeps a contrast that is lexical in the target and reproduces the Latin spelling a Spanish reader has already met: pinyin for Mandarin (Beijing, Guangzhou), Revised Romanization for Korean (Busan, bibimbap). The guard is #b #d #ɡ, not b d ɡ: the question is whether a voiced stop can BEGIN a word, because Korean's b d g are intervocalic allophones of the lenis series (0 word-initial in 1519 words) while Thai's and Hindi's are phonemes (41/92/0 and 123/136/49). A presence test wrongly grouped Korean with Thai and collapsed the aspiration contrast. Restricted to onsets, which is also RR's rule -- bap, not bab."
     }
   ],
   "approximations": [
@@ -74,8 +74,10 @@
     "stress_min_syllables": 2,
     "length": "none",
     "tone": "drop",
-    "max_onset": 3,
-    "locale": "es-419"
+    "max_onset": 2,
+    "locale": "es-419",
+    "fixups": "all",
+    "reader_onsets": "bl br bɹ bɾ bʁ dr dɹ dɾ dʁ fl fr fɹ fʁ kl kr kɫ kɹ kɾ kʁ kʰl kʰr pl pr pɭ pɹ pɾ pʁ pʰl pʰr ql qɹ tr tɹ tɾ tʁ ɖɾ ɡl ɡr ɡɭ ɡɾ ɡʁ ʈɾ"
   },
   "splits": [],
   "phonemes": [
@@ -95,10 +97,10 @@
       "out": "ts"
     },
     {
-      "slot": "any",
+      "slot": "onset",
       "ipa": "ʈʂ",
       "out": "y",
-      "unless_inventory": "b d ɡ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
       "slot": "any",
@@ -106,10 +108,10 @@
       "out": "ch"
     },
     {
-      "slot": "any",
+      "slot": "onset",
       "ipa": "tɕ",
       "out": "y",
-      "unless_inventory": "b d ɡ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
       "slot": "any",
@@ -167,22 +169,22 @@
       "out": "k"
     },
     {
-      "slot": "any",
+      "slot": "onset",
       "ipa": "p",
       "out": "b",
-      "unless_inventory": "b d ɡ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
       "ipa": "t",
       "out": "d",
-      "unless_inventory": "b d ɡ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
       "ipa": "k",
       "out": "g",
-      "unless_inventory": "b d ɡ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
       "slot": "any",
@@ -789,5 +791,6 @@
       ]
     }
   },
-  "note": "Reader's legend, per RESPELL-SYSTEMS.md: two glyphs only -- [sh] as in shampoo, [h] an aspirate as in home. Everything else is ordinary Spanish. There is no curated Spanish sheet, so this table is not scored; it is held to zero --gaps and to being read aloud."
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: two glyphs only -- [sh] as in shampoo, [h] an aspirate as in home. Everything else is ordinary Spanish. There is no curated Spanish sheet, so this table is not scored; it is held to zero --gaps and to being read aloud.",
+  "policy_note": "max_onset 2 restricted by reader_onsets is the RAE division-de-palabras rule: Spanish admits only a single consonant or a C+liquid group as a syllable onset, and the engine's cluster table is the target's, not Spanish's. Measured over every unique word, bare max_onset 2 builds 333 onsets legal in Spanish and 513 that are not (st 135, ng 41, mb 23, nd 23, lm 22, sk 20), and its errors are worse in kind -- a Spanish reader cannot begin an-der-stand or a-lmu-tad and repairs them unpredictably, where max_onset 1 merely lenites a coda stop (prab-lem for pra-blem). reader_onsets gets both. The list is derived rather than guessed: every cluster the engine learns from any of the sixteen targets whose spelling lands in the RAE's thirteen groups, which is why it carries all four rhotic realisations (r ɾ ɹ ʁ, since German writes pɾ where Russian writes pr and French pʁ) and the aspirated and retroflex onsets of Thai, Mandarin and Hindi (kʰr, ʈɾ). Anything absent simply splits, which is the safe default."
 }

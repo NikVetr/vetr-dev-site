@@ -29,11 +29,18 @@ const SPANISH = {
   'ˈtɾes': 'tres',
 };
 
+/**
+ * The fixture three times over, for the tests that go through `phonemeInventory`:
+ * it wants three occurrences before it will believe in a phoneme, which a real
+ * language's ~750 rows clear easily and a ten-word fixture does not.
+ */
+const SAMPLE = [...Object.keys(SPANISH), ...Object.keys(SPANISH), ...Object.keys(SPANISH)];
+
 test('a syllable may open with whatever can open a word, and no more', () => {
   // The whole phonotactic table for a language, from the language itself. Spanish
   // gets /bl/ and does not get /st/, which is the difference between `ah-BLAR`
   // and `ahb-LAR`, and between `es-TA` and `e-STA`.
-  const clusters = onsetClusters(Object.keys(SPANISH));
+  const clusters = onsetClusters(SAMPLE);
   assert.ok(clusters.has('bl'), 'Spanish can open a word with /bl/');
   assert.ok(!clusters.has('st'), 'Spanish cannot open a word with /st/');
 
@@ -46,7 +53,7 @@ test('a syllable may open with whatever can open a word, and no more', () => {
 test('the documented Spanish outputs come out, exactly', () => {
   // Each of these is a rule the pilot derived from the curated corpus, and each
   // one was wrong before that rule existed.
-  const es = createRespeller({ rules, targetIpa: Object.keys(SPANISH) });
+  const es = createRespeller({ rules, targetIpa: SAMPLE });
   assert.equal(es.respell('esˈta'), 'es-TA', '/st/ is not a Spanish onset');
   assert.equal(es.respell('aˈblaɾ'), 'ah-BLAR', 'but /bl/ is');
   assert.equal(es.respell('ˈpaɾa'), 'PAH-ra', 'open /a/ is `ah` word-internally, bare word-finally');
@@ -81,7 +88,7 @@ test('the same IPA takes opposite spellings in two languages, with no per-langua
   // Mandarin's is written `b d g`, because a language that contrasts /p/ with /pʰ/
   // has no voiced stop for `b` to collide with. Both come out of one table, read
   // off the target's own inventory. Getting this wrong cost thirty points.
-  const spanish = createRespeller({ rules, targetIpa: Object.keys(SPANISH) });
+  const spanish = createRespeller({ rules, targetIpa: SAMPLE });
   const mandarin = createRespeller({
     rules,
     // /pʰ/ present three times, so the inventory has it.
@@ -94,7 +101,7 @@ test('the same IPA takes opposite spellings in two languages, with no per-langua
 });
 
 test('stress is marked only where the policy says, and only on real polysyllables', () => {
-  const es = createRespeller({ rules, targetIpa: Object.keys(SPANISH) });
+  const es = createRespeller({ rules, targetIpa: SAMPLE });
   assert.equal(rules.policy.stress, 'caps');
   const out = es.respell('esˈta');
   assert.ok(/[A-Z]/.test(out), `expected a capitalised syllable, got ${out}`);
@@ -102,7 +109,7 @@ test('stress is marked only where the policy says, and only on real polysyllable
 
   // A one-syllable word gets none, because a card that shouts every monosyllable
   // has stopped saying anything.
-  const one = createRespeller({ rules, targetIpa: ['ˈsi'] }).respell('ˈsi');
+  const one = createRespeller({ rules, targetIpa: [...['ˈsi'], ...['ˈsi'], ...['ˈsi']] }).respell('ˈsi');
   assert.equal(one, one.toLowerCase(), `a monosyllable takes no capitals, got ${one}`);
 });
 
@@ -110,10 +117,10 @@ test('a reader who does not want vowel length gets the plain form', () => {
   // Length is a policy switch rather than data, because the respelling is
   // generated. The Japanese sheet invented this convention by hand, doubling a
   // letter on 285 of its 286 long-vowel rows.
-  const plain = createRespeller({ rules, targetIpa: ['doːzo'] }).respell('doːzo');
+  const plain = createRespeller({ rules, targetIpa: [...['doːzo'], ...['doːzo'], ...['doːzo']] }).respell('doːzo');
   const doubled = createRespeller({
     rules: { ...rules, policy: { ...rules.policy, length: 'double' } },
-    targetIpa: ['doːzo'],
+    targetIpa: [...['doːzo'], ...['doːzo'], ...['doːzo']],
   }).respell('doːzo');
   assert.notEqual(plain, doubled);
   assert.ok(doubled.length > plain.length, `${doubled} should be longer than ${plain}`);
@@ -122,7 +129,7 @@ test('a reader who does not want vowel length gets the plain form', () => {
 test('an unmapped symbol survives to the page instead of vanishing', () => {
   // A gap in the table has to be visible. Silently dropping a phoneme shortens a
   // word, which is worse than printing something odd: the reader cannot tell.
-  const out = createRespeller({ rules, targetIpa: ['ˈkaʘa'] }).respell('ˈkaʘa');
+  const out = createRespeller({ rules, targetIpa: [...['ˈkaʘa'], ...['ˈkaʘa'], ...['ˈkaʘa']] }).respell('ˈkaʘa');
   assert.ok(out.includes('ʘ'), `expected the bilabial click to pass through, got ${out}`);
 });
 
@@ -135,8 +142,8 @@ test('an empty ipa cell is not an error', () => {
 });
 
 test('the same input always gives the same output', () => {
-  const a = createRespeller({ rules, targetIpa: Object.keys(SPANISH) });
-  const b = createRespeller({ rules, targetIpa: Object.keys(SPANISH) });
+  const a = createRespeller({ rules, targetIpa: SAMPLE });
+  const b = createRespeller({ rules, targetIpa: SAMPLE });
   for (const ipa of Object.keys(SPANISH)) assert.equal(a.respell(ipa), b.respell(ipa));
 });
 
@@ -154,7 +161,7 @@ const withPolicy = (/** @type {Record<string,any>} */ patch) => ({
 
 test('the stress device is the reader own, not capitals everywhere', () => {
   const say = (/** @type {Record<string,any>} */ patch) => createRespeller({
-    rules: withPolicy(patch), targetIpa: Object.keys(SPANISH),
+    rules: withPolicy(patch), targetIpa: SAMPLE,
   }).respell('esˈta');
   assert.equal(say({ stress: 'caps' }), 'es-TA');
   // The acute lands on the vowel, and the syllable stays lower case -- which is
@@ -171,11 +178,11 @@ test('the acute goes on the last vowel letter of the nucleus, not the first', ()
   // to mean the last one. Here the diphthong is split out first and this table
   // spells the /i/ `ee`, so the mark lands on the `e` of the second syllable.
   const es = createRespeller({
-    rules: withPolicy({ stress: 'acute' }), targetIpa: ['bjˈen', 'ˈbjen'],
+    rules: withPolicy({ stress: 'acute' }), targetIpa: ['bjˈen', 'ˈbjen', 'bjˈen', 'ˈbjen', 'bjˈen', 'ˈbjen'],
   });
   assert.equal(es.respell('bjˈen'), 'bee-én');
   // Two letters in one nucleus, marked once and at the end.
-  const oo = createRespeller({ rules: withPolicy({ stress: 'acute' }), targetIpa: ['ˈkwanto'] });
+  const oo = createRespeller({ rules: withPolicy({ stress: 'acute' }), targetIpa: ['ˈkwanto', 'ˈkwanto', 'ˈkwanto'] });
   assert.equal(oo.respell('ˈkwanto'), 'kwán-toh');
 });
 
@@ -184,7 +191,7 @@ test('a falling diphthong takes the mark on its first element, not its last', ()
   // writes `bién` but `géisha`, because the nucleus head moves. Marking the last
   // letter throughout gave `he-loú` for `hello`, which reads as a stressed /u/ in
   // a third syllable that is not there.
-  const ipa = ['hɛˈloʊ', 'ɛɾlˈaʊpt', 'tʃˈaɪna', 'pˈeɪpa'];
+  const ipa = ['hɛˈloʊ', 'ɛɾlˈaʊpt', 'tʃˈaɪna', 'pˈeɪpa'].flatMap((x) => [x, x, x]);
   const say = createRespeller({ rules: withPolicy({ stress: 'acute' }), targetIpa: ipa });
   // This table spells /aɪ/ `ye` and /eɪ/ `ay`, so both emit a two-letter run and
   // the choice of end is visible: the head is the first.
@@ -203,21 +210,31 @@ test('an accented letter does not take a second accent', () => {
     ...withPolicy({ stress: 'acute' }),
     phonemes: [{ slot: 'nucleus', ipa: 'e', out: 'é' }, ...rules.phonemes],
   };
-  const out = createRespeller({ rules: table, targetIpa: ['esˈte'] }).respell('esˈte');
+  const out = createRespeller({ rules: table, targetIpa: [...['esˈte'], ...['esˈte'], ...['esˈte']] }).respell('esˈte');
   // Both `e`s are the table's own; neither has gained a second mark.
   assert.equal(out, 'és-té');
   const marks = [...out.normalize('NFD')].filter((c) => c === '\u0301');
   assert.equal(marks.length, 2, `one acute per vowel, got ${marks.length} in ${out}`);
+
+  // The same guard, for a letter that is accented by being itself: `ё` is
+  // inherently stressed in Russian -- an unstressed one does not exist -- so the
+  // mark is redundant, and at 4.4pt it lands on top of the diaeresis.
+  const cyrillic = {
+    ...withPolicy({ stress: 'acute' }),
+    phonemes: [{ slot: 'nucleus', ipa: 'ɜ', out: 'ё' }, { slot: 'any', ipa: 's', out: 'с' }],
+  };
+  const yo = createRespeller({ rules: cyrillic, targetIpa: ['sˈɜsɜ', 'sˈɜsɜ', 'sˈɜsɜ'] }).respell('sˈɜsɜ');
+  assert.equal([...yo.normalize('NFD')].filter((c) => c === '\u0301').length, 0, yo);
 });
 
 test('vowel length is written the way the reader writes it', () => {
   const say = (/** @type {string} */ length) => createRespeller({
-    rules: withPolicy({ length }), targetIpa: ['doːzo'],
+    rules: withPolicy({ length }), targetIpa: [...['doːzo'], ...['doːzo'], ...['doːzo']],
   }).respell('doːzo');
   // Turkish reads a doubled vowel as two syllables, so it takes a colon instead.
   assert.notEqual(say('colon'), say('double'));
   assert.match(say('colon'), /:/);
-  assert.equal(say('none'), createRespeller({ rules, targetIpa: ['doːzo'] }).respell('doːzo'));
+  assert.equal(say('none'), createRespeller({ rules, targetIpa: [...['doːzo'], ...['doːzo'], ...['doːzo']] }).respell('doːzo'));
 });
 
 test('onset maximisation is the reader decision, not the target', () => {
@@ -227,7 +244,7 @@ test('onset maximisation is the reader decision, not the target', () => {
   // the *target* changes between these two calls.
   // The sample has to contain a /gr/-initial word for /gr/ to be a cluster at all,
   // which is the point of `onsetClusters` -- `ˈgɾande` supplies it.
-  const ipa = [...Object.keys(SPANISH), 'proˈgɾama'];
+  const ipa = [...SAMPLE, 'proˈgɾama', 'proˈgɾama', 'proˈgɾama'];
   const wide = createRespeller({ rules: withPolicy({ stress: 'none' }), targetIpa: ipa });
   const narrow = createRespeller({
     rules: withPolicy({ stress: 'none', max_onset: 1 }), targetIpa: ipa,
@@ -241,7 +258,7 @@ test('a fixup backreference reaches the page as text, not as a backslash', () =>
   // what Python's `re.sub` takes. JS spells them `$1` and silently emits the
   // literal characters for `\1`, so the table's own `g(ee|e) -> \1gh\2` rule put
   // `\1gh\2` on the card for every Hindi and Korean velar.
-  const out = createRespeller({ rules, targetIpa: ['ɡiː'] }).respell('ɡiː');
+  const out = createRespeller({ rules, targetIpa: ['ɡiː', 'ɡiː', 'ɡiː'] }).respell('ɡiː');
   assert.equal(out, 'ghee', `expected the capture to be substituted, got ${out}`);
   assert.ok(!out.includes('\\'), 'and no backslash to survive to the page');
 });
@@ -251,7 +268,7 @@ test('a rising diphthong is split whether or not stress is marked', () => {
   // inside an onset regardless of whether the syllable is capitalised -- and
   // gating one on the other dropped the split for every reader whose policy marks
   // no stress at all.
-  const ipa = ['bjˈen', 'ˈbjen'];
+  const ipa = ['bjˈen', 'ˈbjen'].flatMap((x) => [x, x, x]);
   const marked = createRespeller({ rules: withPolicy({ stress: 'caps' }), targetIpa: ipa });
   const plain = createRespeller({ rules: withPolicy({ stress: 'none' }), targetIpa: ipa });
   assert.equal(marked.respell('bjˈen'), 'bee-EN');
@@ -286,10 +303,52 @@ test('a table can ask for every fixup, or just the first', () => {
     ...rules,
     syllable_fixups: [{ match: 'k', out: 'K' }, { match: 'a', out: 'A' }],
   };
-  const first = createRespeller({ rules: chart, targetIpa: ['ka'] }).respell('ka');
+  const first = createRespeller({ rules: chart, targetIpa: ['ka', 'ka', 'ka'] }).respell('ka');
   const all = createRespeller({
     rules: { ...chart, policy: { ...rules.policy, fixups: 'all' } }, targetIpa: ['ka'],
   }).respell('ka');
   assert.equal(first, 'Ka');
   assert.equal(all, 'KA');
+});
+
+test('the inventory says where a phoneme occurs, not just whether', () => {
+  // The difference between a phoneme and an allophone, and no test for bare
+  // presence can see it. Korean's `ipa` carries `b d ɡ` from Revised Romanization
+  // but never word-initially, because they are the intervocalic realisations of
+  // the lenis series; Thai has 41 word-initial /b/, where it is contrastive. A
+  // rule that spells the plain series voiced has to fire for the first and not the
+  // second, so it asks `#b` rather than `b`.
+  const korean = [syllabify('kaba'), syllabify('kaba'), syllabify('kaba')];
+  const thai = [syllabify('baka'), syllabify('baka'), syllabify('baka')];
+  assert.ok(phonemeInventory(korean).has('b'), 'Korean has the sound');
+  assert.ok(!phonemeInventory(korean).has('#b'), 'but never to open a word');
+  assert.ok(phonemeInventory(thai).has('#b'), 'Thai does');
+});
+
+test('a cluster has to be legal for the reader as well as the target', () => {
+  // `onsetClusters` answers "can this language open a word this way", which is not
+  // "can my reader read it": a Spanish reader was shown `an-der-stánd` and
+  // `hój-shtul`. Dropping to one consonant fixes those and costs the C+liquid
+  // onsets Spanish does admit. Naming the reader's own list gets both.
+  const ipa = ['ˈblanko', 'ˈblanko', 'ˈblanko', 'ˈstop', 'ˈstop', 'ˈstop',
+    'proˈblema', 'ˈastop'];
+  const table = (/** @type {Record<string,any>} */ policy) => createRespeller({
+    rules: { ...rules, policy: { ...rules.policy, stress: 'none', ...policy } },
+    targetIpa: ipa,
+  });
+  // Two consonants and no list: /bl/ and /st/ both open a syllable because the
+  // target permits both, and `ah-stop` is the unreadable half -- no Spanish reader
+  // begins a syllable /st/, and they will repair it unpredictably.
+  const loose = table({ max_onset: 2 });
+  assert.equal(loose.respell('proˈblema'), 'pro-bleh-ma');
+  assert.equal(loose.respell('ˈastop'), 'ah-stop');
+  // One consonant fixes /st/ and takes /bl/ with it, which is the trade the
+  // Spanish table measured at 513 illegal onsets against 333 legal ones.
+  const tight = table({ max_onset: 1 });
+  assert.equal(tight.respell('ˈastop'), 'as-top');
+  assert.equal(tight.respell('proˈblema'), 'prob-leh-ma');
+  // The reader's own list gets both: /bl/ back, /st/ still split.
+  const both = table({ max_onset: 2, reader_onsets: 'bl br pl pr tr kl kr ɡr fl' });
+  assert.equal(both.respell('proˈblema'), 'pro-bleh-ma');
+  assert.equal(both.respell('ˈastop'), 'as-top');
 });

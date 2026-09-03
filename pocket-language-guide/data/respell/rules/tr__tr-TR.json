@@ -1,0 +1,1095 @@
+{
+  "source": "tr",
+  "accent": "tr-TR",
+  "version": "1",
+  "derives_from": "Turk Dil Kurumu, Yazim Kilavuzu: SS08 Yabanci Ozel Adlarin Yazilisi, which authorises the feature itself -- «Ancak Bati dillerinde kullanilan adlarin okunuslari ayrac icinde gosterilebilir: Shakespeare (Sekspir)» -- plus SS07 Alinti Kelimelerin Yazilisi for the loan phonology (clusters kept: kral, kredi, plan, problem, spiker, spor, staj, tren, film, form, luks, modern, slayt, teyp; final devoicing: kitap, bant, etut, metot, standart; buyuk unlu uyumu not sought in loans), the TDK hece yapisi rule for the syllable division (Bati kokenli kelimeler Turkcenin hece yapisina gore hecelere ayrilir: band-rol, kont-rol, port-re, prog-ram, sant-ral, surp-riz, tund-ra, volf-ram), and the Guncel Turkce Sozluk's own metalinguistic notation Sozlukte Kullanilan Isaretler for length -- «: Uzun okunan heceyi gosterir: ela:, ka:til, a:let». Letters for sounds Turkish has no letter of its own for are taken from TDK's attested loan spellings (tisort /3:/ -> o, Solohov and otoban /x/ -> h, faks and taksi /ks/, kuvars /kw/ -> kuv, miting and kamping and doping /N/ -> ng, kokteyl and kokteyl and naylon and boykot and greyfurt for the front offglide and aut and faul for the back one and oto and radyo and gol and bot and kod for the o-glide that Turkish simply monophthongises, cip and caz and ceket /dZ/ -> c, Vasington and vat and viski /w/ -> v, Atina and tez and matematik Greek theta -> t, Osman and sabit Arabic thaa -> s, buro and menu for Russian /u/ after a palatalised consonant). Secondary, and cited as such: tr.wikipedia Yardim:IPA (CC BY-SA), whose gloss of schwa as «[e] ve [ı] arasi» is the authority for /@/ -> ı.",
+  "deviations": [
+    {
+      "rule": "SS08's Greek and Russian clause: «Yunan/Rus harflerinin ses degerlerini karsilayan Turk harfleri» -- Turkish letters answering the sound values of the source letters",
+      "why": "That is a phonemic transliteration keyed on the source script, and it is the one place the TDK rule is not keyed on the ear. It fails RESPELL-SYSTEMS.md's own respelling test -- change the spelling without changing the sound and the output moves -- so it is unreachable from an ipa column and is not implemented. Only the sound-keyed half of SS08 is taken: the parenthesised okunus."
+    },
+    {
+      "rule": "SS08 prints the okunus as one unbroken word: Shakespeare (Sekspir)",
+      "why": "TDK is bracketing one adopted name. We bracket a whole phrase of up to a dozen syllables, and an unbroken string invites the reader to apply Turkish default word-final stress across all of it. So the syllables are hyphenated, per CONTRIBUTING.md's per-reader divider table, and divided by TDK's own hece rule rather than by onset maximisation -- max_onset 1, which reproduces prog-ram, band-rol and surp-riz exactly."
+    },
+    {
+      "rule": "The Guncel Turkce Sozluk marks stress with an apostrophe immediately after the stressed vowel: ko'kteyl, tiya'tro, loka'nta",
+      "why": "Overruled for capitals, for a typographic reason rather than a linguistic one: the same apostrophe is the kesme isareti marking a suffix boundary on a proper noun (Ankara'dan, TDK'nin), which is exactly the environment a phrasebook prints. Marking is not optional here -- Turkish default stress is word-final for ordinary words but penultimate for foreign names (Kenedi, Vasington, Mendelson), so an unmarked polysyllable gets one of two different stresses depending on which the reader takes it for. Capitals are unambiguous provided the casing runs in the Turkish locale, which policy.locale tr does: the stressed syllable of a word with an i comes out with I dotted, not I dotless, and those are different letters with different vowels."
+    },
+    {
+      "rule": "SS08's settled Western names are written «Turkce soylenislerine gore»: Napolyon, Atina, Londra, Marsilya, Munih",
+      "why": "Those are lexicalised adoptions, not respellings -- Londra comes from Italian Londra and not from [ˈlʌndən], and Munih from Arabic script practice. The same is true of the closed list of loans TDK spells with an epenthetic vowel (iskarpin, istasyon, kulup). This table respells from the ear every time, so it gives lan-DIN for London and never reproduces the settled form. A curated override row is the right place for a lexicalised name, not a rule."
+    },
+    {
+      "rule": "The Turkish alphabet has 29 letters and no digraph for aspiration; TDK writes borrowed ph as f (fotograf, felsefe, fizik)",
+      "why": "Departed from for Hindi and Thai only, which contrast unaspirated with aspirated stops while also having a phonemic voiced series, so the two Turkish letters cannot carry a three- or four-way contrast. Those two targets get ph th kh, where Turkish h is always pronounced and so writes the puff of air exactly; it also agrees with the romanisations a Turkish reader has already met (Phuket, Punjab, Delhi). The risk is a reader with English or French schooling reading ph as f. Mandarin and Korean do not take the digraph -- see the next entry -- and Hindi's *voiced* aspirates do not either: breathy voice has no Turkish realisation at all, so bh would be read as b plus h, a genuinely different sound, and TDK's own Indic loans drop it (Buda, Gandi)."
+    },
+    {
+      "rule": "SS07's final-devoicing rule is about permanent Turkish spellings of loanwords (kitap < kitab, bant < band, etut < etud, metot < metod, standart < standard)",
+      "why": "Kept rather than overruled, which is worth stating because it is the one place a loanword-orthography rule and a pronunciation hint agree: a Turkish reader shown a word-final b d c g devoices it anyway, so writing the voiceless letter costs nothing audible and buys a form that looks Turkish. Word-final only, and only in a coda. Arabic /baQd/ therefore ends -t."
+    },
+    {
+      "rule": "Unaspirated stops written with Turkish voiced letters (Mandarin and Korean only)",
+      "why": "Turkish b d g are voiced and unaspirated and its p t k are aspirated word-initially, so the Turkish contrast is carried more by aspiration than by voicing. Where the target contrasts unaspirated with aspirated and has no *word-initial* voiced series for b d g to collide with, the unaspirated series takes b d g and the aspirated series takes p t k. Guarded by unless_inventory «#b #d #ɡ» rather than by target, which is what separates Korean -- whose ipa carries b d g only intervocalically, as the lenis series' allophones -- from Thai and Hindi, where they are word-initial and contrastive. For Korean it also lands on Revised Romanization, the spelling a Turkish reader has seen in Gangnam and Busan."
+    },
+    {
+      "rule": "Do not use the circumflex, and do not double a vowel for length",
+      "why": "RESPELL-SYSTEMS.md's case, held to. The circumflex has three live and incompatible readings in Turkish and the third is fatal: it palatalises a preceding k g l, and kar /kaɾ/ against kar-circumflex /caɾ/ is a minimal pair and two separate TDK headwords. A doubled vowel reads as two syllables and TDK adjudicates aa inconsistently (maalesef -> ma:lesef but cemaat -> cema:at, with saat left blank). policy.length colon is the Sozluk's own mark instead, and the legend line is that one glyph."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/ŋ/ (Mandarin, Vietnamese, Portuguese, Thai, Korean, German, English)",
+      "out": "ng, and n before a velar",
+      "why": "Turkish's 21 consonant letters have no symbol for a velar nasal. ng is TDK's own loan solution (miting, kamping, doping) and buys an unavoidable extra [g]; before a velar onset Turkish writes n and reads it [ŋ] for free (tank, banka), so that environment costs nothing."
+    },
+    {
+      "sounds": "/w/ (Mandarin, Swahili, Vietnamese, English, Korean, Japanese, Thai, Arabic)",
+      "out": "v word-initially, u after a consonant, v as a falling offglide",
+      "why": "Turkish has no /w/. TDK's respelling of an initial one is v (Vasington, vat, viski), which is firmly [v] before a e i and only [β] beside a rounded vowel -- the sharpest single loss in this table. After a consonant u is both closer and TDK's own answer (kuvars), and as a falling offglide v is what TDK's loans write (kavboy, sov)."
+    },
+    {
+      "sounds": "/θ/ /ð/ (English think and this, Arabic thaa and dhaal)",
+      "out": "t d, and s z for Arabic",
+      "why": "Two TDK traditions, each applied to the language that owns it. Greek and Western theta is t (Atina, tez, matematik, termos) and delta is d (demokrasi); Arabic thaa is s (Osman < Uthman, sabit) and dhaal is z (zerre). Guarded by if_inventory «ħ», which in this corpus is Arabic alone."
+    },
+    {
+      "sounds": "/ʔ/ /ʕ/ /ˤ/ /ˀ/ (glottal stop, ayn, pharyngealisation, Vietnamese glottalisation)",
+      "out": "dropped",
+      "why": "Turkish has neither letter nor sound, and dropping them is what Turkish's own Arabic loans do (sanat < san'at, Kuran, memur). A dropped hamza leaves an ordinary onsetless Turkish syllable."
+    },
+    {
+      "sounds": "/x/ /ħ/ /ç/ (Mandarin h, Arabic khaa and haa, German ich-Laut)",
+      "out": "h",
+      "why": "TDK-attested for the velar (Solohov, otoban, Han). Turkish /h/ is itself [x] before a back vowel and [ç] after a front one, so h is the exact letter for the German case and only the pharyngeal is a real loss."
+    },
+    {
+      "sounds": "/ʈ ɖ ɳ ɽ ʂ ʐ/ and the Mandarin retroflex series",
+      "out": "t d n r ş j, c and ç for the affricates",
+      "why": "Turkish has no retroflexes. Mandarin zh/ch/sh and j/q/x therefore merge into c/ç/ş, which is the same merger the Spanish table makes for the same reason."
+    },
+    {
+      "sounds": "/ɤ/ (Arabic ghayn, Vietnamese g)",
+      "out": "g",
+      "why": "Turkish g is a stop and ğ would be closer in manner, but ğ is silent, or a syllable break, or lengthening, or [j] depending on context -- RESPELL-SYSTEMS.md's warning -- so it cannot be trusted to be read as a consonant at all. Turkish's own Arabic loans write g (gayret, gazel)."
+    },
+    {
+      "sounds": "/ə/ (German, Vietnamese, Indonesian, French, Hindi, English)",
+      "out": "ı, and a for Hindi",
+      "why": "tr.wikipedia's IPA key glosses schwa as «[e] ve [ı] arasi», and ı is the best schwa any Latin-script reader in this set has. Hindi is the exception: its schwa is the inherent vowel of every consonant letter and the whole language reads wrong in ı (na-mas-TE, not nı-mıs-TE), so it takes a, guarded on if_inventory «ʋ» as in the Spanish and Russian tables."
+    },
+    {
+      "sounds": "lexical tone (zh-Hans, th, vi)",
+      "out": "dropped",
+      "why": "Chao letters are not Turkish letters and a reader with no key gets nothing from them. All four curated tonal sheets drop tone too. Thai and Vietnamese lose the most."
+    },
+    {
+      "sounds": "breathy voice /bʰ dʰ ɡʰ ɟʰ ɖʰ ɽʰ/ (Hindi)",
+      "out": "the plain letter",
+      "why": "See the deviation on the aspiration digraph: h after a voiced letter would be read as a separate [h], which is not breathy voice. TDK's Indic loans drop it (Buda)."
+    },
+    {
+      "sounds": "geminate /kː/",
+      "out": "single k",
+      "why": "Measured rather than assumed, and the measurement is the Russian table's: 137 of the 180 /kː/ in the corpus are the Hindi G2P writing kya as /kːjaː/, which is no geminate at all. The other nine geminates do double, which is how Turkish writes its own (elli, anne) and what gets Hindi baccaa and Arabic shadda; the ten genuine /kː/ (Italian ecco) lose theirs, the smaller of the two errors."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "colon",
+    "tone": "drop",
+    "max_onset": 1,
+    "locale": "tr",
+    "fixups": "all"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ç"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ç"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "cc"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃː",
+      "out": "çç"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒː",
+      "out": "cc"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsː",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dzː",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "c",
+      "if_inventory": "tɕʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ç"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ç"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "dz",
+      "if_inventory": "tsʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "çh"
+    },
+    {
+      "slot": "any",
+      "ipa": "cː",
+      "out": "çç"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ç"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "g",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "ph"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "th"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "kh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "th"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "bb"
+    },
+    {
+      "slot": "any",
+      "ipa": "sː",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "zː",
+      "out": "zz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃː",
+      "out": "şş"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒː",
+      "out": "jj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡː",
+      "out": "gg"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "kː",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ː",
+      "out": "tt"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "b",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "d",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "g",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "z",
+      "if_inventory": "ħ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s",
+      "if_inventory": "ħ"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "ş"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "ş"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ş"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "z"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "n",
+      "if_nucleus": "i iː ɪ əː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "k ɡ x q ɣ kʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "l",
+      "if_nucleus": "i iː ɪ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥœ",
+      "out": "üe"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "ü"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "",
+      "if_nucleus": "iːj"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "",
+      "after_out": "o u"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u",
+      "after_out": "b c ç d f g h j k l m n p r s ş t v y z a e ı i o ö u ü"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": "",
+      "after_out": "ç c ş j y"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʲ",
+      "out": "y",
+      "if_nucleus": "a o u ɑ ʌ ɔ ɐ ʊ ɵ ɤ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "any",
+      "ipa": "əː",
+      "out": "ı:"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯː",
+      "out": "ı:"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤː",
+      "out": "ı:"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "e",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "ı"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜː",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ī",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "y",
+      "after_out": "a e ı i o ö u ü"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "ı"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "ı"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "ı"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "",
+      "after_out": "o u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "ü"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "ü"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "ı",
+      "before_onset": "ɹ r ɾ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "ır"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "ır"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "ng([kg])",
+      "out": "n\\1"
+    },
+    {
+      "match": "nng",
+      "out": "ng"
+    },
+    {
+      "match": "([^b])b$",
+      "out": "\\1p",
+      "when": [
+        "word_final"
+      ]
+    },
+    {
+      "match": "([^c])c$",
+      "out": "\\1ç",
+      "when": [
+        "word_final"
+      ]
+    },
+    {
+      "match": "([^d])d$",
+      "out": "\\1t",
+      "when": [
+        "word_final"
+      ]
+    },
+    {
+      "match": "([^ng])g$",
+      "out": "\\1k",
+      "when": [
+        "word_final"
+      ]
+    }
+  ],
+  "targets": {
+    "ja": {
+      "comment": "Japanese /ɯ/ is a compressed back vowel, not the Korean and Thai unrounded [ɯ] that ı answers, and every Turkish rendering of Japanese writes u (suşi, sumo, Fukuşima, Tokyo). This is the one place a targets block was cheaper than a typological guard, exactly as in the Russian table.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɯː",
+          "out": "u"
+        },
+        {
+          "slot": "any",
+          "ipa": "ɯ",
+          "out": "u"
+        }
+      ]
+    },
+    "ko": {
+      "comment": "Korean eo /ʌ/ is [ʌ~ɔ] and Turkish writes it o (Seul, Coson, Pusan). Everywhere else in the corpus the same symbol is English STRUT, Russian reduction or the Hindi inherent vowel, all of which want a.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "o"
+        }
+      ]
+    },
+    "pt": {
+      "comment": "espeak writes the Portuguese reduced final vowel [ɨ] as /y/, a front rounded vowel it is not: noite comes out /nˈoɪtʃy/ and fumadores /fumadˈoɾys/. A logged G2P defect, not a fact about Portuguese, and ı is the right letter for [ɨ]. Turkish's own /y/ rows are unaffected -- fr, de and zh-Hans keep ü.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "ı"
+        }
+      ]
+    },
+    "vi": {
+      "comment": "Same espeak defect as Portuguese: Vietnamese u-horn is [ɨ~ɯ] and is written /y/ (duợc /ɗyəc/, truớc /tʃyəc/), which is not the front rounded vowel. ı is the letter for it.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "ı"
+        }
+      ]
+    }
+  },
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: one glyph only -- «:» marks a syllable read long, which is the Guncel Turkce Sozluk's own mark (ka:til, a:let). Everything else is ordinary Turkish, and the two traps to remember when reading this table are Turkish's own: c is /dʒ/ and j is /ʒ/. There is no curated Turkish sheet -- all sixteen gloss into English -- so this table carries no agreement score by construction, and is held instead to faithfulness, zero --gaps, and being read aloud. It deliberately does not resemble tr.wikipedia's Yardim:Telaffuz yeniden heceleme anahtari, which has Turkish headers and English values and renders Al Pacino as pə-CHEE-noh: CHEE is not Turkish, and IL is read [ıl] because capital dotless I is ı.",
+  "policy_note": "max_onset 1 is TDK's syllable rule, not a tuning: «Bati kokenli kelimeler, Turkcenin hece yapisina gore hecelere ayrilir: band-rol, kont-rol, port-re, prog-ram, sant-ral, surp-riz, tund-ra, volf-ram». Two medial consonants split VC.CV and three split VCC.CV, and 1 reproduces all eight of those examples where 2 and 3 do not -- kont-rol is decisive, because TDK splits it VC.CV even though tren and trafik prove /tr/ can open a Turkish word, so the medial rule is not about what is a possible onset. That is also why reader_onsets is unused: a Turkish syllable has no complex onset at all, so there is no cluster list to intersect, and the field cannot express the empty set. Word-initial clusters are untouched by max_onset, so SS07's kral, kredi, plan, problem, spiker, spor, staj, studyo, trafik and tren survive. Tested directly: fed TDK's eight examples back in as IPA against a target whose cluster table holds pr, tr, dr and gr, max_onset 1 returns all eight of band-rol, kont-rol, port-re, prog-ram, sant-ral, surp-riz, tund-ra and volf-ram, and 2 and 3 return seven of them wrong (ban-drol, kon-trol, por-tre, pro-gram, san-tral, sur-priz, tun-dra). Measured over all 11,780 rows of the sixteen targets: 1 against 2 differs on 1,275 rows and 2 against 3 on 27. Turkish therefore goes the opposite way from the Russian table, which kept 3. The 1,275 are the whole argument -- an-dirs-TENT against an-dir-STENT, PRA:B-lim against PRA:-blim, CILD-rin against CIL-drin, ink-LU:-dit against in-KLU:-dit -- and every one of them is TDK-shaped at 1. The 27 are all English and Arabic three-consonant medial clusters (re-cist-REY-shin against re-ci-STREY-shin), so 2 against 3 is not a decision this table has to take a view on.",
+  "measurements": [
+    "Gaps: 55 unmapped IPA symbols reaching the page before this table existed, 0 after. `respell_check.mjs tr --gaps` prints none, and no IPA character survives anywhere in the output of any of the sixteen targets. `--units` reports 19 phonemes spelt by decomposition rather than by a rule of their own, and all 19 are the deliberate kind: the dental mark on /t̪ s̪ ts̪/, Arabic pharyngealisation on /dˤ/, the Swahili syllabic mark on /m̩ n̩/, and Russian's fourteen palatalised consonants, whose /ʲ/ is dropped or written y by rule. No diacritic in this table maps to a letter by accident.",
+    "Length: 7,215 syllables take the colon and none lose it. 6,809 put it exactly where the Guncel Turkce Sozluk does, immediately after the long vowel (ka:til). The remaining 406 are the engine placing it at the end of the syllable's first vowel *run* rather than after the long vowel itself: 360 where a falling offglide follows the long vowel (Thai daːj -> day: for da:y), 28 on the Arabic rows whose G2P lost every short vowel so the only vowel letter is the onset's y (jmknniː -> y:mknni), and 18 where a geminate consonant closes the syllable and its own length mark pulls a vowel colon (ʔalħadː -> al-ha:dd). All 406 are still readable under TDK's own definition of the mark -- «uzun okunan HECEYI gosterir», it marks the syllable read long -- and a syllable has at most one long vowel, so no contrast is lost. Reported rather than worked around: writing every long vowel's colon in the phonemes table instead would place all 7,215 exactly, at the cost of not using policy.length at all.",
+    "Final devoicing is written as four end-anchored syllable_fixups rather than as coda phoneme rules, because `when: [\"word_final\"]` is a fact about the *syllable* and the rule is about the last *letter*. Measured: 386 word-final codas open with a voiced stop, and only 286 of them end with it -- coda rules devoiced the other 100 too, of which 42 were plainly wrong (Arabic qabl -> kapl, French possible -> po-SI-pl). The fixups devoice exactly the 286, and each excludes its own doubled form so an Arabic geminate (ʔalħadː -> al-ha:dd) is left alone; the g fixup also excludes ng, or TDK's own miting and kamping would come back as mitink.",
+    "Because VOWEL_LETTERS in core/respell.js has no ı, policy.length cannot mark a long /ɯː əː ɤː/ at all, so those three carry their colon in the phonemes table instead. That is the whole of the overlap between a table-written colon and a policy-written one, and it collided exactly once in 11,780 rows: Vietnamese nhờ /ɲəː/, where the onset's y is also a vowel letter, printed ny:i:. /ɲ/ before that nucleus is now spelt n, which is the same back-off the rule already has before /i/; the other 43 long back-unrounded syllables have onsets that emit no vowel letter, so nothing else in the corpus can collide."
+  ]
+}

@@ -6,30 +6,38 @@
   "deviations": [
     {
       "rule": "제3항 -- a 받침 may only be ㄱ ㄴ ㄹ ㅁ ㅂ ㅅ ㅇ",
-      "why": "Satisfied vacuously, and that is the deviation: this table writes no 받침 at all, because `word()` in `core/respell.js` builds a syllable by concatenating the emitted text of its onset, nucleus and coda and a Hangul block cannot be assembled that way (see `note`). Every coda is therefore a following ㅡ syllable. For the obstruents that is the 대조표’s own 자음 앞 또는 어말 column -- 프 브 트 드 크 그 스 즈 -- so /est/ is 에스트 and /kat/ is 카트 as prescribed, and the ㅡ epenthesis a Korean reader would supply anyway is exactly right for a foreign cluster. It is wrong for the four sonorants the standard does write as 받침: /han/ comes out 하느 for 한, /hotel/ 호테르 for 호텔, /bæŋk/ 배응크 for 뱅크. That is the largest single defect in this table and it is not expressible away: a rule that merges a coda needs the initial, the vowel and the coda together, which is 19 x 21 x 7 table entries."
+      "why": "Kept, and now a decision rather than a limitation, since NFC makes a 받침 expressible. **Written as a 받침:** ㄴ for /n ɳ ɴ/, ㅁ for /m/, ㅇ for /ŋ/ and for the nasality of a nasal vowel, ㄹ for /l ɫ ɭ ʎ/ -- always, so 뱅크, 힌트, 램프, 호텔, 콘, 생크, 융, 앙팡. And ㅂ ㅅ ㄱ for a /p t k/ after a short vowel, which is 영어 세칙 제1항's condition in full -- 짧은 모음과 유음·비음 이외의 자음 사이, so word-finally *and* before another obstruent: 캣, 북, 크랍, 디껏, 액트, 픽처, 엑스. ㅅ also serves a geminate stop, which is 일본어 세칙's 촉음 rule: 칩푸, 캇테. **Written as its own ㅡ syllable** -- the 대조표's 자음 앞 또는 어말 column -- everything else: the fricatives (스 즈 프 브 흐), the affricates (츠 지 치), the voiced stops (브 드 그), any /p t k/ that fails the short-vowel test (에스트, 데스크, 마스크, 카르트), and the rhotics, because the 대조표 gives [l] a ㄹ 받침 but [r] the syllable 르 (포르 파보르, 베를린). Only the first consonant of a coda can take a 받침, Hangul having one 종성 slot, which is exactly why 힌트 and 뱅크 come out right. Of the seven, ㄷ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ never appear, and ㅅ stands for a final /t/ because the 받침 neutralises to [t]."
+    },
+    {
+      "rule": "제3항, the one place a 받침 is refused on phonological grounds",
+      "why": "A word-final stop keeps the ㅡ form when a 유음 or 비음 follows it in the same coda, which is 영어 세칙 제1항's own exclusion (짧은 모음과 유음·비음 이외의 자음 사이). Korean phonology says why: 받침 ㅅ ㄱ ㅂ assimilate before ㄹ ㅁ ㄴ, so votre as 봇르 would be read [본느]. 보트르 it is. A slot cannot look ahead within itself, so each stop-plus-liquid pair is one rule."
     },
     {
       "rule": "제4항 -- 파열음 are never written with 된소리",
-      "why": "Relaxed, but only in an onset and only where the target’s own inventory proves an aspiration contrast (`if_inventory: \"pʰ\"` and its siblings), which today means Mandarin, Thai and Hindi. The Institute’s own newsletter grants that an unaspirated voiceless stop is nearer 된소리 than the aspirated series 제4항 mandates, and gives as its reason that one transcriber would have to adjudicate the aspirated/tense boundary across Greek, Turkish, Dutch, Arabic, Thai and Hindi -- a cost an inventory predicate does not pay. Korean lax stops are voiceless unaspirated word-initially and voiced between vowels, so the pair that writes an unaspirated voiceless stop in *both* positions is lax initially and tense elsewhere, which is what these rules do: 라-꼬느 for /laːkɔːn/, 마이-뻬느-라이 for /majpenraj/. The standard sets its own precedent for position-conditioned letters in the 일본어 세칙 (か行 is ㄱ word-initially and ㅋ mid-word). In a coda the block is a bare ㅡ syllable where the tense letter buys nothing and reads oddly, so 대조표 is kept there: /baːt/ is 바트, not 바뜨. 제4항 covers 파열음 only, so the ㅉ of /tɕ/ and /ts/ is inside the standard, and is what its own 중국어 표기 세칙 prints (마오쩌둥)."
+      "why": "Relaxed, but only in an onset and only where the target's own inventory proves an aspiration contrast (`if_inventory: \"pʰ\"` and its siblings), which today means Mandarin, Thai and Hindi. The Institute's own newsletter grants that an unaspirated voiceless stop is nearer 된소리 than the aspirated series 제4항 mandates, and gives as its reason that one transcriber would have to adjudicate the aspirated/tense boundary across Greek, Turkish, Dutch, Arabic, Thai and Hindi -- a cost an inventory predicate does not pay. Korean lax stops are voiceless unaspirated word-initially and voiced between vowels, so the pair that writes an unaspirated voiceless stop in *both* positions is lax initially and tense elsewhere: 라-꼰 for /laːkɔːn/, 마이-뻰-라이 for /majpenraj/. The standard sets its own precedent for position-conditioned letters in the 일본어 세칙, where か行 is ㄱ word-initially and ㅋ mid-word. In a coda the block is a bare ㅡ syllable where the tense letter buys nothing and reads oddly, so the 대조표 is kept there: /baːt/ is 바트, not 바뜨. 제4항 covers 파열음 only, so the ㅉ of /tɕ/ and /ts/ is inside the standard, and is what its own 중국어 표기 세칙 prints (마오쩌둥)."
     },
     {
       "rule": "제4항, continued -- targets whose inventory cannot prove the contrast",
-      "why": "Not relaxed, and this is a considered disagreement with `content/RESPELL-SYSTEMS.md`, which names Spanish, French, Italian, Japanese, Thai and Vietnamese as reading better with ㅃㄸㄲ. Thai is covered above; the other five have no aspirated series in phonemic IPA, and neither does English or German, whose /p t k/ *are* aspirated and must stay ㅍㅌㅋ. The data holds no discriminator, so the choice is between printing the standard’s answer and hard-coding four language codes in a `targets` block. We print the standard’s: /toːkjoː/ is 토-쿄 where a Korean reader expects 도쿄. If the owner wants the survey’s list, it is six rules per target in `targets` (p t k -> lax when word_initial, tense otherwise). Vietnamese needs no rule at all -- its `ipa` column is simply missing the /tʰ/ of th-, and the moment it has it these rules fire on their own."
+      "why": "Not relaxed, and this is a considered disagreement with `content/RESPELL-SYSTEMS.md`, which names Spanish, French, Italian, Japanese, Thai and Vietnamese as reading better with ㅃㄸㄲ. Thai is covered above; the other five have no aspirated series in phonemic IPA, and neither does English or German, whose /p t k/ *are* aspirated and must stay ㅍㅌㅋ. The data holds no discriminator, so the choice is between printing the standard's answer and hard-coding four language codes in a `targets` block. We print the standard's: /toːkjoː/ is 토-쿄 where a Korean reader expects 도쿄. If the owner wants the survey's list it is six rules per target in `targets` (p t k -> lax when word_initial, tense otherwise). Vietnamese needs no rule at all -- its `ipa` column is simply missing the /tʰ/ of th-, and the moment it has it these rules fire on their own."
     },
     {
       "rule": "제9항 다만 -- after a consonant, [w] is written as its own syllable (트위스트), except after [ɡ], [h] and [k] (쿼터, 펭귄)",
-      "why": "Applied as written for a non-tonal target, and reversed for a tonal one (`unless_inventory: \"˧\"`). The clause is written for European consonant clusters; the same IPA string in Mandarin, Vietnamese and Thai is a medial glide inside one syllable, and splitting it would invent a syllable in a language whose syllable count is morphemic -- 说 /ʂwɔ/ must be 숴, not 스워. Lexical tone in the `ipa` column is the one thing in the data that tracks the difference, since the medial is a property of exactly those syllable canons."
+      "why": "Applied as written for a non-tonal target, and reversed for a tonal one (`unless_inventory: \"˧\"`). The clause is written for European consonant clusters; the same IPA string in Mandarin, Vietnamese and Thai is a medial glide inside one syllable, and splitting it would invent a syllable in a language whose syllable count is morphemic -- 说 /ʂwɔ/ must be 숴, not 스워. Lexical tone in the `ipa` column is the one thing in the data that tracks the difference, the medial being a property of exactly those syllable canons. So /twɪst/ is 트위스트, /bwaʁ/ 브와르, /kwatɾo/ 콰트로."
+    },
+    {
+      "rule": "제9항 -- [ʃ] and [ɲ] are 시 and 니 before a vowel, merged into the ㅑ series",
+      "why": "Merged for the four plain groups where the merge is worth its rules -- ㅑ ㅕ ㅛ ㅠ, so 샤 셔 쇼 슈 냐 녀 뇨 뉴, which is what makes 뉴료쿠 and 아뇨스 -- and left unmerged elsewhere, because the merge needs the 초성 rule to know the whole nucleus and each group costs a rule per consonant plus a suppression rule per vowel. Before an /i/-like vowel nothing is needed (시, 니 fall out of the bare 초성), but /ʃɛ/ is 세 rather than 셰 and /ʃɑ̃/ 상 rather than 샹."
     },
     {
       "rule": "the language-specific 세칙 of 제3장 (영어, 일본어, 중국어, 프랑스어 …)",
-      "why": "Not applied; only 표 1, the IPA table 제2장 names as the basis of the others and as the default for anything not tabulated. The 세칙 are indexed by the source language’s own spelling, which is the index this feature cannot have, and they contradict each other on the same IPA -- 일본어 세칙 writes か as 가/카 by position, 중국어 세칙 writes pinyin b as ㅂ and z as ㅉ. Where a 세칙 form is the one a Korean reader expects, it belongs in `data/respell/overrides`, which 제5항 (established forms win) makes authoritative over this file anyway."
+      "why": "Not applied as tables; only 표 1, the IPA table 제2장 names as the basis of the others and as the default for anything not tabulated. The 세칙 are indexed by the source language's own spelling, which is the index this feature cannot have, and they contradict each other on the same IPA -- 일본어 세칙 writes か as 가/카 by position, 중국어 세칙 writes pinyin b as ㅂ and z as ㅉ. Two of their conditions are borrowed above, because both are phonetic rather than orthographic and so survive the change of index: 영어 세칙 제1항's 짧은 모음 test for a final stop, and 일본어 세칙's ㅅ 받침 for a geminate. Where a 세칙 form is the one a Korean reader expects, it belongs in `data/respell/overrides`, which 제5항 makes authoritative over this file anyway."
     },
     {
-      "rule": "the 대조표 has no row for tone, length, palatalisation or gemination",
-      "why": "Chao tone letters are dropped (`tone: \"drop\"`): the standard marks no tone, and a Korean reader cannot read them. Length is dropped -- the survey’s length table gives Hangul \"none\", the Seoul contrast is dead for younger speakers, and the 대조표 has no long-vowel row. Russian palatalisation (`ʲ`) is dropped rather than written 니/랴, which costs 데느 for день where the 러시아어 세칙 has 덴. Gemination is dropped, because writing it needs the ㅅ 받침 of 삿포로: /mɯkatte/ is 무-카트-테, not 무캇테."
+      "rule": "the 대조표 has no row for tone, length or palatalisation",
+      "why": "Chao tone letters are dropped (`tone: \"drop\"`): the standard marks no tone, and a Korean reader cannot read them. Length is dropped -- the survey's length table gives Hangul \"none\", the Seoul contrast is dead for younger speakers, and the 대조표 has no long-vowel row. Russian palatalisation (`ʲ`) is dropped rather than written 니/랴, which costs 덴 nothing but flattens сь and зь."
     }
   ],
-  "note": "Hangul is a composing script and the engine is not: `word()` in `core/respell.js` concatenates the emitted text of the onset, nucleus and coda, so no rule can put an onset and a vowel into one block. Every consonant therefore emits its own C+ㅡ block -- which is exactly the 대조표’s 자음 앞 또는 어말 column -- and the 520 entries in `syllable_fixups` are the 초성+중성 composition table that merges it with the vowel that follows: 크 + 아 -> 카. This is why /str/ comes out 스트르 + 이 -> 스트리, which is the prescribed form. Two consequences to know about. A syllable gets one fixup, so a syllable needing two merges (an onset *and* a coda glide) only gets the onset one, which is why /ɚ j w/ have their own C+glide rules. And 받침 is out of reach entirely, because merging a coda needs the initial, the vowel and the coda in one rule (19 x 21 x 7 entries). One line in the engine -- normalising the assembled syllable to NFC -- would delete all 520 entries and make 받침 expressible as conjoining jamo; see the report.",
+  "note": "Hangul is a composing script, and since `word()` in `core/respell.js` normalises each assembled syllable to NFC, the three slots really are 초성/중성/종성: this table emits conjoining jamo and the engine composes them into one precomposed block. `syllable_fixups` is empty -- with NFC there is nothing left for it to do.\n\nTwo invariants hold the table together, and both are about what a 받침 may attach to. **A vowel is always conjoining jamo** -- the 중성 alone when a 초성 is waiting for it (`after_out` lists the 19 초성), ᄋ plus the 중성 when it opens a block of its own, which covers an onsetless syllable and the second element of a diphthong alike. Never the precomposed character, because a 받침 can only reach a 중성 that is still loose: this is what makes /jʊŋ/ 융 and /el/ 엘. **A consonant's own ㅡ block is precomposed**, for the mirror reason -- a 받침 must not reach back into it, or /dɛsk/ would be 데슥 instead of 데스크.\n\nA 초성 is otherwise written bare so the vowel can bind to it, but a bare 초성 with nothing after it would ship as an isolated jamo glyph and leave its own syllable out of the font subset -- a box in the PDF. Two positions therefore give it a whole block instead: inside an onset cluster, where the previous 초성 is still open and Korean's own ㅡ epenthesis is the right answer (/str/ is 스트르 + ᅵ = 스트리, the prescribed form), and a word with no vowel at all, such as Russian в or Arabic mkbːr, spelled `if_nucleus: \" \"` because that is the only way to ask the engine whether the nucleus is empty.\n\n`max_onset` is 1, which is what Korean phonotactics want -- a Korean syllable admits exactly one 초성 and no cluster at all -- and it is measurably the best value now that the syllabifier segments on phonemes rather than codepoints: against 2 or 3 it spends 309 fewer syllables on the same 11,807 rows and writes 320 more 받침, because a consonant it leaves in the coda can become a 받침 where the same consonant pulled into the next onset has to carry its own ㅡ block. Arabic's article is the clearest case: 알-바크-시시, not 아-르바크-시시.",
   "legend": "없음 -- 이 표기에 쓰인 글자는 모두 보통 한글입니다.",
   "policy": {
     "syllable_separator": "-",
@@ -38,20 +46,458 @@
     "stress_min_syllables": 2,
     "length": "none",
     "tone": "drop",
-    "max_onset": 3,
+    "max_onset": 1,
     "locale": "ko"
   },
   "splits": [],
   "phonemes": [
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "pʰ",
+      "out": "프",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʰ",
+      "out": "트",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "kʰ",
+      "out": "크",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʰ",
+      "out": "트",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "tsʰ",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕʰ",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂʰ",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "cʰ",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "c",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʃ",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "츠",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈ",
+      "out": "트",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "프",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "트",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "크",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "q",
+      "out": "크",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "b",
+      "out": "브",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "d",
+      "out": "드",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡ",
+      "out": "그",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɖ",
+      "out": "드",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɗ",
+      "out": "드",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "bʰ",
+      "out": "브",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʰ",
+      "out": "드",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʰ",
+      "out": "그",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɖʰ",
+      "out": "드",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟʰ",
+      "out": "즈",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɽʰ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "dz",
+      "out": "즈",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʑ",
+      "out": "즈",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʒ",
+      "out": "즈",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
+      "out": "즈",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "pf",
+      "out": "프",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "f",
+      "out": "프",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "v",
+      "out": "브",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʋ",
+      "out": "브",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "θ",
+      "out": "스",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ð",
+      "out": "드",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "s",
+      "out": "스",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "z",
+      "out": "즈",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʂ",
+      "out": "스",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "x",
+      "out": "흐",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ħ",
+      "out": "흐",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "h",
+      "out": "흐",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɸ",
+      "out": "흐",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɣ",
+      "out": "그",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʐ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʑ",
+      "out": "즈",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʒ",
+      "out": "즈",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ç",
+      "out": "흐",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "스",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "스",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "느",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "m",
+      "out": "므",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "n",
+      "out": "느",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɳ",
+      "out": "느",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɴ",
+      "out": "느",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ŋ",
+      "out": "으",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "l",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɫ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɭ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʎ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "r",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɾ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɹ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʁ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɻ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɽ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʝ",
+      "out": "으",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "j",
+      "out": "으",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "pʰ",
+      "out": "ᅳᄑ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pʰ",
+      "out": "ᄑ"
+    },
+    {
+      "slot": "coda",
       "ipa": "pʰ",
       "out": "프"
     },
     {
       "slot": "onset",
       "ipa": "p",
-      "out": "브",
+      "out": "ᅳᄇ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "pʰ",
       "when": [
         "word_initial"
@@ -60,18 +506,46 @@
     {
       "slot": "onset",
       "ipa": "p",
-      "out": "쁘",
+      "out": "ᄇ",
+      "if_inventory": "pʰ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "ᅳᄈ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "pʰ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "p",
+      "out": "ᄈ",
+      "if_inventory": "pʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʰ",
+      "out": "ᅳᄐ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʰ",
+      "out": "ᄐ"
+    },
+    {
+      "slot": "coda",
       "ipa": "tʰ",
       "out": "트"
     },
     {
       "slot": "onset",
       "ipa": "t",
-      "out": "드",
+      "out": "ᅳᄃ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "tʰ",
       "when": [
         "word_initial"
@@ -80,18 +554,46 @@
     {
       "slot": "onset",
       "ipa": "t",
-      "out": "뜨",
+      "out": "ᄃ",
+      "if_inventory": "tʰ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "ᅳᄄ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "tʰ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "t",
+      "out": "ᄄ",
+      "if_inventory": "tʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "kʰ",
+      "out": "ᅳᄏ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "kʰ",
+      "out": "ᄏ"
+    },
+    {
+      "slot": "coda",
       "ipa": "kʰ",
       "out": "크"
     },
     {
       "slot": "onset",
       "ipa": "k",
-      "out": "그",
+      "out": "ᅳᄀ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "kʰ",
       "when": [
         "word_initial"
@@ -100,18 +602,46 @@
     {
       "slot": "onset",
       "ipa": "k",
-      "out": "끄",
+      "out": "ᄀ",
+      "if_inventory": "kʰ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "ᅳᄁ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "kʰ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "k",
+      "out": "ᄁ",
+      "if_inventory": "kʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʰ",
+      "out": "ᅳᄐ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʰ",
+      "out": "ᄐ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ʈʰ",
       "out": "트"
     },
     {
       "slot": "onset",
       "ipa": "ʈ",
-      "out": "드",
+      "out": "ᅳᄃ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "ʈʰ",
       "when": [
         "word_initial"
@@ -120,18 +650,46 @@
     {
       "slot": "onset",
       "ipa": "ʈ",
-      "out": "뜨",
+      "out": "ᄃ",
+      "if_inventory": "ʈʰ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈ",
+      "out": "ᅳᄄ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "ʈʰ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ʈ",
+      "out": "ᄄ",
+      "if_inventory": "ʈʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tsʰ",
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tsʰ",
+      "out": "ᄎ"
+    },
+    {
+      "slot": "coda",
       "ipa": "tsʰ",
       "out": "츠"
     },
     {
       "slot": "onset",
       "ipa": "ts",
-      "out": "즈",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "tsʰ",
       "when": [
         "word_initial"
@@ -140,18 +698,46 @@
     {
       "slot": "onset",
       "ipa": "ts",
-      "out": "쯔",
+      "out": "ᄌ",
+      "if_inventory": "tsʰ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "ᅳᄍ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "tsʰ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "ᄍ",
+      "if_inventory": "tsʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕʰ",
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕʰ",
+      "out": "ᄎ"
+    },
+    {
+      "slot": "coda",
       "ipa": "tɕʰ",
       "out": "츠"
     },
     {
       "slot": "onset",
       "ipa": "tɕ",
-      "out": "즈",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "tɕʰ",
       "when": [
         "word_initial"
@@ -160,18 +746,46 @@
     {
       "slot": "onset",
       "ipa": "tɕ",
-      "out": "쯔",
+      "out": "ᄌ",
+      "if_inventory": "tɕʰ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "ᅳᄍ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "tɕʰ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "ᄍ",
+      "if_inventory": "tɕʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂʰ",
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂʰ",
+      "out": "ᄎ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ʈʂʰ",
       "out": "츠"
     },
     {
       "slot": "onset",
       "ipa": "ʈʂ",
-      "out": "즈",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "ʈʂʰ",
       "when": [
         "word_initial"
@@ -180,18 +794,46 @@
     {
       "slot": "onset",
       "ipa": "ʈʂ",
-      "out": "쯔",
+      "out": "ᄌ",
+      "if_inventory": "ʈʂʰ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "ᅳᄍ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "ʈʂʰ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "ᄍ",
+      "if_inventory": "ʈʂʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "cʰ",
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "cʰ",
+      "out": "ᄎ"
+    },
+    {
+      "slot": "coda",
       "ipa": "cʰ",
       "out": "츠"
     },
     {
       "slot": "onset",
       "ipa": "c",
-      "out": "즈",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "cʰ",
       "when": [
         "word_initial"
@@ -200,7 +842,23 @@
     {
       "slot": "onset",
       "ipa": "c",
-      "out": "쯔",
+      "out": "ᄌ",
+      "if_inventory": "cʰ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "onset",
+      "ipa": "c",
+      "out": "ᅳᄍ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
+      "if_inventory": "cʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "c",
+      "out": "ᄍ",
       "if_inventory": "cʰ"
     },
     {
@@ -226,115 +884,524 @@
     {
       "slot": "onset",
       "ipa": "c",
-      "out": "츠"
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "c",
+      "out": "ᄎ"
     },
     {
       "slot": "onset",
       "ipa": "tʃ",
-      "out": "츠"
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʃ",
+      "out": "ᄎ"
     },
     {
       "slot": "onset",
       "ipa": "tɕ",
-      "out": "츠"
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "ᄎ"
     },
     {
       "slot": "onset",
       "ipa": "ʈʂ",
-      "out": "츠"
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "ᄎ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "ᅳᄎ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "ᄎ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ts",
       "out": "츠"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ʈ",
+      "out": "ᅳᄐ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈ",
+      "out": "ᄐ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ʈ",
       "out": "트"
     },
     {
-      "slot": "any",
+      "slot": "coda",
+      "ipa": "pr",
+      "out": "프르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pɾ",
+      "out": "프르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʁ",
+      "out": "프르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pɹ",
+      "out": "프르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pl",
+      "out": "프르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pɫ",
+      "out": "프르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pm",
+      "out": "프므"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pn",
+      "out": "프느"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tr",
+      "out": "트르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɾ",
+      "out": "트르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʁ",
+      "out": "트르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɹ",
+      "out": "트르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tl",
+      "out": "트르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɫ",
+      "out": "트르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tm",
+      "out": "트므"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tn",
+      "out": "트느"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kr",
+      "out": "크르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kɾ",
+      "out": "크르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʁ",
+      "out": "크르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kɹ",
+      "out": "크르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kl",
+      "out": "크르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kɫ",
+      "out": "크르"
+    },
+    {
+      "slot": "coda",
+      "ipa": "km",
+      "out": "크므"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kn",
+      "out": "크느"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ps",
+      "out": "ᆸ스",
+      "if_nucleus": "a ɑ ɐ e ɛ æ i ɪ ɨ o ɔ ɒ ɵ u ʊ ʉ ɯ ʌ ə ɜ ɤ y ʏ œ ø",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ks",
+      "out": "ᆨ스",
+      "if_nucleus": "a ɑ ɐ e ɛ æ i ɪ ɨ o ɔ ɒ ɵ u ʊ ʉ ɯ ʌ ə ɜ ɤ y ʏ œ ø",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p",
+      "out": "ᆺ",
+      "before_onset": "p",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p",
+      "out": "ᆸ",
+      "if_nucleus": "a ɑ ɐ e ɛ æ i ɪ ɨ o ɔ ɒ ɵ u ʊ ʉ ɯ ʌ ə ɜ ɤ y ʏ œ ø",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t",
+      "out": "ᆺ",
+      "before_onset": "t",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t",
+      "out": "ᆺ",
+      "if_nucleus": "a ɑ ɐ e ɛ æ i ɪ ɨ o ɔ ɒ ɵ u ʊ ʉ ɯ ʌ ə ɜ ɤ y ʏ œ ø",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "ᆺ",
+      "before_onset": "k",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "ᆨ",
+      "if_nucleus": "a ɑ ɐ e ɛ æ i ɪ ɨ o ɔ ɒ ɵ u ʊ ʉ ɯ ʌ ə ɜ ɤ y ʏ œ ø",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "ᅳᄑ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "ᄑ"
+    },
+    {
+      "slot": "coda",
       "ipa": "p",
       "out": "프"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "t",
+      "out": "ᅳᄐ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "ᄐ"
+    },
+    {
+      "slot": "coda",
       "ipa": "t",
       "out": "트"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "k",
+      "out": "ᅳᄏ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "ᄏ"
+    },
+    {
+      "slot": "coda",
       "ipa": "k",
       "out": "크"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "q",
+      "out": "ᅳᄏ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "q",
+      "out": "ᄏ"
+    },
+    {
+      "slot": "coda",
       "ipa": "q",
       "out": "크"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "b",
+      "out": "ᅳᄇ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "b",
+      "out": "ᄇ"
+    },
+    {
+      "slot": "coda",
       "ipa": "b",
       "out": "브"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "d",
+      "out": "ᅳᄃ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "d",
+      "out": "ᄃ"
+    },
+    {
+      "slot": "coda",
       "ipa": "d",
       "out": "드"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ɡ",
+      "out": "ᅳᄀ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡ",
+      "out": "ᄀ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɡ",
       "out": "그"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ɖ",
+      "out": "ᅳᄃ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɖ",
+      "out": "ᄃ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɖ",
       "out": "드"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ɗ",
+      "out": "ᅳᄃ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɗ",
+      "out": "ᄃ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɗ",
       "out": "드"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "bʰ",
+      "out": "ᅳᄇ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "bʰ",
+      "out": "ᄇ"
+    },
+    {
+      "slot": "coda",
       "ipa": "bʰ",
       "out": "브"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "dʰ",
+      "out": "ᅳᄃ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʰ",
+      "out": "ᄃ"
+    },
+    {
+      "slot": "coda",
       "ipa": "dʰ",
       "out": "드"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ɡʰ",
+      "out": "ᅳᄀ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʰ",
+      "out": "ᄀ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɡʰ",
       "out": "그"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ɖʰ",
+      "out": "ᅳᄃ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɖʰ",
+      "out": "ᄃ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɖʰ",
       "out": "드"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ɟʰ",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟʰ",
+      "out": "ᄌ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɟʰ",
       "out": "즈"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ɽʰ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɽʰ",
+      "out": "ᄅ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɽʰ",
       "out": "르"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "dz",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dz",
+      "out": "ᄌ"
+    },
+    {
+      "slot": "coda",
       "ipa": "dz",
       "out": "즈"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "dʑ",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʑ",
+      "out": "ᄌ"
+    },
+    {
+      "slot": "coda",
       "ipa": "dʑ",
       "out": "즈"
     },
@@ -346,7 +1413,13 @@
     {
       "slot": "onset",
       "ipa": "dʒ",
-      "out": "즈"
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʒ",
+      "out": "ᄌ"
     },
     {
       "slot": "coda",
@@ -356,13 +1429,26 @@
     {
       "slot": "onset",
       "ipa": "ɟ",
-      "out": "그",
+      "out": "ᅳᄀ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "dʒ"
     },
     {
       "slot": "onset",
       "ipa": "ɟ",
-      "out": "즈"
+      "out": "ᄀ",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
+      "out": "ᄌ"
     },
     {
       "slot": "any",
@@ -375,70 +1461,260 @@
       "out": ""
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "pf",
+      "out": "ᅳᄑ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pf",
+      "out": "ᄑ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pf",
+      "out": "프"
+    },
+    {
+      "slot": "onset",
+      "ipa": "f",
+      "out": "ᅳᄑ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "f",
+      "out": "ᄑ"
+    },
+    {
+      "slot": "coda",
       "ipa": "f",
       "out": "프"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "v",
+      "out": "ᅳᄇ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "v",
+      "out": "ᄇ"
+    },
+    {
+      "slot": "coda",
       "ipa": "v",
       "out": "브"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ʋ",
+      "out": "ᅳᄇ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʋ",
+      "out": "ᄇ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ʋ",
       "out": "브"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "θ",
+      "out": "ᅳᄉ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "θ",
+      "out": "ᄉ"
+    },
+    {
+      "slot": "coda",
       "ipa": "θ",
       "out": "스"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ð",
+      "out": "ᅳᄃ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ð",
+      "out": "ᄃ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ð",
       "out": "드"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "s",
+      "out": "ᅳᄉ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "s",
+      "out": "ᄉ"
+    },
+    {
+      "slot": "coda",
       "ipa": "s",
       "out": "스"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "z",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "z",
+      "out": "ᄌ"
+    },
+    {
+      "slot": "coda",
       "ipa": "z",
       "out": "즈"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ʂ",
+      "out": "ᅳᄉ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʂ",
+      "out": "ᄉ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ʂ",
       "out": "스"
     },
     {
-      "slot": "coda",
-      "ipa": "ʃ",
-      "out": "시",
-      "when": [
-        "word_final"
-      ]
+      "slot": "onset",
+      "ipa": "x",
+      "out": "ᅳᄒ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ʃ",
-      "out": "슈"
+      "slot": "onset",
+      "ipa": "x",
+      "out": "ᄒ"
     },
     {
       "slot": "coda",
-      "ipa": "ɕ",
-      "out": "시",
-      "when": [
-        "word_final"
-      ]
+      "ipa": "x",
+      "out": "흐"
     },
     {
-      "slot": "any",
-      "ipa": "ɕ",
-      "out": "슈"
+      "slot": "onset",
+      "ipa": "ħ",
+      "out": "ᅳᄒ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ħ",
+      "out": "ᄒ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ħ",
+      "out": "흐"
+    },
+    {
+      "slot": "onset",
+      "ipa": "h",
+      "out": "ᅳᄒ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "h",
+      "out": "ᄒ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": "흐"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɸ",
+      "out": "ᅳᄒ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɸ",
+      "out": "ᄒ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɸ",
+      "out": "흐"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɣ",
+      "out": "ᅳᄀ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɣ",
+      "out": "ᄀ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɣ",
+      "out": "그"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʐ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʐ",
+      "out": "ᄅ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʐ",
+      "out": "르"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʑ",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʑ",
+      "out": "ᄌ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʑ",
+      "out": "즈"
     },
     {
       "slot": "coda",
@@ -449,19 +1725,20 @@
       ]
     },
     {
+      "slot": "onset",
+      "ipa": "ʒ",
+      "out": "ᅳᄌ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʒ",
+      "out": "ᄌ"
+    },
+    {
       "slot": "coda",
       "ipa": "ʒ",
       "out": "주"
-    },
-    {
-      "slot": "any",
-      "ipa": "ʒ",
-      "out": "즈"
-    },
-    {
-      "slot": "any",
-      "ipa": "ʑ",
-      "out": "즈"
     },
     {
       "slot": "coda",
@@ -469,77 +1746,369 @@
       "out": "히"
     },
     {
-      "slot": "any",
+      "slot": "onset",
       "ipa": "ç",
-      "out": "흐"
+      "out": "ᅳᄒ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "x",
-      "out": "흐"
+      "slot": "onset",
+      "ipa": "ç",
+      "out": "ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ħ",
-      "out": "흐"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "ᅳ샤",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ʐ",
-      "out": "르"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "샤",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː"
     },
     {
-      "slot": "any",
-      "ipa": "h",
-      "out": "흐"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "ᅳ셔",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ɸ",
-      "out": "흐"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "셔",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː"
     },
     {
-      "slot": "any",
-      "ipa": "ɣ",
-      "out": "그"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "ᅳ쇼",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ʝ",
-      "out": "이"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "쇼",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː"
     },
     {
-      "slot": "any",
-      "ipa": "j",
-      "out": "이"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "ᅳ슈",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "m",
-      "out": "므"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "슈",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː"
     },
     {
-      "slot": "any",
-      "ipa": "n",
-      "out": "느"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "ᅳᄉ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ɳ",
-      "out": "느"
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "ᄉ"
     },
     {
-      "slot": "any",
-      "ipa": "ɴ",
-      "out": "느"
+      "slot": "coda",
+      "ipa": "ʃ",
+      "out": "시",
+      "when": [
+        "word_final"
+      ]
     },
     {
-      "slot": "any",
+      "slot": "coda",
+      "ipa": "ʃ",
+      "out": "슈"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "ᅳ샤",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "샤",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "ᅳ셔",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "셔",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "ᅳ쇼",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "쇼",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "ᅳ슈",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "슈",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "ᅳᄉ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "ᄉ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɕ",
+      "out": "시",
+      "when": [
+        "word_final"
+      ]
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɕ",
+      "out": "슈"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ᅳ냐",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "냐",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ᅳ녀",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "녀",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ᅳ뇨",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "뇨",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ᅳ뉴",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "뉴",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ᅳᄂ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ᄂ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "니",
+      "when": [
+        "word_final"
+      ]
+    },
+    {
+      "slot": "coda",
       "ipa": "ɲ",
       "out": "뉴"
     },
     {
-      "slot": "any",
+      "slot": "coda",
+      "ipa": "m",
+      "out": "",
+      "after_out": "ᆼ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "",
+      "after_out": "ᆼ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "",
+      "after_out": "ᆼ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "m",
+      "out": "ᅳᄆ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "m",
+      "out": "ᄆ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "ᆷ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "므"
+    },
+    {
+      "slot": "onset",
+      "ipa": "n",
+      "out": "ᅳᄂ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "n",
+      "out": "ᄂ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "ᆫ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "느"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɳ",
+      "out": "ᅳᄂ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɳ",
+      "out": "ᄂ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "ᆫ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "느"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɴ",
+      "out": "ᅳᄂ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɴ",
+      "out": "ᄂ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "ᆫ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "느"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ŋ",
+      "out": "ᅳᄋ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ŋ",
+      "out": "ᄋ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "ᆼ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ŋ",
       "out": "응"
     },
@@ -550,504 +2119,672 @@
       "if_inventory": "ɚ"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "l",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "l",
+      "out": "ᄅ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "ᆯ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
       "ipa": "l",
       "out": "르"
     },
     {
-      "slot": "any",
-      "ipa": "r",
-      "out": "르"
+      "slot": "onset",
+      "ipa": "ɫ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ɾ",
-      "out": "르"
+      "slot": "onset",
+      "ipa": "ɫ",
+      "out": "ᄅ"
     },
     {
-      "slot": "any",
+      "slot": "coda",
+      "ipa": "ɫ",
+      "out": "ᆯ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɫ",
       "out": "르"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "ɭ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɭ",
+      "out": "ᄅ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭ",
+      "out": "ᆯ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɭ",
       "out": "르"
     },
     {
-      "slot": "any",
-      "ipa": "ɽ",
-      "out": "르"
+      "slot": "onset",
+      "ipa": "ʎ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ʁ",
-      "out": "르"
+      "slot": "onset",
+      "ipa": "ʎ",
+      "out": "ᄅ"
     },
     {
-      "slot": "any",
-      "ipa": "ɻ",
-      "out": "르"
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "ᆯ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ʎ",
       "out": "르"
     },
     {
-      "slot": "any",
+      "slot": "onset",
+      "ipa": "r",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "r",
+      "out": "ᄅ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "r",
+      "out": "르"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɾ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɾ",
+      "out": "ᄅ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɾ",
+      "out": "르"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɹ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɹ",
+      "out": "ᄅ"
+    },
+    {
+      "slot": "coda",
       "ipa": "ɹ",
       "out": "르"
     },
     {
-      "slot": "any",
-      "ipa": "pɚ",
-      "out": "퍼"
+      "slot": "onset",
+      "ipa": "ʁ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "bɚ",
-      "out": "버"
+      "slot": "onset",
+      "ipa": "ʁ",
+      "out": "ᄅ"
     },
     {
-      "slot": "any",
-      "ipa": "tɚ",
-      "out": "터"
+      "slot": "coda",
+      "ipa": "ʁ",
+      "out": "르"
     },
     {
-      "slot": "any",
-      "ipa": "dɚ",
-      "out": "더"
+      "slot": "onset",
+      "ipa": "ɻ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "kɚ",
-      "out": "커"
+      "slot": "onset",
+      "ipa": "ɻ",
+      "out": "ᄅ"
     },
     {
-      "slot": "any",
-      "ipa": "ɡɚ",
-      "out": "거"
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": "르"
     },
     {
-      "slot": "any",
-      "ipa": "mɚ",
-      "out": "머"
+      "slot": "onset",
+      "ipa": "ɽ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "nɚ",
-      "out": "너"
+      "slot": "onset",
+      "ipa": "ɽ",
+      "out": "ᄅ"
     },
     {
-      "slot": "any",
-      "ipa": "lɚ",
-      "out": "러"
+      "slot": "coda",
+      "ipa": "ɽ",
+      "out": "르"
     },
     {
-      "slot": "any",
-      "ipa": "rɚ",
-      "out": "러"
+      "slot": "onset",
+      "ipa": "ʝ",
+      "out": "ᅳᄋ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "ɾɚ",
-      "out": "러"
+      "slot": "onset",
+      "ipa": "ʝ",
+      "out": "ᄋ"
     },
     {
-      "slot": "any",
-      "ipa": "ɹɚ",
-      "out": "러"
+      "slot": "onset",
+      "ipa": "j",
+      "out": "ᅳᄋ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
-      "slot": "any",
-      "ipa": "sɚ",
-      "out": "서"
+      "slot": "onset",
+      "ipa": "j",
+      "out": "ᄋ"
     },
     {
-      "slot": "any",
-      "ipa": "zɚ",
-      "out": "저"
-    },
-    {
-      "slot": "any",
-      "ipa": "fɚ",
-      "out": "퍼"
-    },
-    {
-      "slot": "any",
-      "ipa": "vɚ",
-      "out": "버"
-    },
-    {
-      "slot": "any",
-      "ipa": "θɚ",
-      "out": "서"
-    },
-    {
-      "slot": "any",
-      "ipa": "ðɚ",
-      "out": "더"
-    },
-    {
-      "slot": "any",
-      "ipa": "ʃɚ",
-      "out": "셔"
-    },
-    {
-      "slot": "any",
-      "ipa": "ʒɚ",
-      "out": "저"
-    },
-    {
-      "slot": "any",
-      "ipa": "tʃɚ",
-      "out": "처"
-    },
-    {
-      "slot": "any",
-      "ipa": "dʒɚ",
-      "out": "저"
-    },
-    {
-      "slot": "any",
-      "ipa": "xɚ",
-      "out": "허"
-    },
-    {
-      "slot": "any",
-      "ipa": "ɲɚ",
-      "out": "녀"
-    },
-    {
-      "slot": "any",
-      "ipa": "ħɚ",
-      "out": "허"
-    },
-    {
-      "slot": "any",
-      "ipa": "ʐɚ",
-      "out": "러"
-    },
-    {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "pj",
       "out": "피"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "bj",
       "out": "비"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "tj",
       "out": "티"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "dj",
       "out": "디"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "kj",
       "out": "키"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ɡj",
       "out": "기"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "mj",
       "out": "미"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "nj",
       "out": "니"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "lj",
       "out": "리"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "rj",
       "out": "리"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ɾj",
       "out": "리"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ɹj",
       "out": "리"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "sj",
       "out": "시"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "zj",
       "out": "지"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "fj",
       "out": "피"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "vj",
       "out": "비"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "θj",
       "out": "시"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ðj",
       "out": "디"
     },
     {
-      "slot": "any",
-      "ipa": "ʃj",
-      "out": "시"
-    },
-    {
-      "slot": "any",
-      "ipa": "ʒj",
-      "out": "지"
-    },
-    {
-      "slot": "any",
-      "ipa": "tʃj",
-      "out": "치"
-    },
-    {
-      "slot": "any",
-      "ipa": "dʒj",
-      "out": "지"
-    },
-    {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "xj",
       "out": "히"
     },
     {
-      "slot": "any",
-      "ipa": "ɲj",
-      "out": "니"
-    },
-    {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ħj",
       "out": "히"
     },
     {
-      "slot": "any",
-      "ipa": "ʐj",
-      "out": "리"
+      "slot": "coda",
+      "ipa": "ʒj",
+      "out": "지"
     },
     {
-      "slot": "any",
+      "slot": "coda",
+      "ipa": "dʒj",
+      "out": "지"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃj",
+      "out": "치"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲj",
+      "out": "니"
+    },
+    {
+      "slot": "coda",
       "ipa": "pw",
       "out": "푸"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "bw",
       "out": "부"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "tw",
       "out": "투"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "dw",
       "out": "두"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "kw",
       "out": "쿠"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ɡw",
       "out": "구"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "mw",
       "out": "무"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "nw",
       "out": "누"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "lw",
       "out": "루"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "rw",
       "out": "루"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ɾw",
       "out": "루"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ɹw",
       "out": "루"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "sw",
       "out": "수"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "zw",
       "out": "주"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "fw",
       "out": "푸"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "vw",
       "out": "부"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "θw",
       "out": "수"
     },
     {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ðw",
       "out": "두"
     },
     {
-      "slot": "any",
-      "ipa": "ʃw",
-      "out": "슈"
-    },
-    {
-      "slot": "any",
-      "ipa": "ʒw",
-      "out": "주"
-    },
-    {
-      "slot": "any",
-      "ipa": "tʃw",
-      "out": "추"
-    },
-    {
-      "slot": "any",
-      "ipa": "dʒw",
-      "out": "주"
-    },
-    {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "xw",
       "out": "후"
     },
     {
-      "slot": "any",
-      "ipa": "ɲw",
-      "out": "뉴"
-    },
-    {
-      "slot": "any",
+      "slot": "coda",
       "ipa": "ħw",
       "out": "후"
     },
     {
-      "slot": "any",
-      "ipa": "ʐw",
-      "out": "루"
+      "slot": "coda",
+      "ipa": "ʒw",
+      "out": "주"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒw",
+      "out": "주"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃw",
+      "out": "추"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲw",
+      "out": "누"
     },
     {
       "slot": "any",
-      "ipa": "ɚ",
-      "out": "어"
+      "ipa": "j",
+      "out": "ᅵ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "이"
     },
     {
       "slot": "any",
       "ipa": "w",
-      "out": "우"
+      "out": "ᅮ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "우"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "ᅵ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "이"
     },
     {
       "slot": "nucleus",
-      "ipa": "ɑ̃",
-      "out": "앙"
+      "ipa": "a",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "a aː ɑ ɑː ɐ ɐː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɘ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "ʌ ʌː ə əː ɜ ɜː ɘ ɘː ɤ ɤː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "o oː ɔ ɔː ɒ ɒː ɵ ɵː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "",
+      "after_out": "ᅣ ᅧ ᅭ ᅲ",
+      "if_nucleus": "u uː ʊ ʊː ʉ ʉː ɯ ɯː"
     },
     {
       "slot": "nucleus",
       "ipa": "ã",
-      "out": "앙"
+      "out": "ᅡᆼ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
       "slot": "nucleus",
-      "ipa": "ɐ̃",
-      "out": "앙"
+      "ipa": "ã",
+      "out": "앙"
     },
     {
       "slot": "nucleus",
       "ipa": "ɛ̃",
-      "out": "앵"
+      "out": "ᅢᆼ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "앵"
     },
     {
       "slot": "nucleus",
       "ipa": "œ̃",
-      "out": "앵"
+      "out": "ᅢᆼ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
       "slot": "nucleus",
-      "ipa": "ɔ̃",
-      "out": "옹"
+      "ipa": "œ̃",
+      "out": "앵"
     },
     {
       "slot": "nucleus",
       "ipa": "õ",
-      "out": "옹"
+      "out": "ᅩᆼ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "옹"
     },
     {
       "slot": "nucleus",
       "ipa": "ĩ",
-      "out": "잉"
+      "out": "ᅵᆼ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "잉"
     },
     {
       "slot": "nucleus",
       "ipa": "ũ",
-      "out": "웅"
+      "out": "ᅮᆼ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "웅"
     },
     {
       "slot": "nucleus",
       "ipa": "ẽ",
-      "out": "엥"
+      "out": "ᅦᆼ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "엥"
     },
     {
       "slot": "nucleus",
@@ -1057,546 +2794,965 @@
     {
       "slot": "nucleus",
       "ipa": "ɯ",
-      "out": "으",
-      "after_out": "스 쓰 즈 쯔 츠 슈"
+      "out": "ᅳ",
+      "after_out": "ᄉ ᄊ ᄌ ᄍ ᄎ"
     },
     {
       "slot": "nucleus",
       "ipa": "ɯ",
-      "out": "우",
+      "out": "ᅮ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ",
       "if_inventory": "ɯː",
       "unless_inventory": "˧"
     },
     {
       "slot": "nucleus",
       "ipa": "ɯ",
-      "out": "으"
+      "out": "우",
+      "if_inventory": "ɯː",
+      "unless_inventory": "˧"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ᅳ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "으"
     },
     {
       "slot": "nucleus",
       "ipa": "i",
-      "out": "이"
+      "out": "ᅵ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "이"
     },
     {
       "slot": "nucleus",
       "ipa": "ɪ",
-      "out": "이"
+      "out": "ᅵ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "이"
     },
     {
       "slot": "nucleus",
       "ipa": "ɨ",
-      "out": "이"
+      "out": "ᅵ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "이"
     },
     {
       "slot": "nucleus",
       "ipa": "y",
-      "out": "위"
+      "out": "ᅱ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "위"
     },
     {
       "slot": "nucleus",
       "ipa": "ʏ",
-      "out": "위"
+      "out": "ᅱ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "위"
     },
     {
       "slot": "nucleus",
       "ipa": "e",
-      "out": "에"
+      "out": "ᅦ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "에"
     },
     {
       "slot": "nucleus",
       "ipa": "ɛ",
-      "out": "에"
+      "out": "ᅦ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "에"
     },
     {
       "slot": "nucleus",
       "ipa": "æ",
-      "out": "애"
+      "out": "ᅢ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "애"
     },
     {
       "slot": "nucleus",
       "ipa": "ø",
-      "out": "외"
+      "out": "ᅬ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "외"
     },
     {
       "slot": "nucleus",
       "ipa": "œ",
-      "out": "외"
+      "out": "ᅬ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "외"
     },
     {
       "slot": "nucleus",
       "ipa": "a",
-      "out": "아"
+      "out": "ᅡ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "아"
     },
     {
       "slot": "nucleus",
       "ipa": "ɑ",
-      "out": "아"
+      "out": "ᅡ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "아"
     },
     {
       "slot": "nucleus",
       "ipa": "ɐ",
-      "out": "아"
+      "out": "ᅡ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "아"
     },
     {
       "slot": "nucleus",
       "ipa": "ʌ",
-      "out": "어"
+      "out": "ᅥ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "어"
     },
     {
       "slot": "nucleus",
       "ipa": "ə",
-      "out": "어"
+      "out": "ᅥ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "어"
     },
     {
       "slot": "nucleus",
       "ipa": "ɜ",
-      "out": "어"
+      "out": "ᅥ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "어"
     },
     {
       "slot": "nucleus",
       "ipa": "ɘ",
-      "out": "어"
+      "out": "ᅥ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɘ",
+      "out": "어"
     },
     {
       "slot": "nucleus",
       "ipa": "ɤ",
-      "out": "어"
+      "out": "ᅥ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "어"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "ᅥ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "어"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "ᅥ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "어"
     },
     {
       "slot": "nucleus",
       "ipa": "o",
-      "out": "오"
+      "out": "ᅩ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "오"
     },
     {
       "slot": "nucleus",
       "ipa": "ɔ",
-      "out": "오"
+      "out": "ᅩ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "오"
     },
     {
       "slot": "nucleus",
       "ipa": "ɒ",
-      "out": "오"
+      "out": "ᅩ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "오"
     },
     {
       "slot": "nucleus",
       "ipa": "ɵ",
-      "out": "오"
+      "out": "ᅩ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "오"
     },
     {
       "slot": "nucleus",
       "ipa": "u",
-      "out": "우"
+      "out": "ᅮ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "우"
     },
     {
       "slot": "nucleus",
       "ipa": "ʊ",
-      "out": "우"
+      "out": "ᅮ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "우"
     },
     {
       "slot": "nucleus",
       "ipa": "ʉ",
-      "out": "우"
+      "out": "ᅮ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "우"
     },
     {
       "slot": "nucleus",
       "ipa": "ja",
-      "out": "야"
+      "out": "ᅡ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ja",
+      "out": "ᅣ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ja",
+      "out": "야"
     },
     {
       "slot": "nucleus",
       "ipa": "jɑ",
-      "out": "야"
+      "out": "ᅡ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑ",
+      "out": "ᅣ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑ",
+      "out": "야"
     },
     {
       "slot": "nucleus",
       "ipa": "jɐ",
-      "out": "야"
+      "out": "ᅡ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɐ",
+      "out": "ᅣ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɐ",
+      "out": "야"
     },
     {
       "slot": "nucleus",
       "ipa": "jʌ",
-      "out": "여"
+      "out": "ᅥ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jʌ",
+      "out": "ᅧ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jʌ",
+      "out": "여"
     },
     {
       "slot": "nucleus",
       "ipa": "jə",
-      "out": "여"
+      "out": "ᅥ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jə",
+      "out": "ᅧ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jə",
+      "out": "여"
     },
     {
       "slot": "nucleus",
       "ipa": "jɜ",
-      "out": "여"
+      "out": "ᅥ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɜ",
+      "out": "ᅧ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɜ",
+      "out": "여"
     },
     {
       "slot": "nucleus",
       "ipa": "jɤ",
-      "out": "여"
+      "out": "ᅥ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɤ",
+      "out": "ᅧ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɤ",
+      "out": "여"
     },
     {
       "slot": "nucleus",
       "ipa": "jæ",
-      "out": "얘"
+      "out": "ᅢ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jæ",
+      "out": "ᅤ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jæ",
+      "out": "얘"
     },
     {
       "slot": "nucleus",
       "ipa": "jo",
-      "out": "요"
+      "out": "ᅩ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jo",
+      "out": "ᅭ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jo",
+      "out": "요"
     },
     {
       "slot": "nucleus",
       "ipa": "jɔ",
-      "out": "요"
+      "out": "ᅩ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɔ",
+      "out": "ᅭ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɔ",
+      "out": "요"
     },
     {
       "slot": "nucleus",
       "ipa": "ju",
-      "out": "유"
+      "out": "ᅮ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ju",
+      "out": "ᅲ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ju",
+      "out": "유"
     },
     {
       "slot": "nucleus",
       "ipa": "jʊ",
-      "out": "유"
+      "out": "ᅮ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jʊ",
+      "out": "ᅲ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jʊ",
+      "out": "유"
     },
     {
       "slot": "nucleus",
       "ipa": "jɯ",
-      "out": "유"
+      "out": "ᅮ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɯ",
+      "out": "ᅲ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɯ",
+      "out": "유"
     },
     {
       "slot": "nucleus",
       "ipa": "jy",
-      "out": "유"
+      "out": "ᅮ",
+      "after_out": "ᄌ ᄍ ᄎ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jy",
+      "out": "ᅲ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jy",
+      "out": "유"
     },
     {
       "slot": "nucleus",
       "ipa": "jø",
-      "out": "외"
+      "out": "ᅬ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jø",
+      "out": "외"
     },
     {
       "slot": "nucleus",
       "ipa": "ji",
-      "out": "이"
+      "out": "ᅵ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ji",
+      "out": "이"
     },
     {
       "slot": "nucleus",
       "ipa": "jɪ",
-      "out": "이"
+      "out": "ᅵ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
       "slot": "nucleus",
-      "ipa": "jɑ̃",
-      "out": "이앙"
+      "ipa": "jɪ",
+      "out": "이"
     },
     {
       "slot": "nucleus",
-      "ipa": "jã",
-      "out": "이앙"
+      "ipa": "jɛ",
+      "out": "예",
+      "when": [
+        "no_onset"
+      ]
     },
     {
       "slot": "nucleus",
-      "ipa": "jɐ̃",
-      "out": "이앙"
+      "ipa": "jɛ",
+      "out": "ᅵ에",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
       "slot": "nucleus",
-      "ipa": "jɔ̃",
-      "out": "이옹"
+      "ipa": "jɛ",
+      "out": "이에"
     },
     {
       "slot": "nucleus",
-      "ipa": "jõ",
-      "out": "이옹"
+      "ipa": "je",
+      "out": "예",
+      "when": [
+        "no_onset"
+      ]
     },
     {
       "slot": "nucleus",
-      "ipa": "jɛ̃",
-      "out": "이앵"
+      "ipa": "je",
+      "out": "ᅵ에",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
       "slot": "nucleus",
-      "ipa": "jĩ",
-      "out": "이잉"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "jũ",
-      "out": "이웅"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "jẽ",
-      "out": "이엥"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "wa",
-      "out": "으와",
-      "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "ipa": "je",
+      "out": "이에"
     },
     {
       "slot": "nucleus",
       "ipa": "wa",
-      "out": "와"
+      "out": "ᅳ와",
+      "unless_inventory": "˧",
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wa",
+      "out": "ᅪ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wa",
+      "out": "와"
     },
     {
       "slot": "nucleus",
       "ipa": "wɑ",
-      "out": "으와",
+      "out": "ᅳ와",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wɑ",
-      "out": "와"
+      "out": "ᅪ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wɑ",
+      "out": "와"
     },
     {
       "slot": "nucleus",
       "ipa": "wɐ",
-      "out": "으와",
+      "out": "ᅳ와",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wɐ",
-      "out": "와"
+      "out": "ᅪ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wɐ",
+      "out": "와"
     },
     {
       "slot": "nucleus",
       "ipa": "wə",
-      "out": "으워",
+      "out": "ᅳ워",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wə",
-      "out": "워"
+      "out": "ᅯ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wə",
+      "out": "워"
     },
     {
       "slot": "nucleus",
       "ipa": "wʌ",
-      "out": "으워",
+      "out": "ᅳ워",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wʌ",
-      "out": "워"
+      "out": "ᅯ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wʌ",
+      "out": "워"
     },
     {
       "slot": "nucleus",
       "ipa": "wɜ",
-      "out": "으워",
+      "out": "ᅳ워",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wɜ",
-      "out": "워"
+      "out": "ᅯ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wɜ",
+      "out": "워"
     },
     {
       "slot": "nucleus",
       "ipa": "wɤ",
-      "out": "으워",
+      "out": "ᅳ워",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wɤ",
-      "out": "워"
+      "out": "ᅯ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wɤ",
+      "out": "워"
     },
     {
       "slot": "nucleus",
       "ipa": "wɔ",
-      "out": "으워",
+      "out": "ᅳ워",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wɔ",
-      "out": "워"
+      "out": "ᅯ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wɔ",
+      "out": "워"
     },
     {
       "slot": "nucleus",
       "ipa": "wo",
-      "out": "으워",
+      "out": "ᅳ워",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wo",
-      "out": "워"
+      "out": "ᅯ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wo",
+      "out": "워"
     },
     {
       "slot": "nucleus",
       "ipa": "wɛ",
-      "out": "으웨",
+      "out": "ᅳ웨",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wɛ",
-      "out": "웨"
+      "out": "ᅰ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wɛ",
+      "out": "웨"
     },
     {
       "slot": "nucleus",
       "ipa": "we",
-      "out": "으웨",
+      "out": "ᅳ웨",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "we",
-      "out": "웨"
+      "out": "ᅰ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "we",
+      "out": "웨"
     },
     {
       "slot": "nucleus",
       "ipa": "wæ",
-      "out": "으왜",
+      "out": "ᅳ왜",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wæ",
-      "out": "왜"
+      "out": "ᅫ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wæ",
+      "out": "왜"
     },
     {
       "slot": "nucleus",
       "ipa": "wi",
-      "out": "으위",
+      "out": "ᅳ위",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wi",
-      "out": "위"
+      "out": "ᅱ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wi",
+      "out": "위"
     },
     {
       "slot": "nucleus",
       "ipa": "wɪ",
-      "out": "으위",
+      "out": "ᅳ위",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wɪ",
-      "out": "위"
+      "out": "ᅱ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wɪ",
+      "out": "위"
     },
     {
       "slot": "nucleus",
       "ipa": "wy",
-      "out": "으위",
+      "out": "ᅳ위",
       "unless_inventory": "˧",
-      "after_out": "스 트 므 느 드 르 브 프 즈 츠 쁘 뜨 쯔 슈 뉴 이"
+      "after_out": "ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄐ ᄑ"
     },
     {
       "slot": "nucleus",
       "ipa": "wy",
-      "out": "위"
+      "out": "ᅱ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wy",
+      "out": "위"
     },
     {
       "slot": "nucleus",
       "ipa": "wu",
-      "out": "우"
+      "out": "ᅮ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wu",
+      "out": "우"
     },
     {
       "slot": "nucleus",
       "ipa": "wʊ",
-      "out": "우"
+      "out": "ᅮ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "wʊ",
+      "out": "우"
     },
     {
       "slot": "nucleus",
       "ipa": "wɯ",
-      "out": "우"
+      "out": "ᅮ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
       "slot": "nucleus",
-      "ipa": "wɑ̃",
-      "out": "우앙"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "wã",
-      "out": "우앙"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "wɐ̃",
-      "out": "우앙"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "wɔ̃",
-      "out": "우옹"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "wõ",
-      "out": "우옹"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "wɛ̃",
-      "out": "우앵"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "wĩ",
-      "out": "우잉"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "wũ",
-      "out": "우웅"
+      "ipa": "wɯ",
+      "out": "우"
     },
     {
       "slot": "nucleus",
       "ipa": "ɥœ",
-      "out": "위에"
+      "out": "ᅱ에",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥœ",
+      "out": "위에"
     },
     {
       "slot": "nucleus",
       "ipa": "ɥ",
-      "out": "위"
+      "out": "ᅱ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
       "slot": "nucleus",
-      "ipa": "jɛ",
-      "out": "예",
-      "when": [
-        "no_onset"
-      ]
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "jɛ",
-      "out": "이에"
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "je",
-      "out": "예",
-      "when": [
-        "no_onset"
-      ]
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "je",
-      "out": "이에"
+      "ipa": "ɥ",
+      "out": "위"
     },
     {
       "slot": "any",
@@ -1646,7 +3802,13 @@
     {
       "slot": "any",
       "ipa": "̃",
-      "out": ""
+      "out": "ᆼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "sh",
+      "out": "ᅳ슈",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
     },
     {
       "slot": "any",
@@ -1656,2094 +3818,25 @@
     {
       "slot": "any",
       "ipa": "ch",
+      "out": "ᅳ츠",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ch",
       "out": "츠"
     },
     {
       "slot": "any",
       "ipa": "ī",
-      "out": "이"
+      "out": "ᅵ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ī",
+      "out": "이"
     }
   ],
-  "syllable_fixups": [
-    {
-      "match": "스아",
-      "out": "사"
-    },
-    {
-      "match": "스이",
-      "out": "시"
-    },
-    {
-      "match": "스에",
-      "out": "세"
-    },
-    {
-      "match": "스오",
-      "out": "소"
-    },
-    {
-      "match": "스우",
-      "out": "수"
-    },
-    {
-      "match": "스어",
-      "out": "서"
-    },
-    {
-      "match": "스으",
-      "out": "스"
-    },
-    {
-      "match": "스애",
-      "out": "새"
-    },
-    {
-      "match": "스야",
-      "out": "샤"
-    },
-    {
-      "match": "스여",
-      "out": "셔"
-    },
-    {
-      "match": "스요",
-      "out": "쇼"
-    },
-    {
-      "match": "스유",
-      "out": "슈"
-    },
-    {
-      "match": "스예",
-      "out": "셰"
-    },
-    {
-      "match": "스얘",
-      "out": "섀"
-    },
-    {
-      "match": "스와",
-      "out": "솨"
-    },
-    {
-      "match": "스워",
-      "out": "숴"
-    },
-    {
-      "match": "스위",
-      "out": "쉬"
-    },
-    {
-      "match": "스외",
-      "out": "쇠"
-    },
-    {
-      "match": "스웨",
-      "out": "쉐"
-    },
-    {
-      "match": "스왜",
-      "out": "쇄"
-    },
-    {
-      "match": "스앙",
-      "out": "상"
-    },
-    {
-      "match": "스앵",
-      "out": "생"
-    },
-    {
-      "match": "스엥",
-      "out": "셍"
-    },
-    {
-      "match": "스옹",
-      "out": "송"
-    },
-    {
-      "match": "스웅",
-      "out": "숭"
-    },
-    {
-      "match": "스잉",
-      "out": "싱"
-    },
-    {
-      "match": "트아",
-      "out": "타"
-    },
-    {
-      "match": "트이",
-      "out": "티"
-    },
-    {
-      "match": "트에",
-      "out": "테"
-    },
-    {
-      "match": "트오",
-      "out": "토"
-    },
-    {
-      "match": "트우",
-      "out": "투"
-    },
-    {
-      "match": "트어",
-      "out": "터"
-    },
-    {
-      "match": "트으",
-      "out": "트"
-    },
-    {
-      "match": "트애",
-      "out": "태"
-    },
-    {
-      "match": "트야",
-      "out": "탸"
-    },
-    {
-      "match": "트여",
-      "out": "텨"
-    },
-    {
-      "match": "트요",
-      "out": "툐"
-    },
-    {
-      "match": "트유",
-      "out": "튜"
-    },
-    {
-      "match": "트예",
-      "out": "톄"
-    },
-    {
-      "match": "트얘",
-      "out": "턔"
-    },
-    {
-      "match": "트와",
-      "out": "톼"
-    },
-    {
-      "match": "트워",
-      "out": "퉈"
-    },
-    {
-      "match": "트위",
-      "out": "튀"
-    },
-    {
-      "match": "트외",
-      "out": "퇴"
-    },
-    {
-      "match": "트웨",
-      "out": "퉤"
-    },
-    {
-      "match": "트왜",
-      "out": "퇘"
-    },
-    {
-      "match": "트앙",
-      "out": "탕"
-    },
-    {
-      "match": "트앵",
-      "out": "탱"
-    },
-    {
-      "match": "트엥",
-      "out": "텡"
-    },
-    {
-      "match": "트옹",
-      "out": "통"
-    },
-    {
-      "match": "트웅",
-      "out": "퉁"
-    },
-    {
-      "match": "트잉",
-      "out": "팅"
-    },
-    {
-      "match": "크아",
-      "out": "카"
-    },
-    {
-      "match": "크이",
-      "out": "키"
-    },
-    {
-      "match": "크에",
-      "out": "케"
-    },
-    {
-      "match": "크오",
-      "out": "코"
-    },
-    {
-      "match": "크우",
-      "out": "쿠"
-    },
-    {
-      "match": "크어",
-      "out": "커"
-    },
-    {
-      "match": "크으",
-      "out": "크"
-    },
-    {
-      "match": "크애",
-      "out": "캐"
-    },
-    {
-      "match": "크야",
-      "out": "캬"
-    },
-    {
-      "match": "크여",
-      "out": "켜"
-    },
-    {
-      "match": "크요",
-      "out": "쿄"
-    },
-    {
-      "match": "크유",
-      "out": "큐"
-    },
-    {
-      "match": "크예",
-      "out": "켸"
-    },
-    {
-      "match": "크얘",
-      "out": "컈"
-    },
-    {
-      "match": "크와",
-      "out": "콰"
-    },
-    {
-      "match": "크워",
-      "out": "쿼"
-    },
-    {
-      "match": "크위",
-      "out": "퀴"
-    },
-    {
-      "match": "크외",
-      "out": "쾨"
-    },
-    {
-      "match": "크웨",
-      "out": "퀘"
-    },
-    {
-      "match": "크왜",
-      "out": "쾌"
-    },
-    {
-      "match": "크앙",
-      "out": "캉"
-    },
-    {
-      "match": "크앵",
-      "out": "캥"
-    },
-    {
-      "match": "크엥",
-      "out": "켕"
-    },
-    {
-      "match": "크옹",
-      "out": "콩"
-    },
-    {
-      "match": "크웅",
-      "out": "쿵"
-    },
-    {
-      "match": "크잉",
-      "out": "킹"
-    },
-    {
-      "match": "므아",
-      "out": "마"
-    },
-    {
-      "match": "므이",
-      "out": "미"
-    },
-    {
-      "match": "므에",
-      "out": "메"
-    },
-    {
-      "match": "므오",
-      "out": "모"
-    },
-    {
-      "match": "므우",
-      "out": "무"
-    },
-    {
-      "match": "므어",
-      "out": "머"
-    },
-    {
-      "match": "므으",
-      "out": "므"
-    },
-    {
-      "match": "므애",
-      "out": "매"
-    },
-    {
-      "match": "므야",
-      "out": "먀"
-    },
-    {
-      "match": "므여",
-      "out": "며"
-    },
-    {
-      "match": "므요",
-      "out": "묘"
-    },
-    {
-      "match": "므유",
-      "out": "뮤"
-    },
-    {
-      "match": "므예",
-      "out": "몌"
-    },
-    {
-      "match": "므얘",
-      "out": "먜"
-    },
-    {
-      "match": "므와",
-      "out": "뫄"
-    },
-    {
-      "match": "므워",
-      "out": "뭐"
-    },
-    {
-      "match": "므위",
-      "out": "뮈"
-    },
-    {
-      "match": "므외",
-      "out": "뫼"
-    },
-    {
-      "match": "므웨",
-      "out": "뭬"
-    },
-    {
-      "match": "므왜",
-      "out": "뫠"
-    },
-    {
-      "match": "므앙",
-      "out": "망"
-    },
-    {
-      "match": "므앵",
-      "out": "맹"
-    },
-    {
-      "match": "므엥",
-      "out": "멩"
-    },
-    {
-      "match": "므옹",
-      "out": "몽"
-    },
-    {
-      "match": "므웅",
-      "out": "뭉"
-    },
-    {
-      "match": "므잉",
-      "out": "밍"
-    },
-    {
-      "match": "느아",
-      "out": "나"
-    },
-    {
-      "match": "느이",
-      "out": "니"
-    },
-    {
-      "match": "느에",
-      "out": "네"
-    },
-    {
-      "match": "느오",
-      "out": "노"
-    },
-    {
-      "match": "느우",
-      "out": "누"
-    },
-    {
-      "match": "느어",
-      "out": "너"
-    },
-    {
-      "match": "느으",
-      "out": "느"
-    },
-    {
-      "match": "느애",
-      "out": "내"
-    },
-    {
-      "match": "느야",
-      "out": "냐"
-    },
-    {
-      "match": "느여",
-      "out": "녀"
-    },
-    {
-      "match": "느요",
-      "out": "뇨"
-    },
-    {
-      "match": "느유",
-      "out": "뉴"
-    },
-    {
-      "match": "느예",
-      "out": "녜"
-    },
-    {
-      "match": "느얘",
-      "out": "냬"
-    },
-    {
-      "match": "느와",
-      "out": "놔"
-    },
-    {
-      "match": "느워",
-      "out": "눠"
-    },
-    {
-      "match": "느위",
-      "out": "뉘"
-    },
-    {
-      "match": "느외",
-      "out": "뇌"
-    },
-    {
-      "match": "느웨",
-      "out": "눼"
-    },
-    {
-      "match": "느왜",
-      "out": "놰"
-    },
-    {
-      "match": "느앙",
-      "out": "낭"
-    },
-    {
-      "match": "느앵",
-      "out": "냉"
-    },
-    {
-      "match": "느엥",
-      "out": "넹"
-    },
-    {
-      "match": "느옹",
-      "out": "농"
-    },
-    {
-      "match": "느웅",
-      "out": "눙"
-    },
-    {
-      "match": "느잉",
-      "out": "닝"
-    },
-    {
-      "match": "드아",
-      "out": "다"
-    },
-    {
-      "match": "드이",
-      "out": "디"
-    },
-    {
-      "match": "드에",
-      "out": "데"
-    },
-    {
-      "match": "드오",
-      "out": "도"
-    },
-    {
-      "match": "드우",
-      "out": "두"
-    },
-    {
-      "match": "드어",
-      "out": "더"
-    },
-    {
-      "match": "드으",
-      "out": "드"
-    },
-    {
-      "match": "드애",
-      "out": "대"
-    },
-    {
-      "match": "드야",
-      "out": "댜"
-    },
-    {
-      "match": "드여",
-      "out": "뎌"
-    },
-    {
-      "match": "드요",
-      "out": "됴"
-    },
-    {
-      "match": "드유",
-      "out": "듀"
-    },
-    {
-      "match": "드예",
-      "out": "뎨"
-    },
-    {
-      "match": "드얘",
-      "out": "댸"
-    },
-    {
-      "match": "드와",
-      "out": "돠"
-    },
-    {
-      "match": "드워",
-      "out": "둬"
-    },
-    {
-      "match": "드위",
-      "out": "뒤"
-    },
-    {
-      "match": "드외",
-      "out": "되"
-    },
-    {
-      "match": "드웨",
-      "out": "뒈"
-    },
-    {
-      "match": "드왜",
-      "out": "돼"
-    },
-    {
-      "match": "드앙",
-      "out": "당"
-    },
-    {
-      "match": "드앵",
-      "out": "댕"
-    },
-    {
-      "match": "드엥",
-      "out": "뎅"
-    },
-    {
-      "match": "드옹",
-      "out": "동"
-    },
-    {
-      "match": "드웅",
-      "out": "둥"
-    },
-    {
-      "match": "드잉",
-      "out": "딩"
-    },
-    {
-      "match": "르아",
-      "out": "라"
-    },
-    {
-      "match": "르이",
-      "out": "리"
-    },
-    {
-      "match": "르에",
-      "out": "레"
-    },
-    {
-      "match": "르오",
-      "out": "로"
-    },
-    {
-      "match": "르우",
-      "out": "루"
-    },
-    {
-      "match": "르어",
-      "out": "러"
-    },
-    {
-      "match": "르으",
-      "out": "르"
-    },
-    {
-      "match": "르애",
-      "out": "래"
-    },
-    {
-      "match": "르야",
-      "out": "랴"
-    },
-    {
-      "match": "르여",
-      "out": "려"
-    },
-    {
-      "match": "르요",
-      "out": "료"
-    },
-    {
-      "match": "르유",
-      "out": "류"
-    },
-    {
-      "match": "르예",
-      "out": "례"
-    },
-    {
-      "match": "르얘",
-      "out": "럐"
-    },
-    {
-      "match": "르와",
-      "out": "롸"
-    },
-    {
-      "match": "르워",
-      "out": "뤄"
-    },
-    {
-      "match": "르위",
-      "out": "뤼"
-    },
-    {
-      "match": "르외",
-      "out": "뢰"
-    },
-    {
-      "match": "르웨",
-      "out": "뤠"
-    },
-    {
-      "match": "르왜",
-      "out": "뢔"
-    },
-    {
-      "match": "르앙",
-      "out": "랑"
-    },
-    {
-      "match": "르앵",
-      "out": "랭"
-    },
-    {
-      "match": "르엥",
-      "out": "렝"
-    },
-    {
-      "match": "르옹",
-      "out": "롱"
-    },
-    {
-      "match": "르웅",
-      "out": "룽"
-    },
-    {
-      "match": "르잉",
-      "out": "링"
-    },
-    {
-      "match": "브아",
-      "out": "바"
-    },
-    {
-      "match": "브이",
-      "out": "비"
-    },
-    {
-      "match": "브에",
-      "out": "베"
-    },
-    {
-      "match": "브오",
-      "out": "보"
-    },
-    {
-      "match": "브우",
-      "out": "부"
-    },
-    {
-      "match": "브어",
-      "out": "버"
-    },
-    {
-      "match": "브으",
-      "out": "브"
-    },
-    {
-      "match": "브애",
-      "out": "배"
-    },
-    {
-      "match": "브야",
-      "out": "뱌"
-    },
-    {
-      "match": "브여",
-      "out": "벼"
-    },
-    {
-      "match": "브요",
-      "out": "뵤"
-    },
-    {
-      "match": "브유",
-      "out": "뷰"
-    },
-    {
-      "match": "브예",
-      "out": "볘"
-    },
-    {
-      "match": "브얘",
-      "out": "뱨"
-    },
-    {
-      "match": "브와",
-      "out": "봐"
-    },
-    {
-      "match": "브워",
-      "out": "붜"
-    },
-    {
-      "match": "브위",
-      "out": "뷔"
-    },
-    {
-      "match": "브외",
-      "out": "뵈"
-    },
-    {
-      "match": "브웨",
-      "out": "붸"
-    },
-    {
-      "match": "브왜",
-      "out": "봬"
-    },
-    {
-      "match": "브앙",
-      "out": "방"
-    },
-    {
-      "match": "브앵",
-      "out": "뱅"
-    },
-    {
-      "match": "브엥",
-      "out": "벵"
-    },
-    {
-      "match": "브옹",
-      "out": "봉"
-    },
-    {
-      "match": "브웅",
-      "out": "붕"
-    },
-    {
-      "match": "브잉",
-      "out": "빙"
-    },
-    {
-      "match": "프아",
-      "out": "파"
-    },
-    {
-      "match": "프이",
-      "out": "피"
-    },
-    {
-      "match": "프에",
-      "out": "페"
-    },
-    {
-      "match": "프오",
-      "out": "포"
-    },
-    {
-      "match": "프우",
-      "out": "푸"
-    },
-    {
-      "match": "프어",
-      "out": "퍼"
-    },
-    {
-      "match": "프으",
-      "out": "프"
-    },
-    {
-      "match": "프애",
-      "out": "패"
-    },
-    {
-      "match": "프야",
-      "out": "퍄"
-    },
-    {
-      "match": "프여",
-      "out": "펴"
-    },
-    {
-      "match": "프요",
-      "out": "표"
-    },
-    {
-      "match": "프유",
-      "out": "퓨"
-    },
-    {
-      "match": "프예",
-      "out": "폐"
-    },
-    {
-      "match": "프얘",
-      "out": "퍠"
-    },
-    {
-      "match": "프와",
-      "out": "퐈"
-    },
-    {
-      "match": "프워",
-      "out": "풔"
-    },
-    {
-      "match": "프위",
-      "out": "퓌"
-    },
-    {
-      "match": "프외",
-      "out": "푀"
-    },
-    {
-      "match": "프웨",
-      "out": "풰"
-    },
-    {
-      "match": "프왜",
-      "out": "퐤"
-    },
-    {
-      "match": "프앙",
-      "out": "팡"
-    },
-    {
-      "match": "프앵",
-      "out": "팽"
-    },
-    {
-      "match": "프엥",
-      "out": "펭"
-    },
-    {
-      "match": "프옹",
-      "out": "퐁"
-    },
-    {
-      "match": "프웅",
-      "out": "풍"
-    },
-    {
-      "match": "프잉",
-      "out": "핑"
-    },
-    {
-      "match": "즈아",
-      "out": "자"
-    },
-    {
-      "match": "즈이",
-      "out": "지"
-    },
-    {
-      "match": "즈에",
-      "out": "제"
-    },
-    {
-      "match": "즈오",
-      "out": "조"
-    },
-    {
-      "match": "즈우",
-      "out": "주"
-    },
-    {
-      "match": "즈어",
-      "out": "저"
-    },
-    {
-      "match": "즈으",
-      "out": "즈"
-    },
-    {
-      "match": "즈애",
-      "out": "재"
-    },
-    {
-      "match": "즈야",
-      "out": "자"
-    },
-    {
-      "match": "즈여",
-      "out": "저"
-    },
-    {
-      "match": "즈요",
-      "out": "조"
-    },
-    {
-      "match": "즈유",
-      "out": "주"
-    },
-    {
-      "match": "즈예",
-      "out": "제"
-    },
-    {
-      "match": "즈얘",
-      "out": "재"
-    },
-    {
-      "match": "즈와",
-      "out": "좌"
-    },
-    {
-      "match": "즈워",
-      "out": "줘"
-    },
-    {
-      "match": "즈위",
-      "out": "쥐"
-    },
-    {
-      "match": "즈외",
-      "out": "죄"
-    },
-    {
-      "match": "즈웨",
-      "out": "줴"
-    },
-    {
-      "match": "즈왜",
-      "out": "좨"
-    },
-    {
-      "match": "즈앙",
-      "out": "장"
-    },
-    {
-      "match": "즈앵",
-      "out": "쟁"
-    },
-    {
-      "match": "즈엥",
-      "out": "젱"
-    },
-    {
-      "match": "즈옹",
-      "out": "종"
-    },
-    {
-      "match": "즈웅",
-      "out": "중"
-    },
-    {
-      "match": "즈잉",
-      "out": "징"
-    },
-    {
-      "match": "그아",
-      "out": "가"
-    },
-    {
-      "match": "그이",
-      "out": "기"
-    },
-    {
-      "match": "그에",
-      "out": "게"
-    },
-    {
-      "match": "그오",
-      "out": "고"
-    },
-    {
-      "match": "그우",
-      "out": "구"
-    },
-    {
-      "match": "그어",
-      "out": "거"
-    },
-    {
-      "match": "그으",
-      "out": "그"
-    },
-    {
-      "match": "그애",
-      "out": "개"
-    },
-    {
-      "match": "그야",
-      "out": "갸"
-    },
-    {
-      "match": "그여",
-      "out": "겨"
-    },
-    {
-      "match": "그요",
-      "out": "교"
-    },
-    {
-      "match": "그유",
-      "out": "규"
-    },
-    {
-      "match": "그예",
-      "out": "계"
-    },
-    {
-      "match": "그얘",
-      "out": "걔"
-    },
-    {
-      "match": "그와",
-      "out": "과"
-    },
-    {
-      "match": "그워",
-      "out": "궈"
-    },
-    {
-      "match": "그위",
-      "out": "귀"
-    },
-    {
-      "match": "그외",
-      "out": "괴"
-    },
-    {
-      "match": "그웨",
-      "out": "궤"
-    },
-    {
-      "match": "그왜",
-      "out": "괘"
-    },
-    {
-      "match": "그앙",
-      "out": "강"
-    },
-    {
-      "match": "그앵",
-      "out": "갱"
-    },
-    {
-      "match": "그엥",
-      "out": "겡"
-    },
-    {
-      "match": "그옹",
-      "out": "공"
-    },
-    {
-      "match": "그웅",
-      "out": "궁"
-    },
-    {
-      "match": "그잉",
-      "out": "깅"
-    },
-    {
-      "match": "흐아",
-      "out": "하"
-    },
-    {
-      "match": "흐이",
-      "out": "히"
-    },
-    {
-      "match": "흐에",
-      "out": "헤"
-    },
-    {
-      "match": "흐오",
-      "out": "호"
-    },
-    {
-      "match": "흐우",
-      "out": "후"
-    },
-    {
-      "match": "흐어",
-      "out": "허"
-    },
-    {
-      "match": "흐으",
-      "out": "흐"
-    },
-    {
-      "match": "흐애",
-      "out": "해"
-    },
-    {
-      "match": "흐야",
-      "out": "햐"
-    },
-    {
-      "match": "흐여",
-      "out": "혀"
-    },
-    {
-      "match": "흐요",
-      "out": "효"
-    },
-    {
-      "match": "흐유",
-      "out": "휴"
-    },
-    {
-      "match": "흐예",
-      "out": "혜"
-    },
-    {
-      "match": "흐얘",
-      "out": "햬"
-    },
-    {
-      "match": "흐와",
-      "out": "화"
-    },
-    {
-      "match": "흐워",
-      "out": "훠"
-    },
-    {
-      "match": "흐위",
-      "out": "휘"
-    },
-    {
-      "match": "흐외",
-      "out": "회"
-    },
-    {
-      "match": "흐웨",
-      "out": "훼"
-    },
-    {
-      "match": "흐왜",
-      "out": "홰"
-    },
-    {
-      "match": "흐앙",
-      "out": "항"
-    },
-    {
-      "match": "흐앵",
-      "out": "행"
-    },
-    {
-      "match": "흐엥",
-      "out": "헹"
-    },
-    {
-      "match": "흐옹",
-      "out": "홍"
-    },
-    {
-      "match": "흐웅",
-      "out": "훙"
-    },
-    {
-      "match": "흐잉",
-      "out": "힝"
-    },
-    {
-      "match": "츠아",
-      "out": "차"
-    },
-    {
-      "match": "츠이",
-      "out": "치"
-    },
-    {
-      "match": "츠에",
-      "out": "체"
-    },
-    {
-      "match": "츠오",
-      "out": "초"
-    },
-    {
-      "match": "츠우",
-      "out": "추"
-    },
-    {
-      "match": "츠어",
-      "out": "처"
-    },
-    {
-      "match": "츠으",
-      "out": "츠"
-    },
-    {
-      "match": "츠애",
-      "out": "채"
-    },
-    {
-      "match": "츠야",
-      "out": "차"
-    },
-    {
-      "match": "츠여",
-      "out": "처"
-    },
-    {
-      "match": "츠요",
-      "out": "초"
-    },
-    {
-      "match": "츠유",
-      "out": "추"
-    },
-    {
-      "match": "츠예",
-      "out": "체"
-    },
-    {
-      "match": "츠얘",
-      "out": "채"
-    },
-    {
-      "match": "츠와",
-      "out": "촤"
-    },
-    {
-      "match": "츠워",
-      "out": "춰"
-    },
-    {
-      "match": "츠위",
-      "out": "취"
-    },
-    {
-      "match": "츠외",
-      "out": "최"
-    },
-    {
-      "match": "츠웨",
-      "out": "췌"
-    },
-    {
-      "match": "츠왜",
-      "out": "쵀"
-    },
-    {
-      "match": "츠앙",
-      "out": "창"
-    },
-    {
-      "match": "츠앵",
-      "out": "챙"
-    },
-    {
-      "match": "츠엥",
-      "out": "쳉"
-    },
-    {
-      "match": "츠옹",
-      "out": "총"
-    },
-    {
-      "match": "츠웅",
-      "out": "충"
-    },
-    {
-      "match": "츠잉",
-      "out": "칭"
-    },
-    {
-      "match": "슈아",
-      "out": "샤"
-    },
-    {
-      "match": "슈이",
-      "out": "시"
-    },
-    {
-      "match": "슈에",
-      "out": "셰"
-    },
-    {
-      "match": "슈오",
-      "out": "쇼"
-    },
-    {
-      "match": "슈우",
-      "out": "슈"
-    },
-    {
-      "match": "슈어",
-      "out": "셔"
-    },
-    {
-      "match": "슈으",
-      "out": "슈"
-    },
-    {
-      "match": "슈애",
-      "out": "섀"
-    },
-    {
-      "match": "슈야",
-      "out": "샤"
-    },
-    {
-      "match": "슈여",
-      "out": "셔"
-    },
-    {
-      "match": "슈요",
-      "out": "쇼"
-    },
-    {
-      "match": "슈유",
-      "out": "슈"
-    },
-    {
-      "match": "슈예",
-      "out": "셰"
-    },
-    {
-      "match": "슈얘",
-      "out": "섀"
-    },
-    {
-      "match": "슈와",
-      "out": "솨"
-    },
-    {
-      "match": "슈워",
-      "out": "숴"
-    },
-    {
-      "match": "슈위",
-      "out": "쉬"
-    },
-    {
-      "match": "슈외",
-      "out": "쇠"
-    },
-    {
-      "match": "슈웨",
-      "out": "쉐"
-    },
-    {
-      "match": "슈왜",
-      "out": "쇄"
-    },
-    {
-      "match": "슈앙",
-      "out": "샹"
-    },
-    {
-      "match": "슈앵",
-      "out": "섕"
-    },
-    {
-      "match": "슈엥",
-      "out": "솅"
-    },
-    {
-      "match": "슈옹",
-      "out": "숑"
-    },
-    {
-      "match": "슈웅",
-      "out": "슝"
-    },
-    {
-      "match": "슈잉",
-      "out": "싱"
-    },
-    {
-      "match": "뉴아",
-      "out": "냐"
-    },
-    {
-      "match": "뉴이",
-      "out": "니"
-    },
-    {
-      "match": "뉴에",
-      "out": "녜"
-    },
-    {
-      "match": "뉴오",
-      "out": "뇨"
-    },
-    {
-      "match": "뉴우",
-      "out": "뉴"
-    },
-    {
-      "match": "뉴어",
-      "out": "녀"
-    },
-    {
-      "match": "뉴으",
-      "out": "뉴"
-    },
-    {
-      "match": "뉴애",
-      "out": "냬"
-    },
-    {
-      "match": "뉴야",
-      "out": "냐"
-    },
-    {
-      "match": "뉴여",
-      "out": "녀"
-    },
-    {
-      "match": "뉴요",
-      "out": "뇨"
-    },
-    {
-      "match": "뉴유",
-      "out": "뉴"
-    },
-    {
-      "match": "뉴예",
-      "out": "녜"
-    },
-    {
-      "match": "뉴얘",
-      "out": "냬"
-    },
-    {
-      "match": "뉴와",
-      "out": "놔"
-    },
-    {
-      "match": "뉴워",
-      "out": "눠"
-    },
-    {
-      "match": "뉴위",
-      "out": "뉘"
-    },
-    {
-      "match": "뉴외",
-      "out": "뇌"
-    },
-    {
-      "match": "뉴웨",
-      "out": "눼"
-    },
-    {
-      "match": "뉴왜",
-      "out": "놰"
-    },
-    {
-      "match": "뉴앙",
-      "out": "냥"
-    },
-    {
-      "match": "뉴앵",
-      "out": "넁"
-    },
-    {
-      "match": "뉴엥",
-      "out": "녱"
-    },
-    {
-      "match": "뉴옹",
-      "out": "뇽"
-    },
-    {
-      "match": "뉴웅",
-      "out": "늉"
-    },
-    {
-      "match": "뉴잉",
-      "out": "닝"
-    },
-    {
-      "match": "쁘아",
-      "out": "빠"
-    },
-    {
-      "match": "쁘이",
-      "out": "삐"
-    },
-    {
-      "match": "쁘에",
-      "out": "뻬"
-    },
-    {
-      "match": "쁘오",
-      "out": "뽀"
-    },
-    {
-      "match": "쁘우",
-      "out": "뿌"
-    },
-    {
-      "match": "쁘어",
-      "out": "뻐"
-    },
-    {
-      "match": "쁘으",
-      "out": "쁘"
-    },
-    {
-      "match": "쁘애",
-      "out": "빼"
-    },
-    {
-      "match": "쁘야",
-      "out": "뺘"
-    },
-    {
-      "match": "쁘여",
-      "out": "뼈"
-    },
-    {
-      "match": "쁘요",
-      "out": "뾰"
-    },
-    {
-      "match": "쁘유",
-      "out": "쀼"
-    },
-    {
-      "match": "쁘예",
-      "out": "뼤"
-    },
-    {
-      "match": "쁘얘",
-      "out": "뺴"
-    },
-    {
-      "match": "쁘와",
-      "out": "뽜"
-    },
-    {
-      "match": "쁘워",
-      "out": "뿨"
-    },
-    {
-      "match": "쁘위",
-      "out": "쀠"
-    },
-    {
-      "match": "쁘외",
-      "out": "뾔"
-    },
-    {
-      "match": "쁘웨",
-      "out": "쀄"
-    },
-    {
-      "match": "쁘왜",
-      "out": "뽸"
-    },
-    {
-      "match": "쁘앙",
-      "out": "빵"
-    },
-    {
-      "match": "쁘앵",
-      "out": "뺑"
-    },
-    {
-      "match": "쁘엥",
-      "out": "뼁"
-    },
-    {
-      "match": "쁘옹",
-      "out": "뽕"
-    },
-    {
-      "match": "쁘웅",
-      "out": "뿡"
-    },
-    {
-      "match": "쁘잉",
-      "out": "삥"
-    },
-    {
-      "match": "뜨아",
-      "out": "따"
-    },
-    {
-      "match": "뜨이",
-      "out": "띠"
-    },
-    {
-      "match": "뜨에",
-      "out": "떼"
-    },
-    {
-      "match": "뜨오",
-      "out": "또"
-    },
-    {
-      "match": "뜨우",
-      "out": "뚜"
-    },
-    {
-      "match": "뜨어",
-      "out": "떠"
-    },
-    {
-      "match": "뜨으",
-      "out": "뜨"
-    },
-    {
-      "match": "뜨애",
-      "out": "때"
-    },
-    {
-      "match": "뜨야",
-      "out": "땨"
-    },
-    {
-      "match": "뜨여",
-      "out": "뗘"
-    },
-    {
-      "match": "뜨요",
-      "out": "뚀"
-    },
-    {
-      "match": "뜨유",
-      "out": "뜌"
-    },
-    {
-      "match": "뜨예",
-      "out": "뗴"
-    },
-    {
-      "match": "뜨얘",
-      "out": "떄"
-    },
-    {
-      "match": "뜨와",
-      "out": "똬"
-    },
-    {
-      "match": "뜨워",
-      "out": "뚸"
-    },
-    {
-      "match": "뜨위",
-      "out": "뛰"
-    },
-    {
-      "match": "뜨외",
-      "out": "뙤"
-    },
-    {
-      "match": "뜨웨",
-      "out": "뛔"
-    },
-    {
-      "match": "뜨왜",
-      "out": "뙈"
-    },
-    {
-      "match": "뜨앙",
-      "out": "땅"
-    },
-    {
-      "match": "뜨앵",
-      "out": "땡"
-    },
-    {
-      "match": "뜨엥",
-      "out": "뗑"
-    },
-    {
-      "match": "뜨옹",
-      "out": "똥"
-    },
-    {
-      "match": "뜨웅",
-      "out": "뚱"
-    },
-    {
-      "match": "뜨잉",
-      "out": "띵"
-    },
-    {
-      "match": "끄아",
-      "out": "까"
-    },
-    {
-      "match": "끄이",
-      "out": "끼"
-    },
-    {
-      "match": "끄에",
-      "out": "께"
-    },
-    {
-      "match": "끄오",
-      "out": "꼬"
-    },
-    {
-      "match": "끄우",
-      "out": "꾸"
-    },
-    {
-      "match": "끄어",
-      "out": "꺼"
-    },
-    {
-      "match": "끄으",
-      "out": "끄"
-    },
-    {
-      "match": "끄애",
-      "out": "깨"
-    },
-    {
-      "match": "끄야",
-      "out": "꺄"
-    },
-    {
-      "match": "끄여",
-      "out": "껴"
-    },
-    {
-      "match": "끄요",
-      "out": "꾜"
-    },
-    {
-      "match": "끄유",
-      "out": "뀨"
-    },
-    {
-      "match": "끄예",
-      "out": "꼐"
-    },
-    {
-      "match": "끄얘",
-      "out": "꺠"
-    },
-    {
-      "match": "끄와",
-      "out": "꽈"
-    },
-    {
-      "match": "끄워",
-      "out": "꿔"
-    },
-    {
-      "match": "끄위",
-      "out": "뀌"
-    },
-    {
-      "match": "끄외",
-      "out": "꾀"
-    },
-    {
-      "match": "끄웨",
-      "out": "꿰"
-    },
-    {
-      "match": "끄왜",
-      "out": "꽤"
-    },
-    {
-      "match": "끄앙",
-      "out": "깡"
-    },
-    {
-      "match": "끄앵",
-      "out": "깽"
-    },
-    {
-      "match": "끄엥",
-      "out": "껭"
-    },
-    {
-      "match": "끄옹",
-      "out": "꽁"
-    },
-    {
-      "match": "끄웅",
-      "out": "꿍"
-    },
-    {
-      "match": "끄잉",
-      "out": "낑"
-    },
-    {
-      "match": "쯔아",
-      "out": "짜"
-    },
-    {
-      "match": "쯔이",
-      "out": "찌"
-    },
-    {
-      "match": "쯔에",
-      "out": "쩨"
-    },
-    {
-      "match": "쯔오",
-      "out": "쪼"
-    },
-    {
-      "match": "쯔우",
-      "out": "쭈"
-    },
-    {
-      "match": "쯔어",
-      "out": "쩌"
-    },
-    {
-      "match": "쯔으",
-      "out": "쯔"
-    },
-    {
-      "match": "쯔애",
-      "out": "째"
-    },
-    {
-      "match": "쯔야",
-      "out": "짜"
-    },
-    {
-      "match": "쯔여",
-      "out": "쩌"
-    },
-    {
-      "match": "쯔요",
-      "out": "쪼"
-    },
-    {
-      "match": "쯔유",
-      "out": "쭈"
-    },
-    {
-      "match": "쯔예",
-      "out": "쩨"
-    },
-    {
-      "match": "쯔얘",
-      "out": "째"
-    },
-    {
-      "match": "쯔와",
-      "out": "쫘"
-    },
-    {
-      "match": "쯔워",
-      "out": "쭤"
-    },
-    {
-      "match": "쯔위",
-      "out": "쮜"
-    },
-    {
-      "match": "쯔외",
-      "out": "쬐"
-    },
-    {
-      "match": "쯔웨",
-      "out": "쮀"
-    },
-    {
-      "match": "쯔왜",
-      "out": "쫴"
-    },
-    {
-      "match": "쯔앙",
-      "out": "짱"
-    },
-    {
-      "match": "쯔앵",
-      "out": "쨍"
-    },
-    {
-      "match": "쯔엥",
-      "out": "쩽"
-    },
-    {
-      "match": "쯔옹",
-      "out": "쫑"
-    },
-    {
-      "match": "쯔웅",
-      "out": "쭝"
-    },
-    {
-      "match": "쯔잉",
-      "out": "찡"
-    },
-    {
-      "match": "이아",
-      "out": "야"
-    },
-    {
-      "match": "이이",
-      "out": "이"
-    },
-    {
-      "match": "이에",
-      "out": "예"
-    },
-    {
-      "match": "이오",
-      "out": "요"
-    },
-    {
-      "match": "이우",
-      "out": "유"
-    },
-    {
-      "match": "이어",
-      "out": "여"
-    },
-    {
-      "match": "이으",
-      "out": "유"
-    },
-    {
-      "match": "이애",
-      "out": "얘"
-    },
-    {
-      "match": "이야",
-      "out": "야"
-    },
-    {
-      "match": "이여",
-      "out": "여"
-    },
-    {
-      "match": "이요",
-      "out": "요"
-    },
-    {
-      "match": "이유",
-      "out": "유"
-    },
-    {
-      "match": "이예",
-      "out": "예"
-    },
-    {
-      "match": "이얘",
-      "out": "얘"
-    },
-    {
-      "match": "이와",
-      "out": "와"
-    },
-    {
-      "match": "이워",
-      "out": "워"
-    },
-    {
-      "match": "이위",
-      "out": "위"
-    },
-    {
-      "match": "이외",
-      "out": "외"
-    },
-    {
-      "match": "이웨",
-      "out": "웨"
-    },
-    {
-      "match": "이왜",
-      "out": "왜"
-    },
-    {
-      "match": "이앙",
-      "out": "양"
-    },
-    {
-      "match": "이앵",
-      "out": "얭"
-    },
-    {
-      "match": "이엥",
-      "out": "옝"
-    },
-    {
-      "match": "이옹",
-      "out": "용"
-    },
-    {
-      "match": "이웅",
-      "out": "융"
-    },
-    {
-      "match": "이잉",
-      "out": "잉"
-    }
-  ]
+  "syllable_fixups": []
 }

@@ -1,0 +1,2131 @@
+{
+  "source": "ja",
+  "accent": "ja-JP",
+  "version": "1",
+  "derives_from": "外来語の表記, Cabinet Notification No. 2 of 28 June 1991 (内閣告示第2号), superseding all earlier guidance: 第1表 and 第2表 read as one inventory, plus the sound-keyed items of 留意事項その2. The notification is keyed on sounds but described in kana; this file is that key re-keyed to IPA, which is the only change RESPELL-SYSTEMS.md asks for. Length and gemination are the notification's own 長音符号 ー and 促音 ッ. The epenthetic vowel that a mora script needs for every foreign coda is nowhere tabulated in the notification, and is read off its own 用例 instead -- テスト, ストライキ, ミルク, カップ, ベッド, ヒット, マッチ, ブリッジ -- which give ウ by default, オ after /t d/ and イ after /tʃ dʒ/.",
+  "deviations": [
+    {
+      "rule": "留意事項その1: 第1表 is 「一般的に用いる仮名」 and is preferred; 第2表 is only for 「原音や原つづりになるべく近く書き表そうとする場合」",
+      "why": "第2表 throughout, knowingly against the stated preference: ヴ ヴァ ヴィ ヴェ ヴォ, ティ ディ, トゥ ドゥ, テュ デュ, ウィ ウェ ウォ, クァ クィ クェ クォ, グァ, ツィ, イェ, フュ, ヴュ. The state has acted on the opposite preference -- in 2019 the Diet amended the 在外公館名称位置給与法 to strike ヴ from official country names (カーボヴェルデ > カーボベルデ) and MOFA's stated reason was that the ヴ-less form is more familiar to the public. That is right for a permanent place name and wrong for a column read once whose entire purpose is closeness to the original sound. 留意事項その2 item 8's 「ただし、一般的には「バ」「ビ」「ベ」「ボ」と書く」 is overruled for the same reason."
+    },
+    {
+      "rule": "Several 留意事項 are keyed on the source language's spelling, not its sound: word-final -er, -or, -ar 「などは、原則としてア列の長音「ー」を用いて書く」",
+      "why": "Re-keyed to IPA and the orthographic framing dropped: /ɚ/ and /ɜ/ become アー regardless of how the source spells them. Nothing is lost, and the counterfactual test in RESPELL-SYSTEMS.md's «Respelling or transliteration» section then passes rather than half-passes. The clause that lets the ー be dropped 「慣用に従って」 is not taken up, because the ー is the only length information the reader gets."
+    },
+    {
+      "rule": "No stress or accent notation anywhere in the notification",
+      "why": "Held to, and stated so it is not read as an oversight. Both tables are caseless and take no diacritics, so none of the engine's three stress devices apply; NHK's downstep marks describe Japanese pitch accent rather than foreign stress and are a proprietary dictionary convention. Per RESPELL-SYSTEMS.md's two-argument table, a caseless source facing a target with lexical stress marks nothing and marks length precisely instead -- so every /ː/ in every target becomes ー, which is the one thing this table does that the Spanish one cannot."
+    },
+    {
+      "rule": "Chao tone letters are not kana",
+      "why": "Dropped, so lexical tone is lost on zh-Hans, th and vi. A reader with no key on the card gets nothing from ˥˩, and all four curated tonal sheets drop tone too. Vietnamese's glottal-constriction mark ˀ survives the engine's tone filter and is dropped separately."
+    },
+    {
+      "rule": "The notification brackets one adopted loanword and never divides it",
+      "why": "Divided with 中黒 U+30FB, not the hyphen RESPELL-SYSTEMS.md's divider table assigns. The table puts ja in the row that takes a hyphen for visual grouping rather than for structure, and that much is right -- but a hyphen is the one divider katakana cannot use, because at 5.2pt italic muted it is confusable with ー, and 1,430 of the 11,785 rows this table generates put the two marks directly adjacent (コー-ヒー). A misread in either direction changes vowel length, which is the one piece of prosody this table does carry. 中黒 is the native device for separating katakana elements and cannot be mistaken for a length mark."
+    },
+    {
+      "rule": "Kana outside both tables",
+      "why": "Never invented where a tabulated form exists: /si/ is シ and /zi/ is ジ (第1表) rather than an invented スィ or ズィ, and /nu/ is ヌ rather than ヌゥ. Three small extensions are made and are flagged here: グィ グェ グォ by analogy with the tabulated グァ; キェ ギェ ヒェ ビェ ピェ ミェ リェ ニェ by analogy with the tabulated シェ ジェ チェ; and ヴャ ヴョ by analogy with the tabulated ヴュ. Each is one glyph pair a Japanese reader already meets in ordinary loanword spelling."
+    },
+    {
+      "rule": "留意事項その2's 促音 examples put ッ before a word-final obstruent after a lax vowel: ヒット, カップ, ベッド, バッグ, マッチ",
+      "why": "Declined, and this is the clearest case of the standard optimising for the wrong thing. Those are permanent loanword spellings; the ッ adds a mora the source does not have -- グッド is three morae for an English monosyllable and グド is two, which is closer to [ɡʊd]. ッ is written only where the source IPA has a real geminate, either as /Cː/ (Arabic shadda, Italian batteria, Turkish tesekkurler) or as a coda consonant identical to the next onset, which is how espeak writes Italian possibile and Arabic ash-shariiha. Restricted to obstruents there, because the notification's own 促音 examples are all obstruents and ッ before ラ行 or a nasal is not the device Japanese uses -- Korean's ㄹㄹ is ルラ and its ㄴㄴ is ン."
+    },
+    {
+      "rule": "Epenthesis is not in the notification at all",
+      "why": "It cannot be avoided: kana writes no bare consonant except /n/ (ン) and a geminate (ッ), so every foreign coda acquires a vowel the source did not have and the respelling gains morae -- English /strɛŋkθs/ becomes six. The vowel is not free choice; it is read off the notification's own 用例 (see derives_from). This is the single largest departure from the source phrase in this table and it is inherent to the script, not to the rules."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/l/ against /r ɾ ɹ ʁ ɻ ʐ/",
+      "out": "ラ行",
+      "why": "Japanese has one liquid. The contrast is lost in every target; it is the error a Japanese speaker makes anyway."
+    },
+    {
+      "sounds": "aspiration: /pʰ tʰ kʰ tɕʰ ʈʂʰ tsʰ cʰ/ against /p t k tɕ ʈʂ ts c/",
+      "out": "the same kana row as the plain series",
+      "why": "Japanese has no aspiration contrast, so Mandarin, Korean, Thai and Hindi all lose their two-way (Hindi four-way) stop contrast. Unlike Spanish or English this table has no second letter to spend on it: パ is the only パ."
+    },
+    {
+      "sounds": "Korean tense consonants, espeak's ͈",
+      "out": "dropped",
+      "why": "Japanese has no 顕声 series, and ッ -- the only device that sounds anything like it -- cannot begin a word, which is where most of the corpus's tense consonants are."
+    },
+    {
+      "sounds": "/θ ð/",
+      "out": "サ行, ザ行",
+      "why": "The established rendering (サンキュー, ザ). No kana is closer."
+    },
+    {
+      "sounds": "/v ʋ/",
+      "out": "ヴ series",
+      "why": "第2表, chosen over 第1表's バ -- but ヴ is [b] for most Japanese speakers, so this buys the eye a distinction the mouth may not make."
+    },
+    {
+      "sounds": "/ŋ/ in a coda",
+      "out": "ン",
+      "why": "ン before a velar is already [ŋ] in Japanese and it is what every established rendering of Chinese, Korean, Thai, Vietnamese and Indonesian uses (パキン, バンコク). ング would be the English-loanword habit and adds a mora that is not in the source. /n/ and /ŋ/ therefore merge in codas, which is true of Japanese ン anyway."
+    },
+    {
+      "sounds": "/y ø œ/ (front rounded)",
+      "out": "イウ (so キュ ビュ ミュ after a consonant), エ",
+      "why": "ミュンヘン, チューリヒ, ケルン, レントゲン. Japanese has no rounded front vowel and the standard renderings split by height."
+    },
+    {
+      "sounds": "/ɯ ʉ ɤ/",
+      "out": "ウ, ウ, オ",
+      "why": "Turkish ı, Korean ㅡ, Mandarin -e and Thai เออ all fall on the two vowels Japanese can offer. Mandarin's apical /ɨ/ takes ウ (スー, シャンハイ) and Russian ы takes イ, discriminated by inventory rather than by target."
+    },
+    {
+      "sounds": "/ʔ ʕ ˤ/",
+      "out": "dropped",
+      "why": "No kana and no sound. A dropped hamza leaves an ordinary onsetless mora, which is what Japanese renderings of Arabic do."
+    },
+    {
+      "sounds": "/ħ/ (Arabic ح), /x/, /ç/",
+      "out": "ハ行; フ or ヒ in a coda",
+      "why": "ムハンマド, ハラショー, バッハ, イヒ. Wrong place of articulation, right manner, and audible -- which dropping would not be."
+    },
+    {
+      "sounds": "lexical tone (zh-Hans, th, vi)",
+      "out": "dropped",
+      "why": "See deviations."
+    },
+    {
+      "sounds": "English coda /ɹ/",
+      "out": "nothing after a long vowel, the ア of a centring diphthong otherwise",
+      "why": "The notification's -er/-or/-ar rule already treats a rhotic as vowel colouring. So モー(ニン), ワークス, カー where the vowel is already long, and ウェア, ヒア, チェア, ファイア where it is not. The discriminator is `after_out: ー` -- the length rule has just emitted the ー, so the rule reads it instead of enumerating every long nucleus in the corpus. Guarded by if_inventory ɚ: Arabic's coda /ɹ/ is a real consonant and keeps ル."
+    },
+    {
+      "sounds": "English /ɾ/",
+      "out": "タ行",
+      "why": "espeak writes the American intervocalic flap as /ɾ/, an allophone of /t d/ rather than a rhotic: データ, ウォーター, ア-タ for 'at a'. In the eight other languages that carry /ɾ/ it is a real tap and takes ラ行. Same guard."
+    },
+    {
+      "sounds": "a labial glide, /Cw/",
+      "out": "the anchor plus the ワ row -- ワ ウィ ウェ ウォ",
+      "why": "プウェ for Spanish puedo, トウェイ for Mandarin dui, シュウォ for shuo. 第2表's small-kana forms are used where it has them (クァ クィ クェ クォ, グァ) and ホ + vowel for /xw/ (ホワ for hua). This is the 第2表 choice again -- established Japanese renderings of Spanish, Italian and Mandarin drop the glide instead (プエド, クアトロ, シュオ), which is shorter and more familiar but loses a segment the source has. It costs a mora: シュウォ is three for one Mandarin syllable."
+    },
+    {
+      "sounds": "coda /m/ before a labial",
+      "out": "ン",
+      "why": "シンプル, カンビオ, センプリチ, インフォメーション. ム elsewhere (アムステルダム, チーム, マラム). /m/ and /n/ therefore merge before a labial, as they do in Japanese."
+    },
+    {
+      "sounds": "/ɐ̃ʊ̃/ and the French nasal vowels",
+      "out": "vowel + ン",
+      "why": "サンパウロ, アンファン. /ɛ̃ œ̃ ɑ̃/ all fall together on アン, which is the established rendering and loses a three-way French contrast."
+    }
+  ],
+  "mora_construction": "How a syllabary is written in a format that spells onset, nucleus and coda separately. Kana cannot write a bare consonant, so a consonant's kana depends on the vowel that follows it -- information the `onset` slot does not have. So every consonant rule emits its *epenthetic* kana (its ウ column, or ト/ド for /t d/, チ/ジ for /tʃ dʒ/, ン for /n/), every vowel rule emits the bare vowel kana, and `syllable_fixups` contracts the abutting pair into the real mora: ク + ア to カ, ト + イ to ティ, シュ + オ to ショ. A palatal glide is spelt イ and a labial one ウ, so /kja/ arrives as クイア and Russian /nʲa/ as ンイア; the three-kana contractions therefore serve 拗音 and Russian palatalisation with one set of rules. Everything that does not abut a vowel is already correct as it stands: ス + ト + ア gives スタ for /sta/. This is 第1表 and 第2表 written out as a chart, and it is long for the same reason the notification is two pages of kana. The table needs policy.fixups = all, because a syllable often needs two contractions -- one for the onset and one inside the coda. Russian /jestʲ/ needs both イエ to イェ and トイ to ティ, and there are about 330 such rows. That has a cost the default mode does not have: a rule's *output* can match a later rule. Three orderings keep the groups inert to each other, and changing them will silently corrupt output. (1) The groups run palatal, then labial, then plain, so a two-kana rule cannot fire inside a three-kana sequence. (2) Within each plain row, the one column that spells the anchor itself goes last -- ハア is ハ, トオ is ト, クウ is ク -- because otherwise a later column of the same row re-contracts the result: ハアイ for 'high' became ハイ and then ヒ, and トオウ for 'estou' became トウ and then トゥ. (3) The ウ column carries a negative lookahead on the small kana, because a labial-glide output leaves one behind the anchor and プウェ would otherwise contract again to プェ. Two rules that can only be written as fixups also live there, both because a fixup can anchor its regex to the end of the syllable while a phoneme rule cannot say 'the last phoneme of the coda': 促音 for a coda consonant identical to the next onset, and ン for a coda /m/ before a labial. max_onset is 3, and the reason changed once the engine began segmenting on phonemes rather than codepoints. It used to be 3 because 1 and 2 shattered /tɕʰ/ and left a bare aspiration mark to be spelt on its own; that is gone, and all three settings now shatter nothing. 3 is kept because it is the setting under which the target's own syllable boundaries survive, which is what the 中黒 groups, and because the remaining 14 rows on which 1 and 3 disagree all favour 3.",
+  "policy": {
+    "syllable_separator": "・",
+    "word_separator": " ",
+    "stress": "none",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 3,
+    "fixups": "all",
+    "locale": "ja"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "onset",
+      "ipa": "kː",
+      "out": "ク",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "kː",
+      "out": "ック"
+    },
+    {
+      "slot": "onset",
+      "ipa": "qː",
+      "out": "ク",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "ック"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tː",
+      "out": "ト",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "ット"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t̪ː",
+      "out": "ト",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ː",
+      "out": "ット"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʰː",
+      "out": "ト",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰː",
+      "out": "ット"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dː",
+      "out": "ド",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "ッド"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʰː",
+      "out": "ド",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰː",
+      "out": "ッド"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pː",
+      "out": "プ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "ップ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "bː",
+      "out": "ブ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "ッブ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "sː",
+      "out": "ス",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "sː",
+      "out": "ッス"
+    },
+    {
+      "slot": "onset",
+      "ipa": "zː",
+      "out": "ズ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "zː",
+      "out": "ッズ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃː",
+      "out": "シュ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃː",
+      "out": "ッシュ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʒː",
+      "out": "ジュ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒː",
+      "out": "ッジュ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʃː",
+      "out": "チュ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃː",
+      "out": "ッチュ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tsː",
+      "out": "ツ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "tsː",
+      "out": "ッツ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dzː",
+      "out": "ズ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "dzː",
+      "out": "ッズ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡː",
+      "out": "グ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡː",
+      "out": "ッグ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "cː",
+      "out": "チュ",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "cː",
+      "out": "ッチュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "チュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "チュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʰ",
+      "out": "チュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ツ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "チュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "チュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "チュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ツ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "ズ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "ク"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "ト"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "ト"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "プ"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "チュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "ブ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "ド"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "ド"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "グ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "ジュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "アー"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒj",
+      "out": "ジ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʒj",
+      "out": "ジ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒ",
+      "out": "ジ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʑ",
+      "out": "ジ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃ",
+      "out": "チ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ",
+      "out": "チ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂ",
+      "out": "チ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "ン"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "ニュ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "リ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": "フ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ħ",
+      "out": "フ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "x",
+      "out": "フ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ç",
+      "out": "ヒ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "mp",
+      "out": "ンプ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "mb",
+      "out": "ンブ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ŋɡ",
+      "out": "ング"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲɟ",
+      "out": "ンジュ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mb",
+      "out": "ンブ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mp",
+      "out": "ンプ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mv",
+      "out": "ンヴ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mf",
+      "out": "ンフ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mm",
+      "out": "ンム"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ŋ",
+      "out": "ング",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "ト",
+      "if_inventory": "ɚ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɹ",
+      "out": "",
+      "after_out": "ー",
+      "if_inventory": "ɚ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɹ",
+      "out": "ア",
+      "if_inventory": "ɚ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "",
+      "after_out": "ン"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "",
+      "after_out": "ン"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "ク"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "ク"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "グ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "グ"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "ス"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "ス"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "ズ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "ズ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "ト"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "ト"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "ド"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "ド"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "ド"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "ン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "ン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "ン"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "ハ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "ハ"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "フ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "フ"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "ブ"
+    },
+    {
+      "slot": "any",
+      "ipa": "β",
+      "out": "ブ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "プ"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "ム"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ル"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "ウ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "ウ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "ウ"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "イ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": "イ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "イ"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "ヴ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "ヴ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "シュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "シュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "シュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ジュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ジュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ンイ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ルイ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "グ"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "ハ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "ハ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "ジュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "ジュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "チュ",
+      "if_inventory": "cʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ク"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟ",
+      "out": "ジ",
+      "unless_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "グ",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "ジュ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": "ー"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "ン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "アン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ̃",
+      "out": "アン"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ̃",
+      "out": "アン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃",
+      "out": "アン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ̃",
+      "out": "オン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽː",
+      "out": "エーン"
+    },
+    {
+      "slot": "any",
+      "ipa": "əː",
+      "out": "オー"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "アン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "エン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "イン"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "オン"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "ウン"
+    },
+    {
+      "slot": "any",
+      "ipa": "oʊ",
+      "out": "オー"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ̃",
+      "out": "エン",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ̃",
+      "out": "アン"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "ア"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "ア"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "ア"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "ア"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "ア"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "ア"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "ア"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "エ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "エ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "エ"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "エ"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "イ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "イ"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "オ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "オ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "オ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "オ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "オ"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "ウ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "ウ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "ウ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "ウ"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "イウ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "ウ",
+      "if_inventory": "ʈʂ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "イ"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "ハ(?=[クグスズトドンハフブプムルヴシジチツ])",
+      "out": "フ"
+    },
+    {
+      "match": "プ$",
+      "out": "ッ",
+      "before_onset": "p"
+    },
+    {
+      "match": "ト$",
+      "out": "ッ",
+      "before_onset": "t ʈ"
+    },
+    {
+      "match": "ク$",
+      "out": "ッ",
+      "before_onset": "k q"
+    },
+    {
+      "match": "ブ$",
+      "out": "ッ",
+      "before_onset": "b"
+    },
+    {
+      "match": "ド$",
+      "out": "ッ",
+      "before_onset": "d ɖ"
+    },
+    {
+      "match": "グ$",
+      "out": "ッ",
+      "before_onset": "ɡ"
+    },
+    {
+      "match": "ス$",
+      "out": "ッ",
+      "before_onset": "s θ"
+    },
+    {
+      "match": "ズ$",
+      "out": "ッ",
+      "before_onset": "z ð"
+    },
+    {
+      "match": "フ$",
+      "out": "ッ",
+      "before_onset": "f"
+    },
+    {
+      "match": "ヴ$",
+      "out": "ッ",
+      "before_onset": "v"
+    },
+    {
+      "match": "シュ$",
+      "out": "ッ",
+      "before_onset": "ʃ ɕ ʂ"
+    },
+    {
+      "match": "ジュ$",
+      "out": "ッ",
+      "before_onset": "ʒ ʑ"
+    },
+    {
+      "match": "ル$",
+      "out": "ッ",
+      "before_onset": "l r",
+      "if_inventory": "ʎ"
+    },
+    {
+      "match": "ル$",
+      "out": "ッ",
+      "before_onset": "ɫ"
+    },
+    {
+      "match": "ム$",
+      "out": "ン",
+      "before_onset": "p b m f v"
+    },
+    {
+      "match": "クイア",
+      "out": "キャ"
+    },
+    {
+      "match": "クイイ",
+      "out": "キ"
+    },
+    {
+      "match": "クイウ",
+      "out": "キュ"
+    },
+    {
+      "match": "クイエ",
+      "out": "キェ"
+    },
+    {
+      "match": "クイオ",
+      "out": "キョ"
+    },
+    {
+      "match": "グイア",
+      "out": "ギャ"
+    },
+    {
+      "match": "グイイ",
+      "out": "ギ"
+    },
+    {
+      "match": "グイウ",
+      "out": "ギュ"
+    },
+    {
+      "match": "グイエ",
+      "out": "ギェ"
+    },
+    {
+      "match": "グイオ",
+      "out": "ギョ"
+    },
+    {
+      "match": "スイア",
+      "out": "シャ"
+    },
+    {
+      "match": "スイイ",
+      "out": "シ"
+    },
+    {
+      "match": "スイウ",
+      "out": "シュ"
+    },
+    {
+      "match": "スイエ",
+      "out": "シェ"
+    },
+    {
+      "match": "スイオ",
+      "out": "ショ"
+    },
+    {
+      "match": "ズイア",
+      "out": "ジャ"
+    },
+    {
+      "match": "ズイイ",
+      "out": "ジ"
+    },
+    {
+      "match": "ズイウ",
+      "out": "ジュ"
+    },
+    {
+      "match": "ズイエ",
+      "out": "ジェ"
+    },
+    {
+      "match": "ズイオ",
+      "out": "ジョ"
+    },
+    {
+      "match": "トイア",
+      "out": "チャ"
+    },
+    {
+      "match": "トイイ",
+      "out": "ティ"
+    },
+    {
+      "match": "トイウ",
+      "out": "テュ"
+    },
+    {
+      "match": "トイエ",
+      "out": "チェ"
+    },
+    {
+      "match": "トイオ",
+      "out": "チョ"
+    },
+    {
+      "match": "ドイア",
+      "out": "ジャ"
+    },
+    {
+      "match": "ドイイ",
+      "out": "ディ"
+    },
+    {
+      "match": "ドイウ",
+      "out": "デュ"
+    },
+    {
+      "match": "ドイエ",
+      "out": "ジェ"
+    },
+    {
+      "match": "ドイオ",
+      "out": "ジョ"
+    },
+    {
+      "match": "ンイア",
+      "out": "ニャ"
+    },
+    {
+      "match": "ンイイ",
+      "out": "ニ"
+    },
+    {
+      "match": "ンイウ",
+      "out": "ニュ"
+    },
+    {
+      "match": "ンイエ",
+      "out": "ニェ"
+    },
+    {
+      "match": "ンイオ",
+      "out": "ニョ"
+    },
+    {
+      "match": "ハイア",
+      "out": "ヒャ"
+    },
+    {
+      "match": "ハイイ",
+      "out": "ヒ"
+    },
+    {
+      "match": "ハイウ",
+      "out": "ヒュ"
+    },
+    {
+      "match": "ハイエ",
+      "out": "ヒェ"
+    },
+    {
+      "match": "ハイオ",
+      "out": "ヒョ"
+    },
+    {
+      "match": "フイア",
+      "out": "ファ"
+    },
+    {
+      "match": "フイイ",
+      "out": "フィ"
+    },
+    {
+      "match": "フイウ",
+      "out": "フュ"
+    },
+    {
+      "match": "フイエ",
+      "out": "フェ"
+    },
+    {
+      "match": "フイオ",
+      "out": "フォ"
+    },
+    {
+      "match": "ブイア",
+      "out": "ビャ"
+    },
+    {
+      "match": "ブイイ",
+      "out": "ビ"
+    },
+    {
+      "match": "ブイウ",
+      "out": "ビュ"
+    },
+    {
+      "match": "ブイエ",
+      "out": "ビェ"
+    },
+    {
+      "match": "ブイオ",
+      "out": "ビョ"
+    },
+    {
+      "match": "プイア",
+      "out": "ピャ"
+    },
+    {
+      "match": "プイイ",
+      "out": "ピ"
+    },
+    {
+      "match": "プイウ",
+      "out": "ピュ"
+    },
+    {
+      "match": "プイエ",
+      "out": "ピェ"
+    },
+    {
+      "match": "プイオ",
+      "out": "ピョ"
+    },
+    {
+      "match": "ムイア",
+      "out": "ミャ"
+    },
+    {
+      "match": "ムイイ",
+      "out": "ミ"
+    },
+    {
+      "match": "ムイウ",
+      "out": "ミュ"
+    },
+    {
+      "match": "ムイエ",
+      "out": "ミェ"
+    },
+    {
+      "match": "ムイオ",
+      "out": "ミョ"
+    },
+    {
+      "match": "ルイア",
+      "out": "リャ"
+    },
+    {
+      "match": "ルイイ",
+      "out": "リ"
+    },
+    {
+      "match": "ルイウ",
+      "out": "リュ"
+    },
+    {
+      "match": "ルイエ",
+      "out": "リェ"
+    },
+    {
+      "match": "ルイオ",
+      "out": "リョ"
+    },
+    {
+      "match": "ヴイア",
+      "out": "ヴァ"
+    },
+    {
+      "match": "ヴイイ",
+      "out": "ヴィ"
+    },
+    {
+      "match": "ヴイウ",
+      "out": "ヴュ"
+    },
+    {
+      "match": "ヴイエ",
+      "out": "ヴェ"
+    },
+    {
+      "match": "ヴイオ",
+      "out": "ヴォ"
+    },
+    {
+      "match": "シュイア",
+      "out": "シャ"
+    },
+    {
+      "match": "シュイイ",
+      "out": "シ"
+    },
+    {
+      "match": "シュイウ",
+      "out": "シュ"
+    },
+    {
+      "match": "シュイエ",
+      "out": "シェ"
+    },
+    {
+      "match": "シュイオ",
+      "out": "ショ"
+    },
+    {
+      "match": "ジュイア",
+      "out": "ジャ"
+    },
+    {
+      "match": "ジュイイ",
+      "out": "ジ"
+    },
+    {
+      "match": "ジュイウ",
+      "out": "ジュ"
+    },
+    {
+      "match": "ジュイエ",
+      "out": "ジェ"
+    },
+    {
+      "match": "ジュイオ",
+      "out": "ジョ"
+    },
+    {
+      "match": "チュイア",
+      "out": "チャ"
+    },
+    {
+      "match": "チュイイ",
+      "out": "チ"
+    },
+    {
+      "match": "チュイウ",
+      "out": "チュ"
+    },
+    {
+      "match": "チュイエ",
+      "out": "チェ"
+    },
+    {
+      "match": "チュイオ",
+      "out": "チョ"
+    },
+    {
+      "match": "ツイア",
+      "out": "ツァ"
+    },
+    {
+      "match": "ツイイ",
+      "out": "ツィ"
+    },
+    {
+      "match": "ツイウ",
+      "out": "ツ"
+    },
+    {
+      "match": "ツイエ",
+      "out": "ツェ"
+    },
+    {
+      "match": "ツイオ",
+      "out": "ツォ"
+    },
+    {
+      "match": "クウア",
+      "out": "クァ"
+    },
+    {
+      "match": "クウイ",
+      "out": "クィ"
+    },
+    {
+      "match": "クウウ",
+      "out": "ク"
+    },
+    {
+      "match": "クウエ",
+      "out": "クェ"
+    },
+    {
+      "match": "クウオ",
+      "out": "クォ"
+    },
+    {
+      "match": "グウア",
+      "out": "グァ"
+    },
+    {
+      "match": "グウイ",
+      "out": "グィ"
+    },
+    {
+      "match": "グウウ",
+      "out": "グ"
+    },
+    {
+      "match": "グウエ",
+      "out": "グェ"
+    },
+    {
+      "match": "グウオ",
+      "out": "グォ"
+    },
+    {
+      "match": "ハウア",
+      "out": "ホワ"
+    },
+    {
+      "match": "ハウイ",
+      "out": "ホイ"
+    },
+    {
+      "match": "ハウウ",
+      "out": "フ"
+    },
+    {
+      "match": "ハウエ",
+      "out": "ホエ"
+    },
+    {
+      "match": "ハウオ",
+      "out": "ホオ"
+    },
+    {
+      "match": "ンウア",
+      "out": "ヌワ"
+    },
+    {
+      "match": "ンウイ",
+      "out": "ヌウィ"
+    },
+    {
+      "match": "ンウウ",
+      "out": "ヌ"
+    },
+    {
+      "match": "ンウエ",
+      "out": "ヌウェ"
+    },
+    {
+      "match": "ンウオ",
+      "out": "ヌウォ"
+    },
+    {
+      "match": "([スズトドフブプムルヴツュ])ウア",
+      "out": "\\1ワ"
+    },
+    {
+      "match": "([スズトドフブプムルヴツュ])ウウ",
+      "out": "\\1"
+    },
+    {
+      "match": "([スズトドフブプムルヴツュ])ウエ",
+      "out": "\\1ウェ"
+    },
+    {
+      "match": "([スズトドフブプムルヴツュ])ウオ",
+      "out": "\\1ウォ"
+    },
+    {
+      "match": "シュア",
+      "out": "シャ"
+    },
+    {
+      "match": "シュイ",
+      "out": "シ"
+    },
+    {
+      "match": "シュエ",
+      "out": "シェ"
+    },
+    {
+      "match": "シュオ",
+      "out": "ショ"
+    },
+    {
+      "match": "シュウ(?![ァィゥェォ])",
+      "out": "シュ"
+    },
+    {
+      "match": "ジュア",
+      "out": "ジャ"
+    },
+    {
+      "match": "ジュイ",
+      "out": "ジ"
+    },
+    {
+      "match": "ジュエ",
+      "out": "ジェ"
+    },
+    {
+      "match": "ジュオ",
+      "out": "ジョ"
+    },
+    {
+      "match": "ジュウ(?![ァィゥェォ])",
+      "out": "ジュ"
+    },
+    {
+      "match": "チュア",
+      "out": "チャ"
+    },
+    {
+      "match": "チュイ",
+      "out": "チ"
+    },
+    {
+      "match": "チュエ",
+      "out": "チェ"
+    },
+    {
+      "match": "チュオ",
+      "out": "チョ"
+    },
+    {
+      "match": "チュウ(?![ァィゥェォ])",
+      "out": "チュ"
+    },
+    {
+      "match": "クア",
+      "out": "カ"
+    },
+    {
+      "match": "クイ",
+      "out": "キ"
+    },
+    {
+      "match": "クエ",
+      "out": "ケ"
+    },
+    {
+      "match": "クオ",
+      "out": "コ"
+    },
+    {
+      "match": "クウ(?![ァィゥェォ])",
+      "out": "ク"
+    },
+    {
+      "match": "グア",
+      "out": "ガ"
+    },
+    {
+      "match": "グイ",
+      "out": "ギ"
+    },
+    {
+      "match": "グエ",
+      "out": "ゲ"
+    },
+    {
+      "match": "グオ",
+      "out": "ゴ"
+    },
+    {
+      "match": "グウ(?![ァィゥェォ])",
+      "out": "グ"
+    },
+    {
+      "match": "スア",
+      "out": "サ"
+    },
+    {
+      "match": "スイ",
+      "out": "シ"
+    },
+    {
+      "match": "スエ",
+      "out": "セ"
+    },
+    {
+      "match": "スオ",
+      "out": "ソ"
+    },
+    {
+      "match": "スウ(?![ァィゥェォ])",
+      "out": "ス"
+    },
+    {
+      "match": "ズア",
+      "out": "ザ"
+    },
+    {
+      "match": "ズイ",
+      "out": "ジ"
+    },
+    {
+      "match": "ズエ",
+      "out": "ゼ"
+    },
+    {
+      "match": "ズオ",
+      "out": "ゾ"
+    },
+    {
+      "match": "ズウ(?![ァィゥェォ])",
+      "out": "ズ"
+    },
+    {
+      "match": "トア",
+      "out": "タ"
+    },
+    {
+      "match": "トイ",
+      "out": "ティ"
+    },
+    {
+      "match": "トウ(?![ァィゥェォ])",
+      "out": "トゥ"
+    },
+    {
+      "match": "トエ",
+      "out": "テ"
+    },
+    {
+      "match": "トオ",
+      "out": "ト"
+    },
+    {
+      "match": "ドア",
+      "out": "ダ"
+    },
+    {
+      "match": "ドイ",
+      "out": "ディ"
+    },
+    {
+      "match": "ドウ(?![ァィゥェォ])",
+      "out": "ドゥ"
+    },
+    {
+      "match": "ドエ",
+      "out": "デ"
+    },
+    {
+      "match": "ドオ",
+      "out": "ド"
+    },
+    {
+      "match": "ンア",
+      "out": "ナ"
+    },
+    {
+      "match": "ンイ",
+      "out": "ニ"
+    },
+    {
+      "match": "ンウ(?![ァィゥェォ])",
+      "out": "ヌ"
+    },
+    {
+      "match": "ンエ",
+      "out": "ネ"
+    },
+    {
+      "match": "ンオ",
+      "out": "ノ"
+    },
+    {
+      "match": "ハイ",
+      "out": "ヒ"
+    },
+    {
+      "match": "ハウ(?![ァィゥェォ])",
+      "out": "フ"
+    },
+    {
+      "match": "ハエ",
+      "out": "ヘ"
+    },
+    {
+      "match": "ハオ",
+      "out": "ホ"
+    },
+    {
+      "match": "ハア",
+      "out": "ハ"
+    },
+    {
+      "match": "フア",
+      "out": "ファ"
+    },
+    {
+      "match": "フイ",
+      "out": "フィ"
+    },
+    {
+      "match": "フエ",
+      "out": "フェ"
+    },
+    {
+      "match": "フオ",
+      "out": "フォ"
+    },
+    {
+      "match": "フウ(?![ァィゥェォ])",
+      "out": "フ"
+    },
+    {
+      "match": "ブア",
+      "out": "バ"
+    },
+    {
+      "match": "ブイ",
+      "out": "ビ"
+    },
+    {
+      "match": "ブエ",
+      "out": "ベ"
+    },
+    {
+      "match": "ブオ",
+      "out": "ボ"
+    },
+    {
+      "match": "ブウ(?![ァィゥェォ])",
+      "out": "ブ"
+    },
+    {
+      "match": "プア",
+      "out": "パ"
+    },
+    {
+      "match": "プイ",
+      "out": "ピ"
+    },
+    {
+      "match": "プエ",
+      "out": "ペ"
+    },
+    {
+      "match": "プオ",
+      "out": "ポ"
+    },
+    {
+      "match": "プウ(?![ァィゥェォ])",
+      "out": "プ"
+    },
+    {
+      "match": "ムア",
+      "out": "マ"
+    },
+    {
+      "match": "ムイ",
+      "out": "ミ"
+    },
+    {
+      "match": "ムエ",
+      "out": "メ"
+    },
+    {
+      "match": "ムオ",
+      "out": "モ"
+    },
+    {
+      "match": "ムウ(?![ァィゥェォ])",
+      "out": "ム"
+    },
+    {
+      "match": "ルア",
+      "out": "ラ"
+    },
+    {
+      "match": "ルイ",
+      "out": "リ"
+    },
+    {
+      "match": "ルエ",
+      "out": "レ"
+    },
+    {
+      "match": "ルオ",
+      "out": "ロ"
+    },
+    {
+      "match": "ルウ(?![ァィゥェォ])",
+      "out": "ル"
+    },
+    {
+      "match": "ヴア",
+      "out": "ヴァ"
+    },
+    {
+      "match": "ヴイ",
+      "out": "ヴィ"
+    },
+    {
+      "match": "ヴエ",
+      "out": "ヴェ"
+    },
+    {
+      "match": "ヴオ",
+      "out": "ヴォ"
+    },
+    {
+      "match": "ヴウ(?![ァィゥェォ])",
+      "out": "ヴ"
+    },
+    {
+      "match": "ツア",
+      "out": "ツァ"
+    },
+    {
+      "match": "ツイ",
+      "out": "ツィ"
+    },
+    {
+      "match": "ツエ",
+      "out": "ツェ"
+    },
+    {
+      "match": "ツオ",
+      "out": "ツォ"
+    },
+    {
+      "match": "ツウ(?![ァィゥェォ])",
+      "out": "ツ"
+    },
+    {
+      "match": "ウア",
+      "out": "ワ"
+    },
+    {
+      "match": "ウイ",
+      "out": "ウィ"
+    },
+    {
+      "match": "ウエ",
+      "out": "ウェ"
+    },
+    {
+      "match": "ウオ",
+      "out": "ウォ"
+    },
+    {
+      "match": "ウウ(?![ァィゥェォ])",
+      "out": "ウ"
+    },
+    {
+      "match": "イア",
+      "out": "ヤ"
+    },
+    {
+      "match": "イウ(?![ァィゥェォ])",
+      "out": "ユ"
+    },
+    {
+      "match": "イエ",
+      "out": "イェ"
+    },
+    {
+      "match": "イオ",
+      "out": "ヨ"
+    },
+    {
+      "match": "イイ",
+      "out": "イ"
+    }
+  ],
+  "targets": {
+    "ko": {
+      "comment": "Korean ㅓ is the オ of ソウル and ピンヤン. Everywhere else in the corpus the same symbol is English STRUT, Russian reduction, Hindi अ or Vietnamese â, all of which want ア.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "オ"
+        }
+      ]
+    }
+  },
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: none needed. Every glyph this table emits is ordinary katakana a Japanese reader meets in loanword spelling, including the 第2表 series (ヴ, ティ, トゥ, ウィ, クァ); nothing here has to be looked up. Two typographic notes for the sheet. (1) The divider is 中黒 U+30FB rather than the hyphen the survey's table assigns -- see `deviations`; the hyphen is the one divider katakana cannot use, because it is confusable with ー and 12% of rows put the two adjacent. (2) The output is wider than a Latin respelling: CJK floors at 5.0pt with no condensed face, and epenthesis adds morae, so a Japanese respelling of an English phrase is routinely half again as long as the English one."
+}

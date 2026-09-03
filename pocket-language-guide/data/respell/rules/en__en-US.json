@@ -70,7 +70,7 @@
       "ipa": "ts",
       "out": "dz",
       "if_inventory": "tsʰ",
-      "unless_inventory": "bʰ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
       "slot": "any",
@@ -97,21 +97,21 @@
       "ipa": "p",
       "out": "b",
       "if_inventory": "pʰ",
-      "unless_inventory": "bʰ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
       "slot": "any",
       "ipa": "t",
       "out": "d",
       "if_inventory": "tʰ",
-      "unless_inventory": "bʰ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
       "slot": "any",
       "ipa": "k",
       "out": "g",
       "if_inventory": "kʰ",
-      "unless_inventory": "bʰ"
+      "unless_inventory": "#b #d #ɡ"
     },
     {
       "slot": "any",
@@ -651,11 +651,7 @@
     },
     {
       "rule": "the plain series is written voiced wherever the target aspirates",
-      "why": "Only where the target has no voiced stop of its own for the letter to collide with. Mandarin /p/ is `b` because Mandarin contrasts /p/ with /pʰ/ and has no /b/; Hindi contrasts all four, so its /p/ stays `p`. Without the second half of that condition, `सुब्रभात` came out `soo-bruh-BʰAD` against a curated `su-pra-BHAAT`."
-    },
-    {
-      "rule": "the plain series is written voiced wherever the target aspirates",
-      "why": "Guarded on breathy voice, not on the presence of /b d ɡ/. The claim is that a language contrasting /p/ with /pʰ/ has no voiced stop for `b` to collide with, which is true of Mandarin and false of Hindi -- whose /p/ was printing `soo-bruh-BʰAD` against a curated `su-pra-BHAAT`. But Korean's `ipa` carries `b d ɡ` too, as the Revised Romanization allophones of the lenis series rather than as phonemes, so testing for them costs Korean 1.4 points to gain Hindi 0.6. A breathy stop only exists where the contrast is genuinely four-way, so `unless_inventory: bʰ` separates the two and keeps both."
+      "why": "Guarded on whether the voiced stop can start a *word*, not on whether it occurs at all. The claim is that a language contrasting /p/ with /pʰ/ has no voiced stop for `b` to collide with, which is true of Mandarin and false three ways. Hindi contrasts all four and was printing `soo-bruh-BʰAD` against a curated `su-pra-BHAAT`. Korean's `ipa` carries `b d ɡ` as the Revised Romanization allophones of the lenis series -- 0 of them word-initial in 1,519 words -- so testing for bare presence cost Korean 1.4 points. And Thai contrasts บ /b/ with ป /p/, with 41 word-initial /b/, so guarding on breathy voice instead cost Thai 0.8. `#b` asks the question the phonology actually turns on and gets all four right at once."
     }
   ]
 }

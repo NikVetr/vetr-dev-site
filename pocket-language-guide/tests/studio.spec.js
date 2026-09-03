@@ -340,3 +340,25 @@ test('changing the gloss language changes the interface language with it', async
   await expect(page.getByRole('checkbox', { name: 'Japanisch', exact: true })).toBeVisible();
   await expect(page.getByRole('checkbox', { name: 'Deutsch', exact: true })).toBeVisible();
 });
+
+// The clock band is the one control that exists only for the phone aspect ratio,
+// so the condition that shows it is load-bearing.
+test('the clock band survives a custom phone size', async ({ page }) => {
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+
+  const clock = page.locator('.panel-field', { hasText: 'Keep clear for the clock' });
+  // Not on paper.
+  await expect(clock).toBeHidden();
+
+  await page.getByRole('radio', { name: 'Phone screen' }).click();
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await expect(clock).toBeVisible();
+  await expect(page.getByRole('radio', { name: 'Android' })).toBeVisible();
+
+  // And through a custom size, which is what the flag on the geometry buys over
+  // asking which preset the numbers still match.
+  await page.locator('.panel-field', { hasText: 'Card' })
+    .getByRole('radio', { name: 'Custom' }).click();
+  await expect(clock).toBeVisible();
+});

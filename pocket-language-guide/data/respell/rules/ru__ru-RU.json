@@ -1,0 +1,1144 @@
+{
+  "source": "ru",
+  "accent": "ru-RU",
+  "version": "1",
+  "derives_from": "Prakticheskaya transkriptsiya, read off the middle column. ru.wikipedia's *Anglo-russkaya prakticheskaya transkriptsiya* (CC BY-SA) consolidates the GUGK instruction (Instruktsiya po russkoy peredache angliyskikh geograficheskikh nazvaniy, ed. Anenberg 1975) and Gilyarevskiy & Starostin's appendix table for transmitting English phonemes as three columns -- Orfografiya, Proiznosheniye v RP (IPA), Peredayotsya po-russki -- and the projection taken here is columns two to three, which is the whole of the adaptation RESPELL-SYSTEMS.md calls cheap. Where the English key has no entry for a sound, the letter comes from the GUGK per-language instruction that owns it: Palladius for Mandarin (voiced letters for the unaspirated series, -n/-ng), Kontsevich for Korean (tense = doubled, aspirated = Cx), the India instruction for Hindi (kh -> kx, bh -> bx), the Thai instruction (ph -> px), and the Romance and Germanic instructions for the front rounded vowels (yo) and the nasal vowels (an/on/en). Stress: znak udareniya, prescribed by the academic orthography rules for dictionary headwords and for texts aimed at learners of Russian -- exactly this register.",
+  "deviations": [
+    {
+      "rule": "RESPELL-SYSTEMS.md calls this a cheap adaptation because the anglo-russkaya table carries an IPA column. The re-keying has to be done TWICE, and the second time there is no IPA column to read",
+      "why": "The English table alone does not cover the corpus: ten of the sixteen targets have sounds with no row in it -- /ɕ tɕ ʈʂ ɯ ɨ ɥ ɻ ɲ ʎ ʝ ħ ʕ ɗ/ and the whole aspirated series. The letters for those come from the per-language GUGK instructions the survey mentions only in passing -- Palladius, Polivanov, Kontsevich, the India and Thailand instructions -- and every one of those is keyed on the *target's own script*: kana rows, pinyin letters, Hangul jamo, Thai consonant classes. So they fail the survey's own respelling test a second time, and this time the fix is not a column projection but a judgement per sound. That is why a Russian table is not the cheap adaptation the survey advertised, and it is the single largest source of the departures below."
+    },
+    {
+      "rule": "The primary key of every prakticheskaya transkriptsiya table is the source language's spelling",
+      "why": "This is the re-keying RESPELL-SYSTEMS.md asks for, and it is the largest single class of departure here. Everything the tables index on a letter sequence -- -ough, -ea, -igh, English `w`, English `ng`, silent letters -- is unreachable from IPA and is simply not implemented. What is implemented is the IPA column's answer. Two visible consequences: /w/ is v rather than the u the English instruction gives for the letter `w` (v is also what the Spanish, Italian, Japanese, Korean and Mandarin instructions give for the same sound: Gvatemala, va, vo), and /ng/ is n rather than ng wherever the tradition that owns the target says so."
+    },
+    {
+      "rule": "Polivanov for Japanese, Palladius for Mandarin, Kontsevich for Korean, taken as inventories and not as indexes",
+      "why": "All three are keyed on the target's own script -- kana rows, pinyin letters, Hangul jamo -- so all three fail RESPELL-SYSTEMS.md's own respelling test, and one of them (Polivanov) is famous for it: shi -> si, chi -> ti. The sound-keyed answer wins where they disagree, so /ɕ/ is shch and /tɕ/ is ch. Their *inventories* are borrowed in full, and Palladius's voiced-letter trick for the unaspirated series is kept because it preserves a contrast, guarded by unless_inventory rather than by target -- the same discriminator the Spanish table uses, and Mandarin is again the only language in the corpus with no voiced stop series."
+    },
+    {
+      "rule": "Coda /l/ is soft (l + soft sign) for fifteen of the sixteen targets, where the English instruction gives plain l",
+      "why": "Russian hard l is velarised and is the wrong sound for almost every target here: the continental instructions already write Kyoln, Vivaldi, Mishel, Marsel, hangyl, and Russian's own loanword spelling agrees (film, albom, vals, folklor). So the instruction is overruled everywhere except English itself, which keeps plain l in a targets block: English coda /l/ is the dark velarised [l] that Russian hard l already is. Measured: 107 English coda /l/ against about 1,400 in the other fifteen targets."
+    },
+    {
+      "rule": "/e/ after a consonant is e, not the eh of Polivanov and Palladius",
+      "why": "The two CJK instructions write eh after a consonant to signal that the consonant is hard; the European instructions write e (Ben, Berlin, Mishel). One rule for all sixteen targets is worth more than the hardness cue, and e is the more readable letter in the position. /ae/ keeps eh, which turns the lost cue into a gained contrast: bed -> bed, bad -> behd."
+    },
+    {
+      "rule": "The a/eh split for English /ae/ is keyed on the preceding letter (g, k, h)",
+      "why": "A spelling condition, so it does not survive the re-keying. eh everywhere: it is the closer sound for a Russian ear in every environment, and it is what informal Russian respelling of English already does."
+    },
+    {
+      "rule": "Word-initial /jo/ is yo, not the letter yo",
+      "why": "Both are attested -- York, Yemen, yogurt against Yokogama -- and yo is chosen because its diaeresis is exactly the mark RESPELL-SYSTEMS.md warns dies at 5.2pt italic muted, and because Russian print drops it routinely. The letter yo is kept only where no digraph exists, for /oe/ and /ɜ/ (Kyoln, Gyote, Byorns)."
+    },
+    {
+      "rule": "Consonant length is not written, though Russian doubles geminates freely (Allakh, Mekka)",
+      "why": "Measured rather than assumed: of the 180 /kː/ in the corpus, 127 are the Hindi G2P writing kya as /kːjaː/, which is no geminate at all. The ten consonant-plus-length units with no such artifact do double (tː dː pː bː sː zː ʃː ʒː ɡː qː), which is what gets Italian fatto and Arabic shadda; /kː/ and /cː/ stay single, so the ten genuine /kː/ (Hindi dikkat, Italian ecco, Turkish tesekkurler) lose theirs -- the smaller of the two errors."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/θ/ /ð/ (English think, this; Arabic th, dh)",
+      "out": "t, d",
+      "why": "What Gilyarevskiy & Starostin's English table gives, and what Russian print already shows: Smit, Tetcher, Agata, Rezerford. The Arabic instruction prefers s and z for the same two sounds (Usman, Zulfikar); the English key is the primary one here, so t and d win and Arabic loses the distinction from /t/ /d/."
+    },
+    {
+      "sounds": "vowel length (Japanese, Hindi, Arabic, Thai, German)",
+      "out": "not written",
+      "why": "Russian has no length contrast, so any notation is invented -- RESPELL-SYSTEMS.md says so and puts Cyrillic in the omit row. policy.length is none by choice, not by limitation: the doubling device does now reach Cyrillic, and doubling a Russian vowel would read as two syllables (leer-style hiatus) exactly as it does in Spanish. Japanese, Hindi, Arabic, Thai and German length is lost."
+    },
+    {
+      "sounds": "lexical tone (Mandarin, Thai, Vietnamese)",
+      "out": "dropped",
+      "why": "Chao letters are not Cyrillic and a reader with no key gets nothing from them. All four curated tonal sheets drop tone too. Vietnamese and Thai lose the most."
+    },
+    {
+      "sounds": "/ʔ/ /ʕ/ /ˤ/ /ˀ/ (glottal stop, ayn, pharyngealisation, Vietnamese glottalisation)",
+      "out": "dropped",
+      "why": "Russian has no letter and no sound. A dropped hamza leaves an ordinary onsetless syllable, which is what Russian's own Arabic borrowings do."
+    },
+    {
+      "sounds": "/ʈ ɖ ɳ ɽ ʂ ʐ/ and the Mandarin retroflexes",
+      "out": "t d n r sh zh",
+      "why": "Russian has no retroflex series. The dental letters are the standard Russian rendering of Devanagari and of Palladius's zh/ch/sh/r row."
+    },
+    {
+      "sounds": "/y ø œ ɯ/ (front rounded and back unrounded vowels)",
+      "out": "yu, yo, yo, y",
+      "why": "The Germanic and Romance instructions' own answer -- Myunkhen, Tsyurikh, Kyoln, Gyote -- extended to the back unrounded vowel, which Turkish and Korean already write with the Russian hard y (Kyzylyrmak, hangyl). Japanese /ɯ/ is u instead, per Polivanov, and that is the one place a targets block was cheaper than a typological guard."
+    },
+    {
+      "sounds": "/ɰ/ (Korean 의)",
+      "out": "dropped",
+      "why": "Kontsevich writes yy word-initially and i elsewhere. Dropping the glide gives the second of those two everywhere, which reads; yy for a two-letter vowel a Russian would try to pronounce does not."
+    },
+    {
+      "sounds": "/ə/ (schwa)",
+      "out": "e after a consonant, a otherwise; a throughout for Hindi",
+      "why": "The tradition indexes schwa on the letter it was spelled with, which the re-keying loses. Unstressed Russian a is itself [ə], so a is the honest default; e is kept after a consonant because it is what German and French final -e want (danke, le), and Hindi -- whose schwa is the inherent vowel of every consonant letter -- takes a everywhere, guarded on /ʋ/ as in the Spanish table."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "acute",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 3,
+    "locale": "ru"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ч",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "чж",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ц",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "чх"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ц",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "цх"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "чч"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "цз",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ч"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ч"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "цз",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ц"
+    },
+    {
+      "slot": "any",
+      "ipa": "ch",
+      "out": "ч"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "п",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "т",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "к",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "кк"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "тт"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "пп"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "сс"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "тт"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "дд"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "пп"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "бб"
+    },
+    {
+      "slot": "any",
+      "ipa": "sː",
+      "out": "сс"
+    },
+    {
+      "slot": "any",
+      "ipa": "zː",
+      "out": "зз"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃː",
+      "out": "шш"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒː",
+      "out": "жж"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡː",
+      "out": "гг"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "кк"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "б",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "д",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "г",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "п"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "б"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "т"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "т"
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "д"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "д"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "д"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "д"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "к"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "к"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "г"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "г"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "к"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "г",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "дж"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ч"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "т"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "ф"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "ф"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "в"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "в"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "с"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "з"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "ш"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "ш"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "щ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ж"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ж"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ж"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ж"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "х"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "х"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "х"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "х"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "м"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "н",
+      "if_nucleus": "i iː ɪ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "нь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "н",
+      "before_onset": "k ɡ x q ɣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "н",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "нг"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "нь",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "н"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "н"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "н"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "л",
+      "if_nucleus": "i iː ɪ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ль"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "ль"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "л"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "л"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "л"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "",
+      "after_out": "ж ш ч щ ц цз ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "й",
+      "after_out": "а е ё и о у ы э ю я"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "ь"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥœ",
+      "out": "юэ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "ю"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "ю",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "у",
+      "after_out": "б в г д ж з й к л м н п р с т ф х ц ч ш щ а е ё и о у ы э ю я ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "в"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "ан"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "м",
+      "before_onset": "p b m"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "н"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "ян",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "ан"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "ен"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "ин"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "он"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "ун"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "э"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "а",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "е",
+      "after_out": "б в г д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "е",
+      "after_out": "ь б в г д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "э"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "е",
+      "after_out": "ь б в г д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "э"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "ё",
+      "after_out": "ь б в г д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "э"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "ё",
+      "after_out": "ь б в г д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "э"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "ё",
+      "after_out": "ь б в г д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "э"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "й",
+      "after_out": "а е ё и о у ы э ю я"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "и"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "и"
+    },
+    {
+      "slot": "any",
+      "ipa": "ī",
+      "out": "и"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "о"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "о"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "о"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "ю",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "у"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "ю",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "у"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "ю"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "ю",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "ы"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "э"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "ы",
+      "after_out": "ц цз с"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "и"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "е",
+      "before_onset": "ɹ r ɾ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "ер"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "ер"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": "",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": "х"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "^ья",
+      "out": "я"
+    },
+    {
+      "match": "^ье",
+      "out": "е"
+    },
+    {
+      "match": "^ьё",
+      "out": "ё"
+    },
+    {
+      "match": "^ьи",
+      "out": "йи"
+    },
+    {
+      "match": "^ью",
+      "out": "ю"
+    },
+    {
+      "match": "^ьу",
+      "out": "ю"
+    },
+    {
+      "match": "^ьо",
+      "out": "йо"
+    },
+    {
+      "match": "^ьэ",
+      "out": "э"
+    },
+    {
+      "match": "^ь",
+      "out": "й"
+    },
+    {
+      "match": "нг([кгх])",
+      "out": "н\\1"
+    },
+    {
+      "match": "([мн])[мн]",
+      "out": "\\1"
+    },
+    {
+      "match": "рр",
+      "out": "р"
+    },
+    {
+      "match": "щю",
+      "out": "сю"
+    },
+    {
+      "match": "щя",
+      "out": "ся"
+    },
+    {
+      "match": "([жшчщ])ы",
+      "out": "\\1и"
+    }
+  ],
+  "targets": {
+    "ja": {
+      "comment": "Polivanov's u for /ɯ/: Japanese /u/ is a compressed back vowel and every Russian rendering writes u (sushi, Fukuoka, desu). The hard y the other four /ɯ/ languages want would be unreadable here.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɯ",
+          "out": "ю",
+          "after_out": "ь"
+        },
+        {
+          "slot": "any",
+          "ipa": "ɯ",
+          "out": "у"
+        }
+      ]
+    },
+    "ko": {
+      "comment": "Kontsevich's o for 어 /ʌ/ (Seul, Choson, Pusan), and n for a final ㅇ (Pusan, Inchkhon) where every other target wants ng. Elsewhere in the corpus /ʌ/ is English STRUT or the Hindi schwa, both of which want a.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "о"
+        },
+        {
+          "slot": "any",
+          "ipa": "ŋ",
+          "out": "н"
+        }
+      ]
+    },
+    "en": {
+      "comment": "Two English-only splits that no inventory predicate can see, because both are about morphology rather than sound. Coda /l/ is l, not the soft l the other fifteen targets take: English coda /l/ is the dark velarised [l] that Russian hard l actually is, and l is also what this table's own primary key -- the GUGK English instruction -- prescribes (Milton, futbol), so this is the one language where the soft-coda deviation does not apply. Coda /ts/ is ts, not the affricate ts: in English it is the plural or third-person suffix across a morpheme boundary (nuts, cats), where in German it is the phoneme (Platz, jetzt) and takes ts. Measured: 12 English coda /ts/ against 23 German.",
+      "phonemes": [
+        {
+          "slot": "coda",
+          "ipa": "l",
+          "out": "л"
+        },
+        {
+          "slot": "coda",
+          "ipa": "ts",
+          "out": "тс"
+        }
+      ]
+    },
+    "de": {
+      "comment": "espeak writes the unstressed German -er suffix as /ɜ/, which is the reduced [ɐ] the tradition renders er (Vasser, Vider). The same symbol in English is the NURSE vowel, which wants yo (Byorns).",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɜ",
+          "out": "ер"
+        }
+      ]
+    },
+    "pt": {
+      "comment": "espeak writes the Brazilian reduced final -e as /y/, a plain [i] (de -> /dʒy/), not the front rounded vowel the same symbol is in German, French and Turkish.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "и"
+        },
+        {
+          "slot": "any",
+          "ipa": "æ",
+          "out": "я",
+          "after_out": "ь"
+        },
+        {
+          "slot": "any",
+          "ipa": "æ",
+          "out": "а"
+        },
+        {
+          "slot": "any",
+          "ipa": "ŋ",
+          "out": "н"
+        }
+      ]
+    },
+    "vi": {
+      "comment": "espeak writes Vietnamese ư as /y/, which is the back unrounded vowel Russian writes with a hard y (nuoc -> nyok), not a front rounded one.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "ю",
+          "after_out": "ь"
+        },
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "ы"
+        },
+        {
+          "slot": "any",
+          "ipa": "ə",
+          "out": "я",
+          "after_out": "ь"
+        },
+        {
+          "slot": "any",
+          "ipa": "əː",
+          "out": "о"
+        },
+        {
+          "slot": "any",
+          "ipa": "ə",
+          "out": "о",
+          "after_nucleus": "u uː y yː"
+        },
+        {
+          "slot": "any",
+          "ipa": "ə",
+          "out": "а"
+        }
+      ]
+    }
+  },
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: none needed. Every letter here is ordinary Russian and the only convention to learn is the acute, which the orthography rules already prescribe for this register. The sanctioned fallback if the acute is unavailable for technical reasons is policy.stress = caps, which Russian lexicography documents in exactly those terms. Both devices are live: acute puts the znak udareniya on the nucleus and caps gives mer-SI. One nit worth knowing: the acute stacks on yo on 115 rows, and yo is inherently stressed in Russian, so the mark there is redundant."
+}

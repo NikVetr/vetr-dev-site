@@ -5,6 +5,7 @@
 //   node scripts/respell_check.mjs en --score      agreement against the curated sheets
 //   node scripts/respell_check.mjs en de --diff    only the rows a curated sheet disagrees with
 //   node scripts/respell_check.mjs es --gaps      every IPA symbol still reaching the page
+//   node scripts/respell_check.mjs es --units     phonemes spelt by decomposition
 //   node scripts/respell_check.mjs --charset      rewrite data/respell/charset.json
 //   node scripts/respell_check.mjs --charset --check   fail if that file is stale
 //
@@ -20,7 +21,7 @@
 // script says so rather than printing a meaningless zero.
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { loadCorpus, loadLanguage, loadRespellOverrides, loadRespellRules } from '../core/pack.js';
-import { createRespeller } from '../core/respell.js';
+import { createRespeller, phonemesOf } from '../core/respell.js';
 
 const loadText = (/** @type {string} */ rel) => readFile(rel, 'utf8');
 const args = process.argv.slice(2);
@@ -162,7 +163,7 @@ for (const target of targets) {
       gaps.set(ch, g);
     }
   }
-  if (flags.has('--gaps')) continue;
+  if (flags.has('--gaps') || flags.has('--units')) continue;
   const judged = rows.filter((r) => r.want);
   const exact = judged.filter((r) => r.out === r.want).length;
   const near = judged.filter((r) => loose(r.out) === loose(r.want)).length;
@@ -184,6 +185,47 @@ for (const target of targets) {
   for (const r of show) {
     console.log(`  ${pad(r.text, 22)}${pad(r.ipa, 26)}${pad(r.out, 24)}${r.want && r.want !== r.out ? `\x1b[31mwant ${r.want}\x1b[0m` : ''}`);
   }
+}
+
+if (flags.has('--units')) {
+  // **The review list `--gaps` cannot produce.** `spellSlot` walks a slot's
+  // *string*, so a phoneme with no rule of its own is spelt one codepoint at a
+  // time -- and if the table maps the bare diacritic, the result is plausible
+  // letters rather than raw IPA. `--gaps` then reports "none" while Hindi /ɟʰ/
+  // prints as `ji` plus whatever `ʰ` gives; the Japanese table had exactly that,
+  // spelling /ɟʰ/ as ジュハ on 77 rows.
+  //
+  // Decomposition is not itself wrong -- dropping Russian palatalisation and
+  // approximating the Arabic emphatics are documented choices, and both show up
+  // here. So this is a list to read, not a bar to clear: every entry is a phoneme
+  // whose spelling nobody decided directly.
+  const keys = new Set([
+    ...(table.rules.phonemes ?? []).map((/** @type {any} */ r) => r.ipa),
+    ...Object.values(table.rules.targets ?? {}).flatMap(
+      (/** @type {any} */ t) => (t.phonemes ?? []).map((/** @type {any} */ r) => r.ipa),
+    ),
+  ]);
+  /** @type {Map<string, {count:number, langs:Set<string>}>} */ const units = new Map();
+  for (const target of targets) {
+    for (const row of await rowsFor(table, target)) {
+      for (const unit of phonemesOf(row.ipa.replace(/\s+/g, ''))) {
+        if (unit.length < 2 || keys.has(unit)) continue;
+        const held = units.get(unit) ?? { count: 0, langs: new Set() };
+        held.count += 1;
+        held.langs.add(target);
+        units.set(unit, held);
+      }
+    }
+  }
+  const ranked = [...units].sort((a, b) => b[1].count - a[1].count);
+  console.log(`\n\x1b[1m${ranked.length} phonemes spelt by decomposition\x1b[0m rather than by a `
+    + `rule of their own, against ${keys.size} rule keys. Read them: a diacritic mapped to `
+    + `nothing is a decision, and a diacritic mapped to a letter is usually a bug.`);
+  for (const [unit, held] of ranked) {
+    console.log(`  \x1b[1m${unit}\x1b[0m  ${String(held.count).padStart(5)}x   ${[...held.langs].join(' ')}`);
+  }
+  if (!ranked.length) console.log('  none -- every phoneme the corpus produces has its own rule.');
+  process.exit(0);
 }
 
 if (flags.has('--gaps')) {

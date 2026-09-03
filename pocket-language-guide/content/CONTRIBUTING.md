@@ -82,7 +82,9 @@ question a reader will eventually ask.
 | `stress_min_syllables` | integer | a monosyllable that shouts has stopped saying anything |
 | `length` | `none` `double` `colon` | `double` doubles a Latin vowel; Turkish takes the colon, since a doubled vowel there reads as two syllables. A non-Latin script writes length in the `phonemes` table instead, by giving `oː` its own rule |
 | `tone` | `keep` `drop` | `zh-Hans`, `th` and `vi` carry Chao tone letters, because tone is lexical there |
-| `max_onset` | 1, 2, 3 | onset maximisation is a claim about the *reader*. The TDK prescribes `prog-ram` over `pro-gram` for exactly the Western vocabulary this corpus is full of |
+| `max_onset` | 1, 2, 3 | onset maximisation is a claim about the *reader*. The TDK prescribes `prog-ram` over `pro-gram` for exactly the Western vocabulary this corpus is full of. Counted in phonemes, so an affricate or an aspirated stop is one consonant |
+| `reader_onsets` | IPA clusters | which multi-phoneme onsets the *reader's* orthography permits, intersected with the target's. See below |
+| `fixups` | `first` `all` | whether every matching `syllable_fixups` entry fires or only the first. `first` is right where they are alternative repairs, `all` where they are a transliteration chart |
 | `locale` | BCP-47 | so uppercasing Turkish `i` gives `İ` |
 
 **Whether to mark stress at all is a fact about the target, and it is already in the
@@ -101,6 +103,25 @@ than about the symbol in hand. That is what lets one table spell Spanish /p t k/
 `p t k` and Mandarin's as `b d g`: a language that contrasts /p/ with /pʰ/ has no
 voiced stop for `b` to collide with. Prefer them to a `targets` block, which is the
 escape hatch for the few rules that cannot be put typologically.
+
+**`#` marks a word edge, at both ends, and the leading one is usually the
+interesting question.** `ŋ#` asks whether the target's /ŋ/ can end a word; `#b`
+asks whether its /b/ can start one, which is the difference between a phoneme and
+an allophone. Korean's `ipa` carries `b d ɡ` from Revised Romanization but never
+word-initially, because they are the intervocalic realisations of the lenis
+series, while Thai has 41 word-initial /b/ where it contrasts with /p/. Testing
+for bare presence gets one of those wrong whichever way it goes.
+
+**`reader_onsets` is the other side of the same coin.** `onsetClusters` reads the
+syllable-opening clusters off the *target's* own lexicon, which answers "can this
+language open a word this way" and not "can my reader read it" -- so a Spanish
+reader was shown `an-der-stánd` and `hój-shtul`, onsets no Spanish speaker can
+begin and will repair unpredictably. Dropping to `max_onset: 1` fixes those and
+costs the C+liquid onsets Spanish *does* admit, giving `práb-lem` for `prá-blem`.
+Naming the reader's own clusters gets both, and the list is short: the RAE's
+*división de palabras* has thirteen groups. It is written in **IPA**, because it is
+intersected with the target's table, and it therefore carries both rhotics --
+German writes `pɾ` where Russian writes `pr`.
 
 Then run it over real data:
 

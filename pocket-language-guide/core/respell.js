@@ -50,8 +50,16 @@ const VOWELS = new Set([
   ...'ɚɝ',
 ]);
 const GLIDES = new Set('jwɥ');
-/** Length, nasalisation and the non-syllabic mark all belong to their vowel. */
-const VOWEL_TAIL = new Set(['ː', 'ˑ', '̃', '̯']);
+/**
+ * Length, nasalisation, the non-syllabic mark and tone all belong to their vowel.
+ *
+ * Tone is here because a Chao letter is otherwise an unknown consonant, and lands
+ * in the coda: `ni˧˩˧` parsed as a three-consonant coda, which made every tonal
+ * language look as though it had coda clusters. That mattered once `codaConsonants`
+ * started asking. Binding them also means `policy.tone: 'keep'` still works, since
+ * a rule matching `˧˩˧` matches it inside the nucleus string just as well.
+ */
+const VOWEL_TAIL = new Set(['ː', 'ˑ', '̃', '̯', ...'˥˦˧˨˩']);
 
 /**
  * The affricates, which the IPA writes with two base letters and this corpus
@@ -81,13 +89,19 @@ const CONSONANT_TAIL = new Set([
  * @param {string} ipa
  * @returns {string[]}
  */
-function phonemesOf(ipa) {
+export function phonemesOf(ipa) {
   /** @type {string[]} */ const out = [];
   for (let i = 0; i < ipa.length;) {
     const pair = AFFRICATES.find((a) => ipa.startsWith(a, i));
     let unit = pair ?? ipa[i];
     i += unit.length;
-    while (i < ipa.length && CONSONANT_TAIL.has(ipa[i])) { unit += ipa[i]; i += 1; }
+    // A modifier binds to a consonant, not to a tone letter or a length mark:
+    // Vietnamese writes a glottalised tone `˩ˀ`, and gluing the two together left
+    // a unit that `VOWEL_TAIL` no longer recognised, so the tone became a coda
+    // consonant again -- the exact thing binding it was meant to stop.
+    if (!VOWEL_TAIL.has(unit)) {
+      while (i < ipa.length && CONSONANT_TAIL.has(ipa[i])) { unit += ipa[i]; i += 1; }
+    }
     out.push(unit);
   }
   return out;
@@ -115,7 +129,13 @@ const STRESS = { 'ˈ': 1, 'ˌ': 2 };
  * absent, being a glide and a soft sign rather than vowels.
  */
 const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõywаеёиоуыэюя]+/iu;
-const ACCENTED = /[áéíóúàèìòù]/i;
+/**
+ * Letters that already carry the mark, so a second one would produce a character
+ * no orthography has. `ё` is here because it is *inherently* stressed in Russian --
+ * an unstressed `ё` does not exist -- so the acute on it is redundant, and at 4.4pt
+ * it lands directly on top of the diaeresis.
+ */
+const ACCENTED = /[áéíóúàèìòùё]/i;
 
 /**
  * Put an acute on one end of the syllable's vowel run.
@@ -125,10 +145,22 @@ const ACCENTED = /[áéíóúàèìòù]/i;
  * `géisha` -- so the same syllable shape takes the mark in opposite places
  * depending on where the nucleus head is. Marking the last letter throughout gave
  * `he-loú` for `hello`, which reads as three syllables ending in a stressed /u/.
- * @param {string} text @param {boolean} head  accent the first letter, not the last
+ *
+ * `VOWEL_LETTERS` is generous on purpose, because `y` and `w` spell a nucleus in
+ * several of these orthographies -- so a vowel letter in the run can belong to the
+ * *onset* instead, and marking a falling diphthong then landed on it:
+ * `est-rang-ýei-rus`, where `y` is the consonant /ʝ/, and `pa-gúei`, where the `u`
+ * is the silent half of Spanish's `gue`. Hence `from`: the emitted text is onset
+ * then nucleus then coda, so the nucleus begins at a known offset and the search
+ * starts there. Guessing from the letter cannot work -- the English table spells
+ * /aɪ/ `ye`, where the `y` *is* the head.
+ * @param {string} text
+ * @param {boolean} head  accent the first letter of the run, not the last
+ * @param {number} from   where the nucleus begins
  */
-function acute(text, head) {
-  return text.replace(VOWEL_LETTERS, (run) => {
+function acute(text, head, from) {
+  const onset = text.slice(0, from);
+  return onset + text.slice(from).replace(VOWEL_LETTERS, (run) => {
     const i = head ? 0 : run.length - 1;
     // Already accented, either by the phoneme table or by the orthography itself:
     // a second mark would produce a character no orthography has.
@@ -144,11 +176,12 @@ function acute(text, head) {
  * Portuguese and Russian, where capitals would read as an abbreviation; `prime`
  * is Bhargava's notation for Hindi, whose script is caseless and has no accent.
  *
- * @type {Record<string, (text: string, at: {locale: string, falling: boolean}) => string>}
+ * @type {Record<string, (text: string,
+ *   at: {locale: string, falling: boolean, nucleusAt: number}) => string>}
  */
 const STRESS_DEVICE = {
   caps: (text, at) => text.toLocaleUpperCase(at.locale),
-  acute: (text, at) => acute(text, at.falling),
+  acute: (text, at) => acute(text, at.falling, at.nucleusAt),
   prime: (text) => `${text}\u02b9`,
 };
 
@@ -192,6 +225,16 @@ export function onsetClusters(words) {
     // cluster and /ts/ is not mistaken for /t/ plus /s/.
     for (const k of [2, 3]) if (run.length >= k) out.add(run.slice(0, k).join(''));
   }
+  // **No count threshold here, and that is measured rather than assumed.**
+  // `phonemeInventory` has one, so the symmetry is tempting: four Arabic rows that
+  // lost their short vowels to the G2P begin `lls` and `mkbr`, which teaches the
+  // engine that Arabic opens words with /lm/ and /lb/. But requiring three
+  // occurrences costs the Spanish sheet four points of agreement -- 62.1% to 58.1%
+  // -- by dropping genuine clusters that happen to be word-initial only twice, and
+  // it does not rescue the Arabic rows, which have no vowels to syllabify either
+  // way. A cluster is a claim about what is *possible*, where a phoneme inventory
+  // is a claim about what is *usual*, so one sighting is enough for the first and
+  // not for the second.
   return out;
 }
 
@@ -256,6 +299,24 @@ export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
     for (let j = spans[s][1] + 1; j < spans[s + 1][0]; j += 1) inter.push(j);
     const at = (/** @type {number} */ k) => inter.slice(-k).map((j) => fold(ph[j])).join('');
     if (!inter.length) cuts.push(spans[s + 1][0]);
+    // One consonant between two vowels opens the next syllable. That is right for
+    // `ca-sa` and wrong wherever a syllable is also a morpheme -- Mandarin 翻译
+    // comes out `fa-ni` rather than `fan-i`, and for a reader whose script spells a
+    // consonant with its vowel that changes the characters, not just a hyphen.
+    //
+    // **Deriving the exception was tried and measured, and does not work.** The
+    // proposal was the mirror of the cluster rule -- whatever can close a word can
+    // close a syllable -- gated on the language having no coda clusters, on the
+    // theory that a CV(C) language's final consonant is lexical. Forced on it takes
+    // Mandarin from 63.5% to 66.4% agreement and Spanish from 62.1% to **20.9%**,
+    // so the gate is load-bearing; but the coda-cluster rate does not select the
+    // right languages (Thai 65%, Vietnamese 66% and Mandarin 25% are the *highest*
+    // here, Japanese 0.02% and Korean 0.03% the lowest -- it measures how the G2P
+    // transcribed the language, not its phonotactics). Gating on the writing system
+    // instead selects `zh-Hans ja ko th`, and Korean then *loses* 0.4 points. Only
+    // Mandarin wants it, so there is no typological fact to derive: it needs a
+    // per-target claim the engine is not given, and one language does not earn a
+    // new concept.
     else if (inter.length === 1) cuts.push(inter[0]);
     else if (maxOnset >= 3 && inter.length > 2 && clusters.has(at(3))) cuts.push(inter[inter.length - 3]);
     else if (maxOnset >= 2 && clusters.has(at(2))) cuts.push(inter[inter.length - 2]);
@@ -298,7 +359,14 @@ export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
 export function phonemeInventory(words, minCount = 3) {
   /** @type {Map<string, number>} */ const seen = new Map();
   for (const syllables of words) {
-    const t = `${syllables.map((s) => s.onset + s.nucleus + s.coda).join('')}#`;
+    // `#` at both ends, so a rule can ask *where* a phoneme occurs and not only
+    // whether it exists. That distinction is the difference between a phoneme and
+    // an allophone: Korean's `ipa` carries `b d ɡ` from Revised Romanization, but
+    // never word-initially, because they are the intervocalic realisations of the
+    // lenis series -- while Thai has 41 word-initial `b` and Hindi 123, where they
+    // are contrastive. `unless_inventory: "#b #d #ɡ"` separates the two, which no
+    // test for bare presence can.
+    const t = `#${syllables.map((s) => s.onset + s.nucleus + s.coda).join('')}#`;
     for (let i = 0; i < t.length; i += 1) {
       for (const k of [1, 2, 3]) {
         if (i + k > t.length) continue;
@@ -395,12 +463,28 @@ function applySplits(syllables, splits) {
  */
 export function createRespeller({ rules, targetIpa, target = '' }) {
   const maxOnset = rules.policy?.max_onset ?? 3;
+  /**
+   * A cluster has to be legal for *both* sides. The table is read off the target,
+   * which answers "can this language open a word this way" and not "can my reader
+   * read it" -- so a Spanish reader was shown `an-der-stánd` and `hój-shtul`,
+   * onsets no Spanish speaker can begin and will repair unpredictably. Dropping to
+   * one consonant fixes those and costs the 333 C+liquid onsets Spanish *does*
+   * admit, giving `práb-lem` for `prá-blem`. Naming the reader's own clusters is
+   * what gets both: the RAE's *división de palabras* list is thirteen groups long.
+   *
+   * The list is IPA, not output letters, because it is intersected with the
+   * target's table -- and so it carries both rhotics, since German writes `pɾ`
+   * where Russian writes `pr`.
+   */
+  const reader = (rules.policy?.reader_onsets ?? '').split(' ').filter(Boolean);
   const clusters = onsetClusters(targetIpa.flatMap((s) => s.split(/\s+/)).filter(Boolean));
+  if (reader.length) for (const c of clusters) if (!reader.includes(c)) clusters.delete(c);
   const words = targetIpa
     .flatMap((s) => s.split(/\s+/))
     .filter(Boolean)
     .map((w) => syllabify(w, clusters, maxOnset));
   const inventory = phonemeInventory(words);
+
 
   // A handful of rules cannot be expressed against the target's inventory and have
   // to name it: Mandarin needs `ah` for /a/ where every other language wants the
@@ -447,6 +531,10 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
         prevNucleus: syls[i - 1]?.nucleus ?? '',
       };
       let text = spellSlot(s.onset, 'onset', phonemes, ctx);
+      // Where the nucleus starts, which is what a diacritic device needs: `y` and
+      // `w` are vowel letters, so an onset can put one into the run the mark would
+      // otherwise land on.
+      const nucleusAt = text.length;
       text += spellSlot(s.nucleus, 'nucleus', phonemes, ctx, text);
       text += spellSlot(s.coda, 'coda', phonemes, ctx, text);
       // **A syllable is composed, not concatenated.** For every alphabetic reader
@@ -497,7 +585,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // `syllabify` absorbs, and its head is therefore the first element.
       const tail = [...s.nucleus].filter((c) => !VOWEL_TAIL.has(c)).pop() ?? '';
       const falling = s.nucleus.length > 1 && (GLIDES.has(tail) || 'ɪʊ'.includes(tail));
-      return stressDevice(text, { locale: policy.locale, falling });
+      return stressDevice(text, { locale: policy.locale, falling, nucleusAt });
     }).join(policy.syllable_separator);
   };
 

@@ -359,6 +359,18 @@ def main():
                           f"borrows, or say it was read off the corpus")
         elif not table.get("deviations"):
             errors.append(f"respell/rules/{where}: derives_from with no deviations")
+        # `reader_onsets` is IPA clusters, so it must not contain output letters --
+        # it is intersected with the table read off the target, which is IPA.
+        max_onset = (table.get("policy") or {}).get("max_onset", 3)
+        for cluster in (table.get("policy") or {}).get("reader_onsets", "").split():
+            if len(cluster) < 2:
+                errors.append(f"respell/rules/{where}: reader_onsets has {cluster!r}, "
+                              f"which is one phoneme rather than a cluster")
+            # Counted in characters, which over-counts a modified consonant -- so
+            # this catches only the clear case, an entry no `max_onset` can consult.
+            elif len(cluster) > max_onset + 2:
+                errors.append(f"respell/rules/{where}: reader_onsets has {cluster!r}, "
+                              f"which is longer than max_onset={max_onset} can admit")
         for field, allowed in POLICY_VALUES.items():
             value = (table.get("policy") or {}).get(field)
             if value is not None and value not in allowed:
