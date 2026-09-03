@@ -336,7 +336,8 @@ def main():
     SLOTS = {"onset", "nucleus", "coda", "any"}
     POLICY_VALUES = {"stress": {"caps", "acute", "prime", "none"},
                      "length": {"none", "double", "colon"},
-                     "tone": {"keep", "drop"}}
+                     "tone": {"keep", "drop"},
+                     "fixups": {"first", "all"}}
     listed = set(json.loads((DATA / "respell/rules/index.json").read_text(encoding="utf-8")))
     for path in sorted((DATA / "respell/rules").glob("*.json")):
         if path.name == "index.json":

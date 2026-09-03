@@ -185,8 +185,33 @@ def corpus_chars(langs):
     return chars
 
 
+def respell_chars(langs):
+    """Every character the respelling rule tables can put on a page, per reader.
+
+    `corpus_chars` is the right rule for every other field and the wrong one for
+    this column: a generated respelling is computed at load time from the target's
+    `ipa` column and a rule table, so it appears in no CSV. Korean is the sharp
+    case -- the Hangul subset below is the ~2,350 KS X 1001 syllables, and the
+    Korean table asks for 39 outside them, which in the PDF is a box. The English
+    table needs it too: capitalising a syllable whose IPA had no rule produces
+    Latin Extended-C letters like U+2C6F, which no range here covers.
+
+    Regenerate `charset.json` with `npm run respell:charset`; `npm run check`
+    fails if it is stale, and it is built from the *published* tables only.
+    """
+    with open(ROOT / "data/respell/charset.json", encoding="utf-8") as fh:
+        by_source = json.load(fh)
+    chars = set()
+    for code in langs:
+        chars.update(ord(c) for c in by_source.get(code, ""))
+    return chars
+
+
 def coverage(stack):
     chars = expand(LATIN_RANGES) | corpus_chars(STACK_LANGS[stack])
+    # The respelling column is set in the *reader's* script, so a stack carries the
+    # tables of the languages it draws -- the same scoping `corpus_chars` uses.
+    chars |= respell_chars(STACK_LANGS[stack])
     if stack.startswith("latin"):
         chars |= expand(LATIN_EXTRA_RANGES)
     if stack in ("latin-cond", "latin-serif", "latin-cond-serif"):

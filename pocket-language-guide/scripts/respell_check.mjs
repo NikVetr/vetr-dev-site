@@ -133,6 +133,13 @@ const targets = only ? [only] : ready.filter((l) => l !== source);
  * sheet to score it against, and every reader but English is in that position.
  */
 const IPA_ONLY = /[\u0250-\u02af\u02b0-\u02ff\u0300-\u036f\u1d00-\u1d7f]/u;
+/**
+ * Except the two marks a stress device emits on purpose. Both fall inside the
+ * ranges above -- the combining acute is in the same block as the IPA
+ * diacritics -- so without this the Russian table's 13,035 stress marks report as
+ * the largest gap in the corpus.
+ */
+const DEVICE_MARKS = new Set(['\u0301', '\u02b9']);
 
 /** Ignore what a reviewer would not call a disagreement. */
 const loose = (/** @type {string} */ s) => s.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
@@ -148,7 +155,7 @@ for (const target of targets) {
   const rows = await rowsFor(table, target);
   for (const r of rows) {
     for (const ch of r.out) {
-      if (!IPA_ONLY.test(ch)) continue;
+      if (!IPA_ONLY.test(ch) || DEVICE_MARKS.has(ch)) continue;
       const g = gaps.get(ch) ?? { count: 0, examples: new Set() };
       g.count += 1;
       if (g.examples.size < 3) g.examples.add(`${target} ${r.ipa} -> ${r.out}`);

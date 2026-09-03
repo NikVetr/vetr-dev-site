@@ -52,6 +52,46 @@ const VOWELS = new Set([
 const GLIDES = new Set('jwɥ');
 /** Length, nasalisation and the non-syllabic mark all belong to their vowel. */
 const VOWEL_TAIL = new Set(['ː', 'ˑ', '̃', '̯']);
+
+/**
+ * The affricates, which the IPA writes with two base letters and this corpus
+ * writes without a tie bar.
+ *
+ * **A phoneme is the unit, not a codepoint.** Everything downstream of
+ * `syllabify` inherits its tokenisation, so segmenting by character made /ts/ two
+ * consonants and /tɕʰ/ three: Italian *grazie* broke as `grats-ie`, and asking
+ * for a one-consonant onset tore /tɕʰ/ in half and left a bare `ʰ` to be spelt on
+ * its own. All four rule tables written so far reported it independently.
+ */
+const AFFRICATES = ['ʈʂ', 'tɕ', 'tʃ', 'ts', 'ɖʐ', 'dʑ', 'dʒ', 'dz', 'pf'];
+/**
+ * Modifier letters and diacritics that belong to the consonant they follow, the
+ * way `VOWEL_TAIL` belongs to its vowel: aspiration, palatalisation,
+ * labialisation, pharyngealisation, ejectives, the dental and apical marks, the
+ * Korean tense mark and the unreleased mark.
+ */
+const CONSONANT_TAIL = new Set([
+  ...'ʰʱʲʷˤˠˀʼ',
+  ...['\u0329', '\u032A', '\u033A', '\u0348', '\u031A', '\u0325', '\u032C', '\u0339', '\u031C'],
+]);
+
+/**
+ * Split an IPA word into phonemes: an affricate digraph, or a base character plus
+ * whatever modifiers bind to it.
+ * @param {string} ipa
+ * @returns {string[]}
+ */
+function phonemesOf(ipa) {
+  /** @type {string[]} */ const out = [];
+  for (let i = 0; i < ipa.length;) {
+    const pair = AFFRICATES.find((a) => ipa.startsWith(a, i));
+    let unit = pair ?? ipa[i];
+    i += unit.length;
+    while (i < ipa.length && CONSONANT_TAIL.has(ipa[i])) { unit += ipa[i]; i += 1; }
+    out.push(unit);
+  }
+  return out;
+}
 /**
  * Chao tone letters. Tone is lexical in Mandarin, Thai and Vietnamese, so the
  * `ipa` column carries it -- but whether a *reader* is shown it is the reading
@@ -67,8 +107,14 @@ const STRESS = { 'ˈ': 1, 'ˌ': 2 };
  * Which letters a diacritic stress mark can land on, in any of the scripts that
  * use one. Includes `y` and `w`, which spell a nucleus in several of these
  * orthographies, and the already-accented forms so a second mark is not stacked.
+ *
+ * The Cyrillic vowels are here because Russian's device *is* the acute -- знак
+ * ударения -- and without them `stress: 'acute'` was byte-identical to
+ * `stress: 'none'` for the whole language: the pattern matched nothing and the
+ * string came back untouched on all 11,788 rows. `й` and `ь` are deliberately
+ * absent, being a glide and a soft sign rather than vowels.
  */
-const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõyw]+/iu;
+const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõywаеёиоуыэюя]+/iu;
 const ACCENTED = /[áéíóúàèìòù]/i;
 
 /**
@@ -136,13 +182,15 @@ const fold = (/** @type {string} */ ph) => ALLOPHONE[ph] ?? ph;
 export function onsetClusters(words) {
   /** @type {Set<string>} */ const out = new Set();
   for (const ipa of words) {
-    let run = '';
-    for (const ch of ipa) {
-      if (ch in STRESS || VOWEL_TAIL.has(ch)) continue;
-      if (VOWELS.has(ch) || GLIDES.has(ch)) break;
-      run += fold(ch);
+    /** @type {string[]} */ const run = [];
+    for (const unit of phonemesOf(ipa)) {
+      if (unit in STRESS || VOWEL_TAIL.has(unit)) continue;
+      if (VOWELS.has(unit[0]) || GLIDES.has(unit)) break;
+      run.push(fold(unit));
     }
-    for (const k of [2, 3]) if (run.length >= k) out.add(run.slice(0, k));
+    // Two and three *phonemes*, so /tɕʰ/ is one unit rather than a three-consonant
+    // cluster and /ts/ is not mistaken for /t/ plus /s/.
+    for (const k of [2, 3]) if (run.length >= k) out.add(run.slice(0, k).join(''));
   }
   return out;
 }
@@ -164,14 +212,14 @@ export function onsetClusters(words) {
 export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
   /** @type {[string, number][]} */ const units = [];
   let pending = 0;
-  for (const ch of ipa) {
-    if (ch in STRESS) { pending = STRESS[ch]; continue; }
+  for (const unit of phonemesOf(ipa)) {
+    if (unit in STRESS) { pending = STRESS[unit]; continue; }
     // Length and nasalisation attach to the vowel they follow.
-    if (VOWEL_TAIL.has(ch)) {
-      if (units.length) units[units.length - 1][0] += ch;
+    if (VOWEL_TAIL.has(unit)) {
+      if (units.length) units[units.length - 1][0] += unit;
       continue;
     }
-    units.push([ch, pending]);
+    units.push([unit, pending]);
     pending = 0;
   }
 
@@ -377,8 +425,8 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
     }));
   const splits = only.splits ?? rules.splits ?? [];
   const policy = { stress: 'none', stress_min_syllables: 2, length: 'none', tone: 'keep',
-    syllable_separator: '-', word_separator: ' ', max_onset: 3, locale: rules.source ?? 'en',
-    ...(rules.policy ?? {}), ...(only.policy ?? {}) };
+    syllable_separator: '-', word_separator: ' ', max_onset: 3, fixups: 'first',
+    locale: rules.source ?? 'en', ...(rules.policy ?? {}), ...(only.policy ?? {}) };
   const stressDevice = STRESS_DEVICE[policy.stress];
 
   /** @param {Syllable[]} syllables */
@@ -416,19 +464,31 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // the subset, where the PDF has no system font to fall back to.
       text = text.normalize('NFC');
       for (const f of fixups) {
-        if (!holds(f, ctx, '')) continue;
+        // The syllable's own text, not `''`: a fixup's `after_out` asks what this
+        // syllable has emitted so far, and against an empty string every such
+        // condition was false, so the rule silently never fired.
+        if (!holds(f, ctx, text)) continue;
         const next = text.replace(f.re, f.out);
-        if (next !== text) { text = next; break; }
+        if (next === text) continue;
+        text = next;
+        // One fixup per syllable is the default, and it is the right one for a
+        // table whose fixups are alternative repairs. A table whose fixups are a
+        // transliteration chart needs every one of them: the kana table has to
+        // contract an onset *and* a coda in the same syllable, and worked around
+        // it with nineteen precomposed coda rules that only cover this corpus.
+        if (policy.fixups !== 'all') break;
       }
       // Length is a policy switch rather than data, because the respelling is
       // generated: a reader who does not want it simply gets the plain form. The
       // Japanese sheet already invented this convention by hand, doubling a letter
       // on 285 of its 286 long-vowel rows.
       if (/ː/.test(s.nucleus + s.coda)) {
-        if (policy.length === 'double') text = text.replace(/([aeiou]+)/, '$1$1');
+        // Against `VOWEL_LETTERS` rather than `[aeiou]`, which made both of these
+        // silent no-ops in every script but Latin.
+        if (policy.length === 'double') text = text.replace(VOWEL_LETTERS, '$&$&');
         // Turkish writes length with a colon rather than by doubling, because a
         // doubled vowel there is read as two syllables.
-        else if (policy.length === 'colon') text = text.replace(/([aeiou]+)/, '$1:');
+        else if (policy.length === 'colon') text = text.replace(VOWEL_LETTERS, '$&:');
       }
       const marked = s.stress === 1 && syls.length >= policy.stress_min_syllables;
       if (!marked || !stressDevice) return text;

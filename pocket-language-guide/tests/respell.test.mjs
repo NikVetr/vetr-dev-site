@@ -257,3 +257,39 @@ test('a rising diphthong is split whether or not stress is marked', () => {
   assert.equal(marked.respell('bjˈen'), 'bee-EN');
   assert.equal(plain.respell('bjˈen'), 'bee-en');
 });
+
+test('a phoneme is the unit, not a codepoint', () => {
+  // Everything downstream of `syllabify` inherits its tokenisation, so counting
+  // characters made /ts/ two consonants and /tɕʰ/ three. Italian *grazie* broke as
+  // `grats-ie`, because /ts/ is not something Italian can *end* a syllable with --
+  // and asking for a one-consonant onset tore /tɕʰ/ in half and left a bare `ʰ` to
+  // be spelt on its own. All four rule tables reported it independently.
+  const clusters = onsetClusters(['ɡrˈatsje', 'ˈtsa', 'ˈdʑa']);
+  assert.ok(!clusters.has('ts'), '/ts/ is one phoneme, so it is not a cluster of two');
+  const split = (/** @type {string} */ ipa) => syllabify(ipa, clusters)
+    .map((y) => `${y.onset}|${y.nucleus}|${y.coda}`).join(' ');
+  assert.equal(split('ɡrˈatsje'), 'ɡr|a| ts|je|');
+
+  // And an aspirated affricate survives a one-consonant onset limit, because it
+  // *is* one consonant.
+  assert.equal(split('ˈtɕʰi'), 'tɕʰ|i|');
+  assert.equal(syllabify('ˈtɕʰi', clusters, 1)[0].onset, 'tɕʰ');
+});
+
+test('a table can ask for every fixup, or just the first', () => {
+  // The default is one per syllable, which is right where the fixups are
+  // alternative repairs -- the English table's `ow` rules must not compose. A
+  // transliteration chart is the other case: the kana table contracts an onset and
+  // a coda in the same syllable, and could only reach it by precomposing nineteen
+  // coda rules by hand.
+  const chart = {
+    ...rules,
+    syllable_fixups: [{ match: 'k', out: 'K' }, { match: 'a', out: 'A' }],
+  };
+  const first = createRespeller({ rules: chart, targetIpa: ['ka'] }).respell('ka');
+  const all = createRespeller({
+    rules: { ...chart, policy: { ...rules.policy, fixups: 'all' } }, targetIpa: ['ka'],
+  }).respell('ka');
+  assert.equal(first, 'Ka');
+  assert.equal(all, 'KA');
+});
