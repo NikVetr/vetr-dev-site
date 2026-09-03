@@ -6,7 +6,7 @@
 
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
-  pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy,
+  pairFromQuery, readerLanguage, setReaderLanguage, showFatal, afterPaint, withBusy,
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { contentBox } from '../core/solve/index.js';
@@ -20,7 +20,7 @@ import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from
 import { openQuiz, applyQuiz } from './quiz.js';
 import { attachHandles } from './handles.js';
 import { createAddTerm } from './add-term.js';
-import { warningText, applyStatic, loadUiLanguage, t } from './i18n.js';
+import { warningText, applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
 
 const BANNER_KEY = 'plg.banner-hidden';
 // A full solve is a few hundred milliseconds of synchronous work, so the debounce
@@ -91,20 +91,46 @@ async function main() {
     }, SOLVE_DEBOUNCE_MS);
   }
 
-  const format = createFormatPanel({
+  const formatConfig = () => ({
     root: $('format'),
     spec,
     presets,
     corpus: ctx.corpus,
     languages,
     themes,
-    onChange: (patch) => {
+    /** @param {Partial<import('../core/types.js').SheetSpec>} patch */
+    onChange: async (patch) => {
+      const readerChanged = Boolean(patch.source) && patch.source !== spec.source;
       spec = { ...spec, ...patch };
+      if (readerChanged) await retranslate();
       schedule();
     },
     onCutChange: () => renderCanvas(),
+    /** @param {number} dpi */
     onDpiChange: (dpi) => { pngDpi = dpi; },
   });
+  let format = createFormatPanel(formatConfig());
+
+  /**
+   * The language the sheet is glossed into is also the language of the interface,
+   * so changing one changes the other.
+   *
+   * Everything here is built by passing `t(...)` in as a value rather than by
+   * marking up a key, which `applyStatic` cannot reach -- so the panels have to be
+   * rebuilt rather than re-read. All three already know how: the format panel
+   * replaces its root's children, and the tree and the add-term form are created
+   * lazily by `solve`, so dropping them is enough to have them built again against
+   * the new catalogue. Without this, changing "Glossed into" moved the sheet and
+   * the warnings into the new language and left every control label in the old one.
+   */
+  async function retranslate() {
+    setReaderLanguage(spec.source);
+    await loadUiLanguage(spec.source, loadText);
+    applyStatic();
+    format = createFormatPanel(formatConfig());
+    updateTree = null;
+    addTerm = null;
+  }
 
   // --- banner and quiz ----------------------------------------------------
 
@@ -139,9 +165,12 @@ async function main() {
     else if (focused === null && !gridByChoice) focused = 0;
     else if (focused !== null && focused >= svgs.length) focused = 0;
 
+    // In the reader's own language, not in English. This said "Chinese to German"
+    // in a German interface, which is the one place on the page that names both
+    // languages and so the most conspicuous place to get it wrong.
     $('pair').textContent = t('studio.pair', {
-      target: ctx.corpus.languages[spec.target].exonym_en,
-      source: ctx.corpus.languages[spec.source].exonym_en,
+      target: languageName(spec.target, ctx.corpus.languages[spec.target].exonym_en),
+      source: languageName(spec.source, ctx.corpus.languages[spec.source].exonym_en),
     });
     $('status').dataset.busy = '0';
     $('status').textContent = plan.faces.length
@@ -452,7 +481,9 @@ async function main() {
   $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), () => exportPdf(
     exportInput(),
     {
-      title: t('quick.heading', { language: ctx.corpus.languages[spec.target].exonym_en }),
+      title: t('quick.heading', {
+        language: languageName(spec.target, ctx.corpus.languages[spec.target].exonym_en),
+      }),
       language: spec.source,
     },
   )).catch(showFatal));

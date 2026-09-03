@@ -129,7 +129,8 @@ function swapGlyph() {
  * @param {Map<string,{faces:number, scale:number}>} config.solved  by `target__source`
  * @param {string} config.target   the language being learned
  * @param {string} config.source   the language it is glossed into
- * @param {(source:string)=>void} config.onReaderChange  keeps the grid behind in step
+ * @param {(source:string)=>Promise<void>} config.onReaderChange  keeps the grid behind
+ *   in step, and swaps the interface language before this dialog redraws
  */
 export function openLightbox({ languages, solved, target, source, onReaderChange }) {
   const dialog = document.createElement('dialog');
@@ -177,8 +178,10 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
   close.setAttribute('aria-label', t('gallery.previewClose'));
 
   // Reads the way the pair is spoken -- the language you read, then the one you are
-  // learning -- rather than the way the code names it.
-  const options = languages
+  // learning -- rather than the way the code names it. Each `aside` is a language
+  // name in the *reader's* language, and the reader can be changed from inside this
+  // dialog, so the list is a function rather than a value.
+  const options = () => languages
     .filter((l) => l.status !== 'planned')
     .map((l) => ({
       value: l.bcp47,
@@ -190,7 +193,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     mount: sourceMount,
     label: t('gallery.previewReading'),
     value: pair.source,
-    options,
+    options: options(),
     // Choosing the language already on the other side means the reader wants the
     // pair the other way round, which is what a swap is. Filtering it out of the
     // list instead would have meant rebuilding both controls on every change.
@@ -204,7 +207,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     mount: targetMount,
     label: t('gallery.previewLearning'),
     value: pair.target,
-    options,
+    options: options(),
     onChange: (value) => setPair(
       value === pair.source
         ? { target: pair.source, source: pair.target }
@@ -275,16 +278,44 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
       });
   }
 
+  /**
+   * Re-set every string in here that came from the catalogue.
+   *
+   * The reader's language can be changed from inside this dialog, and nothing in it
+   * carries a `data-i18n` attribute -- the labels are passed to `el` and to
+   * `languagePicker` as values, so `applyStatic` cannot reach them. Rebuilding the
+   * dialog would throw away the typeset card and the strip, so they are re-set in
+   * place instead.
+   */
+  function relabel() {
+    prev.setAttribute('aria-label', t('gallery.previewPrev'));
+    next.setAttribute('aria-label', t('gallery.previewNext'));
+    strip.setAttribute('aria-label', t('gallery.previewStrip'));
+    exportLink.textContent = t('gallery.export');
+    customiseLink.textContent = t('gallery.customise');
+    swap.setAttribute('aria-label', t('gallery.previewSwap'));
+    close.setAttribute('aria-label', t('gallery.previewClose'));
+    sourcePicker.relabel({ label: t('gallery.previewReading'), options: options() });
+    targetPicker.relabel({ label: t('gallery.previewLearning'), options: options() });
+  }
+
   /** @param {{target:string, source:string}} next */
-  function setPair(next) {
+  async function setPair(next) {
+    // Only a change of *reader* is a change of interface language. Firing this on
+    // a target-only change also rewrote the stored reading language, so picking a
+    // new language to learn quietly reordered the gallery behind the dialog.
+    const readerChanged = next.source !== pair.source;
     pair = next;
     at = 0;
     svgs = [];
     strip.replaceChildren();
+    if (readerChanged) {
+      await onReaderChange(pair.source);
+      relabel();
+    }
     // The pre-rendered thumbnail holds the frame while the new pair typesets, so
     // the card is never blank and never the wrong pair's.
     face.replaceChildren(thumbImage());
-    onReaderChange(pair.source);
     paint();
     load();
   }

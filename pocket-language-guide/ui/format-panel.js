@@ -14,11 +14,11 @@ import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
   itemGlyph, cutGlyph, priorityOptions,
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
-  redrawGlyphs, reserveControl,
+  redrawGlyphs, relabelGlyphs, reserveControl,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
-import { t } from './i18n.js';
+import { languageName, t } from './i18n.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
 // 0 selects auto. Faces come in pairs, because a double-sided sheet is two of them
@@ -54,15 +54,42 @@ const CUT_CHOICES = /** @type {const} */ ([
   { value: 'long-edge', captionKey: 'format.cut.longEdge' },
 ]);
 
-const FIELD_LABEL_KEYS = /** @type {const} */ ({
-  script: 'field.script',
-  script_alt: 'field.script_alt',
-  roman: 'field.roman',
-  ipa: 'field.ipa',
-  gloss: 'field.gloss',
-  respell: 'field.respell',
-  literal: 'field.literal',
-});
+/** The order the column toggles appear in, target side first. */
+const FIELD_ORDER = /** @type {const} */ ([
+  'script', 'script_alt', 'roman', 'ipa', 'gloss', 'respell', 'literal',
+]);
+
+/**
+ * What each column is called, in terms of the pair actually selected.
+ *
+ * These read "Their script", "Other script" and "Your language" -- the setting
+ * describing its own schema rather than describing the card in front of you. Every
+ * name is already on hand: the two languages' own, the alternate script's from
+ * `scripts.csv`, and the romanisation system's, so the control can say
+ * "Japanese / Hepburn / English" instead. Three columns keep a generic caption
+ * because no name exists for them -- `ipa` is `ipa` in every language, and
+ * "Say-it-like" and "Literal" describe a treatment rather than a language -- but
+ * their tooltips name the language whose reader they are for.
+ * @param {import('../core/types.js').SheetSpec} spec
+ * @param {PanelInput['corpus']} corpus
+ * @returns {Record<string, {caption:string, title:string}>}
+ */
+function fieldLabels(spec, corpus) {
+  const target = languageName(spec.target, corpus.languages[spec.target].exonym_en);
+  const source = languageName(spec.source, corpus.languages[spec.source].exonym_en);
+  const altIso = corpus.languages[spec.target].script_alt;
+  const alt = altIso ? corpus.scripts[altIso]?.name ?? altIso : t('field.script_alt');
+  const system = spec.romanization ? t(`roman.${spec.romanization}`) : t('field.roman');
+  return {
+    script: { caption: target, title: t('field.title.script', { language: target }) },
+    script_alt: { caption: alt, title: t('field.title.script_alt', { script: alt }) },
+    roman: { caption: system, title: t('field.title.roman', { system, language: target }) },
+    ipa: { caption: t('field.ipa'), title: t('field.title.ipa') },
+    gloss: { caption: source, title: t('field.title.gloss', { language: source }) },
+    respell: { caption: t('field.respell'), title: t('field.title.respell', { language: source }) },
+    literal: { caption: t('field.literal'), title: t('field.title.literal', { language: source }) },
+  };
+}
 
 const CUT_NOTE_KEYS = {
   '': 'cut.hint.whole',
@@ -467,8 +494,10 @@ export function createFormatPanel(input) {
   const systems = (corpus.languages[spec.target].romanizations || '').split(';').filter(Boolean);
   const romanization = menu(
     'romanization', t('format.romanisation'),
+    // `pinyin`, `rr`, `ala-lc` are the slugs the registry keys on, not names a
+    // reader has ever seen. The menu named them anyway.
     systems.length
-      ? systems.map((v) => ({ value: v, text: v }))
+      ? systems.map((v) => ({ value: v, text: t(`roman.${v}`) }))
       : [{ value: '', text: t('format.romanisation.none') }],
     spec.romanization,
     (value) => emit({ romanization: value }),
@@ -485,14 +514,16 @@ export function createFormatPanel(input) {
   // shows an empty rule instead.
   /** @type {import('./glyphs.js').FieldSample} */
   let sample = fieldSample({});
-  const fieldGlyphs = () => Object.keys(FIELD_LABEL_KEYS)
-    .map((field) => fieldGlyph(/** @type {any} */ (field), sample));
+  const fieldGlyphs = () => FIELD_ORDER.map((field) => fieldGlyph(field, sample));
+  const fieldCaptions = (/** @type {import('../core/types.js').SheetSpec} */ at) => {
+    const labels = fieldLabels(at, corpus);
+    return FIELD_ORDER.map((field) => labels[field]);
+  };
   const fieldSet = toggles({
     label: t('format.columnsShown'),
-    options: Object.entries(FIELD_LABEL_KEYS).map(([field, labelKey], i) => ({
+    options: FIELD_ORDER.map((field, i) => ({
       value: /** @type {import('../core/types.js').FieldId} */ (field),
-      caption: t(labelKey),
-      title: t(labelKey),
+      ...fieldCaptions(spec)[i],
       glyph: fieldGlyphs()[i],
     })),
     values: spec.fieldSet.filter((f) => f !== 'numeral'),
@@ -568,6 +599,9 @@ export function createFormatPanel(input) {
         (a) => itemGlyph(arrangementShape(a.id, next.fieldSet)),
       ));
       redrawGlyphs(fieldSet.group, fieldGlyphs());
+      // The captions name the two languages and the romanisation system, all three
+      // of which are settings in this same panel.
+      relabelGlyphs(fieldSet.group, fieldCaptions(next));
       redrawGlyphs(ink.group, INK_CHOICES.map((c) => inkGlyph(c.value, theme.colours())));
     },
     cut: () => cut,

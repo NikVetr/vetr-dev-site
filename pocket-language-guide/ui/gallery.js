@@ -33,7 +33,7 @@ function el(tag, attrs = {}, kids = []) {
  *   with the face count and type scale the pre-render settled on
  * @property {string} reader
  * @property {{total:number, languages:Record<string,number>}} coverage
- * @property {(source:string)=>void} onReaderChange
+ * @property {(source:string)=>Promise<void>} onReaderChange
  */
 
 /** @param {Record<string,string>} lang @param {GalleryContext} gallery */
@@ -62,7 +62,9 @@ function card(lang, gallery) {
     ? el('button', {
       type: 'button',
       class: 'card-thumb-button',
-      'data-i18n-label': 'gallery.previewOpen',
+      // No `data-i18n-label` here: the label is interpolated with the language's
+      // name, and `applyStatic` would overwrite it with the raw template. The card
+      // is rebuilt whole when the reader changes, so it needs no marker.
       'aria-label': t('gallery.previewOpen', { language: name }),
     }, [el('img', {
       class: 'card-thumb',
@@ -204,17 +206,20 @@ async function main() {
   // Collapsed it shows only the endonym -- "Deutsch", not "Deutsch (German)" --
   // because that is the word you scan for. The name in the reader's own language
   // earns its place only in the open list, set grey and to the trailing edge.
+  // The `aside` is each language's name *in the reader's language*, so the whole
+  // list has to be rebuilt when the reader changes -- not just its selection.
+  const pickerOptions = () => languages
+    .filter((l) => l.status !== 'planned')
+    .map((l) => ({
+      value: l.bcp47,
+      name: l.endonym,
+      aside: languageName(l.bcp47, l.exonym_en),
+    }));
   const header = languagePicker({
     mount,
     label: t('nav.readerHint'),
     value: reader,
-    options: languages
-      .filter((l) => l.status !== 'planned')
-      .map((l) => ({
-        value: l.bcp47,
-        name: l.endonym,
-        aside: languageName(l.bcp47, l.exonym_en),
-      })),
+    options: pickerOptions(),
     onChange: setReader,
   });
   renderSpeakCollage(languages, reader);
@@ -223,11 +228,22 @@ async function main() {
    * The reader's language, changed from either place it can be: the header picker,
    * or the pair inside the lightbox. The lightbox is a modal over this page, so the
    * grid it reopens onto has to already agree with it.
+   *
+   * **The catalogue has to be swapped before anything is redrawn.** Almost none of
+   * this page's chrome carries a `data-i18n` attribute -- the strings are passed to
+   * `el` as values, so `applyStatic` cannot reach them and they are only correct
+   * because they were built after `loadUiLanguage`. Switching the reader without
+   * that step left the heading, the cards and the picker's own accessible name in
+   * the previous language while the grid and the collage moved to the new one,
+   * which is exactly the half-translated state this fixes.
    * @param {string} value
    */
-  function setReader(value) {
+  async function setReader(value) {
     setReaderLanguage(value);
+    await loadUiLanguage(value, loadText);
+    applyStatic();
     header.select(value);
+    header.relabel({ label: t('nav.readerHint'), options: pickerOptions() });
     renderSpeakCollage(languages, value);
     render(value);
   }

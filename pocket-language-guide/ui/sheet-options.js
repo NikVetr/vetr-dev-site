@@ -17,7 +17,7 @@ import {
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
-import { warningText, applyStatic, loadUiLanguage, t } from './i18n.js';
+import { warningText, applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
 
 // Module scope, so the words cannot be looked up here: the keys are, and the
 // menu resolves them when it is built.
@@ -53,12 +53,18 @@ async function main() {
 
   const target = ctx.corpus.languages[choice.target];
   const source = ctx.corpus.languages[choice.source];
-  document.title = t('quick.heading', { language: target.exonym_en });
-  $('title').textContent = t('quick.heading', { language: target.exonym_en });
-  $('subtitle').textContent = t('quick.subtitle', { source: source.exonym_en });
+  // The reader's own language throughout: this page is read by whoever the sheet
+  // is glossed into, so naming their language in English is the same mistake as
+  // leaving the heading untranslated.
+  const targetName = languageName(target.bcp47, target.exonym_en);
+  document.title = t('quick.heading', { language: targetName });
+  $('title').textContent = t('quick.heading', { language: targetName });
+  $('subtitle').textContent = t('quick.subtitle', {
+    source: languageName(source.bcp47, source.exonym_en),
+  });
   const flags = regionRow(target.regions, {
     label: t('gallery.spokenIn', {
-      language: target.exonym_en, regions: target.regions.split(';').join(', '),
+      language: targetName, regions: target.regions.split(';').join(', '),
     }),
   });
   if (flags) $('pair-flags').append(flags);
@@ -298,7 +304,7 @@ async function main() {
 
   $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), () => exportPdf(
     input(),
-    { title: t('quick.heading', { language: target.exonym_en }), language: choice.source },
+    { title: t('quick.heading', { language: targetName }), language: choice.source },
   )).catch(showFatal));
   $('png').addEventListener('click', () => withBusy($('png'), t('common.rendering'),
     (onProgress) => exportPng({ ...input(), onProgress }, dpi)).catch(showFatal));

@@ -996,6 +996,24 @@ export function redrawGlyphs(group, glyphs) {
 }
 
 /**
+ * Re-set a glyph group's captions and tooltips, the same way `redrawGlyphs`
+ * re-sets its drawings. Needed by any group whose labels name something the reader
+ * chose, rather than naming a fixed setting -- the column list names the two
+ * languages, so it changes whenever either of them does.
+ * @param {HTMLElement} group
+ * @param {{caption:string, title?:string}[]} labels
+ */
+export function relabelGlyphs(group, labels) {
+  [...group.querySelectorAll('.segment')].forEach((button, i) => {
+    const label = labels[i];
+    if (!label) return;
+    const caption = button.querySelector('.segment-caption');
+    if (caption) caption.textContent = label.caption;
+    if (label.title) /** @type {HTMLElement} */ (button).title = label.title;
+  });
+}
+
+/**
  * How much of a lock screen the operating system draws over, as fractions of the
  * screen's height kept clear at each end.
  *

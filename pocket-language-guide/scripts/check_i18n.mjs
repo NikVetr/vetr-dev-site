@@ -73,9 +73,12 @@ for (const rel of files) {
 const english = JSON.parse(await readFile(join(ROOT, 'data/i18n/en.json'), 'utf8'));
 const keys = new Set(Object.keys(english).filter((k) => !k.startsWith('_')));
 
-// Warning keys are looked up by code rather than written out, so they are used by
-// construction and cannot be found by grepping for `t(`.
-const byCode = [...keys].filter((k) => k.startsWith('warn.') || k.startsWith('fix.'));
+// Some keys are looked up by code rather than written out, so they are used by
+// construction and cannot be found by grepping for `t(`: a warning or a proposed
+// fix by its own code, a field by its id (`ui/i18n.js` `warningText`), and a
+// romanisation system by the slug `data/registry/languages.csv` lists it under.
+const BY_CODE = ['warn.', 'fix.', 'field.', 'roman.'];
+const byCode = [...keys].filter((k) => BY_CODE.some((p) => k.startsWith(p)));
 
 const missing = [...used.keys()].filter((k) => !keys.has(k)).sort();
 const unused = [...keys]

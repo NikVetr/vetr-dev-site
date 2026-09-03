@@ -30,11 +30,19 @@ test.describe('help me decide', () => {
     await expect(page.locator('.banner')).toBeHidden();
     // Large print asked for bigger type, not the same content shrunk.
     await expect(page.getByRole('radio', { name: 'X-large' })).toHaveAttribute('aria-checked', 'true');
-    // The shown-fields control is a row of glyph toggles now, not checkboxes.
+    // The shown-fields control is a row of glyph toggles now, not checkboxes, and
+    // each one is named after what it actually holds for this pair -- so the
+    // romanisation toggle says `Pinyin`, not `Romanisation`.
     await expect(page.getByRole('checkbox', { name: 'Say-it-like' }))
       .toHaveAttribute('aria-checked', 'false');
-    await expect(page.getByRole('checkbox', { name: 'Romanisation' }))
+    await expect(page.getByRole('checkbox', { name: 'Pinyin' }))
       .toHaveAttribute('aria-checked', 'true');
+    // And the two sides of the pair are named, where they used to read
+    // "Their script" and "Your language".
+    await expect(page.getByRole('checkbox', { name: 'Simplified Chinese' })).toBeVisible();
+    // `exact`, because two phrases in the tree are *about* speaking English.
+    await expect(page.getByRole('checkbox', { name: 'English', exact: true }))
+      .toBeVisible();
     await expect(page.locator('.face.focused')).toBeVisible();
   });
 

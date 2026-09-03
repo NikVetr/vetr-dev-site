@@ -34,7 +34,12 @@ test('saves a pair that has no curated respellings', async ({ page, context }) =
 
   const save = page.locator('[data-offline="zh-Hans"]');
   await save.click();
-  await expect(save).toHaveText('Saved', { timeout: 180_000 });
+  // In Japanese, because picking a reading language switches the interface into it.
+  // This asserted the English string and passed for the wrong reason: the picker
+  // used to re-sort the grid without ever swapping the message catalogue, so a
+  // Japanese reader got a Japanese card list under English chrome.
+  await expect(save).toHaveText('保存済み', { timeout: 180_000 });
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
 
   await context.setOffline(true);
   await page.goto('/customize.html?target=zh-Hans&source=ja');

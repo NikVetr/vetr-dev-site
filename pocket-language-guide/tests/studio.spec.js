@@ -321,3 +321,22 @@ test('the tree, the sheet and the term picker all call a section the same thing'
   expect(onSheet).toContain('Sozial');
 });
 
+
+test('changing the gloss language changes the interface language with it', async ({ page }) => {
+  // The sheet, the warnings and the tree all followed the new language; the sixty
+  // control labels around them did not, because they are `t(...)` passed in as
+  // values and no code path swapped the catalogue. The panel is rebuilt now.
+  await page.goto('/customize.html?target=ja&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+  await page.selectOption('#source', 'de');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+  // A label in the same panel as the control that was just used.
+  await expect(page.locator('label[for="source"]')).toHaveText('Übersetzungssprache');
+  // The pair, which named both languages in English whatever the interface said.
+  await expect(page.locator('#pair')).toHaveText('Japanisch nach Deutsch');
+  // And the column toggles, which name the two languages themselves.
+  await expect(page.getByRole('checkbox', { name: 'Japanisch', exact: true })).toBeVisible();
+  await expect(page.getByRole('checkbox', { name: 'Deutsch', exact: true })).toBeVisible();
+});

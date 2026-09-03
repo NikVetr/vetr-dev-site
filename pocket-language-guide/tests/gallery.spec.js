@@ -48,6 +48,32 @@ test.describe('gallery', () => {
     await expect(page.locator('.card', { hasText: '简体中文' })).toHaveCount(0);
   });
 
+  test('changing your own language re-glosses the chrome too, not just the grid', async ({ page }) => {
+    // The grid and the collage came from the registry, so they moved; everything
+    // built by passing `t(...)` in as a value stayed in the previous language,
+    // because nothing swapped the catalogue. The result was a German card list
+    // under an English heading, which is worse than either language alone.
+    await page.goto('/');
+    await expect(page.locator('.card').first()).toBeVisible();
+    const heading = page.locator('h1');
+    const english = await heading.textContent();
+
+    await pickReader(page, 'Deutsch');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+    await expect(heading).not.toHaveText(english ?? '');
+    // Static markup, a card built in JS, and the picker's own accessible name --
+    // three different mechanisms, all of which used to be left behind.
+    await expect(page.locator('.skip-link')).toHaveText('Zu den Sprachen springen');
+    await expect(page.locator('.card').first().getByRole('link', { name: 'Exportieren' }))
+      .toBeVisible();
+    await expect(page.locator('.lang-picker-button'))
+      .toHaveAttribute('aria-label', /wählen Sie die Sprache/);
+    // And it survives a second change, rather than sticking on the first.
+    await pickReader(page, 'English');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(heading).toHaveText(english ?? '');
+  });
+
   test('the header names a language by its own name, and glosses it only in the list', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('.card').first()).toBeVisible();

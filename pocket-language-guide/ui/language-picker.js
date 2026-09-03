@@ -26,7 +26,8 @@ import { nextIndex } from './keys.js';
  * @param {string} config.value
  * @param {string} config.label         accessible name for the control
  * @param {(value:string)=>void} config.onChange
- * @returns {{element:HTMLElement, select:(value:string)=>void, destroy:()=>void}}
+ * @returns {{element:HTMLElement, select:(value:string)=>void, destroy:()=>void,
+ *   relabel:(next:{label:string, options:PickerOption[]})=>void}}
  */
 export function languagePicker({ mount, options, value, label, onChange }) {
   const wrap = document.createElement('div');
@@ -47,9 +48,10 @@ export function languagePicker({ mount, options, value, label, onChange }) {
 
   /** @type {HTMLLIElement[]} */ const items = [];
   let current = value;
+  let shown = options;
 
   const paint = () => {
-    const chosen = options.find((o) => o.value === current) ?? options[0];
+    const chosen = shown.find((o) => o.value === current) ?? shown[0];
     button.textContent = chosen ? chosen.name : '';
     items.forEach((li, i) => {
       const on = options[i].value === current;
@@ -58,7 +60,18 @@ export function languagePicker({ mount, options, value, label, onChange }) {
     });
   };
 
-  options.forEach((option, i) => {
+  /**
+   * Build the list. Separate from the constructor because every option's `aside`
+   * is a language name *in the reader's language*, so changing the reader changes
+   * all of them -- and the reader can be changed from a control that sits next to
+   * this one.
+   * @param {PickerOption[]} next
+   */
+  function fill(next) {
+    shown = next;
+    items.length = 0;
+    list.replaceChildren();
+    next.forEach((option, i) => {
     const li = document.createElement('li');
     li.className = 'lang-picker-option';
     li.setAttribute('role', 'option');
@@ -79,7 +92,9 @@ export function languagePicker({ mount, options, value, label, onChange }) {
     });
     items.push(li);
     list.append(li);
-  });
+    });
+  }
+  fill(options);
 
   /** @param {boolean} refocus */
   function close(refocus) {
@@ -93,7 +108,7 @@ export function languagePicker({ mount, options, value, label, onChange }) {
     if (!list.hidden) return;
     list.hidden = false;
     button.setAttribute('aria-expanded', 'true');
-    const at = Math.max(0, options.findIndex((o) => o.value === current));
+    const at = Math.max(0, shown.findIndex((o) => o.value === current));
     items[at]?.focus();
   }
 
@@ -144,6 +159,18 @@ export function languagePicker({ mount, options, value, label, onChange }) {
     /** Show a different option as chosen, without announcing a change. */
     select(/** @type {string} */ next) {
       current = next;
+      paint();
+    },
+    /**
+     * Re-set the accessible name and the option list after the interface language
+     * has changed. Rebuilding the control instead would drop the document
+     * listener and the element's id, both of which other code holds.
+     * @param {{label:string, options:PickerOption[]}} next
+     */
+    relabel(next) {
+      button.setAttribute('aria-label', next.label);
+      list.setAttribute('aria-label', next.label);
+      fill(next.options);
       paint();
     },
     /** Give up the document listener. */

@@ -7,12 +7,19 @@
 // instead: the `ipa` column of the language being learned, and one rule table per
 // language doing the reading.
 //
-// The rule tables were not written from a published pronunciation key. They were
-// read off the 12,001 hand-curated respellings already in the corpus, which is a
-// better source: it records what a human actually chose for each sound in context.
-// Measured against those, a 99-entry table exactly reproduces 66.8% of the Spanish
-// sheet and 71.8% of the Mandarin one, and agrees at the syllable level on 91%.
-// `content/RESPELL-PILOT.md` has the numbers and the failure taxonomy.
+// The English rule table was not written from a published pronunciation key. It
+// was read off the 12,001 hand-curated respellings already in the corpus, which is
+// a better source: it records what a human actually chose for each sound in
+// context. `scripts/respell_check.mjs` measures any table against them, and
+// `content/RESPELL-PILOT.md` has the failure taxonomy. Every other table starts
+// from a published key instead -- see `content/RESPELL-SYSTEMS.md`, which found one
+// for six of the sixteen and something adaptable for four more -- because those
+// readers have no curated sheet to read a table off of.
+//
+// Agreement is therefore only measurable for an English reader, and only where the
+// table has been fitted: 61.9% of the Spanish sheet exactly and 36.1% of the
+// Mandarin one, against 1-7% on the twelve targets nobody has fitted yet. A low
+// number there means an unwritten rule, not a broken engine.
 //
 // **Generated respellings sit under the curated ones, never over them.** The
 // sixteen curated sheets are not mutually consistent -- Mandarin's /ɕ/ is `sh` 103
@@ -51,6 +58,33 @@ const VOWEL_TAIL = new Set(['ː', 'ˑ', '̃', '̯']);
 const TONE = /[\u02E5-\u02E9]/g;
 /** @type {Record<string,number>} */
 const STRESS = { 'ˈ': 1, 'ˌ': 2 };
+
+/**
+ * Where a stress mark goes when the device is a diacritic: on the *last* vowel
+ * letter of the nucleus, which is what puts the acute on the second element of a
+ * Spanish or Italian rising diphthong (`bien` -> `bién`, not `bíen`).
+ */
+const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõyw]+/iu;
+/**
+ * The stress devices a reader's own orthography already has. `caps` is the
+ * fallback for a Latin script with no native mark, and is what eleven of the
+ * curated sheets use; `acute` is the native device in Spanish, Italian,
+ * Portuguese and Russian, where capitals would read as an abbreviation; `prime`
+ * is Bhargava's notation for Hindi, whose script is caseless and has no accent.
+ *
+ * @type {Record<string, (text: string, locale: string) => string>}
+ */
+const STRESS_DEVICE = {
+  caps: (text, locale) => text.toLocaleUpperCase(locale),
+  acute: (text) => text.replace(VOWEL_LETTERS, (v) => {
+    const i = v.length - 1;
+    // Already accented -- the letter carries its own acute, so adding a second
+    // one would produce a character no orthography has.
+    if (/[áéíóúàèìòù]/i.test(v[i])) return v;
+    return `${v.slice(0, i)}${v[i]}\u0301`.normalize('NFC') + v.slice(i + 1);
+  }),
+  prime: (text) => `${text}\u02b9`,
+};
 
 /**
  * A voiced fricative that is a stop's allophone counts as that stop when deciding
@@ -96,11 +130,18 @@ export function onsetClusters(words) {
 /**
  * Syllabify an IPA word: nucleus spans first, then onset maximisation over the
  * cluster table.
+ *
+ * `maxOnset` exists because onset maximisation is a claim about the *reader*, not
+ * about the target. It is right for most, and wrong for Turkish, where the TDK
+ * prescribes `prog-ram` over `pro-gram` for exactly the Western vocabulary this
+ * corpus is full of -- so a Turkish reader shown `pro-gram` is being shown a
+ * syllabification their own orthography rejects.
  * @param {string} ipa
  * @param {Set<string>} clusters
+ * @param {number} [maxOnset]  how many consonants may open a non-initial syllable
  * @returns {Syllable[]}
  */
-export function syllabify(ipa, clusters = new Set()) {
+export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
   /** @type {[string, number][]} */ const units = [];
   let pending = 0;
   for (const ch of ipa) {
@@ -148,8 +189,8 @@ export function syllabify(ipa, clusters = new Set()) {
     const at = (/** @type {number} */ k) => inter.slice(-k).map((j) => fold(ph[j])).join('');
     if (!inter.length) cuts.push(spans[s + 1][0]);
     else if (inter.length === 1) cuts.push(inter[0]);
-    else if (inter.length > 2 && clusters.has(at(3))) cuts.push(inter[inter.length - 3]);
-    else if (clusters.has(at(2))) cuts.push(inter[inter.length - 2]);
+    else if (maxOnset >= 3 && inter.length > 2 && clusters.has(at(3))) cuts.push(inter[inter.length - 3]);
+    else if (maxOnset >= 2 && clusters.has(at(2))) cuts.push(inter[inter.length - 2]);
     else cuts.push(inter[inter.length - 1]);
   }
 
@@ -285,11 +326,12 @@ function applySplits(syllables, splits) {
  * @param {string} [config.target]  the target's code, for the `targets` block
  */
 export function createRespeller({ rules, targetIpa, target = '' }) {
+  const maxOnset = rules.policy?.max_onset ?? 3;
   const clusters = onsetClusters(targetIpa.flatMap((s) => s.split(/\s+/)).filter(Boolean));
   const words = targetIpa
     .flatMap((s) => s.split(/\s+/))
     .filter(Boolean)
-    .map((w) => syllabify(w, clusters));
+    .map((w) => syllabify(w, clusters, maxOnset));
   const inventory = phonemeInventory(words);
 
   // A handful of rules cannot be expressed against the target's inventory and have
@@ -304,16 +346,24 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
   const phonemes = [...(only.phonemes ?? []), ...(rules.phonemes ?? [])]
     .filter((/** @type {any} */ r) => inventoryHolds(r, inventory))
     .sort((/** @type {any} */ a, /** @type {any} */ b) => b.ipa.length - a.ipa.length);
+  // A fixup's `out` writes backreferences as `\1`, which is the convention in
+  // `content/RESPELL-PILOT.md` and in every table written against it. JS spells
+  // them `$1`, and silently emits the literal text for `\1` -- so a table written
+  // to the documented format put `\1gh\2` on the card instead of `ghee`.
   const fixups = [...(only.syllable_fixups ?? []), ...(rules.syllable_fixups ?? [])]
     .filter((/** @type {any} */ f) => inventoryHolds(f, inventory))
-    .map((/** @type {any} */ f) => ({ ...f, re: new RegExp(f.match) }));
+    .map((/** @type {any} */ f) => ({
+      ...f, re: new RegExp(f.match), out: f.out.replace(/\\(\d)/g, '$$$1'),
+    }));
   const splits = only.splits ?? rules.splits ?? [];
   const policy = { stress: 'none', stress_min_syllables: 2, length: 'none', tone: 'keep',
-    syllable_separator: '-', word_separator: ' ', ...(rules.policy ?? {}), ...(only.policy ?? {}) };
+    syllable_separator: '-', word_separator: ' ', max_onset: 3, locale: rules.source ?? 'en',
+    ...(rules.policy ?? {}), ...(only.policy ?? {}) };
+  const stressDevice = STRESS_DEVICE[policy.stress];
 
   /** @param {Syllable[]} syllables */
   const word = (syllables) => {
-    const syls = policy.stress === 'none' ? syllables : applySplits(syllables, splits);
+    const syls = applySplits(syllables, splits);
     return syls.map((s, i) => {
       const ctx = {
         word_initial: i === 0,
@@ -340,11 +390,14 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // generated: a reader who does not want it simply gets the plain form. The
       // Japanese sheet already invented this convention by hand, doubling a letter
       // on 285 of its 286 long-vowel rows.
-      if (policy.length === 'double' && /ː/.test(s.nucleus + s.coda)) {
-        text = text.replace(/([aeiou]+)/, '$1$1');
+      if (/ː/.test(s.nucleus + s.coda)) {
+        if (policy.length === 'double') text = text.replace(/([aeiou]+)/, '$1$1');
+        // Turkish writes length with a colon rather than by doubling, because a
+        // doubled vowel there is read as two syllables.
+        else if (policy.length === 'colon') text = text.replace(/([aeiou]+)/, '$1:');
       }
       const marked = s.stress === 1 && syls.length >= policy.stress_min_syllables;
-      return marked && policy.stress === 'caps' ? text.toUpperCase() : text;
+      return marked && stressDevice ? stressDevice(text, policy.locale) : text;
     }).join(policy.syllable_separator);
   };
 
@@ -362,7 +415,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       if (!trimmed) return '';
       return trimmed
         .split(/\s+/)
-        .map((w) => word(syllabify(w, clusters)))
+        .map((w) => word(syllabify(w, clusters, maxOnset)))
         .join(policy.word_separator);
     },
   };
