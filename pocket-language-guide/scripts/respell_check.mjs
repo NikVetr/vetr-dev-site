@@ -163,12 +163,14 @@ for (const target of targets) {
       gaps.set(ch, g);
     }
   }
+  // Before the `continue`, or `--gaps` reports its findings against zero rows.
+  totals.rows += rows.length;
   if (flags.has('--gaps') || flags.has('--units')) continue;
   const judged = rows.filter((r) => r.want);
   const exact = judged.filter((r) => r.out === r.want).length;
   const near = judged.filter((r) => loose(r.out) === loose(r.want)).length;
   totals = {
-    rows: totals.rows + rows.length,
+    rows: totals.rows,
     judged: totals.judged + judged.length,
     exact: totals.exact + exact,
     near: totals.near + near,
@@ -205,10 +207,18 @@ if (flags.has('--units')) {
       (/** @type {any} */ t) => (t.phonemes ?? []).map((/** @type {any} */ r) => r.ipa),
     ),
   ]);
+  // The engine strips tone before it tokenises, when the policy says to -- so
+  // scanning the raw column tokenises a string the table never sees. Vietnamese
+  // writes `a˩ˀ`: raw, the tone letter blocks the glottal mark from binding and both
+  // come out as skipped one-character units, hiding ten real phonemes from a
+  // tone-dropping reader. Every such table had the same blind spot; only Vietnamese
+  // triggers it.
+  const tone = (table.rules.policy?.tone ?? 'keep') === 'drop';
   /** @type {Map<string, {count:number, langs:Set<string>}>} */ const units = new Map();
   for (const target of targets) {
     for (const row of await rowsFor(table, target)) {
-      for (const unit of phonemesOf(row.ipa.replace(/\s+/g, ''))) {
+      const seen = tone ? row.ipa.replace(/[\u02E5-\u02E9]/g, '') : row.ipa;
+      for (const unit of phonemesOf(seen.replace(/\s+/g, ''))) {
         if (unit.length < 2 || keys.has(unit)) continue;
         const held = units.get(unit) ?? { count: 0, langs: new Set() };
         held.count += 1;

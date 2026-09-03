@@ -1,10 +1,127 @@
 {
   "source": "de",
   "accent": "de-DE",
+  "status": "ready",
   "version": "1",
-  "derives_from": "TBD",
-  "deviations": [],
-  "approximations": [],
+  "derives_from": "INVENTED, per RESPELL-SYSTEMS.md’s verdict for de -- German lexicography is IPA-only and there is no German respelling key to borrow. Confirmed rather than assumed: PONS states its own notation is IPA in square brackets and offers no respelling («Angaben zur Aussprache befinden sich in diesem Wörterbuch in eckigen Klammern... wird die internationale Lautschrift (IPA)... verwendet»), and Duden Band 6 is IPA throughout. So the invention is constrained rather than free, by four published German things, three of which RESPELL-SYSTEMS.md lists as unverified and which were read for this table. (1) DUDEN BAND 6, Das Aussprachewörterbuch, §B «Zur verwendeten Lautschrift», whose opening sentence is the IPA-subsetting wording the survey could not verify from a legitimate source: «Aus dem kompletten Bestand des phonetischen Alphabets der IPA (International Phonetic Association, vgl. Vor- und Nachsatz) wird in der folgenden Tabelle derjenige Zeichenbestand aufgeführt, der für die Wiedergabe der deutschen Aussprache (auch von Fremdwörtern) relevant ist.» Duden does subset the IPA -- and then prints a SECOND table, «Lautschriftzeichen für fremdsprachliche Ausdrücke», of extra IPA letters for foreign expressions. Duden’s answer to a foreign sound is therefore more IPA, which is the one thing this card cannot print, so the principle is taken and the medium rejected: that is the DPD’s argument made in German. Three further facts come from the same introduction and each settles a decision below -- the Längenzeichen («Zur Bezeichnung der Länge des unmittelbar voranstehenden Lauts (in diesem Werk nur bei Vokalen), z. B. raten [ˈʁaːtn̩] vs. Ratten [ˈʁatn̩]»), the Knacklaut («Stimmritzenverschlusslaut..., mit dem im Deutschen die Artikulation anlautender Vokale eingeleitet wird... Wird am Wortanfang weggelassen»), and what a doubled consonant means in German («die doppelte Konsonantenschreibung <mm> in Hammer [ˈhamɐ] keine längere Aussprache von [m] anzeigt, sondern indirekt die Kürze des vorangehenden Vokals [a] bezeichnet»). (2) THE GERMAN WIEDERGABEKONVENTIONEN for foreign names, which Duden Band 6 §G.I.2 both documents and criticises: «dabei werden in manchen Fällen verschiedene kyrillische Buchstaben (und damit Laute) durch nur einen lateinischen Buchstaben oder eine Buchstabenkombination wiedergegeben, so dass sich die genaue Aussprache nicht immer aus dem Schriftbild erschließen lässt. So steht z. B. <sch> sowohl für den kyrillischen Buchstaben und Laut [ʃ] als auch für [ʒ], <s> repräsentiert den kyrillischen Buchstaben für [s] sowie denjenigen für [z].» That is a sound-keyed statement of which German letter carries which foreign sound, published by the German reference dictionary, and it is the inventory this table borrows: sch, tsch, dsch, ch, w, j, z, s, ng, nj -- the letters a German reader has already met in Gorbatschow, Chruschtschow, Tschaikowski, Schostakowitsch, Jelzin, Sdrastwuite and njet. RESPELL-SYSTEMS.md is right that the Duden-Transkription is a transliteration and not an engine; but its INVENTORY is sound-keyed, and the survey’s own instruction is to borrow standards for their inventories and overrule them on their restrictions. (3) DUDEN’S OWN STRESS MARK, from the Deutsches Universalwörterbuch’s «Zeichen der Wörterbuchartikel», item 7: «Ein unter den Vokal gesetzter Punkt gibt betonte Kürze, ein Strich betonte Länge an.» Overruled, for reasons that are engine and typography rather than linguistics -- see deviations. (4) KAUDERWELSCH (Reise Know-How), reached: four volumes’ front matter read, and the answer to the survey’s question is that there is no series key to borrow -- see the deviation that says so and what the volumes did settle. Secondary, for the syllable division: the Amtliche Regelung der deutschen Rechtschreibung §108 and §112.",
+  "deviations": [
+    {
+      "rule": "Duden Band 6 gives pronunciation «in Lautschrift unter Verwendung des Zeichensystems der International Phonetic Association (IPA)», subset to what German needs, plus a second table of additional IPA letters for foreign expressions",
+      "why": "The principle is ours and the medium is not. summary.md’s case against printing IPA is a fact about this card -- a third 5.22pt italic muted line whose distinguishing marks are the first thing to go in bad light -- and Duden answers a foreign sound by adding an IPA letter, which is precisely the move unavailable here. So Duden supplies the question (which stock of signs does THIS reader need) and German orthography supplies the answer. Every glyph this table emits is an ordinary German letter."
+    },
+    {
+      "rule": "Duden Band 6 §G.I.2 records that the German rendering conventions write <sch> for both [ʃ] and [ʒ] and <s> for both [s] and [z], and says the exact pronunciation therefore cannot always be recovered from the spelling",
+      "why": "Half kept, half overruled, and the split is the difference between a permanent spelling and a disposable hint. The [ʃ]/[ʒ] merger is KEPT: /ʃ/ and /ʒ/ both take sch, because the only alternative is j, which is [j] in native German (ja, Jahr) and [ʒ] only in French loans (Journal, Genie) -- and /j/ outnumbers /ʒ/ 4949 to 500, so j would mis-cue the commoner sound and give the rarer one the wrong MANNER, where sch is wrong only in voicing. The [s]/[z] merger is OVERRULED, because that one is repairable: /z/ takes s, which German reads [z] before a vowel, and /s/ takes ss in an onset and s in a coda, both of which German reads [s]. Duden’s own criticism is the authority for splitting the pair it says the convention loses."
+    },
+    {
+      "rule": "The Wiedergabekonvention writes a single s; RESPELL-SYSTEMS.md’s trap table says «write /s/ as ss or ß»",
+      "why": "Taken, as ss in an onset and a bare s in a coda, which is finer than either and is German’s own distribution. A pre-vocalic s in German is [z] (sagen, Rose), so /s/ spelled s comes back voiced -- the survey’s second trap. ss is never [z] and never [ʃ]. But a coda s in German is [s] outright (Haus, Eis, Rast, best, and Duden’s own «Hast [hast]»), so the 6181 /s/ pay the extra letter only where they must. ß was measured and declined twice over: it never occurs word-initially in German, and policy.locale «de» uppercases it to SS, so the stress device would spend the saving anyway."
+    },
+    {
+      "rule": "Onset maximisation, which is the engine’s default and right for most readers",
+      "why": "Replaced by max_onset 1, which is the Amtliche Regelung §108: «Stehen zwischen Vokalen mehrere Buchstaben für Konsonanten, so kommt der letzte auf die neue Zeile» -- Fens-ter, knusp-rig, Ach-tung, Zip-fel, sechs-te. German’s own syllable division is coda-maximising, so a German reader shown pro-blem is shown a division their schoolbook rejects; §112 permits the other one in foreign words («Pub-likum / Pu-blikum, Feb-ruar / Fe-bruar, Sig-nal / Si-gnal, Hyd-rant / Hy-drant»), which makes both legal and 1 the base rule. It also pays for itself on the first trap -- see policy_note for the 302 sst."
+    },
+    {
+      "rule": "Duden’s Unterpunkt and Unterstrich («Ein unter den Vokal gesetzter Punkt gibt betonte Kürze, ein Strich betonte Länge an»), which RESPELL-SYSTEMS.md prefers for German; and Kauderwelsch’s underlining, which both volumes read here use («In Ausnahmefällen ist der betonte Selbstlaut unterstrichen», Usbekisch; «__ Unterstreichung zeigt Betonung an», Chinesisch)",
+      "why": "Overruled for capitals, and the first reason is an engine fact rather than a preference: STRESS_DEVICE in core/respell.js offers caps, grave, acute and prime and has no device that marks BELOW a letter, and respell_check.mjs’s DEVICE_MARKS exempts only U+0301 and U+02B9 from the gap counter, so U+0323 and U+0331 would be reported as gaps on every stressed syllable. Second, RESPELL-SYSTEMS.md’s own typographic section: a combining mark under a letter at 5.22pt italic muted is exactly the mark the sheet is worst at, and both German devices are that mark. Third, and this is where the survey’s German section is WRONG: its argument against capitals is that «German capitalises every noun’s initial, so a reader scanning guh-TEN TAHK has to sort grammatical capitals from prosodic ones». Measured -- with policy.stress «none» this table emits 0 capital letters in 11,782 rows, because every out in it is lowercase and a respelling of a foreign phrase contains no German noun to capitalise. Every capital in this column is the stress mark and there is nothing to sort. An acute was declined for the French reason: German readers know é from Café, Attaché and Résumé as a vowel QUALITY, so it would read as a change of sound rather than of stress. It is worth noting that both German devices agree with each other and against English -- German marks stress under the vowel, never by case -- so caps here is a documented import, not an inherited assumption."
+    },
+    {
+      "rule": "RESPELL-SYSTEMS.md’s cleanest scheme for German: «ie for /iː/, doubling for other long vowels, h reserved exclusively for /h/»",
+      "why": "The h clause is kept absolutely and measures at zero (see measurements). The other two are overruled together, because they cannot coexist: policy.length is one global switch, so a nucleus rule /iː/ -> ie plus length «double» gives iee, the mark landing on the last letter of the vowel run. Forced to choose one device for every long vowel, this table takes the colon, measured: doubling would be native German on 3892 long vowels -- aa (Saal), ee (See), oo (Boot) -- and would produce a letter sequence German never writes on 1816, being ii (959), uu (471), ää (342) and öö (44). Wrong a third of the time, and wrong on the second commonest long vowel in the corpus. Duden Band 6’s own Längenzeichen is a colon applying to the vowel immediately before it, with a German minimal pair -- raten against Ratten -- so a colon meaning «the vowel before me is long» is a German metalinguistic notation printed by the German reference dictionary, which is the same standing it has in Turkish, and the legend stays at one glyph. It is written ASCII «:» rather than Duden’s U+02D0, which respell_check.mjs would count as a gap."
+    },
+    {
+      "rule": "The Turkish table doubles geminate consonants, and German writes its own geminates doubled (Hammer, Tonne, elli)",
+      "why": "Not done, and Duden Band 6’s introduction is the reason, in its own words: «die doppelte Konsonantenschreibung <mm> in Hammer [ˈhamɐ] keine längere Aussprache von [m] anzeigt, sondern indirekt die Kürze des vorangehenden Vokals [a] bezeichnet». A doubled consonant in German does not say «this consonant is long», it says «the vowel before it is short» -- which would contradict the colon on the very syllable that needs both. So all 178 /kː/, 95 /tː/, 37 /dː/, 23 /ʒː/, 15 /pː/, 15 /ʃː/ and the rest take a single letter, and Arabic shadda and Italian ecco lose their gemination. This independently reproduces the Turkish table’s finding on /kː/: 128 of the 178 are the Hindi G2P writing kya as /kːjaː/, which is no geminate at all. Gemination the corpus writes as two identical phonemes still doubles across the syllable break, which is right for the language that has it: mot-to, kek-ko:, tschip-pu, jak-kjo-ku."
+    },
+    {
+      "rule": "One job per glyph, which would forbid a word-initial ch",
+      "why": "Departed from, and this is a trap RESPELL-SYSTEMS.md’s German table does not list. Word-initial German ch is [k] in Chaos, Charakter, Chor and Christ, [ç] or [k] in Chemie and China, and [ʃ] in Chef and Chance -- so /x/ written ch word-initially is a lottery, on a measured 354 onsets (vi 192, zh-Hans 72, pt 38, ar 19, ru 18, id 6, es 9). h was measured as the alternative and declined: it is what German writes for Mandarin h- (hao, Hunan) but it would collapse three contrasts the targets keep -- Vietnamese kh against h, Arabic khaa against haa, Indonesian kh against h -- and Vietnamese is the largest share of that very count. ch keeps all three and is the German rendering convention for exactly this sound in exactly this position: Chruschtschow, Chabarowsk, Charkow, Chan. Non-initially it is unambiguous, and for /x/ and /ç/ it is not an approximation at all but German’s own two allophones (Bach, ich)."
+    },
+    {
+      "rule": "The Turkish table devoices word-final b d c g with four end-anchored fixups, because TDK’s loan orthography writes the voiceless letter (kitap, bant, metot, standart)",
+      "why": "Not needed, and this is the one place a loanword orthography and a pronunciation hint agree by doing nothing. German orthography keeps the voiced letter -- Kalb, Hand, Tag -- and Auslautverhärtung devoices it in the mouth for free, so a German reader shown a final b d g produces [p t k] without being told. Final voicing is unobtainable for a German reader either way; writing the German letter costs nothing audible and this table therefore has no devoicing fixup at all."
+    },
+    {
+      "rule": "RESPELL-SYSTEMS.md asks whether Kauderwelsch’s European volumes use a plainer German-based respelling than its Laotian one",
+      "why": "REACHED, and the answer is no: there is no series key to borrow, and each volume says so. The Algerian-Arabic volume states the design outright -- «Um dem Lernenden die Aussprache zu erleichtern, verwendet dieser Kauderwelsch-Band SEINE EIGENE Umschrift» -- so the transcription is per volume, not per series. Its length mark is a macron (ā ē ī ō ū) where the Laotian volume’s is a colon, so not even the length device is consistent. Its digraphs are international rather than German and are glossed BY REFERENCE to German -- sh «entspricht dem deutschen sch», dj «das deutsche dsch», plus gh, th and * for ayn -- so a Kauderwelsch-shaped table would print sh and dj, which a German reader without the book’s page-14 table reads as [sh] and [dj]. And the Latin-script volumes have no respelling column at all: the Uzbek volume teaches spelling-to-sound with German comparison words, and its respellings are incidental. Those incidentals are worth having anyway, because they independently confirm three choices here: ovkat «wie aukat» (au for the /aʊ/ offglide), boy «wie boj» and tuy «wie tuj» (j for the offglide), and keyin «wie käin (nicht wie dt. ei!)» -- an explicit warning that ei would be misread, which is why /eɪ/ here is ej and never ei. Stress in Kauderwelsch is underlining, in both volumes that mark it. It remains commercial with no published key, so it could not be faithfully encoded even setting copyright aside; it is cited here as corroboration, not as a source."
+    },
+    {
+      "rule": "Unaspirated stops and affricates written with German voiced letters (Mandarin and Korean only)",
+      "why": "German p t k are aspirated word-initially and b d g are voiced and unaspirated, so the German contrast is carried more by aspiration than by voicing -- the same situation as Turkish and the opposite of Spanish. Where the target contrasts unaspirated with aspirated and has no WORD-INITIAL voiced series for b d g to collide with, the unaspirated series takes b d g and the aspirated takes p t k. Guarded by unless_inventory «#b #d #ɡ» rather than by target, which is what separates Korean -- whose ipa carries b d g only intervocalically, as the lenis series’ allophones -- from Thai and Hindi, where they are word-initial and contrastive. The same split runs through the affricates by a different guard: /tɕ/ and /ʈʂ/ take dsch where the target has the aspirated partner in its inventory and tsch otherwise, so pinyin j/zh come out dsch and q/ch come out tsch -- which is where German’s own Dschunke came from, and it lands on the pinyin and Revised Romanization a German reader has met in Beijing, Guangzhou, Gangnam and Busan. Hindi and Thai therefore lose their aspiration contrast on the stops, because German cannot write a third degree: ph is [f] in German (Philosoph, Fotograf) and would be actively wrong, and kh is simply [k] (Khaki)."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/θ/ /ð/ (English think and this, Arabic thaa and dhaal, Swahili)",
+      "out": "ss and s, and d",
+      "why": "German has neither sound and no letter. th was rejected outright rather than borrowed from English schooling: German th is [t] (Theater, Thema, Thron), so it would spend a digraph to convey a plain stop. [s] is the substitution a German speaker actually makes for English /θ/ and [d] for /ð/. Cost: /θ/ merges with /s/, so think and sink both print ssink, and /ð/ merges with /d/."
+    },
+    {
+      "sounds": "/ʔ/ /ʕ/ and pharyngealisation ˤ, and Vietnamese glottalisation ˀ",
+      "out": "dropped",
+      "why": "Duden Band 6 on the Knacklaut is the authority for dropping the glottal stop rather than approximating it: German introduces the articulation of word-initial vowels with one and «wird am Wortanfang weggelassen» -- never written, always supplied. So a dropped hamza leaves an ordinary onsetless German syllable and the reader puts the stop back unprompted. The pharyngeals are a real loss with no German letter at all."
+    },
+    {
+      "sounds": "/x/ /ç/ /ħ/",
+      "out": "ch",
+      "why": "Exact for the first two, which are German’s own ach-Laut and ich-Laut and are the same phoneme to a German (Bach, ich) -- so Japanese /çi/ prints chi and is read [çi] precisely, and Mandarin /x/ and Russian /x/ get the letter German already uses for them. Only the Arabic pharyngeal /ħ/ is an approximation, taking the velar for want of anything nearer."
+    },
+    {
+      "sounds": "/ɯ/ (Mandarin, Japanese, Korean, Thai, Turkish) and /ɨ/ (Mandarin, Russian)",
+      "out": "u and i",
+      "why": "German has no unrounded back vowel and no central one. u keeps height and backness and loses rounding, which is the error a German speaker makes anyway and the letter German writes for all of Japanese (Sushi, Sumo, Fukushima); it merges Korean ㅡ with ㅜ and Thai’s /ɯ/ with /u/. The Duden-Transkription’s y for Cyrillic ы was declined: German reads y as [ʏ], a ROUNDED front vowel, so the entrenched transliteration is further from [ɨ] than i is. This is the sharpest single loss in the table."
+    },
+    {
+      "sounds": "/y ø œ/ and /ɪ ə ɚ ɝ/",
+      "out": "ü ö ö and i e er",
+      "why": "Not approximations at all, and worth naming because they are where German is unusually well equipped. German has /y/ (Rübe), /ø/ and /œ/ (Öl, göttlich) as its own phonemes; unstressed German e IS [ə] (bitte, Rose); German i is [ɪ] (bist); and German -er is [ɐ], which is exactly English /ɚ/. French /ʁ/ likewise takes r because German /r/ is itself [ʁ]. Hindi is the one exception on the schwa: there /ə/ is the inherent vowel of every consonant letter and the language reads wrong in e (na-mas-TE:, not ne-mes-TE:), so it takes a, guarded on if_inventory «ʋ» as in the Spanish and Turkish tables."
+    },
+    {
+      "sounds": "/w/ (Mandarin, Swahili, Vietnamese, English, Korean, Japanese, Thai, Arabic, Spanish, Italian)",
+      "out": "u before a vowel, u as a falling offglide after a, o as a falling offglide after a mid or front vowel, nothing after u",
+      "why": "German has no [w] and w is [v], so RESPELL-SYSTEMS.md’s rule -- never emit v, write /w/ as u -- is taken as written. Before a vowel u gives a hiatus a German reader closes into a glide, and it is literally the Spanish spelling of the same sound (KUAN-tos for cuántos, en-KUENT-ro for encuentro, kua-HE-ri for kwaheri). As a falling offglide after a it gives German’s own au, exactly right for Thai /aːw/ and Arabic /awt/. But eu and ou are taken -- eu is [ɔʏ] and ou is [u] -- so after a mid or front vowel the offglide is o instead: Portuguese adeus prints a-DEOS, never a-DEUS. German readers left to themselves say [v] for English /w/; u is the deliberate departure from that habit, since it is the only labial glide German orthography can reach."
+    },
+    {
+      "sounds": "/ɪ/ and /j/ as a falling offglide",
+      "out": "j",
+      "why": "ai and oi would have been legal German ([aɪ] in Mai and Kaiser, [ɔɪ] in Boiler), but ei is [aɪ], which is RESPELL-SYSTEMS.md’s own instance of the trap -- «mei for /meɪ/ -> [maɪ]». Writing the offglide j throughout retires the whole digraph question in one rule instead of patching it per vowel, and it is the German rendering convention for precisely this: Sergej, Nikolaj, Tolstoj, Sarajevo, Krajina. Kauderwelsch’s Uzbek volume reaches the same answer from the other direction (boy «wie boj», tuy «wie tuj», keyin «wie käin, nicht wie dt. ei!»). Measured: ei and eu never appear anywhere in the output."
+    },
+    {
+      "sounds": "/ɲ/ /ʎ/ and Russian palatalisation /ʲ/",
+      "out": "nj, lj, and j before a back vowel or nothing before a front one",
+      "why": "nj is German’s own for it (njet, Konjak, Njandoma) and reads [nj], which is what [ɲ] is. It collides with a genuine /n/+/j/ across an engine syllable break -- Thai ตอนเย็น /tɔːn.jen/ prints to:-njen -- but harmlessly, since [ɲɛn] and [n.jɛn] differ only in the timing of a coarticulation. Russian’s /ʲ/ is dropped before a front vowel, where German ni and ti already palatalise, and written j before a back one, which is what the German conventions do (njet, Iljitsch, Uljanowsk); word-final palatalisation is lost, as in the Spanish and Turkish tables."
+    },
+    {
+      "sounds": "/ʈ ɖ ɳ ɽ ʂ ʐ/ and the Mandarin retroflex series",
+      "out": "t d n r sch, and dsch/tsch for the affricates",
+      "why": "German has no retroflexes. The dental letters are the standard German rendering of Devanagari, and Mandarin zh/ch/sh and j/q/x merge onto dsch/tsch/sch -- the same merger the Spanish and Turkish tables make for the same reason. /ʐ/ takes r because German onset r is [ʁ], a voiced fricative: right voicing and manner, wrong place, and the only spare voiced fricative letter German has."
+    },
+    {
+      "sounds": "the Korean tense series /p͈ t͈ k͈ s͈ tɕ͈/",
+      "out": "the plain aspirated letters p t k ss tsch",
+      "why": "German cannot write a third degree of a stop. Revised Romanization’s pp tt kk was declined for the reason in the geminate deviation: by Duden’s own rule a doubled consonant in German says the preceding vowel is short, not that the consonant is tense, so it would print a false vowel-length cue instead of the contrast it was meant to carry. Korean therefore keeps the lenis/aspirated split (b d g against p t k, which is RR and is what a German reader has seen) and loses the tense one."
+    },
+    {
+      "sounds": "coda /v ʋ/",
+      "out": "f",
+      "why": "German has no coda [v]: Auslautverhärtung makes aktiv [akˈtiːf] and brav [bʁaːf], and German’s own final -w is read [f] anyway (Gorbatschow, Kiew), so f is what the reader produces from either letter. It has a second effect worth recording: w is in core/respell.js’s VOWEL_LETTERS, so a coda w after a long nucleus pulled the length mark off the vowel and onto the consonant -- «Good evening» printed IW:-ning for I:F-ning. Writing f closes all 7 of those. Word-internal coda /v/ loses its voicing, which is the price."
+    },
+    {
+      "sounds": "coda /h/ (Indonesian kasih, Arabic)",
+      "out": "dropped",
+      "why": "The severe collision RESPELL-SYSTEMS.md flags: h is simultaneously the best glyph for /h/ and German’s post-vocalic length marker, so a post-vocalic h is silent and merely lengthens (aha -> [aːa], Bahn, Naht). h is therefore reserved to the syllable onset absolutely, and a coda /h/ is dropped rather than written -- which is also what a German reader would do with it: KA-ssih would be read [kaːsiː], with the [h] gone and two spurious long vowels. Measured at zero: no vowel in the output is ever followed by h."
+    },
+    {
+      "sounds": "lexical tone (zh-Hans, th, vi)",
+      "out": "dropped",
+      "why": "Chao letters are not German letters and a reader with no key gets nothing from them. All four curated tonal sheets drop tone too. Thai and Vietnamese lose the most."
+    },
+    {
+      "sounds": "breathy voice /bʰ dʰ ɡʰ ɽʰ ɖʰ/ (Hindi)",
+      "out": "the plain letter",
+      "why": "h after a voiced letter would be read as German’s post-vocalic length h or as a separate [h], neither of which is breathy voice, and both of which are worse than silence. German’s own Indic names drop it (Buddha aside, Gandhi is [ˈgandi])."
+    }
+  ],
   "policy": {
     "syllable_separator": "-",
     "word_separator": " ",
@@ -246,6 +363,12 @@
     {
       "slot": "any",
       "ipa": "ɟ",
+      "out": "g",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
       "out": "dsch"
     },
     {
@@ -266,6 +389,16 @@
     {
       "slot": "any",
       "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "coda",
+      "ipa": "v",
+      "out": "f"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
       "out": "f"
     },
     {
@@ -504,8 +637,14 @@
     {
       "slot": "any",
       "ipa": "ʊ",
+      "out": "",
+      "after_out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
       "out": "o",
-      "after_out": "e i o ä ö ü"
+      "after_out": "e i o ä ö"
     },
     {
       "slot": "any",
@@ -521,8 +660,14 @@
     {
       "slot": "any",
       "ipa": "w",
+      "out": "",
+      "after_out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
       "out": "o",
-      "after_out": "e i o ä ö ü"
+      "after_out": "e i o ä ö"
     },
     {
       "slot": "any",
@@ -795,7 +940,7 @@
   ],
   "targets": {
     "ko": {
-      "comment": "TBD",
+      "comment": "Korean eo is [ʌ~ɔ] and German writes it o (Seoul, Chosŏn, Pusan). Everywhere else in the corpus the same symbol is English STRUT, Russian reduction or the Hindi inherent vowel, all of which want a. Same targets block as the Spanish and Turkish tables, for the same reason.",
       "phonemes": [
         {
           "slot": "any",
@@ -805,7 +950,7 @@
       ]
     },
     "ru": {
-      "comment": "TBD",
+      "comment": "espeak writes Russian palatalised з/с as /ʑ/, a plain sibilant it is not: здесь comes out with /ʑ/ where the sound is [zʲ]. So it takes s, which German reads [z] before a vowel. In Japanese and Korean the same symbol is a real alveolo-palatal inside /dʑ/ and takes sch. Logged as a G2P artefact by the Spanish and Turkish tables too.",
       "phonemes": [
         {
           "slot": "any",
@@ -815,7 +960,7 @@
       ]
     },
     "pt": {
-      "comment": "TBD",
+      "comment": "espeak writes the Portuguese reduced final vowel [ɨ] as /y/, a front rounded vowel it is not: noite comes out /nˈoɪtʃy/ and de /dʒy/. A logged G2P defect, not a fact about Portuguese. German unstressed e IS [ə], which is the closest thing German has to [ɨ] and the right letter here. German’s own /y/ rows are untouched -- fr, tr and zh-Hans keep ü.",
       "phonemes": [
         {
           "slot": "any",
@@ -825,7 +970,7 @@
       ]
     },
     "vi": {
-      "comment": "TBD",
+      "comment": "The same espeak defect with a different true value: Vietnamese ư is [ɨ~ɯ] and is written /y/ (được /ɗyəc/, trước /tʃyəc/), which is not the front rounded vowel. It takes u, the same letter this table gives /ɯ/ everywhere else, rather than the ü that /y/ would get.",
       "phonemes": [
         {
           "slot": "any",
@@ -834,5 +979,17 @@
         }
       ]
     }
-  }
+  },
+  "note": "Reader’s legend, per RESPELL-SYSTEMS.md: one glyph only -- «:» heisst, der Vokal davor wird lang gesprochen, which is Duden Band 6’s own Längenzeichen (raten against Ratten). Everything else is ordinary German, and the three German traps to remember when reading this table are that they are all closed by construction: h appears only at the start of a syllable and never lengthens a vowel, v never appears at all (w is /v/, f is /f/, u is /w/), and a syllable never begins with st or sp. The letters that do the unfamiliar work are all German ones -- sch tsch dsch ch ng nj z w j ä ö ü -- and ss is /s/ in an onset where a single s would be read [z]. CAPITALS mark the stressed syllable; the table itself emits none, so every capital is prosodic. Leads and their state: Duden Band 6’s IPA-subsetting wording, its Längenzeichen, its Knacklaut note and its statement of what a German doubled consonant means were all READ, from the publisher’s own Leseprobe on shop.duden.de, and are quoted in derives_from; PONS’s notation was READ and is IPA in square brackets with no respelling; Duden’s Unterpunkt/Unterstrich wording was READ, from the Deutsches Universalwörterbuch Leseprobe; Kauderwelsch was READ, four volumes (Algerisch-Arabisch, Usbekisch, Chinesisch and the Laotisch front matter the survey already had), and gives no borrowable key. NOT reached: LANGENSCHEIDT and WAHRIG remain unverified -- no first-party statement of either’s notation was retrieved, and they should not be described from search summaries; the DAWB (Krech/Stock/Hirschfeld/Anders, Deutsches Aussprachewörterbuch, de Gruyter 2009) is IPA at the level of its publisher’s description and its own transcription chapter was NOT read, so it is corroboration of the IPA-only verdict and nothing more. Duden Band 6 §G.I «Aussprachetabellen» exists and covers Albanisch, Bulgarisch, Chinesisch, Englisch, Französisch, Italienisch, Neugriechisch, Niederländisch, Norwegisch, Polnisch, Portugiesisch and Rumänisch among others, but it runs spelling-to-sound for a German reader and so fails RESPELL-SYSTEMS.md’s own respelling test; only §G.I.2, which states German letter values for foreign sounds, is sound-keyed, and that is the half borrowed here.",
+  "policy_note": "max_onset 1 is the Amtliche Regelung §108, not a tuning: «Stehen zwischen Vokalen mehrere Buchstaben für Konsonanten, so kommt der letzte auf die neue Zeile» -- Fens-ter, knusp-rig, Ach-tung, Zip-fel, sechs-te; and §108 E1 keeps ch, sch, ph, rh, sh and th undivided, which is one PHONEME and so is exactly what max_onset counts. German’s own syllable division is therefore coda-maximising, and a German reader shown pro-blem is shown a division their schoolbook rejects. §112 permits the other one in foreign words -- «Pub-likum / Pu-blikum, Feb-ruar / Fe-bruar, Sig-nal / Si-gnal, Hyd-rant / Hy-drant» -- which makes both legal and 1 the base rule. Measured over all 11,782 rows: 1 against 2 differs on 1237 rows and 2 against 3 on 26, so the second decision barely exists. Classifying every syllable onset the table emits that FOLLOWS a hyphen, as a legal German onset group or not: max_onset 1 gives 27,562 legal and 1,138 illegal; bare 2 gives 26,841 and 1,870; bare 3 gives 26,817 and 1,894. The 732 extra illegal onsets at bare 2 are dominated by one thing, and it is the first trap. /s/ must be spelled ss in an onset here, because a syllable-initial st is [ʃt], so a medial /st/ or /sp/ onset prints sst or ssp: syllable-initial sst/ssp counts 91 at max_onset 1, 354 at bare 2 and 367 at bare 3, and sst alone appears as an onset 302 times at bare 2 -- an-der-SSTAEND, ek-SSPEK-tid, PAE-sspo:rt, a-NAUN-ssment, KA-sste-me-ri. At max_onset 1 the /s/ falls into the coda, where a single s is read [s]: an-ders-TAEND, eks-PEK-tid, PAES-po:rt, a-NAUNS-ment, KAS-te-me-ri. All 91 that remain at 1 are WORD-initial, which no max_onset can move and which German reads correctly anyway, so 91 is the floor rather than a residue. German therefore goes the same way as Turkish and the opposite way from Russian, for a reason of its own. reader_onsets IS UNUSED, and that is measured rather than skipped. The list was derived the way the Spanish table’s was: all 362 clusters the engine learns across the sixteen targets were spelled as onsets by this table’s own rules and intersected with the German Anlautverbindungen, which admits 55 -- bl br bɭʲ bɹ bɾ bʁ, dr dɹ dʁ ɖɾ ʔdɹ, fl fr fɹ fɾ fʁ, ɡl ɡɭ ɡɾ ɡʁ gr, kl kr kɭʲ kɫ kɹ kɾ kʁ kʰl kʰr krʲ ql qɹ ʔqɹ, pl pr pɭ pɹ pɾ pʁ pʰl pʰr prʲ, tr tɹ tɾ tʁ ʈɾ trʲ tʕr, ħr xr, ʃt ʔʃt, tsvʲ -- essentially C+liquid plus scht, chr and zw, and notably NOT st or sp, whose German spelling here (sst, ssp) is not a German onset group and so drops out of the intersection for free. Fed back in, max_onset 2 with those 55 reader_onsets produces EXACTLY the census of max_onset 1 -- 27,562 legal, 1,138 illegal, 91 sst/ssp -- and differs from it on 508 rows, every one of which is a group §112 explicitly permits either way (PRA:B-lem / PRA:-blem, FEB-ru:-e-ri / FE-bru:-e-ri, TSCHILD-ren / TSCHIL-dren, ad-RES / a-DRES, EJP-rel / EJ-prel). Where German has a cognate it hyphenates the max_onset 1 way -- hun-dert gives hand-rid, Ad-res-se gives ad-RES -- so 1 is kept and the 55-entry list is dropped as machinery that buys a hyphen position §112 leaves free. The premise that German’s large onsets need protecting turns out not to bite: Straße, Pflicht, Schwein and sprechen are all WORD-initial, and max_onset never touches a word-initial onset, so they survive at 1 untouched (SDRAFST-wuj-ti, SSTRASCH-na-wa, SSKU-si, and schp- and scht- throughout). The remaining 1,138 illegal onsets are almost entirely this table’s own deliberate Cj groups -- nj 381, ssj 166, lj 124, rj 77, bj 73, dj 42, tj 40, schj 36, which is 939 of the 1,138 -- and German does admit those in loans and names (njet, Konjak, Tjalk, Bjarne); the whitelist simply did not list them. policy.fixups «all» was measured too: it changes 2 rows and improves both (ssang-RAR for ssanng-RAR, ssangj for ssanngj), where the ng([kg]) and nng repairs have to fire in sequence on one syllable. Spanish gained 5 rows and adopted it, Russian lost 16 and declined; German gains 2 and loses none.",
+  "measurements": [
+    "Gaps: 0. `respell_check.mjs de --gaps` printed «none» on the first build and still does, and the stronger bar holds too -- no IPA character of any kind survives anywhere in the output of any of the sixteen targets, 0 matches for U+0250-U+02AF and U+0300-U+036F over 11,782 rows. The table has 155 phoneme rules and needed them, because the inventory was read off the real ipa column of all sixteen targets before a single rule was written: 146 distinct phonemes, 487 distinct nucleus strings, 481 onsets and 347 codas. Only two rules were ever added in response to a gap; the rest of the work was reading output.",
+    "--units: 18 phonemes spelt by decomposition rather than by a rule of their own, and all 18 are the deliberate kind. Fourteen are Russian’s palatalised consonants (tʲ 277, nʲ 251, ɭʲ 161, rʲ 125, dʲ 122, mʲ 117, tʃʲ 103, sʲ 100, vʲ 63, pʲ 46, bʲ 38, kʲ 26, ɡʲ 19, fʲ 8), whose /ʲ/ is written j before a back vowel and dropped before a front one by rule; three are the Arabic and Vietnamese dental mark (t̪ 528, s̪ 103, ts̪ 6), which decomposes correctly to t, to ss in an onset and s in a coda, and to z; one is Arabic pharyngealisation (dˤ 89), which decomposes to d. Each was checked by reading the spelling it produces rather than by trusting the count: no diacritic in this table becomes a letter by accident. One limitation of the diagnostic is worth recording for the next table -- `phonemesOf` does not bind U+02D0 to a consonant (only `syllabify` does), so --units cannot see a geminate consonant at all, and this corpus has 400 of them. They had to be censused separately and are listed in the geminate deviation.",
+    "The three traps RESPELL-SYSTEMS.md names, each measured on the output column of all 11,782 rows rather than reasoned about, and each at zero. Post-vocalic h: 0 -- no vowel in the output is ever followed by h, because /h/ is onset-only and a coda /h/ is dropped. The v/w swap: 0 -- the letter v is never emitted anywhere; /v ʋ/ take w in an onset and f in a coda, and /w/ takes u or o. Syllable-initial st and sp: 0 -- a bare s never opens a syllable before t or p, because onset /s/ is ss. Four further German digraph traps were measured on the same pass and are also 0: ei (which would read [aɪ]), eu and äu (which would read [ɔʏ]), ie (which would read [iː]), and qu (which would read [kv]). ph, ck and z-before-a-consonant are 0 as well. Twelve traps, twelve zeros, and the two that cost something are named in the approximations: onset /s/ pays a doubled letter, and coda /h/ is lost.",
+    "Length: 6,249 colons on 3,080 of the 11,782 rows. Placement is correct because the engine’s markNucleus is head-aware -- a falling diphthong takes the mark on its first element and a rising one on its last -- so Thai /aːw/ gives a:u and not au:. One residual class was found by reading and it lived in the coda: w and y are in VOWEL_LETTERS but j is not, so a coda spelled w extended the vowel run the mark searches and captured it, and «Good evening» printed IW:-ning where it should print I:F-ning. Spelling coda /v/ as f closes all 7 of those and is independently correct German, so the residue is 0 and no misplaced mark survives (0 matches for w: and j: in the output). A second, smaller interaction is recorded rather than repaired: 5 rows put a colon immediately before a doubled consonant (Thai i:kk-rang, ssakk-ru:), where the doubling says «short» and the colon says «long» about the same vowel. Both come from a coda /k/ meeting an onset /kʰ/ that max_onset 1 correctly leaves together in the coda.",
+    "The capitals question was measured rather than assumed, because RESPELL-SYSTEMS.md’s objection to caps for German is that German capitalises its nouns. With policy.stress «none» this table emits 0 capital letters in 11,782 rows: every out value in it is lowercase, and a respelling of a Japanese or Thai phrase contains no German noun to capitalise. So every capital in this column is unambiguously the stress mark and there is nothing for the reader to sort. stress_min_syllables 2 keeps a monosyllable from shouting (non lo sso, ha-i, schi, pal).",
+    "Two collisions this table creates were looked for on purpose and came back negligible. /s/ spelled ss meeting /x ç ħ/ spelled ch would make a spurious sch read [ʃ]: 1 row in 11,782, and it is Arabic /sxxn/, one of the 73 logged rows that lost their short vowels to the G2P. /ɲ/ spelled nj meeting a genuine /n/ + /j/ across an engine syllable break: 381 onsets, all harmless, since [ɲ] and [nj] differ only in the timing of one coarticulation -- Thai ตอนเย็น /tɔːn.jen/ prints to:-njen and is read [tɔːɲɛn], which is the same string of sounds. The /w/ offglide’s o-variant, which exists only because eu and ou are taken in German, fires 35 times (meo 24, weo 13, keo 6, deo 5, teo 4).",
+    "Faithfulness has no agreement score here and none is invented: all sixteen curated sheets gloss into English, so a German reader has no labelled set by construction. What CAN be checked is whether a table derived from the German rendering conventions lands on them where they independently exist, and Russian is the hardest such test because German has an entrenched respelling for it. It does: Здравствуйте prints SDRAFST-wuj-ti, Добрый вечер prints DOB-rij WE-tschir, Спасибо prints sspa-SSI-ba, Пожалуйста prints pa-SCHA-lujs-ta, Ничего страшного prints ni-tschi-WO SSTRASCH-na-wa and Я не знаю prints ja ne SNA-ju -- Sdrastwuite, Dobry Wetscher, Spassiba, Poschalujsta, snaju: the convention Duden Band 6 §G.I.2 describes, arrived at from the ear rather than from the Cyrillic spelling, which is the respelling test RESPELL-SYSTEMS.md sets and which the Duden-Transkription itself fails.",
+    "Three residues in the output are the logged Arabic G2P defect rather than this table, and they are recorded so the next reader does not chase them: gssssa:lt, mthhr and bdschht all come from rows espeak left without short vowels (/ɣssˈaːlt/, /mt̪hhr/, /bdʒht/). 101 rows contain a run of four or more consonant letters, and they are overwhelmingly that same defect. The table is faithfully spelling a defective input in each case; the fix belongs in scripts/build_ipa.py."
+  ]
 }

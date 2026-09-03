@@ -1,10 +1,145 @@
 {
   "source": "fr",
   "accent": "fr-FR",
+  "status": "ready",
   "version": "1",
-  "derives_from": "TBD",
-  "deviations": [],
-  "approximations": [],
+  "derives_from": "No French respelling standard exists: TLFi, Larousse and Le Robert are IPA-only, fr.wikipedia's Modele:Prononciation inserts an audio file, and RESPELL-SYSTEMS.md accordingly puts fr in the seven-to-invent group. Two sources were reached and both are used, so only the method is invented and the inventory is not. (1) THE INVENTORY, borrowed and verbatim: fr.wikipedia, Aide:Alphabet phonetique international (CC BY-SA, fetched 2026-09-03), an IPA-to-French-grapheme table -- the same kind of source the Spanish table took es.wikipedia's «Aproximacion en espanol» for, and the survey did not look for it. Every reflex below is its own example word: [a] patte, [ɛ] bête/cèpe, [e] clef/été, [ə] je, [i] fini, [o] beaucoup/dôme, [ɔ] Garonne, [ø œ] feu/bœuf, [u] vous/août, [y] mur, [ɑ̃] sans, [ɛ̃] vin/main, [ɔ̃] son, [œ̃] brun, [ʃ] cher/schéma/SHORT, [ʒ] journal, [k] cabinet/quoi/KAKI, [ɲ] champagne, [ŋ] ping-PONG, [ʁ] Paris/carré, [s] sonore/façade/CHASSE, [z] zèbre/DÉSIRER, [ɥ] lui/huit, [j] yaourt, [h] ha!, [m] même/kilogramme, [l] laver/ville, [f] fabuleux/phonetique, [ʔ] oh oh!. Four of those examples decide four of this table's hardest choices on their own: `short` licences sh for /ʃ/, `ping-pong` licences ng for /ŋ/, `chasse` against `desirer` is the intervocalic-s trap and licences ss for /s/, and `dôme` against `Garonne` is the /o/-/ɔ/ contrast French actually writes. The page states it recommends IPA only and offers no respelling convention, which is why it is an inventory and not a key. (2) THE METHOD: Pierre Larousse's 1856 Dictionnaire de la prononciation figuree, the one real French respelling tradition, folded into the main entries from 1878. Its specifics are UNVERIFIED and stay unverified after two attempts -- the two examples the survey reports, bourg -> bourk and cep -> cè, are all that any search returned, and fr.wikisource's Nouveau Larousse illustre page for A was fetched and carries the letter's history essay rather than headword respellings. It is therefore cited for exactly the two principles those two examples demonstrate and for nothing else: write the consonant French orthography would swallow (bourg -> bourk), and write the vowel quality with the accent that fixes it while dropping what is silent (cep -> cè). Both are load-bearing here. (3) THE CONSTRAINTS: the survey's own French trap table, which decides most of what is left, and which this table follows on seven of its nine rows and overrules on two.",
+  "deviations": [
+    {
+      "rule": "A word-final consonant is propped on a mute `e`. Larousse's own bourg -> bourk instead reaches for a final French does pronounce.",
+      "why": "The survey names this the trap with no cost-free option and it is right. French reads no final -e, -s, -t, -d, -p, -x, -z, -g, and a final -n or -m nasalises the vowel instead, so an English `good night` respelled `goud nait` reads [gu nɛ] -- two phonemes gone and a third changed. Larousse's k works for one word at a time because he knows the word; a transducer does not. So the general device is the trailing mute e, which costs at most a schwa French deletes anyway and which makes the consonant certain: goude naite is [gud najt], kanne is [kan] not [kɑ̃], gue is [ɡ] not silence, sse is [s] not [z], che is [ʃ], je is [ʒ], ze is [z]. It fires only word-finally and only after the letters that need it: `r l f k`, `kh` and `th` are left bare, because those are exactly the finals French does pronounce -- the CaReFuL set the survey names, plus cheikh and zenith -- and a prop there would be pure noise. It is also skipped after a single final `n`, `m` or `-ng`, where the nasal vowel is the reading this table wants."
+    },
+    {
+      "rule": "A coda /n/ or /m/ is written doubled: `nn`, `mm`.",
+      "why": "The mirror of the same trap, and the survey's own first suggestion. Any vowel before n or m in the same syllable nasalises unconditionally, so /kanto/ spelt kan-to reads [kɑ̃to] and /in/ spelt in reads [ɛ̃]. A doubled nasal is how French writes the oral reading and it is exhaustive across the vowels this table emits: bonne, banane, innover, Rennes, jeune, lune, comme, immense -- ann enn inn onn unn ounn eunn are all oral vowel plus [n]. So kann-to is [kanto], KOUANN-tosse is [kwantos], ninne is [nin], sso-ROUNNE is [sorun]. This is what decouples the hyphen from the vowel: the survey warns that hyphenation and nasalisation are coupled in French and that the syllabifier is therefore not cosmetic, and with the doubling they are not coupled, so max_onset and reader_onsets can be chosen on phonotactic grounds alone. Japanese moraic /ɴ/ is deliberately exempt -- see approximations."
+    },
+    {
+      "rule": "/o/ is `ô` and /ɔ/ is `o`. The survey's trap table does not mention the contrast.",
+      "why": "French writes /o/ at least six ways -- o, ô, au, eau, ot, os -- and the survey's framing is that every choice trades transparency against looking French. The reverse direction is what matters here and it is not six-way ambiguous: fr.wikipedia's own examples are dôme for /o/ and Garonne for /ɔ/, so the two glyphs are the pair French uses to fix a quality it otherwise leaves to syllable shape. It costs nothing legible -- ô degrades to o, which is the same vowel to within the contrast -- and it buys the 4957 Japanese, Korean and Italian /o/ syllables (a-ri-ga-TÔ, and Tôkyô is French's own spelling) against Thai and Mandarin /ɔ/. The same argument in reverse is why /e/ and /ɛ/ get é and è rather than a bare e: bare e in French is a schwa, a silence or an [ɛ] depending on syllable shape, so it is reserved for /ə/, where all three readings are acceptable."
+    },
+    {
+      "rule": "/I/ is `ï`, and every falling offglide /j/ or /ɪ/ is a tréma too: /aɪ/ aï, /eɪ/ éï, /ɔɪ/ oï, /uj/ ouï.",
+      "why": "The alternative was the bare i, and in French ai is [ɛ], ei is [ɛ], oi is [wa] and ui is [ɥi] -- four digraphs, so a bare i after a vowel changes the vowel instead of adding one. The tréma is the French device for exactly this instruction, read it separately, and it is ordinary orthography: naïf, maïs, Haïti, aïe, and Hanoï, which is already this table's own output for /hanɔj/. It also degrades benignly, which is the argument that settles it: at 5.22pt italic muted the tréma is the first thing to go, and what is left is i, which is the same vowel. Nothing else in this table depends on a mark surviving."
+    },
+    {
+      "rule": "/k/ is `k` everywhere. French writes it c, qu or k by position.",
+      "why": "The Italian table's argument, and it transfers exactly. fr.wikipedia's own third example for [k] is kaki, and k is read [k] by any French reader (kilo, kayak, ski, moka, koala, whisky, kebab). It removes the c/qu decision from the most frequent consonant in the corpus, and it keeps c out of the output entirely -- which matters because c before e and i is [s], so a table that emits c has to condition every occurrence on a following vowel it cannot always see. `qu` was never available: it is two letters for one sound and it collides with /kw/, which this table has to write kou (koua for /kwa/)."
+    },
+    {
+      "rule": "/s/ is `ss`, and plain `s` only word-initially.",
+      "why": "fr.wikipedia gives both chasse and desirer, which is the trap stated as a minimal pair: a single s between vowels is [z]. Every non-initial /s/ in this corpus is potentially intervocalic -- a-BI-ssé for /abise/ would be [abize] with one s -- and the hyphen does not block the rule, since French compounds read straight through it. So ss is the default and s is the exception, not the reverse. A syllable_fixup then thins ss back to s before a consonant, where French reads a single s as [s] already and the doubling would only be noise: MA-smouh, not MA-ssmouh."
+    },
+    {
+      "rule": "/ʃ/ is `ch`, but `sh` before a liquid.",
+      "why": "chr and chl are the Greek-loan spellings and they are [kR] and [kl] in French -- chrome, chlore, chlorure -- so German /ʃr/ and /ʃl/ spelt chr and chl would come out with a [k] and no [ʃ] at all. fr.wikipedia's own third example for [ʃ] is short, so sh is a French spelling of the same sound, and shr and shl cannot be misread. 39 rows across German, Russian and Arabic, 9 of them word-initial where nothing else could have rescued them, since the first syllable's onset is taken whole and reader_onsets cannot reach it."
+    },
+    {
+      "rule": "/ɡ/ is three-way: `g` before a back vowel, `gu` before a front one, `gh` before /y/ and /ɥ/. Coda /ɡ/ is `g`, or `gu` word-finally.",
+      "why": "g before e, i and y is [ʒ] in French, so the front cases need the u -- guéï for /keɪ/, LIN-gué for /lẽːɡeː/, O-gueste for /ˈɔːɡəst/, which is French's own device in guitare and langue. But gu before a back vowel is [ɡw] (Guadeloupe), so the back cases must not have it; and gu before u is [ɡ] with the vowel swallowed, which is why /ɡy/ and /ɟy/ take gh instead -- ghu-naï-DOUNNE for Günaydın, not guu-. gh is [ɡ] before every vowel in French (Ghana, ghetto, spaghetti), which is also why it spells /ɣ/ and why /ŋ/ before a front vowel is ngh, Vietnamese's own nghi. /ɡ/ plus a liquid is spelt whole as gl and gr for the same reason: the liquid stands between the g and the nucleus, so the conditional would emit gur- and read [ɡyʁ]."
+    },
+    {
+      "rule": "Stress is marked with capitals. French has no lexical stress and no stress-marking tradition, so this is an import.",
+      "why": "The survey's own resolution for French, and its reasoning holds: the acute would be read as a vowel-quality change, since é means [e] in French and this table already uses it that way for 5010 rows; the grave is taken by /ɛ/ for the same reason; bold was the research thread's preference and the renderer cannot do it (one RunStyle per field, atoms.js:138); and the two remaining devices are prime, which is Devanagari's, and none. Capitals it is, with a legend line, as a documented choice rather than an inherited assumption. It costs nothing to the reading -- SS is still [s], CH still [ʃ], GU still [ɡ], AN still nasal, and uppercase French keeps its accents in Unicode (È É Ï Ô), which the charset confirms."
+    },
+    {
+      "rule": "Lexical tone is dropped.",
+      "why": "Chao letters are not French letters and the card carries no key, so zh-Hans, th and vi lose tone, as they do in all four curated tonal sheets and in every table written so far. Stated so it is not mistaken for an oversight. Vietnamese glottalisation is dropped with it, for consistency -- see approximations."
+    },
+    {
+      "rule": "Russian /nʲ/ is written `gn`; the rest of the palatalisation is dropped.",
+      "why": "French has no palatalised consonants and no way to write one that does not add a syllable, so 1305 of Russian's 1556 palatalised phonemes lose the feature, as they do in the Spanish and Italian tables. /nʲ/ is the exception because it is the one French has a letter for: [ɲ] is what Russian's soft n actually is, gn is French's own spelling of it (champagne), and it is free. gni-tchi-VO for nichego and svi-DA-gni-ya for svidaniya are both audibly closer than the n would have been, on 251 rows."
+    },
+    {
+      "rule": "The unaspirated series is written with French voiced letters where the target has no word-initial voiced stop.",
+      "why": "The Spanish and Italian rule and the same guard, for the same reason: French /p t k/ are unaspirated, so for most targets both series collapse on p t k. Where the target contrasts /p/ with /pʰ/ and has no voiced obstruent for the letters to collide with, the plain series takes b d g, the plain affricates take dj and the plain /ts/ takes dz -- which is also the Latin spelling a French reader has already met, pinyin for Mandarin (Beijing, Guangzhou) and Revised Romanization for Korean (bibimbap, Busan). The guard is `#b #d #ɡ` rather than `b d ɡ` because Korean's b d g are intervocalic allophones of the lenis series while Thai's and Hindi's are phonemes; a presence test groups Korean with Thai and collapses the contrast. Verified on the output: Mandarin gives dzaï, djeu-gueu and bou daou where Thai keeps pénn, to- and di."
+    },
+    {
+      "rule": "Syllables are hyphenated. Larousse brackets one word as an unbroken string.",
+      "why": "He is respelling a French headword; we are respelling a foreign phrase of up to a dozen syllables. The survey puts fr in the hyphen row, and in French the hyphen does more than break a line -- it is what keeps the doubled nasal and the ss readable as syllable-internal."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/h/ (Hindi, Arabic, Korean, Swahili, Indonesian, German, English)",
+      "out": "h",
+      "why": "French h is mute, so this is a borrowed letter with a borrowed value, and it is the one glyph in the table that needs the legend. It is kept rather than dropped -- the survey's suggestion -- for three reasons. fr.wikipedia's own example for [h] is the French interjection ha!, so the letter is not foreign to the sound. Degradation is benign and symmetrical: a reader who ignores it drops the /h/, which is exactly what dropping it in the table would have produced, so writing it can only gain. And it is orthographically free in French, where post-vocalic h neither lengthens nor colours the vowel (cahier, Sahara, ahuri) -- the collision that makes h expensive in German does not exist here."
+    },
+    {
+      "sounds": "/x/ (Spanish j, German ach, Russian x, Arabic kha, Vietnamese kh, Mandarin h)",
+      "out": "kh",
+      "why": "French has no /x/ and reads kh as [k] (Khartoum, khamsin, Khrouchtchev), so this is the Italian table's k with the h that names it: place and manner right, frication lost. Bare h would delete the consonant outright, which is the one option worse than approximating it. Mandarin is not overruled to h here as it is in the Italian table, because Italian h is at least aspirate-shaped in loans and French h is silent, so h would cost Mandarin the consonant it is meant to keep."
+    },
+    {
+      "sounds": "/θ/ and /ð/ (English think and brother, Arabic tha and dhal, Swahili th and dh)",
+      "out": "th and dh",
+      "why": "French reads th as [t] (the, theatre, thriller, zenith) and dh as [d], so the sound is approximated by a coronal stop, which is what the Italian table also chose. The digraph rather than the bare letter is deliberate on three counts: it is the French spelling of foreign th, it is the standard French transcription of the Arabic letters (hadith, dhikr), and for Swahili it is the target's own orthography, so those 83 rows respell to the spelling they came from. The alternative was ss and z, the substitution a French speaker makes unprompted, which loses the place of articulation and gains nothing legible."
+    },
+    {
+      "sounds": "/ŋ/",
+      "out": "ng, `n` before a velar, `ngh` before a front vowel",
+      "why": "French has no /ŋ/ and the survey proposes ngg or nng, but both are worse than the plain digraph: French would read either as a nasal vowel plus a spurious [ɡ]. ng gets one of two readings, and both are acceptable. In anglicisms it is genuinely [ŋ] -- fr.wikipedia's own example is ping-pong, and parking, camping, shopping all keep it -- and in native shape (sang, long) the /ŋ/ merges into the nasal vowel, which is the approximation French toponymy has always made: Pékin, Nankin, Shanghai, Guangdong, Mékong, Đà Nẵng. Vietnamese không comes out không, which is the Vietnamese spelling. Before a velar the n is enough, since French nk and ng already nasalise (banque): TRÏNK-guèlte. An onset /ŋ/ is real in Vietnamese and Swahili and takes ngh before a front vowel, because ngi would read [nʒi] -- which is Vietnamese's own nghi."
+    },
+    {
+      "sounds": "vowel length (Hindi, Arabic, Thai, Japanese, German, English)",
+      "out": "not written",
+      "why": "French has no length contrast and no device for one. Doubling is unavailable in both directions: aa and ee are not French sequences, and oo is read as a single [ɔ] (alcool). So policy.length is none and /ː/ is spelt as nothing, which loses 7652 marks. German is the sharpest case, since length is phonemic there. The one partial compensation is that /eː/ and /oː/ land on é and ô, the tense qualities, rather than on a bare e or o."
+    },
+    {
+      "sounds": "the retroflex series /ʈ ɖ ɳ ɽ ʂ/ and the Mandarin retroflex affricates",
+      "out": "t d n r ch, and dj / tch",
+      "why": "French has no retroflexes. The dental letters are the standard French rendering of Devanagari, and the Mandarin series joins the palato-alveolar one, which is where a French ear puts it."
+    },
+    {
+      "sounds": "the Korean tense series /k͈ t͈ p͈ s͈ tɕ͈/",
+      "out": "k t p ss tch",
+      "why": "French writes neither tense nor aspirated consonants, so three Korean series must become two. Tense merges with aspirated on the plain letters rather than with lenis on the voiced ones, which keeps the fortis quality audible -- sso-do for /s.@do/. Revised Romanization writes kk tt pp ss jj here; doubling a French consonant is inert, so it would have bought nothing."
+    },
+    {
+      "sounds": "Vietnamese glottalisation (the checked tones: /iˀ eˀ oˀ yˀ uˀ ɲˀ ɔˀ əˀ ɛˀ ɪˀ/)",
+      "out": "dropped",
+      "why": "112 rows. The glottal mark belongs to the nang and nga tones, and tone is dropped for a French reader, so dropping the glottalisation with it is the consistent choice rather than a separate one. These are the ten phonemes this table spells by decomposition -- vowel plus nothing -- and the decomposition is exactly what a rule of their own would have written."
+    },
+    {
+      "sounds": "/ʔ/, /ʕ/ and pharyngealisation",
+      "out": "dropped",
+      "why": "French has no letter and no sound. fr.wikipedia glosses [ʔ] as the interjection oh oh!, which is not a letter. A dropped hamza leaves an ordinary onsetless French syllable, which is what French does with its own Arabic loans, and it is also what makes the Arabic ʔ-initial clusters legible: /ʔdr/ spells dr, a group French admits."
+    },
+    {
+      "sounds": "/ħ/ (Arabic ح)",
+      "out": "h",
+      "why": "Aspirate for pharyngeal: wrong place, right manner and voicing, and audible, which dropping it would not be. It inherits the legend line from /h/."
+    },
+    {
+      "sounds": "/ʐ/ (Mandarin r)",
+      "out": "j",
+      "why": "French r is uvular and would give [ʁ], and Mandarin's r is a voiced retroflex fricative; j is [ʒ], a voiced sibilant fricative, which is one feature away rather than two. It is also the EFEO transcription French readers have met (jen for ren). 34 rows."
+    },
+    {
+      "sounds": "/ɚ/ and /ɝ/ (English NURSE and the r-coloured schwa)",
+      "out": "eur",
+      "why": "French -eur is [œʁ], which is very nearly English NURSE, and it is a full-size letter sequence rather than the superscript r the Italian source invents and the survey rightly calls illegible at 5.22pt. ann-deur-STANNDE for understand."
+    },
+    {
+      "sounds": "/ɯ ʉ/ and /ɨ/ (Japanese u, Turkish undotted i, Korean eu, Russian ы, Mandarin's apical vowel)",
+      "out": "ou and i",
+      "why": "French has no back unrounded or central vowels. /ɯ/ and /ʉ/ go to ou, which shares backness and height with them and is right outright for Japanese, whose /ɯ/ is a compressed [u]; the cost is that Turkish i-dotless merges with u and Korean eu with u, which is what the Spanish and Italian tables also accept. /ɨ/ goes to i, which is what Russian transcription and pinyin both write. Mandarin's apical /ɯ/ -- the vowel of shi, si, zi -- is overruled to i in the targets block, following the Italian table, because pinyin writes it i and chi is what a French reader should see."
+    },
+    {
+      "sounds": "/ʌ/ (English STRUT, Russian reduction, the Hindi inherent vowel)",
+      "out": "a",
+      "why": "Right for Russian and Hindi, where the symbol is a reduced or inherent central vowel, and the ordinary French rendering of English STRUT. Korean is overruled to o in the targets block, since there the symbol is eo, which is [ʌ~ɔ] -- French o exactly."
+    },
+    {
+      "sounds": "/ʎ/ (Italian gli)",
+      "out": "ly",
+      "why": "French has no palatal lateral. y before a vowel is [j] in French (Lyon), so ly is [lj], which is what Italian /ʎ/ reduces to in any non-native mouth. `ill` was the obvious alternative and the survey rules it out: it is [ij] after a vowel but [il] word-initially, so it cannot be used unconditionally."
+    },
+    {
+      "sounds": "/w/",
+      "out": "ou",
+      "why": "fr.wikipedia gives w (Rwanda, watt), but w in French is [v] as often as [w] -- wagon, Wagner, wallon -- and the ambiguity is not recoverable from context on a card. ou before a vowel is unambiguous and native: oui, ouest, ouate, jouer, douane. So /wa/ is oua and /kwan/ is kouann. The cost is that /w/ and /u/ share a spelling, which is harmless except in the one sequence /ui/, where oui reads [wi]."
+    }
+  ],
   "policy": {
     "syllable_separator": "-",
     "word_separator": " ",
@@ -15,7 +150,7 @@
     "max_onset": 2,
     "locale": "fr-FR",
     "fixups": "all",
-    "reader_onsets": ""
+    "reader_onsets": "bl br bɭʲ bɹ bɾ dr dɹ dɾ fl fr fɹ fɾ kl kr krʲ kɫ kɭʲ kɹ kɾ kʰl kʰr pfl pl pr prʲ pɭ pɹ pɾ pʰl pʰr ql qɹ tr trʲ tɹ tɾ tʕr vr vrʲ xr ɖɾ ɡl ɡr ɡɭ ɡɾ ʃl ʃr ʈɾ ʔdɹ ʔqɹ ʔxl θɹ"
   },
   "splits": [],
   "phonemes": [
@@ -120,8 +255,14 @@
     {
       "slot": "onset",
       "ipa": "ɡʰ",
+      "out": "gh",
+      "if_nucleus_head": "y ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʰ",
       "out": "gu",
-      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j y ɥ"
+      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j"
     },
     {
       "slot": "any",
@@ -202,9 +343,35 @@
       "out": "ts"
     },
     {
+      "slot": "onset",
+      "ipa": "s̪",
+      "out": "s",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "coda",
+      "ipa": "s̪",
+      "out": "s",
+      "when": [
+        "not_word_final"
+      ]
+    },
+    {
       "slot": "any",
       "ipa": "s̪",
       "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
     },
     {
       "slot": "any",
@@ -253,11 +420,6 @@
     },
     {
       "slot": "any",
-      "ipa": "sʲ",
-      "out": "ss"
-    },
-    {
-      "slot": "any",
       "ipa": "rʲ",
       "out": "r"
     },
@@ -275,6 +437,27 @@
       "slot": "any",
       "ipa": "nʲ",
       "out": "gn"
+    },
+    {
+      "slot": "onset",
+      "ipa": "sʲ",
+      "out": "s",
+      "when": [
+        "word_initial"
+      ]
+    },
+    {
+      "slot": "coda",
+      "ipa": "sʲ",
+      "out": "s",
+      "when": [
+        "not_word_final"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "ss"
     },
     {
       "slot": "any",
@@ -337,16 +520,6 @@
       "out": "ou"
     },
     {
-      "slot": "any",
-      "ipa": "ɗˀ",
-      "out": "d"
-    },
-    {
-      "slot": "any",
-      "ipa": "tˀ",
-      "out": "t"
-    },
-    {
       "slot": "onset",
       "ipa": "p",
       "out": "b",
@@ -359,16 +532,18 @@
       "unless_inventory": "#b #d #ɡ"
     },
     {
-      "slot": "coda",
+      "slot": "onset",
       "ipa": "k",
-      "out": "k"
+      "out": "gh",
+      "unless_inventory": "#b #d #ɡ",
+      "if_nucleus_head": "y ɥ"
     },
     {
       "slot": "onset",
       "ipa": "k",
       "out": "gu",
       "unless_inventory": "#b #d #ɡ",
-      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j y ɥ"
+      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j"
     },
     {
       "slot": "onset",
@@ -438,11 +613,6 @@
     },
     {
       "slot": "onset",
-      "ipa": "ɡɫ",
-      "out": "gl"
-    },
-    {
-      "slot": "onset",
       "ipa": "ɡr",
       "out": "gr"
     },
@@ -477,8 +647,14 @@
     {
       "slot": "onset",
       "ipa": "ɡ",
+      "out": "gh",
+      "if_nucleus_head": "y ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡ",
       "out": "gu",
-      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j y ɥ"
+      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j"
     },
     {
       "slot": "any",
@@ -493,9 +669,16 @@
     {
       "slot": "onset",
       "ipa": "ɟ",
+      "out": "gh",
+      "if_inventory": "dʒ",
+      "if_nucleus_head": "y ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
       "out": "gu",
       "if_inventory": "dʒ",
-      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j y ɥ"
+      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j"
     },
     {
       "slot": "any",
@@ -565,6 +748,26 @@
       "out": "z"
     },
     {
+      "slot": "onset",
+      "ipa": "ʃr",
+      "out": "shr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃɹ",
+      "out": "shr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃl",
+      "out": "shl"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃɭ",
+      "out": "shl"
+    },
+    {
       "slot": "any",
       "ipa": "ʃ",
       "out": "ch"
@@ -632,6 +835,18 @@
     {
       "slot": "coda",
       "ipa": "n",
+      "out": "",
+      "before_onset": "n"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "",
+      "after_out": "n"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
       "out": "nn"
     },
     {
@@ -642,12 +857,35 @@
     {
       "slot": "coda",
       "ipa": "m",
+      "out": "",
+      "before_onset": "m"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "",
+      "after_out": "n m"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
       "out": "mm"
     },
     {
       "slot": "any",
       "ipa": "m",
       "out": "m"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲɟ",
+      "out": "ndj"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "",
+      "before_onset": "ɲ"
     },
     {
       "slot": "any",
@@ -687,6 +925,12 @@
     {
       "slot": "coda",
       "ipa": "ŋ",
+      "out": "",
+      "after_out": "n"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
       "out": "n",
       "before_onset": "ɡ k x q kʰ ɣ k͈ ɡʲ"
     },
@@ -699,7 +943,7 @@
       "slot": "onset",
       "ipa": "ŋ",
       "out": "ngh",
-      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j y ɥ"
+      "if_nucleus_head": "e ɛ ə ɜ ø œ ɤ i ɪ ɨ ẽ ĩ ɚ ɝ j"
     },
     {
       "slot": "any",
@@ -782,7 +1026,7 @@
       "slot": "any",
       "ipa": "w",
       "out": "",
-      "after_out": "ô"
+      "after_out": "ô u"
     },
     {
       "slot": "any",
@@ -917,8 +1161,20 @@
     },
     {
       "slot": "any",
+      "ipa": "ʊ",
+      "out": "",
+      "after_out": "ô u"
+    },
+    {
+      "slot": "any",
       "ipa": "ɪ",
       "out": "ï"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "",
+      "after_out": "i"
     },
     {
       "slot": "any",
@@ -998,11 +1254,6 @@
     },
     {
       "slot": "any",
-      "ipa": "ˑ",
-      "out": ""
-    },
-    {
-      "slot": "any",
       "ipa": "ʰ",
       "out": ""
     },
@@ -1019,26 +1270,6 @@
     {
       "slot": "any",
       "ipa": "ˤ",
-      "out": ""
-    },
-    {
-      "slot": "any",
-      "ipa": "ʱ",
-      "out": ""
-    },
-    {
-      "slot": "any",
-      "ipa": "ʷ",
-      "out": ""
-    },
-    {
-      "slot": "any",
-      "ipa": "ˠ",
-      "out": ""
-    },
-    {
-      "slot": "any",
-      "ipa": "ʼ",
       "out": ""
     },
     {
@@ -1063,31 +1294,6 @@
     },
     {
       "slot": "any",
-      "ipa": "̚",
-      "out": ""
-    },
-    {
-      "slot": "any",
-      "ipa": "̥",
-      "out": ""
-    },
-    {
-      "slot": "any",
-      "ipa": "̬",
-      "out": ""
-    },
-    {
-      "slot": "any",
-      "ipa": "̹",
-      "out": ""
-    },
-    {
-      "slot": "any",
-      "ipa": "̜",
-      "out": ""
-    },
-    {
-      "slot": "any",
       "ipa": "̃",
       "out": "n"
     }
@@ -1098,7 +1304,7 @@
       "out": "s\\1"
     },
     {
-      "match": "(ss|ch|dh|gh|gu|nn|mm|gn|ts|[bdjpqtvz])([,.;:?!]?)$",
+      "match": "(ss|ch|dh|gh|gu|nn|mm|gn|ts|[bdjptvz])([,.;:?!]?)$",
       "out": "\\1e\\2",
       "when": [
         "word_final"
@@ -1107,7 +1313,7 @@
   ],
   "targets": {
     "ko": {
-      "comment": "",
+      "comment": "/ʌ/ is Korean eo, which is [ʌ~ɔ] and which French o is exactly -- and o is what the Spanish, Portuguese, Italian and Turkish tables all reached for it (Seul, Coson, Pusan). Everywhere else in the corpus the same symbol is English STRUT, Russian reduction or the Hindi inherent vowel, all of which want a. 689 rows, and the one place where a targets block was cheaper than a typological guard, since nothing in Korean's inventory distinguishes it.",
       "phonemes": [
         {
           "slot": "any",
@@ -1117,7 +1323,7 @@
       ]
     },
     "pt": {
-      "comment": "",
+      "comment": "Two Brazilian readings, both first reported by other tables. /x/ is the rhotic, not a velar fricative -- recepcao is /xesesɐ̃ʊ̃/ and Socorro /sokoxʊ/ -- so kh would give kho-dass for rodas on 170 rows. And /y/ is the reduced final -e, a logged espeak defect (scripts/build_ipa.py): it is [i] in Brazil (de /dʒy/, noite /noɪtʃy/), so u would give dju and NOÏ-tchu on 287 rows, where every other target writes a real front rounded vowel there. French's own /y/ rows are unaffected -- de, tr and zh-Hans keep u.",
       "phonemes": [
         {
           "slot": "any",
@@ -1132,7 +1338,7 @@
       ]
     },
     "vi": {
-      "comment": "",
+      "comment": "The same espeak defect wearing its third hat: Vietnamese u-horn is [ɨ~ɯ] and is written /y/ (duoc /ɗyəc/, truoc /tʃyəc/), which is not the front rounded vowel u spells. 199 rows. ou is where this table sends /ɯ/, and [ɨ] has no French letter either, so it joins it rather than being written u.",
       "phonemes": [
         {
           "slot": "any",
@@ -1141,8 +1347,24 @@
         }
       ]
     },
+    "tr": {
+      "comment": "espeak writes Turkish /e/ as /æ/ before a coda liquid or nasal -- gelmek is /ɟælmɛk/, lütfen /lytfæn/, vejetaryen /veʒetarjæn/ -- which is real Turkish allophony but the wrong letter for a French reader: a is Turkish's other vowel, so gal- for gel- changes the word, where è is what this table already writes for the /ɛ/ the same letter gets elsewhere. 96 rows. Everywhere else /æ/ is English TRAP or the Portuguese reduced final -a, both of which want a. The second rule is the consequence: /ɟ/ before this vowel is Turkish's palatal g and needs the u that keeps it [ɡ] rather than [ʒ], which the global rule cannot know because it tests the IPA symbol and not the letter it becomes.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "æ",
+          "out": "è"
+        },
+        {
+          "slot": "onset",
+          "ipa": "ɟ",
+          "out": "gu",
+          "if_nucleus_head": "æ"
+        }
+      ]
+    },
     "zh-Hans": {
-      "comment": "",
+      "comment": "/ɯ/ here is the apical vowel of shi, si and zi, which pinyin itself writes i and which a French reader should see as i -- chi, not chou. Everywhere else the same symbol is Japanese u, Korean eu or Turkish undotted i, all of which want ou. Noted first by the Italian table.",
       "phonemes": [
         {
           "slot": "any",
@@ -1151,5 +1373,7 @@
         }
       ]
     }
-  }
+  },
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md, and it is two items: `h` se prononce, comme dans l'anglais home -- not the mute h of homme; and LA MAJUSCULE marks the stressed syllable. Everything else is ordinary French read as French, including k for /k/ as in kaki, ou for /u/ and /w/, u for /y/, ss for /s/, ch and sh for /ʃ/, j for /ʒ/, gn for /ɲ/, the g/gu/gh series, the tréma for a vowel read on its own, and the mute e that makes a final consonant sound. The output uses 23 of the 26 letters and four accented forms (è é ï ô), never q, w or x, and c only inside ch and tch. There is no curated French sheet and no agreement score to chase, so this table is held to zero --gaps, to a --units list with no accidental letters in it, and to being read aloud.",
+  "policy_note": "max_onset 2 with reader_onsets, both measured over every unique word of all sixteen targets. The measurement counts the multi-phoneme onsets the syllabifier actually builds at non-initial positions and classifies each by whether its French spelling is a group French's own division des mots leaves undivided -- one consonant, or an obstruent plus l or r. Bare max_onset 2 builds 1615 such onsets: 500 spelt as a legal French cluster, 352 collapsing to a single letter (the Arabic clusters whose hamza or ayin spells as nothing), and 763 illegal -- st 295, lk 67, mb 58, nd 46, lm 35, sk 32. French divides es-poir, res-ter, as-pect, so a reader shown PA-spôrte cannot begin that syllable and will repair it unpredictably. Bare max_onset 3 is worse rather than better, 1621 onsets with 788 illegal, because three-consonant onsets displace legal two-consonant ones. max_onset 1 has no illegal onsets and no clusters either: 236 onsets, every one of them collapsing to a single letter, which gives prôb-lème for prô-blème. reader_onsets gets both: 805 onsets, 569 of them spelt as a legal French cluster, zero illegal -- and more legal clusters than bare max_onset 2 managed, because removing st lets ins-truire fall as ins-tru- and keep tr. max_onset 3 with the same list is byte-identical, 805/569/0, so 2 is chosen: it is French's own number, it divides ins-truire and obs-tacle, and 3 buys literally nothing here. The list is derived rather than guessed, by the Spanish table's method: every cluster the engine learns from any of the sixteen targets, spelt through this table and kept if the spelling lands in a French group -- which is why it carries three of the four rhotic realisations (r, the tap and the English approximant), the aspirated and retroflex onsets of Thai, Mandarin and Hindi (kʰl, kʰr, ʈɾ), the Russian palatalised liquids (kɭʲ, prʲ, vrʲ), and the Arabic clusters that open with a hamza or an ayin spelt as nothing (ʔdɹ, ʔqɹ, ʔxl, tʕr). It carries no /ʁ/ entry because /ʁ/ is the French rhotic and French is the reader here, so no target has one; the two /ʁ/ rules in the phoneme table are kept anyway, since their absence from this corpus is an artefact of who is reading rather than a fact about the targets. Anything absent simply splits, which is the safe default. 52 entries, against Spanish's 42 and Italian's 107 -- French sits with Spanish and not with Italian because it admits no s-impura, and it excludes /ʃ/ plus a liquid so that chr and chl can never form mid-word (see deviations). policy.fixups is `all` and it is measured: `first` costs 215 rows, because the two fixups are not alternative repairs but a sequence -- the first thins ss before a consonant and the second props a final consonant on a mute e, and a syllable needing both (ann-deur-STANND for understand, èk-SKIOUSS for excuse) gets only the first under `first` and then loses its final consonant to French's silent-final rule. if_nucleus_head carries the front-vowel list rather than if_nucleus, which is what let this table state the g/gu question in one fifteen-symbol list where the Italian table needed 112 enumerated nucleus strings and 8KB."
 }

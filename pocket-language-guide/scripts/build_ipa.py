@@ -174,6 +174,11 @@ distrust the column as a whole.
   rules, so its absence silently disables them for Vietnamese.
 - Three `ja` rows carry romaji rather than IPA, having passed the Hepburn route
   through unconverted.
+- **espeak writes Turkish /e/ as `/æ/` before a coda liquid or nasal** on 96 cells:
+  *gelmek* is `ɟælmɛk`, *lütfen* is `lytfæn`. The allophony is real, but `/æ/` is the
+  wrong *letter* to hand a rule table -- `a` is Turkish's other vowel, so a reader
+  gets `gal-` for `gel-`, which is a different word. One table overruled it in a
+  `targets` block.
 - `it` has no word-initial /ts/ in the whole column, so `onsetClusters` never
   learns that Italian can open a word with it and *Grazie* breaks as `grats-ie`.
   Italian orthography writes it `z`; the G2P is giving something else.
@@ -187,7 +192,9 @@ distrust the column as a whole.
   real phoneme in `fr de zh-Hans` and a rule table cannot tell the cases apart.
   Portuguese's reduced final [ɨ] is /y/ on 287 cells (`de nada` is `dʒy nˈadæ`),
   Vietnamese's ư [ɨ~ɯ] on 199, and Turkish's ü inconsistently -- `Günaydın` is
-  right but `Özür` is `œzˈør`. Portuguese's final [ɐ] is likewise written /æ/.
+  right but `Özür` is `œzˈør`. Portuguese's final [ɐ] is likewise
+  written **/æ/ on 410 cells** -- `nˈadæ`, `bˈoæ`, `dʒˈiæ` -- a vowel no variety of
+  Portuguese has.
   Three rule tables have had to work around this with `targets` blocks.
 """
 import argparse

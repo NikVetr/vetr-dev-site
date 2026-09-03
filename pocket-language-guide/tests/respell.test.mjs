@@ -8,7 +8,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
-  createRespeller, onsetClusters, phonemeInventory, syllabify,
+  consonantRuns, createRespeller, onsetClusters, phonemeInventory, syllabify,
 } from '../core/respell.js';
 
 const rules = JSON.parse(await readFile('data/respell/rules/en__en-US.json', 'utf8'));
@@ -353,6 +353,41 @@ test('the inventory says where a phoneme occurs, not just whether', () => {
   assert.ok(phonemeInventory(thai).has('#b'), 'Thai does');
 });
 
+test('the reader may name a cluster the target only has mid-word', () => {
+  // Intersection alone could only subtract, so a reader whose own orthography
+  // opens syllables with a prenasal could not be given one unless a target word
+  // happened to *begin* that way. Swahili is the case: only Arabic has a
+  // word-initial `mb`, so a nasal was split from its own obstruent on 735
+  // boundaries -- exactly what BAKITA's division rules forbid.
+  const ipa = ['ˈnamba', 'ˈnamba', 'ˈnamba', 'ˈtata'];
+  assert.ok(!onsetClusters(ipa).has('mb'), 'no word here begins with /mb/');
+  assert.ok(consonantRuns(ipa).has('mb'), 'but the language plainly has the sequence');
+
+  const say = (/** @type {Record<string,any>} */ policy) => createRespeller({
+    rules: { ...rules, policy: { ...rules.policy, stress: 'none', ...policy } },
+    targetIpa: ipa,
+  }).respell('ˈnamba');
+  // `ah` rather than `a`, because this table spells an open /a/ that way -- the
+  // point is where the /m/ lands.
+  assert.equal(say({ max_onset: 2 }), 'nam-ba', 'unasked, the nasal closes the syllable');
+  assert.equal(say({ max_onset: 2, reader_onsets: 'mb nd' }), 'nah-mba',
+    'named, the prenasal opens the next one');
+
+  // And the guard holds: a cluster the target does not have at all is not invented.
+  assert.equal(say({ max_onset: 2, reader_onsets: 'pf' }), 'nam-ba');
+});
+
+test('a non-syllabic vowel joins the nucleus before it', () => {
+  // U+032F says "this vowel is not a syllable", which makes it an offglide by
+  // definition. Thai writes `ua̯ ia̯ ɯa̯` and each was splitting into two
+  // syllables, inflating a monosyllabic language's syllable count on 152 rows.
+  const clusters = onsetClusters(['tɕʰua̯j', 'tɕʰua̯j', 'tɕʰua̯j']);
+  const split = (/** @type {string} */ ipa) => syllabify(ipa, clusters)
+    .map((y) => `${y.onset}|${y.nucleus}|${y.coda}`).join(' ');
+  assert.equal(split('tɕʰua̯j'), 'tɕʰ|ua̯j|');
+  assert.equal(split('kʰɯa̯n'), 'kʰ|ɯa̯|n');
+});
+
 test('a cluster has to be legal for the reader as well as the target', () => {
   // `onsetClusters` answers "can this language open a word this way", which is not
   // "can my reader read it": a Spanish reader was shown `an-der-stánd` and
@@ -446,4 +481,27 @@ test('a rule can ask about the nucleus head, and about a whole next phoneme', ()
   assert.equal(r.respell('kaː'), 'ka', 'a back one does not');
   assert.equal(r.respell('ankʰa'), 'aN-kha', 'the whole aspirate is the next phoneme');
   assert.equal(r.respell('anka'), 'an-ka', 'and a plain /k/ is not it');
+});
+
+test('a glide with a vowel on both sides opens the next syllable', () => {
+  // The nucleus span grew greedily over glides and the two lax vowels, and only
+  // retracted if it *ended* on a glide -- so `V glide V` collapsed into one nucleus
+  // and the boundary between two syllables was lost. Four tables reported it
+  // independently, all on Mandarin 借用 /tɕjɛjʊŋ/, which came out as one syllable
+  // for a Japanese, Russian, Turkish and Indonesian reader alike.
+  const clusters = onsetClusters(['tɕjɛjʊŋ', 'tɕjɛjʊŋ', 'tɕjɛjʊŋ']);
+  const split = (/** @type {string} */ ipa) => syllabify(ipa, clusters)
+    .map((s) => `${s.onset}|${s.nucleus}|${s.coda}`).join(' ');
+  // Two syllables. The glide joins the *second* nucleus rather than opening it,
+  // which is what a rising diphthong is and what every table spells correctly.
+  assert.equal(split('tɕjɛjʊŋ'), 'tɕ|jɛ| |jʊ|ŋ');
+  // The two the Russian and Turkish tables lost a vowel on.
+  assert.equal(split('nʲijɪ'), 'nʲ|i| |jɪ|');
+  assert.equal(split('mijim'), 'm|i| |ji|m');
+
+  // A glide that genuinely closes a syllable still does, which is the half the old
+  // retraction loop got right: nothing follows the /ɪ/ here.
+  assert.equal(split('ˈkaɪt'), 'k|aɪ|t');
+  // And a glide before a *consonant* closes its own syllable rather than moving.
+  assert.equal(split('ˈajta'), '|aj| t|a|');
 });

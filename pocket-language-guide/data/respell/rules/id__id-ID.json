@@ -1,10 +1,110 @@
 {
   "source": "id",
   "accent": "id-ID",
+  "status": "ready",
   "version": "1",
-  "derives_from": "INVENTED. There is no Indonesian pronunciation-respelling tradition to borrow, so this table takes its inventory from EYD Edisi V's own letter system (Keputusan Kepala Badan Bahasa No. 0424/I/BS.00.01/2022: huruf vokal a e i o u, the optional diacritic e pepet, gabungan huruf konsonan kh ng ny sy, and the diftong ai au ei oi) and its shape from the one native precedent the survey identifies: KBBI's slash field, which prints ordinary Indonesian spelling between slashes with a full stop between syllables and a diacritic on nothing but e -- mer.de.ka /mekrdeka/, tab.let, ban.teng. That is this feature at miniature scale and it is the only Indonesian convention that is keyed on sound. Deliberately NOT derived from EYD V's Penulisan Unsur Serapan or from PUPI, which are keyed on the source language's spelling; see deviations.",
-  "deviations": [],
-  "approximations": [],
+  "derives_from": "INVENTED. There is no Indonesian pronunciation-respelling tradition to borrow, so this table takes its inventory from EYD Edisi V's own letter system (Keputusan Kepala Badan Bahasa No. 0424/I/BS.00.01/2022: huruf vokal a e i o u, the optional diacritic e pepet, gabungan huruf konsonan kh ng ny sy, and the diftong ai au ei oi) and its shape from the one native precedent the survey identifies: KBBI's slash field, which prints ordinary Indonesian spelling between slashes with a full stop between syllables and a diacritic on nothing but e -- mer.de.ka /mêrdéka/, tab.let, ban.teng. That is this feature at miniature scale and it is the only Indonesian convention that is keyed on sound. Deliberately NOT derived from EYD V's Penulisan Unsur Serapan or from PUPI, which are keyed on the source language's spelling; see deviations.",
+  "deviations": [
+    {
+      "rule": "EYD Edisi V, Penulisan Unsur Serapan (95 rules), and PUPI -- the two documents anyone reviewing this will reach for. Not derived from at all.",
+      "why": "They answer the wrong question, and this was checked in full rather than taken from the survey. Both ejaan.kemendikdasmen.go.id pages were read: the section's own statement of scope is 'huruf, gabungan huruf, dan imbuhan' under the principle 'Unsur bahasa sumber diserap ke dalam bahasa Indonesia dengan memprioritaskan bentuk' -- prioritising FORM. So every one of the 95 rules is INDEXED on a source-language letter or letter-combination. The survey recorded as unverified whether it is spelling-keyed throughout, and the strict answer is no: about 27 of the 95 do consult pronunciation, but only as a tie-breaker between two spelling-keyed outcomes -- 'Gabungan huruf ea yang dilafalkan /i/ menjadi i', 'Huruf t yang diikuti i dan dilafalkan /s/ menjadi s'. The index is still a letter, so there is no entry a phoneme can reach and the document fails the respelling test exactly as the survey concluded. PUPI is worse and says so: 6.5 changes foreign spelling 'hanya seperlunya', 6.6 keeps a cluster's 'bentuk visual' (hence pneumonia, tmesis, knebelit), 6.3 defines transliteration as 'lepas dari bunyi lafal yang sebenarnya'."
+    },
+    {
+      "rule": "KBBI's slash field is scoped to Indonesian headwords and to the e qualities only: 'Garis miring dipakai untuk lafal kata yang mengandung unsur bunyi /e/, /e/, dan /e/'.",
+      "why": "That scope is the whole convention we are extending: KBBI needs the diacritic only where its own spelling is ambiguous, which for an Indonesian word is nothing but e. A foreign phrase is ambiguous in more places, and every one of them is answered by an ordinary Indonesian letter, so the extension costs no new glyph. Of PUEBI 2015's three diacritics EYD V keeps only e-pepet ('pada huruf e pepet dapat diberikan tanda diakritik'), so é for /e/ and è for /ɛ/ are NOT used: /e/ and /ɛ/ both take plain e, which lands right for free because [ɛ] is the closed-final allophone of /e/."
+    },
+    {
+      "rule": "KBBI marks no stress, and instrumental work finds none in Malay -- 'neither phonemic nor predictable'.",
+      "why": "So policy.stress: caps is a NEW INSTRUCTION rather than a borrowed convention, and it is the weakest-justified field in this table. It is kept because it is the only device the typography can carry (RESPELL-SYSTEMS.md: bold and italic are unavailable, and a diacritic dies at 5.2pt italic muted) and because it is harmless where it is uninformative. The alternative was measured and rejected: an acute cannot be used here, because PUEBI's é means 'this e is /e/', so the mark would read as a vowel-quality change on exactly the vowel most likely to be stressed -- the same argument that rules the acute out for French. Expect the capitals to do no phonetic work and to need the legend."
+    },
+    {
+      "rule": "'v ... is virtually always pronounced as [f]', so the survey concludes it 'does not buy /v/'.",
+      "why": "The premise is right and the conclusion is not followed here: /v/ is written v, not f. A reader who merges them says [f] whichever letter is printed, so v is never worse; a reader who does not merge them gets the distinction; and f for /v/ would additionally collapse /f/ and /v/ ON THE PAGE for the four targets where the contrast is lexical (fr it de ru). v is a letter of the alphabet and the cost of using it is zero."
+    },
+    {
+      "rule": "q and x are letters of the Indonesian alphabet.",
+      "why": "Never emitted, per the survey: EYD restricts both to proper names and religious terms, so /q/ takes k (kiblat, kurban) and /ks/ falls out of the ordinary letters. Verified in the output -- 0 rows contain q or x."
+    },
+    {
+      "rule": "Indonesian orthography is near-phonemic, so the naive table writes each series with its own letter.",
+      "why": "Overruled for the two targets that contrast unaspirated with aspirated and have no word-initial voiced stop: there the unaspirated series takes b d g j dz instead of p t k c ts, and the aspirated series takes p t k c ts. That keeps a contrast that is lexical in the target and reproduces a Latin spelling Indonesian readers have already met -- pinyin (Beijing, Guangzhou) and Revised Romanization (Busan, bibimbap), both of which Indonesian media print as-is. The guard is unless_inventory '#b #d #ɡ' with a word-edge mark and not a bare presence test, because Korean's ipa carries b d g only intervocalically (0 word-initial) while Thai's and Hindi's are phonemes; a presence test groups Korean with Thai and destroys the aspiration contrast."
+    },
+    {
+      "rule": "EYD V can write gemination (Arabic loans keep it) and KBBI writes long vowels in some loans.",
+      "why": "Neither is written here. policy.length is none because EYD's pemenggalan splits adjacent vowels -- bu-ah, ma-in, sa-at -- so a doubled vowel reads as an EXTRA SYLLABLE, which is a wrong reading rather than a neutral one, and because doubling would move the syllable count the capitals are placed against. Consonant length collapses with it, so Italian otto is o.to and Japanese doozo is do.zo. Turkish's colon is a TDK notation with no Indonesian standing."
+    },
+    {
+      "rule": "eu is a vowel combination EYD V recognises, and the obvious letter pair for French /oe/.",
+      "why": "Not used. EYD V assigns eu the monophthong /ɘ/ (Aceh, Sunda, Rejang -- rule 32 keys it on that pronunciation), so it is taken; /ø/ and /œ/ take e instead. This also leaves eu free to mean what espeak's /eʊ/ sequences mean in Portuguese (a.DEUS) rather than a front rounded vowel."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/θ/ and /ð/ (English think/this, Arabic ث ذ, Swahili th/dh)",
+      "out": "s and z",
+      "why": "Indonesian has neither, and KBBI's own Arabic loans have already decided both: hadis (ḥadīth), zikir, azan, zalim. So s and z are not an invention here but the reading an Indonesian has been taught. The cost is English: this way is zis wei, north is nors."
+    },
+    {
+      "sounds": "/ʒ/ (French jour, Russian ж, Portuguese -ge)",
+      "out": "j",
+      "why": "The one gap with no letter and no digraph. j is the voiced palatal Indonesian does have and is what Indonesian's own loans use for it (jurnal < journal), so the error is manner (affricate for fricative) at the right place and voicing. zy was rejected: it would be a third thing in the legend, which RESPELL-SYSTEMS.md limits to one line."
+    },
+    {
+      "sounds": "/ʔ/ (glottal stop) and /ʕ/, plus pharyngealisation ˤ",
+      "out": "dropped",
+      "why": "What Indonesian does with its own Arabic loans: maaf < ma'af, Jumat < Jum'at, Alquran, alim. A dropped hamza leaves an ordinary onsetless Indonesian syllable. Note that final k is [?] in Indonesian anyway, so a target's final glottal stop often survives by accident."
+    },
+    {
+      "sounds": "/ħ/ (Arabic ح)",
+      "out": "h",
+      "why": "EYD's own Arabic correspondence, and audible, which dropping it would not be."
+    },
+    {
+      "sounds": "/y ø œ/ (front rounded vowels) and /ɥ/",
+      "out": "u, e, e, u",
+      "why": "Indonesian has six vowels and no rounded front ones. This is the error an Indonesian speaker makes anyway (Zurich, Brussel), and it keeps the height right while losing the rounding."
+    },
+    {
+      "sounds": "/ə ʌ ɨ ɤ ɜ/ and Turkish, Korean and Thai /ɯ/",
+      "out": "ê",
+      "why": "The one place this table adds a glyph, and the reason it is worth it: Indonesian writes /e/ and /ə/ with the same letter, so without the diacritic a reader cannot tell mer.de.ka's two e's apart. It is one glyph, it is EYD V's own optional mark, and it carries five foreign vowels no other Indonesian letter is close to -- Russian's reduced vowels (spa.SI.bê), Hindi's inherent अ (nê.MÊS.te), Mandarin's e and -i finals (jê.gê, syê), Turkish's ı (gu.nai.DÊN), Korean's ㅡ (sêl), and German's final -er and English NURSE, both ê plus r (kin.dêr, wêrks). Japanese /ɯ/ is excluded typologically rather than by target: espeak writes Japanese's only high back vowel as /ɯ/ and the language has no plain /u/ at all, so unless_inventory 'u' sends it to u there and to ê in the four languages that have both."
+    },
+    {
+      "sounds": "/æ/ (English TRAP, Turkish closed-final e)",
+      "out": "e",
+      "why": "e rather than a, against the loan spellings (taksi, aktif) and for the sound: [kɛn] for can and [sɛŋk] for thank are much closer than [kan] and [saŋk]. It is nearly free, because English /æ/ is always checked, so with max_onset 1 the syllable is closed and Indonesian's own allophony gives [ɛ] rather than [e] without being asked. Portuguese is excluded by a targets block, where the same symbol is a G2P artefact for final -a."
+    },
+    {
+      "sounds": "the retroflex series /ʈ ɖ ɳ ɽ/ and Mandarin's /ʈʂ ʈʂʰ ʂ ʐ ɻ/",
+      "out": "t d n r, and c j sy r r",
+      "why": "Indonesian has no retroflexes. The dental letters are the standard Indonesian rendering of Devanagari, and for Mandarin the retroflex and alveolo-palatal series merge on c j sy, which is what pinyin's zh/j, ch/q, sh/x collapse to for any reader without the contrast."
+    },
+    {
+      "sounds": "aspiration and palatalisation",
+      "out": "not written",
+      "why": "Indonesian has neither. Every aspirate has its own explicit rule so that /kʰ/ cannot decompose into k plus ʰ and print kh, which is the letter for /x/ -- that trap is the whole reason the aspirated and Korean tense series are listed one by one rather than left to a bare modifier rule. Palatalisation is dropped outright rather than written y or i, because y after s would spell sy (/ʃ/) and i would add a syllable Russian does not have; --units lists all 14 palatalised consonants for exactly this reason and every one of them is this decision."
+    },
+    {
+      "sounds": "vowel length, consonant gemination",
+      "out": "not written",
+      "why": "See deviations: doubling reads as an extra syllable in Indonesian. Hindi, Arabic, Thai, Japanese, German and Italian length is lost."
+    },
+    {
+      "sounds": "lexical tone (zh-Hans, th, vi)",
+      "out": "dropped",
+      "why": "Chao tone letters are not Indonesian letters and a reader with no key gets nothing from them. All four curated tonal sheets drop it too. This is the largest single loss in the table and it is unfixable without a device Indonesian does not have."
+    },
+    {
+      "sounds": "syllabic /m̩/ and /n̩/ (Swahili mtoto, nchi)",
+      "out": "ê plus the nasal",
+      "why": "Indonesian has no syllabic consonant, and mto.to asks for an onset it cannot begin. ê gives the nasal a syllable of its own -- [əm.to.to] against [m̩.to.to] is nearly the same sound and is readable. Done as a fixup rather than a phoneme rule because espeak marks the syllabicity on only 34 of the Swahili rows and writes a plain m on the rest; the fixup catches both, and is restricted to m before a non-labial so that Swahili's prenasalised mb mv nd nz nj and the ng/ny digraphs are left alone (ÊNZU.ri for nzuri would have added a syllable and moved the penult, which is where Swahili stress is)."
+    },
+    {
+      "sounds": "/ɹ/ (English r), /ʁ/ (French r)",
+      "out": "r",
+      "why": "Indonesian r is a trill or tap and there is no closer letter. For French this is also what Indonesian's own French loans do -- restoran, trotoar, parfum -- so kh (the letter for [x], and arguably closer in manner) was rejected as unrecognisable."
+    }
+  ],
   "policy": {
     "syllable_separator": ".",
     "word_separator": " ",
@@ -12,10 +112,9 @@
     "stress_min_syllables": 2,
     "length": "none",
     "tone": "drop",
-    "max_onset": 2,
+    "max_onset": 1,
     "locale": "id-ID",
-    "fixups": "first",
-    "reader_onsets": ""
+    "fixups": "first"
   },
   "splits": [],
   "phonemes": [
@@ -54,9 +153,7 @@
     { "slot": "any", "ipa": "dˤ", "out": "d" },
     { "slot": "any", "ipa": "t̪", "out": "t" },
     { "slot": "any", "ipa": "s̪", "out": "s" },
-    { "slot": "onset", "ipa": "m̩", "out": "êm" },
     { "slot": "any", "ipa": "m̩", "out": "m" },
-    { "slot": "onset", "ipa": "n̩", "out": "ên" },
     { "slot": "any", "ipa": "n̩", "out": "n" },
 
     { "slot": "onset", "ipa": "p", "out": "b", "unless_inventory": "#b #d #ɡ" },
@@ -121,7 +218,7 @@
     { "slot": "nucleus", "ipa": "j", "out": "", "after_out": "y" },
     { "slot": "nucleus", "ipa": "j", "out": "i", "after_out": "s j c" },
     { "slot": "nucleus", "ipa": "j", "out": "y" },
-    { "slot": "any", "ipa": "j", "out": "y" },
+    { "slot": "any", "ipa": "j", "out": "i" },
     { "slot": "nucleus", "ipa": "w", "out": "u", "after_out": "a e i o u ê" },
     { "slot": "nucleus", "ipa": "w", "out": "w", "when": ["no_onset"] },
     { "slot": "nucleus", "ipa": "w", "out": "u" },
@@ -175,6 +272,7 @@
     { "slot": "any", "ipa": "ɯ", "out": "ê" }
   ],
   "syllable_fixups": [
+    { "match": "^m(?=[^aeiouêbpfvwy])", "out": "êm" },
     { "match": "([aeiouê])\\1", "out": "\\1" },
     { "match": "([bcdfghjklmnprstvwyz])\\1", "out": "\\1" }
   ],
@@ -193,6 +291,7 @@
       ]
     }
   },
-  "note": "",
-  "policy_note": ""
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md's one-line limit -- one glyph and one convention: \"ê = e pepet (mer.de.ka); HURUF BESAR = suku kata bertekanan.\" Everything else is ordinary Indonesian spelling, including the digraphs kh ng ny sy and the diftong ai au ei oi, and the syllable dot is KBBI's own (ke.pa.la). No q and no x are ever emitted. There is no curated Indonesian sheet, so this table is not scored; it is held to zero --gaps, to a --units list in which every entry is a stated decision, and to being read aloud across all sixteen targets.",
+  "policy_note": "syllable_separator is a full stop and this is the one field in the table that is a fact rather than a judgement. The Indonesian hyphen already carries four readings -- line break, reduplication (anak-anak), prefix and compound joining (se-Indonesia, KTP-mu), and letter-by-letter spelling-out (p-a-n-i-t-i-a) -- so n-i-h-a-o reads as an instruction to spell rather than as a word. KBBI's separator is the dot (ke.pa.la, a.nar.kis.me), it uses both marks when it needs both (a.nai-a.nai), and the dot also disambiguates a digraph boundary (mas.yhur against ma.syhur), which for this table is load-bearing: it is what makes coda n plus onset g safe (han.guk) where Indonesian has no device for /n/+/ɡ/, and what makes coda ŋ plus onset ɡ come out right as ng.g (fing.gêr, wang.gu). \n\nmax_onset is 1, and it is measured. EYD V's pemenggalan kata is Indonesian's division-de-palabras and it is explicit: a medial two-consonant group is always split (man-di, som-bong, swas-ta, cap-lok), a single medial consonant opens the next syllable (ba-pak, ke-nyang), and two adjacent vowels split (bu-ah, ma-in, sa-at). Over all 16 targets the corpus has 40,674 intervocalic junctures: 33.3% with no consonant, 49.2% with one, 16.3% with two, 1.1% with three and 0.1% with four. max_onset 1 reproduces EYD on the first three groups, which is 98.8% of junctures, and deviates only where EYD's rule (d) gives the coda one consonant and the onset the rest (ul-tra, in-fra, in-stru-men) -- 483 junctures, where this table prints ALT.ro and inst.ru.mên. max_onset 2 or 3 would deviate on the 6,614 two-consonant junctures instead, which is the Turkish situation exactly: a reader shown pro.blêm is being shown a division their own dictionary rejects, and KBBI's dots are the same dots this column prints. \n\nreader_onsets is therefore absent, and that is a finding rather than an omission, since the field is inert at max_onset 1 -- syllabify consults the cluster table only in the max_onset>=2 branches. It was derived anyway, to check that dropping it was not costing anything. Measured over every unique word of every target: bare max_onset 2 builds 1,230 medial clusters Indonesian can begin and 230 it cannot (lk 53, lm 35, lq 14, lb 13, ll 10, nz 10), and adding a derived reader_onsets list cuts the illegal ones to 3 while leaving 1,478 syllables with a coda of two or more consonants against 1,742 at max_onset 1. So onset maximisation is better on both of THOSE counts and worse on the only count that is the reader's own rule, which is why the rule wins. max_onset 3 with the same list is byte-identical to max_onset 2 with it (1,230 legal, 3 illegal, 1,478 long codas), so there is nothing at 3 to buy. \n\nfixups stays first, and this too is measured: running all three fixups instead of the first matching one changes 0 of the 11,777 rows. They are alternative repairs rather than a transliteration chart, which is what first is for. The vowel fixup is worth reading twice, because its behaviour on a run of three is the point: ([aeiouê])\\1 collapses a run of two and leaves a run of three as two, and a run's length tracks the number of vowel PHONEMES -- two identical letters come from V+glide and are one syllable (kuu -> ku, Portuguese desculpe), three come from V+glide+V and are two (miiim -> miim, Turkish miyim; nʲijɪ -> nii, Russian -ние). Collapsing to one with \\1+ was tried and loses a syllable in 50 rows.\n\nlength is none and tone is drop; see approximations. stress is caps at stress_min_syllables 2, with the weakest justification of any field here; see deviations.",
+  "engine_note": "Engine limitation, stated as the rule that could not be expressed, with numbers. In syllabify the nucleus span grows greedily over glides and over /ɪ ʊ/, and the retraction loop only fires when the span ENDS on a glide -- so a vowel+glide immediately followed by a glide+vowel collapses into a single nucleus and the syllable boundary between them is lost. The rule wanted: break a nucleus span at a glide that has a vowel on both sides. Mandarin 借用 /tɕjɛjʊŋ/ prints jieiung for jie.yung and 自用 prints dzêiung; Russian -ние /nʲijɪ/ prints nii for ni.ye, and Turkish miyim prints miim -- the last two survive only because the vowel fixup happens to leave a run of three as a run of two. 19 rows print a chunk of seven letters or more and 2 of them are this. Not fixed here, and not worked around: a nucleus rule for each sequence would be a lookup table. The other two engine behaviours this table meets are already documented as measured and rejected in respell.js -- one medial consonant always opens the next syllable, so Mandarin 翻译 is fa.ni and Thai ตอนเย็น is to.nyen rather than ton.yen -- and I have no new numbers to add to them."
 }

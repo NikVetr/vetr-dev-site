@@ -58,6 +58,13 @@ const VOWELS = new Set([
 const GLIDES = new Set('jwɥ');
 const isGlide = (/** @type {string} */ unit) => GLIDES.has(unit[0]);
 /**
+ * U+032F says "this vowel is not a syllable", which makes it an offglide by
+ * definition -- so it belongs to the nucleus before it and can never start one.
+ * Thai writes `ua̯ ia̯ ɯa̯` and they were splitting into two syllables apiece,
+ * inflating a monosyllabic language's syllable count on 152 rows.
+ */
+const offglide = (/** @type {string} */ unit) => unit.endsWith('\u032F');
+/**
  * Length, nasalisation, the non-syllabic mark and tone all belong to their vowel.
  *
  * Tone is here because a Chao letter is otherwise an unknown consonant, and lands
@@ -180,14 +187,22 @@ const MARKS = /[\u0300-\u036f]/gu;
  * the `y` *is* the head.
  * @param {string} text
  * @param {number} from   where the nucleus begins
+ * @param {number} to     where the coda begins, so the run cannot escape into it
  * @param {number} at     which letter of the run; negative counts from the end
  * @param {(letter: string) => string} mark
  */
-function markNucleus(text, from, at, mark) {
-  return text.slice(0, from) + text.slice(from).replace(VOWEL_LETTERS, (run) => {
+function markNucleus(text, from, to, at, mark) {
+  // Bounded at both ends. With only a start, the `VOWEL_LETTERS` run could carry on
+  // past the nucleus into the coda -- `w` and `y` are vowel letters, so a coda /v/
+  // spelt `w` pulled the German length mark off the vowel entirely (`IW:-ning` for
+  // *evening*), and Turkish had sixteen marks land on a coda glide.
+  const head = text.slice(0, from);
+  const nucleus = text.slice(from, to);
+  const coda = text.slice(to);
+  return head + nucleus.replace(VOWEL_LETTERS, (run) => {
     const i = Math.min(Math.max(at < 0 ? run.length + at : at, 0), run.length - 1);
     return run.slice(0, i) + mark(run[i]) + run.slice(i + 1);
-  });
+  }) + coda;
 }
 
 /**
@@ -198,7 +213,7 @@ function markNucleus(text, from, at, mark) {
  * is Bhargava's notation for Hindi, whose script is caseless and has no accent.
  *
  * @type {Record<string, (text: string,
- *   at: {locale: string, head: number, nucleusAt: number}) => string>}
+ *   at: {locale: string, head: number, nucleusAt: number, codaAt: number}) => string>}
  */
 const STRESS_DEVICE = {
   caps: (text, at) => text.toLocaleUpperCase(at.locale),
@@ -206,12 +221,12 @@ const STRESS_DEVICE = {
   // `più` -- `á í ú` occur in no Italian word, and 8,930 of that table's 12,923
   // marks land on one of those three letters. The acute is available there only on
   // `é ó`, which is a choice a table makes in its own rules.
-  grave: (text, at) => markNucleus(text, at.nucleusAt, at.head,
+  grave: (text, at) => markNucleus(text, at.nucleusAt, at.codaAt, at.head,
     (c) => (ACCENTED.test(c) ? c : `${c}\u0300`.normalize('NFC'))),
   // Already accented, either by the phoneme table or by the orthography itself --
   // Portuguese and French both write accents of their own, and `ё` is inherently
   // stressed -- so a second mark would produce a character no orthography has.
-  acute: (text, at) => markNucleus(text, at.nucleusAt, at.head,
+  acute: (text, at) => markNucleus(text, at.nucleusAt, at.codaAt, at.head,
     (c) => (ACCENTED.test(c) ? c : `${c}\u0301`.normalize('NFC'))),
   prime: (text) => `${text}\u02b9`,
 };
@@ -316,9 +331,21 @@ export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
   // it opens the second syllable rather than closing the first.
   /** @type {[number, number][]} */ const spans = [];
   for (let i = 0; i < n;) {
-    if (!VOWELS.has(ph[i][0])) { i += 1; continue; }
+    if (!VOWELS.has(ph[i][0]) || offglide(ph[i])) { i += 1; continue; }
     let hi = i;
-    while (hi + 1 < n && (isGlide(ph[hi + 1]) || 'ɪʊ'.includes(ph[hi + 1][0]))) hi += 1;
+    while (hi + 1 < n) {
+      const next = ph[hi + 1];
+      if (!isGlide(next) && !offglide(next) && !'ɪʊ'.includes(next[0])) break;
+      // **A glide with a vowel on both sides opens the next syllable rather than
+      // closing this one.** The span used to grow greedily and only retract if it
+      // *ended* on a glide, so `V glide V` collapsed into one nucleus and the
+      // boundary between two syllables was lost. Four tables reported it
+      // independently: 借用 /tɕjɛjʊŋ/ came out as one syllable for a Japanese,
+      // Russian, Turkish and Indonesian reader alike, and Russian -ние and Turkish
+      // *miyim* lost a vowel each.
+      if (isGlide(next) && hi + 2 < n && VOWELS.has(ph[hi + 2][0])) break;
+      hi += 1;
+    }
     while (hi > i && isGlide(ph[hi]) && hi + 1 < n && VOWELS.has(ph[hi + 1][0])) hi -= 1;
     spans.push([i, hi]);
     i = hi + 1;
@@ -379,6 +406,42 @@ export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
       stress: Math.max(0, ...chunk.map(([, st]) => st)),
     };
   });
+}
+
+/**
+ * Every two- or three-phoneme consonant run the target has *anywhere*, not only at
+ * the start of a word.
+ *
+ * `onsetClusters` reads what can open a *word*, which is the right question for
+ * onset maximisation and the wrong one for `policy.reader_onsets`: a reader whose
+ * own orthography opens syllables with `mb nd nj ng` cannot be given them if no
+ * word in the target happens to begin that way. Swahili is the case -- only Arabic
+ * has a word-initial `mb`, so five prenasal onsets survived the intersection and a
+ * nasal was split from its own obstruent on 735 boundaries, which is exactly what
+ * BAKITA's division rules forbid.
+ *
+ * The count threshold is what keeps the addition honest: it will not invent `mb`
+ * for a language that does not have the sequence at all.
+ * @param {Iterable<string>} words  IPA words from the target's own corpus
+ * @param {number} minCount
+ * @returns {Set<string>}
+ */
+export function consonantRuns(words, minCount = 3) {
+  /** @type {Map<string, number>} */ const seen = new Map();
+  for (const ipa of words) {
+    /** @type {string[]} */ let run = [];
+    for (const unit of phonemesOf(ipa)) {
+      if (unit in STRESS || VOWEL_TAIL.has(unit)) continue;
+      if (VOWELS.has(unit[0]) || isGlide(unit) || offglide(unit)) { run = []; continue; }
+      run.push(fold(unit));
+      for (const k of [2, 3]) {
+        if (run.length < k) continue;
+        const key = run.slice(-k).join('');
+        seen.set(key, (seen.get(key) ?? 0) + 1);
+      }
+    }
+  }
+  return new Set([...seen].filter(([, n]) => n >= minCount).map(([k]) => k));
 }
 
 /**
@@ -450,6 +513,13 @@ function holds(rule, ctx, emitted) {
     const negated = w.startsWith('not_');
     if (ctx[negated ? w.slice(4) : w] === negated) return false;
   }
+  // `after_out: ""` asks whether this slot has emitted anything yet, which is the
+  // "is this the first segment of the syllable" predicate. `when: ["word_initial"]`
+  // answers it one level up and so answers it wrongly: in /jsaːɾaː/ the onset is
+  // `js`, the /j/ emits its letter, and the /s/ still sees a word-initial syllable
+  // -- which for a French reader is the difference between `ss` and an intervocalic
+  // `s` read as /z/. Every deep-orthography reader wants this.
+  if (rule.after_out === '') return emitted === '';
   if (rule.after_out && !rule.after_out.split(' ').some((/** @type {string} */ x) => emitted.endsWith(x))) {
     return false;
   }
@@ -531,8 +601,17 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
    * where Russian writes `pr`.
    */
   const reader = (rules.policy?.reader_onsets ?? '').split(' ').filter(Boolean);
-  const clusters = onsetClusters(targetIpa.flatMap((s) => s.split(/\s+/)).filter(Boolean));
-  if (reader.length) for (const c of clusters) if (!reader.includes(c)) clusters.delete(c);
+  const spoken = targetIpa.flatMap((s) => s.split(/\s+/)).filter(Boolean);
+  const clusters = onsetClusters(spoken);
+  if (reader.length) {
+    // Intersect, then add back the reader's own clusters that the target has
+    // *somewhere* -- see `consonantRuns`. Intersection alone could only ever
+    // subtract, so a reader could not be given a cluster its own orthography
+    // requires unless a target word happened to begin with it.
+    for (const c of clusters) if (!reader.includes(c)) clusters.delete(c);
+    const anywhere = consonantRuns(spoken);
+    for (const c of reader) if (anywhere.has(c)) clusters.add(c);
+  }
   const words = targetIpa
     .flatMap((s) => s.split(/\s+/))
     .filter(Boolean)
@@ -600,6 +679,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // otherwise land on.
       const nucleusAt = text.length;
       text += spellSlot(s.nucleus, 'nucleus', phonemes, ctx, text);
+      const codaAt = text.length;
       text += spellSlot(s.coda, 'coda', phonemes, ctx, text);
       // **A syllable is composed, not concatenated.** For every alphabetic reader
       // this line does nothing. For Hangul it is the difference between a rule
@@ -649,7 +729,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // wrong half of 1,240 syllables.
       const marked = s.stress === 1 && syls.length >= policy.stress_min_syllables;
       if (marked && stressDevice) {
-        text = stressDevice(text, { locale: policy.locale, head, nucleusAt });
+        text = stressDevice(text, { locale: policy.locale, head, nucleusAt, codaAt });
       }
       // Length goes through the same placement as the stress mark, on the same
       // letter, for the same reason -- and against `VOWEL_LETTERS` rather than
@@ -663,7 +743,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
           // once, and `àà` is a character sequence no orthography writes.
           ? (/** @type {string} */ c) => c + c.normalize('NFD').replace(MARKS, '')
           : (/** @type {string} */ c) => `${c}:`;
-        text = markNucleus(text, nucleusAt, head, mark);
+        text = markNucleus(text, nucleusAt, codaAt, head, mark);
       }
       return text;
     }).join(policy.syllable_separator);

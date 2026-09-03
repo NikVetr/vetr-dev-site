@@ -1,6 +1,7 @@
 {
   "source": "sw",
   "accent": "sw-KE",
+  "status": "ready",
   "version": "1",
   "derives_from": "BAKITA, Mwongozo kwa waandishi wa Kiswahili sanifu (1994) -- its three orthographic rules, quoted in full by Egypt SIS Africa's «TAHAJIA KATIKA KISWAHILI SANIFU» (2021-01-02): (a) «Neno lolote lisiishie na konsonanti hata kama halitakuwa na matatizo katika utamkwaji wake» -- no word may end in a consonant; (b) the permitted consonant sequences, «Mwambatano wowote wa herufi mbili au zaidi za konsonanti uepukwe isipokuwa kwa mwambatano unaohusishwa na herufi m, n, sh, y, sh, chw, w na konsonanti zenye asili ya maneno ya lugha ya kigeni ambazo hazina matatizo ya utamkwaji kama vile: st, sk, kt, chw, shw na dh» (stakabadhi, trekta, hekta, stesheni, steki, sketi); (c) the ukataji wa maneno rules, which give a Bantu-stratum division that must end in a vowel (ma-ne-no, ku-vu-ta, ng'o-mbe not ng'om-be, nyu-mba not nyum-ba, m-no-ng'o-no, ku-te-mbe-a; m and n are full syllables: m-tu, m-mo-ja, n-ta, but mbo-ni not m-bo-ni) and a foreign-stratum division that need not: «Maneno yenye asili ya kigeni ukataji wake utazingatia urahisi wa kutamka silabi... litakatwa mwisho wa silabi hiyo hata kama silabi hiyo haitaishia na irabu» (lab-da, al-fa-ji-ri, mak-ta-ba, kor-ti-ni, u-sta-a-ra-bu, ste-she-ni). The epenthetic vowel is Harvey, «Epenthetic Vowels in Swahili Loanwords», JLLE 8(2) 2014: word-finally labial -> u, pharyngeal -> a, coronal or dorsal -> i (stempu, filamu, nibu, sukurubu, koti, burashi, soksi, stesheni, benki). The sound-based rather than spelling-based route for loans is Mdee, Lexikos 9 (1999), who records it in usage (edita, eproni, pensheni, eksidenti, spitali) and disfavours it in the standard; BBC Swahili's «Ligi Kuu ya Primia» is the same choice in the press. Letter-to-sound values are ordinary Kiswahili orthography, which is near-phonemic.",
   "deviations": [
@@ -14,11 +15,11 @@
     },
     {
       "rule": "BAKITA's Bantu-stratum division and the hyphen as syllable_separator",
-      "why": "The separator is emitted by a fixup rather than by policy.syllable_separator, and the reason is BAKITA's ng'o-mbe / mbo-ni rule. A prenasalised nasal belongs to the following onset, and the engine cannot put it there: onsetClusters learns clusters from the TARGET's word-initial runs and reader_onsets can only intersect that set, never add to it, and no target but Arabic opens a word with mb or nd. Written as a separator, mb and nd split across the hyphen on 746 syllable boundaries -- nam-ba, an-da -- which is exactly the misparse the rule forbids. So syllable_separator is empty, a fixup appends the hyphen to every non-word-final syllable, and a second fixup removes it again after a nasal whose next onset makes a real prenasal (mb mv nd nz nj ng). That yields namba and andastandi, which the reader syllabifies na-mba and a-nda-sta-ndi by their own rule. Appending rather than prepending is also what makes a leading hyphen structurally impossible, and a leading hyphen in Swahili marks a bound stem (-soma, -zuri)."
+      "why": "The separator is emitted by a fixup rather than by policy.syllable_separator, and the reason is BAKITA's ng'o-mbe / mbo-ni rule. A prenasalised nasal belongs to the following onset, and the engine cannot put it there: onsetClusters learns clusters from the TARGET's word-initial runs and reader_onsets can only intersect that set, never add to it, and no target but Arabic opens a word with mb or nd. Written as a separator, a nasal splits from a following voiced obstruent on 735 syllable boundaries in 717 of the 11,777 rows -- nam-ba, an-da, man-dei, chein-jing'i -- which is exactly the misparse the rule forbids. So syllable_separator is empty, a fixup appends the hyphen to every non-word-final syllable, and a second fixup removes it again after a nasal whose next onset makes a real prenasal (mb mv nd nz nj ng). That yields namba and andastandi, which the reader syllabifies na-mba and a-nda-sta-ndi by their own rule. Appending rather than prepending is also what makes a leading hyphen structurally impossible, and a leading hyphen in Swahili marks a bound stem (-soma, -zuri)."
     },
     {
       "rule": "RESPELL-SYSTEMS.md's verdict that Swahili takes capitals for stress, as reinforcement for penult engineering",
-      "why": "Declined; policy.stress is none. Swahili stress is invariably penultimate, so the reader does not read a stress mark, they compute the stress from the syllable count -- a capital cannot move it, only contradict it. And all-caps reads as finyazo: BAKITA's own ukataji rule lists BAKITA, TAKUKURU, TATAKI and BAKIZA as words that are never divided, so a capitalised syllable inside a hyphenated respelling sends two contradictory signals at 5.2pt. The lever that does work is the syllable count, and the epenthesis rule above operates on it for free: a target's final stressed syllable gains a vowel and thereby becomes the penult (hoteli, polisi, farmasi from /hoʊˈtɛl/, /pəˈliːs/, /fɑːɹməsi/). Measured over every row of all sixteen targets that carries a primary stress, the printed penult is the target's stressed syllable on 47.6% of rows with the epenthesis rule and 39.9% without it."
+      "why": "Declined; policy.stress is none. Swahili stress is invariably penultimate, so the reader does not read a stress mark, they compute the stress from the syllable count -- a capital cannot move it, only contradict it. And all-caps reads as finyazo: BAKITA's own ukataji rule lists BAKITA, TAKUKURU, TATAKI and BAKIZA as words that are never divided, so a capitalised syllable inside a hyphenated respelling sends two contradictory signals at 5.2pt. The lever that does work is the syllable count, and the epenthesis rule above operates on it for free: a target's final stressed syllable gains a vowel and thereby becomes the penult (hoteli, polisi, farmasi from /hoʊˈtɛl/, /pəˈliːs/, /fɑːɹməsi/). Measured over the 15,326 words of all sixteen targets that carry a primary stress and syllabify comparably, the reader's own penultimate syllable is the target's stressed syllable on 63.2% of them -- against 62.2% with the epenthetic vowel removed, and 65.9% with vowel doubling removed. So the epenthesis helps the stress slightly and the length device costs it 2.7 points, which is the real price of writing length and is paid deliberately."
     },
     {
       "rule": "Mdee (1999) treats the sound-based loan forms (edita, eproni, spitali) prescriptively as variants to be corrected in favour of the spelling-based ones (editori, aproni, hospitali)",
@@ -148,7 +149,6 @@
     {"slot": "onset", "ipa": "k", "out": "g", "unless_inventory": "#b #d #ɡ"},
     {"slot": "any", "ipa": "p", "out": "p"},
     {"slot": "any", "ipa": "t̪", "out": "t"},
-    {"slot": "any", "ipa": "tʲ", "out": "t"},
     {"slot": "any", "ipa": "t", "out": "t"},
     {"slot": "any", "ipa": "ʈ", "out": "t"},
     {"slot": "any", "ipa": "k", "out": "k"},
@@ -158,7 +158,6 @@
     {"slot": "any", "ipa": "b", "out": "b"},
     {"slot": "any", "ipa": "d", "out": "d"},
     {"slot": "any", "ipa": "dˤ", "out": "d"},
-    {"slot": "any", "ipa": "dʲ", "out": "d"},
     {"slot": "any", "ipa": "ɖ", "out": "d"},
     {"slot": "any", "ipa": "ɗ", "out": "d"},
     {"slot": "any", "ipa": "ɡ", "out": "g"},
@@ -171,7 +170,6 @@
     {"slot": "any", "ipa": "v", "out": "v"},
     {"slot": "any", "ipa": "ʋ", "out": "v"},
     {"slot": "any", "ipa": "s̪", "out": "s"},
-    {"slot": "any", "ipa": "sʲ", "out": "s"},
     {"slot": "any", "ipa": "s", "out": "s"},
     {"slot": "any", "ipa": "z", "out": "z"},
     {"slot": "any", "ipa": "ʃ", "out": "sh"},
@@ -179,6 +177,7 @@
     {"slot": "any", "ipa": "ɕ", "out": "sh"},
     {"slot": "any", "ipa": "ʒ", "out": "j"},
     {"slot": "any", "ipa": "ʑ", "out": "j"},
+    {"slot": "coda", "ipa": "ʝ", "out": "i"},
     {"slot": "any", "ipa": "ʝ", "out": "y"},
     {"slot": "any", "ipa": "ʎ", "out": "ly"},
     {"slot": "any", "ipa": "x", "out": "kh"},
@@ -189,7 +188,6 @@
     {"slot": "any", "ipa": "ʔ", "out": ""},
     {"slot": "any", "ipa": "ʕ", "out": ""},
     {"slot": "any", "ipa": "m", "out": "m"},
-    {"slot": "any", "ipa": "mʲ", "out": "m"},
     {"slot": "any", "ipa": "ɲ", "out": "ny"},
     {"slot": "any", "ipa": "nʲ", "out": "ny"},
     {"slot": "any", "ipa": "ŋ", "out": "n", "before_onset": "ɡ k kʰ x ɣ ɡʲ ɡʰ"},
@@ -203,9 +201,7 @@
     {"slot": "any", "ipa": "l", "out": "l"},
     {"slot": "any", "ipa": "ɫ", "out": "l"},
     {"slot": "any", "ipa": "ɭ", "out": "l"},
-    {"slot": "any", "ipa": "ɭʲ", "out": "l"},
     {"slot": "any", "ipa": "r", "out": "r"},
-    {"slot": "any", "ipa": "rʲ", "out": "r"},
     {"slot": "any", "ipa": "ɾ", "out": "r"},
     {"slot": "any", "ipa": "ɽ", "out": "r"},
     {"slot": "any", "ipa": "ɹ", "out": "r"},
@@ -213,6 +209,7 @@
     {"slot": "any", "ipa": "ʐ", "out": "r"},
     {"slot": "any", "ipa": "ɻ", "out": "r"},
     {"slot": "nucleus", "ipa": "j", "out": "y", "if_nucleus_head": "j"},
+    {"slot": "nucleus", "ipa": "j", "out": "y", "after_out": "a e i o u"},
     {"slot": "onset", "ipa": "j", "out": "y"},
     {"slot": "any", "ipa": "j", "out": "i"},
     {"slot": "nucleus", "ipa": "w", "out": "w", "if_nucleus_head": "w"},
@@ -232,6 +229,8 @@
     {"slot": "any", "ipa": "̩", "out": ""},
     {"slot": "any", "ipa": "͈", "out": ""},
     {"slot": "any", "ipa": "̯", "out": ""},
+    {"slot": "nucleus", "ipa": "iːj", "out": "i"},
+    {"slot": "nucleus", "ipa": "iːɪ", "out": "i"},
     {"slot": "nucleus", "ipa": "ɐ̃ʊ̃", "out": "au"},
     {"slot": "any", "ipa": "ɐ̃", "out": "an"},
     {"slot": "any", "ipa": "ɛ̃", "out": "en"},
@@ -271,19 +270,22 @@
   ],
   "syllable_fixups": [
     {"match": "ng'([kg])", "out": "n\\1"},
-    {"match": "(sh|ch|ny|ly|ng'|th|dh|gh|kh)$", "out": "\\1i", "when": ["word_final"]},
-    {"match": "([tdszjnlrkg])$", "out": "\\1i", "when": ["word_final"]},
-    {"match": "([pbfvmw])$", "out": "\\1u", "when": ["word_final"]},
-    {"match": "h$", "out": "ha", "when": ["word_final"]},
+    {"match": "([bdfghjklmnprstvz])\\1", "out": "\\1"},
+    {"match": "y(?=[,;.!?/]*$)", "out": "i"},
+    {"match": "(sh|ch|ny|ly|ng'|th|dh|gh|kh)(?=[,;.!?/]*$)", "out": "\\1i", "when": ["word_final"]},
+    {"match": "([tdszjnlrkg])(?=[,;.!?/]*$)", "out": "\\1i", "when": ["word_final"]},
+    {"match": "([pbfvmw])(?=[,;.!?/]*$)", "out": "\\1u", "when": ["word_final"]},
+    {"match": "h(?=[,;.!?/]*$)", "out": "ha", "when": ["word_final"]},
     {"match": "(.)$", "out": "\\1-", "when": ["not_word_final"]},
     {"match": "m-$", "out": "m", "before_onset": "b v ʋ bʰ"},
     {"match": "n-$", "out": "n", "before_onset": "d z ɡ dʒ ʒ ʑ dʑ ɖ ɗ dˤ dʲ dʰ ɡʰ ɡʲ ɟ"}
   ],
   "targets": {
     "pt": {
-      "comment": "espeak writes /y/ for the reduced final [ɨ] of Portuguese -e (passaporte, noite): 287 cells, logged in scripts/build_ipa.py. It is an i, not the front rounded vowel every other target uses that symbol for.",
+      "comment": "Two espeak artifacts, both logged in scripts/build_ipa.py or below. /y/ is the reduced final [ɨ] of Portuguese -e (passaporte, noite) on 287 cells, so it is an i and not the front rounded vowel every other target uses that symbol for. And espeak spells every Portuguese nasal coda /ŋ/, which is the nasal-vowel marker rather than a velar nasal -- Portuguese has no phonemic /ŋ/ -- so it takes n, giving boni and on-ji for bom and onde where the general rule would give bong'i and ong'-ji. The general rule is right for Korean, where 당신 is a real velar nasal before a coronal, which is why this is a target block and not a positional rule.",
       "phonemes": [
-        {"slot": "any", "ipa": "y", "out": "i"}
+        {"slot": "any", "ipa": "y", "out": "i"},
+        {"slot": "any", "ipa": "ŋ", "out": "n"}
       ]
     },
     "ko": {
@@ -299,5 +301,6 @@
       ]
     }
   },
-  "note": "Reader's legend, per RESPELL-SYSTEMS.md: nothing to teach. Every letter and digraph here is ordinary Kiswahili orthography -- ng' is /ŋ/ as in ng'ombe, ny is /ɲ/, th dh gh kh are the Arabic-stratum digraphs of thelathini, dhahabu, lugha, khanga. A doubled vowel is long, as in kondoo. There is no curated Swahili sheet, so this table is not scored; it is held to zero --gaps and to being read aloud."
+  "policy_note": "Everything below was measured over every row of all sixteen targets (11,777 rows, 35,477 words) rather than over a sample, because three of the predicates ask about the target's own inventory. max_onset: 2 and 3 are byte-identical on all 11,777 rows, since reader_onsets names no three-phoneme cluster and the max_onset-3 branch can therefore never fire; 1 differs on 858 rows and is worse every time, giving eks-kyuusi for ek-skyuusi, praab-lamu for praa-blamu, andas-tandi for anda-standi and ink-luu-didi for in-kluu-didi -- st, sk, kl and bl are all onsets Kiswahili writes (stesheni, sketi, klabu, blanketi) and BAKITA's own division puts st in the onset mid-word, u-sta-a-ra-bu. So 2. reader_onsets changes 295 rows against the unfiltered cluster table, and the rows it changes are the point: it removes sl, sm and khd (tran-slei-shani, a-naun-smanti, i-sti-khdaamu), which the engine learns from a target's word-initial runs and no Kiswahili reader can begin. The list is derived rather than guessed -- every cluster any target teaches that Kiswahili also writes: C+liquid from plastiki, glasi, blanketi, klabu, krismasi, friji, treni, brashi, s+stop from stesheni, sketi, spana, and the prenasals. It therefore carries all four rhotic realisations, since German writes p+fricative-r where Russian writes pr. The prenasal entries mb, nd, ndʒ, nz, mv and ŋɡ are mostly inert and that is worth stating: reader_onsets can only intersect, and only Arabic opens a word with mb or nd, so five prenasal onsets survive the intersection corpus-wide. The syllable_fixups repair is what actually does that job, on 735 boundaries in 717 rows. fixups: all is required rather than preferred, and it was measured: with first, 162 words end in a consonant, because the ng'k repair or the geminate collapse fires and breaks before the epenthesis rule is reached -- which would violate the one BAKITA rule this table is built on. Vowel doubling costs 2.7 points of penult alignment (65.9% to 63.2%) and is kept anyway, because length is phonemic in Japanese and Arabic. There is no curated Swahili sheet, so none of this is an agreement score; the bar held instead is zero --gaps, no IPA character anywhere in 35,477 words, no word ending in a consonant (0), no leading hyphen (0, structurally: the hyphen is appended, never prepended), no trebled letter (0) and no within-syllable geminate outside the Arabic rows that lost their short vowels (13).",
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: nothing to teach. Every letter and digraph here is ordinary Kiswahili orthography -- ng' is /ŋ/ as in ng'ombe, ny is /ɲ/, th dh gh kh are the Arabic-stratum digraphs of thelathini, dhahabu, lugha and the name Khamisi. A doubled vowel is long, as in kondoo. There is no curated Swahili sheet, so this table is not scored; it is held to zero --gaps and to being read aloud."
 }
