@@ -227,6 +227,34 @@ test('an accented letter does not take a second accent', () => {
   assert.equal([...yo.normalize('NFD')].filter((c) => c === '\u0301').length, 0, yo);
 });
 
+test('length and stress mark the same letter of the nucleus', () => {
+  // They ask one question -- which element is the head -- so they share one
+  // answer. Always-last gave `he-loú` for `hello`; always-first gave `ky:a` for
+  // क्या, which asks a Turkish reader to lengthen a consonant. The TDK writes
+  // `da:y` for the falling diphthong and `kya:` for the rising one, which is the
+  // same split as Spanish's `géisha` against `bién`.
+  const ipa = ['kjaː', 'daːj', 'kjoː'].flatMap((x) => [x, x, x]);
+  const say = createRespeller({
+    rules: {
+      source: 'x',
+      policy: { stress: 'none', length: 'colon', syllable_separator: '-' },
+      phonemes: [
+        { slot: 'any', ipa: 'k', out: 'k' }, { slot: 'any', ipa: 'd', out: 'd' },
+        { slot: 'any', ipa: 'j', out: 'y' }, { slot: 'nucleus', ipa: 'a', out: 'a' },
+        { slot: 'nucleus', ipa: 'o', out: 'o' },
+        // The length mark itself spells nothing; the device writes the colon.
+        { slot: 'any', ipa: 'ː', out: '' },
+      ],
+    },
+    targetIpa: ipa,
+  });
+  // Rising: the glide is first, so the mark goes on the second letter.
+  assert.equal(say.respell('kjaː'), 'kya:');
+  assert.equal(say.respell('kjoː'), 'kyo:');
+  // Falling: the vowel is first, and the mark stays there.
+  assert.equal(say.respell('daːj'), 'da:y');
+});
+
 test('vowel length is written the way the reader writes it', () => {
   const say = (/** @type {string} */ length) => createRespeller({
     rules: withPolicy({ length }), targetIpa: [...['doːzo'], ...['doːzo'], ...['doːzo']],

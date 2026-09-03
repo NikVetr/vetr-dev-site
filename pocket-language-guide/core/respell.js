@@ -146,34 +146,33 @@ const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõıywа�
 const ACCENTED = /[áéíóúàèìòùё]/i;
 
 /**
- * Put an acute on one end of the syllable's vowel run.
+ * Put a mark on the one letter of the nucleus that carries it.
  *
- * Which end is not a matter of taste. A *rising* diphthong is marked on its
- * second element and a *falling* one on its first -- Spanish writes `bién` and
- * `géisha` -- so the same syllable shape takes the mark in opposite places
- * depending on where the nucleus head is. Marking the last letter throughout gave
- * `he-loú` for `hello`, which reads as three syllables ending in a stressed /u/.
+ * **Which letter is not a matter of taste, and it is the same question for both
+ * devices that ask it.** A *falling* diphthong takes the mark on its first element
+ * and a *rising* one on its second, because that is where the head is: Spanish
+ * writes `géisha` and `bién`, and the TDK writes `da:y` and `kya:`. Marking one end
+ * throughout gets the other half wrong -- always-last gave `he-loú` for `hello`,
+ * a stressed /u/ in a syllable that is not there, and always-first gave `ky:a` for
+ * क्या, which asks a Turkish reader to lengthen a consonant.
  *
- * `VOWEL_LETTERS` is generous on purpose, because `y` and `w` spell a nucleus in
- * several of these orthographies -- so a vowel letter in the run can belong to the
- * *onset* instead, and marking a falling diphthong then landed on it:
+ * `from` exists because `VOWEL_LETTERS` is generous on purpose -- `y` and `w` spell
+ * a nucleus in several of these orthographies -- so a vowel letter in the run can
+ * belong to the *onset* instead, and marking a falling diphthong then landed on it:
  * `est-rang-ýei-rus`, where `y` is the consonant /ʝ/, and `pa-gúei`, where the `u`
- * is the silent half of Spanish's `gue`. Hence `from`: the emitted text is onset
- * then nucleus then coda, so the nucleus begins at a known offset and the search
- * starts there. Guessing from the letter cannot work -- the English table spells
- * /aɪ/ `ye`, where the `y` *is* the head.
+ * is the silent half of Spanish's `gue`. The emitted text is onset then nucleus
+ * then coda, so the nucleus begins at a known offset and the search starts there.
+ * Guessing from the letter cannot work: the English table spells /aɪ/ `ye`, where
+ * the `y` *is* the head.
  * @param {string} text
- * @param {boolean} head  accent the first letter of the run, not the last
- * @param {number} from   where the nucleus begins
+ * @param {number} from       where the nucleus begins
+ * @param {boolean} falling   mark the first letter of the run, not the last
+ * @param {(letter: string) => string} mark
  */
-function acute(text, head, from) {
-  const onset = text.slice(0, from);
-  return onset + text.slice(from).replace(VOWEL_LETTERS, (run) => {
-    const i = head ? 0 : run.length - 1;
-    // Already accented, either by the phoneme table or by the orthography itself:
-    // a second mark would produce a character no orthography has.
-    if (ACCENTED.test(run[i])) return run;
-    return run.slice(0, i) + `${run[i]}\u0301`.normalize('NFC') + run.slice(i + 1);
+function markNucleus(text, from, falling, mark) {
+  return text.slice(0, from) + text.slice(from).replace(VOWEL_LETTERS, (run) => {
+    const i = falling ? 0 : run.length - 1;
+    return run.slice(0, i) + mark(run[i]) + run.slice(i + 1);
   });
 }
 
@@ -189,7 +188,11 @@ function acute(text, head, from) {
  */
 const STRESS_DEVICE = {
   caps: (text, at) => text.toLocaleUpperCase(at.locale),
-  acute: (text, at) => acute(text, at.falling, at.nucleusAt),
+  // Already accented, either by the phoneme table or by the orthography itself --
+  // Portuguese and French both write accents of their own, and `ё` is inherently
+  // stressed -- so a second mark would produce a character no orthography has.
+  acute: (text, at) => markNucleus(text, at.nucleusAt, at.falling,
+    (c) => (ACCENTED.test(c) ? c : `${c}\u0301`.normalize('NFC'))),
   prime: (text) => `${text}\u02b9`,
 };
 
@@ -579,6 +582,11 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // the output would ship jamo glyphs and leave the composed syllable out of
       // the subset, where the PDF has no system font to fall back to.
       text = text.normalize('NFC');
+      // The nucleus carries the answer to which end a mark goes on: a falling
+      // diphthong is a vowel followed by a glide or by one of the two lax vowels
+      // `syllabify` absorbs, and its head is therefore the first element.
+      const tail = [...s.nucleus].filter((c) => !VOWEL_TAIL.has(c)).pop() ?? '';
+      const falling = s.nucleus.length > 1 && (GLIDES.has(tail) || 'ɪʊ'.includes(tail));
       for (const f of fixups) {
         // The syllable's own text, not `''`: a fixup's `after_out` asks what this
         // syllable has emitted so far, and against an empty string every such
@@ -598,29 +606,20 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // generated: a reader who does not want it simply gets the plain form. The
       // Japanese sheet already invented this convention by hand, doubling a letter
       // on 285 of its 286 long-vowel rows.
-      // Length marks the *nucleus*, so the search starts where the nucleus does --
-      // the same offset `acute` uses, and for the same reason. Marking the first
-      // vowel run in the whole syllable put Turkish's colon on an onset glide
-      // (`day:` for TDK's `da:y`) or, on a vowel-less Arabic row, on the onset's
-      // own `y`: 406 of 7,215 marks.
+      // Length goes through the same placement as the stress mark, on the same
+      // letter, for the same reason -- and against `VOWEL_LETTERS` rather than
+      // `[aeiou]`, which made both devices silent no-ops in every script but
+      // Latin. Marking the first vowel run in the whole syllable put Turkish's
+      // colon on an onset glide, and marking the first *letter* of the nucleus
+      // then put it on a rising diphthong's glide: `day:`, then `ky:a`.
       if (/ː/.test(s.nucleus) && policy.length !== 'none') {
-        const head = text.slice(0, nucleusAt);
-        // Against `VOWEL_LETTERS` rather than `[aeiou]`, which made both devices
-        // silent no-ops in every script but Latin.
-        // The *first* letter of the nucleus, because `ː` follows the vowel it
-        // lengthens and that is a diphthong's first element: TDK writes `da:y`,
-        // not `day:`.
-        const mark = policy.length === 'double' ? '$1$1' : '$1:';
-        const at = new RegExp(`(${VOWEL_LETTERS.source.replace(/\+$/, '')})`, 'iu');
-        text = head + text.slice(nucleusAt).replace(at, mark);
+        const mark = policy.length === 'double'
+          ? (/** @type {string} */ c) => c + c
+          : (/** @type {string} */ c) => `${c}:`;
+        text = markNucleus(text, nucleusAt, falling, mark);
       }
       const marked = s.stress === 1 && syls.length >= policy.stress_min_syllables;
       if (!marked || !stressDevice) return text;
-      // The nucleus carries the answer to which end the mark goes on: a falling
-      // diphthong is a vowel followed by a glide or by one of the two lax vowels
-      // `syllabify` absorbs, and its head is therefore the first element.
-      const tail = [...s.nucleus].filter((c) => !VOWEL_TAIL.has(c)).pop() ?? '';
-      const falling = s.nucleus.length > 1 && (GLIDES.has(tail) || 'ɪʊ'.includes(tail));
       return stressDevice(text, { locale: policy.locale, falling, nucleusAt });
     }).join(policy.syllable_separator);
   };
