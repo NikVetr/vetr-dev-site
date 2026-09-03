@@ -3,6 +3,7 @@
 //   node scripts/render_preview.mjs [--target zh-Hans] [--source en] [--scale auto]
 //                                   [--out tmp/preview] [--dpi 200]
 //                                   [--geometry phone-1col] [--priority essential]
+//                                   [--head bottom:region,page]
 //
 // This is the same SVG the browser exports, rendered through the same engine, so
 // it doubles as the eyeball check during development and the basis for the visual
@@ -46,6 +47,15 @@ const spec = {
   scale: args.scale === 'auto' ? 0 : Number(args.scale ?? 1),
   // The phone wallpaper is only one face at the top of the ladder, so eyeballing
   // it needs the step as well as the geometry.
+  // `--head top:pair,page` -- the position, then the left and right slots.
+  head: args.head
+    ? (([at, slots]) => {
+      const [left = 'none', right = 'none'] = (slots ?? '').split(',');
+      return /** @type {import('../core/types.js').RunningHead} */ ({
+        at, left, right, text: args.headText ?? 'If found, call +1 555 0100',
+      });
+    })(args.head.split(':'))
+    : undefined,
   priority: args.priority === undefined
     ? base.priority
     : /** @type {Record<string, number>} */ (PRIORITY_STEPS)[args.priority],

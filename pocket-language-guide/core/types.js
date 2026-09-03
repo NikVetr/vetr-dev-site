@@ -111,6 +111,22 @@
  */
 
 /**
+ * A line along the top or bottom of every face, outside the columns.
+ *
+ * Two slots rather than one string, because the useful cases are a label on one
+ * side and a folio on the other -- and a folio belongs in a corner. `custom` takes
+ * `text`; the rest are derived, so they stay right when the pair or the region
+ * changes.
+ * @typedef {'none'|'page'|'pair'|'region'|'custom'} HeadSlot
+ *
+ * @typedef {Object} RunningHead
+ * @property {'none'|'top'|'bottom'} at
+ * @property {HeadSlot} [left]
+ * @property {HeadSlot} [right]
+ * @property {string} [text]  for a `custom` slot
+ */
+
+/**
  * @typedef {Object} SheetSpec
  * @property {string} target
  * @property {string} source
@@ -127,7 +143,9 @@
  *   `paper`, and `roles.<role>` for a section colour. Set when the reader has
  *   picked colours of their own; `themeId` still names the theme underneath, so
  *   everything not overridden -- type sizes, leadings, rules -- comes from it.
- * @property {'sans'|'serif'} typeface  scripts without one fall back to sans
+ * @property {'sans'|'serif'|'cond'|'cond-serif'} typeface  a script with no such
+ *   variant falls back to its plain stack, which is why a condensed Mandarin sheet
+ *   is condensed Latin against unchanged Han
  * @property {'full'|'low-ink'|'mono'} inkMode
  * @property {boolean} autoFaces  let the solver add or drop pairs of faces
  * @property {number} padding  extra breathing room around every text element, in
@@ -139,6 +157,7 @@
  * @property {Record<string,string>} [sectionColors]  section id -> colour role,
  *   overriding the registry's own. Colour is how the sheet codes its sections, so
  *   which section takes which is an editorial choice rather than a fact.
+ * @property {RunningHead} [head]  a line of furniture along the top or bottom
  * @property {number} scale
  * @property {number} priority  keep only concepts whose `importance` reaches this,
  *   0 for all of them. A floor on the corpus rather than a count, so the same

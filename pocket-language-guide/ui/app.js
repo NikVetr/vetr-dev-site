@@ -112,7 +112,7 @@ export function setReaderLanguage(code) {
  * committed to advance widths measured from these exact files.
  * @param {Awaited<ReturnType<typeof browserSheetContext>>} ctx
  * @param {string} target @param {string} source
- * @param {'sans'|'serif'} [typeface]
+ * @param {import('../core/types.js').SheetSpec['typeface']} [typeface]
  */
 export async function ensureFontCss(ctx, target, source, typeface = 'sans') {
   const manifest = await fontManifest();

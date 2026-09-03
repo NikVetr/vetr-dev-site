@@ -59,7 +59,8 @@ export function createFontRegistry(loadBytes, manifest) {
      * every typeface -- there is no condensed Arabic serif here -- so a missing
      * variant falls back to the sans face rather than failing: a serif sheet with
      * one sans column is a compromise, a crash is not.
-     * @param {string} base @param {'sans'|'serif'} typeface
+     * @param {string} base
+     * @param {import('./types.js').SheetSpec['typeface']} typeface
      */
     stackFor(base, typeface) {
       if (typeface === 'sans') return base;

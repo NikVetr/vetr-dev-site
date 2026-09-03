@@ -690,3 +690,47 @@ test('mixed is the default and leaves a reference table as a table', async () =>
   assert.equal(wide(stacked.plan), wide(mixed.plan),
     'a numeral table has the same cells whatever the arrangement');
 });
+
+test('a running head takes its band from the margin, not from the columns', async () => {
+  // There was no page furniture at all: no folio, no running head, nothing naming
+  // the pair on the paper. The band comes out of `contentBox`, which is the same
+  // seam a printer's dead zone and a lock screen's clock go through -- so the
+  // breaker, the fit search and all three renderers need no knowledge of it.
+  const base = await referenceSpec('zh-Hans', 'en');
+  const plain = await buildSheet(ctx, base);
+  const footed = await buildSheet(ctx, {
+    ...base, head: { at: 'bottom', left: 'region', right: 'page' },
+  });
+  assert.equal(footed.plan.faces.length, plain.plan.faces.length,
+    'a line of furniture should not cost a face');
+
+  const runs = footed.plan.faces[0].runs;
+  const lowest = Math.max(...runs.map((r) => r.y));
+  const foot = runs.filter((r) => Math.abs(r.y - lowest) < 0.5);
+  assert.equal(foot.length, 2, 'two slots, left and right');
+  assert.match(foot[0].text, /police/, 'the region supplies its own emergency line');
+  assert.match(foot[1].text, /^1 \/ \d+$/, 'and the folio counts the faces');
+  // The right slot ends at the box's right edge rather than starting there.
+  const box = contentBox(base.geometry, base.paper);
+  assert.ok(foot[1].x > box.left + box.width * 0.8, 'the folio sits in the corner');
+});
+
+test('the narrow face is a smaller sheet, not only a different one', async () => {
+  // Four typefaces cost nothing new: `stackFor` resolves `<stack>-<typeface>` and
+  // falls back per script, and the condensed Latin faces were already subset for
+  // the dense reference tables. Narrow earns its place on legibility rather than
+  // taste -- it fits more per line, so the same eight faces afford larger type.
+  const base = await referenceSpec('zh-Hans', 'en');
+  const sans = await buildSheet(ctx, { ...base, typeface: 'sans' });
+  const cond = await buildSheet(ctx, { ...base, typeface: 'cond' });
+  assert.equal(cond.plan.faces.length, sans.plan.faces.length);
+  assert.ok(cond.plan.scale > sans.plan.scale + 0.02,
+    `narrow should afford more type, got ${cond.plan.scale} against ${sans.plan.scale}`);
+  // And the Han is untouched, which is what the per-script fallback is for.
+  const stacks = (/** @type {any} */ plan) => new Set(plan.faces.flatMap(
+    (/** @type {any} */ f) => f.runs.map((/** @type {any} */ r) => r.fontId),
+  ));
+  assert.ok([...stacks(cond.plan)].some((id) => String(id).startsWith('cjk-sc-')));
+  assert.ok(![...stacks(cond.plan)].some((id) => String(id) === 'latin-400'),
+    'and the Latin is the condensed face throughout');
+});

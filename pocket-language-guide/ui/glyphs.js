@@ -999,6 +999,31 @@ export function redrawGlyphs(group, glyphs) {
 }
 
 /**
+ * A page with a rule of furniture along the top, the bottom, or neither.
+ * @param {'none'|'top'|'bottom'} at
+ */
+export function headGlyph(at) {
+  const box = 30;
+  const svg = frame(box, box);
+  svg.append(svgEl('rect', { x: 5, y: 3, width: 20, height: 24, rx: 1.5, class: 'g-page' }));
+  const rows = at === 'top' ? [10, 14, 18, 22] : at === 'bottom' ? [7, 11, 15, 19] : [7, 11, 15, 19, 23];
+  for (const y of rows) {
+    svg.append(svgEl('rect', { x: 7.5, y, width: 15, height: 1.6, rx: 0.6, class: 'g-ink faint' }));
+  }
+  if (at !== 'none') {
+    // The furniture itself: short, at the edge, and in the accent so it reads as
+    // the thing being switched on.
+    svg.append(svgEl('rect', {
+      x: 7.5, y: at === 'top' ? 6 : 23.5, width: 7, height: 1.8, rx: 0.6, class: 'g-accent',
+    }));
+    svg.append(svgEl('rect', {
+      x: 19, y: at === 'top' ? 6 : 23.5, width: 3.5, height: 1.8, rx: 0.6, class: 'g-accent',
+    }));
+  }
+  return svg;
+}
+
+/**
  * Which phone, once "Phone screen" is chosen.
  *
  * A wallpaper is the one output whose *physical* size is known exactly, and the

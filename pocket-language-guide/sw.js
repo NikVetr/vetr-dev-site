@@ -13,9 +13,24 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-790bf44e2e0a';
+const VERSION = 'plg-d0420bcda922';
 const SHELL_CACHE = `${VERSION}-shell`;
-const PACK_CACHE = `${VERSION}-packs`;
+/**
+ * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
+ * deploy or a reader gets last week's modules against this week's data. A saved
+ * language pack is the opposite: it is the corpus rows and the subset fonts for one
+ * pair, it is megabytes, and someone pressed a button to get it -- usually before
+ * going somewhere without a network, which is the whole reason the button exists.
+ * Scoping this to `VERSION` meant a one-character CSS change silently discarded
+ * every pack every reader had saved, because `VERSION` is a content hash of the
+ * *shell*.
+ *
+ * The trade is that a pack can outlive a change to the data it holds. That is
+ * survivable in a way the reverse is not: `data/coverage.json` and the registry are
+ * in the shell, so a language whose rows changed shape still loads, and a reader who
+ * wants the new rows can press the button again.
+ */
+const PACK_CACHE = 'plg-packs';
 const SHELL_MANIFEST = 'data/shell.json';
 
 self.addEventListener('install', (event) => {
@@ -35,7 +50,9 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     for (const key of await caches.keys()) {
-      if (!key.startsWith(VERSION)) await caches.delete(key);
+      // Everything but this version's shell and the packs, which are not the
+      // shell's to throw away.
+      if (key !== SHELL_CACHE && key !== PACK_CACHE) await caches.delete(key);
     }
     await self.clients.claim();
   })());

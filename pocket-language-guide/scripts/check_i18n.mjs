@@ -78,7 +78,7 @@ const keys = new Set(Object.keys(english).filter((k) => !k.startsWith('_')));
 // fix by its own code, a field by its id (`ui/i18n.js` `warningText`), and a
 // romanisation system by the slug `data/registry/languages.csv` lists it under.
 const BY_CODE = ['warn.', 'fix.', 'field.', 'roman.',
-  'format.arrangement', 'format.split'];
+  'format.arrangement', 'format.split', 'format.head'];
 const byCode = [...keys].filter((k) => BY_CODE.some((p) => k.startsWith(p)));
 
 const missing = [...used.keys()].filter((k) => !keys.has(k)).sort();

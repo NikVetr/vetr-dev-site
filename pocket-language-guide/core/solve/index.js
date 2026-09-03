@@ -60,7 +60,18 @@ export const LOOSE_FRACTION = 0.06;
  * @param {import('../types.js').Geometry} g
  * @param {import('../types.js').PaperSpec} paper
  */
-export function contentBox(g, paper) {
+/**
+ * How tall a running head or foot is, as a multiple of the theme's smallest type.
+ * One line plus the air that keeps it off the first row.
+ */
+const HEAD_LINES = 2.1;
+
+/**
+ * @param {import('../types.js').Geometry} g
+ * @param {import('../types.js').PaperSpec} paper
+ * @param {number} [headPt]  a band reserved for a running head, at top or bottom
+ */
+export function contentBox(g, paper, headPt = 0) {
   const insetX = paper.borderless ? (g.pageW * paper.oversprayPct) / 200 : paper.nonprintablePt;
   const insetY = paper.borderless ? (g.pageH * paper.oversprayPct) / 200 : paper.nonprintablePt;
   // A lock screen's reserved bands are the same shape as a printer's dead zone:
@@ -71,8 +82,12 @@ export function contentBox(g, paper) {
   const reserveBottom = g.pageH * (g.reserve?.bottom ?? 0);
   const left = Math.max(g.marginLeft, insetX);
   const right = Math.max(g.marginRight, insetX);
-  const top = Math.max(g.marginTop, insetY, reserveTop);
-  const bottom = Math.max(g.marginBottom, insetY, reserveBottom);
+  // The head's band is *added* to the margin rather than max()ed into it: a
+  // printer's dead zone and a lock screen's clock are areas the sheet may not use,
+  // where a running head is area the sheet is using for something else. Taking the
+  // larger of the two would let a wide margin swallow the head's own line.
+  const top = Math.max(g.marginTop, insetY, reserveTop) + (headPt > 0 ? headPt : 0);
+  const bottom = Math.max(g.marginBottom, insetY, reserveBottom) + (headPt < 0 ? -headPt : 0);
   const width = g.pageW - left - right;
   const height = g.pageH - top - bottom;
   return {
@@ -165,12 +180,60 @@ function emptyColumns({ blocks, theme, spec, corpus }) {
  */
 
 /**
+ * How tall the head's band is for this spec, signed: positive at the top, negative
+ * at the bottom, zero when there is none. The sign is what lets `contentBox` take
+ * it out of the right margin without a second parameter.
+ * @param {import('../types.js').SheetSpec} spec
+ * @param {any} theme
+ */
+function headBand(spec, theme) {
+  const at = spec.head?.at ?? 'none';
+  if (at === 'none') return 0;
+  const pt = headSize(theme) * HEAD_LINES;
+  return at === 'top' ? pt : -pt;
+}
+
+/** The smallest type the theme uses, which is what furniture is set in.
+ * @param {any} theme */
+function headSize(theme) {
+  const sizes = Object.values(theme.templates)
+    .flatMap((/** @type {any} */ tmpl) => (tmpl.fields ?? []).map((/** @type {any} */ f) => f.size))
+    .filter((/** @type {any} */ n) => typeof n === 'number');
+  return sizes.length ? Math.min(...sizes) : 5.2;
+}
+
+/**
+ * The head's two slots, resolved to text.
+ *
+ * Derived rather than typed wherever it can be, so a label stays right when the
+ * pair or the region changes underneath it -- which is the whole reason this is not
+ * simply two strings.
+ * @param {import('./index.js').SolveInput} input
+ * @param {number} face  zero-based
+ * @param {number} faces
+ */
+function headText(input, face, faces) {
+  const { spec, corpus } = input;
+  const name = (/** @type {string} */ code) => corpus.languages[code]?.exonym_en ?? code;
+  /** @param {import('../types.js').HeadSlot} [slot] */
+  const one = (slot) => {
+    if (slot === 'page') return `${face + 1} / ${faces}`;
+    if (slot === 'pair') return `${name(spec.target)} \u2192 ${name(spec.source)}`;
+    if (slot === 'region') return emergencyNote(corpus, spec.region)?.text ?? '';
+    if (slot === 'custom') return (spec.head?.text ?? '').trim();
+    return '';
+  };
+  return { left: one(spec.head?.left), right: one(spec.head?.right) };
+}
+
+/**
  * @param {SolveInput} input
  * @returns {import('../types.js').LayoutPlan}
  */
 export function layout(input) {
   const { blocks, theme, spec, corpus, measurer, registry } = input;
-  const box = contentBox(spec.geometry, spec.paper);
+  const band = headBand(spec, theme);
+  const box = contentBox(spec.geometry, spec.paper, band);
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
   const targetScript = corpus.scripts[corpus.languages[spec.target].script];
@@ -390,6 +453,59 @@ export function layout(input) {
         for (const i of atom.paint.icons) face.icons.push({ ...i, x: i.x + x, y: i.y + dy });
         for (const h of atom.paint.hits) face.hits.push({ ...h, x: h.x + x, y: h.y + dy });
       });
+    }
+    // The running head, drawn after the columns so it is never something the
+    // breaker has to reason about: its band came out of the margin in `contentBox`,
+    // so by here the space is already its own.
+    if (band !== 0) {
+      const size = headSize(theme);
+      const { left, right } = headText(input, f, faces);
+      const y = band > 0
+        ? box.top - size * 0.9
+        : box.top + box.height + size * 1.35;
+      // The reader's own face: a running head is read by whoever the sheet is
+      // glossed into, the same as the gloss column.
+      const sourceIso = corpus.languages[spec.source].script;
+      const stack = registry.stackFor(corpus.scripts[sourceIso].font_stack, spec.typeface);
+      /** @type {import('../measure.js').RunStyle} */
+      const style = {
+        stack, size, weight: 400, italic: false, leading: size * 1.2,
+        dir: /** @type {'ltr'|'rtl'} */ (corpus.scripts[sourceIso].direction),
+        wordBreak: /** @type {'space'|'any'|'dict'} */ (corpus.scripts[sourceIso].word_break),
+        slotAsRule: false,
+      };
+      // The right slot is a folio or a short label and the left is prose, so when
+      // the two do not both fit the left one gives way. Trimming rather than
+      // dropping, because half a label still says which sheet this is -- and a
+      // phone card is 180pt wide, where the emergency line alone is wider.
+      const rightW = right ? measurer.width(right, style) + size : 0;
+      const room = box.width - rightW;
+      let trimmed = left;
+      while (trimmed && measurer.width(trimmed, style) > room) {
+        trimmed = trimmed.slice(0, -2);
+      }
+      if (trimmed && trimmed !== left) trimmed = `${trimmed}\u2026`;
+
+      for (const [text, x, align] of /** @type {[string, number, 'start'|'end'][]} */ ([
+        [trimmed, box.left, 'start'],
+        [right, box.left + box.width, 'end'],
+      ])) {
+        if (!text) continue;
+        const width = measurer.width(text, style);
+        face.runs.push({
+          text,
+          x: align === 'end' ? x - width : x,
+          y,
+          // The resolved face, not the stack: a run's `fontId` keys the renderer's
+          // face table, and a stack name is not in it.
+          fontId: measurer.faceKey(style),
+          size,
+          fill: theme.colors.muted,
+          bold: false,
+          italic: false,
+          dir: style.dir,
+        });
+      }
     }
     faceList.push(face);
   }

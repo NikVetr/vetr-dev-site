@@ -70,7 +70,7 @@ export async function createSheetContext({ loadText, loadBytes }) {
  * Font stacks a language pair needs, including the Latin one romanisation uses and
  * the serif variants if a serif sheet was asked for.
  * @param {SheetContext['corpus']} corpus @param {string} target @param {string} source
- * @param {'sans'|'serif'} [typeface]
+ * @param {import('./types.js').SheetSpec['typeface']} [typeface]
  */
 export function stacksFor(corpus, target, source, typeface = 'sans') {
   const of = (/** @type {string} */ code) => {
@@ -124,7 +124,7 @@ async function generatedRespellings(ctx, spec, targetRows) {
  * Load the fonts a pair needs. Split from solving so the studio can show a
  * loading state, and so a gallery page never pays for a CJK face it will not use.
  * @param {SheetContext} ctx @param {string} target @param {string} source
- * @param {'sans'|'serif'} [typeface]
+ * @param {import('./types.js').SheetSpec['typeface']} [typeface]
  */
 export async function loadFontsFor(ctx, target, source, typeface = 'sans') {
   const files = ctx.registry.filesFor(stacksFor(ctx.corpus, target, source, typeface));

@@ -63,3 +63,25 @@ test('a failed data or font fetch is reported, not printed around', async ({ pag
   await expect(page.locator('#faces .face').first()).toBeVisible({ timeout: 90_000 });
   await expect(page.locator('body')).not.toContainText('Something went wrong');
 });
+
+test('a saved pack survives a shell change, and a failed save can be retried', async ({ page, context }) => {
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+
+  const save = page.locator('[data-offline="zh-Hans"]');
+  await save.click();
+  await expect(save).toHaveText('Saved', { timeout: 180_000 });
+
+  // The pack cache is not version-scoped, because `VERSION` is a content hash of
+  // the *shell*: a one-character CSS change used to discard every pack every reader
+  // had saved, which is the one thing the button exists to prevent.
+  const names = await page.evaluate(() => caches.keys());
+  expect(names).toContain('plg-packs');
+  expect(names.some((n) => n.startsWith('plg-') && n.endsWith('-shell'))).toBe(true);
+
+  // And it still works with the network off, which is the point.
+  await context.setOffline(true);
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+});

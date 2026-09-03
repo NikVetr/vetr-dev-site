@@ -14,7 +14,7 @@ import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
   itemGlyph, cutGlyph, priorityOptions,
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
-  redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph,
+  redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph, headGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
@@ -34,9 +34,22 @@ const SCALE_CHOICES = [
   { value: 1.15, captionKey: 'format.scale.large' },
   { value: 1.3, captionKey: 'format.scale.xlarge' },
 ];
+/**
+ * The four faces, which cost nothing new: `stackFor` resolves `<stack>-<typeface>`
+ * and falls back to the plain stack when a script has no such variant, and the
+ * condensed Latin faces were already subset for the dense reference tables. So a
+ * Mandarin sheet set to Condensed gets condensed Latin against unchanged Han, which
+ * is what the fallback contract is for.
+ *
+ * A fifth family would not be free: Noto has no mono for Arabic, Devanagari or
+ * Thai, so `mono` would mean new downloads and a face that covers ten of the
+ * seventeen languages.
+ */
 const TYPEFACE_CHOICES = /** @type {const} */ ([
   { value: 'sans', captionKey: 'format.typeface.sans', stack: 'latin' },
   { value: 'serif', captionKey: 'format.typeface.serif', stack: 'latin-serif' },
+  { value: 'cond', captionKey: 'format.typeface.cond', stack: 'latin-cond' },
+  { value: 'cond-serif', captionKey: 'format.typeface.cond-serif', stack: 'latin-cond-serif' },
 ]);
 const DPI_CHOICES = [
   { value: 150, captionKey: 'format.dpi.screen' },
@@ -334,7 +347,9 @@ export function createFormatPanel(input) {
       value: choice.value,
       caption: t(choice.captionKey),
       title: t(choice.captionKey),
-      glyph: typefaceGlyph(`"${familyFor(choice.stack)}", ${choice.value}-serif`),
+      glyph: typefaceGlyph(
+        `"${familyFor(choice.stack)}", ${choice.value.endsWith('serif') ? 'serif' : 'sans-serif'}`,
+      ),
     })),
     onChange: (value) => emit({ typeface: value }),
   });
@@ -556,6 +571,53 @@ export function createFormatPanel(input) {
   );
   if (!systems.length) romanization.select.disabled = true;
 
+  // --- running head -------------------------------------------------------
+
+  // A line of furniture outside the columns. Two slots rather than one string,
+  // because the useful shape is a label on one side and a folio on the other -- and
+  // a folio belongs in a corner.
+  const HEAD_AT = /** @type {const} */ (['none', 'top', 'bottom']);
+  const HEAD_SLOTS = /** @type {const} */ (['none', 'page', 'pair', 'region', 'custom']);
+  const headText = /** @type {HTMLInputElement} */ (el('input', {
+    type: 'text', id: 'head-text', class: 'text-box',
+    placeholder: t('format.headTextPlaceholder'),
+  }));
+  headText.value = spec.head?.text ?? '';
+  const pushHead = (/** @type {Partial<import('../core/types.js').RunningHead>} */ patch) => emit({
+    head: {
+      at: 'none', left: 'none', right: 'none', ...spec.head, ...patch, text: headText.value,
+    },
+  });
+  headText.addEventListener('change', () => pushHead({}));
+
+  const headAt = segmented({
+    label: t('format.headLong'),
+    value: spec.head?.at ?? 'none',
+    options: HEAD_AT.map((id) => ({
+      value: id,
+      caption: t(`format.head.${id}`),
+      title: t(`format.headTitle.${id}`),
+      glyph: headGlyph(id),
+    })),
+    onChange: (at) => pushHead({ at }),
+  });
+  const slotMenu = (/** @type {'left'|'right'} */ side) => menu(
+    `head-${side}`, t(`format.head.${side}`),
+    HEAD_SLOTS.map((id) => ({ value: id, text: t(`format.headSlot.${id}`) })),
+    spec.head?.[side] ?? 'none',
+    (value) => pushHead({ [side]: /** @type {any} */ (value) }),
+  );
+  const headLeft = slotMenu('left');
+  const headRight = slotMenu('right');
+  const headSlots = el('div', { class: 'head-slots' }, [
+    headLeft.wrap, headRight.wrap, headText,
+  ]);
+  const headField = panelField(t('format.head'), [headAt.group, headSlots]);
+  headSlots.hidden = (spec.head?.at ?? 'none') === 'none';
+  headText.hidden = spec.head?.left !== 'custom' && spec.head?.right !== 'custom';
+  headSlots.hidden = (spec.head?.at ?? 'none') === 'none';
+  headText.hidden = spec.head?.left !== 'custom' && spec.head?.right !== 'custom';
+
   // --- which columns appear ----------------------------------------------
 
   // A column of bare checkboxes was the one control here that named a thing instead
@@ -594,6 +656,7 @@ export function createFormatPanel(input) {
     panelField(t('format.typeSize'), [typeSize.group]),
     panelField(t('format.entryLayout'), [arrangement.group]),
     panelField(t('format.split'), [split.group]),
+    headField,
     panelField(t('format.textPadding'), [padding.group]),
     panelField(t('format.colours'), [theme.group, theme.custom]),
     panelField(t('format.ink'), [ink.group]),
@@ -641,6 +704,12 @@ export function createFormatPanel(input) {
       padding.select(next.padding);
       arrangement.select(next.arrangement);
       split.select(next.split ?? 'adaptive');
+      headAt.select(next.head?.at ?? 'none');
+      headLeft.select.value = next.head?.left ?? 'none';
+      headRight.select.value = next.head?.right ?? 'none';
+      // The slots and the free-text box are only useful once there is a band.
+      headSlots.hidden = (next.head?.at ?? 'none') === 'none';
+      headText.hidden = next.head?.left !== 'custom' && next.head?.right !== 'custom';
       theme.sync(next);
       ink.select(next.inkMode);
       paper.select.value = next.paper.presetId;

@@ -116,19 +116,27 @@ async function main() {
     onChange: (value) => set({ priority: value }),
   });
 
-  /** @type {{value:'sans'|'serif', caption:string, stack:string}[]} */
+  /** @type {{value:import('../core/types.js').SheetSpec['typeface'],
+   *          caption:string, stack:string}[]} */
   const typefaces = [
     { value: 'sans', caption: t('format.typeface.sans'), stack: 'latin' },
     { value: 'serif', caption: t('format.typeface.serif'), stack: 'latin-serif' },
+    // Narrow is not only a style: the condensed face fits more per line, so the
+    // reference card comes out at 0.78 of nominal type against 0.70 for sans on the
+    // same eight faces.
+    { value: 'cond', caption: t('format.typeface.cond'), stack: 'latin-cond' },
+    { value: 'cond-serif', caption: t('format.typeface.cond-serif'), stack: 'latin-cond-serif' },
   ];
   const typeface = segmented({
     label: t('format.typeface'),
-    value: /** @type {'sans'|'serif'} */ ('sans'),
+    value: /** @type {import('../core/types.js').SheetSpec['typeface']} */ ('sans'),
     options: typefaces.map((face) => ({
       value: face.value,
       caption: face.caption,
       title: face.caption,
-      glyph: typefaceGlyph(`"${familyFor(face.stack)}", ${face.value}-serif`),
+      glyph: typefaceGlyph(
+        `"${familyFor(face.stack)}", ${face.value.endsWith('serif') ? 'serif' : 'sans-serif'}`,
+      ),
     })),
     onChange: (value) => set({ typeface: value }),
   });

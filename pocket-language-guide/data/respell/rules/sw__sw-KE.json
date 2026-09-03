@@ -1,0 +1,303 @@
+{
+  "source": "sw",
+  "accent": "sw-KE",
+  "version": "1",
+  "derives_from": "BAKITA, Mwongozo kwa waandishi wa Kiswahili sanifu (1994) -- its three orthographic rules, quoted in full by Egypt SIS Africa's «TAHAJIA KATIKA KISWAHILI SANIFU» (2021-01-02): (a) «Neno lolote lisiishie na konsonanti hata kama halitakuwa na matatizo katika utamkwaji wake» -- no word may end in a consonant; (b) the permitted consonant sequences, «Mwambatano wowote wa herufi mbili au zaidi za konsonanti uepukwe isipokuwa kwa mwambatano unaohusishwa na herufi m, n, sh, y, sh, chw, w na konsonanti zenye asili ya maneno ya lugha ya kigeni ambazo hazina matatizo ya utamkwaji kama vile: st, sk, kt, chw, shw na dh» (stakabadhi, trekta, hekta, stesheni, steki, sketi); (c) the ukataji wa maneno rules, which give a Bantu-stratum division that must end in a vowel (ma-ne-no, ku-vu-ta, ng'o-mbe not ng'om-be, nyu-mba not nyum-ba, m-no-ng'o-no, ku-te-mbe-a; m and n are full syllables: m-tu, m-mo-ja, n-ta, but mbo-ni not m-bo-ni) and a foreign-stratum division that need not: «Maneno yenye asili ya kigeni ukataji wake utazingatia urahisi wa kutamka silabi... litakatwa mwisho wa silabi hiyo hata kama silabi hiyo haitaishia na irabu» (lab-da, al-fa-ji-ri, mak-ta-ba, kor-ti-ni, u-sta-a-ra-bu, ste-she-ni). The epenthetic vowel is Harvey, «Epenthetic Vowels in Swahili Loanwords», JLLE 8(2) 2014: word-finally labial -> u, pharyngeal -> a, coronal or dorsal -> i (stempu, filamu, nibu, sukurubu, koti, burashi, soksi, stesheni, benki). The sound-based rather than spelling-based route for loans is Mdee, Lexikos 9 (1999), who records it in usage (edita, eproni, pensheni, eksidenti, spitali) and disfavours it in the standard; BBC Swahili's «Ligi Kuu ya Primia» is the same choice in the press. Letter-to-sound values are ordinary Kiswahili orthography, which is near-phonemic.",
+  "deviations": [
+    {
+      "rule": "BAKITA's loanword clause admits the wrong optimisation in its own words: a word may not end in a consonant «hata kama halitakuwa na matatizo katika utamkwaji wake» -- even where that would cause no pronunciation difficulty",
+      "why": "Held to anyway, and this is the one place where the standard's stated reason does not matter. The clause is about permanent spelling; we produce a disposable hint. But a Swahili reader given a consonant-final string has to invent a repair, and the repair they invent is the epenthesis this rule describes -- so writing it out is more faithful to what they will say, not less. Every attested loan agrees (stesheni, benki, filamu, koti). Medial codas are a different question and are NOT epenthesised: see the next entry."
+    },
+    {
+      "rule": "The received claim that Swahili is strictly CV, so every foreign coda needs an epenthetic vowel",
+      "why": "Overruled by BAKITA's own ukataji rule, which is the closest thing Swahili has to a statement about foreign syllable structure: a foreign-origin word «litakatwa mwisho wa silabi hiyo hata kama silabi hiyo haitaishia na irabu», with lab-da, al-fa-ji-ri, mak-ta-ba, kor-ti-ni and u-sta-a-ra-bu as its own worked examples. The Arabic stratum writes medial codas freely (labda, alfajiri, maktaba, daftari, ahsante, Alhamisi, ustaarabu) and BAKITA's permitted-sequence rule names st, sk and kt outright. So epenthesis is word-final only. Doing it medially as well would add a syllable per coda -- an-da-sa-ta-nda for understand -- and every added syllable moves the penult, which is where the reader will put the stress."
+    },
+    {
+      "rule": "BAKITA's Bantu-stratum division and the hyphen as syllable_separator",
+      "why": "The separator is emitted by a fixup rather than by policy.syllable_separator, and the reason is BAKITA's ng'o-mbe / mbo-ni rule. A prenasalised nasal belongs to the following onset, and the engine cannot put it there: onsetClusters learns clusters from the TARGET's word-initial runs and reader_onsets can only intersect that set, never add to it, and no target but Arabic opens a word with mb or nd. Written as a separator, mb and nd split across the hyphen on 746 syllable boundaries -- nam-ba, an-da -- which is exactly the misparse the rule forbids. So syllable_separator is empty, a fixup appends the hyphen to every non-word-final syllable, and a second fixup removes it again after a nasal whose next onset makes a real prenasal (mb mv nd nz nj ng). That yields namba and andastandi, which the reader syllabifies na-mba and a-nda-sta-ndi by their own rule. Appending rather than prepending is also what makes a leading hyphen structurally impossible, and a leading hyphen in Swahili marks a bound stem (-soma, -zuri)."
+    },
+    {
+      "rule": "RESPELL-SYSTEMS.md's verdict that Swahili takes capitals for stress, as reinforcement for penult engineering",
+      "why": "Declined; policy.stress is none. Swahili stress is invariably penultimate, so the reader does not read a stress mark, they compute the stress from the syllable count -- a capital cannot move it, only contradict it. And all-caps reads as finyazo: BAKITA's own ukataji rule lists BAKITA, TAKUKURU, TATAKI and BAKIZA as words that are never divided, so a capitalised syllable inside a hyphenated respelling sends two contradictory signals at 5.2pt. The lever that does work is the syllable count, and the epenthesis rule above operates on it for free: a target's final stressed syllable gains a vowel and thereby becomes the penult (hoteli, polisi, farmasi from /hoʊˈtɛl/, /pəˈliːs/, /fɑːɹməsi/). Measured over every row of all sixteen targets that carries a primary stress, the printed penult is the target's stressed syllable on 47.6% of rows with the epenthesis rule and 39.9% without it."
+    },
+    {
+      "rule": "Mdee (1999) treats the sound-based loan forms (edita, eproni, spitali) prescriptively as variants to be corrected in favour of the spelling-based ones (editori, aproni, hospitali)",
+      "why": "Inverted, on purpose. This column is a pronunciation hint, so the disfavoured route is the correct one: the whole feature is the distinction Mdee documents, and he found it occurring natively in Swahili rather than imported. BBC Swahili's Ligi Kuu ya Primia tracks /ˈprɛmɪə/ rather than the spelling, so the press makes the same choice."
+    },
+    {
+      "rule": "Established loan spellings of a final velar nasal insert a stop -- shilingi, pudingi",
+      "why": "Not followed: /ŋ/ is ng', so English -ing is -ng'i and not -ngi. Swahili ng is /ŋɡ/ and ng' is /ŋ/, and the attested loans take the ng that makes a permanent word easy to inflect, at the cost of a /ɡ/ nobody said. The apostrophe is therefore load-bearing and cannot double as anything else. Before a velar the rule reverses, because there the nasal is already written n: benki, and fi-nga for finger."
+    },
+    {
+      "rule": "The unaspirated series written with Swahili's voiced letters (Mandarin and Korean only)",
+      "why": "Kiswahili p t k are unaspirated, so for most targets they match the plain series exactly and both series collapse on p t k. Where the target has no voiced obstruent for those letters to collide with, the unaspirated series takes b d g j instead, which keeps a contrast that is lexical in the target and reproduces the Latin spelling a Swahili reader has already met in the press -- pinyin for Mandarin (Beijing, Xi Jinping), Revised Romanization for Korean (Busan, Jeju, kimchi). The guard is #b #d #ɡ rather than b d ɡ, because the question is whether a voiced stop can BEGIN a word: Korean's b d g are the intervocalic realisations of the lenis series and never word-initial, while Thai's and Hindi's are phonemes. It fires for zh-Hans and ko and for nothing else. Restricted to onsets, which is also Revised Romanization's rule: bap, not bab."
+    },
+    {
+      "rule": "Lexical tone is dropped (zh-Hans, th, vi)",
+      "why": "Chao tone letters are not Kiswahili letters and the card has no room for a key, so a reader gets nothing from them. Stated here so it is not mistaken for an oversight: tone is lexical in those three and this column loses it, as all four curated tonal sheets also do."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/ʒ ʑ/ (French jour, Portuguese hoje, Russian ж)",
+      "out": "j",
+      "why": "Swahili has no /ʒ/ and no zh digraph, and inventing one would need a second legend line. j is /dʒ/ -- same place, same voicing, one degree too occluded -- and it is what Swahili's own loans do: garaji from garage. /dʒ/ and /ʒ/ therefore collapse."
+    },
+    {
+      "sounds": "/ə ɜ ɚ ɝ/ (English about, bird, water)",
+      "out": "a",
+      "why": "«The featureless [ə] does not exist in Swahili» and the five vowels are never reduced, so an unstressed syllable is read at full value whatever we write. a is the value Swahili's own English loans give it -- kompyuta, dola, basi, shati -- and it is nearer mid-central than e is."
+    },
+    {
+      "sounds": "/y ø œ ɯ ʉ ɵ/ (front rounded and back unrounded vowels)",
+      "out": "u u e e u u o",
+      "why": "Five vowels, no rounding contrast. This is the substitution a Swahili speaker makes anyway. Portuguese is excepted in the targets block, because espeak writes /y/ there for the reduced final [ɨ] of passaporte, which is an i."
+    },
+    {
+      "sounds": "vowel length",
+      "out": "doubled (aa ee ii oo uu)",
+      "why": "Doubling is the native device (kondoo, saa, hii) and the only one available. It is not free: a written VV counts as two syllables in Swahili, so every long vowel moves the penult one syllable right. Kept because length is phonemic in Japanese and Arabic, where losing it merges words, and because the reader's own weight-based intuition then lands the stress on a heavy syllable rather than a light one."
+    },
+    {
+      "sounds": "/x ɣ ç ħ/ (Russian х, Arabic غ, German ich, Arabic ح)",
+      "out": "kh gh h h",
+      "why": "kh, gh, th and dh are real Kiswahili digraphs from the Arabic stratum (lugha, ghali, thelathini, dhahabu), so they cost no legend. Many speakers outside the coast do not distinguish them from h, g, t and z -- which is the approximation we would otherwise have hard-coded, so the digraph is strictly more informative than the letter: a reader who has the contrast gets it, and a reader who does not falls back to exactly the plain letter."
+    },
+    {
+      "sounds": "/ʔ ʕ/ and pharyngealisation ˤ",
+      "out": "dropped",
+      "why": "No letter and no sound. Dropping ع is what Swahili's own Arabic loans do (ada, alama, Ali), and a dropped glottal stop leaves an ordinary onsetless Swahili syllable, which the language permits everywhere."
+    },
+    {
+      "sounds": "/ʈ ɖ ɳ ɽ ʂ ʐ ɻ/ and the aspirated and breathy series /pʰ tʰ kʰ bʰ dʰ ɡʰ ɟʰ/",
+      "out": "t d n r sh r r; p t k b d g j",
+      "why": "Swahili has one coronal series and writes no aspiration, so the retroflex/dental contrast of Hindi and Mandarin and the four-way Hindi stop contrast are lost. Marginal aspiration exists in Swahili (paa/pʰaa) but is never written, so there is no device to borrow."
+    },
+    {
+      "sounds": "/ts tsʰ/ (Mandarin z and c, German z, Japanese tsu)",
+      "out": "ts",
+      "why": "ts is not a native cluster but it is the spelling modern Swahili already uses for foreign words (tsunami), and it is more faithful than the pinyin-familiar z would be: pinyin z is [ts], not [z]. The z/c aspiration contrast collapses, as every other contrast of that kind does here."
+    },
+    {
+      "sounds": "Russian palatalisation ʲ",
+      "out": "y before a back or central vowel, otherwise nothing; /nʲ/ is ny",
+      "why": "Cy is a native Swahili onset pattern (mpya, vyakula, kompyuta) so /tʲa/ can be written tya. Before a front vowel the palatalisation is inaudible to a reader whose i already palatalises, so it is dropped rather than written. /nʲ/ gets ny outright, because ny is the single phoneme /ɲ/ and is exactly the sound Russian has."
+    },
+    {
+      "sounds": "nasal vowels (French bon, Portuguese um, Hindi लूँ)",
+      "out": "vowel + n",
+      "why": "No nasal vowels. Swahili's own French loans keep the nasal as a consonant (Kongo, Ufaransa), and the n then makes a prenasal with a following voiced onset, which is the closest available sound: bo-njuri. Word-finally it takes the epenthetic i, so bon is boni. Portuguese ão is au, with the nasality dropped rather than paid for with a whole syllable."
+    },
+    {
+      "sounds": "/pf/ (German Pfund)",
+      "out": "f",
+      "why": "No pf and no way to write one that would not read as two syllables. The stop is lost."
+    },
+    {
+      "sounds": "/ʁ/ (French rue)",
+      "out": "r",
+      "why": "Deliberated and not obvious: gh is the closer sound, being a voiced dorsal fricative, but it makes Paris into Paghi. r is what the Swahili press writes, and the l/r distinction is already weak for many speakers, so the letter carries less information than gh would -- this is the approximation of the two that a reader will recognise as a word."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "",
+    "word_separator": " ",
+    "stress": "none",
+    "length": "double",
+    "tone": "drop",
+    "max_onset": 2,
+    "fixups": "all",
+    "locale": "sw-KE",
+    "reader_onsets": "bl br bɹ bɾ bʁ bɭ dr dɹ dɾ dʁ fl fr fɹ fɾ fʁ ɡl ɡɭ ɡr ɡɾ ɡɹ ɡʁ kl kɫ kɭ kr kɾ kɹ kʁ kʰl kʰr mb mv nd ndʒ nz ŋɡ pl pɭ pr pɾ pɹ pʁ pʰl pʰr sk sp st sʈ st̪ tr tɾ tɹ tʁ vl vr vɾ ʃl ʃr θɹ ʈɾ ɖɾ"
+  },
+  "splits": [],
+  "phonemes": [
+    {"slot": "any", "ipa": "ʈʂʰ", "out": "ch"},
+    {"slot": "any", "ipa": "tɕʰ", "out": "ch"},
+    {"slot": "any", "ipa": "tsʰ", "out": "ts"},
+    {"slot": "onset", "ipa": "ʈʂ", "out": "j", "unless_inventory": "#b #d #ɡ"},
+    {"slot": "any", "ipa": "ʈʂ", "out": "ch"},
+    {"slot": "onset", "ipa": "tɕ", "out": "j", "unless_inventory": "#b #d #ɡ"},
+    {"slot": "any", "ipa": "tɕ", "out": "ch"},
+    {"slot": "any", "ipa": "tʃʲ", "out": "ch"},
+    {"slot": "any", "ipa": "tʃ", "out": "ch"},
+    {"slot": "any", "ipa": "ts̪", "out": "ts"},
+    {"slot": "any", "ipa": "ts", "out": "ts"},
+    {"slot": "any", "ipa": "dʒ", "out": "j"},
+    {"slot": "any", "ipa": "dʑ", "out": "j"},
+    {"slot": "any", "ipa": "dz", "out": "z"},
+    {"slot": "any", "ipa": "pf", "out": "f"},
+    {"slot": "any", "ipa": "pʰ", "out": "p"},
+    {"slot": "any", "ipa": "tʰ", "out": "t"},
+    {"slot": "any", "ipa": "kʰ", "out": "k"},
+    {"slot": "any", "ipa": "ʈʰ", "out": "t"},
+    {"slot": "any", "ipa": "cʰ", "out": "ch"},
+    {"slot": "any", "ipa": "bʰ", "out": "b"},
+    {"slot": "any", "ipa": "dʰ", "out": "d"},
+    {"slot": "any", "ipa": "ɡʰ", "out": "g"},
+    {"slot": "any", "ipa": "ɖʰ", "out": "d"},
+    {"slot": "any", "ipa": "ɽʰ", "out": "r"},
+    {"slot": "any", "ipa": "ɟʰ", "out": "j"},
+    {"slot": "any", "ipa": "p͈", "out": "p"},
+    {"slot": "any", "ipa": "t͈", "out": "t"},
+    {"slot": "any", "ipa": "k͈", "out": "k"},
+    {"slot": "any", "ipa": "s͈", "out": "s"},
+    {"slot": "any", "ipa": "tɕ͈", "out": "ch"},
+    {"slot": "onset", "ipa": "p", "out": "b", "unless_inventory": "#b #d #ɡ"},
+    {"slot": "onset", "ipa": "t", "out": "d", "unless_inventory": "#b #d #ɡ"},
+    {"slot": "onset", "ipa": "k", "out": "g", "unless_inventory": "#b #d #ɡ"},
+    {"slot": "any", "ipa": "p", "out": "p"},
+    {"slot": "any", "ipa": "t̪", "out": "t"},
+    {"slot": "any", "ipa": "tʲ", "out": "t"},
+    {"slot": "any", "ipa": "t", "out": "t"},
+    {"slot": "any", "ipa": "ʈ", "out": "t"},
+    {"slot": "any", "ipa": "k", "out": "k"},
+    {"slot": "any", "ipa": "q", "out": "k"},
+    {"slot": "any", "ipa": "c", "out": "k", "if_inventory": "tʃ"},
+    {"slot": "any", "ipa": "c", "out": "ch"},
+    {"slot": "any", "ipa": "b", "out": "b"},
+    {"slot": "any", "ipa": "d", "out": "d"},
+    {"slot": "any", "ipa": "dˤ", "out": "d"},
+    {"slot": "any", "ipa": "dʲ", "out": "d"},
+    {"slot": "any", "ipa": "ɖ", "out": "d"},
+    {"slot": "any", "ipa": "ɗ", "out": "d"},
+    {"slot": "any", "ipa": "ɡ", "out": "g"},
+    {"slot": "any", "ipa": "ɟ", "out": "g", "if_inventory": "dʒ"},
+    {"slot": "any", "ipa": "ɟ", "out": "j"},
+    {"slot": "any", "ipa": "θ", "out": "th"},
+    {"slot": "any", "ipa": "ð", "out": "dh"},
+    {"slot": "any", "ipa": "f", "out": "f"},
+    {"slot": "any", "ipa": "ɸ", "out": "f"},
+    {"slot": "any", "ipa": "v", "out": "v"},
+    {"slot": "any", "ipa": "ʋ", "out": "v"},
+    {"slot": "any", "ipa": "s̪", "out": "s"},
+    {"slot": "any", "ipa": "sʲ", "out": "s"},
+    {"slot": "any", "ipa": "s", "out": "s"},
+    {"slot": "any", "ipa": "z", "out": "z"},
+    {"slot": "any", "ipa": "ʃ", "out": "sh"},
+    {"slot": "any", "ipa": "ʂ", "out": "sh"},
+    {"slot": "any", "ipa": "ɕ", "out": "sh"},
+    {"slot": "any", "ipa": "ʒ", "out": "j"},
+    {"slot": "any", "ipa": "ʑ", "out": "j"},
+    {"slot": "any", "ipa": "ʝ", "out": "y"},
+    {"slot": "any", "ipa": "ʎ", "out": "ly"},
+    {"slot": "any", "ipa": "x", "out": "kh"},
+    {"slot": "any", "ipa": "ɣ", "out": "gh"},
+    {"slot": "any", "ipa": "ç", "out": "h"},
+    {"slot": "any", "ipa": "ħ", "out": "h"},
+    {"slot": "any", "ipa": "h", "out": "h"},
+    {"slot": "any", "ipa": "ʔ", "out": ""},
+    {"slot": "any", "ipa": "ʕ", "out": ""},
+    {"slot": "any", "ipa": "m", "out": "m"},
+    {"slot": "any", "ipa": "mʲ", "out": "m"},
+    {"slot": "any", "ipa": "ɲ", "out": "ny"},
+    {"slot": "any", "ipa": "nʲ", "out": "ny"},
+    {"slot": "any", "ipa": "ŋ", "out": "n", "before_onset": "ɡ k kʰ x ɣ ɡʲ ɡʰ"},
+    {"slot": "any", "ipa": "ŋ", "out": "ng'"},
+    {"slot": "coda", "ipa": "ɴ", "out": "m", "before_onset": "b p m pʰ"},
+    {"slot": "any", "ipa": "ɴ", "out": "n"},
+    {"slot": "any", "ipa": "ɳ", "out": "n"},
+    {"slot": "any", "ipa": "n̩", "out": "n"},
+    {"slot": "coda", "ipa": "n", "out": "m", "before_onset": "b p m pʰ"},
+    {"slot": "any", "ipa": "n", "out": "n"},
+    {"slot": "any", "ipa": "l", "out": "l"},
+    {"slot": "any", "ipa": "ɫ", "out": "l"},
+    {"slot": "any", "ipa": "ɭ", "out": "l"},
+    {"slot": "any", "ipa": "ɭʲ", "out": "l"},
+    {"slot": "any", "ipa": "r", "out": "r"},
+    {"slot": "any", "ipa": "rʲ", "out": "r"},
+    {"slot": "any", "ipa": "ɾ", "out": "r"},
+    {"slot": "any", "ipa": "ɽ", "out": "r"},
+    {"slot": "any", "ipa": "ɹ", "out": "r"},
+    {"slot": "any", "ipa": "ʁ", "out": "r"},
+    {"slot": "any", "ipa": "ʐ", "out": "r"},
+    {"slot": "any", "ipa": "ɻ", "out": "r"},
+    {"slot": "nucleus", "ipa": "j", "out": "y", "if_nucleus_head": "j"},
+    {"slot": "onset", "ipa": "j", "out": "y"},
+    {"slot": "any", "ipa": "j", "out": "i"},
+    {"slot": "nucleus", "ipa": "w", "out": "w", "if_nucleus_head": "w"},
+    {"slot": "onset", "ipa": "w", "out": "w"},
+    {"slot": "any", "ipa": "w", "out": "u"},
+    {"slot": "nucleus", "ipa": "ɥ", "out": "w", "if_nucleus_head": "ɥ"},
+    {"slot": "any", "ipa": "ɥ", "out": "u"},
+    {"slot": "onset", "ipa": "ɰ", "out": "w"},
+    {"slot": "any", "ipa": "ɰ", "out": "u"},
+    {"slot": "onset", "ipa": "ʲ", "out": "y", "if_nucleus_head": "a ɑ ɐ æ ʌ o ɔ ɒ ɵ ɤ u ʊ ɯ ʉ ə ɨ"},
+    {"slot": "any", "ipa": "ʲ", "out": ""},
+    {"slot": "any", "ipa": "ʰ", "out": ""},
+    {"slot": "any", "ipa": "ˤ", "out": ""},
+    {"slot": "any", "ipa": "ˀ", "out": ""},
+    {"slot": "any", "ipa": "ː", "out": ""},
+    {"slot": "any", "ipa": "̪", "out": ""},
+    {"slot": "any", "ipa": "̩", "out": ""},
+    {"slot": "any", "ipa": "͈", "out": ""},
+    {"slot": "any", "ipa": "̯", "out": ""},
+    {"slot": "nucleus", "ipa": "ɐ̃ʊ̃", "out": "au"},
+    {"slot": "any", "ipa": "ɐ̃", "out": "an"},
+    {"slot": "any", "ipa": "ɛ̃", "out": "en"},
+    {"slot": "any", "ipa": "ʊ̃", "out": "un"},
+    {"slot": "any", "ipa": "ã", "out": "an"},
+    {"slot": "any", "ipa": "ẽ", "out": "en"},
+    {"slot": "any", "ipa": "ĩ", "out": "in"},
+    {"slot": "any", "ipa": "õ", "out": "on"},
+    {"slot": "any", "ipa": "ũ", "out": "un"},
+    {"slot": "any", "ipa": "̃", "out": "n"},
+    {"slot": "any", "ipa": "a", "out": "a"},
+    {"slot": "any", "ipa": "ɑ", "out": "a"},
+    {"slot": "any", "ipa": "ɐ", "out": "a"},
+    {"slot": "any", "ipa": "æ", "out": "a"},
+    {"slot": "any", "ipa": "ʌ", "out": "a"},
+    {"slot": "any", "ipa": "ə", "out": "a"},
+    {"slot": "any", "ipa": "ɜ", "out": "a"},
+    {"slot": "any", "ipa": "ɚ", "out": "a"},
+    {"slot": "any", "ipa": "ɝ", "out": "a"},
+    {"slot": "any", "ipa": "e", "out": "e"},
+    {"slot": "any", "ipa": "ɛ", "out": "e"},
+    {"slot": "any", "ipa": "ø", "out": "e"},
+    {"slot": "any", "ipa": "œ", "out": "e"},
+    {"slot": "any", "ipa": "ɤ", "out": "e"},
+    {"slot": "any", "ipa": "i", "out": "i"},
+    {"slot": "any", "ipa": "ɪ", "out": "i"},
+    {"slot": "any", "ipa": "ɨ", "out": "i"},
+    {"slot": "any", "ipa": "o", "out": "o"},
+    {"slot": "any", "ipa": "ɔ", "out": "o"},
+    {"slot": "any", "ipa": "ɒ", "out": "o"},
+    {"slot": "any", "ipa": "ɵ", "out": "o"},
+    {"slot": "any", "ipa": "u", "out": "u"},
+    {"slot": "any", "ipa": "ʊ", "out": "u"},
+    {"slot": "any", "ipa": "ɯ", "out": "u"},
+    {"slot": "any", "ipa": "ʉ", "out": "u"},
+    {"slot": "any", "ipa": "y", "out": "u"}
+  ],
+  "syllable_fixups": [
+    {"match": "ng'([kg])", "out": "n\\1"},
+    {"match": "(sh|ch|ny|ly|ng'|th|dh|gh|kh)$", "out": "\\1i", "when": ["word_final"]},
+    {"match": "([tdszjnlrkg])$", "out": "\\1i", "when": ["word_final"]},
+    {"match": "([pbfvmw])$", "out": "\\1u", "when": ["word_final"]},
+    {"match": "h$", "out": "ha", "when": ["word_final"]},
+    {"match": "(.)$", "out": "\\1-", "when": ["not_word_final"]},
+    {"match": "m-$", "out": "m", "before_onset": "b v ʋ bʰ"},
+    {"match": "n-$", "out": "n", "before_onset": "d z ɡ dʒ ʒ ʑ dʑ ɖ ɗ dˤ dʲ dʰ ɡʰ ɡʲ ɟ"}
+  ],
+  "targets": {
+    "pt": {
+      "comment": "espeak writes /y/ for the reduced final [ɨ] of Portuguese -e (passaporte, noite): 287 cells, logged in scripts/build_ipa.py. It is an i, not the front rounded vowel every other target uses that symbol for.",
+      "phonemes": [
+        {"slot": "any", "ipa": "y", "out": "i"}
+      ]
+    },
+    "ko": {
+      "comment": "/ʌ/ is Korean eo, which Swahili writes o (Seoul, Busan). Everywhere else in the corpus the same symbol is English STRUT, Russian reduction or Hindi schwa, all of which want a.",
+      "phonemes": [
+        {"slot": "any", "ipa": "ʌ", "out": "o"}
+      ]
+    },
+    "ru": {
+      "comment": "espeak writes Russian z' as /ʑ/, a plain sibilant that takes z (zdes -> zdesi). In Japanese and Korean the same symbol is a real alveolo-palatal inside /dʑ/ and takes j.",
+      "phonemes": [
+        {"slot": "any", "ipa": "ʑ", "out": "z"}
+      ]
+    }
+  },
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: nothing to teach. Every letter and digraph here is ordinary Kiswahili orthography -- ng' is /ŋ/ as in ng'ombe, ny is /ɲ/, th dh gh kh are the Arabic-stratum digraphs of thelathini, dhahabu, lugha, khanga. A doubled vowel is long, as in kondoo. There is no curated Swahili sheet, so this table is not scored; it is held to zero --gaps and to being read aloud."
+}

@@ -532,3 +532,34 @@ test('choosing a phone reveals the models, with their aspect ratios', async ({ p
   await field.getByRole('radio', { name: 'iPhone SE' }).click();
   await expect.poll(aspect, { timeout: 120_000 }).toBeCloseTo(1 / 1.778, 2);
 });
+
+test('a header or footer can carry a folio, the pair, or your own text', async ({ page }) => {
+  // There was no page furniture at all: no folio, no running head, nothing naming
+  // the pair on the paper. The band comes out of the margin in `contentBox`, so
+  // everything downstream adapts with no knowledge of it.
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+
+  const field = page.locator('.panel-field', { hasText: 'Header / footer' });
+  await expect(field.locator('.head-slots')).toBeHidden();
+
+  await field.getByRole('radio', { name: 'Footer' }).click();
+  await expect(field.locator('.head-slots')).toBeVisible();
+  await page.selectOption('#head-left', 'pair');
+  await page.selectOption('#head-right', 'page');
+
+  const texts = () => page.locator('.face.focused svg text')
+    .evaluateAll((ns) => ns.map((n) => n.textContent));
+  await expect.poll(async () => (await texts()).some((s) => /→/.test(s)),
+    { timeout: 120_000 }).toBe(true);
+  await expect.poll(async () => (await texts()).some((s) => /^\d+ \/ \d+$/.test(s)),
+    { timeout: 120_000 }).toBe(true);
+
+  // Custom text reveals the box and reaches the page.
+  await page.selectOption('#head-left', 'custom');
+  await expect(page.locator('#head-text')).toBeVisible();
+  await page.locator('#head-text').fill('If found, call +1 555 0100');
+  await page.locator('#head-text').press('Enter');
+  await expect.poll(async () => (await texts()).some((s) => s.includes('555 0100')),
+    { timeout: 120_000 }).toBe(true);
+});

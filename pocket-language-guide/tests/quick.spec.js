@@ -30,7 +30,8 @@ test.describe('the quick export page', () => {
       [...document.querySelectorAll('.face svg text')].map((t) => t.getAttribute('font-family')),
     )].join(' '));
     expect(await families()).not.toContain('serif');
-    await page.getByRole('radio', { name: 'Serif' }).click();
+    // `exact`, because "Narrow serif" is one of the four faces now.
+    await page.getByRole('radio', { name: 'Serif', exact: true }).click();
     await expect.poll(families).toContain('serif');
 
     // Narrowing the content drops items, which shows up as a smaller type scale

@@ -6,7 +6,7 @@
 // sheet -- and only when a reader opens one.
 
 import {
-  browserSheetContext, loadText, loadLanguages, readerLanguage,
+  browserSheetContext, fontManifest, loadText, loadLanguages, readerLanguage,
   registerOffline, saveForOffline, setReaderLanguage, showFatal,
 } from './app.js';
 import { regionRow } from './flags.js';
@@ -97,17 +97,24 @@ function card(lang, gallery) {
       'data-offline': lang.bcp47,
     });
     offline.addEventListener('click', async () => {
+      const button = /** @type {HTMLButtonElement} */ (offline);
       offline.textContent = t('gallery.saving');
-      /** @type {HTMLButtonElement} */ (offline).disabled = true;
+      button.disabled = true;
       try {
         const ctx = await browserSheetContext();
-        const manifest = JSON.parse(await loadText('data/fonts/manifest.json'));
+        const manifest = await fontManifest();
         const result = await saveForOffline({
           corpus: ctx.corpus, target: lang.bcp47, source: reader, manifest,
         });
         offline.textContent = result.ok ? t('gallery.saved') : t('gallery.partlySaved');
+        // Only a complete save is final. "Partly saved" means some file 404ed and
+        // the pair may still be unusable offline, so the reader has to be able to
+        // try again -- and the button used to be disabled for the life of the page
+        // on both of the two ways this can fail.
+        button.disabled = result.ok;
       } catch (err) {
         offline.textContent = t('gallery.saveFailed');
+        button.disabled = false;
         console.warn('[plg]', err);
       }
     });
