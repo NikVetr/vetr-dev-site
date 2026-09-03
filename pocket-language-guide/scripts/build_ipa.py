@@ -179,7 +179,16 @@ distrust the column as a whole.
   Italian orthography writes it `z`; the G2P is giving something else.
 - 73 `ar` rows have no short vowels at all, because espeak read unvocalised text.
   `hal imknni istijdam` is what a respelling of one looks like, and no rule table
-  can recover the vowels. Vocalising the Arabic source text is the fix.
+  can recover the vowels. Vocalising the Arabic source text is the fix. A further
+  `ar` row is a wrong *reading* rather than a missing vowel: espeak takes `كم حجم`
+  for *kilometer*.
+- **espeak writes /y/ for three different vowels that are not /y/**, which is one
+  defect wearing three hats and the most consequential entry here, since /y/ is a
+  real phoneme in `fr de zh-Hans` and a rule table cannot tell the cases apart.
+  Portuguese's reduced final [ɨ] is /y/ on 287 cells (`de nada` is `dʒy nˈadæ`),
+  Vietnamese's ư [ɨ~ɯ] on 199, and Turkish's ü inconsistently -- `Günaydın` is
+  right but `Özür` is `œzˈør`. Portuguese's final [ɐ] is likewise written /æ/.
+  Three rule tables have had to work around this with `targets` blocks.
 """
 import argparse
 import csv

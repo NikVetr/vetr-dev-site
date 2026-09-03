@@ -123,6 +123,13 @@ Naming the reader's own clusters gets both, and the list is short: the RAE's
 intersected with the target's table, and it therefore carries both rhotics --
 German writes `pɾ` where Russian writes `pr`.
 
+**Probe with the target's real `ipa` column, never a hand-made list.** Three of the
+predicates ask about the target's own inventory and phonotactics, so a ten-word
+sample silently answers them differently: a rule guarded on `if_inventory: 'ɚ'`
+vanishes from a toy list that has no `ɚ` in it, and `onsetClusters` cannot learn a
+cluster the sample never happens to open a word with. Two of the tables written so
+far reported a regression that turned out to be their own probe.
+
 Then run it over real data:
 
 ```bash

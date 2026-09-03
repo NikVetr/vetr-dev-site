@@ -469,15 +469,17 @@ test('a column with nothing to print says so, and stops once it is filled', asyn
   assert.ok(filled.plan.faces.flatMap((f) => f.runs).some((r) => r.text === ipa),
     'an imported IPA value should reach the page');
 
-  // The other silent column, on default settings: respellings exist only for pairs
-  // glossed into English, so 225 of the 240 pairs print no say-it-like column at
-  // all. `roman` is empty on that sheet too and is *not* reported -- German
-  // declares no romanisation system, so it is inapplicable rather than unfilled.
-  const german = await buildSheet(ctx, {
-    ...(await referenceSpec('de', 'tr')),
+  // The other silent column, on default settings. This pair used to be `de <- tr`,
+  // and a Turkish reader now has a rule table, so it is no longer silent: six of
+  // the seventeen reading languages have one, which fills 96 of the 272 pairs and
+  // leaves 176. Indonesian is one of the eleven without. `roman` is empty on this
+  // sheet too and is *not* reported -- German declares no romanisation system, so
+  // it is inapplicable rather than unfilled.
+  const quiet = await buildSheet(ctx, {
+    ...(await referenceSpec('de', 'id')),
     selection: { sections: only, items: {} },
   });
-  assert.deepEqual(dead(german.plan), ['respell']);
+  assert.deepEqual(dead(quiet.plan), ['respell']);
 });
 
 test('an empty selection reports itself instead of measuring as NaN', async () => {

@@ -114,6 +114,8 @@ export function phonemesOf(ipa) {
  * `nee˧˩˧ how˧˩˧` reads neither the word nor the tone.
  */
 const TONE = /[\u02E5-\u02E9]/g;
+/** The same set, to test one character at a time. */
+const isTone = (/** @type {string} */ ch) => ch >= '\u02E5' && ch <= '\u02E9';
 /** @type {Record<string,number>} */
 const STRESS = { 'ˈ': 1, 'ˌ': 2 };
 
@@ -127,8 +129,14 @@ const STRESS = { 'ˈ': 1, 'ˌ': 2 };
  * `stress: 'none'` for the whole language: the pattern matched nothing and the
  * string came back untouched on all 11,788 rows. `й` and `ь` are deliberately
  * absent, being a glide and a soft sign rather than vowels.
+ *
+ * Dotless `ı` is here for the same reason and is easy to miss: the `i` flag does
+ * not fold it to `i`, since `ı` <-> `I` is a Turkish-locale mapping rather than a
+ * Unicode default. Without it both length devices were silent no-ops on Turkish's
+ * /ɯː əː ɤː/. **A new table using `stress: 'acute'` or `length` should check its
+ * own vowels are in here before designing around the behaviour.**
  */
-const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõywаеёиоуыэюя]+/iu;
+const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõıywаеёиоуыэюя]+/iu;
 /**
  * Letters that already carry the mark, so a second one would produce a character
  * no orthography has. `ё` is here because it is *inherently* stressed in Russian --
@@ -259,7 +267,14 @@ export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
     if (unit in STRESS) { pending = STRESS[unit]; continue; }
     // Length and nasalisation attach to the vowel they follow.
     if (VOWEL_TAIL.has(unit)) {
-      if (units.length) units[units.length - 1][0] += unit;
+      // A tone letter follows the whole *syllable*, not the segment before it, so
+      // attaching it to the previous unit put it on the coda consonant: `tɕʰiŋ˧˩˧`
+      // gave a coda of `ŋ˧˩˧`, which is four phonemes wearing a trench coat. It
+      // belongs to the nucleus, which is also where a reader who writes tone --
+      // Vietnamese is the only one -- wants the diacritic to land.
+      let at = units.length - 1;
+      while (isTone(unit) && at >= 0 && !VOWELS.has(units[at][0][0])) at -= 1;
+      if (at >= 0) units[at][0] += unit;
       continue;
     }
     units.push([unit, pending]);
@@ -304,19 +319,24 @@ export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
     // comes out `fa-ni` rather than `fan-i`, and for a reader whose script spells a
     // consonant with its vowel that changes the characters, not just a hyphen.
     //
-    // **Deriving the exception was tried and measured, and does not work.** The
-    // proposal was the mirror of the cluster rule -- whatever can close a word can
-    // close a syllable -- gated on the language having no coda clusters, on the
-    // theory that a CV(C) language's final consonant is lexical. Forced on it takes
-    // Mandarin from 63.5% to 66.4% agreement and Spanish from 62.1% to **20.9%**,
-    // so the gate is load-bearing; but the coda-cluster rate does not select the
-    // right languages (Thai 65%, Vietnamese 66% and Mandarin 25% are the *highest*
-    // here, Japanese 0.02% and Korean 0.03% the lowest -- it measures how the G2P
-    // transcribed the language, not its phonotactics). Gating on the writing system
-    // instead selects `zh-Hans ja ko th`, and Korean then *loses* 0.4 points. Only
-    // Mandarin wants it, so there is no typological fact to derive: it needs a
-    // per-target claim the engine is not given, and one language does not earn a
-    // new concept.
+    // **The exception was implemented twice, measured, and rejected both times.**
+    // The proposal is the mirror of the cluster rule -- whatever can close a word
+    // can close a syllable -- gated on the language rarely ending a syllable with
+    // two consonants, on the theory that a CV(C) language's final consonant is
+    // lexical. It works: the gate leaves Spanish at 62.1% and Mandarin gains 2.9
+    // points, 63.5% to 66.4%, which is real because the curated Mandarin sheet
+    // keeps Mandarin's own boundaries. But Korean loses 0.4 and Swahili 0.9, for a
+    // corpus-wide net of +0.1%, and it needs a tuned threshold: the distribution
+    // is `ja` 0.02%, `ko` 0.03%, `th` 0.03%, `sw` 0.06%, `vi` 0.10%, `zh-Hans`
+    // 0.13%, then `it` 0.34% and up to `de` 9.97%, so the gate sits in a 2.6x gap
+    // and nowhere else. One language gaining three points does not pay for a magic
+    // constant that two languages pay for.
+    //
+    // Two earlier numbers for this are wrong and are corrected here. An absolute
+    // "no coda clusters" gate disqualifies all seventeen, since the floor is 0.02%
+    // rather than 0. And a first measurement that put Thai at 65% and Vietnamese
+    // at 66% was an artifact of Chao tone letters being parsed as coda consonants
+    // -- the bug this proposal surfaced and `VOWEL_TAIL` now fixes.
     else if (inter.length === 1) cuts.push(inter[0]);
     else if (maxOnset >= 3 && inter.length > 2 && clusters.has(at(3))) cuts.push(inter[inter.length - 3]);
     else if (maxOnset >= 2 && clusters.has(at(2))) cuts.push(inter[inter.length - 2]);
@@ -495,9 +515,17 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
   // rather than testing it per syllable. Then sort by IPA length, because
   // "longest match wins" is a property of the table and not of the order someone
   // happened to write it in -- an unsorted list silently spells /tɕʰ/ as /t/.
+  // Longest IPA first, and at equal length the *more specific* slot first, because
+  // both are properties of the table rather than of the order someone wrote it in.
+  // Sorting on length alone left ties to a stable sort, so a `slot: 'any'` rule
+  // written earlier in the file shadowed the `slot: 'coda'` override for the same
+  // phoneme -- and the shadowed rule never fired, which no output inspection
+  // reveals. The kana table lost 99 rows to it: a coda /tʃ/ printed マチュ where
+  // the standard's own epenthetic column gives マチ.
   const phonemes = [...(only.phonemes ?? []), ...(rules.phonemes ?? [])]
     .filter((/** @type {any} */ r) => inventoryHolds(r, inventory))
-    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.ipa.length - a.ipa.length);
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.ipa.length - a.ipa.length
+      || Number(a.slot === 'any') - Number(b.slot === 'any'));
   // A fixup's `out` writes backreferences as `\1`, which is the convention in
   // `content/RESPELL-PILOT.md` and in every table written against it. JS spells
   // them `$1`, and silently emits the literal text for `\1` -- so a table written
@@ -570,13 +598,21 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // generated: a reader who does not want it simply gets the plain form. The
       // Japanese sheet already invented this convention by hand, doubling a letter
       // on 285 of its 286 long-vowel rows.
-      if (/ː/.test(s.nucleus + s.coda)) {
-        // Against `VOWEL_LETTERS` rather than `[aeiou]`, which made both of these
+      // Length marks the *nucleus*, so the search starts where the nucleus does --
+      // the same offset `acute` uses, and for the same reason. Marking the first
+      // vowel run in the whole syllable put Turkish's colon on an onset glide
+      // (`day:` for TDK's `da:y`) or, on a vowel-less Arabic row, on the onset's
+      // own `y`: 406 of 7,215 marks.
+      if (/ː/.test(s.nucleus) && policy.length !== 'none') {
+        const head = text.slice(0, nucleusAt);
+        // Against `VOWEL_LETTERS` rather than `[aeiou]`, which made both devices
         // silent no-ops in every script but Latin.
-        if (policy.length === 'double') text = text.replace(VOWEL_LETTERS, '$&$&');
-        // Turkish writes length with a colon rather than by doubling, because a
-        // doubled vowel there is read as two syllables.
-        else if (policy.length === 'colon') text = text.replace(VOWEL_LETTERS, '$&:');
+        // The *first* letter of the nucleus, because `ː` follows the vowel it
+        // lengthens and that is a diphthong's first element: TDK writes `da:y`,
+        // not `day:`.
+        const mark = policy.length === 'double' ? '$1$1' : '$1:';
+        const at = new RegExp(`(${VOWEL_LETTERS.source.replace(/\+$/, '')})`, 'iu');
+        text = head + text.slice(nucleusAt).replace(at, mark);
       }
       const marked = s.stress === 1 && syls.length >= policy.stress_min_syllables;
       if (!marked || !stressDevice) return text;
