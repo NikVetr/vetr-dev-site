@@ -13,7 +13,7 @@
 import { languagePicker } from './language-picker.js';
 import { nextIndex } from './keys.js';
 import { languageName, t } from './i18n.js';
-import { browserSheetContext, ensureFontCss, loadText } from './app.js';
+import { browserSheetContext, ensureFontCss, fontManifest, loadText } from './app.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -46,6 +46,8 @@ function el(tag, attrs = {}, kids = []) {
  * @type {Map<string, Promise<string[]>>}
  */
 const sheets = new Map();
+/** Geometry presets: one file, the same for every pair. */
+/** @type {Promise<any>|null} */ let presetsOnce = null;
 
 /**
  * @param {string} target @param {string} source
@@ -64,7 +66,8 @@ function faceSheet(target, source, solved) {
         import('./app.js'),
       ]);
     const ctx = await browserSheetContext();
-    const presets = JSON.parse(await loadText('data/presets.json'));
+    presetsOnce ??= loadText('data/presets.json').then(JSON.parse);
+    const presets = await presetsOnce;
     const base = makeSpec(ctx, presets, { target, source });
     const spec = {
       ...base,
@@ -82,7 +85,7 @@ function faceSheet(target, source, solved) {
     await ensureFontCss(ctx, target, source, spec.typeface);
     const [built, manifest, icons] = await Promise.all([
       buildSheet(ctx, spec),
-      loadText('data/fonts/manifest.json').then(JSON.parse),
+      fontManifest(),
       loadIcons(),
     ]);
     // A pinned fit is a cached answer, and a cached answer can be wrong: the index
@@ -319,6 +322,17 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     paint();
     load();
   }
+
+  // **Publish the card's width so the pair and the foot can share it.**
+  // It is not expressible in CSS: the face's width is its rendered height times the
+  // sheet's aspect, and on a short window the height is what binds -- so the pair
+  // was hard-coded to the width a *tall* window gives and the foot was sized by its
+  // own thumbnails, and both ended up outboard of the paper's edges.
+  const bounds = new ResizeObserver(([entry]) => {
+    dialog.style.setProperty('--card-w', `${Math.round(entry.contentRect.width)}px`);
+  });
+  bounds.observe(face);
+  dialog.addEventListener('close', () => bounds.disconnect(), { once: true });
 
   prev.addEventListener('click', () => go(at - 1));
   next.addEventListener('click', () => go(at + 1));

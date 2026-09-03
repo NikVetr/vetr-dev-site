@@ -79,7 +79,10 @@ export function pageGlyph({ pageW, pageH, columns, box = 30 }) {
  * @param {Record<string, any>} geometry  `presets.geometry`
  */
 export function cardOptions(geometry) {
-  return Object.entries(geometry).map(([id, g]) => ({
+  // A named phone model is a sub-option of "Phone screen" rather than a card size
+  // of its own: six near-identical tall rectangles in the top-level control would
+  // bury the five paper sizes it exists to choose between.
+  return Object.entries(geometry).filter(([, g]) => !g.model).map(([id, g]) => ({
     value: id,
     caption: g.captionKey
       ? t(g.captionKey)
@@ -477,16 +480,16 @@ export function fieldGlyph(field, sample) {
   // The accent rule down the left edge of every entry on the sheet.
   svg.append(svgEl('rect', { x: 1, y: 3, width: 1.6, height: FIELD_H - 6, class: 'g-ink faint' }));
 
-  // Every other line as a rule, so the glyph still reads as a whole entry.
-  for (const [name, [s, r]] of Object.entries(FIELD_ROWS)) {
-    if (name === field) continue;
-    const w = colW * (r === 0 ? 1 : 0.72);
-    svg.append(svgEl('rect', {
-      x: s === 0 ? 5 : FIELD_W - 3 - w,
-      y: lineY(r), width: w, height: r === 0 ? 2.6 : 1.9,
-      rx: 0.8, class: 'g-ink faint',
-    }));
-  }
+  // One faint counterpart on the other side of the row, and nothing else. Six of
+  // them read as an entry, but they also crowded the one thing the glyph is for --
+  // the column's own words -- into a third of the box. The single bar is enough to
+  // say which half of the entry this column lands in.
+  const otherW = colW * (row === 0 ? 1 : 0.72);
+  svg.append(svgEl('rect', {
+    x: side === 0 ? FIELD_W - 3 - otherW : 5,
+    y: lineY(row), width: otherW, height: row === 0 ? 2.6 : 1.9,
+    rx: 0.8, class: 'g-ink faint',
+  }));
 
   const text = (sample?.values?.[field] ?? '').trim();
   if (!text) {
@@ -508,8 +511,8 @@ export function fieldGlyph(field, sample) {
 
   const node = svgEl('text', {
     x: side === 0 ? left : left + colW,
-    y: lineY(row) + (row === 0 ? 6.4 : 5.6),
-    'font-size': row === 0 ? 8.2 : 7,
+    y: lineY(row) + (row === 0 ? 7.4 : 6.4),
+    'font-size': row === 0 ? 10.5 : 9,
     'font-family': {
       target: sample?.targetFamily, latin: sample?.latinFamily, source: sample?.sourceFamily,
     }[FIELD_FACE[field]] ?? 'inherit',
@@ -993,6 +996,47 @@ export function redrawGlyphs(group, glyphs) {
     const old = button.querySelector('svg');
     if (old && glyphs[i]) old.replaceWith(glyphs[i]);
   });
+}
+
+/**
+ * Which phone, once "Phone screen" is chosen.
+ *
+ * A wallpaper is the one output whose *physical* size is known exactly, and the
+ * whole reason the phone presets are in points is that a point on the sheet is then
+ * a point on the glass -- so the per-script legibility floors mean what they say.
+ * The shapes are not interchangeable: 16:9 and 20:9 differ by a quarter of the
+ * screen's height, which is a whole section of the card. So the ratio is in the
+ * label, because it is the fact that decides.
+ * @param {Object} config
+ * @param {Record<string, any>} config.geometry
+ * @param {import('../core/types.js').Geometry} config.value
+ * @param {(patch: {geometry: import('../core/types.js').Geometry}) => void} config.onChange
+ */
+export function phoneControl({ geometry, value, onChange }) {
+  const models = Object.entries(geometry).filter(([, g]) => g.phone);
+  const idOf = (/** @type {import('../core/types.js').Geometry} */ at) => models.find(
+    ([, g]) => g.pageW === at.pageW && g.pageH === at.pageH,
+  )?.[0] ?? '';
+
+  const group = segmented({
+    label: t('format.phoneLong'),
+    value: idOf(value),
+    options: models.map(([id, g]) => ({
+      value: id,
+      caption: g.name.split('·')[0].trim(),
+      title: `${g.name} — ${g.note}`,
+      glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
+    })),
+    onChange: (id) => onChange({ geometry: { ...geometry[id] } }),
+  });
+
+  return {
+    group: group.group,
+    /** @param {import('../core/types.js').Geometry} next */
+    sync(next) {
+      group.select(idOf(next));
+    },
+  };
 }
 
 /**

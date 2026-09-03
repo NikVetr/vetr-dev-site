@@ -101,6 +101,7 @@ async function main() {
     themes,
     /** @param {Partial<import('../core/types.js').SheetSpec>} patch */
     onChange: async (patch) => {
+      marked = null;
       const readerChanged = Boolean(patch.source) && patch.source !== spec.source;
       spec = { ...spec, ...patch };
       if (readerChanged) await retranslate();
@@ -207,19 +208,21 @@ async function main() {
         icons,
         edits,
         onToggle: (patch) => {
+          marked = null;
           spec = {
             ...spec,
             selection: {
               sections: { ...spec.selection.sections, ...(patch.sections ?? {}) },
               items: { ...spec.selection.items, ...(patch.items ?? {}) },
             },
+            sectionColors: { ...spec.sectionColors, ...(patch.sectionColors ?? {}) },
           };
           schedule();
         },
         onHover: (id) => highlight($('face-area'), id),
       });
     }
-    updateTree(spec, blocks);
+    updateTree(spec, blocks, marked);
     // Custom items are written into the same edits an import produces, so a term
     // typed here and a term imported from a CSV behave identically.
     if (!addTerm) {
@@ -383,6 +386,17 @@ async function main() {
     }));
   });
 
+  /**
+   * What the last balance changed, until the reader touches anything else.
+   *
+   * Balancing can move a dozen rows at once and the only feedback was the total
+   * changing, so the answer to "what did that do" was to compare two numbers.
+   * Cleared on the next interaction, which is what makes it a diff rather than a
+   * permanent decoration.
+   * @type {Record<string,boolean>|null}
+   */
+  let marked = null;
+
   /** @param {ReturnType<typeof proposeBalance>} diff */
   function showDiff(diff) {
     const panel = $('diff');
@@ -447,6 +461,11 @@ async function main() {
             if (!items[concept.concept_id]) items[concept.concept_id] = false;
           }
         }
+        // What balancing did, so the reader can see it rather than infer it from a
+        // count. `items` holds both halves already: `true` is a row it added and
+        // `false` is one it turned off to stop a whole section arriving with it --
+        // which is the surprising half and the one worth colouring.
+        marked = items;
         spec = {
           ...spec,
           selection: {

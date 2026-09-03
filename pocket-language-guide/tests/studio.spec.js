@@ -354,7 +354,8 @@ test('the clock band survives a custom phone size', async ({ page }) => {
   await page.getByRole('radio', { name: 'Phone screen' }).click();
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
   await expect(clock).toBeVisible();
-  await expect(page.getByRole('radio', { name: 'Android' })).toBeVisible();
+  // Scoped to the clock field: there is an "Older Android" phone model now too.
+  await expect(clock.getByRole('radio', { name: 'Android', exact: true })).toBeVisible();
 
   // And through a custom size, which is what the flag on the geometry buys over
   // asking which preset the numbers still match.
@@ -436,4 +437,98 @@ test('the tree offers only concepts that belong on this target', async ({ page }
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
   await page.locator('.tree summary').first().click();
   await expect(page.locator('.tree')).toContainText('Thai politeness');
+});
+
+test('a column that cannot be filled is not offered', async ({ page }) => {
+  // A target with no alternate script and one with no romanisation system can never
+  // fill those columns, and their toggles drew an empty dashed rule -- which reads
+  // as broken rather than as "your language has one script".
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const group = page.locator('.segmented[role="group"]').first();
+  await expect(group.getByRole('checkbox', { name: 'Other script' })).toHaveCount(0);
+  await expect(group.getByRole('checkbox', { name: 'Romanisation' })).toHaveCount(0);
+
+  // Mandarin has both, and names them.
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await expect(page.getByRole('checkbox', { name: 'Han (Traditional)' })).toBeVisible();
+  await expect(page.getByRole('checkbox', { name: 'Pinyin' })).toBeVisible();
+});
+
+test('a section can be recoloured, and every term shows its importance', async ({ page }) => {
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  // The first section is open already.
+  await expect(page.locator('.tree details').first()).toHaveAttribute('open', '');
+
+  // Importance is what the priority ladder is a floor on, so the tree is where its
+  // effect is legible. It was carried on the concept row and thrown away.
+  const weights = page.locator('.items .weight');
+  expect(await weights.count()).toBeGreaterThan(5);
+  await expect(weights.first()).toHaveText(/^[01]\.\d\d$/);
+
+  // Colour is how the sheet codes its sections, so which section takes which is an
+  // editorial choice. Clicking the swatch cycles it, and the sheet follows.
+  const swatch = page.locator('.tree-color').first();
+  const shade = () => swatch.evaluate((b) => {
+    const mark = b.firstElementChild;
+    return mark.getAttribute('stroke') ?? mark.getAttribute('style');
+  });
+  const before = await shade();
+  await swatch.click();
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await expect.poll(shade).not.toBe(before);
+
+  // And clicking it did not fold the section, which a <summary> click would.
+  await expect(page.locator('.tree details').first()).toHaveAttribute('open', '');
+});
+
+test('balancing marks what it changed, until the next interaction', async ({ page }) => {
+  // Balancing can move a dozen rows at once and the only feedback was the total
+  // changing, so the answer to "what did that do" was to compare two numbers.
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+
+  await page.locator('#balance').click();
+  const apply = page.locator('#diff button.primary');
+  if (await apply.count()) {
+    await apply.click();
+    await expect(page.locator('.face.focused')).toBeVisible({ timeout: 120_000 });
+    // Two states, because "it added rows" and "it switched rows off so the added
+    // ones would not bring a whole section" are different news.
+    const changed = page.locator('.items li.added, .items li.removed');
+    await expect.poll(() => changed.count(), { timeout: 30_000 }).toBeGreaterThan(0);
+
+    // And it is a diff, not a decoration: the next interaction clears it.
+    await page.locator('.items input[type=checkbox]').first().click();
+    await expect.poll(() => changed.count(), { timeout: 30_000 }).toBe(0);
+  }
+});
+
+test('choosing a phone reveals the models, with their aspect ratios', async ({ page }) => {
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+
+  const field = page.locator('.panel-field', { hasText: 'Which phone' });
+  // A wallpaper setting has no meaning on paper.
+  await expect(field).toBeHidden();
+
+  await page.getByRole('radio', { name: 'Phone screen' }).click();
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 120_000 });
+  await expect(field).toBeVisible();
+
+  // 16:9 and 20:9 differ by a quarter of the screen's height, so the ratio is the
+  // fact that decides and it is in the label.
+  const pixel = field.getByRole('radio', { name: 'Pixel' });
+  await expect(pixel).toBeVisible();
+  await expect(pixel).toHaveAttribute('title', /2\.22:1/);
+
+  // And picking one changes the sheet's shape. The face div carries the page's own
+  // aspect, so that is the thing to watch.
+  const aspect = () => page.locator('.face.focused')
+    .evaluate((el) => Number(getComputedStyle(el).getPropertyValue('--face-aspect')));
+  await expect.poll(aspect, { timeout: 120_000 }).toBeCloseTo(180 / 396, 2);
+  await field.getByRole('radio', { name: 'iPhone SE' }).click();
+  await expect.poll(aspect, { timeout: 120_000 }).toBeCloseTo(1 / 1.778, 2);
 });

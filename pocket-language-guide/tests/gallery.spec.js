@@ -189,3 +189,46 @@ test.describe('gallery', () => {
   });
 });
 
+test('the card, the pair and the strip share one width', async ({ page }) => {
+  // The card's width is its rendered height times the sheet's aspect, so on a short
+  // window the height binds. The pair was hard-coded to the width a tall window
+  // gives and the foot was sized by its own fixed thumbnails, so both sat outboard
+  // of the paper.
+  for (const size of [{ width: 1500, height: 950 }, { width: 1500, height: 560 }]) {
+    await page.setViewportSize(size);
+    await page.goto('/');
+    await page.locator('.card-thumb-button').first().click();
+    const face = page.locator('.lightbox-face');
+    await expect(face).toBeVisible({ timeout: 90_000 });
+    await page.waitForTimeout(300);
+
+    const w = async (/** @type {string} */ sel) =>
+      (await page.locator(sel).boundingBox()).width;
+    const card = await w('.lightbox-face');
+    for (const sel of ['.lightbox-pair', '.lightbox-foot']) {
+      const got = await w(sel);
+      expect(Math.abs(got - card), `${sel} against the card at ${size.height}px tall`)
+        .toBeLessThan(3);
+    }
+    await page.keyboard.press('Escape');
+  }
+});
+
+test('both carets are visible before hover and neither has a box', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.card-thumb-button').first().click();
+  await expect(page.locator('.lightbox-face')).toBeVisible({ timeout: 90_000 });
+
+  for (const dir of ['prev', 'next']) {
+    const step = page.locator(`.lightbox-step.${dir}`);
+    await expect(step).toBeVisible();
+    // The box was `button:hover` winning over a `:not(:disabled)`-guarded override,
+    // so it appeared on whichever caret was at the end of the series.
+    await step.hover();
+    const paint = await step.evaluate((el) => {
+      const css = getComputedStyle(el);
+      return { bg: css.backgroundColor, radius: css.borderRadius };
+    });
+    expect(paint.bg, `${dir} caret background on hover`).toMatch(/rgba\(0, 0, 0, 0\)|transparent/);
+  }
+});

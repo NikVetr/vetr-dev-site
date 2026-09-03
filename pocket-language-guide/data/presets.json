@@ -2,7 +2,7 @@
   "note": "Geometry and paper presets. pageW/pageH and all margins are in points. \"faces\" is the card's natural count -- a double-sided sheet is two faces -- and is the anchor auto starts from, not a hard limit. \"screen\" marks a preset that is never printed, so it has no back to duplex and its faces need not come in pairs.",
   "geometry": {
     "card-7x5-4col": {
-      "name": "7\u00d75in landscape \u00b7 4 columns",
+      "name": "7×5in landscape · 4 columns",
       "pageW": 504,
       "pageH": 360,
       "marginTop": 4.68,
@@ -15,7 +15,7 @@
       "note": "Matches the reference sheet: 1.662in columns, 0.0507in gap."
     },
     "card-5x7-3col": {
-      "name": "5\u00d77in portrait \u00b7 3 columns",
+      "name": "5×7in portrait · 3 columns",
       "pageW": 360,
       "pageH": 504,
       "marginTop": 4.68,
@@ -27,7 +27,7 @@
       "faces": 4
     },
     "card-4x6-3col": {
-      "name": "6\u00d74in landscape \u00b7 3 columns",
+      "name": "6×4in landscape · 3 columns",
       "pageW": 432,
       "pageH": 288,
       "marginTop": 4.68,
@@ -39,7 +39,7 @@
       "faces": 4
     },
     "a6-2col": {
-      "name": "A6 portrait \u00b7 2 columns",
+      "name": "A6 portrait · 2 columns",
       "pageW": 297.64,
       "pageH": 419.53,
       "marginTop": 8,
@@ -51,7 +51,7 @@
       "faces": 4
     },
     "wallet-2col": {
-      "name": "Credit-card size \u00b7 2 columns",
+      "name": "Credit-card size · 2 columns",
       "pageW": 242.65,
       "pageH": 153.07,
       "marginTop": 4,
@@ -64,7 +64,7 @@
       "captionKey": "format.card.creditCard"
     },
     "phone-1col": {
-      "name": "Phone screen \u00b7 1 column",
+      "name": "Phone screen · 1 column",
       "pageW": 180,
       "pageH": 396,
       "marginTop": 9,
@@ -76,7 +76,111 @@
       "faces": 1,
       "screen": true,
       "captionKey": "format.card.phone",
-      "note": "2.5x5.5in, which is the physical size of a 6in phone screen -- so the type sizes and the per-script legibility floors, all in points, are what the reader actually sees. Whole pixels at every dpi the panel offers: 375x825, 750x1650, 1500x3300. One column, because two would be 79pt wide against the 115-138pt every other preset gives a column."
+      "note": "2.5x5.5in, which is the physical size of a 6in phone screen -- so the type sizes and the per-script legibility floors, all in points, are what the reader actually sees. Whole pixels at every dpi the panel offers: 375x825, 750x1650, 1500x3300. One column, because two would be 79pt wide against the 115-138pt every other preset gives a column.",
+      "phone": true,
+      "aspect": 2.2
+    },
+    "phone-19-5x9": {
+      "name": "iPhone 15/16 · Galaxy S24 · 2.17:1",
+      "pageW": 184,
+      "pageH": 399,
+      "marginTop": 9,
+      "marginBottom": 9,
+      "marginLeft": 9,
+      "marginRight": 9,
+      "columns": 1,
+      "columnGap": 4,
+      "faces": 1,
+      "screen": true,
+      "phone": true,
+      "aspect": 2.167,
+      "note": "The commonest phone shape: 19.5:9, as on iPhone 12 through 16 and the Galaxy S line. Sized from a 6.1in diagonal, so a point here is a point on the glass and the per-script legibility floors mean what they say.",
+      "model": true
+    },
+    "phone-20x9": {
+      "name": "Pixel · most Android · 2.22:1",
+      "pageW": 183,
+      "pageH": 407,
+      "marginTop": 9,
+      "marginBottom": 9,
+      "marginLeft": 9,
+      "marginRight": 9,
+      "columns": 1,
+      "columnGap": 4,
+      "faces": 1,
+      "screen": true,
+      "phone": true,
+      "aspect": 2.222,
+      "note": "Google Pixel and much of Android: 20:9. Sized from a 6.2in diagonal, so a point here is a point on the glass and the per-script legibility floors mean what they say.",
+      "model": true
+    },
+    "phone-19-3x9": {
+      "name": "Galaxy S Ultra · 2.14:1",
+      "pageW": 207,
+      "pageH": 444,
+      "marginTop": 9,
+      "marginBottom": 9,
+      "marginLeft": 9,
+      "marginRight": 9,
+      "columns": 1,
+      "columnGap": 4,
+      "faces": 1,
+      "screen": true,
+      "phone": true,
+      "aspect": 2.144,
+      "note": "The large Samsung shape: 19.3:9. Sized from a 6.8in diagonal, so a point here is a point on the glass and the per-script legibility floors mean what they say.",
+      "model": true
+    },
+    "phone-16x9": {
+      "name": "iPhone SE · older Android · 1.78:1",
+      "pageW": 166,
+      "pageH": 295,
+      "marginTop": 9,
+      "marginBottom": 9,
+      "marginLeft": 9,
+      "marginRight": 9,
+      "columns": 1,
+      "columnGap": 4,
+      "faces": 1,
+      "screen": true,
+      "phone": true,
+      "aspect": 1.778,
+      "note": "16:9, as on the iPhone SE and Android before the tall screens. Sized from a 4.7in diagonal, so a point here is a point on the glass and the per-script legibility floors mean what they say.",
+      "model": true
+    },
+    "phone-18x9": {
+      "name": "Older Android · 2.00:1",
+      "pageW": 187,
+      "pageH": 374,
+      "marginTop": 9,
+      "marginBottom": 9,
+      "marginLeft": 9,
+      "marginRight": 9,
+      "columns": 1,
+      "columnGap": 4,
+      "faces": 1,
+      "screen": true,
+      "phone": true,
+      "aspect": 2.0,
+      "note": "18:9, the first generation of tall Android screens. Sized from a 5.8in diagonal, so a point here is a point on the glass and the per-script legibility floors mean what they say.",
+      "model": true
+    },
+    "tablet-3x2": {
+      "name": "iPad · tablet · 1.44:1",
+      "pageW": 448,
+      "pageH": 644,
+      "marginTop": 9,
+      "marginBottom": 9,
+      "marginLeft": 9,
+      "marginRight": 9,
+      "columns": 2,
+      "columnGap": 4,
+      "faces": 1,
+      "screen": true,
+      "phone": true,
+      "aspect": 1.439,
+      "note": "A tablet in portrait, near 3:2. Wide enough for two columns. Sized from a 10.9in diagonal, so a point here is a point on the glass and the per-script legibility floors mean what they say.",
+      "model": true
     }
   }
 }

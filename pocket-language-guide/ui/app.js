@@ -41,8 +41,32 @@ export async function loadBytes(rel) {
   return new Uint8Array(await res.arrayBuffer());
 }
 
+/**
+ * The sheet context, built once per page.
+ *
+ * It loads the whole corpus and builds the font registry and the measurer, and
+ * nothing in it depends on which pair is being drawn -- so the lightbox was paying
+ * for all of that again on every language change, which is the most expensive
+ * thing between a click and a card.
+ * @type {ReturnType<typeof createSheetContext>|null}
+ */
+let context = null;
+
 export function browserSheetContext() {
-  return createSheetContext({ loadText, loadBytes });
+  context ??= createSheetContext({ loadText, loadBytes });
+  return context;
+}
+
+/**
+ * The font manifest, likewise: `ensureFontCss` fetches it and so did every caller
+ * that then needed it for rendering, which was two requests for one file.
+ * @type {Promise<{faces:{stack:string,weight:number,italic:boolean,file:string}[]}>|null}
+ */
+let manifestOnce = null;
+
+export function fontManifest() {
+  manifestOnce ??= loadText('data/fonts/manifest.json').then(JSON.parse);
+  return manifestOnce;
 }
 
 /**
@@ -91,7 +115,7 @@ export function setReaderLanguage(code) {
  * @param {'sans'|'serif'} [typeface]
  */
 export async function ensureFontCss(ctx, target, source, typeface = 'sans') {
-  const manifest = JSON.parse(await loadText('data/fonts/manifest.json'));
+  const manifest = await fontManifest();
   const stacks = stacksFor(ctx.corpus, target, source, typeface);
   const id = `plg-fonts-${stacks.join('-')}`;
   if (!document.getElementById(id)) {

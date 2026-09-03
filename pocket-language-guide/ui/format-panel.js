@@ -14,7 +14,7 @@ import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
   itemGlyph, cutGlyph, priorityOptions,
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
-  redrawGlyphs, relabelGlyphs, reserveControl, splitGlyph,
+  redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
@@ -58,6 +58,27 @@ const CUT_CHOICES = /** @type {const} */ ([
 const FIELD_ORDER = /** @type {const} */ ([
   'script', 'script_alt', 'roman', 'ipa', 'gloss', 'respell', 'literal',
 ]);
+
+/**
+ * The columns this pair could actually fill, in order.
+ *
+ * Two of the seven are structural rather than empty: a target with no alternate
+ * script and a target with no romanisation system can *never* fill those columns,
+ * and their toggles were drawing an empty dashed rule -- which reads as "this is
+ * broken" rather than "your language has one script". The dashes stay for a column
+ * that is applicable and merely unfilled, which is the honest signal they were
+ * added for.
+ * @param {import('../core/types.js').SheetSpec} spec
+ * @param {PanelInput['corpus']} corpus
+ */
+function fieldsFor(spec, corpus) {
+  const target = corpus.languages[spec.target];
+  return FIELD_ORDER.filter((field) => {
+    if (field === 'script_alt') return Boolean(target.script_alt);
+    if (field === 'roman') return Boolean((target.romanizations || '').trim());
+    return true;
+  });
+}
 
 /**
  * What each column is called, in terms of the pair actually selected.
@@ -431,6 +452,11 @@ export function createFormatPanel(input) {
   // the wallpaper and its shortcuts over the bottom, so a sheet meant to be a lock
   // screen has to keep those bands clear -- and there is no point offering that for
   // a card that will be printed.
+  // Which phone, once "Phone screen" is chosen. Gated with the clock band, because
+  // both exist only for a screen.
+  const phone = phoneControl({ geometry: presets.geometry, value: spec.geometry, onChange: emit });
+  const phoneField = panelField(t('format.phone'), [phone.group]);
+
   const reserve = reserveControl({ value: spec.geometry, onChange: emit });
   const reserveField = panelField(t('format.reserve'), [reserve.group, reserve.custom]);
 
@@ -453,6 +479,7 @@ export function createFormatPanel(input) {
     const cuttable = !screen && faceCount % 2 === 0;
     cutField.hidden = !cuttable;
     reserveField.hidden = !screen;
+    phoneField.hidden = !screen;
     if (cuttable || !cut) return;
     cut = '';
     cutControl.select('');
@@ -539,14 +566,15 @@ export function createFormatPanel(input) {
   // shows an empty rule instead.
   /** @type {import('./glyphs.js').FieldSample} */
   let sample = fieldSample({});
-  const fieldGlyphs = () => FIELD_ORDER.map((field) => fieldGlyph(field, sample));
+  const shownFields = fieldsFor(spec, corpus);
+  const fieldGlyphs = () => shownFields.map((field) => fieldGlyph(field, sample));
   const fieldCaptions = (/** @type {import('../core/types.js').SheetSpec} */ at) => {
     const labels = fieldLabels(at, corpus);
-    return FIELD_ORDER.map((field) => labels[field]);
+    return shownFields.map((field) => labels[field]);
   };
   const fieldSet = toggles({
     label: t('format.columnsShown'),
-    options: FIELD_ORDER.map((field, i) => ({
+    options: shownFields.map((field, i) => ({
       value: /** @type {import('../core/types.js').FieldId} */ (field),
       ...fieldCaptions(spec)[i],
       glyph: fieldGlyphs()[i],
@@ -558,6 +586,7 @@ export function createFormatPanel(input) {
 
   root.replaceChildren(
     panelField(t('format.card'), [size.group, size.custom]),
+    phoneField,
     panelField(t('format.columns'), [columns.group]),
     panelField(t('format.faces'), [faces.group]),
     panelField(t('format.priority'), [priority.group]),
@@ -596,6 +625,7 @@ export function createFormatPanel(input) {
       }
       size.sync(next.geometry);
       reserve.sync(next.geometry);
+      phone.sync(next.geometry);
       columns.select(next.geometry.columns);
       faces.select(next.autoFaces ? 0 : next.geometry.faces);
       priority.select(next.priority);

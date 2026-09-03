@@ -301,8 +301,41 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .items li { display: flex; gap: var(--space-1); align-items: baseline; font-size: var(--fs--1); }
 .items label { display: flex; gap: 0.4em; align-items: baseline; cursor: pointer; }
 .items li.flash { background: var(--accent-soft); }
+/* What the last balance did, until the reader touches anything else. A bar down the
+   inside edge rather than a fill, so it does not fight the row's own text or the
+   hover state -- and a word as well as a colour, because roughly one man in twelve
+   cannot use the colour on its own. */
+.items li.added, .items li.removed { position: relative; padding-inline-start: 6px; }
+.items li.added::before, .items li.removed::before {
+  content: ''; position: absolute; inset-block: 1px; inset-inline-start: 0;
+  inline-size: 3px; border-radius: 2px;
+}
+.items li.added::before { background: #B3261E; }
+.items li.removed::before { background: #0B67A3; }
+.items li.added::after, .items li.removed::after {
+  font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.04em;
+  flex: none; align-self: center;
+}
+.items li.added::after { content: 'added'; color: #B3261E; }
+.items li.removed::after { content: 'off'; color: #0B67A3; }
 .items .target { font-weight: 600; }
 .items .gloss { color: var(--muted); }
+/* Right against the panel edge, so the numbers line up as a column to scan rather
+   than sitting where the gloss happens to end. Tabular figures for the same
+   reason. */
+.items .weight {
+  margin-inline-start: auto; color: var(--muted); font-size: 0.85em;
+  font-variant-numeric: tabular-nums; flex: none; padding-inline-start: var(--space-1);
+}
+/* The swatch is a button inside a <summary>, so it needs to look like the dot it
+   replaced until the pointer is on it. */
+.tree-color {
+  padding: 0; border: 0; background: none; display: inline-flex; align-items: center;
+  cursor: pointer; border-radius: 3px; flex: none;
+}
+.tree-color:hover, .tree-color:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 1px;
+}
 
 .warnings { list-style: none; margin: 0 0 var(--space-2); padding: 0; font-size: var(--fs--1); }
 .warnings li { padding: 0.3em 0.5em; border-radius: var(--radius-sm); margin-bottom: 2px; }
@@ -480,14 +513,20 @@ dialog.lightbox {
 }
 dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 
-/* The card and the strip below it share one column, so their left and right edges
-   are the same edges. Only the card can state that width -- it is derived from the
-   card's height and the sheet's aspect -- so the column takes it from the card and
-   the foot stretches to it. */
+/* The card, the strip below it and the pair above it share one width, so their
+   left and right edges are the same edges.
+   Only the card can state that width, and it cannot state it in CSS: it is the
+   card's *rendered* height times the sheet's aspect, and on a short window the
+   height is what binds. So `ui/lightbox.js` measures the face and publishes
+   `--card-w`, and everything else takes it from there. The fallback is the width a
+   tall window gives, which is what the card used to assume unilaterally -- the pair
+   was hard-coded to it and the foot was sized by its own contents, so on a short
+   window the language names and the thumbnails both sat outboard of the paper. */
 .lightbox-stack {
   display: grid; grid-template-rows: minmax(0, 1fr) auto;
   gap: var(--space-2); min-block-size: 0; block-size: 100%;
   justify-items: stretch;
+  inline-size: var(--card-w, min(94vw, 1600px));
 }
 
 /* The card, sized to whatever the window leaves once the pair and the strip have
@@ -530,37 +569,53 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
    No box: they sit over the sheet's own rows, and a panel there hides two of them.
    So they are ink rather than paper, semi-transparent, and large enough to read
    as a control at that weight. */
+/* Always faintly there, so the card reads as one of a series before the pointer
+   arrives -- and `background: none` unconditionally, on a selector that beats the
+   sheet's generic `button:hover`.
+   That specificity was the whole of the left/right asymmetry: the old override was
+   guarded `:not(:disabled)`, so on a *disabled* caret `button:hover` won and
+   painted `--surface` into a 5px-radius box. `prev` is disabled on the first face,
+   which is where the lightbox opens -- so the box looked like a property of the
+   left caret when it was a property of being at the end of the series. */
 .lightbox-step {
   position: absolute; z-index: 1; top: 50%; translate: 0 -50%;
-  padding: 0 0.3rem; border: 0; background: none; backdrop-filter: none;
-  display: none; align-items: center; justify-content: center;
-  font-size: 3.4rem; line-height: 0.7; cursor: pointer;
-  color: rgb(17 24 32 / 42%);
+  padding: 0 0.4rem; border: 0; border-radius: 0; background: none;
+  backdrop-filter: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; line-height: 0.7; cursor: pointer;
+  color: rgb(17 24 32 / 34%);
+  text-shadow: 0 0 5px var(--paper), 0 0 12px var(--paper);
 }
 .lightbox-step.prev { inset-inline-start: 0.15rem; }
 .lightbox-step.next { inset-inline-end: 0.15rem; }
-.lightbox-card:hover .lightbox-step, .lightbox-card:focus-within .lightbox-step {
-  display: flex;
+.lightbox-step:hover, .lightbox-step:focus-visible {
+  color: rgb(17 24 32 / 60%); outline: none; background: none;
 }
 /* Brighter on hover, and outlined -- but the outline is on the glyph, drawn as a
    halo of paper, so it separates the caret from the type under it without covering
    any. Only where there is a card to go to: the ends of the series stay faint. */
 .lightbox-step:not(:disabled):hover, .lightbox-step:not(:disabled):focus-visible {
-  /* `background: none` again because the sheet's generic `button:hover` fills one
-     in, and it comes later in the cascade at the same specificity. */
   color: var(--ink); outline: none; background: none;
   text-shadow: 0 0 4px var(--paper), 0 0 9px var(--paper), 0 0 14px var(--paper);
 }
-.lightbox-step:disabled { opacity: 0.3; cursor: default; }
+.lightbox-step:disabled { opacity: 0.34; cursor: default; }
 
 /* The strip, and the two things to do with the card, on one row exactly as tall as
    a thumbnail: the buttons divide that height rather than setting their own. */
 .lightbox-foot {
+  /* `min-inline-size: 0`, or the grid refuses to take it below its own min-content
+     -- which is the strip's eight un-shrinkable thumbnails plus the button column,
+     and on a short window that is wider than the card it sits under. */
+  min-inline-size: 0;
   display: flex; align-items: stretch; justify-content: space-between;
   gap: var(--space-3);
 }
+/* `flex: 1 1 0` and a scroll, because a thumb is a fixed 6.4rem and never shrinks:
+   as `0 1 auto` their max-content decided the foot's width, and with eight faces
+   that was wider than the card they sit under. */
 .lightbox-strip {
-  display: flex; gap: 0.4rem; flex-wrap: wrap; min-inline-size: 0;
+  display: flex; gap: 0.4rem; min-inline-size: 0; flex: 1 1 0;
+  overflow-x: auto; scrollbar-width: thin; padding-block-end: 0.15rem;
 }
 .lightbox-thumb {
   padding: 0; border: 1px solid rgb(255 255 255 / 25%); border-radius: 3px;
@@ -585,7 +640,8 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
    Three tracks, the outer two equal, and each name pushed against the middle. */
 .lightbox-pair {
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-  gap: var(--space-2); font-size: var(--fs-1); inline-size: min(94vw, 1600px);
+  gap: var(--space-2); font-size: var(--fs-1);
+  inline-size: var(--card-w, min(94vw, 1600px));
 }
 .pair-side { display: flex; min-inline-size: 0; }
 .pair-side.start { justify-content: flex-end; }
@@ -594,6 +650,14 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 /* Both languages are controls and the mark is a third, and none of them draws a
    box on hover: these sit right above the sheet and a box there reads as chrome
    over the thing you came to look at. Colour, and an underline on the names. */
+/* The pair's own override has to undo `min-width` and `text-align` too, or the
+   arrow looks off-centre while sitting exactly on the grid's centre line: the
+   button keeps a 7rem floor with its text at the left edge, so the *left* name
+   ends up to 3rem short of the arrow while the right one hugs it -- and the gap
+   changes with the language, since it is `7rem - width(endonym)`. */
+.lightbox-pair .lang-picker-button {
+  min-width: 0; text-align: center;
+}
 .lightbox-pair .lang-picker-button {
   background: none; border: 0; color: var(--paper);
   font-size: inherit; font-weight: 600; cursor: pointer; padding: 0.15em 0.4em;

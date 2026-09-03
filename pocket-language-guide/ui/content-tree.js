@@ -60,7 +60,7 @@ function el(tag, attrs = {}, kids = []) {
  * @property {Record<string,Record<string,string>>} sourceRows
  * @property {import('../core/types.js').SheetSpec} spec
  * @property {any} theme
- * @property {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>})=>void} onToggle
+ * @property {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>, sectionColors?:Record<string,string>})=>void} onToggle
  * @property {(conceptId:string|null)=>void} onHover
  * @property {any} icons                     data/icons.json
  * @property {Record<string,string>} [sectionTitles] headings in the source
@@ -71,13 +71,17 @@ function el(tag, attrs = {}, kids = []) {
 /**
  * Build the tree. Returns an updater to call after each solve.
  * @param {TreeInput} input
- * @returns {(spec:import('../core/types.js').SheetSpec, blocks:import('../core/types.js').Block[])=>void}
+ * @returns {(spec:import('../core/types.js').SheetSpec,
+ *   blocks:import('../core/types.js').Block[],
+ *   marked?:Record<string,boolean>|null)=>void}
  */
 export function createTree(input) {
   const { root, corpus, theme, spec } = input;
 
   /** @type {{sectionId:string, box:HTMLInputElement, count:HTMLElement,
-   *          items:{conceptId:string, box:HTMLInputElement, target:HTMLElement, gloss:HTMLElement}[]}[]} */
+   *          swatch:HTMLElement, role:string,
+   *          items:{conceptId:string, box:HTMLInputElement, target:HTMLElement,
+   *                  gloss:HTMLElement, row:HTMLElement}[]}[]} */
   const sections = [];
   /** @type {Node[]} */ const nodes = [];
 
@@ -93,12 +97,15 @@ export function createTree(input) {
       // included, and then correctly did not print it.
       .filter((c) => appliesTo(c, input.spec.target))
       .filter((c) => input.targetRows[c.concept_id] && input.sourceRows[c.concept_id])
-      .map((c) => ({ conceptId: c.concept_id, custom: false }));
+      // `importance` comes with it, because the tree is where the priority ladder's
+      // effect is legible: the ladder is a floor on this number, so a reader who
+      // wonders why a row vanished at "Core" can see which side of the line it was.
+      .map((c) => ({ conceptId: c.concept_id, custom: false, weight: Number(c.importance) }));
     // Terms the reader added live in the same list as the corpus ones, marked so
     // they can be told apart and removed.
     const custom = input.edits.extras
       .filter((e) => e.sectionId === section.section_id)
-      .map((e) => ({ conceptId: e.conceptId, custom: true }));
+      .map((e) => ({ conceptId: e.conceptId, custom: true, weight: 1 }));
     const concepts = [...own, ...custom];
     if (!concepts.length) continue;
 
@@ -111,16 +118,30 @@ export function createTree(input) {
       input.onToggle({ sections: { [section.section_id]: sectionBox.checked } });
     });
     const count = el('span', { class: 'count' });
-    const color = theme.colors.roles[section.color_role];
+    // The registry's role is the default; a reader can say otherwise. The colour is
+    // the section-coding mechanism on the printed sheet, so which section is which
+    // colour is a real editorial choice -- and this is the one place both the
+    // colour and the section's contents are in front of you at once.
+    const role = spec.sectionColors?.[section.section_id] ?? section.color_role;
+    const color = theme.colors.roles[role];
     const icon = section.icon ? sectionIcon(input.icons, section.icon, color) : null;
-    const summary = el('summary', {}, [
-      sectionBox,
-      icon ?? el('span', { class: 'dot', style: `background:${color}` }),
-      el('span', { text: title }),
-      count,
-    ]);
+    const swatch = el('button', {
+      type: 'button', class: 'tree-color',
+      'aria-label': t('tree.recolour', { section: title }),
+      title: t('tree.recolour', { section: title }),
+    }, [icon ?? el('span', { class: 'dot', style: `background:${color}` })]);
+    swatch.addEventListener('click', (event) => {
+      // Inside a <summary>, so the click would otherwise fold the section.
+      event.preventDefault();
+      event.stopPropagation();
+      const roles = Object.keys(theme.colors.roles);
+      const next = roles[(roles.indexOf(role) + 1) % roles.length];
+      input.onToggle({ sectionColors: { [section.section_id]: next } });
+    });
+    const summary = el('summary', {}, [sectionBox, swatch, el('span', { text: title }), count]);
 
-    /** @type {{conceptId:string, box:HTMLInputElement, target:HTMLElement, gloss:HTMLElement}[]} */
+    /** @type {{conceptId:string, box:HTMLInputElement, target:HTMLElement,
+     *          gloss:HTMLElement, row:HTMLElement}[]} */
     const items = [];
     const list = el('ul', { class: 'items' }, concepts.map((concept) => {
       const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
@@ -135,22 +156,32 @@ export function createTree(input) {
           target,
           gloss,
           ...(concept.custom ? [el('span', { class: 'tag mine', text: t('tree.mine') })] : []),
+          // Two decimals, right-justified against the panel edge, because it is a
+          // number to compare down a column rather than to read in a sentence.
+          el('span', {
+            class: 'weight',
+            title: t('tree.importanceTitle', { value: concept.weight.toFixed(2) }),
+            text: concept.weight.toFixed(2),
+          }),
         ]),
       ]);
       li.addEventListener('mouseenter', () => input.onHover(concept.conceptId));
       li.addEventListener('mouseleave', () => input.onHover(null));
-      items.push({ conceptId: concept.conceptId, box, target, gloss });
+      items.push({ conceptId: concept.conceptId, box, target, gloss, row: li });
       return li;
     }));
 
-    sections.push({ sectionId: section.section_id, box: sectionBox, count, items });
+    sections.push({
+      sectionId: section.section_id, box: sectionBox, count, items, swatch, role: section.color_role,
+    });
     nodes.push(el('li', {}, [el('details', { open: '' }, [summary, list])]));
   }
 
   root.replaceChildren(...nodes);
 
   return (/** @type {import('../core/types.js').SheetSpec} */ nextSpec,
-    /** @type {import('../core/types.js').Block[]} */ blocks) => {
+    /** @type {import('../core/types.js').Block[]} */ blocks,
+    /** @type {Record<string,boolean>|null} */ marked = null) => {
     // Text comes from the solved blocks, so an imported edit shows here too, not
     // just on the page.
     /** @type {Map<string, import('../core/types.js').ItemRow>} */ const shown = new Map();
@@ -161,6 +192,14 @@ export function createTree(input) {
     for (const section of sections) {
       const on = nextSpec.selection.sections[section.sectionId] !== false;
       section.box.checked = on;
+      // The swatch is state, not shape, so it changes here rather than by rebuilding
+      // the tree -- which would cost every open section and the scroll position.
+      const next = theme.colors.roles[
+        nextSpec.sectionColors?.[section.sectionId] ?? section.role
+      ];
+      const mark = section.swatch.firstElementChild;
+      if (mark instanceof SVGElement) mark.setAttribute('stroke', next);
+      else if (mark instanceof HTMLElement) mark.style.background = next;
       let included = 0;
       for (const item of section.items) {
         const row = shown.get(item.conceptId);
@@ -172,6 +211,13 @@ export function createTree(input) {
         // the blocks.
         item.box.checked = on && nextSpec.selection.items[item.conceptId] !== false;
         item.box.disabled = !on;
+        // What the last balance did to this row, until the reader touches anything
+        // else. Two classes rather than one, because "it added twelve rows" and "it
+        // switched nine off so the twelve would not bring a whole section with them"
+        // are different news.
+        const change = marked?.[item.conceptId];
+        item.row.classList.toggle('added', change === true);
+        item.row.classList.toggle('removed', change === false);
         if (row) {
           item.target.textContent = row.values.script ?? '';
           item.gloss.textContent = row.values.gloss ?? '';

@@ -136,6 +136,9 @@
  * @property {'mixed'|'two-column'|'one-row'|'stacked'} arrangement  item field layout
  * @property {'consistent'|'adaptive'} [split]  whether the divider between an
  *   item's two halves is solved once per section or once per row
+ * @property {Record<string,string>} [sectionColors]  section id -> colour role,
+ *   overriding the registry's own. Colour is how the sheet codes its sections, so
+ *   which section takes which is an editorial choice rather than a fact.
  * @property {number} scale
  * @property {number} priority  keep only concepts whose `importance` reaches this,
  *   0 for all of them. A floor on the corpus rather than a count, so the same

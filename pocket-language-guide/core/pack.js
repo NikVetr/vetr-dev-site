@@ -485,7 +485,8 @@ export function buildBlocks({
     blocks.push({
       kind: 'heading',
       sectionId: section.section_id,
-      colorRole: section.color_role,
+      // The registry's role is the default; the content tree can override it.
+      colorRole: spec.sectionColors?.[section.section_id] ?? section.color_role,
       stretch: 0,
       level: /** @type {1|2|3} */ (Number(section.default_level)),
       text: sectionTitles?.[section.section_id] || section.title_en,
