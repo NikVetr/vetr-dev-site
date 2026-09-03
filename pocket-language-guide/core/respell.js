@@ -156,6 +156,8 @@ const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõẽĩũ
  * `a-nṍs`.
  */
 const ACCENTED = /[áéíóúàèìòùёãõẽĩũâêîôû]/i;
+/** A mark of either kind, for stripping one back off. */
+const MARKS = /[\u0300-\u036f]/gu;
 
 /**
  * Put a mark on the one letter of the nucleus that carries it.
@@ -177,13 +179,13 @@ const ACCENTED = /[áéíóúàèìòùёãõẽĩũâêîôû]/i;
  * Guessing from the letter cannot work: the English table spells /aɪ/ `ye`, where
  * the `y` *is* the head.
  * @param {string} text
- * @param {number} from       where the nucleus begins
- * @param {boolean} falling   mark the first letter of the run, not the last
+ * @param {number} from   where the nucleus begins
+ * @param {number} at     which letter of the run; negative counts from the end
  * @param {(letter: string) => string} mark
  */
-function markNucleus(text, from, falling, mark) {
+function markNucleus(text, from, at, mark) {
   return text.slice(0, from) + text.slice(from).replace(VOWEL_LETTERS, (run) => {
-    const i = falling ? 0 : run.length - 1;
+    const i = Math.min(Math.max(at < 0 ? run.length + at : at, 0), run.length - 1);
     return run.slice(0, i) + mark(run[i]) + run.slice(i + 1);
   });
 }
@@ -196,14 +198,20 @@ function markNucleus(text, from, falling, mark) {
  * is Bhargava's notation for Hindi, whose script is caseless and has no accent.
  *
  * @type {Record<string, (text: string,
- *   at: {locale: string, falling: boolean, nucleusAt: number}) => string>}
+ *   at: {locale: string, head: number, nucleusAt: number}) => string>}
  */
 const STRESS_DEVICE = {
   caps: (text, at) => text.toLocaleUpperCase(at.locale),
+  // Italian's default, and not interchangeable with the acute: `città`, `così`,
+  // `più` -- `á í ú` occur in no Italian word, and 8,930 of that table's 12,923
+  // marks land on one of those three letters. The acute is available there only on
+  // `é ó`, which is a choice a table makes in its own rules.
+  grave: (text, at) => markNucleus(text, at.nucleusAt, at.head,
+    (c) => (ACCENTED.test(c) ? c : `${c}\u0300`.normalize('NFC'))),
   // Already accented, either by the phoneme table or by the orthography itself --
   // Portuguese and French both write accents of their own, and `ё` is inherently
   // stressed -- so a second mark would produce a character no orthography has.
-  acute: (text, at) => markNucleus(text, at.nucleusAt, at.falling,
+  acute: (text, at) => markNucleus(text, at.nucleusAt, at.head,
     (c) => (ACCENTED.test(c) ? c : `${c}\u0301`.normalize('NFC'))),
   prime: (text) => `${text}\u02b9`,
 };
@@ -425,7 +433,18 @@ function inventoryHolds(rule, inventory) {
 /** @param {any} rule @param {Record<string,any>} ctx @param {string} emitted */
 function holds(rule, ctx, emitted) {
   if (rule.if_nucleus && !rule.if_nucleus.split(' ').includes(ctx.nucleus)) return false;
-  if (rule.before_onset && !rule.before_onset.split(' ').includes(ctx.nextOnset.slice(0, 1))) return false;
+  // `if_nucleus` is an exact match on the whole string, which is what a rule wants
+  // when it names a specific vowel. "The following vowel is front" is a different
+  // question and needs the *head*: asking it with `if_nucleus` meant enumerating
+  // 112 nucleus strings and repeating them across seventeen rules, which was 8KB of
+  // the Italian table and its only brittle part. Every digraph orthography has this
+  // question, since `c` before a front vowel is a different letter.
+  if (rule.if_nucleus_head
+    && !rule.if_nucleus_head.split(' ').includes(ctx.nucleusHead)) return false;
+  // A *phoneme*, not a character: `nextOnset.slice(0, 1)` could never match a
+  // two-character aspirate, so a rule written `before_onset: "kʰ"` silently never
+  // fired and only looked as though it did.
+  if (rule.before_onset && !rule.before_onset.split(' ').includes(ctx.nextPhoneme)) return false;
   if (rule.after_nucleus && !rule.after_nucleus.split(' ').includes(ctx.prevNucleus)) return false;
   for (const w of rule.when ?? []) {
     const negated = w.startsWith('not_');
@@ -571,6 +590,8 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
         unstressed: s.stress !== 1,
         nucleus: s.nucleus,
         nextOnset: syls[i + 1]?.onset ?? '',
+        nextPhoneme: phonemesOf(syls[i + 1]?.onset ?? '')[0] ?? '',
+        nucleusHead: phonemesOf(s.nucleus)[0] ?? '',
         prevNucleus: syls[i - 1]?.nucleus ?? '',
       };
       let text = spellSlot(s.onset, 'onset', phonemes, ctx);
@@ -594,11 +615,15 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // the output would ship jamo glyphs and leave the composed syllable out of
       // the subset, where the PDF has no system font to fall back to.
       text = text.normalize('NFC');
-      // The nucleus carries the answer to which end a mark goes on: a falling
-      // diphthong is a vowel followed by a glide or by one of the two lax vowels
-      // `syllabify` absorbs, and its head is therefore the first element.
+      // Which letter of the nucleus carries a mark. A *falling* diphthong -- a
+      // vowel followed by a glide or by one of the two lax vowels `syllabify`
+      // absorbs -- has its head first, a rising one has it last. And a nucleus that
+      // both opens and closes with a glide has it in the middle: /waɪ/ is `uai`,
+      // where neither end is the vowel, so `úai` marks the /w/.
+      const units = phonemesOf(s.nucleus);
       const tail = [...s.nucleus].filter((c) => !VOWEL_TAIL.has(c)).pop() ?? '';
-      const falling = s.nucleus.length > 1 && (isGlide(tail) || 'ɪʊ'.includes(tail));
+      const falling = units.length > 1 && (isGlide(tail) || 'ɪʊ'.includes(tail));
+      const head = falling ? Number(isGlide(units[0])) : -1;
       for (const f of fixups) {
         // The syllable's own text, not `''`: a fixup's `after_out` asks what this
         // syllable has emitted so far, and against an empty string every such
@@ -618,6 +643,14 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // generated: a reader who does not want it simply gets the plain form. The
       // Japanese sheet already invented this convention by hand, doubling a letter
       // on 285 of its 286 long-vowel rows.
+      // **Stress before length**, so that a doubled vowel carries its mark on the
+      // first copy: Italian writes `sàari`, not `saári`. The two devices otherwise
+      // land on the same letter and the later one wins, which put the mark on the
+      // wrong half of 1,240 syllables.
+      const marked = s.stress === 1 && syls.length >= policy.stress_min_syllables;
+      if (marked && stressDevice) {
+        text = stressDevice(text, { locale: policy.locale, head, nucleusAt });
+      }
       // Length goes through the same placement as the stress mark, on the same
       // letter, for the same reason -- and against `VOWEL_LETTERS` rather than
       // `[aeiou]`, which made both devices silent no-ops in every script but
@@ -626,13 +659,13 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // then put it on a rising diphthong's glide: `day:`, then `ky:a`.
       if (/ː/.test(s.nucleus) && policy.length !== 'none') {
         const mark = policy.length === 'double'
-          ? (/** @type {string} */ c) => c + c
+          // The second copy is the bare letter: the mark belongs to the syllable
+          // once, and `àà` is a character sequence no orthography writes.
+          ? (/** @type {string} */ c) => c + c.normalize('NFD').replace(MARKS, '')
           : (/** @type {string} */ c) => `${c}:`;
-        text = markNucleus(text, nucleusAt, falling, mark);
+        text = markNucleus(text, nucleusAt, head, mark);
       }
-      const marked = s.stress === 1 && syls.length >= policy.stress_min_syllables;
-      if (!marked || !stressDevice) return text;
-      return stressDevice(text, { locale: policy.locale, falling, nucleusAt });
+      return text;
     }).join(policy.syllable_separator);
   };
 

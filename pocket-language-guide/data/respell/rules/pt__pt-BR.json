@@ -1,15 +1,129 @@
 {
   "source": "pt",
   "accent": "pt-BR",
+  "status": "ready",
   "version": "1",
-  "derives_from": "PLACEHOLDER",
+  "derives_from": "Dicionario Priberam da Lingua Portuguesa, the `pronuncia` field: a *pronuncia figurada* set between vertical bars in ordinary Portuguese letters rather than IPA, carried on 22709 of its entries. Priberam's own Manual do Utilizador gives the entry structure as `grafia (geralmente a negrito...)` then `pronuncia (entre | |)`, and the notation's semantics are documented by Ciberduvidas da Lingua Portuguesa (ISCTE-IUL), «O uso do acento grave na pronuncia figurada»: the grave marks an open vowel in an unstressed syllable and the acute an open vowel in a stressed one. Verified on the dictionary itself: objeccao |èç|, correto |ét|. That is the DPD's method in Portuguese -- sounds, in letters of the alphabet, deliberately not IPA -- and it settles three items content/RESPELL-SYSTEMS.md left open: it records Priberam as giving «no transcription at all», records that «there is no Portuguese counterpart to the DPD», and marks *pronuncia figurada* as an attested term unverified. All three are wrong; see the report. Secondary: pt.wikipedia's «Wikipedia:Alfabeto fonetico internacional» (CC BY-SA) for the sounds Portuguese has no letter for.",
   "deviations": [
     {
-      "rule": "x",
-      "why": "y"
+      "rule": "Priberam respells only the fragment in doubt -- |èç| for objeccao, not the whole word",
+      "why": "Priberam is disambiguating one vowel of a word its reader already knows how to say, which is why a two-letter respelling is enough. We hand over a whole foreign phrase the reader has never seen, so all of it is respelled and it is hyphenated by syllable, per RESPELL-SYSTEMS.md's per-source divider table, which puts pt in the hyphen row."
+    },
+    {
+      "rule": "the grave accent, which is half of the key's vowel notation",
+      "why": "Not used -- the one place the key is overruled rather than merely extended, and for three reasons that compound. The acute/grave contrast is the load-bearing distinction in Priberam's notation and it is precisely the distinction that dies at 5.22pt italic muted, which is RESPELL-SYSTEMS.md's own typographic constraint. The grave on open unstressed vowels left ordinary Portuguese orthography in 1973 and survives only in the crasis `a`, so a modern reader has no live rule to apply to it. And `policy.stress: acute` is already spending the acute on stress, so a grave printed beside it would read as a second, competing stress mark rather than as a vowel quality. The cost is that open versus close is not written on *unstressed* vowels, where pt-BR reduces them anyway."
+    },
+    {
+      "rule": "in the key the acute means «open AND stressed»; here it means stress alone",
+      "why": "On-key as far as it goes: a stressed /ɛ/ or /ɔ/ is emitted as `e`/`o` and the device makes it `é`/`ó`, which is exactly what the key would print. But a stressed close /e/ or /o/ wants `ê`/`ô`, and the device offers only the acute -- emitting the circumflex directly makes the device stack a second mark on it. So stressed close vowels come out open. The circumflex is unavailable here rather than rejected; see the engine request in the report."
+    },
+    {
+      "rule": "/ʃ/ -> `x`, per RESPELL-SYSTEMS.md's grapheme table and the RAE's citation of Portuguese xerife, gueixa and Xangai",
+      "why": "`ch` instead. Those are *adoption* spellings, and adoption versus hinting is the distinction the survey itself draws: an adopted loanword is read in context by a reader who has already met it, while this column is read cold and once. Portuguese `x` has four live readings and three are wrong here -- caixa [ʃ], exame [z], taxi [ks], proximo [s] -- and it is worst between vowels, which is where most of our /ʃ/ lands. `ch` is [ʃ] in every position in standard Portuguese, and it pairs with `tch` for /tʃ/: if `ch` were the affricate, `tch` could not be read at all."
+    },
+    {
+      "rule": "espeak's /r/ read as one phoneme",
+      "why": "It is not one. Across the sixteen targets /r/ is the tap or trill in eight (it 717, id 497, tr 428, th 264, ar 260, sw 157, ru 296, hi 20) and the strong rhotic in two (es 58, a lexical trill; de 141, uvular). Portuguese happens to write that exact contrast with `r` against `rr`, so the global rule is the tap and `targets.es` and `targets.de` take `rr`. Read as a single phoneme it gave Italian sera as `ce-rra` [ˈsɛhɐ] and Swahili habari as `ra-ba-rri`."
+    },
+    {
+      "rule": "/ɟ/ read as a voiced palatal affricate",
+      "why": "Only where the target has no /dʒ/ of its own. espeak writes /ɟ/ for Swahili and Hindi `j` (an affricate, so `dj`) and for Turkish `g` before a front vowel (a palatalised velar stop, so `g`). The discriminator is typological: a language that already has /dʒ/ is using /ɟ/ for something else. Without the guard, gunler and geceler came out as `djen-ler` and `dje-dje-ler`."
+    },
+    {
+      "rule": "tone",
+      "why": "Dropped. The key's method is letters of the Portuguese alphabet, and a Chao tone letter is not one; a reader with no legend gets nothing from it. Lexical tone is therefore lost on zh-Hans, th and vi. Stated so it is not mistaken for an oversight."
+    },
+    {
+      "rule": "unaspirated stops written with the voiced letters, for Mandarin and Korean",
+      "why": "Portuguese p t k are unaspirated, so for most targets they are the exact match for the plain series and both series collapse on p t k. Where the target has no voiced obstruent for those letters to collide with, the plain series takes b d g instead, which keeps a contrast that is lexical in the target and reproduces a Latin spelling the reader has already met: pinyin for Mandarin, Revised Romanization for Korean. The guard is `#b #d #ɡ` rather than `b d ɡ`, because the question is whether a voiced stop can *begin* a word: Korean's b d g are intervocalic realisations of the lenis series, while Thai's and Hindi's are phonemes, and a bare presence test groups Korean with Thai and collapses the aspiration contrast."
+    },
+    {
+      "rule": "Priberam is pt-PT; this table declares pt-BR",
+      "why": "The accent key in the filename, and pt-BR is the larger readership and the registry's default_accent. But the fork does not reach the table: not one rule here would change for a pt-PT reader, because every difference between the two varieties is one Portuguese orthography cannot express. See the report."
     }
   ],
-  "approximations": [],
+  "approximations": [
+    {
+      "sounds": "/h/",
+      "out": "`r` word-initially, `rr` between vowels",
+      "why": "Word-initial `r` and intervocalic `rr` are [h~x] in most of Brazil, which is the one resource pt-BR has that pt-PT does not; a pt-PT reader gets [ʁ] for [h]. Portuguese `h` is silent, so no other letter is available -- and spelling /h/ with the rhotic is what keeps `nh` and `lh` free to mean [ɲ] and [ʎ], which a literal `h` would have destroyed. 1691 rows carry an /h/."
+    },
+    {
+      "sounds": "/x/ /ħ/ /ʁ/",
+      "out": "the same `r` / `rr`",
+      "why": "Right in both varieties, and better than the /h/ case: [x] is what those letters are in Brazil and [ʁ] is what they are in Portugal, and both are close to Spanish j, the German ach-Laut, Russian x, Arabic khaa and French r. /ħ/ is a pharyngeal against a velar -- wrong place, right manner, and audible, which dropping it would not be."
+    },
+    {
+      "sounds": "word-initial /ɾ/ /ɹ/ /r/",
+      "out": "`r`, which is [h] in pt-BR",
+      "why": "A Portuguese word cannot begin with a tap; initial `r` is always the strong rhotic. English is helped by this, since Brazilians substitute [h] for English initial /ɹ/ anyway, but the Spanish, Italian and Turkish taps are simply lost."
+    },
+    {
+      "sounds": "/θ/ and /ð/",
+      "out": "`t` and `d`",
+      "why": "Portuguese has neither. `t` is what Portuguese does with English th in names (Smith, Thiago) and it never voices, where `s` for /θ/ would become [z] between vowels and produce a worse error than the one it repairs."
+    },
+    {
+      "sounds": "coda /m/ /n/ /ŋ/ /ɴ/",
+      "out": "`m` / `n`, read as nasalisation of the vowel",
+      "why": "Portuguese writes a coda nasal as nasalisation and deletes the consonant, so a true coda [n] or [m] is unwritable. This is not really a loss: [ṽ] is what the reader would produce from any spelling, and it is exactly how Brazilian loanword practice reads shopping, marketing and ping-pong. Onset /ŋ/ takes `ng`, as in tango."
+    },
+    {
+      "sounds": "coda /ɲ/",
+      "out": "`nh`",
+      "why": "A string no Portuguese word contains -- `nh` always takes a following vowel. Kept because the digraph is unambiguous and Brazilian final epenthesis lands it on [ɲi], which is nearer French [ɲ] than the nasal vowel `n` would be; Portuguese's own adoption of champagne as champanhe adds precisely that vowel. Not added here, because inserting a phoneme the input does not have would be the only such rule in the table, and every other unpronounceable coda (kint, votr, prandr) is likewise left for the reader to break up."
+    },
+    {
+      "sounds": "/y/ /ø/ /œ/ /ɯ/",
+      "out": "u e e u",
+      "why": "Portuguese has no front rounded and no back unrounded vowel. This is the substitution a Portuguese speaker makes anyway (Bruxelas, Zurique, Istambul)."
+    },
+    {
+      "sounds": "vowel length",
+      "out": "not written",
+      "why": "Not phonemic in Portuguese, and a doubled vowel reads as two syllables (voo, cooperar). Hindi, Arabic, Thai, Japanese and German length is lost. RESPELL-SYSTEMS puts pt in the omit row."
+    },
+    {
+      "sounds": "/ʔ/ /ʕ/ and pharyngealisation ˤ",
+      "out": "dropped",
+      "why": "No letter and no sound. A dropped hamza leaves an ordinary onsetless Portuguese syllable, which is what Portuguese's own Arabic loanwords do."
+    },
+    {
+      "sounds": "/ʈ ɖ ɳ ɽ/ and the Mandarin retroflexes",
+      "out": "t d n r, and ch / dj / tch for the sibilants",
+      "why": "No retroflex series. The dental letters are the standard Portuguese rendering of Devanagari."
+    },
+    {
+      "sounds": "the Korean tense series /p͈ t͈ k͈ s͈ tɕ͈/",
+      "out": "the plain letters, merging with the lenis series",
+      "why": "Portuguese can carry a two-way stop contrast and Korean has three. The aspirated/plain split is the more audible one and it is the one kept; NIKL's own 4th clause refuses the tense letters in the other direction for the same kind of reason."
+    },
+    {
+      "sounds": "Hindi breathy voice /bʰ dʰ ɡʰ ɖʰ ɟʰ ɽʰ/",
+      "out": "the plain letters",
+      "why": "No letter for breathy voice, and `h` is silent in Portuguese so the obvious spelling would vanish rather than aspirate."
+    },
+    {
+      "sounds": "word-final /z/",
+      "out": "`z`",
+      "why": "Portuguese devoices a final `z` (paz, luz), so this reads [s]. The letter is kept because it is right everywhere else, including between vowels, where Portuguese `z` is [z] and a single `s` would not be."
+    },
+    {
+      "sounds": "/ti/ and /di/",
+      "out": "`ti` and `di`, which a Brazilian reads [tʃi] and [dʒi]",
+      "why": "Unrepairable in pt-BR: the affrication is categorical for most Brazilian speakers and no other spelling gives [ti]. A pt-PT reader gets it right. It cuts the other way too -- pt-BR readers get /dʒ/ free from `di`, which is why `dj` costs nothing."
+    },
+    {
+      "sounds": "coda /l/ /ɫ/ /ɭ/",
+      "out": "`l`, which a Brazilian reads [w]",
+      "why": "Also unrepairable, and in the opposite direction: coda `l` is [w] in pt-BR and [ɫ] in pt-PT, and Portuguese has no other way to write a syllable-final lateral. 1635 rows are affected. A pt-PT reader reads these correctly."
+    },
+    {
+      "sounds": "lexical tone (zh-Hans, th, vi)",
+      "out": "dropped",
+      "why": "See deviations. All four curated tonal sheets drop it too."
+    }
+  ],
   "policy": {
     "syllable_separator": "-",
     "word_separator": " ",
@@ -20,13 +134,19 @@
     "max_onset": 2,
     "locale": "pt-BR",
     "fixups": "all",
-    "reader_onsets": "PLACEHOLDER"
+    "reader_onsets": "bl br bɹ bɾ bʁ dr dɹ dɾ dʁ ɖɾ fl fr fɹ fɾ fʁ kl kr kɫ kɹ kɾ kʁ kʰl kʰr krʲ pl pr pɭ pɹ pɾ pʁ pʰl pʰr prʲ tr tɹ tɾ tʁ ʈɾ trʲ vr vɭ vrʲ ql qɹ ɡl ɡr ɡɭ ɡɾ ɡʁ θɹ"
   },
   "splits": [],
   "phonemes": [
     {
       "slot": "onset",
       "ipa": "ʁ",
+      "out": "r",
+      "after_out": "b d f g k p t v"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʁ",
       "out": "rr",
       "when": [
         "not_word_initial"
@@ -39,16 +159,9 @@
     },
     {
       "slot": "onset",
-      "ipa": "r",
-      "out": "rr",
-      "when": [
-        "not_word_initial"
-      ]
-    },
-    {
-      "slot": "any",
-      "ipa": "r",
-      "out": "r"
+      "ipa": "x",
+      "out": "r",
+      "after_out": "b d f g k p t v"
     },
     {
       "slot": "onset",
@@ -66,6 +179,12 @@
     {
       "slot": "onset",
       "ipa": "h",
+      "out": "r",
+      "after_out": "b d f g k p t v"
+    },
+    {
+      "slot": "onset",
+      "ipa": "h",
       "out": "rr",
       "when": [
         "not_word_initial"
@@ -75,6 +194,12 @@
       "slot": "any",
       "ipa": "h",
       "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ħ",
+      "out": "r",
+      "after_out": "b d f g k p t v"
     },
     {
       "slot": "onset",
@@ -112,6 +237,11 @@
     {
       "slot": "any",
       "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
       "out": "r"
     },
     {
@@ -220,7 +350,14 @@
     {
       "slot": "coda",
       "ipa": "ɟ",
-      "out": "j"
+      "out": "j",
+      "unless_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "g",
+      "if_inventory": "dʒ"
     },
     {
       "slot": "any",
@@ -439,6 +576,12 @@
       "out": "nh"
     },
     {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "n",
+      "before_onset": "ɲ"
+    },
+    {
       "slot": "any",
       "ipa": "ɲ",
       "out": "nh"
@@ -568,7 +711,23 @@
     {
       "slot": "nucleus",
       "ipa": "ɑ̃",
+      "out": "an",
+      "when": [
+        "stressed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
       "out": "ã"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "on",
+      "when": [
+        "stressed"
+      ]
     },
     {
       "slot": "nucleus",
@@ -578,7 +737,23 @@
     {
       "slot": "nucleus",
       "ipa": "ɛ̃",
+      "out": "en",
+      "when": [
+        "stressed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
       "out": "ẽ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "en",
+      "when": [
+        "stressed"
+      ]
     },
     {
       "slot": "nucleus",
@@ -588,7 +763,23 @@
     {
       "slot": "nucleus",
       "ipa": "ã",
+      "out": "an",
+      "when": [
+        "stressed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
       "out": "ã"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en",
+      "when": [
+        "stressed"
+      ]
     },
     {
       "slot": "nucleus",
@@ -598,12 +789,36 @@
     {
       "slot": "nucleus",
       "ipa": "ĩ",
+      "out": "in",
+      "when": [
+        "stressed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
       "out": "ĩ"
     },
     {
       "slot": "nucleus",
       "ipa": "õ",
+      "out": "on",
+      "when": [
+        "stressed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
       "out": "õ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un",
+      "when": [
+        "stressed"
+      ]
     },
     {
       "slot": "nucleus",
@@ -753,7 +968,7 @@
   ],
   "syllable_fixups": [
     {
-      "match": "ç([ei])",
+      "match": "ç([eiẽĩ])",
       "out": "c\\1"
     },
     {
@@ -761,17 +976,59 @@
       "out": "\\1gu\\2"
     },
     {
-      "match": "([bcdfgklmnptvz])\\1",
+      "match": "([rs])\\1+(?![aeiouãõẽĩũ])",
       "out": "\\1"
     },
     {
-      "match": "([aeiou])\\1",
+      "match": "([bcdfgklmnptvz])\\1+",
+      "out": "\\1"
+    },
+    {
+      "match": "([aeiou])\\1+",
       "out": "\\1"
     }
   ],
   "targets": {
+    "es": {
+      "comment": "espeak's Spanish /r/ is the lexical trill that contrasts with the tap /ɾ/, and Portuguese writes that contrast with exactly the same two graphemes: carro against caro. 43 of the 58 are word-initial and take `r` either way; the other 15 are the ones this buys (cerrado -> ce-rra-do, cierra -> cie-rra). Everywhere else in the corpus the same symbol is a tap.",
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "r",
+          "out": "r",
+          "after_out": "b d f g k p t v"
+        },
+        {
+          "slot": "onset",
+          "ipa": "r",
+          "out": "rr",
+          "when": [
+            "not_word_initial"
+          ]
+        }
+      ]
+    },
+    "de": {
+      "comment": "German /r/ before a vowel is uvular, and `rr` is [x~h] in Brazil and [ʁ] in Portugal -- both nearer to it than a tap. espeak already splits the two for German, writing /ɾ/ after a consonant and in codas, where the tap letter is right and the after_out rule keeps it.",
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "r",
+          "out": "r",
+          "after_out": "b d f g k p t v"
+        },
+        {
+          "slot": "onset",
+          "ipa": "r",
+          "out": "rr",
+          "when": [
+            "not_word_initial"
+          ]
+        }
+      ]
+    },
     "ko": {
-      "comment": "Korean eo",
+      "comment": "/ʌ/ is Korean eo, which Portuguese writes o (Seul, as in Spanish). Everywhere else in the corpus the same symbol is English STRUT, Russian reduction or the Hindi inherent vowel, all of which want a.",
       "phonemes": [
         {
           "slot": "any",
@@ -780,5 +1037,7 @@
         }
       ]
     }
-  }
+  },
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md. Everything this table emits is ordinary Portuguese: the letters, the five nasal vowels, and the digraphs ch nh lh rr tch dj ng, every one of which occurs in a common word (cha, manha, filho, carro, tchau, adjetivo, tango). `x` is never emitted at all, and neither are `w`, `y` or a bare `h`. Two sequences are not native and are the whole of the legend: *ts como em tsunami; dz como em adzuki*. There is no curated Portuguese sheet, so this table is not scored; it is held to zero --gaps, to a --units list where every entry is a deliberate decomposition, and to being read aloud.",
+  "policy_note": "max_onset 2 restricted by reader_onsets, measured. Portuguese admits a single consonant or a consonant plus `l`/`r` as a syllable onset -- the grupos indivisiveis of ordinary silabacao -- and it never admits three, so `s` before a consonant always closes the preceding syllable (es-tar, es-perar), exactly as in Spanish. Counting non-initial syllable onsets of two or more phonemes over every word of all sixteen targets: max_onset 1 builds none at all, so pra-blem becomes prab-lem; bare max_onset 2 builds 501 onsets a Portuguese reader can begin and 816 they cannot (st 204, ŋɡ 97, mb 58, lk 53, nd 46, lm 35, sp 26, sk 25); bare max_onset 3 is worse than 2 at both ends, 481 legal and 842 illegal, because a three-consonant cut steals from the two-consonant one. max_onset 2 plus reader_onsets gives 501 legal and zero illegal, and max_onset 3 plus reader_onsets is identical to it because every entry in the list is two phonemes -- Portuguese has no three-consonant onset for a longer entry to describe. The list is derived rather than hand-written: every cluster the engine learns from any of the sixteen targets whose second phoneme is a liquid and whose spelling under this table lands in a Portuguese C+l/r group. That is why it carries all four rhotic realisations (r ɾ ɹ ʁ, since German writes pɾ where Russian writes pr and French pʁ), the aspirated and retroflex onsets of Thai, Mandarin and Hindi (kʰr, ʈɾ), the Russian palatalised ones (krʲ, prʲ, trʲ, vrʲ), and `v` clusters and `θɹ` that the Spanish list cannot have: Portuguese has /v/, and it spells /θ/ `t`, so English three lands in `tr` where Spanish lands in `sr`. Anything absent simply splits, which is the safe default. fixups `all` rather than `first`, also measured: it changes 11 rows and improves all 11, because the cedilla repair and the doubled-vowel collapse the doubled-vowel collapse have to fire in the same syllable (kur-cii -> kur-ci, ta-guiir -> ta-guir)."
 }

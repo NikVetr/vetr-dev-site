@@ -380,3 +380,70 @@ test('a cluster has to be legal for the reader as well as the target', () => {
   assert.equal(both.respell('proˈblema'), 'pro-bleh-ma');
   assert.equal(both.respell('ˈastop'), 'as-top');
 });
+
+test('a diacritic device marks the head, wherever in the nucleus that is', () => {
+  // Three positions, one rule. A rising diphthong is marked on its second element,
+  // a falling one on its first, and a nucleus that both opens *and* closes with a
+  // glide has its head in the middle -- /waɪ/ is spelt `uai`, where neither end is
+  // the vowel, so marking the first letter put the accent on the /w/.
+  const ipa = ['bjˈen', 'ˈɡeɪʃa', 'wˈaɪfaɪ', 'sˈɔːri'].flatMap((x) => [x, x, x]);
+  const say = (/** @type {string} */ stress) => createRespeller({
+    rules: withPolicy({ stress }), targetIpa: ipa,
+  });
+  const acute = say('acute');
+  assert.match(acute.respell('ˈɡeɪʃa'), /gá/, 'falling: the first element');
+  assert.match(acute.respell('wˈaɪfaɪ'), /wá/, 'glide on both sides: the middle');
+
+  // And the grave is a device of its own, because `á í ú` occur in no Italian word.
+  const grave = say('grave');
+  assert.match(grave.respell('ˈɡeɪʃa'), /gà/, 'the same position, the other mark');
+  assert.ok(!/á|é|í|ó|ú/.test(grave.respell('ˈɡeɪʃa')), 'and no acute anywhere');
+});
+
+test('a doubled vowel carries its mark on the first copy', () => {
+  // Both devices land on the same letter, so whichever ran second used to win:
+  // length doubled the vowel and then stress marked the *second* copy, giving
+  // `saári` where Italian writes `sàari`. Stress runs first now, and the second
+  // copy is the bare letter -- `àà` is a sequence no orthography writes.
+  const table = {
+    source: 'x',
+    policy: { stress: 'grave', length: 'double', syllable_separator: '-' },
+    phonemes: [
+      { slot: 'any', ipa: 's', out: 's' }, { slot: 'any', ipa: 'r', out: 'r' },
+      { slot: 'nucleus', ipa: 'ɔ', out: 'o' }, { slot: 'nucleus', ipa: 'i', out: 'i' },
+      { slot: 'any', ipa: 'ː', out: '' },
+    ],
+  };
+  const out = createRespeller({
+    rules: table, targetIpa: ['sˈɔːri', 'sˈɔːri', 'sˈɔːri'],
+  }).respell('sˈɔːri');
+  const marks = [...out.normalize('NFD')].filter((c) => c === '̀');
+  assert.equal(marks.length, 1, `one mark, got ${marks.length} in ${out}`);
+  assert.match(out, /ò[a-z]/, `the mark belongs to the first copy, got ${out}`);
+});
+
+test('a rule can ask about the nucleus head, and about a whole next phoneme', () => {
+  // `if_nucleus` is an exact match on the whole string, which is right when a rule
+  // names one vowel and useless for "the following vowel is front" -- the Italian
+  // table had to enumerate 112 nucleus strings across seventeen rules to ask it.
+  // And `before_onset` compared one *character*, so a rule naming a two-character
+  // aspirate could never fire and only looked as though it did.
+  const table = {
+    source: 'x',
+    policy: { stress: 'none', syllable_separator: '-' },
+    phonemes: [
+      { slot: 'onset', ipa: 'k', out: 'c', if_nucleus_head: 'i e' },
+      { slot: 'onset', ipa: 'k', out: 'k' },
+      { slot: 'coda', ipa: 'n', out: 'N', before_onset: 'kʰ' },
+      { slot: 'coda', ipa: 'n', out: 'n' },
+      { slot: 'nucleus', ipa: 'i', out: 'i' }, { slot: 'nucleus', ipa: 'a', out: 'a' },
+      { slot: 'any', ipa: 'ː', out: '' }, { slot: 'onset', ipa: 'kʰ', out: 'kh' },
+    ],
+  };
+  const ipa = ['kiː', 'kaː', 'ankʰa', 'anka'].flatMap((x) => [x, x, x]);
+  const r = createRespeller({ rules: table, targetIpa: ipa });
+  assert.equal(r.respell('kiː'), 'ci', 'a front nucleus head takes the c');
+  assert.equal(r.respell('kaː'), 'ka', 'a back one does not');
+  assert.equal(r.respell('ankʰa'), 'aN-kha', 'the whole aspirate is the next phoneme');
+  assert.equal(r.respell('anka'), 'an-ka', 'and a plain /k/ is not it');
+});

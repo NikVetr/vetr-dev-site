@@ -334,7 +334,7 @@ def main():
     # our Korean not match the official transcription", which is a question a
     # reader will eventually ask.
     SLOTS = {"onset", "nucleus", "coda", "any"}
-    POLICY_VALUES = {"stress": {"caps", "acute", "prime", "none"},
+    POLICY_VALUES = {"stress": {"caps", "acute", "grave", "prime", "none"},
                      "length": {"none", "double", "colon"},
                      "tone": {"keep", "drop"},
                      "fixups": {"first", "all"}}

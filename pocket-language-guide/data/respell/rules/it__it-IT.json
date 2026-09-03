@@ -1,0 +1,1154 @@
+{
+  "source": "it",
+  "accent": "it-IT",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Sergio Lepri, *Consigli pratici per la grafia e la pronunzia di lingue straniere* -- the ANSA newsroom \"si pronuncia ...\" convention, which is a respelling in ordinary Italian orthography and the one borrowable Italian tradition. Read off its published examples, the survey's and the page's own (sergiolepri.it, retrieved 2026-09-03): the accent on the stressed vowel mid-word, and it is a GRAVE throughout -- ròusvelt, scikàgou, hiùuston, vagliadolìd, bèibi, sciòu, màniger, kostùnica, hiròscima, barìs, hògia; vowel doubling for length (abdallàah, vàaslaf, crùus, ùuc); sc/sci for /ʃ/ (busc, varsciàva); sg(i) for /ʒ/; gl(i) for /ʎ/; gn for /ɲ/; g(i) for /dʒ/ (hògia); z for /ts/; h pressed into service as an aspirate (hogia, hiuuston, bahrain); ghn for a real /ɡn/ cluster; and Italian’s own c/ch and g/gh rules on the following vowel. Secondary: Italian dictionary practice for reading a mid-word accent as stress -- Treccani prints its own headword as pronùncia, which is not legal ordinary spelling, since ordinary Italian accents only ever fall word-finally. The DOP (Migliorini, Tagliavini and Fiorelli) is deliberately not the source: its Ascoli-Merlo notation is a Romance philologist’s alphabet rather than a reader’s respelling, the work is commercial, and every dop.rai.it and dizionario.rai.it path returned 404 again on 2026-09-03, so its sign inventory stays unverified.",
+  "deviations": [
+    {
+      "rule": "Lepri writes /k/ with Italian c and ch, chosen by the following vowel. This table writes k everywhere.",
+      "why": "Lepri writes it himself, twice: scikàgou for Chicago and kostùnica for Kostunica. And k is read /k/ by any Italian reader (kiwi, koala, kebab, ok, kg, karaoke). It buys three things. It removes the c/ch decision from the most frequent consonant in the corpus -- 4624 onsets. It makes sc unambiguous, which the survey names as a generator trap: with c for /k/, /sk/ and /ʃ/ collide on sca, and with k they cannot (ska against scia, schi against sci). And it disambiguates Lepri's own hardest example: ciauscescu for Ceausescu asks the reader to take the first sc as /ʃ/ and the second as /sk/ in one word, where this table writes ciau-sce-sku."
+    },
+    {
+      "rule": "Lepri writes /ʒ/ as sg(i). This table gives /ʒ ʑ/ the same g/gi as /dʒ/.",
+      "why": "sg carries a spurious /z/ (sga is /zɡa/, sge is /zdʒe/), and it collides with the g/gh device: a nucleus rule keyed on a trailing g cannot tell sg from g. An Italian says /dʒ/ for a foreign /ʒ/ anyway -- Jean is /dʒan/, garage /ɡaradʒ/ -- so g/gi is both simpler and closer to what the reader will produce."
+    },
+    {
+      "rule": "Lepri writes a final /ʃ/ as bare sc: busc for Bush.",
+      "why": "busc reads /busk/, because sc before a consonant or a pause is /sk/. So in a coda the i stays: /ʃ/ is sci, /tʃ/ is ci, /dʒ/ is gi -- busci, uocci, brigi. That spends a vowel the word does not have, on 481 syllables, and keeps the consonant identifiable, which is the only thing the column is for. It is the one place where this table is longer than the newsroom convention."
+    },
+    {
+      "rule": "Stress is marked with the acute. Lepri and Italian dictionary practice use the grave, or grave against acute chosen by vowel quality.",
+      "why": "NOT A CHOICE -- the engine offers acute, caps, prime and none, and acute is the only one of those an Italian reads as stress. Lepri's own page uses the grave throughout and never an acute, and the reason is orthographic rather than stylistic. It is wrong in the same way on 8930 of the 12923 marked syllables: Italian never writes an acute on a, i or u (città, così, più are graves, and a i u have no close/open contrast to record), so á í ú are sequences no Italian word contains. Requested as a one-line engine change; flipping policy.stress to grave is the whole fix."
+    },
+    {
+      "rule": "The open/close contrast on e and o is not written. Lepri and Treccani choose grave against acute deliberately, and get /E O/ against /e o/ for free.",
+      "why": "One device, one mark. With only the acute available the mark has to mean stress, so /ɛ/ and /e/ both come out e. Real information lost: 3242 /ɛ/ and 1758 /ɔ/. A grave device would recover it, since the natural rule is grave for the open vowels and acute for the close ones, which is exactly what the two Italian sources do."
+    },
+    {
+      "rule": "Length is written by doubling the vowel, per Lepri (abdallàah, vàaslaf, crùus), but the mark lands on the second copy: saári where Lepri writes sàari.",
+      "why": "The engine doubles the nucleus head and then marks the same run, so the mark ends up on the last letter of the doubled pair. 1240 syllables are both stressed and long. Reported with the grave request; the fix is to place the mark on the first copy."
+    },
+    {
+      "rule": "Syllables are hyphenated. Lepri brackets one adopted word as an unbroken string.",
+      "why": "He is respelling a name; we are respelling a phrase of up to a dozen syllables, where an unbroken string invites Italian default stress across the whole of it. The survey puts it in the hyphen row."
+    },
+    {
+      "rule": "Unaspirated stops and affricates are written with Italian voiced letters where the target has no word-initial voiced stop.",
+      "why": "The Spanish table's rule and guard, for the same reason: Italian p t k are unaspirated, so for most targets both series would collapse on p t k. Where the target contrasts /p/ with /pʰ/ and has no voiced obstruent to collide with, the plain series takes b d g and the plain affricates take gi -- which is also the Latin spelling an Italian reader has already met, pinyin for Mandarin (Beijing, Guangzhou) and Revised Romanization for Korean (bibimbap, Busan, jeon). The guard is #b #d #ɡ rather than b d ɡ because Korean's b d g are intervocalic allophones while Thai's and Hindi's are phonemes."
+    },
+    {
+      "rule": "Lexical tone is dropped.",
+      "why": "Chao letters are not letters of the Italian alphabet, and the card carries no key. Tone is therefore lost on zh-Hans, th and vi, as it is in all four curated tonal sheets. Stated so it is not mistaken for an oversight."
+    },
+    {
+      "rule": "Lepri's page marks stress with a grave on every vowel",
+      "why": "Followed, now that the engine has the device. `á í ú` occur in no Italian word -- città, così, più -- and 8,930 of this table's 12,923 marks land on a, i or u, so the acute was wrong far more often than right. The acute is available in Italian only on é and ó, which is a distinction this table does not draw (see the open/close deviation)."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/h/",
+      "out": "h",
+      "why": "Italian h is mute, so this is a borrowed letter with a borrowed value -- but it is Lepri's own borrowing (hogia, hiuuston, bahrain) and the survey's finding is that readers cope. A reader who ignores it gets a dropped /h/, which is what Italian does with foreign /h/ anyway. This is the one glyph in the table that needs the legend line."
+    },
+    {
+      "sounds": "/x/ (Spanish j, German ach, Russian x, Arabic kha, Vietnamese kh)",
+      "out": "k",
+      "why": "Italian has no /x/ and its own tradition renders it [k]: Chisciotte for Quijote, Bach as /bak/, Krusciov for Khrushchev, Chiapas. h would be mute and delete the consonant outright. Two targets are overruled in the targets block: Mandarin pinyin h, which an Italian has already met written h (Hong Kong, hao), and Brazilian /x/, which is the rhotic."
+    },
+    {
+      "sounds": "/θ ð/ (English think, brother; Arabic ث, ذ)",
+      "out": "t d",
+      "why": "The substitution an Italian makes anyway: thriller is /triller/, Thatcher /tàtcer/, brother /brader/. s and z were the alternative and both are further from the place of articulation."
+    },
+    {
+      "sounds": "/z/",
+      "out": "s",
+      "why": "Italian has no letter for /z/ -- z is /ts~dz/ -- and ss is a geminate, which is not available for anything but length. Northern Italian reads intervocalic s as [z], so the letter is often simply right."
+    },
+    {
+      "sounds": "/ħ/ (Arabic ح)",
+      "out": "h",
+      "why": "Aspirate for pharyngeal: wrong place, right manner, and audible, which dropping it would not be."
+    },
+    {
+      "sounds": "/ʔ ʕ/ and pharyngealisation ˤ",
+      "out": "dropped",
+      "why": "No letter and no sound in Italian. A dropped hamza leaves an ordinary onsetless Italian syllable, which is what Italian does with its own Arabic loans."
+    },
+    {
+      "sounds": "/y ø œ/ (front rounded vowels)",
+      "out": "u e e",
+      "why": "Italian has seven vowels and no rounded front ones. This is the error an Italian speaker makes anyway: Müller as /muller/, Goethe as /ghete/. Brazilian /y/ is overruled in the targets block, being a reduced final -e rather than a front rounded vowel."
+    },
+    {
+      "sounds": "/ɯ ʉ/ (back unrounded and central vowels)",
+      "out": "u",
+      "why": "Japanese u, Korean eu and Turkish undotted i all land on u. Mandarin's apical /ɯ/ -- the vowel of shi, si, zi -- is overruled to i in the targets block, which is what pinyin itself writes."
+    },
+    {
+      "sounds": "the retroflex series /ʈ ɖ ɳ ɽ ʂ/ and the Mandarin retroflex affricates",
+      "out": "t d n r sc / gi ci",
+      "why": "Italian has no retroflexes. The dental letters are the standard Italian rendering of Devanagari, and the Mandarin series joins the palato-alveolar one, which is where an Italian ear puts it."
+    },
+    {
+      "sounds": "the Korean tense series /k͈ t͈ p͈ s͈ tɕ͈/",
+      "out": "k t p s c",
+      "why": "Italian writes neither tense nor aspirated consonants, so three Korean series have to become two. Tense merges with aspirated on the plain letters rather than with lenis on the voiced ones, which keeps the fortis quality audible. Revised Romanization writes kk tt pp ss jj here; doubling is unavailable because a double consonant in Italian is a real geminate."
+    },
+    {
+      "sounds": "Russian palatalisation",
+      "out": "not written",
+      "why": "Italian has no palatalised consonants and no way to write one that does not add a syllable: zdes, not zdies. Fourteen phonemes are spelt by decomposition because of this and it is deliberate -- see --units."
+    },
+    {
+      "sounds": "nasal vowels (French, Portuguese, Hindi)",
+      "out": "V + n",
+      "why": "Italian has no nasal vowels; an Italian reading bon or an nasalises the vowel anyway. A following coda nasal is then dropped rather than doubled, so French mon enfant is mon and Portuguese um is un, not monn and unng."
+    },
+    {
+      "sounds": "/ŋ/",
+      "out": "ng, n before a velar, ngh before e and i",
+      "why": "Italian n before a velar is already [ŋ], so nk and ng need no extra letter. An onset /ŋ/ is real in Vietnamese and Swahili and takes ngh before a front vowel, which is Vietnamese's own spelling (nghe, nghi)."
+    },
+    {
+      "sounds": "/ç/ (German ich, Japanese hi)",
+      "out": "h in an onset, k in a coda",
+      "why": "Japanese hito wants h; German ich wants k, which is what an Italian says for it. 261 of the 331 occurrences are German codas."
+    },
+    {
+      "sounds": "English r-colouring",
+      "out": "er for /ɚ/, r for /ɹ/",
+      "why": "Lepri invents a superscript r for this and the survey is right that it would be illegible at 5.22pt. An Italian reads every written r, which is the wrong half of the error to fix."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "grave",
+    "stress_min_syllables": 2,
+    "length": "double",
+    "tone": "drop",
+    "max_onset": 3,
+    "locale": "it-IT",
+    "fixups": "first",
+    "reader_onsets": "bl br bɭʲ bɹ bɾ bʁ dr dɭʲ dɹ dɾ dʁ fl fr fɹ fɾ fʁ kl kr krʲ kɫ kɭʲ kɹ kɾ kʁ kʰl kʰr pl pr prʲ pɭ pɹ pɾ pʁ pʰl pʰr ql qɹ sf sk skr skɭ skɹ skɾ skʲ sl sm sn sp spr spɹ spʲ sr srʲ st str stɹ stʰ sv svʲ sɭ sɭʲ sʈ sʔb sʔn sʲnʲ sʲtʲ s̪ɹ tr trʲ tɹ tɾ tʁ tʕr vr vrʲ vɭ zd zdr zn zv ɖɾ ɡl ɡr ɡɭ ɡɾ ɡʁ ʃb ʃd ʃk ʃkɹ ʃl ʃm ʃn ʃp ʃpɾ ʃr ʃt ʃtɾ ʃv ʃɡ ʈɾ ʔdɹ ʔqɹ ʔsm ʔst ʔs̪r ʔʃt"
+  },
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md, and it is one glyph: h is an aspirate, as in English home -- not the mute h of ho, hanno. Everything else is ordinary Italian read as Italian, including k for /k/ as in kiwi and the ci/ce, gi/ge, ch/gh, sc/sci pairs, which behave exactly as they do in Italian spelling. There is no curated Italian sheet and no agreement score to chase, so this table is held to zero --gaps, to a --units list with no accidental letters in it, and to being read aloud.",
+  "policy_note": "max_onset 3 with reader_onsets, both measured over every unique word of all sixteen targets. Bare max_onset 2 builds 1342 cluster onsets of which 465 are illegal in Italian (ngg 97, mb 58, nd 54, lg 53, lm 35), and a reader who cannot begin a syllable that way repairs it unpredictably. max_onset 1 splits every cluster -- 0 cluster onsets -- and so has no illegal ones and none of the 878 legal ones either, giving an-ders-tand for an-der-stand and prob-lema for pro-blema. reader_onsets gets both: 878 legal onsets and one illegal (sgh, from Arabic /ʃɣ/, which is readable as /zɡ/). The list is derived rather than guessed -- every cluster the engine learns from any target whose phoneme classes land in a group Italian's own division rules admit (obstruent+liquid, s+consonant, s+obstruent+liquid), which is why it carries all four rhotic realisations, the aspirated and retroflex onsets of Thai, Mandarin and Hindi, and the Arabic clusters that open with a /ʔ/ or /ʕ/ spelt as nothing. It is 107 entries against the Spanish table's 42, because Italian admits s-impura: sport, stanza, sfera, and s+obstruent+liquid keeps str and spr together, which is the only thing max_onset 3 buys over 2 -- 879 onsets against 878, exactly one more in this corpus, but it is Italian's own rule (fi-ne-stra, co-stru-i-re). Affricates and the /ʒ/ family are excluded from the reader list: they are spelt with a digraph ending in i, so nothing can follow them inside an onset. if_nucleus carries two derived lists, the 112 nucleus strings whose Italian spelling begins with e or i and the 126 that begin with a o u. Both are exhaustive over this corpus plus every bare vowel and its long form, and each family is keyed on whichever list makes the fallback benign: the c and gi families list the front nuclei, so an unseen nucleus gets ci or gi, which is redundant but right; the g family lists the back ones, so an unseen nucleus gets gh, which is /ɡ/ either way, where g would be read /dZ/. syllable_fixups is empty by design and policy.fixups is therefore inert (verified: first and all give byte-identical output). Every context-sensitive letter is inserted in phonemes instead, because a letter inserted by a fixup is invisible to the stress and length devices' nucleus offset -- that is what gave ciiau for Vietnamese chao and put the accent on the inserted i of ciai.",
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "onset",
+      "ipa": "ʃtɾ",
+      "out": "str"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃpɾ",
+      "out": "spr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃtʁ",
+      "out": "str"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃpʁ",
+      "out": "spr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃt",
+      "out": "st"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃp",
+      "out": "sp"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃl",
+      "out": "sl"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃm",
+      "out": "sm"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃn",
+      "out": "sn"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃv",
+      "out": "sv"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃɾ",
+      "out": "sr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃr",
+      "out": "sr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃk",
+      "out": "sk"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃb",
+      "out": "sb"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃd",
+      "out": "sd"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃɡ",
+      "out": "sg"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃɣ",
+      "out": "sgh"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃx",
+      "out": "sk"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "kː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "bb"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "cː",
+      "out": "cc"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "g",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "gi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "g",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "gi",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "c",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ci"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʃ",
+      "out": "c",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ci"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʒ",
+      "out": "g",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "gi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʑ",
+      "out": "g",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "gi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʒ",
+      "out": "g",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "gi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʑ",
+      "out": "g",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "gi"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "sc",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sci"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʂ",
+      "out": "sc",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sci"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "sc",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "sci"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "b",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "d",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "g",
+      "if_nucleus": "a aj ajj ajˀ aw aɪ aɪw aɪʊ aʊ aː aːj aːjˀ aːw aːwˀ aːɪ aːʊ a̯ a̯j a̯w o oj ojɪ ojʊ ojˀ ow oɪ oɪʊ oʊ oʊɪ oˀ oː oːj oːɪ oːʊ u uj ujʊ uw uɪ uˀ uː uːɪ w wa waj waɪ waʊ waː waːj waːjˀ we weɪ weː wi wiw wiː wo wu wæ wɐ̃ wɑ wɑː wɔ wɔː wə wəɪ wɛ wɛ̃ wɜː wɤː wɪ wʊ wʌ wː y yj yˀ yː ã ãː æ æː õ õj õː ũ ũː ɐ ɐː ɐ̃ ɐ̃ʊ̃ ɐ̃ː ɑ ɑj ɑʊ ɑː ɑ̃ ɒ ɒː ɔ ɔj ɔjˀ ɔɪ ɔˀ ɔː ɔːj ɔ̃ ɥ ɥœ ɥː ɯ ɯjʊ ɯː ɰ ɰː ɵ ɵː ʉ ʉː ʊ ʊj ʊː ʌ ʌj ʌjɪ ʌː",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "gh",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "k"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡl",
+      "out": "gl"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡɭ",
+      "out": "gl"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡr",
+      "out": "gr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡɾ",
+      "out": "gr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡɹ",
+      "out": "gr"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʁ",
+      "out": "gr"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡ",
+      "out": "g",
+      "if_nucleus": "a aj ajj ajˀ aw aɪ aɪw aɪʊ aʊ aː aːj aːjˀ aːw aːwˀ aːɪ aːʊ a̯ a̯j a̯w o oj ojɪ ojʊ ojˀ ow oɪ oɪʊ oʊ oʊɪ oˀ oː oːj oːɪ oːʊ u uj ujʊ uw uɪ uˀ uː uːɪ w wa waj waɪ waʊ waː waːj waːjˀ we weɪ weː wi wiw wiː wo wu wæ wɐ̃ wɑ wɑː wɔ wɔː wə wəɪ wɛ wɛ̃ wɜː wɤː wɪ wʊ wʌ wː y yj yˀ yː ã ãː æ æː õ õj õː ũ ũː ɐ ɐː ɐ̃ ɐ̃ʊ̃ ɐ̃ː ɑ ɑj ɑʊ ɑː ɑ̃ ɒ ɒː ɔ ɔj ɔjˀ ɔɪ ɔˀ ɔː ɔːj ɔ̃ ɥ ɥœ ɥː ɯ ɯjʊ ɯː ɰ ɰː ɵ ɵː ʉ ʉː ʊ ʊj ʊː ʌ ʌj ʌjɪ ʌː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "gh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "gh"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
+      "out": "g",
+      "if_nucleus": "a aj ajj ajˀ aw aɪ aɪw aɪʊ aʊ aː aːj aːjˀ aːw aːwˀ aːɪ aːʊ a̯ a̯j a̯w o oj ojɪ ojʊ ojˀ ow oɪ oɪʊ oʊ oʊɪ oˀ oː oːj oːɪ oːʊ u uj ujʊ uw uɪ uˀ uː uːɪ w wa waj waɪ waʊ waː waːj waːjˀ we weɪ weː wi wiw wiː wo wu wæ wɐ̃ wɑ wɑː wɔ wɔː wə wəɪ wɛ wɛ̃ wɜː wɤː wɪ wʊ wʌ wː y yj yˀ yː ã ãː æ æː õ õj õː ũ ũː ɐ ɐː ɐ̃ ɐ̃ʊ̃ ɐ̃ː ɑ ɑj ɑʊ ɑː ɑ̃ ɒ ɒː ɔ ɔj ɔjˀ ɔɪ ɔˀ ɔː ɔːj ɔ̃ ɥ ɥœ ɥː ɯ ɯjʊ ɯː ɰ ɰː ɵ ɵː ʉ ʉː ʊ ʊj ʊː ʌ ʌj ʌjɪ ʌː",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "gh",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
+      "out": "g",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "gi"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "k",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "c"
+    },
+    {
+      "slot": "onset",
+      "ipa": "c",
+      "out": "c",
+      "if_nucleus": "e ej ejɪ ew eɪ eɪɪ eɪʊ eʊ eˀ eː eːɪ i ij ijɪ iw iɪ iʊ iˀ iː iːj iːɪ j ja jaw jaː je jej jeɪ jeː ji jijɪ jiː jja jje jji jju jjɪ jo joʊ joː ju juː jy jã jæ jõ jø jœ jɑ jɑʊ jɑː jɑ̃ jɔ jɔj jɔː jɔ̃ jə jɛ jɛjʊ jɛː jɛ̃ jɪ jɯ jɯː jɵ jʊ jʌ jː ø øː ĩ ĩː œ œj œː œ̃ ə əj əw əwˀ əɪ əɪˀ əʊ əˀ əː əːj ɚ ɚː ɛ ɛj ɛw ɛwˀ ɛɪ ɛʊ ɛˀ ɛː ɛːw ɛ̃ ɜ ɜː ɤ ɤː ɤːj ɨ ɨj ɨjɪ ɨɪ ɨː ɪ ɪː ẽ ẽː"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ci"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ç",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "gn"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋk",
+      "out": "nk"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋɡ",
+      "out": "ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋkʰ",
+      "out": "nk"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "",
+      "after_out": "n"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "ɡ k x q ɣ kʰ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ŋ",
+      "out": "ng",
+      "if_nucleus": "a aj ajj ajˀ aw aɪ aɪw aɪʊ aʊ aː aːj aːjˀ aːw aːwˀ aːɪ aːʊ a̯ a̯j a̯w o oj ojɪ ojʊ ojˀ ow oɪ oɪʊ oʊ oʊɪ oˀ oː oːj oːɪ oːʊ u uj ujʊ uw uɪ uˀ uː uːɪ w wa waj waɪ waʊ waː waːj waːjˀ we weɪ weː wi wiw wiː wo wu wæ wɐ̃ wɑ wɑː wɔ wɔː wə wəɪ wɛ wɛ̃ wɜː wɤː wɪ wʊ wʌ wː y yj yˀ yː ã ãː æ æː õ õj õː ũ ũː ɐ ɐː ɐ̃ ɐ̃ʊ̃ ɐ̃ː ɑ ɑj ɑʊ ɑː ɑ̃ ɒ ɒː ɔ ɔj ɔjˀ ɔɪ ɔˀ ɔː ɔːj ɔ̃ ɥ ɥœ ɥː ɯ ɯjʊ ɯː ɰ ɰː ɵ ɵː ʉ ʉː ʊ ʊj ʊː ʌ ʌj ʌjɪ ʌː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ngh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "",
+      "after_out": "n"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "m",
+      "before_onset": "b p m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "gli"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "",
+      "after_out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "e",
+      "after_out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "any",
+      "ipa": "ī",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    }
+  ],
+  "syllable_fixups": [],
+  "targets": {
+    "zh-Hans": {
+      "comment": "Two Mandarin-only readings. /ɯ/ is the apical vowel of shi, si, zi, which pinyin itself writes i and which an Italian hears as i, not u -- everywhere else in the corpus the same symbol is Japanese u, Korean eu or Turkish i-dotless, all of which want u. And pinyin h is the one /x/ in the corpus an Italian reader has already met written h (Hong Kong, Shanghai, hao); the rest -- Spanish j, German ach, Russian h, Arabic kha -- are k by Italian tradition (Chisciotte, Bach, Krusciov).",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɯ",
+          "out": "i"
+        },
+        {
+          "slot": "any",
+          "ipa": "x",
+          "out": "h"
+        }
+      ]
+    },
+    "pt": {
+      "comment": "Two Brazilian readings. /x/ is the rhotic, not a velar fricative -- receção is /xesesɐ̃ʊ̃/ and Socorro /sokoxʊ/, so spelling it k would give kodas for rodas on 170 rows. And /y/ is the reduced final -e, which is [i] in Brazil (de /dʒy/, noite /noɪtʃy/): u would give giu and noiciu on 256 rows, where every other target writes a front rounded vowel there.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "x",
+          "out": "r"
+        },
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "i"
+        }
+      ]
+    },
+    "ru": {
+      "comment": "espeak writes Russian z/s-soft as /ʑ/, a plain sibilant that takes s (zdes -> sdes). In Japanese and Korean the same symbol is a real alveolo-palatal inside /dʑ/ and takes gi. Noted first by the Spanish table.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʑ",
+          "out": "s"
+        }
+      ]
+    }
+  }
+}

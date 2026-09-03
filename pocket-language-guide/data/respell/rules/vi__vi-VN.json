@@ -83,8 +83,18 @@
     },
     {
       "sounds": "/ʲ/ (Russian palatalisation)",
-      "out": "nh for /nʲ/, i before a back vowel, otherwise nothing",
-      "why": "Vietnamese nh IS [ɲ], so Russian нь is written exactly. For the rest the Spanish table's split is followed: an i where a back vowel makes the palatalisation audible as an onglide (which Vietnamese rimes take natively), and nothing where it would only add a letter."
+      "out": "nh for /nʲ/, i before /a/ or /u/, otherwise nothing",
+      "why": "Vietnamese nh IS [ɲ], so Russian нь is written exactly. For the rest the Spanish table's split is followed -- an i where the palatalisation is audible as an onglide, which Vietnamese rimes take natively (тя -> tia, чуть -> chiut) -- but only before the two i-onglide rimes Vietnamese actually has, ia and iu. The wider back-vowel list this started with built io, iô, iơ, iă and iư, none of which is a Vietnamese rime: `--units` found it, on 34 Russian rows (всё was phxiô, now phxô). Everywhere else the mark is dropped, which is the right reading for a word-final ть a Vietnamese ear cannot hear anyway. This is the one place in the table where a diacritic deliberately becomes a letter."
+    },
+    {
+      "sounds": "a syllabic nasal (/m̩/ Swahili mna, mtoto; /n̩/)",
+      "out": "mơ-, nơ-",
+      "why": "It is a syllable, and Vietnamese has no vowelless one, so it takes the epenthetic ơ the tradition already uses for a foreign schwa (Ê-đi-xơn, Đích-ken-xơ). mna and mtoto were mna and mtô-tô, which a Vietnamese reader cannot begin; they are now mơ-na and mơ-tô-tô, and the syllable count matches Swahili's, which matters because Swahili stress is penultimate. Onset only: as a coda (one English row, button) the nasal is just n."
+    },
+    {
+      "sounds": "/ts̪/ (Arabic ت + ص across a morpheme boundary)",
+      "out": "tx",
+      "why": "Not the affricate /ts/, which takes t. The corpus writes the Arabic imperfective prefix and its stem as one unit on five rows (tˈasˤbiħ and friends, all of which also lost their short vowels), and spelling it by decomposition dropped the /s/ entirely -- `--units` found it. Two consonants, two letters, and x for /s/ is the tradition's own (Mát-xcơ-va)."
     }
   ],
   "policy": {
@@ -724,6 +734,11 @@
       "slot": "any",
       "ipa": "dʑ",
       "out": "gi"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "tx"
     },
     {
       "slot": "any",
@@ -1710,22 +1725,22 @@
     {
       "slot": "any",
       "ipa": "wʌ",
-      "out": "uơ"
+      "out": "uâ"
     },
     {
       "slot": "any",
       "ipa": "wə",
-      "out": "uơ"
+      "out": "uâ"
     },
     {
       "slot": "any",
       "ipa": "wɜː",
-      "out": "uơ"
+      "out": "uâ"
     },
     {
       "slot": "any",
       "ipa": "wɤː",
-      "out": "uơ"
+      "out": "uâ"
     },
     {
       "slot": "any",
@@ -1945,6 +1960,16 @@
       "after_out": "a e a² a³ a⁴ a⁵ a⁶ e² e³ e⁴ e⁵ e⁶"
     },
     {
+      "slot": "onset",
+      "ipa": "m̩",
+      "out": "mơ-"
+    },
+    {
+      "slot": "onset",
+      "ipa": "n̩",
+      "out": "nơ-"
+    },
+    {
       "slot": "any",
       "ipa": "j",
       "out": "i"
@@ -1958,7 +1983,7 @@
       "slot": "onset",
       "ipa": "ʲ",
       "out": "i",
-      "if_nucleus": "a o u ɑ ʌ ɔ ɐ ʊ ɵ ʉ ɯ aː ɑː oː uː"
+      "if_nucleus": "a aː ɑ ɑː u uː ʊ ʉ"
     },
     {
       "slot": "any",
@@ -2041,6 +2066,10 @@
       "out": "k\\1"
     },
     {
+      "match": "^c[ou](?=[aăâeêơôy])",
+      "out": "qu"
+    },
+    {
       "match": "g([eê])",
       "out": "gh\\1"
     },
@@ -2070,6 +2099,10 @@
     {
       "match": "(?<!i)([iê])([²³⁴⁵⁶]?)c$",
       "out": "\\1\\2ch"
+    },
+    {
+      "match": "([ou])([²³⁴⁵⁶]?)nh$",
+      "out": "\\1\\2n"
     },
     {
       "match": "^([^²³⁴⁵⁶]*?)(?<![aăâeêioôơuư][iyou])(ch|[ptc])$",
@@ -2359,6 +2392,15 @@
         }
       ]
     },
+    "sw": {
+      "comment": "Swahili's noun-class prefix m- is a syllable, and the G2P marks it as one on 34 words and not on 61 more (msaada, mkali, mfupa), which left onsets no Vietnamese reader can begin: mxa-a-đa, mca-li, mphu-pa. The fixup gives the unmarked ones the same epenthetic o-horn the phoneme rule gives /m̩/, so mơ-xa-a-đa. m before a vowel letter is untouched, which is what keeps mwisho (m plus a glide, genuinely one syllable) as mui-sô -- and it is m only, because Swahili's nd-, nj- and ng- are prenasalised stops rather than syllables.",
+      "syllable_fixups": [
+        {
+          "match": "^m(?=ph|[bcdghklnqrstvxđ])",
+          "out": "mơ-"
+        }
+      ]
+    },
     "th": {
       "comment": "Thai's falling tone takes nặng rather than the huyền its contour would suggest, because huyền is already spoken for by Thai's low tone: 21 and 41 both end at the bottom of the range and Vietnamese has one low falling tone for the two. nặng keeps all five Thai tones distinct, at the cost of implying the glottal constriction Vietnamese nặng has and Thai does not.",
       "phonemes": [
@@ -2370,6 +2412,6 @@
       ]
     }
   },
-  "note": "Reader's legend, per RESPELL-SYSTEMS.md: none. Every letter in the output is an ordinary Vietnamese letter used for its ordinary sound, the hyphen is the prescribed separator rather than a convention to learn, and the tone marks are the reader's own. The 2000 rules' licence for f j w z was available and was not taken, so there is no glyph on the card a Vietnamese reader has to be told about. There is no curated Vietnamese sheet, so this table is not scored; it is held to zero --gaps and to being read aloud.\n\nHow tone is written. The Chao letters arrive in the coda slot, after the coda consonant, and a Vietnamese tone mark belongs on the head of the rime -- so the tone rules emit a superscript numeral in the Vietnamese tone order (² huyền, ³ hỏi, ⁴ ngã, ⁵ sắc, ⁶ nặng; ngang is unmarked and emits nothing), and the syllable_fixups move it onto the right vowel as a precomposed letter. The eleven-vowel by five-mark block at the end of syllable_fixups is that move, written out because a fixup's output has to be a literal: see policy_note for the one engine line that would replace all fifty-five rules with three. Every one of them consumes the numeral, so at most one fires, and a final rule deletes any numeral that found no vowel to land on.",
-  "policy_note": "max_onset, measured over all 11,846 rows with a filled ipa column: 1 against 2 differs on 1,327 rows, 2 against 3 on 27. Vietnamese has no native consonant cluster at all, so the naive setting is 1 -- but the 2000 rules license four onsets (br, khr, xc, đr), and reader_onsets expresses exactly that licence, which max_onset alone cannot: it names those clusters in IPA and drops every other one the target's own phonotactics would have offered. So max_onset is 2 with a seventeen-entry whitelist. Word-initial onsets are unaffected by either setting, which is where the tradition's own clusters live (Brúc-xen, Xcaclati, Sếch-xpia). max_onset 3 would only add three-consonant onsets, which the licence does not cover.\n\nThe engine change that would pay for itself here: normalise the syllable to NFC *after* the syllable_fixups loop as well as before it (one line, next to the existing text = text.normalize('NFC')). A Vietnamese tone mark has to move leftwards from the end of the syllable onto the head of the rime, and a fixup can reorder characters but cannot compose them -- so the mark has to be spelled as a precomposed letter, and the rule has to be written once per vowel per tone. With a post-fixup NFC the tone rules could emit the combining mark itself and three position rules would do the whole job:\n  {match: \"(ch|[ptc])([\\u0300\\u0309\\u0303])$\", out: \"\\\\1\\u0323\"}\n  {match: \"((?:ng|nh|ch|[mnptcl])+)([\\u0300\\u0301\\u0303\\u0309\\u0323])$\", out: \"\\\\2\\\\1\"}\n  {match: \"([aăâeêioôơuư])([iyou])([\\u0300\\u0301\\u0303\\u0309\\u0323])$\", out: \"\\\\1\\\\3\\\\2\"}\nFifty-five rules become three, and they stop being a table of characters and start being a statement of the rule (“the mark goes before the coda, and on the head of a falling diphthong”). Nothing else in this file needs it, and the table is complete and gap-free without it."
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: none. Every letter in the output is an ordinary Vietnamese letter used for its ordinary sound, the hyphen is the prescribed separator rather than a convention to learn, and the tone marks are the reader's own. The 2000 rules' licence for f j w z was available and was not taken, so there is no glyph on the card a Vietnamese reader has to be told about: the output alphabet is 78 characters, all of them Vietnamese. There is no curated Vietnamese sheet, so this table is not scored; it is held to zero --gaps, to a --units list that is all decisions, and to being read aloud.\n\nHow tone is written. A Chao tone letter binds to the nucleus, so it arrives *inside* the nucleus string -- after the head vowel and before an offglide (`a˥˩j`), which is exactly where a Vietnamese tone mark goes, or after the whole nucleus when the offglide is one of the two lax vowels `syllabify` absorbs (`ɑʊ˧˩˧`). The tone rules therefore emit a superscript numeral in the Vietnamese tone order (² huyền, ³ hỏi, ⁴ ngã, ⁵ sắc, ⁶ nặng; ngang is unmarked and emits nothing), and the syllable_fixups turn it into a precomposed letter on the head of the rime. The eleven-vowel by five-mark block near the end of syllable_fixups is that move, written out because a fixup's output has to be a literal: see policy_note for the one engine line that would replace all fifty-five with three. Every one of them consumes the numeral, so at most one fires, and two final rules delete any numeral that found no vowel to land on.\n\nTwo phonotactic repairs ride on the same numerals, and they are the reason the mechanism has to exist whatever is decided about tone: a syllable closed by a stop takes sắc if it has no tone of its own (Tô-mát, Mát-xcơ-va), and takes nặng if its tone is one of the four a checked syllable cannot carry.\n\n",
+  "policy_note": "max_onset, measured over all 11,846 rows with a filled ipa column: 1 against 2 differs on 1,327 rows, 2 against 3 on 27. Vietnamese has no native consonant cluster at all, so the naive setting is 1 -- but the 2000 rules license four onsets (br, khr, xc, đr), and reader_onsets expresses that licence, which max_onset alone cannot: it names the clusters in IPA and drops every other one the target's own phonotactics would have offered. So max_onset is 2 with a whitelist, widened from the four to consonant-plus-liquid generally, which Vietnamese loan vocabulary attests (clo, brôm, prô-tê-in) and which is the cheaper error: an /nk/ coda keeps only its n, so in-clu-i-đô would otherwise lose its /k/ altogether. Word-initial onsets are unaffected by either setting, which is where the tradition's own clusters live (Brúc-xen, Xcaclati, Sếch-xpia, Ô-xtrây-li-a).\n\nThe engine change that would pay for itself here: normalise the syllable to NFC *after* the syllable_fixups loop as well as before it, one line beside the existing `text = text.normalize('NFC')`. A tone mark has to end up on the head of the rime as a precomposed letter, and a fixup can reorder characters but cannot compose them -- so the mark has to be spelled out per vowel per tone. With a post-fixup NFC the numerals could be rewritten as combining marks by five class-based rules and moved by one more, and the fifty-five placement rules would become:\n  {match: \"([aăâeêioôơuư])([iyou])([²³⁴⁵⁶])\", out: \"\\\\1\\\\3\\\\2\"}   (head, not offglide)\n  {match: \"²\", out: \"\\u0300\"} and four more like it\nThat is three rules and five substitutions instead of fifty-five, and it stops being a table of characters and starts being a statement of the rule. Nothing else in this file needs it, and the table is complete and gap-free without it.\n\nEngine notes from the --units pass, none of them blocking. (1) Two rules in the targets blocks were shadowed before the specificity sort landed -- Japanese /ç/ and Turkish /ɟ/, each an `any` rule sitting on top of this table's `coda` rule. Both are now live and neither moves a row: measured, Japanese has 38 /ç/ and all are onsets, Turkish has 89 /ɟ/ and all are onsets, so the coda rules they were hiding have nothing to spell. (2) No target in the sixteen has a glide carrying a modifier, so testing GLIDES on the base character changes nothing here; it does fix Vietnamese *as a target*, where `t̪aːjˀ` now has one nucleus rather than a phantom stop coda. (3) The two Vietnamese glottalised tones are unreachable when Vietnamese is the target: `ˀ` is not a tone letter, so it separates from `˨˩ˀ` and `˧ˀ˥` and lands in the coda, which makes nặng indistinguishable from huyền and ngã from sắc. It costs nothing in production, since a Vietnamese reader is never shown Vietnamese, but it is why the vi--vi self-test writes `về` for `vệ`. (4) Two Mandarin rows run two tonal syllables together (`tɕjɛ˥˩jʊŋ˥˩`), because a vowel carrying its own tone is still absorbed as an offglide; the second numeral is deleted rather than printed."
 }
