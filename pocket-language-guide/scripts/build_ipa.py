@@ -164,6 +164,22 @@ respelling's capitals 99% of the time in Spanish and 68% in Turkish. Japanese pi
 accent is not in the Hepburn column and is not here. Mandarin, Thai and Vietnamese
 tone is, as Chao tone letters. Korean tensification across a syllable boundary
 (학교 [hak̚k͈jo]) is not applied, because Revised Romanization does not write it.
+
+**Known defects, found by the rule tables reading this column rather than by
+anything here.** Each one prints, so each is worth a pass; none is a reason to
+distrust the column as a whole.
+
+- `vi` has no /tʰ/ anywhere, though Vietnamese contrasts it. It is the aspirated
+  series that lets a Korean or Mandarin reader's table fire its own aspiration
+  rules, so its absence silently disables them for Vietnamese.
+- Three `ja` rows carry romaji rather than IPA, having passed the Hepburn route
+  through unconverted.
+- `it` has no word-initial /ts/ in the whole column, so `onsetClusters` never
+  learns that Italian can open a word with it and *Grazie* breaks as `grats-ie`.
+  Italian orthography writes it `z`; the G2P is giving something else.
+- 73 `ar` rows have no short vowels at all, because espeak read unvocalised text.
+  `hal imknni istijdam` is what a respelling of one looks like, and no rule table
+  can recover the vowels. Vocalising the Arabic source text is the fix.
 """
 import argparse
 import csv

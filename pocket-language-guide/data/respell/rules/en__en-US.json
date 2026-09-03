@@ -69,7 +69,8 @@
       "slot": "any",
       "ipa": "ts",
       "out": "dz",
-      "if_inventory": "tsʰ"
+      "if_inventory": "tsʰ",
+      "unless_inventory": "bʰ"
     },
     {
       "slot": "any",
@@ -95,19 +96,22 @@
       "slot": "any",
       "ipa": "p",
       "out": "b",
-      "if_inventory": "pʰ"
+      "if_inventory": "pʰ",
+      "unless_inventory": "bʰ"
     },
     {
       "slot": "any",
       "ipa": "t",
       "out": "d",
-      "if_inventory": "tʰ"
+      "if_inventory": "tʰ",
+      "unless_inventory": "bʰ"
     },
     {
       "slot": "any",
       "ipa": "k",
       "out": "g",
-      "if_inventory": "kʰ"
+      "if_inventory": "kʰ",
+      "unless_inventory": "bʰ"
     },
     {
       "slot": "any",
@@ -644,6 +648,14 @@
     {
       "rule": "the whole table was read off the corpus, not transcribed from the key",
       "why": "The 12,001 hand-curated respellings in `data/respell/overrides` record what a human actually chose for each sound *in context*, which a published table cannot. Where the two disagree the corpus wins, and the disagreements are measurable: `scripts/respell_check.mjs en --score`."
+    },
+    {
+      "rule": "the plain series is written voiced wherever the target aspirates",
+      "why": "Only where the target has no voiced stop of its own for the letter to collide with. Mandarin /p/ is `b` because Mandarin contrasts /p/ with /pʰ/ and has no /b/; Hindi contrasts all four, so its /p/ stays `p`. Without the second half of that condition, `सुब्रभात` came out `soo-bruh-BʰAD` against a curated `su-pra-BHAAT`."
+    },
+    {
+      "rule": "the plain series is written voiced wherever the target aspirates",
+      "why": "Guarded on breathy voice, not on the presence of /b d ɡ/. The claim is that a language contrasting /p/ with /pʰ/ has no voiced stop for `b` to collide with, which is true of Mandarin and false of Hindi -- whose /p/ was printing `soo-bruh-BʰAD` against a curated `su-pra-BHAAT`. But Korean's `ipa` carries `b d ɡ` too, as the Revised Romanization allophones of the lenis series rather than as phonemes, so testing for them costs Korean 1.4 points to gain Hindi 0.6. A breathy stop only exists where the contrast is genuinely four-way, so `unless_inventory: bʰ` separates the two and keeps both."
     }
   ]
 }

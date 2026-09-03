@@ -1,18 +1,18 @@
-bcp47,endonym,exonym_en,script,script_alt,romanizations,badge,status,regions,speak_label
-en,English,English,Latn,,,Aa,ready,GB;US;CA;AU;NZ;IE;ZA;IN,I speak
-es,Español,Spanish,Latn,,,Áé,ready,ES;MX;AR;CO;CL;PE,Hablo
-zh-Hans,简体中文,Chinese (Simplified),Hans,Hant,pinyin,中,ready,CN;SG;MY,我说
-ja,日本語,Japanese,Jpan,,hepburn;kunrei,あ,ready,JP,話せる言語
-ar,العربية,Arabic,Arab,,ala-lc,ع,ready,SA;EG;AE;MA;JO;IQ,أتحدث
-fr,Français,French,Latn,,,Àç,ready,FR;CA;BE;CH;SN;CI,Je parle
-de,Deutsch,German,Latn,,,Äß,ready,DE;AT;CH,Ich spreche
-pt,Português,Portuguese,Latn,,,Ãç,ready,PT;BR;AO;MZ,Eu falo
-ko,한국어,Korean,Kore,,rr;mccune,한,ready,KR,사용 언어
-hi,हिन्दी,Hindi,Deva,,iast;hunterian,अ,ready,IN,मैं बोलता हूँ
-th,ไทย,Thai,Thai,,rtgs,ก,ready,TH,ฉันพูด
-ru,Русский,Russian,Cyrl,,bgn,Яж,ready,RU;BY;KZ;KG,Я говорю на
-id,Bahasa Indonesia,Indonesian,Latn,,,Aa,ready,ID,Saya berbicara
-sw,Kiswahili,Swahili,Latn,,,Aa,ready,TZ;KE;UG;CD,Ninasema
-tr,Türkçe,Turkish,Latn,,,Şğ,ready,TR;CY,Konuştuğum dil
-vi,Tiếng Việt,Vietnamese,Latn,,,Ệ,ready,VN,Tôi nói
-it,Italiano,Italian,Latn,,,Èù,ready,IT;CH;SM,Parlo
+bcp47,endonym,exonym_en,script,script_alt,romanizations,default_accent,badge,status,regions,speak_label
+en,English,English,Latn,,,en-US,Aa,ready,GB;US;CA;AU;NZ;IE;ZA;IN,I speak
+es,Español,Spanish,Latn,,,es-419,Áé,ready,ES;MX;AR;CO;CL;PE,Hablo
+zh-Hans,简体中文,Chinese (Simplified),Hans,Hant,pinyin,zh-CN,中,ready,CN;SG;MY,我说
+ja,日本語,Japanese,Jpan,,hepburn;kunrei,ja-JP,あ,ready,JP,話せる言語
+ar,العربية,Arabic,Arab,,ala-lc,ar-MSA,ع,ready,SA;EG;AE;MA;JO;IQ,أتحدث
+fr,Français,French,Latn,,,fr-FR,Àç,ready,FR;CA;BE;CH;SN;CI,Je parle
+de,Deutsch,German,Latn,,,de-DE,Äß,ready,DE;AT;CH,Ich spreche
+pt,Português,Portuguese,Latn,,,pt-BR,Ãç,ready,PT;BR;AO;MZ,Eu falo
+ko,한국어,Korean,Kore,,rr;mccune,ko-KR,한,ready,KR,사용 언어
+hi,हिन्दी,Hindi,Deva,,iast;hunterian,hi-IN,अ,ready,IN,मैं बोलता हूँ
+th,ไทย,Thai,Thai,,rtgs,th-TH,ก,ready,TH,ฉันพูด
+ru,Русский,Russian,Cyrl,,bgn,ru-RU,Яж,ready,RU;BY;KZ;KG,Я говорю на
+id,Bahasa Indonesia,Indonesian,Latn,,,id-ID,Aa,ready,ID,Saya berbicara
+sw,Kiswahili,Swahili,Latn,,,sw-KE,Aa,ready,TZ;KE;UG;CD,Ninasema
+tr,Türkçe,Turkish,Latn,,,tr-TR,Şğ,ready,TR;CY,Konuştuğum dil
+vi,Tiếng Việt,Vietnamese,Latn,,,vi-VN,Ệ,ready,VN,Tôi nói
+it,Italiano,Italian,Latn,,,it-IT,Èù,ready,IT;CH;SM,Parlo

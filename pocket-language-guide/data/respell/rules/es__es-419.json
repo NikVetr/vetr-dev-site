@@ -1,0 +1,793 @@
+{
+  "source": "es",
+  "accent": "es-419",
+  "version": "1",
+  "derives_from": "RAE/ASALE, Diccionario panhispanico de dudas, seccion «Representacion de los fonemas y de la pronunciacion de voces o expresiones»: its bracket alphabet (ordinary Spanish letters, deliberately not IPA), its four extra signs, its rule that the tonic vowel always carries a tilde even where ordinary spelling would not, and its decision to give the seseante pronunciation first «por ser la mayoritaria». Secondary: es.wikipedia Ayuda:AFI/* «Aproximacion en espanol» (CC BY-SA 4.0) for /ʁ/ and /ç/, which the DPD does not cover.",
+  "deviations": [
+    {
+      "rule": "Ortografia, extranjerismos crudos: 'sh' and etymological 'h' are 'secuencias que resultan a veces extranas a nuestra lengua'",
+      "why": "That warning is about permanent Spanish spellings of loanwords. The DPD uses [sh] and [h] freely inside pronunciation brackets, and this column is a bracket, not a spelling: it is thrown away after one reading. /S/ -> sh, /h/ -> h."
+    },
+    {
+      "rule": "DPD's fourth extra bracket sign, for the voiced palatal fricative of French Jean",
+      "why": "NOT THE DPD'S SIGN -- a substitute, flagged as such. The glyph is an image on rae.es and was never read. [zh] is the obvious guess but reads as [s] to a Spanish eye, since h alone is silent and the card carries no key. Instead /ʒ dʒ ʑ ɟ/ all take y: the letter the DPD's own extranjerismo list gives these sounds (Djibouti > Yibuti, manager > manayer), a voiced palatal in every accent, and literally [ʒ] in rioplatense. It also keeps the legend at the two glyphs RESPELL-SYSTEMS.md specifies; [zh] would make three. Do not cite this as the DPD."
+    },
+    {
+      "rule": "DPD brackets are one continuous string: [shespir], [kiche], [airbag]",
+      "why": "The DPD is bracketing one adopted loanword. We are bracketing a whole foreign phrase of up to a dozen syllables, and an unbroken string invites the reader to apply Spanish default stress across it. Hyphens per RESPELL-SYSTEMS.md's per-source divider table, which puts es in the hyphen row."
+    },
+    {
+      "rule": "DPD's method admits only 'letras del abecedario'",
+      "why": "Held to, and it is why tone is dropped: the Chao letters that zh-Hans, th and vi carry are not letters of the alphabet, and a reader with no key gets nothing from them. Lexical tone is therefore lost on those three targets. Stated so it is not mistaken for an oversight."
+    },
+    {
+      "rule": "Unaspirated stops written with Spanish voiced letters (Mandarin only)",
+      "why": "Spanish p t k are already unaspirated, so for most targets they are the exact match for the plain series and both series collapse on p t k -- the opposite of the English table, whose p t k are aspirated. Where the target has no voiced stop for those letters to collide with (Mandarin alone in this corpus) the unaspirated series takes b d g y instead, which keeps the contrast and reproduces pinyin, the spelling a Spanish reader has already met in Beijing and Guangzhou. Guarded by unless_inventory, not by target."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/ʔ/ /ʕ/ and pharyngealisation ˤ",
+      "out": "dropped",
+      "why": "Spanish has no letter and no sound. Dropping the pharyngeals is what Spanish's own Arabic loanwords do (arabe < 'arab), and a dropped hamza leaves an ordinary onsetless Spanish syllable. Raw IPA on the card would be worse."
+    },
+    {
+      "sounds": "/ʈ ɖ ɳ ɽ/ and the Mandarin retroflexes",
+      "out": "t d n r",
+      "why": "Spanish has no retroflex series. The dental letters are the standard Spanish rendering of Devanagari."
+    },
+    {
+      "sounds": "/ħ/ (Arabic ح)",
+      "out": "j",
+      "why": "Voiceless pharyngeal against Spanish [x]. Wrong place, right manner and voicing, and audible -- which dropping it would not be."
+    },
+    {
+      "sounds": "/θ/ (English think, Arabic ث)",
+      "out": "s",
+      "why": "es-419 is seseante, per the DPD's own decision to list the seseante form first. A Peninsular table would write z here; see the report."
+    },
+    {
+      "sounds": "vowel length",
+      "out": "not written",
+      "why": "Spanish has no length contrast and a doubled vowel reads as two syllables (leer, cooperar). Hindi, Arabic, Thai, Japanese and German length is lost."
+    },
+    {
+      "sounds": "/y ø œ ɯ/ (front rounded and back unrounded vowels)",
+      "out": "u e e u",
+      "why": "Spanish has five vowels. This is the error a Spanish speaker makes anyway (Bruselas, Zurich, Estambul)."
+    },
+    {
+      "sounds": "lexical tone (zh-Hans, th, vi)",
+      "out": "dropped",
+      "why": "See deviations: Chao letters are not letters of the alphabet. All four curated tonal sheets drop it too."
+    },
+    {
+      "sounds": "/ʐ/ (Mandarin r)",
+      "out": "r",
+      "why": "Spanish r is a tap or trill by position and never a retroflex fricative; there is no closer letter. The word-initial trill is the survey's own noted dead end."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "acute",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 3,
+    "locale": "es-419"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "y",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "y",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʧ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒ",
+      "out": "ch"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʑ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "b",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "d",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "g",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "sh"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʒ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "g",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "y"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "j"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r",
+      "after_out": "b d f g k p t v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ñ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "ɡ k ɣ x kʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "m",
+      "before_onset": "b p m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ji",
+      "out": "yi"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɪ",
+      "out": "yi"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": "",
+      "after_out": "ch sh y ñ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʲ",
+      "out": "i",
+      "if_nucleus": "a o u ɑ ʌ ɔ ɐ ʊ ɵ ʉ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ī",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "ng([kg])",
+      "out": "n\\1"
+    },
+    {
+      "match": "ll",
+      "out": "l"
+    },
+    {
+      "match": "rr",
+      "out": "r"
+    },
+    {
+      "match": "y([bcdfgjklmnprstv])",
+      "out": "sh\\1"
+    },
+    {
+      "match": "([nm])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "^(.*?)g([ei])",
+      "out": "\\1gu\\2"
+    },
+    {
+      "match": "([aeiou])\\1",
+      "out": "\\1"
+    }
+  ],
+  "targets": {
+    "ko": {
+      "comment": "/V/ is Korean eo, which Spanish writes o (Seul). Everywhere else in the corpus the same symbol is English STRUT, Russian reduction or Hindi schwa, all of which want a.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "o"
+        }
+      ]
+    },
+    "ru": {
+      "comment": "espeak writes Russian z/s' as /z\\/, a plain sibilant that takes s (zdes -> sdes). In Japanese and Korean the same symbol is a real alveolo-palatal inside /dz\\/ and takes y.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʑ",
+          "out": "s"
+        }
+      ]
+    }
+  },
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: two glyphs only -- [sh] as in shampoo, [h] an aspirate as in home. Everything else is ordinary Spanish. There is no curated Spanish sheet, so this table is not scored; it is held to zero --gaps and to being read aloud."
+}

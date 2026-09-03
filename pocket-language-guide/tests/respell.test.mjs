@@ -179,6 +179,22 @@ test('the acute goes on the last vowel letter of the nucleus, not the first', ()
   assert.equal(oo.respell('ˈkwanto'), 'kwán-toh');
 });
 
+test('a falling diphthong takes the mark on its first element, not its last', () => {
+  // The other half of the same rule, and the half that is easy to miss: Spanish
+  // writes `bién` but `géisha`, because the nucleus head moves. Marking the last
+  // letter throughout gave `he-loú` for `hello`, which reads as a stressed /u/ in
+  // a third syllable that is not there.
+  const ipa = ['hɛˈloʊ', 'ɛɾlˈaʊpt', 'tʃˈaɪna', 'pˈeɪpa'];
+  const say = createRespeller({ rules: withPolicy({ stress: 'acute' }), targetIpa: ipa });
+  // This table spells /aɪ/ `ye` and /eɪ/ `ay`, so both emit a two-letter run and
+  // the choice of end is visible: the head is the first.
+  assert.equal(say.respell('tʃˈaɪna'), 'chýe-na');
+  assert.equal(say.respell('pˈeɪpa'), 'páy-pa');
+  // /oʊ/ is `oh` here, one vowel letter and an orthographic `h`, so there is only
+  // one place the mark can go and it is the right one either way.
+  assert.equal(say.respell('hɛˈloʊ'), 'heh-lóh');
+});
+
 test('an accented letter does not take a second accent', () => {
   // A phoneme rule may already have written an accent -- Portuguese and French
   // both need to -- and stacking the stress mark on top of it produces a character

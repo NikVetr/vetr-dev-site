@@ -44,6 +44,10 @@
 const VOWELS = new Set([
   ...'iyɨʉɯuɪʏʊeøɘɵɤoəɛœɜɞʌɔæɐaɶɑɒ',
   ...'ãẽĩõũ',
+  // The rhotic vowels. Without them `coverage` /kˈʌvɚɹɪdʒ/ syllabifies `ɚ` as a
+  // consonant, `onsetClusters` learns `ɚɹ` as something that can open a word, and
+  // the break lands mid-nucleus.
+  ...'ɚɝ',
 ]);
 const GLIDES = new Set('jwɥ');
 /** Length, nasalisation and the non-syllabic mark all belong to their vowel. */
@@ -60,11 +64,33 @@ const TONE = /[\u02E5-\u02E9]/g;
 const STRESS = { 'ˈ': 1, 'ˌ': 2 };
 
 /**
- * Where a stress mark goes when the device is a diacritic: on the *last* vowel
- * letter of the nucleus, which is what puts the acute on the second element of a
- * Spanish or Italian rising diphthong (`bien` -> `bién`, not `bíen`).
+ * Which letters a diacritic stress mark can land on, in any of the scripts that
+ * use one. Includes `y` and `w`, which spell a nucleus in several of these
+ * orthographies, and the already-accented forms so a second mark is not stacked.
  */
 const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõyw]+/iu;
+const ACCENTED = /[áéíóúàèìòù]/i;
+
+/**
+ * Put an acute on one end of the syllable's vowel run.
+ *
+ * Which end is not a matter of taste. A *rising* diphthong is marked on its
+ * second element and a *falling* one on its first -- Spanish writes `bién` and
+ * `géisha` -- so the same syllable shape takes the mark in opposite places
+ * depending on where the nucleus head is. Marking the last letter throughout gave
+ * `he-loú` for `hello`, which reads as three syllables ending in a stressed /u/.
+ * @param {string} text @param {boolean} head  accent the first letter, not the last
+ */
+function acute(text, head) {
+  return text.replace(VOWEL_LETTERS, (run) => {
+    const i = head ? 0 : run.length - 1;
+    // Already accented, either by the phoneme table or by the orthography itself:
+    // a second mark would produce a character no orthography has.
+    if (ACCENTED.test(run[i])) return run;
+    return run.slice(0, i) + `${run[i]}\u0301`.normalize('NFC') + run.slice(i + 1);
+  });
+}
+
 /**
  * The stress devices a reader's own orthography already has. `caps` is the
  * fallback for a Latin script with no native mark, and is what eleven of the
@@ -72,17 +98,11 @@ const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõyw]+/iu
  * Portuguese and Russian, where capitals would read as an abbreviation; `prime`
  * is Bhargava's notation for Hindi, whose script is caseless and has no accent.
  *
- * @type {Record<string, (text: string, locale: string) => string>}
+ * @type {Record<string, (text: string, at: {locale: string, falling: boolean}) => string>}
  */
 const STRESS_DEVICE = {
-  caps: (text, locale) => text.toLocaleUpperCase(locale),
-  acute: (text) => text.replace(VOWEL_LETTERS, (v) => {
-    const i = v.length - 1;
-    // Already accented -- the letter carries its own acute, so adding a second
-    // one would produce a character no orthography has.
-    if (/[áéíóúàèìòù]/i.test(v[i])) return v;
-    return `${v.slice(0, i)}${v[i]}\u0301`.normalize('NFC') + v.slice(i + 1);
-  }),
+  caps: (text, at) => text.toLocaleUpperCase(at.locale),
+  acute: (text, at) => acute(text, at.falling),
   prime: (text) => `${text}\u02b9`,
 };
 
@@ -381,6 +401,20 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       let text = spellSlot(s.onset, 'onset', phonemes, ctx);
       text += spellSlot(s.nucleus, 'nucleus', phonemes, ctx, text);
       text += spellSlot(s.coda, 'coda', phonemes, ctx, text);
+      // **A syllable is composed, not concatenated.** For every alphabetic reader
+      // this line does nothing. For Hangul it is the difference between a rule
+      // table and a lookup table: the three slots are exactly Korean's
+      // 초성/중성/종성, so a table that emits conjoining jamo gets precomposed
+      // syllable blocks for free -- and a 받침 becomes expressible at all, where
+      // concatenation could only reach it by enumerating initial x vowel x final,
+      // some 2,800 entries. It also composes a Devanagari nukta and a kana
+      // dakuten, both of which the corpus writes precomposed.
+      //
+      // It has to happen here rather than in a renderer, because `charset.json`
+      // and `subset_fonts.py` build the font subset from what this emits: jamo in
+      // the output would ship jamo glyphs and leave the composed syllable out of
+      // the subset, where the PDF has no system font to fall back to.
+      text = text.normalize('NFC');
       for (const f of fixups) {
         if (!holds(f, ctx, '')) continue;
         const next = text.replace(f.re, f.out);
@@ -397,7 +431,13 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
         else if (policy.length === 'colon') text = text.replace(/([aeiou]+)/, '$1:');
       }
       const marked = s.stress === 1 && syls.length >= policy.stress_min_syllables;
-      return marked && stressDevice ? stressDevice(text, policy.locale) : text;
+      if (!marked || !stressDevice) return text;
+      // The nucleus carries the answer to which end the mark goes on: a falling
+      // diphthong is a vowel followed by a glide or by one of the two lax vowels
+      // `syllabify` absorbs, and its head is therefore the first element.
+      const tail = [...s.nucleus].filter((c) => !VOWEL_TAIL.has(c)).pop() ?? '';
+      const falling = s.nucleus.length > 1 && (GLIDES.has(tail) || 'ɪʊ'.includes(tail));
+      return stressDevice(text, { locale: policy.locale, falling });
     }).join(policy.syllable_separator);
   };
 

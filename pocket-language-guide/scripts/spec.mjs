@@ -15,7 +15,10 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
   return {
     target,
     source,
-    accent: `${source}-US`,
+    // From the registry, not `${source}-US`: an accent is a fact about the reading
+    // language, and building it by concatenation meant only English could ever find
+    // its own respelling table.
+    accent: languages.find((l) => l.bcp47 === source)?.default_accent ?? `${source}-US`,
     // Derived, not hardcoded: pinning this to Pinyin silently dropped Hepburn from
     // every Japanese sheet.
     romanization: (lang.romanizations || '').split(';').filter(Boolean)[0] ?? '',

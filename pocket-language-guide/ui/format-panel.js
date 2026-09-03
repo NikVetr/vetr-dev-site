@@ -473,7 +473,7 @@ export function createFormatPanel(input) {
         text: t('gallery.pickerOption', { endonym: l.endonym, exonym: l.exonym_en }),
       })),
     spec.source,
-    (value) => emit({ source: value, accent: `${value}-US` }),
+    (value) => emit({ source: value, accent: corpus.languages[value].default_accent }),
   );
 
   // Where you are going, which decides the local emergency numbers. Only the

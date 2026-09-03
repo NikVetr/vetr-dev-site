@@ -3,20 +3,12 @@
     {
       "target": "en",
       "source": "es",
-      "scale": 0.63,
-      "faces": 6,
+      "scale": 0.79,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -210,20 +202,12 @@
     {
       "target": "en",
       "source": "ko",
-      "scale": 0.75,
-      "faces": 6,
+      "scale": 0.93,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -683,20 +667,12 @@
     {
       "target": "es",
       "source": "ko",
-      "scale": 0.74,
-      "faces": 6,
+      "scale": 0.85,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -977,20 +953,12 @@
     {
       "target": "zh-Hans",
       "source": "es",
-      "scale": 0.98,
+      "scale": 0.75,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 612,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -1033,7 +1001,7 @@
     {
       "target": "zh-Hans",
       "source": "ar",
-      "scale": 0.99,
+      "scale": 0.98,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -1156,20 +1124,12 @@
     {
       "target": "zh-Hans",
       "source": "ko",
-      "scale": 0.51,
-      "faces": 6,
+      "scale": 0.97,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 607,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -1450,20 +1410,12 @@
     {
       "target": "ja",
       "source": "es",
-      "scale": 0.69,
-      "faces": 8,
+      "scale": 0.79,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 622,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -1629,20 +1581,12 @@
     {
       "target": "ja",
       "source": "ko",
-      "scale": 0.86,
+      "scale": 0.5,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 617,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -1923,20 +1867,12 @@
     {
       "target": "ar",
       "source": "es",
-      "scale": 0.6,
-      "faces": 8,
+      "scale": 0.82,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -2091,20 +2027,12 @@
     {
       "target": "ar",
       "source": "ko",
-      "scale": 0.8,
-      "faces": 8,
+      "scale": 0.99,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -2385,20 +2313,12 @@
     {
       "target": "fr",
       "source": "es",
-      "scale": 0.57,
-      "faces": 6,
+      "scale": 0.73,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -2564,20 +2484,12 @@
     {
       "target": "fr",
       "source": "ko",
-      "scale": 0.7,
-      "faces": 6,
+      "scale": 0.88,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -2858,20 +2770,12 @@
     {
       "target": "de",
       "source": "es",
-      "scale": 0.56,
-      "faces": 6,
+      "scale": 0.68,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 617,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -3037,20 +2941,12 @@
     {
       "target": "de",
       "source": "ko",
-      "scale": 0.7,
-      "faces": 6,
+      "scale": 0.77,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -3331,20 +3227,12 @@
     {
       "target": "pt",
       "source": "es",
-      "scale": 0.6,
-      "faces": 6,
+      "scale": 0.7,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 617,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -3510,20 +3398,12 @@
     {
       "target": "pt",
       "source": "ko",
-      "scale": 0.73,
-      "faces": 6,
+      "scale": 0.87,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 613,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -3804,20 +3684,12 @@
     {
       "target": "ko",
       "source": "es",
-      "scale": 0.85,
+      "scale": 0.6,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 611,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -4277,20 +4149,12 @@
     {
       "target": "hi",
       "source": "es",
-      "scale": 0.57,
-      "faces": 8,
+      "scale": 0.77,
+      "faces": 10,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -4484,20 +4348,12 @@
     {
       "target": "hi",
       "source": "ko",
-      "scale": 0.74,
+      "scale": 0.45,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -4747,20 +4603,12 @@
     {
       "target": "th",
       "source": "es",
-      "scale": 0.7,
+      "scale": 0.5,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "no-dictionary-breaking",
           "severity": "warn",
@@ -4855,7 +4703,7 @@
     {
       "target": "th",
       "source": "ar",
-      "scale": 0.71,
+      "scale": 0.69,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -5010,20 +4858,12 @@
     {
       "target": "th",
       "source": "ko",
-      "scale": 0.85,
+      "scale": 0.65,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 613,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "no-dictionary-breaking",
           "severity": "warn",
@@ -5329,20 +5169,12 @@
     {
       "target": "ru",
       "source": "es",
-      "scale": 0.7,
+      "scale": 0.47,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -5536,20 +5368,12 @@
     {
       "target": "ru",
       "source": "ko",
-      "scale": 0.8,
+      "scale": 0.53,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -5802,20 +5626,12 @@
     {
       "target": "id",
       "source": "es",
-      "scale": 0.64,
-      "faces": 6,
+      "scale": 0.77,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 612,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -6009,20 +5825,12 @@
     {
       "target": "id",
       "source": "ko",
-      "scale": 0.79,
-      "faces": 6,
+      "scale": 0.95,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 610,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -6275,20 +6083,12 @@
     {
       "target": "sw",
       "source": "es",
-      "scale": 0.6,
-      "faces": 6,
+      "scale": 0.72,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 617,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -6482,20 +6282,12 @@
     {
       "target": "sw",
       "source": "ko",
-      "scale": 0.74,
-      "faces": 6,
+      "scale": 0.85,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 615,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -6748,20 +6540,12 @@
     {
       "target": "tr",
       "source": "es",
-      "scale": 0.65,
-      "faces": 6,
+      "scale": 0.78,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -6955,20 +6739,12 @@
     {
       "target": "tr",
       "source": "ko",
-      "scale": 0.79,
-      "faces": 6,
+      "scale": 0.94,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -7221,20 +6997,12 @@
     {
       "target": "vi",
       "source": "es",
-      "scale": 0.63,
-      "faces": 6,
+      "scale": 0.85,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 616,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -7428,20 +7196,12 @@
     {
       "target": "vi",
       "source": "ko",
-      "scale": 0.78,
+      "scale": 0.47,
       "faces": 6,
       "pageW": 504,
       "pageH": 360,
       "items": 614,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -7694,20 +7454,12 @@
     {
       "target": "it",
       "source": "es",
-      "scale": 0.6,
-      "faces": 6,
+      "scale": 0.69,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 613,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -7901,20 +7653,12 @@
     {
       "target": "it",
       "source": "ko",
-      "scale": 0.74,
-      "faces": 6,
+      "scale": 0.85,
+      "faces": 8,
       "pageW": 504,
       "pageH": 360,
       "items": 613,
       "warnings": [
-        {
-          "code": "empty-column",
-          "severity": "warn",
-          "params": {
-            "field": "respell"
-          },
-          "message": "The respell column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off."
-        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",

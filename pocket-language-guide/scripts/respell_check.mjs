@@ -77,7 +77,13 @@ async function rowsFor(/** @type {{source:string, accent:string, rules:any}} */ 
  */
 async function charset() {
   /** @type {Record<string,string>} */ const out = {};
-  for (const { source: src, accent: acc } of tables) {
+  // The *published* tables, from `index.json`, not every file in the directory:
+  // the font subset should cover what ships, and a table under construction does
+  // not. Reading the directory here would also make the committed charset depend
+  // on an uncommitted file.
+  for (const { source: src, accent: acc } of tables.filter(
+    (t) => corpus.respellRules.has(`${t.source}__${t.accent}`),
+  )) {
     const table = { source: src, accent: acc, rules: await loadRespellRules(loadText, src, acc) };
     /** @type {Set<string>} */ const chars = new Set();
     for (const target of ready) {

@@ -119,6 +119,21 @@ export async function ensureFontCss(ctx, target, source, typeface = 'sans') {
 }
 
 /**
+ * Which accent a reader's respellings are keyed on.
+ *
+ * This was `${source}-US`, which is right for exactly one of the seventeen
+ * languages. An accent is a fact about the reading language -- Spanish
+ * respellings are `es-419` and Korean's are `ko-KR` -- and it is half of the key
+ * that finds both the curated sheet and the rule table, so a concatenated guess
+ * meant a table could ship and never load.
+ * @param {{languages: Record<string, Record<string,string>>}} corpus
+ * @param {string} source
+ */
+export function accentFor(corpus, source) {
+  return corpus.languages[source]?.default_accent || `${source}-US`;
+}
+
+/**
  * A sheet spec with everything resolved. `scale: 0` means auto-fit.
  * @param {Awaited<ReturnType<typeof browserSheetContext>>} ctx
  * @param {any} presets
@@ -140,7 +155,7 @@ export function makeSpec(ctx, presets, choice) {
   return {
     target: choice.target,
     source: choice.source,
-    accent: `${choice.source}-US`,
+    accent: accentFor(ctx.corpus, choice.source),
     romanization,
     register: 'neutral',
     region,
@@ -241,7 +256,7 @@ export async function saveForOffline({ corpus, target, source, manifest }) {
   }
   // Only the curated files that exist: asking for one that was never written made
   // the worker report a partial save and the button stop at "Partly saved".
-  const accent = `${source}-US`;
+  const accent = accentFor(corpus, source);
   if (corpus.respellOverrides.has(`${target}__${source}__${accent}`)) {
     urls.push(respellOverrideFile(target, source, accent));
   }

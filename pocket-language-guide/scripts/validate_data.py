@@ -344,7 +344,13 @@ def main():
         table = json.loads(path.read_text(encoding="utf-8"))
         where = path.stem
         if where not in listed:
-            errors.append(f"respell/rules/{where}: not in index.json, so nothing loads it")
+            # A table under construction is a legitimate state, which is why
+            # `respell_check.mjs` reads this directory rather than the index: a
+            # reader can be run before it is published. So this is a warning, and
+            # the error is the other direction, below.
+            warnings.append(f"respell/rules/{where}: not in index.json, so nothing "
+                            f"loads it yet")
+            continue
         if where != f"{table.get('source')}__{table.get('accent')}":
             errors.append(f"respell/rules/{where}: source/accent disagree with the filename")
         if not table.get("derives_from"):
