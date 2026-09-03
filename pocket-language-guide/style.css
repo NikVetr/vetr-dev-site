@@ -204,8 +204,13 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .studio {
   display: grid;
   /* Ratios, not percentages, so the format column can hold its 250px floor: at
-     1101px a flat 20% gave it 220px and every control wrapped an orphan row. */
-  grid-template-columns: minmax(250px, 1fr) minmax(0, 2.5fr) minmax(0, 1.5fr);
+     1101px a flat 20% gave it 220px and every control wrapped an orphan row.
+     The two side columns become explicit widths once a resizer is dragged, and
+     the canvas keeps whatever is left. */
+  grid-template-columns:
+    var(--col-format, minmax(250px, 1fr)) auto
+    minmax(0, 2.5fr)
+    auto var(--col-content, minmax(0, 1.5fr));
   /* One row, exactly the studio's height. An auto row grew to the 9,000px content
      tree, so the panel's own `overflow: auto` never had anything to scroll. */
   grid-template-rows: minmax(0, 1fr);
@@ -217,9 +222,10 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
    was otherwise measured against the page and added 1,100px of blank scroll. */
 .studio > section {
   min-height: 0; overflow: auto; padding: var(--space-2); position: relative;
-  border-inline-end: 1px solid var(--line);
 }
-.studio > section:last-child { border-inline-end: none; }
+/* No `border-inline-end` here: at this width the seam between panels is the
+   draggable `.col-resizer` between them, which draws its own rule. The stacked
+   layouts below hide the resizers and put the borders back. */
 .panel-title {
   font-size: var(--fs--1); text-transform: uppercase; letter-spacing: 0.06em;
   color: var(--muted); margin: 0 0 var(--space-2);
@@ -239,13 +245,20 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   box-shadow: 0 1px 3px rgb(17 24 32 / 8%); position: relative; cursor: zoom-in; overflow: hidden;
 }
 .face svg { display: block; width: 100%; height: auto; }
-/* A portrait card is scaled by its height instead, or it runs off the bottom of the
-   panel: the phone-screen preset is 2.2 times as tall as it is wide, so fitting it
-   to the width made it more than twice the canvas's height. Both dimensions are
-   capped and the card's own aspect decides which one binds. */
-.face.focused { display: flex; justify-content: center; }
-.face.focused svg { width: auto; height: auto; max-inline-size: 100%; max-block-size: 74vh; }
-.face.focused { cursor: default; }
+/* The focused face is exactly the drawn page and nothing else.
+   Both overlays place themselves as percentages of the page's units against this
+   box, so it has to *be* the page: it was the panel's full width with the SVG
+   centred inside at a fixed 672px, which offset every row highlight and every drag
+   handle from the ink they refer to. The aspect comes from the plan's own geometry
+   (`ui/preview.js`), the width takes what the panel offers, and the height cap is
+   what keeps a portrait card on screen -- the phone preset is 2.2 times as tall as
+   it is wide, so fitting it to the width alone made it twice the canvas's height. */
+.face.focused {
+  display: block; cursor: default; margin-inline: auto;
+  aspect-ratio: var(--face-aspect, 1.4);
+  inline-size: min(100%, calc(74vh * var(--face-aspect, 1.4)));
+}
+.face.focused svg { inline-size: 100%; block-size: 100%; }
 .face-strip { display: flex; gap: var(--space-1); margin-top: auto; }
 .face-strip .face { flex: 1; cursor: pointer; }
 .face.current { outline: 2px solid var(--accent); }
@@ -303,11 +316,30 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 /* Tablet to small laptop: the sheet on top at full width, the two control panels
    side by side under it. Three 1099px-wide bands left ~850px of dead space beside
    every control group. */
+/* A grabbable seam between panels. 6px wide with a 1px rule down the middle, so it
+   reads as the border it replaces until the pointer is on it. */
+.col-resizer {
+  inline-size: 6px; cursor: col-resize; background: none; border: 0; padding: 0;
+  position: relative; touch-action: none;
+}
+.col-resizer::before {
+  content: ''; position: absolute; inset-block: 0; inset-inline-start: 2px;
+  inline-size: 1px; background: var(--line);
+}
+.col-resizer:hover::before, .col-resizer:focus-visible::before, .col-resizer.dragging::before {
+  inset-inline-start: 1px; inline-size: 3px; background: var(--accent);
+}
+.col-resizer:focus-visible { outline: none; }
+
 @media (min-width: 701px) and (max-width: 1100px) {
   .studio {
     grid-template-columns: minmax(250px, 22rem) minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
   }
+  /* Two columns and a stacked canvas: there is no vertical seam to drag, so the
+     panels carry their own borders again. */
+  .studio > .col-resizer { display: none; }
+  .studio > section:first-of-type { border-inline-end: 1px solid var(--line); }
   .studio > .canvas {
     grid-area: 1 / 1 / 2 / -1;
     border-inline-end: none; border-bottom: 1px solid var(--line);
@@ -321,6 +353,7 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
    being edited, and the two long panels scroll inside themselves rather than
    running the page to 11,000px. */
 @media (max-width: 700px) {
+  .studio > .col-resizer { display: none; }
   body:has(> .studio) { display: block; height: auto; }
   .studio { grid-template-columns: 1fr; grid-template-rows: none; }
   .studio > section { border-inline-end: none; border-bottom: 1px solid var(--line); }

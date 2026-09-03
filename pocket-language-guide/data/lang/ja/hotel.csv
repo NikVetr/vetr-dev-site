@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
 hotel-basics.are-any-rooms-available,空室はありますか？,,kūshitsu wa arimasu ka?,kɯːɕitsɯ wa aɾimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-words.passport,パスポート,,pasupōto,pasɯpoːto,,2,japanese-reviewed-v6;ipa=hepburn
 room-problems.there-is-a-problem-with-the-room,部屋に問題があります,,heya ni mondai ga arimasu,heja ɲi moɴdai ɡa aɾimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
-hotel-requests.can-i-check-out-later,レイトチェックアウトできますか？,,reito chekkuauto dekimasu ka?,ɾeito chekkuauto dekimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+hotel-requests.can-i-check-out-later,レイトチェックアウトできますか？,,reito chekkuauto dekimasu ka?,ɾeito tɕekkɯaɯto dekimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 laundry.please-wash-these-clothes,この服を洗ってください,,kono fuku o aratte kudasai,kono ɸɯkɯ o aɾatte kɯdasai,,2,ja-agent-v1;ipa=hepburn
 hotel-basics.there-are-two-of-us,二人です,,futari desu,ɸɯtaɾi desɯ,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-words.room-key-card,ルームキー,,rūmu kī,ɾɯːmɯ kiː,,2,japanese-reviewed-v6;ipa=hepburn
@@ -10,11 +10,11 @@ room-problems.the-air-conditioning-is-broken,エアコンが壊れています,,
 hotel-requests.what-time-does-breakfast-start,朝食は何時からですか？,,chōshoku wa nanji kara desu ka?,tɕoːɕokɯ wa naɴdʑi kaɾa desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 laundry.where-is-a-laundromat,コインランドリーはどこですか？,,koin randorī wa doko desu ka?,koiɴ ɾaɴdoɾiː wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
 hotel-basics.i-have-a-reservation,予約しています,,yoyaku shiteimasu,jojakɯ ɕiteimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
-hotel-words.check-in,チェックイン,,chekkuin,chekkuin,,2,japanese-reviewed-v6;ipa=hepburn
+hotel-words.check-in,チェックイン,,chekkuin,tɕekkɯiɴ,,2,japanese-reviewed-v6;ipa=hepburn
 room-problems.there-is-no-hot-water,お湯が出ません,,oyu ga demasen,ojɯ ɡa demaseɴ,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-requests.can-i-store-my-luggage,荷物を預けられますか？,,nimotsu o azukeraremasu ka?,ɲimotsɯ o azɯkeɾaɾemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 laundry.when-will-it-be-ready,いつできますか？,,itsu dekimasu ka?,itsɯ dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
-hotel-words.check-out,チェックアウト,,chekkuauto,chekkuauto,,2,japanese-reviewed-v6;ipa=hepburn
+hotel-words.check-out,チェックアウト,,chekkuauto,tɕekkɯaɯto,,2,japanese-reviewed-v6;ipa=hepburn
 room-problems.can-i-change-rooms,部屋を変えられますか？,,heya o kaeraremasu ka?,heja o kaeɾaɾemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-basics.can-i-charge-my-phone,スマホを充電できますか？,,sumaho o jūden dekimasu ka?,sɯmaho o dʑɯːdeɴ dekimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-requests.no-housekeeping,掃除は不要です,,sōji wa fuyō desu,soːdʑi wa ɸɯjoː desɯ,,2,japanese-reviewed-v6;ipa=hepburn
@@ -40,9 +40,9 @@ hotel-basics.is-wi-fi-free,Wi-Fiは無料ですか？,,wai-fai wa muryō desu ka
 hotel-requests.another-towel-please,タオルをもう一枚お願いします,,taoru o mō ichimai onegaishimasu,taoɾɯ o moː itɕimai oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-words.luggage-storage,荷物預かり,,nimotsu azukari,ɲimotsɯ azɯkaɾi,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-basics.how-much-per-night,一泊いくらですか？,,ippaku ikura desu ka?,ippakɯ ikɯɾa desɯ ka,,2,ja-agent-v1;ipa=hepburn
-hotel-requests.what-time-is-check-out,チェックアウトは何時ですか？,,chekkuauto wa nanji desu ka?,chekkuauto wa naɴdʑi desɯ ka,,2,ja-agent-v1;ipa=hepburn
+hotel-requests.what-time-is-check-out,チェックアウトは何時ですか？,,chekkuauto wa nanji desu ka?,tɕekkɯaɯto wa naɴdʑi desɯ ka,,2,ja-agent-v1;ipa=hepburn
 hotel-basics.is-breakfast-included,朝食は付いていますか？,,chōshoku wa tsuiteimasu ka?,tɕoːɕokɯ wa tsɯiteimasɯ ka,,2,ja-agent-v1;ipa=hepburn
-hotel-requests.can-i-check-in-early,アーリーチェックインできますか？,,ārī chekkuin dekimasu ka?,aːɾiː chekkuin dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+hotel-requests.can-i-check-in-early,アーリーチェックインできますか？,,ārī chekkuin dekimasu ka?,aːɾiː tɕekkɯiɴ dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
 hotel-basics.may-i-see-the-room,部屋を見せてもらえますか？,,heya o misete moraemasu ka?,heja o misete moɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
 hotel-requests.another-night,もう一泊できますか？,,mō ippaku dekimasu ka?,moː ippakɯ dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
 hotel-basics.for-nights,{}泊お願いします,,{} haku onegaishimasu,{} hakɯ oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn

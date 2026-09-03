@@ -362,3 +362,78 @@ test('the clock band survives a custom phone size', async ({ page }) => {
     .getByRole('radio', { name: 'Custom' }).click();
   await expect(clock).toBeVisible();
 });
+
+test('a row highlight lands on the row it names', async ({ page }) => {
+  // Both overlays place themselves as percentages of the page's own units against
+  // the face div, so the div has to be exactly the drawn page. It was the panel's
+  // full width with the SVG centred inside at a fixed 672px, which offset every
+  // hit box and every drag handle from the ink.
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  const face = page.locator('.face.focused');
+  await expect(face).toBeVisible({ timeout: 90_000 });
+
+  const gap = await face.evaluate((el) => {
+    const svg = el.querySelector('svg');
+    const a = el.getBoundingClientRect();
+    const b = svg.getBoundingClientRect();
+    return { dx: Math.abs(a.left - b.left), dy: Math.abs(a.top - b.top),
+      dw: Math.abs(a.width - b.width), dh: Math.abs(a.height - b.height) };
+  });
+  // 2px of slack for the face's 1px border, which the client rect includes and the
+  // overlays' `inset: 0` correctly does not.
+  for (const [k, v] of Object.entries(gap)) {
+    expect(v, `${k} between the face box and the drawn page`).toBeLessThanOrEqual(2);
+  }
+
+  // And a hit box sits over real ink: the first row's box should contain a glyph.
+  const over = await face.evaluate((el) => {
+    const hit = el.querySelector('.hit');
+    const h = hit.getBoundingClientRect();
+    const texts = [...el.querySelectorAll('svg text')].map((t) => t.getBoundingClientRect());
+    return texts.some((t) => t.left >= h.left - 2 && t.right <= h.right + 2
+      && t.top >= h.top - 2 && t.bottom <= h.bottom + 2);
+  });
+  expect(over, 'the first row box should contain the row it refers to').toBe(true);
+});
+
+test('the seams between the studio panels can be dragged, and stay', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+
+  const format = page.locator('.studio > section').first();
+  const before = (await format.boundingBox()).width;
+
+  const seam = page.locator('#resize-format');
+  const box = await seam.boundingBox();
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 120, box.y + box.height / 2, { steps: 8 });
+  await page.mouse.up();
+
+  const after = (await format.boundingBox()).width;
+  expect(after).toBeGreaterThan(before + 80);
+
+  // A width you have to set on every visit is worse than one you cannot set.
+  await page.reload();
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const kept = (await page.locator('.studio > section').first().boundingBox()).width;
+  expect(Math.abs(kept - after)).toBeLessThan(4);
+});
+
+test('the tree offers only concepts that belong on this target', async ({ page }) => {
+  // 32 concepts mean something for one target only, and the tree listed all of
+  // them for every target -- ticked, and counted in the section total -- while
+  // the sheet correctly did not print them. A Spanish sheet offered a paragraph
+  // about Thai politeness particles.
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await page.locator('.tree summary').first().click();
+  await expect(page.locator('.tree')).not.toContainText('Thai politeness');
+
+  // And it is still there for the target it is about.
+  await page.goto('/customize.html?target=th&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await page.locator('.tree summary').first().click();
+  await expect(page.locator('.tree')).toContainText('Thai politeness');
+});

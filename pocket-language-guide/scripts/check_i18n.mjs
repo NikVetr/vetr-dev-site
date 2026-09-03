@@ -77,7 +77,8 @@ const keys = new Set(Object.keys(english).filter((k) => !k.startsWith('_')));
 // construction and cannot be found by grepping for `t(`: a warning or a proposed
 // fix by its own code, a field by its id (`ui/i18n.js` `warningText`), and a
 // romanisation system by the slug `data/registry/languages.csv` lists it under.
-const BY_CODE = ['warn.', 'fix.', 'field.', 'roman.'];
+const BY_CODE = ['warn.', 'fix.', 'field.', 'roman.',
+  'format.arrangement', 'format.split'];
 const byCode = [...keys].filter((k) => BY_CODE.some((p) => k.startsWith(p)));
 
 const missing = [...used.keys()].filter((k) => !keys.has(k)).sort();

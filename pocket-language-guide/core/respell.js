@@ -143,14 +143,19 @@ const STRESS = { 'ˈ': 1, 'ˌ': 2 };
  * /ɯː əː ɤː/. **A new table using `stress: 'acute'` or `length` should check its
  * own vowels are in here before designing around the behaviour.**
  */
-const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõıywаеёиоуыэюя]+/iu;
+const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõẽĩũıywаеёиоуыэюя]+/iu;
 /**
  * Letters that already carry the mark, so a second one would produce a character
- * no orthography has. `ё` is here because it is *inherently* stressed in Russian --
- * an unstressed `ё` does not exist -- so the acute on it is redundant, and at 4.4pt
- * it lands directly on top of the diaeresis.
+ * no orthography has.
+ *
+ * `ё` is here because it is *inherently* stressed in Russian -- an unstressed `ё`
+ * does not exist -- so the acute on it is redundant, and at 4.4pt it lands directly
+ * on top of the diaeresis. The tilde and circumflex vowels are the same case in
+ * Portuguese: *irmã*, *pão* and *jardim* carry the stress in the nasal itself and
+ * Portuguese never stacks a mark on a tilde, so 59 rows were printing `ã-fã́` and
+ * `a-nṍs`.
  */
-const ACCENTED = /[áéíóúàèìòùё]/i;
+const ACCENTED = /[áéíóúàèìòùёãõẽĩũâêîôû]/i;
 
 /**
  * Put a mark on the one letter of the nucleus that carries it.

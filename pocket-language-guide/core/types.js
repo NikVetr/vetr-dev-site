@@ -133,7 +133,9 @@
  * @property {number} padding  extra breathing room around every text element, in
  *   points at nominal type size. Named for what it does: larger means more space.
  *   It was called `density`, which meant the opposite of its effect.
- * @property {'two-column'|'one-row'|'stacked'} arrangement  item field layout
+ * @property {'mixed'|'two-column'|'one-row'|'stacked'} arrangement  item field layout
+ * @property {'consistent'|'adaptive'} [split]  whether the divider between an
+ *   item's two halves is solved once per section or once per row
  * @property {number} scale
  * @property {number} priority  keep only concepts whose `importance` reaches this,
  *   0 for all of them. A floor on the corpus rather than a count, so the same

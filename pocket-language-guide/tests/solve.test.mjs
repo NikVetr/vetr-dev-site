@@ -655,3 +655,38 @@ test('a column with no neighbour centres what the glue could not absorb', async 
   assert.ok(Math.min(...firsts) - cardBox.top < 8,
     'the reference card still starts its columns at the top of the box');
 });
+
+test('the divider is solved once per section unless asked for per row', async () => {
+  // Per-row solving lets a long phrase borrow width from a short gloss, and it
+  // buys real type size. It also moves the divider between an entry's two halves
+  // from row to row inside one section, which is what a reader looking at a
+  // section notices -- so the tidier behaviour is a setting.
+  //
+  // It is not the *default*, and that is measured rather than assumed: it takes
+  // the hand-built Japanese sheet from four faces to six, and four faces at
+  // `padding: 0` is this engine's acceptance criterion.
+  const base = await referenceSpec('es', 'en');
+  const even = await buildSheet(ctx, { ...base, split: 'consistent' });
+  const perRow = await buildSheet(ctx, base);
+  assert.equal(even.plan.faces.length, perRow.plan.faces.length,
+    'the trade is type size at a fixed face count, not more faces');
+  assert.ok(perRow.plan.scale > even.plan.scale + 0.05,
+    `per-row should afford visibly more type, got ${perRow.plan.scale} against ${even.plan.scale}`);
+});
+
+test('mixed is the default and leaves a reference table as a table', async () => {
+  // The setting was already being disobeyed with no way to say so: a reference
+  // table is one line of four columns whose point is that its rows line up, so it
+  // keeps its own grid whatever is chosen. `mixed` says that rather than implying
+  // "One per line" applies to the number tables too.
+  const base = await referenceSpec('zh-Hans', 'en');
+  assert.equal(base.arrangement, 'mixed');
+  const stacked = await buildSheet(ctx, { ...base, arrangement: 'stacked' });
+  const mixed = await buildSheet(ctx, base);
+  // The number table's rows are four cells on one line in both.
+  const wide = (/** @type {import('../core/types.js').LayoutPlan} */ plan) => plan.faces
+    .flatMap((f) => f.runs).filter((r) => /^\d+$/.test(r.text)).length;
+  assert.ok(wide(mixed.plan) > 0, 'the numerals are on the sheet');
+  assert.equal(wide(stacked.plan), wide(mixed.plan),
+    'a numeral table has the same cells whatever the arrangement');
+});

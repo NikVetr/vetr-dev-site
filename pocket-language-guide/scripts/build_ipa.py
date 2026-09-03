@@ -337,6 +337,15 @@ HEPBURN = {
     "pa": "pa", "pi": "pi", "pu": "pɯ", "pe": "pe", "po": "po",
     "ma": "ma", "mi": "mi", "mu": "mɯ", "me": "me", "mo": "mo",
     "ya": "ja", "yu": "jɯ", "yo": "jo", "wa": "wa",
+    # The extended katakana. These exist only in loanwords, which is exactly what a
+    # phrasebook's hotel and pharmacy rows are made of -- チェックイン, アセトアミノフェン,
+    # アナフィラキシー -- and without them `longest` matched nothing, the tail was
+    # carried out whole, and ten rows shipped as raw Hepburn: `chekkuin`.
+    "che": "tɕe", "she": "ɕe", "je": "dʑe",
+    "fa": "ɸa", "fi": "ɸi", "fe": "ɸe", "fo": "ɸo",
+    "ti": "ti", "di": "di", "tu": "tɯ", "du": "dɯ",
+    "tsa": "tsa", "tsi": "tsi", "tse": "tse", "tso": "tso",
+    "wi": "wi", "we": "we", "wo": "wo",
     # ヴ, which only appears in loanwords but does appear: ヴィーガン.
     "va": "va", "vi": "vi", "vu": "vɯ", "ve": "ve", "vo": "vo",
     "ra": "ɾa", "ri": "ɾi", "ru": "ɾɯ", "re": "ɾe", "ro": "ɾo",
@@ -616,6 +625,19 @@ def normalise(ipa, code):
     return apply_stress(ipa, STRESS.get(code, "keep"))
 
 
+# Letters that are inside the IPA alphabet and still cannot appear in *Japanese*
+# IPA, so seeing one means a Hepburn mora went unconverted rather than that the
+# reading is exotic. `u` is the sharp one: Japanese /ɯ/ is never `u`, so a single
+# `u` is proof the tail was carried out whole. This is what let `chekkuin` ship --
+# `check_alphabet` only knows what is IPA, not what is IPA *for this language*.
+ROUTE_FORBIDS = {"hepburn": set("ucflqx")}
+
+
+def check_route(ipa, route):
+    """The characters `route` should never produce. Non-empty means refuse the row."""
+    return sorted(set(ipa) & ROUTE_FORBIDS.get(route, set()))
+
+
 def check_alphabet(ipa):
     """The characters of `ipa` that are not IPA. Non-empty means refuse the row.
 
@@ -814,7 +836,10 @@ def build(code):
         ipa = assemble([(kind, normalise(transcribe(value) or "", code) if kind == "text"
                          else value) for kind, value in parts])
         ipa = unicodedata.normalize("NFC", re.sub(r"\s+", " ", ipa).strip())
-        stray = check_alphabet(ipa)
+        # `check_alphabet` is a whitelist of what is IPA; `check_route` is what this
+        # route can never legitimately produce. Both refuse the row, because a
+        # characterless failure and an unconverted mora are the same fault.
+        stray = check_alphabet(ipa) + check_route(ipa, method)
         if not ipa or stray:
             skipped["G2P failed"] += 1
             bad.update(stray or ["(empty)"])

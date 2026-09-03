@@ -180,6 +180,17 @@ function faceNode(input, svg, index, interactive) {
 
   node.setAttribute('role', 'group');
   node.setAttribute('aria-label', name);
+  // **The face div has to be exactly the drawn page, not the panel.** Both overlays
+  // -- the row hit boxes and the drag handles -- place themselves as percentages of
+  // the page's own units against this div, so any difference between the two boxes
+  // is a systematic offset. The div was block-level at the panel's full width while
+  // the SVG sat at its intrinsic 672px and was centred inside it, which on a wide
+  // window put every hit box and every margin bar about 1.16x too wide and 54px too
+  // far right, and made the drag arithmetic move the margin 14% less than the
+  // pointer. Giving the div the page's aspect and letting the SVG fill it makes the
+  // two boxes the same box -- which also closes the whitespace, since the card now
+  // takes the width the panel offers instead of a fixed 672px.
+  node.style.setProperty('--face-aspect', String(input.plan.pageW / input.plan.pageH));
 
   // The rows of a face are a list you pick one of, so focus doubles as the hover
   // highlight and activating a row is what reveals it in the content list.

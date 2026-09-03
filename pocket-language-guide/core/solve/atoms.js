@@ -349,7 +349,7 @@ function resolveAlign(align, mirror) {
 function itemAtoms(ctx, block, rows, withPaint) {
   const base = ctx.theme.templates[block.templateId ?? 'entry'];
   if (!base) throw new Error(`unknown template ${block.templateId}`);
-  const template = arrangeTemplate(base, ctx.spec.arrangement ?? 'two-column', ctx.shown);
+  const template = arrangeTemplate(base, ctx.spec.arrangement ?? 'mixed', ctx.shown);
   const s = ctx.scale;
   // All four sides, not just top and bottom. Holding the horizontal insets back was
   // meant to protect the usable width, but those insets are exactly the gap between
@@ -367,7 +367,19 @@ function itemAtoms(ctx, block, rows, withPaint) {
   // Shared-width templates solve their columns once for the whole group; phrase
   // rows solve per row, which is what lets a long phrase borrow width from a
   // short gloss.
-  const shared = template.widthMode === 'shared'
+  // Shared-width templates solve their columns once for the whole group. Phrase
+  // rows solve per row by default, which is what lets a long phrase borrow width
+  // from a short gloss.
+  //
+  // **That default is measured, not inherited.** Solving once per section instead
+  // makes every row's divider line up, which is what a reader looking at a section
+  // notices -- but it costs 5-23% of type size at the same face count, and it
+  // takes the hand-built Japanese sheet from four faces to six. Four faces at
+  // `padding: 0` is the acceptance criterion for this engine, and the reference's
+  // own per-row split search is why it is reachable. So `split: 'consistent'` is a
+  // setting rather than the default, and it is worth knowing it buys tidiness with
+  // paper.
+  const shared = template.widthMode === 'shared' || ctx.spec.split === 'consistent'
     ? chooseSharedWidths(grids, avail, template, ctx.measurer)
     : null;
 

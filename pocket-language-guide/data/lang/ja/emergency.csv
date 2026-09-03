@@ -49,7 +49,7 @@ police-consulate.i-need-it-for-my-insurance,保険の手続きに必要です,,h
 body-parts.ear,耳,,mimi,mimi,,2,ja-agent-v1;ipa=hepburn
 lost-rescue.my-companion-is-missing,仲間が見つかりません,,nakama ga mitsukarimasen,nakama ɡa mitsɯkaɾimaseɴ,,2,japanese-reviewed-v6;ipa=hepburn
 medical-conditions.i-am-pregnant,妊娠しています,,ninshin shiteimasu,ɲiɴɕiɴ ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
-pharmacy-symptoms.paracetamol-acetaminophen,アセトアミノフェン,,asetoaminofen,asetoaminofen,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.paracetamol-acetaminophen,アセトアミノフェン,,asetoaminofen,asetoaminoɸeɴ,,2,ja-agent-v1;ipa=hepburn
 police-consulate.i-need-an-interpreter,通訳が必要です,,tsūyaku ga hitsuyō desu,tsɯːjakɯ ɡa çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
 body-parts.leg,脚,足,ashi,aɕi,,2,ja-agent-v1;ipa=hepburn
 medical-conditions.i-carry-an-adrenaline-injector,アドレナリン自己注射薬があります,,adorenarin jiko chūshayaku ga arimasu,adoɾenaɾiɴ dʑiko tɕɯːɕajakɯ ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
@@ -88,13 +88,13 @@ police-consulate.i-did-not-agree-to-this-price,この値段には同意してい
 medical-conditions.do-not-give-me,{}は使わないでください,,{} wa tsukawanaide kudasai,{} wa tsɯkawanaide kɯdasai,,2,ja-agent-v1;ipa=hepburn
 pharmacy-symptoms.i-feel-dizzy,めまいがします,,memai ga shimasu,memai ɡa ɕimasɯ,,2,ja-agent-v1;ipa=hepburn
 police-consulate.please-write-the-report-number,受理番号を書いてください,,juri bangō o kaite kudasai,dʑɯɾi baɴɡoː o kaite kɯdasai,,2,ja-agent-v1;ipa=hepburn
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,アスピリンとイブプロフェンにアレルギーがあります,,asupirin to ibupurofen ni arerugī ga arimasu,asɯpiɾiɴ to ibɯpɯɾofen ɲi aɾeɾɯɡiː ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
-pharmacy-symptoms.ibuprofen,イブプロフェン,,ibupurofen,ibɯpɯɾofen,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,アスピリンとイブプロフェンにアレルギーがあります,,asupirin to ibupurofen ni arerugī ga arimasu,asɯpiɾiɴ to ibɯpɯɾoɸeɴ ɲi aɾeɾɯɡiː ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.ibuprofen,イブプロフェン,,ibupurofen,ibɯpɯɾoɸeɴ,,2,ja-agent-v1;ipa=hepburn
 police-consulate.it-happened-here,ここで起きました,,koko de okimashita,koko de okimaɕita,,2,ja-agent-v1;ipa=hepburn
 medical-conditions.my-injector-is-in-my-bag,自己注射薬はかばんの中にあります,,jiko chūshayaku wa kaban no naka ni arimasu,dʑiko tɕɯːɕajakɯ wa kabaɴ no naka ɲi aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
 pharmacy-symptoms.i-have-a-sore-throat,喉が痛いです,,nodo ga itai desu,nodo ɡa itai desɯ,,2,ja-agent-v1;ipa=hepburn
 police-consulate.may-i-have-a-copy-of-the-report,被害届のコピーをもらえますか？,,higai todoke no kopī o moraemasu ka?,çiɡai todoke no kopiː o moɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
-medical-conditions.i-am-allergic-to-sulfa-drugs,サルファ剤にアレルギーがあります,,sarufazai ni arerugī ga arimasu,saɾɯfazai ɲi aɾeɾɯɡiː ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
+medical-conditions.i-am-allergic-to-sulfa-drugs,サルファ剤にアレルギーがあります,,sarufazai ni arerugī ga arimasu,saɾɯɸazai ɲi aɾeɾɯɡiː ɡa aɾimasɯ,,2,ja-agent-v1;ipa=hepburn
 pharmacy-symptoms.can-i-get-this-medicine-here,この薬はここで買えますか？,,kono kusuri wa koko de kaemasu ka?,kono kɯsɯɾi wa koko de kaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
 police-consulate.i-will-not-sign-anything-i-cannot-read,読めない書類にはサインしません,,yomenai shorui ni wa sain shimasen,jomenai ɕoɾɯi ɲi wa saiɴ ɕimaseɴ,,2,ja-agent-v1;ipa=hepburn
 pharmacy-symptoms.bandage,包帯,,hōtai,hoːtai,,2,ja-agent-v1;ipa=hepburn
@@ -116,7 +116,7 @@ pharmacy-symptoms.is-this-safe-during-pregnancy,妊娠中でも飲めますか�
 emergency-medical.i-feel-unwell,具合が悪いです,,guai ga warui desu,ɡɯai ɡa waɾɯi desɯ,,2,japanese-reviewed-v6;ipa=hepburn
 lost-rescue.please-look-at-my-current-location,現在地を見てください,,genzaichi o mite kudasai,ɡeɴzaitɕi o mite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
 emergency-medical.this-is-an-emergency,緊急です,,kinkyū desu,kiɴkjɯː desɯ,,2,ja-agent-v1;ipa=hepburn
-emergency-medical.i-am-having-a-severe-allergic-reaction,アナフィラキシーです,重いアレルギー反応です,anafirakishī desu,anafirakishī desɯ,,2,ja-agent-v1;ipa=hepburn
+emergency-medical.i-am-having-a-severe-allergic-reaction,アナフィラキシーです,重いアレルギー反応です,anafirakishī desu,anaɸiɾakiɕiː desɯ,,2,ja-agent-v1;ipa=hepburn
 lost-rescue.my-child-is-missing,子供が見つかりません,,kodomo ga mitsukarimasen,kodomo ɡa mitsɯkaɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
 emergency-medical.i-cannot-breathe,息ができません,,iki ga dekimasen,iki ɡa dekimaseɴ,,2,ja-agent-v1;ipa=hepburn
 lost-rescue.i-do-not-know-where-i-am,ここがどこかわかりません,,koko ga doko ka wakarimasen,koko ɡa doko ka wakaɾimaseɴ,,2,ja-agent-v1;ipa=hepburn

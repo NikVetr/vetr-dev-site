@@ -19,6 +19,7 @@ import { renderFaces, highlight } from './preview.js';
 import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from './io.js';
 import { openQuiz, applyQuiz } from './quiz.js';
 import { attachHandles } from './handles.js';
+import { attachPanelResizers } from './panels.js';
 import { createAddTerm } from './add-term.js';
 import { warningText, applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
 
@@ -133,6 +134,8 @@ async function main() {
   }
 
   // --- banner and quiz ----------------------------------------------------
+
+  attachPanelResizers(/** @type {HTMLElement} */ (document.querySelector('.studio')));
 
   if (localStorage.getItem(BANNER_KEY) === '1') $('banner').hidden = true;
   $('banner-hide').addEventListener('click', () => {

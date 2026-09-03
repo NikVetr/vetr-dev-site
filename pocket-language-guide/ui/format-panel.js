@@ -14,7 +14,7 @@ import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
   itemGlyph, cutGlyph, priorityOptions,
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
-  redrawGlyphs, relabelGlyphs, reserveControl,
+  redrawGlyphs, relabelGlyphs, reserveControl, splitGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
@@ -341,11 +341,31 @@ export function createFormatPanel(input) {
     value: spec.arrangement,
     options: ARRANGEMENTS.map((a) => ({
       value: a.id,
-      caption: a.name,
-      title: a.name,
+      // From the catalogue rather than `ARRANGEMENTS[].name`, which is English in
+      // a source file the solver owns and cannot be translated.
+      caption: t(`format.arrangement.${a.id}`),
+      title: t(`format.arrangementTitle.${a.id}`),
       glyph: itemGlyph(arrangementShape(a.id, spec.fieldSet)),
     })),
     onChange: (value) => emit({ arrangement: value }),
+  });
+
+  // Where the divider between an entry's two halves sits. `Per row` is the
+  // default and is the reference sheet's own behaviour: it lets a long phrase
+  // borrow width from a short gloss, which is worth 5-23% of type size at the same
+  // face count and is why the hand-built Japanese sheet fits on four faces rather
+  // than six. `Even` solves it once for a whole section so the rows line up, and
+  // pays for that in paper.
+  const split = segmented({
+    label: t('format.splitLong'),
+    value: spec.split ?? 'adaptive',
+    options: /** @type {const} */ (['consistent', 'adaptive']).map((id) => ({
+      value: id,
+      caption: t(`format.split.${id}`),
+      title: t(`format.splitTitle.${id}`),
+      glyph: splitGlyph(id === 'consistent'),
+    })),
+    onChange: (value) => emit({ split: value }),
   });
 
   const theme = paletteControl({
@@ -544,6 +564,7 @@ export function createFormatPanel(input) {
     panelField(t('format.typeface'), [typefaceControl.group]),
     panelField(t('format.typeSize'), [typeSize.group]),
     panelField(t('format.entryLayout'), [arrangement.group]),
+    panelField(t('format.split'), [split.group]),
     panelField(t('format.textPadding'), [padding.group]),
     panelField(t('format.colours'), [theme.group, theme.custom]),
     panelField(t('format.ink'), [ink.group]),
@@ -589,6 +610,7 @@ export function createFormatPanel(input) {
       typeSize.select(next.scale);
       padding.select(next.padding);
       arrangement.select(next.arrangement);
+      split.select(next.split ?? 'adaptive');
       theme.sync(next);
       ink.select(next.inkMode);
       paper.select.value = next.paper.presetId;

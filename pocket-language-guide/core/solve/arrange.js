@@ -24,10 +24,28 @@ const ORDER = ['script', 'script_alt', 'roman', 'ipa', 'gloss', 'literal', 'resp
 /** Which side of the item a field belongs to, for the two-column arrangement. */
 const TARGET_SIDE = new Set(['script', 'script_alt', 'roman', 'ipa']);
 
-/** @typedef {'two-column'|'one-row'|'stacked'} Arrangement */
+/** @typedef {'mixed'|'two-column'|'one-row'|'stacked'} Arrangement */
 
-/** @type {{id:Arrangement, name:string}[]} */
+/**
+ * `mixed` is the default, and it earns a name because the setting was already
+ * being disobeyed with no way to say so.
+ *
+ * A reference table is one line of four columns whose whole point is that its rows
+ * line up, so it keeps its own grid whatever is chosen -- a sheet set to "One per
+ * line" still prints its number tables as tables, which is right and was silent.
+ * `mixed` says that out loud: phrase rows side by side, tables as tables. The three
+ * named shapes mean the same thing for phrase rows and differ only in which shape
+ * that is.
+ *
+ * It deliberately does *not* choose per section by measurement. That was tried:
+ * picking the shorter of two shapes per section makes the arrangement a function
+ * of the type scale, which makes `fits(scale)` non-monotonic and breaks the fit
+ * search's binary assumption -- Mandarin went from eight faces to ten and Japanese
+ * lost 0.14 of scale.
+ * @type {{id:Arrangement, name:string}[]}
+ */
 export const ARRANGEMENTS = [
+  { id: 'mixed', name: 'Mixed' },
   { id: 'two-column', name: 'Side by side' },
   { id: 'one-row', name: 'One line' },
   { id: 'stacked', name: 'One per line' },
@@ -48,6 +66,9 @@ export const ARRANGEMENTS = [
  */
 export function arrangeTemplate(template, arrangement, shown) {
   if (template.widthMode !== 'per-row') return template;
+  // `mixed` is resolved by the caller, which is the only place that can measure a
+  // whole section's rows; reaching here means nothing did, so take the default.
+  if (arrangement === 'mixed') arrangement = 'two-column';
 
   const fields = /** @type {FieldStyle[]} */ (template.fields)
     .filter((f) => shown.has(f.field))

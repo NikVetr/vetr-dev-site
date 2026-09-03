@@ -996,6 +996,32 @@ export function redrawGlyphs(group, glyphs) {
 }
 
 /**
+ * Three stacked entries whose divider is either in one place or in three, which
+ * is the whole of what the setting does.
+ * @param {boolean} even
+ */
+export function splitGlyph(even) {
+  const box = 30;
+  const svg = frame(box, box);
+  // The dividers, at a fixed fraction or at three different ones.
+  const at = even ? [0.5, 0.5, 0.5] : [0.38, 0.62, 0.47];
+  at.forEach((frac, i) => {
+    const y = 5 + i * 7;
+    const x = 3 + (box - 6) * frac;
+    // The target half, left-aligned; the gloss half, right-aligned. Same shape as
+    // `itemGlyph` draws, at a size that reads at 30px.
+    svg.append(svgEl('rect', { x: 3, y, width: (x - 3) * 0.72, height: 2, rx: 0.8, class: 'g-ink' }));
+    svg.append(svgEl('rect', {
+      x: box - 3 - (box - 3 - x) * 0.72, y, width: (box - 3 - x) * 0.72, height: 2, rx: 0.8, class: 'g-ink faint',
+    }));
+    svg.append(svgEl('line', {
+      x1: x, y1: y - 1.5, x2: x, y2: y + 3.5, class: 'g-accent-line',
+    }));
+  });
+  return svg;
+}
+
+/**
  * Re-set a glyph group's captions and tooltips, the same way `redrawGlyphs`
  * re-sets its drawings. Needed by any group whose labels name something the reader
  * chose, rather than naming a fixed setting -- the column list names the two

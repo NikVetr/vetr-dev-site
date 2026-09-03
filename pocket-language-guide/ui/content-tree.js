@@ -10,6 +10,7 @@
 // working through a list of them.
 
 import { t } from './i18n.js';
+import { appliesTo } from '../core/pack.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -84,6 +85,13 @@ export function createTree(input) {
     const title = input.sectionTitles?.[section.section_id] || section.title_en;
     const own = (corpus.conceptsByGroup[section.group] ?? [])
       .filter((c) => c.section_id === section.section_id)
+      // The same scope the sheet applies. 32 concepts mean something for one
+      // target only -- Chinese measure words, the yuan, Japanese counters, the
+      // Thai politeness note -- and the tree was listing all of them for every
+      // target, ticked, and counting them in the section total. So a Spanish
+      // sheet offered a paragraph about Thai politeness particles, said it was
+      // included, and then correctly did not print it.
+      .filter((c) => appliesTo(c, input.spec.target))
       .filter((c) => input.targetRows[c.concept_id] && input.sourceRows[c.concept_id])
       .map((c) => ({ conceptId: c.concept_id, custom: false }));
     // Terms the reader added live in the same list as the corpus ones, marked so
