@@ -1,6 +1,7 @@
 {
   "source": "ja",
   "accent": "ja-JP",
+  "status": "ready",
   "version": "1",
   "derives_from": "外来語の表記, Cabinet Notification No. 2 of 28 June 1991 (内閣告示第2号), superseding all earlier guidance: 第1表 and 第2表 read as one inventory, plus the sound-keyed items of 留意事項その2. The notification is keyed on sounds but described in kana; this file is that key re-keyed to IPA, which is the only change RESPELL-SYSTEMS.md asks for. Length and gemination are the notification's own 長音符号 ー and 促音 ッ. The epenthetic vowel that a mora script needs for every foreign coda is nowhere tabulated in the notification, and is read off its own 用例 instead -- テスト, ストライキ, ミルク, カップ, ベッド, ヒット, マッチ, ブリッジ -- which give ウ by default, オ after /t d/ and イ after /tʃ dʒ/.",
   "deviations": [
@@ -51,7 +52,7 @@
     {
       "sounds": "Korean tense consonants, espeak's ͈",
       "out": "dropped",
-      "why": "Japanese has no 顕声 series, and ッ -- the only device that sounds anything like it -- cannot begin a word, which is where most of the corpus's tense consonants are."
+      "why": "Japanese has no 濃音 series, and ッ -- the only device that sounds anything like it -- cannot begin a word, which is where most of the corpus's tense consonants are."
     },
     {
       "sounds": "/θ ð/",
@@ -77,6 +78,11 @@
       "sounds": "/ɯ ʉ ɤ/",
       "out": "ウ, ウ, オ",
       "why": "Turkish ı, Korean ㅡ, Mandarin -e and Thai เออ all fall on the two vowels Japanese can offer. Mandarin's apical /ɨ/ takes ウ (スー, シャンハイ) and Russian ы takes イ, discriminated by inventory rather than by target."
+    },
+    {
+      "sounds": "the dental and apical marks on /t̪ s̪ ts̪/ (Arabic, Vietnamese)",
+      "out": "the plain タ サ ツ rows",
+      "why": "Japanese has one coronal place, so the mark cannot be written. It carries real information in Arabic, where espeak uses it for ص and ط, so the emphatic quality of those two consonants is lost here just as /ˤ/ is below -- ص becomes サ行 and ط becomes タ行, which is what Japanese renderings of Arabic do. In Vietnamese it marks the ordinary /t/ and nothing is lost."
     },
     {
       "sounds": "/ʔ ʕ ˤ/",
@@ -368,6 +374,21 @@
       "out": "ッチュ"
     },
     {
+      "slot": "coda",
+      "ipa": "tʃ",
+      "out": "チ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ",
+      "out": "チ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂ",
+      "out": "チ"
+    },
+    {
       "slot": "any",
       "ipa": "tɕʰ",
       "out": "チュ"
@@ -491,21 +512,6 @@
       "slot": "coda",
       "ipa": "dʑ",
       "out": "ジ"
-    },
-    {
-      "slot": "coda",
-      "ipa": "tʃ",
-      "out": "チ"
-    },
-    {
-      "slot": "coda",
-      "ipa": "tɕ",
-      "out": "チ"
-    },
-    {
-      "slot": "coda",
-      "ipa": "ʈʂ",
-      "out": "チ"
     },
     {
       "slot": "coda",

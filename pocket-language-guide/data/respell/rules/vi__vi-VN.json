@@ -1,6 +1,7 @@
 {
   "source": "vi",
   "accent": "vi-VN",
+  "status": "ready",
   "version": "1",
   "derives_from": "Quy tắc chính tả tiếng Việt và phiên chuyển tiếng nước ngoài, adopted by the Hội đồng Quốc gia Chỉ đạo Biên soạn Từ điển Bách khoa Việt Nam at its plenary of 3-4 May 2000 under Prime Minister's Office letter 1635/VPCP-KG. Its rule for phiên âm is this project's rule verbatim -- transcribe “bằng các âm, vần và chữ Việt dựa vào cách đọc trực tiếp của nguyên ngữ”, using Vietnamese sounds, rhymes and letters and keyed on the direct pronunciation of the source language, not on its spelling. Taken from it: the permitted coda list n m p l c ch ng nh t (which adds l to native Vietnamese phonotactics on purpose), the permitted two-consonant onsets br khr xc đr, and the per-source instruction to read English, French and German directly. The hyphen between syllables is QĐ 07/2003/QĐ-BGDĐT verbatim -- “Đối với mỗi bộ phận tạo thành tên riêng, viết hoa chữ cái đầu và có gạch nối giữa các âm tiết” (Phơ-ri-đơ-rích Ăng-ghen, Mát-xcơ-va, An-giê-ri) -- so the separator this engine uses everywhere is, for a Vietnamese reader, the prescribed form and a marker of foreignness besides. The letters for each sound are read off the attested phiên âm corpus the instruments and the textbooks share: Tô-mát Ê-đi-xơn, Đích-ken-xơ, Sếch-xpia, Oa-sinh-tơn, Mát-xcơ-va, Ăng-ghen, Giăng, Giôn, Gơ-tơ, Huy-gô, Niu Oóc, Tô-ki-ô, I-ô-cô-ha-ma, Ca-na-đa, Ken-nơ-đi, Ô-xtrây-li-a, Bra-xin, Xin-ga-po. Standing above all of it: QĐ 1989/QĐ-BGDĐT (2018) keeps “hình thức phiên âm, có gạch nối các âm tiết” for primary-school textbooks with the original parenthesised, and since 15 June 2021 Báo Nhân Dân prints the original spelling with the phiên âm in parentheses -- Vladimir Putin (V.Pu-tin). What has declined is phiên âm as a name's orthography; what survives in law and in the national newspaper is phiên âm as a parenthetical pronunciation aid, which is exactly this column.",
   "deviations": [
@@ -96,7 +97,7 @@
     "max_onset": 2,
     "locale": "vi",
     "fixups": "all",
-    "reader_onsets": "br bɹ bɾ bʁ dr dɹ dɾ dʁ ɗr ɗɾ sk sc xr xɾ kʰr kʰɾ kʁ"
+    "reader_onsets": "bl br bɫ bɭ bɹ bɾ bʁ dl dr dɫ dɭ dɹ dɾ dʁ fl fr fɫ fɭ fɹ fɾ fʁ kl kr kɫ kɭ kɹ kɾ kʁ kʰl kʰr kʰɫ kʰɭ kʰɹ kʰɾ kʰʁ pl pr pɫ pɭ pɹ pɾ pʁ pʰl pʰr pʰɫ pʰɭ pʰɹ pʰɾ pʰʁ sc sk sl sp sr st sɫ sɭ sɹ sɾ sʁ tl tr tɫ tɭ tɹ tɾ tʁ tʰl tʰr tʰɫ tʰɭ tʰɹ tʰɾ tʰʁ vl vr vɫ vɭ vɹ vɾ vʁ xl xr xɫ xɭ xɹ xɾ xʁ ɗl ɗr ɗɫ ɗɭ ɗɹ ɗɾ ɗʁ ɡl ɡr ɡɫ ɡɭ ɡɹ ɡɾ ɡʁ"
   },
   "splits": [],
   "phonemes": [
@@ -192,16 +193,30 @@
     },
     {
       "slot": "onset",
-      "ipa": "k",
-      "out": "gh",
-      "unless_inventory": "#b #d #ɡ",
-      "if_nucleus": "jijɪ jeː juː jaw jeɪ ijɪ jɑʊ jaː jɑː jɔ̃ jɛː jɔj iːɪ jɔː iːj jɯː jiː jɛ̃ jej joʊ joː ɛːw ja ɛː ẽː jo iː iɪ ɛ̃ ij jã ɛʊ jə jɵ ɛw jæ jʌ jɛ iw jø je jɑ jɪ ew ju jɔ eʊ jɯ iʊ jõ ji eː jœ jʊ ĩ i ɪ ẽ e ī ɛ"
+      "ipa": "tɕʰ",
+      "out": "kh",
+      "if_inventory": "ʈʂ"
     },
     {
       "slot": "onset",
-      "ipa": "k",
-      "out": "g",
-      "unless_inventory": "#b #d #ɡ"
+      "ipa": "tɕʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "onset",
+      "ipa": "x",
+      "out": "h",
+      "if_inventory": "ʈʂ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "x",
+      "out": "kh"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "ch"
     },
     {
       "slot": "onset",
@@ -217,64 +232,23 @@
     },
     {
       "slot": "onset",
-      "ipa": "tɕ",
-      "out": "gi",
-      "unless_inventory": "#b #d #ɡ"
-    },
-    {
-      "slot": "any",
-      "ipa": "tɕ",
-      "out": "ch"
-    },
-    {
-      "slot": "any",
-      "ipa": "k",
-      "out": "k",
-      "if_nucleus": "jijɪ jeː juː jaw jeɪ ijɪ jɑʊ jaː jɑː jɔ̃ jɛː jɔj iːɪ jɔː iːj jɯː jiː jɛ̃ jej joʊ joː ɛːw ja ɛː ẽː jo iː iɪ ɛ̃ ij jã ɛʊ jə jɵ ɛw jæ jʌ jɛ iw jø je jɑ jɪ ew ju jɔ eʊ jɯ iʊ jõ ji eː jœ jʊ ĩ i ɪ ẽ e ī ɛ"
-    },
-    {
-      "slot": "any",
       "ipa": "k",
       "out": "c"
     },
     {
-      "slot": "any",
-      "ipa": "ɡ",
-      "out": "gh",
-      "if_nucleus": "jijɪ jeː juː jaw jeɪ ijɪ jɑʊ jaː jɑː jɔ̃ jɛː jɔj iːɪ jɔː iːj jɯː jiː jɛ̃ jej joʊ joː ɛːw ja ɛː ẽː jo iː iɪ ɛ̃ ij jã ɛʊ jə jɵ ɛw jæ jʌ jɛ iw jø je jɑ jɪ ew ju jɔ eʊ jɯ iʊ jõ ji eː jœ jʊ ĩ i ɪ ẽ e ī ɛ"
-    },
-    {
-      "slot": "any",
+      "slot": "onset",
       "ipa": "ɡ",
       "out": "g"
     },
     {
       "slot": "onset",
       "ipa": "ŋ",
-      "out": "ngh",
-      "if_nucleus": "jijɪ jeː juː jaw jeɪ ijɪ jɑʊ jaː jɑː jɔ̃ jɛː jɔj iːɪ jɔː iːj jɯː jiː jɛ̃ jej joʊ joː ɛːw ja ɛː ẽː jo iː iɪ ɛ̃ ij jã ɛʊ jə jɵ ɛw jæ jʌ jɛ iw jø je jɑ jɪ ew ju jɔ eʊ jɯ iʊ jõ ji eː jœ jʊ ĩ i ɪ ẽ e ī ɛ"
-    },
-    {
-      "slot": "onset",
-      "ipa": "ŋ",
       "out": "ng"
     },
     {
       "slot": "coda",
       "ipa": "ŋ",
-      "out": "nh",
-      "if_nucleus": "iːj ij iɪ iːɪ jiː ji jɪ ijɪ jijɪ iː i ɪ ī eː e"
-    },
-    {
-      "slot": "coda",
-      "ipa": "ŋ",
       "out": "ng"
-    },
-    {
-      "slot": "coda",
-      "ipa": "k",
-      "out": "ch",
-      "if_nucleus": "iːj ij iɪ iːɪ jiː ji jɪ ijɪ jijɪ iː i ɪ ī eː e"
     },
     {
       "slot": "coda",
@@ -488,6 +462,81 @@
     },
     {
       "slot": "coda",
+      "ipa": "kʰ",
+      "out": "c"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "coda",
+      "ipa": "cʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʰ",
+      "out": "p"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʰ",
+      "out": "t"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʰ",
+      "out": "t"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʰ",
+      "out": "c"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽʰ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂʰ",
+      "out": "t"
+    },
+    {
+      "slot": "coda",
       "ipa": "c",
       "out": "ch"
     },
@@ -579,11 +628,6 @@
     {
       "slot": "any",
       "ipa": "ʈʂʰ",
-      "out": "ch"
-    },
-    {
-      "slot": "any",
-      "ipa": "tɕʰ",
       "out": "ch"
     },
     {
@@ -730,11 +774,6 @@
       "slot": "any",
       "ipa": "h",
       "out": "h"
-    },
-    {
-      "slot": "any",
-      "ipa": "x",
-      "out": "kh"
     },
     {
       "slot": "any",
@@ -953,6 +992,11 @@
     },
     {
       "slot": "any",
+      "ipa": "tʃ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
       "ipa": "aː",
       "out": "a"
     },
@@ -1055,11 +1099,6 @@
     },
     {
       "slot": "any",
-      "ipa": "aj",
-      "out": "ai"
-    },
-    {
-      "slot": "any",
       "ipa": "aːj",
       "out": "ai"
     },
@@ -1080,6 +1119,11 @@
     },
     {
       "slot": "any",
+      "ipa": "aj",
+      "out": "ay"
+    },
+    {
+      "slot": "any",
       "ipa": "a̯j",
       "out": "ay"
     },
@@ -1091,12 +1135,12 @@
     {
       "slot": "any",
       "ipa": "aʊ",
-      "out": "au"
+      "out": "ao"
     },
     {
       "slot": "any",
-      "ipa": "aw",
-      "out": "au"
+      "ipa": "ɑʊ",
+      "out": "ao"
     },
     {
       "slot": "any",
@@ -1107,6 +1151,11 @@
       "slot": "any",
       "ipa": "aːʊ",
       "out": "ao"
+    },
+    {
+      "slot": "any",
+      "ipa": "aw",
+      "out": "au"
     },
     {
       "slot": "any",
@@ -1341,7 +1390,7 @@
     {
       "slot": "any",
       "ipa": "jʊ",
-      "out": "iu"
+      "out": "i-u"
     },
     {
       "slot": "any",
@@ -1884,6 +1933,18 @@
       "out": "uy"
     },
     {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "y",
+      "after_out": "ă â ă² ă³ ă⁴ ă⁵ ă⁶ â² â³ â⁴ â⁵ â⁶"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "o",
+      "after_out": "a e a² a³ a⁴ a⁵ a⁶ e² e³ e⁴ e⁵ e⁶"
+    },
+    {
       "slot": "any",
       "ipa": "j",
       "out": "i"
@@ -1952,10 +2013,6 @@
   ],
   "syllable_fixups": [
     {
-      "match": "i{2,}",
-      "out": "i"
-    },
-    {
       "match": "([aăâeêoôơuư])\\1",
       "out": "\\1"
     },
@@ -1964,240 +2021,287 @@
       "out": "\\1"
     },
     {
-      "match": "ia(ng|nh|ch|[mnptcl])",
-      "out": "iê\\1"
+      "match": "ă([²³⁴⁵⁶]?)$",
+      "out": "a\\1"
     },
     {
-      "match": "(ng|nh|ch|[mnptcl])(?:ng|nh|ch|[mnptcl])+([²³⁴⁵⁶]?)$",
-      "out": "\\1\\2"
+      "match": "â([²³⁴⁵⁶]?)$",
+      "out": "ơ\\1"
     },
     {
-      "match": "(?<![aăâeêioôơuư][iyou])(ch|[ptc])$",
-      "out": "\\1⁵"
+      "match": "ă([²³⁴⁵⁶]?)([iyou])",
+      "out": "a\\1\\2"
     },
     {
-      "match": "(ch|[ptc])[²³⁴]$",
-      "out": "\\1⁶"
+      "match": "ia([²³⁴⁵⁶]?)(ng|nh|ch|[mnptcl])",
+      "out": "iê\\1\\2"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a(.*)²$",
-      "out": "\\1\\2\\3à\\4"
+      "match": "c([iêe])",
+      "out": "k\\1"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a(.*)³$",
-      "out": "\\1\\2\\3ả\\4"
+      "match": "g([eê])",
+      "out": "gh\\1"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a(.*)⁴$",
-      "out": "\\1\\2\\3ã\\4"
+      "match": "g(i)(?![aăâeêioôơuưy])",
+      "out": "gh\\1"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a(.*)⁵$",
-      "out": "\\1\\2\\3á\\4"
+      "match": "i{2,}",
+      "out": "i"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a(.*)⁶$",
-      "out": "\\1\\2\\3ạ\\4"
+      "match": "(ng|nh|ch|[mnptcl])(?:ng|nh|ch|[mnptcl])+$",
+      "out": "\\1"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă(.*)²$",
-      "out": "\\1\\2\\3ằ\\4"
+      "match": "^iê([²³⁴⁵⁶]?)",
+      "out": "yê\\1",
+      "when": [
+        "no_onset"
+      ]
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă(.*)³$",
-      "out": "\\1\\2\\3ẳ\\4"
+      "match": "(?<!i)([iê])([²³⁴⁵⁶]?)ng$",
+      "out": "\\1\\2nh"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă(.*)⁴$",
-      "out": "\\1\\2\\3ẵ\\4"
+      "match": "(?<!i)([iê])([²³⁴⁵⁶]?)c$",
+      "out": "\\1\\2ch"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă(.*)⁵$",
-      "out": "\\1\\2\\3ắ\\4"
+      "match": "^([^²³⁴⁵⁶]*?)(?<![aăâeêioôơuư][iyou])(ch|[ptc])$",
+      "out": "\\1⁵\\2"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă(.*)⁶$",
-      "out": "\\1\\2\\3ặ\\4"
+      "match": "[²³⁴]((?:ch|[ptc])$)",
+      "out": "⁶\\1"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â(.*)²$",
-      "out": "\\1\\2\\3ầ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3à\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â(.*)³$",
-      "out": "\\1\\2\\3ẩ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ả\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â(.*)⁴$",
-      "out": "\\1\\2\\3ẫ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ã\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â(.*)⁵$",
-      "out": "\\1\\2\\3ấ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3á\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â(.*)⁶$",
-      "out": "\\1\\2\\3ậ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*o?)a([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ạ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e(.*)²$",
-      "out": "\\1\\2\\3è\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ằ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e(.*)³$",
-      "out": "\\1\\2\\3ẻ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ẳ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e(.*)⁴$",
-      "out": "\\1\\2\\3ẽ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ẵ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e(.*)⁵$",
-      "out": "\\1\\2\\3é\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3ắ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e(.*)⁶$",
-      "out": "\\1\\2\\3ẹ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)ă([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ặ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê(.*)²$",
-      "out": "\\1\\2\\3ề\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ầ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê(.*)³$",
-      "out": "\\1\\2\\3ể\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ẩ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê(.*)⁴$",
-      "out": "\\1\\2\\3ễ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ẫ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê(.*)⁵$",
-      "out": "\\1\\2\\3ế\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3ấ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê(.*)⁶$",
-      "out": "\\1\\2\\3ệ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)â([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ậ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô(.*)²$",
-      "out": "\\1\\2\\3ồ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3è\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô(.*)³$",
-      "out": "\\1\\2\\3ổ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ẻ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô(.*)⁴$",
-      "out": "\\1\\2\\3ỗ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ẽ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô(.*)⁵$",
-      "out": "\\1\\2\\3ố\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3é\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô(.*)⁶$",
-      "out": "\\1\\2\\3ộ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ou]?)e([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ẹ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ(.*)²$",
-      "out": "\\1\\2\\3ờ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ề\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ(.*)³$",
-      "out": "\\1\\2\\3ở\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ể\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ(.*)⁴$",
-      "out": "\\1\\2\\3ỡ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ễ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ(.*)⁵$",
-      "out": "\\1\\2\\3ớ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3ế\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ(.*)⁶$",
-      "out": "\\1\\2\\3ợ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[oui]?)ê([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ệ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư(.*)²$",
-      "out": "\\1\\2\\3ừ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ồ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư(.*)³$",
-      "out": "\\1\\2\\3ử\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ổ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư(.*)⁴$",
-      "out": "\\1\\2\\3ữ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ỗ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư(.*)⁵$",
-      "out": "\\1\\2\\3ứ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3ố\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư(.*)⁶$",
-      "out": "\\1\\2\\3ự\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[ui]?)ô([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ộ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i(.*)²$",
-      "out": "\\1\\2\\3ì\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ờ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i(.*)³$",
-      "out": "\\1\\2\\3ỉ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ở\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i(.*)⁴$",
-      "out": "\\1\\2\\3ĩ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ỡ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i(.*)⁵$",
-      "out": "\\1\\2\\3í\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3ớ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i(.*)⁶$",
-      "out": "\\1\\2\\3ị\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*[uiư]?)ơ([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ợ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o(.*)²$",
-      "out": "\\1\\2\\3ò\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ừ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o(.*)³$",
-      "out": "\\1\\2\\3ỏ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ử\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o(.*)⁴$",
-      "out": "\\1\\2\\3õ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ữ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o(.*)⁵$",
-      "out": "\\1\\2\\3ó\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3ứ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o(.*)⁶$",
-      "out": "\\1\\2\\3ọ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)ư([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ự\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u(.*)²$",
-      "out": "\\1\\2\\3ù\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ì\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u(.*)³$",
-      "out": "\\1\\2\\3ủ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ỉ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u(.*)⁴$",
-      "out": "\\1\\2\\3ũ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ĩ\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u(.*)⁵$",
-      "out": "\\1\\2\\3ú\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3í\\4\\5"
     },
     {
-      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u(.*)⁶$",
-      "out": "\\1\\2\\3ụ\\4"
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)i([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ị\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ò\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ỏ\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3õ\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3ó\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)o([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ọ\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u([^-]*?)²(.*)$",
+      "out": "\\1\\2\\3ù\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u([^-]*?)³(.*)$",
+      "out": "\\1\\2\\3ủ\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u([^-]*?)⁴(.*)$",
+      "out": "\\1\\2\\3ũ\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u([^-]*?)⁵(.*)$",
+      "out": "\\1\\2\\3ú\\4\\5"
+    },
+    {
+      "match": "^(.*-)?((?:qu|gi)?)([^aăâeêioôơuưy]*)u([^-]*?)⁶(.*)$",
+      "out": "\\1\\2\\3ụ\\4\\5"
+    },
+    {
+      "match": "[²³⁴⁵⁶]([^²³⁴⁵⁶]*)[²³⁴⁵⁶]",
+      "out": "\\1"
     },
     {
       "match": "[²³⁴⁵⁶]",
@@ -2216,12 +2320,22 @@
       ]
     },
     "ja": {
-      "comment": "Japanese /ɯ/ is a compressed back vowel, not the unrounded ư that Turkish ı, Korean ㅡ and Mandarin -i are: every Vietnamese rendering writes u (Tô-ki-ô, Mít-su-bi-si, su-shi). Same finding as the Russian table's Polivanov note, same fix.",
+      "comment": "Japanese /ɯ/ is a compressed back vowel, not the unrounded ư that Turkish ı, Korean ㅡ and Mandarin -i are: every Vietnamese rendering writes u (Tô-ki-ô, Mít-su-bi-si, su-shi). Same finding as the Russian table's Polivanov note, same fix. Japanese hi is [ç], where German ich is the same symbol and wants kh: h is the letter for the Japanese one (hi-tsu-yo, not khi-tsu-yo).",
       "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɯː",
+          "out": "u"
+        },
         {
           "slot": "any",
           "ipa": "ɯ",
           "out": "u"
+        },
+        {
+          "slot": "any",
+          "ipa": "ç",
+          "out": "h"
         }
       ]
     },
@@ -2232,6 +2346,16 @@
           "slot": "any",
           "ipa": "y",
           "out": "i"
+        }
+      ]
+    },
+    "tr": {
+      "comment": "espeak writes Turkish g before a front vowel as /ɟ/, which is a palatalised velar stop and wants g (and so gh, by the rule above): gi-she-si is [zi], not [ɟi]. The same symbol in Swahili (jambo) and Hindi is a voiced palatal affricate, where gi is the closest Vietnamese has. Measured: 89 Turkish against 427 Swahili and Hindi.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɟ",
+          "out": "g"
         }
       ]
     },

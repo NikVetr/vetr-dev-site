@@ -2,6 +2,7 @@
 //
 //   node scripts/render_preview.mjs [--target zh-Hans] [--source en] [--scale auto]
 //                                   [--out tmp/preview] [--dpi 200]
+//                                   [--geometry phone-1col] [--priority essential]
 //
 // This is the same SVG the browser exports, rendered through the same engine, so
 // it doubles as the eyeball check during development and the basis for the visual
@@ -12,6 +13,7 @@ import { createSheetContext, buildSheet, stacksFor } from '../core/sheet.js';
 import { planToSvg } from '../render/svg.js';
 import { cssFaces, fontFaceCss } from '../render/fonts.js';
 import { referenceSpec } from './spec.mjs';
+import { PRIORITY_STEPS } from '../core/pack.js';
 
 /** @param {string[]} argv */
 function parseArgs(argv) {
@@ -42,6 +44,11 @@ const spec = {
   padding: args.padding === undefined ? base.padding : Number(args.padding),
   arrangement: /** @type {any} */ (args.arrangement ?? base.arrangement),
   scale: args.scale === 'auto' ? 0 : Number(args.scale ?? 1),
+  // The phone wallpaper is only one face at the top of the ladder, so eyeballing
+  // it needs the step as well as the geometry.
+  priority: args.priority === undefined
+    ? base.priority
+    : /** @type {Record<string, number>} */ (PRIORITY_STEPS)[args.priority],
 };
 
 const t0 = performance.now();

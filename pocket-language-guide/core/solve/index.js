@@ -372,8 +372,18 @@ export function layout(input) {
       const columnAtoms = indices.map((i) => atoms[i]);
       const { offsets, residual } = placeColumn(columnAtoms, box.top, broken.slack[bin]);
       looseness.push(residual);
+      // Slack the glue could not absorb without opening a canyon is left over, and
+      // it has to go *somewhere*. Against a neighbour it goes at the bottom, because
+      // a short column whose first row no longer lines up with the column beside it
+      // looks like a mistake rather than like whitespace. With no neighbour there is
+      // nothing to line up with, so it splits above and below -- which is what the
+      // phone wallpaper needs: at the `essential` priority step the content is one
+      // face and ends 19% early, and 71pt of blank under the last row reads as the
+      // sheet having been cut off, between a reserved clock band above it and a
+      // reserved widget band below.
+      const drop = spec.geometry.columns === 1 ? residual / 2 : 0;
       columnAtoms.forEach((atom, k) => {
-        const dy = offsets[k];
+        const dy = offsets[k] + drop;
         if (!atom.paint) return;
         for (const r of atom.paint.rects) face.rects.push({ ...r, x: r.x + x, y: r.y + dy });
         for (const r of atom.paint.runs) face.runs.push({ ...r, x: r.x + x, y: r.y + dy });

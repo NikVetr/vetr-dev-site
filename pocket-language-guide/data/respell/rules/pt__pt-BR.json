@@ -1,0 +1,784 @@
+{
+  "source": "pt",
+  "accent": "pt-BR",
+  "version": "1",
+  "derives_from": "PLACEHOLDER",
+  "deviations": [
+    {
+      "rule": "x",
+      "why": "y"
+    }
+  ],
+  "approximations": [],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "acute",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 2,
+    "locale": "pt-BR",
+    "fixups": "all",
+    "reader_onsets": "PLACEHOLDER"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "onset",
+      "ipa": "ʁ",
+      "out": "rr",
+      "when": [
+        "not_word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "r",
+      "out": "rr",
+      "when": [
+        "not_word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "x",
+      "out": "rr",
+      "when": [
+        "not_word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "h",
+      "out": "rr",
+      "when": [
+        "not_word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ħ",
+      "out": "rr",
+      "when": [
+        "not_word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ç",
+      "out": "rr",
+      "when": [
+        "not_word_initial"
+      ],
+      "if_inventory": "ɸ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "r",
+      "if_inventory": "ɸ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "tch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "tch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂ",
+      "out": "j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "dj",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "tch"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ",
+      "out": "j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "dj",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "tch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "tch"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "dz",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒ",
+      "out": "j"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dj"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dj"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "dj"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "tch"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "b",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "d",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "g",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "t"
+    },
+    {
+      "slot": "onset",
+      "ipa": "s",
+      "out": "ç",
+      "when": [
+        "not_word_initial"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "mu"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "nu"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "nh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "nh"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "lh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "lh"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": "",
+      "after_out": "ch j nh lh"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʲ",
+      "out": "i",
+      "if_nucleus": "a o u ɑ ʌ ɔ ɐ ʊ ɵ ʉ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "ã"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "õ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "ẽ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "ẽ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ã"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "ẽ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "ĩ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "õ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "ũ"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ī",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "er"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "ç([ei])",
+      "out": "c\\1"
+    },
+    {
+      "match": "^(.*?)g([ei])",
+      "out": "\\1gu\\2"
+    },
+    {
+      "match": "([bcdfgklmnptvz])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "([aeiou])\\1",
+      "out": "\\1"
+    }
+  ],
+  "targets": {
+    "ko": {
+      "comment": "Korean eo",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "o"
+        }
+      ]
+    }
+  }
+}

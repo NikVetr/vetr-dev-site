@@ -344,14 +344,19 @@ def main():
             continue
         table = json.loads(path.read_text(encoding="utf-8"))
         where = path.stem
-        if where not in listed:
-            # A table under construction is a legitimate state, which is why
-            # `respell_check.mjs` reads this directory rather than the index: a
-            # reader can be run before it is published. So this is a warning, and
-            # the error is the other direction, below.
-            warnings.append(f"respell/rules/{where}: not in index.json, so nothing "
-                            f"loads it yet")
+        status = table.get("status", "draft")
+        if status not in ("draft", "ready"):
+            errors.append(f"respell/rules/{where}: status {status!r}, not draft or ready")
+        if status != "ready":
+            # A table under construction is a legitimate state -- it is worked on in
+            # place, because `respell_check.mjs` reads this directory so it can be
+            # run before it ships. So the checks below are held until its author
+            # says it is finished.
+            warnings.append(f"respell/rules/{where}: draft, so nothing loads it yet")
             continue
+        if where not in listed:
+            errors.append(f"respell/rules/{where}: ready but not in index.json -- "
+                          f"run `npm run shell`")
         if where != f"{table.get('source')}__{table.get('accent')}":
             errors.append(f"respell/rules/{where}: source/accent disagree with the filename")
         if not table.get("derives_from"):

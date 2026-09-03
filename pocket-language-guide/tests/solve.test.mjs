@@ -618,3 +618,40 @@ test('an item ticked by hand outranks the priority floor', async () => {
     spec: { ...trimmed, selection: { ...trimmed.selection, items: { [low]: true } } },
   })).has(low));
 });
+
+test('a column with no neighbour centres what the glue could not absorb', async () => {
+  // Slack the glue refuses -- opening it further would make a canyon -- is left
+  // over, and it has to go somewhere. Against a neighbour it belongs at the
+  // bottom: a short column whose first row no longer lines up with the column
+  // beside it looks like a mistake rather than like whitespace. Alone it has
+  // nothing to line up with.
+  //
+  // The phone wallpaper is why this matters. At the `essential` priority step the
+  // content is a single face and ends about a fifth of the way early, so 71pt sat
+  // under the last row -- between a band reserved for the clock above it and one
+  // reserved for widgets below, which made the sheet look cut off.
+  const presets = JSON.parse(await readFile('data/presets.json', 'utf8'));
+  const phone = {
+    ...(await referenceSpec('zh-Hans', 'en')),
+    geometry: { ...presets.geometry['phone-1col'] },
+    priority: PRIORITY_STEPS.essential,
+    autoFaces: true,
+  };
+  const built = await buildSheet(ctx, phone);
+  const box = contentBox(phone.geometry, phone.paper);
+  assert.equal(built.plan.faces.length, 1, 'the essential step is one wallpaper');
+  const ys = built.plan.faces[0].runs.map((r) => r.y);
+  const above = Math.min(...ys) - box.top;
+  const below = box.top + box.height - Math.max(...ys);
+  assert.ok(above > 20, `expected the block to sit off the top, ${above.toFixed(0)}pt`);
+  assert.ok(Math.abs(above - below) < 12,
+    `expected the leftover split evenly, ${above.toFixed(0)}pt above and ${below.toFixed(0)}pt below`);
+
+  // And the multi-column card is untouched, because there its columns must agree.
+  const card = await referenceSpec('zh-Hans', 'en');
+  const paper = await buildSheet(ctx, card);
+  const cardBox = contentBox(card.geometry, card.paper);
+  const firsts = paper.plan.faces[0].runs.map((r) => r.y);
+  assert.ok(Math.min(...firsts) - cardBox.top < 8,
+    'the reference card still starts its columns at the top of the box');
+});

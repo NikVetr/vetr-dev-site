@@ -49,7 +49,14 @@ const VOWELS = new Set([
   // the break lands mid-nucleus.
   ...'ɚɝ',
 ]);
+/**
+ * Tested on a phoneme's *base* character, like `VOWELS`, because a modifier does
+ * not stop a glide being one: Vietnamese writes a glottalised offglide `jˀ`, and
+ * matching the whole unit left it a coda consonant, so `t̪aːjˀ` syllabified as
+ * though it ended in a stop.
+ */
 const GLIDES = new Set('jwɥ');
+const isGlide = (/** @type {string} */ unit) => GLIDES.has(unit[0]);
 /**
  * Length, nasalisation, the non-syllabic mark and tone all belong to their vowel.
  *
@@ -229,7 +236,7 @@ export function onsetClusters(words) {
     /** @type {string[]} */ const run = [];
     for (const unit of phonemesOf(ipa)) {
       if (unit in STRESS || VOWEL_TAIL.has(unit)) continue;
-      if (VOWELS.has(unit[0]) || GLIDES.has(unit)) break;
+      if (VOWELS.has(unit[0]) || isGlide(unit)) break;
       run.push(fold(unit));
     }
     // Two and three *phonemes*, so /tɕʰ/ is one unit rather than a three-consonant
@@ -298,14 +305,14 @@ export function syllabify(ipa, clusters = new Set(), maxOnset = 3) {
   for (let i = 0; i < n;) {
     if (!VOWELS.has(ph[i][0])) { i += 1; continue; }
     let hi = i;
-    while (hi + 1 < n && (GLIDES.has(ph[hi + 1]) || 'ɪʊ'.includes(ph[hi + 1][0]))) hi += 1;
-    while (hi > i && GLIDES.has(ph[hi]) && hi + 1 < n && VOWELS.has(ph[hi + 1][0])) hi -= 1;
+    while (hi + 1 < n && (isGlide(ph[hi + 1]) || 'ɪʊ'.includes(ph[hi + 1][0]))) hi += 1;
+    while (hi > i && isGlide(ph[hi]) && hi + 1 < n && VOWELS.has(ph[hi + 1][0])) hi -= 1;
     spans.push([i, hi]);
     i = hi + 1;
   }
   const taken = new Set(spans.flatMap(([lo, hi]) => Array.from({ length: hi - lo + 1 }, (_, k) => lo + k)));
   for (const span of spans) {
-    while (span[0] - 1 >= 0 && GLIDES.has(ph[span[0] - 1]) && !taken.has(span[0] - 1)) {
+    while (span[0] - 1 >= 0 && isGlide(ph[span[0] - 1]) && !taken.has(span[0] - 1)) {
       span[0] -= 1;
       taken.add(span[0]);
     }
@@ -586,7 +593,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // diphthong is a vowel followed by a glide or by one of the two lax vowels
       // `syllabify` absorbs, and its head is therefore the first element.
       const tail = [...s.nucleus].filter((c) => !VOWEL_TAIL.has(c)).pop() ?? '';
-      const falling = s.nucleus.length > 1 && (GLIDES.has(tail) || 'ɪʊ'.includes(tail));
+      const falling = s.nucleus.length > 1 && (isGlide(tail) || 'ɪʊ'.includes(tail));
       for (const f of fixups) {
         // The syllable's own text, not `''`: a fixup's `after_out` asks what this
         // syllable has emitted so far, and against an empty string every such

@@ -74,14 +74,27 @@ const overrides = files
   .map((f) => f.slice('data/respell/overrides/'.length, -'.csv'.length));
 const overrideIndex = `${JSON.stringify(overrides, null, 2)}\n`;
 
-// And which reading languages have a respelling rule table. Most do not yet, and a
-// pair whose reader has none simply gets no generated respelling -- so this list is
-// what stops the app asking for sixteen files that were never written.
-const ruleTables = files
+// And which reading languages have a *finished* respelling rule table. Most have
+// none yet, and a pair whose reader has none simply gets no generated respelling --
+// so this list is what stops the app asking for sixteen files that were never
+// written.
+//
+// **`status: 'ready'` is required, and absent means draft.** This list used to be
+// every file in the directory, which meant a table shipped the moment it existed:
+// a half-written Portuguese draft with the literal string `PLACEHOLDER` in it went
+// into the gallery's thumbnails on the next `npm run shell`, and each rebuild
+// silently re-added tables that had been taken out. A table is worked on in place,
+// because `respell_check.mjs` reads the directory so it can be run before it is
+// published -- so being finished has to be a claim its author makes, the same way
+// `languages.csv` carries `status` and the gallery honours it.
+const ready = await Promise.all(files
   .filter((f) => f.startsWith('data/respell/rules/') && f.endsWith('.json')
     && !f.endsWith('/index.json'))
-  .map((f) => f.slice('data/respell/rules/'.length, -'.json'.length));
-const rulesIndex = `${JSON.stringify(ruleTables, null, 2)}\n`;
+  .map(async (f) => {
+    const table = JSON.parse(await readFile(join(ROOT, f), 'utf8'));
+    return table.status === 'ready' ? f.slice('data/respell/rules/'.length, -'.json'.length) : '';
+  }));
+const rulesIndex = `${JSON.stringify(ready.filter(Boolean), null, 2)}\n`;
 
 // This script's own output, so write it before checking that the list is real.
 if (!CHECK) {

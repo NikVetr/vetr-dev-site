@@ -1,6 +1,7 @@
 {
   "source": "es",
   "accent": "es-419",
+  "status": "ready",
   "version": "1",
   "derives_from": "RAE/ASALE, Diccionario panhispanico de dudas, seccion «Representacion de los fonemas y de la pronunciacion de voces o expresiones»: its bracket alphabet (ordinary Spanish letters, deliberately not IPA), its four extra signs, its rule that the tonic vowel always carries a tilde even where ordinary spelling would not, and its decision to give the seseante pronunciation first «por ser la mayoritaria». Secondary: es.wikipedia Ayuda:AFI/* «Aproximacion en espanol» (CC BY-SA 4.0) for /ʁ/ and /ç/, which the DPD does not cover.",
   "deviations": [

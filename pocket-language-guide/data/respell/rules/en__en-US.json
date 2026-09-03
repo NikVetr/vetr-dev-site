@@ -1,6 +1,7 @@
 {
   "source": "en",
   "accent": "en-US",
+  "status": "ready",
   "version": "pilot-1",
   "policy": {
     "syllable_separator": "-",

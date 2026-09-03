@@ -1,6 +1,7 @@
 {
   "source": "ru",
   "accent": "ru-RU",
+  "status": "ready",
   "version": "1",
   "derives_from": "Prakticheskaya transkriptsiya, read off the middle column. ru.wikipedia's *Anglo-russkaya prakticheskaya transkriptsiya* (CC BY-SA) consolidates the GUGK instruction (Instruktsiya po russkoy peredache angliyskikh geograficheskikh nazvaniy, ed. Anenberg 1975) and Gilyarevskiy & Starostin's appendix table for transmitting English phonemes as three columns -- Orfografiya, Proiznosheniye v RP (IPA), Peredayotsya po-russki -- and the projection taken here is columns two to three, which is the whole of the adaptation RESPELL-SYSTEMS.md calls cheap. Where the English key has no entry for a sound, the letter comes from the GUGK per-language instruction that owns it: Palladius for Mandarin (voiced letters for the unaspirated series, -n/-ng), Kontsevich for Korean (tense = doubled, aspirated = Cx), the India instruction for Hindi (kh -> kx, bh -> bx), the Thai instruction (ph -> px), and the Romance and Germanic instructions for the front rounded vowels (yo) and the nasal vowels (an/on/en). Stress: znak udareniya, prescribed by the academic orthography rules for dictionary headwords and for texts aimed at learners of Russian -- exactly this register.",
   "deviations": [
@@ -14,7 +15,7 @@
     },
     {
       "rule": "Polivanov for Japanese, Palladius for Mandarin, Kontsevich for Korean, taken as inventories and not as indexes",
-      "why": "All three are keyed on the target's own script -- kana rows, pinyin letters, Hangul jamo -- so all three fail RESPELL-SYSTEMS.md's own respelling test, and one of them (Polivanov) is famous for it: shi -> si, chi -> ti. The sound-keyed answer wins where they disagree, so /ɕ/ is shch and /tɕ/ is ch. Their *inventories* are borrowed in full, and Palladius's voiced-letter trick for the unaspirated series is kept because it preserves a contrast, guarded by unless_inventory rather than by target -- the same discriminator the Spanish table uses, and Mandarin is again the only language in the corpus with no voiced stop series."
+      "why": "All three are keyed on the target's own script -- kana rows, pinyin letters, Hangul jamo -- so all three fail RESPELL-SYSTEMS.md's own respelling test, and one of them (Polivanov) is famous for it: shi -> si, chi -> ti. The sound-keyed answer wins where they disagree, so /ɕ/ is shch and /tɕ/ is ch. Their *inventories* are borrowed in full, and Palladius's voiced-letter trick for the unaspirated series is kept because it preserves a contrast, guarded by unless_inventory rather than by target -- the same discriminator the Spanish table uses, and Mandarin is again the only language in the corpus with no voiced stop series. The guard is a *presence* test rather than the word-initial test #b #d #g, and deliberately: the question it asks is whether the target has any voiced stop for b/d/g to collide with, and Korean does have one allophonically between vowels, which espeak writes and this table already spells b/d/g. Measured: switching these fifteen guards to #b #d #g changes 598 of 712 Korean rows and every one is a regression, since it hands Korean the whole Palladius package -- pusan -> busan, tx -> t, ch -> tsz, coda -n -> -ny. Word position is the right question for a different rule."
     },
     {
       "rule": "Coda /l/ is soft (l + soft sign) for fifteen of the sixteen targets, where the English instruction gives plain l",
@@ -156,6 +157,11 @@
       "slot": "any",
       "ipa": "ts",
       "out": "ц"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "тс"
     },
     {
       "slot": "any",
@@ -332,11 +338,6 @@
       "slot": "any",
       "ipa": "ɣ",
       "out": "г"
-    },
-    {
-      "slot": "coda",
-      "ipa": "c",
-      "out": "к"
     },
     {
       "slot": "any",
@@ -998,7 +999,7 @@
       "out": "н\\1"
     },
     {
-      "match": "([мн])[мн]",
+      "match": "([аеёиоуыэюя][мн])[мн]",
       "out": "\\1"
     },
     {
@@ -1059,6 +1060,11 @@
           "out": "л"
         },
         {
+          "slot": "any",
+          "ipa": "ʔ",
+          "out": "т"
+        },
+        {
           "slot": "coda",
           "ipa": "ts",
           "out": "тс"
@@ -1102,8 +1108,13 @@
       ]
     },
     "vi": {
-      "comment": "espeak writes Vietnamese ư as /y/, which is the back unrounded vowel Russian writes with a hard y (nuoc -> nyok), not a front rounded one.",
+      "comment": "espeak writes Vietnamese ư as /y/, which is the back unrounded vowel Russian writes with a hard y (nuoc -> nyok), not a front rounded one. Final -c is /k/ (nuoc, duoc, chuc), which is a Vietnamese orthographic fact and not a fact about codas: as a general coda rule it stole Hindi's coda च and छ, spelling march марк and panch панк.",
       "phonemes": [
+        {
+          "slot": "coda",
+          "ipa": "c",
+          "out": "к"
+        },
         {
           "slot": "any",
           "ipa": "y",
@@ -1140,5 +1151,5 @@
       ]
     }
   },
-  "note": "Reader's legend, per RESPELL-SYSTEMS.md: none needed. Every letter here is ordinary Russian and the only convention to learn is the acute, which the orthography rules already prescribe for this register. The sanctioned fallback if the acute is unavailable for technical reasons is policy.stress = caps, which Russian lexicography documents in exactly those terms. Both devices are live: acute puts the znak udareniya on the nucleus and caps gives mer-SI. One nit worth knowing: the acute stacks on yo on 115 rows, and yo is inherently stressed in Russian, so the mark there is redundant."
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: none needed. Every letter here is ordinary Russian and the only convention to learn is the acute, which the orthography rules already prescribe for this register. The sanctioned fallback if the acute is unavailable for technical reasons is policy.stress = caps, which Russian lexicography documents in exactly those terms. Both devices are live: acute puts the znak udareniya on the nucleus and caps gives mer-SI. One nit worth knowing: the acute stacks on yo on 115 rows, and yo is inherently stressed in Russian, so the mark there is redundant. --units was read entry by entry: the seventeen remaining are all deliberate, being either a two-letter Russian digraph (dzh, dz, pf) or a diacritic dropped on purpose (dental, pharyngealised, syllabic) or the GUGK India aspirate series (bx dx gx chx)."
 }

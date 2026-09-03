@@ -64,6 +64,15 @@ once. `content/RESPELL-SYSTEMS.md` surveys what to derive each one from: six
 languages have a published, sound-keyed key to borrow, four have a tradition to
 re-key, and seven have to be invented. Start there, not from a blank file.
 
+**A table declares when it is finished, with `status: "ready"`.** It is worked on
+in place, because `respell_check.mjs` reads the rules directory so a table can be
+run before it ships -- so being finished has to be a claim rather than a
+consequence of the file existing. `npm run shell` builds `index.json` from the
+tables that say `ready`, the app loads only what is in that index, and
+`validate_data.py` holds every check below until then. Absent means draft. This
+existed as the file's mere presence at first, and a half-written draft with the
+literal string `PLACEHOLDER` in it went straight into the gallery's thumbnails.
+
 **A rule table is a borrowed key plus named departures from it.** Every standard
 worth borrowing needs overruling somewhere, and always for the same reason: the
 standard produces a *permanent* spelling and we produce a disposable hint. So
