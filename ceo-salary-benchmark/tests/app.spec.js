@@ -1181,7 +1181,6 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
       revenue: String(model.rpProfile.revenue),
       staff: String(model.rpProfile.staff),
       highestOther: String(model.rpProfile.highest_other_base),
-      year: String(model.rpProfile.compensation_year),
       focus: model.rpProfile.focus_area,
       ea: model.rpProfile.ea_relationship,
       type: model.rpProfile.organization_type,
@@ -1193,6 +1192,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
       cashProxyFilings: model.training.cashProxyFilings,
       advertisedRecords: model.training.advertisedRecords,
       comparisonRows: model.comparison.length,
+      comparison: model.comparison.map(({ key, label }) => ({ key, label })),
     };
   });
   await page.locator("#stream-select").selectOption("incumbents");
@@ -1205,7 +1205,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator("#model-revenue")).toHaveValue(defaults.revenue);
   await expect(page.locator("#model-staff")).toHaveValue(defaults.staff);
   await expect(page.locator("#model-highest-other")).toHaveValue(defaults.highestOther);
-  await expect(page.locator("#model-year")).toHaveValue(defaults.year);
+  await expect(page.locator("#model-year")).toHaveCount(0);
   await expect(page.locator("#model-focus")).toHaveValue(defaults.focus);
   await expect(page.locator("#model-ea")).toHaveValue(defaults.ea);
   await expect(page.locator("#model-organization-type")).toHaveValue(defaults.type);
@@ -1220,6 +1220,22 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator(".model-interval-50")).toHaveCount(1);
   await expect(page.locator(".model-interval-80")).toHaveCount(1);
   await expect(page.locator(".model-interval-95")).toHaveCount(1);
+  const intervalGeometry = await page.locator("#salary-chart").evaluate((svg) => [50, 80, 95].map((level) => {
+    const interval = svg.querySelector(`.model-interval-${level}`);
+    const density = svg.querySelector(".model-density-area");
+    return {
+      tag: interval?.tagName.toLowerCase(),
+      path: interval?.getAttribute("d") || "",
+      intervalHeight: interval?.getBBox().height || 0,
+      densityHeight: density?.getBBox().height || 0,
+    };
+  }));
+  intervalGeometry.forEach(({ tag, path, intervalHeight, densityHeight }) => {
+    expect(tag).toBe("path");
+    expect(path.match(/L/g)?.length || 0).toBeGreaterThan(3);
+    expect(intervalHeight).toBeGreaterThan(0);
+    expect(intervalHeight).toBeLessThanOrEqual(densityHeight + 0.5);
+  });
   await expect(page.locator(".rp-reference-guide")).toHaveCount(1);
   await expect(page.locator(".rp-chart-marker")).toHaveCount(1);
   const sharedQuantileMarkCount = await page.locator(".curve-quantile-mark").count();
@@ -1269,11 +1285,66 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator('tbody tr[data-id^="SRC-AD"]')).not.toHaveCount(0);
   await expect(page.locator("#organization-table .header-filter-menu:visible")).toHaveCount(0);
   await expect(page.locator("#model-profile-support")).toHaveText(/^(Typical|Sparse)$/);
-  await page.locator("#model-details summary").click();
+  await expect(page.locator("#chart-view-content #model-method-description")).toHaveCount(0);
+  await expect(page.getByRole("tab", { name: "Robustness" })).toBeHidden();
+  const modelDetailsTab = page.getByRole("tab", { name: "Model details" });
+  await expect(modelDetailsTab).toBeVisible();
+  await expect(page.locator("#results-panel-model-details")).toBeHidden();
+  await page.getByRole("tab", { name: "Quantiles" }).focus();
+  await page.getByRole("tab", { name: "Quantiles" }).press("End");
+  await expect(modelDetailsTab).toBeFocused();
+  await expect(modelDetailsTab).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#results-panel-model-details")).toBeVisible();
   await expect(page.locator("#model-method-description")).toBeVisible();
   await expect(page.locator("#model-comparison-body tr")).toHaveCount(defaults.comparisonRows);
   await expect(page.locator("#model-comparison-body tr.is-selected")).toHaveCount(1);
   await expect(page.locator("#model-contributions .model-contribution")).not.toHaveCount(0);
+  await expect(page.locator("#model-comparison-body tr.is-actionable")).toHaveCount(3);
+  await expect(page.locator("#model-comparison-body .model-method-button")).toHaveCount(3);
+  const benchmarkRows = defaults.comparison.filter(({ key }) => !["bayesian", "bayesian_ranges", "gam"].includes(key));
+  await expect(page.locator("#model-comparison-body .model-benchmark-label small")).toHaveCount(benchmarkRows.length);
+  for (const { key } of benchmarkRows) {
+    const row = page.locator(`#model-comparison-body tr[data-method-key="${key}"]`);
+    await expect(row).not.toHaveClass(/is-actionable/);
+    await expect(row).not.toHaveAttribute("tabindex");
+  }
+  const compactTable = await page.locator(".model-comparison-scroll").evaluate((scroll) => {
+    const table = scroll.querySelector("table");
+    const columnWidths = [...table.querySelectorAll("thead th")].map((cell) => cell.getBoundingClientRect().width);
+    return {
+      scrollWidth: scroll.getBoundingClientRect().width,
+      tableWidth: table.getBoundingClientRect().width,
+      tableMinWidth: getComputedStyle(table).minWidth,
+      columnWidths,
+    };
+  });
+  expect(compactTable.tableMinWidth).toBe("0px");
+  expect(compactTable.tableWidth).toBeLessThan(compactTable.scrollWidth + 160);
+  expect(compactTable.columnWidths[0]).toBeGreaterThan(Math.max(...compactTable.columnWidths.slice(1)));
+
+  await page.getByRole("button", { name: "About prediction method" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("both numeric profile inputs and categorical fields");
+  await expect(page.locator("#help-tooltip")).toContainText("not the categorical fields");
+
+  await page.locator('#model-comparison-body tr[data-method-key="bayesian_ranges"] td').first().click();
+  await expect(page.locator("#model-method")).toHaveValue("bayesian");
+  await expect(page.locator("#model-use-ad-ranges")).toBeChecked();
+  await expect(page.locator('#model-comparison-body tr[data-method-key="bayesian_ranges"]')).toHaveClass(/is-selected/);
+
+  const gamRow = page.locator('#model-comparison-body tr[data-method-key="gam"]');
+  await gamRow.focus();
+  await gamRow.press("Enter");
+  await expect(page.locator("#model-method")).toHaveValue("gam");
+  await expect(page.locator("#model-use-ad-ranges")).toBeDisabled();
+  await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
+  await expect(page.locator("#model-settings-note")).toContainText("not the categorical fields");
+
+  const bayesianRow = page.locator('#model-comparison-body tr[data-method-key="bayesian"]');
+  await bayesianRow.focus();
+  await bayesianRow.press("Space");
+  await expect(page.locator("#model-method")).toHaveValue("bayesian");
+  await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
+  await expect(page.locator("#model-settings-note")).toContainText("numeric profile inputs and categorical fields");
 
   const filingOnlyExpected = await page.locator("#stat-n").textContent();
   await page.locator("#model-use-ad-ranges").check();
@@ -1299,6 +1370,10 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   const expectedBefore = await page.locator("#stat-n").textContent();
   await page.locator("#model-expenses").fill(String(Number(defaults.expenses) * 2));
   await expect.poll(() => page.locator("#stat-n").textContent()).not.toBe(expectedBefore);
+  await selectChartView(page, "histogram");
+  await expect(modelDetailsTab).toBeHidden();
+  await expect(page.getByRole("tab", { name: "Robustness" })).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Quantiles" })).toHaveAttribute("aria-selected", "true");
   expect(errors).toEqual([]);
 });
 
@@ -1381,6 +1456,10 @@ test("model state round-trips through the compact URL and participates in undo a
   const sharedUrl = page.url();
   const predictionBeforeReload = await page.locator("#stat-n").textContent();
   expect(sharedUrl.length).toBeLessThan(500);
+  const encodedModelProfile = JSON.parse(Buffer.from(
+    new URL(sharedUrl).searchParams.get("s"), "base64url",
+  ).toString()).y;
+  expect(encodedModelProfile).not.toHaveProperty("y");
 
   await page.reload();
   await expect(chartViewTab(page, "model")).toHaveAttribute("aria-selected", "true");

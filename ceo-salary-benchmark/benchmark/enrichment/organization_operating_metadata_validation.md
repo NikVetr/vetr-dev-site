@@ -50,13 +50,13 @@ All percentages use 201 organizations as the denominator.
 |  | `false` | 66 | 32.8% |
 |  | `unknown` | 86 | 42.8% |
 |  | **Resolved (`true` or `false`)** | **115** | **57.2%** |
-| Serves as fiscal sponsor | `true` | 13 | 6.5% |
+| Serves as fiscal sponsor | `true` | 14 | 7.0% |
 |  | `false` | 4 | 2.0% |
-|  | `unknown` | 184 | 91.5% |
-|  | **Resolved (`true` or `false`)** | **17** | **8.5%** |
+|  | `unknown` | 183 | 91.0% |
+|  | **Resolved (`true` or `false`)** | **18** | **9.0%** |
 
-Overall row-level confidence is high for 65 organizations (32.3%), medium for
-91 (45.3%), and low for 45 (22.4%). Confidence is a single row-level field, not
+Overall row-level confidence is high for 66 organizations (32.8%), medium for
+90 (44.8%), and low for 45 (22.4%). Confidence is a single row-level field, not
 a separate assessment for each claim. All 45 low-confidence rows have
 `unknown` fiscal-sponsor status; 45 of the 86 unknown remote rows are low
 confidence.
@@ -116,6 +116,6 @@ necessarily an unresolved classification.
 The layer is structurally complete for the current 201-organization universe,
 with internally consistent controlled values and a valid two-claim manifest.
 Downstream use should retain `unknown` as its own category and should disclose
-the materially lower resolved coverage for fiscal-sponsor status (8.5%) than
+the materially lower resolved coverage for fiscal-sponsor status (9.0%) than
 for remote operating model (57.2%). The four manual artifact requests and 173
 URL-only claim entries remain the principal preservation follow-ups.

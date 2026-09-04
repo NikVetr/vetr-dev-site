@@ -22,7 +22,7 @@ EXTRA_TRAINING_ROWS = {
     "SRC-AD-OVERZERO-2025": "Organization-wide Executive Director posting for a sponsored project; organization type is represented in model inputs.",
     "SRC-AD-SEATTLEBG": "Organization-wide President/CEO posting; organization type is represented in model inputs.",
     "SRC-AD-CHAPA-AMBIG": "Organization-wide CEO posting; retained with its documented posting-date caveat.",
-    "SRC-AD-TAIMAKA-2025": "Organization-wide Executive Director posting; older source date is represented in the pay-year input.",
+    "SRC-AD-TAIMAKA-2025": "Organization-wide Executive Director posting; its older source date is handled by the July 2026 inflation adjustment.",
     "SRC-AD-SCREWWORM-2025": "Organization-wide founding Director posting; pre-operational structure is represented in model inputs.",
     "SRC-AD-JOYCEIVY-2026": "Full-time organization-wide Executive Director posting; the wide range and optional fractional alternative remain documented caveats.",
 }

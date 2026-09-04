@@ -28,8 +28,8 @@ advertised range retains its adjusted lower and upper bounds rather than being
 replaced by its midpoint.
 
 The continuous features are log annual expenses, log annual revenue, log
-employee count, log highest reported non-CEO Schedule J base pay in the same
-filing, and compensation year. The categorical features are broad focus area,
+employee count, and log highest reported non-CEO Schedule J base pay in the same
+filing. The categorical features are broad focus area,
 EA relationship, organization type, CEO-title group, broad location scope,
 organization-wide work model, and whether the organization serves as a fiscal
 sponsor. Category construction is deterministic, source-reviewed, and
@@ -46,8 +46,8 @@ deterministic challenger and uses fold-specific median values plus explicit
 missingness indicators. Browser profiles require positive numeric inputs.
 
 RP's exported default profile is $20,378,936 in expenses, $20,599,841 in revenue,
-43 employees, $136,142.69 highest reported non-CEO base pay, compensation year
-2024, Research / evidence, EA-core, Independent nonprofit, CEO, International /
+43 employees, $136,142.69 highest reported non-CEO base pay, Research / evidence,
+EA-core, Independent nonprofit, CEO, International /
 multi-country, Remote, and Serves as fiscal sponsor. Its displayed adjusted
 filing salary is $155,230.03 and is never a training outcome. The employee count
 is from RP's 2023 filing, whereas the financial values and compensation are from
@@ -70,8 +70,10 @@ mu[i] = alpha + X[i] beta
 ```
 
 `X` contains standardized log expenses, log revenue, log staff, log highest
-reported non-CEO base pay, year, and four missingness indicators. Centering and
+reported non-CEO base pay, and four missingness indicators. Centering and
 scaling parameters are estimated from the relevant training data only. The
+salary outcome and advertised bounds are already expressed in July 2026 USD, so
+the model does not add a separate pay-year trend on top of that adjustment. The
 priors are:
 
 ```text
@@ -119,15 +121,16 @@ observations and near-zero scales produced unstable geometry in sparse folds.
 
 The production artifact uses four chains. Each grouped cross-validation fit has
 400 warmup and 500 retained iterations per chain; each full fit has 800 warmup
-and 1,000 retained iterations per chain. `adapt_delta` is 0.995 and maximum tree
-depth is 13. The final filing-only fit reports maximum R-hat 1.0030, minimum bulk
-ESS 1,438, minimum tail ESS 1,198, zero divergences, zero maximum-tree-depth hits,
-and minimum E-BFMI 0.812. The range-augmented fit reports maximum R-hat 1.0047,
-minimum bulk ESS 1,146, minimum tail ESS 1,048, zero divergences, zero
-maximum-tree-depth hits, and minimum E-BFMI 0.812. Across the 20 four-chain
-cross-validation fits, maximum R-hat is 1.0155, minimum bulk ESS is 357, minimum
-tail ESS is 233, there are zero divergences and maximum-tree-depth hits, and
-minimum E-BFMI is 0.653. The recorded sampler diagnostics pass the build gates,
+and 1,000 retained iterations per chain. `adapt_delta` is 0.995 for validation
+fits and 0.999 for full fits; maximum tree depth is 13. The final filing-only fit
+reports maximum R-hat 1.0063, minimum bulk ESS 1,436, minimum tail ESS 1,139,
+zero divergences, zero maximum-tree-depth hits, and minimum E-BFMI 0.777. The
+range-augmented fit reports maximum R-hat 1.0059, minimum bulk ESS 1,029, minimum
+tail ESS 1,028, zero divergences, zero maximum-tree-depth hits, and minimum
+E-BFMI 0.799. Across the 20 four-chain cross-validation fits, maximum R-hat is
+1.0176, minimum bulk ESS is 316, minimum tail ESS is 359, there are zero
+divergences and maximum-tree-depth hits, and minimum E-BFMI is 0.673. The
+recorded sampler diagnostics pass the build gates,
 but they do not resolve the substantive sparsity and evidence-stream limitations
 described below.
 
@@ -140,10 +143,10 @@ The audit also fits three exact-filing comparators:
 - **Scale linear:** linear regression on the standardized numeric inputs and
   missingness indicators.
 - **Numeric-input GAM:** REML cubic-regression splines (`k = 4`) for log
-  expenses, revenue, staff, and highest-other-base pay, plus a linear year term
-  and missingness indicators.
+  expenses, revenue, staff, and highest-other-base pay, plus missingness
+  indicators.
 
-The browser exposes the Bayesian model and the scale GAM. The intercept and linear
+The browser exposes the Bayesian model and the numeric-input GAM. The intercept and linear
 models are validation baselines only. No boosted-tree model is included in the
 current artifact and the app must not describe one as implemented.
 
@@ -176,19 +179,19 @@ normal residual intervals. This is cross-validated ELPD, not in-sample lppd.
 | Model | Log RMSE | OOS R2 | Median absolute % error | 80% coverage | 90% coverage | Mean log predictive density |
 |---|---:|---:|---:|---:|---:|---:|
 | Intercept only | 0.379 | -0.015 | 25.4% | 82.5% | 87.7% | -0.469 |
-| Scale linear | 0.297 | 0.373 | 17.8% | 76.3% | 87.7% | -0.243 |
-| Numeric-input GAM | **0.289** | **0.409** | **17.1%** | 78.1% | 82.5% | -0.236 |
-| Bayesian multilevel | 0.321 | 0.271 | 19.4% | **84.2%** | **89.5%** | -0.240 |
-| Bayesian multilevel + ad ranges | 0.316 | 0.294 | 17.5% | **84.2%** | 87.7% | **-0.229** |
+| Scale linear | 0.303 | 0.348 | 18.7% | 75.4% | 90.4% | -0.267 |
+| Numeric-input GAM | **0.292** | **0.394** | 17.3% | 79.8% | 84.2% | **-0.251** |
+| Bayesian multilevel | 0.323 | 0.262 | 18.2% | **82.5%** | 89.5% | -0.258 |
+| Bayesian multilevel + ad ranges | 0.320 | 0.276 | **16.9%** | **82.5%** | **91.2%** | -0.259 |
 
 The range-augmented model's mean interval log score on the 25 held-out advertised
-ranges is -2.306; the two held-out advertised points have mean log score -0.755.
+ranges is -2.363; the two held-out advertised points have mean log score -0.869.
 The interval probability score and continuous point-density score are not
 directly comparable. Relative to the filing-only multilevel model, adding ads
-improves log RMSE by 0.005, OOS R2 by 0.023, median percentage error by 1.9
-percentage points, and total filing CV-ELPD by 1.24. One fixed fold assignment
-provides no standard error for these differences, so it does not establish that
-recruitment ranges improve the model.
+improves log RMSE by 0.003, OOS R2 by 0.014, and median percentage error by 1.4
+percentage points, while worsening total filing CV-ELPD by 0.12. One fixed fold
+assignment provides no standard error for these small, mixed differences, so it
+does not establish that recruitment ranges improve the model.
 
 No one model dominates. The GAM has the best held-out point error and OOS R2,
 while the multilevel fits provide better 90% interval coverage and support the
@@ -225,9 +228,10 @@ record-count-weighted mean). The displayed driver bars are median additive
 contributions on the log-salary scale and are predictive associations, not causal
 decompositions.
 
-For the GAM, the artifact exports the full-fit baseline, 141-point effect grids
-over standardized values from -3.5 to 3.5, and the 114 organization-grouped
-out-of-fold residuals. The browser linearly interpolates each effect grid and
+For the GAM, the artifact exports the full-fit baseline, effect grids with at
+least 141 points spanning standardized values from -3.5 to 3.5 and all observed
+training support, and the 114 organization-grouped out-of-fold residuals. The
+browser linearly interpolates each effect grid and
 forms predictive draws as `exp(mu + residual)`. Values beyond an effect grid are
 clamped at its endpoint and separately flagged as outside training support.
 

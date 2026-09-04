@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-04T19:23:40+00:00",
+  "generatedAt": "2026-09-04T21:48:30+00:00",
   "seed": 20260903,
-  "trainingInputSha256": "6b5d88d273f3597882c9eb5da688ba9a5537216730d12cafee297aa9313d2528",
+  "trainingInputSha256": "f53b3acf4d06f41548c9341943a60186885192b8a2690be435728630b595a8e5",
   "target": "log July 2026-adjusted annual base salary",
   "foldRule": "Ten deterministic organization-grouped folds; filing and posting records with the same normalized organization name share a fold.",
   "counts": {
@@ -58,8 +58,8 @@
     },
     "fiscal_sponsor_category": {
       "Does not serve as fiscal sponsor": 3,
-      "Serves as fiscal sponsor": 12,
-      "Unknown": 138
+      "Serves as fiscal sponsor": 13,
+      "Unknown": 137
     }
   },
   "missingContinuous": {
@@ -73,7 +73,6 @@
     "revenue": 20599841.0,
     "staff": 43.0,
     "highest_other_base": 136142.69,
-    "compensation_year": 2024,
     "focus_area": "Research / evidence",
     "ea_relationship": "EA-core",
     "organization_type": "Independent nonprofit",
@@ -84,11 +83,11 @@
     "reference_salary": 155230.03
   },
   "provenance": {
-    "trainingCsvSha256": "870c6f0f7cfe3076650c8c36f282e4a65255a755a13e1836e359149ce2509098",
-    "prepareScriptSha256": "8c75f281055c06a857ac02cef27f76d5a612765ab67ea712d93471c65811a308",
-    "fitScriptSha256": "522b5172df5631a3a3b4bc9786463afffac1d90d752382572819b8d70a4e38f3",
+    "trainingCsvSha256": "efe4739b97ae2169d94af0a7f6e2f797a3a014189100f1493eaef28aa1691416",
+    "prepareScriptSha256": "e8c31d78e1ed83cf18f34b6c6f5d2881440d15a87e9f5641fdd0139a083f7a75",
+    "fitScriptSha256": "8163d090d957abefa06c4b1f484ace14d919dcdab4529a83de477567c29742dd",
     "stanModelSha256": "0bef0528706587492ca2ba13ddb8bf25993cdacbbc12eca3974d7557c4ed3fd5",
     "utilsScriptSha256": "81c97f6aba827471a2085831c80479c294d8c91122590d20d47c2045d205c235",
-    "contractScriptSha256": "1ded4695c45d38ba78c2a8c2c8a5d8042fed7d34f709c9ce90c6af2bd983f129"
+    "contractScriptSha256": "7df39cc306e7833412981185843ffae7cf7e03a98010e5c05b2e0ba8713bc252"
   }
 }

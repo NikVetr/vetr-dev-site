@@ -325,17 +325,23 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .model-diagnostic-strip > span:last-child { border-right: 0; }
 .model-diagnostic-strip b { display: block; overflow: hidden; color: var(--ink); font-size: 10px; text-overflow: ellipsis; text-transform: none; white-space: nowrap; }
 .model-profile-reasons { margin: 0; padding: 5px 8px; border-top: 1px solid var(--line); background: color-mix(in srgb, var(--coral), white 92%); color: color-mix(in srgb, var(--coral), var(--ink) 38%); font-size: 8.5px; line-height: 1.35; }
-.model-diagnostics details { border-top: 1px solid var(--line); }
-.model-diagnostics summary { padding: 5px 8px; color: var(--green); font-size: 9px; font-weight: 750; cursor: pointer; }
-.model-diagnostics details[open] { max-height: min(210px, 32dvh); overflow: auto; background: var(--paper); }
-.model-diagnostics details > p { margin: 0; padding: 6px 8px; color: var(--muted); font-size: 8.5px; line-height: 1.4; }
-.model-details-grid { display: grid; grid-template-columns: minmax(260px, 1.25fr) minmax(180px, .75fr); gap: 10px; padding: 0 8px 8px; }
-.model-details-grid h3 { margin: 4px 0 5px; font-size: 9.5px; }
-.model-comparison-scroll { overflow-x: auto; }
-.model-comparison-table { width: 100%; border-collapse: collapse; font-size: 8px; }
-.model-comparison-table th, .model-comparison-table td { padding: 4px 5px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+.model-details-panel > p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
+.model-details-grid { display: grid; grid-template-columns: minmax(0, max-content) minmax(190px, 1fr); align-items: start; gap: 18px; margin-top: 9px; }
+.model-details-grid h3 { margin: 0 0 6px; font-size: 10px; }
+.model-comparison-scroll { max-width: 100%; overflow-x: auto; }
+.model-comparison-table { width: auto; min-width: 0; max-width: 100%; border-collapse: collapse; font-size: 9px; }
+.model-comparison-table th, .model-comparison-table td { padding: 4px 6px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+.model-comparison-table thead th:not(:first-child) { line-height: 1.15; white-space: normal; }
 .model-comparison-table th:first-child, .model-comparison-table td:first-child { text-align: left; }
+.model-comparison-table th:not(:first-child), .model-comparison-table td:not(:first-child) { width: 1%; }
 .model-comparison-table tr.is-selected { background: var(--green-soft); color: var(--green); font-weight: 700; }
+.model-comparison-table tr.is-actionable { cursor: pointer; }
+.model-comparison-table tr.is-actionable:hover { background: color-mix(in srgb, var(--green-soft), white 35%); }
+.model-comparison-table tr.is-actionable:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.model-method-button { display: inline; min-height: 0; padding: 0; border: 0; background: transparent; color: var(--green); font: inherit; font-weight: 750; text-align: left; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.model-method-button[aria-pressed="true"] { color: var(--ink); text-decoration-thickness: 2px; }
+.model-benchmark-label { color: var(--ink); }
+.model-benchmark-label small { margin-left: 4px; color: var(--muted); font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
 .model-contributions { display: grid; gap: 3px; }
 .model-contribution { display: grid; grid-template-columns: 80px minmax(50px, 1fr) 40px; align-items: center; gap: 4px; font-size: 8px; }
 .model-contribution > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -344,7 +350,7 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .model-contribution-bar { position: absolute; top: 1px; bottom: 1px; background: var(--teal); }
 .model-contribution.is-negative .model-contribution-bar { background: var(--green); }
 .model-contribution > output { text-align: right; font-variant-numeric: tabular-nums; }
-.model-limitations { border-top: 1px solid var(--line); }
+.model-limitations { margin-top: 9px !important; padding-top: 7px; border-top: 1px solid var(--line); }
 .model-profile-warning { color: var(--coral); }
 .model-density-area { fill: color-mix(in srgb, var(--blue), transparent 68%); }
 .model-density-line { fill: none; stroke: var(--green); stroke-width: 2.5; }

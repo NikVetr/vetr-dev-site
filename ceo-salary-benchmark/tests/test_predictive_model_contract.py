@@ -26,6 +26,23 @@ def load_app_data():
 
 
 class PredictiveModelContractTest(unittest.TestCase):
+    def test_model_uses_adjusted_salary_without_a_second_pay_year_effect(self):
+        artifact = json.loads(
+            (ROOT / "benchmark" / "analysis" / "predictive_salary_models" / "model_artifact.json")
+            .read_text(encoding="utf-8")
+        )
+        expected = ["expenses", "revenue", "staff", "highest_other_base"]
+        self.assertEqual([feature["key"] for feature in artifact["continuousFeatures"]], expected)
+        self.assertNotIn("compensation_year", artifact["rpProfile"])
+        for model_key in ("bayesian", "bayesianRanges", "gam"):
+            self.assertEqual(
+                [item["key"] for item in artifact["models"][model_key]["preprocessing"]],
+                expected,
+            )
+        self.assertEqual(set(artifact["models"]["gam"]["effects"]), {
+            "expenses", "revenue", "staff", "highestOther",
+        })
+
     def test_reviewed_training_eligibility_has_expected_counts(self):
         data = load_app_data()
         exact = cash = ads = 0

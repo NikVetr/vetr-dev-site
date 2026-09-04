@@ -51,6 +51,10 @@ sentence, overall confidence, and caveats. Programmatically blocked official
 pages are listed separately in
 `organization_operating_metadata_manual_requests.csv`.
 
+`model_cohort_operating_metadata_followup.md` documents a second, field-by-field
+review of every unresolved value in the predictive-model cohort, including the
+strict negative-evidence rules and the one resulting source-backed update.
+
 `scripts/build_organization_operating_metadata.py` validates the complete app
 organization universe, controlled values, source fields, and local paths; then
 it creates the consolidated table and a file-integrity manifest. The generated

@@ -109,7 +109,7 @@ layout: null
           <button id="model-reset-profile" class="text-button" type="button">Reset RP inputs</button>
         </div>
         <label class="field compact">
-          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian multilevel modeling combines organization scale, non-CEO pay, and regularized category effects. The numeric-input GAM is a nonlinear challenger using only continuous inputs. Both were evaluated on held-out organizations; details appear below the plot.">?</button></span>
+          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian multilevel modeling uses both numeric profile inputs and categorical fields. The numeric-input GAM is a nonlinear challenger that uses the numeric profile inputs but not the categorical fields. Both were evaluated on held-out organizations; details appear in the Model details tab below the plot.">?</button></span>
           <select id="model-method">
             <option value="bayesian">Bayesian multilevel</option>
             <option value="gam">Numeric-input GAM</option>
@@ -124,7 +124,6 @@ layout: null
           <label><span>Revenue</span><input id="model-revenue" type="number" min="1" step="100000" inputmode="numeric"></label>
           <label><span>Employees</span><input id="model-staff" type="number" min="1" step="1" inputmode="numeric"></label>
           <label><span>Highest other reported base pay <button class="info-tooltip" type="button" aria-label="About highest other reported base pay" data-tooltip="The highest eligible Schedule J base-pay amount reported for someone other than the CEO or organization-wide co-leader in the same filing. It can exceed CEO pay; Form 990 is not a complete employee census.">?</button></span><input id="model-highest-other" type="number" min="1" step="1000" inputmode="numeric"></label>
-          <label><span>Pay year</span><input id="model-year" type="number" min="2020" max="2030" step="1" inputmode="numeric"></label>
         </div>
         <div id="model-category-inputs" class="model-category-inputs">
           <label><span>Focus area</span><select id="model-focus"></select></label>
@@ -303,26 +302,6 @@ layout: null
               <span><b id="model-training-count">—</b> training records</span>
             </div>
             <p id="model-profile-reasons" class="model-profile-reasons" role="status" hidden></p>
-            <details id="model-details">
-              <summary>Model details and comparison</summary>
-              <p id="model-method-description"></p>
-              <div class="model-details-grid">
-                <div>
-                  <h3>Grouped 10-fold validation</h3>
-                  <div class="model-comparison-scroll">
-                    <table class="model-comparison-table">
-                      <thead><tr><th>Method</th><th>Log RMSE</th><th>Typical error</th><th>90% coverage</th><th>CV log score</th></tr></thead>
-                      <tbody id="model-comparison-body"></tbody>
-                    </table>
-                  </div>
-                </div>
-                <div>
-                  <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="Shows how each input moves the expected log salary relative to a typical modeled organization. These are predictive associations, not causal effects or board recommendations.">?</button></h3>
-                  <div id="model-contributions" class="model-contributions"></div>
-                </div>
-              </div>
-              <p id="model-limitations" class="model-limitations"></p>
-            </details>
           </section>
           <div id="chart-wrap" class="chart-wrap">
             <svg id="salary-chart" role="img" aria-labelledby="chart-title chart-description"></svg>
@@ -349,6 +328,7 @@ layout: null
           <button id="results-tab-quantiles" type="button" role="tab" aria-selected="true" aria-controls="results-panel-quantiles" tabindex="0">Quantiles</button>
           <button id="results-tab-compare" type="button" role="tab" aria-selected="false" aria-controls="results-panel-compare" tabindex="-1">Compare <span id="scenario-tab-count" aria-label="No saved scenarios">0</span></button>
           <button id="results-tab-robustness" type="button" role="tab" aria-selected="false" aria-controls="results-panel-robustness" tabindex="-1">Robustness</button>
+          <button id="results-tab-model-details" type="button" role="tab" aria-selected="false" aria-controls="results-panel-model-details" tabindex="-1" hidden>Model details</button>
         </div>
 
         <section id="results-panel-quantiles" class="results-tab-panel" role="tabpanel" aria-labelledby="results-tab-quantiles">
@@ -408,6 +388,27 @@ layout: null
           <p id="robustness-status" class="result-status" role="status" aria-live="polite">Run the check to compare the selected alternatives for the current position.</p>
           <div id="robustness-results"></div>
           <div id="robustness-tooltip" class="robustness-tooltip" role="tooltip" hidden></div>
+        </section>
+
+        <section id="results-panel-model-details" class="results-tab-panel model-details-panel" role="tabpanel" aria-labelledby="results-tab-model-details" hidden>
+          <h2 class="sr-only">Model details</h2>
+          <p id="model-method-description"></p>
+          <div class="model-details-grid">
+            <div>
+              <h3>Grouped 10-fold validation</h3>
+              <div class="model-comparison-scroll">
+                <table class="model-comparison-table">
+                  <thead><tr><th scope="col">Method</th><th scope="col">Log RMSE</th><th scope="col">Typical error</th><th scope="col">90% coverage</th><th scope="col">CV log score</th></tr></thead>
+                  <tbody id="model-comparison-body"></tbody>
+                </table>
+              </div>
+            </div>
+            <div>
+              <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="Shows how each input moves the expected log salary relative to a typical modeled organization. These are predictive associations, not causal effects or board recommendations.">?</button></h3>
+              <div id="model-contributions" class="model-contributions"></div>
+            </div>
+          </div>
+          <p id="model-limitations" class="model-limitations"></p>
         </section>
       </section>
     </section>

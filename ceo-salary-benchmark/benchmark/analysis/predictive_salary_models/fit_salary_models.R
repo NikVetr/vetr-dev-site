@@ -71,7 +71,7 @@ z$log_low <- log(z$salary_lower)
 z$log_high <- log(z$salary_upper)
 z$log_cash <- ifelse(is.finite(z$cash_proxy) & z$cash_proxy > 0, log(z$cash_proxy), NA_real_)
 
-continuous_keys <- c("expenses", "revenue", "staff", "highest_other_base", "compensation_year")
+continuous_keys <- c("expenses", "revenue", "staff", "highest_other_base")
 missing_indicator_keys <- c("expenses", "revenue", "staff", "highest_other_base")
 categorical_keys <- c(
   "focus_area", "organization_type", "title_group", "location_scope",
@@ -102,8 +102,7 @@ if (!all(z$ea_relationship %in% ea_levels)) stop("Unexpected EA relationship cat
 fit_preprocessing <- function(rows) {
   result <- list()
   for (key in continuous_keys) {
-    raw <- rows[[key]]
-    if (key != "compensation_year") raw <- ifelse(is.finite(raw) & raw > 0, log(raw), NA_real_)
+    raw <- ifelse(is.finite(rows[[key]]) & rows[[key]] > 0, log(rows[[key]]), NA_real_)
     observed <- raw[is.finite(raw)]
     if (!length(observed)) stop("No observed values for ", key)
     impute <- median(observed)
@@ -117,17 +116,16 @@ fit_preprocessing <- function(rows) {
 }
 
 transform_continuous <- function(rows, preprocessing) {
-  x <- matrix(0, nrow(rows), 9L)
+  x <- matrix(0, nrow(rows), 8L)
   colnames(x) <- c(
-    "log_expenses", "log_revenue", "log_staff", "log_highest_other_base", "year",
+    "log_expenses", "log_revenue", "log_staff", "log_highest_other_base",
     "expenses_missing", "revenue_missing", "staff_missing", "highest_other_base_missing"
   )
   missing_values <- matrix(FALSE, nrow(rows), length(continuous_keys))
   colnames(missing_values) <- continuous_keys
   for (j in seq_along(continuous_keys)) {
     key <- continuous_keys[[j]]
-    raw <- rows[[key]]
-    if (key != "compensation_year") raw <- ifelse(is.finite(raw) & raw > 0, log(raw), NA_real_)
+    raw <- ifelse(is.finite(rows[[key]]) & rows[[key]] > 0, log(rows[[key]]), NA_real_)
     missing <- !is.finite(raw)
     missing_values[, j] <- missing
     raw[missing] <- preprocessing[[key]]$center
@@ -225,7 +223,7 @@ fit_stan <- function(rows, seed, full = FALSE) {
     iter_sampling = if (full && !quick) 1000L else if (quick) 80L else 500L,
     init = rep(list(initial_values), chains),
     refresh = 0,
-    adapt_delta = if (quick) 0.99 else 0.995,
+    adapt_delta = if (quick) 0.99 else if (full) 0.999 else 0.995,
     max_treedepth = 13,
     show_messages = quick
   )
@@ -281,7 +279,7 @@ posterior_components <- function(fit) {
   list(
     matrix = draws,
     alpha = as.numeric(draws[, "alpha"]),
-    beta = draw_columns(draws, "beta", 9L),
+    beta = draw_columns(draws, "beta", length(continuous_keys) + length(missing_indicator_keys)),
     ad_offset = as.numeric(draws[, "ad_offset"]),
     cash_increment_rate = as.numeric(draws[, "cash_increment_rate"]),
     cash_zero_probability = as.numeric(draws[, "cash_zero_probability"]),
@@ -437,12 +435,12 @@ evaluate_simple_model <- function(kind) {
       train_frame <- data.frame(y = training$log_mid, x_train)
       test_frame <- data.frame(x_test)
       names(train_frame) <- c(
-        "y", "x_expenses", "x_revenue", "x_staff", "x_highest_other", "x_year",
+        "y", "x_expenses", "x_revenue", "x_staff", "x_highest_other",
         "missing_expenses", "missing_revenue", "missing_staff", "missing_highest_other"
       )
       names(test_frame) <- names(train_frame)[-1]
       fit <- gam(y ~ s(x_expenses, k = 4, bs = "cr") + s(x_revenue, k = 4, bs = "cr") +
-                   s(x_staff, k = 4, bs = "cr") + s(x_highest_other, k = 4, bs = "cr") + x_year +
+                   s(x_staff, k = 4, bs = "cr") + s(x_highest_other, k = 4, bs = "cr") +
                    missing_expenses + missing_revenue + missing_staff + missing_highest_other,
                  data = train_frame, method = "REML")
       predicted <- as.numeric(predict(fit, newdata = test_frame, type = "response"))
@@ -542,21 +540,21 @@ gam_pp <- fit_preprocessing(exact)
 gam_x <- transform_continuous(exact, gam_pp)$X
 gam_frame <- data.frame(y = exact$log_mid, gam_x)
 names(gam_frame) <- c(
-  "y", "x_expenses", "x_revenue", "x_staff", "x_highest_other", "x_year",
+  "y", "x_expenses", "x_revenue", "x_staff", "x_highest_other",
   "missing_expenses", "missing_revenue", "missing_staff", "missing_highest_other"
 )
 gam_fit <- gam(y ~ s(x_expenses, k = 4, bs = "cr") + s(x_revenue, k = 4, bs = "cr") +
-                 s(x_staff, k = 4, bs = "cr") + s(x_highest_other, k = 4, bs = "cr") + x_year +
+                 s(x_staff, k = 4, bs = "cr") + s(x_highest_other, k = 4, bs = "cr") +
                  missing_expenses + missing_revenue + missing_staff + missing_highest_other,
                data = gam_frame, method = "REML")
 gam_zero <- data.frame(
-  x_expenses = 0, x_revenue = 0, x_staff = 0, x_highest_other = 0, x_year = 0,
+  x_expenses = 0, x_revenue = 0, x_staff = 0, x_highest_other = 0,
   missing_expenses = 0, missing_revenue = 0, missing_staff = 0, missing_highest_other = 0
 )
 gam_baseline <- as.numeric(predict(gam_fit, gam_zero, type = "response"))
 gam_effects <- list()
-gam_effect_keys <- c("expenses", "revenue", "staff", "highestOther", "year")
-gam_effect_columns <- c("x_expenses", "x_revenue", "x_staff", "x_highest_other", "x_year")
+gam_effect_keys <- c("expenses", "revenue", "staff", "highestOther")
+gam_effect_columns <- c("x_expenses", "x_revenue", "x_staff", "x_highest_other")
 for (j in seq_along(gam_effect_keys)) {
   key <- gam_effect_keys[[j]]
   column <- gam_effect_columns[[j]]
@@ -576,10 +574,10 @@ gam_residuals <- gam_oof$observed_log_salary - gam_oof$predicted_log_salary
 json_preprocessing <- function(preprocessing) {
   lapply(names(preprocessing), function(key) {
     item <- preprocessing[[key]]
-    raw_min <- if (key == "compensation_year") item$minimum else exp(item$minimum)
-    raw_max <- if (key == "compensation_year") item$maximum else exp(item$maximum)
+    raw_min <- exp(item$minimum)
+    raw_max <- exp(item$maximum)
     list(key = key, center = item$center, scale = item$scale, impute = item$impute,
-         minimum = raw_min, maximum = raw_max, transform = if (key == "compensation_year") "identity" else "log")
+         minimum = raw_min, maximum = raw_max, transform = "log")
   })
 }
 
@@ -697,8 +695,7 @@ artifact <- list(
     list(key = "expenses", label = "Annual expenses", unit = "USD"),
     list(key = "revenue", label = "Annual revenue", unit = "USD"),
     list(key = "staff", label = "Employees", unit = "people"),
-    list(key = "highest_other_base", label = "Non-CEO highest reported base pay", unit = "USD"),
-    list(key = "compensation_year", label = "Compensation year", unit = "year")
+    list(key = "highest_other_base", label = "Non-CEO highest reported base pay", unit = "USD")
   ),
   categoricalFeatures = category_schema,
   eaLevels = ea_levels,
@@ -737,7 +734,7 @@ artifact <- list(
   ),
   method = list(
     bayesian = "Multilevel normal model for log base salary with signed regularized scale and non-CEO-pay slopes; multilevel focus, type, title, location, remote-work, and fiscal-sponsor effects; ordered cumulative EA increments; latent missing continuous inputs; and distinct cash-proxy and posting measurement models. Advertised salaries enter through an interval likelihood.",
-    gam = "Low-complexity additive smooths for log expenses, revenue, staff, non-CEO highest reported base pay, and year, with fold-specific centering and missing-value indicators. Predictive uncertainty uses organization-grouped out-of-fold residuals; cash-only records and advertised ranges are not used.",
+    gam = "Low-complexity additive smooths for log expenses, revenue, staff, and non-CEO highest reported base pay, with fold-specific centering and missing-value indicators. Predictive uncertainty uses organization-grouped out-of-fold residuals; cash-only records, advertised ranges, and categorical profile fields are not used.",
     validation = "One deterministic organization-grouped 10-fold cross-validation. Every transform is estimated inside its training fold; filing and posting records with the same normalized organization name never cross folds."
   ),
   provenance = c(

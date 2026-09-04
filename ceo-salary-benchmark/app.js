@@ -51,7 +51,10 @@
     throw new Error("The same-source RP Form 990 scale profile is unavailable.");
   }
   const AUTO_WEIGHT_TOOLTIP = `Automatic weights never use salary. Form 990 records receive more weight when their reported expenses and employee counts are closer to RP's Form 990 values (${compactMoney(RP_FORM990_PROFILE.expenses)} and ${RP_FORM990_PROFILE.staff} employees). Job postings use a separate similarity score based only on non-pay information. Missing organization-size information reduces a record's weight. The target effective sample size controls how concentrated the Form 990 weights may become; pay-source balancing and your adjustments are applied afterward.`;
-  const MODEL_PROFILE_DEFAULTS = Object.freeze({ ...PREDICTIVE_MODEL.rpProfile });
+  const MODEL_PROFILE_DEFAULTS = Object.freeze(Object.fromEntries([
+    "expenses", "revenue", "staff", "highest_other_base", "focus_area", "ea_relationship",
+    "organization_type", "title_group", "location_scope", "remote_category", "fiscal_sponsor_category",
+  ].map((key) => [key, PREDICTIVE_MODEL.rpProfile[key]])));
   const DEFAULT_POSITION = Object.freeze({
     key: "ceo", label: "CEO", pageLabel: "CEO", defaultMeasure: "base",
     description: "Reviewed CEO pay benchmark using Form 990 filings and job postings.",
@@ -253,7 +256,7 @@
     modelUseAdRanges: $("#model-use-ad-ranges"), modelAdRangesField: $("#model-ad-ranges-field"),
     modelResetProfile: $("#model-reset-profile"), modelExpenses: $("#model-expenses"),
     modelRevenue: $("#model-revenue"), modelStaff: $("#model-staff"),
-    modelHighestOther: $("#model-highest-other"), modelYear: $("#model-year"),
+    modelHighestOther: $("#model-highest-other"),
     modelFocus: $("#model-focus"), modelEa: $("#model-ea"), modelOrganizationType: $("#model-organization-type"),
     modelTitle: $("#model-title"), modelLocation: $("#model-location"),
     modelRemote: $("#model-remote"), modelFiscalSponsor: $("#model-fiscal-sponsor"),
@@ -2844,7 +2847,7 @@
 
   function modelContinuousVector(model) {
     const preprocessing = modelPreprocessing(model);
-    const standardized = ["expenses", "revenue", "staff", "highest_other_base", "compensation_year"].map((key) => {
+    const standardized = ["expenses", "revenue", "staff", "highest_other_base"].map((key) => {
       const definition = preprocessing.get(key);
       const raw = Number(state.modelProfile[key]);
       if (!definition || !Number.isFinite(raw) || raw <= 0) return NaN;
@@ -2888,12 +2891,12 @@
   function gamModelPrediction() {
     const model = PREDICTIVE_MODEL.models.gam;
     const vector = modelContinuousVector(model);
-    if (vector.slice(0, 5).some((value) => !Number.isFinite(value))) return null;
-    const keys = ["expenses", "revenue", "staff", "highestOther", "year"];
+    if (vector.slice(0, 4).some((value) => !Number.isFinite(value))) return null;
+    const keys = ["expenses", "revenue", "staff", "highestOther"];
     const contributions = keys.map((key, index) => ({
       label: {
         expenses: "Expenses", revenue: "Revenue", staff: "Employees",
-        highestOther: "Non-CEO highest base pay", year: "Pay year",
+        highestOther: "Non-CEO highest base pay",
       }[key],
       value: interpolateModelEffect(model.effects[key], vector[index]),
     }));
@@ -2910,7 +2913,7 @@
   function bayesianModelPrediction() {
     const model = state.modelUseAdRanges ? PREDICTIVE_MODEL.models.bayesianRanges : PREDICTIVE_MODEL.models.bayesian;
     const vector = modelContinuousVector(model);
-    if (vector.slice(0, 5).some((value) => !Number.isFinite(value))) return null;
+    if (vector.slice(0, 4).some((value) => !Number.isFinite(value))) return null;
     const draws = model.draws;
     const categoryIndexes = {
       focus: modelCategoryIndex("focus_area", state.modelProfile.focus_area),
@@ -2939,7 +2942,6 @@
       ["Revenue", () => draws.beta.map((row) => row[1] * vector[1])],
       ["Employees", () => draws.beta.map((row) => row[2] * vector[2])],
       ["Non-CEO highest base pay", () => draws.beta.map((row) => row[3] * vector[3])],
-      ["Pay year", () => draws.beta.map((row) => row[4] * vector[4])],
       ["Focus area", () => categoryIndexes.focus < 0 ? [0] : draws.focus.map((row) => row[categoryIndexes.focus])],
       ["Effective Altruism", () => categoryIndexes.ea < 0 ? [0] : draws.ea.map((row) => row[categoryIndexes.ea])],
       ["Organization type", () => categoryIndexes.organizationType < 0 ? [0] : draws.organizationType.map((row) => row[categoryIndexes.organizationType])],
@@ -2979,7 +2981,7 @@
     const active = state.modelMethod === "gam" ? PREDICTIVE_MODEL.models.gam
       : state.modelUseAdRanges ? PREDICTIVE_MODEL.models.bayesianRanges : PREDICTIVE_MODEL.models.bayesian;
     const preprocessing = modelPreprocessing(active);
-    ["expenses", "revenue", "staff", "highest_other_base", "compensation_year"].forEach((key) => {
+    ["expenses", "revenue", "staff", "highest_other_base"].forEach((key) => {
       const definition = preprocessing.get(key);
       const value = Number(state.modelProfile[key]);
       if (!Number.isFinite(value) || value <= 0) warnings.push(`${key} is invalid`);
@@ -3018,6 +3020,16 @@
     });
   }
 
+  function selectModelComparisonMethod(methodKey) {
+    if (!["bayesian", "bayesian_ranges", "gam"].includes(methodKey)) return;
+    state.modelMethod = methodKey === "gam" ? "gam" : "bayesian";
+    state.modelUseAdRanges = methodKey === "bayesian_ranges";
+    renderAll();
+    requestAnimationFrame(() => {
+      refs.modelComparisonBody.querySelector(`[data-model-method="${methodKey}"]`)?.focus();
+    });
+  }
+
   function renderModelDiagnostics(prediction) {
     const metric = modelComparisonRow(prediction.methodKey);
     const coverage = modelProfileCoverage();
@@ -3036,7 +3048,54 @@
     PREDICTIVE_MODEL.comparison.forEach((row) => {
       const tr = document.createElement("tr");
       tr.classList.toggle("is-selected", row.key === prediction.methodKey);
-      tr.innerHTML = `<td>${escapeHtml(row.label)}</td><td>${row.logRmse.toFixed(3)}</td><td>${(row.medianAbsPercentError * 100).toFixed(0)}%</td><td>${(row.coverage90 * 100).toFixed(0)}%</td><td>${row.meanLogPredictiveDensity.toFixed(3)}</td>`;
+      tr.dataset.methodKey = row.key;
+      const methodCell = document.createElement("th");
+      methodCell.scope = "row";
+      if (["bayesian", "bayesian_ranges", "gam"].includes(row.key)) {
+        const activate = () => selectModelComparisonMethod(row.key);
+        tr.classList.add("is-actionable");
+        tr.tabIndex = 0;
+        tr.setAttribute("aria-label", `Use ${row.label} for the prediction`);
+        tr.addEventListener("click", (event) => {
+          if (!event.target.closest("button")) activate();
+        });
+        tr.addEventListener("keydown", (event) => {
+          if (event.target !== tr || !["Enter", " "].includes(event.key)) return;
+          event.preventDefault();
+          activate();
+        });
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "model-method-button";
+        button.dataset.modelMethod = row.key;
+        button.textContent = row.label;
+        button.setAttribute("aria-pressed", String(row.key === prediction.methodKey));
+        button.setAttribute("aria-label", `Use ${row.label} for the prediction`);
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          activate();
+        });
+        methodCell.append(button);
+      } else {
+        const label = document.createElement("span");
+        label.className = "model-benchmark-label";
+        label.append(document.createTextNode(row.label));
+        const benchmark = document.createElement("small");
+        benchmark.textContent = "benchmark";
+        label.append(benchmark);
+        methodCell.append(label);
+      }
+      const metrics = [
+        row.logRmse.toFixed(3),
+        `${(row.medianAbsPercentError * 100).toFixed(0)}%`,
+        `${(row.coverage90 * 100).toFixed(0)}%`,
+        row.meanLogPredictiveDensity.toFixed(3),
+      ];
+      tr.append(methodCell, ...metrics.map((value) => {
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        return cell;
+      }));
       refs.modelComparisonBody.append(tr);
     });
     renderModelContributions(prediction);
@@ -3108,9 +3167,18 @@
     const yScale = (value) => margin.top + innerHeight - value / peak * innerHeight * .92;
     const bottom = margin.top + innerHeight;
     Object.entries(intervals).sort((a, b) => Number(b[0]) - Number(a[0])).forEach(([level, interval]) => {
-      svg.append(svgElement("rect", {
-        x: xScale(interval[0]), y: margin.top, width: Math.max(1, xScale(interval[1]) - xScale(interval[0])), height: innerHeight,
-        class: `model-interval-${level}`, "aria-hidden": "true",
+      const intervalPoints = [
+        { value: interval[0], density: density(interval[0]) },
+        ...points.filter((point) => point.value > interval[0] && point.value < interval[1]),
+        { value: interval[1], density: density(interval[1]) },
+      ];
+      const intervalPath = [
+        `M${xScale(interval[0]).toFixed(2)},${bottom.toFixed(2)}`,
+        ...intervalPoints.map((point) => `L${xScale(point.value).toFixed(2)},${yScale(point.density).toFixed(2)}`),
+        `L${xScale(interval[1]).toFixed(2)},${bottom.toFixed(2)}Z`,
+      ].join(" ");
+      svg.append(svgElement("path", {
+        d: intervalPath, class: `model-interval-${level}`, "aria-hidden": "true",
       }));
     });
     const areaPath = [`M${xScale(points[0].value)},${bottom}`, ...points.map((point) => `L${xScale(point.value).toFixed(2)},${yScale(point.density).toFixed(2)}`), `L${xScale(points.at(-1).value)},${bottom}Z`].join(" ");
@@ -4458,7 +4526,7 @@
   const URL_QUANTILE_KEYS = reverseCodes(URL_QUANTILE_CODES);
   const URL_VARIABLE_KEYS = reverseCodes(URL_VARIABLE_CODES);
   const MODEL_PROFILE_URL_FIELDS = Object.freeze({
-    expenses: "e", revenue: "r", staff: "s", highest_other_base: "h", compensation_year: "y",
+    expenses: "e", revenue: "r", staff: "s", highest_other_base: "h",
     focus_area: "f", ea_relationship: "a", organization_type: "o",
     title_group: "t", location_scope: "l", remote_category: "w", fiscal_sponsor_category: "c",
   });
@@ -4468,7 +4536,7 @@
   ]);
   const MODEL_PROFILE_BOUNDS = Object.freeze({
     expenses: [1, Number.MAX_SAFE_INTEGER], revenue: [1, Number.MAX_SAFE_INTEGER],
-    staff: [1, 1_000_000], highest_other_base: [1, Number.MAX_SAFE_INTEGER], compensation_year: [2020, 2030],
+    staff: [1, 1_000_000], highest_other_base: [1, Number.MAX_SAFE_INTEGER],
   });
   function encodeVariableKey(key) {
     if (URL_VARIABLE_CODES[key]) return URL_VARIABLE_CODES[key];
@@ -4663,7 +4731,9 @@
   }
 
   function activateResultsTab(key, { focus = false } = {}) {
-    if (!["quantiles", "compare", "robustness"].includes(key)) return;
+    if (!["quantiles", "compare", "robustness", "model-details"].includes(key)) return;
+    const target = refs.resultsTabs.find((tab) => resultsTabKey(tab) === key);
+    if (!target || target.hidden || target.disabled) return;
     activeResultsTab = key;
     refs.resultsTabs.forEach((tab) => {
       const active = resultsTabKey(tab) === key;
@@ -4679,12 +4749,13 @@
   }
 
   function resultsTabKeyFromKeyboard(event) {
-    const current = refs.resultsTabs.indexOf(event.currentTarget);
-    if (event.key === "Home") return resultsTabKey(refs.resultsTabs[0]);
-    if (event.key === "End") return resultsTabKey(refs.resultsTabs.at(-1));
+    const available = refs.resultsTabs.filter((tab) => !tab.hidden && !tab.disabled);
+    const current = available.indexOf(event.currentTarget);
+    if (event.key === "Home") return resultsTabKey(available[0]);
+    if (event.key === "End") return resultsTabKey(available.at(-1));
     if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return "";
     const direction = event.key === "ArrowRight" ? 1 : -1;
-    return resultsTabKey(refs.resultsTabs[(current + direction + refs.resultsTabs.length) % refs.resultsTabs.length]);
+    return resultsTabKey(available[(current + direction + available.length) % available.length]);
   }
 
   function scenarioFormatKind(axisKey) {
@@ -5080,7 +5151,7 @@
         if (customWeights[stream].has(id)) modifiedWeightIds[stream].add(id);
       });
     });
-    activeResultsTab = ["quantiles", "compare", "robustness"].includes(snapshot.activeResultsTab)
+    activeResultsTab = ["quantiles", "compare", "robustness", "model-details"].includes(snapshot.activeResultsTab)
       ? snapshot.activeResultsTab : "quantiles";
     closeAxisSelector();
     hideTooltip();
@@ -6406,8 +6477,13 @@
     const ceo = isCeoPosition();
     const modelView = state.view === "model";
     const robustnessTab = refs.resultsTabs.find((tab) => resultsTabKey(tab) === "robustness");
+    const modelDetailsTab = refs.resultsTabs.find((tab) => resultsTabKey(tab) === "model-details");
     robustnessTab.hidden = modelView;
-    if (modelView && activeResultsTab === "robustness") activateResultsTab("quantiles");
+    modelDetailsTab.hidden = !modelView;
+    if ((modelView && activeResultsTab === "robustness") || (!modelView && activeResultsTab === "model-details")) {
+      activateResultsTab("quantiles");
+    }
+    if (modelView && activeResultsTab === "model-details") activateResultsTab("model-details");
     refs.robustnessRun.disabled = modelView;
     weightingInput.disabled = !ceo || modelView;
     refs.robustnessWeightingOption.title = ceo ? "" : "Automatic weights are available only for the CEO benchmark.";
@@ -6528,7 +6604,6 @@
     refs.modelRevenue.value = state.modelProfile.revenue;
     refs.modelStaff.value = state.modelProfile.staff;
     refs.modelHighestOther.value = state.modelProfile.highest_other_base;
-    refs.modelYear.value = state.modelProfile.compensation_year;
     refs.modelFocus.value = state.modelProfile.focus_area;
     refs.modelEa.value = state.modelProfile.ea_relationship;
     refs.modelOrganizationType.value = state.modelProfile.organization_type;
@@ -6542,8 +6617,8 @@
     refs.modelUseAdRanges.disabled = gam;
     refs.modelAdRangesField.classList.toggle("is-disabled", gam);
     refs.modelSettingsNote.textContent = gam
-      ? "The GAM uses expenses, revenue, employees, non-CEO highest reported base pay, and pay year. It was fit to exact Form 990 base-pay records only."
-      : `The model uses a fixed reviewed cohort; table filters do not refit it. Cash-only filings use a separate measurement model. ${state.modelUseAdRanges ? "Advertised ranges contribute as intervals." : "Recruitment postings are excluded."}`;
+      ? "The GAM uses the four numeric profile inputs above, not the categorical fields. It was fit to exact Form 990 base-pay records only."
+      : `The Bayesian multilevel model uses both the numeric profile inputs and categorical fields. Its fixed reviewed cohort is not changed by table filters. Cash-only filings use a separate measurement model. ${state.modelUseAdRanges ? "Advertised ranges contribute as intervals." : "Recruitment postings are excluded."}`;
   }
 
   function syncControlsFromState() {
@@ -6958,6 +7033,7 @@
   refs.markCurve.addEventListener("change", () => { state.markCurve = refs.markCurve.checked; renderChart(); });
   refs.modelMethod.addEventListener("change", () => {
     state.modelMethod = refs.modelMethod.value === "gam" ? "gam" : "bayesian";
+    if (state.modelMethod === "gam") state.modelUseAdRanges = false;
     renderAll();
   });
   refs.modelUseAdRanges.addEventListener("change", () => {
@@ -6969,7 +7045,6 @@
     [refs.modelRevenue, "revenue"],
     [refs.modelStaff, "staff"],
     [refs.modelHighestOther, "highest_other_base"],
-    [refs.modelYear, "compensation_year"],
   ].forEach(([input, key]) => {
     const [minimum, maximum] = MODEL_PROFILE_BOUNDS[key];
     input.addEventListener("input", () => {

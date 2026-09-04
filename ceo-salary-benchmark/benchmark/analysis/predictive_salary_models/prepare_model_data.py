@@ -430,7 +430,6 @@ def main() -> None:
             "highest_other_base": positive(
                 ((data["rpReference"].get("highestPaidOtherEmployee") or {}).get("base") or {}).get("adjusted")
             ),
-            "compensation_year": int(data["rpReference"]["compensationYear"]),
             "focus_area": "Research / evidence",
             "ea_relationship": "EA-core",
             "organization_type": "Independent nonprofit",

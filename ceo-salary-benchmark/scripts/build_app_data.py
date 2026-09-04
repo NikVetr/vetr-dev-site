@@ -316,8 +316,16 @@ def load_predictive_model_artifact(
     if set((artifact.get("models") or {})) != {"bayesian", "bayesianRanges", "gam"}:
         raise ValueError("Predictive-model artifact is missing a required model")
     rp_profile = artifact.get("rpProfile") or {}
-    for key in ("expenses", "revenue", "staff", "highest_other_base", "compensation_year", "reference_salary"):
+    for key in ("expenses", "revenue", "staff", "highest_other_base", "reference_salary"):
         require_finite_number(rp_profile.get(key), f"RP profile {key}", positive=True)
+    continuous_features = artifact.get("continuousFeatures") or []
+    continuous_feature_keys = [
+        feature.get("key") for feature in continuous_features if isinstance(feature, dict)
+    ]
+    if continuous_feature_keys != ["expenses", "revenue", "staff", "highest_other_base"]:
+        raise ValueError("Predictive-model continuous feature schema is malformed")
+    if "compensation_year" in rp_profile:
+        raise ValueError("Predictive-model RP profile must not include a pay-year predictor")
 
     categorical_features = artifact.get("categoricalFeatures") or []
     expected_categorical_keys = {
@@ -368,7 +376,7 @@ def load_predictive_model_artifact(
         model = artifact["models"][model_key]
         preprocessing = model.get("preprocessing") or []
         preprocessing_by_key = {item.get("key"): item for item in preprocessing if isinstance(item, dict)}
-        expected_preprocessing = {"expenses", "revenue", "staff", "highest_other_base", "compensation_year"}
+        expected_preprocessing = {"expenses", "revenue", "staff", "highest_other_base"}
         if set(preprocessing_by_key) != expected_preprocessing or len(preprocessing_by_key) != len(preprocessing):
             raise ValueError(f"Predictive-model {model_key} preprocessing is malformed")
         for key, item in preprocessing_by_key.items():
@@ -376,13 +384,12 @@ def load_predictive_model_artifact(
                 require_finite_number(item.get(field), f"{model_key} {key} {field}", positive=field == "scale")
             if item.get("minimum") > item.get("maximum"):
                 raise ValueError(f"Predictive-model {model_key} {key} support is reversed")
-            expected_transform = "identity" if key == "compensation_year" else "log"
-            if item.get("transform") != expected_transform:
+            if item.get("transform") != "log":
                 raise ValueError(f"Predictive-model {model_key} {key} transform is invalid")
         draws = model.get("draws") or {}
         for key in ("alpha", "adOffset", "residualZ"):
             require_finite_vector(draws.get(key), draw_count, f"{model_key} draws {key}")
-        require_finite_matrix(draws.get("beta"), draw_count, 9, f"{model_key} draws beta")
+        require_finite_matrix(draws.get("beta"), draw_count, 8, f"{model_key} draws beta")
         require_finite_matrix(draws.get("sigma"), draw_count, 2, f"{model_key} draws sigma")
         for row_index, row in enumerate(draws["sigma"]):
             if any(value <= 0 for value in row):
@@ -403,7 +410,6 @@ def load_predictive_model_artifact(
         "revenue": "revenue",
         "staff": "staff",
         "highestOther": "highest_other_base",
-        "year": "compensation_year",
     }.items():
         preprocessing = gam_preprocessing.get(preprocessing_key) or {}
         effect = (gam.get("effects") or {}).get(effect_key) or {}
