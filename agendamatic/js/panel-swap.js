@@ -97,7 +97,6 @@ function swapPanels(source, target) {
     announceLayoutChange(
         `${sourceLabel} moved to the ${destinationLabel} position; ${targetLabel} moved to the ${getSlotLabel(sourceSlot.id)} position.`
     );
-    window.dispatchEvent(new Event('resize'));
     window.dispatchEvent(new Event('autochair:layout-resized'));
     return true;
 }
@@ -263,6 +262,8 @@ function createGhost(panel, event) {
     const rect = panel.getBoundingClientRect();
     const ghost = panel.cloneNode(true);
     ghost.className = `${panel.className} panel-drag-ghost`;
+    ghost.inert = true;
+    ghost.setAttribute('aria-hidden', 'true');
     ghost.removeAttribute('id');
     ghost.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
     ghost.style.width = `${rect.width}px`;
@@ -369,4 +370,5 @@ export function initPanelSwaps() {
     document.addEventListener('pointermove', onPointerMove);
     document.addEventListener('pointerup', finishDrag);
     document.addEventListener('pointercancel', finishDrag);
+    window.dispatchEvent(new Event('autochair:layout-resized'));
 }

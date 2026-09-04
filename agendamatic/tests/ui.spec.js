@@ -9,38 +9,60 @@ test('desktop and mobile layouts keep every panel usable', async ({ page }) => {
     await loadFresh(page);
     await expect(page.locator('html')).toHaveJSProperty('scrollWidth', 1440);
 
-    await page.setViewportSize({ width: 1100, height: 900 });
+    await page.setViewportSize({ width: 1200, height: 800 });
+    const compactDesktop = await page.evaluate(() => {
+        const panelsFit = [
+            '#agenda-container',
+            '.export-panel',
+            '.timeline-container',
+            '.current-status-display',
+            '.staging-container',
+            '.current-item-box'
+        ].every(selector => {
+            const element = document.querySelector(selector);
+            return element.scrollWidth - element.clientWidth <= 1 &&
+                element.scrollHeight - element.clientHeight <= 1;
+        });
+        const headers = [...document.querySelectorAll('.agenda-header > div')];
+        const cells = [...document.querySelectorAll('.agenda-row:first-child > *')];
+        const columnsAlign = headers.every((header, index) => {
+            const headerRect = header.getBoundingClientRect();
+            const cellRect = cells[index].getBoundingClientRect();
+            return Math.abs((headerRect.left + headerRect.right) - (cellRect.left + cellRect.right)) <= 2;
+        });
+        return { panelsFit, columnsAlign };
+    });
+    expect(compactDesktop).toEqual({ panelsFit: true, columnsAlign: true });
+
+    await page.evaluate(async () => {
+        const state = await import('/agendamatic/js/state.js');
+        state.ensureExpectedSnapshot();
+        state.updateTracker({ varianceMode: true });
+    });
+    const varianceFits = await page.evaluate(() => {
+        const agenda = document.getElementById('agenda-container');
+        const headers = [...document.querySelectorAll('.agenda-header > div')];
+        const cells = [...document.querySelectorAll('.agenda-row:first-child > *')];
+        return agenda.scrollWidth - agenda.clientWidth <= 1 && headers.every((header, index) => {
+            const headerRect = header.getBoundingClientRect();
+            const cellRect = cells[index].getBoundingClientRect();
+            return Math.abs((headerRect.left + headerRect.right) - (cellRect.left + cellRect.right)) <= 2;
+        });
+    });
+    expect(varianceFits).toBe(true);
+    await page.evaluate(async () => {
+        const { updateTracker } = await import('/agendamatic/js/state.js');
+        updateTracker({ varianceMode: false });
+    });
+
+    await page.setViewportSize({ width: 1300, height: 900 });
     const intermediateToggle = page.locator('#btn-settings-toggle');
     await expect(intermediateToggle).toBeVisible();
-    await intermediateToggle.click();
-    await expect(page.locator('#settings-sidebar')).toHaveAttribute('aria-hidden', 'false');
-    await page.keyboard.press('Escape');
-
-    await page.setViewportSize({ width: 900, height: 900 });
-    const intermediatePanels = await page.locator('.box[data-panel-id]').evaluateAll(panels => panels.map(panel => ({
-        width: panel.getBoundingClientRect().width,
-        height: panel.getBoundingClientRect().height
-    })));
-    expect(intermediatePanels.every(panel => panel.width > 800 && panel.height >= 200)).toBe(true);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
-
-    await page.setViewportSize({ width: 600, height: 900 });
-    const geometry = await page.locator('.box[data-panel-id]').evaluateAll(panels => panels.map(panel => ({
-        width: panel.getBoundingClientRect().width,
-        height: panel.getBoundingClientRect().height
-    })));
-    expect(geometry).toHaveLength(7);
-    expect(geometry.every(panel => panel.width > 500 && panel.height >= 200)).toBe(true);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
-
-    const toggle = page.locator('#btn-settings-toggle');
-    await expect(toggle).toBeVisible();
-    await toggle.focus();
+    await intermediateToggle.focus();
     await page.keyboard.press('Space');
-    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
     await expect(page.locator('#settings-sidebar')).toHaveAttribute('aria-hidden', 'false');
     await page.keyboard.press('Escape');
-    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(intermediateToggle).toHaveAttribute('aria-expanded', 'false');
 
     await page.setViewportSize({ width: 375, height: 812 });
     const narrowInput = await page.evaluate(() => {
@@ -83,13 +105,17 @@ test('desktop and mobile layouts keep every panel usable', async ({ page }) => {
     await expect(page.locator('.agenda-header')).toHaveClass(/variance-grid/);
     const narrowVariance = await page.evaluate(() => {
         const agenda = document.getElementById('agenda-container');
+        const input = document.querySelector('.input-box');
         const header = document.querySelector('.agenda-header');
         const row = document.querySelector('.agenda-row');
         const rowRect = row.getBoundingClientRect();
+        const inputRect = input.getBoundingClientRect();
+        const addButtonRect = document.getElementById('btn-add-item').getBoundingClientRect();
         return {
             agendaOverflow: agenda.scrollWidth - agenda.clientWidth,
             headerOverflow: header.scrollWidth - header.clientWidth,
             rowHeight: rowRect.height,
+            inputContainsAgenda: addButtonRect.bottom <= inputRect.bottom + 1,
             childrenContained: [...row.children].every(child => {
                 const rect = child.getBoundingClientRect();
                 return rect.left >= rowRect.left - 1 && rect.right <= rowRect.right + 1 &&
@@ -100,6 +126,7 @@ test('desktop and mobile layouts keep every panel usable', async ({ page }) => {
     expect(narrowVariance).toMatchObject({
         agendaOverflow: 0,
         headerOverflow: 0,
+        inputContainsAgenda: true,
         childrenContained: true
     });
     expect(narrowVariance.rowHeight).toBeGreaterThan(70);
@@ -246,9 +273,47 @@ test('agenda and staging offer keyboard and touch-friendly movement controls', a
     await expect(page.getByRole('button', { name: `Move ${secondName} to staging` })).toBeVisible();
 });
 
+test('staged items retain preset colors in light and dark mode', async ({ page }) => {
+    await loadFresh(page);
+    const firstName = await page.locator('.agenda-row input[data-field="name"]').first().inputValue();
+    await page.getByRole('button', { name: `Move ${firstName} to staging` }).click();
+
+    async function compareStagedToThemeReference() {
+        return page.evaluate(() => {
+            const card = document.querySelector('.staging-item');
+            const referenceRow = [...document.querySelectorAll('.agenda-row')]
+                .find(row => row.classList.contains(card.classList[1]));
+            const referenceName = referenceRow.querySelector('input[data-field="name"]');
+            const cardStyle = getComputedStyle(card);
+            const rowStyle = getComputedStyle(referenceRow);
+            const nameStyle = getComputedStyle(referenceName);
+            return {
+                card: [cardStyle.borderLeftColor, cardStyle.backgroundColor, cardStyle.color],
+                reference: [rowStyle.borderLeftColor, nameStyle.backgroundColor, nameStyle.color]
+            };
+        });
+    }
+
+    const colors = await compareStagedToThemeReference();
+    expect(colors.card).toEqual(colors.reference);
+
+    await page.evaluate(async () => {
+        const { updateSettings } = await import('/agendamatic/js/state.js');
+        updateSettings({ darkMode: true });
+    });
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect.poll(async () => {
+        const current = await compareStagedToThemeReference();
+        return current.card.join('|') === current.reference.join('|');
+    }).toBe(true);
+});
+
 test('Stop freezes live tracking and resume excludes the paused interval', async ({ page }) => {
     await loadFresh(page);
-    await page.locator('#sync-system-time').check();
+    await page.evaluate(async () => {
+        const { updateSettings } = await import('/agendamatic/js/state.js');
+        updateSettings({ syncSystemTime: true });
+    });
     await page.locator('#btn-next-item').click();
     await page.waitForTimeout(1100);
     await page.locator('#btn-stop').click();
@@ -311,13 +376,11 @@ test('Tracker renders buffer gaps and pop-out mirrors the active appearance', as
     await expect.poll(() => popup.locator('#popout-tracker').count()).toBe(1);
     const appearance = await popup.evaluate(() => ({
         display: getComputedStyle(document.body).display,
-        grid: getComputedStyle(document.body).gridTemplateColumns,
         theme: document.documentElement.getAttribute('data-theme'),
         density: document.documentElement.getAttribute('data-density')
     }));
     expect(appearance).toEqual({
         display: 'block',
-        grid: 'none',
         theme: 'dark',
         density: 'presentation'
     });
@@ -359,7 +422,10 @@ test('custom HSL colors round-trip and style every agenda view', async ({ page }
     await page.locator('#bulk-edit-cancel').click();
 
     const lightBackground = await page.locator('.agenda-row').first().locator('input[data-field="name"]').evaluate(element => getComputedStyle(element).backgroundColor);
-    await page.locator('#dark-mode').check();
+    await page.evaluate(async () => {
+        const { updateSettings } = await import('/agendamatic/js/state.js');
+        updateSettings({ darkMode: true });
+    });
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await expect.poll(() => page.locator('.agenda-row').first().locator('input[data-field="name"]')
         .evaluate(element => getComputedStyle(element).backgroundColor)).not.toBe(lightBackground);

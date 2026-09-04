@@ -101,7 +101,7 @@
                     <div class="box export-box">
                         <div class="box-header">
                             <h3>Import / Export</h3>
-                            <button type="button" id="btn-metadata" class="box-header-action" data-tooltip="Add meeting details and attendance">Add Metadata</button>
+                            <button type="button" id="btn-metadata" class="box-header-action" aria-label="Add meeting metadata" data-tooltip="Add meeting details and attendance"><span class="compact-action-icon" aria-hidden="true">+</span><span class="header-action-label">Add Metadata</span></button>
                         </div>
                         <div class="export-panel">
                             <div class="export-options">
@@ -130,7 +130,7 @@
                                     <button id="btn-export-docx" data-tooltip="Download as Word document">.doc</button>
                                     <button id="btn-export-json" data-tooltip="Download state as JSON">.json</button>
                                 </div>
-                                <div class="export-section-label" style="margin-top: 8px;">From:</div>
+                                <div class="export-section-label export-from-label">From:</div>
                                 <button id="btn-import-inline" class="btn-import" data-tooltip="Import agenda from JSON file">Import .json</button>
                             </div>
                         </div>
@@ -237,8 +237,8 @@
                         <div class="timeline-header">
                             <h3>Tracker</h3>
                             <div class="timeline-controls">
-                                <button id="btn-popout" data-tooltip="Open a wide tracker pop-out window">&#8599; Pop Out</button>
-                                <button id="btn-stop" data-tooltip="Stop/pause tracking">&#9632; Stop</button>
+                                <button id="btn-popout" aria-label="Pop out tracker" data-tooltip="Open tracker pop-out window"><span aria-hidden="true">&#8599;</span><span class="timeline-control-label">Pop Out</span></button>
+                                <button id="btn-stop" aria-label="Pause meeting" data-tooltip="Stop/pause tracking"><span aria-hidden="true">&#9632;</span><span class="timeline-control-label">Stop</span></button>
                             </div>
                         </div>
 
@@ -260,7 +260,6 @@
                         <div class="progress-bar-container">
                             <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
                         </div>
-                        <div id="active-item-glow" class="active-item-glow" aria-hidden="true"></div>
                         <div id="progress-guide-line" class="progress-guide-line" aria-hidden="true"></div>
                     </div>
 
@@ -323,8 +322,8 @@
                                 <button type="button" data-action="bold" data-tooltip="Bold (Ctrl+B)" aria-label="Bold"><b>B</b></button>
                                 <button type="button" data-action="italic" data-tooltip="Italic (Ctrl+I)" aria-label="Italic"><i>I</i></button>
                                 <button type="button" data-action="heading" data-tooltip="Heading" aria-label="Heading">H</button>
-                                <button type="button" data-action="bullet" data-tooltip="Bullet list" aria-label="Bullet list">&#8226; List</button>
-                                <button type="button" data-action="numbered" data-tooltip="Numbered list" aria-label="Numbered list">1. List</button>
+                                <button type="button" data-action="bullet" data-tooltip="Bullet list" aria-label="Bullet list">&#8226;<span class="toolbar-wide-label"> List</span></button>
+                                <button type="button" data-action="numbered" data-tooltip="Numbered list" aria-label="Numbered list">1.<span class="toolbar-wide-label"> List</span></button>
                                 <button type="button" data-action="link" data-tooltip="Insert link" aria-label="Insert link">Link</button>
                                 <button type="button" data-action="code" data-tooltip="Code block" aria-label="Code block">&lt;/&gt;</button>
                             </div>

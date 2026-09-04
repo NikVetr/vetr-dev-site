@@ -440,7 +440,7 @@ function setupSettingsDrawer(elements) {
     } = elements;
     if (!settingsSidebar || !settingsToggleButton || !settingsCloseButton || !settingsBackdrop) return;
 
-    const mobileQuery = window.matchMedia('(max-width: 1280px)');
+    const mobileQuery = window.matchMedia('(max-width: 1439px)');
     let returnFocus = null;
 
     const closeDrawer = ({ restoreFocus = true } = {}) => {

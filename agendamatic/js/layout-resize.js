@@ -6,6 +6,7 @@ import { clamp } from './utils.js';
 
 const STORAGE_KEY = 'autochair_layout_splits_v6';
 const KEYBOARD_STEP = 16;
+const STACKED_LAYOUT_QUERY = '(max-width: 1199px), (max-height: 720px)';
 
 const RESIZER_DEFS = [
     {
@@ -13,40 +14,40 @@ const RESIZER_DEFS = [
         axis: 'y',
         containerSelector: '.workspace-panels',
         cssVar: '--main-top-height',
+        beforeSelector: ':scope > .top-section',
+        afterSelector: ':scope > .lower-panels',
         beforeLabel: 'Top panels',
-        afterLabel: 'Lower panels',
-        minPrev: 220,
-        minNext: 300
+        afterLabel: 'Lower panels'
     },
     {
         handleId: 'resizer-top-main',
         axis: 'x',
         containerSelector: '.top-section',
         cssVar: '--top-left-width',
+        beforeSelector: ':scope > .panel-slot-input',
+        afterSelector: ':scope > .right-side',
         beforeLabel: 'Input panel',
-        afterLabel: 'Right-side panels',
-        minPrev: 360,
-        minNext: 280
+        afterLabel: 'Right-side panels'
     },
     {
         handleId: 'resizer-right-side',
         axis: 'x',
         containerSelector: '.right-side',
         cssVar: '--right-export-width',
+        beforeSelector: ':scope > .panel-slot-export',
+        afterSelector: ':scope > .status-column',
         beforeLabel: 'Import and Export panel',
-        afterLabel: 'Status panels',
-        minPrev: 190,
-        minNext: 200
+        afterLabel: 'Status panels'
     },
     {
         handleId: 'resizer-status-column',
         axis: 'y',
         containerSelector: '.status-column',
         cssVar: '--status-overall-height',
+        beforeSelector: ':scope > .panel-slot-overall-status',
+        afterSelector: ':scope > .next-item-controls',
         beforeLabel: 'Agenda Status panel',
-        afterLabel: 'Meeting controls',
-        minPrev: 140,
-        minNext: 110
+        afterLabel: 'Meeting controls'
     },
     {
         handleId: 'resizer-next-controls',
@@ -63,31 +64,31 @@ const RESIZER_DEFS = [
         axis: 'x',
         containerSelector: '.tracker-section',
         cssVar: '--tracker-left-width',
+        beforeSelector: ':scope > .panel-slot-tracker',
+        afterSelector: ':scope > .panel-slot-current-status',
         beforeLabel: 'Tracker panel',
-        afterLabel: 'Current Status panel',
-        minPrev: 360,
-        minNext: 260
+        afterLabel: 'Current Status panel'
     },
     {
         handleId: 'resizer-main-bottom',
         axis: 'y',
         containerSelector: '.lower-panels',
         cssVar: '--main-bottom-height',
+        beforeSelector: ':scope > .tracker-section',
+        afterSelector: ':scope > .bottom-section',
         beforeLabel: 'Tracker row',
         afterLabel: 'Bottom panels',
-        anchor: 'next',
-        minPrev: 120,
-        minNext: 120
+        anchor: 'next'
     },
     {
         handleId: 'resizer-bottom',
         axis: 'x',
         containerSelector: '.bottom-section',
         cssVar: '--bottom-left-width',
+        beforeSelector: ':scope > .panel-slot-staging',
+        afterSelector: ':scope > .panel-slot-current-item',
         beforeLabel: 'Staging panel',
-        afterLabel: 'Current Item panel',
-        minPrev: 320,
-        minNext: 280
+        afterLabel: 'Current Item panel'
     }
 ];
 
@@ -99,26 +100,71 @@ function getSplitterSize(container) {
     return Number.isFinite(value) && value > 0 ? value : 10;
 }
 
-function getFeasibleBounds(def, total, splitter) {
+function getCssPixels(element, property) {
+    const value = Number.parseFloat(getComputedStyle(element).getPropertyValue(property));
+    return Number.isFinite(value) ? value : 0;
+}
+
+function getRequiredSize(element, axis) {
+    if (!element) return 0;
+    const panelMinimum = getCssPixels(
+        element,
+        axis === 'x' ? '--panel-min-inline' : '--panel-min-block'
+    );
+    if (panelMinimum > 0) return panelMinimum;
+
+    const node = RESIZER_DEFS.find(def => (
+        def.beforeSelector && element.matches(def.containerSelector)
+    ));
+    if (!node) return 0;
+    const before = getRequiredSize(element.querySelector(node.beforeSelector), axis);
+    const after = getRequiredSize(element.querySelector(node.afterSelector), axis);
+    return node.axis === axis
+        ? before + getSplitterSize(element) + after
+        : Math.max(before, after);
+}
+
+function getConfiguredMinima(def, container) {
+    if (!def.beforeSelector) {
+        return { minPrev: def.minPrev || 0, minNext: def.minNext || 0 };
+    }
+    return {
+        minPrev: getRequiredSize(container.querySelector(def.beforeSelector), def.axis),
+        minNext: getRequiredSize(container.querySelector(def.afterSelector), def.axis)
+    };
+}
+
+function syncLayoutMinimums() {
+    RESIZER_DEFS.forEach(def => {
+        if (!def.beforeSelector) return;
+        const container = document.querySelector(def.containerSelector);
+        if (!container) return;
+        const { minPrev, minNext } = getConfiguredMinima(def, container);
+        container.style.setProperty('--layout-before-min', `${Math.ceil(minPrev)}px`);
+        container.style.setProperty('--layout-after-min', `${Math.ceil(minNext)}px`);
+    });
+    const workspace = document.querySelector('.workspace-panels');
+    if (workspace) {
+        workspace.style.setProperty('--workspace-min-block', `${Math.ceil(getRequiredSize(workspace, 'y'))}px`);
+    }
+}
+
+function getFeasibleBounds(def, container, total, splitter) {
     const available = Math.max(0, total - splitter);
     if (available <= 0) {
         return { minPrev: 0, maxPrev: 0 };
     }
 
-    let minPrev = Math.max(0, def.minPrev || 0);
-    let minNext = Math.max(0, def.minNext || 0);
+    const configured = getConfiguredMinima(def, container);
+    const minPrev = Math.max(0, configured.minPrev);
+    const minNext = Math.max(0, configured.minNext);
 
-    // If the requested minima do not fit, scale them down proportionally.
     const required = minPrev + minNext;
     if (required > available) {
-        const ratio = required > 0 ? (minPrev / required) : 0.5;
-        minPrev = available * ratio;
-        minNext = available - minPrev;
+        return { minPrev, maxPrev: minPrev };
     }
 
-    const maxPrev = Math.max(0, available - minNext);
-    minPrev = Math.min(minPrev, maxPrev);
-    return { minPrev, maxPrev };
+    return { minPrev, maxPrev: available - minNext };
 }
 
 function getStoredValueFromPrev(def, total, splitter, prevValue) {
@@ -141,11 +187,10 @@ function applyValue(def, container, rawValue) {
     const rect = container.getBoundingClientRect();
     const splitter = getSplitterSize(container);
     const total = def.axis === 'x' ? rect.width : rect.height;
-    const { minPrev, maxPrev } = getFeasibleBounds(def, total, splitter);
+    const { minPrev, maxPrev } = getFeasibleBounds(def, container, total, splitter);
     const clamped = clamp(rawValue, minPrev, maxPrev);
     const stored = getStoredValueFromPrev(def, total, splitter, clamped);
     container.style.setProperty(def.cssVar, `${Math.round(stored)}px`);
-    updateHandleAria(def, container);
     return clamped;
 }
 
@@ -153,7 +198,7 @@ function getCurrentPrevValue(def, container, handle = document.getElementById(de
     const rect = container.getBoundingClientRect();
     const splitter = getSplitterSize(container);
     const total = def.axis === 'x' ? rect.width : rect.height;
-    const { minPrev, maxPrev } = getFeasibleBounds(def, total, splitter);
+    const { minPrev, maxPrev } = getFeasibleBounds(def, container, total, splitter);
     const storedCssValue = container.style.getPropertyValue(def.cssVar).trim();
     if (/^-?\d+(?:\.\d+)?px$/.test(storedCssValue)) {
         const storedValue = Number.parseFloat(storedCssValue);
@@ -179,13 +224,13 @@ function updateHandleAria(def, container, handle = document.getElementById(def.h
     const splitter = getSplitterSize(container);
     const total = def.axis === 'x' ? rect.width : rect.height;
     const available = Math.max(0, total - splitter);
-    const { minPrev, maxPrev } = getFeasibleBounds(def, total, splitter);
+    const { minPrev, maxPrev } = getFeasibleBounds(def, container, total, splitter);
     const current = getCurrentPrevValue(def, container, handle);
     const asPercent = value => available > 0 ? Math.round((value / available) * 100) : 0;
     const minimum = asPercent(minPrev);
     const maximum = asPercent(maxPrev);
     const now = clamp(asPercent(current), minimum, maximum);
-    const isUnavailable = window.matchMedia('(max-width: 1024px)').matches;
+    const isUnavailable = window.matchMedia(STACKED_LAYOUT_QUERY).matches || maximum <= minimum;
 
     handle.setAttribute('role', 'separator');
     handle.tabIndex = isUnavailable ? -1 : 0;
@@ -214,7 +259,7 @@ function updateAllHandleAria() {
 }
 
 function handleKeyboardResize(event, def, handle, container) {
-    if (window.matchMedia('(max-width: 1024px)').matches) return;
+    if (window.matchMedia(STACKED_LAYOUT_QUERY).matches) return;
     const decreaseKey = def.axis === 'x' ? 'ArrowLeft' : 'ArrowUp';
     const increaseKey = def.axis === 'x' ? 'ArrowRight' : 'ArrowDown';
     if (![decreaseKey, increaseKey, 'Home', 'End'].includes(event.key)) return;
@@ -223,7 +268,7 @@ function handleKeyboardResize(event, def, handle, container) {
     const rect = container.getBoundingClientRect();
     const splitter = getSplitterSize(container);
     const total = def.axis === 'x' ? rect.width : rect.height;
-    const { minPrev, maxPrev } = getFeasibleBounds(def, total, splitter);
+    const { minPrev, maxPrev } = getFeasibleBounds(def, container, total, splitter);
     const current = getCurrentPrevValue(def, container, handle);
     const step = event.shiftKey ? KEYBOARD_STEP * 3 : KEYBOARD_STEP;
     let nextValue = current;
@@ -233,10 +278,8 @@ function handleKeyboardResize(event, def, handle, container) {
     else if (event.key === 'End') nextValue = maxPrev;
 
     applyValue(def, container, nextValue);
-    clampAll();
-    persistValues();
-    updateAllHandleAria();
     window.dispatchEvent(new Event('autochair:layout-resized'));
+    persistValues();
 }
 
 function handlePointerMove(event) {
@@ -256,7 +299,6 @@ function handlePointerMove(event) {
 
     // Keep nested split values feasible while parent splits move.
     clampAll();
-    window.dispatchEvent(new Event('autochair:layout-resized'));
 }
 
 function persistValues() {
@@ -285,12 +327,15 @@ function endDrag() {
     window.removeEventListener('pointermove', handlePointerMove);
     window.removeEventListener('pointerup', endDrag);
     window.removeEventListener('pointercancel', endDrag);
-    persistValues();
     window.dispatchEvent(new Event('autochair:layout-resized'));
+    persistValues();
 }
 
 function startDrag(event, def, handle, container) {
-    if (window.matchMedia('(max-width: 1024px)').matches) return;
+    if (
+        window.matchMedia(STACKED_LAYOUT_QUERY).matches ||
+        handle.getAttribute('aria-disabled') === 'true'
+    ) return;
     event.preventDefault();
     handle.focus({ preventScroll: true });
     activeDrag = { drags: [{ def, handle, container }] };
@@ -322,7 +367,7 @@ function loadPersistedValues() {
 }
 
 function clampAll() {
-    if (window.matchMedia('(max-width: 1024px)').matches) return;
+    if (window.matchMedia(STACKED_LAYOUT_QUERY).matches) return;
     RESIZER_DEFS.forEach(def => {
         const container = document.querySelector(def.containerSelector);
         if (!container) return;
@@ -335,6 +380,12 @@ function clampAll() {
         const prevValue = getPrevValueFromStored(def, total, splitter, value);
         applyValue(def, container, prevValue);
     });
+}
+
+function reconcileLayout() {
+    syncLayoutMinimums();
+    clampAll();
+    updateAllHandleAria();
 }
 
 /**
@@ -352,9 +403,10 @@ export function initLayoutResizers() {
     });
 
     window.addEventListener('resize', () => {
-        clampAll();
-        updateAllHandleAria();
+        reconcileLayout();
     });
-    clampAll();
-    updateAllHandleAria();
+    window.addEventListener('autochair:layout-resized', () => {
+        reconcileLayout();
+    });
+    reconcileLayout();
 }

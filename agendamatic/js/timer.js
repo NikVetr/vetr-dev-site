@@ -48,7 +48,6 @@ let currentItemPanel = null;
 let notesPreviewEl = null;
 let progressBar = null;
 let progressGuideLine = null;
-let activeItemGlow = null;
 let tickerTape = null;
 let tickInterval = null;
 let popoutResizeTimeout = null;
@@ -141,7 +140,6 @@ export function initTimer(elements) {
     currentStatusUnitEl = currentStatusBox?.querySelector('.current-status-unit') || null;
     progressBar = elements.progressBar;
     progressGuideLine = document.getElementById('progress-guide-line');
-    activeItemGlow = document.getElementById('active-item-glow');
     tickerTape = document.getElementById('ticker-tape');
     stopButton = elements.stopButton;
     popoutButton = elements.popoutButton;
@@ -666,7 +664,6 @@ function getTrackerStructureSignature() {
             id: block.dataset.id,
             className: block.className.replace(' label-overflow', ''),
             text: block.textContent,
-            glowRgb: block.dataset.glowRgb,
             colorStyle: block.style.cssText
         }))
     });
@@ -806,7 +803,6 @@ function syncPopoutDynamicTracker(trackerHost) {
     }
 
     const popoutView = trackerHost.ownerDocument.defaultView;
-    const targetGlow = trackerHost.querySelector('.active-item-glow');
     if (axisGeometryChanged || blockGeometryChanged) {
         popoutView?.requestAnimationFrame(() => {
             if (axisGeometryChanged) layoutClonedAxis(targetAxisWrapper);
@@ -818,11 +814,9 @@ function syncPopoutDynamicTracker(trackerHost) {
                     trackerHost.querySelector('.overflow-labels-container')
                 );
             }
-            updateActiveItemGlow(trackerHost, targetTrack, targetGlow);
             syncPopoutProgressGuide(trackerHost);
         });
     } else {
-        updateActiveItemGlow(trackerHost, targetTrack, targetGlow);
         syncPopoutProgressGuide(trackerHost);
     }
 }
@@ -884,55 +878,21 @@ function openTrackerPopout() {
   <title>autoCHAIR Tracker</title>
   <base href="${baseHref}">
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    * { box-sizing: border-box; }
-    body { display: block; grid-template-columns: none; width: 100%; min-height: 100vh; margin: 0; padding: 10px; background: var(--bg-secondary); color: var(--text-color); font-family: 'Courier New', monospace; overflow: auto; }
-    .popout-layout { display: grid; grid-template-columns: minmax(520px, 3fr) minmax(210px, 1fr) minmax(240px, 1fr); grid-template-rows: minmax(220px, 1fr) 118px; gap: 10px; width: 100%; min-width: 990px; min-height: 390px; height: calc(100vh - 20px); }
-    .popout-pane { border: 2px solid var(--border-color); border-radius: 4px; background: var(--bg-color); min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
-    .popout-tracker-pane { grid-column: 1; grid-row: 1 / 3; }
-    .popout-overall-pane { grid-column: 2; grid-row: 1; }
-    .popout-current-pane { grid-column: 3; grid-row: 1; }
-    .popout-control-pane { grid-column: 2 / 4; grid-row: 2; min-height: 118px; }
-    .popout-pane h3 { margin: 0; padding: 8px 10px; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; text-transform: uppercase; }
-    .popout-content { position: relative; padding: 8px; min-height: 0; min-width: 0; flex: 1; overflow: auto; }
-    .popout-tracker-pane .popout-content { overflow: hidden; }
-    .popout-content .timeline-header { display: none; }
-    .popout-content .timeline-axis-wrapper { margin-top: 28px; margin-left: 14px; margin-right: 14px; }
-    .popout-content .timeline-track-wrapper { margin-left: 14px; margin-right: 14px; }
-    .popout-content .progress-bar-container { margin-left: 14px; margin-right: 14px; }
-    .popout-content .status-display { box-sizing: border-box; height: auto; min-height: 100%; padding: 8px 4px; overflow: visible; }
-    .popout-content .current-status-display { box-sizing: border-box; height: auto; min-height: 100%; gap: 4px; padding: 6px 4px; overflow: visible; }
-    .popout-content .ticker-container { height: 58px; }
-    .popout-content .current-status-ticker { height: 52px; }
-    .popout-content .current-status-tape.continuous-ticker { --ticker-base-size: 2rem; }
-    .popout-content .current-status-line { font-size: 0.82rem; }
-    .popout-content .current-status-next { font-size: 0.72rem; margin-top: 1px; }
-    .popout-controls-wrap { flex: 1; min-height: 0; padding: 8px; }
-    .popout-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 100%; }
-    .popout-controls[data-phase="idle"] { grid-template-columns: 1fr; }
-    .popout-controls[data-phase="idle"] .popout-action-prev { display: none; }
-    .popout-action { min-width: 0; border: 2px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-color); font: inherit; font-weight: 800; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 14px; }
-    .popout-action-prev { background: rgba(52, 152, 219, 0.12); }
-    .popout-action-next { background: rgba(231, 76, 60, 0.12); }
-    .popout-action:hover { filter: brightness(0.96); }
-    .popout-action:disabled { opacity: 0.6; cursor: not-allowed; }
-    .popout-action kbd { border: 1px solid var(--border-color); border-radius: 5px; background: var(--bg-color); color: var(--text-muted); padding: 3px 8px; font: 0.68rem 'Courier New', monospace; font-weight: 400; }
-  </style>
 </head>
-<body>
+<body class="popout-body">
   <div class="popout-layout">
-    <section class="popout-pane popout-tracker-pane"><h3>Tracker</h3><div id="popout-tracker" class="popout-content"></div></section>
-    <section class="popout-pane popout-overall-pane"><h3>Agenda Status</h3><div id="popout-overall" class="popout-content"></div></section>
-    <section class="popout-pane popout-current-pane"><h3>Current Status</h3><div id="popout-current" class="popout-content"></div></section>
+    <section class="popout-pane popout-tracker-pane"><h3>Tracker</h3><div id="popout-tracker" class="popout-content timeline-container"></div></section>
+    <section class="popout-pane popout-overall-pane"><h3>Agenda Status</h3><div id="popout-overall" class="popout-content overall-status-box"></div></section>
+    <section class="popout-pane popout-current-pane"><h3>Current Status</h3><div id="popout-current" class="popout-content current-status-box"></div></section>
     <section class="popout-pane popout-control-pane">
       <h3>Controls</h3>
       <div class="popout-controls-wrap">
         <div class="popout-controls" data-phase="idle">
-          <button id="btn-popout-prev" class="popout-action popout-action-prev">
+          <button id="btn-popout-prev" class="next-item-btn prev-item-btn popout-action" data-short-label="Previous" aria-label="Previous agenda item" aria-keyshortcuts="Backspace">
             <span>← Previous Item</span>
             <kbd>Backspace</kbd>
           </button>
-          <button id="btn-popout-next" class="popout-action popout-action-next">
+          <button id="btn-popout-next" class="next-item-btn main-next-btn popout-action" data-short-label="Start" aria-label="Start meeting" aria-keyshortcuts="Space">
             <span id="popout-primary-label">Start Meeting</span>
             <kbd>Space</kbd>
           </button>
@@ -968,10 +928,14 @@ function openTrackerPopout() {
         }
     });
     popoutWindow.addEventListener('resize', () => {
+        popoutWindow.document.body.classList.add('resizing-popout');
         clearTimeout(popoutResizeTimeout);
         popoutResizeTimeout = setTimeout(() => {
             popoutTrackerSignature = null;
             syncPopoutWindow();
+            popoutWindow?.requestAnimationFrame(() => {
+                popoutWindow?.document.body.classList.remove('resizing-popout');
+            });
         }, 140);
     });
 
@@ -1018,18 +982,16 @@ function syncPopoutWindow() {
         const trackHtml = document.querySelector('.timeline-track-wrapper')?.outerHTML || '';
         const progressHtml = document.querySelector('.progress-bar-container')?.outerHTML || '';
         const guideHtml = document.querySelector('.progress-guide-line')?.outerHTML || '';
-        trackerHost.innerHTML = `<div class="active-item-glow" aria-hidden="true"></div>${axisHtml}${trackHtml}${progressHtml}${guideHtml}`;
+        trackerHost.innerHTML = `${axisHtml}${trackHtml}${progressHtml}${guideHtml}`;
         popoutTrackerSignature = nextTrackerSignature;
 
         const popoutAxisWrapper = trackerHost.querySelector('.timeline-axis-wrapper');
         const popoutTrack = trackerHost.querySelector('.timeline-track');
         const popoutOverflow = trackerHost.querySelector('.overflow-labels-container');
-        const popoutGlow = trackerHost.querySelector('.active-item-glow');
         const blockData = getTimelineBlockData(calculateAdjustedIntervals().items);
         popoutView?.requestAnimationFrame(() => {
             layoutClonedAxis(popoutAxisWrapper);
             renderOverflowLabels(blockData, popoutTrack, popoutOverflow);
-            updateActiveItemGlow(trackerHost, popoutTrack, popoutGlow);
         });
     }
     syncPopoutDynamicTracker(trackerHost);
@@ -1078,13 +1040,24 @@ function syncPopoutWindow() {
     if (popoutPrev && prevItemButton) {
         popoutPrev.disabled = prevItemButton.disabled;
         popoutPrev.hidden = prevItemButton.hidden;
+        popoutPrev.setAttribute('aria-label', prevItemButton.getAttribute('aria-label') || 'Previous agenda item');
+        popoutPrev.setAttribute('aria-keyshortcuts', prevItemButton.getAttribute('aria-keyshortcuts') || 'Backspace');
     }
     if (popoutNext && nextItemButton) {
         popoutNext.disabled = nextItemButton.disabled;
         popoutNext.setAttribute('aria-label', nextItemButton.getAttribute('aria-label') || 'Meeting action');
+        popoutNext.setAttribute('aria-keyshortcuts', nextItemButton.getAttribute('aria-keyshortcuts') || 'Space');
     }
     const phase = getTrackerPhase(getState().tracker);
     if (popoutControls) popoutControls.dataset.phase = phase;
+    if (popoutNext) {
+        popoutNext.dataset.shortLabel = {
+            idle: 'Start',
+            running: 'Next',
+            paused: 'Resume',
+            completed: 'Complete'
+        }[phase];
+    }
     if (popoutPrimaryLabel) {
         popoutPrimaryLabel.textContent = {
             idle: 'Start Meeting',
@@ -1137,6 +1110,12 @@ function getTimelineBlockData(items) {
     });
 }
 
+function clearOverflowLabels(labelsContainer = overflowLabelsContainer) {
+    if (!labelsContainer) return;
+    labelsContainer.replaceChildren();
+    labelsContainer.classList.remove('has-overflow', 'compact-overflow');
+}
+
 function renderTimeline() {
     if (!timelineTrack) return;
 
@@ -1145,11 +1124,7 @@ function renderTimeline() {
     lastLiveLayoutKey = getLiveLayoutKey(adjusted);
     if (items.length === 0) {
         timelineTrack.innerHTML = '<div class="timeline-block" style="left: 0; width: 100%; background: #ddd;">No items</div>';
-        if (activeItemGlow) activeItemGlow.style.display = 'none';
-        if (overflowLabelsContainer) {
-            overflowLabelsContainer.innerHTML = '';
-            overflowLabelsContainer.classList.remove('has-overflow');
-        }
+        clearOverflowLabels();
         return;
     }
 
@@ -1160,7 +1135,7 @@ function renderTimeline() {
 
     if (totalMinutes <= 0) {
         timelineTrack.innerHTML = '';
-        if (activeItemGlow) activeItemGlow.style.display = 'none';
+        clearOverflowLabels();
         return;
     }
 
@@ -1184,21 +1159,8 @@ function renderTimeline() {
         block.dataset.index = index;
         block.dataset.id = item.id;
         block.draggable = true;
-        const hasCustomColor = applyItemColorStyles(block, item);
-        const outlineColors = {
-            1: '#2196f3',
-            2: '#9c27b0',
-            3: '#4caf50',
-            4: '#ff9800',
-            5: '#e91e63',
-            6: '#009688',
-            7: '#795548',
-            8: '#607d8b'
-        };
-        if (!hasCustomColor) {
-            block.style.setProperty('--block-outline', outlineColors[item.themeNumber] || '#666');
-        }
-        block.dataset.glowRgb = colorRgb(getItemColor(item, index));
+        applyItemColorStyles(block, item);
+        block.style.setProperty('--active-glow-rgb', colorRgb(getItemColor(item, index)));
 
         if (getState().tracker.completedAt || index < currentItemIndex) {
             block.classList.add('completed');
@@ -1277,46 +1239,7 @@ function renderTimeline() {
         timelineTrack.appendChild(block);
     });
 
-    // Check for overflow labels after render
-    requestAnimationFrame(() => {
-        renderOverflowLabels(blockData);
-        updateActiveItemGlow();
-    });
-}
-
-function updateActiveItemGlow(
-    container = timelineTrack?.closest('.timeline-container'),
-    track = timelineTrack,
-    glow = activeItemGlow
-) {
-    const activeBlock = track?.querySelector('.timeline-block.active');
-    const axisWrapper = container?.querySelector('.timeline-axis-wrapper');
-    if (!container || !track || !glow || !activeBlock || !axisWrapper) {
-        if (glow) glow.style.display = 'none';
-        return;
-    }
-
-    const containerRect = container.getBoundingClientRect();
-    const originLeft = containerRect.left + container.clientLeft;
-    const originTop = containerRect.top + container.clientTop;
-    const axisRect = axisWrapper.getBoundingClientRect();
-    const blockRect = activeBlock.getBoundingClientRect();
-    const top = Math.max(0, axisRect.top - originTop + 2);
-    const bottom = blockRect.top - originTop;
-    const height = bottom - top;
-    if (height <= 0 || blockRect.width <= 0) {
-        glow.style.display = 'none';
-        return;
-    }
-
-    const blockLeft = blockRect.left - originLeft;
-
-    glow.style.display = 'block';
-    glow.style.left = `${blockLeft}px`;
-    glow.style.top = `${top}px`;
-    glow.style.width = `${blockRect.width}px`;
-    glow.style.height = `${height}px`;
-    glow.style.setProperty('--active-glow-rgb', activeBlock.dataset.glowRgb || '33 150 243');
+    renderOverflowLabels(blockData);
 }
 
 /**
@@ -1350,16 +1273,12 @@ function renderOverflowLabels(
                 block,
                 completed: block.classList.contains('completed')
             });
-        } else {
-            block.classList.remove('label-overflow');
         }
     });
 
-    // Clear and rebuild overflow labels
-    labelsContainer.innerHTML = '';
+    clearOverflowLabels(labelsContainer);
 
     if (overflowItems.length === 0) {
-        labelsContainer.classList.remove('has-overflow');
         return;
     }
 
@@ -1378,47 +1297,49 @@ function renderOverflowLabels(
         return label;
     });
 
-    ownerWindow.requestAnimationFrame(() => {
-        const containerRect = labelsContainer.getBoundingClientRect();
-        const containerWidth = containerRect.width;
-        if (containerWidth <= 0) return;
+    const containerRect = labelsContainer.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    if (containerWidth <= 0) return;
 
-        const desiredCenters = overflowItems.map(item => (item.centerPercent / 100) * containerWidth);
-        const widths = labels.map(label => label.getBoundingClientRect().width);
-        const fittedCenters = fitLabelCenters(desiredCenters, widths, 6, [0, containerWidth]);
+    const desiredCenters = overflowItems.map(item => (item.centerPercent / 100) * containerWidth);
+    const widths = labels.map(label => label.getBoundingClientRect().width);
+    const requiredWidth = widths.reduce((sum, width) => sum + width, 0) +
+        Math.max(0, labels.length - 1) * 6;
+    const useCompactLegend = requiredWidth > containerWidth;
+    labelsContainer.classList.toggle('compact-overflow', useCompactLegend);
+    if (useCompactLegend) {
+        svg.remove();
+        return;
+    }
 
-        labels.forEach((label, i) => {
-            label.style.left = `${fittedCenters[i]}px`;
-        });
+    const fittedCenters = fitLabelCenters(desiredCenters, widths, 6, [0, containerWidth]);
+    labels.forEach((label, i) => {
+        label.style.left = `${fittedCenters[i]}px`;
+    });
 
-        const svgHeight = labelsContainer.getBoundingClientRect().height;
-        svg.setAttribute('width', containerWidth);
-        svg.setAttribute('height', svgHeight);
-        svg.setAttribute('viewBox', `0 0 ${containerWidth} ${svgHeight}`);
-        svg.innerHTML = '';
+    const svgHeight = labelsContainer.getBoundingClientRect().height;
+    svg.setAttribute('width', containerWidth);
+    svg.setAttribute('height', svgHeight);
+    svg.setAttribute('viewBox', `0 0 ${containerWidth} ${svgHeight}`);
 
-        overflowItems.forEach((item, i) => {
-            const blockRect = item.block.getBoundingClientRect();
-            const labelRect = labels[i].getBoundingClientRect();
-            const labelTop = labelRect.top - containerRect.top;
-            const startX = blockRect.left + blockRect.width / 2 - containerRect.left;
-            const startY = blockRect.bottom - containerRect.top;
-            const endX = fittedCenters[i];
-            // Anchor just above the label to avoid colored strokes intruding on text.
-            const endY = Math.max(0, labelTop - 2);
-
-            const darkMode = ownerDocument.documentElement.dataset.theme === 'dark';
-            const strokeColor = getItemAccentColor(item, item.index, darkMode);
-
-            const path = ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', getVerticalConnectorPath(startX, startY, endX, endY));
-            path.setAttribute('stroke', strokeColor);
-            path.setAttribute('stroke-width', '1.5');
-            path.setAttribute('fill', 'none');
-            path.setAttribute('vector-effect', 'non-scaling-stroke');
-            if (item.completed) path.setAttribute('opacity', '0.35');
-            svg.appendChild(path);
-        });
+    overflowItems.forEach((item, i) => {
+        const blockRect = item.block.getBoundingClientRect();
+        const labelRect = labels[i].getBoundingClientRect();
+        const labelTop = labelRect.top - containerRect.top;
+        const startX = blockRect.left + blockRect.width / 2 - containerRect.left;
+        const startY = blockRect.bottom - containerRect.top;
+        const endX = fittedCenters[i];
+        const endY = Math.max(0, labelTop - 2);
+        const darkMode = ownerDocument.documentElement.dataset.theme === 'dark';
+        const strokeColor = getItemAccentColor(item, item.index, darkMode);
+        const path = ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', getVerticalConnectorPath(startX, startY, endX, endY));
+        path.setAttribute('stroke', strokeColor);
+        path.setAttribute('stroke-width', '1.5');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('vector-effect', 'non-scaling-stroke');
+        if (item.completed) path.setAttribute('opacity', '0.35');
+        svg.appendChild(path);
     });
 }
 
@@ -1441,143 +1362,25 @@ function getVerticalConnectorPath(startX, startY, endX, endY) {
 }
 
 function fitLabelCenters(desiredCenters, widths, gap, bounds) {
-    const n = desiredCenters.length;
-    if (n === 0) return [];
-
-    const totalWidth = widths.reduce((sum, width) => sum + width, 0);
-    let gapUsed = gap;
-    if (bounds && n > 1) {
-        const available = bounds[1] - bounds[0];
-        const maxGap = Math.max(0, (available - totalWidth) / (n - 1));
-        if (gapUsed > maxGap) {
-            gapUsed = maxGap;
-        }
-    }
-
+    if (desiredCenters.length === 0) return [];
+    const [minimum, maximum] = bounds;
     const order = desiredCenters.map((value, index) => ({ value, index }))
         .sort((a, b) => (a.value - b.value) || (a.index - b.index));
-
-    const sortedLeft = new Array(n);
-    const offsets = new Array(n);
-    let offset = 0;
-    for (let i = 0; i < n; i += 1) {
-        const idx = order[i].index;
-        sortedLeft[i] = desiredCenters[idx] - widths[idx] / 2;
-        offsets[i] = offset;
-        offset += widths[idx] + gapUsed;
+    const centers = new Array(desiredCenters.length);
+    let cursor = minimum;
+    order.forEach(({ index }) => {
+        const halfWidth = widths[index] / 2;
+        centers[index] = clamp(desiredCenters[index], cursor + halfWidth, maximum - halfWidth);
+        cursor = centers[index] + halfWidth + gap;
+    });
+    cursor = maximum;
+    for (let i = order.length - 1; i >= 0; i -= 1) {
+        const index = order[i].index;
+        const halfWidth = widths[index] / 2;
+        centers[index] = Math.min(centers[index], cursor - halfWidth);
+        cursor = centers[index] - halfWidth - gap;
     }
-
-    const lower = new Array(n);
-    const upper = new Array(n);
-    const minBound = bounds ? bounds[0] : -Infinity;
-    const maxBound = bounds ? bounds[1] : Infinity;
-    for (let i = 0; i < n; i += 1) {
-        const idx = order[i].index;
-        lower[i] = minBound - offsets[i];
-        upper[i] = (maxBound - widths[idx]) - offsets[i];
-    }
-
-    const target = sortedLeft.map((value, i) => value - offsets[i]);
-    const adjusted = boundedIsotonicRegression(target, lower, upper);
-
-    const centers = new Array(n);
-    for (let i = 0; i < n; i += 1) {
-        const idx = order[i].index;
-        const left = adjusted[i] + offsets[i];
-        centers[idx] = left + widths[idx] / 2;
-    }
-
     return centers;
-}
-
-function hasHorizontalOverlap(desiredCenters, widths, gap) {
-    if (desiredCenters.length <= 1) return false;
-    const order = desiredCenters.map((value, index) => ({ value, index }))
-        .sort((a, b) => (a.value - b.value) || (a.index - b.index));
-    for (let i = 1; i < order.length; i += 1) {
-        const prevIdx = order[i - 1].index;
-        const currIdx = order[i].index;
-        const prevCenter = desiredCenters[prevIdx];
-        const currCenter = desiredCenters[currIdx];
-        const minDist = (widths[prevIdx] + widths[currIdx]) / 2 + gap;
-        if (currCenter - prevCenter < minDist) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function boundedIsotonicRegression(values, lower, upper) {
-    const n = values.length;
-    if (n === 0) return [];
-    const tol = 1e-9;
-
-    let bStart = [];
-    let bEnd = [];
-    let bSum = [];
-    let bW = [];
-    let bLo = [];
-    let bHi = [];
-    let bVal = [];
-
-    for (let i = 0; i < n; i += 1) {
-        bStart.push(i);
-        bEnd.push(i);
-        bSum.push(values[i]);
-        bW.push(1);
-        bLo.push(lower[i]);
-        bHi.push(upper[i]);
-        let val = values[i];
-        if (val < lower[i]) val = lower[i];
-        if (val > upper[i]) val = upper[i];
-        bVal.push(val);
-    }
-
-    let m = n;
-    let i = 0;
-    while (i < m - 1) {
-        if (bVal[i] > bVal[i + 1] + tol) {
-            bEnd[i] = bEnd[i + 1];
-            bSum[i] += bSum[i + 1];
-            bW[i] += bW[i + 1];
-            const newLo = Math.max(bLo[i], bLo[i + 1]);
-            const newHi = Math.min(bHi[i], bHi[i + 1]);
-            if (newLo > newHi && newLo - newHi > tol) {
-                const mid = (newLo + newHi) / 2;
-                bLo[i] = mid;
-                bHi[i] = mid;
-            } else {
-                bLo[i] = newLo;
-                bHi[i] = newHi;
-            }
-            let mu = bSum[i] / bW[i];
-            if (mu < bLo[i]) mu = bLo[i];
-            if (mu > bHi[i]) mu = bHi[i];
-            bVal[i] = mu;
-
-            bStart.splice(i + 1, 1);
-            bEnd.splice(i + 1, 1);
-            bSum.splice(i + 1, 1);
-            bW.splice(i + 1, 1);
-            bLo.splice(i + 1, 1);
-            bHi.splice(i + 1, 1);
-            bVal.splice(i + 1, 1);
-
-            m -= 1;
-            if (i > 0) i -= 1;
-        } else {
-            i += 1;
-        }
-    }
-
-    const out = new Array(n);
-    for (let k = 0; k < m; k += 1) {
-        for (let j = bStart[k]; j <= bEnd[k]; j += 1) {
-            out[j] = bVal[k];
-        }
-    }
-
-    return out;
 }
 
 function getFollowingItemColor(items, boundaryTime) {
@@ -1613,77 +1416,88 @@ function getMinorLabelInterval(totalMinutes) {
 function layoutAxisLabels(axisWrapper, axis, labelEntries) {
     const ownerDocument = axisWrapper.ownerDocument;
     const ownerWindow = ownerDocument.defaultView || window;
+    const width = axis.getBoundingClientRect().width;
+    if (labelEntries.length === 0 || width <= 0) return;
 
-    ownerWindow.requestAnimationFrame(() => {
-        const width = axis.getBoundingClientRect().width;
-        if (labelEntries.length === 0 || width <= 0) return;
-
-        const desiredCenters = labelEntries.map(entry => (entry.desiredCenter / 100) * width);
-        const labelWidths = labelEntries.map(entry => entry.label.getBoundingClientRect().width);
-        const boundedDesiredCenters = desiredCenters.map((center, i) => {
-            const halfWidth = labelWidths[i] / 2;
-            return clamp(center, halfWidth, width - halfWidth);
-        });
-        const fittedCenters = hasHorizontalOverlap(boundedDesiredCenters, labelWidths, 8)
-            ? fitLabelCenters(boundedDesiredCenters, labelWidths, 8, [0, width])
-            : boundedDesiredCenters;
-        const labelHeights = labelEntries.map(entry => entry.label.getBoundingClientRect().height || 12);
-        const tickHeights = labelEntries.map(entry => {
-            const renderedHeight = parseFloat(ownerWindow.getComputedStyle(entry.tickElement, '::before').height);
-            return Number.isFinite(renderedHeight) ? renderedHeight : entry.tickHeight;
-        });
-        const maxLabelHeight = Math.max(...labelHeights, 12);
-        const axisLine = axisWrapper.querySelector('.timeline-axis-line');
-        const axisY = axisLine ? axisLine.offsetTop : axis.offsetTop;
-        const tickTop = axisY - Math.max(...tickHeights);
-        const baseTop = Math.max(0, tickTop - maxLabelHeight - 4);
-        const liftedTop = Math.max(0, baseTop - 14);
-
-        labelEntries.forEach((entry, i) => {
-            const displacement = Math.abs(fittedCenters[i] - desiredCenters[i]);
-            entry.displaced = displacement > 2;
-            entry.tickElement.classList.toggle('has-connector', entry.displaced);
-            entry.label.style.left = `${fittedCenters[i]}px`;
-            entry.label.style.top = entry.displaced ? `${liftedTop}px` : `${baseTop}px`;
-            entry.label.style.background = '';
-            entry.label.style.webkitBackgroundClip = '';
-            entry.label.style.backgroundClip = '';
-            entry.label.style.webkitTextFillColor = '';
-            entry.label.style.color = entry.isMajor ? entry.followColor : '#222';
-        });
-
-        axisWrapper.querySelectorAll('.axis-label-curves').forEach(node => node.remove());
-        const displaced = labelEntries
-            .map((entry, i) => ({ entry, i }))
-            .filter(item => item.entry.displaced);
-        if (displaced.length === 0) return;
-
-        const wrapperRect = axisWrapper.getBoundingClientRect();
-        const curveSvg = ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const wrapperHeight = axisWrapper.getBoundingClientRect().height;
-        curveSvg.classList.add('axis-label-curves');
-        curveSvg.setAttribute('width', width);
-        curveSvg.setAttribute('height', wrapperHeight);
-        curveSvg.setAttribute('viewBox', `0 0 ${width} ${wrapperHeight}`);
-
-        displaced.forEach(({ entry, i }) => {
-            const labelBox = entry.label.getBoundingClientRect();
-            const endX = fittedCenters[i];
-            const endY = labelBox.top - wrapperRect.top + labelBox.height + 0.5;
-            const startX = desiredCenters[i];
-            const startY = axisY + 0.5;
-            const path = ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', getVerticalConnectorPath(startX, startY, endX, endY));
-            path.setAttribute('stroke', entry.isMajor ? entry.followColor : '#444');
-            path.setAttribute('stroke-width', entry.isMajor ? '1.4' : '1');
-            path.setAttribute('fill', 'none');
-            path.setAttribute('stroke-linecap', 'round');
-            path.setAttribute('vector-effect', 'non-scaling-stroke');
-            curveSvg.appendChild(path);
-        });
-
-        axisWrapper.appendChild(curveSvg);
+    labelEntries.forEach(entry => {
+        entry.label.hidden = false;
+        entry.tickElement.classList.remove('has-connector');
     });
+    const allWidths = labelEntries.map(entry => entry.label.getBoundingClientRect().width);
+    const widestLabel = Math.max(...allWidths);
+    const capacity = Math.max(2, Math.floor((width + 8) / (widestLabel + 8)));
+    let visibleEntries = labelEntries;
+    if (capacity < labelEntries.length) {
+        const visibleIndexes = new Set(
+            Array.from({ length: capacity }, (_, index) => (
+                Math.round((index * (labelEntries.length - 1)) / (capacity - 1))
+            ))
+        );
+        labelEntries.forEach((entry, index) => {
+            entry.label.hidden = !visibleIndexes.has(index);
+        });
+        visibleEntries = labelEntries.filter((_, index) => visibleIndexes.has(index));
+    }
+
+    const desiredCenters = visibleEntries.map(entry => (entry.desiredCenter / 100) * width);
+    const labelWidths = visibleEntries.map(entry => entry.label.getBoundingClientRect().width);
+    const boundedCenters = desiredCenters.map((center, index) => {
+        const halfWidth = labelWidths[index] / 2;
+        return clamp(center, halfWidth, width - halfWidth);
+    });
+    const fittedCenters = fitLabelCenters(boundedCenters, labelWidths, 8, [0, width]);
+    const labelHeights = visibleEntries.map(entry => entry.label.getBoundingClientRect().height || 12);
+    const tickHeights = visibleEntries.map(entry => {
+        const renderedHeight = parseFloat(ownerWindow.getComputedStyle(entry.tickElement, '::before').height);
+        return Number.isFinite(renderedHeight) ? renderedHeight : entry.tickHeight;
+    });
+    const axisLine = axisWrapper.querySelector('.timeline-axis-line');
+    const axisY = axisLine ? axisLine.offsetTop : axis.offsetTop;
+    const tickTop = axisY - Math.max(...tickHeights);
+    const baseTop = Math.max(0, tickTop - Math.max(...labelHeights, 12) - 4);
+    const liftedTop = Math.max(0, baseTop - 14);
+
+    visibleEntries.forEach((entry, index) => {
+        entry.displaced = Math.abs(fittedCenters[index] - desiredCenters[index]) > 2;
+        entry.tickElement.classList.toggle('has-connector', entry.displaced);
+        entry.label.style.left = `${fittedCenters[index]}px`;
+        entry.label.style.top = entry.displaced ? `${liftedTop}px` : `${baseTop}px`;
+        entry.label.style.color = entry.isMajor ? entry.followColor : '#222';
+    });
+
+    axisWrapper.querySelectorAll('.axis-label-curves').forEach(node => node.remove());
+    const displaced = visibleEntries
+        .map((entry, index) => ({ entry, index }))
+        .filter(({ entry }) => entry.displaced);
+    if (displaced.length === 0) return;
+
+    const wrapperRect = axisWrapper.getBoundingClientRect();
+    const curveSvg = ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const wrapperHeight = axisWrapper.getBoundingClientRect().height;
+    curveSvg.classList.add('axis-label-curves');
+    curveSvg.setAttribute('width', width);
+    curveSvg.setAttribute('height', wrapperHeight);
+    curveSvg.setAttribute('viewBox', `0 0 ${width} ${wrapperHeight}`);
+
+    displaced.forEach(({ entry, index }) => {
+        const labelBox = entry.label.getBoundingClientRect();
+        const endX = fittedCenters[index];
+        const endY = labelBox.top - wrapperRect.top + labelBox.height + 0.5;
+        const path = ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', getVerticalConnectorPath(
+            desiredCenters[index],
+            axisY + 0.5,
+            endX,
+            endY
+        ));
+        path.setAttribute('stroke', entry.isMajor ? entry.followColor : '#444');
+        path.setAttribute('stroke-width', entry.isMajor ? '1.4' : '1');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('vector-effect', 'non-scaling-stroke');
+        curveSvg.appendChild(path);
+    });
+    axisWrapper.appendChild(curveSvg);
 }
 
 function layoutClonedAxis(axisWrapper) {
@@ -2105,11 +1919,13 @@ function updateCurrentItemPanel() {
         currentItem = items[0];
     }
 
-    if (currentItem) {
-        // Update theme class on the panel
-        currentItemPanel.className = `box current-item-box theme-${currentItem.themeNumber}`;
-        applyItemColorStyles(currentItemPanel, currentItem);
+    [...currentItemPanel.classList]
+        .filter(className => /^theme-\d+$/.test(className))
+        .forEach(className => currentItemPanel.classList.remove(className));
+    if (currentItem) currentItemPanel.classList.add(`theme-${currentItem.themeNumber}`);
+    applyItemColorStyles(currentItemPanel, currentItem);
 
+    if (currentItem) {
         nameEl.textContent = currentItem.name;
         applyThemeText(nameEl, currentItem);
         leadEl.textContent = `{ ${currentItem.lead || 'TBD'} }`;
@@ -2129,7 +1945,6 @@ function updateCurrentItemPanel() {
         nameEl.textContent = 'No Active Item';
         applyThemeText(nameEl, null);
         leadEl.textContent = '{ - }';
-        currentItemPanel.className = 'box current-item-box';
         if (notesPreviewEl) {
             notesPreviewEl.innerHTML = '';
         }

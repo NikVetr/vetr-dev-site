@@ -6,22 +6,22 @@ A real-time meeting agenda tracker with visual timeline, state persistence, and 
 
 - **Dynamic Agenda Management**: Add, edit, delete, and reorder agenda items with drag-and-drop
 - **Automatic Time Calculation**: Durations automatically calculate start/end intervals
-- **Visual Timeline**: Gantt-style horizontal bar chart showing agenda items
+- **Visual Timeline**: Gantt-style agenda chart with a block-anchored active-item gradient and stable post-resize annotations
 - **Real-time Tracking**: Current time marker moves across the timeline, with pause/resume and explicit completion
 - **Smart Time Adjustment**: Unlocked items proportionally resize when running behind/ahead
 - **Locked Items**: Lock specific items to prevent their duration from being adjusted
 - **Clear Status Monitors**: Agenda variance is labeled ahead/behind/on time, while the current-item panel names exactly what its timer measures
 - **State Persistence**: Ordinary work persists in the URL and localStorage; opened share links, including legacy unmarked links, use isolated tab storage
 - **Undo/Redo**: Use Ctrl/Cmd-Z and Ctrl/Cmd-Shift-Z outside text editors
-- **Panel Layouts**: Drag panel headers to swap slots; panel order and splitter sizes persist locally
+- **Panel Layouts**: Drag panel headers to swap slots; occupancy-aware split limits keep each destination usable, while narrow or short workspaces stack
 - **Bulk Editing**: Edit Item, Lead, Color, Duration, Locked, or Notes as lists, or edit all nine CSV columns with stable IDs; former six-column CSV remains import-compatible
-- **Item Colors**: An arbitrary fixed-lightness HSL picker, eight compatible preset values, readable light/dark tokens, and optional adjacent-color separation
+- **Item Colors**: An arbitrary fixed-lightness HSL picker, eight compatible preset values, readable light/dark tokens, staging-safe color identity, and optional adjacent-color separation
 - **Configurable Alerts**: Multiple warning offsets, sound/visual styles, previews, overtime pulses, and optional desktop notifications
 - **Meeting Metadata**: Persist title, local date, location, safe meeting URL, multiple attendee groups, attendance, and structured action items
 - **Shareable Links**: Copy a versioned URL containing the complete agenda configuration and metadata
 - **Export Options**: Export to Markdown, text, Word-compatible HTML, or JSON; completed runs export as minutes
 - **Import/Export**: Full JSON import/export for backup and transfer
-- **Responsive Layout**: Usable stacked panels and an accessible Settings drawer on phones and tablets
+- **Responsive Layout**: Panels compact and reflow before the outer stage scrolls; notes and the accessible Settings drawer retain deliberate local scrolling
 - **Customizable Settings**: Dark mode, density, buffer time, pinned boundaries, and more
 - **Tooltips**: Helpful tooltips explain each feature
 
@@ -103,9 +103,9 @@ agendamatic/
 - **Start**: Before a run, the large meeting control shows the time until the scheduled start and starts the meeting with one click or Space
 - **Stop/Resume**: Stop pauses without counting paused time; the main control then changes to Resume Meeting
 - **Current Time**: Red triangle marker shows current position
-- **Active Item**: Current item is highlighted on the timeline
+- **Active Item**: Current item is highlighted by a subtle gradient anchored inside its timeline block; resize-sensitive annotations redraw after panel movement settles
 - **Advance/Rewind**: Once running, the main control becomes Next Item and a fully contained Previous Item control appears; use Space and Backspace to control completion explicitly
-- **Pop Out**: Open the tracker/status display in a separate projector-friendly window
+- **Pop Out**: Open a projector-friendly view that switches among wide, stacked, and short-landscape arrangements without document scrollbars
 
 ### Export & Share
 
@@ -145,7 +145,7 @@ npm install
 npm test
 ```
 
-The Playwright suite covers state migration and normalization, URL and isolated-share persistence, tracker lifecycle and timing math, buffers and pins, live agenda mutations, responsive and keyboard-accessible layouts, metadata, exports, stable-ID CSV editing, fractional durations, custom colors, pop-out synchronization, and the parent-site link.
+The Playwright suite covers state and timing, persistence and sharing, editing and exports, meeting-control phases, responsive/swappable layouts, tracker and pop-out geometry, accessibility, colors, and the parent-site route. Tests favor user-visible behavior over implementation details.
 
 ## Deployment
 
