@@ -57,7 +57,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     if (explicitLabel) return explicitLabel.textContent.trim();
     return [...header.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent.trim()).join(" ").trim();
   }));
-  expect(tableHeaders).toEqual(["Selected", "Organization", "Title", "2026 Adj. Salary", "Expenses", "Staff", "Weight", "Score", "Peer Group", "Focus Area", "Location", "Work Model", "Fiscal Sponsor", "Effective Altruism", "Organization Type", "Year", "Pay Source", "Reported Salary", "Source"]);
+  expect(tableHeaders).toEqual(["Selected", "Organization", "Title", "2026 Adj. Salary", "Expenses", "Staff", "Peer Group", "Focus Area", "Location", "Work Model", "Fiscal Sponsor", "Effective Altruism", "Organization Type", "Year", "Pay Source", "Weight", "Score", "Reported Salary", "Source"]);
   await expect(page.locator('thead button[data-sort="adjustedSalary"] > span > span')).toHaveCount(2);
   await expect(page.locator('thead button[data-sort="reportedSalary"] > span > span')).toHaveCount(2);
   expect(await page.locator("#organization-table .title-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThan(140);
@@ -138,7 +138,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     packageCounts: window.CEO_BENCHMARK_DATA.categoryExplainers.rationaleCounts,
   }));
   expect(explainerCoverage).toEqual({
-    definitions: 283,
+    definitions: 280,
     rows: 193,
     filingReviews: 122,
     packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
@@ -285,8 +285,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(excludedPostingToggle).not.toBeChecked();
   await expect(excludedPostingToggle).toHaveAttribute("title", /not in the recommended peer group.*Select to include it/);
   const excludedPostingRow = page.locator('tr[data-id="SRC-AD-MOST-2025"]');
-  await expect(excludedPostingRow.locator("td").nth(13)).toHaveText("Similar work; no documented connection");
-  await expect(excludedPostingRow.locator("td").nth(14)).toHaveText("independent nonprofit");
+  await expect(excludedPostingRow.locator("td").nth(11)).toHaveText("Similar work; no documented connection");
+  await expect(excludedPostingRow.locator("td").nth(12)).toHaveText("independent nonprofit");
   const postingEnrichmentCoverage = await page.evaluate(() => {
     const rows = window.CEO_BENCHMARK_DATA.jobAds;
     const definitions = window.CEO_BENCHMARK_DATA.categoryExplainers.definitions;
@@ -310,7 +310,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
     rows: 40,
     missing: [],
     missingDefinitions: [],
-    eaValues: ["EA-adjacent", "EA-core", "functional-only"],
+    eaValues: ["EA-adjacent", "functional-only"],
     topicCount: 11,
     enriched: 33,
   });
@@ -783,9 +783,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   expect(await eaWeightEditor.locator(".discrete-weight-grid").evaluate((grid) =>
     grid.querySelectorAll(".info-tooltip").length === grid.querySelectorAll('input[type="number"]').length)).toBe(true);
   await page.getByRole("button", { name: "About Effective Altruism category Connected to effective altruism" }).hover();
-  await expect(page.locator("#help-tooltip")).toContainText("publicly linked to effective altruism");
-  await expect(page.getByLabel("Effective Altruism multiplier for Effective-altruism organization")).toHaveValue("1");
-  await expect(page.getByLabel("Effective Altruism multiplier for Connected to effective altruism")).toHaveValue("0.85");
+  await expect(page.locator("#help-tooltip")).toContainText("documented connection to effective altruism");
+  await expect(page.getByLabel("Effective Altruism multiplier for Connected to effective altruism")).toHaveValue("1");
   await expect(page.getByLabel("Effective Altruism multiplier for Similar work; no documented connection")).toHaveValue("0.65");
   await page.locator('#weighting-components input[value="titleGroup"]').check();
   await expect(page.getByLabel("Title multiplier for CEO")).toHaveValue("1");
@@ -1039,9 +1038,10 @@ test("organization work-model and fiscal-sponsor evidence stays connected to cha
 
   expect(metadata.dialogTarget).toBeTruthy();
   const target = metadata.dialogTarget;
+  const targetTableValue = target.value === "Unknown" ? "NA" : target.value;
   const buttonLabel = target.field === "remote"
-    ? `View work-model evidence for ${target.organization}: ${target.value}`
-    : `View fiscal-sponsor evidence for ${target.organization}: ${target.value}`;
+    ? `View work-model evidence for ${target.organization}: ${targetTableValue}`
+    : `View fiscal-sponsor evidence for ${target.organization}: ${targetTableValue}`;
   const evidenceButton = page.getByRole("button", { name: buttonLabel, exact: true }).first();
   await evidenceButton.scrollIntoViewIfNeeded();
   await expect(evidenceButton).toBeVisible();
@@ -1192,7 +1192,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
       cashProxyFilings: model.training.cashProxyFilings,
       advertisedRecords: model.training.advertisedRecords,
       comparisonRows: model.comparison.length,
-      comparison: model.comparison.map(({ key, label }) => ({ key, label })),
+      comparison: model.comparison.map(({ key, label, includeHighestOtherPay }) => ({ key, label, includeHighestOtherPay })),
     };
   });
   await page.locator("#stream-select").selectOption("incumbents");
@@ -1201,10 +1201,13 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
 
   await expect(page.locator("#model-method")).toHaveValue("bayesian");
   await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
+  await expect(page.locator("#model-include-highest-other")).toBeChecked();
+  await expect(page.locator("#model-include-highest-other")).toBeEnabled();
   await expect(page.locator("#model-expenses")).toHaveValue(defaults.expenses);
   await expect(page.locator("#model-revenue")).toHaveValue(defaults.revenue);
   await expect(page.locator("#model-staff")).toHaveValue(defaults.staff);
   await expect(page.locator("#model-highest-other")).toHaveValue(defaults.highestOther);
+  await expect(page.locator("#model-highest-other").locator("xpath=ancestor::label").locator(".info-tooltip")).toHaveCount(0);
   await expect(page.locator("#model-year")).toHaveCount(0);
   await expect(page.locator("#model-focus")).toHaveValue(defaults.focus);
   await expect(page.locator("#model-ea")).toHaveValue(defaults.ea);
@@ -1213,6 +1216,28 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator("#model-location")).toHaveValue(defaults.location);
   await expect(page.locator("#model-remote")).toHaveValue(defaults.remote);
   await expect(page.locator("#model-fiscal-sponsor")).toHaveValue(defaults.fiscalSponsor);
+  const zeroCountCategories = await page.evaluate(() => {
+    const model = window.CEO_BENCHMARK_DATA.predictiveModel;
+    const rows = model.categoricalFeatures.map((definition) => ({
+      key: definition.key,
+      levels: definition.levels.filter((level, index) => Number(definition.filingCounts[index]) === 0),
+    }));
+    rows.push({
+      key: "ea_relationship",
+      levels: model.eaLevels.filter((level, index) => Number(model.eaFilingCounts[index]) === 0),
+    });
+    return rows;
+  });
+  const categorySelectors = {
+    focus_area: "#model-focus", ea_relationship: "#model-ea",
+    organization_type: "#model-organization-type", title_group: "#model-title",
+    location_scope: "#model-location", remote_category: "#model-remote",
+    fiscal_sponsor_category: "#model-fiscal-sponsor",
+  };
+  for (const { key, levels } of zeroCountCategories) {
+    const available = await page.locator(`${categorySelectors[key]} option`).evaluateAll((options) => options.map((option) => option.value));
+    for (const level of levels) expect(available).not.toContain(level);
+  }
 
   await expect(page.locator("#chart-title")).toHaveText("Predicted CEO Salary for Selected Profile");
   await expect(page.locator("#chart-description")).toContainText("posterior predictive distribution");
@@ -1263,6 +1288,15 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   expect(rpReferenceGeometry.guideY1 - rpReferenceGeometry.markerY).toBeCloseTo(14, 1);
   expect(rpReferenceGeometry.guideY2).toBeGreaterThan(rpReferenceGeometry.guideY1);
   expect(rpReferenceGeometry.markerRole).toBe("button");
+  const markerClearsAnnotations = await page.locator("#salary-chart").evaluate((svg) => {
+    const marker = svg.querySelector(".rp-chart-marker").getBoundingClientRect();
+    return [...svg.querySelectorAll(".curve-quantile-mark")].every((label) => {
+      const bounds = label.getBoundingClientRect();
+      return marker.right + 2 <= bounds.left || bounds.right + 2 <= marker.left
+        || marker.bottom + 2 <= bounds.top || bounds.bottom + 2 <= marker.top;
+    });
+  });
+  expect(markerClearsAnnotations).toBe(true);
   await page.locator(".rp-chart-marker").hover();
   await expect(page.locator("#chart-tooltip")).toContainText("Model reference");
   await expect(page.locator("#chart-tooltip")).toContainText("Excluded from model fitting");
@@ -1285,6 +1319,19 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator('tbody tr[data-id^="SRC-AD"]')).not.toHaveCount(0);
   await expect(page.locator("#organization-table .header-filter-menu:visible")).toHaveCount(0);
   await expect(page.locator("#model-profile-support")).toHaveText(/^(Typical|Sparse)$/);
+  await expect(page.locator("#model-profile-reasons")).not.toContainText("0 filing examples");
+  await expect(page.locator("#model-limitations")).not.toContainText("0 filing examples");
+  await expect(page.locator("#weight-column-label > span")).toHaveText(["Model", "Data"]);
+  const tableModelColumnIndexes = await page.locator("#organization-table thead th").evaluateAll((headers) => ({
+    paySource: headers.findIndex((header) => header.querySelector('[data-sort="sourceType"]')),
+    modelData: headers.findIndex((header) => header.querySelector("#weight-column-sort")),
+    score: headers.findIndex((header) => header.querySelector('[data-sort="comparabilityScore"]')),
+  }));
+  expect(tableModelColumnIndexes.modelData).toBe(tableModelColumnIndexes.paySource + 1);
+  expect(tableModelColumnIndexes.score).toBe(tableModelColumnIndexes.modelData + 1);
+  expect(await page.locator("#organization-table .score-column").evaluate((header) => header.getBoundingClientRect().width)).toBeLessThanOrEqual(57);
+  await expect(page.locator("#organization-table tbody .metadata-evidence-button", { hasText: "Unknown" })).toHaveCount(0);
+  await expect(page.locator("#organization-table tbody .metadata-evidence-button", { hasText: "NA" })).not.toHaveCount(0);
   await expect(page.locator("#chart-view-content #model-method-description")).toHaveCount(0);
   await expect(page.getByRole("tab", { name: "Robustness" })).toBeHidden();
   const modelDetailsTab = page.getByRole("tab", { name: "Model details" });
@@ -1295,18 +1342,30 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(modelDetailsTab).toBeFocused();
   await expect(modelDetailsTab).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#results-panel-model-details")).toBeVisible();
+  await expect.poll(async () => page.locator("#analysis-column").evaluate((column) => {
+    const chart = column.querySelector("#chart-panel").getBoundingClientRect().height;
+    const results = column.querySelector("#results-panel").getBoundingClientRect().height;
+    return results / (chart + results);
+  })).toBeGreaterThan(0.57);
+  await page.mouse.move(1, 1);
+  await expect(page.locator("#chart-tooltip")).toBeHidden();
+  await page.locator("#analysis-column").screenshot({ path: "tmp/app-model-details-expanded.png" });
   await expect(page.locator("#model-method-description")).toBeVisible();
   await expect(page.locator("#model-comparison-body tr")).toHaveCount(defaults.comparisonRows);
+  expect(defaults.comparisonRows).toBe(9);
+  expect(defaults.comparison.map(({ key }) => key)).toEqual(expect.arrayContaining([
+    "intercept", "linear", "linear_no_highest", "gam", "gam_no_highest",
+    "bayesian", "bayesian_no_highest", "bayesian_ranges", "bayesian_ranges_no_highest",
+  ]));
   await expect(page.locator("#model-comparison-body tr.is-selected")).toHaveCount(1);
   await expect(page.locator("#model-contributions .model-contribution")).not.toHaveCount(0);
-  await expect(page.locator("#model-comparison-body tr.is-actionable")).toHaveCount(3);
-  await expect(page.locator("#model-comparison-body .model-method-button")).toHaveCount(3);
-  const benchmarkRows = defaults.comparison.filter(({ key }) => !["bayesian", "bayesian_ranges", "gam"].includes(key));
-  await expect(page.locator("#model-comparison-body .model-benchmark-label small")).toHaveCount(benchmarkRows.length);
-  for (const { key } of benchmarkRows) {
+  await expect(page.locator("#model-comparison-body tr.is-actionable")).toHaveCount(defaults.comparisonRows);
+  await expect(page.locator("#model-comparison-body .model-method-button")).toHaveCount(defaults.comparisonRows);
+  for (const { key } of defaults.comparison) {
     const row = page.locator(`#model-comparison-body tr[data-method-key="${key}"]`);
-    await expect(row).not.toHaveClass(/is-actionable/);
-    await expect(row).not.toHaveAttribute("tabindex");
+    await expect(row).toHaveClass(/is-actionable/);
+    await expect(row).toHaveAttribute("tabindex", "0");
+    await expect(row.locator(".model-method-button")).toHaveCount(1);
   }
   const compactTable = await page.locator(".model-comparison-scroll").evaluate((scroll) => {
     const table = scroll.querySelector("table");
@@ -1322,9 +1381,54 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   expect(compactTable.tableWidth).toBeLessThan(compactTable.scrollWidth + 160);
   expect(compactTable.columnWidths[0]).toBeGreaterThan(Math.max(...compactTable.columnWidths.slice(1)));
 
-  await page.getByRole("button", { name: "About prediction method" }).hover();
-  await expect(page.locator("#help-tooltip")).toContainText("both numeric profile inputs and categorical fields");
-  await expect(page.locator("#help-tooltip")).toContainText("not the categorical fields");
+  await page.getByRole("button", { name: "About prediction methods" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("numeric and categorical inputs");
+  await expect(page.locator("#help-tooltip")).toContainText("Scale linear and the GAM use the numeric inputs only");
+  await expect(page.locator("#help-tooltip")).toContainText("intercept only uses no profile inputs");
+
+  const numericModelInputs = ["#model-expenses", "#model-revenue", "#model-staff", "#model-highest-other"];
+  const linearRow = page.locator('#model-comparison-body tr[data-method-key="linear"]');
+  await linearRow.focus();
+  await linearRow.press("Enter");
+  await expect(page.locator("#model-method")).toHaveValue("linear");
+  await expect(page.locator("#model-use-ad-ranges")).toBeDisabled();
+  await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
+  await expect(page.locator("#model-category-inputs")).toBeHidden();
+  for (const selector of numericModelInputs) await expect(page.locator(selector)).toBeEnabled();
+  await expect(page.locator("#quantile-basis")).toContainText("scale-linear model");
+  await expect(page.locator("#model-contributions .model-contribution")).toHaveCount(4);
+  await expect(page.locator("#model-contributions .model-no-contributions")).toHaveCount(0);
+  await expect(page.locator("#model-profile-support")).toHaveText("Typical");
+  await expect(page.locator("#model-profile-reasons")).toBeHidden();
+  await expect(page.locator("#model-training-count")).toHaveText(String(defaults.exactFilings));
+  await expect(linearRow).toHaveClass(/is-selected/);
+
+  const linearNoHighestRow = page.locator('#model-comparison-body tr[data-method-key="linear_no_highest"]');
+  await linearNoHighestRow.click();
+  await expect(page.locator("#model-method")).toHaveValue("linear");
+  await expect(page.locator("#model-include-highest-other")).not.toBeChecked();
+  await expect(page.locator("#model-highest-other")).toBeDisabled();
+  await expect(page.locator("#quantile-basis")).toContainText("without highest-other pay");
+  await expect(page.locator("#model-contributions .model-contribution")).toHaveCount(3);
+  await expect(page.locator("#model-contributions")).not.toContainText("Non-CEO highest base pay");
+  await expect(page.locator("#model-profile-support")).toHaveText("Typical");
+  await expect(linearNoHighestRow).toHaveClass(/is-selected/);
+
+  const interceptRow = page.locator('#model-comparison-body tr[data-method-key="intercept"]');
+  await interceptRow.click();
+  await expect(page.locator("#model-method")).toHaveValue("intercept");
+  await expect(page.locator("#model-use-ad-ranges")).toBeDisabled();
+  await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
+  await expect(page.locator("#model-include-highest-other")).toBeDisabled();
+  await expect(page.locator("#model-category-inputs")).toBeHidden();
+  for (const selector of numericModelInputs) await expect(page.locator(selector)).toBeDisabled();
+  await expect(page.locator("#quantile-basis")).toContainText("intercept-only benchmark");
+  await expect(page.locator("#model-contributions .model-contribution")).toHaveCount(0);
+  await expect(page.locator("#model-contributions .model-no-contributions")).toHaveText("This method uses no profile inputs.");
+  await expect(page.locator("#model-profile-support")).toHaveText("Not used");
+  await expect(page.locator("#model-profile-reasons")).toBeHidden();
+  await expect(page.locator("#model-training-count")).toHaveText(String(defaults.exactFilings));
+  await expect(interceptRow).toHaveClass(/is-selected/);
 
   await page.locator('#model-comparison-body tr[data-method-key="bayesian_ranges"] td').first().click();
   await expect(page.locator("#model-method")).toHaveValue("bayesian");
@@ -1435,11 +1539,107 @@ test("model diagnostics and saved scenarios use fixed method-specific artifact c
   expect(errors).toEqual([]);
 });
 
+test("predictive density stays legible for extreme profile predictions", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await selectChartView(page, "model");
+  await expect(page.locator("#salary-chart")).toHaveAttribute("data-model-axis-scale", "linear");
+
+  await page.locator("#model-highest-other").fill("18");
+  await expect(page.locator("#salary-chart")).toHaveAttribute("data-model-axis-scale", "log");
+  await expect(page.locator("#stat-n")).not.toHaveText("$0K");
+  await expect(page.locator("#stat-neff")).not.toHaveText("$0K");
+  await expect(page.locator("#stat-center")).not.toHaveText("$0K–$0K");
+
+  const readGeometry = () => page.locator("#salary-chart").evaluate((svg) => {
+    const viewBox = svg.viewBox.baseVal;
+    const svgBounds = svg.getBoundingClientRect();
+    const boxes = [
+      ".model-density-area", ".density-line", ".model-interval-50",
+      ".model-interval-80", ".model-interval-95", ".model-median-line",
+      ".rp-reference-guide",
+    ].map((selector) => {
+      const element = svg.querySelector(selector);
+      const box = element.getBBox();
+      return { selector, x: box.x, y: box.y, width: box.width, height: box.height };
+    });
+    const pathsAreFinite = [...svg.querySelectorAll("path")].every((path) => {
+      const data = path.getAttribute("d") || "";
+      return data.length > 0 && !/NaN|Infinity/.test(data);
+    });
+    const outsideAnnotations = [...svg.querySelectorAll(".curve-quantile-mark, .model-axis-tick, .rp-chart-marker")]
+      .flatMap((element) => {
+        const bounds = element.getBoundingClientRect();
+        const inside = bounds.left >= svgBounds.left - 1 && bounds.right <= svgBounds.right + 1
+          && bounds.top >= svgBounds.top - 1 && bounds.bottom <= svgBounds.bottom + 1;
+        return inside ? [] : [{ className: element.getAttribute("class"),
+          left: bounds.left - svgBounds.left, right: bounds.right - svgBounds.left,
+          top: bounds.top - svgBounds.top, bottom: bounds.bottom - svgBounds.top }];
+      });
+    const ticks = [...svg.querySelectorAll(".model-axis-tick")].map((tick) => ({
+      value: Number(tick.dataset.value), label: tick.textContent,
+    }));
+    return {
+      viewBox: { width: viewBox.width, height: viewBox.height }, boxes,
+      pathsAreFinite, annotationsInsideSvg: outsideAnnotations.length === 0, outsideAnnotations, ticks,
+      quantileMarks: svg.querySelectorAll(".curve-quantile-mark").length,
+    };
+  });
+  const geometry = await readGeometry();
+  expect(geometry.pathsAreFinite).toBe(true);
+  expect(geometry.annotationsInsideSvg).toBe(true);
+  expect(geometry.quantileMarks).toBeGreaterThan(0);
+  geometry.boxes.forEach(({ selector, x, y, width, height }) => {
+    expect(x, `${selector} left edge`).toBeGreaterThanOrEqual(-0.5);
+    expect(y, `${selector} top edge`).toBeGreaterThanOrEqual(-0.5);
+    expect(x + width, `${selector} right edge`).toBeLessThanOrEqual(geometry.viewBox.width + 0.5);
+    expect(y + height, `${selector} bottom edge`).toBeLessThanOrEqual(geometry.viewBox.height + 0.5);
+  });
+  const interval95 = geometry.boxes.find(({ selector }) => selector === ".model-interval-95");
+  expect(interval95.width).toBeGreaterThan(geometry.viewBox.width * 0.05);
+  expect(interval95.height).toBeGreaterThan(geometry.viewBox.height * 0.2);
+  expect(geometry.ticks.length).toBeGreaterThanOrEqual(4);
+  expect(new Set(geometry.ticks.map(({ label }) => label)).size).toBe(geometry.ticks.length);
+  expect(geometry.ticks.every(({ value }) => Number.isFinite(value) && value > 0)).toBe(true);
+  expect(geometry.ticks.at(-1).value / geometry.ticks[0].value).toBeGreaterThan(20);
+  await page.locator("#chart-panel").screenshot({ path: "tmp/model-extreme-small-prediction.png" });
+
+  await page.locator("#model-highest-other").fill("180000000000");
+  await expect(page.locator("#salary-chart")).toHaveAttribute("data-model-axis-scale", "log");
+  const largeGeometry = await readGeometry();
+  expect(largeGeometry.pathsAreFinite).toBe(true);
+  expect(largeGeometry.outsideAnnotations).toEqual([]);
+  expect(largeGeometry.quantileMarks).toBeGreaterThan(0);
+  const largeInterval95 = largeGeometry.boxes.find(({ selector }) => selector === ".model-interval-95");
+  expect(largeInterval95.width).toBeGreaterThan(largeGeometry.viewBox.width * 0.05);
+  expect(largeInterval95.height).toBeGreaterThan(largeGeometry.viewBox.height * 0.2);
+  largeGeometry.boxes.forEach(({ selector, x, y, width, height }) => {
+    expect(x, `${selector} large-profile left edge`).toBeGreaterThanOrEqual(-0.5);
+    expect(y, `${selector} large-profile top edge`).toBeGreaterThanOrEqual(-0.5);
+    expect(x + width, `${selector} large-profile right edge`).toBeLessThanOrEqual(largeGeometry.viewBox.width + 0.5);
+    expect(y + height, `${selector} large-profile bottom edge`).toBeLessThanOrEqual(largeGeometry.viewBox.height + 0.5);
+  });
+  await page.locator("#chart-panel").screenshot({ path: "tmp/model-extreme-large-prediction.png" });
+  expect(errors).toEqual([]);
+});
+
 test("model state round-trips through the compact URL and participates in undo and redo", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
   await selectChartView(page, "model");
+
+  await page.locator("#model-highest-other").fill("");
+  await expect(page.locator("#model-diagnostics")).toBeHidden();
+  await expect(page.locator("#model-comparison-body tr")).toHaveCount(0);
+  await expect(page.locator("#model-contributions")).toBeEmpty();
+  await expect(page.locator("#model-method-description")).toContainText("required profile inputs are valid");
+  await page.locator("#model-include-highest-other").uncheck();
+  await expect(page.locator("#model-diagnostics")).toBeVisible();
+  await expect(page.locator("#model-highest-other")).toBeDisabled();
+  await expect(page.locator("#model-comparison-body tr")).toHaveCount(9);
+  await expect(page.locator('#model-comparison-body tr[data-method-key="bayesian_no_highest"]')).toHaveClass(/is-selected/);
 
   const defaultExpenses = Number(await page.locator("#model-expenses").inputValue());
   const changedExpenses = defaultExpenses + 1_234_567;
@@ -1460,12 +1660,16 @@ test("model state round-trips through the compact URL and participates in undo a
     new URL(sharedUrl).searchParams.get("s"), "base64url",
   ).toString()).y;
   expect(encodedModelProfile).not.toHaveProperty("y");
+  expect(encodedModelProfile).toMatchObject({ d: 1, x: 0 });
+  expect(encodedModelProfile).not.toHaveProperty("h");
 
   await page.reload();
   await expect(chartViewTab(page, "model")).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#model-expenses")).toHaveValue(String(changedExpenses));
   await expect(page.locator("#model-focus")).toHaveValue(alternativeFocus);
   await expect(page.locator("#model-use-ad-ranges")).toBeChecked();
+  await expect(page.locator("#model-include-highest-other")).not.toBeChecked();
+  await expect(page.locator("#model-highest-other")).toBeDisabled();
   await expect(page.locator("#quantile-granularity")).toHaveValue("deciles");
   await expect(page.locator("#stat-n")).toHaveText(predictionBeforeReload);
 
@@ -1478,6 +1682,30 @@ test("model state round-trips through the compact URL and participates in undo a
   await expect(page.locator("#model-staff")).toHaveValue(String(originalStaff));
   await page.keyboard.press("Control+Shift+z");
   await expect(page.locator("#model-staff")).toHaveValue(String(changedStaff));
+
+  await page.locator("#model-include-highest-other").check();
+  await chartViewTab(page, "model").focus();
+  await page.keyboard.press("Control+z");
+  await expect(page.locator("#model-include-highest-other")).not.toBeChecked();
+  await page.keyboard.press("Control+Shift+z");
+  await expect(page.locator("#model-include-highest-other")).toBeChecked();
+  await page.locator("#model-include-highest-other").uncheck();
+
+  await page.locator("#model-method").selectOption("linear");
+  await expect.poll(async () => {
+    const encoded = new URL(page.url()).searchParams.get("s");
+    return encoded ? JSON.parse(Buffer.from(encoded, "base64url").toString()).y : null;
+  }).toMatchObject({ m: "l", x: 0 });
+  await page.locator("#model-method").selectOption("intercept");
+  await expect(page.locator("#model-include-highest-other")).toBeDisabled();
+  await expect.poll(async () => {
+    const encoded = new URL(page.url()).searchParams.get("s");
+    return encoded ? JSON.parse(Buffer.from(encoded, "base64url").toString()).y : null;
+  }).toMatchObject({ m: "i" });
+  const interceptUrlState = JSON.parse(Buffer.from(
+    new URL(page.url()).searchParams.get("s"), "base64url",
+  ).toString()).y;
+  expect(interceptUrlState).not.toHaveProperty("x");
   expect(errors).toEqual([]);
 });
 

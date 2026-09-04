@@ -243,7 +243,7 @@ def robust_scale(values):
     return max(s, 1e-6)
 
 
-EA_ORDINAL = {"EA-core": 1.0, "EA-adjacent": 0.65, "functional-only": 0.0}
+EA_ORDINAL = {"EA-adjacent": 1.0, "functional-only": 0.0}
 
 
 def distance_matrix(train_rows, target_rows, kind, cat_weight):
@@ -271,9 +271,9 @@ def distance_matrix(train_rows, target_rows, kind, cat_weight):
             a = np.array([str(r.get(key) or "Not reported") for r in target_rows])
             b = np.array([str(r.get(key) or "Not reported") for r in train_rows])
             d2 += cat_weight * (a[:, None] != b[None, :]).astype(float)
-        a = np.array([EA_ORDINAL.get(str(r.get("eaAffinity")), 0.35) for r in target_rows])
-        b = np.array([EA_ORDINAL.get(str(r.get("eaAffinity")), 0.35) for r in train_rows])
-        d2 += cat_weight * ((a[:, None] - b[None, :]) / 0.65) ** 2
+        a = np.array([EA_ORDINAL.get(str(r.get("eaAffinity")), 0.5) for r in target_rows])
+        b = np.array([EA_ORDINAL.get(str(r.get("eaAffinity")), 0.5) for r in train_rows])
+        d2 += cat_weight * (a[:, None] - b[None, :]) ** 2
     if kind == "full_mixed":
         for key in ("topic",):
             a = np.array([str(r.get(key) or "Not reported") for r in target_rows])

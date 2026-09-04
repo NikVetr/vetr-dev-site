@@ -39,6 +39,14 @@ EXPECTED_NON_CEO_CATALOG_COUNT = 989
 EXPECTED_ROLE_ELIGIBLE_COUNT = 778
 EXPECTED_DEFAULT_INCLUDED_COUNT = 755
 RP_SOURCE_ID = "SRC-990-RP-REFERENCE"
+
+
+def normalize_ea_affinity(value: object) -> str:
+    """Apply the current two-level analytical taxonomy to derived rows."""
+    label = str(value or "").strip()
+    return "EA-adjacent" if label.casefold() in {"ea-core", "ea core"} else label
+
+
 POSITION_SUPPORTING_SOURCES = (
     {
         "source_id": "SRC-POSITION-BULLETIN-2023-ANNUAL-REPORT",
@@ -2124,7 +2132,12 @@ def main() -> None:
                 "schedule_j_total_july_2026": format_number(round(schedule_total * factor, 2) if schedule_total is not None else None),
                 "peer_tier": validated.get("tier_group", "Reference" if source_id == RP_SOURCE_ID else ""),
                 "reference_tier": reference.get("reference_tier", "Reference" if source_id == RP_SOURCE_ID else ""),
-                "ea_affinity": category.get("ea_relationship", "EA-core" if source_id == RP_SOURCE_ID else validated.get("ea_affinity", "")),
+                "ea_affinity": normalize_ea_affinity(
+                    category.get(
+                        "ea_relationship",
+                        "EA-adjacent" if source_id == RP_SOURCE_ID else validated.get("ea_affinity", ""),
+                    )
+                ),
                 "comparability_score": validated.get("comparability_score", ""),
                 "topic_cluster": reference.get("topic_cluster", category.get("topic_model", "RP reference organization" if source_id == RP_SOURCE_ID else "")),
                 "country_or_region": reference.get("country_or_region", "US" if source_id == RP_SOURCE_ID else ""),

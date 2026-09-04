@@ -267,7 +267,7 @@ def normalize_ea(value: str) -> str:
     return {
         "functional-only": "Functional overlap",
         "ea-adjacent": "EA-adjacent",
-        "ea-core": "EA-core",
+        "ea-core": "EA-adjacent",
     }.get(value.casefold(), "EA relationship not coded")
 
 
@@ -431,7 +431,7 @@ def main() -> None:
                 ((data["rpReference"].get("highestPaidOtherEmployee") or {}).get("base") or {}).get("adjusted")
             ),
             "focus_area": "Research / evidence",
-            "ea_relationship": "EA-core",
+            "ea_relationship": "EA-adjacent",
             "organization_type": "Independent nonprofit",
             "title_group": "CEO",
             "location_scope": "International / multi-country",

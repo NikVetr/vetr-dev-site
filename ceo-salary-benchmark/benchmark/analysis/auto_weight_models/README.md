@@ -163,8 +163,8 @@ If exposed, label this preset experimental and add to the scale distance:
 ```
 d2 += 2 * I(title_group differs)
     + 2 * I(structure differs)
-    + 2 * ((ea[i] - eaRP) / 0.65)^2
-ea = {EA-core: 1.0, EA-adjacent: 0.65, functional-only: 0.0, unknown: 0.35}
+    + 2 * (ea[i] - eaRP)^2
+ea = {EA-adjacent: 1.0, functional-only: 0.0, unknown: 0.5}
 ```
 
 Use `h = 1.0`, ESS at least 35, and maximum normalized weight 6. Current RP results
@@ -174,8 +174,9 @@ for P75; these omit taxonomy and model-selection uncertainty.
 
 ## Important blockers / leakage risks
 
-- RP has no exact EA-core analogue in the primary sample: 62 observations are
-  EA-adjacent and 48 functional-only. Structure is 104/110 independent nonprofit;
+- The current app taxonomy treats every documented EA connection as
+  EA-adjacent rather than assigning finer degrees of connection. Structure is
+  104/110 independent nonprofit;
   several title/topic levels are singletons. There are 23 topic labels.
 - 87/110 salaries are from compensation year 2024; recency cannot be estimated
   robustly. Keep recency as a visible sensitivity judgment (if used, a 6-year

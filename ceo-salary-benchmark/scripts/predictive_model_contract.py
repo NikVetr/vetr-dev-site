@@ -40,8 +40,18 @@ RP_FIELDS = (
 )
 
 
+def normalize_ea_affinity(value: object) -> object:
+    """Collapse the retired EA-core category at the analytical boundary."""
+    if str(value or "").strip().casefold() in {"ea-core", "ea core"}:
+        return "EA-adjacent"
+    return value
+
+
 def _project(row: dict, fields: tuple[str, ...]) -> dict:
-    return {field: row.get(field) for field in fields}
+    projected = {field: row.get(field) for field in fields}
+    if "eaAffinity" in projected:
+        projected["eaAffinity"] = normalize_ea_affinity(projected["eaAffinity"])
+    return projected
 
 
 def predictive_model_input_payload(data: dict) -> dict:

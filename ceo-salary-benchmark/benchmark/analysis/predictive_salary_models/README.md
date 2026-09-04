@@ -28,8 +28,10 @@ advertised range retains its adjusted lower and upper bounds rather than being
 replaced by its midpoint.
 
 The continuous features are log annual expenses, log annual revenue, log
-employee count, and log highest reported non-CEO Schedule J base pay in the same
-filing. The categorical features are broad focus area,
+employee count, and, in one member of each paired specification, log highest
+reported non-CEO Schedule J base pay in the same filing. Every model family is
+fit both with and without that last feature, so its influence is visible rather
+than assumed. The categorical features are broad focus area,
 EA relationship, organization type, CEO-title group, broad location scope,
 organization-wide work model, and whether the organization serves as a fiscal
 sponsor. Category construction is deterministic, source-reviewed, and
@@ -42,12 +44,12 @@ budgets are kept as expense proxies and are not duplicated into revenue. In the
 Bayesian fit, each missing transformed continuous value is a latent standardized
 parameter with a standard-normal prior. This integrates over missing-value
 uncertainty instead of filling every gap with one median. The GAM remains a
-deterministic challenger and uses fold-specific median values plus explicit
+deterministic challenger and uses the fold-specific transformed center plus active
 missingness indicators. Browser profiles require positive numeric inputs.
 
 RP's exported default profile is $20,378,936 in expenses, $20,599,841 in revenue,
 43 employees, $136,142.69 highest reported non-CEO base pay, Research / evidence,
-EA-core, Independent nonprofit, CEO, International /
+EA-adjacent, Independent nonprofit, CEO, International /
 multi-country, Remote, and Serves as fiscal sponsor. Its displayed adjusted
 filing salary is $155,230.03 and is never a training outcome. The employee count
 is from RP's 2023 filing, whereas the financial values and compensation are from
@@ -69,8 +71,10 @@ mu[i] = alpha + X[i] beta
       + ea_effect[ea[i]]
 ```
 
-`X` contains standardized log expenses, log revenue, log staff, log highest
-reported non-CEO base pay, and four missingness indicators. Centering and
+`X` contains standardized log expenses, log revenue, log staff, their three
+missingness indicators, and—only in the paired “with other pay” fits—log highest
+reported non-CEO base pay and its missingness indicator. The reduced fits truly
+remove both columns; they do not hold their coefficients at zero. Centering and
 scaling parameters are estimated from the relevant training data only. The
 salary outcome and advertised bounds are already expressed in July 2026 USD, so
 the model does not add a separate pay-year trend on top of that adjustment. The
@@ -90,10 +94,11 @@ missing standardized values   ~ Normal(0, 1)
 ```
 
 Each categorical effect is `tau * (raw - mean(raw))`, giving a centered
-multilevel effect with stronger regularization for sparse levels. EA is encoded cumulatively as
-`[0, increment_1, increment_1 + increment_2]` for Functional overlap,
-EA-adjacent, and EA-core. The increments are signed, so the coding respects the
-declared sequence without imposing a monotone salary direction.
+multilevel effect with stronger regularization for sparse levels. The app's
+current EA taxonomy has two levels: Functional overlap is the zero point and a
+single signed increment represents EA-adjacent organizations. Historical input
+files retain their finer labels, which are collapsed at model ingress. The
+increment remains signed, so the coding does not impose a salary direction.
 
 Exact filings contribute
 
@@ -122,33 +127,30 @@ observations and near-zero scales produced unstable geometry in sparse folds.
 The production artifact uses four chains. Each grouped cross-validation fit has
 400 warmup and 500 retained iterations per chain; each full fit has 800 warmup
 and 1,000 retained iterations per chain. `adapt_delta` is 0.995 for validation
-fits and 0.999 for full fits; maximum tree depth is 13. The final filing-only fit
-reports maximum R-hat 1.0063, minimum bulk ESS 1,436, minimum tail ESS 1,139,
-zero divergences, zero maximum-tree-depth hits, and minimum E-BFMI 0.777. The
-range-augmented fit reports maximum R-hat 1.0059, minimum bulk ESS 1,029, minimum
-tail ESS 1,028, zero divergences, zero maximum-tree-depth hits, and minimum
-E-BFMI 0.799. Across the 20 four-chain cross-validation fits, maximum R-hat is
-1.0176, minimum bulk ESS is 316, minimum tail ESS is 359, there are zero
-divergences and maximum-tree-depth hits, and minimum E-BFMI is 0.673. The
-recorded sampler diagnostics pass the build gates,
+fits and 0.999 for full fits; maximum tree depth is 13. Diagnostics are recorded
+for all 40 four-chain cross-validation fits and all four full Bayesian fits. The
+app-data build requires them to pass R-hat, effective-sample-size, divergence,
+tree-depth, and E-BFMI gates,
 but they do not resolve the substantive sparsity and evidence-stream limitations
 described below.
 
 ## Comparison models
 
-The audit also fits three exact-filing comparators:
+The audit also fits five exact-filing comparators:
 
 - **Intercept only:** the training-fold mean log salary and residual standard
   deviation.
-- **Scale linear:** linear regression on the standardized numeric inputs and
-  missingness indicators.
-- **Numeric-input GAM:** REML cubic-regression splines (`k = 4`) for log
-  expenses, revenue, staff, and highest-other-base pay, plus missingness
-  indicators.
+- **Scale linear, paired:** linear regression on standardized numeric inputs and
+  active missingness indicators, with and without other pay.
+- **Numeric-input GAM, paired:** REML cubic-regression splines (`k = 4`) for log
+  expenses, revenue, and staff, again with and without other pay.
 
-The browser exposes the Bayesian model and the numeric-input GAM. The intercept and linear
-models are validation baselines only. No boosted-tree model is included in the
-current artifact and the app must not describe one as implemented.
+The browser exposes all nine fitted models. The intercept-only and scale-linear
+models remain deliberately simple validation baselines, but their full-fit
+parameters and organization-grouped out-of-fold residuals are exported so a
+user can inspect the predictions behind their validation rows. No boosted-tree
+model is included in the current artifact and the app must not describe one as
+implemented.
 
 ## Leakage-safe grouped validation
 
@@ -171,34 +173,14 @@ observations, so adding job ads is judged by whether it improves prediction of
 the same filing-pay estimand. `cv_elpd` is the sum of held-out filing log
 predictive densities, and `mean_log_predictive_density` is its per-filing mean.
 Ad-range log scores are reported separately. Bayesian coverage uses held-out
-posterior-predictive intervals; the baselines and GAM use their training-fold
-normal residual intervals. This is cross-validated ELPD, not in-sample lppd.
-
-### Current 10-fold results
-
-| Model | Log RMSE | OOS R2 | Median absolute % error | 80% coverage | 90% coverage | Mean log predictive density |
-|---|---:|---:|---:|---:|---:|---:|
-| Intercept only | 0.379 | -0.015 | 25.4% | 82.5% | 87.7% | -0.469 |
-| Scale linear | 0.303 | 0.348 | 18.7% | 75.4% | 90.4% | -0.267 |
-| Numeric-input GAM | **0.292** | **0.394** | 17.3% | 79.8% | 84.2% | **-0.251** |
-| Bayesian multilevel | 0.323 | 0.262 | 18.2% | **82.5%** | 89.5% | -0.258 |
-| Bayesian multilevel + ad ranges | 0.320 | 0.276 | **16.9%** | **82.5%** | **91.2%** | -0.259 |
-
-The range-augmented model's mean interval log score on the 25 held-out advertised
-ranges is -2.363; the two held-out advertised points have mean log score -0.869.
-The interval probability score and continuous point-density score are not
-directly comparable. Relative to the filing-only multilevel model, adding ads
-improves log RMSE by 0.003, OOS R2 by 0.014, and median percentage error by 1.4
-percentage points, while worsening total filing CV-ELPD by 0.12. One fixed fold
-assignment provides no standard error for these small, mixed differences, so it
-does not establish that recruitment ranges improve the model.
-
-No one model dominates. The GAM has the best held-out point error and OOS R2,
-while the multilevel fits provide better 90% interval coverage and support the
-requested categorical organization profile. The app therefore defaults to the
-multilevel model for profile analysis, exposes the GAM as the stronger numeric
-point-prediction challenger, and makes ad-range use an explicit experimental
-choice rather than folding it silently into the filing model.
+posterior-predictive intervals. Deterministic coverage uses empirical residual
+quantiles calibrated from the other nine folds, matching the browser's
+residual-calibrated prediction without reusing the target fold. Gaussian
+training-fold residual scales remain the basis for deterministic log predictive
+density, since empirical residuals do not define a continuous density without
+an additional smoothing choice. This is cross-validated ELPD, not in-sample
+lppd. The generated `cross_validation_results.csv` is the canonical results
+table and reports all nine specifications in paired order.
 
 ## Browser artifact semantics
 
@@ -208,7 +190,14 @@ the schema is unsupported, RP exclusion is not asserted, the cohort counts or
 input/script/training hashes are stale, required models are absent, or recorded
 sampler diagnostics fail the build thresholds.
 
-For each Bayesian fit, the artifact exports 512 evenly spaced posterior draws of
+Each categorical level has three support counts: `counts` across all training
+records, `filingCounts` across exact-base and cash-proxy filings, and
+`exactCounts` across exact-base filings alone. EA relationship exposes the same
+three scopes at the top level. Interface support notes use filing counts for a
+filing-target Bayesian prediction, while the exact counts remain available for
+auditing how much of that support uses the direct base-salary estimand.
+
+For each of the four Bayesian fits, the artifact exports 512 evenly spaced posterior draws of
 the intercept, slopes, category effects, source offset, and source-specific
 residual scales. It also exports one seeded standard-normal residual draw per
 posterior draw. For a browser profile, the app:
@@ -228,12 +217,24 @@ record-count-weighted mean). The displayed driver bars are median additive
 contributions on the log-salary scale and are predictive associations, not causal
 decompositions.
 
-For the GAM, the artifact exports the full-fit baseline, effect grids with at
+For each GAM, the artifact exports the full-fit baseline, effect grids with at
 least 141 points spanning standardized values from -3.5 to 3.5 and all observed
 training support, and the 114 organization-grouped out-of-fold residuals. The
 browser linearly interpolates each effect grid and
 forms predictive draws as `exp(mu + residual)`. Values beyond an effect grid are
 clamped at its endpoint and separately flagged as outside training support.
+
+For the intercept-only model, the artifact exports the full-fit mean log salary
+and the 114 organization-grouped out-of-fold residuals. For each scale-linear
+model, it additionally exports the full-fit preprocessing constants, candidate,
+active, and explicitly dropped design columns, intercept, and coefficient
+vector. Constant or collinear columns are removed deterministically instead of
+being retained with a silently replaced non-finite coefficient. The with-pay
+candidate schema has eight columns and the without-pay schema has six. Both
+comparators form browser predictive draws as
+`exp(mu + residual)`. Residual and training-record IDs are retained explicitly
+so the app-data build can prove that each exact filing contributes exactly one
+held-out residual and that no other record enters either comparator.
 
 The Model view is deliberately fixed to the versioned Recommended CEO cohort.
 Table inclusion, filters, peer weights, distribution choice, pay-source control,
@@ -246,9 +247,9 @@ in application history.
 
 - The sample is small, selected, and overwhelmingly U.S.-registered independent
   nonprofits. It is not representative of all nonprofits or labor markets.
-- RP's EA-core target has **zero exact filing examples**. Four EA-core filing
-  records are cash proxies and one is an advertised interval, so the category
-  effect remains prior- and measurement-model-sensitive.
+- The EA-adjacent category merges every organization with a documented EA
+  connection. This avoids estimating a sparsely supported finer distinction,
+  but its effect remains descriptive rather than causal.
 - Several other levels have little or no exact-filing support: Independent
   nonprofit accounts for 108/114 filings, no exact filing is in Outside United
   States or Education / public engagement, and multiple focus areas contain only

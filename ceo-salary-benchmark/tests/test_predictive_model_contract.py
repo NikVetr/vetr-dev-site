@@ -26,6 +26,20 @@ def load_app_data():
 
 
 class PredictiveModelContractTest(unittest.TestCase):
+    def test_generated_app_uses_collapsed_ea_taxonomy(self):
+        data = load_app_data()
+        self.assertNotIn("EA-core", json.dumps(data))
+        all_rows = [
+            *data["incumbents"], *data["jobAds"], data["rpReference"],
+            *(row for rows in data["positionObservations"].values() for row in rows),
+            *(row for rows in data["positionJobAds"].values() for row in rows),
+            *(row for rows in data["rpReferencesByPosition"].values() for row in rows),
+        ]
+        self.assertEqual(
+            {row["eaAffinity"] for row in all_rows},
+            {"EA-adjacent", "functional-only"},
+        )
+
     def test_model_uses_adjusted_salary_without_a_second_pay_year_effect(self):
         artifact = json.loads(
             (ROOT / "benchmark" / "analysis" / "predictive_salary_models" / "model_artifact.json")
@@ -34,14 +48,109 @@ class PredictiveModelContractTest(unittest.TestCase):
         expected = ["expenses", "revenue", "staff", "highest_other_base"]
         self.assertEqual([feature["key"] for feature in artifact["continuousFeatures"]], expected)
         self.assertNotIn("compensation_year", artifact["rpProfile"])
-        for model_key in ("bayesian", "bayesianRanges", "gam"):
+        self.assertEqual(
+            set(artifact["models"]),
+            {
+                "bayesian", "bayesianNoHighest", "bayesianRanges",
+                "bayesianRangesNoHighest", "gam", "gamNoHighest", "intercept",
+                "linear", "linearNoHighest",
+            },
+        )
+        for model_key in ("bayesian", "bayesianRanges", "gam", "linear"):
             self.assertEqual(
                 [item["key"] for item in artifact["models"][model_key]["preprocessing"]],
                 expected,
             )
+            self.assertTrue(artifact["models"][model_key]["includeHighestOtherPay"])
+        reduced = expected[:-1]
+        for model_key in (
+            "bayesianNoHighest", "bayesianRangesNoHighest", "gamNoHighest",
+            "linearNoHighest",
+        ):
+            self.assertEqual(
+                [item["key"] for item in artifact["models"][model_key]["preprocessing"]],
+                reduced,
+            )
+            self.assertFalse(artifact["models"][model_key]["includeHighestOtherPay"])
         self.assertEqual(set(artifact["models"]["gam"]["effects"]), {
             "expenses", "revenue", "staff", "highestOther",
         })
+        self.assertEqual(
+            set(artifact["models"]["gamNoHighest"]["effects"]),
+            {"expenses", "revenue", "staff"},
+        )
+        self.assertEqual(artifact["eaLevels"], ["Functional overlap", "EA-adjacent"])
+        self.assertEqual(sum(artifact["eaFilingCounts"]), 126)
+        for feature in artifact["categoricalFeatures"]:
+            self.assertEqual(len(feature["filingCounts"]), len(feature["levels"]))
+            self.assertEqual(sum(feature["filingCounts"]), 126)
+
+    def test_browser_baselines_preserve_leakage_safe_residual_provenance(self):
+        artifact = json.loads(
+            (ROOT / "benchmark" / "analysis" / "predictive_salary_models" / "model_artifact.json")
+            .read_text(encoding="utf-8")
+        )
+        exact_ids = [
+            record["id"]
+            for record in artifact["training"]["records"]
+            if record["observation"] == "exact_base"
+        ]
+        for model_key in ("intercept", "linear", "linearNoHighest", "gam", "gamNoHighest"):
+            model = artifact["models"][model_key]
+            self.assertFalse(model["includeAdvertisedRanges"])
+            self.assertEqual(model["trainingRecordIds"], exact_ids)
+            self.assertEqual(set(model["residualRecordIds"]), set(exact_ids))
+            self.assertEqual(len(model["residualRecordIds"]), len(exact_ids))
+            self.assertEqual(len(model["residuals"]), len(exact_ids))
+            self.assertEqual(model["diagnostics"]["trainingN"], len(exact_ids))
+        candidates = {
+            "linear": [
+                "log_expenses", "log_revenue", "log_staff", "log_highest_other_base",
+                "expenses_missing", "revenue_missing", "staff_missing",
+                "highest_other_base_missing",
+            ],
+            "linearNoHighest": [
+                "log_expenses", "log_revenue", "log_staff",
+                "expenses_missing", "revenue_missing", "staff_missing",
+            ],
+        }
+        for model_key, expected_candidates in candidates.items():
+            model = artifact["models"][model_key]
+            self.assertEqual(model["candidateDesignColumns"], expected_candidates)
+            self.assertEqual(model["designColumns"], model["activeDesignColumns"])
+            self.assertEqual(
+                set(model["activeDesignColumns"]) | set(model["droppedDesignColumns"]),
+                set(expected_candidates),
+            )
+            self.assertFalse(
+                set(model["activeDesignColumns"]) & set(model["droppedDesignColumns"])
+            )
+            self.assertEqual(len(model["coefficients"]), len(model["designColumns"]))
+            self.assertEqual(
+                model["intervalCalibration"],
+                "leave-one-fold-out empirical OOF residual quantiles",
+            )
+
+    def test_model_comparison_pairs_highest_other_pay_specs(self):
+        artifact = json.loads(
+            (ROOT / "benchmark" / "analysis" / "predictive_salary_models" / "model_artifact.json")
+            .read_text(encoding="utf-8")
+        )
+        expected = [
+            ("intercept", False, False),
+            ("linear_no_highest", False, False), ("linear", True, False),
+            ("gam_no_highest", False, False), ("gam", True, False),
+            ("bayesian_no_highest", False, False), ("bayesian", True, False),
+            ("bayesian_ranges_no_highest", False, True),
+            ("bayesian_ranges", True, True),
+        ]
+        self.assertEqual(
+            [
+                (row["key"], row["includeHighestOtherPay"], row["includeAdvertisedRanges"])
+                for row in artifact["comparison"]
+            ],
+            expected,
+        )
 
     def test_reviewed_training_eligibility_has_expected_counts(self):
         data = load_app_data()

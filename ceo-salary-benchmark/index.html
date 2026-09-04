@@ -103,21 +103,27 @@
           <button id="model-reset-profile" class="text-button" type="button">Reset RP inputs</button>
         </div>
         <label class="field compact">
-          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian multilevel modeling uses both numeric profile inputs and categorical fields. The numeric-input GAM is a nonlinear challenger that uses the numeric profile inputs but not the categorical fields. Both were evaluated on held-out organizations; details appear in the Model details tab below the plot.">?</button></span>
+          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian multilevel modeling uses numeric and categorical inputs. Scale linear and the GAM use the numeric inputs only; intercept only uses no profile inputs. Every method was evaluated on held-out organizations; details appear in Model details below the plot.">?</button></span>
           <select id="model-method">
             <option value="bayesian">Bayesian multilevel</option>
+            <option value="linear">Scale linear</option>
             <option value="gam">Numeric-input GAM</option>
+            <option value="intercept">Intercept only</option>
           </select>
         </label>
         <span id="model-ad-ranges-field" class="model-option">
           <label><input id="model-use-ad-ranges" type="checkbox"> Include ad ranges</label>
           <button class="info-tooltip" type="button" aria-label="About advertised ranges in the model" data-tooltip="Experimental: advertised low-to-high ranges enter the Bayesian model as intervals, never as midpoint salaries. A separate posting adjustment recognizes that advertised and realized pay are different. The GAM does not use postings.">?</button>
         </span>
+        <span id="model-highest-other-field" class="model-option">
+          <label><input id="model-include-highest-other" type="checkbox" checked> Include highest-other pay</label>
+          <button class="info-tooltip" type="button" aria-label="About highest-other pay in the model" data-tooltip="Use the highest eligible base pay reported for another employee in the same filing as a predictor. Switching this off uses a separately fitted version of the selected model that omits this field.">?</button>
+        </span>
         <div class="model-input-grid">
           <label><span>Expenses</span><input id="model-expenses" type="number" min="1" step="100000" inputmode="numeric"></label>
           <label><span>Revenue</span><input id="model-revenue" type="number" min="1" step="100000" inputmode="numeric"></label>
           <label><span>Employees</span><input id="model-staff" type="number" min="1" step="1" inputmode="numeric"></label>
-          <label><span>Highest other reported base pay <button class="info-tooltip" type="button" aria-label="About highest other reported base pay" data-tooltip="The highest eligible Schedule J base-pay amount reported for someone other than the CEO or organization-wide co-leader in the same filing. It can exceed CEO pay; Form 990 is not a complete employee census.">?</button></span><input id="model-highest-other" type="number" min="1" step="1000" inputmode="numeric"></label>
+          <label><span>Highest other reported base pay</span><input id="model-highest-other" type="number" min="1" step="1000" inputmode="numeric"></label>
         </div>
         <div id="model-category-inputs" class="model-category-inputs">
           <label><span>Focus area</span><select id="model-focus"></select></label>
@@ -398,7 +404,7 @@
               </div>
             </div>
             <div>
-              <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="Shows how each input moves the expected log salary relative to a typical modeled organization. These are predictive associations, not causal effects or board recommendations.">?</button></h3>
+              <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="These bars are profile-specific contributions in log-salary units, not model coefficients. A negative bar can mean that a positively associated input is below the model's center. They are predictive associations, not causal effects or board recommendations.">?</button></h3>
               <div id="model-contributions" class="model-contributions"></div>
             </div>
           </div>
@@ -463,27 +469,6 @@
                 </div>
               </th>
               <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities reports 43 individuals employed on its 2023 Form 990">Staff</button></th>
-              <th class="weight-column"><button id="weight-column-sort" type="button" data-sort="weight"><span id="weight-column-label">Weight</span></button></th>
-              <th class="filterable-column">
-                <div class="header-controls">
-                  <button type="button" data-sort="comparabilityScore">Score</button>
-                  <div class="filter-menu numeric-filter-menu header-filter-menu" data-numeric-filter="matchScore">
-                    <details>
-                      <summary id="match-score-filter-summary" aria-label="Filter similarity score"></summary>
-                      <div class="filter-popover numeric-filter-popover">
-                        <div id="match-score-filter-status" class="filter-status" aria-live="polite">All similarity scores included</div>
-                        <section class="range-filter" data-range-filter="matchScore">
-                          <div><span>Score range <button class="info-tooltip" type="button" aria-label="About similarity-score filtering" data-tooltip="Include only records whose reviewed non-pay similarity score falls between the two handles. This filter updates the chart, fitted distribution, statistics, and quantiles.">?</button></span><output id="match-score-range-value">All</output></div>
-                          <div class="dual-range">
-                            <input id="match-score-range-min" type="range" min="0" max="100" step="1" aria-label="Minimum similarity score">
-                            <input id="match-score-range-max" type="range" min="0" max="100" step="1" aria-label="Maximum similarity score">
-                          </div>
-                        </section>
-                      </div>
-                    </details>
-                  </div>
-                </div>
-              </th>
               <th class="tier-column filterable-column">
                 <div class="header-controls">
                   <button type="button" class="stacked-sort" data-sort="tier"><span><span>Peer </span><span>Group</span></span></button>
@@ -531,6 +516,27 @@
                 <div class="header-controls">
                   <button type="button" class="stacked-sort" data-sort="sourceType"><span><span>Pay </span><span>Source</span></span></button>
                   <div class="filter-menu header-filter-menu" data-filter-menu="sourceType"></div>
+                </div>
+              </th>
+              <th class="weight-column"><button id="weight-column-sort" class="stacked-sort" type="button" data-sort="weight"><span id="weight-column-label"><span>Weight</span></span></button></th>
+              <th class="score-column filterable-column">
+                <div class="header-controls">
+                  <button type="button" data-sort="comparabilityScore">Score</button>
+                  <div class="filter-menu numeric-filter-menu header-filter-menu" data-numeric-filter="matchScore">
+                    <details>
+                      <summary id="match-score-filter-summary" aria-label="Filter similarity score"></summary>
+                      <div class="filter-popover numeric-filter-popover">
+                        <div id="match-score-filter-status" class="filter-status" aria-live="polite">All similarity scores included</div>
+                        <section class="range-filter" data-range-filter="matchScore">
+                          <div><span>Score range <button class="info-tooltip" type="button" aria-label="About similarity-score filtering" data-tooltip="Include only records whose reviewed non-pay similarity score falls between the two handles. This filter updates the chart, fitted distribution, statistics, and quantiles.">?</button></span><output id="match-score-range-value">All</output></div>
+                          <div class="dual-range">
+                            <input id="match-score-range-min" type="range" min="0" max="100" step="1" aria-label="Minimum similarity score">
+                            <input id="match-score-range-max" type="range" min="0" max="100" step="1" aria-label="Maximum similarity score">
+                          </div>
+                        </section>
+                      </div>
+                    </details>
+                  </div>
                 </div>
               </th>
               <th><button id="reported-compensation-sort" type="button" class="stacked-sort" data-sort="reportedSalary"><span><span>Reported </span><span id="reported-compensation-term">Salary</span></span></button></th>

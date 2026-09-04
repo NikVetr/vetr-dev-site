@@ -313,7 +313,10 @@ def load_predictive_model_artifact(
     ]
     if artifact_records != archived_records:
         raise ValueError("Predictive-model training-record labels do not match the archived training cohort")
-    if set((artifact.get("models") or {})) != {"bayesian", "bayesianRanges", "gam"}:
+    if set((artifact.get("models") or {})) != {
+        "bayesian", "bayesianNoHighest", "bayesianRanges", "bayesianRangesNoHighest",
+        "gam", "gamNoHighest", "intercept", "linear", "linearNoHighest",
+    }:
         raise ValueError("Predictive-model artifact is missing a required model")
     rp_profile = artifact.get("rpProfile") or {}
     for key in ("expenses", "revenue", "staff", "highest_other_base", "reference_salary"):
@@ -338,33 +341,103 @@ def load_predictive_model_artifact(
     if set(categorical_by_key) != expected_categorical_keys or len(categorical_by_key) != len(categorical_features):
         raise ValueError("Predictive-model categorical feature schema is malformed")
     category_widths: dict[str, int] = {}
+    expected_count_totals = {
+        "counts": expected_record_count,
+        "filingCounts": expected_exact + expected_cash_proxy,
+        "exactCounts": expected_exact,
+    }
     for key, feature in categorical_by_key.items():
         levels = feature.get("levels")
         if not isinstance(levels, list) or not levels or len(set(levels)) != len(levels) or any(not text(level) for level in levels):
             raise ValueError(f"Predictive-model {key} levels are malformed")
         category_widths[key] = len(levels)
-        for count_key in ("counts", "exactCounts"):
+        for count_key, expected_total in expected_count_totals.items():
             counts = feature.get(count_key)
             if not isinstance(counts, list) or len(counts) != len(levels) or any(
                 isinstance(value, bool) or not isinstance(value, int) or value < 0 for value in counts
             ):
                 raise ValueError(f"Predictive-model {key} {count_key} are malformed")
+            if sum(counts) != expected_total:
+                raise ValueError(f"Predictive-model {key} {count_key} total is stale")
+
+    ea_levels = artifact.get("eaLevels")
+    if ea_levels != ["Functional overlap", "EA-adjacent"]:
+        raise ValueError("Predictive-model EA relationship levels are malformed")
+    for count_key, expected_total in {
+        "eaCounts": expected_record_count,
+        "eaFilingCounts": expected_exact + expected_cash_proxy,
+        "eaExactCounts": expected_exact,
+    }.items():
+        counts = artifact.get(count_key)
+        if not isinstance(counts, list) or len(counts) != len(ea_levels) or any(
+            isinstance(value, bool) or not isinstance(value, int) or value < 0 for value in counts
+        ):
+            raise ValueError(f"Predictive-model {count_key} are malformed")
+        if sum(counts) != expected_total:
+            raise ValueError(f"Predictive-model {count_key} total is stale")
 
     comparison = artifact.get("comparison") or []
-    expected_comparison_keys = {"intercept", "linear", "gam", "bayesian", "bayesian_ranges"}
-    if {row.get("key") for row in comparison if isinstance(row, dict)} != expected_comparison_keys or len(comparison) != len(expected_comparison_keys):
+    expected_comparison = {
+        "intercept": (False, False),
+        "linear_no_highest": (False, False),
+        "linear": (True, False),
+        "gam_no_highest": (False, False),
+        "gam": (True, False),
+        "bayesian_no_highest": (False, False),
+        "bayesian": (True, False),
+        "bayesian_ranges_no_highest": (False, True),
+        "bayesian_ranges": (True, True),
+    }
+    if (
+        [row.get("key") for row in comparison if isinstance(row, dict)]
+        != list(expected_comparison)
+    ):
         raise ValueError("Predictive-model comparison table is incomplete")
     for row in comparison:
+        expected_highest, expected_ranges = expected_comparison[row["key"]]
+        if row.get("includeHighestOtherPay") is not expected_highest:
+            raise ValueError(f"comparison {row['key']} has the wrong non-CEO-pay specification")
+        if row.get("includeAdvertisedRanges") is not expected_ranges:
+            raise ValueError(f"comparison {row['key']} has the wrong advertised-range specification")
         for metric in (
             "logRmse", "logMae", "oosR2", "medianAbsPercentError", "coverage80",
             "coverage90", "cvElpd", "meanLogPredictiveDensity",
         ):
             require_finite_number(row.get(metric), f"comparison {row.get('key')} {metric}")
-        if row.get("key") == "bayesian_ranges":
+        if row.get("key") in {"bayesian_ranges", "bayesian_ranges_no_highest"}:
             require_finite_number(row.get("advertisedIntervalMeanLogScore"), "range-model interval log score")
             require_finite_number(row.get("advertisedPointMeanLogScore"), "range-model point log score")
-        if row.get("key") in {"bayesian", "bayesian_ranges"}:
+        if row.get("key") in {
+            "bayesian", "bayesian_no_highest", "bayesian_ranges",
+            "bayesian_ranges_no_highest",
+        }:
             require_finite_number(row.get("cashProxyMeanLogScore"), f"{row.get('key')} cash-proxy log score")
+
+    full_preprocessing = ["expenses", "revenue", "staff", "highest_other_base"]
+    reduced_preprocessing = ["expenses", "revenue", "staff"]
+
+    def validate_preprocessing(
+        model_key: str, model: dict, expected_keys: list[str]
+    ) -> dict[str, dict]:
+        preprocessing = model.get("preprocessing") or []
+        preprocessing_by_key = {
+            item.get("key"): item for item in preprocessing if isinstance(item, dict)
+        }
+        if (
+            list(preprocessing_by_key) != expected_keys
+            or len(preprocessing_by_key) != len(preprocessing)
+        ):
+            raise ValueError(f"Predictive-model {model_key} preprocessing is malformed")
+        for key, item in preprocessing_by_key.items():
+            for field in ("center", "scale", "impute", "minimum", "maximum"):
+                require_finite_number(
+                    item.get(field), f"{model_key} {key} {field}", positive=field == "scale"
+                )
+            if item.get("minimum") > item.get("maximum"):
+                raise ValueError(f"Predictive-model {model_key} {key} support is reversed")
+            if item.get("transform") != "log":
+                raise ValueError(f"Predictive-model {model_key} {key} transform is invalid")
+        return preprocessing_by_key
 
     draw_count = fit_configuration["exportedPosteriorDraws"]
     category_draw_keys = {
@@ -372,24 +445,32 @@ def load_predictive_model_artifact(
         "location": "location_scope", "remote": "remote_category",
         "fiscalSponsor": "fiscal_sponsor_category",
     }
-    for model_key in ("bayesian", "bayesianRanges"):
+    bayesian_configurations = {
+        "bayesian": (True, False),
+        "bayesianNoHighest": (False, False),
+        "bayesianRanges": (True, True),
+        "bayesianRangesNoHighest": (False, True),
+    }
+    for model_key, (include_highest, include_ranges) in bayesian_configurations.items():
         model = artifact["models"][model_key]
-        preprocessing = model.get("preprocessing") or []
-        preprocessing_by_key = {item.get("key"): item for item in preprocessing if isinstance(item, dict)}
-        expected_preprocessing = {"expenses", "revenue", "staff", "highest_other_base"}
-        if set(preprocessing_by_key) != expected_preprocessing or len(preprocessing_by_key) != len(preprocessing):
-            raise ValueError(f"Predictive-model {model_key} preprocessing is malformed")
-        for key, item in preprocessing_by_key.items():
-            for field in ("center", "scale", "impute", "minimum", "maximum"):
-                require_finite_number(item.get(field), f"{model_key} {key} {field}", positive=field == "scale")
-            if item.get("minimum") > item.get("maximum"):
-                raise ValueError(f"Predictive-model {model_key} {key} support is reversed")
-            if item.get("transform") != "log":
-                raise ValueError(f"Predictive-model {model_key} {key} transform is invalid")
+        expected_keys = full_preprocessing if include_highest else reduced_preprocessing
+        validate_preprocessing(model_key, model, expected_keys)
+        if model.get("includeHighestOtherPay") is not include_highest:
+            raise ValueError(f"Predictive-model {model_key} has the wrong non-CEO-pay specification")
+        if model.get("includeAdvertisedRanges") is not include_ranges:
+            raise ValueError(f"Predictive-model {model_key} has the wrong advertised-range specification")
+        expected_design = [
+            *(f"log_{key}" for key in expected_keys),
+            *(f"{key}_missing" for key in expected_keys),
+        ]
+        if model.get("designColumns") != expected_design:
+            raise ValueError(f"Predictive-model {model_key} design columns are malformed")
         draws = model.get("draws") or {}
         for key in ("alpha", "adOffset", "residualZ"):
             require_finite_vector(draws.get(key), draw_count, f"{model_key} draws {key}")
-        require_finite_matrix(draws.get("beta"), draw_count, 8, f"{model_key} draws beta")
+        require_finite_matrix(
+            draws.get("beta"), draw_count, len(expected_design), f"{model_key} draws beta"
+        )
         require_finite_matrix(draws.get("sigma"), draw_count, 2, f"{model_key} draws sigma")
         for row_index, row in enumerate(draws["sigma"]):
             if any(value <= 0 for value in row):
@@ -399,41 +480,134 @@ def load_predictive_model_artifact(
                 draws.get(draw_key), draw_count, category_widths[category_key],
                 f"{model_key} draws {draw_key}",
             )
-        require_finite_matrix(draws.get("ea"), draw_count, 3, f"{model_key} draws ea")
+        require_finite_matrix(
+            draws.get("ea"), draw_count, len(ea_levels), f"{model_key} draws ea"
+        )
 
-    gam = artifact["models"]["gam"]
-    gam_preprocessing = {
-        item.get("key"): item for item in (gam.get("preprocessing") or [])
-    }
-    for effect_key, preprocessing_key in {
-        "expenses": "expenses",
-        "revenue": "revenue",
-        "staff": "staff",
-        "highestOther": "highest_other_base",
-    }.items():
-        preprocessing = gam_preprocessing.get(preprocessing_key) or {}
-        effect = (gam.get("effects") or {}).get(effect_key) or {}
-        grid = effect.get("z") or []
-        values = effect.get("effect") or []
-        if len(grid) < 2 or len(grid) != len(values):
-            raise ValueError(f"Predictive-model GAM {effect_key} grid is malformed")
-        if any(not isinstance(value, (int, float)) or not math.isfinite(value) for value in grid + values):
-            raise ValueError(f"Predictive-model GAM {effect_key} grid contains non-finite values")
-        if any(right <= left for left, right in zip(grid, grid[1:])):
-            raise ValueError(f"Predictive-model GAM {effect_key} grid is not strictly increasing")
-        required = []
-        for bound in (preprocessing.get("minimum"), preprocessing.get("maximum")):
-            if not isinstance(bound, (int, float)) or not math.isfinite(bound):
-                raise ValueError(f"Predictive-model GAM {effect_key} support is missing")
-            transformed = math.log(bound) if preprocessing.get("transform") == "log" else bound
-            required.append((transformed - preprocessing["center"]) / preprocessing["scale"])
-        if grid[0] > min(required) + 1e-7 or grid[-1] < max(required) - 1e-7:
-            raise ValueError(f"Predictive-model GAM {effect_key} grid does not cover observed support")
-    require_finite_number(gam.get("baseline"), "GAM baseline")
-    require_finite_vector(gam.get("residuals"), expected_exact, "GAM residuals")
+    for model_key, include_highest in {"gam": True, "gamNoHighest": False}.items():
+        gam = artifact["models"][model_key]
+        expected_keys = full_preprocessing if include_highest else reduced_preprocessing
+        gam_preprocessing = validate_preprocessing(model_key, gam, expected_keys)
+        if gam.get("includeHighestOtherPay") is not include_highest:
+            raise ValueError(f"Predictive-model {model_key} has the wrong non-CEO-pay specification")
+        expected_effects = {
+            "expenses": "expenses", "revenue": "revenue", "staff": "staff"
+        }
+        if include_highest:
+            expected_effects["highestOther"] = "highest_other_base"
+        if set(gam.get("effects") or {}) != set(expected_effects):
+            raise ValueError(f"Predictive-model {model_key} effects are malformed")
+        for effect_key, preprocessing_key in expected_effects.items():
+            preprocessing = gam_preprocessing.get(preprocessing_key) or {}
+            effect = (gam.get("effects") or {}).get(effect_key) or {}
+            grid = effect.get("z") or []
+            values = effect.get("effect") or []
+            if len(grid) < 2 or len(grid) != len(values):
+                raise ValueError(f"Predictive-model {model_key} {effect_key} grid is malformed")
+            if any(not isinstance(value, (int, float)) or not math.isfinite(value) for value in grid + values):
+                raise ValueError(f"Predictive-model {model_key} {effect_key} grid contains non-finite values")
+            if any(right <= left for left, right in zip(grid, grid[1:])):
+                raise ValueError(f"Predictive-model {model_key} {effect_key} grid is not strictly increasing")
+            required = []
+            for bound in (preprocessing.get("minimum"), preprocessing.get("maximum")):
+                if not isinstance(bound, (int, float)) or not math.isfinite(bound):
+                    raise ValueError(f"Predictive-model {model_key} {effect_key} support is missing")
+                transformed = math.log(bound) if preprocessing.get("transform") == "log" else bound
+                required.append((transformed - preprocessing["center"]) / preprocessing["scale"])
+            if grid[0] > min(required) + 1e-7 or grid[-1] < max(required) - 1e-7:
+                raise ValueError(f"Predictive-model {model_key} {effect_key} grid does not cover observed support")
+        require_finite_number(gam.get("baseline"), f"{model_key} baseline")
+        require_finite_vector(gam.get("residuals"), expected_exact, f"{model_key} residuals")
+
+    exact_record_ids = [
+        text(record.get("id"))
+        for record in records
+        if isinstance(record, dict) and record.get("observation") == "exact_base"
+    ]
+    def expected_design_columns(include_highest: bool) -> list[str]:
+        keys = full_preprocessing if include_highest else reduced_preprocessing
+        return [*(f"log_{key}" for key in keys), *(f"{key}_missing" for key in keys)]
+
+    def validate_deterministic_model(
+        model_key: str, include_highest: bool, require_rank: bool = True
+    ) -> dict:
+        model = artifact["models"][model_key]
+        if model.get("includeAdvertisedRanges") is not False:
+            raise ValueError(f"Predictive-model {model_key} must use exact filings only")
+        if model.get("includeHighestOtherPay") is not include_highest:
+            raise ValueError(f"Predictive-model {model_key} has the wrong non-CEO-pay specification")
+        require_finite_number(model.get("baseline"), f"{model_key} baseline")
+        require_finite_vector(model.get("residuals"), expected_exact, f"{model_key} residuals")
+        residual_ids = model.get("residualRecordIds")
+        if (
+            not isinstance(residual_ids, list)
+            or len(residual_ids) != expected_exact
+            or any(not isinstance(record_id, str) or not record_id for record_id in residual_ids)
+            or len(set(residual_ids)) != expected_exact
+            or set(residual_ids) != set(exact_record_ids)
+        ):
+            raise ValueError(f"Predictive-model {model_key} residual IDs are malformed")
+        if model.get("trainingRecordIds") != exact_record_ids:
+            raise ValueError(f"Predictive-model {model_key} training IDs are stale")
+        diagnostics = model.get("diagnostics") or {}
+        if diagnostics.get("trainingN") != expected_exact:
+            raise ValueError(f"Predictive-model {model_key} training count is stale")
+        require_finite_number(
+            diagnostics.get("residualScale"), f"{model_key} residual scale", positive=True
+        )
+        if model.get("intervalCalibration") != "leave-one-fold-out empirical OOF residual quantiles":
+            raise ValueError(f"Predictive-model {model_key} interval calibration is malformed")
+        if require_rank:
+            rank = diagnostics.get("rank")
+            if isinstance(rank, bool) or not isinstance(rank, int) or rank < 1:
+                raise ValueError(f"Predictive-model {model_key} rank is malformed")
+        return model
+
+    validate_deterministic_model("intercept", False)
+
+    def validate_design_partition(model_key: str, model: dict, include_highest: bool) -> None:
+        candidate = expected_design_columns(include_highest)
+        active = model.get("activeDesignColumns")
+        dropped = model.get("droppedDesignColumns")
+        if model.get("candidateDesignColumns") != candidate:
+            raise ValueError(f"Predictive-model {model_key} candidate columns are malformed")
+        if (
+            not isinstance(active, list) or not isinstance(dropped, list)
+            or len(set(active)) != len(active) or len(set(dropped)) != len(dropped)
+            or any(column not in candidate for column in [*active, *dropped])
+            or set(active).intersection(dropped)
+            or set(active).union(dropped) != set(candidate)
+        ):
+            raise ValueError(f"Predictive-model {model_key} active/dropped columns are malformed")
+
+    for model_key, include_highest in {"linear": True, "linearNoHighest": False}.items():
+        linear = validate_deterministic_model(model_key, include_highest)
+        expected_keys = full_preprocessing if include_highest else reduced_preprocessing
+        validate_preprocessing(model_key, linear, expected_keys)
+        validate_design_partition(model_key, linear, include_highest)
+        if linear.get("designColumns") != linear.get("activeDesignColumns"):
+            raise ValueError(f"Predictive-model {model_key} design columns are not the active columns")
+        require_finite_vector(
+            linear.get("coefficients"), len(linear["designColumns"]),
+            f"{model_key} coefficients",
+        )
+
+    for model_key, include_highest in {"gam": True, "gamNoHighest": False}.items():
+        gam = validate_deterministic_model(model_key, include_highest, require_rank=False)
+        validate_design_partition(model_key, gam, include_highest)
+
+    method = artifact.get("method") or {}
+    for method_key in (
+        "intercept", "linear", "linearNoHighest", "bayesian", "bayesianNoHighest",
+        "bayesianRanges", "bayesianRangesNoHighest", "gam", "gamNoHighest",
+        "validation",
+    ):
+        if not text(method.get(method_key)):
+            raise ValueError(f"Predictive-model {method_key} method description is missing")
+
     validation = artifact.get("validationDiagnostics") or {}
-    if validation.get("crossValidationFits") != 20:
-        raise ValueError("Predictive-model artifact lacks all 20 Bayesian CV fit diagnostics")
+    if validation.get("crossValidationFits") != 40:
+        raise ValueError("Predictive-model artifact lacks all 40 Bayesian CV fit diagnostics")
     if validation.get("crossValidationDivergences") or validation.get("crossValidationMaxTreedepthHits"):
         raise ValueError("Predictive-model cross-validation contains sampler failures")
     if not isinstance(validation.get("crossValidationMinEbfmi"), (int, float)) or validation["crossValidationMinEbfmi"] < 0.2:
@@ -444,7 +618,9 @@ def load_predictive_model_artifact(
         raise ValueError("Predictive-model cross-validation has inadequate bulk ESS")
     if not isinstance(validation.get("crossValidationMinTailEss"), (int, float)) or validation["crossValidationMinTailEss"] < 100:
         raise ValueError("Predictive-model cross-validation has inadequate tail ESS")
-    for key in ("bayesian", "bayesianRanges"):
+    for key in (
+        "bayesian", "bayesianNoHighest", "bayesianRanges", "bayesianRangesNoHighest"
+    ):
         diagnostics = artifact["models"][key].get("diagnostics") or {}
         if diagnostics.get("chains") != 4 or diagnostics.get("drawsPerChain") != 1000:
             raise ValueError(f"Predictive-model full fit {key} lacks the required four-chain run")
@@ -466,6 +642,45 @@ def load_predictive_model_artifact(
 def text(value: object) -> str:
     value = "" if value is None else str(value).strip()
     return "" if value.lower() in {"", "nan", "none"} else value
+
+
+EA_CORE_LABEL = re.compile(r"\bEA(?:-|\s+)core\b", re.IGNORECASE)
+
+
+def normalize_ea_taxonomy(value: object) -> object:
+    """Collapse the retired EA category in generated/displayed data only.
+
+    Frozen CSVs and source-native evidence remain unchanged on disk. Applying
+    the migration recursively here prevents historical provenance text or a
+    future derived row from leaking the retired label back into app-data.js.
+    """
+    if isinstance(value, str):
+        return EA_CORE_LABEL.sub("EA-adjacent", value)
+    if isinstance(value, list):
+        return [normalize_ea_taxonomy(item) for item in value]
+    if isinstance(value, dict):
+        result: dict = {}
+        for key, item in value.items():
+            normalized_key = normalize_ea_taxonomy(key)
+            if normalized_key in result:
+                raise ValueError(
+                    f"EA taxonomy migration produced a duplicate key: {normalized_key!r}"
+                )
+            result[normalized_key] = normalize_ea_taxonomy(item)
+        return result
+    return value
+
+
+def assert_no_retired_ea_label(value: object, path: str = "payload") -> None:
+    if isinstance(value, str) and EA_CORE_LABEL.search(value):
+        raise ValueError(f"Retired EA label leaked into {path}: {value!r}")
+    if isinstance(value, list):
+        for index, item in enumerate(value):
+            assert_no_retired_ea_label(item, f"{path}[{index}]")
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            assert_no_retired_ea_label(key, f"{path}.<key>")
+            assert_no_retired_ea_label(item, f"{path}.{key}")
 
 
 def literal(value: object) -> str:
@@ -730,7 +945,7 @@ def build_rp_reference() -> dict:
         "rawTitle": title,
         "tier": "Reference",
         "topic": "RP reference organization",
-        "eaAffinity": "EA-core",
+        "eaAffinity": "EA-adjacent",
         "location": "US",
         "remoteStatus": "Not reported in Form 990",
         "structure": "independent nonprofit",
@@ -834,9 +1049,11 @@ def load_category_explainers() -> tuple[dict, dict, dict, dict[str, int]]:
         value = literal(row["exact_category_value"])
         if not field or not value:
             raise ValueError("Category dictionary contains a blank field or exact category value")
+        verify_preserved_paths(literal(row["source_path"]), ";")
+        if EA_CORE_LABEL.fullmatch(value):
+            continue
         if value in definitions.setdefault(field, {}):
             raise ValueError(f"Duplicate category definition: {field}={value}")
-        verify_preserved_paths(literal(row["source_path"]), ";")
         definitions[field][value] = {
             "shortDefinition": literal(row["short_display_definition"]),
             "operationalRule": literal(row["detailed_operational_rule"]),
@@ -847,6 +1064,24 @@ def load_category_explainers() -> tuple[dict, dict, dict, dict[str, int]]:
             "confidence": literal(row["confidence"]),
             "caveats": literal(row["caveats"]),
         }
+
+    for field in ("ea_affinity", "ea_affinity_precomp", "ea_relationship"):
+        adjacent = definitions.get(field, {}).get("EA-adjacent")
+        if adjacent:
+            adjacent.update({
+                "shortDefinition": "Documented connection to effective altruism",
+                "operationalRule": (
+                    "Organization or project with a documented connection to effective altruism. "
+                    "The app intentionally uses one connected category rather than finer degrees of connection."
+                ),
+                "weightRationale": (
+                    "Suggested weighting treats every documented effective-altruism connection equally."
+                ),
+                "caveats": (
+                    "Historical source files preserve the finer taxonomy used when the peer set was assembled; "
+                    "the generated app collapses those labels without changing the underlying evidence."
+                ),
+            })
 
     by_source: dict[tuple[str, str], dict] = {}
     references_by_organization: dict[str, dict] = {}
@@ -868,7 +1103,12 @@ def load_category_explainers() -> tuple[dict, dict, dict, dict[str, int]]:
             if organization in references_by_organization:
                 raise ValueError(f"Duplicate reference-selection rationale: {organization}")
             references_by_organization[organization] = compact
-    return definitions, by_source, references_by_organization, rationale_counts
+    return (
+        normalize_ea_taxonomy(definitions),
+        normalize_ea_taxonomy(by_source),
+        normalize_ea_taxonomy(references_by_organization),
+        rationale_counts,
+    )
 
 
 def load_job_ad_enrichment(jobs: list[dict[str, str]]) -> dict[str, dict[str, str]]:
@@ -1403,11 +1643,15 @@ def build_lingering_org_app_additions() -> tuple[list[dict], dict[str, list[dict
         "tier_label": "Tier A directory addendum provisional",
         "selection_wave": "EA directory cross-check addendum",
         "topic_cluster": "global health policy and implementation",
-        "ea_affinity": "EA-core",
+        "ea_affinity": "EA-adjacent",
         "country_or_region": "International / United Kingdom",
         "expected_structure": "independent nonprofit",
     }
-    if any(text(candidate[field]) != expected for field, expected in candidate_fields.items()):
+    if any(
+        text(normalize_ea_taxonomy(candidate[field]) if field == "ea_affinity" else candidate[field])
+        != expected
+        for field, expected in candidate_fields.items()
+    ):
         raise ValueError("LEEP frozen non-pay classification changed; re-review the addendum")
     if number(candidate["comparability_score"]) != 88:
         raise ValueError("LEEP pay-blind comparability score changed; re-review the addendum")
@@ -1824,7 +2068,7 @@ def build_position_data(
             organization_provenance
             or {
                 "tier": {"value": "Reference", "label": "RP reference", "rationale": "Display-only RP filing reference.", "citation": text(row["source_local_path"])},
-                "ea": {"value": "EA-core", "sourceValue": "EA-core", "rationale": "Rethink Priorities reference row.", "citation": text(row["source_local_path"])},
+                "ea": {"value": "EA-adjacent", "sourceValue": "EA-adjacent", "rationale": "Rethink Priorities reference row.", "citation": text(row["source_local_path"])},
                 "structure": {"expected": "independent nonprofit", "observationFlag": "reference_not_analyzed", "rationale": "Display-only RP filing reference.", "citation": text(row["source_local_path"])},
                 "topic": {"value": "research and evidence", "sourceDescription": "research and evidence", "rationale": "Rethink Priorities reference row.", "citation": text(row["source_local_path"])},
             }
@@ -2601,6 +2845,16 @@ def main() -> None:
             catalog_entry["description"],
             count=1,
         )
+    # Historical source and frozen classification files keep their original
+    # labels. Everything emitted to the application uses the current collapsed
+    # taxonomy, including copied provenance attached to CEO and non-CEO rows.
+    incumbents = normalize_ea_taxonomy(incumbents)
+    jobs = normalize_ea_taxonomy(jobs)
+    rp_reference = normalize_ea_taxonomy(rp_reference)
+    position_observations = normalize_ea_taxonomy(position_observations)
+    position_job_ads = normalize_ea_taxonomy(position_job_ads)
+    rp_references_by_position = normalize_ea_taxonomy(rp_references_by_position)
+    definitions = normalize_ea_taxonomy(definitions)
     ceo_catalog = next(position for position in position_catalog if position["key"] == "ceo")
     ceo_rows = incumbents + jobs
     ceo_catalog["counts"] = {
@@ -2741,6 +2995,8 @@ def main() -> None:
             "highestPaidOtherEmployeeAttachments": highest_paid_other_attachments,
         },
     }
+    payload = normalize_ea_taxonomy(payload)
+    assert_no_retired_ea_label(payload)
     OUTPUT.write_text(
         "window.CEO_BENCHMARK_DATA = " + json.dumps(payload, separators=(",", ":")) + ";\n",
         encoding="utf-8",

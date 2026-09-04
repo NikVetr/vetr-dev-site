@@ -37,13 +37,14 @@ data {
   int<lower=1> J_location;
   int<lower=1> J_remote;
   int<lower=1> J_fiscal_sponsor;
+  int<lower=2> J_ea;
   array[N] int<lower=1, upper=J_focus> focus;
   array[N] int<lower=1, upper=J_structure> structure;
   array[N] int<lower=1, upper=J_title> title_group;
   array[N] int<lower=1, upper=J_location> location;
   array[N] int<lower=1, upper=J_remote> remote;
   array[N] int<lower=1, upper=J_fiscal_sponsor> fiscal_sponsor;
-  array[N] int<lower=1, upper=3> ea_level;
+  array[N] int<lower=1, upper=J_ea> ea_level;
 }
 
 parameters {
@@ -70,9 +71,9 @@ parameters {
   vector[J_remote] remote_raw;
   vector[J_fiscal_sponsor] fiscal_sponsor_raw;
 
-  // Functional overlap is the zero point. Signed cumulative increments keep
-  // the predeclared order without forcing a salary direction unsupported by data.
-  vector[2] ea_increment;
+  // Functional overlap is the zero point. Signed cumulative increments support
+  // the current two-level taxonomy without hard-coding the number of levels.
+  vector[J_ea - 1] ea_increment;
 }
 
 transformed parameters {
@@ -83,7 +84,7 @@ transformed parameters {
   vector[J_location] location_effect = tau_location * (location_raw - mean(location_raw));
   vector[J_remote] remote_effect = tau_remote * (remote_raw - mean(remote_raw));
   vector[J_fiscal_sponsor] fiscal_sponsor_effect = tau_fiscal_sponsor * (fiscal_sponsor_raw - mean(fiscal_sponsor_raw));
-  vector[3] ea_effect;
+  vector[J_ea] ea_effect;
   vector[N] mu;
 
   for (m in 1:N_missing) {
@@ -91,8 +92,9 @@ transformed parameters {
   }
 
   ea_effect[1] = 0;
-  ea_effect[2] = ea_increment[1];
-  ea_effect[3] = ea_increment[1] + ea_increment[2];
+  for (j in 2:J_ea) {
+    ea_effect[j] = ea_effect[j - 1] + ea_increment[j - 1];
+  }
   for (n in 1:N) {
     mu[n] = alpha + dot_product(X_complete[n], beta)
       + ad_offset * (outcome_type[n] == 3)

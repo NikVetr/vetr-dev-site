@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-04T21:48:30+00:00",
+  "generatedAt": "2026-09-04T23:00:12+00:00",
   "seed": 20260903,
-  "trainingInputSha256": "f53b3acf4d06f41548c9341943a60186885192b8a2690be435728630b595a8e5",
+  "trainingInputSha256": "3048a670856dfb8120e5575035f9b3a23af1b88d3e501d26bef7ce85a5477bae",
   "target": "log July 2026-adjusted annual base salary",
   "foldRule": "Ten deterministic organization-grouped folds; filing and posting records with the same normalized organization name share a fold.",
   "counts": {
@@ -26,8 +26,7 @@
       "Security / governance": 25
     },
     "ea_relationship": {
-      "EA-adjacent": 76,
-      "EA-core": 5,
+      "EA-adjacent": 81,
       "Functional overlap": 72
     },
     "organization_type": {
@@ -74,7 +73,7 @@
     "staff": 43.0,
     "highest_other_base": 136142.69,
     "focus_area": "Research / evidence",
-    "ea_relationship": "EA-core",
+    "ea_relationship": "EA-adjacent",
     "organization_type": "Independent nonprofit",
     "title_group": "CEO",
     "location_scope": "International / multi-country",
@@ -83,11 +82,11 @@
     "reference_salary": 155230.03
   },
   "provenance": {
-    "trainingCsvSha256": "efe4739b97ae2169d94af0a7f6e2f797a3a014189100f1493eaef28aa1691416",
-    "prepareScriptSha256": "e8c31d78e1ed83cf18f34b6c6f5d2881440d15a87e9f5641fdd0139a083f7a75",
-    "fitScriptSha256": "8163d090d957abefa06c4b1f484ace14d919dcdab4529a83de477567c29742dd",
-    "stanModelSha256": "0bef0528706587492ca2ba13ddb8bf25993cdacbbc12eca3974d7557c4ed3fd5",
+    "trainingCsvSha256": "92f6d8e96fa14febc40db3b98e9a64c7d70c49db4c7ac822c4abed9a03b58594",
+    "prepareScriptSha256": "11d9a08d9a2b326b3959c7980afb2e23b35b524a56bfcb5b4fea8ff02295d306",
+    "fitScriptSha256": "19e9b066dfc2c058cef9729df75c5e153acca386131a8fbd0b0bf4b426a5148b",
+    "stanModelSha256": "9739524cef70c80b32a6d738c8f55702ab0060a077efb882bf69f42525f44e75",
     "utilsScriptSha256": "81c97f6aba827471a2085831c80479c294d8c91122590d20d47c2045d205c235",
-    "contractScriptSha256": "7df39cc306e7833412981185843ffae7cf7e03a98010e5c05b2e0ba8713bc252"
+    "contractScriptSha256": "778cc04d2187fe2b7e6a44c7c9e3e1631ad3908bc99cceab4f9a8a07fd2ab1d8"
   }
 }
