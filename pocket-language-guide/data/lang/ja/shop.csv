@@ -8,7 +8,7 @@ color-size-returns.do-you-have-another-size,別のサイズはありますか？
 payment-receipt.pay-cash,現金で払えますか？,,genkin de haraemasu ka?,ɡeɴkiɴ de haɾaemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 shopping.that-is-too-expensive,高すぎます,,takasugimasu,takasɯɡimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
 color-size-returns.may-i-try-it-on,試着してもいいですか？,,shichaku shite mo ii desu ka?,ɕitɕakɯ ɕite mo iː desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
-payment-receipt.pay-by-qr-code,QRコードで払えますか？,,kyū āru kōdo de haraemasu ka?,,,2,japanese-reviewed-v6
+payment-receipt.pay-by-qr-code,QRコードで払えますか？,,kyū āru kōdo de haraemasu ka?,kjɯː aːɾɯ koːdo de haɾaemasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 color-size-returns.can-i-return-it,返品できますか？,,henpin dekimasu ka?,heɴpiɴ dekimasɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 payment-receipt.a-receipt-please,レシートをください,,reshīto o kudasai,ɾeɕiːto o kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
 shopping.can-it-be-a-little-cheaper,もう少し安くなりますか？,,mō sukoshi yasuku narimasu ka?,moː sɯkoɕi jasɯkɯ naɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn

@@ -16,7 +16,7 @@ sim-data.may-i-use-your-wifi,可以借用无线网吗？,,kěyǐ jièyòng wúxi
 children.make-an-announcement,请广播找人,,qǐng guǎngbō zhǎo rén,tɕʰiŋ˧˩˧ kwɑŋ˧˩˧pwɔ˥ ʈʂɑʊ˧˩˧ ʐən˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
 etiquette.is-tipping-expected,需要给小费吗？,,xūyào gěi xiǎofèi ma?,ɕy˥jɑʊ˥˩ keɪ˧˩˧ ɕjɑʊ˧˩˧feɪ˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin
 social-basics.good-morning,早上好,,zǎoshang hǎo,tsɑʊ˧˩˧ʂɑŋ xɑʊ˧˩˧,,2,latex-reference-v2;ipa=pinyin
-communication.do-you-speak-english,你会说{source}吗？,,nǐ huì shuō {source} ma?,,,2,language-slots-v1
+communication.do-you-speak-english,你会说{source}吗？,,nǐ huì shuō {source} ma?,ni˧˩˧ xweɪ˥˩ ʂwɔ˥ {source} ma,,2,language-slots-v1;ipa=pinyin
 quick-responses.no-not,不是,,bú shì,pu˧˥ ʂɨ˥˩,,2,latex-reference-v2;ipa=pinyin
 phone-translation.one-sentence-at-a-time-please,请一句一句地说,,qǐng yí jù yí jù de shuō,tɕʰiŋ˧˩˧ i˧˥ tɕy˥˩ i˧˥ tɕy˥˩ tɤ ʂwɔ˥,,2,latex-reference-v2;ipa=pinyin
 phone-text-power.please-use-simple-words,请用简单的话说,,qǐng yòng jiǎndān de huà shuō,tɕʰiŋ˧˩˧ jʊŋ˥˩ tɕjɛn˧˩˧tan˥ tɤ xwa˥˩ ʂwɔ˥,,2,latex-reference-v2;ipa=pinyin

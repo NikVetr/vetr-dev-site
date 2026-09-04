@@ -24,8 +24,8 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 - it takes a pair while the type would otherwise sit near its floor.
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
-is a deliberately tight layout that should not be second-guessed. On 7×5in, 175 of
-the 272 shipped pairs settle on eight faces and 97 on ten; none now fits six. The
+is a deliberately tight layout that should not be second-guessed. On 7×5in, 167 of
+the 272 shipped pairs settle on eight faces and 105 on ten; none now fits six. The
 tens are the scripts that need the most vertical room: **every** Japanese, Arabic and
 Devanagari sheet takes ten, Russian eleven of sixteen and Thai nine, while no English
 or Vietnamese sheet needs one. The reference sheets reached four by hand against a
@@ -1004,18 +1004,18 @@ Named so nobody has to rediscover the gap:
   a number that does not answer is worse than a blank, so it stays withheld with
   the FCDO values recorded for a future reviewer.
 
-  What is left on the respelling side is narrower than either of the two items that
-  used to sit here, and it is measured: **171 of 12,837 rows print a blank
-  pronunciation column that ought to have one**, about ten per sheet, in two classes.
-  34 are rows whose text names *the reader's* language — `Parlez-vous {source} ?` —
-  where the substitution varies by pair, so no single stored transcription can serve
-  it; the `{target}` half of that problem is solved and described above. The
-  remaining ~130 are rows `scripts/build_ipa.py` refused outright, most of them a
-  Latin acronym embedded in a non-Latin sentence (`旅行者用のSIMカードを`) that neither
-  the Hepburn table nor espeak's Japanese voice can read. A short lexicon of the
-  acronyms a traveller meets — SIM, WiFi, ATM, PDF — would take most of them. A
-  further 76 rows are blank *correctly*: 64 are prose notes, where a respelling of a
-  paragraph would be meaningless, and 12 are bare symbols like `¥`.
+  What is left on the respelling side is now **19 rows of 12,837**, about one per
+  sheet, and every one of them is a Latin acronym or brand embedded in a non-Latin
+  sentence: `Wi-Fi`, `eSIM`, `ATM`. They are left rather than unfinished, because the
+  human evidence disagrees with itself — the Mandarin and Thai curators respelled
+  them natively (`wee-fye`, `ee-sim`) while the Russian and Korean ones left the
+  Latin standing (`oo vas yest Wi-Fi`) — and neither is derivable from the other.
+  Carrying the Latin run through the way `{}` is carried *is* expressible, and it is
+  the smaller half of the decision: it would put ASCII letters into the respelling
+  charset of the six readers (ar hi ja ko ru th) that have **none** today, which is a
+  choice about what a reader is shown, not a transcription. A further 76 rows are
+  blank *correctly*: 64 are prose notes, where a respelling of a paragraph would be
+  meaningless, and 12 are bare symbols like `¥`.
 - **Dictionary line breaking** for Thai and Khmer. `scripts.csv` marks them
   `word_break: dict`; the measurer falls back to breaking anywhere and the solver
   raises a warning, rather than pretending. It does hold each *character cluster*

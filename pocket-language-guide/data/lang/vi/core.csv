@@ -2,8 +2,8 @@ concept_id,text,text_alt,ipa,literal,confidence,provenance
 pronouns-verbs.i-me,tôi,,t̪oj˧,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.we-us,chúng tôi,,tʃuŋ˧˥ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.you,bạn,,baːn˨˩ˀ,"neutral, any stranger",2,vi-agent-v1;ipa=espeak
-pronouns-verbs.you-polite,anh / chị,ông / bà,,"anh = m., chị = f.",2,vi-agent-v1
-pronouns-verbs.he-him,anh ấy,ông ấy,,,2,vi-agent-v1
+pronouns-verbs.you-polite,anh / chị,ông / bà,aɲ˧ / tʃi˨˩ˀ,"anh = m., chị = f.",2,vi-agent-v1;ipa=espeak
+pronouns-verbs.he-him,anh ấy,ông ấy,aɲ˧ əɪ˧˥,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.she-her,cô ấy,chị ấy,ko˧ əɪ˧˥,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.they-them,họ,,hɔ˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.my-mine,của tôi,,kuə̯˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
@@ -26,7 +26,7 @@ pronouns-verbs.want-thing,muốn + đồ vật,,muə̯n˧˥ ɗo˨˩ vət̪˨˩ˀ
 pronouns-verbs.need-thing,cần + đồ vật,,kən˨˩ ɗo˨˩ vət̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 pronouns-verbs.looking-for-thing,đang tìm + đồ vật,,ɗaːŋ˧ t̪im˨˩ ɗo˨˩ vət̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 question-words.what,gì,,zi˨˩,,2,vi-agent-v1;ipa=espeak
-question-words.where,ở đâu,,,,2,vi-agent-v1
+question-words.where,ở đâu,,əː˧˩˧ ɗəw˧,,2,vi-agent-v1;ipa=espeak
 question-words.who,ai,,aːj˧,,2,vi-agent-v1;ipa=espeak
 question-words.which-one,cái nào,,kaːj˧˥ naːw˨˩,,2,vi-agent-v1;ipa=espeak
 question-words.when,khi nào,,xi˧ naːw˨˩,,2,vi-agent-v1;ipa=espeak

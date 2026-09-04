@@ -26,7 +26,7 @@ emergency-medical.i-have-chest-pain,Ho dolore al petto,Dolore toracico,o dolˈor
 emergency-medical.this-person-is-unconscious,Questa persona ha perso conoscenza,Questa persona è priva di sensi,kwˌɛsta persˈona a pˈɛrso konoʃˈɛntsa,,2,it-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,Dov'è l'ospedale più vicino?,,dovˈɛ lospedˈale pjʊ vitʃˈino,,2,it-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Qual è il numero di emergenza?,,kwˈal e il nˈumero dɪ emerdʒˈɛntsa,,2,it-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,C'è un medico che parla {source}?,,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,C'è un medico che parla {source}?,,tʃe ʊn mˈɛdiko ke pˈarla {source},,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,Credo di avere una frattura,,krˈɛdo dɪ avˈere ˌʊna fratːˈura,,2,it-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Chiami il mio contatto di emergenza,,kjˈamɪ il mˌio kontˈatːo dɪ emerdʒˈɛntsa,,2,it-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Ho un'assicurazione di viaggio,,o ʊnassikʊratsiˈone dɪ vjˈadʒːo,,2,it-agent-v1;ipa=espeak

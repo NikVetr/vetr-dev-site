@@ -61,7 +61,7 @@ social-basics.good-night,Buenas noches,Que descanse,bwˈenas nˈotʃes,,2,es-age
 social-basics.okay-fine-i-am-okay,Estoy bien,,estˈoɪ bjˈen,,2,es-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,No hablo {target},,nˈo ˈablo {target},,2,language-slots-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,Hablo poco {target},,ˈablo pˈoko {target},,2,language-slots-v1;ipa=espeak
-communication.do-you-speak-english,¿Habla {source}?,,,,2,language-slots-v1
+communication.do-you-speak-english,¿Habla {source}?,,ˈabla {source},,2,language-slots-v1;ipa=espeak
 communication.please-speak-more-slowly,"Hable más despacio, por favor",,"ˈable mˈas despˈasjo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,No entiendo,,nˈo entjˈendo,,2,es-agent-v1;ipa=espeak
 communication.i-cannot-read-understand,No sé leer esto,,nˈo sˈe leˈeɾ ˈesto,,2,es-agent-v1;ipa=espeak

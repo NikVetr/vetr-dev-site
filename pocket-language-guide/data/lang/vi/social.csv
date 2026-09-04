@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 social-basics.hello,Xin chào,,sin˧ tʃaːw˨˩,,2,vi-agent-v1;ipa=espeak
-social-basics.hello-polite,Chào anh / chị ạ,,,"anh = m., chị = f.",2,vi-agent-v1
+social-basics.hello-polite,Chào anh / chị ạ,,tʃaːw˨˩ aɲ˧ / tʃi˨˩ˀ aː˨˩ˀ,"anh = m., chị = f.",2,vi-agent-v1;ipa=espeak
 social-basics.good-morning,Chào buổi sáng,,tʃaːw˨˩ buə̯j˧˩˧ saːŋ˧˥,,2,vi-agent-v1;ipa=espeak
 social-basics.good-evening,Chào buổi tối,,tʃaːw˨˩ buə̯j˧˩˧ t̪oj˧˥,,2,vi-agent-v1;ipa=espeak
 social-basics.goodbye,Tạm biệt,,t̪aːm˨˩ˀ biɛ̯t̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -14,7 +14,7 @@ social-basics.good-night,Chúc ngủ ngon,,tʃuc˧˥ ŋu˧˩˧ ŋɔn˧,,2,vi-age
 social-basics.okay-fine-i-am-okay,Tôi ổn,Được rồi,t̪oj˧ on˧˩˧,,2,vi-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,Tôi không nói được tiếng {target},,t̪oj˧ xoŋ˧ nɔj˧˥ ɗyə̯c˨˩ˀ t̪iɛ̯ŋ˧˥ {target},,2,language-slots-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,Tôi chỉ nói được một chút tiếng {target},,t̪oj˧ tʃi˧˩˧ nɔj˧˥ ɗyə̯c˨˩ˀ mot̪˨˩ˀ tʃut̪˧˥ t̪iɛ̯ŋ˧˥ {target},,2,language-slots-v1;ipa=espeak
-communication.do-you-speak-english,Có nói được tiếng {source} không ạ?,,,,2,language-slots-v1
+communication.do-you-speak-english,Có nói được tiếng {source} không ạ?,,kɔ˧˥ nɔj˧˥ ɗyə̯c˨˩ˀ t̪iɛ̯ŋ˧˥ {source} xoŋ˧ aː˨˩ˀ,,2,language-slots-v1;ipa=espeak
 communication.please-speak-more-slowly,Xin nói chậm hơn,,sin˧ nɔj˧˥ tʃəm˨˩ˀ həːn˧,,2,vi-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,Tôi nghe không hiểu,,t̪oj˧ ŋɛ˧ xoŋ˧ hiɛ̯w˧˩˧,,2,vi-agent-v1;ipa=espeak
 communication.i-cannot-read-understand,Tôi đọc không hiểu,,t̪oj˧ ɗɔk˨˩ˀ xoŋ˧ hiɛ̯w˧˩˧,,2,vi-agent-v1;ipa=espeak
@@ -36,11 +36,11 @@ quick-responses.does-not-work-no,Không ổn,,xoŋ˧ on˧˩˧,,2,vi-agent-v1;ipa
 quick-responses.can-possible,Có thể,,kɔ˧˥ te˧˩˧,,2,vi-agent-v1;ipa=espeak
 quick-responses.cannot-not-possible,Không thể,,xoŋ˧ te˧˩˧,,2,vi-agent-v1;ipa=espeak
 quick-responses.okay-fine,Được rồi,,ɗyə̯c˨˩ˀ zoj˨˩,,2,vi-agent-v1;ipa=espeak
-quick-responses.no-good-not-allowed-will-not-work,Không được đâu,,,,2,vi-agent-v1
+quick-responses.no-good-not-allowed-will-not-work,Không được đâu,,xoŋ˧ ɗyə̯c˨˩ˀ ɗəw˧,,2,vi-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,Tôi đang dùng phần mềm dịch,,t̪oj˧ ɗaːŋ˧ zuŋ˨˩ fən˨˩ mem˨˩ zic˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,Xin nói vào điện thoại,,sin˧ nɔj˧˥ vaːw˨˩ ɗiɛ̯n˨˩ˀ twaːj˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 phone-translation.please-write-the-place-name,Xin viết tên địa điểm bằng tiếng {target},,sin˧ viɛ̯t̪˧˥ t̪en˧ ɗiə̯˨˩ˀ ɗiɛ̯m˧˩˧ baŋ˨˩ t̪iɛ̯ŋ˧˥ {target},,2,language-slots-v1;ipa=espeak
-phone-translation.one-sentence-at-a-time-please,Xin nói từng câu một,,,,2,vi-agent-v1
+phone-translation.one-sentence-at-a-time-please,Xin nói từng câu một,,sin˧ nɔj˧˥ t̪yŋ˨˩ kəw˧ mot̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,Xin gõ ra rồi cho tôi xem,,sin˧ ɣɔ˧ˀ˥ zaː˧ zoj˨˩ tʃɔ˧ t̪oj˧ sɛm˧,,2,vi-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,Xin nhìn màn hình,,sin˧ ɲin˨˩ maːn˨˩ hiɲ˨˩,,2,vi-agent-v1;ipa=espeak
 phone-text-power.please-type-it-for-me,Xin gõ giúp tôi,,sin˧ ɣɔ˧ˀ˥ zup˧˥ t̪oj˧,,2,vi-agent-v1;ipa=espeak
@@ -54,7 +54,7 @@ sim-data.i-would-like-a-tourist-sim,Tôi muốn mua SIM du lịch,,t̪oj˧ muə�
 sim-data.may-i-use-your-wifi,Cho tôi dùng Wi-Fi ạ,,tʃɔ˧ t̪oj˧ zuŋ˨˩ waɪfaɪ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 sim-data.how-much-data-is-included,Được bao nhiêu data ạ?,,ɗyə̯c˨˩ˀ baːw˧ ɲiɛ̯w˧ deɪtə˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,Có cần hộ chiếu không ạ?,,kɔ˧˥ kən˨˩ ho˨˩ˀ tʃiɛ̯w˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-sim-data.how-long-is-it-valid,Dùng được bao lâu ạ?,,,,2,vi-agent-v1
+sim-data.how-long-is-it-valid,Dùng được bao lâu ạ?,,zuŋ˨˩ ɗyə̯c˨˩ˀ baːw˧ ləw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 sim-data.please-activate-it,Xin kích hoạt giúp,,sin˧ kic˧˥ hwaːt̪˨˩ˀ zup˧˥,,2,vi-agent-v1;ipa=espeak
 sim-data.do-you-have-an-esim,Có eSIM không ạ?,,kɔ˧˥ ɛ˧ ɛsiɛməː˧˥˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 sim-data.my-data-is-not-working,Data không dùng được,,deɪtə˧ xoŋ˧ zuŋ˨˩ ɗyə̯c˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -62,7 +62,7 @@ sim-data.does-it-need-registration,Có cần đăng ký không ạ?,,kɔ˧˥ kə
 sim-data.i-have-no-signal,Tôi không có sóng,,t̪oj˧ xoŋ˧ kɔ˧˥ sɔŋ˧˥,,2,vi-agent-v1;ipa=espeak
 sim-data.please-write-the-wifi-password,Xin ghi mật khẩu Wi-Fi,,sin˧ ɣi˧ mət̪˨˩ˀ xəw˧˩˧ waɪfaɪ˧,,2,vi-agent-v1;ipa=espeak
 sim-data.sim-card,Thẻ SIM,,tɛ˧˩˧ sim˧,,2,vi-agent-v1;ipa=espeak
-sim-data.where-can-i-buy-a-plug-adapter,Mua ổ cắm chuyển ở đâu ạ?,,,,2,vi-agent-v1
+sim-data.where-can-i-buy-a-plug-adapter,Mua ổ cắm chuyển ở đâu ạ?,,muə̯˧ o˧˩˧ kam˧˥ tʃwiɛ̯n˧˩˧ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 sim-data.mobile-data,Dữ liệu di động,Data,zy˧ˀ˥ liɛ̯w˨˩ˀ zi˧ ɗoŋ˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 sim-data.can-i-top-up-this-sim,Nạp tiền SIM này được không ạ?,,naːp˨˩ˀ t̪iɛ̯n˨˩ ɛsiɛməː˧˥˨˩ naj˨˩ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 sim-data.top-up,Nạp tiền,,naːp˨˩ˀ t̪iɛ̯n˨˩,,2,vi-agent-v1;ipa=espeak
@@ -76,7 +76,7 @@ etiquette.is-tipping-expected,Có cần tiền tip không ạ?,Có cần tiền 
 etiquette.is-service-included,Đã tính phí phục vụ chưa ạ?,,ɗaː˧ˀ˥ t̪iɲ˧˥ fi˧˥ fuc˨˩ˀ vu˨˩ˀ tʃyə̯˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 etiquette.may-i-enter,Tôi vào được không ạ?,,t̪oj˧ vaːw˨˩ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 etiquette.remove-shoes,Có phải cởi giày không ạ?,,kɔ˧˥ faːj˧˩˧ kəːj˧˩˧ zaj˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-etiquette.photo-of-you,Cho tôi chụp hình anh / chị ạ?,Cho tôi chụp ảnh anh / chị ạ?,,"anh = m., chị = f.",2,vi-agent-v1
+etiquette.photo-of-you,Cho tôi chụp hình anh / chị ạ?,Cho tôi chụp ảnh anh / chị ạ?,tʃɔ˧ t̪oj˧ tʃup˨˩ˀ hiɲ˨˩ aɲ˧ / tʃi˨˩ˀ aː˨˩ˀ,"anh = m., chị = f.",2,vi-agent-v1;ipa=espeak
 etiquette.may-i-sit-here,Tôi ngồi đây được không ạ?,,t̪oj˧ ŋoj˨˩ ɗəɪ˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 etiquette.queue-for,Đây là hàng chờ {} phải không ạ?,,ɗəɪ˧ laː˨˩ haːŋ˨˩ tʃəː˨˩ {} faːj˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 etiquette.dressed-appropriately,Tôi mặc thế này được không ạ?,,t̪oj˧ mac˨˩ˀ te˧˥ naj˨˩ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -87,7 +87,7 @@ children.cannot-find-my-child,Tôi không tìm thấy con tôi,,t̪oj˧ xoŋ˧ t
 children.make-an-announcement,Xin thông báo trên loa,,sin˧ toŋ˧ baːw˧˥ tʃen˧ lwaː˧,,2,vi-agent-v1;ipa=espeak
 children.child-age,Con tôi {} tuổi,,kɔn˧ t̪oj˧ {} t̪uə̯j˧˩˧,,2,vi-agent-v1;ipa=espeak
 children.high-chair,Có ghế ăn cho bé không ạ?,,kɔ˧˥ ɣe˧˥ an˧ tʃɔ˧ bɛ˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-children.baby-changing-room,Phòng thay tã ở đâu ạ?,,,,2,vi-agent-v1
+children.baby-changing-room,Phòng thay tã ở đâu ạ?,,fɔŋ˨˩ taj˧ t̪aː˧ˀ˥ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 children.childrens-menu,Có món cho trẻ em không ạ?,,kɔ˧˥ mɔn˧˥ tʃɔ˧ tʃɛ˧˩˧ ɛm˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 children.suitable-for-children,Cái này hợp với trẻ em không ạ?,,kaːj˧˥ naj˨˩ həːp˨˩ˀ vəːj˧˥ tʃɛ˧˩˧ ɛm˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 children.minimum-age,Bao nhiêu tuổi trở lên ạ?,,baːw˧ ɲiɛ̯w˧ t̪uə̯j˧˩˧ tʃəː˧˩˧ len˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak

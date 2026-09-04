@@ -377,7 +377,10 @@ function languageName(subject, locale, overrides, which) {
  * from this cell, so a slot row with no `ipa` printed a blank respelling: a Russian
  * reader's Japanese sheet showed the kana and the romanisation for
  * `{target}の文を見せてください` and nothing in Cyrillic. `scripts/build_ipa.py` now
- * leaves `{target}` in the transcription and the name's own IPA goes in here. */
+ * leaves both slots in the transcription and the name's own IPA goes in here --
+ * `{target}` from the 17 rows where a language names itself, `{source}` from the
+ * other 272, which is the same mechanism over the whole matrix rather than its
+ * diagonal. */
 const SLOT_FIELDS = ['text', 'text_alt', 'literal', 'ipa'];
 const LANGUAGE_SLOT = /\{(target|source)\}/g;
 
@@ -418,15 +421,23 @@ export function fillLanguageSlots(rows, { locale, target, source, names = {} }) 
       const which = field.startsWith('romanization_') ? 'roman'
         : /** @type {'name'|'roman'|'ipa'} */ (field === 'ipa' ? 'ipa' : 'name');
       if (which === 'name' && !SLOT_FIELDS.includes(field)) continue;
+      let missing = false;
       const filled = value.replace(
         LANGUAGE_SLOT,
-        (/** @type {string} */ _, /** @type {string} */ side) => languageName(
-          side === 'target' ? target : source, locale, names, which,
-        ),
+        (/** @type {string} */ _, /** @type {string} */ side) => {
+          const name = languageName(side === 'target' ? target : source, locale, names, which);
+          if (!name) missing = true;
+          return name;
+        },
       );
-      // A transcription with an unfilled slot must not reach the respeller, which
-      // would spell the braces out letter by letter. No name, no cell.
-      row[field] = which === 'ipa' && filled.includes('{') ? '' : filled;
+      // No name, no cell -- and the test has to be whether the *substitution* was
+      // empty rather than whether braces survived it, because `languageName`
+      // answers an absent `ipa` with an empty string and not with the placeholder.
+      // A cell that kept the sentence and dropped the name would be worse than a
+      // blank one: `xoŋ˧ aː˨˩ˀ` respells as a fluent question with the language
+      // silently missing, where an empty cell prints the blank column these rows
+      // print today.
+      row[field] = which === 'ipa' && missing ? '' : filled;
     }
   }
   return rows;

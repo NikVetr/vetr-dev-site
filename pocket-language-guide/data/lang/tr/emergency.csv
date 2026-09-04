@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,Göğsümde ağrı var.,,ɟˈœːsømdɛ ˈa
 emergency-medical.this-person-is-unconscious,Bu kişinin bilinci kapalı.,,bʊ kiʃinˈɪn bilɪndʒˈɪ kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,En yakın hastane nerede?,,ˈæn jakˈɯn hastanˈɛ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Acil numarası kaç?,,adʒˈɪl numaɾasˈɯ kˈatʃ,,2,tr-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,{source} bilen doktor var mı?,,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,{source} bilen doktor var mı?,,{source} bilˈæn dɔktˈɔr vˈar mɯ,,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,Sanırım kemiğim kırıldı.,,sanˈɯɾɯm kemˈijɪm kɯɾɯɫdˈɯ,,2,tr-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,"Yakınımı arayın, lütfen.",Acil durumda aranacak kişiyi arayın.,"jakˈɯnɯmɯ aɾajˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Seyahat sigortam var.,,sejahˈat siɡɔrtˈam vˈar,,2,tr-agent-v1;ipa=espeak

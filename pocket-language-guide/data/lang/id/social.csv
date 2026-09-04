@@ -14,7 +14,7 @@ social-basics.good-night,Selamat tidur,Selamat malam,səlˈamat tˈidur,,2,id-ag
 social-basics.okay-fine-i-am-okay,Saya baik-baik saja,Oke,sˈaja bˈaɪkbaɪk sˈadʒa,,2,id-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,Saya tidak bisa bahasa {target},,sˈaja tˈidak bˈisa bahˈasa {target},,2,language-slots-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,Saya bisa sedikit bahasa {target},,sˈaja bˈisa sədˈikit bahˈasa {target},,2,language-slots-v1;ipa=espeak
-communication.do-you-speak-english,Bisa bahasa {source}?,,,,2,language-slots-v1
+communication.do-you-speak-english,Bisa bahasa {source}?,,bˈisa bahˈasa {source},,2,language-slots-v1;ipa=espeak
 communication.please-speak-more-slowly,Tolong bicara lebih lambat,,tˈoloŋ bitʃˈara lˈɛbih lˈambat,,2,id-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,Saya tidak paham,Saya nggak paham,sˈaja tˈidak pˈaham,,2,id-agent-v1;ipa=espeak
 communication.i-cannot-read-understand,Saya tidak bisa baca ini,,sˈaja tˈidak bˈisa bˈatʃa ˈini,,2,id-agent-v1;ipa=espeak

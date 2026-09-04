@@ -1,8 +1,8 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Đây là phòng số mấy ạ?,,ɗəɪ˧ laː˨˩ fɔŋ˨˩ so˧˥ məɪ˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 building-help.i-am-lost,Tôi bị lạc,,t̪oj˧ bi˨˩ˀ laːc˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-building-help.where-is-reception,Lễ tân ở đâu ạ?,Quầy tiếp tân ở đâu ạ?,,,2,vi-agent-v1
-building-help.where-is-a-power-outlet,Ổ cắm điện ở đâu ạ?,,,,2,vi-agent-v1
+building-help.where-is-reception,Lễ tân ở đâu ạ?,Quầy tiếp tân ở đâu ạ?,le˧ˀ˥ t̪ən˧ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+building-help.where-is-a-power-outlet,Ổ cắm điện ở đâu ạ?,,o˧˩˧ kam˧˥ ɗiɛ̯n˨˩ˀ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 accessibility.step-free,Có lối vào không bậc thang không ạ?,,kɔ˧˥ loj˧˥ vaːw˨˩ xoŋ˧ bəc˨˩ˀ taːŋ˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 accessibility.wheelchair-access,Xe lăn vào được không ạ?,,sɛ˧ lan˧ vaːw˨˩ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 accessibility.elevator,Ở đây có thang máy không ạ?,,əː˧˩˧ ɗəɪ˧ kɔ˧˥ taːŋ˧ maj˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -25,10 +25,10 @@ in-a-building.is-this-the-correct-entrance,Đây có đúng lối vào không �
 in-a-building.do-you-have-wi-fi,Ở đây có Wi-Fi không ạ?,,əː˧˩˧ ɗəɪ˧ kɔ˧˥ waɪfaɪ˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,Mật khẩu Wi-Fi là gì ạ?,,mət̪˨˩ˀ xəw˧˩˧ waɪfaɪ˧ laː˨˩ zi˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 in-a-building.which-floor,Tầng mấy ạ?,,t̪əŋ˨˩ məɪ˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-toilets.where-toilet,Nhà vệ sinh ở đâu ạ?,,,,2,vi-agent-v1
-toilets.where-public-toilet,Nhà vệ sinh công cộng ở đâu ạ?,,,,2,vi-agent-v1
+toilets.where-toilet,Nhà vệ sinh ở đâu ạ?,,ɲaː˨˩ ve˨˩ˀ siɲ˧ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+toilets.where-public-toilet,Nhà vệ sinh công cộng ở đâu ạ?,,ɲaː˨˩ ve˨˩ˀ siɲ˧ koŋ˧ koŋ˨˩ˀ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 toilets.may-i-use-the-toilet,Tôi dùng nhà vệ sinh được không ạ?,,t̪oj˧ zuŋ˨˩ ɲaː˨˩ ve˨˩ˀ siɲ˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-toilets.is-it-only-for-customers,Chỉ dành cho khách hàng ạ?,,,,2,vi-agent-v1
+toilets.is-it-only-for-customers,Chỉ dành cho khách hàng ạ?,,tʃi˧˩˧ zaɲ˨˩ tʃɔ˧ xac˧˥ haːŋ˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 toilets.toilet-wc,Nhà vệ sinh,WC · Toilet,ɲaː˨˩ ve˨˩ˀ siɲ˧,,2,vi-agent-v1;ipa=espeak
 toilets.is-it-free,Có miễn phí không ạ?,,kɔ˧˥ miɛ̯n˧ˀ˥ fi˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 toilets.do-i-need-a-coin,Có cần tiền xu hay thẻ không ạ?,,kɔ˧˥ kən˨˩ t̪iɛ̯n˨˩ su˧ haj˧ tɛ˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -44,7 +44,7 @@ toilets.womens-toilet,Nhà vệ sinh nữ,Nữ,ɲaː˨˩ ve˨˩ˀ siɲ˧ ny˧ˀ�
 toilets.drinking-water,Nước uống,Nước uống được,nyə̯c˧˥ uə̯ŋ˧˥,,2,vi-agent-v1;ipa=espeak
 toilets.not-for-drinking,Nước không uống được,Không phải nước uống,nyə̯c˧˥ xoŋ˧ uə̯ŋ˧˥ ɗyə̯c˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 toilets.accessible-toilet,Nhà vệ sinh người khuyết tật,,ɲaː˨˩ ve˨˩ˀ siɲ˧ ŋyə̯j˨˩ xwiɛ̯t̪˧˥ t̪ət̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-toilets.where-can-i-wash-my-hands,Tôi rửa tay ở đâu được ạ?,,,,2,vi-agent-v1
+toilets.where-can-i-wash-my-hands,Tôi rửa tay ở đâu được ạ?,,t̪oj˧ zyə̯˧˩˧ t̪aj˧ əː˧˩˧ ɗəw˧ ɗyə̯c˨˩ˀ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 toilets.can-i-flush-the-paper,Bỏ giấy vào bồn cầu được không ạ?,,bɔ˧˩˧ zəɪ˧˥ vaːw˨˩ bon˨˩ kəw˨˩ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 toilets.is-there-a-toilet-on-board,Trên xe có nhà vệ sinh không ạ?,Trên tàu có nhà vệ sinh không ạ?,tʃen˧ sɛ˧ kɔ˧˥ ɲaː˨˩ ve˨˩ˀ siɲ˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 toilets.the-toilet-will-not-flush,Bồn cầu không xả nước được,,bon˨˩ kəw˨˩ xoŋ˧ saː˧˩˧ nyə̯c˧˥ ɗyə̯c˨˩ˀ,,2,vi-agent-v1;ipa=espeak

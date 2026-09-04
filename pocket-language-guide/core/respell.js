@@ -129,6 +129,21 @@ export function phonemesOf(ipa) {
   return out;
 }
 /**
+ * The last phoneme of a nucleus, ignoring length, nasalisation, the non-syllabic
+ * mark and tone -- all of which belong to the vowel in front of them rather than
+ * being one of their own.
+ *
+ * Phonemes, not characters, and that is the whole reason this is a function. The
+ * character form -- filter `VOWEL_TAIL` out and take the last one -- reads
+ * Vietnamese `aːjˀ` as `ˀ`, because a glottalisation mark is a `CONSONANT_TAIL`
+ * member and so survives the filter as a unit of its own. That made a falling
+ * diphthong look flat, so the length mark went on the offglide instead of on the
+ * head: `lại` /laːjˀ/ printed `laii` for an Italian, Swahili or Turkish reader and
+ * `bau:` for a German one, doubling the short half of a long vowel on 43 rows.
+ * @param {string} nucleus
+ */
+const nucleusTail = (nucleus) => phonemesOf(nucleus).filter((p) => !VOWEL_TAIL.has(p)).pop() ?? '';
+/**
  * Chao tone letters. Tone is lexical in Mandarin, Thai and Vietnamese, so the
  * `ipa` column carries it -- but whether a *reader* is shown it is the reading
  * language's decision, which is why it is a `policy` switch rather than absent
@@ -517,6 +532,33 @@ function holds(rule, ctx, emitted) {
   // fired and only looked as though it did.
   if (rule.before_onset && !rule.before_onset.split(' ').includes(ctx.nextPhoneme)) return false;
   if (rule.after_nucleus && !rule.after_nucleus.split(' ').includes(ctx.prevNucleus)) return false;
+  // **The vowel on the other side of this syllable's onset**, which is what a
+  // script with no way to write a bare vowel has to ask before it can pick a seat
+  // for one. Arabic and Thai asked for it independently -- the bar for a change
+  // here -- and both had already written the bounded version by hand, as
+  // `syllable_fixups` whose `after_nucleus` lists are short monophthongs and
+  // nothing else, because that is as far as an exact string reaches. Arabic now
+  // writes the standard hamza seat on **148 medial onsetless syllables** that were
+  // أ or a doubled glide, 113 of them ئ and 35 ء, over 145 rows and fourteen
+  // targets: *SIM* is إِسَيْئِمْ where the exact form could only give إِسَيْيِمْ, a doubled
+  // yā' that reads as a geminate. Thai's ย/ว glide seat reaches **28 more**.
+  //
+  // **The tail, not the head, and it is not a close call.** The mirror of
+  // `if_nucleus_head` by *name* is the previous nucleus's first phoneme; the mirror
+  // by *position* -- the vowel adjacent to the onset being spelt -- is its last.
+  // Over the 3,689 medial onsetless syllables an Arabic reader gets, the head is a
+  // *glide* on 208, because `syllabify` pulls a rising diphthong's /j/ or /w/ into
+  // the nucleus: after Korean 돼 /wɛ/ the head asks about a labial consonant where
+  // the vowel before the seat is front /ɛ/. It is also the wrong half of the 90
+  // falling diphthongs, classing /aɪ aʊ eɪ oʊ ɔɪ/ by their onset vowel rather than
+  // by the offglide -- and the offglide is what Arabic's own هَيْئَة spells a seat
+  // for. The tail is a glide on 8, and all eight want exactly that.
+  //
+  // It also strips tone, which is not incidental: Thai keeps tone, so its two
+  // fixups had been matching a nucleus string that carries a Chao letter and fired
+  // on no Mandarin row at all. 14 of the 28 are that bug.
+  if (rule.after_nucleus_tail
+    && !rule.after_nucleus_tail.split(' ').includes(ctx.prevNucleusTail)) return false;
   // **This syllable's own coda, which a nucleus rule could not see.** `open` and
   // `closed` say whether there is one; `before_onset` sees the *next* syllable's
   // onset. Neither answers "what closes this syllable", and two tables asked for it
@@ -702,6 +744,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
         nucleusHead: phonemesOf(s.nucleus)[0] ?? '',
         codaHead: phonemesOf(s.coda)[0] ?? '',
         prevNucleus: syls[i - 1]?.nucleus ?? '',
+        prevNucleusTail: nucleusTail(syls[i - 1]?.nucleus ?? ''),
       };
       let text = spellSlot(s.onset, 'onset', phonemes, ctx);
       // Where the nucleus starts, which is what a diacritic device needs: `y` and
@@ -731,7 +774,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       // both opens and closes with a glide has it in the middle: /waɪ/ is `uai`,
       // where neither end is the vowel, so `úai` marks the /w/.
       const units = phonemesOf(s.nucleus);
-      const tail = [...s.nucleus].filter((c) => !VOWEL_TAIL.has(c)).pop() ?? '';
+      const tail = nucleusTail(s.nucleus);
       const falling = units.length > 1 && (isGlide(tail) || 'ɪʊ'.includes(tail));
       const head = falling ? Number(isGlide(units[0])) : -1;
       for (const f of fixups) {

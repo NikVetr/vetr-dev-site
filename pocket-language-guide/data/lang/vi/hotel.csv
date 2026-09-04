@@ -3,7 +3,7 @@ hotel-words.passport,Hộ chiếu,,ho˨˩ˀ tʃiɛ̯w˧˥,,2,vi-agent-v1;ipa=esp
 hotel-words.room-key-card,Thẻ phòng,,tɛ˧˩˧ fɔŋ˨˩,,2,vi-agent-v1;ipa=espeak
 hotel-words.check-in,Nhận phòng,,ɲən˨˩ˀ fɔŋ˨˩,,2,vi-agent-v1;ipa=espeak
 hotel-words.check-out,Trả phòng,,tʃaː˧˩˧ fɔŋ˨˩,,2,vi-agent-v1;ipa=espeak
-hotel-words.luggage-storage,Gửi hành lý,,,,2,vi-agent-v1
+hotel-words.luggage-storage,Gửi hành lý,,ɣyj˧˩˧ haɲ˨˩ li˧˥,,2,vi-agent-v1;ipa=espeak
 hotel-basics.are-any-rooms-available,Còn phòng trống không ạ?,,kɔn˨˩ fɔŋ˨˩ tʃoŋ˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 hotel-basics.there-are-two-of-us,Chúng tôi có hai người,,tʃuŋ˧˥ t̪oj˧ kɔ˧˥ haːj˧ ŋyə̯j˨˩,,2,vi-agent-v1;ipa=espeak
 hotel-basics.i-have-a-reservation,Tôi có đặt phòng trước,,t̪oj˧ kɔ˧˥ ɗat̪˨˩ˀ fɔŋ˨˩ tʃyə̯c˧˥,,2,vi-agent-v1;ipa=espeak
@@ -20,7 +20,7 @@ hotel-basics.two-beds,Cho tôi phòng hai giường ạ,,tʃɔ˧ t̪oj˧ fɔŋ˨
 hotel-basics.is-there-air-conditioning,Có điều hòa không ạ?,Có máy lạnh không ạ?,kɔ˧˥ ɗiɛ̯w˨˩ hwaː˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 hotel-requests.can-i-check-out-later,Trả phòng muộn được không ạ?,Trả phòng trễ được không ạ?,tʃaː˧˩˧ fɔŋ˨˩ muə̯n˨˩ˀ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 hotel-requests.what-time-does-breakfast-start,Mấy giờ có bữa sáng ạ?,,məɪ˧˥ zəː˨˩ kɔ˧˥ byə̯˧ˀ˥ saːŋ˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-hotel-requests.can-i-store-my-luggage,Gửi hành lý được không ạ?,,,,2,vi-agent-v1
+hotel-requests.can-i-store-my-luggage,Gửi hành lý được không ạ?,,ɣyj˧˩˧ haɲ˨˩ li˧˥ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 hotel-requests.no-housekeeping,Không cần dọn phòng,,xoŋ˧ kən˨˩ zɔn˨˩ˀ fɔŋ˨˩,,2,vi-agent-v1;ipa=espeak
 hotel-requests.another-towel-please,Cho tôi thêm khăn tắm ạ,,tʃɔ˧ t̪oj˧ tem˧ xan˧ t̪am˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 hotel-requests.what-time-is-check-out,Mấy giờ phải trả phòng ạ?,,məɪ˧˥ zəː˨˩ faːj˧˩˧ tʃaː˧˩˧ fɔŋ˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -40,7 +40,7 @@ room-problems.the-light-does-not-work,Đèn không sáng,,ɗɛn˨˩ xoŋ˧ saː�
 room-problems.please-send-someone,Xin cho người đến sửa,,sin˧ tʃɔ˧ ŋyə̯j˨˩ ɗen˧˥ syə̯˧˩˧,,2,vi-agent-v1;ipa=espeak
 room-problems.the-heating-does-not-work,Máy sưởi không chạy,,maj˧˥ syə̯j˧˩˧ xoŋ˧ tʃaj˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 laundry.please-wash-these-clothes,Xin giặt giúp đồ này,,sin˧ zat̪˨˩ˀ zup˧˥ ɗo˨˩ naj˨˩,,2,vi-agent-v1;ipa=espeak
-laundry.where-is-a-laundromat,Tiệm giặt ở đâu ạ?,,,,2,vi-agent-v1
+laundry.where-is-a-laundromat,Tiệm giặt ở đâu ạ?,,t̪iɛ̯m˨˩ˀ zat̪˨˩ˀ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 laundry.when-will-it-be-ready,Khi nào xong ạ?,,xi˧ naːw˨˩ sɔŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 laundry.how-much-per-kilo,Bao nhiêu một ký ạ?,,baːw˧ ɲiɛ̯w˧ mot̪˨˩ˀ ki˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 laundry.can-it-be-ready-today,Hôm nay xong được không ạ?,,hom˧ naj˧ sɔŋ˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak

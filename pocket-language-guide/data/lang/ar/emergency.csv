@@ -113,7 +113,7 @@ emergency-medical.i-have-chest-pain,عندي ألم في الصدر,,ʿindī ala
 emergency-medical.this-person-is-unconscious,هذا الشخص فاقد للوعي,,hādhā al-shakhṣ fāqid lil-waʿy,haˈaðaˌa ʔaʃʃˈaxs̪ fˈaːqid lluːʕˌiː,,2,ar-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,أين أقرب مستشفى؟,,ayna aqrab mustashfá?,ʔˈajna ʔˈaqɹab mˈustaʃfˌaː,,2,ar-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,ما رقم الطوارئ؟,,mā raqm al-ṭawāriʾ?,mˈaː ɹˈaqm ʔat̪ˈuːaːrʔ,,2,ar-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,هل يوجد طبيب يتحدث {source}؟,,hal yūjad ṭabīb yataḥaddath {source}?,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,هل يوجد طبيب يتحدث {source}؟,,hal yūjad ṭabīb yataḥaddath {source}?,hˈal jwdʒd t̪ˈabiːb jtħdθ {source},,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,أظنّ أنّ هناك كسراً,,aẓunn anna hunāk kasran,ʔðnn ʔnn hˈunaːkˌa ksɹaː,I think there is a fracture,2,ar-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,اتصل بجهة الاتصال للطوارئ,اتصل بهذا الرقم من فضلك,ittaṣil bi-jihat al-ittiṣāl lil-ṭawāriʾ,ˈitːas̪ˌal bdʒht alˈitːis̪ˌaːl llt̪uːˌaːrʔ,,2,ar-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,لديّ تأمين سفر,,ladayya taʾmīn safar,ldiː tˈaʔmiːn sˈafar,,2,ar-agent-v1;ipa=espeak

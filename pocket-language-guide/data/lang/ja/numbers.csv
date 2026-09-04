@@ -1,10 +1,10 @@
 concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
 numbers-money.l-ng,零,,rei,ɾei,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.where-is-an-atm,ATMはどこですか？,,ētīemu wa doko desu ka?,,,2,ja-agent-v1
+atm-cash.where-is-an-atm,ATMはどこですか？,,ētīemu wa doko desu ka?,eːtiːemɯ wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
 numbers-money.y,一,,ichi,itɕi,,2,japanese-reviewed-v6;ipa=hepburn
 atm-cash.does-this-atm-take-foreign-cards,海外発行のカードは使えますか？,,kaigai hakkō no kādo wa tsukaemasu ka?,kaiɡai hakkoː no kaːdo wa tsɯkaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
 numbers-money.r,二,,ni,ɲi,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.the-atm-kept-my-card,ATMがカードを取り込みました,,ētīemu ga kādo o torikomimashita,,,2,ja-agent-v1
+atm-cash.the-atm-kept-my-card,ATMがカードを取り込みました,,ētīemu ga kādo o torikomimashita,eːtiːemɯ ɡa kaːdo o toɾikomimaɕita,,2,ja-agent-v1;ipa=hepburn
 atm-cash.is-there-a-fee,手数料はかかりますか？,,tesūryō wa kakarimasu ka?,tesɯːɾjoː wa kakaɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
 numbers-money.li-ng,二,,ni,ɲi,,2,ja-agent-v1;ipa=hepburn
 numbers-money.s-n,三,,san,saɴ,,2,japanese-reviewed-v6;ipa=hepburn
@@ -30,7 +30,7 @@ atm-cash.where-can-i-get-coins,小銭はどこでもらえますか？,,kozeni w
 numbers-money.y-w-n,一万,,ichiman,itɕimaɴ,,2,japanese-reviewed-v6;ipa=hepburn
 atm-cash.is-there-a-minimum-for-cards,カードは最低金額がありますか？,,kādo wa saitei kingaku ga arimasu ka?,kaːdo wa saitei kiɴɡakɯ ɡa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
 numbers-money.b-n,半分,,hanbun,haɴbɯɴ,,2,japanese-reviewed-v6;ipa=hepburn
-atm-cash.atm,ATM,,ētīemu,,,2,ja-agent-v1
+atm-cash.atm,ATM,,ētīemu,eːtiːemɯ,,2,ja-agent-v1;ipa=hepburn
 atm-cash.banknote,お札,紙幣,osatsu,osatsɯ,,2,ja-agent-v1;ipa=hepburn
 numbers-money.yu-n,元,,gen,ɡeɴ,,2,ja-agent-v1;ipa=hepburn
 atm-cash.coin,硬貨,コイン,kōka,koːka,,2,ja-agent-v1;ipa=hepburn

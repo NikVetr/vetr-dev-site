@@ -11,7 +11,7 @@ medical-conditions.i-am-pregnant,임신했어요,,imsinhaesseoyo,imsinhɛs͈ʌjo
 medical-conditions.i-carry-an-adrenaline-injector,에피네프린 자가주사기가 있어요,에피펜이 있어요,epinepeurin jagajusagiga isseoyo,epʰinepʰɯɾin tɕaɡadʑusaɡiɡa is͈ʌjo,adrenaline auto-injector,2,ko-agent-v1;ipa=rr
 medical-conditions.i-take-medicine-for,{} 약을 먹고 있어요,,{} yageul meokgo isseoyo,{} jaɡɯl mʌkko is͈ʌjo,,2,ko-agent-v1;ipa=rr
 medical-conditions.i-take-blood-thinners,항응고제를 먹어요,,hangeunggojereul meogeoyo,haŋɯŋɡodʑeɾɯl mʌɡʌjo,anticoagulant,2,ko-agent-v1;ipa=rr
-medical-conditions.medicine-allergy,약물 알레르기: {},,yangmul allereugi: {},,,2,ko-agent-v1
+medical-conditions.medicine-allergy,약물 알레르기: {},,yangmul allereugi: {},jaŋmul alleɾɯɡi {},,2,ko-agent-v1;ipa=rr
 medical-conditions.this-card-lists-my-conditions,이 카드에 제 병력이 있어요,,i kadeue je byeongnyeogi isseoyo,i kʰadɯe tɕe pjʌŋnjʌɡi is͈ʌjo,,2,ko-agent-v1;ipa=rr
 medical-conditions.this-is-my-medicine,이게 제 약이에요,,ige je yagieyo,iɡe tɕe jaɡiejo,,2,ko-agent-v1;ipa=rr
 medical-conditions.please-give-me-sugar-or-juice,설탕이나 주스를 주세요,,seoltangina juseureul juseyo,sʌltʰaŋina tɕusɯɾɯl tɕusejo,,2,ko-agent-v1;ipa=rr
@@ -45,7 +45,7 @@ pharmacy-symptoms.i-have-a-sore-throat,목이 아파요,,mogi apayo,moɡi apʰaj
 pharmacy-symptoms.can-i-get-this-medicine-here,이 약 여기서 살 수 있어요?,,i yak yeogiseo sal su isseoyo?,i jak jʌɡisʌ sal su is͈ʌjo,,2,ko-agent-v1;ipa=rr
 pharmacy-symptoms.bandage,붕대,밴드,bungdae,puŋdɛ,,2,ko-agent-v1;ipa=rr
 pharmacy-symptoms.the-pain-is-severe,많이 아파요,,mani apayo,mani apʰajo,,2,ko-agent-v1;ipa=rr
-pharmacy-symptoms.antiseptic,소독약,소독제,sodongnyak,,,2,ko-agent-v1
+pharmacy-symptoms.antiseptic,소독약,소독제,sodongnyak,sodoŋnjak,,2,ko-agent-v1;ipa=rr
 pharmacy-symptoms.i-feel-nauseous,메스꺼워요,,meseukkeowoyo,mesɯk͈ʌwʌjo,,2,ko-agent-v1;ipa=rr
 pharmacy-symptoms.i-have-a-rash,발진이 났어요,,baljini nasseoyo,paldʑini nas͈ʌjo,,2,ko-agent-v1;ipa=rr
 pharmacy-symptoms.before-or-after-food,"식전이에요, 식후예요?",,"sikjeonieyo, sikhuyeyo?","siktɕʌniejo, sikhujejo",,2,ko-agent-v1;ipa=rr
@@ -58,7 +58,7 @@ pharmacy-symptoms.it-started-days-ago,{}일 전에 시작됐어요,,{}il jeone s
 pharmacy-symptoms.cough-medicine,기침약,,gichimnyak,kitɕʰimnjak,,2,ko-agent-v1;ipa=rr
 pharmacy-symptoms.is-this-safe-during-pregnancy,임신 중에 먹어도 돼요?,,imsin junge meogeodo dwaeyo?,imsin tɕuŋe mʌɡʌdo twɛjo,,2,ko-agent-v1;ipa=rr
 police-consulate.where-is-the-police-station,경찰서가 어디예요?,,gyeongchalseoga eodiyeyo?,kjʌŋtɕʰalsʌɡa ʌdijejo,,2,ko-agent-v1;ipa=rr
-police-consulate.i-want-to-report-a-theft,도난 신고하고 싶습니다,,donan singohago sipseumnida,,,2,ko-agent-v1
+police-consulate.i-want-to-report-a-theft,도난 신고하고 싶습니다,,donan singohago sipseumnida,tonan sinɡohaɡo sipsɯmnida,,2,ko-agent-v1;ipa=rr
 police-consulate.my-bag-was-stolen,가방을 도난당했습니다,,gabangeul donandanghaetseumnida,kabaŋɯl tonandaŋhɛtsɯmnida,,2,ko-agent-v1;ipa=rr
 police-consulate.my-passport-was-stolen,여권을 도난당했습니다,,yeogwoneul donandanghaetseumnida,jʌɡwʌnɯl tonandaŋhɛtsɯmnida,,2,ko-agent-v1;ipa=rr
 police-consulate.someone-is-following-me,누가 저를 따라와요,,nuga jeoreul ttarawayo,nuɡa tɕʌɾɯl t͈aɾawajo,,2,ko-agent-v1;ipa=rr
@@ -77,7 +77,7 @@ police-consulate.someone-attacked-me,폭행을 당했습니다,,pokhaengeul dang
 police-consulate.i-did-not-agree-to-this-price,이 가격에 동의 안 했습니다,,i gagyeoge dongui an haetseumnida,i kaɡjʌɡe toŋɰi an hɛtsɯmnida,,2,ko-agent-v1;ipa=rr
 police-consulate.please-write-the-report-number,접수번호를 적어 주세요,,jeopsubeonhoreul jeogeo juseyo,tɕʌpsubʌnhoɾɯl tɕʌɡʌ tɕusejo,,2,ko-agent-v1;ipa=rr
 police-consulate.it-happened-here,여기서 일어났습니다,,yeogiseo ireonatseumnida,jʌɡisʌ iɾʌnatsɯmnida,,2,ko-agent-v1;ipa=rr
-police-consulate.may-i-have-a-copy-of-the-report,신고서 사본을 주세요,,singoseo saboneul juseyo,,,2,ko-agent-v1
+police-consulate.may-i-have-a-copy-of-the-report,신고서 사본을 주세요,,singoseo saboneul juseyo,sinɡosʌ sabonɯl tɕusejo,,2,ko-agent-v1;ipa=rr
 police-consulate.i-will-not-sign-anything-i-cannot-read,읽지 못하면 서명 안 합니다,,ikji motamyeon seomyeong an hamnida,iktɕi motʰamjʌn sʌmjʌŋ an hamnida,,2,ko-agent-v1;ipa=rr
 police-consulate.am-i-free-to-go,가도 됩니까?,,gado doemnikka?,kado twemnik͈a,,2,ko-agent-v1;ipa=rr
 police-consulate.i-do-not-want-to-go-with-you,같이 가지 않겠습니다,,gachi gaji anketseumnida,katɕʰi kadʑi ankʰetsɯmnida,,2,ko-agent-v1;ipa=rr
@@ -113,7 +113,7 @@ emergency-medical.i-have-chest-pain,가슴이 아픕니다,,gaseumi apeumnida,ka
 emergency-medical.this-person-is-unconscious,이 사람 의식이 없습니다,,i saram uisigi eopseumnida,i saɾam ɰisiɡi ʌpsɯmnida,,2,ko-agent-v1;ipa=rr
 emergency-medical.where-is-the-nearest-hospital,가까운 병원이 어디예요?,,gakkaun byeongwoni eodiyeyo?,kak͈aun pjʌŋwʌni ʌdijejo,,2,ko-agent-v1;ipa=rr
 emergency-medical.what-is-the-emergency-number,응급 전화번호가 뭐예요?,,eunggeup jeonhwabeonhoga mwoyeyo?,ɯŋɡɯp tɕʌnhwabʌnhoɡa mwʌjejo,,2,ko-agent-v1;ipa=rr
-emergency-medical.is-there-a-doctor-who-speaks-english,{source} 하는 의사 있어요?,,{source} haneun uisa isseoyo?,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,{source} 하는 의사 있어요?,,{source} haneun uisa isseoyo?,{source} hanɯn ɰisa is͈ʌjo,,2,language-slots-v1;ipa=rr
 emergency-medical.i-think-a-bone-is-broken,뼈가 부러진 것 같습니다,,ppyeoga bureojin geot gatseumnida,p͈jʌɡa puɾʌdʑin kʌt katsɯmnida,,2,ko-agent-v1;ipa=rr
 emergency-medical.please-call-my-emergency-contact,비상 연락처에 연락해 주세요,,bisang yeollakcheoe yeollakae juseyo,pisaŋ jʌllaktɕʰʌe jʌllakʰɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 emergency-medical.i-have-travel-insurance,여행자 보험이 있습니다,,yeohaengja boheomi itseumnida,jʌhɛŋdʑa pohʌmi itsɯmnida,,2,ko-agent-v1;ipa=rr
@@ -129,10 +129,10 @@ lost-rescue.my-companion-is-missing,동행이 없어졌어요,,donghaengi eopseo
 lost-rescue.please-look-at-my-current-location,제 현재 위치를 봐 주세요,,je hyeonjae wichireul bwa juseyo,tɕe hjʌndʑɛ witɕʰiɾɯl pwa tɕusejo,,2,ko-agent-v1;ipa=rr
 lost-rescue.my-child-is-missing,아이가 없어졌어요,,aiga eopseojyeosseoyo,aiɡa ʌpsʌdʑjʌs͈ʌjo,child has disappeared,2,ko-agent-v1;ipa=rr
 lost-rescue.i-do-not-know-where-i-am,여기가 어딘지 모르겠어요,,yeogiga eodinji moreugesseoyo,jʌɡiɡa ʌdindʑi moɾɯɡes͈ʌjo,,2,ko-agent-v1;ipa=rr
-lost-rescue.my-friend-is-hurt,친구가 다쳤어요,,chinguga dachyeosseoyo,,,2,ko-agent-v1
+lost-rescue.my-friend-is-hurt,친구가 다쳤어요,,chinguga dachyeosseoyo,tɕʰinɡuɡa tatɕʰjʌs͈ʌjo,,2,ko-agent-v1;ipa=rr
 lost-rescue.i-lost-my-wallet,지갑을 잃어버렸어요,,jigabeul ireobeoryeosseoyo,tɕiɡabɯl iɾʌbʌɾjʌs͈ʌjo,,2,ko-agent-v1;ipa=rr
 lost-rescue.i-lost-my-bag,가방을 잃어버렸어요,,gabangeul ireobeoryeosseoyo,kabaŋɯl iɾʌbʌɾjʌs͈ʌjo,,2,ko-agent-v1;ipa=rr
 lost-rescue.where-is-lost-and-found,유실물센터가 어디예요?,,yusilmulsenteoga eodiyeyo?,jusilmulsentʰʌɡa ʌdijejo,,2,ko-agent-v1;ipa=rr
 lost-rescue.i-cannot-find-my-hotel,호텔을 못 찾겠어요,,hotereul mot chatgesseoyo,hotʰeɾɯl mot tɕʰatkes͈ʌjo,,2,ko-agent-v1;ipa=rr
-lost-rescue.i-left-it-on-the-train,기차에 두고 내렸어요,,gichae dugo naeryeosseoyo,,,2,ko-agent-v1
+lost-rescue.i-left-it-on-the-train,기차에 두고 내렸어요,,gichae dugo naeryeosseoyo,kitɕʰae tuɡo nɛɾjʌs͈ʌjo,,2,ko-agent-v1;ipa=rr
 lost-rescue.i-cannot-get-down,내려갈 수 없어요,,naeryeogal su eopseoyo,nɛɾjʌɡal su ʌpsʌjo,,2,ko-agent-v1;ipa=rr

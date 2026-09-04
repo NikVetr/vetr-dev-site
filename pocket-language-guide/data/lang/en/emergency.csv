@@ -26,7 +26,7 @@ emergency-medical.i-have-chest-pain,I have chest pain,,aɪ hæv tʃˈɛst pˈeɪ
 emergency-medical.this-person-is-unconscious,This person is unconscious,,ðɪs pˈɜːsən ɪz ʌŋkˈɑːnʃəs,,2,expansion-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,Where is the nearest hospital?,,wˌɛɹ ɪz ðə nˌɪɹɪst hˈɑːspɪɾəl,,2,expansion-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,What is the emergency number?,,wˌʌt ɪz ðɪ ɪmˈɜːdʒənsi nˈʌmbɚ,,2,expansion-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,Is there a doctor who speaks {source}?,,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Is there a doctor who speaks {source}?,,ɪz ðɛɹ ɐ dˈɑːktɚ hˌuː spˈiːks {source},,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,I think a bone is broken,,aɪ θˈɪŋk ɐ bˈoʊn ɪz bɹˈoʊkən,,2,expansion-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Please call my emergency contact,,plˈiːz kˈɔːl maɪ ɪmˈɜːdʒənsi kˈɑːntækt,,2,expansion-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,I have travel insurance,,aɪ hæv tɹˈævəl ɪnʃˈʊɹɹəns,,2,expansion-v1;ipa=espeak

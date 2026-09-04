@@ -57,9 +57,10 @@ language. The default `es` is Castilian -- 107 instances of /θ/ and 34 of /ʎ/ 
 while the curated respellings are seseo and yeísmo (`ah-sen-SOR`), so the voice is
 `es-419`. `en` is `en-us`, matching the accent `data/respell/overrides/*__en-US.csv`
 is keyed on. `fr` and `pt` must be spelled `fr-fr` and `pt-br`; the bare codes
-raise "not supported". And `vi` keeps its voice but loses 68 rows: this build emits
-two pieces of its own internal notation, a `1` after a schwa and a `-` after a
-short /e/, that `phonemizer` does not translate into IPA at all.
+raise "not supported". And `vi` emits two pieces of espeak's own phoneme mnemonics
+that `phonemizer` does not translate into IPA at all, which refused 68 rows until
+`VI_TONES` and `REPAIR` were told what they stand for: `1` is the ngang tone
+written out and `e-` is the rhyme of `anh`/`ach`.
 
 Reproducing: `pip3 install --user phonemizer dragonmapper pythainlp`. `thaig2p`
 downloads a 12MB model to `~/.pythainlp-data` on first use.
@@ -67,11 +68,18 @@ downloads a 12MB model to `~/.pythainlp-data` on first use.
 ## What gets phonemised, and what does not
 
 `note` rows are skipped: a note is prose the reader reads, not something anyone
-says. Rows whose text carries `{target}` or `{source}` are skipped whole
-(`content/LANGUAGE-SLOTS.md`): those resolve at build time to a language name in
-the target's own words, no G2P here has that name, and `fillLanguageSlots` in
-core/pack.js deliberately does not substitute into `ipa` -- so a placeholder left
-in this column would print literally. Six or seven rows per language.
+says. Four rows per language, and they are the only rows this script declines to
+transcribe on principle.
+
+`{target}` and `{source}` are carried through as markers rather than phonemised
+(`content/LANGUAGE-SLOTS.md`): each resolves at render time to a language name that
+no G2P here has, so `fillLanguageSlots` in core/pack.js substitutes the IPA of the
+name from the `ipa` column of `data/registry/language-names.csv`, which
+`language_name_ipa` below fills through these same routes. `{target}` needs the 17
+entries where a language names itself and `{source}` the other 272, because a
+`{source}` cell is the target's sentence naming whichever of sixteen languages is
+*reading* it. Where the matrix has no entry the whole cell is blanked rather than
+printed with a hole where the language should be.
 
 `{}` and `/` *are* carried through as their own tokens. Both change how the phrase
 is read rather than how it sounds, both already appear in the curated respellings
@@ -99,15 +107,31 @@ the Hepburn and Pinyin tables pass through unchanged; a pinyin syllable
 `dragonmapper` does not know; a currency symbol -- without a list of things to look
 for. Two routes add one gate of their own:
 
-  ko   Revised Romanization writes both the velar nasal and a /n/+/k/ sequence as
-       `ng`, and the corpus does not use the disambiguating hyphen, so `chinguga`
-       (친구가) is *chin-gu-ga* and `hwajangsiri` (화장실이) is *hwa-jang-*. The
-       row's own Hangul settles it: if the number of ㅇ finals equals the number of
-       `ng`s, every one of them is /ŋ/. 25 rows where it does not are refused.
-  ko   and the syllable count of the result must equal the number of Hangul blocks,
-       which in a syllable-block script it always does. That catches every other
-       digraph read across a boundary rather than within one -- `tuip` (투입) is
-       *tu-ip*, not `tɰip` -- for three more rows.
+  ja   the characters `ROUTE_FORBIDS` names, which are IPA but are not Japanese
+  ko   the syllable count of the result must equal the number of Hangul blocks,
+       which in a syllable-block script it always does. This used to be the main
+       defence against a digraph read across a block boundary and is now a net
+       behind `ko_hyphenate`, which resolves those instead of refusing them.
+
+**Refusing is the last resort and not the first.** Two classes of refusal turned
+out to be answerable from data already in the repository, and both were retired
+rather than made stricter:
+
+  ko   `ng` is both /ŋ/ and an ㄴ+ㄱ sequence, and the corpus does not use RR's
+       disambiguating hyphen, so `chinguga` (친구가) is *chin-gu-ga*. Counting the
+       Hangul's ㅇ finals against the `ng`s refused the 25 rows where the two
+       disagree; aligning the blocks' *vowels* against the RR instead tells you
+       which `ng` is which, and fixes the vowel digraphs in the same pass -- see
+       `ko_hyphenate`. It also caught four rows that were passing while wrong:
+       `다음 주` was `tɛum`, the `ae` of `daeum` read across the boundary.
+  all  a Latin run in a non-Latin sentence was refused by asking whether `text`
+       held a Latin letter. For the three languages read off a romanisation that
+       is the wrong string to ask about: `romanization_hepburn` is Latin
+       throughout, and for these rows it is also the answer, since a fluent
+       speaker wrote `SIM` as `shimu` and `ATM` as `ētīemu`. `latin_survives` asks
+       whether the run is still there in the string the route will read, which
+       kept all 14 Japanese rows and refused the 16 where the loanword really does
+       survive.
 
 ## Declaring provenance, and why `confidence` does not move
 
@@ -171,9 +195,58 @@ distrust the column as a whole.
 - `vi` has no /tʰ/ anywhere, though Vietnamese contrasts it. It is the aspirated
   series that lets a Korean or Mandarin reader's table fire its own aspiration
   rules, so its absence silently disables them for Vietnamese.
-- Three `ja` rows carry romaji rather than IPA, having passed the Hepburn route
-  through unconverted.
-- **espeak writes Turkish /e/ as `/æ/` before a coda liquid or nasal** on 96 cells:
+- **The largest blank-respelling class was never in this column at all.**
+  `fillLanguageSlots` blanked the `ipa` cell of any row whose filled value still
+  contained a `{`, meaning to catch an unresolved language slot -- and caught the
+  ordinary `{}` blank as well, on **747 cells, 44 per language**, every one of which
+  reached the renderer with an `ipa` and left it without one. Nothing on this side
+  could see it: the cell on disk is full. The guard now tests whether the
+  *substitution* came back empty, which is the thing it was trying to ask, and 44
+  rows a sheet went from an empty respelling column to a full one. Worth knowing
+  when reading a blank-cell count: the number this script reports is a lower bound
+  on what a reader actually sees blank.
+- **The language-name matrix is only as stable as the ICU that node was built
+  with.** `data/registry/language-names.csv` carries a `name` only where CLDR is
+  wrong for our purposes, so `language_name_ipa` asks node for the other ~200 and
+  phonemises what it gets. If an ICU update renames a language, the generated `ipa`
+  changes and `--check` fails -- which is the drift report
+  `content/LANGUAGE-SLOTS.md` asks for, and is also the reason `--check` now needs
+  `node` on PATH as well as `phonemizer`. A browser whose ICU disagrees with node's
+  would print a name this column transcribed differently; no pair in the matrix
+  does today, and filling `name` for all 289 rows is the fix if one ever does.
+- **espeak's `vi` voice reads a Latin-script language name with English rules**, so
+  two of Vietnamese's sixteen `{source}` substitutions are English: `Indonesia` is
+  `ɪndəʊniːziə̯` and `Swahili` is `swɑːhiːli` where Vietnamese would have
+  [in.do.ne.zi.a] and [swa.hi.li]. `id`'s word for Thai (`thˈaɪ`, with the `th`
+  unconverted) is the same fault. Three cells of 289, and each prints on one pair's
+  two rows.
+- **`thaig2p` drops the final /t/ of `อังกฤษ`**, Thai for English: the name is
+  `ʔaŋ˧kri˨˩` where the curated sheet respells it *ang-grit*. It prints on both of
+  the Thai pack's `{source}` rows for an English reader, and nowhere else.
+- **A French `{source}` cell carries two phrase stresses.** `STRESS["fr"]` puts the
+  mark on the last word of a *run*, and the substituted name is its own run, so
+  `Parlez-vous {source} ?` is `paʁlˈevˈu ɛspanjˈɔl` -- three marks where French has
+  one, at the end. The name's own stress is right and the frame's is now early;
+  fixing it needs the slot's position, which is downstream of this script.
+- **`anh`/`ach` is transcribed `aɲ`/`ac`, which is a choice.** Hanoi diphthongises
+  the rhyme to [ajŋ]/[ajk]; the curated sheet's *khak* and *ang* for an English
+  reader are what picked `a` over `ɛ` (see `REPAIR["vi"]`), and the palatal coda is
+  espeak's. A Vietnamese reviewer should read these 31 rows first.
+- **`ɪ` is espeak's offglide in `ây`/`ay`**, so `dậy` is `zəɪ˨˩ˀ` and not `zəj˨˩ˀ`.
+  It is the one unit `respell_check --units` gained: `ɪˀ`, once, in 14 of the 17
+  readers' lists, from the single row where that offglide meets a glottalised tone.
+  `syllable_count` already counts `ɪ` as a falling glide, so the count is right and
+  only the letter is unusual; changing it would touch every `əɪ`/`aɪ` cell and every
+  reader's spelling of them, which is a bigger question than this row.
+- **The three `ja` rows that carried romaji rather than IPA no longer do, and this
+  entry was already stale when it was written down.** Driving `hepburn_to_ipa` over
+  every word of the column and reporting the position at which its `longest` gives
+  up finds *none*: the extended-katakana block in `HEPBURN` and
+  `ROUTE_FORBIDS["hepburn"]` between them closed it, the first by reading the morae
+  and the second by refusing the row if anything is left. What replaced it is
+  smaller and in the other direction -- 33 `ja` cells are byte-identical to their
+  Hepburn, which is correct rather than unconverted: /doko/ really is `doko`.
+- **espeak writes Turkish /e/ as `/æ/` before a coda liquid or nasal** on 98 cells:
   *gelmek* is `ɟælmɛk`, *lütfen* is `lytfæn`. The allophony is real, but `/æ/` is the
   wrong *letter* to hand a rule table -- `a` is Turkish's other vowel, so a reader
   gets `gal-` for `gel-`, which is a different word. One table overruled it in a
@@ -189,10 +262,10 @@ distrust the column as a whole.
 - **espeak writes /y/ for three different vowels that are not /y/**, which is one
   defect wearing three hats and the most consequential entry here, since /y/ is a
   real phoneme in `fr de zh-Hans` and a rule table cannot tell the cases apart.
-  Portuguese's reduced final [ɨ] is /y/ on 287 cells (`de nada` is `dʒy nˈadæ`),
-  Vietnamese's ư [ɨ~ɯ] on 199, and Turkish's ü inconsistently -- `Günaydın` is
+  Portuguese's reduced final [ɨ] is /y/ on 292 cells (`de nada` is `dʒy nˈadæ`),
+  Vietnamese's ư [ɨ~ɯ] on 220, and Turkish's ü inconsistently -- `Günaydın` is
   right but `Özür` is `œzˈør`. Portuguese's final [ɐ] is likewise
-  written **/æ/ on 410 cells** -- `nˈadæ`, `bˈoæ`, `dʒˈiæ` -- a vowel no variety of
+  written **/æ/ on 412 cells** -- `nˈadæ`, `bˈoæ`, `dʒˈiæ` -- a vowel no variety of
   Portuguese has.
   Three rule tables have had to work around this with `targets` blocks.
 - **`vi`'s centring diphthongs are marked now, and the mark goes on the *second*
@@ -204,10 +277,10 @@ distrust the column as a whole.
   `biɛ̯t̪`, `ɗyə̯c`, `buə̯j`. Marking the first element instead would have made ə the
   nucleus of ươ and uô, which is backwards, and would have left the offglide in the
   syllable's *onset* rather than its nucleus.
-  The measured cost was **349 extra syllables on 282 of vi's 677 filled rows**, not
-  the 380 on 287 this entry used to claim; `syllabify` puts every one of the 349
-  marks on a vowel that was starting a syllable of its own, so each removes exactly
-  one and no row's count went up. The four rows where espeak spells an
+  The measured cost was **349 extra syllables on 282 of vi's then-677 filled rows**
+  -- 747 now -- and not the 380 on 287 this entry used to claim; `syllabify` puts
+  every one of the 349 marks on a vowel that was starting a syllable of its own, so
+  each removes exactly one and no row's count went up. The four rows where espeak spells an
   acronym out letter by letter (`kwˌiˈɛʐəː` QR, `ˌɛɜsˌiˈɛməː` SIM) keep their two
   syllables and should: there the `i` and the `ɛ` are different letter names.
 - **What still prints is now a reader's problem rather than this column's.** A table
@@ -227,7 +300,9 @@ distrust the column as a whole.
 import argparse
 import csv
 import io
+import json
 import re
+import subprocess
 import sys
 import unicodedata
 from collections import Counter
@@ -357,7 +432,19 @@ REPAIR = {
     # -- vi's own falling `əɪ aɪ` already syllabify correctly, and `iːɛ eɪ əʊ eɛ ea`
     # belong to English loanwords espeak read with English rules (ATM `eɪtiːɛm`,
     # data `deɪtə`), where the length mark keeps `iːɛ` from matching.
-    "vi": [("iɛ", "iɛ̯"), ("iə", "iə̯"), ("yə", "yə̯"), ("uə", "uə̯")],
+    #
+    # `e-` is the rhyme orthographic `anh`/`ach` has, and the hyphen is espeak's own
+    # mnemonic for "short", not IPA -- so it refused 31 rows, every *khách*, *hành*,
+    # *cảnh* and *anh* in the corpus. Probing the front series shows espeak keeps
+    # four heights before a palatal coda and this is the lowest of them: `binh bˈiɲ`,
+    # `bênh bˈeɲ`, `benh bˈɛɲ`, `banh bˈe-ɲ`. The value is `a` rather than `ɛ`
+    # because the only human reading of these rows in the repository says so: the
+    # curated sheet respells `khách` *khak* and `anh` *ang* for an English reader,
+    # against *khahk* for `khác`, so the contrast a reader has to hear is the one
+    # espeak already writes as `a` (ă) against `aː` (a) -- `ɛ` would have given
+    # *khek*. Hanoi actually diphthongises this rhyme to [ajŋ]/[ajk]; that detail is
+    # below the resolution of this column, which keeps espeak's palatal coda.
+    "vi": [("e-", "a"), ("iɛ", "iɛ̯"), ("iə", "iə̯"), ("yə", "yə̯"), ("uə", "uə̯")],
 }
 
 
@@ -366,8 +453,15 @@ REPAIR = {
 # the sixth, sắc, as a stray `ɜ`. Hanoi values, as Chao tone letters. The mark
 # moves to the end of its syllable, which for Vietnamese is the whole token: the
 # language is written one syllable per word.
-VI_TONES = {"2": "˨˩", "ɜ": "˧˥", "4": "˧˩˧", "5": "˧ˀ˥", "6": "˨˩ˀ"}
-VI_LEVEL = "˧"                                    # ngang, which espeak leaves bare
+VI_LEVEL = "˧"                                 # ngang, which espeak usually leaves bare
+# `1` is ngang written out, which espeak does for the `âu` rhyme and inside its
+# number dictionary and nowhere else: probing the tone series on one rhyme gives
+# `câu kˈə1w`, `cầu kˈə2w`, `cấu kˈəɜw`, `cẩu kˈə4w`, `cẫu kˈə5w`, `cậu kˈə6w`, so
+# the digit sits in exactly the slot the other five do and means the sixth tone.
+# Leaving it out of this table refused 40 rows -- every *ở đâu* and *bao lâu* in the
+# corpus -- and mapping it to the same bars `VI_LEVEL` already supplies for the bare
+# form is what makes `ɗə1w˧` and `xoŋ˧` agree.
+VI_TONES = {"1": VI_LEVEL, "2": "˨˩", "ɜ": "˧˥", "4": "˧˩˧", "5": "˧ˀ˥", "6": "˨˩ˀ"}
 
 
 def vi_tone(token):
@@ -524,23 +618,93 @@ def rr_to_ipa(word):
     return out
 
 
-IEUNG_FINAL = 21                                  # jongseong index of ㅇ
-
-
-def ko_ng_is_unambiguous(hangul, rr):
-    """Whether every `ng` in `rr` is /ŋ/ rather than an /n/+/k/ across a boundary.
-
-    Both are spelled `ng` and the corpus does not use RR's disambiguating hyphen,
-    so `chinguga` (친구가) and `hwajangsiri` (화장실이) look alike. Counting the
-    Hangul's own ㅇ finals settles it whenever the two counts agree.
-    """
-    ieung = sum(1 for ch in hangul
-                if 0xAC00 <= ord(ch) <= 0xD7A3 and (ord(ch) - 0xAC00) % 28 == IEUNG_FINAL)
-    return ieung == rr.count("ng")
+# The RR spelling of each jungseong, in jungseong order. A block's *vowel* is the
+# one part of its RR spelling that assimilation cannot rewrite -- 약물 is `yangmul`
+# and 신라 is `silla`, but ㅑ is `ya` and ㅣ is `i` wherever they stand -- and RR's
+# vowel letters `a e i o u w y` are disjoint from its consonant letters, so
+# matching this sequence in order against a word recovers its block boundaries.
+JUNGSEONG_RR = ["a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae",
+                "oe", "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i"]
+# The jongseong RR spells with a bare `n`: ㄴ, ㄵ, ㄶ. A `g` after one of those
+# opens the next block, which is the whole of the `chin-gu` question.
+N_FINALS = {4, 5, 6}
+RR_VOWEL_LETTERS = set("aeiouwy")
+HANGUL = re.compile(r"[가-힣]+")
+# A word of the romanisation column: its letters, and whatever punctuation the
+# sentence hung on either end.
+RR_WORD = re.compile(r"([^A-Za-z]*)([A-Za-z]+)([^A-Za-z]*)$")
 
 
 def hangul_blocks(text):
     return sum(1 for ch in text if 0xAC00 <= ord(ch) <= 0xD7A3)
+
+
+def ko_hyphenate(hangul, rr):
+    """One RR word carrying RR's disambiguating hyphen at every block boundary a
+    longest match would read across, or None if it cannot be aligned.
+
+    Two digraphs cross a block boundary in this corpus and both are then read as a
+    unit that is not there. `ng` is both the velar nasal and an ㄴ+ㄱ sequence, so
+    친구가 `chinguga` is *chin-gu-ga* and not /tɕʰiŋuɡa/; and two vowels in a row
+    are also a vowel digraph, so 기차에 `gichae` is *gi-cha-e* and not /kitɕʰɛ/ and
+    투입 `tuip` is *tu-ip* and not /tʰɰip/. Both were refused rather than read.
+
+    The Hangul settles both, because it is a syllable-block script: line the
+    blocks' vowels up against the RR and the boundaries fall out. Only where the
+    reading would change -- a hyphen everywhere would be wrong, since RR
+    resyllabifies a coda onto a following null onset (있어요 `isseoyo` is
+    /i.s͈ʌ.jo/, so `is-seoyo` would lose the tense /s͈/).
+    """
+    blocks = [ord(c) - 0xAC00 for c in hangul]
+    spans, at = [], 0
+    for block in blocks:
+        vowel = JUNGSEONG_RR[block // 28 % 21]
+        start = rr.find(vowel, at)
+        if start < 0:
+            return None
+        at = start + len(vowel)
+        spans.append((start, at))
+    if RR_VOWEL_LETTERS & set(rr[at:]):           # more RR syllables than blocks
+        return None
+    cuts = []
+    for i, (_, end) in enumerate(spans[:-1]):
+        run = rr[end:spans[i + 1][0]]
+        if not run:                               # two vowels, and so two blocks
+            cuts.append(end)
+        elif run.startswith("ng") and blocks[i] % 28 in N_FINALS:
+            cuts.append(end + 1)                  # the `g` is the next block's onset
+    out, last = [], 0
+    for cut in cuts:
+        out.append(rr[last:cut])
+        last = cut
+    return "-".join(out + [rr[last:]])
+
+
+def ko_romanization(hangul, rr):
+    """The row's RR column hyphenated word by word against its Hangul, or None if
+    an all-Hangul word cannot be aligned to the RR word standing opposite it.
+
+    Word by word because that is the unit the two columns share: RR is written with
+    the Hangul's own spacing. A word either column writes in something other than
+    Hangul or Latin letters -- `{target}로`, `1월`, `₩` -- is left as it is, since
+    there are no blocks there to align against; None then only ever means the two
+    columns disagree about a word that is nothing but blocks, which is a fault in
+    the data rather than an ambiguity, and the row is refused.
+    """
+    words, romanised = hangul.split(), rr.split()
+    if len(words) != len(romanised):
+        return None
+    out = []
+    for word, piece in zip(words, romanised):
+        parts = RR_WORD.fullmatch(piece)
+        if not HANGUL.fullmatch(word) or not parts:
+            out.append(piece)
+            continue
+        split = ko_hyphenate(word, parts[2])
+        if split is None:
+            return None
+        out.append(parts[1] + split + parts[3])
+    return " ".join(out)
 
 
 # ----------------------------------------------------------------- syllables
@@ -600,9 +764,8 @@ def curated_syllables(respell):
 # ------------------------------------------------------------------- the text
 # `{}` is a blank the reader fills and `/` separates two alternatives; both are
 # carried into the IPA, and a comma is attached to the word before it.
-MARKER = re.compile(r"(\{\}|\{target\}|/|[,，、])")
+MARKER = re.compile(r"(\{\}|\{target\}|\{source\}|/|[,，、])")
 LANGUAGE_SLOT = re.compile(r"\{(?:target|source)\}")
-SOURCE_SLOT = re.compile(r"\{source\}")
 # An all-capital Latin run is an acronym or a loanword, and espeak spells one out
 # letter by letter in the target language. Sometimes that is right -- `QR` really is
 # *cu-erre* in Spanish -- and sometimes it is the one thing worse than a blank cell:
@@ -613,9 +776,29 @@ ACRONYM = re.compile(r"(?<![A-Za-z])[A-Z]{2,5}(?![A-Za-z])")
 # The same problem one step worse. A Latin-script word inside a non-Latin language
 # is a loanword -- `Wi-Fi`, `eSIM`, `cm` -- and every route here reads it with the
 # wrong letter-to-sound rules, or in the table routes passes it through unchanged
-# where lowercase Latin is indistinguishable from IPA. 51 rows across the corpus,
-# and they are refused rather than guessed at.
-LATIN_WORD = re.compile(r"[A-Za-z]")
+# where lowercase Latin is indistinguishable from IPA: `SIM` lowercased is three
+# letters no Hepburn mora matches, so it is carried out as `sim` and every one of
+# `s i m` is legal IPA.
+LATIN_RUN = re.compile(r"[A-Za-z]+")
+
+
+def latin_survives(text, source):
+    """Whether a Latin run of `text` is still Latin in the string a route will read.
+
+    The gate this replaces asked whether `text` contains a Latin letter, which is
+    the wrong question for the three languages read off a romanisation column: that
+    column is Latin from end to end, and for these rows it is also *the answer*.
+    A fluent speaker wrote `SIM` as `shimu`, `ATM` as `ētīemu`, `QR` as `kyū āru`
+    and `Wi-Fi` as `wai-fai` in `romanization_hepburn`, so all fourteen Japanese
+    rows the old gate refused transcribe from already-reviewed data -- there was
+    never a loanword left in them to mishandle. Asking the narrower question keeps
+    the refusal exactly where the loanword really does survive: the Pinyin column
+    leaves `Wi-Fi` and `eSIM` in Latin, the RR column leaves `cm`, and Thai and
+    Russian have no romanisation column, so their route reads `text` itself.
+    """
+    lower = source.lower()
+    return any(run.lower() in lower
+               for run in LATIN_RUN.findall(LANGUAGE_SLOT.sub("", text)))
 
 
 def clean(chunk):
@@ -639,18 +822,18 @@ def clean(chunk):
 
 def pieces(text):
     """`text` as a list of ('text'|'marker', value), splitting on `{}`, `{target}`,
-    `/`, `,`.
+    `{source}`, `/`, `,`.
 
-    `{target}` rides through as a marker rather than being phonemised, and the
-    renderer substitutes the IPA of the language's name for it -- see the `ipa`
-    column of `data/registry/language-names.csv`. It can be handled here, and
-    `{source}` cannot, because a cell only ever names a language *in its own
-    language*: `{target}` in a Japanese row is Japanese naming itself, which is one
-    fixed string, where `{source}` names whichever of sixteen languages is reading.
+    Both language slots ride through as markers rather than being phonemised, and
+    the renderer substitutes the IPA of the language's name -- see the `ipa` column
+    of `data/registry/language-names.csv`, which `language_name_ipa` fills. The two
+    are the same mechanism and different amounts of table: `{target}` in a Japanese
+    row is Japanese naming itself, one string per language, where `{source}` names
+    whichever of the other sixteen is reading, so it wants the whole matrix.
     """
     out = []
     for part in MARKER.split(text):
-        if part in ("{}", "{target}", "/"):
+        if part in ("{}", "{target}", "{source}", "/"):
             out.append(("marker", part))
         elif part in (",", "，", "、"):
             out.append(("marker", ","))
@@ -736,10 +919,6 @@ def check_alphabet(ipa):
     that -- ã ẽ ĩ õ ũ -- and `core/respell.js` will need them in its `VOWELS` set,
     because to it they are one character and not a vowel plus a tail.
     """
-    # `{target}` is a placeholder the renderer fills with the IPA of a language's
-    # name, not a transcription, so its own letters are not up for review here --
-    # the same licence `{}` already has, and for the same reason.
-    ipa = SOURCE_SLOT.sub("", LANGUAGE_SLOT.sub("", ipa))
     return sorted({c for c in unicodedata.normalize("NFD", ipa) if c not in ALPHABET})
 
 
@@ -777,6 +956,37 @@ def thai_syllables():
     return chunk
 
 
+def route(code, chunks):
+    """A `chunk -> IPA` function for one language, and the provenance tag naming it.
+
+    `chunks` is every chunk the caller will ask for: the espeak backend costs a
+    second to start and the Thai model twelve, so neither is built per row, and
+    espeak phonemises the whole batch at once. Shared with `language_name_ipa`,
+    which has to put the language names through the same route the column uses or
+    the substituted cell would be in a different phonology than the sentence
+    around it.
+    """
+    if code in VOICES:
+        lexicon = espeak_lexicon(VOICES[code], chunks)
+        return lexicon.get, "espeak"
+    if code == "th":
+        return thai_syllables(), "thaig2p"
+    if code == "zh-Hans":
+        # Lowercased for the same reason the other two table routes are: a capital
+        # is orthography, not sound. `dragonmapper` tolerates one on an initial
+        # (`Zhōngwén`) and refuses one on a bare vowel, so `Ālābóyǔ` and `Éyǔ` --
+        # Chinese for Arabic and Russian -- were the only two language names in the
+        # matrix with no transcription.
+        return lambda chunk: " ".join(pinyin_to_ipa(w.lower())
+                                      for w in chunk.split()), "pinyin"
+    if code == "ja":
+        return lambda chunk: " ".join(hepburn_to_ipa(w.lower())
+                                      for w in chunk.split()), "hepburn"
+    if code == "ko":
+        return lambda chunk: " ".join(rr_to_ipa(w.lower()) for w in chunk.split()), "rr"
+    raise SystemExit(f"no route for {code}")
+
+
 def pinyin_to_ipa(word):
     """One Pinyin word. dragonmapper spaces out the syllables of a polysyllabic
     word; they are joined back up so the IPA has the same word boundaries the
@@ -786,6 +996,130 @@ def pinyin_to_ipa(word):
         return transcriptions.pinyin_to_ipa(word).replace(" ", "")
     except Exception:
         return word                               # fails check_alphabet
+
+
+# ------------------------------------------------------------- language names
+NAMES = DATA / "registry/language-names.csv"
+
+
+def cldr_names(codes):
+    """`Intl.DisplayNames` for every (locale, subject) pair, asked of node.
+
+    The registry deliberately carries a `name` only where CLDR is wrong for our
+    purposes -- `content/LANGUAGE-SLOTS.md`, "Where Intl.DisplayNames is not
+    enough" -- and `languageName` in core/pack.js falls back to CLDR for the rest.
+    So the names this has to phonemise mostly are not in the repository at all, and
+    the only honest source for them is the one the renderer itself will use.
+
+    That also makes this the drift check that document asks for: if an ICU version
+    renames a language, the `ipa` generated from the new name differs from the
+    committed one and `--check` fails, which is the notification. Asked exactly the
+    way `languageName` asks -- full locale, base language for the subject, since
+    `zh-Hans` answers with the *script* ("Simplified Chinese", "chinois simplifie")
+    and nobody says `Parlez-vous chinois simplifie ?`.
+    """
+    script = """
+      const codes = JSON.parse(process.argv[1]);
+      const out = {};
+      for (const locale of codes) {
+        out[locale] = {};
+        for (const subject of codes) {
+          const base = subject.split('-')[0];
+          out[locale][subject] =
+            new Intl.DisplayNames([locale], { type: 'language' }).of(base) || base;
+        }
+      }
+      console.log(JSON.stringify(out));
+    """
+    done = subprocess.run(["node", "-e", script, json.dumps(codes)],
+                          capture_output=True, text=True, check=True)
+    return json.loads(done.stdout)
+
+
+def language_name_ipa(locales, subjects, rows):
+    """{(locale, bcp47): ipa} for one language naming another, with no entry at all
+    for a pair its route refuses.
+
+    Up to 272 strings rather than the 17 `{target}` needed, because a `{source}`
+    cell is the target's sentence naming the *reader's* language: `Parlez-vous
+    {source} ?` wants French's word for each of the other sixteen. Every pair is
+    needed -- both `{source}` concepts ship in all seventeen packs -- and the
+    17 diagonal entries `{target}` already uses fall out of the same loop, so this
+    owns the whole column rather than adding to it.
+
+    Through the language's own route, so the substituted name is in the same
+    phonology as the sentence it lands in: the seven romanised packs read their
+    `romanization` cell, which is hand-written and complete, and the rest read the
+    name in its own script. A pair the route refuses gets an empty cell, and
+    `fillLanguageSlots` then blanks the whole `ipa` rather than printing a sentence
+    with a hole where the language should be -- which is the blank respelling these
+    rows print today, so nothing regresses.
+    """
+    names = cldr_names(sorted(set(locales) | set(subjects)))
+    written = {}
+    for locale in locales:
+        # What to phonemise, per subject. A pack read off a romanisation reads the
+        # registry's own `romanization` cell -- one column here where the corpus has
+        # one per system, because a language names another in only one of them --
+        # and the rest read the name, CLDR's unless the registry overrides it.
+        text = {}
+        for subject in subjects:
+            row = rows.get((locale, subject), {})
+            name = (row.get("romanization") if locale in ROMANISED
+                    else row.get("name") or names[locale][subject]) or ""
+            if name and locale == "ko":
+                # RR read against the Hangul it romanises, which for every name but
+                # 한국어 is CLDR's rather than the registry's: `yeongeo` is 영어, so
+                # the `ng` is /ŋ/, while `hangugeo` is 한국어 and its `ng` is not.
+                name = ko_romanization(names[locale][subject], name) or ""
+            text[subject] = name
+        # Keyed on what `pieces` produces and not on the name, because that is what
+        # `transcribe` will be asked for: `espeak_lexicon` is a dict, so a name
+        # `clean` trims would miss its own entry and come back empty.
+        parts = {subject: pieces(name) for subject, name in text.items() if name}
+        transcribe, method = route(locale, [v for one in parts.values()
+                                            for kind, v in one if kind == "text"])
+        for subject, one in parts.items():
+            ipa = assemble([(kind, normalise(transcribe(value) or "", locale)
+                             if kind == "text" else value)
+                            for kind, value in one])
+            ipa = unicodedata.normalize("NFC", re.sub(r"\s+", " ", ipa).strip())
+            if ipa and not check_alphabet(ipa) and not check_route(ipa, method):
+                written[(locale, subject)] = ipa
+    return written
+
+
+def load_names():
+    """The registry keyed on (locale, bcp47), and its header, in file order."""
+    with NAMES.open(encoding="utf-8-sig", newline="") as fh:
+        reader = csv.DictReader(fh)
+        return reader.fieldnames, {(r["locale"], r["bcp47"]): r for r in reader}
+
+
+def write_names(header, rows, ipa, locales):
+    """The registry as text, with the `ipa` cell of every row whose locale is in
+    `locales` set from `ipa`.
+
+    Owning the column for a locale rather than only adding to it, the same way the
+    corpus pass does: a pair the route stops being able to read has to lose the
+    value the last run left behind. A pair `ipa` has nothing for keeps whatever else
+    its row holds -- a `name` override, a romanisation -- and a pair with no row at
+    all only gets one if there is an `ipa` to put in it, so the file never grows a
+    row of five empty cells.
+    """
+    for key, row in rows.items():
+        if key[0] in locales:
+            row["ipa"] = ipa.get(key, "")
+    for key, value in ipa.items():
+        rows.setdefault(key, dict.fromkeys(header, ""))["ipa"] = value
+    out = io.StringIO(newline="")
+    writer = csv.DictWriter(out, header, lineterminator="\n",
+                            extrasaction="ignore")
+    writer.writeheader()
+    for key in sorted(rows):
+        row = dict(rows[key], locale=key[0], bcp47=key[1])
+        writer.writerow(row)
+    return out.getvalue()
 
 
 # ------------------------------------------------------------------ the corpus
@@ -839,7 +1173,7 @@ def ipa_method(provenance):
 GRADE = {
     "zh-Hans": ("A", "mechanical transform of the reviewed Pinyin column; tone sandhi not applied"),
     "ja": ("A", "mechanical transform of the reviewed Hepburn column; the 49% is 74% final /ɯ/ devoicing"),
-    "ko": ("A-", "mechanical transform of the reviewed RR column; no cross-boundary tensification"),
+    "ko": ("A-", "reviewed RR read against the Hangul's own blocks; no cross-boundary tensification"),
     "es": ("A", "es-419, near-phonemic; 72% -> 97% once the curator's /j/ hiatus is allowed for"),
     "it": ("A", "near-phonemic; stress 98.2%, and this curator keeps the medial glide"),
     "id": ("A", "near-phonemic; stress 92.3%"),
@@ -851,7 +1185,7 @@ GRADE = {
     "ru": ("C", "espeak emits reduction and palatalisation as detail; 27.6% oracle ceiling"),
     "hi": ("C", "schwa deletion is espeak's to get wrong; stress 63.2%"),
     "fr": ("C", "liaison survives and stress is phrasal, but the curated sheet's unit is coarser"),
-    "vi": ("C", "tones reconstructed from espeak's digits; 68 rows refused for untranslated notation"),
+    "vi": ("C", "tones reconstructed from espeak's digits, ngang included; anh/ach is a judgement"),
     "ar": ("D", "short vowels are unwritten and espeak guesses; emphatics inconsistent"),
     "th": ("D", "a neural G2P, and no Thai tone is verifiable against anything in this corpus"),
 }
@@ -884,50 +1218,31 @@ def build(code):
             if not row["text"].strip():
                 skipped["no text"] += 1
                 continue
-            # `{source}` only. A `{target}` slot is one fixed string per language and
-            # rides through `pieces` as a marker, so those rows now get an `ipa` --
-            # and so a respelling, where before they printed a blank cell.
-            if SOURCE_SLOT.search(row["text"]):
-                skipped["names the reader"] += 1
-                continue
             text = row[source] if source else row["text"]
             if source and not text.strip():
                 skipped[f"no {source}"] += 1
                 continue
-            # The slot's own name is Latin and is not part of the sentence, so it has
-            # to come out before this asks whether a Latin loanword is present --
-            # `{target}の文を見せてください` was being refused for the word "target".
-            if code in NON_LATIN and LATIN_WORD.search(LANGUAGE_SLOT.sub("", row["text"])):
+            # Against `text` *and* against the string the route will actually read:
+            # a romanisation column is Latin throughout, and for these rows it is
+            # also where the answer already is. The slot's own name comes out of the
+            # question first, being Latin and no part of the sentence -- otherwise
+            # `{target}の文を見せてください` is refused for the word "target".
+            if code in NON_LATIN and latin_survives(row["text"], text):
                 skipped["latin loanword"] += 1
                 continue
-            if code == "ko" and not ko_ng_is_unambiguous(row["text"], text):
-                skipped["ng ambiguous"] += 1
-                continue
+            if code == "ko":
+                text = ko_romanization(row["text"], text)
+                if text is None:
+                    skipped["rr not aligned"] += 1
+                    continue
             parts = pieces(text)
             if not any(kind == "text" for kind, _ in parts):
                 skipped["nothing to say"] += 1
                 continue
             plan.append((path, index, row, parts))
 
-    # One backend, one batch: the espeak backend costs a second to start and the
-    # Thai model costs twelve, so neither is built per row.
-    if code in VOICES:
-        chunks = [v for _, _, _, parts in plan for kind, v in parts if kind == "text"]
-        lexicon = espeak_lexicon(VOICES[code], chunks)
-        transcribe = lexicon.get
-    elif code == "th":
-        transcribe = thai_syllables()
-    elif code == "zh-Hans":
-        transcribe = lambda chunk: " ".join(pinyin_to_ipa(w) for w in chunk.split())
-    elif code == "ja":
-        transcribe = lambda chunk: " ".join(hepburn_to_ipa(w.lower()) for w in chunk.split())
-    elif code == "ko":
-        transcribe = lambda chunk: " ".join(rr_to_ipa(w.lower()) for w in chunk.split())
-    else:
-        raise SystemExit(f"no route for {code}")
-
-    method = {"th": "thaig2p", "zh-Hans": "pinyin", "ja": "hepburn",
-              "ko": "rr"}.get(code, "espeak")
+    transcribe, method = route(code, [v for _, _, _, parts in plan
+                                      for kind, v in parts if kind == "text"])
     filled = {}                                   # (path, index) -> ipa
     bad = Counter()
     flagged = []                                  # rows a reviewer should read first
@@ -938,20 +1253,31 @@ def build(code):
         # `check_alphabet` is a whitelist of what is IPA; `check_route` is what this
         # route can never legitimately produce. Both refuse the row, because a
         # characterless failure and an unconverted mora are the same fault.
-        stray = check_alphabet(ipa) + check_route(ipa, method)
+        # A language slot is a placeholder the renderer fills with the IPA of a
+        # name, not a transcription, so neither gate reviews its letters -- the same
+        # licence `{}` already has, and for the same reason. `{source}` needs it
+        # more than `{target}` did: `u` and `c` are both in
+        # `ROUTE_FORBIDS["hepburn"]`, so the two Japanese rows that name the reader
+        # were being refused for the word "source".
+        sound = LANGUAGE_SLOT.sub("", ipa)
+        stray = check_alphabet(sound) + check_route(sound, method)
         if not ipa or stray:
             skipped["G2P failed"] += 1
             bad.update(stray or ["(empty)"])
             continue
         # Korean is a syllable-block script, so the result must have exactly as many
-        # syllables as the row has blocks. That catches every RR vowel digraph read
-        # across a boundary rather than within one -- `dongjeon tuip` (동전 투입) is
-        # *tu-ip*, not `tɰip`, and `gichae` (기차에) is *gi-cha-e*, not `kitɕʰɛ*.
+        # syllables as the row has blocks. `ko_hyphenate` now resolves the digraphs
+        # that used to fail this rather than leaving them to be caught, so what is
+        # left is a net: anything else that reads a unit across a boundary.
         # Only where there is a block to count and no digit to confuse it: `1월` is
-        # one block and two syllables, and `₩` is none and one.
+        # one block and two syllables, and `₩` is none and one. The language slot
+        # comes out of the count as well -- it is one word of Latin standing in for a
+        # name whose syllables are not this row's, so counting its letters refused
+        # every Korean row that names a language.
         if code == "ko" and hangul_blocks(row["text"]) \
                 and not any(c.isdigit() for c in row["text"]) \
-                and syllable_count(ipa) != hangul_blocks(row["text"]):
+                and syllable_count(LANGUAGE_SLOT.sub("", ipa)) \
+                != hangul_blocks(row["text"]):
             skipped["syllable count"] += 1
             continue
         if ACRONYM.search(row["text"]):
@@ -993,9 +1319,8 @@ def main():
     args = parser.parse_args()
 
     with (DATA / "registry/languages.csv").open(encoding="utf-8-sig") as fh:
-        codes = [r["bcp47"] for r in csv.DictReader(fh) if r["status"] == "ready"]
-    if args.only:
-        codes = [c for c in args.only.split(",") if c in codes]
+        ready = [r["bcp47"] for r in csv.DictReader(fh) if r["status"] == "ready"]
+    codes = [c for c in args.only.split(",") if c in ready] if args.only else ready
 
     stale, repertoire, report = [], Counter(), []
     for code in codes:
@@ -1036,6 +1361,19 @@ def main():
                 path.write_bytes(text.encode("utf-8"))
         agreed = agreement(code, by_cid)
         report.append((code, written, skipped, bad, agreed, method, len(flagged)))
+
+    # The language names, as their own pass over the same routes. Only the locales
+    # this run rebuilt, so that `--only vi` does not blank the other sixteen and
+    # does not pay for their backends; a full run therefore owns the whole column.
+    header, name_rows = load_names()
+    names_ipa = language_name_ipa(codes, ready, name_rows)
+    text = write_names(header, name_rows, names_ipa, codes)
+    if text != NAMES.read_text(encoding="utf-8"):
+        if args.check:
+            stale.append(str(NAMES.relative_to(ROOT)))
+        else:
+            NAMES.write_text(text, encoding="utf-8")
+    repertoire.update("".join(names_ipa.values()))
 
     undrawable = font_gap(repertoire)
     # `syl` is the headline quality number and the cheapest one available: how often
@@ -1088,7 +1426,6 @@ def font_gap(repertoire):
     text against the intersection of a stack's variants, because a glyph only the
     regular weight carries is unusable in a column set in the bold.
     """
-    import json
     from fontTools.ttLib import TTFont
     faces = json.loads((DATA / "fonts/manifest.json").read_text(encoding="utf-8"))["faces"]
     missing = set()

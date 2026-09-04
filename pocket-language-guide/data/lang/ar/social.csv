@@ -61,7 +61,7 @@ social-basics.good-night,تصبح على خير,,tuṣbiḥ ʿalá khayr,ts̪bħ
 social-basics.okay-fine-i-am-okay,أنا بخير,تمام,anā bi-khayr,ˈana bxiːr,,2,ar-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,لا أتحدث {target},,lā ataḥaddath {target},lˈaː ʔtħdθ {target},,2,language-slots-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,أتحدث {target} قليلاً,,ataḥaddath {target} qalīlan,ʔtħdθ {target} qlˈiːlaː,,2,language-slots-v1;ipa=espeak
-communication.do-you-speak-english,هل تتحدث {source}؟,,hal tataḥaddath {source}?,,,2,language-slots-v1
+communication.do-you-speak-english,هل تتحدث {source}؟,,hal tataḥaddath {source}?,hˈal ttħdθ {source},,2,language-slots-v1;ipa=espeak
 communication.please-speak-more-slowly,تحدث ببطء من فضلك,على مهلك,taḥaddath bi-buṭʾ min faḍlak,tˈaħadːˌaθ bbt̪ʔ mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,لم أفهم,ما فهمت,lam afham,lˈam ʔˈafham,,2,ar-agent-v1;ipa=espeak
 communication.i-cannot-read-understand,لا أقرأ هذا,,lā aqraʾ hādhā,lˈaː ʔˈaqɹaʔ haˈaðaˌa,,2,language-slots-v1;ipa=espeak

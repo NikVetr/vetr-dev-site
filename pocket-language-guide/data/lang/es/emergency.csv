@@ -115,7 +115,7 @@ emergency-medical.i-have-chest-pain,Tengo dolor en el pecho,,tˈeŋɡo dolˈoɾ 
 emergency-medical.this-person-is-unconscious,Esta persona está inconsciente,,ˈesta peɾsˈona estˈa ˌinkonsjˈente,,2,es-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,¿Dónde está el hospital más cercano?,,dˈonde estˈa el ˌospitˈal mˈas seɾkˈano,,2,es-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,¿Cuál es el número de emergencias?,,kwˈal ˈes el nˈumeɾo de ˌemeɾxˈensjas,,2,es-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,¿Hay un médico que hable {source}?,,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,¿Hay un médico que hable {source}?,,ˈaɪ ˈun mˈediko ke ˈable {source},,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,Creo que tengo un hueso roto,,kɾˈeo ke tˈeŋɡo ˈun wˈeso rˈoto,,2,es-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Llame a mi contacto de emergencia,,ʝˈame a mi kontˈakto de ˌemeɾxˈensja,,2,es-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Tengo seguro de viaje,,tˈeŋɡo seɡˈuɾo de bjˈaxe,,2,es-agent-v1;ipa=espeak

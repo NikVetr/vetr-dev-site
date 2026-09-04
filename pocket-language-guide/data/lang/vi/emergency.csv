@@ -5,7 +5,7 @@ emergency-medical.i-need-a-doctor,Tôi cần bác sĩ,,t̪oj˧ kən˨˩ baːc˧�
 emergency-medical.i-am-sick,Tôi bị bệnh,,t̪oj˧ bi˨˩ˀ beɲ˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 emergency-medical.i-am-injured,Tôi bị thương,,t̪oj˧ bi˨˩ˀ tyə̯ŋ˧,,2,vi-agent-v1;ipa=espeak
 emergency-medical.it-hurts-here,Tôi đau ở đây,,t̪oj˧ ɗaw˧ əː˧˩˧ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
-emergency-medical.where-is-a-pharmacy,Nhà thuốc ở đâu ạ?,Hiệu thuốc ở đâu ạ?,,,2,vi-agent-v1
+emergency-medical.where-is-a-pharmacy,Nhà thuốc ở đâu ạ?,Hiệu thuốc ở đâu ạ?,ɲaː˨˩ tuə̯c˧˥ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 emergency-medical.please-take-me-to-a-hospital,Xin đưa tôi đến bệnh viện,,sin˧ ɗyə̯˧ t̪oj˧ ɗen˧˥ beɲ˨˩ˀ viɛ̯n˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 emergency-medical.i-feel-unwell,Tôi thấy không khỏe,,t̪oj˧ təɪ˧˥ xoŋ˧ xwɛ˧˩˧,,2,vi-agent-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,Đây là trường hợp khẩn cấp,,ɗəɪ˧ laː˨˩ tʃyə̯ŋ˨˩ həːp˨˩ˀ xən˧˩˧ kəp˧˥,,2,vi-agent-v1;ipa=espeak
@@ -14,9 +14,9 @@ emergency-medical.i-cannot-breathe,Tôi không thở được,,t̪oj˧ xoŋ˧ t�
 emergency-medical.i-am-bleeding-badly,Tôi chảy máu nhiều,,t̪oj˧ tʃaj˧˩˧ maw˧˥ ɲiɛ̯w˨˩,,2,vi-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,Tôi bị đau ngực,,t̪oj˧ bi˨˩ˀ ɗaw˧ ŋyc˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 emergency-medical.this-person-is-unconscious,Người này bất tỉnh,,ŋyə̯j˨˩ naj˨˩ bət̪˧˥ t̪iɲ˧˩˧,,2,vi-agent-v1;ipa=espeak
-emergency-medical.where-is-the-nearest-hospital,Bệnh viện gần nhất ở đâu ạ?,,,,2,vi-agent-v1
+emergency-medical.where-is-the-nearest-hospital,Bệnh viện gần nhất ở đâu ạ?,,beɲ˨˩ˀ viɛ̯n˨˩ˀ ɣən˨˩ ɲət̪˧˥ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Số khẩn cấp là số mấy ạ?,,so˧˥ xən˧˩˧ kəp˧˥ laː˨˩ so˧˥ məɪ˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,Có bác sĩ nói tiếng {source} không ạ?,,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Có bác sĩ nói tiếng {source} không ạ?,,kɔ˧˥ baːc˧˥ si˧ˀ˥ nɔj˧˥ t̪iɛ̯ŋ˧˥ {source} xoŋ˧ aː˨˩ˀ,,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,Tôi nghĩ bị gãy xương,,t̪oj˧ ŋi˧ˀ˥ bi˨˩ˀ ɣaj˧ˀ˥ syə̯ŋ˧,,2,vi-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Xin gọi người liên hệ khẩn cấp của tôi,,sin˧ ɣɔj˨˩ˀ ŋyə̯j˨˩ liɛ̯n˧ he˨˩ˀ xən˧˩˧ kəp˧˥ kuə̯˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Tôi có bảo hiểm du lịch,,t̪oj˧ kɔ˧˥ baːw˧˩˧ hiɛ̯m˧˩˧ zu˧ lic˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -89,7 +89,7 @@ body-parts.chest,Ngực,,ŋyc˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 body-parts.eye,Mắt,,mat̪˧˥,,2,vi-agent-v1;ipa=espeak
 body-parts.ear,Tai,,t̪aːj˧,,2,vi-agent-v1;ipa=espeak
 body-parts.leg,Chân,,tʃən˧,,2,vi-agent-v1;ipa=espeak
-body-parts.arm,Cánh tay,,,,2,vi-agent-v1
+body-parts.arm,Cánh tay,,kaɲ˧˥ t̪aj˧,,2,vi-agent-v1;ipa=espeak
 body-parts.foot,Bàn chân,,baːn˨˩ tʃən˧,,2,vi-agent-v1;ipa=espeak
 body-parts.hand,Bàn tay,,baːn˨˩ t̪aj˧,,2,vi-agent-v1;ipa=espeak
 body-parts.knee,Đầu gối,,ɗəw˨˩ ɣoj˧˥,,2,vi-agent-v1;ipa=espeak
@@ -106,17 +106,17 @@ lost-rescue.please-contact-rescue,Xin liên hệ đội cứu hộ,,sin˧ liɛ̯
 lost-rescue.my-companion-is-missing,Người đi cùng tôi bị lạc,,ŋyə̯j˨˩ ɗi˧ kuŋ˨˩ t̪oj˧ bi˨˩ˀ laːc˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,Xin xem vị trí hiện tại của tôi,,sin˧ sɛm˧ vi˨˩ˀ tʃi˧˥ hiɛ̯n˨˩ˀ t̪aːj˨˩ˀ kuə̯˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Con tôi bị lạc,,kɔn˧ t̪oj˧ bi˨˩ˀ laːc˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-lost-rescue.i-do-not-know-where-i-am,Tôi không biết mình đang ở đâu,,,,2,vi-agent-v1
+lost-rescue.i-do-not-know-where-i-am,Tôi không biết mình đang ở đâu,,t̪oj˧ xoŋ˧ biɛ̯t̪˧˥ miɲ˨˩ ɗaːŋ˧ əː˧˩˧ ɗəw˧,,2,vi-agent-v1;ipa=espeak
 lost-rescue.my-friend-is-hurt,Bạn tôi bị thương,,baːn˨˩ˀ t̪oj˧ bi˨˩ˀ tyə̯ŋ˧,,2,vi-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-wallet,Tôi mất ví,Tôi mất bóp,t̪oj˧ mət̪˧˥ vi˧˥,,2,vi-agent-v1;ipa=espeak
-lost-rescue.i-lost-my-bag,Tôi mất túi xách,,,,2,vi-agent-v1
-lost-rescue.where-is-lost-and-found,Chỗ nhận đồ thất lạc ở đâu ạ?,,,,2,vi-agent-v1
-lost-rescue.i-cannot-find-my-hotel,Tôi không tìm được khách sạn,,,,2,vi-agent-v1
+lost-rescue.i-lost-my-bag,Tôi mất túi xách,,t̪oj˧ mət̪˧˥ t̪uj˧˥ sac˧˥,,2,vi-agent-v1;ipa=espeak
+lost-rescue.where-is-lost-and-found,Chỗ nhận đồ thất lạc ở đâu ạ?,,tʃo˧ˀ˥ ɲən˨˩ˀ ɗo˨˩ tət̪˧˥ laːc˨˩ˀ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+lost-rescue.i-cannot-find-my-hotel,Tôi không tìm được khách sạn,,t̪oj˧ xoŋ˧ t̪im˨˩ ɗyə̯c˨˩ˀ xac˧˥ saːn˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 lost-rescue.i-left-it-on-the-train,Tôi để quên trên tàu,,t̪oj˧ ɗe˧˩˧ kwen˧ tʃen˧ t̪aw˨˩,,2,vi-agent-v1;ipa=espeak
 lost-rescue.i-cannot-get-down,Tôi không xuống được,,t̪oj˧ xoŋ˧ suə̯ŋ˧˥ ɗyə̯c˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-police-consulate.where-is-the-police-station,Đồn công an ở đâu ạ?,,,,2,vi-agent-v1
+police-consulate.where-is-the-police-station,Đồn công an ở đâu ạ?,,ɗon˨˩ koŋ˧ aːn˧ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 police-consulate.i-want-to-report-a-theft,Tôi muốn trình báo mất trộm,,t̪oj˧ muə̯n˧˥ tʃiɲ˨˩ baːw˧˥ mət̪˧˥ tʃom˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-police-consulate.my-bag-was-stolen,Tôi bị lấy cắp túi xách,,,,2,vi-agent-v1
+police-consulate.my-bag-was-stolen,Tôi bị lấy cắp túi xách,,t̪oj˧ bi˨˩ˀ ləɪ˧˥ kap˧˥ t̪uj˧˥ sac˧˥,,2,vi-agent-v1;ipa=espeak
 police-consulate.my-passport-was-stolen,Tôi bị lấy cắp hộ chiếu,,t̪oj˧ bi˨˩ˀ ləɪ˧˥ kap˧˥ ho˨˩ˀ tʃiɛ̯w˧˥,,2,vi-agent-v1;ipa=espeak
 police-consulate.someone-is-following-me,Có người đang bám theo tôi,,kɔ˧˥ ŋyə̯j˨˩ ɗaːŋ˧ baːm˧˥ tɛw˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 police-consulate.i-need-a-written-police-report,Tôi cần biên bản của công an,,t̪oj˧ kən˨˩ biɛ̯n˧ baːn˧˩˧ kuə̯˧˩˧ koŋ˧ aːn˧,,2,vi-agent-v1;ipa=espeak
@@ -126,11 +126,11 @@ police-consulate.i-need-an-interpreter,Tôi cần người phiên dịch,,t̪oj�
 police-consulate.please-leave-me-alone,Xin để tôi yên,,sin˧ ɗe˧˩˧ t̪oj˧ iɛ̯n˧,,2,vi-agent-v1;ipa=espeak
 police-consulate.i-was-robbed,Tôi bị cướp,,t̪oj˧ bi˨˩ˀ kyə̯p˧˥,,2,vi-agent-v1;ipa=espeak
 police-consulate.i-want-a-lawyer,Tôi muốn có luật sư,,t̪oj˧ muə̯n˧˥ kɔ˧˥ lwət̪˨˩ˀ sy˧,,2,vi-agent-v1;ipa=espeak
-police-consulate.please-notify-my-consulate,Xin báo cho lãnh sự quán của tôi,,,,2,vi-agent-v1
+police-consulate.please-notify-my-consulate,Xin báo cho lãnh sự quán của tôi,,sin˧ baːw˧˥ tʃɔ˧ laɲ˧ˀ˥ sy˨˩ˀ kwaːn˧˥ kuə̯˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 police-consulate.i-am-calling-the-police,Tôi sẽ gọi công an,,t̪oj˧ sɛ˧ˀ˥ ɣɔj˨˩ˀ koŋ˧ aːn˧,,2,vi-agent-v1;ipa=espeak
 police-consulate.am-i-under-arrest,Tôi có bị bắt không ạ?,,t̪oj˧ kɔ˧˥ bi˨˩ˀ bat̪˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"Không, cảm ơn. Tôi không quan tâm",,"xoŋ˧, kaːm˧˩˧ əːn˧ t̪oj˧ xoŋ˧ kwaːn˧ t̪əm˧",,2,vi-agent-v1;ipa=espeak
-police-consulate.someone-attacked-me,Có người hành hung tôi,,,,2,vi-agent-v1
+police-consulate.someone-attacked-me,Có người hành hung tôi,,kɔ˧˥ ŋyə̯j˨˩ haɲ˨˩ huŋ˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 police-consulate.i-did-not-agree-to-this-price,Tôi không đồng ý giá này,,t̪oj˧ xoŋ˧ ɗoŋ˨˩ i˧˥ zaː˧˥ naj˨˩,,2,vi-agent-v1;ipa=espeak
 police-consulate.please-write-the-report-number,Xin ghi số biên bản,,sin˧ ɣi˧ so˧˥ biɛ̯n˧ baːn˧˩˧,,2,vi-agent-v1;ipa=espeak
 police-consulate.it-happened-here,Việc xảy ra ở đây,,viɛ̯c˨˩ˀ saj˧˩˧ zaː˧ əː˧˩˧ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak

@@ -130,7 +130,7 @@ emergency-medical.where-is-the-nearest-hospital,一番近い病院はどこで�
 lost-rescue.where-is-lost-and-found,忘れ物センターはどこですか？,,wasuremono sentā wa doko desu ka?,wasɯɾemono seɴtaː wa doko desɯ ka,,2,ja-agent-v1;ipa=hepburn
 emergency-medical.what-is-the-emergency-number,救急の電話番号は何番ですか？,,kyūkyū no denwa bangō wa nanban desu ka?,kjɯːkjɯː no deɴwa baɴɡoː wa naɴbaɴ desɯ ka,,2,ja-agent-v1;ipa=hepburn
 lost-rescue.i-cannot-find-my-hotel,ホテルが見つかりません,,hoteru ga mitsukarimasen,hoteɾɯ ɡa mitsɯkaɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
-emergency-medical.is-there-a-doctor-who-speaks-english,{source}を話せる医師はいますか？,,{source} o hanaseru ishi wa imasu ka?,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,{source}を話せる医師はいますか？,,{source} o hanaseru ishi wa imasu ka?,{source} o hanaseɾɯ iɕi wa imasɯ ka,,2,language-slots-v1;ipa=hepburn
 lost-rescue.i-left-it-on-the-train,電車に忘れました,,densha ni wasuremashita,deɴɕa ɲi wasɯɾemaɕita,,2,ja-agent-v1;ipa=hepburn
 emergency-medical.i-think-a-bone-is-broken,骨が折れたかもしれません,,hone ga oreta kamo shiremasen,hone ɡa oɾeta kamo ɕiɾemaseɴ,,2,ja-agent-v1;ipa=hepburn
 lost-rescue.i-cannot-get-down,下りられません,,oriraremasen,oɾiɾaɾemaseɴ,,2,ja-agent-v1;ipa=hepburn

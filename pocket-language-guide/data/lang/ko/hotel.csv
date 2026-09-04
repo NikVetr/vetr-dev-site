@@ -10,7 +10,7 @@ laundry.please-iron-this,이거 다려 주세요,,igeo daryeo juseyo,iɡʌ taɾj
 laundry.detergent,세제,,seje,sedʑe,,2,ko-agent-v1;ipa=rr
 laundry.dry-cleaning,드라이클리닝,,deuraikeullining,tɯɾaikʰɯlliniŋ,,2,ko-agent-v1;ipa=rr
 laundry.dryer,건조기,,geonjogi,kʌndʑoɡi,,2,ko-agent-v1;ipa=rr
-laundry.coin-operated,동전 투입,코인 세탁,dongjeon tuip,,,2,ko-agent-v1
+laundry.coin-operated,동전 투입,코인 세탁,dongjeon tuip,toŋdʑʌn tʰuip,,2,ko-agent-v1;ipa=rr
 hotel-words.passport,여권,,yeogwon,jʌɡwʌn,,2,ko-agent-v1;ipa=rr
 hotel-words.room-key-card,카드키,객실 카드,kadeuki,kʰadɯkʰi,,2,ko-agent-v1;ipa=rr
 hotel-words.check-in,체크인,,chekeuin,tɕʰekʰɯin,,2,ko-agent-v1;ipa=rr

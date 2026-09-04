@@ -1,34 +1,34 @@
 concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
-border-customs.i-am-a-tourist,관광으로 왔어요,,gwangwangeuro wasseoyo,,,2,ko-agent-v1
+border-customs.i-am-a-tourist,관광으로 왔어요,,gwangwangeuro wasseoyo,kwanɡwaŋɯɾo was͈ʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.here-is-my-passport,여권 여기 있어요,,yeogwon yeogi isseoyo,jʌɡwʌn jʌɡi is͈ʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.i-am-staying-for-days,{}일 있을 거예요,,{}il isseul geoyeyo,{} il is͈ɯl kʌjejo,,2,ko-agent-v1;ipa=rr
-border-customs.nothing-to-declare,신고할 것 없어요,신고 없음,singohal geot eopseoyo,,sign: 신고 없음,2,ko-agent-v1
+border-customs.nothing-to-declare,신고할 것 없어요,신고 없음,singohal geot eopseoyo,sinɡohal kʌt ʌpsʌjo,sign: 신고 없음,2,ko-agent-v1;ipa=rr
 border-customs.i-am-staying-at,{}에서 묵어요,,{}eseo mugeoyo,{} esʌ muɡʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.i-am-here-for-business,출장으로 왔어요,,chuljangeuro wasseoyo,tɕʰuldʑaŋɯɾo was͈ʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.i-have-a-return-ticket,돌아가는 표 있어요,,doraganeun pyo isseoyo,toɾaɡanɯn pʰjo is͈ʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.i-am-visiting-family,가족 만나러 왔어요,,gajok mannareo wasseoyo,kadʑok mannaɾʌ was͈ʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.this-is-for-personal-use,개인용이에요,,gaeinyongieyo,kɛinjoŋiejo,,2,ko-agent-v1;ipa=rr
 border-customs.i-am-in-transit,환승이에요,,hwanseungieyo,hwansɯŋiejo,,2,ko-agent-v1;ipa=rr
-border-customs.i-have-in-cash,현금 {} 있어요,,hyeongeum {} isseoyo,,,2,ko-agent-v1
+border-customs.i-have-in-cash,현금 {} 있어요,,hyeongeum {} isseoyo,hjʌnɡɯm {} is͈ʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.this-is-a-gift,선물이에요,,seonmurieyo,sʌnmuɾiejo,,2,ko-agent-v1;ipa=rr
 border-customs.where-do-i-collect-my-baggage,수하물 어디서 받아요?,,suhamul eodiseo badayo?,suhamul ʌdisʌ padajo,,2,ko-agent-v1;ipa=rr
 border-customs.how-long-may-i-stay,얼마나 머물 수 있어요?,,eolmana meomul su isseoyo?,ʌlmana mʌmul su is͈ʌjo,,2,ko-agent-v1;ipa=rr
-border-customs.i-have-a-connecting-flight,연결편이 있어요,,yeongyeolpyeoni isseoyo,,,2,ko-agent-v1
+border-customs.i-have-a-connecting-flight,연결편이 있어요,,yeongyeolpyeoni isseoyo,jʌnɡjʌlpʰjʌni is͈ʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.may-i-have-an-entry-stamp,입국 도장 찍어 주세요,,ipguk dojang jjigeo juseyo,ipkuk todʑaŋ tɕ͈iɡʌ tɕusejo,,2,ko-agent-v1;ipa=rr
 border-customs.visa,비자,,bija,pidʑa,,2,ko-agent-v1;ipa=rr
-border-customs.i-have-no-food-or-plants,음식이나 식물 없어요,,eumsigina singmul eopseoyo,,,2,ko-agent-v1
+border-customs.i-have-no-food-or-plants,음식이나 식물 없어요,,eumsigina singmul eopseoyo,ɯmsiɡina siŋmul ʌpsʌjo,,2,ko-agent-v1;ipa=rr
 border-customs.passport-control,입국심사,출입국심사,ipguksimsa,ipkuksimsa,,2,ko-agent-v1;ipa=rr
 border-customs.customs,세관,,segwan,seɡwan,,2,ko-agent-v1;ipa=rr
 border-customs.baggage-claim,수하물 수취,수하물 찾는 곳,suhamul suchwi,suhamul sutɕʰwi,,2,ko-agent-v1;ipa=rr
-border-customs.customs-declaration,세관신고서,,segwansingoseo,,,2,ko-agent-v1
-border-customs.arrival-card,입국신고서,,ipguksingoseo,,,2,ko-agent-v1
+border-customs.customs-declaration,세관신고서,,segwansingoseo,seɡwansinɡosʌ,,2,ko-agent-v1;ipa=rr
+border-customs.arrival-card,입국신고서,,ipguksingoseo,ipkuksinɡosʌ,,2,ko-agent-v1;ipa=rr
 border-customs.transit,환승,,hwanseung,hwansɯŋ,,2,ko-agent-v1;ipa=rr
 border-customs.boarding-pass,탑승권,,tapseunggwon,tʰapsɯŋɡwʌn,,2,ko-agent-v1;ipa=rr
 directions.where-is,{} 어디예요?,,{} eodiyeyo?,{} ʌdijejo,,2,ko-agent-v1;ipa=rr
 directions.how-do-i-get-to,{} 어떻게 가요?,,{} eotteoke gayo?,{} ʌt͈ʌkʰe kajo,,2,ko-agent-v1;ipa=rr
 directions.is-it-far,멀어요?,,meoreoyo?,mʌɾʌjo,,2,ko-agent-v1;ipa=rr
 directions.how-long-on-foot,걸어서 얼마나 걸려요?,,georeoseo eolmana geollyeoyo?,kʌɾʌsʌ ʌlmana kʌlljʌjo,,2,ko-agent-v1;ipa=rr
-directions.please-show-me-on-the-map,지도에서 보여 주세요,,jidoeseo boyeo juseyo,,,2,ko-agent-v1
+directions.please-show-me-on-the-map,지도에서 보여 주세요,,jidoeseo boyeo juseyo,tɕidoesʌ pojʌ tɕusejo,,2,ko-agent-v1;ipa=rr
 directions.where-is-the-nearest,가까운 {} 어디예요?,,gakkaun {} eodiyeyo?,kak͈aun {} ʌdijejo,,2,ko-agent-v1;ipa=rr
 directions.where-am-i,여기가 어디예요?,,yeogiga eodiyeyo?,jʌɡiɡa ʌdijejo,,2,ko-agent-v1;ipa=rr
 directions.which-way,어느 쪽이에요?,,eoneu jjogieyo?,ʌnɯ tɕ͈oɡiejo,,2,ko-agent-v1;ipa=rr
@@ -55,20 +55,20 @@ taxi.please-send-me-the-address,주소를 보내 주세요,,jusoreul bonae jusey
 taxi.we-need-the-east-gate-not-the-south-gate,남문 아니고 동문이에요,,nammun anigo dongmunieyo,nammun aniɡo toŋmuniejo,,2,ko-agent-v1;ipa=rr
 taxi.please-stop-here,여기서 세워 주세요,,yeogiseo sewo juseyo,jʌɡisʌ sewʌ tɕusejo,,2,ko-agent-v1;ipa=rr
 taxi.can-you-wait-for-me-here,여기서 기다려 줄 수 있어요?,,yeogiseo gidaryeo jul su isseoyo?,jʌɡisʌ kidaɾjʌ tɕul su is͈ʌjo,,2,ko-agent-v1;ipa=rr
-taxi.we-need-to-catch-the-high-speed-train,고속열차 타야 해요,KTX 타야 해요,gosongnyeolcha taya haeyo,,,2,ko-agent-v1
+taxi.we-need-to-catch-the-high-speed-train,고속열차 타야 해요,KTX 타야 해요,gosongnyeolcha taya haeyo,kosoŋnjʌltɕʰa tʰaja hɛjo,,2,ko-agent-v1;ipa=rr
 taxi.please-use-the-meter,미터기로 가 주세요,,miteogiro ga juseyo,mitʰʌɡiɾo ka tɕusejo,,2,ko-agent-v1;ipa=rr
 taxi.i-will-get-off-here,여기서 내릴게요,,yeogiseo naerilgeyo,jʌɡisʌ nɛɾilɡejo,,2,ko-agent-v1;ipa=rr
 transit-rides.two-tickets,표 두 장이요,,pyo du jangiyo,pʰjo tu tɕaŋijo,,2,ko-agent-v1;ipa=rr
 transit-rides.where-is-the-subway-station,지하철역이 어디예요?,,jihacheollyeogi eodiyeyo?,tɕihatɕʰʌlljʌɡi ʌdijejo,,2,ko-agent-v1;ipa=rr
 transit-rides.does-this-bus-train-go-to,이거 {} 가요?,,igeo {} gayo?,iɡʌ {} kajo,,2,ko-agent-v1;ipa=rr
-transit-rides.what-is-the-next-stop,다음 역이 어디예요?,,daeum yeogi eodiyeyo?,tɛum jʌɡi ʌdijejo,,2,ko-agent-v1;ipa=rr
+transit-rides.what-is-the-next-stop,다음 역이 어디예요?,,daeum yeogi eodiyeyo?,taɯm jʌɡi ʌdijejo,,2,ko-agent-v1;ipa=rr
 transit-rides.please-tell-me-where-to-get-off,내릴 때 알려 주세요,,naeril ttae allyeo juseyo,nɛɾil t͈ɛ alljʌ tɕusejo,,2,ko-agent-v1;ipa=rr
 transit-rides.is-this-direct,바로 가요?,,baro gayo?,paɾo kajo,,2,ko-agent-v1;ipa=rr
 transit-rides.do-i-need-to-transfer,환승해야 해요?,,hwanseunghaeya haeyo?,hwansɯŋhɛja hɛjo,,2,ko-agent-v1;ipa=rr
 transit-rides.is-it-delayed,연착됐어요?,,yeonchakdwaesseoyo?,jʌntɕʰaktwɛs͈ʌjo,,2,ko-agent-v1;ipa=rr
 transit-rides.i-am-in-a-hurry,급해요,,geupaeyo,kɯpʰɛjo,,2,ko-agent-v1;ipa=rr
 transit-rides.which-platform,몇 번 승강장이에요?,,myeot beon seunggangjangieyo?,mjʌt pʌn sɯŋɡaŋdʑaŋiejo,,2,ko-agent-v1;ipa=rr
-transit-rides.what-time-is-the-next-one,다음 건 몇 시예요?,,daeum geon myeot siyeyo?,tɛum kʌn mjʌt sijejo,,2,ko-agent-v1;ipa=rr
+transit-rides.what-time-is-the-next-one,다음 건 몇 시예요?,,daeum geon myeot siyeyo?,taɯm kʌn mjʌt sijejo,,2,ko-agent-v1;ipa=rr
 transit-rides.i-went-past-my-stop,내릴 곳을 지났어요,,naeril goseul jinasseoyo,nɛɾil kosɯl tɕinas͈ʌjo,,2,ko-agent-v1;ipa=rr
 transit-rides.can-i-use-this-ticket,이 표 쓸 수 있어요?,,i pyo sseul su isseoyo?,i pʰjo s͈ɯl su is͈ʌjo,,2,ko-agent-v1;ipa=rr
 place-words.visitor-center,안내센터,관광안내소,annaesenteo,annɛsentʰʌ,,2,ko-agent-v1;ipa=rr
@@ -77,7 +77,7 @@ place-words.airport,공항,,gonghang,koŋhaŋ,,2,ko-agent-v1;ipa=rr
 place-words.service-desk,안내데스크,,annaedeseukeu,annɛdesɯkʰɯ,,2,ko-agent-v1;ipa=rr
 place-words.bus-stop,버스정류장,,beoseujeongnyujang,pʌsɯdʑʌŋnjudʑaŋ,,2,ko-agent-v1;ipa=rr
 place-words.luggage-storage,짐 보관소,,jim bogwanso,tɕim poɡwanso,,2,ko-agent-v1;ipa=rr
-place-words.tourist-spot-sightseeing-area,관광지,,gwangwangji,,,2,ko-agent-v1
+place-words.tourist-spot-sightseeing-area,관광지,,gwangwangji,kwanɡwaŋdʑi,,2,ko-agent-v1;ipa=rr
 pickup-meeting.where-is-the-pickup-point,픽업 장소 어디예요?,,pigeop jangso eodiyeyo?,pʰiɡʌp tɕaŋso ʌdijejo,,2,ko-agent-v1;ipa=rr
 pickup-meeting.please-send-me-the-pickup-point,픽업 장소를 보내 주세요,,pigeop jangsoreul bonae juseyo,pʰiɡʌp tɕaŋsoɾɯl ponɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 pickup-meeting.please-pick-us-up-here,여기로 와 주세요,,yeogiro wa juseyo,jʌɡiɾo wa tɕusejo,,2,ko-agent-v1;ipa=rr

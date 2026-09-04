@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
-atm-cash.where-is-an-atm,현금인출기 어디예요?,,hyeongeuminchulgi eodiyeyo?,,,2,ko-agent-v1
+atm-cash.where-is-an-atm,현금인출기 어디예요?,,hyeongeuminchulgi eodiyeyo?,hjʌnɡɯmintɕʰulɡi ʌdijejo,,2,ko-agent-v1;ipa=rr
 atm-cash.does-this-atm-take-foreign-cards,외국 카드 돼요?,,oeguk kadeu dwaeyo?,weɡuk kʰadɯ twɛjo,,2,ko-agent-v1;ipa=rr
 atm-cash.the-atm-kept-my-card,기계가 카드를 먹었어요,,gigyega kadeureul meogeosseoyo,kiɡjeɡa kʰadɯɾɯl mʌɡʌs͈ʌjo,machine ate my card,2,ko-agent-v1;ipa=rr
 atm-cash.is-there-a-fee,수수료 있어요?,,susuryo isseoyo?,susuɾjo is͈ʌjo,,2,ko-agent-v1;ipa=rr
@@ -14,10 +14,10 @@ atm-cash.may-i-pay-in,{}로 낼 수 있어요?,,{}ro nael su isseoyo?,{} ɾo nɛ
 atm-cash.please-charge-in-local-currency,원화로 결제해 주세요,,wonhwaro gyeoljehae juseyo,wʌnhwaɾo kjʌldʑehɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 atm-cash.where-can-i-get-coins,동전 어디서 바꿔요?,,dongjeon eodiseo bakkwoyo?,toŋdʑʌn ʌdisʌ pak͈wʌjo,,2,ko-agent-v1;ipa=rr
 atm-cash.is-there-a-minimum-for-cards,카드 최소 금액 있어요?,,kadeu choeso geumaek isseoyo?,kʰadɯ tɕʰweso kɯmɛk is͈ʌjo,,2,ko-agent-v1;ipa=rr
-atm-cash.atm,현금인출기,ATM,hyeongeuminchulgi,,,2,ko-agent-v1
+atm-cash.atm,현금인출기,ATM,hyeongeuminchulgi,hjʌnɡɯmintɕʰulɡi,,2,ko-agent-v1;ipa=rr
 atm-cash.banknote,지폐,,jipye,tɕipʰje,,2,ko-agent-v1;ipa=rr
 atm-cash.coin,동전,,dongjeon,toŋdʑʌn,,2,ko-agent-v1;ipa=rr
-atm-cash.cash-only,현금만 가능,현금 전용,hyeongeumman ganeung,,,2,ko-agent-v1
+atm-cash.cash-only,현금만 가능,현금 전용,hyeongeumman ganeung,hjʌnɡɯmman kanɯŋ,,2,ko-agent-v1;ipa=rr
 atm-cash.fee,수수료,,susuryo,susuɾjo,,2,ko-agent-v1;ipa=rr
 atm-cash.change,잔돈,거스름돈,jandon,tɕandon,,2,ko-agent-v1;ipa=rr
 atm-cash.exchange-rate,환율,,hwannyul,hwannjul,,2,ko-agent-v1;ipa=rr

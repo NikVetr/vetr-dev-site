@@ -77,6 +77,37 @@ test('the registry supplies what ICU cannot: a romanised name', () => {
   assert.equal(named.romanization_pinyin, 'ni hui shuo yingyu ma?');
 });
 
+test('an ipa cell keeps its own blank slot and loses only an unnamed language', () => {
+  // Two rules in one cell, and the first one used to eat the second. The guard was
+  // "blank the ipa if a brace survived the substitution", which is right for a
+  // language nobody has an IPA for -- but `{}`, the ordinary blank the traveller
+  // fills in, is a brace that always survives, so every ipa cell carrying one was
+  // blanked at render time: 747 cells, 44 per language, each printing an empty
+  // respelling column for a row whose transcription was sitting on disk.
+  assert.equal(
+    fill('sin˧ ɣɔj˨˩ˀ t̪oj˧ zəɪ˨˩ˀ luc˧˥ {}', { locale: 'vi', target: 'vi', source: 'en' }).ipa,
+    undefined, 'no ipa field to fill',
+  );
+  /** @type {Record<string,Record<string,string>>} */
+  const kept = { [ID]: { ipa: 'me ʝˈamo {}' } };
+  fillLanguageSlots(kept, { locale: 'es', target: 'es', source: 'en', names: {} });
+  assert.equal(kept[ID].ipa, 'me ʝˈamo {}', 'the blank slot is a token the respeller passes through');
+
+  // And a language the registry has no IPA for still blanks the whole cell, because
+  // the alternative prints a fluent sentence with the language silently missing.
+  /** @type {Record<string,Record<string,string>>} */
+  const unnamed = { [ID]: { ipa: 'paʁlˈevˈu {source}' } };
+  fillLanguageSlots(unnamed, { locale: 'fr', target: 'fr', source: 'es', names: {} });
+  assert.equal(unnamed[ID].ipa, '');
+  /** @type {Record<string,Record<string,string>>} */
+  const named = { [ID]: { ipa: 'paʁlˈevˈu {source}' } };
+  fillLanguageSlots(named, {
+    locale: 'fr', target: 'fr', source: 'es',
+    names: { es: { name: 'espagnol', roman: '', ipa: 'ɛspanjˈɔl' } },
+  });
+  assert.equal(named[ID].ipa, 'paʁlˈevˈu ɛspanjˈɔl');
+});
+
 test('a respelling is never substituted into', () => {
   // Respellings are curated per pair already, and they have to be: the French
   // `par-lay voo zahn-GLEH` carries a liaison /z/ that vanishes with `espagnol`,

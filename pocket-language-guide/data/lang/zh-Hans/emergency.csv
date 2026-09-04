@@ -130,7 +130,7 @@ emergency-medical.where-is-the-nearest-hospital,最近的医院在哪里？,,zu�
 lost-rescue.where-is-lost-and-found,失物招领处在哪里？,,shīwù zhāolǐngchù zài nǎlǐ?,ʂɨ˥u˥˩ ʈʂɑʊ˥liŋ˧˩˧ʈʂʰu˥˩ tsaɪ˥˩ na˧˩˧li˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
 emergency-medical.what-is-the-emergency-number,急救电话是多少？,,jíjiù diànhuà shì duōshao?,tɕi˧˥tɕjoʊ˥˩ tjɛn˥˩xwa˥˩ ʂɨ˥˩ twɔ˥ʂɑʊ,,2,zh-Hans-agent-v1;ipa=pinyin
 lost-rescue.i-cannot-find-my-hotel,我找不到我的酒店,,wǒ zhǎo bu dào wǒ de jiǔdiàn,wɔ˧˩˧ ʈʂɑʊ˧˩˧ pu tɑʊ˥˩ wɔ˧˩˧ tɤ tɕjoʊ˧˩˧tjɛn˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-emergency-medical.is-there-a-doctor-who-speaks-english,有会说{source}的医生吗？,,yǒu huì shuō {source} de yīshēng ma?,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,有会说{source}的医生吗？,,yǒu huì shuō {source} de yīshēng ma?,joʊ˧˩˧ xweɪ˥˩ ʂwɔ˥ {source} tɤ i˥ʂɤŋ˥ ma,,2,language-slots-v1;ipa=pinyin
 lost-rescue.i-left-it-on-the-train,我忘在火车上了,,wǒ wàng zài huǒchē shàng le,wɔ˧˩˧ wɑŋ˥˩ tsaɪ˥˩ xwɔ˧˩˧ʈʂʰɤ˥ ʂɑŋ˥˩ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
 emergency-medical.i-think-a-bone-is-broken,我可能骨折了,,wǒ kěnéng gǔzhé le,wɔ˧˩˧ kʰɤ˧˩˧nɤŋ˧˥ ku˧˩˧ʈʂɤ˧˥ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
 lost-rescue.i-cannot-get-down,我下不去了,,wǒ xià bu qù le,wɔ˧˩˧ ɕja˥˩ pu tɕʰy˥˩ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin

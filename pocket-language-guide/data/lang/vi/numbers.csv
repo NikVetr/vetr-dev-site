@@ -14,20 +14,20 @@ numbers-money.y-b-i,một trăm,100,mot̪˨˩ˀ tʃam˧,,2,vi-agent-v1;ipa=espea
 numbers-money.y-qi-n,một nghìn,một ngàn,mot̪˨˩ˀ ŋin˨˩,,2,vi-agent-v1;ipa=espeak
 numbers-money.y-w-n,mười nghìn,mười ngàn,myə̯j˨˩ ŋin˨˩,,2,vi-agent-v1;ipa=espeak
 numbers-money.b-n,một nửa,rưỡi,mot̪˨˩ˀ nyə̯˧˩˧,,2,vi-agent-v1;ipa=espeak
-atm-cash.where-is-an-atm,Máy ATM ở đâu ạ?,Cây ATM ở đâu ạ?,,,2,vi-agent-v1
+atm-cash.where-is-an-atm,Máy ATM ở đâu ạ?,Cây ATM ở đâu ạ?,maj˧˥ aːteɛməː˨˩ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.does-this-atm-take-foreign-cards,Máy này nhận thẻ nước ngoài không ạ?,,maj˧˥ naj˨˩ ɲən˨˩ˀ tɛ˧˩˧ nyə̯c˧˥ ŋwaːj˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.the-atm-kept-my-card,Máy nuốt thẻ của tôi,,maj˧˥ nuə̯t̪˧˥ tɛ˧˩˧ kuə̯˧˩˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 atm-cash.is-there-a-fee,Có mất phí không ạ?,,kɔ˧˥ mət̪˧˥ fi˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.the-card-was-declined,Thẻ bị từ chối,,tɛ˧˩˧ bi˨˩ˀ t̪y˨˩ tʃoj˧˥,,2,vi-agent-v1;ipa=espeak
 atm-cash.what-is-the-exchange-rate,Tỷ giá bao nhiêu ạ?,,t̪i˧˩˧ zaː˧˥ baːw˧ ɲiɛ̯w˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.no-money-came-out,Máy không nhả tiền,,maj˧˥ xoŋ˧ ɲaː˧˩˧ t̪iɛ̯n˨˩,,2,vi-agent-v1;ipa=espeak
-atm-cash.where-can-i-change-money,Đổi tiền ở đâu ạ?,,,,2,vi-agent-v1
+atm-cash.where-can-i-change-money,Đổi tiền ở đâu ạ?,,ɗoj˧˩˧ t̪iɛ̯n˨˩ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.the-machine-is-out-of-service,Máy không hoạt động,,maj˧˥ xoŋ˧ hwaːt̪˨˩ˀ ɗoŋ˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.please-give-me-smaller-notes,Xin cho tôi tờ nhỏ hơn,,sin˧ tʃɔ˧ t̪oj˧ t̪əː˨˩ ɲɔ˧˩˧ həːn˧,,2,vi-agent-v1;ipa=espeak
 atm-cash.do-you-have-change,Có tiền lẻ không ạ?,,kɔ˧˥ t̪iɛ̯n˨˩ lɛ˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.may-i-pay-in,Trả bằng {} được không ạ?,,tʃaː˧˩˧ baŋ˨˩ {} ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.please-charge-in-local-currency,Xin tính bằng tiền Việt,Xin tính bằng nội tệ,sin˧ t̪iɲ˧˥ baŋ˨˩ t̪iɛ̯n˨˩ viɛ̯t̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-atm-cash.where-can-i-get-coins,Đổi tiền xu ở đâu ạ?,,,,2,vi-agent-v1
+atm-cash.where-can-i-get-coins,Đổi tiền xu ở đâu ạ?,,ɗoj˧˩˧ t̪iɛ̯n˨˩ su˧ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.is-there-a-minimum-for-cards,Thẻ có mức tối thiểu không ạ?,,tɛ˧˩˧ kɔ˧˥ myc˧˥ t̪oj˧˥ tiɛ̯w˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 atm-cash.atm,Máy ATM,Cây ATM,maj˧˥ eɪtiːɛm˧,,2,vi-agent-v1;ipa=espeak
 atm-cash.banknote,Tờ tiền,,t̪əː˨˩ t̪iɛ̯n˨˩,,2,vi-agent-v1;ipa=espeak

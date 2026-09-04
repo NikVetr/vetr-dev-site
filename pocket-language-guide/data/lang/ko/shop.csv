@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,카드로 돼요?,,kadeuro dwaeyo?,kʰadɯɾo twɛjo,,2,ko-agent-v1;ipa=rr
-payment-receipt.pay-cash,현금으로 돼요?,,hyeongeumeuro dwaeyo?,,,2,ko-agent-v1
+payment-receipt.pay-cash,현금으로 돼요?,,hyeongeumeuro dwaeyo?,hjʌnɡɯmɯɾo twɛjo,,2,ko-agent-v1;ipa=rr
 payment-receipt.pay-by-qr-code,큐알코드로 돼요?,,kyualkodeuro dwaeyo?,kʰjualkʰodɯɾo twɛjo,,2,ko-agent-v1;ipa=rr
 payment-receipt.a-receipt-please,영수증 주세요,,yeongsujeung juseyo,jʌŋsudʑɯŋ tɕusejo,,2,ko-agent-v1;ipa=rr
 payment-receipt.please-write-the-number,숫자 적어 주세요,,sutja jeogeo juseyo,suttɕa tɕʌɡʌ tɕusejo,,2,ko-agent-v1;ipa=rr

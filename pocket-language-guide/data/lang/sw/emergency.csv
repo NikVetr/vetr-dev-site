@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,Nina maumivu ya kifua,,nˈina mˌaumˈivu ja
 emergency-medical.this-person-is-unconscious,Mtu huyu amepoteza fahamu,,ˈm̩tu hˈuju ˌamepotˈeza fahˈamu,,2,sw-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,Hospitali ya karibu iko wapi?,,hˌospitˈali ja karˈibu ˈiko wˈapi,,2,sw-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Namba ya dharura ni ngapi?,,nˈamba ja ðarˈura ni ŋɡˈapi,,2,sw-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,Kuna daktari anayesema {source}?,,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Kuna daktari anayesema {source}?,,kˈuna daktˈari ˌanajesˈema {source},,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,Nadhani mfupa umevunjika,,naðˈani mfˈupa ˌumevuɲɟˈika,,2,sw-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Tafadhali piga namba yangu ya dharura,,tˌafaðˈali pˈiɡa nˈamba jˈaŋɡu ja ðarˈura,,2,sw-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Nina bima ya safari,,nˈina bˈima ja safˈari,,2,sw-agent-v1;ipa=espeak

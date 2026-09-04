@@ -4,7 +4,7 @@ dietary-needs.no-eggs,계란 빼 주세요,,gyeran ppae juseyo,kjeɾan p͈ɛ tɕ
 dietary-needs.not-spicy,안 맵게 해 주세요,,an maepge hae juseyo,an mɛpke hɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 dietary-needs.less-spicy,덜 맵게 해 주세요,,deol maepge hae juseyo,tʌl mɛpke hɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 dietary-needs.no-peanuts,땅콩 빼 주세요,,ttangkong ppae juseyo,t͈aŋkʰoŋ p͈ɛ tɕusejo,,2,ko-agent-v1;ipa=rr
-dietary-needs.no-nuts,견과류 빼 주세요,,gyeongwaryu ppae juseyo,,,2,ko-agent-v1
+dietary-needs.no-nuts,견과류 빼 주세요,,gyeongwaryu ppae juseyo,kjʌnɡwaɾju p͈ɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 dietary-needs.no-seafood,해산물 빼 주세요,,haesanmul ppae juseyo,hɛsanmul p͈ɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 dietary-needs.i-am-vegetarian,채식주의자예요,,chaesikjuuijayeyo,tɕʰɛsiktɕuɰidʑajejo,,2,ko-agent-v1;ipa=rr
 dietary-needs.i-am-vegan,비건이에요,완전 채식이에요,bigeonieyo,piɡʌniejo,no animal products,2,ko-agent-v1;ipa=rr

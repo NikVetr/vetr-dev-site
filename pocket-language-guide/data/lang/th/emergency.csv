@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,เจ็บหน้าอก,,chep na ok,t
 emergency-medical.this-person-is-unconscious,คนนี้หมดสติ,,khon ni mot sati,kʰon˧ niː˦˥ mot˨˩sa˨˩tiʔ˨˩,,2,th-agent-v1;ipa=thaig2p
 emergency-medical.where-is-the-nearest-hospital,โรงพยาบาลใกล้สุด อยู่ไหน,,rong phayaban klai sut yu nai,roːŋ˧pʰa˦˥jaː˧baːn˧ klaj˥˩ sut˨˩ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 emergency-medical.what-is-the-emergency-number,เบอร์ฉุกเฉินอะไร,,boe chukchoen arai,bɤː˧ tɕʰuk˨˩tɕʰɤːn˩˩˦ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
-emergency-medical.is-there-a-doctor-who-speaks-english,มีหมอพูด{source}ได้ไหม,,mi mo phut {source} dai mai,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,มีหมอพูด{source}ได้ไหม,,mi mo phut {source} dai mai,miː˧ mɔː˩˩˦ pʰuːt˥˩ {source} daːj˥˩ maj˩˩˦,,2,language-slots-v1;ipa=thaig2p
 emergency-medical.i-think-a-bone-is-broken,กระดูกน่าจะหัก,,kraduk na cha hak,kra˨˩raʔ˨˩duːk˨˩ naː˥˩tɕaʔ˨˩ hak˨˩,,2,th-agent-v1;ipa=thaig2p
 emergency-medical.please-call-my-emergency-contact,ช่วยโทรหา คนติดต่อฉุกเฉิน,,chuai tho ha khon tit to chukchoen,tɕʰua̯j˥˩ tʰoː˧ haː˩˩˦ kʰon˧ tit˨˩tɔː˨˩ tɕʰuk˨˩tɕʰɤːn˩˩˦,,2,th-agent-v1;ipa=thaig2p
 emergency-medical.i-have-travel-insurance,มีประกันเดินทาง,,mi prakan doen thang,miː˧ pra˨˩raʔ˨˩kan˧ dɤːn˧tʰaːŋ˧,,2,th-agent-v1;ipa=thaig2p

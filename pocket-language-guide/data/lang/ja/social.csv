@@ -2,19 +2,19 @@ concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
 social-basics.hello,こんにちは,,konnichiwa,koɴɲitɕiwa,,2,japanese-reviewed-v6;ipa=hepburn
 quick-responses.please-go-ahead,どうぞ,,dōzo,doːzo,,2,japanese-reviewed-v6;ipa=hepburn
 phone-translation.i-am-using-phone-translation,スマホで翻訳しています,,sumaho de hon'yaku shiteimasu,sɯmaho de hoɴjakɯ ɕiteimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
-sim-data.i-would-like-a-tourist-sim,旅行者用のSIMカードをお願いします,,ryokōshayō no shimu kādo o onegaishimasu,,,2,ja-agent-v1
+sim-data.i-would-like-a-tourist-sim,旅行者用のSIMカードをお願いします,,ryokōshayō no shimu kādo o onegaishimasu,ɾjokoːɕajoː no ɕimɯ kaːdo o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
 children.cannot-find-my-child,子供が迷子になりました,,kodomo ga maigo ni narimashita,kodomo ɡa maiɡo ɲi naɾimaɕita,,2,ja-agent-v1;ipa=hepburn
 etiquette.is-this-allowed,これは大丈夫ですか？,,kore wa daijōbu desu ka?,koɾe wa daidʑoːbɯ desɯ ka,,2,ja-agent-v1;ipa=hepburn
 phone-text-power.please-type-it-for-me,入力してください,,nyūryoku shite kudasai,ɲɯːɾjokɯ ɕite kɯdasai,,2,ja-agent-v1;ipa=hepburn
 quick-responses.yes-right,はい,,hai,hai,,2,japanese-reviewed-v6;ipa=hepburn
 phone-translation.please-speak-toward-the-phone,スマホに向かって話してください,,sumaho ni mukatte hanashite kudasai,sɯmaho ɲi mɯkatte hanaɕite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
-sim-data.may-i-use-your-wifi,Wi-Fiを使ってもいいですか？,,wai-fai o tsukatte mo ii desu ka?,,,2,ja-agent-v1
+sim-data.may-i-use-your-wifi,Wi-Fiを使ってもいいですか？,,wai-fai o tsukatte mo ii desu ka?,waiɸai o tsɯkatte mo iː desɯ ka,,2,ja-agent-v1;ipa=hepburn
 children.make-an-announcement,館内放送をお願いします,,kannai hōsō o onegaishimasu,kaɴnai hoːsoː o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
 etiquette.is-tipping-expected,チップは必要ですか？,,chippu wa hitsuyō desu ka?,tɕippɯ wa çitsɯjoː desɯ ka,,2,ja-agent-v1;ipa=hepburn
 social-basics.hello-polite,失礼します,,shitsurei shimasu,ɕitsɯɾei ɕimasɯ,,1,ja-agent-v1;ipa=hepburn
 social-basics.good-morning,おはようございます,,ohayō gozaimasu,ohajoː ɡozaimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
 quick-responses.no-not,いいえ,,iie,iːe,,2,japanese-reviewed-v6;ipa=hepburn
-communication.do-you-speak-english,{source}を話せますか？,,{source} o hanasemasu ka?,,,2,language-slots-v1
+communication.do-you-speak-english,{source}を話せますか？,,{source} o hanasemasu ka?,{source} o hanasemasɯ ka,,2,language-slots-v1;ipa=hepburn
 phone-translation.one-sentence-at-a-time-please,一文ずつ話してください,,ichibun zutsu hanashite kudasai,itɕibɯɴ zɯtsɯ hanaɕite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
 phone-text-power.please-use-simple-words,簡単な言葉で話してください,,kantan na kotoba de hanashite kudasai,kaɴtaɴ na kotoba de hanaɕite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
 sim-data.how-much-data-is-included,データ容量はどのくらいですか？,,dēta yōryō wa dono kurai desu ka?,deːta joːɾjoː wa dono kɯɾai desɯ ka,,2,ja-agent-v1;ipa=hepburn
@@ -44,7 +44,7 @@ quick-responses.works-okay,それでいいです,,sore de ii desu,soɾe de iː d
 social-basics.you-are-welcome,どういたしまして,,dō itashimashite,doː itaɕimaɕite,,2,japanese-reviewed-v6;ipa=hepburn
 communication.please-say-it-again,もう一度言ってください,,mō ichido itte kudasai,moː itɕido itte kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
 phone-text-power.please-confirm,確認してください,,kakunin shite kudasai,kakɯɲiɴ ɕite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
-sim-data.do-you-have-an-esim,eSIMはありますか？,,īshimu wa arimasu ka?,,,2,ja-agent-v1
+sim-data.do-you-have-an-esim,eSIMはありますか？,,īshimu wa arimasu ka?,iːɕimɯ wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
 children.suitable-for-children,子供向けですか？,,kodomo muke desu ka?,kodomo mɯke desɯ ka,,2,ja-agent-v1;ipa=hepburn
 etiquette.may-i-sit-here,ここに座ってもいいですか？,,koko ni suwatte mo ii desu ka?,koko ɲi sɯwatte mo iː desɯ ka,,2,ja-agent-v1;ipa=hepburn
 quick-responses.does-not-work-no,無理です,,muri desu,mɯɾi desɯ,,2,ja-agent-v1;ipa=hepburn
@@ -64,21 +64,21 @@ children.crib,ベビーベッドはありますか？,,bebī beddo wa arimasu ka
 etiquette.did-not-mean-to-offend,知らずに失礼しました,,shirazu ni shitsurei shimashita,ɕiɾazɯ ɲi ɕitsɯɾei ɕimaɕita,,2,ja-agent-v1;ipa=hepburn
 social-basics.no-problem,問題ありません,,mondai arimasen,moɴdai aɾimaseɴ,,2,ja-agent-v1;ipa=hepburn
 social-basics.i-do-not-know,知りません,,shirimasen,ɕiɾimaseɴ,,2,japanese-reviewed-v6;ipa=hepburn
-sim-data.please-write-the-wifi-password,Wi-Fiのパスワードを書いてください,,wai-fai no pasuwādo o kaite kudasai,,,2,ja-agent-v1
+sim-data.please-write-the-wifi-password,Wi-Fiのパスワードを書いてください,,wai-fai no pasuwādo o kaite kudasai,waiɸai no pasɯwaːdo o kaite kɯdasai,,2,ja-agent-v1;ipa=hepburn
 children.warm-this-bottle,哺乳瓶を温めてください,,honyūbin o atatamete kudasai,hoɲɯːbiɴ o atatamete kɯdasai,,2,ja-agent-v1;ipa=hepburn
 etiquette.what-is-customary,ここではどうするのが普通ですか？,,koko de wa dō suru no ga futsū desu ka?,koko de wa doː sɯɾɯ no ɡa ɸɯtsɯː desɯ ka,,2,ja-agent-v1;ipa=hepburn
-sim-data.sim-card,SIMカード,,shimu kādo,,,2,ja-agent-v1
+sim-data.sim-card,SIMカード,,shimu kādo,ɕimɯ kaːdo,,2,ja-agent-v1;ipa=hepburn
 children.car-seat,チャイルドシートが必要です,,chairudo shīto ga hitsuyō desu,tɕaiɾɯdo ɕiːto ɡa çitsɯjoː desɯ,,2,ja-agent-v1;ipa=hepburn
 etiquette.keep-the-change,お釣りは結構です,,otsuri wa kekkō desu,otsɯɾi wa kekkoː desɯ,,2,ja-agent-v1;ipa=hepburn
 sim-data.where-can-i-buy-a-plug-adapter,変換プラグはどこで買えますか？,,henkan puragu wa doko de kaemasu ka?,heɴkaɴ pɯɾaɡɯ wa doko de kaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
 children.stroller,ベビーカー,,bebīkā,bebiːkaː,,2,ja-agent-v1;ipa=hepburn
 sim-data.mobile-data,モバイルデータ,,mobairu dēta,mobaiɾɯ deːta,,2,ja-agent-v1;ipa=hepburn
 children.playground,遊び場はありますか？,,asobiba wa arimasu ka?,asobiba wa aɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
-sim-data.can-i-top-up-this-sim,このSIMにチャージできますか？,,kono shimu ni chāji dekimasu ka?,,,2,ja-agent-v1
+sim-data.can-i-top-up-this-sim,このSIMにチャージできますか？,,kono shimu ni chāji dekimasu ka?,kono ɕimɯ ɲi tɕaːdʑi dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
 sim-data.top-up,チャージ,追加チャージ,chāji,tɕaːdʑi,,2,ja-agent-v1;ipa=hepburn
 sim-data.is-there-coverage-in,{}は電波が入りますか？,,{} wa denpa ga hairimasu ka?,{} wa deɴpa ɡa haiɾimasɯ ka,,2,ja-agent-v1;ipa=hepburn
 sim-data.signal,電波,,denpa,deɴpa,,2,ja-agent-v1;ipa=hepburn
-sim-data.esim,eSIM,,īshimu,,,2,ja-agent-v1
+sim-data.esim,eSIM,,īshimu,iːɕimɯ,,2,ja-agent-v1;ipa=hepburn
 sim-data.prepaid,プリペイド,,puripeido,pɯɾipeido,,2,ja-agent-v1;ipa=hepburn
 sim-data.roaming,ローミング,,rōmingu,ɾoːmiɴɡɯ,,2,ja-agent-v1;ipa=hepburn
 communication.i-do-not-speak-this-language,{target}は話せません,,{target} wa hanasemasen,{target} wa hanasemaseɴ,,2,language-slots-v1;ipa=hepburn

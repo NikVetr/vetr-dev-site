@@ -61,7 +61,7 @@ social-basics.good-night,Bonne nuit,,bɔn nyˈi,,2,fr-agent-v1;ipa=espeak
 social-basics.okay-fine-i-am-okay,Ça va,,sa vˈa,,2,fr-agent-v1;ipa=espeak
 communication.i-do-not-speak-this-language,Je ne parle pas {target},,ʒə nə paʁl pˈa {target},,2,language-slots-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,Je parle très peu {target},,ʒə paʁl tʁɛ pˈø {target},,2,language-slots-v1;ipa=espeak
-communication.do-you-speak-english,Parlez-vous {source} ?,,,,2,language-slots-v1
+communication.do-you-speak-english,Parlez-vous {source} ?,,paʁlˈevˈu {source},,2,language-slots-v1;ipa=espeak
 communication.please-speak-more-slowly,"Parlez plus lentement, s'il vous plaît",,"paʁle ply lɑ̃tmˈɑ̃, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,Je ne comprends pas,,ʒə nə kɔ̃pʁɑ̃ pˈa,,2,fr-agent-v1;ipa=espeak
 communication.i-cannot-read-understand,Je ne sais pas lire ça,,ʒə nə sɛ pa liʁ sˈa,,2,fr-agent-v1;ipa=espeak

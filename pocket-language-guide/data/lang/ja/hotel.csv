@@ -36,7 +36,7 @@ laundry.dry-cleaning,ドライクリーニング,,dorai kurīningu,doɾai kɯɾi
 room-problems.the-heating-does-not-work,暖房が効きません,,danbō ga kikimasen,daɴboː ɡa kikimaseɴ,,2,ja-agent-v1;ipa=hepburn
 laundry.dryer,乾燥機,,kansōki,kaɴsoːki,,2,ja-agent-v1;ipa=hepburn
 laundry.coin-operated,コイン式,,koinshiki,koiɴɕiki,,2,ja-agent-v1;ipa=hepburn
-hotel-basics.is-wi-fi-free,Wi-Fiは無料ですか？,,wai-fai wa muryō desu ka?,,,2,japanese-reviewed-v6
+hotel-basics.is-wi-fi-free,Wi-Fiは無料ですか？,,wai-fai wa muryō desu ka?,waiɸai wa mɯɾjoː desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-requests.another-towel-please,タオルをもう一枚お願いします,,taoru o mō ichimai onegaishimasu,taoɾɯ o moː itɕimai oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-words.luggage-storage,荷物預かり,,nimotsu azukari,ɲimotsɯ azɯkaɾi,,2,japanese-reviewed-v6;ipa=hepburn
 hotel-basics.how-much-per-night,一泊いくらですか？,,ippaku ikura desu ka?,ippakɯ ikɯɾa desɯ ka,,2,ja-agent-v1;ipa=hepburn

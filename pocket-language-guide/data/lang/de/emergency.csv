@@ -113,7 +113,7 @@ emergency-medical.i-have-chest-pain,Ich habe Brustschmerzen.,,ɪç hɑːbə bɾ�
 emergency-medical.this-person-is-unconscious,Die Person ist bewusstlos.,,diː pɛɾzˈoːn ɪst bəvˈʊsʃtloːs,,2,de-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,Wo ist das nächste Krankenhaus?,,vˌoː ɪst das nˈɛçstə kɾˈankənhˌaʊs,,2,de-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Wie lautet die Notrufnummer?,,viː lˈaʊtət diː nˈɔtɾʊfnˌʊmɜ,,2,de-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,"Gibt es einen Arzt, der {source} spricht?",,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,"Gibt es einen Arzt, der {source} spricht?",,"ɡˈiːpt ɛs ˌaɪnən ˈaɾtst, dɛɾ {source} ʃpɾˈɪçt",,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,"Ich glaube, etwas ist gebrochen.",,"ɪç ɡlˈaʊbə, ˈɛtvɑːs ɪst ɡəbɾˈɔxən",,2,de-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Bitte rufen Sie meinen Notfallkontakt an.,,bˈɪtə rˈuːfən ziː mˌaɪnən nˈɔtfalkˌɔntakt ˈan,,2,de-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Ich habe eine Reiseversicherung.,,ɪç hɑːbə ˌaɪnə rˌaɪzeːfɛɾzˈɪçərˌʊŋ,,2,de-agent-v1;ipa=espeak

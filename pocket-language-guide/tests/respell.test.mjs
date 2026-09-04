@@ -505,3 +505,41 @@ test('a glide with a vowel on both sides opens the next syllable', () => {
   // And a glide before a *consonant* closes its own syllable rather than moving.
   assert.equal(split('ˈajta'), '|aj| t|a|');
 });
+
+test('a rule can ask what vowel came before this syllable, not just which nucleus', () => {
+  // `after_nucleus` is an exact match on the whole previous nucleus, which is as far
+  // as an enumeration reaches: the Arabic hiatus seat and Thai's glide seat both
+  // want "the vowel immediately before this onset", and both had lists of short
+  // monophthongs because that is all an exact string can say. `after_nucleus_tail`
+  // is the last phoneme of that nucleus -- the mirror of `if_nucleus_head` by
+  // position rather than by name, which matters: the *head* of a rising diphthong is
+  // its glide, so after Korean 돼 /wɛ/ the head asks about a labial consonant where
+  // the vowel before the seat is front /ɛ/.
+  const phonemes = (/** @type {any} */ first) => [
+    first,
+    { slot: 'nucleus', ipa: 'a', out: 'a' },
+    { slot: 'nucleus', ipa: 'ɪ', out: 'i' }, { slot: 'nucleus', ipa: 'i', out: 'i' },
+    { slot: 'nucleus', ipa: 'u', out: 'u' },
+    { slot: 'any', ipa: 't', out: 't' }, { slot: 'any', ipa: 'w', out: 'w' },
+    { slot: 'any', ipa: 'ː', out: '' }, { slot: 'any', ipa: '˥', out: '' },
+  ];
+  const words = ['taɪa', 'twia', 'ti˥a', 'tiːa', 'tua'];
+  const respeller = (/** @type {any} */ first) => createRespeller({
+    rules: { source: 'x', policy: { stress: 'none', syllable_separator: '-' }, phonemes: phonemes(first) },
+    targetIpa: words.flatMap((w) => [w, w, w]),
+  });
+
+  const tail = respeller({ slot: 'nucleus', ipa: 'a', out: 'Y', after_nucleus_tail: 'ɪ i' });
+  // A falling diphthong is classed by its offglide, which is the half Arabic's own
+  // هَيْئَة spells a seat for, and a rising one by its vowel rather than its glide.
+  assert.equal(tail.respell('taɪa'), 'tai-Y', '/aɪ/ ends in the front vowel');
+  assert.equal(tail.respell('twia'), 'twi-Y', 'and /wi/ ends in one too, though it starts with /w/');
+  // Length and tone belong to the vowel, so neither hides it. Thai keeps tone, and
+  // its two fixups had been comparing `i` against `i˥` and firing on no Mandarin row.
+  assert.equal(tail.respell('tiːa'), 'ti-Y', 'a long vowel is the same vowel');
+  assert.equal(tail.respell('ti˥a'), 'ti-Y', 'so is a toned one');
+  assert.equal(tail.respell('tua'), 'tu-a', 'and a back vowel is not in the class');
+
+  const exact = respeller({ slot: 'nucleus', ipa: 'a', out: 'Y', after_nucleus: 'i' });
+  assert.equal(exact.respell('ti˥a'), 'ti-a', 'which is what the exact form cannot say');
+});

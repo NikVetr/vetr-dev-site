@@ -8,7 +8,7 @@ weather.snow,눈,,nun,nun,,2,ko-agent-v1;ipa=rr
 weather.wind,바람,,baram,paɾam,,2,ko-agent-v1;ipa=rr
 weather.storm,태풍,폭풍,taepung,tʰɛpʰuŋ,typhoon,2,ko-agent-v1;ipa=rr
 weather.ice,빙판,얼음,bingpan,piŋpʰan,icy surface,2,ko-agent-v1;ipa=rr
-weather.fog,안개,,angae,,,2,ko-agent-v1
+weather.fog,안개,,angae,anɡɛ,,2,ko-agent-v1;ipa=rr
 weather.heat,더위,,deowi,tʌwi,,2,ko-agent-v1;ipa=rr
 weather.cold,추위,,chuwi,tɕʰuwi,,2,ko-agent-v1;ipa=rr
 weather.humid,습해요,,seupaeyo,sɯpʰɛjo,,2,ko-agent-v1;ipa=rr

@@ -37,11 +37,11 @@ toilets.not-for-drinking,음용 불가,마시는 물이 아닙니다,eumyong bul
 accessibility.guide-dog,제 안내견이에요,,je annaegyeonieyo,tɕe annɛɡjʌniejo,,2,ko-agent-v1;ipa=rr
 toilets.accessible-toilet,장애인 화장실,다목적 화장실,jangaein hwajangsil,tɕaŋɛin hwadʑaŋsil,,2,ko-agent-v1;ipa=rr
 toilets.where-can-i-wash-my-hands,손 어디서 씻어요?,,son eodiseo ssiseoyo?,son ʌdisʌ s͈isʌjo,,2,ko-agent-v1;ipa=rr
-toilets.can-i-flush-the-paper,휴지 변기에 버려도 돼요?,,hyuji byeongie beoryeodo dwaeyo?,,,2,ko-agent-v1
+toilets.can-i-flush-the-paper,휴지 변기에 버려도 돼요?,,hyuji byeongie beoryeodo dwaeyo?,hjudʑi pjʌnɡie pʌɾjʌdo twɛjo,,2,ko-agent-v1;ipa=rr
 toilets.is-there-a-toilet-on-board,차 안에 화장실 있어요?,,cha ane hwajangsil isseoyo?,tɕʰa ane hwadʑaŋsil is͈ʌjo,,2,ko-agent-v1;ipa=rr
 toilets.the-toilet-will-not-flush,물이 안 내려가요,,muri an naeryeogayo,muɾi an nɛɾjʌɡajo,,2,ko-agent-v1;ipa=rr
 toilets.baby-change,기저귀 교환대,,gijeogwi gyohwandae,kidʑʌɡwi kjohwandɛ,,2,ko-agent-v1;ipa=rr
-toilets.squat-toilet,화변기,쪼그려 앉는 변기,hwabyeongi,,,2,ko-agent-v1
+toilets.squat-toilet,화변기,쪼그려 앉는 변기,hwabyeongi,hwabjʌnɡi,,2,ko-agent-v1;ipa=rr
 building-help.what-room-number-is-this,여기 몇 호실이에요?,,yeogi myeot hosirieyo?,jʌɡi mjʌt hosiɾiejo,,2,ko-agent-v1;ipa=rr
 building-help.i-am-lost,길을 잃었어요,,gireul ireosseoyo,kiɾɯl iɾʌs͈ʌjo,,2,ko-agent-v1;ipa=rr
 building-help.where-is-reception,안내데스크 어디예요?,,annaedeseukeu eodiyeyo?,annɛdesɯkʰɯ ʌdijejo,,2,ko-agent-v1;ipa=rr

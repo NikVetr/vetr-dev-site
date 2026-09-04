@@ -1,11 +1,11 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-directions.where-is,{} ở đâu ạ?,,,,2,vi-agent-v1
+directions.where-is,{} ở đâu ạ?,,{} əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 directions.how-do-i-get-to,Đi {} thế nào ạ?,,ɗi˧ {} te˧˥ naːw˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 directions.is-it-far,Có xa không ạ?,,kɔ˧˥ saː˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-directions.how-long-on-foot,Đi bộ mất bao lâu ạ?,,,,2,vi-agent-v1
+directions.how-long-on-foot,Đi bộ mất bao lâu ạ?,,ɗi˧ bo˨˩ˀ mət̪˧˥ baːw˧ ləw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,Xin chỉ giúp trên bản đồ,,sin˧ tʃi˧˩˧ zup˧˥ tʃen˧ baːn˧˩˧ ɗo˨˩,,2,vi-agent-v1;ipa=espeak
-directions.where-is-the-nearest,{} gần nhất ở đâu ạ?,,,,2,vi-agent-v1
-directions.where-am-i,Tôi đang ở đâu ạ?,,,,2,vi-agent-v1
+directions.where-is-the-nearest,{} gần nhất ở đâu ạ?,,{} ɣən˨˩ ɲət̪˧˥ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+directions.where-am-i,Tôi đang ở đâu ạ?,,t̪oj˧ ɗaːŋ˧ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 directions.which-way,Đi hướng nào ạ?,,ɗi˧ hyə̯ŋ˧˥ naːw˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 directions.can-i-walk-there,Đi bộ đến được không ạ?,,ɗi˧ bo˨˩ˀ ɗen˧˥ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 directions.how-far-is-it,Bao xa ạ?,,baːw˧ saː˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -34,7 +34,7 @@ taxi.we-need-to-catch-the-high-speed-train,Chúng tôi phải kịp tàu cao t�
 taxi.please-use-the-meter,Xin bật đồng hồ,,sin˧ bət̪˨˩ˀ ɗoŋ˨˩ ho˨˩,,2,vi-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Cho tôi xuống đây,,tʃɔ˧ t̪oj˧ suə̯ŋ˧˥ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
 transit-rides.two-tickets,Cho tôi hai vé,,tʃɔ˧ t̪oj˧ haːj˧ vɛ˧˥,,2,vi-agent-v1;ipa=espeak
-transit-rides.where-is-the-subway-station,Ga tàu điện ngầm ở đâu ạ?,Ga metro ở đâu ạ?,,,2,vi-agent-v1
+transit-rides.where-is-the-subway-station,Ga tàu điện ngầm ở đâu ạ?,Ga metro ở đâu ạ?,ɣaː˧ t̪aw˨˩ ɗiɛ̯n˨˩ˀ ŋəm˨˩ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Xe này có đi {} không ạ?,,sɛ˧ naj˨˩ kɔ˧˥ ɗi˧ {} xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 transit-rides.what-is-the-next-stop,Trạm sau là trạm nào ạ?,,tʃaːm˨˩ˀ saw˧ laː˨˩ tʃaːm˨˩ˀ naːw˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,Xin báo tôi chỗ xuống,,sin˧ baːw˧˥ t̪oj˧ tʃo˧ˀ˥ suə̯ŋ˧˥,,2,vi-agent-v1;ipa=espeak
@@ -46,12 +46,12 @@ transit-rides.which-platform,Sân ga nào ạ?,,sən˧ ɣaː˧ naːw˨˩ aː˨˩
 transit-rides.what-time-is-the-next-one,Chuyến sau mấy giờ ạ?,,tʃwiɛ̯n˧˥ saw˧ məɪ˧˥ zəː˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 transit-rides.i-went-past-my-stop,Tôi đi quá trạm rồi,,t̪oj˧ ɗi˧ kwaː˧˥ tʃaːm˨˩ˀ zoj˨˩,,2,vi-agent-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Vé này dùng được không ạ?,,vɛ˧˥ naj˨˩ zuŋ˨˩ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-place-words.visitor-center,Trung tâm du khách,,,,2,vi-agent-v1
+place-words.visitor-center,Trung tâm du khách,,tʃuŋ˧ t̪əm˧ zu˧ xac˧˥,,2,vi-agent-v1;ipa=espeak
 place-words.railway-station,Ga tàu hỏa,Ga xe lửa,ɣaː˧ t̪aw˨˩ hwaː˧˩˧,,2,vi-agent-v1;ipa=espeak
 place-words.airport,Sân bay,,sən˧ baj˧,,2,vi-agent-v1;ipa=espeak
 place-words.service-desk,Quầy dịch vụ,,kwəɪ˨˩ zic˨˩ˀ vu˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 place-words.bus-stop,Trạm xe buýt,Bến xe buýt,tʃaːm˨˩ˀ sɛ˧ bwit̪˧˥,,2,vi-agent-v1;ipa=espeak
-place-words.luggage-storage,Nơi gửi hành lý,,,,2,vi-agent-v1
+place-words.luggage-storage,Nơi gửi hành lý,,nəːj˧ ɣyj˧˩˧ haɲ˨˩ li˧˥,,2,vi-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,Khu du lịch,Điểm tham quan,xu˧ zu˧ lic˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 border-customs.i-am-a-tourist,Tôi đi du lịch,,t̪oj˧ ɗi˧ zu˧ lic˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Hộ chiếu của tôi đây,,ho˨˩ˀ tʃiɛ̯w˧˥ kuə̯˧˩˧ t̪oj˧ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
@@ -62,23 +62,23 @@ border-customs.i-am-here-for-business,Tôi đi công tác,,t̪oj˧ ɗi˧ koŋ˧ 
 border-customs.i-have-a-return-ticket,Tôi có vé khứ hồi,,t̪oj˧ kɔ˧˥ vɛ˧˥ xy˧˥ hoj˨˩,,2,vi-agent-v1;ipa=espeak
 border-customs.i-am-visiting-family,Tôi thăm gia đình,,t̪oj˧ tam˧ zaː˧ ɗiɲ˨˩,,2,vi-agent-v1;ipa=espeak
 border-customs.this-is-for-personal-use,Đồ dùng cá nhân,,ɗo˨˩ zuŋ˨˩ kaː˧˥ ɲən˧,,2,vi-agent-v1;ipa=espeak
-border-customs.i-am-in-transit,Tôi quá cảnh,,,,2,vi-agent-v1
+border-customs.i-am-in-transit,Tôi quá cảnh,,t̪oj˧ kwaː˧˥ kaɲ˧˩˧,,2,vi-agent-v1;ipa=espeak
 border-customs.i-have-in-cash,Tôi mang theo {} tiền mặt,,t̪oj˧ maːŋ˧ tɛw˧ {} t̪iɛ̯n˨˩ mat̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 border-customs.this-is-a-gift,Đây là quà,,ɗəɪ˧ laː˨˩ kwaː˨˩,,2,vi-agent-v1;ipa=espeak
-border-customs.where-do-i-collect-my-baggage,Lấy hành lý ở đâu ạ?,,,,2,vi-agent-v1
-border-customs.how-long-may-i-stay,Tôi được ở bao lâu ạ?,,,,2,vi-agent-v1
+border-customs.where-do-i-collect-my-baggage,Lấy hành lý ở đâu ạ?,,ləɪ˧˥ haɲ˨˩ li˧˥ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+border-customs.how-long-may-i-stay,Tôi được ở bao lâu ạ?,,t̪oj˧ ɗyə̯c˨˩ˀ əː˧˩˧ baːw˧ ləw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 border-customs.i-have-a-connecting-flight,Tôi có chuyến bay nối,,t̪oj˧ kɔ˧˥ tʃwiɛ̯n˧˥ baj˧ noj˧˥,,2,vi-agent-v1;ipa=espeak
-border-customs.may-i-have-an-entry-stamp,Cho tôi xin dấu nhập cảnh ạ,,,,2,vi-agent-v1
+border-customs.may-i-have-an-entry-stamp,Cho tôi xin dấu nhập cảnh ạ,,tʃɔ˧ t̪oj˧ sin˧ zəw˧˥ ɲəp˨˩ˀ kaɲ˧˩˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 border-customs.visa,Thị thực,Visa,ti˨˩ˀ tyc˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 border-customs.i-have-no-food-or-plants,Tôi không mang thực phẩm hay cây,,t̪oj˧ xoŋ˧ maːŋ˧ tyc˨˩ˀ fəm˧˩˧ haj˧ kəɪ˧,,2,vi-agent-v1;ipa=espeak
-border-customs.passport-control,Nhập cảnh,Kiểm soát hộ chiếu,,,2,vi-agent-v1
+border-customs.passport-control,Nhập cảnh,Kiểm soát hộ chiếu,ɲəp˨˩ˀ kaɲ˧˩˧,,2,vi-agent-v1;ipa=espeak
 border-customs.customs,Hải quan,,haːj˧˩˧ kwaːn˧,,2,vi-agent-v1;ipa=espeak
-border-customs.baggage-claim,Nhận hành lý,,,,2,vi-agent-v1
+border-customs.baggage-claim,Nhận hành lý,,ɲən˨˩ˀ haɲ˨˩ li˧˥,,2,vi-agent-v1;ipa=espeak
 border-customs.customs-declaration,Tờ khai hải quan,,t̪əː˨˩ xaːj˧ haːj˧˩˧ kwaːn˧,,2,vi-agent-v1;ipa=espeak
-border-customs.arrival-card,Tờ khai nhập cảnh,,,,2,vi-agent-v1
-border-customs.transit,Quá cảnh,,,,2,vi-agent-v1
+border-customs.arrival-card,Tờ khai nhập cảnh,,t̪əː˨˩ xaːj˧ ɲəp˨˩ˀ kaɲ˧˩˧,,2,vi-agent-v1;ipa=espeak
+border-customs.transit,Quá cảnh,,kwaː˧˥ kaɲ˧˩˧,,2,vi-agent-v1;ipa=espeak
 border-customs.boarding-pass,Thẻ lên máy bay,,tɛ˧˩˧ len˧ maj˧˥ baj˧,,2,vi-agent-v1;ipa=espeak
-pickup-meeting.where-is-the-pickup-point,Điểm đón khách ở đâu ạ?,,,,2,vi-agent-v1
+pickup-meeting.where-is-the-pickup-point,Điểm đón khách ở đâu ạ?,,ɗiɛ̯m˧˩˧ ɗɔn˧˥ xac˧˥ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 pickup-meeting.please-send-me-the-pickup-point,Xin gửi điểm đón cho tôi,,sin˧ ɣyj˧˩˧ ɗiɛ̯m˧˩˧ ɗɔn˧˥ tʃɔ˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 pickup-meeting.please-pick-us-up-here,Xin đón chúng tôi ở đây,,sin˧ ɗɔn˧˥ tʃuŋ˧˥ t̪oj˧ əː˧˩˧ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
 pickup-meeting.meet-us-at,Gặp chúng tôi ở {},,ɣap˨˩ˀ tʃuŋ˧˥ t̪oj˧ əː˧˩˧ {},,2,vi-agent-v1;ipa=espeak
@@ -103,7 +103,7 @@ common-signs.vacant,Trống,,tʃoŋ˧˥,,2,vi-agent-v1;ipa=espeak
 common-signs.caution,Chú ý,Cẩn thận,tʃu˧˥ i˧˥,,2,vi-agent-v1;ipa=espeak
 common-signs.no-entry,Cấm vào,,kəm˧˥ vaːw˨˩,,2,vi-agent-v1;ipa=espeak
 common-signs.no-smoking,Cấm hút thuốc,,kəm˧˥ hut̪˧˥ tuə̯c˧˥,,2,vi-agent-v1;ipa=espeak
-common-signs.no-photography,Cấm chụp ảnh,,,,2,vi-agent-v1
+common-signs.no-photography,Cấm chụp ảnh,,kəm˧˥ tʃup˨˩ˀ aɲ˧˩˧,,2,vi-agent-v1;ipa=espeak
 common-signs.do-not-touch,Không chạm vào,Cấm sờ,xoŋ˧ tʃaːm˨˩ˀ vaːw˨˩,,2,vi-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Tạm đóng cửa,Tạm nghỉ,t̪aːm˨˩ˀ ɗɔŋ˧˥ kyə̯˧˩˧,,2,vi-agent-v1;ipa=espeak
 common-signs.open-operating,Đang hoạt động,Đang mở cửa,ɗaːŋ˧ hwaːt̪˨˩ˀ ɗoŋ˨˩ˀ,,2,vi-agent-v1;ipa=espeak

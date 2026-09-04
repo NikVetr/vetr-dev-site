@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,Tenho dor no peito,,tˌeɲʊ dˈor nʊ pˈe�
 emergency-medical.this-person-is-unconscious,Esta pessoa está inconsciente,,ˌɛstæ pˌesˈoæ estˌa ˌiŋkoŋsiˈeɪŋtʃy,,2,pt-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,Onde fica o hospital mais próximo?,,ˌoŋdʒy fˈikæ ʊ ˌospitˈaʊ mˈaɪs prˈɔsimʊ,,2,pt-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Qual é o número de emergência?,,kwˈaʊ ɛ ʊ nˈũmeɾʊ dʒj ˌemeɾəʒˈeɪŋsjæ,,2,pt-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,Há algum médico que fale {source}?,,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,Há algum médico que fale {source}?,,a aʊɡˈũŋ mˈɛdʒikʊ ky fˈaly {source},,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,Acho que parti um osso,Acho que quebrei um osso,ˈaʃʊ ky paɾətʃˈi ũŋ ˈosʊ,,2,pt-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Ligue para o meu contacto de emergência,meu contato de emergência,lˈiɡy pˌaɾæ ʊ meʊ kˌoŋtˈaktʊ dʒj ˌemeɾəʒˈeɪŋsjæ,,2,pt-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Tenho seguro de viagem,,tˌeɲʊ sˌeɡˈuɾʊ dʒy vˌiˈaʒeɪŋ,,2,pt-agent-v1;ipa=espeak

@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,मेरे सीने में दर�
 emergency-medical.this-person-is-unconscious,यह व्यक्ति बेहोश है,,yah vyakti behoś hai,jˌəh ʋjˈʌktɪ beːhˈoːʃ hɛː,,2,hi-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,सबसे नज़दीकी अस्पताल कहाँ है?,,sabse nazdīkī aspatāl kahāṁ hai?,sˈʌbsˌeː nˌəzdˈiːki ˌʌspətˈaːl kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,इमरजेंसी नंबर क्या है?,,imarjeṁsī naṁbar kyā hai?,ˌɪməɾɟˈẽːsi nˈʌmbəɾ kːjaː hɛː,,2,hi-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,क्या कोई डॉक्टर {source} बोलता है?,,kyā koī ḍokṭar {source} boltā hai?,,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,क्या कोई डॉक्टर {source} बोलता है?,,kyā koī ḍokṭar {source} boltā hai?,kːjaː kˈoːi ɖˈɔkʈəɾ {source} bˈoːltˌaː hɛː,,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,लगता है हड्डी टूट गई है,,lagtā hai haḍḍī ṭūṭ gaī hai,lˈʌɡtˌaː hɛː hˈʌɖɖi ʈˈuːʈ ɡˈʌi hɛː,,2,hi-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,मेरे इमरजेंसी नंबर पर फ़ोन कीजिए,,mere imarjeṁsī naṁbar par fon kījie,mˌeːɾeː ˌɪməɾɟˈẽːsi nˈʌmbəɾ pˈʌɾ fˈoːn kˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,मेरा यात्रा बीमा है,,merā yātrā bīmā hai,mˌeːɾaː jˈaːtɾaː bˈiːmaː hɛː,,2,hi-agent-v1;ipa=espeak

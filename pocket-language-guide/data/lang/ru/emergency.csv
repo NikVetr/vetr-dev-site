@@ -16,7 +16,7 @@ emergency-medical.i-have-chest-pain,У меня боль в груди.,,U menya
 emergency-medical.this-person-is-unconscious,Этот человек без сознания.,,Etot chelovek bez soznaniya.,ˈɛtʌt tʃʲiɭʌvʲˈek bʲˈes sʌznˈɑnʲija,,2,ru-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,Где ближайшая больница?,,Gde blizhayshaya bolʼnitsa?,ɡdʲˈe bɭʲiʒˈɑjʃʌja bʌɭnʲˈitsa,,2,ru-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Какой номер экстренных служб?,,Kakoy nomer ekstrennykh sluzhb?,kakˈoj nˈomʲir ˈɛkstrʲinnɨx sɭˈuʃp,,2,ru-agent-v1;ipa=espeak
-emergency-medical.is-there-a-doctor-who-speaks-english,"Есть врач, который говорит на {source}?",,"Yestʼ vrach, kotoryy govorit na {source}?",,,2,language-slots-v1
+emergency-medical.is-there-a-doctor-who-speaks-english,"Есть врач, который говорит на {source}?",,"Yestʼ vrach, kotoryy govorit na {source}?","jestʲ vrˈɑtʃʲ, kʌtˈorɨj ɡʌvʌrʲˈit nˈɑ {source}",,2,language-slots-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,"Кажется, у меня перелом.",,"Kazhetsya, u menya perelom.","kˈɑʒɨtsʌ, ˈu mʲinʲˈɑ pʲirʲiɭˈom",,2,ru-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,Позвоните моему экстренному контакту.,Позвоните моим родственникам.,Pozvonite moyemu ekstrennomu kontaktu.,pʌzvʌnʲˈitʲi mʌjˈemu ˈɛkstrʲinnʌmu kʌntˈɑktu,,2,ru-agent-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,У меня есть туристическая страховка.,,U menya yestʼ turisticheskaya strakhovka.,ˈu mʲinʲˈɑ jestʲ turʲisʲtʲˈitʃʲiskʌja straxˈofka,,2,ru-agent-v1;ipa=espeak

@@ -14,7 +14,7 @@ social-basics.good-night,ราตรีสวัสดิ์,ฝันดี,ra
 social-basics.okay-fine-i-am-okay,สบายดี,โอเค,sabai di,sa˧baːj˧diː˧,,2,th-agent-v1;ipa=thaig2p
 communication.i-do-not-speak-this-language,พูดภาษา{target}ไม่ได้,,phut phasa {target} mai dai,pʰuːt˥˩ pʰaː˧saː˩˩˦ {target} maj˥˩ daːj˥˩,,2,language-slots-v1;ipa=thaig2p
 communication.i-speak-only-a-little-of-this,พูด{target}ได้นิดเดียว,,phut {target} dai nit diao,pʰuːt˥˩ {target} daːj˥˩ nit˦˥dia̯w˧,,2,language-slots-v1;ipa=thaig2p
-communication.do-you-speak-english,พูด{source}ได้ไหม,,phut {source} dai mai,,,2,language-slots-v1
+communication.do-you-speak-english,พูด{source}ได้ไหม,,phut {source} dai mai,pʰuːt˥˩ {source} daːj˥˩ maj˩˩˦,,2,language-slots-v1;ipa=thaig2p
 communication.please-speak-more-slowly,พูดช้าๆหน่อย,,phut cha cha noi,pʰuːt˥˩ tɕʰaː˦˥ŋɔː˧ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
 communication.i-do-not-understand-spoken,ฟังไม่เข้าใจ,,fang mai khaochai,faŋ˧ maj˥˩ kʰaw˥˩tɕaj˧,,2,th-agent-v1;ipa=thaig2p
 communication.i-cannot-read-understand,อ่านไม่เข้าใจ,,an mai khaochai,ʔaːn˨˩ maj˥˩ kʰaw˥˩tɕaj˧,,2,th-agent-v1;ipa=thaig2p
