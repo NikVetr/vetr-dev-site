@@ -10,7 +10,7 @@ import {
     calculateAdjustedIntervals,
     getExpectedVsActualData
 } from './state.js';
-import { formatTime, formatInterval, formatDuration, parseDuration } from './utils.js';
+import { escapeHtml, formatTime, formatInterval, formatDuration, parseDuration } from './utils.js';
 
 function escapeMarkdownHtml(value) {
     return String(value ?? '')
@@ -545,21 +545,6 @@ hr { border: none; border-top: 1pt solid #ccc; margin: 18pt 0; }
     html += '</body>\n</html>';
 
     return html;
-}
-
-/**
- * Escape HTML special characters
- * @param {string} str - String to escape
- * @returns {string} Escaped string
- */
-function escapeHtml(str) {
-    if (str === null || str === undefined) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
 }
 
 /**

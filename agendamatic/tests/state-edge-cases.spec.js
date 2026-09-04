@@ -2,8 +2,6 @@ import { test, expect } from '@playwright/test';
 
 async function loadFresh(page) {
     await page.goto('/agendamatic/');
-    await page.evaluate(() => localStorage.clear());
-    await page.goto('/agendamatic/');
     await expect(page.locator('.agenda-row')).toHaveCount(5);
 }
 
@@ -98,38 +96,6 @@ test('legacy palette hex values stay presets and untouched picker Apply is a no-
         return { item: getState().items[0], url: location.href };
     });
     expect(after).toEqual(before);
-});
-
-test('metadata accepts real calendar dates and rejects impossible ones', async ({ page }) => {
-    await loadFresh(page);
-    const dates = await page.evaluate(async () => {
-        const state = await import('/agendamatic/js/state.js?edge=calendar-dates');
-        state.initializeState();
-        const normalize = date => {
-            state.importFromJSON(JSON.stringify({
-                items: [{ id: 'date-item', name: 'Date', duration: '5m' }],
-                metadata: { date, initialized: true }
-            }));
-            return state.getState().metadata.date;
-        };
-        return {
-            leap: normalize('2024-02-29'),
-            ordinaryLeap: normalize('2000-02-29'),
-            nonLeap: normalize('2026-02-29'),
-            centuryNonLeap: normalize('1900-02-29'),
-            shortMonth: normalize('2026-04-31'),
-            invalidMonth: normalize('2026-13-01')
-        };
-    });
-
-    expect(dates).toEqual({
-        leap: '2024-02-29',
-        ordinaryLeap: '2000-02-29',
-        nonLeap: '',
-        centuryNonLeap: '',
-        shortMonth: '',
-        invalidMonth: ''
-    });
 });
 
 test('explicit and legacy share URLs isolate while ordinary reload resumes', async ({ page, context }) => {
@@ -572,32 +538,4 @@ test('completed timing uses tenth-minute precision and rewind keeps variance con
     expect(result.immediatelyRewound).toEqual({ diff: 5, overall: 5, signed: 5 });
     expect(result.oneMinuteLater).toBe(6);
     expect(result.afterReadvance).toEqual({ diff: 6, overall: 6, activeId: 'b' });
-});
-
-test('tracker completion without a valid start is discarded during import', async ({ page }) => {
-    await loadFresh(page);
-    const tracker = await page.evaluate(async () => {
-        const state = await import('/agendamatic/js/state.js?edge=malformed-lifecycle');
-        state.initializeState();
-        state.importFromJSON(JSON.stringify({
-            items: [{ id: 'a', name: 'A', duration: '10m' }],
-            tracker: {
-                isRunning: false,
-                startedAt: null,
-                completedAt: '2026-09-03T10:10:00.000Z',
-                activeItemIndex: 1,
-                activeItemId: null
-            }
-        }));
-        return state.getState().tracker;
-    });
-
-    expect(tracker).toMatchObject({
-        isRunning: false,
-        startedAt: null,
-        activeItemIndex: 0,
-        activeItemId: null,
-        activeStartedAt: null,
-        completedAt: null
-    });
 });

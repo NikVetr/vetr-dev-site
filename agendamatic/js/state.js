@@ -2,7 +2,15 @@
  * state.js - State management with URL encoding and localStorage persistence
  */
 
-import { generateId, deepClone, parseDuration, formatDuration, addMinutes, parseTime } from './utils.js';
+import {
+    generateId,
+    deepClone,
+    parseDuration,
+    formatDuration,
+    formatTimeValue,
+    addMinutes,
+    parseTime
+} from './utils.js';
 import {
     colorsMatch,
     getSeparatedColor,
@@ -1568,12 +1576,6 @@ export function getExpectedVsActualData() {
         rows,
         byId
     };
-}
-
-function formatTimeValue(date) {
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
 }
 
 function scaleDurationsToTarget(items, targetTotal) {

@@ -19,7 +19,16 @@ import {
     beginHistoryTransaction,
     endHistoryTransaction
 } from './state.js';
-import { formatTime, getMinutesDiff, clamp, parseDuration, parseTime, formatDuration, renderMarkdownToHtml } from './utils.js';
+import {
+    formatTime,
+    getMinutesDiff,
+    clamp,
+    parseDuration,
+    parseTime,
+    formatDuration,
+    renderMarkdownToHtml,
+    setGlobalDragCursor
+} from './utils.js';
 import { processAlertTick } from './alerts.js';
 import {
     applyItemColorStyles,
@@ -68,10 +77,13 @@ let popoutTrackerSignature = null;
 let popoutOverallSignature = null;
 let popoutCurrentSignature = null;
 let lastLiveLayoutKey = null;
-let startButton = null;
 let stopButton = null;
 let popoutButton = null;
 let prevItemButton = null;
+let meetingControls = null;
+let controlsResizer = null;
+let primaryActionWord = null;
+let primaryObjectWord = null;
 let overflowLabelsContainer = null;
 let currentStatusBox = null;
 let currentStatusTape = null;
@@ -85,12 +97,6 @@ let trackerDropIndex = null;
 let trackerResizeState = null;
 let popoutWindow = null;
 let pendingLayoutRefresh = false;
-
-function setGlobalDragCursor(active) {
-    const value = active ? 'grabbing' : '';
-    document.documentElement.style.setProperty('cursor', value, 'important');
-    document.body.style.setProperty('cursor', value, 'important');
-}
 
 function refreshLayoutDependentTrackerViews() {
     renderTimeline();
@@ -137,20 +143,20 @@ export function initTimer(elements) {
     progressGuideLine = document.getElementById('progress-guide-line');
     activeItemGlow = document.getElementById('active-item-glow');
     tickerTape = document.getElementById('ticker-tape');
-    startButton = elements.startButton;
     stopButton = elements.stopButton;
     popoutButton = elements.popoutButton;
     prevItemButton = elements.prevItemButton;
     overflowLabelsContainer = document.getElementById('overflow-labels');
     nextItemButton = elements.nextItemButton;
+    meetingControls = nextItemButton?.closest('.next-item-controls') || null;
+    controlsResizer = document.getElementById('resizer-next-controls');
+    primaryActionWord = document.getElementById('primary-action-word');
+    primaryObjectWord = document.getElementById('primary-object-word');
 
     // Subscribe to state changes
     subscribe(onStateChange);
 
     // Set up button handlers
-    if (startButton) {
-        startButton.addEventListener('click', startTimer);
-    }
     if (stopButton) {
         stopButton.addEventListener('click', stopTimer);
     }
@@ -161,7 +167,7 @@ export function initTimer(elements) {
         prevItemButton.addEventListener('click', triggerRetreatToPreviousItem);
     }
     if (nextItemButton) {
-        nextItemButton.addEventListener('click', triggerAdvanceToNextItem);
+        nextItemButton.addEventListener('click', triggerPrimaryAction);
     }
 
     setupTrackerDragDrop();
@@ -171,7 +177,7 @@ export function initTimer(elements) {
         const isSpace = e.code === 'Space' || e.key === ' ' || e.key === 'Spacebar';
         if (isSpace && !e.repeat) {
             e.preventDefault();
-            triggerAdvanceToNextItem();
+            triggerPrimaryAction();
             return;
         }
 
@@ -205,6 +211,7 @@ export function initTimer(elements) {
  * @param {Object} state - New state
  */
 function onStateChange(state) {
+    updateButtonStates();
     renderTimeline();
     renderAxisTicks();
     updateCurrentTimeMarker();
@@ -212,7 +219,6 @@ function onStateChange(state) {
     updateCurrentItemPanel();
     updateCurrentStatusPanel();
     updateProgressBar();
-    updateButtonStates();
 }
 
 function getTrackerDisplayTime() {
@@ -361,46 +367,74 @@ export function stopTimer() {
 }
 
 /**
- * Reset the timer
- */
-export function resetTimer() {
-    updateTracker({
-        isRunning: false,
-        startedAt: null,
-        scheduledStartAt: null,
-        pausedAt: null,
-        accumulatedPauseMs: 0,
-        activeItemIndex: 0,
-        activeItemId: null,
-        activeStartedAt: null,
-        completedAt: null,
-        completedDiffById: {},
-        overallDeltaMinutes: 0,
-        expectedSnapshot: null,
-        varianceMode: false,
-        varianceActivatedAt: null
-    });
-    updateButtonStates();
-}
-
-/**
  * Update button states based on tracker state
  */
 function updateButtonStates() {
     const state = getState();
-    const isRunning = state.tracker.isRunning;
+    const phase = getTrackerPhase(state.tracker);
+    const hasItems = state.items.length > 0;
+    const currentIndex = calculateAdjustedIntervals().currentItemIndex;
 
-    if (startButton) {
-        startButton.classList.toggle('active', isRunning);
-        startButton.textContent = isRunning ? '▶ Running' : '▶ Start';
-        startButton.disabled = !!state.tracker.completedAt;
+    if (meetingControls) meetingControls.dataset.phase = phase;
+    if (controlsResizer) controlsResizer.hidden = phase === 'idle';
+    if (prevItemButton) {
+        prevItemButton.hidden = phase === 'idle';
+        prevItemButton.disabled = !hasItems || phase === 'idle' || (
+            phase !== 'completed' && currentIndex <= 0
+        );
+    }
+    if (nextItemButton) {
+        const copy = {
+            idle: ['START', 'MEETING'],
+            running: ['NEXT', 'ITEM'],
+            paused: ['RESUME', 'MEETING'],
+            completed: ['MEETING', 'COMPLETE']
+        }[phase];
+        if (primaryActionWord) primaryActionWord.textContent = copy[0];
+        if (primaryObjectWord) primaryObjectWord.textContent = copy[1];
+        nextItemButton.disabled = !hasItems || phase === 'completed';
+        nextItemButton.setAttribute('aria-label', {
+            idle: 'Start meeting',
+            running: 'Next agenda item',
+            paused: 'Resume meeting',
+            completed: 'Meeting complete'
+        }[phase]);
+        nextItemButton.dataset.tooltip = !hasItems
+            ? 'Add an agenda item before starting the meeting'
+            : {
+                idle: 'Start tracking the meeting',
+                running: 'Advance to the next agenda item',
+                paused: 'Resume tracking the meeting',
+                completed: 'The meeting is complete'
+            }[phase];
+        if (phase === 'completed') nextItemButton.removeAttribute('aria-keyshortcuts');
+        else nextItemButton.setAttribute('aria-keyshortcuts', 'Space');
     }
     if (stopButton) {
-        stopButton.disabled = !isRunning;
+        stopButton.hidden = phase !== 'running';
     }
 }
 
-function triggerAdvanceToNextItem() {
+function getTrackerPhase(tracker) {
+    if (tracker.completedAt) return 'completed';
+    if (tracker.isRunning) return 'running';
+    if (tracker.startedAt) return 'paused';
+    return 'idle';
+}
+
+function triggerPrimaryAction() {
+    const phase = getTrackerPhase(getState().tracker);
+    if (phase === 'idle' || phase === 'paused') {
+        startTimer();
+        syncPopoutWindow();
+        return;
+    }
+    if (phase === 'completed') {
+        updateCurrentStatusPanel();
+        syncPopoutWindow();
+        return;
+    }
+
     const advanced = advanceToNextItem();
     if (!advanced) {
         // Keep controls in sync even when no state mutation happened.
@@ -646,7 +680,8 @@ function getSemanticDomSignature(element) {
             return `${node.tagName}.${node.className}[${node.style.cssText}]:${node.childElementCount ? '' : text}`;
         })
         .join('|');
-    return `${element.tagName}.${element.className}[${element.style.cssText}]|${descendants}`;
+    return `${element.tagName}.${element.className}[${element.style.cssText}]`
+        + `[${element.getAttribute('aria-label') || ''}]|${descendants}`;
 }
 
 function syncPopoutTicker(sourceTape, targetTape) {
@@ -807,6 +842,11 @@ function syncPopoutStatusPanel(source, host, selectors) {
 
     target.className = source.className;
     target.style.cssText = source.style.cssText;
+    ['role', 'aria-label', 'aria-live', 'aria-atomic'].forEach(attribute => {
+        const value = source.getAttribute(attribute);
+        if (value === null) target.removeAttribute(attribute);
+        else target.setAttribute(attribute, value);
+    });
     let changed = false;
     selectors.forEach(selector => {
         const sourceNode = source.querySelector(selector);
@@ -869,6 +909,8 @@ function openTrackerPopout() {
     .popout-content .current-status-next { font-size: 0.72rem; margin-top: 1px; }
     .popout-controls-wrap { flex: 1; min-height: 0; padding: 8px; }
     .popout-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 100%; }
+    .popout-controls[data-phase="idle"] { grid-template-columns: 1fr; }
+    .popout-controls[data-phase="idle"] .popout-action-prev { display: none; }
     .popout-action { min-width: 0; border: 2px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-color); font: inherit; font-weight: 800; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 14px; }
     .popout-action-prev { background: rgba(52, 152, 219, 0.12); }
     .popout-action-next { background: rgba(231, 76, 60, 0.12); }
@@ -880,18 +922,18 @@ function openTrackerPopout() {
 <body>
   <div class="popout-layout">
     <section class="popout-pane popout-tracker-pane"><h3>Tracker</h3><div id="popout-tracker" class="popout-content"></div></section>
-    <section class="popout-pane popout-overall-pane"><h3>Overall Status</h3><div id="popout-overall" class="popout-content"></div></section>
+    <section class="popout-pane popout-overall-pane"><h3>Agenda Status</h3><div id="popout-overall" class="popout-content"></div></section>
     <section class="popout-pane popout-current-pane"><h3>Current Status</h3><div id="popout-current" class="popout-content"></div></section>
     <section class="popout-pane popout-control-pane">
       <h3>Controls</h3>
       <div class="popout-controls-wrap">
-        <div class="popout-controls">
+        <div class="popout-controls" data-phase="idle">
           <button id="btn-popout-prev" class="popout-action popout-action-prev">
             <span>← Previous Item</span>
             <kbd>Backspace</kbd>
           </button>
           <button id="btn-popout-next" class="popout-action popout-action-next">
-            <span>Next Item →</span>
+            <span id="popout-primary-label">Start Meeting</span>
             <kbd>Space</kbd>
           </button>
         </div>
@@ -910,14 +952,14 @@ function openTrackerPopout() {
         popoutPrev.addEventListener('click', triggerRetreatToPreviousItem);
     }
     if (popoutNext) {
-        popoutNext.addEventListener('click', triggerAdvanceToNextItem);
+        popoutNext.addEventListener('click', triggerPrimaryAction);
     }
     popoutWindow.addEventListener('keydown', (e) => {
         if (isKeyboardControl(e.target, popoutWindow)) return;
         const isSpace = e.code === 'Space' || e.key === ' ' || e.key === 'Spacebar';
         if (isSpace && !e.repeat) {
             e.preventDefault();
-            triggerAdvanceToNextItem();
+            triggerPrimaryAction();
             return;
         }
         if (e.key === 'Backspace' && !e.repeat) {
@@ -965,6 +1007,8 @@ function syncPopoutWindow() {
     const currentHost = doc.getElementById('popout-current');
     const popoutPrev = doc.getElementById('btn-popout-prev');
     const popoutNext = doc.getElementById('btn-popout-next');
+    const popoutControls = doc.querySelector('.popout-controls');
+    const popoutPrimaryLabel = doc.getElementById('popout-primary-label');
     if (!trackerHost || !overallHost || !currentHost) return;
 
     const popoutView = doc.defaultView;
@@ -1033,9 +1077,21 @@ function syncPopoutWindow() {
 
     if (popoutPrev && prevItemButton) {
         popoutPrev.disabled = prevItemButton.disabled;
+        popoutPrev.hidden = prevItemButton.hidden;
     }
     if (popoutNext && nextItemButton) {
         popoutNext.disabled = nextItemButton.disabled;
+        popoutNext.setAttribute('aria-label', nextItemButton.getAttribute('aria-label') || 'Meeting action');
+    }
+    const phase = getTrackerPhase(getState().tracker);
+    if (popoutControls) popoutControls.dataset.phase = phase;
+    if (popoutPrimaryLabel) {
+        popoutPrimaryLabel.textContent = {
+            idle: 'Start Meeting',
+            running: 'Next Item →',
+            paused: 'Resume Meeting',
+            completed: 'Meeting Complete'
+        }[phase];
     }
 }
 
@@ -1797,15 +1853,30 @@ function updateStatusDisplay() {
     if (!statusDisplayEl || !tickerTape) return;
 
     const { status, difference } = calculateAdjustedIntervals();
-
+    const phase = getTrackerPhase(getState().tracker);
     const statusContainer = statusDisplayEl.querySelector('.status-display');
+    const labelEl = statusDisplayEl.querySelector('.status-label');
     const directionEl = statusDisplayEl.querySelector('.status-direction');
 
     if (!statusContainer || !directionEl) return;
 
     // Remove old status classes
-    statusContainer.classList.remove('on-time', 'behind', 'ahead');
+    statusContainer.classList.remove('not-started', 'on-time', 'behind', 'ahead');
+
+    if (phase === 'idle') {
+        statusContainer.classList.add('not-started');
+        if (labelEl) labelEl.textContent = 'MEETING';
+        tickerTape.innerHTML = '<span class="ticker-on-time">NOT STARTED</span>';
+        directionEl.textContent = '';
+        if (statusUnitEl) statusUnitEl.textContent = '';
+        statusContainer.setAttribute('aria-label', 'Agenda status: meeting not started');
+        fitTickerToContainer(tickerTape);
+        syncPopoutWindow();
+        return;
+    }
+
     statusContainer.classList.add(status);
+    if (labelEl) labelEl.textContent = 'AGENDA IS';
 
     if (status === 'on-time' || difference === 0) {
         // Show "ON TIME" text
@@ -1814,13 +1885,20 @@ function updateStatusDisplay() {
         if (statusUnitEl) {
             statusUnitEl.textContent = '';
         }
+        statusContainer.setAttribute('aria-label', 'Agenda status: on time');
     } else {
         const scale = getTickerScale(difference);
         renderTickerTape(scale.value, status, scale.step, scale.precision);
-        directionEl.textContent = status === 'behind' ? 'BEHIND' : 'AHEAD';
+        const direction = status === 'behind' ? 'BEHIND' : 'AHEAD';
+        directionEl.textContent = direction;
         if (statusUnitEl) {
             statusUnitEl.textContent = scale.unit;
         }
+        const amount = scale.precision > 0 ? scale.value.toFixed(scale.precision) : Math.round(scale.value);
+        statusContainer.setAttribute(
+            'aria-label',
+            `Agenda status: ${amount} ${scale.unit.toLowerCase()} ${direction.toLowerCase()}`
+        );
     }
 
     fitTickerToContainer(tickerTape);
@@ -2069,6 +2147,22 @@ function renderCurrentStatusItemLine(statusLine, prefix, itemName) {
     currentStatusItemEl = item;
 }
 
+function renderCurrentStatusWord(word) {
+    const wordEl = document.createElement('span');
+    wordEl.className = 'ticker-on-time';
+    wordEl.textContent = word;
+    currentStatusTape.classList.remove('continuous-ticker');
+    currentStatusTape.replaceChildren(wordEl);
+    fitTickerToContainer(currentStatusTape);
+}
+
+function formatStatusClock(date) {
+    return new Intl.DateTimeFormat([], {
+        hour: 'numeric',
+        minute: '2-digit'
+    }).format(date);
+}
+
 /**
  * Update the current status panel
  */
@@ -2079,45 +2173,84 @@ function updateCurrentStatusPanel() {
     if (items.length === 0) {
         if (currentStatusLabelEl) currentStatusLabelEl.textContent = 'NO AGENDA ITEMS';
         if (currentStatusUnitEl) currentStatusUnitEl.textContent = '';
-        const emptyTicker = document.createElement('span');
-        emptyTicker.className = 'ticker-on-time';
-        emptyTicker.textContent = '—';
-        currentStatusTape.classList.remove('continuous-ticker');
-        currentStatusTape.replaceChildren(emptyTicker);
+        renderCurrentStatusWord('—');
         const statusLine = currentStatusBox.querySelector('.current-status-line');
         if (statusLine) statusLine.textContent = '';
         currentStatusItemEl = null;
         currentStatusNextLineEl.textContent = '';
         currentStatusNextItemEl = null;
-        fitTickerToContainer(currentStatusTape);
         applyThemeText(currentStatusTape, null);
-        if (nextItemButton) nextItemButton.disabled = true;
-        if (prevItemButton) prevItemButton.disabled = true;
+        currentStatusBox.querySelector('.current-status-display')
+            ?.setAttribute('aria-label', 'Current status: no agenda items');
         return;
     }
 
     const now = getTrackerDisplayTime();
-    const adjusted = calculateAdjustedIntervals(now);
     const state = getState();
     const trackerState = state.tracker || {};
-    const trackerActive = trackerState.isRunning || trackerState.startedAt;
+    const statusLine = currentStatusBox.querySelector('.current-status-line');
+
+    if (!trackerState.startedAt) {
+        const scheduledStart = items[0].startTime;
+        const minutesUntilStart = (scheduledStart.getTime() - now.getTime()) / 60000;
+        const atStart = Math.abs(minutesUntilStart) < 0.05;
+        const direction = minutesUntilStart > 0 ? 'until' : 'past';
+
+        if (atStart) {
+            if (currentStatusLabelEl) currentStatusLabelEl.textContent = 'MEETING STARTS';
+            if (currentStatusUnitEl) currentStatusUnitEl.textContent = '';
+            renderCurrentStatusWord('NOW');
+        } else {
+            const scale = getTickerScale(Math.abs(minutesUntilStart));
+            if (currentStatusLabelEl) {
+                currentStatusLabelEl.textContent = direction === 'until'
+                    ? 'MEETING STARTS IN'
+                    : 'SCHEDULED START WAS';
+            }
+            if (currentStatusUnitEl) {
+                currentStatusUnitEl.textContent = direction === 'until'
+                    ? scale.unit
+                    : `${scale.unit} AGO`;
+            }
+            renderContinuousTicker(currentStatusTape, scale.value, scale);
+            fitTickerToContainer(currentStatusTape);
+        }
+
+        if (statusLine) statusLine.textContent = `SCHEDULED FOR ${formatStatusClock(scheduledStart)}`;
+        currentStatusItemEl = null;
+        currentStatusNextLineEl.innerHTML = '(first item: <span class="current-status-next-item" id="current-status-next-item"></span>)';
+        currentStatusNextItemEl = currentStatusNextLineEl.querySelector('#current-status-next-item');
+        currentStatusNextItemEl.textContent = items[0].name;
+        applyThemeText(currentStatusNextItemEl, items[0]);
+        applyThemeText(currentStatusTape, null);
+        const display = currentStatusBox.querySelector('.current-status-display');
+        if (atStart) {
+            display?.setAttribute('aria-label', 'Current status: meeting starts now');
+        } else {
+            const rounded = Math.max(0, Math.round(Math.abs(minutesUntilStart)));
+            display?.setAttribute(
+                'aria-label',
+                direction === 'until'
+                    ? `Current status: meeting starts in ${rounded} minutes`
+                    : `Current status: scheduled start was ${rounded} minutes ago`
+            );
+        }
+        syncPopoutWindow();
+        return;
+    }
+
+    const adjusted = calculateAdjustedIntervals(now);
     if (trackerState.completedAt) {
         if (currentStatusLabelEl) currentStatusLabelEl.textContent = 'MEETING COMPLETE';
         if (currentStatusUnitEl) currentStatusUnitEl.textContent = '';
-        const doneTicker = document.createElement('span');
-        doneTicker.className = 'ticker-on-time';
-        doneTicker.textContent = 'DONE';
-        currentStatusTape.classList.remove('continuous-ticker');
-        currentStatusTape.replaceChildren(doneTicker);
-        const statusLine = currentStatusBox.querySelector('.current-status-line');
+        renderCurrentStatusWord('DONE');
         if (statusLine) statusLine.textContent = '';
         currentStatusItemEl = null;
         currentStatusNextLineEl.textContent = '(and then you are done!)';
         currentStatusNextItemEl = null;
         applyThemeText(currentStatusTape, null);
-        fitTickerToContainer(currentStatusTape);
-        if (nextItemButton) nextItemButton.disabled = true;
-        if (prevItemButton) prevItemButton.disabled = items.length === 0;
+        currentStatusBox.querySelector('.current-status-display')
+            ?.setAttribute('aria-label', 'Current status: meeting complete');
         syncPopoutWindow();
         return;
     }
@@ -2129,13 +2262,11 @@ function updateCurrentStatusPanel() {
 
     const currentItem = adjusted.items[currentIndex] || items[currentIndex];
     const nextItem = items[currentIndex + 1];
-    const remaining = trackerActive
-        ? (adjusted.currentRemaining ?? 0)
-        : parseDuration((currentItem?.duration || '1m'));
+    const remaining = adjusted.currentRemaining ?? 0;
     const overrun = Math.max(0, -(remaining));
     const plannedDuration = parseDuration(currentItem?.duration || '1m');
     const elapsedMode = state.settings.timerMode === 'elapsed';
-    const elapsed = trackerActive ? Math.max(0, plannedDuration - remaining) : 0;
+    const elapsed = Math.max(0, plannedDuration - remaining);
     const displayValue = elapsedMode ? elapsed : (remaining >= 0 ? remaining : overrun);
     const scale = getCurrentTickerScale(displayValue);
 
@@ -2143,20 +2274,17 @@ function updateCurrentStatusPanel() {
     fitTickerToContainer(currentStatusTape);
 
     if (currentStatusLabelEl) {
-        currentStatusLabelEl.textContent = elapsedMode
-            ? 'YOU HAVE USED'
-            : (remaining >= 0 ? 'YOU HAVE' : 'YOU ARE');
+        const prefix = trackerState.isRunning ? '' : 'PAUSED · ';
+        currentStatusLabelEl.textContent = prefix + (elapsedMode
+            ? 'TIME USED ON CURRENT ITEM'
+            : (remaining >= 0 ? 'TIME LEFT IN CURRENT ITEM' : 'CURRENT ITEM IS OVER BY'));
     }
     if (currentStatusUnitEl) {
         currentStatusUnitEl.textContent = scale.unit;
     }
 
-    const statusLine = currentStatusBox.querySelector('.current-status-line');
     if (statusLine) {
-        const prefix = elapsedMode
-            ? 'ON'
-            : (remaining >= 0 ? 'LEFT FOR' : 'PAST THE END OF');
-        renderCurrentStatusItemLine(statusLine, prefix, currentItem?.name);
+        renderCurrentStatusItemLine(statusLine, 'ITEM:', currentItem?.name);
     }
 
     if (nextItem) {
@@ -2179,13 +2307,17 @@ function updateCurrentStatusPanel() {
         applyThemeText(currentStatusNextItemEl, nextItem);
     }
     applyThemeText(currentStatusTape, currentItem);
-
-    if (nextItemButton) {
-        nextItemButton.disabled = !trackerActive;
-    }
-    if (prevItemButton) {
-        prevItemButton.disabled = !trackerActive || currentIndex <= 0;
-    }
+    const stateWord = trackerState.isRunning ? '' : 'paused; ';
+    const amount = scale.precision > 0 ? scale.value.toFixed(scale.precision) : Math.round(scale.value);
+    const timeMeaning = elapsedMode
+        ? `${amount} ${scale.unit.toLowerCase()} used`
+        : (remaining >= 0
+            ? `${amount} ${scale.unit.toLowerCase()} left`
+            : `${amount} ${scale.unit.toLowerCase()} over`);
+    currentStatusBox.querySelector('.current-status-display')?.setAttribute(
+        'aria-label',
+        `Current status: ${stateWord}${timeMeaning} on ${currentItem?.name || 'current item'}`
+    );
 
     syncPopoutWindow();
 }
@@ -2342,31 +2474,6 @@ function updateProgressBar() {
     const progress = clamp((elapsedMinutes / totalMinutes) * 100, 0, 100);
     progressBar.style.width = `${progress}%`;
     updateProgressGuideLine(progress);
-}
-
-/**
- * Get the current meeting progress info
- * @returns {Object} Progress info
- */
-export function getMeetingProgress() {
-    const items = calculateIntervals();
-    if (items.length === 0) {
-        return { progress: 0, elapsed: 0, remaining: 0, total: 0 };
-    }
-
-    const now = getTrackerDisplayTime();
-    const firstStart = items[0].startTime;
-    const lastEnd = items[items.length - 1].endTime;
-    const total = getMinutesDiff(firstStart, lastEnd);
-    const elapsed = clamp(getMinutesDiff(firstStart, now), 0, total);
-    const remaining = total - elapsed;
-
-    return {
-        progress: (elapsed / total) * 100,
-        elapsed,
-        remaining,
-        total
-    };
 }
 
 /**

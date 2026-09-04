@@ -4,12 +4,12 @@ autoCHAIR is a static, browser-only agenda builder and real-time meeting tracker
 
 ## Architecture
 
-- `index.html` defines the semantic UI shell: agenda input, import/export, overall and current status, tracker, current item, staging, metadata dialogs, color picker, notes editor, and settings.
+- `index.html` defines the semantic UI shell: agenda input, import/export, agenda and current status, tracker, current item, staging, metadata dialogs, color picker, notes editor, and settings.
 - `css/styles.css` supplies theme tokens, responsive panel/container rules, the mobile settings drawer, tracker geometry, custom-color variables, and projector-friendly pop-out styling.
-- `js/main.js` initializes all modules, binds global controls and keyboard shortcuts, applies settings, and manages the accessible mobile settings drawer.
+- `js/main.js` initializes all modules, binds global controls and keyboard shortcuts, applies settings, and manages the accessible mobile settings drawer. Reusable editing, focus, escaping, time, and drag helpers live in `js/utils.js` instead of being repeated across feature modules.
 - `js/state.js` is the single source of truth. It validates and normalizes data, calculates intervals, tracks run anchors and stable item identity, implements undo/redo, handles agenda and staging mutations, and persists state.
 - `js/agenda.js`, `js/staging.js`, and `js/bulk-edit.js` provide row/card editing, cross-panel drag and drop, notes, column-list editing, and escaped CSV editing with line-specific validation.
-- `js/timer.js` renders the timeline and status panels, manages live pause/resume and explicit previous/next progression, exposes duration/reorder interactions, and synchronizes the projector pop-out.
+- `js/timer.js` renders the timeline and status panels, manages start/pause/resume and explicit previous/next progression, exposes duration/reorder interactions, and synchronizes the projector pop-out.
 - `js/metadata.js` manages meeting details, multiple attendee groups and attendance, and structured action items with owner and completion state.
 - `js/export.js` imports/exports complete JSON state and generates Markdown, text, and Word-compatible HTML agendas or minutes.
 - `js/colors.js` owns preset and arbitrary HSL colors, readable light/dark theme tokens, and nearest-preset helpers.
@@ -31,9 +31,11 @@ Undo/redo keeps a bounded in-session history, coalesces rapid edits, and groups 
 
 ## Interface behavior
 
-Desktop layouts use resizable, swappable panels with clamped grid tracks. Narrow layouts stack all panels at usable widths and heights and move Settings into a keyboard-accessible off-canvas drawer with focus trapping, Escape/backdrop dismissal, and restored focus. Container queries keep dense panel contents readable.
+Desktop layouts use independently resizable, swappable panels with clamped grid tracks and keyboard-operable separators. Narrow layouts stack all panels at usable widths and heights and move Settings into a keyboard-accessible off-canvas drawer with focus trapping, Escape/backdrop dismissal, and restored focus. Container queries keep dense panel contents readable.
 
-The tracker displays current progress, completed items, live overtime, buffer gaps, displaced labels, and status variance. Its pop-out has an independent full-width grid and recomputes geometry in its own viewport while synchronizing theme, density, colors, item state, and controls.
+Before tracking begins, Agenda Status says that the meeting has not started, Current Status counts down to the scheduled start, and the item controls form one large Start Meeting action. During a run, those controls become Previous Item and Next Item; while paused, the primary action becomes Resume Meeting; after completion, it becomes a disabled completion label. Agenda Status always describes schedule variance as ahead, behind, or on time, while Current Status explicitly labels time left, used, or over on the active item.
+
+The tracker displays current progress, completed items, live overtime, buffer gaps, displaced labels, and status variance. Its pop-out has an independent full-width grid and recomputes geometry in its own viewport while synchronizing theme, density, colors, item state, control phase, and status wording.
 
 Each row's color control opens a continuous hue/saturation picker with fixed lightness. Bulk color input additionally accepts preset numbers 1–8 or exact six-digit hex values; legacy preset hex values canonicalize back to preset storage. Every custom selection generates contrast-aware tokens for light and dark themes and is preserved through agenda, staging, tracker, current-item, persistence, sharing, and exports. Optional adjacent-color separation applies consistently during adds, reorders, and staging moves.
 
@@ -41,10 +43,6 @@ Bulk column editing supports Item, Lead, Color, Duration, Locked, and Notes. Who
 
 ## Verification
 
-`tests/state.spec.js` covers versioned URL round trips, structural import rejection and field normalization, buffers, pins, locked redistribution, stable tracker identity, cumulative variance, completion, rewinding, and paused time. `tests/state-edge-cases.spec.js` covers color separation, preset canonicalization, calendar validation, explicit and legacy isolated share sessions, active-item removal, and live-run mutation boundaries. `tests/layout-keyboard.spec.js` covers accessible panel moves, persisted keyboard resizing, compact control geometry, and native text undo.
-
-`tests/ui.spec.js` covers desktop/mobile containment, the Settings drawer, metadata and pre-blur persistence, local dates, CSV line diagnostics, keyboard/touch movement, pausing, buffer geometry, pop-out appearance, export sanitization, and HSL colors. `tests/ui-export-edge-cases.spec.js` covers dialog focus, authored details, meeting-host classification, safe share-copy fallback, fractional duration formatting, Locked/Notes editing, stable-ID and legacy CSV, and agenda-control focus.
-
-`tests/accessibility.spec.js` covers pointer-opened modal focus, control names, and useful focus restoration after dynamic metadata additions/removals. `tests/alerts-timer.spec.js` covers isolated optional-delivery failures, threshold deduplication, notification-permission races, exact synchronized starts, and mobile notification stacking. `tests/landing.spec.js` verifies that the parent `vetr.dev` landing page links to `/agendamatic/`.
+The Playwright suite is organized around behavior rather than implementation details. `state.spec.js` and `state-edge-cases.spec.js` cover persistence, imports, timing math, tracker lifecycle, and structural run guards. `ui.spec.js` and `ui-export-edge-cases.spec.js` cover responsive workflows, focus, metadata, editing, exports, and colors. `layout-keyboard.spec.js`, `alerts-timer.spec.js`, and `landing.spec.js` cover keyboard layout controls, meeting-control phases, alerts, and the parent-site route. Overlapping browser cases and low-value implementation assertions are intentionally consolidated to keep the suite readable.
 
 Playwright serves the repository root through `playwright.config.js`; `npm test` runs the complete browser suite against Chromium.

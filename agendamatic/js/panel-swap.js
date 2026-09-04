@@ -6,7 +6,7 @@ const STORAGE_KEY = 'autochair_panel_order_v1';
 const PANEL_DEFS = [
     { id: 'input', selector: '.input-box', label: 'Input' },
     { id: 'export', selector: '.export-box', label: 'Import / Export' },
-    { id: 'overall-status', selector: '.overall-status-box', label: 'Overall Status' },
+    { id: 'overall-status', selector: '.overall-status-box', label: 'Agenda Status' },
     { id: 'tracker', selector: '.timeline-container', label: 'Tracker' },
     { id: 'current-status', selector: '.current-status-box', label: 'Current Status' },
     { id: 'staging', selector: '.staging-box', label: 'Staging' },

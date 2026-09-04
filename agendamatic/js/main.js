@@ -29,23 +29,12 @@ import {
     previewAlert,
     requestDesktopNotificationPermission
 } from './alerts.js';
-import { formatTime, parseTime } from './utils.js';
+import { applyMarkdownAction, formatTimeValue, parseTime } from './utils.js';
 
 const LOGO_FULL_SPIN_SECONDS = 8;
 const NEXT_PREV_SPIN_SECONDS = LOGO_FULL_SPIN_SECONDS / 8;
 const HEADER_SPIN_SECONDS = LOGO_FULL_SPIN_SECONDS / 2;
 const LOGO_STOP_EPSILON_SECONDS = 0.03;
-
-/**
- * Format a Date as HH:MM (24-hour) for settings storage
- * @param {Date} date - Date object
- * @returns {string} Time string
- */
-function formatTimeValue(date) {
-    const hours = date.getHours().toString().padStart(2, '0');
-    const mins = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${mins}`;
-}
 
 /**
  * Step the meeting start time by delta minutes and return HH:MM
@@ -248,7 +237,6 @@ function init() {
         currentStatusNextItem: elements.currentStatusNextItem,
         currentStatusNextLine: elements.currentStatusNextLine,
         progressBar: elements.progressBar,
-        startButton: elements.startButton,
         stopButton: elements.stopButton,
         popoutButton: elements.popoutButton,
         prevItemButton: elements.prevItemButton,
@@ -371,7 +359,6 @@ function getElements() {
         timelineAxis: document.getElementById('timeline-axis'),
         currentTimeMarker: document.getElementById('current-time-marker'),
         popoutButton: document.getElementById('btn-popout'),
-        startButton: document.getElementById('btn-start'),
         stopButton: document.getElementById('btn-stop'),
 
         // Status
@@ -592,49 +579,6 @@ function setupEventListeners(elements) {
 }
 
 /**
- * Set up a time input with scroll wheel support
- * @param {HTMLInputElement} input - Time input element
- * @param {Function} onChange - Callback when time changes
- */
-function setupTimeInput(input, onChange) {
-    // Scroll wheel
-    input.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        const delta = e.deltaY < 0 ? 5 : -5;
-        onChange(getSteppedStartTime(delta));
-    });
-
-    // Direct input change
-    input.addEventListener('change', (e) => {
-        const value = e.target.value;
-        // Try to parse various formats
-        const time = parseTimeString(value);
-        if (time) {
-            const hours = time.getHours().toString().padStart(2, '0');
-            const mins = time.getMinutes().toString().padStart(2, '0');
-            onChange(`${hours}:${mins}`);
-        }
-    });
-}
-
-/**
- * Parse a time string in various formats
- * @param {string} str - Time string
- * @returns {Date|null} Date object or null
- */
-function parseTimeString(str) {
-    if (!str) return null;
-
-    // Try parsing with parseTime utility
-    const result = parseTime(str);
-    if (result && !isNaN(result.getTime())) {
-        return result;
-    }
-
-    return null;
-}
-
-/**
  * Sync start time inputs between agenda panel and settings
  * @param {Object} state - Current state
  */
@@ -642,9 +586,6 @@ function syncStartTimeInputs(state) {
     const settingsStartTime = document.getElementById('start-time');
 
     if (state.settings.startTime) {
-        const time = parseTime(state.settings.startTime);
-        const displayTime = formatTime(time);
-
         if (settingsStartTime) {
             settingsStartTime.value = state.settings.startTime;
         }
@@ -868,92 +809,30 @@ function setupNotesEditor(elements) {
 
     if (!toolbar || !notesArea) return;
 
+    const editNotes = action => {
+        const value = applyMarkdownAction(notesArea, action);
+        const itemId = notesArea.dataset.itemId;
+        if (value !== null && itemId) updateItem(itemId, { notes: value });
+    };
+
     toolbar.addEventListener('click', (e) => {
         const btn = e.target.closest('button');
         if (!btn) return;
         const action = btn.dataset.action;
-        applyMarkdownAction(notesArea, action);
+        editNotes(action);
     });
 
     notesArea.addEventListener('keydown', (e) => {
         if (e.ctrlKey || e.metaKey) {
             if (e.key === 'b') {
                 e.preventDefault();
-                applyMarkdownAction(notesArea, 'bold');
+                editNotes('bold');
             } else if (e.key === 'i') {
                 e.preventDefault();
-                applyMarkdownAction(notesArea, 'italic');
+                editNotes('italic');
             }
         }
     });
-}
-
-/**
- * Apply a markdown action to a textarea selection
- * @param {HTMLTextAreaElement} textarea - Notes textarea
- * @param {string} action - Action name
- */
-function applyMarkdownAction(textarea, action) {
-    if (!textarea) return;
-
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = textarea.value.substring(start, end);
-    let replacement = '';
-    let cursorOffset = 0;
-
-    switch (action) {
-        case 'bold':
-            replacement = `**${selectedText}**`;
-            cursorOffset = selectedText ? replacement.length : 2;
-            break;
-        case 'italic':
-            replacement = `*${selectedText}*`;
-            cursorOffset = selectedText ? replacement.length : 1;
-            break;
-        case 'heading':
-            replacement = `## ${selectedText}`;
-            cursorOffset = replacement.length;
-            break;
-        case 'bullet':
-            replacement = selectedText
-                ? selectedText.split('\n').map(line => `- ${line}`).join('\n')
-                : '- ';
-            cursorOffset = replacement.length;
-            break;
-        case 'numbered':
-            replacement = selectedText
-                ? selectedText.split('\n').map((line, i) => `${i + 1}. ${line}`).join('\n')
-                : '1. ';
-            cursorOffset = replacement.length;
-            break;
-        case 'link':
-            replacement = `[${selectedText || 'link text'}](url)`;
-            cursorOffset = selectedText ? replacement.length : 1;
-            break;
-        case 'code':
-            replacement = selectedText.includes('\n')
-                ? `\`\`\`\n${selectedText}\n\`\`\``
-                : `\`${selectedText}\``;
-            cursorOffset = selectedText ? replacement.length : 1;
-            break;
-        default:
-            return;
-    }
-
-    textarea.value =
-        textarea.value.substring(0, start) +
-        replacement +
-        textarea.value.substring(end);
-
-    const newPosition = start + cursorOffset;
-    textarea.setSelectionRange(newPosition, newPosition);
-    textarea.focus();
-
-    const itemId = textarea.dataset.itemId;
-    if (itemId) {
-        updateItem(itemId, { notes: textarea.value });
-    }
 }
 
 /**

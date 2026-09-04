@@ -570,27 +570,6 @@ body.dragging-panel * {
     letter-spacing: 0.2px;
 }
 
-/* Start time inline in interval column */
-.interval-header {
-    display: flex;
-    justify-content: center;
-}
-
-.start-time-inline {
-    width: 100%;
-    max-width: 90px;
-}
-
-.start-time-inline input {
-    width: 100%;
-    padding: 4px 22px 4px 6px !important;
-    font-size: 0.8rem;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    font-family: inherit;
-}
-
 .agenda-row {
     background: #fff;
     border: 1px solid transparent;
@@ -1210,6 +1189,11 @@ body.dragging-panel * {
     color: var(--accent-green);
 }
 
+.status-display.not-started .ticker-container,
+.status-display.not-started .ticker-on-time {
+    color: var(--text-muted);
+}
+
 .status-display.on-time .ticker-container {
     overflow: hidden;
 }
@@ -1261,7 +1245,7 @@ body.dragging-panel * {
 
 .next-item-controls {
     display: grid;
-    grid-template-columns: minmax(0, var(--next-prev-width, 1fr)) var(--splitter-size) minmax(0, 4fr);
+    grid-template-columns: minmax(72px, var(--next-prev-width, 1fr)) var(--splitter-size) minmax(0, 4fr);
     gap: 0;
     grid-row: 3;
     align-self: stretch;
@@ -1270,6 +1254,19 @@ body.dragging-panel * {
     overflow: hidden;
     container-type: size;
     container-name: next-controls;
+}
+
+.next-item-controls[data-phase="idle"] {
+    grid-template-columns: 1fr;
+}
+
+.next-item-controls[data-phase="idle"] .prev-item-btn,
+.next-item-controls[data-phase="idle"] #resizer-next-controls {
+    display: none;
+}
+
+.next-item-controls[data-phase="idle"] .main-next-btn {
+    grid-column: 1;
 }
 
 /* --- NEXT ITEM BUTTON --- */
@@ -1297,7 +1294,7 @@ body.dragging-panel * {
 }
 
 .prev-item-btn {
-    padding: clamp(8px, 1vw, 18px);
+    padding: clamp(4px, 0.3vw, 7px);
     gap: clamp(4px, 0.8vw, 10px);
     background: rgba(52, 152, 219, 0.12);
 }
@@ -1305,6 +1302,22 @@ body.dragging-panel * {
 .main-next-btn {
     padding: clamp(8px, 1vw, 18px);
     background: rgba(231, 76, 60, 0.12);
+}
+
+.next-item-controls[data-phase="idle"] .main-next-btn {
+    background: rgba(46, 204, 113, 0.14);
+}
+
+.next-item-controls[data-phase="paused"] .main-next-btn {
+    background: rgba(243, 156, 18, 0.16);
+}
+
+.next-item-controls[data-phase="completed"] .main-next-btn {
+    background: var(--bg-secondary);
+}
+
+.next-item-controls[data-phase="completed"] .main-next-btn .next-item-logo {
+    display: none;
 }
 
 .next-item-btn:hover {
@@ -1346,11 +1359,11 @@ body.dragging-panel * {
 }
 
 .next-item-text-prev {
-    font-size: clamp(0.66rem, 1.1vw, 1.05rem);
-    letter-spacing: 1px;
+    font-size: clamp(0.66rem, 0.85vw, 0.85rem);
+    letter-spacing: 0.4px;
     flex-direction: column;
     line-height: 0.95;
-    gap: 6px;
+    gap: 5px;
 }
 
 #resizer-next-controls {
@@ -1366,7 +1379,7 @@ body.dragging-panel * {
 }
 
 .next-item-logo-small {
-    height: clamp(0.95rem, 1.7vw, 1.8rem);
+    height: clamp(1.2rem, 2vw, 2.2rem);
 }
 
 .prev-item-btn .next-item-logo {
@@ -1392,7 +1405,10 @@ body.dragging-panel * {
 }
 
 .backspace-icon {
-    letter-spacing: 0.8px;
+    max-width: 100%;
+    padding-inline: 2px;
+    font-size: 0.52rem;
+    letter-spacing: 0;
 }
 
 /* --- TRACKER + CURRENT STATUS --- */
@@ -1797,6 +1813,8 @@ body.dragging-panel * {
     font-size: 0.9rem;
     color: var(--text-muted);
     letter-spacing: 2px;
+    line-height: 1.2;
+    max-width: calc(100% - 12px);
 }
 
 .current-status-ticker {
@@ -2127,60 +2145,15 @@ body.dragging-panel * {
     transform: translateY(-50%);
 }
 
-.panel-resizer.resizer-vertical,
-.panel-resizer.resizer-horizontal {
-    background: transparent;
-}
-
 .panel-resizer:hover::before,
-.panel-resizer.is-dragging::before,
-.panel-resizer.is-corner-ready::before {
+.panel-resizer.is-dragging::before {
     background: #5e5e5e;
     opacity: 1;
 }
 
 .panel-resizer:hover,
-.panel-resizer.is-dragging,
-.panel-resizer.is-corner-ready {
+.panel-resizer.is-dragging {
     background: rgba(0, 0, 0, 0.03);
-}
-
-.panel-corner {
-    position: fixed;
-    width: 11px;
-    height: 11px;
-    left: var(--corner-screen-x, -9999px);
-    top: var(--corner-screen-y, -9999px);
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    opacity: 0 !important;
-    visibility: hidden;
-    transition: none;
-    pointer-events: none;
-    z-index: 35;
-    transform: translate(-50%, -50%);
-}
-
-.panel-corner.is-preview-active,
-.panel-resizer.is-dragging .panel-corner.is-coupled {
-    opacity: 0 !important;
-    visibility: hidden;
-    pointer-events: auto;
-}
-
-.panel-corner.is-inert {
-    opacity: 0 !important;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.panel-corner.is-coupled {
-    box-shadow: none;
-}
-
-.panel-resizer .panel-corner {
-    cursor: move;
 }
 
 body.resizing-panels {
@@ -2195,16 +2168,6 @@ body.resizing-panels[data-resize-axis="x"] * {
 body.resizing-panels[data-resize-axis="y"],
 body.resizing-panels[data-resize-axis="y"] * {
     cursor: row-resize !important;
-}
-
-body.resizing-panels[data-resize-axis="xy"],
-body.resizing-panels[data-resize-axis="xy"] * {
-    cursor: move !important;
-}
-
-body.corner-resize-preview,
-body.corner-resize-preview * {
-    cursor: move !important;
 }
 
 .staging-box {
@@ -3416,14 +3379,10 @@ body.meeting-alert-pulse::after {
         font-size: 0.65rem;
     }
 
-    .prev-item-btn .next-item-text {
-        font-size: 0;
-    }
-
-    .prev-item-btn .next-item-text::after {
-        content: '\2190';
-        font-size: 1.15rem;
-        line-height: 1;
+    .main-next-btn .next-item-text {
+        flex-direction: column;
+        gap: 4px;
+        font-size: 0.72rem;
     }
 
     .spacebar-icon {
@@ -3472,10 +3431,15 @@ body.meeting-alert-pulse::after {
         padding-bottom: 6px;
     }
 
-    .overall-status-box .status-label,
+    .overall-status-box .status-label {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+    }
+
     .overall-status-box .status-unit,
     .overall-status-box .status-direction {
-        display: none;
+        font-size: 0.68rem;
+        letter-spacing: 1px;
     }
 
     .overall-status-box .ticker-container {
@@ -3501,7 +3465,7 @@ body.meeting-alert-pulse::after {
     }
 }
 
-@container next-controls (max-width: 200px) {
+@container next-controls (max-width: 150px) {
     .next-item-controls .next-item-logo,
     .next-item-controls .next-item-logo-small {
         display: none;
@@ -3596,14 +3560,12 @@ body.meeting-alert-pulse::after {
         padding-bottom: 4px;
     }
 
-    .overall-status-box .status-label,
-    .overall-status-box .status-unit,
-    .overall-status-box .status-direction {
+    .overall-status-box .status-label {
         display: none;
     }
 
     .overall-status-box .ticker-container {
-        height: 44px;
+        height: 34px;
     }
 
     .overall-status-box .ticker-number.center {
@@ -3622,6 +3584,13 @@ body.meeting-alert-pulse::after {
     .overall-status-box .ticker-on-time {
         font-size: 1.18rem;
         line-height: 1;
+    }
+
+    .overall-status-box .status-unit,
+    .overall-status-box .status-direction {
+        font-size: 0.62rem;
+        letter-spacing: 0.7px;
+        margin-top: 0;
     }
 }
 
@@ -3729,7 +3698,7 @@ body.meeting-alert-pulse::after {
     }
 }
 
-@container current-status (max-height: 160px) {
+@container current-status (max-height: 250px) {
     .current-status-display {
         gap: 4px;
     }
@@ -3746,10 +3715,6 @@ body.meeting-alert-pulse::after {
     .current-status-unit {
         font-size: 0.74rem;
         letter-spacing: 1px;
-    }
-
-    .current-status-line {
-        font-size: 0.82rem;
     }
 
     .current-status-next {
@@ -3827,8 +3792,6 @@ body.meeting-alert-pulse::after {
 }
 
 @container current-status (max-height: 88px) {
-    .current-status-label,
-    .current-status-unit,
     .current-status-line,
     .current-status-next {
         display: none;
@@ -3839,7 +3802,13 @@ body.meeting-alert-pulse::after {
     }
 
     .current-status-ticker {
-        height: 34px;
+        height: 28px;
+    }
+
+    .current-status-label,
+    .current-status-unit {
+        font-size: 0.58rem;
+        letter-spacing: 0.5px;
     }
 }
 

@@ -2,11 +2,6 @@ import { test, expect } from '@playwright/test';
 
 async function loadFresh(page) {
     await page.goto('/agendamatic/');
-    await page.evaluate(() => {
-        localStorage.clear();
-        sessionStorage.clear();
-    });
-    await page.goto('/agendamatic/');
     await expect(page.locator('.agenda-row')).toHaveCount(5);
 }
 

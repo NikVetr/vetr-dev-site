@@ -2,6 +2,8 @@
  * colors.js - Agenda item color normalization, readable theme tokens, and picker UI
  */
 
+import { focusAfterTransition } from './utils.js';
+
 export const LEGACY_PALETTE = Object.freeze([
     '#2196f3',
     '#9c27b0',
@@ -277,23 +279,6 @@ export function getSeparatedColor(item, neighbors = []) {
 
 let picker = null;
 
-function focusAfterModalTransition(modalElement, resolveTarget) {
-    const focusTarget = () => {
-        if (!modalElement.classList.contains('visible')) return;
-        resolveTarget()?.focus({ preventScroll: true });
-    };
-    if (getComputedStyle(modalElement).visibility === 'visible') {
-        setTimeout(focusTarget, 0);
-        return;
-    }
-    const onTransitionEnd = event => {
-        if (event.target !== modalElement) return;
-        modalElement.removeEventListener('transitionend', onTransitionEnd);
-        focusTarget();
-    };
-    modalElement.addEventListener('transitionend', onTransitionEnd);
-}
-
 function pickerElements() {
     if (picker) return picker;
     const overlay = document.getElementById('item-color-modal');
@@ -418,5 +403,5 @@ export function openColorPicker({ color, itemName = '', trigger = null, onApply 
     updatePickerPreview(elements);
     elements.overlay.classList.add('visible');
     elements.overlay.setAttribute('aria-hidden', 'false');
-    focusAfterModalTransition(elements.overlay, () => elements.hue);
+    focusAfterTransition(elements.overlay, () => elements.hue);
 }

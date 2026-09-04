@@ -3,6 +3,7 @@
  */
 
 import { getState, updateMetadata } from './state.js';
+import { focusAfterTransition } from './utils.js';
 
 let modal;
 let groupsContainer;
@@ -10,20 +11,7 @@ let actionsContainer;
 let modalTrigger = null;
 
 function deferMetadataFocus(resolveTarget) {
-    const focusTarget = () => {
-        if (!modal?.classList.contains('visible')) return;
-        resolveTarget()?.focus({ preventScroll: true });
-    };
-    if (getComputedStyle(modal).visibility === 'visible') {
-        setTimeout(focusTarget, 0);
-        return;
-    }
-    const onTransitionEnd = event => {
-        if (event.target !== modal) return;
-        modal.removeEventListener('transitionend', onTransitionEnd);
-        focusTarget();
-    };
-    modal.addEventListener('transitionend', onTransitionEnd);
+    focusAfterTransition(modal, resolveTarget);
 }
 
 function createId(prefix) {

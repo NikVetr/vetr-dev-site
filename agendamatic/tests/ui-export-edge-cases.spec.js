@@ -2,8 +2,6 @@ import { test, expect } from '@playwright/test';
 
 async function loadFresh(page) {
     await page.goto('/agendamatic/');
-    await page.evaluate(() => localStorage.clear());
-    await page.goto('/agendamatic/');
     await expect(page.locator('.agenda-row')).toHaveCount(5);
 }
 
@@ -15,6 +13,9 @@ test('item details dialog saves every authored field and keeps keyboard focus co
     const modal = page.locator('#notes-modal');
     await expect(modal).toHaveAttribute('aria-hidden', 'false');
     await expect(modal.locator('[role="dialog"]')).toHaveAttribute('aria-modal', 'true');
+    await expect(page.locator('#editor-textarea')).toBeFocused();
+    await expect(modal.getByRole('button', { name: 'Bold', exact: true })).toBeVisible();
+    await expect(modal.getByRole('button', { name: 'Code block', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Close item details' })).toBeVisible();
 
     await page.locator('#editor-context').fill('Background for the decision');
@@ -51,7 +52,7 @@ test('item details dialog saves every authored field and keeps keyboard focus co
     await expect(notesTrigger).toBeFocused();
 });
 
-test('exports use authored context and preparation and classify only real meeting hosts', async ({ page }) => {
+test('exports sanitize authored details and classify only real meeting hosts', async ({ page }) => {
     await loadFresh(page);
     const result = await page.evaluate(async () => {
         const state = await import('/agendamatic/js/state.js');
@@ -62,44 +63,61 @@ test('exports use authored context and preparation and classify only real meetin
             prep: 'Read appendix | A',
             notes: 'Private notes'
         });
+        state.updateMetadata({
+            title: 'Review <script>',
+            url: 'javascript:alert(1)',
+            attendeeGroups: [{
+                id: 'board',
+                name: 'Board',
+                attendees: [{ id: 'person', name: 'Sam | Lee', present: true }]
+            }],
+            actionItems: [{ id: 'action', text: 'File <report>', owner: 'Sam', done: true }]
+        });
 
         const options = {
             includeHeader: true,
             includeContext: true,
             includePrep: true,
-            includeNotes: true
+            includeNotes: true,
+            includeActionItems: true
         };
-        state.updateMetadata({ url: 'https://notzoom.us/j/123' });
-        const genericLookalike = exports.generatePlainText(options);
-        state.updateMetadata({ url: 'https://zoom.us.evil.example/j/123' });
-        const suffixLookalike = exports.generatePlainText(options);
-        state.updateMetadata({ url: 'https://department.zoom.us/j/123' });
-        const zoom = exports.generatePlainText(options);
-        state.updateMetadata({ url: 'https://teams.microsoft.com/l/meetup-join/123' });
-        const teams = exports.generatePlainText(options);
-        state.updateMetadata({ url: 'https://meet.google.com/abc-defg-hij' });
-        const meet = exports.generatePlainText(options);
-
-        return {
+        const result = {
             markdown: exports.generateMarkdown(options),
             plain: exports.generatePlainText(options),
             doc: exports.generateDocx(options),
-            disabled: exports.generateMarkdown({ ...options, includeContext: false, includePrep: false }),
-            genericLookalike,
-            suffixLookalike,
-            zoom,
-            teams,
-            meet
+            disabled: exports.generateMarkdown({ ...options, includeContext: false, includePrep: false })
+        };
+        const meetingLinkOutput = url => {
+            state.updateMetadata({ url });
+            return exports.generatePlainText(options);
+        };
+
+        return {
+            ...result,
+            genericLookalike: meetingLinkOutput('https://notzoom.us/j/123'),
+            suffixLookalike: meetingLinkOutput('https://zoom.us.evil.example/j/123'),
+            zoom: meetingLinkOutput('https://department.zoom.us/j/123'),
+            teams: meetingLinkOutput('https://teams.microsoft.com/l/meetup-join/123'),
+            meet: meetingLinkOutput('https://meet.google.com/abc-defg-hij')
         };
     });
 
+    expect(result.markdown).toContain('| Board: | ☑ Sam \\| Lee |  |  |  |  |');
+    expect(result.markdown).toContain('Review &lt;script&gt; Agenda');
+    expect(result.markdown).toContain('- [x] File &lt;report&gt; — Sam');
+    expect(result.markdown).not.toContain('<script>');
+    expect(result.markdown).not.toContain('javascript:');
     expect(result.markdown).toContain('| Context: Board &lt;context&gt; &amp; risks Second line |');
     expect(result.markdown).toContain('| Preparation: Read appendix \\| A |');
     expect(result.markdown.indexOf('| Context:')).toBeLessThan(result.markdown.indexOf('| Welcome |'));
     expect(result.plain).toContain('Context: Board <context> & risks\n      Second line');
     expect(result.plain).toContain('Preparation: Read appendix | A');
+    expect(result.plain).toContain('[x] File <report> — Sam');
     expect(result.doc).toContain('<strong>Context:</strong> Board &lt;context&gt; &amp; risks<br>Second line');
     expect(result.doc).toContain('<strong>Preparation:</strong> Read appendix | A');
+    expect(result.doc).toContain('File &lt;report&gt; — Sam');
+    expect(result.doc).toContain('Review &lt;script&gt;');
+    expect(result.doc).not.toContain('javascript:');
     for (const output of [result.markdown, result.plain, result.doc]) {
         expect(output).not.toContain('Add meeting context');
         expect(output).not.toContain('Review previous meeting notes');
@@ -254,6 +272,7 @@ test('Locked, Notes, Duration, and CSV bulk editing validate and round-trip valu
     await lockedHeader.click();
     await expect(modal).toHaveAttribute('aria-hidden', 'false');
     await expect(textarea).toHaveValue('false\ntrue\ntrue\nfalse\nfalse');
+    await expect(textarea).toBeFocused();
 
     await page.locator('#bulk-edit-apply').focus();
     await page.keyboard.press('Tab');
@@ -516,6 +535,8 @@ test('agenda controls keep accessible semantics and focus without page errors', 
         ))
     }));
     expect(semantics).toEqual({ steppers: true, startTimes: true, endTimes: true });
+    await expect(page.getByRole('button', { name: 'Increase start time', exact: true })).toHaveAttribute('type', 'button');
+    await expect(page.getByRole('button', { name: 'Decrease start time', exact: true })).toBeVisible();
 
     const durationUp = page.locator('.agenda-row [data-action="duration-up"]').first();
     await durationUp.focus();
@@ -529,6 +550,7 @@ test('agenda controls keep accessible semantics and focus without page errors', 
 
     const colorButton = page.locator('.agenda-color-button').first();
     await colorButton.click();
+    await expect(page.locator('#item-color-hue')).toBeFocused();
     await page.locator('#item-color-hue').evaluate(element => {
         element.value = '123';
         element.dispatchEvent(new Event('input', { bubbles: true }));

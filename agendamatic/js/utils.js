@@ -113,6 +113,11 @@ export function formatTime(date, use24Hour = false) {
     return `${hours}:${minutes.toString().padStart(2, '0')}`;
 }
 
+/** Format a Date as HH:MM for time inputs and persisted settings. */
+export function formatTimeValue(date) {
+    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+}
+
 /**
  * Format a time interval from two Date objects (e.g., "4:00-4:30")
  * @param {Date} start - Start time
@@ -155,6 +160,97 @@ export function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
 }
 
+/** Escape text before inserting it into generated HTML. */
+export function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+/** Focus a dialog control once its opening transition makes it visible. */
+export function focusAfterTransition(modal, resolveTarget) {
+    const focusTarget = () => {
+        if (!modal?.classList.contains('visible')) return;
+        resolveTarget()?.focus({ preventScroll: true });
+    };
+    if (getComputedStyle(modal).visibility === 'visible') {
+        setTimeout(focusTarget, 0);
+        return;
+    }
+    const onTransitionEnd = event => {
+        if (event.target !== modal) return;
+        modal.removeEventListener('transitionend', onTransitionEnd);
+        focusTarget();
+    };
+    modal.addEventListener('transitionend', onTransitionEnd);
+}
+
+/** Keep the cursor stable while dragging across child elements. */
+export function setGlobalDragCursor(active) {
+    const value = active ? 'grabbing' : '';
+    document.documentElement.style.setProperty('cursor', value, 'important');
+    document.body.style.setProperty('cursor', value, 'important');
+}
+
+/** Apply one of the markdown toolbar actions to a textarea selection. */
+export function applyMarkdownAction(textarea, action) {
+    if (!textarea) return null;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = textarea.value.substring(start, end);
+    let replacement;
+    let cursorOffset;
+
+    switch (action) {
+        case 'bold':
+            replacement = `**${selected}**`;
+            cursorOffset = selected ? replacement.length : 2;
+            break;
+        case 'italic':
+            replacement = `*${selected}*`;
+            cursorOffset = selected ? replacement.length : 1;
+            break;
+        case 'heading':
+            replacement = `## ${selected}`;
+            cursorOffset = replacement.length;
+            break;
+        case 'bullet':
+            replacement = selected
+                ? selected.split('\n').map(line => `- ${line}`).join('\n')
+                : '- ';
+            cursorOffset = replacement.length;
+            break;
+        case 'numbered':
+            replacement = selected
+                ? selected.split('\n').map((line, index) => `${index + 1}. ${line}`).join('\n')
+                : '1. ';
+            cursorOffset = replacement.length;
+            break;
+        case 'link':
+            replacement = `[${selected || 'link text'}](url)`;
+            cursorOffset = selected ? replacement.length : 1;
+            break;
+        case 'code':
+            replacement = selected.includes('\n')
+                ? `\`\`\`\n${selected}\n\`\`\``
+                : `\`${selected}\``;
+            cursorOffset = selected ? replacement.length : 1;
+            break;
+        default:
+            return null;
+    }
+
+    textarea.setRangeText(replacement, start, end, 'end');
+    const position = start + cursorOffset;
+    textarea.setSelectionRange(position, position);
+    textarea.focus();
+    return textarea.value;
+}
+
 /**
  * Generate a unique ID
  * @returns {string} - Unique ID string
@@ -193,28 +289,12 @@ export function deepClone(obj) {
 }
 
 /**
- * Get the theme class number (1-4) based on index
- * @param {number} index - Item index
- * @returns {number} - Theme number (1-4)
- */
-export function getThemeNumber(index) {
-    return (index % 4) + 1;
-}
-
-/**
  * Render basic markdown to HTML for notes previews
  * @param {string} markdown - Markdown text
  * @returns {string} HTML string
  */
 export function renderMarkdownToHtml(markdown) {
     if (!markdown) return '';
-
-    const escapeHtml = (str) => str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
 
     const lines = markdown.replace(/\r\n/g, '\n').split('\n');
     const htmlParts = [];

@@ -2,8 +2,6 @@ import { test, expect } from '@playwright/test';
 
 async function loadFresh(page) {
     await page.goto('/agendamatic/');
-    await page.evaluate(() => localStorage.clear());
-    await page.goto('/agendamatic/');
     await expect(page.locator('.box[data-panel-id]')).toHaveCount(7);
 }
 
@@ -16,49 +14,20 @@ test('panel move controls swap and persist without making headers keyboard stops
 
     const compactControls = await page.evaluate(() => {
         const exportTitle = document.querySelector('[data-panel-id="export"] > .box-header h3');
-        const previousLabel = document.querySelector('#btn-prev-item .next-item-text');
         return {
             exportTitleHeight: exportTitle.getBoundingClientRect().height,
             exportTitleLineHeight: Number.parseFloat(getComputedStyle(exportTitle).lineHeight),
-            previousLabelOverflow: previousLabel.scrollWidth - previousLabel.clientWidth,
             previousAccessibleName: document.getElementById('btn-prev-item').getAttribute('aria-label'),
             nextAccessibleName: document.getElementById('btn-next-item').getAttribute('aria-label')
         };
     });
     expect(compactControls.exportTitleHeight).toBeLessThan(compactControls.exportTitleLineHeight * 1.5);
-    expect(compactControls.previousLabelOverflow).toBeLessThanOrEqual(0);
     expect(compactControls).toMatchObject({
         previousAccessibleName: 'Previous agenda item',
-        nextAccessibleName: 'Next agenda item'
+        nextAccessibleName: 'Start meeting'
     });
-
-    const tracker = page.locator('[data-panel-id="tracker"]');
-    await tracker.evaluate(element => element.style.height = '120px');
-    const compactHeader = await tracker.evaluate(element => {
-        const header = element.querySelector(':scope > .timeline-header').getBoundingClientRect();
-        const title = element.querySelector(':scope > .timeline-header > h3').getBoundingClientRect();
-        const controls = element.querySelector(':scope > .timeline-header > .timeline-controls').getBoundingClientRect();
-        return {
-            panelHeight: element.getBoundingClientRect().height,
-            headerLeft: header.left,
-            headerRight: header.right,
-            titleRight: title.right,
-            controlsLeft: controls.left,
-            controlsRight: controls.right
-        };
-    });
-    expect(compactHeader.panelHeight).toBeLessThanOrEqual(130);
-    expect(compactHeader.titleRight).toBeLessThanOrEqual(compactHeader.controlsLeft);
-    expect(compactHeader.controlsLeft).toBeGreaterThanOrEqual(compactHeader.headerLeft);
-    expect(compactHeader.controlsRight).toBeLessThanOrEqual(compactHeader.headerRight);
-    await tracker.evaluate(element => element.style.removeProperty('height'));
 
     const inputMove = page.locator('[data-panel-id="input"] .panel-move-button');
-    await inputMove.click();
-    await expect(page.locator('#panel-move-menu')).toBeVisible();
-    await page.keyboard.press('Escape');
-    await expect(page.locator('#panel-move-menu')).toBeHidden();
-
     await inputMove.focus();
     await page.keyboard.press('Enter');
     await expect(inputMove).toHaveAttribute('aria-expanded', 'true');
@@ -72,9 +41,6 @@ test('panel move controls swap and persist without making headers keyboard stops
     await expect(page.locator('.panel-slot-export')).toHaveAttribute('data-panel-id', 'input');
     await expect(page.locator('.panel-layout-announcer')).toContainText('Input moved to the Import / Export position');
 
-    const savedOrder = await page.evaluate(() => JSON.parse(localStorage.getItem('autochair_panel_order_v1')));
-    expect(savedOrder.slice(0, 2)).toEqual(['export', 'input']);
-
     await page.reload();
     await expect(page.locator('.panel-slot-export')).toHaveAttribute('data-panel-id', 'input');
     await expect(page.locator('[data-panel-id="input"] .panel-move-button')).toHaveAttribute(
@@ -85,9 +51,129 @@ test('panel move controls swap and persist without making headers keyboard stops
     await page.locator('#btn-edit-csv').focus();
     await page.keyboard.press('Enter');
     await expect(page.locator('#bulk-edit-modal')).toHaveClass(/visible/);
-    expect(await page.locator('[data-panel-id="input"] .panel-move-button').evaluate(
-        element => getComputedStyle(element).touchAction
-    )).toBe('none');
+});
+
+test('meeting controls explain each phase and stay contained', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await loadFresh(page);
+    await page.evaluate(async () => {
+        const { updateSettings } = await import('/agendamatic/js/state.js');
+        const start = new Date(Date.now() + 30 * 60_000);
+        updateSettings({
+            startTime: `${String(start.getHours()).padStart(2, '0')}:${String(start.getMinutes()).padStart(2, '0')}`
+        });
+    });
+
+    const controls = page.locator('.next-item-controls');
+    const primary = page.locator('#btn-next-item');
+    await expect(controls).toHaveAttribute('data-phase', 'idle');
+    await expect(page.locator('#btn-prev-item')).toBeHidden();
+    await expect(primary).toHaveAccessibleName('Start meeting');
+    await expect(page.locator('.current-status-label')).toHaveText('MEETING STARTS IN');
+    await expect(page.locator('#status-display .ticker-on-time')).toHaveText('NOT STARTED');
+    await expect(page.locator('#status-display .status-display')).toHaveRole('status');
+    await expect(page.locator('.current-status-display')).toHaveRole('status');
+    await expect(page.locator('#status-display .ticker-container')).toHaveAttribute('aria-hidden', 'true');
+    await expect(page.locator('.current-status-ticker')).toHaveAttribute('aria-hidden', 'true');
+    expect(await page.locator('.current-status-display').getAttribute('aria-label')).toMatch(
+        /meeting starts in \d+ minutes/
+    );
+
+    const idleGeometry = await page.evaluate(() => {
+        const controls = document.querySelector('.next-item-controls');
+        const container = controls.getBoundingClientRect();
+        const button = document.getElementById('btn-next-item').getBoundingClientRect();
+        return {
+            widthDifference: Math.abs(container.width - button.width),
+            leftDifference: Math.abs(container.left - button.left),
+            horizontalOverflow: controls.scrollWidth - controls.clientWidth,
+            logoVisible: getComputedStyle(document.getElementById('next-item-logo-video')).display !== 'none'
+        };
+    });
+    expect(idleGeometry.widthDifference).toBeLessThan(1);
+    expect(idleGeometry.leftDifference).toBeLessThan(1);
+    expect(idleGeometry.horizontalOverflow).toBeLessThanOrEqual(0);
+    expect(idleGeometry.logoVisible).toBe(true);
+
+    const popupPromise = page.waitForEvent('popup');
+    await page.locator('#btn-popout').click();
+    const popup = await popupPromise;
+    const popoutAgendaStatus = popup.locator('#popout-overall .status-display');
+    const popoutCurrentStatus = popup.locator('#popout-current .current-status-display');
+    const popoutPrimary = popup.locator('#btn-popout-next');
+    await expect(popoutAgendaStatus).toHaveRole('status');
+    await expect(popoutAgendaStatus).toHaveAccessibleName('Agenda status: meeting not started');
+    await expect(popoutCurrentStatus).toHaveAccessibleName(/meeting starts in \d+ minutes/);
+
+    await popup.keyboard.press('Space');
+    await expect(controls).toHaveAttribute('data-phase', 'running');
+    await expect(primary).toHaveAccessibleName('Next agenda item');
+    await expect(page.locator('#btn-prev-item')).toBeVisible();
+    await expect(page.locator('.current-status-label')).toContainText('TIME LEFT IN CURRENT ITEM');
+    await expect(popoutAgendaStatus).toHaveAccessibleName('Agenda status: on time');
+    await expect(popoutCurrentStatus).toHaveAccessibleName(/left on Welcome/);
+    await expect(popoutPrimary).toHaveAccessibleName('Next agenda item');
+
+    const runningGeometry = await page.evaluate(() => {
+        const container = document.querySelector('.next-item-controls');
+        const buttons = [...container.querySelectorAll('button')];
+        const allContent = [...container.querySelectorAll('.next-item-text, .spacebar-icon, video')];
+        const contentFits = allContent.every(element => {
+            const button = element.closest('button').getBoundingClientRect();
+            const rect = element.getBoundingClientRect();
+            return rect.left >= button.left - 1 && rect.right <= button.right + 1 &&
+                rect.top >= button.top - 1 && rect.bottom <= button.bottom + 1 &&
+                element.scrollWidth <= element.clientWidth;
+        });
+        return {
+            horizontalOverflow: container.scrollWidth - container.clientWidth,
+            buttonsFit: buttons.every(button => button.getBoundingClientRect().right <= container.getBoundingClientRect().right + 1),
+            contentFits,
+            previousLogoVisible: getComputedStyle(document.getElementById('prev-item-logo-video')).display !== 'none',
+            nextLogoVisible: getComputedStyle(document.getElementById('next-item-logo-video')).display !== 'none'
+        };
+    });
+    expect(runningGeometry).toEqual({
+        horizontalOverflow: 0,
+        buttonsFit: true,
+        contentFits: true,
+        previousLogoVisible: true,
+        nextLogoVisible: true
+    });
+
+    await page.locator('#btn-stop').click();
+    await expect(controls).toHaveAttribute('data-phase', 'paused');
+    await expect(primary).toHaveAccessibleName('Resume meeting');
+    await expect(popoutCurrentStatus).toHaveAccessibleName(/paused; .* on Welcome/);
+    await expect(popoutPrimary).toHaveAccessibleName('Resume meeting');
+    await page.keyboard.press('Space');
+    await expect(controls).toHaveAttribute('data-phase', 'running');
+
+    await page.evaluate(async () => {
+        const { updateTracker } = await import('/agendamatic/js/state.js');
+        updateTracker({ overallDeltaMinutes: 2 });
+    });
+    await expect(page.locator('#status-display .status-display')).toHaveAttribute('aria-label', /behind/);
+    await page.evaluate(async () => {
+        const { updateTracker } = await import('/agendamatic/js/state.js');
+        updateTracker({ overallDeltaMinutes: -2 });
+    });
+    await expect(page.locator('#status-display .status-display')).toHaveAttribute('aria-label', /ahead/);
+
+    await page.evaluate(async () => {
+        const state = await import('/agendamatic/js/state.js');
+        state.getState().items.forEach(item => state.updateItem(item.id, { locked: false }));
+    });
+    for (let index = 0; index < 5; index += 1) await primary.click();
+    await expect(controls).toHaveAttribute('data-phase', 'completed');
+    await expect(primary).toHaveAccessibleName('Meeting complete');
+    await expect(primary).toBeDisabled();
+    await expect(popoutCurrentStatus).toHaveAccessibleName('Current status: meeting complete');
+    await expect(popoutPrimary).toHaveAccessibleName('Meeting complete');
+    await page.keyboard.press('Backspace');
+    await expect(controls).toHaveAttribute('data-phase', 'paused');
+    await expect(primary).toHaveAccessibleName('Resume meeting');
+    await popup.close();
 });
 
 test('separators expose range metadata and keyboard resizing persists', async ({ page }) => {

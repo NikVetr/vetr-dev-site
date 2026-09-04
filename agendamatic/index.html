@@ -93,8 +93,6 @@
                     aria-label="Resize top section columns"
                     role="separator"
                 >
-                    <span class="panel-corner corner-start" aria-hidden="true"></span>
-                    <span class="panel-corner corner-end" aria-hidden="true"></span>
                 </div>
 
                 <!-- Export + Status -->
@@ -145,47 +143,43 @@
                         aria-label="Resize right side columns"
                         role="separator"
                     >
-                        <span class="panel-corner corner-start" aria-hidden="true"></span>
-                        <span class="panel-corner corner-end" aria-hidden="true"></span>
                     </div>
 
                     <div class="status-column">
                         <!-- Status Display -->
                         <div class="box status-box overall-status-box" id="status-display">
                             <div class="box-header">
-                                <h3>Overall Status</h3>
+                                <h3>Agenda Status</h3>
                                 <div class="status-clock" id="status-clock">--:--</div>
                             </div>
-                            <div class="status-display on-time">
-                                <span class="status-label">YOU ARE</span>
-                                <div class="ticker-container">
+                            <div class="status-display not-started" role="status" aria-live="polite" aria-atomic="true" aria-label="Agenda status: meeting not started">
+                                <span class="status-label" aria-hidden="true">MEETING</span>
+                                <div class="ticker-container" aria-hidden="true">
                                     <div class="ticker-tape" id="ticker-tape">
-                                        <span class="ticker-on-time">ON TIME</span>
+                                        <span class="ticker-on-time">NOT STARTED</span>
                                     </div>
                                 </div>
-                                <div class="status-unit" id="status-unit"></div>
-                                <span class="status-direction"></span>
+                                <div class="status-unit" id="status-unit" aria-hidden="true"></div>
+                                <span class="status-direction" aria-hidden="true"></span>
                             </div>
                         </div>
 
                         <div
                             id="resizer-status-column"
                             class="panel-resizer resizer-horizontal"
-                            data-tooltip="Drag to resize Overall Status and Next controls"
+                            data-tooltip="Drag to resize Agenda Status and meeting controls"
                             aria-label="Resize status rows"
                             role="separator"
                         >
-                            <span class="panel-corner corner-start" aria-hidden="true"></span>
-                            <span class="panel-corner corner-end" aria-hidden="true"></span>
                         </div>
 
-                        <div class="next-item-controls">
+                        <div class="next-item-controls" data-phase="idle">
                             <button id="btn-prev-item" class="next-item-btn prev-item-btn" data-tooltip="Shift focus to the previous agenda item" aria-label="Previous agenda item" aria-keyshortcuts="Backspace">
-                                <span class="next-item-text">
-                                    PREV
+                                <span class="next-item-text next-item-text-prev">
+                                    PREVIOUS
                                     <video
                                         id="prev-item-logo-video"
-                                        class="next-item-logo logo-video"
+                                        class="next-item-logo next-item-logo-small logo-video"
                                         muted
                                         playsinline
                                         preload="auto"
@@ -204,12 +198,10 @@
                                 aria-label="Resize next item controls"
                                 role="separator"
                             >
-                                <span class="panel-corner corner-start" aria-hidden="true"></span>
-                                <span class="panel-corner corner-end" aria-hidden="true"></span>
                             </div>
-                            <button id="btn-next-item" class="next-item-btn main-next-btn" data-tooltip="Advance to the next agenda item" aria-label="Next agenda item" aria-keyshortcuts="Space">
+                            <button id="btn-next-item" class="next-item-btn main-next-btn" data-tooltip="Start tracking the meeting" aria-label="Start meeting" aria-keyshortcuts="Space">
                                 <span class="next-item-text">
-                                    NEXT
+                                    <span id="primary-action-word">START</span>
                                     <video
                                         id="next-item-logo-video"
                                         class="next-item-logo logo-video"
@@ -220,7 +212,7 @@
                                     >
                                         <source src="assets/animation/logo_spin_128.webm" type="video/webm">
                                     </video>
-                                    ITEM
+                                    <span id="primary-object-word">MEETING</span>
                                 </span>
                                 <span class="spacebar-icon" aria-hidden="true">SPACE</span>
                             </button>
@@ -236,8 +228,6 @@
                 aria-label="Resize top and lower panel groups"
                 role="separator"
             >
-                <span class="panel-corner corner-start" aria-hidden="true"></span>
-                <span class="panel-corner corner-end" aria-hidden="true"></span>
             </div>
 
             <div class="lower-panels">
@@ -248,7 +238,6 @@
                             <h3>Tracker</h3>
                             <div class="timeline-controls">
                                 <button id="btn-popout" data-tooltip="Open a wide tracker pop-out window">&#8599; Pop Out</button>
-                                <button id="btn-start" data-tooltip="Start tracking the meeting">&#9654; Start</button>
                                 <button id="btn-stop" data-tooltip="Stop/pause tracking">&#9632; Stop</button>
                             </div>
                         </div>
@@ -282,8 +271,6 @@
                         aria-label="Resize tracker section columns"
                         role="separator"
                     >
-                        <span class="panel-corner corner-start" aria-hidden="true"></span>
-                        <span class="panel-corner corner-end" aria-hidden="true"></span>
                     </div>
 
                     <!-- Current Status Panel -->
@@ -291,16 +278,16 @@
                         <div class="box-header">
                             <h3>Current Status</h3>
                         </div>
-                        <div class="current-status-display">
-                            <div class="current-status-label">YOU HAVE</div>
-                            <div class="current-status-ticker">
+                        <div class="current-status-display" role="status" aria-live="polite" aria-atomic="true" aria-label="Current status: meeting not started">
+                            <div class="current-status-label" aria-hidden="true">MEETING STARTS IN</div>
+                            <div class="current-status-ticker" aria-hidden="true">
                                 <div class="current-status-tape" id="current-status-tape"></div>
                             </div>
-                            <div class="current-status-unit">MINUTES</div>
-                            <div class="current-status-line">
-                                LEFT FOR <span class="current-status-item" id="current-status-item">-</span>
+                            <div class="current-status-unit" aria-hidden="true">MINUTES</div>
+                            <div class="current-status-line" aria-hidden="true">
+                                SCHEDULED FOR <span class="current-status-item" id="current-status-item">-</span>
                             </div>
-                            <div class="current-status-next" id="current-status-next">
+                            <div class="current-status-next" id="current-status-next" aria-hidden="true">
                                 (next item: <span class="current-status-next-item" id="current-status-next-item">-</span>)
                             </div>
                         </div>
@@ -314,8 +301,6 @@
                     aria-label="Resize tracker and bottom panels"
                     role="separator"
                 >
-                    <span class="panel-corner corner-start" aria-hidden="true"></span>
-                    <span class="panel-corner corner-end" aria-hidden="true"></span>
                 </div>
 
                 <div class="bottom-section">
@@ -368,8 +353,6 @@
                         aria-label="Resize bottom section columns"
                         role="separator"
                     >
-                        <span class="panel-corner corner-start" aria-hidden="true"></span>
-                        <span class="panel-corner corner-end" aria-hidden="true"></span>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,18 @@ import {
     calculateIntervals,
     getExpectedVsActualData
 } from './state.js';
-import { formatTime, parseTime, addMinutes, debounce, parseDuration, formatDuration } from './utils.js';
+import {
+    formatTime,
+    formatTimeValue,
+    parseTime,
+    addMinutes,
+    debounce,
+    parseDuration,
+    formatDuration,
+    applyMarkdownAction,
+    focusAfterTransition,
+    setGlobalDragCursor
+} from './utils.js';
 import {
     applyItemColorStyles,
     getItemColor,
@@ -36,29 +47,6 @@ let contextTextarea = null;
 let prepTextarea = null;
 let currentEditingItem = null;
 let notesReturnFocus = null;
-
-function focusAfterModalTransition(modalElement, resolveTarget) {
-    const focusTarget = () => {
-        if (!modalElement.classList.contains('visible')) return;
-        resolveTarget()?.focus({ preventScroll: true });
-    };
-    if (getComputedStyle(modalElement).visibility === 'visible') {
-        setTimeout(focusTarget, 0);
-        return;
-    }
-    const onTransitionEnd = event => {
-        if (event.target !== modalElement) return;
-        modalElement.removeEventListener('transitionend', onTransitionEnd);
-        focusTarget();
-    };
-    modalElement.addEventListener('transitionend', onTransitionEnd);
-}
-
-function setGlobalDragCursor(active) {
-    const value = active ? 'grabbing' : '';
-    document.documentElement.style.setProperty('cursor', value, 'important');
-    document.body.style.setProperty('cursor', value, 'important');
-}
 
 /**
  * Initialize the agenda module
@@ -124,7 +112,7 @@ function setupModalListeners() {
             if (!btn) return;
 
             const action = btn.dataset.action;
-            handleToolbarAction(action);
+            applyMarkdownAction(editorTextarea, action);
         });
     }
 
@@ -187,70 +175,6 @@ function findAgendaRowControl(itemId, selector) {
 }
 
 /**
- * Handle toolbar button actions
- * @param {string} action - Action name
- */
-function handleToolbarAction(action) {
-    if (!editorTextarea) return;
-
-    const start = editorTextarea.selectionStart;
-    const end = editorTextarea.selectionEnd;
-    const selectedText = editorTextarea.value.substring(start, end);
-    let replacement = '';
-    let cursorOffset = 0;
-
-    switch (action) {
-        case 'bold':
-            replacement = `**${selectedText}**`;
-            cursorOffset = selectedText ? replacement.length : 2;
-            break;
-        case 'italic':
-            replacement = `*${selectedText}*`;
-            cursorOffset = selectedText ? replacement.length : 1;
-            break;
-        case 'heading':
-            replacement = `## ${selectedText}`;
-            cursorOffset = replacement.length;
-            break;
-        case 'bullet':
-            replacement = selectedText
-                ? selectedText.split('\n').map(line => `- ${line}`).join('\n')
-                : '- ';
-            cursorOffset = replacement.length;
-            break;
-        case 'numbered':
-            replacement = selectedText
-                ? selectedText.split('\n').map((line, i) => `${i + 1}. ${line}`).join('\n')
-                : '1. ';
-            cursorOffset = replacement.length;
-            break;
-        case 'link':
-            replacement = `[${selectedText || 'link text'}](url)`;
-            cursorOffset = selectedText ? replacement.length : 1;
-            break;
-        case 'code':
-            replacement = selectedText.includes('\n')
-                ? `\`\`\`\n${selectedText}\n\`\`\``
-                : `\`${selectedText}\``;
-            cursorOffset = selectedText ? replacement.length : 1;
-            break;
-        default:
-            return;
-    }
-
-    // Insert the replacement
-    editorTextarea.value =
-        editorTextarea.value.substring(0, start) +
-        replacement +
-        editorTextarea.value.substring(end);
-
-    // Set cursor position
-    const newPosition = start + cursorOffset;
-    editorTextarea.setSelectionRange(newPosition, newPosition);
-    editorTextarea.focus();
-}
-
-/**
  * Open the notes modal for an item
  * @param {Object} item - Item to edit notes for
  */
@@ -266,7 +190,7 @@ export function openNotesModal(item, trigger = document.activeElement) {
 
     notesModal.classList.add('visible');
     notesModal.setAttribute('aria-hidden', 'false');
-    focusAfterModalTransition(notesModal, () => editorTextarea);
+    focusAfterTransition(notesModal, () => editorTextarea);
 }
 
 /**
@@ -932,12 +856,6 @@ function adjustIntervalTimeByDelta(button, deltaMinutes) {
     updateIntervalTime(index, position, targetTime);
 }
 
-function formatTimeValue(date) {
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
-}
-
 /**
  * Adjust duration by delta minutes
  * @param {Object} item - Item to adjust
@@ -1022,55 +940,4 @@ export function handleAddItem() {
             container.scrollTop = container.scrollHeight;
         }, 100);
     }
-}
-
-/**
- * Get the current item based on wall-clock time
- * @returns {Object|null} Current item or null
- */
-export function getCurrentItem() {
-    const items = calculateIntervals();
-    const now = new Date();
-    const index = findCurrentItemIndex(items, now);
-
-    if (index >= 0) {
-        return items[index];
-    }
-
-    // If we're before all items, return the first one
-    if (items.length > 0) {
-        return items[0];
-    }
-
-    return null;
-}
-
-/**
- * Find the index of the current item
- * @returns {number} Index of current item or -1
- */
-export function getCurrentItemIndex() {
-    const items = calculateIntervals();
-    const now = new Date();
-    return findCurrentItemIndex(items, now);
-}
-
-/**
- * Find the index of the current item for a given time
- * @param {Array} items - Items with intervals
- * @param {Date} now - Time to compare
- * @returns {number} Current index or -1 if before start
- */
-function findCurrentItemIndex(items, now) {
-    for (let i = 0; i < items.length; i++) {
-        if (now >= items[i].startTime && now < items[i].endTime) {
-            return i;
-        }
-    }
-
-    if (items.length > 0 && now >= items[items.length - 1].endTime) {
-        return items.length - 1;
-    }
-
-    return -1;
 }

@@ -10,15 +10,10 @@ import {
     reorderStagedItems
 } from './state.js';
 import { applyItemColorStyles } from './colors.js';
+import { escapeHtml, setGlobalDragCursor } from './utils.js';
 
 let container = null;
 let draggedElement = null;
-
-function setGlobalDragCursor(active) {
-    const value = active ? 'grabbing' : '';
-    document.documentElement.style.setProperty('cursor', value, 'important');
-    document.body.style.setProperty('cursor', value, 'important');
-}
 
 /**
  * Initialize staging panel
@@ -199,13 +194,4 @@ function renderStaging(state) {
 
         container.appendChild(card);
     });
-}
-
-function escapeHtml(value) {
-    return String(value || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
 }

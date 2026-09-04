@@ -112,7 +112,7 @@ export function showTooltip(element) {
 }
 
 function isSuppressedTooltipTarget(element) {
-    return Boolean(element.closest('.panel-resizer, .panel-corner'));
+    return Boolean(element.closest('.panel-resizer'));
 }
 
 /**
@@ -168,27 +168,6 @@ function positionTooltip(element) {
 
     tooltipElement.style.top = `${top}px`;
     tooltipElement.style.left = `${left}px`;
-}
-
-/**
- * Update tooltip text for an element
- * @param {HTMLElement} element - Target element
- * @param {string} text - New tooltip text
- */
-export function setTooltipText(element, text) {
-    if (element) {
-        element.setAttribute('data-tooltip', text);
-    }
-}
-
-/**
- * Remove tooltip from an element
- * @param {HTMLElement} element - Target element
- */
-export function removeTooltip(element) {
-    if (element) {
-        element.removeAttribute('data-tooltip');
-    }
 }
 
 /**

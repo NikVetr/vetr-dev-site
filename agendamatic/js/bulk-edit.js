@@ -4,7 +4,7 @@
 
 import { getState, replaceItems } from './state.js';
 import { getItemColor, parseItemColor } from './colors.js';
-import { parseDuration } from './utils.js';
+import { focusAfterTransition, parseDuration } from './utils.js';
 
 const FIELD_LABELS = {
     name: 'Items',
@@ -36,23 +36,6 @@ let badRows;
 let activeField = null;
 let activeFormat = 'newline';
 let returnFocus = null;
-
-function focusAfterModalTransition(resolveTarget) {
-    const focusTarget = () => {
-        if (!modal.classList.contains('visible')) return;
-        resolveTarget()?.focus({ preventScroll: true });
-    };
-    if (getComputedStyle(modal).visibility === 'visible') {
-        setTimeout(focusTarget, 0);
-        return;
-    }
-    const onTransitionEnd = event => {
-        if (event.target !== modal) return;
-        modal.removeEventListener('transitionend', onTransitionEnd);
-        focusTarget();
-    };
-    modal.addEventListener('transitionend', onTransitionEnd);
-}
 
 function escapeValue(value) {
     return String(value ?? '').replace(/\\/g, '\\\\').replace(/,/g, '\\,').replace(/\n/g, '\\n');
@@ -109,7 +92,7 @@ function openModal(field = null, trigger = document.activeElement) {
     textarea.value = csvMode ? serializeCsv() : serializeColumn(field, activeFormat);
     modal.classList.add('visible');
     modal.setAttribute('aria-hidden', 'false');
-    focusAfterModalTransition(() => textarea);
+    focusAfterTransition(modal, () => textarea);
     validateCsv();
 }
 

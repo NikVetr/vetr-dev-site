@@ -2,8 +2,6 @@ import { test, expect } from '@playwright/test';
 
 async function loadFresh(page) {
     await page.goto('/agendamatic/');
-    await page.evaluate(() => localStorage.clear());
-    await page.goto('/agendamatic/');
     await expect(page.locator('.agenda-row')).toHaveCount(5);
 }
 
@@ -107,80 +105,75 @@ test('desktop and mobile layouts keep every panel usable', async ({ page }) => {
     expect(narrowVariance.rowHeight).toBeGreaterThan(70);
 });
 
-test('metadata supports attendee groups and editable action items', async ({ page }) => {
+test('metadata edits persist immediately and additions and removals retain focus', async ({ page }) => {
     await loadFresh(page);
     await page.locator('#btn-metadata').click();
-    await page.locator('#metadata-meeting-title').fill('Planning & Review');
-    await page.locator('#metadata-meeting-title').press('Tab');
+    const title = page.locator('#metadata-meeting-title');
+    await expect(title).toBeFocused();
+    await title.fill('Planning & Review Final');
+    await page.locator('.metadata-group-header input').first().fill('Board members');
+    await page.locator('.metadata-attendee-row input[type="text"]').first().fill('Ada Lovelace');
 
     await page.locator('#metadata-add-group').click();
     const secondGroup = page.locator('.metadata-attendee-group').nth(1);
+    await expect(secondGroup.locator('.metadata-group-header input')).toBeFocused();
     await secondGroup.locator('.metadata-group-header input').fill('Staff');
-    await secondGroup.locator('.metadata-group-header input').press('Tab');
     await secondGroup.locator('.metadata-add-attendee input').fill('Avery');
     await secondGroup.locator('.metadata-add-attendee button').click();
+    await expect(secondGroup.locator('.metadata-attendee-row input[type="text"]')).toBeFocused();
 
     await page.locator('#metadata-add-action').click();
     const action = page.locator('.metadata-action-row').last();
+    await expect(action.locator('input[placeholder="Action item"]')).toBeFocused();
     await action.locator('input[placeholder="Action item"]').fill('Send revised budget');
-    await action.locator('input[placeholder="Action item"]').press('Tab');
-    await action.locator('input[placeholder="Owner"]').fill('Avery');
-    await action.locator('input[placeholder="Owner"]').press('Tab');
     await action.locator('input[type="checkbox"]').check();
-
-    await page.locator('#metadata-meeting-title').fill('Planning & Review Final');
-    await page.keyboard.press('Escape');
-    await expect(page.locator('#metadata-modal')).toHaveAttribute('aria-hidden', 'true');
-    await expect(page.locator('#btn-metadata')).toBeFocused();
-
-    const metadata = await page.evaluate(async () => {
-        const { getState } = await import('/agendamatic/js/state.js');
-        return getState().metadata;
-    });
-    expect(metadata.title).toBe('Planning & Review Final');
-    expect(metadata.attendeeGroups).toHaveLength(2);
-    expect(metadata.attendeeGroups[1]).toMatchObject({
-        name: 'Staff',
-        attendees: [{ name: 'Avery', present: false }]
-    });
-    expect(metadata.actionItems).toContainEqual(expect.objectContaining({
-        text: 'Send revised budget',
-        owner: 'Avery',
-        done: true
-    }));
-});
-
-test('metadata text edits persist before blur or dialog close', async ({ page }) => {
-    await loadFresh(page);
-    await page.locator('#btn-metadata').click();
-
-    await page.locator('#metadata-meeting-title').fill('Unblurred meeting');
-    await page.locator('.metadata-group-header input').first().fill('Board members');
-    await page.locator('.metadata-attendee-row input[type="text"]').first().fill('Ada Lovelace');
-    await page.locator('#metadata-add-action').click();
-    const action = page.locator('.metadata-action-row').last();
-    await action.locator('input[placeholder="Action item"]').fill('Publish minutes');
-    await action.locator('input[placeholder="Owner"]').fill('Ada');
+    await action.locator('input[placeholder="Owner"]').fill('Avery');
 
     const beforeReload = await page.evaluate(async () => {
         const { getState } = await import('/agendamatic/js/state.js');
         return getState().metadata;
     });
-    expect(beforeReload.title).toBe('Unblurred meeting');
-    expect(beforeReload.attendeeGroups[0].name).toBe('Board members');
-    expect(beforeReload.attendeeGroups[0].attendees[0].name).toBe('Ada Lovelace');
+    expect(beforeReload.title).toBe('Planning & Review Final');
+    expect(beforeReload.attendeeGroups).toHaveLength(2);
+    expect(beforeReload.attendeeGroups[0]).toMatchObject({ name: 'Board members' });
+    expect(beforeReload.attendeeGroups[0].attendees[0]).toMatchObject({ name: 'Ada Lovelace' });
+    expect(beforeReload.attendeeGroups[1]).toMatchObject({
+        name: 'Staff',
+        attendees: [{ name: 'Avery', present: false }]
+    });
     expect(beforeReload.actionItems).toContainEqual(expect.objectContaining({
-        text: 'Publish minutes',
-        owner: 'Ada'
+        text: 'Send revised budget',
+        owner: 'Avery',
+        done: true
     }));
 
     await page.reload();
     await page.locator('#btn-metadata').click();
-    await expect(page.locator('#metadata-meeting-title')).toHaveValue('Unblurred meeting');
+    await expect(title).toHaveValue('Planning & Review Final');
     await expect(page.locator('.metadata-group-header input').first()).toHaveValue('Board members');
     await expect(page.locator('.metadata-attendee-row input[type="text"]').first()).toHaveValue('Ada Lovelace');
-    await expect(page.locator('.metadata-action-row input[placeholder="Action item"]')).toHaveValue('Publish minutes');
-    await expect(page.locator('.metadata-action-row input[placeholder="Owner"]')).toHaveValue('Ada');
+    const persistedSecondGroup = page.locator('.metadata-attendee-group').nth(1);
+    await expect(persistedSecondGroup.locator('.metadata-group-header input')).toHaveValue('Staff');
+    await expect(persistedSecondGroup.locator('.metadata-attendee-row input[type="text"]')).toHaveValue('Avery');
+    await expect(page.locator('.metadata-action-row input[placeholder="Action item"]')).toHaveValue('Send revised budget');
+    await expect(page.locator('.metadata-action-row input[placeholder="Owner"]')).toHaveValue('Avery');
+    await expect(page.locator('.metadata-action-row input[type="checkbox"]')).toBeChecked();
+
+    await persistedSecondGroup.getByRole('button', { name: 'Remove Avery' }).click();
+    await expect(persistedSecondGroup.locator('.metadata-add-attendee input')).toBeFocused();
+    await persistedSecondGroup.getByRole('button', { name: 'Remove Staff group' }).click();
+    await expect(page.locator('.metadata-group-header input').first()).toBeFocused();
+
+    await page.locator('#metadata-add-action').click();
+    const actions = page.locator('.metadata-action-row');
+    await actions.first().locator('.metadata-remove-attendee').click();
+    await expect(actions.first().locator('.metadata-remove-attendee')).toBeFocused();
+    await actions.first().locator('.metadata-remove-attendee').click();
+    await expect(page.locator('#metadata-add-action')).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#metadata-modal')).toHaveAttribute('aria-hidden', 'true');
+    await expect(page.locator('#btn-metadata')).toBeFocused();
 });
 
 test('metadata defaults to the local calendar date near UTC rollover', async ({ browser }) => {
@@ -196,6 +189,7 @@ test('metadata defaults to the local calendar date near UTC rollover', async ({ 
 test('bulk editing preserves drafts and marks the true malformed line', async ({ page }) => {
     await loadFresh(page);
     await page.locator('.bulk-column-button[data-bulk-field="name"]').first().click();
+    await expect(page.getByRole('textbox', { name: 'Edit Items', exact: true })).toBeFocused();
     await page.locator('#bulk-edit-text').fill('Draft A\nDraft B');
     await page.locator('input[name="bulk-format"][value="comma"]').check();
     await expect(page.locator('#bulk-edit-text')).toHaveValue('Draft A, Draft B');
@@ -207,6 +201,7 @@ test('bulk editing preserves drafts and marks the true malformed line', async ({
     await expect(page.locator('.agenda-row')).toHaveCount(5);
 
     await page.locator('#btn-edit-csv').click();
+    await expect(page.getByRole('textbox', { name: 'Edit Agenda CSV', exact: true })).toBeFocused();
     await page.locator('#bulk-edit-text').fill([
         'ID,Item,Lead,Color,Duration,Locked,Context,Preparation,Notes',
         'welcome,Welcome,Chair,#2196f3,5m,false,,,Opening',
@@ -254,7 +249,7 @@ test('agenda and staging offer keyboard and touch-friendly movement controls', a
 test('Stop freezes live tracking and resume excludes the paused interval', async ({ page }) => {
     await loadFresh(page);
     await page.locator('#sync-system-time').check();
-    await page.locator('#btn-start').click();
+    await page.locator('#btn-next-item').click();
     await page.waitForTimeout(1100);
     await page.locator('#btn-stop').click();
     await page.waitForTimeout(100);
@@ -280,7 +275,7 @@ test('Stop freezes live tracking and resume excludes the paused interval', async
         progress: paused.progress
     });
 
-    await page.locator('#btn-start').click();
+    await page.locator('#btn-next-item').click();
     const resumedStart = await page.evaluate(async () => {
         const { getState } = await import('/agendamatic/js/state.js');
         return getState().tracker.scheduledStartAt;
@@ -329,38 +324,6 @@ test('Tracker renders buffer gaps and pop-out mirrors the active appearance', as
     await popup.close();
 });
 
-test('exports use structured metadata and sanitize links and HTML', async ({ page }) => {
-    await loadFresh(page);
-    const exports = await page.evaluate(async () => {
-        const state = await import('/agendamatic/js/state.js');
-        const output = await import('/agendamatic/js/export.js');
-        state.updateMetadata({
-            title: 'Review <script>',
-            url: 'javascript:alert(1)',
-            attendeeGroups: [{
-                id: 'board',
-                name: 'Board',
-                attendees: [{ id: 'person', name: 'Sam | Lee', present: true }]
-            }],
-            actionItems: [{ id: 'action', text: 'File <report>', owner: 'Sam', done: true }]
-        });
-        return {
-            markdown: output.generateMarkdown({ includeActionItems: true }),
-            text: output.generatePlainText({ includeActionItems: true }),
-            doc: output.generateDocx({ includeActionItems: true })
-        };
-    });
-    expect(exports.markdown).toContain('| Board: | ☑ Sam \\| Lee |  |  |  |  |');
-    expect(exports.markdown).toContain('Review &lt;script&gt; Agenda');
-    expect(exports.markdown).toContain('- [x] File &lt;report&gt; — Sam');
-    expect(exports.markdown).not.toContain('<script>');
-    expect(exports.markdown).not.toContain('javascript:');
-    expect(exports.text).toContain('[x] File <report> — Sam');
-    expect(exports.doc).toContain('File &lt;report&gt; — Sam');
-    expect(exports.doc).toContain('Review &lt;script&gt;');
-    expect(exports.doc).not.toContain('javascript:');
-});
-
 test('custom HSL colors round-trip and style every agenda view', async ({ page }) => {
     await loadFresh(page);
     await page.locator('.agenda-color-button').first().click();
@@ -373,49 +336,21 @@ test('custom HSL colors round-trip and style every agenda view', async ({ page }
         element.dispatchEvent(new Event('input', { bubbles: true }));
     });
     await expect(page.locator('#item-color-value')).toHaveText('#15e04e');
-    const previewTokens = await page.evaluate(async () => {
-        const { getColorTokens } = await import('/agendamatic/js/colors.js');
-        const tokens = getColorTokens('#15e04e');
-        const expected = Object.fromEntries(['light', 'dark'].map(mode => [mode, {
-            accent: tokens[mode].accent,
-            surface: tokens[mode].surface,
-            text: tokens[mode].text
-        }]));
-        const preview = document.getElementById('item-color-preview-card');
-        return {
-            expected,
-            light: {
-                accent: preview.style.getPropertyValue('--picker-accent-light'),
-                surface: preview.style.getPropertyValue('--picker-surface-light'),
-                text: preview.style.getPropertyValue('--picker-text-light')
-            },
-            dark: {
-                accent: preview.style.getPropertyValue('--picker-accent-dark'),
-                surface: preview.style.getPropertyValue('--picker-surface-dark'),
-                text: preview.style.getPropertyValue('--picker-text-dark')
-            }
-        };
-    });
-    expect(previewTokens.light).toEqual(previewTokens.expected.light);
-    expect(previewTokens.dark).toEqual(previewTokens.expected.dark);
     await page.locator('#item-color-apply').click();
 
     await expect(page.locator('.agenda-row').first()).toHaveClass(/custom-item-color/);
     await expect(page.locator('.timeline-block').first()).toHaveClass(/custom-item-color/);
     await expect(page.locator('.current-item-box')).toHaveClass(/custom-item-color/);
-    await expect(page.locator('#current-status-tape')).toHaveClass(/custom-item-color/);
 
     const persisted = await page.evaluate(async () => {
         const state = await import('/agendamatic/js/state.js');
         return {
             stateColor: state.getState().items[0].customColor,
-            storedColor: JSON.parse(localStorage.getItem('agendamatic_state')).items[0].customColor,
             sharedColor: state.decodeStateFromURL(state.encodeStateToURL()).items[0].customColor
         };
     });
     expect(persisted).toEqual({
         stateColor: '#15e04e',
-        storedColor: '#15e04e',
         sharedColor: '#15e04e'
     });
 

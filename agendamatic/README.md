@@ -10,7 +10,7 @@ A real-time meeting agenda tracker with visual timeline, state persistence, and 
 - **Real-time Tracking**: Current time marker moves across the timeline, with pause/resume and explicit completion
 - **Smart Time Adjustment**: Unlocked items proportionally resize when running behind/ahead
 - **Locked Items**: Lock specific items to prevent their duration from being adjusted
-- **Status Monitor**: Clear display of whether you're on time, behind, or ahead
+- **Clear Status Monitors**: Agenda variance is labeled ahead/behind/on time, while the current-item panel names exactly what its timer measures
 - **State Persistence**: Ordinary work persists in the URL and localStorage; opened share links, including legacy unmarked links, use isolated tab storage
 - **Undo/Redo**: Use Ctrl/Cmd-Z and Ctrl/Cmd-Shift-Z outside text editors
 - **Panel Layouts**: Drag panel headers to swap slots; panel order and splitter sizes persist locally
@@ -100,11 +100,11 @@ agendamatic/
 
 ### Timeline Tracker
 
-- **Start**: Click "Start" to begin tracking the meeting
-- **Stop/Resume**: Pause without counting stopped time toward the schedule or current item
+- **Start**: Before a run, the large meeting control shows the time until the scheduled start and starts the meeting with one click or Space
+- **Stop/Resume**: Stop pauses without counting paused time; the main control then changes to Resume Meeting
 - **Current Time**: Red triangle marker shows current position
 - **Active Item**: Current item is highlighted on the timeline
-- **Advance/Rewind**: Use Next Item/Space and Previous Item/Backspace to control completion explicitly; Next on the final item completes the meeting
+- **Advance/Rewind**: Once running, the main control becomes Next Item and a fully contained Previous Item control appears; use Space and Backspace to control completion explicitly
 - **Pop Out**: Open the tracker/status display in a separate projector-friendly window
 
 ### Export & Share
