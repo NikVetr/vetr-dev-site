@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-04T03:33:50Z",
+  "generatedAt": "2026-09-04T03:38:12Z",
   "target": "July 2026-adjusted annual CEO base salary",
   "responseScale": "natural logarithm of positive annual USD",
   "training": {
@@ -7551,8 +7551,8 @@
   },
   "provenance": {
     "trainingInputSha256": "6038b49de864111d0f82d46a144d692f80659bdb2d7de4db4c0c3f2dcfe3c5ef",
-    "trainingCsvSha256": "cbe3366098004129cd0b494786ed5fb0b100e1eddd0e1ff76d36d0f46d54e480",
-    "prepareScriptSha256": "86be36882ef9ab3276f06c095ee1c876a229cdde1c24e07e4aedfec1e2bd494b",
+    "trainingCsvSha256": "87d2982a7c9008863eef1de611aef7d070a5f464e813966069c5110b4e6e6085",
+    "prepareScriptSha256": "5250c2f6902c91951017a7cfc6ee6fbdcee3dc0f3c9ecd6ccf42d62f4676ba6e",
     "fitScriptSha256": "325f4b3f9f6ce912503409a3c6308b9845dbc5f9196f9822edb27e839d9edb93",
     "stanModelSha256": "1372c4f8ed8892330f894894ac747d04d22f998fba45d9ad9fcc6c199bdf8d8c",
     "seed": 20260903,
